@@ -828,7 +828,7 @@ vfs_init_undelfs (void)
     /* NULLize vfs_s_subclass members */
     memset (&undelfs_subclass, 0, sizeof (undelfs_subclass));
 
-    vfs_init_class (vfs_undelfs_ops, "undelfs", VFS_UNKNOWN, "undel");
+    vfs_init_class (vfs_undelfs_ops, "undelfs", VFSF_UNKNOWN, "undel");
     vfs_undelfs_ops->init = undelfs_init;
     vfs_undelfs_ops->open = undelfs_open;
     vfs_undelfs_ops->close = undelfs_close;

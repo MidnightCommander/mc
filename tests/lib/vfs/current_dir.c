@@ -62,7 +62,7 @@ setup (void)
     vfs_setup_work_dir ();
 
     memset (&vfs_test_subclass, 0, sizeof (vfs_test_subclass));
-    vfs_init_class (vfs_test_ops, "testfs", VFS_UNKNOWN, "test");
+    vfs_init_class (vfs_test_ops, "testfs", VFSF_UNKNOWN, "test");
     vfs_test_ops->chdir = test_chdir;
 }
 
@@ -92,55 +92,55 @@ static const struct test_cd_ds
     { /* 0. */
         "/",
         "/dev/some.file/test://",
-        VFS_NOLINKS,
+        VFSF_NOLINKS,
         "/dev/some.file/test://"
     },
     { /* 1. */
         "/",
         "/dev/some.file/test://bla-bla",
-        VFS_NOLINKS,
+        VFSF_NOLINKS,
         "/dev/some.file/test://bla-bla"
     },
     { /* 2. */
         "/dev/some.file/test://bla-bla",
         "..",
-        VFS_NOLINKS,
+        VFSF_NOLINKS,
         "/dev/some.file/test://"
     },
     { /* 3. */
         "/dev/some.file/test://",
         "..",
-        VFS_NOLINKS,
+        VFSF_NOLINKS,
         "/dev"
     },
     { /* 4. */
         "/dev",
         "..",
-        VFS_NOLINKS,
+        VFSF_NOLINKS,
         "/"
     },
     { /* 5. */
         "/",
         "..",
-        VFS_NOLINKS,
+        VFSF_NOLINKS,
         "/"
     },
     { /* 6. */
         "/",
         "/test://user:pass@host.net/path",
-        VFS_NOLINKS | VFS_REMOTE,
+        VFSF_NOLINKS | VFSF_REMOTE,
         "/test://user:pass@host.net/path"
     },
     { /* 7. */
         "/test://user:pass@host.net/path",
         "..",
-        VFS_NOLINKS | VFS_REMOTE,
+        VFSF_NOLINKS | VFSF_REMOTE,
         "/test://user:pass@host.net/"
     },
     { /* 8. */
         "/test://user:pass@host.net/",
         "..",
-        VFS_NOLINKS | VFS_REMOTE,
+        VFSF_NOLINKS | VFSF_REMOTE,
         "/"
     },
 };

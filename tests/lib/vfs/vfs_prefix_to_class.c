@@ -61,14 +61,14 @@ setup (void)
     vfs_init_localfs ();
     vfs_setup_work_dir ();
 
-    vfs_init_class (&vfs_test_ops1, "testfs1", VFS_NOLINKS | VFS_REMOTE, "test1");
+    vfs_init_class (&vfs_test_ops1, "testfs1", VFSF_NOLINKS | VFSF_REMOTE, "test1");
     vfs_test_ops1.which = test_which;
     vfs_register_class (&vfs_test_ops1);
 
-    vfs_init_class (&vfs_test_ops2, "testfs2", VFS_UNKNOWN, "test2");
+    vfs_init_class (&vfs_test_ops2, "testfs2", VFSF_UNKNOWN, "test2");
     vfs_register_class (&vfs_test_ops2);
 
-    vfs_init_class (&vfs_test_ops3, "testfs3", VFS_UNKNOWN, "test3");
+    vfs_init_class (&vfs_test_ops3, "testfs3", VFSF_UNKNOWN, "test3");
     vfs_register_class (&vfs_test_ops3);
 }
 

@@ -890,7 +890,7 @@ void
 vfs_init_cpiofs (void)
 {
     /* FIXME: cpiofs used own temp files */
-    vfs_init_subclass (&cpio_subclass, "cpiofs", VFS_READONLY, "ucpio");
+    vfs_init_subclass (&cpio_subclass, "cpiofs", VFSF_READONLY, "ucpio");
     vfs_cpiofs_ops->read = cpio_read;
     vfs_cpiofs_ops->setctl = NULL;
     cpio_subclass.archive_check = cpio_super_check;

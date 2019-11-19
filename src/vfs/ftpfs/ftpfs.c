@@ -2698,7 +2698,7 @@ vfs_init_ftpfs (void)
 {
     tcp_init ();
 
-    vfs_init_subclass (&ftpfs_subclass, "ftpfs", VFS_NOLINKS | VFS_REMOTE | VFS_USETMP, "ftp");
+    vfs_init_subclass (&ftpfs_subclass, "ftpfs", VFSF_NOLINKS | VFSF_REMOTE | VFSF_USETMP, "ftp");
     vfs_ftpfs_ops->done = ftpfs_done;
     vfs_ftpfs_ops->fill_names = ftpfs_fill_names;
     vfs_ftpfs_ops->stat = ftpfs_stat;

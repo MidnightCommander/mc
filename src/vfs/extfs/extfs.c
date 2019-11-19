@@ -328,7 +328,7 @@ extfs_fill_names (struct vfs_class *me, fill_names_f func)
 
 /* --------------------------------------------------------------------------------------------- */
 
-/* Create this function because VFS_USETMP flag is not used in extfs */
+/* Create this function because VFSF_USETMP flag is not used in extfs */
 static void
 extfs_free_inode (struct vfs_class *me, struct vfs_s_inode *ino)
 {
@@ -1559,7 +1559,7 @@ extfs_setctl (const vfs_path_t * vpath, int ctlop, void *arg)
 void
 vfs_init_extfs (void)
 {
-    vfs_init_subclass (&extfs_subclass, "extfs", VFS_UNKNOWN, NULL);
+    vfs_init_subclass (&extfs_subclass, "extfs", VFSF_UNKNOWN, NULL);
     vfs_extfs_ops->init = extfs_init;
     vfs_extfs_ops->done = extfs_done;
     vfs_extfs_ops->fill_names = extfs_fill_names;

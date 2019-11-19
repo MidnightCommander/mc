@@ -672,7 +672,7 @@ vfs_s_close (void *fh)
         sub->linear_close (me, fh);
     if (sub->fh_close != NULL)
         res = sub->fh_close (me, fh);
-    if ((me->flags & VFS_USETMP) != 0 && file->changed && sub->file_store != NULL)
+    if ((me->flags & VFSF_USETMP) != 0 && file->changed && sub->file_store != NULL)
     {
         char *s;
 
@@ -764,7 +764,7 @@ vfs_s_getlocalcopy (const vfs_path_t * vpath)
         const struct vfs_class *me;
 
         me = vfs_path_get_by_index (vpath, -1)->class;
-        if ((me->flags & VFS_USETMP) != 0 && fh->ino != NULL)
+        if ((me->flags & VFSF_USETMP) != 0 && fh->ino != NULL)
             local = vfs_path_from_str_flags (fh->ino->localname, VPF_NO_CANON);
 
         vfs_s_close (fh);
@@ -932,7 +932,7 @@ vfs_s_free_inode (struct vfs_class *me, struct vfs_s_inode *ino)
 
     CALL (free_inode) (me, ino);
     g_free (ino->linkname);
-    if ((me->flags & VFS_USETMP) != 0 && ino->localname != NULL)
+    if ((me->flags & VFSF_USETMP) != 0 && ino->localname != NULL)
     {
         unlink (ino->localname);
         g_free (ino->localname);
@@ -1095,7 +1095,7 @@ vfs_s_find_inode (struct vfs_class *me, const struct vfs_s_super *super,
 {
     struct vfs_s_entry *ent;
 
-    if (((me->flags & VFS_REMOTE) == 0) && (*path == '\0'))
+    if (((me->flags & VFSF_REMOTE) == 0) && (*path == '\0'))
         return super->root;
 
     ent = VFS_SUBCLASS (me)->find_entry (me, super->root, path, follow, flags);
@@ -1247,7 +1247,7 @@ vfs_s_fullpath (struct vfs_class *me, struct vfs_s_inode *ino)
     if (ino->ent == NULL)
         ERRNOR (EAGAIN, NULL);
 
-    if ((me->flags & VFS_USETMP) == 0)
+    if ((me->flags & VFSF_USETMP) == 0)
     {
         /* archives */
         char *path;
@@ -1339,7 +1339,7 @@ vfs_s_open (const vfs_path_t * vpath, int flags, mode_t mode)
         ent = vfs_s_generate_entry (path_element->class, name, dir, 0755);
         ino = ent->ino;
         vfs_s_insert_entry (path_element->class, dir, ent);
-        if ((VFS_CLASS (s)->flags & VFS_USETMP) != 0)
+        if ((VFS_CLASS (s)->flags & VFSF_USETMP) != 0)
         {
             int tmp_handle;
             vfs_path_t *tmp_vpath;
@@ -1386,7 +1386,7 @@ vfs_s_open (const vfs_path_t * vpath, int flags, mode_t mode)
         }
     }
 
-    if ((VFS_CLASS (s)->flags & VFS_USETMP) != 0 && fh->ino->localname != NULL)
+    if ((VFS_CLASS (s)->flags & VFSF_USETMP) != 0 && fh->ino->localname != NULL)
     {
         fh->handle = open (fh->ino->localname, NO_LINEAR (flags), mode);
         if (fh->handle == -1)
@@ -1444,7 +1444,7 @@ vfs_s_retrieve_file (struct vfs_class *me, struct vfs_s_inode *ino)
     vfs_path_t *tmp_vpath;
     struct vfs_s_subclass *s = VFS_SUBCLASS (me);
 
-    if ((me->flags & VFS_USETMP) == 0)
+    if ((me->flags & VFSF_USETMP) == 0)
         return (-1);
 
     handle = vfs_mkstemps (&tmp_vpath, me->name, ino->ent->name);
@@ -1523,7 +1523,7 @@ vfs_init_class (struct vfs_class *vclass, const char *name, vfs_flags_t flags, c
     vclass->open = vfs_s_open;
     vclass->close = vfs_s_close;
     vclass->read = vfs_s_read;
-    if ((vclass->flags & VFS_READONLY) == 0)
+    if ((vclass->flags & VFSF_READONLY) == 0)
         vclass->write = vfs_s_write;
     vclass->opendir = vfs_s_opendir;
     vclass->readdir = vfs_s_readdir;
@@ -1539,7 +1539,7 @@ vfs_init_class (struct vfs_class *vclass, const char *name, vfs_flags_t flags, c
     vclass->nothingisopen = vfs_s_nothingisopen;
     vclass->free = vfs_s_free;
     vclass->setctl = vfs_s_setctl;
-    if ((vclass->flags & VFS_USETMP) != 0)
+    if ((vclass->flags & VFSF_USETMP) != 0)
     {
         vclass->getlocalcopy = vfs_s_getlocalcopy;
         vclass->ungetlocalcopy = vfs_s_ungetlocalcopy;
@@ -1562,9 +1562,9 @@ vfs_init_subclass (struct vfs_s_subclass *sub, const char *name, vfs_flags_t fla
     start = (char *) sub + sizeof (struct vfs_class);
     memset (start, 0, len);
 
-    if ((vclass->flags & VFS_USETMP) != 0)
+    if ((vclass->flags & VFSF_USETMP) != 0)
         sub->find_entry = vfs_s_find_entry_linear;
-    else if ((vclass->flags & VFS_REMOTE) != 0)
+    else if ((vclass->flags & VFSF_REMOTE) != 0)
         sub->find_entry = vfs_s_find_entry_linear;
     else
         sub->find_entry = vfs_s_find_entry_tree;

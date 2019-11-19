@@ -461,7 +461,7 @@ vfs_path_from_str_uri_parser (char *path)
 
         url_delimiter += strlen (VFS_PATH_URL_DELIMITER);
 
-        if (element->class != NULL && (element->class->flags & VFS_REMOTE) != 0)
+        if (element->class != NULL && (element->class->flags & VFSF_REMOTE) != 0)
         {
             char *slash_pointer;
 
@@ -530,7 +530,7 @@ static void
 vfs_path_tokens_add_class_info (const vfs_path_element_t * element, GString * ret_tokens,
                                 GString * element_tokens)
 {
-    if (((element->class->flags & VFS_LOCAL) == 0 || ret_tokens->len > 0)
+    if (((element->class->flags & VFSF_LOCAL) == 0 || ret_tokens->len > 0)
         && element_tokens->len > 0)
     {
         char *url_str;
@@ -595,7 +595,8 @@ vfs_path_strip_home (const char *dir)
 
 #define vfs_append_from_path(appendfrom, is_relative) \
 { \
-    if ((flags & VPF_STRIP_HOME) && element_index == 0 && (element->class->flags & VFS_LOCAL) != 0) \
+    if ((flags & VPF_STRIP_HOME) && element_index == 0 && \
+        (element->class->flags & VFSF_LOCAL) != 0) \
     { \
         char *stripped_home_str; \
         stripped_home_str = vfs_path_strip_home (appendfrom); \

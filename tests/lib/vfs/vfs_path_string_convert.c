@@ -54,13 +54,13 @@ setup (void)
     vfs_init_localfs ();
     vfs_setup_work_dir ();
 
-    vfs_init_class (&vfs_test_ops1, "testfs1", VFS_NOLINKS, "test1");
+    vfs_init_class (&vfs_test_ops1, "testfs1", VFSF_NOLINKS, "test1");
     vfs_register_class (&vfs_test_ops1);
 
-    vfs_init_class (&vfs_test_ops2, "testfs2", VFS_REMOTE, "test2");
+    vfs_init_class (&vfs_test_ops2, "testfs2", VFSF_REMOTE, "test2");
     vfs_register_class (&vfs_test_ops2);
 
-    vfs_init_class (&vfs_test_ops3, "testfs3", VFS_UNKNOWN, "test3");
+    vfs_init_class (&vfs_test_ops3, "testfs3", VFSF_UNKNOWN, "test3");
     vfs_register_class (&vfs_test_ops3);
 
 #ifdef HAVE_CHARSET

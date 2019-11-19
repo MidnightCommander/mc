@@ -80,7 +80,7 @@ setup (void)
     vfs_setup_work_dir ();
 
     memset (&vfs_test_subclass1, 0, sizeof (vfs_test_subclass1));
-    vfs_init_class (vfs_test_ops1, "testfs1", VFS_NOLINKS | VFS_REMOTE, "test1");
+    vfs_init_class (vfs_test_ops1, "testfs1", VFSF_NOLINKS | VFSF_REMOTE, "test1");
     vfs_test_ops1->chdir = test_chdir;
     vfs_register_class (vfs_test_ops1);
 

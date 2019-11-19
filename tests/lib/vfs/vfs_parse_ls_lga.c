@@ -61,7 +61,7 @@ setup (void)
     vfs_init_localfs ();
     vfs_setup_work_dir ();
 
-    vfs_init_subclass (&test_subclass1, "testfs1", VFS_NOLINKS | VFS_REMOTE, "test1");
+    vfs_init_subclass (&test_subclass1, "testfs1", VFSF_NOLINKS | VFSF_REMOTE, "test1");
     vfs_register_class (vfs_test_ops1);
 
     vfs_test_super = g_new0 (struct vfs_s_super, 1);

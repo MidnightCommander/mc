@@ -557,7 +557,7 @@ vfs_init_sfs (void)
     /* NULLize vfs_s_subclass members */
     memset (&sfs_subclass, 0, sizeof (sfs_subclass));
 
-    vfs_init_class (vfs_sfs_ops, "sfs", VFS_UNKNOWN, NULL);
+    vfs_init_class (vfs_sfs_ops, "sfs", VFSF_UNKNOWN, NULL);
     vfs_sfs_ops->init = sfs_init;
     vfs_sfs_ops->done = sfs_done;
     vfs_sfs_ops->fill_names = sfs_fill_names;

@@ -58,7 +58,7 @@ vfs_init_sftpfs (void)
 {
     tcp_init ();
 
-    vfs_init_subclass (&sftpfs_subclass, "sftpfs", VFS_NOLINKS | VFS_REMOTE, "sftp");
+    vfs_init_subclass (&sftpfs_subclass, "sftpfs", VFSF_NOLINKS | VFSF_REMOTE, "sftp");
     sftpfs_init_class ();
     sftpfs_init_subclass ();
     vfs_register_class (sftpfs_class);

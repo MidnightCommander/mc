@@ -993,7 +993,7 @@ void
 vfs_init_tarfs (void)
 {
     /* FIXME: tarfs used own temp files */
-    vfs_init_subclass (&tarfs_subclass, "tarfs", VFS_READONLY, "utar");
+    vfs_init_subclass (&tarfs_subclass, "tarfs", VFSF_READONLY, "utar");
     vfs_tarfs_ops->read = tar_read;
     vfs_tarfs_ops->setctl = NULL;
     tarfs_subclass.archive_check = tar_super_check;

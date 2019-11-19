@@ -56,7 +56,7 @@ setup (void)
     load_codepages_list ();
 #endif
 
-    vfs_init_class (&vfs_test_ops, "testfs", VFS_NOLINKS | VFS_REMOTE, "ftp");
+    vfs_init_class (&vfs_test_ops, "testfs", VFSF_NOLINKS | VFSF_REMOTE, "ftp");
     vfs_register_class (&vfs_test_ops);
 }
 

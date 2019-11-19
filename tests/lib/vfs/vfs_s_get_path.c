@@ -88,16 +88,16 @@ setup (void)
     vfs_init_localfs ();
     vfs_setup_work_dir ();
 
-    vfs_init_subclass (&test_subclass1, "testfs1", VFS_NOLINKS | VFS_REMOTE, "test1");
+    vfs_init_subclass (&test_subclass1, "testfs1", VFSF_NOLINKS | VFSF_REMOTE, "test1");
     test_subclass1.open_archive = test1_mock_open_archive;
     test_subclass1.archive_same = test1_mock_archive_same;
     test_subclass1.archive_check = NULL;
     vfs_register_class (vfs_test_ops1);
 
-    vfs_init_subclass (&test_subclass2, "testfs2", VFS_UNKNOWN, "test2");
+    vfs_init_subclass (&test_subclass2, "testfs2", VFSF_UNKNOWN, "test2");
     vfs_register_class (vfs_test_ops2);
 
-    vfs_init_subclass (&test_subclass3, "testfs3", VFS_UNKNOWN, "test3");
+    vfs_init_subclass (&test_subclass3, "testfs3", VFSF_UNKNOWN, "test3");
     vfs_register_class (vfs_test_ops3);
 }
 
