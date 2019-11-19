@@ -1564,6 +1564,7 @@ do_move_dir_dir (const WPanel * panel, file_op_total_context_t * tctx, file_op_c
     gboolean move_over = FALSE;
     gboolean dstat_ok;
     vfs_path_t *src_vpath, *dst_vpath;
+    gboolean calc_total = FALSE;
 
     src_vpath = vfs_path_from_str (s);
     dst_vpath = vfs_path_from_str (d);
@@ -1608,6 +1609,19 @@ do_move_dir_dir (const WPanel * panel, file_op_total_context_t * tctx, file_op_c
     {
         if (move_over)
         {
+            if (panel != NULL)
+            {
+                /* In case of single directory, calculate totals. In case of many directories,
+                   totals are calcuated already. */
+                return_status =
+                    panel_operate_init_totals (panel, src_vpath, &src_stat, ctx, TRUE,
+                                               FILEGUI_DIALOG_MULTI_ITEM);
+                if (return_status != FILE_CONT)
+                    goto ret;
+
+                calc_total = TRUE;
+            }
+
             return_status = copy_dir_dir (tctx, ctx, s, d, FALSE, TRUE, TRUE, NULL);
 
             if (return_status != FILE_CONT)
@@ -1652,13 +1666,13 @@ do_move_dir_dir (const WPanel * panel, file_op_total_context_t * tctx, file_op_c
     }
 
     /* Failed because of filesystem boundary -> copy dir instead */
-    if (panel != NULL)
+    if (panel != NULL && !calc_total)
     {
         /* In case of single directory, calculate totals. In case of many directories,
            totals are calcuated already. */
         return_status =
-            panel_operate_init_totals (panel, src_vpath, &src_stat, ctx, FALSE,
-                                       FILEGUI_DIALOG_ONE_ITEM);
+            panel_operate_init_totals (panel, src_vpath, &src_stat, ctx, TRUE,
+                                       FILEGUI_DIALOG_MULTI_ITEM);
         if (return_status != FILE_CONT)
             goto ret;
     }
