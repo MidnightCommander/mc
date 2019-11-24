@@ -39,6 +39,8 @@ typedef struct WMenuBar
 
 /*** global variables defined in .c file *********************************************************/
 
+extern const global_keymap_t *menu_map;
+
 /*** declarations of public functions ************************************************************/
 
 menu_entry_t *menu_entry_create (const char *name, long command);
