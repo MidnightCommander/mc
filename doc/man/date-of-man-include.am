@@ -6,7 +6,7 @@ SED_PARAMETERS = \
 	-e "s{%libexecdir%{@libexecdir@{g"
 
 MAN_DATE_CMD = \
-	LC_ALL=$(DATE_LANG) @PERL@ -MPOSIX -e '\
+	LC_ALL=$(DATE_LANG) @PERL@ -CS -MPOSIX -e '\
 	    @fi=lstat("'$${MAN_FILE}'"); \
 	    print POSIX::strftime("$(DATE_FORMAT)", localtime($$fi[9]));' 2>/dev/null
 
