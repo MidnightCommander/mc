@@ -1461,8 +1461,7 @@ void
 free_my_statfs (void)
 {
 #ifdef HAVE_INFOMOUNT_LIST
-    g_slist_free_full (mc_mount_list, (GDestroyNotify) free_mount_entry);
-    mc_mount_list = NULL;
+    g_clear_slist (&mc_mount_list, (GDestroyNotify) free_mount_entry);
 #endif /* HAVE_INFOMOUNT_LIST */
 }
 

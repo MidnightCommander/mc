@@ -622,11 +622,10 @@ menubar_refresh (WMenuBar * menubar)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
+static inline void
 menubar_free_menu (WMenuBar * menubar)
 {
-    if (menubar->menu != NULL)
-        g_list_free_full (menubar->menu, (GDestroyNotify) destroy_menu);
+    g_clear_list (&menubar->menu, (GDestroyNotify) destroy_menu);
 }
 
 /* --------------------------------------------------------------------------------------------- */

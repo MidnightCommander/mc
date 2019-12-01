@@ -224,12 +224,7 @@ smbfs_auth_free (struct smb_authinfo const *a)
 static void
 smbfs_auth_free_all (void)
 {
-    if (auth_list)
-    {
-        g_slist_foreach (auth_list, (GFunc) smbfs_auth_free, 0);
-        g_slist_free (auth_list);
-        auth_list = 0;
-    }
+    g_clear_slist (&auth_list, (GDestroyNotify) smbfs_auth_free);
 }
 
 /* --------------------------------------------------------------------------------------------- */
