@@ -71,14 +71,14 @@
 
 panels_layout_t panels_layout = {
     /* Set if the panels are split horizontally */
-    .horizontal_split = 0,
+    .horizontal_split = FALSE,
 
     /* vertical split */
-    .vertical_equal = 1,
+    .vertical_equal = TRUE,
     .left_panel_size = 0,
 
     /* horizontal split */
-    .horizontal_equal = 1,
+    .horizontal_equal = TRUE,
     .top_panel_size = 0
 };
 
@@ -92,13 +92,13 @@ int output_lines = 0;
 gboolean command_prompt = TRUE;
 
 /* Set if the main menu is visible */
-int menubar_visible = 1;
+gboolean menubar_visible = TRUE;
 
 /* Set to show current working dir in xterm window title */
 gboolean xterm_title = TRUE;
 
 /* Set to show free space on device assigned to current directory */
-int free_space = 1;
+gboolean free_space = TRUE;
 
 /* The starting line for the output of the subprogram */
 int output_start_y = 0;
@@ -157,7 +157,7 @@ static WRadio *radio_widget;
 static struct
 {
     const char *text;
-    int *variable;
+    gboolean *variable;
     WCheck *widget;
 } check_options[] =
 {
@@ -226,9 +226,9 @@ update_split (const WDialog * h)
     check_split (&panels_layout);
 
     if (panels_layout.horizontal_split)
-        check_options[0].widget->state = panels_layout.horizontal_equal ? 1 : 0;
+        check_options[0].widget->state = panels_layout.horizontal_equal;
     else
-        check_options[0].widget->state = panels_layout.vertical_equal ? 1 : 0;
+        check_options[0].widget->state = panels_layout.vertical_equal;
     widget_draw (WIDGET (check_options[0].widget));
 
     tty_setcolor (check_options[0].widget->state ? DISABLED_COLOR : COLOR_NORMAL);
@@ -335,7 +335,7 @@ layout_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
     case MSG_POST_KEY:
         {
             const Widget *mw = CONST_WIDGET (midnight_dlg);
-            int _menubar_visible, _command_prompt, _keybar_visible, _message_visible;
+            gboolean _menubar_visible, _command_prompt, _keybar_visible, _message_visible;
 
             _menubar_visible = check_options[1].widget->state;
             _command_prompt = check_options[2].widget->state;
@@ -344,8 +344,8 @@ layout_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
 
             if (mc_global.tty.console_flag == '\0')
                 height =
-                    mw->lines - _keybar_visible - _command_prompt - _menubar_visible -
-                    _output_lines - _message_visible;
+                    mw->lines - (_keybar_visible ? 1 : 0) - (_command_prompt ? 1 : 0) -
+                    (_menubar_visible ? 1 : 0) - _output_lines - (_message_visible ? 1 : 0);
             else
             {
                 int minimum;
@@ -353,9 +353,9 @@ layout_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
                 if (_output_lines < 0)
                     _output_lines = 0;
                 height =
-                    mw->lines - _keybar_visible - _command_prompt - _menubar_visible -
-                    _output_lines - _message_visible;
-                minimum = MINHEIGHT * (1 + panels_layout.horizontal_split);
+                    mw->lines - (_keybar_visible ? 1 : 0) - (_command_prompt ? 1 : 0) -
+                    (_menubar_visible ? 1 : 0) - _output_lines - (_message_visible ? 1 : 0);
+                minimum = MINHEIGHT * (1 + (panels_layout.horizontal_split ? 1 : 0));
                 if (height < minimum)
                 {
                     _output_lines -= minimum - height;
@@ -376,13 +376,13 @@ layout_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
     case MSG_NOTIFY:
         if (sender == WIDGET (radio_widget))
         {
-            if (panels_layout.horizontal_split == radio_widget->sel)
+            if ((panels_layout.horizontal_split ? 1 : 0) == radio_widget->sel)
                 update_split (h);
             else
             {
                 int eq;
 
-                panels_layout.horizontal_split = radio_widget->sel;
+                panels_layout.horizontal_split = radio_widget->sel != 0;
 
                 if (panels_layout.horizontal_split)
                 {
@@ -410,7 +410,7 @@ layout_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
 
         if (sender == WIDGET (check_options[0].widget))
         {
-            int eq;
+            gboolean eq;
 
             if (panels_layout.horizontal_split)
             {
@@ -523,7 +523,7 @@ layout_dlg_create (void)
     add_widget (layout_dlg, groupbox_new (2, 3, 6, l1, title1));
 
     radio_widget = radio_new (3, 5, 2, s_split_direction);
-    radio_widget->sel = panels_layout.horizontal_split;
+    radio_widget->sel = panels_layout.horizontal_split ? 1 : 0;
     add_widget (layout_dlg, radio_widget);
 
     check_options[0].widget = check_new (5, 5, XTRACT (0));
@@ -747,8 +747,8 @@ setup_panels (void)
 
     /* iniitial height of panels */
     height =
-        mw->lines - menubar_visible - mc_global.message_visible - (command_prompt ? 1 : 0) -
-        mc_global.keybar_visible;
+        mw->lines - (menubar_visible ? 1 : 0) - (mc_global.message_visible ? 1 : 0) -
+        (command_prompt ? 1 : 0) - (mc_global.keybar_visible ? 1 : 0);
 
     if (mc_global.tty.console_flag != '\0')
     {
@@ -758,7 +758,7 @@ setup_panels (void)
             output_lines = 0;
         else
             height -= output_lines;
-        minimum = MINHEIGHT * (1 + panels_layout.horizontal_split);
+        minimum = MINHEIGHT * (1 + (panels_layout.horizontal_split ? 1 : 0));
         if (height < minimum)
         {
             output_lines -= minimum - height;
@@ -770,7 +770,7 @@ setup_panels (void)
     menubar_set_visible (the_menubar, menubar_visible);
 
     check_split (&panels_layout);
-    start_y = mw->y + menubar_visible;
+    start_y = mw->y + (menubar_visible ? 1 : 0);
 
     /* update columns first... */
     panel_do_cols (0);
@@ -798,13 +798,14 @@ setup_panels (void)
         widget_set_size (WIDGET (the_hint), 0, 0, 0, 0);
 
     /* Output window */
-    if (mc_global.tty.console_flag != '\0' && output_lines)
+    if (mc_global.tty.console_flag != '\0' && output_lines != 0)
     {
         output_start_y =
-            mw->lines - (command_prompt ? 1 : 0) - mc_global.keybar_visible - output_lines;
+            mw->lines - (command_prompt ? 1 : 0) - (mc_global.keybar_visible ? 1 : 0) -
+            output_lines;
         show_console_contents (output_start_y,
-                               mw->lines - output_lines - mc_global.keybar_visible - 1,
-                               mw->lines - mc_global.keybar_visible - 1);
+                               mw->lines - output_lines - (mc_global.keybar_visible ? 1 : 0) - 1,
+                               mw->lines - (mc_global.keybar_visible ? 1 : 0) - 1);
     }
 
     if (command_prompt)
@@ -821,7 +822,8 @@ setup_panels (void)
         widget_set_size (WIDGET (the_prompt), mw->lines, mw->cols, 0, 0);
     }
 
-    widget_set_size (WIDGET (the_bar), mw->lines - 1, mw->x, mc_global.keybar_visible, mw->cols);
+    widget_set_size (WIDGET (the_bar), mw->lines - 1, mw->x, mc_global.keybar_visible ? 1 : 0,
+                     mw->cols);
     buttonbar_set_visible (the_bar, mc_global.keybar_visible);
 
     update_xterm_title_path ();
@@ -919,7 +921,7 @@ setup_cmdline (void)
     }
 #endif
 
-    y = mw->lines - 1 - mc_global.keybar_visible;
+    y = mw->lines - 1 - (mc_global.keybar_visible ? 1 : 0);
 
     widget_set_size (WIDGET (the_prompt), y, mw->x, 1, prompt_width);
     label_set_text (the_prompt, mc_prompt);
@@ -964,7 +966,7 @@ rotate_dash (gboolean show)
     if (show && !mc_time_elapsed (&timestamp, delay))
         return;
 
-    widget_gotoyx (w, (menubar_visible != 0) ? 1 : 0, w->cols - 1);
+    widget_gotoyx (w, menubar_visible != 0 ? 1 : 0, w->cols - 1);
     tty_setcolor (NORMAL_COLOR);
 
     if (!show)

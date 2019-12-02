@@ -258,19 +258,27 @@ static const struct
 {
     const char *opt_name;
     int *opt_addr;
-} layout [] = {
+} layout_int_options [] = {
+    { "output_lines", &output_lines },
+    { "left_panel_size", &panels_layout.left_panel_size },
+    { "top_panel_size", &panels_layout.top_panel_size },
+    { NULL, NULL }
+};
+
+static const struct
+{
+    const char *opt_name;
+    gboolean *opt_addr;
+} layout_bool_options [] = {
     { "message_visible", &mc_global.message_visible },
     { "keybar_visible", &mc_global.keybar_visible },
     { "xterm_title", &xterm_title },
-    { "output_lines", &output_lines },
     { "command_prompt", &command_prompt },
     { "menubar_visible", &menubar_visible },
     { "free_space", &free_space },
     { "horizontal_split", &panels_layout.horizontal_split },
     { "vertical_equal", &panels_layout.vertical_equal },
-    { "left_panel_size", &panels_layout.left_panel_size },
     { "horizontal_equal", &panels_layout.horizontal_equal },
-    { "top_panel_size", &panels_layout.top_panel_size },
     { NULL, NULL }
 };
 
@@ -670,13 +678,13 @@ static void
 load_layout (void)
 {
     size_t i;
-    int equal_split;
+    gboolean equal_split;
     int first_panel_size;
 
     /* legacy options */
     panels_layout.horizontal_split = mc_config_get_int (mc_global.main_config, CONFIG_APP_SECTION,
-                                                        "horizontal_split", 0);
-    equal_split = mc_config_get_int (mc_global.main_config, "Layout", "equal_split", 1);
+                                                        "horizontal_split", 0) != 0;
+    equal_split = mc_config_get_int (mc_global.main_config, "Layout", "equal_split", 1) != 0;
     first_panel_size = mc_config_get_int (mc_global.main_config, "Layout", "first_panel_size", 1);
     if (panels_layout.horizontal_split)
     {
@@ -690,9 +698,15 @@ load_layout (void)
     }
 
     /* actual options override legacy ones */
-    for (i = 0; layout[i].opt_name != NULL; i++)
-        *layout[i].opt_addr = mc_config_get_int (mc_global.main_config, CONFIG_LAYOUT_SECTION,
-                                                 layout[i].opt_name, *layout[i].opt_addr);
+    for (i = 0; layout_int_options[i].opt_name != NULL; i++)
+        *layout_int_options[i].opt_addr =
+            mc_config_get_int (mc_global.main_config, CONFIG_LAYOUT_SECTION,
+                               layout_int_options[i].opt_name, *layout_int_options[i].opt_addr);
+
+    for (i = 0; layout_bool_options[i].opt_name != NULL; i++)
+        *layout_bool_options[i].opt_addr =
+            mc_config_get_int (mc_global.main_config, CONFIG_LAYOUT_SECTION,
+                               layout_bool_options[i].opt_name, *layout_bool_options[i].opt_addr);
 
     /* remove legacy options */
     mc_config_del_key (mc_global.main_config, CONFIG_APP_SECTION, "horizontal_split");
@@ -981,9 +995,14 @@ save_layout (void)
     size_t i;
 
     /* Save integer options */
-    for (i = 0; layout[i].opt_name != NULL; i++)
-        mc_config_set_int (mc_global.main_config, CONFIG_LAYOUT_SECTION, layout[i].opt_name,
-                           *layout[i].opt_addr);
+    for (i = 0; layout_int_options[i].opt_name != NULL; i++)
+        mc_config_set_int (mc_global.main_config, CONFIG_LAYOUT_SECTION,
+                           layout_int_options[i].opt_name, *layout_int_options[i].opt_addr);
+
+    /* Save boolean options */
+    for (i = 0; layout_bool_options[i].opt_name != NULL; i++)
+        mc_config_set_bool (mc_global.main_config, CONFIG_LAYOUT_SECTION,
+                            layout_bool_options[i].opt_name, *layout_bool_options[i].opt_addr);
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -65,8 +65,8 @@ mc_global_t mc_global = {
 #endif /* !HAVE_CHARSET */
     .utf8_display = FALSE,
 
-    .message_visible = 1,
-    .keybar_visible = 1,
+    .message_visible = TRUE,
+    .keybar_visible = TRUE,
 
 #ifdef ENABLE_BACKGROUND
     .we_are_background = FALSE,

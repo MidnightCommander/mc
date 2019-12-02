@@ -200,9 +200,9 @@ typedef struct
     gboolean utf8_display;
 
     /* Set if the nice message (hint) bar is visible */
-    int message_visible;
+    gboolean message_visible;
     /* Set if the nice and useful keybar is visible */
-    int keybar_visible;
+    gboolean keybar_visible;
 
 #ifdef ENABLE_BACKGROUND
     /* If true, this is a background process */

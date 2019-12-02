@@ -27,14 +27,14 @@ typedef enum
 
 typedef struct
 {
-    int horizontal_split;
+    gboolean horizontal_split;
 
     /* vertical split */
-    int vertical_equal;
+    gboolean vertical_equal;
     int left_panel_size;
 
     /* horizontal split */
-    int horizontal_equal;
+    gboolean horizontal_equal;
     int top_panel_size;
 } panels_layout_t;
 
@@ -42,10 +42,10 @@ typedef struct
 
 extern int output_lines;
 extern gboolean command_prompt;
-extern int menubar_visible;
+extern gboolean menubar_visible;
 extern int output_start_y;
 extern gboolean xterm_title;
-extern int free_space;
+extern gboolean free_space;
 extern gboolean nice_rotating_dash;
 
 extern int ok_to_refresh;

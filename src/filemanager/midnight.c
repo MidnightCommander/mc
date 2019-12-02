@@ -1501,10 +1501,10 @@ midnight_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
     case MSG_DRAW:
         load_hint (TRUE);
         /* We handle the special case of the output lines */
-        if (mc_global.tty.console_flag != '\0' && output_lines)
+        if (mc_global.tty.console_flag != '\0' && output_lines != 0)
             show_console_contents (output_start_y,
-                                   LINES - output_lines - mc_global.keybar_visible -
-                                   1, LINES - mc_global.keybar_visible - 1);
+                                   LINES - output_lines - (mc_global.keybar_visible ? 1 : 0) - 1,
+                                   LINES - (mc_global.keybar_visible ? 1 : 0) - 1);
         return MSG_HANDLED;
 
     case MSG_RESIZE:
