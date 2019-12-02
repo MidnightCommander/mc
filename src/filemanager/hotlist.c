@@ -125,11 +125,6 @@ enum HotListType
 static struct
 {
     /*
-     * these parameters are intended to be user configurable
-     */
-    int expanded;               /* expanded view of all groups at startup */
-
-    /*
      * these reflect run time state
      */
 
@@ -762,9 +757,6 @@ init_hotlist (hotlist_t list_type)
 
     lines = LINES - 2;
     cols = init_i18n_stuff (list_type, COLS - 6);
-
-    hotlist_state.expanded =
-        mc_config_get_int (mc_global.main_config, "HotlistConfig", "expanded_view_of_groups", 0);
 
 #ifdef ENABLE_VFS
     if (list_type == LIST_VFSLIST)
