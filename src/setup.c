@@ -678,24 +678,6 @@ static void
 load_layout (void)
 {
     size_t i;
-    gboolean equal_split;
-    int first_panel_size;
-
-    /* legacy options */
-    panels_layout.horizontal_split = mc_config_get_int (mc_global.main_config, CONFIG_APP_SECTION,
-                                                        "horizontal_split", 0) != 0;
-    equal_split = mc_config_get_int (mc_global.main_config, "Layout", "equal_split", 1) != 0;
-    first_panel_size = mc_config_get_int (mc_global.main_config, "Layout", "first_panel_size", 1);
-    if (panels_layout.horizontal_split)
-    {
-        panels_layout.horizontal_equal = equal_split;
-        panels_layout.left_panel_size = first_panel_size;
-    }
-    else
-    {
-        panels_layout.vertical_equal = equal_split;
-        panels_layout.top_panel_size = first_panel_size;
-    }
 
     /* actual options override legacy ones */
     for (i = 0; layout_int_options[i].opt_name != NULL; i++)
@@ -707,11 +689,6 @@ load_layout (void)
         *layout_bool_options[i].opt_addr =
             mc_config_get_int (mc_global.main_config, CONFIG_LAYOUT_SECTION,
                                layout_bool_options[i].opt_name, *layout_bool_options[i].opt_addr);
-
-    /* remove legacy options */
-    mc_config_del_key (mc_global.main_config, CONFIG_APP_SECTION, "horizontal_split");
-    mc_config_del_key (mc_global.main_config, "Layout", "equal_split");
-    mc_config_del_key (mc_global.main_config, "Layout", "first_panel_size");
 
     startup_left_mode = setup__load_panel_state ("New Left Panel");
     startup_right_mode = setup__load_panel_state ("New Right Panel");
