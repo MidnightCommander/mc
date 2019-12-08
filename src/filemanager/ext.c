@@ -510,9 +510,12 @@ exec_extension (void *target, const vfs_path_t * filename_vpath, const char *lc_
         {
             handle_console (CONSOLE_SAVE);
             if (output_lines != 0 && mc_global.keybar_visible)
-                show_console_contents (output_start_y,
-                                       LINES - (mc_global.keybar_visible ? 1 : 0) - output_lines -
-                                       1, LINES - (mc_global.keybar_visible ? 1 : 0) - 1);
+            {
+                unsigned char end_line;
+
+                end_line = LINES - (mc_global.keybar_visible ? 1 : 0) - 1;
+                show_console_contents (output_start_y, end_line - output_lines, end_line);
+            }
         }
     }
 

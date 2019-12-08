@@ -800,12 +800,11 @@ setup_panels (void)
     /* Output window */
     if (mc_global.tty.console_flag != '\0' && output_lines != 0)
     {
-        output_start_y =
-            mw->lines - (command_prompt ? 1 : 0) - (mc_global.keybar_visible ? 1 : 0) -
-            output_lines;
-        show_console_contents (output_start_y,
-                               mw->lines - output_lines - (mc_global.keybar_visible ? 1 : 0) - 1,
-                               mw->lines - (mc_global.keybar_visible ? 1 : 0) - 1);
+        unsigned char end_line;
+
+        end_line = mw->lines - (mc_global.keybar_visible ? 1 : 0) - 1;
+        output_start_y = end_line - (command_prompt ? 1 : 0) - output_lines + 1;
+        show_console_contents (output_start_y, end_line - output_lines, end_line);
     }
 
     if (command_prompt)
