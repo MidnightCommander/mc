@@ -206,18 +206,23 @@ hotkey_equal (const hotkey_t hotkey1, const hotkey_t hotkey2)
 void
 hotkey_draw (Widget * w, const hotkey_t hotkey, gboolean focused)
 {
-    widget_selectcolor (w, focused, FALSE);
-    tty_print_string (hotkey.start);
+    if (hotkey.start[0] != '\0')
+    {
+        widget_selectcolor (w, focused, FALSE);
+        tty_print_string (hotkey.start);
+    }
 
     if (hotkey.hotkey != NULL)
     {
         widget_selectcolor (w, focused, TRUE);
         tty_print_string (hotkey.hotkey);
-        widget_selectcolor (w, focused, FALSE);
     }
 
     if (hotkey.end != NULL)
+    {
+        widget_selectcolor (w, focused, FALSE);
         tty_print_string (hotkey.end);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
