@@ -237,9 +237,17 @@ void
 button_set_text (WButton * b, const char *text)
 {
     Widget *w = WIDGET (b);
+    hotkey_t hk;
+
+    hk = hotkey_new (text);
+    if (hotkey_equal (b->text, hk))
+    {
+        hotkey_free (hk);
+        return;
+    }
 
     hotkey_free (b->text);
-    b->text = hotkey_new (text);
+    b->text = hk;
     b->hotpos = (b->text.hotkey != NULL) ? str_term_width1 (b->text.start) : -1;
     w->cols = button_get_len (b);
     widget_draw (w);
