@@ -228,9 +228,7 @@ button_new (int y, int x, int action, button_flags_t flags, const char *text, bc
 char *
 button_get_text (const WButton * b)
 {
-    if (b->text.hotkey != NULL)
-        return g_strconcat (b->text.start, "&", b->text.hotkey, b->text.end, (char *) NULL);
-    return g_strdup (b->text.start);
+    return hotkey_get_text (b->text);
 }
 
 /* --------------------------------------------------------------------------------------------- */

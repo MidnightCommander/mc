@@ -222,6 +222,27 @@ hotkey_draw (Widget * w, const hotkey_t hotkey, gboolean focused)
 
 /* --------------------------------------------------------------------------------------------- */
 
+char *
+hotkey_get_text (const hotkey_t hotkey)
+{
+    GString *text;
+
+    text = g_string_new (hotkey.start);
+
+    if (hotkey.hotkey != NULL)
+    {
+        g_string_append_c (text, '&');
+        g_string_append (text, hotkey.hotkey);
+    }
+
+    if (hotkey.end != NULL)
+        g_string_append (text, hotkey.end);
+
+    return g_string_free (text, FALSE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 void
 widget_init (Widget * w, int y, int x, int lines, int cols,
              widget_cb_fn callback, widget_mouse_cb_fn mouse_callback)

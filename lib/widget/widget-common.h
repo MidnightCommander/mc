@@ -173,6 +173,8 @@ int hotkey_width (const hotkey_t hotkey);
 gboolean hotkey_equal (const hotkey_t hotkey1, const hotkey_t hotkey2);
 /* draw hotkey of widget */
 void hotkey_draw (Widget * w, const hotkey_t hotkey, gboolean focused);
+/* get text of hotkey */
+char *hotkey_get_text (const hotkey_t hotkey);
 
 /* widget initialization */
 void widget_init (Widget * w, int y, int x, int lines, int cols,
