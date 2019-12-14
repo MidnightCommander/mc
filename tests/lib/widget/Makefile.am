@@ -16,9 +16,13 @@ LIBS += $(GLIB_LIBS)
 endif
 
 TESTS = \
-	complete_engine
+	complete_engine \
+	hotkey_equal
 
 check_PROGRAMS = $(TESTS)
 
 complete_engine_SOURCES = \
 	complete_engine.c
+
+hotkey_equal_SOURCES = \
+	hotkey_equal.c

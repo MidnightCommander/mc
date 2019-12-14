@@ -110,6 +110,24 @@ widget_reorder (GList * l, gboolean set_top)
         h->widgets = g_list_concat (l, h->widgets);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
+static gboolean
+hotkey_cmp (const char *s1, const char *s2)
+{
+    gboolean n1, n2;
+
+    n1 = s1 != NULL;
+    n2 = s2 != NULL;
+
+    if (n1 != n2)
+        return FALSE;
+
+    if (n1 && n2 && strcmp (s1, s2) != 0)
+        return FALSE;
+
+    return TRUE;
+}
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
@@ -169,6 +187,18 @@ hotkey_width (const hotkey_t hotkey)
     result += (hotkey.hotkey != NULL) ? str_term_width1 (hotkey.hotkey) : 0;
     result += (hotkey.end != NULL) ? str_term_width1 (hotkey.end) : 0;
     return result;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+gboolean
+hotkey_equal (const hotkey_t hotkey1, const hotkey_t hotkey2)
+{
+    /* *INDENT-OFF* */
+    return (strcmp (hotkey1.start, hotkey2.start) == 0) &&
+           hotkey_cmp (hotkey1.hotkey, hotkey2.hotkey) &&
+           hotkey_cmp (hotkey1.end, hotkey2.end);
+    /* *INDENT-ON* */
 }
 
 /* --------------------------------------------------------------------------------------------- */

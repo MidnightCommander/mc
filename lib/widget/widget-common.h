@@ -154,9 +154,9 @@ struct Widget
  */
 typedef struct hotkey_t
 {
-    char *start;
-    char *hotkey;
-    char *end;
+    char *start;                /* never NULL */
+    char *hotkey;               /* can be NULL */
+    char *end;                  /* can be NULL */
 } hotkey_t;
 
 /*** global variables defined in .c file *********************************************************/
@@ -169,6 +169,8 @@ hotkey_t hotkey_new (const char *text);
 void hotkey_free (const hotkey_t hotkey);
 /* return width on terminal of hotkey */
 int hotkey_width (const hotkey_t hotkey);
+/* compare two hotkeys */
+gboolean hotkey_equal (const hotkey_t hotkey1, const hotkey_t hotkey2);
 /* draw hotkey of widget */
 void hotkey_draw (Widget * w, const hotkey_t hotkey, gboolean focused);
 
