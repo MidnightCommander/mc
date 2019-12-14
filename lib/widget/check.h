@@ -26,6 +26,7 @@ typedef struct WCheck
 /*** declarations of public functions ************************************************************/
 
 WCheck *check_new (int y, int x, gboolean state, const char *text);
+void check_set_text (WCheck * check, const char *text);
 
 /*** inline functions ****************************************************************************/
 

@@ -148,3 +148,29 @@ check_new (int y, int x, gboolean state, const char *text)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+void
+check_set_text (WCheck * check, const char *text)
+{
+    Widget *w = WIDGET (check);
+    hotkey_t hk;
+
+    hk = hotkey_new (text);
+    if (hotkey_equal (check->text, hk))
+    {
+        hotkey_free (hk);
+        return;
+    }
+
+    hotkey_free (check->text);
+    check->text = hk;
+
+    if (check->text.start[0] == '\0' && check->text.hotkey == NULL && check->text.end == NULL)
+        w->cols = 3;            /* "[ ]" */
+    else
+        w->cols = 4 + hotkey_width (check->text);       /* "[ ]  text" */
+
+    widget_draw (w);
+}
+
+/* --------------------------------------------------------------------------------------------- */
