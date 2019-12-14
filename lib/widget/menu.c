@@ -872,7 +872,7 @@ menu_entry_create (const char *name, long command)
 
     entry = g_new (menu_entry_t, 1);
     entry->first_letter = ' ';
-    entry->text = parse_hotkey (name);
+    entry->text = hotkey_new (name);
     entry->command = command;
     entry->shortcut = NULL;
 
@@ -886,7 +886,7 @@ menu_entry_free (menu_entry_t * entry)
 {
     if (entry != NULL)
     {
-        release_hotkey (entry->text);
+        hotkey_free (entry->text);
         g_free (entry->shortcut);
         g_free (entry);
     }
@@ -901,7 +901,7 @@ create_menu (const char *name, GList * entries, const char *help_node)
 
     menu = g_new (menu_t, 1);
     menu->start_x = 0;
-    menu->text = parse_hotkey (name);
+    menu->text = hotkey_new (name);
     menu->entries = entries;
     menu->max_entry_len = 1;
     menu->max_hotkey_len = 0;
@@ -916,8 +916,8 @@ create_menu (const char *name, GList * entries, const char *help_node)
 void
 menu_set_name (menu_t * menu, const char *name)
 {
-    release_hotkey (menu->text);
-    menu->text = parse_hotkey (name);
+    hotkey_free (menu->text);
+    menu->text = hotkey_new (name);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -925,7 +925,7 @@ menu_set_name (menu_t * menu, const char *name)
 void
 destroy_menu (menu_t * menu)
 {
-    release_hotkey (menu->text);
+    hotkey_free (menu->text);
     g_list_free_full (menu->entries, (GDestroyNotify) menu_entry_free);
     g_free (menu->help_node);
     g_free (menu);

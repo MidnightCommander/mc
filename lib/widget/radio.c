@@ -135,7 +135,7 @@ radio_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
 
     case MSG_DESTROY:
         for (i = 0; i < r->count; i++)
-            release_hotkey (r->texts[i]);
+            hotkey_free (r->texts[i]);
         g_free (r->texts);
         return MSG_HANDLED;
 
@@ -188,7 +188,7 @@ radio_new (int y, int x, int count, const char **texts)
     {
         int width;
 
-        r->texts[i] = parse_hotkey (texts[i]);
+        r->texts[i] = hotkey_new (texts[i]);
         width = hotkey_width (r->texts[i]);
         wmax = MAX (width, wmax);
     }

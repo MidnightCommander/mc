@@ -116,7 +116,7 @@ widget_reorder (GList * l, gboolean set_top)
 /* --------------------------------------------------------------------------------------------- */
 
 struct hotkey_t
-parse_hotkey (const char *text)
+hotkey_new (const char *text)
 {
     hotkey_t result;
     const char *cp, *p;
@@ -151,7 +151,7 @@ parse_hotkey (const char *text)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-release_hotkey (const hotkey_t hotkey)
+hotkey_free (const hotkey_t hotkey)
 {
     g_free (hotkey.start);
     g_free (hotkey.hotkey);

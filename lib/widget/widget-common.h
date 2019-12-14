@@ -164,9 +164,9 @@ typedef struct hotkey_t
 /*** declarations of public functions ************************************************************/
 
 /* create hotkey from text */
-hotkey_t parse_hotkey (const char *text);
+hotkey_t hotkey_new (const char *text);
 /* release hotkey, free all mebers of hotkey_t */
-void release_hotkey (const hotkey_t hotkey);
+void hotkey_free (const hotkey_t hotkey);
 /* return width on terminal of hotkey */
 int hotkey_width (const hotkey_t hotkey);
 /* draw hotkey of widget */

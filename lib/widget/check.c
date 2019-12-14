@@ -95,7 +95,7 @@ check_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
         }
 
     case MSG_DESTROY:
-        release_hotkey (c->text);
+        hotkey_free (c->text);
         return MSG_HANDLED;
 
     default:
@@ -138,7 +138,7 @@ check_new (int y, int x, gboolean state, const char *text)
 
     c = g_new (WCheck, 1);
     w = WIDGET (c);
-    c->text = parse_hotkey (text);
+    c->text = hotkey_new (text);
     /* 4 is width of "[X] " */
     widget_init (w, y, x, 1, 4 + hotkey_width (c->text), check_callback, check_mouse_callback);
     w->options |= WOP_SELECTABLE | WOP_WANT_CURSOR | WOP_WANT_HOTKEY;

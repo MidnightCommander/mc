@@ -169,7 +169,7 @@ button_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm
         }
 
     case MSG_DESTROY:
-        release_hotkey (b->text);
+        hotkey_free (b->text);
         return MSG_HANDLED;
 
     default:
@@ -213,7 +213,7 @@ button_new (int y, int x, int action, button_flags_t flags, const char *text, bc
 
     b->action = action;
     b->flags = flags;
-    b->text = parse_hotkey (text);
+    b->text = hotkey_new (text);
     widget_init (w, y, x, 1, button_get_len (b), button_default_callback,
                  button_mouse_default_callback);
     w->options |= WOP_SELECTABLE | WOP_WANT_CURSOR | WOP_WANT_HOTKEY;
@@ -240,8 +240,8 @@ button_set_text (WButton * b, const char *text)
 {
     Widget *w = WIDGET (b);
 
-    release_hotkey (b->text);
-    b->text = parse_hotkey (text);
+    hotkey_free (b->text);
+    b->text = hotkey_new (text);
     b->hotpos = (b->text.hotkey != NULL) ? str_term_width1 (b->text.start) : -1;
     w->cols = button_get_len (b);
     widget_draw (w);
