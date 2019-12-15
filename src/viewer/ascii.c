@@ -680,7 +680,7 @@ mcview_display_line (WView * view, mcview_state_machine_t * state, int row,
             {
                 /* The combining character sequence fits entirely in the viewport. Print it. */
                 tty_setcolor (color);
-                widget_move (view, top + row, left + ((off_t) col - dpy_text_column));
+                widget_gotoyx (view, top + row, left + ((off_t) col - dpy_text_column));
                 if (cs[0] == '\t')
                 {
                     for (i = 0; i < charwidth; i++)
@@ -708,7 +708,7 @@ mcview_display_line (WView * view, mcview_state_machine_t * state, int row,
                 for (i = dpy_text_column;
                      i < (off_t) col + charwidth && i < dpy_text_column + (off_t) width; i++)
                 {
-                    widget_move (view, top + row, left + (i - dpy_text_column));
+                    widget_gotoyx (view, top + row, left + (i - dpy_text_column));
                     tty_print_anychar ((cs[0] == '\t') ? ' ' : PARTIAL_CJK_AT_LEFT_MARGIN);
                 }
             }
@@ -721,7 +721,7 @@ mcview_display_line (WView * view, mcview_state_machine_t * state, int row,
                 tty_setcolor (color);
                 for (i = col; i < dpy_text_column + (off_t) width; i++)
                 {
-                    widget_move (view, top + row, left + (i - dpy_text_column));
+                    widget_gotoyx (view, top + row, left + (i - dpy_text_column));
                     tty_print_anychar ((cs[0] == '\t') ? ' ' : PARTIAL_CJK_AT_RIGHT_MARGIN);
                 }
             }
@@ -906,7 +906,7 @@ mcview_display_text (WView * view)
     if (mcview_show_eof != NULL && mcview_show_eof[0] != '\0')
         while (row < (int) height)
         {
-            widget_move (view, top + row, left);
+            widget_gotoyx (view, top + row, left);
             /* TODO: should make it no wider than the viewport */
             tty_print_string (mcview_show_eof);
             row++;

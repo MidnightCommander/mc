@@ -120,7 +120,7 @@ button_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm
             off = 0;
             break;
         }
-        widget_move (w, 0, b->hotpos + off);
+        widget_gotoyx (w, 0, b->hotpos + off);
         return MSG_HANDLED;
 
     case MSG_DRAW:
@@ -130,7 +130,7 @@ button_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm
             focused = widget_get_state (w, WST_FOCUSED);
 
             widget_selectcolor (w, focused, FALSE);
-            widget_move (w, 0, 0);
+            widget_gotoyx (w, 0, 0);
 
             switch (b->flags)
             {
@@ -169,7 +169,7 @@ button_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm
         }
 
     case MSG_DESTROY:
-        release_hotkey (b->text);
+        hotkey_free (b->text);
         return MSG_HANDLED;
 
     default:
@@ -213,7 +213,7 @@ button_new (int y, int x, int action, button_flags_t flags, const char *text, bc
 
     b->action = action;
     b->flags = flags;
-    b->text = parse_hotkey (text);
+    b->text = hotkey_new (text);
     widget_init (w, y, x, 1, button_get_len (b), button_default_callback,
                  button_mouse_default_callback);
     w->options |= WOP_SELECTABLE | WOP_WANT_CURSOR | WOP_WANT_HOTKEY;
@@ -228,9 +228,7 @@ button_new (int y, int x, int action, button_flags_t flags, const char *text, bc
 char *
 button_get_text (const WButton * b)
 {
-    if (b->text.hotkey != NULL)
-        return g_strconcat (b->text.start, "&", b->text.hotkey, b->text.end, (char *) NULL);
-    return g_strdup (b->text.start);
+    return hotkey_get_text (b->text);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -239,12 +237,20 @@ void
 button_set_text (WButton * b, const char *text)
 {
     Widget *w = WIDGET (b);
+    hotkey_t hk;
 
-    release_hotkey (b->text);
-    b->text = parse_hotkey (text);
+    hk = hotkey_new (text);
+    if (hotkey_equal (b->text, hk))
+    {
+        hotkey_free (hk);
+        return;
+    }
+
+    hotkey_free (b->text);
+    b->text = hk;
     b->hotpos = (b->text.hotkey != NULL) ? str_term_width1 (b->text.start) : -1;
     w->cols = button_get_len (b);
-    widget_redraw (w);
+    widget_draw (w);
 }
 
 /* --------------------------------------------------------------------------------------------- */

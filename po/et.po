@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-09-01 20:04+0300\n"
+"POT-Creation-Date: 2019-12-15 12:59+0300\n"
 "PO-Revision-Date: 2019-03-05 18:33+0000\n"
 "Last-Translator: Kristjan Räts <kristjanrats@gmail.com>\n"
 "Language-Team: Estonian (http://www.transifex.com/mc/mc/language/et/)\n"
@@ -483,6 +483,10 @@ msgstr "Klahv Shift"
 
 msgid "The TERM environment variable is unset!\n"
 msgstr "Keskkonnamuutujat TERM on määramata!\n"
+
+#, fuzzy
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Nurjus toru voogude loomine"
 
 #, fuzzy
 msgid "Cannot create pipe for SIGWINCH"

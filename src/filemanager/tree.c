@@ -241,7 +241,7 @@ tree_show_mini_info (WTree * tree, int tree_lines, int tree_cols)
         /* Show search string */
         tty_setcolor (INPUT_COLOR);
         tty_draw_hline (w->y + line, w->x + 1, ' ', tree_cols);
-        widget_move (w, line, 1);
+        widget_gotoyx (w, line, 1);
         tty_print_char (PATH_SEP);
         tty_print_string (str_fit_to_term (tree->search_buffer, tree_cols - 2, J_LEFT_FIT));
         tty_print_char (' ');
@@ -253,7 +253,7 @@ tree_show_mini_info (WTree * tree, int tree_lines, int tree_cols)
 
         tty_setcolor (tree->is_panel ? NORMAL_COLOR : TREE_NORMALC (h));
         tty_draw_hline (w->y + line, w->x + 1, ' ', tree_cols);
-        widget_move (w, line, 1);
+        widget_gotoyx (w, line, 1);
         tty_print_string (str_fit_to_term
                           (vfs_path_as_str (tree->selected_ptr->name), tree_cols, J_LEFT_FIT));
     }
@@ -276,7 +276,7 @@ show_tree (WTree * tree)
     tree_lines = tlines (tree);
     tree_cols = w->cols;
 
-    widget_move (w, y, x);
+    widget_gotoyx (w, y, x);
     if (tree->is_panel)
     {
         tree_cols -= 2;
@@ -585,7 +585,7 @@ tree_chdir_sel (WTree * tree)
             message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\"\n%s"),
                      vfs_path_as_str (tree->selected_ptr->name), unix_error_string (errno));
 
-        widget_redraw (WIDGET (current_panel));
+        widget_draw (WIDGET (current_panel));
         change_panel ();
         show_tree (tree);
     }
@@ -979,7 +979,7 @@ tree_toggle_navig (WTree * tree)
     buttonbar_set_label (b, 4,
                          tree_navigation_flag ? Q_ ("ButtonBar|Static") : Q_ ("ButtonBar|Dynamc"),
                          tree_map, WIDGET (tree));
-    widget_redraw (WIDGET (b));
+    widget_draw (WIDGET (b));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1124,7 +1124,7 @@ tree_frame (WDialog * h, WTree * tree)
 
         tty_draw_box (w->y, w->x, w->lines, w->cols, FALSE);
 
-        widget_move (w, 0, (w->cols - len - 2) / 2);
+        widget_gotoyx (w, 0, (w->cols - len - 2) / 2);
         tty_printf (" %s ", title);
 
         if (panels_options.show_mini_info)
@@ -1132,9 +1132,9 @@ tree_frame (WDialog * h, WTree * tree)
             int y;
 
             y = w->lines - 3;
-            widget_move (w, y, 0);
+            widget_gotoyx (w, y, 0);
             tty_print_alt_char (ACS_LTEE, FALSE);
-            widget_move (w, y, w->cols - 1);
+            widget_gotoyx (w, y, w->cols - 1);
             tty_print_alt_char (ACS_RTEE, FALSE);
             tty_draw_hline (w->y + y, w->x + 1, ACS_HLINE, w->cols - 2);
         }
@@ -1158,7 +1158,7 @@ tree_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
         if (widget_get_state (w, WST_FOCUSED))
         {
             b = find_buttonbar (h);
-            widget_redraw (WIDGET (b));
+            widget_draw (WIDGET (b));
         }
         return MSG_HANDLED;
 

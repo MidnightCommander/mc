@@ -14,7 +14,7 @@
 #define WIDGET(x) ((Widget *)(x))
 #define CONST_WIDGET(x) ((const Widget *)(x))
 
-#define widget_move(w, _y, _x) tty_gotoyx (CONST_WIDGET(w)->y + (_y), CONST_WIDGET(w)->x + (_x))
+#define widget_gotoyx(w, _y, _x) tty_gotoyx (CONST_WIDGET(w)->y + (_y), CONST_WIDGET(w)->x + (_x))
 /* Sets/clear the specified flag in the options field */
 #define widget_want_cursor(w,i) widget_set_options(w, WOP_WANT_CURSOR, i)
 #define widget_want_hotkey(w,i) widget_set_options(w, WOP_WANT_HOTKEY, i)
@@ -154,9 +154,9 @@ struct Widget
  */
 typedef struct hotkey_t
 {
-    char *start;
-    char *hotkey;
-    char *end;
+    char *start;                /* never NULL */
+    char *hotkey;               /* can be NULL */
+    char *end;                  /* can be NULL */
 } hotkey_t;
 
 /*** global variables defined in .c file *********************************************************/
@@ -164,17 +164,22 @@ typedef struct hotkey_t
 /*** declarations of public functions ************************************************************/
 
 /* create hotkey from text */
-hotkey_t parse_hotkey (const char *text);
+hotkey_t hotkey_new (const char *text);
 /* release hotkey, free all mebers of hotkey_t */
-void release_hotkey (const hotkey_t hotkey);
+void hotkey_free (const hotkey_t hotkey);
 /* return width on terminal of hotkey */
 int hotkey_width (const hotkey_t hotkey);
+/* compare two hotkeys */
+gboolean hotkey_equal (const hotkey_t hotkey1, const hotkey_t hotkey2);
 /* draw hotkey of widget */
 void hotkey_draw (Widget * w, const hotkey_t hotkey, gboolean focused);
+/* get text of hotkey */
+char *hotkey_get_text (const hotkey_t hotkey);
 
 /* widget initialization */
 void widget_init (Widget * w, int y, int x, int lines, int cols,
                   widget_cb_fn callback, widget_mouse_cb_fn mouse_callback);
+void widget_destroy (Widget * w);
 /* Default callback for widgets */
 cb_ret_t widget_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
                                   void *data);
@@ -184,7 +189,7 @@ void widget_adjust_position (widget_pos_flags_t pos_flags, int *y, int *x, int *
 void widget_set_size (Widget * widget, int y, int x, int lines, int cols);
 /* select color for widget in dependance of state */
 void widget_selectcolor (Widget * w, gboolean focused, gboolean hotkey);
-void widget_redraw (Widget * w);
+void widget_draw (Widget * w);
 void widget_erase (Widget * w);
 gboolean widget_is_active (const void *w);
 gboolean widget_overlapped (const Widget * a, const Widget * b);

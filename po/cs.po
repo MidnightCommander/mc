@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-09-01 20:04+0300\n"
+"POT-Creation-Date: 2019-12-15 12:59+0300\n"
 "PO-Revision-Date: 2019-03-03 09:55+0000\n"
 "Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>\n"
 "Language-Team: Czech (http://www.transifex.com/mc/mc/language/cs/)\n"
@@ -489,6 +489,10 @@ msgstr "Shift"
 
 msgid "The TERM environment variable is unset!\n"
 msgstr "Proměnná prostředí TERM není nastavena!\n"
+
+#, fuzzy
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Nelze vytvořit sekvence příkazů (pipe streams)"
 
 #, fuzzy
 msgid "Cannot create pipe for SIGWINCH"

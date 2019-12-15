@@ -110,13 +110,31 @@ widget_reorder (GList * l, gboolean set_top)
         h->widgets = g_list_concat (l, h->widgets);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
+static gboolean
+hotkey_cmp (const char *s1, const char *s2)
+{
+    gboolean n1, n2;
+
+    n1 = s1 != NULL;
+    n2 = s2 != NULL;
+
+    if (n1 != n2)
+        return FALSE;
+
+    if (n1 && n2 && strcmp (s1, s2) != 0)
+        return FALSE;
+
+    return TRUE;
+}
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
 struct hotkey_t
-parse_hotkey (const char *text)
+hotkey_new (const char *text)
 {
     hotkey_t result;
     const char *cp, *p;
@@ -151,7 +169,7 @@ parse_hotkey (const char *text)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-release_hotkey (const hotkey_t hotkey)
+hotkey_free (const hotkey_t hotkey)
 {
     g_free (hotkey.start);
     g_free (hotkey.hotkey);
@@ -173,21 +191,59 @@ hotkey_width (const hotkey_t hotkey)
 
 /* --------------------------------------------------------------------------------------------- */
 
+gboolean
+hotkey_equal (const hotkey_t hotkey1, const hotkey_t hotkey2)
+{
+    /* *INDENT-OFF* */
+    return (strcmp (hotkey1.start, hotkey2.start) == 0) &&
+           hotkey_cmp (hotkey1.hotkey, hotkey2.hotkey) &&
+           hotkey_cmp (hotkey1.end, hotkey2.end);
+    /* *INDENT-ON* */
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 void
 hotkey_draw (Widget * w, const hotkey_t hotkey, gboolean focused)
 {
-    widget_selectcolor (w, focused, FALSE);
-    tty_print_string (hotkey.start);
+    if (hotkey.start[0] != '\0')
+    {
+        widget_selectcolor (w, focused, FALSE);
+        tty_print_string (hotkey.start);
+    }
 
     if (hotkey.hotkey != NULL)
     {
         widget_selectcolor (w, focused, TRUE);
         tty_print_string (hotkey.hotkey);
-        widget_selectcolor (w, focused, FALSE);
     }
 
     if (hotkey.end != NULL)
+    {
+        widget_selectcolor (w, focused, FALSE);
         tty_print_string (hotkey.end);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+char *
+hotkey_get_text (const hotkey_t hotkey)
+{
+    GString *text;
+
+    text = g_string_new (hotkey.start);
+
+    if (hotkey.hotkey != NULL)
+    {
+        g_string_append_c (text, '&');
+        g_string_append (text, hotkey.hotkey);
+    }
+
+    if (hotkey.end != NULL)
+        g_string_append (text, hotkey.end);
+
+    return g_string_free (text, FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -211,6 +267,15 @@ widget_init (Widget * w, int y, int x, int lines, int cols,
 
     w->options = WOP_DEFAULT;
     w->state = WST_DEFAULT;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+widget_destroy (Widget * w)
+{
+    send_message (w, NULL, MSG_DESTROY, 0, NULL);
+    g_free (w);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -425,7 +490,7 @@ widget_is_active (const void *w)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-widget_redraw (Widget * w)
+widget_draw (Widget * w)
 {
     if (w != NULL)
     {
@@ -494,7 +559,7 @@ widget_replace (Widget * old_w, Widget * new_w)
     if (should_focus)
         widget_select (new_w);
     else
-        widget_redraw (new_w);
+        widget_draw (new_w);
 }
 
 /* --------------------------------------------------------------------------------------------- */

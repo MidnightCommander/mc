@@ -96,7 +96,7 @@ listbox_drawscroll (WListbox * l)
     int length;
 
     /* Are we at the top? */
-    widget_move (w, 0, w->cols);
+    widget_gotoyx (w, 0, w->cols);
     if (l->top == 0)
         tty_print_one_vline (TRUE);
     else
@@ -105,7 +105,7 @@ listbox_drawscroll (WListbox * l)
     length = g_queue_get_length (l->list);
 
     /* Are we at the bottom? */
-    widget_move (w, max_line, w->cols);
+    widget_gotoyx (w, max_line, w->cols);
     if (l->top + w->lines == length || w->lines >= length)
         tty_print_one_vline (TRUE);
     else
@@ -117,7 +117,7 @@ listbox_drawscroll (WListbox * l)
 
     for (i = 1; i < max_line; i++)
     {
-        widget_move (w, i, w->cols);
+        widget_gotoyx (w, i, w->cols);
         if (i != line)
             tty_print_one_vline (TRUE);
         else
@@ -172,7 +172,7 @@ listbox_draw (WListbox * l, gboolean focused)
         else
             tty_setcolor (normalc);
 
-        widget_move (l, i, 1);
+        widget_gotoyx (l, i, 1);
 
         if (l->list != NULL && le != NULL && (i == 0 || pos < length))
         {
@@ -481,7 +481,7 @@ listbox_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
         return listbox_execute_cmd (l, parm);
 
     case MSG_CURSOR:
-        widget_move (l, l->cursor_y, 0);
+        widget_gotoyx (l, l->cursor_y, 0);
         return MSG_HANDLED;
 
     case MSG_DRAW:

@@ -3154,7 +3154,7 @@ dirsize_status_update_cb (status_msg_t * sm)
     {
         dlg_set_size (sm->dlg, wd->lines, WIDGET (dsm->count_size)->cols + 6);
         dirsize_status_locate_buttons (dsm);
-        dlg_redraw (sm->dlg);
+        dlg_draw (sm->dlg);
     }
 
     /* adjust first label */

@@ -392,9 +392,10 @@ file_bps_prepare_for_show (char *buffer, long bps)
  * |            [ Yes ] [ No ] [ Append ] [ Reget ]           |   // 9, 10, 11, 12
  * +----------------------------------------------------------+
  * |                   Overwrite all files?                   |   // 13
- * |  [ All ] [ Older ] [None] [ Smaller ] [ Size differs ]   |   // 14, 15, 16, 17, 18
+ * |  [ ] Don't overwrite with zero length file               |   // 14
+ * |  [ All ] [ Older ] [None] [ Smaller ] [ Size differs ]   |   // 15, 16, 17, 18, 19
  * +----------------------------------------------------------|
- * |                         [ Abort ]                        |   // 19
+ * |                         [ Abort ]                        |   // 20
  * +----------------------------------------------------------+
  */
 
@@ -769,7 +770,7 @@ check_progress_buttons (file_op_context_t * ctx)
         {
             /* redraw dialog in case of Skip after Suspend */
             place_progress_buttons (ui->op_dlg, FALSE);
-            dlg_redraw (ui->op_dlg);
+            dlg_draw (ui->op_dlg);
         }
         ctx->suspended = FALSE;
         return FILE_SKIP;
@@ -780,7 +781,7 @@ check_progress_buttons (file_op_context_t * ctx)
     case FILE_SUSPEND:
         ctx->suspended = !ctx->suspended;
         place_progress_buttons (ui->op_dlg, ctx->suspended);
-        dlg_redraw (ui->op_dlg);
+        dlg_draw (ui->op_dlg);
         MC_FALLTHROUGH;
     default:
         if (ctx->suspended)
@@ -904,8 +905,7 @@ file_op_context_create_ui (file_op_context_t * ctx, gboolean with_eta,
                                                     progress_buttons[2].text,
                                                     progress_button_callback));
         progress_buttons[2].len = button_get_len (BUTTON (progress_buttons[2].w));
-        send_message (progress_buttons[2].w, NULL, MSG_DESTROY, 0, NULL);
-        g_free (progress_buttons[2].w);
+        widget_destroy (progress_buttons[2].w);
     }
     progress_buttons[2].w = progress_buttons[1].w;
 

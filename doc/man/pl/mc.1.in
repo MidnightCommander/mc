@@ -80,7 +80,7 @@ Włącza tryb powolnego terminala, w którym program nie będzie rysował zbyt
 obciążających znaków graficznych oraz wyłączy opcję weryfikacji.
 .TP
 .I \-t
-Używane tylko jeśli kod był skompilowany przy użyciu Slanga i terminfo:
+Używane tylko jeśli kod był skompilowany przy użyciu S\-Langa i terminfo:
 powoduje, że Midnight Commander będzie używać zmiennej środowiskowej
 .B TERMCAP
 do pokazywania informacji terminala, zamiast informacji w systemowej bazie
@@ -2572,7 +2572,7 @@ kolory używając bazy danych terminali. Czasami jest to zmieniane
 przez różne flagi startowe, np. możesz wymusić wyświetlanie czarno\-białe
 lub kolorowe startując z opcją odpowiednio \-b i \-c.
 .PP
-Jeśli program jest skompilowany z menedżerem ekranu Slang zamiast ncurses,
+Jeśli program jest skompilowany z menedżerem ekranu S\-Lang zamiast ncurses,
 sprawdzi on również wartość zmiennej
 .BR COLORTERM .
 Jeśli jest ustawiona, ma takie samo znaczenie jak opcja \-c.
@@ -2590,7 +2590,7 @@ color_terminals=linux,xterm
 color_terminals=terminal\-name1,terminal\-name2...
 .fi
 .PP
-Program może być skompilowany zarówno z bibliotekami slang jak i ncurses.
+Program może być skompilowany zarówno z bibliotekami S\-Lang jak i ncurses.
 Ncurses nie obsługuje metody wymuszania wyświetlania, zawsze sprawdza w bazie danych
 terminali.
 .PP

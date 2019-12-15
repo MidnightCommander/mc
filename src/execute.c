@@ -554,10 +554,13 @@ toggle_subshell (void)
             do_load_prompt ();
             if (new_dir_vpath != NULL)
                 do_possible_cd (new_dir_vpath);
-            if (mc_global.tty.console_flag != '\0' && output_lines)
-                show_console_contents (output_start_y,
-                                       LINES - mc_global.keybar_visible - output_lines -
-                                       1, LINES - mc_global.keybar_visible - 1);
+            if (mc_global.tty.console_flag != '\0' && output_lines != 0)
+            {
+                unsigned char end_line;
+
+                end_line = LINES - (mc_global.keybar_visible ? 1 : 0) - 1;
+                show_console_contents (output_start_y, end_line - output_lines, end_line);
+            }
         }
         else if (new_dir_vpath != NULL && mc_chdir (new_dir_vpath) != -1)
             vfs_setup_cwd ();

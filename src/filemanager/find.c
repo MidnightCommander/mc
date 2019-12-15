@@ -939,7 +939,7 @@ find_add_match (const char *dir, const char *file, gsize start, gsize end)
     /* Don't scroll */
     if (matches == 0)
         listbox_select_first (find_list);
-    widget_redraw (WIDGET (find_list));
+    widget_draw (WIDGET (find_list));
 
     matches++;
     found_num_update ();
@@ -1250,7 +1250,7 @@ find_rotate_dash (const WDialog * h, gboolean show)
     const Widget *w = CONST_WIDGET (h);
 
     tty_setcolor (h->color[DLG_COLOR_NORMAL]);
-    widget_move (h, w->lines - 7, w->cols - 4);
+    widget_gotoyx (h, w->lines - 7, w->cols - 4);
     tty_print_char (show ? rotating_dash[pos] : ' ');
     pos = (pos + 1) % sizeof (rotating_dash);
     mc_refresh ();
@@ -1595,7 +1595,7 @@ start_stop (WButton * button, int action)
     button_set_text (button, fbuts[is_start ? 3 : 2].text);
 
     find_relocate_buttons (w->owner, FALSE);
-    dlg_redraw (w->owner);
+    dlg_draw (w->owner);
 
     return 0;
 }

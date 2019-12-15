@@ -125,11 +125,6 @@ enum HotListType
 static struct
 {
     /*
-     * these parameters are intended to be user configurable
-     */
-    int expanded;               /* expanded view of all groups at startup */
-
-    /*
      * these reflect run time state
      */
 
@@ -594,7 +589,7 @@ hotlist_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
          * (2) Refresh the hotlist.
          *
          * We may have run a command that changed the contents of the list.
-         * We therefore need to refresh it. So we do `widget_redraw (lst)`.
+         * We therefore need to refresh it. So we do `widget_draw (lst)`.
          */
         {
             Widget *lst;
@@ -603,11 +598,11 @@ hotlist_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
 
             /* widget_select() already redraws the widget, but since it's a
              * no-op if the widget is already selected ("focused"), we have
-             * to call widget_redraw() separately. */
+             * to call widget_draw() separately. */
             if (!widget_get_state (lst, WST_FOCUSED))
                 widget_select (lst);
             else
-                widget_redraw (lst);
+                widget_draw (lst);
         }
         return MSG_HANDLED;
 
@@ -762,9 +757,6 @@ init_hotlist (hotlist_t list_type)
 
     lines = LINES - 2;
     cols = init_i18n_stuff (list_type, COLS - 6);
-
-    hotlist_state.expanded =
-        mc_config_get_int (mc_global.main_config, "HotlistConfig", "expanded_view_of_groups", 0);
 
 #ifdef ENABLE_VFS
     if (list_type == LIST_VFSLIST)

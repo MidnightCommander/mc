@@ -629,7 +629,7 @@ dlg_default_repaint (WDialog * h)
     {
         /* TODO: truncate long title */
         tty_setcolor (h->color[DLG_COLOR_TITLE]);
-        widget_move (h, space, (wh->cols - str_term_width1 (h->title)) / 2);
+        widget_gotoyx (h, space, (wh->cols - str_term_width1 (h->title)) / 2);
         tty_print_string (h->title);
     }
 }
@@ -903,19 +903,18 @@ del_widget (void *w)
     if (d == h->current)
         dlg_set_current_widget_next (h);
 
-    h->widgets = g_list_remove_link (h->widgets, d);
+    h->widgets = g_list_delete_link (h->widgets, d);
     if (h->widgets == NULL)
         h->current = NULL;
-    send_message (d->data, NULL, MSG_DESTROY, 0, NULL);
-    g_free (d->data);
-    g_list_free_1 (d);
 
     /* widget has been deleted in runtime */
     if (widget_get_state (WIDGET (h), WST_ACTIVE))
     {
-        dlg_redraw (h);
+        dlg_draw (h);
         dlg_select_current_widget (h);
     }
+
+    WIDGET (w)->owner = NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -928,7 +927,7 @@ do_refresh (void)
     if (fast_refresh)
     {
         if (d != NULL)
-            dlg_redraw (DIALOG (d->data));
+            dlg_draw (DIALOG (d->data));
     }
     else
     {
@@ -938,7 +937,7 @@ do_refresh (void)
                 break;
         /* back to top dialog */
         for (; d != NULL; d = g_list_previous (d))
-            dlg_redraw (DIALOG (d->data));
+            dlg_draw (DIALOG (d->data));
     }
 }
 
@@ -1052,7 +1051,7 @@ update_cursor (WDialog * h)
  */
 
 void
-dlg_redraw (WDialog * h)
+dlg_draw (WDialog * h)
 {
     if (!widget_get_state (WIDGET (h), WST_ACTIVE))
         return;
@@ -1107,7 +1106,7 @@ dlg_init (WDialog * h)
         dlg_set_current_widget_next (h);
 
     widget_set_state (wh, WST_ACTIVE, TRUE);
-    dlg_redraw (h);
+    dlg_draw (h);
     /* focus found widget */
     if (h->current != NULL)
         widget_set_state (WIDGET (h->current->data), WST_FOCUSED, TRUE);
@@ -1177,8 +1176,8 @@ dlg_destroy (WDialog * h)
 {
     /* if some widgets have history, save all history at one moment here */
     dlg_save_history (h);
-    dlg_broadcast_msg (h, MSG_DESTROY);
-    g_list_free_full (h->widgets, g_free);
+    g_list_foreach (h->widgets, (GFunc) widget_destroy, NULL);
+    g_list_free (h->widgets);
     mc_event_group_del (h->event_group);
     g_free (h->event_group);
     g_free (h->title);

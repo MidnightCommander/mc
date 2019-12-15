@@ -52,7 +52,7 @@
 #include "src/usermenu.h"       /* expand_format */
 
 #include "midnight.h"           /* current_panel */
-#include "layout.h"             /* for command_prompt variable */
+#include "layout.h"             /* command_prompt */
 #include "tree.h"               /* sync_tree() */
 
 #include "command.h"

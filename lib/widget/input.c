@@ -113,13 +113,13 @@ draw_history_button (WInput * in)
     else
         c = '|';
 
-    widget_move (in, 0, WIDGET (in)->cols - HISTORY_BUTTON_WIDTH);
+    widget_gotoyx (in, 0, WIDGET (in)->cols - HISTORY_BUTTON_WIDTH);
     disabled = widget_get_state (WIDGET (in), WST_DISABLED);
     tty_setcolor (disabled ? DISABLED_COLOR : in->color[WINPUTC_HISTORY]);
 
 #ifdef LARGE_HISTORY_BUTTON
     tty_print_string ("[ ]");
-    widget_move (in, 0, WIDGET (in)->cols - HISTORY_BUTTON_WIDTH + 1);
+    widget_gotoyx (in, 0, WIDGET (in)->cols - HISTORY_BUTTON_WIDTH + 1);
 #endif
 
     tty_print_char (c);
@@ -1091,7 +1091,7 @@ input_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
         return MSG_HANDLED;
 
     case MSG_CURSOR:
-        widget_move (in, 0, str_term_width2 (in->buffer, in->point) - in->term_first_shown);
+        widget_gotoyx (in, 0, str_term_width2 (in->buffer, in->point) - in->term_first_shown);
         return MSG_HANDLED;
 
     case MSG_DESTROY:
@@ -1290,7 +1290,7 @@ input_update (WInput * in, gboolean clear_first)
     else
         tty_setcolor (in->color[WINPUTC_MAIN]);
 
-    widget_move (in, 0, 0);
+    widget_gotoyx (in, 0, 0);
 
     if (!in->is_password)
     {
@@ -1309,7 +1309,7 @@ input_update (WInput * in, gboolean clear_first)
                 tty_setcolor (in->color[WINPUTC_MARK]);
                 if (m1 < in->term_first_shown)
                 {
-                    widget_move (in, 0, 0);
+                    widget_gotoyx (in, 0, 0);
                     tty_print_string (str_term_substring
                                       (in->buffer, in->term_first_shown,
                                        m2 - in->term_first_shown));
@@ -1318,7 +1318,7 @@ input_update (WInput * in, gboolean clear_first)
                 {
                     int sel_width, buf_width;
 
-                    widget_move (in, 0, m1 - in->term_first_shown);
+                    widget_gotoyx (in, 0, m1 - in->term_first_shown);
                     buf_width = str_term_width2 (in->buffer, m1);
                     sel_width =
                         MIN (m2 - m1, (w->cols - has_history) - (buf_width - in->term_first_shown));

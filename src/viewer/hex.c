@@ -160,7 +160,7 @@ mcview_display_hex (WView * view)
             size_t i;
 
             g_snprintf (hex_buff, sizeof (hex_buff), "%08" PRIXMAX " ", (uintmax_t) from);
-            widget_move (view, top + row, left);
+            widget_gotoyx (view, top + row, left);
             tty_setcolor (VIEW_BOLD_COLOR);
             for (i = 0; col < width && hex_buff[i] != '\0'; col++, i++)
                 tty_print_char (hex_buff[i]);
@@ -276,7 +276,7 @@ mcview_display_hex (WView * view)
                           view->hexview_in_text ? VIEW_SELECTED_COLOR : VIEW_UNDERLINED_COLOR);
 
             /* Print the hex number */
-            widget_move (view, top + row, left + col);
+            widget_gotoyx (view, top + row, left + col);
             if (col < width)
             {
                 tty_print_char (hex_char[c / 16]);
@@ -349,7 +349,7 @@ mcview_display_hex (WView * view)
             /* Print corresponding character on the text side */
             if (text_start + bytes < width)
             {
-                widget_move (view, top + row, left + text_start + bytes);
+                widget_gotoyx (view, top + row, left + text_start + bytes);
 #ifdef HAVE_CHARSET
                 if (view->utf8)
                     tty_print_anychar (ch);

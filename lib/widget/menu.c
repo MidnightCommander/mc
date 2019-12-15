@@ -119,9 +119,9 @@ menu_arrange (menu_t * menu, dlg_shortcut_str get_shortcut)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-menubar_paint_idx (WMenuBar * menubar, unsigned int idx, int color)
+menubar_paint_idx (const WMenuBar * menubar, unsigned int idx, int color)
 {
-    Widget *w = WIDGET (menubar);
+    const Widget *w = CONST_WIDGET (menubar);
     const menu_t *menu = MENU (g_list_nth_data (menubar->menu, menubar->selected));
     const menu_entry_t *entry = MENUENTRY (g_list_nth_data (menu->entries, idx));
     const int y = 2 + idx;
@@ -135,10 +135,10 @@ menubar_paint_idx (WMenuBar * menubar, unsigned int idx, int color)
         /* menu separator */
         tty_setcolor (MENU_ENTRY_COLOR);
 
-        widget_move (w, y, x - 1);
+        widget_gotoyx (w, y, x - 1);
         tty_print_alt_char (ACS_LTEE, FALSE);
         tty_draw_hline (w->y + y, w->x + x, ACS_HLINE, menu->max_entry_len + 3);
-        widget_move (w, y, x + menu->max_entry_len + 3);
+        widget_gotoyx (w, y, x + menu->max_entry_len + 3);
         tty_print_alt_char (ACS_RTEE, FALSE);
     }
     else
@@ -147,7 +147,7 @@ menubar_paint_idx (WMenuBar * menubar, unsigned int idx, int color)
 
         /* menu text */
         tty_setcolor (color);
-        widget_move (w, y, x);
+        widget_gotoyx (w, y, x);
         tty_print_char ((unsigned char) entry->first_letter);
         tty_getyx (&yt, &xt);
         tty_draw_hline (yt, xt, ' ', menu->max_entry_len + 2);  /* clear line */
@@ -165,21 +165,21 @@ menubar_paint_idx (WMenuBar * menubar, unsigned int idx, int color)
 
         if (entry->shortcut != NULL)
         {
-            widget_move (w, y, x + menu->max_hotkey_len + 3);
+            widget_gotoyx (w, y, x + menu->max_hotkey_len + 3);
             tty_print_string (entry->shortcut);
         }
 
         /* move cursor to the start of entry text */
-        widget_move (w, y, x + 1);
+        widget_gotoyx (w, y, x + 1);
     }
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-menubar_draw_drop (WMenuBar * menubar)
+menubar_draw_drop (const WMenuBar * menubar)
 {
-    Widget *w = WIDGET (menubar);
+    const Widget *w = CONST_WIDGET (menubar);
     const menu_t *menu = MENU (g_list_nth_data (menubar->menu, menubar->selected));
     const unsigned int count = g_list_length (menu->entries);
     int column = menu->start_x - 1;
@@ -199,9 +199,9 @@ menubar_draw_drop (WMenuBar * menubar)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-menubar_set_color (WMenuBar * menubar, gboolean current, gboolean hotkey)
+menubar_set_color (const WMenuBar * menubar, gboolean current, gboolean hotkey)
 {
-    if (!widget_get_state (WIDGET (menubar), WST_FOCUSED))
+    if (!widget_get_state (CONST_WIDGET (menubar), WST_FOCUSED))
         tty_setcolor (MENU_INACTIVE_COLOR);
     else if (current)
         tty_setcolor (hotkey ? MENU_HOTSEL_COLOR : MENU_SELECTED_COLOR);
@@ -212,9 +212,9 @@ menubar_set_color (WMenuBar * menubar, gboolean current, gboolean hotkey)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-menubar_draw (WMenuBar * menubar)
+menubar_draw (const WMenuBar * menubar)
 {
-    Widget *w = WIDGET (menubar);
+    const Widget *w = CONST_WIDGET (menubar);
     GList *i;
 
     /* First draw the complete menubar */
@@ -228,7 +228,7 @@ menubar_draw (WMenuBar * menubar)
         gboolean is_selected = (menubar->selected == (gsize) g_list_position (menubar->menu, i));
 
         menubar_set_color (menubar, is_selected, FALSE);
-        widget_move (w, 0, menu->start_x);
+        widget_gotoyx (w, 0, menu->start_x);
 
         tty_print_char (' ');
         tty_print_string (menu->text.start);
@@ -249,7 +249,7 @@ menubar_draw (WMenuBar * menubar)
     if (menubar->is_dropped)
         menubar_draw_drop (menubar);
     else
-        widget_move (w, 0, MENU (g_list_nth_data (menubar->menu, menubar->selected))->start_x);
+        widget_gotoyx (w, 0, MENU (g_list_nth_data (menubar->menu, menubar->selected))->start_x);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -622,11 +622,10 @@ menubar_refresh (WMenuBar * menubar)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
+static inline void
 menubar_free_menu (WMenuBar * menubar)
 {
-    if (menubar->menu != NULL)
-        g_list_free_full (menubar->menu, (GDestroyNotify) destroy_menu);
+    g_clear_list (&menubar->menu, (GDestroyNotify) destroy_menu);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -873,7 +872,7 @@ menu_entry_create (const char *name, long command)
 
     entry = g_new (menu_entry_t, 1);
     entry->first_letter = ' ';
-    entry->text = parse_hotkey (name);
+    entry->text = hotkey_new (name);
     entry->command = command;
     entry->shortcut = NULL;
 
@@ -887,7 +886,7 @@ menu_entry_free (menu_entry_t * entry)
 {
     if (entry != NULL)
     {
-        release_hotkey (entry->text);
+        hotkey_free (entry->text);
         g_free (entry->shortcut);
         g_free (entry);
     }
@@ -902,7 +901,7 @@ create_menu (const char *name, GList * entries, const char *help_node)
 
     menu = g_new (menu_t, 1);
     menu->start_x = 0;
-    menu->text = parse_hotkey (name);
+    menu->text = hotkey_new (name);
     menu->entries = entries;
     menu->max_entry_len = 1;
     menu->max_hotkey_len = 0;
@@ -917,8 +916,8 @@ create_menu (const char *name, GList * entries, const char *help_node)
 void
 menu_set_name (menu_t * menu, const char *name)
 {
-    release_hotkey (menu->text);
-    menu->text = parse_hotkey (name);
+    hotkey_free (menu->text);
+    menu->text = hotkey_new (name);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -926,7 +925,7 @@ menu_set_name (menu_t * menu, const char *name)
 void
 destroy_menu (menu_t * menu)
 {
-    release_hotkey (menu->text);
+    hotkey_free (menu->text);
     g_list_free_full (menu->entries, (GDestroyNotify) menu_entry_free);
     g_free (menu->help_node);
     g_free (menu);

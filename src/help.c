@@ -393,8 +393,7 @@ end_link_area (int x, int y)
 static void
 clear_link_areas (void)
 {
-    g_slist_free_full (link_area, g_free);
-    link_area = NULL;
+    g_clear_slist (&link_area, g_free);
     inside_link_area = FALSE;
 }
 
@@ -420,7 +419,7 @@ help_print_word (WDialog * h, GString * word, int *col, int *line, gboolean add_
             g_string_set_size (word, 0);
         else
         {
-            widget_move (h, *line + 2, *col + 2);
+            widget_gotoyx (h, *line + 2, *col + 2);
             tty_print_string (word->str);
             g_string_set_size (word, 0);
             *col += w;
@@ -512,7 +511,7 @@ help_show (WDialog * h, const char *paint_start)
                 acs = FALSE;
                 break;
             case CHAR_VERSION:
-                widget_move (h, line + 2, col + 2);
+                widget_gotoyx (h, line + 2, col + 2);
                 tty_print_string (VERSION);
                 col += str_term_width1 (VERSION);
                 break;
@@ -557,7 +556,7 @@ help_show (WDialog * h, const char *paint_start)
                         g_string_append (word, buff);
                     else if (col < HELP_WINDOW_WIDTH)
                     {
-                        widget_move (h, line + 2, col + 2);
+                        widget_gotoyx (h, line + 2, col + 2);
 
                         if ((c == ' ') || (c == '.'))
                             tty_print_char (c);
@@ -598,7 +597,7 @@ help_show (WDialog * h, const char *paint_start)
 
     /* Position the cursor over a nice link */
     if (active_col)
-        widget_move (h, active_line, active_col);
+        widget_gotoyx (h, active_line, active_col);
 }
 
 /* --------------------------------------------------------------------------------------------- */

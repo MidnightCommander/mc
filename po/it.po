@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-09-01 20:04+0300\n"
+"POT-Creation-Date: 2019-12-15 12:59+0300\n"
 "PO-Revision-Date: 2019-05-14 08:45+0200\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/mc/language/"
@@ -484,6 +484,10 @@ msgstr "Maiusc"
 
 msgid "The TERM environment variable is unset!\n"
 msgstr "La variabile TERM non è definita!\n"
+
+#, fuzzy
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Impossibile creare flussi pipe"
 
 #, fuzzy
 msgid "Cannot create pipe for SIGWINCH"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-09-01 20:04+0300\n"
+"POT-Creation-Date: 2019-12-15 12:59+0300\n"
 "PO-Revision-Date: 2019-05-01 13:39+0000\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>\n"
 "Language-Team: Basque (http://www.transifex.com/mc/mc/language/eu/)\n"
@@ -483,6 +483,10 @@ msgstr "Maius"
 
 msgid "The TERM environment variable is unset!\n"
 msgstr "TERM ingurune-aldagaia ezarri gabe dago!\n"
+
+#, fuzzy
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Ezin dira sortu hodiko isuriak"
 
 #, fuzzy
 msgid "Cannot create pipe for SIGWINCH"

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-09-01 20:04+0300\n"
+"POT-Creation-Date: 2019-12-15 12:59+0300\n"
 "PO-Revision-Date: 2019-05-22 09:27+0000\n"
 "Last-Translator: 이정희 <daemul72@gmail.com>\n"
 "Language-Team: Korean (http://www.transifex.com/mc/mc/language/ko/)\n"
@@ -482,6 +482,10 @@ msgstr "쉬프트"
 
 msgid "The TERM environment variable is unset!\n"
 msgstr "TERM 환경변수가 설정되어있지 않습니다!\n"
+
+#, fuzzy
+msgid "Cannot check SIGWINCH pipe"
+msgstr "파이프 데이터 스트림을 생성할 수 없음"
 
 #, fuzzy
 msgid "Cannot create pipe for SIGWINCH"

@@ -91,6 +91,71 @@ g_list_free_full (GList * list, GDestroyNotify free_func)
 
 #endif /* ! GLIB_CHECK_VERSION (2, 28, 0) */
 
+#if ! GLIB_CHECK_VERSION (2, 64, 0)
+/**
+ * g_clear_slist: (skip)
+ * @slist_ptr: (not nullable): a #GSList return location
+ * @destroy: (nullable): the function to pass to g_slist_free_full() or NULL to not free elements
+ *
+ * Clears a pointer to a #GSList, freeing it and, optionally, freeing its elements using @destroy.
+ *
+ * @slist_ptr must be a valid pointer. If @slist_ptr points to a null #GSList, this does nothing.
+ *
+ * Since: 2.64
+ */
+void
+g_clear_slist (GSList ** slist_ptr, GDestroyNotify destroy)
+{
+    GSList *slist;
+
+    slist = *slist_ptr;
+
+    if (slist != NULL)
+    {
+        *slist_ptr = NULL;
+
+        if (destroy != NULL)
+            g_slist_free_full (slist, destroy);
+        else
+            g_slist_free (slist);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * g_clear_list:
+ * @list_ptr: (not nullable): a #GList return location
+ * @destroy: (nullable): the function to pass to g_list_free_full() or NULL to not free elements
+ *
+ * Clears a pointer to a #GList, freeing it and, optionally, freeing its elements using @destroy.
+ *
+ * @list_ptr must be a valid pointer. If @list_ptr points to a null #GList, this does nothing.
+ *
+ * Since: 2.64
+ */
+void
+g_clear_list (GList ** list_ptr, GDestroyNotify destroy)
+{
+    GList *list;
+
+    list = *list_ptr;
+
+    if (list != NULL)
+    {
+        *list_ptr = NULL;
+
+        if (destroy != NULL)
+            g_list_free_full (list, destroy);
+        else
+            g_list_free (list);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+#endif /* ! GLIB_CHECK_VERSION (2, 64, 0) */
+
 #if ! GLIB_CHECK_VERSION (2, 32, 0)
 /**
  * g_queue_free_full:

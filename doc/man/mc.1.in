@@ -5,7 +5,7 @@
 .SH "NAME"
 mc \- Visual shell for Unix\-like systems.
 .\"SKIP_SECTION"
-.SH "USAGE"
+.SH "SYNOPSIS"
 .B mc
 [\-abcCdfhPstuUVx] [\-l log] [dir1 [dir2]] [\-e [file] ...] [\-v file]
 .\"NODE "DESCRIPTION"
@@ -88,51 +88,8 @@ the last directory Midnight Commander was in. Source the file
 as an alias to the appropriate shell script.
 .TP
 .I \-s, \-\-slow
-Set alternative mode drawing of frameworks.
-If the section [Lines] is not filled, the symbol for the pseudographics
-frame is a space, otherwise the frame characters are taken from following
-parameters.
-
-.B You can redefine the following variables:
-.TP
-.B lefttop
-left\-top corner
-.TP
-.B righttop
-right\-top corner
-.TP
-.B centertop
-center\-top cross
-.TP
-.B centerbottom
-center\-bottom cross
-.TP
-.B leftbottom
-left\-bottom corner
-.TP
-.B rightbottom
-right\-bottom corner
-.TP
-.B leftmiddle
-left\-middle cross
-.TP
-.B rightmiddle
-right\-middle cross
-.TP
-.B centermiddle
-center cross
-.TP
-.B horiz
-default horizontal line
-.TP
-.B vert
-default vertical line
-.TP
-.B thinhoriz
-thin horizontal line
-.TP
-.B thinvert
-thin vertical line
+Turn on the slow terminal mode, in this mode the program will not draw
+expensive line drawing characters and will toggle verbose mode off.
 .TP
 .I \-S arg, \-\-skin=arg
 Specify a name of skin in the command line. Technology of skins is
@@ -143,7 +100,7 @@ Skins
 section.
 .TP
 .I \-t, \-\-termcap
-Used only if the code was compiled with Slang and terminfo: it makes
+Used only if the code was compiled with S\-Lang and terminfo: it makes
 Midnight Commander use the value of the
 .B TERMCAP
 variable for the terminal information instead of the information on
@@ -3423,7 +3380,7 @@ Extfs filesystems can be divided into two categories:
 1. Stand\-alone filesystems, which are not associated with any existing
 file.  They represent certain system\-wide data as a directory tree.
 You can invoke them by typing
-.RI ' "cd fsname://" '
+.I "cd fsname://"
 where fsname is an extfs short name (see below).  Examples of such
 filesystems include audio (list audio tracks on the CD) or apt (list of
 all Debian packages in the system).
@@ -3439,7 +3396,7 @@ contents of a file as a directory tree.  It can consist of 'real' files
 compressed in an archive (urar, rpm) or virtual files, like messages
 in a mailbox (mailfs) or parts of a patch (patchfs).  To access such
 filesystems
-.RI ' fsname:// '
+.I fsname://
 should be appended to the archive name.  Note that the archive itself
 can be on another vfs.
 .PP
@@ -3534,7 +3491,7 @@ color using the terminal database and your terminal name.  Sometimes
 it gets confused, so you may force color mode or disable color mode
 using the \-c and \-b flag respectively.
 .PP
-If the program is compiled with the Slang screen manager instead of
+If the program is compiled with the S\-Lang screen manager instead of
 ncurses, it will also check the variable
 .B COLORTERM,
 if it is set, it has the same effect as the \-c flag.
@@ -3552,7 +3509,7 @@ color_terminals=linux,xterm
 color_terminals=terminal\-name1,terminal\-name2...
 .fi
 .PP
-The program can be compiled with both ncurses and slang, ncurses does
+The program can be compiled with both ncurses and S\-Lang, ncurses does
 not provide a way to force color mode: ncurses uses just the
 information in the terminal database.
 .PP
@@ -3962,10 +3919,10 @@ into skin\-file. By default single lines are used, but you may redefine
 to usage of any utf\-8 symbols (like to lines, for example).
 .PP
 .I WARNING!!!
-When you build Midnight Commander with the Ncurses screen library
+When you build Midnight Commander with the ncurses screen library
 usage of drawing lines is limited!
 Possible only drawing a single lines.
-For all questions and comments please contact the developers of Ncurses.
+For all questions and comments please contact the developers of ncurses.
 
 .PP
 Descriptions of parameters
@@ -4300,7 +4257,7 @@ everywhere).
 .SH "FILES"
 Full paths below may vary between installations.  They are also affected
 by the
-.BR MC_DATADIR
+.B MC_DATADIR
 environment variable. If it's set, its value is used instead of
 %prefix%/share/mc in the paths below.
 .PP
@@ -4363,7 +4320,7 @@ Local user\-defined menu. If this file is present, it is used instead of
 the home or system\-wide applications menu.
 .PP
 To change default root directory of MC, you can use
-.BR MC_PROFILE_ROOT
+.B MC_PROFILE_ROOT
 environment variable. The value of MC_PROFILE_ROOT must be an absolute path.
 If MC_PROFILE_ROOT is unset or empty, HOME variable is used. If HOME is unset
 or empty, MC directories are get from GLib library.

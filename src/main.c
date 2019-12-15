@@ -57,7 +57,7 @@
 
 #include "filemanager/midnight.h"       /* current_panel */
 #include "filemanager/treestore.h"      /* tree_store_save */
-#include "filemanager/layout.h" /* command_prompt */
+#include "filemanager/layout.h"
 #include "filemanager/ext.h"    /* flush_extension_file() */
 #include "filemanager/command.h"        /* cmdline */
 #include "filemanager/panel.h"  /* panalized_panel */

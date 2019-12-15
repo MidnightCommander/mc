@@ -63,7 +63,7 @@ gauge_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
     switch (msg)
     {
     case MSG_DRAW:
-        widget_move (w, 0, 0);
+        widget_gotoyx (w, 0, 0);
         if (!g->shown)
         {
             tty_setcolor (h->color[DLG_COLOR_NORMAL]);
@@ -154,7 +154,7 @@ gauge_set_value (WGauge * g, int max, int current)
         max = 1;                /* I do not like division by zero :) */
     g->current = current;
     g->max = max;
-    widget_redraw (WIDGET (g));
+    widget_draw (WIDGET (g));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -165,7 +165,7 @@ gauge_show (WGauge * g, gboolean shown)
     if (g->shown != shown)
     {
         g->shown = shown;
-        widget_redraw (WIDGET (g));
+        widget_draw (WIDGET (g));
     }
 }
 

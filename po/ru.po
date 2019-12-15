@@ -3,30 +3,25 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# aborodin <aborodin@vmail.ru>, 2011
-# AlexL <loginov.alex.valer@gmail.com>, 2015-2019
 # Alex Tkachenko <alex@bcs.zp.ua>, 1998
-# and Alex Tkachenko <alex@bcs.zp.ua>, 1998
-# aborodin <aborodin@vmail.ru>, 2009-2012
-# Andrew V. Samoilov <sav@bcs.zp.ua>, 1999,2014
-# Anton Sergeevich Chumak <nightfast@yahoo.co.uk>, 2005
-# Dimitriy Ryazantcev <DJm00n@mail.ru>, 2015
+# Andrew V. Samoilov <sav@bcs.zp.ua>, 1999, 2014
 # Evgeny Bulgakov <bgav@netvision.net.il>, 1999
-# Ilia Maslakov <il.smind@gmail.com>, 2009
-# Mr GreyWolf, 2016
-# Mr.GreyWolf, 2016
-# NaiLi (aka jamesjames) Rootaerc <theism@mail.ru>, 2012
-# Piotr Drąg <piotrdrag@gmail.com>, 2018
 # Sergey Panov <sipan@mit.edu>, 1999
-# Simple88, 2016
-# Simple88, 2016
-# Slava Zanko <slavazanko@gmail.com>, 2009,2011
 # Valek Filippov <frob@df.ru>, 2000
+# Anton Sergeevich Chumak <nightfast@yahoo.co.uk>, 2005
+# Slava Zanko <slavazanko@gmail.com>, 2009, 2011
+# Ilia Maslakov <il.smind@gmail.com>, 2009
+# Andrew Borodin <aborodin@vmail.ru>, 2009-2019
+# NaiLi (aka jamesjames) Rootaerc <theism@mail.ru>, 2012
+# Dimitriy Ryazantcev <DJm00n@mail.ru>, 2015
+# AlexL <loginov.alex.valer@gmail.com>, 2015-2019
+# Simple88, 2016
+# Piotr Drąg <piotrdrag@gmail.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-09-01 20:04+0300\n"
+"POT-Creation-Date: 2019-12-15 12:59+0300\n"
 "PO-Revision-Date: 2019-03-03 23:22+0000\n"
 "Last-Translator: AlexL <loginov.alex.valer@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/mc/mc/language/ru/)\n"
@@ -506,14 +501,17 @@ msgid "The TERM environment variable is unset!\n"
 msgstr "Переменная среды TERM не определена!\n"
 
 #, fuzzy
-msgid "Cannot create pipe for SIGWINCH"
+msgid "Cannot check SIGWINCH pipe"
 msgstr "Не удалось создать потоки канала"
 
+msgid "Cannot create pipe for SIGWINCH"
+msgstr "Не удалось создать канал для SIGWINCH"
+
 msgid "Cannot configure write end of SIGWINCH pipe"
-msgstr ""
+msgstr "Не удаётся настроить конец записи канала SIGWINCH"
 
 msgid "Cannot configure read end of SIGWINCH pipe"
-msgstr ""
+msgstr "Не удаётся настроить конец чтения канала SIGWINCH"
 
 #, c-format
 msgid ""
@@ -1306,7 +1304,7 @@ msgid "Run sort"
 msgstr "Выполнить сортировку"
 
 msgid "Enter sort options (see manpage) separated by whitespace:"
-msgstr "Введите параметры сортировки (man sort(1)), разделенные пробелами:"
+msgstr "Введите параметры сортировки (man sort(1)), разделённые пробелами:"
 
 msgid "Sort"
 msgstr "Сортировка"
@@ -1390,7 +1388,7 @@ msgid ""
 "Continue discards these changes."
 msgstr ""
 "Текущий текст был изменён и не сохранён.\n"
-"Продолжение операции приведёт к потере изменений"
+"Продолжение операции приведёт к потере изменений."
 
 msgid "NoName"
 msgstr "Без имени"
@@ -1404,9 +1402,8 @@ msgstr "&Новый"
 msgid "&Close"
 msgstr "&Закрыть"
 
-#, fuzzy
 msgid "&History..."
-msgstr "История"
+msgstr "&История..."
 
 msgid "Save &as..."
 msgstr "Сохранить &как..."
@@ -2092,7 +2089,7 @@ msgid "&Long file list"
 msgstr "&Расширенный"
 
 msgid "&User defined:"
-msgstr "&Определенный пользователем"
+msgstr "&Определённый пользователем"
 
 msgid "columns"
 msgstr "столбцы"
@@ -2930,10 +2927,10 @@ msgid "Don't overwrite with &zero length file"
 msgstr "Не перезаписывать файл &нулевой длины"
 
 msgid "&Older"
-msgstr ""
+msgstr "&Старше"
 
 msgid "S&maller"
-msgstr ""
+msgstr "&Меньше"
 
 msgid "&Size differs"
 msgstr "&Различающиеся по длине"
@@ -3435,7 +3432,7 @@ msgid "Command &history"
 msgstr "&История командной строки"
 
 msgid "Viewed/edited files hi&story"
-msgstr ""
+msgstr "Ис&тория просмотра/редактирования файлов"
 
 msgid "Di&rectory hotlist"
 msgstr "Каталоги &быстрого доступа"
@@ -3822,7 +3819,7 @@ msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
 msgstr ""
-"Похоже, что все Ваши клавиши теперь\n"
+"Похоже, что все ваши клавиши теперь\n"
 "работают нормально. Просто здорово!"
 
 msgid "&Discard"
@@ -4064,7 +4061,7 @@ msgid ""
 "Corrupted cpio header encountered in\n"
 "%s"
 msgstr ""
-"Поврежденный заголовок cpio обнаружен в\n"
+"Повреждённый заголовок cpio обнаружен в\n"
 "%s"
 
 #, c-format
@@ -4375,7 +4372,7 @@ msgid ""
 "doesn't look like a tar archive."
 msgstr ""
 "%s\n"
-"не похож на архив tar"
+"не похож на архив tar."
 
 msgid "undelfs: error"
 msgstr "undelfs: ошибка"

@@ -193,7 +193,7 @@ edit_restore_size (WEdit * edit)
     edit->drag_state = MCEDIT_DRAG_NONE;
     w->mouse.forced_capture = FALSE;
     widget_set_size (w, edit->y_prev, edit->x_prev, edit->lines_prev, edit->cols_prev);
-    dlg_redraw (w->owner);
+    dlg_draw (w->owner);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -233,7 +233,7 @@ edit_window_move (WEdit * edit, long command)
     }
 
     edit->force |= REDRAW_PAGE;
-    dlg_redraw (w->owner);
+    dlg_draw (w->owner);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -273,7 +273,7 @@ edit_window_resize (WEdit * edit, long command)
     }
 
     edit->force |= REDRAW_COMPLETELY;
-    dlg_redraw (w->owner);
+    dlg_draw (w->owner);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -960,7 +960,7 @@ edit_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
             x = (e->fullscreen ? 0 : 1) + EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width +
                 e->curs_col + e->start_col + e->over_col;
 
-            widget_move (w, y, x);
+            widget_gotoyx (w, y, x);
             return MSG_HANDLED;
         }
 
@@ -1029,7 +1029,7 @@ edit_mouse_handle_move_resize (Widget * w, mouse_msg_t msg, mouse_event_t * even
     edit->force |= REDRAW_COMPLETELY;   /* Not really needed as WEdit's MSG_DRAW already does this. */
 
     /* We draw the whole dialog because dragging/resizing exposes area beneath. */
-    dlg_redraw (w->owner);
+    dlg_draw (w->owner);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1300,7 +1300,7 @@ edit_update_screen (WEdit * e)
         edit_render_keypress (e);
     }
 
-    widget_redraw (WIDGET (find_buttonbar (h)));
+    widget_draw (WIDGET (find_buttonbar (h)));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1352,7 +1352,7 @@ edit_add_window (WDialog * h, int y, int x, int lines, int cols, const vfs_path_
 
     add_widget_autopos (h, w, WPOS_KEEP_ALL, NULL);
     edit_set_buttonbar (edit, find_buttonbar (h));
-    dlg_redraw (h);
+    dlg_draw (h);
 
     return TRUE;
 }

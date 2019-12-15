@@ -96,7 +96,7 @@ label_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
                     q[0] = '\0';
                 }
 
-                widget_move (w, y, 0);
+                widget_gotoyx (w, y, 0);
                 tty_print_string (str_fit_to_term (p, w->cols, align));
 
                 if (q == NULL)
@@ -173,7 +173,7 @@ label_set_text (WLabel * label, const char *text)
         }
     }
 
-    widget_redraw (w);
+    widget_draw (w);
 
     if (newcols < w->cols)
         w->cols = newcols;
