@@ -311,7 +311,7 @@ widget_init (Widget * w, int y, int x, int lines, int cols,
     w->mouse.last_buttons_down = 0;
 
     w->options = WOP_DEFAULT;
-    w->state = WST_DEFAULT;
+    w->state = WST_CONSTRUCT;
 
     w->find = widget_default_find;
     w->find_by_type = widget_default_find_by_type;

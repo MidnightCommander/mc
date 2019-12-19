@@ -377,7 +377,7 @@ dlg_create (gboolean modal, int y1, int x1, int lines, int cols, widget_pos_flag
 
     w->pos_flags = pos_flags;
     w->options |= WOP_SELECTABLE | WOP_TOP_SELECT;
-    w->state |= WST_CONSTRUCT | WST_FOCUSED;
+    w->state |= WST_FOCUSED;
     /* Temporary hack: dialog doesn't have an owner, own itself. */
     w->owner = g;
 

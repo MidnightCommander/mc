@@ -85,7 +85,7 @@ typedef enum
     WST_MODAL = (1 << 2),       /* Widget (dialog) is modal */
     WST_FOCUSED = (1 << 3),
 
-    WST_CONSTRUCT = (1 << 15),  /* Dialog has been constructed but not run yet */
+    WST_CONSTRUCT = (1 << 15),  /* Widget has been constructed but not run yet */
     WST_ACTIVE = (1 << 16),     /* Dialog is visible and active */
     WST_SUSPENDED = (1 << 17),  /* Dialog is suspended */
     WST_CLOSED = (1 << 18)      /* Dialog is closed */
