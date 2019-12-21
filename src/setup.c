@@ -687,8 +687,8 @@ load_layout (void)
 
     for (i = 0; layout_bool_options[i].opt_name != NULL; i++)
         *layout_bool_options[i].opt_addr =
-            mc_config_get_int (mc_global.main_config, CONFIG_LAYOUT_SECTION,
-                               layout_bool_options[i].opt_name, *layout_bool_options[i].opt_addr);
+            mc_config_get_bool (mc_global.main_config, CONFIG_LAYOUT_SECTION,
+                                layout_bool_options[i].opt_name, *layout_bool_options[i].opt_addr);
 
     startup_left_mode = setup__load_panel_state ("New Left Panel");
     startup_right_mode = setup__load_panel_state ("New Right Panel");
