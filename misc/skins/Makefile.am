@@ -10,6 +10,7 @@ skin_DATA = \
 	gotar.ini \
 	gray-green-purple256.ini \
 	gray-orange-blue256.ini \
+	julia256.ini \
 	mc46.ini \
 	modarcon16-defbg.ini \
 	modarcon16.ini \
