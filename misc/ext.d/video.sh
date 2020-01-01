@@ -28,18 +28,22 @@ do_view_action() {
 do_open_action() {
     filetype=$1
 
+    if mpv >/dev/null 2>&1; then
+        PLAYER=mpv
+    elif mplayer >/dev/null 2>&1; then
+        PLAYER=mplayer
+    else
+        echo "Please install either mplayer or mpv to play this file"
+        return
+    fi
+
     case "${filetype}" in
-    ram)
-        (realplay "${MC_EXT_FILENAME}" >/dev/null 2>&1 &)
-        ;;
     *)
         if [ -n "$DISPLAY" ]; then
-            (mplayer "${MC_EXT_FILENAME}" >/dev/null 2>&1 &)
+            ($PLAYER "${MC_EXT_FILENAME}" >/dev/null 2>&1 &)
         else
-            mplayer -vo null "${MC_EXT_FILENAME}"
+            $PLAYER -vo null "${MC_EXT_FILENAME}"
         fi
-        #(gtv "${MC_EXT_FILENAME}" >/dev/null 2>&1 &)
-        #(xanim "${MC_EXT_FILENAME}" >/dev/null 2>&1 &)
         ;;
     esac
 }
