@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-12-15 12:59+0300\n"
-"PO-Revision-Date: 2019-03-24 14:13+0000\n"
+"POT-Creation-Date: 2020-01-01 23:01+0400\n"
+"PO-Revision-Date: 2019-12-22 22:08+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/mc/mc/language/ca/)\n"
 "Language: ca\n"
@@ -493,19 +493,17 @@ msgstr "Maj"
 msgid "The TERM environment variable is unset!\n"
 msgstr "La variable d'entorn TERM no està definida!\n"
 
-#, fuzzy
 msgid "Cannot check SIGWINCH pipe"
-msgstr "No s'han pogut crear fluxos de la canonada"
+msgstr "No s'ha pogut comprovar la canonada SIGWINCH"
 
-#, fuzzy
 msgid "Cannot create pipe for SIGWINCH"
-msgstr "No s'han pogut crear fluxos de la canonada"
+msgstr "No s'han pogut crear la canonada per a SIGWINCH"
 
 msgid "Cannot configure write end of SIGWINCH pipe"
-msgstr ""
+msgstr "No s'ha pogut configurar l'escriptura final de la canonada SIGWINCH"
 
 msgid "Cannot configure read end of SIGWINCH pipe"
-msgstr ""
+msgstr "No s'ha pogut configurar la lectura final de la canonada SIGWINCH"
 
 #, c-format
 msgid ""
@@ -1396,9 +1394,8 @@ msgstr "&Nou"
 msgid "&Close"
 msgstr "Tan&ca"
 
-#, fuzzy
 msgid "&History..."
-msgstr "Historial"
+msgstr "&Historial..."
 
 msgid "Save &as..."
 msgstr "Desa com &a..."
@@ -3424,7 +3421,7 @@ msgid "Command &history"
 msgstr "&Historial de les ordres"
 
 msgid "Viewed/edited files hi&story"
-msgstr ""
+msgstr "Hi&storial dels fitxers vistos/editats"
 
 msgid "Di&rectory hotlist"
 msgstr "Favorits dels di&rectoris"

@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-12-15 12:59+0300\n"
-"PO-Revision-Date: 2019-03-05 11:24+0000\n"
+"POT-Creation-Date: 2020-01-01 23:01+0400\n"
+"PO-Revision-Date: 2019-12-17 23:30+0000\n"
 "Last-Translator: Gilberto Jorge <gmj125@gmail.com>\n"
 "Language-Team: Portuguese (http://www.transifex.com/mc/mc/language/pt/)\n"
 "Language: pt\n"
@@ -486,19 +486,17 @@ msgstr "Shift"
 msgid "The TERM environment variable is unset!\n"
 msgstr "A variável de ambiente TERM foi limpa!\n"
 
-#, fuzzy
 msgid "Cannot check SIGWINCH pipe"
-msgstr "Não é possível criar streams de pipes"
+msgstr "Não é possível verificar o pipe SIGWINCH"
 
-#, fuzzy
 msgid "Cannot create pipe for SIGWINCH"
-msgstr "Não é possível criar streams de pipes"
+msgstr "Não é possível criar pipe para SIGWINCH"
 
 msgid "Cannot configure write end of SIGWINCH pipe"
-msgstr ""
+msgstr "Não é possível configurar o ponto de escrita do pipe do SIGWINCH"
 
 msgid "Cannot configure read end of SIGWINCH pipe"
-msgstr ""
+msgstr "Não é possível configurar o ponto de leitura do pipe do SIGWINCH"
 
 #, c-format
 msgid ""
@@ -1388,9 +1386,8 @@ msgstr "&Novo"
 msgid "&Close"
 msgstr "&Fechar"
 
-#, fuzzy
 msgid "&History..."
-msgstr "Histórico"
+msgstr "&Histórico..."
 
 msgid "Save &as..."
 msgstr "Guard&ar como..."
@@ -3416,7 +3413,7 @@ msgid "Command &history"
 msgstr "&Histórico de comandos"
 
 msgid "Viewed/edited files hi&story"
-msgstr ""
+msgstr "Hi&stórico de ficheiros visualizados/editados"
 
 msgid "Di&rectory hotlist"
 msgstr "Hotlist de di&retórios"

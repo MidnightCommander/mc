@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-12-15 12:59+0300\n"
-"PO-Revision-Date: 2019-06-16 17:59+0000\n"
-"Last-Translator: Yury V. Zaytsev <yury@shurup.com>\n"
+"POT-Creation-Date: 2020-01-01 23:01+0400\n"
+"PO-Revision-Date: 2019-12-16 01:49+0000\n"
+"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Belarusian (http://www.transifex.com/mc/mc/language/be/)\n"
 "Language: be\n"
 "MIME-Version: 1.0\n"
@@ -491,13 +491,11 @@ msgstr "Shift"
 msgid "The TERM environment variable is unset!\n"
 msgstr "Зменную асяроддзя «TERM» не вызначылі!\n"
 
-#, fuzzy
 msgid "Cannot check SIGWINCH pipe"
-msgstr "Немагчыма стварыць паток каналу"
+msgstr ""
 
-#, fuzzy
 msgid "Cannot create pipe for SIGWINCH"
-msgstr "Немагчыма стварыць паток каналу"
+msgstr ""
 
 msgid "Cannot configure write end of SIGWINCH pipe"
 msgstr ""
@@ -1388,9 +1386,8 @@ msgstr "Новы(&N)"
 msgid "&Close"
 msgstr "Закрыць(&C)"
 
-#, fuzzy
 msgid "&History..."
-msgstr "Гісторыя"
+msgstr ""
 
 msgid "Save &as..."
 msgstr "Захаваць як(&A)…"

@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-12-15 12:59+0300\n"
-"PO-Revision-Date: 2019-05-22 09:27+0000\n"
-"Last-Translator: 이정희 <daemul72@gmail.com>\n"
+"POT-Creation-Date: 2020-01-01 23:01+0400\n"
+"PO-Revision-Date: 2019-12-16 01:49+0000\n"
+"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Korean (http://www.transifex.com/mc/mc/language/ko/)\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
@@ -483,19 +483,17 @@ msgstr "쉬프트"
 msgid "The TERM environment variable is unset!\n"
 msgstr "TERM 환경변수가 설정되어있지 않습니다!\n"
 
-#, fuzzy
 msgid "Cannot check SIGWINCH pipe"
-msgstr "파이프 데이터 스트림을 생성할 수 없음"
+msgstr ""
 
-#, fuzzy
 msgid "Cannot create pipe for SIGWINCH"
-msgstr "파이프 데이터 스트림을 생성할 수 없음"
+msgstr "SIGWINCH용 파이프를 생성할 수 없음"
 
 msgid "Cannot configure write end of SIGWINCH pipe"
-msgstr ""
+msgstr "SIGWINCH 파이프의 쓰기 끝을 구성할 수 없음"
 
 msgid "Cannot configure read end of SIGWINCH pipe"
-msgstr ""
+msgstr "SIGWINCH 파이프의 읽기 엔드를 구성할 수 없음"
 
 #, c-format
 msgid ""
@@ -628,7 +626,7 @@ msgstr "기록"
 
 #. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
 msgid "DialogTitle|History cleanup"
-msgstr "대화상자 제목|기록 지우기"
+msgstr "대화상자 제목 | 기록 지우기"
 
 msgid "Do you want clean this history?"
 msgstr "이 기록을 지우시겠습니까?"
@@ -970,25 +968,25 @@ msgid "Enter line:"
 msgstr "행 번호 입력:"
 
 msgid "ButtonBar|Help"
-msgstr "ButtonBar|도움말"
+msgstr "버튼바|도움말"
 
 msgid "ButtonBar|Save"
-msgstr "ButtonBar|저장"
+msgstr "버튼바|저장"
 
 msgid "ButtonBar|Edit"
-msgstr "ButtonBar|편집"
+msgstr "버튼바|편집"
 
 msgid "ButtonBar|Merge"
-msgstr "ButtonBar|병합"
+msgstr "버튼바|병합"
 
 msgid "ButtonBar|Search"
-msgstr "ButtonBar|검색"
+msgstr "버튼바|검색"
 
 msgid "ButtonBar|Options"
-msgstr "ButtonBar|옵션"
+msgstr "버튼바|옵션"
 
 msgid "ButtonBar|Quit"
-msgstr "ButtonBar|종료"
+msgstr "버튼바|종료"
 
 msgid "Quit"
 msgstr "종료"
@@ -1380,9 +1378,8 @@ msgstr "신규(&N)"
 msgid "&Close"
 msgstr "닫기(&C)"
 
-#, fuzzy
 msgid "&History..."
-msgstr "기록"
+msgstr "기록(&H)..."
 
 msgid "Save &as..."
 msgstr "다른 이름으로 저장(&A)..."
@@ -1680,22 +1677,22 @@ msgid "Edit: "
 msgstr "편집: "
 
 msgid "ButtonBar|Mark"
-msgstr "ButtonBar|표시"
+msgstr "버튼바|표시"
 
 msgid "ButtonBar|Replac"
-msgstr "ButtonBar|바꾸기"
+msgstr "버튼바|바꾸기"
 
 msgid "ButtonBar|Copy"
-msgstr "ButtonBar|복사"
+msgstr "버튼바|복사"
 
 msgid "ButtonBar|Move"
-msgstr "ButtonBar|이동"
+msgstr "버튼바|이동"
 
 msgid "ButtonBar|Delete"
-msgstr "ButtonBar|삭제"
+msgstr "버튼바|삭제"
 
 msgid "ButtonBar|PullDn"
-msgstr "ButtonBar|풀다운"
+msgstr "버튼바|풀다운"
 
 msgid "Breton"
 msgstr "브르타뉴어"
@@ -2089,22 +2086,22 @@ msgstr "정렬 순서"
 
 #. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 msgid "Confirmation|&Delete"
-msgstr "Confirmation|삭제(&D)"
+msgstr "확인|삭제(&D)"
 
 msgid "Confirmation|O&verwrite"
-msgstr "Confirmation|덮어쓰기(&V)"
+msgstr "확인|덮어쓰기(&V)"
 
 msgid "Confirmation|&Execute"
-msgstr "Confirmation|실행(&E)"
+msgstr "확인|실행(&E)"
 
 msgid "Confirmation|E&xit"
-msgstr "Confirmation|종료(&X)"
+msgstr "확인|종료(&X)"
 
 msgid "Confirmation|Di&rectory hotlist delete"
-msgstr "Confirmation|디렉토리 단축목록 삭제(&R)"
+msgstr "확인|디렉토리 단축목록 삭제(&R)"
 
 msgid "Confirmation|&History cleanup"
-msgstr "Confirmation|기록 청소(&H)"
+msgstr "확인 | 기록 청소(&H)"
 
 msgid "Confirmation"
 msgstr "확인"
@@ -2488,22 +2485,22 @@ msgstr ""
 "방법의 예제로 그 파일을 사용할 수 있습니다."
 
 msgid "DialogTitle|Copy"
-msgstr "DialogTitle|복사"
+msgstr "대화상자 제목|복사"
 
 msgid "DialogTitle|Move"
-msgstr "DialogTitle|이동"
+msgstr "대화상자 제목|이동"
 
 msgid "DialogTitle|Delete"
-msgstr "DialogTitle|삭제"
+msgstr "대화상자 제목|삭제"
 
 msgid "FileOperation|Copy"
-msgstr "FileOperation|복사"
+msgstr "파일 작업|복사"
 
 msgid "FileOperation|Move"
-msgstr "FileOperation|이동"
+msgstr "파일 작업|이동"
 
 msgid "FileOperation|Delete"
-msgstr "FileOperation|삭제"
+msgstr "파일 작업|삭제"
 
 #, no-c-format
 msgid "%o %f%n\"%s\"%m"
@@ -3404,7 +3401,7 @@ msgid "Command &history"
 msgstr "명령 기록(&H)"
 
 msgid "Viewed/edited files hi&story"
-msgstr ""
+msgstr "보기/편집된 파일 기록(&s)"
 
 msgid "Di&rectory hotlist"
 msgstr "디렉터리 단축목록(&R)"
@@ -3481,16 +3478,16 @@ msgid "&Right"
 msgstr "오른쪽(&R)"
 
 msgid "ButtonBar|Menu"
-msgstr "ButtonBar|메뉴"
+msgstr "버튼바|메뉴"
 
 msgid "ButtonBar|View"
-msgstr "ButtonBar|보기"
+msgstr "버튼바|보기"
 
 msgid "ButtonBar|RenMov"
-msgstr "ButtonBar|이름변경/이동"
+msgstr "버튼바|이름변경/이동"
 
 msgid "ButtonBar|Mkdir"
-msgstr "ButtonBar|디렉만들기"
+msgstr "버튼바|디렉만들기"
 
 msgid "Memory exhausted!"
 msgstr "메모리 소진됨!"
@@ -3498,7 +3495,7 @@ msgstr "메모리 소진됨!"
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|u"
-msgstr "sort|u"
+msgstr "정렬|u"
 
 msgid "&Unsorted"
 msgstr "정렬 안함(&U)"
@@ -3506,7 +3503,7 @@ msgstr "정렬 안함(&U)"
 #. TRANSLATORS: one single character to represent 'name' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|n"
-msgstr "sort|n"
+msgstr "정렬|n"
 
 msgid "&Name"
 msgstr "이름(&N)"
@@ -3514,7 +3511,7 @@ msgstr "이름(&N)"
 #. TRANSLATORS: one single character to represent 'version' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|v"
-msgstr "sort|v"
+msgstr "정렬|v"
 
 msgid "&Version"
 msgstr "버전(&V)"
@@ -3522,7 +3519,7 @@ msgstr "버전(&V)"
 #. TRANSLATORS: one single character to represent 'extension' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|e"
-msgstr "sort|e"
+msgstr "정렬|e"
 
 msgid "E&xtension"
 msgstr "확장자(&X)"
@@ -3530,7 +3527,7 @@ msgstr "확장자(&X)"
 #. TRANSLATORS: one single character to represent 'size' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|s"
-msgstr "sort|s"
+msgstr "정렬|s"
 
 msgid "&Size"
 msgstr "크기(&S)"
@@ -3541,7 +3538,7 @@ msgstr "블럭 크기"
 #. TRANSLATORS: one single character to represent 'Modify time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|m"
-msgstr "sort|m"
+msgstr "정렬|m"
 
 msgid "&Modify time"
 msgstr "시간 수정(&M)"
@@ -3549,7 +3546,7 @@ msgstr "시간 수정(&M)"
 #. TRANSLATORS: one single character to represent 'Access time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|a"
-msgstr "sort|a"
+msgstr "정렬|a"
 
 msgid "&Access time"
 msgstr "호출 시간(&A)"
@@ -3557,7 +3554,7 @@ msgstr "호출 시간(&A)"
 #. TRANSLATORS: one single character to represent 'Change time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|h"
-msgstr "sort|h"
+msgstr "정렬|h"
 
 msgid "C&hange time"
 msgstr "시간 변경(&H)"
@@ -3571,7 +3568,7 @@ msgstr "Nl"
 #. TRANSLATORS: one single character to represent 'inode' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|i"
-msgstr "sort|i"
+msgstr "정렬|i"
 
 msgid "&Inode"
 msgstr "아이 노드(&I)"
@@ -3703,19 +3700,19 @@ msgid "Delete %s?"
 msgstr "%s을(를) 삭제하시겠습니까?"
 
 msgid "ButtonBar|Static"
-msgstr "ButtonBar|Static"
+msgstr "버튼바|고정"
 
 msgid "ButtonBar|Dynamc"
-msgstr "ButtonBar|Dynamc"
+msgstr "버튼바|다이나믹"
 
 msgid "ButtonBar|Rescan"
-msgstr "ButtonBar|재검색"
+msgstr "버튼바|재검색"
 
 msgid "ButtonBar|Forget"
-msgstr "ButtonBar|잊기"
+msgstr "버튼바|잊기"
 
 msgid "ButtonBar|Rmdir"
-msgstr "ButtonBar|디렉토리 삭제"
+msgstr "버튼바|디렉토리 삭제"
 
 #, c-format
 msgid ""
@@ -3739,10 +3736,10 @@ msgid "Help"
 msgstr "도움말"
 
 msgid "ButtonBar|Index"
-msgstr "ButtonBar|목차"
+msgstr "버튼바|목차"
 
 msgid "ButtonBar|Prev"
-msgstr "ButtonBar|이전"
+msgstr "버튼바|이전"
 
 msgid "Learn keys"
 msgstr "학습 키"
@@ -4446,34 +4443,34 @@ msgid "Goto"
 msgstr "건너뛰기"
 
 msgid "ButtonBar|Ascii"
-msgstr "ButtonBar|Ascii"
+msgstr "버튼바|Ascii"
 
 msgid "ButtonBar|HxSrch"
-msgstr "ButtonBar|16비트 검색"
+msgstr "버튼바|16비트 검색"
 
 msgid "ButtonBar|UnWrap"
-msgstr "ButtonBar|줄바꿀 해제"
+msgstr "버튼바|줄바꿀 해제"
 
 msgid "ButtonBar|Wrap"
-msgstr "ButtonBar|줄바꿈"
+msgstr "버튼바|줄바꿈"
 
 msgid "ButtonBar|Hex"
-msgstr "ButtonBar|16비트"
+msgstr "버튼바|16비트"
 
 msgid "ButtonBar|Goto"
-msgstr "ButtonBar|Goto"
+msgstr "버튼바|Goto"
 
 msgid "ButtonBar|Raw"
-msgstr "ButtonBar|원본 형식"
+msgstr "버튼바|원본 형식"
 
 msgid "ButtonBar|Parse"
-msgstr "ButtonBar|구문 분석"
+msgstr "버튼바|구문 분석"
 
 msgid "ButtonBar|Unform"
-msgstr "ButtonBar|형식화되지 않음"
+msgstr "버튼바|형식화되지 않음"
 
 msgid "ButtonBar|Format"
-msgstr "ButtonBar|형식"
+msgstr "버튼바|형식"
 
 #, c-format
 msgid ""

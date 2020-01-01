@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-12-15 12:59+0300\n"
-"PO-Revision-Date: 2019-03-09 10:24+0000\n"
-"Last-Translator: Miguel Anxo Bouzada <mbouzada@gmail.com>\n"
+"POT-Creation-Date: 2020-01-01 23:01+0400\n"
+"PO-Revision-Date: 2019-12-16 01:49+0000\n"
+"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Galician (http://www.transifex.com/mc/mc/language/gl/)\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
@@ -491,13 +491,11 @@ msgstr "Maiús"
 msgid "The TERM environment variable is unset!\n"
 msgstr "A variábel de contorno TERM está sen definir!\n"
 
-#, fuzzy
 msgid "Cannot check SIGWINCH pipe"
-msgstr "Non é posíbel crear a canalización de fluxos"
+msgstr ""
 
-#, fuzzy
 msgid "Cannot create pipe for SIGWINCH"
-msgstr "Non é posíbel crear a canalización de fluxos"
+msgstr ""
 
 msgid "Cannot configure write end of SIGWINCH pipe"
 msgstr ""
@@ -1392,9 +1390,8 @@ msgstr "&Novo"
 msgid "&Close"
 msgstr "&Pechar"
 
-#, fuzzy
 msgid "&History..."
-msgstr "Historial"
+msgstr ""
 
 msgid "Save &as..."
 msgstr "Gardar &Como..."

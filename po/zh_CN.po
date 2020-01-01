@@ -6,7 +6,7 @@
 # Jacques Yip <cong-ye@163.com>, 2017
 # Jake Li <gnozil@gmail.com>, 2012
 # Kenneth Cheung <zjhken01@163.com>, 2018
-# liushuyu011 <liushuyu011@gmail.com>, 2016,2019
+# shuyu liu <liushuyu011@gmail.com>, 2016,2019
 # Mingcong Bai <jeffbai@aosc.xyz>, 2016,2018
 # qingxianhao <qinghao1@foxmail.com>, 2012
 # qingxianhao <qinghao1@foxmail.com>, 2012
@@ -17,9 +17,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-12-15 12:59+0300\n"
-"PO-Revision-Date: 2019-03-09 03:13+0000\n"
-"Last-Translator: liushuyu011 <liushuyu011@gmail.com>\n"
+"POT-Creation-Date: 2020-01-01 23:01+0400\n"
+"PO-Revision-Date: 2019-12-16 01:49+0000\n"
+"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/mc/mc/language/"
 "zh_CN/)\n"
 "Language: zh_CN\n"
@@ -490,13 +490,11 @@ msgstr "Shift 键"
 msgid "The TERM environment variable is unset!\n"
 msgstr "没有设置 TERM 环境变量!\n"
 
-#, fuzzy
 msgid "Cannot check SIGWINCH pipe"
-msgstr "无法创建管道数据流"
+msgstr ""
 
-#, fuzzy
 msgid "Cannot create pipe for SIGWINCH"
-msgstr "无法创建管道数据流"
+msgstr ""
 
 msgid "Cannot configure write end of SIGWINCH pipe"
 msgstr ""
@@ -1386,9 +1384,8 @@ msgstr "新建(&N)"
 msgid "&Close"
 msgstr "关闭(&C)"
 
-#, fuzzy
 msgid "&History..."
-msgstr "历史"
+msgstr ""
 
 msgid "Save &as..."
 msgstr "另存为(&A)..."

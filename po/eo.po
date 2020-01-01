@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-12-15 12:59+0300\n"
-"PO-Revision-Date: 2019-06-01 18:41+0000\n"
+"POT-Creation-Date: 2020-01-01 23:01+0400\n"
+"PO-Revision-Date: 2019-12-25 01:49+0000\n"
 "Last-Translator: Keith Bowes <zooplah@gmail.com>\n"
 "Language-Team: Esperanto (http://www.transifex.com/mc/mc/language/eo/)\n"
 "Language: eo\n"
@@ -483,19 +483,17 @@ msgstr "Uskleca inversigilo"
 msgid "The TERM environment variable is unset!\n"
 msgstr "La medivariablo TERM ne estas valorizita!\n"
 
-#, fuzzy
 msgid "Cannot check SIGWINCH pipe"
-msgstr "Ne eblas krei duktajn fluojn"
+msgstr "Ne eblas kontroli SIGWINCH-dukton"
 
-#, fuzzy
 msgid "Cannot create pipe for SIGWINCH"
-msgstr "Ne eblas krei duktajn fluojn"
+msgstr "Ne eblas krei duktajn por SIGWINCH"
 
 msgid "Cannot configure write end of SIGWINCH pipe"
-msgstr ""
+msgstr "Ne eblas agordi skribfinon de SIGWINCH-dukto"
 
 msgid "Cannot configure read end of SIGWINCH pipe"
-msgstr ""
+msgstr "Ne eblas agordi legfinon de SIGWINCH-dukton"
 
 #, c-format
 msgid ""
@@ -1383,9 +1381,8 @@ msgstr "&Nova"
 msgid "&Close"
 msgstr "&Fermi"
 
-#, fuzzy
 msgid "&History..."
-msgstr "Historio"
+msgstr "&Historio…"
 
 msgid "Save &as..."
 msgstr "K&onservi kiel..."
@@ -2862,7 +2859,7 @@ msgid "Sorry, I could not put the job in background"
 msgstr "Bedaŭrinde mi ne povis meti la taskon en la fonon"
 
 msgid "S&uspend"
-msgstr "&Paŭzigi"
+msgstr "P&aŭzigi"
 
 msgid "Con&tinue"
 msgstr "&Daŭrigi"
@@ -3410,7 +3407,7 @@ msgid "Command &history"
 msgstr "Komanda &historio"
 
 msgid "Viewed/edited files hi&story"
-msgstr ""
+msgstr "H&istorio de viditaj/redaktitaj dosieroj"
 
 msgid "Di&rectory hotlist"
 msgstr "Dosieru&ja rapidolisto"

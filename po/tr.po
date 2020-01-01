@@ -6,6 +6,7 @@
 # Hüsamettin Ertürk <hsmertk@gmail.com>, 2016
 # Muhammet Kara <muhammetk@gmail.com>, 2014
 # Muhammet Kara <muhammetk@gmail.com>, 2014
+# Serdar Sağlam <teknomobil@msn.com>, 2019
 # Slava Zanko <slavazanko@gmail.com>, 2011
 # yusuf <yusuf.aydemir@pisilinux.org>, 2015-2016
 # yusuf <yusuf.aydemir@pisilinux.org>, 2016-2017
@@ -13,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-12-15 12:59+0300\n"
-"PO-Revision-Date: 2019-03-02 12:55+0000\n"
+"POT-Creation-Date: 2020-01-01 23:01+0400\n"
+"PO-Revision-Date: 2019-12-16 01:49+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/mc/mc/language/tr/)\n"
 "Language: tr\n"
@@ -113,7 +114,7 @@ msgid "Invalid character"
 msgstr "Geçersiz karakter"
 
 msgid "Unmatched quotes character"
-msgstr ""
+msgstr "Eşleşmeyen tırnak işareti karakteri"
 
 #, c-format
 msgid ""
@@ -183,13 +184,13 @@ msgstr ""
 "Varsayılan önyüz yüklendi"
 
 msgid "True color not supported with ncurses."
-msgstr ""
+msgstr "Gerçek renk ncurses ile desteklenmiyor."
 
 msgid "True color not supported in this slang version."
-msgstr ""
+msgstr "Gerçek renk bu slang sürümünde desteklenmiyor."
 
 msgid "Your terminal doesn't even seem to support 256 colors."
-msgstr ""
+msgstr "Uçbiriminiz 256 rengi bile desteklemiyor gibi görünüyor."
 
 msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
 msgstr ""
@@ -480,13 +481,11 @@ msgstr "Shift"
 msgid "The TERM environment variable is unset!\n"
 msgstr "TERM çevre değişkeni atanmamış!\n"
 
-#, fuzzy
 msgid "Cannot check SIGWINCH pipe"
-msgstr "Boru akışı oluşturulamadı"
+msgstr ""
 
-#, fuzzy
 msgid "Cannot create pipe for SIGWINCH"
-msgstr "Boru akışı oluşturulamadı"
+msgstr ""
 
 msgid "Cannot configure write end of SIGWINCH pipe"
 msgstr ""
@@ -671,7 +670,7 @@ msgid "Print last working directory to specified file"
 msgstr "Belirlenen dosyaya son çalışılan dizini yaz"
 
 msgid "<file>"
-msgstr ""
+msgstr "<file>"
 
 msgid "Enables subshell support (default)"
 msgstr "Altkabuk desteğini etkinleştirir (öntanımlı)"
@@ -686,7 +685,7 @@ msgid "Set debug level"
 msgstr "Hata ayıklama seviyesini ayarla"
 
 msgid "<integer>"
-msgstr ""
+msgstr "<integer>"
 
 msgid "Launches the file viewer on a file"
 msgstr "Bir dosyayı dosya göstericide açar"
@@ -695,7 +694,7 @@ msgid "Edit files"
 msgstr "Dosyasyaları düzenle"
 
 msgid "<file> ..."
-msgstr ""
+msgstr "<file> ..."
 
 msgid "Forces xterm features"
 msgstr "xterm özelliklerini etkinleştirir"
@@ -737,7 +736,7 @@ msgid "Specifies a color configuration"
 msgstr "Bir renk yapılandırması belirtir"
 
 msgid "<string>"
-msgstr ""
+msgstr "<string>"
 
 msgid "Show mc with specified skin"
 msgstr "Mc'yi belirtilen önyüz ile göster"
@@ -1381,9 +1380,8 @@ msgstr "&Yeni"
 msgid "&Close"
 msgstr "&Kapat"
 
-#, fuzzy
 msgid "&History..."
-msgstr "Geçmiş"
+msgstr "&Geçmiş..."
 
 msgid "Save &as..."
 msgstr "Farklı kaydet..."
@@ -1669,7 +1667,7 @@ msgstr ""
 "Midnight Commander için yazıldı"
 
 msgid "Copyright (C) 1996-2019 the Free Software Foundation"
-msgstr ""
+msgstr "Telif hakkı (C) 1996-2019 Özgür Yazılım Vakfı"
 
 msgid "About"
 msgstr "Hakkında"
@@ -1866,10 +1864,10 @@ msgstr ""
 " %s"
 
 msgid "&Ignore"
-msgstr ""
+msgstr "&Yoksay"
 
 msgid "Ignore &all"
-msgstr ""
+msgstr "Tümünü &yoksay"
 
 msgid "&Retry"
 msgstr "&Tekrar"
@@ -1967,7 +1965,7 @@ msgid "Sa&fe delete"
 msgstr "güvenilir si&lme"
 
 msgid "Safe overwrite"
-msgstr ""
+msgstr "Güvenli üzerine yaz"
 
 msgid "A&uto save setup"
 msgstr "&Ayarları otomatik kaydet"
@@ -2884,13 +2882,13 @@ msgid "%ld B/s"
 msgstr "%ld B/s"
 
 msgid "New     :"
-msgstr ""
+msgstr "Yeni     :"
 
 msgid "Existing:"
-msgstr ""
+msgstr "Varolan:"
 
 msgid "Overwrite this file?"
-msgstr ""
+msgstr "Bu dosyanın üzerine mi?"
 
 msgid "A&ppend"
 msgstr "Sonuna &Ekle"
@@ -2899,19 +2897,19 @@ msgid "&Reget"
 msgstr "&Reget"
 
 msgid "Overwrite all files?"
-msgstr ""
+msgstr "Tüm dosyaların üzerine mi?"
 
 msgid "Don't overwrite with &zero length file"
-msgstr ""
+msgstr "&Sıfır uzunlukta dosya ile üzerine yazılmasın"
 
 msgid "&Older"
-msgstr ""
+msgstr "&Eski"
 
 msgid "S&maller"
-msgstr ""
+msgstr "&Küçük"
 
 msgid "&Size differs"
-msgstr ""
+msgstr "&Boyut farkı"
 
 msgid "File exists"
 msgstr "Dosya var"
@@ -3058,11 +3056,11 @@ msgstr[1] ""
 
 #, c-format
 msgid "Find File: \"%s\". Content: \"%s\""
-msgstr ""
+msgstr "Dosya Bul: \"%s\". İçerik: \"%s\""
 
 #, c-format
 msgid "Find File: \"%s\""
-msgstr ""
+msgstr "Dosya Bul: \"%s\""
 
 msgid "Searching"
 msgstr "Aranıyor"
@@ -3883,7 +3881,7 @@ msgid "Using the ncursesw library\n"
 msgstr "ncursesw kitaplığı kullanılarak\n"
 
 msgid "With builtin Editor and Aspell support\n"
-msgstr ""
+msgstr "Yerleşik düzenleyici ve Aspell desteği ile\n"
 
 msgid "With builtin Editor\n"
 msgstr "Yerleşik Düzenleyiciyle\n"
@@ -3928,7 +3926,7 @@ msgid "Home directory:"
 msgstr "Ev dizini:"
 
 msgid "Profile root directory:"
-msgstr ""
+msgstr "Profil kök dizini:"
 
 msgid "System data"
 msgstr "Sistem verisi"
@@ -4288,7 +4286,7 @@ msgstr "sftp: Dosya okumak için hiç dosya işleyici verisi mevcut değil "
 
 #, c-format
 msgid "sftp: socket error: %s"
-msgstr ""
+msgstr "sftp: soket hatası: %s"
 
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"

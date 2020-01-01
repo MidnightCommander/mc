@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-12-15 12:59+0300\n"
-"PO-Revision-Date: 2019-03-04 17:03+0000\n"
+"POT-Creation-Date: 2020-01-01 23:01+0400\n"
+"PO-Revision-Date: 2019-12-17 03:41+0000\n"
 "Last-Translator: scootergrisen\n"
 "Language-Team: Danish (http://www.transifex.com/mc/mc/language/da/)\n"
 "Language: da\n"
@@ -488,19 +488,17 @@ msgstr "Skift"
 msgid "The TERM environment variable is unset!\n"
 msgstr "TERM-miljøvariabelen er ikke sat!\n"
 
-#, fuzzy
 msgid "Cannot check SIGWINCH pipe"
-msgstr "Kan ikke oprette datakanalstrømme"
+msgstr "Kan ikke tjekke SIGWINCH-datakanal"
 
-#, fuzzy
 msgid "Cannot create pipe for SIGWINCH"
-msgstr "Kan ikke oprette datakanalstrømme"
+msgstr "Kan ikke oprette datakanal til SIGWINCH"
 
 msgid "Cannot configure write end of SIGWINCH pipe"
-msgstr ""
+msgstr "Kan ikke konfigurerer skriveslutning til SIGWINCH-datakanal"
 
 msgid "Cannot configure read end of SIGWINCH pipe"
-msgstr ""
+msgstr "Kan ikke konfigurerer læseslutning til SIGWINCH-datakanal"
 
 #, c-format
 msgid ""
@@ -1385,9 +1383,8 @@ msgstr "&Ny"
 msgid "&Close"
 msgstr "&Luk"
 
-#, fuzzy
 msgid "&History..."
-msgstr "Historik"
+msgstr "&Historik..."
 
 msgid "Save &as..."
 msgstr "Gem &som..."
@@ -3413,7 +3410,7 @@ msgid "Command &history"
 msgstr "Kommando&historik"
 
 msgid "Viewed/edited files hi&story"
-msgstr ""
+msgstr "Viste/redigerede &filhistorik"
 
 msgid "Di&rectory hotlist"
 msgstr "&Mappehotlist"

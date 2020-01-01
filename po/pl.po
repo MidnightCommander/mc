@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-12-15 12:59+0300\n"
-"PO-Revision-Date: 2019-03-02 15:10+0000\n"
+"POT-Creation-Date: 2020-01-01 23:01+0400\n"
+"PO-Revision-Date: 2019-12-16 16:22+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/mc/mc/language/pl/)\n"
 "Language: pl\n"
@@ -488,19 +488,17 @@ msgstr "Shift"
 msgid "The TERM environment variable is unset!\n"
 msgstr "Zmienna środowiskowa TERM nie jest ustawiona.\n"
 
-#, fuzzy
 msgid "Cannot check SIGWINCH pipe"
-msgstr "Nie można utworzyć strumieni potoku"
+msgstr "Nie można sprawdzić potoku SIGWINCH"
 
-#, fuzzy
 msgid "Cannot create pipe for SIGWINCH"
-msgstr "Nie można utworzyć strumieni potoku"
+msgstr "Nie można utworzyć potoku dla SIGWINCH"
 
 msgid "Cannot configure write end of SIGWINCH pipe"
-msgstr ""
+msgstr "Nie można skonfigurować końca zapisu potoku SIGWINCH"
 
 msgid "Cannot configure read end of SIGWINCH pipe"
-msgstr ""
+msgstr "Nie można skonfigurować końca odczytu potoku SIGWINCH"
 
 #, c-format
 msgid ""
@@ -1392,9 +1390,8 @@ msgstr "&Nowy"
 msgid "&Close"
 msgstr "&Zamknij"
 
-#, fuzzy
 msgid "&History..."
-msgstr "Historia"
+msgstr "&Historia…"
 
 msgid "Save &as..."
 msgstr "Z&apisz jako…"
@@ -3424,7 +3421,7 @@ msgid "Command &history"
 msgstr "&Historia poleceń"
 
 msgid "Viewed/edited files hi&story"
-msgstr ""
+msgstr "Hi&storia wyświetlonych/zmodyfikowanych plików"
 
 msgid "Di&rectory hotlist"
 msgstr "Lista pod&ręcznych katalogów"
@@ -3436,7 +3433,7 @@ msgid "&Background jobs"
 msgstr "Zadania w &tle"
 
 msgid "Screen lis&t"
-msgstr "Li&sta ekranów"
+msgstr "&Lista ekranów"
 
 msgid "&Undelete files (ext2fs only)"
 msgstr "&Odtwórz pliki (tylko system plików ext2)"

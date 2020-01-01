@@ -4,15 +4,15 @@
 #
 # Translators:
 # Mátyás Demeter <mathias.demeter@gmail.com>, 2014
-# Rezső Páder <rezso@rezso.net>, 2012-2017
+# Rezső Páder <rezso@rezso.net>, 2012-2017,2019
 # Slava Zanko <slavazanko@gmail.com>, 2011
 # Szabo Attila, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-12-15 12:59+0300\n"
-"PO-Revision-Date: 2019-03-02 12:55+0000\n"
+"POT-Creation-Date: 2020-01-01 23:01+0400\n"
+"PO-Revision-Date: 2019-12-16 01:49+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/mc/mc/language/hu/)\n"
 "Language: hu\n"
@@ -478,13 +478,11 @@ msgstr "Shift"
 msgid "The TERM environment variable is unset!\n"
 msgstr "Nincs beállítva a TERM környezeti változó.\n"
 
-#, fuzzy
 msgid "Cannot check SIGWINCH pipe"
-msgstr "A(z) %s könyvtár nem létrehozható"
+msgstr ""
 
-#, fuzzy
 msgid "Cannot create pipe for SIGWINCH"
-msgstr "A(z) %s könyvtár nem létrehozható"
+msgstr ""
 
 msgid "Cannot configure write end of SIGWINCH pipe"
 msgstr ""
@@ -1373,9 +1371,8 @@ msgstr "&Új"
 msgid "&Close"
 msgstr "&Bezárás"
 
-#, fuzzy
 msgid "&History..."
-msgstr "Előzmények"
+msgstr ""
 
 msgid "Save &as..."
 msgstr "Mentés m&ásként"
@@ -2872,13 +2869,13 @@ msgid "%ld B/s"
 msgstr "%ld B/s"
 
 msgid "New     :"
-msgstr ""
+msgstr "Új      :"
 
 msgid "Existing:"
-msgstr ""
+msgstr "Meglévő:"
 
 msgid "Overwrite this file?"
-msgstr ""
+msgstr "Fájl felülírása?"
 
 msgid "A&ppend"
 msgstr "&Hozzáírás"
@@ -2887,19 +2884,19 @@ msgid "&Reget"
 msgstr "&Kiegészítés"
 
 msgid "Overwrite all files?"
-msgstr ""
+msgstr "Összes fájl felülírása?"
 
 msgid "Don't overwrite with &zero length file"
-msgstr ""
+msgstr "Ne írja felül &nulla hosszúságú fájllal"
 
 msgid "&Older"
-msgstr ""
+msgstr "&Régebbi"
 
 msgid "S&maller"
-msgstr ""
+msgstr "Ki&sebb"
 
 msgid "&Size differs"
-msgstr ""
+msgstr "&Más a mérete"
 
 msgid "File exists"
 msgstr "A fájl már létezik"
@@ -3041,16 +3038,16 @@ msgstr "Kész"
 #, c-format
 msgid "Finished (ignored %zu directory)"
 msgid_plural "Finished (ignored %zu directories)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Befejezve (%zu könyvtár kihagyva)"
+msgstr[1] "Befejezve (%zu könyvtár kihagyva)"
 
 #, c-format
 msgid "Find File: \"%s\". Content: \"%s\""
-msgstr ""
+msgstr "Fájl keresése: \"%s\". Tartalom: \"%s\""
 
 #, c-format
 msgid "Find File: \"%s\""
-msgstr ""
+msgstr "Fájl keresése: \"%s\""
 
 msgid "Searching"
 msgstr "Keresés"
@@ -3915,10 +3912,10 @@ msgid "Data types:"
 msgstr "Adattípusok:"
 
 msgid "Home directory:"
-msgstr ""
+msgstr "Saját könyvtár:"
 
 msgid "Profile root directory:"
-msgstr ""
+msgstr "Profil gyökérkönyvtár:"
 
 msgid "System data"
 msgstr "Rendszer adatok"
@@ -4277,7 +4274,7 @@ msgstr "sftp: Nincs jelenleg elérhető fájlkezelő adat a fájl olvasásához"
 
 #, c-format
 msgid "sftp: socket error: %s"
-msgstr ""
+msgstr "sftp: socket hiba: %s"
 
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"

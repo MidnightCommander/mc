@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-12-15 12:59+0300\n"
-"PO-Revision-Date: 2019-03-03 09:55+0000\n"
+"POT-Creation-Date: 2020-01-01 23:01+0400\n"
+"PO-Revision-Date: 2019-12-16 05:03+0000\n"
 "Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>\n"
 "Language-Team: Czech (http://www.transifex.com/mc/mc/language/cs/)\n"
 "Language: cs\n"
@@ -490,19 +490,17 @@ msgstr "Shift"
 msgid "The TERM environment variable is unset!\n"
 msgstr "Proměnná prostředí TERM není nastavena!\n"
 
-#, fuzzy
 msgid "Cannot check SIGWINCH pipe"
-msgstr "Nelze vytvořit sekvence příkazů (pipe streams)"
+msgstr "Nedaří se zkontrolovat rouru SIGWINCH"
 
-#, fuzzy
 msgid "Cannot create pipe for SIGWINCH"
-msgstr "Nelze vytvořit sekvence příkazů (pipe streams)"
+msgstr "Nedaří se vytvořit rouru pro signál SIGWINCH"
 
 msgid "Cannot configure write end of SIGWINCH pipe"
-msgstr ""
+msgstr "Nedaří se nastavit zápisovou část roury pro signál SIGWINCH"
 
 msgid "Cannot configure read end of SIGWINCH pipe"
-msgstr ""
+msgstr "Nedaří se nastavit čtecí část roury pro signál SIGWINCH"
 
 #, c-format
 msgid ""
@@ -1387,9 +1385,8 @@ msgstr "&Nový"
 msgid "&Close"
 msgstr "&Zavřít"
 
-#, fuzzy
 msgid "&History..."
-msgstr "Historie"
+msgstr "&Historie…"
 
 msgid "Save &as..."
 msgstr "Uložit j&ako…"
@@ -3325,7 +3322,7 @@ msgid "S&hell link..."
 msgstr "S&hell spojení…"
 
 msgid "S&FTP link..."
-msgstr "S&FTP spojení…"
+msgstr "SFTP sp&ojení…"
 
 msgid "SM&B link..."
 msgstr "SM&B spojení…"
@@ -3421,7 +3418,7 @@ msgid "Command &history"
 msgstr "&Historie příkazů"
 
 msgid "Viewed/edited files hi&story"
-msgstr ""
+msgstr "Hi&storie zobrazených/upravovaných souborů"
 
 msgid "Di&rectory hotlist"
 msgstr "&Rychlý přístup ke složkám"

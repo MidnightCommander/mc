@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-12-15 12:59+0300\n"
-"PO-Revision-Date: 2019-03-05 09:31+0000\n"
+"POT-Creation-Date: 2020-01-01 23:01+0400\n"
+"PO-Revision-Date: 2019-12-16 14:54+0000\n"
 "Last-Translator: David Martin <dhmartina@yahoo.es>\n"
 "Language-Team: Spanish (http://www.transifex.com/mc/mc/language/es/)\n"
 "Language: es\n"
@@ -48,7 +48,7 @@ msgstr "¡Verifique los datos de entrada! ¡Hay parámetros nulos!"
 
 #, c-format
 msgid "Unable to create group '%s' for events!"
-msgstr "Imposible crear el grupo de eventos «%s»"
+msgstr "¡Imposible crear el grupo de eventos «%s»!"
 
 #, c-format
 msgid "Unable to create event '%s'!"
@@ -486,19 +486,17 @@ msgstr "Mayús"
 msgid "The TERM environment variable is unset!\n"
 msgstr "¡La variable de entorno TERM está sin definir!\n"
 
-#, fuzzy
 msgid "Cannot check SIGWINCH pipe"
-msgstr "Imposible crear flujo de tubería"
+msgstr "Imposible comprobar tuberia para SIGWINCH"
 
-#, fuzzy
 msgid "Cannot create pipe for SIGWINCH"
-msgstr "Imposible crear flujo de tubería"
+msgstr "Imposible crear tubería para SIGWINCH"
 
 msgid "Cannot configure write end of SIGWINCH pipe"
-msgstr ""
+msgstr "Imposible configurar extremo de escritura de la tuberia para SIGWINCH"
 
 msgid "Cannot configure read end of SIGWINCH pipe"
-msgstr ""
+msgstr "Imposible configurar extremo de lectura de la tuberia para SIGWINCH"
 
 #, c-format
 msgid ""
@@ -1388,9 +1386,8 @@ msgstr "&Nuevo"
 msgid "&Close"
 msgstr "&Cerrar"
 
-#, fuzzy
 msgid "&History..."
-msgstr "Historia"
+msgstr "&Historia..."
 
 msgid "Save &as..."
 msgstr "guar&Dar como..."
@@ -3416,7 +3413,7 @@ msgid "Command &history"
 msgstr "&Historia de órdenes"
 
 msgid "Viewed/edited files hi&story"
-msgstr ""
+msgstr "hi&Storia de archivos"
 
 msgid "Di&rectory hotlist"
 msgstr "&Favoritos..."
@@ -4099,21 +4096,21 @@ msgstr "fish: Leyendo el directorio %s..."
 
 #, c-format
 msgid "%s: done."
-msgstr "%s: hecho."
+msgstr "%s: Hecho."
 
 #, c-format
 msgid "%s: failure"
-msgstr "%s: fallo"
+msgstr "%s: Fallo."
 
 #, c-format
 msgid "fish: store %s: sending command..."
-msgstr "fish: guardar %s: enviando comando..."
+msgstr "fish: Guardar %s: enviando comando..."
 
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish: Fallo de lectura local, enviando ceros"
 
 msgid "fish: storing file"
-msgstr "ftpfs: guardando archivo"
+msgstr "fish: Guardando archivo"
 
 msgid "Aborting transfer..."
 msgstr "Abortando transferencia."
@@ -4153,7 +4150,7 @@ msgstr "ftpfs: Autorizados"
 
 #, c-format
 msgid "ftpfs: Login incorrect for user %s "
-msgstr "ftpfs: denegada autorización al usuario %s"
+msgstr "ftpfs: Denegada autorización al usuario %s"
 
 msgid "ftpfs: Invalid host name."
 msgstr "ftpfs: Nombre de máquina incorrecto"
@@ -4220,7 +4217,7 @@ msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: Falló; no hay dónde replegarse"
 
 msgid "ftpfs: storing file"
-msgstr "ftpfs: guardando archivo"
+msgstr "ftpfs: Guardando archivo"
 
 msgid ""
 "~/.netrc file has incorrect mode\n"
@@ -4231,7 +4228,7 @@ msgstr ""
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
-msgstr "%s: Atención: no se encuentra el archivo %s\n"
+msgstr "%s: Atención: No se encuentra el archivo %s\n"
 
 #, c-format
 msgid ""
@@ -4355,7 +4352,7 @@ msgstr ""
 "no parece un archivo de tipo tar."
 
 msgid "undelfs: error"
-msgstr "undelfs: error"
+msgstr "undelfs: Error"
 
 msgid "not enough memory"
 msgstr "memoria insuficiente"
@@ -4373,7 +4370,7 @@ msgstr "al iniciar rastreo de inodos %d"
 
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: cargando información de archivos eliminados %d inodos"
+msgstr "undelfs: Cargando información de archivos eliminados %d inodos"
 
 #, c-format
 msgid "while calling ext2_block_iterate %d"
@@ -4391,7 +4388,7 @@ msgid "Cannot open file %s"
 msgstr "Imposible abrir el archivo %s"
 
 msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs: leyendo mapa de inodos..."
+msgstr "undelfs: Leyendo mapa de inodos..."
 
 #, c-format
 msgid ""
@@ -4402,7 +4399,7 @@ msgstr ""
 "%s"
 
 msgid "undelfs: reading block bitmap..."
-msgstr "undelfs: leyendo mapa de bloques..."
+msgstr "undelfs: Leyendo mapa de bloques..."
 
 #, c-format
 msgid ""

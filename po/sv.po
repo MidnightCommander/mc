@@ -9,13 +9,14 @@
 # Jonas Hultén <jonas@kollektivet.nu>, 2017
 # MagnusHerrlin <m8618@abc.se>, 2016
 # MagnusHerrlin <m8618@abc.se>, 2016
+# Sebastian Rasmussen <sebras@gmail.com>, 2019
 # Slava Zanko <slavazanko@gmail.com>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-12-15 12:59+0300\n"
-"PO-Revision-Date: 2019-03-02 12:55+0000\n"
+"POT-Creation-Date: 2020-01-01 23:01+0400\n"
+"PO-Revision-Date: 2019-12-16 01:49+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/mc/mc/language/sv/)\n"
 "Language: sv\n"
@@ -488,13 +489,11 @@ msgstr "Skift"
 msgid "The TERM environment variable is unset!\n"
 msgstr "Omgivningsvariablen TERM är inte satt!\n"
 
-#, fuzzy
 msgid "Cannot check SIGWINCH pipe"
-msgstr "Tunnelströmmar kunde inte skapas"
+msgstr ""
 
-#, fuzzy
 msgid "Cannot create pipe for SIGWINCH"
-msgstr "Tunnelströmmar kunde inte skapas"
+msgstr ""
 
 msgid "Cannot configure write end of SIGWINCH pipe"
 msgstr ""
@@ -1388,9 +1387,8 @@ msgstr "&Ny"
 msgid "&Close"
 msgstr "S&täng"
 
-#, fuzzy
 msgid "&History..."
-msgstr "Historik"
+msgstr ""
 
 msgid "Save &as..."
 msgstr "Spa&ra som..."
@@ -1676,7 +1674,7 @@ msgstr ""
 "skriven för Midnight Commander."
 
 msgid "Copyright (C) 1996-2019 the Free Software Foundation"
-msgstr ""
+msgstr "Copyright (C) 1996-2019 Free Software Foundation"
 
 msgid "About"
 msgstr "Om"
@@ -1972,7 +1970,7 @@ msgid "Sa&fe delete"
 msgstr "S&äker borttagning"
 
 msgid "Safe overwrite"
-msgstr ""
+msgstr "Säker överskrivning"
 
 msgid "A&uto save setup"
 msgstr "A&utospara inställningar"
@@ -2544,16 +2542,20 @@ msgid ""
 "Cannot stat hardlink source file \"%s\"\n"
 "%s"
 msgstr ""
+"Kan inte hämta information om källfil för hårdlänk ”%s”\n"
+"%s"
 
 #, c-format
 msgid ""
 "Cannot create target hardlink \"%s\"\n"
 "%s"
 msgstr ""
+"Kan inte skapa mål för hårdlänk ”%s”\n"
+"%s"
 
 #, c-format
 msgid "Cannot create target hardlink \"%s\""
-msgstr ""
+msgstr "Kan inte skapa mål för hårdlänk ”%s”"
 
 #, c-format
 msgid ""
@@ -2889,13 +2891,13 @@ msgid "%ld B/s"
 msgstr "%ld B/s"
 
 msgid "New     :"
-msgstr ""
+msgstr "Ny      :"
 
 msgid "Existing:"
-msgstr ""
+msgstr "Existerande:"
 
 msgid "Overwrite this file?"
-msgstr ""
+msgstr "Skriv över denna fil?"
 
 msgid "A&ppend"
 msgstr "&Lägg till"
@@ -2904,19 +2906,19 @@ msgid "&Reget"
 msgstr "&Hämta om"
 
 msgid "Overwrite all files?"
-msgstr ""
+msgstr "Skriv över alla filer?"
 
 msgid "Don't overwrite with &zero length file"
-msgstr ""
+msgstr "Skriv inte över med &noll-längdsfil"
 
 msgid "&Older"
-msgstr ""
+msgstr "&Gammal"
 
 msgid "S&maller"
-msgstr ""
+msgstr "M&indre"
 
 msgid "&Size differs"
-msgstr ""
+msgstr "&Storlek skiljer sig"
 
 msgid "File exists"
 msgstr "Filen finns"
@@ -3063,11 +3065,11 @@ msgstr[1] "Klar (ignorerade %zu kataloger)"
 
 #, c-format
 msgid "Find File: \"%s\". Content: \"%s\""
-msgstr ""
+msgstr "Hitta fil: ”%s”. Innehåll: ”%s”"
 
 #, c-format
 msgid "Find File: \"%s\""
-msgstr ""
+msgstr "Hitta fil: ”%s”"
 
 msgid "Searching"
 msgstr "Söker"
@@ -3887,7 +3889,7 @@ msgid "Using the ncursesw library\n"
 msgstr "Använder ncursesw-biblioteket\n"
 
 msgid "With builtin Editor and Aspell support\n"
-msgstr ""
+msgstr "Med inbyggd redigerare och stöd för aspell\n"
 
 msgid "With builtin Editor\n"
 msgstr "Med inbyggd editor\n"

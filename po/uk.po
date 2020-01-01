@@ -9,14 +9,15 @@
 # Sergey Fesyura <pingvein@gmail.com>, 2012-2013
 # Serhii Trykoza <sergey.trikoza@gmail.com>, 2019
 # Slava Zanko <slavazanko@gmail.com>, 2011
+# Vlad Anisimov <uniss@ua.fm>, 2019
 # Yury V. Zaytsev <yury@shurup.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-12-15 12:59+0300\n"
-"PO-Revision-Date: 2019-05-01 18:12+0000\n"
-"Last-Translator: Andriy Smilyanets <smile.andriy@gmail.com>\n"
+"POT-Creation-Date: 2020-01-01 23:01+0400\n"
+"PO-Revision-Date: 2019-12-16 01:49+0000\n"
+"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/mc/mc/language/uk/)\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
@@ -494,19 +495,17 @@ msgstr "Shift"
 msgid "The TERM environment variable is unset!\n"
 msgstr "Змінна середовища TERM не встановлена!\n"
 
-#, fuzzy
 msgid "Cannot check SIGWINCH pipe"
-msgstr "Не вдалося створити потоки каналу"
+msgstr ""
 
-#, fuzzy
 msgid "Cannot create pipe for SIGWINCH"
-msgstr "Не вдалося створити потоки каналу"
+msgstr "Не вдалося створити канал для SIGWINCH"
 
 msgid "Cannot configure write end of SIGWINCH pipe"
-msgstr ""
+msgstr "Не вдалося налаштувати завершення запису каналу SIGWINCH"
 
 msgid "Cannot configure read end of SIGWINCH pipe"
-msgstr ""
+msgstr "Не вдалося налаштувати завершення читання каналу SIGWINCH"
 
 #, c-format
 msgid ""
@@ -1391,9 +1390,8 @@ msgstr "&Новий"
 msgid "&Close"
 msgstr "&Закрити"
 
-#, fuzzy
 msgid "&History..."
-msgstr "Історія"
+msgstr "&Історія..."
 
 msgid "Save &as..."
 msgstr "Зберегти &як…"
@@ -3418,7 +3416,7 @@ msgid "Command &history"
 msgstr "&Історія команд"
 
 msgid "Viewed/edited files hi&story"
-msgstr ""
+msgstr "І&сторія читання/редагування файлів"
 
 msgid "Di&rectory hotlist"
 msgstr "&Гарячий список каталогів"

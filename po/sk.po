@@ -5,6 +5,7 @@
 # Translators:
 # Dušan Lago <inactive+dudko@transifex.com>, 2011
 # Ivan Masár <helix84@centrum.sk>, 2015
+# hualahyja, 2019
 # Jajo Pajo, 2016
 # Jose Riha <jose1711@gmail.com>, 2012
 # Jose Riha <jose1711@gmail.com>, 2012,2017
@@ -14,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-12-15 12:59+0300\n"
-"PO-Revision-Date: 2019-03-02 12:55+0000\n"
+"POT-Creation-Date: 2020-01-01 23:01+0400\n"
+"PO-Revision-Date: 2019-12-16 01:49+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/mc/mc/language/sk/)\n"
 "Language: sk\n"
@@ -109,19 +110,21 @@ msgstr ""
 msgid ""
 "Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
 "hex)"
-msgstr ""
+msgstr "Číslo mimo rozsah (treba jeden bajt, 0 <= n <= 0xFF,  šestnástkovo)"
 
 msgid "Invalid character"
-msgstr ""
+msgstr "Neplatný znak"
 
 msgid "Unmatched quotes character"
-msgstr ""
+msgstr "Nepárny počet úvodzoviek"
 
 #, c-format
 msgid ""
 "Hex pattern error at position %d:\n"
 "%s."
 msgstr ""
+"Chyba hexa vzorky na pozícií %d:\n"
+"%s."
 
 msgid "Search string not found"
 msgstr "Hľadaný znak nebol nájdený"
@@ -174,6 +177,9 @@ msgid ""
 "%s\n"
 "Default skin has been loaded"
 msgstr ""
+"Nemožno použiť schému  '%s'  s podporou true color:\n"
+"%s\n"
+"Bola načitaná základná schéma"
 
 #, c-format
 msgid ""
@@ -186,16 +192,16 @@ msgstr ""
 "Bol načítaný predvolený vzhľad"
 
 msgid "True color not supported with ncurses."
-msgstr ""
+msgstr "Režim True color nie je v ncurses podporovaný."
 
 msgid "True color not supported in this slang version."
-msgstr ""
+msgstr "Režim True color nie je podpora v tejto verzii slang."
 
 msgid "Your terminal doesn't even seem to support 256 colors."
-msgstr ""
+msgstr "Váš terminál asi nepodporuje ani 256 farieb."
 
 msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
-msgstr ""
+msgstr "Ak váš terminál proporuje True color, nastavte COLORTERM=truecolor."
 
 msgid "Escape"
 msgstr "Escape"
@@ -483,19 +489,17 @@ msgstr "Shift"
 msgid "The TERM environment variable is unset!\n"
 msgstr "Premenná prostredia TERM nie je nastavená!\n"
 
-#, fuzzy
 msgid "Cannot check SIGWINCH pipe"
-msgstr "Nemožno vytvoriť toky rúry"
+msgstr ""
 
-#, fuzzy
 msgid "Cannot create pipe for SIGWINCH"
-msgstr "Nemožno vytvoriť toky rúry"
+msgstr "Nemožno vytvoriť rúru pre SIGWINCH"
 
 msgid "Cannot configure write end of SIGWINCH pipe"
-msgstr ""
+msgstr "Nie je možné nastaviť zapisovanie v SIGWINCH rúre"
 
 msgid "Cannot configure read end of SIGWINCH pipe"
-msgstr ""
+msgstr "Nie je možné nastaviť čítanie SIGWINCH rúry"
 
 #, c-format
 msgid ""
@@ -506,25 +510,25 @@ msgstr ""
 "Skontrolujte premennú prostredia TERM.\n"
 
 msgid "B"
-msgstr ""
+msgstr "B"
 
 msgid "kB"
-msgstr ""
+msgstr "kB"
 
 msgid "KiB"
-msgstr ""
+msgstr "KiB"
 
 msgid "MB"
-msgstr ""
+msgstr "MB"
 
 msgid "MiB"
-msgstr ""
+msgstr "MiB"
 
 msgid "GB"
-msgstr ""
+msgstr "GB"
 
 msgid "GiB"
-msgstr ""
+msgstr "GiB"
 
 msgid "Cannot create pipe descriptor"
 msgstr "Nemožno vytvoriť popisovač rúry"
@@ -653,7 +657,7 @@ msgstr "Chyba"
 
 #, c-format
 msgid "%s (%d)"
-msgstr ""
+msgstr "%s (%d)"
 
 msgid "&Abort"
 msgstr "p&Rerušiť"
@@ -674,7 +678,7 @@ msgid "Print last working directory to specified file"
 msgstr "Tlačiť posledný pracovný adresár do zadaného súboru"
 
 msgid "<file>"
-msgstr ""
+msgstr "<file>"
 
 msgid "Enables subshell support (default)"
 msgstr "Zapína podporu pre subshell (štandardne)"
@@ -689,7 +693,7 @@ msgid "Set debug level"
 msgstr "Nastaviť ladiacu úroveň"
 
 msgid "<integer>"
-msgstr ""
+msgstr "<integer>"
 
 msgid "Launches the file viewer on a file"
 msgstr "Spustí prehliadač súborov na súbore"
@@ -698,7 +702,7 @@ msgid "Edit files"
 msgstr "Upraviť súbory"
 
 msgid "<file> ..."
-msgstr ""
+msgstr "<file> ..."
 
 msgid "Forces xterm features"
 msgstr "Vynúti funkcie xterm"
@@ -741,7 +745,7 @@ msgid "Specifies a color configuration"
 msgstr "Určuje farebnú konfiguráciu"
 
 msgid "<string>"
-msgstr ""
+msgstr "<string>"
 
 msgid "Show mc with specified skin"
 msgstr "Zobraziť mc s uvedenou témou vzhľadu"
@@ -814,13 +818,13 @@ msgid "Color options"
 msgstr "Možnosti farieb"
 
 msgid "[+lineno] file1[:lineno] [file2[:lineno]...]"
-msgstr ""
+msgstr "[+lineno] file1[:lineno] [file2[:lineno]...]"
 
 msgid "file"
 msgstr "súbor"
 
 msgid "file1 file2"
-msgstr ""
+msgstr "file1 file2"
 
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[tento_adresár] [adresár_v_druhom_paneli]"
@@ -1383,9 +1387,8 @@ msgstr "&Nové"
 msgid "&Close"
 msgstr "&Zatvoriť"
 
-#, fuzzy
 msgid "&History..."
-msgstr "História"
+msgstr "&História..."
 
 msgid "Save &as..."
 msgstr "Uložiť &ako..."
@@ -1671,7 +1674,7 @@ msgstr ""
 "napísaný pre Midnight Commander."
 
 msgid "Copyright (C) 1996-2019 the Free Software Foundation"
-msgstr ""
+msgstr "Copyright (C) 1996-2019 the Free Software Foundation"
 
 msgid "About"
 msgstr "O aplikácii"
@@ -1866,10 +1869,10 @@ msgstr ""
 "%s"
 
 msgid "&Ignore"
-msgstr ""
+msgstr "&Ignorovať"
 
 msgid "Ignore &all"
-msgstr ""
+msgstr "Ignorovať &všetky"
 
 msgid "&Retry"
 msgstr "&Zopakovať"
@@ -1967,7 +1970,7 @@ msgid "Sa&fe delete"
 msgstr "&Bezpečné zmazanie"
 
 msgid "Safe overwrite"
-msgstr ""
+msgstr "Bezpečné prepísanie"
 
 msgid "A&uto save setup"
 msgstr "A&utomaticky ukladať konfiguráciu"
@@ -2027,7 +2030,7 @@ msgid "Pa&ge scrolling"
 msgstr "&Posúvanie stránky"
 
 msgid "Center &scrolling"
-msgstr ""
+msgstr "Centrovať po&súvanie"
 
 msgid "&Mouse page scrolling"
 msgstr "Posúvanie stránky &myšou"
@@ -2080,7 +2083,7 @@ msgid "User &mini status"
 msgstr "Používateľ. &mini status"
 
 msgid "Listing format"
-msgstr ""
+msgstr "Formát výpisu"
 
 msgid "Executable &first"
 msgstr "N&ajprv spustiteľné"
@@ -2563,6 +2566,10 @@ msgid ""
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
+"Nie je možné vytvoriť stabilné symbolické odkazy na nelokálnych súborových "
+"systémoch:\n"
+"\n"
+"Voľba Stabilné symbolické odkazy bude vypnutá"
 
 #, c-format
 msgid ""
@@ -2763,6 +2770,8 @@ msgid ""
 "Cannot read source file \"%s\"\n"
 "%s"
 msgstr ""
+"Nie je možné čítať zdrojový súbor \"%s\"\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -2847,7 +2856,7 @@ msgstr ""
 
 #, c-format
 msgid "Directories: %zu, total size: %s"
-msgstr ""
+msgstr "Adresárov: %zu, spolu: %s"
 
 msgid "Sorry, I could not put the job in background"
 msgstr "Ľutujeme, nepodarilo sa presunúť úlohu do pozadia"
@@ -2879,13 +2888,13 @@ msgid "%ld B/s"
 msgstr "%ld B/s"
 
 msgid "New     :"
-msgstr ""
+msgstr "Nový:"
 
 msgid "Existing:"
-msgstr ""
+msgstr "Existujúci:"
 
 msgid "Overwrite this file?"
-msgstr ""
+msgstr "Prepísať tento súbor?"
 
 msgid "A&ppend"
 msgstr "&Pridať"
@@ -2894,19 +2903,19 @@ msgid "&Reget"
 msgstr "&Znovu získať"
 
 msgid "Overwrite all files?"
-msgstr ""
+msgstr "Prepísať všetky súbory?"
 
 msgid "Don't overwrite with &zero length file"
 msgstr ""
 
 msgid "&Older"
-msgstr ""
+msgstr "&Starší"
 
 msgid "S&maller"
-msgstr ""
+msgstr "&Menší"
 
 msgid "&Size differs"
-msgstr ""
+msgstr "Rôzna &veľkosť"
 
 msgid "File exists"
 msgstr "Súbor existuje"
@@ -2997,7 +3006,7 @@ msgstr "&Editácia - F4"
 
 #, c-format
 msgid "Found: %lu"
-msgstr ""
+msgstr "Nájdené: %lu"
 
 msgid "Malformed regular expression"
 msgstr "Chybný regulárny výraz"
@@ -3048,18 +3057,18 @@ msgstr "Skončené"
 #, c-format
 msgid "Finished (ignored %zu directory)"
 msgid_plural "Finished (ignored %zu directories)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Ukončené (Ignorovaný %zu adresár)"
+msgstr[1] "Ukončené (Ignorované %zu adresáre)"
+msgstr[2] "Ukončené (Ignorovaných %zu adresárov)"
+msgstr[3] "Ukončené (Ignorovaných %zu adresárov)"
 
 #, c-format
 msgid "Find File: \"%s\". Content: \"%s\""
-msgstr ""
+msgstr "Vyľadať súbor: \"%s\". Obsahuje: \"%s\""
 
 #, c-format
 msgid "Find File: \"%s\""
-msgstr ""
+msgstr "Vyhľadať súbor: \"%s\""
 
 msgid "Searching"
 msgstr "Hľadá sa"
@@ -3221,10 +3230,10 @@ msgstr "Veľkosť: %s"
 #, c-format
 msgid " (%lu block)"
 msgid_plural " (%lu blocks)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] " (%lu blok)"
+msgstr[1] " (%lu bloky)"
+msgstr[2] " (%lu blokov)"
+msgstr[3] " (%lu blokov)"
 
 #, c-format
 msgid "Owner:      %s/%s"
@@ -3291,7 +3300,7 @@ msgid "&Info"
 msgstr "&Info"
 
 msgid "&Listing format..."
-msgstr ""
+msgstr "&Formát výpisu..."
 
 msgid "&Sort order..."
 msgstr "&Poradie výpisu..."
@@ -3405,7 +3414,7 @@ msgid "Command &history"
 msgstr "&História príkazov"
 
 msgid "Viewed/edited files hi&story"
-msgstr ""
+msgstr "Zobrazená/zmenená hi&stória súborov"
 
 msgid "Di&rectory hotlist"
 msgstr "Hotlist ad&resára"
@@ -3461,10 +3470,10 @@ msgstr "Panely:"
 #, c-format
 msgid "You have %zu opened screen. Quit anyway?"
 msgid_plural "You have %zu opened screens. Quit anyway?"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Máte už %zu otvorenú obrazovku. Aj tak odísť?"
+msgstr[1] "Máte už %zu otvorené obrazovky. Aj tak odísť?"
+msgstr[2] "Máte už %zu otvorených obrazoviek. Aj tak odísť?"
+msgstr[3] "Máte už %zu otvorených obrazoviek. Aj tak odísť?"
 
 msgid "The Midnight Commander"
 msgstr "Midnight Commander"
@@ -3887,7 +3896,7 @@ msgid "Using the ncursesw library\n"
 msgstr "Používa sa knižnica ncursesw\n"
 
 msgid "With builtin Editor and Aspell support\n"
-msgstr ""
+msgstr "So zabudovaným editorom a podporou Aspell\n"
 
 msgid "With builtin Editor\n"
 msgstr "So zabudovaným editorom\n"
@@ -3929,10 +3938,10 @@ msgid "Data types:"
 msgstr "Typy dát:"
 
 msgid "Home directory:"
-msgstr ""
+msgstr "Domovský adresár:"
 
 msgid "Profile root directory:"
-msgstr ""
+msgstr "Koreňový adresár profilu:"
 
 msgid "System data"
 msgstr "Systémové dáta"
@@ -4284,14 +4293,14 @@ msgid "sftp: Password is empty."
 msgstr "sftp: Heslo je prázdne."
 
 msgid "sftp: Failure establishing SSH session"
-msgstr ""
+msgstr "sftp: Chyba pri vytváraní SSH spojenia"
 
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: Na čítanie súboru nie sú prítomné dáta obsluhy súboru"
 
 #, c-format
 msgid "sftp: socket error: %s"
-msgstr ""
+msgstr "sftp: chyba soketu: %s"
 
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"

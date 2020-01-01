@@ -4,6 +4,7 @@
 #
 # Translators:
 # Andrius Burokas, 2017-2018
+# Mindaugas <opensuse.lietuviu.kalba@gmail.com>, 2019
 # Nerijus Baliūnas <nerijus@users.sourceforge.net>, 2011
 # Slava Zanko <slavazanko@gmail.com>, 2011
 # Zygimantus <zygimantus@gmail.com>, 2016
@@ -12,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-12-15 12:59+0300\n"
-"PO-Revision-Date: 2019-03-02 12:55+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2020-01-01 23:01+0400\n"
+"PO-Revision-Date: 2019-12-23 11:49+0000\n"
+"Last-Translator: Mindaugas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: Lithuanian (http://www.transifex.com/mc/mc/language/lt/)\n"
 "Language: lt\n"
 "MIME-Version: 1.0\n"
@@ -490,13 +491,11 @@ msgstr ""
 msgid "The TERM environment variable is unset!\n"
 msgstr "Aplinkos kintamasis TERM nenustatytas!\n"
 
-#, fuzzy
 msgid "Cannot check SIGWINCH pipe"
-msgstr "Nepavyko sukurti %s aplanko"
+msgstr ""
 
-#, fuzzy
 msgid "Cannot create pipe for SIGWINCH"
-msgstr "Nepavyko sukurti %s aplanko"
+msgstr ""
 
 msgid "Cannot configure write end of SIGWINCH pipe"
 msgstr ""
@@ -513,25 +512,25 @@ msgstr ""
 "Patikrinkite TERM aplinkos kintamąjį.\n"
 
 msgid "B"
-msgstr ""
+msgstr "B"
 
 msgid "kB"
-msgstr ""
+msgstr "kB"
 
 msgid "KiB"
-msgstr ""
+msgstr "KiB"
 
 msgid "MB"
-msgstr ""
+msgstr "MB"
 
 msgid "MiB"
-msgstr ""
+msgstr "MiB"
 
 msgid "GB"
-msgstr ""
+msgstr "GB"
 
 msgid "GiB"
-msgstr ""
+msgstr "GiB"
 
 msgid "Cannot create pipe descriptor"
 msgstr ""
@@ -1349,9 +1348,8 @@ msgstr "&Naujas"
 msgid "&Close"
 msgstr "&Uždaryti"
 
-#, fuzzy
 msgid "&History..."
-msgstr "Istorija"
+msgstr ""
 
 msgid "Save &as..."
 msgstr "Įrašyti kaip..."
@@ -2785,10 +2783,10 @@ msgid "%ld B/s"
 msgstr "%ld B/s"
 
 msgid "New     :"
-msgstr ""
+msgstr "Naujas  :"
 
 msgid "Existing:"
-msgstr ""
+msgstr "Esamas :"
 
 msgid "Overwrite this file?"
 msgstr ""

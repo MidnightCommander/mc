@@ -15,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-12-15 12:59+0300\n"
-"PO-Revision-Date: 2019-06-20 16:47+0000\n"
-"Last-Translator: Nicolae Crefelean\n"
+"POT-Creation-Date: 2020-01-01 23:01+0400\n"
+"PO-Revision-Date: 2019-12-16 01:49+0000\n"
+"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Romanian (http://www.transifex.com/mc/mc/language/ro/)\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
@@ -490,13 +490,11 @@ msgstr "Shift"
 msgid "The TERM environment variable is unset!\n"
 msgstr "Variabila de mediu TERM nu este setată!\n"
 
-#, fuzzy
 msgid "Cannot check SIGWINCH pipe"
-msgstr "Nu pot crea fluxul filtrului"
+msgstr ""
 
-#, fuzzy
 msgid "Cannot create pipe for SIGWINCH"
-msgstr "Nu pot crea fluxul filtrului"
+msgstr ""
 
 msgid "Cannot configure write end of SIGWINCH pipe"
 msgstr ""
@@ -1391,9 +1389,8 @@ msgstr "&Nou"
 msgid "&Close"
 msgstr "În&chide"
 
-#, fuzzy
 msgid "&History..."
-msgstr "Istoric"
+msgstr ""
 
 msgid "Save &as..."
 msgstr "Salvează c&a..."
