@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the Midnight Commander package.
 #
 # Translators:
-# Marco Ciampa <ciampix@libero.it>, 1999-2019
+# Marco Ciampa <ciampix@libero.it>, 1999-2020
 # Andreas Troschka <signupbox001@om.it.eu.org>, 2012.
 # Giuliano Natali <diaolin@diaolin.com>, 1998.
 # Slava Zanko <slavazanko@gmail.com>, 2011.
@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
 "POT-Creation-Date: 2020-01-01 23:01+0400\n"
-"PO-Revision-Date: 2019-05-14 08:45+0200\n"
+"PO-Revision-Date: 2020-01-06 12:54+0100\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/mc/language/"
 "it/)\n"
@@ -485,19 +485,17 @@ msgstr "Maiusc"
 msgid "The TERM environment variable is unset!\n"
 msgstr "La variabile TERM non è definita!\n"
 
-#, fuzzy
 msgid "Cannot check SIGWINCH pipe"
-msgstr "Impossibile creare flussi pipe"
+msgstr "Impossibile controllare la pipe SIGWINCH"
 
-#, fuzzy
 msgid "Cannot create pipe for SIGWINCH"
-msgstr "Impossibile creare flussi pipe"
+msgstr "Impossibile creare la pipe SIGWINCH"
 
 msgid "Cannot configure write end of SIGWINCH pipe"
-msgstr ""
+msgstr "Impossibile configurare la fine scrittura della pipe SIGWINCH"
 
 msgid "Cannot configure read end of SIGWINCH pipe"
-msgstr ""
+msgstr "Impossibile configurare la fine lettura della pipe SIGWINCH"
 
 #, c-format
 msgid ""
@@ -1384,9 +1382,8 @@ msgstr "&Nuovo"
 msgid "&Close"
 msgstr "&Chiudi"
 
-#, fuzzy
 msgid "&History..."
-msgstr "Cronologia"
+msgstr "&Cronologia..."
 
 msgid "Save &as..."
 msgstr "Sal&va come..."
@@ -3412,7 +3409,7 @@ msgid "Command &history"
 msgstr "Cro&nologia comandi"
 
 msgid "Viewed/edited files hi&story"
-msgstr ""
+msgstr "Cronologia file vi&sualizzati/modificati "
 
 msgid "Di&rectory hotlist"
 msgstr "&Directory di uso frequente"
