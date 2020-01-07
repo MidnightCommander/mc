@@ -3809,6 +3809,34 @@ mouse_sort_col (WPanel * panel, int x)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static int
+panel_mouse_is_on_item (const WPanel * panel, int y, int x)
+{
+    int last;
+
+    if (y < 0)
+        return (-1);
+
+    last = panel->dir.len - 1;
+    y += panel->top_file;
+
+    if (y > last)
+        return (-1);
+
+    if (panel->list_cols > 1)
+    {
+        int width, lines;
+
+        width = (WIDGET (panel)->cols - 2) / panel->list_cols;
+        lines = panel_lines (panel);
+        y += lines * (x / width);
+    }
+
+    return (y > last ? -1 : y);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 panel_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 {
@@ -3858,39 +3886,21 @@ panel_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 
     case MSG_MOUSE_DRAG:
         {
-            int y, last, my_index;
+            int my_index;
 
-            last = panel->dir.len - 1;
-            y = event->y - 2;
-
-            if (panel->top_file + y > last)
-                my_index = last;
-            else
+            my_index = panel_mouse_is_on_item (panel, event->y - 2, event->x);
+            if (my_index >= 0)
             {
-                my_index = panel->top_file + y;
-
-                if (panel->list_cols > 1)
+                if (my_index != panel->selected)
                 {
-                    int width, lines;
-
-                    width = (w->cols - 2) / panel->list_cols;
-                    lines = panel_lines (panel);
-                    my_index += lines * (event->x / width);
+                    unselect_item (panel);
+                    panel->selected = my_index;
+                    select_item (panel);
                 }
 
-                if (my_index > last)
-                    my_index = last;
+                /* This one is new */
+                mark_if_marking (panel, event);
             }
-
-            if (my_index != panel->selected)
-            {
-                unselect_item (panel);
-                panel->selected = my_index;
-                select_item (panel);
-            }
-
-            /* This one is new */
-            mark_if_marking (panel, event);
         }
         break;
 
@@ -3898,16 +3908,9 @@ panel_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
         break;
 
     case MSG_MOUSE_CLICK:
-        if ((event->count & GPM_DOUBLE) != 0 && (event->buttons & GPM_B_LEFT) != 0)
-        {
-            int y, lines;
-
-            y = event->y - 2;
-            lines = panel_lines (panel);
-
-            if (y >= 0 && y < lines)
-                do_enter (panel);
-        }
+        if ((event->count & GPM_DOUBLE) != 0 && (event->buttons & GPM_B_LEFT) != 0 &&
+            panel_mouse_is_on_item (panel, event->y - 2, event->x) >= 0)
+            do_enter (panel);
         break;
 
     case MSG_MOUSE_MOVE:
