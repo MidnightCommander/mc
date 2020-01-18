@@ -9,7 +9,7 @@
 # Fabian Affolter <fab@fedoraproject.org>, 2012-2013
 # Karsten <waldstadt@web.de>, 2016
 # Larson März <larson@protonmail.ch>, 2016
-# Mr.Update, 2019
+# Mr.Update, 2019-2020
 # Slow Rider, 2015,2018
 # Slava Zanko <slavazanko@gmail.com>, 2011
 # username <my.somewhat.lengthy.loginname@gmail.com>, 2011
@@ -19,9 +19,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-01-01 23:01+0400\n"
-"PO-Revision-Date: 2019-12-16 01:49+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2020-01-19 01:45+0400\n"
+"PO-Revision-Date: 2020-01-05 13:48+0000\n"
+"Last-Translator: Mr.Update\n"
 "Language-Team: German (http://www.transifex.com/mc/mc/language/de/)\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -500,7 +500,7 @@ msgid "The TERM environment variable is unset!\n"
 msgstr "Die TERM-Variable ist nicht gesetzt!\n"
 
 msgid "Cannot check SIGWINCH pipe"
-msgstr ""
+msgstr "Kann SIGWINCH-Pipe nicht überprüfen"
 
 msgid "Cannot create pipe for SIGWINCH"
 msgstr "Kann Pipe für SIGWINCH nicht erstellen"

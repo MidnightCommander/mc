@@ -6,7 +6,7 @@
 # Hüsamettin Ertürk <hsmertk@gmail.com>, 2016
 # Muhammet Kara <muhammetk@gmail.com>, 2014
 # Muhammet Kara <muhammetk@gmail.com>, 2014
-# Serdar Sağlam <teknomobil@msn.com>, 2019
+# Serdar Sağlam <teknomobil@msn.com>, 2019-2020
 # Slava Zanko <slavazanko@gmail.com>, 2011
 # yusuf <yusuf.aydemir@pisilinux.org>, 2015-2016
 # yusuf <yusuf.aydemir@pisilinux.org>, 2016-2017
@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-01-01 23:01+0400\n"
-"PO-Revision-Date: 2019-12-16 01:49+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2020-01-19 01:45+0400\n"
+"PO-Revision-Date: 2020-01-18 12:57+0000\n"
+"Last-Translator: Serdar Sağlam <teknomobil@msn.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/mc/mc/language/tr/)\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
@@ -3404,7 +3404,7 @@ msgid "Command &history"
 msgstr "Komut Geçmişi"
 
 msgid "Viewed/edited files hi&story"
-msgstr ""
+msgstr "Görüntülenen/düzenlenen dosya &geçmişi"
 
 msgid "Di&rectory hotlist"
 msgstr "Dizin listesi"
