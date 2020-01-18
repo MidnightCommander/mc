@@ -1429,6 +1429,8 @@ free_keymap_defs (void)
         g_array_free (panel_keymap, TRUE);
     if (dialog_keymap != NULL)
         g_array_free (dialog_keymap, TRUE);
+    if (menu_keymap != NULL)
+        g_array_free (menu_keymap, TRUE);
     if (input_keymap != NULL)
         g_array_free (input_keymap, TRUE);
     if (listbox_keymap != NULL)
