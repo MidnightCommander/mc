@@ -147,7 +147,7 @@ static panels_layout_t old_layout;
 static int old_output_lines;
 
 /* Internal variables */
-static int equal_split;
+static gboolean equal_split;
 static int _output_lines;
 
 static int height;
