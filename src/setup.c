@@ -844,8 +844,8 @@ load_setup_get_keymap_profile_config (gboolean load_from_file)
         load_setup_init_config_from_file (&keymap_config, fname, TRUE);
         goto done;
     }
-    g_free (fname);
-    fname = NULL;
+
+    MC_PTR_FREE (fname);
 
     /* 5) main config; [Midnight Commander] -> keymap */
     fname2 = mc_config_get_string (mc_global.main_config, CONFIG_APP_SECTION, "keymap", NULL);
