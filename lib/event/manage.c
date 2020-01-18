@@ -2,7 +2,7 @@
    Handle any events in application.
    Manage events: add, delete, destroy, search
 
-   Copyright (C) 2011-2019
+   Copyright (C) 2011-2020
    Free Software Foundation, Inc.
 
    Written by:

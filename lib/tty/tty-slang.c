@@ -2,7 +2,7 @@
    Interface to the terminal controlling library.
    Slang wrapper.
 
-   Copyright (C) 2005-2019
+   Copyright (C) 2005-2020
    Free Software Foundation, Inc.
 
    Written by:

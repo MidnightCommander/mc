@@ -1,7 +1,7 @@
 /* Virtual File System: SFTP file system.
    The VFS subclass functions
 
-   Copyright (C) 2011-2019
+   Copyright (C) 2011-2020
    Free Software Foundation, Inc.
 
    Written by:

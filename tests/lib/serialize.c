@@ -1,7 +1,7 @@
 /*
    lib - common serialize/deserialize functions
 
-   Copyright (C) 2011-2019
+   Copyright (C) 2011-2020
    Free Software Foundation, Inc.
 
    Written by:

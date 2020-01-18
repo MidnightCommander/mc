@@ -2,13 +2,13 @@
    Virtual File System: FISH implementation for transfering files over
    shell connections.
 
-   Copyright (C) 1998-2019
+   Copyright (C) 1998-2020
    Free Software Foundation, Inc.
 
    Written by:
    Pavel Machek, 1998
    Michal Svec, 2000
-   Andrew Borodin <aborodin@vmail.ru>, 2010
+   Andrew Borodin <aborodin@vmail.ru>, 2010-2019
    Slava Zanko <slavazanko@gmail.com>, 2010, 2013
    Ilia Maslakov <il.smind@gmail.com>, 2010
 
