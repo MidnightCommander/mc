@@ -143,7 +143,7 @@ static struct
 
 /* These variables are used to avoid updating the information unless */
 /* we need it */
-static panels_layout_t old_layout;
+static panels_layout_t old_panels_layout;
 static int old_output_lines;
 
 /* Internal variables */
@@ -644,7 +644,7 @@ layout_box (void)
 {
     WDialog *layout_dlg;
 
-    old_layout = panels_layout;
+    old_panels_layout = panels_layout;
     old_output_lines = output_lines;
     layout_dlg = layout_dlg_create ();
 
@@ -661,7 +661,7 @@ layout_box (void)
     else
     {
         /* restore layout */
-        panels_layout = old_layout;
+        panels_layout = old_panels_layout;
         output_lines = old_output_lines;
         check_split (&panels_layout);   /* FIXME: is it really needed? */
     }
