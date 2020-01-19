@@ -367,7 +367,7 @@ static char *panel_filename_scroll_right_char = NULL;
 /* Panel that selection started */
 static WPanel *mouse_mark_panel = NULL;
 
-static int mouse_marking = 0;
+static gboolean mouse_marking = FALSE;
 static int state_mark = 0;
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1255,7 +1255,6 @@ static void
 show_dir (const WPanel * panel)
 {
     const Widget *w = CONST_WIDGET (panel);
-
     gchar *tmp;
 
     set_colors (panel);
@@ -1620,6 +1619,7 @@ static const char *
 parse_panel_size (WPanel * panel, const char *format, gboolean isstatus)
 {
     panel_display_t frame = frame_half;
+
     format = skip_separators (format);
 
     if (strncmp (format, "full", 4) == 0)
@@ -2041,17 +2041,19 @@ unselect_item (WPanel * panel)
 static void
 panel_select_ext_cmd (void)
 {
-    gboolean do_select = !selection (current_panel)->f.marked;
-    char *filename = selection (current_panel)->fname;
+    char *filename;
+    gboolean do_select;
     char *reg_exp, *cur_file_ext;
     mc_search_t *search;
     int i;
 
+    filename = selection (current_panel)->fname;
     if (filename == NULL)
         return;
 
-    cur_file_ext = strutils_regex_escape (extension (filename));
+    do_select = !selection (current_panel)->f.marked;
 
+    cur_file_ext = strutils_regex_escape (extension (filename));
     if (cur_file_ext[0] != '\0')
         reg_exp = g_strconcat ("^.*\\.", cur_file_ext, "$", (char *) NULL);
     else
@@ -2073,7 +2075,7 @@ panel_select_ext_cmd (void)
         if (!mc_search_run (search, file_entry->fname, 0, file_entry->fnamelen, NULL))
             continue;
 
-        do_file_mark (current_panel, i, do_select);
+        do_file_mark (current_panel, i, do_select ? 1 : 0);
     }
 
     mc_search_free (search);
@@ -2236,7 +2238,7 @@ prev_page (WPanel * panel)
 {
     int items;
 
-    if (!panel->selected && !panel->top_file)
+    if (panel->selected == 0 && panel->top_file == 0)
         return;
 
     unselect_item (panel);
@@ -2377,7 +2379,9 @@ move_home (WPanel * panel)
 
     if (panels_options.torben_fj_mode)
     {
-        int middle_pos = panel->top_file + panel_items (panel) / 2;
+        int middle_pos;
+
+        middle_pos = panel->top_file + panel_items (panel) / 2;
 
         if (panel->selected > middle_pos)
         {
@@ -2438,6 +2442,7 @@ static void
 do_mark_file (WPanel * panel, mark_act_t do_move)
 {
     do_file_mark (panel, panel->selected, selection (panel)->f.marked ? 0 : 1);
+
     if ((panels_options.mark_moves_down && do_move == MARK_DOWN) || do_move == MARK_FORCE_DOWN)
         move_down (panel);
     else if (do_move == MARK_FORCE_UP)
@@ -2564,7 +2569,7 @@ panel_select_unselect_files (WPanel * panel, const char *title, const char *hist
             continue;
 
         if (mc_search_run (search, panel->dir.list[i].fname, 0, panel->dir.list[i].fnamelen, NULL))
-            do_file_mark (panel, i, do_select);
+            do_file_mark (panel, i, do_select ? 1 : 0);
     }
 
     mc_search_free (search);
@@ -2608,7 +2613,7 @@ panel_select_invert_files (WPanel * panel)
         file_entry_t *file = &panel->dir.list[i];
 
         if (!panels_options.reverse_files_only || !S_ISDIR (file->st.st_mode))
-            do_file_mark (panel, i, !file->f.marked);
+            do_file_mark (panel, i, file->f.marked ? 0 : 1);
     }
 }
 
@@ -2662,7 +2667,7 @@ do_search (WPanel * panel, int c_code)
                 {
                     memcpy (panel->search_buffer + l, panel->search_char, panel->search_chpoint);
                     l += panel->search_chpoint;
-                    *(panel->search_buffer + l) = '\0';
+                    panel->search_buffer[l] = '\0';
                     panel->search_chpoint = 0;
                 }
             }
@@ -2734,7 +2739,7 @@ start_search (WPanel * panel)
 {
     if (panel->searching)
     {
-        if (panel->selected + 1 == panel->dir.len)
+        if (panel->selected == panel->dir.len - 1)
             panel->selected = 0;
         else
             move_down (panel);
@@ -3156,7 +3161,9 @@ panel_content_scroll_right (WPanel * panel)
 static void
 panel_set_sort_type_by_id (WPanel * panel, const char *name)
 {
-    if (strcmp (panel->sort_field->id, name) != 0)
+    if (strcmp (panel->sort_field->id, name) == 0)
+        panel->sort_info.reverse = !panel->sort_info.reverse;
+    else
     {
         const panel_field_t *sort_order;
 
@@ -3166,8 +3173,6 @@ panel_set_sort_type_by_id (WPanel * panel, const char *name)
 
         panel->sort_field = sort_order;
     }
-    else
-        panel->sort_info.reverse = !panel->sort_info.reverse;
 
     panel_set_sort_order (panel, panel->sort_field);
 }
@@ -3204,8 +3209,7 @@ get_parent_dir_name (const vfs_path_t * cwd_vpath, const vfs_path_t * lwd_vpath)
 
         p = strrchr (lwd, PATH_SEP);
 
-        if ((p != NULL)
-            && (strncmp (cwd, lwd, (size_t) (p - lwd)) == 0)
+        if (p != NULL && strncmp (cwd, lwd, (size_t) (p - lwd)) == 0
             && (clen == (size_t) (p - lwd) || (p == lwd && IS_PATH_SEP (cwd[0]) && cwd[1] == '\0')))
             return (p + 1);
 
@@ -3725,9 +3729,9 @@ mouse_set_mark (WPanel * panel)
 {
     if (mouse_mark_panel == panel)
     {
-        if (mouse_marking && !(selection (panel)->f.marked))
+        if (mouse_marking && !selection (panel)->f.marked)
             do_mark_file (panel, MARK_DONT_MOVE);
-        else if (!mouse_marking && (selection (panel)->f.marked))
+        else if (!mouse_marking && selection (panel)->f.marked)
             do_mark_file (panel, MARK_DONT_MOVE);
     }
 }
@@ -3759,11 +3763,11 @@ static void
 mouse_sort_col (WPanel * panel, int x)
 {
     int i = 0;
-    GSList *format = panel->format;
+    GSList *format;
     const char *lc_sort_name = NULL;
     panel_field_t *col_sort_format = NULL;
 
-    for (; format != NULL; format = g_slist_next (format))
+    for (format = panel->format; format != NULL; format = g_slist_next (format))
     {
         format_item_t *fi = (format_item_t *) format->data;
 
@@ -3784,27 +3788,24 @@ mouse_sort_col (WPanel * panel, int x)
         const char *title;
 
         title = panel_get_title_without_hotkey (panel_fields[i].title_hotkey);
-        if (strcmp (title, lc_sort_name) == 0 && panel_fields[i].sort_routine != NULL)
+        if (panel_fields[i].sort_routine != NULL && strcmp (title, lc_sort_name) == 0)
         {
             col_sort_format = &panel_fields[i];
             break;
         }
     }
 
-    if (col_sort_format == NULL)
-        return;
+    if (col_sort_format != NULL)
+    {
+        if (panel->sort_field == col_sort_format)
+            /* reverse the sort if clicked column is already the sorted column */
+            panel->sort_info.reverse = !panel->sort_info.reverse;
+        else
+            /* new sort is forced to be ascending */
+            panel->sort_info.reverse = FALSE;
 
-    if (panel->sort_field == col_sort_format)
-    {
-        /* reverse the sort if clicked column is already the sorted column */
-        panel->sort_info.reverse = !panel->sort_info.reverse;
+        panel_set_sort_order (panel, col_sort_format);
     }
-    else
-    {
-        /* new sort is forced to be ascending */
-        panel->sort_info.reverse = FALSE;
-    }
-    panel_set_sort_order (panel, col_sort_format);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -4537,17 +4538,17 @@ select_item (WPanel * panel)
 void
 unmark_files (WPanel * panel)
 {
-    int i;
+    if (panel->marked != 0)
+    {
+        int i;
 
-    if (panel->marked == 0)
-        return;
+        for (i = 0; i < panel->dir.len; i++)
+            file_mark (panel, i, 0);
 
-    for (i = 0; i < panel->dir.len; i++)
-        file_mark (panel, i, 0);
-
-    panel->dirs_marked = 0;
-    panel->marked = 0;
-    panel->total = 0;
+        panel->dirs_marked = 0;
+        panel->marked = 0;
+        panel->total = 0;
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
