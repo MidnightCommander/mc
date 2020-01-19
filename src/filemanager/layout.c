@@ -125,6 +125,17 @@ int ok_to_refresh = 1;
 
 /*** file scope type declarations ****************************************************************/
 
+typedef struct
+{
+    gboolean menubar_visible;
+    gboolean command_prompt;
+    gboolean keybar_visible;
+    gboolean message_visible;
+    gboolean xterm_title;
+    gboolean free_space;
+    int output_lines;
+} layout_t;
+
 /*** file scope variables ************************************************************************/
 
 static struct
@@ -141,12 +152,9 @@ static struct
     /* *INDENT-ON* */
 };
 
-/* These variables are used to avoid updating the information unless */
-/* we need it */
+static layout_t old_layout;
 static panels_layout_t old_panels_layout;
-static int old_output_lines;
 
-/* Internal variables */
 static gboolean equal_split;
 static int _output_lines;
 
@@ -317,13 +325,13 @@ layout_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
            update everything */
         dlg_default_repaint (h);
 
-        old_output_lines = -1;
+        old_layout.output_lines = -1;
 
         update_split (h);
 
-        if (old_output_lines != _output_lines)
+        if (old_layout.output_lines != _output_lines)
         {
-            old_output_lines = _output_lines;
+            old_layout.output_lines = _output_lines;
             tty_setcolor (mc_global.tty.console_flag != '\0' ? COLOR_NORMAL : DISABLED_COLOR);
             widget_gotoyx (h, 9, 5);
             tty_print_string (output_lines_label);
@@ -363,9 +371,9 @@ layout_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
                 }
             }
 
-            if (old_output_lines != _output_lines)
+            if (old_layout.output_lines != _output_lines)
             {
-                old_output_lines = _output_lines;
+                old_layout.output_lines = _output_lines;
                 tty_setcolor (mc_global.tty.console_flag != '\0' ? COLOR_NORMAL : DISABLED_COLOR);
                 widget_gotoyx (h, 9, 5 + 3 + output_lines_label_len);
                 tty_printf ("%02d", _output_lines);
@@ -433,6 +441,33 @@ layout_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
             return MSG_HANDLED;
         }
 
+        {
+            gboolean ok = TRUE;
+
+            if (sender == WIDGET (check_options[1].widget))
+                menubar_visible = check_options[1].widget->state;
+            else if (sender == WIDGET (check_options[2].widget))
+                command_prompt = check_options[2].widget->state;
+            else if (sender == WIDGET (check_options[3].widget))
+                mc_global.keybar_visible = check_options[3].widget->state;
+            else if (sender == WIDGET (check_options[4].widget))
+                mc_global.message_visible = check_options[4].widget->state;
+            else if (sender == WIDGET (check_options[5].widget))
+                xterm_title = check_options[5].widget->state;
+            else if (sender == WIDGET (check_options[6].widget))
+                free_space = check_options[6].widget->state;
+            else
+                ok = FALSE;
+
+            if (ok)
+            {
+                update_split (h);
+                layout_change ();
+                do_refresh ();
+                return MSG_HANDLED;
+            }
+        }
+
         return MSG_NOT_HANDLED;
 
     default:
@@ -463,10 +498,6 @@ layout_dlg_create (void)
     const char *cancel_button = N_("&Cancel");
 
     output_lines_label = _("Output lines:");
-
-    /* save old params */
-    old_output_lines = -1;
-    _output_lines = output_lines;
 
 #ifdef ENABLE_NLS
     {
@@ -623,6 +654,40 @@ restore_into_right_dir_panel (int idx, gboolean last_was_panel, int y, int x, in
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static void
+layout_save (void)
+{
+    old_layout.menubar_visible = menubar_visible;
+    old_layout.command_prompt = command_prompt;
+    old_layout.keybar_visible = mc_global.keybar_visible;
+    old_layout.message_visible = mc_global.message_visible;
+    old_layout.xterm_title = xterm_title;
+    old_layout.free_space = free_space;
+    old_layout.output_lines = -1;
+
+    _output_lines = output_lines;
+
+    old_panels_layout = panels_layout;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+layout_restore (void)
+{
+    menubar_visible = old_layout.menubar_visible;
+    command_prompt = old_layout.command_prompt;
+    mc_global.keybar_visible = old_layout.keybar_visible;
+    mc_global.message_visible = old_layout.message_visible;
+    xterm_title = old_layout.xterm_title;
+    free_space = old_layout.free_space;
+    output_lines = old_layout.output_lines;
+
+    panels_layout = old_panels_layout;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -644,8 +709,8 @@ layout_box (void)
 {
     WDialog *layout_dlg;
 
-    old_panels_layout = panels_layout;
-    old_output_lines = output_lines;
+    layout_save ();
+
     layout_dlg = layout_dlg_create ();
 
     if (dlg_run (layout_dlg) == B_ENTER)
@@ -659,12 +724,7 @@ layout_box (void)
         output_lines = _output_lines;
     }
     else
-    {
-        /* restore layout */
-        panels_layout = old_panels_layout;
-        output_lines = old_output_lines;
-        check_split (&panels_layout);   /* FIXME: is it really needed? */
-    }
+        layout_restore ();
 
     dlg_destroy (layout_dlg);
     layout_change ();
