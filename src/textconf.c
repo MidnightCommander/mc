@@ -34,6 +34,7 @@
 #include "lib/fileloc.h"
 #include "lib/mcconfig.h"
 #include "lib/util.h"           /* mc_get_profile_root() */
+#include "lib/tty/tty.h"        /* S-Lang or ncurses version */
 
 #include "src/textconf.h"
 
@@ -82,40 +83,40 @@ static const char *const features[] = {
 
 #ifdef USE_INTERNAL_EDIT
 #ifdef HAVE_ASPELL
-    N_("With builtin Editor and Aspell support\n"),
+    N_("With builtin Editor and Aspell support"),
 #else
-    N_("With builtin Editor\n"),
+    N_("With builtin Editor"),
 #endif /* HAVE_ASPELL */
 #endif /* USE_INTERNAL_EDIT */
 
 #ifdef ENABLE_SUBSHELL
 #ifdef SUBSHELL_OPTIONAL
-    N_("With optional subshell support\n"),
+    N_("With optional subshell support"),
 #else
-    N_("With subshell support as default\n"),
+    N_("With subshell support as default"),
 #endif
 #endif /* !ENABLE_SUBSHELL */
 
 #ifdef ENABLE_BACKGROUND
-    N_("With support for background operations\n"),
+    N_("With support for background operations"),
 #endif
 
 #ifdef HAVE_LIBGPM
-    N_("With mouse support on xterm and Linux console\n"),
+    N_("With mouse support on xterm and Linux console"),
 #else
-    N_("With mouse support on xterm\n"),
+    N_("With mouse support on xterm"),
 #endif
 
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
-    N_("With support for X11 events\n"),
+    N_("With support for X11 events"),
 #endif
 
 #ifdef ENABLE_NLS
-    N_("With internationalization support\n"),
+    N_("With internationalization support"),
 #endif
 
 #ifdef HAVE_CHARSET
-    N_("With multiple codepages support\n"),
+    N_("With multiple codepages support"),
 #endif
 
     NULL
@@ -144,29 +145,29 @@ show_version (void)
 #ifdef NCURSES_VERSION
     printf (_("Built with ncurses %s\n"), NCURSES_VERSION);
 #else
-    printf ("%s\n", _("Built with ncurses (unknown version)"));
+    puts (_("Built with ncurses (unknown version)"));
 #endif /* !NCURSES_VERSION */
 #elif defined(USE_NCURSESW)
 #ifdef NCURSES_VERSION
     printf (_("Built with ncursesw %s\n"), NCURSES_VERSION);
 #else
-    printf ("%s\n", _("Built with ncursesw (unknown version)"));
+    puts (_("Built with ncursesw (unknown version)"));
 #endif /* !NCURSES_VERSION */
 #else
 #error "Cannot compile mc without S-Lang or ncurses"
 #endif /* !HAVE_SLANG && !USE_NCURSES */
 
     for (i = 0; features[i] != NULL; i++)
-        printf ("%s", _(features[i]));
+        puts (_(features[i]));
 
 #ifdef ENABLE_VFS
-    printf (_("Virtual File Systems:"));
+    puts (_("Virtual File Systems:"));
     for (i = 0; vfs_supported[i] != NULL; i++)
         printf ("%s %s", i == 0 ? "" : ",", _(vfs_supported[i]));
-    printf ("\n");
+    (void) puts ("");
 #endif /* ENABLE_VFS */
 
-    (void) printf (_("Data types:"));
+    (void) puts (_("Data types:"));
 #define TYPE_INFO(T) \
     (void)printf(" %s: %d;", #T, (int) (CHAR_BIT * sizeof(T)))
     TYPE_INFO (char);
@@ -176,7 +177,7 @@ show_version (void)
     TYPE_INFO (size_t);
     TYPE_INFO (off_t);
 #undef TYPE_INFO
-    (void) printf ("\n");
+    (void) puts ("");
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -232,7 +233,6 @@ show_datadirs_extended (void)
     PRINTF ("mcedit external macros:", mc_config_get_data_path (), MC_EXTMACRO_FILE ".*");
 #endif
     PRINTF_SECTION2 (_("Cache directory:"), mc_config_get_cache_path ());
-
 }
 
 #undef PRINTF
@@ -245,7 +245,7 @@ show_datadirs_extended (void)
 void
 show_configure_options (void)
 {
-    (void) printf ("%s\n", MC_CONFIGURE_ARGS);
+    (void) puts (MC_CONFIGURE_ARGS);
 }
 #endif
 
