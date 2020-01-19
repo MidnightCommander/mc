@@ -79,15 +79,6 @@ static const char *const vfs_supported[] = {
 #endif /* ENABLE_VFS */
 
 static const char *const features[] = {
-#ifdef HAVE_SLANG
-    N_("Using the S-Lang library with terminfo database\n"),
-#elif defined(USE_NCURSES)
-    N_("Using the ncurses library\n"),
-#elif defined(USE_NCURSESW)
-    N_("Using the ncursesw library\n"),
-#else
-#error "Cannot compile mc without S-Lang or ncurses"
-#endif /* !HAVE_SLANG && !USE_NCURSES */
 
 #ifdef USE_INTERNAL_EDIT
 #ifdef HAVE_ASPELL
@@ -146,6 +137,24 @@ show_version (void)
 
     printf (_("Built with GLib %d.%d.%d\n"),
             GLIB_MAJOR_VERSION, GLIB_MINOR_VERSION, GLIB_MICRO_VERSION);
+
+#ifdef HAVE_SLANG
+    printf (_("Built with S-Lang %s with terminfo database\n"), SLANG_VERSION_STRING);
+#elif defined(USE_NCURSES)
+#ifdef NCURSES_VERSION
+    printf (_("Built with ncurses %s\n"), NCURSES_VERSION);
+#else
+    printf ("%s\n", _("Built with ncurses (unknown version)"));
+#endif /* !NCURSES_VERSION */
+#elif defined(USE_NCURSESW)
+#ifdef NCURSES_VERSION
+    printf (_("Built with ncursesw %s\n"), NCURSES_VERSION);
+#else
+    printf ("%s\n", _("Built with ncursesw (unknown version)"));
+#endif /* !NCURSES_VERSION */
+#else
+#error "Cannot compile mc without S-Lang or ncurses"
+#endif /* !HAVE_SLANG && !USE_NCURSES */
 
     for (i = 0; features[i] != NULL; i++)
         printf ("%s", _(features[i]));
