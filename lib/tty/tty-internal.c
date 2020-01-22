@@ -45,6 +45,16 @@ int sigwinch_pipe[2];
 
 /*** file scope macro definitions ****************************************************************/
 
+/* some OSes don't provide O_CLOEXEC */
+#if !defined O_CLOEXEC && defined O_NOINHERIT
+/* Mingw spells it 'O_NOINHERIT'.  */
+#define O_CLOEXEC O_NOINHERIT
+#endif
+
+#ifndef O_CLOEXEC
+#define O_CLOEXEC 0
+#endif
+
 /*** global variables ****************************************************************************/
 
 /*** file scope type declarations ****************************************************************/
