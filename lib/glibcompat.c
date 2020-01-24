@@ -91,7 +91,7 @@ g_list_free_full (GList * list, GDestroyNotify free_func)
 
 #endif /* ! GLIB_CHECK_VERSION (2, 28, 0) */
 
-#if ! GLIB_CHECK_VERSION (2, 64, 0)
+#if ! GLIB_CHECK_VERSION (2, 63, 3)
 /**
  * g_clear_slist: (skip)
  * @slist_ptr: (not nullable): a #GSList return location
@@ -154,7 +154,7 @@ g_clear_list (GList ** list_ptr, GDestroyNotify destroy)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#endif /* ! GLIB_CHECK_VERSION (2, 64, 0) */
+#endif /* ! GLIB_CHECK_VERSION (2, 63, 3) */
 
 #if ! GLIB_CHECK_VERSION (2, 32, 0)
 /**
