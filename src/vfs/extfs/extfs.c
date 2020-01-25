@@ -247,8 +247,6 @@ extfs_find_entry_int (struct vfs_s_inode *dir, const char *name, GSList * list, 
 
     while ((pent != NULL) && (c != '\0') && (*p != '\0'))
     {
-        GList *pl;
-
         q = strchr (p, PATH_SEP);
         if (q == NULL)
             q = (char *) name_end;
@@ -256,36 +254,43 @@ extfs_find_entry_int (struct vfs_s_inode *dir, const char *name, GSList * list, 
         c = *q;
         *q = '\0';
 
-        pent = extfs_resolve_symlinks_int (pent, list);
-        if (pent == NULL)
+        if (DIR_IS_DOTDOT (p))
+            pent = pent->dir->ent;
+        else
         {
-            *q = c;
-            return NULL;
-        }
+            GList *pl;
 
-        if (!S_ISDIR (pent->ino->st.st_mode))
-        {
-            *q = c;
-            notadir = TRUE;
-            return NULL;
-        }
+            pent = extfs_resolve_symlinks_int (pent, list);
+            if (pent == NULL)
+            {
+                *q = c;
+                return NULL;
+            }
 
-        pdir = pent;
-        pl = g_queue_find_custom (pent->ino->subdir, p, vfs_s_entry_compare);
-        pent = pl != NULL ? VFS_ENTRY (pl->data) : NULL;
-        if (pent != NULL && q + 1 > name_end)
-        {
-            /* Hack: I keep the original semanthic unless q+1 would break in the strchr */
-            *q = c;
-            notadir = !S_ISDIR (pent->ino->st.st_mode);
-            return pent;
-        }
+            if (!S_ISDIR (pent->ino->st.st_mode))
+            {
+                *q = c;
+                notadir = TRUE;
+                return NULL;
+            }
 
-        /* When we load archive, we create automagically non-existent directories */
-        if (pent == NULL && (flags & FL_MKDIR) != 0)
-            pent = extfs_generate_entry (super, p, pdir->ino, S_IFDIR | 0777);
-        if (pent == NULL && (flags & FL_MKFILE) != 0)
-            pent = extfs_generate_entry (super, p, pdir->ino, S_IFREG | 0666);
+            pdir = pent;
+            pl = g_queue_find_custom (pent->ino->subdir, p, vfs_s_entry_compare);
+            pent = pl != NULL ? VFS_ENTRY (pl->data) : NULL;
+            if (pent != NULL && q + 1 > name_end)
+            {
+                /* Hack: I keep the original semanthic unless q+1 would break in the strchr */
+                *q = c;
+                notadir = !S_ISDIR (pent->ino->st.st_mode);
+                return pent;
+            }
+
+            /* When we load archive, we create automagically non-existent directories */
+            if (pent == NULL && (flags & FL_MKDIR) != 0)
+                pent = extfs_generate_entry (super, p, pdir->ino, S_IFDIR | 0777);
+            if (pent == NULL && (flags & FL_MKFILE) != 0)
+                pent = extfs_generate_entry (super, p, pdir->ino, S_IFREG | 0666);
+        }
 
         /* Next iteration */
         *q = c;
