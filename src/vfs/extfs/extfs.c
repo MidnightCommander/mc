@@ -558,11 +558,8 @@ extfs_read_archive (FILE * extfsd, struct extfs_super_t *current_archive)
                     st.st_atime = hstat.st_atime;
                     st.st_ctime = hstat.st_ctime;
 
-                    if (current_link_name == NULL || !S_ISLNK (hstat.st_mode))
-                    {
-                        if (S_ISLNK (hstat.st_mode))
-                            st.st_mode &= ~S_IFLNK;     /* You *DON'T* want to do this always */
-                    }
+                    if (current_link_name == NULL && S_ISLNK (hstat.st_mode))
+                        st.st_mode &= ~S_IFLNK; /* You *DON'T* want to do this always */
 
                     inode = vfs_s_new_inode (super->me, super, &st);
                     inode->ent = entry;
