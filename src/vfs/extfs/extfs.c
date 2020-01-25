@@ -570,7 +570,7 @@ extfs_read_archive (FILE * extfsd, struct extfs_super_t *current_archive)
 
                     if (current_link_name != NULL && S_ISLNK (hstat.st_mode))
                     {
-                        VFS_INODE (inode)->linkname = current_link_name;
+                        inode->linkname = current_link_name;
                         current_link_name = NULL;
                     }
                 }
