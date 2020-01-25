@@ -68,6 +68,9 @@ sub mcdebfs_list
 			}
 			
 			$path=$_[$pathindex++];
+			# remove leading ./
+			$path=~s/^\.\///;
+			next if ($path eq '');
 			$arrow=$_[$pathindex++];
 			$link=$_[$pathindex++];
 			$link2=$_[$pathindex++];
