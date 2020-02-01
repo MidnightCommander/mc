@@ -166,6 +166,7 @@ typedef enum
 typedef struct
 {
     mc_run_mode_t mc_run_mode;
+    gboolean run_from_parent_mc;
     /* global timer */
     mc_timer_t *timer;
     /* Used so that widgets know if they are being destroyed or shut down */
