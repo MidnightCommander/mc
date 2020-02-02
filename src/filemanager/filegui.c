@@ -90,7 +90,7 @@
 #define STRUCT_STATVFS struct statvfs
 #define STATFS statvfs
 
-#if __linux__ && (__GLIBC__ || __UCLIBC__)
+#if defined __linux__ && (defined __GLIBC__ || defined __UCLIBC__)
 #include <sys/utsname.h>
 #include <sys/statfs.h>
 #define STAT_STATFS2_BSIZE 1
@@ -269,7 +269,7 @@ static struct
 static int
 statvfs_works (void)
 {
-#if ! (__linux__ && (__GLIBC__ || __UCLIBC__))
+#if ! (defined __linux__ && (defined __GLIBC__ || defined __UCLIBC__))
     return 1;
 #else
     static int statvfs_works_cache = -1;

@@ -290,7 +290,7 @@ me_remote (char const *fs_name, char const *fs_type)
 #define PROPAGATE_TOP_BIT(x) ((x) | ~ (EXTRACT_TOP_BIT (x) - 1))
 
 #ifdef STAT_STATVFS
-#if ! (__linux__ && (__GLIBC__ || __UCLIBC__))
+#if ! (defined __linux__ && (defined __GLIBC__ || defined __UCLIBC__))
 /* The FRSIZE fallback is not required in this case.  */
 #undef STAT_STATFS2_FRSIZE
 #else
@@ -344,7 +344,7 @@ static GSList *mc_mount_list = NULL;
 static int
 statvfs_works (void)
 {
-#if ! (__linux__ && (__GLIBC__ || __UCLIBC__))
+#if ! (defined __linux__ && (defined __GLIBC__ || defined __UCLIBC__))
     return 1;
 #else
     static int statvfs_works_cache = -1;
