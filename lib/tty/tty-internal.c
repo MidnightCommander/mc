@@ -36,6 +36,8 @@
 
 #include "lib/global.h"
 
+#include <glib-unix.h>
+
 #include "tty-internal.h"
 
 /*** global variables ****************************************************************************/
@@ -44,16 +46,6 @@
 int sigwinch_pipe[2];
 
 /*** file scope macro definitions ****************************************************************/
-
-/* some OSes don't provide O_CLOEXEC */
-#if !defined O_CLOEXEC && defined O_NOINHERIT
-/* Mingw spells it 'O_NOINHERIT'.  */
-#define O_CLOEXEC O_NOINHERIT
-#endif
-
-#ifndef O_CLOEXEC
-#define O_CLOEXEC 0
-#endif
 
 /*** global variables ****************************************************************************/
 
@@ -72,11 +64,13 @@ int sigwinch_pipe[2];
 void
 tty_create_winch_pipe (void)
 {
-    int fd_flags;
+    GError *mcerror = NULL;
 
-    if (pipe (sigwinch_pipe) == -1)
+    if (!g_unix_open_pipe (sigwinch_pipe, FD_CLOEXEC, &mcerror))
     {
-        perror (_("Cannot create pipe for SIGWINCH"));
+        fprintf (stderr, _("\nCannot create pipe for SIGWINCH: %s (%d)\n"),
+                 mcerror->message, mcerror->code);
+        g_error_free (mcerror);
         exit (EXIT_FAILURE);
     }
 
@@ -85,28 +79,19 @@ tty_create_winch_pipe (void)
      * from the pipe to allow the write to complete..
      * Therefore, use nonblocking I/O.
      */
-
-    fd_flags = fcntl (sigwinch_pipe[0], F_GETFL, NULL);
-    if (fd_flags != -1)
+    if (!g_unix_set_fd_nonblocking (sigwinch_pipe[0], TRUE, &mcerror))
     {
-        fd_flags |= O_NONBLOCK | O_CLOEXEC;
-        fd_flags = fcntl (sigwinch_pipe[0], F_SETFL, fd_flags);
-    }
-    if (fd_flags == -1)
-    {
-        perror (_("Cannot configure write end of SIGWINCH pipe"));
+        fprintf (stderr, _("\nCannot configure write end of SIGWINCH pipe: %s (%d)\n"),
+                 mcerror->message, mcerror->code);
+        g_error_free (mcerror);
         exit (EXIT_FAILURE);
     }
 
-    fd_flags = fcntl (sigwinch_pipe[1], F_GETFL, NULL);
-    if (fd_flags != -1)
+    if (!g_unix_set_fd_nonblocking (sigwinch_pipe[1], TRUE, &mcerror))
     {
-        fd_flags |= O_NONBLOCK | O_CLOEXEC;
-        fd_flags = fcntl (sigwinch_pipe[1], F_SETFL, fd_flags);
-    }
-    if (fd_flags == -1)
-    {
-        perror (_("Cannot configure read end of SIGWINCH pipe"));
+        fprintf (stderr, _("\nCannot configure read end of SIGWINCH pipe: %s (%d)\n"),
+                 mcerror->message, mcerror->code);
+        g_error_free (mcerror);
         exit (EXIT_FAILURE);
     }
 }
