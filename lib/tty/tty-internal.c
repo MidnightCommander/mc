@@ -84,6 +84,7 @@ tty_create_winch_pipe (void)
         fprintf (stderr, _("\nCannot configure write end of SIGWINCH pipe: %s (%d)\n"),
                  mcerror->message, mcerror->code);
         g_error_free (mcerror);
+        tty_destroy_winch_pipe ();
         exit (EXIT_FAILURE);
     }
 
@@ -92,8 +93,18 @@ tty_create_winch_pipe (void)
         fprintf (stderr, _("\nCannot configure read end of SIGWINCH pipe: %s (%d)\n"),
                  mcerror->message, mcerror->code);
         g_error_free (mcerror);
+        tty_destroy_winch_pipe ();
         exit (EXIT_FAILURE);
     }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+tty_destroy_winch_pipe (void)
+{
+    (void) close (sigwinch_pipe[0]);
+    (void) close (sigwinch_pipe[1]);
 }
 
 /* --------------------------------------------------------------------------------------------- */
