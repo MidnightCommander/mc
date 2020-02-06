@@ -3136,6 +3136,7 @@ context " " green
 
 context ' ' brightgreen
     spellcheck
+    keyword \\\\ brightcyan
     keyword \\' brightcyan
 
 context exclusive <? ?> cyan
