@@ -63,81 +63,81 @@ static size_t vfs_parce_ls_final_num_spaces = 0;
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static gboolean
 is_num (int idx)
 {
     char *column = columns[idx];
 
     if (!column || column[0] < '0' || column[0] > '9')
-        return 0;
+        return FALSE;
 
-    return 1;
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/* Return 1 for MM-DD-YY and MM-DD-YYYY */
+/* Return TRUE for MM-DD-YY and MM-DD-YYYY */
 
-static int
+static gboolean
 is_dos_date (const char *str)
 {
     int len;
 
     if (!str)
-        return 0;
+        return FALSE;
 
     len = strlen (str);
     if (len != 8 && len != 10)
-        return 0;
+        return FALSE;
 
     if (str[2] != str[5])
-        return 0;
+        return FALSE;
 
     if (!strchr ("\\-/", (int) str[2]))
-        return 0;
+        return FALSE;
 
-    return 1;
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static gboolean
 is_week (const char *str, struct tm *tim)
 {
     static const char *week = "SunMonTueWedThuFriSat";
     const char *pos;
 
     if (!str)
-        return 0;
+        return FALSE;
 
     pos = strstr (week, str);
     if (pos != NULL)
     {
         if (tim != NULL)
             tim->tm_wday = (pos - week) / 3;
-        return 1;
+        return TRUE;
     }
-    return 0;
+    return FALSE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static gboolean
 is_month (const char *str, struct tm *tim)
 {
     static const char *month = "JanFebMarAprMayJunJulAugSepOctNovDec";
     const char *pos;
 
     if (!str)
-        return 0;
+        return FALSE;
 
     pos = strstr (month, str);
     if (pos != NULL)
     {
         if (tim != NULL)
             tim->tm_mon = (pos - month) / 3;
-        return 1;
+        return TRUE;
     }
-    return 0;
+    return FALSE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -148,13 +148,13 @@ is_month (const char *str, struct tm *tim)
  * locale is "C" and ftp server use Cyrillic.
  * NB: It is assumed there are no whitespaces in month.
  */
-static int
+static gboolean
 is_localized_month (const char *month)
 {
     int i = 0;
 
     if (!month)
-        return 0;
+        return FALSE;
 
     while ((i < 3) && *month && !isdigit ((unsigned char) *month)
            && !iscntrl ((unsigned char) *month) && !ispunct ((unsigned char) *month))
@@ -167,13 +167,13 @@ is_localized_month (const char *month)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static gboolean
 is_time (const char *str, struct tm *tim)
 {
     const char *p, *p2;
 
     if (str == NULL)
-        return 0;
+        return FALSE;
 
     p = strchr (str, ':');
     p2 = strrchr (str, ':');
@@ -182,46 +182,46 @@ is_time (const char *str, struct tm *tim)
         if (p != p2)
         {
             if (sscanf (str, "%2d:%2d:%2d", &tim->tm_hour, &tim->tm_min, &tim->tm_sec) != 3)
-                return 0;
+                return FALSE;
         }
         else
         {
             if (sscanf (str, "%2d:%2d", &tim->tm_hour, &tim->tm_min) != 2)
-                return 0;
+                return FALSE;
         }
     }
     else
-        return 0;
+        return FALSE;
 
-    return 1;
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static gboolean
 is_year (char *str, struct tm *tim)
 {
     long year;
 
     if (!str)
-        return 0;
+        return FALSE;
 
     if (strchr (str, ':'))
-        return 0;
+        return FALSE;
 
     if (strlen (str) != 4)
-        return 0;
+        return FALSE;
 
     /* cppcheck-suppress invalidscanf */
     if (sscanf (str, "%ld", &year) != 1)
-        return 0;
+        return FALSE;
 
     if (year < 1900 || year > 3000)
-        return 0;
+        return FALSE;
 
     tim->tm_year = (int) (year - 1900);
 
-    return 1;
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -520,8 +520,8 @@ vfs_parse_filedate (int idx, time_t * t)
     char *p;
     struct tm tim;
     int d[3];
-    int got_year = 0;
-    int l10n = 0;               /* Locale's abbreviated month name */
+    gboolean got_year = FALSE;
+    gboolean l10n = FALSE;      /* Locale's abbreviated month name */
     time_t current_time;
     struct tm *local_time;
 
@@ -607,7 +607,7 @@ vfs_parse_filedate (int idx, time_t * t)
                 tim.tm_mon = d[0];
                 tim.tm_mday = d[1];
                 tim.tm_year = d[2];
-                got_year = 1;
+                got_year = TRUE;
             }
             else
                 return 0;       /* sscanf failed */
@@ -615,8 +615,8 @@ vfs_parse_filedate (int idx, time_t * t)
         else
         {
             /* Locale's abbreviated month name followed by day number */
-            if (is_localized_month (p) && (is_num (idx++)))
-                l10n = 1;
+            if (is_localized_month (p) && is_num (idx++))
+                l10n = TRUE;
             else
                 return 0;       /* unsupported format */
         }
