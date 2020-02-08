@@ -60,6 +60,7 @@ static char *columns[MAXCOLS];  /* Points to the string in column n */
 static int column_ptr[MAXCOLS]; /* Index from 0 to the starting positions of the columns */
 static size_t vfs_parce_ls_final_num_spaces = 0;
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -68,7 +69,7 @@ is_num (int idx)
 {
     char *column = columns[idx];
 
-    if (!column || column[0] < '0' || column[0] > '9')
+    if (column == NULL || column[0] < '0' || column[0] > '9')
         return FALSE;
 
     return TRUE;
@@ -80,9 +81,9 @@ is_num (int idx)
 static gboolean
 is_dos_date (const char *str)
 {
-    int len;
+    size_t len;
 
-    if (!str)
+    if (str == NULL)
         return FALSE;
 
     len = strlen (str);
@@ -92,7 +93,7 @@ is_dos_date (const char *str)
     if (str[2] != str[5])
         return FALSE;
 
-    if (!strchr ("\\-/", (int) str[2]))
+    if (strchr ("\\-/", (int) str[2]) == NULL)
         return FALSE;
 
     return TRUE;
@@ -106,7 +107,7 @@ is_week (const char *str, struct tm *tim)
     static const char *week = "SunMonTueWedThuFriSat";
     const char *pos;
 
-    if (!str)
+    if (str == NULL)
         return FALSE;
 
     pos = strstr (week, str);
@@ -116,6 +117,7 @@ is_week (const char *str, struct tm *tim)
             tim->tm_wday = (pos - week) / 3;
         return TRUE;
     }
+
     return FALSE;
 }
 
@@ -127,7 +129,7 @@ is_month (const char *str, struct tm *tim)
     static const char *month = "JanFebMarAprMayJunJulAugSepOctNovDec";
     const char *pos;
 
-    if (!str)
+    if (str == NULL)
         return FALSE;
 
     pos = strstr (month, str);
@@ -137,6 +139,7 @@ is_month (const char *str, struct tm *tim)
             tim->tm_mon = (pos - month) / 3;
         return TRUE;
     }
+
     return FALSE;
 }
 
@@ -153,16 +156,17 @@ is_localized_month (const char *month)
 {
     int i = 0;
 
-    if (!month)
+    if (month == NULL)
         return FALSE;
 
-    while ((i < 3) && *month && !isdigit ((unsigned char) *month)
+    while ((i < 3) && *month != '\0' && !isdigit ((unsigned char) *month)
            && !iscntrl ((unsigned char) *month) && !ispunct ((unsigned char) *month))
     {
         i++;
         month++;
     }
-    return ((i == 3) && (*month == 0));
+
+    return (i == 3 && *month == '\0');
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -203,10 +207,10 @@ is_year (char *str, struct tm *tim)
 {
     long year;
 
-    if (!str)
+    if (str == NULL)
         return FALSE;
 
-    if (strchr (str, ':'))
+    if (strchr (str, ':') != NULL)
         return FALSE;
 
     if (strlen (str) != 4)
@@ -288,6 +292,7 @@ vfs_parse_filetype (const char *s, size_t * ret_skipped, mode_t * ret_type)
 
     *ret_type = type;
     *ret_skipped = 1;
+
     return TRUE;
 }
 
@@ -312,6 +317,7 @@ vfs_parse_fileperms (const char *s, size_t * ret_skipped, mode_t * ret_perms)
     default:
         return FALSE;
     }
+
     switch (*p++)
     {
     case '-':
@@ -322,6 +328,7 @@ vfs_parse_fileperms (const char *s, size_t * ret_skipped, mode_t * ret_perms)
     default:
         return FALSE;
     }
+
     switch (*p++)
     {
     case '-':
@@ -338,6 +345,7 @@ vfs_parse_fileperms (const char *s, size_t * ret_skipped, mode_t * ret_perms)
     default:
         return FALSE;
     }
+
     switch (*p++)
     {
     case '-':
@@ -348,6 +356,7 @@ vfs_parse_fileperms (const char *s, size_t * ret_skipped, mode_t * ret_perms)
     default:
         return FALSE;
     }
+
     switch (*p++)
     {
     case '-':
@@ -358,6 +367,7 @@ vfs_parse_fileperms (const char *s, size_t * ret_skipped, mode_t * ret_perms)
     default:
         return FALSE;
     }
+
     switch (*p++)
     {
     case '-':
@@ -377,6 +387,7 @@ vfs_parse_fileperms (const char *s, size_t * ret_skipped, mode_t * ret_perms)
     default:
         return FALSE;
     }
+
     switch (*p++)
     {
     case '-':
@@ -387,6 +398,7 @@ vfs_parse_fileperms (const char *s, size_t * ret_skipped, mode_t * ret_perms)
     default:
         return FALSE;
     }
+
     switch (*p++)
     {
     case '-':
@@ -397,6 +409,7 @@ vfs_parse_fileperms (const char *s, size_t * ret_skipped, mode_t * ret_perms)
     default:
         return FALSE;
     }
+
     switch (*p++)
     {
     case '-':
@@ -413,13 +426,14 @@ vfs_parse_fileperms (const char *s, size_t * ret_skipped, mode_t * ret_perms)
     default:
         return FALSE;
     }
+
     if (*p == '+')
-    {                           /* ACLs on Solaris, HP-UX and others */
+        /* ACLs on Solaris, HP-UX and others */
         p++;
-    }
 
     *ret_skipped = p - s;
     *ret_perms = perms;
+
     return TRUE;
 }
 
@@ -436,14 +450,15 @@ vfs_parse_filemode (const char *s, size_t * ret_skipped, mode_t * ret_mode)
 
     if (!vfs_parse_filetype (p, &skipped, &type))
         return FALSE;
-    p += skipped;
 
+    p += skipped;
     if (!vfs_parse_fileperms (p, &skipped, &perms))
         return FALSE;
-    p += skipped;
 
+    p += skipped;
     *ret_skipped = p - s;
     *ret_mode = type | perms;
+
     return TRUE;
 }
 
@@ -508,6 +523,7 @@ vfs_parse_raw_filemode (const char *s, size_t * ret_skipped, mode_t * ret_mode)
 
     *ret_skipped = p - s;
     *ret_mode = local_type | perms;
+
     return TRUE;
 }
 
@@ -579,48 +595,37 @@ vfs_parse_filedate (int idx, time_t * t)
             return 0;           /* No day */
 
     }
-    else
+    else if (is_dos_date (p))
     {
         /* Case with MM-DD-YY or MM-DD-YYYY */
-        if (is_dos_date (p))
+        p[2] = p[5] = '-';
+
+        /* cppcheck-suppress invalidscanf */
+        if (sscanf (p, "%2d-%2d-%d", &d[0], &d[1], &d[2]) == 3)
         {
-            p[2] = p[5] = '-';
+            /* Months are zero based */
+            if (d[0] > 0)
+                d[0]--;
 
-            /* cppcheck-suppress invalidscanf */
-            if (sscanf (p, "%2d-%2d-%d", &d[0], &d[1], &d[2]) == 3)
-            {
-                /* Months are zero based */
-                if (d[0] > 0)
-                    d[0]--;
+            if (d[2] > 1900)
+                d[2] -= 1900;
+            else if (d[2] < 70)
+                /* Y2K madness */
+                d[2] += 100;
 
-                if (d[2] > 1900)
-                {
-                    d[2] -= 1900;
-                }
-                else
-                {
-                    /* Y2K madness */
-                    if (d[2] < 70)
-                        d[2] += 100;
-                }
-
-                tim.tm_mon = d[0];
-                tim.tm_mday = d[1];
-                tim.tm_year = d[2];
-                got_year = TRUE;
-            }
-            else
-                return 0;       /* sscanf failed */
+            tim.tm_mon = d[0];
+            tim.tm_mday = d[1];
+            tim.tm_year = d[2];
+            got_year = TRUE;
         }
         else
-        {
-            /* Locale's abbreviated month name followed by day number */
-            if (is_localized_month (p) && is_num (idx++))
-                l10n = TRUE;
-            else
-                return 0;       /* unsupported format */
-        }
+            return 0;           /* sscanf failed */
     }
+    else if (is_localized_month (p) && is_num (idx++))
+        /* Locale's abbreviated month name followed by day number */
+        l10n = TRUE;
+    else
+        return 0;               /* unsupported format */
 
     /* Here we expect to find time or year */
     if (is_num (idx) && (is_time (columns[idx], &tim) || (got_year = is_year (columns[idx], &tim))))
@@ -636,12 +641,12 @@ vfs_parse_filedate (int idx, time_t * t)
      */
     if (!got_year && local_time->tm_mon < 6
         && local_time->tm_mon < tim.tm_mon && tim.tm_mon - local_time->tm_mon >= 6)
-
         tim.tm_year--;
 
     *t = mktime (&tim);
     if (l10n || (*t < 0))
         *t = 0;
+
     return idx;
 }
 
@@ -655,18 +660,19 @@ vfs_split_text (char *p)
 
     memset (columns, 0, sizeof (columns));
 
-    for (numcols = 0; *p && numcols < MAXCOLS; numcols++)
+    for (numcols = 0; *p != '\0' && numcols < MAXCOLS; numcols++)
     {
         while (*p == ' ' || *p == '\r' || *p == '\n')
         {
-            *p = 0;
+            *p = '\0';
             p++;
         }
         columns[numcols] = p;
         column_ptr[numcols] = p - original;
-        while (*p && *p != ' ' && *p != '\r' && *p != '\n')
+        while (*p != '\0' && *p != ' ' && *p != '\r' && *p != '\n')
             p++;
     }
+
     return numcols;
 }
 
@@ -704,14 +710,15 @@ vfs_parse_ls_lga (const char *p, struct stat * s, char **filename, char **linkna
 
     if (!vfs_parse_filetype (p, &skipped, &s->st_mode))
         goto error;
-    p += skipped;
 
+    p += skipped;
     if (*p == ' ')              /* Notwell 4 */
         p++;
     if (*p == '[')
     {
         if (strlen (p) <= 8 || p[8] != ']')
             goto error;
+
         /* Should parse here the Notwell permissions :) */
         if (S_ISDIR (s->st_mode))
             s->st_mode |= (S_IRUSR | S_IRGRP | S_IROTH | S_IWUSR | S_IXUSR | S_IXGRP | S_IXOTH);
@@ -726,6 +733,7 @@ vfs_parse_ls_lga (const char *p, struct stat * s, char **filename, char **linkna
 
         if (!vfs_parse_fileperms (p, &lc_skipped, &perms))
             goto error;
+
         p += lc_skipped;
         s->st_mode |= perms;
     }
@@ -805,8 +813,9 @@ vfs_parse_ls_lga (const char *p, struct stat * s, char **filename, char **linkna
     }
 
     idx = vfs_parse_filedate (idx, &s->st_mtime);
-    if (!idx)
+    if (idx == 0)
         goto error;
+
     /* Use resulting time value */
     s->st_atime = s->st_ctime = s->st_mtime;
 #ifdef HAVE_STRUCT_STAT_ST_MTIM
@@ -834,14 +843,12 @@ vfs_parse_ls_lga (const char *p, struct stat * s, char **filename, char **linkna
         }
 
     if (((S_ISLNK (s->st_mode) || (num_cols == idx + 3 && s->st_nlink > 1)))    /* Maybe a hardlink? (in extfs) */
-        && idx2)
+        && idx2 != 0)
     {
-
-        if (filename)
-        {
+        if (filename != NULL)
             *filename = g_strndup (p + column_ptr[idx], column_ptr[idx2] - column_ptr[idx] - 1);
-        }
-        if (linkname)
+
+        if (linkname != NULL)
         {
             t = g_strdup (p + column_ptr[idx2 + 1]);
             *linkname = t;
@@ -852,26 +859,26 @@ vfs_parse_ls_lga (const char *p, struct stat * s, char **filename, char **linkna
         /* Extract the filename from the string copy, not from the columns
          * this way we have a chance of entering hidden directories like ". ."
          */
-        if (filename)
+        if (filename != NULL)
         {
-            /*
-             * filename = g_strdup (columns [idx++]);
-             */
-
+            /* filename = g_strdup (columns [idx++]); */
             t = g_strdup (p + column_ptr[idx]);
             *filename = t;
         }
-        if (linkname)
+
+        if (linkname != NULL)
             *linkname = NULL;
     }
 
-    if (t)
+    if (t != NULL)
     {
-        int p2 = strlen (t);
-        if ((--p2 > 0) && (t[p2] == '\r' || t[p2] == '\n'))
-            t[p2] = 0;
-        if ((--p2 > 0) && (t[p2] == '\r' || t[p2] == '\n'))
-            t[p2] = 0;
+        size_t p2;
+
+        p2 = strlen (t);
+        if (--p2 > 0 && (t[p2] == '\r' || t[p2] == '\n'))
+            t[p2] = '\0';
+        if (--p2 > 0 && (t[p2] == '\r' || t[p2] == '\n'))
+            t[p2] = '\0';
     }
 
     g_free (p_copy);
@@ -882,9 +889,8 @@ vfs_parse_ls_lga (const char *p, struct stat * s, char **filename, char **linkna
         static int errorcount = 0;
 
         if (++errorcount < 5)
-        {
-            message (D_ERROR, _("Cannot parse:"), "%s", (p_copy && *p_copy) ? p_copy : line);
-        }
+            message (D_ERROR, _("Cannot parse:"), "%s",
+                     (p_copy != NULL && *p_copy != '\0') ? p_copy : line);
         else if (errorcount == 5)
             message (D_ERROR, MSG_ERROR, _("More parsing errors will be ignored."));
     }
