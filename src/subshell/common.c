@@ -402,47 +402,6 @@ init_subshell_child (const char *pty_name)
     my_exit (FORK_FAILURE);
 }
 
-
-/* --------------------------------------------------------------------------------------------- */
-/**
- * Check MC_SID to prevent running one mc from another.
- * Return:
- * 0 if no parent mc in our session was found,
- * 1 if parent mc was found and the user wants to continue,
- * 2 if parent mc was found and the user wants to quit mc.
- */
-
-static int
-check_sid (void)
-{
-    pid_t my_sid, old_sid;
-    const char *sid_str;
-    int r;
-
-    sid_str = getenv ("MC_SID");
-    if (sid_str == NULL)
-        return 0;
-
-    old_sid = (pid_t) strtol (sid_str, NULL, 0);
-    if (old_sid == 0)
-        return 0;
-
-    my_sid = getsid (0);
-    if (my_sid == -1)
-        return 0;
-
-    /* The parent mc is in a different session, it's OK */
-    if (old_sid != my_sid)
-        return 0;
-
-    r = query_dialog (_("Warning"),
-                      _("GNU Midnight Commander is already\n"
-                        "running on this terminal.\n"
-                        "Subshell support will be disabled."), D_ERROR, 2, _("&OK"), _("&Quit"));
-
-    return (r != 0) ? 2 : 1;
-}
-
 /* --------------------------------------------------------------------------------------------- */
 
 static void
@@ -1011,19 +970,6 @@ init_subshell (void)
     static char pty_name[BUF_SMALL];
     /* Must be considerably longer than BUF_SMALL (128) to support fancy shell prompts */
     char precmd[BUF_MEDIUM];
-
-    switch (check_sid ())
-    {
-    case 1:
-        mc_global.tty.use_subshell = FALSE;
-        return;
-    case 2:
-        mc_global.tty.use_subshell = FALSE;
-        mc_global.midnight_shutdown = TRUE;
-        return;
-    default:
-        break;
-    }
 
     /* Take the current (hopefully pristine) tty mode and make */
     /* a raw mode based on it now, before we do anything else with it */
