@@ -15,7 +15,7 @@ Build requirements for GNU Midnight Commander
 - autoconf
 - automake
 - libtool
-- glib2 >= 2.26
+- glib2 >= 2.30
 - slang2 or ncurses
 - gettext >= 0.18.1
 - libssh2 >= 1.2.5 is required only for sftp vfs (1.2.7 if you need ssh-agent support)
@@ -383,8 +383,8 @@ get glib from
 
 ftp://ftp.gnome.org/pub/gnome/sources/glib/
 
-Minimal version of glib: 2.26.x
-Recommended version: 2.26.x and higher.
+Minimal version of glib: 2.30.0
+Recommended version: 2.30.x and higher.
 
 Newer versions may work, but haven't been tested.
 

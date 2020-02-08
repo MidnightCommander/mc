@@ -343,6 +343,7 @@ tty_shutdown (void)
 {
     char *op_cap;
 
+    tty_destroy_winch_pipe ();
     tty_reset_shell_mode ();
     tty_noraw_mode ();
     tty_keypad (FALSE);

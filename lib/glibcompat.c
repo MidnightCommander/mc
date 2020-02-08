@@ -50,47 +50,6 @@
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-#if ! GLIB_CHECK_VERSION (2, 28, 0)
-/**
- * g_slist_free_full:
- * @list: a pointer to a #GSList
- * @free_func: the function to be called to free each element's data
- *
- * Convenience method, which frees all the memory used by a #GSList, and
- * calls the specified destroy function on every element's data.
- *
- * Since: 2.28
- **/
-void
-g_slist_free_full (GSList * list, GDestroyNotify free_func)
-{
-    g_slist_foreach (list, (GFunc) free_func, NULL);
-    g_slist_free (list);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/**
- * g_list_free_full:
- * @list: a pointer to a #GList
- * @free_func: the function to be called to free each element's data
- *
- * Convenience method, which frees all the memory used by a #GList, and
- * calls the specified destroy function on every element's data.
- *
- * Since: 2.28
- */
-void
-g_list_free_full (GList * list, GDestroyNotify free_func)
-{
-    g_list_foreach (list, (GFunc) free_func, NULL);
-    g_list_free (list);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-#endif /* ! GLIB_CHECK_VERSION (2, 28, 0) */
-
 #if ! GLIB_CHECK_VERSION (2, 63, 3)
 /**
  * g_clear_slist: (skip)
