@@ -69,10 +69,7 @@ is_num (int idx)
 {
     char *column = columns[idx];
 
-    if (column == NULL || column[0] < '0' || column[0] > '9')
-        return FALSE;
-
-    return TRUE;
+    return (column != NULL && isdigit (column[0]));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -93,10 +90,7 @@ is_dos_date (const char *str)
     if (str[2] != str[5])
         return FALSE;
 
-    if (strchr ("\\-/", (int) str[2]) == NULL)
-        return FALSE;
-
-    return TRUE;
+    return (strchr ("\\-/", (int) str[2]) != NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -111,14 +105,13 @@ is_week (const char *str, struct tm *tim)
         return FALSE;
 
     pos = strstr (week, str);
-    if (pos != NULL)
-    {
-        if (tim != NULL)
-            tim->tm_wday = (pos - week) / 3;
-        return TRUE;
-    }
+    if (pos == NULL)
+        return FALSE;
 
-    return FALSE;
+    if (tim != NULL)
+        tim->tm_wday = (pos - week) / 3;
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -133,14 +126,13 @@ is_month (const char *str, struct tm *tim)
         return FALSE;
 
     pos = strstr (month, str);
-    if (pos != NULL)
-    {
-        if (tim != NULL)
-            tim->tm_mon = (pos - month) / 3;
-        return TRUE;
-    }
+    if (pos == NULL)
+        return FALSE;
 
-    return FALSE;
+    if (tim != NULL)
+        tim->tm_mon = (pos - month) / 3;
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -154,17 +146,15 @@ is_month (const char *str, struct tm *tim)
 static gboolean
 is_localized_month (const char *month)
 {
-    int i = 0;
+    int i;
 
     if (month == NULL)
         return FALSE;
 
-    while ((i < 3) && *month != '\0' && !isdigit ((unsigned char) *month)
-           && !iscntrl ((unsigned char) *month) && !ispunct ((unsigned char) *month))
-    {
-        i++;
-        month++;
-    }
+    for (i = 0;
+         i < 3 && *month != '\0' && !isdigit ((unsigned char) *month)
+         && !iscntrl ((unsigned char) *month) && !ispunct ((unsigned char) *month); i++, month++)
+        ;
 
     return (i == 3 && *month == '\0');
 }
@@ -180,22 +170,23 @@ is_time (const char *str, struct tm *tim)
         return FALSE;
 
     p = strchr (str, ':');
+    if (p == NULL)
+        return FALSE;
+
     p2 = strrchr (str, ':');
-    if (p != NULL && p2 != NULL)
+    if (p2 == NULL)
+        return FALSE;
+
+    if (p != p2)
     {
-        if (p != p2)
-        {
-            if (sscanf (str, "%2d:%2d:%2d", &tim->tm_hour, &tim->tm_min, &tim->tm_sec) != 3)
-                return FALSE;
-        }
-        else
-        {
-            if (sscanf (str, "%2d:%2d", &tim->tm_hour, &tim->tm_min) != 2)
-                return FALSE;
-        }
+        if (sscanf (str, "%2d:%2d:%2d", &tim->tm_hour, &tim->tm_min, &tim->tm_sec) != 3)
+            return FALSE;
     }
     else
-        return FALSE;
+    {
+        if (sscanf (str, "%2d:%2d", &tim->tm_hour, &tim->tm_min) != 2)
+            return FALSE;
+    }
 
     return TRUE;
 }
@@ -301,11 +292,8 @@ vfs_parse_filetype (const char *s, size_t * ret_skipped, mode_t * ret_type)
 gboolean
 vfs_parse_fileperms (const char *s, size_t * ret_skipped, mode_t * ret_perms)
 {
-    const char *p;
-    mode_t perms;
-
-    p = s;
-    perms = 0;
+    const char *p = s;
+    mode_t perms = 0;
 
     switch (*p++)
     {
@@ -442,11 +430,9 @@ vfs_parse_fileperms (const char *s, size_t * ret_skipped, mode_t * ret_perms)
 gboolean
 vfs_parse_filemode (const char *s, size_t * ret_skipped, mode_t * ret_mode)
 {
-    const char *p;
+    const char *p = s;
     mode_t type, perms;
     size_t skipped;
-
-    p = s;
 
     if (!vfs_parse_filetype (p, &skipped, &type))
         return FALSE;
@@ -467,27 +453,23 @@ vfs_parse_filemode (const char *s, size_t * ret_skipped, mode_t * ret_mode)
 gboolean
 vfs_parse_raw_filemode (const char *s, size_t * ret_skipped, mode_t * ret_mode)
 {
-    const char *p;
+    const char *p = s;
     mode_t remote_type = 0, local_type, perms = 0;
 
-    p = s;
-
     /* isoctal */
-    while (*p >= '0' && *p <= '7')
+    for (; *p >= '0' && *p <= '7'; p++)
     {
         perms *= 010;
         perms += (*p - '0');
-        ++p;
     }
 
     if (*p++ != ' ')
         return FALSE;
 
-    while (*p >= '0' && *p <= '7')
+    for (; *p >= '0' && *p <= '7'; p++)
     {
         remote_type *= 010;
         remote_type += (*p - '0');
-        ++p;
     }
 
     if (*p++ != ' ')
@@ -589,10 +571,10 @@ vfs_parse_filedate (int idx, time_t * t)
     if (is_month (p, &tim))
     {
         /* And we expect, it followed by day number */
-        if (is_num (idx))
-            tim.tm_mday = (int) atol (columns[idx++]);
-        else
+        if (!is_num (idx))
             return 0;           /* No day */
+
+        tim.tm_mday = (int) atol (columns[idx++]);
 
     }
     else if (is_dos_date (p))
@@ -601,25 +583,23 @@ vfs_parse_filedate (int idx, time_t * t)
         p[2] = p[5] = '-';
 
         /* cppcheck-suppress invalidscanf */
-        if (sscanf (p, "%2d-%2d-%d", &d[0], &d[1], &d[2]) == 3)
-        {
-            /* Months are zero based */
-            if (d[0] > 0)
-                d[0]--;
-
-            if (d[2] > 1900)
-                d[2] -= 1900;
-            else if (d[2] < 70)
-                /* Y2K madness */
-                d[2] += 100;
-
-            tim.tm_mon = d[0];
-            tim.tm_mday = d[1];
-            tim.tm_year = d[2];
-            got_year = TRUE;
-        }
-        else
+        if (sscanf (p, "%2d-%2d-%d", &d[0], &d[1], &d[2]) != 3)
             return 0;           /* sscanf failed */
+
+        /* Months are zero based */
+        if (d[0] > 0)
+            d[0]--;
+
+        if (d[2] > 1900)
+            d[2] -= 1900;
+        else if (d[2] < 70)
+            /* Y2K madness */
+            d[2] += 100;
+
+        tim.tm_mon = d[0];
+        tim.tm_mday = d[1];
+        tim.tm_year = d[2];
+        got_year = TRUE;
     }
     else if (is_localized_month (p) && is_num (idx++))
         /* Locale's abbreviated month name followed by day number */
@@ -628,10 +608,11 @@ vfs_parse_filedate (int idx, time_t * t)
         return 0;               /* unsupported format */
 
     /* Here we expect to find time or year */
-    if (is_num (idx) && (is_time (columns[idx], &tim) || (got_year = is_year (columns[idx], &tim))))
-        idx++;
-    else
+    if (!is_num (idx)
+        || !(is_time (columns[idx], &tim) || (got_year = is_year (columns[idx], &tim))))
         return 0;               /* Neither time nor date */
+
+    idx++;
 
     /*
      * If the date is less than 6 months in the past, it is shown without year
@@ -639,8 +620,8 @@ vfs_parse_filedate (int idx, time_t * t)
      * This does not check for years before 1900 ... I don't know, how
      * to represent them at all
      */
-    if (!got_year && local_time->tm_mon < 6
-        && local_time->tm_mon < tim.tm_mon && tim.tm_mon - local_time->tm_mon >= 6)
+    if (!got_year && local_time->tm_mon < 6 && local_time->tm_mon < tim.tm_mon
+        && tim.tm_mon - local_time->tm_mon >= 6)
         tim.tm_year--;
 
     *t = mktime (&tim);
@@ -662,15 +643,14 @@ vfs_split_text (char *p)
 
     for (numcols = 0; *p != '\0' && numcols < MAXCOLS; numcols++)
     {
-        while (*p == ' ' || *p == '\r' || *p == '\n')
-        {
+        for (; *p == ' ' || *p == '\r' || *p == '\n'; p++)
             *p = '\0';
-            p++;
-        }
+
         columns[numcols] = p;
         column_ptr[numcols] = p - original;
-        while (*p != '\0' && *p != ' ' && *p != '\r' && *p != '\n')
-            p++;
+
+        for (; *p != '\0' && *p != ' ' && *p != '\r' && *p != '\n'; p++)
+            ;
     }
 
     return numcols;
