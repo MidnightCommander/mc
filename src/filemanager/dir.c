@@ -316,6 +316,7 @@ unsorted (file_entry_t * a, file_entry_t * b)
 {
     (void) a;
     (void) b;
+
     return 0;
 }
 
@@ -337,6 +338,7 @@ sort_name (file_entry_t * a, file_entry_t * b)
 
         return key_collate (a->sort_key, b->sort_key);
     }
+
     return bd - ad;
 }
 
@@ -349,13 +351,9 @@ sort_vers (file_entry_t * a, file_entry_t * b)
     int bd = MY_ISDIR (b);
 
     if (ad == bd || panels_options.mix_all_files)
-    {
         return filevercmp (a->fname, b->fname) * reverse;
-    }
-    else
-    {
-        return bd - ad;
-    }
+
+    return bd - ad;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -378,11 +376,11 @@ sort_ext (file_entry_t * a, file_entry_t * b)
         r = str_key_collate (a->second_sort_key, b->second_sort_key, case_sensitive);
         if (r != 0)
             return r * reverse;
-        else
-            return sort_name (a, b);
+
+        return sort_name (a, b);
     }
-    else
-        return bd - ad;
+
+    return bd - ad;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -396,13 +394,14 @@ sort_time (file_entry_t * a, file_entry_t * b)
     if (ad == bd || panels_options.mix_all_files)
     {
         int result = a->st.st_mtime < b->st.st_mtime ? -1 : a->st.st_mtime > b->st.st_mtime;
+
         if (result != 0)
             return result * reverse;
-        else
-            return sort_name (a, b);
+
+        return sort_name (a, b);
     }
-    else
-        return bd - ad;
+
+    return bd - ad;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -416,13 +415,14 @@ sort_ctime (file_entry_t * a, file_entry_t * b)
     if (ad == bd || panels_options.mix_all_files)
     {
         int result = a->st.st_ctime < b->st.st_ctime ? -1 : a->st.st_ctime > b->st.st_ctime;
+
         if (result != 0)
             return result * reverse;
-        else
-            return sort_name (a, b);
+
+        return sort_name (a, b);
     }
-    else
-        return bd - ad;
+
+    return bd - ad;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -436,13 +436,14 @@ sort_atime (file_entry_t * a, file_entry_t * b)
     if (ad == bd || panels_options.mix_all_files)
     {
         int result = a->st.st_atime < b->st.st_atime ? -1 : a->st.st_atime > b->st.st_atime;
+
         if (result != 0)
             return result * reverse;
-        else
-            return sort_name (a, b);
+
+        return sort_name (a, b);
     }
-    else
-        return bd - ad;
+
+    return bd - ad;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -455,8 +456,8 @@ sort_inode (file_entry_t * a, file_entry_t * b)
 
     if (ad == bd || panels_options.mix_all_files)
         return (a->st.st_ino - b->st.st_ino) * reverse;
-    else
-        return bd - ad;
+
+    return bd - ad;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -466,16 +467,18 @@ sort_size (file_entry_t * a, file_entry_t * b)
 {
     int ad = MY_ISDIR (a);
     int bd = MY_ISDIR (b);
-    int result = 0;
 
-    if (ad != bd && !panels_options.mix_all_files)
-        return bd - ad;
+    if (ad == bd || panels_options.mix_all_files)
+    {
+        int result = a->st.st_size < b->st.st_size ? -1 : a->st.st_size > b->st.st_size;
 
-    result = a->st.st_size < b->st.st_size ? -1 : a->st.st_size > b->st.st_size;
-    if (result != 0)
-        return result * reverse;
-    else
+        if (result != 0)
+            return result * reverse;
+
         return sort_name (a, b);
+    }
+
+    return bd - ad;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -483,24 +486,22 @@ sort_size (file_entry_t * a, file_entry_t * b)
 void
 dir_list_sort (dir_list * list, GCompareFunc sort, const dir_sort_options_t * sort_op)
 {
-    file_entry_t *fentry;
-    int dot_dot_found = 0;
+    if (list->len > 1 && sort != (GCompareFunc) unsorted)
+    {
+        file_entry_t *fentry = &list->list[0];
+        int dot_dot_found;
 
-    if (list->len < 2 || sort == (GCompareFunc) unsorted)
-        return;
+        /* If there is an ".." entry the caller must take care to
+           ensure that it occupies the first list element. */
+        dot_dot_found = DIR_IS_DOTDOT (fentry->fname) ? 1 : 0;
+        reverse = sort_op->reverse ? -1 : 1;
+        case_sensitive = sort_op->case_sensitive ? 1 : 0;
+        exec_first = sort_op->exec_first;
+        qsort (&(list->list)[dot_dot_found], list->len - dot_dot_found, sizeof (file_entry_t),
+               sort);
 
-    /* If there is an ".." entry the caller must take care to
-       ensure that it occupies the first list element. */
-    fentry = &list->list[0];
-    if (DIR_IS_DOTDOT (fentry->fname))
-        dot_dot_found = 1;
-
-    reverse = sort_op->reverse ? -1 : 1;
-    case_sensitive = sort_op->case_sensitive ? 1 : 0;
-    exec_first = sort_op->exec_first;
-    qsort (&(list->list)[dot_dot_found], list->len - dot_dot_found, sizeof (file_entry_t), sort);
-
-    clean_sort_keys (list, dot_dot_found, list->len - dot_dot_found);
+        clean_sort_keys (list, dot_dot_found, list->len - dot_dot_found);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -684,6 +685,7 @@ if_link_is_exe (const vfs_path_t * full_name_vpath, const file_entry_t * file)
 
     if (S_ISLNK (file->st.st_mode) && mc_stat (full_name_vpath, &b) == 0)
         return is_exe (b.st_mode);
+
     return TRUE;
 }
 
