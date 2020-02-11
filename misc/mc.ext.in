@@ -497,6 +497,10 @@ regex/i/\.og[gax]$
 	Open=@EXTHELPERSDIR@/sound.sh open ogg
 	View=%view{ascii} @EXTHELPERSDIR@/sound.sh view ogg
 
+shell/i/.opus
+	Open=@EXTHELPERSDIR@/sound.sh open opus
+	View=%view{ascii} @EXTHELPERSDIR@/sound.sh view opus
+
 regex/i/\.(spx|flac)$
 	Open=@EXTHELPERSDIR@/sound.sh open common
 

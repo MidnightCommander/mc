@@ -19,6 +19,9 @@ do_view_action() {
     ogg)
         ogginfo "${MC_EXT_FILENAME}"
         ;;
+    opus)
+        opusinfo "${MC_EXT_FILENAME}"
+        ;;
     wma)
         mplayer -quiet -slave -frames 0 -vo null -ao null -identify "${MC_EXT_FILENAME}" 2>/dev/null | \
             tail +13 || file "${MC_EXT_FILENAME}"
@@ -59,6 +62,13 @@ do_open_action() {
             (xmms "${MC_EXT_FILENAME}" >/dev/null 2>&1 &)
         else
             ogg123 "${MC_EXT_FILENAME}"
+        fi
+        ;;
+    opus)
+        if [ -n "$DISPLAY" ]; then
+            (xmms "${MC_EXT_FILENAME}" >/dev/null 2>&1 &)
+        else
+            play "${MC_EXT_FILENAME}"
         fi
         ;;
     midi)
