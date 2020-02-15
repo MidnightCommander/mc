@@ -82,7 +82,7 @@ include pascal.syntax
 file ..\*\\.(?i:ad[abs])$ Ada\sProgram
 include ada95.syntax
 
-file ..\*\\.(?i:i?tcl)$ Tcl\sProgram
+file ..\*\\.(?i:i?tcl)$ Tcl\sProgram ^#!.\*([\s/]tclsh|[\s/]wish|/usr/bin/tclsh|/usr/bin/wish)
 include tcl.syntax
 
 file ..\*\\.(?i:sl)$ S-Lang\sProgram
