@@ -180,7 +180,10 @@ do_show_hist (WInput * in)
                              g_list_position (in->history.list, in->history.list));
     history_show (&hd);
 
+    /* in->history.list was destroyed in history_show().
+     * Apply new history and current postition to avoid use-after-free. */
     in->history.list = hd.list;
+    in->history.current = in->history.list;
     if (hd.text != NULL)
     {
         input_assign_text (in, hd.text);
