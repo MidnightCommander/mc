@@ -1743,12 +1743,11 @@ get_key_code (int no_delay)
   pend_send:
     if (pending_keys != NULL)
     {
-        int d;
         gboolean bad_seq;
 
-        d = *pending_keys++;
-        while (d == ESC_CHAR)
-            d = ALT (*pending_keys++);
+        c = *pending_keys++;
+        while (c == ESC_CHAR)
+            c = ALT (*pending_keys++);
 
         bad_seq = (*pending_keys != ESC_CHAR && *pending_keys != '\0');
         if (*pending_keys == '\0' || bad_seq)
@@ -1769,11 +1768,10 @@ get_key_code (int no_delay)
             goto nodelay_try_again;
         }
 
-        if (d > 127 && d < 256 && use_8th_bit_as_meta)
-            d = ALT (d & 0x7f);
+        if (c > 127 && c < 256 && use_8th_bit_as_meta)
+            c = ALT (c & 0x7f);
 
-        this = NULL;
-        return correct_key_code (d);
+        goto done;
     }
 
   nodelay_try_again:
@@ -1854,12 +1852,9 @@ get_key_code (int no_delay)
             if (this->child == NULL)
             {
                 /* We got a complete match, return and reset search */
-                int code;
-
                 pending_keys = seq_append = NULL;
-                code = this->code;
-                this = NULL;
-                return correct_key_code (code);
+                c = this->code;
+                goto done;
             }
 
             /* No match yet, but it may be a prefix for a valid seq */
@@ -1915,8 +1910,7 @@ get_key_code (int no_delay)
                 c = ALT (c);
 
             pending_keys = seq_append = NULL;
-            this = NULL;
-            return correct_key_code (c);
+            goto done;
         }
 
         /* Unknown sequence. Maybe a prefix of a longer one. Save it. */
@@ -1925,6 +1919,7 @@ get_key_code (int no_delay)
         goto pend_send;
     }                           /* while (this != NULL) */
 
+  done:
     this = NULL;
     return correct_key_code (c);
 }
