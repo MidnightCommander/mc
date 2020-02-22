@@ -4977,9 +4977,8 @@ panel_get_user_possible_fields (gsize * array_size)
 void
 panel_init (void)
 {
-    panel_sort_up_sign = mc_skin_get ("widget-common", "sort-sign-up", "'");
-    panel_sort_down_sign = mc_skin_get ("widget-common", "sort-sign-down", ".");
-
+    panel_sort_up_sign = mc_skin_get ("widget-panel", "sort-sign-up", "'");
+    panel_sort_down_sign = mc_skin_get ("widget-panel", "sort-sign-down", ".");
     panel_hiddenfiles_sign_show = mc_skin_get ("widget-panel", "hiddenfiles-sign-show", ".");
     panel_hiddenfiles_sign_hide = mc_skin_get ("widget-panel", "hiddenfiles-sign-hide", ".");
     panel_history_prev_item_sign = mc_skin_get ("widget-panel", "history-prev-item-sign", "<");
