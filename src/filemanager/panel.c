@@ -353,14 +353,14 @@ static panel_field_t panel_fields[] = {
 };
 /* *INDENT-ON* */
 
-static char *panel_sort_up_sign = NULL;
-static char *panel_sort_down_sign = NULL;
+static char *panel_sort_up_char = NULL;
+static char *panel_sort_down_char = NULL;
 
-static char *panel_hiddenfiles_sign_show = NULL;
-static char *panel_hiddenfiles_sign_hide = NULL;
-static char *panel_history_prev_item_sign = NULL;
-static char *panel_history_next_item_sign = NULL;
-static char *panel_history_show_list_sign = NULL;
+static char *panel_hiddenfiles_show_char = NULL;
+static char *panel_hiddenfiles_hide_char = NULL;
+static char *panel_history_prev_item_char = NULL;
+static char *panel_history_next_item_char = NULL;
+static char *panel_history_show_list_char = NULL;
 static char *panel_filename_scroll_left_char = NULL;
 static char *panel_filename_scroll_right_char = NULL;
 
@@ -1273,11 +1273,11 @@ show_dir (const WPanel * panel)
     }
 
     widget_gotoyx (w, 0, 1);
-    tty_print_string (panel_history_prev_item_sign);
+    tty_print_string (panel_history_prev_item_char);
 
-    tmp = panels_options.show_dot_files ? panel_hiddenfiles_sign_show : panel_hiddenfiles_sign_hide;
-    tmp = g_strdup_printf ("%s[%s]%s", tmp, panel_history_show_list_sign,
-                           panel_history_next_item_sign);
+    tmp = panels_options.show_dot_files ? panel_hiddenfiles_show_char : panel_hiddenfiles_hide_char;
+    tmp = g_strdup_printf ("%s[%s]%s", tmp, panel_history_show_list_char,
+                           panel_history_next_item_char);
 
     widget_gotoyx (w, 0, w->cols - 6);
     tty_print_string (tmp);
@@ -1513,7 +1513,7 @@ panel_paint_sort_info (const WPanel * panel)
     if (*panel->sort_field->hotkey != '\0')
     {
         const char *sort_sign =
-            panel->sort_info.reverse ? panel_sort_up_sign : panel_sort_down_sign;
+            panel->sort_info.reverse ? panel_sort_up_char : panel_sort_down_char;
         char *str;
 
         str = g_strdup_printf ("%s%s", sort_sign, Q_ (panel->sort_field->hotkey));
@@ -1579,7 +1579,7 @@ panel_print_header (const WPanel * panel)
                 if (panel->list_format == list_long && strcmp (fi->id, panel->sort_field->id) == 0)
                     g_string_append (format_txt,
                                      panel->sort_info.reverse
-                                     ? panel_sort_up_sign : panel_sort_down_sign);
+                                     ? panel_sort_up_char : panel_sort_down_char);
 
                 g_string_append (format_txt, fi->title);
 
@@ -4977,13 +4977,13 @@ panel_get_user_possible_fields (gsize * array_size)
 void
 panel_init (void)
 {
-    panel_sort_up_sign = mc_skin_get ("widget-panel", "sort-sign-up", "'");
-    panel_sort_down_sign = mc_skin_get ("widget-panel", "sort-sign-down", ".");
-    panel_hiddenfiles_sign_show = mc_skin_get ("widget-panel", "hiddenfiles-sign-show", ".");
-    panel_hiddenfiles_sign_hide = mc_skin_get ("widget-panel", "hiddenfiles-sign-hide", ".");
-    panel_history_prev_item_sign = mc_skin_get ("widget-panel", "history-prev-item-sign", "<");
-    panel_history_next_item_sign = mc_skin_get ("widget-panel", "history-next-item-sign", ">");
-    panel_history_show_list_sign = mc_skin_get ("widget-panel", "history-show-list-sign", "^");
+    panel_sort_up_char = mc_skin_get ("widget-panel", "sort-up-char", "'");
+    panel_sort_down_char = mc_skin_get ("widget-panel", "sort-down-char", ".");
+    panel_hiddenfiles_show_char = mc_skin_get ("widget-panel", "hiddenfiles-show-char", ".");
+    panel_hiddenfiles_hide_char = mc_skin_get ("widget-panel", "hiddenfiles-hide-char", ".");
+    panel_history_prev_item_char = mc_skin_get ("widget-panel", "history-prev-item-char", "<");
+    panel_history_next_item_char = mc_skin_get ("widget-panel", "history-next-item-char", ">");
+    panel_history_show_list_char = mc_skin_get ("widget-panel", "history-show-list-char", "^");
     panel_filename_scroll_left_char =
         mc_skin_get ("widget-panel", "filename-scroll-left-char", "{");
     panel_filename_scroll_right_char =
@@ -4999,14 +4999,13 @@ panel_init (void)
 void
 panel_deinit (void)
 {
-    g_free (panel_sort_up_sign);
-    g_free (panel_sort_down_sign);
-
-    g_free (panel_hiddenfiles_sign_show);
-    g_free (panel_hiddenfiles_sign_hide);
-    g_free (panel_history_prev_item_sign);
-    g_free (panel_history_next_item_sign);
-    g_free (panel_history_show_list_sign);
+    g_free (panel_sort_up_char);
+    g_free (panel_sort_down_char);
+    g_free (panel_hiddenfiles_show_char);
+    g_free (panel_hiddenfiles_hide_char);
+    g_free (panel_history_prev_item_char);
+    g_free (panel_history_next_item_char);
+    g_free (panel_history_show_list_char);
     g_free (panel_filename_scroll_left_char);
     g_free (panel_filename_scroll_right_char);
 }
