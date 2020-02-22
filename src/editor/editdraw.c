@@ -114,37 +114,33 @@ status_string (WEdit * edit, char *s, int w)
      * otherwise print the current character as is (if printable),
      * as decimal and as hex.
      */
-    if (edit->buffer.curs1 < edit->buffer.size)
-    {
+    if (edit->buffer.curs1 >= edit->buffer.size)
+        strcpy (byte_str, "<EOF>     ");
 #ifdef HAVE_CHARSET
-        if (edit->utf8)
-        {
-            unsigned int cur_utf;
-            int char_length = 1;
+    else if (edit->utf8)
+    {
+        unsigned int cur_utf;
+        int char_length = 1;
 
-            cur_utf = edit_buffer_get_utf (&edit->buffer, edit->buffer.curs1, &char_length);
-            if (char_length > 0)
-                g_snprintf (byte_str, sizeof (byte_str), "%04u 0x%03X",
-                            (unsigned) cur_utf, (unsigned) cur_utf);
-            else
-            {
-                cur_utf = edit_buffer_get_current_byte (&edit->buffer);
-                g_snprintf (byte_str, sizeof (byte_str), "%04d 0x%03X",
-                            (int) cur_utf, (unsigned) cur_utf);
-            }
-        }
+        cur_utf = edit_buffer_get_utf (&edit->buffer, edit->buffer.curs1, &char_length);
+        if (char_length > 0)
+            g_snprintf (byte_str, sizeof (byte_str), "%04u 0x%03X",
+                        (unsigned) cur_utf, (unsigned) cur_utf);
         else
-#endif
         {
-            unsigned char cur_byte;
-
-            cur_byte = edit_buffer_get_current_byte (&edit->buffer);
-            g_snprintf (byte_str, sizeof (byte_str), "%4d 0x%03X",
-                        (int) cur_byte, (unsigned) cur_byte);
+            cur_utf = edit_buffer_get_current_byte (&edit->buffer);
+            g_snprintf (byte_str, sizeof (byte_str), "%04d 0x%03X",
+                        (int) cur_utf, (unsigned) cur_utf);
         }
     }
+#endif
     else
-        strcpy (byte_str, "<EOF>     ");
+    {
+        unsigned char cur_byte;
+
+        cur_byte = edit_buffer_get_current_byte (&edit->buffer);
+        g_snprintf (byte_str, sizeof (byte_str), "%4d 0x%03X", (int) cur_byte, (unsigned) cur_byte);
+    }
 
     /* The field lengths just prevent the status line from shortening too much */
     if (simple_statusbar)
@@ -469,21 +465,18 @@ print_to_widget (WEdit * edit, long row, int start_col, int start_col_real,
 
         style = p->style & 0xFF00;
         textchar = p->ch;
-        color = p->style >> 16;
-
-        if ((style & MOD_ABNORMAL) != 0)
-            /* Non-printable - use black background */
-            color = 0;
+        /* If non-printable - use black background */
+        color = (style & MOD_ABNORMAL) != 0 ? 0 : p->style >> 16;
 
         if ((style & MOD_WHITESPACE) != 0)
         {
-            if ((style & MOD_MARKED) != 0)
+            if ((style & MOD_MARKED) == 0)
+                tty_setcolor (EDITOR_WHITESPACE_COLOR);
+            else
             {
                 textchar = ' ';
                 tty_setcolor (EDITOR_MARKED_COLOR);
             }
-            else
-                tty_setcolor (EDITOR_WHITESPACE_COLOR);
         }
         else if ((style & MOD_BOLD) != 0)
             tty_setcolor (EDITOR_BOLD_COLOR);
@@ -562,7 +555,9 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
             g_snprintf (line_stat, 2, "*");
     }
 
-    if (col + 16 > -edit->start_col)
+    if (col <= -(edit->start_col + 16))
+        start_col_real = start_col = 0;
+    else
     {
         off_t m1 = 0, m2 = 0;
 
@@ -573,18 +568,14 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
             off_t tws = 0;
 
             if (tty_use_colors () && visible_tws)
-            {
-                tws = edit_buffer_get_eol (&edit->buffer, b);
-                while (tws > b)
+                for (tws = edit_buffer_get_eol (&edit->buffer, b); tws > b; tws--)
                 {
                     unsigned int c;
 
                     c = edit_buffer_get_byte (&edit->buffer, tws - 1);
                     if (!whitespace (c))
                         break;
-                    tws--;
                 }
-            }
 
             while (col <= end_col - edit->start_col)
             {
@@ -594,25 +585,28 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
                 gboolean control_char = FALSE;
 
                 p->ch = 0;
-                p->style = 0;
-                if (q == edit->buffer.curs1)
-                    p->style |= MOD_CURSOR;
+                p->style = q == edit->buffer.curs1 ? MOD_CURSOR : 0;
+
                 if (q >= m1 && q < m2)
                 {
-                    if (edit->column_highlight)
+                    if (!edit->column_highlight)
+                        p->style |= MOD_MARKED;
+                    else
                     {
                         long x;
-                        long c1, c2;
+                        long c;
 
                         x = (long) edit_move_forward3 (edit, b, 0, q);
-                        c1 = MIN (edit->column1, edit->column2);
-                        c2 = MAX (edit->column1, edit->column2);
-                        if (x >= c1 && x < c2)
-                            p->style |= MOD_MARKED;
+                        c = MIN (edit->column1, edit->column2);
+                        if (x >= c)
+                        {
+                            c = MAX (edit->column1, edit->column2);
+                            if (x < c)
+                                p->style |= MOD_MARKED;
+                        }
                     }
-                    else
-                        p->style |= MOD_MARKED;
                 }
+
                 if (q == edit->bracket)
                     p->style |= MOD_BOLD;
                 if (q >= edit->found_start && q < (off_t) (edit->found_start + edit->found_len))
@@ -650,8 +644,8 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
                         if (tab_over < 0)
                             i += tab_over;
                         col += i;
-                        if (tty_use_colors () &&
-                            ((visible_tabs || (visible_tws && q >= tws)) && enable_show_tabs_tws))
+                        if (tty_use_colors () && (visible_tabs || (visible_tws && q >= tws))
+                            && enable_show_tabs_tws)
                         {
                             if ((p->style & MOD_MARKED) != 0)
                                 c = p->style;
@@ -825,10 +819,6 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
             }
         }
     }
-    else
-    {
-        start_col_real = start_col = 0;
-    }
 
     p->ch = 0;
 
@@ -915,15 +905,13 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
 
         if ((force & REDRAW_PAGE) != 0)
         {
-            row = start_row;
             b = edit_buffer_get_forward_offset (&edit->buffer, edit->start_display, start_row, 0);
-            while (row <= end_row)
+            for (row = start_row; row <= end_row; row++)
             {
                 if (key_pending (edit))
                     return;
                 edit_draw_this_line (edit, b, row, start_column, end_column);
                 b = edit_buffer_get_forward_offset (&edit->buffer, b, 1, 0);
-                row++;
             }
         }
         else
@@ -936,7 +924,7 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
 
                 row = start_row;
                 b = edit->start_display;
-                upto = curs_row - 1 <= end_row ? curs_row - 1 : end_row;
+                upto = MIN (curs_row - 1, end_row);
                 while (row <= upto)
                 {
                     if (key_pending (edit))
@@ -957,15 +945,13 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
 
             if ((force & REDRAW_AFTER_CURSOR) != 0 && end_row > curs_row)
             {
-                row = curs_row + 1 < start_row ? start_row : curs_row + 1;
                 b = edit_buffer_get_forward_offset (&edit->buffer, b, 1, 0);
-                while (row <= end_row)
+                for (row = MAX (curs_row + 1, start_row); row <= end_row; row++)
                 {
                     if (key_pending (edit))
                         return;
                     edit_draw_this_line (edit, b, row, start_column, end_column);
                     b = edit_buffer_get_forward_offset (&edit->buffer, b, 1, 0);
-                    row++;
                 }
             }
 
