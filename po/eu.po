@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-01-01 23:01+0400\n"
+"POT-Creation-Date: 2020-02-29 19:12+0300\n"
 "PO-Revision-Date: 2019-12-16 01:49+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Basque (http://www.transifex.com/mc/mc/language/eu/)\n"
@@ -487,13 +487,22 @@ msgstr "TERM ingurune-aldagaia ezarri gabe dago!\n"
 msgid "Cannot check SIGWINCH pipe"
 msgstr ""
 
-msgid "Cannot create pipe for SIGWINCH"
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Cannot create pipe for SIGWINCH: %s (%d)\n"
+msgstr "Ezin dira sortu hodiko isuriak"
+
+#, c-format
+msgid ""
+"\n"
+"Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
 msgstr ""
 
-msgid "Cannot configure write end of SIGWINCH pipe"
-msgstr ""
-
-msgid "Cannot configure read end of SIGWINCH pipe"
+#, c-format
+msgid ""
+"\n"
+"Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
 msgstr ""
 
 #, c-format
@@ -1669,7 +1678,8 @@ msgstr ""
 "Testu editore lagunkoi bat\n"
 "Midnight Commander-rarentzako idatzia."
 
-msgid "Copyright (C) 1996-2019 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2020 the Free Software Foundation"
 msgstr "Copyright (C) 1996-2019 the Free Software Foundation"
 
 msgid "About"
@@ -3831,6 +3841,16 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "Etxeko direktorioaren bide-izena ez da absolutua"
 
+#, fuzzy
+msgid ""
+"GNU Midnight Commander\n"
+"is already running on this terminal.\n"
+"Subshell support will be disabled."
+msgstr ""
+"GNU Midnight Commander dagoeneko\n"
+"exekutatzen ari da terminal honetan.\n"
+"Azpi-shell euskarria ezgaituko da."
+
 #, c-format
 msgid ""
 "\n"
@@ -3861,15 +3881,6 @@ msgstr ""
 "%s fitxategia ezin gorde:\n"
 "%s"
 
-msgid ""
-"GNU Midnight Commander is already\n"
-"running on this terminal.\n"
-"Subshell support will be disabled."
-msgstr ""
-"GNU Midnight Commander dagoeneko\n"
-"exekutatzen ari da terminal honetan.\n"
-"Azpi-shell euskarria ezgaituko da."
-
 #, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr "%s izeneko hodia ezin ireki\n"
@@ -3881,54 +3892,71 @@ msgstr "Shell oraindik jardunean dago. Irten hala ere?"
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Abisua: %s(e)ra ezin aldatu.\n"
 
-msgid "Using the S-Lang library with terminfo database\n"
-msgstr "S-Lang liburutegia terminfo datubasearekin erabiltzen\n"
-
-msgid "Using the ncurses library\n"
-msgstr "ncurses liburutegia erabiltzen\n"
-
-msgid "Using the ncursesw library\n"
-msgstr "ncursesw liburutegia erabiltzen\n"
-
-msgid "With builtin Editor and Aspell support\n"
+#, fuzzy
+msgid "With builtin Editor and Aspell support"
 msgstr "Barneratutako editorearekin eta Aspell euskarriarekin\n"
 
-msgid "With builtin Editor\n"
+#, fuzzy
+msgid "With builtin Editor"
 msgstr "builtin editorearekin\n"
 
-msgid "With optional subshell support\n"
+#, fuzzy
+msgid "With optional subshell support"
 msgstr "Hautazko azpi-shell euskarriarekin\n"
 
-msgid "With subshell support as default\n"
+#, fuzzy
+msgid "With subshell support as default"
 msgstr "Azpi-shell euskarria lehenetsita\n"
 
-msgid "With support for background operations\n"
+#, fuzzy
+msgid "With support for background operations"
 msgstr "Atzeko planoko eragiketetarako euskarriarekin\n"
 
-msgid "With mouse support on xterm and Linux console\n"
+#, fuzzy
+msgid "With mouse support on xterm and Linux console"
 msgstr "Sagu-euskarriarekin xterm-en eta Linux-en kontsolan\n"
 
-msgid "With mouse support on xterm\n"
+#, fuzzy
+msgid "With mouse support on xterm"
 msgstr "Sagu-euskarriarekin xterm-en\n"
 
-msgid "With support for X11 events\n"
+#, fuzzy
+msgid "With support for X11 events"
 msgstr "X11 gertaerak onartzen ditu\n"
 
-msgid "With internationalization support\n"
+#, fuzzy
+msgid "With internationalization support"
 msgstr "Nazioarteratzea onartzen du\n"
 
-msgid "With multiple codepages support\n"
+#, fuzzy
+msgid "With multiple codepages support"
 msgstr "Kode-orrien euskarri ugarirekin\n"
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"
 msgstr "GLib %d.%d.%d erabiliz eraikita\n"
 
+#, fuzzy, c-format
+msgid "Built with S-Lang %s with terminfo database\n"
+msgstr "S-Lang liburutegia terminfo datubasearekin erabiltzen\n"
+
 #, c-format
+msgid "Built with ncurses %s\n"
+msgstr ""
+
+msgid "Built with ncurses (unknown version)"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Built with ncursesw %s\n"
+msgstr "ncursesw liburutegia erabiltzen\n"
+
+msgid "Built with ncursesw (unknown version)"
+msgstr ""
+
 msgid "Virtual File Systems:"
 msgstr "Alegiazko fitxategi sistemak (VFS):"
 
-#, c-format
 msgid "Data types:"
 msgstr "Datu motak:"
 
@@ -4547,3 +4575,6 @@ msgstr "Hasieratik jarraitu?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Ezin eskuratu ondokoaren bertako kopia bat: /ftp://some.host/editme.txt"
+
+#~ msgid "Using the ncurses library\n"
+#~ msgstr "ncurses liburutegia erabiltzen\n"

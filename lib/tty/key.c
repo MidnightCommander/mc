@@ -1,7 +1,7 @@
 /*
    Keyboard support routines.
 
-   Copyright (C) 1994-2019
+   Copyright (C) 1994-2020
    Free Software Foundation, Inc.
 
    Written by:
@@ -1743,14 +1743,13 @@ get_key_code (int no_delay)
   pend_send:
     if (pending_keys != NULL)
     {
-        int d;
         gboolean bad_seq;
 
-        d = *pending_keys++;
-        while (d == ESC_CHAR)
-            d = ALT (*pending_keys++);
+        c = *pending_keys++;
+        while (c == ESC_CHAR)
+            c = ALT (*pending_keys++);
 
-        bad_seq = (*pending_keys != ESC_CHAR && *pending_keys != 0);
+        bad_seq = (*pending_keys != ESC_CHAR && *pending_keys != '\0');
         if (*pending_keys == '\0' || bad_seq)
             pending_keys = seq_append = NULL;
 
@@ -1766,14 +1765,14 @@ get_key_code (int no_delay)
 
             while (getch_with_timeout (old_esc_mode_timeout) >= 0 && --paranoia != 0)
                 ;
-            goto nodelay_try_again;
         }
+        else
+        {
+            if (c > 127 && c < 256 && use_8th_bit_as_meta)
+                c = ALT (c & 0x7f);
 
-        if (d > 127 && d < 256 && use_8th_bit_as_meta)
-            d = ALT (d & 0x7f);
-
-        this = NULL;
-        return correct_key_code (d);
+            goto done;
+        }
     }
 
   nodelay_try_again:
@@ -1791,30 +1790,27 @@ get_key_code (int no_delay)
         tty_nodelay (FALSE);
         if (c == -1)
         {
-            if (this != NULL && parent != NULL && parent->action == MCKEY_ESCAPE && old_esc_mode)
+            struct timeval current, time_out;
+
+            if (this == NULL || parent == NULL || parent->action != MCKEY_ESCAPE || !old_esc_mode ||
+                esctime.tv_sec == -1)
+                return -1;
+
+            GET_TIME (current);
+            time_out.tv_sec = old_esc_mode_timeout / 1000000 + esctime.tv_sec;
+            time_out.tv_usec = old_esc_mode_timeout % 1000000 + esctime.tv_usec;
+            if (time_out.tv_usec > 1000000)
             {
-                struct timeval current, time_out;
-
-                if (esctime.tv_sec == -1)
-                    return -1;
-
-                GET_TIME (current);
-                time_out.tv_sec = old_esc_mode_timeout / 1000000 + esctime.tv_sec;
-                time_out.tv_usec = old_esc_mode_timeout % 1000000 + esctime.tv_usec;
-                if (time_out.tv_usec > 1000000)
-                {
-                    time_out.tv_usec -= 1000000;
-                    time_out.tv_sec++;
-                }
-                if (current.tv_sec < time_out.tv_sec ||
-                    (current.tv_sec == time_out.tv_sec && current.tv_usec < time_out.tv_usec))
-                    return -1;
-                this = NULL;
-                pending_keys = seq_append = NULL;
-                return ESC_CHAR;
+                time_out.tv_usec -= 1000000;
+                time_out.tv_sec++;
             }
+            if (current.tv_sec < time_out.tv_sec ||
+                (current.tv_sec == time_out.tv_sec && current.tv_usec < time_out.tv_usec))
+                return -1;
 
-            return -1;
+            this = NULL;
+            pending_keys = seq_append = NULL;
+            return ESC_CHAR;
         }
     }
     else if (c == -1)
@@ -1822,13 +1818,14 @@ get_key_code (int no_delay)
         /* Maybe we got an incomplete match.
            This we do only in delay mode, since otherwise
            tty_lowlevel_getch can return -1 at any time. */
-        if (seq_append != NULL)
+        if (seq_append == NULL)
         {
-            pending_keys = seq_buffer;
-            goto pend_send;
+            this = NULL;
+            return -1;
         }
-        this = NULL;
-        return -1;
+
+        pending_keys = seq_buffer;
+        goto pend_send;
     }
 
     /* Search the key on the root */
@@ -1854,12 +1851,9 @@ get_key_code (int no_delay)
             if (this->child == NULL)
             {
                 /* We got a complete match, return and reset search */
-                int code;
-
                 pending_keys = seq_append = NULL;
-                code = this->code;
-                this = NULL;
-                return correct_key_code (code);
+                c = this->code;
+                goto done;
             }
 
             /* No match yet, but it may be a prefix for a valid seq */
@@ -1881,13 +1875,12 @@ get_key_code (int no_delay)
 
                 esctime.tv_sec = -1;
                 c = getch_with_timeout (old_esc_mode_timeout);
-                if (c == -1)
-                {
-                    pending_keys = seq_append = NULL;
-                    this = NULL;
-                    return ESC_CHAR;
-                }
-                continue;
+                if (c != -1)
+                    continue;
+
+                pending_keys = seq_append = NULL;
+                this = NULL;
+                return ESC_CHAR;
             }
 
             if (no_delay != 0)
@@ -1915,8 +1908,7 @@ get_key_code (int no_delay)
                 c = ALT (c);
 
             pending_keys = seq_append = NULL;
-            this = NULL;
-            return correct_key_code (c);
+            goto done;
         }
 
         /* Unknown sequence. Maybe a prefix of a longer one. Save it. */
@@ -1925,6 +1917,7 @@ get_key_code (int no_delay)
         goto pend_send;
     }                           /* while (this != NULL) */
 
+  done:
     this = NULL;
     return correct_key_code (c);
 }

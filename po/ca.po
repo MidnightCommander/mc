@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-01-01 23:01+0400\n"
+"POT-Creation-Date: 2020-02-29 19:12+0300\n"
 "PO-Revision-Date: 2019-12-22 22:08+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/mc/mc/language/ca/)\n"
@@ -496,13 +496,22 @@ msgstr "La variable d'entorn TERM no està definida!\n"
 msgid "Cannot check SIGWINCH pipe"
 msgstr "No s'ha pogut comprovar la canonada SIGWINCH"
 
-msgid "Cannot create pipe for SIGWINCH"
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Cannot create pipe for SIGWINCH: %s (%d)\n"
 msgstr "No s'han pogut crear la canonada per a SIGWINCH"
 
-msgid "Cannot configure write end of SIGWINCH pipe"
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
 msgstr "No s'ha pogut configurar l'escriptura final de la canonada SIGWINCH"
 
-msgid "Cannot configure read end of SIGWINCH pipe"
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
 msgstr "No s'ha pogut configurar la lectura final de la canonada SIGWINCH"
 
 #, c-format
@@ -1680,7 +1689,8 @@ msgstr ""
 "Un editor de text fàcil d'emprar\n"
 "escrit per al Midnight Commander."
 
-msgid "Copyright (C) 1996-2019 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2020 the Free Software Foundation"
 msgstr "Copyright (C) 1996-2019 la Free Software Foundation"
 
 msgid "About"
@@ -3842,6 +3852,16 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "El camí del directori d'inici no és absolut"
 
+#, fuzzy
+msgid ""
+"GNU Midnight Commander\n"
+"is already running on this terminal.\n"
+"Subshell support will be disabled."
+msgstr ""
+"GNU Midnight Commander està\n"
+"funcionant en aquest terminal.\n"
+"El suport Subshell es desactivarà."
+
 #, c-format
 msgid ""
 "\n"
@@ -3872,15 +3892,6 @@ msgstr ""
 "No s'ha pogut desar el fitxer %s:\n"
 "%s"
 
-msgid ""
-"GNU Midnight Commander is already\n"
-"running on this terminal.\n"
-"Subshell support will be disabled."
-msgstr ""
-"GNU Midnight Commander està\n"
-"funcionant en aquest terminal.\n"
-"El suport Subshell es desactivarà."
-
 #, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr "No s'ha pogut obrir la canonada anomenada %s\n"
@@ -3892,55 +3903,72 @@ msgstr "L'intèrpret d'ordres encara està actiu. Surto de totes maneres?"
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Avís: no s'ha pogut canviar a %s.\n"
 
-msgid "Using the S-Lang library with terminfo database\n"
-msgstr "Emprant la biblioteca «S-Lang» amb la base de dades «terminfo»\n"
-
-msgid "Using the ncurses library\n"
-msgstr "Emprant la biblioteca «ncurses»\n"
-
-msgid "Using the ncursesw library\n"
-msgstr "Emprant la biblioteca «ncursesw»\n"
-
-msgid "With builtin Editor and Aspell support\n"
+#, fuzzy
+msgid "With builtin Editor and Aspell support"
 msgstr "Amb editor incorporat i implementació per a Aspell\n"
 
-msgid "With builtin Editor\n"
+#, fuzzy
+msgid "With builtin Editor"
 msgstr "Amb editor incorporat\n"
 
-msgid "With optional subshell support\n"
+#, fuzzy
+msgid "With optional subshell support"
 msgstr "Amb implementació opcional de subintèrpret\n"
 
-msgid "With subshell support as default\n"
+#, fuzzy
+msgid "With subshell support as default"
 msgstr "Amb implementació de subintèrpret per omissió\n"
 
-msgid "With support for background operations\n"
+#, fuzzy
+msgid "With support for background operations"
 msgstr "Amb implementació per a operacions en segon pla\n"
 
-msgid "With mouse support on xterm and Linux console\n"
+#, fuzzy
+msgid "With mouse support on xterm and Linux console"
 msgstr ""
 "Amb la possibilitat d'emprar el ratolí al xterm i a la consola de Linux\n"
 
-msgid "With mouse support on xterm\n"
+#, fuzzy
+msgid "With mouse support on xterm"
 msgstr "Amb la possibilitat d'emprar el ratolí al xterm.\n"
 
-msgid "With support for X11 events\n"
+#, fuzzy
+msgid "With support for X11 events"
 msgstr "Amb la possibilitat d'emprar els esdeveniments de l'X11\n"
 
-msgid "With internationalization support\n"
+#, fuzzy
+msgid "With internationalization support"
 msgstr "Amb implementació de la internacionalització\n"
 
-msgid "With multiple codepages support\n"
+#, fuzzy
+msgid "With multiple codepages support"
 msgstr "Amb implementació per a múltiples pàgines de codis\n"
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"
 msgstr "Construït amb GLib %d.%d.%d\n"
 
+#, fuzzy, c-format
+msgid "Built with S-Lang %s with terminfo database\n"
+msgstr "Emprant la biblioteca «S-Lang» amb la base de dades «terminfo»\n"
+
 #, c-format
+msgid "Built with ncurses %s\n"
+msgstr ""
+
+msgid "Built with ncurses (unknown version)"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Built with ncursesw %s\n"
+msgstr "Emprant la biblioteca «ncursesw»\n"
+
+msgid "Built with ncursesw (unknown version)"
+msgstr ""
+
 msgid "Virtual File Systems:"
 msgstr "Sistemes de fitxers virtuals:"
 
-#, c-format
 msgid "Data types:"
 msgstr "Tipus de dades:"
 
@@ -4560,3 +4588,6 @@ msgstr "Continuo des del començament?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "No s'ha pogut obtenir una còpia local de /ftp://algun.amfitrió/editam.txt"
+
+#~ msgid "Using the ncurses library\n"
+#~ msgstr "Emprant la biblioteca «ncurses»\n"

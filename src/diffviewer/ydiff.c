@@ -1,7 +1,7 @@
 /*
    File difference viewer
 
-   Copyright (C) 2007-2019
+   Copyright (C) 2007-2020
    Free Software Foundation, Inc.
 
    Written by:

@@ -1,6 +1,6 @@
 /* NT error codes.  please read nterr.h
 
-   Copyright (C) 2011-2019
+   Copyright (C) 2011-2020
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.

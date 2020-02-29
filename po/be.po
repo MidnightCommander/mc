@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-01-01 23:01+0400\n"
+"POT-Creation-Date: 2020-02-29 19:12+0300\n"
 "PO-Revision-Date: 2019-12-16 01:49+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Belarusian (http://www.transifex.com/mc/mc/language/be/)\n"
@@ -494,13 +494,22 @@ msgstr "Зменную асяроддзя «TERM» не вызначылі!\n"
 msgid "Cannot check SIGWINCH pipe"
 msgstr ""
 
-msgid "Cannot create pipe for SIGWINCH"
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Cannot create pipe for SIGWINCH: %s (%d)\n"
+msgstr "Немагчыма стварыць паток каналу"
+
+#, c-format
+msgid ""
+"\n"
+"Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
 msgstr ""
 
-msgid "Cannot configure write end of SIGWINCH pipe"
-msgstr ""
-
-msgid "Cannot configure read end of SIGWINCH pipe"
+#, c-format
+msgid ""
+"\n"
+"Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
 msgstr ""
 
 #, c-format
@@ -1672,7 +1681,7 @@ msgstr ""
 "Зручны тэкставы рэдактар,\n"
 "напісаны для Midnight Commander."
 
-msgid "Copyright (C) 1996-2019 the Free Software Foundation"
+msgid "Copyright (C) 1996-2020 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -3830,6 +3839,16 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "Шлях да хатняга каталога не поўны"
 
+#, fuzzy
+msgid ""
+"GNU Midnight Commander\n"
+"is already running on this terminal.\n"
+"Subshell support will be disabled."
+msgstr ""
+"На тэрмінале ўжо працуе іншы\n"
+"«Midnight Commander».\n"
+"Убудаваная абалонка працаваць не будзе."
+
 #, c-format
 msgid ""
 "\n"
@@ -3860,15 +3879,6 @@ msgstr ""
 "Немагчыма захаваць файл «%s»:\n"
 "%s"
 
-msgid ""
-"GNU Midnight Commander is already\n"
-"running on this terminal.\n"
-"Subshell support will be disabled."
-msgstr ""
-"На тэрмінале ўжо працуе іншы\n"
-"«Midnight Commander».\n"
-"Убудаваная абалонка працаваць не будзе."
-
 #, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr "Немагчыма адкрыць названы канал «%s»\n"
@@ -3880,54 +3890,71 @@ msgstr "Абалонка яшчэ выкарыстоўваецца. Усё ро�
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Увага: немагчыма перайсці ў «%s».\n"
 
-msgid "Using the S-Lang library with terminfo database\n"
-msgstr "З бібліятэкай «S-Lang» і базай «terminfo»\n"
-
-msgid "Using the ncurses library\n"
-msgstr "З бібліятэкай «ncurses»\n"
-
-msgid "Using the ncursesw library\n"
-msgstr "З бібліятэкай «ncursesw»\n"
-
-msgid "With builtin Editor and Aspell support\n"
-msgstr ""
-
-msgid "With builtin Editor\n"
+#, fuzzy
+msgid "With builtin Editor and Aspell support"
 msgstr "З убудаваным рэдактарам\n"
 
-msgid "With optional subshell support\n"
+#, fuzzy
+msgid "With builtin Editor"
+msgstr "З убудаваным рэдактарам\n"
+
+#, fuzzy
+msgid "With optional subshell support"
 msgstr "З наладжваемай падтрымкай ўбудаванай абалонкі\n"
 
-msgid "With subshell support as default\n"
+#, fuzzy
+msgid "With subshell support as default"
 msgstr "З падтрымкай ўбудаванай абалонкі\n"
 
-msgid "With support for background operations\n"
+#, fuzzy
+msgid "With support for background operations"
 msgstr "З падтрымкай дзеянняў у фоне\n"
 
-msgid "With mouse support on xterm and Linux console\n"
+#, fuzzy
+msgid "With mouse support on xterm and Linux console"
 msgstr "З падтрымкай мышы ў «xterm» і кансолі «Linux»\n"
 
-msgid "With mouse support on xterm\n"
+#, fuzzy
+msgid "With mouse support on xterm"
 msgstr "З падтрымкай мышы ў «xterm»\n"
 
-msgid "With support for X11 events\n"
+#, fuzzy
+msgid "With support for X11 events"
 msgstr "З падтрымкай падзей X11\n"
 
-msgid "With internationalization support\n"
+#, fuzzy
+msgid "With internationalization support"
 msgstr "З падтрымкай інтэрнацыяналізацыі\n"
 
-msgid "With multiple codepages support\n"
+#, fuzzy
+msgid "With multiple codepages support"
 msgstr "З падтрымкаю мноства кадаванняў\n"
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"
 msgstr "Сабрана з бібліятэкай «GLib» версіі %d.%d.%d\n"
 
+#, fuzzy, c-format
+msgid "Built with S-Lang %s with terminfo database\n"
+msgstr "З бібліятэкай «S-Lang» і базай «terminfo»\n"
+
 #, c-format
+msgid "Built with ncurses %s\n"
+msgstr ""
+
+msgid "Built with ncurses (unknown version)"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Built with ncursesw %s\n"
+msgstr "З бібліятэкай «ncursesw»\n"
+
+msgid "Built with ncursesw (unknown version)"
+msgstr ""
+
 msgid "Virtual File Systems:"
 msgstr "Віртуальныя файлавыя сістэмы:"
 
-#, c-format
 msgid "Data types:"
 msgstr "Тыпы даных:"
 
@@ -4544,3 +4571,6 @@ msgstr "Працягваць ад пачатку?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Немагчыма атрымаць лакальную копію /ftp://some.host/editme.txt"
+
+#~ msgid "Using the ncurses library\n"
+#~ msgstr "З бібліятэкай «ncurses»\n"

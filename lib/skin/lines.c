@@ -2,7 +2,7 @@
    Skins engine.
    Work with line draving chars.
 
-   Copyright (C) 2009-2019
+   Copyright (C) 2009-2020
    Free Software Foundation, Inc.
 
    Written by:
@@ -44,46 +44,11 @@ static int
 mc_skin_lines_load_frm (mc_skin_t * mc_skin, const char *name)
 {
     int ret;
-    char *frm_val = NULL;
+    char *frm_val;
+
     frm_val = mc_config_get_string_raw (mc_skin->config, "Lines", name, " ");
     ret = mc_tty_normalize_lines_char (frm_val);
-
     g_free (frm_val);
-
-#if 0
-    switch (ret)
-    {
-    case 0x80:
-        ret = ACS_HLINE;
-        break;
-    case 0x81:
-        ret = ACS_VLINE;
-        break;
-    case 0x82:
-        ret = ACS_ULCORNER;
-        break;
-    case 0x83:
-        ret = ACS_URCORNER;
-        break;
-    case 0x84:
-        ret = ACS_LLCORNER;
-        break;
-    case 0x85:
-        ret = ACS_LRCORNER;
-        break;
-    case 0x86:
-        ret = ACS_LTEE;
-        break;
-    case 0x87:
-        ret = ACS_RTEE;
-        break;
-    case 0x8a:
-        ret = ACS_PLUS;
-        break;
-    default:
-        break;
-    }
-#endif
 
     return ret;
 }

@@ -1,7 +1,7 @@
 /*
    Return a list of mounted file systems
 
-   Copyright (C) 1991-2019
+   Copyright (C) 1991-2020
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
@@ -256,14 +256,19 @@ me_remote (char const *fs_name, char const *fs_type)
 #endif
 #ifndef ME_REMOTE
 /* A file system is 'remote' if its Fs_name contains a ':'
-   or if (it is of type (smbfs or cifs) and its Fs_name starts with '//')
+   or if (it is of type (smbfs or smb3 or cifs) and its Fs_name starts with '//')
+   or if it is of type (afs or auristorfs)
    or Fs_name is equal to "-hosts" (used by autofs to mount remote fs).  */
 #define ME_REMOTE(Fs_name, Fs_type) \
     (strchr (Fs_name, ':') != NULL \
      || ((Fs_name)[0] == '/' \
          && (Fs_name)[1] == '/' \
-         && (strcmp (Fs_type, "smbfs") == 0 || strcmp (Fs_type, "cifs") == 0)) \
-     || (strcmp("-hosts", Fs_name) == 0))
+         && (strcmp (Fs_type, "smbfs") == 0 \
+             || strcmp (Fs_type, "smb3") == 0 \
+             || strcmp (Fs_type, "cifs") == 0)) \
+     || strcmp (Fs_type, "afs") == 0 \
+     || strcmp (Fs_type, "auristorfs") == 0 \
+     || strcmp ("-hosts", Fs_name) == 0)
 #endif
 
 /* Many space usage primitives use all 1 bits to denote a value that is
@@ -290,7 +295,7 @@ me_remote (char const *fs_name, char const *fs_type)
 #define PROPAGATE_TOP_BIT(x) ((x) | ~ (EXTRACT_TOP_BIT (x) - 1))
 
 #ifdef STAT_STATVFS
-#if ! (__linux__ && (__GLIBC__ || __UCLIBC__))
+#if ! (defined __linux__ && (defined __GLIBC__ || defined __UCLIBC__))
 /* The FRSIZE fallback is not required in this case.  */
 #undef STAT_STATFS2_FRSIZE
 #else
@@ -344,7 +349,7 @@ static GSList *mc_mount_list = NULL;
 static int
 statvfs_works (void)
 {
-#if ! (__linux__ && (__GLIBC__ || __UCLIBC__))
+#if ! (defined __linux__ && (defined __GLIBC__ || defined __UCLIBC__))
     return 1;
 #else
     static int statvfs_works_cache = -1;

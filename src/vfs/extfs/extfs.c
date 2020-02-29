@@ -1,7 +1,7 @@
 /*
    Virtual File System: External file system.
 
-   Copyright (C) 1995-2019
+   Copyright (C) 1995-2020
    Free Software Foundation, Inc.
 
    Written by:

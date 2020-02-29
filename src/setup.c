@@ -1,7 +1,7 @@
 /*
    Setup loading/saving.
 
-   Copyright (C) 1994-2019
+   Copyright (C) 1994-2020
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
@@ -844,8 +844,8 @@ load_setup_get_keymap_profile_config (gboolean load_from_file)
         load_setup_init_config_from_file (&keymap_config, fname, TRUE);
         goto done;
     }
-    g_free (fname);
-    fname = NULL;
+
+    MC_PTR_FREE (fname);
 
     /* 5) main config; [Midnight Commander] -> keymap */
     fname2 = mc_config_get_string (mc_global.main_config, CONFIG_APP_SECTION, "keymap", NULL);
@@ -1429,6 +1429,8 @@ free_keymap_defs (void)
         g_array_free (panel_keymap, TRUE);
     if (dialog_keymap != NULL)
         g_array_free (dialog_keymap, TRUE);
+    if (menu_keymap != NULL)
+        g_array_free (menu_keymap, TRUE);
     if (input_keymap != NULL)
         g_array_free (input_keymap, TRUE);
     if (listbox_keymap != NULL)

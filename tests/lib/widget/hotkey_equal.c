@@ -1,7 +1,7 @@
 /*
    lib/widget - tests for hotkey comparision
 
-   Copyright (C) 2019
+   Copyright (C) 2019-2020
    Free Software Foundation, Inc.
 
    Written by:

@@ -1,7 +1,7 @@
 /*
    lib/strutil - tests for lib/strutil/fileverscmp function.
 
-   Copyright (C) 2019
+   Copyright (C) 2019-2020
    Free Software Foundation, Inc.
 
    Written by:

@@ -1,7 +1,7 @@
 /*
    Provides a functions for working with shell.
 
-   Copyright (C) 2006-2019
+   Copyright (C) 2006-2020
    Free Software Foundation, Inc.
 
    Written by:

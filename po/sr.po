@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-01-01 23:01+0400\n"
+"POT-Creation-Date: 2020-02-29 19:12+0300\n"
 "PO-Revision-Date: 2019-12-16 01:49+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Serbian (http://www.transifex.com/mc/mc/language/sr/)\n"
@@ -480,13 +480,22 @@ msgstr "Променљива љуске „TERM“ је расподешена!\
 msgid "Cannot check SIGWINCH pipe"
 msgstr ""
 
-msgid "Cannot create pipe for SIGWINCH"
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Cannot create pipe for SIGWINCH: %s (%d)\n"
+msgstr "Не могу да направим токове спојке"
+
+#, c-format
+msgid ""
+"\n"
+"Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
 msgstr ""
 
-msgid "Cannot configure write end of SIGWINCH pipe"
-msgstr ""
-
-msgid "Cannot configure read end of SIGWINCH pipe"
+#, c-format
+msgid ""
+"\n"
+"Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
 msgstr ""
 
 #, c-format
@@ -1658,7 +1667,7 @@ msgstr ""
 "Уређивач текста наклоњен кориснику\n"
 "написан за Поноћног наредника."
 
-msgid "Copyright (C) 1996-2019 the Free Software Foundation"
+msgid "Copyright (C) 1996-2020 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -3809,6 +3818,16 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "Путања почетног директоријума није апсолутна"
 
+#, fuzzy
+msgid ""
+"GNU Midnight Commander\n"
+"is already running on this terminal.\n"
+"Subshell support will be disabled."
+msgstr ""
+"Гнуов Поноћни наредник је већ\n"
+"покренут на овом терминалу.\n"
+"Подршка за подљуске ће бити искључена."
+
 #, c-format
 msgid ""
 "\n"
@@ -3839,15 +3858,6 @@ msgstr ""
 "Не могу да сачувам датотеку „%s“:\n"
 "%s"
 
-msgid ""
-"GNU Midnight Commander is already\n"
-"running on this terminal.\n"
-"Subshell support will be disabled."
-msgstr ""
-"Гнуов Поноћни наредник је већ\n"
-"покренут на овом терминалу.\n"
-"Подршка за подљуске ће бити искључена."
-
 #, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr "Не могу да отворим именовану спојку „%s“\n"
@@ -3859,54 +3869,71 @@ msgstr "Љуска је још увек радна. Да ипак изађем?"
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Упозорење: Не могу да пређем на „%s“.\n"
 
-msgid "Using the S-Lang library with terminfo database\n"
-msgstr "Користим библиотеку „S-Lang“ са базом терминалских података\n"
-
-msgid "Using the ncurses library\n"
-msgstr "Користим библиотеку „ncurses“\n"
-
-msgid "Using the ncursesw library\n"
-msgstr "Користим библиотеку „ncursesw“\n"
-
-msgid "With builtin Editor and Aspell support\n"
-msgstr ""
-
-msgid "With builtin Editor\n"
+#, fuzzy
+msgid "With builtin Editor and Aspell support"
 msgstr "Са уграђеним уређивачем\n"
 
-msgid "With optional subshell support\n"
+#, fuzzy
+msgid "With builtin Editor"
+msgstr "Са уграђеним уређивачем\n"
+
+#, fuzzy
+msgid "With optional subshell support"
 msgstr "Са изборном подршком подљуске\n"
 
-msgid "With subshell support as default\n"
+#, fuzzy
+msgid "With subshell support as default"
 msgstr "Са подршком подљуске као основном\n"
 
-msgid "With support for background operations\n"
+#, fuzzy
+msgid "With support for background operations"
 msgstr "Са подршком за позадинске радње\n"
 
-msgid "With mouse support on xterm and Linux console\n"
+#, fuzzy
+msgid "With mouse support on xterm and Linux console"
 msgstr "Са подршком за миша у Х терминалу и конзоли\n"
 
-msgid "With mouse support on xterm\n"
+#, fuzzy
+msgid "With mouse support on xterm"
 msgstr "Са подршком за миша у Х терминалу\n"
 
-msgid "With support for X11 events\n"
+#, fuzzy
+msgid "With support for X11 events"
 msgstr "Са подршком за догађаје Х11\n"
 
-msgid "With internationalization support\n"
+#, fuzzy
+msgid "With internationalization support"
 msgstr "Са подршком за интернационализацију\n"
 
-msgid "With multiple codepages support\n"
+#, fuzzy
+msgid "With multiple codepages support"
 msgstr "Са подршком за више кодних страница\n"
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"
 msgstr "Изграђено је Гбиблиотеком %d.%d.%d\n"
 
+#, fuzzy, c-format
+msgid "Built with S-Lang %s with terminfo database\n"
+msgstr "Користим библиотеку „S-Lang“ са базом терминалских података\n"
+
 #, c-format
+msgid "Built with ncurses %s\n"
+msgstr ""
+
+msgid "Built with ncurses (unknown version)"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Built with ncursesw %s\n"
+msgstr "Користим библиотеку „ncursesw“\n"
+
+msgid "Built with ncursesw (unknown version)"
+msgstr ""
+
 msgid "Virtual File Systems:"
 msgstr "Виртуелни систем датотека:"
 
-#, c-format
 msgid "Data types:"
 msgstr "Врсте података:"
 
@@ -4522,3 +4549,6 @@ msgstr "Да наставим са почетка?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не могу да довучем месни примерак „/ftp://some.host/editme.txt“"
+
+#~ msgid "Using the ncurses library\n"
+#~ msgstr "Користим библиотеку „ncurses“\n"

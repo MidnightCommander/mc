@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-01-01 23:01+0400\n"
+"POT-Creation-Date: 2020-02-29 19:12+0300\n"
 "PO-Revision-Date: 2019-12-16 01:49+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/mc/mc/language/id/)\n"
@@ -480,13 +480,22 @@ msgstr "Environment variable TERM belum diset\n"
 msgid "Cannot check SIGWINCH pipe"
 msgstr ""
 
-msgid "Cannot create pipe for SIGWINCH"
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Cannot create pipe for SIGWINCH: %s (%d)\n"
+msgstr "Gagal membuat pipe streams"
+
+#, c-format
+msgid ""
+"\n"
+"Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
 msgstr ""
 
-msgid "Cannot configure write end of SIGWINCH pipe"
-msgstr ""
-
-msgid "Cannot configure read end of SIGWINCH pipe"
+#, c-format
+msgid ""
+"\n"
+"Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
 msgstr ""
 
 #, c-format
@@ -1621,7 +1630,7 @@ msgid ""
 "written for the Midnight Commander."
 msgstr ""
 
-msgid "Copyright (C) 1996-2019 the Free Software Foundation"
+msgid "Copyright (C) 1996-2020 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -3641,6 +3650,12 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr ""
 
+msgid ""
+"GNU Midnight Commander\n"
+"is already running on this terminal.\n"
+"Subshell support will be disabled."
+msgstr ""
+
 #, c-format
 msgid ""
 "\n"
@@ -3666,12 +3681,6 @@ msgid ""
 "%s"
 msgstr ""
 
-msgid ""
-"GNU Midnight Commander is already\n"
-"running on this terminal.\n"
-"Subshell support will be disabled."
-msgstr ""
-
 #, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr ""
@@ -3683,43 +3692,38 @@ msgstr ""
 msgid "Warning: Cannot change to %s.\n"
 msgstr ""
 
-msgid "Using the S-Lang library with terminfo database\n"
+msgid "With builtin Editor and Aspell support"
 msgstr ""
 
-msgid "Using the ncurses library\n"
+msgid "With builtin Editor"
 msgstr ""
 
-msgid "Using the ncursesw library\n"
+#, fuzzy
+msgid "With optional subshell support"
+msgstr "Non aktifkan subshell"
+
+#, fuzzy
+msgid "With subshell support as default"
+msgstr "Perbolehkan subshell (default)"
+
+msgid "With support for background operations"
 msgstr ""
 
-msgid "With builtin Editor and Aspell support\n"
+#, fuzzy
+msgid "With mouse support on xterm and Linux console"
+msgstr "Non aktifkan mouse support dalam moda text"
+
+#, fuzzy
+msgid "With mouse support on xterm"
+msgstr "Non aktifkan mouse support dalam moda text"
+
+msgid "With support for X11 events"
 msgstr ""
 
-msgid "With builtin Editor\n"
+msgid "With internationalization support"
 msgstr ""
 
-msgid "With optional subshell support\n"
-msgstr ""
-
-msgid "With subshell support as default\n"
-msgstr ""
-
-msgid "With support for background operations\n"
-msgstr ""
-
-msgid "With mouse support on xterm and Linux console\n"
-msgstr ""
-
-msgid "With mouse support on xterm\n"
-msgstr ""
-
-msgid "With support for X11 events\n"
-msgstr ""
-
-msgid "With internationalization support\n"
-msgstr ""
-
-msgid "With multiple codepages support\n"
+msgid "With multiple codepages support"
 msgstr ""
 
 #, c-format
@@ -3727,10 +3731,26 @@ msgid "Built with GLib %d.%d.%d\n"
 msgstr ""
 
 #, c-format
-msgid "Virtual File Systems:"
+msgid "Built with S-Lang %s with terminfo database\n"
 msgstr ""
 
 #, c-format
+msgid "Built with ncurses %s\n"
+msgstr ""
+
+msgid "Built with ncurses (unknown version)"
+msgstr ""
+
+#, c-format
+msgid "Built with ncursesw %s\n"
+msgstr ""
+
+msgid "Built with ncursesw (unknown version)"
+msgstr ""
+
+msgid "Virtual File Systems:"
+msgstr ""
+
 msgid "Data types:"
 msgstr ""
 

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-01-01 23:01+0400\n"
+"POT-Creation-Date: 2020-02-29 19:12+0300\n"
 "PO-Revision-Date: 2019-12-16 01:49+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/mc/mc/language/nl/)\n"
@@ -491,13 +491,22 @@ msgstr "De TERM omgevingsvariabele is niet gezet!\n"
 msgid "Cannot check SIGWINCH pipe"
 msgstr ""
 
-msgid "Cannot create pipe for SIGWINCH"
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Cannot create pipe for SIGWINCH: %s (%d)\n"
+msgstr "Kan pipe streams niet aanmaken"
+
+#, c-format
+msgid ""
+"\n"
+"Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
 msgstr ""
 
-msgid "Cannot configure write end of SIGWINCH pipe"
-msgstr ""
-
-msgid "Cannot configure read end of SIGWINCH pipe"
+#, c-format
+msgid ""
+"\n"
+"Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
 msgstr ""
 
 #, c-format
@@ -1666,7 +1675,7 @@ msgstr ""
 "Eeen gebruikersvriendelijke tekstbewerker\n"
 "geschreven voor de Midnight Commander"
 
-msgid "Copyright (C) 1996-2019 the Free Software Foundation"
+msgid "Copyright (C) 1996-2020 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -3823,6 +3832,16 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "Pad van thuismap is niet absoluut"
 
+#, fuzzy
+msgid ""
+"GNU Midnight Commander\n"
+"is already running on this terminal.\n"
+"Subshell support will be disabled."
+msgstr ""
+"GNU Midnight Commander draait al in\n"
+"deze terminal.\n"
+"Subshell support wordt uitgeschakeld."
+
 #, c-format
 msgid ""
 "\n"
@@ -3853,15 +3872,6 @@ msgstr ""
 " Kan bestand %s niet opslaan: \n"
 " %s "
 
-msgid ""
-"GNU Midnight Commander is already\n"
-"running on this terminal.\n"
-"Subshell support will be disabled."
-msgstr ""
-"GNU Midnight Commander draait al in\n"
-"deze terminal.\n"
-"Subshell support wordt uitgeschakeld."
-
 #, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr "Openen van 'named pipe' %s mislukt\n"
@@ -3873,54 +3883,71 @@ msgstr "De shell is nog steeds actief. Toch stoppen?"
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Waarschuwing: Schakelen naar %s mislukt.\n"
 
-msgid "Using the S-Lang library with terminfo database\n"
-msgstr "Gebruiken van S-Lang bibliotheek met terminfo database\n"
-
-msgid "Using the ncurses library\n"
-msgstr "Gebruiken van ncurses bibliotheek\n"
-
-msgid "Using the ncursesw library\n"
-msgstr "Gebruiken van ncursesw bibliotheek\n"
-
-msgid "With builtin Editor and Aspell support\n"
-msgstr ""
-
-msgid "With builtin Editor\n"
+#, fuzzy
+msgid "With builtin Editor and Aspell support"
 msgstr "Met ingebouwde editor\n"
 
-msgid "With optional subshell support\n"
+#, fuzzy
+msgid "With builtin Editor"
+msgstr "Met ingebouwde editor\n"
+
+#, fuzzy
+msgid "With optional subshell support"
 msgstr "Met optionele subshell ondersteuning\n"
 
-msgid "With subshell support as default\n"
+#, fuzzy
+msgid "With subshell support as default"
 msgstr "Met subshell ondersteuning als standaard\n"
 
-msgid "With support for background operations\n"
+#, fuzzy
+msgid "With support for background operations"
 msgstr "Met ondersteuning voor achtergrondtaken\n"
 
-msgid "With mouse support on xterm and Linux console\n"
+#, fuzzy
+msgid "With mouse support on xterm and Linux console"
 msgstr "Met muisondersteuning voor xterms en de Linux-console\n"
 
-msgid "With mouse support on xterm\n"
+#, fuzzy
+msgid "With mouse support on xterm"
 msgstr "Met muisondersteuning voor xterms.\n"
 
-msgid "With support for X11 events\n"
+#, fuzzy
+msgid "With support for X11 events"
 msgstr "Met ondersteuning voor X11 signalen\n"
 
-msgid "With internationalization support\n"
+#, fuzzy
+msgid "With internationalization support"
 msgstr "Met ondersteuning voor internationalisatie\n"
 
-msgid "With multiple codepages support\n"
+#, fuzzy
+msgid "With multiple codepages support"
 msgstr "Met ondersteuning voor meerdere karaktersets\n"
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"
 msgstr "Gebouwd met GLib %d.%d.%d\n"
 
+#, fuzzy, c-format
+msgid "Built with S-Lang %s with terminfo database\n"
+msgstr "Gebruiken van S-Lang bibliotheek met terminfo database\n"
+
 #, c-format
+msgid "Built with ncurses %s\n"
+msgstr ""
+
+msgid "Built with ncurses (unknown version)"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Built with ncursesw %s\n"
+msgstr "Gebruiken van ncursesw bibliotheek\n"
+
+msgid "Built with ncursesw (unknown version)"
+msgstr ""
+
 msgid "Virtual File Systems:"
 msgstr "Virtuele Bestandssystemen:"
 
-#, c-format
 msgid "Data types:"
 msgstr "Datatypen:"
 
@@ -4528,3 +4555,6 @@ msgstr "Doorgaan vanaf het begin?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan geen lokale versie van /ftp://some.host/editme.txt ophalen"
+
+#~ msgid "Using the ncurses library\n"
+#~ msgstr "Gebruiken van ncurses bibliotheek\n"

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-01-19 01:45+0400\n"
+"POT-Creation-Date: 2020-02-29 19:12+0300\n"
 "PO-Revision-Date: 2020-01-18 12:57+0000\n"
 "Last-Translator: Serdar Sağlam <teknomobil@msn.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/mc/mc/language/tr/)\n"
@@ -484,13 +484,22 @@ msgstr "TERM çevre değişkeni atanmamış!\n"
 msgid "Cannot check SIGWINCH pipe"
 msgstr ""
 
-msgid "Cannot create pipe for SIGWINCH"
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Cannot create pipe for SIGWINCH: %s (%d)\n"
+msgstr "Boru akışı oluşturulamadı"
+
+#, c-format
+msgid ""
+"\n"
+"Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
 msgstr ""
 
-msgid "Cannot configure write end of SIGWINCH pipe"
-msgstr ""
-
-msgid "Cannot configure read end of SIGWINCH pipe"
+#, c-format
+msgid ""
+"\n"
+"Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
 msgstr ""
 
 #, c-format
@@ -1666,7 +1675,8 @@ msgstr ""
 "Kullanıcı dostu bir metin düzenleyici\n"
 "Midnight Commander için yazıldı"
 
-msgid "Copyright (C) 1996-2019 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2020 the Free Software Foundation"
 msgstr "Telif hakkı (C) 1996-2019 Özgür Yazılım Vakfı"
 
 msgid "About"
@@ -3821,6 +3831,16 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "Ev dizini yolu mutlak değil"
 
+#, fuzzy
+msgid ""
+"GNU Midnight Commander\n"
+"is already running on this terminal.\n"
+"Subshell support will be disabled."
+msgstr ""
+"GNU Midnight Commander zaten\n"
+"bu terminalde çalışıyoryor.\n"
+"Altkabuk desteği kapatılacak."
+
 #, c-format
 msgid ""
 "\n"
@@ -3851,15 +3871,6 @@ msgstr ""
 "%s dosyası kaydedilemedi:\n"
 "%s"
 
-msgid ""
-"GNU Midnight Commander is already\n"
-"running on this terminal.\n"
-"Subshell support will be disabled."
-msgstr ""
-"GNU Midnight Commander zaten\n"
-"bu terminalde çalışıyoryor.\n"
-"Altkabuk desteği kapatılacak."
-
 #, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr " %s isimli veri yolu açılamadı\n"
@@ -3871,54 +3882,71 @@ msgstr "Kabuk hala etkin. Yine de çıkılsın mı?"
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Uyarı: %s'e geçilemedi.\n"
 
-msgid "Using the S-Lang library with terminfo database\n"
-msgstr "Terim bilgisi veritabanı ile S-Lang kütüphanesi kullanılarak\n"
-
-msgid "Using the ncurses library\n"
-msgstr "Ncurses kütüphanesini kullanılarak\n"
-
-msgid "Using the ncursesw library\n"
-msgstr "ncursesw kitaplığı kullanılarak\n"
-
-msgid "With builtin Editor and Aspell support\n"
+#, fuzzy
+msgid "With builtin Editor and Aspell support"
 msgstr "Yerleşik düzenleyici ve Aspell desteği ile\n"
 
-msgid "With builtin Editor\n"
+#, fuzzy
+msgid "With builtin Editor"
 msgstr "Yerleşik Düzenleyiciyle\n"
 
-msgid "With optional subshell support\n"
+#, fuzzy
+msgid "With optional subshell support"
 msgstr "Seçimlik altkabuk desteğiyle\n"
 
-msgid "With subshell support as default\n"
+#, fuzzy
+msgid "With subshell support as default"
 msgstr "Öntanımlı olarak altkabuk desteğiyle\n"
 
-msgid "With support for background operations\n"
+#, fuzzy
+msgid "With support for background operations"
 msgstr "Ardalan işlemleri desteğiyle\n"
 
-msgid "With mouse support on xterm and Linux console\n"
+#, fuzzy
+msgid "With mouse support on xterm and Linux console"
 msgstr "xterm ve Linux konsolunda fare desteği ile\n"
 
-msgid "With mouse support on xterm\n"
+#, fuzzy
+msgid "With mouse support on xterm"
 msgstr "xterm üzerinde fare desteği ile\n"
 
-msgid "With support for X11 events\n"
+#, fuzzy
+msgid "With support for X11 events"
 msgstr "X11 eylemleri desteğiyle\n"
 
-msgid "With internationalization support\n"
+#, fuzzy
+msgid "With internationalization support"
 msgstr "i18n desteğiyle\n"
 
-msgid "With multiple codepages support\n"
+#, fuzzy
+msgid "With multiple codepages support"
 msgstr "Çoklu karakter kümesi desteğiyle\n"
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"
 msgstr "Glib ile yapılandır %d.%d.%d\n"
 
+#, fuzzy, c-format
+msgid "Built with S-Lang %s with terminfo database\n"
+msgstr "Terim bilgisi veritabanı ile S-Lang kütüphanesi kullanılarak\n"
+
 #, c-format
+msgid "Built with ncurses %s\n"
+msgstr ""
+
+msgid "Built with ncurses (unknown version)"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Built with ncursesw %s\n"
+msgstr "ncursesw kitaplığı kullanılarak\n"
+
+msgid "Built with ncursesw (unknown version)"
+msgstr ""
+
 msgid "Virtual File Systems:"
 msgstr "Sanal Dosya Sistemleri:"
 
-#, c-format
 msgid "Data types:"
 msgstr "Veri tipleri:"
 
@@ -4535,3 +4563,6 @@ msgstr "Başından devam edilsin mi?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr " /ftp://some.host/editme.txt 'in yerel kopyası alınamadı"
+
+#~ msgid "Using the ncurses library\n"
+#~ msgstr "Ncurses kütüphanesini kullanılarak\n"

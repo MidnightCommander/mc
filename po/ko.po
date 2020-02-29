@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-01-01 23:01+0400\n"
+"POT-Creation-Date: 2020-02-29 19:12+0300\n"
 "PO-Revision-Date: 2019-12-16 01:49+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Korean (http://www.transifex.com/mc/mc/language/ko/)\n"
@@ -486,13 +486,22 @@ msgstr "TERM 환경변수가 설정되어있지 않습니다!\n"
 msgid "Cannot check SIGWINCH pipe"
 msgstr ""
 
-msgid "Cannot create pipe for SIGWINCH"
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Cannot create pipe for SIGWINCH: %s (%d)\n"
 msgstr "SIGWINCH용 파이프를 생성할 수 없음"
 
-msgid "Cannot configure write end of SIGWINCH pipe"
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
 msgstr "SIGWINCH 파이프의 쓰기 끝을 구성할 수 없음"
 
-msgid "Cannot configure read end of SIGWINCH pipe"
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
 msgstr "SIGWINCH 파이프의 읽기 엔드를 구성할 수 없음"
 
 #, c-format
@@ -1664,7 +1673,8 @@ msgstr ""
 "사용자 친화적인 텍스트 편집기\n"
 "미드나잇 커맨더를 위해 작성됨."
 
-msgid "Copyright (C) 1996-2019 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2020 the Free Software Foundation"
 msgstr "Copyright (C) 1996-2019 the Free Software Foundation"
 
 msgid "About"
@@ -3815,6 +3825,16 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "홈 디렉토리 경로가 절대적이지 않음"
 
+#, fuzzy
+msgid ""
+"GNU Midnight Commander\n"
+"is already running on this terminal.\n"
+"Subshell support will be disabled."
+msgstr ""
+"GNU 미드나잇 커맨더가 이미\n"
+"이 터미널에서 실행 중입니다.\n"
+"Subshell 지원이 비활성화됩니다."
+
 #, c-format
 msgid ""
 "\n"
@@ -3845,15 +3865,6 @@ msgstr ""
 "파일을 저장할 수 없음%s:\n"
 "%s"
 
-msgid ""
-"GNU Midnight Commander is already\n"
-"running on this terminal.\n"
-"Subshell support will be disabled."
-msgstr ""
-"GNU 미드나잇 커맨더가 이미\n"
-"이 터미널에서 실행 중입니다.\n"
-"Subshell 지원이 비활성화됩니다."
-
 #, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr "명명된 %s 파이프를 열 수 없음\n"
@@ -3865,54 +3876,71 @@ msgstr "셸이 아직 활성 상태입니다. 그래도 끝낼까요?"
 msgid "Warning: Cannot change to %s.\n"
 msgstr "경고: %s으(로) 변경할 수 없음.\n"
 
-msgid "Using the S-Lang library with terminfo database\n"
-msgstr "터미널 데이터베이스와 함께 S-Lang 라이브러리 사용\n"
-
-msgid "Using the ncurses library\n"
-msgstr "ncurses 라이브러리 사용\n"
-
-msgid "Using the ncursesw library\n"
-msgstr "ncursesw 라이브러리 사용\n"
-
-msgid "With builtin Editor and Aspell support\n"
+#, fuzzy
+msgid "With builtin Editor and Aspell support"
 msgstr "편집기 내장 및 Aspell 지원 사용\n"
 
-msgid "With builtin Editor\n"
+#, fuzzy
+msgid "With builtin Editor"
 msgstr "편집기 내장 사용\n"
 
-msgid "With optional subshell support\n"
+#, fuzzy
+msgid "With optional subshell support"
 msgstr "옵션으로 하위 쉘 지원 사용\n"
 
-msgid "With subshell support as default\n"
+#, fuzzy
+msgid "With subshell support as default"
 msgstr "기본으로 하위 쉘 지원 사용\n"
 
-msgid "With support for background operations\n"
+#, fuzzy
+msgid "With support for background operations"
 msgstr "백그라운드 작업 지원 사용\n"
 
-msgid "With mouse support on xterm and Linux console\n"
+#, fuzzy
+msgid "With mouse support on xterm and Linux console"
 msgstr "XTerm 및 Linux 콘솔에서 마우스 지원 사용\n"
 
-msgid "With mouse support on xterm\n"
+#, fuzzy
+msgid "With mouse support on xterm"
 msgstr "XTerm에서 마우스 지원 사용\n"
 
-msgid "With support for X11 events\n"
+#, fuzzy
+msgid "With support for X11 events"
 msgstr "X11 이벤트 지원 사용\n"
 
-msgid "With internationalization support\n"
+#, fuzzy
+msgid "With internationalization support"
 msgstr "국제화 지원 사용\n"
 
-msgid "With multiple codepages support\n"
+#, fuzzy
+msgid "With multiple codepages support"
 msgstr "복수의 코드페이지 지원 사용\n"
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"
 msgstr "GLib %d.%d.%d로 빌드\n"
 
+#, fuzzy, c-format
+msgid "Built with S-Lang %s with terminfo database\n"
+msgstr "터미널 데이터베이스와 함께 S-Lang 라이브러리 사용\n"
+
 #, c-format
+msgid "Built with ncurses %s\n"
+msgstr ""
+
+msgid "Built with ncurses (unknown version)"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Built with ncursesw %s\n"
+msgstr "ncursesw 라이브러리 사용\n"
+
+msgid "Built with ncursesw (unknown version)"
+msgstr ""
+
 msgid "Virtual File Systems:"
 msgstr "가상 파일 시스템:"
 
-#, c-format
 msgid "Data types:"
 msgstr "데이터 유형:"
 
@@ -4528,3 +4556,6 @@ msgstr "처음부터 계속하시겠습니까?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "/ftp://some.host/editme.txt의 로컬 복사본을 가져올 수 없음"
+
+#~ msgid "Using the ncurses library\n"
+#~ msgstr "ncurses 라이브러리 사용\n"

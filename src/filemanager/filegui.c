@@ -10,7 +10,7 @@
    Janne Kukonlehto added much error recovery to them for being used
    in an interactive program.
 
-   Copyright (C) 1994-2019
+   Copyright (C) 1994-2020
    Free Software Foundation, Inc.
 
    Written by:
@@ -90,7 +90,7 @@
 #define STRUCT_STATVFS struct statvfs
 #define STATFS statvfs
 
-#if __linux__ && (__GLIBC__ || __UCLIBC__)
+#if defined __linux__ && (defined __GLIBC__ || defined __UCLIBC__)
 #include <sys/utsname.h>
 #include <sys/statfs.h>
 #define STAT_STATFS2_BSIZE 1
@@ -269,7 +269,7 @@ static struct
 static int
 statvfs_works (void)
 {
-#if ! (__linux__ && (__GLIBC__ || __UCLIBC__))
+#if ! (defined __linux__ && (defined __GLIBC__ || defined __UCLIBC__))
     return 1;
 #else
     static int statvfs_works_cache = -1;

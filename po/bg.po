@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-01-01 23:01+0400\n"
+"POT-Creation-Date: 2020-02-29 19:12+0300\n"
 "PO-Revision-Date: 2019-12-16 01:49+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/mc/mc/language/bg/)\n"
@@ -490,13 +490,22 @@ msgstr "Променливата TERM не е установена!\n"
 msgid "Cannot check SIGWINCH pipe"
 msgstr ""
 
-msgid "Cannot create pipe for SIGWINCH"
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Cannot create pipe for SIGWINCH: %s (%d)\n"
+msgstr "Не могат да се създадат потоци на канала"
+
+#, c-format
+msgid ""
+"\n"
+"Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
 msgstr ""
 
-msgid "Cannot configure write end of SIGWINCH pipe"
-msgstr ""
-
-msgid "Cannot configure read end of SIGWINCH pipe"
+#, c-format
+msgid ""
+"\n"
+"Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
 msgstr ""
 
 #, c-format
@@ -1655,7 +1664,7 @@ msgstr ""
 "Удобен за потребителя текстови редактор\n"
 "написан за Midnight Commander-а."
 
-msgid "Copyright (C) 1996-2019 the Free Software Foundation"
+msgid "Copyright (C) 1996-2020 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -3810,6 +3819,16 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "Пътят до домашната папка не е абсолютен"
 
+#, fuzzy
+msgid ""
+"GNU Midnight Commander\n"
+"is already running on this terminal.\n"
+"Subshell support will be disabled."
+msgstr ""
+"GNU Midnight Commander вече е отворен\n"
+"на този терминал.\n"
+"Поддръжката на subshell ще бъде деактивирана."
+
 #, c-format
 msgid ""
 "\n"
@@ -3841,15 +3860,6 @@ msgstr ""
 "Не може да се запише файл %s:\n"
 "%s"
 
-msgid ""
-"GNU Midnight Commander is already\n"
-"running on this terminal.\n"
-"Subshell support will be disabled."
-msgstr ""
-"GNU Midnight Commander вече е отворен\n"
-"на този терминал.\n"
-"Поддръжката на subshell ще бъде деактивирана."
-
 #, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr "Не може да се отвори именуваният канал %s\n"
@@ -3861,54 +3871,71 @@ msgstr "Обвивката е още активна. Да се напусне л
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Внимание: Не мога да премина в %s.\n"
 
-msgid "Using the S-Lang library with terminfo database\n"
-msgstr "Използване на S-Lang библиотеката с terminfo базата данни\n"
-
-msgid "Using the ncurses library\n"
-msgstr "Използване на библиотеката ncurses\n"
-
-msgid "Using the ncursesw library\n"
-msgstr "Използване на библиотеката ncursesw\n"
-
-msgid "With builtin Editor and Aspell support\n"
-msgstr ""
-
-msgid "With builtin Editor\n"
+#, fuzzy
+msgid "With builtin Editor and Aspell support"
 msgstr "С вграден редактор\n"
 
-msgid "With optional subshell support\n"
+#, fuzzy
+msgid "With builtin Editor"
+msgstr "С вграден редактор\n"
+
+#, fuzzy
+msgid "With optional subshell support"
 msgstr "С опционална поддръжка на subshell\n"
 
-msgid "With subshell support as default\n"
+#, fuzzy
+msgid "With subshell support as default"
 msgstr "С поддръжка на subshell по подразбиране\n"
 
-msgid "With support for background operations\n"
+#, fuzzy
+msgid "With support for background operations"
 msgstr "С поддръжка на фонови операции\n"
 
-msgid "With mouse support on xterm and Linux console\n"
+#, fuzzy
+msgid "With mouse support on xterm and Linux console"
 msgstr "С поддръжка на мишка в xterm и Linux конзола\n"
 
-msgid "With mouse support on xterm\n"
+#, fuzzy
+msgid "With mouse support on xterm"
 msgstr "С поддръжка на мишка в xterm\n"
 
-msgid "With support for X11 events\n"
+#, fuzzy
+msgid "With support for X11 events"
 msgstr "С поддръжка на X11 събития\n"
 
-msgid "With internationalization support\n"
+#, fuzzy
+msgid "With internationalization support"
 msgstr "С поддръжка на интернационализация\n"
 
-msgid "With multiple codepages support\n"
+#, fuzzy
+msgid "With multiple codepages support"
 msgstr "С поддръжка на много кодови страници\n"
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"
 msgstr "Компилиран с GLib %d.%d.%d\n"
 
+#, fuzzy, c-format
+msgid "Built with S-Lang %s with terminfo database\n"
+msgstr "Използване на S-Lang библиотеката с terminfo базата данни\n"
+
 #, c-format
+msgid "Built with ncurses %s\n"
+msgstr ""
+
+msgid "Built with ncurses (unknown version)"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Built with ncursesw %s\n"
+msgstr "Използване на библиотеката ncursesw\n"
+
+msgid "Built with ncursesw (unknown version)"
+msgstr ""
+
 msgid "Virtual File Systems:"
 msgstr "Виртуални файлови системи:"
 
-#, c-format
 msgid "Data types:"
 msgstr "Типове за данни:"
 
@@ -4524,3 +4551,6 @@ msgstr "Да се продължи ли от началото?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не може да се изтегли локално копие на /ftp://some.host/editme.txt"
+
+#~ msgid "Using the ncurses library\n"
+#~ msgstr "Използване на библиотеката ncurses\n"

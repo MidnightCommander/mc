@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: mc 4.8.23-144-gcf033444b\n"
+"Project-Id-Version: mc 4.8.24-48-g1ec7a2b76\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-12-15 12:59+0300\n"
+"POT-Creation-Date: 2020-02-29 19:12+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -595,16 +595,25 @@ msgstr ""
 msgid "Cannot check SIGWINCH pipe"
 msgstr ""
 
-#: lib/tty/tty-internal.c:69
-msgid "Cannot create pipe for SIGWINCH"
+#: lib/tty/tty-internal.c:71
+#, c-format
+msgid ""
+"\n"
+"Cannot create pipe for SIGWINCH: %s (%d)\n"
 msgstr ""
 
-#: lib/tty/tty-internal.c:87
-msgid "Cannot configure write end of SIGWINCH pipe"
+#: lib/tty/tty-internal.c:84
+#, c-format
+msgid ""
+"\n"
+"Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
 msgstr ""
 
-#: lib/tty/tty-internal.c:99
-msgid "Cannot configure read end of SIGWINCH pipe"
+#: lib/tty/tty-internal.c:93
+#, c-format
+msgid ""
+"\n"
+"Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
 msgstr ""
 
 #: lib/tty/tty-slang.c:296
@@ -669,8 +678,8 @@ msgstr ""
 #: src/editor/editcmd.c:423 src/editor/editcmd.c:585 src/editor/editcmd.c:1721
 #: src/editor/editcmd.c:3467 src/editor/editcmd.c:3496
 #: src/editor/editcmd_dialogs.c:471 src/execute.c:135
-#: src/filemanager/file.c:2401 src/filemanager/panel.c:4503 src/help.c:362
-#: src/main.c:397 src/subshell/common.c:438 src/subshell/common.c:1273
+#: src/filemanager/file.c:2401 src/filemanager/panel.c:4507 src/help.c:362
+#: src/main.c:414 src/main.c:458 src/subshell/common.c:1219
 #: src/viewer/actions_cmd.c:461
 msgid "Warning"
 msgstr ""
@@ -748,11 +757,11 @@ msgstr ""
 msgid "Press any key to continue..."
 msgstr ""
 
-#: lib/vfs/parse_ls_vga.c:886
+#: lib/vfs/parse_ls_vga.c:872
 msgid "Cannot parse:"
 msgstr ""
 
-#: lib/vfs/parse_ls_vga.c:889
+#: lib/vfs/parse_ls_vga.c:875
 msgid "More parsing errors will be ignored."
 msgstr ""
 
@@ -787,8 +796,8 @@ msgstr ""
 #: src/filemanager/file.c:968 src/filemanager/file.c:1965
 #: src/filemanager/filegui.c:459 src/filemanager/hotlist.c:1150
 #: src/filemanager/hotlist.c:1167 src/filemanager/midnight.c:1067
-#: src/filemanager/midnight.c:1075 src/filemanager/panel.c:2818
-#: src/filemanager/tree.c:826 src/subshell/common.c:1275
+#: src/filemanager/midnight.c:1075 src/filemanager/panel.c:2823
+#: src/filemanager/tree.c:826 src/subshell/common.c:1221
 #: src/viewer/actions_cmd.c:656 src/viewer/actions_cmd.c:662
 #: src/viewer/search.c:398
 msgid "&Yes"
@@ -800,8 +809,8 @@ msgstr ""
 #: src/filemanager/file.c:1965 src/filemanager/filegui.c:461
 #: src/filemanager/hotlist.c:1150 src/filemanager/hotlist.c:1167
 #: src/filemanager/midnight.c:1067 src/filemanager/midnight.c:1075
-#: src/filemanager/panel.c:2818 src/filemanager/tree.c:826
-#: src/subshell/common.c:1275 src/viewer/actions_cmd.c:656
+#: src/filemanager/panel.c:2823 src/filemanager/tree.c:826
+#: src/subshell/common.c:1221 src/viewer/actions_cmd.c:656
 #: src/viewer/actions_cmd.c:662 src/viewer/search.c:399
 msgid "&No"
 msgstr ""
@@ -809,8 +818,7 @@ msgstr ""
 #: lib/widget/quick.h:215 src/editor/editcmd.c:2748
 #: src/editor/editcmd_dialogs.c:121 src/editor/editwidget.c:151
 #: src/filemanager/boxes.c:1227 src/filemanager/filegui.c:1362
-#: src/filemanager/find.c:599 src/filemanager/layout.c:462
-#: src/subshell/common.c:441
+#: src/filemanager/find.c:599 src/filemanager/layout.c:497 src/main.c:417
 msgid "&OK"
 msgstr ""
 
@@ -826,7 +834,7 @@ msgstr ""
 #: src/filemanager/chown.c:310 src/filemanager/cmd.c:1156
 #: src/filemanager/filegui.c:1366 src/filemanager/find.c:599
 #: src/filemanager/hotlist.c:182 src/filemanager/hotlist.c:1006
-#: src/filemanager/hotlist.c:1068 src/filemanager/layout.c:463
+#: src/filemanager/hotlist.c:1068 src/filemanager/layout.c:498
 #: src/filemanager/panelize.c:140 src/learn.c:256 src/viewer/hex.c:431
 msgid "&Cancel"
 msgstr ""
@@ -1038,7 +1046,7 @@ msgid ""
 "as tickets at www.midnight-commander.org\n"
 msgstr ""
 
-#: src/args.c:430 src/filemanager/midnight.c:1767 src/textconf.c:145
+#: src/args.c:430 src/filemanager/midnight.c:1767 src/textconf.c:137
 #, c-format
 msgid "GNU Midnight Commander %s\n"
 msgstr ""
@@ -1742,7 +1750,7 @@ msgid ""
 "Continue discards these changes."
 msgstr ""
 
-#: src/editor/editdraw.c:269 src/editor/editwidget.c:317
+#: src/editor/editdraw.c:263 src/editor/editwidget.c:317
 msgid "NoName"
 msgstr ""
 
@@ -1782,8 +1790,7 @@ msgstr ""
 msgid "A&bout..."
 msgstr ""
 
-#: src/editor/editmenu.c:88 src/filemanager/find.c:194
-#: src/subshell/common.c:441
+#: src/editor/editmenu.c:88 src/filemanager/find.c:194 src/main.c:417
 msgid "&Quit"
 msgstr ""
 
@@ -2081,7 +2088,7 @@ msgid "Tab spacing:"
 msgstr ""
 
 #: src/editor/editoptions.c:164 src/filemanager/boxes.c:536
-#: src/filemanager/layout.c:455
+#: src/filemanager/layout.c:490
 msgid "Other options"
 msgstr ""
 
@@ -2140,7 +2147,7 @@ msgid ""
 msgstr ""
 
 #: src/editor/editwidget.c:149
-msgid "Copyright (C) 1996-2019 the Free Software Foundation"
+msgid "Copyright (C) 1996-2020 the Free Software Foundation"
 msgstr ""
 
 #: src/editor/editwidget.c:158
@@ -2969,7 +2976,7 @@ msgid "Files tagged, want to cd?"
 msgstr ""
 
 #: src/filemanager/cmd.c:145 src/filemanager/cmd.c:1139
-#: src/filemanager/panel.c:2796 src/filemanager/panel.c:3374
+#: src/filemanager/panel.c:2801 src/filemanager/panel.c:3378
 msgid "Cannot change directory"
 msgstr ""
 
@@ -3000,7 +3007,7 @@ msgstr ""
 msgid "symlink: %s"
 msgstr ""
 
-#: src/filemanager/cmd.c:465 src/filemanager/panel.c:4748
+#: src/filemanager/cmd.c:465 src/filemanager/panel.c:4752
 #, c-format
 msgid "Cannot chdir to \"%s\""
 msgstr ""
@@ -3153,7 +3160,7 @@ msgstr ""
 msgid "Cannot execute commands on non-local filesystems"
 msgstr ""
 
-#: src/filemanager/command.c:447 src/filemanager/panel.c:3665
+#: src/filemanager/command.c:447 src/filemanager/panel.c:3669
 #: src/filemanager/tree.c:585
 #, c-format
 msgid ""
@@ -3686,7 +3693,7 @@ msgid "Deleting"
 msgstr ""
 
 #: src/filemanager/filegui.c:1349 src/filemanager/find.c:581
-#: src/filemanager/panel.c:2531
+#: src/filemanager/panel.c:2536
 msgid "&Using shell patterns"
 msgstr ""
 
@@ -4048,55 +4055,55 @@ msgstr ""
 msgid "Location:   %Xh:%Xh"
 msgstr ""
 
-#: src/filemanager/layout.c:165
+#: src/filemanager/layout.c:173
 msgid "&Equal split"
 msgstr ""
 
-#: src/filemanager/layout.c:166
+#: src/filemanager/layout.c:174
 msgid "&Menubar visible"
 msgstr ""
 
-#: src/filemanager/layout.c:167
+#: src/filemanager/layout.c:175
 msgid "Command &prompt"
 msgstr ""
 
-#: src/filemanager/layout.c:168
+#: src/filemanager/layout.c:176
 msgid "&Keybar visible"
 msgstr ""
 
-#: src/filemanager/layout.c:169
+#: src/filemanager/layout.c:177
 msgid "H&intbar visible"
 msgstr ""
 
-#: src/filemanager/layout.c:170
+#: src/filemanager/layout.c:178
 msgid "&XTerm window title"
 msgstr ""
 
-#: src/filemanager/layout.c:171
+#: src/filemanager/layout.c:179
 msgid "&Show free space"
 msgstr ""
 
-#: src/filemanager/layout.c:453
+#: src/filemanager/layout.c:488
 msgid "Panel split"
 msgstr ""
 
-#: src/filemanager/layout.c:454
+#: src/filemanager/layout.c:489
 msgid "Console output"
 msgstr ""
 
-#: src/filemanager/layout.c:458
+#: src/filemanager/layout.c:493
 msgid "&Vertical"
 msgstr ""
 
-#: src/filemanager/layout.c:459
+#: src/filemanager/layout.c:494
 msgid "&Horizontal"
 msgstr ""
 
-#: src/filemanager/layout.c:465
+#: src/filemanager/layout.c:500
 msgid "Output lines:"
 msgstr ""
 
-#: src/filemanager/layout.c:518
+#: src/filemanager/layout.c:549
 msgid "Layout"
 msgstr ""
 
@@ -4344,7 +4351,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: src/filemanager/midnight.c:1067 src/filemanager/midnight.c:1073
-#: src/filemanager/panel.c:2817
+#: src/filemanager/panel.c:2822
 msgid "The Midnight Commander"
 msgstr ""
 
@@ -4384,7 +4391,7 @@ msgstr ""
 msgid "ButtonBar|Mkdir"
 msgstr ""
 
-#: src/filemanager/mountlist.c:895
+#: src/filemanager/mountlist.c:900
 msgid "Memory exhausted!"
 msgstr ""
 
@@ -4533,7 +4540,7 @@ msgid_plural "%s in %d files"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/filemanager/panel.c:1291
+#: src/filemanager/panel.c:1290
 msgid "Panelize"
 msgstr ""
 
@@ -4541,32 +4548,32 @@ msgstr ""
 msgid "Unknown tag on display format:"
 msgstr ""
 
-#: src/filemanager/panel.c:2530
+#: src/filemanager/panel.c:2535
 msgid "&Files only"
 msgstr ""
 
-#: src/filemanager/panel.c:2533
+#: src/filemanager/panel.c:2538
 msgid "&Case sensitive"
 msgstr ""
 
-#: src/filemanager/panel.c:2588
+#: src/filemanager/panel.c:2593
 msgid "Select"
 msgstr ""
 
-#: src/filemanager/panel.c:2596
+#: src/filemanager/panel.c:2601
 msgid "Unselect"
 msgstr ""
 
-#: src/filemanager/panel.c:2817
+#: src/filemanager/panel.c:2822
 msgid "Do you really want to execute?"
 msgstr ""
 
-#: src/filemanager/panel.c:3282 src/filemanager/panel.c:4402
-#: src/filemanager/panel.c:4450 src/viewer/actions_cmd.c:332
+#: src/filemanager/panel.c:3286 src/filemanager/panel.c:4406
+#: src/filemanager/panel.c:4454 src/viewer/actions_cmd.c:332
 msgid "Cannot read directory contents"
 msgstr ""
 
-#: src/filemanager/panel.c:4504
+#: src/filemanager/panel.c:4508
 msgid "User supplied format looks invalid, reverting to default."
 msgstr ""
 
@@ -4762,18 +4769,25 @@ msgid ""
 "key, or click with the mouse to define it. Move around with Tab."
 msgstr ""
 
-#: src/main.c:242
+#: src/main.c:275
 #, c-format
 msgid ""
 "Failed to run:\n"
 "%s\n"
 msgstr ""
 
-#: src/main.c:256
+#: src/main.c:289
 msgid "Home directory path is not absolute"
 msgstr ""
 
-#: src/main.c:493
+#: src/main.c:415
+msgid ""
+"GNU Midnight Commander\n"
+"is already running on this terminal.\n"
+"Subshell support will be disabled."
+msgstr ""
+
+#: src/main.c:555
 #, c-format
 msgid ""
 "\n"
@@ -4804,127 +4818,129 @@ msgid ""
 "%s"
 msgstr ""
 
-#: src/subshell/common.c:439
-msgid ""
-"GNU Midnight Commander is already\n"
-"running on this terminal.\n"
-"Subshell support will be disabled."
-msgstr ""
-
-#: src/subshell/common.c:1085
+#: src/subshell/common.c:1031
 #, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr ""
 
-#: src/subshell/common.c:1274
+#: src/subshell/common.c:1220
 msgid "The shell is still active. Quit anyway?"
 msgstr ""
 
-#: src/subshell/common.c:1374
+#: src/subshell/common.c:1320
 #, c-format
 msgid "Warning: Cannot change to %s.\n"
 msgstr ""
 
-#: src/textconf.c:83
-msgid "Using the S-Lang library with terminfo database\n"
+#: src/textconf.c:86
+msgid "With builtin Editor and Aspell support"
 msgstr ""
 
-#: src/textconf.c:85
-msgid "Using the ncurses library\n"
-msgstr ""
-
-#: src/textconf.c:87
-msgid "Using the ncursesw library\n"
+#: src/textconf.c:88
+msgid "With builtin Editor"
 msgstr ""
 
 #: src/textconf.c:94
-msgid "With builtin Editor and Aspell support\n"
+msgid "With optional subshell support"
 msgstr ""
 
 #: src/textconf.c:96
-msgid "With builtin Editor\n"
+msgid "With subshell support as default"
 msgstr ""
 
-#: src/textconf.c:102
-msgid "With optional subshell support\n"
+#: src/textconf.c:101
+msgid "With support for background operations"
 msgstr ""
 
-#: src/textconf.c:104
-msgid "With subshell support as default\n"
+#: src/textconf.c:105
+msgid "With mouse support on xterm and Linux console"
 msgstr ""
 
-#: src/textconf.c:109
-msgid "With support for background operations\n"
+#: src/textconf.c:107
+msgid "With mouse support on xterm"
 msgstr ""
 
-#: src/textconf.c:113
-msgid "With mouse support on xterm and Linux console\n"
+#: src/textconf.c:111
+msgid "With support for X11 events"
 msgstr ""
 
 #: src/textconf.c:115
-msgid "With mouse support on xterm\n"
+msgid "With internationalization support"
 msgstr ""
 
 #: src/textconf.c:119
-msgid "With support for X11 events\n"
+msgid "With multiple codepages support"
 msgstr ""
 
-#: src/textconf.c:123
-msgid "With internationalization support\n"
-msgstr ""
-
-#: src/textconf.c:127
-msgid "With multiple codepages support\n"
-msgstr ""
-
-#: src/textconf.c:147
+#: src/textconf.c:139
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"
 msgstr ""
 
-#: src/textconf.c:154
+#: src/textconf.c:143
 #, c-format
+msgid "Built with S-Lang %s with terminfo database\n"
+msgstr ""
+
+#: src/textconf.c:146
+#, c-format
+msgid "Built with ncurses %s\n"
+msgstr ""
+
+#: src/textconf.c:148
+msgid "Built with ncurses (unknown version)"
+msgstr ""
+
+#: src/textconf.c:152
+#, c-format
+msgid "Built with ncursesw %s\n"
+msgstr ""
+
+#: src/textconf.c:154
+msgid "Built with ncursesw (unknown version)"
+msgstr ""
+
+#: src/textconf.c:164
 msgid "Virtual File Systems:"
 msgstr ""
 
-#: src/textconf.c:160
-#, c-format
+#: src/textconf.c:170
 msgid "Data types:"
 msgstr ""
 
-#: src/textconf.c:188
+#: src/textconf.c:198
 msgid "Home directory:"
 msgstr ""
 
-#: src/textconf.c:189
+#: src/textconf.c:199
 msgid "Profile root directory:"
 msgstr ""
 
-#: src/textconf.c:192
+#: src/textconf.c:202
 msgid "System data"
 msgstr ""
 
-#: src/textconf.c:194 src/textconf.c:212
+#: src/textconf.c:204 src/textconf.c:222
 msgid "Config directory:"
 msgstr ""
 
-#: src/textconf.c:195 src/textconf.c:213
+#: src/textconf.c:205 src/textconf.c:223
 msgid "Data directory:"
 msgstr ""
 
-#: src/textconf.c:197
+#: src/textconf.c:207
 msgid "File extension handlers:"
 msgstr ""
 
-#: src/textconf.c:200
+#: src/textconf.c:210
 msgid "VFS plugins and scripts:"
 msgstr ""
 
-#: src/textconf.c:210
+#: src/textconf.c:220
 msgid "User data"
 msgstr ""
 
-#: src/textconf.c:225
+#: src/textconf.c:235
 msgid "Cache directory:"
 msgstr ""
 
@@ -5025,18 +5041,18 @@ msgid ""
 "%s"
 msgstr ""
 
-#: src/vfs/extfs/extfs.c:626
+#: src/vfs/extfs/extfs.c:628
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s"
 msgstr ""
 
-#: src/vfs/extfs/extfs.c:631 src/vfs/extfs/extfs.c:636
+#: src/vfs/extfs/extfs.c:633 src/vfs/extfs/extfs.c:638
 msgid "Inconsistent extfs archive"
 msgstr ""
 
-#: src/vfs/extfs/extfs.c:1416
+#: src/vfs/extfs/extfs.c:1418
 #, c-format
 msgid "Warning: cannot open %s directory\n"
 msgstr ""

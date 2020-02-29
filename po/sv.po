@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-01-01 23:01+0400\n"
+"POT-Creation-Date: 2020-02-29 19:12+0300\n"
 "PO-Revision-Date: 2019-12-16 01:49+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/mc/mc/language/sv/)\n"
@@ -492,13 +492,22 @@ msgstr "Omgivningsvariablen TERM är inte satt!\n"
 msgid "Cannot check SIGWINCH pipe"
 msgstr ""
 
-msgid "Cannot create pipe for SIGWINCH"
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Cannot create pipe for SIGWINCH: %s (%d)\n"
+msgstr "Tunnelströmmar kunde inte skapas"
+
+#, c-format
+msgid ""
+"\n"
+"Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
 msgstr ""
 
-msgid "Cannot configure write end of SIGWINCH pipe"
-msgstr ""
-
-msgid "Cannot configure read end of SIGWINCH pipe"
+#, c-format
+msgid ""
+"\n"
+"Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
 msgstr ""
 
 #, c-format
@@ -1673,7 +1682,8 @@ msgstr ""
 "En användarvänlig texteditor\n"
 "skriven för Midnight Commander."
 
-msgid "Copyright (C) 1996-2019 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2020 the Free Software Foundation"
 msgstr "Copyright (C) 1996-2019 Free Software Foundation"
 
 msgid "About"
@@ -3829,6 +3839,16 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "Hemkatalogsökvägen är inte absolut"
 
+#, fuzzy
+msgid ""
+"GNU Midnight Commander\n"
+"is already running on this terminal.\n"
+"Subshell support will be disabled."
+msgstr ""
+"GNU Midnight Commander körs redan\n"
+"i den här terminalen. Underskal-\n"
+"support kommer att inaktiveras."
+
 #, c-format
 msgid ""
 "\n"
@@ -3859,15 +3879,6 @@ msgstr ""
 "Sparning av filen %s misslyckades:\n"
 "%s"
 
-msgid ""
-"GNU Midnight Commander is already\n"
-"running on this terminal.\n"
-"Subshell support will be disabled."
-msgstr ""
-"GNU Midnight Commander körs redan\n"
-"i den här terminalen. Underskal-\n"
-"support kommer att inaktiveras."
-
 #, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr "Kan inte öppna namngiven tunnel %s\n"
@@ -3879,54 +3890,71 @@ msgstr "Skalet är fortfarande aktivt. Avsluta ändå?"
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Varning: Kan inte byta till %s.\n"
 
-msgid "Using the S-Lang library with terminfo database\n"
-msgstr "Använder S-Lang-biblioteket med terminfo-databas\n"
-
-msgid "Using the ncurses library\n"
-msgstr "Använder ncurses-biblioteket\n"
-
-msgid "Using the ncursesw library\n"
-msgstr "Använder ncursesw-biblioteket\n"
-
-msgid "With builtin Editor and Aspell support\n"
+#, fuzzy
+msgid "With builtin Editor and Aspell support"
 msgstr "Med inbyggd redigerare och stöd för aspell\n"
 
-msgid "With builtin Editor\n"
+#, fuzzy
+msgid "With builtin Editor"
 msgstr "Med inbyggd editor\n"
 
-msgid "With optional subshell support\n"
+#, fuzzy
+msgid "With optional subshell support"
 msgstr "Med valbar underskalsupport\n"
 
-msgid "With subshell support as default\n"
+#, fuzzy
+msgid "With subshell support as default"
 msgstr "Med underskalsupport förvalt\n"
 
-msgid "With support for background operations\n"
+#, fuzzy
+msgid "With support for background operations"
 msgstr "Med stöd för bakgrundsoperationer\n"
 
-msgid "With mouse support on xterm and Linux console\n"
+#, fuzzy
+msgid "With mouse support on xterm and Linux console"
 msgstr "Med stöd för mus på xterm och linuxkonsoll\n"
 
-msgid "With mouse support on xterm\n"
+#, fuzzy
+msgid "With mouse support on xterm"
 msgstr "Med stöd för mus på xterm\n"
 
-msgid "With support for X11 events\n"
+#, fuzzy
+msgid "With support for X11 events"
 msgstr "Med stöd för X11-händelser\n"
 
-msgid "With internationalization support\n"
+#, fuzzy
+msgid "With internationalization support"
 msgstr "Med internationaliseringsstöd\n"
 
-msgid "With multiple codepages support\n"
+#, fuzzy
+msgid "With multiple codepages support"
 msgstr "Med stöd för flera teckenöversättningar\n"
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"
 msgstr "Byggd med GLib %d.%d.%d\n"
 
+#, fuzzy, c-format
+msgid "Built with S-Lang %s with terminfo database\n"
+msgstr "Använder S-Lang-biblioteket med terminfo-databas\n"
+
 #, c-format
+msgid "Built with ncurses %s\n"
+msgstr ""
+
+msgid "Built with ncurses (unknown version)"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Built with ncursesw %s\n"
+msgstr "Använder ncursesw-biblioteket\n"
+
+msgid "Built with ncursesw (unknown version)"
+msgstr ""
+
 msgid "Virtual File Systems:"
 msgstr "Virtuella filsystem:"
 
-#, c-format
 msgid "Data types:"
 msgstr "Datatyper:"
 
@@ -4542,3 +4570,6 @@ msgstr "Fortsätt från början?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan inte hämta en lokal kopia av /ftp://some.host/editme.txt"
+
+#~ msgid "Using the ncurses library\n"
+#~ msgstr "Använder ncurses-biblioteket\n"

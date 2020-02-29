@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-01-01 23:01+0400\n"
+"POT-Creation-Date: 2020-02-29 19:12+0300\n"
 "PO-Revision-Date: 2019-12-16 01:49+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/mc/mc/language/"
@@ -493,13 +493,22 @@ msgstr "没有设置 TERM 环境变量!\n"
 msgid "Cannot check SIGWINCH pipe"
 msgstr ""
 
-msgid "Cannot create pipe for SIGWINCH"
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Cannot create pipe for SIGWINCH: %s (%d)\n"
+msgstr "无法创建管道数据流"
+
+#, c-format
+msgid ""
+"\n"
+"Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
 msgstr ""
 
-msgid "Cannot configure write end of SIGWINCH pipe"
-msgstr ""
-
-msgid "Cannot configure read end of SIGWINCH pipe"
+#, c-format
+msgid ""
+"\n"
+"Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
 msgstr ""
 
 #, c-format
@@ -1670,7 +1679,8 @@ msgstr ""
 "为 Midnight Commander 编写的\n"
 "一个界面友好的文本编辑器。"
 
-msgid "Copyright (C) 1996-2019 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2020 the Free Software Foundation"
 msgstr "版权所有 (C) 1996-2019 自由软件基金会"
 
 msgid "About"
@@ -3817,6 +3827,16 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "主目录路径不是绝对路径"
 
+#, fuzzy
+msgid ""
+"GNU Midnight Commander\n"
+"is already running on this terminal.\n"
+"Subshell support will be disabled."
+msgstr ""
+"GNU Midnight Commander 已在\n"
+"该终端上运行。\n"
+"SubShell支持将被禁用。"
+
 #, c-format
 msgid ""
 "\n"
@@ -3847,15 +3867,6 @@ msgstr ""
 "无法保存文件 %s:\n"
 "%s"
 
-msgid ""
-"GNU Midnight Commander is already\n"
-"running on this terminal.\n"
-"Subshell support will be disabled."
-msgstr ""
-"GNU Midnight Commander 已在\n"
-"该终端上运行。\n"
-"SubShell支持将被禁用。"
-
 #, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr "无法打开有名管道 %s\n"
@@ -3867,54 +3878,71 @@ msgstr "Shell 仍在运行中。依然退出?"
 msgid "Warning: Cannot change to %s.\n"
 msgstr "警告: 无法切换至 %s。\n"
 
-msgid "Using the S-Lang library with terminfo database\n"
-msgstr "使用 S-Lang 库和 terminfo 数据库\n"
-
-msgid "Using the ncurses library\n"
-msgstr "使用 ncurses 库\n"
-
-msgid "Using the ncursesw library\n"
-msgstr "使用 ncursesw 库\n"
-
-msgid "With builtin Editor and Aspell support\n"
-msgstr ""
-
-msgid "With builtin Editor\n"
+#, fuzzy
+msgid "With builtin Editor and Aspell support"
 msgstr "使用内建编辑器\n"
 
-msgid "With optional subshell support\n"
+#, fuzzy
+msgid "With builtin Editor"
+msgstr "使用内建编辑器\n"
+
+#, fuzzy
+msgid "With optional subshell support"
 msgstr "启用子 shell 支持作为可选项\n"
 
-msgid "With subshell support as default\n"
+#, fuzzy
+msgid "With subshell support as default"
 msgstr "启用子 shell 支持作为默认项\n"
 
-msgid "With support for background operations\n"
+#, fuzzy
+msgid "With support for background operations"
 msgstr "启用后台操作支持\n"
 
-msgid "With mouse support on xterm and Linux console\n"
+#, fuzzy
+msgid "With mouse support on xterm and Linux console"
 msgstr "启用 xterm 和 Linux 控制台里的鼠标支持\n"
 
-msgid "With mouse support on xterm\n"
+#, fuzzy
+msgid "With mouse support on xterm"
 msgstr "启用 xterm 里鼠标支持\n"
 
-msgid "With support for X11 events\n"
+#, fuzzy
+msgid "With support for X11 events"
 msgstr "启用 X11 事件支持\n"
 
-msgid "With internationalization support\n"
+#, fuzzy
+msgid "With internationalization support"
 msgstr "启用国际化支持\n"
 
-msgid "With multiple codepages support\n"
+#, fuzzy
+msgid "With multiple codepages support"
 msgstr "启用多代码页支持\n"
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"
 msgstr "编译使用了 GLib %d.%d.%d\n"
 
+#, fuzzy, c-format
+msgid "Built with S-Lang %s with terminfo database\n"
+msgstr "使用 S-Lang 库和 terminfo 数据库\n"
+
 #, c-format
+msgid "Built with ncurses %s\n"
+msgstr ""
+
+msgid "Built with ncurses (unknown version)"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Built with ncursesw %s\n"
+msgstr "使用 ncursesw 库\n"
+
+msgid "Built with ncursesw (unknown version)"
+msgstr ""
+
 msgid "Virtual File Systems:"
 msgstr "虚拟文件系统: "
 
-#, c-format
 msgid "Data types:"
 msgstr "数据类型: "
 
@@ -4530,3 +4558,6 @@ msgstr "从头继续搜索?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "无法获取 /ftp://some.host/editme.txt 的本地副本"
+
+#~ msgid "Using the ncurses library\n"
+#~ msgstr "使用 ncurses 库\n"
