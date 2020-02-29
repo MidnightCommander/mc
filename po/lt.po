@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-01-01 23:01+0400\n"
+"POT-Creation-Date: 2020-02-29 19:12+0300\n"
 "PO-Revision-Date: 2019-12-23 11:49+0000\n"
 "Last-Translator: Mindaugas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: Lithuanian (http://www.transifex.com/mc/mc/language/lt/)\n"
@@ -494,13 +494,22 @@ msgstr "Aplinkos kintamasis TERM nenustatytas!\n"
 msgid "Cannot check SIGWINCH pipe"
 msgstr ""
 
-msgid "Cannot create pipe for SIGWINCH"
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Cannot create pipe for SIGWINCH: %s (%d)\n"
+msgstr "Nepavyko sukurti laikino aplanko %s: %s\n"
+
+#, c-format
+msgid ""
+"\n"
+"Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
 msgstr ""
 
-msgid "Cannot configure write end of SIGWINCH pipe"
-msgstr ""
-
-msgid "Cannot configure read end of SIGWINCH pipe"
+#, c-format
+msgid ""
+"\n"
+"Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
 msgstr ""
 
 #, c-format
@@ -1634,7 +1643,7 @@ msgstr ""
 "Lengvas vartoti teksto redaktorius\n"
 "sukurtas Midnight Commander aplinkai."
 
-msgid "Copyright (C) 1996-2019 the Free Software Foundation"
+msgid "Copyright (C) 1996-2020 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -3722,6 +3731,16 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "Namų aplanko kelias nėra absoliutus"
 
+#, fuzzy
+msgid ""
+"GNU Midnight Commander\n"
+"is already running on this terminal.\n"
+"Subshell support will be disabled."
+msgstr ""
+"GNU Midnight Commander jau paleistas\n"
+"šiame terminale.\n"
+"„Subshell“ palaikymas neveiks."
+
 #, c-format
 msgid ""
 "\n"
@@ -3749,15 +3768,6 @@ msgstr ""
 "Nepavyko išsaugoti failo %s:\n"
 "%s"
 
-msgid ""
-"GNU Midnight Commander is already\n"
-"running on this terminal.\n"
-"Subshell support will be disabled."
-msgstr ""
-"GNU Midnight Commander jau paleistas\n"
-"šiame terminale.\n"
-"„Subshell“ palaikymas neveiks."
-
 #, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr "Nepavyko atverti vardinio konvejerio „%s“\n"
@@ -3769,43 +3779,44 @@ msgstr "Aplinka vis dar aktyvi. Vis tiek išeiti?"
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Įspėjimas: nepavyko įeiti į „%s“.\n"
 
-msgid "Using the S-Lang library with terminfo database\n"
-msgstr ""
-
-msgid "Using the ncurses library\n"
-msgstr ""
-
-msgid "Using the ncursesw library\n"
-msgstr ""
-
-msgid "With builtin Editor and Aspell support\n"
-msgstr ""
-
-msgid "With builtin Editor\n"
+#, fuzzy
+msgid "With builtin Editor and Aspell support"
 msgstr "Su vidiniu redaktoriumi\n"
 
-msgid "With optional subshell support\n"
-msgstr ""
+#, fuzzy
+msgid "With builtin Editor"
+msgstr "Su vidiniu redaktoriumi\n"
 
-msgid "With subshell support as default\n"
+#, fuzzy
+msgid "With optional subshell support"
+msgstr "Išjungia „subshell“ palaikymą"
+
+#, fuzzy
+msgid "With subshell support as default"
 msgstr "Su „subshell“ palaikymu kaip numatytuoju\n"
 
-msgid "With support for background operations\n"
+#, fuzzy
+msgid "With support for background operations"
 msgstr "Su fono operacijų galimybe\n"
 
-msgid "With mouse support on xterm and Linux console\n"
+#, fuzzy
+msgid "With mouse support on xterm and Linux console"
 msgstr "Su pelės palaikymu xterm ir Linux konsolėse\n"
 
-msgid "With mouse support on xterm\n"
+#, fuzzy
+msgid "With mouse support on xterm"
 msgstr "Su pelės palaikymu xterm\n"
 
-msgid "With support for X11 events\n"
+#, fuzzy
+msgid "With support for X11 events"
 msgstr "Su X11 įvykių palaikymu\n"
 
-msgid "With internationalization support\n"
+#, fuzzy
+msgid "With internationalization support"
 msgstr "Su internacionalizacijos palaimymu\n"
 
-msgid "With multiple codepages support\n"
+#, fuzzy
+msgid "With multiple codepages support"
 msgstr "Su daugelio koduočių galimybe\n"
 
 #, c-format
@@ -3813,10 +3824,26 @@ msgid "Built with GLib %d.%d.%d\n"
 msgstr ""
 
 #, c-format
-msgid "Virtual File Systems:"
+msgid "Built with S-Lang %s with terminfo database\n"
 msgstr ""
 
 #, c-format
+msgid "Built with ncurses %s\n"
+msgstr ""
+
+msgid "Built with ncurses (unknown version)"
+msgstr ""
+
+#, c-format
+msgid "Built with ncursesw %s\n"
+msgstr ""
+
+msgid "Built with ncursesw (unknown version)"
+msgstr ""
+
+msgid "Virtual File Systems:"
+msgstr ""
+
 msgid "Data types:"
 msgstr ""
 

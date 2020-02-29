@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-01-01 23:01+0400\n"
+"POT-Creation-Date: 2020-02-29 19:12+0300\n"
 "PO-Revision-Date: 2019-12-16 01:49+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Greek (http://www.transifex.com/mc/mc/language/el/)\n"
@@ -479,13 +479,22 @@ msgstr ""
 msgid "Cannot check SIGWINCH pipe"
 msgstr ""
 
-msgid "Cannot create pipe for SIGWINCH"
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Cannot create pipe for SIGWINCH: %s (%d)\n"
+msgstr "Αδύνατη η δημιουργία προσωρινού καταλόγου %s: %s\n"
+
+#, c-format
+msgid ""
+"\n"
+"Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
 msgstr ""
 
-msgid "Cannot configure write end of SIGWINCH pipe"
-msgstr ""
-
-msgid "Cannot configure read end of SIGWINCH pipe"
+#, c-format
+msgid ""
+"\n"
+"Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
 msgstr ""
 
 #, c-format
@@ -1608,7 +1617,7 @@ msgid ""
 "written for the Midnight Commander."
 msgstr ""
 
-msgid "Copyright (C) 1996-2019 the Free Software Foundation"
+msgid "Copyright (C) 1996-2020 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -3714,6 +3723,12 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr ""
 
+msgid ""
+"GNU Midnight Commander\n"
+"is already running on this terminal.\n"
+"Subshell support will be disabled."
+msgstr ""
+
 #, c-format
 msgid ""
 "\n"
@@ -3744,12 +3759,6 @@ msgstr ""
 "Αδυναμία αποθήκευσης αρχείου %s:\n"
 "%s"
 
-msgid ""
-"GNU Midnight Commander is already\n"
-"running on this terminal.\n"
-"Subshell support will be disabled."
-msgstr ""
-
 #, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr ""
@@ -3761,54 +3770,69 @@ msgstr "Το κέλυφος είναι ακόμα ενεργό. Έξοδος π�
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Προειδοποίηση: Αδυναμία αλλαγής σε %s.\n"
 
-msgid "Using the S-Lang library with terminfo database\n"
-msgstr "Με χρήση της βιβλιοθήκης S-Lang με βάση δεδομένων terminfo\n"
-
-msgid "Using the ncurses library\n"
-msgstr "Με χρήση της βιβλιοθήκης ncurses\n"
-
-msgid "Using the ncursesw library\n"
-msgstr "Με χρήση της βιβλιοθήκης ncursesw\n"
-
-msgid "With builtin Editor and Aspell support\n"
-msgstr ""
-
-msgid "With builtin Editor\n"
+#, fuzzy
+msgid "With builtin Editor and Aspell support"
 msgstr "Με ενσωματωμένο επεξεργαστή\n"
 
-msgid "With optional subshell support\n"
+#, fuzzy
+msgid "With builtin Editor"
+msgstr "Με ενσωματωμένο επεξεργαστή\n"
+
+msgid "With optional subshell support"
 msgstr ""
 
-msgid "With subshell support as default\n"
-msgstr ""
-
-msgid "With support for background operations\n"
-msgstr "Με υποστήριξη για λειτουργίες παρασκηνίου\n"
-
-msgid "With mouse support on xterm and Linux console\n"
-msgstr "Με υποστήριξη ποντικιού σε κονσόλα xterm και Linux\n"
-
-msgid "With mouse support on xterm\n"
+#, fuzzy
+msgid "With subshell support as default"
 msgstr "Με υποστήριξη ποντικιού σε xterm\n"
 
-msgid "With support for X11 events\n"
+#, fuzzy
+msgid "With support for background operations"
+msgstr "Με υποστήριξη για λειτουργίες παρασκηνίου\n"
+
+#, fuzzy
+msgid "With mouse support on xterm and Linux console"
+msgstr "Με υποστήριξη ποντικιού σε κονσόλα xterm και Linux\n"
+
+#, fuzzy
+msgid "With mouse support on xterm"
+msgstr "Με υποστήριξη ποντικιού σε xterm\n"
+
+#, fuzzy
+msgid "With support for X11 events"
 msgstr "Με υποστήριξη γεγονότων X11\n"
 
-msgid "With internationalization support\n"
+#, fuzzy
+msgid "With internationalization support"
 msgstr "Με υποστήριξη διεθνοποίησης\n"
 
-msgid "With multiple codepages support\n"
+msgid "With multiple codepages support"
 msgstr ""
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"
 msgstr ""
 
+#, fuzzy, c-format
+msgid "Built with S-Lang %s with terminfo database\n"
+msgstr "Με χρήση της βιβλιοθήκης S-Lang με βάση δεδομένων terminfo\n"
+
 #, c-format
+msgid "Built with ncurses %s\n"
+msgstr ""
+
+msgid "Built with ncurses (unknown version)"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Built with ncursesw %s\n"
+msgstr "Με χρήση της βιβλιοθήκης ncursesw\n"
+
+msgid "Built with ncursesw (unknown version)"
+msgstr ""
+
 msgid "Virtual File Systems:"
 msgstr "Εικονικά συστήματα αρχείων:"
 
-#, c-format
 msgid "Data types:"
 msgstr "Τύποι δεδομένων:"
 
@@ -4403,3 +4427,6 @@ msgstr "Συνέχεια από την αρχή;"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Using the ncurses library\n"
+#~ msgstr "Με χρήση της βιβλιοθήκης ncurses\n"

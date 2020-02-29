@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-01-01 23:01+0400\n"
+"POT-Creation-Date: 2020-02-29 19:12+0300\n"
 "PO-Revision-Date: 2019-12-16 01:49+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/mc/mc/language/uk/)\n"
@@ -498,13 +498,22 @@ msgstr "Змінна середовища TERM не встановлена!\n"
 msgid "Cannot check SIGWINCH pipe"
 msgstr ""
 
-msgid "Cannot create pipe for SIGWINCH"
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Cannot create pipe for SIGWINCH: %s (%d)\n"
 msgstr "Не вдалося створити канал для SIGWINCH"
 
-msgid "Cannot configure write end of SIGWINCH pipe"
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
 msgstr "Не вдалося налаштувати завершення запису каналу SIGWINCH"
 
-msgid "Cannot configure read end of SIGWINCH pipe"
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
 msgstr "Не вдалося налаштувати завершення читання каналу SIGWINCH"
 
 #, c-format
@@ -1676,7 +1685,8 @@ msgstr ""
 "Дружній до користувача редактор тексту\n"
 "написаний для Midnight Commander."
 
-msgid "Copyright (C) 1996-2019 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2020 the Free Software Foundation"
 msgstr "Copyright (C) 1996-2019 the Free Software Foundation"
 
 msgid "About"
@@ -3837,6 +3847,16 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "Шлях до домашнього каталогу не абсолютний"
 
+#, fuzzy
+msgid ""
+"GNU Midnight Commander\n"
+"is already running on this terminal.\n"
+"Subshell support will be disabled."
+msgstr ""
+"Запущено іншу копію Midnight Commander\n"
+"на цьому терміналі. Вкладену командну\n"
+"оболонку вимкнуто."
+
 #, c-format
 msgid ""
 "\n"
@@ -3867,15 +3887,6 @@ msgstr ""
 "Не вдалося зберегти файл %s:\n"
 "%s"
 
-msgid ""
-"GNU Midnight Commander is already\n"
-"running on this terminal.\n"
-"Subshell support will be disabled."
-msgstr ""
-"Запущено іншу копію Midnight Commander\n"
-"на цьому терміналі. Вкладену командну\n"
-"оболонку вимкнуто."
-
 #, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr "Не вдалося відкрити іменований канал %s\n"
@@ -3887,54 +3898,71 @@ msgstr "Оболонка ще активна. Все одно вийти?"
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Попередження: не вдалося змінити на %s.\n"
 
-msgid "Using the S-Lang library with terminfo database\n"
-msgstr "Використання бібліотеки S-Lang із БД terminfo\n"
-
-msgid "Using the ncurses library\n"
-msgstr "Використання бібліотеки ncurses\n"
-
-msgid "Using the ncursesw library\n"
-msgstr "Використання бібліотеки ncursesw\n"
-
-msgid "With builtin Editor and Aspell support\n"
+#, fuzzy
+msgid "With builtin Editor and Aspell support"
 msgstr "Із вмонтованим Редактором та підтримкою Aspell\n"
 
-msgid "With builtin Editor\n"
+#, fuzzy
+msgid "With builtin Editor"
 msgstr "Із вмонтованим редактором\n"
 
-msgid "With optional subshell support\n"
+#, fuzzy
+msgid "With optional subshell support"
 msgstr "Із підтримкою довільної вкладеної оболонки\n"
 
-msgid "With subshell support as default\n"
+#, fuzzy
+msgid "With subshell support as default"
 msgstr "Із підтримкою вкладеної оболонки (стандартно)\n"
 
-msgid "With support for background operations\n"
+#, fuzzy
+msgid "With support for background operations"
 msgstr "Із підтримкою фонових операцій\n"
 
-msgid "With mouse support on xterm and Linux console\n"
+#, fuzzy
+msgid "With mouse support on xterm and Linux console"
 msgstr "Із підтримкою миші у xterm і консолі Linux\n"
 
-msgid "With mouse support on xterm\n"
+#, fuzzy
+msgid "With mouse support on xterm"
 msgstr "Із підтримкою миші у xterm\n"
 
-msgid "With support for X11 events\n"
+#, fuzzy
+msgid "With support for X11 events"
 msgstr "Із підтримкою подій X11\n"
 
-msgid "With internationalization support\n"
+#, fuzzy
+msgid "With internationalization support"
 msgstr "Із підтримкою інтернаціоналізації\n"
 
-msgid "With multiple codepages support\n"
+#, fuzzy
+msgid "With multiple codepages support"
 msgstr "Із підтримкою багатьох кодових сторінок\n"
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"
 msgstr "Зібрано із GLib %d.%d.%d\n"
 
+#, fuzzy, c-format
+msgid "Built with S-Lang %s with terminfo database\n"
+msgstr "Використання бібліотеки S-Lang із БД terminfo\n"
+
 #, c-format
+msgid "Built with ncurses %s\n"
+msgstr ""
+
+msgid "Built with ncurses (unknown version)"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Built with ncursesw %s\n"
+msgstr "Використання бібліотеки ncursesw\n"
+
+msgid "Built with ncursesw (unknown version)"
+msgstr ""
+
 msgid "Virtual File Systems:"
 msgstr "Віртуальні файлові системи:"
 
-#, c-format
 msgid "Data types:"
 msgstr "Типи даних:"
 
@@ -4553,3 +4581,6 @@ msgstr "Почати спочатку?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не вдалося отримати локальну копію /ftp://some.host/editme.txt"
+
+#~ msgid "Using the ncurses library\n"
+#~ msgstr "Використання бібліотеки ncurses\n"

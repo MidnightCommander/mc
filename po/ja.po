@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-01-01 23:01+0400\n"
+"POT-Creation-Date: 2020-02-29 19:12+0300\n"
 "PO-Revision-Date: 2019-12-16 01:49+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Japanese (http://www.transifex.com/mc/mc/language/ja/)\n"
@@ -472,13 +472,22 @@ msgstr "環境変数 TERM がセットされていません\n"
 msgid "Cannot check SIGWINCH pipe"
 msgstr ""
 
-msgid "Cannot create pipe for SIGWINCH"
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Cannot create pipe for SIGWINCH: %s (%d)\n"
+msgstr "テンポラリディレクトリ %s を作成できません: %s\n"
+
+#, c-format
+msgid ""
+"\n"
+"Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
 msgstr ""
 
-msgid "Cannot configure write end of SIGWINCH pipe"
-msgstr ""
-
-msgid "Cannot configure read end of SIGWINCH pipe"
+#, c-format
+msgid ""
+"\n"
+"Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
 msgstr ""
 
 #, c-format
@@ -1590,7 +1599,7 @@ msgid ""
 "written for the Midnight Commander."
 msgstr ""
 
-msgid "Copyright (C) 1996-2019 the Free Software Foundation"
+msgid "Copyright (C) 1996-2020 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -3632,6 +3641,12 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr ""
 
+msgid ""
+"GNU Midnight Commander\n"
+"is already running on this terminal.\n"
+"Subshell support will be disabled."
+msgstr ""
+
 #, c-format
 msgid ""
 "\n"
@@ -3657,12 +3672,6 @@ msgid ""
 "%s"
 msgstr ""
 
-msgid ""
-"GNU Midnight Commander is already\n"
-"running on this terminal.\n"
-"Subshell support will be disabled."
-msgstr ""
-
 #, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr "名前付きパイプ %s をオープンできません\n"
@@ -3674,43 +3683,44 @@ msgstr ""
 msgid "Warning: Cannot change to %s.\n"
 msgstr "警告: %s に変更できません.\n"
 
-msgid "Using the S-Lang library with terminfo database\n"
-msgstr ""
-
-msgid "Using the ncurses library\n"
-msgstr ""
-
-msgid "Using the ncursesw library\n"
-msgstr ""
-
-msgid "With builtin Editor and Aspell support\n"
-msgstr ""
-
-msgid "With builtin Editor\n"
+#, fuzzy
+msgid "With builtin Editor and Aspell support"
 msgstr "内蔵エディタ使用\n"
 
-msgid "With optional subshell support\n"
-msgstr ""
+#, fuzzy
+msgid "With builtin Editor"
+msgstr "内蔵エディタ使用\n"
 
-msgid "With subshell support as default\n"
-msgstr ""
+#, fuzzy
+msgid "With optional subshell support"
+msgstr "サブシェルのサポートを無効化"
 
-msgid "With support for background operations\n"
+#, fuzzy
+msgid "With subshell support as default"
+msgstr "サブシェルのサポート (デフォルト)"
+
+#, fuzzy
+msgid "With support for background operations"
 msgstr "バックグラウンド操作のサポート\n"
 
-msgid "With mouse support on xterm and Linux console\n"
+#, fuzzy
+msgid "With mouse support on xterm and Linux console"
 msgstr "xterm と Linux コンソールによるマウスサポートを使用\n"
 
-msgid "With mouse support on xterm\n"
+#, fuzzy
+msgid "With mouse support on xterm"
 msgstr "xterm によるマウスサポートを使用\n"
 
-msgid "With support for X11 events\n"
+#, fuzzy
+msgid "With support for X11 events"
 msgstr "X11イベントのサポートを使用\n"
 
-msgid "With internationalization support\n"
+#, fuzzy
+msgid "With internationalization support"
 msgstr "国際化サポートを使用\n"
 
-msgid "With multiple codepages support\n"
+#, fuzzy
+msgid "With multiple codepages support"
 msgstr "複数のコードページを使用\n"
 
 #, c-format
@@ -3718,10 +3728,26 @@ msgid "Built with GLib %d.%d.%d\n"
 msgstr ""
 
 #, c-format
+msgid "Built with S-Lang %s with terminfo database\n"
+msgstr ""
+
+#, c-format
+msgid "Built with ncurses %s\n"
+msgstr ""
+
+msgid "Built with ncurses (unknown version)"
+msgstr ""
+
+#, c-format
+msgid "Built with ncursesw %s\n"
+msgstr ""
+
+msgid "Built with ncursesw (unknown version)"
+msgstr ""
+
 msgid "Virtual File Systems:"
 msgstr "仮想ファイル システム:"
 
-#, c-format
 msgid "Data types:"
 msgstr "データの種類"
 

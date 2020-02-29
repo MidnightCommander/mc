@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-01-01 23:01+0400\n"
+"POT-Creation-Date: 2020-02-29 19:12+0300\n"
 "PO-Revision-Date: 2019-12-16 01:49+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/mc/mc/language/sk/)\n"
@@ -492,13 +492,22 @@ msgstr "Premenná prostredia TERM nie je nastavená!\n"
 msgid "Cannot check SIGWINCH pipe"
 msgstr ""
 
-msgid "Cannot create pipe for SIGWINCH"
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Cannot create pipe for SIGWINCH: %s (%d)\n"
 msgstr "Nemožno vytvoriť rúru pre SIGWINCH"
 
-msgid "Cannot configure write end of SIGWINCH pipe"
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
 msgstr "Nie je možné nastaviť zapisovanie v SIGWINCH rúre"
 
-msgid "Cannot configure read end of SIGWINCH pipe"
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
 msgstr "Nie je možné nastaviť čítanie SIGWINCH rúry"
 
 #, c-format
@@ -1673,7 +1682,8 @@ msgstr ""
 "Používateľsky prívetivý textový editor\n"
 "napísaný pre Midnight Commander."
 
-msgid "Copyright (C) 1996-2019 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2020 the Free Software Foundation"
 msgstr "Copyright (C) 1996-2019 the Free Software Foundation"
 
 msgid "About"
@@ -3836,6 +3846,16 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "Cesta do domovského adresára nie je absolútna"
 
+#, fuzzy
+msgid ""
+"GNU Midnight Commander\n"
+"is already running on this terminal.\n"
+"Subshell support will be disabled."
+msgstr ""
+"GNU Midnight Commander už na tomto\n"
+"termináli beží.\n"
+"Podpora subshell bude vypnutá."
+
 #, c-format
 msgid ""
 "\n"
@@ -3866,15 +3886,6 @@ msgstr ""
 "Nebolo možné uložiť súbor %s:\n"
 "%s "
 
-msgid ""
-"GNU Midnight Commander is already\n"
-"running on this terminal.\n"
-"Subshell support will be disabled."
-msgstr ""
-"GNU Midnight Commander už na tomto\n"
-"termináli beží.\n"
-"Podpora subshell bude vypnutá."
-
 #, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr "Nepodarilo sa otvoriť pomenovanú rúru %s\n"
@@ -3886,54 +3897,71 @@ msgstr "Shell je ešte aktívny. Ukončiť napriek tomu?"
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Upozornenie: Nedá sa zmeniť adresár na %s.\n"
 
-msgid "Using the S-Lang library with terminfo database\n"
-msgstr "Používa sa knižnica S-Lang s databázou terminfo\n"
-
-msgid "Using the ncurses library\n"
-msgstr "Používa sa knižnica ncurses\n"
-
-msgid "Using the ncursesw library\n"
-msgstr "Používa sa knižnica ncursesw\n"
-
-msgid "With builtin Editor and Aspell support\n"
+#, fuzzy
+msgid "With builtin Editor and Aspell support"
 msgstr "So zabudovaným editorom a podporou Aspell\n"
 
-msgid "With builtin Editor\n"
+#, fuzzy
+msgid "With builtin Editor"
 msgstr "So zabudovaným editorom\n"
 
-msgid "With optional subshell support\n"
+#, fuzzy
+msgid "With optional subshell support"
 msgstr "S voliteľnou podporou subshellu\n"
 
-msgid "With subshell support as default\n"
+#, fuzzy
+msgid "With subshell support as default"
 msgstr "S predvlenou podporou subshellu\n"
 
-msgid "With support for background operations\n"
+#, fuzzy
+msgid "With support for background operations"
 msgstr "S podporou operácií na pozadí\n"
 
-msgid "With mouse support on xterm and Linux console\n"
+#, fuzzy
+msgid "With mouse support on xterm and Linux console"
 msgstr "S podporou myši v xterm a Linuxovej konzole\n"
 
-msgid "With mouse support on xterm\n"
+#, fuzzy
+msgid "With mouse support on xterm"
 msgstr "S podporou myši v xterm\n"
 
-msgid "With support for X11 events\n"
+#, fuzzy
+msgid "With support for X11 events"
 msgstr "S podporou udalostí X11\n"
 
-msgid "With internationalization support\n"
+#, fuzzy
+msgid "With internationalization support"
 msgstr "S podporou internacionalizácie\n"
 
-msgid "With multiple codepages support\n"
+#, fuzzy
+msgid "With multiple codepages support"
 msgstr "S podporou znakových sád\n"
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"
 msgstr "Zostavené s GLib %d.%d.%d\n"
 
+#, fuzzy, c-format
+msgid "Built with S-Lang %s with terminfo database\n"
+msgstr "Používa sa knižnica S-Lang s databázou terminfo\n"
+
 #, c-format
+msgid "Built with ncurses %s\n"
+msgstr ""
+
+msgid "Built with ncurses (unknown version)"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Built with ncursesw %s\n"
+msgstr "Používa sa knižnica ncursesw\n"
+
+msgid "Built with ncursesw (unknown version)"
+msgstr ""
+
 msgid "Virtual File Systems:"
 msgstr "Virtuálne súborové systémy:"
 
-#, c-format
 msgid "Data types:"
 msgstr "Typy dát:"
 
@@ -4549,3 +4577,6 @@ msgstr "Pokračovať od začiatku?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nemožno stiahnuť lokálnu kópiu /ftp://some.host/editme.txt"
+
+#~ msgid "Using the ncurses library\n"
+#~ msgstr "Používa sa knižnica ncurses\n"

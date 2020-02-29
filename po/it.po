@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-01-01 23:01+0400\n"
+"POT-Creation-Date: 2020-02-29 19:12+0300\n"
 "PO-Revision-Date: 2020-01-06 12:54+0100\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/mc/language/"
@@ -488,13 +488,22 @@ msgstr "La variabile TERM non è definita!\n"
 msgid "Cannot check SIGWINCH pipe"
 msgstr "Impossibile controllare la pipe SIGWINCH"
 
-msgid "Cannot create pipe for SIGWINCH"
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Cannot create pipe for SIGWINCH: %s (%d)\n"
 msgstr "Impossibile creare la pipe SIGWINCH"
 
-msgid "Cannot configure write end of SIGWINCH pipe"
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
 msgstr "Impossibile configurare la fine scrittura della pipe SIGWINCH"
 
-msgid "Cannot configure read end of SIGWINCH pipe"
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
 msgstr "Impossibile configurare la fine lettura della pipe SIGWINCH"
 
 #, c-format
@@ -1668,7 +1677,8 @@ msgstr ""
 "Un semplice editor di testi\n"
 "scritto per il Midnight Commander."
 
-msgid "Copyright (C) 1996-2019 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2020 the Free Software Foundation"
 msgstr "Copyright (C) 1996-2019 the Free Software Foundation"
 
 msgid "About"
@@ -3825,6 +3835,16 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "Il percorso della directory home non è assoluto"
 
+#, fuzzy
+msgid ""
+"GNU Midnight Commander\n"
+"is already running on this terminal.\n"
+"Subshell support will be disabled."
+msgstr ""
+"GNU Midnight Commander è già in funzione su\n"
+"questo terminale.\n"
+"Il supporto alla subshell verrà disabilitato."
+
 #, c-format
 msgid ""
 "\n"
@@ -3855,15 +3875,6 @@ msgstr ""
 " Impossibile salvare il file %s:\n"
 "%s"
 
-msgid ""
-"GNU Midnight Commander is already\n"
-"running on this terminal.\n"
-"Subshell support will be disabled."
-msgstr ""
-"GNU Midnight Commander è già in funzione su\n"
-"questo terminale.\n"
-"Il supporto alla subshell verrà disabilitato."
-
 #, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr "Non posso aprire la pipe %s\n"
@@ -3875,54 +3886,71 @@ msgstr "La shell è ancora attiva. Esco comunque?"
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Attenzione: non posso entrare su %s.\n"
 
-msgid "Using the S-Lang library with terminfo database\n"
-msgstr "Uso della libreria S-Lang con il database terminfo\n"
-
-msgid "Using the ncurses library\n"
-msgstr "Uso della libreria ncurses\n"
-
-msgid "Using the ncursesw library\n"
-msgstr "Uso della libreria ncursesw\n"
-
-msgid "With builtin Editor and Aspell support\n"
+#, fuzzy
+msgid "With builtin Editor and Aspell support"
 msgstr "Con editor integrato e supporto Aspell\n"
 
-msgid "With builtin Editor\n"
+#, fuzzy
+msgid "With builtin Editor"
 msgstr "Con editor integrato\n"
 
-msgid "With optional subshell support\n"
+#, fuzzy
+msgid "With optional subshell support"
 msgstr "Con supporto opzionale subshell\n"
 
-msgid "With subshell support as default\n"
+#, fuzzy
+msgid "With subshell support as default"
 msgstr "Con supporto subshell predefinito\n"
 
-msgid "With support for background operations\n"
+#, fuzzy
+msgid "With support for background operations"
 msgstr "Con supporto per processi in background\n"
 
-msgid "With mouse support on xterm and Linux console\n"
+#, fuzzy
+msgid "With mouse support on xterm and Linux console"
 msgstr "Con supporto del mouse in xterm e in console Linux\n"
 
-msgid "With mouse support on xterm\n"
+#, fuzzy
+msgid "With mouse support on xterm"
 msgstr "Con supporto del mouse in xterm\n"
 
-msgid "With support for X11 events\n"
+#, fuzzy
+msgid "With support for X11 events"
 msgstr "Con supporto per eventi X11\n"
 
-msgid "With internationalization support\n"
+#, fuzzy
+msgid "With internationalization support"
 msgstr "Con supporto internazionale\n"
 
-msgid "With multiple codepages support\n"
+#, fuzzy
+msgid "With multiple codepages support"
 msgstr "Con supporto codepages multiple\n"
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"
 msgstr "Creato con GLib %d.%d.%d\n"
 
+#, fuzzy, c-format
+msgid "Built with S-Lang %s with terminfo database\n"
+msgstr "Uso della libreria S-Lang con il database terminfo\n"
+
 #, c-format
+msgid "Built with ncurses %s\n"
+msgstr ""
+
+msgid "Built with ncurses (unknown version)"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Built with ncursesw %s\n"
+msgstr "Uso della libreria ncursesw\n"
+
+msgid "Built with ncursesw (unknown version)"
+msgstr ""
+
 msgid "Virtual File Systems:"
 msgstr "File System Virtuali:"
 
-#, c-format
 msgid "Data types:"
 msgstr "Tipo dati:"
 
@@ -4538,3 +4566,6 @@ msgstr "Continuare dall'inizio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Impossibile ricevere copia locale di /ftp://un.host/modificami.txt"
+
+#~ msgid "Using the ncurses library\n"
+#~ msgstr "Uso della libreria ncurses\n"

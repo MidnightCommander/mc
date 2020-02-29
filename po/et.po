@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-01-01 23:01+0400\n"
+"POT-Creation-Date: 2020-02-29 19:12+0300\n"
 "PO-Revision-Date: 2019-12-16 01:49+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Estonian (http://www.transifex.com/mc/mc/language/et/)\n"
@@ -487,13 +487,22 @@ msgstr "Keskkonnamuutujat TERM on määramata!\n"
 msgid "Cannot check SIGWINCH pipe"
 msgstr ""
 
-msgid "Cannot create pipe for SIGWINCH"
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Cannot create pipe for SIGWINCH: %s (%d)\n"
+msgstr "Nurjus toru voogude loomine"
+
+#, c-format
+msgid ""
+"\n"
+"Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
 msgstr ""
 
-msgid "Cannot configure write end of SIGWINCH pipe"
-msgstr ""
-
-msgid "Cannot configure read end of SIGWINCH pipe"
+#, c-format
+msgid ""
+"\n"
+"Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
 msgstr ""
 
 #, c-format
@@ -1666,7 +1675,8 @@ msgstr ""
 "Kasutajasõbralik tekstitoimeti, mis\n"
 "on loodud Midnight Commanderile."
 
-msgid "Copyright (C) 1996-2019 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2020 the Free Software Foundation"
 msgstr "Autoriõigus (c) 1996-2019 Free Software Foundation"
 
 msgid "About"
@@ -3819,6 +3829,16 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "Kodukataloog ei ole absoluutne"
 
+#, fuzzy
+msgid ""
+"GNU Midnight Commander\n"
+"is already running on this terminal.\n"
+"Subshell support will be disabled."
+msgstr ""
+"GNU Midnight Commander juba\n"
+"töötab sellel terminalil.\n"
+"Alamkesta tugi keelatakse."
+
 #, c-format
 msgid ""
 "\n"
@@ -3849,15 +3869,6 @@ msgstr ""
 "Faili %s salvestamine nurjus:\n"
 "%s"
 
-msgid ""
-"GNU Midnight Commander is already\n"
-"running on this terminal.\n"
-"Subshell support will be disabled."
-msgstr ""
-"GNU Midnight Commander juba\n"
-"töötab sellel terminalil.\n"
-"Alamkesta tugi keelatakse."
-
 #, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr "Nimega toru %s avamine nurjus\n"
@@ -3869,54 +3880,71 @@ msgstr "Shell on veel aktiivne. Kas soovid ikkagi lõpetada?"
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Hoiatus: sisenemine kataloogi %s nurjus.\n"
 
-msgid "Using the S-Lang library with terminfo database\n"
-msgstr "Kasutatakse S-Lang teeki terminfo andmebaasiga\n"
-
-msgid "Using the ncurses library\n"
-msgstr "Kasutatakse teeki ncurses\n"
-
-msgid "Using the ncursesw library\n"
-msgstr "Kasutatakse teeki ncursesw\n"
-
-msgid "With builtin Editor and Aspell support\n"
+#, fuzzy
+msgid "With builtin Editor and Aspell support"
 msgstr "Sisseehitatud toimeti ja Aspelli toega\n"
 
-msgid "With builtin Editor\n"
+#, fuzzy
+msgid "With builtin Editor"
 msgstr "Sisseehitatud toimetiga\n"
 
-msgid "With optional subshell support\n"
+#, fuzzy
+msgid "With optional subshell support"
 msgstr "Valikulise alamkesta toega\n"
 
-msgid "With subshell support as default\n"
+#, fuzzy
+msgid "With subshell support as default"
 msgstr "Alamkesta tugi vaikeväärtusena\n"
 
-msgid "With support for background operations\n"
+#, fuzzy
+msgid "With support for background operations"
 msgstr "Taustategevuste toega\n"
 
-msgid "With mouse support on xterm and Linux console\n"
+#, fuzzy
+msgid "With mouse support on xterm and Linux console"
 msgstr "Hiire toega xtermis ja Linuxi konsoolil\n"
 
-msgid "With mouse support on xterm\n"
+#, fuzzy
+msgid "With mouse support on xterm"
 msgstr "Hiire toega xtermis\n"
 
-msgid "With support for X11 events\n"
+#, fuzzy
+msgid "With support for X11 events"
 msgstr "X11 sündmuste toega\n"
 
-msgid "With internationalization support\n"
+#, fuzzy
+msgid "With internationalization support"
 msgstr "Internatsionaliseerimise toega\n"
 
-msgid "With multiple codepages support\n"
+#, fuzzy
+msgid "With multiple codepages support"
 msgstr "Mitme kooditabeli toega\n"
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"
 msgstr "Ehitatud GLib teegiga %d.%d.%d\n"
 
+#, fuzzy, c-format
+msgid "Built with S-Lang %s with terminfo database\n"
+msgstr "Kasutatakse S-Lang teeki terminfo andmebaasiga\n"
+
 #, c-format
+msgid "Built with ncurses %s\n"
+msgstr ""
+
+msgid "Built with ncurses (unknown version)"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Built with ncursesw %s\n"
+msgstr "Kasutatakse teeki ncursesw\n"
+
+msgid "Built with ncursesw (unknown version)"
+msgstr ""
+
 msgid "Virtual File Systems:"
 msgstr "Virtuaalsed failisüsteemid:"
 
-#, c-format
 msgid "Data types:"
 msgstr "Andmetüübid:"
 
@@ -4532,3 +4560,6 @@ msgstr "Kas jätkata algusest?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kohaliku koopia hankimine failist /ftp://some.host/editme.txt nurjus"
+
+#~ msgid "Using the ncurses library\n"
+#~ msgstr "Kasutatakse teeki ncurses\n"
