@@ -3446,7 +3446,7 @@ edit_load_forward_cmd (WEdit * edit)
     if (edit->modified
         && edit_query_dialog2 (_("Warning"),
                                _("Current text was modified without a file save.\n"
-                                 "Continue discards these changes"), _("C&ontinue"),
+                                 "Continue discards these changes."), _("C&ontinue"),
                                _("&Cancel")) == 1)
     {
         edit->force |= REDRAW_COMPLETELY;
@@ -3475,7 +3475,7 @@ edit_load_back_cmd (WEdit * edit)
     if (edit->modified
         && edit_query_dialog2 (_("Warning"),
                                _("Current text was modified without a file save.\n"
-                                 "Continue discards these changes"), _("C&ontinue"),
+                                 "Continue discards these changes."), _("C&ontinue"),
                                _("&Cancel")) == 1)
     {
         edit->force |= REDRAW_COMPLETELY;
