@@ -59,6 +59,7 @@ setup (void)
     g_setenv ("XDG_DATA_HOME", CONF_DATA, TRUE);
     g_setenv ("XDG_CACHE_HOME", CONF_CACHE, TRUE);
 #endif
+    mc_global.timer = mc_timer_new ();
     str_init_strings ("UTF-8");
     vfs_init ();
     vfs_init_localfs ();
@@ -72,6 +73,7 @@ teardown (void)
 {
     vfs_shut ();
     str_uninit_strings ();
+    mc_timer_destroy (mc_global.timer);
 }
 
 /* --------------------------------------------------------------------------------------------- */
