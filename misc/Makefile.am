@@ -17,7 +17,6 @@ dist_pkgdata_DATA = \
 	mc.lib
 
 pkgdata_DATA = \
-	$(dist_pkgdata_DATA) \
 	$(PKGDATA_OUT)
 
 SCRIPTS_IN = \
@@ -54,7 +53,6 @@ EXTRA_DIST = \
 	$(LIBFILES_SCRIPT) \
 	$(SCRIPTS_IN) \
 	$(noinst_DATA) \
-	$(dist_pkgdata_DATA) \
 	$(PKGDATA_IN)
 
 install-data-hook:
