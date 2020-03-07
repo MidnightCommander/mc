@@ -461,7 +461,7 @@ toggle_subshell (void)
     {
         if (message_flag)
             message (D_ERROR, MSG_ERROR,
-                     _("Not an xterm or Linux console;\nthe panels cannot be toggled."));
+                     _("Not an xterm or Linux console;\nthe subshell cannot be toggled."));
         message_flag = FALSE;
         return;
     }
