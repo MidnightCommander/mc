@@ -860,7 +860,7 @@ vfs_s_free (vfsid id)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static gboolean
 vfs_s_dir_uptodate (struct vfs_class *me, struct vfs_s_inode *ino)
 {
     guint64 tim;
@@ -873,7 +873,7 @@ vfs_s_dir_uptodate (struct vfs_class *me, struct vfs_s_inode *ino)
 
     tim = mc_timer_elapsed (mc_global.timer);
 
-    return (tim < ino->timestamp ? 1 : 0);
+    return (tim < ino->timestamp);
 }
 
 /* --------------------------------------------------------------------------------------------- */
