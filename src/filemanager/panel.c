@@ -3593,7 +3593,7 @@ panel_execute_cmd (WPanel * panel, long command)
 static cb_ret_t
 panel_key (WPanel * panel, int key)
 {
-    size_t i;
+    long command;
 
     if (is_abort_char (key))
     {
@@ -3607,9 +3607,9 @@ panel_key (WPanel * panel, int key)
         return MSG_HANDLED;
     }
 
-    for (i = 0; panel_map[i].key != 0; i++)
-        if (key == panel_map[i].key)
-            return panel_execute_cmd (panel, panel_map[i].command);
+    command = widget_lookup_key (WIDGET (panel), key);
+    if (command != CK_IgnoreKey)
+        return panel_execute_cmd (panel, command);
 
     if (panels_options.torben_fj_mode && key == ALT ('h'))
     {
@@ -3633,15 +3633,16 @@ static cb_ret_t
 panel_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WPanel *panel = PANEL (w);
+    WDialog *h = DIALOG (w->owner);
     WButtonBar *bb;
 
     switch (msg)
     {
     case MSG_INIT:
         /* subscribe to "history_load" event */
-        mc_event_add (w->owner->event_group, MCEVENT_HISTORY_LOAD, panel_load_history, w, NULL);
+        mc_event_add (h->event_group, MCEVENT_HISTORY_LOAD, panel_load_history, w, NULL);
         /* subscribe to "history_save" event */
-        mc_event_add (w->owner->event_group, MCEVENT_HISTORY_SAVE, panel_save_history, w, NULL);
+        mc_event_add (h->event_group, MCEVENT_HISTORY_SAVE, panel_save_history, w, NULL);
         return MSG_HANDLED;
 
     case MSG_DRAW:
@@ -3676,7 +3677,7 @@ panel_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
         update_xterm_title_path ();
         select_item (panel);
 
-        bb = find_buttonbar (w->owner);
+        bb = find_buttonbar (h);
         midnight_set_buttonbar (bb);
         widget_draw (WIDGET (bb));
         return MSG_HANDLED;
@@ -3697,9 +3698,9 @@ panel_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
     case MSG_DESTROY:
         vfs_stamp_path (panel->cwd_vpath);
         /* unsubscribe from "history_load" event */
-        mc_event_del (w->owner->event_group, MCEVENT_HISTORY_LOAD, panel_load_history, w);
+        mc_event_del (h->event_group, MCEVENT_HISTORY_LOAD, panel_load_history, w);
         /* unsubscribe from "history_save" event */
-        mc_event_del (w->owner->event_group, MCEVENT_HISTORY_SAVE, panel_save_history, w);
+        mc_event_del (h->event_group, MCEVENT_HISTORY_SAVE, panel_save_history, w);
         panel_destroy (panel);
         free_my_statfs ();
         return MSG_HANDLED;
@@ -4300,6 +4301,7 @@ panel_sized_empty_new (const char *panel_name, int y, int x, int lines, int cols
     w = WIDGET (panel);
     widget_init (w, y, x, lines, cols, panel_callback, panel_mouse_callback);
     w->options |= WOP_SELECTABLE | WOP_TOP_SELECT;
+    w->keymap = panel_map;
 
     panel->dir.size = DIR_LIST_MIN_SIZE;
     panel->dir.list = g_new (file_entry_t, panel->dir.size);

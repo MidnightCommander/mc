@@ -577,7 +577,7 @@ mcview_execute_cmd (WView * view, long command)
         break;
     case CK_Quit:
         if (!mcview_is_in_panel (view))
-            dlg_stop (WIDGET (view)->owner);
+            dlg_stop (DIALOG (WIDGET (view)->owner));
         break;
     case CK_Cancel:
         /* don't close viewer due to SIGINT */
@@ -586,6 +586,17 @@ mcview_execute_cmd (WView * view, long command)
         res = MSG_NOT_HANDLED;
     }
     return res;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static long
+mcview_lookup_key (WView * view, int key)
+{
+    if (view->mode_flags.hex)
+        return keybind_lookup_keymap_command (view->hex_keymap, key);
+
+    return widget_lookup_key (WIDGET (view), key);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -599,18 +610,12 @@ mcview_handle_key (WView * view, int key)
     key = convert_from_input_c (key);
 #endif
 
-    if (view->mode_flags.hex)
-    {
-        if (view->hexedit_mode && (mcview_handle_editkey (view, key) == MSG_HANDLED))
-            return MSG_HANDLED;
+    if (view->hexedit_mode && view->mode_flags.hex
+        && mcview_handle_editkey (view, key) == MSG_HANDLED)
+        return MSG_HANDLED;
 
-        command = keybind_lookup_keymap_command (viewer_hex_map, key);
-        if ((command != CK_IgnoreKey) && (mcview_execute_cmd (view, command) == MSG_HANDLED))
-            return MSG_HANDLED;
-    }
-
-    command = keybind_lookup_keymap_command (viewer_map, key);
-    if ((command != CK_IgnoreKey) && (mcview_execute_cmd (view, command) == MSG_HANDLED))
+    command = mcview_lookup_key (view, key);
+    if (command != CK_IgnoreKey && mcview_execute_cmd (view, command) == MSG_HANDLED)
         return MSG_HANDLED;
 
 #ifdef MC_ENABLE_DEBUGGING_CODE
@@ -725,6 +730,7 @@ mcview_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
         return MSG_HANDLED;
 
     case MSG_RESIZE:
+        widget_default_callback (w, NULL, MSG_RESIZE, 0, data);
         mcview_resize (view);
         return MSG_HANDLED;
 
@@ -784,9 +790,9 @@ mcview_dialog_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
         return mcview_execute_cmd (NULL, parm);
 
     case MSG_VALIDATE:
-        view = (WView *) find_widget_type (h, mcview_callback);
+        view = (WView *) widget_find_by_type (w, mcview_callback);
         /* don't stop the dialog before final decision */
-        widget_set_state (WIDGET (h), WST_ACTIVE, TRUE);
+        widget_set_state (w, WST_ACTIVE, TRUE);
         if (mcview_ok_to_quit (view))
             dlg_stop (h);
         else

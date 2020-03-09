@@ -62,7 +62,8 @@ cb_ret_t
 button_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WButton *b = BUTTON (w);
-    WDialog *h = w->owner;
+    WGroup *g = w->owner;
+    WDialog *h = DIALOG (g);
     int off = 0;
 
     switch (msg)
@@ -74,7 +75,7 @@ button_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm
          * when hotkeys are sent to all widgets before the key is
          * handled by the current widget.
          */
-        if (parm == '\n' && WIDGET (h->current->data) == w)
+        if (parm == '\n' && WIDGET (g->current->data) == w)
         {
             send_message (w, sender, MSG_KEY, ' ', data);
             return MSG_HANDLED;

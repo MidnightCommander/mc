@@ -281,8 +281,6 @@ print_flags (const WDialog * h)
 static void
 advanced_chown_refresh (WDialog * h)
 {
-    dlg_default_repaint (h);
-
     tty_setcolor (COLOR_NORMAL);
 
     widget_gotoyx (h, BY - 1, advanced_chown_but[0].x + 5);
@@ -320,11 +318,11 @@ advanced_chown_info_update (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-update_mode (WDialog * h)
+update_mode (WGroup * g)
 {
-    print_flags (h);
+    print_flags (DIALOG (g));
     advanced_chown_info_update ();
-    widget_set_state (WIDGET (h->current->data), WST_FOCUSED, TRUE);
+    widget_set_state (WIDGET (g->current->data), WST_FOCUSED, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -333,6 +331,7 @@ static cb_ret_t
 perm_button_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WButton *b = BUTTON (w);
+    WGroup *g = w->owner;
     int i = 0;
     int f_pos;
 
@@ -365,10 +364,10 @@ perm_button_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
         case '+':
             flag_pos = f_pos * 3 + b->hotpos;
             ch_flags[flag_pos] = parm;
-            update_mode (w->owner);
+            update_mode (g);
             send_message (w, NULL, MSG_KEY, KEY_RIGHT, NULL);
             if (b->hotpos == 2)
-                dlg_select_next_widget (w->owner);
+                group_select_next_widget (g);
             break;
 
         case XCTRL ('f'):
@@ -426,7 +425,7 @@ perm_button_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
             b->hotpos = i;
             flag_pos = f_pos * 3 + i;
             ch_flags[flag_pos] = '=';
-            update_mode (w->owner);
+            update_mode (g);
             break;
 
         default:
@@ -528,7 +527,8 @@ user_group_button_cb (WButton * button, int action)
 
     do
     {
-        WDialog *h = w->owner;
+        WGroup *g = w->owner;
+        WDialog *h = DIALOG (h);
         Widget *wh = WIDGET (h);
 
         gboolean is_owner = (f_pos == BUTTONS_PERM - 2);
@@ -587,7 +587,7 @@ user_group_button_cb (WButton * button, int action)
         listbox_select_entry (chl_list, fe);
 
         b_pos = chl_list->pos;
-        add_widget (chl_dlg, chl_list);
+        group_add_widget (GROUP (chl_dlg), chl_list);
 
         result = dlg_run (chl_dlg);
 
@@ -619,12 +619,12 @@ user_group_button_cb (WButton * button, int action)
                 }
 
                 if (!ok)
-                    dlg_select_current_widget (h);
+                    group_select_current_widget (g);
                 else
                 {
                     ch_flags[f_pos + 6] = '+';
                     update_ownership ();
-                    dlg_select_current_widget (h);
+                    group_select_current_widget (g);
                     print_flags (h);
                 }
             }
@@ -633,14 +633,14 @@ user_group_button_cb (WButton * button, int action)
             {
                 if (!is_owner)
                     chl_end = TRUE;
-                dlg_select_prev_widget (h);
+                group_select_prev_widget (g);
                 f_pos--;
             }
             else if (result == KEY_RIGHT)
             {
                 if (is_owner)
                     chl_end = TRUE;
-                dlg_select_next_widget (h);
+                group_select_next_widget (g);
                 f_pos++;
             }
         }
@@ -656,18 +656,31 @@ user_group_button_cb (WButton * button, int action)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
+advanced_chown_bg_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+{
+    switch (msg)
+    {
+    case MSG_DRAW:
+        frame_callback (w, NULL, MSG_DRAW, 0, NULL);
+        advanced_chown_refresh (DIALOG (w->owner));
+        advanced_chown_info_update ();
+        return MSG_HANDLED;
+
+    default:
+        return frame_callback (w, sender, msg, parm, data);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static cb_ret_t
 advanced_chown_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
-    WDialog *h = DIALOG (w);
+    WGroup *g = GROUP (w);
     int i = 0;
 
     switch (msg)
     {
-    case MSG_DRAW:
-        advanced_chown_refresh (h);
-        advanced_chown_info_update ();
-        return MSG_HANDLED;
-
     case MSG_KEY:
         switch (parm)
         {
@@ -684,8 +697,8 @@ advanced_chown_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm
             for (i = 0; i < 3; i++)
                 ch_flags[i * 3 + parm - 3] = (x_toggle & (1 << parm)) ? '-' : '+';
             x_toggle ^= (1 << parm);
-            update_mode (h);
-            dlg_broadcast_msg (h, MSG_DRAW);
+            update_mode (g);
+            widget_draw (w);
             break;
 
         case XCTRL ('x'):
@@ -701,8 +714,8 @@ advanced_chown_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm
             for (i = 0; i < 3; i++)
                 ch_flags[i * 3 + parm] = (x_toggle & (1 << parm)) ? '-' : '+';
             x_toggle ^= (1 << parm);
-            update_mode (h);
-            dlg_broadcast_msg (h, MSG_DRAW);
+            update_mode (g);
+            widget_draw (w);
             break;
 
         default:
@@ -722,6 +735,7 @@ advanced_chown_init (void)
 {
     gboolean single_set;
     WDialog *ch_dlg;
+    WGroup *ch_grp;
     int lines = 12;
     int cols = 74;
     int i;
@@ -738,67 +752,69 @@ advanced_chown_init (void)
     ch_dlg =
         dlg_create (TRUE, 0, 0, lines, cols, WPOS_CENTER, FALSE, dialog_colors,
                     advanced_chown_callback, NULL, "[Advanced Chown]", _("Chown advanced command"));
+    ch_grp = GROUP (ch_dlg);
 
+    /* draw background */
+    ch_dlg->bg->callback = advanced_chown_bg_callback;
 
     l_filename = label_new (2, 3, "");
-    add_widget (ch_dlg, l_filename);
+    group_add_widget (ch_grp, l_filename);
 
-    add_widget (ch_dlg, hline_new (3, -1, -1));
+    group_add_widget (ch_grp, hline_new (3, -1, -1));
 
 #define XTRACT(i,y,cb) y, BX+advanced_chown_but[i].x, \
         advanced_chown_but[i].ret_cmd, advanced_chown_but[i].flags, \
         (advanced_chown_but[i].text), cb
     b_att[0] = perm_button_new (XTRACT (0, BY, NULL));
-    advanced_chown_but[0].id = add_widget (ch_dlg, b_att[0]);
+    advanced_chown_but[0].id = group_add_widget (ch_grp, b_att[0]);
     b_att[1] = perm_button_new (XTRACT (1, BY, NULL));
-    advanced_chown_but[1].id = add_widget (ch_dlg, b_att[1]);
+    advanced_chown_but[1].id = group_add_widget (ch_grp, b_att[1]);
     b_att[2] = perm_button_new (XTRACT (2, BY, NULL));
-    advanced_chown_but[2].id = add_widget (ch_dlg, b_att[2]);
+    advanced_chown_but[2].id = group_add_widget (ch_grp, b_att[2]);
     b_user = button_new (XTRACT (3, BY, user_group_button_cb));
-    advanced_chown_but[3].id = add_widget (ch_dlg, b_user);
+    advanced_chown_but[3].id = group_add_widget (ch_grp, b_user);
     b_group = button_new (XTRACT (4, BY, user_group_button_cb));
-    advanced_chown_but[4].id = add_widget (ch_dlg, b_group);
-#undef XTRACT
+    advanced_chown_but[4].id = group_add_widget (ch_grp, b_group);
 
     l_mode = label_new (BY + 2, 3, "");
-    add_widget (ch_dlg, l_mode);
+    group_add_widget (ch_grp, l_mode);
 
     y = BY + 3;
     if (!single_set)
     {
         i = BUTTONS_PERM;
-        add_widget (ch_dlg, hline_new (y++, -1, -1));
-        advanced_chown_but[i].id = add_widget (ch_dlg,
-                                               button_new (y,
-                                                           WIDGET (ch_dlg)->cols / 2 -
-                                                           advanced_chown_but[i].len,
-                                                           advanced_chown_but[i].ret_cmd,
-                                                           advanced_chown_but[i].flags,
-                                                           advanced_chown_but[i].text, NULL));
+        group_add_widget (ch_grp, hline_new (y++, -1, -1));
+        advanced_chown_but[i].id = group_add_widget (ch_grp,
+                                                     button_new (y,
+                                                                 WIDGET (ch_dlg)->cols / 2 -
+                                                                 advanced_chown_but[i].len,
+                                                                 advanced_chown_but[i].ret_cmd,
+                                                                 advanced_chown_but[i].flags,
+                                                                 advanced_chown_but[i].text, NULL));
         i++;
-        advanced_chown_but[i].id = add_widget (ch_dlg,
-                                               button_new (y, WIDGET (ch_dlg)->cols / 2 + 1,
-                                                           advanced_chown_but[i].ret_cmd,
-                                                           advanced_chown_but[i].flags,
-                                                           advanced_chown_but[i].text, NULL));
+        advanced_chown_but[i].id = group_add_widget (ch_grp,
+                                                     button_new (y, WIDGET (ch_dlg)->cols / 2 + 1,
+                                                                 advanced_chown_but[i].ret_cmd,
+                                                                 advanced_chown_but[i].flags,
+                                                                 advanced_chown_but[i].text, NULL));
         y++;
     }
 
     i = BUTTONS_PERM + 2;
-    add_widget (ch_dlg, hline_new (y++, -1, -1));
-    advanced_chown_but[i].id = add_widget (ch_dlg,
-                                           button_new (y,
-                                                       WIDGET (ch_dlg)->cols / 2 -
-                                                       advanced_chown_but[i].len,
-                                                       advanced_chown_but[i].ret_cmd,
-                                                       advanced_chown_but[i].flags,
-                                                       advanced_chown_but[i].text, NULL));
+    group_add_widget (ch_grp, hline_new (y++, -1, -1));
+    advanced_chown_but[i].id = group_add_widget (ch_grp,
+                                                 button_new (y,
+                                                             WIDGET (ch_dlg)->cols / 2 -
+                                                             advanced_chown_but[i].len,
+                                                             advanced_chown_but[i].ret_cmd,
+                                                             advanced_chown_but[i].flags,
+                                                             advanced_chown_but[i].text, NULL));
     i++;
-    advanced_chown_but[i].id = add_widget (ch_dlg,
-                                           button_new (y, WIDGET (ch_dlg)->cols / 2 + 1,
-                                                       advanced_chown_but[i].ret_cmd,
-                                                       advanced_chown_but[i].flags,
-                                                       advanced_chown_but[i].text, NULL));
+    advanced_chown_but[i].id = group_add_widget (ch_grp,
+                                                 button_new (y, WIDGET (ch_dlg)->cols / 2 + 1,
+                                                             advanced_chown_but[i].ret_cmd,
+                                                             advanced_chown_but[i].flags,
+                                                             advanced_chown_but[i].text, NULL));
 
     widget_select (WIDGET (b_att[0]));
 

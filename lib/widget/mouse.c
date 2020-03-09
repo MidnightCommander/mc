@@ -70,8 +70,6 @@ init_mouse_event (mouse_event_t * event, mouse_msg_t msg, const Gpm_Event * glob
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/*** public functions ****************************************************************************/
-/* --------------------------------------------------------------------------------------------- */
 
 /**
  * Translate GPM event to high-level event,
@@ -81,7 +79,7 @@ init_mouse_event (mouse_event_t * event, mouse_msg_t msg, const Gpm_Event * glob
  *
  * @return high level mouse event
  */
-mouse_event_t
+static mouse_event_t
 mouse_translate_event (Widget * w, Gpm_Event * event)
 {
     gboolean in_widget;
@@ -172,7 +170,7 @@ mouse_translate_event (Widget * w, Gpm_Event * event)
  *
  * @return result of mouse event handling
  */
-int
+static int
 mouse_process_event (Widget * w, mouse_event_t * event)
 {
     int ret = MOU_UNHANDLED;
@@ -199,6 +197,29 @@ mouse_process_event (Widget * w, mouse_event_t * event)
     }
 
     return ret;
+}
+
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Translate GPM event to high-level event and process it
+ *
+ * @param w Widget object
+ * @param event GPM event
+ *
+ * @return result of mouse event handling
+ */
+int
+mouse_handle_event (Widget * w, Gpm_Event * event)
+{
+    mouse_event_t me;
+
+    me = mouse_translate_event (w, event);
+
+    return mouse_process_event (w, &me);
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -375,12 +375,14 @@ mcview_eol (WView * view, off_t current)
 char *
 mcview_get_title (const WDialog * h, size_t len)
 {
-    const WView *view = (const WView *) find_widget_type (h, mcview_callback);
-    const char *modified = view->hexedit_mode && (view->change_list != NULL) ? "(*) " : "    ";
+    const WView *view;
+    const char *modified;
     const char *file_label;
     const char *view_filename;
     char *ret_str;
 
+    view = (const WView *) widget_find_by_type (CONST_WIDGET (h), mcview_callback);
+    modified = view->hexedit_mode && (view->change_list != NULL) ? "(*) " : "    ";
     view_filename = vfs_path_as_str (view->filename_vpath);
 
     len -= 4;

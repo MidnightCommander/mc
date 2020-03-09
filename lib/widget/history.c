@@ -70,6 +70,7 @@ history_dlg_reposition (WDialog * dlg_head)
 {
     history_dlg_data *data;
     int x = 0, y, he, wi;
+    WRect r;
 
     /* guard checks */
     if ((dlg_head == NULL) || (dlg_head->data == NULL))
@@ -102,9 +103,9 @@ history_dlg_reposition (WDialog * dlg_head)
         x = COLS - wi;
     }
 
-    dlg_set_position (dlg_head, y, x, he, wi);
+    rect_init (&r, y, x, he, wi);
 
-    return MSG_HANDLED;
+    return dlg_default_callback (WIDGET (dlg_head), NULL, MSG_RESIZE, 0, &r);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -230,7 +231,7 @@ history_show (history_descriptor_t * hd)
 
     /* this call makes list stick to all sides of dialog, effectively make
        it be resized with dialog */
-    add_widget_autopos (query_dlg, hd->listbox, WPOS_KEEP_ALL, NULL);
+    group_add_widget_autopos (GROUP (query_dlg), hd->listbox, WPOS_KEEP_ALL, NULL);
 
     /* to avoid diplicating of (calculating sizes in two places)
        code, call history_dlg_callback function here, to set dialog and

@@ -53,8 +53,46 @@
 
 /*** file scope variables ************************************************************************/
 
+/* maximum value of used widget ID */
+static unsigned long widget_id = 0;
+
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Calc widget ID,
+ * Widget ID is uniq for each widget created during MC session (like PID in OS).
+ *
+ * @return widget ID.
+ */
+static unsigned long
+widget_set_id (void)
+{
+    unsigned long id;
+
+    id = widget_id++;
+    /* TODO IF NEEDED: if id is already used, find next free id. */
+
+    return id;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static cb_ret_t
+widget_default_resize (Widget * w, const WRect * r)
+{
+    if (r == NULL)
+        return MSG_NOT_HANDLED;
+
+    w->y = r->y;
+    w->x = r->x;
+    w->lines = r->lines;
+    w->cols = r->cols;
+
+    return MSG_HANDLED;
+}
+
 /* --------------------------------------------------------------------------------------------- */
 
 static void
@@ -74,19 +112,19 @@ widget_do_focus (Widget * w, gboolean enable)
 static void
 widget_focus (Widget * w)
 {
-    WDialog *h = DIALOG (w->owner);
+    WGroup *g = w->owner;
 
-    if (h == NULL)
+    if (g == NULL)
         return;
 
-    if (WIDGET (h->current->data) != w)
+    if (WIDGET (g->current->data) != w)
     {
-        widget_do_focus (WIDGET (h->current->data), FALSE);
+        widget_do_focus (WIDGET (g->current->data), FALSE);
         /* Test if focus lost was allowed and focus has really been loose */
-        if (h->current == NULL || !widget_get_state (WIDGET (h->current->data), WST_FOCUSED))
+        if (g->current == NULL || !widget_get_state (WIDGET (g->current->data), WST_FOCUSED))
         {
             widget_do_focus (w, TRUE);
-            h->current = dlg_find (h, w);
+            g->current = widget_find (WIDGET (g), w);
         }
     }
     else if (!widget_get_state (w, WST_FOCUSED))
@@ -101,13 +139,13 @@ widget_focus (Widget * w)
 static void
 widget_reorder (GList * l, gboolean set_top)
 {
-    WDialog *h = WIDGET (l->data)->owner;
+    WGroup *g = WIDGET (l->data)->owner;
 
-    h->widgets = g_list_remove_link (h->widgets, l);
+    g->widgets = g_list_remove_link (g->widgets, l);
     if (set_top)
-        h->widgets = g_list_concat (h->widgets, l);
+        g->widgets = g_list_concat (g->widgets, l);
     else
-        h->widgets = g_list_concat (l, h->widgets);
+        g->widgets = g_list_concat (l, g->widgets);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -127,6 +165,16 @@ hotkey_cmp (const char *s1, const char *s2)
         return FALSE;
 
     return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static const int *
+widget_default_get_colors (const Widget * w)
+{
+    const Widget *owner = CONST_WIDGET (w->owner);
+
+    return (owner == NULL ? NULL : widget_get_colors (owner));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -252,21 +300,35 @@ void
 widget_init (Widget * w, int y, int x, int lines, int cols,
              widget_cb_fn callback, widget_mouse_cb_fn mouse_callback)
 {
+    w->id = widget_set_id ();
     w->x = x;
     w->y = y;
     w->cols = cols;
     w->lines = lines;
     w->pos_flags = WPOS_KEEP_DEFAULT;
     w->callback = callback;
+
+    w->keymap = NULL;
+    w->ext_keymap = NULL;
+    w->ext_mode = FALSE;
+
     w->mouse_callback = mouse_callback;
     w->owner = NULL;
+    w->mouse_handler = mouse_handle_event;
     w->mouse.forced_capture = FALSE;
     w->mouse.capture = FALSE;
     w->mouse.last_msg = MSG_MOUSE_NONE;
     w->mouse.last_buttons_down = 0;
 
     w->options = WOP_DEFAULT;
-    w->state = WST_DEFAULT;
+    w->state = WST_CONSTRUCT;
+
+    w->find = widget_default_find;
+    w->find_by_type = widget_default_find_by_type;
+    w->find_by_id = widget_default_find_by_id;
+
+    w->set_state = widget_default_set_state;
+    w->get_colors = widget_default_get_colors;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -284,10 +346,8 @@ widget_destroy (Widget * w)
 cb_ret_t
 widget_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
-    (void) w;
     (void) sender;
     (void) parm;
-    (void) data;
 
     switch (msg)
     {
@@ -301,6 +361,9 @@ widget_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm
     case MSG_CURSOR:
     case MSG_IDLE:
         return MSG_HANDLED;
+
+    case MSG_RESIZE:
+        return widget_default_resize (w, CONST_RECT (data));
 
     default:
         return MSG_NOT_HANDLED;
@@ -323,73 +386,6 @@ widget_set_options (Widget * w, widget_options_t options, gboolean enable)
         w->options |= options;
     else
         w->options &= ~options;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/**
- * Modify state of widget.
- *
- * @param w      widget
- * @param state  widget state flag to modify
- * @param enable specifies whether to turn the flag on (TRUE) or off (FALSE).
- *               Only one flag per call can be modified.
- * @return       MSG_HANDLED if set was handled successfully, MSG_NOT_HANDLED otherwise.
- */
-cb_ret_t
-widget_set_state (Widget * w, widget_state_t state, gboolean enable)
-{
-    gboolean ret = MSG_HANDLED;
-
-    if (enable)
-        w->state |= state;
-    else
-        w->state &= ~state;
-
-    if (enable)
-    {
-        /* exclusive bits */
-        if ((state & WST_CONSTRUCT) != 0)
-            w->state &= ~(WST_ACTIVE | WST_SUSPENDED | WST_CLOSED);
-        else if ((state & WST_ACTIVE) != 0)
-            w->state &= ~(WST_CONSTRUCT | WST_SUSPENDED | WST_CLOSED);
-        else if ((state & WST_SUSPENDED) != 0)
-            w->state &= ~(WST_CONSTRUCT | WST_ACTIVE | WST_CLOSED);
-        else if ((state & WST_CLOSED) != 0)
-            w->state &= ~(WST_CONSTRUCT | WST_ACTIVE | WST_SUSPENDED);
-    }
-
-    if (w->owner == NULL)
-        return MSG_NOT_HANDLED;
-
-    switch (state)
-    {
-    case WST_DISABLED:
-        ret = send_message (w, NULL, enable ? MSG_DISABLE : MSG_ENABLE, 0, NULL);
-        if (ret == MSG_HANDLED && widget_get_state (WIDGET (w->owner), WST_ACTIVE))
-            ret = send_message (w, NULL, MSG_DRAW, 0, NULL);
-        break;
-
-    case WST_FOCUSED:
-        {
-            widget_msg_t msg;
-
-            msg = enable ? MSG_FOCUS : MSG_UNFOCUS;
-            ret = send_message (w, NULL, msg, 0, NULL);
-            if (ret == MSG_HANDLED && widget_get_state (WIDGET (w->owner), WST_ACTIVE))
-            {
-                send_message (w, NULL, MSG_DRAW, 0, NULL);
-                /* Notify owner that focus was moved from one widget to another */
-                send_message (w->owner, w, MSG_CHANGED_FOCUS, 0, NULL);
-            }
-        }
-        break;
-
-    default:
-        break;
-    }
-
-    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -423,17 +419,25 @@ widget_adjust_position (widget_pos_flags_t pos_flags, int *y, int *x, int *lines
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Change widget position and size.
+ *
+ * @param w widget
+ * @param y y coordinate of top-left corner
+ * @param x x coordinate of top-left corner
+ * @param lines width
+ * @param cols height
+ */
 
 void
-widget_set_size (Widget * widget, int y, int x, int lines, int cols)
+widget_set_size (Widget * w, int y, int x, int lines, int cols)
 {
-    widget->x = x;
-    widget->y = y;
-    widget->cols = cols;
-    widget->lines = lines;
-    send_message (widget, NULL, MSG_RESIZE, 0, NULL);
-    if (widget->owner != NULL && widget_get_state (WIDGET (widget->owner), WST_ACTIVE))
-        send_message (widget, NULL, MSG_DRAW, 0, NULL);
+    WRect r = { y, x, lines, cols };
+
+    send_message (w, NULL, MSG_RESIZE, 0, &r);
+
+    if (w->owner != NULL && widget_get_state (WIDGET (w->owner), WST_ACTIVE))
+        widget_draw (w);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -441,25 +445,17 @@ widget_set_size (Widget * widget, int y, int x, int lines, int cols)
 void
 widget_selectcolor (Widget * w, gboolean focused, gboolean hotkey)
 {
-    WDialog *h = w->owner;
     int color;
+    const int *colors;
+
+    colors = widget_get_colors (w);
 
     if (widget_get_state (w, WST_DISABLED))
         color = DISABLED_COLOR;
     else if (hotkey)
-    {
-        if (focused)
-            color = h->color[DLG_COLOR_HOT_FOCUS];
-        else
-            color = h->color[DLG_COLOR_HOT_NORMAL];
-    }
+        color = colors[focused ? DLG_COLOR_HOT_FOCUS : DLG_COLOR_HOT_NORMAL];
     else
-    {
-        if (focused)
-            color = h->color[DLG_COLOR_FOCUS];
-        else
-            color = h->color[DLG_COLOR_NORMAL];
-    }
+        color = colors[focused ? DLG_COLOR_FOCUS : DLG_COLOR_NORMAL];
 
     tty_setcolor (color);
 }
@@ -476,6 +472,8 @@ widget_erase (Widget * w)
 /* --------------------------------------------------------------------------------------------- */
 /**
   * Check whether widget is active or not.
+  * Widget is active if it's current in the its owner and each owner in the chain is current too.
+  *
   * @param w the widget
   *
   * @return TRUE if the widget is active, FALSE otherwise
@@ -484,21 +482,40 @@ widget_erase (Widget * w)
 gboolean
 widget_is_active (const void *w)
 {
-    return (w == CONST_WIDGET (w)->owner->current->data);
+    const WGroup *owner;
+
+    /* Is group top? */
+    if (w == top_dlg->data)
+        return TRUE;
+
+    owner = CONST_WIDGET (w)->owner;
+
+    /* Is widget in any group? */
+    if (owner == NULL)
+        return FALSE;
+
+    if (w != owner->current->data)
+        return FALSE;
+
+    return widget_is_active (owner);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-void
+cb_ret_t
 widget_draw (Widget * w)
 {
+    cb_ret_t ret = MSG_NOT_HANDLED;
+
     if (w != NULL)
     {
-        WDialog *h = w->owner;
+        WGroup *g = w->owner;
 
-        if (h != NULL && widget_get_state (WIDGET (h), WST_ACTIVE))
-            w->callback (w, NULL, MSG_DRAW, 0, NULL);
+        if (g != NULL && widget_get_state (WIDGET (g), WST_ACTIVE))
+            ret = w->callback (w, NULL, MSG_DRAW, 0, NULL);
     }
+
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -512,21 +529,21 @@ widget_draw (Widget * w)
 void
 widget_replace (Widget * old_w, Widget * new_w)
 {
-    WDialog *h = old_w->owner;
+    WGroup *g = old_w->owner;
     gboolean should_focus = FALSE;
     GList *holder;
 
-    if (h->widgets == NULL)
+    if (g->widgets == NULL)
         return;
 
-    if (h->current == NULL)
-        h->current = h->widgets;
+    if (g->current == NULL)
+        g->current = g->widgets;
 
     /* locate widget position in the list */
-    if (old_w == h->current->data)
-        holder = h->current;
+    if (old_w == g->current->data)
+        holder = g->current;
     else
-        holder = g_list_find (h->widgets, old_w);
+        holder = g_list_find (g->widgets, old_w);
 
     /* if old widget is focused, we should focus the new one... */
     if (widget_get_state (old_w, WST_FOCUSED))
@@ -540,16 +557,17 @@ widget_replace (Widget * old_w, Widget * new_w)
     {
         GList *l;
 
-        for (l = dlg_get_widget_next_of (holder);
+        for (l = group_get_widget_next_of (holder);
              !widget_get_options (WIDGET (l->data), WOP_SELECTABLE)
-             && !widget_get_state (WIDGET (l->data), WST_DISABLED); l = dlg_get_widget_next_of (l))
+             && !widget_get_state (WIDGET (l->data), WST_DISABLED);
+             l = group_get_widget_next_of (l))
             ;
 
         widget_select (WIDGET (l->data));
     }
 
     /* replace widget */
-    new_w->owner = h;
+    new_w->owner = g;
     new_w->id = old_w->id;
     holder->data = new_w;
 
@@ -575,19 +593,19 @@ widget_replace (Widget * old_w, Widget * new_w)
 void
 widget_select (Widget * w)
 {
-    WDialog *h;
+    WGroup *g;
 
     if (!widget_get_options (w, WOP_SELECTABLE))
         return;
 
-    h = w->owner;
-    if (h != NULL)
+    g = GROUP (w->owner);
+    if (g != NULL)
     {
         if (widget_get_options (w, WOP_TOP_SELECT))
         {
             GList *l;
 
-            l = dlg_find (h, w);
+            l = widget_find (WIDGET (g), w);
             widget_reorder (l, TRUE);
         }
 
@@ -603,7 +621,7 @@ widget_select (Widget * w)
 void
 widget_set_bottom (Widget * w)
 {
-    widget_reorder (dlg_find (w->owner, w), FALSE);
+    widget_reorder (widget_find (WIDGET (w->owner), w), FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -620,6 +638,145 @@ widget_overlapped (const Widget * a, const Widget * b)
 {
     return !((b->x >= a->x + a->cols)
              || (a->x >= b->x + b->cols) || (b->y >= a->y + a->lines) || (a->y >= b->y + b->lines));
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+  * Look up key event of widget and translate it to command ID.
+  * @param w   widget
+  * @param key key event
+  *
+  * @return command ID binded with @key.
+  */
+
+long
+widget_lookup_key (Widget * w, int key)
+{
+    if (w->ext_mode)
+    {
+        w->ext_mode = FALSE;
+        return keybind_lookup_keymap_command (w->ext_keymap, key);
+    }
+
+    return keybind_lookup_keymap_command (w->keymap, key);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Default callback function to find widget.
+ *
+ * @param w widget
+ * @param what widget to find
+ *
+ * @return holder of @what if widget is @what, NULL otherwise
+ */
+
+GList *
+widget_default_find (const Widget * w, const Widget * what)
+{
+    return (w != what
+            || w->owner == NULL) ? NULL : g_list_find (CONST_GROUP (w->owner)->widgets, what);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Default callback function to find widget by widget type using widget callback.
+ *
+ * @param w widget
+ * @param cb widget callback
+ *
+ * @return @w if widget callback is @cb, NULL otherwise
+ */
+
+Widget *
+widget_default_find_by_type (const Widget * w, widget_cb_fn cb)
+{
+    return (w->callback == cb ? WIDGET (w) : NULL);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Default callback function to find widget by widget ID.
+ *
+ * @param w widget
+ * @param id widget ID
+ *
+ * @return @w if widget id is equal to @id, NULL otherwise
+ */
+
+Widget *
+widget_default_find_by_id (const Widget * w, unsigned long id)
+{
+    return (w->id == id ? WIDGET (w) : NULL);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Default callback function to modify state of widget.
+ *
+ * @param w      widget
+ * @param state  widget state flag to modify
+ * @param enable specifies whether to turn the flag on (TRUE) or off (FALSE).
+ *               Only one flag per call can be modified.
+ * @return       MSG_HANDLED if set was handled successfully, MSG_NOT_HANDLED otherwise.
+ */
+
+cb_ret_t
+widget_default_set_state (Widget * w, widget_state_t state, gboolean enable)
+{
+    gboolean ret = MSG_HANDLED;
+
+    if (enable)
+        w->state |= state;
+    else
+        w->state &= ~state;
+
+    if (enable)
+    {
+        /* exclusive bits */
+        if ((state & WST_CONSTRUCT) != 0)
+            w->state &= ~(WST_ACTIVE | WST_SUSPENDED | WST_CLOSED);
+        else if ((state & WST_ACTIVE) != 0)
+            w->state &= ~(WST_CONSTRUCT | WST_SUSPENDED | WST_CLOSED);
+        else if ((state & WST_SUSPENDED) != 0)
+            w->state &= ~(WST_CONSTRUCT | WST_ACTIVE | WST_CLOSED);
+        else if ((state & WST_CLOSED) != 0)
+            w->state &= ~(WST_CONSTRUCT | WST_ACTIVE | WST_SUSPENDED);
+    }
+
+    if (w->owner == NULL)
+        return MSG_NOT_HANDLED;
+
+    switch (state)
+    {
+    case WST_DISABLED:
+        ret = send_message (w, NULL, enable ? MSG_DISABLE : MSG_ENABLE, 0, NULL);
+        if (ret == MSG_HANDLED && widget_get_state (WIDGET (w->owner), WST_ACTIVE))
+            ret = widget_draw (w);
+        break;
+
+    case WST_FOCUSED:
+        {
+            widget_msg_t msg;
+
+            msg = enable ? MSG_FOCUS : MSG_UNFOCUS;
+            ret = send_message (w, NULL, msg, 0, NULL);
+            if (ret == MSG_HANDLED && widget_get_state (WIDGET (w->owner), WST_ACTIVE))
+            {
+                widget_draw (w);
+                /* Notify owner that focus was moved from one widget to another */
+                send_message (w->owner, w, MSG_CHANGED_FOCUS, 0, NULL);
+            }
+        }
+        break;
+
+    default:
+        break;
+    }
+
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */

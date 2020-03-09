@@ -17,7 +17,9 @@ endif
 
 TESTS = \
 	complete_engine \
-	hotkey_equal
+	hotkey_equal \
+	group_init_destroy \
+	widget_find_by_id
 
 check_PROGRAMS = $(TESTS)
 
@@ -26,3 +28,9 @@ complete_engine_SOURCES = \
 
 hotkey_equal_SOURCES = \
 	hotkey_equal.c
+
+group_init_destroy_SOURCES = \
+	group_init_destroy.c
+
+widget_find_by_id_SOURCES = \
+	widget_find_by_id.c

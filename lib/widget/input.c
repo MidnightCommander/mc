@@ -46,7 +46,6 @@
 #include "lib/skin.h"
 #include "lib/strutil.h"
 #include "lib/util.h"
-#include "lib/keybind.h"        /* global_keymap_t */
 #include "lib/widget.h"
 #include "lib/event.h"          /* mc_event_raise() */
 #include "lib/mcconfig.h"       /* mc_config_history_*() */
@@ -874,7 +873,7 @@ input_save_history (const gchar * event_group_name, const gchar * event_name,
     (void) event_group_name;
     (void) event_name;
 
-    if (!in->is_password && (WIDGET (in)->owner->ret_value != B_CANCEL))
+    if (!in->is_password && (DIALOG (WIDGET (in)->owner)->ret_value != B_CANCEL))
     {
         ev_history_load_save_t *ev = (ev_history_load_save_t *) data;
 
@@ -998,6 +997,7 @@ input_new (int y, int x, const int *colors, int width, const char *def_text,
     w = WIDGET (in);
     widget_init (w, y, x, 1, width, input_callback, input_mouse_callback);
     w->options |= WOP_SELECTABLE | WOP_IS_INPUT | WOP_WANT_CURSOR;
+    w->keymap = input_map;
 
     in->color = colors;
     in->first = TRUE;
@@ -1042,15 +1042,16 @@ cb_ret_t
 input_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WInput *in = INPUT (w);
+    WDialog *h = DIALOG (w->owner);
     cb_ret_t v;
 
     switch (msg)
     {
     case MSG_INIT:
         /* subscribe to "history_load" event */
-        mc_event_add (w->owner->event_group, MCEVENT_HISTORY_LOAD, input_load_history, w, NULL);
+        mc_event_add (h->event_group, MCEVENT_HISTORY_LOAD, input_load_history, w, NULL);
         /* subscribe to "history_save" event */
-        mc_event_add (w->owner->event_group, MCEVENT_HISTORY_SAVE, input_save_history, w, NULL);
+        mc_event_add (h->event_group, MCEVENT_HISTORY_SAVE, input_save_history, w, NULL);
         if (in->label != NULL)
             widget_set_state (WIDGET (in->label), WST_DISABLED, widget_get_state (w, WST_DISABLED));
         return MSG_HANDLED;
@@ -1099,9 +1100,9 @@ input_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
 
     case MSG_DESTROY:
         /* unsubscribe from "history_load" event */
-        mc_event_del (w->owner->event_group, MCEVENT_HISTORY_LOAD, input_load_history, w);
+        mc_event_del (h->event_group, MCEVENT_HISTORY_LOAD, input_load_history, w);
         /* unsubscribe from "history_save" event */
-        mc_event_del (w->owner->event_group, MCEVENT_HISTORY_SAVE, input_save_history, w);
+        mc_event_del (h->event_group, MCEVENT_HISTORY_SAVE, input_save_history, w);
         input_destroy (in);
         return MSG_HANDLED;
 
@@ -1138,8 +1139,7 @@ input_handle_char (WInput * in, int key)
         return v;
     }
 
-    command = keybind_lookup_keymap_command (input_map, key);
-
+    command = widget_lookup_key (WIDGET (in), key);
     if (command == CK_IgnoreKey)
     {
         if (key > 255)
@@ -1173,9 +1173,7 @@ input_key_is_in_map (WInput * in, int key)
 {
     long command;
 
-    (void) in;
-
-    command = keybind_lookup_keymap_command (input_map, key);
+    command = widget_lookup_key (WIDGET (in), key);
     if (command == CK_IgnoreKey)
         return 0;
 

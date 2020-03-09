@@ -39,7 +39,6 @@
 #include "lib/tty/tty.h"
 #include "lib/skin.h"
 #include "lib/tty/key.h"        /* key macros */
-#include "lib/keybind.h"        /* global_keymap_t */
 #include "lib/strutil.h"
 #include "lib/widget.h"
 #include "lib/event.h"          /* mc_event_raise() */
@@ -257,7 +256,7 @@ menubar_draw (const WMenuBar * menubar)
 static void
 menubar_remove (WMenuBar * menubar)
 {
-    WDialog *h;
+    Widget *g;
 
     if (!menubar->is_dropped)
         return;
@@ -266,15 +265,15 @@ menubar_remove (WMenuBar * menubar)
        of overlapped widgets. This is useful in multi-window editor.
        In general, menubar should be a special object, not an ordinary widget
        in the current dialog. */
-    h = WIDGET (menubar)->owner;
-    h->current = g_list_find (h->widgets, dlg_find_by_id (h, menubar->previous_widget));
+    g = WIDGET (WIDGET (menubar)->owner);
+    GROUP (g)->current = widget_find (g, widget_find_by_id (g, menubar->previous_widget));
 
     menubar->is_dropped = FALSE;
     do_refresh ();
     menubar->is_dropped = TRUE;
 
     /* restore current widget */
-    h->current = g_list_find (h->widgets, menubar);
+    GROUP (g)->current = widget_find (g, WIDGET (menubar));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -316,8 +315,11 @@ menubar_finish (WMenuBar * menubar)
     /* Move the menubar to the bottom so that widgets displayed on top of
      * an "invisible" menubar get the first chance to respond to mouse events. */
     widget_set_bottom (w);
+    /* background must be bottom */
+    if (DIALOG (w->owner)->bg != NULL)
+        widget_set_bottom (WIDGET (DIALOG (w->owner)->bg));
 
-    dlg_select_by_id (w->owner, menubar->previous_widget);
+    group_select_widget_by_id (w->owner, menubar->previous_widget);
     do_refresh ();
 }
 
@@ -586,7 +588,7 @@ menubar_handle_key (WMenuBar * menubar, int key)
     unsigned long cmd;
     cb_ret_t ret = MSG_NOT_HANDLED;
 
-    cmd = keybind_lookup_keymap_command (menu_map, key);
+    cmd = widget_lookup_key (WIDGET (menubar), key);
 
     if (cmd != CK_IgnoreKey)
         ret = menubar_execute_cmd (menubar, cmd);
@@ -670,6 +672,7 @@ menubar_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
 
     case MSG_RESIZE:
         /* try show menu after screen resize */
+        widget_default_callback (w, NULL, MSG_RESIZE, 0, data);
         menubar_refresh (menubar);
         return MSG_HANDLED;
 
@@ -946,6 +949,7 @@ menubar_new (GList * menu, gboolean visible)
     /* initially, menubar is not selectable */
     widget_set_options (w, WOP_SELECTABLE, FALSE);
     w->options |= WOP_TOP_SELECT;
+    w->keymap = menu_map;
     menubar->is_visible = visible;
     menubar_set_menu (menubar, menu);
 
@@ -974,7 +978,7 @@ menubar_add_menu (WMenuBar * menubar, menu_t * menu)
 {
     if (menu != NULL)
     {
-        menu_arrange (menu, WIDGET (menubar)->owner->get_shortcut);
+        menu_arrange (menu, DIALOG (WIDGET (menubar)->owner)->get_shortcut);
         menubar->menu = g_list_append (menubar->menu, menu);
     }
 
@@ -1039,7 +1043,7 @@ menubar_arrange (WMenuBar * menubar)
 WMenuBar *
 find_menubar (const WDialog * h)
 {
-    return MENUBAR (find_widget_type (h, menubar_callback));
+    return MENUBAR (widget_find_by_type (CONST_WIDGET (h), menubar_callback));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1065,7 +1069,7 @@ menubar_activate (WMenuBar * menubar, gboolean dropped, int which)
         if (which >= 0)
             menubar->selected = (guint) which;
 
-        menubar->previous_widget = dlg_get_current_widget_id (w->owner);
+        menubar->previous_widget = group_get_current_widget_id (w->owner);
 
         /* Bring it to the top so it receives all mouse events before any other widget.
          * See also comment in menubar_finish(). */

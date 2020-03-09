@@ -57,10 +57,8 @@ typedef struct
 
 /*** declarations of public functions ************************************************************/
 
-/* Translate GPM event to high-level event */
-mouse_event_t mouse_translate_event (Widget * w, Gpm_Event * event);
-/* Process high-level mouse event */
-int mouse_process_event (Widget * w, mouse_event_t * event);
+/* Translate GPM event to high-level event and process it */
+int mouse_handle_event (Widget * w, Gpm_Event * event);
 
 /*** inline functions ****************************************************************************/
 

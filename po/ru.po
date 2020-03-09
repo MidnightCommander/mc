@@ -13,7 +13,7 @@
 # Ilia Maslakov <il.smind@gmail.com>, 2009
 # Slava Zanko <slavazanko@gmail.com>, 2009, 2011
 # NaiLi (aka jamesjames) Rootaerc <theism@mail.ru>, 2012
-# AlexL <loginov.alex.valer@gmail.com>, 2015-2019
+# AlexL <loginov.alex.valer@gmail.com>, 2015-2020
 # Dimitriy Ryazantcev <DJm00n@mail.ru>, 2015
 # Simple88, 2016
 # Piotr Drąg <piotrdrag@gmail.com>, 2018
@@ -21,9 +21,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-02-29 19:12+0300\n"
-"PO-Revision-Date: 2019-12-24 17:03+0000\n"
-"Last-Translator: aborodin <aborodin@vmail.ru>\n"
+"POT-Creation-Date: 2020-03-09 10:53+0300\n"
+"PO-Revision-Date: 2020-03-01 23:25+0000\n"
+"Last-Translator: AlexL <loginov.alex.valer@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/mc/mc/language/ru/)\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -169,7 +169,7 @@ msgid ""
 "Unable to load '%s' skin.\n"
 "Default skin has been loaded"
 msgstr ""
-"Невозможно загрузить скин %s.\n"
+"Не удалось загрузить скин %s.\n"
 "Используется скин по умолчанию"
 
 #, c-format
@@ -177,7 +177,7 @@ msgid ""
 "Unable to parse '%s' skin.\n"
 "Default skin has been loaded"
 msgstr ""
-"Невозможно произвести синтаксический разбор файла %s.\n"
+"Не удалось произвести синтаксический разбор файла %s.\n"
 "Используется скин по умолчанию"
 
 #, c-format
@@ -186,7 +186,7 @@ msgid ""
 "%s\n"
 "Default skin has been loaded"
 msgstr ""
-"Невозможно использовать скин %s, требующий True Color:\n"
+"Не удалось использовать скин %s, требующий True Color:\n"
 "%s\n"
 "Будет использован скин по умолчанию"
 
@@ -501,19 +501,31 @@ msgid "The TERM environment variable is unset!\n"
 msgstr "Переменная среды TERM не определена!\n"
 
 msgid "Cannot check SIGWINCH pipe"
+msgstr "Не удаётся проверить канал SIGWINCH"
+
+#, c-format
+msgid ""
+"\n"
+"Cannot create pipe for SIGWINCH: %s (%d)\n"
 msgstr ""
+"\n"
+"Не удалось создать канал для SIGWINCH: %s (%d)\n"
 
 #, c-format
-msgid "\nCannot create pipe for SIGWINCH: %s (%d)\n"
-msgstr "\nНе удалось создать канал для SIGWINCH: %s (%d)\n"
+msgid ""
+"\n"
+"Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
+msgstr ""
+"\n"
+"Не удалось настроить конец записи канала SIGWINCH: %s (%d)\n"
 
 #, c-format
-msgid "\nCannot configure write end of SIGWINCH pipe: %s (%d)\n"
-msgstr "\nНе удалось настроить конец записи канала SIGWINCH: %s (%d)\n"
-
-#, c-format
-msgid "\nCannot configure read end of SIGWINCH pipe: %s (%d)\n"
-msgstr "\nНе удалось настроить конец чтения канала SIGWINCH: %s (%d)\n"
+msgid ""
+"\n"
+"Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
+msgstr ""
+"\n"
+"Не удалось настроить конец чтения канала SIGWINCH: %s (%d)\n"
 
 #, c-format
 msgid ""
@@ -1279,7 +1291,7 @@ msgid "Copy to clipboard"
 msgstr "Копировать в буфер"
 
 msgid "Unable to save to file"
-msgstr "Невозможно сохранить в файл"
+msgstr "Не удалось сохранить в файл"
 
 msgid "Cut to clipboard"
 msgstr "Вырезать в буфер"
@@ -2422,7 +2434,7 @@ msgstr "Правка ссылки"
 
 #, c-format
 msgid "edit symlink, unable to remove %s: %s"
-msgstr "правка символической ссылки, невозможно удалить %s: %s"
+msgstr "правка символической ссылки, не удалось удалить %s: %s"
 
 #, c-format
 msgid "edit symlink: %s"
@@ -2462,7 +2474,7 @@ msgstr "Параметры сохранены в %s"
 
 #, c-format
 msgid "Unable to save setup to %s"
-msgstr "Невозможно сохранить параметры в %s"
+msgstr "Не удалось сохранить параметры в %s"
 
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "Не удалось выполнять команды на нелокальных файловых системах"
@@ -2758,7 +2770,7 @@ msgid ""
 "Cannot fstat source file \"%s\"\n"
 "%s"
 msgstr ""
-"Не удалосьо получить свойства исходного файла \"%s\"\n"
+"Не удалось получить свойства исходного файла \"%s\"\n"
 "%s"
 
 #, c-format
@@ -3758,7 +3770,7 @@ msgid ""
 "Cannot write to the %s file:\n"
 "%s\n"
 msgstr ""
-"Не удалось писать в файл %s:\n"
+"Не удалось записать в файл %s:\n"
 "%s\n"
 
 msgid "Help file format error\n"
@@ -4211,10 +4223,10 @@ msgstr "ftpfs: неверный адрес системы."
 
 #, c-format
 msgid "ftpfs: could not create socket: %s"
-msgstr "Невозможно создать сокет: %s"
+msgstr "Не удалось создать сокет: %s"
 
 msgid "ftpfs: could not setup passive mode"
-msgstr "ftpfs: невозможно установить пассивный режим"
+msgstr "ftpfs: не удалось установить пассивный режим"
 
 msgid "ftpfs: aborting transfer."
 msgstr "ftpfs: прерывание передачи."
@@ -4227,10 +4239,10 @@ msgid "ftpfs: abort failed"
 msgstr "ftpfs: сбой прерывания"
 
 msgid "ftpfs: CWD failed."
-msgstr "ftpfs: невозможно изменить текущий рабочий каталог."
+msgstr "ftpfs: не удалось изменить текущий рабочий каталог."
 
 msgid "ftpfs: couldn't resolve symlink"
-msgstr "ftpfs: невозможно распознать символическую ссылку"
+msgstr "ftpfs: не удалось распознать символическую ссылку"
 
 msgid "Resolving symlink..."
 msgstr "Распознается символическая ссылка..."
@@ -4283,7 +4295,7 @@ msgid "sftp: an error occurred while reading %s: %s"
 msgstr "sftp: произошла ошибка при чтении %s: %s"
 
 msgid "sftp: Unable to get current user name."
-msgstr "sftp: невозможно получить имя пользователя."
+msgstr "sftp: не удалось получить имя пользователя."
 
 msgid "sftp: Invalid host name."
 msgstr "sftp: неверное имя системы."

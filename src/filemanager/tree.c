@@ -85,10 +85,6 @@ gboolean xtree_mode = FALSE;
 #define tlines(t) (t->is_panel ? WIDGET (t)->lines - 2 - \
                     (panels_options.show_mini_info ? 2 : 0) : WIDGET (t)->lines)
 
-/* Use the color of the parent widget for the unselected entries */
-#define TREE_NORMALC(h) (h->color[DLG_COLOR_NORMAL])
-#define TREE_CURRENTC(h) (h->color[DLG_COLOR_FOCUS])
-
 /*** file scope type declarations ****************************************************************/
 
 struct WTree
@@ -249,9 +245,11 @@ tree_show_mini_info (WTree * tree, int tree_lines, int tree_cols)
     else
     {
         /* Show full name of selected directory */
-        WDialog *h = w->owner;
 
-        tty_setcolor (tree->is_panel ? NORMAL_COLOR : TREE_NORMALC (h));
+        const int *colors;
+
+        colors = widget_get_colors (w);
+        tty_setcolor (tree->is_panel ? NORMAL_COLOR : colors[DLG_COLOR_NORMAL]);
         tty_draw_hline (w->y + line, w->x + 1, ' ', tree_cols);
         widget_gotoyx (w, line, 1);
         tty_print_string (str_fit_to_term
@@ -265,7 +263,6 @@ static void
 show_tree (WTree * tree)
 {
     Widget *w = WIDGET (tree);
-    WDialog *h = w->owner;
     tree_entry *current;
     int i, j;
     int topsublevel = 0;
@@ -335,7 +332,10 @@ show_tree (WTree * tree)
     /* Loop for every line */
     for (i = 0; i < tree_lines; i++)
     {
-        tty_setcolor (tree->is_panel ? NORMAL_COLOR : TREE_NORMALC (h));
+        const int *colors;
+
+        colors = widget_get_colors (w);
+        tty_setcolor (tree->is_panel ? NORMAL_COLOR : colors[DLG_COLOR_NORMAL]);
 
         /* Move to the beginning of the line */
         tty_draw_hline (w->y + y + i, w->x + x, ' ', tree_cols);
@@ -344,10 +344,18 @@ show_tree (WTree * tree)
             continue;
 
         if (tree->is_panel)
-            tty_setcolor (widget_get_state (w, WST_FOCUSED) && current == tree->selected_ptr
-                          ? SELECTED_COLOR : NORMAL_COLOR);
+        {
+            gboolean selected;
+
+            selected = widget_get_state (w, WST_FOCUSED) && current == tree->selected_ptr;
+            tty_setcolor (selected ? SELECTED_COLOR : NORMAL_COLOR);
+        }
         else
-            tty_setcolor (current == tree->selected_ptr ? TREE_CURRENTC (h) : TREE_NORMALC (h));
+        {
+            int idx = current == tree->selected_ptr ? DLG_COLOR_FOCUS : DLG_COLOR_NORMAL;
+
+            tty_setcolor (colors[idx]);
+        }
 
         tree->tree_shown[i] = current;
         if (current->sublevel == topsublevel)
@@ -591,7 +599,7 @@ tree_chdir_sel (WTree * tree)
     }
     else
     {
-        WDialog *h = WIDGET (tree)->owner;
+        WDialog *h = DIALOG (WIDGET (tree)->owner);
 
         h->ret_value = B_ENTER;
         dlg_stop (h);
@@ -971,14 +979,15 @@ tree_start_search (WTree * tree)
 static void
 tree_toggle_navig (WTree * tree)
 {
+    Widget *w = WIDGET (tree);
     WButtonBar *b;
 
     tree_navigation_flag = !tree_navigation_flag;
 
-    b = find_buttonbar (WIDGET (tree)->owner);
+    b = find_buttonbar (DIALOG (w->owner));
     buttonbar_set_label (b, 4,
                          tree_navigation_flag ? Q_ ("ButtonBar|Static") : Q_ ("ButtonBar|Dynamc"),
-                         tree_map, WIDGET (tree));
+                         w->keymap, w);
     widget_draw (WIDGET (b));
 }
 
@@ -1044,7 +1053,7 @@ tree_execute_cmd (WTree * tree, long command)
         break;
     case CK_Quit:
         if (!tree->is_panel)
-            dlg_stop (WIDGET (tree)->owner);
+            dlg_stop (DIALOG (WIDGET (tree)->owner));
         return res;
     default:
         res = MSG_NOT_HANDLED;
@@ -1060,7 +1069,7 @@ tree_execute_cmd (WTree * tree, long command)
 static cb_ret_t
 tree_key (WTree * tree, int key)
 {
-    size_t i;
+    long command;
 
     if (is_abort_char (key))
     {
@@ -1082,18 +1091,17 @@ tree_key (WTree * tree, int key)
         return MSG_HANDLED;
     }
 
-    for (i = 0; tree_map[i].key != 0; i++)
-        if (key == tree_map[i].key)
-            switch (tree_map[i].command)
-            {
-            case CK_Left:
-                return tree_move_left (tree) ? MSG_HANDLED : MSG_NOT_HANDLED;
-            case CK_Right:
-                return tree_move_right (tree) ? MSG_HANDLED : MSG_NOT_HANDLED;
-            default:
-                tree_execute_cmd (tree, tree_map[i].command);
-                return MSG_HANDLED;
-            }
+    command = widget_lookup_key (WIDGET (tree), key);
+    switch (command)
+    {
+    case CK_Left:
+        return tree_move_left (tree) ? MSG_HANDLED : MSG_NOT_HANDLED;
+    case CK_Right:
+        return tree_move_right (tree) ? MSG_HANDLED : MSG_NOT_HANDLED;
+    default:
+        tree_execute_cmd (tree, command);
+        return MSG_HANDLED;
+    }
 
     /* Do not eat characters not meant for the tree below ' ' (e.g. C-l). */
     if (!command_prompt && ((key >= ' ' && key <= 255) || key == KEY_BACKSPACE))
@@ -1147,7 +1155,7 @@ static cb_ret_t
 tree_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WTree *tree = (WTree *) w;
-    WDialog *h = w->owner;
+    WDialog *h = DIALOG (w->owner);
     WButtonBar *b;
 
     switch (msg)
@@ -1164,20 +1172,20 @@ tree_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
 
     case MSG_FOCUS:
         b = find_buttonbar (h);
-        buttonbar_set_label (b, 1, Q_ ("ButtonBar|Help"), tree_map, w);
-        buttonbar_set_label (b, 2, Q_ ("ButtonBar|Rescan"), tree_map, w);
-        buttonbar_set_label (b, 3, Q_ ("ButtonBar|Forget"), tree_map, w);
+        buttonbar_set_label (b, 1, Q_ ("ButtonBar|Help"), w->keymap, w);
+        buttonbar_set_label (b, 2, Q_ ("ButtonBar|Rescan"), w->keymap, w);
+        buttonbar_set_label (b, 3, Q_ ("ButtonBar|Forget"), w->keymap, w);
         buttonbar_set_label (b, 4, tree_navigation_flag ? Q_ ("ButtonBar|Static")
-                             : Q_ ("ButtonBar|Dynamc"), tree_map, w);
-        buttonbar_set_label (b, 5, Q_ ("ButtonBar|Copy"), tree_map, w);
-        buttonbar_set_label (b, 6, Q_ ("ButtonBar|RenMov"), tree_map, w);
+                             : Q_ ("ButtonBar|Dynamc"), w->keymap, w);
+        buttonbar_set_label (b, 5, Q_ ("ButtonBar|Copy"), w->keymap, w);
+        buttonbar_set_label (b, 6, Q_ ("ButtonBar|RenMov"), w->keymap, w);
 #if 0
         /* FIXME: mkdir is currently defunct */
-        buttonbar_set_label (b, 7, Q_ ("ButtonBar|Mkdir"), tree_map, w);
+        buttonbar_set_label (b, 7, Q_ ("ButtonBar|Mkdir"), w->keymap, w);
 #else
         buttonbar_clear_label (b, 7, w);
 #endif
-        buttonbar_set_label (b, 8, Q_ ("ButtonBar|Rmdir"), tree_map, w);
+        buttonbar_set_label (b, 8, Q_ ("ButtonBar|Rmdir"), w->keymap, w);
 
         return MSG_HANDLED;
 
@@ -1279,10 +1287,12 @@ tree_new (int y, int x, int lines, int cols, gboolean is_panel)
     Widget *w;
 
     tree = g_new (WTree, 1);
-    w = WIDGET (tree);
 
+    w = WIDGET (tree);
     widget_init (w, y, x, lines, cols, tree_callback, tree_mouse_callback);
     w->options |= WOP_SELECTABLE | WOP_TOP_SELECT;
+    w->keymap = tree_map;
+
     tree->is_panel = is_panel;
     tree->selected_ptr = NULL;
 
@@ -1332,9 +1342,9 @@ sync_tree (const vfs_path_t * vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 WTree *
-find_tree (WDialog * h)
+find_tree (const WDialog * h)
 {
-    return (WTree *) find_widget_type (h, tree_callback);
+    return (WTree *) widget_find_by_type (CONST_WIDGET (h), tree_callback);
 }
 
 /* --------------------------------------------------------------------------------------------- */
