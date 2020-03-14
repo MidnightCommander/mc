@@ -1370,6 +1370,9 @@ load_keymap_defs (gboolean load_from_file)
         listbox_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
         load_keymap_from_section (KEYMAP_SECTION_LISTBOX, listbox_keymap, mc_global_keymap);
 
+        radio_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
+        load_keymap_from_section (KEYMAP_SECTION_RADIO, radio_keymap, mc_global_keymap);
+
         tree_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
         load_keymap_from_section (KEYMAP_SECTION_TREE, tree_keymap, mc_global_keymap);
 
@@ -1408,6 +1411,7 @@ load_keymap_defs (gboolean load_from_file)
     menu_map = (global_keymap_t *) menu_keymap->data;
     input_map = (global_keymap_t *) input_keymap->data;
     listbox_map = (global_keymap_t *) listbox_keymap->data;
+    radio_map = (global_keymap_t *) radio_keymap->data;
     tree_map = (global_keymap_t *) tree_keymap->data;
     help_map = (global_keymap_t *) help_keymap->data;
 #ifdef ENABLE_EXT2FS_ATTR
@@ -1443,6 +1447,8 @@ free_keymap_defs (void)
         g_array_free (input_keymap, TRUE);
     if (listbox_keymap != NULL)
         g_array_free (listbox_keymap, TRUE);
+    if (radio_keymap != NULL)
+        g_array_free (radio_keymap, TRUE);
     if (tree_keymap != NULL)
         g_array_free (tree_keymap, TRUE);
     if (help_keymap != NULL)

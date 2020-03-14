@@ -6,6 +6,8 @@
 #ifndef MC__WIDGET_RADIO_H
 #define MC__WIDGET_RADIO_H
 
+#include "lib/keybind.h"        /* global_keymap_t */
+
 /*** typedefs(not structures) and defined constants **********************************************/
 
 #define RADIO(x) ((WRadio *)(x))
@@ -24,6 +26,8 @@ typedef struct WRadio
 } WRadio;
 
 /*** global variables defined in .c file *********************************************************/
+
+extern const global_keymap_t *radio_map;
 
 /*** declarations of public functions ************************************************************/
 
