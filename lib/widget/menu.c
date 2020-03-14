@@ -518,7 +518,7 @@ menubar_try_exec_menu (WMenuBar * menubar, int hotkey)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-menubar_execute_cmd (WMenuBar * menubar, unsigned long command)
+menubar_execute_cmd (WMenuBar * menubar, long command)
 {
     cb_ret_t ret = MSG_HANDLED;
 
@@ -585,7 +585,7 @@ menubar_execute_cmd (WMenuBar * menubar, unsigned long command)
 static int
 menubar_handle_key (WMenuBar * menubar, int key)
 {
-    unsigned long cmd;
+    long cmd;
     cb_ret_t ret = MSG_NOT_HANDLED;
 
     cmd = widget_lookup_key (WIDGET (menubar), key);
