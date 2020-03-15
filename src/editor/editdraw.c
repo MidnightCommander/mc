@@ -593,15 +593,14 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
                         p->style |= MOD_MARKED;
                     else
                     {
-                        long x;
-                        long c;
+                        long x, cl;
 
                         x = (long) edit_move_forward3 (edit, b, 0, q);
-                        c = MIN (edit->column1, edit->column2);
-                        if (x >= c)
+                        cl = MIN (edit->column1, edit->column2);
+                        if (x >= cl)
                         {
-                            c = MAX (edit->column1, edit->column2);
-                            if (x < c)
+                            cl = MAX (edit->column1, edit->column2);
+                            if (x < cl)
                                 p->style |= MOD_MARKED;
                         }
                     }
