@@ -169,6 +169,17 @@ hotkey_cmp (const char *s1, const char *s2)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static void
+widget_default_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
+{
+    /* do nothing */
+    (void) w;
+    (void) msg;
+    (void) event;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static const int *
 widget_default_get_colors (const Widget * w)
 {
@@ -312,7 +323,7 @@ widget_init (Widget * w, int y, int x, int lines, int cols,
     w->ext_keymap = NULL;
     w->ext_mode = FALSE;
 
-    w->mouse_callback = mouse_callback;
+    w->mouse_callback = mouse_callback != NULL ? mouse_callback : widget_default_mouse_callback;
     w->owner = NULL;
     w->mouse_handler = mouse_handle_event;
     w->mouse.forced_capture = FALSE;
