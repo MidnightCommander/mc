@@ -181,11 +181,8 @@ chmod_init (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-chmod_toggle_select (WDialog * h, int Id)
+chmod_draw_select (WDialog * h, int Id)
 {
-    tty_setcolor (COLOR_NORMAL);
-    check_perm[Id].selected = !check_perm[Id].selected;
-
     widget_gotoyx (h, PY + Id + 1, PX + 1);
     tty_print_char (check_perm[Id].selected ? '*' : ' ');
     widget_gotoyx (h, PY + Id + 1, PX + 3);
@@ -194,12 +191,28 @@ chmod_toggle_select (WDialog * h, int Id)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-chmod_refresh (void)
+chmod_toggle_select (WDialog * h, int Id)
 {
-    int y = WIDGET (file_gb)->y + 1;
-    int x = WIDGET (file_gb)->x + 2;
+    check_perm[Id].selected = !check_perm[Id].selected;
+    tty_setcolor (COLOR_NORMAL);
+    chmod_draw_select (h, Id);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+chmod_refresh (WDialog * h)
+{
+    int i;
+    int y, x;
 
     tty_setcolor (COLOR_NORMAL);
+
+    for (i = 0; i < BUTTONS_PERM; i++)
+        chmod_draw_select (h, i);
+
+    y = WIDGET (file_gb)->y + 1;
+    x = WIDGET (file_gb)->x + 2;
 
     tty_gotoyx (y, x);
     tty_print_string (file_info_labels[0]);
@@ -220,7 +233,7 @@ chmod_bg_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
     {
     case MSG_DRAW:
         frame_callback (w, NULL, MSG_DRAW, 0, NULL);
-        chmod_refresh ();
+        chmod_refresh (DIALOG (w->owner));
         return MSG_HANDLED;
 
     default:
