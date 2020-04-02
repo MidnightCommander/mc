@@ -137,6 +137,9 @@ chmod_init (void)
     static gboolean i18n = FALSE;
     int i, len;
 
+    for (i = 0; i < BUTTONS_PERM; i++)
+        check_perm[i].selected = FALSE;
+
     if (i18n)
         return;
 
