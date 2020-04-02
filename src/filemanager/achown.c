@@ -110,7 +110,7 @@ static struct stat sf_stat;
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-advanced_chown_i18n (void)
+advanced_chown_init (void)
 {
     static gboolean i18n = FALSE;
     int i;
@@ -731,7 +731,7 @@ advanced_chown_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm
 /* --------------------------------------------------------------------------------------------- */
 
 static WDialog *
-advanced_chown_init (void)
+advanced_chown_dlg_create (void)
 {
     gboolean single_set;
     WDialog *ch_dlg;
@@ -999,7 +999,7 @@ advanced_chown_cmd (void)
 
     files_on_begin = MAX (1, current_panel->marked);
 
-    advanced_chown_i18n ();
+    advanced_chown_init ();
 
     current_file = 0;
     ignore_all = FALSE;
@@ -1033,7 +1033,7 @@ advanced_chown_cmd (void)
 
         ch_cmode = sf_stat.st_mode;
 
-        ch_dlg = advanced_chown_init ();
+        ch_dlg = advanced_chown_dlg_create ();
 
         file_idx = files_on_begin == 1 ? 1 : (files_on_begin - current_panel->marked + 1);
         g_snprintf (buffer, sizeof (buffer), "%s (%d/%d)",
