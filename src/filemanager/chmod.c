@@ -181,7 +181,7 @@ chmod_init (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-chmod_draw_select (WDialog * h, int Id)
+chmod_draw_select (const WDialog * h, int Id)
 {
     widget_gotoyx (h, PY + Id + 1, PX + 1);
     tty_print_char (check_perm[Id].selected ? '*' : ' ');
@@ -191,7 +191,7 @@ chmod_draw_select (WDialog * h, int Id)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-chmod_toggle_select (WDialog * h, int Id)
+chmod_toggle_select (const WDialog * h, int Id)
 {
     check_perm[Id].selected = !check_perm[Id].selected;
     tty_setcolor (COLOR_NORMAL);
@@ -201,7 +201,7 @@ chmod_toggle_select (WDialog * h, int Id)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-chmod_refresh (WDialog * h)
+chmod_refresh (const WDialog * h)
 {
     int i;
     int y, x;
@@ -233,7 +233,7 @@ chmod_bg_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
     {
     case MSG_DRAW:
         frame_callback (w, NULL, MSG_DRAW, 0, NULL);
-        chmod_refresh (DIALOG (w->owner));
+        chmod_refresh (CONST_DIALOG (w->owner));
         return MSG_HANDLED;
 
     default:
