@@ -132,7 +132,7 @@ static WGroupbox *file_gb;
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-chmod_i18n (void)
+chmod_init (void)
 {
     static gboolean i18n = FALSE;
     int i, len;
@@ -289,7 +289,7 @@ chmod_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
 /* --------------------------------------------------------------------------------------------- */
 
 static WDialog *
-chmod_init (const char *fname, const struct stat *sf_stat)
+chmod_dlg_create (const char *fname, const struct stat *sf_stat)
 {
     gboolean single_set;
     WDialog *ch_dlg;
@@ -518,7 +518,7 @@ chmod_cmd (void)
     gboolean need_update;
     gboolean end_chmod;
 
-    chmod_i18n ();
+    chmod_init ();
 
     current_file = 0;
     ignore_all = FALSE;
@@ -551,8 +551,7 @@ chmod_cmd (void)
 
         ch_mode = sf_stat.st_mode;
 
-        ch_dlg = chmod_init (fname, &sf_stat);
-
+        ch_dlg = chmod_dlg_create (fname, &sf_stat);
         result = dlg_run (ch_dlg);
 
         switch (result)
