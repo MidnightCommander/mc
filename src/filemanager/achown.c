@@ -528,7 +528,7 @@ user_group_button_cb (WButton * button, int action)
     do
     {
         WGroup *g = w->owner;
-        WDialog *h = DIALOG (h);
+        WDialog *h = DIALOG (g);
         Widget *wh = WIDGET (h);
 
         gboolean is_owner = (f_pos == BUTTONS_PERM - 2);
