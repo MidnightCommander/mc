@@ -852,12 +852,10 @@ help_handle_key (WDialog * h, int key)
     long command;
 
     command = widget_lookup_key (w, key);
-    if ((command == CK_IgnoreKey) || (help_execute_cmd (command) == MSG_NOT_HANDLED))
+    if (command == CK_IgnoreKey)
         return MSG_NOT_HANDLED;
 
-    widget_draw (w);
-
-    return MSG_HANDLED;
+    return help_execute_cmd (command);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -908,7 +906,15 @@ help_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
         return help_resize (h);
 
     case MSG_KEY:
-        return help_handle_key (h, parm);
+        {
+            cb_ret_t ret;
+
+            ret = help_handle_key (h, parm);
+            if (ret == MSG_HANDLED)
+                widget_draw (w);
+
+            return ret;
+        }
 
     case MSG_ACTION:
         /* Handle shortcuts and buttonbar. */
