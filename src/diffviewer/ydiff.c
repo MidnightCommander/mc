@@ -3290,11 +3290,10 @@ dview_handle_key (WDiff * dview, int key)
 #endif
 
     command = widget_lookup_key (WIDGET (dview), key);
-    if ((command != CK_IgnoreKey) && (dview_execute_cmd (dview, command) == MSG_HANDLED))
-        return MSG_HANDLED;
+    if (command == CK_IgnoreKey)
+        return MSG_NOT_HANDLED;
 
-    /* Key not used */
-    return MSG_NOT_HANDLED;
+    return dview_execute_cmd (dview, command);
 }
 
 /* --------------------------------------------------------------------------------------------- */
