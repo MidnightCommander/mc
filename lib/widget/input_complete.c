@@ -1079,7 +1079,7 @@ query_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
             if (parm < 32 || parm > 255)
             {
                 bl = 0;
-                if (input_key_is_in_map (input, parm) != 2)
+                if (widget_lookup_key (WIDGET (input), parm) != CK_Complete)
                     return MSG_NOT_HANDLED;
 
                 if (end == min_end)

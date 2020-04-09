@@ -1165,23 +1165,6 @@ input_handle_char (WInput * in, int key)
 
 /* --------------------------------------------------------------------------------------------- */
 
-/* This function is a test for a special input key used in complete.c */
-/* Returns 0 if it is not a special key, 1 if it is a non-complete key
-   and 2 if it is a complete key */
-int
-input_key_is_in_map (WInput * in, int key)
-{
-    long command;
-
-    command = widget_lookup_key (WIDGET (in), key);
-    if (command == CK_IgnoreKey)
-        return 0;
-
-    return (command == CK_Complete) ? 2 : 1;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 void
 input_assign_text (WInput * in, const char *text)
 {
