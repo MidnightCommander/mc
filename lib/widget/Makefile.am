@@ -15,7 +15,7 @@ libmcwidget_la_SOURCES = \
 	hline.c hline.h \
 	history.c history.h \
 	input.c input.h \
-	input_complete.c input_complete.h \
+	input_complete.c \
 	listbox-window.c listbox-window.h \
 	listbox.c listbox.h \
 	label.c label.h \

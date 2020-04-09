@@ -98,7 +98,10 @@ void input_update (WInput * in, gboolean clear_first);
 void input_enable_update (WInput * in);
 void input_disable_update (WInput * in);
 void input_clean (WInput * in);
-void input_free_completions (WInput * in);
+
+/* input_complete.c */
+void input_complete (WInput * in);
+void input_complete_free (WInput * in);
 
 /*** inline functions ****************************************************************************/
 

@@ -1776,7 +1776,7 @@ load_hint (gboolean force)
 void
 change_panel (void)
 {
-    input_free_completions (cmdline);
+    input_complete_free (cmdline);
     group_select_next_widget (GROUP (midnight_dlg));
 }
 

@@ -50,8 +50,6 @@
 #include "lib/event.h"          /* mc_event_raise() */
 #include "lib/mcconfig.h"       /* mc_config_history_*() */
 
-#include "input_complete.h"
-
 /*** global variables ****************************************************************************/
 
 gboolean quote = FALSE;
@@ -808,7 +806,7 @@ input_execute_cmd (WInput * in, long command)
         do_show_hist (in);
         break;
     case CK_Complete:
-        complete (in);
+        input_complete (in);
         break;
     default:
         res = MSG_NOT_HANDLED;
@@ -897,7 +895,7 @@ input_destroy (WInput * in)
         exit (EXIT_FAILURE);
     }
 
-    input_free_completions (in);
+    input_complete_free (in);
 
     /* clean history */
     if (in->history.list != NULL)
@@ -1132,7 +1130,7 @@ input_handle_char (WInput * in, int key)
 
     if (quote)
     {
-        input_free_completions (in);
+        input_complete_free (in);
         v = insert_char (in, key);
         input_update (in, TRUE);
         quote = FALSE;
@@ -1146,13 +1144,13 @@ input_handle_char (WInput * in, int key)
             return MSG_NOT_HANDLED;
         if (in->first)
             port_region_marked_for_delete (in);
-        input_free_completions (in);
+        input_complete_free (in);
         v = insert_char (in, key);
     }
     else
     {
         if (command != CK_Complete)
-            input_free_completions (in);
+            input_complete_free (in);
         input_execute_cmd (in, command);
         v = MSG_HANDLED;
         if (in->first)
@@ -1174,7 +1172,7 @@ input_assign_text (WInput * in, const char *text)
     if (text == NULL)
         text = "";
 
-    input_free_completions (in);
+    input_complete_free (in);
     in->mark = -1;
     in->need_push = TRUE;
     in->charpoint = 0;
@@ -1222,7 +1220,7 @@ input_set_point (WInput * in, int pos)
     max_pos = str_length (in->buffer);
     pos = MIN (pos, max_pos);
     if (pos != in->point)
-        input_free_completions (in);
+        input_complete_free (in);
     in->point = pos;
     in->charpoint = 0;
     input_update (in, TRUE);
@@ -1365,17 +1363,8 @@ input_clean (WInput * in)
     in->point = 0;
     in->charpoint = 0;
     in->mark = -1;
-    input_free_completions (in);
+    input_complete_free (in);
     input_update (in, FALSE);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-input_free_completions (WInput * in)
-{
-    g_strfreev (in->completions);
-    in->completions = NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */

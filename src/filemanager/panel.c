@@ -3268,7 +3268,7 @@ _do_panel_cd (WPanel * panel, const vfs_path_t * new_dir_vpath, enum cd_enum cd_
     /* Success: save previous directory, shutdown status of previous dir */
     olddir_vpath = vfs_path_clone (panel->cwd_vpath);
     panel_set_lwd (panel, panel->cwd_vpath);
-    input_free_completions (cmdline);
+    input_complete_free (cmdline);
 
     vfs_path_free (panel->cwd_vpath);
     vfs_setup_cwd ();

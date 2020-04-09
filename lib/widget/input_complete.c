@@ -53,8 +53,6 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 
-#include "input_complete.h"
-
 /*** global variables ****************************************************************************/
 
 /* Linux declares environ in <unistd.h>, so don't repeat it here. */
@@ -95,7 +93,7 @@ static char **hosts = NULL;
 static char **hosts_p = NULL;
 static int hosts_alloclen = 0;
 
-static int query_height, query_width;
+static int complete_height, complete_width;
 static WInput *input;
 static int min_end;
 static int start = 0;
@@ -1015,7 +1013,7 @@ insert_text (WInput * in, char *text, ssize_t size)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-query_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+complete_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     static int bl = 0;
 
@@ -1198,7 +1196,7 @@ static gboolean
 complete_engine (WInput * in, int what_to_do)
 {
     if (in->completions != NULL && str_offset_to_pos (in->buffer, in->point) != end)
-        input_free_completions (in);
+        input_complete_free (in);
 
     if (in->completions == NULL)
         complete_engine_fill_completions (in);
@@ -1215,7 +1213,7 @@ complete_engine (WInput * in, int what_to_do)
             if (!insert_text (in, lc_complete, strlen (lc_complete)) || in->completions[1] != NULL)
                 tty_beep ();
             else
-                input_free_completions (in);
+                input_complete_free (in);
         }
 
         if ((what_to_do & DO_QUERY) != 0 && in->completions != NULL && in->completions[1] != NULL)
@@ -1224,8 +1222,8 @@ complete_engine (WInput * in, int what_to_do)
             int x, y, w, h;
             int start_x, start_y;
             char **p, *q;
-            WDialog *query_dlg;
-            WListbox *query_list;
+            WDialog *complete_dlg;
+            WListbox *complete_list;
 
             for (p = in->completions + 1; *p != NULL; count++, p++)
             {
@@ -1262,28 +1260,29 @@ complete_engine (WInput * in, int what_to_do)
 
             input = in;
             min_end = end;
-            query_height = h;
-            query_width = w;
+            complete_height = h;
+            complete_width = w;
 
-            query_dlg = dlg_create (TRUE, y, x, query_height, query_width, WPOS_KEEP_DEFAULT, TRUE,
-                                    dialog_colors, query_callback, NULL, "[Completion]", NULL);
-            query_list = listbox_new (1, 1, h - 2, w - 2, FALSE, NULL);
-            group_add_widget (GROUP (query_dlg), query_list);
+            complete_dlg =
+                dlg_create (TRUE, y, x, complete_height, complete_width, WPOS_KEEP_DEFAULT, TRUE,
+                            dialog_colors, complete_callback, NULL, "[Completion]", NULL);
+            complete_list = listbox_new (1, 1, h - 2, w - 2, FALSE, NULL);
+            group_add_widget (GROUP (complete_dlg), complete_list);
 
             for (p = in->completions + 1; *p != NULL; p++)
-                listbox_add_item (query_list, LISTBOX_APPEND_AT_END, 0, *p, NULL, FALSE);
+                listbox_add_item (complete_list, LISTBOX_APPEND_AT_END, 0, *p, NULL, FALSE);
 
-            i = dlg_run (query_dlg);
+            i = dlg_run (complete_dlg);
             q = NULL;
             if (i == B_ENTER)
             {
-                listbox_get_current (query_list, &q, NULL);
+                listbox_get_current (complete_list, &q, NULL);
                 if (q != NULL)
                     insert_text (in, q, strlen (q));
             }
             if (q != NULL || end != min_end)
-                input_free_completions (in);
-            dlg_destroy (query_dlg);
+                input_complete_free (in);
+            dlg_destroy (complete_dlg);
 
             /* B_USER if user wants to start over again */
             return (i == B_USER);
@@ -1437,7 +1436,7 @@ complete_engine_fill_completions (WInput * in)
 
 /* declared in lib/widget/input.h */
 void
-complete (WInput * in)
+input_complete (WInput * in)
 {
     int engine_flags;
 
@@ -1456,6 +1455,15 @@ complete (WInput * in)
 
     while (complete_engine (in, engine_flags))
         ;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+input_complete_free (WInput * in)
+{
+    g_strfreev (in->completions);
+    in->completions = NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
