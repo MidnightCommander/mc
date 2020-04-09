@@ -64,7 +64,6 @@ void rename_cmd_local (void);
 void mkdir_cmd (void);
 void delete_cmd (void);
 void delete_cmd_local (void);
-void find_cmd (void);
 void filter_cmd (void);
 void reread_cmd (void);
 void vfs_list (void);
@@ -92,6 +91,8 @@ void quick_view_cmd (void);
 #ifdef HAVE_CHARSET
 void encoding_cmd (void);
 #endif
+/* find.c */
+void find_cmd (void);
 
 /*** inline functions ****************************************************************************/
 #endif /* MC__CMD_H */
