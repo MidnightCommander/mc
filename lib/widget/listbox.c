@@ -746,7 +746,7 @@ listbox_remove_current (WListbox * l)
         int length;
 
         current = g_queue_peek_nth_link (l->list, (guint) l->pos);
-        listbox_entry_free (LENTRY (current->data));
+        listbox_entry_free (current->data);
         g_queue_delete_link (l->list, current);
 
         length = g_queue_get_length (l->list);
