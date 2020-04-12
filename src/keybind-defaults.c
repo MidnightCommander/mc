@@ -43,6 +43,9 @@ GArray *input_keymap = NULL;
 GArray *listbox_keymap = NULL;
 GArray *tree_keymap = NULL;
 GArray *help_keymap = NULL;
+#ifdef ENABLE_EXT2FS_ATTR
+GArray *chattr_keymap = NULL;
+#endif
 #ifdef USE_INTERNAL_EDIT
 GArray *editor_keymap = NULL;
 GArray *editor_x_keymap = NULL;
@@ -58,7 +61,9 @@ const global_keymap_t *main_x_map = NULL;
 const global_keymap_t *panel_map = NULL;
 const global_keymap_t *tree_map = NULL;
 const global_keymap_t *help_map = NULL;
-
+#ifdef ENABLE_EXT2FS_ATTR
+const global_keymap_t *chattr_map = NULL;
+#endif
 #ifdef USE_INTERNAL_EDIT
 const global_keymap_t *editor_map = NULL;
 const global_keymap_t *editor_x_map = NULL;
@@ -151,6 +156,9 @@ static const global_keymap_ini_t default_main_x_keymap[] = {
     {"PutOtherTagged", "ctrl-t"},
     {"ChangeMode", "c"},
     {"ChangeOwn", "o"},
+#ifdef ENABLE_EXT2FS_ATTR
+    {"ChangeAttributes", "e"},
+#endif /* ENABLE_EXT2FS_ATTR */
     {"PutCurrentLink", "r"},
     {"PutOtherLink", "ctrl-r"},
     {"Link", "l"},
@@ -338,6 +346,21 @@ static const global_keymap_ini_t default_help_keymap[] = {
     {"NodePrev", "p"},
     {NULL, NULL}
 };
+
+#ifdef ENABLE_EXT2FS_ATTR
+/* chattr dialog */
+static const global_keymap_ini_t default_chattr_keymap[] = {
+    {"Up", "up; left; ctrl-p"},
+    {"Down", "down; right; ctrl-n"},
+    {"Top", "home; alt-lt; a1"},
+    {"Bottom", "end; alt-gt; c1"},
+    {"PageUp", "pgup; alt-v"},
+    {"PageDown", "pgdn; ctrl-v"},
+    {"Mark", "t; shift-t"},
+    {"MarkAndDown", "insert"},
+    {NULL, NULL}
+};
+#endif /* ENABLE_EXT2FS_ATTR */
 
 #ifdef USE_INTERNAL_EDIT
 static const global_keymap_ini_t default_editor_keymap[] = {
@@ -616,6 +639,9 @@ create_default_keymap (void)
     create_default_keymap_section (keymap, KEYMAP_SECTION_LISTBOX, default_listbox_keymap);
     create_default_keymap_section (keymap, KEYMAP_SECTION_TREE, default_tree_keymap);
     create_default_keymap_section (keymap, KEYMAP_SECTION_HELP, default_help_keymap);
+#ifdef ENABLE_EXT2FS_ATTR
+    create_default_keymap_section (keymap, KEYMAP_SECTION_HELP, default_chattr_keymap);
+#endif
 #ifdef USE_INTERNAL_EDIT
     create_default_keymap_section (keymap, KEYMAP_SECTION_EDITOR, default_editor_keymap);
     create_default_keymap_section (keymap, KEYMAP_SECTION_EDITOR_EXT, default_editor_x_keymap);

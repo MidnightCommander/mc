@@ -1376,6 +1376,11 @@ load_keymap_defs (gboolean load_from_file)
         help_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
         load_keymap_from_section (KEYMAP_SECTION_HELP, help_keymap, mc_global_keymap);
 
+#ifdef ENABLE_EXT2FS_ATTR
+        chattr_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
+        load_keymap_from_section (KEYMAP_SECTION_CHATTR, chattr_keymap, mc_global_keymap);
+#endif
+
 #ifdef USE_INTERNAL_EDIT
         editor_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
         load_keymap_from_section (KEYMAP_SECTION_EDITOR, editor_keymap, mc_global_keymap);
@@ -1405,6 +1410,9 @@ load_keymap_defs (gboolean load_from_file)
     listbox_map = (global_keymap_t *) listbox_keymap->data;
     tree_map = (global_keymap_t *) tree_keymap->data;
     help_map = (global_keymap_t *) help_keymap->data;
+#ifdef ENABLE_EXT2FS_ATTR
+    chattr_map = (global_keymap_t *) chattr_keymap->data;
+#endif
 #ifdef USE_INTERNAL_EDIT
     editor_map = (global_keymap_t *) editor_keymap->data;
     editor_x_map = (global_keymap_t *) editor_x_keymap->data;
@@ -1439,6 +1447,10 @@ free_keymap_defs (void)
         g_array_free (tree_keymap, TRUE);
     if (help_keymap != NULL)
         g_array_free (help_keymap, TRUE);
+#ifdef ENABLE_EXT2FS_ATTR
+    if (chattr_keymap != NULL)
+        g_array_free (chattr_keymap, TRUE);
+#endif
 #ifdef USE_INTERNAL_EDIT
     if (editor_keymap != NULL)
         g_array_free (editor_keymap, TRUE);

@@ -459,6 +459,7 @@ fi
 
 mc_SUBSHELL
 mc_BACKGROUND
+mc_EXT2FS_ATTR
 mc_VFS_CHECKS
 
 dnl ############################################################################
@@ -710,22 +711,23 @@ AC_MSG_NOTICE([
 
 Configuration:
 
-  Source code location:       ${srcdir}
-  Compiler:                   ${CC}
-  Compiler flags:             ${CFLAGS}
-  Assertions:                 ${enable_assert}
-  Unit tests:                 ${tests_msg}
-  File system:                ${vfs_type}
-                              ${vfs_flags}
-  Screen library:             ${screen_msg}
-  Mouse support:              ${mouse_lib}
-  X11 events support:         ${textmode_x11_support}
-  With subshell support:      ${subshell}
-  With background operations: ${enable_background}
-  Internal editor:            ${edit_msg}
-  Diff viewer:                ${diff_msg}
-  Support for charset:        ${charset_msg}
-  Search type:                ${SEARCH_TYPE}
+  Source code location:           ${srcdir}
+  Compiler:                       ${CC}
+  Compiler flags:                 ${CFLAGS}
+  Assertions:                     ${enable_assert}
+  Unit tests:                     ${tests_msg}
+  File system:                    ${vfs_type}
+                                  ${vfs_flags}
+  Screen library:                 ${screen_msg}
+  Mouse support:                  ${mouse_lib}
+  X11 events support:             ${textmode_x11_support}
+  With subshell support:          ${subshell}
+  With background operations:     ${enable_background}
+  With ext2fs attributes support: ${ext2fs_attr_msg}
+  Internal editor:                ${edit_msg}
+  Diff viewer:                    ${diff_msg}
+  Support for charset:            ${charset_msg}
+  Search type:                    ${SEARCH_TYPE}
 ])
 
 dnl option checking is disable by default due to AC_CONFIG_SUBDIRS
