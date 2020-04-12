@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-03-09 10:53+0300\n"
+"POT-Creation-Date: 2020-05-05 19:10+0300\n"
 "PO-Revision-Date: 2019-12-16 05:03+0000\n"
 "Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>\n"
 "Language-Team: Czech (http://www.transifex.com/mc/mc/language/cs/)\n"
@@ -2213,6 +2213,122 @@ msgstr "Uživatelské jméno:"
 msgid "SMB authentication"
 msgstr "SMB ověření"
 
+#, fuzzy
+msgid "Secure deletion"
+msgstr "Převrát&it výběr"
+
+#, fuzzy
+msgid "Undelete"
+msgstr "Delete"
+
+msgid "Synchronous updates"
+msgstr ""
+
+#, fuzzy
+msgid "Synchronous directory updates"
+msgstr "Zobrazit velikost&i složek"
+
+msgid "Immutable"
+msgstr ""
+
+#, fuzzy
+msgid "Append only"
+msgstr "Přid&at"
+
+msgid "No dump"
+msgstr ""
+
+msgid "No update atime"
+msgstr ""
+
+msgid "Compress"
+msgstr ""
+
+msgid "Compressed clusters"
+msgstr ""
+
+#, fuzzy
+msgid "Compressed dirty file"
+msgstr "Porovnat složky"
+
+msgid "Compression raw access"
+msgstr ""
+
+msgid "Encrypted inode"
+msgstr ""
+
+msgid "Journaled data"
+msgstr ""
+
+#, fuzzy
+msgid "Indexed directory"
+msgstr "složka"
+
+msgid "No tail merging"
+msgstr ""
+
+#, fuzzy
+msgid "Top of directory hierarchies"
+msgstr "Zobrazit velikost&i složek"
+
+msgid "Inode uses extents"
+msgstr ""
+
+#, fuzzy
+msgid "Huge_file"
+msgstr "soubor"
+
+msgid "No COW"
+msgstr ""
+
+#, fuzzy
+msgid "Casefolded file"
+msgstr "Zavřít soubor"
+
+msgid "Inode has inline data"
+msgstr ""
+
+msgid "Project hierarchy"
+msgstr ""
+
+msgid "Verity protected inode"
+msgstr ""
+
+msgid "&Marked all"
+msgstr "&Nastavit vše na označených souborech"
+
+msgid "S&et marked"
+msgstr "Nastavit označ&ené"
+
+msgid "C&lear marked"
+msgstr "&Smazat označené"
+
+#, fuzzy
+msgid "Chattr command"
+msgstr "Jiný příkaz"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chattr \"%s\"\n"
+"%s"
+msgstr ""
+"Na „%s“ nelze provést stat\n"
+"%s"
+
+#, fuzzy
+msgid "Cannot change attributes on non-local filesystems"
+msgstr ""
+"Pokud nepracujete se soubory, nacházejícími se v tomto počítači, nelze "
+"spouštět žádné příkazy"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot get flags of \"%s\"\n"
+"%s"
+msgstr ""
+"Nelze přesunout soubor „%s“ na „%s“\n"
+"%s"
+
 msgid "set &user ID on execution"
 msgstr "při spouštění nastavit identifikátor &uživatele"
 
@@ -2260,15 +2376,6 @@ msgstr "Jméno vlastníka:"
 
 msgid "Group name:"
 msgstr "Název skupiny:"
-
-msgid "&Marked all"
-msgstr "&Nastavit vše na označených souborech"
-
-msgid "S&et marked"
-msgstr "Nastavit označ&ené"
-
-msgid "C&lear marked"
-msgstr "&Smazat označené"
 
 msgid "Chmod command"
 msgstr "Příkaz chmod"
@@ -3257,6 +3364,16 @@ msgstr "Vlastník:      %s/%s"
 msgid "Links:      %d"
 msgstr "Odkazy:      %d"
 
+msgid "Attributes: not supported"
+msgstr ""
+
+#, c-format
+msgid "Attributes: %s"
+msgstr ""
+
+msgid "Attributes: unavailable"
+msgstr ""
+
 #, c-format
 msgid "Mode:       %s (%04o)"
 msgstr "Režim:       %s (%04o)"
@@ -3375,6 +3492,9 @@ msgstr "Změna &vlastníka"
 
 msgid "&Advanced chown"
 msgstr "&Rozšířená změna práv/vlastníka"
+
+msgid "Cha&ttr"
+msgstr ""
 
 msgid "&Rename/Move"
 msgstr "Přej&menovat/přesunout"
@@ -3940,6 +4060,9 @@ msgstr "S podporou pro místní jazyky a zvyklosti\n"
 #, fuzzy
 msgid "With multiple codepages support"
 msgstr "S podporou více kódových stránek\n"
+
+msgid "With ext2fs attributes support"
+msgstr ""
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"

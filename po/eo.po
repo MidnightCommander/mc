@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-03-09 10:53+0300\n"
+"POT-Creation-Date: 2020-05-05 19:10+0300\n"
 "PO-Revision-Date: 2019-12-25 01:49+0000\n"
 "Last-Translator: Keith Bowes <zooplah@gmail.com>\n"
 "Language-Team: Esperanto (http://www.transifex.com/mc/mc/language/eo/)\n"
@@ -2208,6 +2208,120 @@ msgstr "Salutnomo:"
 msgid "SMB authentication"
 msgstr "SMB-atestado"
 
+#, fuzzy
+msgid "Secure deletion"
+msgstr "Inversigi elek&ton"
+
+#, fuzzy
+msgid "Undelete"
+msgstr "Foriga klavo"
+
+msgid "Synchronous updates"
+msgstr ""
+
+#, fuzzy
+msgid "Synchronous directory updates"
+msgstr "Montri dosierujajn g&randojn"
+
+msgid "Immutable"
+msgstr ""
+
+#, fuzzy
+msgid "Append only"
+msgstr "&Almeti"
+
+msgid "No dump"
+msgstr ""
+
+msgid "No update atime"
+msgstr ""
+
+msgid "Compress"
+msgstr ""
+
+msgid "Compressed clusters"
+msgstr ""
+
+#, fuzzy
+msgid "Compressed dirty file"
+msgstr "Kompari dosierujojn"
+
+msgid "Compression raw access"
+msgstr ""
+
+msgid "Encrypted inode"
+msgstr ""
+
+msgid "Journaled data"
+msgstr ""
+
+#, fuzzy
+msgid "Indexed directory"
+msgstr "dosierujon"
+
+msgid "No tail merging"
+msgstr ""
+
+#, fuzzy
+msgid "Top of directory hierarchies"
+msgstr "Montri dosierujajn g&randojn"
+
+msgid "Inode uses extents"
+msgstr ""
+
+#, fuzzy
+msgid "Huge_file"
+msgstr "dosieron"
+
+msgid "No COW"
+msgstr ""
+
+#, fuzzy
+msgid "Casefolded file"
+msgstr "Fermi dosieron"
+
+msgid "Inode has inline data"
+msgstr ""
+
+msgid "Project hierarchy"
+msgstr ""
+
+msgid "Verity protected inode"
+msgstr ""
+
+msgid "&Marked all"
+msgstr "&Marki ĉion"
+
+msgid "S&et marked"
+msgstr "&Elekti markitajn"
+
+msgid "C&lear marked"
+msgstr "&Forviŝi markitajn"
+
+#, fuzzy
+msgid "Chattr command"
+msgstr "Alia komando"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chattr \"%s\"\n"
+"%s"
+msgstr ""
+"Ne eblas trovi je \"%s\"\n"
+"%s"
+
+#, fuzzy
+msgid "Cannot change attributes on non-local filesystems"
+msgstr "Ne eblas plenumi komandojn en foraj dosiersistemoj"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot get flags of \"%s\"\n"
+"%s"
+msgstr ""
+"Ne eblas movi dosieron \"%s\" al \"%s\"\n"
+"%s"
+
 msgid "set &user ID on execution"
 msgstr "agordi &uzantan identigilon dum plenumigo"
 
@@ -2255,15 +2369,6 @@ msgstr "Estra nomo:"
 
 msgid "Group name:"
 msgstr "Grupa nomo:"
-
-msgid "&Marked all"
-msgstr "&Marki ĉion"
-
-msgid "S&et marked"
-msgstr "&Elekti markitajn"
-
-msgid "C&lear marked"
-msgstr "&Forviŝi markitajn"
 
 msgid "Chmod command"
 msgstr "Komando chmod"
@@ -3246,6 +3351,16 @@ msgstr "Estro:          %s/%s"
 msgid "Links:      %d"
 msgstr "Ligiloj:        %d"
 
+msgid "Attributes: not supported"
+msgstr ""
+
+#, c-format
+msgid "Attributes: %s"
+msgstr ""
+
+msgid "Attributes: unavailable"
+msgstr ""
+
 #, c-format
 msgid "Mode:       %s (%04o)"
 msgstr "Permesoj:       %s (%04o)"
@@ -3364,6 +3479,9 @@ msgstr "Ŝanĝi estre&con"
 
 msgid "&Advanced chown"
 msgstr "&Altnivele ŝanĝi estrecon"
+
+msgid "Cha&ttr"
+msgstr ""
 
 msgid "&Rename/Move"
 msgstr "Al&inomi/Movi"
@@ -3923,6 +4041,9 @@ msgstr "Kun internaciiga rego\n"
 #, fuzzy
 msgid "With multiple codepages support"
 msgstr "Kun rego de pluraj kodpaĝoj\n"
+
+msgid "With ext2fs attributes support"
+msgstr ""
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"

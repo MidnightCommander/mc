@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-03-09 10:53+0300\n"
+"POT-Creation-Date: 2020-05-05 19:10+0300\n"
 "PO-Revision-Date: 2020-01-18 12:57+0000\n"
 "Last-Translator: Serdar Sağlam <teknomobil@msn.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/mc/mc/language/tr/)\n"
@@ -2210,6 +2210,120 @@ msgstr "Kullanıcı: "
 msgid "SMB authentication"
 msgstr "SMB kimlik doğrulama"
 
+#, fuzzy
+msgid "Secure deletion"
+msgstr "&Seçimi tersine çevir"
+
+#, fuzzy
+msgid "Undelete"
+msgstr "Sil"
+
+msgid "Synchronous updates"
+msgstr ""
+
+#, fuzzy
+msgid "Synchronous directory updates"
+msgstr "diz&in boyutlarını göster"
+
+msgid "Immutable"
+msgstr ""
+
+#, fuzzy
+msgid "Append only"
+msgstr "Sonuna &Ekle"
+
+msgid "No dump"
+msgstr ""
+
+msgid "No update atime"
+msgstr ""
+
+msgid "Compress"
+msgstr ""
+
+msgid "Compressed clusters"
+msgstr ""
+
+#, fuzzy
+msgid "Compressed dirty file"
+msgstr "Dizinleri karşılaştır"
+
+msgid "Compression raw access"
+msgstr ""
+
+msgid "Encrypted inode"
+msgstr ""
+
+msgid "Journaled data"
+msgstr ""
+
+#, fuzzy
+msgid "Indexed directory"
+msgstr "dizin:"
+
+msgid "No tail merging"
+msgstr ""
+
+#, fuzzy
+msgid "Top of directory hierarchies"
+msgstr "diz&in boyutlarını göster"
+
+msgid "Inode uses extents"
+msgstr ""
+
+#, fuzzy
+msgid "Huge_file"
+msgstr "dosya:"
+
+msgid "No COW"
+msgstr ""
+
+#, fuzzy
+msgid "Casefolded file"
+msgstr "Dosyayı kapat"
+
+msgid "Inode has inline data"
+msgstr ""
+
+msgid "Project hierarchy"
+msgstr ""
+
+msgid "Verity protected inode"
+msgstr ""
+
+msgid "&Marked all"
+msgstr "Tü&münü seç"
+
+msgid "S&et marked"
+msgstr "S&eçimi başlat"
+
+msgid "C&lear marked"
+msgstr "İşa&retlenenleri Temizle"
+
+#, fuzzy
+msgid "Chattr command"
+msgstr "Diğer komut"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chattr \"%s\"\n"
+"%s"
+msgstr ""
+"\"%s\" durumlanamıyor\n"
+" %s"
+
+#, fuzzy
+msgid "Cannot change attributes on non-local filesystems"
+msgstr "Yerel dosya sistemi dışında komut çalıştırılamaz"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot get flags of \"%s\"\n"
+"%s"
+msgstr ""
+"\"%s\" dosyası \"%s\" e taşınamıyor \n"
+" %s"
+
 msgid "set &user ID on execution"
 msgstr "kullanıcı çalıştırabilir"
 
@@ -2257,15 +2371,6 @@ msgstr "Sahibi:"
 
 msgid "Group name:"
 msgstr "Grup ismi:"
-
-msgid "&Marked all"
-msgstr "Tü&münü seç"
-
-msgid "S&et marked"
-msgstr "S&eçimi başlat"
-
-msgid "C&lear marked"
-msgstr "İşa&retlenenleri Temizle"
 
 msgid "Chmod command"
 msgstr "Chmod komutu"
@@ -3243,6 +3348,16 @@ msgstr "Sahibi:     %s/%s"
 msgid "Links:      %d"
 msgstr "Bağlantılar:%d"
 
+msgid "Attributes: not supported"
+msgstr ""
+
+#, c-format
+msgid "Attributes: %s"
+msgstr ""
+
+msgid "Attributes: unavailable"
+msgstr ""
+
 #, c-format
 msgid "Mode:       %s (%04o)"
 msgstr "Kip:       %s (%04o)"
@@ -3361,6 +3476,9 @@ msgstr "Sa&hip/Grup değiştir"
 
 msgid "&Advanced chown"
 msgstr "&Dosya Özelliklerini Değiştir   "
+
+msgid "Cha&ttr"
+msgstr ""
 
 msgid "&Rename/Move"
 msgstr "Taşıma / &Ad Değiştirme F6"
@@ -3921,6 +4039,9 @@ msgstr "i18n desteğiyle\n"
 #, fuzzy
 msgid "With multiple codepages support"
 msgstr "Çoklu karakter kümesi desteğiyle\n"
+
+msgid "With ext2fs attributes support"
+msgstr ""
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"

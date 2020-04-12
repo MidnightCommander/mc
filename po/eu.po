@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-03-09 10:53+0300\n"
+"POT-Creation-Date: 2020-05-05 19:10+0300\n"
 "PO-Revision-Date: 2019-12-16 01:49+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Basque (http://www.transifex.com/mc/mc/language/eu/)\n"
@@ -2212,6 +2212,120 @@ msgstr "Erabiltzaile izena:"
 msgid "SMB authentication"
 msgstr "SMB autentikazioa"
 
+#, fuzzy
+msgid "Secure deletion"
+msgstr "&Alderantzikatu hautapena"
+
+#, fuzzy
+msgid "Undelete"
+msgstr "Ezabatu"
+
+msgid "Synchronous updates"
+msgstr ""
+
+#, fuzzy
+msgid "Synchronous directory updates"
+msgstr "E&rakutsi direktorioen neurriak"
+
+msgid "Immutable"
+msgstr ""
+
+#, fuzzy
+msgid "Append only"
+msgstr "&Erantsi"
+
+msgid "No dump"
+msgstr ""
+
+msgid "No update atime"
+msgstr ""
+
+msgid "Compress"
+msgstr ""
+
+msgid "Compressed clusters"
+msgstr ""
+
+#, fuzzy
+msgid "Compressed dirty file"
+msgstr "Konparatu direktorioak"
+
+msgid "Compression raw access"
+msgstr ""
+
+msgid "Encrypted inode"
+msgstr ""
+
+msgid "Journaled data"
+msgstr ""
+
+#, fuzzy
+msgid "Indexed directory"
+msgstr "direktorioa"
+
+msgid "No tail merging"
+msgstr ""
+
+#, fuzzy
+msgid "Top of directory hierarchies"
+msgstr "E&rakutsi direktorioen neurriak"
+
+msgid "Inode uses extents"
+msgstr ""
+
+#, fuzzy
+msgid "Huge_file"
+msgstr "fitxategia"
+
+msgid "No COW"
+msgstr ""
+
+#, fuzzy
+msgid "Casefolded file"
+msgstr "Itxi fitxategia"
+
+msgid "Inode has inline data"
+msgstr ""
+
+msgid "Project hierarchy"
+msgstr ""
+
+msgid "Verity protected inode"
+msgstr ""
+
+msgid "&Marked all"
+msgstr "Guztiak &markatuta"
+
+msgid "S&et marked"
+msgstr "&Ezarri markatutakoa"
+
+msgid "C&lear marked"
+msgstr "&Garbitu markatutakoa"
+
+#, fuzzy
+msgid "Chattr command"
+msgstr "Bestelako komandoa"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chattr \"%s\"\n"
+"%s"
+msgstr ""
+"\"%s\"-ren egoera (\"stat\") ezin lortu\n"
+"%s"
+
+#, fuzzy
+msgid "Cannot change attributes on non-local filesystems"
+msgstr "Komandoak ezin exekutatu bertakoa ez den fitxategi-sistema batean"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot get flags of \"%s\"\n"
+"%s"
+msgstr ""
+"Ezin da mugitu \"%s\" fitxategia \"%s\"-ra\n"
+"%s"
+
 msgid "set &user ID on execution"
 msgstr "ezarri &erabiltzaile ID exekutatzean"
 
@@ -2259,15 +2373,6 @@ msgstr "Jabearen izena:"
 
 msgid "Group name:"
 msgstr "Taldearen izena:"
-
-msgid "&Marked all"
-msgstr "Guztiak &markatuta"
-
-msgid "S&et marked"
-msgstr "&Ezarri markatutakoa"
-
-msgid "C&lear marked"
-msgstr "&Garbitu markatutakoa"
 
 msgid "Chmod command"
 msgstr "Chmod komandoa"
@@ -3253,6 +3358,16 @@ msgstr "Jabea: %s/%s"
 msgid "Links:      %d"
 msgstr "Estekak: %d"
 
+msgid "Attributes: not supported"
+msgstr ""
+
+#, c-format
+msgid "Attributes: %s"
+msgstr ""
+
+msgid "Attributes: unavailable"
+msgstr ""
+
 #, c-format
 msgid "Mode:       %s (%04o)"
 msgstr "Modua: %s (%04o)"
@@ -3371,6 +3486,9 @@ msgstr "&Chown"
 
 msgid "&Advanced chown"
 msgstr "Ch&own aurreratua"
+
+msgid "Cha&ttr"
+msgstr ""
 
 msgid "&Rename/Move"
 msgstr "Berrizendatu/Mu&gitu"
@@ -3931,6 +4049,9 @@ msgstr "Nazioarteratzea onartzen du\n"
 #, fuzzy
 msgid "With multiple codepages support"
 msgstr "Kode-orrien euskarri ugarirekin\n"
+
+msgid "With ext2fs attributes support"
+msgstr ""
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"

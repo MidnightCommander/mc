@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-03-09 10:53+0300\n"
+"POT-Creation-Date: 2020-05-05 19:10+0300\n"
 "PO-Revision-Date: 2019-12-16 01:49+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Korean (http://www.transifex.com/mc/mc/language/ko/)\n"
@@ -2204,6 +2204,121 @@ msgstr "사용자 이름:"
 msgid "SMB authentication"
 msgstr "SMB 인증"
 
+#, fuzzy
+msgid "Secure deletion"
+msgstr "선택 반전(&I)"
+
+#, fuzzy
+msgid "Undelete"
+msgstr "삭제 키"
+
+msgid "Synchronous updates"
+msgstr ""
+
+#, fuzzy
+msgid "Synchronous directory updates"
+msgstr "디렉터리 크기 보기(&I)"
+
+msgid "Immutable"
+msgstr ""
+
+#, fuzzy
+msgid "Append only"
+msgstr "추가(&A)"
+
+msgid "No dump"
+msgstr ""
+
+msgid "No update atime"
+msgstr ""
+
+msgid "Compress"
+msgstr ""
+
+msgid "Compressed clusters"
+msgstr ""
+
+#, fuzzy
+msgid "Compressed dirty file"
+msgstr "디렉토리 비교"
+
+msgid "Compression raw access"
+msgstr ""
+
+msgid "Encrypted inode"
+msgstr ""
+
+msgid "Journaled data"
+msgstr ""
+
+#, fuzzy
+msgid "Indexed directory"
+msgstr "디렉터리"
+
+msgid "No tail merging"
+msgstr ""
+
+#, fuzzy
+msgid "Top of directory hierarchies"
+msgstr "디렉터리 크기 보기(&I)"
+
+msgid "Inode uses extents"
+msgstr ""
+
+#, fuzzy
+msgid "Huge_file"
+msgstr "파일"
+
+msgid "No COW"
+msgstr ""
+
+#, fuzzy
+msgid "Casefolded file"
+msgstr "파일 닫기"
+
+msgid "Inode has inline data"
+msgstr ""
+
+msgid "Project hierarchy"
+msgstr ""
+
+msgid "Verity protected inode"
+msgstr ""
+
+msgid "&Marked all"
+msgstr "모두 표시됨(&M)"
+
+msgid "S&et marked"
+msgstr "표시됨 설정(&E)"
+
+msgid "C&lear marked"
+msgstr "표시됨 지우기(&L)"
+
+#, fuzzy
+msgid "Chattr command"
+msgstr "기타 명령어"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chattr \"%s\"\n"
+"%s"
+msgstr ""
+"\"%s\"에 대한 상태\n"
+"%s"
+
+#, fuzzy
+msgid "Cannot change attributes on non-local filesystems"
+msgstr "로컬이 아닌 파일 시스템에서 명령을 실행할 수 없음"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot get flags of \"%s\"\n"
+"%s"
+msgstr ""
+"%s 파일을 \"%s\"로 이동할 수 없음\n"
+"\n"
+"%s"
+
 msgid "set &user ID on execution"
 msgstr "실행 시 사용자 ID 설정(&U)"
 
@@ -2251,15 +2366,6 @@ msgstr "소유자 이름:"
 
 msgid "Group name:"
 msgstr "그룹 이름:"
-
-msgid "&Marked all"
-msgstr "모두 표시됨(&M)"
-
-msgid "S&et marked"
-msgstr "표시됨 설정(&E)"
-
-msgid "C&lear marked"
-msgstr "표시됨 지우기(&L)"
 
 msgid "Chmod command"
 msgstr "Chmod 명령어"
@@ -3240,6 +3346,16 @@ msgstr "소유자:    %s/%s"
 msgid "Links:      %d"
 msgstr "링크:        %d"
 
+msgid "Attributes: not supported"
+msgstr ""
+
+#, c-format
+msgid "Attributes: %s"
+msgstr ""
+
+msgid "Attributes: unavailable"
+msgstr ""
+
 #, c-format
 msgid "Mode:       %s (%04o)"
 msgstr "모드:        %s (%04o)"
@@ -3358,6 +3474,9 @@ msgstr "파일 소유자 변경 (&O)"
 
 msgid "&Advanced chown"
 msgstr "고급 파일 소유자 변경(&A)"
+
+msgid "Cha&ttr"
+msgstr ""
 
 msgid "&Rename/Move"
 msgstr "이름변경/이동(&R)"
@@ -3915,6 +4034,9 @@ msgstr "국제화 지원 사용\n"
 #, fuzzy
 msgid "With multiple codepages support"
 msgstr "복수의 코드페이지 지원 사용\n"
+
+msgid "With ext2fs attributes support"
+msgstr ""
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"
