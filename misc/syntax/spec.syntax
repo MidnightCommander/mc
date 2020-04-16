@@ -60,6 +60,7 @@ context default
     keyword whole linestart %verifyscript red
 
     keyword whole %define brightmagenta
+    keyword linestart \[\s\t\]%dnl\[\s\t\]*\n brown
     keyword whole %dump brightmagenta
     keyword whole %global brightmagenta
     keyword whole %trace brightmagenta
