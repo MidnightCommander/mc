@@ -383,7 +383,7 @@ init_subshell_child (const char *pty_name)
 
     /* Attach all our standard file descriptors to the pty */
 
-    /* This is done just before the fork, because stderr must still      */
+    /* This is done just before the exec, because stderr must still      */
     /* be connected to the real tty during the above error messages; */
     /* otherwise the user will never see them.                   */
 
@@ -620,7 +620,7 @@ read_command_line_buffer (gboolean test_mode)
     if (test_mode)
         return TRUE;
 
-    /* Erase non-text characters in the command buffer, such as tab, or newline, as this
+    /* Substitute non-text characters in the command buffer, such as tab, or newline, as this
      * could cause problems. */
     for (i = 0; i < command_buffer_char_length; i++)
         if ((unsigned char) subshell_command_buffer[i] < 32
@@ -1080,7 +1080,7 @@ init_subshell_precmd (char *precmd, size_t buff_size)
          *    "PS1='$(precmd)\\u@\\h:\\w\\$ '\n",
          *
          * C: This works if user calls "ash" command because in sub-subshell
-         *    PRECMD is unfedined, thus evaluated to empty string - no damage done.
+         *    PRECMD is undefined, thus evaluated to empty string - no damage done.
          *    Attention: BusyBox must be built with FEATURE_EDITING_FANCY_PROMPT to
          *    permit \u, \w, \h, \$ escape sequences. Unfortunately this cannot be guaranteed,
          *    especially on embedded systems where people try to save space, so let's use
