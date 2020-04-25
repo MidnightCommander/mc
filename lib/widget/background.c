@@ -23,7 +23,7 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** \file hline.c
+/** \file background.c
  *  \brief Source: WBackground widget (background area of dialog)
  */
 
