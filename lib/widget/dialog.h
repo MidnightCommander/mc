@@ -53,9 +53,6 @@ typedef char *(*dlg_title_str) (const WDialog * h, size_t len);
 
 typedef int dlg_colors_t[DLG_COLOR_COUNT];
 
-/* menu command execution */
-typedef cb_ret_t (*menu_exec_fn) (int command);
-
 /*** structures declarations (and typedefs of structures)*****************************************/
 
 struct WDialog
