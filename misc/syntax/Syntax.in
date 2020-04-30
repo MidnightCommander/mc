@@ -301,5 +301,8 @@ include protobuf.syntax
 file ..\*\\.(?i:yab)$ Yabasic\s(Yet\sAnother\sBASIC)
 include markdown.syntax
 
+file ..\*\\.(?i:cbl|cob)$ Cobol\sProgram
+include cobol.syntax
+
 file .\* unknown
 include unknown.syntax
