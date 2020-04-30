@@ -13,6 +13,7 @@ SYNTAXFILES =			\
 	cabal.syntax		\
 	changelog.syntax	\
 	cmake.syntax		\
+	cobol.syntax		\
 	cs.syntax		\
 	css.syntax		\
 	cuda.syntax		\
