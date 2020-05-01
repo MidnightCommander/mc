@@ -2240,22 +2240,22 @@ edit_close_cmd (WEdit * edit)
 
     if (ret)
     {
-        WGroup *g = WIDGET (edit)->owner;
-        WDialog *h = DIALOG (g);
+        Widget *w = WIDGET (edit);
+        WGroup *g = w->owner;
 
         if (edit->locked != 0)
             unlock_file (edit->filename_vpath);
 
-        group_remove_widget (edit);
-        widget_destroy (WIDGET (edit));
+        group_remove_widget (w);
+        widget_destroy (w);
 
         if (edit_widget_is_editor (CONST_WIDGET (g->current->data)))
             edit = (WEdit *) (g->current->data);
         else
         {
-            edit = find_editor (h);
+            edit = find_editor (DIALOG (g));
             if (edit != NULL)
-                widget_select (WIDGET (edit));
+                widget_select (w);
         }
     }
 
