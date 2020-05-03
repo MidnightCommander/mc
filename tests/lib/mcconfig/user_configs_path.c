@@ -124,7 +124,7 @@ static const struct test_user_config_paths_ds
     },
     { /* 9. */
         CONF_DATA,
-        MC_SKINS_SUBDIR
+        MC_SKINS_DIR
     },
     { /* 10. */
         CONF_DATA,

@@ -52,7 +52,7 @@ mc_skin_get_list_from_dir (const gchar * base_dir, GPtrArray * list)
     gchar *name;
     GDir *dir;
 
-    name = g_build_filename (base_dir, MC_SKINS_SUBDIR, (char *) NULL);
+    name = g_build_filename (base_dir, MC_SKINS_DIR, (char *) NULL);
     dir = g_dir_open (name, 0, NULL);
     g_free (name);
 
@@ -101,7 +101,7 @@ mc_skin_ini_file_load_search_in_dir (mc_skin_t * mc_skin, const gchar * base_dir
 {
     char *file_name, *file_name2;
 
-    file_name = g_build_filename (base_dir, MC_SKINS_SUBDIR, mc_skin->name, (char *) NULL);
+    file_name = g_build_filename (base_dir, MC_SKINS_DIR, mc_skin->name, (char *) NULL);
     if (exist_file (file_name))
     {
         mc_skin->config = mc_config_init (file_name, TRUE);
@@ -111,7 +111,7 @@ mc_skin_ini_file_load_search_in_dir (mc_skin_t * mc_skin, const gchar * base_dir
     g_free (file_name);
 
     file_name2 = g_strdup_printf ("%s.ini", mc_skin->name);
-    file_name = g_build_filename (base_dir, MC_SKINS_SUBDIR, file_name2, (char *) NULL);
+    file_name = g_build_filename (base_dir, MC_SKINS_DIR, file_name2, (char *) NULL);
     g_free (file_name2);
 
     if (exist_file (file_name))

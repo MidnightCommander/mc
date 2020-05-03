@@ -61,7 +61,8 @@
 #define MC_TREESTORE_FILE       "Tree"
 #define MC_PANELS_FILE          "panels.ini"
 #define MC_FHL_INI_FILE         "filehighlight.ini"
-#define MC_SKINS_SUBDIR         "skins"
+
+#define MC_SKINS_DIR            "skins"
 
 /* editor home directory */
 #define EDIT_HOME_DIR           "mcedit"

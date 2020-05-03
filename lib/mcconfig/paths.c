@@ -76,7 +76,7 @@ static const struct
     { "",                                    &mc_config_str, MC_FILEBIND_FILE },
 
     /* data */
-    { "skins",                               &mc_data_str, MC_SKINS_SUBDIR },
+    { "skins",                               &mc_data_str, MC_SKINS_DIR },
     { "fish",                                &mc_data_str, FISH_PREFIX },
     { "ashrc",                               &mc_data_str, "ashrc" },
     { "bashrc",                              &mc_data_str, "bashrc" },
