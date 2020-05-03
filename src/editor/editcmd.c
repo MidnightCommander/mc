@@ -1087,7 +1087,7 @@ edit_save_block_to_clip_file (WEdit * edit, off_t start, off_t finish)
     gboolean ret;
     gchar *tmp;
 
-    tmp = mc_config_get_full_path (EDIT_CLIP_FILE);
+    tmp = mc_config_get_full_path (EDIT_HOME_CLIP_FILE);
     ret = edit_save_block (edit, tmp, start, finish);
     g_free (tmp);
 
@@ -2145,7 +2145,7 @@ edit_load_syntax_file (WDialog * h)
     {
         vfs_path_t *user_syntax_file_vpath;
 
-        user_syntax_file_vpath = mc_config_get_full_vpath (EDIT_SYNTAX_FILE);
+        user_syntax_file_vpath = mc_config_get_full_vpath (EDIT_HOME_SYNTAX_FILE);
         check_for_default (extdir_vpath, user_syntax_file_vpath);
         ret = edit_load_file_from_filename (h, user_syntax_file_vpath);
         vfs_path_free (user_syntax_file_vpath);
@@ -3022,7 +3022,7 @@ edit_paste_from_X_buf_cmd (WEdit * edit)
 
     /* try use external clipboard utility */
     mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_from_ext_clip", NULL);
-    tmp = mc_config_get_full_vpath (EDIT_CLIP_FILE);
+    tmp = mc_config_get_full_vpath (EDIT_HOME_CLIP_FILE);
     ret = (edit_insert_file (edit, tmp) >= 0);
     vfs_path_free (tmp);
 
@@ -3083,7 +3083,7 @@ edit_save_block_cmd (WEdit * edit)
     if (!eval_marks (edit, &start_mark, &end_mark))
         return TRUE;
 
-    tmp = mc_config_get_full_path (EDIT_CLIP_FILE);
+    tmp = mc_config_get_full_path (EDIT_HOME_CLIP_FILE);
     exp =
         input_expand_dialog (_("Save block"), _("Enter file name:"),
                              MC_HISTORY_EDIT_SAVE_BLOCK, tmp, INPUT_COMPLETE_FILENAMES);
@@ -3115,7 +3115,7 @@ edit_insert_file_cmd (WEdit * edit)
     char *exp;
     gboolean ret = FALSE;
 
-    tmp = mc_config_get_full_path (EDIT_CLIP_FILE);
+    tmp = mc_config_get_full_path (EDIT_HOME_CLIP_FILE);
     exp = input_expand_dialog (_("Insert file"), _("Enter file name:"),
                                MC_HISTORY_EDIT_INSERT_FILE, tmp, INPUT_COMPLETE_FILENAMES);
     g_free (tmp);
@@ -3156,7 +3156,7 @@ edit_sort_cmd (WEdit * edit)
         return 0;
     }
 
-    tmp = mc_config_get_full_path (EDIT_BLOCK_FILE);
+    tmp = mc_config_get_full_path (EDIT_HOME_BLOCK_FILE);
     edit_save_block (edit, tmp, start_mark, end_mark);
     g_free (tmp);
 
@@ -3167,8 +3167,8 @@ edit_sort_cmd (WEdit * edit)
     if (exp == NULL)
         return 1;
 
-    tmp_edit_block_name = mc_config_get_full_path (EDIT_BLOCK_FILE);
-    tmp_edit_temp_name = mc_config_get_full_path (EDIT_TEMP_FILE);
+    tmp_edit_block_name = mc_config_get_full_path (EDIT_HOME_BLOCK_FILE);
+    tmp_edit_temp_name = mc_config_get_full_path (EDIT_HOME_TEMP_FILE);
     tmp =
         g_strconcat (" sort ", exp, " ", tmp_edit_block_name,
                      " > ", tmp_edit_temp_name, (char *) NULL);
@@ -3203,7 +3203,7 @@ edit_sort_cmd (WEdit * edit)
     {
         vfs_path_t *tmp_vpath;
 
-        tmp_vpath = mc_config_get_full_vpath (EDIT_TEMP_FILE);
+        tmp_vpath = mc_config_get_full_vpath (EDIT_HOME_TEMP_FILE);
         edit_insert_file (edit, tmp_vpath);
         vfs_path_free (tmp_vpath);
     }
@@ -3233,7 +3233,7 @@ edit_ext_cmd (WEdit * edit)
     if (!exp)
         return 1;
 
-    tmp_edit_temp_file = mc_config_get_full_path (EDIT_TEMP_FILE);
+    tmp_edit_temp_file = mc_config_get_full_path (EDIT_HOME_TEMP_FILE);
     tmp = g_strconcat (exp, " > ", tmp_edit_temp_file, (char *) NULL);
     g_free (tmp_edit_temp_file);
     e = system (tmp);
@@ -3251,7 +3251,7 @@ edit_ext_cmd (WEdit * edit)
     {
         vfs_path_t *tmp_vpath;
 
-        tmp_vpath = mc_config_get_full_vpath (EDIT_TEMP_FILE);
+        tmp_vpath = mc_config_get_full_vpath (EDIT_HOME_TEMP_FILE);
         edit_insert_file (edit, tmp_vpath);
         vfs_path_free (tmp_vpath);
     }
@@ -3270,7 +3270,7 @@ edit_block_process_cmd (WEdit * edit, int macro_number)
     char *fname;
     char *macros_fname = NULL;
 
-    fname = g_strdup_printf ("%s.%i.sh", MC_EXTMACRO_FILE, macro_number);
+    fname = g_strdup_printf ("%s.%i.sh", EDIT_HOME_MACRO_FILE, macro_number);
     macros_fname = g_build_filename (mc_config_get_data_path (), fname, (char *) NULL);
     user_menu (edit, macros_fname, 0);
     g_free (fname);

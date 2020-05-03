@@ -108,7 +108,7 @@ static const struct test_user_config_paths_ds
     },
     { /* 5. */
         CONF_MAIN,
-        EDIT_SYNTAX_FILE
+        EDIT_HOME_SYNTAX_FILE
     },
     { /* 6. */
         CONF_MAIN,
@@ -116,11 +116,11 @@ static const struct test_user_config_paths_ds
     },
     { /* 7. */
         CONF_MAIN,
-        EDIT_DIR PATH_SEP_STR "edit.indent.rc"
+        EDIT_HOME_DIR PATH_SEP_STR "edit.indent.rc"
     },
     { /* 8. */
         CONF_MAIN,
-        EDIT_DIR PATH_SEP_STR "edit.spell.rc"
+        EDIT_HOME_DIR PATH_SEP_STR "edit.spell.rc"
     },
     { /* 9. */
         CONF_MAIN,
@@ -164,7 +164,7 @@ static const struct test_user_config_paths_ds
     },
     { /* 19. */
         CONF_DATA,
-        EDIT_CLIP_FILE
+        EDIT_HOME_CLIP_FILE
     },
     { /* 20. */
         CONF_DATA,
@@ -180,11 +180,11 @@ static const struct test_user_config_paths_ds
     },
     { /* 23. */
         CONF_CACHE,
-        EDIT_TEMP_FILE
+        EDIT_HOME_TEMP_FILE
     },
     { /* 24. */
         CONF_CACHE,
-        EDIT_BLOCK_FILE
+        EDIT_HOME_BLOCK_FILE
     },
 };
 /* *INDENT-ON* */

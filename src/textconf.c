@@ -234,7 +234,7 @@ show_datadirs_extended (void)
 #endif
 #ifdef USE_INTERNAL_EDIT
     PRINTF ("mcedit macros:", mc_config_get_data_path (), MC_MACRO_FILE);
-    PRINTF ("mcedit external macros:", mc_config_get_data_path (), MC_EXTMACRO_FILE ".*");
+    PRINTF ("mcedit external macros:", mc_config_get_data_path (), EDIT_HOME_MACRO_FILE ".*");
 #endif
     PRINTF_SECTION2 (_("Cache directory:"), mc_config_get_cache_path ());
 }
