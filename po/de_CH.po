@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-03-09 10:53+0300\n"
+"POT-Creation-Date: 2020-05-05 19:10+0300\n"
 "PO-Revision-Date: 2015-02-26 09:48+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: German (Switzerland) (http://www.transifex.com/projects/p/mc/"
@@ -2102,6 +2102,105 @@ msgstr ""
 msgid "SMB authentication"
 msgstr ""
 
+msgid "Secure deletion"
+msgstr ""
+
+msgid "Undelete"
+msgstr ""
+
+msgid "Synchronous updates"
+msgstr ""
+
+msgid "Synchronous directory updates"
+msgstr ""
+
+msgid "Immutable"
+msgstr ""
+
+msgid "Append only"
+msgstr ""
+
+msgid "No dump"
+msgstr ""
+
+msgid "No update atime"
+msgstr ""
+
+msgid "Compress"
+msgstr ""
+
+msgid "Compressed clusters"
+msgstr ""
+
+msgid "Compressed dirty file"
+msgstr ""
+
+msgid "Compression raw access"
+msgstr ""
+
+msgid "Encrypted inode"
+msgstr ""
+
+msgid "Journaled data"
+msgstr ""
+
+msgid "Indexed directory"
+msgstr ""
+
+msgid "No tail merging"
+msgstr ""
+
+msgid "Top of directory hierarchies"
+msgstr ""
+
+msgid "Inode uses extents"
+msgstr ""
+
+msgid "Huge_file"
+msgstr ""
+
+msgid "No COW"
+msgstr ""
+
+msgid "Casefolded file"
+msgstr ""
+
+msgid "Inode has inline data"
+msgstr ""
+
+msgid "Project hierarchy"
+msgstr ""
+
+msgid "Verity protected inode"
+msgstr ""
+
+msgid "&Marked all"
+msgstr ""
+
+msgid "S&et marked"
+msgstr ""
+
+msgid "C&lear marked"
+msgstr ""
+
+msgid "Chattr command"
+msgstr ""
+
+#, c-format
+msgid ""
+"Cannot chattr \"%s\"\n"
+"%s"
+msgstr ""
+
+msgid "Cannot change attributes on non-local filesystems"
+msgstr ""
+
+#, c-format
+msgid ""
+"Cannot get flags of \"%s\"\n"
+"%s"
+msgstr ""
+
 msgid "set &user ID on execution"
 msgstr ""
 
@@ -2148,15 +2247,6 @@ msgid "Owner name:"
 msgstr ""
 
 msgid "Group name:"
-msgstr ""
-
-msgid "&Marked all"
-msgstr ""
-
-msgid "S&et marked"
-msgstr ""
-
-msgid "C&lear marked"
 msgstr ""
 
 msgid "Chmod command"
@@ -3047,6 +3137,16 @@ msgstr ""
 msgid "Links:      %d"
 msgstr ""
 
+msgid "Attributes: not supported"
+msgstr ""
+
+#, c-format
+msgid "Attributes: %s"
+msgstr ""
+
+msgid "Attributes: unavailable"
+msgstr ""
+
 #, c-format
 msgid "Mode:       %s (%04o)"
 msgstr ""
@@ -3164,6 +3264,9 @@ msgid "Ch&own"
 msgstr ""
 
 msgid "&Advanced chown"
+msgstr ""
+
+msgid "Cha&ttr"
 msgstr ""
 
 msgid "&Rename/Move"
@@ -3681,6 +3784,9 @@ msgid "With internationalization support"
 msgstr ""
 
 msgid "With multiple codepages support"
+msgstr ""
+
+msgid "With ext2fs attributes support"
 msgstr ""
 
 #, c-format

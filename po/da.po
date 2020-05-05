@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-03-09 10:53+0300\n"
+"POT-Creation-Date: 2020-05-05 19:10+0300\n"
 "PO-Revision-Date: 2019-12-17 03:41+0000\n"
 "Last-Translator: scootergrisen\n"
 "Language-Team: Danish (http://www.transifex.com/mc/mc/language/da/)\n"
@@ -2211,6 +2211,120 @@ msgstr "Brugernavn:"
 msgid "SMB authentication"
 msgstr "SMB-godkendelse"
 
+#, fuzzy
+msgid "Secure deletion"
+msgstr "&Omvend markering"
+
+#, fuzzy
+msgid "Undelete"
+msgstr "Delete"
+
+msgid "Synchronous updates"
+msgstr ""
+
+#, fuzzy
+msgid "Synchronous directory updates"
+msgstr "Vis &mappestørrelser"
+
+msgid "Immutable"
+msgstr ""
+
+#, fuzzy
+msgid "Append only"
+msgstr "&Tilføj"
+
+msgid "No dump"
+msgstr ""
+
+msgid "No update atime"
+msgstr ""
+
+msgid "Compress"
+msgstr ""
+
+msgid "Compressed clusters"
+msgstr ""
+
+#, fuzzy
+msgid "Compressed dirty file"
+msgstr "Sammenlign mapper"
+
+msgid "Compression raw access"
+msgstr ""
+
+msgid "Encrypted inode"
+msgstr ""
+
+msgid "Journaled data"
+msgstr ""
+
+#, fuzzy
+msgid "Indexed directory"
+msgstr "mappe"
+
+msgid "No tail merging"
+msgstr ""
+
+#, fuzzy
+msgid "Top of directory hierarchies"
+msgstr "Vis &mappestørrelser"
+
+msgid "Inode uses extents"
+msgstr ""
+
+#, fuzzy
+msgid "Huge_file"
+msgstr "fil"
+
+msgid "No COW"
+msgstr ""
+
+#, fuzzy
+msgid "Casefolded file"
+msgstr "Luk fil"
+
+msgid "Inode has inline data"
+msgstr ""
+
+msgid "Project hierarchy"
+msgstr ""
+
+msgid "Verity protected inode"
+msgstr ""
+
+msgid "&Marked all"
+msgstr "&Marker alle"
+
+msgid "S&et marked"
+msgstr "Sæ&t markerede"
+
+msgid "C&lear marked"
+msgstr "F&jern markerede"
+
+#, fuzzy
+msgid "Chattr command"
+msgstr "Andre kommandoer"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chattr \"%s\"\n"
+"%s"
+msgstr ""
+"Kan ikke stat »%s«\n"
+"%s"
+
+#, fuzzy
+msgid "Cannot change attributes on non-local filesystems"
+msgstr "Kan ikke køre kommandoer på filsystemer der ikke er lokale"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot get flags of \"%s\"\n"
+"%s"
+msgstr ""
+"Kan ikke flytte fil »%s« til »%s«\n"
+"%s"
+
 msgid "set &user ID on execution"
 msgstr "sæt &bruger-id ved eksekvering"
 
@@ -2258,15 +2372,6 @@ msgstr "Ejernavn:"
 
 msgid "Group name:"
 msgstr "Gruppenavn:"
-
-msgid "&Marked all"
-msgstr "&Marker alle"
-
-msgid "S&et marked"
-msgstr "Sæ&t markerede"
-
-msgid "C&lear marked"
-msgstr "F&jern markerede"
 
 msgid "Chmod command"
 msgstr "Chmod-kommando"
@@ -3249,6 +3354,16 @@ msgstr "Ejer:       %s/%s"
 msgid "Links:      %d"
 msgstr "Henvisninger:      %d"
 
+msgid "Attributes: not supported"
+msgstr ""
+
+#, c-format
+msgid "Attributes: %s"
+msgstr ""
+
+msgid "Attributes: unavailable"
+msgstr ""
+
 #, c-format
 msgid "Mode:       %s (%04o)"
 msgstr "Tilstand:   %s (%04o)"
@@ -3367,6 +3482,9 @@ msgstr "Ch&own"
 
 msgid "&Advanced chown"
 msgstr "&Avanceret chown"
+
+msgid "Cha&ttr"
+msgstr ""
 
 msgid "&Rename/Move"
 msgstr "&Omdøb/flyt"
@@ -3927,6 +4045,9 @@ msgstr "Med understøttelse af internationalisering\n"
 #, fuzzy
 msgid "With multiple codepages support"
 msgstr "Med understøttelse af flere tegnsæt\n"
+
+msgid "With ext2fs attributes support"
+msgstr ""
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"

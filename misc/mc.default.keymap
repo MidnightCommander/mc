@@ -60,6 +60,7 @@ ExtendedKeyMap = ctrl-x
 [main:xmap]
 ChangeMode = c
 ChangeOwn = o
+ChangeAttributes = e
 CompareDirs = d
 CompareFiles = ctrl-d
 HotListAdd = h
@@ -235,6 +236,16 @@ LinkNext = tab
 LinkPrev = alt-tab
 NodeNext = n
 NodePrev = p
+
+[chattr]
+Up = up; left; ctrl-p
+Down = down; right; ctrl-n
+Top = home; alt-lt; a1
+Bottom = end; alt-gt; c1
+PageUp = pgup; alt-v
+PageDown = pgdn; ctrl-v
+Mark = t; shift-t
+MarkAndDown = insert
 
 [editor]
 Store = ctrl-insert

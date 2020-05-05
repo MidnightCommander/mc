@@ -78,6 +78,9 @@
 #include "chmod.h"
 #include "chown.h"
 #include "achown.h"
+#ifdef ENABLE_EXT2FS_ATTR
+#include "chattr.h"
+#endif
 
 #ifdef USE_INTERNAL_EDIT
 #include "src/editor/edit.h"
@@ -250,6 +253,9 @@ create_file_menu (void)
     entries = g_list_prepend (entries, menu_entry_create (_("Ch&own"), CK_ChangeOwn));
     entries =
         g_list_prepend (entries, menu_entry_create (_("&Advanced chown"), CK_ChangeOwnAdvanced));
+#ifdef ENABLE_EXT2FS_ATTR
+    entries = g_list_prepend (entries, menu_entry_create (_("Cha&ttr"), CK_ChangeAttributes));
+#endif
     entries = g_list_prepend (entries, menu_entry_create (_("&Rename/Move"), CK_Move));
     entries = g_list_prepend (entries, menu_entry_create (_("&Mkdir"), CK_MakeDir));
     entries = g_list_prepend (entries, menu_entry_create (_("&Delete"), CK_Delete));
@@ -1156,6 +1162,11 @@ midnight_execute_cmd (Widget * sender, long command)
     case CK_ChangeOwnAdvanced:
         advanced_chown_cmd ();
         break;
+#ifdef ENABLE_EXT2FS_ATTR
+    case CK_ChangeAttributes:
+        chattr_cmd ();
+        break;
+#endif
     case CK_CompareDirs:
         compare_dirs_cmd ();
         break;

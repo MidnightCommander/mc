@@ -20,6 +20,7 @@ Build requirements for GNU Midnight Commander
 - gettext >= 0.18.1
 - libssh2 >= 1.2.5 is required only for sftp vfs (1.2.7 if you need ssh-agent support)
 - libaspell to support spell checking in the internal editor
+- ext2fs >= 1.42.4 to suport ext{2,3,4}fs extended attributes
 
 
 Installation instructions for GNU Midnight Commander

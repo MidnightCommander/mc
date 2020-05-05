@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-03-09 10:53+0300\n"
+"POT-Creation-Date: 2020-05-05 19:10+0300\n"
 "PO-Revision-Date: 2019-12-16 01:49+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Romanian (http://www.transifex.com/mc/mc/language/ro/)\n"
@@ -2216,6 +2216,120 @@ msgstr "Nume proprietar:"
 msgid "SMB authentication"
 msgstr "Autentificare SMB"
 
+#, fuzzy
+msgid "Secure deletion"
+msgstr "&Inversează selecția"
+
+#, fuzzy
+msgid "Undelete"
+msgstr "Delete"
+
+msgid "Synchronous updates"
+msgstr ""
+
+#, fuzzy
+msgid "Synchronous directory updates"
+msgstr "Arată mărimea dosarelor"
+
+msgid "Immutable"
+msgstr ""
+
+#, fuzzy
+msgid "Append only"
+msgstr "&Adaugă"
+
+msgid "No dump"
+msgstr ""
+
+msgid "No update atime"
+msgstr ""
+
+msgid "Compress"
+msgstr ""
+
+msgid "Compressed clusters"
+msgstr ""
+
+#, fuzzy
+msgid "Compressed dirty file"
+msgstr "Compară dosarele"
+
+msgid "Compression raw access"
+msgstr ""
+
+msgid "Encrypted inode"
+msgstr ""
+
+msgid "Journaled data"
+msgstr ""
+
+#, fuzzy
+msgid "Indexed directory"
+msgstr "dosar"
+
+msgid "No tail merging"
+msgstr ""
+
+#, fuzzy
+msgid "Top of directory hierarchies"
+msgstr "Arată mărimea dosarelor"
+
+msgid "Inode uses extents"
+msgstr ""
+
+#, fuzzy
+msgid "Huge_file"
+msgstr "fișierul"
+
+msgid "No COW"
+msgstr ""
+
+#, fuzzy
+msgid "Casefolded file"
+msgstr "Închide fișier"
+
+msgid "Inode has inline data"
+msgstr ""
+
+msgid "Project hierarchy"
+msgstr ""
+
+msgid "Verity protected inode"
+msgstr ""
+
+msgid "&Marked all"
+msgstr "&Tot marc."
+
+msgid "S&et marked"
+msgstr "Set. &marc."
+
+msgid "C&lear marked"
+msgstr "Şter&g marc."
+
+#, fuzzy
+msgid "Chattr command"
+msgstr "Altă comendă"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chattr \"%s\"\n"
+"%s"
+msgstr ""
+"Nu se poate găsi \"%s\"\n"
+"%s"
+
+#, fuzzy
+msgid "Cannot change attributes on non-local filesystems"
+msgstr "Nu se pot executa comenzi în sisteme de fișiere ne-locale"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot get flags of \"%s\"\n"
+"%s"
+msgstr ""
+"Nu se poate muta fișierul \"%s\" în \"%s\"\n"
+"%s"
+
 msgid "set &user ID on execution"
 msgstr "Setează ID &proprietar la executare"
 
@@ -2263,15 +2377,6 @@ msgstr "Nume proprietar:"
 
 msgid "Group name:"
 msgstr "Nume grup:"
-
-msgid "&Marked all"
-msgstr "&Tot marc."
-
-msgid "S&et marked"
-msgstr "Set. &marc."
-
-msgid "C&lear marked"
-msgstr "Şter&g marc."
 
 msgid "Chmod command"
 msgstr "Comanda chmod"
@@ -3255,6 +3360,16 @@ msgstr "Proprietar: %s/%s"
 msgid "Links:      %d"
 msgstr "Legături: %d"
 
+msgid "Attributes: not supported"
+msgstr ""
+
+#, c-format
+msgid "Attributes: %s"
+msgstr ""
+
+msgid "Attributes: unavailable"
+msgstr ""
+
 #, c-format
 msgid "Mode:       %s (%04o)"
 msgstr "Mod: %s (%04o)"
@@ -3373,6 +3488,9 @@ msgstr "Ch&own"
 
 msgid "&Advanced chown"
 msgstr "Chown &avansat"
+
+msgid "Cha&ttr"
+msgstr ""
 
 msgid "&Rename/Move"
 msgstr "&Redenumește/Mută"
@@ -3935,6 +4053,9 @@ msgstr "Cu suport de internaționalizare\n"
 #, fuzzy
 msgid "With multiple codepages support"
 msgstr "Cu suport pentru coduri de pagină multiple\n"
+
+msgid "With ext2fs attributes support"
+msgstr ""
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"

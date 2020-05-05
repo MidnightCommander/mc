@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-03-09 10:53+0300\n"
+"POT-Creation-Date: 2020-05-05 19:10+0300\n"
 "PO-Revision-Date: 2019-12-22 22:08+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/mc/mc/language/ca/)\n"
@@ -2221,6 +2221,120 @@ msgstr "Nom d'usuari:"
 msgid "SMB authentication"
 msgstr "Autenticació SMB"
 
+#, fuzzy
+msgid "Secure deletion"
+msgstr "&Inverteix la selecció"
+
+#, fuzzy
+msgid "Undelete"
+msgstr "Suprimeix"
+
+msgid "Synchronous updates"
+msgstr ""
+
+#, fuzzy
+msgid "Synchronous directory updates"
+msgstr "Mostra les m&ides dels directoris"
+
+msgid "Immutable"
+msgstr ""
+
+#, fuzzy
+msgid "Append only"
+msgstr "A&nnexa"
+
+msgid "No dump"
+msgstr ""
+
+msgid "No update atime"
+msgstr ""
+
+msgid "Compress"
+msgstr ""
+
+msgid "Compressed clusters"
+msgstr ""
+
+#, fuzzy
+msgid "Compressed dirty file"
+msgstr "Compara els directoris"
+
+msgid "Compression raw access"
+msgstr ""
+
+msgid "Encrypted inode"
+msgstr ""
+
+msgid "Journaled data"
+msgstr ""
+
+#, fuzzy
+msgid "Indexed directory"
+msgstr "directori"
+
+msgid "No tail merging"
+msgstr ""
+
+#, fuzzy
+msgid "Top of directory hierarchies"
+msgstr "Mostra les m&ides dels directoris"
+
+msgid "Inode uses extents"
+msgstr ""
+
+#, fuzzy
+msgid "Huge_file"
+msgstr "fitxer"
+
+msgid "No COW"
+msgstr ""
+
+#, fuzzy
+msgid "Casefolded file"
+msgstr "Tanca el fitxer"
+
+msgid "Inode has inline data"
+msgstr ""
+
+msgid "Project hierarchy"
+msgstr ""
+
+msgid "Verity protected inode"
+msgstr ""
+
+msgid "&Marked all"
+msgstr "&Marca'ls tots"
+
+msgid "S&et marked"
+msgstr "&Posa els marcats"
+
+msgid "C&lear marked"
+msgstr "&Esborra els marcats"
+
+#, fuzzy
+msgid "Chattr command"
+msgstr "Una altra ordre"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chattr \"%s\"\n"
+"%s"
+msgstr ""
+"No s'ha pogut veure l'estat de «%s»\n"
+"%s"
+
+#, fuzzy
+msgid "Cannot change attributes on non-local filesystems"
+msgstr "No es poden executar ordres en sistemes de fitxers no locals"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot get flags of \"%s\"\n"
+"%s"
+msgstr ""
+"No s'ha pogut moure el fitxer «%s» cap a «%s»\n"
+"%s"
+
 msgid "set &user ID on execution"
 msgstr "estableix l'ID d'&usuari en l'execució"
 
@@ -2268,15 +2382,6 @@ msgstr "Nom del propietari:"
 
 msgid "Group name:"
 msgstr "Nom del grup:"
-
-msgid "&Marked all"
-msgstr "&Marca'ls tots"
-
-msgid "S&et marked"
-msgstr "&Posa els marcats"
-
-msgid "C&lear marked"
-msgstr "&Esborra els marcats"
 
 msgid "Chmod command"
 msgstr "Canvi dels permisos"
@@ -3260,6 +3365,16 @@ msgstr "Propietari: %s/%s"
 msgid "Links:      %d"
 msgstr "Enllaços:   %d"
 
+msgid "Attributes: not supported"
+msgstr ""
+
+#, c-format
+msgid "Attributes: %s"
+msgstr ""
+
+msgid "Attributes: unavailable"
+msgstr ""
+
 #, c-format
 msgid "Mode:       %s (%04o)"
 msgstr "Mode:       %s (%04o)"
@@ -3378,6 +3493,9 @@ msgstr "Can&via el propietari"
 
 msgid "&Advanced chown"
 msgstr "C&anvi avançat del propietari"
+
+msgid "Cha&ttr"
+msgstr ""
 
 msgid "&Rename/Move"
 msgstr "&Reanomena/Mou"
@@ -3943,6 +4061,9 @@ msgstr "Amb implementació de la internacionalització\n"
 #, fuzzy
 msgid "With multiple codepages support"
 msgstr "Amb implementació per a múltiples pàgines de codis\n"
+
+msgid "With ext2fs attributes support"
+msgstr ""
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"

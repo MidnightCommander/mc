@@ -75,6 +75,9 @@ static name_keymap_t command_names[] = {
     {"ChangeMode", CK_ChangeMode},
     {"ChangeOwn", CK_ChangeOwn},
     {"ChangeOwnAdvanced", CK_ChangeOwnAdvanced},
+#ifdef ENABLE_EXT2FS_ATTR
+    {"ChangeAttributes", CK_ChangeAttributes},
+#endif
     {"Remove", CK_Remove},
     {"BackSpace", CK_BackSpace},
     {"Redo", CK_Redo},
@@ -257,6 +260,9 @@ static name_keymap_t command_names[] = {
 #if defined (USE_INTERNAL_EDIT) || defined (USE_DIFF_VIEW)
     {"ShowNumbers", CK_ShowNumbers},
 #endif
+
+    /* chattr dialog */
+    {"MarkAndDown", CK_MarkAndDown},
 
 #ifdef USE_INTERNAL_EDIT
     {"Close", CK_Close},

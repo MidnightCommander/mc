@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-03-09 10:53+0300\n"
+"POT-Creation-Date: 2020-05-05 19:10+0300\n"
 "PO-Revision-Date: 2019-12-16 01:49+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Belarusian (http://www.transifex.com/mc/mc/language/be/)\n"
@@ -2212,6 +2212,120 @@ msgstr "Імя карыстальніка:"
 msgid "SMB authentication"
 msgstr "Аўтэнтыфікацыя SMB"
 
+#, fuzzy
+msgid "Secure deletion"
+msgstr "Адвярнуць вылучэнне(&I)"
+
+#, fuzzy
+msgid "Undelete"
+msgstr "Delete"
+
+msgid "Synchronous updates"
+msgstr ""
+
+#, fuzzy
+msgid "Synchronous directory updates"
+msgstr "Памеры каталогаў(&I)"
+
+msgid "Immutable"
+msgstr ""
+
+#, fuzzy
+msgid "Append only"
+msgstr "У канец(&A)"
+
+msgid "No dump"
+msgstr ""
+
+msgid "No update atime"
+msgstr ""
+
+msgid "Compress"
+msgstr ""
+
+msgid "Compressed clusters"
+msgstr ""
+
+#, fuzzy
+msgid "Compressed dirty file"
+msgstr "Параўнаць каталогі"
+
+msgid "Compression raw access"
+msgstr ""
+
+msgid "Encrypted inode"
+msgstr ""
+
+msgid "Journaled data"
+msgstr ""
+
+#, fuzzy
+msgid "Indexed directory"
+msgstr "каталог"
+
+msgid "No tail merging"
+msgstr ""
+
+#, fuzzy
+msgid "Top of directory hierarchies"
+msgstr "Памеры каталогаў(&I)"
+
+msgid "Inode uses extents"
+msgstr ""
+
+#, fuzzy
+msgid "Huge_file"
+msgstr "файл"
+
+msgid "No COW"
+msgstr ""
+
+#, fuzzy
+msgid "Casefolded file"
+msgstr "Закрыць файл"
+
+msgid "Inode has inline data"
+msgstr ""
+
+msgid "Project hierarchy"
+msgstr ""
+
+msgid "Verity protected inode"
+msgstr ""
+
+msgid "&Marked all"
+msgstr "Пазначыць усё(&M)"
+
+msgid "S&et marked"
+msgstr "Прызначыць пазначанае(&E)"
+
+msgid "C&lear marked"
+msgstr "Прыбраць пазначэнне(&L)"
+
+#, fuzzy
+msgid "Chattr command"
+msgstr "Іншы загад"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chattr \"%s\"\n"
+"%s"
+msgstr ""
+"Немагчыма атрымаць уласцівасці «%s»\n"
+"%s"
+
+#, fuzzy
+msgid "Cannot change attributes on non-local filesystems"
+msgstr "На нелакальных файлавых сістэмах нельга выконваць загады"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot get flags of \"%s\"\n"
+"%s"
+msgstr ""
+"Немагчыма перамясціць файл «%s» у «%s»\n"
+"%s"
+
 msgid "set &user ID on execution"
 msgstr "задаць user ID для запуску(&U)"
 
@@ -2259,15 +2373,6 @@ msgstr "Імя ўладальніка:"
 
 msgid "Group name:"
 msgstr "Назва групы :"
-
-msgid "&Marked all"
-msgstr "Пазначыць усё(&M)"
-
-msgid "S&et marked"
-msgstr "Прызначыць пазначанае(&E)"
-
-msgid "C&lear marked"
-msgstr "Прыбраць пазначэнне(&L)"
 
 msgid "Chmod command"
 msgstr "Загад «chmod»"
@@ -3248,6 +3353,16 @@ msgstr "Уладальнік:      %s/%s"
 msgid "Links:      %d"
 msgstr "Спасылкі:      %d"
 
+msgid "Attributes: not supported"
+msgstr ""
+
+#, c-format
+msgid "Attributes: %s"
+msgstr ""
+
+msgid "Attributes: unavailable"
+msgstr ""
+
 #, c-format
 msgid "Mode:       %s (%04o)"
 msgstr "Рэжым:       %s (%04o)"
@@ -3366,6 +3481,9 @@ msgstr "Змяніць уладальніка(&O)"
 
 msgid "&Advanced chown"
 msgstr "Дазволы (пашыраныя)(&A)"
+
+msgid "Cha&ttr"
+msgstr ""
 
 msgid "&Rename/Move"
 msgstr "Змяніць назву або перамясціць(&R)"
@@ -3929,6 +4047,9 @@ msgstr "З падтрымкай інтэрнацыяналізацыі\n"
 #, fuzzy
 msgid "With multiple codepages support"
 msgstr "З падтрымкаю мноства кадаванняў\n"
+
+msgid "With ext2fs attributes support"
+msgstr ""
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"

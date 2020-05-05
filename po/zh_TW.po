@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-03-09 10:53+0300\n"
+"POT-Creation-Date: 2020-05-05 19:10+0300\n"
 "PO-Revision-Date: 2019-12-16 01:49+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/mc/mc/language/"
@@ -2105,6 +2105,110 @@ msgstr "使用者名稱: "
 msgid "SMB authentication"
 msgstr ""
 
+msgid "Secure deletion"
+msgstr ""
+
+#, fuzzy
+msgid "Undelete"
+msgstr "刪除"
+
+msgid "Synchronous updates"
+msgstr ""
+
+msgid "Synchronous directory updates"
+msgstr ""
+
+msgid "Immutable"
+msgstr ""
+
+#, fuzzy
+msgid "Append only"
+msgstr "增加"
+
+msgid "No dump"
+msgstr ""
+
+msgid "No update atime"
+msgstr ""
+
+msgid "Compress"
+msgstr ""
+
+msgid "Compressed clusters"
+msgstr ""
+
+msgid "Compressed dirty file"
+msgstr ""
+
+msgid "Compression raw access"
+msgstr ""
+
+msgid "Encrypted inode"
+msgstr ""
+
+msgid "Journaled data"
+msgstr ""
+
+#, fuzzy
+msgid "Indexed directory"
+msgstr "目錄"
+
+msgid "No tail merging"
+msgstr ""
+
+msgid "Top of directory hierarchies"
+msgstr ""
+
+msgid "Inode uses extents"
+msgstr ""
+
+#, fuzzy
+msgid "Huge_file"
+msgstr "檔案"
+
+msgid "No COW"
+msgstr ""
+
+msgid "Casefolded file"
+msgstr ""
+
+msgid "Inode has inline data"
+msgstr ""
+
+msgid "Project hierarchy"
+msgstr ""
+
+msgid "Verity protected inode"
+msgstr ""
+
+msgid "&Marked all"
+msgstr "標示全部"
+
+msgid "S&et marked"
+msgstr "標示區設定"
+
+msgid "C&lear marked"
+msgstr "清除標示區"
+
+#, fuzzy
+msgid "Chattr command"
+msgstr "其它指令"
+
+#, c-format
+msgid ""
+"Cannot chattr \"%s\"\n"
+"%s"
+msgstr ""
+
+msgid "Cannot change attributes on non-local filesystems"
+msgstr ""
+
+#, c-format
+msgid ""
+"Cannot get flags of \"%s\"\n"
+"%s"
+msgstr ""
+
 msgid "set &user ID on execution"
 msgstr ""
 
@@ -2152,15 +2256,6 @@ msgstr ""
 
 msgid "Group name:"
 msgstr ""
-
-msgid "&Marked all"
-msgstr "標示全部"
-
-msgid "S&et marked"
-msgstr "標示區設定"
-
-msgid "C&lear marked"
-msgstr "清除標示區"
 
 msgid "Chmod command"
 msgstr "chmod 指令"
@@ -3048,6 +3143,16 @@ msgstr ""
 msgid "Links:      %d"
 msgstr ""
 
+msgid "Attributes: not supported"
+msgstr ""
+
+#, c-format
+msgid "Attributes: %s"
+msgstr ""
+
+msgid "Attributes: unavailable"
+msgstr ""
+
 #, c-format
 msgid "Mode:       %s (%04o)"
 msgstr ""
@@ -3165,6 +3270,9 @@ msgid "Ch&own"
 msgstr ""
 
 msgid "&Advanced chown"
+msgstr ""
+
+msgid "Cha&ttr"
 msgstr ""
 
 msgid "&Rename/Move"
@@ -3706,6 +3814,9 @@ msgstr ""
 #, fuzzy
 msgid "With multiple codepages support"
 msgstr "使用多頁碼支援\n"
+
+msgid "With ext2fs attributes support"
+msgstr ""
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"

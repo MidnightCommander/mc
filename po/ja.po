@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-03-09 10:53+0300\n"
+"POT-Creation-Date: 2020-05-05 19:10+0300\n"
 "PO-Revision-Date: 2019-12-16 01:49+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Japanese (http://www.transifex.com/mc/mc/language/ja/)\n"
@@ -2118,6 +2118,117 @@ msgstr "ユーザ名:"
 msgid "SMB authentication"
 msgstr ""
 
+#, fuzzy
+msgid "Secure deletion"
+msgstr "選択の反転(&I)"
+
+#, fuzzy
+msgid "Undelete"
+msgstr "下線"
+
+msgid "Synchronous updates"
+msgstr ""
+
+#, fuzzy
+msgid "Synchronous directory updates"
+msgstr "ディレクトリー名の入力:"
+
+msgid "Immutable"
+msgstr ""
+
+#, fuzzy
+msgid "Append only"
+msgstr "追加(&A)"
+
+msgid "No dump"
+msgstr ""
+
+msgid "No update atime"
+msgstr ""
+
+msgid "Compress"
+msgstr ""
+
+msgid "Compressed clusters"
+msgstr ""
+
+#, fuzzy
+msgid "Compressed dirty file"
+msgstr "ディレクトリーの比較"
+
+msgid "Compression raw access"
+msgstr ""
+
+msgid "Encrypted inode"
+msgstr ""
+
+msgid "Journaled data"
+msgstr ""
+
+#, fuzzy
+msgid "Indexed directory"
+msgstr "directory"
+
+msgid "No tail merging"
+msgstr ""
+
+msgid "Top of directory hierarchies"
+msgstr ""
+
+msgid "Inode uses extents"
+msgstr ""
+
+#, fuzzy
+msgid "Huge_file"
+msgstr "file"
+
+msgid "No COW"
+msgstr ""
+
+msgid "Casefolded file"
+msgstr ""
+
+msgid "Inode has inline data"
+msgstr ""
+
+msgid "Project hierarchy"
+msgstr ""
+
+msgid "Verity protected inode"
+msgstr ""
+
+msgid "&Marked all"
+msgstr "全マーク(&M)"
+
+msgid "S&et marked"
+msgstr "マークを設定(&e)"
+
+msgid "C&lear marked"
+msgstr "マークをクリア(&l)"
+
+#, fuzzy
+msgid "Chattr command"
+msgstr "その他のコマンド"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chattr \"%s\"\n"
+"%s"
+msgstr ""
+"chmod \"%s\" ができません\n"
+"%s"
+
+msgid "Cannot change attributes on non-local filesystems"
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+"Cannot get flags of \"%s\"\n"
+"%s"
+msgstr ""
+"「%s」を開けません\n"
+"%s"
+
 msgid "set &user ID on execution"
 msgstr ""
 
@@ -2165,15 +2276,6 @@ msgstr "所有者の名前:"
 
 msgid "Group name:"
 msgstr "グループの名前:"
-
-msgid "&Marked all"
-msgstr "全マーク(&M)"
-
-msgid "S&et marked"
-msgstr "マークを設定(&e)"
-
-msgid "C&lear marked"
-msgstr "マークをクリア(&l)"
 
 msgid "Chmod command"
 msgstr "chmod コマンド"
@@ -3063,6 +3165,16 @@ msgstr ""
 msgid "Links:      %d"
 msgstr ""
 
+msgid "Attributes: not supported"
+msgstr ""
+
+#, c-format
+msgid "Attributes: %s"
+msgstr ""
+
+msgid "Attributes: unavailable"
+msgstr ""
+
 #, c-format
 msgid "Mode:       %s (%04o)"
 msgstr ""
@@ -3180,6 +3292,9 @@ msgid "Ch&own"
 msgstr "所有者変更(&O)"
 
 msgid "&Advanced chown"
+msgstr ""
+
+msgid "Cha&ttr"
 msgstr ""
 
 msgid "&Rename/Move"
@@ -3722,6 +3837,9 @@ msgstr "国際化サポートを使用\n"
 #, fuzzy
 msgid "With multiple codepages support"
 msgstr "複数のコードページを使用\n"
+
+msgid "With ext2fs attributes support"
+msgstr ""
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-03-09 10:53+0300\n"
+"POT-Creation-Date: 2020-05-05 19:10+0300\n"
 "PO-Revision-Date: 2019-12-23 11:49+0000\n"
 "Last-Translator: Mindaugas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: Lithuanian (http://www.transifex.com/mc/mc/language/lt/)\n"
@@ -2164,6 +2164,119 @@ msgstr "Prisijungimo vardas:"
 msgid "SMB authentication"
 msgstr ""
 
+#, fuzzy
+msgid "Secure deletion"
+msgstr "Atvirkštinis pasirinkimas"
+
+#, fuzzy
+msgid "Undelete"
+msgstr "Šalinti"
+
+msgid "Synchronous updates"
+msgstr ""
+
+#, fuzzy
+msgid "Synchronous directory updates"
+msgstr "Rodyti aplankų dydžius"
+
+msgid "Immutable"
+msgstr ""
+
+#, fuzzy
+msgid "Append only"
+msgstr "P&apildyti"
+
+msgid "No dump"
+msgstr ""
+
+msgid "No update atime"
+msgstr ""
+
+msgid "Compress"
+msgstr ""
+
+msgid "Compressed clusters"
+msgstr ""
+
+#, fuzzy
+msgid "Compressed dirty file"
+msgstr "Lyginti aplankus"
+
+msgid "Compression raw access"
+msgstr ""
+
+msgid "Encrypted inode"
+msgstr ""
+
+msgid "Journaled data"
+msgstr ""
+
+#, fuzzy
+msgid "Indexed directory"
+msgstr "aplanką"
+
+msgid "No tail merging"
+msgstr ""
+
+#, fuzzy
+msgid "Top of directory hierarchies"
+msgstr "Rodyti aplankų dydžius"
+
+msgid "Inode uses extents"
+msgstr ""
+
+#, fuzzy
+msgid "Huge_file"
+msgstr "failą"
+
+msgid "No COW"
+msgstr ""
+
+#, fuzzy
+msgid "Casefolded file"
+msgstr "Uždaryti failą"
+
+msgid "Inode has inline data"
+msgstr ""
+
+msgid "Project hierarchy"
+msgstr ""
+
+msgid "Verity protected inode"
+msgstr ""
+
+msgid "&Marked all"
+msgstr "Pažy&mėti visi"
+
+msgid "S&et marked"
+msgstr "Nustat&yti pažymėtus"
+
+msgid "C&lear marked"
+msgstr "Išva&lyti pažymėtus"
+
+#, fuzzy
+msgid "Chattr command"
+msgstr "Kita komanda"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chattr \"%s\"\n"
+"%s"
+msgstr ""
+"Nepavyko pašalinti aplanko \"%s\"\n"
+"%s"
+
+msgid "Cannot change attributes on non-local filesystems"
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+"Cannot get flags of \"%s\"\n"
+"%s"
+msgstr ""
+"Nepavyko perkelti failo \"%s\" į \"%s\"\n"
+"%s"
+
 msgid "set &user ID on execution"
 msgstr ""
 
@@ -2211,15 +2324,6 @@ msgstr "Savininko vardas:"
 
 msgid "Group name:"
 msgstr "Grupės pavadinimas:"
-
-msgid "&Marked all"
-msgstr "Pažy&mėti visi"
-
-msgid "S&et marked"
-msgstr "Nustat&yti pažymėtus"
-
-msgid "C&lear marked"
-msgstr "Išva&lyti pažymėtus"
 
 msgid "Chmod command"
 msgstr "„chmod“ komanda"
@@ -3145,6 +3249,16 @@ msgstr "Savininkas: %s/%s"
 msgid "Links:      %d"
 msgstr "Nuorodos: %d"
 
+msgid "Attributes: not supported"
+msgstr ""
+
+#, c-format
+msgid "Attributes: %s"
+msgstr ""
+
+msgid "Attributes: unavailable"
+msgstr ""
+
 #, c-format
 msgid "Mode:       %s (%04o)"
 msgstr ""
@@ -3262,6 +3376,9 @@ msgid "Ch&own"
 msgstr "Chown"
 
 msgid "&Advanced chown"
+msgstr ""
+
+msgid "Cha&ttr"
 msgstr ""
 
 msgid "&Rename/Move"
@@ -3818,6 +3935,9 @@ msgstr "Su internacionalizacijos palaimymu\n"
 #, fuzzy
 msgid "With multiple codepages support"
 msgstr "Su daugelio koduočių galimybe\n"
+
+msgid "With ext2fs attributes support"
+msgstr ""
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"

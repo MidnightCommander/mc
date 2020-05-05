@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-03-09 10:53+0300\n"
+"POT-Creation-Date: 2020-05-05 19:10+0300\n"
 "PO-Revision-Date: 2019-12-16 01:49+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Estonian (http://www.transifex.com/mc/mc/language/et/)\n"
@@ -2205,6 +2205,120 @@ msgstr "Kasutaja:"
 msgid "SMB authentication"
 msgstr "SMB autentimine"
 
+#, fuzzy
+msgid "Secure deletion"
+msgstr "Vah&eta valik"
+
+#, fuzzy
+msgid "Undelete"
+msgstr "Klahv Delete"
+
+msgid "Synchronous updates"
+msgstr ""
+
+#, fuzzy
+msgid "Synchronous directory updates"
+msgstr "Kuva kataloogide &suurused"
+
+msgid "Immutable"
+msgstr ""
+
+#, fuzzy
+msgid "Append only"
+msgstr "&Lisa"
+
+msgid "No dump"
+msgstr ""
+
+msgid "No update atime"
+msgstr ""
+
+msgid "Compress"
+msgstr ""
+
+msgid "Compressed clusters"
+msgstr ""
+
+#, fuzzy
+msgid "Compressed dirty file"
+msgstr "Kataloogide võrdlemine"
+
+msgid "Compression raw access"
+msgstr ""
+
+msgid "Encrypted inode"
+msgstr ""
+
+msgid "Journaled data"
+msgstr ""
+
+#, fuzzy
+msgid "Indexed directory"
+msgstr "kataloog"
+
+msgid "No tail merging"
+msgstr ""
+
+#, fuzzy
+msgid "Top of directory hierarchies"
+msgstr "Kuva kataloogide &suurused"
+
+msgid "Inode uses extents"
+msgstr ""
+
+#, fuzzy
+msgid "Huge_file"
+msgstr "fail"
+
+msgid "No COW"
+msgstr ""
+
+#, fuzzy
+msgid "Casefolded file"
+msgstr "Sulge fail"
+
+msgid "Inode has inline data"
+msgstr ""
+
+msgid "Project hierarchy"
+msgstr ""
+
+msgid "Verity protected inode"
+msgstr ""
+
+msgid "&Marked all"
+msgstr "&Vali kõik"
+
+msgid "S&et marked"
+msgstr "&Määra valik"
+
+msgid "C&lear marked"
+msgstr "Tü&hista valik"
+
+#, fuzzy
+msgid "Chattr command"
+msgstr "Muu käsk"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chattr \"%s\"\n"
+"%s"
+msgstr ""
+"\"%s\" attribuutide päring nurjus\n"
+"%s"
+
+#, fuzzy
+msgid "Cannot change attributes on non-local filesystems"
+msgstr "Käske ei saa käivitada kaugfailisüsteemidel"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot get flags of \"%s\"\n"
+"%s"
+msgstr ""
+"Faili \"%s\" teisaldamine kataloogi \"%s\" nurjus\n"
+"%s"
+
 msgid "set &user ID on execution"
 msgstr "kas&utaja ID käivitamisel"
 
@@ -2252,15 +2366,6 @@ msgstr "Omaniku nimi:"
 
 msgid "Group name:"
 msgstr "Grupi nimi:"
-
-msgid "&Marked all"
-msgstr "&Vali kõik"
-
-msgid "S&et marked"
-msgstr "&Määra valik"
-
-msgid "C&lear marked"
-msgstr "Tü&hista valik"
 
 msgid "Chmod command"
 msgstr "Õiguste muutmise käsk"
@@ -3242,6 +3347,16 @@ msgstr "Omanik: %s/%s"
 msgid "Links:      %d"
 msgstr "Viidad: %d"
 
+msgid "Attributes: not supported"
+msgstr ""
+
+#, c-format
+msgid "Attributes: %s"
+msgstr ""
+
+msgid "Attributes: unavailable"
+msgstr ""
+
 #, c-format
 msgid "Mode:       %s (%04o)"
 msgstr "Režiim: %s (%04o)"
@@ -3360,6 +3475,9 @@ msgstr "Vaheta &omanik"
 
 msgid "&Advanced chown"
 msgstr "Täpsem omani&ku vahetus"
+
+msgid "Cha&ttr"
+msgstr ""
 
 msgid "&Rename/Move"
 msgstr "Teisal&da/nimeta"
@@ -3919,6 +4037,9 @@ msgstr "Internatsionaliseerimise toega\n"
 #, fuzzy
 msgid "With multiple codepages support"
 msgstr "Mitme kooditabeli toega\n"
+
+msgid "With ext2fs attributes support"
+msgstr ""
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"

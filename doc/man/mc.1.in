@@ -2558,6 +2558,52 @@ Chown
 .\"Chown"
 command combined into one window. You can change the permissions and
 owner/group of files at once.
+.\"NODE "Chattr"
+.SH "Chattr"
+The Chattr window is used to change the attributes of a group of files
+and directories on a Linux file system. It can be invoked with the C\-x e
+key combination.
+.PP
+Not all attributes are supported or utilized by all filesystems.
+List of available attribute flags is represented as a set of check buttons
+which correspond to the attribute flags (see
+.B chattr(1)
+for details). As you change the attribute flags, you can see the symbolic
+value change below file name.
+.PP
+To move between the widgets (buttons and check buttons) use the
+.I arrow keys
+or the
+.I Tab
+key. To change the state of the check buttons or to select a button use
+.BR Space .
+.PP
+To set the attributes, use the Enter key.
+.PP
+When working with a group of files or directories, you just click on
+the flags you want to set or clear. Once you have selected the flags
+you want to change, you select one of the action buttons (Set marked
+or Clear marked).
+.PP
+Finally, to set the attributes exactly to those specified, you can use
+the
+.B [Set all]
+button, which will act on all the tagged files.
+.PP
+.B [Marked all]
+set only marked attributes to all selected files.
+.PP
+.B [Set marked]
+set marked flags in attributes of all selected files.
+.PP
+.B [Clean marked]
+clear marked flags in attributes of all selected files.
+.PP
+.B [Set]
+set the attributes of one file.
+.PP
+.B [Cancel]
+cancel the Chattr command.
 .\"NODE "File Operations"
 .SH "File Operations"
 When you copy, move or delete files, Midnight Commander shows the

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-03-09 10:53+0300\n"
+"POT-Creation-Date: 2020-05-05 19:10+0300\n"
 "PO-Revision-Date: 2019-12-16 01:49+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/mc/mc/language/nl/)\n"
@@ -2207,6 +2207,120 @@ msgstr " Gebruikersnaam:"
 msgid "SMB authentication"
 msgstr "SMB-authenticatie"
 
+#, fuzzy
+msgid "Secure deletion"
+msgstr "&Inverteer selectie"
+
+#, fuzzy
+msgid "Undelete"
+msgstr "Verwijderen"
+
+msgid "Synchronous updates"
+msgstr ""
+
+#, fuzzy
+msgid "Synchronous directory updates"
+msgstr "Toon mappen&grootte"
+
+msgid "Immutable"
+msgstr ""
+
+#, fuzzy
+msgid "Append only"
+msgstr "&Toevoegen"
+
+msgid "No dump"
+msgstr ""
+
+msgid "No update atime"
+msgstr ""
+
+msgid "Compress"
+msgstr ""
+
+msgid "Compressed clusters"
+msgstr ""
+
+#, fuzzy
+msgid "Compressed dirty file"
+msgstr "Mappen vergelijken"
+
+msgid "Compression raw access"
+msgstr ""
+
+msgid "Encrypted inode"
+msgstr ""
+
+msgid "Journaled data"
+msgstr ""
+
+#, fuzzy
+msgid "Indexed directory"
+msgstr "map"
+
+msgid "No tail merging"
+msgstr ""
+
+#, fuzzy
+msgid "Top of directory hierarchies"
+msgstr "Toon mappen&grootte"
+
+msgid "Inode uses extents"
+msgstr ""
+
+#, fuzzy
+msgid "Huge_file"
+msgstr "bestand"
+
+msgid "No COW"
+msgstr ""
+
+#, fuzzy
+msgid "Casefolded file"
+msgstr "Bestand sluiten"
+
+msgid "Inode has inline data"
+msgstr ""
+
+msgid "Project hierarchy"
+msgstr ""
+
+msgid "Verity protected inode"
+msgstr ""
+
+msgid "&Marked all"
+msgstr "Alle gemarkeerden"
+
+msgid "S&et marked"
+msgstr "Z&et de gemarkeerde"
+
+msgid "C&lear marked"
+msgstr "Mar&kering opheffen"
+
+#, fuzzy
+msgid "Chattr command"
+msgstr "Andere opdracht"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chattr \"%s\"\n"
+"%s"
+msgstr ""
+"Kan niet stat  \"%s\"\n"
+"%s"
+
+#, fuzzy
+msgid "Cannot change attributes on non-local filesystems"
+msgstr "U kunt geen opdrachten uitvoeren op non-lokale bestandssystemen"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot get flags of \"%s\"\n"
+"%s"
+msgstr ""
+"Verplaatsen van \"%s\" naar \"%s\" mislukt \n"
+"%s"
+
 msgid "set &user ID on execution"
 msgstr "zet gebr&uikers-ID bij uitvoering"
 
@@ -2254,15 +2368,6 @@ msgstr "Naam eigenaar:"
 
 msgid "Group name:"
 msgstr "Groepsnaam:"
-
-msgid "&Marked all"
-msgstr "Alle gemarkeerden"
-
-msgid "S&et marked"
-msgstr "Z&et de gemarkeerde"
-
-msgid "C&lear marked"
-msgstr "Mar&kering opheffen"
 
 msgid "Chmod command"
 msgstr "'chmod'-opdracht"
@@ -3243,6 +3348,16 @@ msgstr "Eigenaar: %s/%s"
 msgid "Links:      %d"
 msgstr "Links: %d"
 
+msgid "Attributes: not supported"
+msgstr ""
+
+#, c-format
+msgid "Attributes: %s"
+msgstr ""
+
+msgid "Attributes: unavailable"
+msgstr ""
+
 #, c-format
 msgid "Mode:       %s (%04o)"
 msgstr "Modus: %s (%04o)"
@@ -3361,6 +3476,9 @@ msgstr "Ch&own"
 
 msgid "&Advanced chown"
 msgstr "&Uitgebreide chown"
+
+msgid "Cha&ttr"
+msgstr ""
 
 msgid "&Rename/Move"
 msgstr "&Hernoemen"
@@ -3922,6 +4040,9 @@ msgstr "Met ondersteuning voor internationalisatie\n"
 #, fuzzy
 msgid "With multiple codepages support"
 msgstr "Met ondersteuning voor meerdere karaktersets\n"
+
+msgid "With ext2fs attributes support"
+msgstr ""
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"

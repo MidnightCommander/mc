@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-03-09 10:53+0300\n"
+"POT-Creation-Date: 2020-05-05 19:10+0300\n"
 "PO-Revision-Date: 2020-01-06 12:54+0100\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/mc/language/"
@@ -2210,6 +2210,120 @@ msgstr "Nome utente:"
 msgid "SMB authentication"
 msgstr "Autenticazione SMB"
 
+#, fuzzy
+msgid "Secure deletion"
+msgstr "&Inverti selezione"
+
+#, fuzzy
+msgid "Undelete"
+msgstr "Elimina"
+
+msgid "Synchronous updates"
+msgstr ""
+
+#, fuzzy
+msgid "Synchronous directory updates"
+msgstr "Mostra dimensione d&irectory"
+
+msgid "Immutable"
+msgstr ""
+
+#, fuzzy
+msgid "Append only"
+msgstr "&Appendi"
+
+msgid "No dump"
+msgstr ""
+
+msgid "No update atime"
+msgstr ""
+
+msgid "Compress"
+msgstr ""
+
+msgid "Compressed clusters"
+msgstr ""
+
+#, fuzzy
+msgid "Compressed dirty file"
+msgstr "Confronta directory"
+
+msgid "Compression raw access"
+msgstr ""
+
+msgid "Encrypted inode"
+msgstr ""
+
+msgid "Journaled data"
+msgstr ""
+
+#, fuzzy
+msgid "Indexed directory"
+msgstr "directory"
+
+msgid "No tail merging"
+msgstr ""
+
+#, fuzzy
+msgid "Top of directory hierarchies"
+msgstr "Mostra dimensione d&irectory"
+
+msgid "Inode uses extents"
+msgstr ""
+
+#, fuzzy
+msgid "Huge_file"
+msgstr "file"
+
+msgid "No COW"
+msgstr ""
+
+#, fuzzy
+msgid "Casefolded file"
+msgstr "Chiudi il file"
+
+msgid "Inode has inline data"
+msgstr ""
+
+msgid "Project hierarchy"
+msgstr ""
+
+msgid "Verity protected inode"
+msgstr ""
+
+msgid "&Marked all"
+msgstr "M&od. tut."
+
+msgid "S&et marked"
+msgstr "&Imp. marc."
+
+msgid "C&lear marked"
+msgstr "&Canc. marc."
+
+#, fuzzy
+msgid "Chattr command"
+msgstr "Altro comando"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chattr \"%s\"\n"
+"%s"
+msgstr ""
+"Impossibile ottenere info dal file \"%s\"\n"
+"%s"
+
+#, fuzzy
+msgid "Cannot change attributes on non-local filesystems"
+msgstr "Impossibile eseguire comandi su filesystem non locali"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot get flags of \"%s\"\n"
+"%s"
+msgstr ""
+"Impossibile spostare il file \"%s\" in \"%s\" \n"
+"%s"
+
 msgid "set &user ID on execution"
 msgstr "imposta &UID all'esecuzione"
 
@@ -2257,15 +2371,6 @@ msgstr "Nome propr.:"
 
 msgid "Group name:"
 msgstr "Nome gruppo:"
-
-msgid "&Marked all"
-msgstr "M&od. tut."
-
-msgid "S&et marked"
-msgstr "&Imp. marc."
-
-msgid "C&lear marked"
-msgstr "&Canc. marc."
 
 msgid "Chmod command"
 msgstr "Permessi"
@@ -3248,6 +3353,16 @@ msgstr "Proprietà:     %s/%s"
 msgid "Links:      %d"
 msgstr "Collegamenti:  %d"
 
+msgid "Attributes: not supported"
+msgstr ""
+
+#, c-format
+msgid "Attributes: %s"
+msgstr ""
+
+msgid "Attributes: unavailable"
+msgstr ""
+
 #, c-format
 msgid "Mode:       %s (%04o)"
 msgstr "Permessi:      %s (%04o)"
@@ -3366,6 +3481,9 @@ msgstr "Pr&oprietario"
 
 msgid "&Advanced chown"
 msgstr "Proprietario &avanzato"
+
+msgid "Cha&ttr"
+msgstr ""
 
 msgid "&Rename/Move"
 msgstr "Rinomina&/Sposta"
@@ -3925,6 +4043,9 @@ msgstr "Con supporto internazionale\n"
 #, fuzzy
 msgid "With multiple codepages support"
 msgstr "Con supporto codepages multiple\n"
+
+msgid "With ext2fs attributes support"
+msgstr ""
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"

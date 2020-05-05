@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-03-09 10:53+0300\n"
+"POT-Creation-Date: 2020-05-05 19:10+0300\n"
 "PO-Revision-Date: 2019-12-16 01:49+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Greek (http://www.transifex.com/mc/mc/language/el/)\n"
@@ -2138,6 +2138,119 @@ msgstr "Όνομα χρήστη:"
 msgid "SMB authentication"
 msgstr ""
 
+#, fuzzy
+msgid "Secure deletion"
+msgstr "&Αντιστροφή επιλογής"
+
+#, fuzzy
+msgid "Undelete"
+msgstr "Πλήκτρο Delete"
+
+msgid "Synchronous updates"
+msgstr ""
+
+#, fuzzy
+msgid "Synchronous directory updates"
+msgstr "Εμ&φάνιση μεγεθών καταλόγων"
+
+msgid "Immutable"
+msgstr ""
+
+msgid "Append only"
+msgstr ""
+
+msgid "No dump"
+msgstr ""
+
+msgid "No update atime"
+msgstr ""
+
+msgid "Compress"
+msgstr ""
+
+msgid "Compressed clusters"
+msgstr ""
+
+#, fuzzy
+msgid "Compressed dirty file"
+msgstr "Σύγκριση καταλόγων"
+
+msgid "Compression raw access"
+msgstr ""
+
+msgid "Encrypted inode"
+msgstr ""
+
+msgid "Journaled data"
+msgstr ""
+
+#, fuzzy
+msgid "Indexed directory"
+msgstr "κατάλογος"
+
+msgid "No tail merging"
+msgstr ""
+
+#, fuzzy
+msgid "Top of directory hierarchies"
+msgstr "Εμ&φάνιση μεγεθών καταλόγων"
+
+msgid "Inode uses extents"
+msgstr ""
+
+#, fuzzy
+msgid "Huge_file"
+msgstr "αρχείο"
+
+msgid "No COW"
+msgstr ""
+
+#, fuzzy
+msgid "Casefolded file"
+msgstr "Κλείσιμο αρχείου"
+
+msgid "Inode has inline data"
+msgstr ""
+
+msgid "Project hierarchy"
+msgstr ""
+
+msgid "Verity protected inode"
+msgstr ""
+
+msgid "&Marked all"
+msgstr "&Επιλογή όλων"
+
+msgid "S&et marked"
+msgstr "&Ρύθμιση επιλεγμένων"
+
+msgid "C&lear marked"
+msgstr "&Καθαρισμός επιλεγμένων"
+
+#, fuzzy
+msgid "Chattr command"
+msgstr "Άλλη εντολή"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chattr \"%s\"\n"
+"%s"
+msgstr ""
+"Αδυναμία chmod \"%s\"\n"
+"%s"
+
+#, fuzzy
+msgid "Cannot change attributes on non-local filesystems"
+msgstr "Αδυναμία εκτέλεσης εντολών σε μη τοπικά συστήματα αρχείων"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot get flags of \"%s\"\n"
+"%s"
+msgstr ""
+"Αδυναμία μετακίνησης αρχείου \"%s\" στο \"%s\"\n"
+"%s"
+
 msgid "set &user ID on execution"
 msgstr ""
 
@@ -2185,15 +2298,6 @@ msgstr "Όνομα ιδιοκτήτη:"
 
 msgid "Group name:"
 msgstr "Όνομα ομάδας:"
-
-msgid "&Marked all"
-msgstr "&Επιλογή όλων"
-
-msgid "S&et marked"
-msgstr "&Ρύθμιση επιλεγμένων"
-
-msgid "C&lear marked"
-msgstr "&Καθαρισμός επιλεγμένων"
 
 msgid "Chmod command"
 msgstr "Εντολή chmod"
@@ -3141,6 +3245,16 @@ msgstr ""
 msgid "Links:      %d"
 msgstr "Σύνδεσμοι:      %d"
 
+msgid "Attributes: not supported"
+msgstr ""
+
+#, c-format
+msgid "Attributes: %s"
+msgstr ""
+
+msgid "Attributes: unavailable"
+msgstr ""
+
 #, c-format
 msgid "Mode:       %s (%04o)"
 msgstr ""
@@ -3259,6 +3373,9 @@ msgstr "Ch&own"
 
 msgid "&Advanced chown"
 msgstr "&Προχωρημένο chown"
+
+msgid "Cha&ttr"
+msgstr ""
 
 msgid "&Rename/Move"
 msgstr "&Μετονομασία/μετακίνηση"
@@ -3806,6 +3923,9 @@ msgid "With internationalization support"
 msgstr "Με υποστήριξη διεθνοποίησης\n"
 
 msgid "With multiple codepages support"
+msgstr ""
+
+msgid "With ext2fs attributes support"
 msgstr ""
 
 #, c-format

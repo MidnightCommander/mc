@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-03-09 10:53+0300\n"
+"POT-Creation-Date: 2020-05-05 19:10+0300\n"
 "PO-Revision-Date: 2019-12-16 01:49+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/mc/mc/language/hu/)\n"
@@ -2196,6 +2196,120 @@ msgstr "Felhasználónév:"
 msgid "SMB authentication"
 msgstr "SMB hitelesítés"
 
+#, fuzzy
+msgid "Secure deletion"
+msgstr "K&ijelölés megfordítása"
+
+#, fuzzy
+msgid "Undelete"
+msgstr "Delete"
+
+msgid "Synchronous updates"
+msgstr ""
+
+#, fuzzy
+msgid "Synchronous directory updates"
+msgstr "Könyvtár&méret"
+
+msgid "Immutable"
+msgstr ""
+
+#, fuzzy
+msgid "Append only"
+msgstr "Ho&zzáadás"
+
+msgid "No dump"
+msgstr ""
+
+msgid "No update atime"
+msgstr ""
+
+msgid "Compress"
+msgstr ""
+
+msgid "Compressed clusters"
+msgstr ""
+
+#, fuzzy
+msgid "Compressed dirty file"
+msgstr "Könyvtárak összehasonlítása"
+
+msgid "Compression raw access"
+msgstr ""
+
+msgid "Encrypted inode"
+msgstr ""
+
+msgid "Journaled data"
+msgstr ""
+
+#, fuzzy
+msgid "Indexed directory"
+msgstr "könyvtár"
+
+msgid "No tail merging"
+msgstr ""
+
+#, fuzzy
+msgid "Top of directory hierarchies"
+msgstr "Könyvtár&méret"
+
+msgid "Inode uses extents"
+msgstr ""
+
+#, fuzzy
+msgid "Huge_file"
+msgstr "fájl"
+
+msgid "No COW"
+msgstr ""
+
+#, fuzzy
+msgid "Casefolded file"
+msgstr "Fájl bezárása"
+
+msgid "Inode has inline data"
+msgstr ""
+
+msgid "Project hierarchy"
+msgstr ""
+
+msgid "Verity protected inode"
+msgstr ""
+
+msgid "&Marked all"
+msgstr "&Jelölteket"
+
+msgid "S&et marked"
+msgstr "Jel. b&e"
+
+msgid "C&lear marked"
+msgstr "Jel. &ki"
+
+#, fuzzy
+msgid "Chattr command"
+msgstr "más parancs"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chattr \"%s\"\n"
+"%s"
+msgstr ""
+"A(z) \"%s\" adatai nem lekérdezhetők \n"
+"%s"
+
+#, fuzzy
+msgid "Cannot change attributes on non-local filesystems"
+msgstr "Távoli fájlrendszeren nem lehet végrehajtani a parancsokat"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot get flags of \"%s\"\n"
+"%s"
+msgstr ""
+"A(z) \"%s\" fájl nem átnevezhető/mozgatható erre: \"%s\"\n"
+"%s"
+
 msgid "set &user ID on execution"
 msgstr "&felhasználó-azonosító beállítása végrehajtáskor"
 
@@ -2243,15 +2357,6 @@ msgstr "Tulajdonos:"
 
 msgid "Group name:"
 msgstr "Csoport:"
-
-msgid "&Marked all"
-msgstr "&Jelölteket"
-
-msgid "S&et marked"
-msgstr "Jel. b&e"
-
-msgid "C&lear marked"
-msgstr "Jel. &ki"
 
 msgid "Chmod command"
 msgstr "Jogosultságok beállítása (Chmod)"
@@ -3229,6 +3334,16 @@ msgstr "Tulajdonos: %s/%s"
 msgid "Links:      %d"
 msgstr "Linkek száma: %d"
 
+msgid "Attributes: not supported"
+msgstr ""
+
+#, c-format
+msgid "Attributes: %s"
+msgstr ""
+
+msgid "Attributes: unavailable"
+msgstr ""
+
 #, c-format
 msgid "Mode:       %s (%04o)"
 msgstr "Típus+jogok:  %s (%04o)"
@@ -3347,6 +3462,9 @@ msgstr "Ch&own"
 
 msgid "&Advanced chown"
 msgstr "Chmod-Chown (tul&aj)"
+
+msgid "Cha&ttr"
+msgstr ""
 
 msgid "&Rename/Move"
 msgstr "Át&nevez/Áthelyez"
@@ -3909,6 +4027,9 @@ msgstr "Nyelvi lokalizálás támogatása\n"
 #, fuzzy
 msgid "With multiple codepages support"
 msgstr "Több kódlap támogatása\n"
+
+msgid "With ext2fs attributes support"
+msgstr ""
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"

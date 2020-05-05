@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-03-09 10:53+0300\n"
+"POT-Creation-Date: 2020-05-05 19:10+0300\n"
 "PO-Revision-Date: 2019-12-16 01:49+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Serbian (http://www.transifex.com/mc/mc/language/sr/)\n"
@@ -2198,6 +2198,120 @@ msgstr "Корисник:"
 msgid "SMB authentication"
 msgstr "СМБ потврђивање идентитета"
 
+#, fuzzy
+msgid "Secure deletion"
+msgstr "&Преокрени избор"
+
+#, fuzzy
+msgid "Undelete"
+msgstr "Обриши"
+
+msgid "Synchronous updates"
+msgstr ""
+
+#, fuzzy
+msgid "Synchronous directory updates"
+msgstr "Прикажи &величине директоријума"
+
+msgid "Immutable"
+msgstr ""
+
+#, fuzzy
+msgid "Append only"
+msgstr "&Надовежи"
+
+msgid "No dump"
+msgstr ""
+
+msgid "No update atime"
+msgstr ""
+
+msgid "Compress"
+msgstr ""
+
+msgid "Compressed clusters"
+msgstr ""
+
+#, fuzzy
+msgid "Compressed dirty file"
+msgstr "Упоредите директоријуме"
+
+msgid "Compression raw access"
+msgstr ""
+
+msgid "Encrypted inode"
+msgstr ""
+
+msgid "Journaled data"
+msgstr ""
+
+#, fuzzy
+msgid "Indexed directory"
+msgstr "директоријум"
+
+msgid "No tail merging"
+msgstr ""
+
+#, fuzzy
+msgid "Top of directory hierarchies"
+msgstr "Прикажи &величине директоријума"
+
+msgid "Inode uses extents"
+msgstr ""
+
+#, fuzzy
+msgid "Huge_file"
+msgstr "датотеку"
+
+msgid "No COW"
+msgstr ""
+
+#, fuzzy
+msgid "Casefolded file"
+msgstr "Затвори датотеку"
+
+msgid "Inode has inline data"
+msgstr ""
+
+msgid "Project hierarchy"
+msgstr ""
+
+msgid "Verity protected inode"
+msgstr ""
+
+msgid "&Marked all"
+msgstr "&Све означене"
+
+msgid "S&et marked"
+msgstr "П&остави означене"
+
+msgid "C&lear marked"
+msgstr "О&чисти означене"
+
+#, fuzzy
+msgid "Chattr command"
+msgstr "Друга наредба"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot chattr \"%s\"\n"
+"%s"
+msgstr ""
+"Не могу да добијем податке о „%s“\n"
+"%s"
+
+#, fuzzy
+msgid "Cannot change attributes on non-local filesystems"
+msgstr "Не могу да извршим наредбе на не-месним системима датотека"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot get flags of \"%s\"\n"
+"%s"
+msgstr ""
+"Не могу да преместим датотеку „%s“ у „%s“\n"
+"%s"
+
 msgid "set &user ID on execution"
 msgstr "подеси ИБ &корисника при извршавању"
 
@@ -2245,15 +2359,6 @@ msgstr "Власник:"
 
 msgid "Group name:"
 msgstr "Група:"
-
-msgid "&Marked all"
-msgstr "&Све означене"
-
-msgid "S&et marked"
-msgstr "П&остави означене"
-
-msgid "C&lear marked"
-msgstr "О&чисти означене"
 
 msgid "Chmod command"
 msgstr "Наредба промене режима"
@@ -3228,6 +3333,16 @@ msgstr "Власник:      %s/%s"
 msgid "Links:      %d"
 msgstr "Везе:      %d"
 
+msgid "Attributes: not supported"
+msgstr ""
+
+#, c-format
+msgid "Attributes: %s"
+msgstr ""
+
+msgid "Attributes: unavailable"
+msgstr ""
+
 #, c-format
 msgid "Mode:       %s (%04o)"
 msgstr "Режим:       %s (%04o)"
@@ -3346,6 +3461,9 @@ msgstr "Промени &власништво"
 
 msgid "&Advanced chown"
 msgstr "&Напредна промена власништва"
+
+msgid "Cha&ttr"
+msgstr ""
 
 msgid "&Rename/Move"
 msgstr "&Преиме/Премес"
@@ -3908,6 +4026,9 @@ msgstr "Са подршком за интернационализацију\n"
 #, fuzzy
 msgid "With multiple codepages support"
 msgstr "Са подршком за више кодних страница\n"
+
+msgid "With ext2fs attributes support"
+msgstr ""
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"
