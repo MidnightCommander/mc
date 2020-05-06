@@ -191,7 +191,7 @@ static struct
     /* added in v1.43-WIP-2016-05-12
        ext2fsprogs e1cec4464bdaf93ea609de43c5cdeb6a1f553483 2016-03-07
                    97d7e2fdb2ebec70c3124c1a6370d28ec02efad0 2016-05-09 */
-    { EXT4_PROJINHERIT_FL,  'P', N_("Project hierarchy")              FALSE, FALSE },
+    { EXT4_PROJINHERIT_FL,  'P', N_("Project hierarchy"),             FALSE, FALSE },
 #endif
 #ifdef EXT4_VERITY_FL
     /* added in v1.44.4
