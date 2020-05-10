@@ -28,6 +28,9 @@ typedef struct
 
 WHLine *hline_new (int y, int x, int width);
 void hline_set_text (WHLine * l, const char *text);
+/* *INDENT-OFF* */
+void hline_set_textv (WHLine * l, const char *format, ...) G_GNUC_PRINTF (2, 3);
+/* *INDENT-ON* */
 
 /*** inline functions ****************************************************************************/
 
