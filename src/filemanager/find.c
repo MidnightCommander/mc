@@ -365,13 +365,10 @@ status_update (const char *text)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
+static inline void
 found_num_update (void)
 {
-    char buffer[BUF_TINY];
-
-    g_snprintf (buffer, sizeof (buffer), _("Found: %lu"), matches);
-    label_set_text (found_num_label, buffer);
+    label_set_textv (found_num_label, _("Found: %lu"), matches);
 }
 
 /* --------------------------------------------------------------------------------------------- */

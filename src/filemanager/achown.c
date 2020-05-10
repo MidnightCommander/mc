@@ -305,11 +305,8 @@ advanced_chown_refresh (WDialog * h)
 static void
 advanced_chown_info_update (void)
 {
-    char buffer[BUF_SMALL];
-
     /* mode */
-    g_snprintf (buffer, sizeof (buffer), "Permissions (octal): %o", get_mode ());
-    label_set_text (l_mode, buffer);
+    label_set_textv (l_mode, _("Permissions (octal): %o"), get_mode ());
 
     /* permissions */
     update_permissions ();
@@ -1011,7 +1008,6 @@ advanced_chown_cmd (void)
         const char *fname;
         int result;
         int file_idx;
-        char buffer[BUF_MEDIUM];
 
         do_refresh ();
 
@@ -1036,10 +1032,9 @@ advanced_chown_cmd (void)
         ch_dlg = advanced_chown_dlg_create ();
 
         file_idx = files_on_begin == 1 ? 1 : (files_on_begin - current_panel->marked + 1);
-        g_snprintf (buffer, sizeof (buffer), "%s (%d/%d)",
-                    str_fit_to_term (fname, WIDGET (ch_dlg)->cols - 20, J_LEFT_FIT),
-                    file_idx, files_on_begin);
-        label_set_text (l_filename, buffer);
+        label_set_textv (l_filename, "%s (%d/%d)",
+                         str_fit_to_term (fname, WIDGET (ch_dlg)->cols - 20, J_LEFT_FIT),
+                         file_idx, files_on_begin);
         update_ownership ();
 
         result = dlg_run (ch_dlg);

@@ -263,11 +263,8 @@ chmod_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
 
             if (i < BUTTONS_PERM)
             {
-                char buffer[BUF_TINY];
-
                 ch_mode ^= check_perm[i].mode;
-                g_snprintf (buffer, sizeof (buffer), "%o", (unsigned int) ch_mode);
-                label_set_text (statl, buffer);
+                label_set_textv (statl, "%o", (unsigned int) ch_mode);
                 chmod_toggle_select (h, i);
                 mode_change = TRUE;
                 return MSG_HANDLED;
