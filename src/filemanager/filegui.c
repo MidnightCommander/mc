@@ -1087,19 +1087,15 @@ file_progress_show_total (file_op_total_context_t * tctx, file_op_context_t * ct
 
     if (ui->total_bytes_label != NULL)
     {
-        char buffer[BUF_TINY];
-
         size_trunc_len (buffer2, 5, tctx->copied_bytes, 0, panels_options.kilobyte_si);
 
         if (!ctx->progress_totals_computed)
-            g_snprintf (buffer, sizeof (buffer), _(" Total: %s "), buffer2);
+            hline_set_textv (ui->total_bytes_label, _(" Total: %s "), buffer2);
         else
         {
             size_trunc_len (buffer3, 5, ctx->progress_bytes, 0, panels_options.kilobyte_si);
-            g_snprintf (buffer, sizeof (buffer), _(" Total: %s/%s "), buffer2, buffer3);
+            hline_set_textv (ui->total_bytes_label, _(" Total: %s/%s "), buffer2, buffer3);
         }
-
-        hline_set_text (ui->total_bytes_label, buffer);
     }
 }
 
