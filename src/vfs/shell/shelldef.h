@@ -119,14 +119,28 @@
 
 /* default 'retr'  script */
 #define VFS_SHELL_GET_DEF_CONTENT ""                                             \
+"FILENAME=\"/${SHELL_FILENAME}\"\n"                                              \
+"STARTOFFSET=${SHELL_STARTOFFSET}\n"                                             \
+"CHUNKSIZE=${SHELL_CHUNKSIZE}\n"                                                 \
 "export LC_TIME=C\n"                                                             \
-"if dd if=\"/${SHELL_FILENAME}\" of=/dev/null bs=1 count=1 2>/dev/null ; then\n" \
-"    ls -ln \"/${SHELL_FILENAME}\" 2>/dev/null | (\n"                            \
+"if dd if=\"${FILENAME}\" of=/dev/null bs=1 count=1 2>/dev/null ; then\n"        \
+"    file_size=`ls -ln \"${FILENAME}\" 2>/dev/null | (\n"                        \
 "       read p l u g s r\n"                                                      \
 "       echo $s\n"                                                               \
-"    )\n"                                                                        \
+"    )`\n"                                                                       \
+"    echo ${file_size}"                                                          \
 "    echo \"### 100\"\n"                                                         \
-"    cat \"/${SHELL_FILENAME}\"\n"                                               \
+"    next_offset=`expr ${STARTOFFSET} + ${CHUNKSIZE}`\n"                         \
+"    if [ ${next_offset} -gt ${file_size} ]; then\n"                             \
+"        CHUNKSIZE=`expr ${file_size} - ${STARTOFFSET}`\n"                       \
+"    fi\n"                                                                       \
+"    if [ ${CHUNKSIZE} -eq 0 ]; then\n"                                          \
+"        echo -n\n"                                                              \
+"    elsif [ ${STARTOFFSET} -eq 0 ]; then\n"                                     \
+"        dd if=\"${FILENAME}\" bs=${CHUNKSIZE} 2>/dev/null\n"                    \
+"    else\n"                                                                     \
+"        dd if=\"${FILENAME}\" ibs=${STARTOFFSET} skip=1"                        \
+"             obs=${CHUNKSIZE} count=1\n"                                        \
 "    echo \"### 200\"\n"                                                         \
 "else\n"                                                                         \
 "    echo \"### 500\"\n"                                                         \

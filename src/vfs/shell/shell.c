@@ -150,7 +150,7 @@ typedef struct
 {
     vfs_file_handler_t base;    /* base class */
 
-    off_t got;
+    char *file_name;
     off_t total;
     gboolean append;
 } shell_file_handler_t;
@@ -979,233 +979,6 @@ shell_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, const char *remot
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-shell_file_store (struct vfs_class *me, vfs_file_handler_t *fh, char *name, char *localname)
-{
-    shell_file_handler_t *shell = SHELL_FILE_HANDLER (fh);
-    struct vfs_s_super *super = VFS_FILE_HANDLER_SUPER (fh);
-    shell_super_t *shell_super = SHELL_SUPER (super);
-    int code;
-    off_t total = 0;
-    char buffer[BUF_8K];
-    struct stat s;
-    int h;
-    char *quoted_name;
-
-    h = open (localname, O_RDONLY);
-    if (h == -1)
-        ERRNOR (EIO, -1);
-    if (fstat (h, &s) < 0)
-    {
-        close (h);
-        ERRNOR (EIO, -1);
-    }
-
-    /* First, try this as stor:
-     *
-     *     ( head -c number ) | ( cat > file; cat >/dev/null )
-     *
-     *  If 'head' is not present on the remote system, 'dd' will be used.
-     * Unfortunately, we cannot trust most non-GNU 'head' implementations
-     * even if '-c' options is supported. Therefore, we separate GNU head
-     * (and other modern heads?) using '-q' and '-' . This causes another
-     * implementations to fail (because of "incorrect options").
-     *
-     *  Fallback is:
-     *
-     *     rest=<number>
-     *     while [ $rest -gt 0 ]
-     *     do
-     *        cnt=`expr \( $rest + 255 \) / 256`
-     *        n=`dd bs=256 count=$cnt | tee -a <target_file> | wc -c`
-     *        rest=`expr $rest - $n`
-     *     done
-     *
-     *  'dd' was not designed for full filling of input buffers,
-     *  and does not report exact number of bytes (not blocks).
-     *  Therefore a more complex shell script is needed.
-     *
-     *   On some systems non-GNU head writes "Usage:" error report to stdout
-     *  instead of stderr. It makes impossible the use of "head || dd"
-     *  algorithm for file appending case, therefore just "dd" is used for it.
-     */
-
-    quoted_name = str_shell_escape (name);
-    vfs_print_message (_("shell: store %s: sending command..."), quoted_name);
-
-    /* FIXME: File size is limited to ULONG_MAX */
-    code =
-        shell_command_v (me, super, WAIT_REPLY,
-                         shell->append ? shell_super->scr_append : shell_super->scr_send,
-                         "SHELL_FILENAME=%s SHELL_FILESIZE=%" PRIuMAX ";\n", quoted_name,
-                         (uintmax_t) s.st_size);
-    g_free (quoted_name);
-
-    if (code != PRELIM)
-    {
-        close (h);
-        ERRNOR (E_REMOTE, -1);
-    }
-
-    while (TRUE)
-    {
-        ssize_t n, t;
-
-        while ((n = read (h, buffer, sizeof (buffer))) < 0)
-        {
-            if ((errno == EINTR) && tty_got_interrupt ())
-                continue;
-            vfs_print_message ("%s", _("shell: Local read failed, sending zeros"));
-            close (h);
-            h = open ("/dev/zero", O_RDONLY);
-        }
-
-        if (n == 0)
-            break;
-
-        t = write (shell_super->sockw, buffer, n);
-        if (t != n)
-        {
-            if (t == -1)
-                me->verrno = errno;
-            else
-                me->verrno = EIO;
-            goto error_return;
-        }
-        tty_disable_interrupt_key ();
-        total += n;
-        vfs_print_message ("%s: %" PRIuMAX "/%" PRIuMAX, _("shell: storing file"),
-                           (uintmax_t) total, (uintmax_t) s.st_size);
-    }
-    close (h);
-
-    if (shell_get_reply (me, shell_super->sockr, NULL, 0) != COMPLETE)
-        ERRNOR (E_REMOTE, -1);
-    return 0;
-
-  error_return:
-    close (h);
-    shell_get_reply (me, shell_super->sockr, NULL, 0);
-    return -1;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static int
-shell_linear_start (struct vfs_class *me, vfs_file_handler_t *fh, off_t offset)
-{
-    shell_file_handler_t *shell = SHELL_FILE_HANDLER (fh);
-    struct vfs_s_super *super = VFS_FILE_HANDLER_SUPER (fh);
-    char *name;
-    char *quoted_name;
-
-    name = vfs_s_fullpath (me, fh->ino);
-    if (name == NULL)
-        return 0;
-    quoted_name = str_shell_escape (name);
-    g_free (name);
-    shell->append = FALSE;
-
-    /*
-     * Check whether the remote file is readable by using 'dd' to copy 
-     * a single byte from the remote file to /dev/null. If 'dd' completes
-     * with exit status of 0 use 'cat' to send the file contents to the
-     * standard output (i.e. over the network).
-     */
-
-    offset =
-        shell_command_v (me, super, WANT_STRING, SHELL_SUPER (super)->scr_get,
-                         "SHELL_FILENAME=%s SHELL_START_OFFSET=%" PRIuMAX ";\n", quoted_name,
-                         (uintmax_t) offset);
-    g_free (quoted_name);
-
-    if (offset != PRELIM)
-        ERRNOR (E_REMOTE, 0);
-    fh->linear = LS_LINEAR_OPEN;
-    shell->got = 0;
-    errno = 0;
-#if SIZEOF_OFF_T == SIZEOF_LONG
-    shell->total = (off_t) strtol (reply_str, NULL, 10);
-#else
-    shell->total = (off_t) g_ascii_strtoll (reply_str, NULL, 10);
-#endif
-    if (errno != 0)
-        ERRNOR (E_REMOTE, 0);
-    return 1;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-shell_linear_abort (struct vfs_class *me, vfs_file_handler_t *fh)
-{
-    shell_file_handler_t *shell = SHELL_FILE_HANDLER (fh);
-    struct vfs_s_super *super = VFS_FILE_HANDLER_SUPER (fh);
-    char buffer[BUF_8K];
-    ssize_t n;
-
-    vfs_print_message ("%s", _("Aborting transfer..."));
-
-    do
-    {
-        n = MIN ((off_t) sizeof (buffer), (shell->total - shell->got));
-        if (n != 0)
-        {
-            n = read (SHELL_SUPER (super)->sockr, buffer, n);
-            if (n < 0)
-                return;
-            shell->got += n;
-        }
-    }
-    while (n != 0);
-
-    if (shell_get_reply (me, SHELL_SUPER (super)->sockr, NULL, 0) != COMPLETE)
-        vfs_print_message ("%s", _("Error reported after abort."));
-    else
-        vfs_print_message ("%s", _("Aborted transfer would be successful."));
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static ssize_t
-shell_linear_read (struct vfs_class *me, vfs_file_handler_t *fh, void *buf, size_t len)
-{
-    shell_file_handler_t *shell = SHELL_FILE_HANDLER (fh);
-    struct vfs_s_super *super = VFS_FILE_HANDLER_SUPER (fh);
-    ssize_t n = 0;
-
-    len = MIN ((size_t) (shell->total - shell->got), len);
-    tty_disable_interrupt_key ();
-    while (len != 0 && ((n = read (SHELL_SUPER (super)->sockr, buf, len)) < 0))
-    {
-        if ((errno == EINTR) && !tty_got_interrupt ())
-            continue;
-        break;
-    }
-    tty_enable_interrupt_key ();
-
-    if (n > 0)
-        shell->got += n;
-    else if (n < 0)
-        shell_linear_abort (me, fh);
-    else if (shell_get_reply (me, SHELL_SUPER (super)->sockr, NULL, 0) != COMPLETE)
-        ERRNOR (E_REMOTE, -1);
-    ERRNOR (errno, n);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-shell_linear_close (struct vfs_class *me, vfs_file_handler_t *fh)
-{
-    shell_file_handler_t *shell = SHELL_FILE_HANDLER (fh);
-
-    if (shell->total != shell->got)
-        shell_linear_abort (me, fh);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static int
 shell_ctl (void *fh, int ctlop, void *arg)
 {
     (void) arg;
@@ -1219,13 +992,7 @@ shell_ctl (void *fh, int ctlop, void *arg)
     {
     case VFS_CTL_IS_NOTREADY:
         {
-            vfs_file_handler_t *file = VFS_FILE_HANDLER (fh);
             int v;
-
-            if (file->linear == LS_NOT_LINEAR)
-                vfs_die ("You may not do this");
-            if (file->linear == LS_LINEAR_CLOSED || file->linear == LS_LINEAR_PREOPEN)
-                return 0;
 
             v = vfs_s_select_on_two (VFS_FILE_HANDLER_SUPER (fh)->u.shell.sockr, 0);
 
@@ -1628,6 +1395,7 @@ shell_fh_new (struct vfs_s_inode *ino, gboolean changed)
 
     fh = g_new0 (shell_file_handler_t, 1);
     vfs_s_init_fh (VFS_FILE_HANDLER (fh), ino, changed);
+    fh->total = -1;             /* not read yet */
 
     return VFS_FILE_HANDLER (fh);
 }
@@ -1639,36 +1407,45 @@ shell_fh_open (struct vfs_class *me, vfs_file_handler_t *fh, int flags, mode_t m
 {
     shell_file_handler_t *shell = SHELL_FILE_HANDLER (fh);
 
+    (void) me;
     (void) mode;
 
     /* File will be written only, so no need to retrieve it */
-    if (((flags & O_WRONLY) == O_WRONLY) && ((flags & (O_RDONLY | O_RDWR)) == 0))
+    if ((flags & O_WRONLY) != 0 && (flags & (O_RDONLY | O_RDWR)) == 0)
     {
+        fh->pos = 0;
+
         /* user pressed the button [ Append ] in the "Copy" dialog */
         if ((flags & O_APPEND) != 0)
-            shell->append = TRUE;
-
-        if (fh->ino->localname == NULL)
         {
-            vfs_path_t *vpath = NULL;
-            int tmp_handle;
-
-            tmp_handle = vfs_mkstemps (&vpath, me->name, fh->ino->ent->name);
-            if (tmp_handle == -1)
-                return (-1);
-
-            fh->ino->localname = vfs_path_free (vpath, FALSE);
-            close (tmp_handle);
+            fh->pos = fh->ino->st.st_size;      /* FIXME */
+            shell->append = TRUE;
         }
-        return 0;
     }
 
-    if (fh->ino->localname == NULL && vfs_s_retrieve_file (me, fh->ino) == -1)
-        return (-1);
-
-    if (fh->ino->localname == NULL)
-        vfs_die ("retrieve_file failed to fill in localname");
     return 0;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+shell_fh_free (vfs_file_handler_t * fh)
+{
+    g_free (SHELL_FILE_HANDLER (fh)->file_name);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static char *
+shell_fh_create_filename (struct vfs_class *me, vfs_file_handler_t * fh)
+{
+    char *name, *quoted_name;
+
+    name = vfs_s_fullpath (me, fh->ino);
+    quoted_name = strutils_shell_escape (name);
+    g_free (name);
+
+    return quoted_name;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1726,6 +1503,166 @@ shell_open (const vfs_path_t *vpath, int flags, mode_t mode)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static ssize_t
+shell_read (void *fh, char *buffer, size_t len)
+{
+    static const char * const reply200 = "### 200\n";
+    static const size_t len200 = sizeof (reply200);
+
+    vfs_file_handler_t *file = VFS_FILE_HANDLER (fh);
+    struct vfs_s_super *super = VFS_FILE_HANDLER_SUPER (fh);
+    struct vfs_class *me = super->me;
+
+    shell_file_handler_t *shell_file = SHELL_FILE_HANDLER (fh);
+    shell_super_t *shell_super = SHELL_SUPER (super);
+
+    ssize_t n;
+    size_t remain;
+    ssize_t ret = 0;
+
+    if (shell_file->file_name == NULL)
+        shell_file->file_name = shell_fh_create_filename (me, file);
+
+    n = shell_command_v (me, super, WANT_STRING, shell_super->scr_get,
+                         "SHELL_FILENAME=%s SHELL_STARTOFFSET=%" PRIuMAX " SHELL_CHUNKSIZE=%zu;\n",
+                         shell_file->file_name, (uintmax_t) file->pos, len);
+
+    if (n != PRELIM)
+        ERRNOR (E_REMOTE, -1);
+
+    /* get the size of remote file at first read */
+    if (shell_file->total < 0)
+    {
+#if SIZEOF_OFF_T == SIZEOF_LONG
+        shell_file->total = (off_t) strtol (reply_str, NULL, 10);
+#else
+        shell_file->total = (off_t) g_ascii_strtoll (reply_str, NULL, 10);
+#endif
+    }
+
+    /* define the size of chunk to be read */
+    len = MIN (len, shell_file->total - file->pos);
+
+    /* get data followed by "### 200\n" or "### 500\n" */
+    /*
+     * there are three cases:
+     * 1) buffer contains data and reply
+          no extra read is required
+     * 2) buffer contains data and start chunk of reply
+          extra read is required to get remain chunk of reply
+     * 2) buffer contains data only
+          extra read is required to get whole reply
+     */
+
+    /* total byte to read: data and reply */
+    remain = (size_t) (len + len200);
+
+    /* fill @buffer */
+    while (TRUE)
+    {
+        n = read (shell_super->sockr, buffer + ret, len - ret);
+        if (n < 0)
+        {
+            if (errno == EINTR)
+                continue;
+
+            ERRNOR (errno, -1);
+        }
+
+        if (n == 0)
+           break;       /* nothing to read anymore */
+
+        ret += n;
+        remain -= (size_t) n;
+
+        if (remain <= len200)
+        {
+            ret -= len200 - remain;
+            break;
+        }
+    }
+
+    /* read remain (or whole) part of reply */
+    while (remain != 0)
+    {
+        /* cases 2 and 3 */
+        n = read (shell_super->sockr, reply_str, remain);
+
+        if (n < 0 && errno == EINTR)
+            continue;
+
+        if (n < 0 || (size_t) n != remain)
+            ERRNOR (E_REMOTE, -1);
+
+        break;
+    }
+
+    /* check reply */
+    if (remain == 0)
+    {
+        if (strncmp (buffer + ret, reply200, len200) != 0)
+            ERRNOR (E_REMOTE, -1);
+    }
+    else if (remain == len200)
+    {
+        if (strncmp (reply_str, reply200, len200) != 0)
+            ERRNOR (E_REMOTE, -1);
+    }
+    else /* remain < len200 */
+    {
+        if (strncmp (buffer + ret, reply200, remain) != 0 ||
+            strncmp (reply_str, reply200 + remain, len200 - remain) != 0)
+            ERRNOR (E_REMOTE, -1);
+    }
+
+    file->pos += ret;
+
+    ERRNOR (errno, ret);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static ssize_t
+shell_write (void *fh, const char *buffer, size_t len)
+{
+    vfs_file_handler_t *file = VFS_FILE_HANDLER (fh);
+    struct vfs_s_super *super = VFS_FILE_HANDLER_SUPER (fh);
+    struct vfs_class *me = super->me;
+
+    shell_file_handler_t *shell_file = SHELL_FILE_HANDLER (fh);
+    shell_super_t *shell_super = SHELL_SUPER (super);
+
+    ssize_t n;
+
+    if (shell_file->file_name == NULL)
+        shell_file->file_name = shell_fh_create_filename (me, file);
+
+    n = shell_command_v (me, super, WAIT_REPLY,
+                         shell_file->append ? shell_super->scr_append : shell_super->scr_send,
+                         "SHELL_FILENAME=%s SHELL_FILESIZE=%zu;\n", shell_file->file_name, len);
+
+    if (n != PRELIM)
+        ERRNOR (E_REMOTE, -1);
+
+    n = write (shell_super->sockw, buffer, len);
+    if (n != (ssize_t) len)
+    {
+        me->verrno = n == -1 ? errno : EIO;
+        ERRNOR (me->verrno, -1);
+    }
+
+    if (shell_get_reply (me, shell_super->sockr, NULL, 0) != COMPLETE)
+        ERRNOR (E_REMOTE, -1);
+
+    /* once wrote to new file, then append */
+    shell_file->append = TRUE;
+    file->pos += n;
+
+    ERRNOR (errno, n);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -1734,7 +1671,7 @@ vfs_init_shell (void)
 {
     tcp_init ();
 
-    vfs_init_subclass (&shell_subclass, "shell", VFSF_REMOTE | VFSF_USETMP, "sh");
+    vfs_init_subclass (&shell_subclass, "shell", VFSF_REMOTE, "sh");
     vfs_shell_ops->fill_names = shell_fill_names;
     vfs_shell_ops->stat = shell_stat;
     vfs_shell_ops->lstat = shell_lstat;
@@ -1743,6 +1680,8 @@ vfs_init_shell (void)
     vfs_shell_ops->chown = shell_chown;
     vfs_shell_ops->utime = shell_utime;
     vfs_shell_ops->open = shell_open;
+    vfs_shell_ops->read = shell_read;
+    vfs_shell_ops->write = shell_write;
     vfs_shell_ops->symlink = shell_symlink;
     vfs_shell_ops->link = shell_link;
     vfs_shell_ops->unlink = shell_unlink;
@@ -1756,11 +1695,8 @@ vfs_init_shell (void)
     shell_subclass.free_archive = shell_free_archive;
     shell_subclass.fh_new = shell_fh_new;
     shell_subclass.fh_open = shell_fh_open;
+    shell_subclass.fh_free = shell_fh_free;
     shell_subclass.dir_load = shell_dir_load;
-    shell_subclass.file_store = shell_file_store;
-    shell_subclass.linear_start = shell_linear_start;
-    shell_subclass.linear_read = shell_linear_read;
-    shell_subclass.linear_close = shell_linear_close;
     vfs_register_class (vfs_shell_ops);
 }
 
