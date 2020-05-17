@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-05 19:10+0300\n"
+"POT-Creation-Date: 2020-05-17 18:50+0300\n"
 "PO-Revision-Date: 2019-12-16 01:49+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/mc/mc/language/bg/)\n"
@@ -1124,9 +1124,6 @@ msgstr "Преобразуване на новите редове към:"
 msgid "Save As"
 msgstr "Запазване като"
 
-msgid "Block is large, you may not be able to undo this action"
-msgstr "Блокът е голям, може да нямате възможност да отмените това действие"
-
 msgid "Collect completions"
 msgstr "Събиране на довършванията"
 
@@ -1327,7 +1324,7 @@ msgstr "Натиснете който и да е клавиш:"
 
 msgid ""
 "Current text was modified without a file save.\n"
-"Continue discards these changes"
+"Continue discards these changes."
 msgstr ""
 "Сегашния текст е променен без запис на файл.\n"
 "Продължаване изоставяйки тези промени"
@@ -1358,13 +1355,6 @@ msgstr "Потвърждаване замяната"
 
 msgid "Cancel"
 msgstr "Отказ"
-
-msgid ""
-"Current text was modified without a file save.\n"
-"Continue discards these changes."
-msgstr ""
-"Сегашния текст е променен без запис на файл.\n"
-"Продължаване изоставяйки тези промени"
 
 msgid "NoName"
 msgstr "БезИме"
@@ -1817,9 +1807,10 @@ msgstr "Не може да се добие локално копие от %s"
 msgid "The shell is already running a command"
 msgstr "Обвивката вече изпълнява команда"
 
+#, fuzzy
 msgid ""
 "Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
+"the subshell cannot be toggled."
 msgstr ""
 " Не е xterm или Линукс конзола;\n"
 "панелите не могат да бъдат показвани/скривани."
@@ -1847,6 +1838,10 @@ msgstr "други"
 
 msgid "Flag"
 msgstr "Флаг"
+
+#, fuzzy, c-format
+msgid "Permissions (octal): %o"
+msgstr "Права (осмичен вид):"
 
 msgid "Chown advanced command"
 msgstr "Разширена Chown команда"
@@ -4672,6 +4667,16 @@ msgstr "Да се продължи ли от началото?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не може да се изтегли локално копие на /ftp://some.host/editme.txt"
+
+#~ msgid "Block is large, you may not be able to undo this action"
+#~ msgstr "Блокът е голям, може да нямате възможност да отмените това действие"
+
+#~ msgid ""
+#~ "Current text was modified without a file save.\n"
+#~ "Continue discards these changes"
+#~ msgstr ""
+#~ "Сегашния текст е променен без запис на файл.\n"
+#~ "Продължаване изоставяйки тези промени"
 
 #~ msgid "Using the ncurses library\n"
 #~ msgstr "Използване на библиотеката ncurses\n"

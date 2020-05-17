@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-05 19:10+0300\n"
+"POT-Creation-Date: 2020-05-17 18:50+0300\n"
 "PO-Revision-Date: 2019-12-16 05:03+0000\n"
 "Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>\n"
 "Language-Team: Czech (http://www.transifex.com/mc/mc/language/cs/)\n"
@@ -1142,9 +1142,6 @@ msgstr "Změnit konce řádků na:"
 msgid "Save As"
 msgstr "Uložit jako"
 
-msgid "Block is large, you may not be able to undo this action"
-msgstr "Blok je příliš velký, návrat o krok zpět nebude fungovat"
-
 msgid "Collect completions"
 msgstr "Sbírat dokončení"
 
@@ -1343,10 +1340,10 @@ msgstr "Stiskněte libovolnou klávesu:"
 
 msgid ""
 "Current text was modified without a file save.\n"
-"Continue discards these changes"
+"Continue discards these changes."
 msgstr ""
 "Tento text byl změněn, ale změny nebyly uloženy.\n"
-"Pokračováním se změny ztratí"
+"Pokračováním se změny ztratí."
 
 msgid "In se&lection"
 msgstr "&Ve výběru"
@@ -1374,13 +1371,6 @@ msgstr "Potvrdit nahrazení"
 
 msgid "Cancel"
 msgstr "Storno"
-
-msgid ""
-"Current text was modified without a file save.\n"
-"Continue discards these changes."
-msgstr ""
-"Tento text byl změněn, ale změny nebyly uloženy.\n"
-"Pokračováním se změny ztratí."
 
 msgid "NoName"
 msgstr "Beze názvu"
@@ -1835,9 +1825,10 @@ msgstr "Nedaří se získat místní kopii souboru %s"
 msgid "The shell is already running a command"
 msgstr "V shellu je už spuštěný příkaz"
 
+#, fuzzy
 msgid ""
 "Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
+"the subshell cannot be toggled."
 msgstr ""
 "Toto není xterm nebo linuxová konzola;\n"
 "panely nelze přepnout."
@@ -1865,6 +1856,10 @@ msgstr " ostatní"
 
 msgid "Flag"
 msgstr "Příznak"
+
+#, fuzzy, c-format
+msgid "Permissions (octal): %o"
+msgstr "Oprávnění (osmičkově):"
 
 msgid "Chown advanced command"
 msgstr "Rozšířená změna vlastníka"
@@ -4705,6 +4700,16 @@ msgstr "Pokračovat od začátku?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nedaří získat místní kopii souboru /ftp://some.host/editme.txt"
+
+#~ msgid "Block is large, you may not be able to undo this action"
+#~ msgstr "Blok je příliš velký, návrat o krok zpět nebude fungovat"
+
+#~ msgid ""
+#~ "Current text was modified without a file save.\n"
+#~ "Continue discards these changes"
+#~ msgstr ""
+#~ "Tento text byl změněn, ale změny nebyly uloženy.\n"
+#~ "Pokračováním se změny ztratí"
 
 #~ msgid "Using the ncurses library\n"
 #~ msgstr "Používá se knihovna ncurses\n"

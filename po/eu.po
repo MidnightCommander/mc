@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-05 19:10+0300\n"
+"POT-Creation-Date: 2020-05-17 18:50+0300\n"
 "PO-Revision-Date: 2019-12-16 01:49+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Basque (http://www.transifex.com/mc/mc/language/eu/)\n"
@@ -1138,9 +1138,6 @@ msgstr "Aldatu lerro hausturak hontara:"
 msgid "Save As"
 msgstr "Gorde honela"
 
-msgid "Block is large, you may not be able to undo this action"
-msgstr "Blokea handia da, agian ezingo duzu ekintza hau desegin"
-
 msgid "Collect completions"
 msgstr "Osatzeak bildu"
 
@@ -1341,10 +1338,10 @@ msgstr "Sakatu edozein tekla:"
 
 msgid ""
 "Current text was modified without a file save.\n"
-"Continue discards these changes"
+"Continue discards these changes."
 msgstr ""
 "Uneko testua aldatu da baino ez da fitxategian gorde.\n"
-"Jarraitzeak aldaketa hauek baztertuko ditu"
+"Jarraitzeak aldaketa hauek baztertuko ditu."
 
 msgid "In se&lection"
 msgstr "&Hautapenean"
@@ -1372,13 +1369,6 @@ msgstr "Berretsi ordezkapena"
 
 msgid "Cancel"
 msgstr "Utzi"
-
-msgid ""
-"Current text was modified without a file save.\n"
-"Continue discards these changes."
-msgstr ""
-"Uneko testua aldatu da baino ez da fitxategian gorde.\n"
-"Jarraitzeak aldaketa hauek baztertuko ditu."
 
 msgid "NoName"
 msgstr "Izengabe"
@@ -1832,9 +1822,10 @@ msgstr "Ezin eskuratu ondokoaren bertako kopia bat: %s"
 msgid "The shell is already running a command"
 msgstr "Shell-a dagoeneko komando bat exekutate ari da"
 
+#, fuzzy
 msgid ""
 "Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
+"the subshell cannot be toggled."
 msgstr ""
 "Ez da xterm edo Linux kontsola;\n"
 "panelak ezin dira ezkutatu."
@@ -1862,6 +1853,10 @@ msgstr "bestelakoa"
 
 msgid "Flag"
 msgstr "Bandera"
+
+#, fuzzy, c-format
+msgid "Permissions (octal): %o"
+msgstr "Baimenak (Zortzitarra):"
 
 msgid "Chown advanced command"
 msgstr "Chown komando aurreratua"
@@ -4696,6 +4691,16 @@ msgstr "Hasieratik jarraitu?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Ezin eskuratu ondokoaren bertako kopia bat: /ftp://some.host/editme.txt"
+
+#~ msgid "Block is large, you may not be able to undo this action"
+#~ msgstr "Blokea handia da, agian ezingo duzu ekintza hau desegin"
+
+#~ msgid ""
+#~ "Current text was modified without a file save.\n"
+#~ "Continue discards these changes"
+#~ msgstr ""
+#~ "Uneko testua aldatu da baino ez da fitxategian gorde.\n"
+#~ "Jarraitzeak aldaketa hauek baztertuko ditu"
 
 #~ msgid "Using the ncurses library\n"
 #~ msgstr "ncurses liburutegia erabiltzen\n"

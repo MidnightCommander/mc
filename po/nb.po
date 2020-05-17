@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-05 19:10+0300\n"
+"POT-Creation-Date: 2020-05-17 18:50+0300\n"
 "PO-Revision-Date: 2019-12-22 05:53+0000\n"
 "Last-Translator: Kjell Cato Heskjestad <cato@heskjestad.xyz>\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/mc/mc/language/"
@@ -1142,9 +1142,6 @@ msgstr "Endre linjeskift til:"
 msgid "Save As"
 msgstr "Lagre som"
 
-msgid "Block is large, you may not be able to undo this action"
-msgstr "Blokka er stor, og du kan kanskje ikke angre handlinga"
-
 msgid "Collect completions"
 msgstr "Samle fullføringer"
 
@@ -1345,7 +1342,7 @@ msgstr "Trykk en vilkårlig tast:"
 
 msgid ""
 "Current text was modified without a file save.\n"
-"Continue discards these changes"
+"Continue discards these changes."
 msgstr ""
 "Denne teksten er endret, men ikke lagret.\n"
 "Endringene kasseres hvis du fortsetter."
@@ -1376,13 +1373,6 @@ msgstr "Bekreft erstatning"
 
 msgid "Cancel"
 msgstr "Avbryt"
-
-msgid ""
-"Current text was modified without a file save.\n"
-"Continue discards these changes."
-msgstr ""
-"Denne teksten er endret, men ikke lagret.\n"
-"Endringene kasseres hvis du fortsetter."
 
 msgid "NoName"
 msgstr "Navnløs"
@@ -1836,9 +1826,10 @@ msgstr "Klarte ikke hente en lokal kopi av %s"
 msgid "The shell is already running a command"
 msgstr "Skallet kjører allerede en kommando"
 
+#, fuzzy
 msgid ""
 "Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
+"the subshell cannot be toggled."
 msgstr ""
 "Ikke en xterm eller Linux-konsoll;\n"
 "kan ikke bytte om panelene."
@@ -1866,6 +1857,10 @@ msgstr "andre"
 
 msgid "Flag"
 msgstr "Flagg"
+
+#, fuzzy, c-format
+msgid "Permissions (octal): %o"
+msgstr "Rettigheter (oktale)"
 
 msgid "Chown advanced command"
 msgstr "Avansert chown-kommando"
@@ -4690,6 +4685,16 @@ msgstr "Fortsett fra begynnelsen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Klarte ikke hente en lokal kopi av /ftp://some.host/editme.txt"
+
+#~ msgid "Block is large, you may not be able to undo this action"
+#~ msgstr "Blokka er stor, og du kan kanskje ikke angre handlinga"
+
+#~ msgid ""
+#~ "Current text was modified without a file save.\n"
+#~ "Continue discards these changes"
+#~ msgstr ""
+#~ "Denne teksten er endret, men ikke lagret.\n"
+#~ "Endringene kasseres hvis du fortsetter."
 
 #~ msgid "Using the ncurses library\n"
 #~ msgstr "Bruker ncurses-biblioteket\n"

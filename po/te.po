@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-05 19:10+0300\n"
+"POT-Creation-Date: 2020-05-17 18:50+0300\n"
 "PO-Revision-Date: 2019-12-16 01:49+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Telugu (http://www.transifex.com/mc/mc/language/te/)\n"
@@ -1058,9 +1058,6 @@ msgstr ""
 msgid "Save As"
 msgstr ""
 
-msgid "Block is large, you may not be able to undo this action"
-msgstr ""
-
 msgid "Collect completions"
 msgstr ""
 
@@ -1255,7 +1252,7 @@ msgstr ""
 
 msgid ""
 "Current text was modified without a file save.\n"
-"Continue discards these changes"
+"Continue discards these changes."
 msgstr ""
 
 msgid "In se&lection"
@@ -1283,11 +1280,6 @@ msgid "Confirm replace"
 msgstr ""
 
 msgid "Cancel"
-msgstr ""
-
-msgid ""
-"Current text was modified without a file save.\n"
-"Continue discards these changes."
 msgstr ""
 
 msgid "NoName"
@@ -1735,7 +1727,7 @@ msgstr ""
 
 msgid ""
 "Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
+"the subshell cannot be toggled."
 msgstr ""
 
 msgid "Type 'exit' to return to the Midnight Commander"
@@ -1760,6 +1752,10 @@ msgid "other"
 msgstr ""
 
 msgid "Flag"
+msgstr ""
+
+#, c-format
+msgid "Permissions (octal): %o"
 msgstr ""
 
 msgid "Chown advanced command"

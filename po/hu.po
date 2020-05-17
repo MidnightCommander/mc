@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-05 19:10+0300\n"
+"POT-Creation-Date: 2020-05-17 18:50+0300\n"
 "PO-Revision-Date: 2019-12-16 01:49+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/mc/mc/language/hu/)\n"
@@ -1128,9 +1128,6 @@ msgstr "Sortörés formátum:"
 msgid "Save As"
 msgstr "Mentés másként"
 
-msgid "Block is large, you may not be able to undo this action"
-msgstr "Nagy blokk, a művelet nem biztos hogy visszavonható."
-
 msgid "Collect completions"
 msgstr ""
 
@@ -1329,9 +1326,9 @@ msgstr "Nyomjon meg egy billentyűt:"
 
 msgid ""
 "Current text was modified without a file save.\n"
-"Continue discards these changes"
+"Continue discards these changes."
 msgstr ""
-"A szöveg módosult a legutóbbi mentés óta.\n"
+"A szöveg módosult a legutóbbi mentés óta. \n"
 "Ha továbblép, ezek a változások elvesznek."
 
 msgid "In se&lection"
@@ -1360,13 +1357,6 @@ msgstr "Csere megerősítése"
 
 msgid "Cancel"
 msgstr "Mégsem"
-
-msgid ""
-"Current text was modified without a file save.\n"
-"Continue discards these changes."
-msgstr ""
-"A szöveg módosult a legutóbbi mentés óta. \n"
-"Ha továbblép, ezek a változások elvesznek."
 
 msgid "NoName"
 msgstr "Névtelen"
@@ -1819,9 +1809,10 @@ msgstr "Nem sikerült behozni \"%s\" helyi másolatát"
 msgid "The shell is already running a command"
 msgstr "A parancsértelmező már futtat egy parancsot."
 
+#, fuzzy
 msgid ""
 "Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
+"the subshell cannot be toggled."
 msgstr ""
 "Nem Xterm vagy Linux-konzol;\n"
 "a paneleket nem lehet kikapcsolni."
@@ -1849,6 +1840,10 @@ msgstr "Mások"
 
 msgid "Flag"
 msgstr "Jel"
+
+#, fuzzy, c-format
+msgid "Permissions (octal): %o"
+msgstr "Jogok (oktálisan):"
 
 msgid "Chown advanced command"
 msgstr "Chmod-Chown parancs"
@@ -4667,6 +4662,16 @@ msgstr "Folytatás az elejéről?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nem sikerült behozni /ftp://some.host/editme.txt helyi másolatát"
+
+#~ msgid "Block is large, you may not be able to undo this action"
+#~ msgstr "Nagy blokk, a művelet nem biztos hogy visszavonható."
+
+#~ msgid ""
+#~ "Current text was modified without a file save.\n"
+#~ "Continue discards these changes"
+#~ msgstr ""
+#~ "A szöveg módosult a legutóbbi mentés óta.\n"
+#~ "Ha továbblép, ezek a változások elvesznek."
 
 #~ msgid "Using the ncurses library\n"
 #~ msgstr "Az ncurses könyvtár használata\n"

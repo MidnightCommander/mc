@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-05 19:10+0300\n"
+"POT-Creation-Date: 2020-05-17 18:50+0300\n"
 "PO-Revision-Date: 2020-01-18 12:57+0000\n"
 "Last-Translator: Serdar Sağlam <teknomobil@msn.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/mc/mc/language/tr/)\n"
@@ -1134,9 +1134,6 @@ msgstr "Satır sonu şunla değiştiriliyor:"
 msgid "Save As"
 msgstr "Farklı kaydet..."
 
-msgid "Block is large, you may not be able to undo this action"
-msgstr "Blok çok büyük, bu eylem geri alınamayabilir"
-
 msgid "Collect completions"
 msgstr "Tamamlamaları topla"
 
@@ -1338,10 +1335,10 @@ msgstr "Bir tuşa basınız:"
 
 msgid ""
 "Current text was modified without a file save.\n"
-"Continue discards these changes"
+"Continue discards these changes."
 msgstr ""
 "Mevcut metin kaydedilmemiş değişiklikler içeriyor\n"
-"Bu değişiklikler yoksayılarak devam edilsin mi?"
+"Bu değişiklikler yoksayılarak devam edilsin mi?."
 
 msgid "In se&lection"
 msgstr "Seçi&li kısımda"
@@ -1369,13 +1366,6 @@ msgstr "Yer değişikliğini onaylat"
 
 msgid "Cancel"
 msgstr "Vazgeç"
-
-msgid ""
-"Current text was modified without a file save.\n"
-"Continue discards these changes."
-msgstr ""
-"Mevcut metin kaydedilmemiş değişiklikler içeriyor\n"
-"Bu değişiklikler yoksayılarak devam edilsin mi?."
 
 msgid "NoName"
 msgstr "İsimsiz"
@@ -1831,9 +1821,10 @@ msgstr "`%s'in yerel kopyası alınamadı"
 msgid "The shell is already running a command"
 msgstr "Kabukta halen bir komut etkin"
 
+#, fuzzy
 msgid ""
 "Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
+"the subshell cannot be toggled."
 msgstr ""
 "Bir xterm ya da Linux konsolu değil;\n"
 " Paneller değiştirilemez."
@@ -1861,6 +1852,10 @@ msgstr "diğer"
 
 msgid "Flag"
 msgstr "İm"
+
+#, fuzzy, c-format
+msgid "Permissions (octal): %o"
+msgstr "İzinler (Sekizlik):"
 
 msgid "Chown advanced command"
 msgstr "Dosya özellikleri"
@@ -4684,6 +4679,16 @@ msgstr "Başından devam edilsin mi?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr " /ftp://some.host/editme.txt 'in yerel kopyası alınamadı"
+
+#~ msgid "Block is large, you may not be able to undo this action"
+#~ msgstr "Blok çok büyük, bu eylem geri alınamayabilir"
+
+#~ msgid ""
+#~ "Current text was modified without a file save.\n"
+#~ "Continue discards these changes"
+#~ msgstr ""
+#~ "Mevcut metin kaydedilmemiş değişiklikler içeriyor\n"
+#~ "Bu değişiklikler yoksayılarak devam edilsin mi?"
 
 #~ msgid "Using the ncurses library\n"
 #~ msgstr "Ncurses kütüphanesini kullanılarak\n"

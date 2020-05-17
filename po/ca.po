@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-05 19:10+0300\n"
+"POT-Creation-Date: 2020-05-17 18:50+0300\n"
 "PO-Revision-Date: 2019-12-22 22:08+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/mc/mc/language/ca/)\n"
@@ -1149,9 +1149,6 @@ msgstr "Canvia els salts de línia a:"
 msgid "Save As"
 msgstr "Desa com a"
 
-msgid "Block is large, you may not be able to undo this action"
-msgstr "El bloc és gran, potser no pudreu desfer aquesta acció."
-
 msgid "Collect completions"
 msgstr "Recull completat"
 
@@ -1352,7 +1349,7 @@ msgstr "Premeu una tecla: "
 
 msgid ""
 "Current text was modified without a file save.\n"
-"Continue discards these changes"
+"Continue discards these changes."
 msgstr ""
 "El text actual ha estat modificat sense desar-lo a un fitxer.\n"
 "Continueu i es descartaran aquests canvis."
@@ -1383,13 +1380,6 @@ msgstr "Consigna la substitució"
 
 msgid "Cancel"
 msgstr "Cancel·la"
-
-msgid ""
-"Current text was modified without a file save.\n"
-"Continue discards these changes."
-msgstr ""
-"El text actual ha estat modificat sense desar-lo a un fitxer.\n"
-"Continueu i es descartaran aquests canvis."
 
 msgid "NoName"
 msgstr "Sense nom"
@@ -1843,9 +1833,10 @@ msgstr "No s'ha pogut obtenir una còpia local de %s"
 msgid "The shell is already running a command"
 msgstr "La shell ja està executant una ordre"
 
+#, fuzzy
 msgid ""
 "Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
+"the subshell cannot be toggled."
 msgstr ""
 "No feu servir ni xterm ni una consola Linux.\n"
 "No podreu alternar entre els plafons."
@@ -1873,6 +1864,10 @@ msgstr "altres"
 
 msgid "Flag"
 msgstr "Bandera"
+
+#, fuzzy, c-format
+msgid "Permissions (octal): %o"
+msgstr "Permisos (octal):"
 
 msgid "Chown advanced command"
 msgstr "Ordre del canvi avançat del propietari"
@@ -4709,6 +4704,16 @@ msgstr "Continuo des del començament?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "No s'ha pogut obtenir una còpia local de /ftp://algun.amfitrió/editam.txt"
+
+#~ msgid "Block is large, you may not be able to undo this action"
+#~ msgstr "El bloc és gran, potser no pudreu desfer aquesta acció."
+
+#~ msgid ""
+#~ "Current text was modified without a file save.\n"
+#~ "Continue discards these changes"
+#~ msgstr ""
+#~ "El text actual ha estat modificat sense desar-lo a un fitxer.\n"
+#~ "Continueu i es descartaran aquests canvis."
 
 #~ msgid "Using the ncurses library\n"
 #~ msgstr "Emprant la biblioteca «ncurses»\n"

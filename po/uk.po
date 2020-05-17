@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-05 19:10+0300\n"
+"POT-Creation-Date: 2020-05-17 18:50+0300\n"
 "PO-Revision-Date: 2019-12-16 01:49+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/mc/mc/language/uk/)\n"
@@ -1147,9 +1147,6 @@ msgstr "Замінити закінчення рядків на:"
 msgid "Save As"
 msgstr "Зберегти як"
 
-msgid "Block is large, you may not be able to undo this action"
-msgstr "Блок завеликий, імовірно, цю дію не можна буде повернути."
-
 msgid "Collect completions"
 msgstr "Зібрати доповнення"
 
@@ -1348,10 +1345,10 @@ msgstr "Натисніть будь-яку клавішу:"
 
 msgid ""
 "Current text was modified without a file save.\n"
-"Continue discards these changes"
+"Continue discards these changes."
 msgstr ""
-"Поточний текст змінено і не збережено.\n"
-"Продовження операції призведе до втрати змін"
+"Поточний текст змінено і не збережено. \n"
+"Продовження операції призведе до втрати змін."
 
 msgid "In se&lection"
 msgstr "У вид&іленні"
@@ -1379,13 +1376,6 @@ msgstr "Підтвердити заміну"
 
 msgid "Cancel"
 msgstr "Скасувати"
-
-msgid ""
-"Current text was modified without a file save.\n"
-"Continue discards these changes."
-msgstr ""
-"Поточний текст змінено і не збережено. \n"
-"Продовження операції призведе до втрати змін."
 
 msgid "NoName"
 msgstr "БезНазви"
@@ -1838,9 +1828,10 @@ msgstr "Не вдалося отримати локальну копію %s"
 msgid "The shell is already running a command"
 msgstr "Інтерпретатор вже виконує команду"
 
+#, fuzzy
 msgid ""
 "Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
+"the subshell cannot be toggled."
 msgstr ""
 "Це не xterm і не консоль Linux.\n"
 "Панелі не можна перемкнути. "
@@ -1868,6 +1859,10 @@ msgstr "інші"
 
 msgid "Flag"
 msgstr "Мітка"
+
+#, fuzzy, c-format
+msgid "Permissions (octal): %o"
+msgstr "Дозволи (вісімкові):"
 
 msgid "Chown advanced command"
 msgstr "Розширена зміна власника"
@@ -4702,6 +4697,16 @@ msgstr "Почати спочатку?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не вдалося отримати локальну копію /ftp://some.host/editme.txt"
+
+#~ msgid "Block is large, you may not be able to undo this action"
+#~ msgstr "Блок завеликий, імовірно, цю дію не можна буде повернути."
+
+#~ msgid ""
+#~ "Current text was modified without a file save.\n"
+#~ "Continue discards these changes"
+#~ msgstr ""
+#~ "Поточний текст змінено і не збережено.\n"
+#~ "Продовження операції призведе до втрати змін"
 
 #~ msgid "Using the ncurses library\n"
 #~ msgstr "Використання бібліотеки ncurses\n"

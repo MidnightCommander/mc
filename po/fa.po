@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-05 19:10+0300\n"
+"POT-Creation-Date: 2020-05-17 18:50+0300\n"
 "PO-Revision-Date: 2019-12-16 01:49+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Persian (http://www.transifex.com/mc/mc/language/fa/)\n"
@@ -1063,9 +1063,6 @@ msgstr ""
 msgid "Save As"
 msgstr "ذخیره به عنوان"
 
-msgid "Block is large, you may not be able to undo this action"
-msgstr ""
-
 msgid "Collect completions"
 msgstr ""
 
@@ -1260,7 +1257,7 @@ msgstr "کلیدی را فشار دهید"
 
 msgid ""
 "Current text was modified without a file save.\n"
-"Continue discards these changes"
+"Continue discards these changes."
 msgstr ""
 
 msgid "In se&lection"
@@ -1289,11 +1286,6 @@ msgstr ""
 
 msgid "Cancel"
 msgstr "لغو"
-
-msgid ""
-"Current text was modified without a file save.\n"
-"Continue discards these changes."
-msgstr ""
 
 msgid "NoName"
 msgstr ""
@@ -1740,7 +1732,7 @@ msgstr "شل در حال اجرای فرمانی دیگر است"
 
 msgid ""
 "Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
+"the subshell cannot be toggled."
 msgstr ""
 
 msgid "Type 'exit' to return to the Midnight Commander"
@@ -1766,6 +1758,10 @@ msgstr "دیگران"
 
 msgid "Flag"
 msgstr "پرچم"
+
+#, fuzzy, c-format
+msgid "Permissions (octal): %o"
+msgstr "اجازه"
 
 msgid "Chown advanced command"
 msgstr ""

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-05 19:10+0300\n"
+"POT-Creation-Date: 2020-05-17 18:50+0300\n"
 "PO-Revision-Date: 2019-12-16 01:49+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Japanese (http://www.transifex.com/mc/mc/language/ja/)\n"
@@ -1071,9 +1071,6 @@ msgstr ""
 msgid "Save As"
 msgstr "別名で保存"
 
-msgid "Block is large, you may not be able to undo this action"
-msgstr ""
-
 msgid "Collect completions"
 msgstr ""
 
@@ -1268,7 +1265,7 @@ msgstr "どれかキーを押してください:"
 
 msgid ""
 "Current text was modified without a file save.\n"
-"Continue discards these changes"
+"Continue discards these changes."
 msgstr ""
 
 msgid "In se&lection"
@@ -1297,11 +1294,6 @@ msgstr "置換の確認"
 
 msgid "Cancel"
 msgstr "キャンセル"
-
-msgid ""
-"Current text was modified without a file save.\n"
-"Continue discards these changes."
-msgstr ""
 
 msgid "NoName"
 msgstr ""
@@ -1750,7 +1742,7 @@ msgstr ""
 
 msgid ""
 "Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
+"the subshell cannot be toggled."
 msgstr ""
 
 msgid "Type 'exit' to return to the Midnight Commander"
@@ -1776,6 +1768,10 @@ msgstr "その他"
 
 msgid "Flag"
 msgstr "フラグ"
+
+#, fuzzy, c-format
+msgid "Permissions (octal): %o"
+msgstr "権限(8進数)"
 
 msgid "Chown advanced command"
 msgstr ""

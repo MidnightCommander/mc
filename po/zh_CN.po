@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-05 19:10+0300\n"
+"POT-Creation-Date: 2020-05-17 18:50+0300\n"
 "PO-Revision-Date: 2019-12-16 01:49+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/mc/mc/language/"
@@ -1141,9 +1141,6 @@ msgstr "更改换行符为: "
 msgid "Save As"
 msgstr "另存为"
 
-msgid "Block is large, you may not be able to undo this action"
-msgstr "块过大，您可能无法撤消这个操作"
-
 msgid "Collect completions"
 msgstr "收集补全"
 
@@ -1342,10 +1339,10 @@ msgstr "按下任意键: "
 
 msgid ""
 "Current text was modified without a file save.\n"
-"Continue discards these changes"
+"Continue discards these changes."
 msgstr ""
-"当前文本被修改但没有保存文件。\n"
-"选择继续将丢失这些修改"
+"当前文字被修改但没有保存。\n"
+"选择继续将丢失这些修改。"
 
 msgid "In se&lection"
 msgstr "在选择区域(&L)"
@@ -1373,13 +1370,6 @@ msgstr "确认替换"
 
 msgid "Cancel"
 msgstr "取消"
-
-msgid ""
-"Current text was modified without a file save.\n"
-"Continue discards these changes."
-msgstr ""
-"当前文字被修改但没有保存。\n"
-"选择继续将丢失这些修改。"
 
 msgid "NoName"
 msgstr "未命名"
@@ -1832,9 +1822,10 @@ msgstr "无法获取 %s 的本地副本"
 msgid "The shell is already running a command"
 msgstr "Shell 正在运行一个命令"
 
+#, fuzzy
 msgid ""
 "Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
+"the subshell cannot be toggled."
 msgstr ""
 "不是一个 xterm 或 Linux 控制台；\n"
 "无法切换面板。"
@@ -1862,6 +1853,10 @@ msgstr "其它"
 
 msgid "Flag"
 msgstr "标志"
+
+#, fuzzy, c-format
+msgid "Permissions (octal): %o"
+msgstr "权限(8进制): "
 
 msgid "Chown advanced command"
 msgstr "Chown 高级命令"
@@ -4679,6 +4674,16 @@ msgstr "从头继续搜索?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "无法获取 /ftp://some.host/editme.txt 的本地副本"
+
+#~ msgid "Block is large, you may not be able to undo this action"
+#~ msgstr "块过大，您可能无法撤消这个操作"
+
+#~ msgid ""
+#~ "Current text was modified without a file save.\n"
+#~ "Continue discards these changes"
+#~ msgstr ""
+#~ "当前文本被修改但没有保存文件。\n"
+#~ "选择继续将丢失这些修改"
 
 #~ msgid "Using the ncurses library\n"
 #~ msgstr "使用 ncurses 库\n"

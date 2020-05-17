@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-05 19:10+0300\n"
+"POT-Creation-Date: 2020-05-17 18:50+0300\n"
 "PO-Revision-Date: 2019-12-16 01:49+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/mc/mc/language/"
@@ -1104,9 +1104,6 @@ msgstr "Alterar término de linhas para:"
 msgid "Save As"
 msgstr "Salvar Como"
 
-msgid "Block is large, you may not be able to undo this action"
-msgstr "O bloco é grande, você pode não ser capaz de desfazer esta ação"
-
 msgid "Collect completions"
 msgstr ""
 
@@ -1304,10 +1301,8 @@ msgstr "Pressione qualquer tecla:"
 
 msgid ""
 "Current text was modified without a file save.\n"
-"Continue discards these changes"
+"Continue discards these changes."
 msgstr ""
-"O texto atual foi modificado sem um ter salvado em arquivo.\n"
-"Continuar o descarte destas alterações"
 
 msgid "In se&lection"
 msgstr "Na se&leção"
@@ -1335,11 +1330,6 @@ msgstr "Confirmar substituição"
 
 msgid "Cancel"
 msgstr "Cancelar"
-
-msgid ""
-"Current text was modified without a file save.\n"
-"Continue discards these changes."
-msgstr ""
 
 msgid "NoName"
 msgstr "SemNome"
@@ -1790,9 +1780,10 @@ msgstr "Não foi possível adquirir uma cópia local de %s"
 msgid "The shell is already running a command"
 msgstr "A shell já está executando um comando"
 
+#, fuzzy
 msgid ""
 "Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
+"the subshell cannot be toggled."
 msgstr ""
 "Não é um xterm nem console linux;\n"
 "Os paines não podem ser ativados."
@@ -1820,6 +1811,10 @@ msgstr "outro"
 
 msgid "Flag"
 msgstr "Parâmetro"
+
+#, fuzzy, c-format
+msgid "Permissions (octal): %o"
+msgstr "Permissão"
 
 msgid "Chown advanced command"
 msgstr "Comando avançado de chown"
@@ -4584,3 +4579,13 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Block is large, you may not be able to undo this action"
+#~ msgstr "O bloco é grande, você pode não ser capaz de desfazer esta ação"
+
+#~ msgid ""
+#~ "Current text was modified without a file save.\n"
+#~ "Continue discards these changes"
+#~ msgstr ""
+#~ "O texto atual foi modificado sem um ter salvado em arquivo.\n"
+#~ "Continuar o descarte destas alterações"

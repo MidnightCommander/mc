@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-05 19:10+0300\n"
+"POT-Creation-Date: 2020-05-17 18:50+0300\n"
 "PO-Revision-Date: 2019-12-16 01:49+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/mc/mc/language/nl/)\n"
@@ -1139,9 +1139,6 @@ msgstr "Verander regeleindes naar:"
 msgid "Save As"
 msgstr "Opslaan als"
 
-msgid "Block is large, you may not be able to undo this action"
-msgstr "Groot blok, wellicht kunt u deze actie niet ongedaan maken..."
-
 msgid "Collect completions"
 msgstr "Verzamel uitkomsten"
 
@@ -1338,9 +1335,9 @@ msgstr "Druk op een toets:"
 
 msgid ""
 "Current text was modified without a file save.\n"
-"Continue discards these changes"
+"Continue discards these changes."
 msgstr ""
-"De huidige tekst is gewijzigd zonder te zijn opgeslagen.\n"
+"Deze tekst is veranderd zonder te zijn opgeslagen.\n"
 "Doorgaan gooit alle wijzigingen weg."
 
 msgid "In se&lection"
@@ -1369,13 +1366,6 @@ msgstr "Vervangen bevestigen"
 
 msgid "Cancel"
 msgstr "Annuleren"
-
-msgid ""
-"Current text was modified without a file save.\n"
-"Continue discards these changes."
-msgstr ""
-"Deze tekst is veranderd zonder te zijn opgeslagen.\n"
-"Doorgaan gooit alle wijzigingen weg."
 
 msgid "NoName"
 msgstr "NoName"
@@ -1828,9 +1818,10 @@ msgstr "Er kan geen lokale kopie van %s worden opgehaald"
 msgid "The shell is already running a command"
 msgstr "De shell voert al een opdracht uit"
 
+#, fuzzy
 msgid ""
 "Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
+"the subshell cannot be toggled."
 msgstr ""
 "Geen xterm en geen Linux console; \n"
 "de vensters kunnen niet geschakeld worden."
@@ -1858,6 +1849,10 @@ msgstr "anderen"
 
 msgid "Flag"
 msgstr "Vlag"
+
+#, fuzzy, c-format
+msgid "Permissions (octal): %o"
+msgstr "Toegangsrechten (octaal)"
 
 msgid "Chown advanced command"
 msgstr "Uitgebreide opdracht 'chown'"
@@ -4676,6 +4671,16 @@ msgstr "Doorgaan vanaf het begin?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan geen lokale versie van /ftp://some.host/editme.txt ophalen"
+
+#~ msgid "Block is large, you may not be able to undo this action"
+#~ msgstr "Groot blok, wellicht kunt u deze actie niet ongedaan maken..."
+
+#~ msgid ""
+#~ "Current text was modified without a file save.\n"
+#~ "Continue discards these changes"
+#~ msgstr ""
+#~ "De huidige tekst is gewijzigd zonder te zijn opgeslagen.\n"
+#~ "Doorgaan gooit alle wijzigingen weg."
 
 #~ msgid "Using the ncurses library\n"
 #~ msgstr "Gebruiken van ncurses bibliotheek\n"
