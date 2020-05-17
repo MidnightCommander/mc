@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-05 19:10+0300\n"
+"POT-Creation-Date: 2020-05-17 18:50+0300\n"
 "PO-Revision-Date: 2019-12-16 16:22+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/mc/mc/language/pl/)\n"
@@ -1145,9 +1145,6 @@ msgstr "Zmiana łamania wierszy na:"
 msgid "Save As"
 msgstr "Zapisz jako"
 
-msgid "Block is large, you may not be able to undo this action"
-msgstr "Z powodu wielkości bloku cofnięcie działania może być niemożliwe"
-
 msgid "Collect completions"
 msgstr "Zbierz uzupełnianie"
 
@@ -1348,7 +1345,7 @@ msgstr "Proszę nacisnąć dowolny klawisz:"
 
 msgid ""
 "Current text was modified without a file save.\n"
-"Continue discards these changes"
+"Continue discards these changes."
 msgstr ""
 "Bieżący tekst zmodyfikowano bez zapisania pliku.\n"
 "Kontynuacja spowoduje ich odrzucenie."
@@ -1379,13 +1376,6 @@ msgstr "Potwierdź zastąpienie"
 
 msgid "Cancel"
 msgstr "Anuluj"
-
-msgid ""
-"Current text was modified without a file save.\n"
-"Continue discards these changes."
-msgstr ""
-"Bieżący tekst zmodyfikowano bez zapisania pliku.\n"
-"Kontynuacja spowoduje ich odrzucenie."
 
 msgid "NoName"
 msgstr "BezNazwy"
@@ -1838,9 +1828,10 @@ msgstr "Nie można pobrać lokalnej kopii %s"
 msgid "The shell is already running a command"
 msgstr "Powłoka wykonuje już polecenie"
 
+#, fuzzy
 msgid ""
 "Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
+"the subshell cannot be toggled."
 msgstr ""
 "Panele mogą być przełączane tylko\n"
 "na konsoli xterm lub Linux."
@@ -1868,6 +1859,10 @@ msgstr "inni"
 
 msgid "Flag"
 msgstr "Flaga"
+
+#, fuzzy, c-format
+msgid "Permissions (octal): %o"
+msgstr "Uprawnienia (ósemkowe):"
 
 msgid "Chown advanced command"
 msgstr "Zaawansowane polecenie chown"
@@ -4705,6 +4700,16 @@ msgstr "Kontynuować od początku?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Nie można pobrać lokalnej kopii /ftp://jakiś.komputer/modyfikuj_mnie.txt"
+
+#~ msgid "Block is large, you may not be able to undo this action"
+#~ msgstr "Z powodu wielkości bloku cofnięcie działania może być niemożliwe"
+
+#~ msgid ""
+#~ "Current text was modified without a file save.\n"
+#~ "Continue discards these changes"
+#~ msgstr ""
+#~ "Bieżący tekst zmodyfikowano bez zapisania pliku.\n"
+#~ "Kontynuacja spowoduje ich odrzucenie."
 
 #~ msgid "Using the ncurses library\n"
 #~ msgstr "Używanie biblioteki ncurses\n"

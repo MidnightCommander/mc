@@ -20,6 +20,7 @@ extern GArray *dialog_keymap;
 extern GArray *menu_keymap;
 extern GArray *input_keymap;
 extern GArray *listbox_keymap;
+extern GArray *radio_keymap;
 extern GArray *tree_keymap;
 extern GArray *help_keymap;
 #ifdef ENABLE_EXT2FS_ATTR

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-05 19:10+0300\n"
+"POT-Creation-Date: 2020-05-17 18:50+0300\n"
 "PO-Revision-Date: 2019-12-16 01:49+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Serbian (http://www.transifex.com/mc/mc/language/sr/)\n"
@@ -1129,9 +1129,6 @@ msgstr "Измени преломе редова на:"
 msgid "Save As"
 msgstr "Сачувај као"
 
-msgid "Block is large, you may not be able to undo this action"
-msgstr "Блок је повелик, нећете моћи да поништите ову радњу"
-
 msgid "Collect completions"
 msgstr "Сакупи довршавања"
 
@@ -1330,10 +1327,10 @@ msgstr "Притисните неки тастер:"
 
 msgid ""
 "Current text was modified without a file save.\n"
-"Continue discards these changes"
+"Continue discards these changes."
 msgstr ""
 "Текући текст је измењен без чувања датотеке.\n"
-"Настављање ће одбацити ове измене"
+"Настављање ће одбацити ове измене."
 
 msgid "In se&lection"
 msgstr "У &избору"
@@ -1361,13 +1358,6 @@ msgstr "Потврди замену"
 
 msgid "Cancel"
 msgstr "Откажи"
-
-msgid ""
-"Current text was modified without a file save.\n"
-"Continue discards these changes."
-msgstr ""
-"Текући текст је измењен без чувања датотеке.\n"
-"Настављање ће одбацити ове измене."
 
 msgid "NoName"
 msgstr "Без назива"
@@ -1820,9 +1810,10 @@ msgstr "Не могу да довучем месни умножак „%s“"
 msgid "The shell is already running a command"
 msgstr "Шкољка већ извршава наредбу"
 
+#, fuzzy
 msgid ""
 "Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
+"the subshell cannot be toggled."
 msgstr ""
 "Није конзоа хтерминала или Линукса;\n"
 "панели не могу бити промењени."
@@ -1850,6 +1841,10 @@ msgstr "други"
 
 msgid "Flag"
 msgstr "Ознака"
+
+#, fuzzy, c-format
+msgid "Permissions (octal): %o"
+msgstr "Овлашћења (октално):"
 
 msgid "Chown advanced command"
 msgstr "Напредна наредба промене власника"
@@ -4670,6 +4665,16 @@ msgstr "Да наставим са почетка?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не могу да довучем месни примерак „/ftp://some.host/editme.txt“"
+
+#~ msgid "Block is large, you may not be able to undo this action"
+#~ msgstr "Блок је повелик, нећете моћи да поништите ову радњу"
+
+#~ msgid ""
+#~ "Current text was modified without a file save.\n"
+#~ "Continue discards these changes"
+#~ msgstr ""
+#~ "Текући текст је измењен без чувања датотеке.\n"
+#~ "Настављање ће одбацити ове измене"
 
 #~ msgid "Using the ncurses library\n"
 #~ msgstr "Користим библиотеку „ncurses“\n"

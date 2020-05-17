@@ -132,10 +132,13 @@ static WGroupbox *file_gb;
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-chmod_i18n (void)
+chmod_init (void)
 {
     static gboolean i18n = FALSE;
     int i, len;
+
+    for (i = 0; i < BUTTONS_PERM; i++)
+        check_perm[i].selected = FALSE;
 
     if (i18n)
         return;
@@ -178,11 +181,8 @@ chmod_i18n (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-chmod_toggle_select (WDialog * h, int Id)
+chmod_draw_select (const WDialog * h, int Id)
 {
-    tty_setcolor (COLOR_NORMAL);
-    check_perm[Id].selected = !check_perm[Id].selected;
-
     widget_gotoyx (h, PY + Id + 1, PX + 1);
     tty_print_char (check_perm[Id].selected ? '*' : ' ');
     widget_gotoyx (h, PY + Id + 1, PX + 3);
@@ -191,12 +191,28 @@ chmod_toggle_select (WDialog * h, int Id)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-chmod_refresh (void)
+chmod_toggle_select (const WDialog * h, int Id)
 {
-    int y = WIDGET (file_gb)->y + 1;
-    int x = WIDGET (file_gb)->x + 2;
+    check_perm[Id].selected = !check_perm[Id].selected;
+    tty_setcolor (COLOR_NORMAL);
+    chmod_draw_select (h, Id);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+chmod_refresh (const WDialog * h)
+{
+    int i;
+    int y, x;
 
     tty_setcolor (COLOR_NORMAL);
+
+    for (i = 0; i < BUTTONS_PERM; i++)
+        chmod_draw_select (h, i);
+
+    y = WIDGET (file_gb)->y + 1;
+    x = WIDGET (file_gb)->x + 2;
 
     tty_gotoyx (y, x);
     tty_print_string (file_info_labels[0]);
@@ -217,7 +233,7 @@ chmod_bg_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
     {
     case MSG_DRAW:
         frame_callback (w, NULL, MSG_DRAW, 0, NULL);
-        chmod_refresh ();
+        chmod_refresh (CONST_DIALOG (w->owner));
         return MSG_HANDLED;
 
     default:
@@ -247,11 +263,8 @@ chmod_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
 
             if (i < BUTTONS_PERM)
             {
-                char buffer[BUF_TINY];
-
                 ch_mode ^= check_perm[i].mode;
-                g_snprintf (buffer, sizeof (buffer), "%o", (unsigned int) ch_mode);
-                label_set_text (statl, buffer);
+                label_set_textv (statl, "%o", (unsigned int) ch_mode);
                 chmod_toggle_select (h, i);
                 mode_change = TRUE;
                 return MSG_HANDLED;
@@ -289,7 +302,7 @@ chmod_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
 /* --------------------------------------------------------------------------------------------- */
 
 static WDialog *
-chmod_init (const char *fname, const struct stat *sf_stat)
+chmod_dlg_create (const char *fname, const struct stat *sf_stat)
 {
     gboolean single_set;
     WDialog *ch_dlg;
@@ -518,7 +531,7 @@ chmod_cmd (void)
     gboolean need_update;
     gboolean end_chmod;
 
-    chmod_i18n ();
+    chmod_init ();
 
     current_file = 0;
     ignore_all = FALSE;
@@ -551,8 +564,7 @@ chmod_cmd (void)
 
         ch_mode = sf_stat.st_mode;
 
-        ch_dlg = chmod_init (fname, &sf_stat);
-
+        ch_dlg = chmod_dlg_create (fname, &sf_stat);
         result = dlg_run (ch_dlg);
 
         switch (result)

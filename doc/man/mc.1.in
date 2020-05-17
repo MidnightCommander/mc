@@ -239,7 +239,7 @@ Thus C\-f would be: hold the Control key and type f.
 .B Alt\-<chr>
 means hold the Meta or Alt key down while typing <chr>.
 If there is no Meta or Alt key, type
-.IR ESC ,
+.IR Esc ,
 release it, then type the character <chr>.
 .TP
 .B S\-<chr>
@@ -457,8 +457,8 @@ panel.
 to tag files you may use the Insert key (the kich1 terminfo sequence).
 To untag files, just retag a tagged file.
 .TP
-.B M\-e
-to change charset of panel you may use M\-e (Alt\-e).
+.B Alt\-e
+to change charset of panel you may use Alt\-e (M\-e).
 Recoding is made from selected codepage into system codepage. To
 cancel the recoding, select "No translation" in the dialog of encodings.
 .TP
@@ -549,7 +549,7 @@ moves to the next directory in the history, equivalent to clicking the
 .I >
 with the mouse.
 .TP
-.B Alt\-Shift\-h, Alt\-H
+.B Alt\-S\-h, Alt\-H
 displays the directory history, equivalent to depressing the 'v' with
 the mouse.
 .\"NODE "  Quick search"
@@ -589,7 +589,7 @@ copy the currently selected file name to the command line.
 .B C\-Enter
 same a Alt\-Enter.  May not work on remote systems and some terminals.
 .TP
-.B C\-Shift\-Enter
+.B C\-S\-Enter
 copy the full path name of the currently selected file to the command
 line.  May not work on remote systems and some terminals.
 .TP
@@ -961,7 +961,7 @@ Midnight Commander uses the F1 \- F10 keys as keyboard shortcuts
 for commands appearing in the file menu.  The escape sequences for the
 function keys are terminfo capabilities kf1 trough kf10.  On terminals
 without function key support, you can achieve the same functionality by
-pressing the ESC key and then a number in the range 1 through 9 and 0
+pressing the Esc key and then a number in the range 1 through 9 and 0
 (corresponding to F1 to F9 and F10 respectively).
 .PP
 The File menu has the following commands (keyboard shortcuts in parentheses):
@@ -1047,7 +1047,7 @@ the tagged files, if there is at least one file tagged) to the
 directory/filename you specify in the input dialog. The destination
 defaults to the directory in the non\-selected panel. Space for destination
 file may be preallocated relative to preallocate_space configure option.
-During this process, you can press C\-c or ESC to abort the operation.
+During this process, you can press C\-c or Esc to abort the operation.
 For details about source mask (which will be usually either * or ^\\(.*\\)$
 depending on setting of Use shell patterns) and possible wildcards in the
 destination see
@@ -1146,7 +1146,7 @@ Pop up an input dialog and creates the directory specified.
 .PP
 Delete the currently selected file or the tagged files in the
 currently selected panel. During the process, you can press C\-c or
-ESC to abort the operation.
+Esc to abort the operation.
 .PP
 .B Quick cd (Alt\-c)
 Use the
@@ -1183,10 +1183,10 @@ Used to unselect a group of files. This is the opposite of the
 .I "Select group"
 command.
 .PP
-.B Quit (F10, Shift\-F10)
+.B Quit (F10, S\-F10)
 .PP
-Terminate Midnight Commander. Shift\-F10 is used when you want to
-quit and you are using the shell wrapper.  Shift\-F10 will not take you
+Terminate Midnight Commander. S\-F10 is used when you want to
+quit and you are using the shell wrapper.  S\-F10 will not take you
 to the last directory you visited with Midnight Commander, instead
 it will stay at the directory where you started Midnight Commander.
 .\"NODE "    Quick cd"
@@ -1286,28 +1286,28 @@ directory which you want to see is missing, move to its parent
 directory and press C\-r (or F2).
 .PP
 You can use the following keys:
-.PP
+.TP
 .\"LINK2"
 General movement keys
 .\"General Movement Keys"
 are accepted.
-.PP
+.TP
 .B Enter.
 In the directory tree, exits the directory tree and changes to this
 directory in the current panel. In the tree view, changes to this
 directory in the other panel and stays in tree view mode in the
 current panel.
-.PP
+.TP
 .B C\-r, F2 (Rescan).
 Rescan this directory. Use this when the tree figure is out of date:
 it is missing subdirectories or shows some subdirectories which don't
 exist any more.
-.PP
+.TP
 .B F3 (Forget).
 Delete this directory from the tree figure. Use this to remove clutter
 from the figure. If you want the directory back to the tree figure
 press F2 in its parent directory.
-.PP
+.TP
 .B F4 (Static/Dynamic).
 Toggle between the dynamic navigation mode (default) and the static
 navigation mode.
@@ -1320,26 +1320,26 @@ select a sibling directory, the Left key to move to the parent
 directory, and the Right key to move to a child directory. Only the
 parent, sibling and children directories are shown, others are left
 out. The tree figure changes dynamically as you traverse.
-.PP
+.TP
 .B F5 (Copy).
 Copy the directory.
-.PP
+.TP
 .B F6 (RenMov).
 Move the directory.
-.PP
+.TP
 .B F7 (Mkdir).
 Make a new directory below this directory.
-.PP
+.TP
 .B F8 (Delete).
 Delete this directory from the file system.
-.PP
+.TP
 .B C\-s, Alt\-s.
 Search the next directory matching the search string. If there is
 no such directory these keys will move one line down.
-.PP
+.TP
 .B C\-h, Backspace.
 Delete the last character of the search string.
-.PP
+.TP
 .B Any other character.
 Add the character to the search string and move to the next directory
 which starts with these characters. In the tree view you must first
@@ -1348,10 +1348,10 @@ in the mini status line.
 .PP
 The following actions are available only in the directory tree. They
 aren't supported in the tree view.
-.PP
+.TP
 .B F1 (Help).
 Invoke the help viewer and show this section.
-.PP
+.TP
 .B Esc, F10.
 Exit the directory tree. Do not change the directory.
 .PP
@@ -1805,20 +1805,20 @@ Disabled by default.
 .PP
 .B Esc key mode.
 .PP
-By default, Midnight Commander treats the ESC key as a key prefix.
+By default, Midnight Commander treats the Esc key as a key prefix.
 Therefore, you should press Esc code twice to exit a dialog. But there is
-a possibility to use a single press of ESC key for that action.
+a possibility to use a single press of Esc key for that action.
 .PP
 .I Single press.
-By default this option is disabled. If you'll enable it, the ESC key
+By default this option is disabled. If you'll enable it, the Esc key
 will act as a prefix key for set up time interval (see
 .I Timeout
-option below), and if no extra keys have arrived, then the ESC key
-is interpreted as a cancel key (ESC ESC).
+option below), and if no extra keys have arrived, then the Esc key
+is interpreted as a cancel key (Esc Esc).
 .PP
 .I Timeout.
 This options is used to setup the time interval (in microseconds)
-for single press of ESC key. By default, this interval is one second
+for single press of Esc key. By default, this interval is one second
 (1000000 microseconds). Also the timeout can be set via KEYBOARD_KEY_TIMEOUT_US
 environment variable (also in microseconds), which has higher priority
 than Timeout option value.
@@ -2428,7 +2428,7 @@ The % character
 .I %{some text}
 Prompt for the substitution. An input box is shown and the text inside
 the braces is used as a prompt. The macro is substituted by the text
-typed by the user. The user can press ESC or F10 to cancel. This macro
+typed by the user. The user can press Esc or F10 to cancel. This macro
 doesn't work on the command line yet.
 .TP
 .I %var{ENV:default}
@@ -2803,94 +2803,94 @@ copy from popular version control systems (GIT, Subversion, etc).
 .PP
 Following shortcuts are available in internal diff viewer of Midnight
 Commander.
-.PP
+.TP
 .B F1
 Invoke the built\-in hypertext help viewer.
-.PP
+.TP
 .B F2
 Save modified files.
-.PP
+.TP
 .B F4
 Edit file of the left panel in the internal editor.
-.PP
+.TP
 .B F14
 Edit file of the right panel in the internal editor.
-.PP
+.TP
 .B F5
 Merge the current hunk. Only the current hunk will be merged.
-.PP
+.TP
 .B F7
 Start search.
-.PP
+.TP
 .B F17
 Continue search.
-.PP
+.TP
 .B F10, Esc, q
 Exit from diff viewer.
-.PP
+.TP
 .B Alt\-s, s
 Toggle show of hunk status.
-.PP
+.TP
 .B Alt\-n, l
 Toggle show of line numbers.
-.PP
+.TP
 .B f
 Maximize left panel.
-.PP
+.TP
 .B =
 Make panels equal in width.
-.PP
+.TP
 .B >
 Reduce the size of the right panel.
-.PP
+.TP
 .B <
 Reduce the size of the left panel.
-.PP
+.TP
 .B c
 Toggle show of trailing carriage return (CR) symbol as ^M.
-.PP
+.TP
 .B 2, 3, 4, 8
 Set tabulation size
-.PP
+.TP
 .B C\-u
 Swap contents of diff panels.
-.PP
+.TP
 .B C\-r
 Refresh the screen.
-.PP
+.TP
 .B C\-o
 Switch to the subshell and show the command screen.
-.PP
+.TP
 .B Enter, Space, n
 Find next diff hunk.
-.PP
+.TP
 .B Backspace, p
 Find previous diff hunk.
-.PP
+.TP
 .B g
 Go to line.
-.PP
+.TP
 .B Down
 Scroll one line forward.
-.PP
+.TP
 .B Up
 Scroll one line backward.
-.PP
+.TP
 .B PageUp
 Move one page up.
-.PP
+.TP
 .B PageDown
 Mves one page down.
-.PP
+.TP
 .B Home, A1
 Moves to the line beginning.
-.PP
+.TP
 .B End
 Moves to the line end.
-.PP
+.TP
 .B C\-Home
 Move to the file beginning.
-.PP
+.TP
 .B C\-End, C1
 Move to the file end.
 .\"NODE "Internal File Viewer"
@@ -2920,87 +2920,87 @@ number.
 .PP
 Here is a listing of the actions associated with each key that the
 Midnight Commander handles in the internal file viewer.
-.PP
+.TP
 .B F1
 Invoke the built\-in hypertext help viewer.
-.PP
+.TP
 .B F2
 Toggle the wrap mode.
-.PP
+.TP
 .B F4
 Toggle the hex mode.
-.PP
+.TP
 .B F5
 Goto. You can specify a line number, offset or percentage of file size
 of position that you want to view.
-.PP
+.TP
 .B F7, /, ?
 Start search. These keys call the dialog window that allows you to set up
 the search options. If key is ? the "Backwards" option is on.
-.PP
+.TP
 .B C\-s
 Continue forward search.
-.PP
+.TP
 .B C\-r
 Continue reverse search.
-.PP
+.TP
 .B F17, n
 Continue search in the chosen direction.
-.PP
+.TP
 .B N
 Temporary change the search direction: backwards if forward search is chosen,
 and vice versa.
-.PP
+.TP
 .B F8
 Toggle Raw/Parsed mode: This will show the file as found on disk or if
 a processing filter has been specified in the mc.ext file, then the
 output from the filter. Current mode is always the other than written
 on the button label, since on the button is the mode which you enter
 by that key.
-.PP
+.TP
 .B F9
 Toggle the format/unformat mode: when format mode is on the viewer
 will interpret some string sequences to show bold and underline with
 different colors. Also, on button label is the other mode than current.
-.PP
+.TP
 .B F10, Esc.
 Exit the internal file viewer.
-.PP
-.B next\-page, space, C\-v.
+.TP
+.B PageDown, space, C\-v.
 Scroll one page forward.
-.PP
-.B prev\-page, Alt\-v, C\-b, Backspace.
+.TP
+.B PageUp, Alt\-v, C\-b, Backspace.
 Scroll one page backward.
-.PP
-.B down\-key
+.TP
+.B Down
 Scroll one line forward.
-.PP
-.B up\-key
+.TP
+.B Up
 Scroll one line backward.
-.PP
+.TP
 .B C\-l
 Refresh the screen.
-.PP
+.TP
 .B C\-o
 Switch to the subshell and show the command screen.
-.PP
+.TP
 .B "[n] m"
 Set the mark n.
-.PP
+.TP
 .B "[n] r"
 Jump to the mark n.
-.PP
+.TP
 .B C\-f
 Jump to the next file.
-.PP
+.TP
 .B C\-b
 Jump to the previous file.
-.PP
+.TP
 .B Alt\-r
 Toggle the ruler.
-.PP
+.TP
 .B Alt\-e
-to change charset of displayed text may use M\-e (Alt\-e).
+to change charset of displayed text may use Alt\-e (M\-e).
 Recoding is made from selected codepage into system codepage. To
 cancel the recoding you may select "<No translation>" in charset
 selection dialog.
@@ -3023,7 +3023,7 @@ option is set in the initialization file.
 .PP
 The features it presently supports are: block copy, move, delete, cut,
 paste; key for key undo; pull\-down menus; file insertion; macro
-commands; regular expression search and replace; shift\-arrow text highlighting
+commands; regular expression search and replace; S\-arrow text highlighting
 (if supported by the terminal); insert\-overwrite toggle; word wrap;
 autoindent; tunable tab size; syntax highlighting for various file
 types; and an option to pipe text blocks through shell commands like
@@ -3038,30 +3038,30 @@ Options of editor in ini\-file
 The editor is very easy to use and requires no tutoring. To see what
 keys do what, just consult the appropriate pull\-down menu. Other keys
 are: Shift movement keys do text highlighting.
-.B Ctrl\-Ins
+.B C\-Ins
 copies to the file
 .B mcedit.clip
 and
-.B Shift\-Ins
+.B S\-Ins
 pastes from mcedit.clip.
-.B Shift\-Del
+.B S\-Del
 cuts to
 .BR mcedit.clip ,
 and
-.B Ctrl\-Del
+.B C\-Del
 deletes highlighted text. Mouse highlighting also works, and you
 can override the mouse as usual by holding down the shift key
 while dragging the mouse to let normal terminal mouse highlighting
 work.
 .PP
 To define a macro, press
-.B Ctrl\-R
+.B C\-R
 and then type out the key
 strokes you want to be executed. Press
-.B Ctrl\-R
+.B C\-R
 again when finished. You can then assign the macro to any key you
 like by pressing that key. The macro is executed when you press
-.B Ctrl\-A
+.B C\-A
 and then the assigned key. The macro is also executed if
 you press Meta, Ctrl, or Esc and the assigned key, provided that the
 key is not used for any other function. Once defined, the macro
@@ -3070,16 +3070,13 @@ commands go into the file
 You can delete a macro by deleting the
 appropriate line in this file.
 .PP
-To change charset of displayed text may use M\-e (Alt\-e).
+To change charset of displayed text may use Alt\-e (M\-e).
 Recoding is made from selected codepage into system codepage. To
 cancel the recoding you may select "<No translation>" in charset
 selection dialog.
 .PP
 .B F19
-will format the currently highlighted block (plain text or
-.B C
-or
-.B C++
+will format the currently highlighted block (plain text or C or C++
 code or another). This is controlled by the
 file
 .B %prefix%/share/mc/edit.indent.rc
@@ -3170,11 +3167,9 @@ is disabled, the dialog pops up only if you press
 .B Alt\-Tab
 for the second time, for the first time MC just beeps.
 .PP
-Apply escaping of
-.BR ? ", " * " and " &
-symbols (as \fB\\?\fR, \fB\\*\fR, \fB\\&\fR )
-in filenames to disallow use them as metasymbols in regular expressions
-when substitution is performed in the input line.
+Apply escaping of \fB?\fR, \fB*\fR, and \fB&\fR symbols (as \fB\\?\fR, \fB\\*\fR,
+and \fB\\&\fR) in filenames to disallow use them as metasymbols in regular
+expressions when substitution is performed in the input line.
 
 .\"NODE "Virtual File System"
 .SH "Virtual File System"
@@ -4125,7 +4120,7 @@ command line is not empty.
 .TP
 .I alternate_plus_minus
 If true, use '+', '\-', '\\' and '*' keys normally. For select/unselect,
-use 'M\-+', 'M\--' and 'M\-*'.
+use 'Alt\-+', 'Alt\--' and 'Alt\-*'.
 .TP
 .I show_output_starts_shell
 This variable only works if you are not using the subshell support.
@@ -4289,7 +4284,7 @@ For example:
 
 .PP
 This means that ctrl+alt+left sends a \\e[[1;6D escape sequence
-and therefore Midnight Commander interprets "\\e[[1;6D" as Ctrl\-Alt\-Left.
+and therefore Midnight Commander interprets "\\e[[1;6D" as C\-Alt\-Left.
 
 .PP
 The

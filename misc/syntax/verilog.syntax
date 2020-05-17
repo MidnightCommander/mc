@@ -10,34 +10,34 @@ context default
 
 
 #Preprocessor keywords
-    keyword  whole  `resetall brightred/
-    keyword  whole  `define brightred/
-    keyword  whole  `timescale brightred/
-    keyword  whole  `ifdef brightred/
-    keyword  whole  `else brightred/
-    keyword  whole  `endif brightred/
-    keyword  whole  `include brightred/
-    keyword  whole  `signed brightred/
-    keyword  whole  `unsigned brightred/
-    keyword  whole  `celldefine brightred/
-    keyword  whole  `endcelldefine brightred/
-    keyword  whole  `default_nettype brightred/
-    keyword  whole  `unconnected_drive brightred/
-    keyword  whole  `nounconnected_drive brightred/
     keyword  whole  `accelerate brightred/
-    keyword  whole  `noaccelerate brightred/
-    keyword  whole  `protect brightred/
+    keyword  whole  `autoexpand_vectornets brightred/
+    keyword  whole  `celldefine brightred/
+    keyword  whole  `default_nettype brightred/
+    keyword  whole  `define brightred/
+    keyword  whole  `else brightred/
+    keyword  whole  `endcelldefine brightred/
+    keyword  whole  `endif brightred/
     keyword  whole  `endprotect brightred/
-    keyword  whole  `protected brightred/
     keyword  whole  `endprotected brightred/
     keyword  whole  `expand_vectornets brightred/
+    keyword  whole  `ifdef brightred/
+    keyword  whole  `ifndef brightred/
+    keyword  whole  `include brightred/
+    keyword  whole  `noaccelerate brightred/
     keyword  whole  `noexpand_vectornets brightred/
-    keyword  whole  `autoexpand_vectornets brightred/
-    keyword  whole  `remove_gatenames brightred/
     keyword  whole  `noremove_gatenames brightred/
-    keyword  whole  `remove_netnames brightred/
     keyword  whole  `noremove_netnames brightred/
-
+    keyword  whole  `nounconnected_drive brightred/
+    keyword  whole  `protect brightred/
+    keyword  whole  `protected brightred/
+    keyword  whole  `remove_gatenames brightred/
+    keyword  whole  `remove_netnames brightred/
+    keyword  whole  `resetall brightred/
+    keyword  whole  `signed brightred/
+    keyword  whole  `timescale brightred/
+    keyword  whole  `unconnected_drive brightred/
+    keyword  whole  `unsigned brightred/
 
 #Reserved Keywords 1
     keyword  whole  always yellow

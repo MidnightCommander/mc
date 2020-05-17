@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-05 19:10+0300\n"
+"POT-Creation-Date: 2020-05-17 18:50+0300\n"
 "PO-Revision-Date: 2019-12-16 01:49+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Estonian (http://www.transifex.com/mc/mc/language/et/)\n"
@@ -1137,9 +1137,6 @@ msgstr "Vaheta reavahetused:"
 msgid "Save As"
 msgstr "Salvesta kui"
 
-msgid "Block is large, you may not be able to undo this action"
-msgstr "Plokk on suur, selle muudatuse tagasi võtmine võib nurjuda."
-
 msgid "Collect completions"
 msgstr "Koonda lõpetamised"
 
@@ -1338,10 +1335,10 @@ msgstr "Vajuta suvalist klahvi:"
 
 msgid ""
 "Current text was modified without a file save.\n"
-"Continue discards these changes"
+"Continue discards these changes."
 msgstr ""
-"Tekstis on salvestamata muudatusi.\n"
-"Jätkamine kustutab need muudatused"
+"Teksti on muudetud faili salvestamata.\n"
+"Jätkamine viskab muudatused ära."
 
 msgid "In se&lection"
 msgstr "&Valikus"
@@ -1369,13 +1366,6 @@ msgstr "Kinnita asendamine"
 
 msgid "Cancel"
 msgstr "Tühista"
-
-msgid ""
-"Current text was modified without a file save.\n"
-"Continue discards these changes."
-msgstr ""
-"Teksti on muudetud faili salvestamata.\n"
-"Jätkamine viskab muudatused ära."
 
 msgid "NoName"
 msgstr "Nimetu"
@@ -1828,9 +1818,10 @@ msgstr "Kohaliku koopia hankimine %s'st nurjus"
 msgid "The shell is already running a command"
 msgstr "Kest on hõivatud käsu täitmisega"
 
+#, fuzzy
 msgid ""
 "Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
+"the subshell cannot be toggled."
 msgstr ""
 "Sa ei kasuta xtermi või Linuxi konsooli;\n"
 "paneele ei saa kuvada/peita."
@@ -1858,6 +1849,10 @@ msgstr "teised"
 
 msgid "Flag"
 msgstr "Lipp"
+
+#, fuzzy, c-format
+msgid "Permissions (octal): %o"
+msgstr "Õigused (8nd süsteemis):"
 
 msgid "Chown advanced command"
 msgstr "Keerukas omanikuvahetus"
@@ -4681,6 +4676,16 @@ msgstr "Kas jätkata algusest?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kohaliku koopia hankimine failist /ftp://some.host/editme.txt nurjus"
+
+#~ msgid "Block is large, you may not be able to undo this action"
+#~ msgstr "Plokk on suur, selle muudatuse tagasi võtmine võib nurjuda."
+
+#~ msgid ""
+#~ "Current text was modified without a file save.\n"
+#~ "Continue discards these changes"
+#~ msgstr ""
+#~ "Tekstis on salvestamata muudatusi.\n"
+#~ "Jätkamine kustutab need muudatused"
 
 #~ msgid "Using the ncurses library\n"
 #~ msgstr "Kasutatakse teeki ncurses\n"

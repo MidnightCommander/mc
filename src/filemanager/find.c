@@ -54,12 +54,10 @@
 #include "src/history.h"        /* MC_HISTORY_SHARED_SEARCH */
 
 #include "dir.h"
-#include "cmd.h"                /* view_file_at_line() */
+#include "cmd.h"                /* find_cmd(), view_file_at_line() */
 #include "midnight.h"           /* current_panel */
 #include "boxes.h"
 #include "panelize.h"
-
-#include "find.h"
 
 /*** global variables ****************************************************************************/
 
@@ -367,13 +365,10 @@ status_update (const char *text)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
+static inline void
 found_num_update (void)
 {
-    char buffer[BUF_TINY];
-
-    g_snprintf (buffer, sizeof (buffer), _("Found: %lu"), matches);
-    label_set_text (found_num_label, buffer);
+    label_set_textv (found_num_label, _("Found: %lu"), matches);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1885,7 +1880,7 @@ do_find (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
 /* --------------------------------------------------------------------------------------------- */
 
 void
-find_file (void)
+find_cmd (void)
 {
     char *start_dir = NULL, *ignore_dirs = NULL;
     ssize_t start_dir_len;

@@ -1094,6 +1094,8 @@ tree_key (WTree * tree, int key)
     command = widget_lookup_key (WIDGET (tree), key);
     switch (command)
     {
+    case CK_IgnoreKey:
+        break;
     case CK_Left:
         return tree_move_left (tree) ? MSG_HANDLED : MSG_NOT_HANDLED;
     case CK_Right:

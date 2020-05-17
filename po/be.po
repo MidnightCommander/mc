@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-05 19:10+0300\n"
+"POT-Creation-Date: 2020-05-17 18:50+0300\n"
 "PO-Revision-Date: 2019-12-16 01:49+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Belarusian (http://www.transifex.com/mc/mc/language/be/)\n"
@@ -1145,9 +1145,6 @@ msgstr "Змяніць пераводы радкоў на:"
 msgid "Save As"
 msgstr "Захаваць як"
 
-msgid "Block is large, you may not be able to undo this action"
-msgstr "Можа не атрымацца адрабіць дзеянне: вялікі блок"
-
 msgid "Collect completions"
 msgstr "Збіраць дапаўненні"
 
@@ -1344,10 +1341,10 @@ msgstr "Націсніце клавішу:"
 
 msgid ""
 "Current text was modified without a file save.\n"
-"Continue discards these changes"
+"Continue discards these changes."
 msgstr ""
-"Тэкст змяніўся, але файл не быў захаваны .\n"
-"Калі працягнуць, змены страцяцца"
+"Тэкст змяніўся, але файл не захавалі.\n"
+"Калі працягнуць, змены страцяцца."
 
 msgid "In se&lection"
 msgstr "У абраным(&L)"
@@ -1375,13 +1372,6 @@ msgstr "Замяніць?"
 
 msgid "Cancel"
 msgstr "Скасаваць"
-
-msgid ""
-"Current text was modified without a file save.\n"
-"Continue discards these changes."
-msgstr ""
-"Тэкст змяніўся, але файл не захавалі.\n"
-"Калі працягнуць, змены страцяцца."
 
 msgid "NoName"
 msgstr "Без назвы"
@@ -1834,9 +1824,10 @@ msgstr "Немагчыма атрымаць лакальную копію «%s»
 msgid "The shell is already running a command"
 msgstr "Абалонка ўжо выконвае загад"
 
+#, fuzzy
 msgid ""
 "Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
+"the subshell cannot be toggled."
 msgstr ""
 "Гэта не xterm альбо кансоль Linux;\n"
 "панэлі немагчыма выключыць."
@@ -1864,6 +1855,10 @@ msgstr "іншыя"
 
 msgid "Flag"
 msgstr "Знак"
+
+#, fuzzy, c-format
+msgid "Permissions (octal): %o"
+msgstr "Дазволы (васмярковыя)"
 
 msgid "Chown advanced command"
 msgstr "Пашыраны загад «chown»"
@@ -4692,6 +4687,16 @@ msgstr "Працягваць ад пачатку?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Немагчыма атрымаць лакальную копію /ftp://some.host/editme.txt"
+
+#~ msgid "Block is large, you may not be able to undo this action"
+#~ msgstr "Можа не атрымацца адрабіць дзеянне: вялікі блок"
+
+#~ msgid ""
+#~ "Current text was modified without a file save.\n"
+#~ "Continue discards these changes"
+#~ msgstr ""
+#~ "Тэкст змяніўся, але файл не быў захаваны .\n"
+#~ "Калі працягнуць, змены страцяцца"
 
 #~ msgid "Using the ncurses library\n"
 #~ msgstr "З бібліятэкай «ncurses»\n"

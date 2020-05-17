@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-05 19:10+0300\n"
+"POT-Creation-Date: 2020-05-17 18:50+0300\n"
 "PO-Revision-Date: 2020-03-01 23:25+0000\n"
 "Last-Translator: AlexL <loginov.alex.valer@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/mc/mc/language/ru/)\n"
@@ -1164,9 +1164,6 @@ msgstr "Изменить окончания строк на:"
 msgid "Save As"
 msgstr "Сохранить как"
 
-msgid "Block is large, you may not be able to undo this action"
-msgstr "Блок слишком велик, вам может не удаться отменить эту операцию."
-
 msgid "Collect completions"
 msgstr "Поиск дополнений"
 
@@ -1365,7 +1362,7 @@ msgstr "Нажмите любую клавишу:"
 
 msgid ""
 "Current text was modified without a file save.\n"
-"Continue discards these changes"
+"Continue discards these changes."
 msgstr ""
 "Текущий текст был изменён и не сохранён.\n"
 "Продолжение операции приведёт к потере изменений."
@@ -1396,13 +1393,6 @@ msgstr "Подтвердить замену"
 
 msgid "Cancel"
 msgstr "Прервать"
-
-msgid ""
-"Current text was modified without a file save.\n"
-"Continue discards these changes."
-msgstr ""
-"Текущий текст был изменён и не сохранён.\n"
-"Продолжение операции приведёт к потере изменений."
 
 msgid "NoName"
 msgstr "Без имени"
@@ -1855,9 +1845,10 @@ msgstr "Не удалось получить локальную копию %s"
 msgid "The shell is already running a command"
 msgstr "Интерпретатор занят выполнением команды"
 
+#, fuzzy
 msgid ""
 "Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
+"the subshell cannot be toggled."
 msgstr ""
 "Это не xterm и не консоль Linux;\n"
 "панели не могут быть отключены."
@@ -1885,6 +1876,10 @@ msgstr "другие"
 
 msgid "Flag"
 msgstr "Флаг"
+
+#, fuzzy, c-format
+msgid "Permissions (octal): %o"
+msgstr "Доступ (восьмеричный)"
 
 msgid "Chown advanced command"
 msgstr "Расширенная команда chown"
@@ -4707,3 +4702,13 @@ msgstr "Продолжить с начала?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не удалось получить локальную копию /ftp://some.host/editme.txt"
+
+#~ msgid "Block is large, you may not be able to undo this action"
+#~ msgstr "Блок слишком велик, вам может не удаться отменить эту операцию."
+
+#~ msgid ""
+#~ "Current text was modified without a file save.\n"
+#~ "Continue discards these changes"
+#~ msgstr ""
+#~ "Текущий текст был изменён и не сохранён.\n"
+#~ "Продолжение операции приведёт к потере изменений."

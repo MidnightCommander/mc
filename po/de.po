@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-05 19:10+0300\n"
+"POT-Creation-Date: 2020-05-17 18:50+0300\n"
 "PO-Revision-Date: 2020-01-05 13:48+0000\n"
 "Last-Translator: Mr.Update\n"
 "Language-Team: German (http://www.transifex.com/mc/mc/language/de/)\n"
@@ -1157,9 +1157,6 @@ msgstr "Ändere Zeilenumbruch in:"
 msgid "Save As"
 msgstr "Speichern unter"
 
-msgid "Block is large, you may not be able to undo this action"
-msgstr "Großer Block, diese Aktion kann nicht rückgängig gemacht werden"
-
 msgid "Collect completions"
 msgstr "Fertigstellungen zusammentragen"
 
@@ -1358,7 +1355,7 @@ msgstr "Eine Taste drücken:"
 
 msgid ""
 "Current text was modified without a file save.\n"
-"Continue discards these changes"
+"Continue discards these changes."
 msgstr ""
 "Dieser Text wurde ohne zu speichern geändert.\n"
 "Wenn Sie fortfahren, werden diese Änderungen verworfen."
@@ -1389,13 +1386,6 @@ msgstr "Ersetzen bestätigen"
 
 msgid "Cancel"
 msgstr "Abbrechen"
-
-msgid ""
-"Current text was modified without a file save.\n"
-"Continue discards these changes."
-msgstr ""
-"Dieser Text wurde ohne zu speichern geändert.\n"
-"Wenn Sie fortfahren, werden diese Änderungen verworfen."
 
 msgid "NoName"
 msgstr "NoName"
@@ -1849,9 +1839,10 @@ msgstr "Kann lokale Kopie von %s nicht erstellen"
 msgid "The shell is already running a command"
 msgstr "Die Shell führt bereits einen Befehl aus"
 
+#, fuzzy
 msgid ""
 "Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
+"the subshell cannot be toggled."
 msgstr ""
 "Weder xterm noch Linux-Konsole;\n"
 "die Panels können nicht ausgetauscht werden."
@@ -1879,6 +1870,10 @@ msgstr "Andere"
 
 msgid "Flag"
 msgstr "Schalter"
+
+#, fuzzy, c-format
+msgid "Permissions (octal): %o"
+msgstr "Rechte (oktal):"
 
 msgid "Chown advanced command"
 msgstr "Erweitertes Kommando chown"
@@ -4711,6 +4706,16 @@ msgstr "Am Anfang fortsetzen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kann lokale Kopie von /ftp://some.host/editme.txt nicht erstellen"
+
+#~ msgid "Block is large, you may not be able to undo this action"
+#~ msgstr "Großer Block, diese Aktion kann nicht rückgängig gemacht werden"
+
+#~ msgid ""
+#~ "Current text was modified without a file save.\n"
+#~ "Continue discards these changes"
+#~ msgstr ""
+#~ "Dieser Text wurde ohne zu speichern geändert.\n"
+#~ "Wenn Sie fortfahren, werden diese Änderungen verworfen."
 
 #~ msgid "Using the ncurses library\n"
 #~ msgstr "Die ncurses-Bibliothek benutzen\n"

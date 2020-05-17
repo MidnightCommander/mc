@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-05 19:10+0300\n"
+"POT-Creation-Date: 2020-05-17 18:50+0300\n"
 "PO-Revision-Date: 2019-12-16 01:49+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Romanian (http://www.transifex.com/mc/mc/language/ro/)\n"
@@ -1145,9 +1145,6 @@ msgstr "Schimbă finalul de linie în:"
 msgid "Save As"
 msgstr "Salvează ca"
 
-msgid "Block is large, you may not be able to undo this action"
-msgstr "Blocul este mare, este posibil sa nu poți anula această acțiune"
-
 msgid "Collect completions"
 msgstr "Colecționează completări"
 
@@ -1347,7 +1344,7 @@ msgstr "Apasă orice tastă:"
 
 msgid ""
 "Current text was modified without a file save.\n"
-"Continue discards these changes"
+"Continue discards these changes."
 msgstr ""
 "Textul curent a fost modificat fără a se salva fișierul.\n"
 "Dacă se continuă schimbările vor fi pierdute."
@@ -1378,13 +1375,6 @@ msgstr "Confirmă înlocuirea"
 
 msgid "Cancel"
 msgstr "Renunță"
-
-msgid ""
-"Current text was modified without a file save.\n"
-"Continue discards these changes."
-msgstr ""
-"Textul curent a fost modificat fără a se salva fișierul.\n"
-"Dacă se continuă schimbările vor fi pierdute."
 
 msgid "NoName"
 msgstr "FărăNume"
@@ -1838,9 +1828,10 @@ msgstr "Nu se poate prelua o copie locală a %s"
 msgid "The shell is already running a command"
 msgstr "Terminalul deja rulează o comandă"
 
+#, fuzzy
 msgid ""
 "Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
+"the subshell cannot be toggled."
 msgstr ""
 "Nu este o consolă xterm sau Linux;\n"
 "panourile nu pot fi comutate."
@@ -1868,6 +1859,10 @@ msgstr "alții"
 
 msgid "Flag"
 msgstr "Ind."
+
+#, fuzzy, c-format
+msgid "Permissions (octal): %o"
+msgstr "Permisiuni (octal):"
 
 msgid "Chown advanced command"
 msgstr "Comandă avansată chown"
@@ -4699,6 +4694,16 @@ msgstr "Continuă de la început?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nu se poate aduce o copie locală a /ftp://some.host/editme.txt"
+
+#~ msgid "Block is large, you may not be able to undo this action"
+#~ msgstr "Blocul este mare, este posibil sa nu poți anula această acțiune"
+
+#~ msgid ""
+#~ "Current text was modified without a file save.\n"
+#~ "Continue discards these changes"
+#~ msgstr ""
+#~ "Textul curent a fost modificat fără a se salva fișierul.\n"
+#~ "Dacă se continuă schimbările vor fi pierdute."
 
 #~ msgid "Using the ncurses library\n"
 #~ msgstr "Folosind librăria ncurses\n"

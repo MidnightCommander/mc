@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-05 19:10+0300\n"
+"POT-Creation-Date: 2020-05-17 18:50+0300\n"
 "PO-Revision-Date: 2019-12-16 01:49+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/mc/mc/language/sv/)\n"
@@ -1144,9 +1144,6 @@ msgstr "Ändra radbrytningar till:"
 msgid "Save As"
 msgstr "Spara som"
 
-msgid "Block is large, you may not be able to undo this action"
-msgstr "Stort block, du kanske inte kan ångra denna åtgärd"
-
 msgid "Collect completions"
 msgstr "Samlar in kompletteringar"
 
@@ -1345,10 +1342,10 @@ msgstr "Tryck på valfri tangent:"
 
 msgid ""
 "Current text was modified without a file save.\n"
-"Continue discards these changes"
+"Continue discards these changes."
 msgstr ""
 "Nuvarande text har modifierats utan att sparas.\n"
-"Fortsätt kastar bort dessa ändringar"
+"Fortsätt kastar bort dessa ändringar."
 
 msgid "In se&lection"
 msgstr "&I markerat"
@@ -1376,13 +1373,6 @@ msgstr "Bekräfta ersätt"
 
 msgid "Cancel"
 msgstr "Avbryt"
-
-msgid ""
-"Current text was modified without a file save.\n"
-"Continue discards these changes."
-msgstr ""
-"Nuvarande text har modifierats utan att sparas.\n"
-"Fortsätt kastar bort dessa ändringar."
 
 msgid "NoName"
 msgstr "Namnlös"
@@ -1836,9 +1826,10 @@ msgstr "En lokal kopia av %s kunde inte hämtas"
 msgid "The shell is already running a command"
 msgstr "Skalet kör redan ett kommando"
 
+#, fuzzy
 msgid ""
 "Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
+"the subshell cannot be toggled."
 msgstr ""
 "Inte en xterm- eller linuxterminal;\n"
 "panelerna kan inte slås av/på."
@@ -1866,6 +1857,10 @@ msgstr "andra"
 
 msgid "Flag"
 msgstr "Flagga"
+
+#, fuzzy, c-format
+msgid "Permissions (octal): %o"
+msgstr "Rättigheter (oktalt):"
 
 msgid "Chown advanced command"
 msgstr "Avancerat chown-kommando"
@@ -4691,6 +4686,16 @@ msgstr "Fortsätt från början?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan inte hämta en lokal kopia av /ftp://some.host/editme.txt"
+
+#~ msgid "Block is large, you may not be able to undo this action"
+#~ msgstr "Stort block, du kanske inte kan ångra denna åtgärd"
+
+#~ msgid ""
+#~ "Current text was modified without a file save.\n"
+#~ "Continue discards these changes"
+#~ msgstr ""
+#~ "Nuvarande text har modifierats utan att sparas.\n"
+#~ "Fortsätt kastar bort dessa ändringar"
 
 #~ msgid "Using the ncurses library\n"
 #~ msgstr "Använder ncurses-biblioteket\n"

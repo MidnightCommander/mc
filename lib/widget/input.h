@@ -90,7 +90,6 @@ WInput *input_new (int y, int x, const int *colors,
 cb_ret_t input_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data);
 void input_set_default_colors (void);
 cb_ret_t input_handle_char (WInput * in, int key);
-int input_key_is_in_map (WInput * in, int key);
 void input_assign_text (WInput * in, const char *text);
 gboolean input_is_empty (const WInput * in);
 void input_insert (WInput * in, const char *text, gboolean insert_extra_space);
@@ -99,7 +98,10 @@ void input_update (WInput * in, gboolean clear_first);
 void input_enable_update (WInput * in);
 void input_disable_update (WInput * in);
 void input_clean (WInput * in);
-void input_free_completions (WInput * in);
+
+/* input_complete.c */
+void input_complete (WInput * in);
+void input_complete_free (WInput * in);
 
 /*** inline functions ****************************************************************************/
 

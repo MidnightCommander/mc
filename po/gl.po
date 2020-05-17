@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-05 19:10+0300\n"
+"POT-Creation-Date: 2020-05-17 18:50+0300\n"
 "PO-Revision-Date: 2019-12-16 01:49+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Galician (http://www.transifex.com/mc/mc/language/gl/)\n"
@@ -1147,9 +1147,6 @@ msgstr "Cambiar saltos de liña por:"
 msgid "Save As"
 msgstr "Gardar como"
 
-msgid "Block is large, you may not be able to undo this action"
-msgstr "O bloque é moi grande, pode que non se poida desfacer esta acción"
-
 msgid "Collect completions"
 msgstr "Recoller os remates"
 
@@ -1348,10 +1345,10 @@ msgstr "Prema calquera tecla:"
 
 msgid ""
 "Current text was modified without a file save.\n"
-"Continue discards these changes"
+"Continue discards these changes."
 msgstr ""
 "O texto actual foi modificado e non foi gardado.\n"
-"Continuar desbotará estes cambios."
+"Continuar debotará estes cambios."
 
 msgid "In se&lection"
 msgstr "Na se&Lección"
@@ -1379,13 +1376,6 @@ msgstr "Confirmar cambios"
 
 msgid "Cancel"
 msgstr "Cancelar"
-
-msgid ""
-"Current text was modified without a file save.\n"
-"Continue discards these changes."
-msgstr ""
-"O texto actual foi modificado e non foi gardado.\n"
-"Continuar debotará estes cambios."
 
 msgid "NoName"
 msgstr "SenNome"
@@ -1839,9 +1829,10 @@ msgstr "Non é posíbel obter unha copia local de %s"
 msgid "The shell is already running a command"
 msgstr "O terminal xa esta executando unha orde"
 
+#, fuzzy
 msgid ""
 "Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
+"the subshell cannot be toggled."
 msgstr ""
 "Non se está usando nin xterm nin a consola Linux;\n"
 "os paneis non se poden agochar."
@@ -1869,6 +1860,10 @@ msgstr "outros"
 
 msgid "Flag"
 msgstr "Marca"
+
+#, fuzzy, c-format
+msgid "Permissions (octal): %o"
+msgstr "Permisos (octal):"
 
 msgid "Chown advanced command"
 msgstr "Cambiar propietario e permisos"
@@ -4698,6 +4693,16 @@ msgstr "Continuar desde o principio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Non é posíbel obter unha copia local de /ftp://some.host/editme.txt"
+
+#~ msgid "Block is large, you may not be able to undo this action"
+#~ msgstr "O bloque é moi grande, pode que non se poida desfacer esta acción"
+
+#~ msgid ""
+#~ "Current text was modified without a file save.\n"
+#~ "Continue discards these changes"
+#~ msgstr ""
+#~ "O texto actual foi modificado e non foi gardado.\n"
+#~ "Continuar desbotará estes cambios."
 
 #~ msgid "Using the ncurses library\n"
 #~ msgstr "Empregando a biblioteca ncurses\n"

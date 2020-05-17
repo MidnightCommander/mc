@@ -80,6 +80,7 @@ mc_config_get_home_dir (void)
 static void
 setup (void)
 {
+    mc_global.timer = mc_timer_new ();
     str_init_strings (NULL);
 
     vfs_init ();
@@ -97,6 +98,7 @@ teardown (void)
     vfs_path_free (do_cd__new_dir_vpath__captured);
     vfs_shut ();
     str_uninit_strings ();
+    mc_timer_destroy (mc_global.timer);
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -199,6 +199,13 @@ View = f3
 Edit = f4
 Enter = enter
 
+[radio]
+Up = up; ctrl-p
+Down = down; ctrl-n
+Top = home; alt-lt; a1
+Bottom = end; alt-gt; c1
+Select = space
+
 [tree]
 Help = f1
 Reread = f2; ctrl-r

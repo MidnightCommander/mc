@@ -16,6 +16,7 @@
 #define KEYMAP_SECTION_MENU "menu"
 #define KEYMAP_SECTION_INPUT "input"
 #define KEYMAP_SECTION_LISTBOX "listbox"
+#define KEYMAP_SECTION_RADIO "radio"
 #define KEYMAP_SECTION_TREE "tree"
 #define KEYMAP_SECTION_HELP "help"
 #define KEYMAP_SECTION_CHATTR "chattr"

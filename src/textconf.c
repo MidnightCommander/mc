@@ -225,7 +225,7 @@ show_datadirs_extended (void)
 
     PRINTF_SECTION2 (_("Config directory:"), mc_config_get_path ());
     PRINTF_SECTION2 (_("Data directory:"), mc_config_get_data_path ());
-    PRINTF ("skins:", mc_config_get_data_path (), MC_SKINS_SUBDIR PATH_SEP_STR);
+    PRINTF ("skins:", mc_config_get_data_path (), MC_SKINS_DIR PATH_SEP_STR);
 #ifdef ENABLE_VFS_EXTFS
     PRINTF ("extfs.d:", mc_config_get_data_path (), MC_EXTFS_DIR PATH_SEP_STR);
 #endif
@@ -234,7 +234,7 @@ show_datadirs_extended (void)
 #endif
 #ifdef USE_INTERNAL_EDIT
     PRINTF ("mcedit macros:", mc_config_get_data_path (), MC_MACRO_FILE);
-    PRINTF ("mcedit external macros:", mc_config_get_data_path (), MC_EXTMACRO_FILE ".*");
+    PRINTF ("mcedit external macros:", mc_config_get_data_path (), EDIT_HOME_MACRO_FILE ".*");
 #endif
     PRINTF_SECTION2 (_("Cache directory:"), mc_config_get_cache_path ());
 }

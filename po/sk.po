@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-05 19:10+0300\n"
+"POT-Creation-Date: 2020-05-17 18:50+0300\n"
 "PO-Revision-Date: 2019-12-16 01:49+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/mc/mc/language/sk/)\n"
@@ -1142,9 +1142,6 @@ msgstr "Zmeniť konce riadkov na:"
 msgid "Save As"
 msgstr "Uložiť ako"
 
-msgid "Block is large, you may not be able to undo this action"
-msgstr "Blok je veľký, je možné, že túto operáciu nebude možné vrátiť"
-
 msgid "Collect completions"
 msgstr "Zhromaždiť doplnenia"
 
@@ -1345,7 +1342,7 @@ msgstr "Stačte ľubovoľný kláves:"
 
 msgid ""
 "Current text was modified without a file save.\n"
-"Continue discards these changes"
+"Continue discards these changes."
 msgstr ""
 "Aktuálny text sa zmenil bez uloženia súboru.\n"
 "Pokračovaním tieto zmeny zrušíte"
@@ -1376,13 +1373,6 @@ msgstr "Potvrdiť nahradenie"
 
 msgid "Cancel"
 msgstr "Zruš"
-
-msgid ""
-"Current text was modified without a file save.\n"
-"Continue discards these changes."
-msgstr ""
-"Aktuálny text sa zmenil bez uloženia súboru.\n"
-"Pokračovaním tieto zmeny zrušíte"
 
 msgid "NoName"
 msgstr "BezNázvu"
@@ -1836,9 +1826,10 @@ msgstr "Nemožno stiahnuť lokálnu kópiu %s"
 msgid "The shell is already running a command"
 msgstr "Shell už vykonáva príkaz"
 
+#, fuzzy
 msgid ""
 "Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
+"the subshell cannot be toggled."
 msgstr ""
 "Konzola nie je xterm alebo Linux;\n"
 "nemožno prepnúť panely."
@@ -1866,6 +1857,10 @@ msgstr "ostatní"
 
 msgid "Flag"
 msgstr "Označ"
+
+#, fuzzy, c-format
+msgid "Permissions (octal): %o"
+msgstr "Oprávnenia (osmičkové):"
 
 msgid "Chown advanced command"
 msgstr "Pokročilý príkaz chown"
@@ -4698,6 +4693,16 @@ msgstr "Pokračovať od začiatku?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nemožno stiahnuť lokálnu kópiu /ftp://some.host/editme.txt"
+
+#~ msgid "Block is large, you may not be able to undo this action"
+#~ msgstr "Blok je veľký, je možné, že túto operáciu nebude možné vrátiť"
+
+#~ msgid ""
+#~ "Current text was modified without a file save.\n"
+#~ "Continue discards these changes"
+#~ msgstr ""
+#~ "Aktuálny text sa zmenil bez uloženia súboru.\n"
+#~ "Pokračovaním tieto zmeny zrušíte"
 
 #~ msgid "Using the ncurses library\n"
 #~ msgstr "Používa sa knižnica ncurses\n"

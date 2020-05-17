@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-05 19:10+0300\n"
+"POT-Creation-Date: 2020-05-17 18:50+0300\n"
 "PO-Revision-Date: 2019-12-25 01:49+0000\n"
 "Last-Translator: Keith Bowes <zooplah@gmail.com>\n"
 "Language-Team: Esperanto (http://www.transifex.com/mc/mc/language/eo/)\n"
@@ -1137,9 +1137,6 @@ msgstr "ŝanĝi linirompojn al:"
 msgid "Save As"
 msgstr "Konservi kiel"
 
-msgid "Block is large, you may not be able to undo this action"
-msgstr "Bloko estas tra granda, do vi eble ne povos malfari tiun agon"
-
 msgid "Collect completions"
 msgstr "Kolekti kompletigojn"
 
@@ -1339,10 +1336,10 @@ msgstr "Premu iun klavon:"
 
 msgid ""
 "Current text was modified without a file save.\n"
-"Continue discards these changes"
+"Continue discards these changes."
 msgstr ""
 "Aktuala teksto estis modifita sen dosiera konservado.\n"
-"Daŭrigi forviŝos tiujn ŝanĝojn"
+"Daŭri forviŝos tiujn ŝanĝojn."
 
 msgid "In se&lection"
 msgstr "En e&lekto"
@@ -1370,13 +1367,6 @@ msgstr "Konfirmi anstataŭigon"
 
 msgid "Cancel"
 msgstr "Nuligi"
-
-msgid ""
-"Current text was modified without a file save.\n"
-"Continue discards these changes."
-msgstr ""
-"Aktuala teksto estis modifita sen dosiera konservado.\n"
-"Daŭri forviŝos tiujn ŝanĝojn."
 
 msgid "NoName"
 msgstr "Sennoma"
@@ -1830,9 +1820,10 @@ msgstr "Ne eblas atingi lokan kopion de %s"
 msgid "The shell is already running a command"
 msgstr "La ŝelo jam plenumas komandon"
 
+#, fuzzy
 msgid ""
 "Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
+"the subshell cannot be toggled."
 msgstr ""
 "Ne xterm-fenestron aŭ linuksan terminalon;\n"
 "la flankojn oni ne povis inversigi."
@@ -1860,6 +1851,10 @@ msgstr "aliaj"
 
 msgid "Flag"
 msgstr "Markoj"
+
+#, fuzzy, c-format
+msgid "Permissions (octal): %o"
+msgstr "Permesoj (Okuma):"
 
 msgid "Chown advanced command"
 msgstr "[chown] altnivelaj komandoj"
@@ -4686,6 +4681,16 @@ msgstr "Ĉu deiri de la komenco?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Ne eblas atingi lokan kopion de /ftp://some.host/editme.txt"
+
+#~ msgid "Block is large, you may not be able to undo this action"
+#~ msgstr "Bloko estas tra granda, do vi eble ne povos malfari tiun agon"
+
+#~ msgid ""
+#~ "Current text was modified without a file save.\n"
+#~ "Continue discards these changes"
+#~ msgstr ""
+#~ "Aktuala teksto estis modifita sen dosiera konservado.\n"
+#~ "Daŭrigi forviŝos tiujn ŝanĝojn"
 
 #~ msgid "Using the ncurses library\n"
 #~ msgstr "Uzanta la bibliotekon ncurses\n"

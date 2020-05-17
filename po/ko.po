@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-05 19:10+0300\n"
+"POT-Creation-Date: 2020-05-17 18:50+0300\n"
 "PO-Revision-Date: 2019-12-16 01:49+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Korean (http://www.transifex.com/mc/mc/language/ko/)\n"
@@ -1135,9 +1135,6 @@ msgstr "줄바꿈 변경:"
 msgid "Save As"
 msgstr "다른이름으로 저장"
 
-msgid "Block is large, you may not be able to undo this action"
-msgstr "블록이 크면 이 작업을 실행 취소할 수 없음"
-
 msgid "Collect completions"
 msgstr "수집 완료"
 
@@ -1336,7 +1333,7 @@ msgstr "아무 키나 누르십시오:"
 
 msgid ""
 "Current text was modified without a file save.\n"
-"Continue discards these changes"
+"Continue discards these changes."
 msgstr ""
 "파일 저장 없이 현재 텍스트가 수정됨.\n"
 "계속 이런 변경 내용을 삭제합니다."
@@ -1367,13 +1364,6 @@ msgstr "바꾸기 확인"
 
 msgid "Cancel"
 msgstr "취소"
-
-msgid ""
-"Current text was modified without a file save.\n"
-"Continue discards these changes."
-msgstr ""
-"파일 저장 없이 현재 텍스트가 수정됨.\n"
-"계속 이런 변경 내용을 삭제합니다."
 
 msgid "NoName"
 msgstr "이름없음"
@@ -1826,9 +1816,10 @@ msgstr "%s의 로컬 복사본을 가져올 수 없음"
 msgid "The shell is already running a command"
 msgstr "셸이 이미 명령을 실행하고 있음"
 
+#, fuzzy
 msgid ""
 "Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
+"the subshell cannot be toggled."
 msgstr ""
 "XTerm 또는 Linux 콘솔이 아님;\n"
 "패널을 전환할 수 없습니다."
@@ -1856,6 +1847,10 @@ msgstr "기타"
 
 msgid "Flag"
 msgstr "플래그"
+
+#, fuzzy, c-format
+msgid "Permissions (octal): %o"
+msgstr "권한 (8진수):"
 
 msgid "Chown advanced command"
 msgstr "Chown 고급 명령어"
@@ -4678,6 +4673,16 @@ msgstr "처음부터 계속하시겠습니까?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "/ftp://some.host/editme.txt의 로컬 복사본을 가져올 수 없음"
+
+#~ msgid "Block is large, you may not be able to undo this action"
+#~ msgstr "블록이 크면 이 작업을 실행 취소할 수 없음"
+
+#~ msgid ""
+#~ "Current text was modified without a file save.\n"
+#~ "Continue discards these changes"
+#~ msgstr ""
+#~ "파일 저장 없이 현재 텍스트가 수정됨.\n"
+#~ "계속 이런 변경 내용을 삭제합니다."
 
 #~ msgid "Using the ncurses library\n"
 #~ msgstr "ncurses 라이브러리 사용\n"

@@ -449,7 +449,6 @@ static cb_ret_t
 listbox_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WListbox *l = LISTBOX (w);
-    cb_ret_t ret_code;
 
     switch (msg)
     {
@@ -467,10 +466,14 @@ listbox_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
         }
 
     case MSG_KEY:
-        ret_code = listbox_key (l, parm);
-        if (ret_code != MSG_NOT_HANDLED)
-            listbox_on_change (l);
-        return ret_code;
+        {
+            cb_ret_t ret_code;
+
+            ret_code = listbox_key (l, parm);
+            if (ret_code != MSG_NOT_HANDLED)
+                listbox_on_change (l);
+            return ret_code;
+        }
 
     case MSG_ACTION:
         return listbox_execute_cmd (l, parm);
@@ -743,7 +746,7 @@ listbox_remove_current (WListbox * l)
         int length;
 
         current = g_queue_peek_nth_link (l->list, (guint) l->pos);
-        listbox_entry_free (LENTRY (current->data));
+        listbox_entry_free (current->data);
         g_queue_delete_link (l->list, current);
 
         length = g_queue_get_length (l->list);

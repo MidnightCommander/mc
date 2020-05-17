@@ -117,7 +117,7 @@ static WListbox *l_user, *l_group;
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-chown_i18n (void)
+chown_init (void)
 {
     static gboolean i18n = FALSE;
     int i;
@@ -187,7 +187,7 @@ chown_bg_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
 /* --------------------------------------------------------------------------------------------- */
 
 static WDialog *
-chown_init (void)
+chown_dlg_create (void)
 {
     int single_set;
     WDialog *ch_dlg;
@@ -397,7 +397,7 @@ chown_cmd (void)
     gboolean need_update;
     gboolean end_chown;
 
-    chown_i18n ();
+    chown_init ();
 
     current_file = 0;
     ignore_all = FALSE;
@@ -431,7 +431,7 @@ chown_cmd (void)
             break;
         }
 
-        ch_dlg = chown_init ();
+        ch_dlg = chown_dlg_create ();
 
         /* select in listboxes */
         listbox_select_entry (l_user, listbox_search_text (l_user, get_owner (sf_stat.st_uid)));

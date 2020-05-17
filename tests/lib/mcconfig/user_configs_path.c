@@ -59,6 +59,7 @@ setup (void)
     g_setenv ("XDG_DATA_HOME", CONF_DATA, TRUE);
     g_setenv ("XDG_CACHE_HOME", CONF_CACHE, TRUE);
 #endif
+    mc_global.timer = mc_timer_new ();
     str_init_strings ("UTF-8");
     vfs_init ();
     vfs_init_localfs ();
@@ -72,6 +73,7 @@ teardown (void)
 {
     vfs_shut ();
     str_uninit_strings ();
+    mc_timer_destroy (mc_global.timer);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -106,7 +108,7 @@ static const struct test_user_config_paths_ds
     },
     { /* 5. */
         CONF_MAIN,
-        EDIT_SYNTAX_FILE
+        EDIT_HOME_SYNTAX_FILE
     },
     { /* 6. */
         CONF_MAIN,
@@ -114,75 +116,67 @@ static const struct test_user_config_paths_ds
     },
     { /* 7. */
         CONF_MAIN,
-        EDIT_DIR PATH_SEP_STR "edit.indent.rc"
+        MC_PANELS_FILE
     },
     { /* 8. */
         CONF_MAIN,
-        EDIT_DIR PATH_SEP_STR "edit.spell.rc"
-    },
-    { /* 9. */
-        CONF_MAIN,
-        MC_PANELS_FILE
-    },
-    { /* 10. */
-        CONF_MAIN,
         MC_FILEBIND_FILE
     },
-    { /* 11. */
+    { /* 9. */
         CONF_DATA,
-        MC_SKINS_SUBDIR
+        MC_SKINS_DIR
     },
-    { /* 12. */
+    { /* 10. */
         CONF_DATA,
         FISH_PREFIX
     },
-    { /* 13. */
+    { /* 11. */
         CONF_DATA,
         "ashrc"
     },
-    { /* 14. */
+    { /* 12. */
         CONF_DATA,
         "bashrc"
     },
-    { /* 15. */
+    { /* 13. */
         CONF_DATA,
         "inputrc"
     },
-    { /* 16. */
+    { /* 14. */
         CONF_DATA,
         MC_EXTFS_DIR
     },
-    { /* 17. */
+    { /* 15. */
         CONF_DATA,
         MC_HISTORY_FILE
     },
-    { /* 18. */
+    { /* 16. */
         CONF_DATA,
         MC_FILEPOS_FILE
     },
-    { /* 19. */
+    { /* 17. */
         CONF_DATA,
-        EDIT_CLIP_FILE
+        EDIT_HOME_CLIP_FILE
     },
-    { /* 20. */
+    { /* 18. */
         CONF_DATA,
         MC_MACRO_FILE
     },
-    { /* 21. */
+    { /* 19. */
         CONF_CACHE,
         "mc.log"
     },
-    { /* 22. */
+    { /* 20. */
         CONF_CACHE,
         MC_TREESTORE_FILE
     },
-    { /* 23. */
+    { /* 21. */
         CONF_CACHE,
-        EDIT_TEMP_FILE
+        EDIT_HOME_TEMP_FILE
     },
-    { /* 24. */
+    { /* 22. */
         CONF_CACHE,
-        EDIT_BLOCK_FILE
+        EDIT_HOME_BLOCK_FILE
     },
 };
 /* *INDENT-ON* */

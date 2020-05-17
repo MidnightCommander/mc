@@ -91,7 +91,7 @@ struct vfs_s_inode
     struct stat st;             /* Parameters of this inode */
     char *linkname;             /* Symlink's contents */
     char *localname;            /* Filename of local file, if we have one */
-    struct timeval timestamp;   /* Subclass specific */
+    guint64 timestamp;          /* Subclass specific */
     off_t data_offset;          /* Subclass specific */
 };
 
@@ -139,7 +139,7 @@ struct vfs_s_subclass
                                        struct vfs_s_inode * root,
                                        const char *path, int follow, int flags);
     int (*dir_load) (struct vfs_class * me, struct vfs_s_inode * ino, char *path);
-    int (*dir_uptodate) (struct vfs_class * me, struct vfs_s_inode * ino);
+    gboolean (*dir_uptodate) (struct vfs_class * me, struct vfs_s_inode * ino);
     int (*file_store) (struct vfs_class * me, vfs_file_handler_t * fh, char *path, char *localname);
 
     int (*linear_start) (struct vfs_class * me, vfs_file_handler_t * fh, off_t from);

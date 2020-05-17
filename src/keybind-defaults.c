@@ -28,7 +28,7 @@
 #include <config.h>
 
 #include "lib/global.h"
-#include "lib/widget.h"         /* dialog_map, input_map, listbox_map, menu_map */
+#include "lib/widget.h"         /* dialog_map, input_map, listbox_map, menu_map, radio_map */
 
 #include "keybind-defaults.h"
 
@@ -41,6 +41,7 @@ GArray *dialog_keymap = NULL;
 GArray *menu_keymap = NULL;
 GArray *input_keymap = NULL;
 GArray *listbox_keymap = NULL;
+GArray *radio_keymap = NULL;
 GArray *tree_keymap = NULL;
 GArray *help_keymap = NULL;
 #ifdef ENABLE_EXT2FS_ATTR
@@ -297,6 +298,16 @@ static const global_keymap_ini_t default_listbox_keymap[] = {
     {"View", "f3"},
     {"Edit", "f4"},
     {"Enter", "enter"},
+    {NULL, NULL}
+};
+
+/* radio */
+static const global_keymap_ini_t default_radio_keymap[] = {
+    {"Up", "up; ctrl-p"},
+    {"Down", "down; ctrl-n"},
+    {"Top", "home; alt-lt; a1"},
+    {"Bottom", "end; alt-gt; c1"},
+    {"Select", "space"},
     {NULL, NULL}
 };
 
@@ -637,6 +648,7 @@ create_default_keymap (void)
     create_default_keymap_section (keymap, KEYMAP_SECTION_MENU, default_menu_keymap);
     create_default_keymap_section (keymap, KEYMAP_SECTION_INPUT, default_input_keymap);
     create_default_keymap_section (keymap, KEYMAP_SECTION_LISTBOX, default_listbox_keymap);
+    create_default_keymap_section (keymap, KEYMAP_SECTION_RADIO, default_radio_keymap);
     create_default_keymap_section (keymap, KEYMAP_SECTION_TREE, default_tree_keymap);
     create_default_keymap_section (keymap, KEYMAP_SECTION_HELP, default_help_keymap);
 #ifdef ENABLE_EXT2FS_ATTR

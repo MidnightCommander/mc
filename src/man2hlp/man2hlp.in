@@ -204,6 +204,7 @@ sub print_string($)
     my ($buffer) = @_;
     my $len;                    # The length of current word
     my $backslash_flag = 0;
+    my $font_change_flag = 0;
 
     # Skipping lines?
     return if $skip_flag;
@@ -246,12 +247,43 @@ sub print_string($)
                 # Attempt to handle backslash quoting
                 foreach (split //, $buffer)
                 {
+                    # handle \fR, \fB, \fI and \fP commands
+                    if ($font_change_flag)
+                    {
+                        if ($_ eq 'B')
+                        {
+                            print $f_out $CHAR_FONT_BOLD;
+                        }
+                        elsif ($_ eq 'I')
+                        {
+                            print $f_out $CHAR_FONT_ITALIC;
+                        }
+                        elsif ($_ eq 'R' || $_ eq 'P')
+                        {
+                            print $f_out $CHAR_FONT_NORMAL;
+                        }
+                        else
+                        {
+                            print $f_out 'f' . $_;
+                            print_error "Syntax error: unsupported \\f" . $_ . " command";
+                        }
+
+                        $font_change_flag = 0;
+                        next;
+                    }
+                    if ($_ eq 'f' && $backslash_flag)
+                    {
+                        $font_change_flag = 1;
+                        $backslash_flag = 0;
+                        next;
+                    }
                     if ($_ eq '\\' && !$backslash_flag)
                     {
                         $backslash_flag = 1;
                         next;
                     }
                     $backslash_flag = 0;
+                    $font_change_flag = 0;
                     print $f_out $_;
                 }
                 # Increase column

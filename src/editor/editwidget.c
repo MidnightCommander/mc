@@ -45,7 +45,7 @@
 #include "lib/tty/key.h"        /* is_idle() */
 #include "lib/tty/color.h"      /* tty_setcolor() */
 #include "lib/skin.h"
-#include "lib/fileloc.h"        /* EDIT_DIR */
+#include "lib/fileloc.h"        /* EDIT_HOME_DIR */
 #include "lib/strutil.h"        /* str_term_trim() */
 #include "lib/util.h"           /* mc_build_filename() */
 #include "lib/widget.h"
@@ -1217,15 +1217,15 @@ edit_files (const GList * files)
     {
         char *dir;
 
-        dir = mc_build_filename (mc_config_get_cache_path (), EDIT_DIR, (char *) NULL);
+        dir = mc_build_filename (mc_config_get_cache_path (), EDIT_HOME_DIR, (char *) NULL);
         made_directory = (mkdir (dir, 0700) != -1 || errno == EEXIST);
         g_free (dir);
 
-        dir = mc_build_filename (mc_config_get_path (), EDIT_DIR, (char *) NULL);
+        dir = mc_build_filename (mc_config_get_path (), EDIT_HOME_DIR, (char *) NULL);
         made_directory = (mkdir (dir, 0700) != -1 || errno == EEXIST);
         g_free (dir);
 
-        dir = mc_build_filename (mc_config_get_data_path (), EDIT_DIR, (char *) NULL);
+        dir = mc_build_filename (mc_config_get_data_path (), EDIT_HOME_DIR, (char *) NULL);
         made_directory = (mkdir (dir, 0700) != -1 || errno == EEXIST);
         g_free (dir);
     }
