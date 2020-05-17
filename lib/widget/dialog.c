@@ -457,6 +457,12 @@ do_refresh (void)
         for (; d != NULL; d = g_list_next (d))
             if ((WIDGET (d->data)->pos_flags & WPOS_FULLSCREEN) != 0)
                 break;
+
+        /* when small dialog (i.e. error message) is created first,
+           there is no fullscreen dialog in the stack */
+        if (d == NULL)
+            d = g_list_last (top_dlg);
+
         /* back to top dialog */
         for (; d != NULL; d = g_list_previous (d))
             widget_draw (WIDGET (d->data));
