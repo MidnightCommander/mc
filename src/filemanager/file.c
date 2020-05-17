@@ -792,7 +792,7 @@ panel_operate_init_totals (const WPanel * panel, const vfs_path_t * source,
         status = FILE_CONT;
         ctx->progress_count = panel->marked;
         ctx->progress_bytes = panel->total;
-        ctx->progress_totals_computed = FALSE;
+        ctx->progress_totals_computed = verbose && dialog_type == FILEGUI_DIALOG_ONE_ITEM;
     }
 
     /* destroy already created UI for single file rename operation */
