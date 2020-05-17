@@ -2686,7 +2686,8 @@ edit_replace_cmd (WEdit * edit, gboolean again)
             if (edit->search->error != MC_SEARCH_E_OK)
             {
                 edit_show_search_error (edit, _("Replace"));
-                g_string_free (repl_str, TRUE);
+                if (repl_str != NULL)
+                    g_string_free (repl_str, TRUE);
                 break;
             }
 
