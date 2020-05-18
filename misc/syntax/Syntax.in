@@ -295,6 +295,9 @@ include r.syntax
 file ..\*\\.(?i:md)$ Markdown
 include markdown.syntax
 
+file ..\*\\.(?i:adoc)$ ASCIIDoc
+include asciidoc.syntax
+
 file ..\*\\.proto$ Protobuf\sFile
 include protobuf.syntax
 
