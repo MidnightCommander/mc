@@ -563,6 +563,8 @@ context default
     keyword = yellow
     keyword != yellow
     keyword == yellow
+    keyword || yellow
+    keyword && yellow
     keyword { brightcyan
     keyword } brightcyan
     keyword ( brightcyan
@@ -574,6 +576,10 @@ context default
     keyword : brightcyan
     keyword ? brightcyan
     keyword ; brightmagenta
+    keyword | brightmagenta
+    keyword & brightmagenta
+    keyword ~ brightmagenta
+    keyword ^ brightmagenta
 
 
 context exclusive /\* \*/ brown
