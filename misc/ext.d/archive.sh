@@ -79,14 +79,18 @@ do_view_action() {
         ;;
 
     lha)
-        lha l "${MC_EXT_FILENAME}"
+        lha l "${MC_EXT_FILENAME}" 2>/dev/null || \
+            jlha l "${MC_EXT_FILENAME}" 2>/dev/null || \
+            lhasa l "${MC_EXT_FILENAME}" 2>/dev/null
         ;;
     arj)
         arj l "${MC_EXT_FILENAME}" 2>/dev/null || \
-            unarj l "${MC_EXT_FILENAME}"
+            unarj l "${MC_EXT_FILENAME}" 2>/dev/null || \
+            7za l "${MC_EXT_FILENAME}" 2>/dev/null
         ;;
     cab)
-        cabextract -l "${MC_EXT_FILENAME}"
+        cabextract -l "${MC_EXT_FILENAME}" 2> /dev/null || \
+            7za l "${MC_EXT_FILENAME}" 2>/dev/null
         ;;
     ha)
         ha lf "${MC_EXT_FILENAME}"
@@ -133,7 +137,11 @@ do_view_action() {
         arc l "${MC_EXT_FILENAME}"
         ;;
     zip)
-        unzip -v "${MC_EXT_FILENAME}"
+        unzip -v "${MC_EXT_FILENAME}" 2> /dev/null || \
+            7za l "${MC_EXT_FILENAME}" 2> /dev/null
+        ;;
+    zipx)
+        7za l "${MC_EXT_FILENAME}" 2> /dev/null
         ;;
     zoo)
         zoo l "${MC_EXT_FILENAME}"

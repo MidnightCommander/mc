@@ -13,7 +13,11 @@ do_view_action() {
 
     case "${filetype}" in
     iso9660)
-         isoinfo -d -i "${MC_EXT_FILENAME}" && isoinfo -l -R -J -i "${MC_EXT_FILENAME}"
+        if which isoinfo > /dev/null 2>&1; then
+            isoinfo -d -i "${MC_EXT_FILENAME}" && isoinfo -l -R -J -i "${MC_EXT_FILENAME}"
+		else
+		    7za l "${MC_EXT_FILENAME}"
+		fi
         ;;
     cat)
         /bin/cat "${MC_EXT_FILENAME}" 2>/dev/null
