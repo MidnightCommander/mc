@@ -268,6 +268,37 @@ context default
     keyword  whole  with yellow
     keyword  whole  within yellow
 
+#Reserved Keywords IEEE1800-2009
+    keyword  whole  accept_on yellow
+    keyword  whole  checker yellow
+    keyword  whole  endchecker yellow
+    keyword  whole  eventually
+    keyword  whole  global yellow
+    keyword  whole  implies yellow
+    keyword  whole  let yellow
+    keyword  whole  nexttime yellow
+    keyword  whole  reject_on yellow
+    keyword  whole  restrict yellow
+    keyword  whole  s_always yellow
+    keyword  whole  s_eventually yellow
+    keyword  whole  s_nexttime yellow
+    keyword  whole  s_until yellow
+    keyword  whole  s_until_with yellow
+    keyword  whole  strong yellow
+    keyword  whole  sync_accept_on yellow
+    keyword  whole  sync_reject_on yellow
+    keyword  whole  unique0 yellow
+    keyword  whole  until yellow
+    keyword  whole  until_with yellow
+    keyword  whole  untyped yellow
+    keyword  whole  weak yellow
+
+#Reserved Keywords IEEE1800-2012
+    keyword  whole  implements yellow
+    keyword  whole  interconnect yellow
+    keyword  whole  nettype yellow
+    keyword  whole  soft yellow
+
 #Reserved Keywords 2
 
     keyword  whole  $bitstoreal yellow
