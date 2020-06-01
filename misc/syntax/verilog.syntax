@@ -299,69 +299,248 @@ context default
     keyword  whole  nettype yellow
     keyword  whole  soft yellow
 
-#Reserved Keywords 2
-
+#Utility system tasks and system functions
+    keyword  whole  $acos yellow
+    keyword  whole  $acosh yellow
+    keyword  whole  $asin yellow
+    keyword  whole  $asinh yellow
+    keyword  whole  $assertcontrol yellow
+    keyword  whole  $assertfailoff yellow
+    keyword  whole  $assertfailon yellow
+    keyword  whole  $assertkill yellow
+    keyword  whole  $assertnonvacuouson yellow
+    keyword  whole  $assertoff yellow
+    keyword  whole  $asserton yellow
+    keyword  whole  $assertpassoff yellow
+    keyword  whole  $assertpasson yellow
+    keyword  whole  $assertvacuousoff yellow
+    keyword  whole  $async$and$array yellow
+    keyword  whole  $async$and$plane yellow
+    keyword  whole  $async$nand$array yellow
+    keyword  whole  $async$nand$plane yellow
+    keyword  whole  $async$nor$array yellow
+    keyword  whole  $async$nor$plane yellow
+    keyword  whole  $async$or$array yellow
+    keyword  whole  $async$or$plane yellow
+    keyword  whole  $atan yellow
+    keyword  whole  $atan2 yellow
+    keyword  whole  $atanh yellow
+    keyword  whole  $bits yellow
     keyword  whole  $bitstoreal yellow
-    keyword  whole  $countdrivers yellow
+    keyword  whole  $bitstoshortreal yellow
+    keyword  whole  $cast yellow
+    keyword  whole  $ceil yellow
+    keyword  whole  $changed yellow
+    keyword  whole  $changed_gclk yellow
+    keyword  whole  $changing_gclk yellow
+    keyword  whole  $clog2 yellow
+    keyword  whole  $cos yellow
+    keyword  whole  $cosh yellow
+    keyword  whole  $countbits yellow
+    keyword  whole  $countones yellow
+    keyword  whole  $coverage_control yellow
+    keyword  whole  $coverage_get yellow
+    keyword  whole  $coverage_get_max yellow
+    keyword  whole  $coverage_merge yellow
+    keyword  whole  $coverage_save yellow
+    keyword  whole  $dimensions yellow
+    keyword  whole  $dist_chi_square yellow
+    keyword  whole  $dist_erlang yellow
+    keyword  whole  $dist_exponential yellow
+    keyword  whole  $dist_normal yellow
+    keyword  whole  $dist_poisson yellow
+    keyword  whole  $dist_t yellow
+    keyword  whole  $dist_uniform yellow
+    keyword  whole  $error yellow
+    keyword  whole  $error yellow
+    keyword  whole  $exit yellow
+    keyword  whole  $exp yellow
+    keyword  whole  $falling_gclk yellow
+    keyword  whole  $fatal yellow
+    keyword  whole  $fatal yellow
+    keyword  whole  $fell yellow
+    keyword  whole  $fell_gclk yellow
+    keyword  whole  $finish yellow
+    keyword  whole  $floor yellow
+    keyword  whole  $future_gclk yellow
+    keyword  whole  $get_coverage yellow
+    keyword  whole  $high yellow
+    keyword  whole  $hypot yellow
+    keyword  whole  $increment yellow
+    keyword  whole  $info yellow
+    keyword  whole  $info yellow
+    keyword  whole  $isunbounded yellow
+    keyword  whole  $isunknown yellow
+    keyword  whole  $itor yellow
+    keyword  whole  $left yellow
+    keyword  whole  $ln yellow
+    keyword  whole  $load_coverage_db yellow
+    keyword  whole  $log10 yellow
+    keyword  whole  $low yellow
+    keyword  whole  $onehot yellow
+    keyword  whole  $onehot0 yellow
+    keyword  whole  $past yellow
+    keyword  whole  $past_gclk yellow
+    keyword  whole  $pow yellow
+    keyword  whole  $printtimescale yellow
+    keyword  whole  $q_add yellow
+    keyword  whole  $q_exam yellow
+    keyword  whole  $q_full yellow
+    keyword  whole  $q_initialize yellow
+    keyword  whole  $q_remove yellow
+    keyword  whole  $random yellow
+    keyword  whole  $realtime yellow
+    keyword  whole  $realtobits yellow
+    keyword  whole  $right yellow
+    keyword  whole  $rising_gclk yellow
+    keyword  whole  $rose yellow
+    keyword  whole  $rose_gclk yellow
+    keyword  whole  $rtoi yellow
+    keyword  whole  $sampled yellow
+    keyword  whole  $set_coverage_db_name yellow
+    keyword  whole  $shortrealtobits yellow
+    keyword  whole  $signed yellow
+    keyword  whole  $sin yellow
+    keyword  whole  $sinh yellow
+    keyword  whole  $size yellow
+    keyword  whole  $sqrt yellow
+    keyword  whole  $stable yellow
+    keyword  whole  $stable_gclk yellow
+    keyword  whole  $steady_gclk yellow
+    keyword  whole  $stime yellow
+    keyword  whole  $stop yellow
+    keyword  whole  $sync$and$array yellow
+    keyword  whole  $sync$and$plane yellow
+    keyword  whole  $sync$nand$array yellow
+    keyword  whole  $sync$nand$plane yellow
+    keyword  whole  $sync$nor$array yellow
+    keyword  whole  $sync$nor$plane yellow
+    keyword  whole  $sync$or$array yellow
+    keyword  whole  $sync$or$plane yellow
+    keyword  whole  $system yellow
+    keyword  whole  $tan yellow
+    keyword  whole  $tanh yellow
+    keyword  whole  $time yellow
+    keyword  whole  $timeformat yellow
+    keyword  whole  $typename yellow
+    keyword  whole  $unpacked_dimensions yellow
+    keyword  whole  $unsigned yellow
+    keyword  whole  $warning yellow
+
+#Input/output system tasks and system functions
     keyword  whole  $display yellow
+    keyword  whole  $displayb yellow
+    keyword  whole  $displayh yellow
+    keyword  whole  $displayo yellow
     keyword  whole  $dumpall yellow
     keyword  whole  $dumpfile yellow
     keyword  whole  $dumpflush yellow
+    keyword  whole  $dumplimit yellow
     keyword  whole  $dumpoff yellow
     keyword  whole  $dumpon yellow
+    keyword  whole  $dumpports yellow
+    keyword  whole  $dumpportsall yellow
+    keyword  whole  $dumpportsflush yellow
+    keyword  whole  $dumpportslimit yellow
+    keyword  whole  $dumpportsoff yellow
+    keyword  whole  $dumpportson yellow
     keyword  whole  $dumpvars yellow
     keyword  whole  $fclose yellow
     keyword  whole  $fdisplay yellow
-    keyword  whole  $finish yellow
+    keyword  whole  $fdisplayb yellow
+    keyword  whole  $fdisplayh yellow
+    keyword  whole  $fdisplayo yellow
+    keyword  whole  $feof yellow
+    keyword  whole  $ferror yellow
+    keyword  whole  $fflush yellow
+    keyword  whole  $fgetc yellow
+    keyword  whole  $fgets yellow
     keyword  whole  $fmonitor yellow
+    keyword  whole  $fmonitorb yellow
+    keyword  whole  $fmonitorh yellow
+    keyword  whole  $fmonitoro yellow
     keyword  whole  $fopen yellow
+    keyword  whole  $fread yellow
+    keyword  whole  $fscanf yellow
+    keyword  whole  $fseek yellow
     keyword  whole  $fstrobe yellow
+    keyword  whole  $fstrobeb yellow
+    keyword  whole  $fstrobeh yellow
+    keyword  whole  $fstrobeo yellow
+    keyword  whole  $ftell yellow
     keyword  whole  $fwrite yellow
-    keyword  whole  $getpattern yellow
-    keyword  whole  $history yellow
+    keyword  whole  $fwriteb yellow
+    keyword  whole  $fwriteh yellow
+    keyword  whole  $fwriteo yellow
+    keyword  whole  $monitor yellow
+    keyword  whole  $monitorb yellow
+    keyword  whole  $monitorh yellow
+    keyword  whole  $monitoro yellow
+    keyword  whole  $monitoroff yellow
+    keyword  whole  $monitoron yellow
+    keyword  whole  $readmemb yellow
+    keyword  whole  $readmemh yellow
+    keyword  whole  $rewind yellow
+    keyword  whole  $sformat yellow
+    keyword  whole  $sformatf yellow
+    keyword  whole  $sscanf yellow
+    keyword  whole  $strobe yellow
+    keyword  whole  $strobeb yellow
+    keyword  whole  $strobeh yellow
+    keyword  whole  $strobeo yellow
+    keyword  whole  $swrite yellow
+    keyword  whole  $swriteb yellow
+    keyword  whole  $swriteh yellow
+    keyword  whole  $swriteo yellow
+    keyword  whole  $test$plusargs yellow
+    keyword  whole  $ungetc yellow
+    keyword  whole  $value$plusargs yellow
+    keyword  whole  $write yellow
+    keyword  whole  $writeb yellow
+    keyword  whole  $writeh yellow
+    keyword  whole  $writememb yellow
+    keyword  whole  $writememh yellow
+    keyword  whole  $writeo yellow
+
+#Timing checks
+    keyword  whole  $fullskew yellow
     keyword  whole  $hold yellow
+    keyword  whole  $nochange yellow
+    keyword  whole  $period yellow
+    keyword  whole  $recovery yellow
+    keyword  whole  $recrem yellow
+    keyword  whole  $removal yellow
+    keyword  whole  $setup yellow
+    keyword  whole  $setuphold yellow
+    keyword  whole  $skew yellow
+    keyword  whole  $timeskew yellow
+    keyword  whole  $width yellow
+
+#Other items (these are not specified in any verilog standard. These may be vendor-specific or deprecated):
+    keyword  whole  $history yellow
+    keyword  whole  $showvariables yellow
+
+#Optional system tasks and system functions
+    keyword  whole  $countdrivers yellow
+    keyword  whole  $getpattern yellow
     keyword  whole  $incsave yellow
     keyword  whole  $input yellow
-    keyword  whole  $itor yellow
     keyword  whole  $key yellow
     keyword  whole  $list yellow
     keyword  whole  $log yellow
-    keyword  whole  $monitor yellow
-    keyword  whole  $monitoroff yellow
-    keyword  whole  $monitoron yellow
     keyword  whole  $nokey yellow
     keyword  whole  $nolog yellow
-    keyword  whole  $period yellow
-    keyword  whole  $printtimescale yellow
-    keyword  whole  $readmemb yellow
-    keyword  whole  $readmemh yellow
-    keyword  whole  $realtime yellow
-    keyword  whole  $realtobits yellow
-    keyword  whole  $recovery yellow
     keyword  whole  $reset yellow
     keyword  whole  $reset_count yellow
     keyword  whole  $reset_value yellow
     keyword  whole  $restart yellow
-    keyword  whole  $rtoi yellow
     keyword  whole  $save yellow
     keyword  whole  $scale yellow
     keyword  whole  $scope yellow
-    keyword  whole  $setup yellow
-    keyword  whole  $setuphold yellow
     keyword  whole  $showscopes yellow
-    keyword  whole  $showvariables yellow
     keyword  whole  $showvars yellow
-    keyword  whole  $skew yellow
     keyword  whole  $sreadmemb yellow
     keyword  whole  $sreadmemh yellow
-    keyword  whole  $stime yellow
-    keyword  whole  $stop yellow
-    keyword  whole  $strobe yellow
-    keyword  whole  $time yellow
-    keyword  whole  $timeformat yellow
-    keyword  whole  $width yellow
-    keyword  whole  $write yellow
-
 
     keyword > yellow
     keyword < yellow
