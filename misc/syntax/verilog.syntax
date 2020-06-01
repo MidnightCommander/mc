@@ -9,34 +9,45 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_
 context default
 
 
-#Preprocessor keywords
-    keyword  whole  `accelerate brightred/
-    keyword  whole  `autoexpand_vectornets brightred/
+#Compiler directives
+    keyword  whole  `__FILE__ brightred/
+    keyword  whole  `__LINE__ brightred/
+    keyword  whole  `begin_keywords brightred/
     keyword  whole  `celldefine brightred/
     keyword  whole  `default_nettype brightred/
     keyword  whole  `define brightred/
     keyword  whole  `else brightred/
+    keyword  whole  `elsif brightred/
+    keyword  whole  `end_keywords brightred/
     keyword  whole  `endcelldefine brightred/
     keyword  whole  `endif brightred/
-    keyword  whole  `endprotect brightred/
-    keyword  whole  `endprotected brightred/
-    keyword  whole  `expand_vectornets brightred/
     keyword  whole  `ifdef brightred/
     keyword  whole  `ifndef brightred/
     keyword  whole  `include brightred/
+    keyword  whole  `line brightred/
+    keyword  whole  `nounconnected_drive brightred/
+    keyword  whole  `pragma brightred/
+    keyword  whole  `resetall brightred/
+    keyword  whole  `timescale brightred/
+    keyword  whole  `unconnected_drive brightred/
+    keyword  whole  `undef brightred/
+    keyword  whole  `undefineall brightred/
+
+#Other -- these are not defined in the verilog standards, may be vendor-specific:
+    keyword  whole  `accelerate brightred/
+    keyword  whole  `autoexpand_vectornets brightred/
+    keyword  whole  `endprotect brightred/
+    keyword  whole  `endprotected brightred/
+    keyword  whole  `expand_vectornets brightred/
     keyword  whole  `noaccelerate brightred/
     keyword  whole  `noexpand_vectornets brightred/
     keyword  whole  `noremove_gatenames brightred/
     keyword  whole  `noremove_netnames brightred/
-    keyword  whole  `nounconnected_drive brightred/
     keyword  whole  `protect brightred/
     keyword  whole  `protected brightred/
     keyword  whole  `remove_gatenames brightred/
     keyword  whole  `remove_netnames brightred/
-    keyword  whole  `resetall brightred/
     keyword  whole  `signed brightred/
-    keyword  whole  `timescale brightred/
-    keyword  whole  `unconnected_drive brightred/
     keyword  whole  `unsigned brightred/
 
 #Reserved Keywords IEEE1364-1995
