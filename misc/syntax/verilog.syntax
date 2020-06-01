@@ -43,7 +43,6 @@ context default
     keyword  whole  always yellow
     keyword  whole  and yellow
     keyword  whole  assign yellow
-    keyword  whole  attribute yellow
     keyword  whole  begin yellow
     keyword  whole  buf yellow
     keyword  whole  bufif0 yellow
@@ -59,7 +58,6 @@ context default
     keyword  whole  edge yellow
     keyword  whole  else yellow
     keyword  whole  end yellow
-    keyword  whole  endattribute yellow
     keyword  whole  endcase yellow
     keyword  whole  endmodule yellow
     keyword  whole  endfunction yellow
@@ -115,7 +113,6 @@ context default
     keyword  whole  small yellow
     keyword  whole  specify yellow
     keyword  whole  specparam yellow
-    keyword  whole  strength yellow
     keyword  whole  strong0 yellow
     keyword  whole  strong1 yellow
     keyword  whole  supply0 yellow
