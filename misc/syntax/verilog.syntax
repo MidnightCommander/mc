@@ -166,6 +166,9 @@ context default
     keyword  whole  unsigned yellow
     keyword  whole  use yellow
 
+#Reserved Keywords IEEE1364-2005
+    keyword  whole  uwire yellow
+
 #Reserved Keywords 2
 
     keyword  whole  $bitstoreal yellow
