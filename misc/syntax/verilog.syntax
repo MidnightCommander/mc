@@ -144,6 +144,26 @@ context default
     keyword  whole  xor yellow
 
 #Reserved Keywords IEEE1364-2001
+    keyword  whole  automatic yellow
+    keyword  whole  cell yellow
+    keyword  whole  config yellow
+    keyword  whole  design yellow
+    keyword  whole  endconfig yellow
+    keyword  whole  endgenerate yellow
+    keyword  whole  generate yellow
+    keyword  whole  genvar yellow
+    keyword  whole  incdir yellow
+    keyword  whole  include yellow
+    keyword  whole  instance yellow
+    keyword  whole  liblist yellow
+    keyword  whole  library yellow
+    keyword  whole  localparam yellow
+    keyword  whole  noshowcancelled yellow
+    keyword  whole  pulsestyle_ondetect yellow
+    keyword  whole  pulsestyle_onevent yellow
+    keyword  whole  showcancelled yellow
+    keyword  whole  signed yellow
+    keyword  whole  unsigned yellow
     keyword  whole  use yellow
 
 #Reserved Keywords 2
