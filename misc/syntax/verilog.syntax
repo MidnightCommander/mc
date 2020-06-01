@@ -39,7 +39,7 @@ context default
     keyword  whole  `unconnected_drive brightred/
     keyword  whole  `unsigned brightred/
 
-#Reserved Keywords 1
+#Reserved Keywords IEEE1364-1995
     keyword  whole  always yellow
     keyword  whole  and yellow
     keyword  whole  assign yellow
@@ -74,6 +74,7 @@ context default
     keyword  whole  highz0 yellow
     keyword  whole  highz1 yellow
     keyword  whole  if yellow
+    keyword  whole  ifnone yellow
     keyword  whole  initial yellow
     keyword  whole  inout yellow
     keyword  whole  input yellow
@@ -101,6 +102,8 @@ context default
     keyword  whole  pullup yellow
     keyword  whole  pulldown yellow
     keyword  whole  rcmos yellow
+    keyword  whole  real yellow
+    keyword  whole  realtime yellow
     keyword  whole  reg yellow
     keyword  whole  release yellow
     keyword  whole  repeat yellow
@@ -129,7 +132,6 @@ context default
     keyword  whole  triand yellow
     keyword  whole  trior yellow
     keyword  whole  trireg yellow
-    keyword  whole  use yellow
     keyword  whole  vectored yellow
     keyword  whole  wait yellow
     keyword  whole  wand yellow
@@ -140,6 +142,9 @@ context default
     keyword  whole  wor yellow
     keyword  whole  xnor yellow
     keyword  whole  xor yellow
+
+#Reserved Keywords IEEE1364-2001
+    keyword  whole  use yellow
 
 #Reserved Keywords 2
 
