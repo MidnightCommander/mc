@@ -44,6 +44,7 @@ SYNTAXFILES =			\
 	jal.syntax		\
 	java.syntax		\
 	js.syntax		\
+	kotlin.syntax		\
 	latex.syntax		\
 	lisp.syntax		\
 	lkr.syntax		\

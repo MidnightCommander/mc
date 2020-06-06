@@ -1,0 +1,188 @@
+# kotlin.syntax
+#
+# URL: https://github.com/anvabr/kotlin.syntax
+#
+# License: GNU General Public License v3.0
+
+context default
+
+# hard keywords
+	keyword whole as yellow
+	keyword whole as? yellow
+	keyword whole break yellow
+	keyword whole class yellow
+	keyword whole continue yellow
+	keyword whole do yellow
+	keyword whole else yellow
+	keyword whole false yellow
+	keyword whole for yellow
+	keyword whole fun yellow
+	keyword whole if yellow
+	keyword whole in yellow
+	keyword whole !in yellow
+	keyword whole interface yellow
+	keyword whole is yellow
+	keyword whole !is yellow
+	keyword whole null yellow
+	keyword whole object yellow
+	keyword whole package brown
+	keyword whole return yellow
+	keyword whole super yellow
+	keyword whole this yellow
+	keyword whole throw yellow
+	keyword whole true yellow
+	keyword whole try yellow
+	keyword whole typealias yellow
+	keyword whole val yellow
+	keyword whole var yellow
+	keyword whole when yellow
+	keyword whole while yellow	
+
+# soft keywords
+	keyword whole by brightgreen
+	keyword whole catch yellow
+	keyword whole constructor brightgreen
+	keyword whole delegate brightgreen
+	keyword whole dynamic brightgreen
+#	keyword whole field brightgreen
+	keyword whole file brightgreen
+	keyword whole finally brightgreen
+	keyword whole get brightgreen
+	keyword whole import brown
+	keyword whole init brightgreen
+	keyword whole param brightgreen
+	keyword whole property brightgreen
+	keyword whole reciever brightgreen
+	keyword whole set brightgreen
+	keyword whole setparam brightgreen
+	keyword whole where brightgreen
+
+# modifier keywords
+	keyword whole abstract brightmagenta
+	keyword whole annotation brightmagenta
+	keyword whole companion brightmagenta
+	keyword whole const brightmagenta
+	keyword whole crossinline brightmagenta
+	keyword whole data brightmagenta
+	keyword whole enum brightmagenta
+	keyword whole external brightmagenta
+	keyword whole final brightmagenta
+	keyword whole infix brightmagenta
+	keyword whole inline brightmagenta
+	keyword whole inner brightmagenta
+	keyword whole internal brightmagenta
+	keyword whole lateinit brightmagenta
+	keyword whole noinline brightmagenta
+	keyword whole open brightmagenta
+	keyword whole operator brightmagenta
+	keyword whole out brightmagenta
+	keyword whole override brightmagenta
+	keyword whole private brightmagenta
+	keyword whole protected brightmagenta
+	keyword whole public brightmagenta
+	keyword whole reified brightmagenta
+	keyword whole sealed brightmagenta
+	keyword whole suspend brightmagenta
+	keyword whole tailrec brightmagenta
+	keyword whole vararg brightmagenta
+
+# special identifiers
+	keyword whole field brightgreen
+	keyword whole it brightgreen
+
+	keyword @\[ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] brightcyan	
+	keyword \[ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\]@ brightcyan
+
+# operators and special symbols
+	keyword \+ brightcyan
+	keyword - brightcyan
+	keyword \* brightcyan
+	keyword / brightcyan
+	keyword % brightcyan
+	keyword = brightcyan
+	keyword \+= brightcyan
+	keyword -= brightcyan
+	keyword \*= brightcyan
+	keyword /= brightcyan
+	keyword %= brightcyan
+	keyword \+\+ brightcyan
+	keyword -- brightcyan
+	keyword && brightcyan
+	keyword || brightcyan
+	keyword ! brightcyan
+	keyword == brightcyan
+	keyword != brightcyan
+	keyword === brightcyan
+	keyword !== brightcyan
+	keyword > brightcyan
+	keyword < brightcyan
+	keyword >= brightcyan
+	keyword <= brightcyan
+	keyword [ brightcyan
+	keyword ] brightcyan
+	keyword !! brightcyan
+	keyword ?. brightcyan
+	keyword ?: brightcyan
+	keyword :: brightcyan
+	keyword .. brightcyan
+	keyword : brightcyan
+	keyword ? brightcyan
+	keyword -> brightcyan
+	keyword @ brightcyan
+	keyword ; brightcyan
+	keyword $ brightcyan
+	keyword _ brightcyan
+
+# built-in types
+	keyword whole Double brightred
+	keyword whole Float brightred
+	keyword whole Long brightred
+	keyword whole Int brightred
+	keyword whole Short brightred
+	keyword whole Byte brightred
+	keyword whole Char brightred
+	keyword whole Boolean brightred
+	keyword whole Array brightred
+	keyword whole String brightred
+	keyword whole ByteArray brightred
+	keyword whole ByteSequence brightred
+
+# comment
+context exclusive /\* \*/ gray
+context exclusive // \n gray
+
+context """ """ green
+    spellcheck
+    keyword \\" brightgreen
+    keyword %% brightgreen
+    keyword %\[#0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[L\]\{eEfgGoxX\} brightgreen
+    keyword %\[0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[hl\]\{diuxX\} brightgreen
+    keyword %\[hl\]n brightgreen
+    keyword %\[-\]\[0123456789\*\]\[.\]\[0123456789\*\]s brightgreen
+    keyword %[*] brightgreen
+    keyword %c brightgreen
+    keyword %p brightgreen
+    keyword $\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] brightgreen
+    keyword \\\{0123\}\{01234567\}\{01234567\} brightgreen
+    keyword \\\\ brightgreen
+    keyword \\' brightgreen
+    keyword \\\{abtnvfr\} brightgreen
+
+context ' ' green
+
+context " " green
+    spellcheck
+    keyword \\" brightgreen
+    keyword %% brightgreen
+    keyword %\[#0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[L\]\{eEfgGoxX\} brightgreen
+    keyword %\[0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[hl\]\{diuxX\} brightgreen
+    keyword %\[hl\]n brightgreen
+    keyword %\[-\]\[0123456789\*\]\[.\]\[0123456789\*\]s brightgreen
+    keyword %[*] brightgreen
+    keyword %c brightgreen
+    keyword %p brightgreen
+    keyword $\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] brightgreen
+    keyword \\\{0123\}\{01234567\}\{01234567\} brightgreen
+    keyword \\\\ brightgreen
+    keyword \\' brightgreen
+    keyword \\\{abtnvfr\} brightgreen
