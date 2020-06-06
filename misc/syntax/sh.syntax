@@ -40,8 +40,8 @@ context default
 
     keyword $ brightgreen
 
-    keyword wholeleft linestart \[\s\]*function*() brightmagenta
-    keyword wholeleft linestart \[\s\]*function\[\s\]+ brightmagenta
+    keyword wholeleft linestart function*() brightmagenta
+    keyword wholeleft linestart function\[\s\]+ brightmagenta
     keyword wholeright +() brightmagenta
 
 wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
