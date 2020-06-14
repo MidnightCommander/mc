@@ -152,6 +152,10 @@ mcrpmfs_list_fastRPM ()
     echo "$FILEPREF 0 $DATE INFO/REQUIRES"
     echo "$FILEPREF 0 $DATE INFO/OBSOLETES"
     echo "$FILEPREF 0 $DATE INFO/PROVIDES"
+    echo "$FILEPREF 0 $DATE INFO/ENHANCES"
+    echo "$FILEPREF 0 $DATE INFO/SUGGESTS"
+    echo "$FILEPREF 0 $DATE INFO/RECOMMENDS"
+    echo "$FILEPREF 0 $DATE INFO/SUPPLEMENTS"
     echo "$FILEPREF 0 $DATE INFO/CONFLICTS"
     echo "$FILEPREF 0 $DATE INFO/CHANGELOG"
 }
@@ -288,6 +292,10 @@ mcrpmfs_copyout ()
 	INFO/LICENSE)		mcrpmfs_getOneTag "LICENSE" >"$2"; exit 0;;
 	INFO/RPMVERSION)	mcrpmfs_getRawOneTag "%{RPMVERSION}\n" >"$2"; exit 0;;
 	INFO/REQUIRES)		mcrpmfs_getRawOneTag "[%{REQUIRENAME} %{REQUIREFLAGS:depflags} %{REQUIREVERSION}\n]" >"$2"; exit 0;;
+	INFO/ENHANCES)		mcrpmfs_getRawOneTag "[%|ENHANCESFLAGS:depflag_strong?{}:{%{ENHANCESNAME} %{ENHANCESFLAGS:depflags} %{ENHANCESVERSION}\n}|]" "$f" >"$3"; exit 0;;
+	INFO/SUGGESTS)		mcrpmfs_getRawOneTag "[%|SUGGESTSFLAGS:depflag_strong?{}:{%{SUGGESTSNAME} %{SUGGESTSFLAGS:depflags} %{SUGGESTSVERSION}\n}|]" "$f" >"$3"; exit 0;;
+	INFO/RECOMMENDS)	mcrpmfs_getRawOneTag "[%|SUGGESTSFLAGS:depflag_strong?{%{SUGGESTSNAME} %{SUGGESTSFLAGS:depflags} %{SUGGESTSVERSION}\n}|]" "$f" >"$3"; exit 0;;
+	INFO/SUPPLEMENTS)	mcrpmfs_getRawOneTag "[%|ENHANCESFLAGS:depflag_strong?{%{ENHANCESNAME} %{ENHANCESFLAGS:depflags} %{ENHANCESVERSION}\n}|]" "$f" >"$3"; exit 0;;
 	INFO/PROVIDES)		mcrpmfs_getRawOneTag "[%{PROVIDES} %{PROVIDEFLAGS:depflags} %{PROVIDEVERSION}\n]" >"$2"; exit 0;;
 	INFO/SCRIPTS/PRETRANS)	mcrpmfs_getRawOneTag "%{RPMTAG_PRETRANS}\n" >"$2"; exit 0;;
 	INFO/SCRIPTS/PRETRANSPROG)	mcrpmfs_getRawOneTag "%{RPMTAG_PRETRANSPROG}\n" >"$2"; exit 0;;
