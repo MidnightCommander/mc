@@ -2120,8 +2120,15 @@ tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
 #endif /* KEY_MOUSE */
                           || c == MCKEY_EXTENDED_MOUSE))
     {
-        /* Mouse event */
-        xmouse_get_event (event, c == MCKEY_EXTENDED_MOUSE);
+        /* Mouse event. See tickets 2956 and 3954 for extended mode detection. */
+        gboolean extended = c == MCKEY_EXTENDED_MOUSE;
+
+#ifdef KEY_MOUSE
+        extended = extended || (c == KEY_MOUSE && xmouse_seq == NULL
+                                && xmouse_extended_seq != NULL);
+#endif /* KEY_MOUSE */
+
+        xmouse_get_event (event, extended);
         c = (event->type != 0) ? EV_MOUSE : EV_NONE;
     }
     else if (c == MCKEY_BRACKETED_PASTING_START)
