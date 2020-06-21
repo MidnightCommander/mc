@@ -363,11 +363,11 @@ tty_init_xterm_support (gboolean is_xterm)
 
     /* There's only one termcap entry "kmous", typically containing "\E[M" or "\E[<".
      * We need the former in xmouse_seq, the latter in xmouse_extended_seq.
-     * See tickets 2956 and 3954 for details. */
+     * See tickets 2956, 3954, and 4063 for details. */
     if (xmouse_seq != NULL)
     {
         if (strcmp (xmouse_seq, ESC_STR "[<") == 0)
-            xmouse_seq = NULL;
+            xmouse_seq = ESC_STR "[M";
 
         xmouse_extended_seq = ESC_STR "[<";
     }
