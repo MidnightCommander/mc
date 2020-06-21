@@ -97,7 +97,7 @@ include texinfo.syntax
 file ..\*\\.c$ C\sProgram
 include c.syntax
 
-file ..\*\\.([hC]|(?i:cxx|cc|cpp|hpp|hxx|hh)|[Hh]\\.in)$ C/C\+\+\sProgram
+file ..\*\\.([hC]|(?i:cxx|cc|cpp|hpp|hxx|hh|ino)|[Hh]\\.in)$ C/C\+\+\sProgram
 include cxx.syntax
 
 file ..\*\\.d$ D\sProgram
