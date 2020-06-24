@@ -48,6 +48,9 @@
 #include <sys/ioctl.h>
 #endif
 
+/* In some systems (like Solaris 11.4 SPARC), TIOCSWINSZ is defined in termios.h */
+#include <termios.h>
+
 #include "lib/global.h"
 #include "lib/strutil.h"
 
