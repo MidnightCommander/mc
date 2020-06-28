@@ -287,104 +287,6 @@ tar_from_oct (int digs, const char *where)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static struct vfs_s_super *
-tar_new_archive (struct vfs_class *me)
-{
-    tar_super_t *arch;
-
-    arch = g_new0 (tar_super_t, 1);
-    arch->base.me = me;
-    arch->fd = -1;
-    arch->type = TAR_UNKNOWN;
-
-    return VFS_SUPER (arch);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-tar_free_archive (struct vfs_class *me, struct vfs_s_super *archive)
-{
-    tar_super_t *arch = TAR_SUPER (archive);
-
-    (void) me;
-
-    if (arch->fd != -1)
-    {
-        mc_close (arch->fd);
-        arch->fd = -1;
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/* Returns fd of the open tar file */
-static int
-tar_open_archive_int (struct vfs_class *me, const vfs_path_t * vpath, struct vfs_s_super *archive)
-{
-    int result, type;
-    tar_super_t *arch;
-    mode_t mode;
-    struct vfs_s_inode *root;
-
-    result = mc_open (vpath, O_RDONLY);
-    if (result == -1)
-    {
-        message (D_ERROR, MSG_ERROR, _("Cannot open tar archive\n%s"), vfs_path_as_str (vpath));
-        ERRNOR (ENOENT, -1);
-    }
-
-    archive->name = g_strdup (vfs_path_as_str (vpath));
-    arch = TAR_SUPER (archive);
-    mc_stat (vpath, &arch->st);
-
-    /* Find out the method to handle this tar file */
-    type = get_compression_type (result, archive->name);
-    if (type == COMPRESSION_NONE)
-        mc_lseek (result, 0, SEEK_SET);
-    else
-    {
-        char *s;
-        vfs_path_t *tmp_vpath;
-
-        mc_close (result);
-        s = g_strconcat (archive->name, decompress_extension (type), (char *) NULL);
-        tmp_vpath = vfs_path_from_str_flags (s, VPF_NO_CANON);
-        result = mc_open (tmp_vpath, O_RDONLY);
-        vfs_path_free (tmp_vpath, TRUE);
-        if (result == -1)
-            message (D_ERROR, MSG_ERROR, _("Cannot open tar archive\n%s"), s);
-        g_free (s);
-        if (result == -1)
-        {
-            MC_PTR_FREE (archive->name);
-            ERRNOR (ENOENT, -1);
-        }
-    }
-
-    arch->fd = result;
-    mode = arch->st.st_mode & 07777;
-    if (mode & 0400)
-        mode |= 0100;
-    if (mode & 0040)
-        mode |= 0010;
-    if (mode & 0004)
-        mode |= 0001;
-    mode |= S_IFDIR;
-
-    root = vfs_s_new_inode (me, archive, &arch->st);
-    root->st.st_mode = mode;
-    root->data_offset = -1;
-    root->st.st_nlink++;
-    root->st.st_dev = VFS_SUBCLASS (me)->rdev++;
-
-    archive->root = root;
-
-    return result;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 static union block *
 tar_get_next_block (struct vfs_s_super *archive, int tard)
 {
@@ -809,6 +711,104 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
         }
         return HEADER_SUCCESS;
     }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static struct vfs_s_super *
+tar_new_archive (struct vfs_class *me)
+{
+    tar_super_t *arch;
+
+    arch = g_new0 (tar_super_t, 1);
+    arch->base.me = me;
+    arch->fd = -1;
+    arch->type = TAR_UNKNOWN;
+
+    return VFS_SUPER (arch);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+tar_free_archive (struct vfs_class *me, struct vfs_s_super *archive)
+{
+    tar_super_t *arch = TAR_SUPER (archive);
+
+    (void) me;
+
+    if (arch->fd != -1)
+    {
+        mc_close (arch->fd);
+        arch->fd = -1;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/* Returns fd of the open tar file */
+static int
+tar_open_archive_int (struct vfs_class *me, const vfs_path_t * vpath, struct vfs_s_super *archive)
+{
+    int result, type;
+    tar_super_t *arch;
+    mode_t mode;
+    struct vfs_s_inode *root;
+
+    result = mc_open (vpath, O_RDONLY);
+    if (result == -1)
+    {
+        message (D_ERROR, MSG_ERROR, _("Cannot open tar archive\n%s"), vfs_path_as_str (vpath));
+        ERRNOR (ENOENT, -1);
+    }
+
+    archive->name = g_strdup (vfs_path_as_str (vpath));
+    arch = TAR_SUPER (archive);
+    mc_stat (vpath, &arch->st);
+
+    /* Find out the method to handle this tar file */
+    type = get_compression_type (result, archive->name);
+    if (type == COMPRESSION_NONE)
+        mc_lseek (result, 0, SEEK_SET);
+    else
+    {
+        char *s;
+        vfs_path_t *tmp_vpath;
+
+        mc_close (result);
+        s = g_strconcat (archive->name, decompress_extension (type), (char *) NULL);
+        tmp_vpath = vfs_path_from_str_flags (s, VPF_NO_CANON);
+        result = mc_open (tmp_vpath, O_RDONLY);
+        vfs_path_free (tmp_vpath, TRUE);
+        if (result == -1)
+            message (D_ERROR, MSG_ERROR, _("Cannot open tar archive\n%s"), s);
+        g_free (s);
+        if (result == -1)
+        {
+            MC_PTR_FREE (archive->name);
+            ERRNOR (ENOENT, -1);
+        }
+    }
+
+    arch->fd = result;
+    mode = arch->st.st_mode & 07777;
+    if (mode & 0400)
+        mode |= 0100;
+    if (mode & 0040)
+        mode |= 0010;
+    if (mode & 0004)
+        mode |= 0001;
+    mode |= S_IFDIR;
+
+    root = vfs_s_new_inode (me, archive, &arch->st);
+    root->st.st_mode = mode;
+    root->data_offset = -1;
+    root->st.st_nlink++;
+    root->st.st_dev = VFS_SUBCLASS (me)->rdev++;
+
+    archive->root = root;
+
+    return result;
 }
 
 /* --------------------------------------------------------------------------------------------- */
