@@ -227,11 +227,12 @@ enum archive_format
 
 typedef enum
 {
-    STATUS_BADCHECKSUM,
-    STATUS_SUCCESS,
-    STATUS_EOFMARK,
-    STATUS_EOF
-} ReadStatus;
+    HEADER_STILL_UNREAD,        /* for when read_header has not been called */
+    HEADER_SUCCESS,             /* header successfully read and checksummed */
+    HEADER_ZERO_BLOCK,          /* zero block where header expected */
+    HEADER_END_OF_FILE,         /* true end of file while header expected */
+    HEADER_FAILURE              /* ill-formed header, or bad checksum */
+} read_header;
 
 typedef struct
 {
@@ -411,7 +412,7 @@ tar_skip_n_records (struct vfs_s_super *archive, int tard, size_t n)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static ReadStatus
+static read_header
 tar_checksum (const union block *header)
 {
     long recsum;
@@ -447,12 +448,12 @@ tar_checksum (const union block *header)
      * for the 8 blanks we faked for the checksum field.
      */
     if (sum == 8 * ' ')
-        return STATUS_EOFMARK;
+        return HEADER_ZERO_BLOCK;
 
     if (sum != recsum && signed_sum != recsum)
-        return STATUS_BADCHECKSUM;
+        return HEADER_FAILURE;
 
-    return STATUS_SUCCESS;
+    return HEADER_SUCCESS;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -596,16 +597,12 @@ tar_fill_stat (struct vfs_s_super *archive, struct stat *st, union block *header
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/**
- * Return 1 for success, 0 if the checksum is bad, EOF on eof,
- * 2 for a block full of zeros (EOF marker).
- *
- */
-static ReadStatus
+
+static read_header
 tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, size_t * h_size)
 {
     tar_super_t *arch = TAR_SUPER (archive);
-    ReadStatus checksum_status;
+    read_header checksum_status;
     union block *header;
     static char *next_long_name = NULL, *next_long_link = NULL;
 
@@ -613,10 +610,10 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
     {
         header = tar_get_next_block (archive, tard);
         if (header == NULL)
-            return STATUS_EOF;
+            return HEADER_END_OF_FILE;
 
         checksum_status = tar_checksum (header);
-        if (checksum_status != STATUS_SUCCESS)
+        if (checksum_status != HEADER_SUCCESS)
             return checksum_status;
 
         *h_size = tar_decode_header (header, arch);
@@ -626,7 +623,7 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
         {
             if (arch->type == TAR_UNKNOWN)
                 arch->type = TAR_POSIX;
-            return STATUS_SUCCESS;
+            return HEADER_SUCCESS;
         }
 
         if (header->header.typeflag == GNUTYPE_LONGNAME
@@ -643,7 +640,7 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
             if (*h_size > MC_MAXPATHLEN)
             {
                 message (D_ERROR, MSG_ERROR, _("Inconsistent tar archive"));
-                return STATUS_BADCHECKSUM;
+                return HEADER_FAILURE;
             }
 
             longp = header->header.typeflag == GNUTYPE_LONGNAME ? &next_long_name : &next_long_link;
@@ -658,7 +655,7 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
                 {
                     MC_PTR_FREE (*longp);
                     message (D_ERROR, MSG_ERROR, _("Unexpected EOF on archive file"));
-                    return STATUS_BADCHECKSUM;
+                    return HEADER_FAILURE;
                 }
                 written = BLOCKSIZE;
                 if ((off_t) written > size)
@@ -672,7 +669,7 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
             {
                 MC_PTR_FREE (*longp);
                 message (D_ERROR, MSG_ERROR, _("Inconsistent tar archive"));
-                return STATUS_BADCHECKSUM;
+                return HEADER_FAILURE;
             }
 
             *bp = '\0';
@@ -761,7 +758,7 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
         if (parent == NULL)
         {
             message (D_ERROR, MSG_ERROR, _("Inconsistent tar archive"));
-            return STATUS_BADCHECKSUM;
+            return HEADER_FAILURE;
         }
 
         if (header->header.typeflag == LNKTYPE)
@@ -811,7 +808,7 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
             if (inode != NULL)
                 inode->data_offset = current_tar_position;
         }
-        return STATUS_SUCCESS;
+        return HEADER_SUCCESS;
     }
 }
 
@@ -825,7 +822,7 @@ tar_open_archive (struct vfs_s_super *archive, const vfs_path_t * vpath,
                   const vfs_path_element_t * vpath_element)
 {
     /* Initial status at start of archive */
-    ReadStatus status = STATUS_EOFMARK;
+    read_header status = HEADER_STILL_UNREAD;
     int tard;
 
     current_tar_position = 0;
@@ -837,13 +834,19 @@ tar_open_archive (struct vfs_s_super *archive, const vfs_path_t * vpath,
     while (TRUE)
     {
         size_t h_size = 0;
-        ReadStatus prev_status = status;
+        read_header prev_status;
 
+        prev_status = status;
         status = tar_read_header (vpath_element->class, archive, tard, &h_size);
 
         switch (status)
         {
-        case STATUS_SUCCESS:
+        case HEADER_STILL_UNREAD:
+            message (D_ERROR, MSG_ERROR, _("%s\ndoesn't look like a tar archive."),
+                     vfs_path_as_str (vpath));
+            return -1;
+
+        case HEADER_SUCCESS:
             tar_skip_n_records (archive, tard, (h_size + BLOCKSIZE - 1) / BLOCKSIZE);
             continue;
 
@@ -853,11 +856,11 @@ tar_open_archive (struct vfs_s_super *archive, const vfs_path_t * vpath,
              * If the previous header was good, tell them
              * that we are skipping bad ones.
              */
-        case STATUS_BADCHECKSUM:
+        case HEADER_FAILURE:
             switch (prev_status)
             {
                 /* Error on first block */
-            case STATUS_EOFMARK:
+            case HEADER_ZERO_BLOCK:
                 {
                     message (D_ERROR, MSG_ERROR, _("%s\ndoesn't look like a tar archive."),
                              vfs_path_as_str (vpath));
@@ -865,13 +868,13 @@ tar_open_archive (struct vfs_s_super *archive, const vfs_path_t * vpath,
 
                     /* Error after header rec */
                 }
-            case STATUS_SUCCESS:
+            case HEADER_SUCCESS:
                 /* Error after error */
 
-            case STATUS_BADCHECKSUM:
+            case HEADER_FAILURE:
                 return -1;
 
-            case STATUS_EOF:
+            case HEADER_END_OF_FILE:
                 return 0;
 
             default:
@@ -880,10 +883,10 @@ tar_open_archive (struct vfs_s_super *archive, const vfs_path_t * vpath,
             MC_FALLTHROUGH;
 
             /* Record of zeroes */
-        case STATUS_EOFMARK:   /* If error after 0's */
+        case HEADER_ZERO_BLOCK:        /* If error after 0's */
             MC_FALLTHROUGH;
             /* exit from loop */
-        case STATUS_EOF:       /* End of archive */
+        case HEADER_END_OF_FILE:       /* End of archive */
             break;
         default:
             break;
