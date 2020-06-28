@@ -402,7 +402,7 @@ tar_get_next_block (struct vfs_s_super *archive, int tard)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-tar_skip_n_records (struct vfs_s_super *archive, int tard, size_t n)
+tar_skip_n_records (struct vfs_s_super *archive, int tard, off_t n)
 {
     (void) archive;
 
