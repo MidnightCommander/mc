@@ -412,45 +412,44 @@ tar_skip_n_records (struct vfs_s_super *archive, int tard, size_t n)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/** Check header checksum.
+ */
 static read_header
 tar_checksum (const union block *header)
 {
-    long recsum;
-    long signed_sum = 0;
-    long sum = 0;
-    int i;
+    size_t i;
+    int unsigned_sum = 0;       /* the POSIX one :-) */
+    int signed_sum = 0;         /* the Sun one :-( */
+    int recorded_sum;
+    long parsed_sum;
     const char *p = header->buffer;
 
-    recsum = tar_from_oct (8, header->header.chksum);
-
-    for (i = sizeof (*header); --i >= 0;)
+    for (i = sizeof (*header); i-- != 0;)
     {
-        /*
-         * We can't use unsigned char here because of old compilers,
-         * e.g. V7.
-         */
-        signed_sum += *p;
-        sum += 0xFF & *p++;
+        unsigned_sum += (unsigned char) *p;
+        signed_sum += (signed char) (*p++);
     }
 
-    /* Adjust checksum to count the "chksum" field as blanks. */
-    for (i = sizeof (header->header.chksum); --i >= 0;)
-    {
-        sum -= 0xFF & header->header.chksum[i];
-        signed_sum -= (char) header->header.chksum[i];
-    }
-
-    sum += ' ' * sizeof (header->header.chksum);
-    signed_sum += ' ' * sizeof (header->header.chksum);
-
-    /*
-     * This is a zeroed block... whole block is 0's except
-     * for the 8 blanks we faked for the checksum field.
-     */
-    if (sum == 8 * ' ')
+    if (unsigned_sum == 0)
         return HEADER_ZERO_BLOCK;
 
-    if (sum != recsum && signed_sum != recsum)
+    /* Adjust checksum to count the "chksum" field as blanks.  */
+    for (i = sizeof (header->header.chksum); i-- != 0;)
+    {
+        unsigned_sum -= (unsigned char) header->header.chksum[i];
+        signed_sum -= (signed char) (header->header.chksum[i]);
+    }
+
+    unsigned_sum += ' ' * sizeof (header->header.chksum);
+    signed_sum += ' ' * sizeof (header->header.chksum);
+
+    parsed_sum = tar_from_oct (8, header->header.chksum);
+    if (parsed_sum == -1)
+        return HEADER_FAILURE;
+
+    recorded_sum = parsed_sum;
+
+    if (unsigned_sum != recorded_sum && signed_sum != recorded_sum)
         return HEADER_FAILURE;
 
     return HEADER_SUCCESS;
