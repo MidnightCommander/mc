@@ -37,10 +37,14 @@
 
 #include <config.h>
 
-#include <ctype.h>
+#include <ctype.h>              /* isspace() */
 #include <errno.h>
+#include <inttypes.h>           /* uintmax_t */
+#include <limits.h>             /* CHAR_BIT, INT_MAX, etc */
+#include <stdint.h>             /* UINTMAX_MAX, etc */
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <string.h>             /* memset() */
 
 #ifdef hpux
 /* major() and minor() macros (among other things) defined here for hpux */
@@ -134,6 +138,41 @@
 
 
 #define isodigit(c) ( ((c) >= '0') && ((c) <= '7') )
+
+/* Log base 2 of common values. */
+#define LG_8 3
+#define LG_64 6
+#define LG_256 8
+
+/* Bits used in the mode field, values in octal.  */
+#define TSUID    04000          /* set UID on execution */
+#define TSGID    02000          /* set GID on execution */
+#define TSVTX    01000          /* reserved */
+                                /* file permissions */
+#define TUREAD   00400          /* read by owner */
+#define TUWRITE  00200          /* write by owner */
+#define TUEXEC   00100          /* execute/search by owner */
+#define TGREAD   00040          /* read by group */
+#define TGWRITE  00020          /* write by group */
+#define TGEXEC   00010          /* execute/search by group */
+#define TOREAD   00004          /* read by other */
+#define TOWRITE  00002          /* write by other */
+#define TOEXEC   00001          /* execute/search by other */
+
+/* These macros work even on ones'-complement hosts (!).
+   The extra casts work around some compiler bugs. */
+#define TYPE_SIGNED(t) (!((t) 0 < (t) (-1)))
+#define TYPE_MINIMUM(t) (TYPE_SIGNED (t) ? ~(t) 0 << (sizeof (t) * CHAR_BIT - 1) : (t) 0)
+#define TYPE_MAXIMUM(t) (~(t) 0 - TYPE_MINIMUM (t))
+
+#define GID_FROM_HEADER(where) gid_from_header (where, sizeof (where))
+#define MAJOR_FROM_HEADER(where) major_from_header (where, sizeof (where))
+#define MINOR_FROM_HEADER(where) minor_from_header (where, sizeof (where))
+#define MODE_FROM_HEADER(where,hbits) mode_from_header (where, sizeof (where), hbits)
+#define OFF_FROM_HEADER(where) off_from_header (where, sizeof (where))
+#define TIME_FROM_HEADER(where) time_from_header (where, sizeof (where))
+#define UID_FROM_HEADER(where) uid_from_header (where, sizeof (where))
+#define UINTMAX_FROM_HEADER(where) uintmax_from_header (where, sizeof (where))
 
 /*** file scope type declarations ****************************************************************/
 
@@ -247,6 +286,19 @@ typedef struct
 
 /*** file scope variables ************************************************************************/
 
+/* Base 64 digits; see RFC 2045 Table 1.  */
+static char const base_64_digits[64] = {
+    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+    'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+    'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+    'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+    '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '/'
+};
+
+/* Table of base 64 digit values indexed by unsigned chars.
+   The value is 64 for unsigned chars that are not base 64 digits.  */
+static char base64_map[1 + (unsigned char) (-1)];
+
 static struct vfs_s_subclass tarfs_subclass;
 static struct vfs_class *vfs_tarfs_ops = VFS_CLASS (&tarfs_subclass);
 
@@ -258,33 +310,292 @@ static union block block_buf;
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
-/**
- * Quick and dirty octal conversion.
- *
- * Result is -1 if the field is invalid (all blank, or nonoctal).
- */
-static long
-tar_from_oct (int digs, const char *where)
+
+static void
+tar_base64_init (void)
 {
-    long value;
+    size_t i;
 
-    while (isspace ((unsigned char) *where))
-    {                           /* Skip spaces */
+    memset (base64_map, 64, sizeof base64_map);
+    for (i = 0; i < 64; i++)
+        base64_map[(int) base_64_digits[i]] = i;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Represent @n using a signed integer I such that (uintmax_t) I == @n.
+   With a good optimizing compiler, this is equivalent to (intmax_t) i
+   and requires zero machine instructions.  */
+#if !(UINTMAX_MAX / 2 <= INTMAX_MAX)
+#error "tar_represent_uintmax() returns intmax_t to represent uintmax_t"
+#endif
+static inline intmax_t
+tar_represent_uintmax (uintmax_t n)
+{
+    if (n <= INTMAX_MAX)
+        return n;
+
+    {
+        /* Avoid signed integer overflow on picky platforms.  */
+        intmax_t nd = n - INTMAX_MIN;
+        return nd + INTMAX_MIN;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Convert buffer at @where0 of size @digs from external format to intmax_t.
+ * @digs must be positive.
+ * If @type is non-NULL, data are of type @type.
+ * The buffer must represent a value in the range -@minval through @maxval;
+ * if the mathematically correct result V would be greater than INTMAX_MAX,
+ * return a negative integer V such that (uintmax_t) V yields the correct result.
+ * If @octal_only, allow only octal numbers instead of the other GNU extensions.
+ *
+ * Result is -1 if the field is invalid.
+ */
+#if !(INTMAX_MAX <= UINTMAX_MAX && - (INTMAX_MIN + 1) <= UINTMAX_MAX)
+#error "tar_from_header() internally represents intmax_t as uintmax_t + sign"
+#endif
+#if !(UINTMAX_MAX / 2 <= INTMAX_MAX)
+#error "tar_from_header() returns intmax_t to represent uintmax_t"
+#endif
+static intmax_t
+tar_from_header (const char *where0, size_t digs, char const *type, intmax_t minval,
+                 uintmax_t maxval, gboolean octal_only)
+{
+    uintmax_t value = 0;
+    uintmax_t uminval = minval;
+    uintmax_t minus_minval = -uminval;
+    const char *where = where0;
+    char const *lim = where + digs;
+    gboolean negative = FALSE;
+
+    /* Accommodate buggy tar of unknown vintage, which outputs leading
+       NUL if the previous field overflows. */
+    if (*where == '\0')
         where++;
-        if (--digs <= 0)
-            return -1;          /* All blank field */
-    }
-    value = 0;
-    while (digs > 0 && isodigit (*where))
-    {                           /* Scan till nonoctal */
-        value = (value << 3) | (*where++ - '0');
-        --digs;
+
+    /* Accommodate older tars, which output leading spaces. */
+    while (TRUE)
+    {
+        if (where == lim)
+            return (-1);
+
+        if (!isspace ((unsigned char) *where))
+            break;
+
+        where++;
     }
 
-    if (digs > 0 && *where && !isspace ((unsigned char) *where))
-        return -1;              /* Ended on non-space/nul */
+    if (isodigit (*where))
+    {
+        char const *where1 = where;
+        gboolean overflow = FALSE;
 
-    return value;
+        while (TRUE)
+        {
+            value += *where++ - '0';
+            if (where == lim || !isodigit (*where))
+                break;
+            overflow |= value != (value << LG_8 >> LG_8);
+            value <<= LG_8;
+        }
+
+        /* Parse the output of older, unportable tars, which generate
+           negative values in two's complement octal. If the leading
+           nonzero digit is 1, we can't recover the original value
+           reliably; so do this only if the digit is 2 or more. This
+           catches the common case of 32-bit negative time stamps. */
+        if ((overflow || maxval < value) && *where1 >= 2 && type != NULL)
+        {
+            /* Compute the negative of the input value, assuming two's complement. */
+            int digit;
+
+            digit = (*where1 - '0') | 4;
+            overflow = FALSE;
+            value = 0;
+            where = where1;
+
+            while (TRUE)
+            {
+                value += 7 - digit;
+                where++;
+                if (where == lim || !isodigit (*where))
+                    break;
+                digit = *where - '0';
+                overflow |= value != (value << LG_8 >> LG_8);
+                value <<= LG_8;
+            }
+
+            value++;
+            overflow |= value == 0;
+
+            if (!overflow && value <= minus_minval)
+                negative = TRUE;
+        }
+
+        if (overflow)
+            return (-1);
+    }
+    else if (octal_only)
+    {
+        /* Suppress the following extensions. */
+    }
+    else if (*where == '-' || *where == '+')
+    {
+        /* Parse base-64 output produced only by tar test versions
+           1.13.6 (1999-08-11) through 1.13.11 (1999-08-23).
+           Support for this will be withdrawn in future tar releases. */
+        int dig;
+
+        negative = *where++ == '-';
+
+        while (where != lim && (dig = base64_map[(unsigned char) *where]) < 64)
+        {
+            if (value << LG_64 >> LG_64 != value)
+                return (-1);
+            value = (value << LG_64) | dig;
+            where++;
+        }
+    }
+    else if (where <= lim - 2 && (*where == '\200'      /* positive base-256 */
+                                  || *where == '\377' /* negative base-256 */ ))
+    {
+        /* Parse base-256 output.  A nonnegative number N is
+           represented as (256**DIGS)/2 + N; a negative number -N is
+           represented as (256**DIGS) - N, i.e. as two's complement.
+           The representation guarantees that the leading bit is
+           always on, so that we don't confuse this format with the
+           others (assuming ASCII bytes of 8 bits or more). */
+
+        int signbit;
+        uintmax_t topbits;
+
+        signbit = *where & (1 << (LG_256 - 2));
+        topbits =
+            (((uintmax_t) - signbit) << (CHAR_BIT * sizeof (uintmax_t) - LG_256 - (LG_256 - 2)));
+
+        value = (*where++ & ((1 << (LG_256 - 2)) - 1)) - signbit;
+
+        while (TRUE)
+        {
+            value = (value << LG_256) + (unsigned char) *where++;
+            if (where == lim)
+                break;
+
+            if (((value << LG_256 >> LG_256) | topbits) != value)
+                return (-1);
+        }
+
+        negative = signbit != 0;
+        if (negative)
+            value = -value;
+    }
+
+    if (where != lim && *where != '\0' && !isspace ((unsigned char) *where))
+        return (-1);
+
+    if (value <= (negative ? minus_minval : maxval))
+        return tar_represent_uintmax (negative ? -value : value);
+
+    return (-1);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static inline gid_t
+gid_from_header (const char *p, size_t s)
+{
+    return tar_from_header (p, s, "gid_t", TYPE_MINIMUM (gid_t), TYPE_MAXIMUM (gid_t), FALSE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static inline major_t
+major_from_header (const char *p, size_t s)
+{
+    return tar_from_header (p, s, "major_t", TYPE_MINIMUM (major_t), TYPE_MAXIMUM (major_t), FALSE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static inline minor_t
+minor_from_header (const char *p, size_t s)
+{
+    return tar_from_header (p, s, "minor_t", TYPE_MINIMUM (minor_t), TYPE_MAXIMUM (minor_t), FALSE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Convert @p to the file mode, as understood by tar.
+ * Store unrecognized mode bits (from 10th up) in @hbits.
+ * Set *hbits if there are any unrecognized bits.
+ * */
+static inline mode_t
+mode_from_header (const char *p, size_t s, gboolean * hbits)
+{
+    unsigned int u;
+    mode_t mode;
+
+    /* Do not complain about unrecognized mode bits. */
+    u = tar_from_header (p, s, "mode_t", INTMAX_MIN, UINTMAX_MAX, FALSE);
+
+    /* *INDENT-OFF* */
+    mode = ((u & TSUID ? S_ISUID : 0)
+          | (u & TSGID ? S_ISGID : 0)
+          | (u & TSVTX ? S_ISVTX : 0)
+          | (u & TUREAD ? S_IRUSR : 0)
+          | (u & TUWRITE ? S_IWUSR : 0)
+          | (u & TUEXEC ? S_IXUSR : 0)
+          | (u & TGREAD ? S_IRGRP : 0)
+          | (u & TGWRITE ? S_IWGRP : 0)
+          | (u & TGEXEC ? S_IXGRP : 0)
+          | (u & TOREAD ? S_IROTH : 0)
+          | (u & TOWRITE ? S_IWOTH : 0)
+          | (u & TOEXEC ? S_IXOTH : 0));
+    /* *INDENT-ON* */
+
+    if (hbits != NULL)
+        *hbits = (u & ~07777) != 0;
+
+    return mode;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static inline off_t
+off_from_header (const char *p, size_t s)
+{
+    /* Negative offsets are not allowed in tar files, so invoke
+       from_header with minimum value 0, not TYPE_MINIMUM (off_t). */
+    return tar_from_header (p, s, "off_t", 0, TYPE_MAXIMUM (off_t), FALSE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static inline time_t
+time_from_header (const char *p, size_t s)
+{
+    return tar_from_header (p, s, "time_t", TYPE_MINIMUM (time_t), TYPE_MAXIMUM (time_t), FALSE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static inline uid_t
+uid_from_header (const char *p, size_t s)
+{
+    return tar_from_header (p, s, "uid_t", TYPE_MINIMUM (uid_t), TYPE_MAXIMUM (uid_t), FALSE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static inline uintmax_t
+uintmax_from_header (const char *p, size_t s)
+{
+    return tar_from_header (p, s, "uintmax_t", 0, UINTMAX_MAX, FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -325,7 +636,7 @@ tar_checksum (const union block *header)
     int unsigned_sum = 0;       /* the POSIX one :-) */
     int signed_sum = 0;         /* the Sun one :-( */
     int recorded_sum;
-    long parsed_sum;
+    int parsed_sum;
     const char *p = header->buffer;
 
     for (i = sizeof (*header); i-- != 0;)
@@ -347,8 +658,10 @@ tar_checksum (const union block *header)
     unsigned_sum += ' ' * sizeof (header->header.chksum);
     signed_sum += ' ' * sizeof (header->header.chksum);
 
-    parsed_sum = tar_from_oct (8, header->header.chksum);
-    if (parsed_sum == -1)
+    parsed_sum =
+        tar_from_header (header->header.chksum, sizeof (header->header.chksum), NULL, 0,
+                         INT_MAX, TRUE);
+    if (parsed_sum < 0)
         return HEADER_FAILURE;
 
     recorded_sum = parsed_sum;
@@ -404,7 +717,7 @@ tar_decode_header (union block *header, tar_super_t * arch)
     if (header->header.typeflag == LNKTYPE || header->header.typeflag == DIRTYPE)
         size = 0;               /* Links 0 size on tape */
     else
-        size = tar_from_oct (1 + 12, header->header.size);
+        size = OFF_FROM_HEADER (header->header.size);
 
     if (header->header.typeflag == GNUTYPE_DUMPDIR)
         if (arch->type == TAR_UNKNOWN)
@@ -420,10 +733,10 @@ tar_fill_stat (struct vfs_s_super *archive, struct stat *st, union block *header
 {
     tar_super_t *arch = TAR_SUPER (archive);
 
-    st->st_mode = tar_from_oct (8, header->header.mode);
+    st->st_mode = MODE_FROM_HEADER (header->header.mode, NULL);
 
     /* Adjust st->st_mode because there are tar-files with
-     * typeflag==SYMTYPE and S_ISLNK(mod)==0. I don't 
+     * typeflag==SYMTYPE and S_ISLNK(mod)==0. I don't
      * know about the other modes but I think I cause no new
      * problem when I adjust them, too. -- Norbert.
      */
@@ -453,10 +766,10 @@ tar_fill_stat (struct vfs_s_super *archive, struct stat *st, union block *header
         /* *INDENT-OFF* */
         st->st_uid = *header->header.uname != '\0'
             ? (uid_t) vfs_finduid (header->header.uname)
-            : tar_from_oct (8, header->header.uid);
+            : UID_FROM_HEADER (header->header.uid);
         st->st_gid = *header->header.gname != '\0'
-            ? (gid_t)  vfs_findgid (header->header.gname)
-            : tar_from_oct (8,header->header.gid);
+            ? (gid_t) vfs_findgid (header->header.gname)
+            : GID_FROM_HEADER (header->header.gid);
         /* *INDENT-ON* */
 
         switch (header->header.typeflag)
@@ -465,8 +778,8 @@ tar_fill_stat (struct vfs_s_super *archive, struct stat *st, union block *header
         case CHRTYPE:
 #ifdef HAVE_STRUCT_STAT_ST_RDEV
             st->st_rdev =
-                makedev (tar_from_oct (8, header->header.devmajor),
-                         tar_from_oct (8, header->header.devminor));
+                makedev (MAJOR_FROM_HEADER (header->header.devmajor),
+                         MINOR_FROM_HEADER (header->header.devminor));
 #endif
             break;
         default:
@@ -475,8 +788,8 @@ tar_fill_stat (struct vfs_s_super *archive, struct stat *st, union block *header
         break;
 
     default:
-        st->st_uid = tar_from_oct (8, header->header.uid);
-        st->st_gid = tar_from_oct (8, header->header.gid);
+        st->st_uid = UID_FROM_HEADER (header->header.uid);
+        st->st_gid = GID_FROM_HEADER (header->header.gid);
         break;
     }
 
@@ -484,13 +797,13 @@ tar_fill_stat (struct vfs_s_super *archive, struct stat *st, union block *header
 #ifdef HAVE_STRUCT_STAT_ST_MTIM
     st->st_atim.tv_nsec = st->st_mtim.tv_nsec = st->st_ctim.tv_nsec = 0;
 #endif
-    st->st_mtime = tar_from_oct (1 + 12, header->header.mtime);
+    st->st_mtime = TIME_FROM_HEADER (header->header.mtime);
     st->st_atime = 0;
     st->st_ctime = 0;
     if (arch->type == TAR_GNU)
     {
-        st->st_atime = tar_from_oct (1 + 12, header->oldgnu_header.atime);
-        st->st_ctime = tar_from_oct (1 + 12, header->oldgnu_header.ctime);
+        st->st_atime = TIME_FROM_HEADER (header->oldgnu_header.atime);
+        st->st_ctime = TIME_FROM_HEADER (header->oldgnu_header.ctime);
     }
 
 #ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
@@ -991,6 +1304,8 @@ vfs_init_tarfs (void)
     tarfs_subclass.free_archive = tar_free_archive;
     tarfs_subclass.fh_open = tar_fh_open;
     vfs_register_class (vfs_tarfs_ops);
+
+    tar_base64_init ();
 }
 
 /* --------------------------------------------------------------------------------------------- */
