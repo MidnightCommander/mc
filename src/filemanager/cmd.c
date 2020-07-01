@@ -1415,7 +1415,7 @@ single_dirsize_cmd (void)
         status_msg_init (STATUS_MSG (&dsm), _("Directory scanning"), 0, dirsize_status_init_cb,
                          dirsize_status_update_cb, dirsize_status_deinit_cb);
 
-        if (compute_dir_size (p, &dsm, &dir_count, &count, &total, TRUE) == FILE_CONT)
+        if (compute_dir_size (p, &dsm, &dir_count, &count, &total, FALSE) == FILE_CONT)
         {
             entry->st.st_size = (off_t) total;
             entry->f.dir_size_computed = 1;
@@ -1462,7 +1462,7 @@ dirsizes_cmd (void)
             gboolean ok;
 
             p = vfs_path_from_str (panel->dir.list[i].fname);
-            ok = compute_dir_size (p, &dsm, &dir_count, &count, &total, TRUE) != FILE_CONT;
+            ok = compute_dir_size (p, &dsm, &dir_count, &count, &total, FALSE) != FILE_CONT;
             vfs_path_free (p);
             if (ok)
                 break;

@@ -626,21 +626,7 @@ do_compute_dir_size (const vfs_path_t * dirname_vpath, dirsize_status_msg_t * ds
     DIR *dir;
     struct dirent *dirent;
     FileProgressStatus ret = FILE_CONT;
-
-    if (!compute_symlinks)
-    {
-        res = mc_lstat (dirname_vpath, &s);
-        if (res != 0)
-            return ret;
-
-        /* don't scan symlink to directory */
-        if (S_ISLNK (s.st_mode))
-        {
-            (*ret_marked)++;
-            *ret_total += (uintmax_t) s.st_size;
-            return ret;
-        }
-    }
+    mc_stat_fn stat_func = compute_symlinks ? mc_stat : mc_lstat;
 
     (*dir_count)++;
 
@@ -657,7 +643,7 @@ do_compute_dir_size (const vfs_path_t * dirname_vpath, dirsize_status_msg_t * ds
 
         tmp_vpath = vfs_path_append_new (dirname_vpath, dirent->d_name, (char *) NULL);
 
-        res = mc_lstat (tmp_vpath, &s);
+        res = stat_func (tmp_vpath, &s);
         if (res == 0)
         {
             if (S_ISDIR (s.st_mode))
@@ -700,10 +686,11 @@ do_compute_dir_size (const vfs_path_t * dirname_vpath, dirsize_status_msg_t * ds
 
 static FileProgressStatus
 panel_compute_totals (const WPanel * panel, dirsize_status_msg_t * sm, size_t * ret_count,
-                      uintmax_t * ret_total, gboolean compute_symlinks)
+                      uintmax_t * ret_total, gboolean follow_symlinks)
 {
     int i;
     size_t dir_count = 0;
+    mc_stat_fn stat_func = follow_symlinks ? mc_stat : mc_lstat;
 
     for (i = 0; i < panel->dir.len; i++)
     {
@@ -714,7 +701,9 @@ panel_compute_totals (const WPanel * panel, dirsize_status_msg_t * sm, size_t * 
 
         s = &panel->dir.list[i].st;
 
-        if (S_ISDIR (s->st_mode))
+        if (S_ISDIR (s->st_mode)
+           || (follow_symlinks && link_isdir (&panel->dir.list[i])
+                && panel->dir.list[i].f.stale_link == 0))
         {
             vfs_path_t *p;
             FileProgressStatus status;
@@ -754,6 +743,7 @@ panel_operate_init_totals (const WPanel * panel, const vfs_path_t * source,
     if (verbose && compute_totals)
     {
         dirsize_status_msg_t dsm;
+        gboolean stale_link = FALSE;
 
         memset (&dsm, 0, sizeof (dsm));
         dsm.allow_skip = TRUE;
@@ -766,7 +756,10 @@ panel_operate_init_totals (const WPanel * panel, const vfs_path_t * source,
         if (source == NULL)
             status = panel_compute_totals (panel, &dsm, &ctx->progress_count, &ctx->progress_bytes,
                                            ctx->follow_links);
-        else if (S_ISDIR (source_stat->st_mode))
+        else if (S_ISDIR (source_stat->st_mode)
+                 || (ctx->follow_links
+                     && file_is_symlink_to_dir (source, (struct stat *) source_stat, &stale_link)
+                     && !stale_link))
         {
             size_t dir_count = 0;
 
