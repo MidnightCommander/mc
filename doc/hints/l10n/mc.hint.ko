@@ -24,7 +24,7 @@
 
 힌트 : 우리는 또한 멋진 매뉴얼 페이지를 가지고 있습니다.
 
-Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
+힌트 : lynx 스타일 탐색을 원하십니까? 구성 대화 상자에서 설정하십시오.
 
 힌트: % 매크로는 명령줄에서도 작동합니다.
 
@@ -68,7 +68,7 @@ Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
 
 힌트: 옵션 / 확인에서 확인 요청을 모두 비활성화할 수 있습니다.
 
-Hint: Leap to frequently used directories in a single bound with C-\.
+힌트 : C- \를 사용하여 단일 바인딩된에서 자주 사용 하는 디렉터리로 이동합니다.
 
 힌트: 'cd ftp://machine.edu'를 입력하여 mc에서 익명 FTP를 할 수 있습니다.
 
@@ -84,4 +84,4 @@ Hint: Leap to frequently used directories in a single bound with C-\.
 
 힌트: 마우스 커트 및 붙여넣기를 사용하려면 Shift 키를 누르고 있어야 할 수 있습니다.
 
-Hint: Key frequently visited ftp sites in the hotlist: type C-\.
+힌트: 단축목록에서 자주 방문하는 ftp 사이트 키: C-\ 를 입력하세요.

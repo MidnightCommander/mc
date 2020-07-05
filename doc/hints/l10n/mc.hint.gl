@@ -24,7 +24,7 @@ Consello: o mellor VFS! Prema Intro nun arquivo «tar» para examinar o seu cont
 
 Suxestión: temos tamén unha páxina de manual: «man mc»
 
-Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
+Consello: quere navegar ao estilo «Lynx» coas frechas? axústeo no cadro de diálogo de configuración.
 
 Consello: as macros con % funcionan incluso na liña de ordes.
 
@@ -68,7 +68,7 @@ Consello: pódese empregar un visor externo indicándoo na variábel PAGER.
 
 Consello: Para desactivar as mensaxes de confirmación fagao no menú Opcións.
 
-Hint: Leap to frequently used directories in a single bound with C-\.
+Consello: marque os directorios e sitios máis usados en «Favoritos».
 
 Consello: para facer un FTP anónimo con mc: «cd ftp://maquina.dominio»
 
@@ -84,4 +84,4 @@ Consello: para marcar os directorios no cadro de diálogo de selección, engada 
 
 Consello: para cortar e pegar co rato manteña premida a tecla Maiús.
 
-Hint: Key frequently visited ftp sites in the hotlist: type C-\.
+Consello: os sitios FTP habituais poden marcarse como «preferidos»: escriba C-\.

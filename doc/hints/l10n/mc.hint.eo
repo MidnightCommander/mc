@@ -24,7 +24,7 @@ Konsilo: Mirinde, klavi la Enen-klavon super tar-dosiero por esplori ĝian enhav
 
 Konsilo: Ankaŭ ekzistas manlibra paĝo.
 
-Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
+Konsilo: Ĉu vi volas navigadon laŭ la modelo de Lynx? Agordi en la agorda dialogujo.
 
 Konsilo: makrooj kun % funkcias eĉ ĉe la komandlinio.
 
@@ -68,7 +68,7 @@ Konsilo: Specifi la eksteran dokumento-legilon per la medivariablon VIEWER aŭ P
 
 Konsilo: Ĉiuj konfirmo-petoj estas malaktivigeblaj en Agordo/Konfirmo.
 
-Hint: Leap to frequently used directories in a single bound with C-\.
+Konsilo: Stir-\ por ofte uzataj dosierujoj.
 
 Konsilo: 'cd ftp://machine.edu' por sennoma FTP-konekto al machine.org
 
@@ -84,4 +84,4 @@ Konsilo: Por marki dosierujojn ĉe elektiloj almetu oblikvon.
 
 Konsilo: Eble vi devas premadi la registrumon por kopii kaj alglui per la muso.
 
-Hint: Key frequently visited ftp sites in the hotlist: type C-\.
+Konsileto: Stir-\ por la plej ofte vizitaj FTP-serviloj.

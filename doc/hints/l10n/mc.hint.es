@@ -24,7 +24,7 @@ Consejo: ¡El mejor VFS! Al «entrar» en un archivo comprimido se ve su conteni
 
 Consejo: El Midnight Commander tiene manual: «man mc»
 
-Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
+Consejo: ¿Desea navegar con las flechas al estilo Lynx? Está en Configuración.
 
 Consejo: Las macros con % funcionan incluso en la línea de órdenes.
 
@@ -68,7 +68,7 @@ Consejo: Se puede usar un visor externo indicado en la variable PAGER.
 
 Consejo: Para deshabilitar los mensajes de Confirmación vaya al menú Opciones.
 
-Hint: Leap to frequently used directories in a single bound with C-\.
+Consejo: Apunte los directorios y sitios más usados en «Favoritos».
 
 Consejo: Para hacer un FTP anónimo con mc: «cd ftp://maquina.dominio»
 
@@ -84,4 +84,4 @@ Consejo: Para marcar directorios en el dialogo de selección, añadirle «/».
 
 Consejo: Para copiar y pegar con ratón mantener presionada la tecla MAYÚSCULAS.
 
-Hint: Key frequently visited ftp sites in the hotlist: type C-\.
+Consejo: Los ftp habituales se pueden guardar en «Favoritos».

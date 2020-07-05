@@ -24,7 +24,7 @@ Consell: El millor VFS: toqueu «Retorn» en un fitxer TAR per examinar el seu c
 
 Consell: També tenim una bona pàgina de manual.
 
-Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
+Consell: Voleu navegar a l'estil del Lynx? Establiu-ho al diàleg de configuració.
 
 Consell: Les macros amb % funcionen fins i tot a la línia d'ordres.
 
@@ -68,7 +68,7 @@ Consell: Podeu especificar el visor extern amb la variable d'entorn VIEWER o PAG
 
 Consell: Podeu inhabilitar tots els missatges de confirmació a «Opcions/Confirmació».
 
-Hint: Leap to frequently used directories in a single bound with C-\.
+Consell: Aneu als directoris emprats sovint amb «Ctrl-\».
 
 Consell: Podeu fer FTP anònim amb mc escrivint «cd ftp://màquina.edu».
 
@@ -84,4 +84,4 @@ Consell: Per a marcar directoris al diàleg de selecció, afegiu-l'hi un «/».
 
 Consell: Per a tallar i enganxar amb el ratolí, podria requerir mantenir premuda la tecla «Maj».
 
-Hint: Key frequently visited ftp sites in the hotlist: type C-\.
+Consell: Els FTP visitats sovint es poden desar a Favorits: escriviu «Ctrl-\».

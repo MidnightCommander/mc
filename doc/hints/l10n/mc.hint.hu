@@ -24,7 +24,7 @@ Tipp: VFS-funkció: egy Tar-fájlon Entert nyomva megjelenik annak tartalma.
 
 Tipp: A Midnight Commandernek van "man" (kézikönyv) lapja is.
 
-Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
+Tipp: Szeretne Lynx-stílusú navigációt? Be lehet állítani az Alapbeállításoknál.
 
 Tipp: A % makrók még a parancssorban is használhatók.
 
@@ -68,13 +68,13 @@ Tipp: A külső fájlmegjelenítőt a PAGER shell-változóval lehet megadni.
 
 Tipp: Az összes megerősítéskérés kikapcsolható: "Beállítások/Megerősítések".
 
-Hint: Leap to frequently used directories in a single bound with C-\.
+Tipp: Egyszerű módon elérhetők a gyakran használt könyvtárak: C-\.
 
 Tipp: "Anonymous" FTP-zés végezhető ezzel a paranccsal: "cd ftp://gépnév.edu".
 
 Tipp: Az FTP be van építve a Midnight Commanderbe: "FTP-kapcsolat" menüpontok.
 
-Tipp: A listázási mód gyorsan váltható a következő billentyűkombinációval: M-t
+Tipp: A listázási mód gyorsan váltható a következő billentyűkombinációval: M-t.
 
 Tipp: FTP-zésnél felhasználónév is megadható: "cd ftp://felhasználó@gépnév.edu".
 
@@ -84,4 +84,4 @@ Tipp: Könyvtárak kijelölése a "Kijelölés" ablakban: / jel hozzáfűzésév
 
 Tipp: Az egérrel való szövegkimásoláshoz szükség lehet a Shift lenyomására.
 
-Hint: Key frequently visited ftp sites in the hotlist: type C-\.
+Tipp: A gyakran látogatott FTP-helyek betehetők a gyorslistába: C-\.

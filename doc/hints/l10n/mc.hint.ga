@@ -24,9 +24,9 @@ Leid: VFS coolness: tap a chur isteach ar chomhad tarra chun scrúdú a dhéanam
 
 Leid: Tá leathanach láimhe deas againn freisin.
 
-Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
+Leid: An bhfuil tú ag iarraidh loingseoireacht stíl lynx? Socraigh é sa dialóg Cumraíochta.
 
-Leid:% Macraí ag obair fiú ar na n-orduithe.
+Leid: % Macraí ag obair fiú ar na n-orduithe.
 
 Leid: M-! beidh deis agat cláir a fhorghníomhú agus an t-aschur a fheiceáil sa lucht féachana.
 
@@ -68,7 +68,7 @@ Leid: Féadfaidh tú an breathnóir seachtrach a shonrú leis an vars bhlaosc VI
 
 Leid: Is féidir leat gach iarratas a dhíchumasú ar dheimhniú i Roghanna / Dearbhaithe.
 
-Hint: Leap to frequently used directories in a single bound with C-\.
+Leid: Luaigh eolairí a úsáidtear go minic i gceangal le C-\.
 
 Leid: Is féidir leat FTP gan ainm a dhéanamh le mc trí chlóscríobh 'cd ftp://machine.edu'
 
@@ -76,7 +76,7 @@ Leid: tógtar FTP sa Cheannasaí Meán Oíche, seiceáil an roghchlár nasc File
 
 Leid: Athraíonn M-t go tapa ar an mód liostaithe.
 
-Leid: Is féidir leat an t-ainm úsáideora a shonrú nuair a dhéanann tú ftps: \&'cd ftp: //user@machine.edu'
+Leid: Is féidir leat an t-ainm úsáideora a shonrú nuair a dhéanann tú ftps: 'cd ftp: //user@machine.edu'
 
 Leid: Is féidir leat brabhsáil comhaid RPM trí scanadh a chur isteach ar bharr comhad rpm.
 
@@ -84,4 +84,4 @@ Leid: Chun comharthaí a mharcáil ar an mbosca dialóige roghnaigh, cuir slash 
 
 Leid: Úsáid a bhaint as an gearrtha luch agus greamaigh theastóidh a bhfuil an eochair-athrú
 
-Hint: Key frequently visited ftp sites in the hotlist: type C-\.
+Leid: Eochair láithreáin ftp a thugtar cuairt orthu go minic sa hotlist: cineál C-\.

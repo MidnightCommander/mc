@@ -24,7 +24,7 @@ Fif: Cool VFS: tryk på enter på en tar-fil for at undersøge dens indhold.
 
 Fif: Vi har også en fin manualside.
 
-Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
+Fif: Vil du have navigation i lynx-stil? Sæt det i konfigurationsdialogen.
 
 Fif: %-makroer virker også på kommandolinjen.
 
@@ -68,7 +68,7 @@ Fif: Du kan angive den eksterne fremviser med skalvariablerne VIEWER eller PAGER
 
 Fif: Du kan deaktivere alle anmodninger om bekræftelse i Indstillinger/Bekræftelse.
 
-Hint: Leap to frequently used directories in a single bound with C-\.
+Fif: Hop hurtigt til mapper som ofte bruges med C-\.
 
 Fif: Du kan brug anonym FTP i mc ved at skrive 'cd ftp://maskine.edu'
 
@@ -84,4 +84,4 @@ Fif: Tilføj en skråstreg, til at markere mapper i den valgte dialogboks.
 
 Fif: Brug at klip og indsæt med musen kan kræve at skift-tasten holdes nede
 
-Hint: Key frequently visited ftp sites in the hotlist: type C-\.
+Fif: Tilknyt taster i hotlisten med ftp-steder som ofte bruges: skriv C-\.

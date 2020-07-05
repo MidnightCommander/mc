@@ -24,7 +24,7 @@ Astuce: VFS: taper Entrée sur une archive tar pour en visualiser son contenu.
 
 Astuce: Une documentation complète est disponible: "man mc".
 
-Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
+Astuce: Vous cherchez une navigation à la Lynx? Activez-là dans le menu Options/Configuration.
 
 Astuce: Les macros % fonctionnent également dans la ligne de commande.
 
@@ -68,7 +68,7 @@ Astuce: Vous pouvez définir le visionneur externe utilisé par le shell via la 
 
 Astuce: Vous pouvez désactiver toutes les demandes de confirmation dans le menu Options/Confirmation.
 
-Hint: Leap to frequently used directories in a single bound with C-\.
+Astuce: Allez dans vos répertoires favoris rapidement avec C-backslash.
 
 Astuce: Vous pouvez faire du FTP anonyme avec MC en tapant 'cd ftp://machine.edu'.
 
@@ -84,4 +84,4 @@ Astuce: Pour ne sélectionner que les répertoires (dans la fenêtre "Selectionn
 
 Astuce: Le copier-coller par la souris peut nécessiter de maintenir la touche Shift.
 
-Hint: Key frequently visited ftp sites in the hotlist: type C-\.
+Astuce: Définissez vos sites FTP favoris dans la hotlist: taper C-backslash.

@@ -16,7 +16,7 @@ Hinweis: Wenn dein Terminal keine Funktionstasten unterstützt, benutze die Komb
 
 Hinweis: Die Homepage von GNU Midnight Commander: http://www.midnight-commander.org/
 
-Hinweis: Bitte sende jeden Fehlerreport an mc-devel@gnome.org
+Hinweis: Bitte sende alle Fehlerberichte an mc-devel@gnome.org
 
 Hinweis: Tabulator wechselt das aktuelle Panel.
 
@@ -24,7 +24,7 @@ Hinweis: Cooles VFS: Drücke Enter auf einer TAR-Datei, um den Inhalt zu sehen.
 
 Hinweis: Wir haben auch eine schöne Handbuchseite.
 
-Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
+Hinweis: Möchtest du eine Lynx-artige Navigation? Setze dies im Konfigurationsfenster.
 
 Hinweis: %-Makros funktionieren auch auf der Kommandozeile.
 
@@ -68,7 +68,7 @@ Hinweis: Du kannst den externen Viewer mit den Shellvariablen VIEWER oder PAGER 
 
 Hinweis: Du kannst alle Bestätigungsanfragen unter Optionen / Nachfragen deaktivieren.
 
-Hint: Leap to frequently used directories in a single bound with C-\.
+Hinweis: Springe mit C-\ direkt zu häufig verwendeten Verzeichnissen.
 
 Hinweis: Du kannst eine anonyme FTP-Verbindung im MC mit der Eingabe von 'cd ftp://machine.edu' starten.
 
@@ -84,4 +84,4 @@ Hinweis: Um Verzeichnisse in der Auswahlbox zu markieren, füge einen Schrägstr
 
 Hinweis: Um mit der Maus Ausschneiden und Einfügen nutzen zu können, muss evtl. die Umschalttaste gedrückt werden.
 
-Hint: Key frequently visited ftp sites in the hotlist: type C-\.
+Hinweis: Speichere häufig verwendete FTP-Seiten mit C-\ in der Hotlist.

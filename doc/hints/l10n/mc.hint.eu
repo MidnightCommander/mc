@@ -14,7 +14,7 @@ Aholkua: Direktorioak hautatzea: erantsi «/» barra zeiharra bilaketa ereduaren
 
 Aholkua: Zure terminalari funtzio teklak falta bazaizkio, erabili Ihes+zenbakia sekuentzia.
 
-Hint: GNU Midnight Commander-ren atariko orria: http://www.midnight-commander.org/
+Aholkua: GNU Midnight Commander-ren atariko orria: http://www.midnight-commander.org/
 
 Aholkua: Mesedez bidali akats txosten oro hona: mc-devel@gnome.org
 
@@ -24,7 +24,7 @@ Aholkua: VFS-ren onurak: sakatu sartu tar fitxategi batean bere edukia aztertzek
 
 Aholkua: Eskuliburu orrialde ederra ere badaukagu.
 
-Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
+Aholkua: Lynx tankerako nabigazioa nahi duzu? Ezarri ezazu Konfigurazio elkarrizketan.
 
 Aholkua: % makroak komando lerroan ere erabili daitezke.
 
@@ -68,7 +68,7 @@ Aholkua: Kanpoko erakuslea zehaztu dezakezu VIEWER edo PAGER shell aldagaiekin.
 
 Aholkua: Berresteko eskaera guztiak ezgaitu ditzakezu Aukerak/Berrespena-tik.
 
-Hint: Leap to frequently used directories in a single bound with C-\.
+Aholkua: Iritsi maiz erabilitako direktorioetara jauzi bakarrean C-\ erabiliz.
 
 Aholkua: FTP anonimoa egin dezakezu mc-rekin 'cd ftp://machine.edu' tekleatuta.
 
@@ -84,4 +84,4 @@ Aholkua: Hautatu elkarrizketa-koadroan direktorioak markatzeko, erantsi «/» ba
 
 Aholkua: Saguaren ebaki eta itsatsi erabiltzeko maius tekla sakatu behar izan dezakezu
 
-Hint: Key frequently visited ftp sites in the hotlist: type C-\.
+Aholkua: Txertatu maiz bisitatutako ftp lekuak gogokoetan: tekleatu C-\.

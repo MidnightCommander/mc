@@ -24,7 +24,7 @@ Hint: VFS lar deg trykke Enter på et tar-arkiv for å undersøke innholdet.
 
 Hint: Se også manualsiden.
 
-Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
+Hint: Du kan slå på Lynx-lignende navigering i Innstillinger/Oppsett.
 
 Hint: %-makroer virker også i kommandolinja.
 
@@ -68,7 +68,7 @@ Hint: Du kan velge eksternt visningsprogram med skallvariablene VIEWER eller PAG
 
 Hint: Du kan slå av bekreftelsesforespørsler i Innstillinger/Bekreftelser.
 
-Hint: Leap to frequently used directories in a single bound with C-\.
+Hint: Hurtigtasten C-\ åpner en liste over favorittmappene dine.
 
 Hint: Du kan koble til anonym FTP med mc ved å skrive «cd ftp://tjener.edu»
 
@@ -84,4 +84,4 @@ Hint: Legg til en skråstrek for å markere mapper i utvalgsdialogen.
 
 Hint: Du må kanskje holde inn Shift-tasten for å klippe ut og lime inn med musa.
 
-Hint: Key frequently visited ftp sites in the hotlist: type C-\.
+Hint: Du kan legge til ofte besøkte FTP-steder i favorittmapper, C-\.

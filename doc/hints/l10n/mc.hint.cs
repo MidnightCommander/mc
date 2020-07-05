@@ -24,7 +24,7 @@ Tip: Stiskem Enter na souboru .tar nebo .tar.gz si prohlédnete jeho obsah.
 
 Tip: Existuje také manuálová stránka [mc(1)].
 
-Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
+Tip: Přejete si klávesy stejně jako v prohlížeči lynx? Přepněte si to v Nastavení.
 
 Tip: Makra uvozená % fungují i na příkazovém řádku.
 
@@ -68,7 +68,7 @@ Tip: Externí prohlížeč určíte proměnnými VIEWER nebo PAGER
 
 Tip: Všechny žádosti o potvrzení je možné vypnout v Nastavení/Potvrzování.
 
-Hint: Leap to frequently used directories in a single bound with C-\.
+Tip: K seznamu často používaných složek se můžete dostat i přes Ctrl-\.
 
 Tip: Na anonymní FTP se připojíte pomocí „cd ftp://stroj.domena.cz“.
 
@@ -84,4 +84,4 @@ Tip: Pro označení složek v dialogovém okně výběru souborů, přidejte lom
 
 Tip: Chcete-li použít myš pro zkopírování nebo vložení textu, stiskněte Shift.
 
-Hint: Key frequently visited ftp sites in the hotlist: type C-\.
+Tip: V seznamu složek můžete mít i často navštěvované FTP servery. Zkuste Ctrl-\.

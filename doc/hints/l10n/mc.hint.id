@@ -24,7 +24,7 @@ Petunjuk: VFS itu keren: ketuk enter pada suatu file tar untuk memeriksa isinya.
 
 Petunjuk: Kami juga memiliki halaman manual yang bagus.
 
-Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
+Petunjuk: Apakah Anda ingin navigasi gaya lynx? Atur itu dalam dialog Konfigurasi.
 
 Petunjuk: makro bekerja bahkan pada command line.
 
@@ -68,7 +68,7 @@ Petunjuk: Anda boleh menyatakan penampil eksternal dengan variabel shell VIEWER 
 
 Petunjuk: Anda dapat menonaktifkan semua permintaan konfirmasi dalam Opsi/Konfirmasi.
 
-Hint: Leap to frequently used directories in a single bound with C-\.
+Petunjuk: Melompatlah ke direktori yang sering dipakai dengan C-\.
 
 Petunjuk: Anda dapat melakukan FTP anonim memakai mc dengan mengetikkan 'cd ftp://server.ftp.yang.dituju'
 
@@ -84,4 +84,4 @@ Petunjuk: Untuk menandai direktori pada kotak dialog pilihan, tambahkan suatu ga
 
 Petunjuk: Untuk memakai potong dan tempel tetikus mungkin perlu menahan tombol shift.
 
-Hint: Key frequently visited ftp sites in the hotlist: type C-\.
+Petunjuk: Masukkan situs-situs ftp yang sering dikunjungi ke daftar pintas: ketikkan C-\.

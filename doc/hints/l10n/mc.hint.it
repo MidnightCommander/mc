@@ -24,7 +24,7 @@ Suggerimento: La forza dei VFS: Invio su un tar file permette di esaminarne il c
 
 Suggerimento: Abbiamo anche un bel manuale manpage.
 
-Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
+Suggerimento: Si vuole una navigazione stile Lynx? Basta settarla in Opzioni/Configurazione/movimenti tipo Lynx.
 
 Suggerimento: le % macro funzionano anche nella linea di comando.
 
@@ -68,7 +68,7 @@ Suggerimento: Si può specificare il visualizzatore esterno tramite le variabili
 
 Suggerimento: È possibile disabilitare tutte le richieste di conferma
 
-Hint: Leap to frequently used directories in a single bound with C-\.
+Suggerimento: Si può saltare verso cartelle usate frequentemente mediante Ctrl-\.
 
 Suggerimento: È possibile creare una connessione FTP anonima con mc digitando 'cd ftp://host.edu'.
 
@@ -84,4 +84,4 @@ Suggerimento: Per segnare delle cartelle nel riquadro di selezione, appendere un
 
 Suggerimento: per utilizzare il mouse per il taglia e incolla premere il tasto Shift.
 
-Hint: Key frequently visited ftp sites in the hotlist: type C-\.
+Suggerimento: Per richiamare la lista degli indirizzi FTP più utilizzati: Ctrl-\.
