@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# Dušan Lago <inactive+dudko@transifex.com>, 2011
+# 3ff9a567ff32d540038a6a558650f376_643ea9b <38630839a6ec6b692ff2ca08fafb2585_10562>, 2011
 # Ivan Masár <helix84@centrum.sk>, 2015
 # hualahyja, 2019
 # Jajo Pajo, 2016
@@ -15,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-17 18:50+0300\n"
-"PO-Revision-Date: 2019-12-16 01:49+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"PO-Revision-Date: 2020-05-17 17:42+0000\n"
+"Last-Translator: Transifex Bot <>\n"
 "Language-Team: Slovak (http://www.transifex.com/mc/mc/language/sk/)\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
@@ -492,23 +492,23 @@ msgstr "Premenná prostredia TERM nie je nastavená!\n"
 msgid "Cannot check SIGWINCH pipe"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Cannot create pipe for SIGWINCH: %s (%d)\n"
-msgstr "Nemožno vytvoriť rúru pre SIGWINCH"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
-msgstr "Nie je možné nastaviť zapisovanie v SIGWINCH rúre"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
-msgstr "Nie je možné nastaviť čítanie SIGWINCH rúry"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1672,9 +1672,8 @@ msgstr ""
 "Používateľsky prívetivý textový editor\n"
 "napísaný pre Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2020 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2019 the Free Software Foundation"
+msgstr ""
 
 msgid "About"
 msgstr "O aplikácii"
@@ -1826,13 +1825,10 @@ msgstr "Nemožno stiahnuť lokálnu kópiu %s"
 msgid "The shell is already running a command"
 msgstr "Shell už vykonáva príkaz"
 
-#, fuzzy
 msgid ""
 "Not an xterm or Linux console;\n"
 "the subshell cannot be toggled."
 msgstr ""
-"Konzola nie je xterm alebo Linux;\n"
-"nemožno prepnúť panely."
 
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Napísaním „exit“ sa vrátite do aplikácie Midnight Commander"
@@ -1858,9 +1854,9 @@ msgstr "ostatní"
 msgid "Flag"
 msgstr "Označ"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Permissions (octal): %o"
-msgstr "Oprávnenia (osmičkové):"
+msgstr ""
 
 msgid "Chown advanced command"
 msgstr "Pokročilý príkaz chown"
@@ -2209,27 +2205,23 @@ msgstr "Meno použivateľa:"
 msgid "SMB authentication"
 msgstr "Autentifikácia SMB"
 
-#, fuzzy
 msgid "Secure deletion"
-msgstr "&Invertovať výber"
+msgstr ""
 
-#, fuzzy
 msgid "Undelete"
-msgstr "Delete"
+msgstr ""
 
 msgid "Synchronous updates"
 msgstr ""
 
-#, fuzzy
 msgid "Synchronous directory updates"
-msgstr "Zobraz&iť veľkosť adresárov"
+msgstr ""
 
 msgid "Immutable"
 msgstr ""
 
-#, fuzzy
 msgid "Append only"
-msgstr "Prid&ať"
+msgstr ""
 
 msgid "No dump"
 msgstr ""
@@ -2243,9 +2235,8 @@ msgstr ""
 msgid "Compressed clusters"
 msgstr ""
 
-#, fuzzy
 msgid "Compressed dirty file"
-msgstr "Porovnať adresáre"
+msgstr ""
 
 msgid "Compression raw access"
 msgstr ""
@@ -2256,30 +2247,26 @@ msgstr ""
 msgid "Journaled data"
 msgstr ""
 
-#, fuzzy
 msgid "Indexed directory"
-msgstr "adresár"
+msgstr ""
 
 msgid "No tail merging"
 msgstr ""
 
-#, fuzzy
 msgid "Top of directory hierarchies"
-msgstr "Zobraz&iť veľkosť adresárov"
+msgstr ""
 
 msgid "Inode uses extents"
 msgstr ""
 
-#, fuzzy
 msgid "Huge_file"
-msgstr "súbor"
+msgstr ""
 
 msgid "No COW"
 msgstr ""
 
-#, fuzzy
 msgid "Casefolded file"
-msgstr "Zatvoriť súbor"
+msgstr ""
 
 msgid "Inode has inline data"
 msgstr ""
@@ -2299,29 +2286,23 @@ msgstr "N&astaviť označ."
 msgid "C&lear marked"
 msgstr "z&Mazať označ."
 
-#, fuzzy
 msgid "Chattr command"
-msgstr "Další príkaz"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chattr \"%s\"\n"
 "%s"
 msgstr ""
-"Nemožno vykonať stat() „%s“\n"
-"%s"
 
-#, fuzzy
 msgid "Cannot change attributes on non-local filesystems"
-msgstr "Nemožno spúšťať príkazy na súborových systémoch, ktoré nie sú lokálne"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get flags of \"%s\"\n"
 "%s"
 msgstr ""
-"Nemožno presunúť „%s“ do „%s“\n"
-"%s"
 
 msgid "set &user ID on execution"
 msgstr "nastaviť ID po&užívateľa pri spustení"
@@ -3959,15 +3940,11 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "Cesta do domovského adresára nie je absolútna"
 
-#, fuzzy
 msgid ""
 "GNU Midnight Commander\n"
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""
-"GNU Midnight Commander už na tomto\n"
-"termináli beží.\n"
-"Podpora subshell bude vypnutá."
 
 #, c-format
 msgid ""
@@ -4010,45 +3987,35 @@ msgstr "Shell je ešte aktívny. Ukončiť napriek tomu?"
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Upozornenie: Nedá sa zmeniť adresár na %s.\n"
 
-#, fuzzy
 msgid "With builtin Editor and Aspell support"
-msgstr "So zabudovaným editorom a podporou Aspell\n"
+msgstr ""
 
-#, fuzzy
 msgid "With builtin Editor"
-msgstr "So zabudovaným editorom\n"
+msgstr ""
 
-#, fuzzy
 msgid "With optional subshell support"
-msgstr "S voliteľnou podporou subshellu\n"
+msgstr ""
 
-#, fuzzy
 msgid "With subshell support as default"
-msgstr "S predvlenou podporou subshellu\n"
+msgstr ""
 
-#, fuzzy
 msgid "With support for background operations"
-msgstr "S podporou operácií na pozadí\n"
+msgstr ""
 
-#, fuzzy
 msgid "With mouse support on xterm and Linux console"
-msgstr "S podporou myši v xterm a Linuxovej konzole\n"
+msgstr ""
 
-#, fuzzy
 msgid "With mouse support on xterm"
-msgstr "S podporou myši v xterm\n"
+msgstr ""
 
-#, fuzzy
 msgid "With support for X11 events"
-msgstr "S podporou udalostí X11\n"
+msgstr ""
 
-#, fuzzy
 msgid "With internationalization support"
-msgstr "S podporou internacionalizácie\n"
+msgstr ""
 
-#, fuzzy
 msgid "With multiple codepages support"
-msgstr "S podporou znakových sád\n"
+msgstr ""
 
 msgid "With ext2fs attributes support"
 msgstr ""
@@ -4057,9 +4024,9 @@ msgstr ""
 msgid "Built with GLib %d.%d.%d\n"
 msgstr "Zostavené s GLib %d.%d.%d\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with S-Lang %s with terminfo database\n"
-msgstr "Používa sa knižnica S-Lang s databázou terminfo\n"
+msgstr ""
 
 #, c-format
 msgid "Built with ncurses %s\n"
@@ -4068,9 +4035,9 @@ msgstr ""
 msgid "Built with ncurses (unknown version)"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with ncursesw %s\n"
-msgstr "Používa sa knižnica ncursesw\n"
+msgstr ""
 
 msgid "Built with ncursesw (unknown version)"
 msgstr ""
@@ -4693,16 +4660,3 @@ msgstr "Pokračovať od začiatku?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nemožno stiahnuť lokálnu kópiu /ftp://some.host/editme.txt"
-
-#~ msgid "Block is large, you may not be able to undo this action"
-#~ msgstr "Blok je veľký, je možné, že túto operáciu nebude možné vrátiť"
-
-#~ msgid ""
-#~ "Current text was modified without a file save.\n"
-#~ "Continue discards these changes"
-#~ msgstr ""
-#~ "Aktuálny text sa zmenil bez uloženia súboru.\n"
-#~ "Pokračovaním tieto zmeny zrušíte"
-
-#~ msgid "Using the ncurses library\n"
-#~ msgstr "Používa sa knižnica ncurses\n"

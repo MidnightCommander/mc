@@ -15,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-17 18:50+0300\n"
-"PO-Revision-Date: 2019-12-16 01:49+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"PO-Revision-Date: 2020-05-17 17:42+0000\n"
+"Last-Translator: Transifex Bot <>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/mc/mc/language/uk/)\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
@@ -498,23 +498,23 @@ msgstr "Змінна середовища TERM не встановлена!\n"
 msgid "Cannot check SIGWINCH pipe"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Cannot create pipe for SIGWINCH: %s (%d)\n"
-msgstr "Не вдалося створити канал для SIGWINCH"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
-msgstr "Не вдалося налаштувати завершення запису каналу SIGWINCH"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
-msgstr "Не вдалося налаштувати завершення читання каналу SIGWINCH"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1675,9 +1675,8 @@ msgstr ""
 "Дружній до користувача редактор тексту\n"
 "написаний для Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2020 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2019 the Free Software Foundation"
+msgstr ""
 
 msgid "About"
 msgstr "Про програму"
@@ -1828,13 +1827,10 @@ msgstr "Не вдалося отримати локальну копію %s"
 msgid "The shell is already running a command"
 msgstr "Інтерпретатор вже виконує команду"
 
-#, fuzzy
 msgid ""
 "Not an xterm or Linux console;\n"
 "the subshell cannot be toggled."
 msgstr ""
-"Це не xterm і не консоль Linux.\n"
-"Панелі не можна перемкнути. "
 
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Введіть 'exit', щоб повернутися до Midnight Commander"
@@ -1860,9 +1856,9 @@ msgstr "інші"
 msgid "Flag"
 msgstr "Мітка"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Permissions (octal): %o"
-msgstr "Дозволи (вісімкові):"
+msgstr ""
 
 msgid "Chown advanced command"
 msgstr "Розширена зміна власника"
@@ -2210,27 +2206,23 @@ msgstr "Ім’я користувача:"
 msgid "SMB authentication"
 msgstr "SMB(самба) автентифікація"
 
-#, fuzzy
 msgid "Secure deletion"
-msgstr "&Інвертувати виділення"
+msgstr ""
 
-#, fuzzy
 msgid "Undelete"
-msgstr "Клавіша Delete"
+msgstr ""
 
 msgid "Synchronous updates"
 msgstr ""
 
-#, fuzzy
 msgid "Synchronous directory updates"
-msgstr "Показати &розміри каталогів"
+msgstr ""
 
 msgid "Immutable"
 msgstr ""
 
-#, fuzzy
 msgid "Append only"
-msgstr "До&писати"
+msgstr ""
 
 msgid "No dump"
 msgstr ""
@@ -2244,9 +2236,8 @@ msgstr ""
 msgid "Compressed clusters"
 msgstr ""
 
-#, fuzzy
 msgid "Compressed dirty file"
-msgstr "Порівняти каталоги"
+msgstr ""
 
 msgid "Compression raw access"
 msgstr ""
@@ -2257,30 +2248,26 @@ msgstr ""
 msgid "Journaled data"
 msgstr ""
 
-#, fuzzy
 msgid "Indexed directory"
-msgstr "каталог"
+msgstr ""
 
 msgid "No tail merging"
 msgstr ""
 
-#, fuzzy
 msgid "Top of directory hierarchies"
-msgstr "Показати &розміри каталогів"
+msgstr ""
 
 msgid "Inode uses extents"
 msgstr ""
 
-#, fuzzy
 msgid "Huge_file"
-msgstr "файл"
+msgstr ""
 
 msgid "No COW"
 msgstr ""
 
-#, fuzzy
 msgid "Casefolded file"
-msgstr "Закрити файл"
+msgstr ""
 
 msgid "Inode has inline data"
 msgstr ""
@@ -2300,29 +2287,23 @@ msgstr "Увім. п&oміч."
 msgid "C&lear marked"
 msgstr "&Вим. поміч."
 
-#, fuzzy
 msgid "Chattr command"
-msgstr "Інша команда"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chattr \"%s\"\n"
 "%s"
 msgstr ""
-"Не вдалося отримати властивості «%s»\n"
-"%s "
 
-#, fuzzy
 msgid "Cannot change attributes on non-local filesystems"
-msgstr "Не можна виконувати команди на нелокальних файлових системах"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get flags of \"%s\"\n"
 "%s"
 msgstr ""
-"Не вдалося перенести файл «%s» у «%s»\n"
-"%s "
 
 msgid "set &user ID on execution"
 msgstr "встановити ID &користувача на виконання"
@@ -3960,15 +3941,11 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "Шлях до домашнього каталогу не абсолютний"
 
-#, fuzzy
 msgid ""
 "GNU Midnight Commander\n"
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""
-"Запущено іншу копію Midnight Commander\n"
-"на цьому терміналі. Вкладену командну\n"
-"оболонку вимкнуто."
 
 #, c-format
 msgid ""
@@ -4011,45 +3988,35 @@ msgstr "Оболонка ще активна. Все одно вийти?"
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Попередження: не вдалося змінити на %s.\n"
 
-#, fuzzy
 msgid "With builtin Editor and Aspell support"
-msgstr "Із вмонтованим Редактором та підтримкою Aspell\n"
+msgstr ""
 
-#, fuzzy
 msgid "With builtin Editor"
-msgstr "Із вмонтованим редактором\n"
+msgstr ""
 
-#, fuzzy
 msgid "With optional subshell support"
-msgstr "Із підтримкою довільної вкладеної оболонки\n"
+msgstr ""
 
-#, fuzzy
 msgid "With subshell support as default"
-msgstr "Із підтримкою вкладеної оболонки (стандартно)\n"
+msgstr ""
 
-#, fuzzy
 msgid "With support for background operations"
-msgstr "Із підтримкою фонових операцій\n"
+msgstr ""
 
-#, fuzzy
 msgid "With mouse support on xterm and Linux console"
-msgstr "Із підтримкою миші у xterm і консолі Linux\n"
+msgstr ""
 
-#, fuzzy
 msgid "With mouse support on xterm"
-msgstr "Із підтримкою миші у xterm\n"
+msgstr ""
 
-#, fuzzy
 msgid "With support for X11 events"
-msgstr "Із підтримкою подій X11\n"
+msgstr ""
 
-#, fuzzy
 msgid "With internationalization support"
-msgstr "Із підтримкою інтернаціоналізації\n"
+msgstr ""
 
-#, fuzzy
 msgid "With multiple codepages support"
-msgstr "Із підтримкою багатьох кодових сторінок\n"
+msgstr ""
 
 msgid "With ext2fs attributes support"
 msgstr ""
@@ -4058,9 +4025,9 @@ msgstr ""
 msgid "Built with GLib %d.%d.%d\n"
 msgstr "Зібрано із GLib %d.%d.%d\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with S-Lang %s with terminfo database\n"
-msgstr "Використання бібліотеки S-Lang із БД terminfo\n"
+msgstr ""
 
 #, c-format
 msgid "Built with ncurses %s\n"
@@ -4069,9 +4036,9 @@ msgstr ""
 msgid "Built with ncurses (unknown version)"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with ncursesw %s\n"
-msgstr "Використання бібліотеки ncursesw\n"
+msgstr ""
 
 msgid "Built with ncursesw (unknown version)"
 msgstr ""
@@ -4697,16 +4664,3 @@ msgstr "Почати спочатку?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не вдалося отримати локальну копію /ftp://some.host/editme.txt"
-
-#~ msgid "Block is large, you may not be able to undo this action"
-#~ msgstr "Блок завеликий, імовірно, цю дію не можна буде повернути."
-
-#~ msgid ""
-#~ "Current text was modified without a file save.\n"
-#~ "Continue discards these changes"
-#~ msgstr ""
-#~ "Поточний текст змінено і не збережено.\n"
-#~ "Продовження операції призведе до втрати змін"
-
-#~ msgid "Using the ncurses library\n"
-#~ msgstr "Використання бібліотеки ncurses\n"

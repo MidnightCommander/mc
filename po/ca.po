@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# Antoni Bella Pérez <antonibella5@yahoo.com>, 2017-2019
+# Antoni Bella Pérez <antonibella5@yahoo.com>, 2017-2020
 # Daniel <danicases@gmail.com>, 2011
 # Daniel <danicases@gmail.com>, 2011-2012
 # Daniel <danicases@gmail.com>, 2012
@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-17 18:50+0300\n"
-"PO-Revision-Date: 2019-12-22 22:08+0000\n"
+"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"PO-Revision-Date: 2020-05-18 08:43+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/mc/mc/language/ca/)\n"
 "Language: ca\n"
@@ -496,23 +496,31 @@ msgstr "La variable d'entorn TERM no està definida!\n"
 msgid "Cannot check SIGWINCH pipe"
 msgstr "No s'ha pogut comprovar la canonada SIGWINCH"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Cannot create pipe for SIGWINCH: %s (%d)\n"
-msgstr "No s'han pogut crear la canonada per a SIGWINCH"
+msgstr ""
+"\n"
+"No s'ha pogut crear una canonada per a SIGWINCH: %s (%d)\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
-msgstr "No s'ha pogut configurar l'escriptura final de la canonada SIGWINCH"
+msgstr ""
+"\n"
+"No s'ha pogut configurar el final de l'escriptura de la canonada SIGWINCH: "
+"%s (%d)\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
-msgstr "No s'ha pogut configurar la lectura final de la canonada SIGWINCH"
+msgstr ""
+"\n"
+"No s'ha pogut configurar el final de la lectura de la canonada SIGWINCH: %s "
+"(%d)\n"
 
 #, c-format
 msgid ""
@@ -1679,9 +1687,8 @@ msgstr ""
 "Un editor de text fàcil d'emprar\n"
 "escrit per al Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2020 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2019 la Free Software Foundation"
+msgstr "Copyright (C) 1996-2020 la Free Software Foundation"
 
 msgid "About"
 msgstr "Quant a"
@@ -1833,13 +1840,12 @@ msgstr "No s'ha pogut obtenir una còpia local de %s"
 msgid "The shell is already running a command"
 msgstr "La shell ja està executant una ordre"
 
-#, fuzzy
 msgid ""
 "Not an xterm or Linux console;\n"
 "the subshell cannot be toggled."
 msgstr ""
-"No feu servir ni xterm ni una consola Linux.\n"
-"No podreu alternar entre els plafons."
+"No és una consola «xterm» o Linux;\n"
+"no es pot alternar el subintèrpret d'ordres."
 
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Escriviu «exit» per tornar al Midnight Commander"
@@ -1865,9 +1871,9 @@ msgstr "altres"
 msgid "Flag"
 msgstr "Bandera"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Permissions (octal): %o"
-msgstr "Permisos (octal):"
+msgstr "Permisos (octal): %o"
 
 msgid "Chown advanced command"
 msgstr "Ordre del canvi avançat del propietari"
@@ -2216,77 +2222,68 @@ msgstr "Nom d'usuari:"
 msgid "SMB authentication"
 msgstr "Autenticació SMB"
 
-#, fuzzy
 msgid "Secure deletion"
-msgstr "&Inverteix la selecció"
+msgstr "Supressió segura"
 
-#, fuzzy
 msgid "Undelete"
-msgstr "Suprimeix"
+msgstr "Recupera"
 
 msgid "Synchronous updates"
-msgstr ""
+msgstr "Actualitzacions sincròniques"
 
-#, fuzzy
 msgid "Synchronous directory updates"
-msgstr "Mostra les m&ides dels directoris"
+msgstr "Actualitzacions sincròniques del directori"
 
 msgid "Immutable"
-msgstr ""
+msgstr "Immutable"
 
-#, fuzzy
 msgid "Append only"
-msgstr "A&nnexa"
+msgstr "Només annexar"
 
 msgid "No dump"
-msgstr ""
+msgstr "No bolcar"
 
 msgid "No update atime"
-msgstr ""
+msgstr "No actualitzar «atime»"
 
 msgid "Compress"
-msgstr ""
+msgstr "Comprimeix"
 
 msgid "Compressed clusters"
-msgstr ""
+msgstr "Clústers comprimits"
 
-#, fuzzy
 msgid "Compressed dirty file"
-msgstr "Compara els directoris"
+msgstr "Fitxer en brut comprimit"
 
 msgid "Compression raw access"
-msgstr ""
+msgstr "Compressió amb accès sense processar"
 
 msgid "Encrypted inode"
-msgstr ""
+msgstr "Inode encriptat"
 
 msgid "Journaled data"
-msgstr ""
+msgstr "Dades amb diari"
 
-#, fuzzy
 msgid "Indexed directory"
-msgstr "directori"
+msgstr "Directori indexat"
 
 msgid "No tail merging"
-msgstr ""
+msgstr "No fusionar els «tail»"
 
-#, fuzzy
 msgid "Top of directory hierarchies"
-msgstr "Mostra les m&ides dels directoris"
+msgstr "Començament de les jerarquies de directori"
 
 msgid "Inode uses extents"
 msgstr ""
 
-#, fuzzy
 msgid "Huge_file"
-msgstr "fitxer"
+msgstr ""
 
 msgid "No COW"
 msgstr ""
 
-#, fuzzy
 msgid "Casefolded file"
-msgstr "Tanca el fitxer"
+msgstr ""
 
 msgid "Inode has inline data"
 msgstr ""
@@ -2306,29 +2303,23 @@ msgstr "&Posa els marcats"
 msgid "C&lear marked"
 msgstr "&Esborra els marcats"
 
-#, fuzzy
 msgid "Chattr command"
-msgstr "Una altra ordre"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chattr \"%s\"\n"
 "%s"
 msgstr ""
-"No s'ha pogut veure l'estat de «%s»\n"
-"%s"
 
-#, fuzzy
 msgid "Cannot change attributes on non-local filesystems"
-msgstr "No es poden executar ordres en sistemes de fitxers no locals"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get flags of \"%s\"\n"
 "%s"
 msgstr ""
-"No s'ha pogut moure el fitxer «%s» cap a «%s»\n"
-"%s"
 
 msgid "set &user ID on execution"
 msgstr "estableix l'ID d'&usuari en l'execució"
@@ -3361,14 +3352,14 @@ msgid "Links:      %d"
 msgstr "Enllaços:   %d"
 
 msgid "Attributes: not supported"
-msgstr ""
+msgstr "Atributs: no admesos"
 
 #, c-format
 msgid "Attributes: %s"
-msgstr ""
+msgstr "Atributs: %s"
 
 msgid "Attributes: unavailable"
-msgstr ""
+msgstr "Atributs: no disponibles"
 
 #, c-format
 msgid "Mode:       %s (%04o)"
@@ -3965,15 +3956,14 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "El camí del directori d'inici no és absolut"
 
-#, fuzzy
 msgid ""
 "GNU Midnight Commander\n"
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""
-"GNU Midnight Commander està\n"
-"funcionant en aquest terminal.\n"
-"El suport Subshell es desactivarà."
+"El Midnight Commander de GNU\n"
+"ja s'està executant en aquest terminal.\n"
+"La implementació del subintèrpret d'ordres està inhabilitada."
 
 #, c-format
 msgid ""
@@ -4016,71 +4006,60 @@ msgstr "L'intèrpret d'ordres encara està actiu. Surto de totes maneres?"
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Avís: no s'ha pogut canviar a %s.\n"
 
-#, fuzzy
 msgid "With builtin Editor and Aspell support"
-msgstr "Amb editor incorporat i implementació per a Aspell\n"
+msgstr "Amb la implementació incorporada de l'Editor i Aspell"
 
-#, fuzzy
 msgid "With builtin Editor"
-msgstr "Amb editor incorporat\n"
+msgstr "Amb l'editor integrat"
 
-#, fuzzy
 msgid "With optional subshell support"
-msgstr "Amb implementació opcional de subintèrpret\n"
+msgstr "Amb la implementació opcional del subintèrpret d'ordres"
 
-#, fuzzy
 msgid "With subshell support as default"
-msgstr "Amb implementació de subintèrpret per omissió\n"
+msgstr "Amb la implementació del subintèrpret d'ordres com a predeterminat"
 
-#, fuzzy
 msgid "With support for background operations"
-msgstr "Amb implementació per a operacions en segon pla\n"
+msgstr "Amb la implementació per a operacions en segon pla"
 
-#, fuzzy
 msgid "With mouse support on xterm and Linux console"
-msgstr ""
-"Amb la possibilitat d'emprar el ratolí al xterm i a la consola de Linux\n"
+msgstr "Amb la implementació per al ratolí a xterm i a la consola de Linux"
 
-#, fuzzy
 msgid "With mouse support on xterm"
-msgstr "Amb la possibilitat d'emprar el ratolí al xterm.\n"
+msgstr "Amb la implementació per al ratolí a xterm"
 
-#, fuzzy
 msgid "With support for X11 events"
-msgstr "Amb la possibilitat d'emprar els esdeveniments de l'X11\n"
+msgstr "Amb la implementació per als esdeveniments d'X11"
 
-#, fuzzy
 msgid "With internationalization support"
-msgstr "Amb implementació de la internacionalització\n"
+msgstr "Amb la implementació per a la internacionalització"
 
-#, fuzzy
 msgid "With multiple codepages support"
-msgstr "Amb implementació per a múltiples pàgines de codis\n"
+msgstr "Amb la implementació per a múltiples pàgines de codi"
 
 msgid "With ext2fs attributes support"
-msgstr ""
+msgstr "Amb la implementació dels atributs «ext2fs»"
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"
 msgstr "Construït amb GLib %d.%d.%d\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with S-Lang %s with terminfo database\n"
-msgstr "Emprant la biblioteca «S-Lang» amb la base de dades «terminfo»\n"
+msgstr "Construïda amb S-Lang %s amb base de dades terminfo\n"
 
 #, c-format
 msgid "Built with ncurses %s\n"
-msgstr ""
+msgstr "Construïda amb ncurses %s\n"
 
 msgid "Built with ncurses (unknown version)"
-msgstr ""
+msgstr "Construïda amb ncurses (versió desconeguda)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with ncursesw %s\n"
-msgstr "Emprant la biblioteca «ncursesw»\n"
+msgstr "Construïda amb ncursesw %s\n"
 
 msgid "Built with ncursesw (unknown version)"
-msgstr ""
+msgstr "Construïda amb ncursesw (versió desconeguda)"
 
 msgid "Virtual File Systems:"
 msgstr "Sistemes de fitxers virtuals:"
@@ -4704,16 +4683,3 @@ msgstr "Continuo des del començament?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "No s'ha pogut obtenir una còpia local de /ftp://algun.amfitrió/editam.txt"
-
-#~ msgid "Block is large, you may not be able to undo this action"
-#~ msgstr "El bloc és gran, potser no pudreu desfer aquesta acció."
-
-#~ msgid ""
-#~ "Current text was modified without a file save.\n"
-#~ "Continue discards these changes"
-#~ msgstr ""
-#~ "El text actual ha estat modificat sense desar-lo a un fitxer.\n"
-#~ "Continueu i es descartaran aquests canvis."
-
-#~ msgid "Using the ncurses library\n"
-#~ msgstr "Emprant la biblioteca «ncurses»\n"

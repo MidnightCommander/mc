@@ -5,14 +5,14 @@
 # Translators:
 # Nikolay Korotkiy <sikmir@gmail.com>, 2017-2019
 # Slava Zanko <slavazanko@gmail.com>, 2011
-# Kasvain <kasvain@gmail.com>, 2015
+# hondakassi <kasvain@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-17 18:50+0300\n"
-"PO-Revision-Date: 2019-12-16 01:49+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"PO-Revision-Date: 2020-05-17 17:42+0000\n"
+"Last-Translator: Transifex Bot <>\n"
 "Language-Team: Finnish (http://www.transifex.com/mc/mc/language/fi/)\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
@@ -471,11 +471,11 @@ msgstr ""
 msgid "Cannot check SIGWINCH pipe"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Cannot create pipe for SIGWINCH: %s (%d)\n"
-msgstr "Väliaikaishakemiston luonti epäonnistui %s: %s\n"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1766,9 +1766,9 @@ msgstr "muut"
 msgid "Flag"
 msgstr "Lippo"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Permissions (octal): %o"
-msgstr "Oikeudet"
+msgstr ""
 
 msgid "Chown advanced command"
 msgstr ""
@@ -2112,9 +2112,8 @@ msgstr ""
 msgid "Secure deletion"
 msgstr ""
 
-#, fuzzy
 msgid "Undelete"
-msgstr "Alleviivaus"
+msgstr ""
 
 msgid "Synchronous updates"
 msgstr ""
@@ -2152,9 +2151,8 @@ msgstr ""
 msgid "Journaled data"
 msgstr ""
 
-#, fuzzy
 msgid "Indexed directory"
-msgstr "Hakemiston %s luonti epäonnistui"
+msgstr ""
 
 msgid "No tail merging"
 msgstr ""
@@ -2165,16 +2163,14 @@ msgstr ""
 msgid "Inode uses extents"
 msgstr ""
 
-#, fuzzy
 msgid "Huge_file"
-msgstr "tiedosto"
+msgstr ""
 
 msgid "No COW"
 msgstr ""
 
-#, fuzzy
 msgid "Casefolded file"
-msgstr "Sulje tiedosto"
+msgstr ""
 
 msgid "Inode has inline data"
 msgstr ""
@@ -2194,9 +2190,8 @@ msgstr "&Aseta merkityt"
 msgid "C&lear marked"
 msgstr "&Tyhjennä merkityt"
 
-#, fuzzy
 msgid "Chattr command"
-msgstr "Chmod-komento"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -3783,13 +3778,11 @@ msgstr ""
 msgid "With support for background operations"
 msgstr ""
 
-#, fuzzy
 msgid "With mouse support on xterm and Linux console"
-msgstr "Ota hiirituki pois käytöstä tekstiversiossa"
+msgstr ""
 
-#, fuzzy
 msgid "With mouse support on xterm"
-msgstr "Ota hiirituki pois käytöstä tekstiversiossa"
+msgstr ""
 
 msgid "With support for X11 events"
 msgstr ""

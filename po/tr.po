@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-17 18:50+0300\n"
-"PO-Revision-Date: 2020-01-18 12:57+0000\n"
-"Last-Translator: Serdar Sağlam <teknomobil@msn.com>\n"
+"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"PO-Revision-Date: 2020-05-17 17:42+0000\n"
+"Last-Translator: Transifex Bot <>\n"
 "Language-Team: Turkish (http://www.transifex.com/mc/mc/language/tr/)\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
@@ -484,11 +484,11 @@ msgstr "TERM çevre değişkeni atanmamış!\n"
 msgid "Cannot check SIGWINCH pipe"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Cannot create pipe for SIGWINCH: %s (%d)\n"
-msgstr "Boru akışı oluşturulamadı"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1665,9 +1665,8 @@ msgstr ""
 "Kullanıcı dostu bir metin düzenleyici\n"
 "Midnight Commander için yazıldı"
 
-#, fuzzy
 msgid "Copyright (C) 1996-2020 the Free Software Foundation"
-msgstr "Telif hakkı (C) 1996-2019 Özgür Yazılım Vakfı"
+msgstr ""
 
 msgid "About"
 msgstr "Hakkında"
@@ -1821,13 +1820,10 @@ msgstr "`%s'in yerel kopyası alınamadı"
 msgid "The shell is already running a command"
 msgstr "Kabukta halen bir komut etkin"
 
-#, fuzzy
 msgid ""
 "Not an xterm or Linux console;\n"
 "the subshell cannot be toggled."
 msgstr ""
-"Bir xterm ya da Linux konsolu değil;\n"
-" Paneller değiştirilemez."
 
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Midnight Commander'a dönmek için 'exit' yazın"
@@ -1853,9 +1849,9 @@ msgstr "diğer"
 msgid "Flag"
 msgstr "İm"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Permissions (octal): %o"
-msgstr "İzinler (Sekizlik):"
+msgstr ""
 
 msgid "Chown advanced command"
 msgstr "Dosya özellikleri"
@@ -2205,27 +2201,23 @@ msgstr "Kullanıcı: "
 msgid "SMB authentication"
 msgstr "SMB kimlik doğrulama"
 
-#, fuzzy
 msgid "Secure deletion"
-msgstr "&Seçimi tersine çevir"
+msgstr ""
 
-#, fuzzy
 msgid "Undelete"
-msgstr "Sil"
+msgstr ""
 
 msgid "Synchronous updates"
 msgstr ""
 
-#, fuzzy
 msgid "Synchronous directory updates"
-msgstr "diz&in boyutlarını göster"
+msgstr ""
 
 msgid "Immutable"
 msgstr ""
 
-#, fuzzy
 msgid "Append only"
-msgstr "Sonuna &Ekle"
+msgstr ""
 
 msgid "No dump"
 msgstr ""
@@ -2239,9 +2231,8 @@ msgstr ""
 msgid "Compressed clusters"
 msgstr ""
 
-#, fuzzy
 msgid "Compressed dirty file"
-msgstr "Dizinleri karşılaştır"
+msgstr ""
 
 msgid "Compression raw access"
 msgstr ""
@@ -2252,30 +2243,26 @@ msgstr ""
 msgid "Journaled data"
 msgstr ""
 
-#, fuzzy
 msgid "Indexed directory"
-msgstr "dizin:"
+msgstr ""
 
 msgid "No tail merging"
 msgstr ""
 
-#, fuzzy
 msgid "Top of directory hierarchies"
-msgstr "diz&in boyutlarını göster"
+msgstr ""
 
 msgid "Inode uses extents"
 msgstr ""
 
-#, fuzzy
 msgid "Huge_file"
-msgstr "dosya:"
+msgstr ""
 
 msgid "No COW"
 msgstr ""
 
-#, fuzzy
 msgid "Casefolded file"
-msgstr "Dosyayı kapat"
+msgstr ""
 
 msgid "Inode has inline data"
 msgstr ""
@@ -2295,29 +2282,23 @@ msgstr "S&eçimi başlat"
 msgid "C&lear marked"
 msgstr "İşa&retlenenleri Temizle"
 
-#, fuzzy
 msgid "Chattr command"
-msgstr "Diğer komut"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chattr \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" durumlanamıyor\n"
-" %s"
 
-#, fuzzy
 msgid "Cannot change attributes on non-local filesystems"
-msgstr "Yerel dosya sistemi dışında komut çalıştırılamaz"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get flags of \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" dosyası \"%s\" e taşınamıyor \n"
-" %s"
 
 msgid "set &user ID on execution"
 msgstr "kullanıcı çalıştırabilir"
@@ -3944,15 +3925,11 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "Ev dizini yolu mutlak değil"
 
-#, fuzzy
 msgid ""
 "GNU Midnight Commander\n"
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""
-"GNU Midnight Commander zaten\n"
-"bu terminalde çalışıyoryor.\n"
-"Altkabuk desteği kapatılacak."
 
 #, c-format
 msgid ""
@@ -3995,45 +3972,35 @@ msgstr "Kabuk hala etkin. Yine de çıkılsın mı?"
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Uyarı: %s'e geçilemedi.\n"
 
-#, fuzzy
 msgid "With builtin Editor and Aspell support"
-msgstr "Yerleşik düzenleyici ve Aspell desteği ile\n"
+msgstr ""
 
-#, fuzzy
 msgid "With builtin Editor"
-msgstr "Yerleşik Düzenleyiciyle\n"
+msgstr ""
 
-#, fuzzy
 msgid "With optional subshell support"
-msgstr "Seçimlik altkabuk desteğiyle\n"
+msgstr ""
 
-#, fuzzy
 msgid "With subshell support as default"
-msgstr "Öntanımlı olarak altkabuk desteğiyle\n"
+msgstr ""
 
-#, fuzzy
 msgid "With support for background operations"
-msgstr "Ardalan işlemleri desteğiyle\n"
+msgstr ""
 
-#, fuzzy
 msgid "With mouse support on xterm and Linux console"
-msgstr "xterm ve Linux konsolunda fare desteği ile\n"
+msgstr ""
 
-#, fuzzy
 msgid "With mouse support on xterm"
-msgstr "xterm üzerinde fare desteği ile\n"
+msgstr ""
 
-#, fuzzy
 msgid "With support for X11 events"
-msgstr "X11 eylemleri desteğiyle\n"
+msgstr ""
 
-#, fuzzy
 msgid "With internationalization support"
-msgstr "i18n desteğiyle\n"
+msgstr ""
 
-#, fuzzy
 msgid "With multiple codepages support"
-msgstr "Çoklu karakter kümesi desteğiyle\n"
+msgstr ""
 
 msgid "With ext2fs attributes support"
 msgstr ""
@@ -4042,9 +4009,9 @@ msgstr ""
 msgid "Built with GLib %d.%d.%d\n"
 msgstr "Glib ile yapılandır %d.%d.%d\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with S-Lang %s with terminfo database\n"
-msgstr "Terim bilgisi veritabanı ile S-Lang kütüphanesi kullanılarak\n"
+msgstr ""
 
 #, c-format
 msgid "Built with ncurses %s\n"
@@ -4053,9 +4020,9 @@ msgstr ""
 msgid "Built with ncurses (unknown version)"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with ncursesw %s\n"
-msgstr "ncursesw kitaplığı kullanılarak\n"
+msgstr ""
 
 msgid "Built with ncursesw (unknown version)"
 msgstr ""
@@ -4679,16 +4646,3 @@ msgstr "Başından devam edilsin mi?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr " /ftp://some.host/editme.txt 'in yerel kopyası alınamadı"
-
-#~ msgid "Block is large, you may not be able to undo this action"
-#~ msgstr "Blok çok büyük, bu eylem geri alınamayabilir"
-
-#~ msgid ""
-#~ "Current text was modified without a file save.\n"
-#~ "Continue discards these changes"
-#~ msgstr ""
-#~ "Mevcut metin kaydedilmemiş değişiklikler içeriyor\n"
-#~ "Bu değişiklikler yoksayılarak devam edilsin mi?"
-
-#~ msgid "Using the ncurses library\n"
-#~ msgstr "Ncurses kütüphanesini kullanılarak\n"

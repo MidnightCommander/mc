@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-17 18:50+0300\n"
-"PO-Revision-Date: 2019-12-16 01:49+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"PO-Revision-Date: 2020-05-17 17:42+0000\n"
+"Last-Translator: Transifex Bot <>\n"
 "Language-Team: Slovenian (http://www.transifex.com/mc/mc/language/sl/)\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
@@ -472,11 +472,11 @@ msgstr "TERM okoljska spremenljivka ni nastavljena!\n"
 msgid "Cannot check SIGWINCH pipe"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Cannot create pipe for SIGWINCH: %s (%d)\n"
-msgstr " Ne morem ustvariti začasnega imenika %s: %s\n"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1767,9 +1767,9 @@ msgstr "drugo"
 msgid "Flag"
 msgstr "Zastavica"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Permissions (octal): %o"
-msgstr "Dovoljenje"
+msgstr ""
 
 msgid "Chown advanced command"
 msgstr ""
@@ -2113,9 +2113,8 @@ msgstr ""
 msgid "Secure deletion"
 msgstr ""
 
-#, fuzzy
 msgid "Undelete"
-msgstr "&Zbriši"
+msgstr ""
 
 msgid "Synchronous updates"
 msgstr ""
@@ -2126,9 +2125,8 @@ msgstr ""
 msgid "Immutable"
 msgstr ""
 
-#, fuzzy
 msgid "Append only"
-msgstr "&Pripni"
+msgstr ""
 
 msgid "No dump"
 msgstr ""
@@ -2154,9 +2152,8 @@ msgstr ""
 msgid "Journaled data"
 msgstr ""
 
-#, fuzzy
 msgid "Indexed directory"
-msgstr "imenik"
+msgstr ""
 
 msgid "No tail merging"
 msgstr ""
@@ -2167,9 +2164,8 @@ msgstr ""
 msgid "Inode uses extents"
 msgstr ""
 
-#, fuzzy
 msgid "Huge_file"
-msgstr "datoteko"
+msgstr ""
 
 msgid "No COW"
 msgstr ""
@@ -2195,9 +2191,8 @@ msgstr "&Nastavi oznako"
 msgid "C&lear marked"
 msgstr "&Počisti označeno"
 
-#, fuzzy
 msgid "Chattr command"
-msgstr "Drug ukaz"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -3794,45 +3789,35 @@ msgstr ""
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Opozorilo: Ne morem iti v %s.\n"
 
-#, fuzzy
 msgid "With builtin Editor and Aspell support"
-msgstr "Z vgrajenim urejevalnikom\n"
+msgstr ""
 
-#, fuzzy
 msgid "With builtin Editor"
-msgstr "Z vgrajenim urejevalnikom\n"
+msgstr ""
 
-#, fuzzy
 msgid "With optional subshell support"
-msgstr "Izključi podporo za podlupine"
+msgstr ""
 
-#, fuzzy
 msgid "With subshell support as default"
-msgstr "Vklopi podporo za podlupino (privzeto)"
+msgstr ""
 
-#, fuzzy
 msgid "With support for background operations"
-msgstr "S podporo operacijam v ozadju\n"
+msgstr ""
 
-#, fuzzy
 msgid "With mouse support on xterm and Linux console"
-msgstr "S podporo za miško v programu xterm in konzoli Linux\n"
+msgstr ""
 
-#, fuzzy
 msgid "With mouse support on xterm"
-msgstr "S podporo za miško v programu xterm\n"
+msgstr ""
 
-#, fuzzy
 msgid "With support for X11 events"
-msgstr "S podporo za dogodke X11\n"
+msgstr ""
 
-#, fuzzy
 msgid "With internationalization support"
-msgstr "Z mednarodno podporo\n"
+msgstr ""
 
-#, fuzzy
 msgid "With multiple codepages support"
-msgstr "Z podporo večim naborom znakov\n"
+msgstr ""
 
 msgid "With ext2fs attributes support"
 msgstr ""

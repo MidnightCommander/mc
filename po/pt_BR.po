@@ -13,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-17 18:50+0300\n"
-"PO-Revision-Date: 2019-12-16 01:49+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"PO-Revision-Date: 2020-05-17 17:42+0000\n"
+"Last-Translator: Transifex Bot <>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/mc/mc/language/"
 "pt_BR/)\n"
 "Language: pt_BR\n"
@@ -490,11 +490,11 @@ msgstr "A variável de ambiente TERM não foi definida!\n"
 msgid "Cannot check SIGWINCH pipe"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Cannot create pipe for SIGWINCH: %s (%d)\n"
-msgstr "Não é possível criar pipe streams"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1780,13 +1780,10 @@ msgstr "Não foi possível adquirir uma cópia local de %s"
 msgid "The shell is already running a command"
 msgstr "A shell já está executando um comando"
 
-#, fuzzy
 msgid ""
 "Not an xterm or Linux console;\n"
 "the subshell cannot be toggled."
 msgstr ""
-"Não é um xterm nem console linux;\n"
-"Os paines não podem ser ativados."
 
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr ""
@@ -1812,9 +1809,9 @@ msgstr "outro"
 msgid "Flag"
 msgstr "Parâmetro"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Permissions (octal): %o"
-msgstr "Permissão"
+msgstr ""
 
 msgid "Chown advanced command"
 msgstr "Comando avançado de chown"
@@ -2164,23 +2161,20 @@ msgstr ""
 msgid "Secure deletion"
 msgstr ""
 
-#, fuzzy
 msgid "Undelete"
-msgstr "Delete"
+msgstr ""
 
 msgid "Synchronous updates"
 msgstr ""
 
-#, fuzzy
 msgid "Synchronous directory updates"
-msgstr "Insira nome de diretório"
+msgstr ""
 
 msgid "Immutable"
 msgstr ""
 
-#, fuzzy
 msgid "Append only"
-msgstr "&Adicionar"
+msgstr ""
 
 msgid "No dump"
 msgstr ""
@@ -2194,9 +2188,8 @@ msgstr ""
 msgid "Compressed clusters"
 msgstr ""
 
-#, fuzzy
 msgid "Compressed dirty file"
-msgstr "Comparar diretórios"
+msgstr ""
 
 msgid "Compression raw access"
 msgstr ""
@@ -2207,9 +2200,8 @@ msgstr ""
 msgid "Journaled data"
 msgstr ""
 
-#, fuzzy
 msgid "Indexed directory"
-msgstr "diretório"
+msgstr ""
 
 msgid "No tail merging"
 msgstr ""
@@ -2220,16 +2212,14 @@ msgstr ""
 msgid "Inode uses extents"
 msgstr ""
 
-#, fuzzy
 msgid "Huge_file"
-msgstr "arquivo"
+msgstr ""
 
 msgid "No COW"
 msgstr ""
 
-#, fuzzy
 msgid "Casefolded file"
-msgstr "Fechar arquivo"
+msgstr ""
 
 msgid "Inode has inline data"
 msgstr ""
@@ -2249,28 +2239,23 @@ msgstr "Configurar &Marcado"
 msgid "C&lear marked"
 msgstr "Lim&peza marcada"
 
-#, fuzzy
 msgid "Chattr command"
-msgstr "Outro comando"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chattr \"%s\"\n"
 "%s"
 msgstr ""
-"Não foi possível executar chmod \"%s\"\n"
-"%s"
 
 msgid "Cannot change attributes on non-local filesystems"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get flags of \"%s\"\n"
 "%s"
 msgstr ""
-"Não foi possível mover arquivo \"%s\" para \"%s\"\n"
-"%s"
 
 msgid "set &user ID on execution"
 msgstr ""
@@ -3908,37 +3893,29 @@ msgstr ""
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Alerta: Impossível mudar para %s.\n"
 
-#, fuzzy
 msgid "With builtin Editor and Aspell support"
-msgstr "Com Editor embutido\n"
+msgstr ""
 
-#, fuzzy
 msgid "With builtin Editor"
-msgstr "Com Editor embutido\n"
+msgstr ""
 
-#, fuzzy
 msgid "With optional subshell support"
-msgstr "Desabilita suporte à sub interpretadores de comandos"
+msgstr ""
 
-#, fuzzy
 msgid "With subshell support as default"
-msgstr "Habilita suporte à sub interpretadores de comandos (padrão)"
+msgstr ""
 
-#, fuzzy
 msgid "With support for background operations"
-msgstr "Com suporte a operações em segundo plano\n"
+msgstr ""
 
-#, fuzzy
 msgid "With mouse support on xterm and Linux console"
-msgstr "Desabilita suporte à mouse em modo texto"
+msgstr ""
 
-#, fuzzy
 msgid "With mouse support on xterm"
-msgstr "Desabilita suporte à mouse em modo texto"
+msgstr ""
 
-#, fuzzy
 msgid "With support for X11 events"
-msgstr "Com suporte a operações em segundo plano\n"
+msgstr ""
 
 msgid "With internationalization support"
 msgstr ""
@@ -4579,13 +4556,3 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "Block is large, you may not be able to undo this action"
-#~ msgstr "O bloco é grande, você pode não ser capaz de desfazer esta ação"
-
-#~ msgid ""
-#~ "Current text was modified without a file save.\n"
-#~ "Continue discards these changes"
-#~ msgstr ""
-#~ "O texto atual foi modificado sem um ter salvado em arquivo.\n"
-#~ "Continuar o descarte destas alterações"

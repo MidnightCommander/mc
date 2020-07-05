@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-17 18:50+0300\n"
-"PO-Revision-Date: 2019-12-16 01:49+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"PO-Revision-Date: 2020-05-17 17:42+0000\n"
+"Last-Translator: Transifex Bot <>\n"
 "Language-Team: Indonesian (http://www.transifex.com/mc/mc/language/id/)\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
@@ -480,11 +480,11 @@ msgstr "Environment variable TERM belum diset\n"
 msgid "Cannot check SIGWINCH pipe"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Cannot create pipe for SIGWINCH: %s (%d)\n"
-msgstr "Gagal membuat pipe streams"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2144,9 +2144,8 @@ msgstr ""
 msgid "Secure deletion"
 msgstr ""
 
-#, fuzzy
 msgid "Undelete"
-msgstr "Delete"
+msgstr ""
 
 msgid "Synchronous updates"
 msgstr ""
@@ -2184,9 +2183,8 @@ msgstr ""
 msgid "Journaled data"
 msgstr ""
 
-#, fuzzy
 msgid "Indexed directory"
-msgstr "Cetak data directory"
+msgstr ""
 
 msgid "No tail merging"
 msgstr ""
@@ -2227,24 +2225,20 @@ msgstr ""
 msgid "Chattr command"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chattr \"%s\"\n"
 "%s"
 msgstr ""
-"Gagal stat \"%s\"\n"
-"%s"
 
 msgid "Cannot change attributes on non-local filesystems"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get flags of \"%s\"\n"
 "%s"
 msgstr ""
-"Gagal stat \"%s\"\n"
-"%s"
 
 msgid "set &user ID on execution"
 msgstr ""
@@ -3803,24 +3797,20 @@ msgstr ""
 msgid "With builtin Editor"
 msgstr ""
 
-#, fuzzy
 msgid "With optional subshell support"
-msgstr "Non aktifkan subshell"
+msgstr ""
 
-#, fuzzy
 msgid "With subshell support as default"
-msgstr "Perbolehkan subshell (default)"
+msgstr ""
 
 msgid "With support for background operations"
 msgstr ""
 
-#, fuzzy
 msgid "With mouse support on xterm and Linux console"
-msgstr "Non aktifkan mouse support dalam moda text"
+msgstr ""
 
-#, fuzzy
 msgid "With mouse support on xterm"
-msgstr "Non aktifkan mouse support dalam moda text"
+msgstr ""
 
 msgid "With support for X11 events"
 msgstr ""

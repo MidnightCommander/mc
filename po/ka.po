@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-17 18:50+0300\n"
-"PO-Revision-Date: 2019-12-16 01:49+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"PO-Revision-Date: 2020-05-17 17:42+0000\n"
+"Last-Translator: Transifex Bot <>\n"
 "Language-Team: Georgian (http://www.transifex.com/mc/mc/language/ka/)\n"
 "Language: ka\n"
 "MIME-Version: 1.0\n"
@@ -1757,9 +1757,9 @@ msgstr ""
 msgid "Flag"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Permissions (octal): %o"
-msgstr "უფლებები (8-ბიტიანი):"
+msgstr ""
 
 msgid "Chown advanced command"
 msgstr ""
@@ -2104,16 +2104,14 @@ msgstr ""
 msgid "Secure deletion"
 msgstr ""
 
-#, fuzzy
 msgid "Undelete"
-msgstr "&წაშლა"
+msgstr ""
 
 msgid "Synchronous updates"
 msgstr ""
 
-#, fuzzy
 msgid "Synchronous directory updates"
-msgstr "შეიყვანეთ დირექტორიის სახელი:"
+msgstr ""
 
 msgid "Immutable"
 msgstr ""
@@ -2133,9 +2131,8 @@ msgstr ""
 msgid "Compressed clusters"
 msgstr ""
 
-#, fuzzy
 msgid "Compressed dirty file"
-msgstr "ფა&ილების შედარება"
+msgstr ""
 
 msgid "Compression raw access"
 msgstr ""
@@ -2146,9 +2143,8 @@ msgstr ""
 msgid "Journaled data"
 msgstr ""
 
-#, fuzzy
 msgid "Indexed directory"
-msgstr "კონფიგურაციის დირექტორია:"
+msgstr ""
 
 msgid "No tail merging"
 msgstr ""
@@ -2165,9 +2161,8 @@ msgstr ""
 msgid "No COW"
 msgstr ""
 
-#, fuzzy
 msgid "Casefolded file"
-msgstr "ფაილის დაკეტვა"
+msgstr ""
 
 msgid "Inode has inline data"
 msgstr ""
@@ -2187,9 +2182,8 @@ msgstr ""
 msgid "C&lear marked"
 msgstr ""
 
-#, fuzzy
 msgid "Chattr command"
-msgstr "გარე ბრძანება"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2200,11 +2194,11 @@ msgstr ""
 msgid "Cannot change attributes on non-local filesystems"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get flags of \"%s\"\n"
 "%s"
-msgstr "%s ფაილის გახსნა ვერ მოხერხდა"
+msgstr ""
 
 msgid "set &user ID on execution"
 msgstr ""

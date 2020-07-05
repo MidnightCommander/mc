@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-17 18:50+0300\n"
-"PO-Revision-Date: 2019-12-16 01:49+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"PO-Revision-Date: 2020-05-17 17:42+0000\n"
+"Last-Translator: Transifex Bot <>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/mc/mc/language/bg/)\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
@@ -490,11 +490,11 @@ msgstr "Променливата TERM не е установена!\n"
 msgid "Cannot check SIGWINCH pipe"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Cannot create pipe for SIGWINCH: %s (%d)\n"
-msgstr "Не могат да се създадат потоци на канала"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1807,13 +1807,10 @@ msgstr "Не може да се добие локално копие от %s"
 msgid "The shell is already running a command"
 msgstr "Обвивката вече изпълнява команда"
 
-#, fuzzy
 msgid ""
 "Not an xterm or Linux console;\n"
 "the subshell cannot be toggled."
 msgstr ""
-" Не е xterm или Линукс конзола;\n"
-"панелите не могат да бъдат показвани/скривани."
 
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Напишете 'exit', за да се върнете в Midnight Commander-а"
@@ -1839,9 +1836,9 @@ msgstr "други"
 msgid "Flag"
 msgstr "Флаг"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Permissions (octal): %o"
-msgstr "Права (осмичен вид):"
+msgstr ""
 
 msgid "Chown advanced command"
 msgstr "Разширена Chown команда"
@@ -2190,27 +2187,23 @@ msgstr "Потребителско име:"
 msgid "SMB authentication"
 msgstr "SMB удостоверяване"
 
-#, fuzzy
 msgid "Secure deletion"
-msgstr "&Преобръщане на селекция"
+msgstr ""
 
-#, fuzzy
 msgid "Undelete"
-msgstr "Delete"
+msgstr ""
 
 msgid "Synchronous updates"
 msgstr ""
 
-#, fuzzy
 msgid "Synchronous directory updates"
-msgstr "Показване на &размерите на директориите"
+msgstr ""
 
 msgid "Immutable"
 msgstr ""
 
-#, fuzzy
 msgid "Append only"
-msgstr "Добави"
+msgstr ""
 
 msgid "No dump"
 msgstr ""
@@ -2224,9 +2217,8 @@ msgstr ""
 msgid "Compressed clusters"
 msgstr ""
 
-#, fuzzy
 msgid "Compressed dirty file"
-msgstr "Сравняване на папки"
+msgstr ""
 
 msgid "Compression raw access"
 msgstr ""
@@ -2237,30 +2229,26 @@ msgstr ""
 msgid "Journaled data"
 msgstr ""
 
-#, fuzzy
 msgid "Indexed directory"
-msgstr "директория"
+msgstr ""
 
 msgid "No tail merging"
 msgstr ""
 
-#, fuzzy
 msgid "Top of directory hierarchies"
-msgstr "Показване на &размерите на директориите"
+msgstr ""
 
 msgid "Inode uses extents"
 msgstr ""
 
-#, fuzzy
 msgid "Huge_file"
-msgstr "файл"
+msgstr ""
 
 msgid "No COW"
 msgstr ""
 
-#, fuzzy
 msgid "Casefolded file"
-msgstr "Затваряне на файл"
+msgstr ""
 
 msgid "Inode has inline data"
 msgstr ""
@@ -2280,29 +2268,23 @@ msgstr "Уст марк"
 msgid "C&lear marked"
 msgstr "Изтр марк"
 
-#, fuzzy
 msgid "Chattr command"
-msgstr "Друга команда"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chattr \"%s\"\n"
 "%s"
 msgstr ""
-"Не може да се stat-не \"%s\"\n"
-"%s"
 
-#, fuzzy
 msgid "Cannot change attributes on non-local filesystems"
-msgstr "Не може да се изпълняват команди на не-локални файлови системи"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get flags of \"%s\"\n"
 "%s"
 msgstr ""
-"Не може да се премести файл \"%s\" в \"%s\"\n"
-"%s"
 
 msgid "set &user ID on execution"
 msgstr "задаване на &потребителско ID при изпълнение"
@@ -3932,15 +3914,11 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "Пътят до домашната папка не е абсолютен"
 
-#, fuzzy
 msgid ""
 "GNU Midnight Commander\n"
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""
-"GNU Midnight Commander вече е отворен\n"
-"на този терминал.\n"
-"Поддръжката на subshell ще бъде деактивирана."
 
 #, c-format
 msgid ""
@@ -3984,45 +3962,35 @@ msgstr "Обвивката е още активна. Да се напусне л
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Внимание: Не мога да премина в %s.\n"
 
-#, fuzzy
 msgid "With builtin Editor and Aspell support"
-msgstr "С вграден редактор\n"
+msgstr ""
 
-#, fuzzy
 msgid "With builtin Editor"
-msgstr "С вграден редактор\n"
+msgstr ""
 
-#, fuzzy
 msgid "With optional subshell support"
-msgstr "С опционална поддръжка на subshell\n"
+msgstr ""
 
-#, fuzzy
 msgid "With subshell support as default"
-msgstr "С поддръжка на subshell по подразбиране\n"
+msgstr ""
 
-#, fuzzy
 msgid "With support for background operations"
-msgstr "С поддръжка на фонови операции\n"
+msgstr ""
 
-#, fuzzy
 msgid "With mouse support on xterm and Linux console"
-msgstr "С поддръжка на мишка в xterm и Linux конзола\n"
+msgstr ""
 
-#, fuzzy
 msgid "With mouse support on xterm"
-msgstr "С поддръжка на мишка в xterm\n"
+msgstr ""
 
-#, fuzzy
 msgid "With support for X11 events"
-msgstr "С поддръжка на X11 събития\n"
+msgstr ""
 
-#, fuzzy
 msgid "With internationalization support"
-msgstr "С поддръжка на интернационализация\n"
+msgstr ""
 
-#, fuzzy
 msgid "With multiple codepages support"
-msgstr "С поддръжка на много кодови страници\n"
+msgstr ""
 
 msgid "With ext2fs attributes support"
 msgstr ""
@@ -4031,9 +3999,9 @@ msgstr ""
 msgid "Built with GLib %d.%d.%d\n"
 msgstr "Компилиран с GLib %d.%d.%d\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with S-Lang %s with terminfo database\n"
-msgstr "Използване на S-Lang библиотеката с terminfo базата данни\n"
+msgstr ""
 
 #, c-format
 msgid "Built with ncurses %s\n"
@@ -4042,9 +4010,9 @@ msgstr ""
 msgid "Built with ncurses (unknown version)"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with ncursesw %s\n"
-msgstr "Използване на библиотеката ncursesw\n"
+msgstr ""
 
 msgid "Built with ncursesw (unknown version)"
 msgstr ""
@@ -4667,16 +4635,3 @@ msgstr "Да се продължи ли от началото?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не може да се изтегли локално копие на /ftp://some.host/editme.txt"
-
-#~ msgid "Block is large, you may not be able to undo this action"
-#~ msgstr "Блокът е голям, може да нямате възможност да отмените това действие"
-
-#~ msgid ""
-#~ "Current text was modified without a file save.\n"
-#~ "Continue discards these changes"
-#~ msgstr ""
-#~ "Сегашния текст е променен без запис на файл.\n"
-#~ "Продължаване изоставяйки тези промени"
-
-#~ msgid "Using the ncurses library\n"
-#~ msgstr "Използване на библиотеката ncurses\n"

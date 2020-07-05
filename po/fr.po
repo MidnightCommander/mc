@@ -10,16 +10,16 @@
 # Effede Effede <g2sainfroc@gmail.com>, 2016
 # Matthieu Crapet <mcrapet@gmail.com>, 2013-2016
 # Slava Zanko <slavazanko@gmail.com>, 2011
-# lkppo, 2012
+# 4a14a73d523224463300dea5e0502458_3dab472, 2012
 # Towinet, 2017
 # Yury V. Zaytsev <yury@shurup.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-17 18:50+0300\n"
-"PO-Revision-Date: 2019-12-16 01:49+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"PO-Revision-Date: 2020-05-17 17:42+0000\n"
+"Last-Translator: Transifex Bot <>\n"
 "Language-Team: French (http://www.transifex.com/mc/mc/language/fr/)\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -497,11 +497,11 @@ msgstr "La variable d'environnement TERM n'est pas définie !\n"
 msgid "Cannot check SIGWINCH pipe"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Cannot create pipe for SIGWINCH: %s (%d)\n"
-msgstr "Impossible de créer les flux des tubes"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1834,13 +1834,10 @@ msgstr "Impossible de récupérer une copie locale de %s "
 msgid "The shell is already running a command"
 msgstr " Le shell est déjà en train d'exécuter une commande "
 
-#, fuzzy
 msgid ""
 "Not an xterm or Linux console;\n"
 "the subshell cannot be toggled."
 msgstr ""
-"N'est pas un xterm ou une console Linux;\n"
-"les panneaux ne peuvent pas être activé."
 
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Tapez « exit » pour retourner à Midnight Commander"
@@ -1866,9 +1863,9 @@ msgstr "autres"
 msgid "Flag"
 msgstr "Drapeau"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Permissions (octal): %o"
-msgstr "Permissions (octal) :"
+msgstr ""
 
 msgid "Chown advanced command"
 msgstr " Commande chown avancée"
@@ -2217,27 +2214,23 @@ msgstr "Nom d'utilisateur :"
 msgid "SMB authentication"
 msgstr "Authentification SMB"
 
-#, fuzzy
 msgid "Secure deletion"
-msgstr "&Inverser la sélection"
+msgstr ""
 
-#, fuzzy
 msgid "Undelete"
-msgstr "Suppression"
+msgstr ""
 
 msgid "Synchronous updates"
 msgstr ""
 
-#, fuzzy
 msgid "Synchronous directory updates"
-msgstr "Aff&icher la taille des rép."
+msgstr ""
 
 msgid "Immutable"
 msgstr ""
 
-#, fuzzy
 msgid "Append only"
-msgstr "&Ajouter"
+msgstr ""
 
 msgid "No dump"
 msgstr ""
@@ -2251,9 +2244,8 @@ msgstr ""
 msgid "Compressed clusters"
 msgstr ""
 
-#, fuzzy
 msgid "Compressed dirty file"
-msgstr "Comparer des répertoires"
+msgstr ""
 
 msgid "Compression raw access"
 msgstr ""
@@ -2264,30 +2256,26 @@ msgstr ""
 msgid "Journaled data"
 msgstr ""
 
-#, fuzzy
 msgid "Indexed directory"
-msgstr "répertoire"
+msgstr ""
 
 msgid "No tail merging"
 msgstr ""
 
-#, fuzzy
 msgid "Top of directory hierarchies"
-msgstr "Aff&icher la taille des rép."
+msgstr ""
 
 msgid "Inode uses extents"
 msgstr ""
 
-#, fuzzy
 msgid "Huge_file"
-msgstr "fichier"
+msgstr ""
 
 msgid "No COW"
 msgstr ""
 
-#, fuzzy
 msgid "Casefolded file"
-msgstr "Fermer le fichier"
+msgstr ""
 
 msgid "Inode has inline data"
 msgstr ""
@@ -2307,29 +2295,23 @@ msgstr "Défini comme &marqué"
 msgid "C&lear marked"
 msgstr "&Supprimer les marqués"
 
-#, fuzzy
 msgid "Chattr command"
-msgstr "Autre commande"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chattr \"%s\"\n"
 "%s"
 msgstr ""
-"Impossible d'obtenir les caractéristiques de « %s »\n"
-"%s"
 
-#, fuzzy
 msgid "Cannot change attributes on non-local filesystems"
-msgstr " Ne peut pas exécuter de commande sur un système de fichiers non local"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get flags of \"%s\"\n"
 "%s"
 msgstr ""
-"Impossible de déplacer le fichier « %s » vers « %s »\n"
-"%s"
 
 msgid "set &user ID on execution"
 msgstr "définir l'ID &utilisateur à l'exécution"
@@ -3958,15 +3940,11 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "Le chemin vers le répertoire utilisateur n'est pas absolu"
 
-#, fuzzy
 msgid ""
 "GNU Midnight Commander\n"
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""
-"GNU Midnight Commander est\n"
-"en cours d'exécution sur ce terminal.\n"
-"Le support des sous-shells sera désactivé."
 
 #, c-format
 msgid ""
@@ -4009,45 +3987,35 @@ msgstr "Le shell est toujours actif. Quitter tout de même ?"
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Attention : ne peut aller à %s.\n"
 
-#, fuzzy
 msgid "With builtin Editor and Aspell support"
-msgstr "Avec l'éditeur intégré\n"
+msgstr ""
 
-#, fuzzy
 msgid "With builtin Editor"
-msgstr "Avec l'éditeur intégré\n"
+msgstr ""
 
-#, fuzzy
 msgid "With optional subshell support"
-msgstr "Avec support optionnel des sous-shells\n"
+msgstr ""
 
-#, fuzzy
 msgid "With subshell support as default"
-msgstr "Avec support des sous-shells par défaut\n"
+msgstr ""
 
-#, fuzzy
 msgid "With support for background operations"
-msgstr "Avec support des opérations en tâche de fond\n"
+msgstr ""
 
-#, fuzzy
 msgid "With mouse support on xterm and Linux console"
-msgstr "Avec support de la souris pour xterm et la console Linux\n"
+msgstr ""
 
-#, fuzzy
 msgid "With mouse support on xterm"
-msgstr "Avec support de la souris pour xterm\n"
+msgstr ""
 
-#, fuzzy
 msgid "With support for X11 events"
-msgstr "Avec support des événements X11\n"
+msgstr ""
 
-#, fuzzy
 msgid "With internationalization support"
-msgstr "Avec support de l'internationalisation\n"
+msgstr ""
 
-#, fuzzy
 msgid "With multiple codepages support"
-msgstr "Avec support de plusieurs codepages\n"
+msgstr ""
 
 msgid "With ext2fs attributes support"
 msgstr ""
@@ -4056,9 +4024,9 @@ msgstr ""
 msgid "Built with GLib %d.%d.%d\n"
 msgstr "Compilé avec GLib %d.%d.%d\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with S-Lang %s with terminfo database\n"
-msgstr "Utilise la bibliothèque S-Lang avec la base de données terminfo\n"
+msgstr ""
 
 #, c-format
 msgid "Built with ncurses %s\n"
@@ -4067,9 +4035,9 @@ msgstr ""
 msgid "Built with ncurses (unknown version)"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with ncursesw %s\n"
-msgstr "Utilisation de la bibliothèque ncursesw\n"
+msgstr ""
 
 msgid "Built with ncursesw (unknown version)"
 msgstr ""
@@ -4697,16 +4665,3 @@ msgstr "Continuer à partir du début ?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Impossible de récupérer localement le fichier /ftp://some.host/editme.txt"
-
-#~ msgid "Block is large, you may not be able to undo this action"
-#~ msgstr "Le bloc est grand, vous ne pourrez pas annuler cette action"
-
-#~ msgid ""
-#~ "Current text was modified without a file save.\n"
-#~ "Continue discards these changes"
-#~ msgstr ""
-#~ "Le contenu courant a été modifié mais pas enregistré.\n"
-#~ "Ignorer les changements et continuer"
-
-#~ msgid "Using the ncurses library\n"
-#~ msgstr "Utilisation de la bibliothèque ncurses\n"

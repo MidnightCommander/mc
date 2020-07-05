@@ -3,27 +3,32 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# Andrew V. Samoilov <sav@bcs.zp.ua>, 1999, 2014
-# Alex Tkachenko <alex@bcs.zp.ua>, 1998
-# Evgeny Bulgakov <bgav@netvision.net.il>, 1999
-# Sergey Panov <sipan@mit.edu>, 1999
-# Valek Filippov <frob@df.ru>, 2000
-# Anton Sergeevich Chumak <nightfast@yahoo.co.uk>, 2005
-# Andrew Borodin <aborodin@vmail.ru>, 2009-2020
-# Ilia Maslakov <il.smind@gmail.com>, 2009
-# Slava Zanko <slavazanko@gmail.com>, 2009, 2011
-# NaiLi (aka jamesjames) Rootaerc <theism@mail.ru>, 2012
+# Andrew Borodin <aborodin@vmail.ru>, 2011
 # AlexL <loginov.alex.valer@gmail.com>, 2015-2020
+# Alex Tkachenko <alex@bcs.zp.ua>, 1998
+# and Alex Tkachenko <alex@bcs.zp.ua>, 1998
+# Andrew Borodin <aborodin@vmail.ru>, 2009-2012
+# Andrew V. Samoilov <sav@bcs.zp.ua>, 1999,2014
+# Anton Sergeevich Chumak <nightfast@yahoo.co.uk>, 2005
 # Dimitriy Ryazantcev <DJm00n@mail.ru>, 2015
-# Simple88, 2016
+# Evgeny Bulgakov <bgav@netvision.net.il>, 1999
+# Ilia Maslakov <il.smind@gmail.com>, 2009
+# Mr GreyWolf, 2016
+# Mr.GreyWolf, 2016
+# NaiLi (aka jamesjames) Rootaerc <theism@mail.ru>, 2012
 # Piotr Drąg <piotrdrag@gmail.com>, 2018
+# Sergey Panov <sipan@mit.edu>, 1999
+# Simple88, 2016
+# Simple88, 2016
+# Slava Zanko <slavazanko@gmail.com>, 2009,2011
+# Valek Filippov <frob@df.ru>, 2000
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-17 18:50+0300\n"
-"PO-Revision-Date: 2020-03-01 23:25+0000\n"
-"Last-Translator: AlexL <loginov.alex.valer@gmail.com>\n"
+"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"PO-Revision-Date: 2020-05-17 17:42+0000\n"
+"Last-Translator: Transifex Bot <>\n"
 "Language-Team: Russian (http://www.transifex.com/mc/mc/language/ru/)\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -1845,13 +1850,10 @@ msgstr "Не удалось получить локальную копию %s"
 msgid "The shell is already running a command"
 msgstr "Интерпретатор занят выполнением команды"
 
-#, fuzzy
 msgid ""
 "Not an xterm or Linux console;\n"
 "the subshell cannot be toggled."
 msgstr ""
-"Это не xterm и не консоль Linux;\n"
-"панели не могут быть отключены."
 
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Введите exit для возврата в Midnight Commander"
@@ -1877,9 +1879,9 @@ msgstr "другие"
 msgid "Flag"
 msgstr "Флаг"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Permissions (octal): %o"
-msgstr "Доступ (восьмеричный)"
+msgstr ""
 
 msgid "Chown advanced command"
 msgstr "Расширенная команда chown"
@@ -2228,27 +2230,23 @@ msgstr "Имя пользователя:"
 msgid "SMB authentication"
 msgstr "Идентификация SMB"
 
-#, fuzzy
 msgid "Secure deletion"
-msgstr "О&братить выделение"
+msgstr ""
 
-#, fuzzy
 msgid "Undelete"
-msgstr "Клавиша Delete   "
+msgstr ""
 
 msgid "Synchronous updates"
 msgstr ""
 
-#, fuzzy
 msgid "Synchronous directory updates"
-msgstr "&Размеры каталогов"
+msgstr ""
 
 msgid "Immutable"
 msgstr ""
 
-#, fuzzy
 msgid "Append only"
-msgstr "В &конец"
+msgstr ""
 
 msgid "No dump"
 msgstr ""
@@ -2262,9 +2260,8 @@ msgstr ""
 msgid "Compressed clusters"
 msgstr ""
 
-#, fuzzy
 msgid "Compressed dirty file"
-msgstr "Сравнить каталоги"
+msgstr ""
 
 msgid "Compression raw access"
 msgstr ""
@@ -2275,30 +2272,26 @@ msgstr ""
 msgid "Journaled data"
 msgstr ""
 
-#, fuzzy
 msgid "Indexed directory"
-msgstr "каталог"
+msgstr ""
 
 msgid "No tail merging"
 msgstr ""
 
-#, fuzzy
 msgid "Top of directory hierarchies"
-msgstr "&Размеры каталогов"
+msgstr ""
 
 msgid "Inode uses extents"
 msgstr ""
 
-#, fuzzy
 msgid "Huge_file"
-msgstr "файл"
+msgstr ""
 
 msgid "No COW"
 msgstr ""
 
-#, fuzzy
 msgid "Casefolded file"
-msgstr "Закрытие файла"
+msgstr ""
 
 msgid "Inode has inline data"
 msgstr ""
@@ -2318,29 +2311,23 @@ msgstr "Уста&новить помеченное"
 msgid "C&lear marked"
 msgstr "&Очистить помеченное"
 
-#, fuzzy
 msgid "Chattr command"
-msgstr "Новая команда"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chattr \"%s\"\n"
 "%s"
 msgstr ""
-"Не удалось получить свойства \"%s\"\n"
-"%s"
 
-#, fuzzy
 msgid "Cannot change attributes on non-local filesystems"
-msgstr "Не удалось выполнять команды на нелокальных файловых системах"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get flags of \"%s\"\n"
 "%s"
 msgstr ""
-"Не удалось переместить файл \"%s\" в \"%s\"\n"
-"%s"
 
 msgid "set &user ID on execution"
 msgstr "присв. &UID при выполнении"
@@ -2910,7 +2897,7 @@ msgid ""
 "Cannot write target file \"%s\"\n"
 "%s"
 msgstr ""
-"Не удалось записать целевой файл \"%s\"\n"
+"ое удалось записать целевой файл \"%s\"\n"
 "%s"
 
 msgid "(stalled)"
@@ -4702,13 +4689,3 @@ msgstr "Продолжить с начала?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не удалось получить локальную копию /ftp://some.host/editme.txt"
-
-#~ msgid "Block is large, you may not be able to undo this action"
-#~ msgstr "Блок слишком велик, вам может не удаться отменить эту операцию."
-
-#~ msgid ""
-#~ "Current text was modified without a file save.\n"
-#~ "Continue discards these changes"
-#~ msgstr ""
-#~ "Текущий текст был изменён и не сохранён.\n"
-#~ "Продолжение операции приведёт к потере изменений."

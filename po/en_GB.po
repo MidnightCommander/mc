@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# Andi Chandler <andi@gowling.com>, 2016-2017
+# Andi Chandler <andi@gowling.com>, 2016-2017,2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-17 18:50+0300\n"
-"PO-Revision-Date: 2019-12-16 01:49+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"PO-Revision-Date: 2020-05-17 17:42+0000\n"
+"Last-Translator: Transifex Bot <>\n"
 "Language-Team: English (United Kingdom) (http://www.transifex.com/mc/mc/"
 "language/en_GB/)\n"
 "Language: en_GB\n"
@@ -104,58 +104,66 @@ msgid ""
 "Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
 "hex)"
 msgstr ""
+"Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
+"hex)"
 
 msgid "Invalid character"
-msgstr ""
+msgstr "Invalid character"
 
 msgid "Unmatched quotes character"
-msgstr ""
+msgstr "Unmatched quotes character"
 
 #, c-format
 msgid ""
 "Hex pattern error at position %d:\n"
 "%s."
 msgstr ""
+"Hex pattern error at position %d:\n"
+"%s."
 
 msgid "Search string not found"
-msgstr ""
+msgstr "Search string not found"
 
 msgid "Not implemented yet"
-msgstr ""
+msgstr "Not implemented yet"
 
 msgid "Num of replace tokens not equal to num of found tokens"
-msgstr ""
+msgstr "Num of replace tokens not equal to num of found tokens"
 
 #, c-format
 msgid "Invalid token number %d"
-msgstr ""
+msgstr "Invalid token number %d"
 
 msgid "Regular expression error"
-msgstr ""
+msgstr "Regular expression error"
 
 msgid "No&rmal"
-msgstr ""
+msgstr "No&rmal"
 
 msgid "Re&gular expression"
-msgstr ""
+msgstr "Re&gular expression"
 
 msgid "He&xadecimal"
-msgstr ""
+msgstr "He&xadecimal"
 
 msgid "Wil&dcard search"
-msgstr ""
+msgstr "Wil&dcard search"
 
 #, c-format
 msgid ""
 "Unable to load '%s' skin.\n"
 "Default skin has been loaded"
 msgstr ""
+"Unable to load '%s' skin.\n"
+"Default skin has been loaded"
 
 #, c-format
 msgid ""
 "Unable to parse '%s' skin.\n"
 "Default skin has been loaded"
 msgstr ""
+"Unable to parse '%s' skin.\n"
+"Default skin has been loaded"
 
 #, c-format
 msgid ""
@@ -163,6 +171,9 @@ msgid ""
 "%s\n"
 "Default skin has been loaded"
 msgstr ""
+"Unable to use '%s' skin with true colours support:\n"
+"%s\n"
+"Default skin has been loaded"
 
 #, c-format
 msgid ""
@@ -170,24 +181,27 @@ msgid ""
 "on non-256 colors terminal.\n"
 "Default skin has been loaded"
 msgstr ""
+"Unable to use '%s' skin with 256 colours support\n"
+"on non-256 colours terminal.\n"
+"Default skin has been loaded"
 
 msgid "True color not supported with ncurses."
-msgstr ""
+msgstr "True colour not supported with ncurses."
 
 msgid "True color not supported in this slang version."
-msgstr ""
+msgstr "True colour not supported in this slang version."
 
 msgid "Your terminal doesn't even seem to support 256 colors."
-msgstr ""
+msgstr "Your terminal doesn't even seem to support 256 colours."
 
 msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
-msgstr ""
+msgstr "Set COLORTERM=truecolor if your terminal really supports true colours."
 
 msgid "Escape"
-msgstr ""
+msgstr "Escape"
 
 msgid "Function key 1"
-msgstr ""
+msgstr "Function key 1"
 
 msgid "Function key 2"
 msgstr ""
@@ -2150,9 +2164,8 @@ msgstr ""
 msgid "Journaled data"
 msgstr ""
 
-#, fuzzy
 msgid "Indexed directory"
-msgstr "Cannot create %s directory"
+msgstr ""
 
 msgid "No tail merging"
 msgstr ""

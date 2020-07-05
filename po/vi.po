@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-17 18:50+0300\n"
-"PO-Revision-Date: 2019-12-16 01:49+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"PO-Revision-Date: 2020-05-17 17:42+0000\n"
+"Last-Translator: Transifex Bot <>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/mc/mc/language/vi/)\n"
 "Language: vi\n"
 "MIME-Version: 1.0\n"
@@ -462,11 +462,11 @@ msgstr "Biến môi trườn TERM chưa được xác định!\n"
 msgid "Cannot check SIGWINCH pipe"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Cannot create pipe for SIGWINCH: %s (%d)\n"
-msgstr "Không tạo được thư mục tạm thời %s: %s\n"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1757,9 +1757,9 @@ msgstr "khác"
 msgid "Flag"
 msgstr "Cờ"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Permissions (octal): %o"
-msgstr "Quyền hạn"
+msgstr ""
 
 msgid "Chown advanced command"
 msgstr ""
@@ -2103,9 +2103,8 @@ msgstr ""
 msgid "Secure deletion"
 msgstr ""
 
-#, fuzzy
 msgid "Undelete"
-msgstr "&Xóa"
+msgstr ""
 
 msgid "Synchronous updates"
 msgstr ""
@@ -2116,9 +2115,8 @@ msgstr ""
 msgid "Immutable"
 msgstr ""
 
-#, fuzzy
 msgid "Append only"
-msgstr "&Thêm vào"
+msgstr ""
 
 msgid "No dump"
 msgstr ""
@@ -2144,9 +2142,8 @@ msgstr ""
 msgid "Journaled data"
 msgstr ""
 
-#, fuzzy
 msgid "Indexed directory"
-msgstr "thư mục"
+msgstr ""
 
 msgid "No tail merging"
 msgstr ""
@@ -2157,9 +2154,8 @@ msgstr ""
 msgid "Inode uses extents"
 msgstr ""
 
-#, fuzzy
 msgid "Huge_file"
-msgstr "tập tin"
+msgstr ""
 
 msgid "No COW"
 msgstr ""
@@ -2185,9 +2181,8 @@ msgstr "Đá&nh dấu"
 msgid "C&lear marked"
 msgstr "&Xóa đánh dấu"
 
-#, fuzzy
 msgid "Chattr command"
-msgstr "Lệnh khác"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -3730,15 +3725,11 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr ""
 
-#, fuzzy
 msgid ""
 "GNU Midnight Commander\n"
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""
-"Một GNU Midnight Commander đã làm việc\n"
-"trên terminal này. Sẽ không có hỗ trợ\n"
-"shell con."
 
 #, c-format
 msgid ""
@@ -3776,45 +3767,35 @@ msgstr ""
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Cảnh báo: Không chuyển được vào %s.\n"
 
-#, fuzzy
 msgid "With builtin Editor and Aspell support"
-msgstr "Với Trình soạn thảo nội trú\n"
+msgstr ""
 
-#, fuzzy
 msgid "With builtin Editor"
-msgstr "Với Trình soạn thảo nội trú\n"
+msgstr ""
 
-#, fuzzy
 msgid "With optional subshell support"
-msgstr "Tắt hỗ trợ shell con"
+msgstr ""
 
-#, fuzzy
 msgid "With subshell support as default"
-msgstr "Bật hỗ trợ shell con (mặc định)"
+msgstr ""
 
-#, fuzzy
 msgid "With support for background operations"
-msgstr "Với hỗ trợ thao tác nền sau\n"
+msgstr ""
 
-#, fuzzy
 msgid "With mouse support on xterm and Linux console"
-msgstr "Với hỗ trợ chuột trong xterm và kênh giao tác Linux\n"
+msgstr ""
 
-#, fuzzy
 msgid "With mouse support on xterm"
-msgstr "Với hỗ trợ chuột trong xterm\n"
+msgstr ""
 
-#, fuzzy
 msgid "With support for X11 events"
-msgstr "Với hỗ trợ sự kiện X11\n"
+msgstr ""
 
-#, fuzzy
 msgid "With internationalization support"
-msgstr "Với hỗ trợ các ngôn ngữ khác\n"
+msgstr ""
 
-#, fuzzy
 msgid "With multiple codepages support"
-msgstr "Với hỗ trợ nhiều bảng mã\n"
+msgstr ""
 
 msgid "With ext2fs attributes support"
 msgstr ""

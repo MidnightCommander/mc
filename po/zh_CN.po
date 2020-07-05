@@ -17,9 +17,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-17 18:50+0300\n"
-"PO-Revision-Date: 2019-12-16 01:49+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"PO-Revision-Date: 2020-05-17 17:42+0000\n"
+"Last-Translator: Transifex Bot <>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/mc/mc/language/"
 "zh_CN/)\n"
 "Language: zh_CN\n"
@@ -493,11 +493,11 @@ msgstr "没有设置 TERM 环境变量!\n"
 msgid "Cannot check SIGWINCH pipe"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Cannot create pipe for SIGWINCH: %s (%d)\n"
-msgstr "无法创建管道数据流"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1669,9 +1669,8 @@ msgstr ""
 "为 Midnight Commander 编写的\n"
 "一个界面友好的文本编辑器。"
 
-#, fuzzy
 msgid "Copyright (C) 1996-2020 the Free Software Foundation"
-msgstr "版权所有 (C) 1996-2019 自由软件基金会"
+msgstr ""
 
 msgid "About"
 msgstr "关于"
@@ -1822,13 +1821,10 @@ msgstr "无法获取 %s 的本地副本"
 msgid "The shell is already running a command"
 msgstr "Shell 正在运行一个命令"
 
-#, fuzzy
 msgid ""
 "Not an xterm or Linux console;\n"
 "the subshell cannot be toggled."
 msgstr ""
-"不是一个 xterm 或 Linux 控制台；\n"
-"无法切换面板。"
 
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "输入 'exit' 返回 Midnight Commander"
@@ -1854,9 +1850,9 @@ msgstr "其它"
 msgid "Flag"
 msgstr "标志"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Permissions (octal): %o"
-msgstr "权限(8进制): "
+msgstr ""
 
 msgid "Chown advanced command"
 msgstr "Chown 高级命令"
@@ -2204,27 +2200,23 @@ msgstr "用户名: "
 msgid "SMB authentication"
 msgstr "SMB 认证"
 
-#, fuzzy
 msgid "Secure deletion"
-msgstr "反选(&I)"
+msgstr ""
 
-#, fuzzy
 msgid "Undelete"
-msgstr "删除键"
+msgstr ""
 
 msgid "Synchronous updates"
 msgstr ""
 
-#, fuzzy
 msgid "Synchronous directory updates"
-msgstr "显示目录大小(&I)"
+msgstr ""
 
 msgid "Immutable"
 msgstr ""
 
-#, fuzzy
 msgid "Append only"
-msgstr "追加(&A)"
+msgstr ""
 
 msgid "No dump"
 msgstr ""
@@ -2238,9 +2230,8 @@ msgstr ""
 msgid "Compressed clusters"
 msgstr ""
 
-#, fuzzy
 msgid "Compressed dirty file"
-msgstr "比较目录"
+msgstr ""
 
 msgid "Compression raw access"
 msgstr ""
@@ -2251,30 +2242,26 @@ msgstr ""
 msgid "Journaled data"
 msgstr ""
 
-#, fuzzy
 msgid "Indexed directory"
-msgstr "目录"
+msgstr ""
 
 msgid "No tail merging"
 msgstr ""
 
-#, fuzzy
 msgid "Top of directory hierarchies"
-msgstr "显示目录大小(&I)"
+msgstr ""
 
 msgid "Inode uses extents"
 msgstr ""
 
-#, fuzzy
 msgid "Huge_file"
-msgstr "文件"
+msgstr ""
 
 msgid "No COW"
 msgstr ""
 
-#, fuzzy
 msgid "Casefolded file"
-msgstr "关闭文件"
+msgstr ""
 
 msgid "Inode has inline data"
 msgstr ""
@@ -2294,29 +2281,23 @@ msgstr "设置已标记的(&E)"
 msgid "C&lear marked"
 msgstr "清除已标记的(&L)"
 
-#, fuzzy
 msgid "Chattr command"
-msgstr "其它命令"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chattr \"%s\"\n"
 "%s"
 msgstr ""
-"无法查看“%s”的状态\n"
-"%s"
 
-#, fuzzy
 msgid "Cannot change attributes on non-local filesystems"
-msgstr "您无法在非本地文件系统上执行命令"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get flags of \"%s\"\n"
 "%s"
 msgstr ""
-"无法移动文件“%s”到“%s”\n"
-"%s"
 
 msgid "set &user ID on execution"
 msgstr "执行时设置用户 ID(&U)"
@@ -3940,15 +3921,11 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "主目录路径不是绝对路径"
 
-#, fuzzy
 msgid ""
 "GNU Midnight Commander\n"
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""
-"GNU Midnight Commander 已在\n"
-"该终端上运行。\n"
-"SubShell支持将被禁用。"
 
 #, c-format
 msgid ""
@@ -3991,45 +3968,35 @@ msgstr "Shell 仍在运行中。依然退出?"
 msgid "Warning: Cannot change to %s.\n"
 msgstr "警告: 无法切换至 %s。\n"
 
-#, fuzzy
 msgid "With builtin Editor and Aspell support"
-msgstr "使用内建编辑器\n"
+msgstr ""
 
-#, fuzzy
 msgid "With builtin Editor"
-msgstr "使用内建编辑器\n"
+msgstr ""
 
-#, fuzzy
 msgid "With optional subshell support"
-msgstr "启用子 shell 支持作为可选项\n"
+msgstr ""
 
-#, fuzzy
 msgid "With subshell support as default"
-msgstr "启用子 shell 支持作为默认项\n"
+msgstr ""
 
-#, fuzzy
 msgid "With support for background operations"
-msgstr "启用后台操作支持\n"
+msgstr ""
 
-#, fuzzy
 msgid "With mouse support on xterm and Linux console"
-msgstr "启用 xterm 和 Linux 控制台里的鼠标支持\n"
+msgstr ""
 
-#, fuzzy
 msgid "With mouse support on xterm"
-msgstr "启用 xterm 里鼠标支持\n"
+msgstr ""
 
-#, fuzzy
 msgid "With support for X11 events"
-msgstr "启用 X11 事件支持\n"
+msgstr ""
 
-#, fuzzy
 msgid "With internationalization support"
-msgstr "启用国际化支持\n"
+msgstr ""
 
-#, fuzzy
 msgid "With multiple codepages support"
-msgstr "启用多代码页支持\n"
+msgstr ""
 
 msgid "With ext2fs attributes support"
 msgstr ""
@@ -4038,9 +4005,9 @@ msgstr ""
 msgid "Built with GLib %d.%d.%d\n"
 msgstr "编译使用了 GLib %d.%d.%d\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with S-Lang %s with terminfo database\n"
-msgstr "使用 S-Lang 库和 terminfo 数据库\n"
+msgstr ""
 
 #, c-format
 msgid "Built with ncurses %s\n"
@@ -4049,9 +4016,9 @@ msgstr ""
 msgid "Built with ncurses (unknown version)"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with ncursesw %s\n"
-msgstr "使用 ncursesw 库\n"
+msgstr ""
 
 msgid "Built with ncursesw (unknown version)"
 msgstr ""
@@ -4674,16 +4641,3 @@ msgstr "从头继续搜索?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "无法获取 /ftp://some.host/editme.txt 的本地副本"
-
-#~ msgid "Block is large, you may not be able to undo this action"
-#~ msgstr "块过大，您可能无法撤消这个操作"
-
-#~ msgid ""
-#~ "Current text was modified without a file save.\n"
-#~ "Continue discards these changes"
-#~ msgstr ""
-#~ "当前文本被修改但没有保存文件。\n"
-#~ "选择继续将丢失这些修改"
-
-#~ msgid "Using the ncurses library\n"
-#~ msgstr "使用 ncurses 库\n"

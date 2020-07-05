@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-17 18:50+0300\n"
-"PO-Revision-Date: 2019-12-16 01:49+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"PO-Revision-Date: 2020-05-17 17:42+0000\n"
+"Last-Translator: Transifex Bot <>\n"
 "Language-Team: Persian (http://www.transifex.com/mc/mc/language/fa/)\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
@@ -466,11 +466,11 @@ msgstr ""
 msgid "Cannot check SIGWINCH pipe"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Cannot create pipe for SIGWINCH: %s (%d)\n"
-msgstr "امکان ساخت پوشه‌ی موقت %s وجود ندارد: %s\n"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1759,9 +1759,9 @@ msgstr "دیگران"
 msgid "Flag"
 msgstr "پرچم"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Permissions (octal): %o"
-msgstr "اجازه"
+msgstr ""
 
 msgid "Chown advanced command"
 msgstr ""
@@ -2105,16 +2105,14 @@ msgstr ""
 msgid "Secure deletion"
 msgstr ""
 
-#, fuzzy
 msgid "Undelete"
-msgstr "حذف"
+msgstr ""
 
 msgid "Synchronous updates"
 msgstr ""
 
-#, fuzzy
 msgid "Synchronous directory updates"
-msgstr "نام پوشه را وارد کنید:"
+msgstr ""
 
 msgid "Immutable"
 msgstr ""
@@ -2134,9 +2132,8 @@ msgstr ""
 msgid "Compressed clusters"
 msgstr ""
 
-#, fuzzy
 msgid "Compressed dirty file"
-msgstr "مقایسه پوشه‌ها"
+msgstr ""
 
 msgid "Compression raw access"
 msgstr ""
@@ -2147,9 +2144,8 @@ msgstr ""
 msgid "Journaled data"
 msgstr ""
 
-#, fuzzy
 msgid "Indexed directory"
-msgstr "پوشه"
+msgstr ""
 
 msgid "No tail merging"
 msgstr ""
@@ -2160,9 +2156,8 @@ msgstr ""
 msgid "Inode uses extents"
 msgstr ""
 
-#, fuzzy
 msgid "Huge_file"
-msgstr "فایل"
+msgstr ""
 
 msgid "No COW"
 msgstr ""
@@ -2188,9 +2183,8 @@ msgstr ""
 msgid "C&lear marked"
 msgstr ""
 
-#, fuzzy
 msgid "Chattr command"
-msgstr "فرمان دیگر"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2198,9 +2192,8 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy
 msgid "Cannot change attributes on non-local filesystems"
-msgstr "در فایل سیستم غیرمحلی نمی‌توان فرمانی اجرا کرد"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -3772,25 +3765,20 @@ msgstr ""
 msgid "With optional subshell support"
 msgstr ""
 
-#, fuzzy
 msgid "With subshell support as default"
-msgstr "با پشتیبانی از ماوس در xterm\n"
+msgstr ""
 
-#, fuzzy
 msgid "With support for background operations"
-msgstr "با پشتیبانی از رویدادهای X11\n"
+msgstr ""
 
-#, fuzzy
 msgid "With mouse support on xterm and Linux console"
-msgstr "با پشتیبانی از ماوس در xterm\n"
+msgstr ""
 
-#, fuzzy
 msgid "With mouse support on xterm"
-msgstr "با پشتیبانی از ماوس در xterm\n"
+msgstr ""
 
-#, fuzzy
 msgid "With support for X11 events"
-msgstr "با پشتیبانی از رویدادهای X11\n"
+msgstr ""
 
 msgid "With internationalization support"
 msgstr ""

@@ -5,8 +5,8 @@
 # Translators:
 # Arthur Titeica <arthur@psw.ro>, 2013
 # Arthur Țițeică <arthur.titeica@gmail.com>, 2013-2014,2017
-# Christian Eichert, 2018
-# Mihai Draghicioiu <inactive+vampirefrog@transifex.com>, 2016
+# 666ac67b8cef279621e9f9f0d4368bd5_672ede5, 2018
+# 7ad110ef65cb8fea3e45887cffdf497a_28ca6f3 <3e77beb79c064caff61514bbc685d086_451299>, 2016
 # Nicolae Crefelean, 2014,2019
 # Slava Zanko <slavazanko@gmail.com>, 2011
 # Sorin Sfirlogea, 2016
@@ -15,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-17 18:50+0300\n"
-"PO-Revision-Date: 2019-12-16 01:49+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"PO-Revision-Date: 2020-05-17 17:42+0000\n"
+"Last-Translator: Transifex Bot <>\n"
 "Language-Team: Romanian (http://www.transifex.com/mc/mc/language/ro/)\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
@@ -493,11 +493,11 @@ msgstr "Variabila de mediu TERM nu este setată!\n"
 msgid "Cannot check SIGWINCH pipe"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Cannot create pipe for SIGWINCH: %s (%d)\n"
-msgstr "Nu pot crea fluxul filtrului"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1674,9 +1674,8 @@ msgstr ""
 "Un editor de text ușor de utilizat\n"
 "creat pentru Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2020 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2019 the Free Software Foundation"
+msgstr ""
 
 msgid "About"
 msgstr "Despre"
@@ -1828,13 +1827,10 @@ msgstr "Nu se poate prelua o copie locală a %s"
 msgid "The shell is already running a command"
 msgstr "Terminalul deja rulează o comandă"
 
-#, fuzzy
 msgid ""
 "Not an xterm or Linux console;\n"
 "the subshell cannot be toggled."
 msgstr ""
-"Nu este o consolă xterm sau Linux;\n"
-"panourile nu pot fi comutate."
 
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Tastați `exit' pentru a reveni în Midnight Commander"
@@ -1860,9 +1856,9 @@ msgstr "alții"
 msgid "Flag"
 msgstr "Ind."
 
-#, fuzzy, c-format
+#, c-format
 msgid "Permissions (octal): %o"
-msgstr "Permisiuni (octal):"
+msgstr ""
 
 msgid "Chown advanced command"
 msgstr "Comandă avansată chown"
@@ -2211,27 +2207,23 @@ msgstr "Nume proprietar:"
 msgid "SMB authentication"
 msgstr "Autentificare SMB"
 
-#, fuzzy
 msgid "Secure deletion"
-msgstr "&Inversează selecția"
+msgstr ""
 
-#, fuzzy
 msgid "Undelete"
-msgstr "Delete"
+msgstr ""
 
 msgid "Synchronous updates"
 msgstr ""
 
-#, fuzzy
 msgid "Synchronous directory updates"
-msgstr "Arată mărimea dosarelor"
+msgstr ""
 
 msgid "Immutable"
 msgstr ""
 
-#, fuzzy
 msgid "Append only"
-msgstr "&Adaugă"
+msgstr ""
 
 msgid "No dump"
 msgstr ""
@@ -2245,9 +2237,8 @@ msgstr ""
 msgid "Compressed clusters"
 msgstr ""
 
-#, fuzzy
 msgid "Compressed dirty file"
-msgstr "Compară dosarele"
+msgstr ""
 
 msgid "Compression raw access"
 msgstr ""
@@ -2258,30 +2249,26 @@ msgstr ""
 msgid "Journaled data"
 msgstr ""
 
-#, fuzzy
 msgid "Indexed directory"
-msgstr "dosar"
+msgstr ""
 
 msgid "No tail merging"
 msgstr ""
 
-#, fuzzy
 msgid "Top of directory hierarchies"
-msgstr "Arată mărimea dosarelor"
+msgstr ""
 
 msgid "Inode uses extents"
 msgstr ""
 
-#, fuzzy
 msgid "Huge_file"
-msgstr "fișierul"
+msgstr ""
 
 msgid "No COW"
 msgstr ""
 
-#, fuzzy
 msgid "Casefolded file"
-msgstr "Închide fișier"
+msgstr ""
 
 msgid "Inode has inline data"
 msgstr ""
@@ -2301,29 +2288,23 @@ msgstr "Set. &marc."
 msgid "C&lear marked"
 msgstr "Şter&g marc."
 
-#, fuzzy
 msgid "Chattr command"
-msgstr "Altă comendă"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chattr \"%s\"\n"
 "%s"
 msgstr ""
-"Nu se poate găsi \"%s\"\n"
-"%s"
 
-#, fuzzy
 msgid "Cannot change attributes on non-local filesystems"
-msgstr "Nu se pot executa comenzi în sisteme de fișiere ne-locale"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get flags of \"%s\"\n"
 "%s"
 msgstr ""
-"Nu se poate muta fișierul \"%s\" în \"%s\"\n"
-"%s"
 
 msgid "set &user ID on execution"
 msgstr "Setează ID &proprietar la executare"
@@ -3958,15 +3939,11 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "Calea către dosarul acasă nu este absolută"
 
-#, fuzzy
 msgid ""
 "GNU Midnight Commander\n"
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""
-"GNU Midnight Commander rulează\n"
-"deja în acest terminal.\n"
-"Suportul pentru subshell va fi dezactivat."
 
 #, c-format
 msgid ""
@@ -4009,45 +3986,35 @@ msgstr "Terminalul este încă activ. Ieși oricum?"
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Atenție: Nu se poate schimba în %s.\n"
 
-#, fuzzy
 msgid "With builtin Editor and Aspell support"
-msgstr "Cu Editor încorporat și suport Aspell\n"
+msgstr ""
 
-#, fuzzy
 msgid "With builtin Editor"
-msgstr "Cu editor integrat\n"
+msgstr ""
 
-#, fuzzy
 msgid "With optional subshell support"
-msgstr "Cu suport pentru subshell opțional\n"
+msgstr ""
 
-#, fuzzy
 msgid "With subshell support as default"
-msgstr "Cu suport pentru subshell implicit\n"
+msgstr ""
 
-#, fuzzy
 msgid "With support for background operations"
-msgstr "Cu suport pentru sarcini în fundal\n"
+msgstr ""
 
-#, fuzzy
 msgid "With mouse support on xterm and Linux console"
-msgstr "Cu suport de mouse în xterm și consola Linux\n"
+msgstr ""
 
-#, fuzzy
 msgid "With mouse support on xterm"
-msgstr "Cu suport de mouse în xterm.\n"
+msgstr ""
 
-#, fuzzy
 msgid "With support for X11 events"
-msgstr "Cu suport pentru evenimente X11\n"
+msgstr ""
 
-#, fuzzy
 msgid "With internationalization support"
-msgstr "Cu suport de internaționalizare\n"
+msgstr ""
 
-#, fuzzy
 msgid "With multiple codepages support"
-msgstr "Cu suport pentru coduri de pagină multiple\n"
+msgstr ""
 
 msgid "With ext2fs attributes support"
 msgstr ""
@@ -4056,9 +4023,9 @@ msgstr ""
 msgid "Built with GLib %d.%d.%d\n"
 msgstr "Construit cu GLib %d.%d.%d\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with S-Lang %s with terminfo database\n"
-msgstr "Folosind librăria S-Lang cu baza de date terminfo\n"
+msgstr ""
 
 #, c-format
 msgid "Built with ncurses %s\n"
@@ -4067,9 +4034,9 @@ msgstr ""
 msgid "Built with ncurses (unknown version)"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with ncursesw %s\n"
-msgstr "Folosind librăria ncursesw\n"
+msgstr ""
 
 msgid "Built with ncursesw (unknown version)"
 msgstr ""
@@ -4694,16 +4661,3 @@ msgstr "Continuă de la început?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nu se poate aduce o copie locală a /ftp://some.host/editme.txt"
-
-#~ msgid "Block is large, you may not be able to undo this action"
-#~ msgstr "Blocul este mare, este posibil sa nu poți anula această acțiune"
-
-#~ msgid ""
-#~ "Current text was modified without a file save.\n"
-#~ "Continue discards these changes"
-#~ msgstr ""
-#~ "Textul curent a fost modificat fără a se salva fișierul.\n"
-#~ "Dacă se continuă schimbările vor fi pierdute."
-
-#~ msgid "Using the ncurses library\n"
-#~ msgstr "Folosind librăria ncurses\n"

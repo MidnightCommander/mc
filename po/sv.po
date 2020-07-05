@@ -9,15 +9,15 @@
 # Jonas Hultén <jonas@kollektivet.nu>, 2017
 # MagnusHerrlin <m8618@abc.se>, 2016
 # MagnusHerrlin <m8618@abc.se>, 2016
-# Sebastian Rasmussen <sebras@gmail.com>, 2019
+# Sebastian Rasmussen <sebras@gmail.com>, 2019-2020
 # Slava Zanko <slavazanko@gmail.com>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-17 18:50+0300\n"
-"PO-Revision-Date: 2019-12-16 01:49+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"PO-Revision-Date: 2020-05-17 17:42+0000\n"
+"Last-Translator: Transifex Bot <>\n"
 "Language-Team: Swedish (http://www.transifex.com/mc/mc/language/sv/)\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
@@ -490,13 +490,13 @@ msgid "The TERM environment variable is unset!\n"
 msgstr "Omgivningsvariablen TERM är inte satt!\n"
 
 msgid "Cannot check SIGWINCH pipe"
-msgstr ""
+msgstr "Kan inte kontrollera SIGWINCH-tunnel"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Cannot create pipe for SIGWINCH: %s (%d)\n"
-msgstr "Tunnelströmmar kunde inte skapas"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1387,7 +1387,7 @@ msgid "&Close"
 msgstr "S&täng"
 
 msgid "&History..."
-msgstr ""
+msgstr "&Historik…"
 
 msgid "Save &as..."
 msgstr "Spa&ra som..."
@@ -1672,9 +1672,8 @@ msgstr ""
 "En användarvänlig texteditor\n"
 "skriven för Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2020 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2019 Free Software Foundation"
+msgstr ""
 
 msgid "About"
 msgstr "Om"
@@ -1826,13 +1825,10 @@ msgstr "En lokal kopia av %s kunde inte hämtas"
 msgid "The shell is already running a command"
 msgstr "Skalet kör redan ett kommando"
 
-#, fuzzy
 msgid ""
 "Not an xterm or Linux console;\n"
 "the subshell cannot be toggled."
 msgstr ""
-"Inte en xterm- eller linuxterminal;\n"
-"panelerna kan inte slås av/på."
 
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Skriv 'exit' för att återvända till Midnight Commander"
@@ -1858,9 +1854,9 @@ msgstr "andra"
 msgid "Flag"
 msgstr "Flagga"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Permissions (octal): %o"
-msgstr "Rättigheter (oktalt):"
+msgstr ""
 
 msgid "Chown advanced command"
 msgstr "Avancerat chown-kommando"
@@ -2209,27 +2205,23 @@ msgstr "Användarnamn:"
 msgid "SMB authentication"
 msgstr "SMB-autentisering"
 
-#, fuzzy
 msgid "Secure deletion"
-msgstr "&Invertera markering"
+msgstr ""
 
-#, fuzzy
 msgid "Undelete"
-msgstr "Ta bort"
+msgstr ""
 
 msgid "Synchronous updates"
 msgstr ""
 
-#, fuzzy
 msgid "Synchronous directory updates"
-msgstr "V&isa katalogstorlekar"
+msgstr ""
 
 msgid "Immutable"
 msgstr ""
 
-#, fuzzy
 msgid "Append only"
-msgstr "&Lägg till"
+msgstr ""
 
 msgid "No dump"
 msgstr ""
@@ -2243,9 +2235,8 @@ msgstr ""
 msgid "Compressed clusters"
 msgstr ""
 
-#, fuzzy
 msgid "Compressed dirty file"
-msgstr "Jämför kataloger"
+msgstr ""
 
 msgid "Compression raw access"
 msgstr ""
@@ -2256,30 +2247,26 @@ msgstr ""
 msgid "Journaled data"
 msgstr ""
 
-#, fuzzy
 msgid "Indexed directory"
-msgstr "katalog"
+msgstr ""
 
 msgid "No tail merging"
 msgstr ""
 
-#, fuzzy
 msgid "Top of directory hierarchies"
-msgstr "V&isa katalogstorlekar"
+msgstr ""
 
 msgid "Inode uses extents"
 msgstr ""
 
-#, fuzzy
 msgid "Huge_file"
-msgstr "fil"
+msgstr ""
 
 msgid "No COW"
 msgstr ""
 
-#, fuzzy
 msgid "Casefolded file"
-msgstr "Stäng fil"
+msgstr ""
 
 msgid "Inode has inline data"
 msgstr ""
@@ -2299,29 +2286,23 @@ msgstr "Sä&tt markerade"
 msgid "C&lear marked"
 msgstr "N&ollställ markerade"
 
-#, fuzzy
 msgid "Chattr command"
-msgstr "Annat kommando"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chattr \"%s\"\n"
 "%s"
 msgstr ""
-"'stat' misslyckades på \"%s\"\n"
-"%s"
 
-#, fuzzy
 msgid "Cannot change attributes on non-local filesystems"
-msgstr "Kommandon kan inte exekveras på ickelokala filsystem"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get flags of \"%s\"\n"
 "%s"
 msgstr ""
-"Att flytta filen \"%s\" to \"%s\" misslyckades\n"
-"%s"
 
 msgid "set &user ID on execution"
 msgstr "sätt användar-I&D vid exekvering"
@@ -3536,7 +3517,7 @@ msgid "Command &history"
 msgstr "Kommando-&historik"
 
 msgid "Viewed/edited files hi&story"
-msgstr ""
+msgstr "Hi&storik över visade/redigerade filer"
 
 msgid "Di&rectory hotlist"
 msgstr "Katalog&favoriter"
@@ -3952,15 +3933,11 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "Hemkatalogsökvägen är inte absolut"
 
-#, fuzzy
 msgid ""
 "GNU Midnight Commander\n"
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""
-"GNU Midnight Commander körs redan\n"
-"i den här terminalen. Underskal-\n"
-"support kommer att inaktiveras."
 
 #, c-format
 msgid ""
@@ -4003,45 +3980,35 @@ msgstr "Skalet är fortfarande aktivt. Avsluta ändå?"
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Varning: Kan inte byta till %s.\n"
 
-#, fuzzy
 msgid "With builtin Editor and Aspell support"
-msgstr "Med inbyggd redigerare och stöd för aspell\n"
+msgstr ""
 
-#, fuzzy
 msgid "With builtin Editor"
-msgstr "Med inbyggd editor\n"
+msgstr ""
 
-#, fuzzy
 msgid "With optional subshell support"
-msgstr "Med valbar underskalsupport\n"
+msgstr ""
 
-#, fuzzy
 msgid "With subshell support as default"
-msgstr "Med underskalsupport förvalt\n"
+msgstr ""
 
-#, fuzzy
 msgid "With support for background operations"
-msgstr "Med stöd för bakgrundsoperationer\n"
+msgstr ""
 
-#, fuzzy
 msgid "With mouse support on xterm and Linux console"
-msgstr "Med stöd för mus på xterm och linuxkonsoll\n"
+msgstr ""
 
-#, fuzzy
 msgid "With mouse support on xterm"
-msgstr "Med stöd för mus på xterm\n"
+msgstr ""
 
-#, fuzzy
 msgid "With support for X11 events"
-msgstr "Med stöd för X11-händelser\n"
+msgstr ""
 
-#, fuzzy
 msgid "With internationalization support"
-msgstr "Med internationaliseringsstöd\n"
+msgstr ""
 
-#, fuzzy
 msgid "With multiple codepages support"
-msgstr "Med stöd för flera teckenöversättningar\n"
+msgstr ""
 
 msgid "With ext2fs attributes support"
 msgstr ""
@@ -4050,9 +4017,9 @@ msgstr ""
 msgid "Built with GLib %d.%d.%d\n"
 msgstr "Byggd med GLib %d.%d.%d\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with S-Lang %s with terminfo database\n"
-msgstr "Använder S-Lang-biblioteket med terminfo-databas\n"
+msgstr ""
 
 #, c-format
 msgid "Built with ncurses %s\n"
@@ -4061,9 +4028,9 @@ msgstr ""
 msgid "Built with ncurses (unknown version)"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with ncursesw %s\n"
-msgstr "Använder ncursesw-biblioteket\n"
+msgstr ""
 
 msgid "Built with ncursesw (unknown version)"
 msgstr ""
@@ -4686,16 +4653,3 @@ msgstr "Fortsätt från början?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan inte hämta en lokal kopia av /ftp://some.host/editme.txt"
-
-#~ msgid "Block is large, you may not be able to undo this action"
-#~ msgstr "Stort block, du kanske inte kan ångra denna åtgärd"
-
-#~ msgid ""
-#~ "Current text was modified without a file save.\n"
-#~ "Continue discards these changes"
-#~ msgstr ""
-#~ "Nuvarande text har modifierats utan att sparas.\n"
-#~ "Fortsätt kastar bort dessa ändringar"
-
-#~ msgid "Using the ncurses library\n"
-#~ msgstr "Använder ncurses-biblioteket\n"

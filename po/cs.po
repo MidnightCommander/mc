@@ -4,8 +4,9 @@
 #
 # Translators:
 # Jiří Vírava <appukonrad@gmail.com>, 2015,2017
+# k3dar <k3dar7@gmail.com>, 2020
 # Karel Kopecky <kdkopx@protonmail.com>, 2017
-# Pavel Borecki <pavel.borecki@gmail.com>, 2017-2019
+# Pavel Borecki <pavel.borecki@gmail.com>, 2017-2020
 # Radek Valášek <valin@buchlovice.org>, 2014
 # Robin Kriebel <kriebel.robin@gmail.com>, 2016
 # Slava Zanko <slavazanko@gmail.com>, 2011
@@ -13,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-17 18:50+0300\n"
-"PO-Revision-Date: 2019-12-16 05:03+0000\n"
-"Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>\n"
+"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"PO-Revision-Date: 2020-06-25 07:12+0000\n"
+"Last-Translator: k3dar <k3dar7@gmail.com>\n"
 "Language-Team: Czech (http://www.transifex.com/mc/mc/language/cs/)\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -493,23 +494,29 @@ msgstr "Proměnná prostředí TERM není nastavena!\n"
 msgid "Cannot check SIGWINCH pipe"
 msgstr "Nedaří se zkontrolovat rouru SIGWINCH"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Cannot create pipe for SIGWINCH: %s (%d)\n"
-msgstr "Nedaří se vytvořit rouru pro signál SIGWINCH"
+msgstr ""
+"\n"
+"Nedaří se vytvořit rouru pro signál SIGWINCH: %s (%d)\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
-msgstr "Nedaří se nastavit zápisovou část roury pro signál SIGWINCH"
+msgstr ""
+"\n"
+"Nedaří se nastavit zápisovou část roury pro signál SIGWINCH: %s (%d)\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
-msgstr "Nedaří se nastavit čtecí část roury pro signál SIGWINCH"
+msgstr ""
+"\n"
+"Nedaří se nastavit čtecí část roury pro signál SIGWINCH: %s (%d)\n"
 
 #, c-format
 msgid ""
@@ -1670,9 +1677,8 @@ msgstr ""
 "Uživatelsky přívětivý textový editor\n"
 "napsaný pro Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2020 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2019 the Free Software Foundation"
+msgstr "Autorská práva © 1996-2020 nadace Free Software Foundation"
 
 msgid "About"
 msgstr "O programu"
@@ -1825,13 +1831,12 @@ msgstr "Nedaří se získat místní kopii souboru %s"
 msgid "The shell is already running a command"
 msgstr "V shellu je už spuštěný příkaz"
 
-#, fuzzy
 msgid ""
 "Not an xterm or Linux console;\n"
 "the subshell cannot be toggled."
 msgstr ""
-"Toto není xterm nebo linuxová konzola;\n"
-"panely nelze přepnout."
+"Nejedná se o xterm nebo linuxovou konzoli;\n"
+"podshell není možné přepnout."
 
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Do Midnight Commander se vrátíte zadáním příkazu „exit“"
@@ -1857,9 +1862,9 @@ msgstr " ostatní"
 msgid "Flag"
 msgstr "Příznak"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Permissions (octal): %o"
-msgstr "Oprávnění (osmičkově):"
+msgstr "Oprávnění (osmičkově): %o"
 
 msgid "Chown advanced command"
 msgstr "Rozšířená změna vlastníka"
@@ -2208,86 +2213,77 @@ msgstr "Uživatelské jméno:"
 msgid "SMB authentication"
 msgstr "SMB ověření"
 
-#, fuzzy
 msgid "Secure deletion"
-msgstr "Převrát&it výběr"
+msgstr "Bezpečné smazání"
 
-#, fuzzy
 msgid "Undelete"
-msgstr "Delete"
+msgstr "Vzít zpět smazání"
 
 msgid "Synchronous updates"
-msgstr ""
+msgstr "Synchronní aktualizace"
 
-#, fuzzy
 msgid "Synchronous directory updates"
-msgstr "Zobrazit velikost&i složek"
+msgstr "Synchronní aktualizace složek"
 
 msgid "Immutable"
-msgstr ""
+msgstr "Neměnné"
 
-#, fuzzy
 msgid "Append only"
-msgstr "Přid&at"
+msgstr "Pouze připojit"
 
 msgid "No dump"
-msgstr ""
+msgstr "Žádný výpis (dump)"
 
 msgid "No update atime"
-msgstr ""
+msgstr "Neaktualizovat čas přístupu (atime)"
 
 msgid "Compress"
-msgstr ""
+msgstr "Komprimovat"
 
 msgid "Compressed clusters"
-msgstr ""
+msgstr "Komprimované klastry"
 
-#, fuzzy
 msgid "Compressed dirty file"
-msgstr "Porovnat složky"
+msgstr "Komprimovaný „dirty“ soubor"
 
 msgid "Compression raw access"
-msgstr ""
+msgstr "Holý přístup ke kompresi"
 
 msgid "Encrypted inode"
-msgstr ""
+msgstr "Zašifrovaný i-uzel"
 
 msgid "Journaled data"
-msgstr ""
+msgstr "Žurnálovaná data"
 
-#, fuzzy
 msgid "Indexed directory"
-msgstr "složka"
+msgstr "Indexovaná složka"
 
 msgid "No tail merging"
-msgstr ""
+msgstr "Žádné slučování konce (tail)"
 
-#, fuzzy
 msgid "Top of directory hierarchies"
-msgstr "Zobrazit velikost&i složek"
+msgstr "Vrchol adresářového stromu"
 
 msgid "Inode uses extents"
-msgstr ""
+msgstr "I-uzel používá extent jednotek"
 
-#, fuzzy
 msgid "Huge_file"
-msgstr "soubor"
+msgstr "Obrovský soubor"
 
 msgid "No COW"
-msgstr ""
+msgstr "Nepoužít kopírování při zápisu (CoW)"
 
-#, fuzzy
 msgid "Casefolded file"
-msgstr "Zavřít soubor"
+msgstr "Casefolded file"
 
 msgid "Inode has inline data"
-msgstr ""
+msgstr "I-uzel má inline data"
 
 msgid "Project hierarchy"
-msgstr ""
+msgstr "Hierarchie projektu"
 
 msgid "Verity protected inode"
-msgstr ""
+msgstr "Ověřit chráněný i-uzel"
 
 msgid "&Marked all"
 msgstr "&Nastavit vše na označených souborech"
@@ -2298,30 +2294,26 @@ msgstr "Nastavit označ&ené"
 msgid "C&lear marked"
 msgstr "&Smazat označené"
 
-#, fuzzy
 msgid "Chattr command"
-msgstr "Jiný příkaz"
+msgstr "Příkaz chattr"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chattr \"%s\"\n"
 "%s"
 msgstr ""
-"Na „%s“ nelze provést stat\n"
+"Není možné chattr „%s“\n"
 "%s"
 
-#, fuzzy
 msgid "Cannot change attributes on non-local filesystems"
-msgstr ""
-"Pokud nepracujete se soubory, nacházejícími se v tomto počítači, nelze "
-"spouštět žádné příkazy"
+msgstr "Není možné měnit atributy souborových systémů, které nejsou lokální"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get flags of \"%s\"\n"
 "%s"
 msgstr ""
-"Nelze přesunout soubor „%s“ na „%s“\n"
+"Nedaří se získat příznaky „%s“\n"
 "%s"
 
 msgid "set &user ID on execution"
@@ -3360,14 +3352,14 @@ msgid "Links:      %d"
 msgstr "Odkazy:      %d"
 
 msgid "Attributes: not supported"
-msgstr ""
+msgstr "Atributy: nepodporováno"
 
 #, c-format
 msgid "Attributes: %s"
-msgstr ""
+msgstr "Atributy: %s"
 
 msgid "Attributes: unavailable"
-msgstr ""
+msgstr "Atributy: není k dispozici"
 
 #, c-format
 msgid "Mode:       %s (%04o)"
@@ -3489,7 +3481,7 @@ msgid "&Advanced chown"
 msgstr "&Rozšířená změna práv/vlastníka"
 
 msgid "Cha&ttr"
-msgstr ""
+msgstr "Cha&ttr"
 
 msgid "&Rename/Move"
 msgstr "Přej&menovat/přesunout"
@@ -3643,7 +3635,7 @@ msgid "sort|u"
 msgstr "sort|s"
 
 msgid "&Unsorted"
-msgstr "&Netříděno"
+msgstr "Ne&uspořádaně"
 
 #. TRANSLATORS: one single character to represent 'name' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -3686,7 +3678,7 @@ msgid "sort|m"
 msgstr "sort|u"
 
 msgid "&Modify time"
-msgstr "&Okamžik úpravy"
+msgstr "&Modifikace"
 
 #. TRANSLATORS: one single character to represent 'Access time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -3694,7 +3686,7 @@ msgid "sort|a"
 msgstr "sort|p"
 
 msgid "&Access time"
-msgstr "Ok&amžik přístupu"
+msgstr "Č&as přístupu"
 
 #. TRANSLATORS: one single character to represent 'Change time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -3702,7 +3694,7 @@ msgid "sort|h"
 msgstr "sort|z"
 
 msgid "C&hange time"
-msgstr "Okamžik změn&y"
+msgstr "Čas změn&y"
 
 msgid "Perm"
 msgstr "Práva"
@@ -3964,14 +3956,13 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "Popis umístění domovské složky není zadaný od té kořenové"
 
-#, fuzzy
 msgid ""
 "GNU Midnight Commander\n"
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""
-"GNU Midnight Commander je v tomto\n"
-"terminálu už spuštěný.\n"
+"GNU Midnight Commander\n"
+"je v tomto terminálu už spuštěný.\n"
 "Podřízený shell proto bude pro další\n"
 "instanci vypnut."
 
@@ -4016,70 +4007,60 @@ msgstr "Shell je stále aktivní, přesto ukončit?"
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Varování: Nedaří se přepnout do složky %s.\n"
 
-#, fuzzy
 msgid "With builtin Editor and Aspell support"
-msgstr "S vestavěným editorem a podporou Aspell\n"
+msgstr "S vestavěným editorem a podporou Aspell"
 
-#, fuzzy
 msgid "With builtin Editor"
-msgstr "Vestavěným editorem\n"
+msgstr "S vestavěným editorem"
 
-#, fuzzy
 msgid "With optional subshell support"
-msgstr "S volitelnou podporou podřízeného shellu\n"
+msgstr "S volitelnou podporou podřízeného shellu"
 
-#, fuzzy
 msgid "With subshell support as default"
-msgstr "Se výchozí podporou podřízeného shellu\n"
+msgstr "Se výchozí podporou podřízeného shellu"
 
-#, fuzzy
 msgid "With support for background operations"
-msgstr "S podporou operací na pozadí\n"
+msgstr "S podporou operací na pozadí"
 
-#, fuzzy
 msgid "With mouse support on xterm and Linux console"
-msgstr "S podporou myši v Xterm a Linux konzolích\n"
+msgstr "S podporou myši v Xterm a Linux konzolích"
 
-#, fuzzy
 msgid "With mouse support on xterm"
-msgstr "S podporou myši v Xterm konzoli\n"
+msgstr "S podporou myši v Xterm konzoli"
 
-#, fuzzy
 msgid "With support for X11 events"
-msgstr "S podporou X11 událostí\n"
+msgstr "S podporou X11 událostí"
 
-#, fuzzy
 msgid "With internationalization support"
-msgstr "S podporou pro místní jazyky a zvyklosti\n"
+msgstr "S podporou pro místní jazyky a zvyklosti"
 
-#, fuzzy
 msgid "With multiple codepages support"
-msgstr "S podporou více kódových stránek\n"
+msgstr "S podporou vícero znakových sad"
 
 msgid "With ext2fs attributes support"
-msgstr ""
+msgstr "S podporou ext2fs atributů"
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"
 msgstr "Sestaveno s GLib %d.%d.%d\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with S-Lang %s with terminfo database\n"
-msgstr "Používá se knihovna S-Lang s databází terminfo\n"
+msgstr "Sestavenou s využitím knihovny S-Lang %s s databází terminfo\n"
 
 #, c-format
 msgid "Built with ncurses %s\n"
-msgstr ""
+msgstr "Sestaveno s využitím ncurses %s\n"
 
 msgid "Built with ncurses (unknown version)"
-msgstr ""
+msgstr "Sestaveno s využitím ncurses (neznámá verze)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with ncursesw %s\n"
-msgstr "Používá se knihovna ncursesw\n"
+msgstr "Sestaveno s využitím ncursesw %s\n"
 
 msgid "Built with ncursesw (unknown version)"
-msgstr ""
+msgstr "Sestaveno s využitím ncursesw (neznámá verze)"
 
 msgid "Virtual File Systems:"
 msgstr "Virtuální souborové systémy:"
@@ -4700,16 +4681,3 @@ msgstr "Pokračovat od začátku?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nedaří získat místní kopii souboru /ftp://some.host/editme.txt"
-
-#~ msgid "Block is large, you may not be able to undo this action"
-#~ msgstr "Blok je příliš velký, návrat o krok zpět nebude fungovat"
-
-#~ msgid ""
-#~ "Current text was modified without a file save.\n"
-#~ "Continue discards these changes"
-#~ msgstr ""
-#~ "Tento text byl změněn, ale změny nebyly uloženy.\n"
-#~ "Pokračováním se změny ztratí"
-
-#~ msgid "Using the ncurses library\n"
-#~ msgstr "Používá se knihovna ncurses\n"

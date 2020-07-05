@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
+# András Tőrös <toros.andras04@gmail.com>, 2020
 # Mátyás Demeter <mathias.demeter@gmail.com>, 2014
 # Rezső Páder <rezso@rezso.net>, 2012-2017,2019
 # Slava Zanko <slavazanko@gmail.com>, 2011
@@ -11,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-17 18:50+0300\n"
-"PO-Revision-Date: 2019-12-16 01:49+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"PO-Revision-Date: 2020-05-17 17:42+0000\n"
+"Last-Translator: Transifex Bot <>\n"
 "Language-Team: Hungarian (http://www.transifex.com/mc/mc/language/hu/)\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
@@ -481,11 +482,11 @@ msgstr "Nincs beállítva a TERM környezeti változó.\n"
 msgid "Cannot check SIGWINCH pipe"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Cannot create pipe for SIGWINCH: %s (%d)\n"
-msgstr "A(z) \"%s\" ideiglenes könyvtár nem hozható létre: %s\n"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1809,13 +1810,10 @@ msgstr "Nem sikerült behozni \"%s\" helyi másolatát"
 msgid "The shell is already running a command"
 msgstr "A parancsértelmező már futtat egy parancsot."
 
-#, fuzzy
 msgid ""
 "Not an xterm or Linux console;\n"
 "the subshell cannot be toggled."
 msgstr ""
-"Nem Xterm vagy Linux-konzol;\n"
-"a paneleket nem lehet kikapcsolni."
 
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Írjon \"exit\"-et a Midnight Commanderbe való visszatéréshez."
@@ -1841,9 +1839,9 @@ msgstr "Mások"
 msgid "Flag"
 msgstr "Jel"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Permissions (octal): %o"
-msgstr "Jogok (oktálisan):"
+msgstr ""
 
 msgid "Chown advanced command"
 msgstr "Chmod-Chown parancs"
@@ -1958,7 +1956,7 @@ msgid "Sa&fe delete"
 msgstr "\"Ó&vatos\" törlés"
 
 msgid "Safe overwrite"
-msgstr ""
+msgstr "Biztonságos felülírás"
 
 msgid "A&uto save setup"
 msgstr "Auto &Beállításmentés"
@@ -2191,27 +2189,23 @@ msgstr "Felhasználónév:"
 msgid "SMB authentication"
 msgstr "SMB hitelesítés"
 
-#, fuzzy
 msgid "Secure deletion"
-msgstr "K&ijelölés megfordítása"
+msgstr ""
 
-#, fuzzy
 msgid "Undelete"
-msgstr "Delete"
+msgstr ""
 
 msgid "Synchronous updates"
 msgstr ""
 
-#, fuzzy
 msgid "Synchronous directory updates"
-msgstr "Könyvtár&méret"
+msgstr ""
 
 msgid "Immutable"
 msgstr ""
 
-#, fuzzy
 msgid "Append only"
-msgstr "Ho&zzáadás"
+msgstr ""
 
 msgid "No dump"
 msgstr ""
@@ -2225,9 +2219,8 @@ msgstr ""
 msgid "Compressed clusters"
 msgstr ""
 
-#, fuzzy
 msgid "Compressed dirty file"
-msgstr "Könyvtárak összehasonlítása"
+msgstr ""
 
 msgid "Compression raw access"
 msgstr ""
@@ -2238,30 +2231,26 @@ msgstr ""
 msgid "Journaled data"
 msgstr ""
 
-#, fuzzy
 msgid "Indexed directory"
-msgstr "könyvtár"
+msgstr ""
 
 msgid "No tail merging"
 msgstr ""
 
-#, fuzzy
 msgid "Top of directory hierarchies"
-msgstr "Könyvtár&méret"
+msgstr ""
 
 msgid "Inode uses extents"
 msgstr ""
 
-#, fuzzy
 msgid "Huge_file"
-msgstr "fájl"
+msgstr ""
 
 msgid "No COW"
 msgstr ""
 
-#, fuzzy
 msgid "Casefolded file"
-msgstr "Fájl bezárása"
+msgstr ""
 
 msgid "Inode has inline data"
 msgstr ""
@@ -2281,29 +2270,23 @@ msgstr "Jel. b&e"
 msgid "C&lear marked"
 msgstr "Jel. &ki"
 
-#, fuzzy
 msgid "Chattr command"
-msgstr "más parancs"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chattr \"%s\"\n"
 "%s"
 msgstr ""
-"A(z) \"%s\" adatai nem lekérdezhetők \n"
-"%s"
 
-#, fuzzy
 msgid "Cannot change attributes on non-local filesystems"
-msgstr "Távoli fájlrendszeren nem lehet végrehajtani a parancsokat"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get flags of \"%s\"\n"
 "%s"
 msgstr ""
-"A(z) \"%s\" fájl nem átnevezhető/mozgatható erre: \"%s\"\n"
-"%s"
 
 msgid "set &user ID on execution"
 msgstr "&felhasználó-azonosító beállítása végrehajtáskor"
@@ -3932,15 +3915,11 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "A Home könyvtár elérési útja nem abszolút"
 
-#, fuzzy
 msgid ""
 "GNU Midnight Commander\n"
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""
-"A Midnight Commander már fut ezen\n"
-"a terminálon.\n"
-"Háttér-shell használata nem lesz lehetséges."
 
 #, c-format
 msgid ""
@@ -3983,45 +3962,35 @@ msgstr "A háttér-shell még aktív. Mégis kilép?"
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Nem sikerült belépni a(z) \"%s\" könyvtárba.\n"
 
-#, fuzzy
 msgid "With builtin Editor and Aspell support"
-msgstr "Beépített szövegszerkesztővel\n"
+msgstr ""
 
-#, fuzzy
 msgid "With builtin Editor"
-msgstr "Beépített szövegszerkesztővel\n"
+msgstr "Beépített szerkesztővel"
 
-#, fuzzy
 msgid "With optional subshell support"
-msgstr "Opcionális háttér-shell-támogatással\n"
+msgstr ""
 
-#, fuzzy
 msgid "With subshell support as default"
-msgstr "Alapértelmezésben háttér-shell-támogatással\n"
+msgstr ""
 
-#, fuzzy
 msgid "With support for background operations"
-msgstr "Háttérműveletek támogatása\n"
+msgstr ""
 
-#, fuzzy
 msgid "With mouse support on xterm and Linux console"
-msgstr "Egérhasználat Xterm alatt és Linux-konzolon\n"
+msgstr ""
 
-#, fuzzy
 msgid "With mouse support on xterm"
-msgstr "Egérhasználat Xterm alatt\n"
+msgstr ""
 
-#, fuzzy
 msgid "With support for X11 events"
-msgstr "X11-események támogatása\n"
+msgstr ""
 
-#, fuzzy
 msgid "With internationalization support"
-msgstr "Nyelvi lokalizálás támogatása\n"
+msgstr ""
 
-#, fuzzy
 msgid "With multiple codepages support"
-msgstr "Több kódlap támogatása\n"
+msgstr ""
 
 msgid "With ext2fs attributes support"
 msgstr ""
@@ -4030,9 +3999,9 @@ msgstr ""
 msgid "Built with GLib %d.%d.%d\n"
 msgstr "GLib %d.%d.%d verzióval fordíva\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with S-Lang %s with terminfo database\n"
-msgstr "Az S-Lang könyvtár használata Terminfo adatbázissal\n"
+msgstr ""
 
 #, c-format
 msgid "Built with ncurses %s\n"
@@ -4041,9 +4010,9 @@ msgstr ""
 msgid "Built with ncurses (unknown version)"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with ncursesw %s\n"
-msgstr "Az ncursesw könyvtár használata\n"
+msgstr ""
 
 msgid "Built with ncursesw (unknown version)"
 msgstr ""
@@ -4662,16 +4631,3 @@ msgstr "Folytatás az elejéről?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nem sikerült behozni /ftp://some.host/editme.txt helyi másolatát"
-
-#~ msgid "Block is large, you may not be able to undo this action"
-#~ msgstr "Nagy blokk, a művelet nem biztos hogy visszavonható."
-
-#~ msgid ""
-#~ "Current text was modified without a file save.\n"
-#~ "Continue discards these changes"
-#~ msgstr ""
-#~ "A szöveg módosult a legutóbbi mentés óta.\n"
-#~ "Ha továbblép, ezek a változások elvesznek."
-
-#~ msgid "Using the ncurses library\n"
-#~ msgstr "Az ncurses könyvtár használata\n"

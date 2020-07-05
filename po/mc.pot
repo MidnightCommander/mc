@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: mc 4.8.24-135-gf5d667197\n"
+"Project-Id-Version: mc 4.8.24-160-gbdeaed5b7\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-17 18:50+0300\n"
+"POT-Creation-Date: 2020-07-05 21:41+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -587,11 +587,11 @@ msgstr ""
 msgid "Shift"
 msgstr ""
 
-#: lib/tty/tty.c:102
+#: lib/tty/tty.c:105
 msgid "The TERM environment variable is unset!\n"
 msgstr ""
 
-#: lib/tty/tty.c:191
+#: lib/tty/tty.c:194
 msgid "Cannot check SIGWINCH pipe"
 msgstr ""
 

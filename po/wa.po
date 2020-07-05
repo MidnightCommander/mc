@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-17 18:50+0300\n"
-"PO-Revision-Date: 2019-12-16 01:49+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"PO-Revision-Date: 2020-05-17 17:42+0000\n"
+"Last-Translator: Transifex Bot <>\n"
 "Language-Team: Walloon (http://www.transifex.com/mc/mc/language/wa/)\n"
 "Language: wa\n"
 "MIME-Version: 1.0\n"
@@ -1755,9 +1755,9 @@ msgstr "ôte"
 msgid "Flag"
 msgstr "Drapea"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Permissions (octal): %o"
-msgstr "Permission"
+msgstr ""
 
 msgid "Chown advanced command"
 msgstr ""
@@ -2101,9 +2101,8 @@ msgstr ""
 msgid "Secure deletion"
 msgstr ""
 
-#, fuzzy
 msgid "Undelete"
-msgstr "&Disfacer"
+msgstr ""
 
 msgid "Synchronous updates"
 msgstr ""
@@ -2114,9 +2113,8 @@ msgstr ""
 msgid "Immutable"
 msgstr ""
 
-#, fuzzy
 msgid "Append only"
-msgstr "&Mete å coron"
+msgstr ""
 
 msgid "No dump"
 msgstr ""
@@ -2142,9 +2140,8 @@ msgstr ""
 msgid "Journaled data"
 msgstr ""
 
-#, fuzzy
 msgid "Indexed directory"
-msgstr "ridant"
+msgstr ""
 
 msgid "No tail merging"
 msgstr ""
@@ -2155,9 +2152,8 @@ msgstr ""
 msgid "Inode uses extents"
 msgstr ""
 
-#, fuzzy
 msgid "Huge_file"
-msgstr "fitchî"
+msgstr ""
 
 msgid "No COW"
 msgstr ""
@@ -2183,9 +2179,8 @@ msgstr "M&ete li mårke"
 msgid "C&lear marked"
 msgstr "&Waester li mårke"
 
-#, fuzzy
 msgid "Chattr command"
-msgstr "Ôtès cmandes"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -3786,21 +3781,17 @@ msgstr ""
 msgid "With subshell support as default"
 msgstr ""
 
-#, fuzzy
 msgid "With support for background operations"
-msgstr "Avou sopoirt po les bouyes di fond\n"
+msgstr ""
 
-#, fuzzy
 msgid "With mouse support on xterm and Linux console"
-msgstr "Ni nén sopoirter li soris dvins li modêye tecse"
+msgstr ""
 
-#, fuzzy
 msgid "With mouse support on xterm"
-msgstr "Ni nén sopoirter li soris dvins li modêye tecse"
+msgstr ""
 
-#, fuzzy
 msgid "With support for X11 events"
-msgstr "Avou sopoirt po les bouyes di fond\n"
+msgstr ""
 
 msgid "With internationalization support"
 msgstr ""

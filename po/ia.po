@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-17 18:50+0300\n"
-"PO-Revision-Date: 2019-12-16 01:49+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"PO-Revision-Date: 2020-05-17 17:42+0000\n"
+"Last-Translator: Transifex Bot <>\n"
 "Language-Team: Interlingua (http://www.transifex.com/mc/mc/language/ia/)\n"
 "Language: ia\n"
 "MIME-Version: 1.0\n"
@@ -471,11 +471,11 @@ msgstr "Le variabile de ambiente TERM non es definite!\n"
 msgid "Cannot check SIGWINCH pipe"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Cannot create pipe for SIGWINCH: %s (%d)\n"
-msgstr "Non pote crear le directorio temporari %s: %s\n"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1775,9 +1775,9 @@ msgstr "altere"
 msgid "Flag"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Permissions (octal): %o"
-msgstr "Permissiones (octal):"
+msgstr ""
 
 msgid "Chown advanced command"
 msgstr ""
@@ -2121,9 +2121,8 @@ msgstr ""
 msgid "Secure deletion"
 msgstr ""
 
-#, fuzzy
 msgid "Undelete"
-msgstr "Deler"
+msgstr ""
 
 msgid "Synchronous updates"
 msgstr ""
@@ -2134,9 +2133,8 @@ msgstr ""
 msgid "Immutable"
 msgstr ""
 
-#, fuzzy
 msgid "Append only"
-msgstr "&Appender"
+msgstr ""
 
 msgid "No dump"
 msgstr ""
@@ -2162,9 +2160,8 @@ msgstr ""
 msgid "Journaled data"
 msgstr ""
 
-#, fuzzy
 msgid "Indexed directory"
-msgstr "directorio"
+msgstr ""
 
 msgid "No tail merging"
 msgstr ""
@@ -2175,9 +2172,8 @@ msgstr ""
 msgid "Inode uses extents"
 msgstr ""
 
-#, fuzzy
 msgid "Huge_file"
-msgstr "file"
+msgstr ""
 
 msgid "No COW"
 msgstr ""
@@ -2203,9 +2199,8 @@ msgstr ""
 msgid "C&lear marked"
 msgstr ""
 
-#, fuzzy
 msgid "Chattr command"
-msgstr "Altere commando"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2216,11 +2211,11 @@ msgstr ""
 msgid "Cannot change attributes on non-local filesystems"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get flags of \"%s\"\n"
 "%s"
-msgstr "Le file \"%s\" non pote esser aperite"
+msgstr ""
 
 msgid "set &user ID on execution"
 msgstr ""
@@ -3783,29 +3778,23 @@ msgstr ""
 msgid "With builtin Editor"
 msgstr ""
 
-#, fuzzy
 msgid "With optional subshell support"
-msgstr "Disactivar le supporto de sub-shells"
+msgstr ""
 
-#, fuzzy
 msgid "With subshell support as default"
-msgstr "Activar le supporto de sub-shells (predefinite)"
+msgstr ""
 
-#, fuzzy
 msgid "With support for background operations"
-msgstr "Con supporto pro eventos X11\n"
+msgstr ""
 
-#, fuzzy
 msgid "With mouse support on xterm and Linux console"
-msgstr "Disactivar le supporto del mouse in le version texto"
+msgstr ""
 
-#, fuzzy
 msgid "With mouse support on xterm"
-msgstr "Disactivar le supporto del mouse in le version texto"
+msgstr ""
 
-#, fuzzy
 msgid "With support for X11 events"
-msgstr "Con supporto pro eventos X11\n"
+msgstr ""
 
 msgid "With internationalization support"
 msgstr ""

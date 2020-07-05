@@ -3,17 +3,17 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# 이정희 <daemul72@gmail.com>, 2019
+# MarongHappy <daemul72@gmail.com>, 2019-2020
 # JinYeong Bak <dongdm@gmail.com>, 2016
-# 이정희 <daemul72@gmail.com>, 2019
+# MarongHappy <daemul72@gmail.com>, 2019
 # Slava Zanko <slavazanko@gmail.com>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-17 18:50+0300\n"
-"PO-Revision-Date: 2019-12-16 01:49+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"PO-Revision-Date: 2020-05-17 17:42+0000\n"
+"Last-Translator: Transifex Bot <>\n"
 "Language-Team: Korean (http://www.transifex.com/mc/mc/language/ko/)\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
@@ -484,25 +484,31 @@ msgid "The TERM environment variable is unset!\n"
 msgstr "TERM 환경변수가 설정되어있지 않습니다!\n"
 
 msgid "Cannot check SIGWINCH pipe"
-msgstr ""
+msgstr "SIGWINCH 파이프를 확인할 수 없습니다"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Cannot create pipe for SIGWINCH: %s (%d)\n"
-msgstr "SIGWINCH용 파이프를 생성할 수 없음"
+msgstr ""
+"\n"
+"SIGWINCH용 파이프를 작성할 수 없음: %s (%d)\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
-msgstr "SIGWINCH 파이프의 쓰기 끝을 구성할 수 없음"
+msgstr ""
+"\n"
+"SIGWINCH 파이프의 쓰기 끝을 구성할 수 없음: %s (%d)\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
-msgstr "SIGWINCH 파이프의 읽기 엔드를 구성할 수 없음"
+msgstr ""
+"\n"
+"SIGWINCH 파이프의 읽기 끝을 구성할 수 없음: %s (%d)\n"
 
 #, c-format
 msgid ""
@@ -1663,9 +1669,8 @@ msgstr ""
 "사용자 친화적인 텍스트 편집기\n"
 "미드나잇 커맨더를 위해 작성됨."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2020 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2019 the Free Software Foundation"
+msgstr "Copyright (C) 1996-2020 the Free Software Foundation"
 
 msgid "About"
 msgstr "소개"
@@ -1816,13 +1821,10 @@ msgstr "%s의 로컬 복사본을 가져올 수 없음"
 msgid "The shell is already running a command"
 msgstr "셸이 이미 명령을 실행하고 있음"
 
-#, fuzzy
 msgid ""
 "Not an xterm or Linux console;\n"
 "the subshell cannot be toggled."
 msgstr ""
-"XTerm 또는 Linux 콘솔이 아님;\n"
-"패널을 전환할 수 없습니다."
 
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "미드나잇 커맨더로 돌아가려면 'exit'를 입력하십시오."
@@ -1848,9 +1850,9 @@ msgstr "기타"
 msgid "Flag"
 msgstr "플래그"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Permissions (octal): %o"
-msgstr "권한 (8진수):"
+msgstr ""
 
 msgid "Chown advanced command"
 msgstr "Chown 고급 명령어"
@@ -2199,27 +2201,23 @@ msgstr "사용자 이름:"
 msgid "SMB authentication"
 msgstr "SMB 인증"
 
-#, fuzzy
 msgid "Secure deletion"
-msgstr "선택 반전(&I)"
+msgstr ""
 
-#, fuzzy
 msgid "Undelete"
-msgstr "삭제 키"
+msgstr ""
 
 msgid "Synchronous updates"
 msgstr ""
 
-#, fuzzy
 msgid "Synchronous directory updates"
-msgstr "디렉터리 크기 보기(&I)"
+msgstr ""
 
 msgid "Immutable"
 msgstr ""
 
-#, fuzzy
 msgid "Append only"
-msgstr "추가(&A)"
+msgstr ""
 
 msgid "No dump"
 msgstr ""
@@ -2233,9 +2231,8 @@ msgstr ""
 msgid "Compressed clusters"
 msgstr ""
 
-#, fuzzy
 msgid "Compressed dirty file"
-msgstr "디렉토리 비교"
+msgstr ""
 
 msgid "Compression raw access"
 msgstr ""
@@ -2246,30 +2243,26 @@ msgstr ""
 msgid "Journaled data"
 msgstr ""
 
-#, fuzzy
 msgid "Indexed directory"
-msgstr "디렉터리"
+msgstr ""
 
 msgid "No tail merging"
 msgstr ""
 
-#, fuzzy
 msgid "Top of directory hierarchies"
-msgstr "디렉터리 크기 보기(&I)"
+msgstr ""
 
 msgid "Inode uses extents"
 msgstr ""
 
-#, fuzzy
 msgid "Huge_file"
-msgstr "파일"
+msgstr ""
 
 msgid "No COW"
 msgstr ""
 
-#, fuzzy
 msgid "Casefolded file"
-msgstr "파일 닫기"
+msgstr ""
 
 msgid "Inode has inline data"
 msgstr ""
@@ -2289,30 +2282,23 @@ msgstr "표시됨 설정(&E)"
 msgid "C&lear marked"
 msgstr "표시됨 지우기(&L)"
 
-#, fuzzy
 msgid "Chattr command"
-msgstr "기타 명령어"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chattr \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\"에 대한 상태\n"
-"%s"
 
-#, fuzzy
 msgid "Cannot change attributes on non-local filesystems"
-msgstr "로컬이 아닌 파일 시스템에서 명령을 실행할 수 없음"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get flags of \"%s\"\n"
 "%s"
 msgstr ""
-"%s 파일을 \"%s\"로 이동할 수 없음\n"
-"\n"
-"%s"
 
 msgid "set &user ID on execution"
 msgstr "실행 시 사용자 ID 설정(&U)"
@@ -3939,15 +3925,14 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "홈 디렉토리 경로가 절대적이지 않음"
 
-#, fuzzy
 msgid ""
 "GNU Midnight Commander\n"
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""
-"GNU 미드나잇 커맨더가 이미\n"
-"이 터미널에서 실행 중입니다.\n"
-"Subshell 지원이 비활성화됩니다."
+"GNU 미드나잇 코맨더가\n"
+"이미 이 터미널에서 실행 중입니다.\n"
+"Subshell 지원이 비활성화 됩니다."
 
 #, c-format
 msgid ""
@@ -3990,45 +3975,35 @@ msgstr "셸이 아직 활성 상태입니다. 그래도 끝낼까요?"
 msgid "Warning: Cannot change to %s.\n"
 msgstr "경고: %s으(로) 변경할 수 없음.\n"
 
-#, fuzzy
 msgid "With builtin Editor and Aspell support"
-msgstr "편집기 내장 및 Aspell 지원 사용\n"
+msgstr "기본 제공 편집기 및 Aspell 지원 포함"
 
-#, fuzzy
 msgid "With builtin Editor"
-msgstr "편집기 내장 사용\n"
+msgstr "기본 제공 편집기 포함"
 
-#, fuzzy
 msgid "With optional subshell support"
-msgstr "옵션으로 하위 쉘 지원 사용\n"
+msgstr "subshell 지원 옵션 포함"
 
-#, fuzzy
 msgid "With subshell support as default"
-msgstr "기본으로 하위 쉘 지원 사용\n"
+msgstr "기본 설정으로 subshell 지원 포함"
 
-#, fuzzy
 msgid "With support for background operations"
-msgstr "백그라운드 작업 지원 사용\n"
+msgstr "백그라운드 작업용 지원 포함"
 
-#, fuzzy
 msgid "With mouse support on xterm and Linux console"
-msgstr "XTerm 및 Linux 콘솔에서 마우스 지원 사용\n"
+msgstr "xterm 및 Linux 콘솔에서 마우스 지원 포함"
 
-#, fuzzy
 msgid "With mouse support on xterm"
-msgstr "XTerm에서 마우스 지원 사용\n"
+msgstr "xterm에서 마우스 지원 포함"
 
-#, fuzzy
 msgid "With support for X11 events"
-msgstr "X11 이벤트 지원 사용\n"
+msgstr "X11 이벤트에 대한 지원 포함"
 
-#, fuzzy
 msgid "With internationalization support"
-msgstr "국제화 지원 사용\n"
+msgstr "국제화 지원 포함"
 
-#, fuzzy
 msgid "With multiple codepages support"
-msgstr "복수의 코드페이지 지원 사용\n"
+msgstr "다중 코드페이지 지원 포함"
 
 msgid "With ext2fs attributes support"
 msgstr ""
@@ -4037,23 +4012,23 @@ msgstr ""
 msgid "Built with GLib %d.%d.%d\n"
 msgstr "GLib %d.%d.%d로 빌드\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with S-Lang %s with terminfo database\n"
-msgstr "터미널 데이터베이스와 함께 S-Lang 라이브러리 사용\n"
+msgstr "터미널 데이터베이스가 있는 S-Lang %s로 구축\n"
 
 #, c-format
 msgid "Built with ncurses %s\n"
-msgstr ""
+msgstr "ncurses %s로 구축\n"
 
 msgid "Built with ncurses (unknown version)"
-msgstr ""
+msgstr "ncures로 구축 (알 수 없는 버전)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with ncursesw %s\n"
-msgstr "ncursesw 라이브러리 사용\n"
+msgstr "ncursesw %s로 구축\n"
 
 msgid "Built with ncursesw (unknown version)"
-msgstr ""
+msgstr "ncursesw로 구축 (알 수 없는 버전)"
 
 msgid "Virtual File Systems:"
 msgstr "가상 파일 시스템:"
@@ -4673,16 +4648,3 @@ msgstr "처음부터 계속하시겠습니까?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "/ftp://some.host/editme.txt의 로컬 복사본을 가져올 수 없음"
-
-#~ msgid "Block is large, you may not be able to undo this action"
-#~ msgstr "블록이 크면 이 작업을 실행 취소할 수 없음"
-
-#~ msgid ""
-#~ "Current text was modified without a file save.\n"
-#~ "Continue discards these changes"
-#~ msgstr ""
-#~ "파일 저장 없이 현재 텍스트가 수정됨.\n"
-#~ "계속 이런 변경 내용을 삭제합니다."
-
-#~ msgid "Using the ncurses library\n"
-#~ msgstr "ncurses 라이브러리 사용\n"

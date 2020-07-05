@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-17 18:50+0300\n"
-"PO-Revision-Date: 2019-12-16 01:49+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"PO-Revision-Date: 2020-05-17 17:42+0000\n"
+"Last-Translator: Transifex Bot <>\n"
 "Language-Team: Latvian (http://www.transifex.com/mc/mc/language/lv/)\n"
 "Language: lv\n"
 "MIME-Version: 1.0\n"
@@ -1758,9 +1758,9 @@ msgstr "citi"
 msgid "Flag"
 msgstr "Karogs"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Permissions (octal): %o"
-msgstr "Atļauja"
+msgstr ""
 
 msgid "Chown advanced command"
 msgstr ""
@@ -2105,9 +2105,8 @@ msgstr ""
 msgid "Secure deletion"
 msgstr ""
 
-#, fuzzy
 msgid "Undelete"
-msgstr "&Dzēst"
+msgstr ""
 
 msgid "Synchronous updates"
 msgstr ""
@@ -2118,9 +2117,8 @@ msgstr ""
 msgid "Immutable"
 msgstr ""
 
-#, fuzzy
 msgid "Append only"
-msgstr "pie&Likt"
+msgstr ""
 
 msgid "No dump"
 msgstr ""
@@ -2146,9 +2144,8 @@ msgstr ""
 msgid "Journaled data"
 msgstr ""
 
-#, fuzzy
 msgid "Indexed directory"
-msgstr "direktoriju"
+msgstr ""
 
 msgid "No tail merging"
 msgstr ""
@@ -2159,9 +2156,8 @@ msgstr ""
 msgid "Inode uses extents"
 msgstr ""
 
-#, fuzzy
 msgid "Huge_file"
-msgstr "failu"
+msgstr ""
 
 msgid "No COW"
 msgstr ""
@@ -2187,9 +2183,8 @@ msgstr "U&zstādīt izvēlēto"
 msgid "C&lear marked"
 msgstr "A&ttīrīt izvēlēto"
 
-#, fuzzy
 msgid "Chattr command"
-msgstr "Cita omanda"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -3782,45 +3777,35 @@ msgstr ""
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Brīdinājums: Nevarēja pārmainīt uz %s.\n"
 
-#, fuzzy
 msgid "With builtin Editor and Aspell support"
-msgstr "Ar iebūvēto Redaktoru\n"
+msgstr ""
 
-#, fuzzy
 msgid "With builtin Editor"
-msgstr "Ar iebūvēto Redaktoru\n"
+msgstr ""
 
-#, fuzzy
 msgid "With optional subshell support"
-msgstr "Atslēdz zemčaulas atbalstu"
+msgstr ""
 
-#, fuzzy
 msgid "With subshell support as default"
-msgstr "Ieslēdz zemčaulas atbalstu (noklusētais)"
+msgstr ""
 
-#, fuzzy
 msgid "With support for background operations"
-msgstr "Ar atbalstu fona operācijām\n"
+msgstr ""
 
-#, fuzzy
 msgid "With mouse support on xterm and Linux console"
-msgstr "Ar peles atbalstu xterm un Linux konsolei\n"
+msgstr ""
 
-#, fuzzy
 msgid "With mouse support on xterm"
-msgstr "Ar peles atbalstu xterm\n"
+msgstr ""
 
-#, fuzzy
 msgid "With support for X11 events"
-msgstr "Ar atbalstu X11 operācijām\n"
+msgstr ""
 
-#, fuzzy
 msgid "With internationalization support"
-msgstr "ar internacionalizācijas atbalstu\n"
+msgstr ""
 
-#, fuzzy
 msgid "With multiple codepages support"
-msgstr "Ar vairāku kodu tabulu atbalstu\n"
+msgstr ""
 
 msgid "With ext2fs attributes support"
 msgstr ""

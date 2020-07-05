@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-17 18:50+0300\n"
-"PO-Revision-Date: 2019-12-16 01:49+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"PO-Revision-Date: 2020-05-17 17:42+0000\n"
+"Last-Translator: Transifex Bot <>\n"
 "Language-Team: Azerbaijani (http://www.transifex.com/mc/mc/language/az/)\n"
 "Language: az\n"
 "MIME-Version: 1.0\n"
@@ -1757,9 +1757,9 @@ msgstr "başqa"
 msgid "Flag"
 msgstr "Bayraq"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Permissions (octal): %o"
-msgstr "İstifadəhaqları"
+msgstr ""
 
 msgid "Chown advanced command"
 msgstr ""
@@ -2103,9 +2103,8 @@ msgstr ""
 msgid "Secure deletion"
 msgstr ""
 
-#, fuzzy
 msgid "Undelete"
-msgstr "&Sil"
+msgstr ""
 
 msgid "Synchronous updates"
 msgstr ""
@@ -2116,9 +2115,8 @@ msgstr ""
 msgid "Immutable"
 msgstr ""
 
-#, fuzzy
 msgid "Append only"
-msgstr "&ƏLavə Et"
+msgstr ""
 
 msgid "No dump"
 msgstr ""
@@ -2144,9 +2142,8 @@ msgstr ""
 msgid "Journaled data"
 msgstr ""
 
-#, fuzzy
 msgid "Indexed directory"
-msgstr "qovluq"
+msgstr ""
 
 msgid "No tail merging"
 msgstr ""
@@ -2157,9 +2154,8 @@ msgstr ""
 msgid "Inode uses extents"
 msgstr ""
 
-#, fuzzy
 msgid "Huge_file"
-msgstr "fayl"
+msgstr ""
 
 msgid "No COW"
 msgstr ""
@@ -2185,9 +2181,8 @@ msgstr "Seçilənləri D&xil et"
 msgid "C&lear marked"
 msgstr "Seçilanləri T&əmizlə"
 
-#, fuzzy
 msgid "Chattr command"
-msgstr "Başqa əmr"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -3776,45 +3771,35 @@ msgstr ""
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Xəbərdarlıq : %s'ye keçə bilmədim .\n"
 
-#, fuzzy
 msgid "With builtin Editor and Aspell support"
-msgstr "Daxili düzəldici ilə birlikdə\n"
+msgstr ""
 
-#, fuzzy
 msgid "With builtin Editor"
-msgstr "Daxili düzəldici ilə birlikdə\n"
+msgstr ""
 
-#, fuzzy
 msgid "With optional subshell support"
-msgstr "Subchell dətəyini passivləşdir"
+msgstr ""
 
-#, fuzzy
 msgid "With subshell support as default"
-msgstr "Subshell dəstəyini fəallaşdırar (əsas)"
+msgstr ""
 
-#, fuzzy
 msgid "With support for background operations"
-msgstr "Arxaplan əməliyyatları dəstəkli\n"
+msgstr ""
 
-#, fuzzy
 msgid "With mouse support on xterm and Linux console"
-msgstr "xtermdə və Linuks konsolunda siçan dəstəyi ilə\n"
+msgstr ""
 
-#, fuzzy
 msgid "With mouse support on xterm"
-msgstr "Xtermdə siçan dəstəyi ilə\n"
+msgstr ""
 
-#, fuzzy
 msgid "With support for X11 events"
-msgstr "X11 olayları dəstəkli\n"
+msgstr ""
 
-#, fuzzy
 msgid "With internationalization support"
-msgstr "Beynəlmiləlləşdirmə dəstəkli\n"
+msgstr ""
 
-#, fuzzy
 msgid "With multiple codepages support"
-msgstr "Çoxlu kod səhifəsi dəstəyilə\n"
+msgstr ""
 
 msgid "With ext2fs attributes support"
 msgstr ""

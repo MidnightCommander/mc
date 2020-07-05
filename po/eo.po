@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-17 18:50+0300\n"
-"PO-Revision-Date: 2019-12-25 01:49+0000\n"
+"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"PO-Revision-Date: 2020-05-22 15:31+0000\n"
 "Last-Translator: Keith Bowes <zooplah@gmail.com>\n"
 "Language-Team: Esperanto (http://www.transifex.com/mc/mc/language/eo/)\n"
 "Language: eo\n"
@@ -124,7 +124,7 @@ msgid "Search string not found"
 msgstr "Serĉita ĉeno ne trovita"
 
 msgid "Not implemented yet"
-msgstr "Ne jam realigita"
+msgstr "Ankoraŭ ne realigita"
 
 msgid "Num of replace tokens not equal to num of found tokens"
 msgstr "Nombro da anstataŭotaj eroj ne egalas nombron da trovitaj eroj"
@@ -486,23 +486,29 @@ msgstr "La medivariablo TERM ne estas valorizita!\n"
 msgid "Cannot check SIGWINCH pipe"
 msgstr "Ne eblas kontroli SIGWINCH-dukton"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Cannot create pipe for SIGWINCH: %s (%d)\n"
-msgstr "Ne eblas krei duktajn por SIGWINCH"
+msgstr ""
+"\n"
+"Ne eblas krei duktajn por SIGWINCH: %s (%d)\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
-msgstr "Ne eblas agordi skribfinon de SIGWINCH-dukto"
+msgstr ""
+"\n"
+"Ne eblas agordi skribfinon de SIGWINCH-dukto: %s (%d)\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
-msgstr "Ne eblas agordi legfinon de SIGWINCH-dukton"
+msgstr ""
+"\n"
+"Ne eblas agordi legfinon de SIGWINCH-dukton: %s (%d)\n"
 
 #, c-format
 msgid ""
@@ -831,7 +837,7 @@ msgid "file1 file2"
 msgstr "dosiero1 dosiero2"
 
 msgid "[this_dir] [other_panel_dir]"
-msgstr "[maldekstra_flanko] [dekstra_flanko]"
+msgstr "[ĉi_tiu_flanko] [alia_flanko]"
 
 msgid ""
 "\n"
@@ -1120,10 +1126,10 @@ msgid "&Do not change"
 msgstr "&Ne ŝanĝu"
 
 msgid "&Unix format (LF)"
-msgstr "&Uniksa formato"
+msgstr "Uniksa &formato"
 
 msgid "&Windows/DOS format (CR LF)"
-msgstr "&Vindozo/DOS-a formato"
+msgstr "&Vindoza/DOS-a formato"
 
 msgid "&Macintosh format (CR)"
 msgstr "&Makintoŝa formato"
@@ -1338,7 +1344,7 @@ msgid ""
 "Current text was modified without a file save.\n"
 "Continue discards these changes."
 msgstr ""
-"Aktuala teksto estis modifita sen dosiera konservado.\n"
+"Nuna teksto estis modifita sen dosiera konservado.\n"
 "Daŭri forviŝos tiujn ŝanĝojn."
 
 msgid "In se&lection"
@@ -1438,7 +1444,7 @@ msgid "&Cut to clipfile"
 msgstr "El&tranĉi al poŝa dosiero"
 
 msgid "Pa&ste from clipfile"
-msgstr "Alglui al poŝa do&siero"
+msgstr "Alglui el poŝa do&siero"
 
 msgid "&Beginning"
 msgstr "Komen&co"
@@ -1666,9 +1672,8 @@ msgstr ""
 "Afabla tekstoredaktilo\n"
 "verkita por Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2020 the Free Software Foundation"
-msgstr "Kopirajto (C) 1996–2019 la Fondaĵo pri liberaj programoj"
+msgstr "Kopirajto (C) 1996–2020 la Fondaĵo pri liberaj programoj"
 
 msgid "About"
 msgstr "Pri"
@@ -1820,13 +1825,12 @@ msgstr "Ne eblas atingi lokan kopion de %s"
 msgid "The shell is already running a command"
 msgstr "La ŝelo jam plenumas komandon"
 
-#, fuzzy
 msgid ""
 "Not an xterm or Linux console;\n"
 "the subshell cannot be toggled."
 msgstr ""
 "Ne xterm-fenestron aŭ linuksan terminalon;\n"
-"la flankojn oni ne povis inversigi."
+"la subŝelon oni ne ne povas baskuligi."
 
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Tajpu \"exit\" por reiri al Midnight Commander"
@@ -1852,9 +1856,9 @@ msgstr "aliaj"
 msgid "Flag"
 msgstr "Markoj"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Permissions (octal): %o"
-msgstr "Permesoj (Okuma):"
+msgstr "Permesoj (Okuma): %o"
 
 msgid "Chown advanced command"
 msgstr "[chown] altnivelaj komandoj"
@@ -2203,86 +2207,77 @@ msgstr "Salutnomo:"
 msgid "SMB authentication"
 msgstr "SMB-atestado"
 
-#, fuzzy
 msgid "Secure deletion"
-msgstr "Inversigi elek&ton"
+msgstr "Sekura forigo"
 
-#, fuzzy
 msgid "Undelete"
-msgstr "Foriga klavo"
+msgstr "Malforigi"
 
 msgid "Synchronous updates"
-msgstr ""
+msgstr "Sinkronaj ĝisdatigoj"
 
-#, fuzzy
 msgid "Synchronous directory updates"
-msgstr "Montri dosierujajn g&randojn"
+msgstr "Sinkronaj dosierujo-ĝisdatigoj"
 
 msgid "Immutable"
-msgstr ""
+msgstr "Neŝanĝebla"
 
-#, fuzzy
 msgid "Append only"
-msgstr "&Almeti"
+msgstr "Nur Almeti"
 
 msgid "No dump"
-msgstr ""
+msgstr "Neniu ŝuto"
 
 msgid "No update atime"
-msgstr ""
+msgstr "Ne ĝisdatigi atingo-tempon"
 
 msgid "Compress"
-msgstr ""
+msgstr "Kunpremi"
 
 msgid "Compressed clusters"
-msgstr ""
+msgstr "Kunpremitaj sektoroj"
 
-#, fuzzy
 msgid "Compressed dirty file"
-msgstr "Kompari dosierujojn"
+msgstr "Kunpremita malneto"
 
 msgid "Compression raw access"
-msgstr ""
+msgstr "Kruda atingo de kunpremitaj datumoj"
 
 msgid "Encrypted inode"
-msgstr ""
+msgstr "Ĉifrita inodo"
 
 msgid "Journaled data"
-msgstr ""
+msgstr "Protokolitaj datumoj"
 
-#, fuzzy
 msgid "Indexed directory"
-msgstr "dosierujon"
+msgstr "Indicitaj dosierujon"
 
 msgid "No tail merging"
-msgstr ""
+msgstr "Neniu kunfandigo de vosto-datumoj"
 
-#, fuzzy
 msgid "Top of directory hierarchies"
-msgstr "Montri dosierujajn g&randojn"
+msgstr "Supro de dosierujaj hierarkioj"
 
 msgid "Inode uses extents"
-msgstr ""
+msgstr "Inodo uzas etendaĵojn"
 
-#, fuzzy
 msgid "Huge_file"
-msgstr "dosieron"
+msgstr "Grandega_dosieron"
 
 msgid "No COW"
-msgstr ""
+msgstr "Neniu COW"
 
-#, fuzzy
 msgid "Casefolded file"
-msgstr "Fermi dosieron"
+msgstr "Dosiero kun faldita uskleco"
 
 msgid "Inode has inline data"
-msgstr ""
+msgstr "Inodo havas enliniajn datumojn"
 
 msgid "Project hierarchy"
-msgstr ""
+msgstr "Projekta hierarkio"
 
 msgid "Verity protected inode"
-msgstr ""
+msgstr "Vere protektita inodo"
 
 msgid "&Marked all"
 msgstr "&Marki ĉion"
@@ -2293,28 +2288,26 @@ msgstr "&Elekti markitajn"
 msgid "C&lear marked"
 msgstr "&Forviŝi markitajn"
 
-#, fuzzy
 msgid "Chattr command"
-msgstr "Alia komando"
+msgstr "Chattr-komando"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chattr \"%s\"\n"
 "%s"
 msgstr ""
-"Ne eblas trovi je \"%s\"\n"
+"Ne eblas plenumi la komandon chattr por \"%s\"\n"
 "%s"
 
-#, fuzzy
 msgid "Cannot change attributes on non-local filesystems"
-msgstr "Ne eblas plenumi komandojn en foraj dosiersistemoj"
+msgstr "Ne eblas ŝanĝi atributojn en foraj dosiersistemoj"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get flags of \"%s\"\n"
 "%s"
 msgstr ""
-"Ne eblas movi dosieron \"%s\" al \"%s\"\n"
+"Ne eblas akiri flagojn de \"%s\"\n"
 "%s"
 
 msgid "set &user ID on execution"
@@ -3347,14 +3340,14 @@ msgid "Links:      %d"
 msgstr "Ligiloj:        %d"
 
 msgid "Attributes: not supported"
-msgstr ""
+msgstr "Atributoj: ne komprenitaj"
 
 #, c-format
 msgid "Attributes: %s"
-msgstr ""
+msgstr "Atributoj: %s"
 
 msgid "Attributes: unavailable"
-msgstr ""
+msgstr "Atributoj: nedisponeblaj"
 
 #, c-format
 msgid "Mode:       %s (%04o)"
@@ -3476,7 +3469,7 @@ msgid "&Advanced chown"
 msgstr "&Altnivele ŝanĝi estrecon"
 
 msgid "Cha&ttr"
-msgstr ""
+msgstr "Ŝanĝi atri&buton"
 
 msgid "&Rename/Move"
 msgstr "Al&inomi/Movi"
@@ -3946,15 +3939,14 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "Hejma-dosieruja vojo ne estas absoluta"
 
-#, fuzzy
 msgid ""
 "GNU Midnight Commander\n"
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""
-"Midnight Commander de GNU jam estas\n"
-"plenumiĝi en ĉi tiu terminalo.\n"
-"Subŝelo estos malebligita."
+"Midnight Commander de GNU\n"
+"jam plenumiĝas en ĉi tiu terminalo.\n"
+"Subŝelo estos malaktivigita."
 
 #, c-format
 msgid ""
@@ -3997,70 +3989,60 @@ msgstr "La ŝelo estas aktiva. Ĉu senkonsidere eliri?"
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Averto: Ne eblas ŝanĝi al %s.\n"
 
-#, fuzzy
 msgid "With builtin Editor and Aspell support"
-msgstr "Kun interna tekstoredaktilo kaj literumilo\n"
+msgstr "Kun interna tekstoredaktilo kaj literumilo"
 
-#, fuzzy
 msgid "With builtin Editor"
-msgstr "Kun interna tekstoredaktilo\n"
+msgstr "Kun interna tekstoredaktilo"
 
-#, fuzzy
 msgid "With optional subshell support"
-msgstr "Kun laŭvola subŝelo\n"
+msgstr "Kun laŭvola subŝelo"
 
-#, fuzzy
 msgid "With subshell support as default"
-msgstr "Kun aŭtomata subŝelo\n"
+msgstr "Kun aŭtomata subŝelo"
 
-#, fuzzy
 msgid "With support for background operations"
-msgstr "Kun rego de fonaj operacioj\n"
+msgstr "Kun rego de fonaj operacioj"
 
-#, fuzzy
 msgid "With mouse support on xterm and Linux console"
-msgstr "Kun musa rego ĉe terminaloj xterm-aj kaj linuksaj\n"
+msgstr "Kun musa rego ĉe terminaloj xterm-aj kaj linuksaj"
 
-#, fuzzy
 msgid "With mouse support on xterm"
-msgstr "Kun musa rego ĉe xterm\n"
+msgstr "Kun musa rego ĉe xterm"
 
-#, fuzzy
 msgid "With support for X11 events"
-msgstr "Kun rego de X11-eventoj\n"
+msgstr "Kun rego de X11-eventoj"
 
-#, fuzzy
 msgid "With internationalization support"
-msgstr "Kun internaciiga rego\n"
+msgstr "Kun internaciiga rego"
 
-#, fuzzy
 msgid "With multiple codepages support"
-msgstr "Kun rego de pluraj kodpaĝoj\n"
+msgstr "Kun rego de pluraj kodpaĝoj"
 
 msgid "With ext2fs attributes support"
-msgstr ""
+msgstr "Kun rego de ext2fs-atributoj"
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"
 msgstr "Muntita kun GLib %d.%d.%d\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with S-Lang %s with terminfo database\n"
-msgstr "Uzanta la bibliotekon S-Lang kun terminfo-datumbazo\n"
+msgstr "Muntita kun S-Lang %s kun terminfo-datumbazo\n"
 
 #, c-format
 msgid "Built with ncurses %s\n"
-msgstr ""
+msgstr "Muntita kun ncurses %s\n"
 
 msgid "Built with ncurses (unknown version)"
-msgstr ""
+msgstr "Muntita kun ncurses (nekonata eldono)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with ncursesw %s\n"
-msgstr "Uzanta la bibliotekon ncursesw\n"
+msgstr "Muntita kun ncursesw %s\n"
 
 msgid "Built with ncursesw (unknown version)"
-msgstr ""
+msgstr "Muntita kun ncursesw (nekonata eldono)"
 
 msgid "Virtual File Systems:"
 msgstr "Virtualaj dosiersistemoj:"
@@ -4681,16 +4663,3 @@ msgstr "Ĉu deiri de la komenco?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Ne eblas atingi lokan kopion de /ftp://some.host/editme.txt"
-
-#~ msgid "Block is large, you may not be able to undo this action"
-#~ msgstr "Bloko estas tra granda, do vi eble ne povos malfari tiun agon"
-
-#~ msgid ""
-#~ "Current text was modified without a file save.\n"
-#~ "Continue discards these changes"
-#~ msgstr ""
-#~ "Aktuala teksto estis modifita sen dosiera konservado.\n"
-#~ "Daŭrigi forviŝos tiujn ŝanĝojn"
-
-#~ msgid "Using the ncurses library\n"
-#~ msgstr "Uzanta la bibliotekon ncurses\n"

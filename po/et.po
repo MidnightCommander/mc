@@ -4,13 +4,15 @@
 #
 # Translators:
 # Kristjan Räts <kristjanrats@gmail.com>, 2013-2016,2018-2019
+# Priit Jõerüüt <transifex@joeruut.com>, 2020
+# vaba <vaba@riseup.net>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-17 18:50+0300\n"
-"PO-Revision-Date: 2019-12-16 01:49+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"PO-Revision-Date: 2020-05-17 17:42+0000\n"
+"Last-Translator: Transifex Bot <>\n"
 "Language-Team: Estonian (http://www.transifex.com/mc/mc/language/et/)\n"
 "Language: et\n"
 "MIME-Version: 1.0\n"
@@ -487,11 +489,11 @@ msgstr "Keskkonnamuutujat TERM on määramata!\n"
 msgid "Cannot check SIGWINCH pipe"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Cannot create pipe for SIGWINCH: %s (%d)\n"
-msgstr "Nurjus toru voogude loomine"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1380,7 +1382,7 @@ msgid "&Close"
 msgstr "&Sulge"
 
 msgid "&History..."
-msgstr ""
+msgstr "&Ajalugu..."
 
 msgid "Save &as..."
 msgstr "Salvesta &kui..."
@@ -1665,9 +1667,8 @@ msgstr ""
 "Kasutajasõbralik tekstitoimeti, mis\n"
 "on loodud Midnight Commanderile."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2020 the Free Software Foundation"
-msgstr "Autoriõigus (c) 1996-2019 Free Software Foundation"
+msgstr "Autoriõigus (C) 1996-2020 the Free Software Foundation"
 
 msgid "About"
 msgstr "Programmist"
@@ -1818,13 +1819,10 @@ msgstr "Kohaliku koopia hankimine %s'st nurjus"
 msgid "The shell is already running a command"
 msgstr "Kest on hõivatud käsu täitmisega"
 
-#, fuzzy
 msgid ""
 "Not an xterm or Linux console;\n"
 "the subshell cannot be toggled."
 msgstr ""
-"Sa ei kasuta xtermi või Linuxi konsooli;\n"
-"paneele ei saa kuvada/peita."
 
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Midnight Commanderisse tagasipöördumiseks sisesta 'exit'"
@@ -1850,9 +1848,9 @@ msgstr "teised"
 msgid "Flag"
 msgstr "Lipp"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Permissions (octal): %o"
-msgstr "Õigused (8nd süsteemis):"
+msgstr ""
 
 msgid "Chown advanced command"
 msgstr "Keerukas omanikuvahetus"
@@ -2200,27 +2198,23 @@ msgstr "Kasutaja:"
 msgid "SMB authentication"
 msgstr "SMB autentimine"
 
-#, fuzzy
 msgid "Secure deletion"
-msgstr "Vah&eta valik"
+msgstr "Turvaline kustutamine"
 
-#, fuzzy
 msgid "Undelete"
-msgstr "Klahv Delete"
+msgstr "Taasta"
 
 msgid "Synchronous updates"
-msgstr ""
+msgstr "Sünkroonsed andnevärskendused"
 
-#, fuzzy
 msgid "Synchronous directory updates"
-msgstr "Kuva kataloogide &suurused"
+msgstr "Sünkroonsed kataloogivärskendused"
 
 msgid "Immutable"
 msgstr ""
 
-#, fuzzy
 msgid "Append only"
-msgstr "&Lisa"
+msgstr ""
 
 msgid "No dump"
 msgstr ""
@@ -2234,46 +2228,41 @@ msgstr ""
 msgid "Compressed clusters"
 msgstr ""
 
-#, fuzzy
 msgid "Compressed dirty file"
-msgstr "Kataloogide võrdlemine"
+msgstr ""
 
 msgid "Compression raw access"
 msgstr ""
 
 msgid "Encrypted inode"
-msgstr ""
+msgstr "Krüptitud i-kirje"
 
 msgid "Journaled data"
 msgstr ""
 
-#, fuzzy
 msgid "Indexed directory"
-msgstr "kataloog"
+msgstr "Indekseeritud kataloog"
 
 msgid "No tail merging"
 msgstr ""
 
-#, fuzzy
 msgid "Top of directory hierarchies"
-msgstr "Kuva kataloogide &suurused"
+msgstr ""
 
 msgid "Inode uses extents"
 msgstr ""
 
-#, fuzzy
 msgid "Huge_file"
-msgstr "fail"
+msgstr ""
 
 msgid "No COW"
 msgstr ""
 
-#, fuzzy
 msgid "Casefolded file"
-msgstr "Sulge fail"
+msgstr ""
 
 msgid "Inode has inline data"
-msgstr ""
+msgstr "I-kirjel on põimitud andmeid"
 
 msgid "Project hierarchy"
 msgstr ""
@@ -2290,29 +2279,23 @@ msgstr "&Määra valik"
 msgid "C&lear marked"
 msgstr "Tü&hista valik"
 
-#, fuzzy
 msgid "Chattr command"
-msgstr "Muu käsk"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chattr \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" attribuutide päring nurjus\n"
-"%s"
 
-#, fuzzy
 msgid "Cannot change attributes on non-local filesystems"
-msgstr "Käske ei saa käivitada kaugfailisüsteemidel"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get flags of \"%s\"\n"
 "%s"
 msgstr ""
-"Faili \"%s\" teisaldamine kataloogi \"%s\" nurjus\n"
-"%s"
 
 msgid "set &user ID on execution"
 msgstr "kas&utaja ID käivitamisel"
@@ -2605,13 +2588,13 @@ msgid "DialogTitle|Delete"
 msgstr "DialogTitle|Kustutamine"
 
 msgid "FileOperation|Copy"
-msgstr "FileOperation|Kopeerimine"
+msgstr "FileOperation|Kopeeri"
 
 msgid "FileOperation|Move"
-msgstr "FileOperation|Teisaldamine"
+msgstr "FileOperation|Teisalda"
 
 msgid "FileOperation|Delete"
-msgstr "FileOperation|Kustutamine"
+msgstr "FileOperation|Kustuta"
 
 #, no-c-format
 msgid "%o %f%n\"%s\"%m"
@@ -3074,7 +3057,7 @@ msgid "to:"
 msgstr "asukohta:"
 
 msgid "Follow &links"
-msgstr "&Viitade järgimine"
+msgstr "Järgi &viitasid"
 
 msgid "Preserve &attributes"
 msgstr "Säilita &atribuudid"
@@ -3526,7 +3509,7 @@ msgid "Command &history"
 msgstr "Käskude a&jalugu"
 
 msgid "Viewed/edited files hi&story"
-msgstr ""
+msgstr "Vaadatud/muudetud failide ajalugu"
 
 msgid "Di&rectory hotlist"
 msgstr "Katal&oogide kiirvalik"
@@ -3942,15 +3925,11 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "Kodukataloog ei ole absoluutne"
 
-#, fuzzy
 msgid ""
 "GNU Midnight Commander\n"
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""
-"GNU Midnight Commander juba\n"
-"töötab sellel terminalil.\n"
-"Alamkesta tugi keelatakse."
 
 #, c-format
 msgid ""
@@ -3993,45 +3972,35 @@ msgstr "Shell on veel aktiivne. Kas soovid ikkagi lõpetada?"
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Hoiatus: sisenemine kataloogi %s nurjus.\n"
 
-#, fuzzy
 msgid "With builtin Editor and Aspell support"
-msgstr "Sisseehitatud toimeti ja Aspelli toega\n"
+msgstr ""
 
-#, fuzzy
 msgid "With builtin Editor"
-msgstr "Sisseehitatud toimetiga\n"
+msgstr ""
 
-#, fuzzy
 msgid "With optional subshell support"
-msgstr "Valikulise alamkesta toega\n"
+msgstr ""
 
-#, fuzzy
 msgid "With subshell support as default"
-msgstr "Alamkesta tugi vaikeväärtusena\n"
+msgstr ""
 
-#, fuzzy
 msgid "With support for background operations"
-msgstr "Taustategevuste toega\n"
+msgstr ""
 
-#, fuzzy
 msgid "With mouse support on xterm and Linux console"
-msgstr "Hiire toega xtermis ja Linuxi konsoolil\n"
+msgstr ""
 
-#, fuzzy
 msgid "With mouse support on xterm"
-msgstr "Hiire toega xtermis\n"
+msgstr ""
 
-#, fuzzy
 msgid "With support for X11 events"
-msgstr "X11 sündmuste toega\n"
+msgstr ""
 
-#, fuzzy
 msgid "With internationalization support"
-msgstr "Internatsionaliseerimise toega\n"
+msgstr ""
 
-#, fuzzy
 msgid "With multiple codepages support"
-msgstr "Mitme kooditabeli toega\n"
+msgstr ""
 
 msgid "With ext2fs attributes support"
 msgstr ""
@@ -4040,9 +4009,9 @@ msgstr ""
 msgid "Built with GLib %d.%d.%d\n"
 msgstr "Ehitatud GLib teegiga %d.%d.%d\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with S-Lang %s with terminfo database\n"
-msgstr "Kasutatakse S-Lang teeki terminfo andmebaasiga\n"
+msgstr ""
 
 #, c-format
 msgid "Built with ncurses %s\n"
@@ -4051,9 +4020,9 @@ msgstr ""
 msgid "Built with ncurses (unknown version)"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with ncursesw %s\n"
-msgstr "Kasutatakse teeki ncursesw\n"
+msgstr ""
 
 msgid "Built with ncursesw (unknown version)"
 msgstr ""
@@ -4676,16 +4645,3 @@ msgstr "Kas jätkata algusest?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kohaliku koopia hankimine failist /ftp://some.host/editme.txt nurjus"
-
-#~ msgid "Block is large, you may not be able to undo this action"
-#~ msgstr "Plokk on suur, selle muudatuse tagasi võtmine võib nurjuda."
-
-#~ msgid ""
-#~ "Current text was modified without a file save.\n"
-#~ "Continue discards these changes"
-#~ msgstr ""
-#~ "Tekstis on salvestamata muudatusi.\n"
-#~ "Jätkamine kustutab need muudatused"
-
-#~ msgid "Using the ncurses library\n"
-#~ msgstr "Kasutatakse teeki ncurses\n"

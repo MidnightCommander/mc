@@ -6,15 +6,15 @@
 # Efstathios Iosifidis <iefstathios@gmail.com>, 2015
 # Panos Bouklis <panos@echidna-band.com>, 2012
 # Slava Zanko <slavazanko@gmail.com>, 2011
-# Thodoris Arvanitidis <inactive+watchdog@transifex.com>, 2015
+# 779c708ac0843f43a54f0695e3271fdc_a60cce1 <746f1f7083ae1685f297c8b639879e77_312742>, 2015
 # Yannis Anthymidis, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-17 18:50+0300\n"
-"PO-Revision-Date: 2019-12-16 01:49+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"PO-Revision-Date: 2020-05-17 17:42+0000\n"
+"Last-Translator: Transifex Bot <>\n"
 "Language-Team: Greek (http://www.transifex.com/mc/mc/language/el/)\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
@@ -479,11 +479,11 @@ msgstr ""
 msgid "Cannot check SIGWINCH pipe"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Cannot create pipe for SIGWINCH: %s (%d)\n"
-msgstr "Αδύνατη η δημιουργία προσωρινού καταλόγου %s: %s\n"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1787,9 +1787,9 @@ msgstr "άλλοι"
 msgid "Flag"
 msgstr "Σημαία"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Permissions (octal): %o"
-msgstr "&Άδειες"
+msgstr ""
 
 msgid "Chown advanced command"
 msgstr "Προχωρημένη εντολή chown"
@@ -2134,20 +2134,17 @@ msgstr "Όνομα χρήστη:"
 msgid "SMB authentication"
 msgstr ""
 
-#, fuzzy
 msgid "Secure deletion"
-msgstr "&Αντιστροφή επιλογής"
+msgstr ""
 
-#, fuzzy
 msgid "Undelete"
-msgstr "Πλήκτρο Delete"
+msgstr ""
 
 msgid "Synchronous updates"
 msgstr ""
 
-#, fuzzy
 msgid "Synchronous directory updates"
-msgstr "Εμ&φάνιση μεγεθών καταλόγων"
+msgstr ""
 
 msgid "Immutable"
 msgstr ""
@@ -2167,9 +2164,8 @@ msgstr ""
 msgid "Compressed clusters"
 msgstr ""
 
-#, fuzzy
 msgid "Compressed dirty file"
-msgstr "Σύγκριση καταλόγων"
+msgstr ""
 
 msgid "Compression raw access"
 msgstr ""
@@ -2180,30 +2176,26 @@ msgstr ""
 msgid "Journaled data"
 msgstr ""
 
-#, fuzzy
 msgid "Indexed directory"
-msgstr "κατάλογος"
+msgstr ""
 
 msgid "No tail merging"
 msgstr ""
 
-#, fuzzy
 msgid "Top of directory hierarchies"
-msgstr "Εμ&φάνιση μεγεθών καταλόγων"
+msgstr ""
 
 msgid "Inode uses extents"
 msgstr ""
 
-#, fuzzy
 msgid "Huge_file"
-msgstr "αρχείο"
+msgstr ""
 
 msgid "No COW"
 msgstr ""
 
-#, fuzzy
 msgid "Casefolded file"
-msgstr "Κλείσιμο αρχείου"
+msgstr ""
 
 msgid "Inode has inline data"
 msgstr ""
@@ -2223,29 +2215,23 @@ msgstr "&Ρύθμιση επιλεγμένων"
 msgid "C&lear marked"
 msgstr "&Καθαρισμός επιλεγμένων"
 
-#, fuzzy
 msgid "Chattr command"
-msgstr "Άλλη εντολή"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chattr \"%s\"\n"
 "%s"
 msgstr ""
-"Αδυναμία chmod \"%s\"\n"
-"%s"
 
-#, fuzzy
 msgid "Cannot change attributes on non-local filesystems"
-msgstr "Αδυναμία εκτέλεσης εντολών σε μη τοπικά συστήματα αρχείων"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get flags of \"%s\"\n"
 "%s"
 msgstr ""
-"Αδυναμία μετακίνησης αρχείου \"%s\" στο \"%s\"\n"
-"%s"
 
 msgid "set &user ID on execution"
 msgstr ""
@@ -3883,40 +3869,32 @@ msgstr "Το κέλυφος είναι ακόμα ενεργό. Έξοδος π�
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Προειδοποίηση: Αδυναμία αλλαγής σε %s.\n"
 
-#, fuzzy
 msgid "With builtin Editor and Aspell support"
-msgstr "Με ενσωματωμένο επεξεργαστή\n"
+msgstr ""
 
-#, fuzzy
 msgid "With builtin Editor"
-msgstr "Με ενσωματωμένο επεξεργαστή\n"
+msgstr ""
 
 msgid "With optional subshell support"
 msgstr ""
 
-#, fuzzy
 msgid "With subshell support as default"
-msgstr "Με υποστήριξη ποντικιού σε xterm\n"
+msgstr ""
 
-#, fuzzy
 msgid "With support for background operations"
-msgstr "Με υποστήριξη για λειτουργίες παρασκηνίου\n"
+msgstr ""
 
-#, fuzzy
 msgid "With mouse support on xterm and Linux console"
-msgstr "Με υποστήριξη ποντικιού σε κονσόλα xterm και Linux\n"
+msgstr ""
 
-#, fuzzy
 msgid "With mouse support on xterm"
-msgstr "Με υποστήριξη ποντικιού σε xterm\n"
+msgstr ""
 
-#, fuzzy
 msgid "With support for X11 events"
-msgstr "Με υποστήριξη γεγονότων X11\n"
+msgstr ""
 
-#, fuzzy
 msgid "With internationalization support"
-msgstr "Με υποστήριξη διεθνοποίησης\n"
+msgstr ""
 
 msgid "With multiple codepages support"
 msgstr ""
@@ -3928,9 +3906,9 @@ msgstr ""
 msgid "Built with GLib %d.%d.%d\n"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with S-Lang %s with terminfo database\n"
-msgstr "Με χρήση της βιβλιοθήκης S-Lang με βάση δεδομένων terminfo\n"
+msgstr ""
 
 #, c-format
 msgid "Built with ncurses %s\n"
@@ -3939,9 +3917,9 @@ msgstr ""
 msgid "Built with ncurses (unknown version)"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with ncursesw %s\n"
-msgstr "Με χρήση της βιβλιοθήκης ncursesw\n"
+msgstr ""
 
 msgid "Built with ncursesw (unknown version)"
 msgstr ""
@@ -4543,6 +4521,3 @@ msgstr "Συνέχεια από την αρχή;"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "Using the ncurses library\n"
-#~ msgstr "Με χρήση της βιβλιοθήκης ncurses\n"

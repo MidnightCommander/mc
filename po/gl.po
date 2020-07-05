@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-05-17 18:50+0300\n"
-"PO-Revision-Date: 2019-12-16 01:49+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"PO-Revision-Date: 2020-05-17 17:42+0000\n"
+"Last-Translator: Transifex Bot <>\n"
 "Language-Team: Galician (http://www.transifex.com/mc/mc/language/gl/)\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
@@ -494,11 +494,11 @@ msgstr "A variábel de contorno TERM está sen definir!\n"
 msgid "Cannot check SIGWINCH pipe"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Cannot create pipe for SIGWINCH: %s (%d)\n"
-msgstr "Non é posíbel crear a canalización de fluxos"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1675,9 +1675,8 @@ msgstr ""
 "Un editor de texto de uso amigábel\n"
 "escrito para o Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2020 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2019 a Free Software Foundation"
+msgstr ""
 
 msgid "About"
 msgstr "Sobre"
@@ -1829,13 +1828,10 @@ msgstr "Non é posíbel obter unha copia local de %s"
 msgid "The shell is already running a command"
 msgstr "O terminal xa esta executando unha orde"
 
-#, fuzzy
 msgid ""
 "Not an xterm or Linux console;\n"
 "the subshell cannot be toggled."
 msgstr ""
-"Non se está usando nin xterm nin a consola Linux;\n"
-"os paneis non se poden agochar."
 
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Escriba «exit» para volver ao Midnight Commander"
@@ -1861,9 +1857,9 @@ msgstr "outros"
 msgid "Flag"
 msgstr "Marca"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Permissions (octal): %o"
-msgstr "Permisos (octal):"
+msgstr ""
 
 msgid "Chown advanced command"
 msgstr "Cambiar propietario e permisos"
@@ -2213,27 +2209,23 @@ msgstr "Usuario:"
 msgid "SMB authentication"
 msgstr "Autenticación SMB"
 
-#, fuzzy
 msgid "Secure deletion"
-msgstr "&Inverter a selección"
+msgstr ""
 
-#, fuzzy
 msgid "Undelete"
-msgstr "Eliminar"
+msgstr ""
 
 msgid "Synchronous updates"
 msgstr ""
 
-#, fuzzy
 msgid "Synchronous directory updates"
-msgstr "Mostrar &Tamaño dos directorios"
+msgstr ""
 
 msgid "Immutable"
 msgstr ""
 
-#, fuzzy
 msgid "Append only"
-msgstr "Engadir ao &Final"
+msgstr ""
 
 msgid "No dump"
 msgstr ""
@@ -2247,9 +2239,8 @@ msgstr ""
 msgid "Compressed clusters"
 msgstr ""
 
-#, fuzzy
 msgid "Compressed dirty file"
-msgstr "Comparar directorios"
+msgstr ""
 
 msgid "Compression raw access"
 msgstr ""
@@ -2260,30 +2251,26 @@ msgstr ""
 msgid "Journaled data"
 msgstr ""
 
-#, fuzzy
 msgid "Indexed directory"
-msgstr "directorio"
+msgstr ""
 
 msgid "No tail merging"
 msgstr ""
 
-#, fuzzy
 msgid "Top of directory hierarchies"
-msgstr "Mostrar &Tamaño dos directorios"
+msgstr ""
 
 msgid "Inode uses extents"
 msgstr ""
 
-#, fuzzy
 msgid "Huge_file"
-msgstr "ficheiro"
+msgstr ""
 
 msgid "No COW"
 msgstr ""
 
-#, fuzzy
 msgid "Casefolded file"
-msgstr "Pechar o ficheiro"
+msgstr ""
 
 msgid "Inode has inline data"
 msgstr ""
@@ -2303,29 +2290,23 @@ msgstr "&Estabelecer marcados"
 msgid "C&lear marked"
 msgstr "&Limpar marcados"
 
-#, fuzzy
 msgid "Chattr command"
-msgstr "Outra orde"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chattr \"%s\"\n"
 "%s"
 msgstr ""
-"Non é posíbel identificar «%s»\n"
-"%s"
 
-#, fuzzy
 msgid "Cannot change attributes on non-local filesystems"
-msgstr "Non é posíbel executar ordes desde sistemas de ficheiros non locais"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get flags of \"%s\"\n"
 "%s"
 msgstr ""
-"Non é posíbel mover o ficheiro «%s» a «%s»\n"
-"%s"
 
 msgid "set &user ID on execution"
 msgstr "Estabelecer o ID do &Ususrio na execución"
@@ -3957,15 +3938,11 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "A ruta do directorio de inicio non é absoluta"
 
-#, fuzzy
 msgid ""
 "GNU Midnight Commander\n"
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""
-"GNU Midnight Commander xa se está\n"
-"executando neste terminal.\n"
-"A compatibilidade de subterminal quedará desactivada."
 
 #, c-format
 msgid ""
@@ -4008,45 +3985,35 @@ msgstr "O terminal aínda está activo. Saír de todos xeitos?"
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Coidado: Non é posíbel cambiar a %s.\n"
 
-#, fuzzy
 msgid "With builtin Editor and Aspell support"
-msgstr "Co editor interno e a axuda do Aspell\n"
+msgstr ""
 
-#, fuzzy
 msgid "With builtin Editor"
-msgstr "Editor de texto propio incluído\n"
+msgstr ""
 
-#, fuzzy
 msgid "With optional subshell support"
-msgstr "Con compatibilidade opcional coa subterminal\n"
+msgstr ""
 
-#, fuzzy
 msgid "With subshell support as default"
-msgstr "Con compatibilidade predeterminada coa subterminal\n"
+msgstr ""
 
-#, fuzzy
 msgid "With support for background operations"
-msgstr "Compatibilidade para operacións en 2º plano\n"
+msgstr ""
 
-#, fuzzy
 msgid "With mouse support on xterm and Linux console"
-msgstr "Compatibilidade para rato en xterm e consola Linux\n"
+msgstr ""
 
-#, fuzzy
 msgid "With mouse support on xterm"
-msgstr "Compatibilidade para rato en xterm\n"
+msgstr ""
 
-#, fuzzy
 msgid "With support for X11 events"
-msgstr "Compatibilidade para accións X11\n"
+msgstr ""
 
-#, fuzzy
 msgid "With internationalization support"
-msgstr "Compatibilidade para internacionalización\n"
+msgstr ""
 
-#, fuzzy
 msgid "With multiple codepages support"
-msgstr "Compatibilidade para cambio de xogos de caracteres\n"
+msgstr ""
 
 msgid "With ext2fs attributes support"
 msgstr ""
@@ -4055,9 +4022,9 @@ msgstr ""
 msgid "Built with GLib %d.%d.%d\n"
 msgstr "Construido con GLib %d.%d.%d\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with S-Lang %s with terminfo database\n"
-msgstr "Empregando a biblioteca S-Lang coa base de datos terminfo\n"
+msgstr ""
 
 #, c-format
 msgid "Built with ncurses %s\n"
@@ -4066,11 +4033,9 @@ msgstr ""
 msgid "Built with ncurses (unknown version)"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with ncursesw %s\n"
 msgstr ""
-"Empregando a biblioteca ncursesw\n"
-"\n"
 
 msgid "Built with ncursesw (unknown version)"
 msgstr ""
@@ -4693,16 +4658,3 @@ msgstr "Continuar desde o principio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Non é posíbel obter unha copia local de /ftp://some.host/editme.txt"
-
-#~ msgid "Block is large, you may not be able to undo this action"
-#~ msgstr "O bloque é moi grande, pode que non se poida desfacer esta acción"
-
-#~ msgid ""
-#~ "Current text was modified without a file save.\n"
-#~ "Continue discards these changes"
-#~ msgstr ""
-#~ "O texto actual foi modificado e non foi gardado.\n"
-#~ "Continuar desbotará estes cambios."
-
-#~ msgid "Using the ncurses library\n"
-#~ msgstr "Empregando a biblioteca ncurses\n"
