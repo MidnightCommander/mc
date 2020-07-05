@@ -1,4 +1,4 @@
-[main]
+[filemanager]
 ChangePanel = tab; ctrl-i
 Help = f1
 UserMenu = f2
@@ -57,7 +57,7 @@ ScreenList = alt-prime
 EditorViewerHistory = alt-shift-e
 ExtendedKeyMap = ctrl-x
 
-[main:xmap]
+[filemanager:xmap]
 ChangeMode = c
 ChangeOwn = o
 ChangeAttributes = e

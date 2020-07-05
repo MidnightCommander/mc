@@ -34,8 +34,8 @@
 
 /*** global variables ****************************************************************************/
 
-GArray *main_keymap = NULL;
-GArray *main_x_keymap = NULL;
+GArray *filemanager_keymap = NULL;
+GArray *filemanager_x_keymap = NULL;
 GArray *panel_keymap = NULL;
 GArray *dialog_keymap = NULL;
 GArray *menu_keymap = NULL;
@@ -57,8 +57,8 @@ GArray *viewer_hex_keymap = NULL;
 GArray *diff_keymap = NULL;
 #endif
 
-const global_keymap_t *main_map = NULL;
-const global_keymap_t *main_x_map = NULL;
+const global_keymap_t *filemanager_map = NULL;
+const global_keymap_t *filemanager_x_map = NULL;
 const global_keymap_t *panel_map = NULL;
 const global_keymap_t *tree_map = NULL;
 const global_keymap_t *help_map = NULL;
@@ -89,7 +89,7 @@ typedef struct global_keymap_ini_t
 /*** file scope variables ************************************************************************/
 
 /* midnight */
-static const global_keymap_ini_t default_main_keymap[] = {
+static const global_keymap_ini_t default_filemanager_keymap[] = {
     {"ChangePanel", "tab; ctrl-i"},
     {"Help", "f1"},
     {"UserMenu", "f2"},
@@ -143,7 +143,7 @@ static const global_keymap_ini_t default_main_keymap[] = {
     {NULL, NULL}
 };
 
-static const global_keymap_ini_t default_main_x_keymap[] = {
+static const global_keymap_ini_t default_filemanager_x_keymap[] = {
     {"CompareDirs", "d"},
 #ifdef USE_DIFF_VIEW
     {"CompareFiles", "ctrl-d"},
@@ -641,8 +641,9 @@ create_default_keymap (void)
 
     keymap = mc_config_init (NULL, TRUE);
 
-    create_default_keymap_section (keymap, KEYMAP_SECTION_MAIN, default_main_keymap);
-    create_default_keymap_section (keymap, KEYMAP_SECTION_MAIN_EXT, default_main_x_keymap);
+    create_default_keymap_section (keymap, KEYMAP_SECTION_FILEMANAGER, default_filemanager_keymap);
+    create_default_keymap_section (keymap, KEYMAP_SECTION_FILEMANAGER_EXT,
+                                   default_filemanager_x_keymap);
     create_default_keymap_section (keymap, KEYMAP_SECTION_PANEL, default_panel_keymap);
     create_default_keymap_section (keymap, KEYMAP_SECTION_DIALOG, default_dialog_keymap);
     create_default_keymap_section (keymap, KEYMAP_SECTION_MENU, default_menu_keymap);

@@ -1355,8 +1355,8 @@ load_keymap_defs (gboolean load_from_file)
     km##_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t)); \
     load_keymap_from_section (KEYMAP_SECTION_##s, km##_keymap, mc_global_keymap)
 
-        LOAD_KEYMAP (MAIN, main);
-        LOAD_KEYMAP (MAIN_EXT, main_x);
+        LOAD_KEYMAP (FILEMANAGER, filemanager);
+        LOAD_KEYMAP (FILEMANAGER_EXT, filemanager_x);
         LOAD_KEYMAP (PANEL, panel);
         LOAD_KEYMAP (DIALOG, dialog);
         LOAD_KEYMAP (MENU, menu);
@@ -1385,8 +1385,8 @@ load_keymap_defs (gboolean load_from_file)
 #define SET_MAP(m) \
     m##_map = (global_keymap_t *) m##_keymap->data
 
-    SET_MAP (main);
-    SET_MAP (main_x);
+    SET_MAP (filemanager);
+    SET_MAP (filemanager_x);
     SET_MAP (panel);
     SET_MAP (dialog);
     SET_MAP (menu);
@@ -1420,8 +1420,8 @@ free_keymap_defs (void)
     if (km##_keymap != NULL) \
         g_array_free (km##_keymap, TRUE)
 
-    FREE_KEYMAP (main);
-    FREE_KEYMAP (main_x);
+    FREE_KEYMAP (filemanager);
+    FREE_KEYMAP (filemanager_x);
     FREE_KEYMAP (panel);
     FREE_KEYMAP (dialog);
     FREE_KEYMAP (menu);
