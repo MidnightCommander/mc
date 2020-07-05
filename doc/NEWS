@@ -1,3 +1,64 @@
+Version 4.8.25
+
+- Core
+
+  * Minimal version of GLib is 2.30.0
+  * Avoid subshell warning for standalone mcedit/mcview/mcdiffview run from mc (#4056)
+  * Implement chattr command (change ext{2,3,4}fs extended attributes). Default shortcut is "C-x e" (#3847)
+  * Implement a WGroup widget -- a base class for widgets which contain other widgets (#2919, #4075)
+  * Implement key bindings for radiobuttons (#212)
+
+- VFS
+
+  * RPM VFS improvements:
+    * Support weak dependency tags: ENHANCES, SUGGESTS, RECOMMENDS, SUPPLEMENTS (#4091)
+
+- Editor
+
+  * Improvements of syntax highlighting:
+    * php (#4060)
+    * tcl: add shebangs with wish and tclsh (#4062)
+    * Cobol (#1987)
+    * Verilog/SystemVerilog (#4087)
+  * New syntax highlighting:
+    * Kotlin (#4088)
+    * ino (Arduino IDE and a number of other IDEs) (#4098)
+
+- Misc
+
+  * Code cleanup (#4050, #4085)
+  * Add support for opus audio (#4061)
+  * mc-wrapper: don't cd to the same directory (#3355)
+  * Improve archive support: more binaries to view archive content (#4086)
+    * lha: jlha, lhasa
+    * arj: 7za
+    * cab: 7za
+    * zip; 7z
+    * zipx: 7za
+    * iso: 7za
+  * Clean up in video.sh handler (#4045)
+    * RealPlayer is a proprietary application which can't be installed in most distros and has long been abandoned.
+    * gtv hasn't been developed since 2003.
+    * xanim barely plays anything.
+  * Various fixups and updates of man page
+
+- Fixes
+
+  * FTBFS on OSes w/o O_CLOEXEC (#4052)
+  * FTBFS with glib2 >= 2.63.3 (#4053)
+  * Undefined "__linux__" macro on non-Linux systems (#4058)
+  * Mouse is not handled with ncurses-6 (#3964)
+  * Mouse is not handled with S-Lang on some old terminal emulators (#4063)
+  * Terminal size is always 80x24 in subshell on Solaris 11.4 SPARC (#4099)
+  * Double clicking on empty area of file panel executes last item (#3722)
+  * Garbage in input line history (#4064)
+  * Speed of file copy is not displayed for single file (#4081)
+  * mcedit: blank screen with invisible error (#4057)
+  * mcedit: broken syntax highlighting for shell scripts (#4054)
+  * VFS: broken browsing of .deb packages (#4055)
+  * mc.lib installed twice (#4070)
+
+
 Version 4.8.24
 
 - Core
