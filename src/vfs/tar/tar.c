@@ -257,11 +257,12 @@ union block
 
 enum archive_format
 {
-    TAR_UNKNOWN = 0,
-    TAR_V7,
-    TAR_USTAR,
-    TAR_POSIX,
-    TAR_GNU
+    TAR_UNKNOWN = 0,            /* format to be decided later */
+    TAR_V7,                     /* old V7 tar format */
+    TAR_OLDGNU,                 /* GNU format as per before tar 1.12 */
+    TAR_USTAR,                  /* POSIX.1-1988 (ustar) format */
+    TAR_POSIX,                  /* POSIX.1-2001 format */
+    TAR_GNU                     /* Almost same as TAR_OLDGNU */
 };
 
 typedef enum
@@ -675,8 +676,12 @@ tar_checksum (const union block *header)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-tar_decode_header (union block *header, tar_super_t * arch)
+tar_decode_header (union block *header, tar_super_t * arch, struct stat *st)
 {
+    gboolean hbits = FALSE;
+
+    st->st_mode = MODE_FROM_HEADER (header->header.mode, &hbits);
+
     /*
      * Try to determine the archive format.
      */
@@ -690,7 +695,9 @@ tar_decode_header (union block *header, tar_super_t * arch)
                 arch->type = TAR_USTAR;
         }
         else if (strcmp (header->buffer + offsetof (struct posix_header, magic), OLDGNU_MAGIC) == 0)
-            arch->type = TAR_GNU;
+            arch->type = hbits ? TAR_OLDGNU : TAR_GNU;
+        else
+            arch->type = TAR_V7;
     }
 
     /*
@@ -717,11 +724,9 @@ tar_decode_header (union block *header, tar_super_t * arch)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-tar_fill_stat (struct vfs_s_super *archive, struct stat *st, union block *header, size_t h_size)
+tar_fill_stat (struct vfs_s_super *archive, struct stat *st, union block *header)
 {
     tar_super_t *arch = TAR_SUPER (archive);
-
-    st->st_mode = MODE_FROM_HEADER (header->header.mode, NULL);
 
     /* Adjust st->st_mode because there are tar-files with
      * typeflag==SYMTYPE and S_ISLNK(mod)==0. I don't
@@ -751,6 +756,7 @@ tar_fill_stat (struct vfs_s_super *archive, struct stat *st, union block *header
     case TAR_USTAR:
     case TAR_POSIX:
     case TAR_GNU:
+    case TAR_OLDGNU:
         /* *INDENT-OFF* */
         st->st_uid = *header->header.uname != '\0'
             ? (uid_t) vfs_finduid (header->header.uname)
@@ -781,14 +787,13 @@ tar_fill_stat (struct vfs_s_super *archive, struct stat *st, union block *header
         break;
     }
 
-    st->st_size = h_size;
 #ifdef HAVE_STRUCT_STAT_ST_MTIM
     st->st_atim.tv_nsec = st->st_mtim.tv_nsec = st->st_ctim.tv_nsec = 0;
 #endif
     st->st_mtime = TIME_FROM_HEADER (header->header.mtime);
     st->st_atime = 0;
     st->st_ctime = 0;
-    if (arch->type == TAR_GNU)
+    if (arch->type == TAR_GNU || arch->type == TAR_OLDGNU)
     {
         st->st_atime = TIME_FROM_HEADER (header->oldgnu_header.atime);
         st->st_ctime = TIME_FROM_HEADER (header->oldgnu_header.ctime);
@@ -808,6 +813,7 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
     tar_super_t *arch = TAR_SUPER (archive);
     read_header checksum_status;
     union block *header;
+    struct stat st;
     static char *next_long_name = NULL, *next_long_link = NULL;
 
     while (TRUE)
@@ -820,12 +826,15 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
         if (checksum_status != HEADER_SUCCESS)
             return checksum_status;
 
-        tar_decode_header (header, arch);
-
         if (header->header.typeflag == LNKTYPE || header->header.typeflag == DIRTYPE)
             *h_size = 0;        /* Links 0 size on tape */
         else
             *h_size = OFF_FROM_HEADER (header->header.size);
+
+        memset (&st, 0, sizeof (st));
+        st.st_size = *h_size;
+        tar_decode_header (header, arch, &st);
+        tar_fill_stat (archive, &st, header);
 
         /* Skip over pax extended header and global extended header records. */
         if (header->header.typeflag == XHDTYPE || header->header.typeflag == XGLTYPE)
@@ -888,7 +897,6 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
     }
 
     {
-        struct stat st;
         struct vfs_s_entry *entry;
         struct vfs_s_inode *inode = NULL, *parent;
         off_t data_position;
@@ -931,6 +939,7 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
             }
             break;
         case TAR_GNU:
+        case TAR_OLDGNU:
             if (next_long_name != NULL)
                 current_file_name = next_long_name;
             break;
@@ -983,9 +992,6 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
                 goto done;
             }
         }
-
-        memset (&st, 0, sizeof (st));
-        tar_fill_stat (archive, &st, header, *h_size);
 
         if (S_ISDIR (st.st_mode))
         {
