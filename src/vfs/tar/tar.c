@@ -674,11 +674,9 @@ tar_checksum (const union block *header)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static size_t
+static void
 tar_decode_header (union block *header, tar_super_t * arch)
 {
-    size_t size;
-
     /*
      * Try to determine the archive format.
      */
@@ -711,19 +709,9 @@ tar_decode_header (union block *header, tar_super_t * arch)
             header->header.typeflag = DIRTYPE;
     }
 
-    /*
-     * Good block.  Decode file size and return.
-     */
-    if (header->header.typeflag == LNKTYPE || header->header.typeflag == DIRTYPE)
-        size = 0;               /* Links 0 size on tape */
-    else
-        size = OFF_FROM_HEADER (header->header.size);
-
     if (header->header.typeflag == GNUTYPE_DUMPDIR)
         if (arch->type == TAR_UNKNOWN)
             arch->type = TAR_GNU;
-
-    return size;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -832,7 +820,12 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
         if (checksum_status != HEADER_SUCCESS)
             return checksum_status;
 
-        *h_size = tar_decode_header (header, arch);
+        tar_decode_header (header, arch);
+
+        if (header->header.typeflag == LNKTYPE || header->header.typeflag == DIRTYPE)
+            *h_size = 0;        /* Links 0 size on tape */
+        else
+            *h_size = OFF_FROM_HEADER (header->header.size);
 
         /* Skip over pax extended header and global extended header records. */
         if (header->header.typeflag == XHDTYPE || header->header.typeflag == XGLTYPE)
