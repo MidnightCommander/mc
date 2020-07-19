@@ -249,6 +249,7 @@ mc_skin_color_cache_init (void)
     REVERSE_COLOR = mc_skin_color_get ("core", "reverse");
     HEADER_COLOR = mc_skin_color_get ("core", "header");
     COMMAND_MARK_COLOR = mc_skin_color_get ("core", "commandlinemark");
+    SHADOW_COLOR = mc_skin_color_get ("core", "shadow");
 
     COLOR_NORMAL = mc_skin_color_get ("dialog", "_default_");
     COLOR_FOCUS = mc_skin_color_get ("dialog", "dfocus");

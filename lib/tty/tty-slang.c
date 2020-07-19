@@ -623,6 +623,15 @@ tty_fill_region (int y, int x, int rows, int cols, unsigned char ch)
 /* --------------------------------------------------------------------------------------------- */
 
 void
+tty_colorize_area (int y, int x, int rows, int cols, int color)
+{
+    if (use_colors)
+        SLsmg_set_color_in_region (color, y, x, rows, cols);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
 tty_set_alt_charset (gboolean alt_charset)
 {
     SLsmg_set_char_set ((int) alt_charset);

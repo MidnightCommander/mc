@@ -360,6 +360,7 @@ static const struct
 #endif /* USE_INTERNAL_EDIT */
     { "editor_ask_filename_before_edit", &editor_ask_filename_before_edit },
     { "nice_rotating_dash", &nice_rotating_dash },
+    { "shadows", &mc_global.tty.shadows },
     { "mcview_remember_file_position", &mcview_remember_file_position },
     { "auto_fill_mkdir_name", &auto_fill_mkdir_name },
     { "copymove_persistent_attr", &copymove_persistent_attr },

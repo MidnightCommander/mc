@@ -2113,13 +2113,17 @@ overwriting files, execution by pressing enter, quitting the program,
 directory hotlist entries deletion and history cleanup.
 .\"NODE "    Appearance"
 .SH "    Appearance"
-In this dialog you can select the skin to be used.
+In this dialog you can select the skin to be used and enable shadow
+for dialogs and drop down menus.
 .PP
 See the
 .\"LINK2"
 Skins
 .\"Skins"
 section for technical details about the skin definition files.
+.PP
+.I Shadows.
+If this option is enabled, all dialogs and drop down menus will have a shadow.
 .\"NODE "    Display bits"
 .SH "    Display bits"
 This is used to configure the range of visible characters on the

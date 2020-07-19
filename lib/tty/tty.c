@@ -264,6 +264,17 @@ tty_draw_box (int y, int x, int ys, int xs, gboolean single)
 
 /* --------------------------------------------------------------------------------------------- */
 
+void
+tty_draw_box_shadow (int y, int x, int rows, int cols, int shadow_color)
+{
+    /* draw right shadow */
+    tty_colorize_area (y + 1, x + cols, rows - 1, 2, shadow_color);
+    /* draw bottom shadow */
+    tty_colorize_area (y + rows, x + 2, 1, cols, shadow_color);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 char *
 mc_tty_normalize_from_utf8 (const char *str)
 {

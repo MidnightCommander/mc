@@ -42,6 +42,7 @@
 #include "lib/global.h"
 
 #include "lib/tty/tty.h"
+#include "lib/tty/color.h"      /* tty_use_colors() */
 #include "lib/tty/key.h"        /* XCTRL and ALT macros  */
 #include "lib/skin.h"           /* INPUT_COLOR */
 #include "lib/mcconfig.h"       /* Load/save user formats */
@@ -118,6 +119,8 @@ static gchar *current_skin_name;
 #ifdef ENABLE_BACKGROUND
 static WListbox *bg_list = NULL;
 #endif /* ENABLE_BACKGROUND */
+
+static unsigned long shadows_id;
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
@@ -268,6 +271,38 @@ sel_skin_button (WButton * button, int action)
     dlg_destroy (skin_dlg);
 
     return 0;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static cb_ret_t
+appearance_box_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+{
+    switch (msg)
+    {
+    case MSG_INIT:
+        if (!tty_use_colors ())
+        {
+            Widget *shadow;
+
+            shadow = widget_find_by_id (w, shadows_id);
+            CHECK (shadow)->state = FALSE;
+            widget_disable (shadow, TRUE);
+        }
+        return MSG_HANDLED;
+
+    case MSG_NOTIFY:
+        if (sender != NULL && sender->id == shadows_id)
+        {
+            mc_global.tty.shadows = CHECK (sender)->state;
+            repaint_screen ();
+            return MSG_HANDLED;
+        }
+        return MSG_NOT_HANDLED;
+
+    default:
+        return dlg_default_callback (w, sender, msg, parm, data);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -590,6 +625,8 @@ configure_box (void)
 void
 appearance_box (void)
 {
+    gboolean shadows = mc_global.tty.shadows;
+
     current_skin_name = g_strdup (mc_skin__default.name);
     skin_names = mc_skin_list ();
 
@@ -602,6 +639,8 @@ appearance_box (void)
                 QUICK_BUTTON (str_fit_to_term (skin_name_to_label (current_skin_name), 20, J_LEFT_FIT),
                               B_USER, sel_skin_button, NULL),
             QUICK_STOP_COLUMNS,
+            QUICK_SEPARATOR (TRUE),
+            QUICK_CHECKBOX (N_("&Shadows"), &mc_global.tty.shadows, &shadows_id),
             QUICK_BUTTONS_OK_CANCEL,
             QUICK_END
             /* *INDENT-ON* */
@@ -610,14 +649,17 @@ appearance_box (void)
         quick_dialog_t qdlg = {
             -1, -1, 54,
             N_("Appearance"), "[Appearance]",
-            quick_widgets, dlg_default_callback, NULL
+            quick_widgets, appearance_box_callback, NULL
         };
 
         if (quick_dialog (&qdlg) == B_ENTER)
             mc_config_set_string (mc_global.main_config, CONFIG_APP_SECTION, "skin",
                                   current_skin_name);
         else
+        {
             skin_apply (NULL);
+            mc_global.tty.shadows = shadows;
+        }
     }
 
     g_free (current_skin_name);
