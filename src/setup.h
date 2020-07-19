@@ -73,7 +73,7 @@ struct mc_fhl_struct;
 
 /*** global variables defined in .c file *********************************************************/
 
-/* global paremeters */
+/* global parameters */
 extern char *global_profile_name;
 extern gboolean confirm_delete;
 extern gboolean confirm_directory_hotlist_delete;
