@@ -1,5 +1,5 @@
 [main]
-ChangePanel = tab
+ChangePanel = tab; ctrl-i
 Help = f1
 UserMenu = f2
 View = f3
