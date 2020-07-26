@@ -3910,7 +3910,7 @@ edit_execute_cmd (WEdit * edit, long command, int char_for_insertion)
     case CK_ExternalCommand:
         edit_ext_cmd (edit);
         break;
-    case CK_Mail:
+    case CK_EditMail:
         edit_mail_dialog (edit);
         break;
 #ifdef HAVE_CHARSET

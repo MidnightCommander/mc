@@ -316,7 +316,7 @@ enum
     CK_InsertLiteral,
     CK_ExternalCommand,
     CK_Date,
-    CK_Mail,
+    CK_EditMail,
 
     /* viewer */
     CK_WrapMode = 600L,
