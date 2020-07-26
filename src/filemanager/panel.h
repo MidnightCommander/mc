@@ -90,6 +90,9 @@ typedef struct
 typedef struct
 {
     Widget widget;
+
+    char *name;                 /* The panel name */
+
     dir_list dir;               /* Directory contents */
 
     list_format_t list_format;  /* listing type */
@@ -120,7 +123,6 @@ typedef struct
     GSList *format;             /* Display format */
     GSList *status_format;      /* Mini status format */
 
-    char *panel_name;           /* The panel name */
     struct stat dir_stat;       /* Stat of current dir: used by execute () */
 
 #ifdef HAVE_CHARSET

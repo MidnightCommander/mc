@@ -1399,9 +1399,9 @@ panel_save_name (WPanel * panel)
 {
     /* If the program is shuting down */
     if ((mc_global.midnight_shutdown && auto_save_setup) || saving_setup)
-        return g_strdup (panel->panel_name);
+        return g_strdup (panel->name);
 
-    return g_strconcat ("Temporal:", panel->panel_name, (char *) NULL);
+    return g_strconcat ("Temporal:", panel->name, (char *) NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1499,7 +1499,7 @@ panel_destroy (WPanel * p)
         g_free (p->user_status_format[i]);
 
     g_free (p->dir.list);
-    g_free (p->panel_name);
+    g_free (p->name);
 
     vfs_path_free (p->lwd_vpath);
     vfs_path_free (p->cwd_vpath);
@@ -4327,15 +4327,15 @@ panel_sized_empty_new (const char *panel_name, int y, int x, int lines, int cols
 
     panel->frame_size = frame_half;
 
-    panel->panel_name = g_strdup (panel_name);
-    panel->dir_history.name = g_strconcat ("Dir Hist ", panel->panel_name, (char *) NULL);
+    panel->name = g_strdup (panel_name);
+    panel->dir_history.name = g_strconcat ("Dir Hist ", panel->name, (char *) NULL);
     /* directories history will be get later */
 
-    section = g_strconcat ("Temporal:", panel->panel_name, (char *) NULL);
+    section = g_strconcat ("Temporal:", panel->name, (char *) NULL);
     if (!mc_config_has_group (mc_global.main_config, section))
     {
         g_free (section);
-        section = g_strdup (panel->panel_name);
+        section = g_strdup (panel->name);
     }
     panel_load_setup (panel, section);
     g_free (section);
