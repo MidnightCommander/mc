@@ -103,7 +103,7 @@ static const int panel_list_user_idx = 3;
 
 static char **status_format;
 static unsigned long panel_list_formats_id, panel_user_format_id, panel_brief_cols_id;
-static unsigned long mini_user_status_id, mini_user_format_id;
+static unsigned long user_mini_status_id, mini_user_format_id;
 
 #ifdef HAVE_CHARSET
 static int new_display_codepage;
@@ -320,7 +320,7 @@ panel_listing_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
 
             in1 = INPUT (widget_find_by_id (w, panel_user_format_id));
             in2 = INPUT (widget_find_by_id (w, panel_brief_cols_id));
-            ch = CHECK (widget_find_by_id (w, mini_user_status_id));
+            ch = CHECK (widget_find_by_id (w, user_mini_status_id));
             in3 = INPUT (widget_find_by_id (w, mini_user_format_id));
 
             if (!ch->state)
@@ -333,7 +333,7 @@ panel_listing_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
             return MSG_HANDLED;
         }
 
-        if (sender != NULL && sender->id == mini_user_status_id)
+        if (sender != NULL && sender->id == user_mini_status_id)
         {
             WInput *in;
 
@@ -767,7 +767,7 @@ panel_listing_box (WPanel * panel, int num, char **userp, char **minip, gboolean
     }
 
     {
-        gboolean mini_user_status;
+        gboolean user_mini_status;
         char panel_brief_cols_in[BUF_TINY];
         char *panel_brief_cols_out = NULL;
         char *panel_user_format = NULL;
@@ -794,7 +794,7 @@ panel_listing_box (WPanel * panel, int num, char **userp, char **minip, gboolean
             QUICK_INPUT (panel->user_format, "user-fmt-input", &panel_user_format,
                          &panel_user_format_id, FALSE, FALSE, INPUT_COMPLETE_NONE),
             QUICK_SEPARATOR (TRUE),
-            QUICK_CHECKBOX (N_("User &mini status"), &mini_user_status, &mini_user_status_id),
+            QUICK_CHECKBOX (N_("User &mini status"), &user_mini_status, &user_mini_status_id),
             QUICK_INPUT (panel->user_status_format[panel->list_format], "mini_input",
                          &mini_user_format, &mini_user_format_id, FALSE, FALSE, INPUT_COMPLETE_NONE),
             QUICK_BUTTONS_OK_CANCEL,
@@ -808,7 +808,7 @@ panel_listing_box (WPanel * panel, int num, char **userp, char **minip, gboolean
             quick_widgets, panel_listing_callback, NULL
         };
 
-        mini_user_status = panel->user_mini_status;
+        user_mini_status = panel->user_mini_status;
         result = panel->list_format;
         status_format = panel->user_status_format;
 
@@ -820,7 +820,7 @@ panel_listing_box (WPanel * panel, int num, char **userp, char **minip, gboolean
         if ((int) panel->list_format != panel_list_user_idx)
             quick_widgets[6].state = WST_DISABLED;
 
-        if (!mini_user_status)
+        if (!user_mini_status)
             quick_widgets[9].state = WST_DISABLED;
 
         if (quick_dialog (&qdlg) == B_CANCEL)
@@ -832,7 +832,7 @@ panel_listing_box (WPanel * panel, int num, char **userp, char **minip, gboolean
 
             *userp = panel_user_format;
             *minip = mini_user_format;
-            *use_msformat = mini_user_status;
+            *use_msformat = user_mini_status;
 
             cols = strtol (panel_brief_cols_out, &error, 10);
             if (*error == '\0')
