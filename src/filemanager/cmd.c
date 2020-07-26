@@ -1275,7 +1275,7 @@ help_cmd (void)
 {
     ev_help_t event_data = { NULL, NULL };
 
-    if (current_panel->searching)
+    if (current_panel->quick_search.active)
         event_data.node = "[Quick search]";
     else
         event_data.node = "[main]";

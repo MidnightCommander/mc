@@ -134,11 +134,15 @@ typedef struct
         GList *current;         /* Pointer to the current history item */
     } dir_history;
 
-    gboolean searching;
-    char search_buffer[MC_MAXFILENAMELEN];
-    char prev_search_buffer[MC_MAXFILENAMELEN];
-    char search_char[MB_LEN_MAX];       /*buffer for multibytes characters */
-    int search_chpoint;         /*point after last characters in search_char */
+    struct
+    {
+        gboolean active;
+        char buffer[MC_MAXFILENAMELEN];
+        char prev_buffer[MC_MAXFILENAMELEN];
+        char ch[MB_LEN_MAX];    /* Buffer for multi-byte character */
+        int chpoint;            /* Point after last characters in @ch */
+    } quick_search;
+
     int content_shift;          /* Number of characters of filename need to skip from left side. */
     int max_shift;              /* Max shift for visible part of current panel */
 } WPanel;

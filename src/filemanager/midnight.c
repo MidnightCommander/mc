@@ -1558,7 +1558,7 @@ midnight_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
 
         if ((!mc_global.tty.alternate_plus_minus
              || !(mc_global.tty.console_flag != '\0' || mc_global.tty.xterm_flag)) && !quote
-            && !current_panel->searching)
+            && !current_panel->quick_search.active)
         {
             if (!only_leading_plus_minus)
             {
@@ -1594,7 +1594,7 @@ midnight_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
         return MSG_NOT_HANDLED;
 
     case MSG_HOTKEY_HANDLED:
-        if ((get_current_type () == view_listing) && current_panel->searching)
+        if ((get_current_type () == view_listing) && current_panel->quick_search.active)
         {
             current_panel->dirty = 1;   /* FIXME: unneeded? */
             send_message (current_panel, NULL, MSG_ACTION, CK_SearchStop, NULL);

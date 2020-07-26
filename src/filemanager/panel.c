@@ -990,11 +990,11 @@ display_mini_info (WPanel * panel)
 
     widget_gotoyx (w, panel_lines (panel) + 3, 1);
 
-    if (panel->searching)
+    if (panel->quick_search.active)
     {
         tty_setcolor (INPUT_COLOR);
         tty_print_char ('/');
-        tty_print_string (str_fit_to_term (panel->search_buffer, w->cols - 3, J_LEFT));
+        tty_print_string (str_fit_to_term (panel->quick_search.buffer, w->cols - 3, J_LEFT));
         return;
     }
 
@@ -2634,47 +2634,48 @@ do_search (WPanel * panel, int c_code)
     char *reg_exp, *esc_str;
     gboolean is_found = FALSE;
 
-    l = strlen (panel->search_buffer);
+    l = strlen (panel->quick_search.buffer);
     if (c_code == KEY_BACKSPACE)
     {
         if (l != 0)
         {
-            act = panel->search_buffer + l;
-            str_prev_noncomb_char (&act, panel->search_buffer);
+            act = panel->quick_search.buffer + l;
+            str_prev_noncomb_char (&act, panel->quick_search.buffer);
             act[0] = '\0';
         }
-        panel->search_chpoint = 0;
+        panel->quick_search.chpoint = 0;
     }
     else
     {
-        if (c_code != 0 && (gsize) panel->search_chpoint < sizeof (panel->search_char))
+        if (c_code != 0 && (gsize) panel->quick_search.chpoint < sizeof (panel->quick_search.ch))
         {
-            panel->search_char[panel->search_chpoint] = c_code;
-            panel->search_chpoint++;
+            panel->quick_search.ch[panel->quick_search.chpoint] = c_code;
+            panel->quick_search.chpoint++;
         }
 
-        if (panel->search_chpoint > 0)
+        if (panel->quick_search.chpoint > 0)
         {
-            switch (str_is_valid_char (panel->search_char, panel->search_chpoint))
+            switch (str_is_valid_char (panel->quick_search.ch, panel->quick_search.chpoint))
             {
             case -2:
                 return;
             case -1:
-                panel->search_chpoint = 0;
+                panel->quick_search.chpoint = 0;
                 return;
             default:
-                if (l + panel->search_chpoint < sizeof (panel->search_buffer))
+                if (l + panel->quick_search.chpoint < sizeof (panel->quick_search.buffer))
                 {
-                    memcpy (panel->search_buffer + l, panel->search_char, panel->search_chpoint);
-                    l += panel->search_chpoint;
-                    panel->search_buffer[l] = '\0';
-                    panel->search_chpoint = 0;
+                    memcpy (panel->quick_search.buffer + l, panel->quick_search.ch,
+                            panel->quick_search.chpoint);
+                    l += panel->quick_search.chpoint;
+                    panel->quick_search.buffer[l] = '\0';
+                    panel->quick_search.chpoint = 0;
                 }
             }
         }
     }
 
-    reg_exp = g_strdup_printf ("%s*", panel->search_buffer);
+    reg_exp = g_strdup_printf ("%s*", panel->quick_search.buffer);
     esc_str = strutils_escape (reg_exp, -1, ",|\\{}[]", TRUE);
     search = mc_search_new (esc_str, NULL);
     search->search_type = MC_SEARCH_T_GLOB;
@@ -2720,8 +2721,8 @@ do_search (WPanel * panel, int c_code)
     }
     else if (c_code != KEY_BACKSPACE)
     {
-        act = panel->search_buffer + l;
-        str_prev_noncomb_char (&act, panel->search_buffer);
+        act = panel->quick_search.buffer + l;
+        str_prev_noncomb_char (&act, panel->quick_search.buffer);
         act[0] = '\0';
     }
     mc_search_free (search);
@@ -2737,7 +2738,7 @@ do_search (WPanel * panel, int c_code)
 static void
 start_search (WPanel * panel)
 {
-    if (panel->searching)
+    if (panel->quick_search.active)
     {
         if (panel->selected == panel->dir.len - 1)
             panel->selected = 0;
@@ -2746,18 +2747,18 @@ start_search (WPanel * panel)
 
         /* in case if there was no search string we need to recall
            previous string, with which we ended previous searching */
-        if (panel->search_buffer[0] == '\0')
-            g_strlcpy (panel->search_buffer, panel->prev_search_buffer,
-                       sizeof (panel->search_buffer));
+        if (panel->quick_search.buffer[0] == '\0')
+            g_strlcpy (panel->quick_search.buffer, panel->quick_search.prev_buffer,
+                       sizeof (panel->quick_search.buffer));
 
         do_search (panel, 0);
     }
     else
     {
-        panel->searching = TRUE;
-        panel->search_buffer[0] = '\0';
-        panel->search_char[0] = '\0';
-        panel->search_chpoint = 0;
+        panel->quick_search.active = TRUE;
+        panel->quick_search.buffer[0] = '\0';
+        panel->quick_search.ch[0] = '\0';
+        panel->quick_search.chpoint = 0;
         display_mini_info (panel);
         mc_refresh ();
     }
@@ -2768,13 +2769,13 @@ start_search (WPanel * panel)
 static void
 stop_search (WPanel * panel)
 {
-    panel->searching = FALSE;
+    panel->quick_search.active = FALSE;
 
-    /* if user had overrdied search string, we need to store it
-       to the previous_search_buffer */
-    if (panel->search_buffer[0] != '\0')
-        g_strlcpy (panel->prev_search_buffer, panel->search_buffer,
-                   sizeof (panel->prev_search_buffer));
+    /* if user overrdied search string, we need to store it
+       to the quick_search.prev_buffer */
+    if (panel->quick_search.buffer[0] != '\0')
+        g_strlcpy (panel->quick_search.prev_buffer, panel->quick_search.buffer,
+                   sizeof (panel->quick_search.prev_buffer));
 
     display_mini_info (panel);
 }
@@ -3601,7 +3602,7 @@ panel_key (WPanel * panel, int key)
         return MSG_HANDLED;
     }
 
-    if (panel->searching && ((key >= ' ' && key <= 255) || key == KEY_BACKSPACE))
+    if (panel->quick_search.active && ((key >= ' ' && key <= 255) || key == KEY_BACKSPACE))
     {
         do_search (panel, key);
         return MSG_HANDLED;
@@ -4235,7 +4236,7 @@ panel_clean_dir (WPanel * panel)
     panel->marked = 0;
     panel->dirs_marked = 0;
     panel->total = 0;
-    panel->searching = FALSE;
+    panel->quick_search.active = FALSE;
     panel->is_panelized = FALSE;
     panel->dirty = 1;
     panel->content_shift = -1;

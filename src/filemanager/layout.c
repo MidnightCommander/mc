@@ -1277,8 +1277,8 @@ swap_panels (void)
         panelswap (dir_stat);
 #undef panelswap
 
-        panel1->searching = FALSE;
-        panel2->searching = FALSE;
+        panel1->quick_search.active = FALSE;
+        panel2->quick_search.active = FALSE;
 
         if (current_panel == panel1)
             current_panel = panel2;
