@@ -1834,7 +1834,7 @@ use_display_format (WPanel * panel, const char *format, char **error, gboolean i
     if (*error != NULL)
         return NULL;
 
-    panel->dirty = 1;
+    panel->dirty = TRUE;
 
     usable_columns = WIDGET (panel)->cols - 2;
     /* Status needn't to be split */
@@ -3289,7 +3289,7 @@ _do_panel_cd (WPanel * panel, const vfs_path_t * new_dir_vpath, enum cd_enum cd_
     try_to_select (panel, get_parent_dir_name (panel->cwd_vpath, olddir_vpath));
 
     load_hint (FALSE);
-    panel->dirty = 1;
+    panel->dirty = TRUE;
     update_xterm_title_path ();
 
     vfs_path_free (olddir_vpath);
@@ -3655,13 +3655,13 @@ panel_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
         paint_dir (panel);
         mini_info_separator (panel);
         display_mini_info (panel);
-        panel->dirty = 0;
+        panel->dirty = FALSE;
         return MSG_HANDLED;
 
     case MSG_FOCUS:
         state_mark = -1;
         current_panel = panel;
-        panel->active = 1;
+        panel->active = TRUE;
 
         if (mc_chdir (panel->cwd_vpath) != 0)
         {
@@ -3686,7 +3686,7 @@ panel_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
     case MSG_UNFOCUS:
         /* Janne: look at this for the multiple panel options */
         stop_search (panel);
-        panel->active = 0;
+        panel->active = FALSE;
         unselect_item (panel);
         return MSG_HANDLED;
 
@@ -3871,7 +3871,7 @@ panel_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
                 /* no other events on 1st line, return MOU_UNHANDLED */
                 event->result.abort = TRUE;
                 /* avoid extra panel redraw */
-                panel->dirty = 0;
+                panel->dirty = FALSE;
             }
             break;
         }
@@ -4015,7 +4015,7 @@ update_one_panel_widget (WPanel * panel, panel_update_flags_t flags, const char 
         panel_reload (panel);
 
     try_to_select (panel, current_file);
-    panel->dirty = 1;
+    panel->dirty = TRUE;
 
     if (free_pointer)
         g_free (my_current_file);
@@ -4044,7 +4044,7 @@ do_select (WPanel * panel, int i)
 {
     if (i != panel->selected)
     {
-        panel->dirty = 1;
+        panel->dirty = TRUE;
         panel->selected = i;
         panel->top_file = panel->selected - (WIDGET (panel)->lines - 2) / 2;
         if (panel->top_file < 0)
@@ -4238,7 +4238,7 @@ panel_clean_dir (WPanel * panel)
     panel->total = 0;
     panel->quick_search.active = FALSE;
     panel->is_panelized = FALSE;
-    panel->dirty = 1;
+    panel->dirty = TRUE;
     panel->content_shift = -1;
     panel->max_shift = -1;
 
@@ -4311,7 +4311,7 @@ panel_sized_empty_new (const char *panel_name, int y, int x, int lines, int cols
 
     panel->list_cols = 1;
     panel->brief_cols = 2;
-    panel->dirty = 1;
+    panel->dirty = TRUE;
     panel->content_shift = -1;
     panel->max_shift = -1;
 
@@ -4456,7 +4456,7 @@ panel_reload (WPanel * panel)
                           &panel->sort_info, panel->filter))
         message (D_ERROR, MSG_ERROR, _("Cannot read directory contents"));
 
-    panel->dirty = 1;
+    panel->dirty = TRUE;
     if (panel->selected >= panel->dir.len)
         do_select (panel, panel->dir.len - 1);
 
@@ -4531,7 +4531,7 @@ select_item (WPanel * panel)
 {
     adjust_top_file (panel);
 
-    panel->dirty = 1;
+    panel->dirty = TRUE;
 
     execute_hooks (select_file_hook);
 }
@@ -4646,7 +4646,7 @@ file_mark (WPanel * panel, int lc_index, int val)
     if (panel->dir.list[lc_index].f.marked != val)
     {
         panel->dir.list[lc_index].f.marked = val;
-        panel->dirty = 1;
+        panel->dirty = TRUE;
     }
 }
 
@@ -4676,7 +4676,7 @@ panel_re_sort (WPanel * panel)
     g_free (filename);
     panel->top_file = panel->selected - panel_items (panel) / 2;
     select_item (panel);
-    panel->dirty = 1;
+    panel->dirty = TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */

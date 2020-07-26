@@ -93,7 +93,7 @@ typedef struct
     dir_list dir;               /* Directory contents */
 
     list_format_t list_format;  /* listing type */
-    int active;                 /* If panel is currently selected */
+    gboolean active;            /* If panel is currently selected */
     vfs_path_t *cwd_vpath;      /* Current Working Directory */
     vfs_path_t *lwd_vpath;      /* Last Working Directory */
     int marked;                 /* Count of marked files */
@@ -111,7 +111,7 @@ typedef struct
     dir_sort_options_t sort_info;
     const panel_field_t *sort_field;
 
-    int dirty;                  /* Should we redisplay the panel? */
+    gboolean dirty;             /* Should we redisplay the panel? */
 
     gboolean user_mini_status;  /* Is user_status_format used */
     char *user_format;          /* User format */
