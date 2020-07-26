@@ -93,41 +93,43 @@ typedef struct
 
     char *name;                 /* The panel name */
 
-    dir_list dir;               /* Directory contents */
+    panel_display_t frame_size; /* half or full frame */
 
-    list_format_t list_format;  /* listing type */
     gboolean active;            /* If panel is currently selected */
+    gboolean dirty;             /* Should we redisplay the panel? */
+    gboolean is_panelized;      /* Flag: special filelisting, can't reload */
+
+#ifdef HAVE_CHARSET
+    int codepage;               /* Panel codepage */
+#endif
+
+    dir_list dir;               /* Directory contents */
+    struct stat dir_stat;       /* Stat of current dir: used by execute () */
+
     vfs_path_t *cwd_vpath;      /* Current Working Directory */
     vfs_path_t *lwd_vpath;      /* Last Working Directory */
-    int marked;                 /* Count of marked files */
-    int dirs_marked;            /* Count of marked directories */
-    uintmax_t total;            /* Bytes in marked files */
-    int top_file;               /* The file showed on the top of the panel */
-    int selected;               /* Index to the selected file */
+
+    list_format_t list_format;  /* Listing type */
+    GSList *format;             /* Display format */
+    char *user_format;          /* User format */
     int list_cols;              /* Number of file list columns */
     int brief_cols;             /* Number of columns in case of list_brief format */
-    gboolean is_panelized;      /* Flag: special filelisting, can't reload */
-    panel_display_t frame_size; /* half or full frame */
-    char *filter;               /* File name filter */
-
     /* sort */
     dir_sort_options_t sort_info;
     const panel_field_t *sort_field;
 
-    gboolean dirty;             /* Should we redisplay the panel? */
+    int marked;                 /* Count of marked files */
+    int dirs_marked;            /* Count of marked directories */
+    uintmax_t total;            /* Bytes in marked files */
 
+    int top_file;               /* The file showed on the top of the panel */
+    int selected;               /* Index to the selected file */
+
+    GSList *status_format;      /* Mini status format */
     gboolean user_mini_status;  /* Is user_status_format used */
-    char *user_format;          /* User format */
     char *user_status_format[LIST_FORMATS];     /* User format for status line */
 
-    GSList *format;             /* Display format */
-    GSList *status_format;      /* Mini status format */
-
-    struct stat dir_stat;       /* Stat of current dir: used by execute () */
-
-#ifdef HAVE_CHARSET
-    int codepage;               /* panel codepage */
-#endif
+    char *filter;               /* File name filter */
 
     struct
     {
