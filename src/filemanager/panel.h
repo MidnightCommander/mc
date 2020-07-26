@@ -96,9 +96,6 @@ typedef struct
     int active;                 /* If panel is currently selected */
     vfs_path_t *cwd_vpath;      /* Current Working Directory */
     vfs_path_t *lwd_vpath;      /* Last Working Directory */
-    GList *dir_history;         /* directory history */
-    GList *dir_history_current; /* pointer to the current history item */
-    char *hist_name;            /* directory history name for history file */
     int marked;                 /* Count of marked files */
     int dirs_marked;            /* Count of marked directories */
     uintmax_t total;            /* Bytes in marked files */
@@ -129,6 +126,13 @@ typedef struct
 #ifdef HAVE_CHARSET
     int codepage;               /* panel codepage */
 #endif
+
+    struct
+    {
+        char *name;             /* Directory history name for history file */
+        GList *list;            /* Directory history */
+        GList *current;         /* Pointer to the current history item */
+    } dir_history;
 
     gboolean searching;
     char search_buffer[MC_MAXFILENAMELEN];

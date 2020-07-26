@@ -1412,8 +1412,8 @@ directory_history_add (WPanel * panel, const vfs_path_t * vpath)
     char *tmp;
 
     tmp = vfs_path_to_str_flags (vpath, 0, VPF_STRIP_PASSWORD);
-    panel->dir_history = list_append_unique (panel->dir_history, tmp);
-    panel->dir_history_current = panel->dir_history;
+    panel->dir_history.list = list_append_unique (panel->dir_history.list, tmp);
+    panel->dir_history.current = panel->dir_history.list;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1432,9 +1432,9 @@ panel_load_history (const gchar * event_group_name, const gchar * event_name,
     if (ev->receiver == NULL || ev->receiver == WIDGET (p))
     {
         if (ev->cfg != NULL)
-            p->dir_history = mc_config_history_load (ev->cfg, p->hist_name);
+            p->dir_history.list = mc_config_history_load (ev->cfg, p->dir_history.name);
         else
-            p->dir_history = mc_config_history_get (p->hist_name);
+            p->dir_history.list = mc_config_history_get (p->dir_history.name);
 
         directory_history_add (p, p->cwd_vpath);
     }
@@ -1454,11 +1454,11 @@ panel_save_history (const gchar * event_group_name, const gchar * event_name,
     (void) event_group_name;
     (void) event_name;
 
-    if (p->dir_history != NULL)
+    if (p->dir_history.list != NULL)
     {
         ev_history_load_save_t *ev = (ev_history_load_save_t *) data;
 
-        mc_config_history_save (ev->cfg, p->hist_name, p->dir_history);
+        mc_config_history_save (ev->cfg, p->dir_history.name, p->dir_history.list);
     }
 
     return TRUE;
@@ -1483,13 +1483,13 @@ panel_destroy (WPanel * p)
     panel_clean_dir (p);
 
     /* clean history */
-    if (p->dir_history != NULL)
+    if (p->dir_history.list != NULL)
     {
         /* directory history is already saved before this moment */
-        p->dir_history = g_list_first (p->dir_history);
-        g_list_free_full (p->dir_history, g_free);
+        p->dir_history.list = g_list_first (p->dir_history.list);
+        g_list_free_full (p->dir_history.list, g_free);
     }
-    g_free (p->hist_name);
+    g_free (p->dir_history.name);
 
     g_slist_free_full (p->format, (GDestroyNotify) format_item_free);
     g_slist_free_full (p->status_format, (GDestroyNotify) format_item_free);
@@ -3308,7 +3308,7 @@ directory_history_next (WPanel * panel)
         GList *next;
 
         ok = TRUE;
-        next = g_list_next (panel->dir_history_current);
+        next = g_list_next (panel->dir_history.current);
         if (next != NULL)
         {
             vfs_path_t *data_vpath;
@@ -3316,7 +3316,7 @@ directory_history_next (WPanel * panel)
             data_vpath = vfs_path_from_str ((char *) next->data);
             ok = _do_panel_cd (panel, data_vpath, cd_exact);
             vfs_path_free (data_vpath);
-            panel->dir_history_current = next;
+            panel->dir_history.current = next;
         }
         /* skip directories that present in history but absent in file system */
     }
@@ -3335,7 +3335,7 @@ directory_history_prev (WPanel * panel)
         GList *prev;
 
         ok = TRUE;
-        prev = g_list_previous (panel->dir_history_current);
+        prev = g_list_previous (panel->dir_history.current);
         if (prev != NULL)
         {
             vfs_path_t *data_vpath;
@@ -3343,7 +3343,7 @@ directory_history_prev (WPanel * panel)
             data_vpath = vfs_path_from_str ((char *) prev->data);
             ok = _do_panel_cd (panel, data_vpath, cd_exact);
             vfs_path_free (data_vpath);
-            panel->dir_history_current = prev;
+            panel->dir_history.current = prev;
         }
         /* skip directories that present in history but absent in file system */
     }
@@ -3359,13 +3359,13 @@ directory_history_list (WPanel * panel)
     gboolean ok = FALSE;
     size_t pos;
 
-    pos = g_list_position (panel->dir_history_current, panel->dir_history);
+    pos = g_list_position (panel->dir_history.current, panel->dir_history.list);
 
-    history_descriptor_init (&hd, WIDGET (panel)->y, WIDGET (panel)->x, panel->dir_history,
+    history_descriptor_init (&hd, WIDGET (panel)->y, WIDGET (panel)->x, panel->dir_history.list,
                              (int) pos);
     history_show (&hd);
 
-    panel->dir_history = hd.list;
+    panel->dir_history.list = hd.list;
     if (hd.text != NULL)
     {
         vfs_path_t *s_vpath;
@@ -3387,17 +3387,17 @@ directory_history_list (WPanel * panel)
 
         size_t i;
 
-        panel->dir_history_current = panel->dir_history;
+        panel->dir_history.current = panel->dir_history.list;
 
         for (i = 0; i <= pos; i++)
         {
             GList *prev;
 
-            prev = g_list_previous (panel->dir_history_current);
+            prev = g_list_previous (panel->dir_history.current);
             if (prev == NULL)
                 break;
 
-            panel->dir_history_current = prev;
+            panel->dir_history.current = prev;
         }
     }
 }
@@ -4327,7 +4327,7 @@ panel_sized_empty_new (const char *panel_name, int y, int x, int lines, int cols
     panel->frame_size = frame_half;
 
     panel->panel_name = g_strdup (panel_name);
-    panel->hist_name = g_strconcat ("Dir Hist ", panel->panel_name, (char *) NULL);
+    panel->dir_history.name = g_strconcat ("Dir Hist ", panel->panel_name, (char *) NULL);
     /* directories history will be get later */
 
     section = g_strconcat ("Temporal:", panel->panel_name, (char *) NULL);
