@@ -38,6 +38,22 @@
 #define MC_PIPE_ERROR_CREATE_PIPE_STREAM -4
 #define MC_PIPE_ERROR_READ -5
 
+/* gnulib efa15594e17fc20827dba66414fb391e99905394
+
+ *_GL_CMP (n1, n2) performs a three-valued comparison on n1 vs. n2.
+ *  It returns
+ *    1  if n1 > n2
+ *    0  if n1 == n2
+ *    -1 if n1 < n2
+ *  The native code   (n1 > n2 ? 1 : n1 < n2 ? -1 : 0)  produces a conditional
+ *  jump with nearly all GCC versions up to GCC 10.
+ *  This variant      (n1 < n2 ? -1 : n1 > n2)  produces a conditional with many
+ *  GCC versions up to GCC 9.
+ *  The better code  (n1 > n2) - (n1 < n2)  from Hacker's Delight para 2-9
+ *  avoids conditional jumps in all GCC versions >= 3.4.
+ */
+#define _GL_CMP(n1, n2) (((n1) > (n2)) - ((n1) < (n2)))
+
 /*** enums ***************************************************************************************/
 
 /* Pathname canonicalization */
