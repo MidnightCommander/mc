@@ -865,6 +865,8 @@ chattrboxes_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
         break;
 
     default:
+        /* return MOU_UNHANDLED */
+        event->result.abort = TRUE;
         break;
     }
 }
