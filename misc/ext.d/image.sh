@@ -13,8 +13,12 @@ do_view_action() {
 
     case "${filetype}" in
     jpeg)
-        identify "${MC_EXT_FILENAME}"
-        which exif >/dev/null 2>&1 && exif "${MC_EXT_FILENAME}" 2>/dev/null
+        if exiftool >/dev/null 2>&1; then
+            exiftool "${MC_EXT_FILENAME}"
+        else
+            identify "${MC_EXT_FILENAME}"
+            which exif >/dev/null 2>&1 && exif "${MC_EXT_FILENAME}" 2>/dev/null
+        fi
         ;;
     xpm)
         sxpm "${MC_EXT_FILENAME}"
