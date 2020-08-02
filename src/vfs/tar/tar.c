@@ -69,6 +69,7 @@
 
 #define TAR_SUPER(super) ((tar_super_t *) (super))
 
+#define NAME_FIELD_SIZE 100
 
 /* tar Header Block, from POSIX 1003.1-1990.  */
 
@@ -136,6 +137,7 @@
 /* tar files are made in basic blocks of this size.  */
 #define BLOCKSIZE 512
 
+#define DEFAULT_BLOCKING 20
 
 #define isodigit(c) ( ((c) >= '0') && ((c) <= '7') )
 
@@ -299,6 +301,7 @@ typedef struct
     int fd;
     struct stat st;
     enum archive_format type;   /* Type of the archive */
+    union block *record_start;  /* Start of record of archive */
 } tar_super_t;
 
 /*** forward declarations (file scope functions) *************************************************/
@@ -321,11 +324,21 @@ static char base64_map[1 + (unsigned char) (-1)];
 static struct vfs_s_subclass tarfs_subclass;
 static struct vfs_class *vfs_tarfs_ops = VFS_CLASS (&tarfs_subclass);
 
-/* As we open one archive at a time, it is safe to have this static */
-static off_t current_tar_position = 0;
+/* Size of each record, once in blocks, once in bytes. Those two variables are always related,
+   the second being BLOCKSIZE times the first. */
+static const int blocking_factor = DEFAULT_BLOCKING;
+static const size_t record_size = DEFAULT_BLOCKING * BLOCKSIZE;
 
-static union block block_buf;
+/* As we open one archive at a time, it is safe to have these static */
 
+union block *record_end;        /* last+1 block of archive record */
+union block *current_block;     /* current block of archive */
+static off_t record_start_block;        /* block ordinal at record_start */
+
+/* Have we hit EOF yet?  */
+static gboolean hit_eof;
+
+static union block *current_header;
 static struct tar_stat_info current_stat_info;
 
 static struct timespec start_time;
@@ -665,25 +678,246 @@ uintmax_from_header (const char *p, size_t s)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static union block *
-tar_find_next_block (tar_super_t * archive)
+static gboolean
+tar_short_read (size_t status, tar_super_t * archive)
 {
-    int n;
+    size_t left;                /* bytes left */
+    char *more;                 /* pointer to next byte to read */
 
-    n = mc_read (archive->fd, block_buf.buffer, sizeof (block_buf.buffer));
-    if (n != sizeof (block_buf.buffer))
-        return NULL;            /* An error has occurred */
-    current_tar_position += sizeof (block_buf.buffer);
-    return &block_buf;
+    more = archive->record_start->buffer + status;
+    left = record_size - status;
+
+    while (left % BLOCKSIZE != 0 || (left != 0 && status != 0))
+    {
+        if (status != 0)
+        {
+            ssize_t r;
+
+            r = mc_read (archive->fd, more, left);
+            if (r == -1)
+                return FALSE;
+
+            status = (size_t) r;
+        }
+
+        if (status == 0)
+            break;
+
+        left -= status;
+        more += status;
+    }
+
+    record_end = archive->record_start + (record_size - left) / BLOCKSIZE;
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
-tar_skip_n_records (tar_super_t * archive, off_t n)
+static gboolean
+tar_flush_read (tar_super_t * archive)
 {
-    mc_lseek (archive->fd, n * sizeof (block_buf.buffer), SEEK_CUR);
-    current_tar_position += n * sizeof (block_buf.buffer);
+    size_t status;
+
+    status = mc_read (archive->fd, archive->record_start->buffer, record_size);
+    if (status == record_size)
+        return TRUE;
+
+    return tar_short_read (status, archive);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**  Flush the current buffer from the archive.
+ */
+static gboolean
+tar_flush_archive (tar_super_t * archive)
+{
+    record_start_block += record_end - archive->record_start;
+    current_block = archive->record_start;
+    record_end = archive->record_start + blocking_factor;
+
+    return tar_flush_read (archive);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Return the location of the next available input or output block.
+ * Return NULL for EOF.
+ */
+static union block *
+tar_find_next_block (tar_super_t * archive)
+{
+    if (current_block == record_end)
+    {
+        if (hit_eof)
+            return NULL;
+
+        if (!tar_flush_archive (archive))
+        {
+            message (D_ERROR, MSG_ERROR, _("Inconsistent tar archive"));
+            return NULL;
+        }
+
+        if (current_block == record_end)
+        {
+            hit_eof = TRUE;
+            return NULL;
+        }
+    }
+
+    return current_block;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Indicate that we have used all blocks up thru @block.
+ */
+static gboolean
+tar_set_next_block_after (union block *block)
+{
+    while (block >= current_block)
+        current_block++;
+
+    /* Do *not* flush the archive here. If we do, the same argument to tar_set_next_block_after()
+       could mean the next block (if the input record is exactly one block long), which is not
+       what is intended.  */
+
+    return !(current_block > record_end);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Compute and return the block ordinal at current_block.
+ */
+static off_t
+tar_current_block_ordinal (const tar_super_t * archive)
+{
+    return record_start_block + (current_block - archive->record_start);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static off_t
+tar_seek_archive (tar_super_t * archive, off_t size)
+{
+    off_t start, offset;
+    off_t nrec, nblk;
+    off_t skipped;
+
+    skipped = (blocking_factor - (current_block - archive->record_start)) * BLOCKSIZE;
+    if (size <= skipped)
+        return 0;
+
+    /* Compute number of records to skip */
+    nrec = (size - skipped) / record_size;
+    if (nrec == 0)
+        return 0;
+
+    start = tar_current_block_ordinal (archive);
+
+    offset = mc_lseek (archive->fd, nrec * record_size, SEEK_CUR);
+    if (offset < 0)
+        return offset;
+
+#if 0
+    if ((offset % record_size) != 0)
+    {
+        message (D_ERROR, MSG_ERROR, _("tar: mc_lseek not stopped at a record boundary"));
+        return -1;
+    }
+#endif
+
+    /* Convert to number of records */
+    offset /= BLOCKSIZE;
+    /* Compute number of skipped blocks */
+    nblk = offset - start;
+
+    /* Update buffering info */
+    record_start_block = offset - blocking_factor;
+    current_block = record_end;
+
+    return nblk;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Skip over @size bytes of data in blocks in the archive.
+ */
+static gboolean
+tar_skip_file (tar_super_t * archive, off_t size)
+{
+    union block *x;
+    off_t nblk;
+
+    nblk = tar_seek_archive (archive, size);
+    if (nblk >= 0)
+        size -= nblk * BLOCKSIZE;
+
+    while (size > 0)
+    {
+        x = tar_find_next_block (archive);
+        if (x == NULL)
+            return FALSE;
+
+        tar_set_next_block_after (x);
+        size -= BLOCKSIZE;
+    }
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static gboolean
+tar_skip_member (tar_super_t * archive, struct vfs_s_inode *inode)
+{
+    char save_typeflag = current_header->header.typeflag;
+
+    tar_set_next_block_after (current_header);
+
+    if (archive->type == TAR_OLDGNU && current_header->oldgnu_header.isextended)
+    {
+        union block *exhdr;
+
+        do
+        {
+            exhdr = tar_find_next_block (archive);
+            if (exhdr == NULL)
+                return FALSE;
+
+            tar_set_next_block_after (exhdr);
+        }
+        while (exhdr->sparse_header.isextended != 0);
+    }
+
+    if (save_typeflag != DIRTYPE)
+    {
+        if (inode != NULL)
+            inode->data_offset = BLOCKSIZE * tar_current_block_ordinal (archive);
+
+        return tar_skip_file (archive, current_stat_info.stat.st_size);
+    }
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Return the number of bytes comprising the space between @pointer through the end
+ * of the current buffer of blocks. This space is available for filling with data,
+ * or taking data from. @pointer is usually (but not always) the result previous
+ * tar_find_next_block() call.
+ */
+static inline size_t
+tar_available_space_after (const union block *pointer)
+{
+    return record_end->buffer - pointer->buffer;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -853,13 +1087,13 @@ tar_fill_stat (struct vfs_s_super *archive, union block *header)
     current_stat_info.ctime.tv_nsec = 0;
 #endif
     current_stat_info.mtime.tv_sec = TIME_FROM_HEADER (header->header.mtime);
-    current_stat_info.atime.tv_sec = 0;
-    current_stat_info.ctime.tv_sec = 0;
     if (arch->type == TAR_GNU || arch->type == TAR_OLDGNU)
     {
         current_stat_info.atime.tv_sec = TIME_FROM_HEADER (header->oldgnu_header.atime);
         current_stat_info.ctime.tv_sec = TIME_FROM_HEADER (header->oldgnu_header.ctime);
     }
+    else
+        current_stat_info.atime = current_stat_info.ctime = start_time;
 
 #ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
     current_stat_info.stat.st_blksize = 8 * 1024;       /* FIXME */
@@ -923,7 +1157,7 @@ tar_insert_entry (struct vfs_class *me, struct vfs_s_super *archive, union block
         }
 
         *inode = vfs_s_new_inode (me, archive, &current_stat_info.stat);
-        (*inode)->data_offset = current_tar_position;
+        (*inode)->data_offset = BLOCKSIZE * tar_current_block_ordinal (TAR_SUPER (archive));
 
         if (link_name != NULL && *link_name != '\0')
             (*inode)->linkname = g_strdup (link_name);
@@ -942,160 +1176,207 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive)
 {
     tar_super_t *arch = TAR_SUPER (archive);
     union block *header;
-    static char *next_long_name = NULL, *next_long_link = NULL;
-    read_header status;
+    union block *next_long_name = NULL, *next_long_link = NULL;
+    read_header status = HEADER_SUCCESS;
 
     while (TRUE)
     {
         header = tar_find_next_block (arch);
+        current_header = header;
         if (header == NULL)
-            return HEADER_END_OF_FILE;
+        {
+            status = HEADER_END_OF_FILE;
+            goto ret;
+        }
 
         status = tar_checksum (header);
         if (status != HEADER_SUCCESS)
-            return status;
+            goto ret;
 
         if (header->header.typeflag == LNKTYPE || header->header.typeflag == DIRTYPE)
             current_stat_info.stat.st_size = 0; /* Links 0 size on tape */
         else
+        {
             current_stat_info.stat.st_size = OFF_FROM_HEADER (header->header.size);
+            if (current_stat_info.stat.st_size < 0)
+            {
+                status = HEADER_FAILURE;
+                goto ret;
+            }
+        }
 
         tar_decode_header (header, arch);
         tar_fill_stat (archive, header);
 
-        /* Skip over pax extended header and global extended header records. */
-        if (header->header.typeflag == XHDTYPE || header->header.typeflag == XGLTYPE)
-        {
-            if (arch->type == TAR_UNKNOWN)
-                arch->type = TAR_POSIX;
-            return HEADER_SUCCESS;
-        }
-
         if (header->header.typeflag == GNUTYPE_LONGNAME
             || header->header.typeflag == GNUTYPE_LONGLINK)
         {
-            char **longp;
-            char *bp, *data;
+            size_t name_size = current_stat_info.stat.st_size;
+            size_t n;
             off_t size;
+            union block *header_copy;
+            char *bp;
             size_t written;
 
             if (arch->type == TAR_UNKNOWN)
                 arch->type = TAR_GNU;
 
-            if (st->st_size > MC_MAXPATHLEN)
+            n = name_size % BLOCKSIZE;
+            size = name_size + BLOCKSIZE;
+            if (n != 0)
+                size += BLOCKSIZE - n;
+            if ((off_t) name_size != current_stat_info.stat.st_size || size < (off_t) name_size)
             {
                 message (D_ERROR, MSG_ERROR, _("Inconsistent tar archive"));
-                return HEADER_FAILURE;
+                status = HEADER_FAILURE;
+                goto ret;
             }
 
-            longp = header->header.typeflag == GNUTYPE_LONGNAME ? &next_long_name : &next_long_link;
+            header_copy = g_malloc (size + 1);
 
-            g_free (*longp);
-            bp = *longp = g_malloc (st->st_size + 1);
-
-            for (size = st->st_size; size > 0; size -= written)
+            if (header->header.typeflag == GNUTYPE_LONGNAME)
             {
-                data = tar_find_next_block (arch)->buffer;
-                if (data == NULL)
+                g_free (next_long_name);
+                next_long_name = header_copy;
+            }
+            else
+            {
+                g_free (next_long_link);
+                next_long_link = header_copy;
+            }
+
+            tar_set_next_block_after (header);
+            *header_copy = *header;
+            bp = header_copy->buffer + BLOCKSIZE;
+
+            for (size -= BLOCKSIZE; size > 0; size -= written)
+            {
+                union block *data_block;
+
+                data_block = tar_find_next_block (arch);
+                if (data_block == NULL)
                 {
-                    MC_PTR_FREE (*longp);
+                    g_free (header_copy);
                     message (D_ERROR, MSG_ERROR, _("Unexpected EOF on archive file"));
-                    return HEADER_FAILURE;
+                    status = HEADER_FAILURE;
+                    goto ret;
                 }
-                written = BLOCKSIZE;
+
+                written = tar_available_space_after (data_block);
                 if ((off_t) written > size)
                     written = (size_t) size;
 
-                memcpy (bp, data, written);
+                memcpy (bp, data_block->buffer, written);
                 bp += written;
-            }
-
-            if (bp - *longp == MC_MAXPATHLEN && bp[-1] != '\0')
-            {
-                MC_PTR_FREE (*longp);
-                message (D_ERROR, MSG_ERROR, _("Inconsistent tar archive"));
-                return HEADER_FAILURE;
+                tar_set_next_block_after ((union block *) (data_block->buffer + written - 1));
             }
 
             *bp = '\0';
+        }
+        else if (header->header.typeflag == XHDTYPE || header->header.typeflag == XGLTYPE)
+        {
+            /* Skip over pax extended header and global extended header records. */
+            if (arch->type == TAR_UNKNOWN)
+                arch->type = TAR_POSIX;
+            status = tar_skip_member (arch, NULL) ? HEADER_SUCCESS : HEADER_FAILURE;
+            goto ret;
         }
         else
             break;
     }
 
     {
-        char *recent_long_name, *recent_long_link;
+        static union block *recent_long_name = NULL, *recent_long_link = NULL;
+        struct posix_header const *h = &current_header->header;
+        char *file_name = NULL;
+        char *link_name;
         struct vfs_s_inode *inode = NULL;
 
-        recent_long_link =
-            next_long_link != NULL ? next_long_link : g_strndup (header->header.linkname,
-                                                                 sizeof (header->header.linkname));
-        tar_assign_string (&current_stat_info.link_name, recent_long_link);
+        g_free (recent_long_name);
 
-        recent_long_name = NULL;
-        switch (arch->type)
+        if (next_long_name != NULL)
         {
-        case TAR_USTAR:
-        case TAR_POSIX:
-            /* The ustar archive format supports pathnames of upto 256
-             * characters in length. This is achieved by concatenating
-             * the contents of the 'prefix' and 'name' fields like
-             * this:
-             *
-             *   prefix + path_separator + name
-             *
-             * If the 'prefix' field contains an empty string i.e. its
-             * first characters is '\0' the prefix field is ignored.
-             */
-            if (header->header.prefix[0] != '\0')
+            file_name = g_strdup (next_long_name->buffer + BLOCKSIZE);
+            recent_long_name = next_long_name;
+        }
+        else
+        {
+            /* Accept file names as specified by POSIX.1-1996 section 10.1.1. */
+            char *s1 = NULL;
+            char *s2;
+
+            /* Don't parse TAR_OLDGNU incremental headers as POSIX prefixes. */
+            if (h->prefix[0] != '\0' && strcmp (h->magic, TMAGIC) == 0)
             {
-                char *temp_name, *temp_prefix;
+                s1 = g_strndup (h->prefix, sizeof (h->prefix));
 
-                temp_name = g_strndup (header->header.name, sizeof (header->header.name));
-                temp_prefix = g_strndup (header->header.prefix, sizeof (header->header.prefix));
-                recent_long_name = g_strconcat (temp_prefix, PATH_SEP_STR,
-                                                temp_name, (char *) NULL);
-                g_free (temp_name);
-                g_free (temp_prefix);
+                /* Prevent later references to current_header from mistakenly treating this
+                   as an old GNU header.
+                   This assignment invalidates h->prefix. */
+                current_header->oldgnu_header.isextended = 0;
             }
-            break;
-        case TAR_GNU:
-        case TAR_OLDGNU:
-            if (next_long_name != NULL)
-                recent_long_name = next_long_name;
-            break;
-        default:
-            break;
-        }
 
-        if (recent_long_name == NULL)
-        {
-            if (next_long_name != NULL)
-                recent_long_name = g_strdup (next_long_name);
+            s2 = g_strndup (h->name, sizeof (h->name));
+
+            if (s1 == NULL)
+                file_name = s2;
             else
-                recent_long_name = g_strndup (header->header.name, sizeof (header->header.name));
+            {
+                file_name = g_strconcat (s1, PATH_SEP_STR, s2, (char *) NULL);
+                g_free (s1);
+                g_free (s2);
+            }
+
+            recent_long_name = NULL;
         }
 
-        tar_assign_string_dup (&current_stat_info.orig_file_name, recent_long_name);
-        canonicalize_pathname (recent_long_name);
-        tar_assign_string (&current_stat_info.file_name, recent_long_name);
+        tar_assign_string_dup (&current_stat_info.orig_file_name, file_name);
+        canonicalize_pathname (file_name);
+        tar_assign_string (&current_stat_info.file_name, file_name);
+
+        g_free (recent_long_link);
+
+        if (next_long_link != NULL)
+        {
+            link_name = g_strdup (next_long_link->buffer + BLOCKSIZE);
+            recent_long_link = next_long_link;
+        }
+        else
+        {
+            link_name = g_strndup (h->linkname, sizeof (h->linkname));
+            recent_long_link = NULL;
+        }
+
+        tar_assign_string (&current_stat_info.link_name, link_name);
+
+        tar_set_next_block_after (current_header);
 
         status = tar_insert_entry (me, archive, header, &inode);
         if (status != HEADER_SUCCESS)
-            return status;
-
-        next_long_link = next_long_name = NULL;
-
-        if (arch->type == TAR_GNU && header->oldgnu_header.isextended)
         {
-            while (tar_find_next_block (arch)->sparse_header.isextended != 0)
-                ;
-
-            if (inode != NULL)
-                inode->data_offset = current_tar_position;
+            message (D_ERROR, MSG_ERROR, _("Inconsistent tar archive"));
+            goto ret;
         }
-        return HEADER_SUCCESS;
+
+        if (recent_long_name == next_long_name)
+            recent_long_name = NULL;
+
+        if (recent_long_link == next_long_link)
+            recent_long_link = NULL;
+
+        if (tar_skip_member (arch, inode))
+            status = HEADER_SUCCESS;
+        else if (hit_eof)
+            status = HEADER_END_OF_FILE;
+        else
+            status = HEADER_FAILURE;
     }
+
+  ret:
+    g_free (next_long_name);
+    g_free (next_long_link);
+
+    return status;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1110,6 +1391,13 @@ tar_new_archive (struct vfs_class *me)
     arch->base.me = me;
     arch->fd = -1;
     arch->type = TAR_UNKNOWN;
+
+    /* Prepare global data needed for tar_find_next_block: */
+    record_start_block = 0;
+    arch->record_start = g_malloc (record_size);
+    record_end = arch->record_start;    /* set up for 1st record = # 0 */
+    current_block = arch->record_start;
+    hit_eof = FALSE;
 
     /* time in microseconds */
     usec = g_get_real_time ();
@@ -1135,6 +1423,7 @@ tar_free_archive (struct vfs_class *me, struct vfs_s_super *archive)
         arch->fd = -1;
     }
 
+    g_free (arch->record_start);
     tar_stat_destroy (&current_stat_info);
 }
 
@@ -1217,10 +1506,11 @@ tar_open_archive (struct vfs_s_super *archive, const vfs_path_t * vpath,
     /* Initial status at start of archive */
     read_header status = HEADER_STILL_UNREAD;
 
-    current_tar_position = 0;
     /* Open for reading */
     if (!tar_open_archive_int (vpath_element->class, vpath, archive))
         return -1;
+
+    tar_find_next_block (arch);
 
     while (TRUE)
     {
@@ -1238,53 +1528,52 @@ tar_open_archive (struct vfs_s_super *archive, const vfs_path_t * vpath,
             return -1;
 
         case HEADER_SUCCESS:
-            tar_skip_n_records (archive,
-                                (current_stat_info.stat.st_size + BLOCKSIZE - 1) / BLOCKSIZE);
             continue;
 
-            /*
-             * Invalid header:
-             *
-             * If the previous header was good, tell them
-             * that we are skipping bad ones.
-             */
+            /* Record of zeroes */
+        case HEADER_ZERO_BLOCK:
+            tar_set_next_block_after (current_header);
+            (void) tar_read_header (vpath_element->class, archive);
+            status = prev_status;
+            continue;
+
+        case HEADER_END_OF_FILE:
+            break;
+
+            /* Invalid header:
+             * If the previous header was good, tell them that we are skipping bad ones. */
         case HEADER_FAILURE:
+            tar_set_next_block_after (current_header);
+
             switch (prev_status)
             {
-                /* Error on first block */
-            case HEADER_ZERO_BLOCK:
-                {
-                    message (D_ERROR, MSG_ERROR, _("%s\ndoesn't look like a tar archive"),
-                             vfs_path_as_str (vpath));
-                    MC_FALLTHROUGH;
-
-                    /* Error after header rec */
-                }
-            case HEADER_SUCCESS:
-                /* Error after error */
-
-            case HEADER_FAILURE:
+            case HEADER_STILL_UNREAD:
+                message (D_ERROR, MSG_ERROR, _("%s\ndoesn't look like a tar archive"),
+                         vfs_path_as_str (vpath));
                 return -1;
 
+            case HEADER_ZERO_BLOCK:
+            case HEADER_SUCCESS:
+                /* Skipping to next header. */
+                break;          /* AB: FIXME */
+
             case HEADER_END_OF_FILE:
-                return 0;
+            case HEADER_FAILURE:
+                /* We are in the middle of a cascade of errors.  */
+                /* AB: FIXME: TODO: show an error message here */
+                return -1;
 
             default:
                 break;
             }
-            MC_FALLTHROUGH;
+            continue;
 
-            /* Record of zeroes */
-        case HEADER_ZERO_BLOCK:        /* If error after 0's */
-            MC_FALLTHROUGH;
-            /* exit from loop */
-        case HEADER_END_OF_FILE:       /* End of archive */
-            break;
         default:
             break;
         }
         break;
     }
+
     return 0;
 }
 
