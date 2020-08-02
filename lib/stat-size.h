@@ -81,12 +81,6 @@
   /* HP-UX counts st_blocks in 1024-byte units.
      This loses when mixing HP-UX and BSD file systems with NFS.  */
 #define ST_NBLOCKSIZE 1024
-#else /* !hpux */
-#if defined _CRAY
-#define ST_NBLOCKS(statbuf) \
-  (S_ISREG ((statbuf).st_mode) || S_ISDIR ((statbuf).st_mode) \
-   ? (statbuf).st_blocks * ST_BLKSIZE (statbuf) / ST_NBLOCKSIZE : 0)
-#endif
 #endif
 #endif
 

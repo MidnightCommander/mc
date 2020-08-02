@@ -189,7 +189,7 @@
 #include <sys/fs/s5param.h>
 #endif
 
-#if defined (HAVE_SYS_FILSYS_H) && !defined (_CRAY)
+#ifdef HAVE_SYS_FILSYS_H
 #include <sys/filsys.h>
 #endif
 
