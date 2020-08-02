@@ -85,6 +85,7 @@ mc_global_t mc_global = {
     .tty =
     {
         .skin = NULL,
+        .shadows = TRUE,
         .setup_color_string = NULL,
         .term_color_string = NULL,
         .color_terminal_string = NULL,

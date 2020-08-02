@@ -42,6 +42,8 @@ char *mc_tty_normalize_from_utf8 (const char *);
 void tty_init_xterm_support (gboolean is_xterm);
 int tty_lowlevel_getch (void);
 
+void tty_colorize_area (int y, int x, int rows, int cols, int color);
+
 /*** inline functions ****************************************************************************/
 
 #endif /* MC_TTY_INTERNAL_H */

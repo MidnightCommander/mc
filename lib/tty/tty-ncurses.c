@@ -48,6 +48,7 @@
 
 #include "tty-internal.h"       /* mc_tty_normalize_from_utf8() */
 #include "tty.h"
+#include "color.h"              /* tty_setcolor */
 #include "color-internal.h"
 #include "key.h"
 #include "mouse.h"
@@ -117,6 +118,44 @@ sigwinch_handler (int dummy)
 
     n = write (sigwinch_pipe[1], "", 1);
     (void) n;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Get visible part of area.
+ *
+ * @returns TRUE if any part of area is in screen bounds, FALSE otherwise.
+ */
+static gboolean
+tty_clip (int *y, int *x, int *rows, int *cols)
+{
+    if (*y < 0)
+    {
+        *rows += *y;
+
+        if (*rows <= 0)
+            return FALSE;
+
+        *y = 0;
+    }
+
+    if (*x < 0)
+    {
+        *cols += *x;
+
+        if (*cols <= 0)
+            return FALSE;
+
+        *x = 0;
+    }
+
+    if (*y + *rows > LINES)
+        *rows = LINES - *y;
+    if (*x + *cols > COLS)
+        *cols = COLS - *x;
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -494,30 +533,8 @@ tty_fill_region (int y, int x, int rows, int cols, unsigned char ch)
 {
     int i;
 
-    if (y < 0)
-    {
-        rows += y;
-
-        if (rows <= 0)
-            return;
-
-        y = 0;
-    }
-
-    if (x < 0)
-    {
-        cols += x;
-
-        if (cols <= 0)
-            return;
-
-        x = 0;
-    }
-
-    if (y + rows > LINES)
-        rows = LINES - y;
-    if (x + cols > COLS)
-        cols = COLS - x;
+    if (!tty_clip (&y, &x, &rows, &cols))
+        return;
 
     for (i = 0; i < rows; i++)
     {
@@ -529,6 +546,38 @@ tty_fill_region (int y, int x, int rows, int cols, unsigned char ch)
 
     mc_curs_row = y;
     mc_curs_col = x;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+tty_colorize_area (int y, int x, int rows, int cols, int color)
+{
+    cchar_t *ctext;
+    wchar_t wch[10];   /* TODO not sure if the length is correct */
+    attr_t attrs;
+    short color_pair;
+
+    if (!use_colors || !tty_clip (&y, &x, &rows, &cols))
+        return;
+
+    tty_setcolor (color);
+    ctext = g_malloc (sizeof (cchar_t) * (cols + 1));
+
+    for (int row = 0; row < rows; row++)
+    {
+        mvin_wchnstr (y + row, x, ctext, cols);
+
+        for (int col = 0; col < cols; col++)
+        {
+            getcchar (&ctext[col], wch, &attrs, &color_pair, NULL);
+            setcchar (&ctext[col], wch, attrs, color, NULL);
+        }
+
+        mvadd_wchnstr (y + row, x, ctext, cols);
+    }
+
+    g_free (ctext);
 }
 
 /* --------------------------------------------------------------------------------------------- */
