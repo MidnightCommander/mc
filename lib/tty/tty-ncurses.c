@@ -554,7 +554,7 @@ void
 tty_colorize_area (int y, int x, int rows, int cols, int color)
 {
     cchar_t *ctext;
-    wchar_t wch[10];   /* TODO not sure if the length is correct */
+    wchar_t wch[10];            /* TODO not sure if the length is correct */
     attr_t attrs;
     short color_pair;
 
