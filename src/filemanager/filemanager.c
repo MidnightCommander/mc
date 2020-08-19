@@ -1317,7 +1317,7 @@ midnight_execute_cmd (Widget * sender, long command)
         menu_last_selected_cmd ();
         break;
     case CK_MakeDir:
-        mkdir_cmd ();
+        mkdir_cmd (current_panel);
         break;
     case CK_OptionsPanel:
         panel_options_box ();

@@ -63,7 +63,7 @@ void copy_cmd (void);
 void copy_cmd_local (void);
 void rename_cmd (void);
 void rename_cmd_local (void);
-void mkdir_cmd (void);
+void mkdir_cmd (WPanel * panel);
 void delete_cmd (void);
 void delete_cmd_local (void);
 void filter_cmd (void);

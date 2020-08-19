@@ -829,14 +829,14 @@ rename_cmd_local (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mkdir_cmd (void)
+mkdir_cmd (WPanel * panel)
 {
     char *dir;
     const char *name = "";
 
     /* If 'on' then automatically fills name with current selected item name */
-    if (auto_fill_mkdir_name && !DIR_IS_DOTDOT (selection (current_panel)->fname))
-        name = selection (current_panel)->fname;
+    if (auto_fill_mkdir_name && !DIR_IS_DOTDOT (selection (panel)->fname))
+        name = selection (panel)->fname;
 
     dir =
         input_expand_dialog (_("Create a new Directory"),
@@ -858,7 +858,7 @@ mkdir_cmd (void)
             if (dir[0] == '\\' && dir[1] == '~')
                 tmpdir = dir + 1;
 
-            absdir = vfs_path_append_new (current_panel->cwd_vpath, tmpdir, (char *) NULL);
+            absdir = vfs_path_append_new (panel->cwd_vpath, tmpdir, (char *) NULL);
         }
 
         save_cwds_stat ();
@@ -869,7 +869,7 @@ mkdir_cmd (void)
         {
             update_panels (UP_OPTIMIZE, dir);
             repaint_screen ();
-            select_item (current_panel);
+            select_item (panel);
         }
 
         vfs_path_free (absdir);
