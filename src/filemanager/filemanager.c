@@ -1147,7 +1147,7 @@ midnight_execute_cmd (Widget * sender, long command)
         setup_listing_format_cmd ();
         break;
     case CK_ChangeMode:
-        chmod_cmd ();
+        chmod_cmd (current_panel);
         break;
     case CK_ChangeOwn:
         chown_cmd ();

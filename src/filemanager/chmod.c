@@ -40,8 +40,6 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 
-#include "filemanager.h"        /* current_panel */
-
 #include "cmd.h"                /* chmod_cmd() */
 
 /*** global variables ****************************************************************************/
@@ -302,7 +300,7 @@ chmod_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
 /* --------------------------------------------------------------------------------------------- */
 
 static WDialog *
-chmod_dlg_create (const char *fname, const struct stat *sf_stat)
+chmod_dlg_create (WPanel * panel, const char *fname, const struct stat *sf_stat)
 {
     gboolean single_set;
     WDialog *ch_dlg;
@@ -316,7 +314,7 @@ chmod_dlg_create (const char *fname, const struct stat *sf_stat)
 
     mode_change = FALSE;
 
-    single_set = (current_panel->marked < 2);
+    single_set = (panel->marked < 2);
     perm_gb_len = check_perm_len + 2;
     file_gb_len = file_info_labels_len + 2;
     cols = str_term_width1 (fname) + 2 + 1;
@@ -413,12 +411,12 @@ chmod_done (gboolean need_update)
 /* --------------------------------------------------------------------------------------------- */
 
 static const char *
-next_file (void)
+next_file (const WPanel * panel)
 {
-    while (!current_panel->dir.list[current_file].f.marked)
+    while (!panel->dir.list[current_file].f.marked)
         current_file++;
 
-    return current_panel->dir.list[current_file].fname;
+    return panel->dir.list[current_file].fname;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -468,7 +466,7 @@ try_chmod (const vfs_path_t * p, mode_t m)
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-do_chmod (const vfs_path_t * p, struct stat *sf)
+do_chmod (WPanel * panel, const vfs_path_t * p, struct stat *sf)
 {
     gboolean ret;
 
@@ -477,7 +475,7 @@ do_chmod (const vfs_path_t * p, struct stat *sf)
 
     ret = try_chmod (p, sf->st_mode);
 
-    do_file_mark (current_panel, current_file, 0);
+    do_file_mark (panel, current_file, 0);
 
     return ret;
 }
@@ -485,26 +483,26 @@ do_chmod (const vfs_path_t * p, struct stat *sf)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-apply_mask (vfs_path_t * vpath, struct stat *sf)
+apply_mask (WPanel * panel, vfs_path_t * vpath, struct stat *sf)
 {
     gboolean ok;
 
-    if (!do_chmod (vpath, sf))
+    if (!do_chmod (panel, vpath, sf))
         return;
 
     do
     {
         const char *fname;
 
-        fname = next_file ();
+        fname = next_file (panel);
         vpath = vfs_path_from_str (fname);
         ok = (mc_stat (vpath, sf) == 0);
 
         if (!ok)
         {
             /* if current file was deleted outside mc -- try next file */
-            /* decrease current_panel->marked */
-            do_file_mark (current_panel, current_file, 0);
+            /* decrease panel->marked */
+            do_file_mark (panel, current_file, 0);
 
             /* try next file */
             ok = TRUE;
@@ -513,12 +511,12 @@ apply_mask (vfs_path_t * vpath, struct stat *sf)
         {
             ch_mode = sf->st_mode;
 
-            ok = do_chmod (vpath, sf);
+            ok = do_chmod (panel, vpath, sf);
         }
 
         vfs_path_free (vpath);
     }
-    while (ok && current_panel->marked != 0);
+    while (ok && panel->marked != 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -526,7 +524,7 @@ apply_mask (vfs_path_t * vpath, struct stat *sf)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-chmod_cmd (void)
+chmod_cmd (WPanel * panel)
 {
     gboolean need_update;
     gboolean end_chmod;
@@ -549,10 +547,10 @@ chmod_cmd (void)
         need_update = FALSE;
         end_chmod = FALSE;
 
-        if (current_panel->marked != 0)
-            fname = next_file ();       /* next marked file */
+        if (panel->marked != 0)
+            fname = next_file (panel);  /* next marked file */
         else
-            fname = selection (current_panel)->fname;   /* single file */
+            fname = selection (panel)->fname;   /* single file */
 
         vpath = vfs_path_from_str (fname);
 
@@ -564,7 +562,7 @@ chmod_cmd (void)
 
         ch_mode = sf_stat.st_mode;
 
-        ch_dlg = chmod_dlg_create (fname, &sf_stat);
+        ch_dlg = chmod_dlg_create (panel, fname, &sf_stat);
         result = dlg_run (ch_dlg);
 
         switch (result)
@@ -576,7 +574,7 @@ chmod_cmd (void)
         case B_ENTER:
             if (mode_change)
             {
-                if (current_panel->marked <= 1)
+                if (panel->marked <= 1)
                 {
                     /* single or last file */
                     if (mc_chmod (vpath, ch_mode) == -1 && !ignore_all)
@@ -609,7 +607,7 @@ chmod_cmd (void)
                         and_mask &= ~check_perm[i].mode;
                 }
 
-            apply_mask (vpath, &sf_stat);
+            apply_mask (panel, vpath, &sf_stat);
             need_update = TRUE;
             end_chmod = TRUE;
             break;
@@ -622,7 +620,7 @@ chmod_cmd (void)
                 if (check_perm[i].selected)
                     or_mask |= check_perm[i].mode;
 
-            apply_mask (vpath, &sf_stat);
+            apply_mask (panel, vpath, &sf_stat);
             need_update = TRUE;
             end_chmod = TRUE;
             break;
@@ -635,7 +633,7 @@ chmod_cmd (void)
                 if (check_perm[i].selected)
                     and_mask &= ~check_perm[i].mode;
 
-            apply_mask (vpath, &sf_stat);
+            apply_mask (panel, vpath, &sf_stat);
             need_update = TRUE;
             end_chmod = TRUE;
             break;
@@ -644,9 +642,9 @@ chmod_cmd (void)
             break;
         }
 
-        if (current_panel->marked != 0 && result != B_CANCEL)
+        if (panel->marked != 0 && result != B_CANCEL)
         {
-            do_file_mark (current_panel, current_file, 0);
+            do_file_mark (panel, current_file, 0);
             need_update = TRUE;
         }
 
@@ -654,7 +652,7 @@ chmod_cmd (void)
 
         dlg_destroy (ch_dlg);
     }
-    while (current_panel->marked != 0 && !end_chmod);
+    while (panel->marked != 0 && !end_chmod);
 
     chmod_done (need_update);
 }

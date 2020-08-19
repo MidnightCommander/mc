@@ -96,7 +96,7 @@ void encoding_cmd (void);
 /* achown.c */
 void advanced_chown_cmd (WPanel * panel);
 /* chmod.c */
-void chmod_cmd (void);
+void chmod_cmd (WPanel * panel);
 /* chown.c */
 void chown_cmd (void);
 #ifdef ENABLE_EXT2FS_ATTR
