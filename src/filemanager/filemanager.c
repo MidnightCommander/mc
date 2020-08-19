@@ -1150,7 +1150,7 @@ midnight_execute_cmd (Widget * sender, long command)
         chmod_cmd (current_panel);
         break;
     case CK_ChangeOwn:
-        chown_cmd ();
+        chown_cmd (current_panel);
         break;
     case CK_ChangeOwnAdvanced:
         advanced_chown_cmd (current_panel);

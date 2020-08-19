@@ -98,7 +98,7 @@ void advanced_chown_cmd (WPanel * panel);
 /* chmod.c */
 void chmod_cmd (WPanel * panel);
 /* chown.c */
-void chown_cmd (void);
+void chown_cmd (WPanel * panel);
 #ifdef ENABLE_EXT2FS_ATTR
 /* chattr.c */
 void chattr_cmd (void);
