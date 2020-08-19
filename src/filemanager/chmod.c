@@ -42,7 +42,7 @@
 
 #include "midnight.h"           /* current_panel */
 
-#include "chmod.h"
+#include "cmd.h"                /* chmod_cmd() */
 
 /*** global variables ****************************************************************************/
 

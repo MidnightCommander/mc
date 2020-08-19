@@ -91,6 +91,17 @@ void quick_view_cmd (void);
 #ifdef HAVE_CHARSET
 void encoding_cmd (void);
 #endif
+/* achown.c */
+void advanced_chown_cmd (void);
+/* chmod.c */
+void chmod_cmd (void);
+/* chown.c */
+void chown_cmd (void);
+#ifdef ENABLE_EXT2FS_ATTR
+/* chattr.c */
+void chattr_cmd (void);
+const char *chattr_get_as_str (unsigned long attr);
+#endif
 /* find.c */
 void find_cmd (void);
 

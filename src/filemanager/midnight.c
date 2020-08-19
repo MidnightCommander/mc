@@ -75,13 +75,6 @@
 #include "command.h"            /* cmdline */
 #include "dir.h"                /* dir_list_clean() */
 
-#include "chmod.h"
-#include "chown.h"
-#include "achown.h"
-#ifdef ENABLE_EXT2FS_ATTR
-#include "chattr.h"
-#endif
-
 #ifdef USE_INTERNAL_EDIT
 #include "src/editor/edit.h"
 #endif
