@@ -1157,7 +1157,7 @@ midnight_execute_cmd (Widget * sender, long command)
         break;
 #ifdef ENABLE_EXT2FS_ATTR
     case CK_ChangeAttributes:
-        chattr_cmd ();
+        chattr_cmd (current_panel);
         break;
 #endif
     case CK_CompareDirs:

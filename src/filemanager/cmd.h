@@ -101,7 +101,7 @@ void chmod_cmd (WPanel * panel);
 void chown_cmd (WPanel * panel);
 #ifdef ENABLE_EXT2FS_ATTR
 /* chattr.c */
-void chattr_cmd (void);
+void chattr_cmd (WPanel * panel);
 const char *chattr_get_as_str (unsigned long attr);
 #endif
 /* find.c */

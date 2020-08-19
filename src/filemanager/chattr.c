@@ -48,9 +48,6 @@
 
 #include "src/keybind-defaults.h"       /* chattr_map */
 
-#include "filemanager.h"        /* current_panel */
-#include "panel.h"              /* do_file_mark() */
-
 #include "cmd.h"                /* chattr_cmd(), chattr_get_as_str() */
 
 /*** global variables ****************************************************************************/
@@ -946,7 +943,7 @@ chattr_init (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static WDialog *
-chattr_dlg_create (const char *fname, unsigned long attr)
+chattr_dlg_create (WPanel * panel, const char *fname, unsigned long attr)
 {
     const Widget *mw = CONST_WIDGET (midnight_dlg);
     gboolean single_set;
@@ -966,7 +963,7 @@ chattr_dlg_create (const char *fname, unsigned long attr)
 
     cols = check_attr_width + cb_scrollbar_width;
 
-    single_set = (current_panel->marked < 2);
+    single_set = (panel->marked < 2);
 
     lines = 5 + checkboxes_lines + 4;
     if (!single_set)
@@ -1081,12 +1078,12 @@ chattr_done (gboolean need_update)
 /* --------------------------------------------------------------------------------------------- */
 
 static const char *
-next_file (void)
+next_file (const WPanel * panel)
 {
-    while (!current_panel->dir.list[current_file].f.marked)
+    while (!panel->dir.list[current_file].f.marked)
         current_file++;
 
-    return current_panel->dir.list[current_file].fname;
+    return panel->dir.list[current_file].fname;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1136,7 +1133,7 @@ try_chattr (const char *p, unsigned long m)
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-do_chattr (const vfs_path_t * p, unsigned long m)
+do_chattr (WPanel * panel, const vfs_path_t * p, unsigned long m)
 {
     gboolean ret;
 
@@ -1145,7 +1142,7 @@ do_chattr (const vfs_path_t * p, unsigned long m)
 
     ret = try_chattr (vfs_path_as_str (p), m);
 
-    do_file_mark (current_panel, current_file, 0);
+    do_file_mark (panel, current_file, 0);
 
     return ret;
 }
@@ -1153,25 +1150,25 @@ do_chattr (const vfs_path_t * p, unsigned long m)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-chattr_apply_mask (vfs_path_t * vpath, unsigned long m)
+chattr_apply_mask (WPanel * panel, vfs_path_t * vpath, unsigned long m)
 {
     gboolean ok;
 
-    if (!do_chattr (vpath, m))
+    if (!do_chattr (panel, vpath, m))
         return;
 
     do
     {
         const char *fname;
 
-        fname = next_file ();
+        fname = next_file (panel);
         ok = (fgetflags (fname, &m) == 0);
 
         if (!ok)
         {
             /* if current file was deleted outside mc -- try next file */
-            /* decrease current_panel->marked */
-            do_file_mark (current_panel, current_file, 0);
+            /* decrease panel->marked */
+            do_file_mark (panel, current_file, 0);
 
             /* try next file */
             ok = TRUE;
@@ -1180,11 +1177,11 @@ chattr_apply_mask (vfs_path_t * vpath, unsigned long m)
         {
             vpath = vfs_path_from_str (fname);
             flags = m;
-            ok = do_chattr (vpath, m);
+            ok = do_chattr (panel, vpath, m);
             vfs_path_free (vpath);
         }
     }
-    while (ok && current_panel->marked != 0);
+    while (ok && panel->marked != 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1192,7 +1189,7 @@ chattr_apply_mask (vfs_path_t * vpath, unsigned long m)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-chattr_cmd (void)
+chattr_cmd (WPanel * panel)
 {
     gboolean need_update = FALSE;
     gboolean end_chattr = FALSE;
@@ -1222,10 +1219,10 @@ chattr_cmd (void)
         need_update = FALSE;
         end_chattr = FALSE;
 
-        if (current_panel->marked != 0)
-            fname = next_file ();       /* next marked file */
+        if (panel->marked != 0)
+            fname = next_file (panel);  /* next marked file */
         else
-            fname = selection (current_panel)->fname;   /* single file */
+            fname = selection (panel)->fname;   /* single file */
 
         vpath = vfs_path_from_str (fname);
         fname2 = vfs_path_as_str (vpath);
@@ -1240,7 +1237,7 @@ chattr_cmd (void)
 
         flags_changed = FALSE;
 
-        ch_dlg = chattr_dlg_create (fname, flags);
+        ch_dlg = chattr_dlg_create (panel, fname, flags);
         result = dlg_run (ch_dlg);
         dlg_destroy (ch_dlg);
 
@@ -1253,7 +1250,7 @@ chattr_cmd (void)
         case B_ENTER:
             if (flags_changed)
             {
-                if (current_panel->marked <= 1)
+                if (panel->marked <= 1)
                 {
                     /* single or last file */
                     if (fsetflags (fname2, flags) == -1 && !ignore_all)
@@ -1286,7 +1283,7 @@ chattr_cmd (void)
                         and_mask &= ~check_attr[i].flags;
                 }
 
-            chattr_apply_mask (vpath, flags);
+            chattr_apply_mask (panel, vpath, flags);
             need_update = TRUE;
             end_chattr = TRUE;
             break;
@@ -1299,7 +1296,7 @@ chattr_cmd (void)
                 if (chattr_is_modifiable (i) && check_attr[i].selected)
                     or_mask |= check_attr[i].flags;
 
-            chattr_apply_mask (vpath, flags);
+            chattr_apply_mask (panel, vpath, flags);
             need_update = TRUE;
             end_chattr = TRUE;
             break;
@@ -1312,7 +1309,7 @@ chattr_cmd (void)
                 if (chattr_is_modifiable (i) && check_attr[i].selected)
                     and_mask &= ~check_attr[i].flags;
 
-            chattr_apply_mask (vpath, flags);
+            chattr_apply_mask (panel, vpath, flags);
             need_update = TRUE;
             end_chattr = TRUE;
             break;
@@ -1321,16 +1318,16 @@ chattr_cmd (void)
             break;
         }
 
-        if (current_panel->marked != 0 && result != B_CANCEL)
+        if (panel->marked != 0 && result != B_CANCEL)
         {
-            do_file_mark (current_panel, current_file, 0);
+            do_file_mark (panel, current_file, 0);
             need_update = TRUE;
         }
 
         vfs_path_free (vpath);
 
     }
-    while (current_panel->marked != 0 && !end_chattr);
+    while (panel->marked != 0 && !end_chattr);
 
     chattr_done (need_update);
 }
