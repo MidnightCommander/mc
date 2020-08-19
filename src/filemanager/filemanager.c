@@ -1328,7 +1328,7 @@ midnight_execute_cmd (Widget * sender, long command)
         break;
 #endif
     case CK_CdQuick:
-        quick_cd_cmd ();
+        quick_cd_cmd (current_panel);
         break;
     case CK_HotList:
         hotlist_cmd ();

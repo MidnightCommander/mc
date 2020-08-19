@@ -1352,11 +1352,11 @@ undelete_cmd (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-quick_cd_cmd (void)
+quick_cd_cmd (WPanel * panel)
 {
     char *p;
 
-    p = cd_box ();
+    p = cd_box (panel);
     if (p != NULL && *p != '\0')
     {
         char *q;

@@ -73,10 +73,9 @@
 
 #include "command.h"            /* For cmdline */
 #include "dir.h"
-#include "panel.h"              /* LIST_FORMATS */
 #include "tree.h"
 #include "layout.h"             /* for get_nth_panel_name proto */
-#include "filemanager.h"        /* current_panel */
+#include "filemanager.h"
 
 #include "boxes.h"
 
@@ -1196,9 +1195,9 @@ configure_vfs_box (void)
 /* --------------------------------------------------------------------------------------------- */
 
 char *
-cd_box (void)
+cd_box (const WPanel * panel)
 {
-    const Widget *w = CONST_WIDGET (current_panel);
+    const Widget *w = CONST_WIDGET (panel);
     char *my_str;
 
     quick_widget_t quick_widgets[] = {

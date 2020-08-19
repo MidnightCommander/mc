@@ -81,7 +81,7 @@ void panel_tree_cmd (void);
 void link_cmd (link_type_t link_type);
 void edit_symlink_cmd (void);
 void swap_cmd (void);
-void quick_cd_cmd (void);
+void quick_cd_cmd (WPanel * panel);
 void save_setup_cmd (void);
 void user_file_menu_cmd (void);
 void info_cmd (void);
