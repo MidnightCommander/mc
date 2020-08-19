@@ -46,7 +46,7 @@ void dirsizes_cmd (void);
 gboolean view_file_at_line (const vfs_path_t * filename_vpath, gboolean plain_view,
                             gboolean internal, long start_line, off_t search_start,
                             off_t search_end);
-gboolean view_file (const vfs_path_t * filename_vpath, gboolean normal, gboolean internal);
+gboolean view_file (const vfs_path_t * filename_vpath, gboolean plain_view, gboolean internal);
 void view_cmd (void);
 void view_file_cmd (void);
 void view_raw_cmd (void);
