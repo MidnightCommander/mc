@@ -124,10 +124,10 @@ static const char *machine_str = N_("Enter machine name (F1 for details):");
 /* --------------------------------------------------------------------------------------------- */
 /**
  * Run viewer (internal or external) on the currently selected file.
- * If normal is TRUE, force internal viewer and raw mode (used for F13).
+ * If @plain_view is TRUE, force internal viewer and raw mode (used for F13).
  */
 static void
-do_view_cmd (gboolean normal)
+do_view_cmd (gboolean plain_view)
 {
     /* Directories are viewed by changing to them */
     if (S_ISDIR (selection (current_panel)->st.st_mode) || link_isdir (selection (current_panel)))
@@ -151,7 +151,7 @@ do_view_cmd (gboolean normal)
 
         file_idx = current_panel->selected;
         filename_vpath = vfs_path_from_str (current_panel->dir.list[file_idx].fname);
-        view_file (filename_vpath, normal, use_internal_view);
+        view_file (filename_vpath, plain_view, use_internal_view);
         vfs_path_free (filename_vpath);
     }
 
