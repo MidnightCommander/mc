@@ -45,8 +45,6 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 
-#include "filemanager.h"        /* current_panel */
-
 #include "cmd.h"                /* advanced_chown_cmd() */
 
 /*** global variables ****************************************************************************/
@@ -728,7 +726,7 @@ advanced_chown_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm
 /* --------------------------------------------------------------------------------------------- */
 
 static WDialog *
-advanced_chown_dlg_create (void)
+advanced_chown_dlg_create (WPanel * panel)
 {
     gboolean single_set;
     WDialog *ch_dlg;
@@ -742,7 +740,7 @@ advanced_chown_dlg_create (void)
     flag_pos = 0;
     x_toggle = 070;
 
-    single_set = (current_panel->marked < 2);
+    single_set = (panel->marked < 2);
     if (!single_set)
         lines += 2;
 
@@ -831,12 +829,12 @@ advanced_chown_done (gboolean need_update)
 /* --------------------------------------------------------------------------------------------- */
 
 static const char *
-next_file (void)
+next_file (const WPanel * panel)
 {
-    while (!current_panel->dir.list[current_file].f.marked)
+    while (!panel->dir.list[current_file].f.marked)
         current_file++;
 
-    return current_panel->dir.list[current_file].fname;
+    return panel->dir.list[current_file].fname;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -925,13 +923,13 @@ try_advanced_chown (const vfs_path_t * p, mode_t m, uid_t u, gid_t g)
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-do_advanced_chown (const vfs_path_t * p, mode_t m, uid_t u, gid_t g)
+do_advanced_chown (WPanel * panel, const vfs_path_t * p, mode_t m, uid_t u, gid_t g)
 {
     gboolean ret;
 
     ret = try_advanced_chown (p, m, u, g);
 
-    do_file_mark (current_panel, current_file, 0);
+    do_file_mark (panel, current_file, 0);
 
     return ret;
 }
@@ -939,30 +937,30 @@ do_advanced_chown (const vfs_path_t * p, mode_t m, uid_t u, gid_t g)
  /* --------------------------------------------------------------------------------------------- */
 
 static void
-apply_advanced_chowns (vfs_path_t * vpath, struct stat *sf)
+apply_advanced_chowns (WPanel * panel, vfs_path_t * vpath, struct stat *sf)
 {
     gid_t a_gid = sf->st_gid;
     uid_t a_uid = sf->st_uid;
     gboolean ok;
 
-    if (!do_advanced_chown
-        (vpath, get_mode (), (ch_flags[9] == '+') ? a_uid : (uid_t) (-1),
-         (ch_flags[10] == '+') ? a_gid : (gid_t) (-1)))
+    if (!do_advanced_chown (panel, vpath, get_mode (),
+                            (ch_flags[9] == '+') ? a_uid : (uid_t) (-1),
+                            (ch_flags[10] == '+') ? a_gid : (gid_t) (-1)))
         return;
 
     do
     {
         const char *fname;
 
-        fname = next_file ();
+        fname = next_file (panel);
         vpath = vfs_path_from_str (fname);
         ok = (mc_stat (vpath, sf) == 0);
 
         if (!ok)
         {
             /* if current file was deleted outside mc -- try next file */
-            /* decrease current_panel->marked */
-            do_file_mark (current_panel, current_file, 0);
+            /* decrease panel->marked */
+            do_file_mark (panel, current_file, 0);
 
             /* try next file */
             ok = TRUE;
@@ -971,14 +969,14 @@ apply_advanced_chowns (vfs_path_t * vpath, struct stat *sf)
         {
             ch_cmode = sf->st_mode;
 
-            ok = do_advanced_chown (vpath, get_mode (),
+            ok = do_advanced_chown (panel, vpath, get_mode (),
                                     (ch_flags[9] == '+') ? a_uid : (uid_t) (-1),
                                     (ch_flags[10] == '+') ? a_gid : (gid_t) (-1));
         }
 
         vfs_path_free (vpath);
     }
-    while (ok && current_panel->marked != 0);
+    while (ok && panel->marked != 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -986,7 +984,7 @@ apply_advanced_chowns (vfs_path_t * vpath, struct stat *sf)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-advanced_chown_cmd (void)
+advanced_chown_cmd (WPanel * panel)
 {
     gboolean need_update;
     gboolean end_chown;
@@ -994,7 +992,7 @@ advanced_chown_cmd (void)
     /* Number of files at startup */
     int files_on_begin;
 
-    files_on_begin = MAX (1, current_panel->marked);
+    files_on_begin = MAX (1, panel->marked);
 
     advanced_chown_init ();
 
@@ -1014,10 +1012,10 @@ advanced_chown_cmd (void)
         need_update = FALSE;
         end_chown = FALSE;
 
-        if (current_panel->marked != 0)
-            fname = next_file ();       /* next marked file */
+        if (panel->marked != 0)
+            fname = next_file (panel);  /* next marked file */
         else
-            fname = selection (current_panel)->fname;   /* single file */
+            fname = selection (panel)->fname;   /* single file */
 
         vpath = vfs_path_from_str (fname);
 
@@ -1029,9 +1027,9 @@ advanced_chown_cmd (void)
 
         ch_cmode = sf_stat.st_mode;
 
-        ch_dlg = advanced_chown_dlg_create ();
+        ch_dlg = advanced_chown_dlg_create (panel);
 
-        file_idx = files_on_begin == 1 ? 1 : (files_on_begin - current_panel->marked + 1);
+        file_idx = files_on_begin == 1 ? 1 : (files_on_begin - panel->marked + 1);
         label_set_textv (l_filename, "%s (%d/%d)",
                          str_fit_to_term (fname, WIDGET (ch_dlg)->cols - 20, J_LEFT_FIT),
                          file_idx, files_on_begin);
@@ -1046,7 +1044,7 @@ advanced_chown_cmd (void)
             break;
 
         case B_ENTER:
-            if (current_panel->marked <= 1)
+            if (panel->marked <= 1)
             {
                 /* single or last file */
                 if (mc_chmod (vpath, get_mode ()) == -1)
@@ -1074,7 +1072,7 @@ advanced_chown_cmd (void)
             break;
 
         case B_SETALL:
-            apply_advanced_chowns (vpath, &sf_stat);
+            apply_advanced_chowns (panel, vpath, &sf_stat);
             need_update = TRUE;
             end_chown = TRUE;
             break;
@@ -1084,9 +1082,9 @@ advanced_chown_cmd (void)
             break;
         }
 
-        if (current_panel->marked != 0 && result != B_CANCEL)
+        if (panel->marked != 0 && result != B_CANCEL)
         {
-            do_file_mark (current_panel, current_file, 0);
+            do_file_mark (panel, current_file, 0);
             need_update = TRUE;
         }
 
@@ -1094,7 +1092,7 @@ advanced_chown_cmd (void)
 
         dlg_destroy (ch_dlg);
     }
-    while (current_panel->marked != 0 && !end_chown);
+    while (panel->marked != 0 && !end_chown);
 
     advanced_chown_done (need_update);
 }

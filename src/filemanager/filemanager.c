@@ -1153,7 +1153,7 @@ midnight_execute_cmd (Widget * sender, long command)
         chown_cmd ();
         break;
     case CK_ChangeOwnAdvanced:
-        advanced_chown_cmd ();
+        advanced_chown_cmd (current_panel);
         break;
 #ifdef ENABLE_EXT2FS_ATTR
     case CK_ChangeAttributes:

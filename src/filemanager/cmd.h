@@ -9,6 +9,8 @@
 
 #include "lib/global.h"
 
+#include "panel.h"
+
 /*** typedefs(not structures) and defined constants **********************************************/
 
 /*** enums ***************************************************************************************/
@@ -92,7 +94,7 @@ void quick_view_cmd (void);
 void encoding_cmd (void);
 #endif
 /* achown.c */
-void advanced_chown_cmd (void);
+void advanced_chown_cmd (WPanel * panel);
 /* chmod.c */
 void chmod_cmd (void);
 /* chown.c */
