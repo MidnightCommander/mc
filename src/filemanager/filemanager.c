@@ -1141,7 +1141,7 @@ midnight_execute_cmd (Widget * sender, long command)
         change_panel ();
         break;
     case CK_HotListAdd:
-        add2hotlist_cmd ();
+        add2hotlist_cmd (current_panel);
         break;
     case CK_SetupListingFormat:
         setup_listing_format_cmd ();

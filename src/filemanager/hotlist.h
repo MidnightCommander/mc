@@ -7,6 +7,8 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
+#include "panel.h"
+
 /*** enums ***************************************************************************************/
 
 typedef enum
@@ -22,7 +24,7 @@ typedef enum
 
 /*** declarations of public functions ************************************************************/
 
-void add2hotlist_cmd (void);
+void add2hotlist_cmd (WPanel * panel);
 char *hotlist_show (hotlist_t list_type);
 gboolean save_hotlist (void);
 void done_hotlist (void);

@@ -59,7 +59,6 @@
 #include "src/setup.h"          /* For profile_bname */
 #include "src/history.h"
 
-#include "filemanager.h"        /* current_panel */
 #include "command.h"            /* cmdline */
 
 #include "hotlist.h"
@@ -151,6 +150,8 @@ struct hotlist
 
 /*** file scope variables ************************************************************************/
 
+static WPanel *our_panel;
+
 static gboolean hotlist_has_dot_dot = TRUE;
 
 static WDialog *hotlist_dlg, *movelist_dlg;
@@ -216,7 +217,7 @@ static int list_level = 0;
 
 static void init_movelist (struct hotlist *item);
 static void add_new_group_cmd (void);
-static void add_new_entry_cmd (void);
+static void add_new_entry_cmd (WPanel * panel);
 static void remove_from_hotlist (struct hotlist *entry);
 static void load_hotlist (void);
 static void add_dotdot_to_list (void);
@@ -413,11 +414,11 @@ hotlist_run_cmd (int action)
         return 0;
 
     case B_ADD_CURRENT:
-        add2hotlist_cmd ();
+        add2hotlist_cmd (our_panel);
         return 0;
 
     case B_NEW_ENTRY:
-        add_new_entry_cmd ();
+        add_new_entry_cmd (our_panel);
         return 0;
 
     case B_ENTER:
@@ -1032,13 +1033,13 @@ add_new_entry_input (const char *header, const char *text1, const char *text2,
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-add_new_entry_cmd (void)
+add_new_entry_cmd (WPanel * panel)
 {
     char *title, *url, *to_free;
     int ret;
 
     /* Take current directory as default value for input fields */
-    to_free = title = url = vfs_path_to_str_flags (current_panel->cwd_vpath, 0, VPF_STRIP_PASSWORD);
+    to_free = title = url = vfs_path_to_str_flags (panel->cwd_vpath, 0, VPF_STRIP_PASSWORD);
 
     ret = add_new_entry_input (_("New hotlist entry"), _("Directory label:"),
                                _("Directory path:"), "[Hotlist]", &title, &url);
@@ -1594,7 +1595,7 @@ add_dotdot_to_list (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-add2hotlist_cmd (void)
+add2hotlist_cmd (WPanel * panel)
 {
     char *lc_prompt;
     const char *cp = N_("Label for \"%s\":");
@@ -1605,8 +1606,11 @@ add2hotlist_cmd (void)
     cp = _(cp);
 #endif
 
+    /* extra variable to use it in the button callback */
+    our_panel = panel;
+
     l = str_term_width1 (cp);
-    label_string = vfs_path_to_str_flags (current_panel->cwd_vpath, 0, VPF_STRIP_PASSWORD);
+    label_string = vfs_path_to_str_flags (panel->cwd_vpath, 0, VPF_STRIP_PASSWORD);
     lc_prompt = g_strdup_printf (cp, str_trunc (label_string, COLS - 2 * UX - (l + 8)));
     label =
         input_dialog (_("Add to hotlist"), lc_prompt, MC_HISTORY_HOTLIST_ADD, label_string,
