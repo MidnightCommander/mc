@@ -1022,7 +1022,7 @@ show_editor_viewer_history (void)
 
         case CK_View:
             s_vpath = vfs_path_from_str (s);
-            view_file (s_vpath, use_internal_view, 0);
+            view_file (s_vpath, use_internal_view, FALSE);
             break;
 
         default:
