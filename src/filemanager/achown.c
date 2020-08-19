@@ -45,7 +45,7 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 
-#include "midnight.h"           /* current_panel */
+#include "filemanager.h"        /* current_panel */
 
 #include "cmd.h"                /* advanced_chown_cmd() */
 

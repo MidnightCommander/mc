@@ -29,7 +29,7 @@
 
 #include "src/vfs/local/local.c"
 
-#include "src/filemanager/midnight.c"
+#include "src/filemanager/filemanager.c"
 
 #include "src/filemanager/ext.c"
 

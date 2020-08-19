@@ -45,7 +45,7 @@
 #include "lib/widget.h"
 
 #include "src/setup.h"          /* panels_options */
-#include "midnight.h"           /* current_panel */
+#include "filemanager.h"        /* current_panel */
 
 #include "cmd.h"                /* chown_cmd() */
 

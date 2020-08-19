@@ -56,7 +56,7 @@
 #include "lib/util.h"
 #include "lib/vfs/vfs.h"        /* vfs_init(), vfs_shut() */
 
-#include "filemanager/midnight.h"       /* current_panel */
+#include "filemanager/filemanager.h"
 #include "filemanager/treestore.h"      /* tree_store_save */
 #include "filemanager/layout.h"
 #include "filemanager/ext.h"    /* flush_extension_file() */

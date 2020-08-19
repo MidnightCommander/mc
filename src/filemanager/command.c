@@ -51,7 +51,7 @@
 #include "src/execute.h"        /* shell_execute */
 #include "src/usermenu.h"       /* expand_format */
 
-#include "midnight.h"           /* current_panel */
+#include "filemanager.h"        /* current_panel */
 #include "layout.h"             /* command_prompt */
 #include "tree.h"               /* sync_tree() */
 

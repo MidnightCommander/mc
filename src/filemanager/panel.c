@@ -74,7 +74,7 @@
 #include "layout.h"             /* Most layout variables are here */
 #include "cmd.h"
 #include "command.h"            /* cmdline */
-#include "midnight.h"
+#include "filemanager.h"
 #include "mountlist.h"          /* my_statfs */
 
 #include "panel.h"

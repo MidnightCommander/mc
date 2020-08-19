@@ -60,7 +60,7 @@
 #include "src/history.h"
 
 #include "dir.h"
-#include "midnight.h"           /* the_menubar */
+#include "filemanager.h"        /* the_menubar */
 #include "file.h"               /* copy_dir_dir(), move_dir_dir(), erase_dir() */
 #include "layout.h"             /* command_prompt */
 #include "treestore.h"

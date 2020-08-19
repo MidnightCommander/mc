@@ -50,7 +50,7 @@
 #include "src/history.h"
 
 #include "dir.h"
-#include "midnight.h"           /* current_panel */
+#include "filemanager.h"        /* current_panel */
 #include "layout.h"             /* rotate_dash() */
 #include "panel.h"              /* WPanel */
 

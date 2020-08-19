@@ -34,7 +34,7 @@
 #include "lib/vfs/vfs.h"        /* vfs_get_raw_current_dir() */
 
 #include "src/setup.h"          /* quit */
-#include "src/filemanager/midnight.h"   /* current_panel */
+#include "src/filemanager/filemanager.h"        /* current_panel */
 #include "src/consaver/cons.saver.h"    /* handle_console() */
 
 #include "internal.h"

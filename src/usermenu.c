@@ -54,7 +54,7 @@
 #include "src/history.h"
 
 #include "src/filemanager/dir.h"
-#include "src/filemanager/midnight.h"
+#include "src/filemanager/filemanager.h"
 #include "src/filemanager/layout.h"
 
 #include "usermenu.h"

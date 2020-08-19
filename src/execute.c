@@ -45,7 +45,7 @@
 #include "lib/strutil.h"        /* str_replace_all_substrings() */
 #include "lib/widget.h"
 
-#include "filemanager/midnight.h"
+#include "filemanager/filemanager.h"
 #include "filemanager/layout.h" /* use_dash() */
 #include "consaver/cons.saver.h"
 #ifdef ENABLE_SUBSHELL

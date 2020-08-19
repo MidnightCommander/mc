@@ -32,7 +32,7 @@
 
 #include "lib/vfs/path.h"
 #include "src/filemanager/layout.h"
-#include "src/filemanager/midnight.h"
+#include "src/filemanager/filemanager.h"
 #include "src/filemanager/tree.h"
 #ifdef ENABLE_SUBSHELL
 #include "src/subshell/subshell.h"

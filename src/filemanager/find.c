@@ -54,7 +54,7 @@
 
 #include "dir.h"
 #include "cmd.h"                /* find_cmd(), view_file_at_line() */
-#include "midnight.h"           /* current_panel */
+#include "filemanager.h"        /* current_panel */
 #include "boxes.h"
 #include "panelize.h"
 

@@ -85,7 +85,7 @@
 #include "hotlist.h"            /* hotlist_show() */
 #include "panel.h"              /* WPanel */
 #include "tree.h"               /* tree_chdir() */
-#include "midnight.h"           /* change_panel() */
+#include "filemanager.h"        /* change_panel() */
 #include "command.h"            /* cmdline */
 #include "layout.h"             /* get_current_type() */
 #include "ext.h"                /* regex_command() */

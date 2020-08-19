@@ -48,7 +48,7 @@
 
 #include "src/keybind-defaults.h"       /* chattr_map */
 
-#include "midnight.h"           /* current_panel */
+#include "filemanager.h"        /* current_panel */
 #include "panel.h"              /* do_file_mark() */
 
 #include "cmd.h"                /* chattr_cmd(), chattr_get_as_str() */

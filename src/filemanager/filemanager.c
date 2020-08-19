@@ -8,7 +8,7 @@
    Miguel de Icaza, 1994, 1995, 1996, 1997
    Janne Kukonlehto, 1994, 1995
    Norbert Warmuth, 1997
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2012, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2012, 2013, 2020
    Slava Zanko <slavazanko@gmail.com>, 2013
 
    This file is part of the Midnight Commander.
@@ -27,7 +27,7 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** \file main.c
+/** \file filemanager.c
  *  \brief Source: main dialog (file panels) of the Midnight Commander
  */
 
@@ -86,7 +86,7 @@
 #include "src/consaver/cons.saver.h"    /* show_console_contents */
 #include "src/file_history.h"   /* show_file_history() */
 
-#include "midnight.h"
+#include "filemanager.h"
 
 /*** global variables ****************************************************************************/
 

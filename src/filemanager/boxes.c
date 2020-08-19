@@ -76,7 +76,7 @@
 #include "panel.h"              /* LIST_FORMATS */
 #include "tree.h"
 #include "layout.h"             /* for get_nth_panel_name proto */
-#include "midnight.h"           /* current_panel */
+#include "filemanager.h"        /* current_panel */
 
 #include "boxes.h"
 

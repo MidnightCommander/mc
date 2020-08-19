@@ -61,7 +61,7 @@
 #include "lib/mcconfig.h"       /* mc_config_history_get() */
 
 #include "src/filemanager/layout.h"
-#include "src/filemanager/midnight.h"   /* current_panel */
+#include "src/filemanager/filemanager.h"        /* current_panel */
 #include "src/filemanager/ext.h"        /* regex_command_for() */
 
 #include "src/history.h"

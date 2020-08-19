@@ -54,7 +54,7 @@
 #endif
 
 #include "filemanager/dir.h"
-#include "filemanager/midnight.h"
+#include "filemanager/filemanager.h"
 #include "filemanager/tree.h"   /* xtree_mode */
 #include "filemanager/hotlist.h"        /* load/save/done hotlist */
 #include "filemanager/panelize.h"       /* load/save/done panelize */

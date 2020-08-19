@@ -59,7 +59,7 @@
 #include "src/setup.h"          /* For profile_bname */
 #include "src/history.h"
 
-#include "midnight.h"           /* current_panel */
+#include "filemanager.h"        /* current_panel */
 #include "command.h"            /* cmdline */
 
 #include "hotlist.h"

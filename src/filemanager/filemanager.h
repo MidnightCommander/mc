@@ -1,9 +1,9 @@
-/** \file midnight.h
- *  \brief Header: main dialog (file panel) for Midnight Commander
+/** \file filemanager.h
+ *  \brief Header: main dialog (file panels) for Midnight Commander
  */
 
-#ifndef MC__MIDNIGHT_H
-#define MC__MIDNIGHT_H
+#ifndef MC__FILEMANAGER_H
+#define MC__FILEMANAGER_H
 
 #include "lib/widget.h"
 
@@ -50,4 +50,4 @@ gboolean do_nc (void);
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__MIDNIGHT_H */
+#endif /* MC__FILEMANAGER_H */

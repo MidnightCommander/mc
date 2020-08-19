@@ -60,7 +60,7 @@
 #endif
 
 #include "command.h"
-#include "midnight.h"
+#include "filemanager.h"
 #include "tree.h"
 /* Needed for the extern declarations of integer parameters */
 #include "dir.h"

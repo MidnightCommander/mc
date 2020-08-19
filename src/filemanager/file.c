@@ -80,7 +80,7 @@
 #include "filegui.h"
 #include "filenot.h"
 #include "tree.h"
-#include "midnight.h"           /* current_panel */
+#include "filemanager.h"        /* current_panel */
 #include "layout.h"             /* rotate_dash() */
 #include "ioblksize.h"          /* io_blksize() */
 
