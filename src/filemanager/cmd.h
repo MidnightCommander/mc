@@ -49,10 +49,10 @@ gboolean view_file_at_line (const vfs_path_t * filename_vpath, gboolean plain_vi
                             gboolean internal, long start_line, off_t search_start,
                             off_t search_end);
 gboolean view_file (const vfs_path_t * filename_vpath, gboolean plain_view, gboolean internal);
-void view_cmd (void);
-void view_file_cmd (void);
-void view_raw_cmd (void);
-void view_filtered_cmd (void);
+void view_cmd (const WPanel * panel);
+void view_file_cmd (const WPanel * panel);
+void view_raw_cmd (const WPanel * panel);
+void view_filtered_cmd (const WPanel * panel);
 void edit_file_at_line (const vfs_path_t * what_vpath, gboolean internal, long start_line);
 void edit_cmd (void);
 void edit_cmd_new (void);

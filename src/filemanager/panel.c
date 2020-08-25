@@ -3447,7 +3447,7 @@ panel_execute_cmd (WPanel * panel, long command)
         do_enter (panel);
         break;
     case CK_ViewRaw:
-        view_raw_cmd ();
+        view_raw_cmd (panel);
         break;
     case CK_EditNew:
         edit_cmd_new ();

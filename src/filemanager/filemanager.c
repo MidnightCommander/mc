@@ -1244,7 +1244,7 @@ midnight_execute_cmd (Widget * sender, long command)
         filter_cmd ();
         break;
     case CK_ViewFiltered:
-        view_filtered_cmd ();
+        view_filtered_cmd (current_panel);
         break;
     case CK_Find:
         find_cmd ();
@@ -1418,10 +1418,10 @@ midnight_execute_cmd (Widget * sender, long command)
         user_file_menu_cmd ();
         break;
     case CK_View:
-        view_cmd ();
+        view_cmd (current_panel);
         break;
     case CK_ViewFile:
-        view_file_cmd ();
+        view_file_cmd (current_panel);
         break;
     case CK_EditorViewerHistory:
         show_editor_viewer_history ();

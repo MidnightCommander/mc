@@ -127,19 +127,19 @@ static const char *machine_str = N_("Enter machine name (F1 for details):");
  * If @plain_view is TRUE, force internal viewer and raw mode (used for F13).
  */
 static void
-do_view_cmd (gboolean plain_view)
+do_view_cmd (const WPanel * panel, gboolean plain_view)
 {
     /* Directories are viewed by changing to them */
-    if (S_ISDIR (selection (current_panel)->st.st_mode) || link_isdir (selection (current_panel)))
+    if (S_ISDIR (selection (panel)->st.st_mode) || link_isdir (selection (panel)))
     {
         vfs_path_t *fname_vpath;
 
-        if (confirm_view_dir && (current_panel->marked != 0 || current_panel->dirs_marked != 0) &&
+        if (confirm_view_dir && (panel->marked != 0 || panel->dirs_marked != 0) &&
             query_dialog (_("Confirmation"), _("Files tagged, want to cd?"), D_NORMAL, 2,
                           _("&Yes"), _("&No")) != 0)
             return;
 
-        fname_vpath = vfs_path_from_str (selection (current_panel)->fname);
+        fname_vpath = vfs_path_from_str (selection (panel)->fname);
         if (!do_cd (fname_vpath, cd_exact))
             message (D_ERROR, MSG_ERROR, _("Cannot change directory"));
         vfs_path_free (fname_vpath);
@@ -149,8 +149,8 @@ do_view_cmd (gboolean plain_view)
         int file_idx;
         vfs_path_t *filename_vpath;
 
-        file_idx = current_panel->selected;
-        filename_vpath = vfs_path_from_str (current_panel->dir.list[file_idx].fname);
+        file_idx = panel->selected;
+        filename_vpath = vfs_path_from_str (panel->dir.list[file_idx].fname);
         view_file (filename_vpath, plain_view, use_internal_view);
         vfs_path_free (filename_vpath);
     }
@@ -609,23 +609,23 @@ view_file (const vfs_path_t * filename_vpath, gboolean plain_view, gboolean inte
 /** Run user's preferred viewer on the currently selected file */
 
 void
-view_cmd (void)
+view_cmd (const WPanel * panel)
 {
-    do_view_cmd (FALSE);
+    do_view_cmd (panel, FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 /** Ask for file and run user's preferred viewer on it */
 
 void
-view_file_cmd (void)
+view_file_cmd (const WPanel * panel)
 {
     char *filename;
     vfs_path_t *vpath;
 
     filename =
         input_expand_dialog (_("View file"), _("Filename:"),
-                             MC_HISTORY_FM_VIEW_FILE, selection (current_panel)->fname,
+                             MC_HISTORY_FM_VIEW_FILE, selection (panel)->fname,
                              INPUT_COMPLETE_FILENAMES);
     if (filename == NULL)
         return;
@@ -639,21 +639,21 @@ view_file_cmd (void)
 /* --------------------------------------------------------------------------------------------- */
 /** Run plain internal viewer on the currently selected file */
 void
-view_raw_cmd (void)
+view_raw_cmd (const WPanel * panel)
 {
-    do_view_cmd (TRUE);
+    do_view_cmd (panel, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 void
-view_filtered_cmd (void)
+view_filtered_cmd (const WPanel * panel)
 {
     char *command;
     const char *initial_command;
 
     if (input_is_empty (cmdline))
-        initial_command = selection (current_panel)->fname;
+        initial_command = selection (panel)->fname;
     else
         initial_command = cmdline->buffer;
 
