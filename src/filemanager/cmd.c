@@ -711,11 +711,11 @@ edit_file_at_line (const vfs_path_t * what_vpath, gboolean internal, long start_
 /* --------------------------------------------------------------------------------------------- */
 
 void
-edit_cmd (void)
+edit_cmd (const WPanel * panel)
 {
     vfs_path_t *fname;
 
-    fname = vfs_path_from_str (selection (current_panel)->fname);
+    fname = vfs_path_from_str (selection (panel)->fname);
     if (regex_command (fname, "Edit") == 0)
         do_edit (fname);
     vfs_path_free (fname);
@@ -725,11 +725,11 @@ edit_cmd (void)
 
 #ifdef USE_INTERNAL_EDIT
 void
-edit_cmd_force_internal (void)
+edit_cmd_force_internal (const WPanel * panel)
 {
     vfs_path_t *fname;
 
-    fname = vfs_path_from_str (selection (current_panel)->fname);
+    fname = vfs_path_from_str (selection (panel)->fname);
     if (regex_command (fname, "Edit") == 0)
         edit_file_at_line (fname, TRUE, 1);
     vfs_path_free (fname);

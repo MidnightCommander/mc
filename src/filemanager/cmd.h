@@ -54,10 +54,10 @@ void view_file_cmd (const WPanel * panel);
 void view_raw_cmd (const WPanel * panel);
 void view_filtered_cmd (const WPanel * panel);
 void edit_file_at_line (const vfs_path_t * what_vpath, gboolean internal, long start_line);
-void edit_cmd (void);
+void edit_cmd (const WPanel * panel);
 void edit_cmd_new (void);
 #ifdef USE_INTERNAL_EDIT
-void edit_cmd_force_internal (void);
+void edit_cmd_force_internal (const WPanel * panel);
 #endif
 void copy_cmd (void);
 void copy_cmd_local (void);

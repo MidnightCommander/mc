@@ -1218,11 +1218,11 @@ midnight_execute_cmd (Widget * sender, long command)
         display_bits_box ();
         break;
     case CK_Edit:
-        edit_cmd ();
+        edit_cmd (current_panel);
         break;
 #ifdef USE_INTERNAL_EDIT
     case CK_EditForceInternal:
-        edit_cmd_force_internal ();
+        edit_cmd_force_internal (current_panel);
         break;
 #endif
     case CK_EditExtensionsFile:
