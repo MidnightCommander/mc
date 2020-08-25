@@ -1380,27 +1380,23 @@ quick_cd_cmd (WPanel * panel)
  */
 
 void
-smart_dirsize_cmd (void)
+smart_dirsize_cmd (WPanel * panel)
 {
-    WPanel *panel = current_panel;
-    file_entry_t *entry;
+    const file_entry_t *entry = &panel->dir.list[panel->selected];
 
-    entry = &(panel->dir.list[panel->selected]);
     if ((S_ISDIR (entry->st.st_mode) && DIR_IS_DOTDOT (entry->fname)) || panel->dirs_marked)
-        dirsizes_cmd ();
+        dirsizes_cmd (panel);
     else
-        single_dirsize_cmd ();
+        single_dirsize_cmd (panel);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 void
-single_dirsize_cmd (void)
+single_dirsize_cmd (WPanel * panel)
 {
-    WPanel *panel = current_panel;
-    file_entry_t *entry;
+    file_entry_t *entry = &panel->dir.list[panel->selected];
 
-    entry = &(panel->dir.list[panel->selected]);
     if (S_ISDIR (entry->st.st_mode) && !DIR_IS_DOTDOT (entry->fname))
     {
         size_t dir_count = 0;
@@ -1440,9 +1436,8 @@ single_dirsize_cmd (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-dirsizes_cmd (void)
+dirsizes_cmd (WPanel * panel)
 {
-    WPanel *panel = current_panel;
     int i;
     dirsize_status_msg_t dsm;
 

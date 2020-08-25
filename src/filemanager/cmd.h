@@ -42,9 +42,9 @@ void smblink_cmd (void);
 #endif
 void undelete_cmd (void);
 void help_cmd (void);
-void smart_dirsize_cmd (void);
-void single_dirsize_cmd (void);
-void dirsizes_cmd (void);
+void smart_dirsize_cmd (WPanel * panel);
+void single_dirsize_cmd (WPanel * panel);
+void dirsizes_cmd (WPanel * panel);
 gboolean view_file_at_line (const vfs_path_t * filename_vpath, gboolean plain_view,
                             gboolean internal, long start_line, off_t search_start,
                             off_t search_end);

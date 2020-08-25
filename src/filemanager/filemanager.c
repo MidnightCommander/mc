@@ -1371,7 +1371,7 @@ midnight_execute_cmd (Widget * sender, long command)
         toggle_subshell ();
         break;
     case CK_DirSize:
-        smart_dirsize_cmd ();
+        smart_dirsize_cmd (current_panel);
         break;
     case CK_Sort:
         sort_cmd ();
