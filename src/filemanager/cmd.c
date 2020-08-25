@@ -880,11 +880,11 @@ mkdir_cmd (WPanel * panel)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-delete_cmd (void)
+delete_cmd (WPanel * panel)
 {
     save_cwds_stat ();
 
-    if (panel_operate (current_panel, OP_DELETE, FALSE))
+    if (panel_operate (panel, OP_DELETE, FALSE))
     {
         update_panels (UP_OPTIMIZE, UP_KEEPSEL);
         repaint_screen ();
@@ -895,11 +895,11 @@ delete_cmd (void)
 /** Invoked by F18.  Remove selected file, regardless of marked files.  */
 
 void
-delete_cmd_local (void)
+delete_cmd_local (WPanel * panel)
 {
     save_cwds_stat ();
 
-    if (panel_operate (current_panel, OP_DELETE, TRUE))
+    if (panel_operate (panel, OP_DELETE, TRUE))
     {
         update_panels (UP_OPTIMIZE, UP_KEEPSEL);
         repaint_screen ();

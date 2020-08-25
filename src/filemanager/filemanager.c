@@ -1204,7 +1204,7 @@ midnight_execute_cmd (Widget * sender, long command)
         put_other_tagged ();
         break;
     case CK_Delete:
-        delete_cmd ();
+        delete_cmd (current_panel);
         break;
     case CK_ScreenList:
         dialog_switch_list ();

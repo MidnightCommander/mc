@@ -3441,7 +3441,7 @@ panel_execute_cmd (WPanel * panel, long command)
         copy_cmd_local (panel);
         break;
     case CK_DeleteSingle:
-        delete_cmd_local ();
+        delete_cmd_local (panel);
         break;
     case CK_Enter:
         do_enter (panel);
