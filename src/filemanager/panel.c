@@ -3438,7 +3438,7 @@ panel_execute_cmd (WPanel * panel, long command)
         chdir_to_readlink (panel);
         break;
     case CK_CopySingle:
-        copy_cmd_local ();
+        copy_cmd_local (panel);
         break;
     case CK_DeleteSingle:
         delete_cmd_local ();
@@ -3453,7 +3453,7 @@ panel_execute_cmd (WPanel * panel, long command)
         edit_cmd_new ();
         break;
     case CK_MoveSingle:
-        rename_cmd_local ();
+        rename_cmd_local (panel);
         break;
     case CK_SelectInvert:
         panel_select_invert_files (panel);

@@ -59,10 +59,10 @@ void edit_cmd_new (void);
 #ifdef USE_INTERNAL_EDIT
 void edit_cmd_force_internal (const WPanel * panel);
 #endif
-void copy_cmd (void);
-void copy_cmd_local (void);
-void rename_cmd (void);
-void rename_cmd_local (void);
+void copy_cmd (WPanel * panel);
+void copy_cmd_local (WPanel * panel);
+void rename_cmd (WPanel * panel);
+void rename_cmd_local (WPanel * panel);
 void mkdir_cmd (WPanel * panel);
 void delete_cmd (void);
 void delete_cmd_local (void);

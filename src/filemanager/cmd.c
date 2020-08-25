@@ -770,11 +770,11 @@ edit_cmd_new (void)
 /** Invoked by F5.  Copy, default to the other panel.  */
 
 void
-copy_cmd (void)
+copy_cmd (WPanel * panel)
 {
     save_cwds_stat ();
 
-    if (panel_operate (current_panel, OP_COPY, FALSE))
+    if (panel_operate (panel, OP_COPY, FALSE))
     {
         update_panels (UP_OPTIMIZE, UP_KEEPSEL);
         repaint_screen ();
@@ -785,11 +785,11 @@ copy_cmd (void)
 /** Invoked by F6.  Move/rename, default to the other panel, ignore marks.  */
 
 void
-rename_cmd (void)
+rename_cmd (WPanel * panel)
 {
     save_cwds_stat ();
 
-    if (panel_operate (current_panel, OP_MOVE, FALSE))
+    if (panel_operate (panel, OP_MOVE, FALSE))
     {
         update_panels (UP_OPTIMIZE, UP_KEEPSEL);
         repaint_screen ();
@@ -800,11 +800,11 @@ rename_cmd (void)
 /** Invoked by F15.  Copy, default to the same panel, ignore marks.  */
 
 void
-copy_cmd_local (void)
+copy_cmd_local (WPanel * panel)
 {
     save_cwds_stat ();
 
-    if (panel_operate (current_panel, OP_COPY, TRUE))
+    if (panel_operate (panel, OP_COPY, TRUE))
     {
         update_panels (UP_OPTIMIZE, UP_KEEPSEL);
         repaint_screen ();
@@ -815,11 +815,11 @@ copy_cmd_local (void)
 /** Invoked by F16.  Move/rename, default to the same panel.  */
 
 void
-rename_cmd_local (void)
+rename_cmd_local (WPanel * panel)
 {
     save_cwds_stat ();
 
-    if (panel_operate (current_panel, OP_MOVE, TRUE))
+    if (panel_operate (panel, OP_MOVE, TRUE))
     {
         update_panels (UP_OPTIMIZE, UP_KEEPSEL);
         repaint_screen ();

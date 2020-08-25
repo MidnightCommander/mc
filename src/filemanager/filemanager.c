@@ -1175,7 +1175,7 @@ midnight_execute_cmd (Widget * sender, long command)
         confirm_box ();
         break;
     case CK_Copy:
-        copy_cmd ();
+        copy_cmd (current_panel);
         break;
     case CK_PutCurrentPath:
         midnight_put_panel_path (current_panel);
@@ -1349,7 +1349,7 @@ midnight_execute_cmd (Widget * sender, long command)
         link_cmd (LINK_SYMLINK_RELATIVE);
         break;
     case CK_Move:
-        rename_cmd ();
+        rename_cmd (current_panel);
         break;
     case CK_Reread:
         reread_cmd ();
