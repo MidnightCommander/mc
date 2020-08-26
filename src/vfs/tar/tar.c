@@ -274,6 +274,24 @@ typedef enum
     HEADER_FAILURE              /* ill-formed header, or bad checksum */
 } read_header;
 
+struct tar_stat_info
+{
+    char *orig_file_name;       /* name of file read from the archive header */
+    char *file_name;            /* name of file for the current archive entry after being normalized */
+    char *link_name;            /* name of link for the current archive entry  */
+#if 0
+    char *uname;                /* user name of owner */
+    char *gname;                /* group name of owner */
+#endif
+    struct stat stat;           /* regular filesystem stat */
+
+    /* stat() doesn't always have access, data modification, and status
+       change times in a convenient form, so store them separately.  */
+    struct timespec atime;
+    struct timespec mtime;
+    struct timespec ctime;
+};
+
 typedef struct
 {
     struct vfs_s_super base;    /* base class */
@@ -308,6 +326,10 @@ static off_t current_tar_position = 0;
 
 static union block block_buf;
 
+static struct tar_stat_info current_stat_info;
+
+static struct timespec start_time;
+
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
@@ -320,6 +342,48 @@ tar_base64_init (void)
     memset (base64_map, 64, sizeof base64_map);
     for (i = 0; i < 64; i++)
         base64_map[(int) base_64_digits[i]] = i;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+tar_stat_destroy (struct tar_stat_info *st)
+{
+    g_free (st->orig_file_name);
+    g_free (st->file_name);
+    g_free (st->link_name);
+#if 0
+    g_free (st->uname);
+    g_free (st->gname);
+#endif
+    memset (st, 0, sizeof (*st));
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+tar_assign_string (char **string, char *value)
+{
+    g_free (*string);
+    *string = value;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+tar_assign_string_dup (char **string, const char *value)
+{
+    g_free (*string);
+    *string = g_strdup (value);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+tar_assign_string_dup_n (char **string, const char *value, size_t n)
+{
+    g_free (*string);
+    *string = g_strndup (value, n);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -672,11 +736,11 @@ tar_checksum (const union block *header)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-tar_decode_header (union block *header, tar_super_t * arch, struct stat *st)
+tar_decode_header (union block *header, tar_super_t * arch)
 {
     gboolean hbits = FALSE;
 
-    st->st_mode = MODE_FROM_HEADER (header->header.mode, &hbits);
+    current_stat_info.stat.st_mode = MODE_FROM_HEADER (header->header.mode, &hbits);
 
     /*
      * Try to determine the archive format.
@@ -720,31 +784,31 @@ tar_decode_header (union block *header, tar_super_t * arch, struct stat *st)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-tar_fill_stat (struct vfs_s_super *archive, struct stat *st, union block *header)
+tar_fill_stat (struct vfs_s_super *archive, union block *header)
 {
     tar_super_t *arch = TAR_SUPER (archive);
 
-    /* Adjust st->st_mode because there are tar-files with
+    /* Adjust current_stat_info.stat.st_mode because there are tar-files with
      * typeflag==SYMTYPE and S_ISLNK(mod)==0. I don't
      * know about the other modes but I think I cause no new
      * problem when I adjust them, too. -- Norbert.
      */
     if (header->header.typeflag == DIRTYPE || header->header.typeflag == GNUTYPE_DUMPDIR)
-        st->st_mode |= S_IFDIR;
+        current_stat_info.stat.st_mode |= S_IFDIR;
     else if (header->header.typeflag == SYMTYPE)
-        st->st_mode |= S_IFLNK;
+        current_stat_info.stat.st_mode |= S_IFLNK;
     else if (header->header.typeflag == CHRTYPE)
-        st->st_mode |= S_IFCHR;
+        current_stat_info.stat.st_mode |= S_IFCHR;
     else if (header->header.typeflag == BLKTYPE)
-        st->st_mode |= S_IFBLK;
+        current_stat_info.stat.st_mode |= S_IFBLK;
     else if (header->header.typeflag == FIFOTYPE)
-        st->st_mode |= S_IFIFO;
+        current_stat_info.stat.st_mode |= S_IFIFO;
     else
-        st->st_mode |= S_IFREG;
+        current_stat_info.stat.st_mode |= S_IFREG;
 
-    st->st_dev = 0;
+    current_stat_info.stat.st_dev = 0;
 #ifdef HAVE_STRUCT_STAT_ST_RDEV
-    st->st_rdev = 0;
+    current_stat_info.stat.st_rdev = 0;
 #endif
 
     switch (arch->type)
@@ -754,10 +818,10 @@ tar_fill_stat (struct vfs_s_super *archive, struct stat *st, union block *header
     case TAR_GNU:
     case TAR_OLDGNU:
         /* *INDENT-OFF* */
-        st->st_uid = *header->header.uname != '\0'
+        current_stat_info.stat.st_uid = *header->header.uname != '\0'
             ? (uid_t) vfs_finduid (header->header.uname)
             : UID_FROM_HEADER (header->header.uid);
-        st->st_gid = *header->header.gname != '\0'
+        current_stat_info.stat.st_gid = *header->header.gname != '\0'
             ? (gid_t) vfs_findgid (header->header.gname)
             : GID_FROM_HEADER (header->header.gid);
         /* *INDENT-ON* */
@@ -767,7 +831,7 @@ tar_fill_stat (struct vfs_s_super *archive, struct stat *st, union block *header
         case BLKTYPE:
         case CHRTYPE:
 #ifdef HAVE_STRUCT_STAT_ST_RDEV
-            st->st_rdev =
+            current_stat_info.stat.st_rdev =
                 makedev (MAJOR_FROM_HEADER (header->header.devmajor),
                          MINOR_FROM_HEADER (header->header.devminor));
 #endif
@@ -778,37 +842,38 @@ tar_fill_stat (struct vfs_s_super *archive, struct stat *st, union block *header
         break;
 
     default:
-        st->st_uid = UID_FROM_HEADER (header->header.uid);
-        st->st_gid = GID_FROM_HEADER (header->header.gid);
+        current_stat_info.stat.st_uid = UID_FROM_HEADER (header->header.uid);
+        current_stat_info.stat.st_gid = GID_FROM_HEADER (header->header.gid);
         break;
     }
 
 #ifdef HAVE_STRUCT_STAT_ST_MTIM
-    st->st_atim.tv_nsec = st->st_mtim.tv_nsec = st->st_ctim.tv_nsec = 0;
+    current_stat_info.atime.tv_nsec = 0;
+    current_stat_info.mtime.tv_nsec = 0;
+    current_stat_info.ctime.tv_nsec = 0;
 #endif
-    st->st_mtime = TIME_FROM_HEADER (header->header.mtime);
-    st->st_atime = 0;
-    st->st_ctime = 0;
+    current_stat_info.mtime.tv_sec = TIME_FROM_HEADER (header->header.mtime);
+    current_stat_info.atime.tv_sec = 0;
+    current_stat_info.ctime.tv_sec = 0;
     if (arch->type == TAR_GNU || arch->type == TAR_OLDGNU)
     {
-        st->st_atime = TIME_FROM_HEADER (header->oldgnu_header.atime);
-        st->st_ctime = TIME_FROM_HEADER (header->oldgnu_header.ctime);
+        current_stat_info.atime.tv_sec = TIME_FROM_HEADER (header->oldgnu_header.atime);
+        current_stat_info.ctime.tv_sec = TIME_FROM_HEADER (header->oldgnu_header.ctime);
     }
 
 #ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
-    st->st_blksize = 8 * 1024;  /* FIXME */
+    current_stat_info.stat.st_blksize = 8 * 1024;       /* FIXME */
 #endif
-    vfs_adjust_stat (st);
+    vfs_adjust_stat (&current_stat_info.stat);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static read_header
-tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, size_t * h_size)
+tar_read_header (struct vfs_class *me, struct vfs_s_super *archive)
 {
     tar_super_t *arch = TAR_SUPER (archive);
     union block *header;
-    struct stat st;
     static char *next_long_name = NULL, *next_long_link = NULL;
     read_header status;
 
@@ -823,14 +888,12 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, size_t * h_s
             return status;
 
         if (header->header.typeflag == LNKTYPE || header->header.typeflag == DIRTYPE)
-            *h_size = 0;        /* Links 0 size on tape */
+            current_stat_info.stat.st_size = 0; /* Links 0 size on tape */
         else
-            *h_size = OFF_FROM_HEADER (header->header.size);
+            current_stat_info.stat.st_size = OFF_FROM_HEADER (header->header.size);
 
-        memset (&st, 0, sizeof (st));
-        st.st_size = *h_size;
-        tar_decode_header (header, arch, &st);
-        tar_fill_stat (archive, &st, header);
+        tar_decode_header (header, arch);
+        tar_fill_stat (archive, header);
 
         /* Skip over pax extended header and global extended header records. */
         if (header->header.typeflag == XHDTYPE || header->header.typeflag == XGLTYPE)
@@ -851,7 +914,7 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, size_t * h_s
             if (arch->type == TAR_UNKNOWN)
                 arch->type = TAR_GNU;
 
-            if (*h_size > MC_MAXPATHLEN)
+            if (st->st_size > MC_MAXPATHLEN)
             {
                 message (D_ERROR, MSG_ERROR, _("Inconsistent tar archive"));
                 return HEADER_FAILURE;
@@ -860,9 +923,9 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, size_t * h_s
             longp = header->header.typeflag == GNUTYPE_LONGNAME ? &next_long_name : &next_long_link;
 
             g_free (*longp);
-            bp = *longp = g_malloc (*h_size + 1);
+            bp = *longp = g_malloc (st->st_size + 1);
 
-            for (size = *h_size; size > 0; size -= written)
+            for (size = st->st_size; size > 0; size -= written)
             {
                 data = tar_find_next_block (arch)->buffer;
                 if (data == NULL)
@@ -903,6 +966,7 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, size_t * h_s
         recent_long_link =
             next_long_link != NULL ? next_long_link : g_strndup (header->header.linkname,
                                                                  sizeof (header->header.linkname));
+        tar_assign_string (&current_stat_info.link_name, recent_long_link);
 
         recent_long_name = NULL;
         switch (arch->type)
@@ -948,7 +1012,9 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, size_t * h_s
                 recent_long_name = g_strndup (header->header.name, sizeof (header->header.name));
         }
 
+        tar_assign_string_dup (&current_stat_info.orig_file_name, recent_long_name);
         canonicalize_pathname (recent_long_name);
+        tar_assign_string (&current_stat_info.file_name, recent_long_name);
 
         data_position = current_tar_position;
 
@@ -991,29 +1057,25 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, size_t * h_s
             {
                 entry = vfs_s_new_entry (me, p, inode);
                 vfs_s_insert_entry (me, parent, entry);
-                g_free (recent_long_link);
                 goto done;
             }
         }
 
-        if (S_ISDIR (st.st_mode))
+        if (S_ISDIR (st->st_mode))
         {
             entry = VFS_SUBCLASS (me)->find_entry (me, parent, p, LINK_NO_FOLLOW, FL_NONE);
             if (entry != NULL)
                 goto done;
         }
 
-        inode = vfs_s_new_inode (me, archive, &st);
+        inode = vfs_s_new_inode (me, archive, st);
         inode->data_offset = data_position;
 
-        if (*recent_long_link != '\0')
-            inode->linkname = recent_long_link;
-        else if (recent_long_link != next_long_link)
-            g_free (recent_long_link);
+        if (*current_stat_info.linkname != '\0')
+            inode->linkname = g_strdup (current_stat_info.link_name);
 
         entry = vfs_s_new_entry (me, p, inode);
         vfs_s_insert_entry (me, parent, entry);
-        g_free (recent_long_name);
 
       done:
         next_long_link = next_long_name = NULL;
@@ -1036,11 +1098,18 @@ static struct vfs_s_super *
 tar_new_archive (struct vfs_class *me)
 {
     tar_super_t *arch;
+    gint64 usec;
 
     arch = g_new0 (tar_super_t, 1);
     arch->base.me = me;
     arch->fd = -1;
     arch->type = TAR_UNKNOWN;
+
+    /* time in microseconds */
+    usec = g_get_real_time ();
+    /* time in seconds and nanoseconds */
+    start_time.tv_sec = usec / G_USEC_PER_SEC;
+    start_time.tv_nsec = (usec % G_USEC_PER_SEC) * 1000;
 
     return VFS_SUPER (arch);
 }
@@ -1059,6 +1128,8 @@ tar_free_archive (struct vfs_class *me, struct vfs_s_super *archive)
         mc_close (arch->fd);
         arch->fd = -1;
     }
+
+    tar_stat_destroy (&current_stat_info);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1147,11 +1218,11 @@ tar_open_archive (struct vfs_s_super *archive, const vfs_path_t * vpath,
 
     while (TRUE)
     {
-        size_t h_size = 0;
         read_header prev_status;
 
         prev_status = status;
-        status = tar_read_header (vpath_element->class, archive, &h_size);
+        tar_stat_destroy (&current_stat_info);
+        status = tar_read_header (vpath_element->class, archive);
 
         switch (status)
         {
@@ -1161,7 +1232,8 @@ tar_open_archive (struct vfs_s_super *archive, const vfs_path_t * vpath,
             return -1;
 
         case HEADER_SUCCESS:
-            tar_skip_n_records (archive, (h_size + BLOCKSIZE - 1) / BLOCKSIZE);
+            tar_skip_n_records (archive,
+                                (current_stat_info.stat.st_size + BLOCKSIZE - 1) / BLOCKSIZE);
             continue;
 
             /*
