@@ -551,7 +551,6 @@ toggle_subshell (void)
     {
         if (mc_global.mc_run_mode == MC_RUN_FULL)
         {
-            do_load_prompt ();
             if (new_dir_vpath != NULL)
                 do_possible_cd (new_dir_vpath);
         }
