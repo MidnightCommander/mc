@@ -1498,7 +1498,11 @@ load_prompt (int fd, void *unused)
     (void) fd;
     (void) unused;
 
-    do_load_prompt ();
+    if (should_read_new_subshell_prompt)
+        do_load_prompt ();
+    else
+        flush_subshell (0, QUIETLY);
+
     return 0;
 }
 #endif /* ENABLE_SUBSHELL */
