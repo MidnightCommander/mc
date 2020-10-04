@@ -43,7 +43,7 @@ xorriso_list() {
     r=$?
     test $r -gt 0 && return $r
 
-    echo "$lsl" | @GREP@ "^[-d]" | \
+    echo "$lsl" | grep "^[-d]" | \
     while read attr ln usr gr sz dt1 dt2 dt3 nm ; do
         len=$((${#nm} - 1))
         name=$(printf -- "$nm" | cut -c2-$len)  # remove quotes
@@ -97,11 +97,11 @@ test_iso () {
 
     CHARSET=$(locale charmap 2>/dev/null)
     if test -z "$CHARSET"; then
-        CHARSET=$(locale 2>/dev/null | @GREP@ LC_CTYPE | sed -n -e 's/.*\.\(.*\)"$/\1/p')
+        CHARSET=$(locale 2>/dev/null | grep LC_CTYPE | sed -n -e 's/.*\.\(.*\)"$/\1/p')
     fi
     if test -n "$CHARSET"; then
         CHARSET=$(echo "$CHARSET" | tr '[A-Z]' '[a-z]' | sed -e 's/^iso-/iso/')
-        isoinfo -j $CHARSET -i /dev/null 2>&1 | @GREP@ "Iconv not yet supported\|Unknown charset" >/dev/null && CHARSET=
+        isoinfo -j $CHARSET -i /dev/null 2>&1 | grep "Iconv not yet supported\|Unknown charset" >/dev/null && CHARSET=
     fi
     if test -n "$CHARSET"; then
         JOLIET_OPT="-j $CHARSET -J"
@@ -112,10 +112,10 @@ test_iso () {
 
     ISOINFO_D_I="$(isoinfo -d -i "$1" 2>/dev/null)"
 
-    echo "$ISOINFO_D_I" | @GREP@ "UCS level 1\|NO Joliet" > /dev/null || ISOINFO="$ISOINFO $JOLIET_OPT"
+    echo "$ISOINFO_D_I" | grep "UCS level 1\|NO Joliet" > /dev/null || ISOINFO="$ISOINFO $JOLIET_OPT"
 
-    if [ $(echo "$ISOINFO_D_I" | @GREP@ "Joliet with UCS level 3 found" | wc -l) = 1 \
-        -a $(echo "$ISOINFO_D_I" | @GREP@ "NO Rock Ridge" | wc -l) = 1 ] ; then
+    if [ $(echo "$ISOINFO_D_I" | grep "Joliet with UCS level 3 found" | wc -l) = 1 \
+        -a $(echo "$ISOINFO_D_I" | grep "NO Rock Ridge" | wc -l) = 1 ] ; then
         SEMICOLON="YES"
     fi
 }
