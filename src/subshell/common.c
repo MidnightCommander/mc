@@ -1133,7 +1133,7 @@ init_subshell_precmd (char *precmd, size_t buff_size)
         g_snprintf (precmd, buff_size,
                     "set echo_style=both; "
                     "set prompt='%%n@%%m:%%~%%# '; "
-                    "alias precmd 'echo $cwd:q >>%s; kill -STOP $$'\n", tcsh_fifo);
+                    "alias precmd 'echo -n;echo $cwd:q >>%s; kill -STOP $$'\n", tcsh_fifo);
         break;
     case SHELL_FISH:
         g_snprintf (precmd, buff_size,
