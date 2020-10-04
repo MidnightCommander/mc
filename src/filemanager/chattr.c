@@ -122,7 +122,7 @@ struct WChattrBoxes
  * EXT4_EOFBLOCKS_FL        0x00400000 was here, unused
  * FS_NOCOW_FL              0x00800000 -- Do not cow file
  * EXT4_SNAPFILE_FL         0x01000000 -- Inode is a snapshot
- *                          0x02000000 -- unused yet
+ * FS_DAX_FL                0x02000000 -- Inode is DAX
  * EXT4_SNAPFILE_DELETED_FL 0x04000000 -- Snapshot is being deleted
  * EXT4_SNAPFILE_SHRUNK_FL  0x08000000 -- Snapshot shrink has completed
  * EXT4_INLINE_DATA_FL      0x10000000 -- Inode has inline data
@@ -179,6 +179,12 @@ static struct
     { EXT4_HUGE_FILE_FL,    'h', N_("Huge_file"),                     FALSE, FALSE },
 #endif
     { FS_NOCOW_FL,          'C', N_("No COW"),                        FALSE, FALSE },
+#ifdef FS_DAX_FL
+    /* added in v1.45.7
+       TODO: clarify version after ext2fsprogs release
+       ext2fsprogs 1dd48bc23c3776df76459aff0c7723fff850ea45 2020-07-28 */
+    { FS_DAX_FL,            'x', N_("Direct access for files"),       FALSE, FALSE },
+#endif
 #ifdef EXT4_CASEFOLD_FL
     /* added in v1.45.0
        ext2fsprogs 1378bb6515e98a27f0f5c220381d49d20544204e 2018-12-01 */
