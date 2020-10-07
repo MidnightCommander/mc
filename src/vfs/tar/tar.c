@@ -1060,12 +1060,12 @@ tar_free_archive (struct vfs_class *me, struct vfs_s_super *archive)
 
 /* --------------------------------------------------------------------------------------------- */
 
-/* Returns fd of the open tar file */
-static int
+/* Returns status of the tar archive open */
+static gboolean
 tar_open_archive_int (struct vfs_class *me, const vfs_path_t * vpath, struct vfs_s_super *archive)
 {
+    tar_super_t *arch = TAR_SUPER (archive);
     int result, type;
-    tar_super_t *arch;
     mode_t mode;
     struct vfs_s_inode *root;
 
@@ -1073,11 +1073,10 @@ tar_open_archive_int (struct vfs_class *me, const vfs_path_t * vpath, struct vfs
     if (result == -1)
     {
         message (D_ERROR, MSG_ERROR, _("Cannot open tar archive\n%s"), vfs_path_as_str (vpath));
-        ERRNOR (ENOENT, -1);
+        ERRNOR (ENOENT, FALSE);
     }
 
     archive->name = g_strdup (vfs_path_as_str (vpath));
-    arch = TAR_SUPER (archive);
     mc_stat (vpath, &arch->st);
 
     /* Find out the method to handle this tar file */
@@ -1100,7 +1099,7 @@ tar_open_archive_int (struct vfs_class *me, const vfs_path_t * vpath, struct vfs
         if (result == -1)
         {
             MC_PTR_FREE (archive->name);
-            ERRNOR (ENOENT, -1);
+            ERRNOR (ENOENT, FALSE);
         }
     }
 
@@ -1122,7 +1121,7 @@ tar_open_archive_int (struct vfs_class *me, const vfs_path_t * vpath, struct vfs
 
     archive->root = root;
 
-    return result;
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1134,14 +1133,13 @@ static int
 tar_open_archive (struct vfs_s_super *archive, const vfs_path_t * vpath,
                   const vfs_path_element_t * vpath_element)
 {
+    tar_super_t *arch = TAR_SUPER (archive);
     /* Initial status at start of archive */
     read_header status = HEADER_STILL_UNREAD;
-    int tard;
 
     current_tar_position = 0;
     /* Open for reading */
-    tard = tar_open_archive_int (vpath_element->class, vpath, archive);
-    if (tard == -1)
+    if (!tar_open_archive_int (vpath_element->class, vpath, archive))
         return -1;
 
     while (TRUE)
@@ -1150,7 +1148,7 @@ tar_open_archive (struct vfs_s_super *archive, const vfs_path_t * vpath,
         read_header prev_status;
 
         prev_status = status;
-        status = tar_read_header (vpath_element->class, archive, tard, &h_size);
+        status = tar_read_header (vpath_element->class, archive, arch->fd, &h_size);
 
         switch (status)
         {
@@ -1160,7 +1158,7 @@ tar_open_archive (struct vfs_s_super *archive, const vfs_path_t * vpath,
             return -1;
 
         case HEADER_SUCCESS:
-            tar_skip_n_records (archive, tard, (h_size + BLOCKSIZE - 1) / BLOCKSIZE);
+            tar_skip_n_records (archive, arch->fd, (h_size + BLOCKSIZE - 1) / BLOCKSIZE);
             continue;
 
             /*
