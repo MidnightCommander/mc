@@ -633,10 +633,13 @@ read_command_line_buffer (gboolean test_mode)
     {
         /* We need to do this because bash gives the cursor position in a utf-8 string based
          * on the location in bytes, not in unicode characters. */
-        for (i = 0; i < command_buffer_length; i++)
-            if (str_offset_to_pos (subshell_command_buffer, i) == cursor_position)
-                break;
-        cursor_position = i;
+        char *curr, *stop;
+
+        curr = subshell_command_buffer;
+        stop = curr + cursor_position;
+
+        for (cursor_position = 0; curr < stop; cursor_position++)
+            str_next_char_safe (&curr);
     }
     if (cursor_position > command_buffer_length)
         cursor_position = command_buffer_length;
