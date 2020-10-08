@@ -518,10 +518,10 @@ read_command_line_buffer (gboolean test_mode)
     struct timeval subshell_prompt_timer = { 0, 0 };
     int command_buffer_length;
     int command_buffer_char_length;
+    int bash_version;
     int cursor_position;
     int maxfdp;
     int rc;
-    char *end;
 
     if (!use_persistent_buffer)
         return TRUE;
@@ -612,9 +612,17 @@ read_command_line_buffer (gboolean test_mode)
         return FALSE;
 
     subshell_cursor_buffer[bytes - 1] = '\0';
-    cursor_position = strtol (subshell_cursor_buffer, &end, 10);
-    if (end == subshell_cursor_buffer)
-        return FALSE;
+    if (mc_global.shell->type == SHELL_BASH)
+    {
+        if (sscanf (subshell_cursor_buffer, "%d:%d", &bash_version, &cursor_position) != 2)
+            return FALSE;
+    }
+    else
+    {
+        if (sscanf (subshell_cursor_buffer, "%d", &cursor_position) != 1)
+            return FALSE;
+        bash_version = 1000;
+    }
 
     if (test_mode)
         return TRUE;
@@ -629,9 +637,9 @@ read_command_line_buffer (gboolean test_mode)
     input_assign_text (cmdline, "");
     input_insert (cmdline, subshell_command_buffer, FALSE);
 
-    if (mc_global.shell->type == SHELL_BASH)
+    if (bash_version < 5)       /* implies SHELL_BASH */
     {
-        /* We need to do this because bash gives the cursor position in a utf-8 string based
+        /* We need to do this because bash < v5 gives the cursor position in a utf-8 string based
          * on the location in bytes, not in unicode characters. */
         char *curr, *stop;
 
@@ -1065,10 +1073,11 @@ init_subshell_precmd (char *precmd, size_t buff_size)
         g_snprintf (precmd, buff_size,
                     " mc_print_command_buffer () { printf \"%%s\\\\n\" \"$READLINE_LINE\" >&%d; }\n"
                     " bind -x '\"\\e" SHELL_BUFFER_KEYBINDING "\":\"mc_print_command_buffer\"'\n"
-                    " bind -x '\"\\e" SHELL_CURSOR_KEYBINDING "\":\"echo $READLINE_POINT>&%d\"'\n"
+                    " bind -x '\"\\e" SHELL_CURSOR_KEYBINDING
+                    "\":\"echo $BASH_VERSINFO:$READLINE_POINT >&%d\"'\n"
                     " PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND\n}'pwd>&%d;kill -STOP $$'\n"
-                    "PS1='\\u@\\h:\\w\\$ '\n",
-                    command_buffer_pipe[WRITE], command_buffer_pipe[WRITE], subshell_pipe[WRITE]);
+                    "PS1='\\u@\\h:\\w\\$ '\n", command_buffer_pipe[WRITE],
+                    command_buffer_pipe[WRITE], subshell_pipe[WRITE]);
         break;
 
     case SHELL_ASH_BUSYBOX:
