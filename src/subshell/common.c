@@ -1060,7 +1060,7 @@ init_subshell_precmd (char *precmd, size_t buff_size)
     {
     case SHELL_BASH:
         g_snprintf (precmd, buff_size,
-                    " mc_print_command_buffer () { echo \"$READLINE_LINE\" >&%d; }\n"
+                    " mc_print_command_buffer () { printf \"%%s\\\\n\" \"$READLINE_LINE\" >&%d; }\n"
                     " bind -x '\"\\e" SHELL_BUFFER_KEYBINDING "\":\"mc_print_command_buffer\"'\n"
                     " bind -x '\"\\e" SHELL_CURSOR_KEYBINDING "\":\"echo $READLINE_POINT>&%d\"'\n"
                     " PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND\n}'pwd>&%d;kill -STOP $$'\n"
@@ -1124,7 +1124,7 @@ init_subshell_precmd (char *precmd, size_t buff_size)
 
     case SHELL_ZSH:
         g_snprintf (precmd, buff_size,
-                    " mc_print_command_buffer () { echo \"$BUFFER\"' >&%d}\n"
+                    " mc_print_command_buffer () { printf \"%%s\\\\n\" \"$BUFFER\" >&%d; }\n"
                     " zle -N mc_print_command_buffer\n"
                     " bindkey '^[" SHELL_BUFFER_KEYBINDING "' mc_print_command_buffer\n"
                     " mc_print_cursor_position () { echo $CURSOR >&%d}\n"
