@@ -38,7 +38,7 @@ do_open_action() {
     case "${filetype}" in
     common)
         if [ -n "$DISPLAY" ]; then
-            (xmms  "${MC_EXT_FILENAME}" >/dev/null 2>&1 &)
+            (audacious  "${MC_EXT_FILENAME}" >/dev/null 2>&1 &)
         else
             play "${MC_EXT_FILENAME}"
         fi
@@ -52,21 +52,21 @@ do_open_action() {
         ;;
     mp3)
         if [ -n "$DISPLAY" ]; then
-            (xmms "${MC_EXT_FILENAME}" >/dev/null 2>&1 &)
+            (audacious "${MC_EXT_FILENAME}" >/dev/null 2>&1 &)
         else
             mpg123 "${MC_EXT_FILENAME}"
         fi
         ;;
     ogg)
         if [ -n "$DISPLAY" ]; then
-            (xmms "${MC_EXT_FILENAME}" >/dev/null 2>&1 &)
+            (audacious "${MC_EXT_FILENAME}" >/dev/null 2>&1 &)
         else
             ogg123 "${MC_EXT_FILENAME}"
         fi
         ;;
     opus)
         if [ -n "$DISPLAY" ]; then
-            (xmms "${MC_EXT_FILENAME}" >/dev/null 2>&1 &)
+            (audacious "${MC_EXT_FILENAME}" >/dev/null 2>&1 &)
         else
             play "${MC_EXT_FILENAME}"
         fi
@@ -79,7 +79,7 @@ do_open_action() {
         ;;
     playlist)
         if [ -n "$DISPLAY" ]; then
-            (xmms -p "${MC_EXT_FILENAME}" >/dev/null 2>&1 &)
+            (audacious -p "${MC_EXT_FILENAME}" >/dev/null 2>&1 &)
         else
             mplayer -vo null -playlist "${MC_EXT_FILENAME}"
         fi
