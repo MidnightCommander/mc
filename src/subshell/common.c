@@ -509,9 +509,8 @@ synchronize (void)
 static gboolean
 read_command_line_buffer (gboolean test_mode)
 {
-    /* Make static to avoid allocation of large buffers in the stack each time */
-    static char subshell_command_buffer[BUF_LARGE];
-    static char subshell_cursor_buffer[BUF_SMALL];
+    char subshell_command_buffer[BUF_LARGE];
+    char subshell_cursor_buffer[BUF_SMALL];
 
     fd_set read_set;
     int i;
