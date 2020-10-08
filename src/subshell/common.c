@@ -1142,12 +1142,12 @@ init_subshell_precmd (char *precmd, size_t buff_size)
         break;
     case SHELL_FISH:
         g_snprintf (precmd, buff_size,
-                    " if not functions -q fish_prompt_mc;"
+                    " bind \\e" SHELL_BUFFER_KEYBINDING " 'echo (commandline)>&%d';"
+                    "bind \\e" SHELL_CURSOR_KEYBINDING " 'echo (commandline -C)>&%d';"
+                    "if not functions -q fish_prompt_mc;"
                     "functions -e fish_right_prompt;"
                     "functions -c fish_prompt fish_prompt_mc; end;"
                     "function fish_prompt;"
-                    "bind \\e\\" SHELL_BUFFER_KEYBINDING " 'echo (commandline)>&%d'\n"
-                    "bind \\e\\" SHELL_CURSOR_KEYBINDING " 'echo (commandline -C)>&%d'\n"
                     "echo \"$PWD\">&%d; fish_prompt_mc; kill -STOP %%self; end\n",
                     command_buffer_pipe[WRITE], command_buffer_pipe[WRITE], subshell_pipe[WRITE]);
         break;
