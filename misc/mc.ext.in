@@ -671,10 +671,6 @@ regex/i/\.(epub|mobi)$
 shell/.class
 	View=%view{ascii} @EXTHELPERSDIR@/misc.sh view javaclass
 
-# Makefile
-regex/^[Mm]akefile$
-	Open=make -f %f %{Enter parameters}
-
 # Imakefile
 shell/Imakefile
 	Open=xmkmf -a
@@ -682,6 +678,10 @@ shell/Imakefile
 # Makefile.PL (MakeMaker)
 regex/^Makefile\.(PL|pl)$
 	Open=%var{PERL:perl} %f
+
+# Makefile
+regex/[Mm]akefile
+	Open=make -f %f %{Enter parameters}
 
 # sqlite3.db
 type/^SQLite 3.x database

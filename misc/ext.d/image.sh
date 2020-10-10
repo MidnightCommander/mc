@@ -45,7 +45,7 @@ do_open_action() {
             else
                 (gqview "${MC_EXT_FILENAME}" &)
             fi
-        elif see >/dev/null 2>&1; then
+        elif which see >/dev/null 2>&1; then
             (see "${MC_EXT_FILENAME}" &)
         else
             (zgv "${MC_EXT_FILENAME}" &)
