@@ -687,6 +687,9 @@ parse_subshell_prompt_string (const char *buffer, int bytes)
 {
     int i;
 
+    if (mc_global.mc_run_mode != MC_RUN_FULL)
+        return;
+
     /* First time through */
     if (subshell_prompt == NULL)
         subshell_prompt = g_string_sized_new (INITIAL_PROMPT_SIZE);
@@ -706,6 +709,9 @@ parse_subshell_prompt_string (const char *buffer, int bytes)
 static void
 set_prompt_string (void)
 {
+    if (mc_global.mc_run_mode != MC_RUN_FULL)
+        return;
+
     if (subshell_prompt_temp_buffer->len != 0)
         g_string_assign (subshell_prompt, subshell_prompt_temp_buffer->str);
 
@@ -1323,8 +1329,9 @@ init_subshell (void)
             return;
         }
 
-        if (mc_global.shell->type == SHELL_BASH || mc_global.shell->type == SHELL_ZSH
-            || mc_global.shell->type == SHELL_FISH)
+        if (mc_global.mc_run_mode == MC_RUN_FULL &&
+            (mc_global.shell->type == SHELL_BASH || mc_global.shell->type == SHELL_ZSH
+             || mc_global.shell->type == SHELL_FISH))
             use_persistent_buffer = TRUE;
         if (use_persistent_buffer && pipe (command_buffer_pipe) != 0)
         {
@@ -1593,10 +1600,18 @@ exit_subshell (void)
                          tcsh_fifo, unix_error_string (errno));
         }
 
-        g_string_free (subshell_prompt, TRUE);
-        subshell_prompt = NULL;
-        g_string_free (subshell_prompt_temp_buffer, TRUE);
-        subshell_prompt_temp_buffer = NULL;
+        if (subshell_prompt != NULL)
+        {
+            g_string_free (subshell_prompt, TRUE);
+            subshell_prompt = NULL;
+        }
+
+        if (subshell_prompt_temp_buffer != NULL)
+        {
+            g_string_free (subshell_prompt_temp_buffer, TRUE);
+            subshell_prompt_temp_buffer = NULL;
+        }
+
         pty_buffer[0] = '\0';
     }
 
