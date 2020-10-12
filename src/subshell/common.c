@@ -383,7 +383,7 @@ init_subshell_child (const char *pty_name)
 
     /* Attach all our standard file descriptors to the pty */
 
-    /* This is done just before the fork, because stderr must still      */
+    /* This is done just before the exec, because stderr must still      */
     /* be connected to the real tty during the above error messages; */
     /* otherwise the user will never see them.                   */
 
@@ -509,9 +509,8 @@ synchronize (void)
 static gboolean
 read_command_line_buffer (gboolean test_mode)
 {
-    /* Make static to avoid allocation of large buffers in the stack each time */
-    static char subshell_command_buffer[BUF_LARGE];
-    static char subshell_cursor_buffer[BUF_SMALL];
+    char subshell_command_buffer[BUF_LARGE];
+    char subshell_cursor_buffer[BUF_SMALL];
 
     fd_set read_set;
     int i;
@@ -519,10 +518,10 @@ read_command_line_buffer (gboolean test_mode)
     struct timeval subshell_prompt_timer = { 0, 0 };
     int command_buffer_length;
     int command_buffer_char_length;
+    int bash_version;
     int cursor_position;
     int maxfdp;
     int rc;
-    char *end;
 
     if (!use_persistent_buffer)
         return TRUE;
@@ -613,14 +612,22 @@ read_command_line_buffer (gboolean test_mode)
         return FALSE;
 
     subshell_cursor_buffer[bytes - 1] = '\0';
-    cursor_position = strtol (subshell_cursor_buffer, &end, 10);
-    if (end == subshell_cursor_buffer)
-        return FALSE;
+    if (mc_global.shell->type == SHELL_BASH)
+    {
+        if (sscanf (subshell_cursor_buffer, "%d:%d", &bash_version, &cursor_position) != 2)
+            return FALSE;
+    }
+    else
+    {
+        if (sscanf (subshell_cursor_buffer, "%d", &cursor_position) != 1)
+            return FALSE;
+        bash_version = 1000;
+    }
 
     if (test_mode)
         return TRUE;
 
-    /* Erase non-text characters in the command buffer, such as tab, or newline, as this
+    /* Substitute non-text characters in the command buffer, such as tab, or newline, as this
      * could cause problems. */
     for (i = 0; i < command_buffer_char_length; i++)
         if ((unsigned char) subshell_command_buffer[i] < 32
@@ -630,14 +637,17 @@ read_command_line_buffer (gboolean test_mode)
     input_assign_text (cmdline, "");
     input_insert (cmdline, subshell_command_buffer, FALSE);
 
-    if (mc_global.shell->type == SHELL_BASH)
+    if (bash_version < 5)       /* implies SHELL_BASH */
     {
-        /* We need to do this because bash gives the cursor position in a utf-8 string based
+        /* We need to do this because bash < v5 gives the cursor position in a utf-8 string based
          * on the location in bytes, not in unicode characters. */
-        for (i = 0; i < command_buffer_length; i++)
-            if (str_offset_to_pos (subshell_command_buffer, i) == cursor_position)
-                break;
-        cursor_position = i;
+        char *curr, *stop;
+
+        curr = subshell_command_buffer;
+        stop = curr + cursor_position;
+
+        for (cursor_position = 0; curr < stop; cursor_position++)
+            str_next_char_safe (&curr);
     }
     if (cursor_position > command_buffer_length)
         cursor_position = command_buffer_length;
@@ -1061,11 +1071,13 @@ init_subshell_precmd (char *precmd, size_t buff_size)
     {
     case SHELL_BASH:
         g_snprintf (precmd, buff_size,
-                    " bind -x '\"\\e" SHELL_BUFFER_KEYBINDING "\":\"echo $READLINE_LINE>&%d\"'\n"
-                    " bind -x '\"\\e" SHELL_CURSOR_KEYBINDING "\":\"echo $READLINE_POINT>&%d\"'\n"
+                    " mc_print_command_buffer () { printf \"%%s\\\\n\" \"$READLINE_LINE\" >&%d; }\n"
+                    " bind -x '\"\\e" SHELL_BUFFER_KEYBINDING "\":\"mc_print_command_buffer\"'\n"
+                    " bind -x '\"\\e" SHELL_CURSOR_KEYBINDING
+                    "\":\"echo $BASH_VERSINFO:$READLINE_POINT >&%d\"'\n"
                     " PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND\n}'pwd>&%d;kill -STOP $$'\n"
-                    "PS1='\\u@\\h:\\w\\$ '\n",
-                    command_buffer_pipe[WRITE], command_buffer_pipe[WRITE], subshell_pipe[WRITE]);
+                    "PS1='\\u@\\h:\\w\\$ '\n", command_buffer_pipe[WRITE],
+                    command_buffer_pipe[WRITE], subshell_pipe[WRITE]);
         break;
 
     case SHELL_ASH_BUSYBOX:
@@ -1080,7 +1092,7 @@ init_subshell_precmd (char *precmd, size_t buff_size)
          *    "PS1='$(precmd)\\u@\\h:\\w\\$ '\n",
          *
          * C: This works if user calls "ash" command because in sub-subshell
-         *    PRECMD is unfedined, thus evaluated to empty string - no damage done.
+         *    PRECMD is undefined, thus evaluated to empty string - no damage done.
          *    Attention: BusyBox must be built with FEATURE_EDITING_FANCY_PROMPT to
          *    permit \u, \w, \h, \$ escape sequences. Unfortunately this cannot be guaranteed,
          *    especially on embedded systems where people try to save space, so let's use
@@ -1124,7 +1136,7 @@ init_subshell_precmd (char *precmd, size_t buff_size)
 
     case SHELL_ZSH:
         g_snprintf (precmd, buff_size,
-                    " mc_print_command_buffer () { echo $BUFFER >&%d}\n"
+                    " mc_print_command_buffer () { printf \"%%s\\\\n\" \"$BUFFER\" >&%d; }\n"
                     " zle -N mc_print_command_buffer\n"
                     " bindkey '^[" SHELL_BUFFER_KEYBINDING "' mc_print_command_buffer\n"
                     " mc_print_cursor_position () { echo $CURSOR >&%d}\n"
@@ -1143,12 +1155,12 @@ init_subshell_precmd (char *precmd, size_t buff_size)
         break;
     case SHELL_FISH:
         g_snprintf (precmd, buff_size,
-                    " if not functions -q fish_prompt_mc;"
+                    " bind \\e" SHELL_BUFFER_KEYBINDING " 'commandline >&%d';"
+                    "bind \\e" SHELL_CURSOR_KEYBINDING " 'commandline -C >&%d';"
+                    "if not functions -q fish_prompt_mc;"
                     "functions -e fish_right_prompt;"
                     "functions -c fish_prompt fish_prompt_mc; end;"
                     "function fish_prompt;"
-                    "bind \\e\\" SHELL_BUFFER_KEYBINDING " 'echo (commandline)>&%d'\n"
-                    "bind \\e\\" SHELL_CURSOR_KEYBINDING " 'echo (commandline -C)>&%d'\n"
                     "echo \"$PWD\">&%d; fish_prompt_mc; kill -STOP %%self; end\n",
                     command_buffer_pipe[WRITE], command_buffer_pipe[WRITE], subshell_pipe[WRITE]);
         break;
