@@ -1,4 +1,4 @@
-# serial 13
+# serial 14
 dnl Copyright (C) 2002-2006, 2009-2019 Free Software Foundation, Inc.
 dnl This file is free software; the Free Software Foundation
 dnl gives unlimited permission to copy and/or distribute it,
@@ -244,7 +244,7 @@ extern
 "C"
 #endif
 int getmntinfo (struct statfs **, int);
-              ]], [])],
+              ]], [[]])],
            [fu_cv_sys_mounted_getmntinfo2=no],
            [fu_cv_sys_mounted_getmntinfo2=yes])
         ])

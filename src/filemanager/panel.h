@@ -90,51 +90,63 @@ typedef struct
 typedef struct
 {
     Widget widget;
-    dir_list dir;               /* Directory contents */
 
-    list_format_t list_format;  /* listing type */
-    int active;                 /* If panel is currently selected */
+    char *name;                 /* The panel name */
+
+    panel_display_t frame_size; /* half or full frame */
+
+    gboolean active;            /* If panel is currently selected */
+    gboolean dirty;             /* Should we redisplay the panel? */
+    gboolean is_panelized;      /* Flag: special filelisting, can't reload */
+
+#ifdef HAVE_CHARSET
+    int codepage;               /* Panel codepage */
+#endif
+
+    dir_list dir;               /* Directory contents */
+    struct stat dir_stat;       /* Stat of current dir: used by execute () */
+
     vfs_path_t *cwd_vpath;      /* Current Working Directory */
     vfs_path_t *lwd_vpath;      /* Last Working Directory */
-    GList *dir_history;         /* directory history */
-    GList *dir_history_current; /* pointer to the current history item */
-    char *hist_name;            /* directory history name for history file */
-    int marked;                 /* Count of marked files */
-    int dirs_marked;            /* Count of marked directories */
-    uintmax_t total;            /* Bytes in marked files */
-    int top_file;               /* The file showed on the top of the panel */
-    int selected;               /* Index to the selected file */
+
+    list_format_t list_format;  /* Listing type */
+    GSList *format;             /* Display format */
+    char *user_format;          /* User format */
     int list_cols;              /* Number of file list columns */
     int brief_cols;             /* Number of columns in case of list_brief format */
-    gboolean is_panelized;      /* Flag: special filelisting, can't reload */
-    panel_display_t frame_size; /* half or full frame */
-    char *filter;               /* File name filter */
-
     /* sort */
     dir_sort_options_t sort_info;
     const panel_field_t *sort_field;
 
-    int dirty;                  /* Should we redisplay the panel? */
+    int marked;                 /* Count of marked files */
+    int dirs_marked;            /* Count of marked directories */
+    uintmax_t total;            /* Bytes in marked files */
 
+    int top_file;               /* The file showed on the top of the panel */
+    int selected;               /* Index to the selected file */
+
+    GSList *status_format;      /* Mini status format */
     gboolean user_mini_status;  /* Is user_status_format used */
-    char *user_format;          /* User format */
     char *user_status_format[LIST_FORMATS];     /* User format for status line */
 
-    GSList *format;             /* Display format */
-    GSList *status_format;      /* Mini status format */
+    char *filter;               /* File name filter */
 
-    char *panel_name;           /* The panel name */
-    struct stat dir_stat;       /* Stat of current dir: used by execute () */
+    struct
+    {
+        char *name;             /* Directory history name for history file */
+        GList *list;            /* Directory history */
+        GList *current;         /* Pointer to the current history item */
+    } dir_history;
 
-#ifdef HAVE_CHARSET
-    int codepage;               /* panel codepage */
-#endif
+    struct
+    {
+        gboolean active;
+        char buffer[MC_MAXFILENAMELEN];
+        char prev_buffer[MC_MAXFILENAMELEN];
+        char ch[MB_LEN_MAX];    /* Buffer for multi-byte character */
+        int chpoint;            /* Point after last characters in @ch */
+    } quick_search;
 
-    gboolean searching;
-    char search_buffer[MC_MAXFILENAMELEN];
-    char prev_search_buffer[MC_MAXFILENAMELEN];
-    char search_char[MB_LEN_MAX];       /*buffer for multibytes characters */
-    int search_chpoint;         /*point after last characters in search_char */
     int content_shift;          /* Number of characters of filename need to skip from left side. */
     int max_shift;              /* Max shift for visible part of current panel */
 } WPanel;

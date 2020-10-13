@@ -997,11 +997,11 @@ save_panel_types (void)
     type = get_panel_type (0);
     panel_save_type ("New Left Panel", type);
     if (type == view_listing)
-        panel_save_setup (left_panel, left_panel->panel_name);
+        panel_save_setup (left_panel, left_panel->name);
     type = get_panel_type (1);
     panel_save_type ("New Right Panel", type);
     if (type == view_listing)
-        panel_save_setup (right_panel, right_panel->panel_name);
+        panel_save_setup (right_panel, right_panel->name);
 
     {
         char *dirs;

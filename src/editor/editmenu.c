@@ -190,7 +190,7 @@ create_command_menu (void)
         entries = g_list_prepend (entries, menu_separator_create ());
     }
 #endif /* HAVE_ASPELL */
-    entries = g_list_prepend (entries, menu_entry_create (_("&Mail..."), CK_Mail));
+    entries = g_list_prepend (entries, menu_entry_create (_("&Mail..."), CK_EditMail));
 
 
     return g_list_reverse (entries);

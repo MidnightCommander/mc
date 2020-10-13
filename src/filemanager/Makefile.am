@@ -2,10 +2,10 @@
 noinst_LTLIBRARIES = libmcfilemanager.la
 
 libmcfilemanager_la_SOURCES = \
-	achown.c achown.h \
+	achown.c \
 	boxes.c boxes.h \
-	chmod.c chmod.h \
-	chown.c chown.h \
+	chmod.c \
+	chown.c \
 	cmd.c cmd.h \
 	command.c command.h \
 	dir.c dir.h \
@@ -33,7 +33,7 @@ AM_CPPFLAGS = -I$(top_srcdir) $(GLIB_CFLAGS) $(PCRE_CPPFLAGS)
 
 if ENABLE_EXT2FS_ATTR
 libmcfilemanager_la_SOURCES += \
-	chattr.c chattr.h
+	chattr.c
 
 AM_CPPFLAGS += @EXT2FS_CFLAGS@ @E2P_CFLAGS@
 endif

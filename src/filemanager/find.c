@@ -36,7 +36,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
-#include <sys/time.h>
 
 #include "lib/global.h"
 
@@ -155,7 +154,7 @@ static unsigned long matches;   /* Number of matches */
 static gboolean is_start = FALSE;       /* Status of the start/stop toggle button */
 static char *old_dir = NULL;
 
-static struct timeval last_refresh;
+static gint64 last_refresh;
 
 /* Where did we stop */
 static gboolean resuming;
@@ -992,9 +991,7 @@ search_content (WDialog * h, const char *directory, const char *filename)
     int file_fd;
     gboolean ret_val = FALSE;
     vfs_path_t *vpath;
-    struct timeval tv;
-    time_t seconds;
-    suseconds_t useconds;
+    gint64 tv;
     gboolean status_updated = FALSE;
 
     vpath = vfs_path_build_filename (directory, filename, (char *) NULL);
@@ -1012,21 +1009,9 @@ search_content (WDialog * h, const char *directory, const char *filename)
         return FALSE;
 
     /* get time elapsed from last refresh */
-    if (gettimeofday (&tv, NULL) == -1)
-    {
-        tv.tv_sec = 0;
-        tv.tv_usec = 0;
-        last_refresh = tv;
-    }
-    seconds = tv.tv_sec - last_refresh.tv_sec;
-    useconds = tv.tv_usec - last_refresh.tv_usec;
-    if (useconds < 0)
-    {
-        seconds--;
-        useconds += G_USEC_PER_SEC;
-    }
+    tv = g_get_real_time ();
 
-    if (s.st_size >= MIN_REFRESH_FILE_SIZE || seconds > 0 || useconds > MAX_REFRESH_INTERVAL)
+    if (s.st_size >= MIN_REFRESH_FILE_SIZE || (tv - last_refresh) > MAX_REFRESH_INTERVAL)
     {
         g_snprintf (buffer, sizeof (buffer), _("Grepping in %s"), filename);
         status_update (str_trunc (buffer, WIDGET (h)->cols - 8));
@@ -1898,8 +1883,7 @@ find_cmd (void)
 
         if (find_pattern[0] != '\0')
         {
-            last_refresh.tv_sec = 0;
-            last_refresh.tv_usec = 0;
+            last_refresh = 0;
 
             is_start = FALSE;
 

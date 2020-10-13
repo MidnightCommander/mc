@@ -393,7 +393,7 @@ sort_time (file_entry_t * a, file_entry_t * b)
 
     if (ad == bd || panels_options.mix_all_files)
     {
-        int result = a->st.st_mtime < b->st.st_mtime ? -1 : a->st.st_mtime > b->st.st_mtime;
+        int result = _GL_CMP (a->st.st_mtime, b->st.st_mtime);
 
         if (result != 0)
             return result * reverse;
@@ -414,7 +414,7 @@ sort_ctime (file_entry_t * a, file_entry_t * b)
 
     if (ad == bd || panels_options.mix_all_files)
     {
-        int result = a->st.st_ctime < b->st.st_ctime ? -1 : a->st.st_ctime > b->st.st_ctime;
+        int result = _GL_CMP (a->st.st_ctime, b->st.st_ctime);
 
         if (result != 0)
             return result * reverse;
@@ -435,7 +435,7 @@ sort_atime (file_entry_t * a, file_entry_t * b)
 
     if (ad == bd || panels_options.mix_all_files)
     {
-        int result = a->st.st_atime < b->st.st_atime ? -1 : a->st.st_atime > b->st.st_atime;
+        int result = _GL_CMP (a->st.st_atime, b->st.st_atime);
 
         if (result != 0)
             return result * reverse;
@@ -470,7 +470,7 @@ sort_size (file_entry_t * a, file_entry_t * b)
 
     if (ad == bd || panels_options.mix_all_files)
     {
-        int result = a->st.st_size < b->st.st_size ? -1 : a->st.st_size > b->st.st_size;
+        int result = _GL_CMP (a->st.st_size, b->st.st_size);
 
         if (result != 0)
             return result * reverse;

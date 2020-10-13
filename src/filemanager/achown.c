@@ -47,7 +47,7 @@
 
 #include "midnight.h"           /* current_panel */
 
-#include "achown.h"
+#include "cmd.h"                /* advanced_chown_cmd() */
 
 /*** global variables ****************************************************************************/
 

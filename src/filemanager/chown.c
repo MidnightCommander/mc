@@ -47,7 +47,7 @@
 #include "src/setup.h"          /* panels_options */
 #include "midnight.h"           /* current_panel */
 
-#include "chown.h"
+#include "cmd.h"                /* chown_cmd() */
 
 /*** global variables ****************************************************************************/
 

@@ -3174,7 +3174,7 @@ dirsize_status_deinit_cb (status_msg_t * sm)
 
     /* schedule to update passive panel */
     if (get_other_type () == view_listing)
-        other_panel->dirty = 1;
+        other_panel->dirty = TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -9,7 +9,6 @@
    Aliaksey Kandratsenka <alk@tut.by>
    Andreas Mohr <and@gmx.li>
    Andrew Borodin <aborodin@vmail.ru>
-   Andrew Borodin <borodin@borodin.zarya>
    Andrew V. Samoilov <sav@bcs.zp.ua>
    Chris Owen <chris@candu.co.uk>
    Claes Nästén <me@pekdon.net>
@@ -22,13 +21,14 @@
    Miguel de Icaza <miguel@novell.com>
    Mikhail S. Pobolovets <styx.mp@gmail.com>
    Norbert Warmuth <nwarmuth@privat.circular.de>
+   Oswald Buddenhagen <oswald.buddenhagen@gmx.de>
    Patrick Winnertz <winnie@debian.org>
    Pavel Machek <pavel@suse.cz>
    Pavel Roskin <proski@gnu.org>
    Pavel Tsekov <ptsekov@gmx.net>
    Roland Illig <roland.illig@gmx.de>
    Sergei Trofimovich <slyfox@inbox.ru>
-   Slava Zanko <slavazanko@gmail.com>, 2013,2015.
+   Slava Zanko <slavazanko@gmail.com>
    Timur Bakeyev <mc@bat.ru>
    Vit Rosin <vit_r@list.ru>
 

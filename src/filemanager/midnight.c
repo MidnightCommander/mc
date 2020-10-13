@@ -75,13 +75,6 @@
 #include "command.h"            /* cmdline */
 #include "dir.h"                /* dir_list_clean() */
 
-#include "chmod.h"
-#include "chown.h"
-#include "achown.h"
-#ifdef ENABLE_EXT2FS_ATTR
-#include "chattr.h"
-#endif
-
 #ifdef USE_INTERNAL_EDIT
 #include "src/editor/edit.h"
 #endif
@@ -390,7 +383,7 @@ menu_cmd (void)
 {
     int selected;
 
-    if ((get_current_index () == 0) == (current_panel->active != 0))
+    if ((get_current_index () == 0) == current_panel->active)
         selected = 0;
     else
         selected = g_list_length (the_menubar->menu) - 1;
@@ -1029,7 +1022,7 @@ show_editor_viewer_history (void)
 
         case CK_View:
             s_vpath = vfs_path_from_str (s);
-            view_file (s_vpath, use_internal_view, 0);
+            view_file (s_vpath, use_internal_view, FALSE);
             break;
 
         default:
@@ -1104,7 +1097,7 @@ quit_cmd (void)
 
 /**
  * Repaint the contents of the panels without frames.  To schedule panel
- * for repainting, set panel->dirty to 1.  There are many reasons why
+ * for repainting, set panel->dirty to TRUE.  There are many reasons why
  * the panels need to be repainted, and this is a costly operation, so
  * it's done once per event.
  */
@@ -1460,7 +1453,7 @@ is_cmdline_mute (void)
        it's activity. Thus, we can't use get_current_type() here.
        current_panel should point to actualy current active panel
        independently of it's type. */
-    return (current_panel->active == 0
+    return (!current_panel->active
             && (get_other_type () == view_quick || get_other_type () == view_tree));
 }
 
@@ -1558,7 +1551,7 @@ midnight_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
 
         if ((!mc_global.tty.alternate_plus_minus
              || !(mc_global.tty.console_flag != '\0' || mc_global.tty.xterm_flag)) && !quote
-            && !current_panel->searching)
+            && !current_panel->quick_search.active)
         {
             if (!only_leading_plus_minus)
             {
@@ -1594,9 +1587,9 @@ midnight_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
         return MSG_NOT_HANDLED;
 
     case MSG_HOTKEY_HANDLED:
-        if ((get_current_type () == view_listing) && current_panel->searching)
+        if ((get_current_type () == view_listing) && current_panel->quick_search.active)
         {
-            current_panel->dirty = 1;   /* FIXME: unneeded? */
+            current_panel->dirty = TRUE;        /* FIXME: unneeded? */
             send_message (current_panel, NULL, MSG_ACTION, CK_SearchStop, NULL);
         }
         return MSG_HANDLED;
