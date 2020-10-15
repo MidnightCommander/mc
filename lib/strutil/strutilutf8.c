@@ -70,7 +70,7 @@ str_unichar_iscombiningmark (gunichar uni)
     GUnicodeType type;
 
     type = g_unichar_type (uni);
-    return (type == G_UNICODE_COMBINING_MARK)
+    return (type == G_UNICODE_SPACING_MARK)
         || (type == G_UNICODE_ENCLOSING_MARK) || (type == G_UNICODE_NON_SPACING_MARK);
 }
 

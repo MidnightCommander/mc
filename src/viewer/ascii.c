@@ -162,12 +162,6 @@
 
 /*** file scope macro definitions ****************************************************************/
 
-#if GLIB_CHECK_VERSION (2, 30, 0)
-#define SPACING_MARK G_UNICODE_SPACING_MARK
-#else
-#define SPACING_MARK G_UNICODE_COMBINING_MARK
-#endif
-
 /* The Unicode standard recommends that lonely combining characters are printed over a dotted
  * circle. If the terminal is not UTF-8, this will be replaced by a dot anyway. */
 #define BASE_CHARACTER_FOR_LONELY_COMBINING 0x25CC      /* dotted circle */
@@ -266,7 +260,7 @@ mcview_is_spacing_mark (const WView * view, int c)
 {
 #ifdef HAVE_CHARSET
     if (view->utf8)
-        return g_unichar_type (c) == SPACING_MARK;
+        return g_unichar_type (c) == G_UNICODE_SPACING_MARK;
 #else
     (void) view;
     (void) c;
@@ -535,7 +529,7 @@ mcview_next_combining_char_sequence (WView * view, mcview_state_machine_t * stat
             return i;
         if (!mcview_ismark (view, cs[i]) || !mcview_isprint (view, cs[i]))
             return i;
-        if (g_unichar_type (cs[i]) == SPACING_MARK)
+        if (g_unichar_type (cs[i]) == G_UNICODE_SPACING_MARK)
         {
             /* Only allow as the first combining char. Stop processing in either case. */
             if (i == 1)
