@@ -352,7 +352,7 @@ sub print_file {
 	if ($platform eq 'unx' && $filename =~ /\/$/ && $perms =~ /^\?(.*)$/) {
 		$perms = 'd'.$1;
 	}
-	printf "%-10s    1 %-8d %-8d %8s %s/%s/%s %s:%s:%s %s", $perms, $<,
+	printf "%-10s    1 %-8d %-8d %8s %s/%s/%s %s:%s:%s ./%s", $perms, $<,
 		$(, $realsize, $mon, $day, $year, $hours, $mins, $secs, $filename;
 	if ($platform eq 'unx' && $perms =~ /^l/) {
 		my $linkdest = &get_link_destination($filename);
