@@ -1,3 +1,5 @@
+-rw-r--r--   1  <<uid>>  <<gid>>          6 2016-11-23 07:13:36 ./-filename with leading dash.txt
+-rw-r--r--   1  <<uid>>  <<gid>>          6 2016-11-23 07:13:36 ./ filename with leading space.txt
 drwxr-xr-x   1  <<uid>>  <<gid>>          0 2015-12-25 00:15:14 ./brushes/
 -rw-------   1  <<uid>>  <<gid>>        739 2016-09-18 16:45:57 ./colorrc
 -rw-------   1  <<uid>>  <<gid>>       1863 2016-09-18 16:45:58 ./controllerrc

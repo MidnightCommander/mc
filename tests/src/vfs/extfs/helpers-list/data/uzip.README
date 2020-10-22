@@ -3,6 +3,8 @@ The input files were created thus:
 
     cd ~/.gimp-2.8
     echo hello > 'filename with spaces.txt'
+    echo hello > ' filename with leading space.txt'
+    echo hello > '-filename with leading dash.txt'
     zip a.zip *
     unzip -Z -l -T a.zip > uzip.with-zipinfo.input
     unzip -qq -v a.zip > uzip.without-zipinfo--ymd.input
