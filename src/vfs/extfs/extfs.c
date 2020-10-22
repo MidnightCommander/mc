@@ -373,6 +373,26 @@ extfs_free_archive (struct vfs_class *me, struct vfs_s_super *psup)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static inline char *
+extfs_skip_leading_dotslash (char *s)
+{
+    /* Skip leading "./" (if present).
+     * Some programs don't understand it:
+     *
+     * $ zip file.zip ./-file2.txt file1.txt
+     *   adding: -file2.txt (stored 0%)
+     *   adding: file1.txt (stored 0%)
+     * $ /usr/lib/mc/extfs.d/uzip copyout file.zip ./-file2.txt ./tmp-file2.txt
+     * caution: filename not matched:  ./-file2.txt
+     */
+    if (s[0] == '.' && s[1] == PATH_SEP)
+        s += 2;
+
+    return s;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static FILE *
 extfs_open_archive (int fstype, const char *name, struct extfs_super_t **pparc)
 {
@@ -486,6 +506,7 @@ extfs_read_archive (FILE * extfsd, struct extfs_super_t *current_archive)
 
             if (*cfn != '\0')
             {
+                cfn = extfs_skip_leading_dotslash (cfn);
                 if (IS_PATH_SEP (*cfn))
                     cfn++;
                 p = strchr (cfn, '\0');
@@ -812,13 +833,16 @@ extfs_cmd (const char *str_extfs_cmd, const struct extfs_super_t *archive,
     quoted_file = name_quote (file, FALSE);
     g_free (file);
 
+    /* Skip leading "./" (if present) added in name_quote() */
+    file = extfs_skip_leading_dotslash (quoted_file);
+
     archive_name = extfs_get_archive_name (archive);
     quoted_archive_name = name_quote (archive_name, FALSE);
     g_free (archive_name);
     quoted_localname = name_quote (localname, FALSE);
     info = &g_array_index (extfs_plugins, extfs_plugin_info_t, archive->fstype);
     cmd = g_strconcat (info->path, info->prefix, str_extfs_cmd,
-                       quoted_archive_name, " ", quoted_file, " ", quoted_localname, (char *) NULL);
+                       quoted_archive_name, " ", file, " ", quoted_localname, (char *) NULL);
     g_free (quoted_file);
     g_free (quoted_localname);
     g_free (quoted_archive_name);
