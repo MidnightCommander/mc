@@ -1427,7 +1427,7 @@ single_dirsize_cmd (WPanel * panel)
 
     recalculate_panel_summary (panel);
 
-    if (current_panel->sort_field->sort_routine == (GCompareFunc) sort_size)
+    if (panel->sort_field->sort_routine == (GCompareFunc) sort_size)
         panel_re_sort (panel);
 
     panel->dirty = TRUE;
@@ -1470,7 +1470,7 @@ dirsizes_cmd (WPanel * panel)
 
     recalculate_panel_summary (panel);
 
-    if (current_panel->sort_field->sort_routine == (GCompareFunc) sort_size)
+    if (panel->sort_field->sort_routine == (GCompareFunc) sort_size)
         panel_re_sort (panel);
 
     panel->dirty = TRUE;
