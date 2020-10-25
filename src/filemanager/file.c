@@ -75,12 +75,12 @@
 #include "src/background.h"     /* do_background() */
 #endif
 
-/* Needed for current_panel, other_panel and WTree */
+/* Needed for other_panel and WTree */
 #include "dir.h"
 #include "filegui.h"
 #include "filenot.h"
 #include "tree.h"
-#include "filemanager.h"        /* current_panel */
+#include "filemanager.h"        /* other_panel */
 #include "layout.h"             /* rotate_dash() */
 #include "ioblksize.h"          /* io_blksize() */
 
