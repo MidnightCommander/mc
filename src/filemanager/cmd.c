@@ -1583,7 +1583,7 @@ void
 quick_view_cmd (void)
 {
     if (PANEL (get_panel_widget (MENU_PANEL_IDX)) == current_panel)
-        change_panel ();
+        (void) change_panel ();
     create_panel (MENU_PANEL_IDX, view_quick);
 }
 

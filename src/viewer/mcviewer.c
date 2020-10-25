@@ -108,7 +108,7 @@ mcview_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
             if (!widget_get_state (w, WST_FOCUSED))
             {
                 /* Grab focus */
-                change_panel ();
+                (void) change_panel ();
             }
         }
         MC_FALLTHROUGH;

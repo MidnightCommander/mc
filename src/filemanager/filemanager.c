@@ -1138,7 +1138,7 @@ midnight_execute_cmd (Widget * sender, long command)
     switch (command)
     {
     case CK_ChangePanel:
-        change_panel ();
+        (void) change_panel ();
         break;
     case CK_HotListAdd:
         add2hotlist_cmd (current_panel);
@@ -1765,12 +1765,18 @@ load_hint (gboolean force)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+  * Change current panel in the file manager.
+  *
+  * @return current_panel
+  */
 
-void
+WPanel *
 change_panel (void)
 {
     input_complete_free (cmdline);
     group_select_next_widget (GROUP (midnight_dlg));
+    return current_panel;
 }
 
 /* --------------------------------------------------------------------------------------------- */

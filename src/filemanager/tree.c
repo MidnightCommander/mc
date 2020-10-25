@@ -586,16 +586,18 @@ tree_chdir_sel (WTree * tree)
 {
     if (tree->is_panel)
     {
-        change_panel ();
+        WPanel *p;
 
-        if (do_cd (current_panel, tree->selected_ptr->name, cd_exact))
-            select_item (current_panel);
+        p = change_panel ();
+
+        if (do_cd (p, tree->selected_ptr->name, cd_exact))
+            select_item (p);
         else
             message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\"\n%s"),
                      vfs_path_as_str (tree->selected_ptr->name), unix_error_string (errno));
 
-        widget_draw (WIDGET (current_panel));
-        change_panel ();
+        widget_draw (WIDGET (p));
+        (void) change_panel ();
         show_tree (tree);
     }
     else
@@ -1229,7 +1231,7 @@ tree_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
             event->result.abort = TRUE;
         }
         else if (!widget_get_state (w, WST_FOCUSED))
-            change_panel ();
+            (void) change_panel ();
         break;
 
     case MSG_MOUSE_CLICK:

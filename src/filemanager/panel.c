@@ -2876,6 +2876,7 @@ chdir_other_panel (WPanel * panel)
     const file_entry_t *entry = &panel->dir.list[panel->selected];
     vfs_path_t *new_dir_vpath;
     char *sel_entry = NULL;
+    WPanel *p;
 
     if (get_other_type () != view_listing)
         create_panel (get_other_index (), view_listing);
@@ -2888,13 +2889,13 @@ chdir_other_panel (WPanel * panel)
         sel_entry = strrchr (vfs_path_get_last_path_str (panel->cwd_vpath), PATH_SEP);
     }
 
-    change_panel ();
-    do_cd (current_panel, new_dir_vpath, cd_exact);
+    p = change_panel ();
+    do_cd (p, new_dir_vpath, cd_exact);
     vfs_path_free (new_dir_vpath);
 
     if (sel_entry)
-        try_to_select (current_panel, sel_entry);
-    change_panel ();
+        try_to_select (p, sel_entry);
+    (void) change_panel ();
 
     move_down (panel);
 }
@@ -2931,6 +2932,7 @@ chdir_to_readlink (WPanel * panel)
     struct stat st;
     vfs_path_t *panel_fname_vpath;
     gboolean ok;
+    WPanel *cpanel;
 
     if (get_other_type () != view_listing)
         return;
@@ -2969,10 +2971,10 @@ chdir_to_readlink (WPanel * panel)
     else
         new_dir_vpath = vfs_path_append_new (panel->cwd_vpath, buffer, (char *) NULL);
 
-    change_panel ();
-    do_cd (current_panel, new_dir_vpath, cd_exact);
+    cpanel = change_panel ();
+    do_cd (cpanel, new_dir_vpath, cd_exact);
     vfs_path_free (new_dir_vpath);
-    change_panel ();
+    (void) change_panel ();
 
     move_down (panel);
 }
@@ -3879,7 +3881,7 @@ panel_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
         }
 
         if (!is_active)
-            change_panel ();
+            (void) change_panel ();
         MC_FALLTHROUGH;
 
     case MSG_MOUSE_DRAG:
