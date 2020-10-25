@@ -2913,7 +2913,7 @@ panel_sync_other (const WPanel * panel)
     if (get_other_type () != view_listing)
         create_panel (get_other_index (), view_listing);
 
-    do_panel_cd (other_panel, current_panel->cwd_vpath, cd_exact);
+    do_panel_cd (other_panel, panel->cwd_vpath, cd_exact);
 
     /* try to select current filename on the other panel */
     if (!panel->is_panelized)
