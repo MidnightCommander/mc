@@ -127,7 +127,7 @@ static const char *machine_str = N_("Enter machine name (F1 for details):");
  * If @plain_view is TRUE, force internal viewer and raw mode (used for F13).
  */
 static void
-do_view_cmd (const WPanel * panel, gboolean plain_view)
+do_view_cmd (WPanel * panel, gboolean plain_view)
 {
     /* Directories are viewed by changing to them */
     if (S_ISDIR (selection (panel)->st.st_mode) || link_isdir (selection (panel)))
@@ -140,7 +140,7 @@ do_view_cmd (const WPanel * panel, gboolean plain_view)
             return;
 
         fname_vpath = vfs_path_from_str (selection (panel)->fname);
-        if (!do_cd (fname_vpath, cd_exact))
+        if (!do_cd (panel, fname_vpath, cd_exact))
             message (D_ERROR, MSG_ERROR, _("Cannot change directory"));
         vfs_path_free (fname_vpath);
     }
@@ -609,7 +609,7 @@ view_file (const vfs_path_t * filename_vpath, gboolean plain_view, gboolean inte
 /** Run user's preferred viewer on the currently selected file */
 
 void
-view_cmd (const WPanel * panel)
+view_cmd (WPanel * panel)
 {
     do_view_cmd (panel, FALSE);
 }
@@ -639,7 +639,7 @@ view_file_cmd (const WPanel * panel)
 /* --------------------------------------------------------------------------------------------- */
 /** Run plain internal viewer on the currently selected file */
 void
-view_raw_cmd (const WPanel * panel)
+view_raw_cmd (WPanel * panel)
 {
     do_view_cmd (panel, TRUE);
 }
@@ -1126,7 +1126,7 @@ vfs_list (void)
         return;
 
     target_vpath = vfs_path_from_str (target);
-    if (!do_cd (target_vpath, cd_exact))
+    if (!do_cd (current_panel, target_vpath, cd_exact))
         message (D_ERROR, MSG_ERROR, _("Cannot change directory"));
     vfs_path_free (target_vpath);
     g_free (target);

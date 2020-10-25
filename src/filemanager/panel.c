@@ -1979,12 +1979,12 @@ mini_status_format (WPanel * panel)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-cd_up_dir (void)
+cd_up_dir (WPanel * panel)
 {
     vfs_path_t *up_dir;
 
     up_dir = vfs_path_from_str ("..");
-    do_cd (up_dir, cd_exact);
+    do_cd (panel, up_dir, cd_exact);
     vfs_path_free (up_dir);
 }
 
@@ -1992,23 +1992,22 @@ cd_up_dir (void)
 /** Used to emulate Lynx's entering leaving a directory with the arrow keys */
 
 static cb_ret_t
-maybe_cd (gboolean move_up_dir)
+maybe_cd (WPanel * panel, gboolean move_up_dir)
 {
     if (panels_options.navigate_with_arrows && input_is_empty (cmdline))
     {
         if (move_up_dir)
         {
-            cd_up_dir ();
+            cd_up_dir (panel);
             return MSG_HANDLED;
         }
 
-        if (S_ISDIR (selection (current_panel)->st.st_mode)
-            || link_isdir (selection (current_panel)))
+        if (S_ISDIR (selection (panel)->st.st_mode) || link_isdir (selection (panel)))
         {
             vfs_path_t *vpath;
 
-            vpath = vfs_path_from_str (selection (current_panel)->fname);
-            do_cd (vpath, cd_exact);
+            vpath = vfs_path_from_str (selection (panel)->fname);
+            do_cd (panel, vpath, cd_exact);
             vfs_path_free (vpath);
             return MSG_HANDLED;
         }
@@ -2021,11 +2020,11 @@ maybe_cd (gboolean move_up_dir)
 
 /* if command line is empty then do 'cd ..' */
 static cb_ret_t
-force_maybe_cd (void)
+force_maybe_cd (WPanel * panel)
 {
     if (input_is_empty (cmdline))
     {
-        cd_up_dir ();
+        cd_up_dir (panel);
         return MSG_HANDLED;
     }
 
@@ -2219,7 +2218,7 @@ move_left (WPanel * panel)
         return MSG_HANDLED;
     }
 
-    return maybe_cd (TRUE);     /* cd .. */
+    return maybe_cd (panel, TRUE);      /* cd .. */
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2233,7 +2232,7 @@ move_right (WPanel * panel)
         return MSG_HANDLED;
     }
 
-    return maybe_cd (FALSE);    /* cd (selection) */
+    return maybe_cd (panel, FALSE);     /* cd (selection) */
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2266,7 +2265,7 @@ static void
 goto_parent_dir (WPanel * panel)
 {
     if (!panel->is_panelized)
-        cd_up_dir ();
+        cd_up_dir (panel);
     else
     {
         char *fname = panel->dir.list[panel->selected].fname;
@@ -2293,7 +2292,7 @@ goto_parent_dir (WPanel * panel)
             g_free (dname);
         }
 
-        do_cd (dname_vpath, cd_exact);
+        do_cd (panel, dname_vpath, cd_exact);
         try_to_select (panel, bname);
 
         vfs_path_free (dname_vpath);
@@ -2337,7 +2336,7 @@ goto_child_dir (WPanel * panel)
         vfs_path_t *vpath;
 
         vpath = vfs_path_from_str (selection (panel)->fname);
-        do_cd (vpath, cd_exact);
+        do_cd (panel, vpath, cd_exact);
         vfs_path_free (vpath);
     }
 }
@@ -2780,7 +2779,7 @@ stop_search (WPanel * panel)
 /** Return TRUE if the Enter key has been processed, FALSE otherwise */
 
 static gboolean
-do_enter_on_file_entry (file_entry_t * fe)
+do_enter_on_file_entry (WPanel * panel, file_entry_t * fe)
 {
     vfs_path_t *full_name_vpath;
     gboolean ok;
@@ -2794,13 +2793,13 @@ do_enter_on_file_entry (file_entry_t * fe)
         vfs_path_t *fname_vpath;
 
         fname_vpath = vfs_path_from_str (fe->fname);
-        if (!do_cd (fname_vpath, cd_exact))
+        if (!do_cd (panel, fname_vpath, cd_exact))
             message (D_ERROR, MSG_ERROR, _("Cannot change directory"));
         vfs_path_free (fname_vpath);
         return TRUE;
     }
 
-    full_name_vpath = vfs_path_append_new (current_panel->cwd_vpath, fe->fname, (char *) NULL);
+    full_name_vpath = vfs_path_append_new (panel->cwd_vpath, fe->fname, (char *) NULL);
 
     /* Try associated command */
     ok = regex_command (full_name_vpath, "Open") != 0;
@@ -2809,7 +2808,7 @@ do_enter_on_file_entry (file_entry_t * fe)
         return TRUE;
 
     /* Check if the file is executable */
-    full_name_vpath = vfs_path_append_new (current_panel->cwd_vpath, fe->fname, (char *) NULL);
+    full_name_vpath = vfs_path_append_new (panel->cwd_vpath, fe->fname, (char *) NULL);
     ok = (is_exe (fe->st.st_mode) && if_link_is_exe (full_name_vpath, fe));
     vfs_path_free (full_name_vpath);
     if (!ok)
@@ -2854,7 +2853,7 @@ do_enter_on_file_entry (file_entry_t * fe)
 static inline gboolean
 do_enter (WPanel * panel)
 {
-    return do_enter_on_file_entry (selection (panel));
+    return do_enter_on_file_entry (panel, selection (panel));
 }
 
 
@@ -2890,7 +2889,7 @@ chdir_other_panel (WPanel * panel)
     }
 
     change_panel ();
-    do_cd (new_dir_vpath, cd_exact);
+    do_cd (current_panel, new_dir_vpath, cd_exact);
     vfs_path_free (new_dir_vpath);
 
     if (sel_entry)
@@ -2971,7 +2970,7 @@ chdir_to_readlink (WPanel * panel)
         new_dir_vpath = vfs_path_append_new (panel->cwd_vpath, buffer, (char *) NULL);
 
     change_panel ();
-    do_cd (new_dir_vpath, cd_exact);
+    do_cd (current_panel, new_dir_vpath, cd_exact);
     vfs_path_free (new_dir_vpath);
     change_panel ();
 
@@ -3513,7 +3512,7 @@ panel_execute_cmd (WPanel * panel, long command)
         mark_file_right (panel);
         break;
     case CK_CdParentSmart:
-        res = force_maybe_cd ();
+        res = force_maybe_cd (panel);
         break;
     case CK_Up:
         move_up (panel);
@@ -5018,12 +5017,12 @@ panel_deinit (void)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-do_cd (const vfs_path_t * new_dir_vpath, enum cd_enum exact)
+do_cd (WPanel * panel, const vfs_path_t * new_dir_vpath, enum cd_enum exact)
 {
     gboolean res;
     const vfs_path_t *_new_dir_vpath = new_dir_vpath;
 
-    if (current_panel->is_panelized)
+    if (panel->is_panelized)
     {
         size_t new_vpath_len;
 
@@ -5032,18 +5031,18 @@ do_cd (const vfs_path_t * new_dir_vpath, enum cd_enum exact)
             _new_dir_vpath = panelized_panel.root_vpath;
     }
 
-    res = do_panel_cd (current_panel, _new_dir_vpath, exact);
+    res = do_panel_cd (panel, _new_dir_vpath, exact);
 
 #ifdef HAVE_CHARSET
     if (res)
     {
         const vfs_path_element_t *path_element;
 
-        path_element = vfs_path_get_by_index (current_panel->cwd_vpath, -1);
+        path_element = vfs_path_get_by_index (panel->cwd_vpath, -1);
         if (path_element->encoding != NULL)
-            current_panel->codepage = get_codepage_index (path_element->encoding);
+            panel->codepage = get_codepage_index (path_element->encoding);
         else
-            current_panel->codepage = SELECT_CHARSET_NO_TRANSLATE;
+            panel->codepage = SELECT_CHARSET_NO_TRANSLATE;
     }
 #endif /* HAVE_CHARSET */
 

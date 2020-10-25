@@ -1904,7 +1904,7 @@ find_cmd (void)
                 vfs_path_t *dirname_vpath;
 
                 dirname_vpath = vfs_path_from_str (dirname);
-                do_cd (dirname_vpath, cd_exact);
+                do_cd (current_panel, dirname_vpath, cd_exact);
                 vfs_path_free (dirname_vpath);
                 if (filename != NULL)
                     try_to_select (current_panel,
@@ -1916,7 +1916,7 @@ find_cmd (void)
                 vfs_path_t *filename_vpath;
 
                 filename_vpath = vfs_path_from_str (filename);
-                do_cd (filename_vpath, cd_exact);
+                do_cd (current_panel, filename_vpath, cd_exact);
                 vfs_path_free (filename_vpath);
             }
         }

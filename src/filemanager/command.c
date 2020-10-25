@@ -216,7 +216,7 @@ handle_cdpath (const char *path)
                 vfs_path_t *r_vpath;
 
                 r_vpath = vfs_path_build_filename (p, path, (char *) NULL);
-                result = do_cd (r_vpath, cd_parse_command);
+                result = do_cd (current_panel, r_vpath, cd_parse_command);
                 vfs_path_free (r_vpath);
             }
             *s = c;
@@ -435,7 +435,7 @@ do_cd_command (char *orig_cmd)
         else
             q_vpath = vfs_path_from_str_flags (path, VPF_NO_CANON);
 
-        ok = do_cd (q_vpath, cd_parse_command);
+        ok = do_cd (current_panel, q_vpath, cd_parse_command);
         if (!ok)
             ok = handle_cdpath (path);
 

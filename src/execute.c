@@ -131,7 +131,7 @@ edition_pre_exec (void)
 static void
 do_possible_cd (const vfs_path_t * new_dir_vpath)
 {
-    if (!do_cd (new_dir_vpath, cd_exact))
+    if (!do_cd (current_panel, new_dir_vpath, cd_exact))
         message (D_ERROR, _("Warning"), "%s",
                  _("The Commander can't change to the directory that\n"
                    "the subshell claims you are in. Perhaps you have\n"

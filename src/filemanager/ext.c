@@ -62,6 +62,7 @@
 #include "src/selcodepage.h"    /* do_set_codepage */
 #endif
 
+#include "filemanager.h"        /* current_panel */
 #include "panel.h"              /* do_cd */
 
 #include "ext.h"
@@ -388,7 +389,7 @@ exec_extension_view (void *target, char *cmd, const vfs_path_t * filename_vpath,
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-exec_extension_cd (void)
+exec_extension_cd (WPanel * panel)
 {
     char *q;
     vfs_path_t *p_vpath;
@@ -403,7 +404,7 @@ exec_extension_cd (void)
     q[1] = 0;
 
     p_vpath = vfs_path_from_str_flags (pbuffer, VPF_NO_CANON);
-    do_cd (p_vpath, cd_parse_command);
+    do_cd (panel, p_vpath, cd_parse_command);
     vfs_path_free (p_vpath);
 }
 
@@ -411,8 +412,8 @@ exec_extension_cd (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static vfs_path_t *
-exec_extension (void *target, const vfs_path_t * filename_vpath, const char *lc_data,
-                int start_line)
+exec_extension (WPanel * panel, void *target, const vfs_path_t * filename_vpath,
+                const char *lc_data, int start_line)
 {
     char *shell_string, *export_variables;
     vfs_path_t *script_vpath = NULL;
@@ -439,7 +440,7 @@ exec_extension (void *target, const vfs_path_t * filename_vpath, const char *lc_
 
     if (is_cd)
     {
-        exec_extension_cd ();
+        exec_extension_cd (panel);
         g_free (shell_string);
         goto ret;
     }
@@ -1025,7 +1026,7 @@ regex_command_for (void *target, const vfs_path_t * filename_vpath, const char *
                         {
                             vfs_path_t *sv;
 
-                            sv = exec_extension (target, filename_vpath, r + 1,
+                            sv = exec_extension (current_panel, target, filename_vpath, r + 1,
                                                  view_at_line_number);
                             if (script_vpath != NULL)
                                 *script_vpath = sv;

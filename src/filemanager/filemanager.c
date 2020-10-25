@@ -154,7 +154,7 @@ treebox_cmd (void)
         vfs_path_t *sel_vdir;
 
         sel_vdir = vfs_path_from_str (sel_dir);
-        do_cd (sel_vdir, cd_exact);
+        do_cd (current_panel, sel_vdir, cd_exact);
         vfs_path_free (sel_vdir);
         g_free (sel_dir);
     }
@@ -1031,7 +1031,7 @@ show_editor_viewer_history (void)
 
                 d = g_path_get_dirname (s);
                 s_vpath = vfs_path_from_str (d);
-                do_cd (s_vpath, cd_exact);
+                do_cd (current_panel, s_vpath, cd_exact);
                 try_to_select (current_panel, s);
                 g_free (d);
             }

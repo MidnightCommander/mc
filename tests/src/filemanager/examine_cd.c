@@ -56,8 +56,9 @@ get_current_type (void)
 }
 
 gboolean
-do_cd (const vfs_path_t * new_dir_vpath, enum cd_enum cd_type)
+do_cd (WPanel * panel, const vfs_path_t * new_dir_vpath, enum cd_enum cd_type)
 {
+    (void) panel;
     (void) new_dir_vpath;
     (void) cd_type;
 

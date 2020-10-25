@@ -588,7 +588,7 @@ tree_chdir_sel (WTree * tree)
     {
         change_panel ();
 
-        if (do_cd (tree->selected_ptr->name, cd_exact))
+        if (do_cd (current_panel, tree->selected_ptr->name, cd_exact))
             select_item (current_panel);
         else
             message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\"\n%s"),

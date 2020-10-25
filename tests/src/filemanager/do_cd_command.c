@@ -30,7 +30,7 @@
 #include "src/vfs/local/local.c"
 
 #include "src/filemanager/command.c"
-
+#include "src/filemanager/panel.h"
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -55,8 +55,10 @@ static gboolean do_cd__return_value;
 
 /* @Mock */
 gboolean
-do_cd (const vfs_path_t * new_dir_vpath, enum cd_enum cd_type)
+do_cd (WPanel * panel, const vfs_path_t * new_dir_vpath, enum cd_enum cd_type)
 {
+    (void) panel;
+
     do_cd__new_dir_vpath__captured = vfs_path_clone (new_dir_vpath);
     do_cd__cd_type__captured = cd_type;
     return do_cd__return_value;
