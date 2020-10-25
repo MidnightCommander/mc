@@ -105,7 +105,7 @@ void chattr_cmd (WPanel * panel);
 const char *chattr_get_as_str (unsigned long attr);
 #endif
 /* find.c */
-void find_cmd (void);
+void find_cmd (WPanel * panel);
 
 /*** inline functions ****************************************************************************/
 #endif /* MC__CMD_H */

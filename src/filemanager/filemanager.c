@@ -1247,7 +1247,7 @@ midnight_execute_cmd (Widget * sender, long command)
         view_filtered_cmd (current_panel);
         break;
     case CK_Find:
-        find_cmd ();
+        find_cmd (current_panel);
         break;
 #ifdef ENABLE_VFS_FISH
     case CK_ConnectFish:

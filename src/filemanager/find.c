@@ -54,7 +54,6 @@
 
 #include "dir.h"
 #include "cmd.h"                /* find_cmd(), view_file_at_line() */
-#include "filemanager.h"        /* current_panel */
 #include "boxes.h"
 #include "panelize.h"
 
@@ -557,7 +556,7 @@ find_parm_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
  */
 
 static gboolean
-find_parameters (char **start_dir, ssize_t * start_dir_len,
+find_parameters (WPanel * panel, char **start_dir, ssize_t * start_dir_len,
                  char **ignore_dirs, char **pattern, char **content)
 {
     WGroup *g;
@@ -775,7 +774,7 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
 
             temp_dir = in_start->buffer;
             if (*temp_dir == '\0' || DIR_IS_DOT (temp_dir))
-                temp_dir = g_strdup (vfs_path_as_str (current_panel->cwd_vpath));
+                temp_dir = g_strdup (vfs_path_as_str (panel->cwd_vpath));
             else
                 temp_dir = g_strdup (temp_dir);
 
@@ -828,8 +827,8 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
 
             if (DIR_IS_DOT (s))
             {
-                *start_dir = g_strdup (vfs_path_as_str (current_panel->cwd_vpath));
-                /* FIXME: is current_panel->cwd_vpath canonicalized? */
+                *start_dir = g_strdup (vfs_path_as_str (panel->cwd_vpath));
+                /* FIXME: is panel->cwd_vpath canonicalized? */
                 /* relative paths will be used in panelization */
                 *start_dir_len = (ssize_t) strlen (*start_dir);
                 g_free (s);
@@ -843,9 +842,8 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
             {
                 /* relative paths will be used in panelization */
                 *start_dir =
-                    mc_build_filename (vfs_path_as_str (current_panel->cwd_vpath), s,
-                                       (char *) NULL);
-                *start_dir_len = (ssize_t) strlen (vfs_path_as_str (current_panel->cwd_vpath));
+                    mc_build_filename (vfs_path_as_str (panel->cwd_vpath), s, (char *) NULL);
+                *start_dir_len = (ssize_t) strlen (vfs_path_as_str (panel->cwd_vpath));
                 g_free (s);
             }
 
@@ -1749,7 +1747,7 @@ kill_gui (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-do_find (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
+do_find (WPanel * panel, const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
          char **dirname, char **filename)
 {
     int return_value = 0;
@@ -1778,10 +1776,10 @@ do_find (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
         int i;
         struct stat st;
         GList *entry;
-        dir_list *list = &current_panel->dir;
+        dir_list *list = &panel->dir;
         char *name = NULL;
 
-        panel_clean_dir (current_panel);
+        panel_clean_dir (panel);
         dir_list_init (list);
 
         for (i = 0, entry = listbox_get_first_link (find_list); entry != NULL;
@@ -1847,9 +1845,9 @@ do_find (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
                 rotate_dash (TRUE);
         }
 
-        current_panel->is_panelized = TRUE;
-        panelize_absolutize_if_needed (current_panel);
-        panelize_save_panel (current_panel);
+        panel->is_panelized = TRUE;
+        panelize_absolutize_if_needed (panel);
+        panelize_save_panel (panel);
     }
 
     kill_gui ();
@@ -1865,7 +1863,7 @@ do_find (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
 /* --------------------------------------------------------------------------------------------- */
 
 void
-find_cmd (void)
+find_cmd (WPanel * panel)
 {
     char *start_dir = NULL, *ignore_dirs = NULL;
     ssize_t start_dir_len;
@@ -1873,7 +1871,7 @@ find_cmd (void)
     find_pattern = NULL;
     content_pattern = NULL;
 
-    while (find_parameters (&start_dir, &start_dir_len,
+    while (find_parameters (panel, &start_dir, &start_dir_len,
                             &ignore_dirs, &find_pattern, &content_pattern))
     {
         char *filename = NULL, *dirname = NULL;
@@ -1890,7 +1888,7 @@ find_cmd (void)
             if (!content_is_empty && !str_is_valid_string (content_pattern))
                 MC_PTR_FREE (content_pattern);
 
-            v = do_find (start_dir, start_dir_len, ignore_dirs, &dirname, &filename);
+            v = do_find (panel, start_dir, start_dir_len, ignore_dirs, &dirname, &filename);
         }
 
         g_free (start_dir);
@@ -1904,10 +1902,10 @@ find_cmd (void)
                 vfs_path_t *dirname_vpath;
 
                 dirname_vpath = vfs_path_from_str (dirname);
-                do_cd (current_panel, dirname_vpath, cd_exact);
+                do_cd (panel, dirname_vpath, cd_exact);
                 vfs_path_free (dirname_vpath);
                 if (filename != NULL)
-                    try_to_select (current_panel,
+                    try_to_select (panel,
                                    filename + (content_pattern != NULL
                                                ? strchr (filename + 4, ':') - filename + 1 : 4));
             }
@@ -1916,7 +1914,7 @@ find_cmd (void)
                 vfs_path_t *filename_vpath;
 
                 filename_vpath = vfs_path_from_str (filename);
-                do_cd (current_panel, filename_vpath, cd_exact);
+                do_cd (panel, filename_vpath, cd_exact);
                 vfs_path_free (filename_vpath);
             }
         }
@@ -1930,8 +1928,8 @@ find_cmd (void)
 
         if (v == B_PANELIZE)
         {
-            panel_re_sort (current_panel);
-            try_to_select (current_panel, NULL);
+            panel_re_sort (panel);
+            try_to_select (panel, NULL);
             break;
         }
     }
