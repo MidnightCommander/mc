@@ -146,6 +146,9 @@ do_view_action() {
     zoo)
         zoo l "${MC_EXT_FILENAME}"
         ;;
+    wim)
+        wimlib-imagex info "${MC_EXT_FILENAME}" 2> /dev/null
+        ;;
     *)
         ;;
     esac

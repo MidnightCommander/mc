@@ -809,6 +809,10 @@ type/\(Zstandard compressed
 type/^Parity\ Archive\ Volume\ Set
 	Open=@EXTHELPERSDIR@/archive.sh open par2
 
+# WIM
+shell/i/\.wim
+	Open=%cd %p/uwim://
+	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view wim
 
 ### Includes
 # includes should be at end of bindings

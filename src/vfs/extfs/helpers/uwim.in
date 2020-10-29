@@ -1,0 +1,208 @@
+#! /bin/sh
+# Midnight Commander - WIM suport
+#
+# Written by:
+#  Vadim Kalinnikov <moose@ylsoftware.com>,
+#
+# This file is part of the Midnight Commander.
+#
+# It required wimtools: https://wimlib.net/
+# On Debian/Ubuntu wimtools can be installed via:
+# apt install wimtools
+
+which wimlib-imagex 2>/dev/null > /dev/null || exit 1
+WIM=`which wimlib-imagex`
+AWK=@AWK@
+
+[ -n "$2" ] || exit 1
+
+ACTION=$1
+WIMFILENAME=$2
+
+mcwim_list() {
+	# Here we can use "Image count" from output,
+	# but on some borken images we can get garbage, instead of number
+	IMAGECOUNT=`${WIM} info ${WIMFILENAME} | grep  Index: | grep -v Boot | wc -l`
+	IMGNUM=1
+	VUID=`id -nu`
+	VGID=`id -ng`
+	while [ ${IMGNUM} -le ${IMAGECOUNT} ]; do
+		${WIM} dir ${WIMFILENAME} ${IMGNUM} --detailed | \
+			${AWK}  -v uid=${VUID} -v gid=${VGID} -v imgnum=${IMGNUM} '
+				/^----------------------------------------------------------------------------/,/^$/ {
+					if (match($0, /^Full Path/)) {
+						split($0, namesrc, "\"");
+						name=namesrc[2];
+					}
+					if (match($0, /FILE_ATTRIBUTE_DIRECTORY is set/)) {
+						attr="drwxr-xr-x"
+					}
+					if (match($0, /^Uncompressed size/)) {
+						size=$4;
+					}
+					if (match($0, /^Last Write Time/)) {
+						months["Jan"] = "01";
+						months["Feb"] = "02";
+						months["Mar"] = "03";
+						months["Apr"] = "04";
+						months["May"] = "05";
+						months["Jun"] = "06";
+						months["Jul"] = "07";
+						months["Aug"] = "08";
+						months["Sep"] = "09";
+						months["Oct"] = "10";
+						months["Nov"] = "11";
+						months["Dec"] = "12";
+						split($0, mtimesrc, " ");
+						mtime=sprintf("%s/%s/%s %s", months[mtimesrc[6]], mtimesrc[7], mtimesrc[9], mtimesrc[8]);
+					}
+					
+					if (match($0, /^$/)) {
+						printf("%s 1 %s %s % 20s % 24s IMAGE%s%s\n",
+							attr, uid, gid, size, mtime, imgnum, name);
+						name = size = mtime = "";
+						attr="-rw-r--r--";
+					}
+				}
+			'
+		
+		IMGNUM=$((IMGNUM+1))
+	done
+	
+	# Virtual files
+	echo "-r-xr-xr-x 1 ${VUID} ${VGID}                    1      01/01/2020 00:00:00 OPTIMIZE"
+	echo "-r-xr-xr-x 1 ${VUID} ${VGID}                    1      01/01/2020 00:00:00 VERIFY"
+}
+
+mcwim_copyout() {
+	# Virtual files
+	if [ "${FILENAMESRC}" = "OPTIMIZE" ]; then
+		echo "#/bin/sh" > ${FILENAMEDST}
+		echo "# Run this to optimize archive" >> ${FILENAMEDST}
+		echo "${WIM} optimize \"${WIMFILENAME}\"" >> ${FILENAMEDST}
+		chmod a+x ${FILENAMEDST}
+		exit 0;
+	elif [ "${FILENAMESRC}" = "VERIFY" ]; then
+		echo "#/bin/sh" > ${FILENAMEDST}
+		echo "# Run this to verify archive" >> ${FILENAMEDST}
+		echo "${WIM} verify \"${WIMFILENAME}\"" >> ${FILENAMEDST}
+		chmod a+x ${FILENAMEDST}
+		exit 0;
+	fi
+
+	# Filename must contain imgnum
+	echo ${FILENAMESRC} | grep -E '^IMAGE[0-9]+/' || exit 1
+
+	IMGNUM=`echo ${FILENAMESRC} | cut -d '/' -f1 | sed "s/IMAGE//"`
+	REALFILENAME=`echo ${FILENAMESRC} | sed "s/IMAGE${IMGNUM}//"`
+	${WIM} extract ${WIMFILENAME} ${IMGNUM} ${REALFILENAME} --to-stdout > ${FILENAMEDST}
+}
+
+mcwim_copyin() {
+	# Skip virtual files
+	[ "${FILENAMEDST}" = "OPTIMIZE" ] && exit 1;
+	[ "${FILENAMEDST}" = "VERIFY" ] && exit 1;
+
+	# Filename must contain imgnum
+	echo ${FILENAMEDST} | grep -E '^IMAGE[0-9]+/' || exit 1
+
+	IMGNUM=`echo ${FILENAMEDST} | cut -d '/' -f1 | sed "s/IMAGE//"`
+	REALFILENAME=`echo ${FILENAMEDST} | sed "s/IMAGE${IMGNUM}//"`
+	echo "add \"${FILENAMESRC}\" \"${REALFILENAME}\"" | ${WIM} update ${WIMFILENAME} ${IMGNUM} > /dev/null
+}
+
+
+mcwim_rm() {
+	# Skip virtual files
+	[ "${FILENAMESRC}" = "OPTIMIZE" ] && exit 0;
+	[ "${FILENAMESRC}" = "VERIFY" ] && exit 0;
+
+	# Filename must contain imgnum
+	echo ${FILENAMESRC} | grep -E '^IMAGE[0-9]+/' || exit 1
+	
+	IMGNUM=`echo ${FILENAMESRC} | cut -d '/' -f1 | sed "s/IMAGE//"`
+	REALFILENAME=`echo ${FILENAMESRC} | sed "s/IMAGE${IMGNUM}//"`
+
+	if [ -z "${REALFILENAME}" ]; then
+		# If user want to remove image
+		${WIM} delete ${WIMFILENAME} ${IMGNUM}
+	else
+		# remove regular file or directory
+		echo "delete \"${REALFILENAME}\"" | ${WIM} update ${WIMFILENAME} ${IMGNUM} --force --recursive > /dev/null
+	fi
+}
+
+mcwim_run() {
+	case ${RUNFILENAME} in
+		OPTIMIZE)
+			${WIM} optimize ${WIMFILENAME}
+			exit 0;
+		;;
+		VERIFY)
+			${WIM} verify ${WIMFILENAME}
+			exit 0;
+		;;
+	esac
+	exit 1;
+}
+
+
+mcwim_mkdir() {
+	# New dirname must contain imgnum
+	echo ${NEWDIRNAME} | grep -E '^IMAGE[0-9]+/' || exit 1
+	IMGNUM=`echo ${NEWDIRNAME} | cut -d '/' -f1 | sed "s/IMAGE//"`
+	REALDIRNAME=`echo ${NEWDIRNAME} | sed "s/IMAGE${IMGNUM}//"`
+	[ -z "${REALDIRNAME}" ] && exit 1
+	
+	TMPDIR=`mktemp -d`
+	DSTBASENAME=`basename ${REALDIRNAME}`
+	SRCDIRNAME="${TMPDIR}/${DSTBASENAME}"
+	mkdir -p ${SRCDIRNAME}
+	echo "add \"${SRCDIRNAME}\" \"${REALDIRNAME}\"" | ${WIM} update ${WIMFILENAME} ${IMGNUM} > /dev/null
+	rm -rf ${TMPDIR}
+}
+
+#echo "'$1' '$2' '$3' '$4' '$5'" >> /tmp/mcdebug
+
+case "$ACTION" in
+	list)
+		mcwim_list
+	;;
+	
+	copyout)
+		[ -n "$4" ] || exit 1
+		FILENAMESRC="$3"
+		FILENAMEDST="$4"
+		mcwim_copyout
+	;;
+	
+	copyin)
+		[ -n "$4" ] || exit 1
+		FILENAMEDST="$3"
+		FILENAMESRC="$4"
+		mcwim_copyin
+	;;
+	
+	rm|rmdir)
+		[ -n "$3" ] || exit 1
+		FILENAMESRC="$3"
+		mcwim_rm
+	;;
+	
+	run)
+		[ -n "$3" ] || exit 1
+		RUNFILENAME="$3"
+		mcwim_run
+	;;
+	
+	mkdir)
+		[ -n "$3" ] || exit 1
+		NEWDIRNAME="$3"
+		mcwim_mkdir
+	;;
+	
+
+	*)
+		exit 1
+	;;
+esac
