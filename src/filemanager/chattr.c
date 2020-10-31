@@ -1243,7 +1243,7 @@ chattr_cmd (WPanel * panel)
 
         ch_dlg = chattr_dlg_create (panel, fname->str, flags);
         result = dlg_run (ch_dlg);
-        dlg_destroy (ch_dlg);
+        widget_destroy (WIDGET (ch_dlg));
 
         switch (result)
         {

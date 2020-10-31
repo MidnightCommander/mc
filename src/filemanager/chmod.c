@@ -650,7 +650,7 @@ chmod_cmd (WPanel * panel)
 
         vfs_path_free (vpath, TRUE);
 
-        dlg_destroy (ch_dlg);
+        widget_destroy (WIDGET (ch_dlg));
     }
     while (panel->marked != 0 && !end_chmod);
 

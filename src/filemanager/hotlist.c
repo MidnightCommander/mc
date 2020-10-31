@@ -350,7 +350,7 @@ hotlist_run_cmd (int action)
             hotlist_state.moving = FALSE;
             listbox_get_current (l_movelist, NULL, (void **) &moveto_item);
             moveto_group = current_group;
-            dlg_destroy (movelist_dlg);
+            widget_destroy (WIDGET (movelist_dlg));
             current_group = saved;
             if (ret == B_CANCEL)
                 return 0;
@@ -891,7 +891,7 @@ init_movelist (struct hotlist *item)
 static void
 hotlist_done (void)
 {
-    dlg_destroy (hotlist_dlg);
+    widget_destroy (WIDGET (hotlist_dlg));
     l_hotlist = NULL;
 #if 0
     update_panels (UP_OPTIMIZE, UP_KEEPSEL);

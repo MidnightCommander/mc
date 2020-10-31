@@ -345,16 +345,8 @@ widget_init (Widget * w, int y, int x, int lines, int cols,
     w->find_by_id = widget_default_find_by_id;
 
     w->set_state = widget_default_set_state;
+    w->destroy = widget_default_destroy;
     w->get_colors = widget_default_get_colors;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-widget_destroy (Widget * w)
-{
-    send_message (w, NULL, MSG_DESTROY, 0, NULL);
-    g_free (w);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -877,6 +869,20 @@ widget_default_set_state (Widget * w, widget_state_t state, gboolean enable)
     }
 
     return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Default callback function to destroy widget.
+ *
+ * @param w widget
+ */
+
+void
+widget_default_destroy (Widget * w)
+{
+    send_message (w, NULL, MSG_DESTROY, 0, NULL);
+    g_free (w);
 }
 
 /* --------------------------------------------------------------------------------------------- */

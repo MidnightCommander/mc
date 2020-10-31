@@ -642,7 +642,7 @@ user_group_button_cb (WButton * button, int action)
         }
 
         /* Here we used to redraw the window */
-        dlg_destroy (chl_dlg);
+        widget_destroy (WIDGET (chl_dlg));
     }
     while (chl_end);
 
@@ -1091,7 +1091,7 @@ advanced_chown_cmd (WPanel * panel)
 
         vfs_path_free (vpath, TRUE);
 
-        dlg_destroy (ch_dlg);
+        widget_destroy (WIDGET (ch_dlg));
     }
     while (panel->marked != 0 && !end_chown);
 

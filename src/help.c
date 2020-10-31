@@ -1175,7 +1175,7 @@ help_interactive_display (const gchar * event_group_name, const gchar * event_na
 
     dlg_run (whelp);
     interactive_display_finish ();
-    dlg_destroy (whelp);
+    widget_destroy (wh);
     return TRUE;
 }
 

@@ -325,6 +325,23 @@ frontend_dlg_run (WDialog * h)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static void
+dlg_default_destroy (Widget * w)
+{
+    WDialog *h = DIALOG (w);
+
+    /* if some widgets have history, save all histories at one moment here */
+    dlg_save_history (h);
+    group_default_callback (w, NULL, MSG_DESTROY, 0, NULL);
+    mc_event_group_del (h->event_group);
+    g_free (h->event_group);
+    g_free (h);
+
+    do_refresh ();
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 /** Default dialog callback */
@@ -403,6 +420,7 @@ dlg_create (gboolean modal, int y1, int x1, int lines, int cols, widget_pos_flag
     w->mouse_handler = dlg_handle_mouse_event;
     w->mouse.forced_capture = mouse_close_dialog && (w->pos_flags & WPOS_FULLSCREEN) == 0;
 
+    w->destroy = dlg_default_destroy;
     w->get_colors = dlg_default_get_colors;
 
     new_d->colors = colors;
@@ -582,22 +600,6 @@ dlg_run (WDialog * h)
     frontend_dlg_run (h);
     dlg_run_done (h);
     return h->ret_value;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-dlg_destroy (WDialog * h)
-{
-    /* if some widgets have history, save all history at one moment here */
-    dlg_save_history (h);
-    group_default_callback (WIDGET (h), NULL, MSG_DESTROY, 0, NULL);
-    send_message (WIDGET (h), NULL, MSG_DESTROY, 0, NULL);
-    mc_event_group_del (h->event_group);
-    g_free (h->event_group);
-    g_free (h);
-
-    do_refresh ();
 }
 
 /* --------------------------------------------------------------------------------------------- */

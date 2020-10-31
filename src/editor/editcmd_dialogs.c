@@ -358,7 +358,7 @@ editcmd_dialog_raw_key_query (const char *heading, const char *query, gboolean c
     }
 
     w = dlg_run (raw_dlg);
-    dlg_destroy (raw_dlg);
+    widget_destroy (WIDGET (raw_dlg));
 
     return (cancel && (w == ESC_CHAR || w == B_CANCEL)) ? 0 : w;
 }
@@ -424,7 +424,7 @@ editcmd_dialog_completion_show (const WEdit * edit, GQueue * compl, int max_widt
     }
 
     /* destroy dialog before return */
-    dlg_destroy (compl_dlg);
+    widget_destroy (WIDGET (compl_dlg));
 
     return curr;
 }
@@ -523,7 +523,7 @@ editcmd_dialog_select_definition_show (WEdit * edit, char *match_expr, GPtrArray
     }
 
     /* destroy dialog before return */
-    dlg_destroy (def_dlg);
+    widget_destroy (WIDGET (def_dlg));
 }
 
 /* --------------------------------------------------------------------------------------------- */

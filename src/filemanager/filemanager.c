@@ -1841,7 +1841,7 @@ do_nc (void)
 
         ret = TRUE;
 
-        /* dlg_destroy destroys even current_panel->cwd_vpath, so we have to save a copy :) */
+        /* widget_destroy destroys even current_panel->cwd_vpath, so we have to save a copy :) */
         if (mc_args__last_wd_file != NULL && vfs_current_is_local ())
             last_wd_string = g_strdup (vfs_path_as_str (current_panel->cwd_vpath));
 
@@ -1855,7 +1855,7 @@ do_nc (void)
     mc_global.midnight_shutdown = TRUE;
     dialog_switch_shutdown ();
     done_mc ();
-    dlg_destroy (filemanager);
+    widget_destroy (WIDGET (filemanager));
     current_panel = NULL;
 
 #ifdef USE_INTERNAL_EDIT

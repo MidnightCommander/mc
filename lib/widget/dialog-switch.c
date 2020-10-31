@@ -268,7 +268,7 @@ dialog_switch_process_pending (void)
         ret = dlg_run (h);
         if (widget_get_state (wh, WST_CLOSED))
         {
-            dlg_destroy (h);
+            widget_destroy (wh);
 
             /* return to panels */
             if (mc_global.mc_run_mode == MC_RUN_FULL)
@@ -306,7 +306,7 @@ dialog_switch_shutdown (void)
         WDialog *dlg = DIALOG (mc_dialogs->data);
 
         dlg_run (dlg);
-        dlg_destroy (dlg);
+        widget_destroy (WIDGET (dlg));
     }
 }
 

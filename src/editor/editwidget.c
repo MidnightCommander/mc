@@ -1280,7 +1280,7 @@ edit_files (const GList * files)
         dlg_run (edit_dlg);
 
     if (!ok || widget_get_state (wd, WST_CLOSED))
-        dlg_destroy (edit_dlg);
+        widget_destroy (wd);
 
     return ok;
 }

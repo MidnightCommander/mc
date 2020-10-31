@@ -611,7 +611,7 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
             }
         }
 
-    dlg_destroy (dd);
+    widget_destroy (WIDGET (dd));
 
     g_list_free_full (input_labels, g_free);    /* destroy input labels created before */
     g_array_free (widgets, TRUE);

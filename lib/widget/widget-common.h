@@ -168,6 +168,7 @@ struct Widget
     /* *INDENT-OFF* */
     cb_ret_t (*set_state) (Widget * w, widget_state_t state, gboolean enable);
     /* *INDENT-ON* */
+    void (*destroy) (Widget * w);
 
     const int *(*get_colors) (const Widget * w);
 };
@@ -203,7 +204,6 @@ char *hotkey_get_text (const hotkey_t hotkey);
 /* widget initialization */
 void widget_init (Widget * w, int y, int x, int lines, int cols,
                   widget_cb_fn callback, widget_mouse_cb_fn mouse_callback);
-void widget_destroy (Widget * w);
 /* Default callback for widgets */
 cb_ret_t widget_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
                                   void *data);
@@ -232,6 +232,8 @@ Widget *widget_default_find_by_type (const Widget * w, widget_cb_fn cb);
 Widget *widget_default_find_by_id (const Widget * w, unsigned long id);
 
 cb_ret_t widget_default_set_state (Widget * w, widget_state_t state, gboolean enable);
+
+void widget_default_destroy (Widget * w);
 
 /* get mouse pointer location within widget */
 Gpm_Event mouse_get_local (const Gpm_Event * global, const Widget * w);
@@ -378,6 +380,19 @@ static inline cb_ret_t
 widget_set_state (Widget * w, widget_state_t state, gboolean enable)
 {
     return w->set_state (w, state, enable);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Destroy widget.
+ *
+ * @param w widget
+ */
+
+static inline void
+widget_destroy (Widget * w)
+{
+    w->destroy (w);
 }
 
 /* --------------------------------------------------------------------------------------------- */

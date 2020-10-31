@@ -740,7 +740,7 @@ layout_box (void)
     else
         layout_restore ();
 
-    dlg_destroy (layout_dlg);
+    widget_destroy (WIDGET (layout_dlg));
     layout_change ();
     do_refresh ();
 }

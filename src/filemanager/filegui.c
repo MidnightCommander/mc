@@ -671,7 +671,7 @@ overwrite_query_dialog (file_op_context_t * ctx, enum OperationMode mode)
     if (result != B_CANCEL)
         ui->dont_overwrite_with_zero = CHECK (dlg_widgets[14].widget)->state;
 
-    dlg_destroy (ui->replace_dlg);
+    widget_destroy (wd);
 
     return (result == B_CANCEL) ? REPLACE_ABORT : (replace_action_t) result;
 
@@ -950,7 +950,7 @@ file_op_context_destroy_ui (file_op_context_t * ctx)
         file_op_context_ui_t *ui = (file_op_context_ui_t *) ctx->ui;
 
         dlg_run_done (ui->op_dlg);
-        dlg_destroy (ui->op_dlg);
+        widget_destroy (WIDGET (ui->op_dlg));
         MC_PTR_FREE (ctx->ui);
     }
 }

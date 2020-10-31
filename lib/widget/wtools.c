@@ -150,9 +150,8 @@ fg_message (int flags, const char *title, const char *text)
     d = do_create_message (flags, title, text);
     tty_getch ();
     dlg_run_done (d);
-    dlg_destroy (d);
+    widget_destroy (WIDGET (d));
 }
-
 
 /* --------------------------------------------------------------------------------------------- */
 /** Show message box from background */
@@ -356,7 +355,7 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
         }
 
         /* free used memory */
-        dlg_destroy (query_dlg);
+        widget_destroy (WIDGET (query_dlg));
     }
     else
     {
@@ -380,7 +379,7 @@ query_set_sel (int new_sel)
 /* --------------------------------------------------------------------------------------------- */
 /**
  * Create message dialog.  The caller must call dlg_run_done() and
- * dlg_destroy() to dismiss it.  Not safe to call from background.
+ * widget_destroy() to dismiss it.  Not safe to call from background.
  */
 
 WDialog *
@@ -628,7 +627,7 @@ status_msg_deinit (status_msg_t * sm)
 
     /* close and destroy dialog */
     dlg_run_done (sm->dlg);
-    dlg_destroy (sm->dlg);
+    widget_destroy (WIDGET (sm->dlg));
 }
 
 /* --------------------------------------------------------------------------------------------- */

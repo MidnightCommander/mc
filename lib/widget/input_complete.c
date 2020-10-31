@@ -1282,7 +1282,7 @@ complete_engine (WInput * in, int what_to_do)
             }
             if (q != NULL || end != min_end)
                 input_complete_free (in);
-            dlg_destroy (complete_dlg);
+            widget_destroy (WIDGET (complete_dlg));
 
             /* B_USER if user wants to start over again */
             return (i == B_USER);

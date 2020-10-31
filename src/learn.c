@@ -122,7 +122,7 @@ learn_button (WButton * button, int action)
     }
 
     dlg_run_done (d);
-    dlg_destroy (d);
+    widget_destroy (WIDGET (d));
 
     widget_select (learnkeys[action - B_USER].button);
 
@@ -343,7 +343,7 @@ init_learn (void)
 static void
 learn_done (void)
 {
-    dlg_destroy (learn_dlg);
+    widget_destroy (WIDGET (learn_dlg));
     repaint_screen ();
 }
 

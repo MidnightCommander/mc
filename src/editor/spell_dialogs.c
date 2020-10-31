@@ -141,7 +141,7 @@ spell_dialog_spell_suggest_show (WEdit * edit, const char *word, char **new_word
         *new_word = tmp;
     }
 
-    dlg_destroy (sug_dlg);
+    widget_destroy (WIDGET (sug_dlg));
     g_free (lang_label);
     g_free (word_label);
 
