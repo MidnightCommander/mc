@@ -3869,7 +3869,7 @@ panel_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
                 directory_history_list (panel);
             else if (event->x == w->cols - 6)
                 /* "." button show/hide hidden files */
-                send_message (midnight_dlg, NULL, MSG_ACTION, CK_ShowHidden, NULL);
+                send_message (filemanager, NULL, MSG_ACTION, CK_ShowHidden, NULL);
             else
             {
                 /* no other events on 1st line, return MOU_UNHANDLED */

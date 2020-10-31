@@ -964,7 +964,7 @@ chattr_init (void)
 static WDialog *
 chattr_dlg_create (WPanel * panel, const char *fname, unsigned long attr)
 {
-    const Widget *mw = CONST_WIDGET (midnight_dlg);
+    Widget *mw = WIDGET (WIDGET (panel)->owner);
     gboolean single_set;
     WDialog *ch_dlg;
     int lines, cols;

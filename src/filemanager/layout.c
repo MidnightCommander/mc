@@ -213,7 +213,7 @@ check_split (panels_layout_t * layout)
     }
     else
     {
-        int md_cols = CONST_WIDGET (midnight_dlg)->cols;
+        int md_cols = CONST_WIDGET (filemanager)->cols;
 
         if (layout->vertical_equal)
             layout->left_panel_size = md_cols / 2;
@@ -251,7 +251,7 @@ update_split (const WDialog * h)
     if (panels_layout.horizontal_split)
         tty_printf ("%03d", height - panels_layout.top_panel_size);
     else
-        tty_printf ("%03d", CONST_WIDGET (midnight_dlg)->cols - panels_layout.left_panel_size);
+        tty_printf ("%03d", CONST_WIDGET (filemanager)->cols - panels_layout.left_panel_size);
 
     widget_gotoyx (h, 6, 12);
     tty_print_char ('=');
@@ -352,7 +352,7 @@ layout_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
     {
     case MSG_POST_KEY:
         {
-            const Widget *mw = CONST_WIDGET (midnight_dlg);
+            const Widget *mw = CONST_WIDGET (filemanager);
             gboolean _menubar_visible, _command_prompt, _keybar_visible, _message_visible;
 
             _menubar_visible = check_options[1].widget->state;
@@ -412,7 +412,7 @@ layout_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
                 {
                     eq = panels_layout.vertical_equal;
                     if (eq)
-                        panels_layout.left_panel_size = CONST_WIDGET (midnight_dlg)->cols / 2;
+                        panels_layout.left_panel_size = CONST_WIDGET (filemanager)->cols / 2;
                 }
 
                 widget_disable (WIDGET (bleft_widget), eq);
@@ -750,7 +750,7 @@ layout_box (void)
 void
 panel_update_cols (Widget * widget, panel_display_t frame_size)
 {
-    const Widget *mw = CONST_WIDGET (midnight_dlg);
+    const Widget *mw = CONST_WIDGET (filemanager);
     int cols, x;
 
     /* don't touch panel if it is not in dialog yet */
@@ -816,7 +816,7 @@ setup_panels (void)
      * +--------+------------------------------------------------------+
      */
 
-    Widget *mw = WIDGET (midnight_dlg);
+    Widget *mw = WIDGET (filemanager);
     int start_y;
     gboolean active;
 
@@ -969,7 +969,7 @@ panels_split_less (void)
 void
 setup_cmdline (void)
 {
-    const Widget *mw = CONST_WIDGET (midnight_dlg);
+    const Widget *mw = CONST_WIDGET (filemanager);
     int prompt_width;
     int y;
     char *tmp_prompt = (char *) mc_prompt;
@@ -1050,7 +1050,7 @@ rotate_dash (gboolean show)
     /* update with 10 FPS rate */
     static const gint64 delay = G_USEC_PER_SEC / 10;
 
-    const Widget *w = CONST_WIDGET (midnight_dlg);
+    const Widget *w = CONST_WIDGET (filemanager);
 
     if (!nice_rotating_dash || (ok_to_refresh <= 0))
         return;
@@ -1146,7 +1146,7 @@ create_panel (int num, panel_view_mode_t type)
 
         if (old_type == view_listing && panel->frame_size == frame_full && type != view_listing)
         {
-            int md_cols = CONST_WIDGET (midnight_dlg)->cols;
+            int md_cols = CONST_WIDGET (filemanager)->cols;
 
             if (panels_layout.horizontal_split)
             {
@@ -1217,8 +1217,8 @@ create_panel (int num, panel_view_mode_t type)
         if (old_type == view_listing)
         {
             /* save and write directory history of panel
-             * ... and other histories of midnight_dlg  */
-            dlg_save_history (midnight_dlg);
+             * ... and other histories of filemanager  */
+            dlg_save_history (filemanager);
         }
 
         widget_replace (old_widget, new_widget);
@@ -1233,7 +1233,7 @@ create_panel (int num, panel_view_mode_t type)
         {
             ev_history_load_save_t event_data = { NULL, new_widget };
 
-            mc_event_raise (midnight_dlg->event_group, MCEVENT_HISTORY_LOAD, &event_data);
+            mc_event_raise (filemanager->event_group, MCEVENT_HISTORY_LOAD, &event_data);
         }
 
         if (num == 0)
@@ -1493,7 +1493,7 @@ do_load_prompt (void)
         return ret;
 
     /* Don't actually change the prompt if it's invisible */
-    if (top_dlg != NULL && DIALOG (top_dlg->data) == midnight_dlg && command_prompt)
+    if (top_dlg != NULL && DIALOG (top_dlg->data) == filemanager && command_prompt)
     {
         setup_cmdline ();
 
@@ -1501,7 +1501,7 @@ do_load_prompt (void)
          * tty_get_event channels, the prompt updating does not take place
          * automatically: force a cursor update and a screen refresh
          */
-        widget_update_cursor (WIDGET (midnight_dlg));
+        widget_update_cursor (WIDGET (filemanager));
         mc_refresh ();
         ret = TRUE;
     }

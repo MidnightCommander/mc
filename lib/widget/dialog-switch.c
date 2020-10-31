@@ -40,7 +40,7 @@
 
 /*** global variables ****************************************************************************/
 
-WDialog *midnight_dlg = NULL;
+WDialog *filemanager = NULL;
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -86,7 +86,7 @@ dialog_switch_goto (GList * dlg)
 
         mc_current = dlg;
 
-        if (old == midnight_dlg)
+        if (old == filemanager)
         {
             /* switch from panels to another dialog (editor, viewer, etc) */
             dialog_switch_pending = TRUE;
@@ -97,14 +97,14 @@ dialog_switch_goto (GList * dlg)
             /* switch from editor, viewer, etc to another dialog */
             widget_set_state (WIDGET (old), WST_SUSPENDED, TRUE);
 
-            if (DIALOG (dlg->data) != midnight_dlg)
+            if (DIALOG (dlg->data) != filemanager)
                 /* switch to another editor, viewer, etc */
                 /* return to panels before run the required dialog */
                 dialog_switch_pending = TRUE;
             else
             {
                 /* switch to panels */
-                widget_set_state (WIDGET (midnight_dlg), WST_ACTIVE, TRUE);
+                widget_set_state (WIDGET (filemanager), WST_ACTIVE, TRUE);
                 do_refresh ();
             }
         }
@@ -273,7 +273,7 @@ dialog_switch_process_pending (void)
             /* return to panels */
             if (mc_global.mc_run_mode == MC_RUN_FULL)
             {
-                mc_current = g_list_find (mc_dialogs, midnight_dlg);
+                mc_current = g_list_find (mc_dialogs, filemanager);
                 mc_event_raise (MCEVENT_GROUP_FILEMANAGER, "update_panels", NULL);
             }
         }

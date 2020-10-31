@@ -12,7 +12,7 @@
 
 /*** global variables defined in .c file *********************************************************/
 
-extern WDialog *midnight_dlg;
+extern WDialog *filemanager;
 
 /*** declarations of public functions ************************************************************/
 
