@@ -1531,7 +1531,7 @@ edit_complete_word_insert_recoded_completion (WEdit * edit, char *completion, gs
 void
 edit_refresh_cmd (void)
 {
-    clr_scr ();
+    tty_clear_screen ();
     repaint_screen ();
     tty_keypad (TRUE);
 }

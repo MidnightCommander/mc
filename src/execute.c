@@ -99,7 +99,7 @@ static void
 edition_pre_exec (void)
 {
     if (clear_before_exec)
-        clr_scr ();
+        tty_clear_screen ();
     else
     {
         if (!(mc_global.tty.console_flag != '\0' || mc_global.tty.xterm_flag))
@@ -470,7 +470,7 @@ toggle_subshell (void)
     disable_mouse ();
     disable_bracketed_paste ();
     if (clear_before_exec)
-        clr_scr ();
+        tty_clear_screen ();
     if (mc_global.tty.alternate_plus_minus)
         numeric_keypad_mode ();
 #ifndef HAVE_SLANG

@@ -1862,7 +1862,7 @@ do_nc (void)
 #endif
 
     if ((quit & SUBSHELL_EXIT) == 0)
-        clr_scr ();
+        tty_clear_screen ();
 
     return ret;
 }
