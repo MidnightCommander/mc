@@ -23,6 +23,8 @@ context default
     keyword whole and yellow
     keyword whole as yellow
     keyword whole assert yellow
+    keyword whole async yellow
+    keyword whole await yellow
     keyword whole break yellow
     keyword whole class yellow
     keyword whole continue yellow
@@ -41,6 +43,7 @@ context default
     keyword whole in yellow
     keyword whole is yellow
     keyword whole lambda yellow
+    keyword whole nonlocal yellow
     keyword whole not yellow
     keyword whole or yellow
     keyword whole pass yellow
