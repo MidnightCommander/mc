@@ -898,16 +898,16 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, size_t * h_s
         off_t data_position;
         char *p, *q;
         size_t len;
-        char *current_file_name, *current_link_name;
+        char *recent_long_name, *recent_long_link;
 
-        current_link_name =
+        recent_long_link =
             next_long_link != NULL ? next_long_link : g_strndup (header->header.linkname,
                                                                  sizeof (header->header.linkname));
-        len = strlen (current_link_name);
-        if (len > 1 && IS_PATH_SEP (current_link_name[len - 1]))
-            current_link_name[len - 1] = '\0';
+        len = strlen (recent_long_link);
+        if (len > 1 && IS_PATH_SEP (recent_long_link[len - 1]))
+            recent_long_link[len - 1] = '\0';
 
-        current_file_name = NULL;
+        recent_long_name = NULL;
         switch (arch->type)
         {
         case TAR_USTAR:
@@ -928,8 +928,8 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, size_t * h_s
 
                 temp_name = g_strndup (header->header.name, sizeof (header->header.name));
                 temp_prefix = g_strndup (header->header.prefix, sizeof (header->header.prefix));
-                current_file_name = g_strconcat (temp_prefix, PATH_SEP_STR,
-                                                 temp_name, (char *) NULL);
+                recent_long_name = g_strconcat (temp_prefix, PATH_SEP_STR,
+                                                temp_name, (char *) NULL);
                 g_free (temp_name);
                 g_free (temp_prefix);
             }
@@ -937,35 +937,35 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, size_t * h_s
         case TAR_GNU:
         case TAR_OLDGNU:
             if (next_long_name != NULL)
-                current_file_name = next_long_name;
+                recent_long_name = next_long_name;
             break;
         default:
             break;
         }
 
-        if (current_file_name == NULL)
+        if (recent_long_name == NULL)
         {
             if (next_long_name != NULL)
-                current_file_name = g_strdup (next_long_name);
+                recent_long_name = g_strdup (next_long_name);
             else
-                current_file_name = g_strndup (header->header.name, sizeof (header->header.name));
+                recent_long_name = g_strndup (header->header.name, sizeof (header->header.name));
         }
 
-        canonicalize_pathname (current_file_name);
-        len = strlen (current_file_name);
+        canonicalize_pathname (recent_long_name);
+        len = strlen (recent_long_name);
 
         data_position = current_tar_position;
 
-        p = strrchr (current_file_name, PATH_SEP);
+        p = strrchr (recent_long_name, PATH_SEP);
         if (p == NULL)
         {
-            p = current_file_name;
-            q = current_file_name + len;        /* "" */
+            p = recent_long_name;
+            q = recent_long_name + len; /* "" */
         }
         else
         {
             *(p++) = '\0';
-            q = current_file_name;
+            q = recent_long_name;
         }
 
         parent = vfs_s_find_inode (me, archive, q, LINK_NO_FOLLOW, FL_MKDIR);
@@ -977,14 +977,14 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, size_t * h_s
 
         if (header->header.typeflag == LNKTYPE)
         {
-            inode = vfs_s_find_inode (me, archive, current_link_name, LINK_NO_FOLLOW, FL_NONE);
+            inode = vfs_s_find_inode (me, archive, recent_long_link, LINK_NO_FOLLOW, FL_NONE);
             if (inode == NULL)
                 message (D_ERROR, MSG_ERROR, _("Inconsistent tar archive"));
             else
             {
                 entry = vfs_s_new_entry (me, p, inode);
                 vfs_s_insert_entry (me, parent, entry);
-                g_free (current_link_name);
+                g_free (recent_long_link);
                 goto done;
             }
         }
@@ -999,14 +999,14 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, size_t * h_s
         inode = vfs_s_new_inode (me, archive, &st);
         inode->data_offset = data_position;
 
-        if (*current_link_name != '\0')
-            inode->linkname = current_link_name;
-        else if (current_link_name != next_long_link)
-            g_free (current_link_name);
+        if (*recent_long_link != '\0')
+            inode->linkname = recent_long_link;
+        else if (recent_long_link != next_long_link)
+            g_free (recent_long_link);
 
         entry = vfs_s_new_entry (me, p, inode);
         vfs_s_insert_entry (me, parent, entry);
-        g_free (current_file_name);
+        g_free (recent_long_name);
 
       done:
         next_long_link = next_long_name = NULL;
