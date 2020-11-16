@@ -92,7 +92,7 @@ struct WTree
     Widget widget;
     struct TreeStore *store;
     tree_entry *selected_ptr;   /* The selected directory */
-    char search_buffer[MC_MAXFILENAMELEN];      /* Current search string */
+    GString *search_buffer;     /* Current search string */
     tree_entry **tree_shown;    /* Entries currently on screen */
     gboolean is_panel;          /* panel or plain widget flag */
     gboolean searching;         /* Are we on searching mode? */
@@ -195,6 +195,7 @@ tree_destroy (WTree * tree)
     save_tree (tree);
 
     MC_PTR_FREE (tree->tree_shown);
+    g_string_free (tree->search_buffer, TRUE);
     tree->selected_ptr = NULL;
 }
 
@@ -239,7 +240,7 @@ tree_show_mini_info (WTree * tree, int tree_lines, int tree_cols)
         tty_draw_hline (w->y + line, w->x + 1, ' ', tree_cols);
         widget_gotoyx (w, line, 1);
         tty_print_char (PATH_SEP);
-        tty_print_string (str_fit_to_term (tree->search_buffer, tree_cols - 2, J_LEFT_FIT));
+        tty_print_string (str_fit_to_term (tree->search_buffer->str, tree_cols - 2, J_LEFT_FIT));
         tty_print_char (' ');
     }
     else
@@ -618,19 +619,15 @@ maybe_chdir (WTree * tree)
 /* --------------------------------------------------------------------------------------------- */
 /** Search tree for text */
 
-static int
-search_tree (WTree * tree, char *text)
+static gboolean
+search_tree (WTree * tree, const GString * text)
 {
-    tree_entry *current;
-    size_t len;
+    tree_entry *current = tree->selected_ptr;
     gboolean wrapped = FALSE;
     gboolean found = FALSE;
 
-    len = strlen (text);
-    current = tree->selected_ptr;
-
     while (!found && (!wrapped || current != tree->selected_ptr))
-        if (strncmp (current->subname, text, len) == 0)
+        if (strncmp (current->subname, text->str, text->len) == 0)
         {
             tree->selected_ptr = current;
             found = TRUE;
@@ -656,19 +653,15 @@ search_tree (WTree * tree, char *text)
 static void
 tree_do_search (WTree * tree, int key)
 {
-    size_t l;
+    /* TODO: support multi-byte characters, see do_search() in panel.c */
 
-    l = strlen (tree->search_buffer);
-    if ((l != 0) && (key == KEY_BACKSPACE))
-        tree->search_buffer[--l] = '\0';
-    else if (key && l < sizeof (tree->search_buffer) - 1)
-    {
-        tree->search_buffer[l] = key;
-        tree->search_buffer[++l] = '\0';
-    }
+    if (tree->search_buffer->len != 0 && key == KEY_BACKSPACE)
+        g_string_set_size (tree->search_buffer, tree->search_buffer->len - 1);
+    else if (key != 0)
+        g_string_append_c (tree->search_buffer, (gchar) key);
 
     if (!search_tree (tree, tree->search_buffer))
-        tree->search_buffer[--l] = '\0';
+        g_string_set_size (tree->search_buffer, tree->search_buffer->len - 1);
 
     show_tree (tree);
     maybe_chdir (tree);
@@ -970,7 +963,7 @@ tree_start_search (WTree * tree)
     else
     {
         tree->searching = TRUE;
-        tree->search_buffer[0] = '\0';
+        g_string_set_size (tree->search_buffer, 0);
     }
 }
 
@@ -1301,7 +1294,7 @@ tree_new (int y, int x, int lines, int cols, gboolean is_panel)
     tree->store = tree_store_get ();
     tree_store_add_entry_remove_hook (remove_callback, tree);
     tree->tree_shown = NULL;
-    tree->search_buffer[0] = '\0';
+    tree->search_buffer = g_string_sized_new (MC_MAXPATHLEN);
     tree->topdiff = w->lines / 2;
     tree->searching = FALSE;
 
