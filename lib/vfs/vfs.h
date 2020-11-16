@@ -9,7 +9,7 @@
 
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <dirent.h>
+#include <dirent.h>             /* DIR */
 #ifdef HAVE_UTIMENSAT
 #include <sys/time.h>
 #elif defined (HAVE_UTIME_H)
@@ -20,7 +20,6 @@
 #include <stddef.h>
 
 #include "lib/global.h"
-#include "lib/fs.h"             /* MC_MAXPATHLEN */
 
 #include "path.h"
 
@@ -172,7 +171,7 @@ typedef struct vfs_class
     ssize_t (*write) (void *vfs_info, const char *buf, size_t count);
 
     void *(*opendir) (const vfs_path_t * vpath);
-    void *(*readdir) (void *vfs_info);
+    struct vfs_dirent *(*readdir) (void *vfs_info);
     int (*closedir) (void *vfs_info);
 
     int (*stat) (const vfs_path_t * vpath, struct stat * buf);
@@ -211,13 +210,17 @@ typedef struct vfs_class
 } vfs_class;
 
 /*
- * This union is used to ensure that there is enough space for the
- * filename (d_name) when the dirent structure is created.
+ * This struct is used instead of standard dirent to hold file name of any length
+ * (not limited to NAME_MAX).
  */
-union vfs_dirent
+struct vfs_dirent
 {
-    struct dirent dent;
-    char _extra_buffer[offsetof (struct dirent, d_name) + MC_MAXPATHLEN + 1];
+    /* private */
+    GString *d_name_str;
+
+    /* public */
+    ino_t d_ino;
+    char *d_name;               /* Alias of d_name_str->str */
 };
 
 /*** global variables defined in .c file *********************************************************/
@@ -278,6 +281,10 @@ void vfs_stamp_path (const vfs_path_t * path);
 
 void vfs_release_path (const vfs_path_t * vpath);
 
+struct vfs_dirent *vfs_dirent_init (struct vfs_dirent *d, const char *fname, ino_t ino);
+void vfs_dirent_assign (struct vfs_dirent *d, const char *fname, ino_t ino);
+void vfs_dirent_free (struct vfs_dirent *d);
+
 void vfs_fill_names (fill_names_f);
 
 /* *INDENT-OFF* */
@@ -309,7 +316,7 @@ int mc_readlink (const vfs_path_t * vpath, char *buf, size_t bufsiz);
 int mc_close (int handle);
 off_t mc_lseek (int fd, off_t offset, int whence);
 DIR *mc_opendir (const vfs_path_t * vpath);
-struct dirent *mc_readdir (DIR * dirp);
+struct vfs_dirent *mc_readdir (DIR * dirp);
 int mc_closedir (DIR * dir);
 int mc_stat (const vfs_path_t * vpath, struct stat *buf);
 int mc_mknod (const vfs_path_t * vpath, mode_t mode, dev_t dev);

@@ -115,13 +115,12 @@ sftpfs_opendir (const vfs_path_t * vpath, GError ** mcerror)
  * @return information about direntry if success, NULL otherwise
  */
 
-void *
+struct vfs_dirent *
 sftpfs_readdir (void *data, GError ** mcerror)
 {
     char mem[BUF_MEDIUM];
     LIBSSH2_SFTP_ATTRIBUTES attrs;
     sftpfs_dir_data_t *sftpfs_dir = (sftpfs_dir_data_t *) data;
-    static union vfs_dirent sftpfs_dirent;
     int rc;
 
     mc_return_val_if_error (mcerror, NULL);
@@ -137,11 +136,7 @@ sftpfs_readdir (void *data, GError ** mcerror)
     }
     while (rc == LIBSSH2_ERROR_EAGAIN);
 
-    if (rc == 0)
-        return NULL;
-
-    g_strlcpy (sftpfs_dirent.dent.d_name, mem, BUF_MEDIUM);
-    return &sftpfs_dirent;
+    return (rc != 0 ? vfs_dirent_init (NULL, mem, 0) : NULL);   /* FIXME: inode */
 }
 
 /* --------------------------------------------------------------------------------------------- */

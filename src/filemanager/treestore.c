@@ -909,7 +909,7 @@ tree_store_rescan (const vfs_path_t * vpath)
     dirp = mc_opendir (vpath);
     if (dirp != NULL)
     {
-        struct dirent *dp;
+        struct vfs_dirent *dp;
 
         for (dp = mc_readdir (dirp); dp != NULL; dp = mc_readdir (dirp))
             if (!DIR_IS_DOT (dp->d_name) && !DIR_IS_DOTDOT (dp->d_name))

@@ -188,11 +188,11 @@ sftpfs_cb_opendir (const vfs_path_t * vpath)
  * @return information about direntry if success, NULL otherwise
  */
 
-static void *
+static struct vfs_dirent *
 sftpfs_cb_readdir (void *data)
 {
     GError *mcerror = NULL;
-    union vfs_dirent *sftpfs_dirent;
+    struct vfs_dirent *sftpfs_dirent;
 
     if (tty_got_interrupt ())
     {
@@ -204,7 +204,7 @@ sftpfs_cb_readdir (void *data)
     if (!mc_error_message (&mcerror, NULL))
     {
         if (sftpfs_dirent != NULL)
-            vfs_print_message (_("sftp: (Ctrl-G break) Listing... %s"), sftpfs_dirent->dent.d_name);
+            vfs_print_message (_("sftp: (Ctrl-G break) Listing... %s"), sftpfs_dirent->d_name);
         else
             vfs_print_message ("%s", _("sftp: Listing done."));
     }

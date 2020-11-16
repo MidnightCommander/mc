@@ -103,10 +103,14 @@ local_opendir (const vfs_path_t * vpath)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void *
+static struct vfs_dirent *
 local_readdir (void *data)
 {
-    return readdir (*(DIR **) data);
+    struct dirent *d;
+
+    d = readdir (*(DIR **) data);
+
+    return (d != NULL ? vfs_dirent_init (NULL, d->d_name, d->d_ino) : NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */

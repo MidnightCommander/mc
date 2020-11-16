@@ -145,7 +145,7 @@ clean_sort_keys (dir_list * list, int start, int count)
  */
 
 static gboolean
-handle_dirent (struct dirent *dp, const char *fltr, struct stat *buf1, gboolean * link_to_dir,
+handle_dirent (struct vfs_dirent *dp, const char *fltr, struct stat *buf1, gboolean * link_to_dir,
                gboolean * stale_link)
 {
     vfs_path_t *vpath;
@@ -624,7 +624,7 @@ dir_list_load (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
                const dir_sort_options_t * sort_op, const char *fltr)
 {
     DIR *dirp;
-    struct dirent *dp;
+    struct vfs_dirent *dp;
     struct stat st;
     file_entry_t *fentry;
     const char *vpath_str;
@@ -697,7 +697,7 @@ dir_list_reload (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
                  const dir_sort_options_t * sort_op, const char *fltr)
 {
     DIR *dirp;
-    struct dirent *dp;
+    struct vfs_dirent *dp;
     int i;
     struct stat st;
     int marked_cnt;

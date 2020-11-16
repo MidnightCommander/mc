@@ -624,7 +624,7 @@ do_compute_dir_size (const vfs_path_t * dirname_vpath, dirsize_status_msg_t * ds
     int res;
     struct stat s;
     DIR *dir;
-    struct dirent *dirent;
+    struct vfs_dirent *dirent;
     FileProgressStatus ret = FILE_CONT;
 
     (*dir_count)++;
@@ -1403,7 +1403,7 @@ try_erase_dir (file_op_context_t * ctx, const char *dir)
 static FileProgressStatus
 recursive_erase (file_op_total_context_t * tctx, file_op_context_t * ctx, const vfs_path_t * vpath)
 {
-    struct dirent *next;
+    struct vfs_dirent *next;
     DIR *reading;
     const char *s;
     FileProgressStatus return_status = FILE_CONT;
@@ -1458,7 +1458,7 @@ static int
 check_dir_is_empty (const vfs_path_t * vpath)
 {
     DIR *dir;
-    struct dirent *d;
+    struct vfs_dirent *d;
     int i = 1;
 
     dir = mc_opendir (vpath);
@@ -2766,7 +2766,7 @@ FileProgressStatus
 copy_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const char *s, const char *d,
               gboolean toplevel, gboolean move_over, gboolean do_delete, GSList * parent_dirs)
 {
-    struct dirent *next;
+    struct vfs_dirent *next;
     struct stat dst_stat, src_stat;
     DIR *reading;
     FileProgressStatus return_status = FILE_CONT;

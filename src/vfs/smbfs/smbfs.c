@@ -915,11 +915,10 @@ smbfs_free_dir (dir_entry * de)
 /* It's too slow to ask the server each time */
 /* It now also sends the complete lstat information for each file */
 
-static void *
+static struct vfs_dirent *
 smbfs_readdir (void *info)
 {
-    static union vfs_dirent smbfs_readdir_data;
-    static char *const dirent_dest = smbfs_readdir_data.dent.d_name;
+    struct vfs_dirent *dirent;
     opendir_info *smbfs_info = (opendir_info *) info;
 
     DEBUG (4, ("smbfs_readdir(%s)\n", smbfs_info->dirname));
@@ -937,10 +936,12 @@ smbfs_readdir (void *info)
 #endif
         return NULL;
     }
-    g_strlcpy (dirent_dest, smbfs_info->current->text, MC_MAXPATHLEN);
+
+    dirent = vfs_dirent_init (NULL, smbfs_info->current->text, 0);      /* FIXME: inode */
+
     smbfs_info->current = smbfs_info->current->next;
 
-    return &smbfs_readdir_data;
+    return dirent;
 }
 
 /* --------------------------------------------------------------------------------------------- */

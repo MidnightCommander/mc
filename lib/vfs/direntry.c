@@ -453,10 +453,10 @@ vfs_s_opendir (const vfs_path_t * vpath)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void *
+static struct vfs_dirent *
 vfs_s_readdir (void *data)
 {
-    static union vfs_dirent dir;
+    struct vfs_dirent *dir = NULL;
     struct dirhandle *info = (struct dirhandle *) data;
     const char *name;
 
@@ -465,13 +465,13 @@ vfs_s_readdir (void *data)
 
     name = VFS_ENTRY (info->cur->data)->name;
     if (name != NULL)
-        g_strlcpy (dir.dent.d_name, name, MC_MAXPATHLEN);
+        dir = vfs_dirent_init (NULL, name, 0);
     else
         vfs_die ("Null in structure-cannot happen");
 
     info->cur = g_list_next (info->cur);
 
-    return (void *) &dir;
+    return dir;
 }
 
 /* --------------------------------------------------------------------------------------------- */
