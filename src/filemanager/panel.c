@@ -370,6 +370,8 @@ static WPanel *mouse_mark_panel = NULL;
 static gboolean mouse_marking = FALSE;
 static int state_mark = 0;
 
+static GString *string_file_name_buffer;
+
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
@@ -451,12 +453,12 @@ add_permission_string (const char *dest, int width, file_entry_t * fe, int attr,
 static const char *
 string_file_name (file_entry_t * fe, int len)
 {
-    static char buffer[MC_MAXPATHLEN * MB_LEN_MAX + 1];
-
     (void) len;
 
-    g_strlcpy (buffer, fe->fname, sizeof (buffer));
-    return buffer;
+    g_string_set_size (string_file_name_buffer, 0);
+    g_string_append_len (string_file_name_buffer, fe->fname, fe->fnamelen);
+
+    return string_file_name_buffer->str;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -4992,6 +4994,8 @@ panel_init (void)
     panel_filename_scroll_right_char =
         mc_skin_get ("widget-panel", "filename-scroll-right-char", "}");
 
+    string_file_name_buffer = g_string_sized_new (MC_MAXFILENAMELEN);
+
     mc_event_add (MCEVENT_GROUP_FILEMANAGER, "update_panels", event_update_panels, NULL, NULL);
     mc_event_add (MCEVENT_GROUP_FILEMANAGER, "panel_save_current_file_to_clip_file",
                   panel_save_current_file_to_clip_file, NULL, NULL);
@@ -5011,6 +5015,7 @@ panel_deinit (void)
     g_free (panel_history_show_list_char);
     g_free (panel_filename_scroll_left_char);
     g_free (panel_filename_scroll_right_char);
+    g_string_free (string_file_name_buffer, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
