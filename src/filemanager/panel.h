@@ -141,8 +141,8 @@ typedef struct
     struct
     {
         gboolean active;
-        char buffer[MC_MAXFILENAMELEN];
-        char prev_buffer[MC_MAXFILENAMELEN];
+        GString *buffer;
+        GString *prev_buffer;
         char ch[MB_LEN_MAX];    /* Buffer for multi-byte character */
         int chpoint;            /* Point after last characters in @ch */
     } quick_search;
