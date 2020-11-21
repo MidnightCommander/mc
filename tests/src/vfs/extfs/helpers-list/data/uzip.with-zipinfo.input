@@ -1,5 +1,7 @@
 Archive:  a.zip
-Zip file size: 75222 bytes, number of entries: 40
+Zip file size: 75234 bytes, number of entries: 42
+-rw-r--r--  3.0 unx        6 tx        6 stor 20161123.071336 -filename with leading dash.txt
+-rw-r--r--  3.0 unx        6 tx        6 stor 20161123.071336  filename with leading space.txt
 drwxr-xr-x  3.0 unx        0 bx        0 stor 20151225.001514 brushes/
 -rw-------  3.0 unx      739 tx      164 defN 20160918.164557 colorrc
 -rw-------  3.0 unx     1863 tx      441 defN 20160918.164558 controllerrc

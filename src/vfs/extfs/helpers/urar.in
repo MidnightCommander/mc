@@ -47,7 +47,7 @@ flag==1 {
     else
 	if (index($6, ".") != 0)
 	    $6="-rw-r--r--"
-    printf "%s 1 %s %s %d %02d/%02d/%02d %s %s\n", $6, uid, gid, $1, a[2], a[1], a[3], $5, str
+    printf "%s 1 %s %s %d %02d/%02d/%02d %s ./%s\n", $6, uid, gid, $1, a[2], a[1], a[3], $5, str
 }'
 }
 
@@ -105,7 +105,7 @@ mcrar5fs_list ()
         }
 
         ### and finally
-        printf ("%s 1 %s %s %d %02d/%02d/%02d %s %s\n",
+        printf ("%s 1 %s %s %d %02d/%02d/%02d %s ./%s\n",
                 attrs, uid, gid, size, date[2], date[3], date[1], time, name);
     }
 '
