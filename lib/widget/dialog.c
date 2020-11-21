@@ -206,6 +206,8 @@ dlg_handle_key (WDialog * h, int d_key)
     long command;
 
     command = widget_lookup_key (WIDGET (h), d_key);
+    if (command == CK_IgnoreKey)
+        command = keybind_lookup_keymap_command (dialog_map, d_key);
     if (command != CK_IgnoreKey)
         return dlg_execute_cmd (h, command);
 
