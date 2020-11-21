@@ -71,14 +71,13 @@ clipboard_file_to_ext_clip (const gchar * event_group_name, const gchar * event_
                             gpointer init_data, gpointer data)
 {
     char *tmp, *cmd;
-    const char *d = getenv ("DISPLAY");
 
     (void) event_group_name;
     (void) event_name;
     (void) init_data;
     (void) data;
 
-    if (d == NULL || clipboard_store_path == NULL || clipboard_store_path[0] == '\0')
+    if (clipboard_store_path == NULL || clipboard_store_path[0] == '\0')
         return TRUE;
 
     tmp = mc_config_get_full_path (EDIT_HOME_CLIP_FILE);
@@ -101,14 +100,13 @@ clipboard_file_from_ext_clip (const gchar * event_group_name, const gchar * even
 {
     mc_pipe_t *p;
     int file = -1;
-    const char *d = getenv ("DISPLAY");
 
     (void) event_group_name;
     (void) event_name;
     (void) init_data;
     (void) data;
 
-    if (d == NULL || clipboard_paste_path == NULL || clipboard_paste_path[0] == '\0')
+    if (clipboard_paste_path == NULL || clipboard_paste_path[0] == '\0')
         return TRUE;
 
     p = mc_popen (clipboard_paste_path, NULL);
