@@ -1512,7 +1512,7 @@ mc_replace_error (GError ** dest, int code, const char *format, ...)
  * and if it has then updates the timestamp.
  *
  * @param timestamp the last timestamp in microseconds, updated if the given time elapsed
- * @param deleay amount of time in microseconds
+ * @param delay amount of time in microseconds
 
  * @return TRUE if clock skew detected, FALSE otherwise
  */
