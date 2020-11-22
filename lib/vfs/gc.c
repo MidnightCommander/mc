@@ -44,7 +44,6 @@
 #include "lib/global.h"
 #include "lib/event.h"
 #include "lib/util.h"           /* MC_PTR_FREE */
-#include "lib/timer.h"
 
 #include "vfs.h"
 #include "utilvfs.h"
@@ -98,7 +97,7 @@ struct vfs_stamping
 {
     struct vfs_class *v;
     vfsid id;
-    guint64 time;
+    gint64 time;
 };
 
 /*** file scope variables ************************************************************************/
@@ -130,7 +129,7 @@ vfs_addstamp (struct vfs_class *v, vfsid id)
         stamp = g_new (struct vfs_stamping, 1);
         stamp->v = v;
         stamp->id = id;
-        stamp->time = mc_timer_elapsed (mc_global.timer);
+        stamp->time = g_get_real_time ();
 
         stamps = g_slist_append (stamps, stamp);
     }
@@ -153,7 +152,7 @@ vfs_stamp (struct vfs_class *v, vfsid id)
     stamp = g_slist_find_custom (stamps, &what, vfs_stamp_compare);
     if (stamp != NULL && stamp->data != NULL)
     {
-        VFS_STAMPING (stamp->data)->time = mc_timer_elapsed (mc_global.timer);
+        VFS_STAMPING (stamp->data)->time = g_get_real_time ();
         ret = TRUE;
     }
 
@@ -239,7 +238,7 @@ void
 vfs_expire (gboolean now)
 {
     static gboolean locked = FALSE;
-    guint64 curr_time, exp_time;
+    gint64 curr_time, exp_time;
     GSList *stamp;
 
     /* Avoid recursive invocation, e.g. when one of the free functions
@@ -248,7 +247,7 @@ vfs_expire (gboolean now)
         return;
     locked = TRUE;
 
-    curr_time = mc_timer_elapsed (mc_global.timer);
+    curr_time = g_get_real_time ();
     exp_time = curr_time - vfs_timeout * G_USEC_PER_SEC;
 
     if (now)
