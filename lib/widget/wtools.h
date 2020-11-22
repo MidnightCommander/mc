@@ -5,8 +5,6 @@
 #ifndef MC__WTOOLS_H
 #define MC__WTOOLS_H
 
-#include "lib/timer.h"
-
 /*** typedefs(not structures) and defined constants **********************************************/
 
 /* Pass this as def_text to request a password */
@@ -42,8 +40,8 @@ enum
 struct status_msg_t
 {
     WDialog *dlg;               /* pointer to status message dialog */
-    guint64 start;              /* start time in microseconds */
-    guint64 delay;              /* delay before raise the 'dlg' in microseconds */
+    gint64 start;               /* start time in microseconds */
+    gint64 delay;               /* delay before raise the 'dlg' in microseconds */
     gboolean block;             /* how to get event using tty_get_event() */
 
     status_msg_cb init;         /* callback to init derived classes */

@@ -583,17 +583,17 @@ void
 status_msg_init (status_msg_t * sm, const char *title, double delay, status_msg_cb init_cb,
                  status_msg_update_cb update_cb, status_msg_cb deinit_cb)
 {
-    guint64 start;
+    gint64 start;
 
     /* repaint screen to remove previous finished dialog */
     mc_refresh ();
 
-    start = mc_timer_elapsed (mc_global.timer);
+    start = g_get_real_time ();
 
     sm->dlg = dlg_create (TRUE, 0, 0, 7, MIN (MAX (40, COLS / 2), COLS), WPOS_CENTER, FALSE,
                           dialog_colors, NULL, NULL, NULL, title);
     sm->start = start;
-    sm->delay = (guint64) (delay * G_USEC_PER_SEC);
+    sm->delay = (gint64) (delay * G_USEC_PER_SEC);
     sm->block = FALSE;
 
     sm->init = init_cb;
@@ -658,7 +658,7 @@ status_msg_common_update (status_msg_t * sm)
         /* dialog is not shown yet */
 
         /* do not change sm->start */
-        guint64 start = sm->start;
+        gint64 start = sm->start;
 
         if (mc_time_elapsed (&start, sm->delay))
             dlg_init (sm->dlg);

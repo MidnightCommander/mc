@@ -1027,9 +1027,9 @@ set_hintbar (const char *str)
 void
 rotate_dash (gboolean show)
 {
-    static guint64 timestamp = 0;
+    static gint64 timestamp = 0;
     /* update with 10 FPS rate */
-    static const guint64 delay = G_USEC_PER_SEC / 10;
+    static const gint64 delay = G_USEC_PER_SEC / 10;
 
     const Widget *w = CONST_WIDGET (midnight_dlg);
 

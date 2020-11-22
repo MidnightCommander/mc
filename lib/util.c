@@ -51,7 +51,6 @@
 #include "lib/vfs/vfs.h"
 #include "lib/strutil.h"
 #include "lib/util.h"
-#include "lib/timer.h"
 
 /*** global variables ****************************************************************************/
 
@@ -1518,11 +1517,11 @@ mc_replace_error (GError ** dest, int code, const char *format, ...)
  * @return TRUE if clock skew detected, FALSE otherwise
  */
 gboolean
-mc_time_elapsed (guint64 * timestamp, guint64 delay)
+mc_time_elapsed (gint64 * timestamp, gint64 delay)
 {
-    guint64 now;
+    gint64 now;
 
-    now = mc_timer_elapsed (mc_global.timer);
+    now = g_get_real_time ();
 
     if (now >= *timestamp && now < *timestamp + delay)
         return FALSE;

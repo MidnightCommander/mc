@@ -49,7 +49,6 @@
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"        /* For init_key() */
 #include "lib/tty/mouse.h"      /* init_mouse() */
-#include "lib/timer.h"
 #include "lib/skin.h"
 #include "lib/filehighlight.h"
 #include "lib/fileloc.h"
@@ -255,8 +254,6 @@ main (int argc, char *argv[])
 
     mc_global.run_from_parent_mc = !check_sid ();
 
-    mc_global.timer = mc_timer_new ();
-
     /* We had LC_CTYPE before, LC_ALL includs LC_TYPE as well */
 #ifdef HAVE_SETLOCALE
     (void) setlocale (LC_ALL, "");
@@ -277,7 +274,6 @@ main (int argc, char *argv[])
       startup_exit_ok:
         mc_shell_deinit ();
         str_uninit_strings ();
-        mc_timer_destroy (mc_global.timer);
         return exit_code;
     }
 
@@ -556,8 +552,6 @@ main (int argc, char *argv[])
         g_error_free (mcerror);
         exit_code = EXIT_FAILURE;
     }
-
-    mc_timer_destroy (mc_global.timer);
 
     (void) putchar ('\n');      /* Hack to make shell's prompt start at left of screen */
 

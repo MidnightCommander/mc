@@ -1666,8 +1666,8 @@ midnight_set_buttonbar (WButtonBar * b)
 char *
 get_random_hint (gboolean force)
 {
-    static const guint64 update_period = 60 * G_USEC_PER_SEC;
-    static guint64 tv = 0;
+    static const gint64 update_period = 60 * G_USEC_PER_SEC;
+    static gint64 tv = 0;
 
     char *data, *result = NULL, *eop;
     size_t len, start;

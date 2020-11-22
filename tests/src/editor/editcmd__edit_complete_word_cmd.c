@@ -29,7 +29,6 @@
 
 #include <ctype.h>
 
-#include "lib/timer.h"
 #ifdef HAVE_CHARSET
 #include "lib/charsets.h"
 #endif
@@ -152,7 +151,6 @@ editcmd_dialog_completion_show__deinit (void)
 static void
 my_setup (void)
 {
-    mc_global.timer = mc_timer_new ();
     str_init_strings (NULL);
 
     vfs_init ();
@@ -187,7 +185,6 @@ my_teardown (void)
     vfs_shut ();
 
     str_uninit_strings ();
-    mc_timer_destroy (mc_global.timer);
 }
 
 /* --------------------------------------------------------------------------------------------- */
