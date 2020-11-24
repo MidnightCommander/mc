@@ -87,13 +87,30 @@ static void *
 local_opendir (const vfs_path_t * vpath)
 {
     DIR **local_info;
-    DIR *dir;
+    DIR *dir = NULL;
     const vfs_path_element_t *path_element;
 
     path_element = vfs_path_get_by_index (vpath, -1);
-    dir = opendir (path_element->path);
-    if (dir == NULL)
-        return 0;
+
+    /* On Linux >= 5.1, MC sometimes shows empty directpries on mounted CIFS shares.
+     * Rereading directory restores the directory content.
+     *
+     * Reopen directory, if first readdir() returns NULL and errno == EINTR.
+     */
+    while (dir == NULL)
+    {
+        dir = opendir (path_element->path);
+        if (dir == NULL)
+            return NULL;
+
+        if (readdir (dir) == NULL && errno == EINTR)
+        {
+            closedir (dir);
+            dir = NULL;
+        }
+        else
+            rewinddir (dir);
+    }
 
     local_info = (DIR **) g_new (DIR *, 1);
     *local_info = dir;
