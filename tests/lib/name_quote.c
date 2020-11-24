@@ -1,7 +1,7 @@
 /*
-   lib/vfs - Quote file names
+   lib - Quote file names
 
-   Copyright (C) 2011-2016
+   Copyright (C) 2011-2020
    Free Software Foundation, Inc.
 
    Written by:

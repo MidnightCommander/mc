@@ -1,7 +1,7 @@
 /*
    Widgets for the Midnight Commander
 
-   Copyright (C) 1994-2016
+   Copyright (C) 1994-2020
    Free Software Foundation, Inc.
 
    Authors:
@@ -44,7 +44,6 @@
 #include "lib/skin.h"
 #include "lib/strutil.h"
 #include "lib/util.h"
-#include "lib/keybind.h"        /* global_keymap_t */
 #include "lib/widget.h"
 
 /*** global variables ****************************************************************************/
@@ -149,10 +148,11 @@ buttonbar_call (WButtonBar * bb, int i)
     Widget *w = WIDGET (bb);
     Widget *target;
 
-    target = (bb->labels[i].receiver != NULL) ? bb->labels[i].receiver : WIDGET (w->owner);
-
     if ((bb != NULL) && (bb->labels[i].command != CK_IgnoreKey))
+    {
+        target = (bb->labels[i].receiver != NULL) ? bb->labels[i].receiver : WIDGET (w->owner);
         ret = send_message (target, w, MSG_ACTION, bb->labels[i].command, NULL);
+    }
     return ret;
 }
 
@@ -176,10 +176,10 @@ buttonbar_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
         if (bb->visible)
         {
             buttonbar_init_button_positions (bb);
-            widget_move (w, 0, 0);
+            widget_gotoyx (w, 0, 0);
             tty_setcolor (DEFAULT_COLOR);
             tty_printf ("%-*s", w->cols, "");
-            widget_move (w, 0, 0);
+            widget_gotoyx (w, 0, 0);
 
             for (i = 0; i < BUTTONBAR_LABELS_NUM; i++)
             {
@@ -283,5 +283,5 @@ buttonbar_set_label (WButtonBar * bb, int idx, const char *text, const global_ke
 WButtonBar *
 find_buttonbar (const WDialog * h)
 {
-    return BUTTONBAR (find_widget_type (h, buttonbar_callback));
+    return BUTTONBAR (widget_find_by_type (CONST_WIDGET (h), buttonbar_callback));
 }

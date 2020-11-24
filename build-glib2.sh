@@ -25,13 +25,13 @@
 : ${MC_TOPDIR=`pwd`}
 : ${WORK_TOPDIR=$MC_TOPDIR/build_glib2}
 : ${TMP_INSTDIR=$WORK_TOPDIR/tmp-inst}
-: ${GLIB_VERSION=2.21.0}
+: ${GLIB_VERSION=2.30.0}
 : ${PKGC_VERSION=0.23}
 : ${GETTEXT_VERSION=0.17}
 
 GLIB_DIR="glib-$GLIB_VERSION"
 GLIB_TARBALL="glib-$GLIB_VERSION.tar.gz"
-GLIB_URL="ftp://ftp.gtk.org/pub/glib/2.21/$GLIB_TARBALL"
+GLIB_URL="ftp://ftp.gnome.org/pub/gnome/sources/glib/2.30/$GLIB_TARBALL"
 
 PKGC_DIR="pkg-config-$PKGC_VERSION"
 PKGC_TARBALL="pkg-config-$PKGC_VERSION.tar.gz"

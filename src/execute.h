@@ -32,7 +32,7 @@ extern int pause_after_run;
 void shell_execute (const char *command, int flags);
 
 /* Handle toggling panels by Ctrl-O */
-void toggle_panels (void);
+void toggle_subshell (void);
 
 /* Handle toggling panels by Ctrl-Z */
 gboolean execute_suspend (const gchar * event_group_name, const gchar * event_name,

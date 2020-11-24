@@ -1,7 +1,7 @@
 /*
    lib/vfs - manipulations with temp files and  dirs
 
-   Copyright (C) 2012-2016
+   Copyright (C) 2012-2020
    Free Software Foundation, Inc.
 
    Written by:
@@ -39,20 +39,17 @@
 
 #include "src/vfs/local/local.c"
 
-
-struct vfs_s_subclass test_subclass1, test_subclass2, test_subclass3;
-struct vfs_class vfs_test_ops1, vfs_test_ops2, vfs_test_ops3;
-
 /* --------------------------------------------------------------------------------------------- */
 
 /* @Before */
 static void
 setup (void)
 {
+    mc_global.timer = mc_timer_new ();
     str_init_strings (NULL);
 
     vfs_init ();
-    init_localfs ();
+    vfs_init_localfs ();
     vfs_setup_work_dir ();
 }
 
@@ -64,6 +61,7 @@ teardown (void)
 {
     vfs_shut ();
     str_uninit_strings ();
+    mc_timer_destroy (mc_global.timer);
 }
 
 /* --------------------------------------------------------------------------------------------- */

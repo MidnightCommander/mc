@@ -1,18 +1,6 @@
-Before 4.6.2
-============
-
-mc manual: describe new Find File feature options (find Recursively,
-case Sensitive and Regular expression) 
 mc manual: Add Environment Variables section
 
-Check all instances of const_cast and str_unconst, remove the
-unnecessary and comment the rest.
-
 Clean up #include's in all files.
-
-Make mc work with 64 bit data types. This includes support for 64 bit
-processors, 64 bit operating systems and 64 bit file sizes. Generalizing
-this, mc should use datatypes as they are appropriate.
 
 Remove all instances of type casts on function pointers. Run the
 following command to get a list of function pointer types.
@@ -36,8 +24,6 @@ over VFS with an external editor.
 
 Allow pathnames starting with spaces in vfs/extfs.
 
-Hide the passwords when displaying mcvfs path names.
-
 Broken pipe warning when viewing large *.tar.gz files.  Warnings should
 be shown before the viewer is started if possible.
 
@@ -49,9 +35,6 @@ Check if the archive was changed for extfs, tar and cpio.  Free the data
 associated with the old archive.
 
 Ctrl-q Ctrl-m in input dialog should enter \r, not a newline.
-
-Interpret C literals in regular expressions entered by the user, e.g. \r
-and \0x0D.
 
 Allow entering archives in VFS by Ctrl-PgDown with non-empty command
 line.  Right now, there is no convenient way to enter an archive when
@@ -73,7 +56,6 @@ When saving config files, write to a copy, then replace the file.  This
 would avoid the problem of partly written config files.  Consider using
 locking of the config files.
 
-Totals are not calculated when copying or moving a single directory. 
 Totals should only be omitted for single files.
 
 Recheck all mouse handlers, make sure that they check button number.  We
@@ -88,13 +70,6 @@ environment variable MC_PS1 (or PS1) in the same way as bash.
 Support an environment variable (also like PS1 in bash) for setting the
 window title.
 
-real_input_dialog_help() shouldn't use translated strings in the section
-names in .mc/history.  Right now, mc writes separate history sections
-for different locales.  Only input history is affected.
-
-Add "Ignore" and "Ignore all" buttons when reporting permission
-problems.
-
 Better date parser - don't allow seconds and year in ftp listings on the
 same line.
 
@@ -103,16 +78,11 @@ Report errors in fish operations and recover from them.
 Allow colors to be defined in the mc.lib file.  Make it possible to
 avoid using a super-long line to redefine all colors.
 
-Allow verbatim search in "Find File".  Right now, the context is always
-interpreted as regular expression.
-
 Filters in the editor should operate on the open file - don't close and
 reopen the file.  They don't work on VFS now.  For example, a gzipped
 files on FTP cannot be edited.
 
 ftp and fish with home != '/' - readjust directory to the home.
-
-Search in the viewer should have an option for case sensitive search.
 
 Make "Find File" dialog more responsive.  Keep state in a structure and
 preserve it when the search is suspended.
@@ -121,18 +91,7 @@ Use KDGKBENT ioctl on Linux console to find the mapping for shifted
 functional keys.  Two mappings are widely used (Shift-F1 = F11 and
 Shift-F1 = F13).  mc should adjust the keys to the mapping.
 
-Alt-O should optionally show the current directory and move cursor down
-(as in older versions).  Old functionality on files (go to "..") is not
-needed.
-
-
-After 4.6.2 on 4.6.x branch
-===========================
-
-Make the internal editor reentrant.  Add "edit menu file" to the editor
-menu.
-
-Safe and restore file position in the viewer.
+Make the internal editor reentrant.
 
 Consistent support for mc.lib.
 
@@ -151,12 +110,6 @@ Add print dialog in the internal editor.
 
 Implement logging, not just for VFS.
 
-"Find file" should remember full starting path, not "." in the history.
-
-
-In the 4.7 branch
-=================
-
 Eliminate all pipes in subshell.c, run pwd after kill.  Add support for
 more shells (e.g. ksh).
 
@@ -164,14 +117,10 @@ Internal terminal - no more console saving.
 
 Implement a really Advanced Chown/Chmod.
 
-Support for multi-byte charsets (e.g. UTF-8).
-
-sftp and fxp support in VFS.
+fxp support in VFS.
 
 New listing mode keyword "time": mtime or the time (atime, ctime) used
 to sort files.
-
-Support for X clipboard.
 
 Provide "patch" and "diff" editors. The patch editor will automatically
 adjust the line numbers of the following chunks when lines are deleted
@@ -179,8 +128,6 @@ or inserted at the beginning of the file.
 
 Provide context menus for files. Possible actions include: [compile],
 [CVS commit], [CVS diff -up], [pack], [unpack], [grep].
-
-Make mc a CVS frontend comparable to Eclipse-3.0.
 
 More standard Widgets: WTreeView, WDirectoryList, WGroupBox, WTextArea,
 WOpenDialog, WSaveDialog, WPrintDialog, WKeyBar.
@@ -198,8 +145,6 @@ ideas still waiting for their implementation.
 
   - Make the extfs handle re-reads.
 
-  - Document (or remove) C-x C-r, C-x C-s.
-
   - Check that all the help contexts exist on the help file.
 
   - Make the buttonbar for the tree box work.
@@ -207,15 +152,10 @@ ideas still waiting for their implementation.
   - In the incremental search mode, when backspacing, select the
     correct file, do not stop in current file.
 
-  - Make C-y yank back all the killed text at once if you've just done
-    several kill operations in a row (C-k, M-d, etc).
-
   - In learn keys, warn the user if he is trying to
     i) define a same sequence as an already defined (if the keycode differs)
     ii) define a sequence, which is a prefix of other longer and already
         defined sequence
-
-* Configuration 
 
 * Documentation
 
@@ -253,8 +193,6 @@ ideas still waiting for their implementation.
 
   - Make a mechanism to lock all the mouse events and send them to
     the locking widget until unlocking is done.
-
-  - Sort with numerical extensions.
 
   - Allow the program to execute a command even when we are on a vfs, maybe
     a special box, or make subshell code ignore the change directory
@@ -299,12 +237,6 @@ ideas still waiting for their implementation.
 
   - Support of non-UNIX ls in ftpfs. Perhaps using an ascii configuration
     file similar to moxftp.
-
-  - Have an option to let the user choose the preferred keybindings.
-    Currently, only the emacs keybindings are supported, add support
-    for Norton Commander and vi keybindings.
-
-  - Find command should have a way to specify directories to skip.
 
   - Add an option that will let listboxes do incremental searches.
 

@@ -2,7 +2,7 @@
    Internal file viewer for the Midnight Commander
    Function for work with coordinate cache (ccache)
 
-   Copyright (C) 1994-2016
+   Copyright (C) 1994-2020
    Free Software Foundation, Inc.
 
    Written by:
@@ -146,9 +146,7 @@ mcview_ccache_find (WView * view, const coord_cache_entry_t * coord, cmp_func_t 
     size_t base = 0;
     size_t limit = view->coord_cache->size;
 
-#ifdef HAVE_ASSERT_H
-    assert (limit != 0);
-#endif
+    g_assert (limit != 0);
 
     while (limit > 1)
     {
@@ -215,9 +213,7 @@ mcview_ccache_dump (WView * view)
     guint i;
     const coord_cache_t *cache = view->coord_cache;
 
-#ifdef HAVE_ASSERT_H
-    assert (cache != NULL);
-#endif
+    g_assert (cache != NULL);
 
     filesize = mcview_get_filesize (view);
 
@@ -316,7 +312,7 @@ mcview_ccache_lookup (WView * view, coord_cache_entry_t * coord, enum ccache_typ
 
     if (sorter == CCACHE_OFFSET)
         cmp_func = mcview_coord_cache_entry_less_offset;
-    else if (view->text_nroff_mode)
+    else if (view->mode_flags.nroff)
         cmp_func = mcview_coord_cache_entry_less_nroff;
     else
         cmp_func = mcview_coord_cache_entry_less_plain;
@@ -346,7 +342,8 @@ mcview_ccache_lookup (WView * view, coord_cache_entry_t * coord, enum ccache_typ
 
         if (!cmp_func (&current, coord))
         {
-            if (lookup_what == CCACHE_OFFSET && view->text_nroff_mode && nroff_state != NROFF_START)
+            if (lookup_what == CCACHE_OFFSET && view->mode_flags.nroff
+                && nroff_state != NROFF_START)
             {
                 /* don't break here */
             }

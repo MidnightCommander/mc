@@ -1,11 +1,12 @@
 #ifndef MC__VIEWER_INLINES_H
 #define MC__VIEWER_INLINES_H
 
-#ifdef HAVE_ASSERT_H
-#include <assert.h>
-#endif
+#include <limits.h>             /* CHAR_BIT */
 
 /*** typedefs(not structures) and defined constants **********************************************/
+
+#define OFF_T_BITWIDTH  ((unsigned int) (sizeof (off_t) * CHAR_BIT - 1))
+#define OFFSETTYPE_MAX (((off_t) 1 << (OFF_T_BITWIDTH - 1)) - 1)
 
 /*** enums ***************************************************************************************/
 
@@ -29,9 +30,7 @@ mcview_offset_doz (off_t a, off_t b)
 static inline off_t
 mcview_offset_rounddown (off_t a, off_t b)
 {
-#ifdef HAVE_ASSERT_H
-    assert (b != 0);
-#endif
+    g_assert (b != 0);
     return a - a % b;
 }
 
@@ -77,9 +76,7 @@ mcview_already_loaded (off_t offset, off_t idx, size_t size)
 static inline gboolean
 mcview_get_byte_file (WView * view, off_t byte_index, int *retval)
 {
-#ifdef HAVE_ASSERT_H
-    assert (view->datasource == DS_FILE);
-#endif
+    g_assert (view->datasource == DS_FILE);
 
     mcview_file_load_data (view, byte_index);
     if (mcview_already_loaded (view->ds_file_offset, byte_index, view->ds_file_datalen))
@@ -110,9 +107,6 @@ mcview_get_byte (WView * view, off_t offset, int *retval)
     case DS_NONE:
         return mcview_get_byte_none (view, offset, retval);
     default:
-#ifdef HAVE_ASSERT_H
-        assert (!"Unknown datasource type");
-#endif
         return FALSE;
     }
 }
@@ -163,6 +157,14 @@ mcview_is_nroff_sequence (WView * view, off_t offset)
         return FALSE;
 
     return (c0 == c2 || c0 == '_' || (c0 == '+' && c2 == 'o'));
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static inline void
+mcview_growbuf_read_all_data (WView * view)
+{
+    mcview_growbuf_read_until (view, OFFSETTYPE_MAX);
 }
 
 /* --------------------------------------------------------------------------------------------- */

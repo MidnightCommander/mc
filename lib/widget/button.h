@@ -49,6 +49,10 @@ char *button_get_text (const WButton * b);
 void button_set_text (WButton * b, const char *text);
 int button_get_len (const WButton * b);
 
+cb_ret_t button_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
+                                  void *data);
+void button_mouse_default_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event);
+
 /*** inline functions ****************************************************************************/
 
 #endif /* MC__WIDGET_BUTTON_H */

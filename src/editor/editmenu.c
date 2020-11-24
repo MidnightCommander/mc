@@ -1,7 +1,7 @@
 /*
    Editor menu definitions and initialisation
 
-   Copyright (C) 1996-2016
+   Copyright (C) 1996-2020
    Free Software Foundation, Inc.
 
    Written by:
@@ -73,6 +73,7 @@ create_file_menu (void)
     entries = g_list_prepend (entries, menu_entry_create (_("&Open file..."), CK_EditFile));
     entries = g_list_prepend (entries, menu_entry_create (_("&New"), CK_EditNew));
     entries = g_list_prepend (entries, menu_entry_create (_("&Close"), CK_Close));
+    entries = g_list_prepend (entries, menu_entry_create (_("&History..."), CK_History));
     entries = g_list_prepend (entries, menu_separator_create ());
     entries = g_list_prepend (entries, menu_entry_create (_("&Save"), CK_Save));
     entries = g_list_prepend (entries, menu_entry_create (_("Save &as..."), CK_SaveAs));
@@ -189,7 +190,7 @@ create_command_menu (void)
         entries = g_list_prepend (entries, menu_separator_create ());
     }
 #endif /* HAVE_ASPELL */
-    entries = g_list_prepend (entries, menu_entry_create (_("&Mail..."), CK_Mail));
+    entries = g_list_prepend (entries, menu_entry_create (_("&Mail..."), CK_EditMail));
 
 
     return g_list_reverse (entries);
@@ -268,7 +269,7 @@ edit_drop_menu_cmd (WDialog * h, int which)
     WMenuBar *menubar;
 
     menubar = find_menubar (h);
-    menubar_activate (menubar, drop_menus != 0, which);
+    menubar_activate (menubar, drop_menus, which);
 }
 
 /* --------------------------------------------------------------------------------------------- */

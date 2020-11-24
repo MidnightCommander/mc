@@ -34,9 +34,9 @@ void file_progress_show (file_op_context_t * ctx, off_t done, off_t total,
 void file_progress_show_count (file_op_context_t * ctx, size_t done, size_t total);
 void file_progress_show_total (file_op_total_context_t * tctx, file_op_context_t * ctx,
                                uintmax_t copied_bytes, gboolean show_summary);
-void file_progress_show_source (file_op_context_t * ctx, const vfs_path_t * s_vpath);
-void file_progress_show_target (file_op_context_t * ctx, const vfs_path_t * path);
-void file_progress_show_deleting (file_op_context_t * ctx, const char *path, size_t * count);
+void file_progress_show_source (file_op_context_t * ctx, const vfs_path_t * vpath);
+void file_progress_show_target (file_op_context_t * ctx, const vfs_path_t * vpath);
+gboolean file_progress_show_deleting (file_op_context_t * ctx, const char *path, size_t * count);
 
 /*** inline functions ****************************************************************************/
 #endif /* MC__FILEGUI_H */

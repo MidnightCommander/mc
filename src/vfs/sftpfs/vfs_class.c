@@ -1,7 +1,7 @@
 /* Virtual File System: SFTP file system.
    The VFS class functions
 
-   Copyright (C) 2011-2016
+   Copyright (C) 2011-2020
    Free Software Foundation, Inc.
 
    Written by:
@@ -35,8 +35,6 @@
 #include "internal.h"
 
 /*** global variables ****************************************************************************/
-
-struct vfs_class sftpfs_class;
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -95,7 +93,7 @@ sftpfs_cb_done (struct vfs_class *me)
 static void *
 sftpfs_cb_open (const vfs_path_t * vpath, int flags, mode_t mode)
 {
-    vfs_file_handler_t *file_handler;
+    vfs_file_handler_t *fh;
     const vfs_path_element_t *path_element;
     struct vfs_s_super *super;
     const char *path_super;
@@ -145,25 +143,19 @@ sftpfs_cb_open (const vfs_path_t * vpath, int flags, mode_t mode)
         return NULL;
     }
 
-    file_handler = g_new0 (vfs_file_handler_t, 1);
-    file_handler->pos = 0;
-    file_handler->ino = path_inode;
-    file_handler->handle = -1;
-    file_handler->changed = is_changed;
-    file_handler->linear = 0;
-    file_handler->data = NULL;
+    fh = sftpfs_fh_new (path_inode, is_changed);
 
-    if (!sftpfs_open_file (file_handler, flags, mode, &mcerror))
+    if (!sftpfs_open_file (fh, flags, mode, &mcerror))
     {
         mc_error_message (&mcerror, NULL);
-        g_free (file_handler);
+        g_free (fh);
         return NULL;
     }
 
     vfs_rmstamp (path_element->class, (vfsid) super);
     super->fd_usage++;
-    file_handler->ino->st.st_nlink++;
-    return file_handler;
+    fh->ino->st.st_nlink++;
+    return fh;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -324,18 +316,27 @@ sftpfs_cb_readlink (const vfs_path_t * vpath, char *buf, size_t size)
 /**
  * Callback for utime VFS-function.
  *
- * @param vpath unused
- * @param times unused
- * @return always 0
+ * @param vpath path to file or directory
+ * @param times access and modification time to set
+ * @return 0 if success, negative value otherwise
  */
 
 static int
-sftpfs_cb_utime (const vfs_path_t * vpath, struct utimbuf *times)
+sftpfs_cb_utime (const vfs_path_t * vpath, mc_timesbuf_t * times)
 {
-    (void) vpath;
-    (void) times;
+    int rc;
+    GError *mcerror = NULL;
+#ifdef HAVE_UTIMENSAT
+    time_t atime = (*times)[0].tv_sec;
+    time_t mtime = (*times)[1].tv_sec;
+#else
+    time_t atime = times->actime;
+    time_t mtime = times->modtime;
+#endif
 
-    return 0;
+    rc = sftpfs_utime (vpath, atime, mtime, &mcerror);
+    mc_error_message (&mcerror, NULL);
+    return rc;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -431,7 +432,7 @@ sftpfs_cb_read (void *data, char *buffer, size_t count)
 {
     int rc;
     GError *mcerror = NULL;
-    vfs_file_handler_t *fh = (vfs_file_handler_t *) data;
+    vfs_file_handler_t *fh = VFS_FILE_HANDLER (data);
 
     if (tty_got_interrupt ())
     {
@@ -459,7 +460,7 @@ sftpfs_cb_write (void *data, const char *buf, size_t nbyte)
 {
     int rc;
     GError *mcerror = NULL;
-    vfs_file_handler_t *fh = (vfs_file_handler_t *) data;
+    vfs_file_handler_t *fh = VFS_FILE_HANDLER (data);
 
     rc = sftpfs_write_file (fh, buf, nbyte, &mcerror);
     mc_error_message (&mcerror, NULL);
@@ -479,23 +480,20 @@ sftpfs_cb_close (void *data)
 {
     int rc;
     GError *mcerror = NULL;
-    struct vfs_s_super *super;
-    vfs_file_handler_t *file_handler = (vfs_file_handler_t *) data;
-
-    super = file_handler->ino->super;
+    struct vfs_s_super *super = VFS_FILE_HANDLER_SUPER (data);
+    vfs_file_handler_t *fh = VFS_FILE_HANDLER (data);
 
     super->fd_usage--;
     if (super->fd_usage == 0)
-        vfs_stamp_create (&sftpfs_class, super);
+        vfs_stamp_create (sftpfs_class, super);
 
-    rc = sftpfs_close_file (file_handler, &mcerror);
+    rc = sftpfs_close_file (fh, &mcerror);
     mc_error_message (&mcerror, NULL);
 
-    if (file_handler->handle != -1)
-        close (file_handler->handle);
+    if (fh->handle != -1)
+        close (fh->handle);
 
-    vfs_s_free_inode (&sftpfs_class, file_handler->ino);
-    g_free (file_handler);
+    vfs_s_free_inode (sftpfs_class, fh->ino);
 
     return rc;
 }
@@ -573,10 +571,10 @@ static off_t
 sftpfs_cb_lseek (void *data, off_t offset, int whence)
 {
     off_t ret_offset;
-    vfs_file_handler_t *file_handler = (vfs_file_handler_t *) data;
+    vfs_file_handler_t *fh = VFS_FILE_HANDLER (data);
     GError *mcerror = NULL;
 
-    ret_offset = sftpfs_lseek (file_handler, offset, whence, &mcerror);
+    ret_offset = sftpfs_lseek (fh, offset, whence, &mcerror);
     mc_error_message (&mcerror, NULL);
     return ret_offset;
 }
@@ -675,50 +673,36 @@ sftpfs_cb_fill_names (struct vfs_class *me, fill_names_f func)
 void
 sftpfs_init_class (void)
 {
-    memset (&sftpfs_class, 0, sizeof (sftpfs_class));
-    sftpfs_class.name = "sftpfs";
-    sftpfs_class.prefix = "sftp";
-    sftpfs_class.flags = VFSF_NOLINKS;
-}
+    sftpfs_class->init = sftpfs_cb_init;
+    sftpfs_class->done = sftpfs_cb_done;
 
-/* --------------------------------------------------------------------------------------------- */
-/**
- * Initialization of VFS class callbacks.
- */
+    sftpfs_class->fill_names = sftpfs_cb_fill_names;
 
-void
-sftpfs_init_class_callbacks (void)
-{
-    sftpfs_class.init = sftpfs_cb_init;
-    sftpfs_class.done = sftpfs_cb_done;
+    sftpfs_class->opendir = sftpfs_cb_opendir;
+    sftpfs_class->readdir = sftpfs_cb_readdir;
+    sftpfs_class->closedir = sftpfs_cb_closedir;
+    sftpfs_class->mkdir = sftpfs_cb_mkdir;
+    sftpfs_class->rmdir = sftpfs_cb_rmdir;
 
-    sftpfs_class.fill_names = sftpfs_cb_fill_names;
+    sftpfs_class->stat = sftpfs_cb_stat;
+    sftpfs_class->lstat = sftpfs_cb_lstat;
+    sftpfs_class->fstat = sftpfs_cb_fstat;
+    sftpfs_class->readlink = sftpfs_cb_readlink;
+    sftpfs_class->symlink = sftpfs_cb_symlink;
+    sftpfs_class->link = sftpfs_cb_link;
+    sftpfs_class->utime = sftpfs_cb_utime;
+    sftpfs_class->mknod = sftpfs_cb_mknod;
+    sftpfs_class->chown = sftpfs_cb_chown;
+    sftpfs_class->chmod = sftpfs_cb_chmod;
 
-    sftpfs_class.opendir = sftpfs_cb_opendir;
-    sftpfs_class.readdir = sftpfs_cb_readdir;
-    sftpfs_class.closedir = sftpfs_cb_closedir;
-    sftpfs_class.mkdir = sftpfs_cb_mkdir;
-    sftpfs_class.rmdir = sftpfs_cb_rmdir;
-
-    sftpfs_class.stat = sftpfs_cb_stat;
-    sftpfs_class.lstat = sftpfs_cb_lstat;
-    sftpfs_class.fstat = sftpfs_cb_fstat;
-    sftpfs_class.readlink = sftpfs_cb_readlink;
-    sftpfs_class.symlink = sftpfs_cb_symlink;
-    sftpfs_class.link = sftpfs_cb_link;
-    sftpfs_class.utime = sftpfs_cb_utime;
-    sftpfs_class.mknod = sftpfs_cb_mknod;
-    sftpfs_class.chown = sftpfs_cb_chown;
-    sftpfs_class.chmod = sftpfs_cb_chmod;
-
-    sftpfs_class.open = sftpfs_cb_open;
-    sftpfs_class.read = sftpfs_cb_read;
-    sftpfs_class.write = sftpfs_cb_write;
-    sftpfs_class.close = sftpfs_cb_close;
-    sftpfs_class.lseek = sftpfs_cb_lseek;
-    sftpfs_class.unlink = sftpfs_cb_unlink;
-    sftpfs_class.rename = sftpfs_cb_rename;
-    sftpfs_class.ferrno = sftpfs_cb_errno;
+    sftpfs_class->open = sftpfs_cb_open;
+    sftpfs_class->read = sftpfs_cb_read;
+    sftpfs_class->write = sftpfs_cb_write;
+    sftpfs_class->close = sftpfs_cb_close;
+    sftpfs_class->lseek = sftpfs_cb_lseek;
+    sftpfs_class->unlink = sftpfs_cb_unlink;
+    sftpfs_class->rename = sftpfs_cb_rename;
+    sftpfs_class->ferrno = sftpfs_cb_errno;
 }
 
 /* --------------------------------------------------------------------------------------------- */

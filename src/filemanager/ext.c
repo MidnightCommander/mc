@@ -1,7 +1,7 @@
 /*
    Extension dependent execution.
 
-   Copyright (C) 1994-2016
+   Copyright (C) 1994-2020
    Free Software Foundation, Inc.
 
    Written by:
@@ -53,6 +53,7 @@
 #include "src/setup.h"          /* use_file_to_check_type */
 #include "src/execute.h"
 #include "src/history.h"
+#include "src/usermenu.h"
 
 #include "src/consaver/cons.saver.h"
 #include "src/viewer/mcviewer.h"
@@ -62,7 +63,6 @@
 #endif
 
 #include "panel.h"              /* do_cd */
-#include "usermenu.h"
 
 #include "ext.h"
 
@@ -71,9 +71,9 @@
 /*** file scope macro definitions ****************************************************************/
 
 #ifdef FILE_L
-#define FILE_CMD "file -L "
+#define FILE_CMD "file -L -z "
 #else
-#define FILE_CMD "file "
+#define FILE_CMD "file -z "
 #endif
 
 /*** file scope type declarations ****************************************************************/
@@ -337,7 +337,7 @@ exec_make_shell_string (const char *lc_data, const vfs_path_t * filename_vpath)
             expand_prefix_found = TRUE;
         else
         {
-            if (*lc_data != ' ' && *lc_data != '\t')
+            if (!whitespace (*lc_data))
                 written_nonspace = TRUE;
             if (is_cd)
                 *(pbuffer++) = *lc_data;
@@ -353,25 +353,34 @@ exec_make_shell_string (const char *lc_data, const vfs_path_t * filename_vpath)
 static void
 exec_extension_view (void *target, char *cmd, const vfs_path_t * filename_vpath, int start_line)
 {
-    int def_hex_mode = mcview_default_hex_mode, changed_hex_mode = 0;
-    int def_nroff_flag = mcview_default_nroff_flag, changed_nroff_flag = 0;
+    mcview_mode_flags_t def_flags = {
+        /* *INDENT-OFF* */
+        .wrap = FALSE,
+        .hex = mcview_global_flags.hex,
+        .magic = FALSE,
+        .nroff = mcview_global_flags.nroff
+        /* *INDENT-ON* */
+    };
 
-    mcview_altered_hex_mode = 0;
-    mcview_altered_nroff_flag = 0;
-    if (def_hex_mode != mcview_default_hex_mode)
-        changed_hex_mode = 1;
-    if (def_nroff_flag != mcview_default_nroff_flag)
-        changed_nroff_flag = 1;
+    mcview_mode_flags_t changed_flags;
+
+    mcview_clear_mode_flags (&changed_flags);
+    mcview_altered_flags.hex = FALSE;
+    mcview_altered_flags.nroff = FALSE;
+    if (def_flags.hex != mcview_global_flags.hex)
+        changed_flags.hex = TRUE;
+    if (def_flags.nroff != mcview_global_flags.nroff)
+        changed_flags.nroff = TRUE;
 
     if (target == NULL)
         mcview_viewer (cmd, filename_vpath, start_line, 0, 0);
     else
         mcview_load ((WView *) target, cmd, vfs_path_as_str (filename_vpath), start_line, 0, 0);
 
-    if (changed_hex_mode && !mcview_altered_hex_mode)
-        mcview_default_hex_mode = def_hex_mode;
-    if (changed_nroff_flag && !mcview_altered_nroff_flag)
-        mcview_default_nroff_flag = def_nroff_flag;
+    if (changed_flags.hex && !mcview_altered_flags.hex)
+        mcview_global_flags.hex = def_flags.hex;
+    if (changed_flags.nroff && !mcview_altered_flags.nroff)
+        mcview_global_flags.nroff = def_flags.nroff;
 
     dialog_switch_process_pending ();
 }
@@ -386,13 +395,10 @@ exec_extension_cd (void)
 
     *pbuffer = '\0';
     pbuffer = buffer;
-    /*      while (*p == ' ' && *p == '\t')
-     *          p++;
-     */
     /* Search last non-space character. Start search at the end in order
        not to short filenames containing spaces. */
     q = pbuffer + strlen (pbuffer) - 1;
-    while (q >= pbuffer && (*q == ' ' || *q == '\t'))
+    while (q >= pbuffer && whitespace (*q))
         q--;
     q[1] = 0;
 
@@ -503,10 +509,13 @@ exec_extension (void *target, const vfs_path_t * filename_vpath, const char *lc_
         if (mc_global.tty.console_flag != '\0')
         {
             handle_console (CONSOLE_SAVE);
-            if (output_lines && mc_global.keybar_visible)
-                show_console_contents (output_start_y,
-                                       LINES - mc_global.keybar_visible -
-                                       output_lines - 1, LINES - mc_global.keybar_visible - 1);
+            if (output_lines != 0 && mc_global.keybar_visible)
+            {
+                unsigned char end_line;
+
+                end_line = LINES - (mc_global.keybar_visible ? 1 : 0) - 1;
+                show_console_contents (output_start_y, end_line - output_lines, end_line);
+            }
         }
     }
 
@@ -698,9 +707,8 @@ regex_check_type (const vfs_path_t * filename_vpath, const char *ptr, gboolean c
                 if (content_string[content_shift] == ':')
                 {
                     /* Solaris' file prints tab(s) after ':' */
-                    for (content_shift++;
-                         content_string[content_shift] == ' '
-                         || content_string[content_shift] == '\t'; content_shift++)
+                    for (content_shift++; whitespace (content_string[content_shift]);
+                         content_shift++)
                         ;
                 }
             }
@@ -872,7 +880,7 @@ regex_command_for (void *target, const vfs_path_t * filename_vpath, const char *
 
     for (p = data; *p != '\0'; p++)
     {
-        for (q = p; *q == ' ' || *q == '\t'; q++)
+        for (q = p; whitespace (*q); q++)
             ;
         if (*q == '\n' || *q == '\0')
             p = q;              /* empty line */
@@ -1007,7 +1015,7 @@ regex_command_for (void *target, const vfs_path_t * filename_vpath, const char *
                     {
                         *r = c;
 
-                        for (p = r + 1; *p == ' ' || *p == '\t'; p++)
+                        for (p = r + 1; whitespace (*p); p++)
                             ;
 
                         /* Empty commands just stop searching

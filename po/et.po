@@ -1,16 +1,18 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the mc package.
 #
 # Translators:
-# Kristjan Räts <kristjanrats@gmail.com>, 2013-2016
+# Kristjan Räts <kristjanrats@gmail.com>, 2013-2016,2018-2019
+# Priit Jõerüüt <transifex@joeruut.com>, 2020
+# vaba <vaba@riseup.net>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2016-11-13 15:59+0300\n"
-"PO-Revision-Date: 2016-05-30 12:14+0000\n"
-"Last-Translator: Kristjan Räts <kristjanrats@gmail.com>\n"
+"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"PO-Revision-Date: 2020-05-17 17:42+0000\n"
+"Last-Translator: Transifex Bot <>\n"
 "Language-Team: Estonian (http://www.transifex.com/mc/mc/language/et/)\n"
 "Language: et\n"
 "MIME-Version: 1.0\n"
@@ -99,6 +101,27 @@ msgstr ""
 "Su vanad seaded toodi failist %s\n"
 "üle faili %s\n"
 
+msgid ""
+"Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
+"hex)"
+msgstr ""
+"Väärtus ei ole oodatud vahemikus (peab olema baidi vahemikus 0x00 <= x <= "
+"0xFF, kirjutatud 16-süsteemis)"
+
+msgid "Invalid character"
+msgstr "Vigane märk"
+
+msgid "Unmatched quotes character"
+msgstr "Paariliseta jutumärk"
+
+#, c-format
+msgid ""
+"Hex pattern error at position %d:\n"
+"%s."
+msgstr ""
+"16-numbri mustri viga kohal %d:\n"
+"%s."
+
 msgid "Search string not found"
 msgstr "Otsitavat stringi ei leitud"
 
@@ -143,14 +166,14 @@ msgstr ""
 "Naha '%s' parsimine nurjus.\n"
 "Laeti vaikimisi nahk"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Unable to use '%s' skin with true colors support:\n"
 "%s\n"
 "Default skin has been loaded"
 msgstr ""
-"256-värvi toega naha \"%s\" kasutamine terminalil,\n"
-"mis ei toeta 256 värvi on võimatu.\n"
+"Nahka '%s' ei saa tõeliste värvide toega kasutada:\n"
+"%s\n"
 "Laeti vaikimisi nahk"
 
 #, c-format
@@ -164,16 +187,18 @@ msgstr ""
 "Laeti vaikimisi nahk"
 
 msgid "True color not supported with ncurses."
-msgstr ""
+msgstr "Tõelised värvid ei ole toetatud teegiga ncurses."
 
 msgid "True color not supported in this slang version."
-msgstr ""
+msgstr "Tõelised värvid ei ole teegi slang selle versiooniga toetatud."
 
 msgid "Your terminal doesn't even seem to support 256 colors."
-msgstr ""
+msgstr "Su terminal ei paista toetavat isegi 256 värvi."
 
 msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
 msgstr ""
+"Sea keskkonnamuutuja COLORTERM=truecolor, kui su terminal tõesti toetab "
+"tõeliseid värve."
 
 msgid "Escape"
 msgstr "Paoklahv"
@@ -461,6 +486,27 @@ msgstr "Klahv Shift"
 msgid "The TERM environment variable is unset!\n"
 msgstr "Keskkonnamuutujat TERM on määramata!\n"
 
+msgid "Cannot check SIGWINCH pipe"
+msgstr ""
+
+#, c-format
+msgid ""
+"\n"
+"Cannot create pipe for SIGWINCH: %s (%d)\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"\n"
+"Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"\n"
+"Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
+msgstr ""
+
 #, c-format
 msgid ""
 "Screen size %dx%d is not supported.\n"
@@ -470,25 +516,25 @@ msgstr ""
 "Kontrolli keskkonna muutujat TERM.\n"
 
 msgid "B"
-msgstr ""
+msgstr "B"
 
 msgid "kB"
-msgstr ""
+msgstr "kB"
 
 msgid "KiB"
-msgstr ""
+msgstr "KiB"
 
 msgid "MB"
-msgstr ""
+msgstr "MB"
 
 msgid "MiB"
-msgstr ""
+msgstr "MiB"
 
 msgid "GB"
-msgstr ""
+msgstr "GB"
 
 msgid "GiB"
-msgstr ""
+msgstr "GiB"
 
 msgid "Cannot create pipe descriptor"
 msgstr "Nurjus torupideme loomine"
@@ -569,7 +615,6 @@ msgstr "Ajutised failid luuakse kataloogis %s\n"
 msgid "Temporary files will not be created\n"
 msgstr "Ajutisi faile ei looda\n"
 
-#, c-format
 msgid "Press any key to continue..."
 msgstr "Jätkamiseks vajuta suvalist klahvi..."
 
@@ -638,6 +683,9 @@ msgstr "Trüki häälestuse suvandid"
 msgid "Print last working directory to specified file"
 msgstr "Väljasta viimane töökataloog määratud faili"
 
+msgid "<file>"
+msgstr "<file>"
+
 msgid "Enables subshell support (default)"
 msgstr "Lubab alamkesta toe (vaikimisi)"
 
@@ -650,11 +698,17 @@ msgstr "Logi FTP dialoog määratud faili"
 msgid "Set debug level"
 msgstr "Määra silumistase"
 
+msgid "<integer>"
+msgstr "<integer>"
+
 msgid "Launches the file viewer on a file"
 msgstr "Käivitab failivaaturi failile"
 
 msgid "Edit files"
 msgstr "Muuda faile"
+
+msgid "<file> ..."
+msgstr "<file> ..."
 
 msgid "Forces xterm features"
 msgstr "Sunnib xterm'i tunnused"
@@ -694,6 +748,9 @@ msgstr "Nõuab värvide kasutamist"
 
 msgid "Specifies a color configuration"
 msgstr "Määrab värvide seadistuse"
+
+msgid "<string>"
+msgstr "<string>"
 
 msgid "Show mc with specified skin"
 msgstr "Kuva mc määratud nahaga"
@@ -766,14 +823,17 @@ msgstr ""
 msgid "Color options"
 msgstr "Värvi suvandid"
 
-msgid "+number"
-msgstr "+number"
+msgid "[+lineno] file1[:lineno] [file2[:lineno]...]"
+msgstr "[+reanr] fail1[:reanr] [fail2[:reanr]...]"
+
+msgid "file"
+msgstr "fail"
+
+msgid "file1 file2"
+msgstr "fail1 fail2"
 
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[this_dir] [other_panel_dir]"
-
-msgid "Set initial line number for the internal editor"
-msgstr "Määra sisseehitatud toimeti esialgne reanumber"
 
 msgid ""
 "\n"
@@ -1079,9 +1139,6 @@ msgstr "Vaheta reavahetused:"
 msgid "Save As"
 msgstr "Salvesta kui"
 
-msgid "Block is large, you may not be able to undo this action"
-msgstr "Plokk on suur, selle muudatuse tagasi võtmine võib nurjuda."
-
 msgid "Collect completions"
 msgstr "Koonda lõpetamised"
 
@@ -1280,10 +1337,10 @@ msgstr "Vajuta suvalist klahvi:"
 
 msgid ""
 "Current text was modified without a file save.\n"
-"Continue discards these changes"
+"Continue discards these changes."
 msgstr ""
-"Tekstis on salvestamata muudatusi.\n"
-"Jätkamine kustutab need muudatused"
+"Teksti on muudetud faili salvestamata.\n"
+"Jätkamine viskab muudatused ära."
 
 msgid "In se&lection"
 msgstr "&Valikus"
@@ -1312,13 +1369,6 @@ msgstr "Kinnita asendamine"
 msgid "Cancel"
 msgstr "Tühista"
 
-msgid ""
-"Current text was modified without a file save.\n"
-"Continue discards these changes."
-msgstr ""
-"Teksti on muudetud faili salvestamata.\n"
-"Jätkamine viskab muudatused ära."
-
 msgid "NoName"
 msgstr "Nimetu"
 
@@ -1330,6 +1380,9 @@ msgstr "&Uus"
 
 msgid "&Close"
 msgstr "&Sulge"
+
+msgid "&History..."
+msgstr "&Ajalugu..."
 
 msgid "Save &as..."
 msgstr "Salvesta &kui..."
@@ -1614,8 +1667,8 @@ msgstr ""
 "Kasutajasõbralik tekstitoimeti, mis\n"
 "on loodud Midnight Commanderile."
 
-msgid "Copyright (C) 1996-2016 the Free Software Foundation"
-msgstr "Autoriõigus (C) 1996-2016 Free Software Foundation"
+msgid "Copyright (C) 1996-2020 the Free Software Foundation"
+msgstr "Autoriõigus (C) 1996-2020 the Free Software Foundation"
 
 msgid "About"
 msgstr "Programmist"
@@ -1766,7 +1819,11 @@ msgstr "Kohaliku koopia hankimine %s'st nurjus"
 msgid "The shell is already running a command"
 msgstr "Kest on hõivatud käsu täitmisega"
 
-#, c-format
+msgid ""
+"Not an xterm or Linux console;\n"
+"the subshell cannot be toggled."
+msgstr ""
+
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Midnight Commanderisse tagasipöördumiseks sisesta 'exit'"
 
@@ -1791,6 +1848,10 @@ msgstr "teised"
 msgid "Flag"
 msgstr "Lipp"
 
+#, c-format
+msgid "Permissions (octal): %o"
+msgstr ""
+
 msgid "Chown advanced command"
 msgstr "Keerukas omanikuvahetus"
 
@@ -1801,6 +1862,15 @@ msgid ""
 msgstr ""
 "\"%s\" õiguste muutmine nurjus\n"
 "%s"
+
+msgid "&Ignore"
+msgstr "E&ira"
+
+msgid "Ignore &all"
+msgstr "Eira &kõiki"
+
+msgid "&Retry"
+msgstr "&Proovi uuesti"
 
 #, c-format
 msgid ""
@@ -1893,6 +1963,9 @@ msgstr "&Järgi kataloogide nimeviitu"
 
 msgid "Sa&fe delete"
 msgstr "&Kindel kustutamine"
+
+msgid "Safe overwrite"
+msgstr "Turvaline ülekirjutamine"
 
 msgid "A&uto save setup"
 msgstr "Seadete a&utomaatsalvestus"
@@ -2003,8 +2076,8 @@ msgstr "veerud"
 msgid "User &mini status"
 msgstr "Kasutaja &mini info"
 
-msgid "Listing mode"
-msgstr "Loendi režiim"
+msgid "Listing format"
+msgstr "Loendi vormindus"
 
 msgid "Executable &first"
 msgstr "Käivitatavad &esimestena"
@@ -2125,6 +2198,105 @@ msgstr "Kasutaja:"
 msgid "SMB authentication"
 msgstr "SMB autentimine"
 
+msgid "Secure deletion"
+msgstr "Turvaline kustutamine"
+
+msgid "Undelete"
+msgstr "Taasta"
+
+msgid "Synchronous updates"
+msgstr "Sünkroonsed andnevärskendused"
+
+msgid "Synchronous directory updates"
+msgstr "Sünkroonsed kataloogivärskendused"
+
+msgid "Immutable"
+msgstr ""
+
+msgid "Append only"
+msgstr ""
+
+msgid "No dump"
+msgstr ""
+
+msgid "No update atime"
+msgstr ""
+
+msgid "Compress"
+msgstr ""
+
+msgid "Compressed clusters"
+msgstr ""
+
+msgid "Compressed dirty file"
+msgstr ""
+
+msgid "Compression raw access"
+msgstr ""
+
+msgid "Encrypted inode"
+msgstr "Krüptitud i-kirje"
+
+msgid "Journaled data"
+msgstr ""
+
+msgid "Indexed directory"
+msgstr "Indekseeritud kataloog"
+
+msgid "No tail merging"
+msgstr ""
+
+msgid "Top of directory hierarchies"
+msgstr ""
+
+msgid "Inode uses extents"
+msgstr ""
+
+msgid "Huge_file"
+msgstr ""
+
+msgid "No COW"
+msgstr ""
+
+msgid "Casefolded file"
+msgstr ""
+
+msgid "Inode has inline data"
+msgstr "I-kirjel on põimitud andmeid"
+
+msgid "Project hierarchy"
+msgstr ""
+
+msgid "Verity protected inode"
+msgstr ""
+
+msgid "&Marked all"
+msgstr "&Vali kõik"
+
+msgid "S&et marked"
+msgstr "&Määra valik"
+
+msgid "C&lear marked"
+msgstr "Tü&hista valik"
+
+msgid "Chattr command"
+msgstr ""
+
+#, c-format
+msgid ""
+"Cannot chattr \"%s\"\n"
+"%s"
+msgstr ""
+
+msgid "Cannot change attributes on non-local filesystems"
+msgstr ""
+
+#, c-format
+msgid ""
+"Cannot get flags of \"%s\"\n"
+"%s"
+msgstr ""
+
 msgid "set &user ID on execution"
 msgstr "kas&utaja ID käivitamisel"
 
@@ -2172,15 +2344,6 @@ msgstr "Omaniku nimi:"
 
 msgid "Group name:"
 msgstr "Grupi nimi:"
-
-msgid "&Marked all"
-msgstr "&Vali kõik"
-
-msgid "S&et marked"
-msgstr "&Määra valik"
-
-msgid "C&lear marked"
-msgstr "Tü&hista valik"
 
 msgid "Chmod command"
 msgstr "Õiguste muutmise käsk"
@@ -2313,13 +2476,6 @@ msgstr ""
 "Selle käsu kasutamiseks peaksid mõlemad\n"
 "paneelid kuvama failide loendit"
 
-msgid ""
-"Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
-msgstr ""
-"Sa ei kasuta xtermi või Linuxi konsooli;\n"
-"paneele ei saa kuvada/peita."
-
 #, c-format
 msgid "'%s' is not a symbolic link"
 msgstr "\"%s\" ei ole nimeviit"
@@ -2386,9 +2542,6 @@ msgstr ""
 "Kataloogi \"%s\" sisenemine nurjus\n"
 "%s"
 
-msgid "Cannot read directory contents"
-msgstr "Kataloogi sisu lugemine nurjus"
-
 msgid "Parameter"
 msgstr "Parameeter"
 
@@ -2435,13 +2588,13 @@ msgid "DialogTitle|Delete"
 msgstr "DialogTitle|Kustutamine"
 
 msgid "FileOperation|Copy"
-msgstr "FileOperation|Kopeerimine"
+msgstr "FileOperation|Kopeeri"
 
 msgid "FileOperation|Move"
-msgstr "FileOperation|Teisaldamine"
+msgstr "FileOperation|Teisalda"
 
 msgid "FileOperation|Delete"
-msgstr "FileOperation|Kustutamine"
+msgstr "FileOperation|Kustuta"
 
 #, no-c-format
 msgid "%o %f%n\"%s\"%m"
@@ -2450,9 +2603,6 @@ msgstr "%o %f%n\"%s\"%m"
 #, no-c-format
 msgid "%o %d %f%m"
 msgstr "%o %d %f%m"
-
-msgid "file"
-msgstr "fail"
 
 msgid "files"
 msgstr "failid"
@@ -2470,8 +2620,25 @@ msgstr "failid/kataloogid"
 msgid " with source mask:"
 msgstr "lähtemaskiga:"
 
-msgid "Cannot make the hardlink"
-msgstr "Jäikviida loomine nurjus"
+#, c-format
+msgid ""
+"Cannot stat hardlink source file \"%s\"\n"
+"%s"
+msgstr ""
+"Jäikviida lähtefaili \"%s\" info päring nurjus\n"
+"%s"
+
+#, c-format
+msgid ""
+"Cannot create target hardlink \"%s\"\n"
+"%s"
+msgstr ""
+"Jäikviida sihtfaili \"%s\" loomine nurjus\n"
+"%s"
+
+#, c-format
+msgid "Cannot create target hardlink \"%s\""
+msgstr "Jäikviida sihtfaili \"%s\" loomine nurjus"
 
 #, c-format
 msgid ""
@@ -2482,11 +2649,11 @@ msgstr ""
 "%s"
 
 msgid ""
-"Cannot make stable symlinks acrossnon-local filesystems:\n"
+"Cannot make stable symlinks across non-local filesystems:\n"
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
-"Stabiilseid nimeviitu saab luua ainult kohalikel failisüsteemidel:\n"
+"Stabiilseid nimeviitu saab luua ainult kohalikes failisüsteemides:\n"
 "\n"
 "Valik stabiilsed nimeviidad keelatakse"
 
@@ -2498,11 +2665,32 @@ msgstr ""
 "Nimeviida \"%s\" loomine nurjus sihtkohas\n"
 "%s"
 
+#, c-format
+msgid ""
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same directory"
+msgstr ""
+"\"%s\"\n"
+"ja\n"
+"\"%s\"\n"
+"on üks ja see sama kataloog"
+
+#, c-format
+msgid ""
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same file"
+msgstr ""
+"\"%s\"\n"
+"ja\n"
+"\"%s\"\n"
+"on üks ja see sama fail"
+
 msgid "Ski&p all"
 msgstr "Jäta &kõik vahele"
-
-msgid "&Retry"
-msgstr "&Proovi uuesti"
 
 #, c-format
 msgid ""
@@ -2527,23 +2715,19 @@ msgstr "&Mitte ükski"
 
 #, c-format
 msgid ""
+"Cannot remove file \"%s\"\n"
+"%s"
+msgstr ""
+"Faili \"%s\" eemaldamine nurjus\n"
+"%s"
+
+#, c-format
+msgid ""
 "Cannot stat file \"%s\"\n"
 "%s"
 msgstr ""
 "Faili \"%s\" info päring nurjus\n"
 "%s"
-
-#, c-format
-msgid ""
-"\"%s\"\n"
-"and\n"
-"\"%s\"\n"
-"are the same file"
-msgstr ""
-"\"%s\"\n"
-"ja\n"
-"\"%s\"\n"
-"on üks ja see sama fail"
 
 #, c-format
 msgid "Cannot overwrite directory \"%s\""
@@ -2555,22 +2739,6 @@ msgid ""
 "%s"
 msgstr ""
 "Faili \"%s\" teisaldamine kataloogi \"%s\" nurjus\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot remove file \"%s\"\n"
-"%s"
-msgstr ""
-"Faili \"%s\" eemaldamine nurjus\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot delete file \"%s\"\n"
-"%s"
-msgstr ""
-"Faili \"%s\" kustutamine nurjus\n"
 "%s"
 
 #, c-format
@@ -2588,6 +2756,25 @@ msgid ""
 msgstr ""
 "Kataloogi \"%s\" ülekirjutamine nurjus\n"
 "%s"
+
+#, c-format
+msgid ""
+"Cannot overwrite file \"%s\"\n"
+"%s"
+msgstr ""
+"Faili \"%s\" ülekirjutamine nurjus\n"
+"%s"
+
+#, c-format
+msgid ""
+"Cannot move directory \"%s\" to \"%s\"\n"
+"%s"
+msgstr ""
+"Kataloogi \"%s\" teisaldamine kataloogi \"%s\" nurjus\n"
+"%s"
+
+msgid "Cannot operate on \"..\"!"
+msgstr "Kataloogi \"..\" kasutamine on keelatud!"
 
 #, c-format
 msgid ""
@@ -2696,7 +2883,7 @@ msgid ""
 "Cannot close target file \"%s\"\n"
 "%s"
 msgstr ""
-"Sihtfaili \"%s\" silgemine nurjus\n"
+"Sihtfaili \"%s\" sulgemine nurjus\n"
 "%s"
 
 msgid "Incomplete file was retrieved. Keep it?"
@@ -2754,39 +2941,8 @@ msgstr ""
 "%s"
 
 #, c-format
-msgid ""
-"\"%s\"\n"
-"and\n"
-"\"%s\"\n"
-"are the same directory"
-msgstr ""
-"\"%s\"\n"
-"ja\n"
-"\"%s\"\n"
-"on üks ja see sama kataloog"
-
-#, c-format
-msgid ""
-"Cannot overwrite file \"%s\"\n"
-"%s"
-msgstr ""
-"Faili \"%s\" ülekirjutamine nurjus\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot move directory \"%s\" to \"%s\"\n"
-"%s"
-msgstr ""
-"Kataloogi \"%s\" teisaldamine kataloogi \"%s\" nurjus\n"
-"%s"
-
-#, c-format
-msgid "Directories: %zd, total size: %s"
-msgstr "Kataloogid: %zd, kogu suurus: %s"
-
-msgid "Cannot operate on \"..\"!"
-msgstr "Kataloogi \"..\" kasutamine on keelatud!"
+msgid "Directories: %zu, total size: %s"
+msgstr "Katalooge: %zu, kogumaht: %s"
 
 msgid "Sorry, I could not put the job in background"
 msgstr "Vabandust, töö saatmine taustale nurjus"
@@ -2817,19 +2973,14 @@ msgstr "%.2f KB/s"
 msgid "%ld B/s"
 msgstr "%ld B/s"
 
-msgid "Target file already exists!"
-msgstr "Sihtfail on juba olemas!"
+msgid "New     :"
+msgstr "Uus:"
 
-#, c-format
-msgid "New     : %s, size %s"
-msgstr "Uus %s, suurus %s"
+msgid "Existing:"
+msgstr "Olemasolev:"
 
-#, c-format
-msgid "Existing: %s, size %s"
-msgstr "Olemasolev: %s, suurus %s"
-
-msgid "Overwrite this target?"
-msgstr "Kas kirjutada see sihtkoht üle?"
+msgid "Overwrite this file?"
+msgstr "Kas kirjutada see fail üle?"
 
 msgid "A&ppend"
 msgstr "&Lisa"
@@ -2837,14 +2988,20 @@ msgstr "&Lisa"
 msgid "&Reget"
 msgstr "&Uuesti"
 
-msgid "Overwrite all targets?"
-msgstr "Kas kirjutada kõik sihtkohad üle?"
+msgid "Overwrite all files?"
+msgstr "Kas kirjutada kõik failid üle?"
 
-msgid "&Update"
-msgstr "&Uuenda"
+msgid "Don't overwrite with &zero length file"
+msgstr "Ära kirjuta üle &tühje faile"
 
-msgid "If &size differs"
-msgstr "Kui &suurus erineb"
+msgid "&Older"
+msgstr "&Vanemad"
+
+msgid "S&maller"
+msgstr "Vä&iksemad"
+
+msgid "&Size differs"
+msgstr "&Suurus erineb"
 
 msgid "File exists"
 msgstr "Fail on olemas"
@@ -2900,7 +3057,7 @@ msgid "to:"
 msgstr "asukohta:"
 
 msgid "Follow &links"
-msgstr "&Viitade järgimine"
+msgstr "Järgi &viitasid"
 
 msgid "Preserve &attributes"
 msgstr "Säilita &atribuudid"
@@ -2934,8 +3091,8 @@ msgid "&Edit - F4"
 msgstr "&Muuda - F4"
 
 #, c-format
-msgid "Found: %ld"
-msgstr "Leiti: %ld"
+msgid "Found: %lu"
+msgstr "Leitud: %lu"
 
 msgid "Malformed regular expression"
 msgstr "Vigane regulaaravaldis"
@@ -2984,10 +3141,18 @@ msgid "Finished"
 msgstr "Lõpetatud"
 
 #, c-format
-msgid "Finished (ignored %zd directory)"
-msgid_plural "Finished (ignored %zd directories)"
-msgstr[0] "Lõpetatud (%zd kataloog jäeti vahele)"
-msgstr[1] "Lõpetatud (%zd kataloogi jäeti vahele)"
+msgid "Finished (ignored %zu directory)"
+msgid_plural "Finished (ignored %zu directories)"
+msgstr[0] "Lõpetatud (%zu kataloogi eirati)"
+msgstr[1] "Lõpetatud (%zu kataloogi eirati)"
+
+#, c-format
+msgid "Find File: \"%s\". Content: \"%s\""
+msgstr "Otsi faile: \"%s\". Sisu: \"%s\""
+
+#, c-format
+msgid "Find File: \"%s\""
+msgstr "Otsi faile: \"%s\""
 
 msgid "Searching"
 msgstr "Otsimine"
@@ -3147,10 +3312,10 @@ msgid "Size:       %s"
 msgstr "Suurus: %s"
 
 #, c-format
-msgid " (%ld block)"
-msgid_plural " (%ld blocks)"
-msgstr[0] "(%ld plokk)"
-msgstr[1] "(%ld plokki)"
+msgid " (%lu block)"
+msgid_plural " (%lu blocks)"
+msgstr[0] "(%lu plokk)"
+msgstr[1] "(%lu plokki)"
 
 #, c-format
 msgid "Owner:      %s/%s"
@@ -3159,6 +3324,16 @@ msgstr "Omanik: %s/%s"
 #, c-format
 msgid "Links:      %d"
 msgstr "Viidad: %d"
+
+msgid "Attributes: not supported"
+msgstr ""
+
+#, c-format
+msgid "Attributes: %s"
+msgstr ""
+
+msgid "Attributes: unavailable"
+msgstr ""
 
 #, c-format
 msgid "Mode:       %s (%04o)"
@@ -3216,8 +3391,8 @@ msgstr "&Kiirvaade"
 msgid "&Info"
 msgstr "&Info"
 
-msgid "&Listing mode..."
-msgstr "L&oendi režiim..."
+msgid "&Listing format..."
+msgstr "&Loendi vormindus"
 
 msgid "&Sort order..."
 msgstr "&Sortimine..."
@@ -3279,6 +3454,9 @@ msgstr "Vaheta &omanik"
 msgid "&Advanced chown"
 msgstr "Täpsem omani&ku vahetus"
 
+msgid "Cha&ttr"
+msgstr ""
+
 msgid "&Rename/Move"
 msgstr "Teisal&da/nimeta"
 
@@ -3329,6 +3507,9 @@ msgstr "Kuva kataloogide &suurused"
 
 msgid "Command &history"
 msgstr "Käskude a&jalugu"
+
+msgid "Viewed/edited files hi&story"
+msgstr "Vaadatud/muudetud failide ajalugu"
 
 msgid "Di&rectory hotlist"
 msgstr "Katal&oogide kiirvalik"
@@ -3382,10 +3563,10 @@ msgid "Panels:"
 msgstr "Paneelid:"
 
 #, c-format
-msgid "You have %zd opened screen. Quit anyway?"
-msgid_plural "You have %zd opened screens. Quit anyway?"
-msgstr[0] "Oled avanud %zd ekraani. Kas lõpetada ikkagi?"
-msgstr[1] "Oled avanud %zd ekraani. Kas lõpetada ikkagi?"
+msgid "You have %zu opened screen. Quit anyway?"
+msgid_plural "You have %zu opened screens. Quit anyway?"
+msgstr[0] "Sul on %zu avatud ekraan. Kas ikkagi lõpetada?"
+msgstr[1] "Sul on %zu avatud ekraani. Kas ikkagi lõpetada?"
 
 msgid "The Midnight Commander"
 msgstr "Midnight Commander"
@@ -3555,6 +3736,9 @@ msgstr "Tühista valik"
 msgid "Do you really want to execute?"
 msgstr "Kas sa soovid tõesti käivitada?"
 
+msgid "Cannot read directory contents"
+msgstr "Kataloogi sisu lugemine nurjus"
+
 msgid "User supplied format looks invalid, reverting to default."
 msgstr "Kasutaja antud vormindus tundub vigane; kasutatakse vaikeväärtust."
 
@@ -3647,50 +3831,6 @@ msgid ""
 msgstr ""
 "Faili %s kirjutamine nurjus:\n"
 "%s\n"
-
-msgid "Debug"
-msgstr "Silumine"
-
-msgid "ERROR:"
-msgstr "Viga:"
-
-msgid "True:"
-msgstr "Tõene:"
-
-msgid "False:"
-msgstr "Väär:"
-
-msgid "Error calling program"
-msgstr "Viga programmi kutsel"
-
-msgid "Warning -- ignoring file"
-msgstr "Hoiatus -- eiratakse faili"
-
-#, c-format
-msgid ""
-"File %s is not owned by root or you or is world writable.\n"
-"Using it may compromise your security"
-msgstr ""
-"Faili %s omanik ei ole root või sina, või see on kõigile kirjutatav.\n"
-"Selle kasutamine võib ohustada su turvalisust"
-
-msgid "Format error on file Extensions File"
-msgstr "Laiendite failis on vorminduse viga"
-
-#, c-format
-msgid "The %%var macro has no default"
-msgstr "Makrol %%var puudub vaikeväärtus"
-
-#, c-format
-msgid "The %%var macro has no variable"
-msgstr "Makrol %%var puudub muutuja"
-
-#, c-format
-msgid "No suitable entries found in %s"
-msgstr "Failist %s ei leitud sobivaid kirjeid"
-
-msgid "User menu"
-msgstr "Kasutaja menüü"
 
 msgid "Help file format error\n"
 msgstr "Abi failivorminduse viga\n"
@@ -3785,6 +3925,12 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "Kodukataloog ei ole absoluutne"
 
+msgid ""
+"GNU Midnight Commander\n"
+"is already running on this terminal.\n"
+"Subshell support will be disabled."
+msgstr ""
+
 #, c-format
 msgid ""
 "\n"
@@ -3815,15 +3961,6 @@ msgstr ""
 "Faili %s salvestamine nurjus:\n"
 "%s"
 
-msgid ""
-"GNU Midnight Commander is already\n"
-"running on this terminal.\n"
-"Subshell support will be disabled."
-msgstr ""
-"GNU Midnight Commander juba\n"
-"töötab sellel terminalil.\n"
-"Alamkesta tugi keelatakse."
-
 #, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr "Nimega toru %s avamine nurjus\n"
@@ -3835,56 +3972,72 @@ msgstr "Shell on veel aktiivne. Kas soovid ikkagi lõpetada?"
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Hoiatus: sisenemine kataloogi %s nurjus.\n"
 
-msgid "Using the S-Lang library with terminfo database\n"
-msgstr "Kasutatakse S-Lang teeki terminfo andmebaasiga\n"
+msgid "With builtin Editor and Aspell support"
+msgstr ""
 
-msgid "Using the ncurses library\n"
-msgstr "Kasutatakse teeki ncurses\n"
+msgid "With builtin Editor"
+msgstr ""
 
-msgid "Using the ncursesw library\n"
-msgstr "Kasutatakse teeki ncursesw\n"
+msgid "With optional subshell support"
+msgstr ""
 
-msgid "With builtin Editor\n"
-msgstr "Sisseehitatud toimetiga\n"
+msgid "With subshell support as default"
+msgstr ""
 
-msgid "With optional subshell support\n"
-msgstr "Valikulise alamkesta toega\n"
+msgid "With support for background operations"
+msgstr ""
 
-msgid "With subshell support as default\n"
-msgstr "Alamkesta tugi vaikeväärtusena\n"
+msgid "With mouse support on xterm and Linux console"
+msgstr ""
 
-msgid "With support for background operations\n"
-msgstr "Taustategevuste toega\n"
+msgid "With mouse support on xterm"
+msgstr ""
 
-msgid "With mouse support on xterm and Linux console\n"
-msgstr "Hiire toega xtermis ja Linuxi konsoolil\n"
+msgid "With support for X11 events"
+msgstr ""
 
-msgid "With mouse support on xterm\n"
-msgstr "Hiire toega xtermis\n"
+msgid "With internationalization support"
+msgstr ""
 
-msgid "With support for X11 events\n"
-msgstr "X11 sündmuste toega\n"
+msgid "With multiple codepages support"
+msgstr ""
 
-msgid "With internationalization support\n"
-msgstr "Internatsionaliseerimise toega\n"
-
-msgid "With multiple codepages support\n"
-msgstr "Mitme kooditabeli toega\n"
+msgid "With ext2fs attributes support"
+msgstr ""
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"
 msgstr "Ehitatud GLib teegiga %d.%d.%d\n"
 
 #, c-format
+msgid "Built with S-Lang %s with terminfo database\n"
+msgstr ""
+
+#, c-format
+msgid "Built with ncurses %s\n"
+msgstr ""
+
+msgid "Built with ncurses (unknown version)"
+msgstr ""
+
+#, c-format
+msgid "Built with ncursesw %s\n"
+msgstr ""
+
+msgid "Built with ncursesw (unknown version)"
+msgstr ""
+
 msgid "Virtual File Systems:"
 msgstr "Virtuaalsed failisüsteemid:"
 
-#, c-format
 msgid "Data types:"
 msgstr "Andmetüübid:"
 
-msgid "Root directory:"
-msgstr "Juurkataloog:"
+msgid "Home directory:"
+msgstr "Kodukataloog:"
+
+msgid "Profile root directory:"
+msgstr "Profiili juurkataloog:"
 
 msgid "System data"
 msgstr "Süsteemi andmed"
@@ -3906,6 +4059,50 @@ msgstr "Kasutaja andmed"
 
 msgid "Cache directory:"
 msgstr "Vahemälu kataloog:"
+
+msgid "Debug"
+msgstr "Silumine"
+
+msgid "ERROR:"
+msgstr "Viga:"
+
+msgid "True:"
+msgstr "Tõene:"
+
+msgid "False:"
+msgstr "Väär:"
+
+msgid "Error calling program"
+msgstr "Viga programmi kutsel"
+
+msgid "Warning -- ignoring file"
+msgstr "Hoiatus -- eiratakse faili"
+
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
+msgstr ""
+"Faili %s omanik ei ole root või sina, või see on kõigile kirjutatav.\n"
+"Selle kasutamine võib ohustada su turvalisust"
+
+msgid "Format error on file Extensions File"
+msgstr "Laiendite failis on vorminduse viga"
+
+#, c-format
+msgid "The %%var macro has no default"
+msgstr "Makrol %%var puudub vaikeväärtus"
+
+#, c-format
+msgid "The %%var macro has no variable"
+msgstr "Makrol %%var puudub muutuja"
+
+#, c-format
+msgid "No suitable entries found in %s"
+msgstr "Failist %s ei leitud sobivaid kirjeid"
+
+msgid "User menu"
+msgstr "Kasutaja menüü"
 
 #, c-format
 msgid ""
@@ -4198,6 +4395,10 @@ msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: faili lugemiseks puuduvad faili käsitleja andmed"
 
 #, c-format
+msgid "sftp: socket error: %s"
+msgstr "sftp: sokli viga: %s"
+
+#, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"
 msgstr "sftp: (Ctrl+G katkestab) Loendamine... %s"
 
@@ -4444,11 +4645,3 @@ msgstr "Kas jätkata algusest?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kohaliku koopia hankimine failist /ftp://some.host/editme.txt nurjus"
-
-#~ msgid "Cannot parse command for pipe"
-#~ msgstr "Nurjus toru käsu parsimine"
-
-#~ msgid "%s byte"
-#~ msgid_plural "%s bytes"
-#~ msgstr[0] "%s bait"
-#~ msgstr[1] "%s baiti"

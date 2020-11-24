@@ -1,7 +1,7 @@
 /*
    Common code for testing functions in src/execute.c file.
 
-   Copyright (C) 2013-2016
+   Copyright (C) 2013-2020
 
    Free Software Foundation, Inc.
 
@@ -194,6 +194,7 @@ mc_stat__deinit (void)
 {
     g_ptr_array_foreach (mc_stat__vpath__captured, (GFunc) vfs_path_free, NULL);
     g_ptr_array_free (mc_stat__vpath__captured, TRUE);
+    mc_stat__vpath__captured = NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -237,9 +238,10 @@ mc_ungetlocalcopy__deinit (void)
 static void
 setup (void)
 {
+    mc_global.timer = mc_timer_new ();
     str_init_strings (NULL);
     vfs_init ();
-    init_localfs ();
+    vfs_init_localfs ();
     vfs_setup_work_dir ();
 
     vfs_file_is_local__init ();
@@ -265,6 +267,7 @@ teardown (void)
 
     vfs_shut ();
     str_uninit_strings ();
+    mc_timer_destroy (mc_global.timer);
 }
 
 /* --------------------------------------------------------------------------------------------- */

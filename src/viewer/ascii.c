@@ -2,7 +2,7 @@
    Internal file viewer for the Midnight Commander
    Function for plain view
 
-   Copyright (C) 1994-2016
+   Copyright (C) 1994-2020
    Free Software Foundation, Inc.
 
    Written by:
@@ -162,12 +162,6 @@
 
 /*** file scope macro definitions ****************************************************************/
 
-#if GLIB_CHECK_VERSION (2, 30, 0)
-#define SPACING_MARK G_UNICODE_SPACING_MARK
-#else
-#define SPACING_MARK G_UNICODE_COMBINING_MARK
-#endif
-
 /* The Unicode standard recommends that lonely combining characters are printed over a dotted
  * circle. If the terminal is not UTF-8, this will be replaced by a dot anyway. */
 #define BASE_CHARACTER_FOR_LONELY_COMBINING 0x25CC      /* dotted circle */
@@ -266,7 +260,7 @@ mcview_is_spacing_mark (const WView * view, int c)
 {
 #ifdef HAVE_CHARSET
     if (view->utf8)
-        return g_unichar_type (c) == SPACING_MARK;
+        return g_unichar_type (c) == G_UNICODE_SPACING_MARK;
 #else
     (void) view;
     (void) c;
@@ -341,6 +335,8 @@ mcview_char_display (const WView * view, int c, char *s)
  * Normally: stores c, updates state, returns TRUE.
  * At EOF: state is unchanged, c is undefined, returns FALSE.
  *
+ * Just as with mcview_get_utf(), invalid UTF-8 is reported using negative integers.
+ *
  * Also, temporary hack: handle force_max here.
  * TODO: move it to lower layers (datasource.c)?
  */
@@ -400,7 +396,7 @@ mcview_get_next_maybe_nroff_char (WView * view, mcview_state_machine_t * state, 
     if (color != NULL)
         *color = VIEW_NORMAL_COLOR;
 
-    if (!view->text_nroff_mode)
+    if (!view->mode_flags.nroff)
         return mcview_get_next_char (view, state, c);
 
     if (!mcview_get_next_char (view, state, c))
@@ -533,7 +529,7 @@ mcview_next_combining_char_sequence (WView * view, mcview_state_machine_t * stat
             return i;
         if (!mcview_ismark (view, cs[i]) || !mcview_isprint (view, cs[i]))
             return i;
-        if (g_unichar_type (cs[i]) == SPACING_MARK)
+        if (g_unichar_type (cs[i]) == G_UNICODE_SPACING_MARK)
         {
             /* Only allow as the first combining char. Stop processing in either case. */
             if (i == 1)
@@ -581,7 +577,7 @@ mcview_display_line (WView * view, mcview_state_machine_t * state, int row,
     const screen_dimen top = view->data_area.top;
     const screen_dimen width = view->data_area.width;
     const screen_dimen height = view->data_area.height;
-    off_t dpy_text_column = view->text_wrap_mode ? 0 : view->dpy_text_column;
+    off_t dpy_text_column = view->mode_flags.wrap ? 0 : view->dpy_text_column;
     screen_dimen col = 0;
     int cs[1 + MAX_COMBINING_CHARS];
     char str[(1 + MAX_COMBINING_CHARS) * UTF8_CHAR_LEN + 1];
@@ -590,14 +586,14 @@ mcview_display_line (WView * view, mcview_state_machine_t * state, int row,
     if (paragraph_ended != NULL)
         *paragraph_ended = TRUE;
 
-    if (!view->text_wrap_mode && (row < 0 || row >= (int) height) && linewidth == NULL)
+    if (!view->mode_flags.wrap && (row < 0 || row >= (int) height) && linewidth == NULL)
     {
         /* Optimization: Fast forward to the end of the line, rather than carefully
          * parsing and then not actually displaying it. */
         off_t eol;
         int retval;
 
-        eol = mcview_eol (view, state->offset, mcview_get_filesize (view));
+        eol = mcview_eol (view, state->offset);
         retval = (eol > state->offset) ? 1 : 0;
 
         mcview_state_machine_init (state, eol);
@@ -659,7 +655,7 @@ mcview_display_line (WView * view, mcview_state_machine_t * state, int row,
         /* In wrap mode only: We're done with this row if the character sequence wouldn't fit.
          * Except if at the first column, because then it wouldn't fit in the next row either.
          * In this extreme case let the unwrapped code below do its best to display it. */
-        if (view->text_wrap_mode && (off_t) col + charwidth > dpy_text_column + (off_t) width
+        if (view->mode_flags.wrap && (off_t) col + charwidth > dpy_text_column + (off_t) width
             && col > 0)
         {
             *state = state_saved;
@@ -678,7 +674,7 @@ mcview_display_line (WView * view, mcview_state_machine_t * state, int row,
             {
                 /* The combining character sequence fits entirely in the viewport. Print it. */
                 tty_setcolor (color);
-                widget_move (view, top + row, left + ((off_t) col - dpy_text_column));
+                widget_gotoyx (view, top + row, left + ((off_t) col - dpy_text_column));
                 if (cs[0] == '\t')
                 {
                     for (i = 0; i < charwidth; i++)
@@ -706,7 +702,7 @@ mcview_display_line (WView * view, mcview_state_machine_t * state, int row,
                 for (i = dpy_text_column;
                      i < (off_t) col + charwidth && i < dpy_text_column + (off_t) width; i++)
                 {
-                    widget_move (view, top + row, left + (i - dpy_text_column));
+                    widget_gotoyx (view, top + row, left + (i - dpy_text_column));
                     tty_print_anychar ((cs[0] == '\t') ? ' ' : PARTIAL_CJK_AT_LEFT_MARGIN);
                 }
             }
@@ -719,7 +715,7 @@ mcview_display_line (WView * view, mcview_state_machine_t * state, int row,
                 tty_setcolor (color);
                 for (i = col; i < dpy_text_column + (off_t) width; i++)
                 {
-                    widget_move (view, top + row, left + (i - dpy_text_column));
+                    widget_gotoyx (view, top + row, left + (i - dpy_text_column));
                     tty_print_anychar ((cs[0] == '\t') ? ' ' : PARTIAL_CJK_AT_RIGHT_MARGIN);
                 }
             }
@@ -728,14 +724,14 @@ mcview_display_line (WView * view, mcview_state_machine_t * state, int row,
         col += charwidth;
         state->unwrapped_column += charwidth;
 
-        if (!view->text_wrap_mode && (off_t) col >= dpy_text_column + (off_t) width
+        if (!view->mode_flags.wrap && (off_t) col >= dpy_text_column + (off_t) width
             && linewidth == NULL)
         {
             /* Optimization: Fast forward to the end of the line, rather than carefully
              * parsing and then not actually displaying it. */
             off_t eol;
 
-            eol = mcview_eol (view, state->offset, mcview_get_filesize (view));
+            eol = mcview_eol (view, state->offset);
             mcview_state_machine_init (state, eol);
             return 1;
         }
@@ -868,7 +864,7 @@ mcview_display_text (WView * view)
         mcview_display_clean (view);
         mcview_display_ruler (view);
 
-        if (!view->text_wrap_mode)
+        if (!view->mode_flags.wrap)
             mcview_state_machine_init (&state, view->dpy_start);
         else
         {
@@ -886,7 +882,7 @@ mcview_display_text (WView * view)
                  * scroll the file and display again. This happens when e.g. the
                  * window is made bigger, or the file becomes shorter due to
                  * charset change or enabling nroff. */
-                if ((view->text_wrap_mode ? view->dpy_state_top.offset : view->dpy_start) > 0)
+                if ((view->mode_flags.wrap ? view->dpy_state_top.offset : view->dpy_start) > 0)
                 {
                     mcview_ascii_move_up (view, height - row);
                     again = TRUE;
@@ -904,7 +900,7 @@ mcview_display_text (WView * view)
     if (mcview_show_eof != NULL && mcview_show_eof[0] != '\0')
         while (row < (int) height)
         {
-            widget_move (view, top + row, left);
+            widget_gotoyx (view, top + row, left);
             /* TODO: should make it no wider than the viewport */
             tty_print_string (mcview_show_eof);
             row++;
@@ -938,9 +934,9 @@ mcview_ascii_move_down (WView * view, off_t lines)
 
         /* Okay, there's enough data. Move by 1 row at the top, too. No need to check for
          * EOF, that can't happen. */
-        if (!view->text_wrap_mode)
+        if (!view->mode_flags.wrap)
         {
-            view->dpy_start = mcview_eol (view, view->dpy_start, mcview_get_filesize (view));
+            view->dpy_start = mcview_eol (view, view->dpy_start);
             view->dpy_paragraph_skip_lines = 0;
             view->dpy_wrap_dirty = TRUE;
         }
@@ -975,7 +971,7 @@ mcview_ascii_move_down (WView * view, off_t lines)
 void
 mcview_ascii_move_up (WView * view, off_t lines)
 {
-    if (!view->text_wrap_mode)
+    if (!view->mode_flags.wrap)
     {
         while (lines-- != 0)
             view->dpy_start = mcview_bol (view, view->dpy_start - 1, 0);
@@ -1025,7 +1021,7 @@ mcview_ascii_move_up (WView * view, off_t lines)
 void
 mcview_ascii_moveto_bol (WView * view)
 {
-    if (!view->text_wrap_mode)
+    if (!view->mode_flags.wrap)
         view->dpy_text_column = 0;
 }
 
@@ -1034,7 +1030,7 @@ mcview_ascii_moveto_bol (WView * view)
 void
 mcview_ascii_moveto_eol (WView * view)
 {
-    if (!view->text_wrap_mode)
+    if (!view->mode_flags.wrap)
     {
         mcview_state_machine_t state;
         off_t linewidth;

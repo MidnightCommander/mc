@@ -17,12 +17,14 @@
 #                         ascii (editable on the pc)
 #      - start the server on the HP48: <left shift> - i/o - srvr - serve
 #        or the shortcut <right shift> - <right arrow>
-#      - on MC's commandline enter "cd hp48:"
+#      - on MC's commandline enter "cd hp48://"
 #
 # Make sure you have kermit installed and that it's using the right serial
 # device by changing /dev/ttyXX on the next line
 AWK=@AWK@
-KERMIT="kermit -l /dev/ttyS1 -b 9600"
+KERMIT=${MC_TEST_EXTFS_LIST_CMD:-"kermit -l /dev/ttyS1 -b 9600"}
+
+NOW=`date +"%m-%d-%Y %H:%M"`
 
 hp48_cmd()
 {
@@ -38,29 +40,60 @@ done
 echo QUIT)| $KERMIT -B >/dev/null
 }
 
-hp48_retdir()
-{
-echo "$1"
-}
-
-hp48_retsize()
-{
-printf "%d" "$2" 2>/dev/null
-}
-
+#
+# Parses the reply to the DIRECTORY command.
+#
+# Here's an example reply (taken from [1][2]):
+#
+#    { HOME } 105617
+#    STRAY 185.5 Directory 29225
+#    YEN 30.5 Program 53391
+#    JYTLIGHT 21848.5 String 62692
+#    IOPAR 37.5 List 61074
+#
+# The meaning of the fields (according to [3][4]):
+#
+#    { Current_directory } Free_space
+#    Object_name Object_size_bytes Object_type Object_CRC
+#    ...
+#
+# [1] http://newarea48.tripod.com/kermit.html
+# [2] http://www.hpmuseum.org/forum/thread-4684.html
+# [3] https://groups.google.com/d/msg/comp.sys.hp48/bYTCu9K3k20/YWQfF--W3EEJ
+# [4] http://www.columbia.edu/kermit/hp48.html (also has a link to the HP's user manual).
+#
 hp48_parser()
 {
 HP48_DIRS=
+
 read -r INPUT
 while [ "x$INPUT" != "xEOF" ]
 do
-    case `echo "$INPUT" | $AWK '{if (int($2)) if ($3 == "Directory") print "dir";else print "file"}'` in
-    dir) HP48_DIRS="$HP48_DIRS `hp48_retdir \"$INPUT\"`"
-    printf "drwxr-xr-x   1 %-8d %-8d %8d %s %s\n" 0 0 `hp48_retsize "$INPUT"` "`date +\"%b %d %Y %k:%M\"`" "$HP48_CDIR/`hp48_retdir \"$INPUT\"`";;
-    file) printf "-rw-r--r--   1 %-8d %-8d %8d %s %s\n" 0 0 `hp48_retsize "$INPUT"` "`date +\"%b %d %Y %k:%M\"`" "$HP48_CDIR/`hp48_retdir \"$INPUT\"`";;
+    set -- $INPUT
+
+    obj_name=$1
+    obj_size=$2
+    obj_type=$3
+
+    obj_size=`echo $obj_size | $AWK '{ print int($0) }'`  # Truncates floats to ints; anything else to "0".
+
+    if [ "$obj_size" != "0" ]; then  # Skips the 1st reply line (purportedly there aren't zero-size files b/c, according to resource [4], the size is "including name").
+      case "$obj_type" in
+        Directory)
+          HP48_DIRS="$HP48_DIRS $obj_name"
+          printf "%crwxr-xr-x   1 %-8d %-8d %8d %s %s\n" 'd' \
+            0 0 $obj_size "$NOW" "$HP48_CDIR/$obj_name"
+          ;;
+        *)
+          printf "%crw-r--r--   1 %-8d %-8d %8d %s %s\n" '-' \
+            0 0 $obj_size "$NOW" "$HP48_CDIR/$obj_name"
+          ;;
     esac
+    fi
+
     read -r INPUT
 done
+
 for HP48_DIR in $HP48_DIRS;
 do 
     HP48_PDIR="$HP48_CDIR"
@@ -72,6 +105,7 @@ done
 
 hp48_list()
 {
+# It's hard to see why this "EOF" thing is needed. The loop above can be changed to "while read -r obj_name ...". @TODO.
 { hp48_cmd "DIRECTORY"; echo; echo EOF; } | hp48_parser
 }
 

@@ -1,7 +1,7 @@
 /*
    Dynamic paragraph formatting.
 
-   Copyright (C) 2011-2016
+   Copyright (C) 2011-2020
    Free Software Foundation, Inc.
 
    Copyright (C) 1996 Paul Sheer
@@ -303,7 +303,7 @@ word_start (unsigned char *t, off_t q, off_t size)
 {
     off_t i;
 
-    if (t[q] == ' ' || t[q] == '\t')
+    if (whitespace (t[q]))
         return next_word_start (t, q, size);
 
     for (i = q;; i--)
@@ -315,7 +315,7 @@ word_start (unsigned char *t, off_t q, off_t size)
         c = t[i - 1];
         if (c == '\n')
             return (-1);
-        if (c == ' ' || c == '\t')
+        if (whitespace (c))
             return i;
     }
 }
@@ -448,6 +448,7 @@ put_paragraph (WEdit * edit, unsigned char *t, off_t p, long indent, off_t size)
         if (c != t[i])
             replace_at (edit, p, t[i]);
     }
+    edit_cursor_move (edit, cursor - edit->buffer.curs1);       /* restore cursor position */
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -527,31 +528,12 @@ format_paragraph (WEdit * edit, gboolean force)
 #ifdef HAVE_CHARSET
     utf8 = edit->utf8;
 #endif
-    /* scroll up to show 1st line of paragraph */
-    edit_move_up (edit, lines, TRUE);
-    /* scroll left as much as possible to show the formatted paragraph */
-    edit_scroll_left (edit, -edit->start_col);
-
     format_this (t2, q - p, indent, utf8);
     put_paragraph (edit, t2, p, indent, size);
     g_free ((char *) t2);
 
-    /* move to the end of paragraph */
-    q = end_paragraph (edit, force);
-    edit_cursor_move (edit, q - edit->buffer.curs1);
-
-    /* try move to the start of next paragraph */
-    if (edit->buffer.curs_line < edit->buffer.lines)
-    {
-        edit_execute_cmd (edit, CK_Home, -1);
-
-        do
-        {
-            edit_execute_cmd (edit, CK_Down, -1);
-        }
-        while (edit->buffer.curs_line < edit->buffer.lines
-               && edit_line_is_blank (edit, edit->buffer.curs_line));
-    }
+    /* Scroll left as much as possible to show the formatted paragraph */
+    edit_scroll_left (edit, -edit->start_col);
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -1,7 +1,7 @@
 /*
    Directory cache support
 
-   Copyright (C) 1998-2016
+   Copyright (C) 1998-2020
    Free Software Foundation, Inc.
 
    Written by:
@@ -58,15 +58,19 @@
 #include <config.h>
 
 #include <errno.h>
-#include <time.h>
-#include <sys/time.h>           /* gettimeofday() */
 #include <inttypes.h>           /* uintmax_t */
 #include <stdarg.h>
+#ifdef HAVE_SYS_SELECT_H
+#include <sys/select.h>
+#endif
+#include <sys/types.h>
+#include <unistd.h>
 
 #include "lib/global.h"
 
 #include "lib/tty/tty.h"        /* enable/disable interrupt key */
 #include "lib/util.h"           /* custom_canonicalize_pathname() */
+#include "lib/timer.h"
 #if 0
 #include "lib/widget.h"         /* message() */
 #endif
@@ -80,7 +84,9 @@
 
 /*** file scope macro definitions ****************************************************************/
 
-#define CALL(x) if (MEDATA->x) MEDATA->x
+#define CALL(x) \
+        if (VFS_SUBCLASS (me)->x != NULL) \
+            VFS_SUBCLASS (me)->x
 
 /*** file scope type declarations ****************************************************************/
 
@@ -92,18 +98,8 @@ struct dirhandle
 
 /*** file scope variables ************************************************************************/
 
-/*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
-
-static int
-vfs_s_entry_compare (const void *a, const void *b)
-{
-    const struct vfs_s_entry *e = (const struct vfs_s_entry *) a;
-    const char *name = (const char *) b;
-
-    return strcmp (e->name, name);
-}
-
+/*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
 /* We were asked to create entries automagically */
@@ -141,7 +137,7 @@ vfs_s_resolve_symlink (struct vfs_class *me, struct vfs_s_entry *entry, int foll
         return entry;
     if (follow == 0)
         ERRNOR (ELOOP, NULL);
-    if (!entry)
+    if (entry == NULL)
         ERRNOR (ENOENT, NULL);
     if (!S_ISLNK (entry->ino->st.st_mode))
         return entry;
@@ -164,7 +160,8 @@ vfs_s_resolve_symlink (struct vfs_class *me, struct vfs_s_entry *entry, int foll
         }
     }
 
-    target = (MEDATA->find_entry) (me, entry->dir->super->root, linkname, follow - 1, 0);
+    target =
+        VFS_SUBCLASS (me)->find_entry (me, entry->dir->super->root, linkname, follow - 1, FL_NONE);
     g_free (fullname);
     return target;
 }
@@ -203,15 +200,15 @@ vfs_s_find_entry_tree (struct vfs_class *me, struct vfs_s_inode *root,
         for (pseg = 0; path[pseg] != '\0' && !IS_PATH_SEP (path[pseg]); pseg++)
             ;
 
-        for (iter = root->subdir; iter != NULL; iter = g_list_next (iter))
+        for (iter = g_queue_peek_head_link (root->subdir); iter != NULL; iter = g_list_next (iter))
         {
-            ent = (struct vfs_s_entry *) iter->data;
+            ent = VFS_ENTRY (iter->data);
             if (strlen (ent->name) == pseg && strncmp (ent->name, path, pseg) == 0)
                 /* FOUND! */
                 break;
         }
 
-        ent = iter != NULL ? (struct vfs_s_entry *) iter->data : NULL;
+        ent = iter != NULL ? VFS_ENTRY (iter->data) : NULL;
 
         if (ent == NULL && (flags & (FL_MKFILE | FL_MKDIR)) != 0)
             ent = vfs_s_automake (me, root, path, flags);
@@ -266,10 +263,10 @@ vfs_s_find_entry_linear (struct vfs_class *me, struct vfs_s_inode *root,
         return ent;
     }
 
-    iter = g_list_find_custom (root->subdir, path, (GCompareFunc) vfs_s_entry_compare);
-    ent = iter != NULL ? (struct vfs_s_entry *) iter->data : NULL;
+    iter = g_queue_find_custom (root->subdir, path, (GCompareFunc) vfs_s_entry_compare);
+    ent = iter != NULL ? VFS_ENTRY (iter->data) : NULL;
 
-    if (ent != NULL && !MEDATA->dir_uptodate (me, ent->ino))
+    if (ent != NULL && !VFS_SUBCLASS (me)->dir_uptodate (me, ent->ino))
     {
 #if 1
         vfs_print_message (_("Directory cache expired for %s"), path);
@@ -284,7 +281,7 @@ vfs_s_find_entry_linear (struct vfs_class *me, struct vfs_s_inode *root,
 
         ino = vfs_s_new_inode (me, root->super, vfs_s_default_stat (me, S_IFDIR | 0755));
         ent = vfs_s_new_entry (me, path, ino);
-        if (MEDATA->dir_load (me, ino, path) == -1)
+        if (VFS_SUBCLASS (me)->dir_load (me, ino, path) == -1)
         {
             vfs_s_free_entry (me, ent);
             g_free (path);
@@ -293,14 +290,14 @@ vfs_s_find_entry_linear (struct vfs_class *me, struct vfs_s_inode *root,
 
         vfs_s_insert_entry (me, root, ent);
 
-        iter = g_list_find_custom (root->subdir, path, (GCompareFunc) vfs_s_entry_compare);
-        ent = iter != NULL ? (struct vfs_s_entry *) iter->data : NULL;
+        iter = g_queue_find_custom (root->subdir, path, (GCompareFunc) vfs_s_entry_compare);
+        ent = iter != NULL ? VFS_ENTRY (iter->data) : NULL;
     }
     if (ent == NULL)
         vfs_die ("find_linear: success but directory is not there\n");
 
 #if 0
-    if (!vfs_s_resolve_symlink (me, ent, follow))
+    if (vfs_s_resolve_symlink (me, ent, follow) == NULL)
     {
         g_free (path);
         return NULL;
@@ -329,7 +326,7 @@ vfs_s_new_super (struct vfs_class *me)
 static inline void
 vfs_s_insert_super (struct vfs_class *me, struct vfs_s_super *super)
 {
-    MEDATA->supers = g_list_prepend (MEDATA->supers, super);
+    VFS_SUBCLASS (me)->supers = g_list_prepend (VFS_SUBCLASS (me)->supers, super);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -345,7 +342,7 @@ vfs_s_free_super (struct vfs_class *me, struct vfs_s_super *super)
 
 #if 0
     /* FIXME: We currently leak small ammount of memory, sometimes. Fix it if you can. */
-    if (super->ino_usage)
+    if (super->ino_usage != 0)
         message (D_ERROR, "Direntry warning",
                  "Super ino_usage is %d, memory leak", super->ino_usage);
 
@@ -353,7 +350,7 @@ vfs_s_free_super (struct vfs_class *me, struct vfs_s_super *super)
         message (D_ERROR, "Direntry warning", "%s", "Super has want_stale set");
 #endif
 
-    MEDATA->supers = g_list_remove (MEDATA->supers, super);
+    VFS_SUBCLASS (me)->supers = g_list_remove (VFS_SUBCLASS (me)->supers, super);
 
     CALL (free_archive) (me, super);
 #ifdef ENABLE_VFS_NET
@@ -361,6 +358,30 @@ vfs_s_free_super (struct vfs_class *me, struct vfs_s_super *super)
 #endif
     g_free (super->name);
     g_free (super);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static vfs_file_handler_t *
+vfs_s_new_fh (struct vfs_s_inode *ino, gboolean changed)
+{
+    vfs_file_handler_t *fh;
+
+    fh = g_new0 (vfs_file_handler_t, 1);
+    vfs_s_init_fh (fh, ino, changed);
+
+    return fh;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+vfs_s_free_fh (struct vfs_s_subclass *s, vfs_file_handler_t * fh)
+{
+    if (s->fh_free != NULL)
+        s->fh_free (fh);
+
+    g_free (fh);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -385,7 +406,7 @@ vfs_s_inode_from_path (const vfs_path_t * vpath, int flags)
         vfs_s_find_inode (path_element->class, super, q,
                           (flags & FL_FOLLOW) != 0 ? LINK_FOLLOW : LINK_NO_FOLLOW,
                           flags & ~FL_FOLLOW);
-    if ((!ino) && (!*q))
+    if (ino == NULL && *q == '\0')
         /* We are asking about / directory of ftp server: assume it exists */
         ino =
             vfs_s_find_inode (path_element->class, super, q,
@@ -403,11 +424,12 @@ vfs_s_opendir (const vfs_path_t * vpath)
     struct dirhandle *info;
     const vfs_path_element_t *path_element;
 
-    path_element = vfs_path_get_by_index (vpath, -1);
-
     dir = vfs_s_inode_from_path (vpath, FL_DIR | FL_FOLLOW);
     if (dir == NULL)
         return NULL;
+
+    path_element = vfs_path_get_by_index (vpath, -1);
+
     if (!S_ISDIR (dir->st.st_mode))
     {
         path_element->class->verrno = ENOTDIR;
@@ -423,7 +445,7 @@ vfs_s_opendir (const vfs_path_t * vpath)
     }
 #endif
     info = g_new (struct dirhandle, 1);
-    info->cur = dir->subdir;
+    info->cur = g_queue_peek_head_link (dir->subdir);
     info->dir = dir;
 
     return info;
@@ -441,7 +463,7 @@ vfs_s_readdir (void *data)
     if (info->cur == NULL || info->cur->data == NULL)
         return NULL;
 
-    name = ((struct vfs_s_entry *) info->cur->data)->name;
+    name = VFS_ENTRY (info->cur->data)->name;
     if (name != NULL)
         g_strlcpy (dir.dent.d_name, name, MC_MAXPATHLEN);
     else
@@ -474,7 +496,7 @@ vfs_s_chdir (const vfs_path_t * vpath)
 
     data = vfs_s_opendir (vpath);
     if (data == NULL)
-        return -1;
+        return (-1);
     vfs_s_closedir (data);
     return 0;
 }
@@ -489,33 +511,8 @@ vfs_s_internal_stat (const vfs_path_t * vpath, struct stat *buf, int flag)
 
     ino = vfs_s_inode_from_path (vpath, flag);
     if (ino == NULL)
-        return -1;
+        return (-1);
     *buf = ino->st;
-    return 0;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static int
-vfs_s_stat (const vfs_path_t * vpath, struct stat *buf)
-{
-    return vfs_s_internal_stat (vpath, buf, FL_FOLLOW);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static int
-vfs_s_lstat (const vfs_path_t * vpath, struct stat *buf)
-{
-    return vfs_s_internal_stat (vpath, buf, FL_NONE);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static int
-vfs_s_fstat (void *fh, struct stat *buf)
-{
-    *buf = FH->ino->st;
     return 0;
 }
 
@@ -528,22 +525,22 @@ vfs_s_readlink (const vfs_path_t * vpath, char *buf, size_t size)
     size_t len;
     const vfs_path_element_t *path_element;
 
-    path_element = vfs_path_get_by_index (vpath, -1);
-
     ino = vfs_s_inode_from_path (vpath, 0);
-    if (!ino)
-        return -1;
+    if (ino == NULL)
+        return (-1);
+
+    path_element = vfs_path_get_by_index (vpath, -1);
 
     if (!S_ISLNK (ino->st.st_mode))
     {
         path_element->class->verrno = EINVAL;
-        return -1;
+        return (-1);
     }
 
     if (ino->linkname == NULL)
     {
         path_element->class->verrno = EFAULT;
-        return -1;
+        return (-1);
     }
 
     len = strlen (ino->linkname);
@@ -559,31 +556,32 @@ vfs_s_readlink (const vfs_path_t * vpath, char *buf, size_t size)
 static ssize_t
 vfs_s_read (void *fh, char *buffer, size_t count)
 {
-    struct vfs_class *me = FH_SUPER->me;
+    vfs_file_handler_t *file = VFS_FILE_HANDLER (fh);
+    struct vfs_class *me = VFS_FILE_HANDLER_SUPER (fh)->me;
 
-    if (FH->linear == LS_LINEAR_PREOPEN)
+    if (file->linear == LS_LINEAR_PREOPEN)
     {
-        if (!MEDATA->linear_start (me, FH, FH->pos))
-            return -1;
+        if (VFS_SUBCLASS (me)->linear_start (me, file, file->pos) == 0)
+            return (-1);
     }
 
-    if (FH->linear == LS_LINEAR_CLOSED)
+    if (file->linear == LS_LINEAR_CLOSED)
         vfs_die ("linear_start() did not set linear_state!");
 
-    if (FH->linear == LS_LINEAR_OPEN)
-        return MEDATA->linear_read (me, FH, buffer, count);
+    if (file->linear == LS_LINEAR_OPEN)
+        return VFS_SUBCLASS (me)->linear_read (me, file, buffer, count);
 
-    if (FH->handle != -1)
+    if (file->handle != -1)
     {
         ssize_t n;
 
-        n = read (FH->handle, buffer, count);
+        n = read (file->handle, buffer, count);
         if (n < 0)
             me->verrno = errno;
         return n;
     }
     vfs_die ("vfs_s_read: This should not happen\n");
-    return -1;
+    return (-1);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -591,17 +589,18 @@ vfs_s_read (void *fh, char *buffer, size_t count)
 static ssize_t
 vfs_s_write (void *fh, const char *buffer, size_t count)
 {
-    struct vfs_class *me = FH_SUPER->me;
+    vfs_file_handler_t *file = VFS_FILE_HANDLER (fh);
+    struct vfs_class *me = VFS_FILE_HANDLER_SUPER (fh)->me;
 
-    if (FH->linear)
+    if (file->linear != LS_NOT_LINEAR)
         vfs_die ("no writing to linear files, please");
 
-    FH->changed = 1;
-    if (FH->handle != -1)
+    file->changed = TRUE;
+    if (file->handle != -1)
     {
         ssize_t n;
 
-        n = write (FH->handle, buffer, count);
+        n = write (file->handle, buffer, count);
         if (n < 0)
             me->verrno = errno;
         return n;
@@ -615,23 +614,26 @@ vfs_s_write (void *fh, const char *buffer, size_t count)
 static off_t
 vfs_s_lseek (void *fh, off_t offset, int whence)
 {
-    off_t size = FH->ino->st.st_size;
+    vfs_file_handler_t *file = VFS_FILE_HANDLER (fh);
+    off_t size = file->ino->st.st_size;
 
-    if (FH->linear == LS_LINEAR_OPEN)
+    if (file->linear == LS_LINEAR_OPEN)
         vfs_die ("cannot lseek() after linear_read!");
 
-    if (FH->handle != -1)
+    if (file->handle != -1)
     {                           /* If we have local file opened, we want to work with it */
-        off_t retval = lseek (FH->handle, offset, whence);
+        off_t retval;
+
+        retval = lseek (file->handle, offset, whence);
         if (retval == -1)
-            FH->ino->super->me->verrno = errno;
+            VFS_FILE_HANDLER_SUPER (fh)->me->verrno = errno;
         return retval;
     }
 
     switch (whence)
     {
     case SEEK_CUR:
-        offset += FH->pos;
+        offset += file->pos;
         break;
     case SEEK_END:
         offset += size;
@@ -640,12 +642,12 @@ vfs_s_lseek (void *fh, off_t offset, int whence)
         break;
     }
     if (offset < 0)
-        FH->pos = 0;
+        file->pos = 0;
     else if (offset < size)
-        FH->pos = offset;
+        file->pos = offset;
     else
-        FH->pos = size;
-    return FH->pos;
+        file->pos = size;
+    return file->pos;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -653,39 +655,48 @@ vfs_s_lseek (void *fh, off_t offset, int whence)
 static int
 vfs_s_close (void *fh)
 {
+    vfs_file_handler_t *file = VFS_FILE_HANDLER (fh);
+    struct vfs_s_super *super = VFS_FILE_HANDLER_SUPER (fh);
+    struct vfs_class *me = super->me;
+    struct vfs_s_subclass *sub = VFS_SUBCLASS (me);
     int res = 0;
-    struct vfs_class *me = FH_SUPER->me;
 
     if (me == NULL)
         return (-1);
 
-    FH_SUPER->fd_usage--;
-    if (!FH_SUPER->fd_usage)
-        vfs_stamp_create (me, FH_SUPER);
+    super->fd_usage--;
+    if (super->fd_usage == 0)
+        vfs_stamp_create (me, VFS_FILE_HANDLER_SUPER (fh));
 
-    if (FH->linear == LS_LINEAR_OPEN)
-        MEDATA->linear_close (me, fh);
-    if (MEDATA->fh_close)
-        res = MEDATA->fh_close (me, fh);
-    if ((MEDATA->flags & VFS_S_USETMP) && FH->changed && MEDATA->file_store)
+    if (file->linear == LS_LINEAR_OPEN)
+        sub->linear_close (me, fh);
+    if (sub->fh_close != NULL)
+        res = sub->fh_close (me, fh);
+    if ((me->flags & VFSF_USETMP) != 0 && file->changed && sub->file_store != NULL)
     {
-        char *s = vfs_s_fullpath (me, FH->ino);
-        if (!s)
+        char *s;
+
+        s = vfs_s_fullpath (me, file->ino);
+
+        if (s == NULL)
             res = -1;
         else
         {
-            res = MEDATA->file_store (me, fh, s, FH->ino->localname);
+            res = sub->file_store (me, fh, s, file->ino->localname);
             g_free (s);
         }
-        vfs_s_invalidate (me, FH_SUPER);
+        vfs_s_invalidate (me, super);
     }
-    if (FH->handle != -1)
-        close (FH->handle);
 
-    vfs_s_free_inode (me, FH->ino);
-    if (MEDATA->fh_free_data != NULL)
-        MEDATA->fh_free_data (fh);
-    g_free (fh);
+    if (file->handle != -1)
+    {
+        close (file->handle);
+        file->handle = -1;
+    }
+
+    vfs_s_free_inode (me, file->ino);
+    vfs_s_free_fh (sub, fh);
+
     return res;
 }
 
@@ -711,7 +722,7 @@ vfs_s_fill_names (struct vfs_class *me, fill_names_f func)
 {
     GList *iter;
 
-    for (iter = MEDATA->supers; iter != NULL; iter = g_list_next (iter))
+    for (iter = VFS_SUBCLASS (me)->supers; iter != NULL; iter = g_list_next (iter))
     {
         const struct vfs_s_super *super = (const struct vfs_s_super *) iter->data;
         char *name;
@@ -753,7 +764,7 @@ vfs_s_getlocalcopy (const vfs_path_t * vpath)
         const struct vfs_class *me;
 
         me = vfs_path_get_by_index (vpath, -1)->class;
-        if ((MEDATA->flags & VFS_S_USETMP) != 0 && (fh->ino != NULL))
+        if ((me->flags & VFSF_USETMP) != 0 && fh->ino != NULL)
             local = vfs_path_from_str_flags (fh->ino->localname, VPF_NO_CANON);
 
         vfs_s_close (fh);
@@ -795,20 +806,20 @@ vfs_s_setctl (const vfs_path_t * vpath, int ctlop, void *arg)
             ino = vfs_s_inode_from_path (vpath, 0);
             if (ino == NULL)
                 return 0;
-            if (arg)
-                ino->super->want_stale = 1;
+            if (arg != NULL)
+                ino->super->want_stale = TRUE;
             else
             {
-                ino->super->want_stale = 0;
+                ino->super->want_stale = FALSE;
                 vfs_s_invalidate (path_element->class, ino->super);
             }
             return 1;
         }
     case VFS_SETCTL_LOGFILE:
-        ((struct vfs_s_subclass *) path_element->class->data)->logfile = fopen ((char *) arg, "w");
+        path_element->class->logfile = fopen ((char *) arg, "w");
         return 1;
     case VFS_SETCTL_FLUSH:
-        ((struct vfs_s_subclass *) path_element->class->data)->flush = 1;
+        path_element->class->flush = TRUE;
         return 1;
     default:
         return 0;
@@ -833,12 +844,10 @@ vfs_s_getid (const vfs_path_t * vpath)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static gboolean
 vfs_s_nothingisopen (vfsid id)
 {
-    (void) id;
-    /* Our data structures should survive free of superblock at any time */
-    return 1;
+    return (VFS_SUPER (id)->fd_usage <= 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -846,28 +855,26 @@ vfs_s_nothingisopen (vfsid id)
 static void
 vfs_s_free (vfsid id)
 {
-    vfs_s_free_super (((struct vfs_s_super *) id)->me, (struct vfs_s_super *) id);
+    vfs_s_free_super (VFS_SUPER (id)->me, VFS_SUPER (id));
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static gboolean
 vfs_s_dir_uptodate (struct vfs_class *me, struct vfs_s_inode *ino)
 {
-    struct timeval tim;
+    guint64 tim;
 
-    if (MEDATA->flush)
+    if (me->flush)
     {
-        MEDATA->flush = 0;
+        me->flush = FALSE;
         return 0;
     }
 
-    gettimeofday (&tim, NULL);
-    if (tim.tv_sec < ino->timestamp.tv_sec)
-        return 1;
-    return 0;
-}
+    tim = mc_timer_elapsed (mc_global.timer);
 
+    return (tim < ino->timestamp);
+}
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
@@ -882,12 +889,13 @@ vfs_s_new_inode (struct vfs_class *me, struct vfs_s_super *super, struct stat *i
     if (ino == NULL)
         return NULL;
 
-    if (initstat)
+    if (initstat != NULL)
         ino->st = *initstat;
     ino->super = super;
+    ino->subdir = g_queue_new ();
     ino->st.st_nlink = 0;
-    ino->st.st_ino = MEDATA->inode_counter++;
-    ino->st.st_dev = MEDATA->rdev;
+    ino->st.st_ino = VFS_SUBCLASS (me)->inode_counter++;
+    ino->st.st_dev = VFS_SUBCLASS (me)->rdev;
 
     super->ino_usage++;
 
@@ -911,12 +919,20 @@ vfs_s_free_inode (struct vfs_class *me, struct vfs_s_inode *ino)
         return;
     }
 
-    while (ino->subdir != NULL)
-        vfs_s_free_entry (me, (struct vfs_s_entry *) ino->subdir->data);
+    while (g_queue_get_length (ino->subdir) != 0)
+    {
+        struct vfs_s_entry *entry;
+
+        entry = VFS_ENTRY (g_queue_peek_head (ino->subdir));
+        vfs_s_free_entry (me, entry);
+    }
+
+    g_queue_free (ino->subdir);
+    ino->subdir = NULL;
 
     CALL (free_inode) (me, ino);
     g_free (ino->linkname);
-    if ((MEDATA->flags & VFS_S_USETMP) != 0 && ino->localname != NULL)
+    if ((me->flags & VFSF_USETMP) != 0 && ino->localname != NULL)
     {
         unlink (ino->localname);
         g_free (ino->localname);
@@ -942,14 +958,13 @@ vfs_s_new_entry (struct vfs_class *me, const char *name, struct vfs_s_inode *ino
     return entry;
 }
 
-
 /* --------------------------------------------------------------------------------------------- */
 
 void
 vfs_s_free_entry (struct vfs_class *me, struct vfs_s_entry *ent)
 {
     if (ent->dir != NULL)
-        ent->dir->subdir = g_list_remove (ent->dir->subdir, ent);
+        g_queue_remove (ent->dir->subdir, ent);
 
     MC_PTR_FREE (ent->name);
 
@@ -972,7 +987,18 @@ vfs_s_insert_entry (struct vfs_class *me, struct vfs_s_inode *dir, struct vfs_s_
     ent->dir = dir;
 
     ent->ino->st.st_nlink++;
-    dir->subdir = g_list_append (dir->subdir, ent);
+    g_queue_push_tail (dir->subdir, ent);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+int
+vfs_s_entry_compare (const void *a, const void *b)
+{
+    const struct vfs_s_entry *e = (const struct vfs_s_entry *) a;
+    const char *name = (const char *) b;
+
+    return strcmp (e->name, name);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -992,13 +1018,58 @@ vfs_s_default_stat (struct vfs_class *me, mode_t mode)
     st.st_mode = mode;
     st.st_ino = 0;
     st.st_dev = 0;
+#ifdef HAVE_STRUCT_STAT_ST_RDEV
     st.st_rdev = 0;
+#endif
     st.st_uid = getuid ();
     st.st_gid = getgid ();
+#ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
+    st.st_blksize = 512;
+#endif
     st.st_size = 0;
+
     st.st_mtime = st.st_atime = st.st_ctime = time (NULL);
+#ifdef HAVE_STRUCT_STAT_ST_MTIM
+    st.st_atim.tv_nsec = st.st_mtim.tv_nsec = st.st_ctim.tv_nsec = 0;
+#endif
+
+    vfs_adjust_stat (&st);
 
     return &st;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Calculate number of st_blocks using st_size and st_blksize.
+ * In according to stat(2), st_blocks is the size in 512-byte units.
+ *
+ * @param s stat info
+ */
+
+void
+vfs_adjust_stat (struct stat *s)
+{
+#ifdef HAVE_STRUCT_STAT_ST_BLOCKS
+    if (s->st_size == 0)
+        s->st_blocks = 0;
+    else
+    {
+#ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
+        blkcnt_t ioblocks;
+        blksize_t ioblock_size;
+
+        /* 1. Calculate how many IO blocks are occupied */
+        ioblocks = 1 + (s->st_size - 1) / s->st_blksize;
+        /* 2. Calculate size of st_blksize in 512-byte units */
+        ioblock_size = 1 + (s->st_blksize - 1) / 512;
+        /* 3. Calculate number of blocks */
+        s->st_blocks = ioblocks * ioblock_size;
+#else
+        /* Let IO block size is 512 bytes */
+        s->st_blocks = 1 + (s->st_size - 1) / 512;
+#endif /* HAVE_STRUCT_STAT_ST_BLKSIZE */
+    }
+#endif /* HAVE_STRUCT_STAT_ST_BLOCKS */
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1024,11 +1095,11 @@ vfs_s_find_inode (struct vfs_class *me, const struct vfs_s_super *super,
 {
     struct vfs_s_entry *ent;
 
-    if (((MEDATA->flags & VFS_S_REMOTE) == 0) && (*path == '\0'))
+    if (((me->flags & VFSF_REMOTE) == 0) && (*path == '\0'))
         return super->root;
 
-    ent = (MEDATA->find_entry) (me, super->root, path, follow, flags);
-    return (ent != NULL) ? ent->ino : NULL;
+    ent = VFS_SUBCLASS (me)->find_entry (me, super->root, path, follow, flags);
+    return (ent != NULL ? ent->ino : NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1052,9 +1123,7 @@ vfs_get_super_by_vpath (const vfs_path_t * vpath)
     vfs_path_t *vpath_archive;
 
     path_element = vfs_path_get_by_index (vpath, -1);
-    subclass = ((struct vfs_s_subclass *) path_element->class->data);
-    if (subclass == NULL)
-        return NULL;
+    subclass = VFS_SUBCLASS (path_element->class);
 
     vpath_archive = vfs_path_clone (vpath);
     vfs_path_remove_element_by_index (vpath_archive, -1);
@@ -1066,11 +1135,14 @@ vfs_get_super_by_vpath (const vfs_path_t * vpath)
             goto ret;
     }
 
+    if (subclass->archive_same == NULL)
+        goto ret;
+
     for (iter = subclass->supers; iter != NULL; iter = g_list_next (iter))
     {
         int i;
 
-        super = (struct vfs_s_super *) iter->data;
+        super = VFS_SUPER (iter->data);
 
         /* 0 == other, 1 == same, return it, 2 == other but stop scanning */
         i = subclass->archive_same (path_element, super, vpath_archive, cookie);
@@ -1115,15 +1187,17 @@ vfs_s_get_path (const vfs_path_t * vpath, struct vfs_s_super **archive, int flag
     if (super != NULL)
         goto return_success;
 
-    if (flags & FL_NO_OPEN)
+    if ((flags & FL_NO_OPEN) != 0)
     {
         path_element->class->verrno = EIO;
         return NULL;
     }
 
-    super = vfs_s_new_super (path_element->class);
+    subclass = VFS_SUBCLASS (path_element->class);
 
-    subclass = ((struct vfs_s_subclass *) path_element->class->data);
+    super = subclass->new_archive != NULL ?
+        subclass->new_archive (path_element->class) : vfs_s_new_super (path_element->class);
+
     if (subclass->open_archive != NULL)
     {
         vfs_path_t *vpath_archive;
@@ -1140,9 +1214,9 @@ vfs_s_get_path (const vfs_path_t * vpath, struct vfs_s_super **archive, int flag
         path_element->class->verrno = EIO;
         return NULL;
     }
-    if (!super->name)
+    if (super->name == NULL)
         vfs_die ("You have to fill name\n");
-    if (!super->root)
+    if (super->root == NULL)
         vfs_die ("You have to fill root inode\n");
 
     vfs_s_insert_super (path_element->class, super);
@@ -1170,19 +1244,24 @@ vfs_s_invalidate (struct vfs_class *me, struct vfs_s_super *super)
 char *
 vfs_s_fullpath (struct vfs_class *me, struct vfs_s_inode *ino)
 {
-    if (!ino->ent)
+    if (ino->ent == NULL)
         ERRNOR (EAGAIN, NULL);
 
-    if ((MEDATA->flags & VFS_S_USETMP) == 0)
+    if ((me->flags & VFSF_USETMP) == 0)
     {
         /* archives */
-        char *newpath;
-        char *path = g_strdup (ino->ent->name);
-        while (1)
+        char *path;
+
+        path = g_strdup (ino->ent->name);
+
+        while (TRUE)
         {
+            char *newpath;
+
             ino = ino->ent->dir;
             if (ino == ino->super->root)
                 break;
+
             newpath = g_strconcat (ino->ent->name, PATH_SEP_STR, path, (char *) NULL);
             g_free (path);
             path = newpath;
@@ -1191,10 +1270,21 @@ vfs_s_fullpath (struct vfs_class *me, struct vfs_s_inode *ino)
     }
 
     /* remote systems */
-    if ((!ino->ent->dir) || (!ino->ent->dir->ent))
+    if (ino->ent->dir == NULL || ino->ent->dir->ent == NULL)
         return g_strdup (ino->ent->name);
 
     return g_strconcat (ino->ent->dir->ent->name, PATH_SEP_STR, ino->ent->name, (char *) NULL);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+vfs_s_init_fh (vfs_file_handler_t * fh, struct vfs_s_inode *ino, gboolean changed)
+{
+    fh->ino = ino;
+    fh->handle = -1;
+    fh->changed = changed;
+    fh->linear = LS_NOT_LINEAR;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1203,32 +1293,37 @@ vfs_s_fullpath (struct vfs_class *me, struct vfs_s_inode *ino)
 void *
 vfs_s_open (const vfs_path_t * vpath, int flags, mode_t mode)
 {
-    int was_changed = 0;
+    gboolean was_changed = FALSE;
     vfs_file_handler_t *fh;
     struct vfs_s_super *super;
     const char *q;
     struct vfs_s_inode *ino;
     const vfs_path_element_t *path_element;
-
-    path_element = vfs_path_get_by_index (vpath, -1);
+    struct vfs_s_subclass *s;
 
     q = vfs_s_get_path (vpath, &super, 0);
     if (q == NULL)
         return NULL;
+
+    path_element = vfs_path_get_by_index (vpath, -1);
+
     ino = vfs_s_find_inode (path_element->class, super, q, LINK_FOLLOW, FL_NONE);
-    if (ino && ((flags & (O_CREAT | O_EXCL)) == (O_CREAT | O_EXCL)))
+    if (ino != NULL && (flags & (O_CREAT | O_EXCL)) == (O_CREAT | O_EXCL))
     {
         path_element->class->verrno = EEXIST;
         return NULL;
     }
-    if (!ino)
+
+    s = VFS_SUBCLASS (path_element->class);
+
+    if (ino == NULL)
     {
         char *dirname, *name;
         struct vfs_s_entry *ent;
         struct vfs_s_inode *dir;
 
         /* If the filesystem is read-only, disable file creation */
-        if (!(flags & O_CREAT) || !(path_element->class->write))
+        if ((flags & O_CREAT) == 0 || path_element->class->write == NULL)
             return NULL;
 
         dirname = g_path_get_dirname (q);
@@ -1240,10 +1335,11 @@ vfs_s_open (const vfs_path_t * vpath, int flags, mode_t mode)
             g_free (name);
             return NULL;
         }
+
         ent = vfs_s_generate_entry (path_element->class, name, dir, 0755);
         ino = ent->ino;
         vfs_s_insert_entry (path_element->class, dir, ent);
-        if ((VFSDATA (path_element)->flags & VFS_S_USETMP) != 0)
+        if ((VFS_CLASS (s)->flags & VFSF_USETMP) != 0)
         {
             int tmp_handle;
             vfs_path_t *tmp_vpath;
@@ -1262,7 +1358,7 @@ vfs_s_open (const vfs_path_t * vpath, int flags, mode_t mode)
         }
         g_free (dirname);
         g_free (name);
-        was_changed = 1;
+        was_changed = TRUE;
     }
 
     if (S_ISDIR (ino->st.st_mode))
@@ -1271,17 +1367,11 @@ vfs_s_open (const vfs_path_t * vpath, int flags, mode_t mode)
         return NULL;
     }
 
-    fh = g_new (vfs_file_handler_t, 1);
-    fh->pos = 0;
-    fh->ino = ino;
-    fh->handle = -1;
-    fh->changed = was_changed;
-    fh->linear = 0;
-    fh->data = NULL;
+    fh = s->fh_new != NULL ? s->fh_new (ino, was_changed) : vfs_s_new_fh (ino, was_changed);
 
     if (IS_LINEAR (flags))
     {
-        if (VFSDATA (path_element)->linear_start)
+        if (s->linear_start != NULL)
         {
             vfs_print_message ("%s", _("Starting linear transfer..."));
             fh->linear = LS_LINEAR_PREOPEN;
@@ -1289,24 +1379,19 @@ vfs_s_open (const vfs_path_t * vpath, int flags, mode_t mode)
     }
     else
     {
-        struct vfs_s_subclass *s;
-
-        s = VFSDATA (path_element);
         if (s->fh_open != NULL && s->fh_open (path_element->class, fh, flags, mode) != 0)
         {
-            if (s->fh_free_data != NULL)
-                s->fh_free_data (fh);
-            g_free (fh);
+            vfs_s_free_fh (s, fh);
             return NULL;
         }
     }
 
-    if ((VFSDATA (path_element)->flags & VFS_S_USETMP) != 0 && fh->ino->localname != NULL)
+    if ((VFS_CLASS (s)->flags & VFSF_USETMP) != 0 && fh->ino->localname != NULL)
     {
         fh->handle = open (fh->ino->localname, NO_LINEAR (flags), mode);
         if (fh->handle == -1)
         {
-            g_free (fh);
+            vfs_s_free_fh (s, fh);
             path_element->class->verrno = errno;
             return NULL;
         }
@@ -1322,6 +1407,31 @@ vfs_s_open (const vfs_path_t * vpath, int flags, mode_t mode)
 /* --------------------------------------------------------------------------------------------- */
 
 int
+vfs_s_stat (const vfs_path_t * vpath, struct stat *buf)
+{
+    return vfs_s_internal_stat (vpath, buf, FL_FOLLOW);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+int
+vfs_s_lstat (const vfs_path_t * vpath, struct stat *buf)
+{
+    return vfs_s_internal_stat (vpath, buf, FL_NONE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+int
+vfs_s_fstat (void *fh, struct stat *buf)
+{
+    *buf = VFS_FILE_HANDLER (fh)->ino->st;
+    return 0;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+int
 vfs_s_retrieve_file (struct vfs_class *me, struct vfs_s_inode *ino)
 {
     /* If you want reget, you'll have to open file with O_LINEAR */
@@ -1330,16 +1440,12 @@ vfs_s_retrieve_file (struct vfs_class *me, struct vfs_s_inode *ino)
     int handle;
     ssize_t n;
     off_t stat_size = ino->st.st_size;
-    vfs_file_handler_t fh;
+    vfs_file_handler_t *fh = NULL;
     vfs_path_t *tmp_vpath;
+    struct vfs_s_subclass *s = VFS_SUBCLASS (me);
 
-    if ((MEDATA->flags & VFS_S_USETMP) == 0)
-        return -1;
-
-    memset (&fh, 0, sizeof (fh));
-
-    fh.ino = ino;
-    fh.handle = -1;
+    if ((me->flags & VFSF_USETMP) == 0)
+        return (-1);
 
     handle = vfs_mkstemps (&tmp_vpath, me->name, ino->ent->name);
     ino->localname = g_strdup (vfs_path_as_str (tmp_vpath));
@@ -1350,16 +1456,19 @@ vfs_s_retrieve_file (struct vfs_class *me, struct vfs_s_inode *ino)
         goto error_4;
     }
 
-    if (!MEDATA->linear_start (me, &fh, 0))
+    fh = s->fh_new != NULL ? s->fh_new (ino, FALSE) : vfs_s_new_fh (ino, FALSE);
+
+    if (s->linear_start (me, fh, 0) == 0)
         goto error_3;
 
     /* Clear the interrupt status */
     tty_got_interrupt ();
     tty_enable_interrupt_key ();
 
-    while ((n = MEDATA->linear_read (me, &fh, buffer, sizeof (buffer))))
+    while ((n = s->linear_read (me, fh, buffer, sizeof (buffer))) != 0)
     {
         int t;
+
         if (n < 0)
             goto error_1;
 
@@ -1377,23 +1486,24 @@ vfs_s_retrieve_file (struct vfs_class *me, struct vfs_s_inode *ino)
             goto error_1;
         }
     }
-    MEDATA->linear_close (me, &fh);
+    s->linear_close (me, fh);
     close (handle);
 
     tty_disable_interrupt_key ();
-    g_free (fh.data);
+    vfs_s_free_fh (s, fh);
     return 0;
 
   error_1:
-    MEDATA->linear_close (me, &fh);
+    s->linear_close (me, fh);
   error_3:
     tty_disable_interrupt_key ();
     close (handle);
     unlink (ino->localname);
   error_4:
     MC_PTR_FREE (ino->localname);
-    g_free (fh.data);
-    return -1;
+    if (fh != NULL)
+        vfs_s_free_fh (s, fh);
+    return (-1);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1401,17 +1511,20 @@ vfs_s_retrieve_file (struct vfs_class *me, struct vfs_s_inode *ino)
 
 /* Initialize one of our subclasses - fill common functions */
 void
-vfs_s_init_class (struct vfs_class *vclass, struct vfs_s_subclass *sub)
+vfs_init_class (struct vfs_class *vclass, const char *name, vfs_flags_t flags, const char *prefix)
 {
-    vclass->data = sub;
+    memset (vclass, 0, sizeof (struct vfs_class));
+
+    vclass->name = name;
+    vclass->flags = flags;
+    vclass->prefix = prefix;
+
     vclass->fill_names = vfs_s_fill_names;
     vclass->open = vfs_s_open;
     vclass->close = vfs_s_close;
     vclass->read = vfs_s_read;
-    if (!(sub->flags & VFS_S_READONLY))
-    {
+    if ((vclass->flags & VFSF_READONLY) == 0)
         vclass->write = vfs_s_write;
-    }
     vclass->opendir = vfs_s_opendir;
     vclass->readdir = vfs_s_readdir;
     vclass->closedir = vfs_s_closedir;
@@ -1425,17 +1538,36 @@ vfs_s_init_class (struct vfs_class *vclass, struct vfs_s_subclass *sub)
     vclass->getid = vfs_s_getid;
     vclass->nothingisopen = vfs_s_nothingisopen;
     vclass->free = vfs_s_free;
-    if ((sub->flags & VFS_S_USETMP) != 0)
+    vclass->setctl = vfs_s_setctl;
+    if ((vclass->flags & VFSF_USETMP) != 0)
     {
         vclass->getlocalcopy = vfs_s_getlocalcopy;
         vclass->ungetlocalcopy = vfs_s_ungetlocalcopy;
-        sub->find_entry = vfs_s_find_entry_linear;
     }
-    else if ((sub->flags & VFS_S_REMOTE) != 0)
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+vfs_init_subclass (struct vfs_s_subclass *sub, const char *name, vfs_flags_t flags,
+                   const char *prefix)
+{
+    struct vfs_class *vclass = VFS_CLASS (sub);
+    size_t len;
+    char *start;
+
+    vfs_init_class (vclass, name, flags, prefix);
+
+    len = sizeof (struct vfs_s_subclass) - sizeof (struct vfs_class);
+    start = (char *) sub + sizeof (struct vfs_class);
+    memset (start, 0, len);
+
+    if ((vclass->flags & VFSF_USETMP) != 0)
+        sub->find_entry = vfs_s_find_entry_linear;
+    else if ((vclass->flags & VFSF_REMOTE) != 0)
         sub->find_entry = vfs_s_find_entry_linear;
     else
         sub->find_entry = vfs_s_find_entry_tree;
-    vclass->setctl = vfs_s_setctl;
     sub->dir_uptodate = vfs_s_dir_uptodate;
 }
 
@@ -1464,13 +1596,14 @@ vfs_s_select_on_two (int fd1, int fd2)
     fd_set set;
     struct timeval time_out;
     int v;
-    int maxfd = (fd1 > fd2 ? fd1 : fd2) + 1;
+    int maxfd = MAX (fd1, fd2) + 1;
 
     time_out.tv_sec = 1;
     time_out.tv_usec = 0;
     FD_ZERO (&set);
     FD_SET (fd1, &set);
     FD_SET (fd2, &set);
+
     v = select (maxfd, &set, 0, 0, &time_out);
     if (v <= 0)
         return v;
@@ -1478,7 +1611,7 @@ vfs_s_select_on_two (int fd1, int fd2)
         return 1;
     if (FD_ISSET (fd2, &set))
         return 2;
-    return -1;
+    return (-1);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1486,7 +1619,7 @@ vfs_s_select_on_two (int fd1, int fd2)
 int
 vfs_s_get_line (struct vfs_class *me, int sock, char *buf, int buf_len, char term)
 {
-    FILE *logfile = MEDATA->logfile;
+    FILE *logfile = me->logfile;
     int i;
     char c;
 
@@ -1494,30 +1627,34 @@ vfs_s_get_line (struct vfs_class *me, int sock, char *buf, int buf_len, char ter
     {
         if (read (sock, buf, sizeof (char)) <= 0)
             return 0;
-        if (logfile)
+
+        if (logfile != NULL)
         {
             size_t ret1;
             int ret2;
+
             ret1 = fwrite (buf, 1, 1, logfile);
             ret2 = fflush (logfile);
             (void) ret1;
             (void) ret2;
         }
+
         if (*buf == term)
         {
-            *buf = 0;
+            *buf = '\0';
             return 1;
         }
     }
 
     /* Line is too long - terminate buffer and discard the rest of line */
-    *buf = 0;
+    *buf = '\0';
     while (read (sock, &c, sizeof (c)) > 0)
     {
-        if (logfile)
+        if (logfile != NULL)
         {
             size_t ret1;
             int ret2;
+
             ret1 = fwrite (&c, 1, 1, logfile);
             ret2 = fflush (logfile);
             (void) ret1;
@@ -1584,17 +1721,22 @@ vfs_s_normalize_filename_leading_spaces (struct vfs_s_inode *root_inode, size_t 
 {
     GList *iter;
 
-    for (iter = root_inode->subdir; iter != NULL; iter = g_list_next (iter))
+    for (iter = g_queue_peek_head_link (root_inode->subdir); iter != NULL;
+         iter = g_list_next (iter))
     {
-        struct vfs_s_entry *entry = (struct vfs_s_entry *) iter->data;
+        struct vfs_s_entry *entry = VFS_ENTRY (iter->data);
+
         if ((size_t) entry->ino->data_offset > final_num_spaces)
         {
-            char *source_name = entry->name;
-            char *spacer = g_strnfill (entry->ino->data_offset - final_num_spaces, ' ');
-            entry->name = g_strdup_printf ("%s%s", spacer, source_name);
+            char *source_name, *spacer;
+
+            source_name = entry->name;
+            spacer = g_strnfill (entry->ino->data_offset - final_num_spaces, ' ');
+            entry->name = g_strconcat (spacer, source_name, (char *) NULL);
             g_free (spacer);
             g_free (source_name);
         }
+
         entry->ino->data_offset = -1;
     }
 }

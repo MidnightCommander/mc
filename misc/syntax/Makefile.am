@@ -13,17 +13,19 @@ SYNTAXFILES =			\
 	cabal.syntax		\
 	changelog.syntax	\
 	cmake.syntax		\
+	cobol.syntax		\
 	cs.syntax		\
 	css.syntax		\
 	cuda.syntax		\
 	cxx.syntax		\
+	cython.syntax		\
 	d.syntax		\
-	dlink.syntax		\
 	debian-changelog.syntax	\
 	debian-control.syntax	\
 	debian-description.syntax	\
 	debian-sources-list.syntax	\
 	diff.syntax		\
+	dlink.syntax		\
 	dos.syntax		\
 	ebuild.syntax		\
 	eiffel.syntax		\
@@ -34,6 +36,7 @@ SYNTAXFILES =			\
 	glsl.syntax		\
 	go.syntax		\
 	haskell.syntax		\
+	hive.syntax		\
 	html.syntax		\
 	idl.syntax		\
 	ini.syntax		\
@@ -41,6 +44,7 @@ SYNTAXFILES =			\
 	jal.syntax		\
 	java.syntax		\
 	js.syntax		\
+	kotlin.syntax		\
 	latex.syntax		\
 	lisp.syntax		\
 	lkr.syntax		\
@@ -49,11 +53,15 @@ SYNTAXFILES =			\
 	m4.syntax		\
 	mail.syntax		\
 	makefile.syntax		\
+	markdown.syntax		\
 	ml.syntax		\
+	meson.syntax		\
 	named.syntax		\
 	nemerle.syntax		\
 	nroff.syntax		\
 	octave.syntax		\
+	opencl.syntax		\
+	osl.syntax		\
 	pascal.syntax		\
 	perl.syntax		\
 	php.syntax		\
@@ -61,10 +69,12 @@ SYNTAXFILES =			\
 	povray.syntax		\
 	procmail.syntax		\
 	properties.syntax	\
+	protobuf.syntax		\
 	puppet.syntax		\
 	python.syntax		\
-	cython.syntax		\
+	r.syntax		\
 	ruby.syntax		\
+	rust.syntax		\
 	sh.syntax		\
 	slang.syntax		\
 	smalltalk.syntax	\
@@ -75,11 +85,14 @@ SYNTAXFILES =			\
 	syntax.syntax		\
 	tcl.syntax		\
 	texinfo.syntax		\
+	ts.syntax		\
 	tt.syntax		\
 	unknown.syntax		\
 	verilog.syntax		\
 	vhdl.syntax		\
 	xml.syntax		\
+	yabasic.syntax		\
+	yaml.syntax		\
 	yum-repo.syntax		\
 	yxx.syntax
 

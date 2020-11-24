@@ -8,7 +8,7 @@
 #
 
 # Define which archiver you are using with appropriate options
-ARC_LIST="arc v"
+ARC_LIST=${MC_TEST_EXTFS_LIST_CMD:-"arc v"}
 ARC_GET="arc x"
 ARC_PUT="arc a"
 ARC_DEL="arc d"
@@ -24,7 +24,13 @@ mc_arc_fs_list()
         fi
     fi
     $ARC_LIST "$1" | @AWK@ -v uid=$UID '
-BEGIN { }
+BEGIN {
+  # Copied from uzoo.in.
+  split("Jan:Feb:Mar:Apr:May:Jun:Jul:Aug:Sep:Oct:Nov:Dec", month_list, ":")
+  for (i=1; i<=12; i++) {
+    month[month_list[i]] = i
+  }
+}
 /^Name/ { next }
 /===/ { next }
 /^Total/ { next }
@@ -45,7 +51,7 @@ BEGIN { }
                 a[2]=substr(a[2],1,2)
         }
 
-        printf "-rw-r--r--   1 %-8d %-8d %8d %s %2d %4d %02d:%02d %s\n", uid, 0, $2, $7, $6, $8, a[1], a[2], $1
+        printf "-rw-r--r--   1 %-8d %-8d %8d %02d-%02d-%04d %02d:%02d %s\n", uid, 0, $2, month[$7], $6, $8, a[1], a[2], $1
 }' 2>/dev/null
     exit 0
 }

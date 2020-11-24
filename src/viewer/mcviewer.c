@@ -2,7 +2,7 @@
    Internal file viewer for the Midnight Commander
    Interface functions
 
-   Copyright (C) 1994-2016
+   Copyright (C) 1994-2020
    Free Software Foundation, Inc
 
    Written by:
@@ -43,29 +43,34 @@
 #include "lib/util.h"           /* load_file_position() */
 #include "lib/widget.h"
 
-#include "src/filemanager/layout.h"     /* menubar_visible */
+#include "src/filemanager/layout.h"
 #include "src/filemanager/midnight.h"   /* the_menubar */
 
 #include "internal.h"
 
 /*** global variables ****************************************************************************/
 
-int mcview_default_hex_mode = 0;
-int mcview_default_nroff_flag = 0;
-int mcview_global_wrap_mode = 1;
-int mcview_default_magic_flag = 1;
+mcview_mode_flags_t mcview_global_flags = {
+    .wrap = TRUE,
+    .hex = FALSE,
+    .magic = TRUE,
+    .nroff = FALSE
+};
 
-int mcview_altered_hex_mode = 0;
-int mcview_altered_magic_flag = 0;
-int mcview_altered_nroff_flag = 0;
+mcview_mode_flags_t mcview_altered_flags = {
+    .wrap = FALSE,
+    .hex = FALSE,
+    .magic = FALSE,
+    .nroff = FALSE
+};
 
-int mcview_remember_file_position = FALSE;
+gboolean mcview_remember_file_position = FALSE;
 
 /* Maxlimit for skipping updates */
 int mcview_max_dirt_limit = 10;
 
 /* Scrolling is done in pages or line increments */
-int mcview_mouse_move_pages = 1;
+gboolean mcview_mouse_move_pages = TRUE;
 
 /* end of file will be showen from mcview_show_eof */
 char *mcview_show_eof = NULL;
@@ -106,10 +111,10 @@ mcview_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
                 change_panel ();
             }
         }
-        /* fall throught */
+        MC_FALLTHROUGH;
 
     case MSG_MOUSE_CLICK:
-        if (!view->text_wrap_mode)
+        if (!view->mode_flags.wrap)
         {
             /* Scrolling left and right */
             screen_dimen x;
@@ -196,27 +201,26 @@ mcview_new (int y, int x, int lines, int cols, gboolean is_panel)
     w = WIDGET (view);
     widget_init (w, y, x, lines, cols, mcview_callback, mcview_mouse_callback);
     w->options |= WOP_SELECTABLE | WOP_TOP_SELECT;
+    w->keymap = viewer_map;
 
-    view->hex_mode = FALSE;
+    mcview_clear_mode_flags (&view->mode_flags);
     view->hexedit_mode = FALSE;
-    view->locked = FALSE;
+    view->hex_keymap = viewer_hex_map;
     view->hexview_in_text = FALSE;
-    view->text_nroff_mode = FALSE;
-    view->text_wrap_mode = FALSE;
-    view->magic_mode = FALSE;
+    view->locked = FALSE;
 
     view->dpy_frame_size = is_panel ? 1 : 0;
     view->converter = str_cnv_from_term;
 
     mcview_init (view);
 
-    if (mcview_default_hex_mode)
+    if (mcview_global_flags.hex)
         mcview_toggle_hex_mode (view);
-    if (mcview_default_nroff_flag)
+    if (mcview_global_flags.nroff)
         mcview_toggle_nroff_mode (view);
-    if (mcview_global_wrap_mode)
+    if (mcview_global_flags.wrap)
         mcview_toggle_wrap_mode (view);
-    if (mcview_default_magic_flag)
+    if (mcview_global_flags.magic)
         mcview_toggle_magic_mode (view);
 
     return view;
@@ -232,16 +236,22 @@ mcview_viewer (const char *command, const vfs_path_t * file_vpath, int start_lin
     gboolean succeeded;
     WView *lc_mcview;
     WDialog *view_dlg;
+    Widget *vw, *b;
+    WGroup *g;
 
     /* Create dialog and widgets, put them on the dialog */
     view_dlg = dlg_create (FALSE, 0, 0, 1, 1, WPOS_FULLSCREEN, FALSE, NULL, mcview_dialog_callback,
                            NULL, "[Internal File Viewer]", NULL);
-    widget_want_tab (WIDGET (view_dlg), TRUE);
+    vw = WIDGET (view_dlg);
+    widget_want_tab (vw, TRUE);
 
-    lc_mcview = mcview_new (0, 0, LINES - 1, COLS, FALSE);
-    add_widget (view_dlg, lc_mcview);
+    g = GROUP (view_dlg);
 
-    add_widget (view_dlg, buttonbar_new (TRUE));
+    lc_mcview = mcview_new (vw->y, vw->x, vw->lines - 1, vw->cols, FALSE);
+    group_add_widget_autopos (g, lc_mcview, WPOS_KEEP_ALL, NULL);
+
+    b = WIDGET (buttonbar_new (TRUE));
+    group_add_widget_autopos (g, b, b->pos_flags, NULL);
 
     view_dlg->get_title = mcview_get_title;
 
@@ -254,7 +264,7 @@ mcview_viewer (const char *command, const vfs_path_t * file_vpath, int start_lin
     else
         dlg_stop (view_dlg);
 
-    if (widget_get_state (WIDGET (view_dlg), WST_CLOSED))
+    if (widget_get_state (vw, WST_CLOSED))
         dlg_destroy (view_dlg);
 
     return succeeded;
@@ -271,9 +281,7 @@ mcview_load (WView * view, const char *command, const char *file, int start_line
     gboolean retval = FALSE;
     vfs_path_t *vpath = NULL;
 
-#ifdef HAVE_ASSERT_H
-    assert (view->bytes_per_line != 0);
-#endif
+    g_assert (view->bytes_per_line != 0);
 
     view->filename_vpath = vfs_path_from_str (file);
 
@@ -306,9 +314,11 @@ mcview_load (WView * view, const char *command, const char *file, int start_line
     if (!mcview_is_in_panel (view))
         view->dpy_text_column = 0;
 
+#ifdef HAVE_CHARSET
     mcview_set_codeset (view);
+#endif
 
-    if (command != NULL && (view->magic_mode || file == NULL || file[0] == '\0'))
+    if (command != NULL && (view->mode_flags.magic || file == NULL || file[0] == '\0'))
         retval = mcview_load_command_output (view, command);
     else if (file != NULL && file[0] != '\0')
     {
@@ -366,7 +376,7 @@ mcview_load (WView * view, const char *command, const char *file, int start_line
         }
         else
         {
-            if (view->magic_mode)
+            if (view->mode_flags.magic)
             {
                 int type;
 
@@ -428,7 +438,7 @@ mcview_load (WView * view, const char *command, const char *file, int start_line
             new_offset = 0;
         else
             new_offset = MIN (new_offset, max_offset);
-        if (!view->hex_mode)
+        if (!view->mode_flags.hex)
         {
             view->dpy_start = mcview_bol (view, new_offset, 0);
             view->dpy_wrap_dirty = TRUE;

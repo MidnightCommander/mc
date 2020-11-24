@@ -61,21 +61,22 @@
 #define MC_TREESTORE_FILE       "Tree"
 #define MC_PANELS_FILE          "panels.ini"
 #define MC_FHL_INI_FILE         "filehighlight.ini"
-#define MC_SKINS_SUBDIR         "skins"
+
+#define MC_SKINS_DIR            "skins"
 
 /* editor home directory */
-#define EDIT_DIR                "mcedit"
+#define EDIT_HOME_DIR           "mcedit"
 
 /* file names */
-#define MC_EXTMACRO_FILE        EDIT_DIR PATH_SEP_STR "macros.d" PATH_SEP_STR "macro"
-#define EDIT_SYNTAX_FILE        EDIT_DIR PATH_SEP_STR "Syntax"
-#define EDIT_CLIP_FILE          EDIT_DIR PATH_SEP_STR "mcedit.clip"
-#define EDIT_BLOCK_FILE         EDIT_DIR PATH_SEP_STR "mcedit.block"
-#define EDIT_TEMP_FILE          EDIT_DIR PATH_SEP_STR "mcedit.temp"
+#define EDIT_HOME_MACRO_FILE    EDIT_HOME_DIR PATH_SEP_STR "macros.d" PATH_SEP_STR "macro"
+#define EDIT_HOME_SYNTAX_FILE   EDIT_HOME_DIR PATH_SEP_STR "Syntax"
+#define EDIT_HOME_CLIP_FILE     EDIT_HOME_DIR PATH_SEP_STR "mcedit.clip"
+#define EDIT_HOME_BLOCK_FILE    EDIT_HOME_DIR PATH_SEP_STR "mcedit.block"
+#define EDIT_HOME_TEMP_FILE     EDIT_HOME_DIR PATH_SEP_STR "mcedit.temp"
 
 #define EDIT_GLOBAL_MENU        "mcedit.menu"
 #define EDIT_LOCAL_MENU         ".cedit.menu"
-#define EDIT_HOME_MENU          EDIT_DIR PATH_SEP_STR "menu"
+#define EDIT_HOME_MENU          EDIT_HOME_DIR PATH_SEP_STR "menu"
 
 /*** enums ***************************************************************************************/
 

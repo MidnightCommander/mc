@@ -33,8 +33,19 @@ source "${MC_SOURCE_ROOT_DIR}/maint/utils/sync-transifex/functions"
 
 #*** file scope functions **********************************************
 
-removeExtraBackSlash() {
+processHintFiles() {
+
+    # Remove extra backslash
     sed -i -e 's/\\-/-/g' ${MC_SOURCE_ROOT_DIR}/doc/hints/l10n/mc.hint.*
+
+    # Remove extra line breaks
+    for fn in ${MC_SOURCE_ROOT_DIR}/doc/hints/l10n/mc.hint.*; do
+        awk '/^$/ { print "\n"; } /./ { printf("%s ", $0); } END { print; }' $fn > $fn.tmp
+        sed -e 's/[[:space:]]*$//' < $fn.tmp > $fn
+        perl -i -0pe 's/\n+\Z/\n/' $fn
+        rm $fn.tmp
+    done
+
 }
 
 #*** main code *********************************************************
@@ -47,4 +58,4 @@ createPo4A "mc.hint"
 
 convertFromPoToText "${WORK_DIR}" "mc.hint"
 
-removeExtraBackSlash
+processHintFiles

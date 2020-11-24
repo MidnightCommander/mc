@@ -1,7 +1,7 @@
 /*
    Proxy functions for getting access to public variables into 'filemanager' module.
 
-   Copyright (C) 2015-2016
+   Copyright (C) 2015-2020
    Free Software Foundation, Inc.
 
    Written by:
@@ -24,10 +24,14 @@
  */
 
 #include <config.h>
-#include <sys/wait.h>
+
+#include <signal.h>             /* kill() */
+#include <sys/types.h>
+#include <sys/wait.h>           /* waitpid() */
 
 #include "lib/global.h"
-#include "lib/widget.h"
+
+#include "lib/vfs/vfs.h"        /* vfs_get_raw_current_dir() */
 
 #include "src/setup.h"          /* quit */
 #include "src/filemanager/midnight.h"   /* current_panel */
@@ -54,9 +58,12 @@
 /* --------------------------------------------------------------------------------------------- */
 
 const vfs_path_t *
-subshell_get_cwd_from_current_panel (void)
+subshell_get_cwd (void)
 {
-    return current_panel->cwd_vpath;
+    if (mc_global.mc_run_mode == MC_RUN_FULL)
+        return current_panel->cwd_vpath;
+
+    return vfs_get_raw_current_dir ();
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -69,7 +76,6 @@ subshell_handle_cons_saver (void)
     pid_t pid;
 
     pid = waitpid (cons_saver_pid, &status, WUNTRACED | WNOHANG);
-    waitpid (cons_saver_pid, &status, WUNTRACED | WNOHANG);
 
     if (pid == cons_saver_pid)
     {

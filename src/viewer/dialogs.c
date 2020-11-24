@@ -2,7 +2,7 @@
    Internal file viewer for the Midnight Commander
    Function for paint dialogs
 
-   Copyright (C) 1994-2016
+   Copyright (C) 1994-2020
    Free Software Foundation, Inc.
 
    Written by:
@@ -78,7 +78,7 @@ mcview_dialog_search (WView * view)
 {
     char *exp = NULL;
     int qd_result;
-    size_t num_of_types;
+    size_t num_of_types = 0;
     gchar **list_of_types;
 
     list_of_types = mc_search_get_types_strings_array (&num_of_types);
@@ -128,11 +128,8 @@ mcview_dialog_search (WView * view)
         GString *tmp;
 
         tmp = str_convert_to_input (exp);
-        if (tmp != NULL)
-        {
-            g_free (exp);
-            exp = g_string_free (tmp, FALSE);
-        }
+        g_free (exp);
+        exp = g_string_free (tmp, FALSE);
     }
 #endif
 
@@ -247,17 +244,29 @@ mcview_dialog_goto (WView * view, off_t * offset)
             case MC_VIEW_GOTO_PERCENT:
                 if (addr > 100)
                     addr = 100;
+                /* read all data from pipe to get real size */
+                if (view->growbuf_in_use)
+                    mcview_growbuf_read_all_data (view);
                 *offset = addr * mcview_get_filesize (view) / 100;
-                if (!view->hex_mode)
+                if (!view->mode_flags.hex)
                     *offset = mcview_bol (view, *offset, 0);
                 break;
             case MC_VIEW_GOTO_OFFSET_DEC:
             case MC_VIEW_GOTO_OFFSET_HEX:
-                *offset = addr;
-                if (!view->hex_mode)
-                    *offset = mcview_bol (view, *offset, 0);
+                if (!view->mode_flags.hex)
+                {
+                    if (view->growbuf_in_use)
+                        mcview_growbuf_read_until (view, addr);
+
+                    *offset = mcview_bol (view, addr, 0);
+                }
                 else
                 {
+                    /* read all data from pipe to get real size */
+                    if (view->growbuf_in_use)
+                        mcview_growbuf_read_all_data (view);
+
+                    *offset = addr;
                     addr = mcview_get_filesize (view);
                     if (*offset > addr)
                         *offset = addr;
@@ -273,3 +282,5 @@ mcview_dialog_goto (WView * view, off_t * offset)
     g_free (exp);
     return res;
 }
+
+/* --------------------------------------------------------------------------------------------- */

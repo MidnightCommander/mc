@@ -1,7 +1,7 @@
 /*
    Virtual File System: GNU Tar file system.
 
-   Copyright (C) 2000-2016
+   Copyright (C) 2000-2020
    Free Software Foundation, Inc.
 
    Written by:
@@ -52,23 +52,19 @@
 
 /*** file scope macro definitions ****************************************************************/
 
+#define CPIO_SUPER(super) ((cpio_super_t *) (super))
+
 #define CPIO_POS(super) cpio_position
 /* If some time reentrancy should be needed change it to */
 /* #define CPIO_POS(super) (super)->u.arch.fd */
 
-#define CPIO_SEEK_SET(super, where) \
-        mc_lseek (((cpio_super_data_t *)(super)->data)->fd, \
-                  CPIO_POS(super) = (where), SEEK_SET)
-#define CPIO_SEEK_CUR(super, where) \
-        mc_lseek (((cpio_super_data_t *)(super)->data)->fd, \
-                  CPIO_POS(super) += (where), SEEK_SET)
+#define CPIO_SEEK_SET(super, where) mc_lseek (CPIO_SUPER(super)->fd, CPIO_POS(super) = (where), SEEK_SET)
+#define CPIO_SEEK_CUR(super, where) mc_lseek (CPIO_SUPER(super)->fd, CPIO_POS(super) += (where), SEEK_SET)
 
 #define MAGIC_LENGTH (6)        /* How many bytes we have to read ahead */
 #define SEEKBACK CPIO_SEEK_CUR(super, ptr - top)
-#define RETURN(x) return (((cpio_super_data_t *)super->data)->type = (x))
-#define TYPEIS(x) \
-        ((((cpio_super_data_t *)super->data)->type == CPIO_UNKNOWN) || \
-         (((cpio_super_data_t *)super->data)->type == (x)))
+#define RETURN(x) return (CPIO_SUPER(super)->type = (x))
+#define TYPEIS(x) ((CPIO_SUPER(super)->type == CPIO_UNKNOWN) || (CPIO_SUPER(super)->type == (x)))
 
 #define HEAD_LENGTH (26)
 
@@ -135,18 +131,22 @@ typedef struct
 
 typedef struct
 {
+    struct vfs_s_super base;    /* base class */
+
     int fd;
     struct stat st;
     int type;                   /* Type of the archive */
     GSList *deferred;           /* List of inodes for which another entries may appear */
-} cpio_super_data_t;
+} cpio_super_t;
 
 /*** file scope variables ************************************************************************/
 
-static struct vfs_class vfs_cpiofs_ops;
+static struct vfs_s_subclass cpio_subclass;
+static struct vfs_class *vfs_cpiofs_ops = VFS_CLASS (&cpio_subclass);
 
 static off_t cpio_position;
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -172,7 +172,7 @@ cpio_defer_find (const void *a, const void *b)
 static ssize_t
 cpio_skip_padding (struct vfs_s_super *super)
 {
-    switch (((cpio_super_data_t *) super->data)->type)
+    switch (CPIO_SUPER (super)->type)
     {
     case CPIO_BIN:
     case CPIO_BINRE:
@@ -190,22 +190,35 @@ cpio_skip_padding (struct vfs_s_super *super)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static struct vfs_s_super *
+cpio_new_archive (struct vfs_class *me)
+{
+    cpio_super_t *arch;
+
+    arch = g_new0 (cpio_super_t, 1);
+    arch->base.me = me;
+    arch->fd = -1;              /* for now */
+    arch->type = CPIO_UNKNOWN;
+
+    return VFS_SUPER (arch);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 cpio_free_archive (struct vfs_class *me, struct vfs_s_super *super)
 {
-    cpio_super_data_t *arch = (cpio_super_data_t *) super->data;
+    cpio_super_t *arch = CPIO_SUPER (super);
 
     (void) me;
 
-    if (super->data == NULL)
-        return;
-
     if (arch->fd != -1)
+    {
         mc_close (arch->fd);
-    arch->fd = -1;
-    g_slist_free_full (arch->deferred, g_free);
-    arch->deferred = NULL;
-    MC_PTR_FREE (super->data);
+        arch->fd = -1;
+    }
+
+    g_clear_slist (&arch->deferred, g_free);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -214,7 +227,7 @@ static int
 cpio_open_cpio_file (struct vfs_class *me, struct vfs_s_super *super, const vfs_path_t * vpath)
 {
     int fd, type;
-    cpio_super_data_t *arch;
+    cpio_super_t *arch;
     mode_t mode;
     struct vfs_s_inode *root;
 
@@ -226,12 +239,8 @@ cpio_open_cpio_file (struct vfs_class *me, struct vfs_s_super *super, const vfs_
     }
 
     super->name = g_strdup (vfs_path_as_str (vpath));
-    super->data = g_new (cpio_super_data_t, 1);
-    arch = (cpio_super_data_t *) super->data;
-    arch->fd = -1;              /* for now */
+    arch = CPIO_SUPER (super);
     mc_stat (vpath, &arch->st);
-    arch->type = CPIO_UNKNOWN;
-    arch->deferred = NULL;
 
     type = get_compression_type (fd, super->name);
     if (type == COMPRESSION_NONE)
@@ -265,7 +274,7 @@ cpio_open_cpio_file (struct vfs_class *me, struct vfs_s_super *super, const vfs_
     root->st.st_mode = mode;
     root->data_offset = -1;
     root->st.st_nlink++;
-    root->st.st_dev = MEDATA->rdev++;
+    root->st.st_dev = VFS_SUBCLASS (me)->rdev++;
 
     super->root = root;
 
@@ -302,7 +311,7 @@ cpio_read_head (struct vfs_class *me, struct vfs_s_super *super)
 static ssize_t
 cpio_find_head (struct vfs_class *me, struct vfs_s_super *super)
 {
-    cpio_super_data_t *arch = (cpio_super_data_t *) super->data;
+    cpio_super_t *arch = CPIO_SUPER (super);
     char buf[BUF_SMALL * 2];
     ssize_t ptr = 0;
     ssize_t top;
@@ -366,7 +375,7 @@ cpio_find_head (struct vfs_class *me, struct vfs_s_super *super)
 static int
 cpio_create_entry (struct vfs_class *me, struct vfs_s_super *super, struct stat *st, char *name)
 {
-    cpio_super_data_t *arch = (cpio_super_data_t *) super->data;
+    cpio_super_t *arch = CPIO_SUPER (super);
     struct vfs_s_inode *inode = NULL;
     struct vfs_s_inode *root = super->root;
     struct vfs_s_entry *entry = NULL;
@@ -388,6 +397,7 @@ cpio_create_entry (struct vfs_class *me, struct vfs_s_super *super, struct stat 
         /* cppcheck-suppress syntaxError */
     case S_IFNAM:
 #endif
+#ifdef HAVE_STRUCT_STAT_ST_RDEV
         if ((st->st_size != 0) && (st->st_rdev == 0x0001))
         {
             /* FIXME: representation of major/minor differs between */
@@ -395,6 +405,7 @@ cpio_create_entry (struct vfs_class *me, struct vfs_s_super *super, struct stat 
             st->st_rdev = (unsigned) st->st_size;
             st->st_size = 0;
         }
+#endif
         break;
     default:
         break;
@@ -441,7 +452,7 @@ cpio_create_entry (struct vfs_class *me, struct vfs_s_super *super, struct stat 
         tn++;
     }
 
-    entry = MEDATA->find_entry (me, root, tn, LINK_FOLLOW, FL_NONE);    /* In case entry is already there */
+    entry = VFS_SUBCLASS (me)->find_entry (me, root, tn, LINK_FOLLOW, FL_NONE); /* In case entry is already there */
 
     if (entry != NULL)
     {
@@ -460,9 +471,15 @@ cpio_create_entry (struct vfs_class *me, struct vfs_s_super *super, struct stat 
             entry->ino->st.st_mode = st->st_mode;
             entry->ino->st.st_uid = st->st_uid;
             entry->ino->st.st_gid = st->st_gid;
+#ifdef HAVE_STRUCT_STAT_ST_MTIM
+            entry->ino->st.st_atim = st->st_atim;
+            entry->ino->st.st_mtim = st->st_mtim;
+            entry->ino->st.st_ctim = st->st_ctim;
+#else
             entry->ino->st.st_atime = st->st_atime;
             entry->ino->st.st_mtime = st->st_mtime;
             entry->ino->st.st_ctime = st->st_ctime;
+#endif
         }
 
         g_free (name);
@@ -539,7 +556,7 @@ cpio_read_bin_head (struct vfs_class *me, struct vfs_s_super *super)
         short shorts[HEAD_LENGTH >> 1];
     } u;
 
-    cpio_super_data_t *arch = (cpio_super_data_t *) super->data;
+    cpio_super_t *arch = CPIO_SUPER (super);
     ssize_t len;
     char *name;
     struct stat st;
@@ -583,8 +600,13 @@ cpio_read_bin_head (struct vfs_class *me, struct vfs_s_super *super)
     st.st_nlink = u.buf.c_nlink;
     st.st_uid = u.buf.c_uid;
     st.st_gid = u.buf.c_gid;
+#ifdef HAVE_STRUCT_STAT_ST_RDEV
     st.st_rdev = u.buf.c_rdev;
+#endif
     st.st_size = (u.buf.c_filesizes[0] << 16) | u.buf.c_filesizes[1];
+#ifdef HAVE_STRUCT_STAT_ST_MTIM
+    st.st_atim.tv_nsec = st.st_mtim.tv_nsec = st.st_ctim.tv_nsec = 0;
+#endif
     st.st_atime = st.st_mtime = st.st_ctime = (u.buf.c_mtimes[0] << 16) | u.buf.c_mtimes[1];
 
     return cpio_create_entry (me, super, &st, name);
@@ -598,7 +620,7 @@ cpio_read_bin_head (struct vfs_class *me, struct vfs_s_super *super)
 static ssize_t
 cpio_read_oldc_head (struct vfs_class *me, struct vfs_s_super *super)
 {
-    cpio_super_data_t *arch = (cpio_super_data_t *) super->data;
+    cpio_super_t *arch = CPIO_SUPER (super);
     struct new_cpio_header hd;
     union
     {
@@ -650,8 +672,13 @@ cpio_read_oldc_head (struct vfs_class *me, struct vfs_s_super *super)
     u.st.st_nlink = hd.c_nlink;
     u.st.st_uid = hd.c_uid;
     u.st.st_gid = hd.c_gid;
+#ifdef HAVE_STRUCT_STAT_ST_RDEV
     u.st.st_rdev = hd.c_rdev;
+#endif
     u.st.st_size = hd.c_filesize;
+#ifdef HAVE_STRUCT_STAT_ST_MTIM
+    u.st.st_atim.tv_nsec = u.st.st_mtim.tv_nsec = u.st.st_ctim.tv_nsec = 0;
+#endif
     u.st.st_atime = u.st.st_mtime = u.st.st_ctime = hd.c_mtime;
 
     return cpio_create_entry (me, super, &u.st, name);
@@ -665,7 +692,7 @@ cpio_read_oldc_head (struct vfs_class *me, struct vfs_s_super *super)
 static ssize_t
 cpio_read_crc_head (struct vfs_class *me, struct vfs_s_super *super)
 {
-    cpio_super_data_t *arch = (cpio_super_data_t *) super->data;
+    cpio_super_t *arch = CPIO_SUPER (super);
     struct new_cpio_header hd;
     union
     {
@@ -726,8 +753,13 @@ cpio_read_crc_head (struct vfs_class *me, struct vfs_s_super *super)
     u.st.st_nlink = hd.c_nlink;
     u.st.st_uid = hd.c_uid;
     u.st.st_gid = hd.c_gid;
+#ifdef HAVE_STRUCT_STAT_ST_RDEV
     u.st.st_rdev = makedev (hd.c_rdev, hd.c_rdevmin);
+#endif
     u.st.st_size = hd.c_filesize;
+#ifdef HAVE_STRUCT_STAT_ST_MTIM
+    u.st.st_atim.tv_nsec = u.st.st_mtim.tv_nsec = u.st.st_ctim.tv_nsec = 0;
+#endif
     u.st.st_atime = u.st.st_mtime = u.st.st_ctime = hd.c_mtime;
 
     return cpio_create_entry (me, super, &u.st, name);
@@ -801,16 +833,15 @@ cpio_super_same (const vfs_path_element_t * vpath_element, struct vfs_s_super *p
         return 0;
 
     /* Has the cached archive been changed on the disk? */
-    if (parc->data != NULL
-        && ((cpio_super_data_t *) parc->data)->st.st_mtime < archive_stat->st_mtime)
+    if (parc != NULL && CPIO_SUPER (parc)->st.st_mtime < archive_stat->st_mtime)
     {
         /* Yes, reload! */
-        (*vfs_cpiofs_ops.free) ((vfsid) parc);
-        vfs_rmstamp (&vfs_cpiofs_ops, (vfsid) parc);
+        vfs_cpiofs_ops->free ((vfsid) parc);
+        vfs_rmstamp (vfs_cpiofs_ops, (vfsid) parc);
         return 2;
     }
     /* Hasn't been modified, give it a new timeout */
-    vfs_stamp (&vfs_cpiofs_ops, (vfsid) parc);
+    vfs_stamp (vfs_cpiofs_ops, (vfsid) parc);
     return 1;
 }
 
@@ -819,21 +850,22 @@ cpio_super_same (const vfs_path_element_t * vpath_element, struct vfs_s_super *p
 static ssize_t
 cpio_read (void *fh, char *buffer, size_t count)
 {
-    off_t begin = FH->ino->data_offset;
-    int fd = ((cpio_super_data_t *) FH_SUPER->data)->fd;
-    struct vfs_class *me = FH_SUPER->me;
+    vfs_file_handler_t *file = VFS_FILE_HANDLER (fh);
+    struct vfs_class *me = VFS_FILE_HANDLER_SUPER (fh)->me;
+    int fd = CPIO_SUPER (VFS_FILE_HANDLER_SUPER (fh))->fd;
+    off_t begin = file->ino->data_offset;
     ssize_t res;
 
-    if (mc_lseek (fd, begin + FH->pos, SEEK_SET) != begin + FH->pos)
+    if (mc_lseek (fd, begin + file->pos, SEEK_SET) != begin + file->pos)
         ERRNOR (EIO, -1);
 
-    count = MIN (count, (size_t) (FH->ino->st.st_size - FH->pos));
+    count = MIN (count, (size_t) (file->ino->st.st_size - file->pos));
 
     res = mc_read (fd, buffer, count);
     if (res == -1)
         ERRNOR (errno, -1);
 
-    FH->pos += res;
+    file->pos += res;
     return res;
 }
 
@@ -842,9 +874,8 @@ cpio_read (void *fh, char *buffer, size_t count)
 static int
 cpio_fh_open (struct vfs_class *me, vfs_file_handler_t * fh, int flags, mode_t mode)
 {
+    (void) fh;
     (void) mode;
-
-    fh->data = NULL;
 
     if ((flags & O_ACCMODE) != O_RDONLY)
         ERRNOR (EROFS, -1);
@@ -856,23 +887,19 @@ cpio_fh_open (struct vfs_class *me, vfs_file_handler_t * fh, int flags, mode_t m
 /* --------------------------------------------------------------------------------------------- */
 
 void
-init_cpiofs (void)
+vfs_init_cpiofs (void)
 {
-    static struct vfs_s_subclass cpio_subclass;
-
-    cpio_subclass.flags = VFS_S_READONLY;       /* FIXME: cpiofs used own temp files */
+    /* FIXME: cpiofs used own temp files */
+    vfs_init_subclass (&cpio_subclass, "cpiofs", VFSF_READONLY, "ucpio");
+    vfs_cpiofs_ops->read = cpio_read;
+    vfs_cpiofs_ops->setctl = NULL;
     cpio_subclass.archive_check = cpio_super_check;
     cpio_subclass.archive_same = cpio_super_same;
+    cpio_subclass.new_archive = cpio_new_archive;
     cpio_subclass.open_archive = cpio_open_archive;
     cpio_subclass.free_archive = cpio_free_archive;
     cpio_subclass.fh_open = cpio_fh_open;
-
-    vfs_s_init_class (&vfs_cpiofs_ops, &cpio_subclass);
-    vfs_cpiofs_ops.name = "cpiofs";
-    vfs_cpiofs_ops.prefix = "ucpio";
-    vfs_cpiofs_ops.read = cpio_read;
-    vfs_cpiofs_ops.setctl = NULL;
-    vfs_register_class (&vfs_cpiofs_ops);
+    vfs_register_class (vfs_cpiofs_ops);
 }
 
 /* --------------------------------------------------------------------------------------------- */

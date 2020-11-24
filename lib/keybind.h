@@ -13,10 +13,13 @@
 #define KEYMAP_SECTION_MAIN_EXT "main:xmap"
 #define KEYMAP_SECTION_PANEL "panel"
 #define KEYMAP_SECTION_DIALOG "dialog"
+#define KEYMAP_SECTION_MENU "menu"
 #define KEYMAP_SECTION_INPUT "input"
 #define KEYMAP_SECTION_LISTBOX "listbox"
+#define KEYMAP_SECTION_RADIO "radio"
 #define KEYMAP_SECTION_TREE "tree"
 #define KEYMAP_SECTION_HELP "help"
+#define KEYMAP_SECTION_CHATTR "chattr"
 #define KEYMAP_SECTION_EDITOR "editor"
 #define KEYMAP_SECTION_EDITOR_EXT "editor:xmap"
 #define KEYMAP_SECTION_VIEWER "viewer"
@@ -66,6 +69,7 @@ enum
     CK_ChangeMode,
     CK_ChangeOwn,
     CK_ChangeOwnAdvanced,
+    CK_ChangeAttributes,
     CK_Remove,
     CK_BackSpace,
     CK_Redo,
@@ -84,6 +88,7 @@ enum
     CK_EditNew,
     CK_Shell,
     CK_SelectCodepage,
+    CK_EditorViewerHistory,
     CK_History,
     CK_HistoryNext,
     CK_HistoryPrev,
@@ -137,7 +142,7 @@ enum
     CK_Find,
     CK_DirSize,
     CK_HotListAdd,
-    CK_PanelListingChange,
+    CK_SetupListingFormat,
     CK_CompareDirs,
     CK_OptionsVfs,
     CK_OptionsConfirm,
@@ -165,7 +170,6 @@ enum
     CK_VfsList,
     CK_SaveSetup,
     CK_LinkSymbolic,
-    CK_PanelListingSwitch,
     CK_ShowHidden,
     CK_PanelTree,
     CK_Tree,
@@ -208,6 +212,7 @@ enum
     CK_SortByMTime,
     CK_ScrollLeft,
     CK_ScrollRight,
+    CK_CycleListingFormat,
 
     /* dialog */
     CK_Ok = 300L,
@@ -226,6 +231,9 @@ enum
 
     /* tree */
     CK_Forget = 450L,
+
+    /* chattr dialog */
+    CK_MarkAndDown = 480L,
 
     /* editor */
     /* cursor movements */
@@ -308,7 +316,7 @@ enum
     CK_InsertLiteral,
     CK_ExternalCommand,
     CK_Date,
-    CK_Mail,
+    CK_EditMail,
 
     /* viewer */
     CK_WrapMode = 600L,
@@ -322,6 +330,7 @@ enum
     CK_SearchBackward,
     CK_SearchForwardContinue,
     CK_SearchBackwardContinue,
+    CK_SearchOppositeContinue,
 
     /* diff viewer */
     CK_ShowSymbols = 700L,

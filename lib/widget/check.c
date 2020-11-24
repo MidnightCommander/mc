@@ -1,7 +1,7 @@
 /*
    Widgets for the Midnight Commander
 
-   Copyright (C) 1994-2016
+   Copyright (C) 1994-2020
    Free Software Foundation, Inc.
 
    Authors:
@@ -73,14 +73,13 @@ check_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
     case MSG_KEY:
         if (parm != ' ')
             return MSG_NOT_HANDLED;
-        c->state ^= C_BOOL;
-        c->state ^= C_CHANGE;
-        widget_redraw (w);
-        send_message (w->owner, w, MSG_NOTIFY, (int) MSG_KEY, NULL);
+        c->state = !c->state;
+        widget_draw (w);
+        send_message (w->owner, w, MSG_NOTIFY, 0, NULL);
         return MSG_HANDLED;
 
     case MSG_CURSOR:
-        widget_move (w, 0, 1);
+        widget_gotoyx (w, 0, 1);
         return MSG_HANDLED;
 
     case MSG_DRAW:
@@ -89,14 +88,14 @@ check_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
 
             focused = widget_get_state (w, WST_FOCUSED);
             widget_selectcolor (w, focused, FALSE);
-            widget_move (w, 0, 0);
-            tty_print_string ((c->state & C_BOOL) ? "[x] " : "[ ] ");
+            widget_gotoyx (w, 0, 0);
+            tty_print_string (c->state ? "[x] " : "[ ] ");
             hotkey_draw (w, c->text, focused);
             return MSG_HANDLED;
         }
 
     case MSG_DESTROY:
-        release_hotkey (c->text);
+        hotkey_free (c->text);
         return MSG_HANDLED;
 
     default:
@@ -132,20 +131,46 @@ check_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 /* --------------------------------------------------------------------------------------------- */
 
 WCheck *
-check_new (int y, int x, int state, const char *text)
+check_new (int y, int x, gboolean state, const char *text)
 {
     WCheck *c;
     Widget *w;
 
     c = g_new (WCheck, 1);
     w = WIDGET (c);
-    c->text = parse_hotkey (text);
+    c->text = hotkey_new (text);
     /* 4 is width of "[X] " */
     widget_init (w, y, x, 1, 4 + hotkey_width (c->text), check_callback, check_mouse_callback);
     w->options |= WOP_SELECTABLE | WOP_WANT_CURSOR | WOP_WANT_HOTKEY;
-    c->state = state ? C_BOOL : 0;
+    c->state = state;
 
     return c;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+check_set_text (WCheck * check, const char *text)
+{
+    Widget *w = WIDGET (check);
+    hotkey_t hk;
+
+    hk = hotkey_new (text);
+    if (hotkey_equal (check->text, hk))
+    {
+        hotkey_free (hk);
+        return;
+    }
+
+    hotkey_free (check->text);
+    check->text = hk;
+
+    if (check->text.start[0] == '\0' && check->text.hotkey == NULL && check->text.end == NULL)
+        w->cols = 3;            /* "[ ]" */
+    else
+        w->cols = 4 + hotkey_width (check->text);       /* "[ ]  text" */
+
+    widget_draw (w);
 }
 
 /* --------------------------------------------------------------------------------------------- */

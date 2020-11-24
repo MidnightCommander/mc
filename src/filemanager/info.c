@@ -1,7 +1,7 @@
 /*
    Panel managing.
 
-   Copyright (C) 1994-2016
+   Copyright (C) 1994-2020
    Free Software Foundation, Inc.
 
    Written by:
@@ -34,6 +34,9 @@
 #include <stdlib.h>
 #include <sys/stat.h>
 #include <inttypes.h>           /* PRIuMAX */
+#ifdef ENABLE_EXT2FS_ATTR
+#include <e2p/e2p.h>            /* fgetflags() */
+#endif
 
 #include "lib/global.h"
 #include "lib/unixcompat.h"
@@ -50,6 +53,10 @@
 #include "midnight.h"           /* the_menubar */
 #include "layout.h"
 #include "mountlist.h"
+#ifdef ENABLE_EXT2FS_ATTR
+#include "cmd.h"                /* chattr_get_as_str() */
+#endif
+
 #include "info.h"
 
 /*** global variables ****************************************************************************/
@@ -88,12 +95,12 @@ info_box (WInfo * info)
     widget_erase (w);
     tty_draw_box (w->y, w->x, w->lines, w->cols, FALSE);
 
-    widget_move (w, 0, (w->cols - len - 2) / 2);
+    widget_gotoyx (w, 0, (w->cols - len - 2) / 2);
     tty_printf (" %s ", title);
 
-    widget_move (w, 2, 0);
+    widget_gotoyx (w, 2, 0);
     tty_print_alt_char (ACS_LTEE, FALSE);
-    widget_move (w, 2, w->cols - 1);
+    widget_gotoyx (w, 2, w->cols - 1);
     tty_print_alt_char (ACS_RTEE, FALSE);
     tty_draw_hline (w->y + 2, w->x + 1, ACS_HLINE, w->cols - 2);
 }
@@ -117,7 +124,7 @@ info_show_info (WInfo * info)
     info_box (info);
 
     tty_setcolor (MARKED_COLOR);
-    widget_move (w, 1, 3);
+    widget_gotoyx (w, 1, 3);
     tty_printf (_("Midnight Commander %s"), VERSION);
 
     if (!info->ready)
@@ -153,9 +160,9 @@ info_show_info (WInfo * info)
         /* Note: all cases are fall-throughs */
 
     default:
-
-    case 16:
-        widget_move (w, 16, 3);
+        MC_FALLTHROUGH;
+    case 17:
+        widget_gotoyx (w, 17, 3);
         if ((myfs_stats.nfree == 0 && myfs_stats.nodes == 0) ||
             (myfs_stats.nfree == (uintmax_t) (-1) && myfs_stats.nodes == (uintmax_t) (-1)))
             tty_print_string (_("No node information"));
@@ -169,9 +176,9 @@ info_show_info (WInfo * info)
                         myfs_stats.nfree, myfs_stats.nodes,
                         myfs_stats.nodes == 0 ? 0 :
                         (int) (100 * (long double) myfs_stats.nfree / myfs_stats.nodes));
-
-    case 15:
-        widget_move (w, 15, 3);
+        MC_FALLTHROUGH;
+    case 16:
+        widget_gotoyx (w, 16, 3);
         if (myfs_stats.avail == 0 && myfs_stats.total == 0)
             tty_print_string (_("No space information"));
         else
@@ -184,47 +191,51 @@ info_show_info (WInfo * info)
                         myfs_stats.total == 0 ? 0 :
                         (int) (100 * (long double) myfs_stats.avail / myfs_stats.total));
         }
-
-    case 14:
-        widget_move (w, 14, 3);
+        MC_FALLTHROUGH;
+    case 15:
+        widget_gotoyx (w, 15, 3);
         tty_printf (_("Type:       %s"),
                     myfs_stats.typename ? myfs_stats.typename : _("non-local vfs"));
         if (myfs_stats.type != 0xffff && myfs_stats.type != -1)
-            tty_printf (" (%Xh)", myfs_stats.type);
-
-    case 13:
-        widget_move (w, 13, 3);
+            tty_printf (" (%Xh)", (unsigned int) myfs_stats.type);
+        MC_FALLTHROUGH;
+    case 14:
+        widget_gotoyx (w, 14, 3);
         str_printf (buff, _("Device:     %s"),
                     str_trunc (myfs_stats.device, w->cols - i18n_adjust));
         tty_print_string (buff->str);
         g_string_set_size (buff, 0);
-    case 12:
-        widget_move (w, 12, 3);
+        MC_FALLTHROUGH;
+    case 13:
+        widget_gotoyx (w, 13, 3);
         str_printf (buff, _("Filesystem: %s"),
                     str_trunc (myfs_stats.mpoint, w->cols - i18n_adjust));
         tty_print_string (buff->str);
         g_string_set_size (buff, 0);
-    case 11:
-        widget_move (w, 11, 3);
+        MC_FALLTHROUGH;
+    case 12:
+        widget_gotoyx (w, 12, 3);
         str_printf (buff, _("Accessed:   %s"), file_date (st.st_atime));
         tty_print_string (buff->str);
         g_string_set_size (buff, 0);
-    case 10:
-        widget_move (w, 10, 3);
+        MC_FALLTHROUGH;
+    case 11:
+        widget_gotoyx (w, 11, 3);
         str_printf (buff, _("Modified:   %s"), file_date (st.st_mtime));
         tty_print_string (buff->str);
         g_string_set_size (buff, 0);
-    case 9:
-        widget_move (w, 9, 3);
+        MC_FALLTHROUGH;
+    case 10:
+        widget_gotoyx (w, 10, 3);
         /* The field st_ctime is changed by writing or by setting inode
            information (i.e., owner, group, link count, mode, etc.).  */
         /* TRANSLATORS: Time of last status change as in stat(2) man. */
         str_printf (buff, _("Changed:    %s"), file_date (st.st_ctime));
         tty_print_string (buff->str);
         g_string_set_size (buff, 0);
-
-    case 8:
-        widget_move (w, 8, 3);
+        MC_FALLTHROUGH;
+    case 9:
+        widget_gotoyx (w, 9, 3);
 #ifdef HAVE_STRUCT_STAT_ST_RDEV
         if (S_ISCHR (st.st_mode) || S_ISBLK (st.st_mode))
             tty_printf (_("Dev. type: major %lu, minor %lu"),
@@ -236,40 +247,65 @@ info_show_info (WInfo * info)
             size_trunc_len (buffer, 9, st.st_size, 0, panels_options.kilobyte_si);
             tty_printf (_("Size:       %s"), buffer);
 #ifdef HAVE_STRUCT_STAT_ST_BLOCKS
-            tty_printf (ngettext (" (%ld block)", " (%ld blocks)",
+            tty_printf (ngettext (" (%lu block)", " (%lu blocks)",
                                   (unsigned long) st.st_blocks), (unsigned long) st.st_blocks);
 #endif
         }
-
-    case 7:
-        widget_move (w, 7, 3);
+        MC_FALLTHROUGH;
+    case 8:
+        widget_gotoyx (w, 8, 3);
         tty_printf (_("Owner:      %s/%s"), get_owner (st.st_uid), get_group (st.st_gid));
-
-    case 6:
-        widget_move (w, 6, 3);
+        MC_FALLTHROUGH;
+    case 7:
+        widget_gotoyx (w, 7, 3);
         tty_printf (_("Links:      %d"), (int) st.st_nlink);
+        MC_FALLTHROUGH;
+    case 6:
+        widget_gotoyx (w, 6, 3);
+#ifdef ENABLE_EXT2FS_ATTR
+        if (!vfs_current_is_local ())
+            tty_print_string (_("Attributes: not supported"));
+        else
+        {
+            vfs_path_t *vpath;
+            unsigned long attr;
 
+            vpath = vfs_path_from_str (current_panel->dir.list[current_panel->selected].fname);
+
+            if (fgetflags (vfs_path_as_str (vpath), &attr) == 0)
+                tty_printf (_("Attributes: %s"), chattr_get_as_str (attr));
+            else
+                tty_print_string (_("Attributes: unavailable"));
+
+            vfs_path_free (vpath);
+        }
+#else
+        tty_print_string (_("Attributes: not supported"));
+#endif
+        MC_FALLTHROUGH;
     case 5:
-        widget_move (w, 5, 3);
+        widget_gotoyx (w, 5, 3);
         tty_printf (_("Mode:       %s (%04o)"),
                     string_perm (st.st_mode), (unsigned) st.st_mode & 07777);
-
+        MC_FALLTHROUGH;
     case 4:
-        widget_move (w, 4, 3);
-        tty_printf (_("Location:   %Xh:%Xh"), (int) st.st_dev, (int) st.st_ino);
-
+        widget_gotoyx (w, 4, 3);
+        tty_printf (_("Location:   %Xh:%Xh"), (unsigned int) st.st_dev, (unsigned int) st.st_ino);
+        MC_FALLTHROUGH;
     case 3:
         {
             const char *fname;
 
-            widget_move (w, 3, 2);
+            widget_gotoyx (w, 3, 2);
             fname = current_panel->dir.list[current_panel->selected].fname;
             str_printf (buff, file_label, str_trunc (fname, w->cols - i18n_adjust));
             tty_print_string (buff->str);
         }
-
+        MC_FALLTHROUGH;
     case 2:
+        MC_FALLTHROUGH;
     case 1:
+        MC_FALLTHROUGH;
     case 0:
         ;
     }                           /* switch */

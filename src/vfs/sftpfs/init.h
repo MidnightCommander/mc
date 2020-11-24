@@ -16,7 +16,7 @@
 
 /*** declarations of public functions ************************************************************/
 
-void init_sftpfs (void);
+void vfs_init_sftpfs (void);
 
 /*** inline functions ****************************************************************************/
 

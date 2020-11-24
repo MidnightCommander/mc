@@ -1,7 +1,7 @@
 /*
    Mouse managing
 
-   Copyright (C) 1994-2016
+   Copyright (C) 1994-2020
    Free Software Foundation, Inc.
 
    Written by:
@@ -90,8 +90,10 @@ init_mouse (void)
 
     case MOUSE_XTERM_NORMAL_TRACKING:
     case MOUSE_XTERM_BUTTON_EVENT_TRACKING:
-        define_sequence (MCKEY_MOUSE, xmouse_seq, MCKEY_NOACTION);
-        define_sequence (MCKEY_EXTENDED_MOUSE, xmouse_extended_seq, MCKEY_NOACTION);
+        if (xmouse_seq != NULL)
+            define_sequence (MCKEY_MOUSE, xmouse_seq, MCKEY_NOACTION);
+        if (xmouse_extended_seq != NULL)
+            define_sequence (MCKEY_EXTENDED_MOUSE, xmouse_extended_seq, MCKEY_NOACTION);
         break;
 
     default:

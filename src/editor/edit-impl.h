@@ -116,8 +116,8 @@ typedef struct edit_stack_type
 /*** global variables defined in .c file *********************************************************/
 
 extern const char VERTICAL_MAGIC[5];
-/* if enable_show_tabs_tws ==1 then use visible_tab visible_tws */
-extern int enable_show_tabs_tws;
+/* if enable_show_tabs_tws == TRUE then use visible_tab visible_tws */
+extern gboolean enable_show_tabs_tws;
 
 extern edit_search_options_t edit_search_options;
 
@@ -127,7 +127,7 @@ extern edit_stack_type edit_history_moveto[MAX_HISTORY_MOVETO];
 extern int option_line_state_width;
 
 extern int option_max_undo;
-extern int option_auto_syntax;
+extern gboolean option_auto_syntax;
 
 extern gboolean search_create_bookmark;
 
@@ -186,6 +186,7 @@ WEdit *edit_init (WEdit * edit, int y, int x, int lines, int cols,
 gboolean edit_clean (WEdit * edit);
 gboolean edit_ok_to_exit (WEdit * edit);
 gboolean edit_load_cmd (WDialog * h);
+gboolean edit_load_file_from_history (WDialog * h);
 gboolean edit_load_syntax_file (WDialog * h);
 gboolean edit_load_menu_file (WDialog * h);
 gboolean edit_close_cmd (WEdit * edit);

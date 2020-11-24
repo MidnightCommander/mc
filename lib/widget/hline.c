@@ -1,7 +1,7 @@
 /*
    Widgets for the Midnight Commander
 
-   Copyright (C) 1994-2016
+   Copyright (C) 1994-2020
    Free Software Foundation, Inc.
 
    Authors:
@@ -34,6 +34,7 @@
 
 #include <config.h>
 
+#include <stdarg.h>
 #include <stdlib.h>
 
 #include "lib/global.h"
@@ -51,48 +52,67 @@
 
 /*** file scope variables ************************************************************************/
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+hline_adjust_cols (WHLine * l)
+{
+    if (l->auto_adjust_cols)
+    {
+        Widget *w = WIDGET (l);
+        Widget *wo = WIDGET (w->owner);
+
+        if (DIALOG (wo)->compact)
+        {
+            w->x = wo->x;
+            w->cols = wo->cols;
+        }
+        else
+        {
+            w->x = wo->x + 1;
+            w->cols = wo->cols - 2;
+        }
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
 hline_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WHLine *l = HLINE (w);
-    WDialog *h = w->owner;
 
     switch (msg)
     {
     case MSG_INIT:
-    case MSG_RESIZE:
-        if (l->auto_adjust_cols)
-        {
-            Widget *wo = WIDGET (h);
+        hline_adjust_cols (l);
+        return MSG_HANDLED;
 
-            if (h->compact)
-            {
-                w->x = wo->x;
-                w->cols = wo->cols;
-            }
-            else
-            {
-                w->x = wo->x + 1;
-                w->cols = wo->cols - 2;
-            }
-        }
+    case MSG_RESIZE:
+        hline_adjust_cols (l);
+        w->y = RECT (data)->y;
         return MSG_HANDLED;
 
     case MSG_DRAW:
         if (l->transparent)
             tty_setcolor (DEFAULT_COLOR);
         else
-            tty_setcolor (h->color[DLG_COLOR_NORMAL]);
+        {
+            const int *colors;
+
+            colors = widget_get_colors (w);
+            tty_setcolor (colors[DLG_COLOR_NORMAL]);
+        }
 
         tty_draw_hline (w->y, w->x + 1, ACS_HLINE, w->cols - 2);
 
         if (l->auto_adjust_cols)
         {
-            widget_move (w, 0, 0);
+            widget_gotoyx (w, 0, 0);
             tty_print_alt_char (ACS_LTEE, FALSE);
-            widget_move (w, 0, w->cols - 1);
+            widget_gotoyx (w, 0, w->cols - 1);
             tty_print_alt_char (ACS_RTEE, FALSE);
         }
 
@@ -101,7 +121,7 @@ hline_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
             int text_width;
 
             text_width = str_term_width1 (l->text);
-            widget_move (w, 0, (w->cols - text_width) / 2);
+            widget_gotoyx (w, 0, (w->cols - text_width) / 2);
             tty_print_string (l->text);
         }
         return MSG_HANDLED;
@@ -148,7 +168,22 @@ hline_set_text (WHLine * l, const char *text)
     else
         l->text = g_strdup (text);
 
-    widget_redraw (WIDGET (l));
+    widget_draw (WIDGET (l));
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+hline_set_textv (WHLine * l, const char *format, ...)
+{
+    va_list args;
+    char buf[BUF_1K];           /* FIXME: is it enough? */
+
+    va_start (args, format);
+    g_vsnprintf (buf, sizeof (buf), format, args);
+    va_end (args);
+
+    hline_set_text (l, buf);
 }
 
 /* --------------------------------------------------------------------------------------------- */

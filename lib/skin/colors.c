@@ -2,7 +2,7 @@
    Skins engine.
    Work with colors
 
-   Copyright (C) 2009-2016
+   Copyright (C) 2009-2020
    Free Software Foundation, Inc.
 
    Written by:
@@ -120,6 +120,61 @@ mc_skin_color_get_with_defaults (const gchar * group, const gchar * name)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* If an alias is found, alloc a new string for the resolved value and free the input parameter.
+   Otherwise it's a no-op returning the original string. */
+static gchar *
+mc_skin_color_look_up_alias (mc_skin_t * mc_skin, gchar * str)
+{
+    gchar *orig, *str2;
+    int hop = 0;
+
+    orig = g_strdup (str);
+    str2 = g_strdup (str);
+
+    while (TRUE)
+    {
+        gchar **values;
+        gsize items_count;
+
+        values = mc_config_get_string_list (mc_skin->config, "aliases", str, &items_count);
+        if (items_count != 1)
+        {
+            /* No such alias declaration found, that is, we've got the resolved value. */
+            g_strfreev (values);
+            g_free (str2);
+            g_free (orig);
+            return str;
+        }
+
+        g_free (str);
+        str = g_strdup (values[0]);
+        g_strfreev (values);
+
+        /* str2 resolves at half speed than str. This is used for loop detection. */
+        if (hop++ % 2 != 0)
+        {
+            values = mc_config_get_string_list (mc_skin->config, "aliases", str2, &items_count);
+            g_assert (items_count == 1);
+            g_free (str2);
+            str2 = g_strdup (values[0]);
+            g_strfreev (values);
+
+            if (strcmp (str, str2) == 0)
+            {
+                /* Loop detected. */
+                fprintf (stderr,
+                         "Loop detected while trying to resolve alias \"%s\" in skin \"%s\"\n",
+                         orig, mc_skin->name);
+                g_free (str);
+                g_free (str2);
+                return orig;
+            }
+        }
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static mc_skin_color_t *
 mc_skin_color_get_from_ini_file (mc_skin_t * mc_skin, const gchar * group, const gchar * key)
 {
@@ -142,11 +197,14 @@ mc_skin_color_get_from_ini_file (mc_skin_t * mc_skin, const gchar * group, const
     }
 
     tmp = mc_skin_color_get_with_defaults (group, "_default_");
-    mc_skin_color->fgcolor = (items_count > 0 && values[0][0]) ? g_strstrip (g_strdup (values[0])) :
+    mc_skin_color->fgcolor = (items_count > 0 && values[0][0]) ?
+        mc_skin_color_look_up_alias (mc_skin, g_strstrip (g_strdup (values[0]))) :
         (tmp != NULL) ? g_strdup (tmp->fgcolor) : NULL;
-    mc_skin_color->bgcolor = (items_count > 1 && values[1][0]) ? g_strstrip (g_strdup (values[1])) :
+    mc_skin_color->bgcolor = (items_count > 1 && values[1][0]) ?
+        mc_skin_color_look_up_alias (mc_skin, g_strstrip (g_strdup (values[1]))) :
         (tmp != NULL) ? g_strdup (tmp->bgcolor) : NULL;
-    mc_skin_color->attrs = (items_count > 2 && values[2][0]) ? g_strstrip (g_strdup (values[2])) :
+    mc_skin_color->attrs = (items_count > 2 && values[2][0]) ?
+        mc_skin_color_look_up_alias (mc_skin, g_strstrip (g_strdup (values[2]))) :
         (tmp != NULL) ? g_strdup (tmp->attrs) : NULL;
 
     g_strfreev (values);
@@ -191,6 +249,7 @@ mc_skin_color_cache_init (void)
     REVERSE_COLOR = mc_skin_color_get ("core", "reverse");
     HEADER_COLOR = mc_skin_color_get ("core", "header");
     COMMAND_MARK_COLOR = mc_skin_color_get ("core", "commandlinemark");
+    SHADOW_COLOR = mc_skin_color_get ("core", "shadow");
 
     COLOR_NORMAL = mc_skin_color_get ("dialog", "_default_");
     COLOR_FOCUS = mc_skin_color_get ("dialog", "dfocus");
@@ -265,7 +324,7 @@ mc_skin_color_cache_init (void)
 static gboolean
 mc_skin_color_check_inisection (const gchar * group)
 {
-    return !((strcasecmp ("skin", group) == 0)
+    return !((strcasecmp ("skin", group) == 0) || (strcasecmp ("aliases", group) == 0)
              || (strcasecmp ("lines", group) == 0) || (strncasecmp ("widget-", group, 7) == 0));
 }
 

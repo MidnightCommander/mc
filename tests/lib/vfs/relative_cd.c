@@ -1,6 +1,6 @@
 /* lib/vfs - test vfs_path_t manipulation functions
 
-   Copyright (C) 2011-2016
+   Copyright (C) 2011-2020
    Free Software Foundation, Inc.
 
    Written by:
@@ -26,6 +26,8 @@
 
 #include "tests/mctest.h"
 
+#include <string.h>             /* memset() */
+
 #include "lib/strutil.h"
 #include "lib/vfs/xdirentry.h"
 #include "lib/vfs/path.h"
@@ -33,8 +35,8 @@
 #include "src/vfs/local/local.c"
 
 
-struct vfs_s_subclass test_subclass1;
-struct vfs_class vfs_test_ops1;
+static struct vfs_s_subclass vfs_test_subclass1;
+static struct vfs_class *vfs_test_ops1 = VFS_CLASS (&vfs_test_subclass1);
 
 static int test_chdir (const vfs_path_t * vpath);
 
@@ -71,25 +73,21 @@ test_chdir__deinit (void)
 static void
 setup (void)
 {
-
+    mc_global.timer = mc_timer_new ();
     str_init_strings (NULL);
 
     vfs_init ();
-    init_localfs ();
+    vfs_init_localfs ();
     vfs_setup_work_dir ();
 
-    test_subclass1.flags = VFS_S_REMOTE;
-    vfs_s_init_class (&vfs_test_ops1, &test_subclass1);
-
-    vfs_test_ops1.name = "testfs1";
-    vfs_test_ops1.flags = VFSF_NOLINKS;
-    vfs_test_ops1.prefix = "test1";
-    vfs_test_ops1.chdir = test_chdir;
-    vfs_register_class (&vfs_test_ops1);
+    memset (&vfs_test_subclass1, 0, sizeof (vfs_test_subclass1));
+    vfs_init_class (vfs_test_ops1, "testfs1", VFSF_NOLINKS | VFSF_REMOTE, "test1");
+    vfs_test_ops1->chdir = test_chdir;
+    vfs_register_class (vfs_test_ops1);
 
     mc_global.sysconfig_dir = (char *) TEST_SHARE_DIR;
 
-    vfs_local_ops.chdir = test_chdir;
+    vfs_local_ops->chdir = test_chdir;
 
     test_chdir__init ();
 }
@@ -104,6 +102,7 @@ teardown (void)
 
     vfs_shut ();
     str_uninit_strings ();
+    mc_timer_destroy (mc_global.timer);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -202,10 +201,16 @@ int
 main (void)
 {
     int number_failed;
+    char *cwd;
 
     Suite *s = suite_create (TEST_SUITE_NAME);
     TCase *tc_core = tcase_create ("Core");
     SRunner *sr;
+
+    /* writable directory where check creates temporary files */
+    cwd = g_get_current_dir ();
+    g_setenv ("TEMP", cwd, TRUE);
+    g_free (cwd);
 
     tcase_add_checked_fixture (tc_core, setup, teardown);
 

@@ -84,6 +84,15 @@ shell_patterns=0
         tar cf - "$Pwd" | xz -f > "$tar.tar.xz" && \
         echo "../$tar.tar.xz created."
 
+7       Compress the current subdirectory (tar.zst)
+        Pwd=`basename %d /`
+        echo -n "Name of the compressed file (without extension) [$Pwd]: "
+        read tar
+        [ "$tar"x = x ] && tar="$Pwd"
+        cd .. && \
+        tar cf - "$Pwd" | zstd -f > "$tar.tar.zst" && \
+        echo "../$tar.tar.zst created."
+
 = f \.c$ & t r
 + f \.c$ & t r & ! t t
 c       Compile and link current .c file
@@ -219,7 +228,7 @@ U       Uudecode marked news articles (needs work)
         fi
         echo "Please test the output file before deleting anything."
 
-=+ f \.tar\.gz$ | f \.tar\.z$ | f \.tgz$ | f \.tpz$ | f \.tar\.lz$ | f \.tar\.lz4$ | f \.tar\.lzma$ | f \.tar\.7z$ | f \.tar\.xz$ | f \.tar\.Z$ | f \.tar\.bz2$ & t r
+=+ f \.tar\.gz$ | f \.tar\.z$ | f \.tgz$ | f \.tpz$ | f \.tar\.lz$ | f \.tar\.lz4$ | f \.tar\.lzma$ | f \.tar\.7z$ | f \.tar\.xz$ | f \.tar\.zst | f \.tar\.Z$ | f \.tar\.bz2$ & t rl
 x       Extract the contents of a compressed tar file
         unset PRG
         case %f in
@@ -230,6 +239,7 @@ x       Extract the contents of a compressed tar file
             *.tar.lz4)  PRG="lz4 -dc";;
             *.tar.lzma) PRG="lzma -dc";;
             *.tar.xz)   PRG="xz -dc";;
+            *.tar.zst)  PRG="zstd -dc";;
             *)          exit 1;;
         esac
         $PRG %f | tar xvf -
@@ -241,7 +251,8 @@ y       Gzip or gunzip current file
         case %f in
             *.gz|*.[zZ]) DECOMP=-d;;
         esac
-        gzip "$DECOMP" -v %f
+        # Do *not* add quotes around $DECOMP!
+        gzip $DECOMP -v %f
 
 + t t
 Y       Gzip or gunzip tagged files
@@ -250,7 +261,7 @@ Y       Gzip or gunzip tagged files
             case "$i" in
                 *.gz|*.[zZ]) DECOMP=-d;;
             esac
-            gzip "$DECOMP" -v "$i"
+            gzip $DECOMP -v "$i"
         done
 
 + ! t t
@@ -259,7 +270,7 @@ b       Bzip2 or bunzip2 current file
         case %f in
             *.bz2) DECOMP=-d;;
         esac
-        bzip2 "$DECOMP" -v %f
+        bzip2 $DECOMP -v %f
 
 + t t
 B       Bzip2 or bunzip2 tagged files
@@ -268,7 +279,7 @@ B       Bzip2 or bunzip2 tagged files
             case "$i" in
                 *.bz2) DECOMP=-d;;
             esac
-            bzip2 "$DECOMP" -v "$i"
+            bzip2 $DECOMP -v "$i"
         done
 
 + f \.tar.gz$ | f \.tgz$ | f \.tpz$ | f \.tar.Z$ | f \.tar.z$ | f \.tar.bz2$ | f \.tar.F$ & t r & ! t t

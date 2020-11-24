@@ -1,7 +1,7 @@
 /*
    src/filemanager - tests for do_cd_command() function
 
-   Copyright (C) 2011-2016
+   Copyright (C) 2011-2020
    Free Software Foundation, Inc.
 
    Written by:
@@ -80,10 +80,11 @@ mc_config_get_home_dir (void)
 static void
 setup (void)
 {
+    mc_global.timer = mc_timer_new ();
     str_init_strings (NULL);
 
     vfs_init ();
-    init_localfs ();
+    vfs_init_localfs ();
     vfs_setup_work_dir ();
     do_cd__new_dir_vpath__captured = NULL;
 }
@@ -97,6 +98,7 @@ teardown (void)
     vfs_path_free (do_cd__new_dir_vpath__captured);
     vfs_shut ();
     str_uninit_strings ();
+    mc_timer_destroy (mc_global.timer);
 }
 
 /* --------------------------------------------------------------------------------------------- */

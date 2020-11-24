@@ -1,0 +1,178 @@
+# Syntax rules for the C and the C++ programming languages
+#
+# List of keywords is based on opencl-mode.el from
+# Salmane Bah <salmane.bah@u-bordeaux.fr>
+
+context default
+    keyword whole auto yellow
+    keyword whole break yellow
+    keyword whole case yellow
+    keyword whole char yellow
+    keyword whole const yellow
+    keyword whole continue yellow
+    keyword whole do yellow
+    keyword whole double yellow
+    keyword whole else yellow
+    keyword whole enum yellow
+    keyword whole extern yellow
+    keyword whole float yellow
+    keyword whole for yellow
+    keyword whole goto yellow
+    keyword whole if yellow
+    keyword whole int yellow
+    keyword whole long yellow
+    keyword whole register yellow
+    keyword whole return yellow
+    keyword whole short yellow
+    keyword whole signed yellow
+    keyword whole sizeof yellow
+    keyword whole static yellow
+    keyword whole struct yellow
+    keyword whole switch yellow
+    keyword whole typedef yellow
+    keyword whole union yellow
+    keyword whole unsigned yellow
+    keyword whole void yellow
+    keyword whole volatile yellow
+    keyword whole while yellow
+    keyword whole asm yellow
+    keyword whole inline yellow
+    keyword whole wchar_t yellow
+    keyword whole ... yellow
+    keyword whole linestart \{\s\t\}\[\s\t\]#*\n brightmagenta
+    keyword whole \[\s\t\]default yellow
+    keyword whole linestart \[\s\t\]\{ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\}\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\]: cyan
+
+# Function type qualifiers
+    keyword whole __kernel white
+
+# Variable type qualifiers
+    keyword whole __global white
+    keyword whole __local white
+    keyword whole __constant white
+    keyword whole __private white
+    keyword whole __read_only white
+    keyword whole __write_only white
+    keyword whole __read_write white
+    keyword whole __enable white
+    keyword whole __disable white
+    keyword whole global white
+    keyword whole local white
+    keyword whole constant white
+    keyword whole private white
+    keyword whole read_only white
+    keyword whole write_only white
+    keyword whole read_write white
+    keyword whole enable white
+    keyword whole disable white
+
+# Built-in functions
+    keyword whole get_group_id brightmagenta
+    keyword whole get_local_id brightmagenta
+    keyword whole get_global_id brightmagenta
+    keyword whole get_local_size brightmagenta
+    keyword whole get_global_size brightmagenta
+    keyword whole get_work_dim brightmagenta
+    keyword whole get_num_groups brightmagenta
+    keyword whole get_global_offset brightmagenta
+    keyword whole barrier brightmagenta
+
+# Constants
+    keyword whole CLK_LOCAL_MEM_FENCE white
+    keyword whole CLK_GLOBAL_MEM_FENCE white
+    keyword whole MAXFLOAT white
+    keyword whole HUGE_VAL white
+    keyword whole HUGE_VALF white
+    keyword whole INFINITY white
+    keyword whole NAN white
+
+# Built-in types
+    keyword whole half yellow
+    keyword whole uchar yellow
+    keyword whole ushort yellow
+    keyword whole uint yellow
+    keyword whole ulong yellow
+    keyword whole bool yellow
+    keyword whole size_t yellow
+    keyword whole ptrdiff_t yellow
+    keyword whole intptr_t yellow
+    keyword whole uintptr_t yellow
+
+    keyword whole image2d_t yellow
+    keyword whole image3d_t yellow
+    keyword whole image2d_array_t yellow
+    keyword whole image3d_array_t yellow
+    keyword whole image1d_array_t yellow
+    keyword whole image1d_t yellow
+    keyword whole image1d_buffer_t yellow
+    keyword whole sampler_t yellow
+    keyword whole event_t yellow
+
+    keyword whole cl_khr_\{ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz\}\{ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_\}+ brightgreen
+
+    keyword /\* brown
+    keyword \*/ brown
+    keyword // brown
+
+    keyword '\\\{"abtnvfr\}' brightgreen
+    keyword '\\\{0123\}\{01234567\}\{01234567\}' brightgreen
+    keyword '\\'' brightgreen
+    keyword '\\\\' brightgreen
+    keyword '\\0' brightgreen
+    keyword '\{\s!"#$%&()\*\+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~ ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ\}' brightgreen
+
+# punctuation characters, sorted by ASCII code
+    keyword ! yellow
+    keyword % yellow
+    keyword && yellow
+    keyword & brightmagenta
+    keyword ( brightcyan
+    keyword ) brightcyan
+    keyword \* yellow
+    keyword \+ yellow
+    keyword , brightcyan
+    keyword - yellow
+    keyword / yellow
+    keyword : brightcyan
+    keyword ; brightmagenta
+    keyword < yellow
+    keyword = yellow
+    keyword > yellow
+    keyword ? brightcyan
+    keyword [ brightcyan
+    keyword ] brightcyan
+    keyword ^ brightmagenta
+    keyword { brightcyan
+    keyword || yellow
+    keyword | brightmagenta
+    keyword } brightcyan
+    keyword ~ brightmagenta
+
+context exclusive /\* \*/ brown
+    spellcheck
+
+context exclusive // \n brown
+    spellcheck
+
+context linestart # \n brightred
+    keyword \\\n yellow
+    keyword /\**\*/ brown
+    keyword //*\n brown
+    keyword "+" red
+    keyword <+> red
+
+context " " green
+    spellcheck
+    keyword \\" brightgreen
+    keyword %% brightgreen
+    keyword %\[#0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[L\]\{eEfgGoxX\} brightgreen
+    keyword %\[0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[hl\]\{diuxX\} brightgreen
+    keyword %\[hl\]n brightgreen
+    keyword %\[-\]\[0123456789\*\]\[.\]\[0123456789\*\]s brightgreen
+    keyword %[*] brightgreen
+    keyword %c brightgreen
+    keyword %p brightgreen
+    keyword \\\{0123\}\{01234567\}\{01234567\} brightgreen
+    keyword \\\\ brightgreen
+    keyword \\' brightgreen
+    keyword \\\{abtnvfr\} brightgreen

@@ -71,7 +71,7 @@ git_head=`git --git-dir "${src_top_dir}/.git" rev-parse --verify HEAD 2>/dev/nul
 # try to store sha1
 CURR_MC_VERSION="${git_head}"
 
-new_version=`git --git-dir "${src_top_dir}/.git" describe 2>/dev/null`
+new_version=`git --git-dir "${src_top_dir}/.git" describe --always 2>/dev/null`
 [ -z "${new_version}" ] && mc_print_version
 
 # store pretty tagged version

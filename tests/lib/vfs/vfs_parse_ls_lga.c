@@ -1,7 +1,7 @@
 /*
    lib/vfs - test vfs_parse_ls_lga() functionality
 
-   Copyright (C) 2011-2016
+   Copyright (C) 2011-2020
    Free Software Foundation, Inc.
 
    Written by:
@@ -37,7 +37,7 @@
 
 
 struct vfs_s_subclass test_subclass1;
-struct vfs_class vfs_test_ops1;
+static struct vfs_class *vfs_test_ops1 = VFS_CLASS (&test_subclass1);
 
 struct vfs_s_entry *vfs_root_entry;
 static struct vfs_s_inode *vfs_root_inode;
@@ -55,24 +55,21 @@ setup (void)
 {
     static struct stat initstat;
 
+    mc_global.timer = mc_timer_new ();
     str_init_strings (NULL);
 
     vfs_init ();
-    init_localfs ();
+    vfs_init_localfs ();
     vfs_setup_work_dir ();
 
-    test_subclass1.flags = VFS_S_REMOTE;
-    vfs_s_init_class (&vfs_test_ops1, &test_subclass1);
-    vfs_test_ops1.name = "testfs1";
-    vfs_test_ops1.flags = VFSF_NOLINKS;
-    vfs_test_ops1.prefix = "test1:";
-    vfs_register_class (&vfs_test_ops1);
+    vfs_init_subclass (&test_subclass1, "testfs1", VFSF_NOLINKS | VFSF_REMOTE, "test1");
+    vfs_register_class (vfs_test_ops1);
 
     vfs_test_super = g_new0 (struct vfs_s_super, 1);
-    vfs_test_super->me = &vfs_test_ops1;
+    vfs_test_super->me = vfs_test_ops1;
 
-    vfs_root_inode = vfs_s_new_inode (&vfs_test_ops1, vfs_test_super, &initstat);
-    vfs_root_entry = vfs_s_new_entry (&vfs_test_ops1, "/", vfs_root_inode);
+    vfs_root_inode = vfs_s_new_inode (vfs_test_ops1, vfs_test_super, &initstat);
+    vfs_root_entry = vfs_s_new_entry (vfs_test_ops1, "/", vfs_root_inode);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -81,9 +78,10 @@ setup (void)
 static void
 teardown (void)
 {
-    vfs_s_free_entry (&vfs_test_ops1, vfs_root_entry);
+    vfs_s_free_entry (vfs_test_ops1, vfs_root_entry);
     vfs_shut ();
     str_uninit_strings ();
+    mc_timer_destroy (mc_global.timer);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -110,6 +108,11 @@ message (int flags, const char *title, const char *text, ...)
 static void
 fill_stat_struct (struct stat *etalon_stat, int iterator)
 {
+
+#ifdef HAVE_STRUCT_STAT_ST_MTIM
+    etalon_stat->st_atim.tv_nsec = etalon_stat->st_mtim.tv_nsec = etalon_stat->st_ctim.tv_nsec = 0;
+#endif
+
     switch (iterator)
     {
     case 0:
@@ -119,10 +122,16 @@ fill_stat_struct (struct stat *etalon_stat, int iterator)
         etalon_stat->st_nlink = 10;
         etalon_stat->st_uid = 500;
         etalon_stat->st_gid = 500;
+#ifdef HAVE_STRUCT_STAT_ST_RDEV
         etalon_stat->st_rdev = 0;
+#endif
         etalon_stat->st_size = 4096;
+#ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
         etalon_stat->st_blksize = 512;
+#endif
+#ifdef HAVE_STRUCT_STAT_ST_BLOCKS
         etalon_stat->st_blocks = 8;
+#endif
         etalon_stat->st_atime = 1308838140;
         etalon_stat->st_mtime = 1308838140;
         etalon_stat->st_ctime = 1308838140;
@@ -134,10 +143,16 @@ fill_stat_struct (struct stat *etalon_stat, int iterator)
         etalon_stat->st_nlink = 10;
         etalon_stat->st_uid = 500;
         etalon_stat->st_gid = 500;
+#ifdef HAVE_STRUCT_STAT_ST_RDEV
         etalon_stat->st_rdev = 0;
+#endif
         etalon_stat->st_size = 11;
+#ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
         etalon_stat->st_blksize = 512;
+#endif
+#ifdef HAVE_STRUCT_STAT_ST_BLOCKS
         etalon_stat->st_blocks = 1;
+#endif
         etalon_stat->st_atime = 1268431200;
         etalon_stat->st_mtime = 1268431200;
         etalon_stat->st_ctime = 1268431200;
@@ -149,10 +164,16 @@ fill_stat_struct (struct stat *etalon_stat, int iterator)
         etalon_stat->st_nlink = 10;
         etalon_stat->st_uid = 500;
         etalon_stat->st_gid = 500;
+#ifdef HAVE_STRUCT_STAT_ST_RDEV
         etalon_stat->st_rdev = 0;
+#endif
         etalon_stat->st_size = 4096;
+#ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
         etalon_stat->st_blksize = 512;
+#endif
+#ifdef HAVE_STRUCT_STAT_ST_BLOCKS
         etalon_stat->st_blocks = 8;
+#endif
         etalon_stat->st_atime = 1308838140;
         etalon_stat->st_mtime = 1308838140;
         etalon_stat->st_ctime = 1308838140;
@@ -164,10 +185,16 @@ fill_stat_struct (struct stat *etalon_stat, int iterator)
         etalon_stat->st_nlink = 10;
         etalon_stat->st_uid = 500;
         etalon_stat->st_gid = 500;
+#ifdef HAVE_STRUCT_STAT_ST_RDEV
         etalon_stat->st_rdev = 0;
+#endif
         etalon_stat->st_size = 4096;
+#ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
         etalon_stat->st_blksize = 512;
+#endif
+#ifdef HAVE_STRUCT_STAT_ST_BLOCKS
         etalon_stat->st_blocks = 8;
+#endif
         etalon_stat->st_atime = 1308838140;
         etalon_stat->st_mtime = 1308838140;
         etalon_stat->st_ctime = 1308838140;
@@ -237,7 +264,9 @@ START_PARAMETRIZED_TEST (test_vfs_parse_ls_lga, test_vfs_parse_ls_lga_ds)
 
     vfs_parse_ls_lga_init ();
 
+#ifdef HAVE_STRUCT_STAT_ST_BLOCKS
     etalon_stat.st_blocks = 0;
+#endif
     etalon_stat.st_size = 0;
     etalon_stat.st_mode = 0;
     fill_stat_struct (&etalon_stat, _i);
@@ -257,16 +286,29 @@ START_PARAMETRIZED_TEST (test_vfs_parse_ls_lga, test_vfs_parse_ls_lga_ds)
     mctest_assert_int_eq (etalon_stat.st_mode, test_stat.st_mode);
     mctest_assert_int_eq (etalon_stat.st_uid, test_stat.st_uid);
     mctest_assert_int_eq (etalon_stat.st_gid, test_stat.st_gid);
+#ifdef HAVE_STRUCT_STAT_ST_RDEV
     mctest_assert_int_eq (etalon_stat.st_rdev, test_stat.st_rdev);
+#endif
     mctest_assert_int_eq (etalon_stat.st_size, test_stat.st_size);
+#ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
     mctest_assert_int_eq (etalon_stat.st_blksize, test_stat.st_blksize);
+#endif
+#ifdef HAVE_STRUCT_STAT_ST_BLOCKS
     mctest_assert_int_eq (etalon_stat.st_blocks, test_stat.st_blocks);
+#endif
 
     /* FIXME: these commented checks are related to time zone!
        mctest_assert_int_eq (etalon_stat.st_atime, test_stat.st_atime);
        mctest_assert_int_eq (etalon_stat.st_mtime, test_stat.st_mtime);
        mctest_assert_int_eq (etalon_stat.st_ctime, test_stat.st_ctime);
      */
+
+#ifdef HAVE_STRUCT_STAT_ST_MTIM
+    mctest_assert_int_eq (0, test_stat.st_atim.tv_nsec);
+    mctest_assert_int_eq (0, test_stat.st_mtim.tv_nsec);
+    mctest_assert_int_eq (0, test_stat.st_ctim.tv_nsec);
+#endif
+
 }
 /* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
@@ -286,27 +328,27 @@ START_TEST (test_vfs_parse_ls_lga_reorder)
     vfs_parse_ls_lga_init ();
 
     /* init ent1 */
-    ent1 = vfs_s_generate_entry (&vfs_test_ops1, NULL, vfs_root_inode, 0);
+    ent1 = vfs_s_generate_entry (vfs_test_ops1, NULL, vfs_root_inode, 0);
     vfs_parse_ls_lga
         ("drwxrwxr-x   10 500      500          4096 Jun 23 17:09      build_root1", &ent1->ino->st,
          &ent1->name, &ent1->ino->linkname, &filepos);
     vfs_s_store_filename_leading_spaces (ent1, filepos);
-    vfs_s_insert_entry (&vfs_test_ops1, vfs_root_inode, ent1);
+    vfs_s_insert_entry (vfs_test_ops1, vfs_root_inode, ent1);
 
 
     /* init ent2 */
-    ent2 = vfs_s_generate_entry (&vfs_test_ops1, NULL, vfs_root_inode, 0);
+    ent2 = vfs_s_generate_entry (vfs_test_ops1, NULL, vfs_root_inode, 0);
     vfs_parse_ls_lga ("drwxrwxr-x   10 500      500          4096 Jun 23 17:09    build_root2",
                       &ent2->ino->st, &ent2->name, &ent2->ino->linkname, &filepos);
     vfs_s_store_filename_leading_spaces (ent2, filepos);
-    vfs_s_insert_entry (&vfs_test_ops1, vfs_root_inode, ent2);
+    vfs_s_insert_entry (vfs_test_ops1, vfs_root_inode, ent2);
 
     /* init ent3 */
-    ent3 = vfs_s_generate_entry (&vfs_test_ops1, NULL, vfs_root_inode, 0);
+    ent3 = vfs_s_generate_entry (vfs_test_ops1, NULL, vfs_root_inode, 0);
     vfs_parse_ls_lga ("drwxrwxr-x   10 500      500          4096 Jun 23 17:09 ..",
                       &ent3->ino->st, &ent3->name, &ent3->ino->linkname, &filepos);
     vfs_s_store_filename_leading_spaces (ent3, filepos);
-    vfs_s_insert_entry (&vfs_test_ops1, vfs_root_inode, ent3);
+    vfs_s_insert_entry (vfs_test_ops1, vfs_root_inode, ent3);
 
     /* when */
     vfs_s_normalize_filename_leading_spaces (vfs_root_inode, vfs_parse_ls_lga_get_final_spaces ());
@@ -321,7 +363,7 @@ END_TEST
 
 /* --------------------------------------------------------------------------------------------- */
 #define parce_one_line(ent_index, ls_output) {\
-    ent[ent_index] = vfs_s_generate_entry (&vfs_test_ops1, NULL, vfs_root_inode, 0);\
+    ent[ent_index] = vfs_s_generate_entry (vfs_test_ops1, NULL, vfs_root_inode, 0);\
     if (! vfs_parse_ls_lga (ls_output,\
     &ent[ent_index]->ino->st, &ent[ent_index]->name, &ent[ent_index]->ino->linkname, &filepos))\
     {\
@@ -329,7 +371,7 @@ END_TEST
         return;\
     }\
     vfs_s_store_filename_leading_spaces (ent[ent_index], filepos);\
-    vfs_s_insert_entry (&vfs_test_ops1, vfs_root_inode, ent[ent_index]);\
+    vfs_s_insert_entry (vfs_test_ops1, vfs_root_inode, ent[ent_index]);\
     \
 }
 

@@ -1,7 +1,7 @@
 /*
    src - tests for execute_external_editor_or_viewer() function
 
-   Copyright (C) 2013-2016
+   Copyright (C) 2013-2020
    Free Software Foundation, Inc.
 
    Written by:
@@ -48,7 +48,7 @@ static GPtrArray *mc_config_get_string__return_value;
 
 /* @Mock */
 gchar *
-mc_config_get_string_raw (const mc_config_t * config_ignored, const gchar * group,
+mc_config_get_string_raw (mc_config_t * config_ignored, const gchar * group,
                           const gchar * param, const gchar * default_value)
 {
     char *return_value;
@@ -95,9 +95,10 @@ mc_config_get_string__deinit (void)
 static void
 setup (void)
 {
+    mc_global.timer = mc_timer_new ();
     str_init_strings (NULL);
     vfs_init ();
-    init_localfs ();
+    vfs_init_localfs ();
     vfs_setup_work_dir ();
 
     mc_config_get_string__init ();
@@ -113,6 +114,7 @@ teardown (void)
 
     vfs_shut ();
     str_uninit_strings ();
+    mc_timer_destroy (mc_global.timer);
 }
 
 /* --------------------------------------------------------------------------------------------- */

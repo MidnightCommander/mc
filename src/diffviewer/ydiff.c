@@ -1,7 +1,7 @@
 /*
    File difference viewer
 
-   Copyright (C) 2007-2016
+   Copyright (C) 2007-2020
    Free Software Foundation, Inc.
 
    Written by:
@@ -50,10 +50,11 @@
 #endif
 #include "lib/event.h"          /* mc_event_raise() */
 
-#include "src/filemanager/cmd.h"        /* edit_file_at_line(), view_other_cmd() */
+#include "src/filemanager/cmd.h"        /* edit_file_at_line() */
 #include "src/filemanager/panel.h"
 #include "src/filemanager/layout.h"     /* Needed for get_current_index and get_other_panel */
 
+#include "src/execute.h"        /* toggle_subshell() */
 #include "src/keybind-defaults.h"
 #include "src/setup.h"
 #include "src/history.h"
@@ -2271,9 +2272,11 @@ dview_compute_split (WDiff * dview, int i)
 static void
 dview_compute_areas (WDiff * dview)
 {
-    dview->height = LINES - 2;
-    dview->half1 = COLS / 2;
-    dview->half2 = COLS - dview->half1;
+    Widget *w = WIDGET (dview);
+
+    dview->height = w->lines - 1;
+    dview->half1 = w->cols / 2;
+    dview->half2 = w->cols - dview->half1;
 
     dview_compute_split (dview, 0);
 }
@@ -2879,7 +2882,7 @@ dview_update (WDiff * dview)
 static void
 dview_edit (WDiff * dview, diff_place_t ord)
 {
-    WDialog *h;
+    Widget *h;
     gboolean h_modal;
     int linenum, lineofs;
 
@@ -2889,23 +2892,23 @@ dview_edit (WDiff * dview, diff_place_t ord)
         return;
     }
 
-    h = WIDGET (dview)->owner;
-    h_modal = widget_get_state (WIDGET (h), WST_MODAL);
+    h = WIDGET (WIDGET (dview)->owner);
+    h_modal = widget_get_state (h, WST_MODAL);
 
     get_line_numbers (dview->a[ord], dview->skip_rows, &linenum, &lineofs);
 
     /* disallow edit file in several editors */
-    widget_set_state (WIDGET (h), WST_MODAL, TRUE);
+    widget_set_state (h, WST_MODAL, TRUE);
 
     {
         vfs_path_t *tmp_vpath;
 
         tmp_vpath = vfs_path_from_str (dview->file[ord]);
-        edit_file_at_line (tmp_vpath, use_internal_edit != 0, linenum);
+        edit_file_at_line (tmp_vpath, use_internal_edit, linenum);
         vfs_path_free (tmp_vpath);
     }
 
-    widget_set_state (WIDGET (h), WST_MODAL, h_modal);
+    widget_set_state (h, WST_MODAL, h_modal);
     dview_redo (dview);
     dview_update (dview);
 }
@@ -2962,21 +2965,18 @@ dview_goto_cmd (WDiff * dview, diff_place_t ord)
 static void
 dview_labels (WDiff * dview)
 {
-    Widget *d;
-    WDialog *h;
+    Widget *d = WIDGET (dview);
     WButtonBar *b;
 
-    d = WIDGET (dview);
-    h = d->owner;
-    b = find_buttonbar (h);
+    b = find_buttonbar (DIALOG (d->owner));
 
-    buttonbar_set_label (b, 1, Q_ ("ButtonBar|Help"), diff_map, d);
-    buttonbar_set_label (b, 2, Q_ ("ButtonBar|Save"), diff_map, d);
-    buttonbar_set_label (b, 4, Q_ ("ButtonBar|Edit"), diff_map, d);
-    buttonbar_set_label (b, 5, Q_ ("ButtonBar|Merge"), diff_map, d);
-    buttonbar_set_label (b, 7, Q_ ("ButtonBar|Search"), diff_map, d);
-    buttonbar_set_label (b, 9, Q_ ("ButtonBar|Options"), diff_map, d);
-    buttonbar_set_label (b, 10, Q_ ("ButtonBar|Quit"), diff_map, d);
+    buttonbar_set_label (b, 1, Q_ ("ButtonBar|Help"), d->keymap, d);
+    buttonbar_set_label (b, 2, Q_ ("ButtonBar|Save"), d->keymap, d);
+    buttonbar_set_label (b, 4, Q_ ("ButtonBar|Edit"), d->keymap, d);
+    buttonbar_set_label (b, 5, Q_ ("ButtonBar|Merge"), d->keymap, d);
+    buttonbar_set_label (b, 7, Q_ ("ButtonBar|Search"), d->keymap, d);
+    buttonbar_set_label (b, 9, Q_ ("ButtonBar|Options"), d->keymap, d);
+    buttonbar_set_label (b, 10, Q_ ("ButtonBar|Quit"), d->keymap, d);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -3106,7 +3106,7 @@ dview_ok_to_exit (WDiff * dview)
             res = mc_util_unlink_backup_if_possible (dview->file[DIFF_LEFT], "~~~");
         if (mc_util_restore_from_backup_if_possible (dview->file[DIFF_RIGHT], "~~~"))
             res = mc_util_unlink_backup_if_possible (dview->file[DIFF_RIGHT], "~~~");
-        /* fall through */
+        MC_FALLTHROUGH;
     default:
         res = TRUE;
         break;
@@ -3253,7 +3253,7 @@ dview_execute_cmd (WDiff * dview, long command)
         dview->skip_cols = 0;
         break;
     case CK_Shell:
-        view_other_cmd ();
+        toggle_subshell ();
         break;
     case CK_Quit:
         dview->view_quit = TRUE;
@@ -3289,12 +3289,11 @@ dview_handle_key (WDiff * dview, int key)
     key = convert_from_input_c (key);
 #endif
 
-    command = keybind_lookup_keymap_command (diff_map, key);
-    if ((command != CK_IgnoreKey) && (dview_execute_cmd (dview, command) == MSG_HANDLED))
-        return MSG_HANDLED;
+    command = widget_lookup_key (WIDGET (dview), key);
+    if (command == CK_IgnoreKey)
+        return MSG_NOT_HANDLED;
 
-    /* Key not used */
-    return MSG_NOT_HANDLED;
+    return dview_execute_cmd (dview, command);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -3303,7 +3302,7 @@ static cb_ret_t
 dview_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WDiff *dview = (WDiff *) w;
-    WDialog *h = w->owner;
+    WDialog *h = DIALOG (w->owner);
     cb_ret_t i;
 
     switch (msg)
@@ -3334,6 +3333,11 @@ dview_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
         else
             dview_update (dview);
         return i;
+
+    case MSG_RESIZE:
+        widget_default_callback (w, NULL, MSG_RESIZE, 0, data);
+        dview_compute_areas (dview);
+        return MSG_HANDLED;
 
     case MSG_DESTROY:
         dview_save_options (dview);
@@ -3374,23 +3378,6 @@ dview_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
-dview_adjust_size (WDialog * h)
-{
-    WDiff *dview;
-    WButtonBar *bar;
-
-    /* Look up the viewer and the buttonbar, we assume only two widgets here */
-    dview = (WDiff *) find_widget_type (h, dview_callback);
-    bar = find_buttonbar (h);
-    widget_set_size (WIDGET (dview), 0, 0, LINES - 1, COLS);
-    widget_set_size (WIDGET (bar), LINES - 1, 0, 1, COLS);
-
-    dview_compute_areas (dview);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 static cb_ret_t
 dview_dialog_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
@@ -3399,10 +3386,6 @@ dview_dialog_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, 
 
     switch (msg)
     {
-    case MSG_RESIZE:
-        dview_adjust_size (h);
-        return MSG_HANDLED;
-
     case MSG_ACTION:
         /* Handle shortcuts. */
 
@@ -3411,7 +3394,7 @@ dview_dialog_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, 
         return dview_execute_cmd (NULL, parm);
 
     case MSG_VALIDATE:
-        dview = (WDiff *) find_widget_type (h, dview_callback);
+        dview = (WDiff *) widget_find_by_type (CONST_WIDGET (h), dview_callback);
         /* don't stop the dialog before final decision */
         widget_set_state (w, WST_ACTIVE, TRUE);
         if (dview_ok_to_exit (dview))
@@ -3434,7 +3417,7 @@ dview_get_title (const WDialog * h, size_t len)
     size_t len1;
     GString *title;
 
-    dview = (const WDiff *) find_widget_type (h, dview_callback);
+    dview = (const WDiff *) widget_find_by_type (CONST_WIDGET (h), dview_callback);
     len1 = (len - str_term_width1 (_("Diff:")) - strlen (modified) - 3) / 2;
 
     title = g_string_sized_new (len);
@@ -3457,33 +3440,36 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
     WDiff *dview;
     Widget *w;
     WDialog *dview_dlg;
+    Widget *dw;
+    WGroup *g;
 
     /* Create dialog and widgets, put them on the dialog */
     dview_dlg =
         dlg_create (FALSE, 0, 0, 1, 1, WPOS_FULLSCREEN, FALSE, NULL, dview_dialog_callback, NULL,
                     "[Diff Viewer]", NULL);
-    widget_want_tab (WIDGET (dview_dlg), TRUE);
+    dw = WIDGET (dview_dlg);
+    widget_want_tab (dw, TRUE);
+
+    g = GROUP (dview_dlg);
 
     dview = g_new0 (WDiff, 1);
     w = WIDGET (dview);
-    widget_init (w, 0, 0, LINES - 1, COLS, dview_callback, dview_mouse_callback);
+    widget_init (w, dw->y, dw->x, dw->lines - 1, dw->cols, dview_callback, dview_mouse_callback);
     w->options |= WOP_SELECTABLE;
+    w->keymap = diff_map;
+    group_add_widget_autopos (g, w, WPOS_KEEP_ALL, NULL);
 
-    add_widget (dview_dlg, dview);
-    add_widget (dview_dlg, buttonbar_new (TRUE));
+    w = WIDGET (buttonbar_new (TRUE));
+    group_add_widget_autopos (g, w, w->pos_flags, NULL);
 
     dview_dlg->get_title = dview_get_title;
 
     error = dview_init (dview, "-a", file1, file2, label1, label2, DATA_SRC_MEM);       /* XXX binary diff? */
 
-    /* Please note that if you add another widget,
-     * you have to modify dview_adjust_size to
-     * be aware of it
-     */
     if (error == 0)
         dlg_run (dview_dlg);
 
-    if (error != 0 || widget_get_state (WIDGET (dview_dlg), WST_CLOSED))
+    if (error != 0 || widget_get_state (dw, WST_CLOSED))
         dlg_destroy (dview_dlg);
 
     return error == 0 ? 1 : 0;

@@ -157,7 +157,7 @@ Skins\&.
 .\"Skins"
 .TP
 .I \-t, \-\-termcap
-Usado solo si el código fue compilado con Slang y terminfo: hace que
+Usado solo si el código fue compilado con S\-Lang y terminfo: hace que
 Midnight Commander use el valor de la variable de entorno
 .B TERMCAP
 para obtener la información del terminal, en vez de la base de datos de
@@ -840,7 +840,7 @@ si hemos elegido la disposición horizontal de paneles en las opciones de
 .\"LINK2"
 presentación\&).
 .\"Layout"
-.\"NODE "    Listing Mode..."
+.\"NODE "    Listing Format..."
 .SH "    Listado..."
 La vista en modo
 .B "Listado"
@@ -1995,7 +1995,7 @@ campos de
 del
 .\"LINK2"
 Modo de Listado
-.\"Listing Mode..."
+.\"Listing Format..."
 aplicables al usuario actual de Midnight Commander serán resaltados
 usando el color indicado por medio de la palabra clave
 .I selected.
@@ -2107,7 +2107,7 @@ colores
 distintivos. Si se habilita el resaltado de permisos, los
 .\"LINK2"
 campos del listado
-.\"Listing Mode..."
+.\"Listing Format..."
 .I perm
 y
 .I mode
@@ -3452,7 +3452,7 @@ el uso de color utilizando la base de datos de terminales y nuestro nombre de te
 estará confundido, por lo que deberemos forzar el modo en color o deshabilitar el modo de color
 usando el argumento \-c y \-b respectivamente.
 .PP
-Si el programa está compilado con el gestor pantallas Slang
+Si el programa está compilado con el gestor pantallas S\-Lang
 en lugar de ncurses, también chequeará la variable
 .BR COLORTERM ,
 si existe, lo que tiene el mismo efecto que la opción \-c.
@@ -3471,7 +3471,7 @@ color_terminals=linux,xterm
 color_terminals=nombre\-terminal1,nombre\-terminal2...
 .fi
 .PP
-El programa puede compilarse con ncurses y slang, ncurses no
+El programa puede compilarse con ncurses y S\-Lang, ncurses no
 ofrece la posibilidad de forzar el modo en color: ncurses utiliza la
 información de la base de datos de terminales.
 .PP
@@ -3855,9 +3855,9 @@ líneas dobles).
 .PP
 .I ¡¡¡ATENCIÓN!!!
 Si se compila Midnight Commander empleando la biblioteca de pantalla
-Ncurses, entonces el trazado de líneas está limitado. Es posible que
+ncurses, entonces el trazado de líneas está limitado. Es posible que
 solo se puedan utilizar líneas simples. Para consultas y comentarios
-contactar con los desarrolladores de Ncurses.
+contactar con los desarrolladores de ncurses.
 
 .PP
 Descripción de parámetros de la sección
@@ -4232,7 +4232,7 @@ Configuración personal del usuario. Si este archivo está presente entonces
 se cargará la configuración desde aquí en lugar de desde el archivo de
 configuración del sistema.
 .PP
-.I %prefix%/share/mc/mc.hint
+.I %prefix%/share/mc/hints/mc.hint
 .IP
 Este archivo contiene los mensajes cortos de ayuda mostrados por el
 programa.
@@ -4258,10 +4258,10 @@ personal o de sistema.
 .PP
 Para cambiar el directorio de incio de MC se puede utilizar la variable de
 entorno
-.BR MC_HOME .
-El valor de MC_HOME tiene que ser una ruta absoluta. Si MC_HOME no existe o
-está vacía se usa la variable HOME. Si HOME no existe o está vacía se recurre
-a la biblioteca GLib para obtener los directorios de MC.
+.BR MC_PROFILE_ROOT .
+El valor de MC_PROFILE_ROOT tiene que ser una ruta absoluta. Si MC_PROFILE_ROOT
+no existe o está vacía se usa la variable HOME. Si HOME no existe o está vacía
+se recurre a la biblioteca GLib para obtener los directorios de MC.
 .\"SKIP_SECTION"
 .SH "LICENCIA"
 Este programa se distribuye en los términos que recoge la Licencia Pública

@@ -1,7 +1,7 @@
 /*
    Find file command for the Midnight Commander
 
-   Copyright (C) 1995-2016
+   Copyright (C) 1995-2020
    Free Software Foundation, Inc.
 
    Written  by:
@@ -36,7 +36,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
-#include <sys/time.h>
 
 #include "lib/global.h"
 
@@ -54,12 +53,10 @@
 #include "src/history.h"        /* MC_HISTORY_SHARED_SEARCH */
 
 #include "dir.h"
-#include "cmd.h"                /* view_file_at_line() */
+#include "cmd.h"                /* find_cmd(), view_file_at_line() */
 #include "midnight.h"           /* current_panel */
 #include "boxes.h"
 #include "panelize.h"
-
-#include "find.h"
 
 /*** global variables ****************************************************************************/
 
@@ -152,11 +149,12 @@ static char *find_pattern = NULL;       /* Pattern to search */
 static char *content_pattern = NULL;    /* pattern to search inside files; if
                                            content_regexp_flag is true, it contains the
                                            regex pattern, else the search string. */
+static gboolean content_is_empty = TRUE;        /* remember content field state; initially is empty */
 static unsigned long matches;   /* Number of matches */
 static gboolean is_start = FALSE;       /* Status of the start/stop toggle button */
 static char *old_dir = NULL;
 
-static struct timeval last_refresh;
+static gint64 last_refresh;
 
 /* Where did we stop */
 static gboolean resuming;
@@ -366,12 +364,10 @@ status_update (const char *text)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
+static inline void
 found_num_update (void)
 {
-    char buffer[BUF_TINY];
-    g_snprintf (buffer, sizeof (buffer), _("Found: %ld"), matches);
-    label_set_text (found_num_label, buffer);
+    label_set_textv (found_num_label, _("Found: %lu"), matches);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -422,9 +418,17 @@ find_check_regexp (const char *r)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
+find_toggle_enable_ignore_dirs (void)
+{
+    widget_disable (WIDGET (in_ignore), !ignore_dirs_cbox->state);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
 find_toggle_enable_params (void)
 {
-    gboolean disable = in_name->buffer[0] == '\0';
+    gboolean disable = input_is_empty (in_name);
 
     widget_disable (WIDGET (file_pattern_cbox), disable);
     widget_disable (WIDGET (file_case_sens_cbox), disable);
@@ -438,15 +442,13 @@ find_toggle_enable_params (void)
 static void
 find_toggle_enable_content (void)
 {
-    gboolean disable = in_with->buffer[0] == '\0';
-
-    widget_disable (WIDGET (content_regexp_cbox), disable);
-    widget_disable (WIDGET (content_case_sens_cbox), disable);
+    widget_disable (WIDGET (content_regexp_cbox), content_is_empty);
+    widget_disable (WIDGET (content_case_sens_cbox), content_is_empty);
 #ifdef HAVE_CHARSET
-    widget_disable (WIDGET (content_all_charsets_cbox), disable);
+    widget_disable (WIDGET (content_all_charsets_cbox), content_is_empty);
 #endif
-    widget_disable (WIDGET (content_whole_words_cbox), disable);
-    widget_disable (WIDGET (content_first_hit_cbox), disable);
+    widget_disable (WIDGET (content_whole_words_cbox), content_is_empty);
+    widget_disable (WIDGET (content_first_hit_cbox), content_is_empty);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -475,16 +477,14 @@ find_parm_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
     switch (msg)
     {
     case MSG_INIT:
+        group_default_callback (w, NULL, MSG_INIT, 0, NULL);
         first_draw = TRUE;
         return MSG_HANDLED;
 
     case MSG_NOTIFY:
-        if (sender == WIDGET (ignore_dirs_cbox) && parm == (int) MSG_FOCUS)
+        if (sender == WIDGET (ignore_dirs_cbox))
         {
-            gboolean disable = !(ignore_dirs_cbox->state & C_BOOL);
-
-            widget_disable (WIDGET (in_ignore), disable);
-
+            find_toggle_enable_ignore_dirs ();
             return MSG_HANDLED;
         }
 
@@ -495,22 +495,21 @@ find_parm_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
             return MSG_HANDLED;
 
         /* check filename regexp */
-        if (!(file_pattern_cbox->state & C_BOOL)
-            && (in_name->buffer[0] != '\0') && !find_check_regexp (in_name->buffer))
+        if (!file_pattern_cbox->state && !input_is_empty (in_name)
+            && !find_check_regexp (in_name->buffer))
         {
             /* Don't stop the dialog */
-            widget_set_state (WIDGET (h), WST_ACTIVE, TRUE);
+            widget_set_state (w, WST_ACTIVE, TRUE);
             message (D_ERROR, MSG_ERROR, _("Malformed regular expression"));
             widget_select (WIDGET (in_name));
             return MSG_HANDLED;
         }
 
         /* check content regexp */
-        if ((content_regexp_cbox->state & C_BOOL) && (in_with->buffer[0] != '\0')
-            && !find_check_regexp (in_with->buffer))
+        if (content_regexp_cbox->state && !content_is_empty && !find_check_regexp (in_with->buffer))
         {
             /* Don't stop the dialog */
-            widget_set_state (WIDGET (h), WST_ACTIVE, TRUE);
+            widget_set_state (w, WST_ACTIVE, TRUE);
             message (D_ERROR, MSG_ERROR, _("Malformed regular expression"));
             widget_select (WIDGET (in_with));
             return MSG_HANDLED;
@@ -519,21 +518,25 @@ find_parm_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
         return MSG_HANDLED;
 
     case MSG_POST_KEY:
-        if (h->current->data == in_name)
+        if (GROUP (h)->current->data == in_name)
             find_toggle_enable_params ();
-        else if (h->current->data == in_with)
+        else if (GROUP (h)->current->data == in_with)
+        {
+            content_is_empty = input_is_empty (in_with);
             find_toggle_enable_content ();
+        }
         return MSG_HANDLED;
 
     case MSG_DRAW:
         if (first_draw)
         {
+            find_toggle_enable_ignore_dirs ();
             find_toggle_enable_params ();
             find_toggle_enable_content ();
         }
 
         first_draw = FALSE;
-        /* fall through to call MSG_DRAW default handler */
+        MC_FALLTHROUGH;         /* to call MSG_DRAW default handler */
 
     default:
         return dlg_default_callback (w, sender, msg, parm, data);
@@ -557,6 +560,8 @@ static gboolean
 find_parameters (char **start_dir, ssize_t * start_dir_len,
                  char **ignore_dirs, char **pattern, char **content)
 {
+    WGroup *g;
+
     /* Size of the find parameters window */
 #ifdef HAVE_CHARSET
     const int lines = 18;
@@ -663,96 +668,97 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
     find_dlg =
         dlg_create (TRUE, 0, 0, lines, cols, WPOS_CENTER, FALSE, dialog_colors, find_parm_callback,
                     NULL, "[Find File]", _("Find File"));
+    g = GROUP (find_dlg);
 
     x1 = 3;
     x2 = cols / 2 + 1;
     cw = (cols - 7) / 2;
     y1 = 2;
 
-    add_widget (find_dlg, label_new (y1++, x1, _("Start at:")));
+    group_add_widget (g, label_new (y1++, x1, _("Start at:")));
     in_start =
         input_new (y1, x1, input_colors, cols - b0 - 7, in_start_dir, "start",
                    INPUT_COMPLETE_CD | INPUT_COMPLETE_FILENAMES);
-    add_widget (find_dlg, in_start);
+    group_add_widget (g, in_start);
 
-    add_widget (find_dlg, button_new (y1++, cols - b0 - 3, B_TREE, NORMAL_BUTTON, buts[0], NULL));
+    group_add_widget (g, button_new (y1++, cols - b0 - 3, B_TREE, NORMAL_BUTTON, buts[0], NULL));
 
     ignore_dirs_cbox =
         check_new (y1++, x1, options.ignore_dirs_enable, _("Ena&ble ignore directories:"));
-    add_widget (find_dlg, ignore_dirs_cbox);
+    group_add_widget (g, ignore_dirs_cbox);
 
     in_ignore =
         input_new (y1++, x1, input_colors, cols - 6,
                    options.ignore_dirs != NULL ? options.ignore_dirs : "", "ignoredirs",
                    INPUT_COMPLETE_CD | INPUT_COMPLETE_FILENAMES);
-    add_widget (find_dlg, in_ignore);
+    group_add_widget (g, in_ignore);
 
-    add_widget (find_dlg, hline_new (y1++, -1, -1));
+    group_add_widget (g, hline_new (y1++, -1, -1));
 
     y2 = y1;
 
     /* Start 1st column */
-    add_widget (find_dlg, label_new (y1++, x1, file_name_label));
+    group_add_widget (g, label_new (y1++, x1, file_name_label));
     in_name =
         input_new (y1++, x1, input_colors, cw, INPUT_LAST_TEXT, "name",
                    INPUT_COMPLETE_FILENAMES | INPUT_COMPLETE_CD);
-    add_widget (find_dlg, in_name);
+    group_add_widget (g, in_name);
 
     /* Start 2nd column */
     content_label = label_new (y2++, x2, content_content_label);
-    add_widget (find_dlg, content_label);
+    group_add_widget (g, content_label);
     in_with =
-        input_new (y2++, x2, input_colors, cw, INPUT_LAST_TEXT,
+        input_new (y2++, x2, input_colors, cw, content_is_empty ? "" : INPUT_LAST_TEXT,
                    MC_HISTORY_SHARED_SEARCH, INPUT_COMPLETE_NONE);
     in_with->label = content_label;
-    add_widget (find_dlg, in_with);
+    group_add_widget (g, in_with);
 
     /* Continue 1st column */
     recursively_cbox = check_new (y1++, x1, options.find_recurs, file_recurs_label);
-    add_widget (find_dlg, recursively_cbox);
+    group_add_widget (g, recursively_cbox);
 
     file_pattern_cbox = check_new (y1++, x1, options.file_pattern, file_pattern_label);
-    add_widget (find_dlg, file_pattern_cbox);
+    group_add_widget (g, file_pattern_cbox);
 
     file_case_sens_cbox = check_new (y1++, x1, options.file_case_sens, file_case_label);
-    add_widget (find_dlg, file_case_sens_cbox);
+    group_add_widget (g, file_case_sens_cbox);
 
 #ifdef HAVE_CHARSET
     file_all_charsets_cbox =
         check_new (y1++, x1, options.file_all_charsets, file_all_charsets_label);
-    add_widget (find_dlg, file_all_charsets_cbox);
+    group_add_widget (g, file_all_charsets_cbox);
 #endif
 
     skip_hidden_cbox = check_new (y1++, x1, options.skip_hidden, file_skip_hidden_label);
-    add_widget (find_dlg, skip_hidden_cbox);
+    group_add_widget (g, skip_hidden_cbox);
 
     /* Continue 2nd column */
     content_whole_words_cbox =
         check_new (y2++, x2, options.content_whole_words, content_whole_words_label);
-    add_widget (find_dlg, content_whole_words_cbox);
+    group_add_widget (g, content_whole_words_cbox);
 
     content_regexp_cbox = check_new (y2++, x2, options.content_regexp, content_regexp_label);
-    add_widget (find_dlg, content_regexp_cbox);
+    group_add_widget (g, content_regexp_cbox);
 
     content_case_sens_cbox = check_new (y2++, x2, options.content_case_sens, content_case_label);
-    add_widget (find_dlg, content_case_sens_cbox);
+    group_add_widget (g, content_case_sens_cbox);
 
 #ifdef HAVE_CHARSET
     content_all_charsets_cbox =
         check_new (y2++, x2, options.content_all_charsets, content_all_charsets_label);
-    add_widget (find_dlg, content_all_charsets_cbox);
+    group_add_widget (g, content_all_charsets_cbox);
 #endif
 
     content_first_hit_cbox =
         check_new (y2++, x2, options.content_first_hit, content_first_hit_label);
-    add_widget (find_dlg, content_first_hit_cbox);
+    group_add_widget (g, content_first_hit_cbox);
 
     /* buttons */
     y1 = max (y1, y2);
     x1 = (cols - b12) / 2;
-    add_widget (find_dlg, hline_new (y1++, -1, -1));
-    add_widget (find_dlg, button_new (y1, x1, B_ENTER, DEFPUSH_BUTTON, buts[1], NULL));
-    add_widget (find_dlg, button_new (y1, x1 + b1 + 1, B_CANCEL, NORMAL_BUTTON, buts[2], NULL));
+    group_add_widget (g, hline_new (y1++, -1, -1));
+    group_add_widget (g, button_new (y1, x1, B_ENTER, DEFPUSH_BUTTON, buts[1], NULL));
+    group_add_widget (g, button_new (y1, x1 + b1 + 1, B_CANCEL, NORMAL_BUTTON, buts[2], NULL));
 
   find_par_start:
     widget_select (WIDGET (in_name));
@@ -792,23 +798,23 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
             char *s;
 
 #ifdef HAVE_CHARSET
-            options.file_all_charsets = file_all_charsets_cbox->state & C_BOOL;
-            options.content_all_charsets = content_all_charsets_cbox->state & C_BOOL;
+            options.file_all_charsets = file_all_charsets_cbox->state;
+            options.content_all_charsets = content_all_charsets_cbox->state;
 #endif
-            options.content_case_sens = content_case_sens_cbox->state & C_BOOL;
-            options.content_regexp = content_regexp_cbox->state & C_BOOL;
-            options.content_first_hit = content_first_hit_cbox->state & C_BOOL;
-            options.content_whole_words = content_whole_words_cbox->state & C_BOOL;
-            options.find_recurs = recursively_cbox->state & C_BOOL;
-            options.file_pattern = file_pattern_cbox->state & C_BOOL;
-            options.file_case_sens = file_case_sens_cbox->state & C_BOOL;
-            options.skip_hidden = skip_hidden_cbox->state & C_BOOL;
-            options.ignore_dirs_enable = ignore_dirs_cbox->state & C_BOOL;
+            options.content_case_sens = content_case_sens_cbox->state;
+            options.content_regexp = content_regexp_cbox->state;
+            options.content_first_hit = content_first_hit_cbox->state;
+            options.content_whole_words = content_whole_words_cbox->state;
+            options.find_recurs = recursively_cbox->state;
+            options.file_pattern = file_pattern_cbox->state;
+            options.file_case_sens = file_case_sens_cbox->state;
+            options.skip_hidden = skip_hidden_cbox->state;
+            options.ignore_dirs_enable = ignore_dirs_cbox->state;
             g_free (options.ignore_dirs);
             options.ignore_dirs = g_strdup (in_ignore->buffer);
 
-            *content = in_with->buffer[0] != '\0' ? g_strdup (in_with->buffer) : NULL;
-            if (in_name->buffer[0] != '\0')
+            *content = !input_is_empty (in_with) ? g_strdup (in_with->buffer) : NULL;
+            if (!input_is_empty (in_name))
                 *pattern = g_strdup (in_name->buffer);
             else
                 *pattern = g_strdup (options.file_pattern ? "*" : ".*");
@@ -843,7 +849,7 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
                 g_free (s);
             }
 
-            if (!options.ignore_dirs_enable || in_ignore->buffer[0] == '\0'
+            if (!options.ignore_dirs_enable || input_is_empty (in_ignore)
                 || DIR_IS_DOT (in_ignore->buffer))
                 *ignore_dirs = NULL;
             else
@@ -882,8 +888,7 @@ pop_directory (void)
 static void
 clear_stack (void)
 {
-    g_queue_foreach (&dir_queue, (GFunc) vfs_path_free, NULL);
-    g_queue_clear (&dir_queue);
+    g_queue_clear_full (&dir_queue, (GDestroyNotify) vfs_path_free);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -898,9 +903,9 @@ insert_file (const char *dir, const char *file, gsize start, gsize end)
     while (IS_PATH_SEP (dir[0]) && IS_PATH_SEP (dir[1]))
         dir++;
 
-    if (old_dir)
+    if (old_dir != NULL)
     {
-        if (strcmp (old_dir, dir))
+        if (strcmp (old_dir, dir) != 0)
         {
             g_free (old_dir);
             old_dir = g_strdup (dir);
@@ -932,7 +937,7 @@ find_add_match (const char *dir, const char *file, gsize start, gsize end)
     /* Don't scroll */
     if (matches == 0)
         listbox_select_first (find_list);
-    widget_redraw (WIDGET (find_list));
+    widget_draw (WIDGET (find_list));
 
     matches++;
     found_num_update ();
@@ -947,7 +952,7 @@ check_find_events (WDialog * h)
     int c;
 
     event.x = -1;
-    c = tty_get_event (&event, h->mouse_status == MOU_REPEAT, FALSE);
+    c = tty_get_event (&event, GROUP (h)->mouse_status == MOU_REPEAT, FALSE);
     if (c != EV_NONE)
     {
         dlg_process_event (h, c, &event);
@@ -986,9 +991,7 @@ search_content (WDialog * h, const char *directory, const char *filename)
     int file_fd;
     gboolean ret_val = FALSE;
     vfs_path_t *vpath;
-    struct timeval tv;
-    time_t seconds;
-    suseconds_t useconds;
+    gint64 tv;
     gboolean status_updated = FALSE;
 
     vpath = vfs_path_build_filename (directory, filename, (char *) NULL);
@@ -1006,21 +1009,9 @@ search_content (WDialog * h, const char *directory, const char *filename)
         return FALSE;
 
     /* get time elapsed from last refresh */
-    if (gettimeofday (&tv, NULL) == -1)
-    {
-        tv.tv_sec = 0;
-        tv.tv_usec = 0;
-        last_refresh = tv;
-    }
-    seconds = tv.tv_sec - last_refresh.tv_sec;
-    useconds = tv.tv_usec - last_refresh.tv_usec;
-    if (useconds < 0)
-    {
-        seconds--;
-        useconds += G_USEC_PER_SEC;
-    }
+    tv = g_get_real_time ();
 
-    if (s.st_size >= MIN_REFRESH_FILE_SIZE || seconds > 0 || useconds > MAX_REFRESH_INTERVAL)
+    if (s.st_size >= MIN_REFRESH_FILE_SIZE || (tv - last_refresh) > MAX_REFRESH_INTERVAL)
     {
         g_snprintf (buffer, sizeof (buffer), _("Grepping in %s"), filename);
         status_update (str_trunc (buffer, WIDGET (h)->cols - 8));
@@ -1058,6 +1049,7 @@ search_content (WDialog * h, const char *directory, const char *filename)
         while (!ret_val)
         {
             char ch = '\0';
+
             off += i + 1;       /* the previous line, plus a newline character */
             i = 0;
 
@@ -1141,6 +1133,7 @@ search_content (WDialog * h, const char *directory, const char *filename)
             if ((line & 0xff) == 0)
             {
                 FindProgressStatus res;
+
                 res = check_find_events (h);
                 switch (res)
                 {
@@ -1239,12 +1232,11 @@ find_rotate_dash (const WDialog * h, gboolean show)
     static size_t pos = 0;
     static const char rotating_dash[4] = "|/-\\";
     const Widget *w = CONST_WIDGET (h);
+    const int *colors;
 
-    if (!verbose)
-        return;
-
-    tty_setcolor (h->color[DLG_COLOR_NORMAL]);
-    widget_move (h, w->lines - 7, w->cols - 4);
+    colors = widget_get_colors (w);
+    tty_setcolor (colors[DLG_COLOR_NORMAL]);
+    widget_gotoyx (h, w->lines - 7, w->cols - 4);
     tty_print_char (show ? rotating_dash[pos] : ' ');
     pos = (pos + 1) % sizeof (rotating_dash);
     mc_refresh ();
@@ -1301,13 +1293,15 @@ do_search (WDialog * h)
                         else
                         {
                             char msg[BUF_SMALL];
+
                             g_snprintf (msg, sizeof (msg),
-                                        ngettext ("Finished (ignored %zd directory)",
-                                                  "Finished (ignored %zd directories)",
+                                        ngettext ("Finished (ignored %zu directory)",
+                                                  "Finished (ignored %zu directories)",
                                                   ignore_count), ignore_count);
                             status_update (msg);
                         }
-                        find_rotate_dash (h, FALSE);
+                        if (verbose)
+                            find_rotate_dash (h, FALSE);
                         stop_idle (h);
                         return 0;
                     }
@@ -1393,7 +1387,8 @@ do_search (WDialog * h)
             ;
     }                           /* for */
 
-    find_rotate_dash (h, TRUE);
+    if (verbose)
+        find_rotate_dash (h, TRUE);
 
     return 1;
 }
@@ -1420,7 +1415,6 @@ static void
 find_do_view_edit (gboolean unparsed_view, gboolean edit, char *dir, char *file, off_t search_start,
                    off_t search_end)
 {
-    char *fullname = NULL;
     const char *filename = NULL;
     int line;
     vfs_path_t *fullname_vpath;
@@ -1438,12 +1432,11 @@ find_do_view_edit (gboolean unparsed_view, gboolean edit, char *dir, char *file,
 
     fullname_vpath = vfs_path_build_filename (dir, filename, (char *) NULL);
     if (edit)
-        edit_file_at_line (fullname_vpath, use_internal_edit != 0, line);
+        edit_file_at_line (fullname_vpath, use_internal_edit, line);
     else
-        view_file_at_line (fullname_vpath, unparsed_view, use_internal_view != 0, line,
-                           search_start, search_end);
+        view_file_at_line (fullname_vpath, unparsed_view, use_internal_view, line, search_start,
+                           search_end);
     vfs_path_free (fullname_vpath);
-    g_free (fullname);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1492,6 +1485,35 @@ find_calc_button_locations (const WDialog * h, gboolean all_buttons)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
+find_adjust_header (WDialog * h)
+{
+    char title[BUF_MEDIUM];
+    int title_len;
+
+    if (content_pattern != NULL)
+        g_snprintf (title, sizeof (title), _("Find File: \"%s\". Content: \"%s\""), find_pattern,
+                    content_pattern);
+    else
+        g_snprintf (title, sizeof (title), _("Find File: \"%s\""), find_pattern);
+
+    title_len = str_term_width1 (title);
+    if (title_len > WIDGET (h)->cols - 6)
+    {
+        /* title is too wide, truncate it */
+        title_len = WIDGET (h)->cols - 6;
+        title_len = str_column_to_pos (title, title_len);
+        title_len -= 3;         /* reserve space for three dots */
+        title_len = str_offset_to_pos (title, title_len);
+        /* mark that title is truncated */
+        memmove (title + title_len, "...", 4);
+    }
+
+    frame_set_title (FRAME (h->bg), title);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
 find_relocate_buttons (const WDialog * h, gboolean all_buttons)
 {
     size_t i;
@@ -1505,12 +1527,33 @@ find_relocate_buttons (const WDialog * h, gboolean all_buttons)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
+find_resize (WDialog * h)
+{
+    Widget *w = WIDGET (h);
+    WRect r;
+
+    rect_init (&r, w->y, w->x, LINES - 4, COLS - 16);
+    dlg_default_callback (w, NULL, MSG_RESIZE, 0, &r);
+    find_adjust_header (h);
+    find_relocate_buttons (h, TRUE);
+
+    return MSG_HANDLED;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static cb_ret_t
 find_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WDialog *h = DIALOG (w);
 
     switch (msg)
     {
+    case MSG_INIT:
+        group_default_callback (w, NULL, MSG_INIT, 0, NULL);
+        find_adjust_header (h);
+        return MSG_HANDLED;
+
     case MSG_KEY:
         if (parm == KEY_F (3) || parm == KEY_F (13))
         {
@@ -1523,9 +1566,7 @@ find_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
         return MSG_NOT_HANDLED;
 
     case MSG_RESIZE:
-        dlg_set_size (h, LINES - 4, COLS - 16);
-        find_relocate_buttons (h, TRUE);
-        return MSG_HANDLED;
+        return find_resize (h);
 
     case MSG_IDLE:
         do_search (h);
@@ -1553,8 +1594,8 @@ start_stop (WButton * button, int action)
     status_update (is_start ? _("Stopped") : _("Searching"));
     button_set_text (button, fbuts[is_start ? 3 : 2].text);
 
-    find_relocate_buttons (w->owner, FALSE);
-    dlg_redraw (w->owner);
+    find_relocate_buttons (DIALOG (w->owner), FALSE);
+    widget_draw (WIDGET (w->owner));
 
     return 0;
 }
@@ -1590,6 +1631,7 @@ find_do_edit_file (WButton * button, int action)
 static void
 setup_gui (void)
 {
+    WGroup *g;
     size_t i;
     int lines, cols;
     int y;
@@ -1616,24 +1658,25 @@ setup_gui (void)
 
     find_dlg =
         dlg_create (TRUE, 0, 0, lines, cols, WPOS_CENTER, FALSE, dialog_colors, find_callback, NULL,
-                    "[Find File]", _("Find File"));
+                    "[Find File]", NULL);
+    g = GROUP (find_dlg);
 
     find_calc_button_locations (find_dlg, TRUE);
 
     y = 2;
     find_list = listbox_new (y, 2, lines - 10, cols - 4, FALSE, NULL);
-    add_widget_autopos (find_dlg, find_list, WPOS_KEEP_ALL, NULL);
+    group_add_widget_autopos (g, find_list, WPOS_KEEP_ALL, NULL);
     y += WIDGET (find_list)->lines;
 
-    add_widget_autopos (find_dlg, hline_new (y++, -1, -1), WPOS_KEEP_BOTTOM, NULL);
+    group_add_widget_autopos (g, hline_new (y++, -1, -1), WPOS_KEEP_BOTTOM, NULL);
 
     found_num_label = label_new (y++, 4, "");
-    add_widget_autopos (find_dlg, found_num_label, WPOS_KEEP_BOTTOM, NULL);
+    group_add_widget_autopos (g, found_num_label, WPOS_KEEP_BOTTOM, NULL);
 
     status_label = label_new (y++, 4, _("Searching"));
-    add_widget_autopos (find_dlg, status_label, WPOS_KEEP_BOTTOM, NULL);
+    group_add_widget_autopos (g, status_label, WPOS_KEEP_BOTTOM, NULL);
 
-    add_widget_autopos (find_dlg, hline_new (y++, -1, -1), WPOS_KEEP_BOTTOM, NULL);
+    group_add_widget_autopos (g, hline_new (y++, -1, -1), WPOS_KEEP_BOTTOM, NULL);
 
     for (i = 0; i < fbuts_num; i++)
     {
@@ -1645,7 +1688,7 @@ setup_gui (void)
                 WIDGET (button_new
                         (y, fbuts[i].x, fbuts[i].ret_cmd, fbuts[i].flags, fbuts[i].text,
                          fbuts[i].callback));
-            add_widget_autopos (find_dlg, fbuts[i].button, WPOS_KEEP_BOTTOM, NULL);
+            group_add_widget_autopos (g, fbuts[i].button, WPOS_KEEP_BOTTOM, NULL);
         }
 
         if (i == quit_button)
@@ -1707,19 +1750,12 @@ kill_gui (void)
 
 static int
 do_find (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
-         const char *pattern, const char *content, char **dirname, char **filename)
+         char **dirname, char **filename)
 {
     int return_value = 0;
     char *dir_tmp = NULL, *file_tmp = NULL;
 
     setup_gui ();
-
-    /* FIXME: Need to cleanup this, this ought to be passed non-globaly */
-    find_pattern = (char *) pattern;
-
-    content_pattern = NULL;
-    if (content != NULL && str_is_valid_string (content))
-        content_pattern = g_strdup (content);
 
     init_find_vars ();
     parse_ignore_dirs (ignore_dirs);
@@ -1739,13 +1775,13 @@ do_find (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
 
     if (return_value == B_PANELIZE && *filename)
     {
-        int link_to_dir, stale_link;
         int i;
         struct stat st;
         GList *entry;
         dir_list *list = &current_panel->dir;
         char *name = NULL;
 
+        panel_clean_dir (current_panel);
         dir_list_init (list);
 
         for (i = 0, entry = listbox_get_first_link (find_list); entry != NULL;
@@ -1755,11 +1791,12 @@ do_find (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
             WLEntry *le = LENTRY (entry->data);
             find_match_location_t *location = le->data;
             char *p;
+            gboolean link_to_dir, stale_link;
 
             if ((le->text == NULL) || (location == NULL) || (location->dir == NULL))
                 continue;
 
-            if (content_pattern != NULL)
+            if (!content_is_empty)
                 lc_filename = strchr (le->text + 4, ':') + 1;
             else
                 lc_filename = le->text + 4;
@@ -1788,20 +1825,18 @@ do_find (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
             }
 
             /* don't add files more than once to the panel */
-            if (content_pattern != NULL && list->len != 0
+            if (!content_is_empty && list->len != 0
                 && strcmp (list->list[list->len - 1].fname, p) == 0)
             {
                 g_free (name);
                 continue;
             }
 
-            if (list->len == 0) /* first turn i.e clean old list */
-                panel_clean_dir (current_panel);
             list->list[list->len].fnamelen = strlen (p);
             list->list[list->len].fname = g_strndup (p, list->list[list->len].fnamelen);
             list->list[list->len].f.marked = 0;
-            list->list[list->len].f.link_to_dir = link_to_dir;
-            list->list[list->len].f.stale_link = stale_link;
+            list->list[list->len].f.link_to_dir = link_to_dir ? 1 : 0;
+            list->list[list->len].f.stale_link = stale_link ? 1 : 0;
             list->list[list->len].f.dir_size_computed = 0;
             list->list[list->len].st = st;
             list->list[list->len].sort_key = NULL;
@@ -1812,24 +1847,11 @@ do_find (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
                 rotate_dash (TRUE);
         }
 
-        if (list->len != 0)
-        {
-            current_panel->is_panelized = TRUE;
-
-            /* absolute path */
-            if (start_dir_len < 0)
-            {
-                int ret;
-                vfs_path_free (current_panel->cwd_vpath);
-                current_panel->cwd_vpath = vfs_path_from_str (PATH_SEP_STR);
-                ret = chdir (PATH_SEP_STR);
-                (void) ret;
-            }
-            panelize_save_panel (current_panel);
-        }
+        current_panel->is_panelized = TRUE;
+        panelize_absolutize_if_needed (current_panel);
+        panelize_save_panel (current_panel);
     }
 
-    g_free (content_pattern);
     kill_gui ();
     do_search (NULL);           /* force do_search to release resources */
     MC_PTR_FREE (old_dir);
@@ -1843,29 +1865,37 @@ do_find (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
 /* --------------------------------------------------------------------------------------------- */
 
 void
-find_file (void)
+find_cmd (void)
 {
-    char *start_dir = NULL, *pattern = NULL, *content = NULL, *ignore_dirs = NULL;
+    char *start_dir = NULL, *ignore_dirs = NULL;
     ssize_t start_dir_len;
 
-    while (find_parameters (&start_dir, &start_dir_len, &ignore_dirs, &pattern, &content))
+    find_pattern = NULL;
+    content_pattern = NULL;
+
+    while (find_parameters (&start_dir, &start_dir_len,
+                            &ignore_dirs, &find_pattern, &content_pattern))
     {
         char *filename = NULL, *dirname = NULL;
         int v = B_CANCEL;
 
-        if (pattern[0] != '\0')
+        content_is_empty = content_pattern == NULL;
+
+        if (find_pattern[0] != '\0')
         {
-            last_refresh.tv_sec = 0;
-            last_refresh.tv_usec = 0;
+            last_refresh = 0;
 
             is_start = FALSE;
-            v = do_find (start_dir, start_dir_len, ignore_dirs, pattern, content, &dirname,
-                         &filename);
+
+            if (!content_is_empty && !str_is_valid_string (content_pattern))
+                MC_PTR_FREE (content_pattern);
+
+            v = do_find (start_dir, start_dir_len, ignore_dirs, &dirname, &filename);
         }
 
         g_free (start_dir);
         g_free (ignore_dirs);
-        g_free (pattern);
+        MC_PTR_FREE (find_pattern);
 
         if (v == B_ENTER)
         {
@@ -1878,7 +1908,7 @@ find_file (void)
                 vfs_path_free (dirname_vpath);
                 if (filename != NULL)
                     try_to_select (current_panel,
-                                   filename + (content != NULL
+                                   filename + (content_pattern != NULL
                                                ? strchr (filename + 4, ':') - filename + 1 : 4));
             }
             else if (filename != NULL)
@@ -1891,7 +1921,7 @@ find_file (void)
             }
         }
 
-        g_free (content);
+        MC_PTR_FREE (content_pattern);
         g_free (dirname);
         g_free (filename);
 

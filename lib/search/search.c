@@ -2,7 +2,7 @@
    Search text engine.
    Interface functions
 
-   Copyright (C) 2009-2016
+   Copyright (C) 2009-2020
    Free Software Foundation, Inc.
 
    Written by:
@@ -263,6 +263,19 @@ mc_search_prepare (mc_search_t * lc_mc_search)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/**
+ * Carries out the search.
+ *
+ * Returns TRUE if found.
+ *
+ * Returns FALSE if not found. In this case, lc_mc_search->error reveals
+ * the reason:
+ *
+ *   - MC_SEARCH_E_NOTFOUND: the pattern isn't in the subject string.
+ *   - MC_SEARCH_E_ABORT: the user aborted the search.
+ *   - For any other reason (but not for the above two!): the description
+ *     is in lc_mc_search->error_str.
+ */
 gboolean
 mc_search_run (mc_search_t * lc_mc_search, const void *user_data,
                gsize start_search, gsize end_search, gsize * found_len)
@@ -346,11 +359,11 @@ mc_search_prepare_replace_str (mc_search_t * lc_mc_search, GString * replace_str
 {
     GString *ret;
 
+    if (replace_str == NULL || replace_str->len == 0)
+        return g_string_new ("");
+
     if (lc_mc_search == NULL)
         return g_string_new_len (replace_str->str, replace_str->len);
-
-    if (replace_str == NULL || replace_str->str == NULL || replace_str->len == 0)
-        return g_string_new ("");
 
     switch (lc_mc_search->search_type)
     {

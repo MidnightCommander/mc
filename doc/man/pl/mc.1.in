@@ -80,7 +80,7 @@ Włącza tryb powolnego terminala, w którym program nie będzie rysował zbyt
 obciążających znaków graficznych oraz wyłączy opcję weryfikacji.
 .TP
 .I \-t
-Używane tylko jeśli kod był skompilowany przy użyciu Slanga i terminfo:
+Używane tylko jeśli kod był skompilowany przy użyciu S\-Langa i terminfo:
 powoduje, że Midnight Commander będzie używać zmiennej środowiskowej
 .B TERMCAP
 do pokazywania informacji terminala, zamiast informacji w systemowej bazie
@@ -564,7 +564,7 @@ Wygląd panelu katalogowego może zostać zmieniony poprzez menu
 i
 .BR right .
 .PP
-.\"NODE "    Listing Mode..."
+.\"NODE "    Listing Format..."
 .SH "    Tryby wyświetlania (Listing modes)"
 Tryby wyświetlania są używane do zmienia ustawień przy wyświetlaniu.
 Dostępne są cztery różne tryby:
@@ -2572,7 +2572,7 @@ kolory używając bazy danych terminali. Czasami jest to zmieniane
 przez różne flagi startowe, np. możesz wymusić wyświetlanie czarno\-białe
 lub kolorowe startując z opcją odpowiednio \-b i \-c.
 .PP
-Jeśli program jest skompilowany z menedżerem ekranu Slang zamiast ncurses,
+Jeśli program jest skompilowany z menedżerem ekranu S\-Lang zamiast ncurses,
 sprawdzi on również wartość zmiennej
 .BR COLORTERM .
 Jeśli jest ustawiona, ma takie samo znaczenie jak opcja \-c.
@@ -2590,7 +2590,7 @@ color_terminals=linux,xterm
 color_terminals=terminal\-name1,terminal\-name2...
 .fi
 .PP
-Program może być skompilowany zarówno z bibliotekami slang jak i ncurses.
+Program może być skompilowany zarówno z bibliotekami S\-Lang jak i ncurses.
 Ncurses nie obsługuje metody wymuszania wyświetlania, zawsze sprawdza w bazie danych
 terminali.
 .PP
@@ -2911,7 +2911,7 @@ definiowania ogólnosystemowych ustawień terminali.
 Własny setup użytkownika. Jeśli ten plik jest dostępny, jest ładowany
 zamiast pliku globalnego.
 .PP
-%prefix%/share/mc/mc.hint
+%prefix%/share/mc/hints/mc.hint
 .IP
 Plik zawierający podpowiedzi (hints) wyświetlane przez program.
 .PP
@@ -2939,10 +2939,10 @@ Lokalny plik zdefiniowany przez użytkownika. Jeśli ten plik jest dostępny,
 jest używany zamiast pliku w katalogu domowym i ogólnosystemowego.
 .PP
 To change default home directory of MC, you can use 
-.BR MC_HOME
-environment variable. The value of MC_HOME must be an absolute path. If MC_HOME
-is unset or empty, HOME variable is used. If HOME is unset or empty, MC
-directories are get from GLib library.
+.BR MC_PROFILE_ROOT
+environment variable. The value of MC_PROFILE_ROOT must be an absolute path.
+If MC_PROFILE_ROOT is unset or empty, HOME variable is used. If HOME is unset
+or empty, MC directories are get from GLib library.
 .\"SKIP_SECTION"
 .SH LICENCJA
 Program jest dystrybuowany na zasadach licencji GNU General Public License

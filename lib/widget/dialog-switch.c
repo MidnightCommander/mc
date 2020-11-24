@@ -3,7 +3,7 @@
 
    Original idea and code: Oleg "Olegarch" Konovalov <olegarch@linuxinside.com>
 
-   Copyright (C) 2009-2016
+   Copyright (C) 2009-2020
    Free Software Foundation, Inc.
 
    Written by:
@@ -119,7 +119,7 @@ dialog_switch_resize (WDialog * d)
     if (widget_get_state (WIDGET (d), WST_ACTIVE))
         send_message (d, NULL, MSG_RESIZE, 0, NULL);
     else
-        d->winch_pending = TRUE;
+        GROUP (d)->winch_pending = TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -220,9 +220,8 @@ dialog_switch_list (void)
     const size_t dlg_num = g_list_length (mc_dialogs);
     int lines, cols;
     Listbox *listbox;
-    GList *h;
+    GList *h, *selected;
     int i = 0;
-    int rv;
 
     if (mc_global.midnight_shutdown || mc_current == NULL)
         return;
@@ -234,30 +233,22 @@ dialog_switch_list (void)
 
     for (h = mc_dialogs; h != NULL; h = g_list_next (h))
     {
-        WDialog *dlg;
+        WDialog *dlg = DIALOG (h->data);
         char *title;
 
-        dlg = DIALOG (h->data);
-
-        if ((dlg != NULL) && (dlg->get_title != NULL))
+        if (dlg->get_title != NULL)
             title = dlg->get_title (dlg, WIDGET (listbox->list)->cols - 2);
         else
             title = g_strdup ("");
 
-        listbox_add_item (listbox->list, LISTBOX_APPEND_BEFORE, get_hotkey (i++), title, NULL,
-                          FALSE);
+        listbox_add_item (listbox->list, LISTBOX_APPEND_BEFORE, get_hotkey (i++), title, h, FALSE);
 
         g_free (title);
     }
 
-    listbox_select_entry (listbox->list, dlg_num - 1 - g_list_position (mc_dialogs, mc_current));
-    rv = run_listbox (listbox);
-
-    if (rv >= 0)
-    {
-        h = g_list_nth (mc_dialogs, dlg_num - 1 - rv);
-        dialog_switch_goto (h);
-    }
+    selected = run_listbox_with_data (listbox, mc_current);
+    if (selected != NULL)
+        dialog_switch_goto (selected);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -302,7 +293,7 @@ dialog_switch_got_winch (void)
 
     for (dlg = mc_dialogs; dlg != NULL; dlg = g_list_next (dlg))
         if (dlg != mc_current)
-            DIALOG (dlg->data)->winch_pending = TRUE;
+            GROUP (dlg->data)->winch_pending = TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -347,7 +338,8 @@ mc_refresh (void)
     if (mc_global.we_are_background)
         return;
 #endif /* ENABLE_BACKGROUND */
-    if (mc_global.tty.winch_flag == 0)
+
+    if (!tty_got_winch ())
         tty_refresh ();
     else
     {
@@ -364,8 +356,7 @@ dialog_change_screen_size (void)
 {
     GList *d;
 
-    mc_global.tty.winch_flag = 0;
-
+    tty_flush_winch ();
     tty_change_screen_size ();
 
 #ifdef HAVE_SLANG

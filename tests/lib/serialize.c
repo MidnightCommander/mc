@@ -1,7 +1,7 @@
 /*
-   lib/vfs - common serialize/deserialize functions
+   lib - common serialize/deserialize functions
 
-   Copyright (C) 2011-2016
+   Copyright (C) 2011-2020
    Free Software Foundation, Inc.
 
    Written by:
@@ -97,6 +97,8 @@ START_PARAMETRIZED_TEST (test_serialize, test_serialize_ds)
 
     g_free (actual_result);
 
+    if (error != NULL)
+        g_error_free (error);
 }
 /* *INDENT-OFF* */
 END_PARAMETRIZED_TEST

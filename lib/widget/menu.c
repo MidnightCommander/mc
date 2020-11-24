@@ -1,7 +1,7 @@
 /*
    Pulldown menu code
 
-   Copyright (C) 1994-2016
+   Copyright (C) 1994-2020
    Free Software Foundation, Inc.
 
    Written by:
@@ -44,6 +44,8 @@
 #include "lib/event.h"          /* mc_event_raise() */
 
 /*** global variables ****************************************************************************/
+
+const global_keymap_t *menu_map = NULL;
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -116,9 +118,9 @@ menu_arrange (menu_t * menu, dlg_shortcut_str get_shortcut)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-menubar_paint_idx (WMenuBar * menubar, unsigned int idx, int color)
+menubar_paint_idx (const WMenuBar * menubar, unsigned int idx, int color)
 {
-    Widget *w = WIDGET (menubar);
+    const Widget *w = CONST_WIDGET (menubar);
     const menu_t *menu = MENU (g_list_nth_data (menubar->menu, menubar->selected));
     const menu_entry_t *entry = MENUENTRY (g_list_nth_data (menu->entries, idx));
     const int y = 2 + idx;
@@ -132,10 +134,10 @@ menubar_paint_idx (WMenuBar * menubar, unsigned int idx, int color)
         /* menu separator */
         tty_setcolor (MENU_ENTRY_COLOR);
 
-        widget_move (w, y, x - 1);
+        widget_gotoyx (w, y, x - 1);
         tty_print_alt_char (ACS_LTEE, FALSE);
         tty_draw_hline (w->y + y, w->x + x, ACS_HLINE, menu->max_entry_len + 3);
-        widget_move (w, y, x + menu->max_entry_len + 3);
+        widget_gotoyx (w, y, x + menu->max_entry_len + 3);
         tty_print_alt_char (ACS_RTEE, FALSE);
     }
     else
@@ -144,7 +146,7 @@ menubar_paint_idx (WMenuBar * menubar, unsigned int idx, int color)
 
         /* menu text */
         tty_setcolor (color);
-        widget_move (w, y, x);
+        widget_gotoyx (w, y, x);
         tty_print_char ((unsigned char) entry->first_letter);
         tty_getyx (&yt, &xt);
         tty_draw_hline (yt, xt, ' ', menu->max_entry_len + 2);  /* clear line */
@@ -162,21 +164,21 @@ menubar_paint_idx (WMenuBar * menubar, unsigned int idx, int color)
 
         if (entry->shortcut != NULL)
         {
-            widget_move (w, y, x + menu->max_hotkey_len + 3);
+            widget_gotoyx (w, y, x + menu->max_hotkey_len + 3);
             tty_print_string (entry->shortcut);
         }
 
         /* move cursor to the start of entry text */
-        widget_move (w, y, x + 1);
+        widget_gotoyx (w, y, x + 1);
     }
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-menubar_draw_drop (WMenuBar * menubar)
+menubar_draw_drop (const WMenuBar * menubar)
 {
-    Widget *w = WIDGET (menubar);
+    const Widget *w = CONST_WIDGET (menubar);
     const menu_t *menu = MENU (g_list_nth_data (menubar->menu, menubar->selected));
     const unsigned int count = g_list_length (menu->entries);
     int column = menu->start_x - 1;
@@ -184,6 +186,10 @@ menubar_draw_drop (WMenuBar * menubar)
 
     if (column + menu->max_entry_len + 5 > (gsize) w->cols)
         column = w->cols - menu->max_entry_len - 5;
+
+    if (mc_global.tty.shadows)
+        tty_draw_box_shadow (w->y + 1, w->x + column, count + 2, menu->max_entry_len + 5,
+                             SHADOW_COLOR);
 
     tty_setcolor (MENU_ENTRY_COLOR);
     tty_draw_box (w->y + 1, w->x + column, count + 2, menu->max_entry_len + 5, FALSE);
@@ -196,9 +202,9 @@ menubar_draw_drop (WMenuBar * menubar)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-menubar_set_color (WMenuBar * menubar, gboolean current, gboolean hotkey)
+menubar_set_color (const WMenuBar * menubar, gboolean current, gboolean hotkey)
 {
-    if (!widget_get_state (WIDGET (menubar), WST_FOCUSED))
+    if (!widget_get_state (CONST_WIDGET (menubar), WST_FOCUSED))
         tty_setcolor (MENU_INACTIVE_COLOR);
     else if (current)
         tty_setcolor (hotkey ? MENU_HOTSEL_COLOR : MENU_SELECTED_COLOR);
@@ -209,9 +215,9 @@ menubar_set_color (WMenuBar * menubar, gboolean current, gboolean hotkey)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-menubar_draw (WMenuBar * menubar)
+menubar_draw (const WMenuBar * menubar)
 {
-    Widget *w = WIDGET (menubar);
+    const Widget *w = CONST_WIDGET (menubar);
     GList *i;
 
     /* First draw the complete menubar */
@@ -225,7 +231,7 @@ menubar_draw (WMenuBar * menubar)
         gboolean is_selected = (menubar->selected == (gsize) g_list_position (menubar->menu, i));
 
         menubar_set_color (menubar, is_selected, FALSE);
-        widget_move (w, 0, menu->start_x);
+        widget_gotoyx (w, 0, menu->start_x);
 
         tty_print_char (' ');
         tty_print_string (menu->text.start);
@@ -246,7 +252,7 @@ menubar_draw (WMenuBar * menubar)
     if (menubar->is_dropped)
         menubar_draw_drop (menubar);
     else
-        widget_move (w, 0, MENU (g_list_nth_data (menubar->menu, menubar->selected))->start_x);
+        widget_gotoyx (w, 0, MENU (g_list_nth_data (menubar->menu, menubar->selected))->start_x);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -254,7 +260,7 @@ menubar_draw (WMenuBar * menubar)
 static void
 menubar_remove (WMenuBar * menubar)
 {
-    WDialog *h;
+    Widget *g;
 
     if (!menubar->is_dropped)
         return;
@@ -263,15 +269,15 @@ menubar_remove (WMenuBar * menubar)
        of overlapped widgets. This is useful in multi-window editor.
        In general, menubar should be a special object, not an ordinary widget
        in the current dialog. */
-    h = WIDGET (menubar)->owner;
-    h->current = g_list_find (h->widgets, dlg_find_by_id (h, menubar->previous_widget));
+    g = WIDGET (WIDGET (menubar)->owner);
+    GROUP (g)->current = widget_find (g, widget_find_by_id (g, menubar->previous_widget));
 
     menubar->is_dropped = FALSE;
     do_refresh ();
     menubar->is_dropped = TRUE;
 
     /* restore current widget */
-    h->current = g_list_find (h->widgets, menubar);
+    GROUP (g)->current = widget_find (g, WIDGET (menubar));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -313,8 +319,11 @@ menubar_finish (WMenuBar * menubar)
     /* Move the menubar to the bottom so that widgets displayed on top of
      * an "invisible" menubar get the first chance to respond to mouse events. */
     widget_set_bottom (w);
+    /* background must be bottom */
+    if (DIALOG (w->owner)->bg != NULL)
+        widget_set_bottom (WIDGET (DIALOG (w->owner)->bg));
 
-    dlg_select_by_id (w->owner, menubar->previous_widget);
+    group_select_widget_by_id (w->owner, menubar->previous_widget);
     do_refresh ();
 }
 
@@ -397,28 +406,36 @@ menubar_up (WMenuBar * menubar)
 static void
 menubar_first (WMenuBar * menubar)
 {
-    menu_t *menu = MENU (g_list_nth_data (menubar->menu, menubar->selected));
-
-    if (menu->selected == 0)
-        return;
-
-    menubar_paint_idx (menubar, menu->selected, MENU_ENTRY_COLOR);
-
-    menu->selected = 0;
-
-    while (TRUE)
+    if (menubar->is_dropped)
     {
-        menu_entry_t *entry;
+        menu_t *menu = MENU (g_list_nth_data (menubar->menu, menubar->selected));
 
-        entry = MENUENTRY (g_list_nth_data (menu->entries, menu->selected));
+        if (menu->selected == 0)
+            return;
 
-        if ((entry == NULL) || (entry->command == CK_IgnoreKey))
-            menu->selected++;
-        else
-            break;
+        menubar_paint_idx (menubar, menu->selected, MENU_ENTRY_COLOR);
+
+        menu->selected = 0;
+
+        while (TRUE)
+        {
+            menu_entry_t *entry;
+
+            entry = MENUENTRY (g_list_nth_data (menu->entries, menu->selected));
+
+            if ((entry == NULL) || (entry->command == CK_IgnoreKey))
+                menu->selected++;
+            else
+                break;
+        }
+
+        menubar_paint_idx (menubar, menu->selected, MENU_SELECTED_COLOR);
     }
-
-    menubar_paint_idx (menubar, menu->selected, MENU_SELECTED_COLOR);
+    else
+    {
+        menubar->selected = 0;
+        menubar_draw (menubar);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -426,46 +443,92 @@ menubar_first (WMenuBar * menubar)
 static void
 menubar_last (WMenuBar * menubar)
 {
-    menu_t *menu = MENU (g_list_nth_data (menubar->menu, menubar->selected));
-    const unsigned int len = g_list_length (menu->entries);
-    menu_entry_t *entry;
-
-    if (menu->selected == len - 1)
-        return;
-
-    menubar_paint_idx (menubar, menu->selected, MENU_ENTRY_COLOR);
-
-    menu->selected = len;
-
-    do
+    if (menubar->is_dropped)
     {
-        menu->selected--;
-        entry = MENUENTRY (g_list_nth_data (menu->entries, menu->selected));
-    }
-    while ((entry == NULL) || (entry->command == CK_IgnoreKey));
+        menu_t *menu = MENU (g_list_nth_data (menubar->menu, menubar->selected));
+        const unsigned int len = g_list_length (menu->entries);
+        menu_entry_t *entry;
 
-    menubar_paint_idx (menubar, menu->selected, MENU_SELECTED_COLOR);
+        if (menu->selected == len - 1)
+            return;
+
+        menubar_paint_idx (menubar, menu->selected, MENU_ENTRY_COLOR);
+
+        menu->selected = len;
+
+        do
+        {
+            menu->selected--;
+            entry = MENUENTRY (g_list_nth_data (menu->entries, menu->selected));
+        }
+        while ((entry == NULL) || (entry->command == CK_IgnoreKey));
+
+        menubar_paint_idx (menubar, menu->selected, MENU_SELECTED_COLOR);
+    }
+    else
+    {
+        menubar->selected = g_list_length (menubar->menu) - 1;
+        menubar_draw (menubar);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
-menubar_handle_key (WMenuBar * menubar, int key)
+static cb_ret_t
+menubar_try_drop_menu (WMenuBar * menubar, int hotkey)
 {
-    /* Lowercase */
-    if (isascii (key))
-        key = g_ascii_tolower (key);
+    GList *i;
 
-    if (is_abort_char (key))
+    for (i = menubar->menu; i != NULL; i = g_list_next (i))
     {
-        menubar_finish (menubar);
-        return 1;
+        menu_t *menu = MENU (i->data);
+
+        if (menu->text.hotkey != NULL && hotkey == g_ascii_tolower (menu->text.hotkey[0]))
+        {
+            menubar_drop (menubar, g_list_position (menubar->menu, i));
+            return MSG_HANDLED;
+        }
     }
 
-    /* menubar help or menubar navigation */
-    switch (key)
+    return MSG_NOT_HANDLED;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static cb_ret_t
+menubar_try_exec_menu (WMenuBar * menubar, int hotkey)
+{
+    menu_t *menu;
+    GList *i;
+
+    menu = g_list_nth_data (menubar->menu, menubar->selected);
+
+    for (i = menu->entries; i != NULL; i = g_list_next (i))
     {
-    case KEY_F (1):
+        const menu_entry_t *entry = MENUENTRY (i->data);
+
+        if (entry != NULL && entry->text.hotkey != NULL
+            && hotkey == g_ascii_tolower (entry->text.hotkey[0]))
+        {
+            menu->selected = g_list_position (menu->entries, i);
+            menubar_execute (menubar);
+            return MSG_HANDLED;
+        }
+    }
+
+    return MSG_NOT_HANDLED;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static cb_ret_t
+menubar_execute_cmd (WMenuBar * menubar, long command)
+{
+    cb_ret_t ret = MSG_HANDLED;
+
+    switch (command)
+    {
+    case CK_Help:
         {
             ev_help_t event_data = { NULL, NULL };
 
@@ -477,98 +540,72 @@ menubar_handle_key (WMenuBar * menubar, int key)
 
             mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data);
             menubar_draw (menubar);
-            return 1;
         }
+        break;
 
-    case KEY_LEFT:
-    case XCTRL ('b'):
+    case CK_Left:
         menubar_left (menubar);
-        return 1;
-
-    case KEY_RIGHT:
-    case XCTRL ('f'):
+        break;
+    case CK_Right:
         menubar_right (menubar);
-        return 1;
+        break;
+    case CK_Up:
+        if (menubar->is_dropped)
+            menubar_up (menubar);
+        break;
+    case CK_Down:
+        if (menubar->is_dropped)
+            menubar_down (menubar);
+        else
+            menubar_drop (menubar, menubar->selected);
+        break;
+    case CK_Home:
+        menubar_first (menubar);
+        break;
+    case CK_End:
+        menubar_last (menubar);
+        break;
+
+    case CK_Enter:
+        if (menubar->is_dropped)
+            menubar_execute (menubar);
+        else
+            menubar_drop (menubar, menubar->selected);
+        break;
+    case CK_Quit:
+        menubar_finish (menubar);
+        break;
 
     default:
+        ret = MSG_NOT_HANDLED;
         break;
     }
 
-    if (!menubar->is_dropped)
+    return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+menubar_handle_key (WMenuBar * menubar, int key)
+{
+    long cmd;
+    cb_ret_t ret = MSG_NOT_HANDLED;
+
+    cmd = widget_lookup_key (WIDGET (menubar), key);
+
+    if (cmd != CK_IgnoreKey)
+        ret = menubar_execute_cmd (menubar, cmd);
+
+    if (ret != MSG_HANDLED)
     {
-        GList *i;
-
-        /* drop menu by hotkey */
-        for (i = menubar->menu; i != NULL; i = g_list_next (i))
-        {
-            menu_t *menu = MENU (i->data);
-
-            if ((menu->text.hotkey != NULL) && (key == g_ascii_tolower (menu->text.hotkey[0])))
-            {
-                menubar_drop (menubar, g_list_position (menubar->menu, i));
-                return 1;
-            }
-        }
-
-        /* drop menu by Enter or Dowwn key */
-        if (key == KEY_ENTER || key == XCTRL ('n') || key == KEY_DOWN || key == '\n')
-            menubar_drop (menubar, menubar->selected);
-
-        return 1;
+        if (menubar->is_dropped)
+            ret = menubar_try_exec_menu (menubar, key);
+        else
+            ret = menubar_try_drop_menu (menubar, key);
     }
 
-    {
-        menu_t *menu = MENU (g_list_nth_data (menubar->menu, menubar->selected));
-        GList *i;
-
-        /* execute menu command by hotkey */
-        for (i = menu->entries; i != NULL; i = g_list_next (i))
-        {
-            const menu_entry_t *entry = MENUENTRY (i->data);
-
-            if ((entry != NULL) && (entry->command != CK_IgnoreKey)
-                && (entry->text.hotkey != NULL) && (key == g_ascii_tolower (entry->text.hotkey[0])))
-            {
-                menu->selected = g_list_position (menu->entries, i);
-                menubar_execute (menubar);
-                return 1;
-            }
-        }
-
-        /* menu execute by Enter or menu navigation */
-        switch (key)
-        {
-        case KEY_ENTER:
-        case '\n':
-            menubar_execute (menubar);
-            return 1;
-
-        case KEY_HOME:
-        case ALT ('<'):
-            menubar_first (menubar);
-            break;
-
-        case KEY_END:
-        case ALT ('>'):
-            menubar_last (menubar);
-            break;
-
-        case KEY_DOWN:
-        case XCTRL ('n'):
-            menubar_down (menubar);
-            break;
-
-        case KEY_UP:
-        case XCTRL ('p'):
-            menubar_up (menubar);
-            break;
-
-        default:
-            break;
-        }
-    }
-
-    return 0;
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -591,11 +628,10 @@ menubar_refresh (WMenuBar * menubar)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
+static inline void
 menubar_free_menu (WMenuBar * menubar)
 {
-    if (menubar->menu != NULL)
-        g_list_free_full (menubar->menu, (GDestroyNotify) destroy_menu);
+    g_clear_list (&menubar->menu, (GDestroyNotify) destroy_menu);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -640,6 +676,7 @@ menubar_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
 
     case MSG_RESIZE:
         /* try show menu after screen resize */
+        widget_default_callback (w, NULL, MSG_RESIZE, 0, data);
         menubar_refresh (menubar);
         return MSG_HANDLED;
 
@@ -661,7 +698,7 @@ menubar_get_menu_by_x_coord (const WMenuBar * menubar, int x)
     GList *menu;
 
     for (i = 0, menu = menubar->menu;
-         menu != NULL && x > MENU (menu->data)->start_x; i++, menu = g_list_next (menu))
+         menu != NULL && x >= MENU (menu->data)->start_x; i++, menu = g_list_next (menu))
         ;
 
     /* Don't set the invalid value -1 */
@@ -842,7 +879,7 @@ menu_entry_create (const char *name, long command)
 
     entry = g_new (menu_entry_t, 1);
     entry->first_letter = ' ';
-    entry->text = parse_hotkey (name);
+    entry->text = hotkey_new (name);
     entry->command = command;
     entry->shortcut = NULL;
 
@@ -856,7 +893,7 @@ menu_entry_free (menu_entry_t * entry)
 {
     if (entry != NULL)
     {
-        release_hotkey (entry->text);
+        hotkey_free (entry->text);
         g_free (entry->shortcut);
         g_free (entry);
     }
@@ -871,7 +908,7 @@ create_menu (const char *name, GList * entries, const char *help_node)
 
     menu = g_new (menu_t, 1);
     menu->start_x = 0;
-    menu->text = parse_hotkey (name);
+    menu->text = hotkey_new (name);
     menu->entries = entries;
     menu->max_entry_len = 1;
     menu->max_hotkey_len = 0;
@@ -886,8 +923,8 @@ create_menu (const char *name, GList * entries, const char *help_node)
 void
 menu_set_name (menu_t * menu, const char *name)
 {
-    release_hotkey (menu->text);
-    menu->text = parse_hotkey (name);
+    hotkey_free (menu->text);
+    menu->text = hotkey_new (name);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -895,7 +932,7 @@ menu_set_name (menu_t * menu, const char *name)
 void
 destroy_menu (menu_t * menu)
 {
-    release_hotkey (menu->text);
+    hotkey_free (menu->text);
     g_list_free_full (menu->entries, (GDestroyNotify) menu_entry_free);
     g_free (menu->help_node);
     g_free (menu);
@@ -904,17 +941,19 @@ destroy_menu (menu_t * menu)
 /* --------------------------------------------------------------------------------------------- */
 
 WMenuBar *
-menubar_new (int y, int x, int cols, GList * menu, gboolean visible)
+menubar_new (GList * menu, gboolean visible)
 {
     WMenuBar *menubar;
     Widget *w;
 
     menubar = g_new0 (WMenuBar, 1);
     w = WIDGET (menubar);
-    widget_init (w, y, x, 1, cols, menubar_callback, menubar_mouse_callback);
+    widget_init (w, 0, 0, 1, COLS, menubar_callback, menubar_mouse_callback);
+    w->pos_flags = WPOS_KEEP_HORZ | WPOS_KEEP_TOP;
     /* initially, menubar is not selectable */
     widget_set_options (w, WOP_SELECTABLE, FALSE);
     w->options |= WOP_TOP_SELECT;
+    w->keymap = menu_map;
     menubar->is_visible = visible;
     menubar_set_menu (menubar, menu);
 
@@ -943,7 +982,7 @@ menubar_add_menu (WMenuBar * menubar, menu_t * menu)
 {
     if (menu != NULL)
     {
-        menu_arrange (menu, WIDGET (menubar)->owner->get_shortcut);
+        menu_arrange (menu, DIALOG (WIDGET (menubar)->owner)->get_shortcut);
         menubar->menu = g_list_append (menubar->menu, menu);
     }
 
@@ -1008,7 +1047,7 @@ menubar_arrange (WMenuBar * menubar)
 WMenuBar *
 find_menubar (const WDialog * h)
 {
-    return MENUBAR (find_widget_type (h, menubar_callback));
+    return MENUBAR (widget_find_by_type (CONST_WIDGET (h), menubar_callback));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1034,7 +1073,7 @@ menubar_activate (WMenuBar * menubar, gboolean dropped, int which)
         if (which >= 0)
             menubar->selected = (guint) which;
 
-        menubar->previous_widget = dlg_get_current_widget_id (w->owner);
+        menubar->previous_widget = group_get_current_widget_id (w->owner);
 
         /* Bring it to the top so it receives all mouse events before any other widget.
          * See also comment in menubar_finish(). */

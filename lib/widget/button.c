@@ -1,7 +1,7 @@
 /*
    Widgets for the Midnight Commander
 
-   Copyright (C) 1994-2016
+   Copyright (C) 1994-2020
    Free Software Foundation, Inc.
 
    Authors:
@@ -50,13 +50,20 @@
 
 /*** file scope variables ************************************************************************/
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
-static cb_ret_t
-button_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+cb_ret_t
+button_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WButton *b = BUTTON (w);
-    WDialog *h = w->owner;
+    WGroup *g = w->owner;
+    WDialog *h = DIALOG (g);
     int off = 0;
 
     switch (msg)
@@ -68,7 +75,7 @@ button_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
          * when hotkeys are sent to all widgets before the key is
          * handled by the current widget.
          */
-        if (parm == '\n' && WIDGET (h->current->data) == WIDGET (b))
+        if (parm == '\n' && WIDGET (g->current->data) == w)
         {
             send_message (w, sender, MSG_KEY, ' ', data);
             return MSG_HANDLED;
@@ -114,7 +121,7 @@ button_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
             off = 0;
             break;
         }
-        widget_move (w, 0, b->hotpos + off);
+        widget_gotoyx (w, 0, b->hotpos + off);
         return MSG_HANDLED;
 
     case MSG_DRAW:
@@ -124,7 +131,7 @@ button_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
             focused = widget_get_state (w, WST_FOCUSED);
 
             widget_selectcolor (w, focused, FALSE);
-            widget_move (w, 0, 0);
+            widget_gotoyx (w, 0, 0);
 
             switch (b->flags)
             {
@@ -163,7 +170,7 @@ button_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
         }
 
     case MSG_DESTROY:
-        release_hotkey (b->text);
+        hotkey_free (b->text);
         return MSG_HANDLED;
 
     default:
@@ -173,8 +180,8 @@ button_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
-button_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
+void
+button_mouse_default_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 {
     (void) event;
 
@@ -195,8 +202,6 @@ button_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/*** public functions ****************************************************************************/
-/* --------------------------------------------------------------------------------------------- */
 
 WButton *
 button_new (int y, int x, int action, button_flags_t flags, const char *text, bcback_fn callback)
@@ -209,8 +214,9 @@ button_new (int y, int x, int action, button_flags_t flags, const char *text, bc
 
     b->action = action;
     b->flags = flags;
-    b->text = parse_hotkey (text);
-    widget_init (w, y, x, 1, button_get_len (b), button_callback, button_mouse_callback);
+    b->text = hotkey_new (text);
+    widget_init (w, y, x, 1, button_get_len (b), button_default_callback,
+                 button_mouse_default_callback);
     w->options |= WOP_SELECTABLE | WOP_WANT_CURSOR | WOP_WANT_HOTKEY;
     b->callback = callback;
     b->hotpos = (b->text.hotkey != NULL) ? str_term_width1 (b->text.start) : -1;
@@ -223,9 +229,7 @@ button_new (int y, int x, int action, button_flags_t flags, const char *text, bc
 char *
 button_get_text (const WButton * b)
 {
-    if (b->text.hotkey != NULL)
-        return g_strconcat (b->text.start, "&", b->text.hotkey, b->text.end, (char *) NULL);
-    return g_strdup (b->text.start);
+    return hotkey_get_text (b->text);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -234,12 +238,20 @@ void
 button_set_text (WButton * b, const char *text)
 {
     Widget *w = WIDGET (b);
+    hotkey_t hk;
 
-    release_hotkey (b->text);
-    b->text = parse_hotkey (text);
+    hk = hotkey_new (text);
+    if (hotkey_equal (b->text, hk))
+    {
+        hotkey_free (hk);
+        return;
+    }
+
+    hotkey_free (b->text);
+    b->text = hk;
     b->hotpos = (b->text.hotkey != NULL) ? str_term_width1 (b->text.start) : -1;
     w->cols = button_get_len (b);
-    widget_redraw (w);
+    widget_draw (w);
 }
 
 /* --------------------------------------------------------------------------------------------- */

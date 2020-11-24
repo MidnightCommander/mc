@@ -1,0 +1,3 @@
+This is a dummy file meant to ensure this directory isn't empty so that git always creates it.
+
+Otherwise our 'test_all' script will fail complaining the directory doesn't exist.

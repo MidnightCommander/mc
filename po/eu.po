@@ -1,17 +1,17 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the mc package.
 #
 # Translators:
-# Iñigo Salvador Azurmendi <xalba@euskalnet.net>, 2011,2015
+# Iñigo Salvador Azurmendi <xalba@euskalnet.net>, 2011,2015-2019
 # Slava Zanko <slavazanko@gmail.com>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2016-11-13 15:59+0300\n"
-"PO-Revision-Date: 2016-05-08 08:14+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"PO-Revision-Date: 2020-05-17 17:42+0000\n"
+"Last-Translator: Transifex Bot <>\n"
 "Language-Team: Basque (http://www.transifex.com/mc/mc/language/eu/)\n"
 "Language: eu\n"
 "MIME-Version: 1.0\n"
@@ -100,6 +100,27 @@ msgstr ""
 "Zure ezarpen zaharrak %s-tik⏎\n"
 "%s-ra migratu dira⏎\n"
 
+msgid ""
+"Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
+"hex)"
+msgstr ""
+"Barruti kanpoko zenbakia (byte barrutian egon behar luke, 0 <= n <= 0xFF, "
+"hamaseitarrean adierazita)"
+
+msgid "Invalid character"
+msgstr "Karaktere baliogabea"
+
+msgid "Unmatched quotes character"
+msgstr "Itxi gabeko aipu karaktereak"
+
+#, c-format
+msgid ""
+"Hex pattern error at position %d:\n"
+"%s."
+msgstr ""
+"Hex eredu errorea %dkokapenean :\n"
+"%s."
+
 msgid "Search string not found"
 msgstr "Bilatutako katea ez da aurkitu"
 
@@ -126,7 +147,7 @@ msgid "He&xadecimal"
 msgstr "Hama&seitarra"
 
 msgid "Wil&dcard search"
-msgstr "&Zernahitarako karaktere bilaketa"
+msgstr "&Maskara bilaketa"
 
 #, c-format
 msgid ""
@@ -141,17 +162,17 @@ msgid ""
 "Unable to parse '%s' skin.\n"
 "Default skin has been loaded"
 msgstr ""
-"'%s' azalaren azterketa sintaktikoa ezin egin.\n"
+"'%s' azalaren azterketa sintaktikoa ezin da egin.\n"
 "Azal lehenetsia zamatu da"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Unable to use '%s' skin with true colors support:\n"
 "%s\n"
 "Default skin has been loaded"
 msgstr ""
-"Ezin da 256 koloretarako euskarria duen '%s' azala\n"
-"256 koloretakoa ez den terminal batean erabili.\n"
+"Ezin da '%s' azala erabili benetako-kolore sostenguarekin:\n"
+"%s\n"
 "Lehenetsitako azala zamatu da"
 
 #, c-format
@@ -165,16 +186,17 @@ msgstr ""
 "Lehenetsitako azala zamatu da"
 
 msgid "True color not supported with ncurses."
-msgstr ""
+msgstr "Benetako-kolorea ez du onartzen ncurses-ek."
 
 msgid "True color not supported in this slang version."
-msgstr ""
+msgstr "Benetako-kolorea ez da onartzen slang bertsio honetan."
 
 msgid "Your terminal doesn't even seem to support 256 colors."
-msgstr ""
+msgstr "Ematen du zure terminalak 256 kolore ere ez dituela onartzen."
 
 msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
 msgstr ""
+"Ezarri COLORTERM=truecolor zure terminalak benetako-kolorea onartzen badu."
 
 msgid "Escape"
 msgstr "Ihes"
@@ -462,6 +484,27 @@ msgstr "Maius"
 msgid "The TERM environment variable is unset!\n"
 msgstr "TERM ingurune-aldagaia ezarri gabe dago!\n"
 
+msgid "Cannot check SIGWINCH pipe"
+msgstr ""
+
+#, c-format
+msgid ""
+"\n"
+"Cannot create pipe for SIGWINCH: %s (%d)\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"\n"
+"Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"\n"
+"Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
+msgstr ""
+
 #, c-format
 msgid ""
 "Screen size %dx%d is not supported.\n"
@@ -471,25 +514,25 @@ msgstr ""
 "Egiaztatu TERM ingurune-aldagaia.\n"
 
 msgid "B"
-msgstr ""
+msgstr "B"
 
 msgid "kB"
-msgstr ""
+msgstr "kB"
 
 msgid "KiB"
-msgstr ""
+msgstr "KiB"
 
 msgid "MB"
-msgstr ""
+msgstr "MB"
 
 msgid "MiB"
-msgstr ""
+msgstr "MiB"
 
 msgid "GB"
-msgstr ""
+msgstr "GB"
 
 msgid "GiB"
-msgstr ""
+msgstr "GiB"
 
 msgid "Cannot create pipe descriptor"
 msgstr "Ezin da sortu hodi deskriptorea"
@@ -531,11 +574,11 @@ msgstr "%s(r)en direktorio cache-a iraungi egin da"
 
 #, c-format
 msgid "%s: %s: %s %3d%% (%lld) bytes transferred"
-msgstr ""
+msgstr "%s: %s: %s %3d%% (%lld) byte transferituta"
 
 #, c-format
 msgid "%s: %s: %s %lld bytes transferred"
-msgstr ""
+msgstr "%s: %s: %s %lld byte transferituta"
 
 msgid "Starting linear transfer..."
 msgstr "Transferentzia lineala hasten..."
@@ -570,12 +613,11 @@ msgstr "Aldiuneko fitxategiak %s kokalekuan sortuko dira\n"
 msgid "Temporary files will not be created\n"
 msgstr "Aldiuneko fitxategiak ez dira sortuko\n"
 
-#, c-format
 msgid "Press any key to continue..."
 msgstr "Sakatu edozein tekla jarraitzeko..."
 
 msgid "Cannot parse:"
-msgstr "Azterketa sintaktikoa ezin egin:"
+msgstr "Azterketa sintaktikoa ezin da egin:"
 
 msgid "More parsing errors will be ignored."
 msgstr "Azterketa sintaktikoaren akats gehiago baztertu egingo dira."
@@ -619,7 +661,7 @@ msgstr "Errorea"
 
 #, c-format
 msgid "%s (%d)"
-msgstr ""
+msgstr "%s (%d)"
 
 msgid "&Abort"
 msgstr "&Abortatu"
@@ -639,6 +681,9 @@ msgstr "Inprimatu konfiguratzeko aukerak"
 msgid "Print last working directory to specified file"
 msgstr "Inprimatu laneko azken direktorioa zehaztutako fitxategira"
 
+msgid "<file>"
+msgstr "<file>"
+
 msgid "Enables subshell support (default)"
 msgstr "Subshell euskarria (lehenetsia) gaitzen du"
 
@@ -646,16 +691,22 @@ msgid "Disables subshell support"
 msgstr "Subshell euskarria desgaitzen du"
 
 msgid "Log ftp dialog to specified file"
-msgstr "Erregistratu ftp elkarrizketa-koadroa zehaztutako fitxategian "
+msgstr "Gorde ftp elkarrizketa zehaztutako fitxategian"
 
 msgid "Set debug level"
 msgstr "Ezarri arazketa maila"
+
+msgid "<integer>"
+msgstr "<integer>"
 
 msgid "Launches the file viewer on a file"
 msgstr "Fitxategi-ikustailea fitxategian abiarazten du"
 
 msgid "Edit files"
 msgstr "Editatu fitxategiak"
+
+msgid "<file> ..."
+msgstr "<file> ..."
 
 msgid "Forces xterm features"
 msgstr "xterm eginbideak behartzen ditu"
@@ -695,6 +746,9 @@ msgstr "Kolore moduan exekutatzeko eskatzen du"
 
 msgid "Specifies a color configuration"
 msgstr "Kolore-konfigurazioa zehazten du"
+
+msgid "<string>"
+msgstr "<string>"
 
 msgid "Show mc with specified skin"
 msgstr "Erakutsi mc zehaztutako azalarekin"
@@ -768,14 +822,17 @@ msgstr ""
 msgid "Color options"
 msgstr "Koloreen aukerak"
 
-msgid "+number"
-msgstr "+zenbakia"
+msgid "[+lineno] file1[:lineno] [file2[:lineno]...]"
+msgstr "[+lerrozk] fitxtg1[:lerrozk] [fitxtg2[:lerrozk]...]"
+
+msgid "file"
+msgstr "fitxategia"
+
+msgid "file1 file2"
+msgstr "file1 file2"
 
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[dir_hau] [beste_panel_dir]"
-
-msgid "Set initial line number for the internal editor"
-msgstr "Ezarri barneko editorearentzako hasierako lerro zenbakia"
 
 msgid ""
 "\n"
@@ -1081,11 +1138,8 @@ msgstr "Aldatu lerro hausturak hontara:"
 msgid "Save As"
 msgstr "Gorde honela"
 
-msgid "Block is large, you may not be able to undo this action"
-msgstr "Blokea handia da, agian ezingo duzu ekintza hau desegin"
-
 msgid "Collect completions"
-msgstr ""
+msgstr "Osatzeak bildu"
 
 msgid "&Quick save"
 msgstr "&Azker gordetzea"
@@ -1284,10 +1338,10 @@ msgstr "Sakatu edozein tekla:"
 
 msgid ""
 "Current text was modified without a file save.\n"
-"Continue discards these changes"
+"Continue discards these changes."
 msgstr ""
-"Uneko testuan aldaketak egin dira eta ez dira gorde.\n"
-"Jarraitzen baduzu aldaketa hauek baztertu egingo dira"
+"Uneko testua aldatu da baino ez da fitxategian gorde.\n"
+"Jarraitzeak aldaketa hauek baztertuko ditu."
 
 msgid "In se&lection"
 msgstr "&Hautapenean"
@@ -1316,13 +1370,6 @@ msgstr "Berretsi ordezkapena"
 msgid "Cancel"
 msgstr "Utzi"
 
-msgid ""
-"Current text was modified without a file save.\n"
-"Continue discards these changes."
-msgstr ""
-"Uneko testuan aldaketak egin dira eta ez dira gorde.\n"
-"Jarraitzen baduzu aldaketa horiek baztertu egingo dira"
-
 msgid "NoName"
 msgstr "Izengabe"
 
@@ -1334,6 +1381,9 @@ msgstr "&Berria"
 
 msgid "&Close"
 msgstr "It&xi"
+
+msgid "&History..."
+msgstr ""
 
 msgid "Save &as..."
 msgstr "Gorde &honela..."
@@ -1447,7 +1497,7 @@ msgid "&Refresh screen"
 msgstr "&Freskatu pantaila"
 
 msgid "&Start/Stop record macro"
-msgstr "&Hasi/Gelditu makro grabaketa"
+msgstr "&Hasi/Gelditu makro grabatzea"
 
 msgid "Delete macr&o..."
 msgstr "Ezabatu makr&oa..."
@@ -1618,7 +1668,7 @@ msgstr ""
 "Testu editore lagunkoi bat\n"
 "Midnight Commander-rarentzako idatzia."
 
-msgid "Copyright (C) 1996-2016 the Free Software Foundation"
+msgid "Copyright (C) 1996-2020 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -1771,7 +1821,11 @@ msgstr "Ezin eskuratu ondokoaren bertako kopia bat: %s"
 msgid "The shell is already running a command"
 msgstr "Shell-a dagoeneko komando bat exekutate ari da"
 
-#, c-format
+msgid ""
+"Not an xterm or Linux console;\n"
+"the subshell cannot be toggled."
+msgstr ""
+
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Tekleatu «exit» Midnight Commanderrera itzultzeko"
 
@@ -1796,6 +1850,10 @@ msgstr "bestelakoa"
 msgid "Flag"
 msgstr "Bandera"
 
+#, c-format
+msgid "Permissions (octal): %o"
+msgstr ""
+
 msgid "Chown advanced command"
 msgstr "Chown komando aurreratua"
 
@@ -1806,6 +1864,15 @@ msgid ""
 msgstr ""
 "\"%s\"-ren baimenak ezin aldatu (\"chmod\")\n"
 "%s"
+
+msgid "&Ignore"
+msgstr "&Jaromonik ez"
+
+msgid "Ignore &all"
+msgstr "Jaramonik ez &guztiari"
+
+msgid "&Retry"
+msgstr "&Saiatu berriz"
 
 #, c-format
 msgid ""
@@ -1897,7 +1964,10 @@ msgid "Cd follows lin&ks"
 msgstr "Cd-k este&kei jarraitzen die"
 
 msgid "Sa&fe delete"
-msgstr "E&zabaketa segurua"
+msgstr "E&zabatze segurua"
+
+msgid "Safe overwrite"
+msgstr "Gainidazte segurua"
 
 msgid "A&uto save setup"
 msgstr "A&uto gorde ezarpena"
@@ -1933,7 +2003,7 @@ msgid "Show &hidden files"
 msgstr "Erakutsi &ezkutuko fitxategiak"
 
 msgid "&Fast dir reload"
-msgstr "&Direktorio birzamaketa bizkorra"
+msgstr "&Direktorio birzamatze bizkorra"
 
 msgid "Ma&rk moves down"
 msgstr "Ma&rkatzean beheruntz mugitu"
@@ -1942,7 +2012,7 @@ msgid "Re&verse files only"
 msgstr "&Alderantzikatu fitxategiak soilik"
 
 msgid "Simple s&wap"
-msgstr "&Trukaketa erraza"
+msgstr "&Trukatze arrunta"
 
 msgid "A&uto save panels setup"
 msgstr "A&uto gorde panelen ezarpena"
@@ -1954,13 +2024,13 @@ msgid "L&ynx-like motion"
 msgstr "L&ynx-en moduko mugimendua"
 
 msgid "Pa&ge scrolling"
-msgstr "Orri &labainketa"
+msgstr "O&rria labaintzea"
 
 msgid "Center &scrolling"
-msgstr ""
+msgstr "Erdigunean &labaintzea"
 
 msgid "&Mouse page scrolling"
-msgstr "&Saguarekin orri labainketa"
+msgstr "&Saguarekin orria labaintzea"
 
 msgid "File highlight"
 msgstr "Fitxategi nabarmentzea"
@@ -2009,8 +2079,8 @@ msgstr "zutabeak"
 msgid "User &mini status"
 msgstr "Erabiltzailearen &mini egoera"
 
-msgid "Listing mode"
-msgstr "Zerrendatzeko modua"
+msgid "Listing format"
+msgstr "Zerrenda formatua"
 
 msgid "Executable &first"
 msgstr "Exekutagarria &lehenengo"
@@ -2133,6 +2203,105 @@ msgstr "Erabiltzaile izena:"
 msgid "SMB authentication"
 msgstr "SMB autentikazioa"
 
+msgid "Secure deletion"
+msgstr ""
+
+msgid "Undelete"
+msgstr ""
+
+msgid "Synchronous updates"
+msgstr ""
+
+msgid "Synchronous directory updates"
+msgstr ""
+
+msgid "Immutable"
+msgstr ""
+
+msgid "Append only"
+msgstr ""
+
+msgid "No dump"
+msgstr ""
+
+msgid "No update atime"
+msgstr ""
+
+msgid "Compress"
+msgstr ""
+
+msgid "Compressed clusters"
+msgstr ""
+
+msgid "Compressed dirty file"
+msgstr ""
+
+msgid "Compression raw access"
+msgstr ""
+
+msgid "Encrypted inode"
+msgstr ""
+
+msgid "Journaled data"
+msgstr ""
+
+msgid "Indexed directory"
+msgstr ""
+
+msgid "No tail merging"
+msgstr ""
+
+msgid "Top of directory hierarchies"
+msgstr ""
+
+msgid "Inode uses extents"
+msgstr ""
+
+msgid "Huge_file"
+msgstr ""
+
+msgid "No COW"
+msgstr ""
+
+msgid "Casefolded file"
+msgstr ""
+
+msgid "Inode has inline data"
+msgstr ""
+
+msgid "Project hierarchy"
+msgstr ""
+
+msgid "Verity protected inode"
+msgstr ""
+
+msgid "&Marked all"
+msgstr "Guztiak &markatuta"
+
+msgid "S&et marked"
+msgstr "&Ezarri markatutakoa"
+
+msgid "C&lear marked"
+msgstr "&Garbitu markatutakoa"
+
+msgid "Chattr command"
+msgstr ""
+
+#, c-format
+msgid ""
+"Cannot chattr \"%s\"\n"
+"%s"
+msgstr ""
+
+msgid "Cannot change attributes on non-local filesystems"
+msgstr ""
+
+#, c-format
+msgid ""
+"Cannot get flags of \"%s\"\n"
+"%s"
+msgstr ""
+
 msgid "set &user ID on execution"
 msgstr "ezarri &erabiltzaile ID exekutatzean"
 
@@ -2180,15 +2349,6 @@ msgstr "Jabearen izena:"
 
 msgid "Group name:"
 msgstr "Taldearen izena:"
-
-msgid "&Marked all"
-msgstr "Guztiak &markatuta"
-
-msgid "S&et marked"
-msgstr "&Ezarri markatutakoa"
-
-msgid "C&lear marked"
-msgstr "&Garbitu markatutakoa"
 
 msgid "Chmod command"
 msgstr "Chmod komandoa"
@@ -2321,13 +2481,6 @@ msgstr ""
 "Panel biak egon beharko lirateke zerrendatzeko\n"
 "moduan komando hau erabiltzeko"
 
-msgid ""
-"Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
-msgstr ""
-"Ez da xterm edo Linux kontsola;\n"
-"panelak ezin dira ezkutatu."
-
 #, c-format
 msgid "'%s' is not a symbolic link"
 msgstr "'%s' ez da esteka sinbolikoa"
@@ -2394,9 +2547,6 @@ msgstr ""
 "Ezin da \"%s\" direktoriora aldatu\n"
 "%s"
 
-msgid "Cannot read directory contents"
-msgstr "Direktorioaren edukia ezin irakurri"
-
 msgid "Parameter"
 msgstr "Parametroa"
 
@@ -2461,9 +2611,6 @@ msgstr "%o %f%n\"%s\"%m"
 msgid "%o %d %f%m"
 msgstr "%o %d %f%m"
 
-msgid "file"
-msgstr "fitxategia"
-
 msgid "files"
 msgstr "fitxategiak"
 
@@ -2480,40 +2627,79 @@ msgstr "fitxategiak/direktorioak"
 msgid " with source mask:"
 msgstr " iturburu maskararekin:"
 
-msgid "Cannot make the hardlink"
-msgstr "Esteka trinkoa ezin egin"
+#, c-format
+msgid ""
+"Cannot stat hardlink source file \"%s\"\n"
+"%s"
+msgstr ""
+"Ezin da lortu esteka trinkoaren \"%s\" iturburu fitxategiaren egoera "
+"(stat)\\n\n"
+"%s"
+
+#, c-format
+msgid ""
+"Cannot create target hardlink \"%s\"\n"
+"%s"
+msgstr ""
+"Ezin da sortu iturburuaren \"%s\" esteka sinbolikoa\\n\n"
+"%s"
+
+#, c-format
+msgid "Cannot create target hardlink \"%s\""
+msgstr "Ezin da sortu iturburuaren \"%s\" esteka sinbolikoa"
 
 #, c-format
 msgid ""
 "Cannot read source link \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" iturburu esteka ezin irakurri\n"
+"Ezin da irakurri \"%s\" iturburu esteka\\n\n"
 "%s"
 
 msgid ""
-"Cannot make stable symlinks acrossnon-local filesystems:\n"
+"Cannot make stable symlinks across non-local filesystems:\n"
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
-"Bertakoak ez diren fitxategi sistemen artean ezin da esteka sinboliko "
-"egonkorrik sortu:\n"
+"Ezin dira egin esteka-sinboliko egonkorrak lokalak ez diren fitxategi-"
+"sistemetara:\n"
 "\n"
-"Esteka sinboliko egonkorrak aukera ezgaituko da"
+"Esteka-sinboliko egonkorrak aukera desgaituko da"
 
 #, c-format
 msgid ""
 "Cannot create target symlink \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" helburu esteka sinbolikoa ezin sortu\n"
+"Ezin da sortu \"%s\" helburu esteka sinbolikoa\n"
 "%s"
+
+#, c-format
+msgid ""
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same directory"
+msgstr ""
+"\"%s\"\n"
+"eta\n"
+"\"%s\"\n"
+"direktorio bera dira"
+
+#, c-format
+msgid ""
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same file"
+msgstr ""
+"\"%s\"\n"
+"eta\n"
+"\"%s\"\n"
+"fitxategi bera dira"
 
 msgid "Ski&p all"
 msgstr "Sa&hiestu guztia"
-
-msgid "&Retry"
-msgstr "&Saiatu berriz"
 
 #, c-format
 msgid ""
@@ -2538,38 +2724,6 @@ msgstr "&Bat ere ez"
 
 #, c-format
 msgid ""
-"Cannot stat file \"%s\"\n"
-"%s"
-msgstr ""
-"\"%s\" fitxategiaren egoera (\"stat\") ezin lortu\n"
-"%s"
-
-#, c-format
-msgid ""
-"\"%s\"\n"
-"and\n"
-"\"%s\"\n"
-"are the same file"
-msgstr ""
-"\"%s\"\n"
-"eta\n"
-"\"%s\"\n"
-"fitxategi bera dira"
-
-#, c-format
-msgid "Cannot overwrite directory \"%s\""
-msgstr "\"%s\" direktorioa ezin gainidatzi"
-
-#, c-format
-msgid ""
-"Cannot move file \"%s\" to \"%s\"\n"
-"%s"
-msgstr ""
-"\"%s\" fitxategia \"%s\"-ra ezin mugitu\n"
-"%s"
-
-#, c-format
-msgid ""
 "Cannot remove file \"%s\"\n"
 "%s"
 msgstr ""
@@ -2578,10 +2732,22 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Cannot delete file \"%s\"\n"
+"Cannot stat file \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" fitxategia ezin ezabatu\n"
+"Ezin da lortu \"%s\" fitxategiaren egoera (stat)\n"
+"%s"
+
+#, c-format
+msgid "Cannot overwrite directory \"%s\""
+msgstr "Ezin da gainidatzi \"%s\" direktorioa"
+
+#, c-format
+msgid ""
+"Cannot move file \"%s\" to \"%s\"\n"
+"%s"
+msgstr ""
+"Ezin da mugitu \"%s\" fitxategia \"%s\"-ra\n"
 "%s"
 
 #, c-format
@@ -2589,7 +2755,7 @@ msgid ""
 "Cannot remove directory \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" direktorioa ezin ezabatu\n"
+"Ezin da ezabatu \"%s\" direktorioa\n"
 "%s"
 
 #, c-format
@@ -2597,15 +2763,34 @@ msgid ""
 "Cannot overwrite directory \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" direktorioa ezin gainidatzi\n"
+"Ezin da gainidatzi \"%s\" direktorioa\n"
 "%s"
+
+#, c-format
+msgid ""
+"Cannot overwrite file \"%s\"\n"
+"%s"
+msgstr ""
+"Ezin da gainidatzi \"%s\" fitxategia\n"
+"%s"
+
+#, c-format
+msgid ""
+"Cannot move directory \"%s\" to \"%s\"\n"
+"%s"
+msgstr ""
+"Ezin da mugitu \"%s\" direktorioa \"%s\"-ra\n"
+"%s"
+
+msgid "Cannot operate on \"..\"!"
+msgstr "Ezin da \"..\" erabili!"
 
 #, c-format
 msgid ""
 "Cannot stat source file \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" iturburu fitxategiaren egoera (\"stat\") ezin lortu\n"
+"Ezin da lortu \"%s\" iturburu fitxategiaren egoera\n"
 "%s"
 
 #, c-format
@@ -2613,7 +2798,7 @@ msgid ""
 "Cannot create special file \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" fitxategi berezia ezin sortu\n"
+"Ezin da sortu \"%s\" fitxategi berezia\n"
 "%s"
 
 #, c-format
@@ -2621,7 +2806,7 @@ msgid ""
 "Cannot chown target file \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" helburu fitxategiaren jabea ezin aldatu\n"
+"Ezin da aldatu \"%s\" helburu fitxategiaren jabea (chown)\n"
 "%s"
 
 #, c-format
@@ -2629,7 +2814,7 @@ msgid ""
 "Cannot chmod target file \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" helburu fitxategiaren baimenak ezin aldatu\n"
+"Ezin dira aldatu \"%s\" helburu fitxategiaren baimenak\n"
 "%s"
 
 #, c-format
@@ -2637,7 +2822,7 @@ msgid ""
 "Cannot open source file \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" iturburu fitxategia ezin ireki\n"
+"Ezin da ireki \"%s\" iturburu fitxategia\n"
 "%s"
 
 msgid "Reget failed, about to overwrite file"
@@ -2648,7 +2833,7 @@ msgid ""
 "Cannot fstat source file \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" iturburu fitxategiaren egoera (\"fstat\") ezin lortu\n"
+"Ezin da lortu \"%s\" iturburu fitxategiaren egoera (fstat)\n"
 "%s"
 
 #, c-format
@@ -2656,7 +2841,7 @@ msgid ""
 "Cannot create target file \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" helburu fitxategia ezin sortu\n"
+"Ezin da sortu \"%s\" helburu fitxategia\n"
 "%s"
 
 #, c-format
@@ -2664,7 +2849,7 @@ msgid ""
 "Cannot fstat target file \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" helburu fitxategiaren egoera (\"fstat\") ezin lortu\n"
+"Ezin da loortu \"%s\" helburu fitxategiaren egoera (fstat)\n"
 "%s"
 
 #, c-format
@@ -2680,13 +2865,15 @@ msgid ""
 "Cannot read source file \"%s\"\n"
 "%s"
 msgstr ""
+"Ezin da irakurri \"%s\" iturburu fitxategia\n"
+"%s"
 
 #, c-format
 msgid ""
 "Cannot write target file \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" helburu fitxategia ezin idatzi\n"
+"Ezin da idatzi \"%s\" helburu fitxategia\n"
 "%s"
 
 msgid "(stalled)"
@@ -2697,7 +2884,7 @@ msgid ""
 "Cannot close source file \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" iturburu fitxategia ezin itxi\n"
+"Ezin da itxi \"%s\" iturburu fitxategia\n"
 "%s"
 
 #, c-format
@@ -2705,7 +2892,7 @@ msgid ""
 "Cannot close target file \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" helburu fitxategia ezin itxi\n"
+"Ezin da itxi \"%s\" helburu fitxategia\n"
 "%s"
 
 msgid "Incomplete file was retrieved. Keep it?"
@@ -2719,7 +2906,7 @@ msgid ""
 "Cannot stat source directory \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" iturburu direktorioaren egoera (\"stat\") ezin lortu\n"
+"Ezin da lortu \"%s\" iturburu direktorioaren egoera (stat)\n"
 "%s"
 
 #, c-format
@@ -2759,43 +2946,12 @@ msgid ""
 "Cannot chown target directory \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" helburu direktorioaren jabea ezin aldatu (\"chown\")\n"
+"Ezin da aldatu \"%s\" helburu direktorioaren jabea (chown)\n"
 "%s"
 
 #, c-format
-msgid ""
-"\"%s\"\n"
-"and\n"
-"\"%s\"\n"
-"are the same directory"
-msgstr ""
-"\"%s\"\n"
-"eta\n"
-"\"%s\"\n"
-"direktorio bera dira"
-
-#, c-format
-msgid ""
-"Cannot overwrite file \"%s\"\n"
-"%s"
-msgstr ""
-"\"%s\" fitxategia ezin gainidatzi\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot move directory \"%s\" to \"%s\"\n"
-"%s"
-msgstr ""
-"\"%s\" direktorioa \"%s\"-ra ezin mugitu\n"
-"%s"
-
-#, c-format
-msgid "Directories: %zd, total size: %s"
-msgstr "Direktorioak: %zd, neurri osoa: %s"
-
-msgid "Cannot operate on \"..\"!"
-msgstr "Ezin da \"..\" erabili!"
+msgid "Directories: %zu, total size: %s"
+msgstr "Direktorioak: %zu, guztizko neurria: %s"
 
 msgid "Sorry, I could not put the job in background"
 msgstr "Barkatu, ezin izan dut lana hondoan ipini"
@@ -2826,19 +2982,14 @@ msgstr "%.2f KB/s"
 msgid "%ld B/s"
 msgstr "%ld B/s"
 
-msgid "Target file already exists!"
-msgstr "Helburu fitxategia dagoeneko existitzen da!"
+msgid "New     :"
+msgstr "Berria  :"
 
-#, c-format
-msgid "New     : %s, size %s"
-msgstr "Berria : %s, neurria %s"
+msgid "Existing:"
+msgstr "Dagoena:"
 
-#, c-format
-msgid "Existing: %s, size %s"
-msgstr "Dagoena: %s, size %s"
-
-msgid "Overwrite this target?"
-msgstr "Helburu guztiak gainidatzi?"
+msgid "Overwrite this file?"
+msgstr "Gainidatzi fitxategi hau?"
 
 msgid "A&ppend"
 msgstr "era&nskina"
@@ -2846,14 +2997,20 @@ msgstr "era&nskina"
 msgid "&Reget"
 msgstr "&Beste saiakera bat"
 
-msgid "Overwrite all targets?"
-msgstr "Helburu guztiak gainidatzi?"
+msgid "Overwrite all files?"
+msgstr "Gainidatzi fitxategi guztiak?"
 
-msgid "&Update"
-msgstr "Eg&uneratu"
+msgid "Don't overwrite with &zero length file"
+msgstr "Ez gainidatzi &zero luzerako fitxategiekin"
 
-msgid "If &size differs"
-msgstr "&Neurria desberdina bada"
+msgid "&Older"
+msgstr "&Zaharragoa"
+
+msgid "S&maller"
+msgstr "T&xikiagoa"
+
+msgid "&Size differs"
+msgstr "&Neurri ezberdinak"
 
 msgid "File exists"
 msgstr "Fitxategia existitzen da"
@@ -2903,7 +3060,7 @@ msgid "Deleting"
 msgstr "Ezabatzen"
 
 msgid "&Using shell patterns"
-msgstr "&Shell ereduak erabiltzen"
+msgstr "&Shell ereduak erabiliz"
 
 msgid "to:"
 msgstr "hona:"
@@ -2943,8 +3100,8 @@ msgid "&Edit - F4"
 msgstr "&Edizioa - F4"
 
 #, c-format
-msgid "Found: %ld"
-msgstr "Aurkitu: %ld"
+msgid "Found: %lu"
+msgstr "Aurkitutakoak: %lu"
 
 msgid "Malformed regular expression"
 msgstr "Gaizki osatutako adierazpen erregularra"
@@ -2983,7 +3140,7 @@ msgid "Start at:"
 msgstr "Hemen hasi:"
 
 msgid "Ena&ble ignore directories:"
-msgstr "&Gaitu alboratu direktorioak:"
+msgstr "&Gaitu direktorioak baztertzea:"
 
 #, c-format
 msgid "Grepping in %s"
@@ -2993,10 +3150,18 @@ msgid "Finished"
 msgstr "Amaituta"
 
 #, c-format
-msgid "Finished (ignored %zd directory)"
-msgid_plural "Finished (ignored %zd directories)"
-msgstr[0] "Amaituta (direktorio %zd baztertuta)"
-msgstr[1] "Amaituta (%zd direktorio baztertuta)"
+msgid "Finished (ignored %zu directory)"
+msgid_plural "Finished (ignored %zu directories)"
+msgstr[0] "Amaituta (%zu direktorioa baztertuta)"
+msgstr[1] "Amaituta (%zu direktorioak baztertuta)"
+
+#, c-format
+msgid "Find File: \"%s\". Content: \"%s\""
+msgstr "Aurkitu fitxategia: \"%s\". Edukia: \"%s\""
+
+#, c-format
+msgid "Find File: \"%s\""
+msgstr "Bilatu fitxategia: \"%s\""
 
 msgid "Searching"
 msgstr "Bilatzen"
@@ -3156,10 +3321,10 @@ msgid "Size:       %s"
 msgstr "Neurria: %s"
 
 #, c-format
-msgid " (%ld block)"
-msgid_plural " (%ld blocks)"
-msgstr[0] " (bloke %ld)"
-msgstr[1] " (%ld bloke)"
+msgid " (%lu block)"
+msgid_plural " (%lu blocks)"
+msgstr[0] " (%lu blokea)"
+msgstr[1] " (%lu blokeak)"
 
 #, c-format
 msgid "Owner:      %s/%s"
@@ -3168,6 +3333,16 @@ msgstr "Jabea: %s/%s"
 #, c-format
 msgid "Links:      %d"
 msgstr "Estekak: %d"
+
+msgid "Attributes: not supported"
+msgstr ""
+
+#, c-format
+msgid "Attributes: %s"
+msgstr ""
+
+msgid "Attributes: unavailable"
+msgstr ""
 
 #, c-format
 msgid "Mode:       %s (%04o)"
@@ -3178,7 +3353,7 @@ msgid "Location:   %Xh:%Xh"
 msgstr "Kokalekua: %Xh:%Xh"
 
 msgid "&Equal split"
-msgstr "&zatiketa berdina"
+msgstr "&Zati berdinetan erdibitu"
 
 msgid "&Menubar visible"
 msgstr "&Menu-barra ikusgai"
@@ -3199,7 +3374,7 @@ msgid "&Show free space"
 msgstr "&Erakutsi leku hutsa"
 
 msgid "Panel split"
-msgstr "Panel zatiketa"
+msgstr "Panel zatitzea"
 
 msgid "Console output"
 msgstr "Kontsolaren irteera"
@@ -3225,8 +3400,8 @@ msgstr "Ikuspegi &azkarra"
 msgid "&Info"
 msgstr "&Info"
 
-msgid "&Listing mode..."
-msgstr "&Zerrendatzeko modua..."
+msgid "&Listing format..."
+msgstr "&Zerrenda formatua"
 
 msgid "&Sort order..."
 msgstr "&Sailkatzeko ordena..."
@@ -3288,6 +3463,9 @@ msgstr "&Chown"
 msgid "&Advanced chown"
 msgstr "Ch&own aurreratua"
 
+msgid "Cha&ttr"
+msgstr ""
+
 msgid "&Rename/Move"
 msgstr "Berrizendatu/Mu&gitu"
 
@@ -3301,7 +3479,7 @@ msgid "Select &group"
 msgstr "Hautatu ta&ldea"
 
 msgid "U&nselect group"
-msgstr "&Desegin talde hautaketa"
+msgstr "&Hautua kendu taldeari"
 
 msgid "&Invert selection"
 msgstr "&Alderantzikatu hautapena"
@@ -3338,6 +3516,9 @@ msgstr "E&rakutsi direktorioen neurriak"
 
 msgid "Command &history"
 msgstr "Ko&mandoen historia"
+
+msgid "Viewed/edited files hi&story"
+msgstr ""
 
 msgid "Di&rectory hotlist"
 msgstr "&Gogoko direktorioak"
@@ -3391,10 +3572,10 @@ msgid "Panels:"
 msgstr "Panelak:"
 
 #, c-format
-msgid "You have %zd opened screen. Quit anyway?"
-msgid_plural "You have %zd opened screens. Quit anyway?"
-msgstr[0] "Pantaila %zd irekita daukazu. Irten hala ere?"
-msgstr[1] "%zd pantaila irekita dauzkazu. Irten hala ere?"
+msgid "You have %zu opened screen. Quit anyway?"
+msgid_plural "You have %zu opened screens. Quit anyway?"
+msgstr[0] "Pantaila %zu irekita duzu. Irten hala ere?"
+msgstr[1] "%zu pantaila irekita dituzu. Irten hala ere?"
 
 msgid "The Midnight Commander"
 msgstr "Midnight Commander-ra"
@@ -3478,7 +3659,7 @@ msgid "sort|m"
 msgstr "d"
 
 msgid "&Modify time"
-msgstr "&Edukiaren aldaketa ordua"
+msgstr "&Aldatze data"
 
 #. TRANSLATORS: one single character to represent 'Access time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -3494,7 +3675,7 @@ msgid "sort|h"
 msgstr "t"
 
 msgid "C&hange time"
-msgstr "A&tributuen aldaketa ordua"
+msgstr "A&ldatze data"
 
 msgid "Perm"
 msgstr "Baim"
@@ -3547,7 +3728,7 @@ msgid "Panelize"
 msgstr "Paneleratu"
 
 msgid "Unknown tag on display format:"
-msgstr "Etiketa ezezaguna bistaratzeko formatuan:"
+msgstr "Etiketa ezezaguna bistaratze formatuan:"
 
 msgid "&Files only"
 msgstr "&Fitxategiak soilik"
@@ -3559,10 +3740,13 @@ msgid "Select"
 msgstr "Hautatu"
 
 msgid "Unselect"
-msgstr "Desegin hautaketa"
+msgstr "Hautua kendu"
 
 msgid "Do you really want to execute?"
 msgstr "Beneta exekutatu nahi duzu?"
+
+msgid "Cannot read directory contents"
+msgstr "Direktorioaren edukia ezin irakurri"
 
 msgid "User supplied format looks invalid, reverting to default."
 msgstr "Erabiltzaileak emandako formatua baliogabea da, lehenetsira itzultzen."
@@ -3658,50 +3842,6 @@ msgstr ""
 "Ezin da %s fitxategian idatzi:\n"
 "%s\n"
 
-msgid "Debug"
-msgstr "Araztu"
-
-msgid "ERROR:"
-msgstr "AKATSA:"
-
-msgid "True:"
-msgstr "Egia:"
-
-msgid "False:"
-msgstr "Gezurra:"
-
-msgid "Error calling program"
-msgstr "Akatsa programari deitzerakoan"
-
-msgid "Warning -- ignoring file"
-msgstr "Abisua -- fitxategia ezikusten"
-
-#, c-format
-msgid ""
-"File %s is not owned by root or you or is world writable.\n"
-"Using it may compromise your security"
-msgstr ""
-"%s fitxategia ez da root-arena edo ez da zurea edo guztiek idatz\n"
-"dezake. Hori erabiltzeak zure segurtasuna arriskuan jarri dezake"
-
-msgid "Format error on file Extensions File"
-msgstr "Formatu akatsa fitxategien luzapen fitxategian"
-
-#, c-format
-msgid "The %%var macro has no default"
-msgstr "%%var makroak ez dauka lehenetsitakorik"
-
-#, c-format
-msgid "The %%var macro has no variable"
-msgstr "%%var makroak ez dauka aldagairik"
-
-#, c-format
-msgid "No suitable entries found in %s"
-msgstr "%s-(e)n ez dira sarrera egokiak aurkitu"
-
-msgid "User menu"
-msgstr "Erabiltzailearen menua"
-
 msgid "Help file format error\n"
 msgstr "Laguntza fitxategiaren formatu akatsa\n"
 
@@ -3795,6 +3935,12 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "Etxeko direktorioaren bide-izena ez da absolutua"
 
+msgid ""
+"GNU Midnight Commander\n"
+"is already running on this terminal.\n"
+"Subshell support will be disabled."
+msgstr ""
+
 #, c-format
 msgid ""
 "\n"
@@ -3825,15 +3971,6 @@ msgstr ""
 "%s fitxategia ezin gorde:\n"
 "%s"
 
-msgid ""
-"GNU Midnight Commander is already\n"
-"running on this terminal.\n"
-"Subshell support will be disabled."
-msgstr ""
-"GNU Midnight Commander dagoeneko\n"
-"exekutatzen ari da terminal honetan.\n"
-"Azpi-shell euskarria ezgaituko da."
-
 #, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr "%s izeneko hodia ezin ireki\n"
@@ -3845,56 +3982,72 @@ msgstr "Shell oraindik jardunean dago. Irten hala ere?"
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Abisua: %s(e)ra ezin aldatu.\n"
 
-msgid "Using the S-Lang library with terminfo database\n"
-msgstr "S-Lang liburutegia terminfo datubasearekin erabiltzen\n"
+msgid "With builtin Editor and Aspell support"
+msgstr ""
 
-msgid "Using the ncurses library\n"
-msgstr "ncurses liburutegia erabiltzen\n"
+msgid "With builtin Editor"
+msgstr ""
 
-msgid "Using the ncursesw library\n"
-msgstr "ncursesw liburutegia erabiltzen\n"
+msgid "With optional subshell support"
+msgstr ""
 
-msgid "With builtin Editor\n"
-msgstr "builtin editorearekin\n"
+msgid "With subshell support as default"
+msgstr ""
 
-msgid "With optional subshell support\n"
-msgstr "Hautazko azpi-shell euskarriarekin\n"
+msgid "With support for background operations"
+msgstr ""
 
-msgid "With subshell support as default\n"
-msgstr "Azpi-shell euskarria lehenetsita\n"
+msgid "With mouse support on xterm and Linux console"
+msgstr ""
 
-msgid "With support for background operations\n"
-msgstr "Atzeko planoko eragiketetarako euskarriarekin\n"
+msgid "With mouse support on xterm"
+msgstr ""
 
-msgid "With mouse support on xterm and Linux console\n"
-msgstr "Sagu-euskarriarekin xterm-en eta Linux-en kontsolan\n"
+msgid "With support for X11 events"
+msgstr ""
 
-msgid "With mouse support on xterm\n"
-msgstr "Sagu-euskarriarekin xterm-en\n"
+msgid "With internationalization support"
+msgstr ""
 
-msgid "With support for X11 events\n"
-msgstr "X11 gertaerak onartzen ditu\n"
+msgid "With multiple codepages support"
+msgstr ""
 
-msgid "With internationalization support\n"
-msgstr "Nazioarteratzea onartzen du\n"
-
-msgid "With multiple codepages support\n"
-msgstr "Kode-orrien euskarri ugarirekin\n"
+msgid "With ext2fs attributes support"
+msgstr ""
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"
 msgstr "GLib %d.%d.%d erabiliz eraikita\n"
 
 #, c-format
+msgid "Built with S-Lang %s with terminfo database\n"
+msgstr ""
+
+#, c-format
+msgid "Built with ncurses %s\n"
+msgstr ""
+
+msgid "Built with ncurses (unknown version)"
+msgstr ""
+
+#, c-format
+msgid "Built with ncursesw %s\n"
+msgstr ""
+
+msgid "Built with ncursesw (unknown version)"
+msgstr ""
+
 msgid "Virtual File Systems:"
 msgstr "Alegiazko fitxategi sistemak (VFS):"
 
-#, c-format
 msgid "Data types:"
 msgstr "Datu motak:"
 
-msgid "Root directory:"
-msgstr "Erro direktorioa:"
+msgid "Home directory:"
+msgstr "Etxeko direktorioa:"
+
+msgid "Profile root directory:"
+msgstr "Profilen erro direktorioa:"
 
 msgid "System data"
 msgstr "Sistemaren datuak"
@@ -3916,6 +4069,50 @@ msgstr "Erabiltzaile datuak"
 
 msgid "Cache directory:"
 msgstr "Cache direktorioa:"
+
+msgid "Debug"
+msgstr "Araztu"
+
+msgid "ERROR:"
+msgstr "AKATSA:"
+
+msgid "True:"
+msgstr "Egia:"
+
+msgid "False:"
+msgstr "Gezurra:"
+
+msgid "Error calling program"
+msgstr "Akatsa programari deitzerakoan"
+
+msgid "Warning -- ignoring file"
+msgstr "Abisua -- fitxategia ezikusten"
+
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
+msgstr ""
+"%s fitxategia ez da root-arena edo ez da zurea edo guztiek idatz\n"
+"dezake. Hori erabiltzeak zure segurtasuna arriskuan jarri dezake"
+
+msgid "Format error on file Extensions File"
+msgstr "Formatu akatsa fitxategien luzapen fitxategian"
+
+#, c-format
+msgid "The %%var macro has no default"
+msgstr "%%var makroak ez dauka lehenetsitakorik"
+
+#, c-format
+msgid "The %%var macro has no variable"
+msgstr "%%var makroak ez dauka aldagairik"
+
+#, c-format
+msgid "No suitable entries found in %s"
+msgstr "%s-(e)n ez dira sarrera egokiak aurkitu"
+
+msgid "User menu"
+msgstr "Erabiltzailearen menua"
 
 #, c-format
 msgid ""
@@ -4017,14 +4214,14 @@ msgstr "%s: eginda."
 
 #, c-format
 msgid "%s: failure"
-msgstr "%s: akatsa"
+msgstr "%s: hutsegitea"
 
 #, c-format
 msgid "fish: store %s: sending command..."
 msgstr "fish: %s biltegiratu: komandoa bidaltzen..."
 
 msgid "fish: Local read failed, sending zeros"
-msgstr "fish: Irakurketa lokalak huts egin du, zeroak bidaltzen"
+msgstr "fish: Irakurtze lokalak huts egin du, zeroak bidaltzen"
 
 msgid "fish: storing file"
 msgstr "fish: fitxategia biltegiratzen"
@@ -4203,14 +4400,18 @@ msgid "sftp: Password is empty."
 msgstr "sftp: pasahitza hutsik dago."
 
 msgid "sftp: Failure establishing SSH session"
-msgstr ""
+msgstr "sftp: Hutsegitea SSH saioa ezartzean"
 
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: Ez dago fitxategi maneiatzaile daturik fitxategia irakurtzeko"
 
 #, c-format
+msgid "sftp: socket error: %s"
+msgstr "sftp: socket-errorea: %s"
+
+#, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"
-msgstr ""
+msgstr "sftp: (Ktrl-G eteteko) Zerrendatzen... %s"
 
 msgid "sftp: Listing done."
 msgstr "sftp: Zerrenda osatuta."
@@ -4457,11 +4658,3 @@ msgstr "Hasieratik jarraitu?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Ezin eskuratu ondokoaren bertako kopia bat: /ftp://some.host/editme.txt"
-
-#~ msgid "Cannot parse command for pipe"
-#~ msgstr "Ezin da sintaktikoki ulertu hodirako komandoa"
-
-#~ msgid "%s byte"
-#~ msgid_plural "%s bytes"
-#~ msgstr[0] "byte %s"
-#~ msgstr[1] "%s byte"

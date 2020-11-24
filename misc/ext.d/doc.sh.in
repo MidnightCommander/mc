@@ -25,9 +25,13 @@ staroffice_console() {
 }
 
 get_ooffice_executable() {
-    which loffice >/dev/null 2>&1 && \
-        echo "loffice" || \
+    if which loffice >/dev/null 2>&1; then
+        echo "loffice"
+    elif which ooffice >/dev/null 2>&1; then
         echo "ooffice"
+    else
+        echo -n
+    fi
 }
 
 do_view_action() {
@@ -48,27 +52,32 @@ do_view_action() {
         fi
         ;;
     msdoc)
-        which wvHtml >/dev/null 2>&1 &&
-        {
+        if which wvHtml >/dev/null 2>&1; then
             tmp=`mktemp -d ${TMPDIR:-/tmp}/%p.XXXXXX`
             wvHtml "${MC_EXT_FILENAME}" --targetdir="$tmp" page.html
             elinks -dump "$tmp/page.html"
             rm -rf "$tmp"
-        } || \
-            antiword -t "${MC_EXT_FILENAME}" || \
-            catdoc -w "${MC_EXT_FILENAME}" || \
-            word2x -f text "${MC_EXT_FILENAME}" - || \
+        elif which antiword >/dev/null 2>&1; then
+            antiword -t "${MC_EXT_FILENAME}"
+        elif which catdoc >/dev/null 2>&1; then
+            catdoc -w "${MC_EXT_FILENAME}"
+        elif which word2x >/dev/null 2>&1; then
+            word2x -f text "${MC_EXT_FILENAME}" -
+        else
             strings "${MC_EXT_FILENAME}"
+        fi
         ;;
     msxls)
-        which xlHtml >/dev/null 2>&1 && {
+        if which xlhtml >/dev/null 2>&1; then
             tmp=`mktemp -d ${TMPDIR:-/tmp}/%p.XXXXXX`
             xlhtml -a "${MC_EXT_FILENAME}" > "$tmp/page.html"
             elinks -dump "$tmp/page.html"
             rm -rf "$tmp"
-        } || \
-            xls2csv "${MC_EXT_FILENAME}" || \
+        elif which xls2csv >/dev/null 2>&1; then
+            xls2csv "${MC_EXT_FILENAME}"
+        else
             strings "${MC_EXT_FILENAME}"
+        fi
         ;;
     dvi)
         which dvi2tty >/dev/null 2>&1 && \
@@ -111,7 +120,9 @@ do_open_action() {
     ooffice)
         if [ -n "$DISPLAY" ]; then
             OOFFICE=`get_ooffice_executable`
-            (${OOFFICE} "${MC_EXT_FILENAME}" &)
+            if [ -n "${OOFFICE}" ]; then
+                (${OOFFICE} "${MC_EXT_FILENAME}" &)
+            fi
         else
             if [ `echo "${MC_EXT_FILENAME}" | grep -c "${STAROFFICE_REGEXP}"` -ne 0 ]; then
                 staroffice_console "${MC_EXT_FILENAME}"
@@ -128,7 +139,12 @@ do_open_action() {
         ;;
     msdoc)
         if [ -n "$DISPLAY" ]; then
-            (abiword "${MC_EXT_FILENAME}" >/dev/null 2>&1 &)
+            OOFFICE=`get_ooffice_executable`
+            if [ -n "${OOFFICE}" ]; then
+                (${OOFFICE} "${MC_EXT_FILENAME}" &)
+            else
+                (abiword "${MC_EXT_FILENAME}" >/dev/null 2>&1 &)
+            fi
         else
             tmp=`mktemp -d ${TMPDIR:-/tmp}/%p.XXXXXX`
             wvHtml "${MC_EXT_FILENAME}" --targetdir="$tmp" page.html -1
@@ -138,7 +154,12 @@ do_open_action() {
         ;;
     msxls)
         if [ -n "$DISPLAY" ]; then
-            (gnumeric "${MC_EXT_FILENAME}" >/dev/null 2>&1 &)
+            OOFFICE=`get_ooffice_executable`
+            if [ -n "${OOFFICE}" ]; then
+                (${OOFFICE} "${MC_EXT_FILENAME}" &)
+            else
+                (gnumeric "${MC_EXT_FILENAME}" >/dev/null 2>&1 &)
+            fi
         else
             tmp=`mktemp -d ${TMPDIR:-/tmp}/%p.XXXXXX`
             xlhtml -a "${MC_EXT_FILENAME}" > "$tmp/page.html"
@@ -149,7 +170,9 @@ do_open_action() {
     msppt)
         if [ -n "$DISPLAY" ]; then
             OOFFICE=`get_ooffice_executable`
-            (${OOFFICE} "${MC_EXT_FILENAME}" >/dev/null 2>&1 &)
+            if [ -n "${OOFFICE}" ]; then
+                (${OOFFICE} "${MC_EXT_FILENAME}" &)
+            fi
         else
             tmp=`mktemp -d ${TMPDIR:-/tmp}/%p.XXXXXX`
             ppthtml "${MC_EXT_FILENAME}" > "$tmp/page.html"

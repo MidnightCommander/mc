@@ -68,7 +68,7 @@ AC_DEFUN([mc_VFS_UNDELFS],
 	    AC_MSG_NOTICE([using ext2fs file recovery code])
 	    MCLIBS="$MCLIBS $EXT2FS_UNDEL_LIBS"
 	else
-	    AC_ERROR([Ext2 libraries not found])
+	    AC_MSG_ERROR([Ext2 libraries not found])
 	fi
     fi
     AM_CONDITIONAL(ENABLE_VFS_UNDELFS, [test "$enable_vfs" = "yes" -a x"$enable_vfs_undelfs" = x"yes"])

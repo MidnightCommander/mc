@@ -73,3 +73,6 @@ patchsetfs - list of patches of current file
 
 # Gputils lib archives.
 ulib
+
+# PAK Archive
+unar

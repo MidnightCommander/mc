@@ -115,6 +115,7 @@ regex/^\[git\]
 	Open=%cd %p/changesetfs://
 	View=%cd %p/patchsetfs://
 
+
 ### Archives ###
 
 # .tgz, .tpz, .tar.gz, .tar.z, .tar.Z, .ipk, .gem
@@ -150,6 +151,11 @@ regex/\.t(ar\.xz|xz)$
 	Open=%cd %p/utar://
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view tar.xz
 
+# .tar.zst, .tzst
+regex/\.t(ar\.zst|zst)$
+	Open=%cd %p/utar://
+	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view tar.zst
+
 # .tar.F - used in QNX
 shell/.tar.F
 	# Open=%cd %p/utar://
@@ -169,6 +175,11 @@ shell/i/.tar
 type/^LHa\ .*archive
 	Open=%cd %p/ulha://
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view lha
+
+# PAK
+type/^PAK\ .*archive
+	Open=%cd %p/unar://
+	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view pak
 
 # arj
 regex/i/\.a(rj|[0-9][0-9])$
@@ -212,6 +223,10 @@ shell/.cpio.xz
 	Open=%cd %p/ucpio://
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view cpio.xz
 
+shell/.cpio.zst
+	Open=%cd %p/ucpio://
+	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view cpio.zst
+
 shell/.cpio.gz
 	Open=%cd %p/ucpio://
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view cpio.gz
@@ -242,6 +257,10 @@ regex/\.(diff|patch)(\.(gz|Z))$
 regex/\.(diff|patch)(\.xz)$
     Open=%cd %p/patchfs://
     View=%view{ascii} @EXTHELPERSDIR@/archive.sh view xz
+
+regex/\.(diff|patch)(\.zst)$
+    Open=%cd %p/patchfs://
+    View=%view{ascii} @EXTHELPERSDIR@/archive.sh view zst
 
 # ls-lR
 regex/(^|\.)ls-?lR(\.gz|Z|bz2)$
@@ -321,9 +340,6 @@ shell/i/.f
 regex/i/\.(s|asm)$
 	Include=editor
 
-include/editor
-	Open=%var{EDITOR:vi} %f
-
 # .so libraries
 regex/\.(so|so\.[0-9\.]*)$
 	View=%view{ascii} @EXTHELPERSDIR@/misc.sh view so
@@ -332,6 +348,7 @@ regex/\.(so|so\.[0-9\.]*)$
 type/^ELF
 	#Open=%var{PAGER:more} %f
 	View=%view{ascii} @EXTHELPERSDIR@/misc.sh view elf
+
 
 ### Documentation ###
 
@@ -349,16 +366,6 @@ shell/.info
 shell/i/.3gp
 	Include=video
 
-# Manual page
-regex/(([^0-9]|^[^\.]*)\.([1-9][A-Za-z]*|[ln])|\.man)$
-	Open=@EXTHELPERSDIR@/text.sh open man %var{PAGER:more}
-	View=%view{ascii,nroff} @EXTHELPERSDIR@/text.sh view man %var{PAGER:more}
-
-# Perl pod page
-shell/.pod
-	Open=@EXTHELPERSDIR@/text.sh open pod %var{PAGER:more}
-	View=%view{ascii,nroff} @EXTHELPERSDIR@/text.sh view pod %var{PAGER:more}
-
 # Troff with me macros.
 # Exception - "read.me" is not a nroff file.
 shell/read.me
@@ -375,17 +382,27 @@ shell/.ms
 	View=%view{ascii,nroff} @EXTHELPERSDIR@/text.sh view nroff.ms %var{PAGER:more}
 
 # Manual page - compressed
-regex/([^0-9]|^[^\.]*)\.([1-9][A-Za-z]*|[ln])\.g?[Zz]$
+type/^(ASCII )?troff.*gzip compressed
 	Open=@EXTHELPERSDIR@/text.sh open man.gz %var{PAGER:more}
 	View=%view{ascii,nroff} @EXTHELPERSDIR@/text.sh view man.gz %var{PAGER:more}
 
-regex/([^0-9]|^[^\.]*)\.([1-9][A-Za-z]*|[ln])\.bz$
+type/^(ASCII )?troff.*bzip compressed
 	Open=@EXTHELPERSDIR@/text.sh open man.bz %var{PAGER:more}
 	View=%view{ascii,nroff} @EXTHELPERSDIR@/text.sh view man.bz %var{PAGER:more}
 
-regex/([^0-9]|^[^\.]*)\.([1-9][A-Za-z]*|[ln])\.bz2$
+type/^(ASCII )?troff.*bzip2 compressed
 	Open=@EXTHELPERSDIR@/text.sh open man.bz2 %var{PAGER:more}
 	View=%view{ascii,nroff} @EXTHELPERSDIR@/text.sh view man.bz2 %var{PAGER:more}
+
+# Manual page
+type/^(ASCII )?troff
+	Open=@EXTHELPERSDIR@/text.sh open man %var{PAGER:more}
+	View=%view{ascii,nroff} @EXTHELPERSDIR@/text.sh view man %var{PAGER:more}
+
+# Perl pod page
+shell/.pod
+	Open=@EXTHELPERSDIR@/text.sh open pod %var{PAGER:more}
+	View=%view{ascii,nroff} @EXTHELPERSDIR@/text.sh view pod %var{PAGER:more}
 
 regex/([^0-9]|^[^\.]*)\.([1-9][A-Za-z]*|[ln])\.lz$
 	Open=@EXTHELPERSDIR@/text.sh open man.lz %var{PAGER:more}
@@ -403,9 +420,14 @@ regex/([^0-9]|^[^\.]*)\.([1-9][A-Za-z]*|[ln])\.xz$
 	Open=@EXTHELPERSDIR@/text.sh open man.xz %var{PAGER:more}
 	View=%view{ascii,nroff} @EXTHELPERSDIR@/text.sh view man.xz %var{PAGER:more}
 
+regex/([^0-9]|^[^\.]*)\.([1-9][A-Za-z]*|[ln])\.zst$
+	Open=@EXTHELPERSDIR@/text.sh open man.zst %var{PAGER:more}
+	View=%view{ascii,nroff} @EXTHELPERSDIR@/text.sh view man.zst %var{PAGER:more}
+
 # CHM
 shell/i/.chm
 	Open=@EXTHELPERSDIR@/text.sh open chm
+
 
 ### Images ###
 
@@ -460,10 +482,6 @@ shell/i/.svg
 	View=%view{ascii} @EXTHELPERSDIR@/image.sh view svg
 	Open=@EXTHELPERSDIR@/image.sh open svg
 
-include/image
-	Open=@EXTHELPERSDIR@/image.sh open ALL_FORMATS
-	View=%view{ascii} @EXTHELPERSDIR@/image.sh view ALL_FORMATS
-
 
 ### Sound files ###
 
@@ -483,6 +501,10 @@ shell/i/.mp3
 regex/i/\.og[gax]$
 	Open=@EXTHELPERSDIR@/sound.sh open ogg
 	View=%view{ascii} @EXTHELPERSDIR@/sound.sh view ogg
+
+shell/i/.opus
+	Open=@EXTHELPERSDIR@/sound.sh open opus
+	View=%view{ascii} @EXTHELPERSDIR@/sound.sh view opus
 
 regex/i/\.(spx|flac)$
 	Open=@EXTHELPERSDIR@/sound.sh open common
@@ -550,10 +572,6 @@ shell/i/.webm
 type/WebM
     Include=video
 
-include/video
-	Open=@EXTHELPERSDIR@/video.sh open ALL_FORMATS
-	View=%view{ascii} @EXTHELPERSDIR@/video.sh view ALL_FORMATS
-
 
 ### Documents ###
 
@@ -590,7 +608,7 @@ shell/i/.gnumeric
 	Open=@EXTHELPERSDIR@/doc.sh open gnumeric
 
 # Microsoft Word Document
-regex/i/\.(do[ct]|wri)$
+regex/i/\.(do[ct]|wri|docx)$
 	Open=@EXTHELPERSDIR@/doc.sh open msdoc
 	View=%view{ascii} @EXTHELPERSDIR@/doc.sh view msdoc
 type/^Microsoft\ Word
@@ -602,19 +620,22 @@ shell/i/.rtf
 	Open=@EXTHELPERSDIR@/doc.sh open msdoc
 
 # Microsoft Excel Worksheet
-regex/i/\.xl[sw]$
+regex/i/\.(xl[sw]|xlsx)$
 	Open=@EXTHELPERSDIR@/doc.sh open msxls
 	View=%view{ascii} @EXTHELPERSDIR@/doc.sh view msxls
 type/^Microsoft\ Excel
 	Open=@EXTHELPERSDIR@/doc.sh open msxls
 	View=%view{ascii} @EXTHELPERSDIR@/doc.sh view msxls
 
-regex/i/\.(ppt|pps)$
+# Microsoft PowerPoint Presentation
+regex/i/\.(pp[ts]|pptx)$
 	Open=@EXTHELPERSDIR@/doc.sh open msppt
 	View=%view{ascii} @EXTHELPERSDIR@/doc.sh view msppt
 
-# Use OpenOffice.org to open any MS Office documents
+# Use OpenOffice.org/LibreOffice to open any MS Office documents
 type/^Microsoft\ Office\ Document
+	Open=@EXTHELPERSDIR@/doc.sh open ooffice
+type/^Microsoft\ OOXML
 	Open=@EXTHELPERSDIR@/doc.sh open ooffice
 
 # Framemaker
@@ -628,6 +649,10 @@ shell/i/.dvi
 
 # TeX
 shell/i/.tex
+	Include=editor
+
+# Markdown
+shell/i/.md
 	Include=editor
 
 # DjVu
@@ -651,10 +676,6 @@ regex/i/\.(epub|mobi)$
 shell/.class
 	View=%view{ascii} @EXTHELPERSDIR@/misc.sh view javaclass
 
-# Makefile
-regex/^[Mm]akefile$
-	Open=make -f %f %{Enter parameters}
-
 # Imakefile
 shell/Imakefile
 	Open=xmkmf -a
@@ -662,6 +683,10 @@ shell/Imakefile
 # Makefile.PL (MakeMaker)
 regex/^Makefile\.(PL|pl)$
 	Open=%var{PERL:perl} %f
+
+# Makefile
+regex/[Mm]akefile
+	Open=make -f %f %{Enter parameters}
 
 # sqlite3.db
 type/^SQLite 3.x database
@@ -704,6 +729,7 @@ shell/i/.lyx
 shell/i/.torrent
 	View=%view{ascii} @EXTHELPERSDIR@/misc.sh view torrent
 
+
 ### Plain compressed files ###
 
 # ace
@@ -740,38 +766,27 @@ shell/i/.zoo
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view zoo
 
 # gzip
-type/^gzip
+type/\(gzip compressed
 	Open=@EXTHELPERSDIR@/archive.sh view gz %var{PAGER:more}
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view gz
 
-regex/\.(gz|Z)$
-	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view gz
-
 # bzip2
-type/^bzip2
+type/\(bzip2 compressed
 	Open=@EXTHELPERSDIR@/archive.sh view bzip2 %var{PAGER:more}
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view bz2
 
-regex/\.bz2?$
-	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view bz2
-
 # bzip
-type/^bzip
+type/\(bzip compressed
 	Open=@EXTHELPERSDIR@/archive.sh view bzip %var{PAGER:more}
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view bzip
 
 # compress
-type/^compress
+type/\(compress'd
 	Open=@EXTHELPERSDIR@/archive.sh view gz %var{PAGER:more}
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view gz
 
 # lz
-regex/\.lz$
-	Open=@EXTHELPERSDIR@/archive.sh view lz %var{PAGER:more}
-	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view lz
-
-# lz
-type/^LZIP
+type/\(lzip compressed
 	Open=@EXTHELPERSDIR@/archive.sh view lz %var{PAGER:more}
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view lz
 
@@ -781,18 +796,43 @@ regex/\.lz4$
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view lz4
 
 # lzma
-regex/\.lzma$
+type/\(LZMA compressed
 	Open=@EXTHELPERSDIR@/archive.sh view lzma %var{PAGER:more}
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view lzma
 
 # xz
-regex/\.xz$
+type/\(XZ compressed
 	Open=@EXTHELPERSDIR@/archive.sh view xz %var{PAGER:more}
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view xz
+
+# zstd
+type/\(Zstandard compressed
+	Open=@EXTHELPERSDIR@/archive.sh view zst %var{PAGER:more}
+	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view zst
 
 # Parity Archive
 type/^Parity\ Archive\ Volume\ Set
 	Open=@EXTHELPERSDIR@/archive.sh open par2
+
+# WIM
+shell/i/\.wim
+	Open=%cd %p/uwim://
+	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view wim
+
+### Includes
+# includes should be at end of bindings
+
+include/editor
+	Open=%var{EDITOR:vi} %f
+
+include/image
+	Open=@EXTHELPERSDIR@/image.sh open ALL_FORMATS
+	View=%view{ascii} @EXTHELPERSDIR@/image.sh view ALL_FORMATS
+
+include/video
+	Open=@EXTHELPERSDIR@/video.sh open ALL_FORMATS
+	View=%view{ascii} @EXTHELPERSDIR@/video.sh view ALL_FORMATS
+
 
 ### Default ###
 

@@ -16,7 +16,8 @@ TTY_SRC = \
 	color.c color.h \
 	key.c key.h keyxdef.c \
 	mouse.c mouse.h \
-	tty.c tty.h tty-internal.h \
+	tty-internal.c tty-internal.h \
+	tty.c tty.h \
 	win.c win.h
 
 if HAVE_TEXTMODE_X11_SUPPORT

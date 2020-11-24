@@ -19,55 +19,90 @@
 
 P7ZIP=`which 7z 2>/dev/null` || P7ZIP=`which 7za 2>/dev/null` || P7ZIP=`which 7zr 2>/dev/null` || P7ZIP=""
 
+# Let the test framework hook in:
+P7ZIP=${MC_TEST_EXTFS_LIST_CMD:-$P7ZIP}
+STAT=${MC_TEST_EXTFS_U7Z_STAT:-stat}
+
 mcu7zip_list ()
 {
-	# Symlinks are not shown - no idea how to distinguish them
-	# Read-only files are not shown as such - it's rarely useful
-	ugid="`id -nu` `id -ng`"
-	date_re='^\(....\)-\(..\)-\(..\) \(..:..:..\)'
-	date_mc='\2-\3-\1 \4'
-	size_re='............'
-	$P7ZIP l "$1" | sed -n "s/$date_re D.... $size_re $size_re\(.*\)/drwxr-xr-x 1 $ugid 0 $date_mc \5/p;s/$date_re \..... \($size_re\) $size_re\(.*\)/-rw-r--r-- 1 $ugid \5 $date_mc \6/p"
+        # Symlinks are not shown - no idea how to distinguish them
+        # Read-only files are not shown as such - it's rarely useful
+
+        ugid="`id -nu` `id -ng`"
+
+        date_re='^\(....\)-\(..\)-\(..\) \(..:..:..\)' # 19 chars.
+        date_mc='\2-\3-\1 \4'
+        empty_date_re='^ \{19\}'
+
+        size_re='............' # 12 chars.
+        empty_size_re=' \{12\}'
+        zero_size='           0'
+
+        # archive entries can have no datetime info, 7z will use archive file datetime
+        date_archive=`$STAT -c %y "$1" 2>/dev/null | sed -n "s/${date_re}.*/${date_mc}/p" 2>/dev/null`
+        [ "${date_archive}"x = x ] && date_archive=`ls -lan "$1" 2>/dev/null | awk '{print $6, $7, $8}' 2>/dev/null`
+        [ "${date_archive}"x = x ] && date_archive="01-01-1970 00:00:00"
+
+        $P7ZIP l "$1" | sed -n "
+
+                  # If the uncompressed size is missing, we copy the compressed size onto it.
+                  #
+                  # But first, if the compressed size is missing too, set it to zero:
+                  s/^\(.\{19\} [D.]....\) $empty_size_re $empty_size_re/\1 $zero_size $zero_size/
+                  # Next, do the copy:
+                  s/^\(.\{19\} [D.]....\) $empty_size_re \($size_re\)/\1 \2 \2/
+                  #
+                  # (We use '.\{19\}' as the date may be missing. It may give false positives
+                  # but we don't mind: the printing commands that follow use strict patterns.).
+
+                  # Handle directories.
+                  s/$date_re D.... $size_re $size_re\(.*\)/drwxr-xr-x 1 $ugid 0 $date_mc \5/p
+            s/$empty_date_re D.... $size_re $size_re\(.*\)/drwxr-xr-x 1 $ugid 0 $date_archive \1/p
+
+                  # Handle normal files.
+                  s/$date_re \..... \($size_re\) $size_re\(.*\)/-rw-r--r-- 1 $ugid \5 $date_mc \6/p
+            s/$empty_date_re \..... \($size_re\) $size_re\(.*\)/-rw-r--r-- 1 $ugid \1 $date_archive \2/p
+        "
 }
 
 mcu7zip_copyout ()
 {
-	#first we check if we have old p7zip archive with prefix ./ in filename
-	$P7ZIP l "$1" "$2" | grep -q "0 files, 0 folders" && \
-	EXFNAME='*./'"$2" || EXFNAME="$2"
-	$P7ZIP e -so "$1" "$EXFNAME" > "$3" 2>/dev/null
+        #first we check if we have old p7zip archive with prefix ./ in filename
+        $P7ZIP l "$1" "$2" | grep -q "0 files, 0 folders" && \
+        EXFNAME='*./'"$2" || EXFNAME="$2"
+        $P7ZIP e -so "$1" "$EXFNAME" > "$3" 2>/dev/null
 }
 
 mcu7zip_copyin ()
 {
-	$P7ZIP a -si"$2" "$1" <"$3" >/dev/null 2>&1
+        $P7ZIP a -si"$2" "$1" <"$3" >/dev/null 2>&1
 }
 
 mcu7zip_mkdir ()
 {
-	dir=`mktemp -d "${MC_TMPDIR:-/tmp}/mctmpdir-u7z.XXXXXX"` || exit 1
-	mkdir -p "$dir"/"$2"
-	$P7ZIP a -w"$dir" "$1" "$dir"/"$2" >/dev/null 2>&1
-	rm -rf "$dir"
+        dir=`mktemp -d "${MC_TMPDIR:-/tmp}/mctmpdir-u7z.XXXXXX"` || exit 1
+        mkdir -p "$dir"/"$2"
+        $P7ZIP a -w"$dir" "$1" "$dir"/"$2" >/dev/null 2>&1
+        rm -rf "$dir"
 }
 
 mcu7zip_rm ()
 {
-	# NOTE: Version 4.20 fails to delete files in subdirectories
-	#first we check if we have old p7zip archive with prefix ./ in filename
-	$P7ZIP l "$1" "$2" | grep -q "0 files, 0 folders" && \
-	EXFNAME='*./'"$2" || EXFNAME="$2"
-	$P7ZIP d "$1" "$EXFNAME" 2>&1 | grep -q E_NOTIMPL > /dev/null 2>&1 && \
-	{ printf "Function not implemented...\n7z cannot delete from solid archive." >&2 ; exit 1 ; }
+        # NOTE: Version 4.20 fails to delete files in subdirectories
+        #first we check if we have old p7zip archive with prefix ./ in filename
+        $P7ZIP l "$1" "$2" | grep -q "0 files, 0 folders" && \
+        EXFNAME='*./'"$2" || EXFNAME="$2"
+        $P7ZIP d "$1" "$EXFNAME" 2>&1 | grep -q E_NOTIMPL > /dev/null 2>&1 && \
+        { printf "Function not implemented...\n7z cannot delete from solid archive." >&2 ; exit 1 ; }
 }
 
 mcu7zip_rmdir ()
 {
-	#first we check if we have old p7zip archive with prefix ./ in filename
-	$P7ZIP l "$1" "$2" | grep -q "0 files, 0 folders" && \
-	EXFNAME='*./'"$2" || EXFNAME="$2"
-	$P7ZIP d "$1" "$EXFNAME"/ 2>&1 | grep -q E_NOTIMPL > /dev/null 2>&1 && \
-	{ printf "Function not implemented...\n7z cannot delete from solid archive." >&2 ; exit 1 ; }
+        #first we check if we have old p7zip archive with prefix ./ in filename
+        $P7ZIP l "$1" "$2" | grep -q "0 files, 0 folders" && \
+        EXFNAME='*./'"$2" || EXFNAME="$2"
+        $P7ZIP d "$1" "$EXFNAME"/ 2>&1 | grep -q E_NOTIMPL > /dev/null 2>&1 && \
+        { printf "Function not implemented...\n7z cannot delete from solid archive." >&2 ; exit 1 ; }
 }
 
 # override any locale for dates

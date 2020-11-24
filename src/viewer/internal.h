@@ -23,8 +23,6 @@ typedef unsigned char byte;
 /* A width or height on the screen */
 typedef unsigned int screen_dimen;
 
-extern const off_t OFFSETTYPE_MAX;
-
 /*** enums ***************************************************************************************/
 
 /* data sources of the view */
@@ -136,13 +134,14 @@ struct WView
                                    growing buffer */
     gboolean growbuf_finished;  /* TRUE when all data has been read. */
 
-    /* Editor modes */
-    gboolean hex_mode;          /* Hexview or Hexedit */
-    gboolean hexedit_mode;      /* Hexedit */
+    mcview_mode_flags_t mode_flags;
+
+    /* Hex editor modes */
+    gboolean hexedit_mode;      /* Hexview or Hexedit */
+    const global_keymap_t *hex_keymap;
     gboolean hexview_in_text;   /* Is the hexview cursor in the text area? */
-    gboolean text_nroff_mode;   /* Nroff-style highlighting */
-    gboolean text_wrap_mode;    /* Wrap text lines to fit them on the screen */
-    gboolean magic_mode;        /* Preprocess the file using external programs */
+    int bytes_per_line;         /* Number of bytes per line in hex mode */
+    off_t hex_cursor;           /* Hexview cursor position in file */
     gboolean hexedit_lownibble; /* Are we editing the last significant nibble? */
     gboolean locked;            /* We hold lock on current file */
 
@@ -162,7 +161,6 @@ struct WView
     gboolean dpy_wrap_dirty;    /* dpy_state_top needs to be recomputed */
     off_t dpy_text_column;      /* Number of skipped columns in non-wrap
                                  * text mode */
-    off_t hex_cursor;           /* Hexview cursor position in file */
     screen_dimen cursor_col;    /* Cursor column */
     screen_dimen cursor_row;    /* Cursor row */
     struct hexedit_change_node *change_list;    /* Linked list of changes */
@@ -175,30 +173,24 @@ struct WView
     int dirty;                  /* Number of skipped updates */
     gboolean dpy_bbar_dirty;    /* Does the button bar need to be updated? */
 
-    /* Mode variables */
-    int bytes_per_line;         /* Number of bytes per line in hex mode */
-
-    /* Search variables */
-    off_t search_start;         /* First character to start searching from */
-    off_t search_end;           /* Length of found string or 0 if none was found */
-
-    /* Markers */
-    int marker;                 /* mark to use */
-    off_t marks[10];            /* 10 marks: 0..9 */
-
-    off_t update_steps;         /* The number of bytes between percent
-                                 * increments */
-    off_t update_activate;      /* Last point where we updated the status */
-
-    /* converter for translation of text */
-    GIConv converter;
 
     /* handle of search engine */
     mc_search_t *search;
     gchar *last_search_string;
     struct mcview_nroff_struct *search_nroff_seq;
-
+    off_t search_start;         /* First character to start searching from */
+    off_t search_end;           /* Length of found string or 0 if none was found */
     int search_numNeedSkipChar;
+
+    /* Markers */
+    int marker;                 /* mark to use */
+    off_t marks[10];            /* 10 marks: 0..9 */
+
+    off_t update_steps;         /* The number of bytes between percent increments */
+    off_t update_activate;      /* Last point where we updated the status */
+
+    /* converter for translation of text */
+    GIConv converter;
 
     GArray *saved_bookmarks;
 
@@ -310,11 +302,13 @@ void mcview_toggle_nroff_mode (WView * view);
 void mcview_toggle_hex_mode (WView * view);
 void mcview_init (WView * view);
 void mcview_done (WView * view);
+#ifdef HAVE_CHARSET
 void mcview_select_encoding (WView * view);
 void mcview_set_codeset (WView * view);
+#endif
 void mcview_show_error (WView * view, const char *error);
 off_t mcview_bol (WView * view, off_t current, off_t limit);
-off_t mcview_eol (WView * view, off_t current, off_t limit);
+off_t mcview_eol (WView * view, off_t current);
 char *mcview_get_title (const WDialog * h, size_t len);
 int mcview_calc_percent (WView * view, off_t p);
 

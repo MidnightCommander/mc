@@ -6,8 +6,6 @@
 #ifndef MC__WIDGET_LISTBOX_H
 #define MC__WIDGET_LISTBOX_H
 
-#include "lib/keybind.h"        /* global_keymap_t */
-
 /*** typedefs(not structures) and defined constants **********************************************/
 
 #define LISTBOX(x) ((WListbox *)(x))
@@ -64,15 +62,17 @@ extern const global_keymap_t *listbox_map;
 
 WListbox *listbox_new (int y, int x, int height, int width, gboolean deletable, lcback_fn callback);
 int listbox_search_text (WListbox * l, const char *text);
+int listbox_search_data (WListbox * l, const void *data);
 void listbox_select_first (WListbox * l);
 void listbox_select_last (WListbox * l);
 void listbox_select_entry (WListbox * l, int dest);
+int listbox_get_length (const WListbox * l);
 void listbox_get_current (WListbox * l, char **string, void **extra);
 WLEntry *listbox_get_nth_item (const WListbox * l, int pos);
 GList *listbox_get_first_link (const WListbox * l);
 void listbox_remove_current (WListbox * l);
 gboolean listbox_is_empty (const WListbox * l);
-void listbox_set_list (WListbox * l, GList * list);
+void listbox_set_list (WListbox * l, GQueue * list);
 void listbox_remove_list (WListbox * l);
 char *listbox_add_item (WListbox * l, listbox_append_t pos, int hotkey, const char *text,
                         void *data, gboolean free_data);

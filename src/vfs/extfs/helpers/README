@@ -8,7 +8,7 @@ possible to create new virtual filesystems for the GNU MC very easily.
 
 To handle requests, create a shell/perl/python/etc script/program
 (with executable permissions) in $(libexecdir)/mc/extfs.d
-or in ~/.mc/extfs.d.
+or in ~/.local/share/mc/extfs.d/.
 
 (Note: $(libexecdir) should be substituted for actual libexecdir path
 stored when configured or compiled, like /usr/local/libexec or /usr/libexec).
@@ -62,11 +62,12 @@ SSSSSSSS is the file size
 FILENAME is the filename
 PATH     is the path from the archive's root without the leading slash (/)
 DATETIME has one of the following formats:
-	    Mon DD hh:mm, Mon DD YYYY, Mon DD YYYY hh:mm, MM-DD-YYYY hh:mm
+            Mon DD hh:mm[:ss], Mon DD YYYY, MM-DD-YYYY hh:mm[:ss]
 
             where Mon is a three letter English month name, DD is day
-            1-31, MM is month 01-12, YYYY is four digit year, hh hour is
-            and mm is minute.
+            01-31 (can be 1-31, if following Mon), MM is month 01-12,
+            YYYY is four digit year, hh is hours, mm is minutes,
+            and ss is optional seconds.
 
 If the -> [PATH/]FILENAME part is present, it means:
 
@@ -78,6 +79,8 @@ means from root of the archive listed).
 
 If permissions do not start with l, but number of links is greater than one,
 then it says that this file should be a hardlinked with the other file.
+
+The result of list command must not contain "." and ".." items.
 
 * Command: copyout archivename storedfilename extractto
 

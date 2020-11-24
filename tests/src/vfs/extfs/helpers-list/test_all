@@ -1,0 +1,462 @@
+#!/bin/sh
+
+# A tester for extfs helpers.
+#
+# Copyright (C) 2016-2017
+# The Free Software Foundation, Inc.
+#
+# This file is part of the Midnight Commander.
+#
+# The Midnight Commander is free software: you can redistribute it
+# and/or modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation, either version 3 of the License,
+# or (at your option) any later version.
+#
+# The Midnight Commander is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+help() {
+  cat << EOS
+
+NAME
+
+$(basename "$0") - Tests the 'list' command of extfs helpers.
+
+SYNOPSIS
+
+  $(basename "$0") \\
+     --data-dir /path/to/where/data/files/are/stored \\
+     --helpers-dir /path/to/where/helpers/are/stored \\
+     --data-build-dir /path/to/where/config.sh/is/stored
+
+(But you're more likely to invoke this program with the 'run' script
+created by 'make check'; or by 'make check' itself.)
+
+DESCRIPTION
+
+This program tests extfs helpers by feeding them input and comparing
+their output to the expected output.
+
+See README for full details.
+
+You need to tell this program primarily two things: where the helpers are
+stored, and where the "data files" are stored. The data files are *.input
+files that are fed to the helpers and *.output files that are the correct
+output expected from these helpers.
+
+You also need to tell this program where the build flavor of the "data
+files" is stored. Most notably this is where the 'config.sh' file is
+created during build time. You do this with '--data-build-dir'.
+
+EOS
+}
+
+#"'
+
+#
+# Some helpers use the 'sort' utility. The "expected output" files we
+# provide must be generated in the same locale these helpers are to be run
+# by the tester or else 'sort' will produce a different output than ours,
+# failing the tests.
+#
+# We settle on the C locale.
+#
+LC_ALL=C
+export LC_ALL
+
+############################ Global variables ##############################
+
+# The directories used.
+data_dir=
+data_build_dir=
+helpers_dir1=
+helpers_dir2=
+
+opt_create_output=no        # "yes" if '--create-output' provided.
+opt_run_mcdiff_on_error=no  # "yes" if '--mcdiff' provided.
+
+############################ Coding guidance ###############################
+
+#
+# Portability notes:
+#
+# - We do `local var="$whatever"` instead of `local var=$whatever` for
+#   compatibility with Dash. See http://unix.stackexchange.com/questions/97560.
+#
+# - The 'local' keyword used in this file isn't mandatory. Feel free to
+#   remove it if it isn't supported by your archaic shell.
+#
+
+############################ Utility functions #############################
+
+#
+# Does $1 contain $2?
+#
+# Accepts basic regex.
+#
+has_string() {
+  local haystack="$1"  # quotes needed for Dash, as may contain spaces (see notes above).
+  local needle="$2"
+  echo "$haystack" | grep "$needle" > /dev/null
+}
+
+#
+# Given "/path/to/basename.and.some.ext", returns "basename"
+#
+basename_sans_extensions() {
+  local base="$(basename "$1")"
+  echo "${base%%.*}"
+}
+
+#
+# Does an executable exist?
+#
+has_prog() {
+  # see http://stackoverflow.com/questions/592620
+  command -v "$1" >/dev/null 2>&1
+}
+
+#
+# Are we running interactively? Or is our output redirected to a file/pipe?
+#
+is_interactive() {
+  [ -t 1 ]
+}
+
+#
+# Can we use colors?
+#
+has_colors() {
+  is_interactive && has_string "$TERM" 'linux\|xterm\|screen\|tmux\|putty'
+}
+
+init_colors() {
+  if has_colors; then
+    local esc="$(printf '\033')"  # for portability
+    C_bold="$esc[1m"
+    C_green="$esc[1;32m"
+    C_red="$esc[1;31m"
+    C_magenta="$esc[1;35m"
+    C_norm="$esc[0m"
+  fi
+}
+
+#
+# A few colorful alternatives to 'echo'.
+#
+header()  { echo $C_bold"$@"$C_norm; }
+err()     { echo $C_red"$@"$C_norm; }
+notice()  { echo $C_magenta"$@"$C_norm; }
+success() { echo $C_green"$@"$C_norm; }
+
+die() {
+  err "Error: $@"
+  exit 1
+}
+
+assert_dir_exists() {
+  [ -d "$1" ] || die "The directory '$1' doesn't exist, or is not a directory."
+}
+
+#
+# Creates a temporary file.
+#
+temp_file() {
+  local template="$1"
+  # BSD's doesn't support -t.
+  mktemp "${TMPDIR:-/tmp}/$template"
+}
+
+################################ Main code #################################
+
+#
+# Prints out the command to run a helper, if it can find it.
+#
+# For example,
+#
+#    find_helper uzip /path/to/helpers/dir
+#
+# prints:
+#
+#    /usr/bin/perl -w /path/to/helpers/dir/uzip
+#
+# Since helpers in the build tree don't yet have executable bit set, we
+# need to extract the shebang line.
+#
+find_helper() {
+  local helper_name="$1"
+  local dir="$2"
+
+  local try="$dir/$helper_name"
+  if [ -f "$try" ]; then
+    helper_CMD="$(head -1 $try | cut -c 3-) $try"  # reason #1 we don't allow spaces in pathnames.
+    true
+  else
+    false
+  fi
+}
+
+#
+# Returns the path of 'config.sh'.
+#
+path_of_config_sh() {
+  echo "$data_build_dir/config.sh"
+}
+
+#
+# Export variables to be used by tests.
+#
+# See README for their documentation.
+#
+export_useful_variables() {
+  local input="$1"
+
+  # Frequently used variables:
+  MC_TEST_EXTFS_LIST_CMD="mc_xcat $input"  # reason #2 we don't allow spaces in pathnames.
+  export MC_TEST_EXTFS_LIST_CMD
+
+  # Infrequently used variables:
+  MC_TEST_EXTFS_INPUT=$input
+  export MC_TEST_EXTFS_INPUT
+  MC_TEST_EXTFS_DATA_DIR=$data_dir
+  export MC_TEST_EXTFS_DATA_DIR
+  MC_TEST_EXTFS_DATA_BUILD_DIR=$data_build_dir
+  export MC_TEST_EXTFS_DATA_BUILD_DIR
+  MC_TEST_EXTFS_CONFIG_SH=$(path_of_config_sh)
+  export MC_TEST_EXTFS_CONFIG_SH
+}
+
+#
+# The crux of this program.
+#
+run() {
+
+  local error_count=0
+  local pass_count=0
+
+  for input in "$data_dir"/*.input; do
+
+    has_string "$input" '\*' && break  # we can't use 'shopt -s nullglob' as it's bash-specific.
+
+    header "Testing $input"
+
+    has_string "$input" " " && die "Error: filename contains spaces."
+
+    #
+    # Set up variables:
+    #
+
+    local helper_name="$(basename_sans_extensions "$input")"
+    local expected_parsed_output="${input%.input}.output"
+    local env_vars_file="${input%.input}.env_vars"
+    local args_file="${input%.input}.args"
+
+    local do_create_output=no
+
+    if [ ! -f "$expected_parsed_output" ]; then
+      # Corresponding *.output file doesn't exist. We either create it, later, or exit with error.
+      if [ $opt_create_output = "yes" ]; then
+        do_create_output=yes
+      else
+        err
+        err "Missing file: '$expected_parsed_output'."
+        err "You have to create an '.output' file for each '.input' one."
+        err
+        notice "Tip: invoke this program with '--create-output' to"
+        notice "automatically create missing '.output' files."
+        notice
+        exit 1
+      fi
+    fi
+
+    find_helper "$helper_name" "$helpers_dir1" ||
+      find_helper "$helper_name" "$helpers_dir2" ||
+        die "I can't find helper '$helper_name' in either $helpers_dir1 or $helpers_dir2"
+
+    local extra_parser_args=""
+    [ -f "$args_file" ] && extra_parser_args="$(cat "$args_file")"
+
+    local actual_output="$(temp_file $helper_name.actual-output.XXXXXXXX)"
+    local actual_parsed_output="$(temp_file $helper_name.actual-parsed-output.XXXXXXXX)"
+
+    #
+    # Variables are all set. Now do the actual stuff:
+    #
+
+    (
+    export_useful_variables "$input"
+    if [ -f "$env_vars_file" ]; then
+      set -a  # "allexport: Export all variables assigned to."
+      . "$env_vars_file"
+      set +a
+    fi
+    $helper_CMD list /dev/null > "$actual_output"
+    )
+
+    error_count=$((error_count + 1))  # we'll decrement it later.
+
+    if [ ! -s "$actual_output" ]; then
+      err
+      err "The helper '$helper_name' produced no output for this input. Something is wrong."
+      err
+      err "Make sure this helper supports testability: that it uses \$MC_TEST_EXTFS_LIST_CMD."
+      err
+      err "You may try running the helper yourself with:"
+      err
+      err "  \$ MC_TEST_EXTFS_LIST_CMD=\"mc_xcat $input\" \\"
+      err "      $helper_CMD list /dev/null"
+      err
+      continue
+    fi
+
+    # '--symbolic-ids': uid/gid aren't portable between computers,
+    # of course, so we always represent them symbolically when possible.
+    if ! mc_parse_ls_l --symbolic-ids $extra_parser_args "$actual_output" > "$actual_parsed_output"; then
+      err
+      err "ERROR: Parsing of the output of the helper '$helper_name' has failed."
+      err "This means that $helper_name has produced output that MC won't be able to parse."
+      err "Run the parsing command yourself ('mc_parse_ls_l $extra_parser_args $actual_output')"
+      err "to figure out the problem."
+      err
+      continue
+    fi
+
+    if [ $do_create_output = "yes" ]; then
+      # We arrive here if we were invoked with '--create-output' and
+      # the .output file doesn't exist. We create it and move to the next iteration.
+      cp "$actual_parsed_output" "$expected_parsed_output"
+      notice "The output file has been created in $expected_parsed_output"
+      continue
+    fi
+
+    if ! cmp "$expected_parsed_output" "$actual_parsed_output"; then
+      err
+      err "ERROR: $helper_name has produced output that's different than the expected output."
+      err
+      err "  Expected output (after parsing): $expected_parsed_output"
+      err "  Actual output (after parsing): $actual_parsed_output"
+      err
+      err "This might mean that a bug was introduced into $helper_name. Or that a bug was fixed."
+      err "Please compare the files."
+      err
+      err "If the actual output is the correct one, just copy the latter file"
+      err "onto the former (and commit to the git repository)."
+      err
+      if is_interactive; then
+        if [ $opt_run_mcdiff_on_error = "yes" ]; then
+          notice "Hit ENTER to launch mcdiff ..."
+          read dummy_var  # dash needs this.
+          ${MCDIFF:-mcdiff} "$expected_parsed_output" "$actual_parsed_output"
+        else
+          notice "Tip: invoke this program with '--mcdiff' to automatically launch"
+          notice "mcdiff to visually inspect the diff."
+          notice
+          notice "(Running this program non-interactively (i.e., redirecting the"
+          notice "output to a file or pipe) automatically adds diff to the output.)"
+          notice
+        fi
+      else
+        err "------------ diff of the expected output vs the actual output: -------------"
+        diff -U2 "$expected_parsed_output" "$actual_parsed_output"
+        err "------------------------------- end of diff --------------------------------"
+      fi
+      continue
+    fi
+
+    rm "$actual_output" "$actual_parsed_output"
+
+    error_count=$((error_count - 1))  # cancel the earlier "+1".
+    pass_count=$((pass_count + 1))
+
+    success "PASSED."
+
+  done
+
+  [ $pass_count = "0" -a $error_count = "0" ] && notice "Note: The data directory contains no *.input files."
+
+  [ $error_count = "0" ]  # exit status of function.
+}
+
+parse_command_line_arguments() {
+  # We want --long-options, so we don't use 'getopts'.
+  while [ -n "$1" ]; do
+    case "$1" in
+      --data-dir)
+        data_dir=$2
+        shift 2
+        ;;
+      --data-build-dir)
+        data_build_dir=$2
+        shift 2
+        ;;
+      --helpers-dir)
+        if [ -z "$helpers_dir1" ]; then
+          helpers_dir1=$2
+        else
+          helpers_dir2=$2
+        fi
+        shift 2
+        ;;
+      --create-output)
+        opt_create_output=yes
+        shift
+        ;;
+      --mcdiff)
+        opt_run_mcdiff_on_error=yes
+        shift
+        ;;
+      --help|-h)
+        help
+        exit
+        ;;
+      *)
+        die "Unknown command-line option $1"
+        ;;
+    esac
+  done
+}
+
+#
+# Check that everything is set up correctly.
+#
+verify_setup() {
+  [ -n "$data_dir" ] || die "You didn't specify the data dir (--data-dir). Run me with --help for info."
+  [ -n "$data_build_dir" ] || die "You didn't specify the data build dir (--data-build-dir). Run me with --help for info."
+  [ -n "$helpers_dir1" ] || die "You didn't specify the helpers dir (--helpers-dir). Run me with --help for info."
+  [ -z "$helpers_dir2" ] && helpers_dir2=$helpers_dir1  # we're being lazy.
+
+  local dir
+  for dir in "$data_dir" "$data_build_dir" "$helpers_dir1" "$helpers_dir2"; do
+    assert_dir_exists "$dir"
+    has_string "$dir" " " && die "$dir: Sorry, spaces aren't allowed in pathnames."  # search "reason", twice, above.
+  done
+
+  [ -e "$(path_of_config_sh)" ] || die "Missing file $(path_of_config_sh). You probably have a mistake in the '--data-build-dir' path."
+
+  local missing_progs=""
+  check_prog() {
+    if ! has_prog "$1"; then
+      err "I can't see the program '$1'."
+      missing_progs="${missing_progs}${missing_progs:+ and }'$1'"
+    fi
+  }
+
+  check_prog "mc_parse_ls_l"
+  check_prog "mc_xcat"
+  check_prog "mktemp"  # non-POSIX
+  [ -z "$missing_progs" ] || die "You need to add to your PATH the directories containing the executables $missing_progs."
+}
+
+main() {
+  init_colors
+  parse_command_line_arguments "$@"
+  verify_setup
+  run  # being the last command executed, its exit status is that of this whole script.
+}
+
+main "$@"

@@ -1,7 +1,7 @@
 /*
    lib/vfs - test vfs_split() functionality
 
-   Copyright (C) 2011-2016
+   Copyright (C) 2011-2020
    Free Software Foundation, Inc.
 
    Written by:
@@ -33,8 +33,7 @@
 
 #include "src/vfs/local/local.c"
 
-struct vfs_s_subclass test_subclass1, test_subclass2, test_subclass3;
-struct vfs_class vfs_test_ops1, vfs_test_ops2, vfs_test_ops3;
+static struct vfs_class vfs_test_ops1, vfs_test_ops2, vfs_test_ops3;
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -42,29 +41,20 @@ struct vfs_class vfs_test_ops1, vfs_test_ops2, vfs_test_ops3;
 static void
 setup (void)
 {
+    mc_global.timer = mc_timer_new ();
     str_init_strings (NULL);
 
     vfs_init ();
-    init_localfs ();
+    vfs_init_localfs ();
     vfs_setup_work_dir ();
 
-
-    test_subclass1.flags = VFS_S_REMOTE;
-    vfs_s_init_class (&vfs_test_ops1, &test_subclass1);
-
-    vfs_test_ops1.name = "testfs1";
-    vfs_test_ops1.flags = VFSF_NOLINKS;
-    vfs_test_ops1.prefix = "test1:";
+    vfs_init_class (&vfs_test_ops1, "testfs1", VFSF_NOLINKS | VFSF_REMOTE, "test1");
     vfs_register_class (&vfs_test_ops1);
 
-    vfs_s_init_class (&vfs_test_ops2, &test_subclass2);
-    vfs_test_ops2.name = "testfs2";
-    vfs_test_ops2.prefix = "test2:";
+    vfs_init_class (&vfs_test_ops2, "testfs2", VFSF_UNKNOWN, "test2");
     vfs_register_class (&vfs_test_ops2);
 
-    vfs_s_init_class (&vfs_test_ops3, &test_subclass3);
-    vfs_test_ops3.name = "testfs3";
-    vfs_test_ops3.prefix = "test3:";
+    vfs_init_class (&vfs_test_ops3, "testfs3", VFSF_UNKNOWN, "test3");
     vfs_register_class (&vfs_test_ops3);
 }
 
@@ -76,6 +66,7 @@ teardown (void)
 {
     vfs_shut ();
     str_uninit_strings ();
+    mc_timer_destroy (mc_global.timer);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -131,7 +122,7 @@ static const struct test_vfs_split_ds
         "/local/path/#test1:/bla-bla/some/path/",
         "bla-bla/some/path2",
         "test2:",
-        &vfs_test_ops2,
+        &vfs_test_ops2
     },
     { /* 6. split with local */
         "/local/path/#test1:/bla-bla/some/path/",
@@ -167,7 +158,7 @@ static const struct test_vfs_split_ds
         "bl#a-bl#a/so#me/pa#th2",
         "test2:",
         &vfs_test_ops2
-    },
+    }
 };
 /* *INDENT-ON* */
 

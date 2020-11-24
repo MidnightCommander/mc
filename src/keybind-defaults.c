@@ -1,7 +1,7 @@
 /*
    Default values for keybinding engine
 
-   Copyright (C) 2009-2016
+   Copyright (C) 2009-2020
    Free Software Foundation, Inc.
 
    Written by:
@@ -28,7 +28,7 @@
 #include <config.h>
 
 #include "lib/global.h"
-#include "lib/widget.h"         /* dialog_map, input_map, listbox_map */
+#include "lib/widget.h"         /* dialog_map, input_map, listbox_map, menu_map, radio_map */
 
 #include "keybind-defaults.h"
 
@@ -38,10 +38,15 @@ GArray *main_keymap = NULL;
 GArray *main_x_keymap = NULL;
 GArray *panel_keymap = NULL;
 GArray *dialog_keymap = NULL;
+GArray *menu_keymap = NULL;
 GArray *input_keymap = NULL;
 GArray *listbox_keymap = NULL;
+GArray *radio_keymap = NULL;
 GArray *tree_keymap = NULL;
 GArray *help_keymap = NULL;
+#ifdef ENABLE_EXT2FS_ATTR
+GArray *chattr_keymap = NULL;
+#endif
 #ifdef USE_INTERNAL_EDIT
 GArray *editor_keymap = NULL;
 GArray *editor_x_keymap = NULL;
@@ -57,7 +62,9 @@ const global_keymap_t *main_x_map = NULL;
 const global_keymap_t *panel_map = NULL;
 const global_keymap_t *tree_map = NULL;
 const global_keymap_t *help_map = NULL;
-
+#ifdef ENABLE_EXT2FS_ATTR
+const global_keymap_t *chattr_map = NULL;
+#endif
 #ifdef USE_INTERNAL_EDIT
 const global_keymap_t *editor_map = NULL;
 const global_keymap_t *editor_x_map = NULL;
@@ -83,7 +90,7 @@ typedef struct global_keymap_ini_t
 
 /* midnight */
 static const global_keymap_ini_t default_main_keymap[] = {
-    {"ChangePanel", "tab"},
+    {"ChangePanel", "tab; ctrl-i"},
     {"Help", "f1"},
     {"UserMenu", "f2"},
     {"View", "f3"},
@@ -97,6 +104,7 @@ static const global_keymap_ini_t default_main_keymap[] = {
     {"MenuLastSelected", "f19"},
     {"QuitQuiet", "f20"},
     {"History", "alt-h"},
+    {"EditorViewerHistory", "alt-shift-e"},
     {"DirSize", "ctrl-space"},
     /* Copy useful information to the command line */
     {"PutCurrentPath", "alt-a"},
@@ -115,7 +123,6 @@ static const global_keymap_ini_t default_main_keymap[] = {
     /* Panel refresh */
     {"Reread", "ctrl-r"},
     /* Switch listing between long, user defined and full formats */
-    {"PanelListingSwitch", "alt-t"},
     /* Swap panels */
     {"Swap", "ctrl-u"},
     /* Resize panels */
@@ -150,6 +157,9 @@ static const global_keymap_ini_t default_main_x_keymap[] = {
     {"PutOtherTagged", "ctrl-t"},
     {"ChangeMode", "c"},
     {"ChangeOwn", "o"},
+#ifdef ENABLE_EXT2FS_ATTR
+    {"ChangeAttributes", "e"},
+#endif /* ENABLE_EXT2FS_ATTR */
     {"PutCurrentLink", "r"},
     {"PutOtherLink", "ctrl-r"},
     {"Link", "l"},
@@ -168,6 +178,7 @@ static const global_keymap_ini_t default_main_x_keymap[] = {
 
 /* panel */
 static const global_keymap_ini_t default_panel_keymap[] = {
+    {"CycleListingFormat", "alt-t"},
     {"PanelOtherCd", "alt-o"},
     {"PanelOtherCdLink", "alt-l"},
     {"CopySingle", "f15"},
@@ -225,6 +236,20 @@ static const global_keymap_ini_t default_dialog_keymap[] = {
     {NULL, NULL}
 };
 
+/* menubar */
+static const global_keymap_ini_t default_menu_keymap[] = {
+    {"Help", "f1"},
+    {"Left", "left; ctrl-b"},
+    {"Right", "right; ctrl-f"},
+    {"Up", "up; ctrl-p"},
+    {"Down", "down; ctrl-n"},
+    {"Home", "home; alt-lt; ctrl-a"},
+    {"End", "end; alt-gt; ctrl-e"},
+    {"Enter", "enter"},
+    {"Quit", "f10; ctrl-g; esc"},
+    {NULL, NULL}
+};
+
 /* input line */
 static const global_keymap_ini_t default_input_keymap[] = {
     /* Motion */
@@ -270,6 +295,19 @@ static const global_keymap_ini_t default_listbox_keymap[] = {
     {"PageDown", "pgdn; ctrl-v"},
     {"Delete", "delete; d"},
     {"Clear", "shift-delete; shift-d"},
+    {"View", "f3"},
+    {"Edit", "f4"},
+    {"Enter", "enter"},
+    {NULL, NULL}
+};
+
+/* radio */
+static const global_keymap_ini_t default_radio_keymap[] = {
+    {"Up", "up; ctrl-p"},
+    {"Down", "down; ctrl-n"},
+    {"Top", "home; alt-lt; a1"},
+    {"Bottom", "end; alt-gt; c1"},
+    {"Select", "space"},
     {NULL, NULL}
 };
 
@@ -319,6 +357,21 @@ static const global_keymap_ini_t default_help_keymap[] = {
     {"NodePrev", "p"},
     {NULL, NULL}
 };
+
+#ifdef ENABLE_EXT2FS_ATTR
+/* chattr dialog */
+static const global_keymap_ini_t default_chattr_keymap[] = {
+    {"Up", "up; left; ctrl-p"},
+    {"Down", "down; right; ctrl-n"},
+    {"Top", "home; alt-lt; a1"},
+    {"Bottom", "end; alt-gt; c1"},
+    {"PageUp", "pgup; alt-v"},
+    {"PageDown", "pgdn; ctrl-v"},
+    {"Mark", "t; shift-t"},
+    {"MarkAndDown", "insert"},
+    {NULL, NULL}
+};
+#endif /* ENABLE_EXT2FS_ATTR */
 
 #ifdef USE_INTERNAL_EDIT
 static const global_keymap_ini_t default_editor_keymap[] = {
@@ -469,6 +522,8 @@ static const global_keymap_ini_t default_viewer_keymap[] = {
     {"SearchBackward", "question"},
     {"SearchForwardContinue", "ctrl-s"},
     {"SearchBackwardContinue", "ctrl-r"},
+    {"SearchOppositeContinue", "shift-n"},
+    {"History", "alt-shift-e"},
     {NULL, NULL}
 };
 
@@ -503,6 +558,8 @@ static const global_keymap_ini_t default_viewer_hex_keymap[] = {
     {"SearchBackward", "question"},
     {"SearchForwardContinue", "ctrl-s"},
     {"SearchBackwardContinue", "ctrl-r"},
+    {"SearchOppositeContinue", "shift-n"},
+    {"History", "alt-shift-e"},
     {NULL, NULL}
 };
 
@@ -588,10 +645,15 @@ create_default_keymap (void)
     create_default_keymap_section (keymap, KEYMAP_SECTION_MAIN_EXT, default_main_x_keymap);
     create_default_keymap_section (keymap, KEYMAP_SECTION_PANEL, default_panel_keymap);
     create_default_keymap_section (keymap, KEYMAP_SECTION_DIALOG, default_dialog_keymap);
+    create_default_keymap_section (keymap, KEYMAP_SECTION_MENU, default_menu_keymap);
     create_default_keymap_section (keymap, KEYMAP_SECTION_INPUT, default_input_keymap);
     create_default_keymap_section (keymap, KEYMAP_SECTION_LISTBOX, default_listbox_keymap);
+    create_default_keymap_section (keymap, KEYMAP_SECTION_RADIO, default_radio_keymap);
     create_default_keymap_section (keymap, KEYMAP_SECTION_TREE, default_tree_keymap);
     create_default_keymap_section (keymap, KEYMAP_SECTION_HELP, default_help_keymap);
+#ifdef ENABLE_EXT2FS_ATTR
+    create_default_keymap_section (keymap, KEYMAP_SECTION_HELP, default_chattr_keymap);
+#endif
 #ifdef USE_INTERNAL_EDIT
     create_default_keymap_section (keymap, KEYMAP_SECTION_EDITOR, default_editor_keymap);
     create_default_keymap_section (keymap, KEYMAP_SECTION_EDITOR_EXT, default_editor_x_keymap);

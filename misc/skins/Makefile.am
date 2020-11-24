@@ -5,10 +5,12 @@ skin_DATA = \
 	darkfar.ini \
 	default.ini \
 	double-lines.ini \
+	featured-plus.ini \
 	featured.ini \
 	gotar.ini \
 	gray-green-purple256.ini \
 	gray-orange-blue256.ini \
+	julia256.ini \
 	mc46.ini \
 	modarcon16-defbg.ini \
 	modarcon16.ini \
@@ -20,8 +22,13 @@ skin_DATA = \
 	modarin256root.ini \
 	nicedark.ini \
 	sand256.ini \
-	xoria256.ini
-
+	seasons-autumn16M.ini \
+	seasons-spring16M.ini \
+	seasons-summer16M.ini \
+	seasons-winter16M.ini \
+	xoria256.ini \
+	yadt256-defbg.ini \
+	yadt256.ini
 
 EXTRA_DIST = \
     $(skin_DATA)

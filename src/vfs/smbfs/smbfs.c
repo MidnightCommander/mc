@@ -1,7 +1,7 @@
 /*
    Virtual File System: Midnight Commander file system.
 
-   Copyright (C) 1999-2016
+   Copyright (C) 1999-2020
    Free Software Foundation, Inc.
 
    Written by:
@@ -38,6 +38,7 @@
 
 #include <stdio.h>
 #include <sys/types.h>
+#include <string.h>             /* memset() */
 
 #undef USE_NCURSES              /* Don't include *curses.h */
 #undef USE_NCURSESW
@@ -65,6 +66,7 @@
 #include "helpers/include/includes.h"
 
 #include "lib/vfs/vfs.h"
+#include "lib/vfs/xdirentry.h"  /* vfs_s_subclass */
 #include "lib/vfs/netutil.h"
 #include "lib/vfs/utilvfs.h"
 
@@ -136,7 +138,9 @@ static gboolean got_user = FALSE;
 static gboolean got_pass = FALSE;
 static pstring password;
 static pstring username;
-static struct vfs_class vfs_smbfs_ops;
+
+static struct vfs_s_subclass smbfs_subclass;
+static struct vfs_class *vfs_smbfs_ops = VFS_CLASS (&smbfs_subclass);
 
 static struct _smbfs_connection
 {
@@ -220,12 +224,7 @@ smbfs_auth_free (struct smb_authinfo const *a)
 static void
 smbfs_auth_free_all (void)
 {
-    if (auth_list)
-    {
-        g_slist_foreach (auth_list, (GFunc) smbfs_auth_free, 0);
-        g_slist_free (auth_list);
-        auth_list = 0;
-    }
+    g_clear_slist (&auth_list, (GDestroyNotify) smbfs_auth_free);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -987,7 +986,9 @@ smbfs_chown (const vfs_path_t * vpath, uid_t owner, gid_t group)
     const vfs_path_element_t *path_element;
 
     path_element = vfs_path_get_by_index (vpath, -1);
-    DEBUG (3, ("smbfs_chown(path:%s, owner:%d, group:%d)\n", path_element->path, owner, group));
+    DEBUG (3,
+           ("smbfs_chown(path:%s, owner:%d, group:%d)\n", path_element->path, (int) owner,
+            (int) group));
     my_errno = EOPNOTSUPP;      /* ready for your labotomy? */
     return -1;
 }
@@ -995,14 +996,18 @@ smbfs_chown (const vfs_path_t * vpath, uid_t owner, gid_t group)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-smbfs_utime (const vfs_path_t * vpath, struct utimbuf *times)
+smbfs_utime (const vfs_path_t * vpath, mc_timesbuf_t * times)
 {
     const vfs_path_element_t *path_element;
 
     (void) times;
 
     path_element = vfs_path_get_by_index (vpath, -1);
+#ifdef HAVE_UTIMENSAT
+    DEBUG (3, ("smbfs_utimensat(path:%s)\n", path_element->path));
+#else
     DEBUG (3, ("smbfs_utime(path:%s)\n", path_element->path));
+#endif
     my_errno = EOPNOTSUPP;
     return -1;
 }
@@ -1312,7 +1317,7 @@ smbfs_open_link (char *host, char *path, const char *user, int *port, char *this
 
         if (my_errno != EPERM)
             return 0;
-        message (D_ERROR, MSG_ERROR, _("Authentication failed"));
+        message (D_ERROR, MSG_ERROR, "%s", _("Authentication failed"));
 
         /* authentication failed, try again */
         smbfs_auth_remove (bucket->host, bucket->service);
@@ -1341,7 +1346,7 @@ smbfs_get_path (smbfs_connection ** sc, const vfs_path_t * vpath)
 
     DEBUG (3, ("smbfs_get_path(%s)\n", path));
 
-    if (path_element->class != &vfs_smbfs_ops)
+    if (path_element->class != vfs_smbfs_ops)
         return NULL;
 
     while (*path == '/')        /* '/' leading server name */
@@ -1450,7 +1455,7 @@ smbfs_fake_server_stat (const char *server_url, const char *path, struct stat *b
             if (strcmp (dentry->text, path) == 0)
             {
                 DEBUG (4, ("smbfs_fake_server_stat: %s:%4o\n",
-                           dentry->text, (int) dentry->my_stat.st_mode));
+                           dentry->text, (unsigned int) dentry->my_stat.st_mode));
                 memcpy (buf, &dentry->my_stat, sizeof (struct stat));
                 return 0;
             }
@@ -1490,7 +1495,6 @@ smbfs_fake_share_stat (const char *server_url, const char *path, struct stat *bu
             g_free (p);
             return 0;
         }
-        g_free (p);
         return -1;
     }
 
@@ -1512,7 +1516,7 @@ smbfs_fake_share_stat (const char *server_url, const char *path, struct stat *bu
         if (strcmp (dentry->text, path) == 0)
         {
             DEBUG (6, ("smbfs_fake_share_stat: %s:%4o\n",
-                       dentry->text, (int) dentry->my_stat.st_mode));
+                       dentry->text, (unsigned int) dentry->my_stat.st_mode));
             memcpy (buf, &dentry->my_stat, sizeof (struct stat));
             return 0;
         }
@@ -1742,7 +1746,7 @@ smbfs_stat (const vfs_path_t * vpath, struct stat *buf)
 
     /* check if stating server */
     p = path_element->path;
-    if (path_element->class != &vfs_smbfs_ops)
+    if (path_element->class != vfs_smbfs_ops)
         return -1;
 
     while (*p == '/')           /* '/' leading server name */
@@ -1876,7 +1880,7 @@ smbfs_mknod (const vfs_path_t * vpath, mode_t mode, dev_t dev)
 
     path_element = vfs_path_get_by_index (vpath, -1);
     DEBUG (3,
-           ("smbfs_mknod(path:%s, mode:%d, dev:%u)\n", path_element->path, mode,
+           ("smbfs_mknod(path:%s, mode:%d, dev:%u)\n", path_element->path, (int) mode,
             (unsigned int) dev));
     my_errno = EOPNOTSUPP;
     return -1;
@@ -1978,7 +1982,7 @@ smbfs_forget (const vfs_path_t * vpath)
     const char *path;
 
     path_element = vfs_path_get_by_index (vpath, -1);
-    if (path_element->class != &vfs_smbfs_ops)
+    if (path_element->class != vfs_smbfs_ops)
         return;
 
     path = path_element->path;
@@ -2205,6 +2209,17 @@ smbfs_fstat (void *data, struct stat *buf)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static gboolean
+smbfs_nothingisopen (vfsid id)
+{
+    /* FIXME */
+    (void) id;
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -2231,42 +2246,44 @@ vfs_smb_authinfo_new (const char *host, const char *share, const char *domain,
 /* --------------------------------------------------------------------------------------------- */
 
 void
-init_smbfs (void)
+vfs_init_smbfs (void)
 {
     tcp_init ();
 
-    vfs_smbfs_ops.name = "smbfs";
-    vfs_smbfs_ops.prefix = "smb";
-    vfs_smbfs_ops.flags = VFSF_NOLINKS;
-    vfs_smbfs_ops.init = smbfs_init;
-    vfs_smbfs_ops.fill_names = smbfs_fill_names;
-    vfs_smbfs_ops.open = smbfs_open;
-    vfs_smbfs_ops.close = smbfs_close;
-    vfs_smbfs_ops.read = smbfs_read;
-    vfs_smbfs_ops.write = smbfs_write;
-    vfs_smbfs_ops.opendir = smbfs_opendir;
-    vfs_smbfs_ops.readdir = smbfs_readdir;
-    vfs_smbfs_ops.closedir = smbfs_closedir;
-    vfs_smbfs_ops.stat = smbfs_stat;
-    vfs_smbfs_ops.lstat = smbfs_lstat;
-    vfs_smbfs_ops.fstat = smbfs_fstat;
-    vfs_smbfs_ops.chmod = smbfs_chmod;
-    vfs_smbfs_ops.chown = smbfs_chown;
-    vfs_smbfs_ops.utime = smbfs_utime;
-    vfs_smbfs_ops.readlink = smbfs_readlink;
-    vfs_smbfs_ops.symlink = smbfs_symlink;
-    vfs_smbfs_ops.link = smbfs_link;
-    vfs_smbfs_ops.unlink = smbfs_unlink;
-    vfs_smbfs_ops.rename = smbfs_rename;
-    vfs_smbfs_ops.chdir = smbfs_chdir;
-    vfs_smbfs_ops.ferrno = smbfs_errno;
-    vfs_smbfs_ops.lseek = smbfs_lseek;
-    vfs_smbfs_ops.mknod = smbfs_mknod;
-    vfs_smbfs_ops.free = smbfs_free;
-    vfs_smbfs_ops.mkdir = smbfs_mkdir;
-    vfs_smbfs_ops.rmdir = smbfs_rmdir;
-    vfs_smbfs_ops.setctl = smbfs_setctl;
-    vfs_register_class (&vfs_smbfs_ops);
+    /* NULLize vfs_s_subclass members */
+    memset (&smbfs_subclass, 0, sizeof (smbfs_subclass));
+
+    vfs_init_class (vfs_smbfs_ops, "smbfs", VFSF_NOLINKS, "smb");
+    vfs_smbfs_ops->init = smbfs_init;
+    vfs_smbfs_ops->fill_names = smbfs_fill_names;
+    vfs_smbfs_ops->open = smbfs_open;
+    vfs_smbfs_ops->close = smbfs_close;
+    vfs_smbfs_ops->read = smbfs_read;
+    vfs_smbfs_ops->write = smbfs_write;
+    vfs_smbfs_ops->opendir = smbfs_opendir;
+    vfs_smbfs_ops->readdir = smbfs_readdir;
+    vfs_smbfs_ops->closedir = smbfs_closedir;
+    vfs_smbfs_ops->stat = smbfs_stat;
+    vfs_smbfs_ops->lstat = smbfs_lstat;
+    vfs_smbfs_ops->fstat = smbfs_fstat;
+    vfs_smbfs_ops->chmod = smbfs_chmod;
+    vfs_smbfs_ops->chown = smbfs_chown;
+    vfs_smbfs_ops->utime = smbfs_utime;
+    vfs_smbfs_ops->readlink = smbfs_readlink;
+    vfs_smbfs_ops->symlink = smbfs_symlink;
+    vfs_smbfs_ops->link = smbfs_link;
+    vfs_smbfs_ops->unlink = smbfs_unlink;
+    vfs_smbfs_ops->rename = smbfs_rename;
+    vfs_smbfs_ops->chdir = smbfs_chdir;
+    vfs_smbfs_ops->ferrno = smbfs_errno;
+    vfs_smbfs_ops->lseek = smbfs_lseek;
+    vfs_smbfs_ops->mknod = smbfs_mknod;
+    vfs_smbfs_ops->free = smbfs_free;
+    vfs_smbfs_ops->mkdir = smbfs_mkdir;
+    vfs_smbfs_ops->rmdir = smbfs_rmdir;
+    vfs_smbfs_ops->setctl = smbfs_setctl;
+    vfs_smbfs_ops->nothingisopen = smbfs_nothingisopen;
+    vfs_register_class (vfs_smbfs_ops);
 }
 
 /* --------------------------------------------------------------------------------------------- */

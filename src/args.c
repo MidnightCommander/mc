@@ -1,7 +1,7 @@
 /*
    Handle command line arguments.
 
-   Copyright (C) 2009-2016
+   Copyright (C) 2009-2020
    Free Software Foundation, Inc.
 
    Written by:
@@ -95,7 +95,9 @@ static gboolean mc_args__nouse_subshell = FALSE;
 #endif /* ENABLE_SUBSHELL */
 static gboolean mc_args__show_datadirs = FALSE;
 static gboolean mc_args__show_datadirs_extended = FALSE;
+#ifdef ENABLE_CONFIGURE_ARGS
 static gboolean mc_args__show_configure_opts = FALSE;
+#endif
 
 static GOptionGroup *main_group;
 
@@ -125,6 +127,7 @@ static const GOptionEntry argument_main_table[] = {
      NULL
     },
 
+#ifdef ENABLE_CONFIGURE_ARGS
     /* show configure options */
     {
      "configure-options", '\0', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE,
@@ -132,12 +135,13 @@ static const GOptionEntry argument_main_table[] = {
      N_("Print configure options"),
      NULL
     },
+#endif
 
     {
      "printwd", 'P', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_STRING,
      &mc_args__last_wd_file,
      N_("Print last working directory to specified file"),
-     "<file>"
+     N_("<file>")
     },
 
 #ifdef ENABLE_SUBSHELL
@@ -162,7 +166,7 @@ static const GOptionEntry argument_main_table[] = {
      "ftplog", 'l', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_STRING,
      &mc_args__netfs_logfile,
      N_("Log ftp dialog to specified file"),
-     "<file>"
+     N_("<file>")
     },
 #endif /* ENABLE_VFS_FTP */
 #ifdef ENABLE_VFS_SMB
@@ -170,7 +174,7 @@ static const GOptionEntry argument_main_table[] = {
      "debuglevel", 'D', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_INT,
      &mc_args__debug_level,
      N_("Set debug level"),
-     "<integer>"
+     N_("<integer>")
     },
 #endif /* ENABLE_VFS_SMB */
 
@@ -179,7 +183,7 @@ static const GOptionEntry argument_main_table[] = {
      "view", 'v', G_OPTION_FLAG_IN_MAIN | G_OPTION_FLAG_NO_ARG, G_OPTION_ARG_CALLBACK,
      (gpointer) parse_mc_v_argument,
      N_("Launches the file viewer on a file"),
-     "<file>"
+     N_("<file>")
     },
 
     {
@@ -187,7 +191,7 @@ static const GOptionEntry argument_main_table[] = {
      "edit", 'e', G_OPTION_FLAG_IN_MAIN | G_OPTION_FLAG_NO_ARG, G_OPTION_ARG_CALLBACK,
      (gpointer) parse_mc_e_argument,
      N_("Edit files"),
-     "<file> ..." },
+     N_("<file> ...") },
 
     {
      NULL, '\0', 0, 0, NULL, NULL, NULL /* Complete struct initialization */
@@ -264,7 +268,7 @@ static const GOptionEntry argument_terminal_table[] = {
      "keymap", 'K', ARGS_TERM_OPTIONS, G_OPTION_ARG_STRING,
      &mc_args__keymap_file,
      N_("Load definitions of key bindings from specified file"),
-     "<file>"
+     N_("<file>")
     },
 
     {
@@ -306,14 +310,14 @@ static const GOptionEntry argument_color_table[] = {
      "colors", 'C', ARGS_COLOR_OPTIONS, G_OPTION_ARG_STRING,
      &mc_global.tty.command_line_colors,
      N_("Specifies a color configuration"),
-     "<string>"
+     N_("<string>")
     },
 
     {
      "skin", 'S', ARGS_COLOR_OPTIONS, G_OPTION_ARG_STRING,
      &mc_global.tty.skin,
      N_("Show mc with specified skin"),
-     "<string>"
+     N_("<string>")
     },
 
     {
@@ -388,12 +392,28 @@ mc_args_new_color_group (void)
 static gchar *
 mc_args_add_usage_info (void)
 {
-    mc_args__loc__usage_string = g_strdup_printf ("[%s] %s\n %s - %s\n",
-                                                  _("+number"),
-                                                  _("[this_dir] [other_panel_dir]"),
-                                                  _("+number"),
-                                                  _
-                                                  ("Set initial line number for the internal editor"));
+    gchar *s;
+
+    switch (mc_global.mc_run_mode)
+    {
+    case MC_RUN_EDITOR:
+        s = g_strdup_printf ("%s\n", _("[+lineno] file1[:lineno] [file2[:lineno]...]"));
+        break;
+    case MC_RUN_VIEWER:
+        s = g_strdup_printf ("%s\n", _("file"));
+        break;
+#ifdef USE_DIFF_VIEW
+    case MC_RUN_DIFFVIEWER:
+        s = g_strdup_printf ("%s\n", _("file1 file2"));
+        break;
+#endif /* USE_DIFF_VIEW */
+    case MC_RUN_FULL:
+    default:
+        s = g_strdup_printf ("%s\n", _("[this_dir] [other_panel_dir]"));
+    }
+
+    mc_args__loc__usage_string = s;
+
     return mc_args__loc__usage_string;
 }
 
@@ -613,6 +633,32 @@ parse_mcedit_arguments (int argc, char **argv)
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
+void
+mc_setup_run_mode (char **argv)
+{
+    const char *base;
+
+    base = x_basename (argv[0]);
+
+    if (strncmp (base, "mce", 3) == 0 || strcmp (base, "vi") == 0)
+    {
+        /* mce* or vi is link to mc */
+        mc_global.mc_run_mode = MC_RUN_EDITOR;
+    }
+    else if (strncmp (base, "mcv", 3) == 0 || strcmp (base, "view") == 0)
+    {
+        /* mcv* or view is link to mc */
+        mc_global.mc_run_mode = MC_RUN_VIEWER;
+    }
+#ifdef USE_DIFF_VIEW
+    else if (strncmp (base, "mcd", 3) == 0 || strcmp (base, "diff") == 0)
+    {
+        /* mcd* or diff is link to mc */
+        mc_global.mc_run_mode = MC_RUN_DIFFVIEWER;
+    }
+#endif /* USE_DIFF_VIEW */
+}
+
 gboolean
 mc_args_parse (int *argc, char ***argv, const char *translation_domain, GError ** mcerror)
 {
@@ -716,11 +762,13 @@ mc_args_show_info (void)
         return FALSE;
     }
 
+#ifdef ENABLE_CONFIGURE_ARGS
     if (mc_args__show_configure_opts)
     {
         show_configure_options ();
         return FALSE;
     }
+#endif
 
     return TRUE;
 }
@@ -730,7 +778,6 @@ mc_args_show_info (void)
 gboolean
 mc_setup_by_args (int argc, char **argv, GError ** mcerror)
 {
-    const char *base;
     char *tmp;
 
     mc_return_val_if_error (mcerror, FALSE);
@@ -764,26 +811,7 @@ mc_setup_by_args (int argc, char **argv, GError ** mcerror)
         (void) vpath;
     }
 
-    base = x_basename (argv[0]);
     tmp = (argc > 0) ? argv[1] : NULL;
-
-    if (strncmp (base, "mce", 3) == 0 || strcmp (base, "vi") == 0)
-    {
-        /* mce* or vi is link to mc */
-        mc_global.mc_run_mode = MC_RUN_EDITOR;
-    }
-    else if (strncmp (base, "mcv", 3) == 0 || strcmp (base, "view") == 0)
-    {
-        /* mcv* or view is link to mc */
-        mc_global.mc_run_mode = MC_RUN_VIEWER;
-    }
-#ifdef USE_DIFF_VIEW
-    else if (strncmp (base, "mcd", 3) == 0 || strcmp (base, "diff") == 0)
-    {
-        /* mcd* or diff is link to mc */
-        mc_global.mc_run_mode = MC_RUN_DIFFVIEWER;
-    }
-#endif /* USE_DIFF_VIEW */
 
     switch (mc_global.mc_run_mode)
     {
@@ -809,7 +837,7 @@ mc_setup_by_args (int argc, char **argv, GError ** mcerror)
                                 _("Two files are required to envoke the diffviewer."));
             return FALSE;
         }
-        /* fallthrough */
+        MC_FALLTHROUGH;
 #endif /* USE_DIFF_VIEW */
 
     case MC_RUN_FULL:

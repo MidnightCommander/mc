@@ -1,0 +1,59 @@
+#! /bin/sh
+
+# Written by Ilia Maslakov <il.smind@gmail.com>
+#
+# (C) 2020 The Free Software Foundation.
+
+# Define awk
+AWK=@AWK@
+
+# Define which archiver you are using with appropriate options
+UNAR_LIST="lsar "
+UNAR_GET="unar "
+
+# The 'list' command executive
+mc_unar_fs_list()
+{
+    # List the contents of the archive and sort it out
+    $UNAR_LIST -l "$1" | $AWK -v uid=`id -nu` -v gid=`id -ng` '
+	BEGIN { flag = 0 }
+	/^\(Flags/ {next}
+	/^\(Mode/ {next}
+	{
+	    flag++;
+	    if (flag < 4)
+		next
+	    pr="-r--r--r--"
+	    if (index($2, "D") != 0)
+		pr="dr-xr-xr-x"
+	    split($6, a, "-")
+	    split($7, b, ":")
+	    printf "%s 1 %s %s %d %02d/%02d/%02d %02d:%02d  %s\n", pr, uid, gid, $3, a[3], a[2], a[1], b[1], b[2], $8
+	}'
+}
+
+# The 'copyout' command executive to copy displayed files to a destination
+mc_unar_fs_copyout ()
+{
+    TMPDIR=`mktemp -d "${MC_TMPDIR:-/tmp}/mctmpdir-uha.XXXXXX"` || exit 1
+
+    $UNAR_GET  "$1" "$2" -o "$TMPDIR" >/dev/null
+    we=`basename "$1" | sed -E 's|^(.*?)\.\w+$|\1|'`
+    cat "$TMPDIR/$we/$2" > "$3"
+    cd /
+    rm -rf "$TMPDIR"
+}
+
+# The main routine
+umask 077
+
+cmd="$1"
+shift
+
+case "$cmd" in
+   list)    mc_unar_fs_list    "$@" ;;
+   copyout) mc_unar_fs_copyout "$@" ;;
+   *)       exit 1 ;;
+esac
+
+exit 0

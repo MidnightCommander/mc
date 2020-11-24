@@ -46,7 +46,7 @@ void dirsizes_cmd (void);
 gboolean view_file_at_line (const vfs_path_t * filename_vpath, gboolean plain_view,
                             gboolean internal, long start_line, off_t search_start,
                             off_t search_end);
-gboolean view_file (const vfs_path_t * filename_vpath, gboolean normal, gboolean internal);
+gboolean view_file (const vfs_path_t * filename_vpath, gboolean plain_view, gboolean internal);
 void view_cmd (void);
 void view_file_cmd (void);
 void view_raw_cmd (void);
@@ -64,7 +64,6 @@ void rename_cmd_local (void);
 void mkdir_cmd (void);
 void delete_cmd (void);
 void delete_cmd_local (void);
-void find_cmd (void);
 void filter_cmd (void);
 void reread_cmd (void);
 void vfs_list (void);
@@ -80,20 +79,31 @@ void panel_tree_cmd (void);
 void link_cmd (link_type_t link_type);
 void edit_symlink_cmd (void);
 void swap_cmd (void);
-void view_other_cmd (void);
 void quick_cd_cmd (void);
 void save_setup_cmd (void);
 void user_file_menu_cmd (void);
 void info_cmd (void);
 void listing_cmd (void);
-void change_listing_cmd (void);
+void setup_listing_format_cmd (void);
 void quick_cmd_no_menu (void);
 void info_cmd_no_menu (void);
 void quick_view_cmd (void);
-void toggle_listing_cmd (void);
 #ifdef HAVE_CHARSET
 void encoding_cmd (void);
 #endif
+/* achown.c */
+void advanced_chown_cmd (void);
+/* chmod.c */
+void chmod_cmd (void);
+/* chown.c */
+void chown_cmd (void);
+#ifdef ENABLE_EXT2FS_ATTR
+/* chattr.c */
+void chattr_cmd (void);
+const char *chattr_get_as_str (unsigned long attr);
+#endif
+/* find.c */
+void find_cmd (void);
 
 /*** inline functions ****************************************************************************/
 #endif /* MC__CMD_H */

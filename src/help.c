@@ -1,7 +1,7 @@
 /*
    Hypertext file browser.
 
-   Copyright (C) 1994-2016
+   Copyright (C) 1994-2020
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
@@ -50,6 +50,7 @@
 #include <config.h>
 
 #include <errno.h>
+#include <limits.h>             /* MB_LEN_MAX */
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -358,7 +359,7 @@ start_link_area (int x, int y, const char *link_name)
     Link_Area *la;
 
     if (inside_link_area)
-        message (D_NORMAL, _("Warning"), _("Internal bug: Double start of link area"));
+        message (D_NORMAL, _("Warning"), "%s", _("Internal bug: Double start of link area"));
 
     /* Allocate memory for a new link area */
     la = g_new (Link_Area, 1);
@@ -392,8 +393,7 @@ end_link_area (int x, int y)
 static void
 clear_link_areas (void)
 {
-    g_slist_free_full (link_area, g_free);
-    link_area = NULL;
+    g_clear_slist (&link_area, g_free);
     inside_link_area = FALSE;
 }
 
@@ -419,7 +419,7 @@ help_print_word (WDialog * h, GString * word, int *col, int *line, gboolean add_
             g_string_set_size (word, 0);
         else
         {
-            widget_move (h, *line + 2, *col + 2);
+            widget_gotoyx (h, *line + 2, *col + 2);
             tty_print_string (word->str);
             g_string_set_size (word, 0);
             *col += w;
@@ -511,7 +511,7 @@ help_show (WDialog * h, const char *paint_start)
                 acs = FALSE;
                 break;
             case CHAR_VERSION:
-                widget_move (h, line + 2, col + 2);
+                widget_gotoyx (h, line + 2, col + 2);
                 tty_print_string (VERSION);
                 col += str_term_width1 (VERSION);
                 break;
@@ -531,18 +531,22 @@ help_show (WDialog * h, const char *paint_start)
                 line++;
                 col = 0;
                 break;
-            case '\t':
-                col = (col / 8 + 1) * 8;
-                if (col >= HELP_WINDOW_WIDTH)
-                {
-                    line++;
-                    col = 8;
-                }
-                break;
             case ' ':
+            case '\t':
                 /* word delimiter */
                 if (painting)
-                    help_print_word (h, word, &col, &line, TRUE);
+                {
+                    help_print_word (h, word, &col, &line, c == ' ');
+                    if (c == '\t')
+                    {
+                        col = (col / 8 + 1) * 8;
+                        if (col >= HELP_WINDOW_WIDTH)
+                        {
+                            line++;
+                            col = 8;
+                        }
+                    }
+                }
                 break;
             default:
                 if (painting && (line < help_lines))
@@ -552,7 +556,7 @@ help_show (WDialog * h, const char *paint_start)
                         g_string_append (word, buff);
                     else if (col < HELP_WINDOW_WIDTH)
                     {
-                        widget_move (h, line + 2, col + 2);
+                        widget_gotoyx (h, line + 2, col + 2);
 
                         if ((c == ' ') || (c == '.'))
                             tty_print_char (c);
@@ -593,7 +597,7 @@ help_show (WDialog * h, const char *paint_start)
 
     /* Position the cursor over a nice link */
     if (active_col)
-        widget_move (h, active_line, active_col);
+        widget_gotoyx (h, active_line, active_col);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -613,7 +617,7 @@ help_help (WDialog * h)
     {
         currentpoint = p + 1;   /* Skip the newline following the start of the node */
         selected_item = NULL;
-        send_message (h, NULL, MSG_DRAW, 0, NULL);
+        widget_draw (WIDGET (h));
     }
 }
 
@@ -636,7 +640,7 @@ help_index (WDialog * h)
 
         currentpoint = new_item + 1;    /* Skip the newline following the start of the node */
         selected_item = NULL;
-        send_message (h, NULL, MSG_DRAW, 0, NULL);
+        widget_draw (WIDGET (h));
     }
 }
 
@@ -651,7 +655,7 @@ help_back (WDialog * h)
     if (history_ptr < 0)
         history_ptr = HISTORY_SIZE - 1;
 
-    send_message (h, NULL, MSG_DRAW, 0, NULL);  /* FIXME: unneeded? */
+    widget_draw (WIDGET (h));   /* FIXME: unneeded? */
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -842,15 +846,50 @@ help_execute_cmd (long command)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-help_handle_key (WDialog * h, int c)
+help_handle_key (WDialog * h, int key)
 {
+    Widget *w = WIDGET (h);
     long command;
 
-    command = keybind_lookup_keymap_command (help_map, c);
-    if ((command == CK_IgnoreKey) || (help_execute_cmd (command) == MSG_NOT_HANDLED))
+    command = widget_lookup_key (w, key);
+    if (command == CK_IgnoreKey)
         return MSG_NOT_HANDLED;
 
-    send_message (h, NULL, MSG_DRAW, 0, NULL);
+    return help_execute_cmd (command);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static cb_ret_t
+help_bg_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+{
+    switch (msg)
+    {
+    case MSG_DRAW:
+        frame_callback (w, NULL, MSG_DRAW, 0, NULL);
+        help_show (DIALOG (w->owner), currentpoint);
+        return MSG_HANDLED;
+
+    default:
+        return frame_callback (w, sender, msg, parm, data);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static cb_ret_t
+help_resize (WDialog * h)
+{
+    Widget *w = WIDGET (h);
+    WButtonBar *bb;
+    WRect r;
+
+    help_lines = MIN (LINES - 4, MAX (2 * LINES / 3, 18));
+    rect_init (&r, w->y, w->x, help_lines + 4, HELP_WINDOW_WIDTH + 4);
+    dlg_default_callback (w, NULL, MSG_RESIZE, 0, &r);
+    bb = find_buttonbar (h);
+    widget_set_size (WIDGET (bb), LINES - 1, 0, 1, COLS);
+
     return MSG_HANDLED;
 }
 
@@ -864,23 +903,18 @@ help_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
     switch (msg)
     {
     case MSG_RESIZE:
-        {
-            WButtonBar *bb;
-
-            help_lines = MIN (LINES - 4, MAX (2 * LINES / 3, 18));
-            dlg_set_size (h, help_lines + 4, HELP_WINDOW_WIDTH + 4);
-            bb = find_buttonbar (h);
-            widget_set_size (WIDGET (bb), LINES - 1, 0, 1, COLS);
-            return MSG_HANDLED;
-        }
-
-    case MSG_DRAW:
-        dlg_default_repaint (h);
-        help_show (h, currentpoint);
-        return MSG_HANDLED;
+        return help_resize (h);
 
     case MSG_KEY:
-        return help_handle_key (h, parm);
+        {
+            cb_ret_t ret;
+
+            ret = help_handle_key (h, parm);
+            if (ret == MSG_HANDLED)
+                widget_draw (w);
+
+            return ret;
+        }
 
     case MSG_ACTION:
         /* Handle shortcuts and buttonbar. */
@@ -938,6 +972,7 @@ md_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data
     switch (msg)
     {
     case MSG_RESIZE:
+        widget_default_callback (w, NULL, MSG_RESIZE, 0, data);
         w->lines = help_lines;
         return MSG_HANDLED;
 
@@ -1011,7 +1046,7 @@ help_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
         move_forward (1);
 
     /* Show the new node */
-    send_message (w->owner, NULL, MSG_DRAW, 0, NULL);
+    widget_draw (WIDGET (w->owner));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1045,6 +1080,8 @@ help_interactive_display (const gchar * event_group_name, const gchar * event_na
         HELP_TITLE_COLOR        /* title color */
     };
 
+    Widget *wh;
+    WGroup *g;
     WButtonBar *help_bar;
     Widget *md;
     char *hlpfile = NULL;
@@ -1099,7 +1136,12 @@ help_interactive_display (const gchar * event_group_name, const gchar * event_na
     whelp =
         dlg_create (TRUE, 0, 0, help_lines + 4, HELP_WINDOW_WIDTH + 4, WPOS_CENTER | WPOS_TRYUP,
                     FALSE, help_colors, help_callback, NULL, "[Help]", _("Help"));
-    widget_want_tab (WIDGET (whelp), TRUE);
+    wh = WIDGET (whelp);
+    g = GROUP (whelp);
+    wh->keymap = help_map;
+    widget_want_tab (wh, TRUE);
+    /* draw background */
+    whelp->bg->callback = help_bg_callback;
 
     selected_item = search_string_node (main_node, STRING_LINK_START) - 1;
     currentpoint = main_node + 1;       /* Skip the newline following the start of the node */
@@ -1112,24 +1154,24 @@ help_interactive_display (const gchar * event_group_name, const gchar * event_na
     }
 
     help_bar = buttonbar_new (TRUE);
-    WIDGET (help_bar)->y -= WIDGET (whelp)->y;
-    WIDGET (help_bar)->x -= WIDGET (whelp)->x;
+    WIDGET (help_bar)->y -= wh->y;
+    WIDGET (help_bar)->x -= wh->x;
 
     md = mousedispatch_new (1, 1, help_lines, HELP_WINDOW_WIDTH - 2);
 
-    add_widget (whelp, md);
-    add_widget (whelp, help_bar);
+    group_add_widget (g, md);
+    group_add_widget (g, help_bar);
 
-    buttonbar_set_label (help_bar, 1, Q_ ("ButtonBar|Help"), help_map, NULL);
-    buttonbar_set_label (help_bar, 2, Q_ ("ButtonBar|Index"), help_map, NULL);
-    buttonbar_set_label (help_bar, 3, Q_ ("ButtonBar|Prev"), help_map, NULL);
-    buttonbar_set_label (help_bar, 4, "", help_map, NULL);
-    buttonbar_set_label (help_bar, 5, "", help_map, NULL);
-    buttonbar_set_label (help_bar, 6, "", help_map, NULL);
-    buttonbar_set_label (help_bar, 7, "", help_map, NULL);
-    buttonbar_set_label (help_bar, 8, "", help_map, NULL);
-    buttonbar_set_label (help_bar, 9, "", help_map, NULL);
-    buttonbar_set_label (help_bar, 10, Q_ ("ButtonBar|Quit"), help_map, NULL);
+    buttonbar_set_label (help_bar, 1, Q_ ("ButtonBar|Help"), wh->keymap, NULL);
+    buttonbar_set_label (help_bar, 2, Q_ ("ButtonBar|Index"), wh->keymap, NULL);
+    buttonbar_set_label (help_bar, 3, Q_ ("ButtonBar|Prev"), wh->keymap, NULL);
+    buttonbar_set_label (help_bar, 4, "", wh->keymap, NULL);
+    buttonbar_set_label (help_bar, 5, "", wh->keymap, NULL);
+    buttonbar_set_label (help_bar, 6, "", wh->keymap, NULL);
+    buttonbar_set_label (help_bar, 7, "", wh->keymap, NULL);
+    buttonbar_set_label (help_bar, 8, "", wh->keymap, NULL);
+    buttonbar_set_label (help_bar, 9, "", wh->keymap, NULL);
+    buttonbar_set_label (help_bar, 10, Q_ ("ButtonBar|Quit"), wh->keymap, NULL);
 
     dlg_run (whelp);
     interactive_display_finish ();

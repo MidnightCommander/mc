@@ -1,7 +1,7 @@
 /*
    src/editor - tests for edit_complete_word_cmd() function
 
-   Copyright (C) 2013-2016
+   Copyright (C) 2013-2020
    Free Software Foundation, Inc.
 
    Written by:
@@ -44,6 +44,13 @@
 
 
 static WEdit *test_edit;
+
+/* --------------------------------------------------------------------------------------------- */
+/* @Mock */
+void
+mc_refresh (void)
+{
+}
 
 /* --------------------------------------------------------------------------------------------- */
 /* @Mock */
@@ -149,7 +156,7 @@ my_setup (void)
     str_init_strings (NULL);
 
     vfs_init ();
-    init_localfs ();
+    vfs_init_localfs ();
     vfs_setup_work_dir ();
 
 #ifdef HAVE_CHARSET

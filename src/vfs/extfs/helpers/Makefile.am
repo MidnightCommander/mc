@@ -1,12 +1,10 @@
 extfsdir = $(libexecdir)/@PACKAGE@/extfs.d
 
-EXTFSCONFFILES = sfs.ini
-
 # Files to install and distribute other than extfs scripts
 EXTFS_MISC  = README README.extfs
 
 # Scripts hat don't need adaptation to the local system
-EXTFS_CONST = bpp changesetfs gitfs+ patchsetfs rpm trpm u7z
+EXTFS_CONST = bpp changesetfs gitfs+ patchsetfs rpm trpm u7z uc1541
 
 # Scripts that need adaptation to the local system - source files
 EXTFS_IN    = 			\
@@ -29,12 +27,13 @@ EXTFS_IN    = 			\
 	uar.in			\
 	uarc.in			\
 	uarj.in			\
-	uc1541.in		\
 	ucab.in			\
 	uha.in			\
 	ulha.in			\
 	ulib.in			\
+	unar.in			\
 	urar.in			\
+	uwim.in			\
 	uzip.in			\
 	uzoo.in
 
@@ -59,21 +58,19 @@ EXTFS_OUT = 			\
 	uar			\
 	uarc			\
 	uarj			\
-	uc1541			\
 	ucab			\
 	uha			\
 	ulha			\
 	ulib			\
+	unar			\
 	urar			\
+	uwim			\
 	uzip			\
 	uzoo
 
-if ENABLE_VFS
+if ENABLE_VFS_EXTFS
 extfs_DATA = $(EXTFS_MISC)
 extfs_SCRIPTS = $(EXTFS_CONST) $(EXTFS_OUT)
-
-extfsconfdir = $(sysconfdir)/@PACKAGE@
-extfsconf_DATA = $(EXTFSCONFFILES)
 endif
 
-EXTRA_DIST = $(EXTFS_MISC) $(EXTFS_CONST) $(EXTFSCONFFILES)
+EXTRA_DIST = $(EXTFS_MISC) $(EXTFS_CONST)

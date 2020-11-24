@@ -8,7 +8,12 @@ AM_CPPFLAGS = \
 
 AM_LDFLAGS = @TESTS_LDFLAGS@
 
-LIBS=@CHECK_LIBS@  $(top_builddir)/lib/libmc.la
+LIBS = @CHECK_LIBS@ \
+	$(top_builddir)/lib/libmc.la
+
+if ENABLE_MCLIB
+LIBS += $(GLIB_LIBS)
+endif
 
 TESTS = \
 	config_string \

@@ -1,7 +1,7 @@
 /*
    Color setup for S_Lang screen library
 
-   Copyright (C) 1994-2016
+   Copyright (C) 1994-2020
    Free Software Foundation, Inc.
 
    Written by:
@@ -36,6 +36,7 @@
 #include <sys/types.h>          /* size_t */
 
 #include "lib/global.h"
+#include "lib/util.h"           /* whitespace() */
 
 #include "tty-slang.h"
 #include "color.h"              /* variables */
@@ -72,7 +73,7 @@ has_colors (gboolean disable, gboolean force)
             char *s;
             size_t i = 0;
 
-            while (*cts == ' ' || *cts == '\t')
+            while (whitespace (*cts))
                 cts++;
             s = cts;
 

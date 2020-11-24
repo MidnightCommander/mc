@@ -43,6 +43,9 @@ Alexander Serkov <serkov@ukrpost.net>
 Alessandro Rubini <rubini@ipvvis.unipv.it>
 	Mouse support.
 
+Aleš Janda <ales.janda@kyblsoft.cz>
+	Shadows of dialog windows and menus.
+
 Alexander Dong <ado@software-ag.de>
 	OS/2 port.
 
@@ -106,6 +109,7 @@ Massimo Fontanelli <MC8737@mclink.it>
 
 Mooffie <mooffie@gmail.com>
 	New high-level mouse API
+	extfs helpers tester
 
 Oliver Lange <modarin@bloody.in-berlin.de>
 	modarin256: set of 256-color skins

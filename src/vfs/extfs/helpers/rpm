@@ -30,6 +30,8 @@
 #	      add support for PREINPROG/POSTINPROG/PREUNPROG/POSTUNPROG
 #	      add support for VERIFYSCRIPTPROG
 #	      add support for TRIGGERSCRIPTS/TRIGGERSCRIPTPROG
+#  Jiri Tyr <jiri.tyr@gmail.com>
+#	2016: add support for PRETRANS/PRETRANSPROG/POSTTRANS/POSTTRANSPROG
 #
 #  This file is part of the Midnight Commander.
 #
@@ -64,6 +66,7 @@ if rpm --nosignature --version >/dev/null 2>&1; then
 else
   RPM="rpm"
 fi
+RPM_QUERY_FMT="$RPM -qp --qf"
 RPM2CPIO="rpm2cpio"
 
 SED="sed"
@@ -73,11 +76,6 @@ rpm_filename=$1; shift
 
 FILEPREF="-r--r--r--   1 root     root    "
 
-mcrpmfs_getSupportedTags()
-{
-    rpm --querytags
-}
-
 mcrpmfs_getDesription()
 {
     $RPM -qip "${rpm_filename}"
@@ -85,14 +83,7 @@ mcrpmfs_getDesription()
 
 mcrpmfs_getAllNeededTags()
 {
-    supportedTags=`mcrpmfs_getSupportedTags`
-    if test "`echo supportedTags | grep -c CONFLICTS`" -eq 1; then
-	tag_CONFLICTS="|CONFLICTS=%{CONFLICTS}"
-    else
-	tag_CONFLICTS=""
-    fi
-
-    $RPM -qp --qf \
+    $RPM_QUERY_FMT \
 "|NAME=%{NAME}"\
 "|VERSION=%{VERSION}"\
 "|RELEASE=%{RELEASE}"\
@@ -106,22 +97,22 @@ mcrpmfs_getAllNeededTags()
 "|REQUIRES=%{REQUIRENAME} %{REQUIREFLAGS:depflags} %{REQUIREVERSION}"\
 "|OBSOLETES=%{OBSOLETES}"\
 "|PROVIDES=%{PROVIDES} %{PROVIDEFLAGS:depflags} %{PROVIDEVERSION}"\
-${tag_CONFLICTS}\
+"|CONFLICTS=%{CONFLICTS}"\
 "|PACKAGER=%{PACKAGER}" \
-    "${rpm_filename}"
+    "${rpm_filename}" \
+    | tr '\n' ' '  # The newlines in DESCRIPTION mess with the sed script in mcrpmfs_getOneTag().
 }
 
 mcrpmfs_getRawOneTag()
 {
-    $RPM -qp --qf "$1" "${rpm_filename}"
+    $RPM_QUERY_FMT "$1" "${rpm_filename}"
 }
 
 mcrpmfs_getOneTag()
 {
-    echo $AllTAGS | $SED "s/.*|${1}=//" | cut -d '|' -f 1
+    # 'echo' can't be used for arbitrary data (see commit message).
+    printf "%s" "$AllTAGS" | $SED "s/.*|${1}=//" | cut -d '|' -f 1
 }
-
-AllTAGS=`mcrpmfs_getAllNeededTags "$1"`
 
 mcrpmfs_printOneMetaInfo()
 {
@@ -145,6 +136,8 @@ mcrpmfs_list_fastRPM ()
     echo "$FILEPREF 0 $DATE INFO/DESCRIPTION"
     echo "$FILEPREF 0 $DATE INFO/SUMMARY"
     echo "dr-xr-xr-x   1 root     root     0 $DATE INFO/SCRIPTS"
+    echo "$FILEPREF 0 $DATE INFO/SCRIPTS/PRETRANS"
+    echo "$FILEPREF 0 $DATE INFO/SCRIPTS/POSTTRANS"
     echo "$FILEPREF 0 $DATE INFO/SCRIPTS/PREIN"
     echo "$FILEPREF 0 $DATE INFO/SCRIPTS/POSTIN"
     echo "$FILEPREF 0 $DATE INFO/SCRIPTS/PREUN"
@@ -159,6 +152,10 @@ mcrpmfs_list_fastRPM ()
     echo "$FILEPREF 0 $DATE INFO/REQUIRES"
     echo "$FILEPREF 0 $DATE INFO/OBSOLETES"
     echo "$FILEPREF 0 $DATE INFO/PROVIDES"
+    echo "$FILEPREF 0 $DATE INFO/ENHANCES"
+    echo "$FILEPREF 0 $DATE INFO/SUGGESTS"
+    echo "$FILEPREF 0 $DATE INFO/RECOMMENDS"
+    echo "$FILEPREF 0 $DATE INFO/SUPPLEMENTS"
     echo "$FILEPREF 0 $DATE INFO/CONFLICTS"
     echo "$FILEPREF 0 $DATE INFO/CHANGELOG"
 }
@@ -170,7 +167,9 @@ mcrpmfs_list_fullRPM ()
     mcrpmfs_printOneMetaInfo "INFO/DESCRIPTION" "DESCRIPTION"
     mcrpmfs_printOneMetaInfo "INFO/SUMMARY" "SUMMARY"
 
-    if test "`mcrpmfs_getRawOneTag \"%{RPMTAG_PREIN}%{RPMTAG_POSTIN}%{RPMTAG_PREUN}%{RPMTAG_POSTUN}%{VERIFYSCRIPT}%{TRIGGERSCRIPTS}\"`" != "(none)(none)(none)(none)(none)(none)"; then
+    if test "`mcrpmfs_getRawOneTag \"%{RPMTAG_PRETRANS}%{RPMTAG_POSTTRANS}%{RPMTAG_PREIN}%{RPMTAG_POSTIN}%{RPMTAG_PREUN}%{RPMTAG_POSTUN}%{VERIFYSCRIPT}%{TRIGGERSCRIPTS}\"`" != "(none)(none)(none)(none)(none)(none)(none)(none)"; then
+	mcrpmfs_printOneMetaInfo "INFO/SCRIPTS/PRETRANS" "RPMTAG_PRETRANS" "raw"
+	mcrpmfs_printOneMetaInfo "INFO/SCRIPTS/POSTTRANS" "RPMTAG_POSTTRANS" "raw"
 	mcrpmfs_printOneMetaInfo "INFO/SCRIPTS/PREIN" "RPMTAG_PREIN" "raw"
 	mcrpmfs_printOneMetaInfo "INFO/SCRIPTS/POSTIN" "RPMTAG_POSTIN" "raw"
 	mcrpmfs_printOneMetaInfo "INFO/SCRIPTS/PREUN" "RPMTAG_PREUN" "raw"
@@ -180,7 +179,9 @@ mcrpmfs_list_fullRPM ()
 	echo "$FILEPREF 0 $DATE INFO/SCRIPTS/ALL"
     fi
 
-    if test "`mcrpmfs_getRawOneTag \"%{RPMTAG_PREINPROG}%{RPMTAG_POSTINPROG}%{RPMTAG_PREUNPROG}%{RPMTAG_POSTUNPROG}%{VERIFYSCRIPTPROG}%{TRIGGERSCRIPTPROG}\"`" != "(none)(none)(none)(none)(none)(none)"; then
+    if test "`mcrpmfs_getRawOneTag \"%{RPMTAG_PRETRANSPROG}%{RPMTAG_POSTTRANSPROG}%{RPMTAG_PREINPROG}%{RPMTAG_POSTINPROG}%{RPMTAG_PREUNPROG}%{RPMTAG_POSTUNPROG}%{VERIFYSCRIPTPROG}%{TRIGGERSCRIPTPROG}\"`" != "(none)(none)(none)(none)(none)(none)(none)(none)"; then
+	mcrpmfs_printOneMetaInfo "INFO/SCRIPTS/PRETRANSPROG" "RPMTAG_PRETRANSPROG" "raw"
+	mcrpmfs_printOneMetaInfo "INFO/SCRIPTS/POSTTRANSPROG" "RPMTAG_POSTTRANSPROG" "raw"
 	mcrpmfs_printOneMetaInfo "INFO/SCRIPTS/PREINPROG" "RPMTAG_PREINPROG" "raw"
 	mcrpmfs_printOneMetaInfo "INFO/SCRIPTS/POSTINPROG" "RPMTAG_POSTINPROG" "raw"
 	mcrpmfs_printOneMetaInfo "INFO/SCRIPTS/PREUNPROG" "RPMTAG_PREUNPROG" "raw"
@@ -217,15 +218,15 @@ mcrpmfs_list ()
     DATE=`mcrpmfs_getRawOneTag "%{BUILDTIME:date}\n" | cut -c 5-11,21-24`
     PAYLOAD=`mcrpmfs_getRawOneTag "%{PAYLOADFORMAT}\n" | sed s/ustar/tar/`
 
-    HEADERSIZE=`echo "$DESC" | wc -c`
+    HEADERSIZE=`printf '%s\n' "$DESC" | wc -c`  # 'echo' can't be used for arbitrary data (see commit message).
     printf '%s %s %s HEADER\n' "${FILEPREF}"  "${HEADERSIZE}" "${DATE}"
-    echo "-r-xr-xr-x   1 root     root    39 $DATE INSTALL"
+    echo "-r-xr-xr-x   1 root     root    0 $DATE INSTALL"
     case "${rpm_filename}" in
 	*.src.rpm)
-	    echo "-r-xr-xr-x   1 root     root    39 $DATE REBUILD"
+	    echo "-r-xr-xr-x   1 root     root    0 $DATE REBUILD"
 	;;
 	*)
-	    echo "-r-xr-xr-x   1 root     root    39 $DATE UPGRADE"
+	    echo "-r-xr-xr-x   1 root     root    0 $DATE UPGRADE"
 	;;
     esac
 
@@ -257,18 +258,15 @@ mcrpmfs_copyout ()
     case "$1" in
 	HEADER) mcrpmfs_getDesription > "$2"; exit 0;;
 	INSTALL)
-	    echo "# Run this script to install this RPM package" > "$2"
-	    echo $RPM -ivh "${rpm_filename}" >> "$2"
+	    echo "# Run this to install this RPM package" > "$2"
 	    exit 0
 	;;
 	UPGRADE)
 	    echo "# Run this to upgrade this RPM package" > "$2"
-	    echo $RPM -Uvh "${rpm_filename}" >> "$2"
 	    exit 0
 	;;
 	REBUILD)
 	    echo "# Run this to rebuild this RPM package" > "$2"
-	    echo $RPMBUILD --rebuild "${rpm_filename}" >> "$2"
 	    exit 0
 	;;
 	ERROR) mcrpmfs_getDesription > /dev/null 2> "$2"; exit 0;;
@@ -294,7 +292,15 @@ mcrpmfs_copyout ()
 	INFO/LICENSE)		mcrpmfs_getOneTag "LICENSE" >"$2"; exit 0;;
 	INFO/RPMVERSION)	mcrpmfs_getRawOneTag "%{RPMVERSION}\n" >"$2"; exit 0;;
 	INFO/REQUIRES)		mcrpmfs_getRawOneTag "[%{REQUIRENAME} %{REQUIREFLAGS:depflags} %{REQUIREVERSION}\n]" >"$2"; exit 0;;
+	INFO/ENHANCES)		mcrpmfs_getRawOneTag "[%|ENHANCESFLAGS:depflag_strong?{}:{%{ENHANCESNAME} %{ENHANCESFLAGS:depflags} %{ENHANCESVERSION}\n}|]" "$f" >"$3"; exit 0;;
+	INFO/SUGGESTS)		mcrpmfs_getRawOneTag "[%|SUGGESTSFLAGS:depflag_strong?{}:{%{SUGGESTSNAME} %{SUGGESTSFLAGS:depflags} %{SUGGESTSVERSION}\n}|]" "$f" >"$3"; exit 0;;
+	INFO/RECOMMENDS)	mcrpmfs_getRawOneTag "[%|SUGGESTSFLAGS:depflag_strong?{%{SUGGESTSNAME} %{SUGGESTSFLAGS:depflags} %{SUGGESTSVERSION}\n}|]" "$f" >"$3"; exit 0;;
+	INFO/SUPPLEMENTS)	mcrpmfs_getRawOneTag "[%|ENHANCESFLAGS:depflag_strong?{%{ENHANCESNAME} %{ENHANCESFLAGS:depflags} %{ENHANCESVERSION}\n}|]" "$f" >"$3"; exit 0;;
 	INFO/PROVIDES)		mcrpmfs_getRawOneTag "[%{PROVIDES} %{PROVIDEFLAGS:depflags} %{PROVIDEVERSION}\n]" >"$2"; exit 0;;
+	INFO/SCRIPTS/PRETRANS)	mcrpmfs_getRawOneTag "%{RPMTAG_PRETRANS}\n" >"$2"; exit 0;;
+	INFO/SCRIPTS/PRETRANSPROG)	mcrpmfs_getRawOneTag "%{RPMTAG_PRETRANSPROG}\n" >"$2"; exit 0;;
+	INFO/SCRIPTS/POSTTRANS)	mcrpmfs_getRawOneTag "%{RPMTAG_POSTTRANS}\n" >"$2"; exit 0;;
+	INFO/SCRIPTS/POSTTRANSPROG)	mcrpmfs_getRawOneTag "%{RPMTAG_POSTTRANSPROG}\n" >"$2"; exit 0;;
 	INFO/SCRIPTS/PREIN)	mcrpmfs_getRawOneTag "%{RPMTAG_PREIN}\n" >"$2"; exit 0;;
 	INFO/SCRIPTS/PREINPROG)	mcrpmfs_getRawOneTag "%{RPMTAG_PREINPROG}\n" >"$2"; exit 0;;
 	INFO/SCRIPTS/POSTIN)	mcrpmfs_getRawOneTag "%{RPMTAG_POSTIN}\n" >"$2"; exit 0;;
@@ -328,6 +334,11 @@ mcrpmfs_run ()
 	REBUILD) echo "Rebuilding \"${rpm_filename}\""; $RPMBUILD --rebuild "${rpm_filename}"; exit 0;;
     esac
 }
+
+# Let the test framework override functions and variables.
+[ -n "$MC_TEST_RPM_REWRITE" ] && . "$MC_TEST_RPM_REWRITE"
+
+AllTAGS=`mcrpmfs_getAllNeededTags "$1"`
 
 umask 077
 case "${param}" in

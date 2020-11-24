@@ -1,16 +1,17 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the mc package.
 #
 # Translators:
+# Kjell Cato Heskjestad <cato@heskjestad.xyz>, 2019-2020
 # Slava Zanko <slavazanko@gmail.com>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2016-11-13 15:59+0300\n"
-"PO-Revision-Date: 2016-05-08 08:14+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"PO-Revision-Date: 2020-05-19 04:15+0000\n"
+"Last-Translator: Kjell Cato Heskjestad <cato@heskjestad.xyz>\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/mc/mc/language/"
 "nb/)\n"
 "Language: nb\n"
@@ -21,34 +22,34 @@ msgstr ""
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
-msgstr ""
+msgstr "Advarsel: Klarte ikke laste tegnkodingsliste"
 
 msgid "7-bit ASCII"
-msgstr ""
+msgstr "7-biters ASCII"
 
 #, c-format
 msgid "Cannot translate from %s to %s"
 msgstr "Kan ikke oversette fra %s til %s"
 
 msgid "Event system already initialized"
-msgstr ""
+msgstr "Hendelsessystemet har allerede startet"
 
 msgid "Failed to initialize event system"
-msgstr ""
+msgstr "Klarte ikke starte hendelsessystemet"
 
 msgid "Event system not initialized"
-msgstr ""
+msgstr "Hendelsessystemet er ikke startet"
 
 msgid "Check input data! Some of parameters are NULL!"
-msgstr ""
+msgstr "Sjekk inndata. Noen parametre er NULL."
 
 #, c-format
 msgid "Unable to create group '%s' for events!"
-msgstr ""
+msgstr "Klarte ikke lage hendelsesgruppa «%s»."
 
 #, c-format
 msgid "Unable to create event '%s'!"
-msgstr ""
+msgstr "Klarte ikke lage hendelse «%s»."
 
 #, c-format
 msgid ""
@@ -56,26 +57,29 @@ msgid ""
 "User: %s\n"
 "Process ID: %d"
 msgstr ""
+"Fila «%s» redigeres allerede.\n"
+"Bruker:%s\n"
+"Prosess-ID: %d"
 
 msgid "File locked"
-msgstr ""
+msgstr "Fila er låst"
 
 msgid "&Grab lock"
-msgstr ""
+msgstr "O&verta lås"
 
 msgid "&Ignore lock"
-msgstr ""
+msgstr "&Ignorer lås"
 
 #, c-format
 msgid "Cannot create %s directory"
-msgstr ""
+msgstr "Klarte ikke opprette mappa %s"
 
 msgid "FATAL: not a directory:"
-msgstr ""
+msgstr "FATALT: ikke en mappe:"
 
 #, c-format
 msgid "An error occurred while migrating user settings: %s"
-msgstr ""
+msgstr "Det oppstod en feil under migrering av brukers oppsett: %s"
 
 #, c-format
 msgid ""
@@ -84,52 +88,82 @@ msgid ""
 "To get more info, please visit\n"
 "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
 msgstr ""
+"Migrerte det gamle oppsettet fra %s\n"
+"til Freedesktops anbefalte mapper.\n"
+"For mer informasjon, se\n"
+"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
 
 #, c-format
 msgid ""
 "Your old settings were migrated from %s\n"
 "to %s\n"
 msgstr ""
+"Migrerte det gamle oppsettet fra %s\n"
+"til %s\n"
+
+msgid ""
+"Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
+"hex)"
+msgstr ""
+"Tallet er utenfor gyldig byte-intervall (0 <= n <= 0xFF, uttrykt i heks)"
+
+msgid "Invalid character"
+msgstr "Ugyldig tegn"
+
+msgid "Unmatched quotes character"
+msgstr "Sitattegn uten make"
+
+#, c-format
+msgid ""
+"Hex pattern error at position %d:\n"
+"%s."
+msgstr ""
+"Feil i heks-mønster i posisjon %d:\n"
+"%s."
 
 msgid "Search string not found"
-msgstr ""
+msgstr "Fant ikke søkestreng"
 
 msgid "Not implemented yet"
-msgstr ""
+msgstr "Ikke implementert ennå"
 
 msgid "Num of replace tokens not equal to num of found tokens"
-msgstr ""
+msgstr "Antall erstatningssymboler ikke lik antall funnet-symboler"
 
 #, c-format
 msgid "Invalid token number %d"
-msgstr ""
+msgstr "Ugyldig symbolnummer %d"
 
 msgid "Regular expression error"
-msgstr ""
+msgstr "Feil i regulært uttrykk"
 
 msgid "No&rmal"
-msgstr ""
+msgstr "&Normal"
 
 msgid "Re&gular expression"
-msgstr ""
+msgstr "&Regulært uttrykk"
 
 msgid "He&xadecimal"
-msgstr ""
+msgstr "&Heksadesimalt"
 
 msgid "Wil&dcard search"
-msgstr ""
+msgstr "Søk med &jokertegn"
 
 #, c-format
 msgid ""
 "Unable to load '%s' skin.\n"
 "Default skin has been loaded"
 msgstr ""
+"Klarte ikke laste drakten «%s».\n"
+"Lastet standarddrakten istedenfor."
 
 #, c-format
 msgid ""
 "Unable to parse '%s' skin.\n"
 "Default skin has been loaded"
 msgstr ""
+"Klarte ikke tolke drakten «%s».\n"
+"Lastet standarddrakten istedenfor."
 
 #, c-format
 msgid ""
@@ -137,6 +171,9 @@ msgid ""
 "%s\n"
 "Default skin has been loaded"
 msgstr ""
+"Kan ikke bruke den 24-biters drakten «%s»:\n"
+"%s\n"
+"Lastet standarddrakten istedenfor."
 
 #, c-format
 msgid ""
@@ -144,21 +181,25 @@ msgid ""
 "on non-256 colors terminal.\n"
 "Default skin has been loaded"
 msgstr ""
+"Kan ikke bruke den 256-fargers drakten «%s»\n"
+"i terminaler som ikke har 256 farger.\n"
+"Lastet standarddrakten istedenfor."
 
 msgid "True color not supported with ncurses."
-msgstr ""
+msgstr "ncurses støtter ikke 24-biters farge"
 
 msgid "True color not supported in this slang version."
-msgstr ""
+msgstr "Denne versjonen av S-Lang støtter ikke 24-biters farge."
 
 msgid "Your terminal doesn't even seem to support 256 colors."
-msgstr ""
+msgstr "Denne terminalen ser ikke ut til å støtte 256 farger."
 
 msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
 msgstr ""
+"Sett COLORTERM=truecolor hvis terminalen virkelig støtter 24-biters farge."
 
 msgid "Escape"
-msgstr ""
+msgstr "Escape"
 
 msgid "Function key 1"
 msgstr "Funksjonstast 1"
@@ -221,341 +262,371 @@ msgid "Function key 20"
 msgstr "Funksjonstast 20"
 
 msgid "Completion/M-tab"
-msgstr "Komplettering/M-tab"
+msgstr "Fullføre/M-tab"
 
 msgid "BackTab/S-tab"
-msgstr ""
+msgstr "Tab bak/S-tab"
 
 msgid "Backspace"
-msgstr ""
+msgstr "Rettetast"
 
 msgid "Up arrow"
-msgstr ""
+msgstr "Pil opp"
 
 msgid "Down arrow"
-msgstr ""
+msgstr "Pil ned"
 
 msgid "Left arrow"
-msgstr ""
+msgstr "Pil venstre"
 
 msgid "Right arrow"
-msgstr ""
+msgstr "Pil høyre"
 
 msgid "Insert"
-msgstr ""
+msgstr "Insert"
 
 msgid "Delete"
-msgstr ""
+msgstr "Delete"
 
 msgid "Home"
-msgstr ""
+msgstr "Home"
 
 msgid "End key"
-msgstr "Slutt"
+msgstr "End"
 
 msgid "Page Up"
-msgstr ""
+msgstr "Page Up"
 
 msgid "Page Down"
-msgstr ""
+msgstr "Page Down"
 
 msgid "/ on keypad"
-msgstr ""
+msgstr "/ på num. tast."
 
 msgid "* on keypad"
-msgstr "* på numerisk tastatur"
+msgstr "* på num. tast."
 
 msgid "- on keypad"
-msgstr "- på numerisk tastatur"
+msgstr "- på num. tast."
 
 msgid "+ on keypad"
-msgstr "+ på numerisk tastatur"
+msgstr "+ på num. tast."
 
 msgid "Left arrow keypad"
-msgstr "Venstrepil på numerisk tastatur"
+msgstr "Pil venstre på num.tast."
 
 msgid "Right arrow keypad"
-msgstr "Høyrepil på numerisk tastatur"
+msgstr "Pil høyre på num. tast."
 
 msgid "Up arrow keypad"
-msgstr "Pil opp på numerisk tastatur"
+msgstr "Pil opp på num. tast."
 
 msgid "Down arrow keypad"
-msgstr "Pil ned på numerisk tastatur"
+msgstr "Pil ned på num. tast."
 
 msgid "Home on keypad"
-msgstr "Hjem på numerisk tastatur"
+msgstr "Home på num. tast."
 
 msgid "End on keypad"
-msgstr "Slutt på numerisk tastatur"
+msgstr "End på num. tast."
 
 msgid "Page Down keypad"
-msgstr "Side ned på numerisk tastatur"
+msgstr "Page Down på num. tast."
 
 msgid "Page Up keypad"
-msgstr "Side opp på numerisk tastatur"
+msgstr "Page Up på num. tast."
 
 msgid "Insert on keypad"
-msgstr "Sett inn på numerisk tastatur"
+msgstr "Insert på num. tast."
 
 msgid "Delete on keypad"
-msgstr "Slett på numerisk tastatur"
+msgstr "Delete på num. tast."
 
 msgid "Enter on keypad"
-msgstr "Linjeskift på numerisk tastatur"
+msgstr "Enter på num. tast."
 
 msgid "Function key 21"
-msgstr ""
+msgstr "Funksjonstast 21"
 
 msgid "Function key 22"
-msgstr ""
+msgstr "Funksjonstast 22"
 
 msgid "Function key 23"
-msgstr ""
+msgstr "Funksjonstast 23"
 
 msgid "Function key 24"
-msgstr ""
+msgstr "Funksjonstast 24"
 
 msgid "A1 key"
-msgstr ""
+msgstr "A1-tast"
 
 msgid "C1 key"
-msgstr ""
+msgstr "C1-tast"
 
 msgid "Asterisk"
-msgstr ""
+msgstr "Asterisk"
 
 msgid "Minus"
-msgstr ""
+msgstr "Minus"
 
 msgid "Plus"
-msgstr ""
+msgstr "Pluss"
 
 msgid "Dot"
-msgstr ""
+msgstr "Punktum"
 
 msgid "Less than"
-msgstr ""
+msgstr "Mindre enn"
 
 msgid "Great than"
-msgstr ""
+msgstr "Større enn"
 
 msgid "Equal"
-msgstr ""
+msgstr "Likhetstegn"
 
 msgid "Comma"
-msgstr ""
+msgstr "Komma"
 
 msgid "Apostrophe"
-msgstr ""
+msgstr "Apostrof"
 
 msgid "Colon"
-msgstr ""
+msgstr "Kolon"
 
 msgid "Semicolon"
-msgstr ""
+msgstr "Semikolon"
 
 msgid "Exclamation mark"
-msgstr ""
+msgstr "Utropstegn"
 
 msgid "Question mark"
-msgstr ""
+msgstr "Spørsmålstegn"
 
 msgid "Ampersand"
-msgstr ""
+msgstr "Ampersand"
 
 msgid "Dollar sign"
-msgstr ""
+msgstr "Dollartegn"
 
 msgid "Quotation mark"
-msgstr ""
+msgstr "Sitattegn"
 
 msgid "Percent sign"
-msgstr ""
+msgstr "Prosenttegn"
 
 msgid "Caret"
-msgstr ""
+msgstr "Sirkumfleks"
 
 msgid "Tilda"
-msgstr ""
+msgstr "Tilde"
 
 msgid "Prime"
-msgstr ""
+msgstr "Primtegn"
 
 msgid "Underline"
-msgstr ""
+msgstr "Understrek"
 
 msgid "Understrike"
-msgstr ""
+msgstr "Understrek"
 
 msgid "Pipe"
-msgstr ""
+msgstr "Rør"
 
 msgid "Left parenthesis"
-msgstr ""
+msgstr "Venstre parentes"
 
 msgid "Right parenthesis"
-msgstr ""
+msgstr "Høyre parentes"
 
 msgid "Left bracket"
-msgstr ""
+msgstr "Venstre klammeparentes"
 
 msgid "Right bracket"
-msgstr ""
+msgstr "Høyre klammeparentes"
 
 msgid "Left brace"
-msgstr ""
+msgstr "Venstre krøllparentes"
 
 msgid "Right brace"
-msgstr ""
+msgstr "Høyre krøllparentes"
 
 msgid "Enter"
-msgstr ""
+msgstr "Enter"
 
 msgid "Tab key"
-msgstr ""
+msgstr "Tabulator"
 
 msgid "Space key"
-msgstr ""
+msgstr "Mellomrom"
 
 msgid "Slash key"
-msgstr ""
+msgstr "Skråstrek"
 
 msgid "Backslash key"
-msgstr ""
+msgstr "Omvendt skråstrek"
 
 msgid "Number sign #"
-msgstr ""
+msgstr "Nummertegn #"
 
 #. TRANSLATORS: Please translate as in "at sign" (@).
 msgid "At sign"
-msgstr ""
+msgstr "Krøllalfa"
 
 msgid "Ctrl"
-msgstr ""
+msgstr "Ctrl"
 
 msgid "Alt"
-msgstr ""
+msgstr "Alt"
 
 msgid "Shift"
-msgstr ""
+msgstr "Shift"
 
 msgid "The TERM environment variable is unset!\n"
-msgstr "TERM miljøvariabelen er ikke satt!\n"
+msgstr "Miljøvariabelen TERM mangler.\n"
+
+msgid "Cannot check SIGWINCH pipe"
+msgstr "Klarte ikke sjekke SIGWINCH-røret"
+
+#, c-format
+msgid ""
+"\n"
+"Cannot create pipe for SIGWINCH: %s (%d)\n"
+msgstr ""
+"\n"
+"Klarte ikke opprette rør for SIGWINCH:%s (%d)\n"
+
+#, c-format
+msgid ""
+"\n"
+"Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
+msgstr ""
+"\n"
+"Klarte ikke sette opp skriveenden av SIGWINCH-røret: %s (%d)\n"
+
+#, c-format
+msgid ""
+"\n"
+"Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
+msgstr ""
+"\n"
+"Klarte ikke sette opp leseenden av SIGWINCH-røret: %s (%d)\n"
 
 #, c-format
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
 msgstr ""
-"Skjermstørrelse %dx%d er ikke støttet.\n"
-"Sjekk TERM miljøvariabelen.\n"
+"Skjermstørrelsen %dx%d støttes ikke.\n"
+"Sjekk miljøvariabelen TERM.\n"
 
 msgid "B"
-msgstr ""
+msgstr "B"
 
 msgid "kB"
-msgstr ""
+msgstr "kB"
 
 msgid "KiB"
-msgstr ""
+msgstr "KiB"
 
 msgid "MB"
-msgstr ""
+msgstr "MB"
 
 msgid "MiB"
-msgstr ""
+msgstr "MiB"
 
 msgid "GB"
-msgstr ""
+msgstr "GB"
 
 msgid "GiB"
-msgstr ""
+msgstr "GiB"
 
 msgid "Cannot create pipe descriptor"
-msgstr ""
+msgstr "Klarte ikke opprette rørdeskriptor"
 
 msgid "Cannot create pipe streams"
-msgstr ""
+msgstr "Klarte ikke opprette rørstrømmer"
 
 #, c-format
 msgid ""
 "Unexpected error in select() reading data from a child process:\n"
 "%s"
 msgstr ""
+"Uventet feil i select() ved lesing av data fra barneprosess:\n"
+"%s"
 
 #, c-format
 msgid ""
 "Unexpected error in waitpid():\n"
 "%s"
 msgstr ""
+"Uventet feil i waitpid():\n"
+"%s"
 
 msgid "Warning"
 msgstr "Advarsel"
 
 msgid "Pipe failed"
-msgstr ""
+msgstr "pipe() mislyktes"
 
 msgid "Dup failed"
-msgstr ""
+msgstr "dup() mislyktes"
 
 msgid "Error dup'ing old error pipe"
-msgstr ""
+msgstr "Klarte ikke «dup»e gammelt feilrør"
 
 #, c-format
 msgid "Directory cache expired for %s"
-msgstr "Katalog-cache utgått for %s"
+msgstr "Mappehurtiglager utgått for %s"
 
 #, c-format
 msgid "%s: %s: %s %3d%% (%lld) bytes transferred"
-msgstr ""
+msgstr "%s: %s: %s %3d%% (%lld) byte overført"
 
 #, c-format
 msgid "%s: %s: %s %lld bytes transferred"
-msgstr ""
+msgstr "%s: %s: %s %lld byte overført"
 
 msgid "Starting linear transfer..."
-msgstr "Starter lineær overføring..."
+msgstr "Starter lineær overføring ..."
 
 msgid "Getting file"
 msgstr "Henter fil"
 
 msgid "Changes to file lost"
-msgstr "Endringer i filen tapt"
+msgstr "Endringer i filen gikk tapt"
 
 #, c-format
 msgid "%s is not a directory\n"
-msgstr ""
+msgstr "%s er ikke en mappe\n"
 
 #, c-format
 msgid "Directory %s is not owned by you\n"
-msgstr ""
+msgstr "Du eier ikke mappa %s\n"
 
 #, c-format
 msgid "Cannot set correct permissions for directory %s\n"
-msgstr ""
+msgstr "Klarte ikke velge riktige rettigheter for mappa %s\n"
 
 #, c-format
 msgid "Cannot create temporary directory %s: %s\n"
-msgstr "Kan ikke opprette midlertidig katalog %s: %s\n"
+msgstr "Klarte ikke ikke opprette midlertidig mappe %s: %s\n"
 
 #, c-format
 msgid "Temporary files will be created in %s\n"
-msgstr ""
+msgstr "Lagrer midlertidige filer i %s\n"
 
 #, c-format
 msgid "Temporary files will not be created\n"
-msgstr ""
+msgstr "Oppretter ikke noen midlertidige filer\n"
 
-#, c-format
 msgid "Press any key to continue..."
-msgstr "Trykk en tast for å fortsette..."
+msgstr "Trykk en tast for å fortsette ..."
 
 msgid "Cannot parse:"
-msgstr "Kunne ikke fortolke:"
+msgstr "Klarte ikke tolke:"
 
 msgid "More parsing errors will be ignored."
-msgstr "Flere fortolkningsfeil vil bli ignorert."
+msgstr "Ignorerer fremtidige fortolkningsfeil."
 
 msgid "Internal error:"
 msgstr "Intern feil:"
@@ -564,17 +635,17 @@ msgid "Password:"
 msgstr "Passord:"
 
 msgid "Screens"
-msgstr ""
+msgstr "Moduler"
 
 msgid "History"
-msgstr ""
+msgstr "Historikk"
 
 #. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
 msgid "DialogTitle|History cleanup"
-msgstr ""
+msgstr "DialogTitle|Tøm historikk"
 
 msgid "Do you want clean this history?"
-msgstr ""
+msgstr "Vil du tømme denne historikken?"
 
 msgid "&Yes"
 msgstr "&Ja"
@@ -596,73 +667,86 @@ msgstr "Feil"
 
 #, c-format
 msgid "%s (%d)"
-msgstr ""
+msgstr "%s (%d)"
 
 msgid "&Abort"
 msgstr "&Avbryt"
 
 msgid "Displays the current version"
-msgstr "Viser nåværende versjon"
+msgstr "Vis programversjon og avslutt"
 
 msgid "Print data directory"
-msgstr "Katalog for utskriftsdata"
+msgstr "Vis datamappe"
 
 msgid "Print extended info about used data directories"
 msgstr ""
+"Vis utvidet informasjon om de aktuelle\n"
+"                                 datamappene."
 
 msgid "Print configure options"
-msgstr ""
+msgstr "Vis kompileringsoppsett"
 
 msgid "Print last working directory to specified file"
-msgstr ""
+msgstr "Skriv siste arbeidsmappe til angitt fil"
+
+msgid "<file>"
+msgstr "<fil>"
 
 msgid "Enables subshell support (default)"
-msgstr "Slår på støtte for underskall (standard)"
+msgstr "Slå på støtte for underskall (standard)"
 
 msgid "Disables subshell support"
 msgstr "Slå av støtte for underskall"
 
 msgid "Log ftp dialog to specified file"
-msgstr "Logg ftp dialogen til spesifisert fil"
+msgstr "Logg FTP-dialogen til angitt fil"
 
 msgid "Set debug level"
-msgstr "Sett feilsøkingsnivå"
+msgstr "Velg feilsøkingsnivå"
+
+msgid "<integer>"
+msgstr "<heltall>"
 
 msgid "Launches the file viewer on a file"
-msgstr "Starter filvisning for en fil"
+msgstr "Vis innholdet til en fil"
 
 msgid "Edit files"
-msgstr ""
+msgstr "Rediger filer"
+
+msgid "<file> ..."
+msgstr "<fil> ..."
 
 msgid "Forces xterm features"
-msgstr "Tvungen bruk av xterm funksjoner"
+msgstr "Tving bruk av xterm-funksjonalitet"
 
 msgid "Disable X11 support"
-msgstr ""
+msgstr "Slå av støtte for X11"
 
 msgid "Tries to use an old highlight mouse tracking"
-msgstr ""
+msgstr "Bruk gammel musesporing for å utheve tekst"
 
 msgid "Disable mouse support in text version"
-msgstr "Slå av musstøtte i tekstversjonen"
+msgstr "Slå av musestøtte i tekstutgaven"
 
 msgid "Tries to use termcap instead of terminfo"
-msgstr "Prøver å bruke termcap i stedet for terminfo"
+msgstr "Bruk termcap istedenfor terminfo"
 
 msgid "To run on slow terminals"
-msgstr "For kjøring på trege terminaler"
+msgstr "Terminalen er treig"
 
 msgid "Use stickchars to draw"
-msgstr "Tegn med klebende tegn"
+msgstr "Tegn opp med strektegn"
 
 msgid "Resets soft keys on HP terminals"
-msgstr "Setter tilbake myke taster på HP terminaler"
+msgstr "Tilbakestill hurtigtaster på HP-terminaler"
 
 msgid "Load definitions of key bindings from specified file"
-msgstr ""
+msgstr "Last tastaturoppsett fra angitt fil"
 
 msgid "Don't load definitions of key bindings from file, use defaults"
 msgstr ""
+"Ikke last tastaturoppsett fra fil,\n"
+"                                 bruk standard oppsett"
 
 msgid "Requests to run in black and white"
 msgstr "Be om å kjøre i sort-hvitt"
@@ -671,10 +755,13 @@ msgid "Request to run in color mode"
 msgstr "Be om å kjøre i fargemodus"
 
 msgid "Specifies a color configuration"
-msgstr "Spesifiserer en fargekonfigurasjon"
+msgstr "Velg et fargeoppsett"
+
+msgid "<string>"
+msgstr "<tekststreng>"
 
 msgid "Show mc with specified skin"
-msgstr ""
+msgstr "Vis mc med angitt presentasjonsdrakt"
 
 #. TRANSLATORS: don't translate keywords
 msgid ""
@@ -697,6 +784,24 @@ msgid ""
 "   Viewer:       viewnormal,viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 msgstr ""
+"--colors NØKKELORD={FORGR},{BAKGR},{ATTR}:NØKKELORD2=...\n"
+"\n"
+"{FORGR}, {BAKGR} og {ATTR} kan utelates for å bruke forvalgte verdier\n"
+"\n"
+" Nøkkelord:\n"
+"   Globale:      errors, disabled, reverse, gauge, header\n"
+"                 input, inputmark, inputunchanged, commandlinemark\n"
+"                 bbarhotkey, bbarbutton, statusbar\n"
+"   Filvisning:   normal, selected, marked, markselect\n"
+"   Dialogbokser: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"                 errdhotfocus\n"
+"   Menyer:       menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Sprettoppmenyer: pmenunormal, pmenusel, pmenutitle\n"
+"   Tekstprogram:  editnormal, editbold, editmarked, editwhitespace,\n"
+"                 editlinestate, editbg, editframe, editframeactive\n"
+"                 editframedrag\n"
+"   Tekstviser:   viewnormal,viewbold, viewunderline, viewselected\n"
+"   Hjelp:        helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 
 #. TRANSLATORS: don't translate color names and attributes
 msgid ""
@@ -711,93 +816,113 @@ msgid ""
 "Attributes:\n"
 "   bold, italic, underline, reverse, blink; append more with '+'\n"
 msgstr ""
+"Standardfarger:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray, white\n"
+"\n"
+"Ekstrafarger, når 256 farger er tilgjengelige:\n"
+"   color16 til color255, eller rgb000 til rgb555 og gray0 til gray23\n"
+"\n"
+"Egenskaper:\n"
+"   bold, italic, underline, reverse, blink; legg til flere med '+'\n"
 
 msgid "Color options"
-msgstr ""
+msgstr "Fargeinnstillinger"
 
-msgid "+number"
-msgstr "+nummer"
+msgid "[+lineno] file1[:lineno] [file2[:lineno]...]"
+msgstr "[+linjenr] fil1[:linjenr] [fil2[:linjenr]...]"
+
+msgid "file"
+msgstr "fil"
+
+msgid "file1 file2"
+msgstr "fil1 fil2"
 
 msgid "[this_dir] [other_panel_dir]"
-msgstr ""
-
-msgid "Set initial line number for the internal editor"
-msgstr "Sett initielt linjenummer for intern redigering"
+msgstr "[denne mappa] [mappa i det andre panelet]"
 
 msgid ""
 "\n"
 "Please send any bug reports (including the output of 'mc -V')\n"
 "as tickets at www.midnight-commander.org\n"
 msgstr ""
+"\n"
+"Send inn alle feilrapporter (ta med resultatet av «mc -V»)\n"
+"som billetter på www.midnight-commander.org\n"
 
 #, c-format
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
 
 msgid "Main options"
-msgstr ""
+msgstr "Hovedinnstillinger"
 
 msgid "Terminal options"
-msgstr ""
+msgstr "Terminalinnstillinger"
 
 msgid "Arguments parse error!"
-msgstr ""
+msgstr "Klarte ikke tolke argumentene."
 
 msgid "No arguments given to the viewer."
-msgstr ""
+msgstr "Filviseren fikk ingen argumenter."
 
 msgid "Two files are required to envoke the diffviewer."
-msgstr ""
+msgstr "Diffviseren trenger to filnavn for å starte."
 
 msgid "Background protocol error"
-msgstr ""
+msgstr "Feil i bakgrunnsprotokoll"
 
 msgid "Reading failed"
-msgstr ""
+msgstr "Lesing mislyktes"
 
 msgid "Background process error"
-msgstr ""
+msgstr "Feil i bakgrunnsprosess"
 
 msgid "Unknown error in child"
-msgstr ""
+msgstr "Ukjent feil i barneprosess"
 
 msgid "Child died unexpectedly"
-msgstr ""
+msgstr "Barneprosessen avsluttet uventet"
 
 msgid ""
 "Background process sent us a request for more arguments\n"
 "than we can handle."
 msgstr ""
+"Bakgrunnsprosessen sendte en forespørsel for\n"
+"flere argument enn det som kan håndteres."
 
 msgid "&Dismiss"
-msgstr "Forkast"
+msgstr "&Lukk"
 
 msgid "Enter search string:"
-msgstr ""
+msgstr "Søk etter:"
 
 msgid "Cas&e sensitive"
-msgstr ""
+msgstr "Skill store/sm&å bokstaver"
 
 msgid "&Backwards"
-msgstr "Bakover"
+msgstr "&Bakover"
 
 msgid "&Whole words"
-msgstr ""
+msgstr "H&ele ord"
 
 msgid "&All charsets"
-msgstr ""
+msgstr "A&lle tegnkodinger"
 
 msgid "Search"
 msgstr "Søk"
 
 msgid "Search is disabled"
-msgstr ""
+msgstr "Søk er slått av"
 
 #, c-format
 msgid ""
 "Cannot create temporary diff file\n"
 "%s"
 msgstr ""
+"Klarte ikke opprette midlertidig diff-fil\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -805,422 +930,440 @@ msgid ""
 "%s%s\n"
 "%s"
 msgstr ""
+"Klarte ikke opprette reservekopi\n"
+"%s%s\n"
+"%s"
 
 #, c-format
 msgid ""
 "Cannot create temporary merge file\n"
 "%s"
 msgstr ""
+"Klarte ikke opprette midlertidig flettefil\n"
+"%s"
 
 msgid "&Fastest (Assume large files)"
-msgstr ""
+msgstr "&Raskeste (anta store filer)"
 
 msgid "&Minimal (Find a smaller set of change)"
-msgstr ""
+msgstr "&Minimal (finn mindre endringssett)"
 
 msgid "Diff algorithm"
-msgstr ""
+msgstr "Diff-algoritme"
 
 msgid "Diff extra options"
-msgstr ""
+msgstr "Flere diff-innstillinger"
 
 msgid "&Ignore case"
-msgstr ""
+msgstr "Ikke skill store/sm&å bokstaver"
 
 msgid "Ignore tab &expansion"
-msgstr ""
+msgstr "Ignorer endringer som skyldes &tabulator-utvidelse"
 
 msgid "Ignore &space change"
-msgstr ""
+msgstr "Ignorer endringer i antall &blanktegn"
 
 msgid "Ignore all &whitespace"
-msgstr ""
+msgstr "Ignorer a&lle blanktegn"
 
 msgid "Strip &trailing carriage return"
-msgstr ""
+msgstr "&Fjern etterfølgende linjeskift-tegn"
 
 msgid "Diff Options"
-msgstr ""
+msgstr "Diff-innstillinger"
 
 msgid "Edit"
-msgstr ""
+msgstr "Redigere"
 
 msgid "Edit is disabled"
-msgstr ""
+msgstr "Redigering er slått av"
 
 msgid "Goto line (left)"
-msgstr ""
+msgstr "Gå til linje (venstre)"
 
 msgid "Goto line (right)"
-msgstr ""
+msgstr "Gå til linje (høyre)"
 
 msgid "Enter line:"
-msgstr ""
+msgstr "Angi linje:"
 
 msgid "ButtonBar|Help"
-msgstr ""
+msgstr "ButtonBar|Hjelp"
 
 msgid "ButtonBar|Save"
-msgstr ""
+msgstr "ButtonBar|Lagre"
 
 msgid "ButtonBar|Edit"
-msgstr ""
+msgstr "ButtonBar|Redig"
 
 msgid "ButtonBar|Merge"
-msgstr ""
+msgstr "ButtonBar|Flett"
 
 msgid "ButtonBar|Search"
-msgstr ""
+msgstr "ButtonBar|Søk"
 
 msgid "ButtonBar|Options"
-msgstr ""
+msgstr "ButtonBar|Innst"
 
 msgid "ButtonBar|Quit"
-msgstr ""
+msgstr "ButtonBar|Avslut"
 
 msgid "Quit"
-msgstr "Slutt"
+msgstr "Avslutt"
 
 msgid "File(s) was modified. Save with exit?"
 msgstr ""
+"En eller flere filer er endret.\n"
+"Lagre før avslutning?"
 
 msgid ""
 "Midnight Commander is being shut down.\n"
 "Save modified file(s)?"
 msgstr ""
+"Midnight Commander avsluttes.\n"
+"En eller flere filer er endret. Lagre?"
 
 msgid "Diff:"
-msgstr ""
+msgstr "Diff:"
 
 #, c-format
 msgid "\"%s\" is a directory"
-msgstr ""
+msgstr "«%s» er en mappe"
 
 #, c-format
 msgid ""
 "Cannot stat \"%s\"\n"
 "%s"
 msgstr ""
+"stat() mislyktes for «%s»\n"
+"%s"
 
 msgid "Diff viewer: invalid mode"
-msgstr ""
+msgstr "Diffviser: Ugyldig modus"
 
 msgid "Two files are needed to compare"
-msgstr ""
+msgstr "Trenger to filer for å sammenligne"
 
 msgid "Choose syntax highlighting"
-msgstr ""
+msgstr "Velg syntaksutheving"
 
 msgid "< Auto >"
-msgstr ""
+msgstr "< Auto >"
 
 msgid "< Reload Current Syntax >"
-msgstr ""
+msgstr "< Last gjeldende syntaks på nytt >"
 
 #, c-format
 msgid "Loading: %3d%%"
-msgstr ""
+msgstr "Laster: %3d%%"
 
 msgid "Loading..."
-msgstr ""
+msgstr "Laster ..."
 
 #, c-format
 msgid "Cannot open %s for reading"
-msgstr ""
+msgstr "Klarte ikke åpne lesetilgang til %s"
 
 msgid "Load file"
-msgstr ""
+msgstr "Last fil"
 
 #, c-format
 msgid "Error reading %s"
-msgstr ""
+msgstr "Klarte ikke lese %s"
 
 #, c-format
 msgid "Cannot get size/permissions for %s"
-msgstr ""
+msgstr "Klarte ikke hente størrelsen/rettighetene til %s"
 
 #, c-format
 msgid "\"%s\" is not a regular file"
-msgstr ""
+msgstr "«%s» er ikke en vanlig fil"
 
 #, c-format
 msgid ""
 "File \"%s\" is too large.\n"
 "Open it anyway?"
 msgstr ""
+"Fila «%s» er for stor.\n"
+"Åpne den likevel?"
 
 #, c-format
 msgid "Error reading from pipe: %s"
-msgstr ""
+msgstr "Klarte ikke lese fra rør: %s"
 
 #, c-format
 msgid "Cannot open pipe for reading: %s"
-msgstr ""
+msgstr "Klarte ikke åpne lesetilgang til rør: %s"
 
 #, c-format
 msgid "Searching %s: %3d%%"
-msgstr ""
+msgstr "Søker %s: %3d%%"
 
 #, c-format
 msgid "Searching %s"
 msgstr "Søker etter %s"
 
 msgid "File has hard-links. Detach before saving?"
-msgstr ""
+msgstr "Fila har harde lenker. Koble fra før lagring?"
 
 msgid "The file has been modified in the meantime. Save anyway?"
-msgstr ""
+msgstr "Fila har i mellomtida blitt endret. Lagre den likevel?"
 
 #, c-format
 msgid "Error writing to pipe: %s"
-msgstr ""
+msgstr "Klarte ikke skrive til rør: %s"
 
 #, c-format
 msgid "Cannot open pipe for writing: %s"
-msgstr ""
+msgstr "Klarte ikke åpne skrivetilgang til rør: %s"
 
 #, c-format
 msgid "Cannot open file for writing: %s"
-msgstr ""
+msgstr "Klarte ikke åpne skrivetilgang til fil: %s"
 
 msgid "The file you are saving does not end with a newline."
-msgstr ""
+msgstr "Fila du lagrer slutter ikke med et linjeskift-tegn."
 
 msgid "C&ontinue"
-msgstr ""
+msgstr "&Fortsett"
 
 msgid "&Do not change"
-msgstr ""
+msgstr "&Ikke endre"
 
 msgid "&Unix format (LF)"
-msgstr ""
+msgstr "&Unix-format (LF)"
 
 msgid "&Windows/DOS format (CR LF)"
-msgstr ""
+msgstr "&Windows/DOS-format (CR LF)"
 
 msgid "&Macintosh format (CR)"
-msgstr ""
+msgstr "&Macintosh-format (CR)"
 
 msgid "Enter file name:"
-msgstr ""
+msgstr "Angi filnavn:"
 
 msgid "Change line breaks to:"
-msgstr ""
+msgstr "Endre linjeskift til:"
 
 msgid "Save As"
-msgstr ""
-
-msgid "Block is large, you may not be able to undo this action"
-msgstr ""
+msgstr "Lagre som"
 
 msgid "Collect completions"
-msgstr ""
+msgstr "Samle fullføringer"
 
 msgid "&Quick save"
-msgstr ""
+msgstr "&Rask lagring"
 
 msgid "&Safe save"
-msgstr ""
+msgstr "&Sikker lagring"
 
 msgid "&Do backups with following extension:"
-msgstr ""
+msgstr "R&eservekopier med følgende etternavn:"
 
 msgid "Check &POSIX new line"
-msgstr ""
+msgstr "Sjekk om linjeskift avslutter fil (&POSIX)"
 
 msgid "Edit Save Mode"
-msgstr ""
+msgstr "Rediger lagringsinnstillinger"
 
 msgid "Save as"
-msgstr ""
+msgstr "Lagre som"
 
 msgid "Cannot save: destination is not a regular file"
-msgstr ""
+msgstr "Kan ikke lagre: Målet er ikke en vanlig fil"
 
 msgid "A file already exists with this name"
-msgstr ""
+msgstr "Det finnes allerede en fil som heter dette"
 
 msgid "&Overwrite"
-msgstr ""
+msgstr "&Overskriv"
 
 msgid "Cannot save file"
-msgstr ""
+msgstr "Klarte ikke lagre fil"
 
 msgid "Delete macro"
-msgstr ""
+msgstr "Slett makro"
 
 msgid "Press macro hotkey:"
-msgstr ""
+msgstr "Trykk på makroens hurtigtast:"
 
 msgid "Macro not deleted"
-msgstr ""
+msgstr "Slettet ikke makro"
 
 msgid "Save macro"
-msgstr ""
+msgstr "Lagre makro"
 
 msgid "Press the macro's new hotkey:"
-msgstr ""
+msgstr "Trykk på makroens nye hurtigtast:"
 
 msgid "Repeat last commands"
-msgstr ""
+msgstr "Gjenta siste kommandoer"
 
 msgid "Repeat times:"
-msgstr ""
+msgstr "Antall gjentakelser:"
 
 #, c-format
 msgid "Confirm save file: \"%s\""
-msgstr ""
+msgstr "Bekreft lagring til: «%s»"
 
 msgid "Save file"
-msgstr ""
+msgstr "Lagre fil"
 
 msgid "&Save"
-msgstr "lagre"
+msgstr "&Lagre"
 
 msgid "Load"
-msgstr ""
+msgstr "Åpne"
 
 msgid "Syntax file edit"
 msgstr "Redigering av syntaksfil"
 
 msgid "Which syntax file you want to edit?"
-msgstr ""
+msgstr "Hvilken syntaksfil vil du redigere?"
 
 msgid "&User"
 msgstr "&Bruker"
 
 msgid "&System wide"
-msgstr ""
+msgstr "&System"
 
 msgid "Menu edit"
-msgstr ""
+msgstr "Rediger meny"
 
 msgid "Which menu file do you want to edit?"
-msgstr ""
+msgstr "Hvilken menyfil vil du redigere?"
 
 msgid "&Local"
 msgstr "&Lokal"
 
 msgid "Replace"
-msgstr ""
+msgstr "Erstatt"
 
 #, c-format
 msgid "%ld replacements made"
-msgstr ""
+msgstr "Erstattet %ld forekomster"
 
 msgid "[NoName]"
-msgstr ""
+msgstr "[Navnløs]"
 
 #, c-format
 msgid ""
 "File %s was modified.\n"
 "Save before close?"
 msgstr ""
+"Fila %s er endret.\n"
+"Lagre før lukking?"
 
 msgid "Close file"
-msgstr ""
+msgstr "Lukk fil"
 
 #, c-format
 msgid ""
 "Midnight Commander is being shut down.\n"
 "Save modified file %s?"
 msgstr ""
+"Midnight Commander avsluttes.\n"
+"Lagre den endrede fila %s?"
 
 msgid "This function is not implemented"
-msgstr ""
+msgstr "Denne funksjonen er ikke implementert"
 
 msgid "Copy to clipboard"
-msgstr ""
+msgstr "Kopier til utklippstavle"
 
 msgid "Unable to save to file"
-msgstr ""
+msgstr "Klarte ikke lagre til fil"
 
 msgid "Cut to clipboard"
-msgstr ""
+msgstr "Klipp ut til utklippstavle"
 
 msgid "Goto line"
-msgstr ""
+msgstr "Gå til linje"
 
 msgid "Save block"
-msgstr ""
+msgstr "Lagre blokk"
 
 msgid "Insert file"
-msgstr ""
+msgstr "Sett inn fil"
 
 msgid "Cannot insert file"
-msgstr ""
+msgstr "Klarte ikke sette inn fil"
 
 msgid "Sort block"
-msgstr ""
+msgstr "Sorter blokk"
 
 msgid "You must first highlight a block of text"
-msgstr ""
+msgstr "Du må først utheve en tekstblokk"
 
 msgid "Run sort"
-msgstr ""
+msgstr "Kjør sortering"
 
 msgid "Enter sort options (see manpage) separated by whitespace:"
 msgstr ""
+"Angi sorteringsalternativer (se manualside),\n"
+"og skill dem med blanktegn:"
 
 msgid "Sort"
-msgstr ""
+msgstr "Sortering"
 
 msgid "Cannot execute sort command"
-msgstr ""
+msgstr "Klarte ikke utføre sorteringskommando"
 
 #, c-format
 msgid "Sort returned non-zero: %s"
-msgstr ""
+msgstr "Sortering gav ikke tilbake 0: %s"
 
 msgid "Paste output of external command"
-msgstr ""
+msgstr "Lim inn utdata fra ekstern kommando"
 
 msgid "Enter shell command(s):"
-msgstr ""
+msgstr "Angi skallkommando(er):"
 
 msgid "External command"
-msgstr ""
+msgstr "Ekstern kommando"
 
 msgid "Cannot execute command"
-msgstr ""
+msgstr "Klarte ikke kjøre kommando"
 
 msgid "mail -s <subject> -c <cc> <to>"
-msgstr ""
+msgstr "mail -s <emne> -c <kopi til> <til>"
 
 msgid "To"
-msgstr ""
+msgstr "Til"
 
 msgid "Subject"
-msgstr ""
+msgstr "Emne"
 
 msgid "Copies to"
-msgstr ""
+msgstr "Kopimottaker(e)"
 
 msgid "Mail"
-msgstr ""
+msgstr "E-post"
 
 msgid "Insert literal"
-msgstr ""
+msgstr "Sett inn direkteverdi"
 
 msgid "Press any key:"
-msgstr ""
+msgstr "Trykk en vilkårlig tast:"
 
 msgid ""
 "Current text was modified without a file save.\n"
-"Continue discards these changes"
+"Continue discards these changes."
 msgstr ""
+"Denne teksten er endret, men ikke lagret.\n"
+"Endringene kasseres hvis du fortsetter."
 
 msgid "In se&lection"
-msgstr ""
+msgstr "I &utvalg"
 
 msgid "&Find all"
-msgstr ""
+msgstr "&Finn alle"
 
 msgid "Enter replacement string:"
-msgstr ""
+msgstr "Erstatt med:"
 
 msgid "Replace with:"
-msgstr ""
+msgstr "Erstatt med:"
 
 msgid "&Replace"
 msgstr "E&rstatt"
@@ -1232,441 +1375,443 @@ msgid "&Skip"
 msgstr "&Hopp over"
 
 msgid "Confirm replace"
-msgstr ""
+msgstr "Bekreft erstatning"
 
 msgid "Cancel"
 msgstr "Avbryt"
 
-msgid ""
-"Current text was modified without a file save.\n"
-"Continue discards these changes."
-msgstr ""
-
 msgid "NoName"
-msgstr ""
+msgstr "Navnløs"
 
 msgid "&Open file..."
-msgstr "&Åpne fil..."
+msgstr "&Åpne fil ..."
 
 msgid "&New"
-msgstr ""
+msgstr "&Ny"
 
 msgid "&Close"
-msgstr ""
+msgstr "L&ukk"
+
+msgid "&History..."
+msgstr "Historikk …"
 
 msgid "Save &as..."
-msgstr ""
+msgstr "Lagre &som ..."
 
 msgid "&Insert file..."
-msgstr ""
+msgstr "Sett &inn fil ..."
 
 msgid "Cop&y to file..."
-msgstr ""
+msgstr "&Kopier til fil ... "
 
 msgid "&User menu..."
-msgstr ""
+msgstr "&Brukermeny ..."
 
 msgid "A&bout..."
-msgstr ""
+msgstr "&Om ..."
 
 msgid "&Quit"
-msgstr "Avslutt"
+msgstr "A&vslutt"
 
 msgid "&Undo"
-msgstr ""
+msgstr "&Angre"
 
 msgid "&Redo"
-msgstr ""
+msgstr "&Gjenta"
 
 msgid "&Toggle ins/overw"
-msgstr ""
+msgstr "S&ett inn/overskriv"
 
 msgid "To&ggle mark"
-msgstr ""
+msgstr "Ma&rkering av/på"
 
 msgid "&Mark columns"
-msgstr ""
+msgstr "Marker s&øyler"
 
 msgid "Mark &all"
-msgstr ""
+msgstr "Marker a&lt"
 
 msgid "Unmar&k"
-msgstr ""
+msgstr "F&jern markering"
 
 msgid "Cop&y"
-msgstr ""
+msgstr "&Kopier"
 
 msgid "Mo&ve"
-msgstr ""
+msgstr "&Flytt"
 
 msgid "&Delete"
 msgstr "&Slett"
 
 msgid "Co&py to clipfile"
-msgstr ""
+msgstr "K&opier til utklippsfil"
 
 msgid "&Cut to clipfile"
-msgstr ""
+msgstr "Kli&pp ut til utklippsfil"
 
 msgid "Pa&ste from clipfile"
-msgstr ""
+msgstr "Li&m inn fra utklippsfil"
 
 msgid "&Beginning"
-msgstr ""
+msgstr "Gå til f&ilstart"
 
 msgid "&End"
-msgstr ""
+msgstr "Gå til filsl&utt"
 
 msgid "&Search..."
-msgstr ""
+msgstr "&Søk ..."
 
 msgid "Search &again"
-msgstr ""
+msgstr "Søk &igjen"
 
 msgid "&Replace..."
-msgstr ""
+msgstr "&Erstatt ..."
 
 msgid "&Toggle bookmark"
-msgstr ""
+msgstr "&Bokmerke av/på"
 
 msgid "&Next bookmark"
-msgstr ""
+msgstr "&Neste bokmerke"
 
 msgid "&Prev bookmark"
-msgstr ""
+msgstr "&Forrige bokmerke"
 
 msgid "&Flush bookmarks"
-msgstr ""
+msgstr "&Tøm bokmerke"
 
 msgid "&Go to line..."
-msgstr ""
+msgstr "&Gå til linje ..."
 
 msgid "&Toggle line state"
-msgstr ""
+msgstr "Linje&stolpe av/på"
 
 msgid "Go to matching &bracket"
-msgstr ""
+msgstr "Gå til tilhørende &parentes"
 
 msgid "Toggle s&yntax highlighting"
-msgstr ""
+msgstr "S&yntaksutheving av/på"
 
 msgid "&Find declaration"
-msgstr ""
+msgstr "Finn &deklarasjon"
 
 msgid "Back from &declaration"
-msgstr ""
+msgstr "&Tilbake fra deklarasjon"
 
 msgid "For&ward to declaration"
-msgstr ""
+msgstr "&Fram til deklarasjon"
 
 msgid "Encod&ing..."
-msgstr ""
+msgstr "Tegn&koding ..."
 
 msgid "&Refresh screen"
-msgstr ""
+msgstr "Oppdater visnin&g"
 
 msgid "&Start/Stop record macro"
-msgstr ""
+msgstr "Start/stopp &makroopptak"
 
 msgid "Delete macr&o..."
-msgstr ""
+msgstr "Sl&ett makro ..."
 
 msgid "Record/Repeat &actions"
-msgstr ""
+msgstr "Ta opp/gjenta &handlinger"
 
 msgid "S&pell check"
-msgstr ""
+msgstr "Sta&vekontroll"
 
 msgid "C&heck word"
-msgstr ""
+msgstr "K&ontroller ord"
 
 msgid "Change spelling &language..."
-msgstr ""
+msgstr "Stavekontrollens spr&åk"
 
 msgid "&Mail..."
-msgstr ""
+msgstr "E&-post ..."
 
 msgid "Insert &literal..."
-msgstr ""
+msgstr "Sett inn &direkteverdi ..."
 
 msgid "Insert &date/time"
-msgstr ""
+msgstr "Sett inn dato/&tid"
 
 msgid "&Format paragraph"
-msgstr ""
+msgstr "Formater &avsnitt"
 
 msgid "&Sort..."
-msgstr ""
+msgstr "&Sorter ..."
 
 msgid "&Paste output of..."
-msgstr ""
+msgstr "Lim inn &utdata fra ..."
 
 msgid "&External formatter"
-msgstr ""
+msgstr "&Ekstern formatering"
 
 msgid "&Move"
-msgstr "&Flytt"
+msgstr "Fl&ytt"
 
 msgid "&Resize"
-msgstr ""
+msgstr "Endre &størrelse"
 
 msgid "&Toggle fullscreen"
-msgstr ""
+msgstr "F&ullskjerm av/på"
 
 msgid "&Next"
-msgstr ""
+msgstr "&Neste"
 
 msgid "&Previous"
-msgstr ""
+msgstr "F&orrige"
 
 msgid "&List..."
-msgstr ""
+msgstr "&Vindusliste ..."
 
 msgid "&General..."
-msgstr ""
+msgstr "&Generelle ..."
 
 msgid "Save &mode..."
-msgstr ""
+msgstr "L&agring ..."
 
 msgid "Learn &keys..."
-msgstr ""
+msgstr "L&ær taster ..."
 
 msgid "Syntax &highlighting..."
-msgstr ""
+msgstr "S&yntaksutheving ..."
 
 msgid "S&yntax file"
-msgstr ""
+msgstr "Syntaks&fil"
 
 msgid "&Menu file"
-msgstr ""
+msgstr "&Menyfil"
 
 msgid "&Save setup"
-msgstr "Lagre oppsett"
+msgstr "&Lagre oppsett"
 
 msgid "&File"
-msgstr ""
+msgstr "&Fil"
 
 msgid "&Edit"
-msgstr ""
+msgstr "&Rediger"
 
 msgid "&Search"
-msgstr ""
+msgstr "&Søk"
 
 msgid "&Command"
-msgstr ""
+msgstr "&Kommando"
 
 msgid "For&mat"
-msgstr ""
+msgstr "For&mat"
 
 msgid "&Window"
-msgstr ""
+msgstr "&Vindu"
 
 msgid "&Options"
-msgstr ""
+msgstr "&Innstillinger"
 
 msgid "&None"
-msgstr ""
+msgstr "&Ingen"
 
 msgid "&Dynamic paragraphing"
-msgstr ""
+msgstr "&Dynamiske avsnitt"
 
 msgid "Type &writer wrap"
-msgstr ""
+msgstr "&Skrivemaskinsbryting"
 
 msgid "Wrap mode"
-msgstr "Brytningsmodus"
+msgstr "Tekstbryting"
 
 msgid "Tabulation"
-msgstr ""
+msgstr "Tabulasjon"
 
 msgid "&Fake half tabs"
-msgstr "&Falske halvtabulatorer"
+msgstr "Falske &halvtabulatorer"
 
 msgid "&Backspace through tabs"
-msgstr "&Tilbake gjennom tabulatorer"
+msgstr "&Rettetast tar alle tab."
 
 msgid "Fill tabs with &spaces"
-msgstr "fyll tabulatorer med mellomrom"
+msgstr "Fyll tab. &med mellomrom"
 
 msgid "Tab spacing:"
-msgstr ""
+msgstr "Tabulatoravstand:"
 
 msgid "Other options"
-msgstr ""
+msgstr "Andre innstillinger"
 
 msgid "&Return does autoindent"
-msgstr "Linjeskift utfører autoindentering"
+msgstr "A&utoinnrykk etter linjeskift"
 
 msgid "Confir&m before saving"
-msgstr "bekreft før lagring"
+msgstr "&Bekreft før lagring"
 
 msgid "Save file &position"
-msgstr ""
+msgstr "&Lagre filposisjon"
 
 msgid "&Visible trailing spaces"
-msgstr ""
+msgstr "Vis &etterfølgende mellomrom"
 
 msgid "Visible &tabs"
-msgstr ""
+msgstr "Vis &tabulatorer"
 
 msgid "Synta&x highlighting"
-msgstr "syntaksutheving"
+msgstr "S&yntaksutheving"
 
 msgid "C&ursor after inserted block"
-msgstr ""
+msgstr "Mark&ør etter innsatt blokk"
 
 msgid "Pers&istent selection"
-msgstr ""
+msgstr "&Varig utvalg"
 
 msgid "Cursor be&yond end of line"
-msgstr ""
+msgstr "Mar&kør forbi linjeslutt"
 
 msgid "&Group undo"
-msgstr ""
+msgstr "An&gre grupperte handlinger"
 
 msgid "Word wrap line length:"
-msgstr ""
+msgstr "Bryt tekst etter:"
 
 msgid "Editor options"
-msgstr ""
+msgstr "Redigeringsinnstillinger"
 
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
 msgstr ""
+"Et brukervennlig skriveprogram\n"
+"skrevet for Midnight Commander."
 
-msgid "Copyright (C) 1996-2016 the Free Software Foundation"
-msgstr ""
+msgid "Copyright (C) 1996-2020 the Free Software Foundation"
+msgstr "Opphavsrett (C) 1996-2020 the Free Software Foundation"
 
 msgid "About"
-msgstr ""
+msgstr "Om"
 
 msgid "Open files"
-msgstr ""
+msgstr "Åpne filer"
 
 msgid "Edit: "
-msgstr ""
+msgstr "Rediger:"
 
 msgid "ButtonBar|Mark"
-msgstr ""
+msgstr "ButtonBar|Marker"
 
 msgid "ButtonBar|Replac"
-msgstr ""
+msgstr "ButtonBar|Erstat"
 
 msgid "ButtonBar|Copy"
-msgstr ""
+msgstr "ButtonBar|Kopier"
 
 msgid "ButtonBar|Move"
-msgstr ""
+msgstr "ButtonBar|Flytt"
 
 msgid "ButtonBar|Delete"
-msgstr ""
+msgstr "ButtonBar|Slett"
 
 msgid "ButtonBar|PullDn"
-msgstr ""
+msgstr "ButtonBar|TrkNed"
 
 msgid "Breton"
-msgstr ""
+msgstr "Bretonsk"
 
 msgid "Czech"
-msgstr ""
+msgstr "Tsjekkisk"
 
 msgid "Welsh"
-msgstr ""
+msgstr "Walisisk"
 
 msgid "Danish"
-msgstr ""
+msgstr "Dansk"
 
 msgid "German"
-msgstr ""
+msgstr "Tysk"
 
 msgid "Greek"
-msgstr ""
+msgstr "Gresk"
 
 msgid "English"
-msgstr ""
+msgstr "Engelsk"
 
 msgid "British English"
-msgstr ""
+msgstr "Britisk-engelsk"
 
 msgid "Canadian English"
-msgstr ""
+msgstr "Kanadisk-engelsk"
 
 msgid "American English"
-msgstr ""
+msgstr "Amerikansk-engelsk"
 
 msgid "Esperanto"
-msgstr ""
+msgstr "Esperanto"
 
 msgid "Spanish"
-msgstr ""
+msgstr "Spansk"
 
 msgid "Faroese"
-msgstr ""
+msgstr "Færøysk"
 
 msgid "French"
-msgstr ""
+msgstr "Fransk"
 
 msgid "Italian"
-msgstr ""
+msgstr "Italiensk"
 
 msgid "Dutch"
-msgstr ""
+msgstr "Nederlandsk"
 
 msgid "Norwegian"
-msgstr ""
+msgstr "Norsk"
 
 msgid "Polish"
-msgstr ""
+msgstr "Polsk"
 
 msgid "Portuguese"
-msgstr ""
+msgstr "Portugisisk"
 
 msgid "Romanian"
-msgstr ""
+msgstr "Rumensk"
 
 msgid "Russian"
-msgstr ""
+msgstr "Russisk"
 
 msgid "Slovak"
-msgstr ""
+msgstr "Slovakisk"
 
 msgid "Swedish"
-msgstr ""
+msgstr "Svensk"
 
 msgid "Ukrainian"
-msgstr ""
+msgstr "Ukrainsk"
 
 msgid "&Add word"
-msgstr ""
+msgstr "&Legg til"
 
 msgid "Language"
-msgstr ""
+msgstr "Språk"
 
 msgid "Misspelled"
-msgstr ""
+msgstr "Feilstavet"
 
 msgid "Check word"
-msgstr ""
+msgstr "Sjekk ord"
 
 msgid "Suggest"
-msgstr ""
+msgstr "Forslag"
 
 msgid "Select language"
-msgstr ""
+msgstr "Velg språk"
 
 msgid "Load syntax file"
-msgstr ""
+msgstr "Last syntaksfil"
 
 #, c-format
 msgid ""
 "Cannot open file %s\n"
 "%s"
 msgstr ""
+"Klarte ikke åpne fila %s\n"
+"%s"
 
 #, c-format
 msgid "Error in file %s on line %d"
-msgstr ""
+msgstr "Feil i fil %s på linje %d"
 
 msgid ""
 "The Commander can't change to the directory that\n"
@@ -1674,17 +1819,27 @@ msgid ""
 "deleted your working directory, or given yourself\n"
 "extra access permissions with the \"su\" command?"
 msgstr ""
+"Midnight Commander klarte ikke bytte til mappa\n"
+"som underskallet påstår du står i. Kanskje er\n"
+"arbeidsmappa slettet, eller du har gitt deg selv\n"
+"ekstra rettigheter med «su»-kommandoen?"
 
 #, c-format
 msgid "Cannot fetch a local copy of %s"
-msgstr ""
+msgstr "Klarte ikke hente en lokal kopi av %s"
 
 msgid "The shell is already running a command"
-msgstr ""
+msgstr "Skallet kjører allerede en kommando"
 
-#, c-format
-msgid "Type 'exit' to return to the Midnight Commander"
+msgid ""
+"Not an xterm or Linux console;\n"
+"the subshell cannot be toggled."
 msgstr ""
+"Ikke en xterm eller Linux-konsoll;\n"
+"kan ikke bytte om underskallet."
+
+msgid "Type 'exit' to return to the Midnight Commander"
+msgstr "Skriv «exit» for å gå tilbake til Midnight Commander"
 
 msgid "Set &all"
 msgstr "Sett &alle"
@@ -1693,7 +1848,7 @@ msgid "S&kip"
 msgstr "&Hopp over"
 
 msgid "&Set"
-msgstr "&Sett"
+msgstr "&Bruk"
 
 msgid "owner"
 msgstr "eier"
@@ -1707,185 +1862,205 @@ msgstr "andre"
 msgid "Flag"
 msgstr "Flagg"
 
+#, c-format
+msgid "Permissions (octal): %o"
+msgstr "Rettigheter (oktale):%o"
+
 msgid "Chown advanced command"
-msgstr ""
+msgstr "Avansert chown-kommando"
 
 #, c-format
 msgid ""
 "Cannot chmod \"%s\"\n"
 "%s"
 msgstr ""
+"chmod mislyktes for «%s»\n"
+"%s"
+
+msgid "&Ignore"
+msgstr "&Ignorer"
+
+msgid "Ignore &all"
+msgstr "Ignorer &alle"
+
+msgid "&Retry"
+msgstr "&Prøv igjen"
 
 #, c-format
 msgid ""
 "Cannot chown \"%s\"\n"
 "%s"
 msgstr ""
+"chmod mislyktes for «%s»\n"
+"%s"
 
 msgid "< Default >"
-msgstr ""
+msgstr "< Standard >"
 
 msgid "Skins"
-msgstr ""
+msgstr "Drakter"
 
 msgid "Other 8 bit"
-msgstr "Andre 8-bit"
+msgstr "Andre 8-biters"
 
 msgid "Running"
-msgstr ""
+msgstr "Kjører"
 
 msgid "Stopped"
-msgstr "Stoppet"
+msgstr "Pause"
 
 msgid "&Never"
-msgstr "aldri"
+msgstr "Aldr&i"
 
 msgid "On dum&b terminals"
-msgstr ""
+msgstr "I &dumme terminaler"
 
 msgid "Alwa&ys"
-msgstr "alltid"
+msgstr "A&lltid"
 
 msgid "File operations"
-msgstr ""
+msgstr "Filoperasjoner"
 
 msgid "&Verbose operation"
-msgstr "utvidet operasjon"
+msgstr "Ordrike operas&joner"
 
 msgid "Compute tota&ls"
-msgstr ""
+msgstr "Beregn &totaler"
 
 msgid "Classic pro&gressbar"
-msgstr ""
+msgstr "Klassisk &framdriftsviser"
 
 msgid "Mkdi&r autoname"
-msgstr ""
+msgstr "Fyll inn sti for &mkdir"
 
 msgid "&Preallocate space"
-msgstr ""
+msgstr "Forh&åndsreserver plass"
 
 msgid "Esc key mode"
-msgstr ""
+msgstr "Escape-modus"
 
 msgid "S&ingle press"
-msgstr ""
+msgstr "&Ett trykk"
 
 msgid "Timeout:"
-msgstr ""
+msgstr "Tidsavbrudd:"
 
 msgid "Pause after run"
-msgstr ""
+msgstr "Pause etter kjøring"
 
 msgid "Use internal edi&t"
-msgstr ""
+msgstr "&Rediger internt "
 
 msgid "Use internal vie&w"
-msgstr ""
+msgstr "&Vis internt"
 
 msgid "A&sk new file name"
-msgstr ""
+msgstr "Spør etter n&ytt filnavn"
 
 msgid "Auto m&enus"
-msgstr ""
+msgstr "Start med &brukermenyen"
 
 msgid "&Drop down menus"
-msgstr "Nedtrekksmenyer"
+msgstr "Trekk &ned menyer"
 
 msgid "S&hell patterns"
-msgstr ""
+msgstr "Skallm&ønstre"
 
 msgid "Co&mplete: show all"
-msgstr ""
+msgstr "F&ullføring: vis alle"
 
 msgid "Rotating d&ash"
-msgstr ""
+msgstr "Roterende stre&k"
 
 msgid "Cd follows lin&ks"
-msgstr ""
+msgstr "&Cd følger lenker"
 
 msgid "Sa&fe delete"
-msgstr ""
+msgstr "&Sikker sletting"
+
+msgid "Safe overwrite"
+msgstr "Sikker overskrivin&g"
 
 msgid "A&uto save setup"
-msgstr ""
+msgstr "Autolagre o&ppsettet"
 
 msgid "Configure options"
-msgstr "Alternativer for konfigurasjon"
+msgstr "Sett opp innstillinger"
 
 msgid "Skin:"
-msgstr ""
+msgstr "Drakt:"
 
 msgid "Appearance"
-msgstr ""
+msgstr "Presentasjonsdrakt"
 
 msgid "Case &insensitive"
-msgstr ""
+msgstr "Ikke skill store&/små bokst."
 
 msgid "Use panel sort mo&de"
-msgstr ""
+msgstr "&Panelets sorteringsrekkef."
 
 msgid "Show mi&ni-status"
-msgstr ""
+msgstr "Vis &mini-statuslinje"
 
 msgid "Use SI si&ze units"
-msgstr ""
+msgstr "Bruk &SI-enheter"
 
 msgid "Mi&x all files"
-msgstr ""
+msgstr "&Bland alle filer"
 
 msgid "Show &backup files"
-msgstr ""
+msgstr "Vis &reservekopier"
 
 msgid "Show &hidden files"
-msgstr ""
+msgstr "Vis sk&julte filer"
 
 msgid "&Fast dir reload"
-msgstr "rask katalogoppfrisking"
+msgstr "Ras&k mappeoppdatering"
 
 msgid "Ma&rk moves down"
-msgstr ""
+msgstr "Flytt &ned etter markering"
 
 msgid "Re&verse files only"
-msgstr ""
+msgstr "&Inverter kun filer"
 
 msgid "Simple s&wap"
-msgstr ""
+msgstr "&Enkel panelombytting"
 
 msgid "A&uto save panels setup"
-msgstr ""
+msgstr "Au&tolagre paneloppsettet"
 
 msgid "Navigation"
-msgstr ""
+msgstr "Navigasjon"
 
 msgid "L&ynx-like motion"
-msgstr "lynx-lignende bevegelse"
+msgstr "Lyn&x-lignende mappebytting"
 
 msgid "Pa&ge scrolling"
-msgstr ""
+msgstr "R&ull sider"
 
 msgid "Center &scrolling"
-msgstr ""
+msgstr "Sentrer mark&ør ved rulling"
 
 msgid "&Mouse page scrolling"
-msgstr ""
+msgstr "Mus ru&ller sider"
 
 msgid "File highlight"
-msgstr ""
+msgstr "Utheving av filer"
 
 msgid "File &types"
-msgstr ""
+msgstr "&Filtyper"
 
 msgid "&Permissions"
-msgstr ""
+msgstr "Retti&gheter"
 
 msgid "Quick search"
-msgstr ""
+msgstr "Hurtigsøk"
 
 msgid "Panel options"
-msgstr ""
+msgstr "Panelinnstillinger"
 
 msgid "Information"
-msgstr ""
+msgstr "Informasjon"
 
 msgid ""
 "Using the fast reload option may not reflect the exact\n"
@@ -1893,30 +2068,34 @@ msgid ""
 "manual reload of the directory. See the man page for\n"
 "the details."
 msgstr ""
+"Innstillingen «Rask mappeoppdatering» gjør at\n"
+"utlistinga ikke nødvendigvis gjenspeiler mappeinnholdet.\n"
+"I så fall må du oppdatere utlistinga manuelt.\n"
+"Se manualsiden for mer informasjon."
 
 msgid "&Full file list"
 msgstr "&Full filliste"
 
 msgid "&Brief file list:"
-msgstr ""
+msgstr "&Kort filliste:"
 
 msgid "&Long file list"
 msgstr "&Lang filliste"
 
 msgid "&User defined:"
-msgstr "&Brukerdefinert:"
+msgstr "&Selvvalgt:"
 
 msgid "columns"
-msgstr ""
+msgstr "kolonner"
 
 msgid "User &mini status"
-msgstr ""
+msgstr "Selvvalgt &ministatus"
 
-msgid "Listing mode"
-msgstr "Listemodus"
+msgid "Listing format"
+msgstr "Utlistingsformat"
 
 msgid "Executable &first"
-msgstr ""
+msgstr "&Kjørbare først"
 
 msgid "&Reverse"
 msgstr "&Reversert"
@@ -1926,82 +2105,82 @@ msgstr "Sorteringsrekkefølge"
 
 #. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 msgid "Confirmation|&Delete"
-msgstr ""
+msgstr "Conformation|&Sletting"
 
 msgid "Confirmation|O&verwrite"
-msgstr ""
+msgstr "Confirmation|O&verskriving"
 
 msgid "Confirmation|&Execute"
-msgstr ""
+msgstr "Confirmation|&Kjøring"
 
 msgid "Confirmation|E&xit"
-msgstr ""
+msgstr "Confirmation|Avsl&utting"
 
 msgid "Confirmation|Di&rectory hotlist delete"
-msgstr ""
+msgstr "Confirmation|Tømming av &favorittmapper"
 
 msgid "Confirmation|&History cleanup"
-msgstr ""
+msgstr "Confirmation|Tømming av &historikk"
 
 msgid "Confirmation"
-msgstr ""
+msgstr "Be om bekreftelse før"
 
 msgid "&UTF-8 output"
-msgstr ""
+msgstr "&UTF-8-utdata"
 
 msgid "&Full 8 bits output"
-msgstr ""
+msgstr "&Full 8-biters utdata"
 
 msgid "&ISO 8859-1"
-msgstr ""
+msgstr "&ISO 8859-1"
 
 msgid "7 &bits"
-msgstr ""
+msgstr "7-&biters"
 
 msgid "F&ull 8 bits input"
-msgstr "F&ull 8-bits input"
+msgstr "F&ull 8-biters inndata"
 
 msgid "Display bits"
-msgstr ""
+msgstr "Tegnkoding"
 
 msgid "Input / display codepage:"
-msgstr "Koding for inndata /visning:"
+msgstr "Tegnkoding for inndata/visning:"
 
 msgid "Directory tree"
-msgstr ""
+msgstr "Mappetre"
 
 msgid "Timeout for freeing VFSs (sec):"
-msgstr ""
+msgstr "Tidsavbrudd for VFS-frakobling (sek):"
 
 msgid "FTP anonymous password:"
-msgstr ""
+msgstr "FTP: Passord for anonym tilkobling:"
 
 msgid "FTP directory cache timeout (sec):"
-msgstr ""
+msgstr "FTP: Tidsavbrudd for mappehurtiglager (sek):"
 
 msgid "&Always use ftp proxy:"
-msgstr ""
+msgstr "Bruk alltid &mellomtjener for FTP:"
 
 msgid "&Use ~/.netrc"
-msgstr "Br&uk ~/.netrc"
+msgstr "Bruk ~/.&netrc"
 
 msgid "Use &passive mode"
-msgstr ""
+msgstr "Bruk &passiv modus"
 
 msgid "Use passive mode over pro&xy"
-msgstr ""
+msgstr "Bruk pa&ssiv modus via mellomtjener"
 
 msgid "Virtual File System Setting"
-msgstr ""
+msgstr "Innstillinger for virtuelt filsystem"
 
 msgid "cd"
 msgstr "cd"
 
 msgid "Quick cd"
-msgstr "Rask katalogskift"
+msgstr "Bytt til en annen mappe"
 
 msgid "Existing filename (filename symlink will point to):"
-msgstr "Eksisterende filnavn (filnavnet symlinken skal peke til):"
+msgstr "Eksisterende filnavn (filnavnet symlenken skal peke til):"
 
 msgid "Symbolic link filename:"
 msgstr "Filnavn for symbolsk lenke:"
@@ -2016,10 +2195,10 @@ msgid "&Resume"
 msgstr "&Gjenoppta"
 
 msgid "&Kill"
-msgstr "&Drep"
+msgstr "&Tving stopp"
 
 msgid "Background jobs"
-msgstr ""
+msgstr "Bakgrunnsjobber"
 
 #, c-format
 msgid "Password for \\\\%s\\%s"
@@ -2032,55 +2211,79 @@ msgid "Username:"
 msgstr "Brukernavn:"
 
 msgid "SMB authentication"
-msgstr ""
+msgstr "SMB-autentisering"
 
-msgid "set &user ID on execution"
-msgstr ""
+msgid "Secure deletion"
+msgstr "Sikker sletting"
 
-msgid "set &group ID on execution"
-msgstr ""
+msgid "Undelete"
+msgstr "Kan gjenopprettes"
 
-msgid "stick&y bit"
-msgstr ""
+msgid "Synchronous updates"
+msgstr "Synkrone oppdateringer"
 
-msgid "&read by owner"
-msgstr ""
+msgid "Synchronous directory updates"
+msgstr "Synkrone mappeoppdateringer"
 
-msgid "&write by owner"
-msgstr ""
+msgid "Immutable"
+msgstr "Uforanderlig"
 
-msgid "e&xecute/search by owner"
-msgstr ""
+msgid "Append only"
+msgstr "Kun legg til"
 
-msgid "rea&d by group"
-msgstr ""
+msgid "No dump"
+msgstr "Ikke dump"
 
-msgid "write by grou&p"
-msgstr ""
+msgid "No update atime"
+msgstr "Ikke oppdater atime"
 
-msgid "execu&te/search by group"
-msgstr ""
+msgid "Compress"
+msgstr "Komprimer"
 
-msgid "read &by others"
-msgstr ""
+msgid "Compressed clusters"
+msgstr "Komprimerte klynger"
 
-msgid "wr&ite by others"
-msgstr ""
+msgid "Compressed dirty file"
+msgstr "Komprimert skitten fil"
 
-msgid "execute/searc&h by others"
-msgstr ""
+msgid "Compression raw access"
+msgstr "Komprimering rå tilgang"
 
-msgid "Name:"
-msgstr ""
+msgid "Encrypted inode"
+msgstr "Kryptert inode"
 
-msgid "Permissions (octal):"
-msgstr ""
+msgid "Journaled data"
+msgstr "Journalførte data"
 
-msgid "Owner name:"
-msgstr ""
+msgid "Indexed directory"
+msgstr "Indeksert mappe"
 
-msgid "Group name:"
-msgstr ""
+msgid "No tail merging"
+msgstr "Ikke haleflett"
+
+msgid "Top of directory hierarchies"
+msgstr "Øverst i mappehierarkiet"
+
+msgid "Inode uses extents"
+msgstr "Inode bruker extent"
+
+msgid "Huge_file"
+msgstr "Enorm fil"
+
+msgid "No COW"
+msgstr "Ikke COW"
+
+msgid "Casefolded file"
+msgstr "Ikke versalsensitiv"
+
+msgid "Inode has inline data"
+msgstr "Inode har innebygd data"
+
+msgid "Project hierarchy"
+msgstr "Prosjektkvotehierarki"
+
+msgid "Verity protected inode"
+msgstr "Verifiser beskyttet inode"
 
 msgid "&Marked all"
 msgstr "&Markert alle"
@@ -2091,11 +2294,81 @@ msgstr "S&ett markerte"
 msgid "C&lear marked"
 msgstr "B&lank ut markerte"
 
+msgid "Chattr command"
+msgstr "Chattr-kommando"
+
+#, c-format
+msgid ""
+"Cannot chattr \"%s\"\n"
+"%s"
+msgstr ""
+"chattr mislyktes for «%s»\n"
+"%s"
+
+msgid "Cannot change attributes on non-local filesystems"
+msgstr "Kan ikke endre attributter i eksterne filsystemer"
+
+#, c-format
+msgid ""
+"Cannot get flags of \"%s\"\n"
+"%s"
+msgstr ""
+"Klarte ikke hente flaggene til «%s»\n"
+"%s"
+
+msgid "set &user ID on execution"
+msgstr "Kjør med &brukers rettigheter"
+
+msgid "set &group ID on execution"
+msgstr "Kjør med &gruppens rettigheter"
+
+msgid "stick&y bit"
+msgstr "&Klebrig bit"
+
+msgid "&read by owner"
+msgstr "Eier kan &lese"
+
+msgid "&write by owner"
+msgstr "Eier kan &skrive"
+
+msgid "e&xecute/search by owner"
+msgstr "Eier kan kj&øre/entre"
+
+msgid "rea&d by group"
+msgstr "G&ruppe kan lese"
+
+msgid "write by grou&p"
+msgstr "Gr&uppe kan skrive"
+
+msgid "execu&te/search by group"
+msgstr "Gru&ppe kan kjøre/entre"
+
+msgid "read &by others"
+msgstr "A&ndre kan lese"
+
+msgid "wr&ite by others"
+msgstr "An&dre kan skrive"
+
+msgid "execute/searc&h by others"
+msgstr "Andr&e kan kjøre/entre"
+
+msgid "Name:"
+msgstr "Navn:"
+
+msgid "Permissions (octal):"
+msgstr "Rettigheter (oktale)"
+
+msgid "Owner name:"
+msgstr "Eiers navn:"
+
+msgid "Group name:"
+msgstr "Gruppens navn:"
+
 msgid "Chmod command"
-msgstr "Chmod kommando"
+msgstr "Chmod-kommando"
 
 msgid "Permission"
-msgstr "Rettighet"
+msgstr "Rettigheter"
 
 msgid "File"
 msgstr "Fil"
@@ -2119,10 +2392,10 @@ msgid "Size"
 msgstr "Størrelse"
 
 msgid "Chown command"
-msgstr ""
+msgstr "Chown-kommando"
 
 msgid "User name"
-msgstr ""
+msgstr "Brukernavn"
 
 msgid "<Unknown user>"
 msgstr "<Ukjent bruker>"
@@ -2131,86 +2404,86 @@ msgid "<Unknown group>"
 msgstr "<Ukjent gruppe>"
 
 msgid "Enter machine name (F1 for details):"
-msgstr ""
+msgstr "Skriv inn tjenernavn (F1 for hjelp):"
 
 msgid "Files tagged, want to cd?"
-msgstr "Filer merket, vil du skifte katalog?"
+msgstr "Merket filer. Vil du bytte mappe?"
 
 msgid "Cannot change directory"
-msgstr " Kunne ikke skifte katalog"
+msgstr " Klarte ikke bytte mappe"
 
 msgid "Filter"
-msgstr ""
+msgstr "Filtrer"
 
 msgid "Set expression for filtering filenames"
-msgstr ""
+msgstr "Skriv inn et filtreringsmønster for filnavn"
 
 #, c-format
 msgid "Link %s to:"
 msgstr "Lag lenke fra %s til:"
 
 msgid "Link"
-msgstr ""
+msgstr "Lenke"
 
 #, c-format
 msgid "link: %s"
-msgstr ""
+msgstr "lenke: %s"
 
 #, c-format
 msgid "symlink: %s"
-msgstr ""
+msgstr "symlenke: %s"
 
 #, c-format
 msgid "Cannot chdir to \"%s\""
-msgstr ""
+msgstr "Klarte ikke bytte mappe til «%s»"
 
 msgid "View file"
-msgstr ""
+msgstr "Vis fil"
 
 msgid "Filename:"
-msgstr ""
+msgstr "Filnavn:"
 
 msgid "Filtered view"
-msgstr ""
+msgstr "Filtrert visning"
 
 msgid "Filter command and arguments:"
-msgstr ""
+msgstr "Filterkommando og argumenter:"
 
 msgid "Edit file"
-msgstr ""
+msgstr "Rediger fil"
 
 msgid "Create a new Directory"
-msgstr "Opprett en ny katalog"
+msgstr "Opprett en ny mappe"
 
 msgid "Enter directory name:"
-msgstr ""
+msgstr "Skriv inn mappenavn:"
 
 msgid "Extension file edit"
 msgstr "Rediger utvidelsesfil"
 
 msgid "Which extension file you want to edit?"
-msgstr ""
+msgstr "Hvilken utvidelsesfil vil du redigere?"
 
 msgid "&System Wide"
 msgstr "&System"
 
 msgid "Highlighting groups file edit"
-msgstr ""
+msgstr "Rediger uthevingsgrupper"
 
 msgid "Which highlighting file you want to edit?"
-msgstr ""
+msgstr "Hvilken uthevingsfil vil du redigere?"
 
 msgid "Compare directories"
-msgstr ""
+msgstr "Sammenlign mapper"
 
 msgid "Select compare method:"
-msgstr ""
+msgstr "Velg sammenligningsmåte:"
 
 msgid "&Quick"
 msgstr "&Rask"
 
 msgid "&Size only"
-msgstr "Bare &Størrelse"
+msgstr "Kun &størrelse"
 
 msgid "&Thorough"
 msgstr "&Grundig"
@@ -2219,89 +2492,89 @@ msgid ""
 "Both panels should be in the listing mode\n"
 "to use this command"
 msgstr ""
-
-msgid ""
-"Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
-msgstr ""
+"Begge panelene må være i utlistingsmodus\n"
+"for å bruke denne kommandoen"
 
 #, c-format
 msgid "'%s' is not a symbolic link"
-msgstr ""
+msgstr "«%s» er ikke ei symbolsk lenke"
 
 #, c-format
 msgid "Symlink '%s' points to:"
-msgstr ""
+msgstr "Symlenke «%s» peker til:"
 
 msgid "Edit symlink"
-msgstr ""
+msgstr "Rediger symlenke"
 
 #, c-format
 msgid "edit symlink, unable to remove %s: %s"
-msgstr ""
+msgstr "redigere symlenke: klarte ikke fjerne %s: %s "
 
 #, c-format
 msgid "edit symlink: %s"
-msgstr ""
+msgstr "redigere symlenke: %s"
 
 msgid "FTP to machine"
-msgstr ""
+msgstr "Koble til FTP"
 
 msgid "SFTP to machine"
-msgstr ""
+msgstr "Koble til SFTP"
 
 msgid "Shell link to machine"
-msgstr ""
+msgstr "Koble til skall"
 
 msgid "SMB link to machine"
-msgstr ""
+msgstr "Koble til SMB"
 
 msgid "Undelete files on an ext2 file system"
-msgstr ""
+msgstr "Gjenopprett filer i et ext2-filsystem"
 
 msgid ""
 "Enter device (without /dev/) to undelete\n"
 "files on: (F1 for details)"
 msgstr ""
+"Angi enhet (uten «/dev/») der filene\n"
+"skal gjenopprettes (F1 for hjelp): "
 
 msgid "Directory scanning"
-msgstr ""
+msgstr "Leter igjennom mappe"
 
 msgid "Setup"
-msgstr ""
+msgstr "Oppsett"
 
 #, c-format
 msgid "Setup saved to %s"
-msgstr ""
+msgstr "Lagret oppsett til %s"
 
 #, c-format
 msgid "Unable to save setup to %s"
-msgstr ""
+msgstr "Klarte ikke lagre oppsettet til %s"
 
 msgid "Cannot execute commands on non-local filesystems"
-msgstr ""
+msgstr "Kan ikke kjøre kommandoer i eksterne filsystemer"
 
 #, c-format
 msgid ""
 "Cannot chdir to \"%s\"\n"
 "%s"
 msgstr ""
-
-msgid "Cannot read directory contents"
-msgstr ""
+"Klarte ikke bytte mappe til «%s»\n"
+"%s"
 
 msgid "Parameter"
-msgstr ""
+msgstr "Parameter"
 
 #, c-format
 msgid ""
 "Cannot create temporary command file\n"
 "%s"
 msgstr ""
+"Klarte ikke opprette midlertidig kommandofil\n"
+"%s"
 
 #, c-format
 msgid " %s%s file error"
-msgstr ""
+msgstr "Feil i fila %s%s "
 
 #, c-format
 msgid ""
@@ -2309,110 +2582,120 @@ msgid ""
 "the installation failed. Please fetch a fresh copy from the Midnight "
 "Commander package."
 msgstr ""
+"Formatet til fila %smc.ext ble endret i versjon 3.0. Det ser ut som om "
+"installasjonen mislyktes. Hent en oppdatert kopi fra Midnight Commander-"
+"pakken."
 
 #, c-format
 msgid "%s file error"
-msgstr ""
+msgstr "Feil i fila %s"
 
 #, c-format
 msgid ""
 "The format of the %s file has changed with version 3.0. You may either want "
 "to copy it from %smc.ext or use that file as an example of how to write it."
 msgstr ""
+"Formatet til fila %s ble endret i versjon 3.0. Du kan enten hente det fra "
+"%smc.ext eller bruke fila som en eksempelfil."
 
 msgid "DialogTitle|Copy"
-msgstr ""
+msgstr "DialogTitle|Kopier"
 
 msgid "DialogTitle|Move"
-msgstr ""
+msgstr "DialogTitle|Flytt"
 
 msgid "DialogTitle|Delete"
-msgstr ""
+msgstr "DialogTitle|Slette?"
 
 msgid "FileOperation|Copy"
-msgstr ""
+msgstr "FileOperation|Kopier"
 
 msgid "FileOperation|Move"
-msgstr ""
+msgstr "FileOperation|Flytt"
 
 msgid "FileOperation|Delete"
-msgstr ""
+msgstr "FileOperation|Slett"
 
 #, no-c-format
 msgid "%o %f%n\"%s\"%m"
-msgstr ""
+msgstr "%o %f%n\"%s\"%m"
 
 #, no-c-format
 msgid "%o %d %f%m"
 msgstr "%o %d %f%m"
 
-msgid "file"
-msgstr "fil"
-
 msgid "files"
 msgstr "filer"
 
 msgid "directory"
-msgstr "katalog"
+msgstr "mappe"
 
 msgid "directories"
-msgstr "kataloger"
+msgstr "mapper"
 
 msgid "files/directories"
-msgstr "filer/kataloger"
+msgstr "filer/mapper"
 
 #. TRANSLATORS: keep leading space here to split words in Copy/Move dialog
 msgid " with source mask:"
 msgstr " med kildemaske:"
 
-msgid "Cannot make the hardlink"
+#, c-format
+msgid ""
+"Cannot stat hardlink source file \"%s\"\n"
+"%s"
 msgstr ""
+"stat() mislyktes for den harde lenkas kildefil «%s»\n"
+"%s"
+
+#, c-format
+msgid ""
+"Cannot create target hardlink \"%s\"\n"
+"%s"
+msgstr ""
+"Klarte ikke opprette den harde lenkas målfil «%s»\n"
+"%s"
+
+#, c-format
+msgid "Cannot create target hardlink \"%s\""
+msgstr "Klarte ikke opprette den harde lenkas målfil «%s»"
 
 #, c-format
 msgid ""
 "Cannot read source link \"%s\"\n"
 "%s"
 msgstr ""
+"Klarte ikke lese lenkas kilde «%s»\n"
+"%s"
 
 msgid ""
-"Cannot make stable symlinks acrossnon-local filesystems:\n"
+"Cannot make stable symlinks across non-local filesystems:\n"
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
+"Symlenker kan ikke peke til eksterne filsystemer:\n"
+"\n"
+"Innstillingen «Fiks symlenker» slås av"
 
 #, c-format
 msgid ""
 "Cannot create target symlink \"%s\"\n"
 "%s"
 msgstr ""
-
-msgid "Ski&p all"
-msgstr ""
-
-msgid "&Retry"
-msgstr "&Prøv igjen"
-
-#, c-format
-msgid ""
-"Directory \"%s\" not empty.\n"
-"Delete it recursively?"
-msgstr ""
-
-#, c-format
-msgid ""
-"Background process:\n"
-"Directory \"%s\" not empty.\n"
-"Delete it recursively?"
-msgstr ""
-
-msgid "Non&e"
-msgstr "ing&En"
-
-#, c-format
-msgid ""
-"Cannot stat file \"%s\"\n"
+"Klarte ikke opprette symlenkas mål «%s»\n"
 "%s"
+
+#, c-format
+msgid ""
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same directory"
 msgstr ""
+"«%s»\n"
+"og\n"
+"«%s»\n"
+"er samme mappe"
 
 #, c-format
 msgid ""
@@ -2421,109 +2704,188 @@ msgid ""
 "\"%s\"\n"
 "are the same file"
 msgstr ""
+"«%s»\n"
+"og\n"
+"«%s»\n"
+"er samme fil"
 
-#, c-format
-msgid "Cannot overwrite directory \"%s\""
-msgstr ""
+msgid "Ski&p all"
+msgstr "H&opp over alle"
 
 #, c-format
 msgid ""
-"Cannot move file \"%s\" to \"%s\"\n"
-"%s"
+"Directory \"%s\" not empty.\n"
+"Delete it recursively?"
 msgstr ""
+"Mappa «%s» er ikke tom.\n"
+"Vil du slette den med alt innhold?"
+
+#, c-format
+msgid ""
+"Background process:\n"
+"Directory \"%s\" not empty.\n"
+"Delete it recursively?"
+msgstr ""
+"Bakgrunnsprosess:\n"
+"Mappa «%s» er ikke tom.\n"
+"VIl du slette den med alt innhold?"
+
+msgid "Non&e"
+msgstr "&Ingen"
 
 #, c-format
 msgid ""
 "Cannot remove file \"%s\"\n"
 "%s"
 msgstr ""
+"Klarte ikke slette fila «%s»\n"
+"%s"
 
 #, c-format
 msgid ""
-"Cannot delete file \"%s\"\n"
+"Cannot stat file \"%s\"\n"
 "%s"
 msgstr ""
+"stat() mislyktes for fila «%s»\n"
+"%s"
+
+#, c-format
+msgid "Cannot overwrite directory \"%s\""
+msgstr "Klarte ikke overskrive mappa «%s»"
+
+#, c-format
+msgid ""
+"Cannot move file \"%s\" to \"%s\"\n"
+"%s"
+msgstr ""
+"Klarte ikke flytte fila «%s» til «%s»\n"
+"%s"
 
 #, c-format
 msgid ""
 "Cannot remove directory \"%s\"\n"
 "%s"
 msgstr ""
+"Klarte ikke slette mappa «%s»\n"
+"%s"
 
 #, c-format
 msgid ""
 "Cannot overwrite directory \"%s\"\n"
 "%s"
 msgstr ""
+"Klarte ikke overskrive mappa «%s»\n"
+"%s"
+
+#, c-format
+msgid ""
+"Cannot overwrite file \"%s\"\n"
+"%s"
+msgstr ""
+"Klarte ikke overskrive fila «%s»\n"
+"%s"
+
+#, c-format
+msgid ""
+"Cannot move directory \"%s\" to \"%s\"\n"
+"%s"
+msgstr ""
+"Klarte ikke flytte mappa «%s» til «%s»\n"
+"%s"
+
+msgid "Cannot operate on \"..\"!"
+msgstr "Kan ikke gjøre noe med «..»."
 
 #, c-format
 msgid ""
 "Cannot stat source file \"%s\"\n"
 "%s"
 msgstr ""
+"stat() mislyktes for kildefila «%s»\n"
+"%s"
 
 #, c-format
 msgid ""
 "Cannot create special file \"%s\"\n"
 "%s"
 msgstr ""
+"Klarte ikke opprette spesialfila «%s»\n"
+"%s"
 
 #, c-format
 msgid ""
 "Cannot chown target file \"%s\"\n"
 "%s"
 msgstr ""
+"chown mislyktes for fila «%s»\n"
+"%s"
 
 #, c-format
 msgid ""
 "Cannot chmod target file \"%s\"\n"
 "%s"
 msgstr ""
+"chmod mislyktes for fila «%s»\n"
+"%s"
 
 #, c-format
 msgid ""
 "Cannot open source file \"%s\"\n"
 "%s"
 msgstr ""
+"Klarte ikke åpne kildefila «%s»\n"
+"%s"
 
 msgid "Reget failed, about to overwrite file"
-msgstr ""
+msgstr "Klarte ikke flette og skal nå overskrive fila"
 
 #, c-format
 msgid ""
 "Cannot fstat source file \"%s\"\n"
 "%s"
 msgstr ""
+"fstat() mislyktes for kildefila «%s»\n"
+"%s"
 
 #, c-format
 msgid ""
 "Cannot create target file \"%s\"\n"
 "%s"
 msgstr ""
+"Klarte ikke opprette målfila «%s»\n"
+"%s"
 
 #, c-format
 msgid ""
 "Cannot fstat target file \"%s\"\n"
 "%s"
 msgstr ""
+"fstat() mislyktes for målfila «%s»\n"
+"%s"
 
 #, c-format
 msgid ""
 "Cannot preallocate space for target file \"%s\"\n"
 "%s"
 msgstr ""
+"Klarte ikke forhåndsreserve plass til målfila «%s»\n"
+"%s"
 
 #, c-format
 msgid ""
 "Cannot read source file \"%s\"\n"
 "%s"
 msgstr ""
+"Klarte ikke lese kildefila «%s»\n"
+"%s"
 
 #, c-format
 msgid ""
 "Cannot write target file \"%s\"\n"
 "%s"
 msgstr ""
+"Klarte ikke skrive målfila «%s»\n"
+"%s"
 
 msgid "(stalled)"
 msgstr "(venter)"
@@ -2533,15 +2895,19 @@ msgid ""
 "Cannot close source file \"%s\"\n"
 "%s"
 msgstr ""
+"Klarte ikke lukke kildefila «%s»\n"
+"%s"
 
 #, c-format
 msgid ""
 "Cannot close target file \"%s\"\n"
 "%s"
 msgstr ""
+"Klarte ikke lukke målfila «%s»\n"
+"%s"
 
 msgid "Incomplete file was retrieved. Keep it?"
-msgstr "Ikke komplett fil ble hentet. Beholde den?"
+msgstr "Leste ufullstendig fil. Beholde den?"
 
 msgid "&Keep"
 msgstr "&Behold"
@@ -2551,80 +2917,69 @@ msgid ""
 "Cannot stat source directory \"%s\"\n"
 "%s"
 msgstr ""
+"stat() mislyktes for kildemappa «%s»\n"
+"%s"
 
 #, c-format
 msgid ""
 "Source \"%s\" is not a directory\n"
 "%s"
 msgstr ""
+"Kilden «%s» er ikke en mappe\n"
+"%s"
 
 #, c-format
 msgid ""
 "Cannot copy cyclic symbolic link\n"
 "\"%s\""
 msgstr ""
+"Klarte ikke kopiere syklisk symlenke\n"
+"«%s»"
 
 #, c-format
 msgid ""
 "Destination \"%s\" must be a directory\n"
 "%s"
 msgstr ""
+"Målet «%s» må være en mappe\n"
+"%s"
 
 #, c-format
 msgid ""
 "Cannot create target directory \"%s\"\n"
 "%s"
 msgstr ""
+"Klarte ikke opprette målmappa «%s»\n"
+"%s"
 
 #, c-format
 msgid ""
 "Cannot chown target directory \"%s\"\n"
 "%s"
 msgstr ""
-
-#, c-format
-msgid ""
-"\"%s\"\n"
-"and\n"
-"\"%s\"\n"
-"are the same directory"
-msgstr ""
-
-#, c-format
-msgid ""
-"Cannot overwrite file \"%s\"\n"
+"chown mislyktes for målmappa «%s»\n"
 "%s"
-msgstr ""
 
 #, c-format
-msgid ""
-"Cannot move directory \"%s\" to \"%s\"\n"
-"%s"
-msgstr ""
-
-#, c-format
-msgid "Directories: %zd, total size: %s"
-msgstr ""
-
-msgid "Cannot operate on \"..\"!"
-msgstr ""
+msgid "Directories: %zu, total size: %s"
+msgstr "Mapper: %zu, total størrelse: %s"
 
 msgid "Sorry, I could not put the job in background"
-msgstr ""
+msgstr "Klarte ikke legge jobben i bakgrunnen"
 
 msgid "S&uspend"
-msgstr ""
+msgstr "&Pause"
 
 msgid "Con&tinue"
-msgstr "Fortsett"
+msgstr "&Fortsett"
 
 #, c-format
 msgid "%d:%02d.%02d"
-msgstr ""
+msgstr "%d:%02d.%02d"
 
 #, c-format
 msgid "ETA %s"
-msgstr ""
+msgstr "Gjenstår %s"
 
 #, c-format
 msgid "%.2f MB/s"
@@ -2638,72 +2993,73 @@ msgstr "%.2f KB/s"
 msgid "%ld B/s"
 msgstr "%ld B/s"
 
-msgid "Target file already exists!"
-msgstr ""
+msgid "New     :"
+msgstr "Ny      :"
 
-#, c-format
-msgid "New     : %s, size %s"
-msgstr ""
+msgid "Existing:"
+msgstr "Eksisterende:"
 
-#, c-format
-msgid "Existing: %s, size %s"
-msgstr ""
-
-msgid "Overwrite this target?"
-msgstr "Overskriv dette målet?"
+msgid "Overwrite this file?"
+msgstr "Overskriv denne fila?"
 
 msgid "A&ppend"
-msgstr "legg til"
+msgstr "Legg &til"
 
 msgid "&Reget"
-msgstr "Hent igjen"
+msgstr "&Flett"
 
-msgid "Overwrite all targets?"
-msgstr "Overskriv alle mål?"
+msgid "Overwrite all files?"
+msgstr "Overskriv alle filene?"
 
-msgid "&Update"
-msgstr "Oppdater"
+msgid "Don't overwrite with &zero length file"
+msgstr "Ikke overskriv hvis kildefila har lengde &0"
 
-msgid "If &size differs"
-msgstr "hvis størrelsen er forskjellig"
+msgid "&Older"
+msgstr "&Eldre"
+
+msgid "S&maller"
+msgstr "&Mindre"
+
+msgid "&Size differs"
+msgstr "Størrelse forskjelli&g"
 
 msgid "File exists"
-msgstr ""
+msgstr "Fila finnes"
 
 msgid "Background process: File exists"
-msgstr ""
+msgstr "Bakgrunnsprosess: Fila finnes"
 
 #, c-format
 msgid "Files processed: %zu/%zu"
-msgstr ""
+msgstr "Filer behandlet: %zu/%zu"
 
 #, c-format
 msgid "Files processed: %zu"
-msgstr ""
+msgstr "Filer behandlet: %zu"
 
 #, c-format
 msgid "Time: %s %s"
-msgstr ""
+msgstr "Tid: %s %s"
 
 #, c-format
 msgid "Time: %s %s (%s)"
-msgstr ""
+msgstr "Tid: %s %s (%s)"
 
 #, c-format
 msgid "Time: %s"
-msgstr ""
+msgstr "Tid: %s"
 
 #, c-format
 msgid "Time: %s (%s)"
-msgstr ""
+msgstr "Tid: %s (%s)"
 
 #, c-format
 msgid " Total: %s "
-msgstr ""
+msgstr " Totalt: %s "
 
 #, c-format
 msgid " Total: %s/%s "
-msgstr ""
+msgstr " Totalt: %s/%s "
 
 msgid "Source"
 msgstr "Kilde"
@@ -2712,90 +3068,90 @@ msgid "Target"
 msgstr "Mål"
 
 msgid "Deleting"
-msgstr ""
+msgstr "Sletter"
 
 msgid "&Using shell patterns"
-msgstr "bruker skallmønstre"
+msgstr "Bruk skallm&ønstre"
 
 msgid "to:"
 msgstr "til:"
 
 msgid "Follow &links"
-msgstr ""
+msgstr "Følg &lenker"
 
 msgid "Preserve &attributes"
-msgstr ""
+msgstr "Bevar a&ttributter"
 
 msgid "Di&ve into subdir if exists"
-msgstr ""
+msgstr "Søk i alle &undermapper"
 
 msgid "&Stable symlinks"
-msgstr ""
+msgstr "&Fiks symlenker"
 
 msgid "&Background"
-msgstr "Bakgrunn"
+msgstr "&Bakgrunn"
 
 #, c-format
 msgid "Invalid source pattern '%s'"
-msgstr ""
+msgstr "ugyldig kildemønster «%s»"
 
 msgid "&Chdir"
-msgstr "Skift katalog"
+msgstr "&Bytt mappe"
 
 msgid "&Again"
-msgstr "Igjen"
+msgstr "&Nytt søk"
 
 msgid "Pane&lize"
-msgstr "Paneliser"
+msgstr "&Legg til i panel"
 
 msgid "&View - F3"
-msgstr "Se på - F3"
+msgstr "Vis - F3"
 
 msgid "&Edit - F4"
 msgstr "Rediger - F4"
 
 #, c-format
-msgid "Found: %ld"
-msgstr ""
+msgid "Found: %lu"
+msgstr "Fant: %lu"
 
 msgid "Malformed regular expression"
-msgstr ""
+msgstr "Ugyldig regulært uttrykk"
 
 msgid "File name:"
-msgstr ""
+msgstr "Filnavn:"
 
 msgid "&Find recursively"
-msgstr ""
+msgstr "Søk i alle &undermapper"
 
 msgid "S&kip hidden"
-msgstr ""
+msgstr "Hopp over &skjulte"
 
 msgid "Content:"
-msgstr ""
+msgstr "Innhold:"
 
 msgid "Sea&rch for content"
-msgstr ""
+msgstr "Søk etter innhold"
 
 msgid "Case sens&itive"
-msgstr ""
+msgstr "Sk&ill store/små bokstaver"
 
 msgid "A&ll charsets"
-msgstr ""
+msgstr "Alle tegn&kodinger"
 
 msgid "Fir&st hit"
-msgstr ""
+msgstr "&Første treff"
 
 msgid "&Tree"
-msgstr "Tre"
+msgstr "&Tre"
 
 msgid "Find File"
 msgstr "Finn fil"
 
 msgid "Start at:"
-msgstr "Start ved:"
+msgstr "Start i:"
 
 msgid "Ena&ble ignore directories:"
-msgstr ""
+msgstr "&Hopp over mapper:"
 
 #, c-format
 msgid "Grepping in %s"
@@ -2805,34 +3161,42 @@ msgid "Finished"
 msgstr "Ferdig"
 
 #, c-format
-msgid "Finished (ignored %zd directory)"
-msgid_plural "Finished (ignored %zd directories)"
-msgstr[0] ""
-msgstr[1] ""
+msgid "Finished (ignored %zu directory)"
+msgid_plural "Finished (ignored %zu directories)"
+msgstr[0] "Ferdig (hoppet over %zu mappe)"
+msgstr[1] "Ferdig (hoppet over %zu mapper)"
+
+#, c-format
+msgid "Find File: \"%s\". Content: \"%s\""
+msgstr "Finn fil: «%s». Innhold: «%s»"
+
+#, c-format
+msgid "Find File: \"%s\""
+msgstr "Finn fil: «%s»"
 
 msgid "Searching"
 msgstr "Søker"
 
 msgid "Change &to"
-msgstr ""
+msgstr "&Bytt til"
 
 msgid "&Free VFSs now"
-msgstr ""
+msgstr "&Koble fra VFS"
 
 msgid "&Refresh"
-msgstr ""
+msgstr "&Oppdater"
 
 msgid "&Add current"
-msgstr "&Legg til denne"
+msgstr "Legg til &gjeldende"
 
 msgid "&Up"
 msgstr "&Opp"
 
 msgid "New &group"
-msgstr ""
+msgstr "Ny gr&uppe"
 
 msgid "New &entry"
-msgstr ""
+msgstr "Ny oppf&øring"
 
 msgid "&Insert"
 msgstr "&Sett inn"
@@ -2844,67 +3208,71 @@ msgid "Subgroup - press ENTER to see list"
 msgstr "Undergruppe - trykk LINJESKIFT for å se listen"
 
 msgid "Active VFS directories"
-msgstr "Aktive VFS kataloger"
+msgstr "Tilgjengelige VFS-mapper"
 
 msgid "Directory hotlist"
-msgstr "Favorittliste for kataloger"
+msgstr "Favorittmapper"
 
 msgid "Top level group"
-msgstr ""
+msgstr "Øverste gruppenivå"
 
 msgid "Directory path"
-msgstr "Katalogsti"
+msgstr "Mappesti"
 
 #, c-format
 msgid "Moving %s"
 msgstr "Flytter %s"
 
 msgid "Directory label"
-msgstr "Katalogetikett"
+msgstr "Mappeetikett"
 
 msgid "&Append"
 msgstr "&Legg til"
 
 msgid "New hotlist entry"
-msgstr "Ny oppføring i favorittlisten"
+msgstr "Ny oppføring i favorittlista"
 
 msgid "Directory label:"
-msgstr ""
+msgstr "Mappeetikett:"
 
 msgid "Directory path:"
-msgstr ""
+msgstr "Mappesti:"
 
 msgid "New hotlist group"
-msgstr ""
+msgstr "Ny gruppe i favorittlista"
 
 msgid "Name of new group:"
-msgstr ""
+msgstr "Nytt gruppenavn:"
 
 #, c-format
 msgid "Are you sure you want to remove entry \"%s\"?"
-msgstr ""
+msgstr "Vil du slette oppføringa «%s»?"
 
 #, c-format
 msgid ""
 "Group \"%s\" is not empty.\n"
 "Remove it?"
 msgstr ""
+"Gruppa «%s» er ikke tom.\n"
+"Vil du fjerne den?"
 
 msgid "Hotlist Load"
-msgstr ""
+msgstr "Laste favorittliste"
 
 #, c-format
 msgid ""
 "MC was unable to write %s file,\n"
 "your old hotlist entries were not deleted"
 msgstr ""
+"Klarte ikke skrive til %s.\n"
+"De gamle oppføringene ble beholdt."
 
 #, c-format
 msgid "Label for \"%s\":"
-msgstr "Etikett for \"%s\":"
+msgstr "Etikett for «%s»:"
 
 msgid "Add to hotlist"
-msgstr ""
+msgstr "Legg til i favorittliste"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -2915,28 +3283,28 @@ msgid "File: %s"
 msgstr "Fil: %s"
 
 msgid "No node information"
-msgstr "Ingen nodeinformasjon"
+msgstr "Mangler nodeinformasjon"
 
 msgid "Free nodes:"
-msgstr ""
+msgstr "Led. noder:"
 
 msgid "No space information"
-msgstr "Ingen plassinformasjon"
+msgstr "Mangler info om ledig kapasitet"
 
 #, c-format
 msgid "Free space: %s/%s (%d%%)"
-msgstr ""
+msgstr "Ledig kap.: %s/%s (%d%%)"
 
 #, c-format
 msgid "Type:       %s"
-msgstr ""
+msgstr "Type:       %s"
 
 msgid "non-local vfs"
 msgstr "ikke-lokalt vfs"
 
 #, c-format
 msgid "Device:     %s"
-msgstr ""
+msgstr "Enhet:      %s"
 
 #, c-format
 msgid "Filesystem: %s"
@@ -2944,220 +3312,236 @@ msgstr "Filsystem:  %s"
 
 #, c-format
 msgid "Accessed:   %s"
-msgstr ""
+msgstr "Tilgang:    %s"
 
 #, c-format
 msgid "Modified:   %s"
-msgstr ""
+msgstr "Endret:     %s"
 
 #. TRANSLATORS: Time of last status change as in stat(2) man.
 #, c-format
 msgid "Changed:    %s"
-msgstr ""
+msgstr "Statusendr: %s"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
-msgstr ""
+msgstr "Enh. type:  større %lu, mindre %lu"
 
 #, c-format
 msgid "Size:       %s"
-msgstr ""
+msgstr "Størrelse:  %s"
 
 #, c-format
-msgid " (%ld block)"
-msgid_plural " (%ld blocks)"
-msgstr[0] ""
-msgstr[1] ""
+msgid " (%lu block)"
+msgid_plural " (%lu blocks)"
+msgstr[0] " (%lu blokk)"
+msgstr[1] " (%lu blokker)"
 
 #, c-format
 msgid "Owner:      %s/%s"
-msgstr ""
+msgstr "Eier:       %s/%s"
 
 #, c-format
 msgid "Links:      %d"
-msgstr ""
+msgstr "Lenker:     %d"
+
+msgid "Attributes: not supported"
+msgstr "Attributter: Støttes ikke"
+
+#, c-format
+msgid "Attributes: %s"
+msgstr "Attributter: %s"
+
+msgid "Attributes: unavailable"
+msgstr "Attributter: Utilgjengelig"
 
 #, c-format
 msgid "Mode:       %s (%04o)"
-msgstr ""
+msgstr "Rettigh.:   %s (%04o)"
 
 #, c-format
 msgid "Location:   %Xh:%Xh"
-msgstr ""
+msgstr "Adresse:    %Xh:%Xh"
 
 msgid "&Equal split"
-msgstr "lik deling"
+msgstr "Lik &fordeling"
 
 msgid "&Menubar visible"
-msgstr ""
+msgstr "Vis &menylinje"
 
 msgid "Command &prompt"
-msgstr ""
+msgstr "Vis &kommandolinje"
 
 msgid "&Keybar visible"
-msgstr "Tastaturlinje synlig"
+msgstr "Vis F&1-F10-linje"
 
 msgid "H&intbar visible"
-msgstr ""
+msgstr "Vis &hintlinje"
 
 msgid "&XTerm window title"
-msgstr ""
+msgstr "Vindustittel i &XTerm"
 
 msgid "&Show free space"
-msgstr ""
+msgstr "Vis ledig &diskplass"
 
 msgid "Panel split"
-msgstr ""
+msgstr "Panelsplitting"
 
 msgid "Console output"
-msgstr ""
+msgstr "Utdata til konsoll"
 
 msgid "&Vertical"
-msgstr "Vertikal"
+msgstr "&Loddrett"
 
 msgid "&Horizontal"
-msgstr "Horisontal"
+msgstr "&Vannrett"
 
 msgid "Output lines:"
-msgstr ""
+msgstr "Utdatalinjer:"
 
 msgid "Layout"
-msgstr "Utseende"
+msgstr "Utforming"
 
 msgid "File listin&g"
-msgstr ""
+msgstr "&List ut filer"
 
 msgid "&Quick view"
-msgstr ""
+msgstr "&Hurtigvis"
 
 msgid "&Info"
-msgstr ""
+msgstr "&Informasjon"
 
-msgid "&Listing mode..."
-msgstr "&Listemodus..."
+msgid "&Listing format..."
+msgstr "&Utlistingsformat ..."
 
 msgid "&Sort order..."
-msgstr "&Sorteringsrekkefølge..."
+msgstr "Sorterings&rekkefølge ..."
 
 msgid "&Filter..."
-msgstr "&Filter..."
+msgstr "&Filtrer ..."
 
 msgid "&Encoding..."
-msgstr ""
+msgstr "Tegn&koding for filnavn ..."
 
 msgid "FT&P link..."
-msgstr "FT&P kobling..."
+msgstr "Koble til FT&P ..."
 
 msgid "S&hell link..."
-msgstr "S&kall-kobling..."
+msgstr "Koble til &skall ..."
 
 msgid "S&FTP link..."
-msgstr ""
+msgstr "K&oble til SFTP ..."
 
 msgid "SM&B link..."
-msgstr "SM&B-kobling..."
+msgstr "Koble til SM&B ..."
 
 msgid "Paneli&ze"
-msgstr ""
+msgstr "&Vis lagt til i panel"
 
 msgid "&Rescan"
-msgstr ""
+msgstr "Opp&dater"
 
 msgid "&View"
-msgstr ""
+msgstr "&Vis"
 
 msgid "Vie&w file..."
-msgstr ""
+msgstr "V&is fil ..."
 
 msgid "&Filtered view"
-msgstr ""
+msgstr "Vis &filtrert"
 
 msgid "&Copy"
-msgstr ""
+msgstr "&Kopier"
 
 msgid "C&hmod"
-msgstr ""
+msgstr "Chm&od"
 
 msgid "&Link"
-msgstr ""
+msgstr "&Lag lenke"
 
 msgid "&Symlink"
-msgstr ""
+msgstr "Lag sym&bolsk lenke"
 
 msgid "Relative symlin&k"
-msgstr ""
+msgstr "Lag relativ s&ymlenke"
 
 msgid "Edit s&ymlink"
-msgstr ""
+msgstr "Redi&ger symlenke"
 
 msgid "Ch&own"
-msgstr ""
+msgstr "Cho&wn"
 
 msgid "&Advanced chown"
-msgstr ""
+msgstr "&Avansert chown"
+
+msgid "Cha&ttr"
+msgstr "Cha&ttr"
 
 msgid "&Rename/Move"
-msgstr ""
+msgstr "&Endre navn/flytt"
 
 msgid "&Mkdir"
-msgstr ""
+msgstr "Lag &mappe"
 
 msgid "&Quick cd"
-msgstr ""
+msgstr "Rask &cd"
 
 msgid "Select &group"
-msgstr ""
+msgstr "Velg gr&uppe"
 
 msgid "U&nselect group"
-msgstr ""
+msgstr "Fravelg gru&ppe"
 
 msgid "&Invert selection"
-msgstr ""
+msgstr "I&nverter utvalg"
 
 msgid "E&xit"
-msgstr ""
+msgstr "Avslu&tt"
 
 msgid "&User menu"
-msgstr ""
+msgstr "&Brukermeny"
 
 msgid "&Directory tree"
-msgstr "Katalogtre"
+msgstr "Mappe&tre"
 
 msgid "&Find file"
-msgstr ""
+msgstr "F&inn fil"
 
 msgid "S&wap panels"
-msgstr ""
+msgstr "Bytt &om paneler"
 
 msgid "Switch &panels on/off"
-msgstr ""
+msgstr "&Paneler av/på"
 
 msgid "&Compare directories"
-msgstr ""
+msgstr "Sammenlign &mapper"
 
 msgid "C&ompare files"
-msgstr ""
+msgstr "Sammenlign &filer"
 
 msgid "E&xternal panelize"
-msgstr ""
+msgstr "Legg til &eksternt i panel"
 
 msgid "Show directory s&izes"
-msgstr ""
+msgstr "Vis mappe&størrelser"
 
 msgid "Command &history"
-msgstr ""
+msgstr "&Kommandohistorikk"
+
+msgid "Viewed/edited files hi&story"
+msgstr "Historikk over viste/redigerte filer"
 
 msgid "Di&rectory hotlist"
-msgstr ""
+msgstr "F&avorittmapper"
 
 msgid "&Active VFS list"
-msgstr ""
+msgstr "Tilgjengelige &VFS"
 
 msgid "&Background jobs"
-msgstr ""
+msgstr "Bakgrunns&jobber"
 
 msgid "Screen lis&t"
-msgstr ""
+msgstr "Kjørende mo&duler"
 
 msgid "&Undelete files (ext2fs only)"
 msgstr "Gjenopprett filer (kun ext2fs)"
@@ -3166,81 +3550,81 @@ msgid "&Listing format edit"
 msgstr "Redigering av listeformat"
 
 msgid "Edit &extension file"
-msgstr "Redigering av utvidelsesfil"
+msgstr "Rediger &utvidelsesfil"
 
 msgid "Edit &menu file"
-msgstr "Menyfilredigering"
+msgstr "Rediger men&yfil"
 
 msgid "Edit hi&ghlighting group file"
-msgstr ""
+msgstr "Rediger uthevings&grupper"
 
 msgid "&Configuration..."
-msgstr "Konfigurasjon..."
+msgstr "&Oppsett ..."
 
 msgid "&Layout..."
-msgstr "Utseende."
+msgstr "&Utforming ..."
 
 msgid "&Panel options..."
-msgstr ""
+msgstr "&Panelinnstillinger ..."
 
 msgid "C&onfirmation..."
-msgstr ""
+msgstr "&Bekreftelser ..."
 
 msgid "&Appearance..."
-msgstr ""
+msgstr "&Presentasjonsdrakt ..."
 
 msgid "&Display bits..."
-msgstr "Tastaturdefinisjon..."
+msgstr "&Tegnkoding ..."
 
 msgid "&Virtual FS..."
-msgstr "Virtuelt FS..."
+msgstr "&Virtuelt FS ..."
 
 msgid "Panels:"
-msgstr ""
+msgstr "Paneler:"
 
 #, c-format
-msgid "You have %zd opened screen. Quit anyway?"
-msgid_plural "You have %zd opened screens. Quit anyway?"
-msgstr[0] ""
-msgstr[1] ""
+msgid "You have %zu opened screen. Quit anyway?"
+msgid_plural "You have %zu opened screens. Quit anyway?"
+msgstr[0] "Det er %zu åpen modul. Avslutte likevel?"
+msgstr[1] "Det er %zu åpne moduler. Avslutte likevel?"
 
 msgid "The Midnight Commander"
-msgstr ""
+msgstr "Midnight Commander"
 
 msgid "Do you really want to quit the Midnight Commander?"
-msgstr ""
+msgstr "VIl du avslutte Midnight Commander?"
 
 msgid "&Above"
-msgstr ""
+msgstr "&Øverst"
 
 msgid "&Left"
-msgstr ""
+msgstr "&Venstre"
 
 msgid "&Below"
-msgstr ""
+msgstr "&Nederst"
 
 msgid "&Right"
-msgstr ""
+msgstr "&Høyre"
 
 msgid "ButtonBar|Menu"
-msgstr ""
+msgstr "ButtonBar|Meny"
 
 msgid "ButtonBar|View"
-msgstr ""
+msgstr "ButtonBar|Vis"
 
 msgid "ButtonBar|RenMov"
-msgstr ""
+msgstr "ButtonBar|Flytt"
 
 msgid "ButtonBar|Mkdir"
-msgstr ""
+msgstr "ButtonBar|Mkdir"
 
 msgid "Memory exhausted!"
-msgstr ""
+msgstr "Gikk tom for minne."
 
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|u"
-msgstr ""
+msgstr "sort|u"
 
 msgid "&Unsorted"
 msgstr "&Usortert"
@@ -3248,7 +3632,7 @@ msgstr "&Usortert"
 #. TRANSLATORS: one single character to represent 'name' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|n"
-msgstr ""
+msgstr "sort|n"
 
 msgid "&Name"
 msgstr "&Navn"
@@ -3256,53 +3640,53 @@ msgstr "&Navn"
 #. TRANSLATORS: one single character to represent 'version' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|v"
-msgstr ""
+msgstr "sort|v"
 
 msgid "&Version"
-msgstr ""
+msgstr "&Versjon"
 
 #. TRANSLATORS: one single character to represent 'extension' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|e"
-msgstr ""
+msgstr "sort|f"
 
 msgid "E&xtension"
-msgstr ""
+msgstr "&Filetternavn"
 
 #. TRANSLATORS: one single character to represent 'size' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|s"
-msgstr ""
+msgstr "sort|s"
 
 msgid "&Size"
-msgstr "&Størrelse"
+msgstr "St&ørrelse"
 
 msgid "Block Size"
-msgstr ""
+msgstr "Blokkstørrelse"
 
 #. TRANSLATORS: one single character to represent 'Modify time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|m"
-msgstr ""
+msgstr "sort|e"
 
 msgid "&Modify time"
-msgstr "&Modifisert"
+msgstr "&Endret"
 
 #. TRANSLATORS: one single character to represent 'Access time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|a"
-msgstr ""
+msgstr "sort|t"
 
 msgid "&Access time"
-msgstr "&Aksessert"
+msgstr "&Tilgang"
 
 #. TRANSLATORS: one single character to represent 'Change time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|h"
-msgstr ""
+msgstr "sort|s"
 
 msgid "C&hange time"
-msgstr ""
+msgstr "&Statusendret"
 
 msgid "Perm"
 msgstr "Rett"
@@ -3313,7 +3697,7 @@ msgstr "Nl"
 #. TRANSLATORS: one single character to represent 'inode' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|i"
-msgstr ""
+msgstr "sort|i"
 
 msgid "&Inode"
 msgstr "&Inode"
@@ -3331,10 +3715,10 @@ msgid "Group"
 msgstr "Gruppe"
 
 msgid "[dev]"
-msgstr ""
+msgstr "[enh]"
 
 msgid "UP--DIR"
-msgstr "UP--DIR"
+msgstr "OVERMAP"
 
 msgid "SYMLINK"
 msgstr "SYMLENKE"
@@ -3348,38 +3732,41 @@ msgstr "<readlink feilet>"
 #, c-format
 msgid "%s in %d file"
 msgid_plural "%s in %d files"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%s i %d fil"
+msgstr[1] "%s i %d filer"
 
 msgid "Panelize"
-msgstr ""
+msgstr "Lagt til i panel"
 
 msgid "Unknown tag on display format:"
-msgstr ""
+msgstr "Ukjent etikett på utlistingsformat:"
 
 msgid "&Files only"
-msgstr ""
+msgstr "Kun &filer"
 
 msgid "&Case sensitive"
-msgstr ""
+msgstr "&Skill store/små bokstaver"
 
 msgid "Select"
-msgstr ""
+msgstr "Velg"
 
 msgid "Unselect"
-msgstr ""
+msgstr "Fravelg"
 
 msgid "Do you really want to execute?"
-msgstr ""
+msgstr "Vil du kjøre?"
+
+msgid "Cannot read directory contents"
+msgstr "Klarte ikke lese mappeinnhold"
 
 msgid "User supplied format looks invalid, reverting to default."
-msgstr "Oppgitt format ser ut til å være ugyldig. Går tilbake til standard."
+msgstr "Oppgitt format er ugyldig. Tilbakestiller til forvalgt."
 
 msgid "&Add new"
 msgstr "Legg til ny"
 
 msgid "External panelize"
-msgstr "Eksternt panel"
+msgstr "Legg til eksternt i panel"
 
 msgid "Other command"
 msgstr "Andre kommandoer"
@@ -3388,22 +3775,22 @@ msgid "Command"
 msgstr "Kommando"
 
 msgid "Add to external panelize"
-msgstr ""
+msgstr "Ny kommando"
 
 msgid "Enter command label:"
-msgstr ""
+msgstr "Angi kommandoetikett:"
 
 msgid "Cannot invoke command."
-msgstr "Kan ikke utføre kommando."
+msgstr "Klarte ikke kalle kommando."
 
 msgid "Pipe close failed"
-msgstr "Feil under lukking av rør"
+msgstr "Klarte ikke lukke rør"
 
 msgid "Cannot run external panelize in a non-local directory"
-msgstr ""
+msgstr "Kan ikke kjøre «Legg til eksternt i panel» i ikke-lokal mappe"
 
 msgid "Modified git files"
-msgstr ""
+msgstr "Endrede git-filer"
 
 msgid "Find rejects after patching"
 msgstr "Finn avviste etter patching"
@@ -3412,14 +3799,14 @@ msgid "Find *.orig after patching"
 msgstr "Finn *.orig etter patching"
 
 msgid "Find SUID and SGID programs"
-msgstr "Finn SUID og SGID programmer"
+msgstr "Finn SUID-og SGID-programmer"
 
 #, c-format
 msgid ""
 "Cannot open the %s file for writing:\n"
 "%s\n"
 msgstr ""
-"Kan ikke åpne filen %s for skriving:\n"
+"Klarte ikke åpne fila %s for skriving:\n"
 "%s\n"
 
 #, c-format
@@ -3435,102 +3822,60 @@ msgid ""
 "Cannot stat the destination\n"
 "%s"
 msgstr ""
+"stat() mislyktes for målet\n"
+"%s"
 
 #, c-format
 msgid "Delete %s?"
-msgstr ""
+msgstr "Slette %s?"
 
 msgid "ButtonBar|Static"
-msgstr ""
+msgstr "ButtonBar|Statik"
 
 msgid "ButtonBar|Dynamc"
-msgstr ""
+msgstr "ButtonBar|Dynamk"
 
 msgid "ButtonBar|Rescan"
-msgstr ""
+msgstr "ButtonBar|Oppdat"
 
 msgid "ButtonBar|Forget"
-msgstr ""
+msgstr "ButtonBar|Glem"
 
 msgid "ButtonBar|Rmdir"
-msgstr ""
+msgstr "ButtonBar|Rmdir"
 
 #, c-format
 msgid ""
 "Cannot write to the %s file:\n"
 "%s\n"
 msgstr ""
-"Kan ikke skrive til %s filen:\n"
+"Klarte ikke skrive til fila %s:\n"
 "%s\n"
 
-msgid "Debug"
-msgstr ""
-
-msgid "ERROR:"
-msgstr ""
-
-msgid "True:"
-msgstr ""
-
-msgid "False:"
-msgstr ""
-
-msgid "Error calling program"
-msgstr ""
-
-msgid "Warning -- ignoring file"
-msgstr ""
-
-#, c-format
-msgid ""
-"File %s is not owned by root or you or is world writable.\n"
-"Using it may compromise your security"
-msgstr ""
-"Filen %s er ikke eid av root eller er skrivbar for alle.\n"
-"Bruk av den kan kompromittere sikkerheten"
-
-msgid "Format error on file Extensions File"
-msgstr ""
-
-#, c-format
-msgid "The %%var macro has no default"
-msgstr ""
-
-#, c-format
-msgid "The %%var macro has no variable"
-msgstr ""
-
-#, c-format
-msgid "No suitable entries found in %s"
-msgstr ""
-
-msgid "User menu"
-msgstr ""
-
 msgid "Help file format error\n"
-msgstr ""
+msgstr "Formatfeil i hjelpefila\n"
 
 msgid "Internal bug: Double start of link area"
-msgstr ""
+msgstr "Programvarefeil: Lenkeområdet har dobbel start"
 
 #, c-format
 msgid "Cannot find node %s in help file"
-msgstr ""
+msgstr "Fant ikke noden %s i hjelpefila"
 
 msgid "Help"
 msgstr "Hjelp"
 
 msgid "ButtonBar|Index"
-msgstr ""
+msgstr "ButtonBar|Indeks"
 
 msgid "ButtonBar|Prev"
-msgstr ""
+msgstr "ButtonBar|Forrig"
 
 msgid "Learn keys"
 msgstr "Lær taster"
 
 msgid "Teach me a key"
-msgstr ""
+msgstr "Lær meg en tast"
 
 #, c-format
 msgid ""
@@ -3543,21 +3888,20 @@ msgid ""
 "If you want to escape, press a single Escape key\n"
 "and wait as well."
 msgstr ""
-"Vær snill og trykk %s\n"
+"Trykk %s\n"
 "og vent til denne meldingen forsvinner.\n"
 "\n"
-"Trykk så igjen fpr å se om OK kommer opp\n"
-"ved siden av knappen.\n"
+"Trykk den deretter igjen for å se om\n"
+"«OK» vises ved siden av knappen dens.\n"
 "\n"
-"Hvis du vil gå ut igjen, trykk en enkelt Escape tast\n"
-"og vent da også."
+"Trykk Escape og vent litt for å avbryte."
 
 msgid "Cannot accept this key"
-msgstr ""
+msgstr "Kan ikke godta denne tasten"
 
 #, c-format
 msgid "You have entered \"%s\""
-msgstr ""
+msgstr "Du tastet «%s»"
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -3571,13 +3915,13 @@ msgstr ""
 "allerede virker fint. Det er bra."
 
 msgid "&Discard"
-msgstr "forkast"
+msgstr "&Forkast"
 
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
 msgstr ""
-"Flott! Du har en komplett terminaldatabase!\n"
+"Du har en komplett terminaldatabase.\n"
 "Alle tastene virker fint."
 
 msgid ""
@@ -3585,15 +3929,29 @@ msgid ""
 "which keys are not marked with OK. Press space on the missing\n"
 "key, or click with the mouse to define it. Move around with Tab."
 msgstr ""
+"Trykk alle tastene som er nevnt over. Sjekk etterpå hvilke taster som\n"
+"ikke er markert med OK. Trykk mellomrom på den manglende tasten, eller\n"
+"velg den med musa for å definere den. Flytt rundt med tabulator."
 
 #, c-format
 msgid ""
 "Failed to run:\n"
 "%s\n"
 msgstr ""
+"Klarte ikke kjøre:\n"
+"%s\n"
 
 msgid "Home directory path is not absolute"
+msgstr "Stien til hjemmemappa er ikke absolutt"
+
+msgid ""
+"GNU Midnight Commander\n"
+"is already running on this terminal.\n"
+"Subshell support will be disabled."
 msgstr ""
+"GNU Midnight Commander kjører\n"
+"allerede i denne terminalen.\n"
+"Slår av støtte for underskall."
 
 #, c-format
 msgid ""
@@ -3601,9 +3959,12 @@ msgid ""
 "Failed while close:\n"
 "%s\n"
 msgstr ""
+"\n"
+"Mislyktes under lukking:\n"
+"%s\n"
 
 msgid "Choose codepage"
-msgstr ""
+msgstr "Velg tegnkoding"
 
 msgid "-  < No translation >"
 msgstr "- < Ingen oversettelse >"
@@ -3619,102 +3980,158 @@ msgid ""
 "Cannot save file %s:\n"
 "%s"
 msgstr ""
-
-msgid ""
-"GNU Midnight Commander is already\n"
-"running on this terminal.\n"
-"Subshell support will be disabled."
-msgstr ""
+"Klarte ikke lagre fila %s:\n"
+"%s"
 
 #, c-format
 msgid "Cannot open named pipe %s\n"
-msgstr "Kunne ikke åpne navngitt rør %s\n"
+msgstr "Klarte ikke åpne navngitt rør %s\n"
 
 msgid "The shell is still active. Quit anyway?"
-msgstr ""
+msgstr "Skallet er fortsatt aktivt. Avslutte likevel?"
 
 #, c-format
 msgid "Warning: Cannot change to %s.\n"
-msgstr "Advarsel: Kunne ikke skifte til %s.\n"
+msgstr "Advarsel: Klarte ikke bytte til %s.\n"
 
-msgid "Using the S-Lang library with terminfo database\n"
-msgstr ""
+msgid "With builtin Editor and Aspell support"
+msgstr "Med innebygget tekstprogram og Aspell-støtte"
 
-msgid "Using the ncurses library\n"
-msgstr ""
+msgid "With builtin Editor"
+msgstr "Med innebygget tekstprogram"
 
-msgid "Using the ncursesw library\n"
-msgstr ""
+msgid "With optional subshell support"
+msgstr "Med valgfri underskall-støtte"
 
-msgid "With builtin Editor\n"
-msgstr "Med innebygget editor\n"
+msgid "With subshell support as default"
+msgstr "Med forvalgt underskall-støtte"
 
-msgid "With optional subshell support\n"
-msgstr ""
+msgid "With support for background operations"
+msgstr "Med støtte for bakgrunnsoperasjoner"
 
-msgid "With subshell support as default\n"
-msgstr ""
+msgid "With mouse support on xterm and Linux console"
+msgstr "Med musestøtte i xterm og Linux-konsollen"
 
-msgid "With support for background operations\n"
-msgstr "Med støtte for bakgrunnsoperasjoner\n"
+msgid "With mouse support on xterm"
+msgstr "Med musestøtte i xterm"
 
-msgid "With mouse support on xterm and Linux console\n"
-msgstr "Med musstøtte i xterm og på Linux konsollet\n"
+msgid "With support for X11 events"
+msgstr "Med støtte for X11-hendelser"
 
-msgid "With mouse support on xterm\n"
-msgstr "Med musstøtte i xterm\n"
+msgid "With internationalization support"
+msgstr "Med støtte for lokaltilpassing"
 
-msgid "With support for X11 events\n"
-msgstr "Med støtte for X11-hendelser\n"
+msgid "With multiple codepages support"
+msgstr "Med støtte for flere tegnkodinger"
 
-msgid "With internationalization support\n"
-msgstr "Med støtte for internasjonalisering\n"
-
-msgid "With multiple codepages support\n"
-msgstr "Med støtte for flere kodinger\n"
+msgid "With ext2fs attributes support"
+msgstr "Støtter ext2fs-attributter"
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"
-msgstr ""
+msgstr "Bygget med GLib %d.%d.%d\n"
 
 #, c-format
+msgid "Built with S-Lang %s with terminfo database\n"
+msgstr "Bruker S-Lang %s med terminfo-database\n"
+
+#, c-format
+msgid "Built with ncurses %s\n"
+msgstr "Bruker ncurses %s\n"
+
+msgid "Built with ncurses (unknown version)"
+msgstr "Bruker ncurses (ukjent versjon)"
+
+#, c-format
+msgid "Built with ncursesw %s\n"
+msgstr "Bruker ncursesw %s\n"
+
+msgid "Built with ncursesw (unknown version)"
+msgstr "Bruker ncursesw (ukjent versjon)"
+
 msgid "Virtual File Systems:"
-msgstr ""
+msgstr "Virtuelle filsystem:"
 
-#, c-format
 msgid "Data types:"
-msgstr ""
+msgstr "Datatyper:"
 
-msgid "Root directory:"
-msgstr ""
+msgid "Home directory:"
+msgstr "Hjemmemappe:"
+
+msgid "Profile root directory:"
+msgstr "Profilrotmappe:"
 
 msgid "System data"
-msgstr ""
+msgstr "Systemdata"
 
 msgid "Config directory:"
-msgstr ""
+msgstr "Oppsettsmappe:"
 
 msgid "Data directory:"
-msgstr ""
+msgstr "Datamappe:"
 
 msgid "File extension handlers:"
-msgstr ""
+msgstr "Håndtering av filetternavn:"
 
 msgid "VFS plugins and scripts:"
-msgstr ""
+msgstr "Programtillegg og skript for VFS:"
 
 msgid "User data"
-msgstr ""
+msgstr "Brukerdata"
 
 msgid "Cache directory:"
+msgstr "Hurtiglagermappe:"
+
+msgid "Debug"
+msgstr "Feilsøking"
+
+msgid "ERROR:"
+msgstr "FEIL:"
+
+msgid "True:"
+msgstr "Sann:"
+
+msgid "False:"
+msgstr "Usann:"
+
+msgid "Error calling program"
+msgstr "Klarte ikke kalle program"
+
+msgid "Warning -- ignoring file"
+msgstr "Advarsel -- ignorerer fil"
+
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
 msgstr ""
+"Verken du eller root eier fila %s, eller alle kan skrive til den.\n"
+"Bruk den på eget sikkerhetsansvar."
+
+msgid "Format error on file Extensions File"
+msgstr "Utvidelsesfila har formatfeil"
+
+#, c-format
+msgid "The %%var macro has no default"
+msgstr " %%var-makroen mangler standardverdi"
+
+#, c-format
+msgid "The %%var macro has no variable"
+msgstr " %%var-makroen mangler variabel"
+
+#, c-format
+msgid "No suitable entries found in %s"
+msgstr "Fant ingen passende oppføringer i %s"
+
+msgid "User menu"
+msgstr "Brukermeny"
 
 #, c-format
 msgid ""
 "Cannot open cpio archive\n"
 "%s"
 msgstr ""
-"Kunne ikke åpne cpio arkiv\n"
+"Klarte ikke åpne cpio-arkiv\n"
 "%s"
 
 #, c-format
@@ -3722,7 +4139,7 @@ msgid ""
 "Premature end of cpio archive\n"
 "%s"
 msgstr ""
-"Prematur slutt på cpio arkiv\n"
+"cpio-arkivet sluttet uventet\n"
 "%s"
 
 #, c-format
@@ -3732,21 +4149,21 @@ msgid ""
 "in cpio archive\n"
 "%s"
 msgstr ""
-"Ukonsistente harde lenker til\n"
-"%s\n"
-"i cpio arkiv\n"
+"%s har \n"
+"inkonsistente harde lenker\n"
+"i cpio-arkivet\n"
 "%s"
 
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
-msgstr "%s inneholder duplikerte oppføringer! Hopper over!"
+msgstr "%s inneholder dupliserte oppføringer. Hopper over."
 
 #, c-format
 msgid ""
 "Corrupted cpio header encountered in\n"
 "%s"
 msgstr ""
-"Korrupt cpio header funnet i\n"
+"Fant skadet cpio-hode i\n"
 "%s"
 
 #, c-format
@@ -3762,45 +4179,45 @@ msgid ""
 "Cannot open %s archive\n"
 "%s"
 msgstr ""
-"Kunne ikke åpne %s arkiv\n"
+"Klarte ikke åpne arkivet %s \n"
 "%s"
 
 msgid "Inconsistent extfs archive"
-msgstr "Ukonsistent extfs arkiv"
+msgstr "Inkonsistent extfs-arkiv"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
-msgstr ""
+msgstr "Advarsel: Klarte ikke åpne mappa %s\n"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
 msgstr "fish: Kobler fra %s"
 
 msgid "fish: Waiting for initial line..."
-msgstr "fish: Venter på innledende linje..."
+msgstr "fish: Venter på innledende linje ..."
 
 msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr "Beklager, vi kan ikke gjøre passordautentiserte forbindelser ennå."
+msgstr "Passordautentisering av tilkoblinger støttes ikke per i dag."
 
 #, c-format
 msgid "fish: Password is required for %s"
-msgstr ""
+msgstr "fish: Trenger passord for %s"
 
 msgid "fish: Sending password..."
-msgstr "fish: Sender passord..."
+msgstr "fish: Sender passord ..."
 
 msgid "fish: Sending initial line..."
-msgstr "fish: Sender innledende linje..."
+msgstr "fish: Sender innledende linje ..."
 
 msgid "fish: Handshaking version..."
-msgstr "fish: Handshaking versjon..."
+msgstr "fish: Avklarer versjon ..."
 
 msgid "fish: Getting host info..."
-msgstr ""
+msgstr "fish: Henter vertsinformasjon ..."
 
 #, c-format
 msgid "fish: Reading directory %s..."
-msgstr "fish: Leser katalog %s..."
+msgstr "fish: Leser mappa %s ..."
 
 #, c-format
 msgid "%s: done."
@@ -3808,20 +4225,20 @@ msgstr "%s: ferdig."
 
 #, c-format
 msgid "%s: failure"
-msgstr " %s: feilet "
+msgstr " %s: mislyktes"
 
 #, c-format
 msgid "fish: store %s: sending command..."
-msgstr "fish: lager %s: sender kommando..."
+msgstr "fish: lagre %s: sender kommando ..."
 
 msgid "fish: Local read failed, sending zeros"
-msgstr "fish: Lokal lesekommando feilet, sender nuller"
+msgstr "fish: Lokal lesekommando mislyktes, sender nuller"
 
 msgid "fish: storing file"
-msgstr ""
+msgstr "fish: lagrer fil"
 
 msgid "Aborting transfer..."
-msgstr "Avbryter overføring..."
+msgstr "Avbryter overføring ..."
 
 msgid "Error reported after abort."
 msgstr "Feil rapportert etter avbrudd."
@@ -3835,7 +4252,7 @@ msgstr "ftpfs: Kobler fra %s"
 
 #, c-format
 msgid "FTP: Password required for %s"
-msgstr ""
+msgstr "FTP: Passord kreves for %s"
 
 msgid "ftpfs: sending login name"
 msgstr "ftpfs: sender innloggingsnavn"
@@ -3845,75 +4262,75 @@ msgstr "ftpfs: sender brukers passord"
 
 #, c-format
 msgid "FTP: Account required for user %s"
-msgstr ""
+msgstr "FTP: Konto kreves for bruker %s"
 
 msgid "Account:"
-msgstr ""
+msgstr "Konto:"
 
 msgid "ftpfs: sending user account"
-msgstr ""
+msgstr "ftpfs: sender brukers konto"
 
 msgid "ftpfs: logged in"
 msgstr "ftpfs: logget inn"
 
 #, c-format
 msgid "ftpfs: Login incorrect for user %s "
-msgstr "ftpfs: Innlogging ukorrekt for bruker %s "
+msgstr "ftpfs: Innlogging mislyktes for bruker %s "
 
 msgid "ftpfs: Invalid host name."
 msgstr "ftpfs: Ugyldig vertsnavn."
 
 #, c-format
 msgid "ftpfs: %s"
-msgstr ""
+msgstr "ftpfs: %s"
 
 #, c-format
 msgid "ftpfs: making connection to %s"
-msgstr "ftpfs: setter opp forbindelse til %s"
+msgstr "ftpfs: setter opp tilkobling til %s"
 
 msgid "ftpfs: connection interrupted by user"
-msgstr "ftpfs: tilkobling avbrutt av bruker"
+msgstr "ftpfs: bruker avbrøt tilkoblingen"
 
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
-msgstr "ftpfs: tilkobling til tjener feilet: %s"
+msgstr "ftpfs: tilkobling til tjener mislyktes: %s"
 
 #, c-format
 msgid "Waiting to retry... %d (Control-G to cancel)"
-msgstr ""
+msgstr "Venter på å prøve igjen ... %d (Ctrl + G avbryter)"
 
 msgid "ftpfs: invalid address family"
-msgstr ""
+msgstr "ftpfs: ugyldig adressefamilie"
 
 #, c-format
 msgid "ftpfs: could not create socket: %s"
-msgstr ""
+msgstr "ftpfs: klarte ikke opprette socket: %s"
 
 msgid "ftpfs: could not setup passive mode"
-msgstr "ftpfs: kunne ikke sette opp passiv modus"
+msgstr "ftpfs: klarte ikke sette opp passiv modus"
 
 msgid "ftpfs: aborting transfer."
 msgstr "ftpfs: avbryter overføring."
 
 #, c-format
 msgid "ftpfs: abort error: %s"
-msgstr "ftpfs: avbrytlsesfeil: %s"
+msgstr "ftpfs: avbruddsfeil: %s"
 
 msgid "ftpfs: abort failed"
-msgstr "ftpfs: avbrudd feilet"
+msgstr "ftpfs: avbrudd mislyktes"
 
 msgid "ftpfs: CWD failed."
-msgstr "ftpfs: CWD feilet."
+msgstr "ftpfs: CWD mislyktes."
 
 msgid "ftpfs: couldn't resolve symlink"
-msgstr "ftpfs: kunne ikke følge symbolsk lenke"
+msgstr "ftpfs: klarte ikke følge symbolsk lenke"
 
 msgid "Resolving symlink..."
-msgstr "Finner symlink..."
+msgstr "Slår opp symlenke ..."
 
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
-msgstr "ftpfs: Leser FTP katalog %s... %s%s"
+msgstr "ftpfs: Leser FTP-mappe %s... %s%s"
 
 msgid "(strict rfc959)"
 msgstr "(følg rfc959)"
@@ -3922,19 +4339,21 @@ msgid "(chdir first)"
 msgstr "(chdir først)"
 
 msgid "ftpfs: failed; nowhere to fallback to"
-msgstr "ftpfs: feilet; ingen steder å falle tilbake til"
+msgstr "ftpfs: mislyktes; ingen retrettmuligheter"
 
 msgid "ftpfs: storing file"
-msgstr ""
+msgstr "ftpfs: lagrer fil"
 
 msgid ""
 "~/.netrc file has incorrect mode\n"
 "Remove password or correct mode"
 msgstr ""
+"~/.netrc har ugyldige rettigheter\n"
+"Fjern passordet eller fiks rettighetene"
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
-msgstr ""
+msgstr "%s: Advarsel: fant ikke fila %s\n"
 
 #, c-format
 msgid ""
@@ -3954,237 +4373,251 @@ msgstr ""
 
 #, c-format
 msgid "sftp: an error occurred while reading %s: %s"
-msgstr ""
+msgstr "sftp: det oppstod en feil under lesing av %s: %s"
 
 msgid "sftp: Unable to get current user name."
-msgstr ""
+msgstr "sftp: Klarte ikke hente gjeldende brukernavn."
 
 msgid "sftp: Invalid host name."
-msgstr ""
+msgstr "sftp: Ugyldig vertsnavn."
 
 #, c-format
 msgid "sftp: %s"
-msgstr ""
+msgstr "sftp: %s"
 
 #, c-format
 msgid "sftp: making connection to %s"
-msgstr ""
+msgstr "sftp: Oppretter tilkobling til %s"
 
 msgid "sftp: connection interrupted by user"
-msgstr ""
+msgstr "sftp: Bruker avbrøt tilkoblingen"
 
 #, c-format
 msgid "sftp: connection to server failed: %s"
-msgstr ""
+msgstr "sftp: Tilkoblingen til tjeneren mislyktes: %s"
 
 #, c-format
 msgid "sftp: Enter passphrase for %s "
-msgstr ""
+msgstr "sftp: Skriv inn passfrase for %s"
 
 msgid "sftp: Passphrase is empty."
-msgstr ""
+msgstr "sftp: Passfrasen er tom."
 
 #, c-format
 msgid "sftp: Enter password for %s "
-msgstr ""
+msgstr "sftp: Skriv inn passord for %s"
 
 msgid "sftp: Password is empty."
-msgstr ""
+msgstr "sftp: Passordet er tomt."
 
 msgid "sftp: Failure establishing SSH session"
-msgstr ""
+msgstr "sftp: Klarte ikke sette opp SSH-økt"
 
 msgid "sftp: No file handler data present for reading file"
-msgstr ""
+msgstr "sftp: Fant ikke filhåndterer som kan lese fila"
+
+#, c-format
+msgid "sftp: socket error: %s"
+msgstr "sftp: Socketfeil: %s"
 
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"
-msgstr ""
+msgstr "sftp: (Ctrl + G avbryter) Lister ut ... %s"
 
 msgid "sftp: Listing done."
-msgstr ""
+msgstr "sftp: Utlisting ferdig."
 
 #, c-format
 msgid "reconnect to %s failed"
-msgstr ""
+msgstr "klarte ikke koble til %s på nytt"
 
 msgid "Authentication failed"
-msgstr ""
+msgstr "Autentisering mislyktes"
 
 #, c-format
 msgid "Error %s creating directory %s"
-msgstr ""
+msgstr "Feilen «%s» oppstod under oppretting av mappa %s"
 
 #, c-format
 msgid "Error %s removing directory %s"
-msgstr ""
+msgstr "Feilen «%s» oppstod under sletting av mappa %s"
 
 #, c-format
 msgid "%s opening remote file %s"
-msgstr ""
+msgstr "%s ved åpning av ekstern fil %s"
 
 #, c-format
 msgid "%s removing remote file %s"
-msgstr ""
+msgstr "%s ved sletting av ekstern fil %s"
 
 #, c-format
 msgid "%s renaming files\n"
-msgstr ""
+msgstr "%s ved endring av filnavn\n"
 
 #, c-format
 msgid ""
 "Cannot open tar archive\n"
 "%s"
 msgstr ""
-"Kunne ikke åpne tar-arkiv\n"
+"Klarte ikke åpne tar-arkiv\n"
 "%s"
 
 msgid "Inconsistent tar archive"
-msgstr "Ukonsistent tar-arkiv"
+msgstr "Inkonsistent tar-arkiv"
 
 msgid "Unexpected EOF on archive file"
-msgstr "Uventet EOF i arkivfilen"
+msgstr "Uventet filslutt i arkivfila"
 
 #, c-format
 msgid ""
 "%s\n"
 "doesn't look like a tar archive."
 msgstr ""
+"%s\n"
+"fremstår ikke som et tar-arkiv."
 
 msgid "undelfs: error"
-msgstr ""
+msgstr "undelfs: feil"
 
 msgid "not enough memory"
-msgstr ""
+msgstr "ikke nok minne"
 
 msgid "while allocating block buffer"
-msgstr ""
+msgstr "under reservering av blokkbuffer"
 
 #, c-format
 msgid "open_inode_scan: %d"
-msgstr ""
+msgstr "open_inode_scan: %d"
 
 #, c-format
 msgid "while starting inode scan %d"
-msgstr ""
+msgstr "under oppstart av inode-leting: %d"
 
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: laster informasjon om slettede filer %d inoder"
+msgstr "undelfs: laster informasjon om slettede filer, %d inoder"
 
 #, c-format
 msgid "while calling ext2_block_iterate %d"
-msgstr ""
+msgstr "under oppkall av ext2_block_iterate: %d"
 
 msgid "no more memory while reallocating array"
-msgstr ""
+msgstr "gikk tom for minne under nyreservering av tabell"
 
 #, c-format
 msgid "while doing inode scan %d"
-msgstr ""
+msgstr "under utførelse av inode-leting: %d"
 
 #, c-format
 msgid "Cannot open file %s"
-msgstr ""
+msgstr "Klarte ikke åpne fila %s"
 
 msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs: leser inode bitmap..."
+msgstr "undelfs: leser inode-bitmap ..."
 
 #, c-format
 msgid ""
 "Cannot load inode bitmap from:\n"
 "%s"
 msgstr ""
+"Klarte ikke laste inode-bitmap fra:\n"
+"%s"
 
 msgid "undelfs: reading block bitmap..."
-msgstr "undelfs: leser blokk bitmap..."
+msgstr "undelfs: leser blokkbitmap ..."
 
 #, c-format
 msgid ""
 "Cannot load block bitmap from:\n"
 "%s"
 msgstr ""
+"Klarte ikke laste blokkbitmap fra:\n"
+"%s"
 
 msgid "vfs_info is not fs!"
-msgstr ""
+msgstr "vfs_info er ikke lik fs"
 
 msgid "You have to chdir to extract files first"
-msgstr ""
+msgstr "Du må bytte mappe for å pakke ut filer"
 
 msgid "while iterating over blocks"
-msgstr ""
+msgstr "under iterasjon over blokker"
 
 #, c-format
 msgid "Cannot open file \"%s\""
-msgstr ""
+msgstr "Klarte ikke åpne fila «%s»"
 
 msgid "Ext2lib error"
-msgstr ""
+msgstr "Ext2lib-feil"
 
 msgid "Invalid value"
-msgstr ""
+msgstr "Ugyldig verdi"
 
 msgid "File was modified. Save with exit?"
-msgstr ""
+msgstr "Fila er endret. Lagre før avslutning?"
 
 msgid "&Cancel quit"
-msgstr ""
+msgstr "Av&bryt avslutning"
 
 msgid ""
 "Midnight Commander is being shut down.\n"
 "Save modified file?"
 msgstr ""
+"Midnight Commander avsluttes.\n"
+"Lagre endret fil?"
 
 msgid "&Line number"
-msgstr ""
+msgstr "&Linjenummer"
 
 msgid "Pe&rcents"
-msgstr ""
+msgstr "&Prosent"
 
 msgid "&Decimal offset"
-msgstr ""
+msgstr "&Desimal posisjon"
 
 msgid "He&xadecimal offset"
-msgstr ""
+msgstr "&Heksadesimal posisjon"
 
 msgid "Goto"
-msgstr "Gåtil"
+msgstr "Gå til"
 
 msgid "ButtonBar|Ascii"
-msgstr ""
+msgstr "ButtonBar|ASCII"
 
 msgid "ButtonBar|HxSrch"
-msgstr ""
+msgstr "ButtonBar|HxSøk"
 
 msgid "ButtonBar|UnWrap"
-msgstr ""
+msgstr "ButtonBar|IkBryt"
 
 msgid "ButtonBar|Wrap"
-msgstr ""
+msgstr "ButtonBar|Bryt"
 
 msgid "ButtonBar|Hex"
-msgstr ""
+msgstr "ButtonBar|Hex"
 
 msgid "ButtonBar|Goto"
-msgstr ""
+msgstr "ButtonBar|GåTil"
 
 msgid "ButtonBar|Raw"
-msgstr ""
+msgstr "ButtonBar|Rått"
 
 msgid "ButtonBar|Parse"
-msgstr ""
+msgstr "ButtonBar|Tolket"
 
 msgid "ButtonBar|Unform"
-msgstr ""
+msgstr "ButtonBar|IkForm"
 
 msgid "ButtonBar|Format"
-msgstr ""
+msgstr "ButtonBar|Format"
 
 #, c-format
 msgid ""
 "Failed to read data from child stdout:\n"
 "%s"
 msgstr ""
+"Klarte ikke lese data fra barnets stdout:\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -4192,36 +4625,45 @@ msgid ""
 "%s\n"
 "Data may have been written or not"
 msgstr ""
+"Klarte ikke lukke fila:\n"
+"%s\n"
+"Data ble skrevet, eller kanskje ikke!"
 
 #, c-format
 msgid ""
 "Cannot save file:\n"
 "%s"
 msgstr ""
+"Klarte ikke lagre fil:\n"
+"%s"
 
 msgid "View: "
-msgstr ""
+msgstr "Vis:  "
 
 #, c-format
 msgid ""
 "Cannot open \"%s\"\n"
 "%s"
 msgstr ""
+"Klarte ikke åpne «%s»\n"
+"%s"
 
 msgid "Cannot view: not a regular file"
-msgstr ""
+msgstr "Klarte ikke vise: Dette er ikke en vanlig fil"
 
 #, c-format
 msgid ""
 "Cannot open \"%s\" in parse mode\n"
 "%s"
 msgstr ""
+"Klarte ikke åpne «%s» fortolket:\n"
+"%s"
 
 msgid "Search done"
-msgstr ""
+msgstr "Søket er ferdig"
 
 msgid "Continue from beginning?"
-msgstr ""
+msgstr "Fortsett fra begynnelsen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
-msgstr ""
+msgstr "Klarte ikke hente en lokal kopi av /ftp://some.host/editme.txt"

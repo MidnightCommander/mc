@@ -1,7 +1,7 @@
 /*
    Widgets for the Midnight Commander
 
-   Copyright (C) 1994-2016
+   Copyright (C) 2016-2020
    Free Software Foundation, Inc.
 
    Authors:
@@ -70,8 +70,6 @@ init_mouse_event (mouse_event_t * event, mouse_msg_t msg, const Gpm_Event * glob
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/*** public functions ****************************************************************************/
-/* --------------------------------------------------------------------------------------------- */
 
 /**
  * Translate GPM event to high-level event,
@@ -81,7 +79,7 @@ init_mouse_event (mouse_event_t * event, mouse_msg_t msg, const Gpm_Event * glob
  *
  * @return high level mouse event
  */
-mouse_event_t
+static mouse_event_t
 mouse_translate_event (Widget * w, Gpm_Event * event)
 {
     gboolean in_widget;
@@ -172,7 +170,7 @@ mouse_translate_event (Widget * w, Gpm_Event * event)
  *
  * @return result of mouse event handling
  */
-int
+static int
 mouse_process_event (Widget * w, mouse_event_t * event)
 {
     int ret = MOU_UNHANDLED;
@@ -180,6 +178,11 @@ mouse_process_event (Widget * w, mouse_event_t * event)
     if (event->msg != MSG_MOUSE_NONE)
     {
         w->mouse_callback (w, event->msg, event);
+
+        /* If a widget aborts a MSG_MOUSE_DOWN, we uncapture it so it
+         * doesn't steal events from other widgets. */
+        if (event->msg == MSG_MOUSE_DOWN && event->result.abort)
+            w->mouse.capture = FALSE;
 
         /* Upon releasing the mouse button: if the mouse hasn't been dragged
          * since the MSG_MOUSE_DOWN, we also trigger a click. */
@@ -194,6 +197,29 @@ mouse_process_event (Widget * w, mouse_event_t * event)
     }
 
     return ret;
+}
+
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Translate GPM event to high-level event and process it
+ *
+ * @param w Widget object
+ * @param event GPM event
+ *
+ * @return result of mouse event handling
+ */
+int
+mouse_handle_event (Widget * w, Gpm_Event * event)
+{
+    mouse_event_t me;
+
+    me = mouse_translate_event (w, event);
+
+    return mouse_process_event (w, &me);
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -34,6 +34,9 @@ get_unpacker() {
     man.xz)
         unpacker="xz -dc"
         ;;
+    man.zst)
+        unpacker="zstd -dc"
+        ;;
     esac
     echo ${unpacker}
 }
@@ -64,7 +67,7 @@ do_view_action() {
     nroff.ms)
         nroff @MAN_FLAGS@ -ms "${MC_EXT_FILENAME}"
         ;;
-    man.gz|man.bz|man.bz2|man.lz|man.lz4|man.lzma|man.xz)
+    man.gz|man.bz|man.bz2|man.lz|man.lz4|man.lzma|man.xz|man.zst)
         case "${MC_EXT_FILENAME}" in
         */log/*|*/logs/*)
             ${unpacker} "${MC_EXT_FILENAME}"
@@ -111,7 +114,7 @@ do_open_action() {
     nroff.ms)
         nroff @MAN_FLAGS@ -ms "${MC_EXT_FILENAME}" | ${pager}
         ;;
-    man.gz|man.bz|man.bz2|man.lz|man.lz4|man.lzma|man.xz)
+    man.gz|man.bz|man.bz2|man.lz|man.lz4|man.lzma|man.xz|man.zst)
         case "${MC_EXT_FILENAME}" in
         */log/*|*/logs/*)
             ${unpacker} "${MC_EXT_FILENAME}"

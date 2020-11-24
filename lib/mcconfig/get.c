@@ -1,7 +1,7 @@
 /*
    Configure module for the Midnight Commander
 
-   Copyright (C) 1994-2016
+   Copyright (C) 1994-2020
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
@@ -24,19 +24,26 @@
 
 #include "lib/global.h"
 #include "lib/strutil.h"
+
 #include "lib/mcconfig.h"
 
-/*** global variables **************************************************/
+/*** global variables ****************************************************************************/
 
-/*** file scope macro definitions **************************************/
+/*** file scope macro definitions ****************************************************************/
 
-/*** file scope type declarations **************************************/
+/*** file scope type declarations ****************************************************************/
 
-/*** file scope variables **********************************************/
+/*** file scope variables ************************************************************************/
 
-/*** file scope functions **********************************************/
+/*** file scope functions ************************************************************************/
 
-/*** public functions **************************************************/
+/* --------------------------------------------------------------------------------------------- */
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 gchar **
 mc_config_get_groups (const mc_config_t * mc_config, gsize * len)
@@ -56,7 +63,7 @@ mc_config_get_groups (const mc_config_t * mc_config, gsize * len)
     return ret;
 }
 
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* --------------------------------------------------------------------------------------------- */
 
 gchar **
 mc_config_get_keys (const mc_config_t * mc_config, const gchar * group, gsize * len)
@@ -76,7 +83,7 @@ mc_config_get_keys (const mc_config_t * mc_config, const gchar * group, gsize * 
     return ret;
 }
 
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* --------------------------------------------------------------------------------------------- */
 
 gchar *
 mc_config_get_string (mc_config_t * mc_config, const gchar * group,
@@ -87,7 +94,7 @@ mc_config_get_string (mc_config_t * mc_config, const gchar * group,
     gchar *ret;
     estr_t conv_res;
 
-    if (!mc_config || !group || !param)
+    if (mc_config == NULL || group == NULL || param == NULL)
         return g_strdup (def);
 
     if (!mc_config_has_param (mc_config, group, param))
@@ -123,15 +130,15 @@ mc_config_get_string (mc_config_t * mc_config, const gchar * group,
     return g_string_free (buffer, FALSE);
 }
 
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* --------------------------------------------------------------------------------------------- */
 
 gchar *
-mc_config_get_string_raw (const mc_config_t * mc_config, const gchar * group,
+mc_config_get_string_raw (mc_config_t * mc_config, const gchar * group,
                           const gchar * param, const gchar * def)
 {
     gchar *ret;
 
-    if (!mc_config || !group || !param)
+    if (mc_config == NULL || group == NULL || param == NULL)
         return g_strdup (def);
 
     if (!mc_config_has_param (mc_config, group, param))
@@ -146,12 +153,12 @@ mc_config_get_string_raw (const mc_config_t * mc_config, const gchar * group,
     return ret != NULL ? ret : g_strdup (def);
 }
 
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* --------------------------------------------------------------------------------------------- */
 
 gboolean
 mc_config_get_bool (mc_config_t * mc_config, const gchar * group, const gchar * param, gboolean def)
 {
-    if (!mc_config || !group || !param)
+    if (mc_config == NULL || group == NULL || param == NULL)
         return def;
 
     if (!mc_config_has_param (mc_config, group, param))
@@ -163,12 +170,12 @@ mc_config_get_bool (mc_config_t * mc_config, const gchar * group, const gchar * 
     return g_key_file_get_boolean (mc_config->handle, group, param, NULL);
 }
 
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* --------------------------------------------------------------------------------------------- */
 
 int
 mc_config_get_int (mc_config_t * mc_config, const gchar * group, const gchar * param, int def)
 {
-    if (!mc_config || !group || !param)
+    if (mc_config == NULL || group == NULL || param == NULL)
         return def;
 
     if (!mc_config_has_param (mc_config, group, param))
@@ -180,41 +187,40 @@ mc_config_get_int (mc_config_t * mc_config, const gchar * group, const gchar * p
     return g_key_file_get_integer (mc_config->handle, group, param, NULL);
 }
 
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* --------------------------------------------------------------------------------------------- */
 
 gchar **
 mc_config_get_string_list (mc_config_t * mc_config, const gchar * group,
                            const gchar * param, gsize * length)
 {
-    if (!mc_config || !group || !param)
+    if (mc_config == NULL || group == NULL || param == NULL)
         return NULL;
 
     return g_key_file_get_string_list (mc_config->handle, group, param, length, NULL);
 }
 
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* --------------------------------------------------------------------------------------------- */
 
 gboolean *
 mc_config_get_bool_list (mc_config_t * mc_config, const gchar * group,
                          const gchar * param, gsize * length)
 {
-    if (!mc_config || !group || !param)
+    if (mc_config == NULL || group == NULL || param == NULL)
         return NULL;
 
     return g_key_file_get_boolean_list (mc_config->handle, group, param, length, NULL);
 }
 
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* --------------------------------------------------------------------------------------------- */
 
 int *
 mc_config_get_int_list (mc_config_t * mc_config, const gchar * group,
                         const gchar * param, gsize * length)
 {
-    if (!mc_config || !group || !param)
+    if (mc_config == NULL || group == NULL || param == NULL)
         return NULL;
 
     return g_key_file_get_integer_list (mc_config->handle, group, param, length, NULL);
 }
 
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* --------------------------------------------------------------------------------------------- */

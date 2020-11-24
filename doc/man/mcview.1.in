@@ -1,7 +1,7 @@
 .TH MCVIEW 1 "%DATE_OF_MAN_PAGE%" "MC Version %DISTR_VERSION%" "GNU Midnight Commander"
 .SH NAME
 mcview \- Internal file viewer of GNU Midnight Commander.
-.SH USAGE
+.SH SYNOPSIS
 .B mcview
 [\-bcCdfhstVx?] file
 .SH DESCRIPTION
@@ -61,7 +61,7 @@ selected=black,green"
 .fi
 .PP
 .SH FILES
-.I %prefix%/share/mc/mc.hlp
+.I %prefix%/share/mc/help/mc.hlp
 .IP
 The help file for the program.
 .PP

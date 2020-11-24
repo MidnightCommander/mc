@@ -1,6 +1,6 @@
 /* A more useful interface to strtol.
 
-   Copyright (C) 1995-2016
+   Copyright (C) 1995-2020
    Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
@@ -24,9 +24,6 @@
    need stderr defined if assertion checking is enabled.  */
 #include <stdio.h>
 
-#ifdef HAVE_ASSERT_H
-#include <assert.h>
-#endif
 #include <ctype.h>
 #include <errno.h>
 #include <inttypes.h>
@@ -84,9 +81,7 @@ xstrtoumax (const char *s, char **ptr, int base, uintmax_t * val, const char *va
     uintmax_t tmp;
     strtol_error_t err = LONGINT_OK;
 
-#ifdef HAVE_ASSERT_H
-    assert (0 <= base && base <= 36);
-#endif
+    g_assert (0 <= base && base <= 36);
 
     p = (ptr != NULL ? ptr : &t_ptr);
 

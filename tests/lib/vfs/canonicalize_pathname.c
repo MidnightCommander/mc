@@ -1,7 +1,7 @@
 /*
    lib - canonicalize path
 
-   Copyright (C) 2011-2016
+   Copyright (C) 2011-2020
    Free Software Foundation, Inc.
 
    Written by:
@@ -37,7 +37,6 @@
 
 #include "src/vfs/local/local.c"
 
-static struct vfs_s_subclass test_subclass;
 static struct vfs_class vfs_test_ops;
 
 /* --------------------------------------------------------------------------------------------- */
@@ -46,10 +45,11 @@ static struct vfs_class vfs_test_ops;
 static void
 setup (void)
 {
+    mc_global.timer = mc_timer_new ();
     str_init_strings (NULL);
 
     vfs_init ();
-    init_localfs ();
+    vfs_init_localfs ();
     vfs_setup_work_dir ();
 
 #ifdef HAVE_CHARSET
@@ -57,12 +57,7 @@ setup (void)
     load_codepages_list ();
 #endif
 
-    vfs_s_init_class (&vfs_test_ops, &test_subclass);
-
-    vfs_test_ops.name = "testfs";
-    vfs_test_ops.flags = VFSF_NOLINKS;
-    vfs_test_ops.prefix = "ftp";
-    test_subclass.flags = VFS_S_REMOTE;
+    vfs_init_class (&vfs_test_ops, "testfs", VFSF_NOLINKS | VFSF_REMOTE, "ftp");
     vfs_register_class (&vfs_test_ops);
 }
 
@@ -77,7 +72,9 @@ teardown (void)
 #endif
 
     vfs_shut ();
+
     str_uninit_strings ();
+    mc_timer_destroy (mc_global.timer);
 }
 
 /* --------------------------------------------------------------------------------------------- */

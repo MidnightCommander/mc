@@ -26,17 +26,24 @@ context default
     keyword whole caller yellow
     keyword whole case yellow
     keyword whole catch yellow
+    keyword whole class yellow
+    keyword whole const yellow
     keyword whole constructor yellow
     keyword whole continue yellow
     keyword whole else yellow
+    keyword whole extends yellow
+    keyword whole export yellow
     keyword whole default yellow
     keyword whole delete yellow
     keyword whole for yellow
     keyword whole function yellow
     keyword whole if yellow
+    keyword whole import yellow
     keyword whole in yellow
     keyword whole instanceof yellow
+    keyword whole let yellow
     keyword whole new yellow
+    keyword whole of yellow
     keyword whole prototype yellow
     keyword whole return yellow
     keyword whole switch yellow
@@ -47,6 +54,7 @@ context default
     keyword whole var yellow
     keyword whole while yellow
     keyword whole with yellow
+    keyword whole yield yellow
 
     #=========================
     # Objects
@@ -61,11 +69,19 @@ context default
     keyword whole Global yellow
     keyword whole Image yellow
     keyword whole Math yellow
+    keyword whole Map yellow
     keyword whole Number yellow
     keyword whole Object yellow
+    keyword whole Promise yellow
+    keyword whole Proxy yellow
+    keyword whole Reflect yellow
+    keyword whole Set yellow
+    keyword whole Symbol yellow
     keyword whole TextStream yellow
     keyword whole RegExp yellow
     keyword whole VBArray yellow
+    keyword whole WeakMap yellow
+    keyword whole WeakSet yellow
 
     #=========================
     # Most common functions
@@ -106,6 +122,7 @@ context default
 
     #=========================
     # Special symbols
+    keyword => brightcyan
     keyword \. yellow
     keyword \* yellow
     keyword \+ yellow
@@ -180,3 +197,9 @@ context ' ' green
     keyword \\\{0123\}\{01234567\}\{01234567\} brightgreen
 
     keyword " brightgreen
+
+context ` ` green
+    spellcheck
+    keyword \\\{\\'"abtnvfr\} brightgreen
+    keyword \\\{0123\}\{01234567\}\{01234567\} brightgreen
+    keyword ${*} yellow

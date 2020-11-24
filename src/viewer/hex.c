@@ -2,7 +2,7 @@
    Internal file viewer for the Midnight Commander
    Function for hex view
 
-   Copyright (C) 1994-2016
+   Copyright (C) 1994-2020
    Free Software Foundation, Inc.
 
    Written by:
@@ -152,14 +152,15 @@ mcview_display_hex (WView * view)
     for (; mcview_get_byte (view, from, NULL) && row < (int) height; row++)
     {
         screen_dimen col = 0;
-        size_t i;
         int bytes;              /* Number of bytes already printed on the line */
 
         /* Print the hex offset */
         if (row >= 0)
         {
+            size_t i;
+
             g_snprintf (hex_buff, sizeof (hex_buff), "%08" PRIXMAX " ", (uintmax_t) from);
-            widget_move (view, top + row, left);
+            widget_gotoyx (view, top + row, left);
             tty_setcolor (VIEW_BOLD_COLOR);
             for (i = 0; col < width && hex_buff[i] != '\0'; col++, i++)
                 tty_print_char (hex_buff[i]);
@@ -275,7 +276,7 @@ mcview_display_hex (WView * view)
                           view->hexview_in_text ? VIEW_SELECTED_COLOR : VIEW_UNDERLINED_COLOR);
 
             /* Print the hex number */
-            widget_move (view, top + row, left + col);
+            widget_gotoyx (view, top + row, left + col);
             if (col < width)
             {
                 tty_print_char (hex_char[c / 16]);
@@ -348,7 +349,7 @@ mcview_display_hex (WView * view)
             /* Print corresponding character on the text side */
             if (text_start + bytes < width)
             {
-                widget_move (view, top + row, left + text_start + bytes);
+                widget_gotoyx (view, top + row, left + text_start + bytes);
 #ifdef HAVE_CHARSET
                 if (view->utf8)
                     tty_print_anychar (ch);
@@ -389,9 +390,7 @@ mcview_hexedit_save_changes (WView * view)
         char *text;
         struct hexedit_change_node *curr, *next;
 
-#ifdef HAVE_ASSERT_H
-        assert (view->filename_vpath != NULL);
-#endif
+        g_assert (view->filename_vpath != NULL);
 
         fp = mc_open (view->filename_vpath, O_WRONLY);
         if (fp != -1)

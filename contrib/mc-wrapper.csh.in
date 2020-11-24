@@ -1,4 +1,4 @@
-set MC_USER="`id | sed 's/[^(]*(//;s/).*//'`"
+set MC_USER=`whoami`
 
 if ($?TMPDIR) then
 	setenv MC_PWD_FILE $TMPDIR/mc-$MC_USER/mc.pwd.$$
@@ -10,7 +10,7 @@ endif
 
 if (-r "$MC_PWD_FILE") then
 	setenv MC_PWD "`cat '$MC_PWD_FILE'`"
-	if ( -d "$MC_PWD" ) then
+	if ("$MC_PWD" != "$cwd" && -d "$MC_PWD") then
 		cd "$MC_PWD"
 	endif
 	unsetenv MC_PWD

@@ -1,7 +1,7 @@
 /*
    GLIB - Library of useful routines for C programming
 
-   Copyright (C) 2009-2016
+   Copyright (C) 2009-2020
    Free Software Foundation, Inc.
 
    Written by:
@@ -50,43 +50,113 @@
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-#if ! GLIB_CHECK_VERSION (2, 28, 0)
+#if ! GLIB_CHECK_VERSION (2, 63, 3)
 /**
- * g_slist_free_full:
- * @list: a pointer to a #GSList
- * @free_func: the function to be called to free each element's data
+ * g_clear_slist: (skip)
+ * @slist_ptr: (not nullable): a #GSList return location
+ * @destroy: (nullable): the function to pass to g_slist_free_full() or NULL to not free elements
  *
- * Convenience method, which frees all the memory used by a #GSList, and
- * calls the specified destroy function on every element's data.
+ * Clears a pointer to a #GSList, freeing it and, optionally, freeing its elements using @destroy.
  *
- * Since: 2.28
- **/
+ * @slist_ptr must be a valid pointer. If @slist_ptr points to a null #GSList, this does nothing.
+ *
+ * Since: 2.64
+ */
 void
-g_slist_free_full (GSList * list, GDestroyNotify free_func)
+g_clear_slist (GSList ** slist_ptr, GDestroyNotify destroy)
 {
-    g_slist_foreach (list, (GFunc) free_func, NULL);
-    g_slist_free (list);
+    GSList *slist;
+
+    slist = *slist_ptr;
+
+    if (slist != NULL)
+    {
+        *slist_ptr = NULL;
+
+        if (destroy != NULL)
+            g_slist_free_full (slist, destroy);
+        else
+            g_slist_free (slist);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 /**
- * g_list_free_full:
- * @list: a pointer to a #GList
- * @free_func: the function to be called to free each element's data
+ * g_clear_list:
+ * @list_ptr: (not nullable): a #GList return location
+ * @destroy: (nullable): the function to pass to g_list_free_full() or NULL to not free elements
  *
- * Convenience method, which frees all the memory used by a #GList, and
- * calls the specified destroy function on every element's data.
+ * Clears a pointer to a #GList, freeing it and, optionally, freeing its elements using @destroy.
  *
- * Since: 2.28
+ * @list_ptr must be a valid pointer. If @list_ptr points to a null #GList, this does nothing.
+ *
+ * Since: 2.64
  */
 void
-g_list_free_full (GList * list, GDestroyNotify free_func)
+g_clear_list (GList ** list_ptr, GDestroyNotify destroy)
 {
-    g_list_foreach (list, (GFunc) free_func, NULL);
-    g_list_free (list);
+    GList *list;
+
+    list = *list_ptr;
+
+    if (list != NULL)
+    {
+        *list_ptr = NULL;
+
+        if (destroy != NULL)
+            g_list_free_full (list, destroy);
+        else
+            g_list_free (list);
+    }
 }
 
-#endif /* ! GLIB_CHECK_VERSION (2, 28, 0) */
+/* --------------------------------------------------------------------------------------------- */
+
+#endif /* ! GLIB_CHECK_VERSION (2, 63, 3) */
+
+#if ! GLIB_CHECK_VERSION (2, 32, 0)
+/**
+ * g_queue_free_full:
+ * @queue: a pointer to a #GQueue
+ * @free_func: the function to be called to free each element's data
+ *
+ * Convenience method, which frees all the memory used by a #GQueue,
+ * and calls the specified destroy function on every element's data.
+ *
+ * Since: 2.32
+ */
+void
+g_queue_free_full (GQueue * queue, GDestroyNotify free_func)
+{
+    g_queue_foreach (queue, (GFunc) free_func, NULL);
+    g_queue_free (queue);
+}
+#endif /* ! GLIB_CHECK_VERSION (2, 32, 0) */
+
+/* --------------------------------------------------------------------------------------------- */
+
+#if ! GLIB_CHECK_VERSION (2, 60, 0)
+/**
+ * g_queue_clear_full:
+ * @queue: a pointer to a #GQueue
+ * @free_func: (nullable): the function to be called to free memory allocated
+ *
+ * Convenience method, which frees all the memory used by a #GQueue,
+ * and calls the provided @free_func on each item in the #GQueue.
+ *
+ * Since: 2.60
+ */
+void
+g_queue_clear_full (GQueue * queue, GDestroyNotify free_func)
+{
+    g_return_if_fail (queue != NULL);
+
+    if (free_func != NULL)
+        g_queue_foreach (queue, (GFunc) free_func, NULL);
+
+    g_queue_clear (queue);
+}
+#endif /* ! GLIB_CHECK_VERSION (2, 60, 0) */
 
 /* --------------------------------------------------------------------------------------------- */

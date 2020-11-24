@@ -1,7 +1,7 @@
 /*
    Init VFS plugins.
 
-   Copyright (C) 2011-2016
+   Copyright (C) 2011-2020
    Free Software Foundation, Inc.
 
    Written by:
@@ -95,35 +95,35 @@ void
 vfs_plugins_init (void)
 {
     /* localfs needs to be the first one */
-    init_localfs ();
+    vfs_init_localfs ();
 
 #ifdef ENABLE_VFS_CPIO
-    init_cpiofs ();
+    vfs_init_cpiofs ();
 #endif /* ENABLE_VFS_CPIO */
 #ifdef ENABLE_VFS_TAR
-    init_tarfs ();
+    vfs_init_tarfs ();
 #endif /* ENABLE_VFS_TAR */
 #ifdef ENABLE_VFS_SFS
-    init_sfs ();
+    vfs_init_sfs ();
 #endif /* ENABLE_VFS_SFS */
 #ifdef ENABLE_VFS_EXTFS
-    init_extfs ();
+    vfs_init_extfs ();
 #endif /* ENABLE_VFS_EXTFS */
 #ifdef ENABLE_VFS_UNDELFS
-    init_undelfs ();
+    vfs_init_undelfs ();
 #endif /* ENABLE_VFS_UNDELFS */
 
 #ifdef ENABLE_VFS_FTP
-    init_ftpfs ();
+    vfs_init_ftpfs ();
 #endif /* ENABLE_VFS_FTP */
 #ifdef ENABLE_VFS_SFTP
-    init_sftpfs ();
+    vfs_init_sftpfs ();
 #endif /* ENABLE_VFS_SFTP */
 #ifdef ENABLE_VFS_FISH
-    init_fish ();
+    vfs_init_fish ();
 #endif /* ENABLE_VFS_FISH */
 #ifdef ENABLE_VFS_SMB
-    init_smbfs ();
+    vfs_init_smbfs ();
 #endif /* ENABLE_VFS_SMB */
 
 }

@@ -1,7 +1,7 @@
 /*
    Learn keys
 
-   Copyright (C) 1995-2016
+   Copyright (C) 1995-2020
    Free Software Foundation, Inc.
 
    Written by:
@@ -138,7 +138,7 @@ learn_move (gboolean right)
 
     totalcols = (learn_total - 1) / ROWS + 1;
     for (i = 0; i < learn_total; i++)
-        if (learnkeys[i].button == WIDGET (learn_dlg->current->data))
+        if (learnkeys[i].button == WIDGET (GROUP (learn_dlg)->current->data))
         {
             if (right)
             {
@@ -194,7 +194,7 @@ learn_check_key (int c)
             }
             else
             {
-                message (D_ERROR, learn_title,
+                message (D_ERROR, learn_title, "%s",
                          _
                          ("Great! You have a complete terminal database!\n"
                           "All your keys work well."));
@@ -213,10 +213,10 @@ learn_check_key (int c)
     case 'l':
         return learn_move (TRUE);
     case 'j':
-        dlg_select_next_widget (learn_dlg);
+        group_select_next_widget (GROUP (learn_dlg));
         return TRUE;
     case 'k':
-        dlg_select_prev_widget (learn_dlg);
+        group_select_prev_widget (GROUP (learn_dlg));
         return TRUE;
     default:
         break;
@@ -247,6 +247,8 @@ learn_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
 static void
 init_learn (void)
 {
+    WGroup *g;
+
     const int dlg_width = 78;
     const int dlg_height = 23;
 
@@ -276,6 +278,7 @@ init_learn (void)
     learn_dlg =
         dlg_create (TRUE, 0, 0, dlg_height, dlg_width, WPOS_CENTER, FALSE, dialog_colors,
                     learn_callback, NULL, "[Learn keys]", learn_title);
+    g = GROUP (learn_dlg);
 
     /* find first unshown button */
     for (key = key_name_conv_tab, learn_total = 0;
@@ -308,8 +311,8 @@ init_learn (void)
         learnkeys[i].button =
             WIDGET (button_new (y, x, B_USER + i, NARROW_BUTTON, buffer, learn_button));
         learnkeys[i].label = WIDGET (label_new (y, x + 19, ""));
-        add_widget (learn_dlg, learnkeys[i].button);
-        add_widget (learn_dlg, learnkeys[i].label);
+        group_add_widget (g, learnkeys[i].button);
+        group_add_widget (g, learnkeys[i].label);
 
         y++;
         if (y == UY + ROWS)
@@ -319,20 +322,20 @@ init_learn (void)
         }
     }
 
-    add_widget (learn_dlg, hline_new (dlg_height - 8, -1, -1));
-    add_widget (learn_dlg,
-                label_new (dlg_height - 7, 5,
-                           _("Press all the keys mentioned here. After you have done it, check\n"
-                             "which keys are not marked with OK. Press space on the missing\n"
-                             "key, or click with the mouse to define it. Move around with Tab.")));
-    add_widget (learn_dlg, hline_new (dlg_height - 4, -1, -1));
+    group_add_widget (g, hline_new (dlg_height - 8, -1, -1));
+    group_add_widget (g, label_new (dlg_height - 7, 5,
+                                    _
+                                    ("Press all the keys mentioned here. After you have done it, check\n"
+                                     "which keys are not marked with OK. Press space on the missing\n"
+                                     "key, or click with the mouse to define it. Move around with Tab.")));
+    group_add_widget (g, hline_new (dlg_height - 4, -1, -1));
     /* buttons */
     bl0 = str_term_width1 (b0) + 5;     /* default button */
     bl1 = str_term_width1 (b1) + 3;     /* normal button */
     bx0 = (dlg_width - (bl0 + bl1 + 1)) / 2;
     bx1 = bx0 + bl0 + 1;
-    add_widget (learn_dlg, button_new (dlg_height - 3, bx0, B_ENTER, DEFPUSH_BUTTON, b0, NULL));
-    add_widget (learn_dlg, button_new (dlg_height - 3, bx1, B_CANCEL, NORMAL_BUTTON, b1, NULL));
+    group_add_widget (g, button_new (dlg_height - 3, bx0, B_ENTER, DEFPUSH_BUTTON, b0, NULL));
+    group_add_widget (g, button_new (dlg_height - 3, bx1, B_CANCEL, NORMAL_BUTTON, b1, NULL));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -387,7 +390,7 @@ learn_save (void)
 void
 learn_keys (void)
 {
-    int save_old_esc_mode = old_esc_mode;
+    gboolean save_old_esc_mode = old_esc_mode;
     gboolean save_alternate_plus_minus = mc_global.tty.alternate_plus_minus;
     int result;
 

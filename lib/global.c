@@ -1,7 +1,7 @@
 /*
    Global structure for some library-related variables
 
-   Copyright (C) 2009-2016
+   Copyright (C) 2009-2020
    Free Software Foundation, Inc.
 
    Written by:
@@ -50,6 +50,7 @@
 /* *INDENT-OFF* */
 mc_global_t mc_global = {
     .mc_run_mode = MC_RUN_FULL,
+    .run_from_parent_mc = FALSE,
     .timer = NULL,
     .midnight_shutdown = FALSE,
 
@@ -60,13 +61,13 @@ mc_global_t mc_global = {
     .source_codepage = -1,
     .display_codepage = -1,
 #else
-    .eight_bit_clean = 1,
-    .full_eight_bits = 0,
+    .eight_bit_clean = TRUE,
+    .full_eight_bits = FALSE,
 #endif /* !HAVE_CHARSET */
     .utf8_display = FALSE,
 
-    .message_visible = 1,
-    .keybar_visible = 1,
+    .message_visible = TRUE,
+    .keybar_visible = TRUE,
 
 #ifdef ENABLE_BACKGROUND
     .we_are_background = FALSE,
@@ -84,6 +85,7 @@ mc_global_t mc_global = {
     .tty =
     {
         .skin = NULL,
+        .shadows = TRUE,
         .setup_color_string = NULL,
         .term_color_string = NULL,
         .color_terminal_string = NULL,
@@ -104,8 +106,7 @@ mc_global_t mc_global = {
         .disable_colors = FALSE,
         .ugly_line_drawing = FALSE,
         .old_mouse = FALSE,
-        .alternate_plus_minus = FALSE,
-        .winch_flag = 0
+        .alternate_plus_minus = FALSE
     },
 
     .vfs =

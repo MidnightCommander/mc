@@ -14,19 +14,11 @@
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
-struct vfs_stamping
-{
-    struct vfs_class *v;
-    vfsid id;
-    struct vfs_stamping *next;
-    struct timeval time;
-};
-
 /*** global variables defined in .c file *********************************************************/
 
 /*** declarations of public functions ************************************************************/
 
-void vfs_stamp (struct vfs_class *vclass, vfsid id);
+gboolean vfs_stamp (struct vfs_class *vclass, vfsid id);
 void vfs_rmstamp (struct vfs_class *vclass, vfsid id);
 void vfs_stamp_create (struct vfs_class *vclass, vfsid id);
 void vfs_gc_done (void);

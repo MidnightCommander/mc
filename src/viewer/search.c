@@ -2,7 +2,7 @@
    Internal file viewer for the Midnight Commander
    Function for search data
 
-   Copyright (C) 1994-2016
+   Copyright (C) 1994-2020
    Free Software Foundation, Inc.
 
    Written by:
@@ -148,13 +148,14 @@ mcview_find (mcview_search_status_msg_t * ssm, off_t search_start, off_t search_
             ok = mc_search_run (view->search, (void *) ssm, search_start, search_end, len);
             if (ok && view->search->normal_offset == search_start)
             {
-                if (view->text_nroff_mode)
+                if (view->mode_flags.nroff)
                     view->search->normal_offset++;
                 return TRUE;
             }
 
-            /* Abort search. */
-            if (!ok && view->search->error == MC_SEARCH_E_ABORT)
+            /* We abort the search in case of a pattern error, or if the user aborts
+               the search. In other words: in all cases except "string not found". */
+            if (!ok && view->search->error != MC_SEARCH_E_NOTFOUND)
                 return FALSE;
 
             search_start--;
@@ -177,17 +178,17 @@ mcview_search_show_result (WView * view, size_t match_len)
     int nroff_len;
 
     nroff_len =
-        view->text_nroff_mode
+        view->mode_flags.nroff
         ? mcview__get_nroff_real_len (view, view->search->start_buffer,
                                       view->search->normal_offset - view->search->start_buffer) : 0;
     view->search_start = view->search->normal_offset + nroff_len;
 
-    if (!view->hex_mode)
+    if (!view->mode_flags.hex)
         view->search_start++;
 
     nroff_len =
-        view->text_nroff_mode ? mcview__get_nroff_real_len (view, view->search_start - 1,
-                                                            match_len) : 0;
+        view->mode_flags.nroff ? mcview__get_nroff_real_len (view, view->search_start - 1,
+                                                             match_len) : 0;
     view->search_end = view->search_start + match_len + nroff_len;
 
     mcview_moveto_match (view);
@@ -203,7 +204,7 @@ mcview_search_cmd_callback (const void *user_data, gsize char_offset, int *curre
     WView *view = ((const mcview_search_status_msg_t *) user_data)->view;
 
     /*    view_read_continue (view, &view->search_onechar_info); *//* AB:FIXME */
-    if (!view->text_nroff_mode)
+    if (!view->mode_flags.nroff)
     {
         mcview_get_byte (view, char_offset, current_char);
         return MC_SEARCH_CB_OK;
@@ -308,7 +309,7 @@ mcview_do_search (WView * view, off_t want_search_start)
 
     if (view->search_start != 0)
     {
-        if (!view->text_nroff_mode)
+        if (!view->mode_flags.nroff)
             search_start = view->search_start + (mcview_search_options.backwards ? -2 : 0);
         else
         {
@@ -365,16 +366,30 @@ mcview_do_search (WView * view, off_t want_search_start)
             break;
         }
 
-        if (view->search->error == MC_SEARCH_E_ABORT || view->search->error == MC_SEARCH_E_NOTFOUND)
+        /* Search error is here.
+         * MC_SEARCH_E_NOTFOUND: continue search
+         * others: stop
+         */
+        if (view->search->error != MC_SEARCH_E_NOTFOUND)
             break;
 
         search_start = growbufsize - view->search->original_len;
     }
     while (search_start > 0 && mcview_may_still_grow (view));
 
+    /* After mcview_may_still_grow (view) == FALSE we have remained last chunk. Search there. */
+    if (view->growbuf_in_use && !found && view->search->error == MC_SEARCH_E_NOTFOUND
+        && !mcview_search_options.backwards
+        && mcview_find (&vsm, search_start, mcview_get_filesize (view), &match_len))
+    {
+        mcview_search_show_result (view, match_len);
+        found = TRUE;
+    }
+
     status_msg_deinit (STATUS_MSG (&vsm));
 
-    if (orig_search_start != 0 && !found && !mcview_search_options.backwards)
+    if (orig_search_start != 0 && (!found && view->search->error == MC_SEARCH_E_NOTFOUND)
+        && !mcview_search_options.backwards)
     {
         view->search_start = orig_search_start;
         mcview_update (view);
@@ -406,9 +421,7 @@ mcview_do_search (WView * view, off_t want_search_start)
         }
     }
 
-    if (!found
-        && (view->search->error == MC_SEARCH_E_ABORT
-            || view->search->error == MC_SEARCH_E_NOTFOUND))
+    if (!found)
     {
         view->search_start = orig_search_start;
         mcview_update (view);

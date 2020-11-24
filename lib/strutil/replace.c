@@ -1,7 +1,7 @@
 /*
    Functions for replacing substrings in strings.
 
-   Copyright (C) 2013-2016
+   Copyright (C) 2013-2020
    Free Software Foundation, Inc.
 
    Written by:
@@ -42,7 +42,7 @@
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-str_ptr_array_join (GPtrArray * str_splints)
+str_ptr_array_join (const GPtrArray * str_splints)
 {
     GString *return_str;
     guint i;

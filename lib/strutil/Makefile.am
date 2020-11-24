@@ -1,6 +1,7 @@
 noinst_LTLIBRARIES = libmcstrutil.la
 
 libmcstrutil_la_SOURCES = \
+	filevercmp.c \
 	replace.c \
 	strescape.c \
 	strutil8bit.c \

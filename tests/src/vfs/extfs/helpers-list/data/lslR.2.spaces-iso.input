@@ -1,0 +1,23 @@
+.:
+total 12
+drwxr-xr-x 3 serhiy serhiy 4096 2009-12-29 19:12  1 2
+drwxr-xr-x 2 serhiy serhiy 4096 2009-12-29 19:08 1 2
+drwxr-xr-x 2 serhiy serhiy 4096 2009-12-29 19:12 1 2 
+
+./ 1 2:
+total 4
+-rw-r--r-- 1 serhiy serhiy    0 2009-12-29 19:08 b
+drwxr-xr-x 2 serhiy serhiy 4096 2009-12-29 19:12 z
+
+./ 1 2/z:
+total 0
+
+./1 2:
+total 0
+-rw-r--r-- 1 serhiy serhiy 0 2009-12-29 19:08 a
+
+./1 2 :
+total 0
+-rw-r--r-- 1 serhiy serhiy 0 2009-12-29 19:08 c
+-rw-r--r-- 1 serhiy serhiy 0 2009-12-29 19:09  d
+-rw-r--r-- 1 serhiy serhiy 0 2009-12-29 19:09 x:

@@ -5,7 +5,7 @@
 # Source of zoo can be found at
 # ftp://ftp.ibiblio.org/pub/Linux/utils/compress/
 
-ZOO=zoo
+ZOO=${MC_TEST_EXTFS_LIST_CMD:-zoo}
 
 # Stupid zoo won't work if the archive name has no .zoo extension, so we
 # have to make a symlink with a "better" name.  Also, zoo can create
@@ -35,10 +35,14 @@ if ($6 > 50)
 else
     $6=$6 + 2000
 split($7, a, ":")
+split("Jan:Feb:Mar:Apr:May:Jun:Jul:Aug:Sep:Oct:Nov:Dec", month_list, ":")
+for (i=1; i<=12; i++) {
+    month[month_list[i]] = i
+}
 if ($8 ~ /\/$/)
-    printf "drwxr-xr-x   1 %-8d %-8d %8d %s %2d %4d %02d:%02d %s\n", uid, 0, $1, $5, $4, $6, a[1], a[2], $8
+    printf "drwxr-xr-x   1 %-8d %-8d %8d %02d-%02d-%4d %02d:%02d %s\n", uid, 0, $1, month[$5], $4, $6, a[1], a[2], $8
 else
-    printf "-rw-r--r--   1 %-8d %-8d %8d %s %2d %4d %02d:%02d %s\n", uid, 0, $1, $5, $4, $6, a[1], a[2], $8
+    printf "-rw-r--r--   1 %-8d %-8d %8d %02d-%02d-%4d %02d:%02d %s\n", uid, 0, $1, month[$5], $4, $6, a[1], a[2], $8
 }' 2>/dev/null
     exit 0
 }

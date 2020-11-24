@@ -20,7 +20,6 @@ config.sub
 configure
 configure.mc
 gettext.m4
-intl
 install-sh
 m4
 mc.qpg
@@ -46,3 +45,5 @@ make.log
 make.clang
 make.gcc
 make.tcc
+tests/src/editor/test-data.txt
+tests/src/vfs/extfs/helpers-list/data/config.sh

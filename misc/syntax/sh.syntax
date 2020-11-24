@@ -567,6 +567,9 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
     keyword whole ogginfo cyan
     keyword whole open cyan
     keyword whole openvt cyan
+    keyword whole opusdec cyan
+    keyword whole opusenc cyan
+    keyword whole opusinfo cyan
     keyword whole pager cyan
     keyword whole pam_getenv cyan
     keyword whole paperconf cyan
@@ -1995,6 +1998,7 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
     keyword whole zoo cyan
     keyword whole zsh cyan
     keyword whole zsoelim cyan
+    keyword whole zstd cyan
     keyword whole zxpdf cyan
 
     keyword whole pamcut cyan

@@ -1,7 +1,7 @@
 /*
    Configure module for the Midnight Commander
 
-   Copyright (C) 1994-2016
+   Copyright (C) 1994-2020
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
@@ -30,18 +30,20 @@
 #include "lib/global.h"
 #include "lib/vfs/vfs.h"        /* mc_stat */
 #include "lib/util.h"
+
 #include "lib/mcconfig.h"
 
-/*** global variables **************************************************/
+/*** global variables ****************************************************************************/
 
-/*** file scope macro definitions **************************************/
+/*** file scope macro definitions ****************************************************************/
 
-/*** file scope type declarations **************************************/
+/*** file scope type declarations ****************************************************************/
 
-/*** file scope variables **********************************************/
+/*** file scope variables ************************************************************************/
 
-/*** file scope functions **********************************************/
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* --------------------------------------------------------------------------------------------- */
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 static gboolean
 mc_config_new_or_override_file (mc_config_t * mc_config, const gchar * ini_path, GError ** mcerror)
@@ -80,6 +82,7 @@ mc_config_new_or_override_file (mc_config_t * mc_config, const gchar * ini_path,
          (cur_written = mc_write (fd, (const void *) written_data, total_written)) > 0;
          written_data += cur_written, total_written -= cur_written)
         ;
+
     mc_close (fd);
     g_free (data);
 
@@ -94,9 +97,9 @@ mc_config_new_or_override_file (mc_config_t * mc_config, const gchar * ini_path,
     return TRUE;
 }
 
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-/*** public functions **************************************************/
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 mc_config_t *
 mc_config_init (const gchar * ini_path, gboolean read_only)
@@ -105,7 +108,6 @@ mc_config_init (const gchar * ini_path, gboolean read_only)
     struct stat st;
 
     mc_config = g_try_malloc0 (sizeof (mc_config_t));
-
     if (mc_config == NULL)
         return NULL;
 
@@ -115,6 +117,7 @@ mc_config_init (const gchar * ini_path, gboolean read_only)
         g_free (mc_config);
         return NULL;
     }
+
     if (ini_path == NULL)
         return mc_config;
 
@@ -140,7 +143,7 @@ mc_config_init (const gchar * ini_path, gboolean read_only)
     return mc_config;
 }
 
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* --------------------------------------------------------------------------------------------- */
 
 void
 mc_config_deinit (mc_config_t * mc_config)
@@ -153,51 +156,51 @@ mc_config_deinit (mc_config_t * mc_config)
     }
 }
 
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* --------------------------------------------------------------------------------------------- */
 
 gboolean
 mc_config_has_param (const mc_config_t * mc_config, const char *group, const gchar * param)
 {
-    if (!mc_config || !group || !param)
+    if (mc_config == NULL || group == NULL || param == NULL)
         return FALSE;
 
     return g_key_file_has_key (mc_config->handle, group, param, NULL);
 }
 
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* --------------------------------------------------------------------------------------------- */
 
 gboolean
 mc_config_has_group (mc_config_t * mc_config, const char *group)
 {
-    if (!mc_config || !group)
+    if (mc_config == NULL || group == NULL)
         return FALSE;
 
     return g_key_file_has_group (mc_config->handle, group);
 }
 
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* --------------------------------------------------------------------------------------------- */
 
 gboolean
 mc_config_del_key (mc_config_t * mc_config, const char *group, const gchar * param)
 {
-    if (!mc_config || !group || !param)
+    if (mc_config == NULL || group == NULL || param == NULL)
         return FALSE;
 
     return g_key_file_remove_key (mc_config->handle, group, param, NULL);
 }
 
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* --------------------------------------------------------------------------------------------- */
 
 gboolean
 mc_config_del_group (mc_config_t * mc_config, const char *group)
 {
-    if (!mc_config || !group)
+    if (mc_config == NULL || group == NULL)
         return FALSE;
 
     return g_key_file_remove_group (mc_config->handle, group, NULL);
 }
 
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* --------------------------------------------------------------------------------------------- */
 
 gboolean
 mc_config_read_file (mc_config_t * mc_config, const gchar * ini_path, gboolean read_only,
@@ -247,7 +250,7 @@ mc_config_read_file (mc_config_t * mc_config, const gchar * ini_path, gboolean r
     return ok;
 }
 
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* --------------------------------------------------------------------------------------------- */
 
 gboolean
 mc_config_save_file (mc_config_t * mc_config, GError ** mcerror)
@@ -260,7 +263,7 @@ mc_config_save_file (mc_config_t * mc_config, GError ** mcerror)
     return mc_config_new_or_override_file (mc_config, mc_config->ini_path, mcerror);
 }
 
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* --------------------------------------------------------------------------------------------- */
 
 gboolean
 mc_config_save_to_file (mc_config_t * mc_config, const gchar * ini_path, GError ** mcerror)
@@ -271,7 +274,6 @@ mc_config_save_to_file (mc_config_t * mc_config, const gchar * ini_path, GError 
         return FALSE;
 
     return mc_config_new_or_override_file (mc_config, ini_path, mcerror);
-
 }
 
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* --------------------------------------------------------------------------------------------- */

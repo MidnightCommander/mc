@@ -1,7 +1,7 @@
 /*
    Widget based utility functions.
 
-   Copyright (C) 1994-2016
+   Copyright (C) 1994-2020
    Free Software Foundation, Inc.
 
    Authors:
@@ -109,7 +109,7 @@ create_listbox_window_centered (int center_y, int center_x, int lines, int cols,
                     NULL, NULL, help, title);
 
     listbox->list = listbox_new (2, 2, lines, cols, FALSE, NULL);
-    add_widget (listbox->dlg, listbox->list);
+    group_add_widget (GROUP (listbox->dlg), listbox->list);
 
     return listbox;
 }
@@ -132,6 +132,41 @@ run_listbox (Listbox * l)
 
     if (dlg_run (l->dlg) != B_CANCEL)
         val = l->list->pos;
+    dlg_destroy (l->dlg);
+    g_free (l);
+    return val;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * A variant of run_listbox() which is more convenient to use when we
+ * need to select arbitrary 'data'.
+ *
+ * @param select  the item to select initially, by its 'data'. Optional.
+ * @return        the 'data' of the item selected, or NULL if none selected.
+ */
+void *
+run_listbox_with_data (Listbox * l, const void *select)
+{
+    void *val = NULL;
+
+    if (select != NULL)
+        listbox_select_entry (l->list, listbox_search_data (l->list, select));
+
+    if (dlg_run (l->dlg) != B_CANCEL)
+    {
+        WLEntry *e;
+        e = listbox_get_nth_item (l->list, l->list->pos);
+        if (e != NULL)
+        {
+            /* The assert guards against returning a soon-to-be deallocated
+             * pointer (as in listbox_add_item(..., TRUE)). */
+            g_assert (!e->free_data);
+            val = e->data;
+        }
+    }
+
     dlg_destroy (l->dlg);
     g_free (l);
     return val;

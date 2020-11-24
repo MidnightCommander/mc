@@ -1,5 +1,5 @@
 [main]
-ChangePanel = tab
+ChangePanel = tab; ctrl-i
 Help = f1
 UserMenu = f2
 View = f3
@@ -23,8 +23,7 @@ Suspend = ctrl-z
 Swap = ctrl-u
 History = alt-h
 # PanelListing =
-PanelListingSwitch = alt-t
-# PanelListingChange =
+# SetupListingFormat =
 ShowHidden = alt-dot
 SplitVertHoriz = alt-comma
 SplitEqual = alt-equal
@@ -55,11 +54,13 @@ ScreenList = alt-prime
 # ConnectFtp =
 # ConnectSmb =
 # Undelete =
+EditorViewerHistory = alt-shift-e
 ExtendedKeyMap = ctrl-x
 
 [main:xmap]
 ChangeMode = c
 ChangeOwn = o
+ChangeAttributes = e
 CompareDirs = d
 CompareFiles = ctrl-d
 HotListAdd = h
@@ -80,6 +81,7 @@ PutCurrentLink = r
 PutOtherLink = ctrl-r
 
 [panel]
+CycleListingFormat = alt-t
 Search = ctrl-s; alt-s
 Mark = insert; ctrl-t
 MarkUp = shift-up
@@ -143,6 +145,17 @@ ScreenList = alt-prime
 ScreenNext = alt-rbrace
 ScreenPrev = alt-lbrace
 
+[menu]
+Help = f1
+Left = left; ctrl-b
+Right = right; ctrl-f
+Up = up; ctrl-p
+Down = down; ctrl-n
+Home = home; alt-lt; ctr-a
+End = end; alt-gt ctrl-e
+Enter = enter
+Quit = F10; esc; ctrl-g
+
 [input]
 Home = ctrl-a; alt-lt; home; a1
 End = ctrl-e; alt-gt; end; c1
@@ -182,6 +195,16 @@ PageUp = pgup; alt-v
 PageDown = pgdn; ctrl-v
 Delete = delete; d
 Clear = shift-delete; shift-d
+View = f3
+Edit = f4
+Enter = enter
+
+[radio]
+Up = up; ctrl-p
+Down = down; ctrl-n
+Top = home; alt-lt; a1
+Bottom = end; alt-gt; c1
+Select = space
 
 [tree]
 Help = f1
@@ -220,6 +243,16 @@ LinkNext = tab
 LinkPrev = alt-tab
 NodeNext = n
 NodePrev = p
+
+[chattr]
+Up = up; left; ctrl-p
+Down = down; right; ctrl-n
+Top = home; alt-lt; a1
+Bottom = end; alt-gt; c1
+PageUp = pgup; alt-v
+PageDown = pgdn; ctrl-v
+Mark = t; shift-t
+MarkAndDown = insert
 
 [editor]
 Store = ctrl-insert
@@ -260,6 +293,7 @@ Save = f2
 EditNew = ctrl-n
 SaveAs = f12; ctrl-f2
 # Close =
+History = alt-shift-e
 Mark = f3
 Copy = f5
 Move = f6
@@ -366,6 +400,7 @@ SearchBackward = question
 SearchContinue = f17; n
 SearchForwardContinue = ctrl-s
 SearchBackwardContinue = ctrl-r
+SearchOppositeContinue = shift-n
 MagicMode = f8
 NroffMode = f9
 Home = ctrl-a
@@ -389,6 +424,7 @@ FilePrev = ctrl-b
 SelectCodepage = alt-e
 Shell = ctrl-o
 Ruler = alt-r
+History = alt-shift-e
 
 [viewer:hex]
 Help = f1
@@ -403,6 +439,7 @@ SearchBackward = question
 SearchContinue = f17; n
 SearchForwardContinue = ctrl-s
 SearchBackwardContinue = ctrl-r
+SearchOppositeContinue = shift-n
 MagicMode = f8
 NroffMode = f9
 ToggleNavigation = tab
@@ -416,6 +453,7 @@ PageDown = pgdn; ctrl-v
 PageUp = pgup; alt-v
 Top = ctrl-home; ctrl-pgup; a1; alt-lt; g
 Bottom = ctrl-end; ctrl-pgdn; c1; alt-gt; shift-g
+History = alt-shift-e
 
 [diffviewer]
 ShowSymbols = alt-s; s

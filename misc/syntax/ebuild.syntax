@@ -15,16 +15,25 @@ context default
     #.ebuild specific commands/glo vars
     # TODO: 1. split keywords by .eclass'es
     #       2. grep all exports and place here
+    keyword whole AT_M4DIR brightcyan
+    keyword whole BDEPEND brightcyan
     keyword whole CABAL_FEATURES brightcyan
+    keyword whole CHECKREQS_DISK_BUILD brightcyan
+    keyword whole CHECKREQS_DISK_USR brightcyan
+    keyword whole CHECKREQS_DISK_VAR brightcyan
+    keyword whole CHECKREQS_MEMORY brightcyan
+    keyword whole CONFIG_CHECK brightcyan
     keyword whole DEPEND brightcyan
     keyword whole DESCRIPTION brightcyan
     keyword whole EAPI brightcyan
+    keyword whole ECONF_SOURCE brightcyan
     keyword whole EDARCS_REPOSITORY brightcyan
     keyword whole EDARCS_GET_CMD brightcyan
     keyword whole EDARCS_LOCALREPO brightcyan
     keyword whole EGIT_BRANCH brightcyan
     keyword whole EGIT_PROJECT brightcyan
     keyword whole EGIT_REPO_URI brightcyan
+    keyword whole EGIT_SUBMODULES brightcyan
     keyword whole EGIT_TREE brightcyan
     keyword whole ESVN_REPO_URI brightcyan
     keyword whole EXPORT_FUNCTIONS brightcyan
@@ -35,6 +44,19 @@ context default
     keyword whole PATCHES brightcyan
     keyword whole PDEPEND brightcyan
     keyword whole PROVIDE brightcyan
+    keyword whole PYTHON_COMPAT brightcyan
+    keyword whole QA_AM_MAINTAINER_MODE brightcyan
+    keyword whole QA_CONFIGURE_OPTIONS brightcyan
+    keyword whole QA_DESKTOP_FILE brightcyan
+    keyword whole QA_DT_NEEDED brightcyan
+    keyword whole QA_EXECSTACK brightcyan
+    keyword whole QA_FLAGS_IGNORED brightcyan
+    keyword whole QA_MULTILIB_PATHS brightcyan
+    keyword whole QA_PREBUILT brightcyan
+    keyword whole QA_PRESTRIPPED brightcyan
+    keyword whole QA_SONAME brightcyan
+    keyword whole QA_TEXTRELS brightcyan
+    keyword whole QA_WX_LOAD brightcyan
     keyword whole RDEPEND brightcyan
     keyword whole REQUIRED_USE brightcyan
     keyword whole RESTRICT brightcyan
@@ -45,16 +67,19 @@ context default
     keyword whole WANT_AUTOCONF brightcyan
     keyword whole WANT_AUTOMAKE brightcyan
     keyword DOCS brightcyan
+    keyword HTML_DOCS brightcyan
     keyword LINGUAS brightcyan
 
-    keyword whole _elibtoolize yellow
+    keyword whole addpredict yellow
     keyword whole best_version yellow
     keyword whole built_with_use yellow
     keyword whole check_KV yellow
+    keyword whole default yellow
     keyword whole die yellow
     keyword whole diropts yellow
     keyword whole dobin yellow
     keyword whole docinto yellow
+    keyword whole docompress yellow
     keyword whole doconfd yellow
     keyword whole dodir yellow
     keyword whole dodoc yellow
@@ -62,7 +87,6 @@ context default
     keyword whole doexe yellow
     keyword whole dohard yellow
     keyword whole dohtml yellow
-    keyword whole doicon yellow
     keyword whole doinfo yellow
     keyword whole doinitd yellow
     keyword whole doins yellow
@@ -70,16 +94,11 @@ context default
     keyword whole dolib.a yellow
     keyword whole dolib.so yellow
     keyword whole doman yellow
-    keyword whole domenu yellow
     keyword whole dosbin yellow
     keyword whole dosed yellow
     keyword whole dosym yellow
-    keyword whole eaclocal yellow
     keyword whole eapply yellow
     keyword whole eapply_user yellow
-    keyword whole eautoconf yellow
-    keyword whole eautoreconf yellow
-    keyword whole eautomake yellow
     keyword whole ebegin yellow
     keyword whole econf yellow
     keyword whole eend yellow
@@ -87,7 +106,6 @@ context default
     keyword whole einfo yellow
     keyword whole einstall yellow
     keyword whole einstalldocs yellow
-    keyword whole elibtoolize yellow
     keyword whole elog yellow
     keyword whole emake yellow
     keyword whole epatch yellow
@@ -108,15 +126,12 @@ context default
     keyword whole into yellow
     keyword whole keepdir yellow
     keyword whole libopts yellow
-    keyword whole local yellow
     keyword whole newbin yellow
     keyword whole newconfd yellow
     keyword whole newdoc yellow
     keyword whole newexe yellow
-    keyword whole newicon yellow
     keyword whole newins yellow
     keyword whole newman yellow
-    keyword whole newmenu yellow
     keyword whole newsbin yellow
     keyword whole newinitd yellow
     keyword whole pax-mark yellow
@@ -126,37 +141,185 @@ context default
     keyword whole prepallman yellow
     keyword whole unpack yellow
     keyword whole use yellow
+    keyword whole usev yellow
+    keyword whole usex yellow
     keyword whole use_enable yellow
     keyword whole use_with yellow
-    #base
-    keyword whole base_src_unpack yellow
+    #autotools
+    keyword whole _elibtoolize yellow
+    keyword whole eaclocal yellow
+    keyword whole eautoconf yellow
+    keyword whole eautopoint yellow
+    keyword whole eautoreconf yellow
+    keyword whole eautomake yellow
+    #bashcomp
+    keyword whole bashcomp_alias yellow
+    keyword whole dobashcomp yellow
+    keyword whole newbashcomp yellow
     #cvs
     keyword whole cvs_src_unpack yellow
     #darcs
     keyword whole darcs_src_unpack yellow
+    #default
+    keyword whole default_src_unpack yellow
+    #desktop
+    keyword whole doicon yellow
+    keyword whole domenu yellow
+    keyword whole make_desktop_entry yellow
+    keyword whole make_session_desktop yellow
+    keyword whole newicon yellow
+    keyword whole newmenu yellow
     #elisp-common
     keyword whole elisp-compile yellow
     keyword whole elisp-install yellow
     keyword whole elisp-site-file-install yellow
     keyword whole elisp-site-regen yellow
     #flag-o-matic
+    keyword whole append-cflags yellow
+    keyword whole append-cxxflags yellow
     keyword whole append-flags yellow
+    keyword whole append-ldflags yellow
+    keyword whole append-lfs-flags yellow
     keyword whole filter-flags yellow
     keyword whole replace-flags yellow
     keyword whole strip-flags yellow
     keyword whole strip-unsupported-flags yellow
-    #git
-    keyword whole git_src_unpack yellow
+    #git-r3
+    keyword whole git-r3_checkout yellow
+    keyword whole git-r3_fetch yellow
+    keyword whole git-r3_src_unpack yellow
     #java-ant-2
     keyword whole EANT_BUILD_TARGET yellow
+    #kernel-2
+    keyword whole kernel-2_src_unpack yellow
+    keyword whole kernel_is yellow
+    #libtool
+    keyword whole elibtoolize yellow
     #mercurial
     keyword whole mercurial_src_unpack yellow
+    #mozilla
+    keyword whole mozconfig_annotate yellow
+    keyword whole mozconfig_config yellow
+    keyword whole mozconfig_final yellow
+    keyword whole mozconfig_init yellow
+    keyword whole mozconfig_install_prefs yellow
+    keyword whole mozconfig_use_enable yellow
+    keyword whole mozconfig_use_with yellow
+    keyword whole moz_pkg_setup yellow
+    #multilib
+    keyword whole multilib_copy_sources yellow
+    keyword whole multilib_env yellow
+    keyword whole multilib_foreach_abi yellow
+    keyword whole multilib_is_native_abi yellow
+    keyword whole multilib_layout yellow
+    keyword whole multilib_parallel_foreach_abi yellow
+    keyword whole multilib_toolchain_setup yellow
+    #ninja-utils
+    keyword whole eninja yellow
+    #pam
+    keyword whole cleanpamd yellow
+    keyword whole dopamd yellow
+    keyword whole dopammod yellow
+    keyword whole dopamsecurity yellow
+    keyword whole newpamd yellow
+    keyword whole newpammod yellow
+    keyword whole newpamsecurity yellow
+    keyword whole pamd_mimic yellow
+    keyword whole pamd_mimic_system yellow
+    #prefix
+    keyword whole eprefixify yellow
+    #preserve-libs
+    keyword whole preserve_old_lib yellow
+    keyword whole preserve_old_lib_notify yellow
+    #python
+    keyword whole python_copy_sources yellow
+    keyword whole python_do yellow
+    keyword whole python_doexe yellow
+    keyword whole python_doheader yellow
+    keyword whole python_domodule yellow
+    keyword whole python_doscript yellow
+    keyword whole python_export yellow
+    keyword whole python_export_best yellow
+    keyword whole python_fix_shebang yellow
+    keyword whole python_foreach_impl yellow
+    keyword whole python_is_python3 yellow
+    keyword whole python_moduleinto yellow
+    keyword whole python_newexe yellow
+    keyword whole python_newscript yellow
+    keyword whole python_optimize yellow
+    keyword whole python_replicate_script yellow
+    keyword whole python_scriptinto yellow
+    keyword whole python_setup yellow
+    #rpm
+    keyword whole rpm_src_unpack yellow
+    keyword whole rpm_unpack yellow
     #svn
     keyword whole subversion_src_unpack yellow
+    #systemd
+    keyword whole systemd_dotmpfilesd yellow
+    keyword whole systemd_dounit yellow
+    keyword whole systemd_douserunit yellow
+    keyword whole systemd_enable_ntpunit yellow
+    keyword whole systemd_install_serviced yellow
+    keyword whole systemd_logger yellow
+    keyword whole systemd_newtmpfilesd yellow
+    keyword whole systemd_newunit yellow
+    keyword whole systemd_reenable yellow
+    keyword whole systemd_update_catalog yellow
+    #toolchain-funcs
+    keyword whole gen_usr_ldscript yellow
+    keyword whole tc-check-openmp yellow
+    keyword whole tc-enables-pie yellow
+    keyword whole tc-export yellow
+    keyword whole tc-export_build_env yellow
+    keyword whole tc-has-openmp yellow
+    keyword whole tc-has-tls yellow
+    keyword whole tc-is-clang yellow
+    keyword whole tc-is-cross-compiler yellow
+    keyword whole tc-is-gcc yellow
+    keyword whole tc-is-static-only yellow
+    keyword whole tc-ld-disable-gold yellow
+    #toolchain
+    keyword whole toolchain_src_unpack yellow
+    #unpacker
+    keyword whole unpacker_src_unpack yellow
+    #virtualx
+    keyword whole virtx yellow
+    #xdg
+    keyword whole xdg_desktop_database_update yellow
+    keyword whole xdg_environment_reset yellow
+    keyword whole xdg_icon_cache_update yellow
+    keyword whole xdg_mimeinfo_database_update yellow
 
     #bashism (builtin extended 'test')
     keyword whole [[ brightcyan
     keyword whole ]] brightcyan
+
+    #common Makefile variables
+    keyword whole AR cyan
+    keyword whole AS cyan
+    keyword whole BINDIR cyan
+    keyword whole CC cyan
+    keyword whole CFLAGS cyan
+    keyword whole CPPFLAGS cyan
+    keyword whole CXX cyan
+    keyword whole CXXFLAGS cyan
+    keyword whole DESTDIR cyan
+    keyword whole DOCDIR cyan
+    keyword whole LD cyan
+    keyword whole LDFLAGS cyan
+    keyword whole LIBDIR cyan
+    keyword whole MANDIR cyan
+    keyword whole NM cyan
+    keyword whole OBJCOPY cyan
+    keyword whole PKG_CONFIG cyan
+    keyword whole PREFIX cyan
+    keyword whole RANLIB cyan
+    keyword whole SBINDIR cyan
+    keyword whole SHELL cyan
+    keyword whole STRIP cyan
+    keyword whole SYSCONFDIR cyan
+    keyword whole YACC cyan
 
 ####################
 # here starts original sh.syntax (with core commands only)
@@ -222,6 +385,7 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
     keyword whole getopts yellow
     keyword whole if yellow
     keyword whole in yellow
+    keyword whole local yellow
     keyword whole read yellow
     keyword whole return yellow
     keyword whole select yellow
@@ -254,10 +418,13 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
     keyword whole perl cyan
     keyword whole pod2man cyan
     keyword whole popd cyan
+    keyword whole printf cyan
     keyword whole pushd cyan
     keyword whole rm cyan
+    keyword whole rmdir cyan
     keyword whole sed cyan
     keyword whole sh cyan
+    keyword whole shopt cyan
     keyword whole touch cyan
     keyword whole xmkmf cyan
 

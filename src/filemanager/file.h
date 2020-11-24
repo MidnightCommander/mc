@@ -39,6 +39,8 @@ struct dirsize_status_msg_t
 
 /*** declarations of public functions ************************************************************/
 
+gboolean file_is_symlink_to_dir (const vfs_path_t * path, struct stat *st, gboolean * stale_link);
+
 FileProgressStatus copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
                                    const char *src_path, const char *dst_path);
 FileProgressStatus move_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx,
@@ -55,12 +57,12 @@ gboolean panel_operate (void *source_panel, FileOperation op, gboolean force_sin
 /* Error reporting routines */
 
 /* Report error with one file */
-FileProgressStatus file_error (const char *format, const char *file);
+FileProgressStatus file_error (gboolean allow_retry, const char *format, const char *file);
 
 /* return value is FILE_CONT or FILE_ABORT */
 FileProgressStatus compute_dir_size (const vfs_path_t * dirname_vpath, dirsize_status_msg_t * sm,
                                      size_t * ret_dir_count, size_t * ret_marked_count,
-                                     uintmax_t * ret_total, gboolean compute_symlinks);
+                                     uintmax_t * ret_total, gboolean follow_symlinks);
 
 void dirsize_status_init_cb (status_msg_t * sm);
 int dirsize_status_update_cb (status_msg_t * sm);

@@ -1,0 +1,706 @@
+# syntax highlighting for cobol.
+# the author is Wuerl, see https://midnight-commander.org/ticket/1987
+# adapted to use in mcedit version 4.8.24 by alex bodnaru <alexbodn@gmail.com>
+
+caseinsensitive
+
+context default
+    keyword ;; brightred
+    keyword \\@ brightred
+    keyword \\$ brightred
+    keyword \\\\ brightred
+    keyword \\" brightred
+    keyword \\' brightred
+    keyword \\` brightred
+    keyword ` brightred
+    keyword ; brightcyan
+    keyword $(*) brightgreen
+    keyword ${*} brightgreen
+    keyword { brightcyan
+    keyword } brightcyan
+
+    keyword whole linestart #!\[\s\]*\n brightcyan black
+
+    keyword $\* brightred
+    keyword $@ brightred
+    keyword $# brightred
+    keyword $? brightred
+    keyword $- brightred
+    keyword $$ brightred
+    keyword $! brightred
+    keyword $_ brightred
+
+    keyword wholeright $\[0123456789\] brightred
+
+    keyword wholeright $+ brightgreen
+
+    keyword $ brightgreen
+
+    keyword wholeleft linestart function*() brightmagenta
+    keyword wholeleft linestart function\[\s\]+ brightmagenta
+    keyword wholeright +() brightmagenta
+
+wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
+
+    keyword whole accept yellow
+    keyword whole access yellow
+    keyword whole add yellow
+    keyword whole adress yellow
+    keyword whole advancing yellow
+    keyword whole after yellow
+    keyword whole allowing yellow
+    keyword whole all yellow
+    keyword whole alpahanumeric-edited yellow
+    keyword whole alphabetic-lower yellow
+    keyword whole alphabetic-upper yellow
+    keyword whole alphabetic yellow
+    keyword whole alphabet yellow
+    keyword whole alphanumeric-edited yellow
+    keyword whole alphanumeric yellow
+    keyword whole also yellow
+    keyword whole alternate yellow
+    keyword whole alter yellow
+    keyword whole and yellow
+    keyword whole any yellow
+    keyword whole apply yellow
+    keyword whole areas yellow
+    keyword whole area yellow
+    keyword whole are yellow
+    keyword whole arithmetic yellow
+    keyword whole ascending yellow
+    keyword whole assign yellow
+    keyword whole as yellow
+    keyword whole at yellow
+    keyword whole author. yellow
+    keyword whole b-and yellow
+    keyword whole based-storage yellow
+    keyword whole based yellow
+    keyword whole basis yellow
+    keyword whole before yellow
+    keyword whole beginning yellow
+    keyword whole begin yellow
+    keyword whole between yellow
+    keyword whole b-exor yellow
+    keyword whole binary yellow
+    keyword whole binary- yellow
+    keyword whole bits yellow
+    keyword whole bit yellow
+    keyword whole blank yellow
+    keyword whole b-less yellow
+    keyword whole block yellow
+    keyword whole b-not yellow
+    keyword whole boolean yellow
+    keyword whole b-or yellow
+    keyword whole bottom yellow
+    keyword whole byte yellow
+    keyword whole by yellow
+    keyword whole call yellow
+    keyword whole cancel yellow
+    keyword whole caracter yellow
+    keyword whole cbl yellow
+    keyword whole cd yellow
+    keyword whole cf yellow
+    keyword whole characters yellow
+    keyword whole character yellow
+    keyword whole ch yellow
+    keyword whole class-id yellow
+    keyword whole class yellow
+    keyword whole clock-units yellow
+    keyword whole cobol yellow
+    keyword whole code-set yellow
+    keyword whole code yellow
+    keyword whole collating yellow
+    keyword whole column yellow
+    keyword whole command yellow
+    keyword whole comma yellow
+    keyword whole common yellow
+    keyword whole communication yellow
+    keyword whole comp-1 yellow
+    keyword whole comp-2 yellow
+    keyword whole comp-3 yellow
+    keyword whole comp-4 yellow
+    keyword whole comp-5 yellow
+    keyword whole comp-6 yellow
+    keyword whole comp-7 yellow
+    keyword whole comp-8 yellow
+    keyword whole complex yellow
+    keyword whole comp-n yellow
+    keyword whole computational-1 yellow
+    keyword whole computational-2 yellow
+    keyword whole computational-3 yellow
+    keyword whole computational-4 yellow
+    keyword whole computational-5 yellow
+    keyword whole computational-n yellow
+    keyword whole computational-x yellow
+    keyword whole computational yellow
+    keyword whole compute yellow
+    keyword whole comp-x yellow
+    keyword whole com-reg yellow
+    keyword whole configuration yellow
+    keyword whole console yellow
+    keyword whole constant yellow
+    keyword whole contained yellow
+    keyword whole contains yellow
+    keyword whole content yellow
+    keyword whole continue yellow
+    keyword whole control-area yellow
+    keyword whole controls yellow
+    keyword whole control yellow
+    keyword whole converting yellow
+    keyword whole copy yellow
+    keyword whole corresponding yellow
+    keyword whole corr yellow
+    keyword whole count yellow
+    keyword whole currency yellow
+    keyword whole current yellow
+    keyword whole cursor yellow
+    keyword whole custom-attribute yellow
+    keyword whole cycle yellow
+    keyword whole data yellow
+    keyword whole date-compiled. yellow
+    keyword whole date-written. yellow
+    keyword whole date yellow
+    keyword whole day-of-week yellow
+    keyword whole day yellow
+    keyword whole db-access-control-key yellow
+    keyword whole dbcs yellow
+    keyword whole db-data-name yellow
+    keyword whole db-exception yellow
+    keyword whole db-record-name yellow
+    keyword whole db-set-name yellow
+    keyword whole db-status yellow
+    keyword whole db yellow
+    keyword whole debug-contents yellow
+    keyword whole debugging yellow
+    keyword whole debug-item yellow
+    keyword whole debug-line yellow
+    keyword whole debug-name yellow
+    keyword whole debug-sub-1 yellow
+    keyword whole debug-sub-2 yellow
+    keyword whole debug-sub-3 yellow
+    keyword whole debug-sub yellow
+    keyword whole debug yellow
+    keyword whole decimal-point yellow
+    keyword whole declaratives yellow
+    keyword whole default yellow
+    keyword whole delegate-id yellow
+    keyword whole delegate yellow
+    keyword whole delimited yellow
+    keyword whole delimiter yellow
+    keyword whole depending yellow
+    keyword whole descending yellow
+    keyword whole destination yellow
+    keyword whole destination- yellow
+    keyword whole detail yellow
+    keyword whole de yellow
+    keyword whole disable yellow
+    keyword whole display-1 yellow
+    keyword whole display-2 yellow
+    keyword whole display-3 yellow
+    keyword whole display-4 yellow
+    keyword whole display-5 yellow
+    keyword whole display-6 yellow
+    keyword whole display-7 yellow
+    keyword whole display-8 yellow
+    keyword whole display-9 yellow
+    keyword whole display yellow
+    keyword whole display- yellow
+    keyword whole divide yellow
+    keyword whole division. yellow
+    keyword whole down yellow
+    keyword whole duplicates yellow
+    keyword whole duplicate yellow
+    keyword whole dynamic yellow
+    keyword whole egcs yellow
+    keyword whole egi yellow
+    keyword whole eject yellow
+    keyword whole else yellow
+    keyword whole emi yellow
+    keyword whole empty yellow
+    keyword whole enable yellow
+    keyword whole end-add yellow
+    keyword whole end-call yellow
+    keyword whole end-ch yellow
+    keyword whole end-class yellow
+    keyword whole end-compute yellow
+    keyword whole end*delegate. yellow
+    keyword whole end-delegate yellow
+    keyword whole end-disable yellow
+    keyword whole end-display yellow
+    keyword whole end-divide yellow
+    keyword whole end-enable yellow
+    keyword whole end-enum yellow
+    keyword whole end-evaluate yellow
+    keyword whole end-if yellow
+    keyword whole ending yellow
+    keyword whole end-invoke yellow
+    keyword whole end-multiply yellow
+    keyword whole end-of-page yellow
+    keyword whole end-perform yellow
+    keyword whole end-receive yellow
+    keyword whole end-return yellow
+    keyword whole end-send yellow
+    keyword whole end-start yellow
+    keyword whole end-string yellow
+    keyword whole end-subtract yellow
+    keyword whole endter yellow
+    keyword whole end-transceive yellow
+    keyword whole end-unstring yellow
+    keyword whole end yellow
+    keyword whole enter yellow
+    keyword whole entry yellow
+    keyword whole enum*id yellow
+    keyword whole enum-id yellow
+    keyword whole enum yellow
+    keyword whole eop yellow
+    keyword whole equals yellow
+    keyword whole equal yellow
+    keyword whole erase yellow
+    keyword whole error yellow
+    keyword whole esi yellow
+    keyword whole evaluate yellow
+    keyword whole every yellow
+    keyword whole exact yellow
+    keyword whole examine yellow
+    keyword whole exceeds yellow
+    keyword whole exception-object yellow
+    keyword whole exception yellow
+    keyword whole exclusive yellow
+    keyword whole exceeds yellow
+    keyword whole exist yellow
+    keyword whole exit yellow
+    keyword whole extend yellow
+    keyword whole external yellow
+    keyword whole factory yellow
+    keyword whole false yellow
+    keyword whole fd yellow
+    keyword whole file-control. yellow
+    keyword whole file-limits yellow
+    keyword whole files yellow
+    keyword whole file yellow
+    keyword whole final yellow
+    keyword whole find yellow
+    keyword whole finish yellow
+    keyword whole first yellow
+    keyword whole footing yellow
+    keyword whole format yellow
+    keyword whole form yellow
+    keyword whole free yellow
+    keyword whole from yellow
+    keyword whole function yellow
+    keyword whole f yellow
+    keyword whole f. yellow
+    keyword whole generate yellow
+    keyword whole get yellow
+    keyword whole giving yellow
+    keyword whole global yellow
+    keyword whole goback yellow
+    keyword whole goback. yellow
+    keyword whole go yellow
+    keyword whole greater yellow
+    keyword whole group yellow
+    keyword whole having yellow
+    keyword whole heading yellow
+    keyword whole high-values yellow
+    keyword whole high*value yellow
+    keyword whole high-value yellow
+    keyword whole id yellow
+    keyword whole if yellow
+    keyword whole include yellow
+    keyword whole indexed yellow
+    keyword whole index yellow
+    keyword whole indicate yellow
+    keyword whole inherits yellow
+    keyword whole initialize yellow
+    keyword whole initial yellow
+    keyword whole initiate yellow
+    keyword whole input-output yellow
+    keyword whole input yellow
+    keyword whole inspect yellow
+    keyword whole installation yellow
+    keyword whole interface-id yellow
+    keyword whole interface yellow
+    keyword whole into yellow
+    keyword whole invalid yellow
+    keyword whole invoke yellow
+    keyword whole in yellow
+    keyword whole i-o-control. yellow
+    keyword whole i-o yellow
+    keyword whole is yellow
+    keyword whole item yellow
+    keyword whole justified yellow
+    keyword whole just yellow
+    keyword whole kanji yellow
+    keyword whole keep yellow
+    keyword whole key yellow
+    keyword whole label yellow
+    keyword whole last yellow
+    keyword whole ld yellow
+    keyword whole leading yellow
+    keyword whole left yellow
+    keyword whole lenght yellow
+    keyword whole less yellow
+    keyword whole like yellow
+    keyword whole limits yellow
+    keyword whole limit yellow
+    keyword whole linage*counter yellow
+    keyword whole linage-counter yellow
+    keyword whole linage yellow
+    keyword whole line*counter yellow
+    keyword whole line-counter yellow
+    keyword whole lines yellow
+    keyword whole line yellow
+    keyword whole linkage yellow
+    keyword whole locally yellow
+    keyword whole local-storage yellow
+    keyword whole lock yellow
+    keyword whole low-values yellow
+    keyword whole low-value yellow
+    keyword whole ls-area yellow
+    keyword whole member yellow
+    keyword whole memory yellow
+    keyword whole merge yellow
+    keyword whole message yellow
+    keyword whole metaclass yellow
+    keyword whole method-id yellow
+    keyword whole method yellow
+    keyword whole mode yellow
+    keyword whole mode- yellow
+    keyword whole modify yellow
+    keyword whole modules yellow
+    keyword whole more-labels yellow
+    keyword whole more yellow
+    keyword whole move yellow
+    keyword whole multiple yellow
+    keyword whole multiply yellow
+    keyword whole native yellow
+    keyword whole negative yellow
+    keyword whole next yellow
+    keyword whole normal yellow
+    keyword whole not yellow
+    keyword whole no yellow
+    keyword whole nulls yellow
+    keyword whole null yellow
+    keyword whole number yellow
+    keyword whole numeric-edited yellow
+    keyword whole numeric yellow
+    keyword whole object-computer. yellow
+    keyword whole object yellow
+    keyword whole occurs yellow
+    keyword whole off yellow
+    keyword whole of yellow
+    keyword whole omitted yellow
+    keyword whole only yellow
+    keyword whole on yellow
+    keyword whole optional yellow
+    keyword whole order yellow
+    keyword whole organisation yellow
+    keyword whole or yellow
+    keyword whole other yellow
+    keyword whole output yellow
+    keyword whole overflow yellow
+    keyword whole override yellow
+    keyword whole owner yellow
+    keyword whole packed*decimal yellow
+    keyword whole packed-decimal yellow
+    keyword whole padding yellow
+    keyword whole page-counter yellow
+    keyword whole page yellow
+    keyword whole password yellow
+    keyword whole perform yellow
+    keyword whole pf yellow
+    keyword whole ph yellow
+    keyword whole picture yellow
+    keyword whole pic yellow
+    keyword whole plus yellow
+    keyword whole pointer yellow
+    keyword whole positioning yellow
+    keyword whole position yellow
+    keyword whole positive yellow
+    keyword whole present yellow
+    keyword whole previous yellow
+    keyword whole printing yellow
+    keyword whole prior yellow
+    keyword whole private yellow
+    keyword whole procedure-pointer yellow
+    keyword whole procedures yellow
+    keyword whole proceed yellow
+    keyword whole processing yellow
+    keyword whole process yellow
+    keyword whole program-id. yellow
+    keyword whole program yellow
+    keyword whole program. yellow
+    keyword whole property yellow
+    keyword whole protected yellow
+    keyword whole prototype yellow
+    keyword whole public yellow
+    keyword whole purge yellow
+    keyword whole queue yellow
+    keyword whole quotes yellow
+    keyword whole quote yellow
+    keyword whole raise yellow
+    keyword whole raising yellow
+    keyword whole random yellow
+    keyword whole range yellow
+    keyword whole rd yellow
+    keyword whole ready yellow
+    keyword whole realm yellow
+    keyword whole receive yellow
+    keyword whole reconnect yellow
+    keyword whole recording yellow
+    keyword whole record-name yellow
+    keyword whole records yellow
+    keyword whole record yellow
+    keyword whole recursive yellow
+    keyword whole redefines yellow
+    keyword whole reel yellow
+    keyword whole references yellow
+    keyword whole reference yellow
+    keyword whole relation yellow
+    keyword whole relative yellow
+    keyword whole release yellow
+    keyword whole reload yellow
+    keyword whole remainder yellow
+    keyword whole remarks yellow
+    keyword whole removal yellow
+    keyword whole renames yellow
+    keyword whole repeated yellow
+    keyword whole replace yellow
+    keyword whole replacing yellow
+    keyword whole reporting yellow
+    keyword whole reports yellow
+    keyword whole report yellow
+    keyword whole repository yellow
+    keyword whole rerun yellow
+    keyword whole reserve yellow
+    keyword whole reset yellow
+    keyword whole retaining yellow
+    keyword whole retrieval yellow
+    keyword whole return-code yellow
+    keyword whole returning yellow
+    keyword whole return yellow
+    keyword whole reversed yellow
+    keyword whole rewind yellow
+    keyword whole rf yellow
+    keyword whole rh yellow
+    keyword whole right yellow
+    keyword whole rounded yellow
+    keyword whole run yellow
+    keyword whole run. yellow
+    keyword whole same yellow
+    keyword whole screen yellow
+    keyword whole sd yellow
+    keyword whole search yellow
+    keyword whole section. yellow
+    keyword whole security yellow
+    keyword whole segment-limit yellow
+    keyword whole segment yellow
+    keyword whole self yellow
+    keyword whole send yellow
+    keyword whole sentence yellow
+    keyword whole separate yellow
+    keyword whole sequence yellow
+    keyword whole sequential yellow
+    keyword whole service yellow
+    keyword whole session-id yellow
+    keyword whole session yellow
+    keyword whole set yellow
+    keyword whole shared yellow
+    keyword whole shift-in yellow
+    keyword whole shift-out yellow
+    keyword whole signed yellow
+    keyword whole sign yellow
+    keyword whole size yellow
+    keyword whole skip yellow
+    keyword whole sort-control yellow
+    keyword whole sort-core-size yellow
+    keyword whole sort-file-size yellow
+    keyword whole sort-merge yellow
+    keyword whole sort-message yellow
+    keyword whole sort-mode-size yellow
+    keyword whole sort-return yellow
+    keyword whole sort-status yellow
+    keyword whole sort yellow
+    keyword whole source-computer. yellow
+    keyword whole source yellow
+    keyword whole spaces yellow
+    keyword whole space yellow
+    keyword whole special-names. yellow
+    keyword whole standard yellow
+    keyword whole standard- yellow
+    keyword whole start yellow
+    keyword whole static yellow
+    keyword whole status yellow
+    keyword whole stop yellow
+    keyword whole storage yellow
+    keyword whole store yellow
+    keyword whole string yellow
+    keyword whole sub-queue- yellow
+    keyword whole sub-schema yellow
+    keyword whole subtract yellow
+    keyword whole suffix yellow
+    keyword whole sum yellow
+    keyword whole super yellow
+    keyword whole suppress yellow
+    keyword whole symbolic yellow
+    keyword whole synchronized yellow
+    keyword whole sync yellow
+    keyword whole table yellow
+    keyword whole tallying yellow
+    keyword whole tally yellow
+    keyword whole tape yellow
+    keyword whole tenant yellow
+    keyword whole terminal yellow
+    keyword whole terminate yellow
+    keyword whole test yellow
+    keyword whole text yellow
+    keyword whole than yellow
+    keyword whole then yellow
+    keyword whole through yellow
+    keyword whole thru yellow
+    keyword whole timeout yellow
+    keyword whole times yellow
+    keyword whole time yellow
+    keyword whole title yellow
+    keyword whole top yellow
+    keyword whole to yellow
+    keyword whole trace yellow
+    keyword whole trailing yellow
+    keyword whole transceive yellow
+    keyword whole true yellow
+    keyword whole typedef yellow
+    keyword whole type yellow
+    keyword whole unequal yellow
+    keyword whole unit yellow
+    keyword whole unlock yellow
+    keyword whole unsigned yellow
+    keyword whole unstring yellow
+    keyword whole until yellow
+    keyword whole upon yellow
+    keyword whole up yellow
+    keyword whole usage-mode yellow
+    keyword whole usage yellow
+    keyword whole use yellow
+    keyword whole using yellow
+    keyword whole validate yellow
+    keyword whole valid yellow
+    keyword whole values yellow
+    keyword whole value yellow
+    keyword whole varying yellow
+    keyword whole wait yellow
+    keyword whole when-compiled yellow
+    keyword whole whenever yellow
+    keyword whole when yellow
+    keyword whole where yellow
+    keyword whole within yellow
+    keyword whole with yellow
+    keyword whole words yellow
+    keyword whole working-storage yellow
+    keyword whole write-only yellow
+    keyword whole zeroes yellow
+    keyword whole zeros yellow
+    keyword whole zero yellow
+
+    keyword whole environment*division. cyan
+    keyword whole data*division. cyan
+    keyword whole program cyan
+    keyword whole procedure*division cyan
+    keyword whole procedure*division. cyan
+    keyword whole identification*division. cyan
+    keyword whole section cyan
+    keyword whole paragraph cyan
+    keyword whole end-program cyan
+    keyword whole end*program. cyan
+
+    keyword whole s9 brightgreen
+    keyword whole v9 brightgreen
+
+    keyword whole close brightred
+    keyword whole commit brightred
+    keyword whole connect brightred
+    keyword whole declare brightred
+    keyword whole delete brightred
+    keyword whole disconnect brightred
+    keyword whole end-delete brightred
+    keyword whole end-exec brightred
+    keyword whole end-read brightred
+    keyword whole end-rewrite brightred
+    keyword whole end-write brightred
+    keyword whole exec brightred
+    keyword whole execute brightred
+    keyword whole execute*immediate. brightred
+    keyword whole fetch brightred
+    keyword whole for brightred
+    keyword whole insert brightred
+    keyword whole open brightred
+    keyword whole phase brightred
+    keyword whole prepare brightred
+    keyword whole read brightred
+    keyword whole rewrite brightred
+    keyword whole rollback brightred
+    keyword whole select brightred
+    keyword whole sql brightred
+    keyword whole update brightred
+    keyword whole work brightred
+    keyword whole write brightred
+
+wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_
+
+context \* \n brown
+    spellcheck
+
+context exclusive whole <<\[\s\]\[-\]\[\s\]\[\\\]EOF EOF green
+context exclusive whole <<\[\s\]\[-\]\[\s\]\[\\\]END END green
+
+context ' ' green
+
+context " " green
+    keyword \\* brightgreen
+    keyword \\@ brightgreen
+    keyword \\$ brightgreen
+    keyword \\\\ brightgreen
+    keyword \\` brightgreen
+    keyword \\" brightgreen
+    keyword $(*) brightgreen
+    keyword ${*} brightgreen
+    keyword $\* brightred
+    keyword $@ brightred
+    keyword $# brightred
+    keyword $? brightred
+    keyword $- brightred
+    keyword $$ brightred
+    keyword $! brightred
+    keyword $_ brightred
+    keyword wholeright $\[0123456789\] brightred
+
+    keyword wholeright $+ brightgreen
+
+    keyword $ brightgreen
+
+context exclusive ` ` lightgray black
+    keyword '*' green
+    keyword " green
+    keyword \\` green
+    keyword ; brightcyan
+    keyword $(*) brightgreen
+    keyword ${*} brightgreen
+    keyword { brightcyan
+    keyword } brightcyan
+
+    keyword $\* brightred
+    keyword $@ brightred
+    keyword $# brightred
+    keyword $? brightred
+    keyword $- brightred
+    keyword $$ brightred
+    keyword $! brightred
+    keyword $_ brightred
+
+    keyword wholeright $\[0123456789\] brightred
+
+    keyword wholeright $+ brightgreen
+
+    keyword $ brightgreen
+
+wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
+

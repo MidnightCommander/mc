@@ -1,7 +1,7 @@
 /*
    Widgets for the Midnight Commander
 
-   Copyright (C) 1994-2016
+   Copyright (C) 1994-2020
    Free Software Foundation, Inc.
 
    Authors:
@@ -42,7 +42,6 @@
 #include "lib/skin.h"
 #include "lib/strutil.h"
 #include "lib/util.h"           /* Q_() */
-#include "lib/keybind.h"        /* global_keymap_t */
 #include "lib/widget.h"
 
 /*** global variables ****************************************************************************/
@@ -96,7 +95,7 @@ listbox_drawscroll (WListbox * l)
     int length;
 
     /* Are we at the top? */
-    widget_move (w, 0, w->cols);
+    widget_gotoyx (w, 0, w->cols);
     if (l->top == 0)
         tty_print_one_vline (TRUE);
     else
@@ -105,7 +104,7 @@ listbox_drawscroll (WListbox * l)
     length = g_queue_get_length (l->list);
 
     /* Are we at the bottom? */
-    widget_move (w, max_line, w->cols);
+    widget_gotoyx (w, max_line, w->cols);
     if (l->top + w->lines == length || w->lines >= length)
         tty_print_one_vline (TRUE);
     else
@@ -117,7 +116,7 @@ listbox_drawscroll (WListbox * l)
 
     for (i = 1; i < max_line; i++)
     {
-        widget_move (w, i, w->cols);
+        widget_gotoyx (w, i, w->cols);
         if (i != line)
             tty_print_one_vline (TRUE);
         else
@@ -131,7 +130,7 @@ static void
 listbox_draw (WListbox * l, gboolean focused)
 {
     Widget *w = WIDGET (l);
-    const WDialog *h = w->owner;
+    const int *colors;
     gboolean disabled;
     int normalc, selc;
     int length = 0;
@@ -140,15 +139,11 @@ listbox_draw (WListbox * l, gboolean focused)
     int i;
     int sel_line = -1;
 
+    colors = widget_get_colors (w);
+
     disabled = widget_get_state (w, WST_DISABLED);
-    normalc = disabled ? DISABLED_COLOR : h->color[DLG_COLOR_NORMAL];
-    /* *INDENT-OFF* */
-    selc = disabled
-        ? DISABLED_COLOR
-        : focused
-            ? h->color[DLG_COLOR_HOT_FOCUS] 
-            : h->color[DLG_COLOR_FOCUS];
-    /* *INDENT-ON* */
+    normalc = disabled ? DISABLED_COLOR : colors[DLG_COLOR_NORMAL];
+    selc = disabled ? DISABLED_COLOR : colors[focused ? DLG_COLOR_HOT_FOCUS : DLG_COLOR_FOCUS];
 
     if (l->list != NULL)
     {
@@ -172,7 +167,7 @@ listbox_draw (WListbox * l, gboolean focused)
         else
             tty_setcolor (normalc);
 
-        widget_move (l, i, 1);
+        widget_gotoyx (l, i, 1);
 
         if (l->list != NULL && le != NULL && (i == 0 || pos < length))
         {
@@ -325,6 +320,11 @@ listbox_execute_cmd (WListbox * l, long command)
                               D_ERROR, 2, _("&Yes"), _("&No")) == 0))
             listbox_remove_list (l);
         break;
+    case CK_View:
+    case CK_Edit:
+    case CK_Enter:
+        ret = send_message (WIDGET (l)->owner, l, MSG_NOTIFY, command, NULL);
+        break;
     default:
         ret = MSG_NOT_HANDLED;
     }
@@ -350,7 +350,7 @@ listbox_key (WListbox * l, int key)
         return MSG_HANDLED;
     }
 
-    command = keybind_lookup_keymap_command (listbox_map, key);
+    command = widget_lookup_key (WIDGET (l), key);
     if (command == CK_IgnoreKey)
         return MSG_NOT_HANDLED;
     return listbox_execute_cmd (l, command);
@@ -398,7 +398,7 @@ static void
 listbox_on_change (WListbox * l)
 {
     listbox_draw (l, TRUE);
-    send_message (WIDGET (l)->owner, l, MSG_NOTIFY, l->pos, NULL);
+    send_message (WIDGET (l)->owner, l, MSG_NOTIFY, 0, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -418,7 +418,7 @@ listbox_do_action (WListbox * l)
 
     if (action == LISTBOX_DONE)
     {
-        WDialog *h = WIDGET (l)->owner;
+        WDialog *h = DIALOG (WIDGET (l)->owner);
 
         h->ret_value = B_ENTER;
         dlg_stop (h);
@@ -449,13 +449,9 @@ static cb_ret_t
 listbox_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WListbox *l = LISTBOX (w);
-    cb_ret_t ret_code;
 
     switch (msg)
     {
-    case MSG_INIT:
-        return MSG_HANDLED;
-
     case MSG_HOTKEY:
         {
             int pos;
@@ -470,16 +466,20 @@ listbox_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
         }
 
     case MSG_KEY:
-        ret_code = listbox_key (l, parm);
-        if (ret_code != MSG_NOT_HANDLED)
-            listbox_on_change (l);
-        return ret_code;
+        {
+            cb_ret_t ret_code;
+
+            ret_code = listbox_key (l, parm);
+            if (ret_code != MSG_NOT_HANDLED)
+                listbox_on_change (l);
+            return ret_code;
+        }
 
     case MSG_ACTION:
         return listbox_execute_cmd (l, parm);
 
     case MSG_CURSOR:
-        widget_move (l, l->cursor_y, 0);
+        widget_gotoyx (l, l->cursor_y, 0);
         return MSG_HANDLED;
 
     case MSG_DRAW:
@@ -488,9 +488,6 @@ listbox_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
 
     case MSG_DESTROY:
         listbox_destroy (l);
-        return MSG_HANDLED;
-
-    case MSG_RESIZE:
         return MSG_HANDLED;
 
     default:
@@ -560,6 +557,7 @@ listbox_new (int y, int x, int height, int width, gboolean deletable, lcback_fn 
     w = WIDGET (l);
     widget_init (w, y, x, height, width, listbox_callback, listbox_mouse_callback);
     w->options |= WOP_SELECTABLE | WOP_WANT_HOTKEY;
+    w->keymap = listbox_map;
 
     l->list = NULL;
     l->top = l->pos = 0;
@@ -573,6 +571,9 @@ listbox_new (int y, int x, int height, int width, gboolean deletable, lcback_fn 
 
 /* --------------------------------------------------------------------------------------------- */
 
+/**
+ * Finds item by its label.
+ */
 int
 listbox_search_text (WListbox * l, const char *text)
 {
@@ -586,6 +587,31 @@ listbox_search_text (WListbox * l, const char *text)
             WLEntry *e = LENTRY (le->data);
 
             if (strcmp (e->text, text) == 0)
+                return i;
+        }
+    }
+
+    return (-1);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Finds item by its 'data' slot.
+ */
+int
+listbox_search_data (WListbox * l, const void *data)
+{
+    if (!listbox_is_empty (l))
+    {
+        int i;
+        GList *le;
+
+        for (i = 0, le = g_queue_peek_head_link (l->list); le != NULL; i++, le = g_list_next (le))
+        {
+            WLEntry *e = LENTRY (le->data);
+
+            if (e->data == data)
                 return i;
         }
     }
@@ -609,10 +635,9 @@ void
 listbox_select_last (WListbox * l)
 {
     int lines = WIDGET (l)->lines;
-    int length = 0;
+    int length;
 
-    if (!listbox_is_empty (l))
-        length = g_queue_get_length (l->list);
+    length = listbox_get_length (l);
 
     l->pos = length > 0 ? length - 1 : 0;
     l->top = length > lines ? length - lines : 0;
@@ -654,6 +679,14 @@ listbox_select_entry (WListbox * l, int dest)
 
     /* If we are unable to find it, set decent values */
     l->pos = l->top = 0;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+int
+listbox_get_length (const WListbox * l)
+{
+    return listbox_is_empty (l) ? 0 : (int) g_queue_get_length (l->list);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -713,7 +746,7 @@ listbox_remove_current (WListbox * l)
         int length;
 
         current = g_queue_peek_nth_link (l->list, (guint) l->pos);
-        listbox_entry_free (LENTRY (current->data));
+        listbox_entry_free (current->data);
         g_queue_delete_link (l->list, current);
 
         length = g_queue_get_length (l->list);
@@ -735,22 +768,19 @@ listbox_is_empty (const WListbox * l)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/**
+ * Set new listbox items list.
+ *
+ * @param l WListbox object
+ * @param list list of WLEntry objects
+ */
 void
-listbox_set_list (WListbox * l, GList * list)
+listbox_set_list (WListbox * l, GQueue * list)
 {
     listbox_remove_list (l);
 
     if (l != NULL)
-    {
-        GList *ll;
-
-        l->list = g_queue_new ();
-
-        for (ll = list; ll != NULL; ll = g_list_next (ll))
-            g_queue_push_tail (l->list, ll->data);
-
-        g_list_free (list);
-    }
+        l->list = list;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -762,11 +792,10 @@ listbox_remove_list (WListbox * l)
     {
         if (l->list != NULL)
         {
-            g_queue_foreach (l->list, (GFunc) listbox_entry_free, NULL);
-            g_queue_free (l->list);
+            g_queue_free_full (l->list, (GDestroyNotify) listbox_entry_free);
+            l->list = NULL;
         }
 
-        l->list = NULL;
         l->pos = l->top = 0;
     }
 }

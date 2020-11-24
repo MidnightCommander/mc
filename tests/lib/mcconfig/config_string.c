@@ -1,7 +1,7 @@
 /*
    libmc - check mcconfig submodule. read and write config files
 
-   Copyright (C) 2011-2016
+   Copyright (C) 2011-2020
    Free Software Foundation, Inc.
 
    Written by:
@@ -79,9 +79,10 @@ config_object__deinit (void)
 static void
 setup (void)
 {
+    mc_global.timer = mc_timer_new ();
     str_init_strings ("KOI8-R");
     vfs_init ();
-    init_localfs ();
+    vfs_init_localfs ();
 
     config_object__init ();
 }
@@ -96,6 +97,7 @@ teardown (void)
 
     vfs_shut ();
     str_uninit_strings ();
+    mc_timer_destroy (mc_global.timer);
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -72,12 +72,14 @@ libinternal_la_SOURCES = \
 	clipboard.c clipboard.h \
 	events_init.c events_init.h \
 	execute.c execute.h \
+	file_history.c file_history.h \
 	help.c help.h \
 	history.h \
 	keybind-defaults.c keybind-defaults.h \
 	learn.c learn.h \
 	setup.c setup.h \
 	textconf.c textconf.h \
+	usermenu.c usermenu.h \
 	util.c util.h
 
 if CHARSET

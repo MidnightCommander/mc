@@ -21,8 +21,17 @@ UNRAR=`which unrar 2>/dev/null`
 [ -z $UNRAR ] && UNRAR=$RAR
 [ ! -x $UNRAR -a -x $RAR ] && UNRAR=$RAR
 
-# Define $UNRAR version
-UNRAR_VERSION=`$UNRAR -cfg- -? | grep "Copyright" | sed -e 's/.*\([0-9]\)\..*/\1/'`
+# Let the test framework hook in:
+UNRAR=${MC_TEST_EXTFS_LIST_CMD:-$UNRAR}
+
+# Determine the $UNRAR version
+if [ -n "$MC_TEST_EXTFS_UNRAR_VERSION" ]; then
+  # Let the test framework fool us:
+  UNRAR_VERSION=$MC_TEST_EXTFS_UNRAR_VERSION
+else
+  # Figure it out from rar itself:
+  UNRAR_VERSION=`$UNRAR -cfg- -? | grep "Copyright" | sed -e 's/.*\([0-9]\)\..*/\1/'`
+fi
 
 mcrar4fs_list ()
 {

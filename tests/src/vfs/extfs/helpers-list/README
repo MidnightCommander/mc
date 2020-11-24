@@ -1,0 +1,207 @@
+---
+title: A tester for extfs helpers
+...
+
+Guide
+=====
+
+Introduction
+------------
+
+The extfs filesystem is composed of various helpers (uzip, urar, uarc,
+...). One command every helper must answer to is "list", to list the
+files on its filesystem.
+
+The purpose of this tester is to test this "list" facet of every helper
+to ensure that it indeed works, at present, and that we won't
+inadvertently break it, in the future, as we modify its code or MC's
+code.
+
+Key concept: Inputs
+-------------------
+
+Most helpers work by parsing the output of some 3'rd party software.
+Which for them becomes the *input*. Helpers sometimes support **several
+variations** of such input. E.g., the uzip helper supports three
+variations.
+
+The tester keeps a repository, in the data folder, of the various inputs
+each helper proclaims to support. Each input is stored in a file with an
+`.input` suffix.
+
+Key concept: Outputs
+--------------------
+
+Along with each input file, the data folder also holds the output the
+helper is expected to produce given the corresponding input. Each output
+is stored in a file with an `.output` suffix.
+
+We call this output "the expected output".
+
+Incidentally, an `.output` file stores not the _raw_ output of the helper
+but its output _after parsing_. In other words, what's stored is the
+unambiguous _meaning_ of the helper's output. This means that as long as
+the helper's code isn't modified in a way that changes the meaning of its
+output, the `.output` file remains up-to-date.
+
+How the tester works
+--------------------
+
+The tester feeds each helper its prepared inputs and reads back the
+helper's "list" answer -- the helper's **output**. This output is a list
+of files in a format similar to `ls -l`, which MC is able to parse. The
+tester checks that this output parses without errors (errors are, for
+example, dates in unsupported format). It then compares this parsed
+output (which we call "the actual output") with a previously saved copy
+of this output which is known to be correct (and which we call "the
+expected output", mentioned in the previous section). This previously
+stored output too is in the data folder, in files with `.output` suffix.
+
+If there's any discrepancy between the *actual output* and the
+*expected output*, the test fails.
+
+Running the tester
+------------------
+
+You can run the tester with `make check`.
+
+But you'll find it more appealing to run the tester with the `run`
+script. You'll get a colorful description of what's going on.
+
+(`run` is created by running `make check` for the 1st time, in the build
+tree.)
+
+Reference
+=========
+
+The data folder
+---------------
+
+There are several types of files in the data folder:
+
+### Input file ###
+
+An input file is named:
+
+> `<helper-name>[.optional-embedded-description].input`
+
+You create such files simply by redirecting the 3'rd party software's
+output to a file.
+
+### Output file ###
+
+This file is named the same as the corresponding input file but with an
+`.output` suffix.
+
+The easiest way to create these files is by invoking the `run` script
+with the `--create-output` option.
+
+### Environment file ###
+
+Optional. This file defines environment variables the helper may use to
+determine the variant of the input. This file is named the same as the
+corresponding input file but with an `.env_var` suffix.
+
+### Arguments file ###
+
+Optional. This file defines extra command-line options to pass to the
+[parser](#mc_parse_ls_l). This file is named the same as the
+corresponding input file but with an `.args` suffix.
+
+The contents of an output file must be the same no matter on what
+computer and at what time we generate it. Therefore we need to tell the
+parser to drop any non-fixed elements in that file. E.g., if the dates
+used are relative (as is the case for the default `ls` dates), we need to
+drop them with `--drop-mtime`. Similarly, if a helper returns user and
+group _names_ that are different than the running user's, they must be
+dropped with `--drop-ids`.
+
+### Other files ###
+
+Any other file is ignored by the tester.
+
+mc_parse_ls_l
+-------------
+
+This program (built with `make check`) is at the heart of the tester
+mechanism. It parses a list of files, in a format similar to `ls -l`,
+just as MC would. This program is used to parse (and thereby verify) the
+output of the helpers. _You don't need to invoke it yourself;_ but, for
+educational purpose, here are a few examples:
+
+    $ LC_ALL=C ls -l | ./mc_parse_ls_l
+
+    $ LC_ALL=C ls -l | ./mc_parse_ls_l --symbolic-ids
+
+    $ LC_ALL=C ls -l | ./mc_parse_ls_l --output-format yaml
+
+test_all
+--------
+
+This is the tester itself. You invoke it with `make check`, or with the
+`run` script. Invoking it directly is a bit involving because you need to
+provide it with 2 or 3 directory paths. `run` does this work for you.
+
+Environment variables
+---------------------
+
+### Frequently used variables ###
+
+#### MC_TEST_EXTFS_LIST_CMD ####
+
+When a helper runs under the tester, the environment variable
+`MC_TEST_EXTFS_LIST_CMD` holds the command that's to provide input. The
+helper's source code must be modified to use this command instead of the
+command it usually uses. This is the device which lets us plug our own
+input into the helper and *without which a helper can't be tested!*
+
+Let's have a little example. The uzoo helper originally has:
+
+    ZOO=zoo
+    ...
+    mczoofs_list () {
+      $ZOO lq "$ARCHIVE" | mawk '......'
+    }
+    ...
+
+To make this helper testable, we need to change the first line to:
+
+    ZOO=${MC_TEST_EXTFS_LIST_CMD:-zoo}
+
+(or equivalent.)
+
+The command in `MC_TEST_EXTFS_LIST_CMD` is a black-box for the helper,
+and it intentionally ignores any arguments passed to it (so that `lq
+"$ARCHIVE"`, above, won't cause problems).
+
+### Infrequently used variables ###
+
+#### MC_TEST_EXTFS_INPUT ####
+
+Contains the path of the [input file]. You'll more commonly use
+[MC_TEST_EXTFS_LIST_CMD], though.
+
+#### MC_TEST_EXTFS_DATA_DIR ####
+
+Contains the path of [the data folder]. Use it when you need to
+construct the paths of other files you store there.
+
+#### MC_TEST_EXTFS_DATA_BUILD_DIR ####
+
+Contains the path of [the data folder], but in the *build* tree. This is
+where *.in files from the source tree end up. If you don't know what
+these are, you can safely ignore this variable.
+
+#### MC_TEST_EXTFS_CONFIG_SH ####
+
+Contains the path of *config.sh*, a file you can "source" into shell
+scripts (including the [environment file]) to gain access to values set
+when Midnight Commander was compiled. Example:
+
+    . "$MC_TEST_EXTFS_CONFIG_SH"
+    $PERL -e 'print "hello"'
+
+Currently, this variable is equal to
+"[$MC_TEST_EXTFS_DATA_BUILD_DIR][MC_TEST_EXTFS_DATA_BUILD_DIR]/config.sh",
+but you're advised to use only `$MC_TEST_EXTFS_CONFIG_SH` as we may
+change this file's location in the future.

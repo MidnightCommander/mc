@@ -11,7 +11,7 @@
 
 /*** declarations of public functions ************************************************************/
 
-void init_sfs (void);
+void vfs_init_sfs (void);
 
 /*** inline functions ****************************************************************************/
 

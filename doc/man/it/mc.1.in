@@ -93,7 +93,7 @@ Abilita il modo terminale lento, in questa modalità il programma
 non disegna le linee e disabilita la modalità prolissa.
 .TP
 .I "\-t"
-Usata solo se il codice è stato compilato con Slang e terminfo: fa
+Usata solo se il codice è stato compilato con S\-Lang e terminfo: fa
 in modo che il Midnight Commander usi il valore della variabile
 .B TERMCAP
 per le informazioni sul terminale invece delle informazioni di sistema
@@ -680,7 +680,7 @@ se la divisione pannello nella finestra
 aspetto
 .\"Layout"
 del menu opzioni è orizzontale).
-.\"NODE "    Listing Mode..."
+.\"NODE "    Listing Format..."
 .SH "    Modalità lista..."
 La modalità lista serve a mostrare un elenco di file; ci sono quattro
 modalità elenco disponibili:
@@ -1765,7 +1765,7 @@ e
 .I modalità
 .\"LINK2"
 dello schermo
-.\"Listing Mode..."
+.\"Listing Format..."
 valide per l'utente che usa il Midnight Commander 
 sono evidenziati con il colore definito con la parolachiave
 .IR selezionata . 
@@ -2904,7 +2904,7 @@ terminale corrente. Capita che possa sbagliarsi, perciò si può essere
 costretti a forzare la modalità a colori o a disabilitarla usando
 rispettivamente le opzioni \-c e \-b.
 .PP
-Se il programma è compilato con il manager dello schermo Slang invece
+Se il programma è compilato con il manager dello schermo S\-Lang invece
 che ncurses, controllerà se è impostata anche la variabile
 .B COLORTERM,
 con lo stesso effetto dell'opzione \-c.
@@ -2924,7 +2924,7 @@ color_terminals=nome_terminale\-1,nome\-terminale\-2...
 .fi
 .PP
 Il programma può essere compilato sia con il supporto di ncurses che
-di slang ma ncurses non fornisce alcun modo per forzare la modalità
+di S\-Lang ma ncurses non fornisce alcun modo per forzare la modalità
 colore: ncurses userà solo le informazioni nel database dei terminali.
 .PP
 Il Midnight Commander fornisce un modo per cambiare i colori predefiniti.
@@ -3174,7 +3174,7 @@ dalla variabile ambiente
 .BR MC_DATADIR ,
 e se la variabile non è impostata, passerà alla directory %prefix%/share/mc .
 .PP
-.I %prefix%/share/mc/mc.hlp
+.I %prefix%/share/mc/help/mc.hlp
 .IP
 Il file di aiuto per il programma.
 .PP
@@ -3208,7 +3208,7 @@ da mc.lib.
 La configurazione dell'utente. Se questo file è presente, la configurazione
 viene caricata da qui invece che dal file di sistema.
 .PP
-.I %prefix%/share/mc/mc.hint
+.I %prefix%/share/mc/hints/mc.hint
 .IP
 Questo file contiene i suggerimenti (dritte) mostrate dal programma.
 .PP
@@ -3231,10 +3231,10 @@ Menu locale definito dall'utente. Se questo file è presente viene usato
 al posto del menu delle applicazioni utente o di sistema.
 .PP
 To change default home directory of MC, you can use 
-.BR MC_HOME
-environment variable. The value of MC_HOME must be an absolute path. If MC_HOME
-is unset or empty, HOME variable is used. If HOME is unset or empty, MC
-directories are get from GLib library.
+.BR MC_PROFILE_ROOT
+environment variable. The value of MC_PROFILE_ROOT must be an absolute path.
+If MC_PROFILE_ROOT is unset or empty, HOME variable is used. If HOME is unset
+or empty, MC directories are get from GLib library.
 .\"SKIP_SECTION"
 .SH "LICENZA"
 Questo programma è distribuito sotto i termini della Licenza Generale

@@ -2,7 +2,7 @@
    Skins engine.
    Interface functions
 
-   Copyright (C) 2009-2016
+   Copyright (C) 2009-2020
    Free Software Foundation, Inc.
 
    Written by:
@@ -147,7 +147,7 @@ mc_skin_init (const gchar * skin_override, GError ** mcerror)
         (void) mc_skin_ini_file_parse (&mc_skin__default);
         is_good_init = FALSE;
     }
-    if (is_good_init && !tty_use_truecolors (&error) && mc_skin__default.have_true_colors)
+    if (is_good_init && mc_skin__default.have_true_colors && !tty_use_truecolors (&error))
     {
         mc_propagate_error (mcerror, 0,
                             _
@@ -159,7 +159,7 @@ mc_skin_init (const gchar * skin_override, GError ** mcerror)
         (void) mc_skin_ini_file_parse (&mc_skin__default);
         is_good_init = FALSE;
     }
-    if (is_good_init && !tty_use_256colors () && mc_skin__default.have_256_colors)
+    if (is_good_init && mc_skin__default.have_256_colors && !tty_use_256colors ())
     {
         mc_propagate_error (mcerror, 0,
                             _

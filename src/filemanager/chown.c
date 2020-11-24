@@ -1,7 +1,7 @@
 /*
    Chown command -- for the Midnight Commander
 
-   Copyright (C) 1994-2016
+   Copyright (C) 1994-2020
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
@@ -45,12 +45,9 @@
 #include "lib/widget.h"
 
 #include "src/setup.h"          /* panels_options */
-
-/* Needed for the extern declarations of integer parameters */
-#include "chmod.h"
 #include "midnight.h"           /* current_panel */
 
-#include "chown.h"
+#include "cmd.h"                /* chown_cmd() */
 
 /*** global variables ****************************************************************************/
 
@@ -73,50 +70,57 @@
 
 /*** file scope variables ************************************************************************/
 
-static int need_update, end_chown;
-static int current_file;
-static int single_set;
-static WListbox *l_user, *l_group;
 
-/* *INDENT-OFF* */
 static struct
 {
     int ret_cmd;
     button_flags_t flags;
-    int y, len;
+    int y;
+    int len;
     const char *text;
-} chown_but[BUTTONS] = {
-    { B_SETALL, NORMAL_BUTTON,  5, 0, N_("Set &all") },
-    { B_SETGRP, NORMAL_BUTTON,  5, 0, N_("Set &groups") },
-    { B_SETUSR, NORMAL_BUTTON,  5, 0, N_("Set &users") },
-    { B_ENTER,  DEFPUSH_BUTTON, 3, 0, N_("&Set") },
-    { B_CANCEL, NORMAL_BUTTON,  3, 0, N_("&Cancel") },
+} chown_but[BUTTONS] =
+{
+    /* *INDENT-OFF* */
+    { B_SETALL,  NORMAL_BUTTON, 5, 0, N_("Set &all")    },
+    { B_SETGRP,  NORMAL_BUTTON, 5, 0, N_("Set &groups") },
+    { B_SETUSR,  NORMAL_BUTTON, 5, 0, N_("Set &users")  },
+    { B_ENTER,  DEFPUSH_BUTTON, 3, 0, N_("&Set")        },
+    { B_CANCEL,  NORMAL_BUTTON, 3, 0, N_("&Cancel")     }
+    /* *INDENT-ON* */
 };
 
 /* summary length of three buttons */
 static int blen = 0;
 
-static struct {
+static struct
+{
     int y;
     WLabel *l;
-} chown_label [LABELS] = {
-    { 4 , NULL },
-    { 6 , NULL },
-    { 8 , NULL },
-    { 10 , NULL },
+} chown_label[LABELS] =
+{
+    /* *INDENT-OFF* */
+    {  4, NULL },
+    {  6, NULL },
+    {  8, NULL },
+    { 10, NULL },
     { 12, NULL }
+    /* *INDENT-ON* */
 };
-/* *INDENT-ON* */
+
+static int current_file;
+static gboolean ignore_all;
+
+static WListbox *l_user, *l_group;
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-chown_i18n (void)
+chown_init (void)
 {
     static gboolean i18n = FALSE;
-    unsigned int i;
+    int i;
 
     if (i18n)
         return;
@@ -144,81 +148,70 @@ chown_i18n (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-chown_refresh (WDialog * h)
+chown_refresh (const Widget * h)
 {
-    const int y = 3;
-    const int x = 7 + GW * 2;
-
-    dlg_default_repaint (h);
+    int y = 3;
+    int x = 7 + GW * 2;
 
     tty_setcolor (COLOR_NORMAL);
 
-    widget_move (h, y + 0, x);
+    widget_gotoyx (h, y + 0, x);
     tty_print_string (_("Name"));
-    widget_move (h, y + 2, x);
+    widget_gotoyx (h, y + 2, x);
     tty_print_string (_("Owner name"));
-    widget_move (h, y + 4, x);
+    widget_gotoyx (h, y + 4, x);
     tty_print_string (_("Group name"));
-    widget_move (h, y + 6, x);
+    widget_gotoyx (h, y + 6, x);
     tty_print_string (_("Size"));
-    widget_move (h, y + 8, x);
+    widget_gotoyx (h, y + 8, x);
     tty_print_string (_("Permission"));
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-static char *
-next_file (void)
-{
-    while (!current_panel->dir.list[current_file].f.marked)
-        current_file++;
-
-    return current_panel->dir.list[current_file].fname;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 static cb_ret_t
-chown_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+chown_bg_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     switch (msg)
     {
     case MSG_DRAW:
-        chown_refresh (DIALOG (w));
+        frame_callback (w, NULL, MSG_DRAW, 0, NULL);
+        chown_refresh (WIDGET (w->owner));
         return MSG_HANDLED;
 
     default:
-        return dlg_default_callback (w, sender, msg, parm, data);
+        return frame_callback (w, sender, msg, parm, data);
     }
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static WDialog *
-init_chown (void)
+chown_dlg_create (void)
 {
+    int single_set;
+    WDialog *ch_dlg;
+    WGroup *g;
     int lines, cols;
-    int i;
-    int y;
+    int i, y;
     struct passwd *l_pass;
     struct group *l_grp;
-    WDialog *ch_dlg;
 
-    do_refresh ();
-
-    end_chown = need_update = current_file = 0;
     single_set = (current_panel->marked < 2) ? 3 : 0;
-
+    lines = GH + 4 + (single_set != 0 ? 2 : 4);
     cols = GW * 3 + 2 + 6;
-    lines = GH + 4 + (single_set ? 2 : 4);
 
     ch_dlg =
-        dlg_create (TRUE, 0, 0, lines, cols, WPOS_CENTER, FALSE, dialog_colors, chown_callback,
-                    NULL, "[Chown]", _("Chown command"));
+        dlg_create (TRUE, 0, 0, lines, cols, WPOS_CENTER, FALSE, dialog_colors, NULL, NULL,
+                    "[Chown]", _("Chown command"));
+    g = GROUP (ch_dlg);
 
-    add_widget (ch_dlg, groupbox_new (2, 3, GH, GW, _("User name")));
+    /* draw background */
+    ch_dlg->bg->callback = chown_bg_callback;
+
+    group_add_widget (g, groupbox_new (2, 3, GH, GW, _("User name")));
     l_user = listbox_new (3, 4, GH - 2, GW - 2, FALSE, NULL);
-    add_widget (ch_dlg, l_user);
+    group_add_widget (g, l_user);
     /* add field for unknown names (numbers) */
     listbox_add_item (l_user, LISTBOX_APPEND_AT_END, 0, _("<Unknown user>"), NULL, FALSE);
     /* get and put user names in the listbox */
@@ -227,9 +220,9 @@ init_chown (void)
         listbox_add_item (l_user, LISTBOX_APPEND_SORTED, 0, l_pass->pw_name, NULL, FALSE);
     endpwent ();
 
-    add_widget (ch_dlg, groupbox_new (2, 4 + GW, GH, GW, _("Group name")));
+    group_add_widget (g, groupbox_new (2, 4 + GW, GH, GW, _("Group name")));
     l_group = listbox_new (3, 5 + GW, GH - 2, GW - 2, FALSE, NULL);
-    add_widget (ch_dlg, l_group);
+    group_add_widget (g, l_group);
     /* add field for unknown names (numbers) */
     listbox_add_item (l_group, LISTBOX_APPEND_AT_END, 0, _("<Unknown group>"), NULL, FALSE);
     /* get and put group names in the listbox */
@@ -238,42 +231,40 @@ init_chown (void)
         listbox_add_item (l_group, LISTBOX_APPEND_SORTED, 0, l_grp->gr_name, NULL, FALSE);
     endgrent ();
 
-    add_widget (ch_dlg, groupbox_new (2, 5 + GW * 2, GH, GW, _("File")));
+    group_add_widget (g, groupbox_new (2, 5 + GW * 2, GH, GW, _("File")));
     /* add widgets for the file information */
     for (i = 0; i < LABELS; i++)
     {
         chown_label[i].l = label_new (chown_label[i].y, 7 + GW * 2, "");
-        add_widget (ch_dlg, chown_label[i].l);
+        group_add_widget (g, chown_label[i].l);
     }
 
-    if (!single_set)
+    if (single_set == 0)
     {
         int x;
 
-        add_widget (ch_dlg, hline_new (lines - chown_but[0].y - 1, -1, -1));
+        group_add_widget (g, hline_new (lines - chown_but[0].y - 1, -1, -1));
 
         y = lines - chown_but[0].y;
         x = (cols - blen) / 2;
 
         for (i = 0; i < BUTTONS - 2; i++)
         {
-            add_widget (ch_dlg,
-                        button_new (y, x, chown_but[i].ret_cmd, chown_but[i].flags,
-                                    chown_but[i].text, NULL));
+            group_add_widget (g, button_new (y, x, chown_but[i].ret_cmd, chown_but[i].flags,
+                                             chown_but[i].text, NULL));
             x += chown_but[i].len + 1;
         }
     }
 
     i = BUTTONS - 2;
     y = lines - chown_but[i].y;
-    add_widget (ch_dlg, hline_new (y - 1, -1, -1));
-    add_widget (ch_dlg,
-                button_new (y, WIDGET (ch_dlg)->cols / 2 - chown_but[i].len, chown_but[i].ret_cmd,
-                            chown_but[i].flags, chown_but[i].text, NULL));
+    group_add_widget (g, hline_new (y - 1, -1, -1));
+    group_add_widget (g, button_new (y, WIDGET (ch_dlg)->cols / 2 - chown_but[i].len,
+                                     chown_but[i].ret_cmd, chown_but[i].flags, chown_but[i].text,
+                                     NULL));
     i++;
-    add_widget (ch_dlg,
-                button_new (y, WIDGET (ch_dlg)->cols / 2 + 1, chown_but[i].ret_cmd,
-                            chown_but[i].flags, chown_but[i].text, NULL));
+    group_add_widget (g, button_new (y, WIDGET (ch_dlg)->cols / 2 + 1, chown_but[i].ret_cmd,
+                                     chown_but[i].flags, chown_but[i].text, NULL));
 
     /* select first listbox */
     widget_select (WIDGET (l_user));
@@ -284,7 +275,7 @@ init_chown (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-chown_done (void)
+chown_done (gboolean need_update)
 {
     if (need_update)
         update_panels (UP_OPTIMIZE, UP_KEEPSEL);
@@ -293,35 +284,107 @@ chown_done (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
-do_chown (uid_t u, gid_t g)
+static const char *
+next_file (void)
 {
-    vfs_path_t *vpath;
+    while (!current_panel->dir.list[current_file].f.marked)
+        current_file++;
 
-    vpath = vfs_path_from_str (current_panel->dir.list[current_file].fname);
-    if (mc_chown (vpath, u, g) == -1)
-        message (D_ERROR, MSG_ERROR, _("Cannot chown \"%s\"\n%s"),
-                 current_panel->dir.list[current_file].fname, unix_error_string (errno));
+    return current_panel->dir.list[current_file].fname;
+}
 
-    vfs_path_free (vpath);
+/* --------------------------------------------------------------------------------------------- */
+
+static gboolean
+try_chown (const vfs_path_t * p, uid_t u, gid_t g)
+{
+    while (mc_chown (p, u, g) == -1 && !ignore_all)
+    {
+        int my_errno = errno;
+        int result;
+        char *msg;
+
+        msg =
+            g_strdup_printf (_("Cannot chown \"%s\"\n%s"), x_basename (vfs_path_as_str (p)),
+                             unix_error_string (my_errno));
+        result =
+            query_dialog (MSG_ERROR, msg, D_ERROR, 4, _("&Ignore"), _("Ignore &all"), _("&Retry"),
+                          _("&Cancel"));
+        g_free (msg);
+
+        switch (result)
+        {
+        case 0:
+            /* try next file */
+            return TRUE;
+
+        case 1:
+            ignore_all = TRUE;
+            /* try next file */
+            return TRUE;
+
+        case 2:
+            /* retry this file */
+            break;
+
+        case 3:
+        default:
+            /* stop remain files processing */
+            return FALSE;
+        }
+    }
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static gboolean
+do_chown (const vfs_path_t * p, uid_t u, gid_t g)
+{
+    gboolean ret;
+
+    ret = try_chown (p, u, g);
+
     do_file_mark (current_panel, current_file, 0);
+
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-apply_chowns (uid_t u, gid_t g)
+apply_chowns (vfs_path_t * vpath, uid_t u, gid_t g)
 {
+    gboolean ok;
 
-    need_update = end_chown = 1;
-    do_chown (u, g);
+    if (!do_chown (vpath, u, g))
+        return;
 
     do
     {
-        next_file ();
-        do_chown (u, g);
+        const char *fname;
+        struct stat sf;
+
+        fname = next_file ();
+        vpath = vfs_path_from_str (fname);
+        ok = (mc_stat (vpath, &sf) == 0);
+
+        if (!ok)
+        {
+            /* if current file was deleted outside mc -- try next file */
+            /* decrease current_panel->marked */
+            do_file_mark (current_panel, current_file, 0);
+
+            /* try next file */
+            ok = TRUE;
+        }
+        else
+            ok = do_chown (vpath, u, g);
+
+        vfs_path_free (vpath);
     }
-    while (current_panel->marked);
+    while (ok && current_panel->marked != 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -331,35 +394,44 @@ apply_chowns (uid_t u, gid_t g)
 void
 chown_cmd (void)
 {
-    char *fname;
-    struct stat sf_stat;
-    uid_t new_user;
-    gid_t new_group;
-    char buffer[BUF_TINY];
+    gboolean need_update;
+    gboolean end_chown;
 
-    chown_i18n ();
+    chown_init ();
+
+    current_file = 0;
+    ignore_all = FALSE;
 
     do
     {                           /* do while any files remaining */
         vfs_path_t *vpath;
         WDialog *ch_dlg;
+        struct stat sf_stat;
+        const char *fname;
+        int result;
+        char buffer[BUF_TINY];
+        uid_t new_user = (uid_t) (-1);
+        gid_t new_group = (gid_t) (-1);
 
-        ch_dlg = init_chown ();
-        new_user = new_group = -1;
+        do_refresh ();
 
-        if (current_panel->marked)
+        need_update = FALSE;
+        end_chown = FALSE;
+
+        if (current_panel->marked != 0)
             fname = next_file ();       /* next marked file */
         else
             fname = selection (current_panel)->fname;   /* single file */
 
         vpath = vfs_path_from_str (fname);
+
         if (mc_stat (vpath, &sf_stat) != 0)
-        {                       /* get status of file */
-            dlg_destroy (ch_dlg);
+        {
             vfs_path_free (vpath);
             break;
         }
-        vfs_path_free (vpath);
+
+        ch_dlg = chown_dlg_create ();
 
         /* select in listboxes */
         listbox_select_entry (l_user, listbox_search_text (l_user, get_owner (sf_stat.st_uid)));
@@ -372,11 +444,55 @@ chown_cmd (void)
         chown_label (3, buffer);
         chown_label (4, string_perm (sf_stat.st_mode));
 
-        switch (dlg_run (ch_dlg))
+        result = dlg_run (ch_dlg);
+
+        switch (result)
         {
         case B_CANCEL:
-            end_chown = 1;
+            end_chown = TRUE;
             break;
+
+        case B_ENTER:
+        case B_SETALL:
+            {
+                struct group *grp;
+                struct passwd *user;
+                char *text;
+
+                listbox_get_current (l_group, &text, NULL);
+                grp = getgrnam (text);
+                if (grp != NULL)
+                    new_group = grp->gr_gid;
+                listbox_get_current (l_user, &text, NULL);
+                user = getpwnam (text);
+                if (user != NULL)
+                    new_user = user->pw_uid;
+                if (result == B_ENTER)
+                {
+                    if (current_panel->marked <= 1)
+                    {
+                        /* single or last file */
+                        if (mc_chown (vpath, new_user, new_group) == -1)
+                            message (D_ERROR, MSG_ERROR, _("Cannot chown \"%s\"\n%s"),
+                                     fname, unix_error_string (errno));
+                        end_chown = TRUE;
+                    }
+                    else if (!try_chown (vpath, new_user, new_group))
+                    {
+                        /* stop multiple files processing */
+                        result = B_CANCEL;
+                        end_chown = TRUE;
+                    }
+                }
+                else
+                {
+                    apply_chowns (vpath, new_user, new_group);
+                    end_chown = TRUE;
+                }
+
+                need_update = TRUE;
+                break;
+            }
 
         case B_SETUSR:
             {
@@ -385,10 +501,12 @@ chown_cmd (void)
 
                 listbox_get_current (l_user, &text, NULL);
                 user = getpwnam (text);
-                if (user)
+                if (user != NULL)
                 {
                     new_user = user->pw_uid;
-                    apply_chowns (new_user, new_group);
+                    apply_chowns (vpath, new_user, new_group);
+                    need_update = TRUE;
+                    end_chown = TRUE;
                 }
                 break;
             }
@@ -400,60 +518,33 @@ chown_cmd (void)
 
                 listbox_get_current (l_group, &text, NULL);
                 grp = getgrnam (text);
-                if (grp)
+                if (grp != NULL)
                 {
                     new_group = grp->gr_gid;
-                    apply_chowns (new_user, new_group);
+                    apply_chowns (vpath, new_user, new_group);
+                    need_update = TRUE;
+                    end_chown = TRUE;
                 }
-                break;
-            }
-
-        case B_SETALL:
-        case B_ENTER:
-            {
-                struct group *grp;
-                struct passwd *user;
-                char *text;
-
-                listbox_get_current (l_group, &text, NULL);
-                grp = getgrnam (text);
-                if (grp)
-                    new_group = grp->gr_gid;
-                listbox_get_current (l_user, &text, NULL);
-                user = getpwnam (text);
-                if (user)
-                    new_user = user->pw_uid;
-                if (ch_dlg->ret_value == B_ENTER)
-                {
-                    vfs_path_t *fname_vpath;
-
-                    fname_vpath = vfs_path_from_str (fname);
-                    need_update = 1;
-                    if (mc_chown (fname_vpath, new_user, new_group) == -1)
-                        message (D_ERROR, MSG_ERROR, _("Cannot chown \"%s\"\n%s"),
-                                 fname, unix_error_string (errno));
-                    vfs_path_free (fname_vpath);
-                }
-                else
-                    apply_chowns (new_user, new_group);
                 break;
             }
 
         default:
             break;
-        }                       /* switch */
+        }
 
-        if (current_panel->marked && ch_dlg->ret_value != B_CANCEL)
+        if (current_panel->marked != 0 && result != B_CANCEL)
         {
             do_file_mark (current_panel, current_file, 0);
-            need_update = 1;
+            need_update = TRUE;
         }
+
+        vfs_path_free (vpath);
 
         dlg_destroy (ch_dlg);
     }
-    while (current_panel->marked && !end_chown);
+    while (current_panel->marked != 0 && !end_chown);
 
-    chown_done ();
+    chown_done (need_update);
 }
 
 /* --------------------------------------------------------------------------------------------- */

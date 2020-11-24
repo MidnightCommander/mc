@@ -78,7 +78,7 @@ a sok energiát felemésztő vonal karaktereket és az un. bővített módot
 kikapcsolja.
 .TP
 .I "\-t"
-Ezt csak akkor használd, ha Slang\-gel és terminfo\-val fordítottad a
+Ezt csak akkor használd, ha S\-Lang\-gel és terminfo\-val fordítottad a
 programot: a
 .B TERMCAP
 váltózó értékét használja, és nem a rendszer szintű terminál adatbázist.
@@ -663,7 +663,7 @@ A könyvtárpanelek megjelenése változtatható a
 és
 .B "Jobb"
 menükben.
-.\"NODE "    Listing Mode..."
+.\"NODE "    Listing Format..."
 .SH "    Fájllista..."
 A fájllista módozatok a fájlok megjelenítésének beállítására szolgálnak,
 négy különböző listázási mód használható:
@@ -1764,7 +1764,7 @@ Ha pl. a jogosultságokat kérted, a
 láthatók a
 .\"LINK2"
 Fájllistában
-.\"Listing Mode..."
+.\"Listing Format..."
 a
 .I kiválasztás
 színével. Ez különösen előnyös, ha a könyvtárunkban más felhasználó
@@ -2898,7 +2898,7 @@ a terminál név segítségével. Néha ez összezavarodhat, ezért
 előfordulhat, hogy neked kell megmondanod azt, hogy színes, vagy
 színtelen módot használjon a \-c illetve a \-b kiegészítéssel.
 .PP
-Ha a programot a Slang képernyő kezelővel fordították az ncurses
+Ha a programot a S\-Lang képernyő kezelővel fordították az ncurses
 helyett, szintén le fogja ellenőrizni a
 .B COLORTERM
 változó értékét, ha be van állítva, ez olyan hatású, mintha a \-c flaggal
@@ -2916,7 +2916,7 @@ color_terminals=linux,xterm
 color_terminals=terminal\-name1,terminal\-name2...
 .fi
 .PP
-A program mindkét opcióval fordítható (ncurses és slang).  Az ncurses nem
+A program mindkét opcióval fordítható (ncurses és S\-Lang).  Az ncurses nem
 jelent feltétlenül színes üzemmódot; csak a terminál adatbázist használja.
 .PP
 A Midnight Commander lehetőséget nyújt az alapértelmezett színek
@@ -3179,7 +3179,7 @@ A progam minden ezzel kapcsolatos infomációt az
 környezeti változóban tárol. Ha ezt a változót nem állítottuk be, akkor
 ez vissza fog állítódni a /usr könyvtárra.
 .PP
-.I %prefix%/share/mc/mc.hlp
+.I %prefix%/share/mc/help/mc.hlp
 .IP
 A program súgó fájlja.
 .PP
@@ -3210,7 +3210,7 @@ A felhasználó saját beállításai. Ha ez a fájl elérhető, akkor a
 beállítások ebből a fájlból olvasódnak be a rendszerszintű indító fájl
 helyett.
 .PP
-.I %prefix%/share/mc/mc.hint
+.I %prefix%/share/mc/hints/mc.hint
 .IP
 Ez a fájl tartalmazza a program által megjelenített útmutattásokat
 (cookie\-kat).
@@ -3242,10 +3242,10 @@ Helyi felhasználó által definiált menü. Ha ez a fájl létezik, ezt
 használja a home, vagy rendszerszintű alkalmazás menü helyett.
 .PP
 To change default home directory of MC, you can use 
-.BR MC_HOME
-environment variable. The value of MC_HOME must be an absolute path. If MC_HOME
-is unset or empty, HOME variable is used. If HOME is unset or empty, MC
-directories are get from GLib library.
+.BR MC_PROFILE_ROOT
+environment variable. The value of MC_PROFILE_ROOT must be an absolute path.
+If MC_PROFILE_ROOT is unset or empty, HOME variable is used. If HOME is unset
+or empty, MC directories are get from GLib library.
 .\"NODE "AVAILABILITY"
 .SH "A Midnight Commander frissítése"
 A program legutolsó verzióját az ftp.nuclecu.unam.mx címen a

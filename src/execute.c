@@ -1,7 +1,7 @@
 /*
    Execution routines for GNU Midnight Commander
 
-   Copyright (C) 2003-2016
+   Copyright (C) 2003-2020
    Free Software Foundation, Inc.
 
    Written by:
@@ -132,7 +132,7 @@ static void
 do_possible_cd (const vfs_path_t * new_dir_vpath)
 {
     if (!do_cd (new_dir_vpath, cd_exact))
-        message (D_ERROR, _("Warning"),
+        message (D_ERROR, _("Warning"), "%s",
                  _("The Commander can't change to the directory that\n"
                    "the subshell claims you are in. Perhaps you have\n"
                    "deleted your working directory, or given yourself\n"
@@ -334,7 +334,7 @@ do_executev (const char *shell, int flags, char *const argv[])
 #endif /* ENABLE_SUBSHELL */
             )
         {
-            printf (_("Press any key to continue..."));
+            printf ("%s", _("Press any key to continue..."));
             fflush (stdout);
             tty_raw_mode ();
             get_key_code (0);
@@ -430,10 +430,12 @@ shell_execute (const char *command, int flags)
 
 #ifdef ENABLE_SUBSHELL
     if (mc_global.tty.use_subshell)
+    {
         if (subshell_state == INACTIVE)
             do_execute (mc_global.shell->path, cmd ? cmd : command, flags | EXECUTE_AS_SHELL);
         else
-            message (D_ERROR, MSG_ERROR, _("The shell is already running a command"));
+            message (D_ERROR, MSG_ERROR, "%s", _("The shell is already running a command"));
+    }
     else
 #endif /* ENABLE_SUBSHELL */
         do_execute (mc_global.shell->path, cmd ? cmd : command, flags | EXECUTE_AS_SHELL);
@@ -444,13 +446,25 @@ shell_execute (const char *command, int flags)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-toggle_panels (void)
+toggle_subshell (void)
 {
+    static gboolean message_flag = TRUE;
+
 #ifdef ENABLE_SUBSHELL
     vfs_path_t *new_dir_vpath = NULL;
 #endif /* ENABLE_SUBSHELL */
 
     SIG_ATOMIC_VOLATILE_T was_sigwinch = 0;
+
+    if (!(mc_global.tty.xterm_flag || mc_global.tty.console_flag != '\0'
+          || mc_global.tty.use_subshell || output_starts_shell))
+    {
+        if (message_flag)
+            message (D_ERROR, MSG_ERROR,
+                     _("Not an xterm or Linux console;\nthe subshell cannot be toggled."));
+        message_flag = FALSE;
+        return;
+    }
 
     channels_down ();
     disable_mouse ();
@@ -486,8 +500,8 @@ toggle_panels (void)
     {
         if (output_starts_shell)
         {
-            fprintf (stderr, _("Type 'exit' to return to the Midnight Commander"));
-            fprintf (stderr, "\n\r\n\r");
+            fputs (_("Type 'exit' to return to the Midnight Commander"), stderr);
+            fputs ("\n\r\n\r", stderr);
 
             my_system (EXECUTE_INTERNAL, mc_global.shell->path, NULL);
         }
@@ -529,19 +543,19 @@ toggle_panels (void)
      * Save sigwinch flag that will be reset in mc_refresh() called via update_panels().
      * There is some problem with screen redraw in ncurses-based mc in this situation.
      */
-    was_sigwinch = mc_global.tty.winch_flag;
-    mc_global.tty.winch_flag = 0;
+    was_sigwinch = tty_got_winch ();
+    tty_flush_winch ();
 
 #ifdef ENABLE_SUBSHELL
     if (mc_global.tty.use_subshell)
     {
-        do_load_prompt ();
-        if (new_dir_vpath != NULL)
-            do_possible_cd (new_dir_vpath);
-        if (mc_global.tty.console_flag != '\0' && output_lines)
-            show_console_contents (output_start_y,
-                                   LINES - mc_global.keybar_visible - output_lines -
-                                   1, LINES - mc_global.keybar_visible - 1);
+        if (mc_global.mc_run_mode == MC_RUN_FULL)
+        {
+            if (new_dir_vpath != NULL)
+                do_possible_cd (new_dir_vpath);
+        }
+        else if (new_dir_vpath != NULL && mc_chdir (new_dir_vpath) != -1)
+            vfs_setup_cwd ();
     }
 
     vfs_path_free (new_dir_vpath);
@@ -553,7 +567,7 @@ toggle_panels (void)
         update_xterm_title_path ();
     }
 
-    if (was_sigwinch != 0 || mc_global.tty.winch_flag != 0)
+    if (was_sigwinch != 0 || tty_got_winch ())
         dialog_change_screen_size ();
     else
         repaint_screen ();
@@ -622,7 +636,7 @@ execute_external_editor_or_viewer (const char *command, const vfs_path_t * filen
     vfs_path_t *localcopy_vpath = NULL;
     const vfs_path_t *do_execute_vpath;
     char *extern_cmd_options;
-    time_t mtime;
+    time_t mtime = 0;
 
     if (!execute_prepare_with_vfs_arg (filename_vpath, &localcopy_vpath, &mtime))
         return;
@@ -646,7 +660,6 @@ execute_external_editor_or_viewer (const char *command, const vfs_path_t * filen
             do_executev (command, EXECUTE_INTERNAL, NULL);
 
         g_free (extern_cmd_options);
-
     }
 
     execute_cleanup_with_vfs_arg (filename_vpath, &localcopy_vpath, &mtime);

@@ -1,0 +1,87 @@
+Hint: Hurtigtasten C-x t kopierer de valgte filnavnene til kommandolinja.
+
+Hint: Hurtigtasten C-x p kopierer dette filnavnet til kommandolinja.
+
+Hint: Hurtigtasten M-Tab (eller Esc + Tab) fullfører. Bruk hurtigtasten to ganger for å få opp en liste.
+
+Hint: Hurtigtastene M-p og M-n gir tilgang til kommandohistorikken.
+
+Hint: For å sitere et tegn kan du bruke hurtigtasten Control + Q og deretter tegnet.
+
+Hint: Du kan slå av disse hintene i menyen Innstillinger/Utforming.
+
+Hint: For å velge mapper kan du legge til en skråstrek til slutt i søkemønsteret.
+
+Hint: Hvis terminalen mangler funksjonstaster så kan du bruke ESC + tallet.
+
+Hint: Hjemmesiden til GNU Midnight Commander er http://www.midnight-commander.org/
+
+Hint: Du kan sende feilrapporter til mc-devel@gnome.org
+
+Hint: Tabulatoren endrer det aktive panelet.
+
+Hint: VFS lar deg trykke Enter på et tar-arkiv for å undersøke innholdet.
+
+Hint: Se også manualsiden.
+
+Hint: Du kan slå på Lynx-lignende navigering i Innstillinger/Oppsett.
+
+Hint: %-makroer virker også i kommandolinja.
+
+Hint: Hurtigtasten M-! lar deg kjøre programmer og se resultatet i visningen.
+
+Hint: Utlistingsformatet kan endres. Se «man mc» for flere detaljer.
+
+Hint: %D/%T erstattes med de utvalgte filene i mappa i det andre panelet.
+
+Hint: Hurtigtasten C-o veksler mellom det vanlige skallet og MC.
+
+Hint: CDPATH-variabelen kan korte ned tastetrykk i cd-kommandoer.
+
+Hint: Du kan slå på visning av .*-filer i Innstillinger/Oppsett.
+
+Hint: Du kan slå på visning av *~-reservekopier i Innstillinger/Oppsett.
+
+Hint: Hurtigtasten M-Tab fullfører i alle skrivefelt i alle dialogvinduer.
+
+Hint: Du kan bruke flagget -s hvis terminalen er treig.
+
+Hint: Du kan jobbe med funnede filer ved å velge «Legg til i panel».
+
+Hint: Du kan bruke «Legg til eksternt i panel» for å utføre komplekse søk.
+
+Hint: Du kan skifte mappe mens du holder på å skrive en kommando med hurtigtasten M-c
+
+Merk: Skallkommandoer vil ikke virke i eksterne filsystemer.
+
+Hint: Du kan hente tilbake tekst med C-y.
+
+Hint: Virker ikke noen av tastene? Forsøk Innstillinger/Lær taster.
+
+Hint: Hurtigtasten M-! legger resultatet av en kommando i visningen.
+
+Hint: F13 eller (Shift + F13) viser filinnhold rått.
+
+Hint: Du kan velge F4s tekstprogram med skallvariabelen EDITOR.
+
+Hint: Du kan velge eksternt visningsprogram med skallvariablene VIEWER eller PAGER.
+
+Hint: Du kan slå av bekreftelsesforespørsler i Innstillinger/Bekreftelser.
+
+Hint: Hurtigtasten C-\ åpner en liste over favorittmappene dine.
+
+Hint: Du kan koble til anonym FTP med mc ved å skrive «cd ftp://tjener.edu»
+
+Hint: FTP er bygd inn i Midnight Commander. Se «Koble til FTP».
+
+Hint: Hurtigtasten M-t endrer utlistingsformatet.
+
+Hint: Du kan angi FTP-brukernavn: «cd ftp://bruker@tjener.edu»
+
+Hint: Du kan se innholdet i RPM-filer ved å trykke Enter på den.
+
+Hint: Legg til en skråstrek for å markere mapper i utvalgsdialogen.
+
+Hint: Du må kanskje holde inn Shift-tasten for å klippe ut og lime inn med musa.
+
+Hint: Du kan legge til ofte besøkte FTP-steder i favorittmapper, C-\.

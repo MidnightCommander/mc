@@ -4,7 +4,7 @@
    with all the magic of the command input line, we depend on some
    help from the program's callback.
 
-   Copyright (C) 1995-2016
+   Copyright (C) 1995-2020
    Free Software Foundation, Inc.
 
    Written by:
@@ -49,10 +49,10 @@
 #include "src/subshell/subshell.h"
 #endif
 #include "src/execute.h"        /* shell_execute */
+#include "src/usermenu.h"       /* expand_format */
 
 #include "midnight.h"           /* current_panel */
-#include "layout.h"             /* for command_prompt variable */
-#include "usermenu.h"           /* expand_format */
+#include "layout.h"             /* command_prompt */
 #include "tree.h"               /* sync_tree() */
 
 #include "command.h"
@@ -94,55 +94,56 @@ static input_colors_t command_colors;
 static char *
 examine_cd (const char *_path)
 {
+    /* *INDENT-OFF* */
     typedef enum
-    { copy_sym, subst_var } state_t;
+    {
+        copy_sym,
+        subst_var
+    } state_t;
+    /* *INDENT-ON* */
 
     state_t state = copy_sym;
-    char *q;
-    size_t qlen;
+    GString *q;
     char *path_tilde, *path;
-    char *p, *r;
+    char *p;
 
     /* Tilde expansion */
     path = strutils_shell_unescape (_path);
     path_tilde = tilde_expand (path);
     g_free (path);
 
-    /* Leave space for further expansion */
-    qlen = strlen (path_tilde) + MC_MAXPATHLEN;
-    q = g_malloc (qlen);
+    q = g_string_sized_new (32);
 
     /* Variable expansion */
-    for (p = path_tilde, r = q; *p != '\0' && r < q + MC_MAXPATHLEN;)
+    for (p = path_tilde; *p != '\0';)
     {
         switch (state)
         {
         case copy_sym:
             if (p[0] == '\\' && p[1] == '$')
             {
-                /* skip backslash */
-                p++;
-                /* copy dollar */
-                *(r++) = *(p++);
+                g_string_append_c (q, '$');
+                p += 2;
             }
             else if (p[0] != '$' || p[1] == '[' || p[1] == '(')
-                *(r++) = *(p++);
+            {
+                g_string_append_c (q, *p);
+                p++;
+            }
             else
                 state = subst_var;
             break;
 
         case subst_var:
             {
-                char *s;
+                char *s = NULL;
                 char c;
-                const char *t;
+                const char *t = NULL;
 
                 /* skip dollar */
                 p++;
 
-                if (p[0] != '{')
-                    s = NULL;
-                else
+                if (p[0] == '{')
                 {
                     p++;
                     s = strchr (p, '}');
@@ -157,21 +158,13 @@ examine_cd (const char *_path)
                 *s = c;
                 if (t == NULL)
                 {
-                    *(r++) = '$';
+                    g_string_append_c (q, '$');
                     if (p[-1] != '$')
-                        *(r++) = '{';
+                        g_string_append_c (q, '{');
                 }
                 else
                 {
-                    size_t tlen;
-
-                    tlen = strlen (t);
-
-                    if (r + tlen < q + MC_MAXPATHLEN)
-                    {
-                        strncpy (r, t, tlen + 1);
-                        r += tlen;
-                    }
+                    g_string_append (q, t);
                     p = s;
                     if (*s == '}')
                         p++;
@@ -188,9 +181,7 @@ examine_cd (const char *_path)
 
     g_free (path_tilde);
 
-    *r = '\0';
-
-    return q;
+    return g_string_free (q, FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -254,10 +245,10 @@ enter (WInput * lc_cmdline)
         return MSG_HANDLED;
 
     /* Any initial whitespace should be removed at this point */
-    while (*cmd == ' ' || *cmd == '\t' || *cmd == '\n')
+    while (whiteness (*cmd))
         cmd++;
 
-    if (!*cmd)
+    if (*cmd == '\0')
         return MSG_HANDLED;
 
     if (strncmp (cmd, "cd ", 3) == 0 || strcmp (cmd, "cd") == 0)
@@ -351,7 +342,7 @@ command_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
         /* Special case: we handle the enter key */
         if (parm == '\n')
             return enter (INPUT (w));
-        /* fall through */
+        MC_FALLTHROUGH;
 
     default:
         return input_callback (w, sender, msg, parm, data);
@@ -381,18 +372,18 @@ do_cd_command (char *orig_cmd)
     /* FIXME: what about interpreting quoted strings like the shell.
        so one could type "cd <tab> M-a <enter>" and it would work. */
     len = strlen (orig_cmd) - 1;
-    while (len >= 0 && (orig_cmd[len] == ' ' || orig_cmd[len] == '\t' || orig_cmd[len] == '\n'))
+    while (len >= 0 && whiteness (orig_cmd[len]))
     {
-        orig_cmd[len] = 0;
+        orig_cmd[len] = '\0';
         len--;
     }
 
     cmd = orig_cmd;
-    if (cmd[CD_OPERAND_OFFSET - 1] == 0)
+    if (cmd[CD_OPERAND_OFFSET - 1] == '\0')
         cmd = "cd ";            /* 0..2 => given text, 3 => \0 */
 
     /* allow any amount of white space in front of the path operand */
-    while (cmd[operand_pos] == ' ' || cmd[operand_pos] == '\t')
+    while (whitespace (cmd[operand_pos]))
         operand_pos++;
 
     if (get_current_type () == view_tree)

@@ -1,7 +1,7 @@
 /* Virtual File System: SFTP file system.
    The interface function
 
-   Copyright (C) 2011-2016
+   Copyright (C) 2011-2020
    Free Software Foundation, Inc.
 
    Written by:
@@ -34,6 +34,9 @@
 
 /*** global variables ****************************************************************************/
 
+struct vfs_s_subclass sftpfs_subclass;
+struct vfs_class *sftpfs_class = VFS_CLASS (&sftpfs_subclass);
+
 /*** file scope macro definitions ****************************************************************/
 
 /*** file scope type declarations ****************************************************************/
@@ -51,19 +54,14 @@
  */
 
 void
-init_sftpfs (void)
+vfs_init_sftpfs (void)
 {
     tcp_init ();
 
+    vfs_init_subclass (&sftpfs_subclass, "sftpfs", VFSF_NOLINKS | VFSF_REMOTE, "sftp");
     sftpfs_init_class ();
     sftpfs_init_subclass ();
-
-    vfs_s_init_class (&sftpfs_class, &sftpfs_subclass);
-
-    sftpfs_init_class_callbacks ();
-    sftpfs_init_subclass_callbacks ();
-
-    vfs_register_class (&sftpfs_class);
+    vfs_register_class (sftpfs_class);
 }
 
 /* --------------------------------------------------------------------------------------------- */

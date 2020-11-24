@@ -1,7 +1,7 @@
 /*
    lib - common code for testing lib/utilinux:my_system() function
 
-   Copyright (C) 2013-2016
+   Copyright (C) 2013-2020
    Free Software Foundation, Inc.
 
    Written by:
@@ -27,6 +27,11 @@
 #include <unistd.h>
 
 #include "lib/vfs/vfs.h"
+
+/* sighandler_t is GNU extension */
+#ifndef HAVE_SIGHANDLER_T
+typedef void (*sighandler_t) (int);
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -105,12 +110,15 @@ sigaction__deinit (void)
 {
     g_ptr_array_foreach (sigaction_signum__captured, (GFunc) g_free, NULL);
     g_ptr_array_free (sigaction_signum__captured, TRUE);
+    sigaction_signum__captured = NULL;
 
     g_ptr_array_foreach (sigaction_act__captured, (GFunc) g_free, NULL);
     g_ptr_array_free (sigaction_act__captured, TRUE);
+    sigaction_act__captured = NULL;
 
     g_ptr_array_foreach (sigaction_oldact__captured, (GFunc) g_free, NULL);
     g_ptr_array_free (sigaction_oldact__captured, TRUE);
+    sigaction_oldact__captured = NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -159,9 +167,11 @@ signal__deinit (void)
 {
     g_ptr_array_foreach (signal_signum__captured, (GFunc) g_free, NULL);
     g_ptr_array_free (signal_signum__captured, TRUE);
+    signal_signum__captured = NULL;
 
     g_ptr_array_foreach (signal_handler__captured, (GFunc) g_free, NULL);
     g_ptr_array_free (signal_handler__captured, TRUE);
+    signal_handler__captured = NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -220,7 +230,8 @@ execvp__deinit (void)
 {
     g_ptr_array_foreach (execvp__args__captured, (GFunc) g_free, NULL);
     g_ptr_array_free (execvp__args__captured, TRUE);
-    g_free (execvp__file__captured);
+    execvp__args__captured = NULL;
+    MC_PTR_FREE (execvp__file__captured);
 }
 
 /* --------------------------------------------------------------------------------------------- */

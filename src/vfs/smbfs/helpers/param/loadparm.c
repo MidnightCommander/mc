@@ -5,7 +5,7 @@
 
    Copyright (C) Karl Auer 1993-1998
 
-   Copyright (C) 2011-2016
+   Copyright (C) 2011-2020
    Free Software Foundation, Inc.
 
    Largely re-written by Andrew Tridgell, September 1994
@@ -448,9 +448,7 @@ static int iNumServices = 0;
 static int iServiceIndex = 0;
 static BOOL bInGlobalSection = True;
 static BOOL bGlobalOnly = False;
-#if 0
-static int default_server_announce;
-#endif /* 0 */
+
 #define NUMPARAMETERS (sizeof(parm_table) / sizeof(struct parm_struct))
 
 /* prototypes for the special type handlers */
@@ -544,7 +542,7 @@ static struct enum_list const enum_ssl_version[] = { {SMB_SSL_V2, "ssl2"}, {SMB_
 
 #define PARM_SEPARATOR(label) {label, P_SEP, P_SEPARATOR, NULL, NULL, NULL, 0, {0}}
 /* note that we do not initialise the defaults union - it is not allowed in ANSI C */
-static struct parm_struct parm_table[] = {
+static struct parm_struct const parm_table[] = {
     PARM_SEPARATOR ("Base Options"),
     {"comment", P_STRING, P_LOCAL, &sDefault.comment, NULL, NULL,
      FLAG_BASIC | FLAG_SHARE | FLAG_PRINT, {0}},
@@ -911,7 +909,7 @@ static void
 init_globals (void)
 {
     static BOOL done_init = False;
-    pstring s;
+    fstring s;
 
     if (!done_init)
     {
@@ -1955,7 +1953,7 @@ init_copymap (service * pservice)
             pservice->copymap[i] = True;
 }
 
-
+#if 0
 /***************************************************************************
  return the local pointer to a parameter given the service number and the 
  pointer into the default structure
@@ -1965,6 +1963,7 @@ lp_local_ptr (int snum, void *ptr)
 {
     return (void *) (((char *) pSERVICE (snum)) + PTR_DIFF (ptr, &sDefault));
 }
+#endif /* 0 */
 
 /***************************************************************************
 Process a parameter for a particular service number. If snum < 0
@@ -2451,7 +2450,7 @@ lp_load (const char *pszFname, BOOL global_only, BOOL save_defaults, BOOL add_ip
     return (bRetval);
 }
 
-
+#if 0
 /***************************************************************************
 reset the max number of services
 ***************************************************************************/
@@ -2470,7 +2469,7 @@ lp_numservices (void)
 {
     return (iNumServices);
 }
-
+#endif /* 0 */
 
 /***************************************************************************
 Return the number of the service with the given name, or -1 if it doesn't
@@ -2505,88 +2504,6 @@ volume_label (int snum)
         return (lp_servicename (snum));
     return (ret);
 }
-#endif /* 0 */
-#if 0
-/*******************************************************************
- Set the server type we will announce as via nmbd.
-********************************************************************/
-static void
-set_default_server_announce_type (void)
-{
-    default_server_announce = (SV_TYPE_WORKSTATION | SV_TYPE_SERVER |
-                               SV_TYPE_SERVER_UNIX | SV_TYPE_PRINTQ_SERVER);
-    if (lp_announce_as () == ANNOUNCE_AS_NT_SERVER)
-        default_server_announce |= (SV_TYPE_SERVER_NT | SV_TYPE_NT);
-    if (lp_announce_as () == ANNOUNCE_AS_NT_WORKSTATION)
-        default_server_announce |= SV_TYPE_NT;
-    else if (lp_announce_as () == ANNOUNCE_AS_WIN95)
-        default_server_announce |= SV_TYPE_WIN95_PLUS;
-    else if (lp_announce_as () == ANNOUNCE_AS_WFW)
-        default_server_announce |= SV_TYPE_WFW;
-    default_server_announce |= (lp_time_server ()? SV_TYPE_TIME_SOURCE : 0);
-}
-
-
-/*******************************************************************
- Get the default server type we will announce as via nmbd.
-********************************************************************/
-int
-lp_default_server_announce (void)
-{
-    return default_server_announce;
-}
-
-
-/*******************************************************************
- Split the announce version into major and minor numbers.
-********************************************************************/
-int
-lp_major_announce_version (void)
-{
-    static BOOL got_major = False;
-    static int major_version = DEFAULT_MAJOR_VERSION;
-    char *vers;
-    char *p;
-
-    if (got_major)
-        return major_version;
-
-    got_major = True;
-    if ((vers = lp_announce_version ()) == NULL)
-        return major_version;
-
-    if ((p = strchr (vers, '.')) == 0)
-        return major_version;
-
-    *p = '\0';
-    major_version = atoi (vers);
-    return major_version;
-}
-
-
-int
-lp_minor_announce_version (void)
-{
-    static BOOL got_minor = False;
-    static int minor_version = DEFAULT_MINOR_VERSION;
-    char *vers;
-    char *p;
-
-    if (got_minor)
-        return minor_version;
-
-    got_minor = True;
-    if ((vers = lp_announce_version ()) == NULL)
-        return minor_version;
-
-    if ((p = strchr (vers, '.')) == 0)
-        return minor_version;
-
-    p++;
-    minor_version = atoi (p);
-    return minor_version;
-}
-#endif /* 0 */
 
 /***********************************************************
  Set the global name resolution order (used in smbclient).
@@ -2597,3 +2514,4 @@ lp_set_name_resolve_order (char *new_order)
 {
     Globals.szNameResolveOrder = new_order;
 }
+#endif /* 0 */

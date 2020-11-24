@@ -27,6 +27,9 @@
 #define mc_return_if_error(mcerror) do { if (mcerror != NULL && *mcerror != NULL) return; } while (0)
 #define mc_return_val_if_error(mcerror, mcvalue) do { if (mcerror != NULL && *mcerror != NULL) return mcvalue; } while (0)
 
+#define whitespace(c) ((c) == ' ' || (c) == '\t')
+#define whiteness(c) (whitespace (c) || (c) == '\n')
+
 #define MC_PIPE_BUFSIZE BUF_8K
 #define MC_PIPE_STREAM_EOF 0
 #define MC_PIPE_STREAM_UNREAD -1
@@ -34,6 +37,22 @@
 #define MC_PIPE_ERROR_PARSE_COMMAND -3
 #define MC_PIPE_ERROR_CREATE_PIPE_STREAM -4
 #define MC_PIPE_ERROR_READ -5
+
+/* gnulib efa15594e17fc20827dba66414fb391e99905394
+
+ *_GL_CMP (n1, n2) performs a three-valued comparison on n1 vs. n2.
+ *  It returns
+ *    1  if n1 > n2
+ *    0  if n1 == n2
+ *    -1 if n1 < n2
+ *  The native code   (n1 > n2 ? 1 : n1 < n2 ? -1 : 0)  produces a conditional
+ *  jump with nearly all GCC versions up to GCC 10.
+ *  This variant      (n1 < n2 ? -1 : n1 > n2)  produces a conditional with many
+ *  GCC versions up to GCC 9.
+ *  The better code  (n1 > n2) - (n1 < n2)  from Hacker's Delight para 2-9
+ *  avoids conditional jumps in all GCC versions >= 3.4.
+ */
+#define _GL_CMP(n1, n2) (((n1) > (n2)) - ((n1) < (n2)))
 
 /*** enums ***************************************************************************************/
 
@@ -57,7 +76,8 @@ enum compression_type
     COMPRESSION_LZIP,
     COMPRESSION_LZ4,
     COMPRESSION_LZMA,
-    COMPRESSION_XZ
+    COMPRESSION_XZ,
+    COMPRESSION_ZSTD,
 };
 
 /* stdout or stderr stream of child process */
@@ -211,11 +231,7 @@ char *tilde_expand (const char *);
 void custom_canonicalize_pathname (char *, CANON_PATH_FLAGS);
 void canonicalize_pathname (char *);
 
-#ifdef HAVE_REALPATH
-#define mc_realpath realpath
-#else
 char *mc_realpath (const char *path, char *resolved_path);
-#endif
 
 /* Looks for "magic" bytes at the start of the VFS file to guess the
  * compression type. Side effect: modifies the file position. */
@@ -248,6 +264,8 @@ char *guess_message_value (void);
 
 char *mc_build_filename (const char *first_element, ...);
 char *mc_build_filenamev (const char *first_element, va_list args);
+
+const char *mc_get_profile_root (void);
 
 /* *INDENT-OFF* */
 void mc_propagate_error (GError ** dest, int code, const char *format, ...) G_GNUC_PRINTF (3, 4);

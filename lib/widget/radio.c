@@ -1,7 +1,7 @@
 /*
    Widgets for the Midnight Commander
 
-   Copyright (C) 1994-2016
+   Copyright (C) 1994-2020
    Free Software Foundation, Inc.
 
    Authors:
@@ -43,13 +43,79 @@
 
 /*** global variables ****************************************************************************/
 
+const global_keymap_t *radio_map = NULL;
+
 /*** file scope macro definitions ****************************************************************/
 
 /*** file scope type declarations ****************************************************************/
 
 /*** file scope variables ************************************************************************/
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+static cb_ret_t
+radio_execute_cmd (WRadio * r, long command)
+{
+    cb_ret_t ret = MSG_HANDLED;
+    Widget *w = WIDGET (r);
+
+    switch (command)
+    {
+    case CK_Up:
+    case CK_Top:
+        if (r->pos == 0)
+            return MSG_NOT_HANDLED;
+
+        if (command == CK_Top)
+            r->pos = 0;
+        else
+            r->pos--;
+        widget_draw (w);
+        return MSG_HANDLED;
+
+    case CK_Down:
+    case CK_Bottom:
+        if (r->pos == r->count - 1)
+            return MSG_NOT_HANDLED;
+
+        if (command == CK_Bottom)
+            r->pos = r->count - 1;
+        else
+            r->pos++;
+        widget_draw (w);
+        return MSG_HANDLED;
+
+    case CK_Select:
+        r->sel = r->pos;
+        widget_set_state (w, WST_FOCUSED, TRUE);        /* Also draws the widget */
+        send_message (w->owner, w, MSG_NOTIFY, 0, NULL);
+        return MSG_HANDLED;
+
+    default:
+        ret = MSG_NOT_HANDLED;
+        break;
+    }
+
+    return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/* Return MSG_HANDLED if we want a redraw */
+static cb_ret_t
+radio_key (WRadio * r, int key)
+{
+    long command;
+
+    command = widget_lookup_key (WIDGET (r), key);
+    if (command == CK_IgnoreKey)
+        return MSG_NOT_HANDLED;
+    return radio_execute_cmd (r, command);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
 radio_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
@@ -60,57 +126,32 @@ radio_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
     switch (msg)
     {
     case MSG_HOTKEY:
+        for (i = 0; i < r->count; i++)
         {
-            for (i = 0; i < r->count; i++)
+            if (r->texts[i].hotkey != NULL)
             {
-                if (r->texts[i].hotkey != NULL)
-                {
-                    int c = g_ascii_tolower ((gchar) r->texts[i].hotkey[0]);
+                int c;
 
-                    if (c != parm)
-                        continue;
-                    r->pos = i;
+                c = g_ascii_tolower ((gchar) r->texts[i].hotkey[0]);
+                if (c != parm)
+                    continue;
+                r->pos = i;
 
-                    /* Take action */
-                    send_message (w, sender, MSG_KEY, ' ', data);
-                    return MSG_HANDLED;
-                }
+                /* Take action */
+                send_message (w, sender, MSG_ACTION, CK_Select, data);
+                return MSG_HANDLED;
             }
         }
         return MSG_NOT_HANDLED;
 
     case MSG_KEY:
-        switch (parm)
-        {
-        case ' ':
-            r->sel = r->pos;
-            widget_set_state (w, WST_FOCUSED, TRUE);    /* Also draws the widget. */
-            return MSG_HANDLED;
+        return radio_key (r, parm);
 
-        case KEY_UP:
-        case KEY_LEFT:
-            if (r->pos > 0)
-            {
-                r->pos--;
-                widget_redraw (w);
-                return MSG_HANDLED;
-            }
-            return MSG_NOT_HANDLED;
-
-        case KEY_DOWN:
-        case KEY_RIGHT:
-            if (r->count - 1 > r->pos)
-            {
-                r->pos++;
-                widget_redraw (w);
-                return MSG_HANDLED;
-            }
-        default:
-            return MSG_NOT_HANDLED;
-        }
+    case MSG_ACTION:
+        return radio_execute_cmd (r, parm);
 
     case MSG_CURSOR:
-        widget_move (r, r->pos, 1);
+        widget_gotoyx (r, r->pos, 1);
         return MSG_HANDLED;
 
     case MSG_DRAW:
@@ -122,7 +163,7 @@ radio_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
             for (i = 0; i < r->count; i++)
             {
                 widget_selectcolor (w, i == r->pos && focused, FALSE);
-                widget_move (w, i, 0);
+                widget_gotoyx (w, i, 0);
                 tty_draw_hline (w->y + i, w->x, ' ', w->cols);
                 tty_print_string ((r->sel == i) ? "(*) " : "( ) ");
                 hotkey_draw (w, r->texts[i], i == r->pos && focused);
@@ -133,7 +174,7 @@ radio_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
 
     case MSG_DESTROY:
         for (i = 0; i < r->count; i++)
-            release_hotkey (r->texts[i]);
+            hotkey_free (r->texts[i]);
         g_free (r->texts);
         return MSG_HANDLED;
 
@@ -156,7 +197,7 @@ radio_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 
     case MSG_MOUSE_CLICK:
         RADIO (w)->pos = event->y;
-        send_message (w, NULL, MSG_KEY, ' ', NULL);
+        send_message (w, NULL, MSG_ACTION, CK_Select, NULL);
         send_message (w->owner, w, MSG_POST_KEY, ' ', NULL);
         break;
 
@@ -186,7 +227,7 @@ radio_new (int y, int x, int count, const char **texts)
     {
         int width;
 
-        r->texts[i] = parse_hotkey (texts[i]);
+        r->texts[i] = hotkey_new (texts[i]);
         width = hotkey_width (r->texts[i]);
         wmax = MAX (width, wmax);
     }
@@ -194,7 +235,8 @@ radio_new (int y, int x, int count, const char **texts)
     /* 4 is width of "(*) " */
     widget_init (w, y, x, count, 4 + wmax, radio_callback, radio_mouse_callback);
     w->options |= WOP_SELECTABLE | WOP_WANT_CURSOR | WOP_WANT_HOTKEY;
-    r->state = 1;
+    w->keymap = radio_map;
+
     r->pos = 0;
     r->sel = 0;
     r->count = count;

@@ -2,7 +2,7 @@
    Input line filename/username/hostname/variable/command completion.
    (Let mc type for you...)
 
-   Copyright (C) 1995-2016
+   Copyright (C) 1995-2020
    Free Software Foundation, Inc.
 
    Written by:
@@ -33,6 +33,7 @@
 #include <config.h>
 
 #include <ctype.h>
+#include <limits.h>             /* MB_LEN_MAX */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -52,8 +53,6 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 
-#include "input_complete.h"
-
 /*** global variables ****************************************************************************/
 
 /* Linux declares environ in <unistd.h>, so don't repeat it here. */
@@ -69,8 +68,6 @@ extern char **environ;
 #else
 #define SHOW_C_CTX(func)
 #endif /* DO_CMPLETION_DEBUG */
-
-#define whitespace(c) ((c) == ' ' || (c) == '\t')
 
 #define DO_INSERTION 1
 #define DO_QUERY     2
@@ -96,7 +93,7 @@ static char **hosts = NULL;
 static char **hosts_p = NULL;
 static int hosts_alloclen = 0;
 
-static int query_height, query_width;
+static int complete_height, complete_width;
 static WInput *input;
 static int min_end;
 static int start = 0;
@@ -642,7 +639,7 @@ command_completion_function (const char *text, int state, input_complete_t flags
             }
         phase++;
         words = bash_builtins;
-        /* fallthrough */
+        MC_FALLTHROUGH;
     case 1:                    /* Builtin commands */
         for (; *words != NULL; words++)
             if (strncmp (*words, u_text, text_len) == 0)
@@ -655,7 +652,7 @@ command_completion_function (const char *text, int state, input_complete_t flags
             break;
         cur_path = path;
         cur_word = NULL;
-        /* fallthrough */
+        MC_FALLTHROUGH;
     case 2:                    /* And looking through the $PATH */
         while (found == NULL)
         {
@@ -676,7 +673,7 @@ command_completion_function (const char *text, int state, input_complete_t flags
             if (found == NULL)
                 MC_PTR_FREE (cur_word);
         }
-        /* fallthrough */
+        MC_FALLTHROUGH;
     default:
         break;
     }
@@ -847,7 +844,7 @@ try_complete_commands_prepare (try_complete_automation_state_t * state, char *te
     else
     {
         ti = str_get_prev_char (&text[*lc_start]);
-        while (ti > text && (ti[0] == ' ' || ti[0] == '\t'))
+        while (ti > text && whitespace (ti[0]))
             str_prev_char (&ti);
     }
 
@@ -888,11 +885,8 @@ try_complete_find_start_sign (try_complete_automation_state_t * state)
         /* don't substitute variable in \$ case */
         if (strutils_is_char_escaped (state->word, state->q))
         {
-            size_t qlen;
-
-            qlen = strlen (state->q);
             /* drop '\\' */
-            memmove (state->q - 1, state->q, qlen + 1);
+            str_move (state->q - 1, state->q);
             /* adjust flags */
             state->flags &= ~INPUT_COMPLETE_VARIABLES;
             state->q = NULL;
@@ -933,14 +927,12 @@ try_complete_all_possible (try_complete_automation_state_t * state, char *text, 
         {
             state->q = text + *lc_start;
             for (state->p = text;
-                 *state->p != '\0' && state->p < state->q && (*state->p == ' '
-                                                              || *state->p == '\t');
+                 *state->p != '\0' && state->p < state->q && whitespace (*state->p);
                  str_next_char (&state->p))
                 ;
             if (strncmp (state->p, "cd", 2) == 0)
                 for (state->p += 2;
-                     *state->p != '\0' && state->p < state->q && (*state->p == ' '
-                                                                  || *state->p == '\t');
+                     *state->p != '\0' && state->p < state->q && whitespace (*state->p);
                      str_next_char (&state->p))
                     ;
             if (state->p == state->q)
@@ -1021,10 +1013,11 @@ insert_text (WInput * in, char *text, ssize_t size)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-query_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+complete_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     static int bl = 0;
 
+    WGroup *g = GROUP (w);
     WDialog *h = DIALOG (w);
 
     switch (msg)
@@ -1063,17 +1056,17 @@ query_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
 
                 new_end = str_get_prev_char (&input->buffer[end]) - input->buffer;
 
-                for (i = 0, e = listbox_get_first_link (LISTBOX (h->current->data));
+                for (i = 0, e = listbox_get_first_link (LISTBOX (g->current->data));
                      e != NULL; i++, e = g_list_next (e))
                 {
                     WLEntry *le = LENTRY (e->data);
 
                     if (strncmp (input->buffer + start, le->text, new_end - start) == 0)
                     {
-                        listbox_select_entry (LISTBOX (h->current->data), i);
+                        listbox_select_entry (LISTBOX (g->current->data), i);
                         end = new_end;
                         input_handle_char (input, parm);
-                        widget_redraw (WIDGET (h->current->data));
+                        widget_draw (WIDGET (g->current->data));
                         break;
                     }
                 }
@@ -1084,7 +1077,7 @@ query_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
             if (parm < 32 || parm > 255)
             {
                 bl = 0;
-                if (input_key_is_in_map (input, parm) != 2)
+                if (widget_lookup_key (WIDGET (input), parm) != CK_Complete)
                     return MSG_NOT_HANDLED;
 
                 if (end == min_end)
@@ -1110,14 +1103,14 @@ query_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
                 {
                 case -1:
                     bl = 0;
-                    /* fallthrough */
+                    MC_FALLTHROUGH;
                 case -2:
                     return MSG_HANDLED;
                 default:
                     break;
                 }
 
-                for (i = 0, e = listbox_get_first_link (LISTBOX (h->current->data));
+                for (i = 0, e = listbox_get_first_link (LISTBOX (g->current->data));
                      e != NULL; i++, e = g_list_next (e))
                 {
                     WLEntry *le = LENTRY (e->data);
@@ -1128,7 +1121,7 @@ query_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
                         if (need_redraw == 0)
                         {
                             need_redraw = 1;
-                            listbox_select_entry (LISTBOX (h->current->data), i);
+                            listbox_select_entry (LISTBOX (g->current->data), i);
                             last_text = le->text;
                         }
                         else
@@ -1179,7 +1172,7 @@ query_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
                 if (need_redraw == 2)
                 {
                     insert_text (input, last_text, low);
-                    widget_redraw (WIDGET (h->current->data));
+                    widget_draw (WIDGET (g->current->data));
                 }
                 else if (need_redraw == 1)
                 {
@@ -1203,7 +1196,7 @@ static gboolean
 complete_engine (WInput * in, int what_to_do)
 {
     if (in->completions != NULL && str_offset_to_pos (in->buffer, in->point) != end)
-        input_free_completions (in);
+        input_complete_free (in);
 
     if (in->completions == NULL)
         complete_engine_fill_completions (in);
@@ -1220,7 +1213,7 @@ complete_engine (WInput * in, int what_to_do)
             if (!insert_text (in, lc_complete, strlen (lc_complete)) || in->completions[1] != NULL)
                 tty_beep ();
             else
-                input_free_completions (in);
+                input_complete_free (in);
         }
 
         if ((what_to_do & DO_QUERY) != 0 && in->completions != NULL && in->completions[1] != NULL)
@@ -1229,8 +1222,8 @@ complete_engine (WInput * in, int what_to_do)
             int x, y, w, h;
             int start_x, start_y;
             char **p, *q;
-            WDialog *query_dlg;
-            WListbox *query_list;
+            WDialog *complete_dlg;
+            WListbox *complete_list;
 
             for (p = in->completions + 1; *p != NULL; count++, p++)
             {
@@ -1267,28 +1260,29 @@ complete_engine (WInput * in, int what_to_do)
 
             input = in;
             min_end = end;
-            query_height = h;
-            query_width = w;
+            complete_height = h;
+            complete_width = w;
 
-            query_dlg = dlg_create (TRUE, y, x, query_height, query_width, WPOS_KEEP_DEFAULT, TRUE,
-                                    dialog_colors, query_callback, NULL, "[Completion]", NULL);
-            query_list = listbox_new (1, 1, h - 2, w - 2, FALSE, NULL);
-            add_widget (query_dlg, query_list);
+            complete_dlg =
+                dlg_create (TRUE, y, x, complete_height, complete_width, WPOS_KEEP_DEFAULT, TRUE,
+                            dialog_colors, complete_callback, NULL, "[Completion]", NULL);
+            complete_list = listbox_new (1, 1, h - 2, w - 2, FALSE, NULL);
+            group_add_widget (GROUP (complete_dlg), complete_list);
 
             for (p = in->completions + 1; *p != NULL; p++)
-                listbox_add_item (query_list, LISTBOX_APPEND_AT_END, 0, *p, NULL, FALSE);
+                listbox_add_item (complete_list, LISTBOX_APPEND_AT_END, 0, *p, NULL, FALSE);
 
-            i = dlg_run (query_dlg);
+            i = dlg_run (complete_dlg);
             q = NULL;
             if (i == B_ENTER)
             {
-                listbox_get_current (query_list, &q, NULL);
+                listbox_get_current (complete_list, &q, NULL);
                 if (q != NULL)
                     insert_text (in, q, strlen (q));
             }
             if (q != NULL || end != min_end)
-                input_free_completions (in);
-            dlg_destroy (query_dlg);
+                input_complete_free (in);
+            dlg_destroy (complete_dlg);
 
             /* B_USER if user wants to start over again */
             return (i == B_USER);
@@ -1442,7 +1436,7 @@ complete_engine_fill_completions (WInput * in)
 
 /* declared in lib/widget/input.h */
 void
-complete (WInput * in)
+input_complete (WInput * in)
 {
     int engine_flags;
 
@@ -1461,6 +1455,15 @@ complete (WInput * in)
 
     while (complete_engine (in, engine_flags))
         ;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+input_complete_free (WInput * in)
+{
+    g_strfreev (in->completions);
+    in->completions = NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */

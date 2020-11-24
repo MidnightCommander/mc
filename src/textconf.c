@@ -1,7 +1,7 @@
 /*
    Print features specific for this build
 
-   Copyright (C) 2000-2016
+   Copyright (C) 2000-2020
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
@@ -33,6 +33,8 @@
 #include "lib/global.h"
 #include "lib/fileloc.h"
 #include "lib/mcconfig.h"
+#include "lib/util.h"           /* mc_get_profile_root() */
+#include "lib/tty/tty.h"        /* S-Lang or ncurses version */
 
 #include "src/textconf.h"
 
@@ -78,48 +80,47 @@ static const char *const vfs_supported[] = {
 #endif /* ENABLE_VFS */
 
 static const char *const features[] = {
-#ifdef HAVE_SLANG
-    N_("Using the S-Lang library with terminfo database\n"),
-#elif defined(USE_NCURSES)
-    N_("Using the ncurses library\n"),
-#elif defined(USE_NCURSESW)
-    N_("Using the ncursesw library\n"),
-#else
-#error "Cannot compile mc without S-Lang or ncurses"
-#endif /* !HAVE_SLANG && !USE_NCURSES */
 
 #ifdef USE_INTERNAL_EDIT
-    N_("With builtin Editor\n"),
-#endif
+#ifdef HAVE_ASPELL
+    N_("With builtin Editor and Aspell support"),
+#else
+    N_("With builtin Editor"),
+#endif /* HAVE_ASPELL */
+#endif /* USE_INTERNAL_EDIT */
 
 #ifdef ENABLE_SUBSHELL
 #ifdef SUBSHELL_OPTIONAL
-    N_("With optional subshell support\n"),
+    N_("With optional subshell support"),
 #else
-    N_("With subshell support as default\n"),
+    N_("With subshell support as default"),
 #endif
 #endif /* !ENABLE_SUBSHELL */
 
 #ifdef ENABLE_BACKGROUND
-    N_("With support for background operations\n"),
+    N_("With support for background operations"),
 #endif
 
 #ifdef HAVE_LIBGPM
-    N_("With mouse support on xterm and Linux console\n"),
+    N_("With mouse support on xterm and Linux console"),
 #else
-    N_("With mouse support on xterm\n"),
+    N_("With mouse support on xterm"),
 #endif
 
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
-    N_("With support for X11 events\n"),
+    N_("With support for X11 events"),
 #endif
 
 #ifdef ENABLE_NLS
-    N_("With internationalization support\n"),
+    N_("With internationalization support"),
 #endif
 
 #ifdef HAVE_CHARSET
-    N_("With multiple codepages support\n"),
+    N_("With multiple codepages support"),
+#endif
+
+#ifdef ENABLE_EXT2FS_ATTR
+    N_("With ext2fs attributes support"),
 #endif
 
     NULL
@@ -142,17 +143,35 @@ show_version (void)
     printf (_("Built with GLib %d.%d.%d\n"),
             GLIB_MAJOR_VERSION, GLIB_MINOR_VERSION, GLIB_MICRO_VERSION);
 
+#ifdef HAVE_SLANG
+    printf (_("Built with S-Lang %s with terminfo database\n"), SLANG_VERSION_STRING);
+#elif defined(USE_NCURSES)
+#ifdef NCURSES_VERSION
+    printf (_("Built with ncurses %s\n"), NCURSES_VERSION);
+#else
+    puts (_("Built with ncurses (unknown version)"));
+#endif /* !NCURSES_VERSION */
+#elif defined(USE_NCURSESW)
+#ifdef NCURSES_VERSION
+    printf (_("Built with ncursesw %s\n"), NCURSES_VERSION);
+#else
+    puts (_("Built with ncursesw (unknown version)"));
+#endif /* !NCURSES_VERSION */
+#else
+#error "Cannot compile mc without S-Lang or ncurses"
+#endif /* !HAVE_SLANG && !USE_NCURSES */
+
     for (i = 0; features[i] != NULL; i++)
-        printf ("%s", _(features[i]));
+        puts (_(features[i]));
 
 #ifdef ENABLE_VFS
-    printf (_("Virtual File Systems:"));
+    puts (_("Virtual File Systems:"));
     for (i = 0; vfs_supported[i] != NULL; i++)
         printf ("%s %s", i == 0 ? "" : ",", _(vfs_supported[i]));
-    printf ("\n");
+    (void) puts ("");
 #endif /* ENABLE_VFS */
 
-    (void) printf (_("Data types:"));
+    (void) puts (_("Data types:"));
 #define TYPE_INFO(T) \
     (void)printf(" %s: %d;", #T, (int) (CHAR_BIT * sizeof(T)))
     TYPE_INFO (char);
@@ -162,7 +181,7 @@ show_version (void)
     TYPE_INFO (size_t);
     TYPE_INFO (off_t);
 #undef TYPE_INFO
-    (void) printf ("\n");
+    (void) puts ("");
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -180,7 +199,8 @@ show_version (void)
 void
 show_datadirs_extended (void)
 {
-    (void) printf ("%s %s\n", _("Root directory:"), mc_config_get_home_dir ());
+    (void) printf ("%s %s\n", _("Home directory:"), mc_config_get_home_dir ());
+    (void) printf ("%s %s\n", _("Profile root directory:"), mc_get_profile_root ());
     (void) puts ("");
 
     PRINTF_GROUP (_("System data"));
@@ -205,7 +225,7 @@ show_datadirs_extended (void)
 
     PRINTF_SECTION2 (_("Config directory:"), mc_config_get_path ());
     PRINTF_SECTION2 (_("Data directory:"), mc_config_get_data_path ());
-    PRINTF ("skins:", mc_config_get_data_path (), MC_SKINS_SUBDIR PATH_SEP_STR);
+    PRINTF ("skins:", mc_config_get_data_path (), MC_SKINS_DIR PATH_SEP_STR);
 #ifdef ENABLE_VFS_EXTFS
     PRINTF ("extfs.d:", mc_config_get_data_path (), MC_EXTFS_DIR PATH_SEP_STR);
 #endif
@@ -214,10 +234,9 @@ show_datadirs_extended (void)
 #endif
 #ifdef USE_INTERNAL_EDIT
     PRINTF ("mcedit macros:", mc_config_get_data_path (), MC_MACRO_FILE);
-    PRINTF ("mcedit external macros:", mc_config_get_data_path (), MC_EXTMACRO_FILE ".*");
+    PRINTF ("mcedit external macros:", mc_config_get_data_path (), EDIT_HOME_MACRO_FILE ".*");
 #endif
     PRINTF_SECTION2 (_("Cache directory:"), mc_config_get_cache_path ());
-
 }
 
 #undef PRINTF
@@ -226,10 +245,12 @@ show_datadirs_extended (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
+#ifdef ENABLE_CONFIGURE_ARGS
 void
 show_configure_options (void)
 {
-    (void) printf ("%s\n", MC_CONFIGURE_ARGS);
+    (void) puts (MC_CONFIGURE_ARGS);
 }
+#endif
 
 /* --------------------------------------------------------------------------------------------- */

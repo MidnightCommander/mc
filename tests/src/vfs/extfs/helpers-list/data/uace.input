@@ -1,0 +1,148 @@
+
+UNACE v2.5     Copyright by ACE Compression Software       May  7 2015 03:22:29
+                                                           
+processing archive /..ive_c/Program Files/test.ace         
+created on 11.12.2016 with ver 2.0 by                      
+*UNREGISTERED VERSION*                                     
+Contents of archive test.ace                               
+                                                           
+  Date    Time     Packed      Size  Ratio  File           
+                                                           
+08.11.07 02:06         168       256   65%  WinAce/find.add
+08.11.07 02:06        1796      5655   31%  WinAce/winace.cnt
+08.11.07 02:06         580      1943   29%  WinAce/winace_enu.cnt
+17.04.94 02:06       13968     31232   44%  WinAce/arcext.de
+08.11.07 02:06        4484     26624   16%  WinAce/sxuninst.de
+08.11.07 02:06         528       883   59%  WinAce/file_id.diz
+08.11.07 02:06      463204   1446400   32%  WinAce/acetools.dll
+08.11.07 02:06      137536    235008   58%  WinAce/acev2.dll
+08.11.07 02:06       59604    166912   35%  WinAce/arcext.dll
+08.11.07 02:06        8852     61440   14%  WinAce/arcicons.dll
+08.11.07 02:06       31868     65536   48%  WinAce/cabinet.dll
+08.11.07 02:06      327564    335360   97%  WinAce/find.dll
+08.11.07 02:06       53588    119808   44%  WinAce/sfxlib.dll
+23.10.07 01:06       74148    160256   46%  WinAce/unrar3.dll
+08.11.07 02:06        3080     16384   18%  WinAce/zficons.dll
+08.11.07 02:06         748      1938   38%  WinAce/license.doc
+08.11.07 02:06        3208     11895   27%  WinAce/technote.doc
+08.11.07 02:06       75240    439296   17%  WinAce/acetools.enu
+08.11.07 02:06        6800     48128   14%  WinAce/find.enu
+08.11.07 02:06       39852    104960   38%  WinAce/order.enu
+08.11.07 02:06        1068     29696    3%  WinAce/wb_setup.enu
+08.11.07 02:06       82952    594432   14%  WinAce/winace.enu
+08.11.07 02:06       30148     36864   81%  WinAce/ccrypt.exe
+08.11.07 02:06       35072     93696   37%  WinAce/helpinst.exe
+11.12.16 22:17       74828     88092   84%  Internet Explorer/iexplore.exe
+08.11.07 02:06      242496    252928   95%  WinAce/order.exe
+08.11.07 02:06       24744    165376   15%  WinAce/sxuninst.exe
+08.11.07 02:06      146988    401408   36%  WinAce/wb_setup.exe
+08.11.07 02:06     1169036   1207296   96%  WinAce/winace.exe
+08.11.07 02:06      504140    839956   60%  WinAce/winace.hlp
+08.11.07 02:06       98852    137589   71%  WinAce/winace_enu.hlp
+08.11.07 02:06        4896     20278   24%  WinAce/menuimg.imf
+08.11.07 02:06        6232     20278   30%  WinAce/menu256.imf
+08.11.07 02:06       12652     77878   16%  WinAce/tool256.imf
+08.11.07 02:06       10144     77878   13%  WinAce/toolimg.imf
+08.11.07 02:06        6460     80464    8%  WinAce/menuimg.img
+08.11.07 02:06       15012    321254    4%  WinAce/toolimg.img
+08.11.07 02:06         208       356   58%  WinAce/outbar.ini
+08.11.07 02:06         320      1304   24%  WinAce/products.ini
+08.11.07 02:06         256       409   62%  WinAce/sfxopt.ini
+08.11.07 02:06         912      4215   21%  WinAce/sxuninst.ini
+08.11.07 02:06         124       155   80%  WinAce/toolimg.ini
+08.11.07 02:06         476       854   55%  WinAce/volume.ini
+08.11.07 02:06         156       235   66%  WinAce/order.ord
+08.11.07 02:06         298       298  100%  WinAce/html/images/abort.png
+08.11.07 02:06         128       211   60%  WinAce/html/images/added.png
+08.11.07 02:06         156       230   67%  WinAce/html/images/back.png
+08.11.07 02:06         104       184   56%  WinAce/html/images/backimg.png
+08.11.07 02:06        8184      8573   95%  WinAce/html/images/banner_bg.png
+08.11.07 02:06         724      1488   48%  WinAce/html/images/bar.png
+08.11.07 02:06        1148      1846   62%  WinAce/html/images/bar1.png
+08.11.07 02:06         100       191   52%  WinAce/html/images/bg2.png
+08.11.07 02:06         224      1001   22%  WinAce/html/images/bug.png
+08.11.07 02:06         124       223   55%  WinAce/html/images/check.png
+08.11.07 02:06       22632     23049   98%  WinAce/html/images/compare.png
+08.11.07 02:06         220       278   79%  WinAce/html/images/contact.png
+08.11.07 02:06          32       278   11%  WinAce/html/images/email.png
+08.11.07 02:06         336       385   87%  WinAce/html/images/fillout.png
+08.11.07 02:06         636       943   67%  WinAce/html/images/fwd.png
+08.11.07 02:06          64       176   36%  WinAce/html/images/infoback.png
+08.11.07 02:06          88       145   60%  WinAce/html/images/line.png
+08.11.07 02:06        7852      7911   99%  WinAce/html/images/logo.png
+08.11.07 02:06        5020      5595   89%  WinAce/html/images/logotop.png
+08.11.07 02:06        1928      2551   75%  WinAce/html/images/logoarc.png
+08.11.07 02:06         756      1108   68%  WinAce/html/images/master.png
+08.11.07 02:06         372      1090   34%  WinAce/html/images/new.png
+08.11.07 02:06         140       235   59%  WinAce/html/images/nexttip.png
+08.11.07 02:06          64       211   30%  WinAce/html/images/plus.png
+08.11.07 02:06         416      1015   41%  WinAce/html/images/preview.png
+08.11.07 02:06         164       960   17%  WinAce/html/images/redo.png
+08.11.07 02:06         124       201   61%  WinAce/html/images/side.png
+08.11.07 02:06         316       382   82%  WinAce/html/images/sysinfo.png
+08.11.07 02:06         448       482   92%  WinAce/html/images/tip.png
+08.11.07 02:06         276       345   80%  WinAce/html/images/tip1.png
+08.11.07 02:06         520      1264   41%  WinAce/html/images/top.png
+08.11.07 02:06         300       993   30%  WinAce/html/images/top_r.png
+08.11.07 02:06         112       992   11%  WinAce/html/images/top_l.png
+08.11.07 02:06         212      1012   20%  WinAce/html/images/visa.png
+08.11.07 02:06          76       132   57%  WinAce/html/images/vline.png
+08.11.07 02:06         188       263   71%  WinAce/html/images/w.png
+08.11.07 02:06         424      1186   35%  WinAce/html/images/waceico.png
+08.11.07 02:06        4236      4824   87%  WinAce/html/images/winacelogo.png
+08.11.07 02:06         332       406   81%  WinAce/html/images/winace.png
+08.11.07 02:06       61840     64933   95%  WinAce/sfxfiles/dos32.sfx
+08.11.07 02:06       40800     79937   51%  WinAce/sfxfiles/os2cl.sfx
+08.11.07 02:06       57588     68877   83%  WinAce/sfxfiles/wgui_hu.sfx
+08.11.07 02:06        7540     68834   11%  WinAce/sfxfiles/wgui_plk.sfx
+08.11.07 02:06        6660     68824    9%  WinAce/sfxfiles/wgui_cz.sfx
+08.11.07 02:06        6748     68781    9%  WinAce/sfxfiles/wgui_fr.sfx
+08.11.07 02:06        6964     68692   10%  WinAce/sfxfiles/wgui_nld.sfx
+08.11.07 02:06        3636     68621    5%  WinAce/sfxfiles/wgui_it.sfx
+08.11.07 02:06        6824     68478   10%  WinAce/sfxfiles/wgui_de.sfx
+08.11.07 02:06        6052     68215    8%  WinAce/sfxfiles/wgui_en.sfx
+08.11.07 02:06       35912     46936   76%  WinAce/sfxfiles/win32cl.sfx
+08.11.07 02:06        1020      2249   45%  WinAce/html/english/infotip.txt
+08.11.07 02:06         984      2234   44%  WinAce/html/deutsch/infotip.txt
+08.11.07 02:06         476       960   49%  WinAce/infodeu.txt
+08.11.07 02:06          32       256   12%  WinAce/language.txt
+08.11.07 02:06         920      3138   29%  WinAce/register.txt
+08.11.07 02:06         424      1117   38%  WinAce/regsites.txt
+08.11.07 02:06         344       960   35%  WinAce/techinfo.txt
+08.11.07 02:06          44        47   93%  WinAce/winace.url
+08.11.07 02:06        1260      3538   35%  WinAce/html/english/av.whf
+08.11.07 02:06          40      3538    1%  WinAce/html/deutsch/av.whf
+08.11.07 02:06        1564     13100   11%  WinAce/html/deutsch/commands.whf
+08.11.07 02:06        1100     10299   10%  WinAce/html/english/commands.whf
+08.11.07 02:06         200      1157   17%  WinAce/html/deutsch/compare.whf
+08.11.07 02:06          48      1155    4%  WinAce/html/english/compare.whf
+08.11.07 02:06       13200     85468   15%  WinAce/html/deutsch/history.whf
+08.11.07 02:06       10804     69151   15%  WinAce/html/english/history.whf
+08.11.07 02:06        1532     10208   15%  WinAce/html/deutsch/info.whf
+08.11.07 02:06        1128      7971   14%  WinAce/html/english/info.whf
+08.11.07 02:06         584      3193   18%  WinAce/html/deutsch/infotip.whf
+08.11.07 02:06         272      2518   10%  WinAce/html/english/infotip.whf
+08.11.07 02:06         336      2271   14%  WinAce/html/deutsch/menu.whf
+08.11.07 02:06         116      2239    5%  WinAce/html/english/menu.whf
+08.11.07 02:06         140      1256   11%  WinAce/html/english/menuex.whf
+08.11.07 02:06         100      1245    8%  WinAce/html/deutsch/menuex.whf
+08.11.07 02:06         264      1945   13%  WinAce/html/english/nav.whf
+08.11.07 02:06          88      1930    4%  WinAce/html/deutsch/nav.whf
+08.11.07 02:06        1792     12471   14%  WinAce/html/deutsch/order.whf
+08.11.07 02:06        1480     12426   11%  WinAce/html/english/order.whf
+08.11.07 02:06         460      2158   21%  WinAce/html/deutsch/share.whf
+08.11.07 02:06         332      1745   19%  WinAce/html/english/share.whf
+08.11.07 02:06         376      1547   24%  WinAce/html/english/system.whf
+08.11.07 02:06         220      1462   15%  WinAce/html/deutsch/system.whf
+08.11.07 02:06         300      2282   13%  WinAce/html/english/top.whf
+08.11.07 02:06          68      2256    3%  WinAce/html/deutsch/top.whf
+08.11.07 02:06         176       602   29%  WinAce/html/deutsch/usage.whf
+08.11.07 02:06          44       601    7%  WinAce/html/english/usage.whf
+08.11.07 02:06         220       889   24%  WinAce/html/english/welcome.whf
+08.11.07 02:06          40       881    4%  WinAce/html/deutsch/welcome.whf
+08.11.07 02:06         228       374   61%  WinAce/projects/backup fast.wpf
+08.11.07 02:06          68       354   19%  WinAce/projects/backup maximum.wpf
+08.11.07 02:06          68       126   54%  WinAce/projects/multivolume.wpf
+08.11.07 02:06          52        94   55%  WinAce/projects/zip compression.wpf
+                                                           
+listed: 136 files, totaling 8.613K bytes (compressed 4.021K)

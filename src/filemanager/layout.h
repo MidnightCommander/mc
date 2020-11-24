@@ -27,14 +27,14 @@ typedef enum
 
 typedef struct
 {
-    int horizontal_split;
+    gboolean horizontal_split;
 
     /* vertical split */
-    int vertical_equal;
+    gboolean vertical_equal;
     int left_panel_size;
 
     /* horizontal split */
-    int horizontal_equal;
+    gboolean horizontal_equal;
     int top_panel_size;
 } panels_layout_t;
 
@@ -42,11 +42,11 @@ typedef struct
 
 extern int output_lines;
 extern gboolean command_prompt;
-extern int menubar_visible;
+extern gboolean menubar_visible;
 extern int output_start_y;
 extern gboolean xterm_title;
-extern int free_space;
-extern int nice_rotating_dash;
+extern gboolean free_space;
+extern gboolean nice_rotating_dash;
 
 extern int ok_to_refresh;
 
@@ -62,9 +62,9 @@ void panels_split_more (void);
 void panels_split_less (void);
 void destroy_panels (void);
 void setup_cmdline (void);
-void set_display_type (int num, panel_view_mode_t type);
+void create_panel (int num, panel_view_mode_t type);
 void swap_panels (void);
-panel_view_mode_t get_display_type (int idx);
+panel_view_mode_t get_panel_type (int idx);
 panel_view_mode_t get_current_type (void);
 panel_view_mode_t get_other_type (void);
 int get_current_index (void);

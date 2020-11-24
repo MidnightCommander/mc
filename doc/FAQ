@@ -127,8 +127,6 @@ Frequently Asked Questions
      * sparc-linux-linux2.x
      * sparc64-linux-linux2.1
      * mips-sgi-irix5.x, 6.x
-     * mips-dec-ultrix4.3
-     * rs6000-ibm-aix3.2.5
      * sparc-sun-sunos4.1
      * sparc-sun-solaris2.3, 2.4, 2.5
      * sparc-sun-netbsd1.0

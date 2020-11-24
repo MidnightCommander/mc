@@ -1,7 +1,7 @@
 /*
    Widgets for the Midnight Commander
 
-   Copyright (C) 1994-2016
+   Copyright (C) 1994-2020
    Free Software Foundation, Inc.
 
    Authors:
@@ -59,23 +59,21 @@ groupbox_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
 
     switch (msg)
     {
-    case MSG_INIT:
-        return MSG_HANDLED;
-
     case MSG_DRAW:
         {
-            WDialog *h = w->owner;
-
             gboolean disabled;
+            const int *colors;
+
+            colors = widget_get_colors (w);
 
             disabled = widget_get_state (w, WST_DISABLED);
-            tty_setcolor (disabled ? DISABLED_COLOR : h->color[DLG_COLOR_NORMAL]);
+            tty_setcolor (disabled ? DISABLED_COLOR : colors[DLG_COLOR_NORMAL]);
             tty_draw_box (w->y, w->x, w->lines, w->cols, TRUE);
 
             if (g->title != NULL)
             {
-                tty_setcolor (disabled ? DISABLED_COLOR : h->color[DLG_COLOR_TITLE]);
-                widget_move (w, 0, 1);
+                tty_setcolor (disabled ? DISABLED_COLOR : colors[DLG_COLOR_TITLE]);
+                widget_gotoyx (w, 0, 1);
                 tty_print_string (g->title);
             }
             return MSG_HANDLED;
@@ -127,7 +125,7 @@ groupbox_set_title (WGroupbox * g, const char *title)
         g_free (t);
     }
 
-    widget_redraw (WIDGET (g));
+    widget_draw (WIDGET (g));
 }
 
 /* --------------------------------------------------------------------------------------------- */

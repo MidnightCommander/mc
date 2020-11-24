@@ -2,13 +2,13 @@
    Virtual File System: FISH implementation for transfering files over
    shell connections.
 
-   Copyright (C) 1998-2016
+   Copyright (C) 1998-2020
    Free Software Foundation, Inc.
 
    Written by:
    Pavel Machek, 1998
    Michal Svec, 2000
-   Andrew Borodin <aborodin@vmail.ru>, 2010
+   Andrew Borodin <aborodin@vmail.ru>, 2010-2019
    Slava Zanko <slavazanko@gmail.com>, 2010, 2013
    Ilia Maslakov <il.smind@gmail.com>, 2010
 
@@ -54,7 +54,6 @@
 #include <errno.h>
 #include <pwd.h>
 #include <grp.h>
-#include <sys/time.h>           /* gettimeofday() */
 #include <stdlib.h>
 #include <string.h>
 #include <inttypes.h>           /* uintmax_t */
@@ -66,6 +65,7 @@
 #include "lib/fileloc.h"
 #include "lib/util.h"           /* my_exit() */
 #include "lib/mcconfig.h"
+#include "lib/timer.h"
 
 #include "src/execute.h"        /* pre_exec, post_exec */
 
@@ -117,12 +117,15 @@ int fish_directory_timeout = 900;
 #define FISH_HAVE_DATE_MDYT   32
 #define FISH_HAVE_TAIL        64
 
-#define SUP ((fish_super_data_t *) super->data)
+#define FISH_SUPER(super) ((fish_super_t *) (super))
+#define FISH_FILE_HANDLER(fh) ((fish_file_handler_t *) fh)
 
 /*** file scope type declarations ****************************************************************/
 
 typedef struct
 {
+    struct vfs_s_super base;    /* base class */
+
     int sockr;
     int sockw;
     char *scr_ls;
@@ -142,22 +145,51 @@ typedef struct
     char *scr_info;
     int host_flags;
     char *scr_env;
-} fish_super_data_t;
+} fish_super_t;
 
 typedef struct
 {
+    vfs_file_handler_t base;    /* base class */
+
     off_t got;
     off_t total;
     gboolean append;
-} fish_fh_data_t;
+} fish_file_handler_t;
 
 /*** file scope variables ************************************************************************/
 
 static char reply_str[80];
 
-static struct vfs_class vfs_fish_ops;
+static struct vfs_s_subclass fish_subclass;
+static struct vfs_class *vfs_fish_ops = VFS_CLASS (&fish_subclass);
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+fish_set_blksize (struct stat *s)
+{
+#ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
+    /* redefine block size */
+    s->st_blksize = 64 * 1024;  /* FIXME */
+#endif
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static struct stat *
+fish_default_stat (struct vfs_class *me)
+{
+    struct stat *s;
+
+    s = vfs_s_default_stat (me, S_IFDIR | 0755);
+    fish_set_blksize (s);
+    vfs_adjust_stat (s);
+
+    return s;
+}
+
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
@@ -236,40 +268,108 @@ fish_get_reply (struct vfs_class *me, int sock, char *string_buf, int string_len
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-G_GNUC_PRINTF (4, 5)
-fish_command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, const char *fmt, ...)
+fish_command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, const char *cmd,
+              size_t cmd_len)
 {
-    va_list ap;
-    char *str;
     ssize_t status;
-    FILE *logfile = MEDATA->logfile;
+    FILE *logfile = me->logfile;
 
-    va_start (ap, fmt);
-    str = g_strdup_vprintf (fmt, ap);
-    va_end (ap);
+    if (cmd_len == (size_t) (-1))
+        cmd_len = strlen (cmd);
 
     if (logfile != NULL)
     {
         size_t ret;
 
-        ret = fwrite (str, strlen (str), 1, logfile);
+        ret = fwrite (cmd, cmd_len, 1, logfile);
         ret = fflush (logfile);
         (void) ret;
     }
 
     tty_enable_interrupt_key ();
-    status = write (SUP->sockw, str, strlen (str));
-    g_free (str);
+    status = write (FISH_SUPER (super)->sockw, cmd, cmd_len);
     tty_disable_interrupt_key ();
 
     if (status < 0)
         return TRANSIENT;
 
     if (wait_reply)
-        return fish_get_reply (me, SUP->sockr,
-                               (wait_reply & WANT_STRING) ? reply_str :
+        return fish_get_reply (me, FISH_SUPER (super)->sockr,
+                               (wait_reply & WANT_STRING) != 0 ? reply_str :
                                NULL, sizeof (reply_str) - 1);
     return COMPLETE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+G_GNUC_PRINTF (5, 0)
+fish_command_va (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, const char *scr,
+                 const char *vars, va_list ap)
+{
+    int r;
+    GString *command;
+
+    command = g_string_new (FISH_SUPER (super)->scr_env);
+    g_string_append_vprintf (command, vars, ap);
+    g_string_append (command, scr);
+    r = fish_command (me, super, wait_reply, command->str, command->len);
+    g_string_free (command, TRUE);
+
+    return r;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+G_GNUC_PRINTF (5, 6)
+fish_command_v (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, const char *scr,
+                const char *vars, ...)
+{
+    int r;
+    va_list ap;
+
+    va_start (ap, vars);
+    r = fish_command_va (me, super, wait_reply, scr, vars, ap);
+    va_end (ap);
+
+    return r;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+G_GNUC_PRINTF (5, 6)
+fish_send_command (struct vfs_class *me, struct vfs_s_super *super, int flags, const char *scr,
+                   const char *vars, ...)
+{
+    int r;
+    va_list ap;
+
+    va_start (ap, vars);
+    r = fish_command_va (me, super, WAIT_REPLY, scr, vars, ap);
+    va_end (ap);
+    vfs_stamp_create (vfs_fish_ops, super);
+
+    if (r != COMPLETE)
+        ERRNOR (E_REMOTE, -1);
+    if ((flags & OPT_FLUSH) != 0)
+        vfs_s_invalidate (me, super);
+
+    return 0;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static struct vfs_s_super *
+fish_new_archive (struct vfs_class *me)
+{
+    fish_super_t *arch;
+
+    arch = g_new0 (fish_super_t, 1);
+    arch->base.me = me;
+
+    return VFS_SUPER (arch);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -277,32 +377,32 @@ fish_command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, c
 static void
 fish_free_archive (struct vfs_class *me, struct vfs_s_super *super)
 {
-    if ((SUP->sockw != -1) || (SUP->sockr != -1))
+    fish_super_t *fish_super = FISH_SUPER (super);
+
+    if ((fish_super->sockw != -1) || (fish_super->sockr != -1))
     {
         vfs_print_message (_("fish: Disconnecting from %s"), super->name ? super->name : "???");
-        fish_command (me, super, NONE, "%s", "#BYE\nexit\n");
-        close (SUP->sockw);
-        close (SUP->sockr);
-        SUP->sockw = SUP->sockr = -1;
+        fish_command (me, super, NONE, "#BYE\nexit\n", -1);
+        close (fish_super->sockw);
+        close (fish_super->sockr);
+        fish_super->sockw = fish_super->sockr = -1;
     }
-    g_free (SUP->scr_ls);
-    g_free (SUP->scr_exists);
-    g_free (SUP->scr_mkdir);
-    g_free (SUP->scr_unlink);
-    g_free (SUP->scr_chown);
-    g_free (SUP->scr_chmod);
-    g_free (SUP->scr_utime);
-    g_free (SUP->scr_rmdir);
-    g_free (SUP->scr_ln);
-    g_free (SUP->scr_mv);
-    g_free (SUP->scr_hardlink);
-    g_free (SUP->scr_get);
-    g_free (SUP->scr_send);
-    g_free (SUP->scr_append);
-    g_free (SUP->scr_info);
-    g_free (SUP->scr_env);
-    g_free (SUP);
-    super->data = NULL;
+    g_free (fish_super->scr_ls);
+    g_free (fish_super->scr_exists);
+    g_free (fish_super->scr_mkdir);
+    g_free (fish_super->scr_unlink);
+    g_free (fish_super->scr_chown);
+    g_free (fish_super->scr_chmod);
+    g_free (fish_super->scr_utime);
+    g_free (fish_super->scr_rmdir);
+    g_free (fish_super->scr_ln);
+    g_free (fish_super->scr_mv);
+    g_free (fish_super->scr_hardlink);
+    g_free (fish_super->scr_get);
+    g_free (fish_super->scr_send);
+    g_free (fish_super->scr_append);
+    g_free (fish_super->scr_info);
+    g_free (fish_super->scr_env);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -324,9 +424,9 @@ fish_pipeopen (struct vfs_s_super *super, const char *path, const char *argv[])
             vfs_die ("Cannot fork(): %m.");
         /* We are the parent */
         close (fileset1[0]);
-        SUP->sockw = fileset1[1];
+        FISH_SUPER (super)->sockw = fileset1[1];
         close (fileset2[1]);
-        SUP->sockr = fileset2[0];
+        FISH_SUPER (super)->sockr = fileset2[0];
     }
     else
     {
@@ -352,7 +452,6 @@ fish_set_env (int flags)
     GString *tmp;
 
     tmp = g_string_sized_new (250);
-    g_string_assign (tmp, "");
 
     if ((flags & FISH_HAVE_HEAD) != 0)
         g_string_append (tmp, "FISH_HAVE_HEAD=1 export FISH_HAVE_HEAD; ");
@@ -383,19 +482,21 @@ fish_set_env (int flags)
 static gboolean
 fish_info (struct vfs_class *me, struct vfs_s_super *super)
 {
-    if (fish_command (me, super, NONE, "%s", SUP->scr_info) == COMPLETE)
+    fish_super_t *fish_super = FISH_SUPER (super);
+
+    if (fish_command (me, super, NONE, fish_super->scr_info, -1) == COMPLETE)
     {
         while (TRUE)
         {
             int res;
             char buffer[BUF_8K];
 
-            res = vfs_s_get_line_interruptible (me, buffer, sizeof (buffer), SUP->sockr);
+            res = vfs_s_get_line_interruptible (me, buffer, sizeof (buffer), fish_super->sockr);
             if ((res == 0) || (res == EINTR))
                 ERRNOR (ECONNRESET, FALSE);
             if (strncmp (buffer, "### ", 4) == 0)
                 break;
-            SUP->host_flags = atol (buffer);
+            fish_super->host_flags = atol (buffer);
         }
         return TRUE;
     }
@@ -453,11 +554,12 @@ fish_open_archive_pipeopen (struct vfs_s_super *super)
 static gboolean
 fish_open_archive_talk (struct vfs_class *me, struct vfs_s_super *super)
 {
+    fish_super_t *fish_super = FISH_SUPER (super);
     char answer[2048];
 
     printf ("\n%s\n", _("fish: Waiting for initial line..."));
 
-    if (vfs_s_get_line (me, SUP->sockr, answer, sizeof (answer), ':') == 0)
+    if (vfs_s_get_line (me, fish_super->sockr, answer, sizeof (answer), ':') == 0)
         return FALSE;
 
     if (strstr (answer, "assword") != NULL)
@@ -487,8 +589,8 @@ fish_open_archive_talk (struct vfs_class *me, struct vfs_s_super *super)
             size_t str_len;
 
             str_len = strlen (super->path_element->password);
-            if ((write (SUP.sockw, super->path_element->password, str_len) != (ssize_t) str_len)
-                || (write (SUP->sockw, "\n", 1) != 1))
+            if ((write (fish_super.sockw, super->path_element->password, str_len) !=
+                 (ssize_t) str_len) || (write (fish_super->sockw, "\n", 1) != 1))
                 return FALSE;
         }
 #endif
@@ -525,23 +627,24 @@ fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
      */
 
     if (fish_command
-        (me, super, WAIT_REPLY, "%s",
-         "#FISH\necho; start_fish_server 2>&1; echo '### 200'\n") != COMPLETE)
+        (me, super, WAIT_REPLY, "#FISH\necho; start_fish_server 2>&1; echo '### 200'\n",
+         -1) != COMPLETE)
         ERRNOR (E_PROTO, -1);
 
     vfs_print_message ("%s", _("fish: Handshaking version..."));
-    if (fish_command (me, super, WAIT_REPLY, "%s", "#VER 0.0.3\necho '### 000'\n") != COMPLETE)
+    if (fish_command (me, super, WAIT_REPLY, "#VER 0.0.3\necho '### 000'\n", -1) != COMPLETE)
         ERRNOR (E_PROTO, -1);
 
     /* Set up remote locale to C, otherwise dates cannot be recognized */
     if (fish_command
-        (me, super, WAIT_REPLY, "%s",
-         "LANG=C LC_ALL=C LC_TIME=C; export LANG LC_ALL LC_TIME;\n" "echo '### 200'\n") != COMPLETE)
+        (me, super, WAIT_REPLY,
+         "LANG=C LC_ALL=C LC_TIME=C; export LANG LC_ALL LC_TIME;\n" "echo '### 200'\n",
+         -1) != COMPLETE)
         ERRNOR (E_PROTO, -1);
 
     vfs_print_message ("%s", _("fish: Getting host info..."));
     if (fish_info (me, super))
-        SUP->scr_env = fish_set_env (SUP->host_flags);
+        FISH_SUPER (super)->scr_env = fish_set_env (FISH_SUPER (super)->host_flags);
 
 #if 0
     super->name =
@@ -551,7 +654,8 @@ fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
     super->name = g_strdup (PATH_SEP_STR);
 #endif
 
-    super->root = vfs_s_new_inode (me, super, vfs_s_default_stat (me, S_IFDIR | 0755));
+    super->root = vfs_s_new_inode (me, super, fish_default_stat (me));
+
     return 0;
 }
 
@@ -561,53 +665,54 @@ static int
 fish_open_archive (struct vfs_s_super *super,
                    const vfs_path_t * vpath, const vfs_path_element_t * vpath_element)
 {
+    fish_super_t *fish_super = FISH_SUPER (super);
+
     (void) vpath;
 
-    super->data = g_new0 (fish_super_data_t, 1);
     super->path_element = vfs_path_element_clone (vpath_element);
 
     if (strncmp (vpath_element->vfs_prefix, "rsh", 3) == 0)
         super->path_element->port = FISH_FLAG_RSH;
 
-    SUP->scr_ls =
+    fish_super->scr_ls =
         fish_load_script_from_file (super->path_element->host, FISH_LS_FILE, FISH_LS_DEF_CONTENT);
-    SUP->scr_exists =
+    fish_super->scr_exists =
         fish_load_script_from_file (super->path_element->host, FISH_EXISTS_FILE,
                                     FISH_EXISTS_DEF_CONTENT);
-    SUP->scr_mkdir =
+    fish_super->scr_mkdir =
         fish_load_script_from_file (super->path_element->host, FISH_MKDIR_FILE,
                                     FISH_MKDIR_DEF_CONTENT);
-    SUP->scr_unlink =
+    fish_super->scr_unlink =
         fish_load_script_from_file (super->path_element->host, FISH_UNLINK_FILE,
                                     FISH_UNLINK_DEF_CONTENT);
-    SUP->scr_chown =
+    fish_super->scr_chown =
         fish_load_script_from_file (super->path_element->host, FISH_CHOWN_FILE,
                                     FISH_CHOWN_DEF_CONTENT);
-    SUP->scr_chmod =
+    fish_super->scr_chmod =
         fish_load_script_from_file (super->path_element->host, FISH_CHMOD_FILE,
                                     FISH_CHMOD_DEF_CONTENT);
-    SUP->scr_utime =
+    fish_super->scr_utime =
         fish_load_script_from_file (super->path_element->host, FISH_UTIME_FILE,
                                     FISH_UTIME_DEF_CONTENT);
-    SUP->scr_rmdir =
+    fish_super->scr_rmdir =
         fish_load_script_from_file (super->path_element->host, FISH_RMDIR_FILE,
                                     FISH_RMDIR_DEF_CONTENT);
-    SUP->scr_ln =
+    fish_super->scr_ln =
         fish_load_script_from_file (super->path_element->host, FISH_LN_FILE, FISH_LN_DEF_CONTENT);
-    SUP->scr_mv =
+    fish_super->scr_mv =
         fish_load_script_from_file (super->path_element->host, FISH_MV_FILE, FISH_MV_DEF_CONTENT);
-    SUP->scr_hardlink =
+    fish_super->scr_hardlink =
         fish_load_script_from_file (super->path_element->host, FISH_HARDLINK_FILE,
                                     FISH_HARDLINK_DEF_CONTENT);
-    SUP->scr_get =
+    fish_super->scr_get =
         fish_load_script_from_file (super->path_element->host, FISH_GET_FILE, FISH_GET_DEF_CONTENT);
-    SUP->scr_send =
+    fish_super->scr_send =
         fish_load_script_from_file (super->path_element->host, FISH_SEND_FILE,
                                     FISH_SEND_DEF_CONTENT);
-    SUP->scr_append =
+    fish_super->scr_append =
         fish_load_script_from_file (super->path_element->host, FISH_APPEND_FILE,
                                     FISH_APPEND_DEF_CONTENT);
-    SUP->scr_info =
+    fish_super->scr_info =
         fish_load_script_from_file (super->path_element->host, FISH_INFO_FILE,
                                     FISH_INFO_DEF_CONTENT);
 
@@ -648,36 +753,33 @@ fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
     struct vfs_s_super *super = dir->super;
     char buffer[BUF_8K] = "\0";
     struct vfs_s_entry *ent = NULL;
-    FILE *logfile;
     char *quoted_path;
     int reply_code;
-    gchar *shell_commands;
 
     /*
      * Simple FISH debug interface :]
      */
 #if 0
-    if (MEDATA->logfile == NULL)
-        MEDATA->logfile = fopen ("/tmp/mc-FISH.sh", "w");
+    if (me->logfile == NULL)
+        me->logfile = fopen ("/tmp/mc-FISH.sh", "w");
 #endif
-    logfile = MEDATA->logfile;
 
     vfs_print_message (_("fish: Reading directory %s..."), remote_path);
 
-    gettimeofday (&dir->timestamp, NULL);
-    dir->timestamp.tv_sec += fish_directory_timeout;
+    dir->timestamp = mc_timer_elapsed (mc_global.timer) + fish_directory_timeout * G_USEC_PER_SEC;
+
     quoted_path = strutils_shell_escape (remote_path);
-    shell_commands = g_strconcat (SUP->scr_env, "FISH_FILENAME=%s;\n", SUP->scr_ls, (char *) NULL);
-    fish_command (me, super, NONE, shell_commands, quoted_path);
-    g_free (shell_commands);
+    (void) fish_command_v (me, super, NONE, FISH_SUPER (super)->scr_ls, "FISH_FILENAME=%s;\n",
+                           quoted_path);
     g_free (quoted_path);
+
     ent = vfs_s_generate_entry (me, NULL, dir, 0);
 
     while (TRUE)
     {
         int res;
 
-        res = vfs_s_get_line_interruptible (me, buffer, sizeof (buffer), SUP->sockr);
+        res = vfs_s_get_line_interruptible (me, buffer, sizeof (buffer), FISH_SUPER (super)->sockr);
 
         if ((res == 0) || (res == EINTR))
         {
@@ -685,11 +787,11 @@ fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
             me->verrno = ECONNRESET;
             goto error;
         }
-        if (logfile != NULL)
+        if (me->logfile != NULL)
         {
-            fputs (buffer, logfile);
-            fputs ("\n", logfile);
-            fflush (logfile);
+            fputs (buffer, me->logfile);
+            fputs ("\n", me->logfile);
+            fflush (me->logfile);
         }
         if (strncmp (buffer, "### ", 4) == 0)
             break;
@@ -807,6 +909,9 @@ fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
                 if (vfs_parse_filedate (0, &ST.st_ctime) == 0)
                     break;
                 ST.st_atime = ST.st_mtime = ST.st_ctime;
+#ifdef HAVE_STRUCT_STAT_ST_MTIM
+                ST.st_atim.tv_nsec = ST.st_mtim.tv_nsec = ST.st_ctim.tv_nsec = 0;
+#endif
             }
             break;
         case 'D':
@@ -818,6 +923,9 @@ fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
                             &tim.tm_mday, &tim.tm_hour, &tim.tm_min, &tim.tm_sec) != 6)
                     break;
                 ST.st_atime = ST.st_mtime = ST.st_ctime = mktime (&tim);
+#ifdef HAVE_STRUCT_STAT_ST_MTIM
+                ST.st_atim.tv_nsec = ST.st_mtim.tv_nsec = ST.st_ctim.tv_nsec = 0;
+#endif
             }
             break;
         case 'E':
@@ -856,9 +964,9 @@ fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 static int
 fish_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, char *localname)
 {
-    fish_fh_data_t *fish = (fish_fh_data_t *) fh->data;
-    gchar *shell_commands = NULL;
-    struct vfs_s_super *super = FH_SUPER;
+    fish_file_handler_t *fish = FISH_FILE_HANDLER (fh);
+    struct vfs_s_super *super = VFS_FILE_HANDLER_SUPER (fh);
+    fish_super_t *fish_super = FISH_SUPER (super);
     int code;
     off_t total = 0;
     char buffer[BUF_8K];
@@ -908,26 +1016,11 @@ fish_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, char
     vfs_print_message (_("fish: store %s: sending command..."), quoted_name);
 
     /* FIXME: File size is limited to ULONG_MAX */
-    if (fish->append)
-    {
-        shell_commands =
-            g_strconcat (SUP->scr_env, "FISH_FILENAME=%s FISH_FILESIZE=%" PRIuMAX ";\n",
-                         SUP->scr_append, (char *) NULL);
-
-        code = fish_command (me, super, WAIT_REPLY, shell_commands, quoted_name,
-                             (uintmax_t) s.st_size);
-        g_free (shell_commands);
-    }
-    else
-    {
-        shell_commands =
-            g_strconcat (SUP->scr_env, "FISH_FILENAME=%s FISH_FILESIZE=%" PRIuMAX ";\n",
-                         SUP->scr_send, (char *) NULL);
-        code = fish_command (me, super, WAIT_REPLY, shell_commands, quoted_name,
-                             (uintmax_t) s.st_size);
-        g_free (shell_commands);
-    }
-
+    code =
+        fish_command_v (me, super, WAIT_REPLY,
+                        fish->append ? fish_super->scr_append : fish_super->scr_send,
+                        "FISH_FILENAME=%s FISH_FILESIZE=%" PRIuMAX ";\n", quoted_name,
+                        (uintmax_t) s.st_size);
     g_free (quoted_name);
 
     if (code != PRELIM)
@@ -952,7 +1045,7 @@ fish_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, char
         if (n == 0)
             break;
 
-        t = write (SUP->sockw, buffer, n);
+        t = write (fish_super->sockw, buffer, n);
         if (t != n)
         {
             if (t == -1)
@@ -968,13 +1061,13 @@ fish_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, char
     }
     close (h);
 
-    if (fish_get_reply (me, SUP->sockr, NULL, 0) != COMPLETE)
+    if (fish_get_reply (me, fish_super->sockr, NULL, 0) != COMPLETE)
         ERRNOR (E_REMOTE, -1);
     return 0;
 
   error_return:
     close (h);
-    fish_get_reply (me, SUP->sockr, NULL, 0);
+    fish_get_reply (me, fish_super->sockr, NULL, 0);
     return -1;
 }
 
@@ -983,16 +1076,10 @@ fish_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, char
 static int
 fish_linear_start (struct vfs_class *me, vfs_file_handler_t * fh, off_t offset)
 {
-    fish_fh_data_t *fish;
-    gchar *shell_commands = NULL;
-    struct vfs_s_super *super = FH_SUPER;
+    fish_file_handler_t *fish = FISH_FILE_HANDLER (fh);
+    struct vfs_s_super *super = VFS_FILE_HANDLER_SUPER (fh);
     char *name;
     char *quoted_name;
-
-    if (fh->data == NULL)
-        fh->data = g_new0 (fish_fh_data_t, 1);
-
-    fish = (fish_fh_data_t *) fh->data;
 
     name = vfs_s_fullpath (me, fh->ino);
     if (name == NULL)
@@ -1008,12 +1095,12 @@ fish_linear_start (struct vfs_class *me, vfs_file_handler_t * fh, off_t offset)
      * standard output (i.e. over the network).
      */
 
-    shell_commands =
-        g_strconcat (SUP->scr_env, "FISH_FILENAME=%s FISH_START_OFFSET=%" PRIuMAX ";\n",
-                     SUP->scr_get, (char *) NULL);
-    offset = fish_command (me, super, WANT_STRING, shell_commands, quoted_name, (uintmax_t) offset);
-    g_free (shell_commands);
+    offset =
+        fish_command_v (me, super, WANT_STRING, FISH_SUPER (super)->scr_get,
+                        "FISH_FILENAME=%s FISH_START_OFFSET=%" PRIuMAX ";\n", quoted_name,
+                        (uintmax_t) offset);
     g_free (quoted_name);
+
     if (offset != PRELIM)
         ERRNOR (E_REMOTE, 0);
     fh->linear = LS_LINEAR_OPEN;
@@ -1034,8 +1121,8 @@ fish_linear_start (struct vfs_class *me, vfs_file_handler_t * fh, off_t offset)
 static void
 fish_linear_abort (struct vfs_class *me, vfs_file_handler_t * fh)
 {
-    fish_fh_data_t *fish = (fish_fh_data_t *) fh->data;
-    struct vfs_s_super *super = FH_SUPER;
+    fish_file_handler_t *fish = FISH_FILE_HANDLER (fh);
+    struct vfs_s_super *super = VFS_FILE_HANDLER_SUPER (fh);
     char buffer[BUF_8K];
     ssize_t n;
 
@@ -1046,7 +1133,7 @@ fish_linear_abort (struct vfs_class *me, vfs_file_handler_t * fh)
         n = MIN ((off_t) sizeof (buffer), (fish->total - fish->got));
         if (n != 0)
         {
-            n = read (SUP->sockr, buffer, n);
+            n = read (FISH_SUPER (super)->sockr, buffer, n);
             if (n < 0)
                 return;
             fish->got += n;
@@ -1054,7 +1141,7 @@ fish_linear_abort (struct vfs_class *me, vfs_file_handler_t * fh)
     }
     while (n != 0);
 
-    if (fish_get_reply (me, SUP->sockr, NULL, 0) != COMPLETE)
+    if (fish_get_reply (me, FISH_SUPER (super)->sockr, NULL, 0) != COMPLETE)
         vfs_print_message ("%s", _("Error reported after abort."));
     else
         vfs_print_message ("%s", _("Aborted transfer would be successful."));
@@ -1065,13 +1152,13 @@ fish_linear_abort (struct vfs_class *me, vfs_file_handler_t * fh)
 static ssize_t
 fish_linear_read (struct vfs_class *me, vfs_file_handler_t * fh, void *buf, size_t len)
 {
-    fish_fh_data_t *fish = (fish_fh_data_t *) fh->data;
-    struct vfs_s_super *super = FH_SUPER;
+    fish_file_handler_t *fish = FISH_FILE_HANDLER (fh);
+    struct vfs_s_super *super = VFS_FILE_HANDLER_SUPER (fh);
     ssize_t n = 0;
 
     len = MIN ((size_t) (fish->total - fish->got), len);
     tty_disable_interrupt_key ();
-    while (len != 0 && ((n = read (SUP->sockr, buf, len)) < 0))
+    while (len != 0 && ((n = read (FISH_SUPER (super)->sockr, buf, len)) < 0))
     {
         if ((errno == EINTR) && !tty_got_interrupt ())
             continue;
@@ -1083,7 +1170,7 @@ fish_linear_read (struct vfs_class *me, vfs_file_handler_t * fh, void *buf, size
         fish->got += n;
     else if (n < 0)
         fish_linear_abort (me, fh);
-    else if (fish_get_reply (me, SUP->sockr, NULL, 0) != COMPLETE)
+    else if (fish_get_reply (me, FISH_SUPER (super)->sockr, NULL, 0) != COMPLETE)
         ERRNOR (E_REMOTE, -1);
     ERRNOR (errno, n);
 }
@@ -1093,7 +1180,7 @@ fish_linear_read (struct vfs_class *me, vfs_file_handler_t * fh, void *buf, size
 static void
 fish_linear_close (struct vfs_class *me, vfs_file_handler_t * fh)
 {
-    fish_fh_data_t *fish = (fish_fh_data_t *) fh->data;
+    fish_file_handler_t *fish = FISH_FILE_HANDLER (fh);
 
     if (fish->total != fish->got)
         fish_linear_abort (me, fh);
@@ -1115,14 +1202,15 @@ fish_ctl (void *fh, int ctlop, void *arg)
     {
     case VFS_CTL_IS_NOTREADY:
         {
+            vfs_file_handler_t *file = VFS_FILE_HANDLER (fh);
             int v;
 
-            if (FH->linear == 0)
+            if (file->linear == LS_NOT_LINEAR)
                 vfs_die ("You may not do this");
-            if (FH->linear == LS_LINEAR_CLOSED || FH->linear == LS_LINEAR_PREOPEN)
+            if (file->linear == LS_LINEAR_CLOSED || file->linear == LS_LINEAR_PREOPEN)
                 return 0;
 
-            v = vfs_s_select_on_two (FH_SUPER->u.fish.sockr, 0);
+            v = vfs_s_select_on_two (VFS_FILE_HANDLER_SUPER (fh)->u.fish.sockr, 0);
 
             return (((v < 0) && (errno == EINTR)) || v == 0) ? 1 : 0;
         }
@@ -1135,30 +1223,13 @@ fish_ctl (void *fh, int ctlop, void *arg)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-fish_send_command (struct vfs_class *me, struct vfs_s_super *super, const char *cmd, int flags)
-{
-    int r;
-
-    r = fish_command (me, super, WAIT_REPLY, "%s", cmd);
-    vfs_stamp_create (&vfs_fish_ops, super);
-    if (r != COMPLETE)
-        ERRNOR (E_REMOTE, -1);
-    if ((flags & OPT_FLUSH) != 0)
-        vfs_s_invalidate (me, super);
-    return 0;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static int
 fish_rename (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 {
-    gchar *shell_commands = NULL;
-    char buf[BUF_LARGE];
     const char *crpath1, *crpath2;
     char *rpath1, *rpath2;
     struct vfs_s_super *super, *super2;
     const vfs_path_element_t *path_element;
+    int ret;
 
     path_element = vfs_path_get_by_index (vpath1, -1);
 
@@ -1172,13 +1243,15 @@ fish_rename (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 
     rpath1 = strutils_shell_escape (crpath1);
     rpath2 = strutils_shell_escape (crpath2);
-    shell_commands = g_strconcat (SUP->scr_env, "FISH_FILEFROM=%s FISH_FILETO=%s;\n",
-                                  SUP->scr_mv, (char *) NULL);
-    g_snprintf (buf, sizeof (buf), shell_commands, rpath1, rpath2);
-    g_free (shell_commands);
+
+    ret =
+        fish_send_command (path_element->class, super2, OPT_FLUSH, FISH_SUPER (super)->scr_mv,
+                           "FISH_FILEFROM=%s FISH_FILETO=%s;\n", rpath1, rpath2);
+
     g_free (rpath1);
     g_free (rpath2);
-    return fish_send_command (path_element->class, super2, buf, OPT_FLUSH);
+
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1186,12 +1259,11 @@ fish_rename (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 static int
 fish_link (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 {
-    gchar *shell_commands = NULL;
-    char buf[BUF_LARGE];
     const char *crpath1, *crpath2;
     char *rpath1, *rpath2;
     struct vfs_s_super *super, *super2;
     const vfs_path_element_t *path_element;
+    int ret;
 
     path_element = vfs_path_get_by_index (vpath1, -1);
 
@@ -1205,15 +1277,16 @@ fish_link (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 
     rpath1 = strutils_shell_escape (crpath1);
     rpath2 = strutils_shell_escape (crpath2);
-    shell_commands = g_strconcat (SUP->scr_env, "FISH_FILEFROM=%s FISH_FILETO=%s;\n",
-                                  SUP->scr_hardlink, (char *) NULL);
-    g_snprintf (buf, sizeof (buf), shell_commands, rpath1, rpath2);
-    g_free (shell_commands);
+
+    ret =
+        fish_send_command (path_element->class, super2, OPT_FLUSH, FISH_SUPER (super)->scr_hardlink,
+                           "FISH_FILEFROM=%s FISH_FILETO=%s;\n", rpath1, rpath2);
+
     g_free (rpath1);
     g_free (rpath2);
-    return fish_send_command (path_element->class, super2, buf, OPT_FLUSH);
-}
 
+    return ret;
+}
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -1221,12 +1294,11 @@ static int
 fish_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 {
     char *qsetto;
-    gchar *shell_commands = NULL;
-    char buf[BUF_LARGE];
     const char *crpath;
     char *rpath;
     struct vfs_s_super *super;
     const vfs_path_element_t *path_element;
+    int ret;
 
     path_element = vfs_path_get_by_index (vpath2, -1);
 
@@ -1237,13 +1309,50 @@ fish_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
     rpath = strutils_shell_escape (crpath);
     qsetto = strutils_shell_escape (vfs_path_get_by_index (vpath1, -1)->path);
 
-    shell_commands = g_strconcat (SUP->scr_env, "FISH_FILEFROM=%s FISH_FILETO=%s;\n",
-                                  SUP->scr_ln, (char *) NULL);
-    g_snprintf (buf, sizeof (buf), shell_commands, qsetto, rpath);
-    g_free (shell_commands);
+    ret =
+        fish_send_command (path_element->class, super, OPT_FLUSH, FISH_SUPER (super)->scr_ln,
+                           "FISH_FILEFROM=%s FISH_FILETO=%s;\n", qsetto, rpath);
+
     g_free (qsetto);
     g_free (rpath);
-    return fish_send_command (path_element->class, super, buf, OPT_FLUSH);
+
+    return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+fish_stat (const vfs_path_t * vpath, struct stat *buf)
+{
+    int ret;
+
+    ret = vfs_s_stat (vpath, buf);
+    fish_set_blksize (buf);
+    return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+fish_lstat (const vfs_path_t * vpath, struct stat *buf)
+{
+    int ret;
+
+    ret = vfs_s_lstat (vpath, buf);
+    fish_set_blksize (buf);
+    return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+fish_fstat (void *vfs_info, struct stat *buf)
+{
+    int ret;
+
+    ret = vfs_s_fstat (vfs_info, buf);
+    fish_set_blksize (buf);
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1251,26 +1360,28 @@ fish_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 static int
 fish_chmod (const vfs_path_t * vpath, mode_t mode)
 {
-    gchar *shell_commands = NULL;
-    char buf[BUF_LARGE];
     const char *crpath;
     char *rpath;
     struct vfs_s_super *super;
     const vfs_path_element_t *path_element;
+    int ret;
 
     path_element = vfs_path_get_by_index (vpath, -1);
 
     crpath = vfs_s_get_path (vpath, &super, 0);
     if (crpath == NULL)
         return -1;
+
     rpath = strutils_shell_escape (crpath);
 
-    shell_commands = g_strconcat (SUP->scr_env, "FISH_FILENAME=%s FISH_FILEMODE=%4.4o;\n",
-                                  SUP->scr_chmod, (char *) NULL);
-    g_snprintf (buf, sizeof (buf), shell_commands, rpath, (int) (mode & 07777));
-    g_free (shell_commands);
+    ret =
+        fish_send_command (path_element->class, super, OPT_FLUSH, FISH_SUPER (super)->scr_chmod,
+                           "FISH_FILENAME=%s FISH_FILEMODE=%4.4o;\n", rpath,
+                           (unsigned int) (mode & 07777));
+
     g_free (rpath);
-    return fish_send_command (path_element->class, super, buf, OPT_FLUSH);
+
+    return ret;;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1281,6 +1392,11 @@ fish_chown (const vfs_path_t * vpath, uid_t owner, gid_t group)
     char *sowner, *sgroup;
     struct passwd *pw;
     struct group *gr;
+    const char *crpath;
+    char *rpath;
+    struct vfs_s_super *super;
+    const vfs_path_element_t *path_element;
+    int ret;
 
     pw = getpwuid (owner);
     if (pw == NULL)
@@ -1293,73 +1409,104 @@ fish_chown (const vfs_path_t * vpath, uid_t owner, gid_t group)
     sowner = pw->pw_name;
     sgroup = gr->gr_name;
 
-    {
-        gchar *shell_commands = NULL;
-        char buf[BUF_LARGE];
-        const char *crpath;
-        char *rpath;
-        struct vfs_s_super *super;
-        const vfs_path_element_t *path_element;
+    path_element = vfs_path_get_by_index (vpath, -1);
 
-        path_element = vfs_path_get_by_index (vpath, -1);
+    crpath = vfs_s_get_path (vpath, &super, 0);
+    if (crpath == NULL)
+        return -1;
 
-        crpath = vfs_s_get_path (vpath, &super, 0);
-        if (crpath == NULL)
-            return -1;
-        rpath = strutils_shell_escape (crpath);
+    rpath = strutils_shell_escape (crpath);
 
-        shell_commands = g_strconcat (SUP->scr_env,
-                                      "FISH_FILENAME=%s FISH_FILEOWNER=%s FISH_FILEGROUP=%s;\n",
-                                      SUP->scr_chown, (char *) NULL);
-        g_snprintf (buf, sizeof (buf), shell_commands, rpath, sowner, sgroup);
-        g_free (shell_commands);
-        fish_send_command (path_element->class, super, buf, OPT_FLUSH);
-        /* FIXME: what should we report if chgrp succeeds but chown fails? */
-        /* fish_send_command(me, super, buf, OPT_FLUSH); */
-        g_free (rpath);
-        return fish_send_command (path_element->class, super, buf, OPT_FLUSH);
-    }
+    /* FIXME: what should we report if chgrp succeeds but chown fails? */
+    ret =
+        fish_send_command (path_element->class, super, OPT_FLUSH, FISH_SUPER (super)->scr_chown,
+                           "FISH_FILENAME=%s FISH_FILEOWNER=%s FISH_FILEGROUP=%s;\n", rpath, sowner,
+                           sgroup);
+
+    g_free (rpath);
+
+    return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+fish_get_atime (mc_timesbuf_t * times, time_t * sec, long *nsec)
+{
+#ifdef HAVE_UTIMENSAT
+    *sec = (*times)[0].tv_sec;
+    *nsec = (*times)[0].tv_nsec;
+#else
+    *sec = times->actime;
+    *nsec = 0;
+#endif
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+fish_get_mtime (mc_timesbuf_t * times, time_t * sec, long *nsec)
+{
+#ifdef HAVE_UTIMENSAT
+    *sec = (*times)[1].tv_sec;
+    *nsec = (*times)[1].tv_nsec;
+#else
+    *sec = times->modtime;
+    *nsec = 0;
+#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-fish_utime (const vfs_path_t * vpath, struct utimbuf *times)
+fish_utime (const vfs_path_t * vpath, mc_timesbuf_t * times)
 {
-    gchar *shell_commands = NULL;
-    char utcmtime[16], utcatime[16];
+    char utcatime[16], utcmtime[16];
+    char utcatime_w_nsec[30], utcmtime_w_nsec[30];
+    time_t atime, mtime;
+    long atime_nsec, mtime_nsec;
     struct tm *gmt;
-    char buf[BUF_LARGE];
     const char *crpath;
     char *rpath;
     struct vfs_s_super *super;
     const vfs_path_element_t *path_element;
+    int ret;
 
     path_element = vfs_path_get_by_index (vpath, -1);
 
     crpath = vfs_s_get_path (vpath, &super, 0);
     if (crpath == NULL)
         return -1;
+
     rpath = strutils_shell_escape (crpath);
 
-    gmt = gmtime (&times->modtime);
-    g_snprintf (utcmtime, sizeof (utcmtime), "%04d%02d%02d%02d%02d.%02d",
-                gmt->tm_year + 1900, gmt->tm_mon + 1, gmt->tm_mday,
-                gmt->tm_hour, gmt->tm_min, gmt->tm_sec);
-
-    gmt = gmtime (&times->actime);
+    fish_get_atime (times, &atime, &atime_nsec);
+    gmt = gmtime (&atime);
     g_snprintf (utcatime, sizeof (utcatime), "%04d%02d%02d%02d%02d.%02d",
                 gmt->tm_year + 1900, gmt->tm_mon + 1, gmt->tm_mday,
                 gmt->tm_hour, gmt->tm_min, gmt->tm_sec);
+    g_snprintf (utcatime_w_nsec, sizeof (utcatime_w_nsec), "%04d-%02d-%02d %02d:%02d:%02d.%09ld",
+                gmt->tm_year + 1900, gmt->tm_mon + 1, gmt->tm_mday,
+                gmt->tm_hour, gmt->tm_min, gmt->tm_sec, atime_nsec);
 
-    shell_commands =
-        g_strconcat (SUP->scr_env, "FISH_FILENAME=%s FISH_FILEATIME=%ld FISH_FILEMTIME=%ld ",
-                     "FISH_TOUCHATIME=%s FISH_TOUCHMTIME=%s;\n", SUP->scr_utime, (char *) NULL);
-    g_snprintf (buf, sizeof (buf), shell_commands, rpath, (long) times->actime,
-                (long) times->modtime, utcatime, utcmtime);
-    g_free (shell_commands);
+    fish_get_mtime (times, &mtime, &mtime_nsec);
+    gmt = gmtime (&mtime);
+    g_snprintf (utcmtime, sizeof (utcmtime), "%04d%02d%02d%02d%02d.%02d",
+                gmt->tm_year + 1900, gmt->tm_mon + 1, gmt->tm_mday,
+                gmt->tm_hour, gmt->tm_min, gmt->tm_sec);
+    g_snprintf (utcmtime_w_nsec, sizeof (utcmtime_w_nsec), "%04d-%02d-%02d %02d:%02d:%02d.%09ld",
+                gmt->tm_year + 1900, gmt->tm_mon + 1, gmt->tm_mday,
+                gmt->tm_hour, gmt->tm_min, gmt->tm_sec, mtime_nsec);
+
+    ret = fish_send_command (path_element->class, super, OPT_FLUSH, FISH_SUPER (super)->scr_utime,
+                             "FISH_FILENAME=%s FISH_FILEATIME=%ld FISH_FILEMTIME=%ld "
+                             "FISH_TOUCHATIME=%s FISH_TOUCHMTIME=%s FISH_TOUCHATIME_W_NSEC=\"%s\" "
+                             "FISH_TOUCHMTIME_W_NSEC=\"%s\";\n", rpath, (long) atime, (long) mtime,
+                             utcatime, utcmtime, utcatime_w_nsec, utcmtime_w_nsec);
+
     g_free (rpath);
-    return fish_send_command (path_element->class, super, buf, OPT_FLUSH);
+
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1367,26 +1514,27 @@ fish_utime (const vfs_path_t * vpath, struct utimbuf *times)
 static int
 fish_unlink (const vfs_path_t * vpath)
 {
-    gchar *shell_commands = NULL;
-    char buf[BUF_LARGE];
     const char *crpath;
     char *rpath;
     struct vfs_s_super *super;
     const vfs_path_element_t *path_element;
+    int ret;
 
     path_element = vfs_path_get_by_index (vpath, -1);
 
     crpath = vfs_s_get_path (vpath, &super, 0);
     if (crpath == NULL)
         return -1;
+
     rpath = strutils_shell_escape (crpath);
 
-    shell_commands =
-        g_strconcat (SUP->scr_env, "FISH_FILENAME=%s;\n", SUP->scr_unlink, (char *) NULL);
-    g_snprintf (buf, sizeof (buf), shell_commands, rpath);
-    g_free (shell_commands);
+    ret =
+        fish_send_command (path_element->class, super, OPT_FLUSH, FISH_SUPER (super)->scr_unlink,
+                           "FISH_FILENAME=%s;\n", rpath);
+
     g_free (rpath);
-    return fish_send_command (path_element->class, super, buf, OPT_FLUSH);
+
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1394,27 +1542,27 @@ fish_unlink (const vfs_path_t * vpath)
 static int
 fish_exists (const vfs_path_t * vpath)
 {
-    gchar *shell_commands = NULL;
-    char buf[BUF_LARGE];
     const char *crpath;
     char *rpath;
     struct vfs_s_super *super;
     const vfs_path_element_t *path_element;
+    int ret;
 
     path_element = vfs_path_get_by_index (vpath, -1);
 
     crpath = vfs_s_get_path (vpath, &super, 0);
     if (crpath == NULL)
         return -1;
+
     rpath = strutils_shell_escape (crpath);
 
-    shell_commands =
-        g_strconcat (SUP->scr_env, "FISH_FILENAME=%s;\n", SUP->scr_exists, (char *) NULL);
-    g_snprintf (buf, sizeof (buf), shell_commands, rpath);
-    g_free (shell_commands);
+    ret =
+        fish_send_command (path_element->class, super, OPT_FLUSH, FISH_SUPER (super)->scr_exists,
+                           "FISH_FILENAME=%s;\n", rpath);
+
     g_free (rpath);
 
-    return (fish_send_command (path_element->class, super, buf, OPT_FLUSH) == 0) ? 1 : 0;
+    return (ret == 0 ? 1 : 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1422,13 +1570,11 @@ fish_exists (const vfs_path_t * vpath)
 static int
 fish_mkdir (const vfs_path_t * vpath, mode_t mode)
 {
-    gchar *shell_commands = NULL;
-    int ret_code;
-    char buf[BUF_LARGE];
     const char *crpath;
     char *rpath;
     struct vfs_s_super *super;
     const vfs_path_element_t *path_element;
+    int ret;
 
     (void) mode;
 
@@ -1437,18 +1583,16 @@ fish_mkdir (const vfs_path_t * vpath, mode_t mode)
     crpath = vfs_s_get_path (vpath, &super, 0);
     if (crpath == NULL)
         return -1;
+
     rpath = strutils_shell_escape (crpath);
 
-    shell_commands =
-        g_strconcat (SUP->scr_env, "FISH_FILENAME=%s;\n", SUP->scr_mkdir, (char *) NULL);
-    g_snprintf (buf, sizeof (buf), shell_commands, rpath);
-    g_free (shell_commands);
-
+    ret =
+        fish_send_command (path_element->class, super, OPT_FLUSH, FISH_SUPER (super)->scr_mkdir,
+                           "FISH_FILENAME=%s;\n", rpath);
     g_free (rpath);
-    ret_code = fish_send_command (path_element->class, super, buf, OPT_FLUSH);
 
-    if (ret_code != 0)
-        return ret_code;
+    if (ret != 0)
+        return ret;
 
     if (fish_exists (vpath) == 0)
     {
@@ -1463,35 +1607,40 @@ fish_mkdir (const vfs_path_t * vpath, mode_t mode)
 static int
 fish_rmdir (const vfs_path_t * vpath)
 {
-    gchar *shell_commands = NULL;
-    char buf[BUF_LARGE];
     const char *crpath;
     char *rpath;
     struct vfs_s_super *super;
     const vfs_path_element_t *path_element;
+    int ret;
 
     path_element = vfs_path_get_by_index (vpath, -1);
 
     crpath = vfs_s_get_path (vpath, &super, 0);
     if (crpath == NULL)
         return -1;
+
     rpath = strutils_shell_escape (crpath);
 
-    shell_commands =
-        g_strconcat (SUP->scr_env, "FISH_FILENAME=%s;\n", SUP->scr_rmdir, (char *) NULL);
-    g_snprintf (buf, sizeof (buf), shell_commands, rpath);
-    g_free (shell_commands);
+    ret =
+        fish_send_command (path_element->class, super, OPT_FLUSH, FISH_SUPER (super)->scr_rmdir,
+                           "FISH_FILENAME=%s;\n", rpath);
+
     g_free (rpath);
-    return fish_send_command (path_element->class, super, buf, OPT_FLUSH);
+
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
-fish_fh_free_data (vfs_file_handler_t * fh)
+static vfs_file_handler_t *
+fish_fh_new (struct vfs_s_inode *ino, gboolean changed)
 {
-    if (fh != NULL)
-        MC_PTR_FREE (fh->data);
+    fish_file_handler_t *fh;
+
+    fh = g_new0 (fish_file_handler_t, 1);
+    vfs_s_init_fh (VFS_FILE_HANDLER (fh), ino, changed);
+
+    return VFS_FILE_HANDLER (fh);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1499,12 +1648,9 @@ fish_fh_free_data (vfs_file_handler_t * fh)
 static int
 fish_fh_open (struct vfs_class *me, vfs_file_handler_t * fh, int flags, mode_t mode)
 {
-    fish_fh_data_t *fish;
+    fish_file_handler_t *fish = FISH_FILE_HANDLER (fh);
 
     (void) mode;
-
-    fh->data = g_new0 (fish_fh_data_t, 1);
-    fish = (fish_fh_data_t *) fh->data;
 
     /* File will be written only, so no need to retrieve it */
     if (((flags & O_WRONLY) == O_WRONLY) && ((flags & (O_RDONLY | O_RDWR)) == 0))
@@ -1537,7 +1683,6 @@ fish_fh_open (struct vfs_class *me, vfs_file_handler_t * fh, int flags, mode_t m
     return 0;
 
   fail:
-    fish_fh_free_data (fh);
     return -1;
 }
 
@@ -1548,7 +1693,7 @@ fish_fill_names (struct vfs_class *me, fill_names_f func)
 {
     GList *iter;
 
-    for (iter = MEDATA->supers; iter != NULL; iter = g_list_next (iter))
+    for (iter = VFS_SUBCLASS (me)->supers; iter != NULL; iter = g_list_next (iter))
     {
         const struct vfs_s_super *super = (const struct vfs_s_super *) iter->data;
 
@@ -1574,7 +1719,7 @@ fish_fill_names (struct vfs_class *me, fill_names_f func)
         }
 
         name =
-            g_strconcat (vfs_fish_ops.prefix, VFS_PATH_URL_DELIMITER,
+            g_strconcat (vfs_fish_ops->prefix, VFS_PATH_URL_DELIMITER,
                          super->path_element->user, "@", super->path_element->host, flags,
                          PATH_SEP_STR, super->path_element->path, (char *) NULL);
         func (name);
@@ -1600,40 +1745,38 @@ fish_open (const vfs_path_t * vpath, int flags, mode_t mode)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-init_fish (void)
+vfs_init_fish (void)
 {
-    static struct vfs_s_subclass fish_subclass;
-
     tcp_init ();
 
-    fish_subclass.flags = VFS_S_REMOTE | VFS_S_USETMP;
+    vfs_init_subclass (&fish_subclass, "fish", VFSF_REMOTE | VFSF_USETMP, "sh");
+    vfs_fish_ops->fill_names = fish_fill_names;
+    vfs_fish_ops->stat = fish_stat;
+    vfs_fish_ops->lstat = fish_lstat;
+    vfs_fish_ops->fstat = fish_fstat;
+    vfs_fish_ops->chmod = fish_chmod;
+    vfs_fish_ops->chown = fish_chown;
+    vfs_fish_ops->utime = fish_utime;
+    vfs_fish_ops->open = fish_open;
+    vfs_fish_ops->symlink = fish_symlink;
+    vfs_fish_ops->link = fish_link;
+    vfs_fish_ops->unlink = fish_unlink;
+    vfs_fish_ops->rename = fish_rename;
+    vfs_fish_ops->mkdir = fish_mkdir;
+    vfs_fish_ops->rmdir = fish_rmdir;
+    vfs_fish_ops->ctl = fish_ctl;
     fish_subclass.archive_same = fish_archive_same;
+    fish_subclass.new_archive = fish_new_archive;
     fish_subclass.open_archive = fish_open_archive;
     fish_subclass.free_archive = fish_free_archive;
+    fish_subclass.fh_new = fish_fh_new;
     fish_subclass.fh_open = fish_fh_open;
-    fish_subclass.fh_free_data = fish_fh_free_data;
     fish_subclass.dir_load = fish_dir_load;
     fish_subclass.file_store = fish_file_store;
     fish_subclass.linear_start = fish_linear_start;
     fish_subclass.linear_read = fish_linear_read;
     fish_subclass.linear_close = fish_linear_close;
-
-    vfs_s_init_class (&vfs_fish_ops, &fish_subclass);
-    vfs_fish_ops.name = "fish";
-    vfs_fish_ops.prefix = "sh";
-    vfs_fish_ops.fill_names = fish_fill_names;
-    vfs_fish_ops.chmod = fish_chmod;
-    vfs_fish_ops.chown = fish_chown;
-    vfs_fish_ops.utime = fish_utime;
-    vfs_fish_ops.open = fish_open;
-    vfs_fish_ops.symlink = fish_symlink;
-    vfs_fish_ops.link = fish_link;
-    vfs_fish_ops.unlink = fish_unlink;
-    vfs_fish_ops.rename = fish_rename;
-    vfs_fish_ops.mkdir = fish_mkdir;
-    vfs_fish_ops.rmdir = fish_rmdir;
-    vfs_fish_ops.ctl = fish_ctl;
-    vfs_register_class (&vfs_fish_ops);
+    vfs_register_class (vfs_fish_ops);
 }
 
 /* --------------------------------------------------------------------------------------------- */

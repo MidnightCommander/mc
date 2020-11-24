@@ -6,11 +6,18 @@ LIBFILES_OUT = mc.ext
 
 noinst_DATA = xterm.ad
 
-pkgdata_DATA = \
-	mc.lib
+PKGDATA_IN = mc.charsets.in
+
+PKGDATA_OUT =
 if CHARSET
-pkgdata_DATA += mc.charsets
+PKGDATA_OUT += mc.charsets
 endif
+
+dist_pkgdata_DATA = \
+	mc.lib
+
+pkgdata_DATA = \
+	$(PKGDATA_OUT)
 
 SCRIPTS_IN = \
 	mc.menu.in \
@@ -29,7 +36,7 @@ LIBFILES_CONST = \
 LIBFILES_SCRIPT = \
 	edit.indent.rc
 
-CLEANFILES = $(SCRIPTS_OUT)
+CLEANFILES = $(SCRIPTS_OUT) $(PKGDATA_OUT)
 
 cfgdir = $(sysconfdir)/@PACKAGE@
 cfg_DATA = \
@@ -46,11 +53,7 @@ EXTRA_DIST = \
 	$(LIBFILES_SCRIPT) \
 	$(SCRIPTS_IN) \
 	$(noinst_DATA) \
-	$(pkgdata_DATA)
-#if CHARSET is defined, mc.charsets is already here
-if !CHARSET
-EXTRA_DIST += mc.charsets
-endif
+	$(PKGDATA_IN)
 
 install-data-hook:
 	cd $(DESTDIR)$(cfgdir) && rm -f mc.keymap && $(LN_S) mc.default.keymap mc.keymap
