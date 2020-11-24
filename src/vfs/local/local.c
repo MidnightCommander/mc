@@ -84,13 +84,27 @@ static void *
 local_opendir (const vfs_path_t * vpath)
 {
     DIR **local_info;
-    DIR *dir;
+    DIR *dir = 0;
     const vfs_path_element_t *path_element;
 
     path_element = vfs_path_get_by_index (vpath, -1);
-    dir = opendir (path_element->path);
-    if (!dir)
-        return 0;
+
+    while (dir == 0)
+    {
+        dir = opendir (path_element->path);
+        if (!dir)
+            return 0;
+
+        if (readdir(dir) == 0 && errno == EINTR)
+        {
+            closedir(dir);
+            dir = 0;
+        }
+        else
+        {
+            rewinddir(dir);
+        }
+    }
 
     local_info = (DIR **) g_new (DIR *, 1);
     *local_info = dir;
