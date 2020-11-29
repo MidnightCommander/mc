@@ -277,7 +277,7 @@ print_flags (const WDialog * h)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-advanced_chown_refresh (WDialog * h)
+advanced_chown_refresh (const WDialog * h)
 {
     tty_setcolor (COLOR_NORMAL);
 
