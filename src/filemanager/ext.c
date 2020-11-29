@@ -176,7 +176,7 @@ exec_expand_format (char symbol, gboolean is_result_quoted)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static char *
+static GString *
 exec_get_export_variables (const vfs_path_t * filename_vpath)
 {
     char *text;
@@ -218,12 +218,13 @@ exec_get_export_variables (const vfs_path_t * filename_vpath)
             g_free (text);
         }
     }
-    return g_string_free (export_vars_string, FALSE);
+
+    return export_vars_string;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-static char *
+static GString *
 exec_make_shell_string (const char *lc_data, const vfs_path_t * filename_vpath)
 {
     GString *shell_string;
@@ -346,7 +347,8 @@ exec_make_shell_string (const char *lc_data, const vfs_path_t * filename_vpath)
                 g_string_append_c (shell_string, *lc_data);
         }
     }                           /* for */
-    return g_string_free (shell_string, FALSE);
+
+    return shell_string;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -415,7 +417,7 @@ static vfs_path_t *
 exec_extension (WPanel * panel, void *target, const vfs_path_t * filename_vpath,
                 const char *lc_data, int start_line)
 {
-    char *shell_string, *export_variables;
+    GString *shell_string, *export_variables;
     vfs_path_t *script_vpath = NULL;
     int cmd_file_fd;
     FILE *cmd_file;
@@ -434,14 +436,13 @@ exec_extension (WPanel * panel, void *target, const vfs_path_t * filename_vpath,
     do_local_copy = !vfs_file_is_local (filename_vpath);
 
     shell_string = exec_make_shell_string (lc_data, filename_vpath);
-
     if (shell_string == NULL)
         goto ret;
 
     if (is_cd)
     {
         exec_extension_cd (panel);
-        g_free (shell_string);
+        g_string_free (shell_string, TRUE);
         goto ret;
     }
 
@@ -466,12 +467,12 @@ exec_extension (WPanel * panel, void *target, const vfs_path_t * filename_vpath,
     export_variables = exec_get_export_variables (filename_vpath);
     if (export_variables != NULL)
     {
-        fprintf (cmd_file, "%s\n", export_variables);
-        g_free (export_variables);
+        fputs (export_variables->str, cmd_file);
+        g_string_free (export_variables, TRUE);
     }
 
-    fputs (shell_string, cmd_file);
-    g_free (shell_string);
+    fputs (shell_string->str, cmd_file);
+    g_string_free (shell_string, TRUE);
 
     /*
      * Make the script remove itself when it finishes.
