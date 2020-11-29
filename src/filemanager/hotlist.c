@@ -445,7 +445,6 @@ hotlist_run_cmd (int action)
                 fill_listbox (list);
                 return 0;
             }
-            MC_FALLTHROUGH;     /* go up */
         }
         MC_FALLTHROUGH;         /* if list empty - just go up */
 
