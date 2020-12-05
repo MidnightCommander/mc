@@ -354,6 +354,7 @@ mcview_close_datasource (WView * view)
         break;
     case DS_STRING:
         MC_PTR_FREE (view->ds_string_data);
+        break;
     default:
         break;
     }

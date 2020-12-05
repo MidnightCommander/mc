@@ -938,6 +938,7 @@ fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
                 ST.st_rdev = makedev (maj, min);
 #endif
             }
+            break;
         default:
             break;
         }

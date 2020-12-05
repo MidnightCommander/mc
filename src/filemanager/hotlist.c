@@ -288,6 +288,7 @@ fill_listbox (WListbox * list)
         case HL_TYPE_DOTDOT:
         case HL_TYPE_ENTRY:
             listbox_add_item (list, LISTBOX_APPEND_AT_END, 0, current->label, current, FALSE);
+            break;
         default:
             break;
         }

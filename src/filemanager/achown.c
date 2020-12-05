@@ -492,6 +492,7 @@ chl_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *dat
                 h->ret_value = parm;
                 dlg_stop (h);
             }
+            break;
         default:
             break;
         }

@@ -782,6 +782,7 @@ strip_ctrl_codes (char *s)
                             r = new_r + 1;
                             goto osc_out;
                         }
+                        break;
                     default:
                         break;
                     }
