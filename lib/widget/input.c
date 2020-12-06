@@ -941,12 +941,12 @@ input_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
     {
     case MSG_MOUSE_DOWN:
         widget_select (w);
-        in->first = FALSE;
 
         if (event->x >= w->cols - HISTORY_BUTTON_WIDTH && should_show_history_button (in))
             do_show_hist (in);
         else
         {
+            in->first = FALSE;
             input_mark_cmd (in, FALSE);
             input_set_point (in, input_screen_to_point (in, event->x));
             /* save point for the possible following MSG_MOUSE_DRAG action */
@@ -1146,18 +1146,22 @@ input_handle_char (WInput * in, int key)
             port_region_marked_for_delete (in);
         input_complete_free (in);
         v = insert_char (in, key);
+        input_update (in, TRUE);
     }
     else
     {
+        gboolean keep_first;
+
         if (command != CK_Complete)
             input_complete_free (in);
         input_execute_cmd (in, command);
         v = MSG_HANDLED;
-        if (in->first)
-            input_update (in, TRUE);    /* needed to clear in->first */
+        /* if in->first == TRUE and history or completion window was cancelled,
+           keep "first" state */
+        keep_first = in->first && (command == CK_History || command == CK_Complete);
+        input_update (in, !keep_first);
     }
 
-    input_update (in, TRUE);
     return v;
 }
 
@@ -1244,6 +1248,9 @@ input_update (WInput * in, gboolean clear_first)
     if (w->owner == NULL || !widget_get_state (WIDGET (w->owner), WST_ACTIVE))
         return;
 
+    if (clear_first)
+        in->first = FALSE;
+
     if (should_show_history_button (in))
         has_history = HISTORY_BUTTON_WIDTH;
 
@@ -1325,9 +1332,6 @@ input_update (WInput * in, gboolean clear_first)
                 str_cnext_char (&cp);
         }
     }
-
-    if (clear_first)
-        in->first = FALSE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
