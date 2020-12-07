@@ -985,7 +985,7 @@ static gboolean
 search_content (WDialog * h, const char *directory, const char *filename)
 {
     struct stat s;
-    char buffer[BUF_4K];        /* raw input buffer */
+    char buffer[BUF_4K] = "";   /* raw input buffer */
     int file_fd;
     gboolean ret_val = FALSE;
     vfs_path_t *vpath;
