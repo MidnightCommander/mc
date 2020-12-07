@@ -200,15 +200,14 @@ extfs_generate_entry (struct extfs_super_t *archive, const char *name, struct vf
     struct vfs_s_inode *inode;
     struct vfs_s_entry *entry;
 
+    memset (&st, 0, sizeof (st));
     st.st_ino = VFS_SUPER (archive)->ino_usage++;
     st.st_dev = archive->rdev;
     myumask = umask (022);
     umask (myumask);
     st.st_mode = mode & ~myumask;
-    st.st_rdev = 0;
     st.st_uid = getuid ();
     st.st_gid = getgid ();
-    st.st_size = 0;
     st.st_mtime = time (NULL);
     st.st_atime = st.st_mtime;
     st.st_ctime = st.st_mtime;
@@ -408,6 +407,8 @@ extfs_open_archive (int fstype, const char *name, struct extfs_super_t **pparc)
     vfs_path_t *local_name_vpath = NULL;
     vfs_path_t *name_vpath;
 
+    memset (&mystat, 0, sizeof (mystat));
+
     name_vpath = vfs_path_from_str (name);
     info = &g_array_index (extfs_plugins, extfs_plugin_info_t, fstype);
 
@@ -563,14 +564,13 @@ extfs_read_archive (FILE * extfsd, struct extfs_super_t *current_archive)
                 {
                     struct stat st;
 
+                    memset (&st, 0, sizeof (st));
                     st.st_ino = super->ino_usage++;
                     st.st_nlink = 1;
                     st.st_dev = current_archive->rdev;
                     st.st_mode = hstat.st_mode;
 #ifdef HAVE_STRUCT_STAT_ST_RDEV
                     st.st_rdev = hstat.st_rdev;
-#else
-                    st.st_rdev = 0;
 #endif
                     st.st_uid = hstat.st_uid;
                     st.st_gid = hstat.st_gid;
