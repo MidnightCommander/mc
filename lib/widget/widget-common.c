@@ -798,13 +798,9 @@ mouse_get_local (const Gpm_Event * global, const Widget * w)
 {
     Gpm_Event local;
 
+    memset (&local, 0, sizeof (local));
+
     local.buttons = global->buttons;
-#ifdef HAVE_LIBGPM
-    local.clicks = 0;
-    local.margin = 0;
-    local.modifiers = 0;
-    local.vc = 0;
-#endif
     local.x = global->x - w->x;
     local.y = global->y - w->y;
     local.type = global->type;
