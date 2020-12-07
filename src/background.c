@@ -565,6 +565,7 @@ do_background (file_op_context_t * ctx, char *info)
                 ;
             while (dup2 (nullfd, STDERR_FILENO) == -1 && errno == EINTR)
                 ;
+            close (nullfd);
         }
 
         return 0;
