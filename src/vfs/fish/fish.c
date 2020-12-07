@@ -488,7 +488,7 @@ fish_info (struct vfs_class *me, struct vfs_s_super *super)
         while (TRUE)
         {
             int res;
-            char buffer[BUF_8K];
+            char buffer[BUF_8K] = "";
 
             res = vfs_s_get_line_interruptible (me, buffer, sizeof (buffer), fish_super->sockr);
             if ((res == 0) || (res == EINTR))
@@ -917,6 +917,7 @@ fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
             {
                 struct tm tim;
 
+                memset (&tim, 0, sizeof (tim));
                 /* cppcheck-suppress invalidscanf */
                 if (sscanf (buffer + 1, "%d %d %d %d %d %d", &tim.tm_year, &tim.tm_mon,
                             &tim.tm_mday, &tim.tm_hour, &tim.tm_min, &tim.tm_sec) != 6)
