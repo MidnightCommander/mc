@@ -45,7 +45,6 @@ static struct vfs_class vfs_test_ops1, vfs_test_ops2, vfs_test_ops3;
 static void
 setup (void)
 {
-    mc_global.timer = mc_timer_new ();
     str_init_strings (NULL);
 
     vfs_init ();
@@ -79,7 +78,6 @@ teardown (void)
 
     vfs_shut ();
     str_uninit_strings ();
-    mc_timer_destroy (mc_global.timer);
 }
 
 /* --------------------------------------------------------------------------------------------- */

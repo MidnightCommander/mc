@@ -616,9 +616,9 @@ do_compute_dir_size (const vfs_path_t * dirname_vpath, dirsize_status_msg_t * ds
                      size_t * dir_count, size_t * ret_marked, uintmax_t * ret_total,
                      mc_stat_fn stat_func)
 {
-    static guint64 timestamp = 0;
+    static gint64 timestamp = 0;
     /* update with 25 FPS rate */
-    static const guint64 delay = G_USEC_PER_SEC / 25;
+    static const gint64 delay = G_USEC_PER_SEC / 25;
 
     status_msg_t *sm = STATUS_MSG (dsm);
     int res;

@@ -73,7 +73,6 @@ test_chdir__deinit (void)
 static void
 setup (void)
 {
-    mc_global.timer = mc_timer_new ();
     str_init_strings (NULL);
 
     vfs_init ();
@@ -102,7 +101,6 @@ teardown (void)
 
     vfs_shut ();
     str_uninit_strings ();
-    mc_timer_destroy (mc_global.timer);
 }
 
 /* --------------------------------------------------------------------------------------------- */

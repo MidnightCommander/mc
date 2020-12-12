@@ -30,7 +30,6 @@
 
 #include "lib/strutil.h"
 #include "lib/util.h"
-#include "lib/timer.h"
 
 #include "src/filemanager/midnight.h"
 
@@ -62,7 +61,6 @@ rand (void)
 static void
 setup (void)
 {
-    mc_global.timer = mc_timer_new ();
     mc_global.share_data_dir = (char *) TEST_SHARE_DIR;
     str_init_strings (NULL);
 }
@@ -71,7 +69,6 @@ static void
 teardown (void)
 {
     str_uninit_strings ();
-    mc_timer_destroy (mc_global.timer);
 }
 
 /* --------------------------------------------------------------------------------------------- */

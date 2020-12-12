@@ -272,7 +272,7 @@ void mc_propagate_error (GError ** dest, int code, const char *format, ...) G_GN
 void mc_replace_error (GError ** dest, int code, const char *format, ...) G_GNUC_PRINTF (3, 4);
 /* *INDENT-ON* */
 
-gboolean mc_time_elapsed (guint64 * timestamp, guint64 delay);
+gboolean mc_time_elapsed (gint64 * timestamp, gint64 delay);
 
 /*** inline functions **************************************************/
 

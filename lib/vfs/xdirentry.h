@@ -91,7 +91,7 @@ struct vfs_s_inode
     struct stat st;             /* Parameters of this inode */
     char *linkname;             /* Symlink's contents */
     char *localname;            /* Filename of local file, if we have one */
-    guint64 timestamp;          /* Subclass specific */
+    gint64 timestamp;           /* Subclass specific */
     off_t data_offset;          /* Subclass specific */
 };
 

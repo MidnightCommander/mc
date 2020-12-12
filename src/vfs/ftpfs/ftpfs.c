@@ -98,7 +98,6 @@ What to do with this?
 #include "lib/util.h"
 #include "lib/strutil.h"        /* str_move() */
 #include "lib/mcconfig.h"
-#include "lib/timer.h"
 
 #include "lib/tty/tty.h"        /* enable/disable interrupt key */
 #include "lib/widget.h"         /* message() */
@@ -1491,17 +1490,17 @@ ftpfs_linear_abort (struct vfs_class *me, vfs_file_handler_t * fh)
 
         if (select (dsock + 1, &mask, NULL, NULL, NULL) > 0)
         {
-            guint64 start_tim;
+            gint64 start_tim;
             char buf[BUF_8K];
 
-            start_tim = mc_timer_elapsed (mc_global.timer);
+            start_tim = g_get_real_time ();
 
             /* flush the remaining data */
             while (read (dsock, buf, sizeof (buf)) > 0)
             {
-                guint64 tim;
+                gint64 tim;
 
-                tim = mc_timer_elapsed (mc_global.timer);
+                tim = g_get_real_time ();
 
                 if (tim > start_tim + ABORT_TIMEOUT)
                 {
@@ -1748,7 +1747,7 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
         return (-1);
     }
 
-    dir->timestamp = mc_timer_elapsed (mc_global.timer) + ftpfs_directory_timeout * G_USEC_PER_SEC;
+    dir->timestamp = g_get_real_time () + ftpfs_directory_timeout * G_USEC_PER_SEC;
 
     if (ftp_super->strict == RFC_STRICT)
         sock = ftpfs_open_data_connection (me, super, "LIST", 0, TYPE_ASCII, 0);

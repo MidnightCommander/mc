@@ -1158,9 +1158,9 @@ file_progress_show_target (file_op_context_t * ctx, const vfs_path_t * vpath)
 gboolean
 file_progress_show_deleting (file_op_context_t * ctx, const char *s, size_t * count)
 {
-    static guint64 timestamp = 0;
+    static gint64 timestamp = 0;
     /* update with 25 FPS rate */
-    static const guint64 delay = G_USEC_PER_SEC / 25;
+    static const gint64 delay = G_USEC_PER_SEC / 25;
 
     gboolean ret;
 
