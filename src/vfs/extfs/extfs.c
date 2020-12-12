@@ -1047,20 +1047,20 @@ extfs_opendir (const vfs_path_t * vpath)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void *
+static struct vfs_dirent *
 extfs_readdir (void *data)
 {
-    static union vfs_dirent dir;
+    struct vfs_dirent *dir;
     GList **info = (GList **) data;
 
     if (*info == NULL)
         return NULL;
 
-    g_strlcpy (dir.dent.d_name, VFS_ENTRY ((*info)->data)->name, MC_MAXPATHLEN);
+    dir = vfs_dirent_init (NULL, VFS_ENTRY ((*info)->data)->name, 0);   /* FIXME: inode */
 
     *info = g_list_next (*info);
 
-    return (void *) &dir;
+    return dir;
 }
 
 /* --------------------------------------------------------------------------------------------- */

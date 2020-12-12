@@ -139,7 +139,7 @@ filename_completion_function (const char *text, int state, input_complete_t flag
     static vfs_path_t *dirname_vpath = NULL;
 
     gboolean isdir = TRUE, isexec = FALSE;
-    struct dirent *entry = NULL;
+    struct vfs_dirent *entry = NULL;
 
     SHOW_C_CTX ("filename_completion_function");
 

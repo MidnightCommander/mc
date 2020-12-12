@@ -62,11 +62,9 @@
 /* TODO: move it to separate private .h */
 extern GString *vfs_str_buffer;
 extern vfs_class *current_vfs;
-extern struct dirent *mc_readdir_result;
+extern struct vfs_dirent *mc_readdir_result;
 
 /*** global variables ****************************************************************************/
-
-struct dirent *mc_readdir_result = NULL;
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -458,29 +456,14 @@ mc_opendir (const vfs_path_t * vpath)
 
 /* --------------------------------------------------------------------------------------------- */
 
-struct dirent *
+struct vfs_dirent *
 mc_readdir (DIR * dirp)
 {
     int handle;
     struct vfs_class *vfs;
     void *fsinfo = NULL;
-    struct dirent *entry = NULL;
+    struct vfs_dirent *entry = NULL;
     vfs_path_element_t *vfs_path_element;
-
-    if (mc_readdir_result == NULL)
-    {
-        /* We can't just allocate struct dirent as (see man dirent.h)
-         * struct dirent has VERY nonnaive semantics of allocating
-         * d_name in it. Moreover, linux's glibc-2.9 allocates dirents _less_,
-         * than 'sizeof (struct dirent)' making full bitwise (sizeof dirent) copy
-         * heap corrupter. So, allocate longliving dirent with at least
-         * (MAXNAMLEN + 1) for d_name in it.
-         * Strictly saying resulting dirent is unusable as we don't adjust internal
-         * structures, holding dirent size. But we don't use it in libc infrastructure.
-         * TODO: to make simpler homemade dirent-alike structure.
-         */
-        mc_readdir_result = (struct dirent *) g_malloc (sizeof (struct dirent) + MAXNAMLEN + 1);
-    }
 
     if (dirp == NULL)
     {
@@ -507,8 +490,8 @@ mc_readdir (DIR * dirp)
 #else
         g_string_assign (vfs_str_buffer, entry->d_name);
 #endif
-        mc_readdir_result->d_ino = entry->d_ino;
-        g_strlcpy (mc_readdir_result->d_name, vfs_str_buffer->str, MAXNAMLEN + 1);
+        vfs_dirent_assign (mc_readdir_result, vfs_str_buffer->str, entry->d_ino);
+        vfs_dirent_free (entry);
     }
     if (entry == NULL)
         errno = vfs->readdir ? vfs_ferrno (vfs) : E_NOTSUPP;

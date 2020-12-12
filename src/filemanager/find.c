@@ -1247,7 +1247,7 @@ find_rotate_dash (const WDialog * h, gboolean show)
 static int
 do_search (WDialog * h)
 {
-    static struct dirent *dp = NULL;
+    static struct vfs_dirent *dp = NULL;
     static DIR *dirp = NULL;
     static char *directory = NULL;
     struct stat tmp_stat;

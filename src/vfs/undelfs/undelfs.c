@@ -400,11 +400,10 @@ undelfs_opendir (const vfs_path_t * vpath)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void *
+static struct vfs_dirent *
 undelfs_readdir (void *vfs_info)
 {
-    static union vfs_dirent undelfs_readdir_data;
-    static char *const dirent_dest = undelfs_readdir_data.dent.d_name;
+    struct vfs_dirent *dirent;
 
     if (vfs_info != fs)
     {
@@ -414,13 +413,18 @@ undelfs_readdir (void *vfs_info)
     if (readdir_ptr == num_delarray)
         return NULL;
     if (readdir_ptr < 0)
-        strcpy (dirent_dest, readdir_ptr == -2 ? "." : "..");
+        dirent = vfs_dirent_init (NULL, readdir_ptr == -2 ? "." : "..", 0);     /* FIXME: inode */
     else
+    {
+        char dirent_dest[MC_MAXPATHLEN];
+
         g_snprintf (dirent_dest, MC_MAXPATHLEN, "%ld:%d",
                     (long) delarray[readdir_ptr].ino, delarray[readdir_ptr].num_blocks);
+        dirent = vfs_dirent_init (NULL, dirent_dest, 0);        /* FIXME: inode */
+    }
     readdir_ptr++;
 
-    return &undelfs_readdir_data;
+    return dirent;
 }
 
 /* --------------------------------------------------------------------------------------------- */

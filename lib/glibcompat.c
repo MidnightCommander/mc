@@ -160,3 +160,29 @@ g_queue_clear_full (GQueue * queue, GDestroyNotify free_func)
 #endif /* ! GLIB_CHECK_VERSION (2, 60, 0) */
 
 /* --------------------------------------------------------------------------------------------- */
+
+/**
+ * mc_g_string_copy:
+ * @dest: (not nullable): the destination #GString. Its current contents are destroyed
+ * @src: (not nullable): the source #GString
+ * @return: @dest
+ *
+ * Copies the bytes from a #GString into a #GString, destroying any previous contents.
+ * It is rather like the standard strcpy() function, except that you do not have to worry about
+ * having enough space to copy the string.
+ *
+ * There is no such API in GLib2.
+ */
+GString *
+mc_g_string_copy (GString * dest, const GString * src)
+{
+    g_return_val_if_fail (src != NULL, NULL);
+    g_return_val_if_fail (dest != NULL, NULL);
+
+    g_string_set_size (dest, 0);
+    g_string_append_len (dest, src->str, src->len);
+
+    return dest;
+}
+
+/* --------------------------------------------------------------------------------------------- */

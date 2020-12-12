@@ -370,6 +370,8 @@ static WPanel *mouse_mark_panel = NULL;
 static gboolean mouse_marking = FALSE;
 static int state_mark = 0;
 
+static GString *string_file_name_buffer;
+
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
@@ -451,12 +453,12 @@ add_permission_string (const char *dest, int width, file_entry_t * fe, int attr,
 static const char *
 string_file_name (file_entry_t * fe, int len)
 {
-    static char buffer[MC_MAXPATHLEN * MB_LEN_MAX + 1];
-
     (void) len;
 
-    g_strlcpy (buffer, fe->fname, sizeof (buffer));
-    return buffer;
+    g_string_set_size (string_file_name_buffer, 0);
+    g_string_append_len (string_file_name_buffer, fe->fname, fe->fnamelen);
+
+    return string_file_name_buffer->str;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -994,7 +996,7 @@ display_mini_info (WPanel * panel)
     {
         tty_setcolor (INPUT_COLOR);
         tty_print_char ('/');
-        tty_print_string (str_fit_to_term (panel->quick_search.buffer, w->cols - 3, J_LEFT));
+        tty_print_string (str_fit_to_term (panel->quick_search.buffer->str, w->cols - 3, J_LEFT));
         return;
     }
 
@@ -1500,6 +1502,9 @@ panel_destroy (WPanel * p)
 
     g_free (p->dir.list);
     g_free (p->name);
+
+    g_string_free (p->quick_search.buffer, TRUE);
+    g_string_free (p->quick_search.prev_buffer, TRUE);
 
     vfs_path_free (p->lwd_vpath);
     vfs_path_free (p->cwd_vpath);
@@ -2626,7 +2631,6 @@ panel_select_invert_files (WPanel * panel)
 static void
 do_search (WPanel * panel, int c_code)
 {
-    size_t l;
     int i, sel;
     gboolean wrapped = FALSE;
     char *act;
@@ -2634,14 +2638,13 @@ do_search (WPanel * panel, int c_code)
     char *reg_exp, *esc_str;
     gboolean is_found = FALSE;
 
-    l = strlen (panel->quick_search.buffer);
     if (c_code == KEY_BACKSPACE)
     {
-        if (l != 0)
+        if (panel->quick_search.buffer->len != 0)
         {
-            act = panel->quick_search.buffer + l;
-            str_prev_noncomb_char (&act, panel->quick_search.buffer);
-            act[0] = '\0';
+            act = panel->quick_search.buffer->str + panel->quick_search.buffer->len;
+            str_prev_noncomb_char (&act, panel->quick_search.buffer->str);
+            g_string_set_size (panel->quick_search.buffer, act - panel->quick_search.buffer->str);
         }
         panel->quick_search.chpoint = 0;
     }
@@ -2663,19 +2666,14 @@ do_search (WPanel * panel, int c_code)
                 panel->quick_search.chpoint = 0;
                 return;
             default:
-                if (l + panel->quick_search.chpoint < sizeof (panel->quick_search.buffer))
-                {
-                    memcpy (panel->quick_search.buffer + l, panel->quick_search.ch,
-                            panel->quick_search.chpoint);
-                    l += panel->quick_search.chpoint;
-                    panel->quick_search.buffer[l] = '\0';
-                    panel->quick_search.chpoint = 0;
-                }
+                g_string_append_len (panel->quick_search.buffer, panel->quick_search.ch,
+                                     panel->quick_search.chpoint);
+                panel->quick_search.chpoint = 0;
             }
         }
     }
 
-    reg_exp = g_strdup_printf ("%s*", panel->quick_search.buffer);
+    reg_exp = g_strdup_printf ("%s*", panel->quick_search.buffer->str);
     esc_str = strutils_escape (reg_exp, -1, ",|\\{}[]", TRUE);
     search = mc_search_new (esc_str, NULL);
     search->search_type = MC_SEARCH_T_GLOB;
@@ -2721,9 +2719,9 @@ do_search (WPanel * panel, int c_code)
     }
     else if (c_code != KEY_BACKSPACE)
     {
-        act = panel->quick_search.buffer + l;
-        str_prev_noncomb_char (&act, panel->quick_search.buffer);
-        act[0] = '\0';
+        act = panel->quick_search.buffer->str + panel->quick_search.buffer->len;
+        str_prev_noncomb_char (&act, panel->quick_search.buffer->str);
+        g_string_set_size (panel->quick_search.buffer, act - panel->quick_search.buffer->str);
     }
     mc_search_free (search);
     g_free (reg_exp);
@@ -2747,16 +2745,15 @@ start_search (WPanel * panel)
 
         /* in case if there was no search string we need to recall
            previous string, with which we ended previous searching */
-        if (panel->quick_search.buffer[0] == '\0')
-            g_strlcpy (panel->quick_search.buffer, panel->quick_search.prev_buffer,
-                       sizeof (panel->quick_search.buffer));
+        if (panel->quick_search.buffer->len == 0)
+            mc_g_string_copy (panel->quick_search.buffer, panel->quick_search.prev_buffer);
 
         do_search (panel, 0);
     }
     else
     {
         panel->quick_search.active = TRUE;
-        panel->quick_search.buffer[0] = '\0';
+        g_string_set_size (panel->quick_search.buffer, 0);
         panel->quick_search.ch[0] = '\0';
         panel->quick_search.chpoint = 0;
         display_mini_info (panel);
@@ -2773,9 +2770,8 @@ stop_search (WPanel * panel)
 
     /* if user overrdied search string, we need to store it
        to the quick_search.prev_buffer */
-    if (panel->quick_search.buffer[0] != '\0')
-        g_strlcpy (panel->quick_search.prev_buffer, panel->quick_search.buffer,
-                   sizeof (panel->quick_search.prev_buffer));
+    if (panel->quick_search.buffer->len != 0)
+        mc_g_string_copy (panel->quick_search.prev_buffer, panel->quick_search.buffer);
 
     display_mini_info (panel);
 }
@@ -4327,6 +4323,9 @@ panel_sized_empty_new (const char *panel_name, int y, int x, int lines, int cols
 
     panel->frame_size = frame_half;
 
+    panel->quick_search.buffer = g_string_sized_new (MC_MAXFILENAMELEN);
+    panel->quick_search.prev_buffer = g_string_sized_new (MC_MAXFILENAMELEN);
+
     panel->name = g_strdup (panel_name);
     panel->dir_history.name = g_strconcat ("Dir Hist ", panel->name, (char *) NULL);
     /* directories history will be get later */
@@ -4992,6 +4991,8 @@ panel_init (void)
     panel_filename_scroll_right_char =
         mc_skin_get ("widget-panel", "filename-scroll-right-char", "}");
 
+    string_file_name_buffer = g_string_sized_new (MC_MAXFILENAMELEN);
+
     mc_event_add (MCEVENT_GROUP_FILEMANAGER, "update_panels", event_update_panels, NULL, NULL);
     mc_event_add (MCEVENT_GROUP_FILEMANAGER, "panel_save_current_file_to_clip_file",
                   panel_save_current_file_to_clip_file, NULL, NULL);
@@ -5011,6 +5012,7 @@ panel_deinit (void)
     g_free (panel_history_show_list_char);
     g_free (panel_filename_scroll_left_char);
     g_free (panel_filename_scroll_right_char);
+    g_string_free (string_file_name_buffer, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
