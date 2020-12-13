@@ -3538,7 +3538,7 @@ edit_get_match_keyword_cmd (WEdit * edit)
         path = ptr;
         g_free (tagfile);
         tagfile = mc_build_filename (path, TAGS_NAME, (char *) NULL);
-        if (exist_file (tagfile))
+        if (tagfile != NULL && exist_file (tagfile))
             break;
     }
     while (strcmp (path, PATH_SEP_STR) != 0);
