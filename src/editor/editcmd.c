@@ -3630,7 +3630,7 @@ edit_suggest_current_word (WEdit * edit)
                     edit_insert (edit, *new_word);
                 g_free (cp_word);
             }
-            else if (retval == B_ADD_WORD && match_word != NULL)
+            else if (retval == B_ADD_WORD)
                 aspell_add_to_dict (match_word->str, (int) word_len);
         }
 
