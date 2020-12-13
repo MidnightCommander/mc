@@ -2385,14 +2385,11 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
         goto ret_fast;
     }
 
-    if (ctx->do_reget != 0)
+    if (ctx->do_reget != 0 && mc_lseek (src_desc, ctx->do_reget, SEEK_SET) != ctx->do_reget)
     {
-        if (mc_lseek (src_desc, ctx->do_reget, SEEK_SET) != ctx->do_reget)
-        {
-            message (D_ERROR, _("Warning"), _("Reget failed, about to overwrite file"));
-            ctx->do_reget = 0;
-            ctx->do_append = FALSE;
-        }
+        message (D_ERROR, _("Warning"), _("Reget failed, about to overwrite file"));
+        ctx->do_reget = 0;
+        ctx->do_append = FALSE;
     }
 
     while (mc_fstat (src_desc, &src_stat) != 0)
@@ -2418,17 +2415,12 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
     file_size = src_stat.st_size;
 
     open_flags = O_WRONLY;
-    if (dst_exists)
-    {
-        if (ctx->do_append)
-            open_flags |= O_APPEND;
-        else
-            open_flags |= O_CREAT | O_TRUNC;
-    }
-    else
-    {
+    if (!dst_exists)
         open_flags |= O_CREAT | O_EXCL;
-    }
+    else if (ctx->do_append)
+        open_flags |= O_APPEND;
+    else
+        open_flags |= O_CREAT | O_TRUNC;
 
     while ((dest_desc = mc_open (dst_vpath, open_flags, src_mode)) < 0)
     {
@@ -2449,6 +2441,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
         }
         goto ret;
     }
+
     dst_status = DEST_SHORT;    /* file opened, but not fully copied */
 
     appending = ctx->do_append;
@@ -2541,6 +2534,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
         while (TRUE)
         {
             ssize_t n_read = -1, n_written;
+            gboolean force_update;
 
             /* src_read */
             if (mc_ctl (src_desc, VFS_CTL_IS_NOTREADY, 0) == 0)
@@ -2617,28 +2611,23 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
                                                  tv_transfer_start, file_size, n_read_total);
                 tv_last_update = tv_current;
             }
+
             is_first_time = FALSE;
 
             if (update_secs > FILEOP_STALLING_INTERVAL)
-            {
                 stalled_msg = _("(stalled)");
-            }
 
+            force_update =
+                (tv_current.tv_sec - tctx->transfer_start.tv_sec) > FILEOP_UPDATE_INTERVAL;
+
+            if (verbose && ctx->dialog_type == FILEGUI_DIALOG_MULTI_ITEM)
             {
-                gboolean force_update;
-
-                force_update =
-                    (tv_current.tv_sec - tctx->transfer_start.tv_sec) > FILEOP_UPDATE_INTERVAL;
-
-                if (verbose && ctx->dialog_type == FILEGUI_DIALOG_MULTI_ITEM)
-                {
-                    file_progress_show_count (ctx, tctx->progress_count, ctx->progress_count);
-                    file_progress_show_total (tctx, ctx, tctx->copied_bytes, force_update);
-                }
-
-                file_progress_show (ctx, n_read_total + ctx->do_reget, file_size, stalled_msg,
-                                    force_update);
+                file_progress_show_count (ctx, tctx->progress_count, ctx->progress_count);
+                file_progress_show_total (tctx, ctx, tctx->copied_bytes, force_update);
             }
+
+            file_progress_show (ctx, n_read_total + ctx->do_reget, file_size, stalled_msg,
+                                force_update);
             mc_refresh ();
 
             return_status = check_progress_buttons (ctx);
@@ -2687,56 +2676,51 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
                           D_ERROR, 2, _("&Delete"), _("&Keep")) == 0)
             mc_unlink (dst_vpath);
     }
-    else if (dst_status == DEST_FULL)
+    else if (dst_status == DEST_FULL && !appending)
     {
         /* Copy has succeeded */
-        if (!appending && ctx->preserve_uidgid)
+
+        while (ctx->preserve_uidgid && mc_chown (dst_vpath, src_uid, src_gid) != 0
+               && !ctx->skip_all)
         {
-            while (mc_chown (dst_vpath, src_uid, src_gid) != 0 && !ctx->skip_all)
+            temp_status = file_error (TRUE, _("Cannot chown target file \"%s\"\n%s"), dst_path);
+            if (temp_status == FILE_RETRY)
+                continue;
+            if (temp_status == FILE_SKIPALL)
             {
-                temp_status = file_error (TRUE, _("Cannot chown target file \"%s\"\n%s"), dst_path);
-                if (temp_status == FILE_RETRY)
-                    continue;
-                if (temp_status == FILE_SKIPALL)
-                {
-                    ctx->skip_all = TRUE;
-                    return_status = FILE_CONT;
-                }
-                if (temp_status == FILE_SKIP)
-                    return_status = FILE_CONT;
-                break;
+                ctx->skip_all = TRUE;
+                return_status = FILE_CONT;
             }
+            if (temp_status == FILE_SKIP)
+                return_status = FILE_CONT;
+            break;
         }
 
-        if (!appending)
+        while (ctx->preserve && mc_chmod (dst_vpath, (src_mode & ctx->umask_kill)) != 0
+               && !ctx->skip_all)
         {
-            if (ctx->preserve)
+            temp_status = file_error (TRUE, _("Cannot chmod target file \"%s\"\n%s"), dst_path);
+            if (temp_status == FILE_RETRY)
+                continue;
+            if (temp_status == FILE_SKIPALL)
             {
-                while (mc_chmod (dst_vpath, (src_mode & ctx->umask_kill)) != 0 && !ctx->skip_all)
-                {
-                    temp_status =
-                        file_error (TRUE, _("Cannot chmod target file \"%s\"\n%s"), dst_path);
-                    if (temp_status == FILE_RETRY)
-                        continue;
-                    if (temp_status == FILE_SKIPALL)
-                    {
-                        ctx->skip_all = TRUE;
-                        return_status = FILE_CONT;
-                    }
-                    if (temp_status == FILE_SKIP)
-                        return_status = FILE_CONT;
-                    break;
-                }
+                ctx->skip_all = TRUE;
+                return_status = FILE_CONT;
             }
-            else if (!dst_exists)
-            {
-                src_mode = umask (-1);
-                umask (src_mode);
-                src_mode = 0100666 & ~src_mode;
-                mc_chmod (dst_vpath, (src_mode & ctx->umask_kill));
-            }
-            mc_utime (dst_vpath, &times);
+            if (temp_status == FILE_SKIP)
+                return_status = FILE_CONT;
+            break;
         }
+
+        if (!ctx->preserve && !dst_exists)
+        {
+            src_mode = umask (-1);
+            umask (src_mode);
+            src_mode = 0100666 & ~src_mode;
+            mc_chmod (dst_vpath, (src_mode & ctx->umask_kill));
+        }
+
+        mc_utime (dst_vpath, &times);
     }
 
     if (return_status == FILE_CONT)
