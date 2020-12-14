@@ -595,7 +595,7 @@ shell/.sdw
 	Open=@EXTHELPERSDIR@/doc.sh open ooffice
 
 # StarOffice 6 and OpenOffice.org formats
-regex/i/\.(odt|ott|sxw|stw|ods|ots|sxc|stc|odp|otp|sxi|sti|odg|otg|sxd|std|odb|odf|sxm|odm|sxg)$
+regex/i/\.(odt|fodt|ott|sxw|stw|ods|fods|ots|sxc|stc|odp|fodp|otp|sxi|sti|odg|fodg|otg|sxd|std|odb|odf|sxm|odm|sxg)$
 	Open=@EXTHELPERSDIR@/doc.sh open ooffice
 	View=%view{ascii} @EXTHELPERSDIR@/doc.sh view odt
 
