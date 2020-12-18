@@ -91,7 +91,7 @@ static input_colors_t command_colors;
  * @return newly allocated string
  */
 
-static char *
+static GString *
 examine_cd (const char *_path)
 {
     /* *INDENT-OFF* */
@@ -181,7 +181,7 @@ examine_cd (const char *_path)
 
     g_free (path_tilde);
 
-    return g_string_free (q, FALSE);
+    return q;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -424,20 +424,20 @@ do_cd_command (char *orig_cmd)
     }
     else
     {
-        char *path;
+        GString *s_path;
         vfs_path_t *q_vpath;
         gboolean ok;
 
-        path = examine_cd (&cmd[operand_pos]);
+        s_path = examine_cd (cmd + operand_pos);
 
-        if (*path == '\0')
+        if (s_path->len == 0)
             q_vpath = vfs_path_from_str (mc_config_get_home_dir ());
         else
-            q_vpath = vfs_path_from_str_flags (path, VPF_NO_CANON);
+            q_vpath = vfs_path_from_str_flags (s_path->str, VPF_NO_CANON);
 
         ok = do_cd (current_panel, q_vpath, cd_parse_command);
         if (!ok)
-            ok = handle_cdpath (path);
+            ok = handle_cdpath (s_path->str);
 
         if (!ok)
         {
@@ -450,7 +450,7 @@ do_cd_command (char *orig_cmd)
         }
 
         vfs_path_free (q_vpath);
-        g_free (path);
+        g_string_free (s_path, TRUE);
     }
 }
 

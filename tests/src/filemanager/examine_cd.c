@@ -5,7 +5,7 @@
    Free Software Foundation, Inc.
 
    Written by:
-   Andrew Borodin <aborodin@vmail.ru>, 2012
+   Andrew Borodin <aborodin@vmail.ru>, 2012, 2020
    Slava Zanko <slavazanko@gmail.com>, 2013
 
    This file is part of the Midnight Commander.
@@ -120,19 +120,20 @@ teardown (void)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
 #define check_examine_cd(input, etalon) \
 { \
     result = examine_cd (input); \
-    fail_unless (strcmp (result, etalon) == 0, \
-    "\ninput (%s)\nactial (%s) not equal to\netalon (%s)", input, result, etalon); \
-    g_free (result); \
+    fail_unless (strcmp (result->str, etalon) == 0, \
+    "\ninput (%s)\nactial (%s) not equal to\netalon (%s)", input, result->str, etalon); \
+    g_string_free (result, TRUE); \
 }
 
 /* *INDENT-OFF* */
 START_TEST (test_examine_cd)
 /* *INDENT-ON* */
 {
-    char *result;
+    GString *result;
 
     g_setenv ("AAA", "aaa", TRUE);
 
