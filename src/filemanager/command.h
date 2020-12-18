@@ -21,8 +21,8 @@ extern WInput *cmdline;
 
 WInput *command_new (int y, int x, int len);
 void command_set_default_colors (void);
-void do_cd_command (const char *path);
 void command_insert (WInput * in, const char *text, gboolean insert_extra_space);
+void cd_to (const char *path);
 
 /*** inline functions ****************************************************************************/
 #endif /* MC__COMMAND_H */

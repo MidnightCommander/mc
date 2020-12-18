@@ -140,7 +140,7 @@ do_view_cmd (WPanel * panel, gboolean plain_view)
             return;
 
         fname_vpath = vfs_path_from_str (selection (panel)->fname);
-        if (!do_cd (panel, fname_vpath, cd_exact))
+        if (!panel_cd (panel, fname_vpath, cd_exact))
             message (D_ERROR, MSG_ERROR, _("Cannot change directory"));
         vfs_path_free (fname_vpath);
     }
@@ -459,7 +459,7 @@ nice_cd (const char *text, const char *xtext, const char *help,
             create_panel (MENU_PANEL_IDX, view_listing);
 
         cd_vpath = vfs_path_from_str_flags (cd_path, VPF_NO_CANON);
-        if (!do_panel_cd (MENU_PANEL, cd_vpath, cd_parse_command))
+        if (!panel_do_cd (MENU_PANEL, cd_vpath, cd_parse_command))
         {
             message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\""), cd_path);
 
@@ -470,7 +470,7 @@ nice_cd (const char *text, const char *xtext, const char *help,
     }
     g_free (cd_path);
 
-    /* In case of passive panel, restore current VFS directory that was changed in do_panel_cd() */
+    /* In case of passive panel, restore current VFS directory that was changed in panel_do_cd() */
     if (MENU_PANEL != current_panel)
         (void) mc_chdir (current_panel->cwd_vpath);
 }
@@ -1103,7 +1103,7 @@ hotlist_cmd (void)
 
         deprecated_vpath = vfs_path_from_str_flags (target, VPF_USE_DEPRECATED_PARSER);
         deprecated_path = vfs_path_as_str (deprecated_vpath);
-        do_cd_command (deprecated_path);
+        cd_to (deprecated_path);
         vfs_path_free (deprecated_vpath);
     }
 
@@ -1124,7 +1124,7 @@ vfs_list (void)
         return;
 
     target_vpath = vfs_path_from_str (target);
-    if (!do_cd (current_panel, target_vpath, cd_exact))
+    if (!panel_cd (current_panel, target_vpath, cd_exact))
         message (D_ERROR, MSG_ERROR, _("Cannot change directory"));
     vfs_path_free (target_vpath);
     g_free (target);
@@ -1356,7 +1356,7 @@ quick_cd_cmd (WPanel * panel)
 
     p = cd_box (panel);
     if (p != NULL && *p != '\0')
-        do_cd_command (p);
+        cd_to (p);
     g_free (p);
 }
 

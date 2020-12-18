@@ -214,7 +214,7 @@ handle_cdpath (const char *path)
                 vfs_path_t *r_vpath;
 
                 r_vpath = vfs_path_build_filename (p, path, (char *) NULL);
-                result = do_cd (current_panel, r_vpath, cd_parse_command);
+                result = panel_cd (current_panel, r_vpath, cd_parse_command);
                 vfs_path_free (r_vpath);
             }
             *s = c;
@@ -251,7 +251,7 @@ enter (WInput * lc_cmdline)
 
     if (strncmp (cmd, "cd", 2) == 0 && (cmd[2] == '\0' || whitespace (cmd[2])))
     {
-        do_cd_command (cmd + 2);
+        cd_to (cmd + 2);
         input_clean (lc_cmdline);
         return MSG_HANDLED;
     }
@@ -357,7 +357,7 @@ command_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
  */
 
 void
-do_cd_command (const char *path)
+cd_to (const char *path)
 {
     char *p;
 
@@ -416,7 +416,7 @@ do_cd_command (const char *path)
         else
             q_vpath = vfs_path_from_str_flags (s_path->str, VPF_NO_CANON);
 
-        ok = do_cd (current_panel, q_vpath, cd_parse_command);
+        ok = panel_cd (current_panel, q_vpath, cd_parse_command);
         if (!ok)
             ok = handle_cdpath (s_path->str);
         if (!ok)

@@ -63,7 +63,7 @@
 #endif
 
 #include "filemanager.h"        /* current_panel */
-#include "panel.h"              /* do_cd */
+#include "panel.h"              /* panel_cd */
 
 #include "ext.h"
 
@@ -406,7 +406,7 @@ exec_extension_cd (WPanel * panel)
     q[1] = 0;
 
     p_vpath = vfs_path_from_str_flags (pbuffer, VPF_NO_CANON);
-    do_cd (panel, p_vpath, cd_parse_command);
+    panel_cd (panel, p_vpath, cd_parse_command);
     vfs_path_free (p_vpath);
 }
 

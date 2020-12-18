@@ -1,5 +1,5 @@
 /*
-   src/filemanager - tests for do_cd_command() function
+   src/filemanager - tests for cd_to() function
 
    Copyright (C) 2011-2020
    Free Software Foundation, Inc.
@@ -56,7 +56,7 @@ static gboolean do_cd__return_value;
 
 /* @Mock */
 gboolean
-do_cd (WPanel * panel, const vfs_path_t * new_dir_vpath, enum cd_enum cd_type)
+panel_cd (WPanel * panel, const vfs_path_t * new_dir_vpath, enum cd_enum cd_type)
 {
     (void) panel;
 
@@ -141,7 +141,7 @@ START_PARAMETRIZED_TEST (test_empty_mean_home, test_empty_mean_home_ds)
         char *input_command;
 
         input_command = g_strdup (data->command);
-        do_cd_command (input_command);
+        cd_to (input_command);
         g_free (input_command);
     }
     /* then */
@@ -172,7 +172,7 @@ main (void)
 
     suite_add_tcase (s, tc_core);
     sr = srunner_create (s);
-    srunner_set_log (sr, "do_cd_command.log");
+    srunner_set_log (sr, "cd_to.log");
     srunner_run_all (sr, CK_ENV);
     number_failed = srunner_ntests_failed (sr);
     srunner_free (sr);

@@ -1902,7 +1902,7 @@ find_cmd (WPanel * panel)
                 vfs_path_t *dirname_vpath;
 
                 dirname_vpath = vfs_path_from_str (dirname);
-                do_cd (panel, dirname_vpath, cd_exact);
+                panel_cd (panel, dirname_vpath, cd_exact);
                 vfs_path_free (dirname_vpath);
                 if (filename != NULL)
                     try_to_select (panel,
@@ -1914,7 +1914,7 @@ find_cmd (WPanel * panel)
                 vfs_path_t *filename_vpath;
 
                 filename_vpath = vfs_path_from_str (filename);
-                do_cd (panel, filename_vpath, cd_exact);
+                panel_cd (panel, filename_vpath, cd_exact);
                 vfs_path_free (filename_vpath);
             }
         }
