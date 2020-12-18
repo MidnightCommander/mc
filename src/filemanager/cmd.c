@@ -1099,14 +1099,12 @@ hotlist_cmd (void)
     else
     {
         vfs_path_t *deprecated_vpath;
-        char *cmd;
+        const char *deprecated_path;
 
         deprecated_vpath = vfs_path_from_str_flags (target, VPF_USE_DEPRECATED_PARSER);
-        cmd = g_strconcat ("cd ", vfs_path_as_str (deprecated_vpath), (char *) NULL);
+        deprecated_path = vfs_path_as_str (deprecated_vpath);
+        do_cd_command (deprecated_path);
         vfs_path_free (deprecated_vpath);
-
-        do_cd_command (cmd);
-        g_free (cmd);
     }
 
     g_free (target);
@@ -1358,13 +1356,7 @@ quick_cd_cmd (WPanel * panel)
 
     p = cd_box (panel);
     if (p != NULL && *p != '\0')
-    {
-        char *q;
-
-        q = g_strconcat ("cd ", p, (char *) NULL);
-        do_cd_command (q);
-        g_free (q);
-    }
+        do_cd_command (p);
     g_free (p);
 }
 

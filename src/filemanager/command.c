@@ -64,8 +64,6 @@ WInput *cmdline;
 
 /*** file scope macro definitions ****************************************************************/
 
-#define CD_OPERAND_OFFSET 3
-
 /*** file scope type declarations ****************************************************************/
 
 /*** file scope variables ************************************************************************/
@@ -251,9 +249,9 @@ enter (WInput * lc_cmdline)
     if (*cmd == '\0')
         return MSG_HANDLED;
 
-    if (strncmp (cmd, "cd ", 3) == 0 || strcmp (cmd, "cd") == 0)
+    if (strncmp (cmd, "cd", 2) == 0 && (cmd[2] == '\0' || whitespace (cmd[2])))
     {
-        do_cd_command (cmd);
+        do_cd_command (cmd + 2);
         input_clean (lc_cmdline);
         return MSG_HANDLED;
     }
@@ -353,49 +351,34 @@ command_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-/** Execute the cd command on the command line
+/** Execute the cd command to specified path
  *
- * @param orig_cmd command for execution
+ * @param path path to cd
  */
 
 void
-do_cd_command (char *orig_cmd)
+do_cd_command (const char *path)
 {
-    int len;
-    int operand_pos = CD_OPERAND_OFFSET;
-    const char *cmd;
+    char *p;
 
-    /* Any final whitespace should be removed here
-       (to see why, try "cd fred "). */
+    /* Remove leading whitespaces. */
+    /* Any final whitespace should be removed here (to see why, try "cd fred "). */
     /* NOTE: I think we should not remove the extra space,
        that way, we can cd into hidden directories */
     /* FIXME: what about interpreting quoted strings like the shell.
        so one could type "cd <tab> M-a <enter>" and it would work. */
-    len = strlen (orig_cmd) - 1;
-    while (len >= 0 && whiteness (orig_cmd[len]))
-    {
-        orig_cmd[len] = '\0';
-        len--;
-    }
-
-    cmd = orig_cmd;
-    if (cmd[CD_OPERAND_OFFSET - 1] == '\0')
-        cmd = "cd ";            /* 0..2 => given text, 3 => \0 */
-
-    /* allow any amount of white space in front of the path operand */
-    while (whitespace (cmd[operand_pos]))
-        operand_pos++;
+    p = g_strstrip (g_strdup (path));
 
     if (get_current_type () == view_tree)
     {
         vfs_path_t *new_vpath = NULL;
 
-        if (cmd[0] == '\0')
+        if (p[0] == '\0')
         {
             new_vpath = vfs_path_from_str (mc_config_get_home_dir ());
             sync_tree (new_vpath);
         }
-        else if (DIR_IS_DOTDOT (cmd + operand_pos))
+        else if (DIR_IS_DOTDOT (p))
         {
             if (vfs_path_elements_count (current_panel->cwd_vpath) != 1 ||
                 strlen (vfs_path_get_by_index (current_panel->cwd_vpath, 0)->path) > 1)
@@ -410,12 +393,10 @@ do_cd_command (char *orig_cmd)
         }
         else
         {
-            if (IS_PATH_SEP (cmd[operand_pos]))
-                new_vpath = vfs_path_from_str (cmd + operand_pos);
+            if (IS_PATH_SEP (*p))
+                new_vpath = vfs_path_from_str (p);
             else
-                new_vpath =
-                    vfs_path_append_new (current_panel->cwd_vpath, cmd + operand_pos,
-                                         (char *) NULL);
+                new_vpath = vfs_path_append_new (current_panel->cwd_vpath, p, (char *) NULL);
 
             sync_tree (new_vpath);
         }
@@ -428,7 +409,7 @@ do_cd_command (char *orig_cmd)
         vfs_path_t *q_vpath;
         gboolean ok;
 
-        s_path = examine_cd (cmd + operand_pos);
+        s_path = examine_cd (p);
 
         if (s_path->len == 0)
             q_vpath = vfs_path_from_str (mc_config_get_home_dir ());
@@ -438,7 +419,6 @@ do_cd_command (char *orig_cmd)
         ok = do_cd (current_panel, q_vpath, cd_parse_command);
         if (!ok)
             ok = handle_cdpath (s_path->str);
-
         if (!ok)
         {
             char *d;
@@ -452,6 +432,8 @@ do_cd_command (char *orig_cmd)
         vfs_path_free (q_vpath);
         g_string_free (s_path, TRUE);
     }
+
+    g_free (p);
 }
 
 /* --------------------------------------------------------------------------------------------- */

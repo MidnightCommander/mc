@@ -6,6 +6,7 @@
 
    Written by:
    Slava Zanko <slavazanko@gmail.com>, 2011, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2019, 2020
 
    This file is part of the Midnight Commander.
 
@@ -111,16 +112,16 @@ static const struct test_empty_mean_home_ds
 } test_empty_mean_home_ds[] =
 {
     {
-        "cd"
+        ""
     },
     {
-        "cd                      "
+        "                      "
     },
     {
-        "cd\t\t\t\t\t\t\t\t\t\t\t"
+        "\t\t\t\t\t\t\t\t\t\t\t"
     },
     {
-        "cd  \t   \t  \t\t    \t    "
+        "  \t   \t  \t\t    \t    "
     },
 };
 /* *INDENT-ON* */
