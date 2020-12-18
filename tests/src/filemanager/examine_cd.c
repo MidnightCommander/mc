@@ -30,23 +30,10 @@
 
 #include <stdio.h>
 
-#include "lib/vfs/path.h"
-#include "src/filemanager/layout.h"
-#include "src/filemanager/filemanager.h"
-#include "src/filemanager/tree.h"
-#ifdef ENABLE_SUBSHELL
-#include "src/subshell/subshell.h"
-#endif /* ENABLE_SUBSHELL */
-
-#include "src/filemanager/command.c"
+#include "src/filemanager/cd.c"
 
 /* --------------------------------------------------------------------------------------------- */
 
-gboolean command_prompt = FALSE;
-#ifdef ENABLE_SUBSHELL
-enum subshell_state_enum subshell_state = INACTIVE;
-#endif /* ENABLE_SUBSHELL */
-int quit = 0;
 WPanel *current_panel = NULL;
 
 panel_view_mode_t
@@ -63,42 +50,6 @@ panel_cd (WPanel * panel, const vfs_path_t * new_dir_vpath, enum cd_enum cd_type
     (void) cd_type;
 
     return TRUE;
-}
-
-gboolean
-quiet_quit_cmd (void)
-{
-    return FALSE;
-}
-
-char *
-expand_format (const WEdit * edit_widget, char c, gboolean do_quote)
-{
-    (void) edit_widget;
-    (void) c;
-    (void) do_quote;
-
-    return NULL;
-}
-
-#ifdef ENABLE_SUBSHELL
-void
-init_subshell (void)
-{
-}
-
-gboolean
-do_load_prompt (void)
-{
-    return TRUE;
-}
-#endif /* ENABLE_SUBSHELL */
-
-void
-shell_execute (const char *command, int flags)
-{
-    (void) command;
-    (void) flags;
 }
 
 void

@@ -1,11 +1,9 @@
-/** \file command.h
- *  \brief Header: command line widget
+/** \file cd.h
+ *  \brief Header: cd function
  */
 
-#ifndef MC__COMMAND_H
-#define MC__COMMAND_H
-
-#include "lib/widget.h"
+#ifndef MC__CD_H
+#define MC__CD_H
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -15,13 +13,10 @@
 
 /*** global variables defined in .c file *********************************************************/
 
-extern WInput *cmdline;
-
 /*** declarations of public functions ************************************************************/
 
-WInput *command_new (int y, int x, int len);
-void command_set_default_colors (void);
-void command_insert (WInput * in, const char *text, gboolean insert_extra_space);
+void cd_to (const char *path);
 
 /*** inline functions ****************************************************************************/
-#endif /* MC__COMMAND_H */
+
+#endif /* MC__CD_H */

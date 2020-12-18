@@ -91,6 +91,7 @@
 #include "ext.h"                /* regex_command() */
 #include "boxes.h"              /* cd_box() */
 #include "dir.h"
+#include "cd.h"                 /* cd_to() */
 
 #include "cmd.h"                /* Our definitions */
 

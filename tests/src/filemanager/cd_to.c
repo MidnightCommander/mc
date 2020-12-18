@@ -30,7 +30,7 @@
 
 #include "src/vfs/local/local.c"
 
-#include "src/filemanager/command.c"
+#include "src/filemanager/cd.c"
 #include "src/filemanager/panel.h"
 
 /* --------------------------------------------------------------------------------------------- */
