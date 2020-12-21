@@ -663,7 +663,7 @@ x_basename (const char *s)
     {
         /* avoid trailing PATH_SEP, if present */
         if (!IS_PATH_SEP (s[strlen (s) - 1]))
-            return (path_sep != NULL) ? path_sep + 1 : s;
+            return path_sep + 1;
 
         while (--path_sep > s && !IS_PATH_SEP (*path_sep))
             ;
