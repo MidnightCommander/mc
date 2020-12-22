@@ -492,6 +492,7 @@ overwrite_query_dialog (file_op_context_t * ctx, enum OperationMode mode)
 
     vfs_path_t *p;
     char *s1;
+    const char *cs1;
     char s2[BUF_SMALL];
     int w, bw1, bw2;
     unsigned short i;
@@ -528,8 +529,8 @@ overwrite_query_dialog (file_op_context_t * ctx, enum OperationMode mode)
     size_trunc_len (s2, sizeof (s2), ui->src_stat->st_size, 0, panels_options.kilobyte_si);
     NEW_LABEL (2, s2);
     /* new file modification date & time */
-    s1 = (char *) file_date (ui->src_stat->st_mtime);
-    NEW_LABEL (3, s1);
+    cs1 = file_date (ui->src_stat->st_mtime);
+    NEW_LABEL (3, cs1);
 
     /* existing file */
     NEW_LABEL (4, dlg_widgets[4].text);
@@ -543,8 +544,8 @@ overwrite_query_dialog (file_op_context_t * ctx, enum OperationMode mode)
     size_trunc_len (s2, sizeof (s2), ui->dst_stat->st_size, 0, panels_options.kilobyte_si);
     NEW_LABEL (6, s2);
     /* existing file modification date & time */
-    s1 = (char *) file_date (ui->dst_stat->st_mtime);
-    NEW_LABEL (7, s1);
+    cs1 = file_date (ui->dst_stat->st_mtime);
+    NEW_LABEL (7, cs1);
 
     /* will "Append" and "Reget" buttons be in the dialog? */
     do_append = !S_ISDIR (ui->dst_stat->st_mode);
