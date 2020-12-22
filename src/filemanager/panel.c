@@ -3834,7 +3834,7 @@ panel_mouse_is_on_item (const WPanel * panel, int y, int x)
     {
         int width, lines;
 
-        width = (WIDGET (panel)->cols - 2) / panel->list_cols;
+        width = (CONST_WIDGET (panel)->cols - 2) / panel->list_cols;
         lines = panel_lines (panel);
         y += lines * (x / width);
     }

@@ -390,6 +390,7 @@ sftpfs_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2, GError ** 
     sftpfs_super_t *super = NULL;
     const vfs_path_element_t *path_element1;
     const vfs_path_element_t *path_element2 = NULL;
+    const char *ctmp_path;
     char *tmp_path;
     unsigned int tmp_path_len;
     int res;
@@ -397,8 +398,8 @@ sftpfs_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2, GError ** 
     if (!sftpfs_op_init (&super, &path_element2, vpath2, mcerror))
         return -1;
 
-    tmp_path = (char *) sftpfs_fix_filename (path_element2->path, &tmp_path_len);
-    tmp_path = g_strndup (tmp_path, tmp_path_len);
+    ctmp_path = sftpfs_fix_filename (path_element2->path, &tmp_path_len);
+    tmp_path = g_strndup (ctmp_path, tmp_path_len);
 
     path_element1 = vfs_path_get_by_index (vpath1, -1);
 
@@ -591,6 +592,7 @@ sftpfs_rename (const vfs_path_t * vpath1, const vfs_path_t * vpath2, GError ** m
     sftpfs_super_t *super = NULL;
     const vfs_path_element_t *path_element1;
     const vfs_path_element_t *path_element2 = NULL;
+    const char *ctmp_path;
     char *tmp_path;
     unsigned int tmp_path_len;
     int res;
@@ -598,8 +600,8 @@ sftpfs_rename (const vfs_path_t * vpath1, const vfs_path_t * vpath2, GError ** m
     if (!sftpfs_op_init (&super, &path_element2, vpath2, mcerror))
         return -1;
 
-    tmp_path = (char *) sftpfs_fix_filename (path_element2->path, &tmp_path_len);
-    tmp_path = g_strndup (tmp_path, tmp_path_len);
+    ctmp_path = sftpfs_fix_filename (path_element2->path, &tmp_path_len);
+    tmp_path = g_strndup (ctmp_path, tmp_path_len);
 
     path_element1 = vfs_path_get_by_index (vpath1, -1);
 
