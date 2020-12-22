@@ -307,5 +307,8 @@ include cobol.syntax
 file ..\*\\.kt$ Kotliin\sSource
 include kotlin.syntax
 
+file ..\*\\.swift$ Swift\sProgram
+include swift.syntax
+
 file .\* unknown
 include unknown.syntax

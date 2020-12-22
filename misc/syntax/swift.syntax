@@ -1,0 +1,223 @@
+define keywords yellow
+define attributes yellow
+define operators brightcyan
+define comments red
+define strings green
+define escapedchars brightgreen
+define interpolation brightgreen
+define unicode brightgreen
+define brackets brightcyan
+define punctuation brightcyan
+define range brightcyan
+define semicolon brightmagenta
+define compilerstatements brightred
+
+context default
+    keyword whole associatedtype keywords
+    keyword whole class keywords
+    keyword whole deinit keywords
+    keyword whole enum keywords
+    keyword whole extension keywords
+    keyword whole fileprivate keywords
+    keyword whole func keywords
+    keyword whole import keywords
+    keyword whole init keywords
+    keyword whole inout keywords
+    keyword whole internal keywords
+    keyword whole let keywords
+    keyword whole open keywords
+    keyword whole operator keywords
+    keyword whole private keywords
+    keyword whole protocol keywords
+    keyword whole public keywords
+    keyword whole rethrows keywords
+    keyword whole static keywords
+    keyword whole struct keywords
+    keyword whole subscript keywords
+    keyword whole typealias keywords
+    keyword whole var keywords
+
+    keyword whole break keywords
+    keyword whole case keywords
+    keyword whole continue keywords
+    keyword whole default keywords
+    keyword whole defer keywords
+    keyword whole do keywords
+    keyword whole else keywords
+    keyword whole fallthrough keywords
+    keyword whole for keywords
+    keyword whole guard keywords
+    keyword whole if keywords
+    keyword whole in keywords
+    keyword whole repeat keywords
+    keyword whole return keywords
+    keyword whole switch keywords
+    keyword whole where keywords
+    keyword whole while keywords
+
+    keyword whole as keywords
+    keyword whole catch keywords
+    keyword whole false keywords
+    keyword whole is keywords
+    keyword whole nil keywords
+    keyword whole self keywords
+    keyword whole Self keywords
+    keyword whole super keywords
+    keyword whole throws keywords
+    keyword whole throw keywords
+    keyword whole true keywords
+    keyword whole try keywords
+
+    keyword whole associativity keywords
+    keyword whole convenience keywords
+    keyword whole didSet keywords
+    keyword whole dynamic keywords
+    keyword whole final keywords
+    keyword whole get keywords
+    keyword whole indirect keywords
+    keyword whole infix keywords
+    keyword whole lazy keywords
+    keyword whole left keywords
+    keyword whole mutating keywords
+    keyword whole none keywords
+    keyword whole nonmutating keywords
+    keyword whole optional keywords
+    keyword whole override keywords
+    keyword whole postfix keywords
+    keyword whole precedence keywords
+    keyword whole prefix keywords
+    keyword whole Protocol keywords
+    keyword whole required keywords
+    keyword whole right keywords
+    keyword whole set keywords
+    keyword whole Type keywords
+    keyword whole unowned keywords
+    keyword whole weak keywords
+    keyword whole willSet keywords
+
+    keyword whole Any keywords
+    keyword whole Bool keywords
+    keyword whole Double keywords
+    keyword whole Float keywords
+    keyword whole Character keywords
+    keyword whole Int keywords
+    keyword whole Int16 keywords
+    keyword whole Int32 keywords
+    keyword whole Int64 keywords
+    keyword whole Int8 keywords
+    keyword whole String keywords
+    keyword whole UInt keywords
+    keyword whole UInt16 keywords
+    keyword whole UInt32 keywords
+    keyword whole UInt64 keywords
+    keyword whole UInt8 keywords
+
+    keyword whole assert keywords
+    keyword whole precondition keywords
+
+    keyword // comments
+    keyword /\* comments
+    keyword *\*/ comments
+
+    keyword > operators
+    keyword < operators
+    keyword \+ operators
+    keyword - operators
+    keyword \* operators
+    keyword / operators
+    keyword % operators
+    keyword = operators
+    keyword != operators
+    keyword == operators
+    keyword | operators
+    keyword & operators
+    keyword ^ operators
+    keyword ~ operators
+    keyword ! operators
+    keyword whole _ operatots
+    keyword { brackets
+    keyword } brackets
+    keyword ( brackets
+    keyword ) brackets
+    keyword [ brackets
+    keyword ] brackets
+    keyword . punctuation
+    keyword , punctuation
+    keyword : punctuation
+    keyword ? punctuation
+    keyword ... range
+    keyword ..< range
+    keyword ; semicolon
+
+    keyword `*` base
+
+    keyword whole @available attributes
+    keyword whole @escaping attributes
+    keyword whole @unavailable attributes
+    keyword whole @introduced attributes
+    keyword whole @deprecated attributes
+    keyword whole @obsolete attributes
+    keyword whole @message attributes
+    keyword whole @main attributes
+    keyword whole @renamed attributes
+    keyword whole @discardableResult attributes
+    keyword whole @dynamicCallable attributes
+    keyword whole @dynamicMemberLookup attributes
+    keyword whole @frozen attributes
+    keyword whole @GKInspectable attributes
+    keyword whole @inlinable attributes
+    keyword whole @nonobjc attributes
+    keyword whole @NSApplicationMain attributes
+    keyword whole @NSCopying attributes
+    keyword whole @objc attributes
+    keyword whole @NSManaged attributes
+    keyword whole @objcMembers attributes
+    keyword whole @propertyWrapper attributes
+    keyword whole @requires_stored_property_inits attributes
+    keyword whole @testable attributes
+    keyword whole @UIApplicationMain attributes
+    keyword whole @usableFromInline attributes
+    keyword whole @warn_unqualified_access attributes
+    keyword whole @autoclosure attributes
+    keyword whole @convention attributes
+    keyword whole @escaping attributes
+    keyword whole @unknown attributes
+
+
+context exclusive /\* \*/ comments
+    spellcheck
+
+
+context exclusive // \n comments
+    spellcheck
+
+
+context linestart # \n compilerstatements
+
+
+context #""" """# string
+    spellcheck
+    keyword \\(*) interpolation
+    keyword \\\{0tnr"'\\\} escapedchars
+    keyword \\u{*} unicode
+
+
+context """ """ string
+    spellcheck
+    keyword \\(*) interpolation
+    keyword \\\{0tnr"'\\\} escapedchars
+    keyword \\u{*} unicode
+
+
+context #" "# string
+    spellcheck
+    keyword \\(*) interpolation
+    keyword \\\{0tnr"'\\\} escapedchars
+    keyword \\u{*} unicode
+
+
+context " " string
+    spellcheck
+    keyword \\(*) interpolation
+    keyword \\\{0tnr"'\\\} escapedchars
+    keyword \\u{*} unicode
