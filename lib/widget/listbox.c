@@ -339,6 +339,8 @@ static cb_ret_t
 listbox_key (WListbox * l, int key)
 {
     long command;
+    char text[2] = {0};
+    int idx = 0;
 
     if (l->list == NULL)
         return MSG_NOT_HANDLED;
@@ -348,7 +350,13 @@ listbox_key (WListbox * l, int key)
     {
         listbox_select_entry (l, key - '0');
         return MSG_HANDLED;
+    } else if(key >= 'a' && key <= 'z') {
+        text[0] = key;
+        idx = listbox_search_first_text(l, text);
+        listbox_select_entry(l, idx);
+        return MSG_HANDLED;
     }
+
 
     command = widget_lookup_key (WIDGET (l), key);
     if (command == CK_IgnoreKey)
@@ -587,6 +595,32 @@ listbox_search_text (WListbox * l, const char *text)
             WLEntry *e = LENTRY (le->data);
 
             if (strcmp (e->text, text) == 0)
+                return i;
+        }
+    }
+
+    return (-1);
+}
+
+/**
+ * Finds item by its label.
+ */
+int
+listbox_search_first_text (WListbox * l, const char *text)
+{
+    size_t text_len = strlen(text);
+
+    if (!listbox_is_empty (l))
+    {
+        int i;
+        GList *le;
+
+        for (i = 0, le = g_queue_peek_head_link (l->list); le != NULL; i++, le = g_list_next (le))
+        {
+            WLEntry *e = LENTRY (le->data);
+
+            // limit compare size, to avoid check for full string
+            if (strncmp (e->text, text, text_len) == 0)
                 return i;
         }
     }
