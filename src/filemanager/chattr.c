@@ -394,7 +394,7 @@ chattr_toggle_select (const WChattrBoxes * cb, int Id)
     Widget *w;
 
     /* find checkbox */
-    w = WIDGET (g_list_nth_data (GROUP (cb)->widgets, Id - cb->top));
+    w = WIDGET (g_list_nth_data (CONST_GROUP (cb)->widgets, Id - cb->top));
 
     check_attr[Id].selected = !check_attr[Id].selected;
 
@@ -511,7 +511,7 @@ checkboxes_save_state (const WChattrBoxes * cb)
     int i;
     GList *l;
 
-    for (i = cb->top, l = GROUP (cb)->widgets; l != NULL; i++, l = g_list_next (l))
+    for (i = cb->top, l = CONST_GROUP (cb)->widgets; l != NULL; i++, l = g_list_next (l))
     {
         int m;
 
