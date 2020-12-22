@@ -887,7 +887,7 @@ extfs_get_archive_name (const struct extfs_super_t *archive)
     if (archive->local_name != NULL)
         archive_name = archive->local_name;
     else
-        archive_name = VFS_SUPER (archive)->name;
+        archive_name = CONST_VFS_SUPER (archive)->name;
 
     if (archive_name == NULL || *archive_name == '\0')
         return g_strdup ("no_archive_name");
