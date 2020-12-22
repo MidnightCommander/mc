@@ -1121,7 +1121,8 @@ pipe_mail (const edit_buffer_t * buf, char *to, char *subject, char *cc)
         off_t i;
 
         for (i = 0; i < buf->size; i++)
-            fputc (edit_buffer_get_byte (buf, i), p);
+            if (fputc (edit_buffer_get_byte (buf, i), p) < 0)
+                break;
         pclose (p);
     }
 }
