@@ -195,7 +195,7 @@ group_default_find (const Widget * w, const Widget * what)
     {
         GList *iter;
 
-        for (iter = GROUP (w)->widgets; iter != NULL; iter = g_list_next (iter))
+        for (iter = CONST_GROUP (w)->widgets; iter != NULL; iter = g_list_next (iter))
         {
             w0 = widget_find (WIDGET (iter->data), what);
             if (w0 != NULL)
@@ -227,7 +227,7 @@ group_default_find_by_type (const Widget * w, widget_cb_fn cb)
     {
         GList *iter;
 
-        for (iter = GROUP (w)->widgets; iter != NULL; iter = g_list_next (iter))
+        for (iter = CONST_GROUP (w)->widgets; iter != NULL; iter = g_list_next (iter))
         {
             w0 = widget_find_by_type (WIDGET (iter->data), cb);
             if (w0 != NULL)
@@ -259,7 +259,7 @@ group_default_find_by_id (const Widget * w, unsigned long id)
     {
         GList *iter;
 
-        for (iter = GROUP (w)->widgets; iter != NULL; iter = g_list_next (iter))
+        for (iter = CONST_GROUP (w)->widgets; iter != NULL; iter = g_list_next (iter))
         {
             w0 = widget_find_by_id (WIDGET (iter->data), id);
             if (w0 != NULL)
