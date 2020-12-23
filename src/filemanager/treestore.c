@@ -269,7 +269,7 @@ tree_store_load_from (const char *name)
                         vfs_path_t *vpath;
 
                         vpath = vfs_path_from_str (oldname);
-                        strcpy (oldname + common, different);
+                        g_strlcpy (oldname + common, different, sizeof (oldname) - (size_t) common);
                         if (vfs_file_is_local (vpath))
                         {
                             vfs_path_t *tmp_vpath;
@@ -294,7 +294,7 @@ tree_store_load_from (const char *name)
                     e->scanned = scanned;
                 }
                 vfs_path_free (vpath);
-                strcpy (oldname, lc_name);
+                g_strlcpy (oldname, lc_name, sizeof (oldname));
             }
             g_free (lc_name);
         }
