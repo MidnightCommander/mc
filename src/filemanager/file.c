@@ -2566,12 +2566,6 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
 
                 n_read_total += n_read;
 
-                /* Windows NT ftp servers report that files have no
-                 * permissions: -------, so if we happen to have actually
-                 * read something, we should fix the permissions.
-                 */
-                if ((src_mode & (S_IRWXU | S_IRWXG | S_IRWXO)) == 0)
-                    src_mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
                 gettimeofday (&tv_last_input, NULL);
 
                 /* dst_write */
