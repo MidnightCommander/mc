@@ -242,7 +242,7 @@ tree_store_load_from (const char *name)
             char *lc_name;
 
             /* Skip invalid records */
-            if ((buffer[0] != '0' && buffer[0] != '1'))
+            if (buffer[0] != '0' && buffer[0] != '1')
                 continue;
 
             if (buffer[1] != ':')
