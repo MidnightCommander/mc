@@ -1193,7 +1193,7 @@ create_panel (int num, panel_view_mode_t type)
 
     /* We use replace to keep the circular list of the dialog in the */
     /* same state.  Maybe we could just kill it and then replace it  */
-    if ((midnight_dlg != NULL) && (old_widget != NULL))
+    if (old_widget != NULL)
     {
         if (old_type == view_listing)
         {
