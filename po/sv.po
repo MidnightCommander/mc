@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"POT-Creation-Date: 2020-12-31 16:34+0300\n"
 "PO-Revision-Date: 2020-05-17 17:42+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Swedish (http://www.transifex.com/mc/mc/language/sv/)\n"
@@ -1982,6 +1982,9 @@ msgstr "Inställningar"
 msgid "Skin:"
 msgstr "Tema:"
 
+msgid "&Shadows"
+msgstr ""
+
 msgid "Appearance"
 msgstr "Utseende"
 
@@ -2205,6 +2208,14 @@ msgstr "Användarnamn:"
 msgid "SMB authentication"
 msgstr "SMB-autentisering"
 
+#, c-format
+msgid ""
+"Cannot chdir to \"%s\"\n"
+"%s"
+msgstr ""
+"Chdir till \"%s\" misslyckades\n"
+"%s"
+
 msgid "Secure deletion"
 msgstr ""
 
@@ -2264,6 +2275,10 @@ msgstr ""
 
 msgid "No COW"
 msgstr ""
+
+#, fuzzy
+msgid "Direct access for files"
+msgstr "Katalogcache för gammal för %s"
 
 msgid "Casefolded file"
 msgstr ""
@@ -2540,14 +2555,6 @@ msgstr "Inställningar kunde inte sparas till %s"
 
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "Kommandon kan inte exekveras på ickelokala filsystem"
-
-#, c-format
-msgid ""
-"Cannot chdir to \"%s\"\n"
-"%s"
-msgstr ""
-"Chdir till \"%s\" misslyckades\n"
-"%s"
 
 msgid "Parameter"
 msgstr "Parameter"
@@ -3083,6 +3090,225 @@ msgstr "&Bakgrund"
 msgid "Invalid source pattern '%s'"
 msgstr "Otillåtet källfilter '%s'"
 
+msgid "File listin&g"
+msgstr "Fillist&a"
+
+msgid "&Quick view"
+msgstr "Fil&vy"
+
+msgid "&Info"
+msgstr "&Info"
+
+msgid "&Tree"
+msgstr "&Träd"
+
+msgid "&Listing format..."
+msgstr "&Listformat..."
+
+msgid "&Sort order..."
+msgstr "&Sorteringsordning..."
+
+msgid "&Filter..."
+msgstr "&Filter..."
+
+msgid "&Encoding..."
+msgstr "Tecken&översättning..."
+
+msgid "FT&P link..."
+msgstr "FT&P-länk..."
+
+msgid "S&hell link..."
+msgstr "S&kallänk..."
+
+msgid "S&FTP link..."
+msgstr "SFTP-l&änk..."
+
+msgid "SM&B link..."
+msgstr "SM&B-länk..."
+
+msgid "Paneli&ze"
+msgstr "Pa&nelisera"
+
+msgid "&Rescan"
+msgstr "Läs in i&gen"
+
+msgid "&View"
+msgstr "&Visa"
+
+msgid "Vie&w file..."
+msgstr "Visa &fil..."
+
+msgid "&Filtered view"
+msgstr "Filtrerad v&y"
+
+msgid "&Copy"
+msgstr "&Kopiera"
+
+msgid "C&hmod"
+msgstr "C&hmod"
+
+msgid "&Link"
+msgstr "&Länk"
+
+msgid "&Symlink"
+msgstr "&Symlänk"
+
+msgid "Relative symlin&k"
+msgstr "&Relativ symlänk"
+
+msgid "Edit s&ymlink"
+msgstr "Redigera sy&mlänk"
+
+msgid "Ch&own"
+msgstr "Ch&own"
+
+msgid "&Advanced chown"
+msgstr "Ava&ncerad chown"
+
+msgid "Cha&ttr"
+msgstr ""
+
+msgid "&Rename/Move"
+msgstr "&Döp om/flytta"
+
+msgid "&Mkdir"
+msgstr "Ska&pa katalog"
+
+msgid "&Quick cd"
+msgstr "Snabb &cd"
+
+msgid "Select &group"
+msgstr "Välj &grupp"
+
+msgid "U&nselect group"
+msgstr "Välj &bort grupp"
+
+msgid "&Invert selection"
+msgstr "&Invertera markering"
+
+msgid "E&xit"
+msgstr "&Avsluta"
+
+msgid "&User menu"
+msgstr "&Användarmeny"
+
+msgid "&Directory tree"
+msgstr "Katalogtr&äd"
+
+msgid "&Find file"
+msgstr "&Sök fil"
+
+msgid "S&wap panels"
+msgstr "B&yt plats på paneler"
+
+msgid "Switch &panels on/off"
+msgstr "&Ta bort/fram paneler"
+
+msgid "&Compare directories"
+msgstr "Jämför &kataloger"
+
+msgid "C&ompare files"
+msgstr "&Jämför filer"
+
+msgid "E&xternal panelize"
+msgstr "&Panelisera externt kommando"
+
+msgid "Show directory s&izes"
+msgstr "V&isa katalogstorlekar"
+
+msgid "Command &history"
+msgstr "Kommando-&historik"
+
+msgid "Viewed/edited files hi&story"
+msgstr "Hi&storik över visade/redigerade filer"
+
+msgid "Di&rectory hotlist"
+msgstr "Katalog&favoriter"
+
+msgid "&Active VFS list"
+msgstr "Aktiv &VFS-lista"
+
+msgid "&Background jobs"
+msgstr "&Bakgrundsjobb"
+
+msgid "Screen lis&t"
+msgstr "Skä&rmlista"
+
+msgid "&Undelete files (ext2fs only)"
+msgstr "&Återskapa raderade filer (endast ext2fs)"
+
+msgid "&Listing format edit"
+msgstr "Redigera &listningsformatet"
+
+msgid "Edit &extension file"
+msgstr "Redigera &utökningsfil"
+
+msgid "Edit &menu file"
+msgstr "Redigera &menyfilen"
+
+msgid "Edit hi&ghlighting group file"
+msgstr "Redigera &gruppmarkeringsfil"
+
+msgid "&Configuration..."
+msgstr "K&onfiguration..."
+
+msgid "&Layout..."
+msgstr "&Layout..."
+
+msgid "&Panel options..."
+msgstr "&Panelalternativ..."
+
+msgid "C&onfirmation..."
+msgstr "&Konfirmera..."
+
+msgid "&Appearance..."
+msgstr "&Utseende..."
+
+msgid "&Display bits..."
+msgstr "&Displaybitar..."
+
+msgid "&Virtual FS..."
+msgstr "&Virtuellt FS..."
+
+msgid "Panels:"
+msgstr "Paneler:"
+
+#, c-format
+msgid "You have %zu opened screen. Quit anyway?"
+msgid_plural "You have %zu opened screens. Quit anyway?"
+msgstr[0] "Du har %zu öppnad skärm. Avsluta ändå?"
+msgstr[1] "Du har %zu öppnade skärmar. Avsluta ändå?"
+
+msgid "The Midnight Commander"
+msgstr "The Midnight Commander"
+
+msgid "Do you really want to quit the Midnight Commander?"
+msgstr "Vill du verkligen avsluta Midnight Commander?"
+
+msgid "&Above"
+msgstr "&Över"
+
+msgid "&Left"
+msgstr "&Vänster"
+
+msgid "&Below"
+msgstr "&Under"
+
+msgid "&Right"
+msgstr "&Höger"
+
+msgid "ButtonBar|Menu"
+msgstr "ButtonBar|Meny"
+
+msgid "ButtonBar|View"
+msgstr "ButtonBar|Visa"
+
+msgid "ButtonBar|RenMov"
+msgstr "ButtonBar|DöpFly"
+
+msgid "ButtonBar|Mkdir"
+msgstr "ButtonBar|NyKat"
+
 msgid "&Chdir"
 msgstr "&Byt katalog"
 
@@ -3128,9 +3354,6 @@ msgstr "A&lla teckenöversättningar"
 
 msgid "Fir&st hit"
 msgstr "F&örsta träff"
-
-msgid "&Tree"
-msgstr "&Träd"
 
 msgid "Find File"
 msgstr "Sök Fil"
@@ -3389,222 +3612,6 @@ msgstr "Utmatningsrader:"
 
 msgid "Layout"
 msgstr "Layout"
-
-msgid "File listin&g"
-msgstr "Fillist&a"
-
-msgid "&Quick view"
-msgstr "Fil&vy"
-
-msgid "&Info"
-msgstr "&Info"
-
-msgid "&Listing format..."
-msgstr "&Listformat..."
-
-msgid "&Sort order..."
-msgstr "&Sorteringsordning..."
-
-msgid "&Filter..."
-msgstr "&Filter..."
-
-msgid "&Encoding..."
-msgstr "Tecken&översättning..."
-
-msgid "FT&P link..."
-msgstr "FT&P-länk..."
-
-msgid "S&hell link..."
-msgstr "S&kallänk..."
-
-msgid "S&FTP link..."
-msgstr "SFTP-l&änk..."
-
-msgid "SM&B link..."
-msgstr "SM&B-länk..."
-
-msgid "Paneli&ze"
-msgstr "Pa&nelisera"
-
-msgid "&Rescan"
-msgstr "Läs in i&gen"
-
-msgid "&View"
-msgstr "&Visa"
-
-msgid "Vie&w file..."
-msgstr "Visa &fil..."
-
-msgid "&Filtered view"
-msgstr "Filtrerad v&y"
-
-msgid "&Copy"
-msgstr "&Kopiera"
-
-msgid "C&hmod"
-msgstr "C&hmod"
-
-msgid "&Link"
-msgstr "&Länk"
-
-msgid "&Symlink"
-msgstr "&Symlänk"
-
-msgid "Relative symlin&k"
-msgstr "&Relativ symlänk"
-
-msgid "Edit s&ymlink"
-msgstr "Redigera sy&mlänk"
-
-msgid "Ch&own"
-msgstr "Ch&own"
-
-msgid "&Advanced chown"
-msgstr "Ava&ncerad chown"
-
-msgid "Cha&ttr"
-msgstr ""
-
-msgid "&Rename/Move"
-msgstr "&Döp om/flytta"
-
-msgid "&Mkdir"
-msgstr "Ska&pa katalog"
-
-msgid "&Quick cd"
-msgstr "Snabb &cd"
-
-msgid "Select &group"
-msgstr "Välj &grupp"
-
-msgid "U&nselect group"
-msgstr "Välj &bort grupp"
-
-msgid "&Invert selection"
-msgstr "&Invertera markering"
-
-msgid "E&xit"
-msgstr "&Avsluta"
-
-msgid "&User menu"
-msgstr "&Användarmeny"
-
-msgid "&Directory tree"
-msgstr "Katalogtr&äd"
-
-msgid "&Find file"
-msgstr "&Sök fil"
-
-msgid "S&wap panels"
-msgstr "B&yt plats på paneler"
-
-msgid "Switch &panels on/off"
-msgstr "&Ta bort/fram paneler"
-
-msgid "&Compare directories"
-msgstr "Jämför &kataloger"
-
-msgid "C&ompare files"
-msgstr "&Jämför filer"
-
-msgid "E&xternal panelize"
-msgstr "&Panelisera externt kommando"
-
-msgid "Show directory s&izes"
-msgstr "V&isa katalogstorlekar"
-
-msgid "Command &history"
-msgstr "Kommando-&historik"
-
-msgid "Viewed/edited files hi&story"
-msgstr "Hi&storik över visade/redigerade filer"
-
-msgid "Di&rectory hotlist"
-msgstr "Katalog&favoriter"
-
-msgid "&Active VFS list"
-msgstr "Aktiv &VFS-lista"
-
-msgid "&Background jobs"
-msgstr "&Bakgrundsjobb"
-
-msgid "Screen lis&t"
-msgstr "Skä&rmlista"
-
-msgid "&Undelete files (ext2fs only)"
-msgstr "&Återskapa raderade filer (endast ext2fs)"
-
-msgid "&Listing format edit"
-msgstr "Redigera &listningsformatet"
-
-msgid "Edit &extension file"
-msgstr "Redigera &utökningsfil"
-
-msgid "Edit &menu file"
-msgstr "Redigera &menyfilen"
-
-msgid "Edit hi&ghlighting group file"
-msgstr "Redigera &gruppmarkeringsfil"
-
-msgid "&Configuration..."
-msgstr "K&onfiguration..."
-
-msgid "&Layout..."
-msgstr "&Layout..."
-
-msgid "&Panel options..."
-msgstr "&Panelalternativ..."
-
-msgid "C&onfirmation..."
-msgstr "&Konfirmera..."
-
-msgid "&Appearance..."
-msgstr "&Utseende..."
-
-msgid "&Display bits..."
-msgstr "&Displaybitar..."
-
-msgid "&Virtual FS..."
-msgstr "&Virtuellt FS..."
-
-msgid "Panels:"
-msgstr "Paneler:"
-
-#, c-format
-msgid "You have %zu opened screen. Quit anyway?"
-msgid_plural "You have %zu opened screens. Quit anyway?"
-msgstr[0] "Du har %zu öppnad skärm. Avsluta ändå?"
-msgstr[1] "Du har %zu öppnade skärmar. Avsluta ändå?"
-
-msgid "The Midnight Commander"
-msgstr "The Midnight Commander"
-
-msgid "Do you really want to quit the Midnight Commander?"
-msgstr "Vill du verkligen avsluta Midnight Commander?"
-
-msgid "&Above"
-msgstr "&Över"
-
-msgid "&Left"
-msgstr "&Vänster"
-
-msgid "&Below"
-msgstr "&Under"
-
-msgid "&Right"
-msgstr "&Höger"
-
-msgid "ButtonBar|Menu"
-msgstr "ButtonBar|Meny"
-
-msgid "ButtonBar|View"
-msgstr "ButtonBar|Visa"
-
-msgid "ButtonBar|RenMov"
-msgstr "ButtonBar|DöpFly"
-
-msgid "ButtonBar|Mkdir"
-msgstr "ButtonBar|NyKat"
 
 msgid "Memory exhausted!"
 msgstr "Minnet är fullt!"

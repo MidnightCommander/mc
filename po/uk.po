@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"POT-Creation-Date: 2020-12-31 16:34+0300\n"
 "PO-Revision-Date: 2020-05-17 17:42+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/mc/mc/language/uk/)\n"
@@ -1984,6 +1984,9 @@ msgstr "Параметри конфігурації"
 msgid "Skin:"
 msgstr "Шкіра:"
 
+msgid "&Shadows"
+msgstr ""
+
 msgid "Appearance"
 msgstr "Вигляд"
 
@@ -2206,6 +2209,14 @@ msgstr "Ім’я користувача:"
 msgid "SMB authentication"
 msgstr "SMB(самба) автентифікація"
 
+#, c-format
+msgid ""
+"Cannot chdir to \"%s\"\n"
+"%s"
+msgstr ""
+"Не вдалося змінити каталог на «%s»\n"
+"%s "
+
 msgid "Secure deletion"
 msgstr ""
 
@@ -2265,6 +2276,10 @@ msgstr ""
 
 msgid "No COW"
 msgstr ""
+
+#, fuzzy
+msgid "Direct access for files"
+msgstr "Кеш каталога застарів для %s"
 
 msgid "Casefolded file"
 msgstr ""
@@ -2541,14 +2556,6 @@ msgstr "Не вдалося зберегти установки в %s"
 
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "Не можна виконувати команди на нелокальних файлових системах"
-
-#, c-format
-msgid ""
-"Cannot chdir to \"%s\"\n"
-"%s"
-msgstr ""
-"Не вдалося змінити каталог на «%s»\n"
-"%s "
 
 msgid "Parameter"
 msgstr "Параметр"
@@ -3082,6 +3089,227 @@ msgstr "На &фоні"
 msgid "Invalid source pattern '%s'"
 msgstr "Неправильний шаблон джерела «%s»"
 
+msgid "File listin&g"
+msgstr "Список &файлів"
+
+msgid "&Quick view"
+msgstr "&Швидкий перегляд"
+
+msgid "&Info"
+msgstr "&Відомості"
+
+msgid "&Tree"
+msgstr "Д&eрево"
+
+msgid "&Listing format..."
+msgstr "&Формат списку"
+
+msgid "&Sort order..."
+msgstr "Порядок &сортування…"
+
+msgid "&Filter..."
+msgstr "&Фільтр…"
+
+msgid "&Encoding..."
+msgstr "Кодування…"
+
+msgid "FT&P link..."
+msgstr "&FTP-з’єднання…"
+
+msgid "S&hell link..."
+msgstr "&Shell-з’єднання…"
+
+msgid "S&FTP link..."
+msgstr "S&FTP-з’єднання…"
+
+msgid "SM&B link..."
+msgstr "&SMB-з’єднання…"
+
+msgid "Paneli&ze"
+msgstr "Панелі&зувати"
+
+msgid "&Rescan"
+msgstr "&Пересканувати"
+
+msgid "&View"
+msgstr "П&ереглянути"
+
+msgid "Vie&w file..."
+msgstr "Пе&регляд файлу…"
+
+msgid "&Filtered view"
+msgstr "Фі&льтрований перегляд"
+
+msgid "&Copy"
+msgstr "Ско&піювати"
+
+msgid "C&hmod"
+msgstr "З&міна прав"
+
+msgid "&Link"
+msgstr "&Посилання"
+
+msgid "&Symlink"
+msgstr "&Символьне посилання"
+
+msgid "Relative symlin&k"
+msgstr "Від&носне символьне посилання"
+
+msgid "Edit s&ymlink"
+msgstr "Ред&агувати символьне посилання"
+
+msgid "Ch&own"
+msgstr "Змі&на власника"
+
+msgid "&Advanced chown"
+msgstr "Пр&ава (розширені)    "
+
+msgid "Cha&ttr"
+msgstr ""
+
+msgid "&Rename/Move"
+msgstr "&Перейменувати/перемістити"
+
+msgid "&Mkdir"
+msgstr "&Створити каталог"
+
+msgid "&Quick cd"
+msgstr "&Швидка зміна каталогу"
+
+msgid "Select &group"
+msgstr "Обрати гр&yпу"
+
+msgid "U&nselect group"
+msgstr "Зн&яти відмітку з групи"
+
+msgid "&Invert selection"
+msgstr "&Інвертувати виділення"
+
+msgid "E&xit"
+msgstr "Ви&хід"
+
+msgid "&User menu"
+msgstr "&Меню користувача"
+
+msgid "&Directory tree"
+msgstr "&Дерево каталогів"
+
+msgid "&Find file"
+msgstr "&Знайти файл"
+
+msgid "S&wap panels"
+msgstr "Пе&реставити панелі"
+
+msgid "Switch &panels on/off"
+msgstr "&Сховати/показати панелі"
+
+msgid "&Compare directories"
+msgstr "П&орівняти каталоги"
+
+msgid "C&ompare files"
+msgstr "П&орівняти файли"
+
+msgid "E&xternal panelize"
+msgstr "Зовн&ішня панелізація"
+
+msgid "Show directory s&izes"
+msgstr "Показати &розміри каталогів"
+
+msgid "Command &history"
+msgstr "&Історія команд"
+
+msgid "Viewed/edited files hi&story"
+msgstr "І&сторія читання/редагування файлів"
+
+msgid "Di&rectory hotlist"
+msgstr "&Гарячий список каталогів"
+
+msgid "&Active VFS list"
+msgstr "Список &активних VFS"
+
+msgid "&Background jobs"
+msgstr "Фонові завдання"
+
+msgid "Screen lis&t"
+msgstr "Список екранів"
+
+msgid "&Undelete files (ext2fs only)"
+msgstr "&Відновлення файлів (лише ext2fs)"
+
+msgid "&Listing format edit"
+msgstr "&Редагування формату списку"
+
+msgid "Edit &extension file"
+msgstr "Редагувати файл роз&ширень"
+
+msgid "Edit &menu file"
+msgstr "Редагувати файл &меню"
+
+msgid "Edit hi&ghlighting group file"
+msgstr "Редагувати файл підсвітки груп"
+
+msgid "&Configuration..."
+msgstr "&Конфігурація…"
+
+msgid "&Layout..."
+msgstr "&Зовнішній вигляд…"
+
+msgid "&Panel options..."
+msgstr "Параметри панелі…"
+
+msgid "C&onfirmation..."
+msgstr "&Підтвердження…"
+
+msgid "&Appearance..."
+msgstr "&Вигляд..."
+
+msgid "&Display bits..."
+msgstr "&Відображення символів…"
+
+msgid "&Virtual FS..."
+msgstr "Віртуальні &ФС…"
+
+msgid "Panels:"
+msgstr "Панелі:"
+
+#, c-format
+msgid "You have %zu opened screen. Quit anyway?"
+msgid_plural "You have %zu opened screens. Quit anyway?"
+msgstr[0] "Відкрито %zu екран. Все одно вийти?"
+msgstr[1] "Відкрито %zu екрани. Все одно вийти?"
+msgstr[2] "Відкрито %zu екранів. Все одно вийти?"
+msgstr[3] "Відкрито %zu екранів. Все одно вийти?"
+
+msgid "The Midnight Commander"
+msgstr "Midnight Commander"
+
+msgid "Do you really want to quit the Midnight Commander?"
+msgstr "Справді вийти з Midnight Commander?"
+
+msgid "&Above"
+msgstr "Верхня"
+
+msgid "&Left"
+msgstr "&Ліва панель "
+
+msgid "&Below"
+msgstr "Нижня"
+
+msgid "&Right"
+msgstr "&Права панель "
+
+msgid "ButtonBar|Menu"
+msgstr "ButtonBar|Меню"
+
+msgid "ButtonBar|View"
+msgstr "ButtonBar|Перегляд"
+
+msgid "ButtonBar|RenMov"
+msgstr "ButtonBar|Переміст."
+
+msgid "ButtonBar|Mkdir"
+msgstr "ButtonBar|СтвКат"
+
 msgid "&Chdir"
 msgstr "Пере&хід"
 
@@ -3127,9 +3355,6 @@ msgstr "&Усі кодування"
 
 msgid "Fir&st hit"
 msgstr "Пер&ший збіг"
-
-msgid "&Tree"
-msgstr "Д&eрево"
 
 msgid "Find File"
 msgstr "Знайти файл"
@@ -3392,224 +3617,6 @@ msgstr "Рядки виводу:"
 
 msgid "Layout"
 msgstr "Зовнішній вигляд"
-
-msgid "File listin&g"
-msgstr "Список &файлів"
-
-msgid "&Quick view"
-msgstr "&Швидкий перегляд"
-
-msgid "&Info"
-msgstr "&Відомості"
-
-msgid "&Listing format..."
-msgstr "&Формат списку"
-
-msgid "&Sort order..."
-msgstr "Порядок &сортування…"
-
-msgid "&Filter..."
-msgstr "&Фільтр…"
-
-msgid "&Encoding..."
-msgstr "Кодування…"
-
-msgid "FT&P link..."
-msgstr "&FTP-з’єднання…"
-
-msgid "S&hell link..."
-msgstr "&Shell-з’єднання…"
-
-msgid "S&FTP link..."
-msgstr "S&FTP-з’єднання…"
-
-msgid "SM&B link..."
-msgstr "&SMB-з’єднання…"
-
-msgid "Paneli&ze"
-msgstr "Панелі&зувати"
-
-msgid "&Rescan"
-msgstr "&Пересканувати"
-
-msgid "&View"
-msgstr "П&ереглянути"
-
-msgid "Vie&w file..."
-msgstr "Пе&регляд файлу…"
-
-msgid "&Filtered view"
-msgstr "Фі&льтрований перегляд"
-
-msgid "&Copy"
-msgstr "Ско&піювати"
-
-msgid "C&hmod"
-msgstr "З&міна прав"
-
-msgid "&Link"
-msgstr "&Посилання"
-
-msgid "&Symlink"
-msgstr "&Символьне посилання"
-
-msgid "Relative symlin&k"
-msgstr "Від&носне символьне посилання"
-
-msgid "Edit s&ymlink"
-msgstr "Ред&агувати символьне посилання"
-
-msgid "Ch&own"
-msgstr "Змі&на власника"
-
-msgid "&Advanced chown"
-msgstr "Пр&ава (розширені)    "
-
-msgid "Cha&ttr"
-msgstr ""
-
-msgid "&Rename/Move"
-msgstr "&Перейменувати/перемістити"
-
-msgid "&Mkdir"
-msgstr "&Створити каталог"
-
-msgid "&Quick cd"
-msgstr "&Швидка зміна каталогу"
-
-msgid "Select &group"
-msgstr "Обрати гр&yпу"
-
-msgid "U&nselect group"
-msgstr "Зн&яти відмітку з групи"
-
-msgid "&Invert selection"
-msgstr "&Інвертувати виділення"
-
-msgid "E&xit"
-msgstr "Ви&хід"
-
-msgid "&User menu"
-msgstr "&Меню користувача"
-
-msgid "&Directory tree"
-msgstr "&Дерево каталогів"
-
-msgid "&Find file"
-msgstr "&Знайти файл"
-
-msgid "S&wap panels"
-msgstr "Пе&реставити панелі"
-
-msgid "Switch &panels on/off"
-msgstr "&Сховати/показати панелі"
-
-msgid "&Compare directories"
-msgstr "П&орівняти каталоги"
-
-msgid "C&ompare files"
-msgstr "П&орівняти файли"
-
-msgid "E&xternal panelize"
-msgstr "Зовн&ішня панелізація"
-
-msgid "Show directory s&izes"
-msgstr "Показати &розміри каталогів"
-
-msgid "Command &history"
-msgstr "&Історія команд"
-
-msgid "Viewed/edited files hi&story"
-msgstr "І&сторія читання/редагування файлів"
-
-msgid "Di&rectory hotlist"
-msgstr "&Гарячий список каталогів"
-
-msgid "&Active VFS list"
-msgstr "Список &активних VFS"
-
-msgid "&Background jobs"
-msgstr "Фонові завдання"
-
-msgid "Screen lis&t"
-msgstr "Список екранів"
-
-msgid "&Undelete files (ext2fs only)"
-msgstr "&Відновлення файлів (лише ext2fs)"
-
-msgid "&Listing format edit"
-msgstr "&Редагування формату списку"
-
-msgid "Edit &extension file"
-msgstr "Редагувати файл роз&ширень"
-
-msgid "Edit &menu file"
-msgstr "Редагувати файл &меню"
-
-msgid "Edit hi&ghlighting group file"
-msgstr "Редагувати файл підсвітки груп"
-
-msgid "&Configuration..."
-msgstr "&Конфігурація…"
-
-msgid "&Layout..."
-msgstr "&Зовнішній вигляд…"
-
-msgid "&Panel options..."
-msgstr "Параметри панелі…"
-
-msgid "C&onfirmation..."
-msgstr "&Підтвердження…"
-
-msgid "&Appearance..."
-msgstr "&Вигляд..."
-
-msgid "&Display bits..."
-msgstr "&Відображення символів…"
-
-msgid "&Virtual FS..."
-msgstr "Віртуальні &ФС…"
-
-msgid "Panels:"
-msgstr "Панелі:"
-
-#, c-format
-msgid "You have %zu opened screen. Quit anyway?"
-msgid_plural "You have %zu opened screens. Quit anyway?"
-msgstr[0] "Відкрито %zu екран. Все одно вийти?"
-msgstr[1] "Відкрито %zu екрани. Все одно вийти?"
-msgstr[2] "Відкрито %zu екранів. Все одно вийти?"
-msgstr[3] "Відкрито %zu екранів. Все одно вийти?"
-
-msgid "The Midnight Commander"
-msgstr "Midnight Commander"
-
-msgid "Do you really want to quit the Midnight Commander?"
-msgstr "Справді вийти з Midnight Commander?"
-
-msgid "&Above"
-msgstr "Верхня"
-
-msgid "&Left"
-msgstr "&Ліва панель "
-
-msgid "&Below"
-msgstr "Нижня"
-
-msgid "&Right"
-msgstr "&Права панель "
-
-msgid "ButtonBar|Menu"
-msgstr "ButtonBar|Меню"
-
-msgid "ButtonBar|View"
-msgstr "ButtonBar|Перегляд"
-
-msgid "ButtonBar|RenMov"
-msgstr "ButtonBar|Переміст."
-
-msgid "ButtonBar|Mkdir"
-msgstr "ButtonBar|СтвКат"
 
 msgid "Memory exhausted!"
 msgstr "Не вистачає пам’яті."

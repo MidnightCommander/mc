@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"POT-Creation-Date: 2020-12-31 16:34+0300\n"
 "PO-Revision-Date: 2020-05-17 17:42+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Romanian (http://www.transifex.com/mc/mc/language/ro/)\n"
@@ -1984,6 +1984,9 @@ msgstr "Opțiuni de configurare"
 msgid "Skin:"
 msgstr "Tematică:"
 
+msgid "&Shadows"
+msgstr ""
+
 msgid "Appearance"
 msgstr "Aspect"
 
@@ -2207,6 +2210,14 @@ msgstr "Nume proprietar:"
 msgid "SMB authentication"
 msgstr "Autentificare SMB"
 
+#, c-format
+msgid ""
+"Cannot chdir to \"%s\"\n"
+"%s"
+msgstr ""
+"Nu se poate chdir în \"%s\"\n"
+"%s"
+
 msgid "Secure deletion"
 msgstr ""
 
@@ -2266,6 +2277,10 @@ msgstr ""
 
 msgid "No COW"
 msgstr ""
+
+#, fuzzy
+msgid "Direct access for files"
+msgstr "Cache-ul dosarelor a expirat pentru %s"
 
 msgid "Casefolded file"
 msgstr ""
@@ -2542,14 +2557,6 @@ msgstr "Nu se poate salva configurația în %s"
 
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "Nu se pot executa comenzi în sisteme de fișiere ne-locale"
-
-#, c-format
-msgid ""
-"Cannot chdir to \"%s\"\n"
-"%s"
-msgstr ""
-"Nu se poate chdir în \"%s\"\n"
-"%s"
 
 msgid "Parameter"
 msgstr "Parametru"
@@ -3084,6 +3091,226 @@ msgstr "În &Fundal"
 msgid "Invalid source pattern '%s'"
 msgstr "Șablon sursă nevalid '%s'"
 
+msgid "File listin&g"
+msgstr "&Lista de fișiere"
+
+msgid "&Quick view"
+msgstr "Vizualizare &rapidă"
+
+msgid "&Info"
+msgstr "&Info"
+
+msgid "&Tree"
+msgstr "Arbore"
+
+msgid "&Listing format..."
+msgstr "formatul de  &listare "
+
+msgid "&Sort order..."
+msgstr "&Ordinea sortării..."
+
+msgid "&Filter..."
+msgstr "&Filtru..."
+
+msgid "&Encoding..."
+msgstr "Codificar&e"
+
+msgid "FT&P link..."
+msgstr "Conectare FT&P..."
+
+msgid "S&hell link..."
+msgstr "Conectare s&hell..."
+
+msgid "S&FTP link..."
+msgstr "Conectare S&FTP..."
+
+msgid "SM&B link..."
+msgstr "Conectare SM&B..."
+
+msgid "Paneli&ze"
+msgstr "Paneli&zare"
+
+msgid "&Rescan"
+msgstr "&Rescanează"
+
+msgid "&View"
+msgstr "&Vizualizează"
+
+msgid "Vie&w file..."
+msgstr "Vi&zualizează fișier"
+
+msgid "&Filtered view"
+msgstr "Vizualizare &filtrată"
+
+msgid "&Copy"
+msgstr "&Copiază"
+
+msgid "C&hmod"
+msgstr "C&hmod"
+
+msgid "&Link"
+msgstr "&Legătură"
+
+msgid "&Symlink"
+msgstr "Legătură &simbolică"
+
+msgid "Relative symlin&k"
+msgstr "Legătură simbolică relati&vă"
+
+msgid "Edit s&ymlink"
+msgstr "Editează legătura s&imbolică"
+
+msgid "Ch&own"
+msgstr "Ch&own"
+
+msgid "&Advanced chown"
+msgstr "Chown &avansat"
+
+msgid "Cha&ttr"
+msgstr ""
+
+msgid "&Rename/Move"
+msgstr "&Redenumește/Mută"
+
+msgid "&Mkdir"
+msgstr "&Mkdir"
+
+msgid "&Quick cd"
+msgstr "Cd &rapid"
+
+msgid "Select &group"
+msgstr "Selectează &grupul"
+
+msgid "U&nselect group"
+msgstr "&De-selectează grupul"
+
+msgid "&Invert selection"
+msgstr "&Inversează selecția"
+
+msgid "E&xit"
+msgstr "&Ieșire"
+
+msgid "&User menu"
+msgstr "Meniu &utilizator"
+
+msgid "&Directory tree"
+msgstr "Arbore de &dosare"
+
+msgid "&Find file"
+msgstr "&Caută fișier"
+
+msgid "S&wap panels"
+msgstr "&Schimbă panourile"
+
+msgid "Switch &panels on/off"
+msgstr "Comută &panourile da/nu"
+
+msgid "&Compare directories"
+msgstr "&Compară dosare"
+
+msgid "C&ompare files"
+msgstr "C&ompară fișiere"
+
+msgid "E&xternal panelize"
+msgstr "Panelizare e&xternă"
+
+msgid "Show directory s&izes"
+msgstr "Arată mărimea dosarelor"
+
+msgid "Command &history"
+msgstr "&Istoric comenzi"
+
+msgid "Viewed/edited files hi&story"
+msgstr ""
+
+msgid "Di&rectory hotlist"
+msgstr "Listă rapidă de dosa&re"
+
+msgid "&Active VFS list"
+msgstr "Lista SVF &active"
+
+msgid "&Background jobs"
+msgstr "Sarcini în &fundal"
+
+msgid "Screen lis&t"
+msgstr "Lis&ta ecranelor"
+
+msgid "&Undelete files (ext2fs only)"
+msgstr "Rec&uperare fișiere (doar ext2fs)"
+
+msgid "&Listing format edit"
+msgstr "Editare mod de &listare"
+
+msgid "Edit &extension file"
+msgstr "Editare fișier &extensii"
+
+msgid "Edit &menu file"
+msgstr "Editare fișier &meniuri"
+
+msgid "Edit hi&ghlighting group file"
+msgstr "Editează fișierul de evidențiere &grup"
+
+msgid "&Configuration..."
+msgstr "&Configurare..."
+
+msgid "&Layout..."
+msgstr "&Aspect..."
+
+msgid "&Panel options..."
+msgstr "Opțiuni &panou..."
+
+msgid "C&onfirmation..."
+msgstr "C&onfirmare..."
+
+msgid "&Appearance..."
+msgstr "&Aspect..."
+
+msgid "&Display bits..."
+msgstr "&Biți de afișare..."
+
+msgid "&Virtual FS..."
+msgstr "Sistem &virtual de fișiere..."
+
+msgid "Panels:"
+msgstr "Panouri:"
+
+#, c-format
+msgid "You have %zu opened screen. Quit anyway?"
+msgid_plural "You have %zu opened screens. Quit anyway?"
+msgstr[0] "Ai %zu ecran deschis. Închizi oricum?"
+msgstr[1] "Ai %zu ecrane deschise. Închizi oricum?"
+msgstr[2] "Ai %zu ecrane deschise. Închizi oricum?"
+
+msgid "The Midnight Commander"
+msgstr "Midnight Commander"
+
+msgid "Do you really want to quit the Midnight Commander?"
+msgstr "Chiar dorești sa închizi Midnight Commander?"
+
+msgid "&Above"
+msgstr "&Deasupra"
+
+msgid "&Left"
+msgstr "&Stânga"
+
+msgid "&Below"
+msgstr "&Dedesubt"
+
+msgid "&Right"
+msgstr "D&reapta"
+
+msgid "ButtonBar|Menu"
+msgstr "ButtonBar|Meniu"
+
+msgid "ButtonBar|View"
+msgstr "ButtonBar|Vezi"
+
+msgid "ButtonBar|RenMov"
+msgstr "ButtonBar|RedMut"
+
+msgid "ButtonBar|Mkdir"
+msgstr "ButtonBar|Mkdir"
+
 msgid "&Chdir"
 msgstr "&Chdir"
 
@@ -3129,9 +3356,6 @@ msgstr "Toate seturi&le de caractere"
 
 msgid "Fir&st hit"
 msgstr "Primul gă&sit"
-
-msgid "&Tree"
-msgstr "Arbore"
 
 msgid "Find File"
 msgstr "Caută fișier"
@@ -3392,223 +3616,6 @@ msgstr "Linii de ieșire:"
 
 msgid "Layout"
 msgstr "Aspect"
-
-msgid "File listin&g"
-msgstr "&Lista de fișiere"
-
-msgid "&Quick view"
-msgstr "Vizualizare &rapidă"
-
-msgid "&Info"
-msgstr "&Info"
-
-msgid "&Listing format..."
-msgstr "formatul de  &listare "
-
-msgid "&Sort order..."
-msgstr "&Ordinea sortării..."
-
-msgid "&Filter..."
-msgstr "&Filtru..."
-
-msgid "&Encoding..."
-msgstr "Codificar&e"
-
-msgid "FT&P link..."
-msgstr "Conectare FT&P..."
-
-msgid "S&hell link..."
-msgstr "Conectare s&hell..."
-
-msgid "S&FTP link..."
-msgstr "Conectare S&FTP..."
-
-msgid "SM&B link..."
-msgstr "Conectare SM&B..."
-
-msgid "Paneli&ze"
-msgstr "Paneli&zare"
-
-msgid "&Rescan"
-msgstr "&Rescanează"
-
-msgid "&View"
-msgstr "&Vizualizează"
-
-msgid "Vie&w file..."
-msgstr "Vi&zualizează fișier"
-
-msgid "&Filtered view"
-msgstr "Vizualizare &filtrată"
-
-msgid "&Copy"
-msgstr "&Copiază"
-
-msgid "C&hmod"
-msgstr "C&hmod"
-
-msgid "&Link"
-msgstr "&Legătură"
-
-msgid "&Symlink"
-msgstr "Legătură &simbolică"
-
-msgid "Relative symlin&k"
-msgstr "Legătură simbolică relati&vă"
-
-msgid "Edit s&ymlink"
-msgstr "Editează legătura s&imbolică"
-
-msgid "Ch&own"
-msgstr "Ch&own"
-
-msgid "&Advanced chown"
-msgstr "Chown &avansat"
-
-msgid "Cha&ttr"
-msgstr ""
-
-msgid "&Rename/Move"
-msgstr "&Redenumește/Mută"
-
-msgid "&Mkdir"
-msgstr "&Mkdir"
-
-msgid "&Quick cd"
-msgstr "Cd &rapid"
-
-msgid "Select &group"
-msgstr "Selectează &grupul"
-
-msgid "U&nselect group"
-msgstr "&De-selectează grupul"
-
-msgid "&Invert selection"
-msgstr "&Inversează selecția"
-
-msgid "E&xit"
-msgstr "&Ieșire"
-
-msgid "&User menu"
-msgstr "Meniu &utilizator"
-
-msgid "&Directory tree"
-msgstr "Arbore de &dosare"
-
-msgid "&Find file"
-msgstr "&Caută fișier"
-
-msgid "S&wap panels"
-msgstr "&Schimbă panourile"
-
-msgid "Switch &panels on/off"
-msgstr "Comută &panourile da/nu"
-
-msgid "&Compare directories"
-msgstr "&Compară dosare"
-
-msgid "C&ompare files"
-msgstr "C&ompară fișiere"
-
-msgid "E&xternal panelize"
-msgstr "Panelizare e&xternă"
-
-msgid "Show directory s&izes"
-msgstr "Arată mărimea dosarelor"
-
-msgid "Command &history"
-msgstr "&Istoric comenzi"
-
-msgid "Viewed/edited files hi&story"
-msgstr ""
-
-msgid "Di&rectory hotlist"
-msgstr "Listă rapidă de dosa&re"
-
-msgid "&Active VFS list"
-msgstr "Lista SVF &active"
-
-msgid "&Background jobs"
-msgstr "Sarcini în &fundal"
-
-msgid "Screen lis&t"
-msgstr "Lis&ta ecranelor"
-
-msgid "&Undelete files (ext2fs only)"
-msgstr "Rec&uperare fișiere (doar ext2fs)"
-
-msgid "&Listing format edit"
-msgstr "Editare mod de &listare"
-
-msgid "Edit &extension file"
-msgstr "Editare fișier &extensii"
-
-msgid "Edit &menu file"
-msgstr "Editare fișier &meniuri"
-
-msgid "Edit hi&ghlighting group file"
-msgstr "Editează fișierul de evidențiere &grup"
-
-msgid "&Configuration..."
-msgstr "&Configurare..."
-
-msgid "&Layout..."
-msgstr "&Aspect..."
-
-msgid "&Panel options..."
-msgstr "Opțiuni &panou..."
-
-msgid "C&onfirmation..."
-msgstr "C&onfirmare..."
-
-msgid "&Appearance..."
-msgstr "&Aspect..."
-
-msgid "&Display bits..."
-msgstr "&Biți de afișare..."
-
-msgid "&Virtual FS..."
-msgstr "Sistem &virtual de fișiere..."
-
-msgid "Panels:"
-msgstr "Panouri:"
-
-#, c-format
-msgid "You have %zu opened screen. Quit anyway?"
-msgid_plural "You have %zu opened screens. Quit anyway?"
-msgstr[0] "Ai %zu ecran deschis. Închizi oricum?"
-msgstr[1] "Ai %zu ecrane deschise. Închizi oricum?"
-msgstr[2] "Ai %zu ecrane deschise. Închizi oricum?"
-
-msgid "The Midnight Commander"
-msgstr "Midnight Commander"
-
-msgid "Do you really want to quit the Midnight Commander?"
-msgstr "Chiar dorești sa închizi Midnight Commander?"
-
-msgid "&Above"
-msgstr "&Deasupra"
-
-msgid "&Left"
-msgstr "&Stânga"
-
-msgid "&Below"
-msgstr "&Dedesubt"
-
-msgid "&Right"
-msgstr "D&reapta"
-
-msgid "ButtonBar|Menu"
-msgstr "ButtonBar|Meniu"
-
-msgid "ButtonBar|View"
-msgstr "ButtonBar|Vezi"
-
-msgid "ButtonBar|RenMov"
-msgstr "ButtonBar|RedMut"
-
-msgid "ButtonBar|Mkdir"
-msgstr "ButtonBar|Mkdir"
 
 msgid "Memory exhausted!"
 msgstr "Memorie epuizată!"

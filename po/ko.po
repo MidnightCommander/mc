@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"POT-Creation-Date: 2020-12-31 16:34+0300\n"
 "PO-Revision-Date: 2020-05-17 17:42+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Korean (http://www.transifex.com/mc/mc/language/ko/)\n"
@@ -1978,6 +1978,9 @@ msgstr "설정 옵션"
 msgid "Skin:"
 msgstr "스킨:"
 
+msgid "&Shadows"
+msgstr ""
+
 msgid "Appearance"
 msgstr "외형"
 
@@ -2201,6 +2204,14 @@ msgstr "사용자 이름:"
 msgid "SMB authentication"
 msgstr "SMB 인증"
 
+#, c-format
+msgid ""
+"Cannot chdir to \"%s\"\n"
+"%s"
+msgstr ""
+"\"%s\"로 디렉토리 변경할 수 없음\n"
+"%s"
+
 msgid "Secure deletion"
 msgstr ""
 
@@ -2260,6 +2271,10 @@ msgstr ""
 
 msgid "No COW"
 msgstr ""
+
+#, fuzzy
+msgid "Direct access for files"
+msgstr "%s 디렉터리 캐쉬 만료"
 
 msgid "Casefolded file"
 msgstr ""
@@ -2536,14 +2551,6 @@ msgstr "%s에 설정을 저장할 수 없음"
 
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "로컬이 아닌 파일 시스템에서 명령을 실행할 수 없음"
-
-#, c-format
-msgid ""
-"Cannot chdir to \"%s\"\n"
-"%s"
-msgstr ""
-"\"%s\"로 디렉토리 변경할 수 없음\n"
-"%s"
 
 msgid "Parameter"
 msgstr "매개변수"
@@ -3079,6 +3086,224 @@ msgstr "백그라운드(&B)"
 msgid "Invalid source pattern '%s'"
 msgstr "잘못된 소스 패턴 '%s'"
 
+msgid "File listin&g"
+msgstr "전체 파일 목록(&G)"
+
+msgid "&Quick view"
+msgstr "빠른 보기(&Q)"
+
+msgid "&Info"
+msgstr "정보(&I)"
+
+msgid "&Tree"
+msgstr "트리구조(&T)"
+
+msgid "&Listing format..."
+msgstr "목록 형식(&L)..."
+
+msgid "&Sort order..."
+msgstr "정렬 순서(&S)..."
+
+msgid "&Filter..."
+msgstr "필터(&F)..."
+
+msgid "&Encoding..."
+msgstr "인코딩(&E)..."
+
+msgid "FT&P link..."
+msgstr "FTP 링크(&P)..."
+
+msgid "S&hell link..."
+msgstr "쉘 링크(&H)..."
+
+msgid "S&FTP link..."
+msgstr "SFTP 링크(&F)..."
+
+msgid "SM&B link..."
+msgstr "SMB 링크(&B)..."
+
+msgid "Paneli&ze"
+msgstr "패널 크기조정"
+
+msgid "&Rescan"
+msgstr "재검색(&R)"
+
+msgid "&View"
+msgstr "보기(&V)"
+
+msgid "Vie&w file..."
+msgstr "파일 보기(&W)..."
+
+msgid "&Filtered view"
+msgstr "필터링됨 보기(&F)"
+
+msgid "&Copy"
+msgstr "복사(&C)"
+
+msgid "C&hmod"
+msgstr "파일 사용 권한 변경(&H)"
+
+msgid "&Link"
+msgstr "링크(&L)"
+
+msgid "&Symlink"
+msgstr "심링크(&S)"
+
+msgid "Relative symlin&k"
+msgstr "상대 심링크(&K)"
+
+msgid "Edit s&ymlink"
+msgstr "심링크 편집(&Y)"
+
+msgid "Ch&own"
+msgstr "파일 소유자 변경 (&O)"
+
+msgid "&Advanced chown"
+msgstr "고급 파일 소유자 변경(&A)"
+
+msgid "Cha&ttr"
+msgstr ""
+
+msgid "&Rename/Move"
+msgstr "이름변경/이동(&R)"
+
+msgid "&Mkdir"
+msgstr "디렉토리 만들기(&M)"
+
+msgid "&Quick cd"
+msgstr "빠른 디렉토리 변경(&Q)"
+
+msgid "Select &group"
+msgstr "그룹 선택(&G)"
+
+msgid "U&nselect group"
+msgstr "그룹 선택해제(&N)"
+
+msgid "&Invert selection"
+msgstr "선택 반전(&I)"
+
+msgid "E&xit"
+msgstr "종료(&X)"
+
+msgid "&User menu"
+msgstr "사용자 메뉴(&U)"
+
+msgid "&Directory tree"
+msgstr "디렉터리 트리구조(&D)"
+
+msgid "&Find file"
+msgstr "파일 찾기(&F)"
+
+msgid "S&wap panels"
+msgstr "스왑 패널(&W)"
+
+msgid "Switch &panels on/off"
+msgstr "패널 스위치 켜기/끄기(&P)"
+
+msgid "&Compare directories"
+msgstr "디렉터리 비교(&C)"
+
+msgid "C&ompare files"
+msgstr "파일 비교(&O)"
+
+msgid "E&xternal panelize"
+msgstr "기타 패널 크기조정(&X)"
+
+msgid "Show directory s&izes"
+msgstr "디렉터리 크기 보기(&I)"
+
+msgid "Command &history"
+msgstr "명령 기록(&H)"
+
+msgid "Viewed/edited files hi&story"
+msgstr "보기/편집된 파일 기록(&s)"
+
+msgid "Di&rectory hotlist"
+msgstr "디렉터리 단축목록(&R)"
+
+msgid "&Active VFS list"
+msgstr "활성 VFS 목록(&A)"
+
+msgid "&Background jobs"
+msgstr "백그라운드 작업(&B)"
+
+msgid "Screen lis&t"
+msgstr "화면 목록(&T)"
+
+msgid "&Undelete files (ext2fs only)"
+msgstr "파일 삭제취소 (est2fs만 가능)(&U)"
+
+msgid "&Listing format edit"
+msgstr "파일 목록 형식 편집(&L)"
+
+msgid "Edit &extension file"
+msgstr "파일 확장자 편집(&E)"
+
+msgid "Edit &menu file"
+msgstr "메뉴 파일 편집(&M)"
+
+msgid "Edit hi&ghlighting group file"
+msgstr "강조 표시 그룹 파일 편집(&G)"
+
+msgid "&Configuration..."
+msgstr "환경설정(&C)..."
+
+msgid "&Layout..."
+msgstr "레이아웃(&L)..."
+
+msgid "&Panel options..."
+msgstr "패널 옵션(&P)"
+
+msgid "C&onfirmation..."
+msgstr "확인(&O)..."
+
+msgid "&Appearance..."
+msgstr "외형(&A)..."
+
+msgid "&Display bits..."
+msgstr "비트 표시(&D)..."
+
+msgid "&Virtual FS..."
+msgstr "가상 파일시스템(&V)..."
+
+msgid "Panels:"
+msgstr "패널:"
+
+#, c-format
+msgid "You have %zu opened screen. Quit anyway?"
+msgid_plural "You have %zu opened screens. Quit anyway?"
+msgstr[0] "%zu 화면이 열려 있습니다. 그래도 끝낼까요?"
+
+msgid "The Midnight Commander"
+msgstr "미드나잇 커맨더"
+
+msgid "Do you really want to quit the Midnight Commander?"
+msgstr "미드나잇 커맨더를 절말로 끝내시겠습니까?"
+
+msgid "&Above"
+msgstr "이상(&A)"
+
+msgid "&Left"
+msgstr "왼쪽(&L)"
+
+msgid "&Below"
+msgstr "아래(&B)"
+
+msgid "&Right"
+msgstr "오른쪽(&R)"
+
+msgid "ButtonBar|Menu"
+msgstr "버튼바|메뉴"
+
+msgid "ButtonBar|View"
+msgstr "버튼바|보기"
+
+msgid "ButtonBar|RenMov"
+msgstr "버튼바|이름변경/이동"
+
+msgid "ButtonBar|Mkdir"
+msgstr "버튼바|디렉만들기"
+
 msgid "&Chdir"
 msgstr "디렉터리 이동(&C)"
 
@@ -3124,9 +3349,6 @@ msgstr "모든 문자셋(&L)"
 
 msgid "Fir&st hit"
 msgstr "먼저 하기(&S)"
-
-msgid "&Tree"
-msgstr "트리구조(&T)"
 
 msgid "Find File"
 msgstr "파일 찾기"
@@ -3383,221 +3605,6 @@ msgstr "출력 라인:"
 
 msgid "Layout"
 msgstr "레이아웃"
-
-msgid "File listin&g"
-msgstr "전체 파일 목록(&G)"
-
-msgid "&Quick view"
-msgstr "빠른 보기(&Q)"
-
-msgid "&Info"
-msgstr "정보(&I)"
-
-msgid "&Listing format..."
-msgstr "목록 형식(&L)..."
-
-msgid "&Sort order..."
-msgstr "정렬 순서(&S)..."
-
-msgid "&Filter..."
-msgstr "필터(&F)..."
-
-msgid "&Encoding..."
-msgstr "인코딩(&E)..."
-
-msgid "FT&P link..."
-msgstr "FTP 링크(&P)..."
-
-msgid "S&hell link..."
-msgstr "쉘 링크(&H)..."
-
-msgid "S&FTP link..."
-msgstr "SFTP 링크(&F)..."
-
-msgid "SM&B link..."
-msgstr "SMB 링크(&B)..."
-
-msgid "Paneli&ze"
-msgstr "패널 크기조정"
-
-msgid "&Rescan"
-msgstr "재검색(&R)"
-
-msgid "&View"
-msgstr "보기(&V)"
-
-msgid "Vie&w file..."
-msgstr "파일 보기(&W)..."
-
-msgid "&Filtered view"
-msgstr "필터링됨 보기(&F)"
-
-msgid "&Copy"
-msgstr "복사(&C)"
-
-msgid "C&hmod"
-msgstr "파일 사용 권한 변경(&H)"
-
-msgid "&Link"
-msgstr "링크(&L)"
-
-msgid "&Symlink"
-msgstr "심링크(&S)"
-
-msgid "Relative symlin&k"
-msgstr "상대 심링크(&K)"
-
-msgid "Edit s&ymlink"
-msgstr "심링크 편집(&Y)"
-
-msgid "Ch&own"
-msgstr "파일 소유자 변경 (&O)"
-
-msgid "&Advanced chown"
-msgstr "고급 파일 소유자 변경(&A)"
-
-msgid "Cha&ttr"
-msgstr ""
-
-msgid "&Rename/Move"
-msgstr "이름변경/이동(&R)"
-
-msgid "&Mkdir"
-msgstr "디렉토리 만들기(&M)"
-
-msgid "&Quick cd"
-msgstr "빠른 디렉토리 변경(&Q)"
-
-msgid "Select &group"
-msgstr "그룹 선택(&G)"
-
-msgid "U&nselect group"
-msgstr "그룹 선택해제(&N)"
-
-msgid "&Invert selection"
-msgstr "선택 반전(&I)"
-
-msgid "E&xit"
-msgstr "종료(&X)"
-
-msgid "&User menu"
-msgstr "사용자 메뉴(&U)"
-
-msgid "&Directory tree"
-msgstr "디렉터리 트리구조(&D)"
-
-msgid "&Find file"
-msgstr "파일 찾기(&F)"
-
-msgid "S&wap panels"
-msgstr "스왑 패널(&W)"
-
-msgid "Switch &panels on/off"
-msgstr "패널 스위치 켜기/끄기(&P)"
-
-msgid "&Compare directories"
-msgstr "디렉터리 비교(&C)"
-
-msgid "C&ompare files"
-msgstr "파일 비교(&O)"
-
-msgid "E&xternal panelize"
-msgstr "기타 패널 크기조정(&X)"
-
-msgid "Show directory s&izes"
-msgstr "디렉터리 크기 보기(&I)"
-
-msgid "Command &history"
-msgstr "명령 기록(&H)"
-
-msgid "Viewed/edited files hi&story"
-msgstr "보기/편집된 파일 기록(&s)"
-
-msgid "Di&rectory hotlist"
-msgstr "디렉터리 단축목록(&R)"
-
-msgid "&Active VFS list"
-msgstr "활성 VFS 목록(&A)"
-
-msgid "&Background jobs"
-msgstr "백그라운드 작업(&B)"
-
-msgid "Screen lis&t"
-msgstr "화면 목록(&T)"
-
-msgid "&Undelete files (ext2fs only)"
-msgstr "파일 삭제취소 (est2fs만 가능)(&U)"
-
-msgid "&Listing format edit"
-msgstr "파일 목록 형식 편집(&L)"
-
-msgid "Edit &extension file"
-msgstr "파일 확장자 편집(&E)"
-
-msgid "Edit &menu file"
-msgstr "메뉴 파일 편집(&M)"
-
-msgid "Edit hi&ghlighting group file"
-msgstr "강조 표시 그룹 파일 편집(&G)"
-
-msgid "&Configuration..."
-msgstr "환경설정(&C)..."
-
-msgid "&Layout..."
-msgstr "레이아웃(&L)..."
-
-msgid "&Panel options..."
-msgstr "패널 옵션(&P)"
-
-msgid "C&onfirmation..."
-msgstr "확인(&O)..."
-
-msgid "&Appearance..."
-msgstr "외형(&A)..."
-
-msgid "&Display bits..."
-msgstr "비트 표시(&D)..."
-
-msgid "&Virtual FS..."
-msgstr "가상 파일시스템(&V)..."
-
-msgid "Panels:"
-msgstr "패널:"
-
-#, c-format
-msgid "You have %zu opened screen. Quit anyway?"
-msgid_plural "You have %zu opened screens. Quit anyway?"
-msgstr[0] "%zu 화면이 열려 있습니다. 그래도 끝낼까요?"
-
-msgid "The Midnight Commander"
-msgstr "미드나잇 커맨더"
-
-msgid "Do you really want to quit the Midnight Commander?"
-msgstr "미드나잇 커맨더를 절말로 끝내시겠습니까?"
-
-msgid "&Above"
-msgstr "이상(&A)"
-
-msgid "&Left"
-msgstr "왼쪽(&L)"
-
-msgid "&Below"
-msgstr "아래(&B)"
-
-msgid "&Right"
-msgstr "오른쪽(&R)"
-
-msgid "ButtonBar|Menu"
-msgstr "버튼바|메뉴"
-
-msgid "ButtonBar|View"
-msgstr "버튼바|보기"
-
-msgid "ButtonBar|RenMov"
-msgstr "버튼바|이름변경/이동"
-
-msgid "ButtonBar|Mkdir"
-msgstr "버튼바|디렉만들기"
 
 msgid "Memory exhausted!"
 msgstr "메모리 소진됨!"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"POT-Creation-Date: 2020-12-31 16:34+0300\n"
 "PO-Revision-Date: 2020-05-19 04:15+0000\n"
 "Last-Translator: Kjell Cato Heskjestad <cato@heskjestad.xyz>\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/mc/mc/language/"
@@ -1990,6 +1990,9 @@ msgstr "Sett opp innstillinger"
 msgid "Skin:"
 msgstr "Drakt:"
 
+msgid "&Shadows"
+msgstr ""
+
 msgid "Appearance"
 msgstr "Presentasjonsdrakt"
 
@@ -2213,6 +2216,14 @@ msgstr "Brukernavn:"
 msgid "SMB authentication"
 msgstr "SMB-autentisering"
 
+#, c-format
+msgid ""
+"Cannot chdir to \"%s\"\n"
+"%s"
+msgstr ""
+"Klarte ikke bytte mappe til «%s»\n"
+"%s"
+
 msgid "Secure deletion"
 msgstr "Sikker sletting"
 
@@ -2272,6 +2283,10 @@ msgstr "Enorm fil"
 
 msgid "No COW"
 msgstr "Ikke COW"
+
+#, fuzzy
+msgid "Direct access for files"
+msgstr "Mappehurtiglager utgått for %s"
 
 msgid "Casefolded file"
 msgstr "Ikke versalsensitiv"
@@ -2552,14 +2567,6 @@ msgstr "Klarte ikke lagre oppsettet til %s"
 
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "Kan ikke kjøre kommandoer i eksterne filsystemer"
-
-#, c-format
-msgid ""
-"Cannot chdir to \"%s\"\n"
-"%s"
-msgstr ""
-"Klarte ikke bytte mappe til «%s»\n"
-"%s"
 
 msgid "Parameter"
 msgstr "Parameter"
@@ -3095,6 +3102,225 @@ msgstr "&Bakgrunn"
 msgid "Invalid source pattern '%s'"
 msgstr "ugyldig kildemønster «%s»"
 
+msgid "File listin&g"
+msgstr "&List ut filer"
+
+msgid "&Quick view"
+msgstr "&Hurtigvis"
+
+msgid "&Info"
+msgstr "&Informasjon"
+
+msgid "&Tree"
+msgstr "&Tre"
+
+msgid "&Listing format..."
+msgstr "&Utlistingsformat ..."
+
+msgid "&Sort order..."
+msgstr "Sorterings&rekkefølge ..."
+
+msgid "&Filter..."
+msgstr "&Filtrer ..."
+
+msgid "&Encoding..."
+msgstr "Tegn&koding for filnavn ..."
+
+msgid "FT&P link..."
+msgstr "Koble til FT&P ..."
+
+msgid "S&hell link..."
+msgstr "Koble til &skall ..."
+
+msgid "S&FTP link..."
+msgstr "K&oble til SFTP ..."
+
+msgid "SM&B link..."
+msgstr "Koble til SM&B ..."
+
+msgid "Paneli&ze"
+msgstr "&Vis lagt til i panel"
+
+msgid "&Rescan"
+msgstr "Opp&dater"
+
+msgid "&View"
+msgstr "&Vis"
+
+msgid "Vie&w file..."
+msgstr "V&is fil ..."
+
+msgid "&Filtered view"
+msgstr "Vis &filtrert"
+
+msgid "&Copy"
+msgstr "&Kopier"
+
+msgid "C&hmod"
+msgstr "Chm&od"
+
+msgid "&Link"
+msgstr "&Lag lenke"
+
+msgid "&Symlink"
+msgstr "Lag sym&bolsk lenke"
+
+msgid "Relative symlin&k"
+msgstr "Lag relativ s&ymlenke"
+
+msgid "Edit s&ymlink"
+msgstr "Redi&ger symlenke"
+
+msgid "Ch&own"
+msgstr "Cho&wn"
+
+msgid "&Advanced chown"
+msgstr "&Avansert chown"
+
+msgid "Cha&ttr"
+msgstr "Cha&ttr"
+
+msgid "&Rename/Move"
+msgstr "&Endre navn/flytt"
+
+msgid "&Mkdir"
+msgstr "Lag &mappe"
+
+msgid "&Quick cd"
+msgstr "Rask &cd"
+
+msgid "Select &group"
+msgstr "Velg gr&uppe"
+
+msgid "U&nselect group"
+msgstr "Fravelg gru&ppe"
+
+msgid "&Invert selection"
+msgstr "I&nverter utvalg"
+
+msgid "E&xit"
+msgstr "Avslu&tt"
+
+msgid "&User menu"
+msgstr "&Brukermeny"
+
+msgid "&Directory tree"
+msgstr "Mappe&tre"
+
+msgid "&Find file"
+msgstr "F&inn fil"
+
+msgid "S&wap panels"
+msgstr "Bytt &om paneler"
+
+msgid "Switch &panels on/off"
+msgstr "&Paneler av/på"
+
+msgid "&Compare directories"
+msgstr "Sammenlign &mapper"
+
+msgid "C&ompare files"
+msgstr "Sammenlign &filer"
+
+msgid "E&xternal panelize"
+msgstr "Legg til &eksternt i panel"
+
+msgid "Show directory s&izes"
+msgstr "Vis mappe&størrelser"
+
+msgid "Command &history"
+msgstr "&Kommandohistorikk"
+
+msgid "Viewed/edited files hi&story"
+msgstr "Historikk over viste/redigerte filer"
+
+msgid "Di&rectory hotlist"
+msgstr "F&avorittmapper"
+
+msgid "&Active VFS list"
+msgstr "Tilgjengelige &VFS"
+
+msgid "&Background jobs"
+msgstr "Bakgrunns&jobber"
+
+msgid "Screen lis&t"
+msgstr "Kjørende mo&duler"
+
+msgid "&Undelete files (ext2fs only)"
+msgstr "Gjenopprett filer (kun ext2fs)"
+
+msgid "&Listing format edit"
+msgstr "Redigering av listeformat"
+
+msgid "Edit &extension file"
+msgstr "Rediger &utvidelsesfil"
+
+msgid "Edit &menu file"
+msgstr "Rediger men&yfil"
+
+msgid "Edit hi&ghlighting group file"
+msgstr "Rediger uthevings&grupper"
+
+msgid "&Configuration..."
+msgstr "&Oppsett ..."
+
+msgid "&Layout..."
+msgstr "&Utforming ..."
+
+msgid "&Panel options..."
+msgstr "&Panelinnstillinger ..."
+
+msgid "C&onfirmation..."
+msgstr "&Bekreftelser ..."
+
+msgid "&Appearance..."
+msgstr "&Presentasjonsdrakt ..."
+
+msgid "&Display bits..."
+msgstr "&Tegnkoding ..."
+
+msgid "&Virtual FS..."
+msgstr "&Virtuelt FS ..."
+
+msgid "Panels:"
+msgstr "Paneler:"
+
+#, c-format
+msgid "You have %zu opened screen. Quit anyway?"
+msgid_plural "You have %zu opened screens. Quit anyway?"
+msgstr[0] "Det er %zu åpen modul. Avslutte likevel?"
+msgstr[1] "Det er %zu åpne moduler. Avslutte likevel?"
+
+msgid "The Midnight Commander"
+msgstr "Midnight Commander"
+
+msgid "Do you really want to quit the Midnight Commander?"
+msgstr "VIl du avslutte Midnight Commander?"
+
+msgid "&Above"
+msgstr "&Øverst"
+
+msgid "&Left"
+msgstr "&Venstre"
+
+msgid "&Below"
+msgstr "&Nederst"
+
+msgid "&Right"
+msgstr "&Høyre"
+
+msgid "ButtonBar|Menu"
+msgstr "ButtonBar|Meny"
+
+msgid "ButtonBar|View"
+msgstr "ButtonBar|Vis"
+
+msgid "ButtonBar|RenMov"
+msgstr "ButtonBar|Flytt"
+
+msgid "ButtonBar|Mkdir"
+msgstr "ButtonBar|Mkdir"
+
 msgid "&Chdir"
 msgstr "&Bytt mappe"
 
@@ -3140,9 +3366,6 @@ msgstr "Alle tegn&kodinger"
 
 msgid "Fir&st hit"
 msgstr "&Første treff"
-
-msgid "&Tree"
-msgstr "&Tre"
 
 msgid "Find File"
 msgstr "Finn fil"
@@ -3401,222 +3624,6 @@ msgstr "Utdatalinjer:"
 
 msgid "Layout"
 msgstr "Utforming"
-
-msgid "File listin&g"
-msgstr "&List ut filer"
-
-msgid "&Quick view"
-msgstr "&Hurtigvis"
-
-msgid "&Info"
-msgstr "&Informasjon"
-
-msgid "&Listing format..."
-msgstr "&Utlistingsformat ..."
-
-msgid "&Sort order..."
-msgstr "Sorterings&rekkefølge ..."
-
-msgid "&Filter..."
-msgstr "&Filtrer ..."
-
-msgid "&Encoding..."
-msgstr "Tegn&koding for filnavn ..."
-
-msgid "FT&P link..."
-msgstr "Koble til FT&P ..."
-
-msgid "S&hell link..."
-msgstr "Koble til &skall ..."
-
-msgid "S&FTP link..."
-msgstr "K&oble til SFTP ..."
-
-msgid "SM&B link..."
-msgstr "Koble til SM&B ..."
-
-msgid "Paneli&ze"
-msgstr "&Vis lagt til i panel"
-
-msgid "&Rescan"
-msgstr "Opp&dater"
-
-msgid "&View"
-msgstr "&Vis"
-
-msgid "Vie&w file..."
-msgstr "V&is fil ..."
-
-msgid "&Filtered view"
-msgstr "Vis &filtrert"
-
-msgid "&Copy"
-msgstr "&Kopier"
-
-msgid "C&hmod"
-msgstr "Chm&od"
-
-msgid "&Link"
-msgstr "&Lag lenke"
-
-msgid "&Symlink"
-msgstr "Lag sym&bolsk lenke"
-
-msgid "Relative symlin&k"
-msgstr "Lag relativ s&ymlenke"
-
-msgid "Edit s&ymlink"
-msgstr "Redi&ger symlenke"
-
-msgid "Ch&own"
-msgstr "Cho&wn"
-
-msgid "&Advanced chown"
-msgstr "&Avansert chown"
-
-msgid "Cha&ttr"
-msgstr "Cha&ttr"
-
-msgid "&Rename/Move"
-msgstr "&Endre navn/flytt"
-
-msgid "&Mkdir"
-msgstr "Lag &mappe"
-
-msgid "&Quick cd"
-msgstr "Rask &cd"
-
-msgid "Select &group"
-msgstr "Velg gr&uppe"
-
-msgid "U&nselect group"
-msgstr "Fravelg gru&ppe"
-
-msgid "&Invert selection"
-msgstr "I&nverter utvalg"
-
-msgid "E&xit"
-msgstr "Avslu&tt"
-
-msgid "&User menu"
-msgstr "&Brukermeny"
-
-msgid "&Directory tree"
-msgstr "Mappe&tre"
-
-msgid "&Find file"
-msgstr "F&inn fil"
-
-msgid "S&wap panels"
-msgstr "Bytt &om paneler"
-
-msgid "Switch &panels on/off"
-msgstr "&Paneler av/på"
-
-msgid "&Compare directories"
-msgstr "Sammenlign &mapper"
-
-msgid "C&ompare files"
-msgstr "Sammenlign &filer"
-
-msgid "E&xternal panelize"
-msgstr "Legg til &eksternt i panel"
-
-msgid "Show directory s&izes"
-msgstr "Vis mappe&størrelser"
-
-msgid "Command &history"
-msgstr "&Kommandohistorikk"
-
-msgid "Viewed/edited files hi&story"
-msgstr "Historikk over viste/redigerte filer"
-
-msgid "Di&rectory hotlist"
-msgstr "F&avorittmapper"
-
-msgid "&Active VFS list"
-msgstr "Tilgjengelige &VFS"
-
-msgid "&Background jobs"
-msgstr "Bakgrunns&jobber"
-
-msgid "Screen lis&t"
-msgstr "Kjørende mo&duler"
-
-msgid "&Undelete files (ext2fs only)"
-msgstr "Gjenopprett filer (kun ext2fs)"
-
-msgid "&Listing format edit"
-msgstr "Redigering av listeformat"
-
-msgid "Edit &extension file"
-msgstr "Rediger &utvidelsesfil"
-
-msgid "Edit &menu file"
-msgstr "Rediger men&yfil"
-
-msgid "Edit hi&ghlighting group file"
-msgstr "Rediger uthevings&grupper"
-
-msgid "&Configuration..."
-msgstr "&Oppsett ..."
-
-msgid "&Layout..."
-msgstr "&Utforming ..."
-
-msgid "&Panel options..."
-msgstr "&Panelinnstillinger ..."
-
-msgid "C&onfirmation..."
-msgstr "&Bekreftelser ..."
-
-msgid "&Appearance..."
-msgstr "&Presentasjonsdrakt ..."
-
-msgid "&Display bits..."
-msgstr "&Tegnkoding ..."
-
-msgid "&Virtual FS..."
-msgstr "&Virtuelt FS ..."
-
-msgid "Panels:"
-msgstr "Paneler:"
-
-#, c-format
-msgid "You have %zu opened screen. Quit anyway?"
-msgid_plural "You have %zu opened screens. Quit anyway?"
-msgstr[0] "Det er %zu åpen modul. Avslutte likevel?"
-msgstr[1] "Det er %zu åpne moduler. Avslutte likevel?"
-
-msgid "The Midnight Commander"
-msgstr "Midnight Commander"
-
-msgid "Do you really want to quit the Midnight Commander?"
-msgstr "VIl du avslutte Midnight Commander?"
-
-msgid "&Above"
-msgstr "&Øverst"
-
-msgid "&Left"
-msgstr "&Venstre"
-
-msgid "&Below"
-msgstr "&Nederst"
-
-msgid "&Right"
-msgstr "&Høyre"
-
-msgid "ButtonBar|Menu"
-msgstr "ButtonBar|Meny"
-
-msgid "ButtonBar|View"
-msgstr "ButtonBar|Vis"
-
-msgid "ButtonBar|RenMov"
-msgstr "ButtonBar|Flytt"
-
-msgid "ButtonBar|Mkdir"
-msgstr "ButtonBar|Mkdir"
 
 msgid "Memory exhausted!"
 msgstr "Gikk tom for minne."

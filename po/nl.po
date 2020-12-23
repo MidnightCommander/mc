@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"POT-Creation-Date: 2020-12-31 16:34+0300\n"
 "PO-Revision-Date: 2020-05-28 13:38+0000\n"
 "Last-Translator: Richard E. van der Luit <nippur@fedoraproject.org>\n"
 "Language-Team: Dutch (http://www.transifex.com/mc/mc/language/nl/)\n"
@@ -1983,6 +1983,9 @@ msgstr "Instellingen"
 msgid "Skin:"
 msgstr "Skin:"
 
+msgid "&Shadows"
+msgstr ""
+
 msgid "Appearance"
 msgstr "Uiterlijk"
 
@@ -2207,6 +2210,14 @@ msgstr " Gebruikersnaam:"
 msgid "SMB authentication"
 msgstr "SMB-authenticatie"
 
+#, c-format
+msgid ""
+"Cannot chdir to \"%s\"\n"
+"%s"
+msgstr ""
+"Veranderen naar map \"%s\" mislukt \n"
+"%s "
+
 msgid "Secure deletion"
 msgstr "Secure verwijderen"
 
@@ -2266,6 +2277,10 @@ msgstr "Huge_file"
 
 msgid "No COW"
 msgstr "Geen COW"
+
+#, fuzzy
+msgid "Direct access for files"
+msgstr "Map-cache verlopen voor %s"
 
 msgid "Casefolded file"
 msgstr "Casefolded bestand"
@@ -2546,14 +2561,6 @@ msgstr "Niet in staat instellingen op te slaan in %s"
 
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "U kunt geen opdrachten uitvoeren op non-lokale bestandssystemen"
-
-#, c-format
-msgid ""
-"Cannot chdir to \"%s\"\n"
-"%s"
-msgstr ""
-"Veranderen naar map \"%s\" mislukt \n"
-"%s "
 
 msgid "Parameter"
 msgstr "Parameter"
@@ -3091,6 +3098,225 @@ msgstr "Achter&grond"
 msgid "Invalid source pattern '%s'"
 msgstr "Ongeldig bronpatroon '%s'"
 
+msgid "File listin&g"
+msgstr "Bestandsopsommin&g"
+
+msgid "&Quick view"
+msgstr "&Korte lijst"
+
+msgid "&Info"
+msgstr "&Info"
+
+msgid "&Tree"
+msgstr "&Boom"
+
+msgid "&Listing format..."
+msgstr "&Lijstformaat..."
+
+msgid "&Sort order..."
+msgstr "&Sorteervolgorde...     "
+
+msgid "&Filter..."
+msgstr "&Filter...              "
+
+msgid "&Encoding..."
+msgstr "&Encoderen..."
+
+msgid "FT&P link..."
+msgstr "FT&P-Verbinding...      "
+
+msgid "S&hell link..."
+msgstr "S&hellverbinding...    "
+
+msgid "S&FTP link..."
+msgstr "S&FTP-link..."
+
+msgid "SM&B link..."
+msgstr "SM&B-Verbinding..."
+
+msgid "Paneli&ze"
+msgstr "Als vens&ter"
+
+msgid "&Rescan"
+msgstr "&Herlezen"
+
+msgid "&View"
+msgstr "&Weergave"
+
+msgid "Vie&w file..."
+msgstr "&Tonen bestand..."
+
+msgid "&Filtered view"
+msgstr "&Gefilterde weergave"
+
+msgid "&Copy"
+msgstr "&Kopiëren"
+
+msgid "C&hmod"
+msgstr "C&hmod"
+
+msgid "&Link"
+msgstr "&Link"
+
+msgid "&Symlink"
+msgstr "&Symlink"
+
+msgid "Relative symlin&k"
+msgstr "Relatieve symli&nk"
+
+msgid "Edit s&ymlink"
+msgstr "S&ymlink bewerken"
+
+msgid "Ch&own"
+msgstr "Ch&own"
+
+msgid "&Advanced chown"
+msgstr "&Uitgebreide chown"
+
+msgid "Cha&ttr"
+msgstr "Cha&ttr"
+
+msgid "&Rename/Move"
+msgstr "&Hernoemen"
+
+msgid "&Mkdir"
+msgstr "&Map maken"
+
+msgid "&Quick cd"
+msgstr "&Snelle cd"
+
+msgid "Select &group"
+msgstr "Selecteren &groep"
+
+msgid "U&nselect group"
+msgstr "&Deselecteren groep"
+
+msgid "&Invert selection"
+msgstr "&Inverteren selectie"
+
+msgid "E&xit"
+msgstr "&Afsluiten"
+
+msgid "&User menu"
+msgstr "&Gebruikersmenu"
+
+msgid "&Directory tree"
+msgstr "&Mappenhiërarchie                 "
+
+msgid "&Find file"
+msgstr "Bestand &zoeken"
+
+msgid "S&wap panels"
+msgstr "&Wisselen vensters"
+
+msgid "Switch &panels on/off"
+msgstr "Vensters &aan/uit"
+
+msgid "&Compare directories"
+msgstr "&Mappen vergelijken"
+
+msgid "C&ompare files"
+msgstr "Vergelij&ken bestanden"
+
+msgid "E&xternal panelize"
+msgstr "&Plaatsen in extern venster"
+
+msgid "Show directory s&izes"
+msgstr "Tonen mappen&grootte"
+
+msgid "Command &history"
+msgstr "&Opdrachtengeschiedenis"
+
+msgid "Viewed/edited files hi&story"
+msgstr "Ge&schiedenis bekeken/bewerkte bestanden"
+
+msgid "Di&rectory hotlist"
+msgstr "&Mappen hotslist"
+
+msgid "&Active VFS list"
+msgstr "Actieve &VFS-lijst"
+
+msgid "&Background jobs"
+msgstr "&Achtergrondtaken"
+
+msgid "Screen lis&t"
+msgstr "Schermopsommin&g"
+
+msgid "&Undelete files (ext2fs only)"
+msgstr "&Herstellen bestanden (alleen ext2fs)"
+
+msgid "&Listing format edit"
+msgstr "&Lijstformaat bewerken"
+
+msgid "Edit &extension file"
+msgstr "Bewerken &extensie                  "
+
+msgid "Edit &menu file"
+msgstr "&Bewerken menubestand               "
+
+msgid "Edit hi&ghlighting group file"
+msgstr "Aanpassen hi&ghlighting-groepsbestand"
+
+msgid "&Configuration..."
+msgstr "&Configuratie..."
+
+msgid "&Layout..."
+msgstr "&Vormgeving..."
+
+msgid "&Panel options..."
+msgstr "Venstero&pties "
+
+msgid "C&onfirmation..."
+msgstr "&Bevestiging..."
+
+msgid "&Appearance..."
+msgstr "&Uiterlijk..."
+
+msgid "&Display bits..."
+msgstr "&Weergavebits..."
+
+msgid "&Virtual FS..."
+msgstr "&Virtueel FS..."
+
+msgid "Panels:"
+msgstr "Vensters:"
+
+#, c-format
+msgid "You have %zu opened screen. Quit anyway?"
+msgid_plural "You have %zu opened screens. Quit anyway?"
+msgstr[0] "Je hebt %zu geopende scherm. Toch stoppen?"
+msgstr[1] "Je hebt %zu geopende schermen. Toch stoppen?"
+
+msgid "The Midnight Commander"
+msgstr "The Midnight Commander"
+
+msgid "Do you really want to quit the Midnight Commander?"
+msgstr "Wilt u echt de Midnight Commander afsluiten?"
+
+msgid "&Above"
+msgstr "&Boven"
+
+msgid "&Left"
+msgstr "&Links"
+
+msgid "&Below"
+msgstr "&Onder"
+
+msgid "&Right"
+msgstr "&Rechts"
+
+msgid "ButtonBar|Menu"
+msgstr " Menu"
+
+msgid "ButtonBar|View"
+msgstr " Bekijken"
+
+msgid "ButtonBar|RenMov"
+msgstr " Hernoemen"
+
+msgid "ButtonBar|Mkdir"
+msgstr " Mkdir"
+
 msgid "&Chdir"
 msgstr "&Chdir"
 
@@ -3136,9 +3362,6 @@ msgstr "A&lle karaktersets"
 
 msgid "Fir&st hit"
 msgstr "Eer&ste hit"
-
-msgid "&Tree"
-msgstr "&Boom"
 
 msgid "Find File"
 msgstr "Bestand zoeken"
@@ -3397,222 +3620,6 @@ msgstr "Output-regels:"
 
 msgid "Layout"
 msgstr "Vormgeving"
-
-msgid "File listin&g"
-msgstr "Bestandsopsommin&g"
-
-msgid "&Quick view"
-msgstr "&Korte lijst"
-
-msgid "&Info"
-msgstr "&Info"
-
-msgid "&Listing format..."
-msgstr "&Lijstformaat..."
-
-msgid "&Sort order..."
-msgstr "&Sorteervolgorde...     "
-
-msgid "&Filter..."
-msgstr "&Filter...              "
-
-msgid "&Encoding..."
-msgstr "&Encoderen..."
-
-msgid "FT&P link..."
-msgstr "FT&P-Verbinding...      "
-
-msgid "S&hell link..."
-msgstr "S&hellverbinding...    "
-
-msgid "S&FTP link..."
-msgstr "S&FTP-link..."
-
-msgid "SM&B link..."
-msgstr "SM&B-Verbinding..."
-
-msgid "Paneli&ze"
-msgstr "Als vens&ter"
-
-msgid "&Rescan"
-msgstr "&Herlezen"
-
-msgid "&View"
-msgstr "&Weergave"
-
-msgid "Vie&w file..."
-msgstr "&Tonen bestand..."
-
-msgid "&Filtered view"
-msgstr "&Gefilterde weergave"
-
-msgid "&Copy"
-msgstr "&Kopiëren"
-
-msgid "C&hmod"
-msgstr "C&hmod"
-
-msgid "&Link"
-msgstr "&Link"
-
-msgid "&Symlink"
-msgstr "&Symlink"
-
-msgid "Relative symlin&k"
-msgstr "Relatieve symli&nk"
-
-msgid "Edit s&ymlink"
-msgstr "S&ymlink bewerken"
-
-msgid "Ch&own"
-msgstr "Ch&own"
-
-msgid "&Advanced chown"
-msgstr "&Uitgebreide chown"
-
-msgid "Cha&ttr"
-msgstr "Cha&ttr"
-
-msgid "&Rename/Move"
-msgstr "&Hernoemen"
-
-msgid "&Mkdir"
-msgstr "&Map maken"
-
-msgid "&Quick cd"
-msgstr "&Snelle cd"
-
-msgid "Select &group"
-msgstr "Selecteren &groep"
-
-msgid "U&nselect group"
-msgstr "&Deselecteren groep"
-
-msgid "&Invert selection"
-msgstr "&Inverteren selectie"
-
-msgid "E&xit"
-msgstr "&Afsluiten"
-
-msgid "&User menu"
-msgstr "&Gebruikersmenu"
-
-msgid "&Directory tree"
-msgstr "&Mappenhiërarchie                 "
-
-msgid "&Find file"
-msgstr "Bestand &zoeken"
-
-msgid "S&wap panels"
-msgstr "&Wisselen vensters"
-
-msgid "Switch &panels on/off"
-msgstr "Vensters &aan/uit"
-
-msgid "&Compare directories"
-msgstr "&Mappen vergelijken"
-
-msgid "C&ompare files"
-msgstr "Vergelij&ken bestanden"
-
-msgid "E&xternal panelize"
-msgstr "&Plaatsen in extern venster"
-
-msgid "Show directory s&izes"
-msgstr "Tonen mappen&grootte"
-
-msgid "Command &history"
-msgstr "&Opdrachtengeschiedenis"
-
-msgid "Viewed/edited files hi&story"
-msgstr "Ge&schiedenis bekeken/bewerkte bestanden"
-
-msgid "Di&rectory hotlist"
-msgstr "&Mappen hotslist"
-
-msgid "&Active VFS list"
-msgstr "Actieve &VFS-lijst"
-
-msgid "&Background jobs"
-msgstr "&Achtergrondtaken"
-
-msgid "Screen lis&t"
-msgstr "Schermopsommin&g"
-
-msgid "&Undelete files (ext2fs only)"
-msgstr "&Herstellen bestanden (alleen ext2fs)"
-
-msgid "&Listing format edit"
-msgstr "&Lijstformaat bewerken"
-
-msgid "Edit &extension file"
-msgstr "Bewerken &extensie                  "
-
-msgid "Edit &menu file"
-msgstr "&Bewerken menubestand               "
-
-msgid "Edit hi&ghlighting group file"
-msgstr "Aanpassen hi&ghlighting-groepsbestand"
-
-msgid "&Configuration..."
-msgstr "&Configuratie..."
-
-msgid "&Layout..."
-msgstr "&Vormgeving..."
-
-msgid "&Panel options..."
-msgstr "Venstero&pties "
-
-msgid "C&onfirmation..."
-msgstr "&Bevestiging..."
-
-msgid "&Appearance..."
-msgstr "&Uiterlijk..."
-
-msgid "&Display bits..."
-msgstr "&Weergavebits..."
-
-msgid "&Virtual FS..."
-msgstr "&Virtueel FS..."
-
-msgid "Panels:"
-msgstr "Vensters:"
-
-#, c-format
-msgid "You have %zu opened screen. Quit anyway?"
-msgid_plural "You have %zu opened screens. Quit anyway?"
-msgstr[0] "Je hebt %zu geopende scherm. Toch stoppen?"
-msgstr[1] "Je hebt %zu geopende schermen. Toch stoppen?"
-
-msgid "The Midnight Commander"
-msgstr "The Midnight Commander"
-
-msgid "Do you really want to quit the Midnight Commander?"
-msgstr "Wilt u echt de Midnight Commander afsluiten?"
-
-msgid "&Above"
-msgstr "&Boven"
-
-msgid "&Left"
-msgstr "&Links"
-
-msgid "&Below"
-msgstr "&Onder"
-
-msgid "&Right"
-msgstr "&Rechts"
-
-msgid "ButtonBar|Menu"
-msgstr " Menu"
-
-msgid "ButtonBar|View"
-msgstr " Bekijken"
-
-msgid "ButtonBar|RenMov"
-msgstr " Hernoemen"
-
-msgid "ButtonBar|Mkdir"
-msgstr " Mkdir"
 
 msgid "Memory exhausted!"
 msgstr "Geen geheugenruimte meer!"

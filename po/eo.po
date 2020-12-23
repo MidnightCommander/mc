@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"POT-Creation-Date: 2020-12-31 16:34+0300\n"
 "PO-Revision-Date: 2020-05-22 15:31+0000\n"
 "Last-Translator: Keith Bowes <zooplah@gmail.com>\n"
 "Language-Team: Esperanto (http://www.transifex.com/mc/mc/language/eo/)\n"
@@ -1984,6 +1984,9 @@ msgstr "Agordaĵoj"
 msgid "Skin:"
 msgstr "Etoso:"
 
+msgid "&Shadows"
+msgstr ""
+
 msgid "Appearance"
 msgstr "Aspekto"
 
@@ -2207,6 +2210,14 @@ msgstr "Salutnomo:"
 msgid "SMB authentication"
 msgstr "SMB-atestado"
 
+#, c-format
+msgid ""
+"Cannot chdir to \"%s\"\n"
+"%s"
+msgstr ""
+"Ne eblas ŝanĝi dosierujon al \"%s\"\n"
+"%s"
+
 msgid "Secure deletion"
 msgstr "Sekura forigo"
 
@@ -2266,6 +2277,10 @@ msgstr "Grandega_dosieron"
 
 msgid "No COW"
 msgstr "Neniu COW"
+
+#, fuzzy
+msgid "Direct access for files"
+msgstr "Dosieruja tenejo eksvalidiĝis por %s"
 
 msgid "Casefolded file"
 msgstr "Dosiero kun faldita uskleco"
@@ -2546,14 +2561,6 @@ msgstr "Ne eblas konservi al dosiero %s"
 
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "Ne eblas plenumi komandojn en foraj dosiersistemoj"
-
-#, c-format
-msgid ""
-"Cannot chdir to \"%s\"\n"
-"%s"
-msgstr ""
-"Ne eblas ŝanĝi dosierujon al \"%s\"\n"
-"%s"
 
 msgid "Parameter"
 msgstr "Parametro"
@@ -3089,6 +3096,225 @@ msgstr "&Fone"
 msgid "Invalid source pattern '%s'"
 msgstr "Nevalida celan ŝablonon '%s'"
 
+msgid "File listin&g"
+msgstr "&Dosiero listo"
+
+msgid "&Quick view"
+msgstr "Rapida &vido"
+
+msgid "&Info"
+msgstr "&Informoj"
+
+msgid "&Tree"
+msgstr "&Arbo"
+
+msgid "&Listing format..."
+msgstr "&Listo-aranĝo…"
+
+msgid "&Sort order..."
+msgstr "&Ordigi laŭ..."
+
+msgid "&Filter..."
+msgstr "&Filtri..."
+
+msgid "&Encoding..."
+msgstr "&Kodoprezento..."
+
+msgid "FT&P link..."
+msgstr "FT&P-ligilo..."
+
+msgid "S&hell link..."
+msgstr "Ŝ&ela ligilo..."
+
+msgid "S&FTP link..."
+msgstr "&SFTP-ligilo..."
+
+msgid "SM&B link..."
+msgstr "SM&B-a ligilo..."
+
+msgid "Paneli&ze"
+msgstr "&Flankigi"
+
+msgid "&Rescan"
+msgstr "&Refreŝigi"
+
+msgid "&View"
+msgstr "&Vidi"
+
+msgid "Vie&w file..."
+msgstr "Vidi do&sieron..."
+
+msgid "&Filtered view"
+msgstr "&Filtrita vido"
+
+msgid "&Copy"
+msgstr "&Kopii"
+
+msgid "C&hmod"
+msgstr "Ŝanĝi &permesojn"
+
+msgid "&Link"
+msgstr "&Ligilo"
+
+msgid "&Symlink"
+msgstr "&Mola ligilo"
+
+msgid "Relative symlin&k"
+msgstr "&Relativa simbola ligilo"
+
+msgid "Edit s&ymlink"
+msgstr "Re&dakti simbolan ligilon"
+
+msgid "Ch&own"
+msgstr "Ŝanĝi estre&con"
+
+msgid "&Advanced chown"
+msgstr "&Altnivele ŝanĝi estrecon"
+
+msgid "Cha&ttr"
+msgstr "Ŝanĝi atri&buton"
+
+msgid "&Rename/Move"
+msgstr "Al&inomi/Movi"
+
+msgid "&Mkdir"
+msgstr "&Novan dosierujon"
+
+msgid "&Quick cd"
+msgstr "Rapide ŝanĝi dosieru&jon"
+
+msgid "Select &group"
+msgstr "Elekti &grupon"
+
+msgid "U&nselect group"
+msgstr "Malelekti gr&upon"
+
+msgid "&Invert selection"
+msgstr "Inversigi elek&ton"
+
+msgid "E&xit"
+msgstr "&Eliri"
+
+msgid "&User menu"
+msgstr "&Uzanto-menuo"
+
+msgid "&Directory tree"
+msgstr "&Dosieruja arbo"
+
+msgid "&Find file"
+msgstr "&Trovi dosieron"
+
+msgid "S&wap panels"
+msgstr "In&versigi flankojn"
+
+msgid "Switch &panels on/off"
+msgstr "(Mal)ŝalti &flankojn"
+
+msgid "&Compare directories"
+msgstr "&Kompari dosierujojn"
+
+msgid "C&ompare files"
+msgstr "K&ompari dosierojn"
+
+msgid "E&xternal panelize"
+msgstr "&Eksterigi flankojn"
+
+msgid "Show directory s&izes"
+msgstr "Montri dosierujajn g&randojn"
+
+msgid "Command &history"
+msgstr "Komanda &historio"
+
+msgid "Viewed/edited files hi&story"
+msgstr "H&istorio de viditaj/redaktitaj dosieroj"
+
+msgid "Di&rectory hotlist"
+msgstr "Dosieru&ja rapidolisto"
+
+msgid "&Active VFS list"
+msgstr "Listo de &aktivaj virtualaj dosiersistemoj"
+
+msgid "&Background jobs"
+msgstr "Fo&naj taskoj"
+
+msgid "Screen lis&t"
+msgstr "&Paĝa listo"
+
+msgid "&Undelete files (ext2fs only)"
+msgstr "Reat&ingi dosierojn (nur en ext2fs)"
+
+msgid "&Listing format edit"
+msgstr "Redakti &listan aranĝon"
+
+msgid "Edit &extension file"
+msgstr "Redakti &sufikso-dosieron"
+
+msgid "Edit &menu file"
+msgstr "Redakti &menuo-dosieron"
+
+msgid "Edit hi&ghlighting group file"
+msgstr "Redakti pri&lumo-grupan dosieron"
+
+msgid "&Configuration..."
+msgstr "Ag&ordo..."
+
+msgid "&Layout..."
+msgstr "&Aranĝo..."
+
+msgid "&Panel options..."
+msgstr "&Flankaj agordaĵoj..."
+
+msgid "C&onfirmation..."
+msgstr "Ko&nfirmo..."
+
+msgid "&Appearance..."
+msgstr "A&spekto..."
+
+msgid "&Display bits..."
+msgstr "&Elmontraj bitoj..."
+
+msgid "&Virtual FS..."
+msgstr "&Virtualaj dosiersistemoj..."
+
+msgid "Panels:"
+msgstr "Flankoj:"
+
+#, c-format
+msgid "You have %zu opened screen. Quit anyway?"
+msgid_plural "You have %zu opened screens. Quit anyway?"
+msgstr[0] "%zu paĝo estas malfermita. Ĉu senkonsidere eliri?"
+msgstr[1] "%zu paĝoj estas malfermitaj. Ĉu senkonsidere eliri?"
+
+msgid "The Midnight Commander"
+msgstr "Midnight Commander"
+
+msgid "Do you really want to quit the Midnight Commander?"
+msgstr "Ĉu vi efektive volas eliri el Midnight Commander?"
+
+msgid "&Above"
+msgstr "&Supra"
+
+msgid "&Left"
+msgstr "&Maldekstra"
+
+msgid "&Below"
+msgstr "&Malsupra"
+
+msgid "&Right"
+msgstr "D&ekstra"
+
+msgid "ButtonBar|Menu"
+msgstr "ButtonBar|Menuo"
+
+msgid "ButtonBar|View"
+msgstr "ButtonBar|Vidi"
+
+msgid "ButtonBar|RenMov"
+msgstr "ButtonBar|Movi"
+
+msgid "ButtonBar|Mkdir"
+msgstr "ButtonBar|Mkdir"
+
 msgid "&Chdir"
 msgstr "Ŝanĝi dosieru&jon"
 
@@ -3134,9 +3360,6 @@ msgstr "Ĉ&iuj signaroj"
 
 msgid "Fir&st hit"
 msgstr "Unu&a rezulto"
-
-msgid "&Tree"
-msgstr "&Arbo"
 
 msgid "Find File"
 msgstr "Trovi dosieron"
@@ -3395,222 +3618,6 @@ msgstr "Eligaj linioj:"
 
 msgid "Layout"
 msgstr "Aranĝo"
-
-msgid "File listin&g"
-msgstr "&Dosiero listo"
-
-msgid "&Quick view"
-msgstr "Rapida &vido"
-
-msgid "&Info"
-msgstr "&Informoj"
-
-msgid "&Listing format..."
-msgstr "&Listo-aranĝo…"
-
-msgid "&Sort order..."
-msgstr "&Ordigi laŭ..."
-
-msgid "&Filter..."
-msgstr "&Filtri..."
-
-msgid "&Encoding..."
-msgstr "&Kodoprezento..."
-
-msgid "FT&P link..."
-msgstr "FT&P-ligilo..."
-
-msgid "S&hell link..."
-msgstr "Ŝ&ela ligilo..."
-
-msgid "S&FTP link..."
-msgstr "&SFTP-ligilo..."
-
-msgid "SM&B link..."
-msgstr "SM&B-a ligilo..."
-
-msgid "Paneli&ze"
-msgstr "&Flankigi"
-
-msgid "&Rescan"
-msgstr "&Refreŝigi"
-
-msgid "&View"
-msgstr "&Vidi"
-
-msgid "Vie&w file..."
-msgstr "Vidi do&sieron..."
-
-msgid "&Filtered view"
-msgstr "&Filtrita vido"
-
-msgid "&Copy"
-msgstr "&Kopii"
-
-msgid "C&hmod"
-msgstr "Ŝanĝi &permesojn"
-
-msgid "&Link"
-msgstr "&Ligilo"
-
-msgid "&Symlink"
-msgstr "&Mola ligilo"
-
-msgid "Relative symlin&k"
-msgstr "&Relativa simbola ligilo"
-
-msgid "Edit s&ymlink"
-msgstr "Re&dakti simbolan ligilon"
-
-msgid "Ch&own"
-msgstr "Ŝanĝi estre&con"
-
-msgid "&Advanced chown"
-msgstr "&Altnivele ŝanĝi estrecon"
-
-msgid "Cha&ttr"
-msgstr "Ŝanĝi atri&buton"
-
-msgid "&Rename/Move"
-msgstr "Al&inomi/Movi"
-
-msgid "&Mkdir"
-msgstr "&Novan dosierujon"
-
-msgid "&Quick cd"
-msgstr "Rapide ŝanĝi dosieru&jon"
-
-msgid "Select &group"
-msgstr "Elekti &grupon"
-
-msgid "U&nselect group"
-msgstr "Malelekti gr&upon"
-
-msgid "&Invert selection"
-msgstr "Inversigi elek&ton"
-
-msgid "E&xit"
-msgstr "&Eliri"
-
-msgid "&User menu"
-msgstr "&Uzanto-menuo"
-
-msgid "&Directory tree"
-msgstr "&Dosieruja arbo"
-
-msgid "&Find file"
-msgstr "&Trovi dosieron"
-
-msgid "S&wap panels"
-msgstr "In&versigi flankojn"
-
-msgid "Switch &panels on/off"
-msgstr "(Mal)ŝalti &flankojn"
-
-msgid "&Compare directories"
-msgstr "&Kompari dosierujojn"
-
-msgid "C&ompare files"
-msgstr "K&ompari dosierojn"
-
-msgid "E&xternal panelize"
-msgstr "&Eksterigi flankojn"
-
-msgid "Show directory s&izes"
-msgstr "Montri dosierujajn g&randojn"
-
-msgid "Command &history"
-msgstr "Komanda &historio"
-
-msgid "Viewed/edited files hi&story"
-msgstr "H&istorio de viditaj/redaktitaj dosieroj"
-
-msgid "Di&rectory hotlist"
-msgstr "Dosieru&ja rapidolisto"
-
-msgid "&Active VFS list"
-msgstr "Listo de &aktivaj virtualaj dosiersistemoj"
-
-msgid "&Background jobs"
-msgstr "Fo&naj taskoj"
-
-msgid "Screen lis&t"
-msgstr "&Paĝa listo"
-
-msgid "&Undelete files (ext2fs only)"
-msgstr "Reat&ingi dosierojn (nur en ext2fs)"
-
-msgid "&Listing format edit"
-msgstr "Redakti &listan aranĝon"
-
-msgid "Edit &extension file"
-msgstr "Redakti &sufikso-dosieron"
-
-msgid "Edit &menu file"
-msgstr "Redakti &menuo-dosieron"
-
-msgid "Edit hi&ghlighting group file"
-msgstr "Redakti pri&lumo-grupan dosieron"
-
-msgid "&Configuration..."
-msgstr "Ag&ordo..."
-
-msgid "&Layout..."
-msgstr "&Aranĝo..."
-
-msgid "&Panel options..."
-msgstr "&Flankaj agordaĵoj..."
-
-msgid "C&onfirmation..."
-msgstr "Ko&nfirmo..."
-
-msgid "&Appearance..."
-msgstr "A&spekto..."
-
-msgid "&Display bits..."
-msgstr "&Elmontraj bitoj..."
-
-msgid "&Virtual FS..."
-msgstr "&Virtualaj dosiersistemoj..."
-
-msgid "Panels:"
-msgstr "Flankoj:"
-
-#, c-format
-msgid "You have %zu opened screen. Quit anyway?"
-msgid_plural "You have %zu opened screens. Quit anyway?"
-msgstr[0] "%zu paĝo estas malfermita. Ĉu senkonsidere eliri?"
-msgstr[1] "%zu paĝoj estas malfermitaj. Ĉu senkonsidere eliri?"
-
-msgid "The Midnight Commander"
-msgstr "Midnight Commander"
-
-msgid "Do you really want to quit the Midnight Commander?"
-msgstr "Ĉu vi efektive volas eliri el Midnight Commander?"
-
-msgid "&Above"
-msgstr "&Supra"
-
-msgid "&Left"
-msgstr "&Maldekstra"
-
-msgid "&Below"
-msgstr "&Malsupra"
-
-msgid "&Right"
-msgstr "D&ekstra"
-
-msgid "ButtonBar|Menu"
-msgstr "ButtonBar|Menuo"
-
-msgid "ButtonBar|View"
-msgstr "ButtonBar|Vidi"
-
-msgid "ButtonBar|RenMov"
-msgstr "ButtonBar|Movi"
-
-msgid "ButtonBar|Mkdir"
-msgstr "ButtonBar|Mkdir"
 
 msgid "Memory exhausted!"
 msgstr "Memoro eluzita!"

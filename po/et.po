@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"POT-Creation-Date: 2020-12-31 16:34+0300\n"
 "PO-Revision-Date: 2020-05-17 17:42+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Estonian (http://www.transifex.com/mc/mc/language/et/)\n"
@@ -1976,6 +1976,9 @@ msgstr "Häälestuse suvandid"
 msgid "Skin:"
 msgstr "Nahk:"
 
+msgid "&Shadows"
+msgstr ""
+
 msgid "Appearance"
 msgstr "Välimus"
 
@@ -2198,6 +2201,14 @@ msgstr "Kasutaja:"
 msgid "SMB authentication"
 msgstr "SMB autentimine"
 
+#, c-format
+msgid ""
+"Cannot chdir to \"%s\"\n"
+"%s"
+msgstr ""
+"Kataloogi \"%s\" sisenemine nurjus\n"
+"%s"
+
 msgid "Secure deletion"
 msgstr "Turvaline kustutamine"
 
@@ -2257,6 +2268,10 @@ msgstr ""
 
 msgid "No COW"
 msgstr ""
+
+#, fuzzy
+msgid "Direct access for files"
+msgstr "Kataloogi %s vahemälu sisu on aegunud"
 
 msgid "Casefolded file"
 msgstr ""
@@ -2533,14 +2548,6 @@ msgstr "Nurjus seadete salvestamine faili %s"
 
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "Käske ei saa käivitada kaugfailisüsteemidel"
-
-#, c-format
-msgid ""
-"Cannot chdir to \"%s\"\n"
-"%s"
-msgstr ""
-"Kataloogi \"%s\" sisenemine nurjus\n"
-"%s"
 
 msgid "Parameter"
 msgstr "Parameeter"
@@ -3075,6 +3082,225 @@ msgstr "&Taustale"
 msgid "Invalid source pattern '%s'"
 msgstr "Vigane lähtemuster \"%s\""
 
+msgid "File listin&g"
+msgstr "F&ailide loend"
+
+msgid "&Quick view"
+msgstr "&Kiirvaade"
+
+msgid "&Info"
+msgstr "&Info"
+
+msgid "&Tree"
+msgstr "&Puu"
+
+msgid "&Listing format..."
+msgstr "&Loendi vormindus"
+
+msgid "&Sort order..."
+msgstr "&Sortimine..."
+
+msgid "&Filter..."
+msgstr "Filtreeri&mine..."
+
+msgid "&Encoding..."
+msgstr "Ko&deering..."
+
+msgid "FT&P link..."
+msgstr "F&TP ühendus..."
+
+msgid "S&hell link..."
+msgstr "K&esta ühendus..."
+
+msgid "S&FTP link..."
+msgstr "S&FTP ühendus..."
+
+msgid "SM&B link..."
+msgstr "SM&B ühendus..."
+
+msgid "Paneli&ze"
+msgstr "Pa&neelile"
+
+msgid "&Rescan"
+msgstr "Ko&rdusskannimine"
+
+msgid "&View"
+msgstr "V&aata"
+
+msgid "Vie&w file..."
+msgstr "Vaa&ta faili..."
+
+msgid "&Filtered view"
+msgstr "&Filtreeritud vaade"
+
+msgid "&Copy"
+msgstr "Ko&peeri"
+
+msgid "C&hmod"
+msgstr "Õi&guste muutmine"
+
+msgid "&Link"
+msgstr "&Jäikviit"
+
+msgid "&Symlink"
+msgstr "A&bsoluutne nimeviit"
+
+msgid "Relative symlin&k"
+msgstr "&Suhteline nimeviit"
+
+msgid "Edit s&ymlink"
+msgstr "Muuda &nimeviita"
+
+msgid "Ch&own"
+msgstr "Vaheta &omanik"
+
+msgid "&Advanced chown"
+msgstr "Täpsem omani&ku vahetus"
+
+msgid "Cha&ttr"
+msgstr ""
+
+msgid "&Rename/Move"
+msgstr "Teisal&da/nimeta"
+
+msgid "&Mkdir"
+msgstr "&Loo kataloog"
+
+msgid "&Quick cd"
+msgstr "Kataloogi k&iirvahetus"
+
+msgid "Select &group"
+msgstr "Vali g&rupp"
+
+msgid "U&nselect group"
+msgstr "Tü&hista grupi valik"
+
+msgid "&Invert selection"
+msgstr "Vah&eta valik"
+
+msgid "E&xit"
+msgstr "&Välju"
+
+msgid "&User menu"
+msgstr "Kas&utaja menüü"
+
+msgid "&Directory tree"
+msgstr "Kataloogi&puu"
+
+msgid "&Find file"
+msgstr "&Failide otsimine"
+
+msgid "S&wap panels"
+msgstr "&Vaheta paneelid"
+
+msgid "Switch &panels on/off"
+msgstr "&Kuva/peida paneelid"
+
+msgid "&Compare directories"
+msgstr "Kataloogi&de võrdlemine"
+
+msgid "C&ompare files"
+msgstr "Võ&rdle faile"
+
+msgid "E&xternal panelize"
+msgstr "Väliskäsk pa&neelile"
+
+msgid "Show directory s&izes"
+msgstr "Kuva kataloogide &suurused"
+
+msgid "Command &history"
+msgstr "Käskude a&jalugu"
+
+msgid "Viewed/edited files hi&story"
+msgstr "Vaadatud/muudetud failide ajalugu"
+
+msgid "Di&rectory hotlist"
+msgstr "Katal&oogide kiirvalik"
+
+msgid "&Active VFS list"
+msgstr "Akt&iivsete VFSde loend"
+
+msgid "&Background jobs"
+msgstr "&Tööd taustal"
+
+msgid "Screen lis&t"
+msgstr "&Ekraanide loend"
+
+msgid "&Undelete files (ext2fs only)"
+msgstr "F&ailide taastamine (ainult ext2fs)"
+
+msgid "&Listing format edit"
+msgstr "&Loend vorminduse muutmine"
+
+msgid "Edit &extension file"
+msgstr "Muuda &laiendite faili"
+
+msgid "Edit &menu file"
+msgstr "Muuda &menüü faili"
+
+msgid "Edit hi&ghlighting group file"
+msgstr "Muuda esiletõstu &grupi faili"
+
+msgid "&Configuration..."
+msgstr "&Häälestus..."
+
+msgid "&Layout..."
+msgstr "&Kujundus..."
+
+msgid "&Panel options..."
+msgstr "&Paneeli häälestus..."
+
+msgid "C&onfirmation..."
+msgstr "K&innitused..."
+
+msgid "&Appearance..."
+msgstr "&Välimus..."
+
+msgid "&Display bits..."
+msgstr "K&uva bitid"
+
+msgid "&Virtual FS..."
+msgstr "Vi&rtuaalne FS..."
+
+msgid "Panels:"
+msgstr "Paneelid:"
+
+#, c-format
+msgid "You have %zu opened screen. Quit anyway?"
+msgid_plural "You have %zu opened screens. Quit anyway?"
+msgstr[0] "Sul on %zu avatud ekraan. Kas ikkagi lõpetada?"
+msgstr[1] "Sul on %zu avatud ekraani. Kas ikkagi lõpetada?"
+
+msgid "The Midnight Commander"
+msgstr "Midnight Commander"
+
+msgid "Do you really want to quit the Midnight Commander?"
+msgstr "Kas sa soovid tõesti Midnight Commanderist väljuda?"
+
+msgid "&Above"
+msgstr "Ü&lal"
+
+msgid "&Left"
+msgstr "&Vasak"
+
+msgid "&Below"
+msgstr "&All"
+
+msgid "&Right"
+msgstr "&Parem"
+
+msgid "ButtonBar|Menu"
+msgstr "ButtonBar|Menüü"
+
+msgid "ButtonBar|View"
+msgstr "ButtonBar|Vaata"
+
+msgid "ButtonBar|RenMov"
+msgstr "ButtonBar|NimTeisalda"
+
+msgid "ButtonBar|Mkdir"
+msgstr "ButtonBar|LooKataloog"
+
 msgid "&Chdir"
 msgstr "&Chdir"
 
@@ -3120,9 +3346,6 @@ msgstr "&Kõik märgistikud"
 
 msgid "Fir&st hit"
 msgstr "E&simene sobiv"
-
-msgid "&Tree"
-msgstr "&Puu"
 
 msgid "Find File"
 msgstr "Failide otsimine"
@@ -3381,222 +3604,6 @@ msgstr "Väljundi ridu:"
 
 msgid "Layout"
 msgstr "Kujundus"
-
-msgid "File listin&g"
-msgstr "F&ailide loend"
-
-msgid "&Quick view"
-msgstr "&Kiirvaade"
-
-msgid "&Info"
-msgstr "&Info"
-
-msgid "&Listing format..."
-msgstr "&Loendi vormindus"
-
-msgid "&Sort order..."
-msgstr "&Sortimine..."
-
-msgid "&Filter..."
-msgstr "Filtreeri&mine..."
-
-msgid "&Encoding..."
-msgstr "Ko&deering..."
-
-msgid "FT&P link..."
-msgstr "F&TP ühendus..."
-
-msgid "S&hell link..."
-msgstr "K&esta ühendus..."
-
-msgid "S&FTP link..."
-msgstr "S&FTP ühendus..."
-
-msgid "SM&B link..."
-msgstr "SM&B ühendus..."
-
-msgid "Paneli&ze"
-msgstr "Pa&neelile"
-
-msgid "&Rescan"
-msgstr "Ko&rdusskannimine"
-
-msgid "&View"
-msgstr "V&aata"
-
-msgid "Vie&w file..."
-msgstr "Vaa&ta faili..."
-
-msgid "&Filtered view"
-msgstr "&Filtreeritud vaade"
-
-msgid "&Copy"
-msgstr "Ko&peeri"
-
-msgid "C&hmod"
-msgstr "Õi&guste muutmine"
-
-msgid "&Link"
-msgstr "&Jäikviit"
-
-msgid "&Symlink"
-msgstr "A&bsoluutne nimeviit"
-
-msgid "Relative symlin&k"
-msgstr "&Suhteline nimeviit"
-
-msgid "Edit s&ymlink"
-msgstr "Muuda &nimeviita"
-
-msgid "Ch&own"
-msgstr "Vaheta &omanik"
-
-msgid "&Advanced chown"
-msgstr "Täpsem omani&ku vahetus"
-
-msgid "Cha&ttr"
-msgstr ""
-
-msgid "&Rename/Move"
-msgstr "Teisal&da/nimeta"
-
-msgid "&Mkdir"
-msgstr "&Loo kataloog"
-
-msgid "&Quick cd"
-msgstr "Kataloogi k&iirvahetus"
-
-msgid "Select &group"
-msgstr "Vali g&rupp"
-
-msgid "U&nselect group"
-msgstr "Tü&hista grupi valik"
-
-msgid "&Invert selection"
-msgstr "Vah&eta valik"
-
-msgid "E&xit"
-msgstr "&Välju"
-
-msgid "&User menu"
-msgstr "Kas&utaja menüü"
-
-msgid "&Directory tree"
-msgstr "Kataloogi&puu"
-
-msgid "&Find file"
-msgstr "&Failide otsimine"
-
-msgid "S&wap panels"
-msgstr "&Vaheta paneelid"
-
-msgid "Switch &panels on/off"
-msgstr "&Kuva/peida paneelid"
-
-msgid "&Compare directories"
-msgstr "Kataloogi&de võrdlemine"
-
-msgid "C&ompare files"
-msgstr "Võ&rdle faile"
-
-msgid "E&xternal panelize"
-msgstr "Väliskäsk pa&neelile"
-
-msgid "Show directory s&izes"
-msgstr "Kuva kataloogide &suurused"
-
-msgid "Command &history"
-msgstr "Käskude a&jalugu"
-
-msgid "Viewed/edited files hi&story"
-msgstr "Vaadatud/muudetud failide ajalugu"
-
-msgid "Di&rectory hotlist"
-msgstr "Katal&oogide kiirvalik"
-
-msgid "&Active VFS list"
-msgstr "Akt&iivsete VFSde loend"
-
-msgid "&Background jobs"
-msgstr "&Tööd taustal"
-
-msgid "Screen lis&t"
-msgstr "&Ekraanide loend"
-
-msgid "&Undelete files (ext2fs only)"
-msgstr "F&ailide taastamine (ainult ext2fs)"
-
-msgid "&Listing format edit"
-msgstr "&Loend vorminduse muutmine"
-
-msgid "Edit &extension file"
-msgstr "Muuda &laiendite faili"
-
-msgid "Edit &menu file"
-msgstr "Muuda &menüü faili"
-
-msgid "Edit hi&ghlighting group file"
-msgstr "Muuda esiletõstu &grupi faili"
-
-msgid "&Configuration..."
-msgstr "&Häälestus..."
-
-msgid "&Layout..."
-msgstr "&Kujundus..."
-
-msgid "&Panel options..."
-msgstr "&Paneeli häälestus..."
-
-msgid "C&onfirmation..."
-msgstr "K&innitused..."
-
-msgid "&Appearance..."
-msgstr "&Välimus..."
-
-msgid "&Display bits..."
-msgstr "K&uva bitid"
-
-msgid "&Virtual FS..."
-msgstr "Vi&rtuaalne FS..."
-
-msgid "Panels:"
-msgstr "Paneelid:"
-
-#, c-format
-msgid "You have %zu opened screen. Quit anyway?"
-msgid_plural "You have %zu opened screens. Quit anyway?"
-msgstr[0] "Sul on %zu avatud ekraan. Kas ikkagi lõpetada?"
-msgstr[1] "Sul on %zu avatud ekraani. Kas ikkagi lõpetada?"
-
-msgid "The Midnight Commander"
-msgstr "Midnight Commander"
-
-msgid "Do you really want to quit the Midnight Commander?"
-msgstr "Kas sa soovid tõesti Midnight Commanderist väljuda?"
-
-msgid "&Above"
-msgstr "Ü&lal"
-
-msgid "&Left"
-msgstr "&Vasak"
-
-msgid "&Below"
-msgstr "&All"
-
-msgid "&Right"
-msgstr "&Parem"
-
-msgid "ButtonBar|Menu"
-msgstr "ButtonBar|Menüü"
-
-msgid "ButtonBar|View"
-msgstr "ButtonBar|Vaata"
-
-msgid "ButtonBar|RenMov"
-msgstr "ButtonBar|NimTeisalda"
-
-msgid "ButtonBar|Mkdir"
-msgstr "ButtonBar|LooKataloog"
 
 msgid "Memory exhausted!"
 msgstr "Mälu otsas!"

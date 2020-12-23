@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"POT-Creation-Date: 2020-12-31 16:34+0300\n"
 "PO-Revision-Date: 2020-05-18 08:43+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/mc/mc/language/ca/)\n"
@@ -1999,6 +1999,9 @@ msgstr "Opcions de configuració"
 msgid "Skin:"
 msgstr "Tema:"
 
+msgid "&Shadows"
+msgstr ""
+
 msgid "Appearance"
 msgstr "Aparença"
 
@@ -2222,6 +2225,14 @@ msgstr "Nom d'usuari:"
 msgid "SMB authentication"
 msgstr "Autenticació SMB"
 
+#, c-format
+msgid ""
+"Cannot chdir to \"%s\"\n"
+"%s"
+msgstr ""
+"No s'ha pogut fer chdir a «%s»\n"
+"%s"
+
 msgid "Secure deletion"
 msgstr "Supressió segura"
 
@@ -2281,6 +2292,10 @@ msgstr ""
 
 msgid "No COW"
 msgstr ""
+
+#, fuzzy
+msgid "Direct access for files"
+msgstr "El directori de la memòria cau ha caducat per %s"
 
 msgid "Casefolded file"
 msgstr ""
@@ -2557,14 +2572,6 @@ msgstr "No s'ha pogut desar la configuració %s"
 
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "No es poden executar ordres en sistemes de fitxers no locals"
-
-#, c-format
-msgid ""
-"Cannot chdir to \"%s\"\n"
-"%s"
-msgstr ""
-"No s'ha pogut fer chdir a «%s»\n"
-"%s"
 
 msgid "Parameter"
 msgstr "Paràmetre"
@@ -3101,6 +3108,225 @@ msgstr "&Segon pla"
 msgid "Invalid source pattern '%s'"
 msgstr "Patró d'origen «%s» no vàlid"
 
+msgid "File listin&g"
+msgstr "&Llistat de fitxers"
+
+msgid "&Quick view"
+msgstr "Vista &ràpida"
+
+msgid "&Info"
+msgstr "&Informació"
+
+msgid "&Tree"
+msgstr "Ar&bre"
+
+msgid "&Listing format..."
+msgstr "Format del &llistat..."
+
+msgid "&Sort order..."
+msgstr "&Ordenació..."
+
+msgid "&Filter..."
+msgstr "&Filtra..."
+
+msgid "&Encoding..."
+msgstr "&Codificació..."
+
+msgid "FT&P link..."
+msgstr "Enllaç per a F&TP..."
+
+msgid "S&hell link..."
+msgstr "Enllaç per a l'i&ntèrpret..."
+
+msgid "S&FTP link..."
+msgstr "Enllaç per a &SFTP..."
+
+msgid "SM&B link..."
+msgstr "Enllaç per a SM&B..."
+
+msgid "Paneli&ze"
+msgstr "&Quadre de cerca"
+
+msgid "&Rescan"
+msgstr "To&rna a escanejar"
+
+msgid "&View"
+msgstr "&Visualitza"
+
+msgid "Vie&w file..."
+msgstr "Visualit&za el fitxer..."
+
+msgid "&Filtered view"
+msgstr "Vista &filtrada"
+
+msgid "&Copy"
+msgstr "&Copia"
+
+msgid "C&hmod"
+msgstr "Ca&nvia els permisos"
+
+msgid "&Link"
+msgstr "En&llaça"
+
+msgid "&Symlink"
+msgstr "Enllaç si&mbòlic"
+
+msgid "Relative symlin&k"
+msgstr "Enllaç sim&bòlic relatiu"
+
+msgid "Edit s&ymlink"
+msgstr "Edi&ta l'enllaç simbòlic"
+
+msgid "Ch&own"
+msgstr "Can&via el propietari"
+
+msgid "&Advanced chown"
+msgstr "C&anvi avançat del propietari"
+
+msgid "Cha&ttr"
+msgstr ""
+
+msgid "&Rename/Move"
+msgstr "&Reanomena/Mou"
+
+msgid "&Mkdir"
+msgstr "Crea un &directori"
+
+msgid "&Quick cd"
+msgstr "Canvia ràpidament de direct&ori"
+
+msgid "Select &group"
+msgstr "Selecciona un &grup"
+
+msgid "U&nselect group"
+msgstr "Deseleccio&na un grup"
+
+msgid "&Invert selection"
+msgstr "&Inverteix la selecció"
+
+msgid "E&xit"
+msgstr "S&urt"
+
+msgid "&User menu"
+msgstr "Menú d'&usuari"
+
+msgid "&Directory tree"
+msgstr "Arbre de &directoris"
+
+msgid "&Find file"
+msgstr "Troba el &fitxer"
+
+msgid "S&wap panels"
+msgstr "Intercan&via els plafons"
+
+msgid "Switch &panels on/off"
+msgstr "Mostra/oculta els &plafons"
+
+msgid "&Compare directories"
+msgstr "&Compara els directoris"
+
+msgid "C&ompare files"
+msgstr "C&ompara els fitxers"
+
+msgid "E&xternal panelize"
+msgstr "Quadre de cerca e&xtern"
+
+msgid "Show directory s&izes"
+msgstr "Mostra les m&ides dels directoris"
+
+msgid "Command &history"
+msgstr "&Historial de les ordres"
+
+msgid "Viewed/edited files hi&story"
+msgstr "Hi&storial dels fitxers vistos/editats"
+
+msgid "Di&rectory hotlist"
+msgstr "Favorits dels di&rectoris"
+
+msgid "&Active VFS list"
+msgstr "Llista el VFS &activu"
+
+msgid "&Background jobs"
+msgstr "Tasques en se&gon pla"
+
+msgid "Screen lis&t"
+msgstr "Llis&ta les pantalles"
+
+msgid "&Undelete files (ext2fs only)"
+msgstr "Recupera el&s fitxers (només ext2fs)"
+
+msgid "&Listing format edit"
+msgstr "Edita el format del &llistat"
+
+msgid "Edit &extension file"
+msgstr "Edita el fitxer d'&extensions"
+
+msgid "Edit &menu file"
+msgstr "Edita el fitxer de &menús"
+
+msgid "Edit hi&ghlighting group file"
+msgstr "Edita el fitxer dels grups de &ressaltat"
+
+msgid "&Configuration..."
+msgstr "&Configuració..."
+
+msgid "&Layout..."
+msgstr "&Disposició..."
+
+msgid "&Panel options..."
+msgstr "Opcions del &plafó..."
+
+msgid "C&onfirmation..."
+msgstr "C&onfirmació..."
+
+msgid "&Appearance..."
+msgstr "&Aparença..."
+
+msgid "&Display bits..."
+msgstr "&Bits de visualització..."
+
+msgid "&Virtual FS..."
+msgstr "Sistema de fitxers &virtual..."
+
+msgid "Panels:"
+msgstr "Plafons:"
+
+#, c-format
+msgid "You have %zu opened screen. Quit anyway?"
+msgid_plural "You have %zu opened screens. Quit anyway?"
+msgstr[0] "Teniu oberta %zu pantalla. Surto igualment?"
+msgstr[1] "Teniu obertes %zu pantalles. Surto igualment?"
+
+msgid "The Midnight Commander"
+msgstr "El Midnight Commander"
+
+msgid "Do you really want to quit the Midnight Commander?"
+msgstr "Segur que voleu sortir del Midnight Commander?"
+
+msgid "&Above"
+msgstr "Qu&ant al"
+
+msgid "&Left"
+msgstr "&Esquerra"
+
+msgid "&Below"
+msgstr "A &sota"
+
+msgid "&Right"
+msgstr "&Dreta"
+
+msgid "ButtonBar|Menu"
+msgstr "ButtonBar|Menú"
+
+msgid "ButtonBar|View"
+msgstr "ButtonBar|Visualitza"
+
+msgid "ButtonBar|RenMov"
+msgstr "ButtonBar|ReanMou"
+
+msgid "ButtonBar|Mkdir"
+msgstr "ButtonBar|CreaDir"
+
 msgid "&Chdir"
 msgstr "Canvia de &dirextori"
 
@@ -3146,9 +3372,6 @@ msgstr "&Tots els jocs de caràcters"
 
 msgid "Fir&st hit"
 msgstr "Pr&Imera coincidència"
-
-msgid "&Tree"
-msgstr "Ar&bre"
 
 msgid "Find File"
 msgstr "Cerca el fitxer"
@@ -3407,222 +3630,6 @@ msgstr "Línies de la sortida:"
 
 msgid "Layout"
 msgstr "Disposició"
-
-msgid "File listin&g"
-msgstr "&Llistat de fitxers"
-
-msgid "&Quick view"
-msgstr "Vista &ràpida"
-
-msgid "&Info"
-msgstr "&Informació"
-
-msgid "&Listing format..."
-msgstr "Format del &llistat..."
-
-msgid "&Sort order..."
-msgstr "&Ordenació..."
-
-msgid "&Filter..."
-msgstr "&Filtra..."
-
-msgid "&Encoding..."
-msgstr "&Codificació..."
-
-msgid "FT&P link..."
-msgstr "Enllaç per a F&TP..."
-
-msgid "S&hell link..."
-msgstr "Enllaç per a l'i&ntèrpret..."
-
-msgid "S&FTP link..."
-msgstr "Enllaç per a &SFTP..."
-
-msgid "SM&B link..."
-msgstr "Enllaç per a SM&B..."
-
-msgid "Paneli&ze"
-msgstr "&Quadre de cerca"
-
-msgid "&Rescan"
-msgstr "To&rna a escanejar"
-
-msgid "&View"
-msgstr "&Visualitza"
-
-msgid "Vie&w file..."
-msgstr "Visualit&za el fitxer..."
-
-msgid "&Filtered view"
-msgstr "Vista &filtrada"
-
-msgid "&Copy"
-msgstr "&Copia"
-
-msgid "C&hmod"
-msgstr "Ca&nvia els permisos"
-
-msgid "&Link"
-msgstr "En&llaça"
-
-msgid "&Symlink"
-msgstr "Enllaç si&mbòlic"
-
-msgid "Relative symlin&k"
-msgstr "Enllaç sim&bòlic relatiu"
-
-msgid "Edit s&ymlink"
-msgstr "Edi&ta l'enllaç simbòlic"
-
-msgid "Ch&own"
-msgstr "Can&via el propietari"
-
-msgid "&Advanced chown"
-msgstr "C&anvi avançat del propietari"
-
-msgid "Cha&ttr"
-msgstr ""
-
-msgid "&Rename/Move"
-msgstr "&Reanomena/Mou"
-
-msgid "&Mkdir"
-msgstr "Crea un &directori"
-
-msgid "&Quick cd"
-msgstr "Canvia ràpidament de direct&ori"
-
-msgid "Select &group"
-msgstr "Selecciona un &grup"
-
-msgid "U&nselect group"
-msgstr "Deseleccio&na un grup"
-
-msgid "&Invert selection"
-msgstr "&Inverteix la selecció"
-
-msgid "E&xit"
-msgstr "S&urt"
-
-msgid "&User menu"
-msgstr "Menú d'&usuari"
-
-msgid "&Directory tree"
-msgstr "Arbre de &directoris"
-
-msgid "&Find file"
-msgstr "Troba el &fitxer"
-
-msgid "S&wap panels"
-msgstr "Intercan&via els plafons"
-
-msgid "Switch &panels on/off"
-msgstr "Mostra/oculta els &plafons"
-
-msgid "&Compare directories"
-msgstr "&Compara els directoris"
-
-msgid "C&ompare files"
-msgstr "C&ompara els fitxers"
-
-msgid "E&xternal panelize"
-msgstr "Quadre de cerca e&xtern"
-
-msgid "Show directory s&izes"
-msgstr "Mostra les m&ides dels directoris"
-
-msgid "Command &history"
-msgstr "&Historial de les ordres"
-
-msgid "Viewed/edited files hi&story"
-msgstr "Hi&storial dels fitxers vistos/editats"
-
-msgid "Di&rectory hotlist"
-msgstr "Favorits dels di&rectoris"
-
-msgid "&Active VFS list"
-msgstr "Llista el VFS &activu"
-
-msgid "&Background jobs"
-msgstr "Tasques en se&gon pla"
-
-msgid "Screen lis&t"
-msgstr "Llis&ta les pantalles"
-
-msgid "&Undelete files (ext2fs only)"
-msgstr "Recupera el&s fitxers (només ext2fs)"
-
-msgid "&Listing format edit"
-msgstr "Edita el format del &llistat"
-
-msgid "Edit &extension file"
-msgstr "Edita el fitxer d'&extensions"
-
-msgid "Edit &menu file"
-msgstr "Edita el fitxer de &menús"
-
-msgid "Edit hi&ghlighting group file"
-msgstr "Edita el fitxer dels grups de &ressaltat"
-
-msgid "&Configuration..."
-msgstr "&Configuració..."
-
-msgid "&Layout..."
-msgstr "&Disposició..."
-
-msgid "&Panel options..."
-msgstr "Opcions del &plafó..."
-
-msgid "C&onfirmation..."
-msgstr "C&onfirmació..."
-
-msgid "&Appearance..."
-msgstr "&Aparença..."
-
-msgid "&Display bits..."
-msgstr "&Bits de visualització..."
-
-msgid "&Virtual FS..."
-msgstr "Sistema de fitxers &virtual..."
-
-msgid "Panels:"
-msgstr "Plafons:"
-
-#, c-format
-msgid "You have %zu opened screen. Quit anyway?"
-msgid_plural "You have %zu opened screens. Quit anyway?"
-msgstr[0] "Teniu oberta %zu pantalla. Surto igualment?"
-msgstr[1] "Teniu obertes %zu pantalles. Surto igualment?"
-
-msgid "The Midnight Commander"
-msgstr "El Midnight Commander"
-
-msgid "Do you really want to quit the Midnight Commander?"
-msgstr "Segur que voleu sortir del Midnight Commander?"
-
-msgid "&Above"
-msgstr "Qu&ant al"
-
-msgid "&Left"
-msgstr "&Esquerra"
-
-msgid "&Below"
-msgstr "A &sota"
-
-msgid "&Right"
-msgstr "&Dreta"
-
-msgid "ButtonBar|Menu"
-msgstr "ButtonBar|Menú"
-
-msgid "ButtonBar|View"
-msgstr "ButtonBar|Visualitza"
-
-msgid "ButtonBar|RenMov"
-msgstr "ButtonBar|ReanMou"
-
-msgid "ButtonBar|Mkdir"
-msgstr "ButtonBar|CreaDir"
 
 msgid "Memory exhausted!"
 msgstr "Memòria exhaurida!"

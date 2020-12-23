@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"POT-Creation-Date: 2020-12-31 16:34+0300\n"
 "PO-Revision-Date: 2020-05-17 17:42+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: French (http://www.transifex.com/mc/mc/language/fr/)\n"
@@ -1991,6 +1991,9 @@ msgstr "Configurer les options"
 msgid "Skin:"
 msgstr "Thème :"
 
+msgid "&Shadows"
+msgstr ""
+
 msgid "Appearance"
 msgstr "Apparence"
 
@@ -2214,6 +2217,14 @@ msgstr "Nom d'utilisateur :"
 msgid "SMB authentication"
 msgstr "Authentification SMB"
 
+#, c-format
+msgid ""
+"Cannot chdir to \"%s\"\n"
+"%s"
+msgstr ""
+"Ne peut aller dans le répertoire « %s »\n"
+"%s"
+
 msgid "Secure deletion"
 msgstr ""
 
@@ -2273,6 +2284,10 @@ msgstr ""
 
 msgid "No COW"
 msgstr ""
+
+#, fuzzy
+msgid "Direct access for files"
+msgstr "Répertoire de cache expiré pour %s"
 
 msgid "Casefolded file"
 msgstr ""
@@ -2549,14 +2564,6 @@ msgstr "Impossible d'enregistrer la configuration dans %s"
 
 msgid "Cannot execute commands on non-local filesystems"
 msgstr " Ne peut pas exécuter de commande sur un système de fichiers non local"
-
-#, c-format
-msgid ""
-"Cannot chdir to \"%s\"\n"
-"%s"
-msgstr ""
-"Ne peut aller dans le répertoire « %s »\n"
-"%s"
 
 msgid "Parameter"
 msgstr "Paramètre"
@@ -3088,6 +3095,225 @@ msgstr "&Arrière plan"
 msgid "Invalid source pattern '%s'"
 msgstr "Motif source invalide « %s »"
 
+msgid "File listin&g"
+msgstr "&Liste des fichiers"
+
+msgid "&Quick view"
+msgstr "&Vue rapide"
+
+msgid "&Info"
+msgstr "&Informations"
+
+msgid "&Tree"
+msgstr "&Arborescence"
+
+msgid "&Listing format..."
+msgstr "Format de &Listing ..."
+
+msgid "&Sort order..."
+msgstr "&Ordre de tri..."
+
+msgid "&Filter..."
+msgstr "&Filtre..."
+
+msgid "&Encoding..."
+msgstr "&Encodage..."
+
+msgid "FT&P link..."
+msgstr "Lien &FTP..."
+
+msgid "S&hell link..."
+msgstr "Lien S&hell..."
+
+msgid "S&FTP link..."
+msgstr "Lien &SFTP..."
+
+msgid "SM&B link..."
+msgstr "Lien SM&B..."
+
+msgid "Paneli&ze"
+msgstr "Mise en &panneaux"
+
+msgid "&Rescan"
+msgstr "&Rafraîchir"
+
+msgid "&View"
+msgstr "&Voir"
+
+msgid "Vie&w file..."
+msgstr "V&oir le fichier..."
+
+msgid "&Filtered view"
+msgstr "Vue &filtrée"
+
+msgid "&Copy"
+msgstr "&Copier"
+
+msgid "C&hmod"
+msgstr "C&hmod"
+
+msgid "&Link"
+msgstr "&Lien"
+
+msgid "&Symlink"
+msgstr "Lien &symbolique"
+
+msgid "Relative symlin&k"
+msgstr "Lien symbolique &relatif"
+
+msgid "Edit s&ymlink"
+msgstr "Éditer le lien s&ymbolique"
+
+msgid "Ch&own"
+msgstr "Ch&own"
+
+msgid "&Advanced chown"
+msgstr "Chown &avancé"
+
+msgid "Cha&ttr"
+msgstr ""
+
+msgid "&Rename/Move"
+msgstr "&Renommer/Déplacer"
+
+msgid "&Mkdir"
+msgstr "&Mkdir"
+
+msgid "&Quick cd"
+msgstr "Cd &rapide"
+
+msgid "Select &group"
+msgstr "Sélectionner les &groupes"
+
+msgid "U&nselect group"
+msgstr "Désélectio&nner les groupes"
+
+msgid "&Invert selection"
+msgstr "&Inverser la sélection"
+
+msgid "E&xit"
+msgstr "&Quitter"
+
+msgid "&User menu"
+msgstr "Menu &utilisateur"
+
+msgid "&Directory tree"
+msgstr "&Arborescence des répertoires"
+
+msgid "&Find file"
+msgstr "Recherche de &fichier"
+
+msgid "S&wap panels"
+msgstr "Échan&ger les panneaux"
+
+msgid "Switch &panels on/off"
+msgstr "Masquer et démasquer les &panneaux"
+
+msgid "&Compare directories"
+msgstr "&Comparer des répertoires"
+
+msgid "C&ompare files"
+msgstr "C&omparer des fichiers"
+
+msgid "E&xternal panelize"
+msgstr "Panneau e&xterne..."
+
+msgid "Show directory s&izes"
+msgstr "Aff&icher la taille des rép."
+
+msgid "Command &history"
+msgstr "&Historique des commandes"
+
+msgid "Viewed/edited files hi&story"
+msgstr ""
+
+msgid "Di&rectory hotlist"
+msgstr "Liste des répe&rtoires favoris"
+
+msgid "&Active VFS list"
+msgstr "Liste des VFS &actifs"
+
+msgid "&Background jobs"
+msgstr "&Processus en tâche de fond"
+
+msgid "Screen lis&t"
+msgstr "Liste des écrans"
+
+msgid "&Undelete files (ext2fs only)"
+msgstr "Réc&upération de fichiers (ext2fs)"
+
+msgid "&Listing format edit"
+msgstr "Édition du format de &liste"
+
+msgid "Edit &extension file"
+msgstr "Édition des &extensions de fichier"
+
+msgid "Edit &menu file"
+msgstr "Édition du fichier de &Menu"
+
+msgid "Edit hi&ghlighting group file"
+msgstr "Édition du fichier de coloration Groupe"
+
+msgid "&Configuration..."
+msgstr "&Configuration..."
+
+msgid "&Layout..."
+msgstr "&Présentation..."
+
+msgid "&Panel options..."
+msgstr "&Options des panneaux..."
+
+msgid "C&onfirmation..."
+msgstr "C&onfirmation..."
+
+msgid "&Appearance..."
+msgstr "&Apparence..."
+
+msgid "&Display bits..."
+msgstr "&Bits d'affichage..."
+
+msgid "&Virtual FS..."
+msgstr "Système de Fichiers &Virtuel (VFS)..."
+
+msgid "Panels:"
+msgstr "Panneaux :"
+
+#, c-format
+msgid "You have %zu opened screen. Quit anyway?"
+msgid_plural "You have %zu opened screens. Quit anyway?"
+msgstr[0] "Il y a %zu fenêtre d'ouverte. Quitter ?"
+msgstr[1] "Il y a %zu fenêtres d'ouvertes. Quitter ?"
+
+msgid "The Midnight Commander"
+msgstr "Midnight Commander"
+
+msgid "Do you really want to quit the Midnight Commander?"
+msgstr "Souhaitez vous vraiment quitter Midnight Commander ?"
+
+msgid "&Above"
+msgstr "&Au-dessus"
+
+msgid "&Left"
+msgstr "&Gauche"
+
+msgid "&Below"
+msgstr "&En-dessous"
+
+msgid "&Right"
+msgstr "&Droite"
+
+msgid "ButtonBar|Menu"
+msgstr "ButtonBar|Menu"
+
+msgid "ButtonBar|View"
+msgstr "ButtonBar|Voir"
+
+msgid "ButtonBar|RenMov"
+msgstr "ButtonBar|RenDep"
+
+msgid "ButtonBar|Mkdir"
+msgstr "ButtonBar|CréRep"
+
 msgid "&Chdir"
 msgstr "&Changer de répertoire"
 
@@ -3133,9 +3359,6 @@ msgstr "Tous les encodages"
 
 msgid "Fir&st hit"
 msgstr "Première occurence"
-
-msgid "&Tree"
-msgstr "&Arborescence"
 
 msgid "Find File"
 msgstr "Recherche de fichier"
@@ -3394,222 +3617,6 @@ msgstr "Lignes en sortie :"
 
 msgid "Layout"
 msgstr "Présentation"
-
-msgid "File listin&g"
-msgstr "&Liste des fichiers"
-
-msgid "&Quick view"
-msgstr "&Vue rapide"
-
-msgid "&Info"
-msgstr "&Informations"
-
-msgid "&Listing format..."
-msgstr "Format de &Listing ..."
-
-msgid "&Sort order..."
-msgstr "&Ordre de tri..."
-
-msgid "&Filter..."
-msgstr "&Filtre..."
-
-msgid "&Encoding..."
-msgstr "&Encodage..."
-
-msgid "FT&P link..."
-msgstr "Lien &FTP..."
-
-msgid "S&hell link..."
-msgstr "Lien S&hell..."
-
-msgid "S&FTP link..."
-msgstr "Lien &SFTP..."
-
-msgid "SM&B link..."
-msgstr "Lien SM&B..."
-
-msgid "Paneli&ze"
-msgstr "Mise en &panneaux"
-
-msgid "&Rescan"
-msgstr "&Rafraîchir"
-
-msgid "&View"
-msgstr "&Voir"
-
-msgid "Vie&w file..."
-msgstr "V&oir le fichier..."
-
-msgid "&Filtered view"
-msgstr "Vue &filtrée"
-
-msgid "&Copy"
-msgstr "&Copier"
-
-msgid "C&hmod"
-msgstr "C&hmod"
-
-msgid "&Link"
-msgstr "&Lien"
-
-msgid "&Symlink"
-msgstr "Lien &symbolique"
-
-msgid "Relative symlin&k"
-msgstr "Lien symbolique &relatif"
-
-msgid "Edit s&ymlink"
-msgstr "Éditer le lien s&ymbolique"
-
-msgid "Ch&own"
-msgstr "Ch&own"
-
-msgid "&Advanced chown"
-msgstr "Chown &avancé"
-
-msgid "Cha&ttr"
-msgstr ""
-
-msgid "&Rename/Move"
-msgstr "&Renommer/Déplacer"
-
-msgid "&Mkdir"
-msgstr "&Mkdir"
-
-msgid "&Quick cd"
-msgstr "Cd &rapide"
-
-msgid "Select &group"
-msgstr "Sélectionner les &groupes"
-
-msgid "U&nselect group"
-msgstr "Désélectio&nner les groupes"
-
-msgid "&Invert selection"
-msgstr "&Inverser la sélection"
-
-msgid "E&xit"
-msgstr "&Quitter"
-
-msgid "&User menu"
-msgstr "Menu &utilisateur"
-
-msgid "&Directory tree"
-msgstr "&Arborescence des répertoires"
-
-msgid "&Find file"
-msgstr "Recherche de &fichier"
-
-msgid "S&wap panels"
-msgstr "Échan&ger les panneaux"
-
-msgid "Switch &panels on/off"
-msgstr "Masquer et démasquer les &panneaux"
-
-msgid "&Compare directories"
-msgstr "&Comparer des répertoires"
-
-msgid "C&ompare files"
-msgstr "C&omparer des fichiers"
-
-msgid "E&xternal panelize"
-msgstr "Panneau e&xterne..."
-
-msgid "Show directory s&izes"
-msgstr "Aff&icher la taille des rép."
-
-msgid "Command &history"
-msgstr "&Historique des commandes"
-
-msgid "Viewed/edited files hi&story"
-msgstr ""
-
-msgid "Di&rectory hotlist"
-msgstr "Liste des répe&rtoires favoris"
-
-msgid "&Active VFS list"
-msgstr "Liste des VFS &actifs"
-
-msgid "&Background jobs"
-msgstr "&Processus en tâche de fond"
-
-msgid "Screen lis&t"
-msgstr "Liste des écrans"
-
-msgid "&Undelete files (ext2fs only)"
-msgstr "Réc&upération de fichiers (ext2fs)"
-
-msgid "&Listing format edit"
-msgstr "Édition du format de &liste"
-
-msgid "Edit &extension file"
-msgstr "Édition des &extensions de fichier"
-
-msgid "Edit &menu file"
-msgstr "Édition du fichier de &Menu"
-
-msgid "Edit hi&ghlighting group file"
-msgstr "Édition du fichier de coloration Groupe"
-
-msgid "&Configuration..."
-msgstr "&Configuration..."
-
-msgid "&Layout..."
-msgstr "&Présentation..."
-
-msgid "&Panel options..."
-msgstr "&Options des panneaux..."
-
-msgid "C&onfirmation..."
-msgstr "C&onfirmation..."
-
-msgid "&Appearance..."
-msgstr "&Apparence..."
-
-msgid "&Display bits..."
-msgstr "&Bits d'affichage..."
-
-msgid "&Virtual FS..."
-msgstr "Système de Fichiers &Virtuel (VFS)..."
-
-msgid "Panels:"
-msgstr "Panneaux :"
-
-#, c-format
-msgid "You have %zu opened screen. Quit anyway?"
-msgid_plural "You have %zu opened screens. Quit anyway?"
-msgstr[0] "Il y a %zu fenêtre d'ouverte. Quitter ?"
-msgstr[1] "Il y a %zu fenêtres d'ouvertes. Quitter ?"
-
-msgid "The Midnight Commander"
-msgstr "Midnight Commander"
-
-msgid "Do you really want to quit the Midnight Commander?"
-msgstr "Souhaitez vous vraiment quitter Midnight Commander ?"
-
-msgid "&Above"
-msgstr "&Au-dessus"
-
-msgid "&Left"
-msgstr "&Gauche"
-
-msgid "&Below"
-msgstr "&En-dessous"
-
-msgid "&Right"
-msgstr "&Droite"
-
-msgid "ButtonBar|Menu"
-msgstr "ButtonBar|Menu"
-
-msgid "ButtonBar|View"
-msgstr "ButtonBar|Voir"
-
-msgid "ButtonBar|RenMov"
-msgstr "ButtonBar|RenDep"
-
-msgid "ButtonBar|Mkdir"
-msgstr "ButtonBar|CréRep"
 
 msgid "Memory exhausted!"
 msgstr "Mémoire épuisée !"

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"POT-Creation-Date: 2020-12-31 16:34+0300\n"
 "PO-Revision-Date: 2020-05-17 17:42+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/mc/mc/language/bg/)\n"
@@ -1964,6 +1964,9 @@ msgstr "Опции на конфигурацията"
 msgid "Skin:"
 msgstr "Тема:"
 
+msgid "&Shadows"
+msgstr ""
+
 msgid "Appearance"
 msgstr "Изглед"
 
@@ -2187,6 +2190,14 @@ msgstr "Потребителско име:"
 msgid "SMB authentication"
 msgstr "SMB удостоверяване"
 
+#, c-format
+msgid ""
+"Cannot chdir to \"%s\"\n"
+"%s"
+msgstr ""
+"Не може да се chdir в \"%s\"\n"
+"%s"
+
 msgid "Secure deletion"
 msgstr ""
 
@@ -2246,6 +2257,10 @@ msgstr ""
 
 msgid "No COW"
 msgstr ""
+
+#, fuzzy
+msgid "Direct access for files"
+msgstr "Кеша за %s остаря"
 
 msgid "Casefolded file"
 msgstr ""
@@ -2522,14 +2537,6 @@ msgstr "Грешка при запис ан настройките в %s"
 
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "Не може да се изпълняват команди на не-локални файлови системи"
-
-#, c-format
-msgid ""
-"Cannot chdir to \"%s\"\n"
-"%s"
-msgstr ""
-"Не може да се chdir в \"%s\"\n"
-"%s"
 
 msgid "Parameter"
 msgstr "Параметър"
@@ -3063,6 +3070,225 @@ msgstr "Във фон"
 msgid "Invalid source pattern '%s'"
 msgstr "Невалиден изходен модел '%s'"
 
+msgid "File listin&g"
+msgstr "Файлово изреж&дане"
+
+msgid "&Quick view"
+msgstr "&Бърз преглед"
+
+msgid "&Info"
+msgstr "&Информация"
+
+msgid "&Tree"
+msgstr "Дърво"
+
+msgid "&Listing format..."
+msgstr "&Формат на списък"
+
+msgid "&Sort order..."
+msgstr "Ред на сортиране..."
+
+msgid "&Filter..."
+msgstr "Филтър..."
+
+msgid "&Encoding..."
+msgstr "&Кодировка"
+
+msgid "FT&P link..."
+msgstr "FTP връзка..."
+
+msgid "S&hell link..."
+msgstr "S&hell връзка..."
+
+msgid "S&FTP link..."
+msgstr "S&FTP връзка..."
+
+msgid "SM&B link..."
+msgstr "SMB връзка..."
+
+msgid "Paneli&ze"
+msgstr "Покажи в панел"
+
+msgid "&Rescan"
+msgstr "&Сканиране отново"
+
+msgid "&View"
+msgstr "&Преглед"
+
+msgid "Vie&w file..."
+msgstr "Преглед на &файла"
+
+msgid "&Filtered view"
+msgstr "&Филтриран изглед"
+
+msgid "&Copy"
+msgstr "&Копиране"
+
+msgid "C&hmod"
+msgstr "C&hmod"
+
+msgid "&Link"
+msgstr "&Линк"
+
+msgid "&Symlink"
+msgstr "&Символичен линк"
+
+msgid "Relative symlin&k"
+msgstr "Релативен символи&чен линк"
+
+msgid "Edit s&ymlink"
+msgstr "Редактиране на сим&воличен линк"
+
+msgid "Ch&own"
+msgstr "Ch&own"
+
+msgid "&Advanced chown"
+msgstr "&Разширена chown"
+
+msgid "Cha&ttr"
+msgstr ""
+
+msgid "&Rename/Move"
+msgstr "&Преименуване или местене"
+
+msgid "&Mkdir"
+msgstr "&Mkdir"
+
+msgid "&Quick cd"
+msgstr "&Бързо cd"
+
+msgid "Select &group"
+msgstr "Избор на &група"
+
+msgid "U&nselect group"
+msgstr "Де&избиране на група"
+
+msgid "&Invert selection"
+msgstr "&Преобръщане на селекция"
+
+msgid "E&xit"
+msgstr "&Изход"
+
+msgid "&User menu"
+msgstr "&Потребителско меню"
+
+msgid "&Directory tree"
+msgstr "Дърво на директориите"
+
+msgid "&Find file"
+msgstr "&Намиране на файл"
+
+msgid "S&wap panels"
+msgstr "Разм&яна на панели"
+
+msgid "Switch &panels on/off"
+msgstr "Включване/Изключване на &панелите"
+
+msgid "&Compare directories"
+msgstr "&Сравнение на директории"
+
+msgid "C&ompare files"
+msgstr "С&равнение на файлове"
+
+msgid "E&xternal panelize"
+msgstr "В&ъншна панелизация"
+
+msgid "Show directory s&izes"
+msgstr "Показване на &размерите на директориите"
+
+msgid "Command &history"
+msgstr "Командна &история"
+
+msgid "Viewed/edited files hi&story"
+msgstr ""
+
+msgid "Di&rectory hotlist"
+msgstr "Списък за бърз достъп до дире&ктории"
+
+msgid "&Active VFS list"
+msgstr "&Активни списък от ВФС"
+
+msgid "&Background jobs"
+msgstr "&Фонови задачи"
+
+msgid "Screen lis&t"
+msgstr "Спис&ък на екрани"
+
+msgid "&Undelete files (ext2fs only)"
+msgstr "Възстанови файлове (само ext2fs)"
+
+msgid "&Listing format edit"
+msgstr "Редактирай формата на списъка"
+
+msgid "Edit &extension file"
+msgstr "Редактирай файл с разширения"
+
+msgid "Edit &menu file"
+msgstr "Редактирай меню-файл"
+
+msgid "Edit hi&ghlighting group file"
+msgstr ""
+
+msgid "&Configuration..."
+msgstr "Конфигурация..."
+
+msgid "&Layout..."
+msgstr "Разположение..."
+
+msgid "&Panel options..."
+msgstr "Настройки на &панел"
+
+msgid "C&onfirmation..."
+msgstr "По&твърждение..."
+
+msgid "&Appearance..."
+msgstr "&Изглед"
+
+msgid "&Display bits..."
+msgstr "Екран..."
+
+msgid "&Virtual FS..."
+msgstr "Виртуална ФС..."
+
+msgid "Panels:"
+msgstr "Панели:"
+
+#, c-format
+msgid "You have %zu opened screen. Quit anyway?"
+msgid_plural "You have %zu opened screens. Quit anyway?"
+msgstr[0] "Имате %zu отворен прозорец. Изход все пак?"
+msgstr[1] "Имате %zu отворени прозорци. Изход все пак?"
+
+msgid "The Midnight Commander"
+msgstr "Midnight Commander-а"
+
+msgid "Do you really want to quit the Midnight Commander?"
+msgstr "Наистина ли искате да напуснете Midnight Commander?"
+
+msgid "&Above"
+msgstr "&Отгоре"
+
+msgid "&Left"
+msgstr "&Вляво"
+
+msgid "&Below"
+msgstr "&Отдолу"
+
+msgid "&Right"
+msgstr "&Вдясно"
+
+msgid "ButtonBar|Menu"
+msgstr "ButtonBar|Меню"
+
+msgid "ButtonBar|View"
+msgstr "ButtonBar|Изглед"
+
+msgid "ButtonBar|RenMov"
+msgstr ""
+
+msgid "ButtonBar|Mkdir"
+msgstr "ButtonBar|Mkdir"
+
 msgid "&Chdir"
 msgstr "Смени директорията"
 
@@ -3108,9 +3334,6 @@ msgstr "Вси&чки кодови таблици"
 
 msgid "Fir&st hit"
 msgstr "Пър&во попадение"
-
-msgid "&Tree"
-msgstr "Дърво"
 
 msgid "Find File"
 msgstr "Търси файл"
@@ -3369,222 +3592,6 @@ msgstr "Изходни редове:"
 
 msgid "Layout"
 msgstr "Изглед"
-
-msgid "File listin&g"
-msgstr "Файлово изреж&дане"
-
-msgid "&Quick view"
-msgstr "&Бърз преглед"
-
-msgid "&Info"
-msgstr "&Информация"
-
-msgid "&Listing format..."
-msgstr "&Формат на списък"
-
-msgid "&Sort order..."
-msgstr "Ред на сортиране..."
-
-msgid "&Filter..."
-msgstr "Филтър..."
-
-msgid "&Encoding..."
-msgstr "&Кодировка"
-
-msgid "FT&P link..."
-msgstr "FTP връзка..."
-
-msgid "S&hell link..."
-msgstr "S&hell връзка..."
-
-msgid "S&FTP link..."
-msgstr "S&FTP връзка..."
-
-msgid "SM&B link..."
-msgstr "SMB връзка..."
-
-msgid "Paneli&ze"
-msgstr "Покажи в панел"
-
-msgid "&Rescan"
-msgstr "&Сканиране отново"
-
-msgid "&View"
-msgstr "&Преглед"
-
-msgid "Vie&w file..."
-msgstr "Преглед на &файла"
-
-msgid "&Filtered view"
-msgstr "&Филтриран изглед"
-
-msgid "&Copy"
-msgstr "&Копиране"
-
-msgid "C&hmod"
-msgstr "C&hmod"
-
-msgid "&Link"
-msgstr "&Линк"
-
-msgid "&Symlink"
-msgstr "&Символичен линк"
-
-msgid "Relative symlin&k"
-msgstr "Релативен символи&чен линк"
-
-msgid "Edit s&ymlink"
-msgstr "Редактиране на сим&воличен линк"
-
-msgid "Ch&own"
-msgstr "Ch&own"
-
-msgid "&Advanced chown"
-msgstr "&Разширена chown"
-
-msgid "Cha&ttr"
-msgstr ""
-
-msgid "&Rename/Move"
-msgstr "&Преименуване или местене"
-
-msgid "&Mkdir"
-msgstr "&Mkdir"
-
-msgid "&Quick cd"
-msgstr "&Бързо cd"
-
-msgid "Select &group"
-msgstr "Избор на &група"
-
-msgid "U&nselect group"
-msgstr "Де&избиране на група"
-
-msgid "&Invert selection"
-msgstr "&Преобръщане на селекция"
-
-msgid "E&xit"
-msgstr "&Изход"
-
-msgid "&User menu"
-msgstr "&Потребителско меню"
-
-msgid "&Directory tree"
-msgstr "Дърво на директориите"
-
-msgid "&Find file"
-msgstr "&Намиране на файл"
-
-msgid "S&wap panels"
-msgstr "Разм&яна на панели"
-
-msgid "Switch &panels on/off"
-msgstr "Включване/Изключване на &панелите"
-
-msgid "&Compare directories"
-msgstr "&Сравнение на директории"
-
-msgid "C&ompare files"
-msgstr "С&равнение на файлове"
-
-msgid "E&xternal panelize"
-msgstr "В&ъншна панелизация"
-
-msgid "Show directory s&izes"
-msgstr "Показване на &размерите на директориите"
-
-msgid "Command &history"
-msgstr "Командна &история"
-
-msgid "Viewed/edited files hi&story"
-msgstr ""
-
-msgid "Di&rectory hotlist"
-msgstr "Списък за бърз достъп до дире&ктории"
-
-msgid "&Active VFS list"
-msgstr "&Активни списък от ВФС"
-
-msgid "&Background jobs"
-msgstr "&Фонови задачи"
-
-msgid "Screen lis&t"
-msgstr "Спис&ък на екрани"
-
-msgid "&Undelete files (ext2fs only)"
-msgstr "Възстанови файлове (само ext2fs)"
-
-msgid "&Listing format edit"
-msgstr "Редактирай формата на списъка"
-
-msgid "Edit &extension file"
-msgstr "Редактирай файл с разширения"
-
-msgid "Edit &menu file"
-msgstr "Редактирай меню-файл"
-
-msgid "Edit hi&ghlighting group file"
-msgstr ""
-
-msgid "&Configuration..."
-msgstr "Конфигурация..."
-
-msgid "&Layout..."
-msgstr "Разположение..."
-
-msgid "&Panel options..."
-msgstr "Настройки на &панел"
-
-msgid "C&onfirmation..."
-msgstr "По&твърждение..."
-
-msgid "&Appearance..."
-msgstr "&Изглед"
-
-msgid "&Display bits..."
-msgstr "Екран..."
-
-msgid "&Virtual FS..."
-msgstr "Виртуална ФС..."
-
-msgid "Panels:"
-msgstr "Панели:"
-
-#, c-format
-msgid "You have %zu opened screen. Quit anyway?"
-msgid_plural "You have %zu opened screens. Quit anyway?"
-msgstr[0] "Имате %zu отворен прозорец. Изход все пак?"
-msgstr[1] "Имате %zu отворени прозорци. Изход все пак?"
-
-msgid "The Midnight Commander"
-msgstr "Midnight Commander-а"
-
-msgid "Do you really want to quit the Midnight Commander?"
-msgstr "Наистина ли искате да напуснете Midnight Commander?"
-
-msgid "&Above"
-msgstr "&Отгоре"
-
-msgid "&Left"
-msgstr "&Вляво"
-
-msgid "&Below"
-msgstr "&Отдолу"
-
-msgid "&Right"
-msgstr "&Вдясно"
-
-msgid "ButtonBar|Menu"
-msgstr "ButtonBar|Меню"
-
-msgid "ButtonBar|View"
-msgstr "ButtonBar|Изглед"
-
-msgid "ButtonBar|RenMov"
-msgstr ""
-
-msgid "ButtonBar|Mkdir"
-msgstr "ButtonBar|Mkdir"
 
 msgid "Memory exhausted!"
 msgstr "Паметта е изразходвана!"
