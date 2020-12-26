@@ -30,8 +30,8 @@
 : ${GETTEXT_VERSION=0.17}
 
 GLIB_DIR="glib-$GLIB_VERSION"
-GLIB_TARBALL="glib-$GLIB_VERSION.tar.gz"
-GLIB_URL="ftp://ftp.gnome.org/pub/gnome/sources/glib/2.30/$GLIB_TARBALL"
+GLIB_TARBALL="glib-$GLIB_VERSION.tar.bz2"
+GLIB_URL="https://download.gnome.org/sources/glib/2.30/$GLIB_TARBALL"
 
 PKGC_DIR="pkg-config-$PKGC_VERSION"
 PKGC_TARBALL="pkg-config-$PKGC_VERSION.tar.gz"
