@@ -152,12 +152,12 @@ Frequently Asked Questions
    You need a POSIX (Unix compatible) operating system.  If you are
    running Windows, use Cygwin.
 
-   To compile any edition you need to have glib 2.x  installed.
-   It's available at ftp://ftp.gtk.org/pub/gtk/.
+   To compile any edition you need to have glib >= 2.30  installed.
+   It's available at https://download.gnome.org/sources/glib/.
 
    If you want to use mouse on the Linux console you need the gpm daemon
-   from ftp://ftp.systemy.it/pub/develop/.  You need nothing extra to
-   use mouse on xterm.
+   from https://www.nico.schottelius.org/software/gpm/.  You need nothing
+   extra to use mouse on xterm.
 
    If you do not want to use the S-Lang library you could try using
    ncurses version 4.1 and above.
@@ -294,10 +294,11 @@ f2 Keyboard
 
 2.8 How do I change the key bindings?
 
-   There is no generic way to reconfigure the key bindings.  You can use
-   the "Learn Keys" dialog to assign keys to some actions listed in that
-   dialog.  However, most actions cannot be redefined to use different
-   keys.
+   Key binding con be reconfigure via keymap files: /etc/mc/mc.keymap
+   and ~/.config/mc/mc.keymap.
+
+   You can use the "Learn Keys" dialog to assign keys to some actions
+   listed in that dialog.
 
 
 3 Mouse
@@ -313,11 +314,6 @@ f2 Keyboard
 3.2 How do I cut and paste text with mouse?
 
    Hold down shift key while using mouse to cut and paste.
-
-3.3 How do I get the extension dependent pop-up menu to pop up?
-
-   It was developed for the GNOME edition.  The text-mode edition
-   doesn't support this feature yet.
 
 
 4 Display
@@ -340,9 +336,8 @@ f2 Keyboard
 4.2 Why don't line drawing characters work?
 
    Since version 4.0.13 there's the command line option -a to force use
-   of charaters +, |, - for line drawing (only available when compiled
-   with S-Lang).  Use the -a option if any of the suggestions below
-   doesn't help.
+   of charaters +, |, - for line drawing.  Use the -a option if any
+   of the suggestions below doesn't help.
 
    In general, there are three cases:
      * Lines are shown as ASCII characters like this
@@ -420,8 +415,6 @@ f2 Keyboard
    database.
 
 4.4 I have problems with entering/viewing national characters!
-
-   Upgrade to version 4.0.12 or newer.
 
    From the Options - Display Bits dialog select Full 8 bits or ISO
    8859-1.  In addition, select 8 bit input from the same dialog.
@@ -514,7 +507,7 @@ f2 Keyboard
    Thomas Dickey maintains his more advanced version of xterm at
    ftp://dickey.his.com/xterm/
 
-   rxvt has its own site http://www.rxvt.org/ - get the latest version
+   rxvt has its own site http://www.rxvt.net/ - get the latest version
    there.
 
 4.8 I got colors working with MC but the other programs don't work at
@@ -613,6 +606,36 @@ MC?
    Only few terminals support screen saving.  It's xterm, rxvt and other
    xterm-like terminals and virtual terminals on Linux and FreeBSD.
 
+6.8 Why I see lot of strange 'cd "printf ' lines into my .history file?
+
+  Add
+
+    export HISTCONTROL="ignoreboth"
+
+  into your ~/.profile file (.bash_profile) for avoid this.
+
+6.9 I have a problem with Screen which makes using Midnight Commander
+problematic. I use Ctrl-O to disable panels. Output of previous commands,
+just a clear, screen is blanked.
+
+  Update GNU Screen to the last version. This bug was fixed in
+
+   commit ad56f746c6243d45124485d198d577bdbb78071c
+   Author: Sadrul Habib Chowdhury <sadrul@users.sourceforge.net>
+   Date:   Sun Nov 29 23:34:25 2009 -0500
+
+       Fix using alternate screen buffers in some cases.
+
+       Screen would reset the 'main' screen buffer if an app tries to
+       switch to an alternate buffer while it is already using one (in
+       other words, sends multiple 'smcup' without an 'rmcup'). This should
+       fix debian #558724
+
+  (see http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=558724)
+
+  or do not rewrite TERM (mustbe TERM=screen) andrun mc as follow:
+
+   echo -e '\e[?1000h' && mc -x
 
 7 Virtual file systems
 
@@ -622,7 +645,7 @@ MC?
    press enter.  If you use mouse just double-click on the tar file.
 
    The recognized suffixes for tar archives are .tar, .tar.gz and .tgz.
-   You can also enter a tar archive by typing "cd filename#utar" where
+   You can also enter a tar archive by typing "cd filename/utar://" where
    filename is the name of the archive.  In this case, the suffix is not
    important.
 
@@ -773,7 +796,7 @@ indenting increases with each line!
    http://www.midnight-commander.org/wiki/McDevelopers
 
    This page lists everbody who has provided a patch or
-   has written code for the midnight-commander in the past:
+   has written code for the Midnight Commander in the past:
    http://www.midnight-commander.org/wiki/McContributors
 
 10.2 Do I dare to use a development version?
@@ -793,7 +816,7 @@ indenting increases with each line!
    You might first want to get the newest development version to see if
    the bug is fixed or the feature is added already.
 
-   If this is not the case, feel free to add a ticket in our ticket-system,
+   If this is not the case, feel free to add a ticket in our ticket system,
    which is located here: http://www.midnight-commander.org/newticket
 
    If you want to send an email instead write your report to mc-devel@gnome.org 
