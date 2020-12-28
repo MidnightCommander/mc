@@ -299,7 +299,7 @@ file ..\*\\.proto$ Protobuf\sFile
 include protobuf.syntax
 
 file ..\*\\.(?i:yab)$ Yabasic\s(Yet\sAnother\sBASIC)
-include markdown.syntax
+include yabasic.syntax
 
 file ..\*\\.(?i:cbl|cob)$ Cobol\sProgram
 include cobol.syntax
