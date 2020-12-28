@@ -33,7 +33,8 @@
 #include "src/vfs/local/local.c"
 
 char *execute_get_external_cmd_opts_from_config (const char *command,
-                                                 const vfs_path_t * filename_vpath, int start_line);
+                                                 const vfs_path_t * filename_vpath,
+                                                 long start_line);
 
 /* --------------------------------------------------------------------------------------------- */
 

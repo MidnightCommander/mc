@@ -32,7 +32,8 @@
 /* --------------------------------------------------------------------------------------------- */
 
 char *execute_get_external_cmd_opts_from_config (const char *command,
-                                                 const vfs_path_t * filename_vpath, int start_line);
+                                                 const vfs_path_t * filename_vpath,
+                                                 long start_line);
 
 /* @CapturedValue */
 static char *execute_external_cmd_opts__command__captured;
@@ -47,7 +48,7 @@ static char *execute_external_cmd_opts__return_value;
 /* @Mock */
 char *
 execute_get_external_cmd_opts_from_config (const char *command, const vfs_path_t * filename_vpath,
-                                           int start_line)
+                                           long start_line)
 {
     execute_external_cmd_opts__command__captured = g_strdup (command);
     execute_external_cmd_opts__filename_vpath__captured = vfs_path_clone (filename_vpath);
