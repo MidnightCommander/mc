@@ -75,15 +75,15 @@ START_TEST (test_widget_find_by_id)
 
     w0 = WIDGET (g);
 
-    fail_unless (widget_find_by_id (w0, 0) != NULL, "Not found ID=0");
-    fail_unless (widget_find_by_id (w0, 1) != NULL, "Not found ID=1");
-    fail_unless (widget_find_by_id (w0, 2) != NULL, "Not found ID=2");
-    fail_unless (widget_find_by_id (w0, 3) != NULL, "Not found ID=3");
-    fail_unless (widget_find_by_id (w0, 4) != NULL, "Not found ID=4");
-    fail_unless (widget_find_by_id (w0, 5) != NULL, "Not found ID=5");
-    fail_unless (widget_find_by_id (w0, 6) != NULL, "Not found ID=6");
-    fail_unless (widget_find_by_id (w0, 7) != NULL, "Not found ID=7");
-    fail_unless (widget_find_by_id (w0, 8) == NULL, "Found ID=8");
+    ck_assert_msg (widget_find_by_id (w0, 0) != NULL, "Not found ID=0");
+    ck_assert_msg (widget_find_by_id (w0, 1) != NULL, "Not found ID=1");
+    ck_assert_msg (widget_find_by_id (w0, 2) != NULL, "Not found ID=2");
+    ck_assert_msg (widget_find_by_id (w0, 3) != NULL, "Not found ID=3");
+    ck_assert_msg (widget_find_by_id (w0, 4) != NULL, "Not found ID=4");
+    ck_assert_msg (widget_find_by_id (w0, 5) != NULL, "Not found ID=5");
+    ck_assert_msg (widget_find_by_id (w0, 6) != NULL, "Not found ID=6");
+    ck_assert_msg (widget_find_by_id (w0, 7) != NULL, "Not found ID=7");
+    ck_assert_msg (widget_find_by_id (w0, 8) == NULL, "Found ID=8");
 
     send_message (g, NULL, MSG_INIT, 0, NULL);
     widget_destroy (w0);

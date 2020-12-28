@@ -75,7 +75,7 @@ teardown (void)
 #define check_examine_cd(input, etalon) \
 { \
     result = examine_cd (input); \
-    fail_unless (strcmp (result->str, etalon) == 0, \
+    ck_assert_msg (strcmp (result->str, etalon) == 0, \
     "\ninput (%s)\nactial (%s) not equal to\netalon (%s)", input, result->str, etalon); \
     g_string_free (result, TRUE); \
 }

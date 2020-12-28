@@ -117,15 +117,15 @@ START_TEST (test_group_init_deinit)
     widget_init (w0, 5, 5, 10, 10, widget_callback, NULL);
     group_add_widget (g, w0);
 
-    fail_unless (w0->id == 7, "last id (%d) != 7", ref);
+    ck_assert_msg (w0->id == 7, "last id (%d) != 7", ref);
 
     send_message (g, NULL, MSG_INIT, 0, NULL);
 
-    fail_unless (ref == 8, "ref (%d) != 8", ref);
+    ck_assert_msg (ref == 8, "ref (%d) != 8", ref);
 
     widget_destroy (WIDGET (g));
 
-    fail_unless (ref == 0, "ref (%d) != 0", ref);
+    ck_assert_msg (ref == 0, "ref (%d) != 0", ref);
 }
 /* *INDENT-OFF* */
 END_TEST
