@@ -56,7 +56,7 @@ config_object__reopen (void)
 
     if (!mc_config_save_file (mc_config, &error))
     {
-        fail ("Unable to save config file: %s", error->message);
+        ck_abort_msg ("Unable to save config file: %s", error->message);
         g_error_free (error);
     }
 
