@@ -321,7 +321,7 @@ dnl ############################################################################
 AC_CHECK_FUNCS([setlocale])
 
 AM_GNU_GETTEXT([external], [need-ngettext])
-AM_GNU_GETTEXT_VERSION([0.18.1])
+AM_GNU_GETTEXT_VERSION([0.18.2])
 
 mc_I18N
 

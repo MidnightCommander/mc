@@ -18,7 +18,7 @@ required:
 
 Autoconf 2.64 and above (latest is recommended)
 Automake 1.12 and above (latest is recommended)
-Gettext 0.18.1 and above
+Gettext 0.18.2 and above
 Glib 2.30 and above
 
 Full list of requirements you can see at:
@@ -41,7 +41,7 @@ on Debian too.
 
 Note that the version of gettext doesn't affect the snapshot because the
 distributed files are installed by gettext from archives for the version
-used in the AM_GNU_GETTEXT_VERSION macro, which is 0.18.1.
+used in the AM_GNU_GETTEXT_VERSION macro, which is 0.18.2.
 
 
 
