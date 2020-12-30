@@ -88,4 +88,22 @@
 
 /*** inline functions ****************************************************************************/
 
+static inline int
+mctest_run_all (TCase * tc_core)
+{
+    Suite *s;
+    SRunner *sr;
+    int number_failed;
+
+    s = suite_create (TEST_SUITE_NAME);
+    suite_add_tcase (s, tc_core);
+    sr = srunner_create (s);
+    srunner_set_log (sr, "-");
+    srunner_run_all (sr, CK_ENV);
+    number_failed = srunner_ntests_failed (sr);
+    srunner_free (sr);
+
+    return (number_failed == 0) ? EXIT_SUCCESS : EXIT_FAILURE;
+}
+
 #endif /* MC__TEST */
