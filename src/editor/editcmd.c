@@ -6,7 +6,7 @@
 
    Written by:
    Paul Sheer, 1996, 1997
-   Andrew Borodin <aborodin@vmail.ru>, 2012-2014
+   Andrew Borodin <aborodin@vmail.ru>, 2012-2021
    Ilia Maslakov <il.smind@gmail.com>, 2012
 
    This file is part of the Midnight Commander.
@@ -1181,30 +1181,34 @@ edit_find_word_start (const edit_buffer_t * buf, off_t * word_start, gsize * wor
  * @return newly allocated string or NULL if no any words under cursor
  */
 
-static char *
+static GString *
 edit_collect_completions_get_current_word (edit_search_status_msg_t * esm, mc_search_t * srch,
                                            off_t word_start)
 {
     WEdit *edit = esm->edit;
     gsize len = 0;
-    off_t i;
-    GString *temp;
+    GString *temp = NULL;
 
-    if (!mc_search_run (srch, (void *) esm, word_start, edit->buffer.size, &len))
-        return NULL;
-
-    temp = g_string_sized_new (len);
-
-    for (i = 0; i < (off_t) len; i++)
+    if (mc_search_run (srch, (void *) esm, word_start, edit->buffer.size, &len))
     {
-        int chr;
+        off_t i;
 
-        chr = edit_buffer_get_byte (&edit->buffer, word_start + i);
-        if (!isspace (chr))
-            g_string_append_c (temp, chr);
+        for (i = 0; i < (off_t) len; i++)
+        {
+            int chr;
+
+            chr = edit_buffer_get_byte (&edit->buffer, word_start + i);
+            if (!isspace (chr))
+            {
+                if (temp == NULL)
+                    temp = g_string_sized_new (len);
+
+                g_string_append_c (temp, chr);
+            }
+        }
     }
 
-    return g_string_free (temp, temp->len == 0);
+    return temp;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1221,7 +1225,7 @@ edit_collect_completions (WEdit * edit, off_t word_start, gsize word_len,
     GString *temp;
     mc_search_t *srch;
     off_t last_byte, start = -1;
-    char *current_word;
+    GString *current_word;
     gboolean entire_file;
     edit_search_status_msg_t esm;
 
@@ -1278,7 +1282,7 @@ edit_collect_completions (WEdit * edit, off_t word_start, gsize word_len,
         if (temp->len == 0)
             continue;
 
-        if (current_word != NULL && strcmp (current_word, temp->str) == 0)
+        if (current_word != NULL && g_string_equal (current_word, temp))
             continue;
 
         skip = 0;
@@ -1331,7 +1335,8 @@ edit_collect_completions (WEdit * edit, off_t word_start, gsize word_len,
     status_msg_deinit (STATUS_MSG (&esm));
     mc_search_free (srch);
     g_string_free (temp, TRUE);
-    g_free (current_word);
+    if (current_word != NULL)
+        g_string_free (current_word, TRUE);
 
     return max_len;
 }
