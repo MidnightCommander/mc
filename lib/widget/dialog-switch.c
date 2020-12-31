@@ -313,16 +313,6 @@ dialog_switch_shutdown (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-clr_scr (void)
-{
-    tty_set_normal_attrs ();
-    tty_fill_region (0, 0, LINES, COLS, ' ');
-    tty_refresh ();
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
 repaint_screen (void)
 {
     do_refresh ();

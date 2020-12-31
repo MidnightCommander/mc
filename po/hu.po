@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"POT-Creation-Date: 2020-12-31 16:34+0300\n"
 "PO-Revision-Date: 2020-05-17 17:42+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Hungarian (http://www.transifex.com/mc/mc/language/hu/)\n"
@@ -1967,6 +1967,9 @@ msgstr "Alapbeállítások"
 msgid "Skin:"
 msgstr ""
 
+msgid "&Shadows"
+msgstr ""
+
 msgid "Appearance"
 msgstr "Megjelenítés"
 
@@ -2189,6 +2192,14 @@ msgstr "Felhasználónév:"
 msgid "SMB authentication"
 msgstr "SMB hitelesítés"
 
+#, c-format
+msgid ""
+"Cannot chdir to \"%s\"\n"
+"%s"
+msgstr ""
+"Nem sikerült belépni a(z) \"%s\" könyvtárba.\n"
+"%s"
+
 msgid "Secure deletion"
 msgstr ""
 
@@ -2248,6 +2259,10 @@ msgstr ""
 
 msgid "No COW"
 msgstr ""
+
+#, fuzzy
+msgid "Direct access for files"
+msgstr "A könyvtár gyorstárának adatai elévültek: %s"
 
 msgid "Casefolded file"
 msgstr ""
@@ -2524,14 +2539,6 @@ msgstr "A beállítások nem menthetők el ide: %s"
 
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "Távoli fájlrendszeren nem lehet végrehajtani a parancsokat"
-
-#, c-format
-msgid ""
-"Cannot chdir to \"%s\"\n"
-"%s"
-msgstr ""
-"Nem sikerült belépni a(z) \"%s\" könyvtárba.\n"
-"%s"
 
 msgid "Parameter"
 msgstr "Paraméter"
@@ -3062,6 +3069,225 @@ msgstr "Háttér&ben"
 msgid "Invalid source pattern '%s'"
 msgstr "Hibás forrás-minta: \"%s\""
 
+msgid "File listin&g"
+msgstr "&Teljes"
+
+msgid "&Quick view"
+msgstr "Gyors nézet"
+
+msgid "&Info"
+msgstr "&Info"
+
+msgid "&Tree"
+msgstr "Köny&vtárfa"
+
+msgid "&Listing format..."
+msgstr ""
+
+msgid "&Sort order..."
+msgstr "&Rendezési mód..."
+
+msgid "&Filter..."
+msgstr "&Szűrő..."
+
+msgid "&Encoding..."
+msgstr "&Kódolás..."
+
+msgid "FT&P link..."
+msgstr "&FTP-kapcsolat..."
+
+msgid "S&hell link..."
+msgstr "Sh&ell-kapcsolat..."
+
+msgid "S&FTP link..."
+msgstr "S&FTP link..."
+
+msgid "SM&B link..."
+msgstr "SM&B-kapcsolat..."
+
+msgid "Paneli&ze"
+msgstr "Panelra helye&zés"
+
+msgid "&Rescan"
+msgstr "Frissít"
+
+msgid "&View"
+msgstr "Megnéz"
+
+msgid "Vie&w file..."
+msgstr "Fájl megjelenítése..."
+
+msgid "&Filtered view"
+msgstr "Szűrt nézet"
+
+msgid "&Copy"
+msgstr "&Másol"
+
+msgid "C&hmod"
+msgstr "C&hmod"
+
+msgid "&Link"
+msgstr "&Link"
+
+msgid "&Symlink"
+msgstr "&Szimb. link"
+
+msgid "Relative symlin&k"
+msgstr "&Relatív szimb. link"
+
+msgid "Edit s&ymlink"
+msgstr "Szimb. link módosítása"
+
+msgid "Ch&own"
+msgstr "Ch&own"
+
+msgid "&Advanced chown"
+msgstr "Chmod-Chown (tul&aj)"
+
+msgid "Cha&ttr"
+msgstr ""
+
+msgid "&Rename/Move"
+msgstr "Át&nevez/Áthelyez"
+
+msgid "&Mkdir"
+msgstr "Új könyvtár"
+
+msgid "&Quick cd"
+msgstr "Gyors könyvtárváltás (cd)"
+
+msgid "Select &group"
+msgstr "&Csoport kijelölése"
+
+msgid "U&nselect group"
+msgstr "Kijelölések megszüntetése"
+
+msgid "&Invert selection"
+msgstr "K&ijelölés megfordítása"
+
+msgid "E&xit"
+msgstr "&Kilépés"
+
+msgid "&User menu"
+msgstr "Felhasználói menü"
+
+msgid "&Directory tree"
+msgstr "Köny&vtárfa"
+
+msgid "&Find file"
+msgstr "&Fájl keresése"
+
+msgid "S&wap panels"
+msgstr "Panelek cseréje"
+
+msgid "Switch &panels on/off"
+msgstr "Pane&lek ki/be"
+
+msgid "&Compare directories"
+msgstr "Könyvtárak összehasonlítása"
+
+msgid "C&ompare files"
+msgstr "Fájl&ok összehasonlítása"
+
+msgid "E&xternal panelize"
+msgstr "Külső panel-parancs"
+
+msgid "Show directory s&izes"
+msgstr "Könyvtár&méret"
+
+msgid "Command &history"
+msgstr "Ko&rábbi parancsok"
+
+msgid "Viewed/edited files hi&story"
+msgstr ""
+
+msgid "Di&rectory hotlist"
+msgstr "Könyvtár-gyorslista"
+
+msgid "&Active VFS list"
+msgstr "&Aktív VFS-lista"
+
+msgid "&Background jobs"
+msgstr "Háttérfolyamatok"
+
+msgid "Screen lis&t"
+msgstr "Képernyő lis&ta"
+
+msgid "&Undelete files (ext2fs only)"
+msgstr "&Törölt fájlok visszaállítása"
+
+msgid "&Listing format edit"
+msgstr "Listá&zási formátum szerkesztése"
+
+msgid "Edit &extension file"
+msgstr "Kiter&jesztésfájl szerkesztése"
+
+msgid "Edit &menu file"
+msgstr "Me&nüfájl szerkesztése"
+
+msgid "Edit hi&ghlighting group file"
+msgstr "Fájltípus színkiemelés szerkesztése"
+
+msgid "&Configuration..."
+msgstr "&Alapbeállítások..."
+
+msgid "&Layout..."
+msgstr "Meg&jelenés..."
+
+msgid "&Panel options..."
+msgstr "&Panelbeállítások..."
+
+msgid "C&onfirmation..."
+msgstr "&Rákérdezés..."
+
+msgid "&Appearance..."
+msgstr "&Megjelenítés..."
+
+msgid "&Display bits..."
+msgstr "&Kivitel és bevitel..."
+
+msgid "&Virtual FS..."
+msgstr "&Virtuális fájlrendszer..."
+
+msgid "Panels:"
+msgstr "Panelek:"
+
+#, c-format
+msgid "You have %zu opened screen. Quit anyway?"
+msgid_plural "You have %zu opened screens. Quit anyway?"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "The Midnight Commander"
+msgstr "Midnight Commander"
+
+msgid "Do you really want to quit the Midnight Commander?"
+msgstr "Valóban ki szeretne lépni a Midnight Commanderből?"
+
+msgid "&Above"
+msgstr "Fe&nt"
+
+msgid "&Left"
+msgstr "&Bal"
+
+msgid "&Below"
+msgstr "&Lent"
+
+msgid "&Right"
+msgstr "&Jobb"
+
+msgid "ButtonBar|Menu"
+msgstr "Menü"
+
+msgid "ButtonBar|View"
+msgstr "Megnéz"
+
+msgid "ButtonBar|RenMov"
+msgstr "Áthelyez"
+
+msgid "ButtonBar|Mkdir"
+msgstr "ÚjKvt"
+
 msgid "&Chdir"
 msgstr "&Belépés a könyvtárba"
 
@@ -3107,9 +3333,6 @@ msgstr "Összes kar.készlet"
 
 msgid "Fir&st hit"
 msgstr "Első találat"
-
-msgid "&Tree"
-msgstr "Köny&vtárfa"
 
 msgid "Find File"
 msgstr "Fájl keresése"
@@ -3368,222 +3591,6 @@ msgstr "Sorok:"
 
 msgid "Layout"
 msgstr "Megjelenés"
-
-msgid "File listin&g"
-msgstr "&Teljes"
-
-msgid "&Quick view"
-msgstr "Gyors nézet"
-
-msgid "&Info"
-msgstr "&Info"
-
-msgid "&Listing format..."
-msgstr ""
-
-msgid "&Sort order..."
-msgstr "&Rendezési mód..."
-
-msgid "&Filter..."
-msgstr "&Szűrő..."
-
-msgid "&Encoding..."
-msgstr "&Kódolás..."
-
-msgid "FT&P link..."
-msgstr "&FTP-kapcsolat..."
-
-msgid "S&hell link..."
-msgstr "Sh&ell-kapcsolat..."
-
-msgid "S&FTP link..."
-msgstr "S&FTP link..."
-
-msgid "SM&B link..."
-msgstr "SM&B-kapcsolat..."
-
-msgid "Paneli&ze"
-msgstr "Panelra helye&zés"
-
-msgid "&Rescan"
-msgstr "Frissít"
-
-msgid "&View"
-msgstr "Megnéz"
-
-msgid "Vie&w file..."
-msgstr "Fájl megjelenítése..."
-
-msgid "&Filtered view"
-msgstr "Szűrt nézet"
-
-msgid "&Copy"
-msgstr "&Másol"
-
-msgid "C&hmod"
-msgstr "C&hmod"
-
-msgid "&Link"
-msgstr "&Link"
-
-msgid "&Symlink"
-msgstr "&Szimb. link"
-
-msgid "Relative symlin&k"
-msgstr "&Relatív szimb. link"
-
-msgid "Edit s&ymlink"
-msgstr "Szimb. link módosítása"
-
-msgid "Ch&own"
-msgstr "Ch&own"
-
-msgid "&Advanced chown"
-msgstr "Chmod-Chown (tul&aj)"
-
-msgid "Cha&ttr"
-msgstr ""
-
-msgid "&Rename/Move"
-msgstr "Át&nevez/Áthelyez"
-
-msgid "&Mkdir"
-msgstr "Új könyvtár"
-
-msgid "&Quick cd"
-msgstr "Gyors könyvtárváltás (cd)"
-
-msgid "Select &group"
-msgstr "&Csoport kijelölése"
-
-msgid "U&nselect group"
-msgstr "Kijelölések megszüntetése"
-
-msgid "&Invert selection"
-msgstr "K&ijelölés megfordítása"
-
-msgid "E&xit"
-msgstr "&Kilépés"
-
-msgid "&User menu"
-msgstr "Felhasználói menü"
-
-msgid "&Directory tree"
-msgstr "Köny&vtárfa"
-
-msgid "&Find file"
-msgstr "&Fájl keresése"
-
-msgid "S&wap panels"
-msgstr "Panelek cseréje"
-
-msgid "Switch &panels on/off"
-msgstr "Pane&lek ki/be"
-
-msgid "&Compare directories"
-msgstr "Könyvtárak összehasonlítása"
-
-msgid "C&ompare files"
-msgstr "Fájl&ok összehasonlítása"
-
-msgid "E&xternal panelize"
-msgstr "Külső panel-parancs"
-
-msgid "Show directory s&izes"
-msgstr "Könyvtár&méret"
-
-msgid "Command &history"
-msgstr "Ko&rábbi parancsok"
-
-msgid "Viewed/edited files hi&story"
-msgstr ""
-
-msgid "Di&rectory hotlist"
-msgstr "Könyvtár-gyorslista"
-
-msgid "&Active VFS list"
-msgstr "&Aktív VFS-lista"
-
-msgid "&Background jobs"
-msgstr "Háttérfolyamatok"
-
-msgid "Screen lis&t"
-msgstr "Képernyő lis&ta"
-
-msgid "&Undelete files (ext2fs only)"
-msgstr "&Törölt fájlok visszaállítása"
-
-msgid "&Listing format edit"
-msgstr "Listá&zási formátum szerkesztése"
-
-msgid "Edit &extension file"
-msgstr "Kiter&jesztésfájl szerkesztése"
-
-msgid "Edit &menu file"
-msgstr "Me&nüfájl szerkesztése"
-
-msgid "Edit hi&ghlighting group file"
-msgstr "Fájltípus színkiemelés szerkesztése"
-
-msgid "&Configuration..."
-msgstr "&Alapbeállítások..."
-
-msgid "&Layout..."
-msgstr "Meg&jelenés..."
-
-msgid "&Panel options..."
-msgstr "&Panelbeállítások..."
-
-msgid "C&onfirmation..."
-msgstr "&Rákérdezés..."
-
-msgid "&Appearance..."
-msgstr "&Megjelenítés..."
-
-msgid "&Display bits..."
-msgstr "&Kivitel és bevitel..."
-
-msgid "&Virtual FS..."
-msgstr "&Virtuális fájlrendszer..."
-
-msgid "Panels:"
-msgstr "Panelek:"
-
-#, c-format
-msgid "You have %zu opened screen. Quit anyway?"
-msgid_plural "You have %zu opened screens. Quit anyway?"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "The Midnight Commander"
-msgstr "Midnight Commander"
-
-msgid "Do you really want to quit the Midnight Commander?"
-msgstr "Valóban ki szeretne lépni a Midnight Commanderből?"
-
-msgid "&Above"
-msgstr "Fe&nt"
-
-msgid "&Left"
-msgstr "&Bal"
-
-msgid "&Below"
-msgstr "&Lent"
-
-msgid "&Right"
-msgstr "&Jobb"
-
-msgid "ButtonBar|Menu"
-msgstr "Menü"
-
-msgid "ButtonBar|View"
-msgstr "Megnéz"
-
-msgid "ButtonBar|RenMov"
-msgstr "Áthelyez"
-
-msgid "ButtonBar|Mkdir"
-msgstr "ÚjKvt"
 
 msgid "Memory exhausted!"
 msgstr "Elfogyott a memória!"

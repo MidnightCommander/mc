@@ -796,7 +796,9 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
             }
         }
 
+        memset (&st, 0, sizeof (st));
         tar_fill_stat (archive, &st, header, *h_size);
+
         if (S_ISDIR (st.st_mode))
         {
             entry = VFS_SUBCLASS (me)->find_entry (me, parent, p, LINK_NO_FOLLOW, FL_NONE);

@@ -9,6 +9,7 @@
 
    Written by:
    Slava Zanko <slavazanko@gmail.com>, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2020
 
    This file is part of the Midnight Commander.
 
@@ -33,27 +34,23 @@
 #include <config.h>
 
 #include <stdlib.h>
-#include <errno.h>
 #include <string.h>
 
-#include "lib/global.h"         /* home_dir */
-#include "lib/tty/tty.h"
-#include "lib/vfs/vfs.h"
-#include "lib/strescape.h"
+#include "lib/global.h"
+#include "lib/vfs/vfs.h"        /* vfs_current_is_local() */
 #include "lib/skin.h"           /* DEFAULT_COLOR */
-#include "lib/util.h"
+#include "lib/util.h"           /* whitespace() */
 #include "lib/widget.h"
 
 #include "src/setup.h"          /* quit */
 #ifdef ENABLE_SUBSHELL
 #include "src/subshell/subshell.h"
 #endif
-#include "src/execute.h"        /* shell_execute */
-#include "src/usermenu.h"       /* expand_format */
+#include "src/execute.h"        /* shell_execute() */
+#include "src/usermenu.h"       /* expand_format() */
 
-#include "midnight.h"           /* current_panel */
-#include "layout.h"             /* command_prompt */
-#include "tree.h"               /* sync_tree() */
+#include "filemanager.h"        /* quiet_quit_cmd(), layout.h */
+#include "cd.h"                 /* cd_to() */
 
 #include "command.h"
 
@@ -64,8 +61,6 @@ WInput *cmdline;
 
 /*** file scope macro definitions ****************************************************************/
 
-#define CD_OPERAND_OFFSET 3
-
 /*** file scope type declarations ****************************************************************/
 
 /*** file scope variables ************************************************************************/
@@ -75,159 +70,6 @@ static input_colors_t command_colors;
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
-/* --------------------------------------------------------------------------------------------- */
-
-/**
- * Expand the argument to "cd" and change directory.  First try tilde
- * expansion, then variable substitution.  If the CDPATH variable is set
- * (e.g. CDPATH=".:~:/usr"), try all the paths contained there.
- * We do not support such rare substitutions as ${var:-value} etc.
- * No quoting is implemented here, so ${VAR} and $VAR will be always
- * substituted.  Wildcards are not supported either.
- * Advanced users should be encouraged to use "\cd" instead of "cd" if
- * they want the behavior they are used to in the shell.
- *
- * @param _path string to examine
- * @return newly allocated string
- */
-
-static char *
-examine_cd (const char *_path)
-{
-    /* *INDENT-OFF* */
-    typedef enum
-    {
-        copy_sym,
-        subst_var
-    } state_t;
-    /* *INDENT-ON* */
-
-    state_t state = copy_sym;
-    GString *q;
-    char *path_tilde, *path;
-    char *p;
-
-    /* Tilde expansion */
-    path = strutils_shell_unescape (_path);
-    path_tilde = tilde_expand (path);
-    g_free (path);
-
-    q = g_string_sized_new (32);
-
-    /* Variable expansion */
-    for (p = path_tilde; *p != '\0';)
-    {
-        switch (state)
-        {
-        case copy_sym:
-            if (p[0] == '\\' && p[1] == '$')
-            {
-                g_string_append_c (q, '$');
-                p += 2;
-            }
-            else if (p[0] != '$' || p[1] == '[' || p[1] == '(')
-            {
-                g_string_append_c (q, *p);
-                p++;
-            }
-            else
-                state = subst_var;
-            break;
-
-        case subst_var:
-            {
-                char *s = NULL;
-                char c;
-                const char *t = NULL;
-
-                /* skip dollar */
-                p++;
-
-                if (p[0] == '{')
-                {
-                    p++;
-                    s = strchr (p, '}');
-                }
-                if (s == NULL)
-                    s = strchr (p, PATH_SEP);
-                if (s == NULL)
-                    s = strchr (p, '\0');
-                c = *s;
-                *s = '\0';
-                t = getenv (p);
-                *s = c;
-                if (t == NULL)
-                {
-                    g_string_append_c (q, '$');
-                    if (p[-1] != '$')
-                        g_string_append_c (q, '{');
-                }
-                else
-                {
-                    g_string_append (q, t);
-                    p = s;
-                    if (*s == '}')
-                        p++;
-                }
-
-                state = copy_sym;
-                break;
-            }
-
-        default:
-            break;
-        }
-    }
-
-    g_free (path_tilde);
-
-    return g_string_free (q, FALSE);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/* CDPATH handling */
-static gboolean
-handle_cdpath (const char *path)
-{
-    gboolean result = FALSE;
-
-    /* CDPATH handling */
-    if (!IS_PATH_SEP (*path))
-    {
-        char *cdpath, *p;
-        char c;
-
-        cdpath = g_strdup (getenv ("CDPATH"));
-        p = cdpath;
-        c = (p == NULL) ? '\0' : ':';
-
-        while (!result && c == ':')
-        {
-            char *s;
-
-            s = strchr (p, ':');
-            if (s == NULL)
-                s = strchr (p, '\0');
-            c = *s;
-            *s = '\0';
-            if (*p != '\0')
-            {
-                vfs_path_t *r_vpath;
-
-                r_vpath = vfs_path_build_filename (p, path, (char *) NULL);
-                result = do_cd (r_vpath, cd_parse_command);
-                vfs_path_free (r_vpath);
-            }
-            *s = c;
-            p = s + 1;
-        }
-        g_free (cdpath);
-    }
-
-    return result;
-}
-
 /* --------------------------------------------------------------------------------------------- */
 
 /** Handle Enter on the command line
@@ -251,9 +93,9 @@ enter (WInput * lc_cmdline)
     if (*cmd == '\0')
         return MSG_HANDLED;
 
-    if (strncmp (cmd, "cd ", 3) == 0 || strcmp (cmd, "cd") == 0)
+    if (strncmp (cmd, "cd", 2) == 0 && (cmd[2] == '\0' || whitespace (cmd[2])))
     {
-        do_cd_command (cmd);
+        cd_to (cmd + 2);
         input_clean (lc_cmdline);
         return MSG_HANDLED;
     }
@@ -351,109 +193,6 @@ command_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
-/* --------------------------------------------------------------------------------------------- */
-
-/** Execute the cd command on the command line
- *
- * @param orig_cmd command for execution
- */
-
-void
-do_cd_command (char *orig_cmd)
-{
-    int len;
-    int operand_pos = CD_OPERAND_OFFSET;
-    const char *cmd;
-
-    /* Any final whitespace should be removed here
-       (to see why, try "cd fred "). */
-    /* NOTE: I think we should not remove the extra space,
-       that way, we can cd into hidden directories */
-    /* FIXME: what about interpreting quoted strings like the shell.
-       so one could type "cd <tab> M-a <enter>" and it would work. */
-    len = strlen (orig_cmd) - 1;
-    while (len >= 0 && whiteness (orig_cmd[len]))
-    {
-        orig_cmd[len] = '\0';
-        len--;
-    }
-
-    cmd = orig_cmd;
-    if (cmd[CD_OPERAND_OFFSET - 1] == '\0')
-        cmd = "cd ";            /* 0..2 => given text, 3 => \0 */
-
-    /* allow any amount of white space in front of the path operand */
-    while (whitespace (cmd[operand_pos]))
-        operand_pos++;
-
-    if (get_current_type () == view_tree)
-    {
-        vfs_path_t *new_vpath = NULL;
-
-        if (cmd[0] == '\0')
-        {
-            new_vpath = vfs_path_from_str (mc_config_get_home_dir ());
-            sync_tree (new_vpath);
-        }
-        else if (DIR_IS_DOTDOT (cmd + operand_pos))
-        {
-            if (vfs_path_elements_count (current_panel->cwd_vpath) != 1 ||
-                strlen (vfs_path_get_by_index (current_panel->cwd_vpath, 0)->path) > 1)
-            {
-                vfs_path_t *tmp_vpath = current_panel->cwd_vpath;
-
-                current_panel->cwd_vpath =
-                    vfs_path_vtokens_get (tmp_vpath, 0, vfs_path_tokens_count (tmp_vpath) - 1);
-                vfs_path_free (tmp_vpath);
-            }
-            sync_tree (current_panel->cwd_vpath);
-        }
-        else
-        {
-            if (IS_PATH_SEP (cmd[operand_pos]))
-                new_vpath = vfs_path_from_str (cmd + operand_pos);
-            else
-                new_vpath =
-                    vfs_path_append_new (current_panel->cwd_vpath, cmd + operand_pos,
-                                         (char *) NULL);
-
-            sync_tree (new_vpath);
-        }
-
-        vfs_path_free (new_vpath);
-    }
-    else
-    {
-        char *path;
-        vfs_path_t *q_vpath;
-        gboolean ok;
-
-        path = examine_cd (&cmd[operand_pos]);
-
-        if (*path == '\0')
-            q_vpath = vfs_path_from_str (mc_config_get_home_dir ());
-        else
-            q_vpath = vfs_path_from_str_flags (path, VPF_NO_CANON);
-
-        ok = do_cd (q_vpath, cd_parse_command);
-        if (!ok)
-            ok = handle_cdpath (path);
-
-        if (!ok)
-        {
-            char *d;
-
-            d = vfs_path_to_str_flags (q_vpath, 0, VPF_STRIP_PASSWORD);
-            message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\"\n%s"), d,
-                     unix_error_string (errno));
-            g_free (d);
-        }
-
-        vfs_path_free (q_vpath);
-        g_free (path);
-    }
-}
-
 /* --------------------------------------------------------------------------------------------- */
 
 WInput *

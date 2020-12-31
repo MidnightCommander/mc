@@ -13,6 +13,7 @@
 
 #include "lib/global.h"
 #include "lib/hook.h"           /* hook_t */
+#include "lib/keybind.h"        /* global_keymap_t */
 
 /*** typedefs(not structures) and defined constants **********************************************/
 

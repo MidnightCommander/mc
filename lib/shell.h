@@ -1,4 +1,4 @@
-/** \file timer.h
+/** \file shell.h
  *  \brief Header: shell structure
  */
 

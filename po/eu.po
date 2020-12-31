@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"POT-Creation-Date: 2020-12-31 16:34+0300\n"
 "PO-Revision-Date: 2020-05-17 17:42+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Basque (http://www.transifex.com/mc/mc/language/eu/)\n"
@@ -1978,6 +1978,9 @@ msgstr "Konfiguratu aukerak"
 msgid "Skin:"
 msgstr "Azala:"
 
+msgid "&Shadows"
+msgstr ""
+
 msgid "Appearance"
 msgstr "Itxura"
 
@@ -2203,6 +2206,14 @@ msgstr "Erabiltzaile izena:"
 msgid "SMB authentication"
 msgstr "SMB autentikazioa"
 
+#, c-format
+msgid ""
+"Cannot chdir to \"%s\"\n"
+"%s"
+msgstr ""
+"Ezin da \"%s\" direktoriora aldatu\n"
+"%s"
+
 msgid "Secure deletion"
 msgstr ""
 
@@ -2262,6 +2273,10 @@ msgstr ""
 
 msgid "No COW"
 msgstr ""
+
+#, fuzzy
+msgid "Direct access for files"
+msgstr "%s(r)en direktorio cache-a iraungi egin da"
 
 msgid "Casefolded file"
 msgstr ""
@@ -2538,14 +2553,6 @@ msgstr "Ezarpenak ezin gorde %s-ra"
 
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "Komandoak ezin exekutatu bertakoa ez den fitxategi-sistema batean"
-
-#, c-format
-msgid ""
-"Cannot chdir to \"%s\"\n"
-"%s"
-msgstr ""
-"Ezin da \"%s\" direktoriora aldatu\n"
-"%s"
 
 msgid "Parameter"
 msgstr "Parametroa"
@@ -3084,6 +3091,225 @@ msgstr "&Atzeko planoa"
 msgid "Invalid source pattern '%s'"
 msgstr "Iturburu eredu baliogabea '%s'"
 
+msgid "File listin&g"
+msgstr "&Fitxategien zerrendatzea"
+
+msgid "&Quick view"
+msgstr "Ikuspegi &azkarra"
+
+msgid "&Info"
+msgstr "&Info"
+
+msgid "&Tree"
+msgstr "Zu&haitza"
+
+msgid "&Listing format..."
+msgstr "&Zerrenda formatua"
+
+msgid "&Sort order..."
+msgstr "&Sailkatzeko ordena..."
+
+msgid "&Filter..."
+msgstr "I&ragazkia..."
+
+msgid "&Encoding..."
+msgstr "&Kodeketa..."
+
+msgid "FT&P link..."
+msgstr "FT&P esteka..."
+
+msgid "S&hell link..."
+msgstr "S&hell esteka..."
+
+msgid "S&FTP link..."
+msgstr "S&FTP esteka..."
+
+msgid "SM&B link..."
+msgstr "S&MB esteka..."
+
+msgid "Paneli&ze"
+msgstr "Panelerat&u"
+
+msgid "&Rescan"
+msgstr "&Berraztertu"
+
+msgid "&View"
+msgstr "&Ikusi"
+
+msgid "Vie&w file..."
+msgstr "Ikusi &fitxategia..."
+
+msgid "&Filtered view"
+msgstr "I&ragazitako ikuspegia"
+
+msgid "&Copy"
+msgstr "&Kopiatu"
+
+msgid "C&hmod"
+msgstr "C&hmod"
+
+msgid "&Link"
+msgstr "&Esteka"
+
+msgid "&Symlink"
+msgstr "E&steka sinbolikoa"
+
+msgid "Relative symlin&k"
+msgstr "Es&teka sinboliko erlatiboa"
+
+msgid "Edit s&ymlink"
+msgstr "E&ditatu esteka sinbolikoa"
+
+msgid "Ch&own"
+msgstr "&Chown"
+
+msgid "&Advanced chown"
+msgstr "Ch&own aurreratua"
+
+msgid "Cha&ttr"
+msgstr ""
+
+msgid "&Rename/Move"
+msgstr "Berrizendatu/Mu&gitu"
+
+msgid "&Mkdir"
+msgstr "&Mkdir"
+
+msgid "&Quick cd"
+msgstr "Cd a&zkarra"
+
+msgid "Select &group"
+msgstr "Hautatu ta&ldea"
+
+msgid "U&nselect group"
+msgstr "&Hautua kendu taldeari"
+
+msgid "&Invert selection"
+msgstr "&Alderantzikatu hautapena"
+
+msgid "E&xit"
+msgstr "Irte&n"
+
+msgid "&User menu"
+msgstr "&Erabiltzailearen menua"
+
+msgid "&Directory tree"
+msgstr "&Direktorio zuhaitza"
+
+msgid "&Find file"
+msgstr "&Aurkitu fitxategia"
+
+msgid "S&wap panels"
+msgstr "&Trukatu panelak"
+
+msgid "Switch &panels on/off"
+msgstr "&Panelak ezkutatu/erakutsi"
+
+msgid "&Compare directories"
+msgstr "&Konparatu direktorioak"
+
+msgid "C&ompare files"
+msgstr "Fitxategiak al&deratu"
+
+msgid "E&xternal panelize"
+msgstr "Ka&npokora paneleratu"
+
+msgid "Show directory s&izes"
+msgstr "E&rakutsi direktorioen neurriak"
+
+msgid "Command &history"
+msgstr "Ko&mandoen historia"
+
+msgid "Viewed/edited files hi&story"
+msgstr ""
+
+msgid "Di&rectory hotlist"
+msgstr "&Gogoko direktorioak"
+
+msgid "&Active VFS list"
+msgstr "&Jarduneko VFS zerrenda"
+
+msgid "&Background jobs"
+msgstr "&Hondoko lanak"
+
+msgid "Screen lis&t"
+msgstr "Pantaila &zerrenda"
+
+msgid "&Undelete files (ext2fs only)"
+msgstr "&Berreskuratu fitxategiak (soilik ext2fs)"
+
+msgid "&Listing format edit"
+msgstr "Zerrendatzeko &formatua editatu"
+
+msgid "Edit &extension file"
+msgstr "Editatu &luzapen fitxategia"
+
+msgid "Edit &menu file"
+msgstr "Editat&u menu fitxategia"
+
+msgid "Edit hi&ghlighting group file"
+msgstr "Editatu nabarmentzeko taldeen &fitxategia"
+
+msgid "&Configuration..."
+msgstr "&Konfigurazioa..."
+
+msgid "&Layout..."
+msgstr "&Diseinua..."
+
+msgid "&Panel options..."
+msgstr "&Panelen aukerak..."
+
+msgid "C&onfirmation..."
+msgstr "&Berrespena..."
+
+msgid "&Appearance..."
+msgstr "&Itxura..."
+
+msgid "&Display bits..."
+msgstr "&Bistaratu bitak..."
+
+msgid "&Virtual FS..."
+msgstr "Alegiazko &FS..."
+
+msgid "Panels:"
+msgstr "Panelak:"
+
+#, c-format
+msgid "You have %zu opened screen. Quit anyway?"
+msgid_plural "You have %zu opened screens. Quit anyway?"
+msgstr[0] "Pantaila %zu irekita duzu. Irten hala ere?"
+msgstr[1] "%zu pantaila irekita dituzu. Irten hala ere?"
+
+msgid "The Midnight Commander"
+msgstr "Midnight Commander-ra"
+
+msgid "Do you really want to quit the Midnight Commander?"
+msgstr "Benetan utzi nahi duzu Midnight Commander-ra?"
+
+msgid "&Above"
+msgstr "&Gainean"
+
+msgid "&Left"
+msgstr "E&zkerra"
+
+msgid "&Below"
+msgstr "&Azpian"
+
+msgid "&Right"
+msgstr "E&skuina"
+
+msgid "ButtonBar|Menu"
+msgstr "Menua"
+
+msgid "ButtonBar|View"
+msgstr "Ikusi"
+
+msgid "ButtonBar|RenMov"
+msgstr "BerrizenMug"
+
+msgid "ButtonBar|Mkdir"
+msgstr "SortuDir"
+
 msgid "&Chdir"
 msgstr "&Aldatu direktorioa"
 
@@ -3129,9 +3355,6 @@ msgstr "Karaktere-&multzo guztiak"
 
 msgid "Fir&st hit"
 msgstr "&Lehenengo agerraldia"
-
-msgid "&Tree"
-msgstr "Zu&haitza"
 
 msgid "Find File"
 msgstr "Bilatu fitxategia"
@@ -3390,222 +3613,6 @@ msgstr "Irteera lerroak:"
 
 msgid "Layout"
 msgstr "Diseinua"
-
-msgid "File listin&g"
-msgstr "&Fitxategien zerrendatzea"
-
-msgid "&Quick view"
-msgstr "Ikuspegi &azkarra"
-
-msgid "&Info"
-msgstr "&Info"
-
-msgid "&Listing format..."
-msgstr "&Zerrenda formatua"
-
-msgid "&Sort order..."
-msgstr "&Sailkatzeko ordena..."
-
-msgid "&Filter..."
-msgstr "I&ragazkia..."
-
-msgid "&Encoding..."
-msgstr "&Kodeketa..."
-
-msgid "FT&P link..."
-msgstr "FT&P esteka..."
-
-msgid "S&hell link..."
-msgstr "S&hell esteka..."
-
-msgid "S&FTP link..."
-msgstr "S&FTP esteka..."
-
-msgid "SM&B link..."
-msgstr "S&MB esteka..."
-
-msgid "Paneli&ze"
-msgstr "Panelerat&u"
-
-msgid "&Rescan"
-msgstr "&Berraztertu"
-
-msgid "&View"
-msgstr "&Ikusi"
-
-msgid "Vie&w file..."
-msgstr "Ikusi &fitxategia..."
-
-msgid "&Filtered view"
-msgstr "I&ragazitako ikuspegia"
-
-msgid "&Copy"
-msgstr "&Kopiatu"
-
-msgid "C&hmod"
-msgstr "C&hmod"
-
-msgid "&Link"
-msgstr "&Esteka"
-
-msgid "&Symlink"
-msgstr "E&steka sinbolikoa"
-
-msgid "Relative symlin&k"
-msgstr "Es&teka sinboliko erlatiboa"
-
-msgid "Edit s&ymlink"
-msgstr "E&ditatu esteka sinbolikoa"
-
-msgid "Ch&own"
-msgstr "&Chown"
-
-msgid "&Advanced chown"
-msgstr "Ch&own aurreratua"
-
-msgid "Cha&ttr"
-msgstr ""
-
-msgid "&Rename/Move"
-msgstr "Berrizendatu/Mu&gitu"
-
-msgid "&Mkdir"
-msgstr "&Mkdir"
-
-msgid "&Quick cd"
-msgstr "Cd a&zkarra"
-
-msgid "Select &group"
-msgstr "Hautatu ta&ldea"
-
-msgid "U&nselect group"
-msgstr "&Hautua kendu taldeari"
-
-msgid "&Invert selection"
-msgstr "&Alderantzikatu hautapena"
-
-msgid "E&xit"
-msgstr "Irte&n"
-
-msgid "&User menu"
-msgstr "&Erabiltzailearen menua"
-
-msgid "&Directory tree"
-msgstr "&Direktorio zuhaitza"
-
-msgid "&Find file"
-msgstr "&Aurkitu fitxategia"
-
-msgid "S&wap panels"
-msgstr "&Trukatu panelak"
-
-msgid "Switch &panels on/off"
-msgstr "&Panelak ezkutatu/erakutsi"
-
-msgid "&Compare directories"
-msgstr "&Konparatu direktorioak"
-
-msgid "C&ompare files"
-msgstr "Fitxategiak al&deratu"
-
-msgid "E&xternal panelize"
-msgstr "Ka&npokora paneleratu"
-
-msgid "Show directory s&izes"
-msgstr "E&rakutsi direktorioen neurriak"
-
-msgid "Command &history"
-msgstr "Ko&mandoen historia"
-
-msgid "Viewed/edited files hi&story"
-msgstr ""
-
-msgid "Di&rectory hotlist"
-msgstr "&Gogoko direktorioak"
-
-msgid "&Active VFS list"
-msgstr "&Jarduneko VFS zerrenda"
-
-msgid "&Background jobs"
-msgstr "&Hondoko lanak"
-
-msgid "Screen lis&t"
-msgstr "Pantaila &zerrenda"
-
-msgid "&Undelete files (ext2fs only)"
-msgstr "&Berreskuratu fitxategiak (soilik ext2fs)"
-
-msgid "&Listing format edit"
-msgstr "Zerrendatzeko &formatua editatu"
-
-msgid "Edit &extension file"
-msgstr "Editatu &luzapen fitxategia"
-
-msgid "Edit &menu file"
-msgstr "Editat&u menu fitxategia"
-
-msgid "Edit hi&ghlighting group file"
-msgstr "Editatu nabarmentzeko taldeen &fitxategia"
-
-msgid "&Configuration..."
-msgstr "&Konfigurazioa..."
-
-msgid "&Layout..."
-msgstr "&Diseinua..."
-
-msgid "&Panel options..."
-msgstr "&Panelen aukerak..."
-
-msgid "C&onfirmation..."
-msgstr "&Berrespena..."
-
-msgid "&Appearance..."
-msgstr "&Itxura..."
-
-msgid "&Display bits..."
-msgstr "&Bistaratu bitak..."
-
-msgid "&Virtual FS..."
-msgstr "Alegiazko &FS..."
-
-msgid "Panels:"
-msgstr "Panelak:"
-
-#, c-format
-msgid "You have %zu opened screen. Quit anyway?"
-msgid_plural "You have %zu opened screens. Quit anyway?"
-msgstr[0] "Pantaila %zu irekita duzu. Irten hala ere?"
-msgstr[1] "%zu pantaila irekita dituzu. Irten hala ere?"
-
-msgid "The Midnight Commander"
-msgstr "Midnight Commander-ra"
-
-msgid "Do you really want to quit the Midnight Commander?"
-msgstr "Benetan utzi nahi duzu Midnight Commander-ra?"
-
-msgid "&Above"
-msgstr "&Gainean"
-
-msgid "&Left"
-msgstr "E&zkerra"
-
-msgid "&Below"
-msgstr "&Azpian"
-
-msgid "&Right"
-msgstr "E&skuina"
-
-msgid "ButtonBar|Menu"
-msgstr "Menua"
-
-msgid "ButtonBar|View"
-msgstr "Ikusi"
-
-msgid "ButtonBar|RenMov"
-msgstr "BerrizenMug"
-
-msgid "ButtonBar|Mkdir"
-msgstr "SortuDir"
 
 msgid "Memory exhausted!"
 msgstr "Memoria agortuta!"

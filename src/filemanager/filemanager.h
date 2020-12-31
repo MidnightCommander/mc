@@ -1,9 +1,9 @@
-/** \file midnight.h
- *  \brief Header: main dialog (file panel) for Midnight Commander
+/** \file filemanager.h
+ *  \brief Header: main dialog (file panels) for Midnight Commander
  */
 
-#ifndef MC__MIDNIGHT_H
-#define MC__MIDNIGHT_H
+#ifndef MC__FILEMANAGER_H
+#define MC__FILEMANAGER_H
 
 #include "lib/widget.h"
 
@@ -43,11 +43,11 @@ void update_menu (void);
 void midnight_set_buttonbar (WButtonBar * b);
 char *get_random_hint (gboolean force);
 void load_hint (gboolean force);
-void change_panel (void);
+WPanel *change_panel (void);
 void save_cwds_stat (void);
 gboolean quiet_quit_cmd (void);
 gboolean do_nc (void);
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__MIDNIGHT_H */
+#endif /* MC__FILEMANAGER_H */

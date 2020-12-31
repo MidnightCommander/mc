@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"POT-Creation-Date: 2020-12-31 16:34+0300\n"
 "PO-Revision-Date: 2020-05-17 17:42+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Greek (http://www.transifex.com/mc/mc/language/el/)\n"
@@ -1915,6 +1915,9 @@ msgstr ""
 msgid "Skin:"
 msgstr ""
 
+msgid "&Shadows"
+msgstr ""
+
 msgid "Appearance"
 msgstr ""
 
@@ -2134,6 +2137,14 @@ msgstr "Όνομα χρήστη:"
 msgid "SMB authentication"
 msgstr ""
 
+#, c-format
+msgid ""
+"Cannot chdir to \"%s\"\n"
+"%s"
+msgstr ""
+"Αδυναμία chdir σε \"%s\"\n"
+"%s"
+
 msgid "Secure deletion"
 msgstr ""
 
@@ -2192,6 +2203,9 @@ msgid "Huge_file"
 msgstr ""
 
 msgid "No COW"
+msgstr ""
+
+msgid "Direct access for files"
 msgstr ""
 
 msgid "Casefolded file"
@@ -2467,14 +2481,6 @@ msgstr ""
 
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "Αδυναμία εκτέλεσης εντολών σε μη τοπικά συστήματα αρχείων"
-
-#, c-format
-msgid ""
-"Cannot chdir to \"%s\"\n"
-"%s"
-msgstr ""
-"Αδυναμία chdir σε \"%s\"\n"
-"%s"
 
 msgid "Parameter"
 msgstr "Παράμετρος"
@@ -2979,6 +2985,225 @@ msgstr "&Παρασκήνιο"
 msgid "Invalid source pattern '%s'"
 msgstr ""
 
+msgid "File listin&g"
+msgstr ""
+
+msgid "&Quick view"
+msgstr "&Γρήγορη προβολή"
+
+msgid "&Info"
+msgstr "&Πληροφορίες"
+
+msgid "&Tree"
+msgstr "&Δέντρο"
+
+msgid "&Listing format..."
+msgstr ""
+
+msgid "&Sort order..."
+msgstr "&Σειρά ταξινόμησης..."
+
+msgid "&Filter..."
+msgstr "&Φίλτρο..."
+
+msgid "&Encoding..."
+msgstr "&Κωδικοποίηση..."
+
+msgid "FT&P link..."
+msgstr "Δεσμος FT&P..."
+
+msgid "S&hell link..."
+msgstr "Δεσμος κε&λύφους..."
+
+msgid "S&FTP link..."
+msgstr "Δεσμός S&FTP..."
+
+msgid "SM&B link..."
+msgstr "Δεσμός SM&B..."
+
+msgid "Paneli&ze"
+msgstr ""
+
+msgid "&Rescan"
+msgstr "&Επανασάρωση"
+
+msgid "&View"
+msgstr "&Προβολή"
+
+msgid "Vie&w file..."
+msgstr "Π&ροβολή αρχείου..."
+
+msgid "&Filtered view"
+msgstr "&Φιλτραρισμένη προβολή"
+
+msgid "&Copy"
+msgstr "&Αντιγραφή"
+
+msgid "C&hmod"
+msgstr "C&hmod"
+
+msgid "&Link"
+msgstr "Δεσμό&ς"
+
+msgid "&Symlink"
+msgstr ""
+
+msgid "Relative symlin&k"
+msgstr ""
+
+msgid "Edit s&ymlink"
+msgstr ""
+
+msgid "Ch&own"
+msgstr "Ch&own"
+
+msgid "&Advanced chown"
+msgstr "&Προχωρημένο chown"
+
+msgid "Cha&ttr"
+msgstr ""
+
+msgid "&Rename/Move"
+msgstr "&Μετονομασία/μετακίνηση"
+
+msgid "&Mkdir"
+msgstr "&Mkdir"
+
+msgid "&Quick cd"
+msgstr "&Γρήγορο cd"
+
+msgid "Select &group"
+msgstr "Επιλογή &ομάδας"
+
+msgid "U&nselect group"
+msgstr "&Αποεπιλογή ομάδας"
+
+msgid "&Invert selection"
+msgstr "&Αντιστροφή επιλογής"
+
+msgid "E&xit"
+msgstr "Έ&ξοδος"
+
+msgid "&User menu"
+msgstr "Μενού &χρήστη"
+
+msgid "&Directory tree"
+msgstr "&Δέντρο καταλόγου"
+
+msgid "&Find file"
+msgstr "&Εύρεση αρχείου"
+
+msgid "S&wap panels"
+msgstr ""
+
+msgid "Switch &panels on/off"
+msgstr ""
+
+msgid "&Compare directories"
+msgstr "&Σύγκριση καταλόγων"
+
+msgid "C&ompare files"
+msgstr "&Σύγκριση αρχείων"
+
+msgid "E&xternal panelize"
+msgstr ""
+
+msgid "Show directory s&izes"
+msgstr "Εμ&φάνιση μεγεθών καταλόγων"
+
+msgid "Command &history"
+msgstr "&Ιστορικό εντολών"
+
+msgid "Viewed/edited files hi&story"
+msgstr ""
+
+msgid "Di&rectory hotlist"
+msgstr ""
+
+msgid "&Active VFS list"
+msgstr "Λίστα &ενεργών VFS"
+
+msgid "&Background jobs"
+msgstr "&Εργασίες παρασκηνίες"
+
+msgid "Screen lis&t"
+msgstr "&Λίστα οθονών"
+
+msgid "&Undelete files (ext2fs only)"
+msgstr "&Επαναφορά αρχείων (ext2fs μόνο)"
+
+msgid "&Listing format edit"
+msgstr ""
+
+msgid "Edit &extension file"
+msgstr "Επεξεργασία α&ρχείου επέκτασης"
+
+msgid "Edit &menu file"
+msgstr "Επεξεργασία αρχείου &μενού"
+
+msgid "Edit hi&ghlighting group file"
+msgstr ""
+
+msgid "&Configuration..."
+msgstr "&Ρυθμίσεις..."
+
+msgid "&Layout..."
+msgstr ""
+
+msgid "&Panel options..."
+msgstr ""
+
+msgid "C&onfirmation..."
+msgstr "Ε&πιβεβαίωση..."
+
+msgid "&Appearance..."
+msgstr ""
+
+msgid "&Display bits..."
+msgstr ""
+
+msgid "&Virtual FS..."
+msgstr "&Εικονικό FS..."
+
+msgid "Panels:"
+msgstr ""
+
+#, c-format
+msgid "You have %zu opened screen. Quit anyway?"
+msgid_plural "You have %zu opened screens. Quit anyway?"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "The Midnight Commander"
+msgstr "Το Midnight Commander"
+
+msgid "Do you really want to quit the Midnight Commander?"
+msgstr "Θέλετε στα αλήθεια να τερματίσετε το Midnight Commander?"
+
+msgid "&Above"
+msgstr "&Πάνω"
+
+msgid "&Left"
+msgstr "&Αριστερά"
+
+msgid "&Below"
+msgstr "&Κάτω"
+
+msgid "&Right"
+msgstr "&Δεξιά"
+
+msgid "ButtonBar|Menu"
+msgstr "ΓραμμήΚουμπιών|Μενού"
+
+msgid "ButtonBar|View"
+msgstr "ΓραμμήΚουμπιών|Προβολή"
+
+msgid "ButtonBar|RenMov"
+msgstr ""
+
+msgid "ButtonBar|Mkdir"
+msgstr "ΓραμμήΚουμπιών|Mkdir"
+
 msgid "&Chdir"
 msgstr "&Chdir"
 
@@ -3024,9 +3249,6 @@ msgstr ""
 
 msgid "Fir&st hit"
 msgstr ""
-
-msgid "&Tree"
-msgstr "&Δέντρο"
 
 msgid "Find File"
 msgstr "Εύρεση αρχείου"
@@ -3283,222 +3505,6 @@ msgstr "Γραμμές εξόδου:"
 
 msgid "Layout"
 msgstr ""
-
-msgid "File listin&g"
-msgstr ""
-
-msgid "&Quick view"
-msgstr "&Γρήγορη προβολή"
-
-msgid "&Info"
-msgstr "&Πληροφορίες"
-
-msgid "&Listing format..."
-msgstr ""
-
-msgid "&Sort order..."
-msgstr "&Σειρά ταξινόμησης..."
-
-msgid "&Filter..."
-msgstr "&Φίλτρο..."
-
-msgid "&Encoding..."
-msgstr "&Κωδικοποίηση..."
-
-msgid "FT&P link..."
-msgstr "Δεσμος FT&P..."
-
-msgid "S&hell link..."
-msgstr "Δεσμος κε&λύφους..."
-
-msgid "S&FTP link..."
-msgstr "Δεσμός S&FTP..."
-
-msgid "SM&B link..."
-msgstr "Δεσμός SM&B..."
-
-msgid "Paneli&ze"
-msgstr ""
-
-msgid "&Rescan"
-msgstr "&Επανασάρωση"
-
-msgid "&View"
-msgstr "&Προβολή"
-
-msgid "Vie&w file..."
-msgstr "Π&ροβολή αρχείου..."
-
-msgid "&Filtered view"
-msgstr "&Φιλτραρισμένη προβολή"
-
-msgid "&Copy"
-msgstr "&Αντιγραφή"
-
-msgid "C&hmod"
-msgstr "C&hmod"
-
-msgid "&Link"
-msgstr "Δεσμό&ς"
-
-msgid "&Symlink"
-msgstr ""
-
-msgid "Relative symlin&k"
-msgstr ""
-
-msgid "Edit s&ymlink"
-msgstr ""
-
-msgid "Ch&own"
-msgstr "Ch&own"
-
-msgid "&Advanced chown"
-msgstr "&Προχωρημένο chown"
-
-msgid "Cha&ttr"
-msgstr ""
-
-msgid "&Rename/Move"
-msgstr "&Μετονομασία/μετακίνηση"
-
-msgid "&Mkdir"
-msgstr "&Mkdir"
-
-msgid "&Quick cd"
-msgstr "&Γρήγορο cd"
-
-msgid "Select &group"
-msgstr "Επιλογή &ομάδας"
-
-msgid "U&nselect group"
-msgstr "&Αποεπιλογή ομάδας"
-
-msgid "&Invert selection"
-msgstr "&Αντιστροφή επιλογής"
-
-msgid "E&xit"
-msgstr "Έ&ξοδος"
-
-msgid "&User menu"
-msgstr "Μενού &χρήστη"
-
-msgid "&Directory tree"
-msgstr "&Δέντρο καταλόγου"
-
-msgid "&Find file"
-msgstr "&Εύρεση αρχείου"
-
-msgid "S&wap panels"
-msgstr ""
-
-msgid "Switch &panels on/off"
-msgstr ""
-
-msgid "&Compare directories"
-msgstr "&Σύγκριση καταλόγων"
-
-msgid "C&ompare files"
-msgstr "&Σύγκριση αρχείων"
-
-msgid "E&xternal panelize"
-msgstr ""
-
-msgid "Show directory s&izes"
-msgstr "Εμ&φάνιση μεγεθών καταλόγων"
-
-msgid "Command &history"
-msgstr "&Ιστορικό εντολών"
-
-msgid "Viewed/edited files hi&story"
-msgstr ""
-
-msgid "Di&rectory hotlist"
-msgstr ""
-
-msgid "&Active VFS list"
-msgstr "Λίστα &ενεργών VFS"
-
-msgid "&Background jobs"
-msgstr "&Εργασίες παρασκηνίες"
-
-msgid "Screen lis&t"
-msgstr "&Λίστα οθονών"
-
-msgid "&Undelete files (ext2fs only)"
-msgstr "&Επαναφορά αρχείων (ext2fs μόνο)"
-
-msgid "&Listing format edit"
-msgstr ""
-
-msgid "Edit &extension file"
-msgstr "Επεξεργασία α&ρχείου επέκτασης"
-
-msgid "Edit &menu file"
-msgstr "Επεξεργασία αρχείου &μενού"
-
-msgid "Edit hi&ghlighting group file"
-msgstr ""
-
-msgid "&Configuration..."
-msgstr "&Ρυθμίσεις..."
-
-msgid "&Layout..."
-msgstr ""
-
-msgid "&Panel options..."
-msgstr ""
-
-msgid "C&onfirmation..."
-msgstr "Ε&πιβεβαίωση..."
-
-msgid "&Appearance..."
-msgstr ""
-
-msgid "&Display bits..."
-msgstr ""
-
-msgid "&Virtual FS..."
-msgstr "&Εικονικό FS..."
-
-msgid "Panels:"
-msgstr ""
-
-#, c-format
-msgid "You have %zu opened screen. Quit anyway?"
-msgid_plural "You have %zu opened screens. Quit anyway?"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "The Midnight Commander"
-msgstr "Το Midnight Commander"
-
-msgid "Do you really want to quit the Midnight Commander?"
-msgstr "Θέλετε στα αλήθεια να τερματίσετε το Midnight Commander?"
-
-msgid "&Above"
-msgstr "&Πάνω"
-
-msgid "&Left"
-msgstr "&Αριστερά"
-
-msgid "&Below"
-msgstr "&Κάτω"
-
-msgid "&Right"
-msgstr "&Δεξιά"
-
-msgid "ButtonBar|Menu"
-msgstr "ΓραμμήΚουμπιών|Μενού"
-
-msgid "ButtonBar|View"
-msgstr "ΓραμμήΚουμπιών|Προβολή"
-
-msgid "ButtonBar|RenMov"
-msgstr ""
-
-msgid "ButtonBar|Mkdir"
-msgstr "ΓραμμήΚουμπιών|Mkdir"
 
 msgid "Memory exhausted!"
 msgstr "Η μνήμη εξαντλήθηκε!"

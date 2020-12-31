@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"POT-Creation-Date: 2020-12-31 16:34+0300\n"
 "PO-Revision-Date: 2020-05-20 02:37+0000\n"
 "Last-Translator: linuxmetel <linuxmetel@gmail.com>\n"
 "Language-Team: Japanese (http://www.transifex.com/mc/mc/language/ja/)\n"
@@ -1896,6 +1896,9 @@ msgstr "設定オプション"
 msgid "Skin:"
 msgstr ""
 
+msgid "&Shadows"
+msgstr ""
+
 msgid "Appearance"
 msgstr ""
 
@@ -2115,6 +2118,14 @@ msgstr "ユーザ名:"
 msgid "SMB authentication"
 msgstr ""
 
+#, c-format
+msgid ""
+"Cannot chdir to \"%s\"\n"
+"%s"
+msgstr ""
+"「%s」に移動できません\n"
+"%s"
+
 msgid "Secure deletion"
 msgstr ""
 
@@ -2174,6 +2185,10 @@ msgstr ""
 
 msgid "No COW"
 msgstr ""
+
+#, fuzzy
+msgid "Direct access for files"
+msgstr "'%s' の Dir キャッシュが終了しました"
 
 msgid "Casefolded file"
 msgstr ""
@@ -2446,14 +2461,6 @@ msgstr ""
 
 msgid "Cannot execute commands on non-local filesystems"
 msgstr ""
-
-#, c-format
-msgid ""
-"Cannot chdir to \"%s\"\n"
-"%s"
-msgstr ""
-"「%s」に移動できません\n"
-"%s"
 
 msgid "Parameter"
 msgstr "パラメーター"
@@ -2906,6 +2913,224 @@ msgstr "バックグラウンド(&B)"
 msgid "Invalid source pattern '%s'"
 msgstr ""
 
+msgid "File listin&g"
+msgstr ""
+
+msgid "&Quick view"
+msgstr ""
+
+msgid "&Info"
+msgstr "情報(&I)"
+
+msgid "&Tree"
+msgstr "ツリー(&T)"
+
+msgid "&Listing format..."
+msgstr ""
+
+msgid "&Sort order..."
+msgstr "整列順(&S)..."
+
+msgid "&Filter..."
+msgstr "フィルタ(&F)..."
+
+msgid "&Encoding..."
+msgstr "エンコード(&E)..."
+
+msgid "FT&P link..."
+msgstr "FTP リンク(&P)..."
+
+msgid "S&hell link..."
+msgstr ""
+
+msgid "S&FTP link..."
+msgstr ""
+
+msgid "SM&B link..."
+msgstr "SMBリンク(&B)..."
+
+msgid "Paneli&ze"
+msgstr ""
+
+msgid "&Rescan"
+msgstr "再検索(&R)"
+
+msgid "&View"
+msgstr "表示(&V)"
+
+msgid "Vie&w file..."
+msgstr "ファイルの表示(&W)"
+
+msgid "&Filtered view"
+msgstr ""
+
+msgid "&Copy"
+msgstr "コピー(&C)"
+
+msgid "C&hmod"
+msgstr "パーミッション設定(&H)"
+
+msgid "&Link"
+msgstr "リンク(&L)"
+
+msgid "&Symlink"
+msgstr "シンボリックリンク(&S)"
+
+msgid "Relative symlin&k"
+msgstr ""
+
+msgid "Edit s&ymlink"
+msgstr "シンボリックリンクの編集(&Y)"
+
+msgid "Ch&own"
+msgstr "所有者変更(&O)"
+
+msgid "&Advanced chown"
+msgstr ""
+
+msgid "Cha&ttr"
+msgstr ""
+
+msgid "&Rename/Move"
+msgstr "名称変更/移動(&R)"
+
+msgid "&Mkdir"
+msgstr "ディレクトリー作成(&M)"
+
+msgid "&Quick cd"
+msgstr ""
+
+msgid "Select &group"
+msgstr "グループの選択(&G)"
+
+msgid "U&nselect group"
+msgstr "グループの選択解除(&N)"
+
+msgid "&Invert selection"
+msgstr "選択の反転(&I)"
+
+msgid "E&xit"
+msgstr "終了(&X)"
+
+msgid "&User menu"
+msgstr "ユーザーのメニュー(&U)"
+
+msgid "&Directory tree"
+msgstr "ディレクトリツリー(&D)"
+
+msgid "&Find file"
+msgstr "ファイルの検索(&F)"
+
+msgid "S&wap panels"
+msgstr "パネルの入れ替え(&W)"
+
+msgid "Switch &panels on/off"
+msgstr ""
+
+msgid "&Compare directories"
+msgstr ""
+
+msgid "C&ompare files"
+msgstr "ファイルの比較(&O)"
+
+msgid "E&xternal panelize"
+msgstr ""
+
+msgid "Show directory s&izes"
+msgstr ""
+
+msgid "Command &history"
+msgstr "コマンド履歴(&H)"
+
+msgid "Viewed/edited files hi&story"
+msgstr ""
+
+msgid "Di&rectory hotlist"
+msgstr ""
+
+msgid "&Active VFS list"
+msgstr ""
+
+msgid "&Background jobs"
+msgstr ""
+
+msgid "Screen lis&t"
+msgstr "画面の一覧(&T)"
+
+msgid "&Undelete files (ext2fs only)"
+msgstr "ファイルの復活(&U) (ext2fsのみ)"
+
+msgid "&Listing format edit"
+msgstr "一覧形式編集(&L)"
+
+msgid "Edit &extension file"
+msgstr "拡張ファイルを編集(&E)"
+
+msgid "Edit &menu file"
+msgstr "メニューファイル編集(&M)"
+
+msgid "Edit hi&ghlighting group file"
+msgstr ""
+
+msgid "&Configuration..."
+msgstr "設定(&C)..."
+
+msgid "&Layout..."
+msgstr "レイアウト(&L)..."
+
+msgid "&Panel options..."
+msgstr "パネルのオプション(&P)"
+
+msgid "C&onfirmation..."
+msgstr "確認(&O)..."
+
+msgid "&Appearance..."
+msgstr ""
+
+msgid "&Display bits..."
+msgstr "表示ビット数(&D)..."
+
+msgid "&Virtual FS..."
+msgstr "仮想FS(&V)..."
+
+msgid "Panels:"
+msgstr "パネル:"
+
+#, c-format
+msgid "You have %zu opened screen. Quit anyway?"
+msgid_plural "You have %zu opened screens. Quit anyway?"
+msgstr[0] ""
+
+msgid "The Midnight Commander"
+msgstr "The Midnight Commander"
+
+msgid "Do you really want to quit the Midnight Commander?"
+msgstr "本当に Midnight Commander を終了しますか?"
+
+msgid "&Above"
+msgstr "上(&A)"
+
+msgid "&Left"
+msgstr "左(&L)"
+
+msgid "&Below"
+msgstr "下(&B)"
+
+msgid "&Right"
+msgstr "右(&R)"
+
+msgid "ButtonBar|Menu"
+msgstr ""
+
+msgid "ButtonBar|View"
+msgstr ""
+
+msgid "ButtonBar|RenMov"
+msgstr ""
+
+msgid "ButtonBar|Mkdir"
+msgstr ""
+
 msgid "&Chdir"
 msgstr "ディレクトリ移動(&C)"
 
@@ -2951,9 +3176,6 @@ msgstr "全文字セット(&L)"
 
 msgid "Fir&st hit"
 msgstr ""
-
-msgid "&Tree"
-msgstr "ツリー(&T)"
 
 msgid "Find File"
 msgstr "ファイル検索"
@@ -3206,221 +3428,6 @@ msgstr "出力行:"
 
 msgid "Layout"
 msgstr "レイアウト"
-
-msgid "File listin&g"
-msgstr ""
-
-msgid "&Quick view"
-msgstr ""
-
-msgid "&Info"
-msgstr "情報(&I)"
-
-msgid "&Listing format..."
-msgstr ""
-
-msgid "&Sort order..."
-msgstr "整列順(&S)..."
-
-msgid "&Filter..."
-msgstr "フィルタ(&F)..."
-
-msgid "&Encoding..."
-msgstr "エンコード(&E)..."
-
-msgid "FT&P link..."
-msgstr "FTP リンク(&P)..."
-
-msgid "S&hell link..."
-msgstr ""
-
-msgid "S&FTP link..."
-msgstr ""
-
-msgid "SM&B link..."
-msgstr "SMBリンク(&B)..."
-
-msgid "Paneli&ze"
-msgstr ""
-
-msgid "&Rescan"
-msgstr "再検索(&R)"
-
-msgid "&View"
-msgstr "表示(&V)"
-
-msgid "Vie&w file..."
-msgstr "ファイルの表示(&W)"
-
-msgid "&Filtered view"
-msgstr ""
-
-msgid "&Copy"
-msgstr "コピー(&C)"
-
-msgid "C&hmod"
-msgstr "パーミッション設定(&H)"
-
-msgid "&Link"
-msgstr "リンク(&L)"
-
-msgid "&Symlink"
-msgstr "シンボリックリンク(&S)"
-
-msgid "Relative symlin&k"
-msgstr ""
-
-msgid "Edit s&ymlink"
-msgstr "シンボリックリンクの編集(&Y)"
-
-msgid "Ch&own"
-msgstr "所有者変更(&O)"
-
-msgid "&Advanced chown"
-msgstr ""
-
-msgid "Cha&ttr"
-msgstr ""
-
-msgid "&Rename/Move"
-msgstr "名称変更/移動(&R)"
-
-msgid "&Mkdir"
-msgstr "ディレクトリー作成(&M)"
-
-msgid "&Quick cd"
-msgstr ""
-
-msgid "Select &group"
-msgstr "グループの選択(&G)"
-
-msgid "U&nselect group"
-msgstr "グループの選択解除(&N)"
-
-msgid "&Invert selection"
-msgstr "選択の反転(&I)"
-
-msgid "E&xit"
-msgstr "終了(&X)"
-
-msgid "&User menu"
-msgstr "ユーザーのメニュー(&U)"
-
-msgid "&Directory tree"
-msgstr "ディレクトリツリー(&D)"
-
-msgid "&Find file"
-msgstr "ファイルの検索(&F)"
-
-msgid "S&wap panels"
-msgstr "パネルの入れ替え(&W)"
-
-msgid "Switch &panels on/off"
-msgstr ""
-
-msgid "&Compare directories"
-msgstr ""
-
-msgid "C&ompare files"
-msgstr "ファイルの比較(&O)"
-
-msgid "E&xternal panelize"
-msgstr ""
-
-msgid "Show directory s&izes"
-msgstr ""
-
-msgid "Command &history"
-msgstr "コマンド履歴(&H)"
-
-msgid "Viewed/edited files hi&story"
-msgstr ""
-
-msgid "Di&rectory hotlist"
-msgstr ""
-
-msgid "&Active VFS list"
-msgstr ""
-
-msgid "&Background jobs"
-msgstr ""
-
-msgid "Screen lis&t"
-msgstr "画面の一覧(&T)"
-
-msgid "&Undelete files (ext2fs only)"
-msgstr "ファイルの復活(&U) (ext2fsのみ)"
-
-msgid "&Listing format edit"
-msgstr "一覧形式編集(&L)"
-
-msgid "Edit &extension file"
-msgstr "拡張ファイルを編集(&E)"
-
-msgid "Edit &menu file"
-msgstr "メニューファイル編集(&M)"
-
-msgid "Edit hi&ghlighting group file"
-msgstr ""
-
-msgid "&Configuration..."
-msgstr "設定(&C)..."
-
-msgid "&Layout..."
-msgstr "レイアウト(&L)..."
-
-msgid "&Panel options..."
-msgstr "パネルのオプション(&P)"
-
-msgid "C&onfirmation..."
-msgstr "確認(&O)..."
-
-msgid "&Appearance..."
-msgstr ""
-
-msgid "&Display bits..."
-msgstr "表示ビット数(&D)..."
-
-msgid "&Virtual FS..."
-msgstr "仮想FS(&V)..."
-
-msgid "Panels:"
-msgstr "パネル:"
-
-#, c-format
-msgid "You have %zu opened screen. Quit anyway?"
-msgid_plural "You have %zu opened screens. Quit anyway?"
-msgstr[0] ""
-
-msgid "The Midnight Commander"
-msgstr "The Midnight Commander"
-
-msgid "Do you really want to quit the Midnight Commander?"
-msgstr "本当に Midnight Commander を終了しますか?"
-
-msgid "&Above"
-msgstr "上(&A)"
-
-msgid "&Left"
-msgstr "左(&L)"
-
-msgid "&Below"
-msgstr "下(&B)"
-
-msgid "&Right"
-msgstr "右(&R)"
-
-msgid "ButtonBar|Menu"
-msgstr ""
-
-msgid "ButtonBar|View"
-msgstr ""
-
-msgid "ButtonBar|RenMov"
-msgstr ""
-
-msgid "ButtonBar|Mkdir"
-msgstr ""
 
 msgid "Memory exhausted!"
 msgstr ""

@@ -31,7 +31,7 @@
 #include "lib/strutil.h"
 #include "lib/util.h"
 
-#include "src/filemanager/midnight.h"
+#include "src/filemanager/filemanager.h"
 
 
 /* --------------------------------------------------------------------------------------------- */

@@ -5,7 +5,7 @@
    Free Software Foundation, Inc.
 
    Written by:
-   Andrew Borodin <aborodin@vmail.ru>, 2012
+   Andrew Borodin <aborodin@vmail.ru>, 2012, 2020
    Slava Zanko <slavazanko@gmail.com>, 2013
 
    This file is part of the Midnight Commander.
@@ -30,23 +30,10 @@
 
 #include <stdio.h>
 
-#include "lib/vfs/path.h"
-#include "src/filemanager/layout.h"
-#include "src/filemanager/midnight.h"
-#include "src/filemanager/tree.h"
-#ifdef ENABLE_SUBSHELL
-#include "src/subshell/subshell.h"
-#endif /* ENABLE_SUBSHELL */
-
-#include "src/filemanager/command.c"
+#include "src/filemanager/cd.c"
 
 /* --------------------------------------------------------------------------------------------- */
 
-gboolean command_prompt = FALSE;
-#ifdef ENABLE_SUBSHELL
-enum subshell_state_enum subshell_state = INACTIVE;
-#endif /* ENABLE_SUBSHELL */
-int quit = 0;
 WPanel *current_panel = NULL;
 
 panel_view_mode_t
@@ -56,48 +43,13 @@ get_current_type (void)
 }
 
 gboolean
-do_cd (const vfs_path_t * new_dir_vpath, enum cd_enum cd_type)
+panel_cd (WPanel * panel, const vfs_path_t * new_dir_vpath, enum cd_enum cd_type)
 {
+    (void) panel;
     (void) new_dir_vpath;
     (void) cd_type;
 
     return TRUE;
-}
-
-gboolean
-quiet_quit_cmd (void)
-{
-    return FALSE;
-}
-
-char *
-expand_format (const WEdit * edit_widget, char c, gboolean do_quote)
-{
-    (void) edit_widget;
-    (void) c;
-    (void) do_quote;
-
-    return NULL;
-}
-
-#ifdef ENABLE_SUBSHELL
-void
-init_subshell (void)
-{
-}
-
-gboolean
-do_load_prompt (void)
-{
-    return TRUE;
-}
-#endif /* ENABLE_SUBSHELL */
-
-void
-shell_execute (const char *command, int flags)
-{
-    (void) command;
-    (void) flags;
 }
 
 void
@@ -119,19 +71,20 @@ teardown (void)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
 #define check_examine_cd(input, etalon) \
 { \
     result = examine_cd (input); \
-    fail_unless (strcmp (result, etalon) == 0, \
-    "\ninput (%s)\nactial (%s) not equal to\netalon (%s)", input, result, etalon); \
-    g_free (result); \
+    fail_unless (strcmp (result->str, etalon) == 0, \
+    "\ninput (%s)\nactial (%s) not equal to\netalon (%s)", input, result->str, etalon); \
+    g_string_free (result, TRUE); \
 }
 
 /* *INDENT-OFF* */
 START_TEST (test_examine_cd)
 /* *INDENT-ON* */
 {
-    char *result;
+    GString *result;
 
     g_setenv ("AAA", "aaa", TRUE);
 

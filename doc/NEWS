@@ -47,7 +47,7 @@ Version 4.8.25
     * FTBFS on OSes w/o O_CLOEXEC (#4052)
     * FTBFS with glib2 >= 2.63.3 (#4053)
     * Undefined "__linux__" macro on non-Linux systems (#4058)
-    * Mouse is not handled with ncurses-6 (#3964)
+    * Mouse is not handled with ncurses-6 (#3954)
     * Mouse is not handled with S-Lang on some old terminal emulators (#4063)
     * Terminal size is always 80x24 in subshell on Solaris 11.4 SPARC (#4099)
     * Double clicking on empty area of file panel executes last item (#3722)

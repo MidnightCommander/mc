@@ -45,7 +45,7 @@
 #include "lib/strutil.h"        /* str_replace_all_substrings() */
 #include "lib/widget.h"
 
-#include "filemanager/midnight.h"
+#include "filemanager/filemanager.h"
 #include "filemanager/layout.h" /* use_dash() */
 #include "consaver/cons.saver.h"
 #ifdef ENABLE_SUBSHELL
@@ -99,7 +99,7 @@ static void
 edition_pre_exec (void)
 {
     if (clear_before_exec)
-        clr_scr ();
+        tty_clear_screen ();
     else
     {
         if (!(mc_global.tty.console_flag != '\0' || mc_global.tty.xterm_flag))
@@ -131,7 +131,7 @@ edition_pre_exec (void)
 static void
 do_possible_cd (const vfs_path_t * new_dir_vpath)
 {
-    if (!do_cd (new_dir_vpath, cd_exact))
+    if (!panel_cd (current_panel, new_dir_vpath, cd_exact))
         message (D_ERROR, _("Warning"), "%s",
                  _("The Commander can't change to the directory that\n"
                    "the subshell claims you are in. Perhaps you have\n"
@@ -470,7 +470,7 @@ toggle_subshell (void)
     disable_mouse ();
     disable_bracketed_paste ();
     if (clear_before_exec)
-        clr_scr ();
+        tty_clear_screen ();
     if (mc_global.tty.alternate_plus_minus)
         numeric_keypad_mode ();
 #ifndef HAVE_SLANG

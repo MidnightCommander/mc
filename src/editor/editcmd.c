@@ -1121,7 +1121,8 @@ pipe_mail (const edit_buffer_t * buf, char *to, char *subject, char *cc)
         off_t i;
 
         for (i = 0; i < buf->size; i++)
-            fputc (edit_buffer_get_byte (buf, i), p);
+            if (fputc (edit_buffer_get_byte (buf, i), p) < 0)
+                break;
         pclose (p);
     }
 }
@@ -1531,7 +1532,7 @@ edit_complete_word_insert_recoded_completion (WEdit * edit, char *completion, gs
 void
 edit_refresh_cmd (void)
 {
-    clr_scr ();
+    tty_clear_screen ();
     repaint_screen ();
     tty_keypad (TRUE);
 }
@@ -3538,7 +3539,7 @@ edit_get_match_keyword_cmd (WEdit * edit)
         path = ptr;
         g_free (tagfile);
         tagfile = mc_build_filename (path, TAGS_NAME, (char *) NULL);
-        if (exist_file (tagfile))
+        if (tagfile != NULL && exist_file (tagfile))
             break;
     }
     while (strcmp (path, PATH_SEP_STR) != 0);
@@ -3630,7 +3631,7 @@ edit_suggest_current_word (WEdit * edit)
                     edit_insert (edit, *new_word);
                 g_free (cp_word);
             }
-            else if (retval == B_ADD_WORD && match_word != NULL)
+            else if (retval == B_ADD_WORD)
                 aspell_add_to_dict (match_word->str, (int) word_len);
         }
 

@@ -28,7 +28,7 @@ void confirm_box (void);
 void display_bits_box (void);
 void configure_vfs_box (void);
 void jobs_box (void);
-char *cd_box (void);
+char *cd_box (const WPanel * panel);
 void symlink_box (const vfs_path_t * existing_vpath, const vfs_path_t * new_vpath,
                   char **ret_existing, char **ret_new);
 char *tree_box (const char *current_dir);

@@ -155,7 +155,7 @@ statfs (char const *filename, struct fs_info *buf)
 
 #include "src/setup.h"          /* verbose, safe_overwrite */
 
-#include "midnight.h"
+#include "filemanager.h"
 #include "fileopctx.h"          /* FILE_CONT */
 
 #include "filegui.h"

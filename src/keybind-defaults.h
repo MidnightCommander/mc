@@ -13,8 +13,8 @@
 
 /*** global variables defined in .c file *********************************************************/
 
-extern GArray *main_keymap;
-extern GArray *main_x_keymap;
+extern GArray *filemanager_keymap;
+extern GArray *filemanager_x_keymap;
 extern GArray *panel_keymap;
 extern GArray *dialog_keymap;
 extern GArray *menu_keymap;
@@ -36,8 +36,8 @@ extern GArray *viewer_hex_keymap;
 extern GArray *diff_keymap;
 #endif
 
-extern const global_keymap_t *main_map;
-extern const global_keymap_t *main_x_map;
+extern const global_keymap_t *filemanager_map;
+extern const global_keymap_t *filemanager_x_map;
 extern const global_keymap_t *panel_map;
 extern const global_keymap_t *tree_map;
 extern const global_keymap_t *help_map;

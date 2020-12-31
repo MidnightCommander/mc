@@ -8,7 +8,7 @@
    Miguel de Icaza, 1994, 1995, 1996, 1997
    Janne Kukonlehto, 1994, 1995
    Norbert Warmuth, 1997
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2012, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2012, 2013, 2020
    Slava Zanko <slavazanko@gmail.com>, 2013
 
    This file is part of the Midnight Commander.
@@ -27,7 +27,7 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** \file main.c
+/** \file filemanager.c
  *  \brief Source: main dialog (file panels) of the Midnight Commander
  */
 
@@ -86,7 +86,7 @@
 #include "src/consaver/cons.saver.h"    /* show_console_contents */
 #include "src/file_history.h"   /* show_file_history() */
 
-#include "midnight.h"
+#include "filemanager.h"
 
 /*** global variables ****************************************************************************/
 
@@ -154,7 +154,7 @@ treebox_cmd (void)
         vfs_path_t *sel_vdir;
 
         sel_vdir = vfs_path_from_str (sel_dir);
-        do_cd (sel_vdir, cd_exact);
+        panel_cd (current_panel, sel_vdir, cd_exact);
         vfs_path_free (sel_vdir);
         g_free (sel_dir);
     }
@@ -415,7 +415,7 @@ midnight_get_shortcut (long command)
     const char *ext_map;
     const char *shortcut = NULL;
 
-    shortcut = keybind_lookup_keymap_shortcut (main_map, command);
+    shortcut = keybind_lookup_keymap_shortcut (filemanager_map, command);
     if (shortcut != NULL)
         return g_strdup (shortcut);
 
@@ -423,9 +423,9 @@ midnight_get_shortcut (long command)
     if (shortcut != NULL)
         return g_strdup (shortcut);
 
-    ext_map = keybind_lookup_keymap_shortcut (main_map, CK_ExtendedKeyMap);
+    ext_map = keybind_lookup_keymap_shortcut (filemanager_map, CK_ExtendedKeyMap);
     if (ext_map != NULL)
-        shortcut = keybind_lookup_keymap_shortcut (main_x_map, command);
+        shortcut = keybind_lookup_keymap_shortcut (filemanager_x_map, command);
     if (shortcut != NULL)
         return g_strdup_printf ("%s %s", ext_map, shortcut);
 
@@ -909,8 +909,8 @@ create_file_manager (void)
     Widget *w = WIDGET (midnight_dlg);
     WGroup *g = GROUP (midnight_dlg);
 
-    w->keymap = main_map;
-    w->ext_keymap = main_x_map;
+    w->keymap = filemanager_map;
+    w->ext_keymap = filemanager_x_map;
 
     midnight_dlg->get_shortcut = midnight_get_shortcut;
     midnight_dlg->get_title = midnight_get_title;
@@ -1031,7 +1031,7 @@ show_editor_viewer_history (void)
 
                 d = g_path_get_dirname (s);
                 s_vpath = vfs_path_from_str (d);
-                do_cd (s_vpath, cd_exact);
+                panel_cd (current_panel, s_vpath, cd_exact);
                 try_to_select (current_panel, s);
                 g_free (d);
             }
@@ -1138,26 +1138,26 @@ midnight_execute_cmd (Widget * sender, long command)
     switch (command)
     {
     case CK_ChangePanel:
-        change_panel ();
+        (void) change_panel ();
         break;
     case CK_HotListAdd:
-        add2hotlist_cmd ();
+        add2hotlist_cmd (current_panel);
         break;
     case CK_SetupListingFormat:
         setup_listing_format_cmd ();
         break;
     case CK_ChangeMode:
-        chmod_cmd ();
+        chmod_cmd (current_panel);
         break;
     case CK_ChangeOwn:
-        chown_cmd ();
+        chown_cmd (current_panel);
         break;
     case CK_ChangeOwnAdvanced:
-        advanced_chown_cmd ();
+        advanced_chown_cmd (current_panel);
         break;
 #ifdef ENABLE_EXT2FS_ATTR
     case CK_ChangeAttributes:
-        chattr_cmd ();
+        chattr_cmd (current_panel);
         break;
 #endif
     case CK_CompareDirs:
@@ -1175,7 +1175,7 @@ midnight_execute_cmd (Widget * sender, long command)
         confirm_box ();
         break;
     case CK_Copy:
-        copy_cmd ();
+        copy_cmd (current_panel);
         break;
     case CK_PutCurrentPath:
         midnight_put_panel_path (current_panel);
@@ -1204,7 +1204,7 @@ midnight_execute_cmd (Widget * sender, long command)
         put_other_tagged ();
         break;
     case CK_Delete:
-        delete_cmd ();
+        delete_cmd (current_panel);
         break;
     case CK_ScreenList:
         dialog_switch_list ();
@@ -1218,11 +1218,11 @@ midnight_execute_cmd (Widget * sender, long command)
         display_bits_box ();
         break;
     case CK_Edit:
-        edit_cmd ();
+        edit_cmd (current_panel);
         break;
 #ifdef USE_INTERNAL_EDIT
     case CK_EditForceInternal:
-        edit_cmd_force_internal ();
+        edit_cmd_force_internal (current_panel);
         break;
 #endif
     case CK_EditExtensionsFile:
@@ -1244,10 +1244,10 @@ midnight_execute_cmd (Widget * sender, long command)
         filter_cmd ();
         break;
     case CK_ViewFiltered:
-        view_filtered_cmd ();
+        view_filtered_cmd (current_panel);
         break;
     case CK_Find:
-        find_cmd ();
+        find_cmd (current_panel);
         break;
 #ifdef ENABLE_VFS_FISH
     case CK_ConnectFish:
@@ -1317,7 +1317,7 @@ midnight_execute_cmd (Widget * sender, long command)
         menu_last_selected_cmd ();
         break;
     case CK_MakeDir:
-        mkdir_cmd ();
+        mkdir_cmd (current_panel);
         break;
     case CK_OptionsPanel:
         panel_options_box ();
@@ -1328,7 +1328,7 @@ midnight_execute_cmd (Widget * sender, long command)
         break;
 #endif
     case CK_CdQuick:
-        quick_cd_cmd ();
+        quick_cd_cmd (current_panel);
         break;
     case CK_HotList:
         hotlist_cmd ();
@@ -1349,7 +1349,7 @@ midnight_execute_cmd (Widget * sender, long command)
         link_cmd (LINK_SYMLINK_RELATIVE);
         break;
     case CK_Move:
-        rename_cmd ();
+        rename_cmd (current_panel);
         break;
     case CK_Reread:
         reread_cmd ();
@@ -1371,7 +1371,7 @@ midnight_execute_cmd (Widget * sender, long command)
         toggle_subshell ();
         break;
     case CK_DirSize:
-        smart_dirsize_cmd ();
+        smart_dirsize_cmd (current_panel);
         break;
     case CK_Sort:
         sort_cmd ();
@@ -1418,10 +1418,10 @@ midnight_execute_cmd (Widget * sender, long command)
         user_file_menu_cmd ();
         break;
     case CK_View:
-        view_cmd ();
+        view_cmd (current_panel);
         break;
     case CK_ViewFile:
-        view_file_cmd ();
+        view_file_cmd (current_panel);
         break;
     case CK_EditorViewerHistory:
         show_editor_viewer_history ();
@@ -1765,12 +1765,18 @@ load_hint (gboolean force)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+  * Change current panel in the file manager.
+  *
+  * @return current_panel
+  */
 
-void
+WPanel *
 change_panel (void)
 {
     input_complete_free (cmdline);
     group_select_next_widget (GROUP (midnight_dlg));
+    return current_panel;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1856,7 +1862,7 @@ do_nc (void)
 #endif
 
     if ((quit & SUBSHELL_EXIT) == 0)
-        clr_scr ();
+        tty_clear_screen ();
 
     return ret;
 }

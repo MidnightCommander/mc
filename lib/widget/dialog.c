@@ -121,7 +121,7 @@ refresh_cmd (void)
     mc_refresh ();
 #else
     /* Use this if the refreshes fail */
-    clr_scr ();
+    tty_clear_screen ();
     repaint_screen ();
 #endif /* HAVE_SLANG */
 }

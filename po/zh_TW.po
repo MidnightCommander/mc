@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"POT-Creation-Date: 2020-12-31 16:34+0300\n"
 "PO-Revision-Date: 2020-05-17 17:42+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/mc/mc/language/"
@@ -1904,6 +1904,9 @@ msgstr "設定選項"
 msgid "Skin:"
 msgstr "色彩配置"
 
+msgid "&Shadows"
+msgstr ""
+
 msgid "Appearance"
 msgstr ""
 
@@ -2123,6 +2126,14 @@ msgstr "使用者名稱: "
 msgid "SMB authentication"
 msgstr ""
 
+#, c-format
+msgid ""
+"Cannot chdir to \"%s\"\n"
+"%s"
+msgstr ""
+"無法更改目錄到 \"%s\"\n"
+"%s"
+
 msgid "Secure deletion"
 msgstr ""
 
@@ -2182,6 +2193,10 @@ msgstr "大型檔案"
 
 msgid "No COW"
 msgstr ""
+
+#, fuzzy
+msgid "Direct access for files"
+msgstr "%s 的路徑快取過期"
 
 msgid "Casefolded file"
 msgstr ""
@@ -2454,14 +2469,6 @@ msgstr ""
 
 msgid "Cannot execute commands on non-local filesystems"
 msgstr ""
-
-#, c-format
-msgid ""
-"Cannot chdir to \"%s\"\n"
-"%s"
-msgstr ""
-"無法更改目錄到 \"%s\"\n"
-"%s"
 
 msgid "Parameter"
 msgstr ""
@@ -2922,6 +2929,224 @@ msgstr "背景"
 msgid "Invalid source pattern '%s'"
 msgstr ""
 
+msgid "File listin&g"
+msgstr "檔案列表"
+
+msgid "&Quick view"
+msgstr "快速檢視"
+
+msgid "&Info"
+msgstr "資訊"
+
+msgid "&Tree"
+msgstr "樹狀"
+
+msgid "&Listing format..."
+msgstr "列表格式..."
+
+msgid "&Sort order..."
+msgstr "排列順序..."
+
+msgid "&Filter..."
+msgstr "過濾器..."
+
+msgid "&Encoding..."
+msgstr "編碼..."
+
+msgid "FT&P link..."
+msgstr "連結 FTP..."
+
+msgid "S&hell link..."
+msgstr "連結 Shell..."
+
+msgid "S&FTP link..."
+msgstr "連結 SFTP..."
+
+msgid "SM&B link..."
+msgstr "連結 SMB..."
+
+msgid "Paneli&ze"
+msgstr ""
+
+msgid "&Rescan"
+msgstr "重新搜尋"
+
+msgid "&View"
+msgstr "檢視"
+
+msgid "Vie&w file..."
+msgstr "檢視檔案"
+
+msgid "&Filtered view"
+msgstr "檢視已過濾"
+
+msgid "&Copy"
+msgstr "複製"
+
+msgid "C&hmod"
+msgstr "Chmod"
+
+msgid "&Link"
+msgstr "連結"
+
+msgid "&Symlink"
+msgstr "軟連結"
+
+msgid "Relative symlin&k"
+msgstr "相對符號連結"
+
+msgid "Edit s&ymlink"
+msgstr "編輯軟連結"
+
+msgid "Ch&own"
+msgstr "Chown"
+
+msgid "&Advanced chown"
+msgstr "進階 chown"
+
+msgid "Cha&ttr"
+msgstr "聊天室"
+
+msgid "&Rename/Move"
+msgstr "重新命名/移動"
+
+msgid "&Mkdir"
+msgstr "建立目錄"
+
+msgid "&Quick cd"
+msgstr "快速改變目錄"
+
+msgid "Select &group"
+msgstr "選取群組"
+
+msgid "U&nselect group"
+msgstr "取消選取群組"
+
+msgid "&Invert selection"
+msgstr "反向選取"
+
+msgid "E&xit"
+msgstr "離開"
+
+msgid "&User menu"
+msgstr "使用者選單"
+
+msgid "&Directory tree"
+msgstr "目錄樹"
+
+msgid "&Find file"
+msgstr "尋找檔案"
+
+msgid "S&wap panels"
+msgstr ""
+
+msgid "Switch &panels on/off"
+msgstr ""
+
+msgid "&Compare directories"
+msgstr ""
+
+msgid "C&ompare files"
+msgstr "比較檔案"
+
+msgid "E&xternal panelize"
+msgstr ""
+
+msgid "Show directory s&izes"
+msgstr ""
+
+msgid "Command &history"
+msgstr ""
+
+msgid "Viewed/edited files hi&story"
+msgstr "已檢視/已編輯的檔案歷史紀錄"
+
+msgid "Di&rectory hotlist"
+msgstr "常用目錄"
+
+msgid "&Active VFS list"
+msgstr "可用的 VFS 列表"
+
+msgid "&Background jobs"
+msgstr "背景工作"
+
+msgid "Screen lis&t"
+msgstr "畫面列表"
+
+msgid "&Undelete files (ext2fs only)"
+msgstr "復原檔案 (只能用在 ext2fs 上面)"
+
+msgid "&Listing format edit"
+msgstr "編輯列表格式"
+
+msgid "Edit &extension file"
+msgstr "編輯擴充檔"
+
+msgid "Edit &menu file"
+msgstr "編輯選單檔"
+
+msgid "Edit hi&ghlighting group file"
+msgstr "編輯高亮群組檔案"
+
+msgid "&Configuration..."
+msgstr "設定..."
+
+msgid "&Layout..."
+msgstr "樣式"
+
+msgid "&Panel options..."
+msgstr "面板選項..."
+
+msgid "C&onfirmation..."
+msgstr "確認..."
+
+msgid "&Appearance..."
+msgstr "出現..."
+
+msgid "&Display bits..."
+msgstr "顯示位元數..."
+
+msgid "&Virtual FS..."
+msgstr "虛擬檔案系統..."
+
+msgid "Panels:"
+msgstr "面板:"
+
+#, c-format
+msgid "You have %zu opened screen. Quit anyway?"
+msgid_plural "You have %zu opened screens. Quit anyway?"
+msgstr[0] ""
+
+msgid "The Midnight Commander"
+msgstr ""
+
+msgid "Do you really want to quit the Midnight Commander?"
+msgstr ""
+
+msgid "&Above"
+msgstr "上述"
+
+msgid "&Left"
+msgstr "左方"
+
+msgid "&Below"
+msgstr ""
+
+msgid "&Right"
+msgstr "右方"
+
+msgid "ButtonBar|Menu"
+msgstr "按鈕列 | 選單"
+
+msgid "ButtonBar|View"
+msgstr "按鈕列 | 檢視"
+
+msgid "ButtonBar|RenMov"
+msgstr "按鈕列 | 搬移"
+
+msgid "ButtonBar|Mkdir"
+msgstr "按鈕列 | 新建目錄"
+
 msgid "&Chdir"
 msgstr "改變目錄"
 
@@ -2967,9 +3192,6 @@ msgstr "所有字元"
 
 msgid "Fir&st hit"
 msgstr ""
-
-msgid "&Tree"
-msgstr "樹狀"
 
 msgid "Find File"
 msgstr "尋找檔案"
@@ -3224,221 +3446,6 @@ msgstr ""
 
 msgid "Layout"
 msgstr "樣式"
-
-msgid "File listin&g"
-msgstr "檔案列表"
-
-msgid "&Quick view"
-msgstr "快速檢視"
-
-msgid "&Info"
-msgstr "資訊"
-
-msgid "&Listing format..."
-msgstr "列表格式..."
-
-msgid "&Sort order..."
-msgstr "排列順序..."
-
-msgid "&Filter..."
-msgstr "過濾器..."
-
-msgid "&Encoding..."
-msgstr "編碼..."
-
-msgid "FT&P link..."
-msgstr "連結 FTP..."
-
-msgid "S&hell link..."
-msgstr "連結 Shell..."
-
-msgid "S&FTP link..."
-msgstr "連結 SFTP..."
-
-msgid "SM&B link..."
-msgstr "連結 SMB..."
-
-msgid "Paneli&ze"
-msgstr ""
-
-msgid "&Rescan"
-msgstr "重新搜尋"
-
-msgid "&View"
-msgstr "檢視"
-
-msgid "Vie&w file..."
-msgstr "檢視檔案"
-
-msgid "&Filtered view"
-msgstr "檢視已過濾"
-
-msgid "&Copy"
-msgstr "複製"
-
-msgid "C&hmod"
-msgstr "Chmod"
-
-msgid "&Link"
-msgstr "連結"
-
-msgid "&Symlink"
-msgstr "軟連結"
-
-msgid "Relative symlin&k"
-msgstr "相對符號連結"
-
-msgid "Edit s&ymlink"
-msgstr "編輯軟連結"
-
-msgid "Ch&own"
-msgstr "Chown"
-
-msgid "&Advanced chown"
-msgstr "進階 chown"
-
-msgid "Cha&ttr"
-msgstr "聊天室"
-
-msgid "&Rename/Move"
-msgstr "重新命名/移動"
-
-msgid "&Mkdir"
-msgstr "建立目錄"
-
-msgid "&Quick cd"
-msgstr "快速改變目錄"
-
-msgid "Select &group"
-msgstr "選取群組"
-
-msgid "U&nselect group"
-msgstr "取消選取群組"
-
-msgid "&Invert selection"
-msgstr "反向選取"
-
-msgid "E&xit"
-msgstr "離開"
-
-msgid "&User menu"
-msgstr "使用者選單"
-
-msgid "&Directory tree"
-msgstr "目錄樹"
-
-msgid "&Find file"
-msgstr "尋找檔案"
-
-msgid "S&wap panels"
-msgstr ""
-
-msgid "Switch &panels on/off"
-msgstr ""
-
-msgid "&Compare directories"
-msgstr ""
-
-msgid "C&ompare files"
-msgstr "比較檔案"
-
-msgid "E&xternal panelize"
-msgstr ""
-
-msgid "Show directory s&izes"
-msgstr ""
-
-msgid "Command &history"
-msgstr ""
-
-msgid "Viewed/edited files hi&story"
-msgstr "已檢視/已編輯的檔案歷史紀錄"
-
-msgid "Di&rectory hotlist"
-msgstr "常用目錄"
-
-msgid "&Active VFS list"
-msgstr "可用的 VFS 列表"
-
-msgid "&Background jobs"
-msgstr "背景工作"
-
-msgid "Screen lis&t"
-msgstr "畫面列表"
-
-msgid "&Undelete files (ext2fs only)"
-msgstr "復原檔案 (只能用在 ext2fs 上面)"
-
-msgid "&Listing format edit"
-msgstr "編輯列表格式"
-
-msgid "Edit &extension file"
-msgstr "編輯擴充檔"
-
-msgid "Edit &menu file"
-msgstr "編輯選單檔"
-
-msgid "Edit hi&ghlighting group file"
-msgstr "編輯高亮群組檔案"
-
-msgid "&Configuration..."
-msgstr "設定..."
-
-msgid "&Layout..."
-msgstr "樣式"
-
-msgid "&Panel options..."
-msgstr "面板選項..."
-
-msgid "C&onfirmation..."
-msgstr "確認..."
-
-msgid "&Appearance..."
-msgstr "出現..."
-
-msgid "&Display bits..."
-msgstr "顯示位元數..."
-
-msgid "&Virtual FS..."
-msgstr "虛擬檔案系統..."
-
-msgid "Panels:"
-msgstr "面板:"
-
-#, c-format
-msgid "You have %zu opened screen. Quit anyway?"
-msgid_plural "You have %zu opened screens. Quit anyway?"
-msgstr[0] ""
-
-msgid "The Midnight Commander"
-msgstr ""
-
-msgid "Do you really want to quit the Midnight Commander?"
-msgstr ""
-
-msgid "&Above"
-msgstr "上述"
-
-msgid "&Left"
-msgstr "左方"
-
-msgid "&Below"
-msgstr ""
-
-msgid "&Right"
-msgstr "右方"
-
-msgid "ButtonBar|Menu"
-msgstr "按鈕列 | 選單"
-
-msgid "ButtonBar|View"
-msgstr "按鈕列 | 檢視"
-
-msgid "ButtonBar|RenMov"
-msgstr "按鈕列 | 搬移"
-
-msgid "ButtonBar|Mkdir"
-msgstr "按鈕列 | 新建目錄"
 
 msgid "Memory exhausted!"
 msgstr ""

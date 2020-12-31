@@ -176,6 +176,7 @@ xstrtoumax (const char *s, char **ptr, int base, uintmax_t * val, const char *va
                     break;
                 }
             }
+            break;
         default:
             break;
         }

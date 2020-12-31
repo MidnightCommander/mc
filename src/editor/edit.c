@@ -3426,6 +3426,7 @@ edit_execute_cmd (WEdit * edit, long command, int char_for_insertion)
             edit->column_highlight = 0;
             edit_mark_cmd (edit, TRUE);
         }
+        break;
     default:
         break;
     }
@@ -3454,6 +3455,7 @@ edit_execute_cmd (WEdit * edit, long command, int char_for_insertion)
     case CK_MarkLeft:
     case CK_MarkRight:
         edit->force |= REDRAW_CHAR_ONLY;
+        break;
     default:
         break;
     }
@@ -3998,6 +4000,7 @@ edit_execute_cmd (WEdit * edit, long command, int char_for_insertion)
         case CK_DeleteToEnd:
             format_paragraph (edit, FALSE);
             edit->force |= REDRAW_PAGE;
+            break;
         default:
             break;
         }

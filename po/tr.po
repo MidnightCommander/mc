@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"POT-Creation-Date: 2020-12-31 16:34+0300\n"
 "PO-Revision-Date: 2020-05-17 17:42+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Turkish (http://www.transifex.com/mc/mc/language/tr/)\n"
@@ -1977,6 +1977,9 @@ msgstr "Yapılandırma seçenekleri"
 msgid "Skin:"
 msgstr "Tema"
 
+msgid "&Shadows"
+msgstr ""
+
 msgid "Appearance"
 msgstr "Görünüm"
 
@@ -2201,6 +2204,14 @@ msgstr "Kullanıcı: "
 msgid "SMB authentication"
 msgstr "SMB kimlik doğrulama"
 
+#, c-format
+msgid ""
+"Cannot chdir to \"%s\"\n"
+"%s"
+msgstr ""
+" \"%s\" dizinine geçilemedi \n"
+" %s "
+
 msgid "Secure deletion"
 msgstr ""
 
@@ -2260,6 +2271,10 @@ msgstr ""
 
 msgid "No COW"
 msgstr ""
+
+#, fuzzy
+msgid "Direct access for files"
+msgstr "Dizin arabelleğinde %s için zamanaşımı"
 
 msgid "Casefolded file"
 msgstr ""
@@ -2536,14 +2551,6 @@ msgstr "Ayarlar %s'e kaydedilemedi"
 
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "Yerel dosya sistemi dışında komut çalıştırılamaz"
-
-#, c-format
-msgid ""
-"Cannot chdir to \"%s\"\n"
-"%s"
-msgstr ""
-" \"%s\" dizinine geçilemedi \n"
-" %s "
 
 msgid "Parameter"
 msgstr "Parametre"
@@ -3074,6 +3081,225 @@ msgstr "A&rtalan"
 msgid "Invalid source pattern '%s'"
 msgstr "Geçersiz kaynak deseni '%s'"
 
+msgid "File listin&g"
+msgstr "Dosya listesi"
+
+msgid "&Quick view"
+msgstr "Dosya içe&Riği"
+
+msgid "&Info"
+msgstr "&Bilgi kipi"
+
+msgid "&Tree"
+msgstr "&Ağaç"
+
+msgid "&Listing format..."
+msgstr "&Listeleme biçimi..."
+
+msgid "&Sort order..."
+msgstr "&Sıralama türü..."
+
+msgid "&Filter..."
+msgstr "&Süzgeç..."
+
+msgid "&Encoding..."
+msgstr "Kodlama..."
+
+msgid "FT&P link..."
+msgstr "FT&P bağı..."
+
+msgid "S&hell link..."
+msgstr "&SSH bağı..."
+
+msgid "S&FTP link..."
+msgstr "FT&P bağı..."
+
+msgid "SM&B link..."
+msgstr "S&MB bağı..."
+
+msgid "Paneli&ze"
+msgstr "Pane&lle"
+
+msgid "&Rescan"
+msgstr "&Tazele"
+
+msgid "&View"
+msgstr "&Görünüm"
+
+msgid "Vie&w file..."
+msgstr "Bir dos&ya göster...  "
+
+msgid "&Filtered view"
+msgstr "&Görünüm Süzgeci"
+
+msgid "&Copy"
+msgstr "&Kopyala"
+
+msgid "C&hmod"
+msgstr "Dosya ki&Pini değiştir"
+
+msgid "&Link"
+msgstr "&bağlantı"
+
+msgid "&Symlink"
+msgstr "&Sembolik bağ"
+
+msgid "Relative symlin&k"
+msgstr "İlgili sembolik bağ"
+
+msgid "Edit s&ymlink"
+msgstr "Sembolik bağı düzenle"
+
+msgid "Ch&own"
+msgstr "Sa&hip/Grup değiştir"
+
+msgid "&Advanced chown"
+msgstr "&Dosya Özelliklerini Değiştir   "
+
+msgid "Cha&ttr"
+msgstr ""
+
+msgid "&Rename/Move"
+msgstr "Taşıma / &Ad Değiştirme F6"
+
+msgid "&Mkdir"
+msgstr "&DizinAç"
+
+msgid "&Quick cd"
+msgstr "&Çabuk dizin değiştirme"
+
+msgid "Select &group"
+msgstr "Bl&ok Seçimi                 M"
+
+msgid "U&nselect group"
+msgstr "Blok seçimi&ni kaldır"
+
+msgid "&Invert selection"
+msgstr "&Seçimi tersine çevir"
+
+msgid "E&xit"
+msgstr "Çıkış"
+
+msgid "&User menu"
+msgstr "&Kullanıcı menüsü"
+
+msgid "&Directory tree"
+msgstr "&Dizin ağacı"
+
+msgid "&Find file"
+msgstr "&Dosyayı bul"
+
+msgid "S&wap panels"
+msgstr "Panelleri yer &değiştir       C-u"
+
+msgid "Switch &panels on/off"
+msgstr "&Panelleri kapat/aç"
+
+msgid "&Compare directories"
+msgstr "&Dizinleri karşılaştır"
+
+msgid "C&ompare files"
+msgstr "Dizinleri karşılaştır"
+
+msgid "E&xternal panelize"
+msgstr "Dış panelleme"
+
+msgid "Show directory s&izes"
+msgstr "diz&in boyutlarını göster"
+
+msgid "Command &history"
+msgstr "Komut Geçmişi"
+
+msgid "Viewed/edited files hi&story"
+msgstr "Görüntülenen/düzenlenen dosya &geçmişi"
+
+msgid "Di&rectory hotlist"
+msgstr "Dizin listesi"
+
+msgid "&Active VFS list"
+msgstr "Etkin &VFS listesi"
+
+msgid "&Background jobs"
+msgstr "&Artalan İşleri"
+
+msgid "Screen lis&t"
+msgstr "Ekran listes&i"
+
+msgid "&Undelete files (ext2fs only)"
+msgstr "Dosyaları k&urtar (sadece ext2fs)"
+
+msgid "&Listing format edit"
+msgstr "&Listeleme biçimini düzenle"
+
+msgid "Edit &extension file"
+msgstr "Dosya &Uzantılarını düzenle"
+
+msgid "Edit &menu file"
+msgstr "Men&ü dosyasını düzenle"
+
+msgid "Edit hi&ghlighting group file"
+msgstr "Vur&gulu grup dosyalarını düzenle"
+
+msgid "&Configuration..."
+msgstr "&Yapılandırma..."
+
+msgid "&Layout..."
+msgstr "&Yerleşim...     "
+
+msgid "&Panel options..."
+msgstr "&Panel seçenekleri..."
+
+msgid "C&onfirmation..."
+msgstr "Onaylama..."
+
+msgid "&Appearance..."
+msgstr "&Görünüm..."
+
+msgid "&Display bits..."
+msgstr "Bit &gösterimi..."
+
+msgid "&Virtual FS..."
+msgstr "&Sanal Dosya Sistemi..."
+
+msgid "Panels:"
+msgstr "Paneller:"
+
+#, c-format
+msgid "You have %zu opened screen. Quit anyway?"
+msgid_plural "You have %zu opened screens. Quit anyway?"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "The Midnight Commander"
+msgstr "Midnight Commander"
+
+msgid "Do you really want to quit the Midnight Commander?"
+msgstr "Midnight Commander'dan gerçekten çıkmak istiyor musunuz?"
+
+msgid "&Above"
+msgstr "&Üst"
+
+msgid "&Left"
+msgstr "&Sol"
+
+msgid "&Below"
+msgstr "&Alt"
+
+msgid "&Right"
+msgstr "&Sağ"
+
+msgid "ButtonBar|Menu"
+msgstr "Düğme Çubuğu|Menü"
+
+msgid "ButtonBar|View"
+msgstr "Düğme Çubuğu|Görünüm"
+
+msgid "ButtonBar|RenMov"
+msgstr "Düğme Çubuğu|Taşı"
+
+msgid "ButtonBar|Mkdir"
+msgstr "Düğme Çubuğu|Dizin Aç"
+
 msgid "&Chdir"
 msgstr "Di&zin değiştir"
 
@@ -3119,9 +3345,6 @@ msgstr "&Tüm karakter kümeleri"
 
 msgid "Fir&st hit"
 msgstr "İ&lk vuruş"
-
-msgid "&Tree"
-msgstr "&Ağaç"
 
 msgid "Find File"
 msgstr "Dosyayı bul"
@@ -3380,222 +3603,6 @@ msgstr "çıktı satırları:"
 
 msgid "Layout"
 msgstr "Yerleşim"
-
-msgid "File listin&g"
-msgstr "Dosya listesi"
-
-msgid "&Quick view"
-msgstr "Dosya içe&Riği"
-
-msgid "&Info"
-msgstr "&Bilgi kipi"
-
-msgid "&Listing format..."
-msgstr "&Listeleme biçimi..."
-
-msgid "&Sort order..."
-msgstr "&Sıralama türü..."
-
-msgid "&Filter..."
-msgstr "&Süzgeç..."
-
-msgid "&Encoding..."
-msgstr "Kodlama..."
-
-msgid "FT&P link..."
-msgstr "FT&P bağı..."
-
-msgid "S&hell link..."
-msgstr "&SSH bağı..."
-
-msgid "S&FTP link..."
-msgstr "FT&P bağı..."
-
-msgid "SM&B link..."
-msgstr "S&MB bağı..."
-
-msgid "Paneli&ze"
-msgstr "Pane&lle"
-
-msgid "&Rescan"
-msgstr "&Tazele"
-
-msgid "&View"
-msgstr "&Görünüm"
-
-msgid "Vie&w file..."
-msgstr "Bir dos&ya göster...  "
-
-msgid "&Filtered view"
-msgstr "&Görünüm Süzgeci"
-
-msgid "&Copy"
-msgstr "&Kopyala"
-
-msgid "C&hmod"
-msgstr "Dosya ki&Pini değiştir"
-
-msgid "&Link"
-msgstr "&bağlantı"
-
-msgid "&Symlink"
-msgstr "&Sembolik bağ"
-
-msgid "Relative symlin&k"
-msgstr "İlgili sembolik bağ"
-
-msgid "Edit s&ymlink"
-msgstr "Sembolik bağı düzenle"
-
-msgid "Ch&own"
-msgstr "Sa&hip/Grup değiştir"
-
-msgid "&Advanced chown"
-msgstr "&Dosya Özelliklerini Değiştir   "
-
-msgid "Cha&ttr"
-msgstr ""
-
-msgid "&Rename/Move"
-msgstr "Taşıma / &Ad Değiştirme F6"
-
-msgid "&Mkdir"
-msgstr "&DizinAç"
-
-msgid "&Quick cd"
-msgstr "&Çabuk dizin değiştirme"
-
-msgid "Select &group"
-msgstr "Bl&ok Seçimi                 M"
-
-msgid "U&nselect group"
-msgstr "Blok seçimi&ni kaldır"
-
-msgid "&Invert selection"
-msgstr "&Seçimi tersine çevir"
-
-msgid "E&xit"
-msgstr "Çıkış"
-
-msgid "&User menu"
-msgstr "&Kullanıcı menüsü"
-
-msgid "&Directory tree"
-msgstr "&Dizin ağacı"
-
-msgid "&Find file"
-msgstr "&Dosyayı bul"
-
-msgid "S&wap panels"
-msgstr "Panelleri yer &değiştir       C-u"
-
-msgid "Switch &panels on/off"
-msgstr "&Panelleri kapat/aç"
-
-msgid "&Compare directories"
-msgstr "&Dizinleri karşılaştır"
-
-msgid "C&ompare files"
-msgstr "Dizinleri karşılaştır"
-
-msgid "E&xternal panelize"
-msgstr "Dış panelleme"
-
-msgid "Show directory s&izes"
-msgstr "diz&in boyutlarını göster"
-
-msgid "Command &history"
-msgstr "Komut Geçmişi"
-
-msgid "Viewed/edited files hi&story"
-msgstr "Görüntülenen/düzenlenen dosya &geçmişi"
-
-msgid "Di&rectory hotlist"
-msgstr "Dizin listesi"
-
-msgid "&Active VFS list"
-msgstr "Etkin &VFS listesi"
-
-msgid "&Background jobs"
-msgstr "&Artalan İşleri"
-
-msgid "Screen lis&t"
-msgstr "Ekran listes&i"
-
-msgid "&Undelete files (ext2fs only)"
-msgstr "Dosyaları k&urtar (sadece ext2fs)"
-
-msgid "&Listing format edit"
-msgstr "&Listeleme biçimini düzenle"
-
-msgid "Edit &extension file"
-msgstr "Dosya &Uzantılarını düzenle"
-
-msgid "Edit &menu file"
-msgstr "Men&ü dosyasını düzenle"
-
-msgid "Edit hi&ghlighting group file"
-msgstr "Vur&gulu grup dosyalarını düzenle"
-
-msgid "&Configuration..."
-msgstr "&Yapılandırma..."
-
-msgid "&Layout..."
-msgstr "&Yerleşim...     "
-
-msgid "&Panel options..."
-msgstr "&Panel seçenekleri..."
-
-msgid "C&onfirmation..."
-msgstr "Onaylama..."
-
-msgid "&Appearance..."
-msgstr "&Görünüm..."
-
-msgid "&Display bits..."
-msgstr "Bit &gösterimi..."
-
-msgid "&Virtual FS..."
-msgstr "&Sanal Dosya Sistemi..."
-
-msgid "Panels:"
-msgstr "Paneller:"
-
-#, c-format
-msgid "You have %zu opened screen. Quit anyway?"
-msgid_plural "You have %zu opened screens. Quit anyway?"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "The Midnight Commander"
-msgstr "Midnight Commander"
-
-msgid "Do you really want to quit the Midnight Commander?"
-msgstr "Midnight Commander'dan gerçekten çıkmak istiyor musunuz?"
-
-msgid "&Above"
-msgstr "&Üst"
-
-msgid "&Left"
-msgstr "&Sol"
-
-msgid "&Below"
-msgstr "&Alt"
-
-msgid "&Right"
-msgstr "&Sağ"
-
-msgid "ButtonBar|Menu"
-msgstr "Düğme Çubuğu|Menü"
-
-msgid "ButtonBar|View"
-msgstr "Düğme Çubuğu|Görünüm"
-
-msgid "ButtonBar|RenMov"
-msgstr "Düğme Çubuğu|Taşı"
-
-msgid "ButtonBar|Mkdir"
-msgstr "Düğme Çubuğu|Dizin Aç"
 
 msgid "Memory exhausted!"
 msgstr "Bellek tükendi!"

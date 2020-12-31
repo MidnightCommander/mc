@@ -9,6 +9,8 @@
 
 #include "lib/global.h"
 
+#include "panel.h"
+
 /*** typedefs(not structures) and defined constants **********************************************/
 
 /*** enums ***************************************************************************************/
@@ -40,30 +42,30 @@ void smblink_cmd (void);
 #endif
 void undelete_cmd (void);
 void help_cmd (void);
-void smart_dirsize_cmd (void);
-void single_dirsize_cmd (void);
-void dirsizes_cmd (void);
+void smart_dirsize_cmd (WPanel * panel);
+void single_dirsize_cmd (WPanel * panel);
+void dirsizes_cmd (WPanel * panel);
 gboolean view_file_at_line (const vfs_path_t * filename_vpath, gboolean plain_view,
                             gboolean internal, long start_line, off_t search_start,
                             off_t search_end);
 gboolean view_file (const vfs_path_t * filename_vpath, gboolean plain_view, gboolean internal);
-void view_cmd (void);
-void view_file_cmd (void);
-void view_raw_cmd (void);
-void view_filtered_cmd (void);
+void view_cmd (WPanel * panel);
+void view_file_cmd (const WPanel * panel);
+void view_raw_cmd (WPanel * panel);
+void view_filtered_cmd (const WPanel * panel);
 void edit_file_at_line (const vfs_path_t * what_vpath, gboolean internal, long start_line);
-void edit_cmd (void);
+void edit_cmd (const WPanel * panel);
 void edit_cmd_new (void);
 #ifdef USE_INTERNAL_EDIT
-void edit_cmd_force_internal (void);
+void edit_cmd_force_internal (const WPanel * panel);
 #endif
-void copy_cmd (void);
-void copy_cmd_local (void);
-void rename_cmd (void);
-void rename_cmd_local (void);
-void mkdir_cmd (void);
-void delete_cmd (void);
-void delete_cmd_local (void);
+void copy_cmd (WPanel * panel);
+void copy_cmd_local (WPanel * panel);
+void rename_cmd (WPanel * panel);
+void rename_cmd_local (WPanel * panel);
+void mkdir_cmd (WPanel * panel);
+void delete_cmd (WPanel * panel);
+void delete_cmd_local (WPanel * panel);
 void filter_cmd (void);
 void reread_cmd (void);
 void vfs_list (void);
@@ -79,7 +81,7 @@ void panel_tree_cmd (void);
 void link_cmd (link_type_t link_type);
 void edit_symlink_cmd (void);
 void swap_cmd (void);
-void quick_cd_cmd (void);
+void quick_cd_cmd (WPanel * panel);
 void save_setup_cmd (void);
 void user_file_menu_cmd (void);
 void info_cmd (void);
@@ -92,18 +94,18 @@ void quick_view_cmd (void);
 void encoding_cmd (void);
 #endif
 /* achown.c */
-void advanced_chown_cmd (void);
+void advanced_chown_cmd (WPanel * panel);
 /* chmod.c */
-void chmod_cmd (void);
+void chmod_cmd (WPanel * panel);
 /* chown.c */
-void chown_cmd (void);
+void chown_cmd (WPanel * panel);
 #ifdef ENABLE_EXT2FS_ATTR
 /* chattr.c */
-void chattr_cmd (void);
+void chattr_cmd (WPanel * panel);
 const char *chattr_get_as_str (unsigned long attr);
 #endif
 /* find.c */
-void find_cmd (void);
+void find_cmd (WPanel * panel);
 
 /*** inline functions ****************************************************************************/
 #endif /* MC__CMD_H */

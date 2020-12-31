@@ -663,7 +663,7 @@ x_basename (const char *s)
     {
         /* avoid trailing PATH_SEP, if present */
         if (!IS_PATH_SEP (s[strlen (s) - 1]))
-            return (path_sep != NULL) ? path_sep + 1 : s;
+            return path_sep + 1;
 
         while (--path_sep > s && !IS_PATH_SEP (*path_sep))
             ;
@@ -782,6 +782,7 @@ strip_ctrl_codes (char *s)
                             r = new_r + 1;
                             goto osc_out;
                         }
+                        break;
                     default:
                         break;
                     }
@@ -1512,7 +1513,7 @@ mc_replace_error (GError ** dest, int code, const char *format, ...)
  * and if it has then updates the timestamp.
  *
  * @param timestamp the last timestamp in microseconds, updated if the given time elapsed
- * @param deleay amount of time in microseconds
+ * @param delay amount of time in microseconds
 
  * @return TRUE if clock skew detected, FALSE otherwise
  */

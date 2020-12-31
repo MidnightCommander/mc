@@ -62,7 +62,8 @@
 #include "src/selcodepage.h"    /* do_set_codepage */
 #endif
 
-#include "panel.h"              /* do_cd */
+#include "filemanager.h"        /* current_panel */
+#include "panel.h"              /* panel_cd */
 
 #include "ext.h"
 
@@ -175,7 +176,7 @@ exec_expand_format (char symbol, gboolean is_result_quoted)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static char *
+static GString *
 exec_get_export_variables (const vfs_path_t * filename_vpath)
 {
     char *text;
@@ -217,12 +218,13 @@ exec_get_export_variables (const vfs_path_t * filename_vpath)
             g_free (text);
         }
     }
-    return g_string_free (export_vars_string, FALSE);
+
+    return export_vars_string;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-static char *
+static GString *
 exec_make_shell_string (const char *lc_data, const vfs_path_t * filename_vpath)
 {
     GString *shell_string;
@@ -345,7 +347,8 @@ exec_make_shell_string (const char *lc_data, const vfs_path_t * filename_vpath)
                 g_string_append_c (shell_string, *lc_data);
         }
     }                           /* for */
-    return g_string_free (shell_string, FALSE);
+
+    return shell_string;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -388,7 +391,7 @@ exec_extension_view (void *target, char *cmd, const vfs_path_t * filename_vpath,
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-exec_extension_cd (void)
+exec_extension_cd (WPanel * panel)
 {
     char *q;
     vfs_path_t *p_vpath;
@@ -403,7 +406,7 @@ exec_extension_cd (void)
     q[1] = 0;
 
     p_vpath = vfs_path_from_str_flags (pbuffer, VPF_NO_CANON);
-    do_cd (p_vpath, cd_parse_command);
+    panel_cd (panel, p_vpath, cd_parse_command);
     vfs_path_free (p_vpath);
 }
 
@@ -411,10 +414,10 @@ exec_extension_cd (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static vfs_path_t *
-exec_extension (void *target, const vfs_path_t * filename_vpath, const char *lc_data,
-                int start_line)
+exec_extension (WPanel * panel, void *target, const vfs_path_t * filename_vpath,
+                const char *lc_data, int start_line)
 {
-    char *shell_string, *export_variables;
+    GString *shell_string, *export_variables;
     vfs_path_t *script_vpath = NULL;
     int cmd_file_fd;
     FILE *cmd_file;
@@ -433,14 +436,13 @@ exec_extension (void *target, const vfs_path_t * filename_vpath, const char *lc_
     do_local_copy = !vfs_file_is_local (filename_vpath);
 
     shell_string = exec_make_shell_string (lc_data, filename_vpath);
-
     if (shell_string == NULL)
         goto ret;
 
     if (is_cd)
     {
-        exec_extension_cd ();
-        g_free (shell_string);
+        exec_extension_cd (panel);
+        g_string_free (shell_string, TRUE);
         goto ret;
     }
 
@@ -465,12 +467,12 @@ exec_extension (void *target, const vfs_path_t * filename_vpath, const char *lc_
     export_variables = exec_get_export_variables (filename_vpath);
     if (export_variables != NULL)
     {
-        fprintf (cmd_file, "%s\n", export_variables);
-        g_free (export_variables);
+        fputs (export_variables->str, cmd_file);
+        g_string_free (export_variables, TRUE);
     }
 
-    fputs (shell_string, cmd_file);
-    g_free (shell_string);
+    fputs (shell_string->str, cmd_file);
+    g_string_free (shell_string, TRUE);
 
     /*
      * Make the script remove itself when it finishes.
@@ -1025,7 +1027,7 @@ regex_command_for (void *target, const vfs_path_t * filename_vpath, const char *
                         {
                             vfs_path_t *sv;
 
-                            sv = exec_extension (target, filename_vpath, r + 1,
+                            sv = exec_extension (current_panel, target, filename_vpath, r + 1,
                                                  view_at_line_number);
                             if (script_vpath != NULL)
                                 *script_vpath = sv;

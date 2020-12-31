@@ -715,11 +715,14 @@ tilde_expand (const char *directory)
 void
 open_error_pipe (void)
 {
+    int error_fd = -1;
+
     if (pipe (error_pipe) < 0)
         message (D_NORMAL, _("Warning"), _("Pipe failed"));
 
     old_error = dup (STDERR_FILENO);
-    if (old_error < 0 || close (STDERR_FILENO) != 0 || dup (error_pipe[1]) != STDERR_FILENO)
+    if (old_error < 0 || close (STDERR_FILENO) != 0
+        || (error_fd = dup (error_pipe[1])) != STDERR_FILENO)
     {
         message (D_NORMAL, _("Warning"), _("Dup failed"));
 
@@ -749,6 +752,8 @@ open_error_pipe (void)
             }
         }
     }
+    if (error_fd >= 0)
+        close (error_fd);
     /* we never write there */
     close (error_pipe[1]);
     error_pipe[1] = -1;

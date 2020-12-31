@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"POT-Creation-Date: 2020-12-31 16:34+0300\n"
 "PO-Revision-Date: 2020-05-17 17:42+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Slovak (http://www.transifex.com/mc/mc/language/sk/)\n"
@@ -1982,6 +1982,9 @@ msgstr "Konfigurácia"
 msgid "Skin:"
 msgstr "Téma vzhľadu:"
 
+msgid "&Shadows"
+msgstr ""
+
 msgid "Appearance"
 msgstr "Vzhľad"
 
@@ -2205,6 +2208,14 @@ msgstr "Meno použivateľa:"
 msgid "SMB authentication"
 msgstr "Autentifikácia SMB"
 
+#, c-format
+msgid ""
+"Cannot chdir to \"%s\"\n"
+"%s"
+msgstr ""
+"Nemožno chdir do „%s“\n"
+"%s"
+
 msgid "Secure deletion"
 msgstr ""
 
@@ -2264,6 +2275,10 @@ msgstr ""
 
 msgid "No COW"
 msgstr ""
+
+#, fuzzy
+msgid "Direct access for files"
+msgstr "Vyrovnávacia pamäť adresárov vypršala pre %s"
 
 msgid "Casefolded file"
 msgstr ""
@@ -2540,14 +2555,6 @@ msgstr "Nemožno uložiť nastavenie do %s"
 
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "Nemožno spúšťať príkazy na súborových systémoch, ktoré nie sú lokálne"
-
-#, c-format
-msgid ""
-"Cannot chdir to \"%s\"\n"
-"%s"
-msgstr ""
-"Nemožno chdir do „%s“\n"
-"%s"
 
 msgid "Parameter"
 msgstr "Parameter"
@@ -3080,6 +3087,227 @@ msgstr "&Pozadie"
 msgid "Invalid source pattern '%s'"
 msgstr "Neplatný zdrojový vzor „%s“"
 
+msgid "File listin&g"
+msgstr "&Výpis súborov"
+
+msgid "&Quick view"
+msgstr "&Rýchle zobrazenie"
+
+msgid "&Info"
+msgstr "&Info"
+
+msgid "&Tree"
+msgstr "&Strom"
+
+msgid "&Listing format..."
+msgstr "&Formát výpisu..."
+
+msgid "&Sort order..."
+msgstr "&Poradie výpisu..."
+
+msgid "&Filter..."
+msgstr "&Filter..."
+
+msgid "&Encoding..."
+msgstr "Kódovani&e..."
+
+msgid "FT&P link..."
+msgstr "&Pripojenie FTP..."
+
+msgid "S&hell link..."
+msgstr "Pripojenie s&hell..."
+
+msgid "S&FTP link..."
+msgstr "Pripojenie S&FTP..."
+
+msgid "SM&B link..."
+msgstr "Pripojenie SM&B..."
+
+msgid "Paneli&ze"
+msgstr "Paneli&zovať"
+
+msgid "&Rescan"
+msgstr "&Znovu načítať"
+
+msgid "&View"
+msgstr "&Zobraziť"
+
+msgid "Vie&w file..."
+msgstr "Zo&braziť súbor..."
+
+msgid "&Filtered view"
+msgstr "&Filtrované zobrazenie"
+
+msgid "&Copy"
+msgstr "&Kopírovať"
+
+msgid "C&hmod"
+msgstr "C&hmod"
+
+msgid "&Link"
+msgstr "&Odkaz"
+
+msgid "&Symlink"
+msgstr "&Sym. odkaz"
+
+msgid "Relative symlin&k"
+msgstr "Relatívny sym. od&kaz"
+
+msgid "Edit s&ymlink"
+msgstr "Upraviť s&ymb. odkaz "
+
+msgid "Ch&own"
+msgstr "Ch&own"
+
+msgid "&Advanced chown"
+msgstr "Rozšírená zmen&a vlastníka"
+
+msgid "Cha&ttr"
+msgstr ""
+
+msgid "&Rename/Move"
+msgstr "&Premenovať/presunúť"
+
+msgid "&Mkdir"
+msgstr "&Vytvoriť adr."
+
+msgid "&Quick cd"
+msgstr "&Rýchly cd"
+
+msgid "Select &group"
+msgstr "Vybrať &skup."
+
+msgid "U&nselect group"
+msgstr "Zruš&iť výber skup."
+
+msgid "&Invert selection"
+msgstr "&Invertovať výber"
+
+msgid "E&xit"
+msgstr "&Ukončiť"
+
+msgid "&User menu"
+msgstr "Po&užívateľské menu "
+
+msgid "&Directory tree"
+msgstr "A&dresárový strom"
+
+msgid "&Find file"
+msgstr "&Nájsť súbor"
+
+msgid "S&wap panels"
+msgstr "&Vymeniť panely"
+
+msgid "Switch &panels on/off"
+msgstr "&Panely zap./vyp."
+
+msgid "&Compare directories"
+msgstr "&Porovnať adresáre"
+
+msgid "C&ompare files"
+msgstr "P&orovnať súbory"
+
+msgid "E&xternal panelize"
+msgstr "Panelizovať e&xterným"
+
+msgid "Show directory s&izes"
+msgstr "Zobraz&iť veľkosť adresárov"
+
+msgid "Command &history"
+msgstr "&História príkazov"
+
+msgid "Viewed/edited files hi&story"
+msgstr "Zobrazená/zmenená hi&stória súborov"
+
+msgid "Di&rectory hotlist"
+msgstr "Hotlist ad&resára"
+
+msgid "&Active VFS list"
+msgstr "Zoznam &aktívnych VFS"
+
+msgid "&Background jobs"
+msgstr "Úlohy v &pozadí"
+
+msgid "Screen lis&t"
+msgstr "Zoznam& obrazoviek"
+
+msgid "&Undelete files (ext2fs only)"
+msgstr "Obnoviť &Súbory (iba ext2fs)"
+
+msgid "&Listing format edit"
+msgstr "&Upraviť formát výpisu"
+
+msgid "Edit &extension file"
+msgstr "Upraviť sú&bor prípon"
+
+msgid "Edit &menu file"
+msgstr "Upraviť súbor me&nu"
+
+msgid "Edit hi&ghlighting group file"
+msgstr "Upraviť súbor &zvýrazňovacích skupín"
+
+msgid "&Configuration..."
+msgstr "&Konfigurácia..."
+
+msgid "&Layout..."
+msgstr "&Rozmiestnenie..."
+
+msgid "&Panel options..."
+msgstr "Nastavenie &panelu..."
+
+msgid "C&onfirmation..."
+msgstr "P&otvrdenie..."
+
+msgid "&Appearance..."
+msgstr "Vzhľ&ad..."
+
+msgid "&Display bits..."
+msgstr "&Zobrazené bity..."
+
+msgid "&Virtual FS..."
+msgstr "&Virtuálny FS..."
+
+msgid "Panels:"
+msgstr "Panely:"
+
+#, c-format
+msgid "You have %zu opened screen. Quit anyway?"
+msgid_plural "You have %zu opened screens. Quit anyway?"
+msgstr[0] "Máte už %zu otvorenú obrazovku. Aj tak odísť?"
+msgstr[1] "Máte už %zu otvorené obrazovky. Aj tak odísť?"
+msgstr[2] "Máte už %zu otvorených obrazoviek. Aj tak odísť?"
+msgstr[3] "Máte už %zu otvorených obrazoviek. Aj tak odísť?"
+
+msgid "The Midnight Commander"
+msgstr "Midnight Commander"
+
+msgid "Do you really want to quit the Midnight Commander?"
+msgstr "Naozaj chcete ukončiť Midnight Commander?"
+
+msgid "&Above"
+msgstr "N&ad"
+
+msgid "&Left"
+msgstr "Vľ&avo"
+
+msgid "&Below"
+msgstr "&Pod"
+
+msgid "&Right"
+msgstr "Vp&ravo"
+
+msgid "ButtonBar|Menu"
+msgstr "ButtonBar|Menu"
+
+msgid "ButtonBar|View"
+msgstr "ButtonBar|Zobraz"
+
+msgid "ButtonBar|RenMov"
+msgstr "ButtonBar|PremPres"
+
+msgid "ButtonBar|Mkdir"
+msgstr "ButtonBar|VytAdr"
+
 msgid "&Chdir"
 msgstr "&Chdir"
 
@@ -3125,9 +3353,6 @@ msgstr "&Všetky znakové sady"
 
 msgid "Fir&st hit"
 msgstr "Prvý vý&skyt"
-
-msgid "&Tree"
-msgstr "&Strom"
 
 msgid "Find File"
 msgstr "Nájsť súbor"
@@ -3390,224 +3615,6 @@ msgstr "Riadky výstupu:"
 
 msgid "Layout"
 msgstr "Rozmiestnenie"
-
-msgid "File listin&g"
-msgstr "&Výpis súborov"
-
-msgid "&Quick view"
-msgstr "&Rýchle zobrazenie"
-
-msgid "&Info"
-msgstr "&Info"
-
-msgid "&Listing format..."
-msgstr "&Formát výpisu..."
-
-msgid "&Sort order..."
-msgstr "&Poradie výpisu..."
-
-msgid "&Filter..."
-msgstr "&Filter..."
-
-msgid "&Encoding..."
-msgstr "Kódovani&e..."
-
-msgid "FT&P link..."
-msgstr "&Pripojenie FTP..."
-
-msgid "S&hell link..."
-msgstr "Pripojenie s&hell..."
-
-msgid "S&FTP link..."
-msgstr "Pripojenie S&FTP..."
-
-msgid "SM&B link..."
-msgstr "Pripojenie SM&B..."
-
-msgid "Paneli&ze"
-msgstr "Paneli&zovať"
-
-msgid "&Rescan"
-msgstr "&Znovu načítať"
-
-msgid "&View"
-msgstr "&Zobraziť"
-
-msgid "Vie&w file..."
-msgstr "Zo&braziť súbor..."
-
-msgid "&Filtered view"
-msgstr "&Filtrované zobrazenie"
-
-msgid "&Copy"
-msgstr "&Kopírovať"
-
-msgid "C&hmod"
-msgstr "C&hmod"
-
-msgid "&Link"
-msgstr "&Odkaz"
-
-msgid "&Symlink"
-msgstr "&Sym. odkaz"
-
-msgid "Relative symlin&k"
-msgstr "Relatívny sym. od&kaz"
-
-msgid "Edit s&ymlink"
-msgstr "Upraviť s&ymb. odkaz "
-
-msgid "Ch&own"
-msgstr "Ch&own"
-
-msgid "&Advanced chown"
-msgstr "Rozšírená zmen&a vlastníka"
-
-msgid "Cha&ttr"
-msgstr ""
-
-msgid "&Rename/Move"
-msgstr "&Premenovať/presunúť"
-
-msgid "&Mkdir"
-msgstr "&Vytvoriť adr."
-
-msgid "&Quick cd"
-msgstr "&Rýchly cd"
-
-msgid "Select &group"
-msgstr "Vybrať &skup."
-
-msgid "U&nselect group"
-msgstr "Zruš&iť výber skup."
-
-msgid "&Invert selection"
-msgstr "&Invertovať výber"
-
-msgid "E&xit"
-msgstr "&Ukončiť"
-
-msgid "&User menu"
-msgstr "Po&užívateľské menu "
-
-msgid "&Directory tree"
-msgstr "A&dresárový strom"
-
-msgid "&Find file"
-msgstr "&Nájsť súbor"
-
-msgid "S&wap panels"
-msgstr "&Vymeniť panely"
-
-msgid "Switch &panels on/off"
-msgstr "&Panely zap./vyp."
-
-msgid "&Compare directories"
-msgstr "&Porovnať adresáre"
-
-msgid "C&ompare files"
-msgstr "P&orovnať súbory"
-
-msgid "E&xternal panelize"
-msgstr "Panelizovať e&xterným"
-
-msgid "Show directory s&izes"
-msgstr "Zobraz&iť veľkosť adresárov"
-
-msgid "Command &history"
-msgstr "&História príkazov"
-
-msgid "Viewed/edited files hi&story"
-msgstr "Zobrazená/zmenená hi&stória súborov"
-
-msgid "Di&rectory hotlist"
-msgstr "Hotlist ad&resára"
-
-msgid "&Active VFS list"
-msgstr "Zoznam &aktívnych VFS"
-
-msgid "&Background jobs"
-msgstr "Úlohy v &pozadí"
-
-msgid "Screen lis&t"
-msgstr "Zoznam& obrazoviek"
-
-msgid "&Undelete files (ext2fs only)"
-msgstr "Obnoviť &Súbory (iba ext2fs)"
-
-msgid "&Listing format edit"
-msgstr "&Upraviť formát výpisu"
-
-msgid "Edit &extension file"
-msgstr "Upraviť sú&bor prípon"
-
-msgid "Edit &menu file"
-msgstr "Upraviť súbor me&nu"
-
-msgid "Edit hi&ghlighting group file"
-msgstr "Upraviť súbor &zvýrazňovacích skupín"
-
-msgid "&Configuration..."
-msgstr "&Konfigurácia..."
-
-msgid "&Layout..."
-msgstr "&Rozmiestnenie..."
-
-msgid "&Panel options..."
-msgstr "Nastavenie &panelu..."
-
-msgid "C&onfirmation..."
-msgstr "P&otvrdenie..."
-
-msgid "&Appearance..."
-msgstr "Vzhľ&ad..."
-
-msgid "&Display bits..."
-msgstr "&Zobrazené bity..."
-
-msgid "&Virtual FS..."
-msgstr "&Virtuálny FS..."
-
-msgid "Panels:"
-msgstr "Panely:"
-
-#, c-format
-msgid "You have %zu opened screen. Quit anyway?"
-msgid_plural "You have %zu opened screens. Quit anyway?"
-msgstr[0] "Máte už %zu otvorenú obrazovku. Aj tak odísť?"
-msgstr[1] "Máte už %zu otvorené obrazovky. Aj tak odísť?"
-msgstr[2] "Máte už %zu otvorených obrazoviek. Aj tak odísť?"
-msgstr[3] "Máte už %zu otvorených obrazoviek. Aj tak odísť?"
-
-msgid "The Midnight Commander"
-msgstr "Midnight Commander"
-
-msgid "Do you really want to quit the Midnight Commander?"
-msgstr "Naozaj chcete ukončiť Midnight Commander?"
-
-msgid "&Above"
-msgstr "N&ad"
-
-msgid "&Left"
-msgstr "Vľ&avo"
-
-msgid "&Below"
-msgstr "&Pod"
-
-msgid "&Right"
-msgstr "Vp&ravo"
-
-msgid "ButtonBar|Menu"
-msgstr "ButtonBar|Menu"
-
-msgid "ButtonBar|View"
-msgstr "ButtonBar|Zobraz"
-
-msgid "ButtonBar|RenMov"
-msgstr "ButtonBar|PremPres"
-
-msgid "ButtonBar|Mkdir"
-msgstr "ButtonBar|VytAdr"
 
 msgid "Memory exhausted!"
 msgstr "Došla pamäť!"

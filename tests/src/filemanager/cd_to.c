@@ -1,11 +1,12 @@
 /*
-   src/filemanager - tests for do_cd_command() function
+   src/filemanager - tests for cd_to() function
 
    Copyright (C) 2011-2020
    Free Software Foundation, Inc.
 
    Written by:
    Slava Zanko <slavazanko@gmail.com>, 2011, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2019, 2020
 
    This file is part of the Midnight Commander.
 
@@ -29,8 +30,8 @@
 
 #include "src/vfs/local/local.c"
 
-#include "src/filemanager/command.c"
-
+#include "src/filemanager/cd.c"
+#include "src/filemanager/panel.h"
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -55,8 +56,10 @@ static gboolean do_cd__return_value;
 
 /* @Mock */
 gboolean
-do_cd (const vfs_path_t * new_dir_vpath, enum cd_enum cd_type)
+panel_cd (WPanel * panel, const vfs_path_t * new_dir_vpath, enum cd_enum cd_type)
 {
+    (void) panel;
+
     do_cd__new_dir_vpath__captured = vfs_path_clone (new_dir_vpath);
     do_cd__cd_type__captured = cd_type;
     return do_cd__return_value;
@@ -109,16 +112,16 @@ static const struct test_empty_mean_home_ds
 } test_empty_mean_home_ds[] =
 {
     {
-        "cd"
+        ""
     },
     {
-        "cd                      "
+        "                      "
     },
     {
-        "cd\t\t\t\t\t\t\t\t\t\t\t"
+        "\t\t\t\t\t\t\t\t\t\t\t"
     },
     {
-        "cd  \t   \t  \t\t    \t    "
+        "  \t   \t  \t\t    \t    "
     },
 };
 /* *INDENT-ON* */
@@ -138,7 +141,7 @@ START_PARAMETRIZED_TEST (test_empty_mean_home, test_empty_mean_home_ds)
         char *input_command;
 
         input_command = g_strdup (data->command);
-        do_cd_command (input_command);
+        cd_to (input_command);
         g_free (input_command);
     }
     /* then */
@@ -169,7 +172,7 @@ main (void)
 
     suite_add_tcase (s, tc_core);
     sr = srunner_create (s);
-    srunner_set_log (sr, "do_cd_command.log");
+    srunner_set_log (sr, "cd_to.log");
     srunner_run_all (sr, CK_ENV);
     number_failed = srunner_ntests_failed (sr);
     srunner_free (sr);

@@ -56,6 +56,7 @@
 
 #include "tty.h"
 #include "tty-internal.h"
+#include "color.h"              /* tty_set_normal_attrs() */
 #include "mouse.h"              /* use_mouse_p */
 #include "win.h"
 
@@ -319,6 +320,17 @@ tty_resize (int fd)
 #else
     return 0;
 #endif
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/** Clear screen */
+void
+tty_clear_screen (void)
+{
+    tty_set_normal_attrs ();
+    tty_fill_region (0, 0, LINES, COLS, ' ');
+    tty_refresh ();
 }
 
 /* --------------------------------------------------------------------------------------------- */

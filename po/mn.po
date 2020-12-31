@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"POT-Creation-Date: 2020-12-31 16:34+0300\n"
 "PO-Revision-Date: 2020-05-31 12:10+0000\n"
 "Last-Translator: Shuree Nyam-Oidov <99shuree@gmail.com>\n"
 "Language-Team: Mongolian (http://www.transifex.com/mc/mc/language/mn/)\n"
@@ -1882,6 +1882,9 @@ msgstr "Тохиргуулгын параметрүүд"
 msgid "Skin:"
 msgstr ""
 
+msgid "&Shadows"
+msgstr ""
+
 msgid "Appearance"
 msgstr ""
 
@@ -2101,6 +2104,12 @@ msgstr "Хэрэглэгчийн нэр:"
 msgid "SMB authentication"
 msgstr ""
 
+#, c-format
+msgid ""
+"Cannot chdir to \"%s\"\n"
+"%s"
+msgstr ""
+
 msgid "Secure deletion"
 msgstr ""
 
@@ -2160,6 +2169,10 @@ msgstr ""
 
 msgid "No COW"
 msgstr ""
+
+#, fuzzy
+msgid "Direct access for files"
+msgstr " %s ийн кэш лавлах хугацаа дууссан байна"
 
 msgid "Casefolded file"
 msgstr ""
@@ -2431,12 +2444,6 @@ msgid "Unable to save setup to %s"
 msgstr ""
 
 msgid "Cannot execute commands on non-local filesystems"
-msgstr ""
-
-#, c-format
-msgid ""
-"Cannot chdir to \"%s\"\n"
-"%s"
 msgstr ""
 
 msgid "Parameter"
@@ -2890,6 +2897,225 @@ msgstr " &Фонд"
 msgid "Invalid source pattern '%s'"
 msgstr ""
 
+msgid "File listin&g"
+msgstr "&Файлийг жагсаалт"
+
+msgid "&Quick view"
+msgstr "Х&урдан харах"
+
+msgid "&Info"
+msgstr "&Мэдээлэл"
+
+msgid "&Tree"
+msgstr "&Мод"
+
+msgid "&Listing format..."
+msgstr "&Жагшаалтын формат"
+
+msgid "&Sort order..."
+msgstr "Эрэмбэлэх &дараалал..."
+
+msgid "&Filter..."
+msgstr "&Шүүлт..."
+
+msgid "&Encoding..."
+msgstr "&Кодчилол"
+
+msgid "FT&P link..."
+msgstr "&FTP-холбоос..."
+
+msgid "S&hell link..."
+msgstr "S&hell-холбоос..."
+
+msgid "S&FTP link..."
+msgstr ""
+
+msgid "SM&B link..."
+msgstr "SM&B-холбоос..."
+
+msgid "Paneli&ze"
+msgstr "&Панелиз"
+
+msgid "&Rescan"
+msgstr ""
+
+msgid "&View"
+msgstr ""
+
+msgid "Vie&w file..."
+msgstr "&файлийг харах"
+
+msgid "&Filtered view"
+msgstr "&Шүүлтийг харах"
+
+msgid "&Copy"
+msgstr "Х&уулах"
+
+msgid "C&hmod"
+msgstr ""
+
+msgid "&Link"
+msgstr "&Линк"
+
+msgid "&Symlink"
+msgstr ""
+
+msgid "Relative symlin&k"
+msgstr "Ха&мааралтай symlink"
+
+msgid "Edit s&ymlink"
+msgstr "&Symlink-ийг засварлах"
+
+msgid "Ch&own"
+msgstr ""
+
+msgid "&Advanced chown"
+msgstr "&Ахисан шатны chown"
+
+msgid "Cha&ttr"
+msgstr ""
+
+msgid "&Rename/Move"
+msgstr ""
+
+msgid "&Mkdir"
+msgstr ""
+
+msgid "&Quick cd"
+msgstr "Х&урдан CD"
+
+msgid "Select &group"
+msgstr "&Групыг сонгох"
+
+msgid "U&nselect group"
+msgstr "Г&рупыг сонгохгүй"
+
+msgid "&Invert selection"
+msgstr ""
+
+msgid "E&xit"
+msgstr "Гара&х"
+
+msgid "&User menu"
+msgstr "Хэрэгл&эгчийн цэс"
+
+msgid "&Directory tree"
+msgstr "&Хавтас мод"
+
+msgid "&Find file"
+msgstr "&Файл хайх"
+
+msgid "S&wap panels"
+msgstr "Панелуудыг хооронд нь с&олих"
+
+msgid "Switch &panels on/off"
+msgstr "Унтраалга &панели on/off"
+
+msgid "&Compare directories"
+msgstr "&Хавсралт файлийг харьцуулах"
+
+msgid "C&ompare files"
+msgstr "Файлийн хар&ьцуулах"
+
+msgid "E&xternal panelize"
+msgstr "Г&адаад панелиз хийх"
+
+msgid "Show directory s&izes"
+msgstr "Хавсралтыг хэ&мжээ харуулах "
+
+msgid "Command &history"
+msgstr "Командын тү&үх "
+
+msgid "Viewed/edited files hi&story"
+msgstr "Харуулсан/засварласан файлийн тү&үх"
+
+msgid "Di&rectory hotlist"
+msgstr "Ка&талоги жагсаалт"
+
+msgid "&Active VFS list"
+msgstr "&Идэвхтэй VFS жагсаалт"
+
+msgid "&Background jobs"
+msgstr "фон&дын ажилууд"
+
+msgid "Screen lis&t"
+msgstr "Дэлгэцийн жагсаа&лт"
+
+msgid "&Undelete files (ext2fs only)"
+msgstr "&Сэргээгдсэн файлууд (зөвхөн ext2fs)"
+
+msgid "&Listing format edit"
+msgstr "&Засварлагдах бүтэцүүд"
+
+msgid "Edit &extension file"
+msgstr "Файлын &өргөтгөл"
+
+msgid "Edit &menu file"
+msgstr "Файл &цэс"
+
+msgid "Edit hi&ghlighting group file"
+msgstr "Өнгөөр то&руулсан бүлэг файлийг засварлах"
+
+msgid "&Configuration..."
+msgstr "&Тохиргоо..."
+
+msgid "&Layout..."
+msgstr "&Гадаад төрх..."
+
+msgid "&Panel options..."
+msgstr "&Панелийн сонголт"
+
+msgid "C&onfirmation..."
+msgstr "Бат&лах"
+
+msgid "&Appearance..."
+msgstr "Хараг&дах байдал"
+
+msgid "&Display bits..."
+msgstr "&Бит тэмдэгтүүд..."
+
+msgid "&Virtual FS..."
+msgstr "Виртуаль &FS..."
+
+msgid "Panels:"
+msgstr ""
+
+#, c-format
+msgid "You have %zu opened screen. Quit anyway?"
+msgid_plural "You have %zu opened screens. Quit anyway?"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "The Midnight Commander"
+msgstr ""
+
+msgid "Do you really want to quit the Midnight Commander?"
+msgstr ""
+
+msgid "&Above"
+msgstr ""
+
+msgid "&Left"
+msgstr "&Зүүн"
+
+msgid "&Below"
+msgstr ""
+
+msgid "&Right"
+msgstr "&Баруун"
+
+msgid "ButtonBar|Menu"
+msgstr "Цэс"
+
+msgid "ButtonBar|View"
+msgstr "Харах"
+
+msgid "ButtonBar|RenMov"
+msgstr "Арилгх"
+
+msgid "ButtonBar|Mkdir"
+msgstr "КтлогХ"
+
 msgid "&Chdir"
 msgstr "&Шилжих"
 
@@ -2935,9 +3161,6 @@ msgstr ""
 
 msgid "Fir&st hit"
 msgstr ""
-
-msgid "&Tree"
-msgstr "&Мод"
 
 msgid "Find File"
 msgstr "Файл хайх"
@@ -3192,222 +3415,6 @@ msgstr ""
 
 msgid "Layout"
 msgstr "Гадаад төрх"
-
-msgid "File listin&g"
-msgstr "&Файлийг жагсаалт"
-
-msgid "&Quick view"
-msgstr "Х&урдан харах"
-
-msgid "&Info"
-msgstr "&Мэдээлэл"
-
-msgid "&Listing format..."
-msgstr "&Жагшаалтын формат"
-
-msgid "&Sort order..."
-msgstr "Эрэмбэлэх &дараалал..."
-
-msgid "&Filter..."
-msgstr "&Шүүлт..."
-
-msgid "&Encoding..."
-msgstr "&Кодчилол"
-
-msgid "FT&P link..."
-msgstr "&FTP-холбоос..."
-
-msgid "S&hell link..."
-msgstr "S&hell-холбоос..."
-
-msgid "S&FTP link..."
-msgstr ""
-
-msgid "SM&B link..."
-msgstr "SM&B-холбоос..."
-
-msgid "Paneli&ze"
-msgstr "&Панелиз"
-
-msgid "&Rescan"
-msgstr ""
-
-msgid "&View"
-msgstr ""
-
-msgid "Vie&w file..."
-msgstr "&файлийг харах"
-
-msgid "&Filtered view"
-msgstr "&Шүүлтийг харах"
-
-msgid "&Copy"
-msgstr "Х&уулах"
-
-msgid "C&hmod"
-msgstr ""
-
-msgid "&Link"
-msgstr "&Линк"
-
-msgid "&Symlink"
-msgstr ""
-
-msgid "Relative symlin&k"
-msgstr "Ха&мааралтай symlink"
-
-msgid "Edit s&ymlink"
-msgstr "&Symlink-ийг засварлах"
-
-msgid "Ch&own"
-msgstr ""
-
-msgid "&Advanced chown"
-msgstr "&Ахисан шатны chown"
-
-msgid "Cha&ttr"
-msgstr ""
-
-msgid "&Rename/Move"
-msgstr ""
-
-msgid "&Mkdir"
-msgstr ""
-
-msgid "&Quick cd"
-msgstr "Х&урдан CD"
-
-msgid "Select &group"
-msgstr "&Групыг сонгох"
-
-msgid "U&nselect group"
-msgstr "Г&рупыг сонгохгүй"
-
-msgid "&Invert selection"
-msgstr ""
-
-msgid "E&xit"
-msgstr "Гара&х"
-
-msgid "&User menu"
-msgstr "Хэрэгл&эгчийн цэс"
-
-msgid "&Directory tree"
-msgstr "&Хавтас мод"
-
-msgid "&Find file"
-msgstr "&Файл хайх"
-
-msgid "S&wap panels"
-msgstr "Панелуудыг хооронд нь с&олих"
-
-msgid "Switch &panels on/off"
-msgstr "Унтраалга &панели on/off"
-
-msgid "&Compare directories"
-msgstr "&Хавсралт файлийг харьцуулах"
-
-msgid "C&ompare files"
-msgstr "Файлийн хар&ьцуулах"
-
-msgid "E&xternal panelize"
-msgstr "Г&адаад панелиз хийх"
-
-msgid "Show directory s&izes"
-msgstr "Хавсралтыг хэ&мжээ харуулах "
-
-msgid "Command &history"
-msgstr "Командын тү&үх "
-
-msgid "Viewed/edited files hi&story"
-msgstr "Харуулсан/засварласан файлийн тү&үх"
-
-msgid "Di&rectory hotlist"
-msgstr "Ка&талоги жагсаалт"
-
-msgid "&Active VFS list"
-msgstr "&Идэвхтэй VFS жагсаалт"
-
-msgid "&Background jobs"
-msgstr "фон&дын ажилууд"
-
-msgid "Screen lis&t"
-msgstr "Дэлгэцийн жагсаа&лт"
-
-msgid "&Undelete files (ext2fs only)"
-msgstr "&Сэргээгдсэн файлууд (зөвхөн ext2fs)"
-
-msgid "&Listing format edit"
-msgstr "&Засварлагдах бүтэцүүд"
-
-msgid "Edit &extension file"
-msgstr "Файлын &өргөтгөл"
-
-msgid "Edit &menu file"
-msgstr "Файл &цэс"
-
-msgid "Edit hi&ghlighting group file"
-msgstr "Өнгөөр то&руулсан бүлэг файлийг засварлах"
-
-msgid "&Configuration..."
-msgstr "&Тохиргоо..."
-
-msgid "&Layout..."
-msgstr "&Гадаад төрх..."
-
-msgid "&Panel options..."
-msgstr "&Панелийн сонголт"
-
-msgid "C&onfirmation..."
-msgstr "Бат&лах"
-
-msgid "&Appearance..."
-msgstr "Хараг&дах байдал"
-
-msgid "&Display bits..."
-msgstr "&Бит тэмдэгтүүд..."
-
-msgid "&Virtual FS..."
-msgstr "Виртуаль &FS..."
-
-msgid "Panels:"
-msgstr ""
-
-#, c-format
-msgid "You have %zu opened screen. Quit anyway?"
-msgid_plural "You have %zu opened screens. Quit anyway?"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "The Midnight Commander"
-msgstr ""
-
-msgid "Do you really want to quit the Midnight Commander?"
-msgstr ""
-
-msgid "&Above"
-msgstr ""
-
-msgid "&Left"
-msgstr "&Зүүн"
-
-msgid "&Below"
-msgstr ""
-
-msgid "&Right"
-msgstr "&Баруун"
-
-msgid "ButtonBar|Menu"
-msgstr "Цэс"
-
-msgid "ButtonBar|View"
-msgstr "Харах"
-
-msgid "ButtonBar|RenMov"
-msgstr "Арилгх"
-
-msgid "ButtonBar|Mkdir"
-msgstr "КтлогХ"
 
 msgid "Memory exhausted!"
 msgstr ""

@@ -44,7 +44,7 @@
 #include "lib/widget.h"
 
 #include "src/filemanager/layout.h"
-#include "src/filemanager/midnight.h"   /* the_menubar */
+#include "src/filemanager/filemanager.h"        /* the_menubar */
 
 #include "internal.h"
 
@@ -108,7 +108,7 @@ mcview_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
             if (!widget_get_state (w, WST_FOCUSED))
             {
                 /* Grab focus */
-                change_panel ();
+                (void) change_panel ();
             }
         }
         MC_FALLTHROUGH;

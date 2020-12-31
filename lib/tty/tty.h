@@ -133,6 +133,9 @@ extern int tty_resize (int fd);
 extern void tty_refresh (void);
 extern void tty_change_screen_size (void);
 
+/* Clear screen */
+extern void tty_clear_screen (void);
+
 extern int mc_tty_normalize_lines_char (const char *);
 
 extern void tty_enter_ca_mode (void);

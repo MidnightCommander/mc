@@ -1093,7 +1093,7 @@ edit_scroll_screen_over_cursor (WEdit * edit)
     {
         int n;
 
-        n = l_extreme + t_extreme;
+        n = l_extreme + r_extreme;
         if (n == 0)
             n = 1;
         l_extreme = (l_extreme * (w->cols - 1)) / n;

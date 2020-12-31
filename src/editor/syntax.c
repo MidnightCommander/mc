@@ -1287,9 +1287,6 @@ edit_read_syntax_file (WEdit * edit, GPtrArray * pnames, const char *syntax_file
         /* Looking for 'include ...' lines before first 'file ...' ones */
         if (!found && strcmp (args[0], "include") == 0)
         {
-            if (g != NULL)
-                continue;
-
             if (args[1] == NULL || (g = open_include_file (args[1])) == NULL)
             {
                 result = line;

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"POT-Creation-Date: 2020-12-31 16:34+0300\n"
 "PO-Revision-Date: 2020-05-17 17:42+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Interlingua (http://www.transifex.com/mc/mc/language/ia/)\n"
@@ -1899,6 +1899,9 @@ msgstr "Configurar optiones"
 msgid "Skin:"
 msgstr ""
 
+msgid "&Shadows"
+msgstr ""
+
 msgid "Appearance"
 msgstr ""
 
@@ -2118,6 +2121,12 @@ msgstr "Nomine de usator:"
 msgid "SMB authentication"
 msgstr ""
 
+#, c-format
+msgid ""
+"Cannot chdir to \"%s\"\n"
+"%s"
+msgstr ""
+
 msgid "Secure deletion"
 msgstr ""
 
@@ -2177,6 +2186,10 @@ msgstr ""
 
 msgid "No COW"
 msgstr ""
+
+#, fuzzy
+msgid "Direct access for files"
+msgstr "Cache de directorio explicate pro %s"
 
 msgid "Casefolded file"
 msgstr ""
@@ -2448,12 +2461,6 @@ msgid "Unable to save setup to %s"
 msgstr ""
 
 msgid "Cannot execute commands on non-local filesystems"
-msgstr ""
-
-#, c-format
-msgid ""
-"Cannot chdir to \"%s\"\n"
-"%s"
 msgstr ""
 
 msgid "Parameter"
@@ -2907,6 +2914,225 @@ msgstr ""
 msgid "Invalid source pattern '%s'"
 msgstr ""
 
+msgid "File listin&g"
+msgstr ""
+
+msgid "&Quick view"
+msgstr ""
+
+msgid "&Info"
+msgstr "&Info"
+
+msgid "&Tree"
+msgstr "&Arbore"
+
+msgid "&Listing format..."
+msgstr ""
+
+msgid "&Sort order..."
+msgstr ""
+
+msgid "&Filter..."
+msgstr ""
+
+msgid "&Encoding..."
+msgstr ""
+
+msgid "FT&P link..."
+msgstr "Ligamine FT&P..."
+
+msgid "S&hell link..."
+msgstr ""
+
+msgid "S&FTP link..."
+msgstr ""
+
+msgid "SM&B link..."
+msgstr ""
+
+msgid "Paneli&ze"
+msgstr ""
+
+msgid "&Rescan"
+msgstr ""
+
+msgid "&View"
+msgstr "&Vider"
+
+msgid "Vie&w file..."
+msgstr ""
+
+msgid "&Filtered view"
+msgstr ""
+
+msgid "&Copy"
+msgstr "&Copiar"
+
+msgid "C&hmod"
+msgstr ""
+
+msgid "&Link"
+msgstr "&Ligamine"
+
+msgid "&Symlink"
+msgstr ""
+
+msgid "Relative symlin&k"
+msgstr ""
+
+msgid "Edit s&ymlink"
+msgstr ""
+
+msgid "Ch&own"
+msgstr ""
+
+msgid "&Advanced chown"
+msgstr ""
+
+msgid "Cha&ttr"
+msgstr ""
+
+msgid "&Rename/Move"
+msgstr "&Renominar/Displaciar"
+
+msgid "&Mkdir"
+msgstr "&Crear dir"
+
+msgid "&Quick cd"
+msgstr ""
+
+msgid "Select &group"
+msgstr "Selige un &gruppo"
+
+msgid "U&nselect group"
+msgstr ""
+
+msgid "&Invert selection"
+msgstr ""
+
+msgid "E&xit"
+msgstr "E&xir"
+
+msgid "&User menu"
+msgstr ""
+
+msgid "&Directory tree"
+msgstr ""
+
+msgid "&Find file"
+msgstr ""
+
+msgid "S&wap panels"
+msgstr ""
+
+msgid "Switch &panels on/off"
+msgstr ""
+
+msgid "&Compare directories"
+msgstr ""
+
+msgid "C&ompare files"
+msgstr ""
+
+msgid "E&xternal panelize"
+msgstr ""
+
+msgid "Show directory s&izes"
+msgstr ""
+
+msgid "Command &history"
+msgstr ""
+
+msgid "Viewed/edited files hi&story"
+msgstr ""
+
+msgid "Di&rectory hotlist"
+msgstr ""
+
+msgid "&Active VFS list"
+msgstr ""
+
+msgid "&Background jobs"
+msgstr ""
+
+msgid "Screen lis&t"
+msgstr ""
+
+msgid "&Undelete files (ext2fs only)"
+msgstr ""
+
+msgid "&Listing format edit"
+msgstr ""
+
+msgid "Edit &extension file"
+msgstr ""
+
+msgid "Edit &menu file"
+msgstr ""
+
+msgid "Edit hi&ghlighting group file"
+msgstr ""
+
+msgid "&Configuration..."
+msgstr "&Configuration..."
+
+msgid "&Layout..."
+msgstr "&Disposition..."
+
+msgid "&Panel options..."
+msgstr "Optiones del &pannello..."
+
+msgid "C&onfirmation..."
+msgstr "C&onfirmation..."
+
+msgid "&Appearance..."
+msgstr ""
+
+msgid "&Display bits..."
+msgstr ""
+
+msgid "&Virtual FS..."
+msgstr ""
+
+msgid "Panels:"
+msgstr "Pannellos:"
+
+#, c-format
+msgid "You have %zu opened screen. Quit anyway?"
+msgid_plural "You have %zu opened screens. Quit anyway?"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "The Midnight Commander"
+msgstr ""
+
+msgid "Do you really want to quit the Midnight Commander?"
+msgstr ""
+
+msgid "&Above"
+msgstr ""
+
+msgid "&Left"
+msgstr ""
+
+msgid "&Below"
+msgstr ""
+
+msgid "&Right"
+msgstr ""
+
+msgid "ButtonBar|Menu"
+msgstr ""
+
+msgid "ButtonBar|View"
+msgstr ""
+
+msgid "ButtonBar|RenMov"
+msgstr ""
+
+msgid "ButtonBar|Mkdir"
+msgstr ""
+
 msgid "&Chdir"
 msgstr ""
 
@@ -2952,9 +3178,6 @@ msgstr ""
 
 msgid "Fir&st hit"
 msgstr ""
-
-msgid "&Tree"
-msgstr "&Arbore"
 
 msgid "Find File"
 msgstr ""
@@ -3209,222 +3432,6 @@ msgstr ""
 
 msgid "Layout"
 msgstr "Layout"
-
-msgid "File listin&g"
-msgstr ""
-
-msgid "&Quick view"
-msgstr ""
-
-msgid "&Info"
-msgstr "&Info"
-
-msgid "&Listing format..."
-msgstr ""
-
-msgid "&Sort order..."
-msgstr ""
-
-msgid "&Filter..."
-msgstr ""
-
-msgid "&Encoding..."
-msgstr ""
-
-msgid "FT&P link..."
-msgstr "Ligamine FT&P..."
-
-msgid "S&hell link..."
-msgstr ""
-
-msgid "S&FTP link..."
-msgstr ""
-
-msgid "SM&B link..."
-msgstr ""
-
-msgid "Paneli&ze"
-msgstr ""
-
-msgid "&Rescan"
-msgstr ""
-
-msgid "&View"
-msgstr "&Vider"
-
-msgid "Vie&w file..."
-msgstr ""
-
-msgid "&Filtered view"
-msgstr ""
-
-msgid "&Copy"
-msgstr "&Copiar"
-
-msgid "C&hmod"
-msgstr ""
-
-msgid "&Link"
-msgstr "&Ligamine"
-
-msgid "&Symlink"
-msgstr ""
-
-msgid "Relative symlin&k"
-msgstr ""
-
-msgid "Edit s&ymlink"
-msgstr ""
-
-msgid "Ch&own"
-msgstr ""
-
-msgid "&Advanced chown"
-msgstr ""
-
-msgid "Cha&ttr"
-msgstr ""
-
-msgid "&Rename/Move"
-msgstr "&Renominar/Displaciar"
-
-msgid "&Mkdir"
-msgstr "&Crear dir"
-
-msgid "&Quick cd"
-msgstr ""
-
-msgid "Select &group"
-msgstr "Selige un &gruppo"
-
-msgid "U&nselect group"
-msgstr ""
-
-msgid "&Invert selection"
-msgstr ""
-
-msgid "E&xit"
-msgstr "E&xir"
-
-msgid "&User menu"
-msgstr ""
-
-msgid "&Directory tree"
-msgstr ""
-
-msgid "&Find file"
-msgstr ""
-
-msgid "S&wap panels"
-msgstr ""
-
-msgid "Switch &panels on/off"
-msgstr ""
-
-msgid "&Compare directories"
-msgstr ""
-
-msgid "C&ompare files"
-msgstr ""
-
-msgid "E&xternal panelize"
-msgstr ""
-
-msgid "Show directory s&izes"
-msgstr ""
-
-msgid "Command &history"
-msgstr ""
-
-msgid "Viewed/edited files hi&story"
-msgstr ""
-
-msgid "Di&rectory hotlist"
-msgstr ""
-
-msgid "&Active VFS list"
-msgstr ""
-
-msgid "&Background jobs"
-msgstr ""
-
-msgid "Screen lis&t"
-msgstr ""
-
-msgid "&Undelete files (ext2fs only)"
-msgstr ""
-
-msgid "&Listing format edit"
-msgstr ""
-
-msgid "Edit &extension file"
-msgstr ""
-
-msgid "Edit &menu file"
-msgstr ""
-
-msgid "Edit hi&ghlighting group file"
-msgstr ""
-
-msgid "&Configuration..."
-msgstr "&Configuration..."
-
-msgid "&Layout..."
-msgstr "&Disposition..."
-
-msgid "&Panel options..."
-msgstr "Optiones del &pannello..."
-
-msgid "C&onfirmation..."
-msgstr "C&onfirmation..."
-
-msgid "&Appearance..."
-msgstr ""
-
-msgid "&Display bits..."
-msgstr ""
-
-msgid "&Virtual FS..."
-msgstr ""
-
-msgid "Panels:"
-msgstr "Pannellos:"
-
-#, c-format
-msgid "You have %zu opened screen. Quit anyway?"
-msgid_plural "You have %zu opened screens. Quit anyway?"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "The Midnight Commander"
-msgstr ""
-
-msgid "Do you really want to quit the Midnight Commander?"
-msgstr ""
-
-msgid "&Above"
-msgstr ""
-
-msgid "&Left"
-msgstr ""
-
-msgid "&Below"
-msgstr ""
-
-msgid "&Right"
-msgstr ""
-
-msgid "ButtonBar|Menu"
-msgstr ""
-
-msgid "ButtonBar|View"
-msgstr ""
-
-msgid "ButtonBar|RenMov"
-msgstr ""
-
-msgid "ButtonBar|Mkdir"
-msgstr ""
 
 msgid "Memory exhausted!"
 msgstr ""

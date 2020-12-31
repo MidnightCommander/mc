@@ -29,7 +29,7 @@
 
 #include "src/vfs/local/local.c"
 
-#include "src/filemanager/midnight.c"
+#include "src/filemanager/filemanager.c"
 
 #include "src/filemanager/ext.c"
 
@@ -71,7 +71,7 @@ START_TEST (sanitize_variables)
 {
     /* given */
     vfs_path_t *filename_vpath;
-    char *actual_string;
+    GString *actual_string;
     const char *expected_string;
 
     current_panel->selected = 0;
@@ -100,9 +100,9 @@ export MC_EXT_SELECTED\n\
 MC_EXT_ONLYTAGGED=\"tagged\\ file1.txt tagged\\ file2.txt \"\n\
 export MC_EXT_ONLYTAGGED\n";
 
-    mctest_assert_str_eq (actual_string, expected_string);
+    mctest_assert_str_eq (actual_string->str, expected_string);
 
-    g_free (actual_string);
+    g_string_free (actual_string, TRUE);
 }
 /* *INDENT-OFF* */
 END_TEST

@@ -191,6 +191,8 @@ handle_console_linux (console_action_t action)
             /* Bind the pipe 0 to the standard input */
             do
             {
+                gboolean ok;
+
                 if (dup2 (pipefd1[0], STDIN_FILENO) == -1)
                     break;
                 status = close (pipefd1[0]);
@@ -201,9 +203,13 @@ handle_console_linux (console_action_t action)
                 status = close (pipefd2[1]);
                 /* Bind standard error to /dev/null */
                 status = open ("/dev/null", O_WRONLY);
-                if (dup2 (status, STDERR_FILENO) == -1)
+                if (status == -1)
                     break;
+                ok = dup2 (status, STDERR_FILENO) != -1;
                 status = close (status);
+                if (!ok)
+                    break;
+
                 if (tty_name != NULL)
                 {
                     char *mc_conssaver;

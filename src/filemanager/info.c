@@ -50,7 +50,7 @@
 
 #include "src/setup.h"          /* panels_options */
 
-#include "midnight.h"           /* the_menubar */
+#include "filemanager.h"        /* the_menubar */
 #include "layout.h"
 #include "mountlist.h"
 #ifdef ENABLE_EXT2FS_ATTR

@@ -603,11 +603,12 @@ cpio_read_bin_head (struct vfs_class *me, struct vfs_s_super *super)
 #ifdef HAVE_STRUCT_STAT_ST_RDEV
     st.st_rdev = u.buf.c_rdev;
 #endif
-    st.st_size = (u.buf.c_filesizes[0] << 16) | u.buf.c_filesizes[1];
+    st.st_size = ((off_t) u.buf.c_filesizes[0] << 16) | u.buf.c_filesizes[1];
 #ifdef HAVE_STRUCT_STAT_ST_MTIM
     st.st_atim.tv_nsec = st.st_mtim.tv_nsec = st.st_ctim.tv_nsec = 0;
 #endif
-    st.st_atime = st.st_mtime = st.st_ctime = (u.buf.c_mtimes[0] << 16) | u.buf.c_mtimes[1];
+    st.st_atime = st.st_mtime = st.st_ctime =
+        ((time_t) u.buf.c_mtimes[0] << 16) | u.buf.c_mtimes[1];
 
     return cpio_create_entry (me, super, &st, name);
 }

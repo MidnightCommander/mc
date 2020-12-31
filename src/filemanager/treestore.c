@@ -242,7 +242,7 @@ tree_store_load_from (const char *name)
             char *lc_name;
 
             /* Skip invalid records */
-            if ((buffer[0] != '0' && buffer[0] != '1'))
+            if (buffer[0] != '0' && buffer[0] != '1')
                 continue;
 
             if (buffer[1] != ':')
@@ -269,7 +269,7 @@ tree_store_load_from (const char *name)
                         vfs_path_t *vpath;
 
                         vpath = vfs_path_from_str (oldname);
-                        strcpy (oldname + common, different);
+                        g_strlcpy (oldname + common, different, sizeof (oldname) - (size_t) common);
                         if (vfs_file_is_local (vpath))
                         {
                             vfs_path_t *tmp_vpath;
@@ -294,7 +294,7 @@ tree_store_load_from (const char *name)
                     e->scanned = scanned;
                 }
                 vfs_path_free (vpath);
-                strcpy (oldname, lc_name);
+                g_strlcpy (oldname, lc_name, sizeof (oldname));
             }
             g_free (lc_name);
         }

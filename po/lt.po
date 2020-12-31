@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-07-05 21:41+0400\n"
+"POT-Creation-Date: 2020-12-31 16:34+0300\n"
 "PO-Revision-Date: 2020-05-17 17:42+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Lithuanian (http://www.transifex.com/mc/mc/language/lt/)\n"
@@ -1936,6 +1936,9 @@ msgstr "Keisti parinktis"
 msgid "Skin:"
 msgstr "Išvaizda"
 
+msgid "&Shadows"
+msgstr ""
+
 msgid "Appearance"
 msgstr "Išvaizda"
 
@@ -2159,6 +2162,12 @@ msgstr "Prisijungimo vardas:"
 msgid "SMB authentication"
 msgstr ""
 
+#, c-format
+msgid ""
+"Cannot chdir to \"%s\"\n"
+"%s"
+msgstr ""
+
 msgid "Secure deletion"
 msgstr ""
 
@@ -2218,6 +2227,10 @@ msgstr ""
 
 msgid "No COW"
 msgstr ""
+
+#, fuzzy
+msgid "Direct access for files"
+msgstr "Aplanko „%s“ podėlis nebegalioja"
 
 msgid "Casefolded file"
 msgstr ""
@@ -2489,12 +2502,6 @@ msgid "Unable to save setup to %s"
 msgstr ""
 
 msgid "Cannot execute commands on non-local filesystems"
-msgstr ""
-
-#, c-format
-msgid ""
-"Cannot chdir to \"%s\"\n"
-"%s"
 msgstr ""
 
 msgid "Parameter"
@@ -2978,6 +2985,227 @@ msgstr "&Foninis režimas"
 msgid "Invalid source pattern '%s'"
 msgstr ""
 
+msgid "File listin&g"
+msgstr ""
+
+msgid "&Quick view"
+msgstr "Greitasis rodymas"
+
+msgid "&Info"
+msgstr "&Informacija"
+
+msgid "&Tree"
+msgstr "&Medis"
+
+msgid "&Listing format..."
+msgstr ""
+
+msgid "&Sort order..."
+msgstr "Rik. t&varka..."
+
+msgid "&Filter..."
+msgstr "&Filtras..."
+
+msgid "&Encoding..."
+msgstr ""
+
+msgid "FT&P link..."
+msgstr "FT&P ryšys..."
+
+msgid "S&hell link..."
+msgstr "Apli&nkos ryšys..."
+
+msgid "S&FTP link..."
+msgstr ""
+
+msgid "SM&B link..."
+msgstr "SM&B ryšys..."
+
+msgid "Paneli&ze"
+msgstr ""
+
+msgid "&Rescan"
+msgstr ""
+
+msgid "&View"
+msgstr "&Rodymas"
+
+msgid "Vie&w file..."
+msgstr "&Peržiūrėti failą..."
+
+msgid "&Filtered view"
+msgstr ""
+
+msgid "&Copy"
+msgstr "&Kopijuoti"
+
+msgid "C&hmod"
+msgstr "Leidimai (c&hmod)"
+
+msgid "&Link"
+msgstr "&Nuoroda"
+
+msgid "&Symlink"
+msgstr "Simbolinė nuoroda"
+
+msgid "Relative symlin&k"
+msgstr ""
+
+msgid "Edit s&ymlink"
+msgstr ""
+
+msgid "Ch&own"
+msgstr "Keisti savininką (ch&own)"
+
+msgid "&Advanced chown"
+msgstr ""
+
+msgid "Cha&ttr"
+msgstr ""
+
+msgid "&Rename/Move"
+msgstr "Pe&rvadinti/Perkelti"
+
+msgid "&Mkdir"
+msgstr "Mkdir"
+
+msgid "&Quick cd"
+msgstr "Greitas cd"
+
+msgid "Select &group"
+msgstr "Pasirinkti &grupę"
+
+msgid "U&nselect group"
+msgstr "Šali&nti iš parinktųjų grupės"
+
+msgid "&Invert selection"
+msgstr "Atv&irkštinis pasirinkimas"
+
+msgid "E&xit"
+msgstr "Išeiti"
+
+msgid "&User menu"
+msgstr "Vartotojo meni&u"
+
+msgid "&Directory tree"
+msgstr "&Aplankų medis"
+
+msgid "&Find file"
+msgstr "&Rasti failą"
+
+msgid "S&wap panels"
+msgstr ""
+
+msgid "Switch &panels on/off"
+msgstr ""
+
+msgid "&Compare directories"
+msgstr "Palyginti katalogus"
+
+msgid "C&ompare files"
+msgstr "Palyginti failus"
+
+msgid "E&xternal panelize"
+msgstr ""
+
+msgid "Show directory s&izes"
+msgstr "Rodyti aplankų dydžius"
+
+msgid "Command &history"
+msgstr "Komandų istorija"
+
+msgid "Viewed/edited files hi&story"
+msgstr ""
+
+msgid "Di&rectory hotlist"
+msgstr "Aplankų są&rašas"
+
+msgid "&Active VFS list"
+msgstr ""
+
+msgid "&Background jobs"
+msgstr "&Foninio režimo užduotys"
+
+msgid "Screen lis&t"
+msgstr ""
+
+msgid "&Undelete files (ext2fs only)"
+msgstr "Atk&urti failus  (tik ext2fs)"
+
+msgid "&Listing format edit"
+msgstr "Keisti r&odymo formatą"
+
+msgid "Edit &extension file"
+msgstr "K&eisti plėtinių failą"
+
+msgid "Edit &menu file"
+msgstr "Keisti &meniu failą"
+
+msgid "Edit hi&ghlighting group file"
+msgstr ""
+
+msgid "&Configuration..."
+msgstr "Konfigūra&cija..."
+
+msgid "&Layout..."
+msgstr "&Išdėstymas..."
+
+msgid "&Panel options..."
+msgstr "Skydelio &parinktys..."
+
+msgid "C&onfirmation..."
+msgstr "Patvirtinimas..."
+
+msgid "&Appearance..."
+msgstr "Išvaizda..."
+
+msgid "&Display bits..."
+msgstr "Iš&vesties bitai..."
+
+msgid "&Virtual FS..."
+msgstr "&Virtuali failų sistema..."
+
+msgid "Panels:"
+msgstr ""
+
+#, c-format
+msgid "You have %zu opened screen. Quit anyway?"
+msgid_plural "You have %zu opened screens. Quit anyway?"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+msgid "The Midnight Commander"
+msgstr ""
+
+msgid "Do you really want to quit the Midnight Commander?"
+msgstr ""
+
+msgid "&Above"
+msgstr "&Viršuj"
+
+msgid "&Left"
+msgstr "Kairė"
+
+msgid "&Below"
+msgstr ""
+
+msgid "&Right"
+msgstr "Dešinė"
+
+msgid "ButtonBar|Menu"
+msgstr ""
+
+msgid "ButtonBar|View"
+msgstr "ButtonBar|Rodyt"
+
+msgid "ButtonBar|RenMov"
+msgstr "ButtonBar|Perkelt"
+
+msgid "ButtonBar|Mkdir"
+msgstr "ButtonBar|Kurt-Aplanką"
+
 msgid "&Chdir"
 msgstr "&Eiti į katal."
 
@@ -3023,9 +3251,6 @@ msgstr "Visos &koduotės"
 
 msgid "Fir&st hit"
 msgstr ""
-
-msgid "&Tree"
-msgstr "&Medis"
 
 msgid "Find File"
 msgstr "Rasti failą"
@@ -3286,224 +3511,6 @@ msgstr ""
 
 msgid "Layout"
 msgstr "Išdėstymas"
-
-msgid "File listin&g"
-msgstr ""
-
-msgid "&Quick view"
-msgstr "Greitasis rodymas"
-
-msgid "&Info"
-msgstr "&Informacija"
-
-msgid "&Listing format..."
-msgstr ""
-
-msgid "&Sort order..."
-msgstr "Rik. t&varka..."
-
-msgid "&Filter..."
-msgstr "&Filtras..."
-
-msgid "&Encoding..."
-msgstr ""
-
-msgid "FT&P link..."
-msgstr "FT&P ryšys..."
-
-msgid "S&hell link..."
-msgstr "Apli&nkos ryšys..."
-
-msgid "S&FTP link..."
-msgstr ""
-
-msgid "SM&B link..."
-msgstr "SM&B ryšys..."
-
-msgid "Paneli&ze"
-msgstr ""
-
-msgid "&Rescan"
-msgstr ""
-
-msgid "&View"
-msgstr "&Rodymas"
-
-msgid "Vie&w file..."
-msgstr "&Peržiūrėti failą..."
-
-msgid "&Filtered view"
-msgstr ""
-
-msgid "&Copy"
-msgstr "&Kopijuoti"
-
-msgid "C&hmod"
-msgstr "Leidimai (c&hmod)"
-
-msgid "&Link"
-msgstr "&Nuoroda"
-
-msgid "&Symlink"
-msgstr "Simbolinė nuoroda"
-
-msgid "Relative symlin&k"
-msgstr ""
-
-msgid "Edit s&ymlink"
-msgstr ""
-
-msgid "Ch&own"
-msgstr "Keisti savininką (ch&own)"
-
-msgid "&Advanced chown"
-msgstr ""
-
-msgid "Cha&ttr"
-msgstr ""
-
-msgid "&Rename/Move"
-msgstr "Pe&rvadinti/Perkelti"
-
-msgid "&Mkdir"
-msgstr "Mkdir"
-
-msgid "&Quick cd"
-msgstr "Greitas cd"
-
-msgid "Select &group"
-msgstr "Pasirinkti &grupę"
-
-msgid "U&nselect group"
-msgstr "Šali&nti iš parinktųjų grupės"
-
-msgid "&Invert selection"
-msgstr "Atv&irkštinis pasirinkimas"
-
-msgid "E&xit"
-msgstr "Išeiti"
-
-msgid "&User menu"
-msgstr "Vartotojo meni&u"
-
-msgid "&Directory tree"
-msgstr "&Aplankų medis"
-
-msgid "&Find file"
-msgstr "&Rasti failą"
-
-msgid "S&wap panels"
-msgstr ""
-
-msgid "Switch &panels on/off"
-msgstr ""
-
-msgid "&Compare directories"
-msgstr "Palyginti katalogus"
-
-msgid "C&ompare files"
-msgstr "Palyginti failus"
-
-msgid "E&xternal panelize"
-msgstr ""
-
-msgid "Show directory s&izes"
-msgstr "Rodyti aplankų dydžius"
-
-msgid "Command &history"
-msgstr "Komandų istorija"
-
-msgid "Viewed/edited files hi&story"
-msgstr ""
-
-msgid "Di&rectory hotlist"
-msgstr "Aplankų są&rašas"
-
-msgid "&Active VFS list"
-msgstr ""
-
-msgid "&Background jobs"
-msgstr "&Foninio režimo užduotys"
-
-msgid "Screen lis&t"
-msgstr ""
-
-msgid "&Undelete files (ext2fs only)"
-msgstr "Atk&urti failus  (tik ext2fs)"
-
-msgid "&Listing format edit"
-msgstr "Keisti r&odymo formatą"
-
-msgid "Edit &extension file"
-msgstr "K&eisti plėtinių failą"
-
-msgid "Edit &menu file"
-msgstr "Keisti &meniu failą"
-
-msgid "Edit hi&ghlighting group file"
-msgstr ""
-
-msgid "&Configuration..."
-msgstr "Konfigūra&cija..."
-
-msgid "&Layout..."
-msgstr "&Išdėstymas..."
-
-msgid "&Panel options..."
-msgstr "Skydelio &parinktys..."
-
-msgid "C&onfirmation..."
-msgstr "Patvirtinimas..."
-
-msgid "&Appearance..."
-msgstr "Išvaizda..."
-
-msgid "&Display bits..."
-msgstr "Iš&vesties bitai..."
-
-msgid "&Virtual FS..."
-msgstr "&Virtuali failų sistema..."
-
-msgid "Panels:"
-msgstr ""
-
-#, c-format
-msgid "You have %zu opened screen. Quit anyway?"
-msgid_plural "You have %zu opened screens. Quit anyway?"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-
-msgid "The Midnight Commander"
-msgstr ""
-
-msgid "Do you really want to quit the Midnight Commander?"
-msgstr ""
-
-msgid "&Above"
-msgstr "&Viršuj"
-
-msgid "&Left"
-msgstr "Kairė"
-
-msgid "&Below"
-msgstr ""
-
-msgid "&Right"
-msgstr "Dešinė"
-
-msgid "ButtonBar|Menu"
-msgstr ""
-
-msgid "ButtonBar|View"
-msgstr "ButtonBar|Rodyt"
-
-msgid "ButtonBar|RenMov"
-msgstr "ButtonBar|Perkelt"
-
-msgid "ButtonBar|Mkdir"
-msgstr "ButtonBar|Kurt-Aplanką"
 
 msgid "Memory exhausted!"
 msgstr ""
