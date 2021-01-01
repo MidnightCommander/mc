@@ -2061,26 +2061,23 @@ edit_load_macro_cmd (WEdit * edit)
 
         for (curr_values = values; *curr_values != NULL && *curr_values[0] != '\0'; curr_values++)
         {
-            char **macro_pair = NULL;
+            char **macro_pair;
 
             macro_pair = g_strsplit (*curr_values, ":", 2);
+
             if (macro_pair != NULL)
             {
-                macro_action_t m_act;
-                if (macro_pair[0] == NULL || macro_pair[0][0] == '\0')
-                    m_act.action = 0;
-                else
-                {
+                macro_action_t m_act = {
+                    .action = 0,
+                    .ch = -1
+                };
+
+                if (macro_pair[0] != NULL && macro_pair[0][0] != '\0')
                     m_act.action = keybind_lookup_action (macro_pair[0]);
-                    MC_PTR_FREE (macro_pair[0]);
-                }
-                if (macro_pair[1] == NULL || macro_pair[1][0] == '\0')
-                    m_act.ch = -1;
-                else
-                {
+
+                if (macro_pair[1] != NULL && macro_pair[1][0] != '\0')
                     m_act.ch = strtol (macro_pair[1], NULL, 0);
-                    MC_PTR_FREE (macro_pair[1]);
-                }
+
                 if (m_act.action != 0)
                 {
                     /* a shell command */
@@ -2092,8 +2089,8 @@ edit_load_macro_cmd (WEdit * edit)
                     g_array_append_val (macros, m_act);
                     have_macro = TRUE;
                 }
+
                 g_strfreev (macro_pair);
-                macro_pair = NULL;
             }
         }
 
@@ -2103,6 +2100,8 @@ edit_load_macro_cmd (WEdit * edit)
             macro.macro = macros;
             g_array_append_val (macros_list, macro);
         }
+        else
+            g_array_free (macros, TRUE);
 
         g_strfreev (values);
     }
