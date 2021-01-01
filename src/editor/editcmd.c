@@ -1988,38 +1988,40 @@ edit_store_macro_cmd (WEdit * edit)
 gboolean
 edit_repeat_macro_cmd (WEdit * edit)
 {
-    int i, j;
+    gboolean ok;
     char *f;
-    long count_repeat;
-    char *error = NULL;
+    long count_repeat = 0;
 
     f = input_dialog (_("Repeat last commands"), _("Repeat times:"), MC_HISTORY_EDIT_REPEAT, NULL,
                       INPUT_COMPLETE_NONE);
-    if (f == NULL || *f == '\0')
-    {
-        g_free (f);
-        return FALSE;
-    }
+    ok = (f != NULL && *f != '\0');
 
-    count_repeat = strtol (f, &error, 0);
-
-    if (*error != '\0')
+    if (ok)
     {
-        g_free (f);
-        return FALSE;
+        char *error = NULL;
+
+        count_repeat = strtol (f, &error, 0);
+
+        ok = (*error == '\0');
     }
 
     g_free (f);
 
-    edit_push_undo_action (edit, KEY_PRESS + edit->start_display);
-    edit->force |= REDRAW_PAGE;
+    if (ok)
+    {
+        int i, j;
 
-    for (j = 0; j < count_repeat; j++)
-        for (i = 0; i < macro_index; i++)
-            edit_execute_cmd (edit, record_macro_buf[i].action, record_macro_buf[i].ch);
+        edit_push_undo_action (edit, KEY_PRESS + edit->start_display);
+        edit->force |= REDRAW_PAGE;
 
-    edit_update_screen (edit);
-    return TRUE;
+        for (j = 0; j < count_repeat; j++)
+            for (i = 0; i < macro_index; i++)
+                edit_execute_cmd (edit, record_macro_buf[i].action, record_macro_buf[i].ch);
+
+        edit_update_screen (edit);
+    }
+
+    return ok;
 }
 
 /* --------------------------------------------------------------------------------------------- */
