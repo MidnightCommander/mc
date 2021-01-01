@@ -2051,11 +2051,9 @@ edit_load_macro_cmd (WEdit * edit)
     for (profile_keys = keys; *profile_keys != NULL; profile_keys++)
     {
         int hotkey;
-        gboolean have_macro = FALSE;
-        GArray *macros;
+        GArray *macros = NULL;
         macros_t macro;
 
-        macros = g_array_new (TRUE, FALSE, sizeof (macro_action_t));
         values = mc_config_get_string_list (macros_config, section_name, *profile_keys, NULL);
         hotkey = lookup_key (*profile_keys, NULL);
 
@@ -2083,25 +2081,28 @@ edit_load_macro_cmd (WEdit * edit)
                     /* a shell command */
                     if ((m_act.action / CK_PipeBlock (0)) == 1)
                     {
-                        m_act.action = CK_PipeBlock (0) + (m_act.ch > 0 ? m_act.ch : 0);
+                        m_act.action = CK_PipeBlock (0);
+                        if (m_act.ch > 0)
+                            m_act.action += m_act.ch;
                         m_act.ch = -1;
                     }
+
+                    if (macros == NULL)
+                        macros = g_array_new (TRUE, FALSE, sizeof (m_act));
+
                     g_array_append_val (macros, m_act);
-                    have_macro = TRUE;
                 }
 
                 g_strfreev (macro_pair);
             }
         }
 
-        if (have_macro)
+        if (macros != NULL)
         {
             macro.hotkey = hotkey;
             macro.macro = macros;
             g_array_append_val (macros_list, macro);
         }
-        else
-            g_array_free (macros, TRUE);
 
         g_strfreev (values);
     }
