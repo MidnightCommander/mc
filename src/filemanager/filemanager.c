@@ -1617,7 +1617,7 @@ midnight_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
         /* Handle shortcuts, menu, and buttonbar. */
         return midnight_execute_cmd (sender, parm);
 
-    case MSG_END:
+    case MSG_DESTROY:
         panel_deinit ();
         return MSG_HANDLED;
 

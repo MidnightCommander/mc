@@ -334,9 +334,17 @@ dlg_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
 {
     switch (msg)
     {
+    case MSG_INIT:
+        /* nothing to init in dialog itself */
+        return MSG_HANDLED;
+
     case MSG_IDLE:
         /* we don't want endless loop */
         widget_idle (w, FALSE);
+        return MSG_HANDLED;
+
+    case MSG_DESTROY:
+        /* nothing to deinit in dialog itself */
         return MSG_HANDLED;
 
     default:
@@ -585,6 +593,7 @@ dlg_destroy (WDialog * h)
     /* if some widgets have history, save all history at one moment here */
     dlg_save_history (h);
     group_default_callback (WIDGET (h), NULL, MSG_DESTROY, 0, NULL);
+    send_message (WIDGET (h), NULL, MSG_DESTROY, 0, NULL);
     mc_event_group_del (h->event_group);
     g_free (h->event_group);
     g_free (h);

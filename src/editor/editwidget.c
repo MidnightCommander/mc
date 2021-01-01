@@ -822,7 +822,7 @@ edit_dialog_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
         edit_quit (h);
         return MSG_HANDLED;
 
-    case MSG_END:
+    case MSG_DESTROY:
         edit_dlg_deinit ();
         return MSG_HANDLED;
 
