@@ -2,7 +2,7 @@
    Input line filename/username/hostname/variable/command completion.
    (Let mc type for you...)
 
-   Copyright (C) 1995-2020
+   Copyright (C) 1995-2021
    Free Software Foundation, Inc.
 
    Written by:

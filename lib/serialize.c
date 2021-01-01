@@ -1,7 +1,7 @@
 /*
    Provides a serialize/unserialize functionality for INI-like formats.
 
-   Copyright (C) 2011-2020
+   Copyright (C) 2011-2021
    Free Software Foundation, Inc.
 
    Written by:

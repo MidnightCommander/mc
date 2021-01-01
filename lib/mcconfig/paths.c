@@ -1,7 +1,7 @@
 /*
    paths to configuration files
 
-   Copyright (C) 2010-2020
+   Copyright (C) 2010-2021
    Free Software Foundation, Inc.
 
    Written by:

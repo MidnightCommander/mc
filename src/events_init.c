@@ -1,7 +1,7 @@
 /*
    Event callbacks initialization
 
-   Copyright (C) 2011-2020
+   Copyright (C) 2011-2021
    Free Software Foundation, Inc.
 
    Written by:

@@ -2,7 +2,7 @@
    Search text engine.
    Plain search
 
-   Copyright (C) 2009-2020
+   Copyright (C) 2009-2021
    Free Software Foundation, Inc.
 
    Written by:

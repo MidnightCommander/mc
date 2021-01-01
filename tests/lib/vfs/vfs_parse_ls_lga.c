@@ -1,7 +1,7 @@
 /*
    lib/vfs - test vfs_parse_ls_lga() functionality
 
-   Copyright (C) 2011-2020
+   Copyright (C) 2011-2021
    Free Software Foundation, Inc.
 
    Written by:

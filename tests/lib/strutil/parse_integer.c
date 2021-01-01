@@ -1,7 +1,7 @@
 /*
    lib/strutil - tests for lib/strutil/parse_integer function.
 
-   Copyright (C) 2013-2020
+   Copyright (C) 2013-2021
    Free Software Foundation, Inc.
 
    Written by:

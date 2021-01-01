@@ -1,7 +1,7 @@
 /*
    lib/vfs - test vfs_s_get_path() function
 
-   Copyright (C) 2011-2020
+   Copyright (C) 2011-2021
    Free Software Foundation, Inc.
 
    Written by:

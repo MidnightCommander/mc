@@ -1,7 +1,7 @@
 /*
    Directory routines
 
-   Copyright (C) 1994-2020
+   Copyright (C) 1994-2021
    Free Software Foundation, Inc.
 
    Written by:

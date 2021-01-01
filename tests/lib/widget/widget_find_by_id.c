@@ -1,7 +1,7 @@
 /*
    libmc - checks for search widget with requested ID
 
-   Copyright (C) 2020
+   Copyright (C) 2020-2021
    The Free Software Foundation, Inc.
 
    Written by:
