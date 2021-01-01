@@ -1906,14 +1906,13 @@ edit_store_macro_cmd (WEdit * edit)
 {
     int i;
     int hotkey;
-    GString *marcros_string;
-    mc_config_t *macros_config = NULL;
+    GString *macros_string = NULL;
     const char *section_name = "editor";
     gchar *macros_fname;
-    GArray *macros;             /* current macro */
+    GArray *macros = NULL;
     int tmp_act;
-    gboolean have_macro = FALSE;
-    char *skeyname = NULL;
+    mc_config_t *macros_config;
+    char *skeyname;
 
     hotkey =
         editcmd_dialog_raw_key_query (_("Save macro"), _("Press the macro's new hotkey:"), TRUE);
@@ -1921,7 +1920,6 @@ edit_store_macro_cmd (WEdit * edit)
         return FALSE;
 
     tmp_act = keybind_lookup_keymap_command (WIDGET (edit)->keymap, hotkey);
-
     /* return FALSE if try assign macro into restricted hotkeys */
     if (tmp_act == CK_MacroStartRecord
         || tmp_act == CK_MacroStopRecord || tmp_act == CK_MacroStartStopRecord)
@@ -1938,9 +1936,6 @@ edit_store_macro_cmd (WEdit * edit)
 
     edit_push_undo_action (edit, KEY_PRESS + edit->start_display);
 
-    marcros_string = g_string_sized_new (250);
-    macros = g_array_new (TRUE, FALSE, sizeof (macro_action_t));
-
     skeyname = lookup_key_by_code (hotkey);
 
     for (i = 0; i < macro_index; i++)
@@ -1949,23 +1944,23 @@ edit_store_macro_cmd (WEdit * edit)
         const char *action_name;
 
         action_name = keybind_lookup_actionname (record_macro_buf[i].action);
-
         if (action_name == NULL)
             break;
+
+        if (macros == NULL)
+        {
+            macros = g_array_new (TRUE, FALSE, sizeof (macro_action_t));
+            macros_string = g_string_sized_new (250);
+        }
 
         m_act.action = record_macro_buf[i].action;
         m_act.ch = record_macro_buf[i].ch;
         g_array_append_val (macros, m_act);
-        have_macro = TRUE;
-        g_string_append_printf (marcros_string, "%s:%i;", action_name,
-                                (int) record_macro_buf[i].ch);
+        g_string_append_printf (macros_string, "%s:%i;", action_name, (int) record_macro_buf[i].ch);
     }
 
-    if (!have_macro)
-    {
+    if (macros == NULL)
         mc_config_del_key (macros_config, section_name, skeyname);
-        g_array_free (macros, TRUE);
-    }
     else
     {
         macros_t macro;
@@ -1973,15 +1968,18 @@ edit_store_macro_cmd (WEdit * edit)
         macro.hotkey = hotkey;
         macro.macro = macros;
         g_array_append_val (macros_list, macro);
-        mc_config_set_string (macros_config, section_name, skeyname, marcros_string->str);
+        mc_config_set_string (macros_config, section_name, skeyname, macros_string->str);
     }
 
     g_free (skeyname);
+
     edit_macro_sort_by_hotkey ();
 
-    g_string_free (marcros_string, TRUE);
+    if (macros_string != NULL)
+        g_string_free (macros_string, TRUE);
     mc_config_save_file (macros_config, NULL);
     mc_config_deinit (macros_config);
+
     return TRUE;
 }
 
