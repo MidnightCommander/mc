@@ -1081,11 +1081,11 @@ edit_fhl_cmd (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-hotlist_cmd (void)
+hotlist_cmd (WPanel * panel)
 {
     char *target;
 
-    target = hotlist_show (LIST_HOTLIST);
+    target = hotlist_show (LIST_HOTLIST, panel);
     if (target == NULL)
         return;
 
@@ -1115,12 +1115,12 @@ hotlist_cmd (void)
 
 #ifdef ENABLE_VFS
 void
-vfs_list (void)
+vfs_list (WPanel * panel)
 {
     char *target;
     vfs_path_t *target_vpath;
 
-    target = hotlist_show (LIST_VFSLIST);
+    target = hotlist_show (LIST_VFSLIST, panel);
     if (target == NULL)
         return;
 

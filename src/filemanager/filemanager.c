@@ -1331,7 +1331,7 @@ midnight_execute_cmd (Widget * sender, long command)
         quick_cd_cmd (current_panel);
         break;
     case CK_HotList:
-        hotlist_cmd ();
+        hotlist_cmd (current_panel);
         break;
     case CK_PanelQuickView:
         if (sender == WIDGET (the_menubar))
@@ -1356,7 +1356,7 @@ midnight_execute_cmd (Widget * sender, long command)
         break;
 #ifdef ENABLE_VFS
     case CK_VfsList:
-        vfs_list ();
+        vfs_list (current_panel);
         break;
 #endif
     case CK_SaveSetup:

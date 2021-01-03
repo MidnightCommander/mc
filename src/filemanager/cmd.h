@@ -68,11 +68,11 @@ void delete_cmd (WPanel * panel);
 void delete_cmd_local (WPanel * panel);
 void filter_cmd (void);
 void reread_cmd (void);
-void vfs_list (void);
+void vfs_list (WPanel * panel);
 void ext_cmd (void);
 void edit_mc_menu_cmd (void);
 void edit_fhl_cmd (void);
-void hotlist_cmd (void);
+void hotlist_cmd (WPanel * panel);
 void compare_dirs_cmd (void);
 #ifdef USE_DIFF_VIEW
 void diff_view_cmd (void);

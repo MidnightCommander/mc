@@ -1632,10 +1632,13 @@ add2hotlist_cmd (WPanel * panel)
 /* --------------------------------------------------------------------------------------------- */
 
 char *
-hotlist_show (hotlist_t list_type)
+hotlist_show (hotlist_t list_type, WPanel * panel)
 {
     char *target = NULL;
     int res;
+
+    /* extra variable to use it in the button callback */
+    our_panel = panel;
 
     hotlist_state.type = list_type;
     load_hotlist ();
