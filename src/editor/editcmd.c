@@ -1501,27 +1501,26 @@ edit_macro_sort_by_hotkey (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static gboolean
-edit_get_macro (WEdit * edit, int hotkey, const macros_t ** macros, guint * indx)
+static int
+edit_get_macro (WEdit * edit, int hotkey)
 {
-    const macros_t *array_start = &g_array_index (macros_list, struct macros_t, 0);
+    macros_t *array_start;
     macros_t *result;
-    macros_t search_macro;
+    macros_t search_macro = {
+        .hotkey = hotkey
+    };
 
     (void) edit;
 
-    search_macro.hotkey = hotkey;
     result = bsearch (&search_macro, macros_list->data, macros_list->len,
                       sizeof (macros_t), (GCompareFunc) edit_macro_comparator);
 
-    if (result != NULL && result->macro != NULL)
-    {
-        *indx = (result - array_start);
-        *macros = result;
-        return TRUE;
-    }
-    *indx = 0;
-    return FALSE;
+    if (result == NULL || result->macro == NULL)
+        return (-1);
+
+    array_start = &g_array_index (macros_list, struct macros_t, 0);
+
+    return (int) (result - array_start);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1533,16 +1532,16 @@ edit_delete_macro (WEdit * edit, int hotkey)
     mc_config_t *macros_config = NULL;
     const char *section_name = "editor";
     gchar *macros_fname;
-    guint indx;
+    int indx;
     char *skeyname;
-    const macros_t *macros = NULL;
 
     /* clear array of actions for current hotkey */
-    while (edit_get_macro (edit, hotkey, &macros, &indx))
+    while ((indx = edit_get_macro (edit, hotkey) != -1))
     {
-        if (macros->macro != NULL)
-            g_array_free (macros->macro, TRUE);
-        macros = NULL;
+        macros_t *macros;
+
+        macros = &g_array_index (macros_list, struct macros_t, indx);
+        g_array_free (macros->macro, TRUE);
         g_array_remove_index (macros_list, indx);
         edit_macro_sort_by_hotkey ();
     }
@@ -1874,23 +1873,28 @@ edit_execute_macro (WEdit * edit, int hotkey)
 
     if (hotkey != 0)
     {
-        const macros_t *macros;
-        guint indx;
+        int indx;
 
-        if (edit_get_macro (edit, hotkey, &macros, &indx) &&
-            macros->macro != NULL && macros->macro->len != 0)
+        indx = edit_get_macro (edit, hotkey);
+        if (indx != -1)
         {
-            guint i;
+            const macros_t *macros;
 
-            edit->force |= REDRAW_PAGE;
-
-            for (i = 0; i < macros->macro->len; i++)
+            macros = &g_array_index (macros_list, struct macros_t, indx);
+            if (macros->macro->len != 0)
             {
-                const macro_action_t *m_act;
+                guint i;
 
-                m_act = &g_array_index (macros->macro, struct macro_action_t, i);
-                edit_execute_cmd (edit, m_act->action, m_act->ch);
-                res = TRUE;
+                edit->force |= REDRAW_PAGE;
+
+                for (i = 0; i < macros->macro->len; i++)
+                {
+                    const macro_action_t *m_act;
+
+                    m_act = &g_array_index (macros->macro, struct macro_action_t, i);
+                    edit_execute_cmd (edit, m_act->action, m_act->ch);
+                    res = TRUE;
+                }
             }
         }
     }
