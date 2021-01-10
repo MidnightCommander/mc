@@ -77,7 +77,7 @@ str_replace_all (const char *haystack, const char *needle, const char *replaceme
 
     needle_len = strlen (needle);
 
-    str_splints = g_ptr_array_new ();
+    str_splints = g_ptr_array_new_with_free_func (g_free);
 
     while (TRUE)
     {
@@ -109,7 +109,6 @@ str_replace_all (const char *haystack, const char *needle, const char *replaceme
     }
     return_str = str_ptr_array_join (str_splints);
 
-    g_ptr_array_foreach (str_splints, (GFunc) g_free, NULL);
     g_ptr_array_free (str_splints, TRUE);
 
     return g_string_free (return_str, FALSE);
