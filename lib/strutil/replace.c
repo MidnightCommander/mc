@@ -41,7 +41,7 @@
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-static char *
+static GString *
 str_ptr_array_join (const GPtrArray * str_splints)
 {
     GString *return_str;
@@ -51,7 +51,7 @@ str_ptr_array_join (const GPtrArray * str_splints)
     for (i = 0; i < str_splints->len; i++)
         g_string_append (return_str, g_ptr_array_index (str_splints, i));
 
-    return g_string_free (return_str, FALSE);
+    return return_str;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -73,7 +73,7 @@ str_replace_all (const char *haystack, const char *needle, const char *replaceme
 {
     size_t needle_len;
     GPtrArray *str_splints;
-    char *return_str;
+    GString *return_str;
 
     needle_len = strlen (needle);
 
@@ -112,7 +112,7 @@ str_replace_all (const char *haystack, const char *needle, const char *replaceme
     g_ptr_array_foreach (str_splints, (GFunc) g_free, NULL);
     g_ptr_array_free (str_splints, TRUE);
 
-    return return_str;
+    return g_string_free (return_str, FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
