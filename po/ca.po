@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# Antoni Bella Pérez <antonibella5@yahoo.com>, 2017-2020
+# Antoni Bella Pérez <antonibella5@yahoo.com>, 2017-2021
 # Daniel <danicases@gmail.com>, 2011
 # Daniel <danicases@gmail.com>, 2011-2012
 # Daniel <danicases@gmail.com>, 2012
@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-12-31 16:34+0300\n"
-"PO-Revision-Date: 2020-05-18 08:43+0000\n"
+"POT-Creation-Date: 2021-01-10 13:15+0100\n"
+"PO-Revision-Date: 2021-01-03 19:08+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/mc/mc/language/ca/)\n"
 "Language: ca\n"
@@ -1869,7 +1869,7 @@ msgid "other"
 msgstr "altres"
 
 msgid "Flag"
-msgstr "Bandera"
+msgstr "Indicador"
 
 #, c-format
 msgid "Permissions (octal): %o"
@@ -2000,7 +2000,7 @@ msgid "Skin:"
 msgstr "Tema:"
 
 msgid "&Shadows"
-msgstr ""
+msgstr "Ombre&s"
 
 msgid "Appearance"
 msgstr "Aparença"
@@ -2285,29 +2285,28 @@ msgid "Top of directory hierarchies"
 msgstr "Començament de les jerarquies de directori"
 
 msgid "Inode uses extents"
-msgstr ""
+msgstr "L'ínode usa extensions"
 
 msgid "Huge_file"
-msgstr ""
+msgstr "Fitxer_enorme"
 
 msgid "No COW"
-msgstr ""
+msgstr "Sense COW"
 
-#, fuzzy
 msgid "Direct access for files"
-msgstr "El directori de la memòria cau ha caducat per %s"
+msgstr "Accés directe als fitxers"
 
 msgid "Casefolded file"
-msgstr ""
+msgstr "Fitxer insensible a majúscules"
 
 msgid "Inode has inline data"
-msgstr ""
+msgstr "L'ínode té dades incloses"
 
 msgid "Project hierarchy"
-msgstr ""
+msgstr "Jerarquia del projecte"
 
 msgid "Verity protected inode"
-msgstr ""
+msgstr "Ínode protegit de veritat"
 
 msgid "&Marked all"
 msgstr "&Marca'ls tots"
@@ -2319,22 +2318,26 @@ msgid "C&lear marked"
 msgstr "&Esborra els marcats"
 
 msgid "Chattr command"
-msgstr ""
+msgstr "Ordre «chattr»"
 
 #, c-format
 msgid ""
 "Cannot chattr \"%s\"\n"
 "%s"
 msgstr ""
+"No s'ha pogut fer chattr «%s»\n"
+"%s"
 
 msgid "Cannot change attributes on non-local filesystems"
-msgstr ""
+msgstr "No es poden canviar els atributs en sistemes de fitxers no locals"
 
 #, c-format
 msgid ""
 "Cannot get flags of \"%s\"\n"
 "%s"
 msgstr ""
+"No s'han pogut obtenir els indicadors de «%s»\n"
+"%s"
 
 msgid "set &user ID on execution"
 msgstr "estableix l'ID d'&usuari en l'execució"
@@ -3184,7 +3187,7 @@ msgid "&Advanced chown"
 msgstr "C&anvi avançat del propietari"
 
 msgid "Cha&ttr"
-msgstr ""
+msgstr "Cha&ttr"
 
 msgid "&Rename/Move"
 msgstr "&Reanomena/Mou"
@@ -4388,7 +4391,7 @@ msgid ""
 "Warning: Invalid flag %c in %s:\n"
 "%s\n"
 msgstr ""
-"Avís: Bandera %c no vàlida a %s:\n"
+"Avís: Indicador %c no vàlid a %s:\n"
 "%s\n"
 
 #, c-format

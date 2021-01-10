@@ -6,16 +6,16 @@
 # Slava Zanko <slavazanko@gmail.com>, 2011
 # Viktar Palstsiuk <vipals@gmail.com>, 2015
 # Yury V. Zaytsev <yury@shurup.com>, 2019
-# Zmicer Turok <nashtlumach@gmail.com>, 2018
-# Zmicer Turok <nashtlumach@gmail.com>, 2018
+# Źmicier Turok <nashtlumach@gmail.com>, 2018
+# Źmicier Turok <nashtlumach@gmail.com>, 2018
 # Zmicer Turok <zmicerturok@gmail.com >, 2017-2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-12-31 16:34+0300\n"
-"PO-Revision-Date: 2020-06-03 11:35+0000\n"
-"Last-Translator: Zmicer Turok <nashtlumach@gmail.com>\n"
+"POT-Creation-Date: 2021-01-10 13:15+0100\n"
+"PO-Revision-Date: 2020-12-31 14:19+0000\n"
+"Last-Translator: Transifex Bot <>\n"
 "Language-Team: Belarusian (http://www.transifex.com/mc/mc/language/be/)\n"
 "Language: be\n"
 "MIME-Version: 1.0\n"
@@ -2283,9 +2283,8 @@ msgstr ""
 msgid "No COW"
 msgstr ""
 
-#, fuzzy
 msgid "Direct access for files"
-msgstr "Кэш каталога састарэў для %s"
+msgstr ""
 
 msgid "Casefolded file"
 msgstr ""

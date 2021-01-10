@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-12-31 16:34+0300\n"
-"PO-Revision-Date: 2020-05-17 17:42+0000\n"
+"POT-Creation-Date: 2021-01-10 13:15+0100\n"
+"PO-Revision-Date: 2020-12-31 14:19+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Estonian (http://www.transifex.com/mc/mc/language/et/)\n"
 "Language: et\n"
@@ -1850,7 +1850,7 @@ msgstr "Lipp"
 
 #, c-format
 msgid "Permissions (octal): %o"
-msgstr ""
+msgstr "Õigused (8nd süsteemis): %o"
 
 msgid "Chown advanced command"
 msgstr "Keerukas omanikuvahetus"
@@ -2222,7 +2222,7 @@ msgid "Synchronous directory updates"
 msgstr "Sünkroonsed kataloogivärskendused"
 
 msgid "Immutable"
-msgstr ""
+msgstr "Muudetamatu"
 
 msgid "Append only"
 msgstr ""
@@ -2231,7 +2231,7 @@ msgid "No dump"
 msgstr ""
 
 msgid "No update atime"
-msgstr ""
+msgstr "Jäta atime uuendamata"
 
 msgid "Compress"
 msgstr ""
@@ -2269,9 +2269,8 @@ msgstr ""
 msgid "No COW"
 msgstr ""
 
-#, fuzzy
 msgid "Direct access for files"
-msgstr "Kataloogi %s vahemälu sisu on aegunud"
+msgstr ""
 
 msgid "Casefolded file"
 msgstr ""
@@ -2304,7 +2303,7 @@ msgid ""
 msgstr ""
 
 msgid "Cannot change attributes on non-local filesystems"
-msgstr ""
+msgstr "Kaugfailisüsteemides ei saa atribuute muuta "
 
 #, c-format
 msgid ""
@@ -3549,14 +3548,14 @@ msgid "Links:      %d"
 msgstr "Viidad: %d"
 
 msgid "Attributes: not supported"
-msgstr ""
+msgstr "Atribuudid: ei ole toetatud"
 
 #, c-format
 msgid "Attributes: %s"
-msgstr ""
+msgstr "Atribuudid: %s"
 
 msgid "Attributes: unavailable"
-msgstr ""
+msgstr "Atribuudid: ei ole saadaval"
 
 #, c-format
 msgid "Mode:       %s (%04o)"
@@ -4010,7 +4009,7 @@ msgid "With multiple codepages support"
 msgstr ""
 
 msgid "With ext2fs attributes support"
-msgstr ""
+msgstr "Sealhulgas ext2fs atribuutide tugi"
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"

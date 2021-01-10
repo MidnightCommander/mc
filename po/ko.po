@@ -3,16 +3,16 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# MarongHappy <daemul72@gmail.com>, 2019-2020
+# Bruce Lee <daemul72@gmail.com>, 2019-2020
 # JinYeong Bak <dongdm@gmail.com>, 2016
-# MarongHappy <daemul72@gmail.com>, 2019
+# Bruce Lee <daemul72@gmail.com>, 2019-2020
 # Slava Zanko <slavazanko@gmail.com>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2020-12-31 16:34+0300\n"
-"PO-Revision-Date: 2020-05-17 17:42+0000\n"
+"POT-Creation-Date: 2021-01-10 13:15+0100\n"
+"PO-Revision-Date: 2020-12-31 14:19+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Korean (http://www.transifex.com/mc/mc/language/ko/)\n"
 "Language: ko\n"
@@ -1825,6 +1825,8 @@ msgid ""
 "Not an xterm or Linux console;\n"
 "the subshell cannot be toggled."
 msgstr ""
+"xterm 또는 Linux 콘솔이 아님;\n"
+"subshell은 토글할 수 없습니다."
 
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "미드나잇 커맨더로 돌아가려면 'exit'를 입력하십시오."
@@ -1852,7 +1854,7 @@ msgstr "플래그"
 
 #, c-format
 msgid "Permissions (octal): %o"
-msgstr ""
+msgstr "사용권한 (octal): %o"
 
 msgid "Chown advanced command"
 msgstr "Chown 고급 명령어"
@@ -2213,80 +2215,79 @@ msgstr ""
 "%s"
 
 msgid "Secure deletion"
-msgstr ""
+msgstr "안전한 삭제"
 
 msgid "Undelete"
-msgstr ""
+msgstr "삭제취소"
 
 msgid "Synchronous updates"
-msgstr ""
+msgstr "동기 업데이트"
 
 msgid "Synchronous directory updates"
-msgstr ""
+msgstr "동기 디렉토리 업데이트"
 
 msgid "Immutable"
-msgstr ""
+msgstr "불변"
 
 msgid "Append only"
-msgstr ""
+msgstr "첨부 만"
 
 msgid "No dump"
-msgstr ""
+msgstr "덤프 없음"
 
 msgid "No update atime"
-msgstr ""
+msgstr "한 번에 업데이트 없음"
 
 msgid "Compress"
-msgstr ""
+msgstr "압축"
 
 msgid "Compressed clusters"
-msgstr ""
+msgstr "압축된 클러스터"
 
 msgid "Compressed dirty file"
-msgstr ""
+msgstr "압축된 더티 파일"
 
 msgid "Compression raw access"
-msgstr ""
+msgstr "압축 원시 액세스"
 
 msgid "Encrypted inode"
-msgstr ""
+msgstr "암호화된 inode"
 
 msgid "Journaled data"
-msgstr ""
+msgstr "저널링된 데이터"
 
 msgid "Indexed directory"
-msgstr ""
+msgstr "색인된 디렉토리"
 
 msgid "No tail merging"
-msgstr ""
+msgstr "꼬리 병합 없음"
 
 msgid "Top of directory hierarchies"
-msgstr ""
+msgstr "최상위 디렉토리 계층"
 
 msgid "Inode uses extents"
-msgstr ""
+msgstr "Inode는 extents를 사용합니다"
 
 msgid "Huge_file"
-msgstr ""
+msgstr "대용량_파일"
 
 msgid "No COW"
-msgstr ""
+msgstr "COW 없음"
 
-#, fuzzy
 msgid "Direct access for files"
-msgstr "%s 디렉터리 캐쉬 만료"
+msgstr ""
 
 msgid "Casefolded file"
-msgstr ""
+msgstr "대소문자 구분 파일"
 
 msgid "Inode has inline data"
-msgstr ""
+msgstr "Inode에 inline 데이터가 있습니다"
 
 msgid "Project hierarchy"
-msgstr ""
+msgstr "프로젝트 계층"
 
 msgid "Verity protected inode"
-msgstr ""
+msgstr "Verity가 inode로 보호됨"
 
 msgid "&Marked all"
 msgstr "모두 표시됨(&M)"
@@ -2298,22 +2299,26 @@ msgid "C&lear marked"
 msgstr "표시됨 지우기(&L)"
 
 msgid "Chattr command"
-msgstr ""
+msgstr "Chattr 명령"
 
 #, c-format
 msgid ""
 "Cannot chattr \"%s\"\n"
 "%s"
 msgstr ""
+"\"%s\" 속성 변경을 할 수 없음\n"
+"%s"
 
 msgid "Cannot change attributes on non-local filesystems"
-msgstr ""
+msgstr "로컬이 아닌 파일 시스템의 속성을 변경할 수 없습니다"
 
 #, c-format
 msgid ""
 "Cannot get flags of \"%s\"\n"
 "%s"
 msgstr ""
+"\"%s\" 플래그를 가져올 수 없음\n"
+"%s"
 
 msgid "set &user ID on execution"
 msgstr "실행 시 사용자 ID 설정(&U)"
@@ -3162,7 +3167,7 @@ msgid "&Advanced chown"
 msgstr "고급 파일 소유자 변경(&A)"
 
 msgid "Cha&ttr"
-msgstr ""
+msgstr "속성 변경(&T)"
 
 msgid "&Rename/Move"
 msgstr "이름변경/이동(&R)"
@@ -3550,14 +3555,14 @@ msgid "Links:      %d"
 msgstr "링크:        %d"
 
 msgid "Attributes: not supported"
-msgstr ""
+msgstr "속성: 지원되지 않음"
 
 #, c-format
 msgid "Attributes: %s"
-msgstr ""
+msgstr "속성: %s"
 
 msgid "Attributes: unavailable"
-msgstr ""
+msgstr "속성: 사용할 수 없음"
 
 #, c-format
 msgid "Mode:       %s (%04o)"
@@ -4013,7 +4018,7 @@ msgid "With multiple codepages support"
 msgstr "다중 코드페이지 지원 포함"
 
 msgid "With ext2fs attributes support"
-msgstr ""
+msgstr "ext2fs 속성 지원"
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"
