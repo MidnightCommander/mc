@@ -1584,8 +1584,11 @@ do_update_prompt (void)
 {
     if (update_subshell_prompt)
     {
-        printf ("\r\n%s", subshell_prompt->str);
-        fflush (stdout);
+        if (subshell_prompt != NULL)
+        {
+            printf ("\r\n%s", subshell_prompt->str);
+            fflush (stdout);
+        }
         update_subshell_prompt = FALSE;
     }
 }
