@@ -1041,7 +1041,7 @@ rotate_dash (gboolean show)
     if (show && !mc_time_elapsed (&timestamp, delay))
         return;
 
-    widget_gotoyx (w, menubar_visible != 0 ? 1 : 0, w->cols - 1);
+    widget_gotoyx (w, menubar_visible ? 1 : 0, w->cols - 1);
     tty_setcolor (NORMAL_COLOR);
 
     if (!show)
