@@ -2,44 +2,44 @@ Version 4.8.26
 
 - Core
 
-  * Support file names of any length (#4145)
-  * Implement persistent command line buffer for subshell (bash >= 4, zsh and fish are supported) (#4114, #4124, #4126)
-  * Implement shadows of dialog windows and menus (#4102)
-  * Allow running clipboard commands if DISPLAY is not set (#4133)
-  * Add support of "alacritty", "tmux", and "tmux-256color" terminals (#4149)
+    * Support file names of any length (#4145)
+    * Implement persistent command line buffer for subshell (bash >= 4, zsh and fish are supported) (#4114, #4124, #4126)
+    * Implement shadows of dialog windows and menus (#4102)
+    * Allow running clipboard commands if DISPLAY is not set (#4133)
+    * Add support of "alacritty", "tmux", and "tmux-256color" terminals (#4149)
 
 - VFS
 
-  * Support wim archive format (using wimtools (https://wimlib.net/)) (#4100)
-  * Support pak archive format (using unar (https://theunarchiver.com/)) (#4130)
+    * Support wim archive format (using wimtools (https://wimlib.net/)) (#4100)
+    * Support pak archive format (using unar (https://theunarchiver.com/)) (#4130)
 
 - Editor
 
-  * Add Swift syntax highlighting (MidnightCommander/mc#159)
+    * Add Swift syntax highlighting (MidnightCommander/mc#159)
 
 - Misc
 
-  * Code cleanup (#4103, #4127, #4131)
-  * ext.d/sound.sh: replace xmms with audacious (part of #4127)
-  * mc.ext: improve handling of compressed content (#4128, #2117)
-  * mc.ext: add support for OpenDocument flax xml formats: fodt, fods, fodp, fodg (#4157)
-  * Filehighlight fodg, fodp, fods, fodt, odg files as documents
-  * modarcon16 skin: make consistent with whitespaces (#4158)
+    * Code cleanup (#4103, #4127, #4131)
+    * ext.d/sound.sh: replace xmms with audacious (part of #4127)
+    * mc.ext: improve handling of compressed content (#4128, #2117)
+    * mc.ext: add support for OpenDocument flax xml formats: fodt, fods, fodp, fodg (#4157)
+    * Filehighlight fodg, fodp, fods, fodt, odg files as documents
+    * modarcon16 skin: make consistent with whitespaces (#4158)
 
 - Fixes
 
-  * 0000 permissions are not preserved on copy/move file (#4155)
-  * Chattr dialog doesn't work with mouse (#4104)
-  * Wrong copy ETA displaying if "Follow links" option is set (#4101)
-  * C-i ("change panel" shortcut) has no effect (#4107)
-  * C-l ("refresh screen") and A-` ("switch screens") shortcuts have no effect (#4142, #4153)
-  * Cancel of history or completion window marks input lines as modified (#4152)
-  * Unexpected subshell execution at panel switch (#2110)
-  * Lock up after pressing Tab in subshell (#2269)
-  * tcsh: error: "The Commander can't change to the directory" (#4120)
-  * vfs: extfs: cannot handle files with name started with dash or space (#4077)
-  * vfs: hang on accessing files within a nested VFS for first 60 seconds (#4147)
-  * vfs: lose content of the current directory on a mounted CIFS share (on Linux >= 5.1) (#3987)
+    * 0000 permissions are not preserved on copy/move file (#4155)
+    * Chattr dialog doesn't work with mouse (#4104)
+    * Wrong copy ETA displaying if "Follow links" option is set (#4101)
+    * C-i ("change panel" shortcut) has no effect (#4107)
+    * C-l ("refresh screen") and A-` ("switch screens") shortcuts have no effect (#4142, #4153)
+    * Cancel of history or completion window marks input lines as modified (#4152)
+    * Unexpected subshell execution at panel switch (#2110)
+    * Lock up after pressing Tab in subshell (#2269)
+    * tcsh: error: "The Commander can't change to the directory" (#4120)
+    * vfs: extfs: cannot handle files with name started with dash or space (#4077)
+    * vfs: hang on accessing files within a nested VFS for first 60 seconds (#4147)
+    * vfs: lose content of the current directory on a mounted CIFS share (on Linux >= 5.1) (#3987)
 
 
 Version 4.8.25
