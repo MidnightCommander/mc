@@ -956,7 +956,6 @@ panels_split_less (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-
 void
 setup_cmdline (void)
 {
@@ -964,6 +963,9 @@ setup_cmdline (void)
     int prompt_width;
     int y;
     char *tmp_prompt = (char *) mc_prompt;
+
+    if (!command_prompt)
+        return;
 
 #ifdef ENABLE_SUBSHELL
     if (mc_global.tty.use_subshell)
