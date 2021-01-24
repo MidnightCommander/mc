@@ -191,7 +191,8 @@ static const GOptionEntry argument_main_table[] = {
      "edit", 'e', G_OPTION_FLAG_IN_MAIN | G_OPTION_FLAG_NO_ARG, G_OPTION_ARG_CALLBACK,
      (gpointer) parse_mc_e_argument,
      N_("Edit files"),
-     N_("<file> ...") },
+     N_("<file> ...")
+    },
 
     {
      NULL, '\0', 0, 0, NULL, NULL, NULL /* Complete struct initialization */
@@ -333,9 +334,10 @@ static gchar *mc_args__loc__footer_string = NULL;
 static gchar *mc_args__loc__header_string = NULL;
 static gchar *mc_args__loc__usage_string = NULL;
 
-/*** file scope functions ************************************************************************/
-
 /* --------------------------------------------------------------------------------------------- */
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 mc_args_clean_temp_help_strings (void)
 {
@@ -350,7 +352,7 @@ mc_args_clean_temp_help_strings (void)
 static GOptionGroup *
 mc_args_new_color_group (void)
 {
-/* *INDENT-OFF* */
+    /* *INDENT-OFF* */
     /* FIXME: to preserve translations, lines should be split. */
     mc_args__loc__colors_string = g_strdup_printf ("%s\n%s",
                                                    /* TRANSLATORS: don't translate keywords */
@@ -380,7 +382,7 @@ mc_args_new_color_group (void)
                                                     "Attributes:\n"
                                                     "   bold, italic, underline, reverse, blink; append more with '+'\n")
                                                     );
-/* *INDENT-ON* */
+    /* *INDENT-ON* */
 
     return g_option_group_new ("color", mc_args__loc__colors_string,
                                _("Color options"), NULL, NULL);
