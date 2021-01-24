@@ -2,6 +2,11 @@
 #ifndef MC__TTY_NCURSES_H
 #define MC__TTY_NCURSES_H
 
+/* for cchar_t, getcchar(), setcchar() */
+#ifndef _XOPEN_SOURCE_EXTENDED
+#define _XOPEN_SOURCE_EXTENDED
+#endif
+
 #ifdef USE_NCURSES
 #ifdef HAVE_NCURSES_CURSES_H
 #include <ncurses/curses.h>
