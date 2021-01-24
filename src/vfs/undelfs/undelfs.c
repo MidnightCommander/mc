@@ -49,15 +49,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>             /* memset() */
-
-#ifdef HAVE_EXT2FS_EXT2_FS_H
 #include <ext2fs/ext2_fs.h>
-#else
-/* asm/types.h defines its own umode_t */
-#undef umode_t
-#include <linux/ext2_fs.h>
-#endif
-
 #include <ext2fs/ext2fs.h>
 #include <ctype.h>
 
