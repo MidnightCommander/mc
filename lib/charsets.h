@@ -66,13 +66,12 @@ int convert_from_8bit_to_utf_c (char input_char, GIConv conv);
  */
 int convert_from_8bit_to_utf_c2 (char input_char);
 
-GString *str_convert_to_input (const char *str);
 GString *str_nconvert_to_input (const char *str, int len);
-
-GString *str_convert_to_display (const char *str);
 GString *str_nconvert_to_display (const char *str, int len);
 
+/* --------------------------------------------------------------------------------------------- */
 /*** inline functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 /* Convert single characters */
 static inline int
@@ -83,6 +82,8 @@ convert_to_display_c (int c)
     return (int) conv_displ[c];
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static inline int
 convert_from_input_c (int c)
 {
@@ -90,5 +91,23 @@ convert_from_input_c (int c)
         return c;
     return (int) conv_input[c];
 }
+
+/* --------------------------------------------------------------------------------------------- */
+
+static inline GString *
+str_convert_to_input (const char *str)
+{
+    return str_nconvert_to_input (str, -1);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static inline GString *
+str_convert_to_display (const char *str)
+{
+    return str_nconvert_to_display (str, -1);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 #endif /* MC__CHARSETS_H */

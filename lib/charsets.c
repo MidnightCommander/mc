@@ -351,14 +351,6 @@ convert_to_display (char *str)
 /* --------------------------------------------------------------------------------------------- */
 
 GString *
-str_convert_to_display (const char *str)
-{
-    return str_nconvert_to_display (str, -1);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-GString *
 str_nconvert_to_display (const char *str, int len)
 {
     GString *buff;
@@ -386,14 +378,6 @@ convert_from_input (char *str)
     if (str != NULL)
         for (; *str != '\0'; str++)
             *str = conv_input[(unsigned char) *str];
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-GString *
-str_convert_to_input (const char *str)
-{
-    return str_nconvert_to_input (str, -1);
 }
 
 /* --------------------------------------------------------------------------------------------- */
