@@ -1218,12 +1218,15 @@ edit_completion_string_free (gpointer data)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * collect the possible completions from one buffer
+ */
 
 static void
-edit_collect_completion_from_one_buffer (GQueue ** compl, mc_search_t *srch,
-                                         edit_search_status_msg_t * esm, off_t word_start,
-                                         gsize word_len, off_t last_byte, GString * current_word,
-                                         int *max_width)
+edit_collect_completion_from_one_buffer (gboolean active_buffer, GQueue ** compl,
+                                         mc_search_t * srch, edit_search_status_msg_t * esm,
+                                         off_t word_start, gsize word_len, off_t last_byte,
+                                         GString * current_word, int *max_width)
 {
     GString *temp = NULL;
     gsize len = 0;
@@ -1281,7 +1284,9 @@ edit_collect_completion_from_one_buffer (GQueue ** compl, mc_search_t *srch,
 
             if (l != NULL)
             {
-                if (l != g_queue_peek_tail_link (*compl))
+                /* resort completion in main buffer only:
+                 * these completions must be at the top of list in the completion dialog */
+                if (!active_buffer && l != g_queue_peek_tail_link (*compl))
                 {
                     /* move to the end */
                     g_queue_unlink (*compl, l);
@@ -1303,7 +1308,11 @@ edit_collect_completion_from_one_buffer (GQueue ** compl, mc_search_t *srch,
             g_string_free (recoded, TRUE);
         }
 #endif
-        g_queue_push_tail (*compl, temp);
+        if (active_buffer)
+            g_queue_push_tail (*compl, temp);
+        else
+            g_queue_push_head (*compl, temp);
+
         start += len;
 
         /* note the maximal length needed for the completion dialog */
@@ -1319,7 +1328,7 @@ edit_collect_completion_from_one_buffer (GQueue ** compl, mc_search_t *srch,
 
 /* --------------------------------------------------------------------------------------------- */
 /**
- * collect the possible completions
+ * collect the possible completions from all buffers
  */
 
 static GQueue *
@@ -1330,7 +1339,7 @@ edit_collect_completions (WEdit * edit, off_t word_start, gsize word_len,
     mc_search_t *srch;
     off_t last_byte;
     GString *current_word;
-    gboolean entire_file;
+    gboolean entire_file, all_files;
     edit_search_status_msg_t esm;
 
 #ifdef HAVE_CHARSET
@@ -1363,9 +1372,49 @@ edit_collect_completions (WEdit * edit, off_t word_start, gsize word_len,
 
     *max_width = 0;
 
-    /* collect completions */
-    edit_collect_completion_from_one_buffer (&compl, srch, &esm, word_start, word_len, last_byte,
-                                             current_word, max_width);
+    /* collect completions from current buffer at first */
+    edit_collect_completion_from_one_buffer (TRUE, &compl, srch, &esm, word_start, word_len,
+                                             last_byte, current_word, max_width);
+
+    /* collect completions from other buffers */
+    all_files =
+        mc_config_get_bool (mc_global.main_config, CONFIG_APP_SECTION,
+                            "editor_wordcompletion_collect_all_files", TRUE);
+    if (all_files)
+    {
+        const WGroup *owner = CONST_GROUP (CONST_WIDGET (edit)->owner);
+        gboolean saved_verbose;
+        GList *w;
+
+        /* don't show incorrect percentage in edit_search_status_update_cb() */
+        saved_verbose = verbose;
+        verbose = FALSE;
+
+        for (w = owner->widgets; w != NULL; w = g_list_next (w))
+        {
+            Widget *ww = WIDGET (w->data);
+            WEdit *e;
+
+            if (!edit_widget_is_editor (ww))
+                continue;
+
+            e = (WEdit *) ww;
+
+            if (e == edit)
+                continue;
+
+            /* search in entire file */
+            word_start = 0;
+            last_byte = e->buffer.size;
+            esm.edit = e;
+            esm.offset = 0;
+
+            edit_collect_completion_from_one_buffer (FALSE, &compl, srch, &esm, word_start,
+                                                     word_len, last_byte, current_word, max_width);
+        }
+
+        verbose = saved_verbose;
+    }
 
     status_msg_deinit (STATUS_MSG (&esm));
     mc_search_free (srch);

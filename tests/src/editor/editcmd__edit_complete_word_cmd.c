@@ -42,7 +42,7 @@
 #include "src/editor/editwidget.h"
 #include "src/editor/editcmd_dialogs.h"
 
-
+static WGroup owner;
 static WEdit *test_edit;
 
 /* --------------------------------------------------------------------------------------------- */
@@ -162,9 +162,15 @@ my_setup (void)
     load_codepages_list ();
 #endif /* HAVE_CHARSET */
 
+    mc_global.main_config = mc_config_init ("editcmd__edit_complete_word_cmd.ini", FALSE);
+    mc_config_set_bool (mc_global.main_config, CONFIG_APP_SECTION,
+                        "editor_wordcompletion_collect_all_files", TRUE);
+
     option_filesize_threshold = (char *) "64M";
 
     test_edit = edit_init (NULL, 0, 0, 24, 80, vfs_path_from_str ("test-data.txt"), 1);
+    memset (&owner, 0, sizeof (owner));
+    group_add_widget (&owner, WIDGET (test_edit));
     editcmd_dialog_completion_show__init ();
 }
 
@@ -176,7 +182,10 @@ my_teardown (void)
 {
     editcmd_dialog_completion_show__deinit ();
     edit_clean (test_edit);
+    group_remove_widget (test_edit);
     g_free (test_edit);
+
+    mc_config_deinit (mc_global.main_config);
 
 #ifdef HAVE_CHARSET
     free_codepages_list ();
