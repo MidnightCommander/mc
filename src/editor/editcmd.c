@@ -1218,17 +1218,117 @@ edit_completion_string_free (gpointer data)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** collect the possible completions */
+
+static void
+edit_collect_completion_from_one_buffer (GQueue ** compl, mc_search_t *srch,
+                                         edit_search_status_msg_t * esm, off_t word_start,
+                                         gsize word_len, off_t last_byte, GString * current_word,
+                                         int *max_width)
+{
+    GString *temp = NULL;
+    gsize len = 0;
+    off_t start = -1;
+
+    while (mc_search_run (srch, (void *) esm, start + 1, last_byte, &len))
+    {
+        gsize i;
+        int width;
+
+        if (temp == NULL)
+            temp = g_string_sized_new (8);
+        else
+            g_string_set_size (temp, 0);
+
+        start = srch->normal_offset;
+
+        /* add matched completion if not yet added */
+        for (i = 0; i < len; i++)
+        {
+            int ch;
+
+            ch = edit_buffer_get_byte (&esm->edit->buffer, start + i);
+            if (isspace (ch))
+                continue;
+
+            /* skip current word */
+            if (start + (off_t) i == word_start)
+                break;
+
+            g_string_append_c (temp, ch);
+        }
+
+        if (temp->len == 0)
+            continue;
+
+        if (current_word != NULL && g_string_equal (current_word, temp))
+            continue;
+
+        if (*compl == NULL)
+            *compl = g_queue_new ();
+        else
+        {
+            GList *l;
+
+            for (l = g_queue_peek_head_link (*compl); l != NULL; l = g_list_next (l))
+            {
+                GString *s = (GString *) l->data;
+
+                /* skip if already added */
+                if (strncmp (s->str + word_len, temp->str + word_len,
+                             MAX (len, s->len) - word_len) == 0)
+                    break;
+            }
+
+            if (l != NULL)
+            {
+                if (l != g_queue_peek_tail_link (*compl))
+                {
+                    /* move to the end */
+                    g_queue_unlink (*compl, l);
+                    g_queue_push_tail_link (*compl, l);
+                }
+
+                continue;
+            }
+        }
+
+#ifdef HAVE_CHARSET
+        {
+            GString *recoded;
+
+            recoded = str_convert_to_display (temp->str);
+            if (recoded->len != 0)
+                mc_g_string_copy (temp, recoded);
+
+            g_string_free (recoded, TRUE);
+        }
+#endif
+        g_queue_push_tail (*compl, temp);
+        start += len;
+
+        /* note the maximal length needed for the completion dialog */
+        width = str_term_width1 (temp->str);
+        *max_width = MAX (*max_width, width);
+
+        temp = NULL;
+    }
+
+    if (temp != NULL)
+        g_string_free (temp, TRUE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * collect the possible completions
+ */
 
 static GQueue *
 edit_collect_completions (WEdit * edit, off_t word_start, gsize word_len,
                           const char *match_expr, int *max_width)
 {
     GQueue *compl = NULL;
-    gsize len = 0;
-    GString *temp = NULL;
     mc_search_t *srch;
-    off_t last_byte, start = -1;
+    off_t last_byte;
     GString *current_word;
     gboolean entire_file;
     edit_search_status_msg_t esm;
@@ -1264,95 +1364,11 @@ edit_collect_completions (WEdit * edit, off_t word_start, gsize word_len,
     *max_width = 0;
 
     /* collect completions */
-    while (mc_search_run (srch, (void *) &esm, start + 1, last_byte, &len))
-    {
-        gsize i;
-        int width;
-
-        if (temp == NULL)
-            temp = g_string_sized_new (8);
-        else
-            g_string_set_size (temp, 0);
-
-        start = srch->normal_offset;
-
-        /* add matched completion if not yet added */
-        for (i = 0; i < len; i++)
-        {
-            int ch;
-
-            ch = edit_buffer_get_byte (&edit->buffer, start + i);
-            if (isspace (ch))
-                continue;
-
-            /* skip current word */
-            if (start + (off_t) i == word_start)
-                break;
-
-            g_string_append_c (temp, ch);
-        }
-
-        if (temp->len == 0)
-            continue;
-
-        if (current_word != NULL && g_string_equal (current_word, temp))
-            continue;
-
-        if (compl == NULL)
-            compl = g_queue_new ();
-        else
-        {
-            GList *l;
-
-            for (l = g_queue_peek_head_link (compl); l != NULL; l = g_list_next (l))
-            {
-                GString *s = (GString *) l->data;
-
-                /* skip if already added */
-                if (strncmp (s->str + word_len, temp->str + word_len,
-                             MAX (len, s->len) - word_len) == 0)
-                    break;
-            }
-
-            if (l != NULL)
-            {
-                if (l != g_queue_peek_tail_link (compl))
-                {
-                    /* move to the end */
-                    g_queue_unlink (compl, l);
-                    g_queue_push_tail_link (compl, l);
-                }
-
-                continue;
-            }
-        }
-
-#ifdef HAVE_CHARSET
-        {
-            GString *recoded;
-
-            recoded = str_convert_to_display (temp->str);
-            if (recoded->len != 0)
-                mc_g_string_copy (temp, recoded);
-
-            g_string_free (recoded, TRUE);
-        }
-#endif
-        g_queue_push_tail (compl, temp);
-        start += len;
-
-        /* note the maximal length needed for the completion dialog */
-        width = str_term_width1 (temp->str);
-        *max_width = MAX (*max_width, width);
-
-        temp = NULL;
-    }
+    edit_collect_completion_from_one_buffer (&compl, srch, &esm, word_start, word_len, last_byte,
+                                             current_word, max_width);
 
     status_msg_deinit (STATUS_MSG (&esm));
     mc_search_free (srch);
-
-    if (temp != NULL)
-        g_string_free (temp, TRUE);
     if (current_word != NULL)
         g_string_free (current_word, TRUE);
 
