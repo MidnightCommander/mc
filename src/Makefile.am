@@ -52,8 +52,15 @@ libinternal_la_LIBADD = \
 	$(DIFFLIB) $(EDITLIB) $(SUBSHELLLIB)
 
 mc_LDADD = \
-	libinternal.la \
+	libinternal.la
+
+if ENABLE_MCLIB
+libinternal_la_LIBADD += \
 	$(top_builddir)/lib/libmc.la
+else
+mc_LDADD += \
+	$(top_builddir)/lib/libmc.la
+endif
 
 if ENABLE_VFS_SMB
 # this is a hack for linking with own samba library in simple way
