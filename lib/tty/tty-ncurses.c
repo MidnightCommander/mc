@@ -152,8 +152,15 @@ tty_clip (int *y, int *x, int *rows, int *cols)
 
     if (*y + *rows > LINES)
         *rows = LINES - *y;
+
+    if (*rows <= 0)
+        return FALSE;
+
     if (*x + *cols > COLS)
         *cols = COLS - *x;
+
+    if (*cols <= 0)
+        return FALSE;
 
     return TRUE;
 }
