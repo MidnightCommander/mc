@@ -90,6 +90,7 @@ typedef struct
     gboolean file_case_sens;
     gboolean file_pattern;
     gboolean find_recurs;
+    gboolean follow_symlinks;
     gboolean skip_hidden;
     gboolean file_all_charsets;
 
@@ -132,6 +133,7 @@ static WLabel *content_label;   /* 'Content:' label */
 static WCheck *file_case_sens_cbox;     /* "case sensitive" checkbox */
 static WCheck *file_pattern_cbox;       /* File name is glob or regexp */
 static WCheck *recursively_cbox;
+static WCheck *follow_sym_cbox;
 static WCheck *skip_hidden_cbox;
 static WCheck *content_case_sens_cbox;  /* "case sensitive" checkbox */
 static WCheck *content_regexp_cbox;     /* "find regular expression" checkbox */
@@ -201,7 +203,7 @@ static const size_t quit_button = 4;    /* index of "Quit" button */
 static WListbox *find_list;     /* Listbox with the file list */
 
 static find_file_options_t options = {
-    TRUE, TRUE, TRUE, FALSE, FALSE,
+    TRUE, TRUE, TRUE, FALSE, FALSE, FALSE,
     TRUE, FALSE, FALSE, FALSE, FALSE,
     FALSE, NULL
 };
@@ -286,6 +288,8 @@ find_load_options (void)
         mc_config_get_bool (mc_global.main_config, "FindFile", "file_shell_pattern", TRUE);
     options.find_recurs =
         mc_config_get_bool (mc_global.main_config, "FindFile", "file_find_recurs", TRUE);
+    options.follow_symlinks =
+        mc_config_get_bool (mc_global.main_config, "FindFile", "follow_symlinks", FALSE);
     options.skip_hidden =
         mc_config_get_bool (mc_global.main_config, "FindFile", "file_skip_hidden", FALSE);
     options.file_all_charsets =
@@ -319,6 +323,7 @@ find_save_options (void)
     mc_config_set_bool (mc_global.main_config, "FindFile", "file_shell_pattern",
                         options.file_pattern);
     mc_config_set_bool (mc_global.main_config, "FindFile", "file_find_recurs", options.find_recurs);
+    mc_config_set_bool (mc_global.main_config, "FindFile", "follow_symlinks", options.follow_symlinks);
     mc_config_set_bool (mc_global.main_config, "FindFile", "file_skip_hidden", options.skip_hidden);
     mc_config_set_bool (mc_global.main_config, "FindFile", "file_all_charsets",
                         options.file_all_charsets);
@@ -563,9 +568,9 @@ find_parameters (WPanel * panel, char **start_dir, ssize_t * start_dir_len,
 
     /* Size of the find parameters window */
 #ifdef HAVE_CHARSET
-    const int lines = 18;
+    const int lines = 19;
 #else
-    const int lines = 17;
+    const int lines = 18;
 #endif
     int cols = 68;
 
@@ -574,6 +579,7 @@ find_parameters (WPanel * panel, char **start_dir, ssize_t * start_dir_len,
     /* file name */
     const char *file_name_label = N_("File name:");
     const char *file_recurs_label = N_("&Find recursively");
+    const char *file_follow_symlinks = N_("Follow &symlinks");
     const char *file_pattern_label = N_("&Using shell patterns");
 #ifdef HAVE_CHARSET
     const char *file_all_charsets_label = N_("&All charsets");
@@ -606,6 +612,7 @@ find_parameters (WPanel * panel, char **start_dir, ssize_t * start_dir_len,
 
         file_name_label = _(file_name_label);
         file_recurs_label = _(file_recurs_label);
+        file_follow_symlinks = _(file_follow_symlinks);
         file_pattern_label = _(file_pattern_label);
 #ifdef HAVE_CHARSET
         file_all_charsets_label = _(file_all_charsets_label);
@@ -634,6 +641,7 @@ find_parameters (WPanel * panel, char **start_dir, ssize_t * start_dir_len,
     /* widget widths */
     cw = str_term_width1 (file_name_label);
     cw = max (cw, str_term_width1 (file_recurs_label) + 4);
+    cw = max (cw, str_term_width1 (file_follow_symlinks) + 4);
     cw = max (cw, str_term_width1 (file_pattern_label) + 4);
 #ifdef HAVE_CHARSET
     cw = max (cw, str_term_width1 (file_all_charsets_label) + 4);
@@ -715,6 +723,9 @@ find_parameters (WPanel * panel, char **start_dir, ssize_t * start_dir_len,
     /* Continue 1st column */
     recursively_cbox = check_new (y1++, x1, options.find_recurs, file_recurs_label);
     group_add_widget (g, recursively_cbox);
+
+    follow_sym_cbox = check_new (y1++, x1, options.follow_symlinks, file_follow_symlinks);
+    group_add_widget (g, follow_sym_cbox);
 
     file_pattern_cbox = check_new (y1++, x1, options.file_pattern, file_pattern_label);
     group_add_widget (g, file_pattern_cbox);
@@ -805,6 +816,7 @@ find_parameters (WPanel * panel, char **start_dir, ssize_t * start_dir_len,
             options.content_first_hit = content_first_hit_cbox->state;
             options.content_whole_words = content_whole_words_cbox->state;
             options.find_recurs = recursively_cbox->state;
+            options.follow_symlinks = follow_sym_cbox->state;
             options.file_pattern = file_pattern_cbox->state;
             options.file_case_sens = file_case_sens_cbox->state;
             options.skip_hidden = skip_hidden_cbox->state;
@@ -1361,7 +1373,7 @@ do_search (WDialog * h)
 
                     tmp_vpath = vfs_path_build_filename (directory, dp->d_name, (char *) NULL);
 
-                    if (mc_lstat (tmp_vpath, &tmp_stat) == 0 && S_ISDIR (tmp_stat.st_mode))
+                    if ((options.follow_symlinks ? mc_stat : mc_lstat) (tmp_vpath, &tmp_stat) == 0 && S_ISDIR (tmp_stat.st_mode))
                         push_directory (tmp_vpath);
                     else
                         vfs_path_free (tmp_vpath);
