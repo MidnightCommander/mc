@@ -6,6 +6,7 @@
 
    Written by:
    Slava Zanko <slavazanko@gmail.com>, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2021
 
    This file is part of the Midnight Commander.
 
@@ -41,7 +42,7 @@
 #include "src/editor/editwidget.h"
 #include "src/editor/editcmd_dialogs.h"
 
-
+static WGroup owner;
 static WEdit *test_edit;
 
 /* --------------------------------------------------------------------------------------------- */
@@ -89,32 +90,33 @@ edit_load_macro_cmd (WEdit * _edit)
 /* @CapturedValue */
 static const WEdit *editcmd_dialog_completion_show__edit;
 /* @CapturedValue */
-static int editcmd_dialog_completion_show__max_len;
+static int editcmd_dialog_completion_show__max_width;
 /* @CapturedValue */
-static GString **editcmd_dialog_completion_show__compl;
-/* @CapturedValue */
-static int editcmd_dialog_completion_show__num_compl;
+static GQueue *editcmd_dialog_completion_show__compl;
 
 /* @ThenReturnValue */
 static char *editcmd_dialog_completion_show__return_value;
 
 /* @Mock */
 char *
-editcmd_dialog_completion_show (const WEdit * edit, int max_len, GString ** compl, int num_compl)
+editcmd_dialog_completion_show (const WEdit * edit, GQueue * compl, int max_width)
 {
 
     editcmd_dialog_completion_show__edit = edit;
-    editcmd_dialog_completion_show__max_len = max_len;
-    editcmd_dialog_completion_show__num_compl = num_compl;
+    editcmd_dialog_completion_show__max_width = max_width;
 
     {
-        int iterator;
+        GList *i;
 
-        editcmd_dialog_completion_show__compl = g_new0 (GString *, num_compl);
+        editcmd_dialog_completion_show__compl = g_queue_new ();
 
-        for (iterator = 0; iterator < editcmd_dialog_completion_show__num_compl; iterator++)
-            editcmd_dialog_completion_show__compl[iterator] =
-                g_string_new_len (compl[iterator]->str, compl[iterator]->len);
+        for (i = g_queue_peek_tail_link (compl); i != NULL; i = g_list_previous (i))
+        {
+            GString *s = (GString *) i->data;
+
+            g_queue_push_tail (editcmd_dialog_completion_show__compl,
+                               g_string_new_len (s->str, s->len));
+        }
     }
 
     return editcmd_dialog_completion_show__return_value;
@@ -124,26 +126,24 @@ static void
 editcmd_dialog_completion_show__init (void)
 {
     editcmd_dialog_completion_show__edit = NULL;
-    editcmd_dialog_completion_show__max_len = 0;
+    editcmd_dialog_completion_show__max_width = 0;
     editcmd_dialog_completion_show__compl = NULL;
-    editcmd_dialog_completion_show__num_compl = 0;
     editcmd_dialog_completion_show__return_value = NULL;
+}
+
+static void
+editcmd_dialog_completion_show__string_free (gpointer data)
+{
+    g_string_free ((GString *) data, TRUE);
 }
 
 static void
 editcmd_dialog_completion_show__deinit (void)
 {
     if (editcmd_dialog_completion_show__compl != NULL)
-    {
-        int iterator;
-
-        for (iterator = 0; iterator < editcmd_dialog_completion_show__num_compl; iterator++)
-            g_string_free (editcmd_dialog_completion_show__compl[iterator], TRUE);
-
-        g_free (editcmd_dialog_completion_show__compl);
-    }
+        g_queue_free_full (editcmd_dialog_completion_show__compl,
+                           editcmd_dialog_completion_show__string_free);
 }
-
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -162,9 +162,15 @@ my_setup (void)
     load_codepages_list ();
 #endif /* HAVE_CHARSET */
 
+    mc_global.main_config = mc_config_init ("editcmd__edit_complete_word_cmd.ini", FALSE);
+    mc_config_set_bool (mc_global.main_config, CONFIG_APP_SECTION,
+                        "editor_wordcompletion_collect_all_files", TRUE);
+
     option_filesize_threshold = (char *) "64M";
 
     test_edit = edit_init (NULL, 0, 0, 24, 80, vfs_path_from_str ("test-data.txt"), 1);
+    memset (&owner, 0, sizeof (owner));
+    group_add_widget (&owner, WIDGET (test_edit));
     editcmd_dialog_completion_show__init ();
 }
 
@@ -176,7 +182,10 @@ my_teardown (void)
 {
     editcmd_dialog_completion_show__deinit ();
     edit_clean (test_edit);
+    group_remove_widget (test_edit);
     g_free (test_edit);
+
+    mc_config_deinit (mc_global.main_config);
 
 #ifdef HAVE_CHARSET
     free_codepages_list ();
@@ -201,7 +210,7 @@ static const struct test_autocomplete_ds
     int input_display_codepage_id;
     const char *input_completed_word;
 
-    int expected_max_len;
+    int expected_max_width;
     int expected_compl_word_count;
     int input_completed_word_start_pos;
     const char *expected_completed_word;
@@ -259,9 +268,9 @@ START_PARAMETRIZED_TEST (test_autocomplete, test_autocomplete_ds)
 
     /* then */
     mctest_assert_ptr_eq (editcmd_dialog_completion_show__edit, test_edit);
-    mctest_assert_int_eq (editcmd_dialog_completion_show__num_compl,
+    mctest_assert_int_eq (g_queue_get_length (editcmd_dialog_completion_show__compl),
                           data->expected_compl_word_count);
-    mctest_assert_int_eq (editcmd_dialog_completion_show__max_len, data->expected_max_len);
+    mctest_assert_int_eq (editcmd_dialog_completion_show__max_width, data->expected_max_width);
 
     {
         off_t i = 0;

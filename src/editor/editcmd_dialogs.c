@@ -345,19 +345,20 @@ editcmd_dialog_raw_key_query (const char *heading, const char *query, gboolean c
 /* let the user select its preferred completion */
 
 char *
-editcmd_dialog_completion_show (const WEdit * edit, int max_len, GString ** compl, int num_compl)
+editcmd_dialog_completion_show (const WEdit * edit, GQueue * compl, int max_width)
 {
     const Widget *we = CONST_WIDGET (edit);
-    int start_x, start_y, offset, i;
+    int start_x, start_y, offset;
     char *curr = NULL;
     WDialog *compl_dlg;
     WListbox *compl_list;
     int compl_dlg_h;            /* completion dialog height */
     int compl_dlg_w;            /* completion dialog width */
+    GList *i;
 
     /* calculate the dialog metrics */
-    compl_dlg_h = num_compl + 2;
-    compl_dlg_w = max_len + 4;
+    compl_dlg_h = g_queue_get_length (compl) + 2;
+    compl_dlg_w = max_width + 4;
     start_x = we->x + edit->curs_col + edit->start_col + EDIT_TEXT_HORIZONTAL_OFFSET +
         (edit->fullscreen ? 0 : 1) + option_line_state_width;
     start_y = we->y + edit->curs_row + EDIT_TEXT_VERTICAL_OFFSET + (edit->fullscreen ? 0 : 1) + 1;
@@ -386,13 +387,12 @@ editcmd_dialog_completion_show (const WEdit * edit, int max_len, GString ** comp
     /* create the listbox */
     compl_list = listbox_new (1, 1, compl_dlg_h - 2, compl_dlg_w - 2, FALSE, NULL);
 
-    /* add the dialog */
-    group_add_widget (GROUP (compl_dlg), compl_list);
-
-    /* fill the listbox with the completions */
-    for (i = num_compl - 1; i >= 0; i--)        /* reverse order */
-        listbox_add_item (compl_list, LISTBOX_APPEND_AT_END, 0, (char *) compl[i]->str, NULL,
+    /* fill the listbox with the completions in the reverse order */
+    for (i = g_queue_peek_tail_link (compl); i != NULL; i = g_list_previous (i))
+        listbox_add_item (compl_list, LISTBOX_APPEND_AT_END, 0, ((GString *) i->data)->str, NULL,
                           FALSE);
+
+    group_add_widget (GROUP (compl_dlg), compl_list);
 
     /* pop up the dialog and apply the chosen completion */
     if (dlg_run (compl_dlg) == B_ENTER)

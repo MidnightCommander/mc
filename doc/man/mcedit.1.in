@@ -586,6 +586,10 @@ deleting, navigating, typing)
 Search autocomplete candidates in entire file (1) or just from
 beginning of file to cursor position (0).
 .TP
+.I editor_wordcompletion_collect_all_files
+Search autocomplete candidates from all loaded files (1, default), not only from
+the currently edited one (0).
+.TP
 .I spell_language
 Spelling language (en, en\-variant_0, ru, etc) installed with aspell
 package (a full list can be obtained using 'aspell' utility).

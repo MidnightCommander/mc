@@ -6,7 +6,7 @@
 
    Written by:
    Paul Sheer, 1996, 1997
-   Andrew Borodin <aborodin@vmail.ru>, 2012-2014
+   Andrew Borodin <aborodin@vmail.ru>, 2012-2021
    Ilia Maslakov <il.smind@gmail.com>, 2012
 
    This file is part of the Midnight Commander.
@@ -95,8 +95,6 @@ gboolean option_drop_selection_on_copy = TRUE;
 #define space_width 1
 
 #define TEMP_BUF_LEN 1024
-
-#define MAX_WORD_COMPLETIONS 100        /* in listbox */
 
 /*** file scope type declarations ****************************************************************/
 
@@ -1181,48 +1179,167 @@ edit_find_word_start (const edit_buffer_t * buf, off_t * word_start, gsize * wor
  * @return newly allocated string or NULL if no any words under cursor
  */
 
-static char *
+static GString *
 edit_collect_completions_get_current_word (edit_search_status_msg_t * esm, mc_search_t * srch,
                                            off_t word_start)
 {
     WEdit *edit = esm->edit;
     gsize len = 0;
-    off_t i;
-    GString *temp;
+    GString *temp = NULL;
 
-    if (!mc_search_run (srch, (void *) esm, word_start, edit->buffer.size, &len))
-        return NULL;
-
-    temp = g_string_sized_new (len);
-
-    for (i = 0; i < (off_t) len; i++)
+    if (mc_search_run (srch, (void *) esm, word_start, edit->buffer.size, &len))
     {
-        int chr;
+        off_t i;
 
-        chr = edit_buffer_get_byte (&edit->buffer, word_start + i);
-        if (!isspace (chr))
-            g_string_append_c (temp, chr);
+        for (i = 0; i < (off_t) len; i++)
+        {
+            int chr;
+
+            chr = edit_buffer_get_byte (&edit->buffer, word_start + i);
+            if (!isspace (chr))
+            {
+                if (temp == NULL)
+                    temp = g_string_sized_new (len);
+
+                g_string_append_c (temp, chr);
+            }
+        }
     }
 
-    return g_string_free (temp, temp->len == 0);
+    return temp;
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** collect the possible completions */
 
-static gsize
-edit_collect_completions (WEdit * edit, off_t word_start, gsize word_len,
-                          char *match_expr, GString ** compl, gsize * num)
+static void
+edit_completion_string_free (gpointer data)
 {
+    g_string_free ((GString *) data, TRUE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * collect the possible completions from one buffer
+ */
+
+static void
+edit_collect_completion_from_one_buffer (gboolean active_buffer, GQueue ** compl,
+                                         mc_search_t * srch, edit_search_status_msg_t * esm,
+                                         off_t word_start, gsize word_len, off_t last_byte,
+                                         GString * current_word, int *max_width)
+{
+    GString *temp = NULL;
     gsize len = 0;
-    gsize max_len = 0;
-    gsize i;
-    int skip;
-    GString *temp;
+    off_t start = -1;
+
+    while (mc_search_run (srch, (void *) esm, start + 1, last_byte, &len))
+    {
+        gsize i;
+        int width;
+
+        if (temp == NULL)
+            temp = g_string_sized_new (8);
+        else
+            g_string_set_size (temp, 0);
+
+        start = srch->normal_offset;
+
+        /* add matched completion if not yet added */
+        for (i = 0; i < len; i++)
+        {
+            int ch;
+
+            ch = edit_buffer_get_byte (&esm->edit->buffer, start + i);
+            if (isspace (ch))
+                continue;
+
+            /* skip current word */
+            if (start + (off_t) i == word_start)
+                break;
+
+            g_string_append_c (temp, ch);
+        }
+
+        if (temp->len == 0)
+            continue;
+
+        if (current_word != NULL && g_string_equal (current_word, temp))
+            continue;
+
+        if (*compl == NULL)
+            *compl = g_queue_new ();
+        else
+        {
+            GList *l;
+
+            for (l = g_queue_peek_head_link (*compl); l != NULL; l = g_list_next (l))
+            {
+                GString *s = (GString *) l->data;
+
+                /* skip if already added */
+                if (strncmp (s->str + word_len, temp->str + word_len,
+                             MAX (len, s->len) - word_len) == 0)
+                    break;
+            }
+
+            if (l != NULL)
+            {
+                /* resort completion in main buffer only:
+                 * these completions must be at the top of list in the completion dialog */
+                if (!active_buffer && l != g_queue_peek_tail_link (*compl))
+                {
+                    /* move to the end */
+                    g_queue_unlink (*compl, l);
+                    g_queue_push_tail_link (*compl, l);
+                }
+
+                continue;
+            }
+        }
+
+#ifdef HAVE_CHARSET
+        {
+            GString *recoded;
+
+            recoded = str_convert_to_display (temp->str);
+            if (recoded->len != 0)
+                mc_g_string_copy (temp, recoded);
+
+            g_string_free (recoded, TRUE);
+        }
+#endif
+        if (active_buffer)
+            g_queue_push_tail (*compl, temp);
+        else
+            g_queue_push_head (*compl, temp);
+
+        start += len;
+
+        /* note the maximal length needed for the completion dialog */
+        width = str_term_width1 (temp->str);
+        *max_width = MAX (*max_width, width);
+
+        temp = NULL;
+    }
+
+    if (temp != NULL)
+        g_string_free (temp, TRUE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * collect the possible completions from all buffers
+ */
+
+static GQueue *
+edit_collect_completions (WEdit * edit, off_t word_start, gsize word_len,
+                          const char *match_expr, int *max_width)
+{
+    GQueue *compl = NULL;
     mc_search_t *srch;
-    off_t last_byte, start = -1;
-    char *current_word;
-    gboolean entire_file;
+    off_t last_byte;
+    GString *current_word;
+    gboolean entire_file, all_files;
     edit_search_status_msg_t esm;
 
 #ifdef HAVE_CHARSET
@@ -1231,11 +1348,11 @@ edit_collect_completions (WEdit * edit, off_t word_start, gsize word_len,
     srch = mc_search_new (match_expr, NULL);
 #endif
     if (srch == NULL)
-        return 0;
+        return NULL;
 
     entire_file =
         mc_config_get_bool (mc_global.main_config, CONFIG_APP_SECTION,
-                            "editor_wordcompletion_collect_entire_file", 0);
+                            "editor_wordcompletion_collect_entire_file", FALSE);
 
     last_byte = entire_file ? edit->buffer.size : word_start;
 
@@ -1253,87 +1370,58 @@ edit_collect_completions (WEdit * edit, off_t word_start, gsize word_len,
 
     current_word = edit_collect_completions_get_current_word (&esm, srch, word_start);
 
-    temp = g_string_new ("");
+    *max_width = 0;
 
-    /* collect max MAX_WORD_COMPLETIONS completions */
-    while (mc_search_run (srch, (void *) &esm, start + 1, last_byte, &len))
+    /* collect completions from current buffer at first */
+    edit_collect_completion_from_one_buffer (TRUE, &compl, srch, &esm, word_start, word_len,
+                                             last_byte, current_word, max_width);
+
+    /* collect completions from other buffers */
+    all_files =
+        mc_config_get_bool (mc_global.main_config, CONFIG_APP_SECTION,
+                            "editor_wordcompletion_collect_all_files", TRUE);
+    if (all_files)
     {
-        g_string_set_size (temp, 0);
-        start = srch->normal_offset;
+        const WGroup *owner = CONST_GROUP (CONST_WIDGET (edit)->owner);
+        gboolean saved_verbose;
+        GList *w;
 
-        /* add matched completion if not yet added */
-        for (i = 0; i < len; i++)
+        /* don't show incorrect percentage in edit_search_status_update_cb() */
+        saved_verbose = verbose;
+        verbose = FALSE;
+
+        for (w = owner->widgets; w != NULL; w = g_list_next (w))
         {
-            skip = edit_buffer_get_byte (&edit->buffer, start + i);
-            if (isspace (skip))
+            Widget *ww = WIDGET (w->data);
+            WEdit *e;
+
+            if (!edit_widget_is_editor (ww))
                 continue;
 
-            /* skip current word */
-            if (start + (off_t) i == word_start)
-                break;
+            e = (WEdit *) ww;
 
-            g_string_append_c (temp, skip);
+            if (e == edit)
+                continue;
+
+            /* search in entire file */
+            word_start = 0;
+            last_byte = e->buffer.size;
+            esm.edit = e;
+            esm.offset = 0;
+
+            edit_collect_completion_from_one_buffer (FALSE, &compl, srch, &esm, word_start,
+                                                     word_len, last_byte, current_word, max_width);
         }
 
-        if (temp->len == 0)
-            continue;
-
-        if (current_word != NULL && strcmp (current_word, temp->str) == 0)
-            continue;
-
-        skip = 0;
-
-        for (i = 0; i < *num; i++)
-        {
-            if (strncmp
-                ((char *) &compl[i]->str[word_len],
-                 (char *) &temp->str[word_len], MAX (len, compl[i]->len) - word_len) == 0)
-            {
-                GString *this = compl[i];
-
-                for (++i; i < *num; i++)
-                    compl[i - 1] = compl[i];
-                compl[*num - 1] = this;
-
-                skip = 1;
-                break;          /* skip it, already added */
-            }
-        }
-        if (skip != 0)
-            continue;
-
-        if (*num == MAX_WORD_COMPLETIONS)
-        {
-            g_string_free (compl[0], TRUE);
-            for (i = 1; i < *num; i++)
-                compl[i - 1] = compl[i];
-            (*num)--;
-        }
-#ifdef HAVE_CHARSET
-        {
-            GString *recoded;
-
-            recoded = str_convert_to_display (temp->str);
-            if (recoded->len != 0)
-                g_string_assign (temp, recoded->str);
-
-            g_string_free (recoded, TRUE);
-        }
-#endif
-        compl[(*num)++] = g_string_new_len (temp->str, temp->len);
-        start += len;
-
-        /* note the maximal length needed for the completion dialog */
-        if (len > max_len)
-            max_len = len;
+        verbose = saved_verbose;
     }
 
     status_msg_deinit (STATUS_MSG (&esm));
     mc_search_free (srch);
-    g_string_free (temp, TRUE);
-    g_free (current_word);
+    if (current_word != NULL)
+        g_string_free (current_word, TRUE);
 
-    return max_len;
+    return compl;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -3334,10 +3422,12 @@ edit_mail_dialog (WEdit * edit)
 void
 edit_complete_word_cmd (WEdit * edit)
 {
-    gsize i, max_len, word_len = 0, num_compl = 0;
     off_t word_start = 0;
+    gsize word_len = 0;
     GString *match_expr;
-    GString *compl[MAX_WORD_COMPLETIONS];       /* completions */
+    gsize i;
+    GQueue *compl;              /* completions: list of GString* */
+    int max_width;
 
     /* search start of word to be completed */
     if (!edit_find_word_start (&edit->buffer, &word_start, &word_len))
@@ -3351,43 +3441,39 @@ edit_complete_word_cmd (WEdit * edit)
     g_string_append (match_expr,
                      "[^\\s\\.=\\+\\[\\]\\(\\)\\,\\;\\:\\\"\\'\\-\\?\\/\\|\\\\\\{\\}\\*\\&\\^\\%%\\$#@\\!]+");
 
-    /* collect the possible completions              */
-    /* start search from begin to end of file */
-    max_len =
-        edit_collect_completions (edit, word_start, word_len, match_expr->str, (GString **) & compl,
-                                  &num_compl);
+    /* collect possible completions */
+    compl = edit_collect_completions (edit, word_start, word_len, match_expr->str, &max_width);
 
-    if (num_compl > 0)
+    g_string_free (match_expr, TRUE);
+
+    if (compl == NULL)
+        return;
+
+    if (g_queue_get_length (compl) == 1)
     {
         /* insert completed word if there is only one match */
-        if (num_compl == 1)
-            edit_complete_word_insert_recoded_completion (edit, compl[0]->str, word_len);
+
+        GString *curr_compl;
+
+        curr_compl = (GString *) g_queue_peek_head (compl);
+        edit_complete_word_insert_recoded_completion (edit, curr_compl->str, word_len);
+    }
+    else
+    {
         /* more than one possible completion => ask the user */
-        else
+
+        char *curr_compl;
+
+        /* let the user select the preferred completion */
+        curr_compl = editcmd_dialog_completion_show (edit, compl, max_width);
+        if (curr_compl != NULL)
         {
-            char *curr_compl;
-
-            /* !!! usually only a beep is expected and when <ALT-TAB> is !!! */
-            /* !!! pressed again the selection dialog pops up, but that  !!! */
-            /* !!! seems to require a further internal state             !!! */
-            /*tty_beep (); */
-
-            /* let the user select the preferred completion */
-            curr_compl = editcmd_dialog_completion_show (edit, max_len,
-                                                         (GString **) & compl, num_compl);
-
-            if (curr_compl != NULL)
-            {
-                edit_complete_word_insert_recoded_completion (edit, curr_compl, word_len);
-                g_free (curr_compl);
-            }
+            edit_complete_word_insert_recoded_completion (edit, curr_compl, word_len);
+            g_free (curr_compl);
         }
     }
 
-    g_string_free (match_expr, TRUE);
-    /* release memory before return */
-    for (i = 0; i < num_compl; i++)
-        g_string_free (compl[i], TRUE);
+    g_queue_free_full (compl, edit_completion_string_free);
 }
 
 /* --------------------------------------------------------------------------------------------- */
