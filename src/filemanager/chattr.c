@@ -178,7 +178,6 @@ static struct
     { FS_NOCOW_FL,          'C', N_("No COW"),                        FALSE, FALSE },
 #ifdef FS_DAX_FL
     /* added in v1.45.7
-       TODO: clarify version after ext2fsprogs release
        ext2fsprogs 1dd48bc23c3776df76459aff0c7723fff850ea45 2020-07-28 */
     { FS_DAX_FL,            'x', N_("Direct access for files"),       FALSE, FALSE },
 #endif
