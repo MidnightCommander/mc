@@ -248,8 +248,6 @@ int
 main (int argc, char *argv[])
 {
     GError *mcerror = NULL;
-    gboolean config_migrated = FALSE;
-    char *config_migrate_msg = NULL;
     int exit_code = EXIT_FAILURE;
 
     mc_global.run_from_parent_mc = !check_sid ();
@@ -298,7 +296,6 @@ main (int argc, char *argv[])
         goto startup_exit_falure;
 
     mc_config_init_config_paths (&mcerror);
-    config_migrated = mc_config_migrate_from_old_place (&mcerror, &config_migrate_msg);
     if (mcerror != NULL)
     {
         mc_event_deinit (NULL);
@@ -448,12 +445,6 @@ main (int argc, char *argv[])
 
         /* subshell_prompt is NULL here */
         mc_prompt = (geteuid () == 0) ? "# " : "$ ";
-
-        if (config_migrated)
-        {
-            message (D_ERROR, _("Warning"), "%s", config_migrate_msg);
-            g_free (config_migrate_msg);
-        }
     }
 
     /* Program main loop */
