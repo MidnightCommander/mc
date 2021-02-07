@@ -310,7 +310,7 @@ tty_init (gboolean mouse_enable, gboolean is_xterm)
     tty_reset_prog_mode ();
     load_terminfo_keys ();
 
-    SLtt_Blink_Mode = (tty_use_256colors () || tty_use_truecolors (NULL)) ? 1 : 0;
+    SLtt_Blink_Mode = (tty_use_256colors (NULL) || tty_use_truecolors (NULL)) ? 1 : 0;
 
     tty_start_interrupt_key ();
 

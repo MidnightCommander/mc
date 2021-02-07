@@ -159,7 +159,7 @@ mc_skin_init (const gchar * skin_override, GError ** mcerror)
         (void) mc_skin_ini_file_parse (&mc_skin__default);
         is_good_init = FALSE;
     }
-    if (is_good_init && mc_skin__default.have_256_colors && !tty_use_256colors ())
+    if (is_good_init && mc_skin__default.have_256_colors && !tty_use_256colors (&error))
     {
         mc_propagate_error (mcerror, 0,
                             _

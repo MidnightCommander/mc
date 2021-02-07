@@ -47,7 +47,7 @@ void tty_set_normal_attrs (void);
 
 void tty_color_set_defaults (const char *, const char *, const char *);
 
-extern gboolean tty_use_256colors (void);
+extern gboolean tty_use_256colors (GError **);
 extern gboolean tty_use_truecolors (GError **);
 
 /*** inline functions ****************************************************************************/
