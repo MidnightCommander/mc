@@ -306,15 +306,18 @@ static void
 do_external_panelize (char *command)
 {
     dir_list *list = &current_panel->dir;
-    FILE *external;
+    mc_pipe_t *external;
+    GError *error = NULL;
+    GString *remain_file_name = NULL;
 
-    open_error_pipe ();
-    external = popen (command, "r");
+    external = mc_popen (command, TRUE, TRUE, &error);
     if (external == NULL)
     {
-        close_error_pipe (D_ERROR, _("Cannot invoke command."));
+        message (D_ERROR, _("External panelize"), "%s", error->message);
+        g_error_free (error);
         return;
     }
+
     /* Clear the counters and the directory list */
     panel_clean_dir (current_panel);
 
@@ -324,48 +327,109 @@ do_external_panelize (char *command)
 
     while (TRUE)
     {
-        char line[MC_MAXPATHLEN];
-        size_t len;
-        char *name;
-        gboolean link_to_dir, stale_link;
-        struct stat st;
+        GString *line;
+        gboolean ok;
 
-        clearerr (external);
-        if (fgets (line, sizeof (line), external) == NULL)
+        /* init buffers before call of mc_pread() */
+        external->out.len = MC_PIPE_BUFSIZE;
+        external->err.len = MC_PIPE_BUFSIZE;
+
+        mc_pread (external, &error);
+
+        if (error != NULL)
         {
-            if (ferror (external) != 0 && errno == EINTR)
-                continue;
+            message (D_ERROR, MSG_ERROR, _("External panelize:\n%s"), error->message);
+            g_error_free (error);
             break;
         }
 
-        len = strlen (line);
-        if (line[len - 1] == '\n')
-            line[len - 1] = '\0';
-        if (line[0] == '\0')
-            continue;
+        if (external->err.len > 0)
+            message (D_ERROR, MSG_ERROR, _("External panelize:\n%s"), external->err.buf);
 
-        name = line;
-        if (line[0] == '.' && IS_PATH_SEP (line[1]))
-            name += 2;
-
-        if (!handle_path (name, &st, &link_to_dir, &stale_link))
-            continue;
-
-        if (!dir_list_append (list, name, &st, link_to_dir, stale_link))
+        if (external->out.len == MC_PIPE_STREAM_EOF)
             break;
 
-        file_mark (current_panel, list->len - 1, 0);
+        if (external->out.len == 0)
+            continue;
 
-        if ((list->len & 31) == 0)
-            rotate_dash (TRUE);
+        if (external->out.len == MC_PIPE_ERROR_READ)
+        {
+            message (D_ERROR, MSG_ERROR,
+                     _("External panelize:\nfailed to read data from child stdout:\n%s"),
+                     unix_error_string (external->out.error));
+            break;
+        }
+
+        ok = TRUE;
+
+        while (ok && (line = mc_pstream_get_string (&external->out)) != NULL)
+        {
+            char *name;
+            gboolean link_to_dir, stale_link;
+            struct stat st;
+
+            /* handle a \n-separated file list */
+
+            if (line->str[line->len - 1] == '\n')
+            {
+                /* entire file name or last chunk */
+
+                g_string_truncate (line, line->len - 1);
+
+                /* join filename chunks */
+                if (remain_file_name != NULL)
+                {
+                    g_string_append_len (remain_file_name, line->str, line->len);
+                    g_string_free (line, TRUE);
+                    line = remain_file_name;
+                    remain_file_name = NULL;
+                }
+            }
+            else
+            {
+                /* first or middle chunk of file name */
+
+                if (remain_file_name == NULL)
+                    remain_file_name = line;
+                else
+                {
+                    g_string_append_len (remain_file_name, line->str, line->len);
+                    g_string_free (line, TRUE);
+                }
+
+                continue;
+            }
+
+            name = line->str;
+
+            if (name[0] == '.' && IS_PATH_SEP (name[1]))
+                name += 2;
+
+            if (handle_path (name, &st, &link_to_dir, &stale_link))
+            {
+                ok = dir_list_append (list, name, &st, link_to_dir, stale_link);
+
+                if (ok)
+                {
+                    file_mark (current_panel, list->len - 1, 0);
+
+                    if ((list->len & 31) == 0)
+                        rotate_dash (TRUE);
+                }
+            }
+
+            g_string_free (line, TRUE);
+        }
     }
+
+    if (remain_file_name != NULL)
+        g_string_free (remain_file_name, TRUE);
+
+    mc_pclose (external, NULL);
 
     current_panel->is_panelized = TRUE;
     panelize_absolutize_if_needed (current_panel);
 
-    if (pclose (external) < 0)
-        message (D_NORMAL, _("External panelize"), _("Pipe close failed"));
-    close_error_pipe (D_NORMAL, NULL);
     try_to_select (current_panel, NULL);
     panel_re_sort (current_panel);
     rotate_dash (FALSE);
