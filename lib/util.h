@@ -87,6 +87,8 @@ typedef struct
     int fd;
     /* data read from fd */
     char buf[MC_PIPE_BUFSIZE];
+    /* current position in @buf (used by mc_pstream_get_string()) */
+    size_t pos;
     /* positive: length of data in buf;
      * MC_PIPE_STREAM_EOF: EOF of fd;
      * MC_PIPE_STREAM_UNREAD: there was not read from fd;
@@ -220,6 +222,8 @@ int my_systemv_flags (int flags, const char *command, char *const argv[]);
 mc_pipe_t *mc_popen (const char *command, gboolean read_out, gboolean read_err, GError ** error);
 void mc_pread (mc_pipe_t * p, GError ** error);
 void mc_pclose (mc_pipe_t * p, GError ** error);
+
+GString *mc_pstream_get_string (mc_pipe_stream_t * ps);
 
 void my_exit (int status);
 void save_stop_handler (void);

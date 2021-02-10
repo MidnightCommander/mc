@@ -277,6 +277,8 @@ mc_pread_stream (mc_pipe_stream_t * ps, const fd_set * fds)
         if (ps->null_term)
             ps->buf[(size_t) ps->len] = '\0';
     }
+
+    ps->pos = 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -626,6 +628,50 @@ mc_pread (mc_pipe_t * p, GError ** error)
         mc_pread_stream (&p->err, &fds);
     else
         p->err.len = MC_PIPE_STREAM_UNREAD;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Reads a line from @stream. Reading stops after an EOL or a newline. If a newline is read,
+ * it is appended to the line.
+ *
+ * @stream mc_pipe_stream_t object
+ *
+ * @return newly created GString or NULL in case of EOL;
+ */
+
+GString *
+mc_pstream_get_string (mc_pipe_stream_t * ps)
+{
+    char *s;
+    size_t size, i;
+    gboolean escape = FALSE;
+
+    g_return_val_if_fail (ps != NULL, NULL);
+
+    if (ps->len < 0)
+        return NULL;
+
+    size = ps->len - ps->pos;
+
+    if (size == 0)
+        return NULL;
+
+    s = ps->buf + ps->pos;
+
+    if (s[0] == '\0')
+        return NULL;
+
+    /* find '\0' or unescaped '\n' */
+    for (i = 0; i < size && !(s[i] == '\0' || (s[i] == '\n' && !escape)); i++)
+        escape = s[i] == '\\' ? !escape : FALSE;
+
+    if (i != size && s[i] == '\n')
+        i++;
+
+    ps->pos += i;
+
+    return g_string_new_len (s, i);
 }
 
 /* --------------------------------------------------------------------------------------------- */
