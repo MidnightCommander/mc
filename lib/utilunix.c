@@ -53,12 +53,6 @@
 #include <sys/select.h>
 #endif
 #include <sys/wait.h>
-#ifdef HAVE_SYS_IOCTL_H
-#include <sys/ioctl.h>
-#endif
-#ifdef HAVE_GET_PROCESS_STATS
-#include <sys/procstats.h>
-#endif
 #include <pwd.h>
 #include <grp.h>
 
@@ -116,9 +110,6 @@ typedef struct
 
 static int_cache uid_cache[UID_CACHE_SIZE];
 static int_cache gid_cache[GID_CACHE_SIZE];
-
-static int error_pipe[2];       /* File descriptors of error pipe */
-static int old_error;           /* File descriptor of old standard error */
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
@@ -755,116 +746,6 @@ tilde_expand (const char *directory)
         return g_strdup (directory);
 
     return g_strconcat (passwd->pw_dir, PATH_SEP_STR, q, (char *) NULL);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
- * Creates a pipe to hold standard error for a later analysis.
- * The pipe can hold 4096 bytes. Make sure no more is written
- * or a deadlock might occur.
- */
-
-void
-open_error_pipe (void)
-{
-    if (pipe (error_pipe) < 0)
-        message (D_NORMAL, _("Warning"), _("Pipe failed"));
-
-    old_error = dup (STDERR_FILENO);
-    if (old_error < 0 || close (STDERR_FILENO) != 0 || dup (error_pipe[1]) != STDERR_FILENO)
-    {
-        message (D_NORMAL, _("Warning"), _("Dup failed"));
-
-        close (error_pipe[0]);
-        error_pipe[0] = -1;
-    }
-    else
-    {
-        /*
-         * Settng stderr in nonblocking mode as we close it earlier, than
-         * program stops. We try to read some error at program startup,
-         * but we should not block on it.
-         *
-         * TODO: make piped stdin/stderr poll()/select()able to get rid
-         * of following hack.
-         */
-        int fd_flags;
-
-        fd_flags = fcntl (error_pipe[0], F_GETFL, NULL);
-        if (fd_flags != -1)
-        {
-            fd_flags |= O_NONBLOCK;
-
-            if (fcntl (error_pipe[0], F_SETFL, fd_flags) == -1)
-            {
-                /* TODO: handle it somehow */
-            }
-        }
-    }
-    /* we never write there */
-    close (error_pipe[1]);
-    error_pipe[1] = -1;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
- * Close a pipe
- *
- * @param error '-1' - ignore errors, '0' - display warning, '1' - display error
- * @param text is prepended to the error message from the pipe
- *
- * @return not 0 if an error was displayed
- */
-
-int
-close_error_pipe (int error, const char *text)
-{
-    const char *title;
-    char msg[MAX_PIPE_SIZE];
-    int len = 0;
-
-    /* already closed */
-    if (error_pipe[0] == -1)
-        return 0;
-
-    if (error < 0 || (error > 0 && (error & D_ERROR) != 0))
-        title = MSG_ERROR;
-    else
-        title = _("Warning");
-    if (old_error >= 0)
-    {
-        if (dup2 (old_error, STDERR_FILENO) == -1)
-        {
-            if (error < 0)
-                error = D_ERROR;
-
-            message (error, MSG_ERROR, _("Error dup'ing old error pipe"));
-            return 1;
-        }
-        close (old_error);
-        len = read (error_pipe[0], msg, sizeof (msg) - 1);
-
-        if (len >= 0)
-            msg[len] = 0;
-        close (error_pipe[0]);
-        error_pipe[0] = -1;
-    }
-    if (error < 0)
-        return 0;               /* Just ignore error message */
-    if (text == NULL)
-    {
-        if (len <= 0)
-            return 0;           /* Nothing to show */
-
-        /* Show message from pipe */
-        message (error, title, "%s", msg);
-    }
-    else
-    {
-        /* Show given text and possible message from pipe */
-        message (error, title, "%s\n%s", text, msg);
-    }
-    return 1;
 }
 
 /* --------------------------------------------------------------------------------------------- */

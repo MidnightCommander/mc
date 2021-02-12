@@ -208,11 +208,6 @@ const char *get_owner (uid_t uid);
 /* Returns a copy of *s until a \n is found and is below top */
 const char *extract_line (const char *s, const char *top);
 
-/* Error pipes */
-void open_error_pipe (void);
-void check_error_pipe (void);
-int close_error_pipe (int error, const char *text);
-
 /* Process spawning */
 int my_system (int flags, const char *shell, const char *command);
 int my_systeml (int flags, const char *shell, ...);
