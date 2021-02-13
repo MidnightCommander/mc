@@ -113,7 +113,7 @@ mcrar5fs_list ()
 
 mcrarfs_list ()
 {
-    [ x$UNRAR_VERSION = x5 ] && mcrar5fs_list "$@" || mcrar4fs_list "$@"
+    [ x$UNRAR_VERSION = x6 -o x$UNRAR_VERSION = x5 ] && mcrar5fs_list "$@" || mcrar4fs_list "$@"
 }
 
 mcrarfs_copyin ()
