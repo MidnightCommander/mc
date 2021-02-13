@@ -4,10 +4,10 @@ The archive was created thus:
     echo hello > 'filename with spaces.txt'
     rar a archive.rar 'filename with spaces.txt' ...
 
-Our 'urar' supports two listing formats: that of version 5, and that of
-version 4.
+Our 'urar' supports two listing formats: that of versions 6 and 5, and that of
+versions 4 and 3.
 
-'urar.v5.input' was created with "unrar vt -c- -cfg- archive.rar" using
+'urar.v6,v5.input' was created with "unrar vt -c- -cfg- archive.rar" using
 unrar 5.30.
 
 'urar.v4,v3.input' was created with "unrar v -c- -cfg- archive.rar" using
