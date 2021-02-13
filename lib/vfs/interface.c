@@ -818,9 +818,13 @@ mc_tmpdir (void)
         st.st_uid == getuid () && (st.st_mode & 0777) == 0700)
         return tmpdir;
 
-    sys_tmp = getenv ("TMPDIR");
+    sys_tmp = getenv ("MC_TMPDIR");
     if (sys_tmp == NULL || !IS_PATH_SEP (sys_tmp[0]))
-        sys_tmp = TMPDIR_DEFAULT;
+    {
+        sys_tmp = getenv ("TMPDIR");
+        if (sys_tmp == NULL || !IS_PATH_SEP (sys_tmp[0]))
+            sys_tmp = TMPDIR_DEFAULT;
+    }
 
     pwd = getpwuid (getuid ());
     if (pwd != NULL)
