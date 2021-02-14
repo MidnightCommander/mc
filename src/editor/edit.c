@@ -64,7 +64,7 @@
 #include "src/usermenu.h"       /* user_menu_cmd() */
 
 #include "src/setup.h"          /* option_tab_spacing */
-#include "src/keybind-defaults.h"
+#include "src/keymap.h"
 
 #include "edit-impl.h"
 #include "editwidget.h"

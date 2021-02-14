@@ -65,7 +65,7 @@
 #include "lib/widget.h"
 #include "lib/event-types.h"
 
-#include "keybind-defaults.h"
+#include "keymap.h"
 #include "help.h"
 
 /*** global variables ****************************************************************************/

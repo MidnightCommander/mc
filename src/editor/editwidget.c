@@ -55,7 +55,7 @@
 #include "lib/charsets.h"
 #endif
 
-#include "src/keybind-defaults.h"       /* keybind_lookup_keymap_command() */
+#include "src/keymap.h"         /* keybind_lookup_keymap_command() */
 #include "src/setup.h"          /* home_dir */
 #include "src/execute.h"        /* toggle_subshell()  */
 #include "src/filemanager/cmd.h"        /* save_setup_cmd()  */

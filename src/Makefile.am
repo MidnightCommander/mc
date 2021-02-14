@@ -82,7 +82,7 @@ libinternal_la_SOURCES = \
 	file_history.c file_history.h \
 	help.c help.h \
 	history.h \
-	keybind-defaults.c keybind-defaults.h \
+	keymap.c keymap.h \
 	learn.c learn.h \
 	setup.c setup.h \
 	textconf.c textconf.h \

@@ -55,7 +55,7 @@
 #include "src/filemanager/layout.h"     /* Needed for get_current_index and get_other_panel */
 
 #include "src/execute.h"        /* toggle_subshell() */
-#include "src/keybind-defaults.h"
+#include "src/keymap.h"
 #include "src/setup.h"
 #include "src/history.h"
 #ifdef HAVE_CHARSET

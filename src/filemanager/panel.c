@@ -60,7 +60,7 @@
 #ifdef HAVE_CHARSET
 #include "src/selcodepage.h"    /* select_charset (), SELECT_CHARSET_NO_TRANSLATE */
 #endif
-#include "src/keybind-defaults.h"       /* global_keymap_t */
+#include "src/keymap.h"         /* global_keymap_t */
 #ifdef ENABLE_SUBSHELL
 #include "src/subshell/subshell.h"      /* do_subshell_chdir() */
 #endif

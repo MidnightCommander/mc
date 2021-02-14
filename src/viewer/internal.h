@@ -11,7 +11,7 @@
 #include "lib/widget.h"
 #include "lib/vfs/vfs.h"        /* vfs_path_t */
 
-#include "src/keybind-defaults.h"       /* global_keymap_t */
+#include "src/keymap.h"         /* global_keymap_t */
 #include "src/filemanager/dir.h"        /* dir_list */
 
 #include "mcviewer.h"

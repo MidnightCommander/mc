@@ -49,7 +49,7 @@
 #include "lib/widget.h"
 
 #include "src/setup.h"          /* drop_menus */
-#include "src/keybind-defaults.h"
+#include "src/keymap.h"
 
 #include "edit-impl.h"
 #include "editwidget.h"

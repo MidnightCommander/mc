@@ -46,7 +46,7 @@
 #include "lib/vfs/vfs.h"
 #include "lib/widget.h"
 
-#include "src/keybind-defaults.h"       /* chattr_map */
+#include "src/keymap.h"         /* chattr_map */
 
 #include "cmd.h"                /* chattr_cmd(), chattr_get_as_str() */
 

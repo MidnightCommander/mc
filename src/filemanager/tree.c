@@ -56,7 +56,7 @@
 #include "lib/event.h"          /* mc_event_raise() */
 
 #include "src/setup.h"          /* confirm_delete, panels_options */
-#include "src/keybind-defaults.h"
+#include "src/keymap.h"
 #include "src/history.h"
 
 #include "dir.h"

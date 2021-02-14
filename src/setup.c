@@ -40,7 +40,6 @@
 #include "lib/fileloc.h"
 #include "lib/timefmt.h"
 #include "lib/util.h"
-#include "lib/widget.h"
 
 #ifdef ENABLE_VFS_FTP
 #include "src/vfs/ftpfs/ftpfs.h"
@@ -64,7 +63,6 @@
 #include "args.h"
 #include "execute.h"            /* pause_after_run */
 #include "clipboard.h"
-#include "keybind-defaults.h"   /* keybind_lookup_action */
 
 #ifdef HAVE_CHARSET
 #include "selcodepage.h"
@@ -440,90 +438,8 @@ static const struct
 };
 /* *INDENT-ON* */
 
-/*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
-
-/**
- * Get name of config file.
- *
- * @param subdir If not NULL, config is also searched in specified subdir.
- * @param config_file_name If relative, file if searched in standard paths.
- *
- * @return newly allocated string with config name or NULL if file is not found.
- */
-
-static char *
-load_setup_get_full_config_name (const char *subdir, const char *config_file_name)
-{
-    /*
-       TODO: IMHO, in future, this function shall be placed in mcconfig module.
-     */
-    char *lc_basename, *ret;
-    char *file_name;
-
-    if (config_file_name == NULL)
-        return NULL;
-
-    /* check for .keymap suffix */
-    if (g_str_has_suffix (config_file_name, ".keymap"))
-        file_name = g_strdup (config_file_name);
-    else
-        file_name = g_strconcat (config_file_name, ".keymap", (char *) NULL);
-
-    canonicalize_pathname (file_name);
-
-    if (g_path_is_absolute (file_name))
-        return file_name;
-
-    lc_basename = g_path_get_basename (file_name);
-    g_free (file_name);
-
-    if (lc_basename == NULL)
-        return NULL;
-
-    if (subdir != NULL)
-        ret = g_build_filename (mc_config_get_path (), subdir, lc_basename, (char *) NULL);
-    else
-        ret = g_build_filename (mc_config_get_path (), lc_basename, (char *) NULL);
-
-    if (exist_file (ret))
-    {
-        g_free (lc_basename);
-        canonicalize_pathname (ret);
-        return ret;
-    }
-    g_free (ret);
-
-    if (subdir != NULL)
-        ret = g_build_filename (mc_global.sysconfig_dir, subdir, lc_basename, (char *) NULL);
-    else
-        ret = g_build_filename (mc_global.sysconfig_dir, lc_basename, (char *) NULL);
-
-    if (exist_file (ret))
-    {
-        g_free (lc_basename);
-        canonicalize_pathname (ret);
-        return ret;
-    }
-    g_free (ret);
-
-    if (subdir != NULL)
-        ret = g_build_filename (mc_global.share_data_dir, subdir, lc_basename, (char *) NULL);
-    else
-        ret = g_build_filename (mc_global.share_data_dir, lc_basename, (char *) NULL);
-
-    g_free (lc_basename);
-
-    if (exist_file (ret))
-    {
-        canonicalize_pathname (ret);
-        return ret;
-    }
-
-    g_free (ret);
-    return NULL;
-}
-
+/*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
 static const char *
@@ -585,27 +501,6 @@ setup__move_panels_config_into_separate_file (const char *profile)
 
     mc_config_save_file (tmp_cfg, NULL);
     mc_config_deinit (tmp_cfg);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
-  Create new mc_config object from specified ini-file or
-  append data to existing mc_config object from ini-file
-*/
-
-static void
-load_setup_init_config_from_file (mc_config_t ** config, const char *fname, gboolean read_only)
-{
-    /*
-       TODO: IMHO, in future, this function shall be placed in mcconfig module.
-     */
-    if (exist_file (fname))
-    {
-        if (*config != NULL)
-            mc_config_read_file (*config, fname, read_only, TRUE);
-        else
-            *config = mc_config_init (fname, read_only);
-    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -762,116 +657,6 @@ load_keys_from_section (const char *terminal, mc_config_t * cfg)
     }
     g_strfreev (keys);
     g_free (section_name);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-load_keymap_from_section (const char *section_name, GArray * keymap, mc_config_t * cfg)
-{
-    gchar **profile_keys, **keys;
-
-    if (section_name == NULL)
-        return;
-
-    keys = mc_config_get_keys (cfg, section_name, NULL);
-
-    for (profile_keys = keys; *profile_keys != NULL; profile_keys++)
-    {
-        gchar **values;
-
-        values = mc_config_get_string_list (cfg, section_name, *profile_keys, NULL);
-        if (values != NULL)
-        {
-            long action;
-
-            action = keybind_lookup_action (*profile_keys);
-            if (action > 0)
-            {
-                gchar **curr_values;
-
-                for (curr_values = values; *curr_values != NULL; curr_values++)
-                    keybind_cmd_bind (keymap, *curr_values, action);
-            }
-
-            g_strfreev (values);
-        }
-    }
-
-    g_strfreev (keys);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static mc_config_t *
-load_setup_get_keymap_profile_config (gboolean load_from_file)
-{
-    /*
-       TODO: IMHO, in future, this function shall be placed in mcconfig module.
-     */
-    mc_config_t *keymap_config;
-    char *share_keymap, *sysconfig_keymap;
-    char *fname, *fname2;
-
-    /* 0) Create default keymap */
-    keymap_config = create_default_keymap ();
-    if (!load_from_file)
-        return keymap_config;
-
-    /* load and merge global keymaps */
-
-    /* 1) /usr/share/mc (mc_global.share_data_dir) */
-    share_keymap = g_build_filename (mc_global.share_data_dir, GLOBAL_KEYMAP_FILE, (char *) NULL);
-    load_setup_init_config_from_file (&keymap_config, share_keymap, TRUE);
-
-    /* 2) /etc/mc (mc_global.sysconfig_dir) */
-    sysconfig_keymap =
-        g_build_filename (mc_global.sysconfig_dir, GLOBAL_KEYMAP_FILE, (char *) NULL);
-    load_setup_init_config_from_file (&keymap_config, sysconfig_keymap, TRUE);
-
-    /* then load and merge one of user-defined keymap */
-
-    /* 3) --keymap=<keymap> */
-    fname = load_setup_get_full_config_name (NULL, mc_args__keymap_file);
-    if (fname != NULL && strcmp (fname, sysconfig_keymap) != 0 && strcmp (fname, share_keymap) != 0)
-    {
-        load_setup_init_config_from_file (&keymap_config, fname, TRUE);
-        goto done;
-    }
-    g_free (fname);
-
-    /* 4) getenv("MC_KEYMAP") */
-    fname = load_setup_get_full_config_name (NULL, g_getenv ("MC_KEYMAP"));
-    if (fname != NULL && strcmp (fname, sysconfig_keymap) != 0 && strcmp (fname, share_keymap) != 0)
-    {
-        load_setup_init_config_from_file (&keymap_config, fname, TRUE);
-        goto done;
-    }
-
-    MC_PTR_FREE (fname);
-
-    /* 5) main config; [Midnight Commander] -> keymap */
-    fname2 = mc_config_get_string (mc_global.main_config, CONFIG_APP_SECTION, "keymap", NULL);
-    if (fname2 != NULL && *fname2 != '\0')
-        fname = load_setup_get_full_config_name (NULL, fname2);
-    g_free (fname2);
-    if (fname != NULL && strcmp (fname, sysconfig_keymap) != 0 && strcmp (fname, share_keymap) != 0)
-    {
-        load_setup_init_config_from_file (&keymap_config, fname, TRUE);
-        goto done;
-    }
-    g_free (fname);
-
-    /* 6) ${XDG_CONFIG_HOME}/mc/mc.keymap */
-    fname = mc_config_get_full_path (GLOBAL_KEYMAP_FILE);
-    load_setup_init_config_from_file (&keymap_config, fname, TRUE);
-
-  done:
-    g_free (fname);
-    g_free (sysconfig_keymap);
-    g_free (share_keymap);
-
-    return keymap_config;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1295,7 +1080,6 @@ setup_save_config_show_error (const char *filename, GError ** mcerror)
     }
 }
 
-
 /* --------------------------------------------------------------------------------------------- */
 
 void
@@ -1337,116 +1121,6 @@ load_anon_passwd (void)
     return NULL;
 }
 #endif /* ENABLE_VFS_FTP */
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-load_keymap_defs (gboolean load_from_file)
-{
-    /*
-     * Load keymap from GLOBAL_KEYMAP_FILE before ${XDG_CONFIG_HOME}/mc/mc.keymap, so that the user
-     * definitions override global settings.
-     */
-    mc_config_t *mc_global_keymap;
-
-    mc_global_keymap = load_setup_get_keymap_profile_config (load_from_file);
-
-    if (mc_global_keymap != NULL)
-    {
-#define LOAD_KEYMAP(s,km) \
-    km##_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t)); \
-    load_keymap_from_section (KEYMAP_SECTION_##s, km##_keymap, mc_global_keymap)
-
-        LOAD_KEYMAP (FILEMANAGER, filemanager);
-        LOAD_KEYMAP (FILEMANAGER_EXT, filemanager_x);
-        LOAD_KEYMAP (PANEL, panel);
-        LOAD_KEYMAP (DIALOG, dialog);
-        LOAD_KEYMAP (MENU, menu);
-        LOAD_KEYMAP (INPUT, input);
-        LOAD_KEYMAP (LISTBOX, listbox);
-        LOAD_KEYMAP (RADIO, radio);
-        LOAD_KEYMAP (TREE, tree);
-        LOAD_KEYMAP (HELP, help);
-#ifdef ENABLE_EXT2FS_ATTR
-        LOAD_KEYMAP (CHATTR, chattr);
-#endif
-#ifdef USE_INTERNAL_EDIT
-        LOAD_KEYMAP (EDITOR, editor);
-        LOAD_KEYMAP (EDITOR_EXT, editor_x);
-#endif
-        LOAD_KEYMAP (VIEWER, viewer);
-        LOAD_KEYMAP (VIEWER_HEX, viewer_hex);
-#ifdef USE_DIFF_VIEW
-        LOAD_KEYMAP (DIFFVIEWER, diff);
-#endif
-
-#undef LOAD_KEYMAP
-        mc_config_deinit (mc_global_keymap);
-    }
-
-#define SET_MAP(m) \
-    m##_map = (global_keymap_t *) m##_keymap->data
-
-    SET_MAP (filemanager);
-    SET_MAP (filemanager_x);
-    SET_MAP (panel);
-    SET_MAP (dialog);
-    SET_MAP (menu);
-    SET_MAP (input);
-    SET_MAP (listbox);
-    SET_MAP (radio);
-    SET_MAP (tree);
-    SET_MAP (help);
-#ifdef ENABLE_EXT2FS_ATTR
-    SET_MAP (chattr);
-#endif
-#ifdef USE_INTERNAL_EDIT
-    SET_MAP (editor);
-    SET_MAP (editor_x);
-#endif
-    SET_MAP (viewer);
-    SET_MAP (viewer_hex);
-#ifdef USE_DIFF_VIEW
-    SET_MAP (diff);
-#endif
-
-#undef SET_MAP
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-free_keymap_defs (void)
-{
-#define FREE_KEYMAP(km) \
-    if (km##_keymap != NULL) \
-        g_array_free (km##_keymap, TRUE)
-
-    FREE_KEYMAP (filemanager);
-    FREE_KEYMAP (filemanager_x);
-    FREE_KEYMAP (panel);
-    FREE_KEYMAP (dialog);
-    FREE_KEYMAP (menu);
-    FREE_KEYMAP (input);
-    FREE_KEYMAP (listbox);
-    FREE_KEYMAP (radio);
-    FREE_KEYMAP (tree);
-    FREE_KEYMAP (help);
-#ifdef ENABLE_EXT2FS_ATTR
-    FREE_KEYMAP (chattr);
-#endif
-#ifdef USE_INTERNAL_EDIT
-    FREE_KEYMAP (editor);
-    FREE_KEYMAP (editor_x);
-#endif
-    FREE_KEYMAP (viewer);
-    FREE_KEYMAP (viewer_hex);
-#ifdef USE_DIFF_VIEW
-    FREE_KEYMAP (diff);
-#endif
-
-#undef FREE_KEYMAP
-}
 
 /* --------------------------------------------------------------------------------------------- */
 

@@ -67,7 +67,7 @@
 #include "src/history.h"
 #include "src/file_history.h"   /* show_file_history() */
 #include "src/execute.h"
-#include "src/keybind-defaults.h"
+#include "src/keymap.h"
 
 #include "internal.h"
 

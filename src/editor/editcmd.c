@@ -67,7 +67,7 @@
 #ifdef HAVE_CHARSET
 #include "src/selcodepage.h"
 #endif
-#include "src/keybind-defaults.h"
+#include "src/keymap.h"
 #include "src/util.h"           /* check_for_default() */
 
 #include "edit-impl.h"

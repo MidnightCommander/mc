@@ -61,7 +61,7 @@
 #include "src/execute.h"        /* toggle_subshell */
 #include "src/setup.h"          /* variables */
 #include "src/learn.h"          /* learn_keys() */
-#include "src/keybind-defaults.h"
+#include "src/keymap.h"
 #include "lib/fileloc.h"        /* MC_FILEPOS_FILE */
 #include "lib/keybind.h"
 #include "lib/event.h"
