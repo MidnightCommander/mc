@@ -45,6 +45,12 @@
 
 /*** file scope type declarations ****************************************************************/
 
+typedef struct name_keymap_t
+{
+    const char *name;
+    long val;
+} name_keymap_t;
+
 /*** file scope variables ************************************************************************/
 
 static name_keymap_t command_names[] = {
