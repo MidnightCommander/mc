@@ -317,7 +317,9 @@ static const struct
     { "old_esc_mode", &old_esc_mode },
     { "cd_symlinks", &mc_global.vfs.cd_symlinks },
     { "show_all_if_ambiguous", &mc_global.widget.show_all_if_ambiguous },
+#ifdef USE_FILE_CMD
     { "use_file_to_guess_type", &use_file_to_check_type },
+#endif
     { "alternate_plus_minus", &mc_global.tty.alternate_plus_minus },
     { "only_leading_plus_minus", &only_leading_plus_minus },
     { "show_output_starts_shell", &output_starts_shell },

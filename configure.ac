@@ -115,23 +115,65 @@ fi
 AC_SUBST(MANDOC)
 AC_SUBST(MAN_FLAGS)
 
-dnl Check for -L option to file
+dnl Check for -z, -L, and -S options to file
 AC_CHECK_PROG(HAVE_FILECMD, file, true, false)
 if $HAVE_FILECMD; then
-    AC_MSG_CHECKING([for -L option to file command])
-    AC_CACHE_VAL(mc_cv_filel, [
-    file -L . > /dev/null 2>&1
-    if test $? = 0; then
-	mc_cv_filel=yes
-    else
-	mc_cv_filel=no
-    fi
+    dnl Don't use the file command if it doesn't accept the -z option
+    AC_MSG_CHECKING([for -z option to file command])
+    AC_CACHE_VAL(mc_cv_file_z, [
+        file -z . > /dev/null 2>&1
+        if test $? = 0; then
+            mc_cv_file_z=yes
+        else
+            mc_cv_file_z=no
+        fi
     ])
-    if test x$mc_cv_filel = xyes; then
-	AC_DEFINE(FILE_L, 1, [Define if the file command accepts the -L option])
+    AC_MSG_RESULT([$mc_cv_file_z])
+
+    if test x$mc_cv_file_z = xyes; then
+        AC_DEFINE(USE_FILE_CMD, 1, [Define if the file command accepts the -z option])
+    else
+        AC_MSG_WARN([The file command doesn't accept the -z option and will not be used])
     fi
-    filel=$mc_cv_filel
-    AC_MSG_RESULT([$filel])
+
+    if test x$mc_cv_file_z = xyes; then
+        dnl file is used; check -L and -S options
+
+        AC_MSG_CHECKING([for -L option to file command])
+        AC_CACHE_VAL(mc_cv_file_L, [
+            file -L . > /dev/null 2>&1
+            if test $? = 0; then
+                mc_cv_file_L=yes
+            else
+                mc_cv_file_L=no
+            fi
+        ])
+        AC_MSG_RESULT([$mc_cv_file_L])
+
+        if test x$mc_cv_file_L = xyes; then
+            AC_DEFINE(FILE_L, "-L ", [Define if the file command accepts the -L option])
+        else
+            AC_DEFINE(FILE_L, "", [Define if the file command accepts the -L option])
+        fi
+
+        dnl The file command accepts the -S option since 5.33
+        AC_MSG_CHECKING([for -S option to file command])
+        AC_CACHE_VAL(mc_cv_file_S, [
+            file -S . > /dev/null 2>&1
+            if test $? = 0; then
+                mc_cv_file_S=yes
+            else
+                mc_cv_file_S=no
+            fi
+        ])
+        AC_MSG_RESULT([$mc_cv_file_S])
+
+        if test x$mc_cv_file_S = xyes; then
+            AC_DEFINE(FILE_S, "-S ", [Define if file command accepts the -S option])
+        else
+            AC_DEFINE(FILE_S, "", [Define if file command accepts the -S option])
+        fi
+    fi
 fi
 
 dnl Only list browsers here that can be run in background (i.e. with `&')

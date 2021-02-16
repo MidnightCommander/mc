@@ -71,10 +71,11 @@
 
 /*** file scope macro definitions ****************************************************************/
 
-#ifdef FILE_L
-#define FILE_CMD "file -L -z "
+#ifdef USE_FILE_CMD
+#define FILE_CMD "file -z " FILE_S FILE_L
 #else
-#define FILE_CMD "file -z "
+/* actually file is unused, but define some reasonable command */
+#define FILE_CMD "file "
 #endif
 
 /*** file scope type declarations ****************************************************************/
