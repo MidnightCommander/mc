@@ -324,7 +324,7 @@ init_subshell_child (const char *pty_name)
     {
     case SHELL_BASH:
         /* Do we have a custom init file ~/.local/share/mc/bashrc? */
-        init_file = mc_config_get_full_path ("bashrc");
+        init_file = mc_config_get_full_path (MC_BASHRC_FILE);
 
         /* Otherwise use ~/.bashrc */
         if (!exist_file (init_file))
@@ -341,7 +341,7 @@ init_subshell_child (const char *pty_name)
         {
             char *input_file;
 
-            input_file = mc_config_get_full_path ("inputrc");
+            input_file = mc_config_get_full_path (MC_INPUTRC_FILE);
             if (exist_file (input_file))
             {
                 putenv_str = g_strconcat ("INPUTRC=", input_file, (char *) NULL);
@@ -355,7 +355,7 @@ init_subshell_child (const char *pty_name)
     case SHELL_ASH_BUSYBOX:
     case SHELL_DASH:
         /* Do we have a custom init file ~/.local/share/mc/ashrc? */
-        init_file = mc_config_get_full_path ("ashrc");
+        init_file = mc_config_get_full_path (MC_ASHRC_FILE);
 
         /* Otherwise use ~/.profile */
         if (!exist_file (init_file))

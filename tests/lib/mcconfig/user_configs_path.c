@@ -122,15 +122,15 @@ static const struct test_user_config_paths_ds
     },
     { /* 11. */
         CONF_DATA,
-        "ashrc"
+        MC_ASHRC_FILE
     },
     { /* 12. */
         CONF_DATA,
-        "bashrc"
+        MC_BASHRC_FILE
     },
     { /* 13. */
         CONF_DATA,
-        "inputrc"
+        MC_INPUTRC_FILE
     },
     { /* 14. */
         CONF_DATA,
