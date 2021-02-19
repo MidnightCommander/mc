@@ -87,7 +87,7 @@ do_view_action() {
     djvu)
         djvused -e print-pure-txt "${MC_EXT_FILENAME}"
         ;;
-    epub)
+    ebook)
         einfo -v "${MC_EXT_FILENAME}"
         ;;
     *)
@@ -197,7 +197,7 @@ do_open_action() {
     comic)
         cbrpager "${MC_EXT_FILENAME}" &
         ;;
-    epub)
+    ebook)
         lucidor "${MC_EXT_FILENAME}" >/dev/null &
         ;;
     *)

@@ -664,10 +664,10 @@ regex/i/\.djvu?$
 regex/i/\.cb[zr]$
 	Open=@EXTHELPERSDIR@/doc.sh open comic
 
-# Epub & mobi
-regex/i/\.(epub|mobi)$
-	Open=@EXTHELPERSDIR@/doc.sh open epub
-	View=%view{ascii} @EXTHELPERSDIR@/doc.sh view epub
+# Epup, mobi, fb2
+regex/i/\.(epub|mobi|fb2)$
+	Open=@EXTHELPERSDIR@/doc.sh open ebook
+	View=%view{ascii} @EXTHELPERSDIR@/doc.sh view ebook
 
 
 ### Miscellaneous ###
