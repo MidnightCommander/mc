@@ -12,6 +12,10 @@ do_view_action() {
     filetype=$1
 
     case "${filetype}" in
+    common)
+        mediainfo "${MC_EXT_FILENAME}"
+        ;;
+
     mp3)
         mpg123 -vtn1 "${MC_EXT_FILENAME}" 2>&1 | \
             sed -n '/^Title/,/^Comment/p;/^MPEG/,/^Audio/p'

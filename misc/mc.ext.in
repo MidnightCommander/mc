@@ -487,6 +487,7 @@ shell/i/.svg
 
 regex/i/\.(wav|snd|voc|au|smp|aiff|snd|m4a|ape|aac|wv)$
 	Open=@EXTHELPERSDIR@/sound.sh open common
+	View=%view{ascii} @EXTHELPERSDIR@/sound.sh view common
 
 regex/i/\.(mod|s3m|xm|it|mtm|669|stm|ult|far)$
 	Open=@EXTHELPERSDIR@/sound.sh open mod
