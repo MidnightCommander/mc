@@ -34,4 +34,5 @@ int etags_set_definition_hash (const char *tagfile, const char *start_path,
                                const char *match_func, etags_hash_t * def_hash);
 
 /*** inline functions ****************************************************************************/
+
 #endif /* MC__EDIT_ETAGS_H */

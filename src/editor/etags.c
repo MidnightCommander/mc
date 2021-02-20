@@ -31,11 +31,11 @@
 
 #include <config.h>
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <inttypes.h>
-#include <string.h>
 #include <ctype.h>
+#include <inttypes.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 #include "lib/global.h"
 #include "lib/util.h"           /* canonicalize_pathname() */
@@ -50,6 +50,7 @@
 
 /*** file scope variables ************************************************************************/
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -62,7 +63,8 @@ parse_define (const char *buf, char **long_name, char **short_name, long *line)
         in_longname,
         in_shortname,
         in_shortname_first_char,
-        in_line, finish
+        in_line,
+        finish
     } def_state = in_longname;
     /* *INDENT-ON* */
 
@@ -80,21 +82,13 @@ parse_define (const char *buf, char **long_name, char **short_name, long *line)
         {
         case in_longname:
             if (c == 0x01)
-            {
                 def_state = in_line;
-            }
             else if (c == 0x7F)
-            {
                 def_state = in_shortname;
-            }
-            else
-            {
-                if (nlong < LONG_DEF_LEN - 1)
-                {
-                    longdef[nlong++] = c;
-                }
-            }
+            else if (nlong < LONG_DEF_LEN - 1)
+                longdef[nlong++] = c;
             break;
+
         case in_shortname_first_char:
             if (isdigit (c))
             {
@@ -103,48 +97,30 @@ parse_define (const char *buf, char **long_name, char **short_name, long *line)
                 def_state = in_line;
             }
             else if (c == 0x01)
-            {
                 def_state = in_line;
-            }
-            else
+            else if (nshort < SHORT_DEF_LEN - 1)
             {
-                if (nshort < SHORT_DEF_LEN - 1)
-                {
-                    shortdef[nshort++] = c;
-                    def_state = in_shortname;
-                }
+                shortdef[nshort++] = c;
+                def_state = in_shortname;
             }
             break;
+
         case in_shortname:
             if (c == 0x01)
-            {
                 def_state = in_line;
-            }
             else if (c == '\n')
-            {
                 def_state = finish;
-            }
-            else
-            {
-                if (nshort < SHORT_DEF_LEN - 1)
-                {
-                    shortdef[nshort++] = c;
-                }
-            }
+            else if (nshort < SHORT_DEF_LEN - 1)
+                shortdef[nshort++] = c;
             break;
+
         case in_line:
             if (c == ',' || c == '\n')
-            {
                 def_state = finish;
-            }
-            else if (isdigit (c))
-            {
-                if (nline < LINE_DEF_LEN - 1)
-                {
-                    linedef[nline++] = c;
-                }
-            }
+            else if (isdigit (c) && nline < LINE_DEF_LEN - 1)
+                linedef[nline++] = c;
             break;
+
         case finish:
             longdef[nlong] = '\0';
             shortdef[nshort] = '\0';
@@ -153,15 +129,19 @@ parse_define (const char *buf, char **long_name, char **short_name, long *line)
             *short_name = shortdef;
             *line = atol (linedef);
             return TRUE;
+
         default:
             break;
         }
+
         buf++;
         c = *buf;
     }
+
     *long_name = NULL;
     *short_name = NULL;
     *line = 0;
+
     return FALSE;
 }
 
@@ -184,13 +164,10 @@ etags_set_definition_hash (const char *tagfile, const char *start_path,
 
     FILE *f;
     char buf[BUF_LARGE];
-
-    char *chekedstr = NULL;
-
     int num = 0;                /* returned value */
     char *filename = NULL;
 
-    if (!match_func || !tagfile)
+    if (match_func == NULL || tagfile == NULL)
         return 0;
 
     /* open file with positions */
@@ -198,16 +175,14 @@ etags_set_definition_hash (const char *tagfile, const char *start_path,
     if (f == NULL)
         return 0;
 
-    while (fgets (buf, sizeof (buf), f))
-    {
+    while (fgets (buf, sizeof (buf), f) != NULL)
         switch (state)
         {
         case start:
             if (buf[0] == 0x0C)
-            {
                 state = in_filename;
-            }
             break;
+
         case in_filename:
             {
                 size_t pos;
@@ -218,42 +193,47 @@ etags_set_definition_hash (const char *tagfile, const char *start_path,
                 state = in_define;
                 break;
             }
+
         case in_define:
             if (buf[0] == 0x0C)
-            {
                 state = in_filename;
-                break;
-            }
-            /* check if the filename matches the define pos */
-            chekedstr = strstr (buf, match_func);
-            if (chekedstr)
+            else
             {
-                char *longname = NULL;
-                char *shortname = NULL;
-                long line = 0;
+                char *chekedstr;
 
-                parse_define (chekedstr, &longname, &shortname, &line);
-                if (num < MAX_DEFINITIONS - 1)
+                /* check if the filename matches the define pos */
+                chekedstr = strstr (buf, match_func);
+                if (chekedstr != NULL)
                 {
-                    def_hash[num].filename_len = strlen (filename);
-                    def_hash[num].fullpath =
-                        mc_build_filename (start_path, filename, (char *) NULL);
+                    char *longname = NULL;
+                    char *shortname = NULL;
+                    long line = 0;
 
-                    canonicalize_pathname (def_hash[num].fullpath);
-                    def_hash[num].filename = g_strdup (filename);
-                    def_hash[num].short_define = g_strdup (shortname ? shortname : longname);
-                    def_hash[num].line = line;
-                    num++;
+                    parse_define (chekedstr, &longname, &shortname, &line);
+                    if (num < MAX_DEFINITIONS - 1)
+                    {
+                        def_hash[num].filename_len = strlen (filename);
+                        def_hash[num].fullpath =
+                            mc_build_filename (start_path, filename, (char *) NULL);
+
+                        canonicalize_pathname (def_hash[num].fullpath);
+                        def_hash[num].filename = g_strdup (filename);
+                        def_hash[num].short_define =
+                            g_strdup (shortname != NULL ? shortname : longname);
+                        def_hash[num].line = line;
+                        num++;
+                    }
                 }
             }
             break;
+
         default:
             break;
         }
-    }
 
     g_free (filename);
     fclose (f);
+
     return num;
 }
 
