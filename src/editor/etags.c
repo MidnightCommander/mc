@@ -80,12 +80,10 @@ parse_define (const char *buf, char **long_name, char **short_name, long *line)
     } def_state = in_longname;
     /* *INDENT-ON* */
 
-    static char longdef[LONG_DEF_LEN];
-    static char shortdef[SHORT_DEF_LEN];
-    static char linedef[LINE_DEF_LEN];
-    int nlong = 0;
-    int nshort = 0;
-    int nline = 0;
+    GString *longdef = NULL;
+    GString *shortdef = NULL;
+    GString *linedef = NULL;
+
     char c = *buf;
 
     while (!(c == '\0' || c == '\n'))
@@ -97,22 +95,34 @@ parse_define (const char *buf, char **long_name, char **short_name, long *line)
                 def_state = in_line;
             else if (c == 0x7F)
                 def_state = in_shortname;
-            else if (nlong < LONG_DEF_LEN - 1)
-                longdef[nlong++] = c;
+            else
+            {
+                if (longdef == NULL)
+                    longdef = g_string_sized_new (32);
+
+                g_string_append_c (longdef, c);
+            }
             break;
 
         case in_shortname_first_char:
             if (isdigit (c))
             {
-                nshort = 0;
+                if (shortdef == NULL)
+                    shortdef = g_string_sized_new (32);
+                else
+                    g_string_set_size (shortdef, 0);
+
                 buf--;
                 def_state = in_line;
             }
             else if (c == 0x01)
                 def_state = in_line;
-            else if (nshort < SHORT_DEF_LEN - 1)
+            else
             {
-                shortdef[nshort++] = c;
+                if (shortdef == NULL)
+                    shortdef = g_string_sized_new (32);
+
+                g_string_append_c (shortdef, c);
                 def_state = in_shortname;
             }
             break;
@@ -122,24 +132,38 @@ parse_define (const char *buf, char **long_name, char **short_name, long *line)
                 def_state = in_line;
             else if (c == '\n')
                 def_state = finish;
-            else if (nshort < SHORT_DEF_LEN - 1)
-                shortdef[nshort++] = c;
+            else
+            {
+                if (shortdef == NULL)
+                    shortdef = g_string_sized_new (32);
+
+                g_string_append_c (shortdef, c);
+            }
             break;
 
         case in_line:
             if (c == ',' || c == '\n')
                 def_state = finish;
-            else if (isdigit (c) && nline < LINE_DEF_LEN - 1)
-                linedef[nline++] = c;
+            else if (isdigit (c))
+            {
+                if (linedef == NULL)
+                    linedef = g_string_sized_new (32);
+
+                g_string_append_c (linedef, c);
+            }
             break;
 
         case finish:
-            longdef[nlong] = '\0';
-            shortdef[nshort] = '\0';
-            linedef[nline] = '\0';
-            *long_name = longdef;
-            *short_name = shortdef;
-            *line = atol (linedef);
+            *long_name = longdef == NULL ? NULL : g_string_free (longdef, FALSE);
+            *short_name = shortdef == NULL ? NULL : g_string_free (shortdef, FALSE);
+
+            if (linedef == NULL)
+                *line = 0;
+            else
+            {
+                *line = atol (linedef->str);
+                g_string_free (linedef, TRUE);
+            }
             return TRUE;
 
         default:
@@ -218,17 +242,28 @@ etags_set_definition_hash (const char *tagfile, const char *start_path, const ch
                 {
                     char *longname = NULL;
                     char *shortname = NULL;
-                    long line = 0;
                     etags_hash_t *def_hash;
 
-                    parse_define (chekedstr, &longname, &shortname, &line);
-
                     def_hash = g_new (etags_hash_t, 1);
+
                     def_hash->fullpath = mc_build_filename (start_path, filename, (char *) NULL);
                     canonicalize_pathname (def_hash->fullpath);
                     def_hash->filename = g_strdup (filename);
-                    def_hash->short_define = g_strdup (shortname != NULL ? shortname : longname);
-                    def_hash->line = line;
+
+                    def_hash->line = 0;
+
+                    parse_define (chekedstr, &longname, &shortname, &def_hash->line);
+
+                    if (shortname != NULL && *shortname != '\0')
+                    {
+                        def_hash->short_define = shortname;
+                        g_free (longname);
+                    }
+                    else
+                    {
+                        def_hash->short_define = longname;
+                        g_free (shortname);
+                    }
 
                     if (ret == NULL)
                         ret = g_ptr_array_new_with_free_func (etags_hash_free);
