@@ -503,10 +503,6 @@ editcmd_dialog_select_definition_show (WEdit * edit, char *match_expr, int max_l
         }
     }
 
-    /* clear definition hash */
-    for (i = 0; i < MAX_DEFINITIONS; i++)
-        g_free (def_hash[i].filename);
-
     /* destroy dialog before return */
     dlg_destroy (def_dlg);
 }

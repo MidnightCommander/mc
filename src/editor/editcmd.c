@@ -3602,9 +3602,6 @@ edit_get_match_keyword_cmd (WEdit * edit)
 
     etags_hash_t def_hash[MAX_DEFINITIONS];
 
-    for (i = 0; i < MAX_DEFINITIONS; i++)
-        def_hash[i].filename = NULL;
-
     /* search start of word to be completed */
     if (!edit_find_word_start (&edit->buffer, &word_start, &word_len))
         return;
@@ -3642,8 +3639,18 @@ edit_get_match_keyword_cmd (WEdit * edit)
     max_len = MAX_WIDTH_DEF_DIALOG;
     word_len = 0;
     if (num_def > 0)
-        editcmd_dialog_select_definition_show (edit, match_expr->str, max_len, word_len,
-                                               (etags_hash_t *) & def_hash, num_def);
+    {
+        editcmd_dialog_select_definition_show (edit, match_expr->str, max_len, word_len, def_hash,
+                                               num_def);
+
+        for (i = 0; i < num_def; i++)
+        {
+            g_free (def_hash[i].filename);
+            g_free (def_hash[i].fullpath);
+            g_free (def_hash[i].short_define);
+        }
+    }
+
     g_string_free (match_expr, TRUE);
 }
 
