@@ -32,7 +32,6 @@
 #include <config.h>
 
 #include <ctype.h>
-#include <inttypes.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -212,7 +211,6 @@ etags_set_definition_hash (const char *tagfile, const char *start_path,
                     parse_define (chekedstr, &longname, &shortname, &line);
                     if (num < MAX_DEFINITIONS - 1)
                     {
-                        def_hash[num].filename_len = strlen (filename);
                         def_hash[num].fullpath =
                             mc_build_filename (start_path, filename, (char *) NULL);
 

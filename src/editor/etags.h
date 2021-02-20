@@ -1,9 +1,6 @@
 #ifndef MC__EDIT_ETAGS_H
 #define MC__EDIT_ETAGS_H 1
 
-#include <sys/types.h>          /* size_t */
-#include "lib/global.h"         /* include <glib.h> */
-
 /*** typedefs(not structures) and defined constants **********************************************/
 
 #define MAX_WIDTH_DEF_DIALOG 60 /* max width def dialog */
@@ -18,9 +15,8 @@
 
 typedef struct etags_hash_struct
 {
-    size_t filename_len;
-    char *fullpath;
     char *filename;
+    char *fullpath;
     char *short_define;
     long line;
 } etags_hash_t;
