@@ -53,6 +53,19 @@
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
+static void
+etags_hash_free (gpointer data)
+{
+    etags_hash_t *hash = (etags_hash_t *) data;
+
+    g_free (hash->filename);
+    g_free (hash->fullpath);
+    g_free (hash->short_define);
+    g_free (hash);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static gboolean
 parse_define (const char *buf, char **long_name, char **short_name, long *line)
 {
@@ -148,9 +161,8 @@ parse_define (const char *buf, char **long_name, char **short_name, long *line)
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-int
-etags_set_definition_hash (const char *tagfile, const char *start_path,
-                           const char *match_func, etags_hash_t * def_hash)
+GPtrArray *
+etags_set_definition_hash (const char *tagfile, const char *start_path, const char *match_func)
 {
     /* *INDENT-OFF* */
     enum
@@ -163,16 +175,16 @@ etags_set_definition_hash (const char *tagfile, const char *start_path,
 
     FILE *f;
     char buf[BUF_LARGE];
-    int num = 0;                /* returned value */
     char *filename = NULL;
+    GPtrArray *ret = NULL;
 
     if (match_func == NULL || tagfile == NULL)
-        return 0;
+        return NULL;
 
     /* open file with positions */
     f = fopen (tagfile, "r");
     if (f == NULL)
-        return 0;
+        return NULL;
 
     while (fgets (buf, sizeof (buf), f) != NULL)
         switch (state)
@@ -207,20 +219,21 @@ etags_set_definition_hash (const char *tagfile, const char *start_path,
                     char *longname = NULL;
                     char *shortname = NULL;
                     long line = 0;
+                    etags_hash_t *def_hash;
 
                     parse_define (chekedstr, &longname, &shortname, &line);
-                    if (num < MAX_DEFINITIONS - 1)
-                    {
-                        def_hash[num].fullpath =
-                            mc_build_filename (start_path, filename, (char *) NULL);
 
-                        canonicalize_pathname (def_hash[num].fullpath);
-                        def_hash[num].filename = g_strdup (filename);
-                        def_hash[num].short_define =
-                            g_strdup (shortname != NULL ? shortname : longname);
-                        def_hash[num].line = line;
-                        num++;
-                    }
+                    def_hash = g_new (etags_hash_t, 1);
+                    def_hash->fullpath = mc_build_filename (start_path, filename, (char *) NULL);
+                    canonicalize_pathname (def_hash->fullpath);
+                    def_hash->filename = g_strdup (filename);
+                    def_hash->short_define = g_strdup (shortname != NULL ? shortname : longname);
+                    def_hash->line = line;
+
+                    if (ret == NULL)
+                        ret = g_ptr_array_new_with_free_func (etags_hash_free);
+
+                    g_ptr_array_add (ret, def_hash);
                 }
             }
             break;
@@ -232,7 +245,7 @@ etags_set_definition_hash (const char *tagfile, const char *start_path,
     g_free (filename);
     fclose (f);
 
-    return num;
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */

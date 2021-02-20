@@ -85,6 +85,22 @@ editcmd_dialog_raw_key_query_cb (Widget * w, Widget * sender, widget_msg_t msg, 
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static void
+editcmd_dialog_select_definition_add (gpointer data, gpointer user_data)
+{
+    etags_hash_t *def_hash = (etags_hash_t *) data;
+    WListbox *def_list = (WListbox *) user_data;
+    char *label_def;
+
+    label_def =
+        g_strdup_printf ("%s -> %s:%ld", def_hash->short_define, def_hash->filename,
+                         def_hash->line);
+    listbox_add_item (def_list, LISTBOX_APPEND_AT_END, 0, label_def, def_hash, FALSE);
+    g_free (label_def);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -412,9 +428,9 @@ editcmd_dialog_completion_show (const WEdit * edit, GQueue * compl, int max_widt
 
 void
 editcmd_dialog_select_definition_show (WEdit * edit, char *match_expr, int max_len, int word_len,
-                                       etags_hash_t * def_hash, int num_lines)
+                                       GPtrArray * def_hash)
 {
-    int start_x, start_y, offset, i;
+    int start_x, start_y, offset;
     char *curr = NULL;
     WDialog *def_dlg;
     WListbox *def_list;
@@ -423,7 +439,7 @@ editcmd_dialog_select_definition_show (WEdit * edit, char *match_expr, int max_l
 
     (void) word_len;
     /* calculate the dialog metrics */
-    def_dlg_h = num_lines + 2;
+    def_dlg_h = def_hash->len + 2;
     def_dlg_w = max_len + 4;
     start_x = edit->curs_col + edit->start_col - (def_dlg_w / 2) +
         EDIT_TEXT_HORIZONTAL_OFFSET + (edit->fullscreen ? 0 : 1) + option_line_state_width;
@@ -449,16 +465,7 @@ editcmd_dialog_select_definition_show (WEdit * edit, char *match_expr, int max_l
     group_add_widget (GROUP (def_dlg), def_list);
 
     /* fill the listbox with the completions */
-    for (i = 0; i < num_lines; i++)
-    {
-        char *label_def;
-
-        label_def =
-            g_strdup_printf ("%s -> %s:%ld", def_hash[i].short_define, def_hash[i].filename,
-                             def_hash[i].line);
-        listbox_add_item (def_list, LISTBOX_APPEND_AT_END, 0, label_def, &def_hash[i], FALSE);
-        g_free (label_def);
-    }
+    g_ptr_array_foreach (def_hash, editcmd_dialog_select_definition_add, def_list);
 
     /* pop up the dialog and apply the chosen completion */
     if (dlg_run (def_dlg) == B_ENTER)

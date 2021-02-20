@@ -27,8 +27,7 @@ int editcmd_dialog_raw_key_query (const char *heading, const char *query, gboole
 
 char *editcmd_dialog_completion_show (const WEdit * edit, GQueue * compl, int max_width);
 
-void editcmd_dialog_select_definition_show (WEdit *, char *, int, int, struct etags_hash_struct *,
-                                            int);
+void editcmd_dialog_select_definition_show (WEdit *, char *, int, int, GPtrArray *);
 
 int editcmd_dialog_replace_prompt_show (WEdit *, char *, char *, int, int);
 /*** inline functions ****************************************************************************/
