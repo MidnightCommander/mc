@@ -238,7 +238,7 @@ edit_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
                 edit->skip_detach_prompt = 1;
                 break;
             default:
-                vfs_path_free (real_filename_vpath);
+                vfs_path_free (real_filename_vpath, TRUE);
                 return -1;
             }
         }
@@ -254,7 +254,7 @@ edit_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
                                      _("&Yes"), _("&Cancel"));
             if (rv != 0)
             {
-                vfs_path_free (real_filename_vpath);
+                vfs_path_free (real_filename_vpath, TRUE);
                 return -1;
             }
         }
@@ -277,7 +277,7 @@ edit_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
         g_free (saveprefix);
         if (savename_vpath == NULL)
         {
-            vfs_path_free (real_filename_vpath);
+            vfs_path_free (real_filename_vpath, TRUE);
             return 0;
         }
         /* FIXME:
@@ -392,7 +392,7 @@ edit_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
         g_free (tmp_store_filename);
 
         ok = (mc_rename (real_filename_vpath, tmp_vpath) != -1);
-        vfs_path_free (tmp_vpath);
+        vfs_path_free (tmp_vpath, TRUE);
         if (!ok)
             goto error_save;
     }
@@ -400,16 +400,16 @@ edit_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
     if (this_save_mode != EDIT_QUICK_SAVE && mc_rename (savename_vpath, real_filename_vpath) == -1)
         goto error_save;
 
-    vfs_path_free (real_filename_vpath);
-    vfs_path_free (savename_vpath);
+    vfs_path_free (real_filename_vpath, TRUE);
+    vfs_path_free (savename_vpath, TRUE);
     return 1;
   error_save:
     /*  FIXME: Is this safe ?
      *  if (this_save_mode != EDIT_QUICK_SAVE)
      *      mc_unlink (savename);
      */
-    vfs_path_free (real_filename_vpath);
-    vfs_path_free (savename_vpath);
+    vfs_path_free (real_filename_vpath, TRUE);
+    vfs_path_free (savename_vpath, TRUE);
     return 0;
 }
 
@@ -1736,7 +1736,7 @@ edit_save_mode_cmd (void)
 void
 edit_set_filename (WEdit * edit, const vfs_path_t * name_vpath)
 {
-    vfs_path_free (edit->filename_vpath);
+    vfs_path_free (edit->filename_vpath, TRUE);
     edit->filename_vpath = vfs_path_clone (name_vpath);
 
     if (edit->dir_vpath == NULL)
@@ -1844,7 +1844,7 @@ edit_save_as_cmd (WEdit * edit)
     }
 
   ret:
-    vfs_path_free (exp_vpath);
+    vfs_path_free (exp_vpath, TRUE);
     edit->force |= REDRAW_COMPLETELY;
     return ret;
 }
@@ -2173,7 +2173,7 @@ edit_load_cmd (WDialog * h)
 
         exp_vpath = vfs_path_from_str (exp);
         ret = edit_load_file_from_filename (h, exp_vpath);
-        vfs_path_free (exp_vpath);
+        vfs_path_free (exp_vpath, TRUE);
     }
 
     g_free (exp);
@@ -2202,7 +2202,7 @@ edit_load_file_from_history (WDialog * h)
 
         exp_vpath = vfs_path_from_str (exp);
         ret = edit_load_file_from_filename (h, exp_vpath);
-        vfs_path_free (exp_vpath);
+        vfs_path_free (exp_vpath, TRUE);
     }
 
     g_free (exp);
@@ -2233,7 +2233,7 @@ edit_load_syntax_file (WDialog * h)
         vfs_path_build_filename (mc_global.sysconfig_dir, "syntax", "Syntax", (char *) NULL);
     if (!exist_file (vfs_path_get_last_path_str (extdir_vpath)))
     {
-        vfs_path_free (extdir_vpath);
+        vfs_path_free (extdir_vpath, TRUE);
         extdir_vpath =
             vfs_path_build_filename (mc_global.share_data_dir, "syntax", "Syntax", (char *) NULL);
     }
@@ -2245,12 +2245,12 @@ edit_load_syntax_file (WDialog * h)
         user_syntax_file_vpath = mc_config_get_full_vpath (EDIT_HOME_SYNTAX_FILE);
         check_for_default (extdir_vpath, user_syntax_file_vpath);
         ret = edit_load_file_from_filename (h, user_syntax_file_vpath);
-        vfs_path_free (user_syntax_file_vpath);
+        vfs_path_free (user_syntax_file_vpath, TRUE);
     }
     else if (dir == 1)
         ret = edit_load_file_from_filename (h, extdir_vpath);
 
-    vfs_path_free (extdir_vpath);
+    vfs_path_free (extdir_vpath, TRUE);
 
     return ret;
 }
@@ -2279,7 +2279,7 @@ edit_load_menu_file (WDialog * h)
         vfs_path_build_filename (mc_global.sysconfig_dir, EDIT_GLOBAL_MENU, (char *) NULL);
     if (!exist_file (vfs_path_get_last_path_str (menufile_vpath)))
     {
-        vfs_path_free (menufile_vpath);
+        vfs_path_free (menufile_vpath, TRUE);
         menufile_vpath =
             vfs_path_build_filename (mc_global.share_data_dir, EDIT_GLOBAL_MENU, (char *) NULL);
     }
@@ -2302,21 +2302,21 @@ edit_load_menu_file (WDialog * h)
             vfs_path_build_filename (mc_global.sysconfig_dir, EDIT_GLOBAL_MENU, (char *) NULL);
         if (!exist_file (vfs_path_get_last_path_str (buffer_vpath)))
         {
-            vfs_path_free (buffer_vpath);
+            vfs_path_free (buffer_vpath, TRUE);
             buffer_vpath =
                 vfs_path_build_filename (mc_global.share_data_dir, EDIT_GLOBAL_MENU, (char *) NULL);
         }
         break;
 
     default:
-        vfs_path_free (menufile_vpath);
+        vfs_path_free (menufile_vpath, TRUE);
         return FALSE;
     }
 
     ret = edit_load_file_from_filename (h, buffer_vpath);
 
-    vfs_path_free (buffer_vpath);
-    vfs_path_free (menufile_vpath);
+    vfs_path_free (buffer_vpath, TRUE);
+    vfs_path_free (menufile_vpath, TRUE);
 
     return ret;
 }
@@ -3004,7 +3004,7 @@ edit_save_block (WEdit * edit, const char *filename, off_t start, off_t finish)
     vpath = vfs_path_from_str (filename);
     file = mc_open (vpath, O_CREAT | O_WRONLY | O_TRUNC,
                     S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH | O_BINARY);
-    vfs_path_free (vpath);
+    vfs_path_free (vpath, TRUE);
     if (file == -1)
         return FALSE;
 
@@ -3122,7 +3122,7 @@ edit_paste_from_X_buf_cmd (WEdit * edit)
     mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_from_ext_clip", NULL);
     tmp = mc_config_get_full_vpath (EDIT_HOME_CLIP_FILE);
     ret = (edit_insert_file (edit, tmp) >= 0);
-    vfs_path_free (tmp);
+    vfs_path_free (tmp, TRUE);
 
     return ret;
 }
@@ -3226,7 +3226,7 @@ edit_insert_file_cmd (WEdit * edit)
 
         exp_vpath = vfs_path_from_str (exp);
         ret = (edit_insert_file (edit, exp_vpath) >= 0);
-        vfs_path_free (exp_vpath);
+        vfs_path_free (exp_vpath, TRUE);
 
         if (!ret)
             edit_error_dialog (_("Insert file"), get_sys_error (_("Cannot insert file")));
@@ -3303,7 +3303,7 @@ edit_sort_cmd (WEdit * edit)
 
         tmp_vpath = mc_config_get_full_vpath (EDIT_HOME_TEMP_FILE);
         edit_insert_file (edit, tmp_vpath);
-        vfs_path_free (tmp_vpath);
+        vfs_path_free (tmp_vpath, TRUE);
     }
 
     return 0;
@@ -3351,7 +3351,7 @@ edit_ext_cmd (WEdit * edit)
 
         tmp_vpath = mc_config_get_full_vpath (EDIT_HOME_TEMP_FILE);
         edit_insert_file (edit, tmp_vpath);
-        vfs_path_free (tmp_vpath);
+        vfs_path_free (tmp_vpath, TRUE);
     }
 
     return 0;

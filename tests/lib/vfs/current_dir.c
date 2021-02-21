@@ -172,7 +172,7 @@ START_PARAMETRIZED_TEST (test_cd, test_cd_ds)
         mctest_assert_str_eq (actual_cd_path, data->expected_cd_path);
         g_free (actual_cd_path);
     }
-    vfs_path_free (vpath);
+    vfs_path_free (vpath, TRUE);
 
     vfs_unregister_class (vfs_test_ops);
 }

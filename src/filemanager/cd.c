@@ -196,7 +196,7 @@ handle_cdpath (const char *path)
 
                 r_vpath = vfs_path_build_filename (p, path, (char *) NULL);
                 result = panel_cd (current_panel, r_vpath, cd_parse_command);
-                vfs_path_free (r_vpath);
+                vfs_path_free (r_vpath, TRUE);
             }
             *s = c;
             p = s + 1;
@@ -247,7 +247,7 @@ cd_to (const char *path)
 
                 current_panel->cwd_vpath =
                     vfs_path_vtokens_get (tmp_vpath, 0, vfs_path_tokens_count (tmp_vpath) - 1);
-                vfs_path_free (tmp_vpath);
+                vfs_path_free (tmp_vpath, TRUE);
             }
             sync_tree (current_panel->cwd_vpath);
         }
@@ -261,7 +261,7 @@ cd_to (const char *path)
             sync_tree (new_vpath);
         }
 
-        vfs_path_free (new_vpath);
+        vfs_path_free (new_vpath, TRUE);
     }
     else
     {
@@ -289,7 +289,7 @@ cd_to (const char *path)
             g_free (d);
         }
 
-        vfs_path_free (q_vpath);
+        vfs_path_free (q_vpath, TRUE);
         g_string_free (s_path, TRUE);
     }
 

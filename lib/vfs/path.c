@@ -939,16 +939,19 @@ vfs_path_clone (const vfs_path_t * vpath)
  * Free vfs_path_t object.
  *
  * @param vpath pointer to vfs_path_t object
+ * @param free_str if TRUE the string representation of vpath is freed as well
  *
+ * @return the string representation of vpath (i.e. NULL if free_str is TRUE)
  */
 
-void
-vfs_path_free (vfs_path_t * vpath)
+char *
+vfs_path_free (vfs_path_t * vpath, gboolean free_str)
 {
     int vpath_element_index;
+    char *ret;
 
     if (vpath == NULL)
-        return;
+        return NULL;
 
     for (vpath_element_index = 0; vpath_element_index < vfs_path_elements_count (vpath);
          vpath_element_index++)
@@ -960,8 +963,18 @@ vfs_path_free (vfs_path_t * vpath)
     }
 
     g_array_free (vpath->path, TRUE);
-    g_free (vpath->str);
+
+    if (!free_str)
+        ret = vpath->str;
+    else
+    {
+        g_free (vpath->str);
+        ret = NULL;
+    }
+
     g_free (vpath);
+
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1167,7 +1180,7 @@ vfs_path_deserialize (const char *data, GError ** mcerror)
         eclass = vfs_get_class_by_name (cfg_value);
         if (eclass == NULL)
         {
-            vfs_path_free (vpath);
+            vfs_path_free (vpath, TRUE);
             g_set_error (mcerror, MC_ERROR, 0, "Unable to find VFS class by name '%s'", cfg_value);
             g_free (cfg_value);
             mc_config_deinit (cpath);
@@ -1198,7 +1211,7 @@ vfs_path_deserialize (const char *data, GError ** mcerror)
     mc_config_deinit (cpath);
     if (vfs_path_elements_count (vpath) == 0)
     {
-        vfs_path_free (vpath);
+        vfs_path_free (vpath, TRUE);
         g_set_error (mcerror, MC_ERROR, 0, "No any path elements found");
         return NULL;
     }

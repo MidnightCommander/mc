@@ -601,12 +601,12 @@ parse_mcedit_arguments (int argc, char **argv)
             if (mc_stat (tmp_vpath, &st) == -1 && mc_stat (fname_vpath, &st) != -1)
             {
                 arg = mcedit_arg_vpath_new (fname_vpath, atoi (p));
-                vfs_path_free (tmp_vpath);
+                vfs_path_free (tmp_vpath, TRUE);
             }
             else
             {
                 arg = mcedit_arg_vpath_new (tmp_vpath, 0);
-                vfs_path_free (fname_vpath);
+                vfs_path_free (fname_vpath, TRUE);
             }
 
             g_free (fname);
@@ -803,12 +803,12 @@ mc_setup_by_args (int argc, char **argv, GError ** mcerror)
 #ifdef ENABLE_VFS_FTP
         vpath = vfs_path_from_str ("ftp://");
         mc_setctl (vpath, VFS_SETCTL_LOGFILE, (void *) mc_args__netfs_logfile);
-        vfs_path_free (vpath);
+        vfs_path_free (vpath, TRUE);
 #endif /* ENABLE_VFS_FTP */
 #ifdef ENABLE_VFS_SMB
         vpath = vfs_path_from_str ("smb://");
         mc_setctl (vpath, VFS_SETCTL_LOGFILE, (void *) mc_args__netfs_logfile);
-        vfs_path_free (vpath);
+        vfs_path_free (vpath, TRUE);
 #endif /* ENABLE_VFS_SMB */
         (void) vpath;
     }
@@ -869,7 +869,7 @@ mc_setup_by_args (int argc, char **argv, GError ** mcerror)
 void
 mcedit_arg_free (mcedit_arg_t * arg)
 {
-    vfs_path_free (arg->file_vpath);
+    vfs_path_free (arg->file_vpath, TRUE);
     g_free (arg);
 }
 

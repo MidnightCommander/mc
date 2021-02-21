@@ -176,8 +176,8 @@ open_temp (void **name)
                  _("Cannot create temporary diff file\n%s"), unix_error_string (errno));
         return -1;
     }
-    *name = g_strdup (vfs_path_as_str (diff_file_name));
-    vfs_path_free (diff_file_name);
+
+    *name = vfs_path_free (diff_file_name, FALSE);
     return fd;
 }
 
@@ -2250,7 +2250,7 @@ do_merge_hunk (WDiff * dview, action_direction_t merge_direction)
             (void) res;
         }
         mc_unlink (merge_file_name_vpath);
-        vfs_path_free (merge_file_name_vpath);
+        vfs_path_free (merge_file_name_vpath, TRUE);
     }
 }
 
@@ -2774,7 +2774,7 @@ dview_status (const WDiff * dview, diff_place_t ord, int width, int c)
 
     vpath = vfs_path_from_str (dview->label[ord]);
     path = vfs_path_to_str_flags (vpath, 0, VPF_STRIP_HOME | VPF_STRIP_PASSWORD);
-    vfs_path_free (vpath);
+    vfs_path_free (vpath, TRUE);
     buf = str_term_trim (path, filename_width);
     if (ord == DIFF_LEFT)
         tty_printf ("%s%-*s %6d+%-4d Col %-4d ", dview->merged[ord] ? "* " : "  ", filename_width,
@@ -2905,7 +2905,7 @@ dview_edit (WDiff * dview, diff_place_t ord)
 
         tmp_vpath = vfs_path_from_str (dview->file[ord]);
         edit_file_at_line (tmp_vpath, use_internal_edit, linenum);
-        vfs_path_free (tmp_vpath);
+        vfs_path_free (tmp_vpath, TRUE);
     }
 
     widget_set_state (h, WST_MODAL, h_modal);
@@ -3510,7 +3510,7 @@ do \
                 changed = (mtime != st##n.st_mtime); \
         } \
         mc_ungetlocalcopy (file##n, real_file##n, changed); \
-        vfs_path_free (real_file##n); \
+        vfs_path_free (real_file##n, TRUE); \
     } \
 } \
 while (0)
@@ -3631,8 +3631,8 @@ dview_diff_cmd (const void *f0, const void *f1)
         message (D_ERROR, MSG_ERROR, _("Two files are needed to compare"));
 
   ret:
-    vfs_path_free (file1);
-    vfs_path_free (file0);
+    vfs_path_free (file1, TRUE);
+    vfs_path_free (file0, TRUE);
 
     return (rv != 0);
 }

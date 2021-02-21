@@ -115,7 +115,7 @@ mc_def_getlocalcopy (const vfs_path_t * filename_vpath)
     return tmp_vpath;
 
   fail:
-    vfs_path_free (tmp_vpath);
+    vfs_path_free (tmp_vpath, TRUE);
     if (fdout != -1)
         close (fdout);
     if (fdin != -1)
@@ -723,7 +723,7 @@ mc_chdir (const vfs_path_t * vpath)
     return 0;
 
   error_end:
-    vfs_path_free (cd_vpath);
+    vfs_path_free (cd_vpath, TRUE);
     return (-1);
 }
 
@@ -894,7 +894,7 @@ mc_tmpdir (void)
             g_snprintf (buffer, sizeof (buffer), "%s", "/dev/null/");
         }
 
-        vfs_path_free (test_vpath);
+        vfs_path_free (test_vpath, TRUE);
         fprintf (stderr, "%s\n", _("Press any key to continue..."));
         getc (stdin);
     }

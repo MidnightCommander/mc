@@ -2275,13 +2275,10 @@ ftpfs_fh_open (struct vfs_class *me, vfs_file_handler_t * fh, int flags, mode_t 
 
                 handle = vfs_mkstemps (&vpath, me->name, fh->ino->ent->name);
                 if (handle == -1)
-                {
-                    vfs_path_free (vpath);
                     return (-1);
-                }
+
                 close (handle);
-                fh->ino->localname = g_strdup (vfs_path_as_str (vpath));
-                vfs_path_free (vpath);
+                fh->ino->localname = vfs_path_free (vpath, FALSE);
                 ftp->append = (flags & O_APPEND) != 0;
             }
             return 0;

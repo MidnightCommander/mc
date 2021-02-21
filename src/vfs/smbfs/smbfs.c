@@ -1485,7 +1485,7 @@ smbfs_fake_share_stat (const char *server_url, const char *path, struct stat *bu
 
         vpath = vfs_path_from_str (path);
         p = smbfs_get_path (&sc, vpath);
-        vfs_path_free (vpath);
+        vfs_path_free (vpath, TRUE);
 
         if (p != NULL)
         {

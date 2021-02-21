@@ -85,7 +85,7 @@ START_TEST (sanitize_variables)
     /* when */
     filename_vpath = vfs_path_from_str ("/tmp/blabla.txt");
     actual_string = exec_get_export_variables (filename_vpath);
-    vfs_path_free (filename_vpath);
+    vfs_path_free (filename_vpath, TRUE);
 
     /* then */
     expected_string = "\

@@ -155,7 +155,7 @@ treebox_cmd (void)
 
         sel_vdir = vfs_path_from_str (sel_dir);
         panel_cd (current_panel, sel_vdir, cd_exact);
-        vfs_path_free (sel_vdir);
+        vfs_path_free (sel_vdir, TRUE);
         g_free (sel_dir);
     }
 }
@@ -663,7 +663,7 @@ create_panels (void)
         else
             vpath = vfs_path_append_new (original_dir, other_dir, (char *) NULL);
         mc_chdir (vpath);
-        vfs_path_free (vpath);
+        vfs_path_free (vpath, TRUE);
     }
     create_panel (other_index, other_mode);
 
@@ -679,7 +679,7 @@ create_panels (void)
         else
             vpath = vfs_path_append_new (original_dir, current_dir, (char *) NULL);
         mc_chdir (vpath);
-        vfs_path_free (vpath);
+        vfs_path_free (vpath, TRUE);
     }
     create_panel (current_index, current_mode);
 
@@ -690,7 +690,7 @@ create_panels (void)
     else
         current_panel = left_panel;
 
-    vfs_path_free (original_dir);
+    vfs_path_free (original_dir, TRUE);
 
 #ifdef ENABLE_VFS
     mc_event_add (MCEVENT_GROUP_CORE, "vfs_timestamp", check_other_panel_timestamp, NULL, NULL);
@@ -724,7 +724,7 @@ midnight_put_panel_path (WPanel * panel)
     if (!IS_PATH_SEP (cwd_vpath_str[strlen (cwd_vpath_str) - 1]))
         command_insert (cmdline, PATH_SEP_STR, FALSE);
 
-    vfs_path_free (cwd_vpath);
+    vfs_path_free (cwd_vpath, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -742,7 +742,7 @@ put_link (WPanel * panel)
 
         vpath = vfs_path_append_new (panel->cwd_vpath, selection (panel)->fname, (char *) NULL);
         i = mc_readlink (vpath, buffer, sizeof (buffer) - 1);
-        vfs_path_free (vpath);
+        vfs_path_free (vpath, TRUE);
 
         if (i > 0)
         {
@@ -881,7 +881,7 @@ setup_dummy_mc (void)
     vpath = vfs_path_from_str (d);
     ret = mc_chdir (vpath);
     (void) ret;
-    vfs_path_free (vpath);
+    vfs_path_free (vpath, TRUE);
     g_free (d);
 }
 
@@ -955,7 +955,7 @@ prepend_cwd_on_local (const char *filename)
     if (!vfs_file_is_local (vpath) || g_path_is_absolute (filename))
         return vpath;
 
-    vfs_path_free (vpath);
+    vfs_path_free (vpath, TRUE);
 
     return vfs_path_append_new (vfs_get_raw_current_dir (), filename, (char *) NULL);
 }
@@ -985,7 +985,7 @@ mc_maybe_editor_or_viewer (void)
                 vpath = prepend_cwd_on_local ((char *) mc_run_param0);
 
             ret = view_file (vpath, FALSE, TRUE);
-            vfs_path_free (vpath);
+            vfs_path_free (vpath, TRUE);
             break;
         }
 #ifdef USE_DIFF_VIEW
@@ -1038,7 +1038,7 @@ show_editor_viewer_history (void)
         }
 
         g_free (s);
-        vfs_path_free (s_vpath);
+        vfs_path_free (s_vpath, TRUE);
     }
 }
 

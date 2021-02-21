@@ -288,7 +288,7 @@ mcview_load (WView * view, const char *command, const char *file, int start_line
     /* get working dir */
     if (file != NULL && file[0] != '\0')
     {
-        vfs_path_free (view->workdir_vpath);
+        vfs_path_free (view->workdir_vpath, TRUE);
 
         if (!g_path_is_absolute (file))
         {
@@ -296,7 +296,7 @@ mcview_load (WView * view, const char *command, const char *file, int start_line
 
             p = vfs_path_clone (vfs_get_raw_current_dir ());
             view->workdir_vpath = vfs_path_append_new (p, file, (char *) NULL);
-            vfs_path_free (p);
+            vfs_path_free (p, TRUE);
         }
         else
         {
@@ -335,9 +335,9 @@ mcview_load (WView * view, const char *command, const char *file, int start_line
                         file, unix_error_string (errno));
             mcview_close_datasource (view);
             mcview_show_error (view, tmp);
-            vfs_path_free (view->filename_vpath);
+            vfs_path_free (view->filename_vpath, TRUE);
             view->filename_vpath = NULL;
-            vfs_path_free (view->workdir_vpath);
+            vfs_path_free (view->workdir_vpath, TRUE);
             view->workdir_vpath = NULL;
             goto finish;
         }
@@ -350,9 +350,9 @@ mcview_load (WView * view, const char *command, const char *file, int start_line
                         file, unix_error_string (errno));
             mcview_close_datasource (view);
             mcview_show_error (view, tmp);
-            vfs_path_free (view->filename_vpath);
+            vfs_path_free (view->filename_vpath, TRUE);
             view->filename_vpath = NULL;
-            vfs_path_free (view->workdir_vpath);
+            vfs_path_free (view->workdir_vpath, TRUE);
             view->workdir_vpath = NULL;
             goto finish;
         }
@@ -362,9 +362,9 @@ mcview_load (WView * view, const char *command, const char *file, int start_line
             mc_close (fd);
             mcview_close_datasource (view);
             mcview_show_error (view, _("Cannot view: not a regular file"));
-            vfs_path_free (view->filename_vpath);
+            vfs_path_free (view->filename_vpath, TRUE);
             view->filename_vpath = NULL;
-            vfs_path_free (view->workdir_vpath);
+            vfs_path_free (view->workdir_vpath, TRUE);
             view->workdir_vpath = NULL;
             goto finish;
         }
@@ -392,7 +392,7 @@ mcview_load (WView * view, const char *command, const char *file, int start_line
                     vpath1 = vfs_path_from_str (tmp_filename);
                     g_free (tmp_filename);
                     fd1 = mc_open (vpath1, O_RDONLY | O_NONBLOCK);
-                    vfs_path_free (vpath1);
+                    vfs_path_free (vpath1, TRUE);
 
                     if (fd1 == -1)
                     {
@@ -457,7 +457,7 @@ mcview_load (WView * view, const char *command, const char *file, int start_line
     view->hexedit_lownibble = FALSE;
     view->hexview_in_text = FALSE;
     view->change_list = NULL;
-    vfs_path_free (vpath);
+    vfs_path_free (vpath, TRUE);
     return retval;
 }
 

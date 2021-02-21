@@ -98,7 +98,7 @@ START_PARAMETRIZED_TEST (test_strip_home, test_strip_home_ds)
     /* then */
     mctest_assert_str_eq (actual_result->str, data->expected_result);
 
-    vfs_path_free (actual_result);
+    vfs_path_free (actual_result, TRUE);
 }
 /* *INDENT-OFF* */
 END_PARAMETRIZED_TEST

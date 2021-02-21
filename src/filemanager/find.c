@@ -894,12 +894,20 @@ pop_directory (void)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static void
+queue_dir_free (gpointer data)
+{
+    vfs_path_free ((vfs_path_t *) data, TRUE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /** Remove all the items from the stack */
 
 static void
 clear_stack (void)
 {
-    g_queue_clear_full (&dir_queue, (GDestroyNotify) vfs_path_free);
+    g_queue_clear_full (&dir_queue, queue_dir_free);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1009,12 +1017,12 @@ search_content (WDialog * h, const char *directory, const char *filename)
 
     if (mc_stat (vpath, &s) != 0 || !S_ISREG (s.st_mode))
     {
-        vfs_path_free (vpath);
+        vfs_path_free (vpath, TRUE);
         return FALSE;
     }
 
     file_fd = mc_open (vpath, O_RDONLY);
-    vfs_path_free (vpath);
+    vfs_path_free (vpath, TRUE);
 
     if (file_fd == -1)
         return FALSE;
@@ -1326,7 +1334,7 @@ do_search (WDialog * h)
                             break;
                     }
 
-                    vfs_path_free (tmp_vpath);
+                    vfs_path_free (tmp_vpath, TRUE);
                     ignore_count++;
                 }
 
@@ -1342,7 +1350,7 @@ do_search (WDialog * h)
                 }
 
                 dirp = mc_opendir (tmp_vpath);
-                vfs_path_free (tmp_vpath);
+                vfs_path_free (tmp_vpath, TRUE);
             }                   /* while (!dirp) */
 
             /* skip invalid filenames */
@@ -1383,7 +1391,7 @@ do_search (WDialog * h)
                     if (stat_res == 0 && S_ISDIR (tmp_stat.st_mode))
                         push_directory (tmp_vpath);
                     else
-                        vfs_path_free (tmp_vpath);
+                        vfs_path_free (tmp_vpath, TRUE);
                 }
             }
 
@@ -1453,7 +1461,7 @@ find_do_view_edit (gboolean unparsed_view, gboolean edit, char *dir, char *file,
     else
         view_file_at_line (fullname_vpath, unparsed_view, use_internal_view, line, search_start,
                            search_end);
-    vfs_path_free (fullname_vpath);
+    vfs_path_free (fullname_vpath, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1922,7 +1930,7 @@ find_cmd (WPanel * panel)
 
                 dirname_vpath = vfs_path_from_str (dirname);
                 panel_cd (panel, dirname_vpath, cd_exact);
-                vfs_path_free (dirname_vpath);
+                vfs_path_free (dirname_vpath, TRUE);
                 if (filename != NULL)
                     try_to_select (panel,
                                    filename + (content_pattern != NULL
@@ -1934,7 +1942,7 @@ find_cmd (WPanel * panel)
 
                 filename_vpath = vfs_path_from_str (filename);
                 panel_cd (panel, filename_vpath, cd_exact);
-                vfs_path_free (filename_vpath);
+                vfs_path_free (filename_vpath, TRUE);
             }
         }
 

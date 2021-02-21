@@ -445,7 +445,6 @@ execute_menu_command (const WEdit * edit_widget, const char *commands, gboolean 
     {
         message (D_ERROR, MSG_ERROR, _("Cannot create temporary command file\n%s"),
                  unix_error_string (errno));
-        vfs_path_free (file_name_vpath);
         return;
     }
 
@@ -482,7 +481,7 @@ execute_menu_command (const WEdit * edit_widget, const char *commands, gboolean 
                     /* User canceled */
                     fclose (cmd_file);
                     mc_unlink (file_name_vpath);
-                    vfs_path_free (file_name_vpath);
+                    vfs_path_free (file_name_vpath, TRUE);
                     return;
                 }
                 if (do_quote)
@@ -583,7 +582,7 @@ execute_menu_command (const WEdit * edit_widget, const char *commands, gboolean 
         g_free (cmd);
     }
     mc_unlink (file_name_vpath);
-    vfs_path_free (file_name_vpath);
+    vfs_path_free (file_name_vpath, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */

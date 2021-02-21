@@ -175,7 +175,7 @@ START_PARAMETRIZED_TEST (check_if_filename_and_lineno_will_be_subtituted, check_
     mctest_assert_str_eq (g_ptr_array_index (mc_config_get_string__default_value__captured, 0),
                           NULL);
 
-    vfs_path_free (filename_vpath);
+    vfs_path_free (filename_vpath, TRUE);
 
 }
 /* *INDENT-OFF* */

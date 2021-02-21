@@ -89,7 +89,7 @@ mcview_remove_ext_script (WView * view)
     if (view->ext_script != NULL)
     {
         mc_unlink (view->ext_script);
-        vfs_path_free (view->ext_script);
+        vfs_path_free (view->ext_script, TRUE);
         view->ext_script = NULL;
     }
 }
@@ -380,7 +380,7 @@ mcview_load_next_prev (WView * view, int direction)
     mcview_init (view);
     if (regex_command_for (view, vfile, "View", &ext_script) == 0)
         mcview_load (view, NULL, vfs_path_as_str (vfile), 0, 0, 0);
-    vfs_path_free (vfile);
+    vfs_path_free (vfile, TRUE);
     view->dir = dir;
     view->dir_idx = dir_idx;
     view->ext_script = ext_script;

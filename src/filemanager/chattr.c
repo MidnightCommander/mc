@@ -1177,7 +1177,7 @@ chattr_apply_mask (WPanel * panel, vfs_path_t * vpath, unsigned long m)
             vpath = vfs_path_from_str (fname);
             flags = m;
             ok = do_chattr (panel, vpath, m);
-            vfs_path_free (vpath);
+            vfs_path_free (vpath, TRUE);
         }
     }
     while (ok && panel->marked != 0);
@@ -1230,7 +1230,7 @@ chattr_cmd (WPanel * panel)
         {
             message (D_ERROR, MSG_ERROR, _("Cannot get flags of \"%s\"\n%s"), fname,
                      unix_error_string (errno));
-            vfs_path_free (vpath);
+            vfs_path_free (vpath, TRUE);
             break;
         }
 
@@ -1323,7 +1323,7 @@ chattr_cmd (WPanel * panel)
             need_update = TRUE;
         }
 
-        vfs_path_free (vpath);
+        vfs_path_free (vpath, TRUE);
 
     }
     while (panel->marked != 0 && !end_chattr);

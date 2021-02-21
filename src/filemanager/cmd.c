@@ -143,7 +143,7 @@ do_view_cmd (WPanel * panel, gboolean plain_view)
         fname_vpath = vfs_path_from_str (selection (panel)->fname);
         if (!panel_cd (panel, fname_vpath, cd_exact))
             message (D_ERROR, MSG_ERROR, _("Cannot change directory"));
-        vfs_path_free (fname_vpath);
+        vfs_path_free (fname_vpath, TRUE);
     }
     else
     {
@@ -153,7 +153,7 @@ do_view_cmd (WPanel * panel, gboolean plain_view)
         file_idx = panel->selected;
         filename_vpath = vfs_path_from_str (panel->dir.list[file_idx].fname);
         view_file (filename_vpath, plain_view, use_internal_view);
-        vfs_path_free (filename_vpath);
+        vfs_path_free (filename_vpath, TRUE);
     }
 
     repaint_screen ();
@@ -333,8 +333,8 @@ compare_dir (WPanel * panel, WPanel * other, enum CompareMode mode)
                 dst_name = vfs_path_append_new (other->cwd_vpath, target->fname, (char *) NULL);
                 if (compare_files (src_name, dst_name, source->st.st_size))
                     do_file_mark (panel, i, 1);
-                vfs_path_free (src_name);
-                vfs_path_free (dst_name);
+                vfs_path_free (src_name, TRUE);
+                vfs_path_free (dst_name, TRUE);
             }
         }
     }                           /* for (i ...) */
@@ -364,7 +364,7 @@ do_link (link_type_t link_type, const char *fname)
         dest_vpath = vfs_path_from_str (dest);
         if (mc_link (fname_vpath, dest_vpath) == -1)
             message (D_ERROR, MSG_ERROR, _("link: %s"), unix_error_string (errno));
-        vfs_path_free (fname_vpath);
+        vfs_path_free (fname_vpath, TRUE);
     }
     else
     {
@@ -384,14 +384,14 @@ do_link (link_type_t link_type, const char *fname)
             char *s_str;
 
             s_str = diff_two_paths (other_panel->cwd_vpath, s);
-            vfs_path_free (s);
+            vfs_path_free (s, TRUE);
             s = vfs_path_from_str_flags (s_str, VPF_NO_CANON);
             g_free (s_str);
         }
 
         symlink_box (s, d, &dest, &src);
-        vfs_path_free (d);
-        vfs_path_free (s);
+        vfs_path_free (d, TRUE);
+        vfs_path_free (s, TRUE);
 
         if (dest == NULL || *dest == '\0' || src == NULL || *src == '\0')
             goto cleanup;
@@ -403,14 +403,14 @@ do_link (link_type_t link_type, const char *fname)
         s = vfs_path_from_str (src);
         if (mc_symlink (dest_vpath, s) == -1)
             message (D_ERROR, MSG_ERROR, _("symlink: %s"), unix_error_string (errno));
-        vfs_path_free (s);
+        vfs_path_free (s, TRUE);
     }
 
     update_panels (UP_OPTIMIZE, UP_KEEPSEL);
     repaint_screen ();
 
   cleanup:
-    vfs_path_free (dest_vpath);
+    vfs_path_free (dest_vpath, TRUE);
     g_free (src);
     g_free (dest);
 }
@@ -467,7 +467,7 @@ nice_cd (const char *text, const char *xtext, const char *help,
             if (save_type != view_listing)
                 create_panel (MENU_PANEL_IDX, save_type);
         }
-        vfs_path_free (cd_vpath);
+        vfs_path_free (cd_vpath, TRUE);
     }
     g_free (cd_path);
 
@@ -634,7 +634,7 @@ view_file_cmd (const WPanel * panel)
     vpath = vfs_path_from_str (filename);
     g_free (filename);
     view_file (vpath, FALSE, use_internal_view);
-    vfs_path_free (vpath);
+    vfs_path_free (vpath, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -719,7 +719,7 @@ edit_cmd (const WPanel * panel)
     fname = vfs_path_from_str (selection (panel)->fname);
     if (regex_command (fname, "Edit") == 0)
         do_edit (fname);
-    vfs_path_free (fname);
+    vfs_path_free (fname, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -733,7 +733,7 @@ edit_cmd_force_internal (const WPanel * panel)
     fname = vfs_path_from_str (selection (panel)->fname);
     if (regex_command (fname, "Edit") == 0)
         edit_file_at_line (fname, TRUE, 1);
-    vfs_path_free (fname);
+    vfs_path_free (fname, TRUE);
 }
 #endif
 
@@ -764,7 +764,7 @@ edit_cmd_new (void)
 #endif
     do_edit (fname_vpath);
 
-    vfs_path_free (fname_vpath);
+    vfs_path_free (fname_vpath, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -873,7 +873,7 @@ mkdir_cmd (WPanel * panel)
             select_item (panel);
         }
 
-        vfs_path_free (absdir);
+        vfs_path_free (absdir, TRUE);
     }
     g_free (dir);
 }
@@ -959,20 +959,20 @@ ext_cmd (void)
         buffer_vpath = mc_config_get_full_vpath (MC_FILEBIND_FILE);
         check_for_default (extdir_vpath, buffer_vpath);
         do_edit (buffer_vpath);
-        vfs_path_free (buffer_vpath);
+        vfs_path_free (buffer_vpath, TRUE);
     }
     else if (dir == 1)
     {
         if (!exist_file (vfs_path_get_last_path_str (extdir_vpath)))
         {
-            vfs_path_free (extdir_vpath);
+            vfs_path_free (extdir_vpath, TRUE);
             extdir_vpath =
                 vfs_path_build_filename (mc_global.share_data_dir, MC_LIB_EXT, (char *) NULL);
         }
         do_edit (extdir_vpath);
     }
 
-    vfs_path_free (extdir_vpath);
+    vfs_path_free (extdir_vpath, TRUE);
     flush_extension_file ();
 }
 
@@ -996,7 +996,7 @@ edit_mc_menu_cmd (void)
 
     if (!exist_file (vfs_path_get_last_path_str (menufile_vpath)))
     {
-        vfs_path_free (menufile_vpath);
+        vfs_path_free (menufile_vpath, TRUE);
         menufile_vpath =
             vfs_path_build_filename (mc_global.share_data_dir, MC_GLOBAL_MENU, (char *) NULL);
     }
@@ -1019,21 +1019,21 @@ edit_mc_menu_cmd (void)
             vfs_path_build_filename (mc_global.sysconfig_dir, MC_GLOBAL_MENU, (char *) NULL);
         if (!exist_file (vfs_path_get_last_path_str (buffer_vpath)))
         {
-            vfs_path_free (buffer_vpath);
+            vfs_path_free (buffer_vpath, TRUE);
             buffer_vpath =
                 vfs_path_build_filename (mc_global.share_data_dir, MC_GLOBAL_MENU, (char *) NULL);
         }
         break;
 
     default:
-        vfs_path_free (menufile_vpath);
+        vfs_path_free (menufile_vpath, TRUE);
         return;
     }
 
     do_edit (buffer_vpath);
 
-    vfs_path_free (buffer_vpath);
-    vfs_path_free (menufile_vpath);
+    vfs_path_free (buffer_vpath, TRUE);
+    vfs_path_free (menufile_vpath, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1059,20 +1059,20 @@ edit_fhl_cmd (void)
         buffer_vpath = mc_config_get_full_vpath (MC_FHL_INI_FILE);
         check_for_default (fhlfile_vpath, buffer_vpath);
         do_edit (buffer_vpath);
-        vfs_path_free (buffer_vpath);
+        vfs_path_free (buffer_vpath, TRUE);
     }
     else if (dir == 1)
     {
         if (!exist_file (vfs_path_get_last_path_str (fhlfile_vpath)))
         {
-            vfs_path_free (fhlfile_vpath);
+            vfs_path_free (fhlfile_vpath, TRUE);
             fhlfile_vpath =
                 vfs_path_build_filename (mc_global.sysconfig_dir, MC_FHL_INI_FILE, (char *) NULL);
         }
         do_edit (fhlfile_vpath);
     }
 
-    vfs_path_free (fhlfile_vpath);
+    vfs_path_free (fhlfile_vpath, TRUE);
     /* refresh highlighting rules */
     mc_fhl_free (&mc_filehighlight);
     mc_filehighlight = mc_fhl_new (TRUE);
@@ -1095,7 +1095,7 @@ hotlist_cmd (WPanel * panel)
 
         vpath = vfs_path_from_str (target);
         tree_chdir (the_tree, vpath);
-        vfs_path_free (vpath);
+        vfs_path_free (vpath, TRUE);
     }
     else
     {
@@ -1105,7 +1105,7 @@ hotlist_cmd (WPanel * panel)
         deprecated_vpath = vfs_path_from_str_flags (target, VPF_USE_DEPRECATED_PARSER);
         deprecated_path = vfs_path_as_str (deprecated_vpath);
         cd_to (deprecated_path);
-        vfs_path_free (deprecated_vpath);
+        vfs_path_free (deprecated_vpath, TRUE);
     }
 
     g_free (target);
@@ -1127,7 +1127,7 @@ vfs_list (WPanel * panel)
     target_vpath = vfs_path_from_str (target);
     if (!panel_cd (current_panel, target_vpath, cd_exact))
         message (D_ERROR, MSG_ERROR, _("Cannot change directory"));
-    vfs_path_free (target_vpath);
+    vfs_path_free (target_vpath, TRUE);
     g_free (target);
 }
 #endif /* ENABLE_VFS */
@@ -1253,10 +1253,10 @@ edit_symlink_cmd (void)
                     if (mc_symlink (dest_vpath, p_vpath) == -1)
                         message (D_ERROR, MSG_ERROR, _("edit symlink: %s"),
                                  unix_error_string (errno));
-                    vfs_path_free (dest_vpath);
+                    vfs_path_free (dest_vpath, TRUE);
                 }
 
-                vfs_path_free (p_vpath);
+                vfs_path_free (p_vpath, TRUE);
 
                 update_panels (UP_OPTIMIZE, UP_KEEPSEL);
                 repaint_screen ();
@@ -1410,7 +1410,7 @@ single_dirsize_cmd (WPanel * panel)
             entry->f.dir_size_computed = 1;
         }
 
-        vfs_path_free (p);
+        vfs_path_free (p, TRUE);
 
         status_msg_deinit (STATUS_MSG (&dsm));
     }
@@ -1451,7 +1451,7 @@ dirsizes_cmd (WPanel * panel)
 
             p = vfs_path_from_str (panel->dir.list[i].fname);
             ok = compute_dir_size (p, &dsm, &dir_count, &count, &total, FALSE) != FILE_CONT;
-            vfs_path_free (p);
+            vfs_path_free (p, TRUE);
             if (ok)
                 break;
 
@@ -1485,7 +1485,7 @@ save_setup_cmd (void)
     else
         message (D_ERROR, _("Setup"), _("Unable to save setup to %s"), path);
 
-    vfs_path_free (vpath);
+    vfs_path_free (vpath, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */

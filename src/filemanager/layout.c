@@ -659,7 +659,7 @@ restore_into_right_dir_panel (int idx, gboolean last_was_panel, int y, int x, in
 
         saved_dir_vpath = vfs_path_from_str (panels[idx].last_saved_dir);
         new_widget = panel_sized_with_dir_new (p_name, y, x, lines, cols, saved_dir_vpath);
-        vfs_path_free (saved_dir_vpath);
+        vfs_path_free (saved_dir_vpath, TRUE);
     }
     else
         new_widget = panel_sized_new (p_name, y, x, lines, cols);

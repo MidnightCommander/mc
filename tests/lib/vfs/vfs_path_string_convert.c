@@ -187,7 +187,7 @@ START_PARAMETRIZED_TEST (test_from_to_string, test_from_to_string_ds)
     mctest_assert_ptr_eq (path_element->class, data->expected_vfs_class);
     mctest_assert_str_eq (path_element->path, data->expected_element_path);
 
-    vfs_path_free (vpath);
+    vfs_path_free (vpath, TRUE);
 }
 /* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
@@ -269,7 +269,7 @@ START_PARAMETRIZED_TEST (test_partial_string_by_index, test_partial_string_by_in
     mctest_assert_str_eq (actual_result, data->expected_result);
     g_free (actual_result);
 
-    vfs_path_free (vpath);
+    vfs_path_free (vpath, TRUE);
 }
 /* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
@@ -302,7 +302,7 @@ START_TEST (test_vfs_path_encoding_at_end)
     mctest_assert_not_null (element->encoding);
     mctest_assert_str_eq (result, ETALON_STR);
 
-    vfs_path_free (vpath);
+    vfs_path_free (vpath, TRUE);
 }
 
 /* *INDENT-OFF* */

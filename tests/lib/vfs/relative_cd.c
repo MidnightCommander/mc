@@ -64,7 +64,7 @@ test_chdir__init (void)
 static void
 test_chdir__deinit (void)
 {
-    vfs_path_free (test_chdir__vpath__captured);
+    vfs_path_free (test_chdir__vpath__captured, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -149,7 +149,7 @@ START_PARAMETRIZED_TEST (test_relative_cd, test_relative_cd_ds)
         mctest_assert_int_eq (actual_result, 0);
         element = vfs_path_get_by_index (vpath, -1);
         mctest_assert_str_eq (element->path, data->expected_element_path);
-        vfs_path_free (vpath);
+        vfs_path_free (vpath, TRUE);
     }
 }
 /* *INDENT-OFF* */
@@ -173,7 +173,7 @@ START_TEST (test_vpath_to_str_filter)
     /* when */
     vpath = vfs_path_from_str ("/test1://some.host/dir");
     path_element = vfs_path_element_clone (vfs_path_get_by_index (vpath, -1));
-    vfs_path_free (vpath);
+    vfs_path_free (vpath, TRUE);
 
     last_vpath = vfs_path_new ();
     last_vpath->relative = TRUE;
@@ -186,7 +186,7 @@ START_TEST (test_vpath_to_str_filter)
     /* then */
     mctest_assert_str_eq (filtered_path, "test1://some.host/dir");
 
-    vfs_path_free (last_vpath);
+    vfs_path_free (last_vpath, TRUE);
     g_free (filtered_path);
 }
 /* *INDENT-OFF* */

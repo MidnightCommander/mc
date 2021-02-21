@@ -298,8 +298,8 @@ free_link (void *data)
 {
     struct link *lp = (struct link *) data;
 
-    vfs_path_free (lp->src_vpath);
-    vfs_path_free (lp->dst_vpath);
+    vfs_path_free (lp->src_vpath, TRUE);
+    vfs_path_free (lp->dst_vpath, TRUE);
     g_free (lp);
 }
 
@@ -553,8 +553,8 @@ make_symlink (file_op_context_t * ctx, const char *src_path, const char *dst_pat
                 g_free (s);
                 tmp_vpath2 = vfs_path_from_str (link_target);
                 s = diff_two_paths (tmp_vpath1, tmp_vpath2);
-                vfs_path_free (tmp_vpath1);
-                vfs_path_free (tmp_vpath2);
+                vfs_path_free (tmp_vpath1, TRUE);
+                vfs_path_free (tmp_vpath2, TRUE);
                 if (s != NULL)
                 {
                     g_strlcpy (link_target, s, sizeof (link_target));
@@ -562,7 +562,7 @@ make_symlink (file_op_context_t * ctx, const char *src_path, const char *dst_pat
                 }
             }
             g_free (p);
-            vfs_path_free (q);
+            vfs_path_free (q, TRUE);
         }
     }
     link_target_vpath = vfs_path_from_str_flags (link_target, VPF_NO_CANON);
@@ -598,9 +598,9 @@ make_symlink (file_op_context_t * ctx, const char *src_path, const char *dst_pat
     }
 
   ret:
-    vfs_path_free (src_vpath);
-    vfs_path_free (dst_vpath);
-    vfs_path_free (link_target_vpath);
+    vfs_path_free (src_vpath, TRUE);
+    vfs_path_free (dst_vpath, TRUE);
+    vfs_path_free (link_target_vpath, TRUE);
     return return_status;
 }
 
@@ -666,7 +666,7 @@ do_compute_dir_size (const vfs_path_t * dirname_vpath, dirsize_status_msg_t * ds
             }
         }
 
-        vfs_path_free (tmp_vpath);
+        vfs_path_free (tmp_vpath, TRUE);
     }
 
     mc_closedir (dir);
@@ -708,7 +708,7 @@ panel_compute_totals (const WPanel * panel, dirsize_status_msg_t * sm, size_t * 
 
             p = vfs_path_append_new (panel->cwd_vpath, fe->fname, (char *) NULL);
             status = do_compute_dir_size (p, sm, &dir_count, ret_count, ret_total, stat_func);
-            vfs_path_free (p);
+            vfs_path_free (p, TRUE);
 
             if (status != FILE_CONT)
                 return status;
@@ -1330,8 +1330,8 @@ move_file_file (const WPanel * panel, file_op_total_context_t * tctx, file_op_co
         return_status = progress_update_one (tctx, ctx, src_stat.st_size);
 
   ret:
-    vfs_path_free (src_vpath);
-    vfs_path_free (dst_vpath);
+    vfs_path_free (src_vpath, TRUE);
+    vfs_path_free (dst_vpath, TRUE);
 
     return return_status;
 }
@@ -1424,14 +1424,14 @@ recursive_erase (file_op_total_context_t * tctx, file_op_context_t * ctx, const 
         if (mc_lstat (tmp_vpath, &buf) != 0)
         {
             mc_closedir (reading);
-            vfs_path_free (tmp_vpath);
+            vfs_path_free (tmp_vpath, TRUE);
             return FILE_RETRY;
         }
         if (S_ISDIR (buf.st_mode))
             return_status = recursive_erase (tctx, ctx, tmp_vpath);
         else
             return_status = erase_file (tctx, ctx, tmp_vpath);
-        vfs_path_free (tmp_vpath);
+        vfs_path_free (tmp_vpath, TRUE);
     }
     mc_closedir (reading);
 
@@ -1589,7 +1589,7 @@ do_move_dir_dir (const WPanel * panel, file_op_total_context_t * tctx, file_op_c
 
         tmp = dst_vpath;
         dst_vpath = vfs_path_append_new (dst_vpath, x_basename (s), (char *) NULL);
-        vfs_path_free (tmp);
+        vfs_path_free (tmp, TRUE);
     }
 
     d = vfs_path_as_str (dst_vpath);
@@ -1694,8 +1694,8 @@ do_move_dir_dir (const WPanel * panel, file_op_total_context_t * tctx, file_op_c
   ret:
     erase_list = free_linklist (erase_list);
   ret_fast:
-    vfs_path_free (src_vpath);
-    vfs_path_free (dst_vpath);
+    vfs_path_free (src_vpath, TRUE);
+    vfs_path_free (dst_vpath, TRUE);
     return return_status;
 }
 
@@ -1776,7 +1776,7 @@ check_single_entry (const WPanel * panel, gboolean force_single, struct stat *sr
             }
         }
 
-        vfs_path_free (source_vpath);
+        vfs_path_free (source_vpath, TRUE);
     }
 
     return ok ? source : NULL;
@@ -2056,7 +2056,7 @@ operate_single_file (const WPanel * panel, FileOperation operation, file_op_tota
         }
     }
 
-    vfs_path_free (src_vpath);
+    vfs_path_free (src_vpath, TRUE);
 
     return value;
 }
@@ -2126,7 +2126,7 @@ operate_one_file (const WPanel * panel, FileOperation operation, file_op_total_c
         }
     }
 
-    vfs_path_free (src_vpath);
+    vfs_path_free (src_vpath, TRUE);
 
     return value;
 }
@@ -2727,8 +2727,8 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
         return_status = progress_update_one (tctx, ctx, file_size);
 
   ret_fast:
-    vfs_path_free (src_vpath);
-    vfs_path_free (dst_vpath);
+    vfs_path_free (src_vpath, TRUE);
+    vfs_path_free (dst_vpath, TRUE);
     return return_status;
 }
 
@@ -2874,7 +2874,7 @@ copy_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const cha
 
             tmp = dst_vpath;
             dst_vpath = vfs_path_append_new (dst_vpath, x_basename (s), (char *) NULL);
-            vfs_path_free (tmp);
+            vfs_path_free (tmp, TRUE);
 
         }
         else
@@ -2987,7 +2987,7 @@ copy_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const cha
             else
                 return_status = erase_file (tctx, ctx, tmp_vpath);
         }
-        vfs_path_free (tmp_vpath);
+        vfs_path_free (tmp_vpath, TRUE);
     }
     mc_closedir (reading);
 
@@ -3011,8 +3011,8 @@ copy_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const cha
     free_link (parent_dirs->data);
     g_slist_free_1 (parent_dirs);
   ret_fast:
-    vfs_path_free (src_vpath);
-    vfs_path_free (dst_vpath);
+    vfs_path_free (src_vpath, TRUE);
+    vfs_path_free (dst_vpath, TRUE);
     return return_status;
 }
 
@@ -3269,7 +3269,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
             mc_setctl (panel->cwd_vpath, VFS_SETCTL_FORGET, NULL);
 
             mc_setctl (dest_vpath, VFS_SETCTL_FORGET, NULL);
-            vfs_path_free (dest_vpath);
+            vfs_path_free (dest_vpath, TRUE);
             g_free (dest);
             /*          file_op_context_destroy (ctx); */
             return FALSE;
@@ -3315,7 +3315,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
 
             vpath = vfs_path_from_str (PATH_SEP_STR);
             chdir_retcode = mc_chdir (vpath);
-            vfs_path_free (vpath);
+            vfs_path_free (vpath, TRUE);
             if (chdir_retcode < 0)
             {
                 ret_val = FALSE;
@@ -3400,7 +3400,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
     {
         tmp_vpath = vfs_path_from_str (save_cwd);
         mc_setctl (tmp_vpath, VFS_SETCTL_STALE_DATA, NULL);
-        vfs_path_free (tmp_vpath);
+        vfs_path_free (tmp_vpath, TRUE);
         g_free (save_cwd);
     }
 
@@ -3408,14 +3408,14 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
     {
         tmp_vpath = vfs_path_from_str (save_dest);
         mc_setctl (tmp_vpath, VFS_SETCTL_STALE_DATA, NULL);
-        vfs_path_free (tmp_vpath);
+        vfs_path_free (tmp_vpath, TRUE);
         g_free (save_dest);
     }
 
     linklist = free_linklist (linklist);
     dest_dirs = free_linklist (dest_dirs);
     g_free (dest);
-    vfs_path_free (dest_vpath);
+    vfs_path_free (dest_vpath, TRUE);
     MC_PTR_FREE (ctx->dest_mask);
 
 #ifdef ENABLE_BACKGROUND

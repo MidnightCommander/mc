@@ -78,7 +78,7 @@ START_PARAMETRIZED_TEST (the_file_is_local, the_file_is_local_ds)
     fail_unless (mc_getlocalcopy__pathname_vpath__captured == NULL,
                  "\nFunction mc_getlocalcopy() shouldn't be called!");
 
-    vfs_path_free (filename_vpath);
+    vfs_path_free (filename_vpath, TRUE);
 }
 /* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
@@ -114,7 +114,7 @@ START_TEST (the_file_is_remote_but_empty)
     fail_unless (mc_getlocalcopy__pathname_vpath__captured == NULL,
                  "\nFunction mc_getlocalcopy() shouldn't be called!");
 
-    vfs_path_free (filename_vpath);
+    vfs_path_free (filename_vpath, TRUE);
 }
 /* *INDENT-OFF* */
 END_TEST
@@ -156,7 +156,7 @@ START_TEST (the_file_is_remote_fail_to_create_local_copy)
                           _("Cannot fetch a local copy of /ftp://some.host/editme.txt"));
 
 
-    vfs_path_free (filename_vpath);
+    vfs_path_free (filename_vpath, TRUE);
 }
 /* *INDENT-OFF* */
 END_TEST
@@ -209,8 +209,8 @@ START_TEST (the_file_is_remote)
     mctest_assert_int_eq (vfs_path_equal (mc_ungetlocalcopy__local_vpath__captured, local_vpath),
                           TRUE);
 
-    vfs_path_free (filename_vpath);
-    vfs_path_free (local_vpath);
+    vfs_path_free (filename_vpath, TRUE);
+    vfs_path_free (local_vpath, TRUE);
 }
 /* *INDENT-OFF* */
 END_TEST

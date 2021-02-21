@@ -277,7 +277,7 @@ info_show_info (WInfo * info)
             else
                 tty_print_string (_("Attributes: unavailable"));
 
-            vfs_path_free (vpath);
+            vfs_path_free (vpath, TRUE);
         }
 #else
         tty_print_string (_("Attributes: not supported"));

@@ -154,7 +154,7 @@ START_PARAMETRIZED_TEST (test_path_recode, test_path_recode_ds)
     mctest_assert_str_eq (element->path, data->expected_element_path);
     mctest_assert_str_eq (vpath_str, data->expected_recoded_path);
 
-    vfs_path_free (vpath);
+    vfs_path_free (vpath, TRUE);
     test_deinit_vfs ();
 }
 /* *INDENT-OFF* */
@@ -256,7 +256,7 @@ START_PARAMETRIZED_TEST (test_path_to_str_flags, test_path_to_str_flags_ds)
     mctest_assert_str_eq (str_path, data->expected_path);
 
     g_free (str_path);
-    vfs_path_free (vpath);
+    vfs_path_free (vpath, TRUE);
     test_deinit_vfs ();
 }
 /* *INDENT-OFF* */

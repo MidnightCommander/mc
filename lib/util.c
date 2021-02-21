@@ -331,7 +331,7 @@ path_trunc (const char *path, size_t trunc_len)
 
     vpath = vfs_path_from_str (path);
     secure_path = vfs_path_to_str_flags (vpath, 0, VPF_STRIP_PASSWORD);
-    vfs_path_free (vpath);
+    vfs_path_free (vpath, TRUE);
 
     ret = str_trunc (secure_path, trunc_len);
     g_free (secure_path);
@@ -1384,7 +1384,7 @@ mc_util_unlink_backup_if_possible (const char *file_name, const char *backup_suf
 
         vpath = vfs_path_from_str (backup_path);
         mc_unlink (vpath);
-        vfs_path_free (vpath);
+        vfs_path_free (vpath, TRUE);
     }
 
     g_free (backup_path);

@@ -68,7 +68,7 @@ static void
 execute_get_external_cmd_opts_from_config__deinit (void)
 {
     g_free (execute_external_cmd_opts__command__captured);
-    vfs_path_free (execute_external_cmd_opts__filename_vpath__captured);
+    vfs_path_free (execute_external_cmd_opts__filename_vpath__captured, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -174,7 +174,7 @@ START_TEST (do_open_external_editor_or_viewer)
     mctest_assert_str_eq (g_ptr_array_index (do_executev__argv__captured, 5), "/path/to/file.txt");
     mctest_assert_str_eq (g_ptr_array_index (do_executev__argv__captured, 6), "+123");
 
-    vfs_path_free (filename_vpath);
+    vfs_path_free (filename_vpath, TRUE);
 }
 /* *INDENT-OFF* */
 END_TEST

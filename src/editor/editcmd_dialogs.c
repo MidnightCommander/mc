@@ -500,7 +500,7 @@ editcmd_dialog_select_definition_show (WEdit * edit, char *match_expr, GPtrArray
 
         if (curr != NULL && do_moveto && edit_stack_iterator + 1 < MAX_HISTORY_MOVETO)
         {
-            vfs_path_free (edit_history_moveto[edit_stack_iterator].filename_vpath);
+            vfs_path_free (edit_history_moveto[edit_stack_iterator].filename_vpath, TRUE);
 
             /* Is file path absolute? Prepend with dir_vpath if necessary */
             if (edit->filename_vpath != NULL && edit->filename_vpath->relative
@@ -513,7 +513,7 @@ editcmd_dialog_select_definition_show (WEdit * edit, char *match_expr, GPtrArray
 
             edit_history_moveto[edit_stack_iterator].line = edit->start_line + edit->curs_row + 1;
             edit_stack_iterator++;
-            vfs_path_free (edit_history_moveto[edit_stack_iterator].filename_vpath);
+            vfs_path_free (edit_history_moveto[edit_stack_iterator].filename_vpath, TRUE);
             edit_history_moveto[edit_stack_iterator].filename_vpath =
                 vfs_path_from_str ((char *) curr_def->fullpath);
             edit_history_moveto[edit_stack_iterator].line = curr_def->line;

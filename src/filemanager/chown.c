@@ -381,7 +381,7 @@ apply_chowns (WPanel * panel, vfs_path_t * vpath, uid_t u, gid_t g)
         else
             ok = do_chown (panel, vpath, u, g);
 
-        vfs_path_free (vpath);
+        vfs_path_free (vpath, TRUE);
     }
     while (ok && panel->marked != 0);
 }
@@ -426,7 +426,7 @@ chown_cmd (WPanel * panel)
 
         if (mc_stat (vpath, &sf_stat) != 0)
         {
-            vfs_path_free (vpath);
+            vfs_path_free (vpath, TRUE);
             break;
         }
 
@@ -537,7 +537,7 @@ chown_cmd (WPanel * panel)
             need_update = TRUE;
         }
 
-        vfs_path_free (vpath);
+        vfs_path_free (vpath, TRUE);
 
         dlg_destroy (ch_dlg);
     }

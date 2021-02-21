@@ -217,9 +217,9 @@ mcview_done (WView * view)
 
     /* Free memory used by the viewer */
     /* view->widget needs no destructor */
-    vfs_path_free (view->filename_vpath);
+    vfs_path_free (view->filename_vpath, TRUE);
     view->filename_vpath = NULL;
-    vfs_path_free (view->workdir_vpath);
+    vfs_path_free (view->workdir_vpath, TRUE);
     view->workdir_vpath = NULL;
     MC_PTR_FREE (view->command);
 

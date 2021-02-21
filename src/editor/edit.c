@@ -1801,7 +1801,7 @@ user_menu (WEdit * edit, const char *menu_file, int selected_entry)
             fclose (fd);
     }
     g_free (block_file);
-    vfs_path_free (block_file_vpath);
+    vfs_path_free (block_file_vpath, TRUE);
 
     edit_cursor_move (edit, curs - edit->buffer.curs1);
     edit->force |= REDRAW_PAGE;
@@ -2202,8 +2202,8 @@ edit_clean (WEdit * edit)
 
     g_free (edit->undo_stack);
     g_free (edit->redo_stack);
-    vfs_path_free (edit->filename_vpath);
-    vfs_path_free (edit->dir_vpath);
+    vfs_path_free (edit->filename_vpath, TRUE);
+    vfs_path_free (edit->dir_vpath, TRUE);
     mc_search_free (edit->search);
     g_free (edit->last_search_string);
 
@@ -4027,7 +4027,7 @@ void
 edit_stack_free (void)
 {
     for (edit_stack_iterator = 0; edit_stack_iterator < MAX_HISTORY_MOVETO; edit_stack_iterator++)
-        vfs_path_free (edit_history_moveto[edit_stack_iterator].filename_vpath);
+        vfs_path_free (edit_history_moveto[edit_stack_iterator].filename_vpath, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */

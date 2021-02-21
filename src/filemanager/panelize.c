@@ -469,15 +469,14 @@ do_panelize_cd (WPanel * panel)
         else
         {
             vfs_path_t *tmp_vpath;
-            const char *fname;
+            char *fname;
 
             tmp_vpath =
                 vfs_path_append_new (panelized_panel.root_vpath, panelized_panel.list.list[i].fname,
                                      (char *) NULL);
-            fname = vfs_path_as_str (tmp_vpath);
+            fname = vfs_path_free (tmp_vpath, FALSE);
             list->list[i].fnamelen = strlen (fname);
-            list->list[i].fname = g_strndup (fname, list->list[i].fnamelen);
-            vfs_path_free (tmp_vpath);
+            list->list[i].fname = fname;
         }
         list->list[i].f.link_to_dir = panelized_panel.list.list[i].f.link_to_dir;
         list->list[i].f.stale_link = panelized_panel.list.list[i].f.stale_link;
@@ -505,7 +504,7 @@ do_panelize_cd (WPanel * panel)
 void
 panelize_change_root (const vfs_path_t * new_root)
 {
-    vfs_path_free (panelized_panel.root_vpath);
+    vfs_path_free (panelized_panel.root_vpath, TRUE);
     panelized_panel.root_vpath = vfs_path_clone (new_root);
 }
 
@@ -577,7 +576,7 @@ panelize_absolutize_if_needed (WPanel * panel)
         panel_set_cwd (panel, root);
         if (panel == current_panel)
             mc_chdir (root);
-        vfs_path_free (root);
+        vfs_path_free (root, TRUE);
     }
 }
 

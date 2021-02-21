@@ -112,7 +112,7 @@ START_TEST (test_mc_mkstemps)
     fail_unless (strncmp (vfs_path_as_str (pname_vpath), begin_pname, strlen (begin_pname)) == 0,
                  "\nstart of %s should be equal to %s\n", vfs_path_as_str (pname_vpath),
                  begin_pname);
-    vfs_path_free (pname_vpath);
+    vfs_path_free (pname_vpath, TRUE);
 }
 /* *INDENT-OFF* */
 END_TEST

@@ -174,7 +174,7 @@ handle_dirent (struct vfs_dirent *dp, const char *fltr, struct stat *buf1, gbool
     /* A link to a file or a directory? */
     *link_to_dir = file_is_symlink_to_dir (vpath, buf1, stale_link);
 
-    vfs_path_free (vpath);
+    vfs_path_free (vpath, TRUE);
 
     return (S_ISDIR (buf1->st_mode) || *link_to_dir || fltr == NULL
             || mc_search (fltr, NULL, dp->d_name, MC_SEARCH_T_GLOB));
@@ -199,7 +199,7 @@ dir_get_dotdot_stat (const vfs_path_t * vpath, struct stat *st)
 
             tmp_vpath = vfs_path_append_new (vpath, "..", (char *) NULL);
             ret = mc_stat (tmp_vpath, st) == 0;
-            vfs_path_free (tmp_vpath);
+            vfs_path_free (tmp_vpath, TRUE);
         }
     }
 
@@ -592,7 +592,7 @@ handle_path (const char *path, struct stat * buf1, gboolean * link_to_dir, gbool
     vpath = vfs_path_from_str (path);
     if (mc_lstat (vpath, buf1) == -1)
     {
-        vfs_path_free (vpath);
+        vfs_path_free (vpath, TRUE);
         return FALSE;
     }
 
@@ -612,7 +612,7 @@ handle_path (const char *path, struct stat * buf1, gboolean * link_to_dir, gbool
             *stale_link = TRUE;
     }
 
-    vfs_path_free (vpath);
+    vfs_path_free (vpath, TRUE);
 
     return TRUE;
 }

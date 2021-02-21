@@ -340,7 +340,7 @@ main (int argc, char *argv[])
             saved_other_dir = buffer;
         else
             g_free (buffer);
-        vfs_path_free (vpath);
+        vfs_path_free (vpath, TRUE);
     }
 
     /* check terminal type

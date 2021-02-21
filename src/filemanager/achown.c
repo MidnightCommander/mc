@@ -975,7 +975,7 @@ apply_advanced_chowns (WPanel * panel, vfs_path_t * vpath, struct stat *sf)
                                     (ch_flags[10] == '+') ? a_gid : (gid_t) (-1));
         }
 
-        vfs_path_free (vpath);
+        vfs_path_free (vpath, TRUE);
     }
     while (ok && panel->marked != 0);
 }
@@ -1022,7 +1022,7 @@ advanced_chown_cmd (WPanel * panel)
 
         if (mc_stat (vpath, &sf_stat) != 0)
         {
-            vfs_path_free (vpath);
+            vfs_path_free (vpath, TRUE);
             break;
         }
 
@@ -1089,7 +1089,7 @@ advanced_chown_cmd (WPanel * panel)
             need_update = TRUE;
         }
 
-        vfs_path_free (vpath);
+        vfs_path_free (vpath, TRUE);
 
         dlg_destroy (ch_dlg);
     }

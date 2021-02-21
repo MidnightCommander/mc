@@ -97,7 +97,7 @@ setup (void)
 static void
 teardown (void)
 {
-    vfs_path_free (do_cd__new_dir_vpath__captured);
+    vfs_path_free (do_cd__new_dir_vpath__captured, TRUE);
     vfs_shut ();
     str_uninit_strings ();
 }
