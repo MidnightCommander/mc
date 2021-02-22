@@ -400,43 +400,6 @@ AM_CONDITIONAL([ENABLE_MCLIB], [test x$enable_mclib = xyes])
 
 
 dnl ############################################################################
-dnl Where config files should be placed
-dnl ############################################################################
-
-AC_ARG_WITH([homedir],
-    AS_HELP_STRING([--with-homedir],
-                   [Choose any place of user settings relative to home dir, or XDG for respect XDG standards @<:@XDG@:>@]),
-    [
-	dnl Unfortunately, there is no way to tell AC_ARG_WITH that the
-	dnl argument value is required, so we can't differentiate
-	dnl between `--with-homedir` and `--with-homedir=yes`, because
-	dnl `with_homedir` is set to `yes` in both cases.
-	dnl
-	dnl We opt to set `with_homedir` to `.mc` if the value is `yes`
-	dnl in order to avoid the surprise for users using
-	dnl `--with-homedir` w/o any value and then getting mc to store
-	dnl settings in the `yes` directory.
-
-	if test "x$withval" = "xXDG"; then
-	    with_homedir=XDG
-	elif test "x$withval" = "xyes"; then
-	    with_homedir=.mc
-	else
-	    with_homedir=$withval
-	fi
-    ],
-    [with_homedir=XDG])
-
-
-if test x$with_homedir = xXDG; then
-    AC_DEFINE(MC_HOMEDIR_XDG, 1, [Define to enable XDG standard support])
-else
-    AC_DEFINE(MC_HOMEDIR_XDG, 0, [Define to disable XDG standard support])
-    AC_DEFINE_UNQUOTED([MC_USERCONF_DIR], ["$with_homedir"], [Where configs will be placed relative to $HOME])
-fi
-
-
-dnl ############################################################################
 dnl MC options
 dnl ############################################################################
 

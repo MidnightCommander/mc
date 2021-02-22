@@ -37,15 +37,9 @@
 
 #define HOME_DIR "/home/testuser"
 
-#if MC_HOMEDIR_XDG
 #define CONF_MAIN HOME_DIR PATH_SEP_STR ".config"
 #define CONF_DATA HOME_DIR PATH_SEP_STR ".local" PATH_SEP_STR "share"
 #define CONF_CACHE HOME_DIR PATH_SEP_STR ".cache"
-#else
-#define CONF_MAIN HOME_DIR
-#define CONF_DATA CONF_MAIN
-#define CONF_CACHE CONF_MAIN
-#endif
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -54,11 +48,9 @@ static void
 setup (void)
 {
     g_setenv ("HOME", HOME_DIR, TRUE);
-#if MC_HOMEDIR_XDG
     g_setenv ("XDG_CONFIG_HOME", CONF_MAIN, TRUE);
     g_setenv ("XDG_DATA_HOME", CONF_DATA, TRUE);
     g_setenv ("XDG_CACHE_HOME", CONF_CACHE, TRUE);
-#endif
     str_init_strings ("UTF-8");
     vfs_init ();
     vfs_init_localfs ();

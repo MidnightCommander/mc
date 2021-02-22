@@ -101,8 +101,6 @@ const char *mc_config_get_path (void);
 char *mc_config_get_full_path (const char *config_name);
 vfs_path_t *mc_config_get_full_vpath (const char *config_name);
 
-gboolean mc_config_migrate_from_old_place (GError ** mcerror, char **msg);
-
 /* mcconfig/history.h */
 
 /* read history to the mc_config, but don't save config to file */
