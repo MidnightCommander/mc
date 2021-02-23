@@ -1076,7 +1076,7 @@ chattr_done (gboolean need_update)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static const char *
+static const GString *
 next_file (const WPanel * panel)
 {
     while (!panel->dir.list[current_file].f.marked)
@@ -1158,10 +1158,10 @@ chattr_apply_mask (WPanel * panel, vfs_path_t * vpath, unsigned long m)
 
     do
     {
-        const char *fname;
+        const GString *fname;
 
         fname = next_file (panel);
-        ok = (fgetflags (fname, &m) == 0);
+        ok = (fgetflags (fname->str, &m) == 0);
 
         if (!ok)
         {
@@ -1174,7 +1174,7 @@ chattr_apply_mask (WPanel * panel, vfs_path_t * vpath, unsigned long m)
         }
         else
         {
-            vpath = vfs_path_from_str (fname);
+            vpath = vfs_path_from_str (fname->str);
             flags = m;
             ok = do_chattr (panel, vpath, m);
             vfs_path_free (vpath, TRUE);
@@ -1202,7 +1202,8 @@ chattr_cmd (WPanel * panel)
     {                           /* do while any files remaining */
         vfs_path_t *vpath;
         WDialog *ch_dlg;
-        const char *fname, *fname2;
+        const GString *fname;
+        const char *fname2;
         size_t i;
         int result;
 
@@ -1223,12 +1224,12 @@ chattr_cmd (WPanel * panel)
         else
             fname = selection (panel)->fname;   /* single file */
 
-        vpath = vfs_path_from_str (fname);
+        vpath = vfs_path_from_str (fname->str);
         fname2 = vfs_path_as_str (vpath);
 
         if (fgetflags (fname2, &flags) != 0)
         {
-            message (D_ERROR, MSG_ERROR, _("Cannot get flags of \"%s\"\n%s"), fname,
+            message (D_ERROR, MSG_ERROR, _("Cannot get flags of \"%s\"\n%s"), fname->str,
                      unix_error_string (errno));
             vfs_path_free (vpath, TRUE);
             break;
@@ -1236,7 +1237,7 @@ chattr_cmd (WPanel * panel)
 
         flags_changed = FALSE;
 
-        ch_dlg = chattr_dlg_create (panel, fname, flags);
+        ch_dlg = chattr_dlg_create (panel, fname->str, flags);
         result = dlg_run (ch_dlg);
         dlg_destroy (ch_dlg);
 
@@ -1253,7 +1254,7 @@ chattr_cmd (WPanel * panel)
                 {
                     /* single or last file */
                     if (fsetflags (fname2, flags) == -1 && !ignore_all)
-                        message (D_ERROR, MSG_ERROR, _("Cannot chattr \"%s\"\n%s"), fname,
+                        message (D_ERROR, MSG_ERROR, _("Cannot chattr \"%s\"\n%s"), fname->str,
                                  unix_error_string (errno));
                     end_chattr = TRUE;
                 }

@@ -1851,14 +1851,14 @@ do_find (WPanel * panel, const char *start_dir, ssize_t start_dir_len, const cha
 
             /* don't add files more than once to the panel */
             if (!content_is_empty && list->len != 0
-                && strcmp (list->list[list->len - 1].fname, p) == 0)
+                && strcmp (list->list[list->len - 1].fname->str, p) == 0)
             {
                 g_free (name);
                 continue;
             }
 
-            list->list[list->len].fnamelen = strlen (p);
-            list->list[list->len].fname = g_strndup (p, list->list[list->len].fnamelen);
+            list->list[list->len].fname = g_string_new_len (list->list[list->len].fname->str,
+                                                            list->list[list->len].fname->len);
             list->list[list->len].f.marked = 0;
             list->list[list->len].f.link_to_dir = link_to_dir ? 1 : 0;
             list->list[list->len].f.stale_link = stale_link ? 1 : 0;

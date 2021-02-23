@@ -1174,7 +1174,7 @@ create_panel (int num, panel_view_mode_t type)
         new_widget = WIDGET (mcview_new (y, x, lines, cols, TRUE));
         the_other_panel = PANEL (panels[the_other].widget);
         if (the_other_panel != NULL)
-            file_name = the_other_panel->dir.list[the_other_panel->selected].fname;
+            file_name = the_other_panel->dir.list[the_other_panel->selected].fname->str;
         else
             file_name = "";
 

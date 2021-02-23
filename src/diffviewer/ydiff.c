@@ -3533,22 +3533,24 @@ dview_diff_cmd (const void *f0, const void *f1)
             const WPanel *panel1 = (const WPanel *) f1;
 
             file0 =
-                vfs_path_append_new (panel0->cwd_vpath, selection (panel0)->fname, (char *) NULL);
+                vfs_path_append_new (panel0->cwd_vpath, selection (panel0)->fname->str,
+                                     (char *) NULL);
             is_dir0 = S_ISDIR (selection (panel0)->st.st_mode);
             if (is_dir0)
             {
                 message (D_ERROR, MSG_ERROR, _("\"%s\" is a directory"),
-                         path_trunc (selection (panel0)->fname, 30));
+                         path_trunc (selection (panel0)->fname->str, 30));
                 goto ret;
             }
 
             file1 =
-                vfs_path_append_new (panel1->cwd_vpath, selection (panel1)->fname, (char *) NULL);
+                vfs_path_append_new (panel1->cwd_vpath, selection (panel1)->fname->str,
+                                     (char *) NULL);
             is_dir1 = S_ISDIR (selection (panel1)->st.st_mode);
             if (is_dir1)
             {
                 message (D_ERROR, MSG_ERROR, _("\"%s\" is a directory"),
-                         path_trunc (selection (panel1)->fname, 30));
+                         path_trunc (selection (panel1)->fname->str, 30));
                 goto ret;
             }
             break;

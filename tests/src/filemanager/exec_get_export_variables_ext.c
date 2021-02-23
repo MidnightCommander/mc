@@ -76,10 +76,10 @@ START_TEST (sanitize_variables)
 
     current_panel->selected = 0;
     current_panel->dir.len = 3;
-    current_panel->dir.list[0].fname = (char *) "selected file.txt";
-    current_panel->dir.list[1].fname = (char *) "tagged file1.txt";
+    current_panel->dir.list[0].fname = g_string_new ("selected file.txt");
+    current_panel->dir.list[1].fname = g_string_new ("tagged file1.txt");
     current_panel->dir.list[1].f.marked = TRUE;
-    current_panel->dir.list[2].fname = (char *) "tagged file2.txt";
+    current_panel->dir.list[2].fname = g_string_new ("tagged file2.txt");
     current_panel->dir.list[2].f.marked = TRUE;
 
     /* when */
@@ -103,6 +103,9 @@ export MC_EXT_ONLYTAGGED\n";
     mctest_assert_str_eq (actual_string->str, expected_string);
 
     g_string_free (actual_string, TRUE);
+    g_string_free (current_panel->dir.list[0].fname, TRUE);
+    g_string_free (current_panel->dir.list[1].fname, TRUE);
+    g_string_free (current_panel->dir.list[2].fname, TRUE);
 }
 /* *INDENT-OFF* */
 END_TEST

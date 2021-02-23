@@ -148,7 +148,7 @@ treebox_cmd (void)
 {
     char *sel_dir;
 
-    sel_dir = tree_box (selection (current_panel)->fname);
+    sel_dir = tree_box (selection (current_panel)->fname->str);
     if (sel_dir != NULL)
     {
         vfs_path_t *sel_vdir;
@@ -740,7 +740,8 @@ put_link (WPanel * panel)
         vfs_path_t *vpath;
         int i;
 
-        vpath = vfs_path_append_new (panel->cwd_vpath, selection (panel)->fname, (char *) NULL);
+        vpath =
+            vfs_path_append_new (panel->cwd_vpath, selection (panel)->fname->str, (char *) NULL);
         i = mc_readlink (vpath, buffer, sizeof (buffer) - 1);
         vfs_path_free (vpath, TRUE);
 
@@ -790,7 +791,7 @@ put_current_selected (void)
         tmp = vfs_path_as_str (selected_name);
     }
     else
-        tmp = selection (current_panel)->fname;
+        tmp = selection (current_panel)->fname->str;
 
     command_insert (cmdline, tmp, TRUE);
 }
@@ -810,12 +811,12 @@ put_tagged (WPanel * panel)
         for (i = 0; i < panel->dir.len; i++)
         {
             if (panel->dir.list[i].f.marked)
-                command_insert (cmdline, panel->dir.list[i].fname, TRUE);
+                command_insert (cmdline, panel->dir.list[i].fname->str, TRUE);
         }
     }
     else
     {
-        command_insert (cmdline, panel->dir.list[panel->selected].fname, TRUE);
+        command_insert (cmdline, panel->dir.list[panel->selected].fname->str, TRUE);
     }
     input_enable_update (cmdline);
 }

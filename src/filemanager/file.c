@@ -706,7 +706,7 @@ panel_compute_totals (const WPanel * panel, dirsize_status_msg_t * sm, size_t * 
             vfs_path_t *p;
             FileProgressStatus status;
 
-            p = vfs_path_append_new (panel->cwd_vpath, fe->fname, (char *) NULL);
+            p = vfs_path_append_new (panel->cwd_vpath, fe->fname->str, (char *) NULL);
             status = do_compute_dir_size (p, sm, &dir_count, ret_count, ret_total, stat_func);
             vfs_path_free (p, TRUE);
 
@@ -1727,10 +1727,10 @@ panel_get_file (const WPanel * panel)
 
         for (i = 0; i < panel->dir.len; i++)
             if (panel->dir.list[i].f.marked)
-                return panel->dir.list[i].fname;
+                return panel->dir.list[i].fname->str;
     }
 
-    return panel->dir.list[panel->selected].fname;
+    return panel->dir.list[panel->selected].fname->str;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1742,7 +1742,7 @@ check_single_entry (const WPanel * panel, gboolean force_single, struct stat *sr
     gboolean ok;
 
     if (force_single)
-        source = selection (panel)->fname;
+        source = selection (panel)->fname->str;
     else
         source = panel_get_file (panel);
 
@@ -3366,7 +3366,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                 if (!panel->dir.list[i].f.marked)
                     continue;   /* Skip the unmarked ones */
 
-                source2 = panel->dir.list[i].fname;
+                source2 = panel->dir.list[i].fname->str;
                 src_stat = panel->dir.list[i].st;
 
                 value = operate_one_file (panel, operation, tctx, ctx, source2, &src_stat, dest);

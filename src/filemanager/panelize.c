@@ -460,23 +460,17 @@ do_panelize_cd (WPanel * panel)
 
     for (i = 0; i < panelized_panel.list.len; i++)
     {
-        if (panelized_same || DIR_IS_DOTDOT (panelized_panel.list.list[i].fname))
-        {
-            list->list[i].fnamelen = panelized_panel.list.list[i].fnamelen;
-            list->list[i].fname = g_strndup (panelized_panel.list.list[i].fname,
-                                             panelized_panel.list.list[i].fnamelen);
-        }
+        if (panelized_same || DIR_IS_DOTDOT (panelized_panel.list.list[i].fname->str))
+            list->list[i].fname = g_string_new_len (panelized_panel.list.list[i].fname->str,
+                                                    panelized_panel.list.list[i].fname->len);
         else
         {
             vfs_path_t *tmp_vpath;
-            char *fname;
 
             tmp_vpath =
-                vfs_path_append_new (panelized_panel.root_vpath, panelized_panel.list.list[i].fname,
-                                     (char *) NULL);
-            fname = vfs_path_free (tmp_vpath, FALSE);
-            list->list[i].fnamelen = strlen (fname);
-            list->list[i].fname = fname;
+                vfs_path_append_new (panelized_panel.root_vpath,
+                                     panelized_panel.list.list[i].fname->str, (char *) NULL);
+            list->list[i].fname = g_string_new (vfs_path_free (tmp_vpath, FALSE));
         }
         list->list[i].f.link_to_dir = panelized_panel.list.list[i].f.link_to_dir;
         list->list[i].f.stale_link = panelized_panel.list.list[i].f.stale_link;
@@ -529,9 +523,8 @@ panelize_save_panel (WPanel * panel)
 
     for (i = 0; i < panel->dir.len; i++)
     {
-        panelized_panel.list.list[i].fnamelen = list->list[i].fnamelen;
         panelized_panel.list.list[i].fname =
-            g_strndup (list->list[i].fname, list->list[i].fnamelen);
+            g_string_new_len (list->list[i].fname->str, list->list[i].fname->len);
         panelized_panel.list.list[i].f.link_to_dir = list->list[i].f.link_to_dir;
         panelized_panel.list.list[i].f.stale_link = list->list[i].f.stale_link;
         panelized_panel.list.list[i].f.dir_size_computed = list->list[i].f.dir_size_computed;
@@ -568,7 +561,7 @@ panelize_absolutize_if_needed (WPanel * panel)
 
     /* Note: We don't support mixing of absolute and relative paths, which is
      * why it's ok for us to check only the 1st entry. */
-    if (list->len > 1 && g_path_is_absolute (list->list[1].fname))
+    if (list->len > 1 && g_path_is_absolute (list->list[1].fname->str))
     {
         vfs_path_t *root;
 

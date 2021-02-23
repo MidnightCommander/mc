@@ -255,7 +255,7 @@ test_condition (const WEdit * edit_widget, char *p, gboolean * condition)
             else
 #endif
                 *condition = panel != NULL &&
-                    mc_search (arg, DEFAULT_CHARSET, panel->dir.list[panel->selected].fname,
+                    mc_search (arg, DEFAULT_CHARSET, panel->dir.list[panel->selected].fname->str,
                                search_type);
             break;
         case 'y':              /* syntax pattern */
@@ -774,7 +774,7 @@ expand_format (const WEdit * edit_widget, char c, gboolean do_quote)
                 panel = other_panel;
             }
 
-            fname = panel->dir.list[panel->selected].fname;
+            fname = panel->dir.list[panel->selected].fname->str;
         }
         break;
 
@@ -916,7 +916,7 @@ expand_format (const WEdit * edit_widget, char c, gboolean do_quote)
                 {
                     char *tmp;
 
-                    tmp = quote_func (panel->dir.list[i].fname, FALSE);
+                    tmp = quote_func (panel->dir.list[i].fname->str, FALSE);
                     g_string_append (block, tmp);
                     g_string_append_c (block, ' ');
                     g_free (tmp);

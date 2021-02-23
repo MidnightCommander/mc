@@ -211,7 +211,7 @@ mcview_hook (void *v)
 
     mcview_done (view);
     mcview_init (view);
-    mcview_load (view, 0, panel->dir.list[panel->selected].fname, 0, 0, 0);
+    mcview_load (view, 0, panel->dir.list[panel->selected].fname->str, 0, 0, 0);
     mcview_display (view);
 }
 
@@ -321,7 +321,7 @@ mcview_load_next_prev_init (WView * view)
             {
                 const file_entry_t *fe = &view->dir->list[i];
 
-                if (fname_len == fe->fnamelen && strncmp (fname, fe->fname, fname_len) == 0)
+                if (fname_len == fe->fname->len && strncmp (fname, fe->fname->str, fname_len) == 0)
                     break;
             }
 
@@ -374,7 +374,8 @@ mcview_load_next_prev (WView * view, int direction)
     dir_idx = view->dir_idx;
     view->dir = NULL;
     view->dir_idx = NULL;
-    vfile = vfs_path_append_new (view->workdir_vpath, dir->list[*dir_idx].fname, (char *) NULL);
+    vfile =
+        vfs_path_append_new (view->workdir_vpath, dir->list[*dir_idx].fname->str, (char *) NULL);
     mcview_done (view);
     mcview_remove_ext_script (view);
     mcview_init (view);

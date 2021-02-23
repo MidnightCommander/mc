@@ -140,7 +140,7 @@ do_view_cmd (WPanel * panel, gboolean plain_view)
                           _("&Yes"), _("&No")) != 0)
             return;
 
-        fname_vpath = vfs_path_from_str (selection (panel)->fname);
+        fname_vpath = vfs_path_from_str (selection (panel)->fname->str);
         if (!panel_cd (panel, fname_vpath, cd_exact))
             message (D_ERROR, MSG_ERROR, _("Cannot change directory"));
         vfs_path_free (fname_vpath, TRUE);
@@ -151,7 +151,7 @@ do_view_cmd (WPanel * panel, gboolean plain_view)
         vfs_path_t *filename_vpath;
 
         file_idx = panel->selected;
-        filename_vpath = vfs_path_from_str (panel->dir.list[file_idx].fname);
+        filename_vpath = vfs_path_from_str (panel->dir.list[file_idx].fname->str);
         view_file (filename_vpath, plain_view, use_internal_view);
         vfs_path_free (filename_vpath, TRUE);
     }
@@ -289,7 +289,7 @@ compare_dir (WPanel * panel, WPanel * other, enum CompareMode mode)
 
         /* Search the corresponding entry from the other panel */
         for (j = 0; j < other->dir.len; j++)
-            if (strcmp (source->fname, other->dir.list[j].fname) == 0)
+            if (g_string_equal (source->fname, other->dir.list[j].fname))
                 break;
 
         if (j >= other->dir.len)
@@ -329,8 +329,10 @@ compare_dir (WPanel * panel, WPanel * other, enum CompareMode mode)
             {
                 vfs_path_t *src_name, *dst_name;
 
-                src_name = vfs_path_append_new (panel->cwd_vpath, source->fname, (char *) NULL);
-                dst_name = vfs_path_append_new (other->cwd_vpath, target->fname, (char *) NULL);
+                src_name =
+                    vfs_path_append_new (panel->cwd_vpath, source->fname->str, (char *) NULL);
+                dst_name =
+                    vfs_path_append_new (other->cwd_vpath, target->fname->str, (char *) NULL);
                 if (compare_files (src_name, dst_name, source->st.st_size))
                     do_file_mark (panel, i, 1);
                 vfs_path_free (src_name, TRUE);
@@ -626,7 +628,7 @@ view_file_cmd (const WPanel * panel)
 
     filename =
         input_expand_dialog (_("View file"), _("Filename:"),
-                             MC_HISTORY_FM_VIEW_FILE, selection (panel)->fname,
+                             MC_HISTORY_FM_VIEW_FILE, selection (panel)->fname->str,
                              INPUT_COMPLETE_FILENAMES);
     if (filename == NULL)
         return;
@@ -654,7 +656,7 @@ view_filtered_cmd (const WPanel * panel)
     const char *initial_command;
 
     if (input_is_empty (cmdline))
-        initial_command = selection (panel)->fname;
+        initial_command = selection (panel)->fname->str;
     else
         initial_command = cmdline->buffer;
 
@@ -716,7 +718,7 @@ edit_cmd (const WPanel * panel)
 {
     vfs_path_t *fname;
 
-    fname = vfs_path_from_str (selection (panel)->fname);
+    fname = vfs_path_from_str (selection (panel)->fname->str);
     if (regex_command (fname, "Edit") == 0)
         do_edit (fname);
     vfs_path_free (fname, TRUE);
@@ -730,7 +732,7 @@ edit_cmd_force_internal (const WPanel * panel)
 {
     vfs_path_t *fname;
 
-    fname = vfs_path_from_str (selection (panel)->fname);
+    fname = vfs_path_from_str (selection (panel)->fname->str);
     if (regex_command (fname, "Edit") == 0)
         edit_file_at_line (fname, TRUE, 1);
     vfs_path_free (fname, TRUE);
@@ -836,8 +838,8 @@ mkdir_cmd (WPanel * panel)
     const char *name = "";
 
     /* If 'on' then automatically fills name with current selected item name */
-    if (auto_fill_mkdir_name && !DIR_IS_DOTDOT (selection (panel)->fname))
-        name = selection (panel)->fname;
+    if (auto_fill_mkdir_name && !DIR_IS_DOTDOT (selection (panel)->fname->str))
+        name = selection (panel)->fname->str;
 
     dir =
         input_expand_dialog (_("Create a new Directory"),
@@ -1197,7 +1199,7 @@ swap_cmd (void)
 void
 link_cmd (link_type_t link_type)
 {
-    char *filename = selection (current_panel)->fname;
+    const char *filename = selection (current_panel)->fname->str;
 
     if (filename != NULL)
         do_link (link_type, filename);
@@ -1212,7 +1214,7 @@ edit_symlink_cmd (void)
     const char *p;
 
     fe = selection (current_panel);
-    p = fe->fname;
+    p = fe->fname->str;
 
     if (!S_ISLNK (fe->st.st_mode))
         message (D_ERROR, MSG_ERROR, _("'%s' is not a symbolic link"), p);
@@ -1377,7 +1379,7 @@ smart_dirsize_cmd (WPanel * panel)
 {
     const file_entry_t *entry = &panel->dir.list[panel->selected];
 
-    if ((S_ISDIR (entry->st.st_mode) && DIR_IS_DOTDOT (entry->fname)) || panel->dirs_marked)
+    if ((S_ISDIR (entry->st.st_mode) && DIR_IS_DOTDOT (entry->fname->str)) || panel->dirs_marked)
         dirsizes_cmd (panel);
     else
         single_dirsize_cmd (panel);
@@ -1390,7 +1392,7 @@ single_dirsize_cmd (WPanel * panel)
 {
     file_entry_t *entry = &panel->dir.list[panel->selected];
 
-    if (S_ISDIR (entry->st.st_mode) && !DIR_IS_DOTDOT (entry->fname))
+    if (S_ISDIR (entry->st.st_mode) && !DIR_IS_DOTDOT (entry->fname->str))
     {
         size_t dir_count = 0;
         size_t count = 0;
@@ -1398,7 +1400,7 @@ single_dirsize_cmd (WPanel * panel)
         dirsize_status_msg_t dsm;
         vfs_path_t *p;
 
-        p = vfs_path_from_str (entry->fname);
+        p = vfs_path_from_str (entry->fname->str);
 
         memset (&dsm, 0, sizeof (dsm));
         status_msg_init (STATUS_MSG (&dsm), _("Directory scanning"), 0, dirsize_status_init_cb,
@@ -1441,7 +1443,7 @@ dirsizes_cmd (WPanel * panel)
     for (i = 0; i < panel->dir.len; i++)
         if (S_ISDIR (panel->dir.list[i].st.st_mode)
             && ((panel->dirs_marked != 0 && panel->dir.list[i].f.marked)
-                || panel->dirs_marked == 0) && !DIR_IS_DOTDOT (panel->dir.list[i].fname))
+                || panel->dirs_marked == 0) && !DIR_IS_DOTDOT (panel->dir.list[i].fname->str))
         {
             vfs_path_t *p;
             size_t dir_count = 0;
@@ -1449,7 +1451,7 @@ dirsizes_cmd (WPanel * panel)
             uintmax_t total = 0;
             gboolean ok;
 
-            p = vfs_path_from_str (panel->dir.list[i].fname);
+            p = vfs_path_from_str (panel->dir.list[i].fname->str);
             ok = compute_dir_size (p, &dsm, &dir_count, &count, &total, FALSE) != FILE_CONT;
             vfs_path_free (p, TRUE);
             if (ok)

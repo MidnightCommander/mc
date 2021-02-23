@@ -829,7 +829,7 @@ advanced_chown_done (gboolean need_update)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static const char *
+static const GString *
 next_file (const WPanel * panel)
 {
     while (!panel->dir.list[current_file].f.marked)
@@ -951,10 +951,10 @@ apply_advanced_chowns (WPanel * panel, vfs_path_t * vpath, struct stat *sf)
 
     do
     {
-        const char *fname;
+        const GString *fname;
 
         fname = next_file (panel);
-        vpath = vfs_path_from_str (fname);
+        vpath = vfs_path_from_str (fname->str);
         ok = (mc_stat (vpath, sf) == 0);
 
         if (!ok)
@@ -1004,7 +1004,7 @@ advanced_chown_cmd (WPanel * panel)
     {                           /* do while any files remaining */
         vfs_path_t *vpath;
         WDialog *ch_dlg;
-        const char *fname;
+        const GString *fname;
         int result;
         int file_idx;
 
@@ -1018,7 +1018,7 @@ advanced_chown_cmd (WPanel * panel)
         else
             fname = selection (panel)->fname;   /* single file */
 
-        vpath = vfs_path_from_str (fname);
+        vpath = vfs_path_from_str (fname->str);
 
         if (mc_stat (vpath, &sf_stat) != 0)
         {
@@ -1032,7 +1032,7 @@ advanced_chown_cmd (WPanel * panel)
 
         file_idx = files_on_begin == 1 ? 1 : (files_on_begin - panel->marked + 1);
         label_set_textv (l_filename, "%s (%d/%d)",
-                         str_fit_to_term (fname, WIDGET (ch_dlg)->cols - 20, J_LEFT_FIT),
+                         str_fit_to_term (fname->str, WIDGET (ch_dlg)->cols - 20, J_LEFT_FIT),
                          file_idx, files_on_begin);
         update_ownership ();
 
@@ -1050,12 +1050,12 @@ advanced_chown_cmd (WPanel * panel)
                 /* single or last file */
                 if (mc_chmod (vpath, get_mode ()) == -1)
                     message (D_ERROR, MSG_ERROR, _("Cannot chmod \"%s\"\n%s"),
-                             fname, unix_error_string (errno));
+                             fname->str, unix_error_string (errno));
                 /* call mc_chown only, if mc_chmod didn't fail */
                 else if (mc_chown
                          (vpath, (ch_flags[9] == '+') ? sf_stat.st_uid : (uid_t) (-1),
                           (ch_flags[10] == '+') ? sf_stat.st_gid : (gid_t) (-1)) == -1)
-                    message (D_ERROR, MSG_ERROR, _("Cannot chown \"%s\"\n%s"), fname,
+                    message (D_ERROR, MSG_ERROR, _("Cannot chown \"%s\"\n%s"), fname->str,
                              unix_error_string (errno));
 
                 end_chown = TRUE;
