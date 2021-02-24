@@ -385,7 +385,7 @@ mcview_load_command_output (WView * view, const char *command)
 
     mcview_close_datasource (view);
 
-    p = mc_popen (command, &error);
+    p = mc_popen (command, TRUE, TRUE, &error);
     if (p == NULL)
     {
         mcview_display (view);

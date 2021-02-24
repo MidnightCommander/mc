@@ -503,13 +503,15 @@ my_systemv_flags (int flags, const char *command, char *const argv[])
  * Create pipe and run child process.
  *
  * @parameter command command line of child process
+ * @parameter read_out do or don't read the stdout of child process
+ * @parameter read_err do or don't read the stderr of child process
  * @paremeter error contains pointer to object to handle error code and message
  *
  * @return newly created object of mc_pipe_t class in success, NULL otherwise
  */
 
 mc_pipe_t *
-mc_popen (const char *command, GError ** error)
+mc_popen (const char *command, gboolean read_out, gboolean read_err, GError ** error)
 {
     mc_pipe_t *p;
     const char *const argv[] = { "/bin/sh", "sh", "-c", command, NULL };
@@ -522,9 +524,13 @@ mc_popen (const char *command, GError ** error)
         goto ret_err;
     }
 
+    p->out.fd = -1;
+    p->err.fd = -1;
+
     if (!g_spawn_async_with_pipes
-        (NULL, (gchar **) argv, NULL, G_SPAWN_DO_NOT_REAP_CHILD | G_SPAWN_FILE_AND_ARGV_ZERO,
-         NULL, NULL, &p->child_pid, NULL, &p->out.fd, &p->err.fd, error))
+        (NULL, (gchar **) argv, NULL, G_SPAWN_DO_NOT_REAP_CHILD | G_SPAWN_FILE_AND_ARGV_ZERO, NULL,
+         NULL, &p->child_pid, NULL, read_out ? &p->out.fd : NULL, read_err ? &p->err.fd : NULL,
+         error))
     {
         mc_replace_error (error, MC_PIPE_ERROR_CREATE_PIPE_STREAM, "%s",
                           _("Cannot create pipe streams"));
@@ -553,9 +559,9 @@ mc_popen (const char *command, GError ** error)
  * @parameter p pipe descriptor
  *
  * The lengths of read data contain in p->out.len and p->err.len.
- * Before read, p->xxx.len is an input:
- *   p->xxx.len > 0:  do read stream p->xxx and store data in p->xxx.buf;
- *   p->xxx.len <= 0: do not read stream p->xxx.
+ *
+ * Before read, p->xxx.len is an input. It defines the number of data to read.
+ * Should not be greater than MC_PIPE_BUFSIZE.
  *
  * After read, p->xxx.len is an output and contains the following:
  *   p->xxx.len > 0: an actual length of read data stored in p->xxx.buf;
@@ -577,8 +583,8 @@ mc_pread (mc_pipe_t * p, GError ** error)
     if (error != NULL)
         *error = NULL;
 
-    read_out = p->out.fd >= 0 && p->out.len > 0;
-    read_err = p->err.fd >= 0 && p->err.len > 0;
+    read_out = p->out.fd >= 0;
+    read_err = p->err.fd >= 0;
 
     if (!read_out && !read_err)
     {

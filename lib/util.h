@@ -87,11 +87,10 @@ typedef struct
     int fd;
     /* data read from fd */
     char buf[MC_PIPE_BUFSIZE];
-    /* positive: length of data in buf as before read as after;
-     * zero or negative before read: do not read drom fd;
-     * MC_PIPE_STREAM_EOF after read: EOF of fd;
-     * MC_PIPE_STREAM_UNREAD after read: there was not read from fd;
-     * MC_PIPE_ERROR_READ after read: reading error from fd.
+    /* positive: length of data in buf;
+     * MC_PIPE_STREAM_EOF: EOF of fd;
+     * MC_PIPE_STREAM_UNREAD: there was not read from fd;
+     * MC_PIPE_ERROR_READ: reading error from fd.
      */
     ssize_t len;
     /* whether buf is null-terminated or not */
@@ -218,7 +217,7 @@ int my_systeml (int flags, const char *shell, ...);
 int my_systemv (const char *command, char *const argv[]);
 int my_systemv_flags (int flags, const char *command, char *const argv[]);
 
-mc_pipe_t *mc_popen (const char *command, GError ** error);
+mc_pipe_t *mc_popen (const char *command, gboolean read_out, gboolean read_err, GError ** error);
 void mc_pread (mc_pipe_t * p, GError ** error);
 void mc_pclose (mc_pipe_t * p, GError ** error);
 
