@@ -52,6 +52,7 @@
 #define MC_EXTFS_DIR            "extfs.d"
 
 #define MC_BASHRC_FILE          "bashrc"
+#define MC_ZSHRC_FILE           ".zshrc"
 #define MC_CONFIG_FILE          "ini"
 #define MC_FILEBIND_FILE        "mc.ext"
 #define MC_FILEPOS_FILE         "filepos"

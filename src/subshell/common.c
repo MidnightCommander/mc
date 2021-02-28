@@ -97,6 +97,7 @@
 
 #include "lib/global.h"
 
+#include "lib/fileloc.h"
 #include "lib/unixcompat.h"
 #include "lib/tty/tty.h"        /* LINES */
 #include "lib/tty/key.h"        /* XCTRL */
@@ -370,9 +371,26 @@ init_subshell_child (const char *pty_name)
 
         break;
 
-        /* TODO: Find a way to pass initfile to TCSH, ZSH and FISH */
-    case SHELL_TCSH:
     case SHELL_ZSH:
+        /* ZDOTDIR environment variable is the only way to point zsh
+         * to an other rc file than the default. */
+
+        /* Don't overwrite $ZDOTDIR */
+        if (g_getenv ("ZDOTDIR") != NULL)
+        {
+            /* Do we have a custom init file ~/.local/share/mc/.zshrc?
+             * Otherwise use standard ~/.zshrc */
+            init_file = mc_config_get_full_path (MC_ZSHRC_FILE);
+            if (exist_file (init_file))
+            {
+                /* Set ZDOTDIR to ~/.local/share/mc */
+                g_setenv ("ZDOTDIR", mc_config_get_data_path (), TRUE);
+            }
+        }
+        break;
+
+        /* TODO: Find a way to pass initfile to TCSH and FISH */
+    case SHELL_TCSH:
     case SHELL_FISH:
         break;
 
@@ -416,7 +434,6 @@ init_subshell_child (const char *pty_name)
         /* Use -g to exclude cmds beginning with space from history
          * and -Z to use the line editor on non-interactive term */
         execl (mc_global.shell->path, "zsh", "-Z", "-g", (char *) NULL);
-
         break;
 
     case SHELL_ASH_BUSYBOX:

@@ -134,37 +134,41 @@ static const struct test_user_config_paths_ds
     },
     { /* 14. */
         CONF_DATA,
-        MC_EXTFS_DIR
+        MC_ZSHRC_FILE
     },
     { /* 15. */
         CONF_DATA,
-        MC_HISTORY_FILE
+        MC_EXTFS_DIR
     },
     { /* 16. */
         CONF_DATA,
-        MC_FILEPOS_FILE
+        MC_HISTORY_FILE
     },
     { /* 17. */
         CONF_DATA,
-        EDIT_HOME_CLIP_FILE
+        MC_FILEPOS_FILE
     },
     { /* 18. */
         CONF_DATA,
-        MC_MACRO_FILE
+        EDIT_HOME_CLIP_FILE
     },
     { /* 19. */
-        CONF_CACHE,
-        "mc.log"
+        CONF_DATA,
+        MC_MACRO_FILE
     },
     { /* 20. */
         CONF_CACHE,
-        MC_TREESTORE_FILE
+        "mc.log"
     },
     { /* 21. */
         CONF_CACHE,
-        EDIT_HOME_TEMP_FILE
+        MC_TREESTORE_FILE
     },
     { /* 22. */
+        CONF_CACHE,
+        EDIT_HOME_TEMP_FILE
+    },
+    { /* 23. */
         CONF_CACHE,
         EDIT_HOME_BLOCK_FILE
     },

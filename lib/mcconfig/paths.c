@@ -77,6 +77,7 @@ static const struct
     { &mc_data_str, "ashrc" },
     { &mc_data_str, "bashrc" },
     { &mc_data_str, "inputrc" },
+    { &mc_data_str, MC_ZSHRC_FILE },
     { &mc_data_str, MC_EXTFS_DIR },
     { &mc_data_str, MC_HISTORY_FILE },
     { &mc_data_str, MC_FILEPOS_FILE },
