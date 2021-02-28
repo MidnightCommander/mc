@@ -115,7 +115,7 @@ editcmd_dialog_completion_show (const WEdit * edit, GQueue * compl, int max_widt
             GString *s = (GString *) i->data;
 
             g_queue_push_tail (editcmd_dialog_completion_show__compl,
-                               g_string_new_len (s->str, s->len));
+                               mc_g_string_dup (s));
         }
     }
 

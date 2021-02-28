@@ -461,8 +461,7 @@ do_panelize_cd (WPanel * panel)
     for (i = 0; i < panelized_panel.list.len; i++)
     {
         if (panelized_same || DIR_IS_DOTDOT (panelized_panel.list.list[i].fname->str))
-            list->list[i].fname = g_string_new_len (panelized_panel.list.list[i].fname->str,
-                                                    panelized_panel.list.list[i].fname->len);
+            list->list[i].fname = mc_g_string_dup (panelized_panel.list.list[i].fname);
         else
         {
             vfs_path_t *tmp_vpath;
@@ -523,8 +522,7 @@ panelize_save_panel (WPanel * panel)
 
     for (i = 0; i < panel->dir.len; i++)
     {
-        panelized_panel.list.list[i].fname =
-            g_string_new_len (list->list[i].fname->str, list->list[i].fname->len);
+        panelized_panel.list.list[i].fname = mc_g_string_dup (list->list[i].fname);
         panelized_panel.list.list[i].f.link_to_dir = list->list[i].f.link_to_dir;
         panelized_panel.list.list[i].f.stale_link = list->list[i].f.stale_link;
         panelized_panel.list.list[i].f.dir_size_computed = list->list[i].f.dir_size_computed;

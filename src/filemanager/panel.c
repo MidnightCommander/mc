@@ -2273,7 +2273,7 @@ goto_parent_dir (WPanel * panel)
         vfs_path_t *dname_vpath;
 
         if (g_path_is_absolute (fname->str))
-            fname = g_string_new_len (fname->str, fname->len);
+            fname = mc_g_string_dup (fname);
         else
         {
             char *fname2;

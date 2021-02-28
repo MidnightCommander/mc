@@ -186,3 +186,25 @@ mc_g_string_copy (GString * dest, const GString * src)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+/**
+ * mc_g_string_dup:
+ * @s: (nullable): the source #GString
+ * @return: @copy of @s
+ *
+ * Copies the bytes from one #GString to another.
+ *
+ * There is no such API in GLib2.
+ */
+GString *
+mc_g_string_dup (const GString * s)
+{
+    GString *ret = NULL;
+
+    if (s != NULL)
+        ret = g_string_new_len (s->str, s->len);
+
+    return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */

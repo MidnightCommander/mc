@@ -1006,7 +1006,7 @@ mc_search_regex_prepare_replace_str (mc_search_t * lc_mc_search, GString * repla
         mc_search_regex__get_max_num_of_replace_tokens (replace_str->str, replace_str->len);
 
     if (lc_mc_search->num_results < 0)
-        return g_string_new_len (replace_str->str, replace_str->len);
+        return mc_g_string_dup (replace_str);
 
     if (num_replace_tokens > lc_mc_search->num_results - 1
         || num_replace_tokens > MC_SEARCH__NUM_REPLACE_ARGS)

@@ -1857,8 +1857,7 @@ do_find (WPanel * panel, const char *start_dir, ssize_t start_dir_len, const cha
                 continue;
             }
 
-            list->list[list->len].fname = g_string_new_len (list->list[list->len].fname->str,
-                                                            list->list[list->len].fname->len);
+            list->list[list->len].fname = mc_g_string_dup (list->list[list->len].fname);
             list->list[list->len].f.marked = 0;
             list->list[list->len].f.link_to_dir = link_to_dir ? 1 : 0;
             list->list[list->len].f.stale_link = stale_link ? 1 : 0;
