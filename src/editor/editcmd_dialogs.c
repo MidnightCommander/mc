@@ -64,6 +64,9 @@ edit_search_options_t edit_search_options = {
 
 /*** file scope variables ************************************************************************/
 
+static int def_max_width;
+
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -92,12 +95,15 @@ editcmd_dialog_select_definition_add (gpointer data, gpointer user_data)
     etags_hash_t *def_hash = (etags_hash_t *) data;
     WListbox *def_list = (WListbox *) user_data;
     char *label_def;
+    int def_width;
 
     label_def =
         g_strdup_printf ("%s -> %s:%ld", def_hash->short_define, def_hash->filename,
                          def_hash->line);
     listbox_add_item (def_list, LISTBOX_APPEND_AT_END, 0, label_def, def_hash, FALSE);
+    def_width = str_term_width1 (label_def);
     g_free (label_def);
+    def_max_width = MAX (def_max_width, def_width);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -427,9 +433,9 @@ editcmd_dialog_completion_show (const WEdit * edit, GQueue * compl, int max_widt
 /* let the user select where function definition */
 
 void
-editcmd_dialog_select_definition_show (WEdit * edit, char *match_expr, int max_len, int word_len,
-                                       GPtrArray * def_hash)
+editcmd_dialog_select_definition_show (WEdit * edit, char *match_expr, GPtrArray * def_hash)
 {
+    const Widget *we = CONST_WIDGET (edit);
     int start_x, start_y, offset;
     char *curr = NULL;
     WDialog *def_dlg;
@@ -437,24 +443,21 @@ editcmd_dialog_select_definition_show (WEdit * edit, char *match_expr, int max_l
     int def_dlg_h;              /* dialog height */
     int def_dlg_w;              /* dialog width */
 
-    (void) word_len;
     /* calculate the dialog metrics */
     def_dlg_h = def_hash->len + 2;
-    def_dlg_w = max_len + 4;
-    start_x = edit->curs_col + edit->start_col - (def_dlg_w / 2) +
-        EDIT_TEXT_HORIZONTAL_OFFSET + (edit->fullscreen ? 0 : 1) + option_line_state_width;
-    start_y = edit->curs_row + EDIT_TEXT_VERTICAL_OFFSET + (edit->fullscreen ? 0 : 1) + 1;
+    def_dlg_w = COLS - 2;       /* will be clarified later */
+    start_x = we->x + edit->curs_col + edit->start_col + EDIT_TEXT_HORIZONTAL_OFFSET +
+        (edit->fullscreen ? 0 : 1) + option_line_state_width;
+    start_y = we->y + edit->curs_row + EDIT_TEXT_VERTICAL_OFFSET + (edit->fullscreen ? 0 : 1) + 1;
 
     if (start_x < 0)
         start_x = 0;
-    if (def_dlg_w > COLS)
-        def_dlg_w = COLS;
+    if (start_x < we->x + 1)
+        start_x = we->x + 1 + option_line_state_width;
+
     if (def_dlg_h > LINES - 2)
         def_dlg_h = LINES - 2;
 
-    offset = start_x + def_dlg_w - COLS;
-    if (offset > 0)
-        start_x -= offset;
     offset = start_y + def_dlg_h - LINES;
     if (offset > 0)
         start_y -= (offset + 1);
@@ -462,10 +465,19 @@ editcmd_dialog_select_definition_show (WEdit * edit, char *match_expr, int max_l
     def_dlg = dlg_create (TRUE, start_y, start_x, def_dlg_h, def_dlg_w, WPOS_KEEP_DEFAULT, TRUE,
                           dialog_colors, NULL, NULL, "[Definitions]", match_expr);
     def_list = listbox_new (1, 1, def_dlg_h - 2, def_dlg_w - 2, FALSE, NULL);
-    group_add_widget (GROUP (def_dlg), def_list);
+    group_add_widget_autopos (GROUP (def_dlg), def_list, WPOS_KEEP_ALL, NULL);
 
-    /* fill the listbox with the completions */
+    /* fill the listbox with the completions and get the maximim width */
+    def_max_width = 0;
     g_ptr_array_foreach (def_hash, editcmd_dialog_select_definition_add, def_list);
+
+    /* adjust dialog width */
+    def_dlg_w = def_max_width + 4;
+    offset = start_x + def_dlg_w - COLS;
+    if (offset > 0)
+        start_x -= offset;
+
+    widget_set_size (WIDGET (def_dlg), start_y, start_x, def_dlg_h, def_dlg_w);
 
     /* pop up the dialog and apply the chosen completion */
     if (dlg_run (def_dlg) == B_ENTER)

@@ -3,8 +3,6 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
-#define MAX_WIDTH_DEF_DIALOG 60 /* max width def dialog */
-
 /*** enums ***************************************************************************************/
 
 /*** structures declarations (and typedefs of structures)*****************************************/
