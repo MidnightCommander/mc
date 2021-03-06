@@ -392,6 +392,122 @@ extfs_skip_leading_dotslash (char *s)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static int
+extfs_add_file (struct extfs_super_t *archive, const char *file_name)
+{
+    struct vfs_s_super *super = VFS_SUPER (archive);
+    struct stat hstat;
+    char *current_file_name = NULL, *current_link_name = NULL;
+    int ret = 0;
+
+    if (vfs_parse_ls_lga (file_name, &hstat, &current_file_name, &current_link_name, NULL))
+    {
+        char *cfn = current_file_name;
+
+        if (*cfn != '\0')
+        {
+            struct vfs_s_entry *entry;
+            struct vfs_s_entry *pent = NULL;
+            struct vfs_s_inode *inode;
+            char *p, *q;
+
+            cfn = extfs_skip_leading_dotslash (cfn);
+            if (IS_PATH_SEP (*cfn))
+                cfn++;
+            p = strchr (cfn, '\0');
+            if (p != cfn && IS_PATH_SEP (p[-1]))
+                p[-1] = '\0';
+            p = strrchr (cfn, PATH_SEP);
+            if (p == NULL)
+            {
+                p = cfn;
+                q = strchr (cfn, '\0');
+            }
+            else
+            {
+                *(p++) = '\0';
+                q = cfn;
+            }
+
+            if (*q != '\0')
+            {
+                pent = extfs_find_entry (super->root, q, FL_MKDIR);
+                if (pent == NULL)
+                {
+                    ret = -1;
+                    goto done;
+                }
+            }
+
+            if (pent != NULL)
+            {
+                entry = extfs_entry_new (super->me, p, pent->ino);
+                entry->dir = pent->ino;
+                g_queue_push_tail (pent->ino->subdir, entry);
+            }
+            else
+            {
+                entry = extfs_entry_new (super->me, p, super->root);
+                entry->dir = super->root;
+                g_queue_push_tail (super->root->subdir, entry);
+            }
+
+            if (!S_ISLNK (hstat.st_mode) && (current_link_name != NULL))
+            {
+                pent = extfs_find_entry (super->root, current_link_name, FL_NONE);
+                if (pent == NULL)
+                {
+                    ret = -1;
+                    goto done;
+                }
+
+                pent->ino->st.st_nlink++;
+                entry->ino = pent->ino;
+            }
+            else
+            {
+                struct stat st;
+
+                memset (&st, 0, sizeof (st));
+                st.st_ino = super->ino_usage++;
+                st.st_nlink = 1;
+                st.st_dev = archive->rdev;
+                st.st_mode = hstat.st_mode;
+#ifdef HAVE_STRUCT_STAT_ST_RDEV
+                st.st_rdev = hstat.st_rdev;
+#endif
+                st.st_uid = hstat.st_uid;
+                st.st_gid = hstat.st_gid;
+                st.st_size = hstat.st_size;
+                st.st_mtime = hstat.st_mtime;
+                st.st_atime = hstat.st_atime;
+                st.st_ctime = hstat.st_ctime;
+
+                if (current_link_name == NULL && S_ISLNK (hstat.st_mode))
+                    st.st_mode &= ~S_IFLNK;     /* You *DON'T* want to do this always */
+
+                inode = vfs_s_new_inode (super->me, super, &st);
+                inode->ent = entry;
+                entry->ino = inode;
+
+                if (current_link_name != NULL && S_ISLNK (hstat.st_mode))
+                {
+                    inode->linkname = current_link_name;
+                    current_link_name = NULL;
+                }
+            }
+        }
+
+      done:
+        g_free (current_file_name);
+        g_free (current_link_name);
+    }
+
+    return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static mc_pipe_t *
 extfs_open_archive (int fstype, const char *name, struct extfs_super_t **pparc, GError ** error)
 {
@@ -481,11 +597,10 @@ extfs_open_archive (int fstype, const char *name, struct extfs_super_t **pparc, 
  */
 
 static int
-extfs_read_archive (mc_pipe_t * pip, struct extfs_super_t *current_archive, GError ** error)
+extfs_read_archive (mc_pipe_t * pip, struct extfs_super_t *archive, GError ** error)
 {
     int ret = 0;
     GString *buffer;
-    struct vfs_s_super *super = VFS_SUPER (current_archive);
     GString *err_msg = NULL;
     GString *remain_file_name = NULL;
 
@@ -524,9 +639,6 @@ extfs_read_archive (mc_pipe_t * pip, struct extfs_super_t *current_archive, GErr
 
         while (ret != -1 && (buffer = mc_pstream_get_string (&pip->out)) != NULL)
         {
-            struct stat hstat;
-            char *current_file_name = NULL, *current_link_name = NULL;
-
             /* handle a \n-separated file list */
 
             if (buffer->str[buffer->len - 1] == '\n')
@@ -559,106 +671,7 @@ extfs_read_archive (mc_pipe_t * pip, struct extfs_super_t *current_archive, GErr
                 continue;
             }
 
-            if (vfs_parse_ls_lga
-                (buffer->str, &hstat, &current_file_name, &current_link_name, NULL))
-            {
-                struct vfs_s_entry *entry, *pent = NULL;
-                struct vfs_s_inode *inode;
-                char *p, *q, *cfn = current_file_name;
-
-                if (*cfn != '\0')
-                {
-                    cfn = extfs_skip_leading_dotslash (cfn);
-                    if (IS_PATH_SEP (*cfn))
-                        cfn++;
-                    p = strchr (cfn, '\0');
-                    if (p != cfn && IS_PATH_SEP (p[-1]))
-                        p[-1] = '\0';
-                    p = strrchr (cfn, PATH_SEP);
-                    if (p == NULL)
-                    {
-                        p = cfn;
-                        q = strchr (cfn, '\0');
-                    }
-                    else
-                    {
-                        *(p++) = '\0';
-                        q = cfn;
-                    }
-
-                    if (*q != '\0')
-                    {
-                        pent = extfs_find_entry (super->root, q, FL_MKDIR);
-                        if (pent == NULL)
-                        {
-                            ret = -1;
-                            goto end_loop;
-                        }
-                    }
-
-                    if (pent != NULL)
-                    {
-                        entry = extfs_entry_new (super->me, p, pent->ino);
-                        entry->dir = pent->ino;
-                        g_queue_push_tail (pent->ino->subdir, entry);
-                    }
-                    else
-                    {
-                        entry = extfs_entry_new (super->me, p, super->root);
-                        entry->dir = super->root;
-                        g_queue_push_tail (super->root->subdir, entry);
-                    }
-
-                    if (!S_ISLNK (hstat.st_mode) && (current_link_name != NULL))
-                    {
-                        pent = extfs_find_entry (super->root, current_link_name, FL_NONE);
-                        if (pent == NULL)
-                        {
-                            ret = -1;
-                            goto end_loop;
-                        }
-
-                        pent->ino->st.st_nlink++;
-                        entry->ino = pent->ino;
-                    }
-                    else
-                    {
-                        struct stat st;
-
-                        memset (&st, 0, sizeof (st));
-                        st.st_ino = super->ino_usage++;
-                        st.st_nlink = 1;
-                        st.st_dev = current_archive->rdev;
-                        st.st_mode = hstat.st_mode;
-#ifdef HAVE_STRUCT_STAT_ST_RDEV
-                        st.st_rdev = hstat.st_rdev;
-#endif
-                        st.st_uid = hstat.st_uid;
-                        st.st_gid = hstat.st_gid;
-                        st.st_size = hstat.st_size;
-                        st.st_mtime = hstat.st_mtime;
-                        st.st_atime = hstat.st_atime;
-                        st.st_ctime = hstat.st_ctime;
-
-                        if (current_link_name == NULL && S_ISLNK (hstat.st_mode))
-                            st.st_mode &= ~S_IFLNK;     /* You *DON'T* want to do this always */
-
-                        inode = vfs_s_new_inode (super->me, super, &st);
-                        inode->ent = entry;
-                        entry->ino = inode;
-
-                        if (current_link_name != NULL && S_ISLNK (hstat.st_mode))
-                        {
-                            inode->linkname = current_link_name;
-                            current_link_name = NULL;
-                        }
-                    }
-                }
-
-              end_loop:
-                g_free (current_file_name);
-                g_free (current_link_name);
-            }
+            ret = extfs_add_file (archive, buffer->str);
 
             g_string_free (buffer, TRUE);
         }
