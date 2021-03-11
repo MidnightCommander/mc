@@ -235,7 +235,7 @@ include cabal.syntax
 file ..\*\\.(?i:n)$ Nemerle\sProgram
 include nemerle.syntax
 
-file ..\*\\.(?i:(v|sv))$ Verilog/SystemVerilog\sDevice\sDescription
+file ..\*\\.(?i:(v|sv|vh|svh))$ Verilog/SystemVerilog\sDevice\sDescription
 include verilog.syntax
 
 file ..\*\\.(?i:hdl|vhdl?)$ VHDL\sDevice\sDescription
