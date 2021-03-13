@@ -3591,19 +3591,14 @@ edit_load_back_cmd (WEdit * edit)
 void
 edit_get_match_keyword_cmd (WEdit * edit)
 {
-    gsize word_len = 0, max_len = 0;
-    int num_def = 0;
+    gsize word_len = 0;
     gsize i;
     off_t word_start = 0;
     GString *match_expr;
     char *path = NULL;
     char *ptr = NULL;
     char *tagfile = NULL;
-
-    etags_hash_t def_hash[MAX_DEFINITIONS];
-
-    for (i = 0; i < MAX_DEFINITIONS; i++)
-        def_hash[i].filename = NULL;
+    GPtrArray *def_hash = NULL;
 
     /* search start of word to be completed */
     if (!edit_find_word_start (&edit->buffer, &word_start, &word_len))
@@ -3633,17 +3628,18 @@ edit_get_match_keyword_cmd (WEdit * edit)
 
     if (tagfile != NULL)
     {
-        num_def =
-            etags_set_definition_hash (tagfile, path, match_expr->str, (etags_hash_t *) & def_hash);
+        def_hash = etags_set_definition_hash (tagfile, path, match_expr->str);
         g_free (tagfile);
     }
     g_free (path);
 
-    max_len = MAX_WIDTH_DEF_DIALOG;
-    word_len = 0;
-    if (num_def > 0)
-        editcmd_dialog_select_definition_show (edit, match_expr->str, max_len, word_len,
-                                               (etags_hash_t *) & def_hash, num_def);
+    if (def_hash != NULL)
+    {
+        editcmd_dialog_select_definition_show (edit, match_expr->str, def_hash);
+
+        g_ptr_array_free (def_hash, TRUE);
+    }
+
     g_string_free (match_expr, TRUE);
 }
 
