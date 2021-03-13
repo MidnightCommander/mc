@@ -2465,7 +2465,10 @@ and special keyboard maps in ~/.local/share/mc/inputrc (fallback ~/.inputrc).
 .B ash/dash
 users (BusyBox or Debian) may specify startup commands in ~/.local/share/mc/ashrc (fallback ~/.profile).
 .PP
-.B tcsh, zsh, fish
+.B zsh
+users may specify startup commands in ~/.local/share/mc/.zshrc (fallback ~/.zshrc).
+.PP
+.B tcsh, fish
 users cannot specify mc-specific startup commands at present. They have to rely on
 shell-specific startup files.
 .PP
