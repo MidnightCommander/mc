@@ -1,7 +1,7 @@
 /*
    User Menu implementation
 
-   Copyright (C) 1994-2020
+   Copyright (C) 1994-2021
    Free Software Foundation, Inc.
 
    Written by:
@@ -255,7 +255,7 @@ test_condition (const WEdit * edit_widget, char *p, gboolean * condition)
             else
 #endif
                 *condition = panel != NULL &&
-                    mc_search (arg, DEFAULT_CHARSET, panel->dir.list[panel->selected].fname,
+                    mc_search (arg, DEFAULT_CHARSET, panel->dir.list[panel->selected].fname->str,
                                search_type);
             break;
         case 'y':              /* syntax pattern */
@@ -445,7 +445,6 @@ execute_menu_command (const WEdit * edit_widget, const char *commands, gboolean 
     {
         message (D_ERROR, MSG_ERROR, _("Cannot create temporary command file\n%s"),
                  unix_error_string (errno));
-        vfs_path_free (file_name_vpath);
         return;
     }
 
@@ -482,7 +481,7 @@ execute_menu_command (const WEdit * edit_widget, const char *commands, gboolean 
                     /* User canceled */
                     fclose (cmd_file);
                     mc_unlink (file_name_vpath);
-                    vfs_path_free (file_name_vpath);
+                    vfs_path_free (file_name_vpath, TRUE);
                     return;
                 }
                 if (do_quote)
@@ -583,7 +582,7 @@ execute_menu_command (const WEdit * edit_widget, const char *commands, gboolean 
         g_free (cmd);
     }
     mc_unlink (file_name_vpath);
-    vfs_path_free (file_name_vpath);
+    vfs_path_free (file_name_vpath, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -775,7 +774,7 @@ expand_format (const WEdit * edit_widget, char c, gboolean do_quote)
                 panel = other_panel;
             }
 
-            fname = panel->dir.list[panel->selected].fname;
+            fname = panel->dir.list[panel->selected].fname->str;
         }
         break;
 
@@ -917,7 +916,7 @@ expand_format (const WEdit * edit_widget, char c, gboolean do_quote)
                 {
                     char *tmp;
 
-                    tmp = quote_func (panel->dir.list[i].fname, FALSE);
+                    tmp = quote_func (panel->dir.list[i].fname->str, FALSE);
                     g_string_append (block, tmp);
                     g_string_append_c (block, ' ');
                     g_free (tmp);

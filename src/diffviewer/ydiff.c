@@ -1,7 +1,7 @@
 /*
    File difference viewer
 
-   Copyright (C) 2007-2020
+   Copyright (C) 2007-2021
    Free Software Foundation, Inc.
 
    Written by:
@@ -55,7 +55,7 @@
 #include "src/filemanager/layout.h"     /* Needed for get_current_index and get_other_panel */
 
 #include "src/execute.h"        /* toggle_subshell() */
-#include "src/keybind-defaults.h"
+#include "src/keymap.h"
 #include "src/setup.h"
 #include "src/history.h"
 #ifdef HAVE_CHARSET
@@ -176,8 +176,8 @@ open_temp (void **name)
                  _("Cannot create temporary diff file\n%s"), unix_error_string (errno));
         return -1;
     }
-    *name = g_strdup (vfs_path_as_str (diff_file_name));
-    vfs_path_free (diff_file_name);
+
+    *name = vfs_path_free (diff_file_name, FALSE);
     return fd;
 }
 
@@ -2250,7 +2250,7 @@ do_merge_hunk (WDiff * dview, action_direction_t merge_direction)
             (void) res;
         }
         mc_unlink (merge_file_name_vpath);
-        vfs_path_free (merge_file_name_vpath);
+        vfs_path_free (merge_file_name_vpath, TRUE);
     }
 }
 
@@ -2774,7 +2774,7 @@ dview_status (const WDiff * dview, diff_place_t ord, int width, int c)
 
     vpath = vfs_path_from_str (dview->label[ord]);
     path = vfs_path_to_str_flags (vpath, 0, VPF_STRIP_HOME | VPF_STRIP_PASSWORD);
-    vfs_path_free (vpath);
+    vfs_path_free (vpath, TRUE);
     buf = str_term_trim (path, filename_width);
     if (ord == DIFF_LEFT)
         tty_printf ("%s%-*s %6d+%-4d Col %-4d ", dview->merged[ord] ? "* " : "  ", filename_width,
@@ -2905,7 +2905,7 @@ dview_edit (WDiff * dview, diff_place_t ord)
 
         tmp_vpath = vfs_path_from_str (dview->file[ord]);
         edit_file_at_line (tmp_vpath, use_internal_edit, linenum);
-        vfs_path_free (tmp_vpath);
+        vfs_path_free (tmp_vpath, TRUE);
     }
 
     widget_set_state (h, WST_MODAL, h_modal);
@@ -3510,7 +3510,7 @@ do \
                 changed = (mtime != st##n.st_mtime); \
         } \
         mc_ungetlocalcopy (file##n, real_file##n, changed); \
-        vfs_path_free (real_file##n); \
+        vfs_path_free (real_file##n, TRUE); \
     } \
 } \
 while (0)
@@ -3533,22 +3533,24 @@ dview_diff_cmd (const void *f0, const void *f1)
             const WPanel *panel1 = (const WPanel *) f1;
 
             file0 =
-                vfs_path_append_new (panel0->cwd_vpath, selection (panel0)->fname, (char *) NULL);
+                vfs_path_append_new (panel0->cwd_vpath, selection (panel0)->fname->str,
+                                     (char *) NULL);
             is_dir0 = S_ISDIR (selection (panel0)->st.st_mode);
             if (is_dir0)
             {
                 message (D_ERROR, MSG_ERROR, _("\"%s\" is a directory"),
-                         path_trunc (selection (panel0)->fname, 30));
+                         path_trunc (selection (panel0)->fname->str, 30));
                 goto ret;
             }
 
             file1 =
-                vfs_path_append_new (panel1->cwd_vpath, selection (panel1)->fname, (char *) NULL);
+                vfs_path_append_new (panel1->cwd_vpath, selection (panel1)->fname->str,
+                                     (char *) NULL);
             is_dir1 = S_ISDIR (selection (panel1)->st.st_mode);
             if (is_dir1)
             {
                 message (D_ERROR, MSG_ERROR, _("\"%s\" is a directory"),
-                         path_trunc (selection (panel1)->fname, 30));
+                         path_trunc (selection (panel1)->fname->str, 30));
                 goto ret;
             }
             break;
@@ -3631,8 +3633,8 @@ dview_diff_cmd (const void *f0, const void *f1)
         message (D_ERROR, MSG_ERROR, _("Two files are needed to compare"));
 
   ret:
-    vfs_path_free (file1);
-    vfs_path_free (file0);
+    vfs_path_free (file1, TRUE);
+    vfs_path_free (file0, TRUE);
 
     return (rv != 0);
 }

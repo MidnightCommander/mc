@@ -1,7 +1,7 @@
 /*
    lib/strutil - tests for lib/strutil/parse_integer function.
 
-   Copyright (C) 2013-2020
+   Copyright (C) 2013-2021
    Free Software Foundation, Inc.
 
    Written by:
@@ -130,9 +130,9 @@ START_PARAMETRIZED_TEST (parse_integer_test, parse_integer_test_ds)
     actual_result = parse_integer (data->haystack, &invalid);
 
     /* then */
-    fail_unless (invalid == data->invalid && actual_result == data->expected_result,
-                 "actial ( %" PRIuMAX ") not equal to\nexpected (%" PRIuMAX ")",
-                 actual_result, data->expected_result);
+    ck_assert_msg (invalid == data->invalid && actual_result == data->expected_result,
+                   "actial ( %" PRIuMAX ") not equal to\nexpected (%" PRIuMAX ")",
+                   actual_result, data->expected_result);
 }
 /* *INDENT-OFF* */
 END_PARAMETRIZED_TEST

@@ -8,7 +8,7 @@
    created and destroyed.  This is required for the future vfs layer,
    it will be possible to have tree views over virtual file systems.
 
-   Copyright (C) 1999-2020
+   Copyright (C) 1999-2021
    Free Software Foundation, Inc.
 
    Written by:
@@ -276,10 +276,10 @@ tree_store_load_from (const char *name)
 
                             tmp_vpath = vfs_path_from_str (oldname);
                             e = tree_store_add_entry (tmp_vpath);
-                            vfs_path_free (tmp_vpath);
+                            vfs_path_free (tmp_vpath, TRUE);
                             e->scanned = scanned;
                         }
-                        vfs_path_free (vpath);
+                        vfs_path_free (vpath, TRUE);
                     }
                 }
             }
@@ -293,7 +293,7 @@ tree_store_load_from (const char *name)
                     e = tree_store_add_entry (vpath);
                     e->scanned = scanned;
                 }
-                vfs_path_free (vpath);
+                vfs_path_free (vpath, TRUE);
                 g_strlcpy (oldname, lc_name, sizeof (oldname));
             }
             g_free (lc_name);
@@ -310,7 +310,7 @@ tree_store_load_from (const char *name)
         tmp_vpath = vfs_path_from_str (PATH_SEP_STR);
         tree_store_add_entry (tmp_vpath);
         tree_store_rescan (tmp_vpath);
-        vfs_path_free (tmp_vpath);
+        vfs_path_free (tmp_vpath, TRUE);
         ts.loaded = TRUE;
     }
 
@@ -520,7 +520,7 @@ remove_entry (tree_entry * entry)
         ts.tree_last = entry->prev;
 
     /* Free the memory used by the entry */
-    vfs_path_free (entry->name);
+    vfs_path_free (entry->name, TRUE);
     g_free (entry);
 
     return ret;
@@ -583,6 +583,14 @@ should_skip_directory (const vfs_path_t * vpath)
         }
 
     return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+queue_vpath_free (gpointer data)
+{
+    vfs_path_free ((vfs_path_t *) data, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -759,7 +767,7 @@ tree_store_mark_checked (const char *subname)
         ts.add_queue_vpath = g_list_prepend (ts.add_queue_vpath, name);
     }
     else
-        vfs_path_free (name);
+        vfs_path_free (name, TRUE);
 
     /* Clear the deletion mark from the subdirectory and its children */
     base = current;
@@ -880,10 +888,10 @@ tree_store_end_check (void)
     /* get the stuff in the scan order */
     the_queue = g_list_reverse (ts.add_queue_vpath);
     ts.add_queue_vpath = NULL;
-    vfs_path_free (ts.check_name);
+    vfs_path_free (ts.check_name, TRUE);
     ts.check_name = NULL;
 
-    g_list_free_full (the_queue, (GDestroyNotify) vfs_path_free);
+    g_list_free_full (the_queue, queue_vpath_free);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -919,7 +927,7 @@ tree_store_rescan (const vfs_path_t * vpath)
                 tmp_vpath = vfs_path_append_new (vpath, dp->d_name, (char *) NULL);
                 if (mc_lstat (tmp_vpath, &buf) != -1 && S_ISDIR (buf.st_mode))
                     tree_store_mark_checked (dp->d_name);
-                vfs_path_free (tmp_vpath);
+                vfs_path_free (tmp_vpath, TRUE);
             }
 
         mc_closedir (dirp);

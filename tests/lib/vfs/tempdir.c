@@ -1,7 +1,7 @@
 /*
    lib/vfs - manipulations with temp files and  dirs
 
-   Copyright (C) 2012-2020
+   Copyright (C) 2012-2021
    Free Software Foundation, Inc.
 
    Written by:
@@ -78,8 +78,8 @@ START_TEST (test_mc_tmpdir)
     env_tmpdir = g_getenv ("MC_TMPDIR");
 
     /* then */
-    fail_unless (g_file_test (tmpdir, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_DIR),
-                 "\nNo such directory: %s\n", tmpdir);
+    ck_assert_msg (g_file_test (tmpdir, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_DIR),
+                   "\nNo such directory: %s\n", tmpdir);
     mctest_assert_str_eq (env_tmpdir, tmpdir);
 }
 /* *INDENT-OFF* */
@@ -105,14 +105,14 @@ START_TEST (test_mc_mkstemps)
     /* then */
     close (fd);
     mctest_assert_int_ne (fd, -1);
-    fail_unless (g_file_test
-                 (vfs_path_as_str (pname_vpath), G_FILE_TEST_EXISTS | G_FILE_TEST_IS_REGULAR),
-                 "\nNo such file: %s\n", vfs_path_as_str (pname_vpath));
+    ck_assert_msg (g_file_test
+                   (vfs_path_as_str (pname_vpath), G_FILE_TEST_EXISTS | G_FILE_TEST_IS_REGULAR),
+                   "\nNo such file: %s\n", vfs_path_as_str (pname_vpath));
     unlink (vfs_path_as_str (pname_vpath));
-    fail_unless (strncmp (vfs_path_as_str (pname_vpath), begin_pname, strlen (begin_pname)) == 0,
-                 "\nstart of %s should be equal to %s\n", vfs_path_as_str (pname_vpath),
-                 begin_pname);
-    vfs_path_free (pname_vpath);
+    ck_assert_msg (strncmp (vfs_path_as_str (pname_vpath), begin_pname, strlen (begin_pname)) == 0,
+                   "\nstart of %s should be equal to %s\n", vfs_path_as_str (pname_vpath),
+                   begin_pname);
+    vfs_path_free (pname_vpath, TRUE);
 }
 /* *INDENT-OFF* */
 END_TEST

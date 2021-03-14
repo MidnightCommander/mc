@@ -1,7 +1,7 @@
 /*
    paths to configuration files
 
-   Copyright (C) 2010-2020
+   Copyright (C) 2010-2021
    Free Software Foundation, Inc.
 
    Written by:
@@ -74,9 +74,9 @@ static const struct
     /* data */
     { &mc_data_str, MC_SKINS_DIR },
     { &mc_data_str, FISH_PREFIX },
-    { &mc_data_str, "ashrc" },
-    { &mc_data_str, "bashrc" },
-    { &mc_data_str, "inputrc" },
+    { &mc_data_str, MC_ASHRC_FILE },
+    { &mc_data_str, MC_BASHRC_FILE },
+    { &mc_data_str, MC_INPUTRC_FILE },
     { &mc_data_str, MC_ZSHRC_FILE },
     { &mc_data_str, MC_EXTFS_DIR },
     { &mc_data_str, MC_HISTORY_FILE },

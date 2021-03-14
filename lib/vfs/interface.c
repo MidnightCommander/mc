@@ -1,7 +1,7 @@
 /*
    Virtual File System: interface functions
 
-   Copyright (C) 2011-2020
+   Copyright (C) 2011-2021
    Free Software Foundation, Inc.
 
    Written by:
@@ -115,7 +115,7 @@ mc_def_getlocalcopy (const vfs_path_t * filename_vpath)
     return tmp_vpath;
 
   fail:
-    vfs_path_free (tmp_vpath);
+    vfs_path_free (tmp_vpath, TRUE);
     if (fdout != -1)
         close (fdout);
     if (fdin != -1)
@@ -723,7 +723,7 @@ mc_chdir (const vfs_path_t * vpath)
     return 0;
 
   error_end:
-    vfs_path_free (cd_vpath);
+    vfs_path_free (cd_vpath, TRUE);
     return (-1);
 }
 
@@ -818,9 +818,13 @@ mc_tmpdir (void)
         st.st_uid == getuid () && (st.st_mode & 0777) == 0700)
         return tmpdir;
 
-    sys_tmp = getenv ("TMPDIR");
+    sys_tmp = getenv ("MC_TMPDIR");
     if (sys_tmp == NULL || !IS_PATH_SEP (sys_tmp[0]))
-        sys_tmp = TMPDIR_DEFAULT;
+    {
+        sys_tmp = getenv ("TMPDIR");
+        if (sys_tmp == NULL || !IS_PATH_SEP (sys_tmp[0]))
+            sys_tmp = TMPDIR_DEFAULT;
+    }
 
     pwd = getpwuid (getuid ());
     if (pwd != NULL)
@@ -890,7 +894,7 @@ mc_tmpdir (void)
             g_snprintf (buffer, sizeof (buffer), "%s", "/dev/null/");
         }
 
-        vfs_path_free (test_vpath);
+        vfs_path_free (test_vpath, TRUE);
         fprintf (stderr, "%s\n", _("Press any key to continue..."));
         getc (stdin);
     }

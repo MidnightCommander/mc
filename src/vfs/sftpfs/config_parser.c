@@ -1,7 +1,7 @@
 /* Virtual File System: SFTP file system.
    The SSH config parser
 
-   Copyright (C) 2011-2020
+   Copyright (C) 2011-2021
    Free Software Foundation, Inc.
 
    Written by:
@@ -120,14 +120,12 @@ static char *
 sftpfs_correct_file_name (const char *filename)
 {
     vfs_path_t *vpath;
-    char *ret_value;
+    char *fn;
 
-    ret_value = tilde_expand (filename);
-    vpath = vfs_path_from_str (ret_value);
-    g_free (ret_value);
-    ret_value = g_strdup (vfs_path_as_str (vpath));
-    vfs_path_free (vpath);
-    return ret_value;
+    fn = tilde_expand (filename);
+    vpath = vfs_path_from_str (fn);
+    g_free (fn);
+    return vfs_path_free (vpath, FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */

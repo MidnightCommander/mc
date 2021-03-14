@@ -1,7 +1,7 @@
 /*
    Util for external clipboard.
 
-   Copyright (C) 2009-2020
+   Copyright (C) 2009-2021
    Free Software Foundation, Inc.
 
    Written by:
@@ -146,7 +146,7 @@ clipboard_file_from_ext_clip (const gchar * event_group_name, const gchar * even
 
                 fname_vpath = mc_config_get_full_vpath (EDIT_HOME_CLIP_FILE);
                 file = mc_open (fname_vpath, clip_open_flags, clip_open_mode);
-                vfs_path_free (fname_vpath);
+                vfs_path_free (fname_vpath, TRUE);
 
                 if (file < 0)
                     break;
@@ -186,7 +186,7 @@ clipboard_text_to_file (const gchar * event_group_name, const gchar * event_name
 
     fname_vpath = mc_config_get_full_vpath (EDIT_HOME_CLIP_FILE);
     file = mc_open (fname_vpath, clip_open_flags, clip_open_mode);
-    vfs_path_free (fname_vpath);
+    vfs_path_free (fname_vpath, TRUE);
 
     if (file == -1)
         return TRUE;

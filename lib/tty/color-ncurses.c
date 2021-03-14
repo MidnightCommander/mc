@@ -1,7 +1,7 @@
 /*
    Color setup for NCurses screen library
 
-   Copyright (C) 1994-2020
+   Copyright (C) 1994-2021
    Free Software Foundation, Inc.
 
    Written by:
@@ -181,7 +181,7 @@ tty_color_try_alloc_pair_lib (tty_color_pair_t * mc_color_pair)
         attr = mc_color_pair->attr;
 
         /* In legacy color mode, change bright colors into bold */
-        if (!tty_use_256colors () && !tty_use_truecolors (NULL))
+        if (!tty_use_256colors (NULL) && !tty_use_truecolors (NULL))
         {
             if (ifg >= 8 && ifg < 16)
             {
@@ -228,8 +228,10 @@ tty_set_normal_attrs (void)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-tty_use_256colors (void)
+tty_use_256colors (GError ** error)
 {
+    (void) error;
+
     return (COLORS == 256);
 }
 

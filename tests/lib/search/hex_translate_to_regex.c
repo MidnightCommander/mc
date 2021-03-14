@@ -1,7 +1,7 @@
 /*
    libmc - checks for hex pattern parsing
 
-   Copyright (C) 2017-2020
+   Copyright (C) 2017-2021
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
@@ -151,7 +151,7 @@ START_PARAMETRIZED_TEST (test_hex_translate_to_regex, test_hex_translate_to_rege
 /* *INDENT-ON* */
 {
     GString *tmp, *dest_str;
-    mc_search_hex_parse_error_t error;
+    mc_search_hex_parse_error_t error = MC_SEARCH_HEX_E_OK;
 
     /* given */
     tmp = g_string_new (data->input_value);

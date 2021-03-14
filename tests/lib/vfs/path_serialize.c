@@ -1,7 +1,7 @@
 /*
    lib/vfs - vfs_path_t serialize/deserialize functions
 
-   Copyright (C) 2011-2020
+   Copyright (C) 2011-2021
    Free Software Foundation, Inc.
 
    Written by:
@@ -144,7 +144,7 @@ START_TEST (test_path_serialize)
     vpath = vfs_path_from_str_flags (ETALON_PATH_STR, VPF_USE_DEPRECATED_PARSER);
     serialized_vpath = vfs_path_serialize (vpath, &error);
 
-    vfs_path_free (vpath);
+    vfs_path_free (vpath, TRUE);
 
     if (error != NULL)
         g_error_free (error);
@@ -174,7 +174,7 @@ START_TEST (test_path_deserialize)
     mctest_assert_ptr_ne (vpath, NULL);
     mctest_assert_str_eq (vfs_path_as_str (vpath), ETALON_PATH_URL_STR);
 
-    vfs_path_free (vpath);
+    vfs_path_free (vpath, TRUE);
 
 }
 /* *INDENT-OFF* */

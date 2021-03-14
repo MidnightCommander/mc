@@ -3,7 +3,7 @@
    tree about the changes made to the directory
    structure.
 
-   Copyright (C) 2011-2020
+   Copyright (C) 2011-2021
    Free Software Foundation, Inc.
 
    Author:
@@ -94,7 +94,7 @@ my_mkdir_rec (const vfs_path_t * vpath, mode_t mode)
 
     q = vfs_path_append_new (vpath, "..", (char *) NULL);
     result = my_mkdir_rec (q, mode);
-    vfs_path_free (q);
+    vfs_path_free (q, TRUE);
 
     if (result == 0)
         result = mc_mkdir (vpath, mode);
@@ -117,7 +117,7 @@ my_mkdir (const vfs_path_t * vpath, mode_t mode)
         vfs_path_t *my_s;
 
         my_s = get_absolute_name (vpath);
-        vfs_path_free (my_s);
+        vfs_path_free (my_s, TRUE);
     }
     return result;
 }
@@ -138,9 +138,9 @@ my_rmdir (const char *path)
         vfs_path_t *my_s;
 
         my_s = get_absolute_name (vpath);
-        vfs_path_free (my_s);
+        vfs_path_free (my_s, TRUE);
     }
-    vfs_path_free (vpath);
+    vfs_path_free (vpath, TRUE);
     return result;
 }
 

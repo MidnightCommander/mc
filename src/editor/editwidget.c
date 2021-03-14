@@ -1,7 +1,7 @@
 /*
    Editor initialisation and callback handler.
 
-   Copyright (C) 1996-2020
+   Copyright (C) 1996-2021
    Free Software Foundation, Inc.
 
    Written by:
@@ -55,7 +55,7 @@
 #include "lib/charsets.h"
 #endif
 
-#include "src/keybind-defaults.h"       /* keybind_lookup_keymap_command() */
+#include "src/keymap.h"         /* keybind_lookup_keymap_command() */
 #include "src/setup.h"          /* home_dir */
 #include "src/execute.h"        /* toggle_subshell()  */
 #include "src/filemanager/cmd.h"        /* save_setup_cmd()  */
@@ -146,7 +146,7 @@ edit_about (void)
         QUICK_LABEL (N_("A user friendly text editor\n"
                         "written for the Midnight Commander."), NULL),
         QUICK_SEPARATOR (FALSE),
-        QUICK_LABEL (N_("Copyright (C) 1996-2020 the Free Software Foundation"), NULL),
+        QUICK_LABEL (N_("Copyright (C) 1996-2021 the Free Software Foundation"), NULL),
         QUICK_START_BUTTONS (TRUE, TRUE),
             QUICK_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
         QUICK_END
@@ -822,7 +822,7 @@ edit_dialog_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
         edit_quit (h);
         return MSG_HANDLED;
 
-    case MSG_END:
+    case MSG_DESTROY:
         edit_dlg_deinit ();
         return MSG_HANDLED;
 

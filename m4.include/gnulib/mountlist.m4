@@ -1,5 +1,5 @@
-# serial 14
-dnl Copyright (C) 2002-2006, 2009-2019 Free Software Foundation, Inc.
+# serial 15
+dnl Copyright (C) 2002-2006, 2009-2021 Free Software Foundation, Inc.
 dnl This file is free software; the Free Software Foundation
 dnl gives unlimited permission to copy and/or distribute it,
 dnl with or without modifications, as long as this notice is preserved.
@@ -331,8 +331,8 @@ AC_DEFUN([gl_PREREQ_MOUNTLIST_EXTRA],
 # nowadays.
 AC_DEFUN([AC_FUNC_GETMNTENT],
 [
-  # getmntent is in the standard C library on UNICOS, in -lsun on Irix 4,
-  # -lgen on Unixware.
-  AC_SEARCH_LIBS([getmntent], [sun gen])
+  # getmntent is in the standard C library on most systems, but in -lgen on
+  # Unixware.
+  AC_SEARCH_LIBS([getmntent], [gen])
   AC_CHECK_FUNCS([getmntent])
 ])

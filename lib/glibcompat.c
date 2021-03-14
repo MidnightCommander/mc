@@ -1,7 +1,7 @@
 /*
    GLIB - Library of useful routines for C programming
 
-   Copyright (C) 2009-2020
+   Copyright (C) 2009-2021
    Free Software Foundation, Inc.
 
    Written by:
@@ -183,6 +183,28 @@ mc_g_string_copy (GString * dest, const GString * src)
     g_string_append_len (dest, src->str, src->len);
 
     return dest;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * mc_g_string_dup:
+ * @s: (nullable): the source #GString
+ * @return: @copy of @s
+ *
+ * Copies the bytes from one #GString to another.
+ *
+ * There is no such API in GLib2.
+ */
+GString *
+mc_g_string_dup (const GString * s)
+{
+    GString *ret = NULL;
+
+    if (s != NULL)
+        ret = g_string_new_len (s->str, s->len);
+
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */

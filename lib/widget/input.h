@@ -86,7 +86,7 @@ extern input_colors_t input_colors;
 WInput *input_new (int y, int x, const int *colors,
                    int len, const char *text, const char *histname,
                    input_complete_t completion_flags);
-/* callbac is public; needed for command line */
+/* callback is public; needed for command line */
 cb_ret_t input_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data);
 void input_set_default_colors (void);
 cb_ret_t input_handle_char (WInput * in, int key);

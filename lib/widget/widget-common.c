@@ -1,7 +1,7 @@
 /*
    Widgets for the Midnight Commander
 
-   Copyright (C) 1994-2020
+   Copyright (C) 1994-2021
    Free Software Foundation, Inc.
 
    Authors:
@@ -446,9 +446,7 @@ widget_set_size (Widget * w, int y, int x, int lines, int cols)
     WRect r = { y, x, lines, cols };
 
     send_message (w, NULL, MSG_RESIZE, 0, &r);
-
-    if (w->owner != NULL && widget_get_state (WIDGET (w->owner), WST_ACTIVE))
-        widget_draw (w);
+    widget_draw (w);
 }
 
 /* --------------------------------------------------------------------------------------------- */

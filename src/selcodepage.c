@@ -3,7 +3,7 @@
 
    Copyright (C) 2001 Walery Studennikov <despair@sama.ru>
 
-   Copyright (C) 2011-2020
+   Copyright (C) 2011-2021
    Free Software Foundation, Inc.
 
    Written by:

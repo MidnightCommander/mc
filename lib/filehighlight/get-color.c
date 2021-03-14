@@ -2,7 +2,7 @@
    File highlight plugin.
    Interface functions. get color pair index for highlighted file.
 
-   Copyright (C) 2009-2020
+   Copyright (C) 2009-2021
    Free Software Foundation, Inc.
 
    Written by:
@@ -239,7 +239,7 @@ mc_fhl_get_color_regexp (mc_fhl_filter_t * mc_filter, mc_fhl_t * fhl, file_entry
     if (mc_filter->search_condition == NULL)
         return -1;
 
-    if (mc_search_run (mc_filter->search_condition, fe->fname, 0, strlen (fe->fname), NULL))
+    if (mc_search_run (mc_filter->search_condition, fe->fname->str, 0, fe->fname->len, NULL))
         return mc_filter->color_pair_index;
 
     return -1;

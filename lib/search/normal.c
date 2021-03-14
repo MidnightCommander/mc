@@ -2,7 +2,7 @@
    Search text engine.
    Plain search
 
-   Copyright (C) 2009-2020
+   Copyright (C) 2009-2021
    Free Software Foundation, Inc.
 
    Written by:
@@ -109,5 +109,6 @@ GString *
 mc_search_normal_prepare_replace_str (mc_search_t * lc_mc_search, GString * replace_str)
 {
     (void) lc_mc_search;
-    return g_string_new_len (replace_str->str, replace_str->len);
+
+    return mc_g_string_dup (replace_str);
 }

@@ -1,7 +1,7 @@
 /*
    Common code for testing functions in src/execute.c file.
 
-   Copyright (C) 2013-2020
+   Copyright (C) 2013-2021
 
    Free Software Foundation, Inc.
 
@@ -54,9 +54,16 @@ vfs_file_is_local__init (void)
 }
 
 static void
+vpath_captured_free (gpointer data, gpointer user_data)
+{
+    (void) user_data;
+    vfs_path_free ((vfs_path_t *) data, TRUE);
+}
+
+static void
 vfs_file_is_local__deinit (void)
 {
-    g_ptr_array_foreach (vfs_file_is_local__vpath__captured, (GFunc) vfs_path_free, NULL);
+    g_ptr_array_foreach (vfs_file_is_local__vpath__captured, vpath_captured_free, NULL);
     g_ptr_array_free (vfs_file_is_local__vpath__captured, TRUE);
 }
 
@@ -119,7 +126,7 @@ mc_getlocalcopy__init (void)
 static void
 mc_getlocalcopy__deinit (void)
 {
-    vfs_path_free (mc_getlocalcopy__pathname_vpath__captured);
+    vfs_path_free (mc_getlocalcopy__pathname_vpath__captured, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -192,7 +199,7 @@ mc_stat__init (void)
 static void
 mc_stat__deinit (void)
 {
-    g_ptr_array_foreach (mc_stat__vpath__captured, (GFunc) vfs_path_free, NULL);
+    g_ptr_array_foreach (mc_stat__vpath__captured, vpath_captured_free, NULL);
     g_ptr_array_free (mc_stat__vpath__captured, TRUE);
     mc_stat__vpath__captured = NULL;
 }
@@ -228,8 +235,8 @@ mc_ungetlocalcopy__init (void)
 static void
 mc_ungetlocalcopy__deinit (void)
 {
-    vfs_path_free (mc_ungetlocalcopy__pathname_vpath__captured);
-    vfs_path_free (mc_ungetlocalcopy__local_vpath__captured);
+    vfs_path_free (mc_ungetlocalcopy__pathname_vpath__captured, TRUE);
+    vfs_path_free (mc_ungetlocalcopy__local_vpath__captured, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */

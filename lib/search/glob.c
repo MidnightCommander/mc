@@ -2,7 +2,7 @@
    Search text engine.
    Glob-style pattern matching
 
-   Copyright (C) 2009-2020
+   Copyright (C) 2009-2021
    Free Software Foundation, Inc.
 
    Written by:

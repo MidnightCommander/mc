@@ -3,30 +3,25 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# Andrew Borodin <aborodin@vmail.ru>, 2011
-# AlexL <loginov.alex.valer@gmail.com>, 2015-2020
 # Alex Tkachenko <alex@bcs.zp.ua>, 1998
-# and Alex Tkachenko <alex@bcs.zp.ua>, 1998
-# Andrew Borodin <aborodin@vmail.ru>, 2009-2012
-# Andrew V. Samoilov <sav@bcs.zp.ua>, 1999,2014
-# Anton Sergeevich Chumak <nightfast@yahoo.co.uk>, 2005
-# Dimitriy Ryazantcev <DJm00n@mail.ru>, 2015
-# Evgeny Bulgakov <bgav@netvision.net.il>, 1999
-# Ilia Maslakov <il.smind@gmail.com>, 2009
-# Mr GreyWolf, 2016
-# Mr.GreyWolf, 2016
-# NaiLi (aka jamesjames) Rootaerc <theism@mail.ru>, 2012
-# Piotr Drąg <piotrdrag@gmail.com>, 2018
 # Sergey Panov <sipan@mit.edu>, 1999
-# Simple88, 2016
-# Simple88, 2016
-# Slava Zanko <slavazanko@gmail.com>, 2009,2011
+# Evgeny Bulgakov <bgav@netvision.net.il>, 1999
+# Andrew V. Samoilov <sav@bcs.zp.ua>, 1999, 2014
 # Valek Filippov <frob@df.ru>, 2000
+# Anton Sergeevich Chumak <nightfast@yahoo.co.uk>, 2005
+# Andrew Borodin <aborodin@vmail.ru>, 2009-2012
+# Ilia Maslakov <il.smind@gmail.com>, 2009
+# Slava Zanko <slavazanko@gmail.com>, 2009, 2011
+# AlexL <loginov.alex.valer@gmail.com>, 2015-2020
+# NaiLi (aka jamesjames) Rootaerc <theism@mail.ru>, 2012
+# Dimitriy Ryazantcev <DJm00n@mail.ru>, 2015
+# Simple88, 2016
+# Piotr Drąg <piotrdrag@gmail.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-01-10 13:15+0100\n"
+"POT-Creation-Date: 2021-03-14 19:59+0300\n"
 "PO-Revision-Date: 2020-12-31 14:19+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Russian (http://www.transifex.com/mc/mc/language/ru/)\n"
@@ -94,30 +89,6 @@ msgstr "Не удалось создать каталог \"%s\""
 
 msgid "FATAL: not a directory:"
 msgstr "ОШИБКА: не является каталогом:"
-
-#, c-format
-msgid "An error occurred while migrating user settings: %s"
-msgstr "Произошла ошибка при переносе пользовательских настроек: %s"
-
-#, c-format
-msgid ""
-"Your old settings were migrated from %s\n"
-"to Freedesktop recommended dirs.\n"
-"To get more info, please visit\n"
-"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-msgstr ""
-"Ваши старые настройки перенесены из %s\n"
-"в каталоги, рекомендованные FreeDesktop.org.\n"
-"Для более полной информации посетите страницу\n"
-"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-
-#, c-format
-msgid ""
-"Your old settings were migrated from %s\n"
-"to %s\n"
-msgstr ""
-"Ваши старые настройки перенесены из %s\n"
-"в %s\n"
 
 msgid ""
 "Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
@@ -208,11 +179,11 @@ msgstr ""
 msgid "True color not supported with ncurses."
 msgstr "True Color не поддерживается ncurses."
 
-msgid "True color not supported in this slang version."
-msgstr "True Color не поддерживается в этой версии slang."
-
 msgid "Your terminal doesn't even seem to support 256 colors."
 msgstr "Кажется, ваш терминал не поддерживает даже 256 цветов."
+
+msgid "True color not supported in this slang version."
+msgstr "True Color не поддерживается в этой версии slang."
 
 msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
 msgstr ""
@@ -582,18 +553,6 @@ msgid ""
 msgstr ""
 "Неожиданная ошибка в waitpid():\n"
 "%s"
-
-msgid "Warning"
-msgstr "Предупреждение"
-
-msgid "Pipe failed"
-msgstr "Сбой канала"
-
-msgid "Dup failed"
-msgstr "Сбой дублирования дескриптора"
-
-msgid "Error dup'ing old error pipe"
-msgstr "Ошибка дублирования старого канала ошибок"
 
 #, c-format
 msgid "Directory cache expired for %s"
@@ -1107,6 +1066,9 @@ msgid ""
 msgstr ""
 "Файл \"%s\" слишком большой.\n"
 "Всё равно открыть?"
+
+msgid "Warning"
+msgstr "Предупреждение"
 
 #, c-format
 msgid "Error reading from pipe: %s"
@@ -1697,7 +1659,8 @@ msgstr ""
 "Текстовый редактор с дружественным интерфейсом пользователя.\n"
 "Создан для Midnight Commander."
 
-msgid "Copyright (C) 1996-2020 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2021 the Free Software Foundation"
 msgstr "Copyright (C) 1996-2020 the Free Software Foundation"
 
 msgid "About"
@@ -2591,6 +2554,9 @@ msgstr ""
 "Не удалось создать временный командный файл\n"
 "%s"
 
+msgid "Pipe failed"
+msgstr "Сбой канала"
+
 #, c-format
 msgid " %s%s file error"
 msgstr "ошибка файла %s%s"
@@ -3363,6 +3329,10 @@ msgstr "Шаблон имени:"
 msgid "&Find recursively"
 msgstr "Найти ре&курсивно"
 
+#, fuzzy
+msgid "Follow s&ymlinks"
+msgstr "&Разыменовывать ссылки"
+
 msgid "S&kip hidden"
 msgstr "Пропускать скр&ытые"
 
@@ -3807,11 +3777,20 @@ msgstr "Добавить в список команд"
 msgid "Enter command label:"
 msgstr "Введите название команды:"
 
-msgid "Cannot invoke command."
-msgstr "Не удалось выполнить команду."
+#, fuzzy, c-format
+msgid ""
+"External panelize:\n"
+"%s"
+msgstr "Внешняя панелизация"
 
-msgid "Pipe close failed"
-msgstr "Сбой закрытия канала"
+#, fuzzy, c-format
+msgid ""
+"External panelize:\n"
+"failed to read data from child stdout:\n"
+"%s"
+msgstr ""
+"Не удалось прочитать данные из дочернего stdout:\n"
+"%s"
 
 msgid "Cannot run external panelize in a non-local directory"
 msgstr "Не удалось выполнить эту команду, находясь не в локальном каталоге"
@@ -4202,16 +4181,20 @@ msgstr ""
 "Неожиданный конец файла\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Cannot open %s archive\n"
+"%s:\n"
 "%s"
 msgstr ""
 "Не удалось открыть архив %s\n"
 "%s"
 
-msgid "Inconsistent extfs archive"
-msgstr "Несогласованный архив extfs"
+#, fuzzy, c-format
+msgid ""
+"EXTFS virtual file system:\n"
+"%s"
+msgstr "Виртуальная файловая система:"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4378,6 +4361,12 @@ msgid ""
 msgstr ""
 "Файл ~/.netrc имеет неверный режим доступа/владения.\n"
 "Удалите пароль или исправьте режим доступа/владения"
+
+#, fuzzy, c-format
+msgid ""
+"SFS virtual file system:\n"
+"%s"
+msgstr "Виртуальная файловая система:"
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"

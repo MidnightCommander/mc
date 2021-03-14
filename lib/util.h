@@ -118,8 +118,7 @@ typedef struct
 typedef struct
 {
     /* File attributes */
-    size_t fnamelen;
-    char *fname;
+    GString *fname;
     struct stat st;
     /* key used for comparing names */
     char *sort_key;

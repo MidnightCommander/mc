@@ -1,7 +1,7 @@
 /*
    Internal stuff of color setup
 
-   Copyright (C) 1994-2020
+   Copyright (C) 1994-2021
    Free Software Foundation, Inc.
 
    Written by:
@@ -136,25 +136,26 @@ parse_256_or_true_color_name (const char *color_name)
     if (color_name[0] == '#')
     {
         int len;
-        int h[6];
 
         color_name++;
         len = (int) strlen (color_name);
-        if (len != 3 && len != 6)
-            return -1;
-
-        for (i = 0; i < len; i++)
+        if (len == 3 || len == 6)
         {
-            h[i] = parse_hex_digit (color_name[i]);
-            if (h[i] == -1)
-                return -1;
-        }
+            int h[6];
 
-        if (i == 3)
-            i = (h[0] << 20) | (h[0] << 16) | (h[1] << 12) | (h[1] << 8) | (h[2] << 4) | h[2];
-        else
-            i = (h[0] << 20) | (h[1] << 16) | (h[2] << 12) | (h[3] << 8) | (h[4] << 4) | h[5];
-        return (1 << 24) | i;
+            for (i = 0; i < len; i++)
+            {
+                h[i] = parse_hex_digit (color_name[i]);
+                if (h[i] == -1)
+                    return -1;
+            }
+
+            if (i == 3)
+                i = (h[0] << 20) | (h[0] << 16) | (h[1] << 12) | (h[1] << 8) | (h[2] << 4) | h[2];
+            else
+                i = (h[0] << 20) | (h[1] << 16) | (h[2] << 12) | (h[3] << 8) | (h[4] << 4) | h[5];
+            return (1 << 24) | i;
+        }
     }
 
     return -1;

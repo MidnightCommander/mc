@@ -6,7 +6,7 @@
    created and destroyed.  This is required for the future vfs layer,
    it will be possible to have tree views over virtual file systems.
 
-   Copyright (C) 1994-2020
+   Copyright (C) 1994-2021
    Free Software Foundation, Inc.
 
    Written by:
@@ -56,7 +56,7 @@
 #include "lib/event.h"          /* mc_event_raise() */
 
 #include "src/setup.h"          /* confirm_delete, panels_options */
-#include "src/keybind-defaults.h"
+#include "src/keymap.h"
 #include "src/history.h"
 
 #include "dir.h"
@@ -212,7 +212,7 @@ load_tree (WTree * tree)
     tree->selected_ptr = tree->store->tree_first;
     vpath = vfs_path_from_str (mc_config_get_home_dir ());
     tree_chdir (tree, vpath);
-    vfs_path_free (vpath);
+    vfs_path_free (vpath, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -689,7 +689,7 @@ tree_rescan (void *data)
         ret = mc_chdir (old_vpath);
         (void) ret;
     }
-    vfs_path_free (old_vpath);
+    vfs_path_free (old_vpath, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -785,7 +785,7 @@ tree_move (WTree * tree, const char *default_dest)
     file_op_context_destroy (ctx);
 
   ret:
-    vfs_path_free (dest_vpath);
+    vfs_path_free (dest_vpath, TRUE);
     g_free (dest);
 }
 

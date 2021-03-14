@@ -1,7 +1,7 @@
 /*
    Virtual File System switch code
 
-   Copyright (C) 1995-2020
+   Copyright (C) 1995-2021
    Free Software Foundation, Inc.
 
    Written by: 1995 Miguel de Icaza
@@ -429,7 +429,7 @@ vfs_get_raw_current_dir (void)
 void
 vfs_set_raw_current_dir (const vfs_path_t * vpath)
 {
-    vfs_path_free (current_path);
+    vfs_path_free (current_path, TRUE);
     current_path = (vfs_path_t *) vpath;
 }
 
@@ -653,7 +653,7 @@ vfs_setup_cwd (void)
             if (vfs_test_current_dir (tmp_vpath))
                 vfs_set_raw_current_dir (tmp_vpath);
             else
-                vfs_path_free (tmp_vpath);
+                vfs_path_free (tmp_vpath, TRUE);
         }
     }
 
@@ -673,7 +673,7 @@ vfs_setup_cwd (void)
             if (!vfs_test_current_dir (tmp_vpath))
                 vfs_set_raw_current_dir (tmp_vpath);
             else
-                vfs_path_free (tmp_vpath);
+                vfs_path_free (tmp_vpath, TRUE);
         }
     }
 }

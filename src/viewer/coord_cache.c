@@ -2,7 +2,7 @@
    Internal file viewer for the Midnight Commander
    Function for work with coordinate cache (ccache)
 
-   Copyright (C) 1994-2020
+   Copyright (C) 1994-2021
    Free Software Foundation, Inc.
 
    Written by:

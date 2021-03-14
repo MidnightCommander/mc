@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-01-10 13:15+0100\n"
+"POT-Creation-Date: 2021-03-14 19:59+0300\n"
 "PO-Revision-Date: 2020-12-31 14:19+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Greek (http://www.transifex.com/mc/mc/language/el/)\n"
@@ -78,30 +78,6 @@ msgstr "Αδυναμία δημιουργία καταλόγου %s"
 
 msgid "FATAL: not a directory:"
 msgstr ""
-
-#, c-format
-msgid "An error occurred while migrating user settings: %s"
-msgstr ""
-
-#, c-format
-msgid ""
-"Your old settings were migrated from %s\n"
-"to Freedesktop recommended dirs.\n"
-"To get more info, please visit\n"
-"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-msgstr ""
-"Οι παλιές σας ρυθμίσεις μετακινήθηκαν από %s\n"
-"στους προτεινόμενους καταλόγους του Freedesktop.\n"
-"Για να λάβετε περισσότερες πληροφορίες, παρακαλούμε επισκεφτείτε το\n"
-"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-
-#, c-format
-msgid ""
-"Your old settings were migrated from %s\n"
-"to %s\n"
-msgstr ""
-"Οι παλιές σας ρυθμίσεις μετακινήθηκαν από %s\n"
-"σε %s\n"
 
 msgid ""
 "Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
@@ -181,10 +157,10 @@ msgstr ""
 msgid "True color not supported with ncurses."
 msgstr ""
 
-msgid "True color not supported in this slang version."
+msgid "Your terminal doesn't even seem to support 256 colors."
 msgstr ""
 
-msgid "Your terminal doesn't even seem to support 256 colors."
+msgid "True color not supported in this slang version."
 msgstr ""
 
 msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
@@ -540,18 +516,6 @@ msgstr ""
 msgid ""
 "Unexpected error in waitpid():\n"
 "%s"
-msgstr ""
-
-msgid "Warning"
-msgstr "Προειδοποίηση"
-
-msgid "Pipe failed"
-msgstr ""
-
-msgid "Dup failed"
-msgstr ""
-
-msgid "Error dup'ing old error pipe"
 msgstr ""
 
 #, c-format
@@ -1023,6 +987,9 @@ msgid ""
 "File \"%s\" is too large.\n"
 "Open it anyway?"
 msgstr ""
+
+msgid "Warning"
+msgstr "Προειδοποίηση"
 
 #, c-format
 msgid "Error reading from pipe: %s"
@@ -1609,7 +1576,7 @@ msgid ""
 "written for the Midnight Commander."
 msgstr ""
 
-msgid "Copyright (C) 1996-2020 the Free Software Foundation"
+msgid "Copyright (C) 1996-2021 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -2493,6 +2460,9 @@ msgstr ""
 "Αδυναμία δημιουργίας προσωρινού αρχείου εντολών\n"
 "%s"
 
+msgid "Pipe failed"
+msgstr ""
+
 #, c-format
 msgid " %s%s file error"
 msgstr "Σφάλμα αρχείου %s%s"
@@ -3232,6 +3202,10 @@ msgstr "Όνομα αρχείου:"
 msgid "&Find recursively"
 msgstr ""
 
+#, fuzzy
+msgid "Follow s&ymlinks"
+msgstr "Να ακολουθούνται οι &δεσμοί"
+
 msgid "S&kip hidden"
 msgstr "&Παράβλεψη κρυφών"
 
@@ -3668,10 +3642,17 @@ msgstr ""
 msgid "Enter command label:"
 msgstr ""
 
-msgid "Cannot invoke command."
+#, c-format
+msgid ""
+"External panelize:\n"
+"%s"
 msgstr ""
 
-msgid "Pipe close failed"
+#, c-format
+msgid ""
+"External panelize:\n"
+"failed to read data from child stdout:\n"
+"%s"
 msgstr ""
 
 msgid "Cannot run external panelize in a non-local directory"
@@ -4043,16 +4024,20 @@ msgstr ""
 "Απροσδόκητο τέλος αρχείου\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Cannot open %s archive\n"
+"%s:\n"
 "%s"
 msgstr ""
 "Άνοιγμα αρχείου %s ανεπιτυχές\n"
 "%s"
 
-msgid "Inconsistent extfs archive"
-msgstr "Χαλασμένο αρχείο extfs"
+#, fuzzy, c-format
+msgid ""
+"EXTFS virtual file system:\n"
+"%s"
+msgstr "Εικονικά συστήματα αρχείων:"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4218,6 +4203,12 @@ msgid ""
 "~/.netrc file has incorrect mode\n"
 "Remove password or correct mode"
 msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+"SFS virtual file system:\n"
+"%s"
+msgstr "Εικονικά συστήματα αρχείων:"
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4527,3 +4518,26 @@ msgstr "Συνέχεια από την αρχή;"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#, c-format
+#~ msgid ""
+#~ "Your old settings were migrated from %s\n"
+#~ "to Freedesktop recommended dirs.\n"
+#~ "To get more info, please visit\n"
+#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+#~ msgstr ""
+#~ "Οι παλιές σας ρυθμίσεις μετακινήθηκαν από %s\n"
+#~ "στους προτεινόμενους καταλόγους του Freedesktop.\n"
+#~ "Για να λάβετε περισσότερες πληροφορίες, παρακαλούμε επισκεφτείτε το\n"
+#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+
+#, c-format
+#~ msgid ""
+#~ "Your old settings were migrated from %s\n"
+#~ "to %s\n"
+#~ msgstr ""
+#~ "Οι παλιές σας ρυθμίσεις μετακινήθηκαν από %s\n"
+#~ "σε %s\n"
+
+#~ msgid "Inconsistent extfs archive"
+#~ msgstr "Χαλασμένο αρχείο extfs"

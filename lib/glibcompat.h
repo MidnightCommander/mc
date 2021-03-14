@@ -27,6 +27,9 @@ void g_queue_clear_full (GQueue * queue, GDestroyNotify free_func);
 /* There is no such API in GLib2 */
 GString *mc_g_string_copy (GString * dest, const GString * src);
 
+/* There is no such API in GLib2 */
+GString *mc_g_string_dup (const GString * s);
+
 /*** inline functions ****************************************************************************/
 
 #endif /* MC_GLIBCOMPAT_H */

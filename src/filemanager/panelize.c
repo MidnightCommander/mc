@@ -1,7 +1,7 @@
 /*
    External panelize
 
-   Copyright (C) 1995-2020
+   Copyright (C) 1995-2021
    Free Software Foundation, Inc.
 
    Written by:
@@ -460,24 +460,16 @@ do_panelize_cd (WPanel * panel)
 
     for (i = 0; i < panelized_panel.list.len; i++)
     {
-        if (panelized_same || DIR_IS_DOTDOT (panelized_panel.list.list[i].fname))
-        {
-            list->list[i].fnamelen = panelized_panel.list.list[i].fnamelen;
-            list->list[i].fname = g_strndup (panelized_panel.list.list[i].fname,
-                                             panelized_panel.list.list[i].fnamelen);
-        }
+        if (panelized_same || DIR_IS_DOTDOT (panelized_panel.list.list[i].fname->str))
+            list->list[i].fname = mc_g_string_dup (panelized_panel.list.list[i].fname);
         else
         {
             vfs_path_t *tmp_vpath;
-            const char *fname;
 
             tmp_vpath =
-                vfs_path_append_new (panelized_panel.root_vpath, panelized_panel.list.list[i].fname,
-                                     (char *) NULL);
-            fname = vfs_path_as_str (tmp_vpath);
-            list->list[i].fnamelen = strlen (fname);
-            list->list[i].fname = g_strndup (fname, list->list[i].fnamelen);
-            vfs_path_free (tmp_vpath);
+                vfs_path_append_new (panelized_panel.root_vpath,
+                                     panelized_panel.list.list[i].fname->str, (char *) NULL);
+            list->list[i].fname = g_string_new (vfs_path_free (tmp_vpath, FALSE));
         }
         list->list[i].f.link_to_dir = panelized_panel.list.list[i].f.link_to_dir;
         list->list[i].f.stale_link = panelized_panel.list.list[i].f.stale_link;
@@ -505,7 +497,7 @@ do_panelize_cd (WPanel * panel)
 void
 panelize_change_root (const vfs_path_t * new_root)
 {
-    vfs_path_free (panelized_panel.root_vpath);
+    vfs_path_free (panelized_panel.root_vpath, TRUE);
     panelized_panel.root_vpath = vfs_path_clone (new_root);
 }
 
@@ -530,9 +522,7 @@ panelize_save_panel (WPanel * panel)
 
     for (i = 0; i < panel->dir.len; i++)
     {
-        panelized_panel.list.list[i].fnamelen = list->list[i].fnamelen;
-        panelized_panel.list.list[i].fname =
-            g_strndup (list->list[i].fname, list->list[i].fnamelen);
+        panelized_panel.list.list[i].fname = mc_g_string_dup (list->list[i].fname);
         panelized_panel.list.list[i].f.link_to_dir = list->list[i].f.link_to_dir;
         panelized_panel.list.list[i].f.stale_link = list->list[i].f.stale_link;
         panelized_panel.list.list[i].f.dir_size_computed = list->list[i].f.dir_size_computed;
@@ -569,7 +559,7 @@ panelize_absolutize_if_needed (WPanel * panel)
 
     /* Note: We don't support mixing of absolute and relative paths, which is
      * why it's ok for us to check only the 1st entry. */
-    if (list->len > 1 && g_path_is_absolute (list->list[1].fname))
+    if (list->len > 1 && g_path_is_absolute (list->list[1].fname->str))
     {
         vfs_path_t *root;
 
@@ -577,7 +567,7 @@ panelize_absolutize_if_needed (WPanel * panel)
         panel_set_cwd (panel, root);
         if (panel == current_panel)
             mc_chdir (root);
-        vfs_path_free (root);
+        vfs_path_free (root, TRUE);
     }
 }
 

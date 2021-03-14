@@ -1,7 +1,7 @@
 /*
    Chmod command -- for the Midnight Commander
 
-   Copyright (C) 1994-2020
+   Copyright (C) 1994-2021
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
@@ -410,7 +410,7 @@ chmod_done (gboolean need_update)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static const char *
+static const GString *
 next_file (const WPanel * panel)
 {
     while (!panel->dir.list[current_file].f.marked)
@@ -492,10 +492,10 @@ apply_mask (WPanel * panel, vfs_path_t * vpath, struct stat *sf)
 
     do
     {
-        const char *fname;
+        const GString *fname;
 
         fname = next_file (panel);
-        vpath = vfs_path_from_str (fname);
+        vpath = vfs_path_from_str (fname->str);
         ok = (mc_stat (vpath, sf) == 0);
 
         if (!ok)
@@ -514,7 +514,7 @@ apply_mask (WPanel * panel, vfs_path_t * vpath, struct stat *sf)
             ok = do_chmod (panel, vpath, sf);
         }
 
-        vfs_path_free (vpath);
+        vfs_path_free (vpath, TRUE);
     }
     while (ok && panel->marked != 0);
 }
@@ -539,7 +539,7 @@ chmod_cmd (WPanel * panel)
         vfs_path_t *vpath;
         WDialog *ch_dlg;
         struct stat sf_stat;
-        const char *fname;
+        const GString *fname;
         int i, result;
 
         do_refresh ();
@@ -552,17 +552,17 @@ chmod_cmd (WPanel * panel)
         else
             fname = selection (panel)->fname;   /* single file */
 
-        vpath = vfs_path_from_str (fname);
+        vpath = vfs_path_from_str (fname->str);
 
         if (mc_stat (vpath, &sf_stat) != 0)
         {
-            vfs_path_free (vpath);
+            vfs_path_free (vpath, TRUE);
             break;
         }
 
         ch_mode = sf_stat.st_mode;
 
-        ch_dlg = chmod_dlg_create (panel, fname, &sf_stat);
+        ch_dlg = chmod_dlg_create (panel, fname->str, &sf_stat);
         result = dlg_run (ch_dlg);
 
         switch (result)
@@ -578,7 +578,7 @@ chmod_cmd (WPanel * panel)
                 {
                     /* single or last file */
                     if (mc_chmod (vpath, ch_mode) == -1 && !ignore_all)
-                        message (D_ERROR, MSG_ERROR, _("Cannot chmod \"%s\"\n%s"), fname,
+                        message (D_ERROR, MSG_ERROR, _("Cannot chmod \"%s\"\n%s"), fname->str,
                                  unix_error_string (errno));
                     end_chmod = TRUE;
                 }
@@ -648,7 +648,7 @@ chmod_cmd (WPanel * panel)
             need_update = TRUE;
         }
 
-        vfs_path_free (vpath);
+        vfs_path_free (vpath, TRUE);
 
         dlg_destroy (ch_dlg);
     }

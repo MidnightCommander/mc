@@ -2,7 +2,7 @@
    Virtual File System: FISH implementation for transfering files over
    shell connections.
 
-   Copyright (C) 1998-2020
+   Copyright (C) 1998-2021
    Free Software Foundation, Inc.
 
    Written by:
@@ -1662,29 +1662,25 @@ fish_fh_open (struct vfs_class *me, vfs_file_handler_t * fh, int flags, mode_t m
 
         if (fh->ino->localname == NULL)
         {
-            vfs_path_t *vpath;
+            vfs_path_t *vpath = NULL;
             int tmp_handle;
 
             tmp_handle = vfs_mkstemps (&vpath, me->name, fh->ino->ent->name);
             if (tmp_handle == -1)
-            {
-                vfs_path_free (vpath);
-                goto fail;
-            }
-            fh->ino->localname = g_strdup (vfs_path_as_str (vpath));
-            vfs_path_free (vpath);
+                return (-1);
+
+            fh->ino->localname = vfs_path_free (vpath, FALSE);
             close (tmp_handle);
         }
         return 0;
     }
+
     if (fh->ino->localname == NULL && vfs_s_retrieve_file (me, fh->ino) == -1)
-        goto fail;
+        return (-1);
+
     if (fh->ino->localname == NULL)
         vfs_die ("retrieve_file failed to fill in localname");
     return 0;
-
-  fail:
-    return -1;
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -2,7 +2,7 @@
    Search text engine.
    Interface functions
 
-   Copyright (C) 2009-2020
+   Copyright (C) 2009-2021
    Free Software Foundation, Inc.
 
    Written by:
@@ -363,7 +363,7 @@ mc_search_prepare_replace_str (mc_search_t * lc_mc_search, GString * replace_str
         return g_string_new ("");
 
     if (lc_mc_search == NULL)
-        return g_string_new_len (replace_str->str, replace_str->len);
+        return mc_g_string_dup (replace_str);
 
     switch (lc_mc_search->search_type)
     {
@@ -380,7 +380,7 @@ mc_search_prepare_replace_str (mc_search_t * lc_mc_search, GString * replace_str
         ret = mc_search_hex_prepare_replace_str (lc_mc_search, replace_str);
         break;
     default:
-        ret = g_string_new_len (replace_str->str, replace_str->len);
+        ret = mc_g_string_dup (replace_str);
         break;
     }
     return ret;

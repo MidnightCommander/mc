@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-01-10 13:15+0100\n"
+"POT-Creation-Date: 2021-03-14 19:59+0300\n"
 "PO-Revision-Date: 2020-12-31 14:19+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Basque (http://www.transifex.com/mc/mc/language/eu/)\n"
@@ -75,30 +75,6 @@ msgstr "%s direktorioa ezin sortu"
 
 msgid "FATAL: not a directory:"
 msgstr "LARRIA: ez da direktorioa:"
-
-#, c-format
-msgid "An error occurred while migrating user settings: %s"
-msgstr "Errore bat gertatu da erabiltzaile-ezarpenak migratzean: %s"
-
-#, c-format
-msgid ""
-"Your old settings were migrated from %s\n"
-"to Freedesktop recommended dirs.\n"
-"To get more info, please visit\n"
-"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-msgstr ""
-"Zure ezarpen zaharrak %s-tik \n"
-"Freedesktop-ek gomendatutako direktorioetara migratu dira.\n"
-"Info gehiago nahi baduzu, mesedez bisitatu\n"
-"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-
-#, c-format
-msgid ""
-"Your old settings were migrated from %s\n"
-"to %s\n"
-msgstr ""
-"Zure ezarpen zaharrak %s-tik⏎\n"
-"%s-ra migratu dira⏎\n"
 
 msgid ""
 "Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
@@ -188,11 +164,11 @@ msgstr ""
 msgid "True color not supported with ncurses."
 msgstr "Benetako-kolorea ez du onartzen ncurses-ek."
 
-msgid "True color not supported in this slang version."
-msgstr "Benetako-kolorea ez da onartzen slang bertsio honetan."
-
 msgid "Your terminal doesn't even seem to support 256 colors."
 msgstr "Ematen du zure terminalak 256 kolore ere ez dituela onartzen."
+
+msgid "True color not supported in this slang version."
+msgstr "Benetako-kolorea ez da onartzen slang bertsio honetan."
 
 msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
 msgstr ""
@@ -555,18 +531,6 @@ msgid ""
 msgstr ""
 "Ustekabeko errorea waitpid()-en:\n"
 "%s"
-
-msgid "Warning"
-msgstr "Abisua"
-
-msgid "Pipe failed"
-msgstr "Hodiak huts egin du"
-
-msgid "Dup failed"
-msgstr "\"Dup\"-ek huts egin du"
-
-msgid "Error dup'ing old error pipe"
-msgstr "Akatsa akats hodi zaharra bikoizterakoan (\"dup\")"
 
 #, c-format
 msgid "Directory cache expired for %s"
@@ -1076,6 +1040,9 @@ msgid ""
 msgstr ""
 "\"%s\" fitxategia handiegia da.\n"
 "Ireki hala ere?"
+
+msgid "Warning"
+msgstr "Abisua"
 
 #, c-format
 msgid "Error reading from pipe: %s"
@@ -1668,7 +1635,7 @@ msgstr ""
 "Testu editore lagunkoi bat\n"
 "Midnight Commander-rarentzako idatzia."
 
-msgid "Copyright (C) 1996-2020 the Free Software Foundation"
+msgid "Copyright (C) 1996-2021 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -2564,6 +2531,9 @@ msgstr ""
 "%s\n"
 "aldiuneko komando fitxategia ezin sortu"
 
+msgid "Pipe failed"
+msgstr "Hodiak huts egin du"
+
 #, c-format
 msgid " %s%s file error"
 msgstr " %s%s fitxategi akatsa"
@@ -3337,6 +3307,10 @@ msgstr "Fitxategi izena:"
 msgid "&Find recursively"
 msgstr "&Bilatu errekurtsiboki"
 
+#, fuzzy
+msgid "Follow s&ymlinks"
+msgstr "jarraitu &estekei"
+
 msgid "S&kip hidden"
 msgstr "B&aztertu ezkutukoak"
 
@@ -3775,11 +3749,20 @@ msgstr "Erantsi kanpokora paneleraturi"
 msgid "Enter command label:"
 msgstr "Sartu komandoaren etiketa:"
 
-msgid "Cannot invoke command."
-msgstr "Ezin da komandoa deitu."
+#, fuzzy, c-format
+msgid ""
+"External panelize:\n"
+"%s"
+msgstr "Kanpokora paneleratu"
 
-msgid "Pipe close failed"
-msgstr "Hodi ixteak huts egin du"
+#, fuzzy, c-format
+msgid ""
+"External panelize:\n"
+"failed to read data from child stdout:\n"
+"%s"
+msgstr ""
+"Ume stdout-etik datuak irakurtzeak huts egin du:\n"
+"%s"
 
 msgid "Cannot run external panelize in a non-local directory"
 msgstr ""
@@ -4168,16 +4151,20 @@ msgstr ""
 "Ustekabeko fitxategi bukaera\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Cannot open %s archive\n"
+"%s:\n"
 "%s"
 msgstr ""
 "%s artxiboa ezin ireki\n"
 "%s"
 
-msgid "Inconsistent extfs archive"
-msgstr "extfs artxibo inkoherentea"
+#, fuzzy, c-format
+msgid ""
+"EXTFS virtual file system:\n"
+"%s"
+msgstr "Alegiazko fitxategi sistemak (VFS):"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4345,6 +4332,12 @@ msgid ""
 msgstr ""
 "~/.netrc fitxategiak modu okerra dauka.\n"
 "Kendu pasahitza edo zuzendu modua"
+
+#, fuzzy, c-format
+msgid ""
+"SFS virtual file system:\n"
+"%s"
+msgstr "Alegiazko fitxategi sistemak (VFS):"
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4664,3 +4657,42 @@ msgstr "Hasieratik jarraitu?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Ezin eskuratu ondokoaren bertako kopia bat: /ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid "An error occurred while migrating user settings: %s"
+#~ msgstr "Errore bat gertatu da erabiltzaile-ezarpenak migratzean: %s"
+
+#, c-format
+#~ msgid ""
+#~ "Your old settings were migrated from %s\n"
+#~ "to Freedesktop recommended dirs.\n"
+#~ "To get more info, please visit\n"
+#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+#~ msgstr ""
+#~ "Zure ezarpen zaharrak %s-tik \n"
+#~ "Freedesktop-ek gomendatutako direktorioetara migratu dira.\n"
+#~ "Info gehiago nahi baduzu, mesedez bisitatu\n"
+#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+
+#, c-format
+#~ msgid ""
+#~ "Your old settings were migrated from %s\n"
+#~ "to %s\n"
+#~ msgstr ""
+#~ "Zure ezarpen zaharrak %s-tik⏎\n"
+#~ "%s-ra migratu dira⏎\n"
+
+#~ msgid "Dup failed"
+#~ msgstr "\"Dup\"-ek huts egin du"
+
+#~ msgid "Error dup'ing old error pipe"
+#~ msgstr "Akatsa akats hodi zaharra bikoizterakoan (\"dup\")"
+
+#~ msgid "Cannot invoke command."
+#~ msgstr "Ezin da komandoa deitu."
+
+#~ msgid "Pipe close failed"
+#~ msgstr "Hodi ixteak huts egin du"
+
+#~ msgid "Inconsistent extfs archive"
+#~ msgstr "extfs artxibo inkoherentea"

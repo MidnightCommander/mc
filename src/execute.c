@@ -1,7 +1,7 @@
 /*
    Execution routines for GNU Midnight Commander
 
-   Copyright (C) 2003-2020
+   Copyright (C) 2003-2021
    Free Software Foundation, Inc.
 
    Written by:
@@ -220,7 +220,7 @@ execute_cleanup_with_vfs_arg (const vfs_path_t * filename_vpath, vfs_path_t ** l
          */
         mc_stat (*localcopy_vpath, &st);
         mc_ungetlocalcopy (filename_vpath, *localcopy_vpath, *mtime != st.st_mtime);
-        vfs_path_free (*localcopy_vpath);
+        vfs_path_free (*localcopy_vpath, TRUE);
         *localcopy_vpath = NULL;
     }
 }
@@ -356,7 +356,7 @@ do_executev (const char *shell, int flags, char *const argv[])
     if (new_dir_vpath != NULL)
     {
         do_possible_cd (new_dir_vpath);
-        vfs_path_free (new_dir_vpath);
+        vfs_path_free (new_dir_vpath, TRUE);
     }
 
 #endif /* ENABLE_SUBSHELL */
@@ -364,7 +364,7 @@ do_executev (const char *shell, int flags, char *const argv[])
     if (old_vfs_dir_vpath != NULL)
     {
         mc_chdir (old_vfs_dir_vpath);
-        vfs_path_free (old_vfs_dir_vpath);
+        vfs_path_free (old_vfs_dir_vpath, TRUE);
     }
 
     if (mc_global.mc_run_mode == MC_RUN_FULL)
@@ -558,7 +558,7 @@ toggle_subshell (void)
             vfs_setup_cwd ();
     }
 
-    vfs_path_free (new_dir_vpath);
+    vfs_path_free (new_dir_vpath, TRUE);
 #endif /* ENABLE_SUBSHELL */
 
     if (mc_global.mc_run_mode == MC_RUN_FULL)

@@ -1,7 +1,7 @@
 /*
    src - tests for execute_external_editor_or_viewer() function
 
-   Copyright (C) 2013-2020
+   Copyright (C) 2013-2021
    Free Software Foundation, Inc.
 
    Written by:
@@ -33,7 +33,8 @@
 #include "src/vfs/local/local.c"
 
 char *execute_get_external_cmd_opts_from_config (const char *command,
-                                                 const vfs_path_t * filename_vpath, int start_line);
+                                                 const vfs_path_t * filename_vpath,
+                                                 long start_line);
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -175,7 +176,7 @@ START_PARAMETRIZED_TEST (check_if_filename_and_lineno_will_be_subtituted, check_
     mctest_assert_str_eq (g_ptr_array_index (mc_config_get_string__default_value__captured, 0),
                           NULL);
 
-    vfs_path_free (filename_vpath);
+    vfs_path_free (filename_vpath, TRUE);
 
 }
 /* *INDENT-OFF* */

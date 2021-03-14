@@ -1,7 +1,7 @@
 /*
    Color setup for S_Lang screen library
 
-   Copyright (C) 1994-2020
+   Copyright (C) 1994-2021
    Free Software Foundation, Inc.
 
    Written by:
@@ -210,9 +210,17 @@ tty_set_normal_attrs (void)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-tty_use_256colors (void)
+tty_use_256colors (GError ** error)
 {
-    return (SLtt_Use_Ansi_Colors && SLtt_tgetnum ((char *) "Co") == 256);
+    gboolean ret;
+
+    ret = (SLtt_Use_Ansi_Colors && SLtt_tgetnum ((char *) "Co") == 256);
+
+    if (!ret)
+        g_set_error (error, MC_ERROR, -1,
+                     _("Your terminal doesn't even seem to support 256 colors."));
+
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -229,14 +237,6 @@ tty_use_truecolors (GError ** error)
     if (SLang_Version < 20301 || (sizeof (long) != 8 && SLang_Version < 30000))
     {
         g_set_error (error, MC_ERROR, -1, _("True color not supported in this slang version."));
-        return FALSE;
-    }
-
-    /* Sanity check that at least 256 colors are supported. */
-    if (!tty_use_256colors ())
-    {
-        g_set_error (error, MC_ERROR, -1,
-                     _("Your terminal doesn't even seem to support 256 colors."));
         return FALSE;
     }
 

@@ -1,7 +1,7 @@
 /*
    Virtual File System: GNU Tar file system.
 
-   Copyright (C) 2000-2020
+   Copyright (C) 2000-2021
    Free Software Foundation, Inc.
 
    Written by:
@@ -254,7 +254,7 @@ cpio_open_cpio_file (struct vfs_class *me, struct vfs_s_super *super, const vfs_
         s = g_strconcat (super->name, decompress_extension (type), (char *) NULL);
         tmp_vpath = vfs_path_from_str_flags (s, VPF_NO_CANON);
         fd = mc_open (tmp_vpath, O_RDONLY);
-        vfs_path_free (tmp_vpath);
+        vfs_path_free (tmp_vpath, TRUE);
         if (fd == -1)
         {
             message (D_ERROR, MSG_ERROR, _("Cannot open cpio archive\n%s"), s);

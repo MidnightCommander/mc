@@ -1,7 +1,7 @@
 /*
    Configure module for the Midnight Commander
 
-   Copyright (C) 1994-2020
+   Copyright (C) 1994-2021
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
@@ -69,7 +69,7 @@ mc_config_new_or_override_file (mc_config_t * mc_config, const gchar * ini_path,
 
     ini_vpath = vfs_path_from_str (ini_path);
     fd = mc_open (ini_vpath, O_WRONLY | O_TRUNC, 0);
-    vfs_path_free (ini_vpath);
+    vfs_path_free (ini_vpath, TRUE);
 
     if (fd == -1)
     {
@@ -136,7 +136,7 @@ mc_config_init (const gchar * ini_path, gboolean read_only)
             /* file exists and not empty */
             g_key_file_load_from_file (mc_config->handle, ini_path, flags, NULL);
         }
-        vfs_path_free (vpath);
+        vfs_path_free (vpath, TRUE);
     }
 
     mc_config->ini_path = g_strdup (ini_path);

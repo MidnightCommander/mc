@@ -7,7 +7,7 @@
    Parts of this program were taken from the lsdel.c and dump.c files
    written by Ted Ts'o (tytso@mit.edu) for the ext2fs package.
 
-   Copyright (C) 1995-2020
+   Copyright (C) 1995-2021
    Free Software Foundation, Inc.
 
    Written by:
@@ -49,15 +49,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>             /* memset() */
-
-#ifdef HAVE_EXT2FS_EXT2_FS_H
 #include <ext2fs/ext2_fs.h>
-#else
-/* asm/types.h defines its own umode_t */
-#undef umode_t
-#include <linux/ext2_fs.h>
-#endif
-
 #include <ext2fs/ext2fs.h>
 #include <ctype.h>
 

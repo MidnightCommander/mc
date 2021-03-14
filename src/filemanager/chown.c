@@ -1,7 +1,7 @@
 /*
    Chown command -- for the Midnight Commander
 
-   Copyright (C) 1994-2020
+   Copyright (C) 1994-2021
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
@@ -283,7 +283,7 @@ chown_done (gboolean need_update)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static const char *
+static const GString *
 next_file (const WPanel * panel)
 {
     while (!panel->dir.list[current_file].f.marked)
@@ -362,11 +362,11 @@ apply_chowns (WPanel * panel, vfs_path_t * vpath, uid_t u, gid_t g)
 
     do
     {
-        const char *fname;
+        const GString *fname;
         struct stat sf;
 
         fname = next_file (panel);
-        vpath = vfs_path_from_str (fname);
+        vpath = vfs_path_from_str (fname->str);
         ok = (mc_stat (vpath, &sf) == 0);
 
         if (!ok)
@@ -381,7 +381,7 @@ apply_chowns (WPanel * panel, vfs_path_t * vpath, uid_t u, gid_t g)
         else
             ok = do_chown (panel, vpath, u, g);
 
-        vfs_path_free (vpath);
+        vfs_path_free (vpath, TRUE);
     }
     while (ok && panel->marked != 0);
 }
@@ -406,7 +406,7 @@ chown_cmd (WPanel * panel)
         vfs_path_t *vpath;
         WDialog *ch_dlg;
         struct stat sf_stat;
-        const char *fname;
+        const GString *fname;
         int result;
         char buffer[BUF_TINY];
         uid_t new_user = (uid_t) (-1);
@@ -422,11 +422,11 @@ chown_cmd (WPanel * panel)
         else
             fname = selection (panel)->fname;   /* single file */
 
-        vpath = vfs_path_from_str (fname);
+        vpath = vfs_path_from_str (fname->str);
 
         if (mc_stat (vpath, &sf_stat) != 0)
         {
-            vfs_path_free (vpath);
+            vfs_path_free (vpath, TRUE);
             break;
         }
 
@@ -436,7 +436,7 @@ chown_cmd (WPanel * panel)
         listbox_select_entry (l_user, listbox_search_text (l_user, get_owner (sf_stat.st_uid)));
         listbox_select_entry (l_group, listbox_search_text (l_group, get_group (sf_stat.st_gid)));
 
-        chown_label (0, str_trunc (fname, GW - 4));
+        chown_label (0, str_trunc (fname->str, GW - 4));
         chown_label (1, str_trunc (get_owner (sf_stat.st_uid), GW - 4));
         chown_label (2, str_trunc (get_group (sf_stat.st_gid), GW - 4));
         size_trunc_len (buffer, GW - 4, sf_stat.st_size, 0, panels_options.kilobyte_si);
@@ -473,7 +473,7 @@ chown_cmd (WPanel * panel)
                         /* single or last file */
                         if (mc_chown (vpath, new_user, new_group) == -1)
                             message (D_ERROR, MSG_ERROR, _("Cannot chown \"%s\"\n%s"),
-                                     fname, unix_error_string (errno));
+                                     fname->str, unix_error_string (errno));
                         end_chown = TRUE;
                     }
                     else if (!try_chown (vpath, new_user, new_group))
@@ -537,7 +537,7 @@ chown_cmd (WPanel * panel)
             need_update = TRUE;
         }
 
-        vfs_path_free (vpath);
+        vfs_path_free (vpath, TRUE);
 
         dlg_destroy (ch_dlg);
     }

@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-01-10 13:15+0100\n"
+"POT-Creation-Date: 2021-03-14 19:59+0300\n"
 "PO-Revision-Date: 2020-12-31 14:19+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/mc/mc/language/"
@@ -84,30 +84,6 @@ msgstr "无法建立目录%s"
 
 msgid "FATAL: not a directory:"
 msgstr "严重错误: 不是一个目录: "
-
-#, c-format
-msgid "An error occurred while migrating user settings: %s"
-msgstr "迁移用户设置时发生了一个错误: %s"
-
-#, c-format
-msgid ""
-"Your old settings were migrated from %s\n"
-"to Freedesktop recommended dirs.\n"
-"To get more info, please visit\n"
-"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-msgstr ""
-"您的旧设置被从 %s 迁移\n"
-"到 Freedesktop 推荐目录。\n"
-"更多信息，请访问\n"
-"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-
-#, c-format
-msgid ""
-"Your old settings were migrated from %s\n"
-"to %s\n"
-msgstr ""
-"您的旧设置被从 %s 迁移\n"
-"到 %s\n"
 
 msgid ""
 "Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
@@ -195,11 +171,11 @@ msgstr ""
 msgid "True color not supported with ncurses."
 msgstr "ncurses 不支持真色彩模式"
 
-msgid "True color not supported in this slang version."
-msgstr "此 slang 版本不支持真色彩模式"
-
 msgid "Your terminal doesn't even seem to support 256 colors."
 msgstr "你的终端连 256 色都不支持"
+
+msgid "True color not supported in this slang version."
+msgstr "此 slang 版本不支持真色彩模式"
 
 msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
 msgstr "如果你的终端真的支持真色彩的话，请设置环境变量 COLORTERM=truecolor"
@@ -561,18 +537,6 @@ msgid ""
 msgstr ""
 "位于 waitpid() 中未预期的错误:\n"
 "%s"
-
-msgid "Warning"
-msgstr "警告"
-
-msgid "Pipe failed"
-msgstr "管道失败"
-
-msgid "Dup failed"
-msgstr "复制失败"
-
-msgid "Error dup'ing old error pipe"
-msgstr "复制原有出错管道时发生错误"
 
 #, c-format
 msgid "Directory cache expired for %s"
@@ -1079,6 +1043,9 @@ msgid ""
 msgstr ""
 "文件“%s”体积过大。\n"
 "仍然打开?"
+
+msgid "Warning"
+msgstr "警告"
 
 #, c-format
 msgid "Error reading from pipe: %s"
@@ -1669,7 +1636,7 @@ msgstr ""
 "为 Midnight Commander 编写的\n"
 "一个界面友好的文本编辑器。"
 
-msgid "Copyright (C) 1996-2020 the Free Software Foundation"
+msgid "Copyright (C) 1996-2021 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -2561,6 +2528,9 @@ msgstr ""
 "无法创建临时命令文件\n"
 "%s"
 
+msgid "Pipe failed"
+msgstr "管道失败"
+
 #, c-format
 msgid " %s%s file error"
 msgstr " %s%s 文件错误"
@@ -3327,6 +3297,10 @@ msgstr "文件名: "
 msgid "&Find recursively"
 msgstr "递归查找(&F)"
 
+#, fuzzy
+msgid "Follow s&ymlinks"
+msgstr "跟随链接(&L)"
+
 msgid "S&kip hidden"
 msgstr "跳过隐藏(&K)"
 
@@ -3762,11 +3736,20 @@ msgstr "添加到外部面板"
 msgid "Enter command label:"
 msgstr "输入命令标签: "
 
-msgid "Cannot invoke command."
-msgstr "无法调用命令。"
+#, fuzzy, c-format
+msgid ""
+"External panelize:\n"
+"%s"
+msgstr "外部面板"
 
-msgid "Pipe close failed"
-msgstr "关闭管道失败"
+#, fuzzy, c-format
+msgid ""
+"External panelize:\n"
+"failed to read data from child stdout:\n"
+"%s"
+msgstr ""
+"无法从子进程的 stdout 读取数据:\n"
+"%s"
 
 msgid "Cannot run external panelize in a non-local directory"
 msgstr "在非本地目录无法执行外部面板"
@@ -4154,16 +4137,20 @@ msgstr ""
 "异常的文件结束\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Cannot open %s archive\n"
+"%s:\n"
 "%s"
 msgstr ""
 "无法打开 %s 档案\n"
 "%s"
 
-msgid "Inconsistent extfs archive"
-msgstr "不完整的 extfs 档案"
+#, fuzzy, c-format
+msgid ""
+"EXTFS virtual file system:\n"
+"%s"
+msgstr "虚拟文件系统: "
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4330,6 +4317,12 @@ msgid ""
 msgstr ""
 "~/.netrc 文件权限不正确\n"
 "删除密码或者改正权限"
+
+#, fuzzy, c-format
+msgid ""
+"SFS virtual file system:\n"
+"%s"
+msgstr "虚拟文件系统: "
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4647,3 +4640,42 @@ msgstr "从头继续搜索?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "无法获取 /ftp://some.host/editme.txt 的本地副本"
+
+#, c-format
+#~ msgid "An error occurred while migrating user settings: %s"
+#~ msgstr "迁移用户设置时发生了一个错误: %s"
+
+#, c-format
+#~ msgid ""
+#~ "Your old settings were migrated from %s\n"
+#~ "to Freedesktop recommended dirs.\n"
+#~ "To get more info, please visit\n"
+#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+#~ msgstr ""
+#~ "您的旧设置被从 %s 迁移\n"
+#~ "到 Freedesktop 推荐目录。\n"
+#~ "更多信息，请访问\n"
+#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+
+#, c-format
+#~ msgid ""
+#~ "Your old settings were migrated from %s\n"
+#~ "to %s\n"
+#~ msgstr ""
+#~ "您的旧设置被从 %s 迁移\n"
+#~ "到 %s\n"
+
+#~ msgid "Dup failed"
+#~ msgstr "复制失败"
+
+#~ msgid "Error dup'ing old error pipe"
+#~ msgstr "复制原有出错管道时发生错误"
+
+#~ msgid "Cannot invoke command."
+#~ msgstr "无法调用命令。"
+
+#~ msgid "Pipe close failed"
+#~ msgstr "关闭管道失败"
+
+#~ msgid "Inconsistent extfs archive"
+#~ msgstr "不完整的 extfs 档案"

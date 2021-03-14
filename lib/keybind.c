@@ -1,7 +1,7 @@
 /*
    Definitions of key bindings.
 
-   Copyright (C) 2005-2020
+   Copyright (C) 2005-2021
    Free Software Foundation, Inc.
 
    Written by:
@@ -44,6 +44,12 @@
     { #name, CK_##name }
 
 /*** file scope type declarations ****************************************************************/
+
+typedef struct name_keymap_t
+{
+    const char *name;
+    long val;
+} name_keymap_t;
 
 /*** file scope variables ************************************************************************/
 

@@ -56,7 +56,8 @@ extern const global_keymap_t *diff_map;
 
 /*** declarations of public functions ************************************************************/
 
-mc_config_t *create_default_keymap (void);
+void keymap_load (gboolean load_from_file);
+void keymap_free (void);
 
 /*** inline functions ****************************************************************************/
 

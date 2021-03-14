@@ -38,5 +38,3 @@ libmcfilemanager_la_SOURCES += \
 
 AM_CPPFLAGS += @EXT2FS_CFLAGS@ @E2P_CFLAGS@
 endif
-
-libmcfilemanager_la_LIBADD = ../../lib/libmc.la

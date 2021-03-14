@@ -1,7 +1,7 @@
 /*
    Hypertext file browser.
 
-   Copyright (C) 1994-2020
+   Copyright (C) 1994-2021
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
@@ -65,7 +65,7 @@
 #include "lib/widget.h"
 #include "lib/event-types.h"
 
-#include "keybind-defaults.h"
+#include "keymap.h"
 #include "help.h"
 
 /*** global variables ****************************************************************************/

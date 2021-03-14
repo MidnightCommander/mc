@@ -5,41 +5,21 @@ dnl    "no" otherwise.  May define ENABLE_VFS_UNDELFS for cpp.
 dnl    Will set EXT2FS_UNDEL_LIBS to required libraries.
 
 AC_DEFUN([mc_UNDELFS_CHECKS], [
-  ext2fs_undel=no
-  EXT2FS_UNDEL_LIBS=
-  AC_CHECK_HEADERS([ext2fs/ext2_fs.h linux/ext2_fs.h], [ext2_fs_h=yes; break])
-  if test x"$ext2_fs_h" = xyes; then
-    AC_CHECK_HEADERS([ext2fs/ext2fs.h], [ext2fs_ext2fs_h=yes], ,
-		     [
-#include <stdio.h>
-#ifdef HAVE_EXT2FS_EXT2_FS_H
-#include <ext2fs/ext2_fs.h>
-#else
-#undef umode_t
-#include <linux/ext2_fs.h>
-#endif
-		     ])
-    if test x"$ext2fs_ext2fs_h" = xyes; then
-      ext2fs_undel=yes
-      EXT2FS_UNDEL_LIBS="-lext2fs -lcom_err"
-      AC_CHECK_TYPE([ext2_ino_t], ,
-		    [AC_DEFINE_UNQUOTED([ext2_ino_t], [ino_t],
-			       [Define to ino_t if undefined.])],
-		    [
-#include <errno.h>
-#include <stdio.h>
-#include <fcntl.h>
-#include <stdlib.h>
-#ifdef HAVE_EXT2FS_EXT2_FS_H
-#include <ext2fs/ext2_fs.h>
-#else
-#undef umode_t
-#include <linux/ext2_fs.h>
-#endif
-#include <ext2fs/ext2fs.h>
-		    ])
+    ext2fs_undel=no
+    EXT2FS_UNDEL_LIBS=
+
+    dnl Use result of mc_EXT2FS_ATTR that was called earlier
+    if test "x$ext2fs_attr_msg" = "xyes"; then
+	com_err=no
+
+	PKG_CHECK_MODULES(COM_ERR, [com_err >= 1.42.4], [com_err=yes], [:])
+
+	if test x"$com_err" = "xyes"; then
+	    EXT2FS_UNDEL_LIBS="$EXT2FS_LIBS $COM_ERR_LIBS"
+	    ext2fs_undel=yes
+	fi
     fi
-  fi
+
 ])
 
 dnl

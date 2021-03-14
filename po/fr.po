@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-01-10 13:15+0100\n"
+"POT-Creation-Date: 2021-03-14 19:59+0300\n"
 "PO-Revision-Date: 2020-12-31 14:19+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: French (http://www.transifex.com/mc/mc/language/fr/)\n"
@@ -83,31 +83,6 @@ msgstr "Ne peut créer le répertoire %s"
 
 msgid "FATAL: not a directory:"
 msgstr "FATAL: n'est pas un répertoire :"
-
-#, c-format
-msgid "An error occurred while migrating user settings: %s"
-msgstr ""
-"Une erreur est survenue lors de la migration des paramètres utilisateur : %s"
-
-#, c-format
-msgid ""
-"Your old settings were migrated from %s\n"
-"to Freedesktop recommended dirs.\n"
-"To get more info, please visit\n"
-"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-msgstr ""
-"Vos anciens paramètres ont été migré de %s\n"
-"vers les répertoires recommandés par Freedesktop\n"
-"Pour plus d'informations, veuillez visiter\n"
-"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-
-#, c-format
-msgid ""
-"Your old settings were migrated from %s\n"
-"to %s\n"
-msgstr ""
-"Vos anciens paramètres ont été migrés de %s\n"
-"vers %s\n"
 
 msgid ""
 "Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
@@ -197,11 +172,11 @@ msgstr ""
 msgid "True color not supported with ncurses."
 msgstr "Truecolor n'est pas permis avec Ncurses."
 
-msgid "True color not supported in this slang version."
-msgstr "Truecolor n'est pas permis cette version d'argot (\"slang version\")."
-
 msgid "Your terminal doesn't even seem to support 256 colors."
 msgstr "Votre terminal ne semble même pas permettre 256 couleurs."
+
+msgid "True color not supported in this slang version."
+msgstr "Truecolor n'est pas permis cette version d'argot (\"slang version\")."
 
 msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
 msgstr ""
@@ -566,18 +541,6 @@ msgid ""
 msgstr ""
 "Erreur inattendue dans waitpid() :\n"
 "%s"
-
-msgid "Warning"
-msgstr "Attention"
-
-msgid "Pipe failed"
-msgstr " Échec du tube "
-
-msgid "Dup failed"
-msgstr "Échec système « dup »"
-
-msgid "Error dup'ing old error pipe"
-msgstr "Erreur système « dup » sur l'ancien tube"
 
 #, c-format
 msgid "Directory cache expired for %s"
@@ -1088,6 +1051,9 @@ msgid ""
 msgstr ""
 "Le fichier \"%s\" est trop gros.\n"
 "Voulez-vous tout de même l'Ouvrir ?"
+
+msgid "Warning"
+msgstr "Attention"
 
 #, c-format
 msgid "Error reading from pipe: %s"
@@ -1681,7 +1647,7 @@ msgstr ""
 "Un éditeur de text facile d'utilisation.\n"
 "écrit pour Midnight Commander."
 
-msgid "Copyright (C) 1996-2020 the Free Software Foundation"
+msgid "Copyright (C) 1996-2021 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -2575,6 +2541,9 @@ msgstr ""
 "Impossible de créer le fichier de commande temporaire\n"
 "%s"
 
+msgid "Pipe failed"
+msgstr " Échec du tube "
+
 #, c-format
 msgid " %s%s file error"
 msgstr "%s%s erreur de fichier"
@@ -3341,6 +3310,10 @@ msgstr "Nom du fichier :"
 msgid "&Find recursively"
 msgstr "&Recherche récursive"
 
+#, fuzzy
+msgid "Follow s&ymlinks"
+msgstr "Suivre les &liens"
+
 msgid "S&kip hidden"
 msgstr "Ignorer les &cachés"
 
@@ -3781,11 +3754,20 @@ msgstr "Ajouter au panneau externe"
 msgid "Enter command label:"
 msgstr "Saissiez le libellé de la commande :"
 
-msgid "Cannot invoke command."
-msgstr "Ne peut invoquer la commande."
+#, fuzzy, c-format
+msgid ""
+"External panelize:\n"
+"%s"
+msgstr "Panneau externe"
 
-msgid "Pipe close failed"
-msgstr "La fermeture du tube a échoué"
+#, fuzzy, c-format
+msgid ""
+"External panelize:\n"
+"failed to read data from child stdout:\n"
+"%s"
+msgstr ""
+"Impossible de lire des données sur le flux de sortie fils\n"
+"%s"
 
 msgid "Cannot run external panelize in a non-local directory"
 msgstr "Impossible d'exécuter le panneau externe dans un répertoire non local"
@@ -4175,16 +4157,20 @@ msgstr ""
 "Fin de fichier inattendue\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Cannot open %s archive\n"
+"%s:\n"
 "%s"
 msgstr ""
 "Ne peut ouvrir l'archive %s\n"
 "%s"
 
-msgid "Inconsistent extfs archive"
-msgstr "Archive extfs incohérente"
+#, fuzzy, c-format
+msgid ""
+"EXTFS virtual file system:\n"
+"%s"
+msgstr "Systèmes des fichiers virtuels :"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4353,6 +4339,12 @@ msgid ""
 msgstr ""
 "Le fichier ~/.netrc n'a pas un mode correct.\n"
 "Enlevez le mot de passe ou corrigez le mode."
+
+#, fuzzy, c-format
+msgid ""
+"SFS virtual file system:\n"
+"%s"
+msgstr "Systèmes des fichiers virtuels :"
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4671,3 +4663,44 @@ msgstr "Continuer à partir du début ?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Impossible de récupérer localement le fichier /ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid "An error occurred while migrating user settings: %s"
+#~ msgstr ""
+#~ "Une erreur est survenue lors de la migration des paramètres utilisateur : "
+#~ "%s"
+
+#, c-format
+#~ msgid ""
+#~ "Your old settings were migrated from %s\n"
+#~ "to Freedesktop recommended dirs.\n"
+#~ "To get more info, please visit\n"
+#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+#~ msgstr ""
+#~ "Vos anciens paramètres ont été migré de %s\n"
+#~ "vers les répertoires recommandés par Freedesktop\n"
+#~ "Pour plus d'informations, veuillez visiter\n"
+#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+
+#, c-format
+#~ msgid ""
+#~ "Your old settings were migrated from %s\n"
+#~ "to %s\n"
+#~ msgstr ""
+#~ "Vos anciens paramètres ont été migrés de %s\n"
+#~ "vers %s\n"
+
+#~ msgid "Dup failed"
+#~ msgstr "Échec système « dup »"
+
+#~ msgid "Error dup'ing old error pipe"
+#~ msgstr "Erreur système « dup » sur l'ancien tube"
+
+#~ msgid "Cannot invoke command."
+#~ msgstr "Ne peut invoquer la commande."
+
+#~ msgid "Pipe close failed"
+#~ msgstr "La fermeture du tube a échoué"
+
+#~ msgid "Inconsistent extfs archive"
+#~ msgstr "Archive extfs incohérente"

@@ -1,7 +1,7 @@
 /*
    Panel layout module for the Midnight Commander
 
-   Copyright (C) 1995-2020
+   Copyright (C) 1995-2021
    Free Software Foundation, Inc.
 
    Written by:
@@ -659,7 +659,7 @@ restore_into_right_dir_panel (int idx, gboolean last_was_panel, int y, int x, in
 
         saved_dir_vpath = vfs_path_from_str (panels[idx].last_saved_dir);
         new_widget = panel_sized_with_dir_new (p_name, y, x, lines, cols, saved_dir_vpath);
-        vfs_path_free (saved_dir_vpath);
+        vfs_path_free (saved_dir_vpath, TRUE);
     }
     else
         new_widget = panel_sized_new (p_name, y, x, lines, cols);
@@ -1041,7 +1041,7 @@ rotate_dash (gboolean show)
     if (show && !mc_time_elapsed (&timestamp, delay))
         return;
 
-    widget_gotoyx (w, menubar_visible != 0 ? 1 : 0, w->cols - 1);
+    widget_gotoyx (w, menubar_visible ? 1 : 0, w->cols - 1);
     tty_setcolor (NORMAL_COLOR);
 
     if (!show)
@@ -1174,7 +1174,7 @@ create_panel (int num, panel_view_mode_t type)
         new_widget = WIDGET (mcview_new (y, x, lines, cols, TRUE));
         the_other_panel = PANEL (panels[the_other].widget);
         if (the_other_panel != NULL)
-            file_name = the_other_panel->dir.list[the_other_panel->selected].fname;
+            file_name = the_other_panel->dir.list[the_other_panel->selected].fname->str;
         else
             file_name = "";
 

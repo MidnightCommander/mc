@@ -2,7 +2,7 @@
    Internal file viewer for the Midnight Commander
    Callback function for some actions (hotkeys, menu)
 
-   Copyright (C) 1994-2020
+   Copyright (C) 1994-2021
    Free Software Foundation, Inc.
 
    Written by:
@@ -67,7 +67,7 @@
 #include "src/history.h"
 #include "src/file_history.h"   /* show_file_history() */
 #include "src/execute.h"
-#include "src/keybind-defaults.h"
+#include "src/keymap.h"
 
 #include "internal.h"
 
@@ -89,7 +89,7 @@ mcview_remove_ext_script (WView * view)
     if (view->ext_script != NULL)
     {
         mc_unlink (view->ext_script);
-        vfs_path_free (view->ext_script);
+        vfs_path_free (view->ext_script, TRUE);
         view->ext_script = NULL;
     }
 }
@@ -211,7 +211,7 @@ mcview_hook (void *v)
 
     mcview_done (view);
     mcview_init (view);
-    mcview_load (view, 0, panel->dir.list[panel->selected].fname, 0, 0, 0);
+    mcview_load (view, 0, panel->dir.list[panel->selected].fname->str, 0, 0, 0);
     mcview_display (view);
 }
 
@@ -321,7 +321,7 @@ mcview_load_next_prev_init (WView * view)
             {
                 const file_entry_t *fe = &view->dir->list[i];
 
-                if (fname_len == fe->fnamelen && strncmp (fname, fe->fname, fname_len) == 0)
+                if (fname_len == fe->fname->len && strncmp (fname, fe->fname->str, fname_len) == 0)
                     break;
             }
 
@@ -374,13 +374,14 @@ mcview_load_next_prev (WView * view, int direction)
     dir_idx = view->dir_idx;
     view->dir = NULL;
     view->dir_idx = NULL;
-    vfile = vfs_path_append_new (view->workdir_vpath, dir->list[*dir_idx].fname, (char *) NULL);
+    vfile =
+        vfs_path_append_new (view->workdir_vpath, dir->list[*dir_idx].fname->str, (char *) NULL);
     mcview_done (view);
     mcview_remove_ext_script (view);
     mcview_init (view);
     if (regex_command_for (view, vfile, "View", &ext_script) == 0)
         mcview_load (view, NULL, vfs_path_as_str (vfile), 0, 0, 0);
-    vfs_path_free (vfile);
+    vfs_path_free (vfile, TRUE);
     view->dir = dir;
     view->dir_idx = dir_idx;
     view->ext_script = ext_script;

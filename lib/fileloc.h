@@ -53,6 +53,8 @@
 
 #define MC_BASHRC_FILE          "bashrc"
 #define MC_ZSHRC_FILE           ".zshrc"
+#define MC_ASHRC_FILE           "ashrc"
+#define MC_INPUTRC_FILE         "inputrc"
 #define MC_CONFIG_FILE          "ini"
 #define MC_FILEBIND_FILE        "mc.ext"
 #define MC_FILEPOS_FILE         "filepos"

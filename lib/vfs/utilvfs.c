@@ -1,7 +1,7 @@
 /*
    Utilities for VFS modules.
 
-   Copyright (C) 1988-2020
+   Copyright (C) 1988-2021
    Free Software Foundation, Inc.
 
    Copyright (C) 1995, 1996 Miguel de Icaza

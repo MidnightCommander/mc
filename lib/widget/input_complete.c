@@ -2,7 +2,7 @@
    Input line filename/username/hostname/variable/command completion.
    (Let mc type for you...)
 
-   Copyright (C) 1995-2020
+   Copyright (C) 1995-2021
    Free Software Foundation, Inc.
 
    Written by:
@@ -168,7 +168,7 @@ filename_completion_function (const char *text, int state, input_complete_t flag
         g_free (dirname);
         g_free (filename);
         g_free (users_dirname);
-        vfs_path_free (dirname_vpath);
+        vfs_path_free (dirname_vpath, TRUE);
 
         if ((*text != '\0') && (temp = strrchr (text, PATH_SEP)) != NULL)
         {
@@ -255,7 +255,7 @@ filename_completion_function (const char *text, int state, input_complete_t flag
                 /* stat failed, strange. not a dir in any case */
                 isdir = FALSE;
             }
-            vfs_path_free (tmp_vpath);
+            vfs_path_free (tmp_vpath, TRUE);
         }
 
         if ((flags & INPUT_COMPLETE_COMMANDS) != 0 && (isexec || isdir))
@@ -274,7 +274,7 @@ filename_completion_function (const char *text, int state, input_complete_t flag
             directory = NULL;
         }
         MC_PTR_FREE (dirname);
-        vfs_path_free (dirname_vpath);
+        vfs_path_free (dirname_vpath, TRUE);
         dirname_vpath = NULL;
         MC_PTR_FREE (filename);
         MC_PTR_FREE (users_dirname);

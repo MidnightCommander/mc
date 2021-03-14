@@ -1,7 +1,7 @@
 /*
    Load and show history of edited and viewed files
 
-   Copyright (C) 2020
+   Copyright (C) 2020-2021
    Free Software Foundation, Inc.
 
    Written by:
@@ -229,7 +229,10 @@ show_file_history (const Widget * w, int *action)
 
     /* Has history cleaned up or not? */
     if (len != g_list_length (hd.list))
+    {
+        hd.list = g_list_reverse (hd.list);
         file_history_list_write (hd.list);
+    }
 
     g_list_free_full (hd.list, (GDestroyNotify) file_history_free_item);
 

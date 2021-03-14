@@ -1,7 +1,7 @@
 /*
    Main program for the Midnight Commander
 
-   Copyright (C) 1994-2020
+   Copyright (C) 1994-2021
    Free Software Foundation, Inc.
 
    Written by:
@@ -70,6 +70,7 @@
 #ifdef ENABLE_SUBSHELL
 #include "subshell/subshell.h"
 #endif
+#include "keymap.h"
 #include "setup.h"              /* load_setup() */
 
 #ifdef HAVE_CHARSET
@@ -339,7 +340,7 @@ main (int argc, char *argv[])
             saved_other_dir = buffer;
         else
             g_free (buffer);
-        vfs_path_free (vpath);
+        vfs_path_free (vpath, TRUE);
     }
 
     /* check terminal type
@@ -381,7 +382,7 @@ main (int argc, char *argv[])
     /* Removing this from the X code let's us type C-c */
     load_key_defs ();
 
-    load_keymap_defs (!mc_args__nokeymap);
+    keymap_load (!mc_args__nokeymap);
 
 #ifdef USE_INTERNAL_EDIT
     macros_list = g_array_new (TRUE, FALSE, sizeof (macros_t));
@@ -460,7 +461,7 @@ main (int argc, char *argv[])
     /* Save the tree store */
     (void) tree_store_save ();
 
-    free_keymap_defs ();
+    keymap_free ();
 
     /* Virtual File System shutdown */
     vfs_shut ();

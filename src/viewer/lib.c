@@ -2,7 +2,7 @@
    Internal file viewer for the Midnight Commander
    Common finctions (used from some other mcviewer functions)
 
-   Copyright (C) 1994-2020
+   Copyright (C) 1994-2021
    Free Software Foundation, Inc.
 
    Written by:
@@ -217,9 +217,9 @@ mcview_done (WView * view)
 
     /* Free memory used by the viewer */
     /* view->widget needs no destructor */
-    vfs_path_free (view->filename_vpath);
+    vfs_path_free (view->filename_vpath, TRUE);
     view->filename_vpath = NULL;
-    vfs_path_free (view->workdir_vpath);
+    vfs_path_free (view->workdir_vpath, TRUE);
     view->workdir_vpath = NULL;
     MC_PTR_FREE (view->command);
 

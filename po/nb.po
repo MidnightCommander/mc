@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-01-10 13:15+0100\n"
+"POT-Creation-Date: 2021-03-14 19:59+0300\n"
 "PO-Revision-Date: 2020-12-31 14:19+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/mc/mc/language/"
@@ -76,30 +76,6 @@ msgstr "Klarte ikke opprette mappa %s"
 
 msgid "FATAL: not a directory:"
 msgstr "FATALT: ikke en mappe:"
-
-#, c-format
-msgid "An error occurred while migrating user settings: %s"
-msgstr "Det oppstod en feil under migrering av brukers oppsett: %s"
-
-#, c-format
-msgid ""
-"Your old settings were migrated from %s\n"
-"to Freedesktop recommended dirs.\n"
-"To get more info, please visit\n"
-"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-msgstr ""
-"Migrerte det gamle oppsettet fra %s\n"
-"til Freedesktops anbefalte mapper.\n"
-"For mer informasjon, se\n"
-"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-
-#, c-format
-msgid ""
-"Your old settings were migrated from %s\n"
-"to %s\n"
-msgstr ""
-"Migrerte det gamle oppsettet fra %s\n"
-"til %s\n"
 
 msgid ""
 "Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
@@ -188,11 +164,11 @@ msgstr ""
 msgid "True color not supported with ncurses."
 msgstr "ncurses støtter ikke 24-biters farge"
 
-msgid "True color not supported in this slang version."
-msgstr "Denne versjonen av S-Lang støtter ikke 24-biters farge."
-
 msgid "Your terminal doesn't even seem to support 256 colors."
 msgstr "Denne terminalen ser ikke ut til å støtte 256 farger."
+
+msgid "True color not supported in this slang version."
+msgstr "Denne versjonen av S-Lang støtter ikke 24-biters farge."
 
 msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
 msgstr ""
@@ -561,18 +537,6 @@ msgid ""
 msgstr ""
 "Uventet feil i waitpid():\n"
 "%s"
-
-msgid "Warning"
-msgstr "Advarsel"
-
-msgid "Pipe failed"
-msgstr "pipe() mislyktes"
-
-msgid "Dup failed"
-msgstr "dup() mislyktes"
-
-msgid "Error dup'ing old error pipe"
-msgstr "Klarte ikke «dup»e gammelt feilrør"
 
 #, c-format
 msgid "Directory cache expired for %s"
@@ -1086,6 +1050,9 @@ msgid ""
 msgstr ""
 "Fila «%s» er for stor.\n"
 "Åpne den likevel?"
+
+msgid "Warning"
+msgstr "Advarsel"
 
 #, c-format
 msgid "Error reading from pipe: %s"
@@ -1678,7 +1645,8 @@ msgstr ""
 "Et brukervennlig skriveprogram\n"
 "skrevet for Midnight Commander."
 
-msgid "Copyright (C) 1996-2020 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2021 the Free Software Foundation"
 msgstr "Opphavsrett (C) 1996-2020 the Free Software Foundation"
 
 msgid "About"
@@ -2578,6 +2546,9 @@ msgstr ""
 "Klarte ikke opprette midlertidig kommandofil\n"
 "%s"
 
+msgid "Pipe failed"
+msgstr "pipe() mislyktes"
+
 #, c-format
 msgid " %s%s file error"
 msgstr "Feil i fila %s%s "
@@ -3348,6 +3319,10 @@ msgstr "Filnavn:"
 msgid "&Find recursively"
 msgstr "Søk i alle &undermapper"
 
+#, fuzzy
+msgid "Follow s&ymlinks"
+msgstr "Følg &lenker"
+
 msgid "S&kip hidden"
 msgstr "Hopp over &skjulte"
 
@@ -3786,11 +3761,20 @@ msgstr "Ny kommando"
 msgid "Enter command label:"
 msgstr "Angi kommandoetikett:"
 
-msgid "Cannot invoke command."
-msgstr "Klarte ikke kalle kommando."
+#, fuzzy, c-format
+msgid ""
+"External panelize:\n"
+"%s"
+msgstr "Legg til eksternt i panel"
 
-msgid "Pipe close failed"
-msgstr "Klarte ikke lukke rør"
+#, fuzzy, c-format
+msgid ""
+"External panelize:\n"
+"failed to read data from child stdout:\n"
+"%s"
+msgstr ""
+"Klarte ikke lese data fra barnets stdout:\n"
+"%s"
 
 msgid "Cannot run external panelize in a non-local directory"
 msgstr "Kan ikke kjøre «Legg til eksternt i panel» i ikke-lokal mappe"
@@ -4180,16 +4164,20 @@ msgstr ""
 "Uventet slutt på fil\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Cannot open %s archive\n"
+"%s:\n"
 "%s"
 msgstr ""
 "Klarte ikke åpne arkivet %s \n"
 "%s"
 
-msgid "Inconsistent extfs archive"
-msgstr "Inkonsistent extfs-arkiv"
+#, fuzzy, c-format
+msgid ""
+"EXTFS virtual file system:\n"
+"%s"
+msgstr "Virtuelle filsystem:"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4356,6 +4344,12 @@ msgid ""
 msgstr ""
 "~/.netrc har ugyldige rettigheter\n"
 "Fjern passordet eller fiks rettighetene"
+
+#, fuzzy, c-format
+msgid ""
+"SFS virtual file system:\n"
+"%s"
+msgstr "Virtuelle filsystem:"
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4673,3 +4667,42 @@ msgstr "Fortsett fra begynnelsen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Klarte ikke hente en lokal kopi av /ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid "An error occurred while migrating user settings: %s"
+#~ msgstr "Det oppstod en feil under migrering av brukers oppsett: %s"
+
+#, c-format
+#~ msgid ""
+#~ "Your old settings were migrated from %s\n"
+#~ "to Freedesktop recommended dirs.\n"
+#~ "To get more info, please visit\n"
+#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+#~ msgstr ""
+#~ "Migrerte det gamle oppsettet fra %s\n"
+#~ "til Freedesktops anbefalte mapper.\n"
+#~ "For mer informasjon, se\n"
+#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+
+#, c-format
+#~ msgid ""
+#~ "Your old settings were migrated from %s\n"
+#~ "to %s\n"
+#~ msgstr ""
+#~ "Migrerte det gamle oppsettet fra %s\n"
+#~ "til %s\n"
+
+#~ msgid "Dup failed"
+#~ msgstr "dup() mislyktes"
+
+#~ msgid "Error dup'ing old error pipe"
+#~ msgstr "Klarte ikke «dup»e gammelt feilrør"
+
+#~ msgid "Cannot invoke command."
+#~ msgstr "Klarte ikke kalle kommando."
+
+#~ msgid "Pipe close failed"
+#~ msgstr "Klarte ikke lukke rør"
+
+#~ msgid "Inconsistent extfs archive"
+#~ msgstr "Inkonsistent extfs-arkiv"

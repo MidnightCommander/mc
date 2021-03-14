@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-01-10 13:15+0100\n"
+"POT-Creation-Date: 2021-03-14 19:59+0300\n"
 "PO-Revision-Date: 2020-12-31 14:19+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Korean (http://www.transifex.com/mc/mc/language/ko/)\n"
@@ -77,30 +77,6 @@ msgstr "%s 디렉터리을 만들 수 없음"
 
 msgid "FATAL: not a directory:"
 msgstr "치명적인 오류: 디렉터리가 아님:"
-
-#, c-format
-msgid "An error occurred while migrating user settings: %s"
-msgstr "사용자 설정을 이전하는 동안 오류가 발생함: %s"
-
-#, c-format
-msgid ""
-"Your old settings were migrated from %s\n"
-"to Freedesktop recommended dirs.\n"
-"To get more info, please visit\n"
-"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-msgstr ""
-"이전 설정이 %s에서 이전됨\n"
-"Freedesktop 추천 디렉토리.\n"
-"자세한 내용은 다음 웹 사이트를 참조하십시오.\n"
-"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-
-#, c-format
-msgid ""
-"Your old settings were migrated from %s\n"
-"to %s\n"
-msgstr ""
-"기존 설정이 %s에서\n"
-"%s로 이전됨\n"
 
 msgid ""
 "Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
@@ -188,11 +164,11 @@ msgstr ""
 msgid "True color not supported with ncurses."
 msgstr "트루 컬러는 ncurses에서 지원 되지 않습니다."
 
-msgid "True color not supported in this slang version."
-msgstr "트루 컬러는 이 속어 버전에서 지원되지 않습니다."
-
 msgid "Your terminal doesn't even seem to support 256 colors."
 msgstr "터미널이 256색상을 지원하지 않는 것 같습니다."
+
+msgid "True color not supported in this slang version."
+msgstr "트루 컬러는 이 속어 버전에서 지원되지 않습니다."
 
 msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
 msgstr "터미널이 트루 컬러를 지원하는 경우, COLORTERM=truecolor로 설정."
@@ -560,18 +536,6 @@ msgid ""
 msgstr ""
 "Waitpid()에서 예상치 못한 오류가 발생:\n"
 "%s"
-
-msgid "Warning"
-msgstr "경고"
-
-msgid "Pipe failed"
-msgstr "파이프 실패"
-
-msgid "Dup failed"
-msgstr "복제 실패"
-
-msgid "Error dup'ing old error pipe"
-msgstr "이전 오류 파이프를 중복하는 동안 오류 발생"
 
 #, c-format
 msgid "Directory cache expired for %s"
@@ -1079,6 +1043,9 @@ msgid ""
 msgstr ""
 "\"%s\" 파일이 너무 큽니다.\n"
 "그래도 여시겠습니까?"
+
+msgid "Warning"
+msgstr "경고"
 
 #, c-format
 msgid "Error reading from pipe: %s"
@@ -1669,7 +1636,8 @@ msgstr ""
 "사용자 친화적인 텍스트 편집기\n"
 "미드나잇 커맨더를 위해 작성됨."
 
-msgid "Copyright (C) 1996-2020 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2021 the Free Software Foundation"
 msgstr "Copyright (C) 1996-2020 the Free Software Foundation"
 
 msgid "About"
@@ -2568,6 +2536,9 @@ msgstr ""
 "임시 명령 파일을 생성할 수 없음\n"
 "%s"
 
+msgid "Pipe failed"
+msgstr "파이프 실패"
+
 #, c-format
 msgid " %s%s file error"
 msgstr " %s%s 파일 오류"
@@ -3337,6 +3308,10 @@ msgstr "파일 이름:"
 msgid "&Find recursively"
 msgstr "반복적으로 찾기(&F)"
 
+#, fuzzy
+msgid "Follow s&ymlinks"
+msgstr "링크 따라가기(&L)"
+
 msgid "S&kip hidden"
 msgstr "건너뛰기 숨기기(&K)"
 
@@ -3772,11 +3747,20 @@ msgstr "기타 패널 크기조정에 추가"
 msgid "Enter command label:"
 msgstr "명령어 레이블 입력:"
 
-msgid "Cannot invoke command."
-msgstr "명령을 호출할 수 없음."
+#, fuzzy, c-format
+msgid ""
+"External panelize:\n"
+"%s"
+msgstr "기타 패널 크기조정"
 
-msgid "Pipe close failed"
-msgstr "파이프 닫기 실패"
+#, fuzzy, c-format
+msgid ""
+"External panelize:\n"
+"failed to read data from child stdout:\n"
+"%s"
+msgstr ""
+"하위 프로세스의 표준 출력에서 ​​데이터를 읽을 수 없음:\n"
+"%s"
 
 msgid "Cannot run external panelize in a non-local directory"
 msgstr "로컬이 아닌 디렉토리에서 기타 패널 크기조정을 실행할 수 없음"
@@ -4167,16 +4151,20 @@ msgstr ""
 "%s\n"
 "파일의 예기치 않은 끝"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Cannot open %s archive\n"
+"%s:\n"
 "%s"
 msgstr ""
 "%s 압축파일을 열 수 없음\n"
 "%s"
 
-msgid "Inconsistent extfs archive"
-msgstr "불완전한 extfs 압축파일"
+#, fuzzy, c-format
+msgid ""
+"EXTFS virtual file system:\n"
+"%s"
+msgstr "가상 파일 시스템:"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4343,6 +4331,12 @@ msgid ""
 msgstr ""
 "~/.netrc 파일의 모드가 잘못됨\n"
 "비밀번호 또는 올바른 권한 제거"
+
+#, fuzzy, c-format
+msgid ""
+"SFS virtual file system:\n"
+"%s"
+msgstr "가상 파일 시스템:"
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4660,3 +4654,42 @@ msgstr "처음부터 계속하시겠습니까?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "/ftp://some.host/editme.txt의 로컬 복사본을 가져올 수 없음"
+
+#, c-format
+#~ msgid "An error occurred while migrating user settings: %s"
+#~ msgstr "사용자 설정을 이전하는 동안 오류가 발생함: %s"
+
+#, c-format
+#~ msgid ""
+#~ "Your old settings were migrated from %s\n"
+#~ "to Freedesktop recommended dirs.\n"
+#~ "To get more info, please visit\n"
+#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+#~ msgstr ""
+#~ "이전 설정이 %s에서 이전됨\n"
+#~ "Freedesktop 추천 디렉토리.\n"
+#~ "자세한 내용은 다음 웹 사이트를 참조하십시오.\n"
+#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+
+#, c-format
+#~ msgid ""
+#~ "Your old settings were migrated from %s\n"
+#~ "to %s\n"
+#~ msgstr ""
+#~ "기존 설정이 %s에서\n"
+#~ "%s로 이전됨\n"
+
+#~ msgid "Dup failed"
+#~ msgstr "복제 실패"
+
+#~ msgid "Error dup'ing old error pipe"
+#~ msgstr "이전 오류 파이프를 중복하는 동안 오류 발생"
+
+#~ msgid "Cannot invoke command."
+#~ msgstr "명령을 호출할 수 없음."
+
+#~ msgid "Pipe close failed"
+#~ msgstr "파이프 닫기 실패"
+
+#~ msgid "Inconsistent extfs archive"
+#~ msgstr "불완전한 extfs 압축파일"

@@ -1,7 +1,7 @@
 /*
    Widget group features module for the Midnight Commander
 
-   Copyright (C) 2020
+   Copyright (C) 2020-2021
    The Free Software Foundation, Inc.
 
    Written by:
@@ -579,6 +579,7 @@ group_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
     case MSG_DESTROY:
         g_list_foreach (g->widgets, (GFunc) widget_destroy, NULL);
         g_list_free (g->widgets);
+        g->widgets = NULL;
         return MSG_HANDLED;
 
     default:

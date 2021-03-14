@@ -1,7 +1,7 @@
 /*
    Virtual File System: External file system.
 
-   Copyright (C) 1995-2020
+   Copyright (C) 1995-2021
    Free Software Foundation, Inc.
 
    Written by:
@@ -364,8 +364,8 @@ extfs_free_archive (struct vfs_class *me, struct vfs_s_super *psup)
         mc_stat (local_name_vpath, &my);
         mc_ungetlocalcopy (name_vpath, local_name_vpath,
                            archive->local_stat.st_mtime != my.st_mtime);
-        vfs_path_free (local_name_vpath);
-        vfs_path_free (name_vpath);
+        vfs_path_free (local_name_vpath, TRUE);
+        vfs_path_free (name_vpath, TRUE);
         g_free (archive->local_name);
     }
 }
@@ -556,14 +556,14 @@ extfs_open_archive (int fstype, const char *name, struct extfs_super_t **pparc, 
         if (local_name_vpath != NULL)
         {
             mc_ungetlocalcopy (name_vpath, local_name_vpath, FALSE);
-            vfs_path_free (local_name_vpath);
+            vfs_path_free (local_name_vpath, TRUE);
         }
         goto ret;
     }
 
     current_archive = extfs_super_new (vfs_extfs_ops, name, local_name_vpath, fstype);
     current_archive->rdev = archive_counter++;
-    vfs_path_free (local_name_vpath);
+    vfs_path_free (local_name_vpath, TRUE);
 
     mode = mystat.st_mode & 07777;
     if (mode & 0400)
@@ -586,7 +586,7 @@ extfs_open_archive (int fstype, const char *name, struct extfs_super_t **pparc, 
     *pparc = current_archive;
 
   ret:
-    vfs_path_free (name_vpath);
+    vfs_path_free (name_vpath, TRUE);
     return result;
 }
 
@@ -900,7 +900,7 @@ extfs_get_archive_name (const struct extfs_super_t *archive)
         vpath = vfs_path_from_str (archive_name);
         path_element = vfs_path_get_by_index (vpath, -1);
         ret_str = g_strdup (path_element->path);
-        vfs_path_free (vpath);
+        vfs_path_free (vpath, TRUE);
         return ret_str;
     }
 }
@@ -1042,12 +1042,12 @@ extfs_open (const vfs_path_t * vpath, int flags, mode_t mode)
             && extfs_cmd (" copyout ", archive, entry, local_filename))
         {
             unlink (local_filename);
-            vfs_path_free (local_filename_vpath);
+            vfs_path_free (local_filename_vpath, TRUE);
             my_errno = EIO;
             return NULL;
         }
         entry->ino->localname = g_strdup (local_filename);
-        vfs_path_free (local_filename_vpath);
+        vfs_path_free (local_filename_vpath, TRUE);
     }
 
     local_handle = open (entry->ino->localname, NO_LINEAR (flags), mode);

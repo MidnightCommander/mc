@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-01-10 13:15+0100\n"
+"POT-Creation-Date: 2021-03-14 19:59+0300\n"
 "PO-Revision-Date: 2020-12-31 14:19+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Dutch (http://www.transifex.com/mc/mc/language/nl/)\n"
@@ -77,31 +77,6 @@ msgstr "Aanmaken van map %s mislukt"
 
 msgid "FATAL: not a directory:"
 msgstr "FATAAL: geen directory:"
-
-#, c-format
-msgid "An error occurred while migrating user settings: %s"
-msgstr ""
-"Er trad een fout op tijdens de migratie van de gebruikersinstellingen: %s"
-
-#, c-format
-msgid ""
-"Your old settings were migrated from %s\n"
-"to Freedesktop recommended dirs.\n"
-"To get more info, please visit\n"
-"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-msgstr ""
-"Uw oude instellingen zijn gemigreerd van %s\n"
-"naar de door Freedesktop aangeraden mappen.\n"
-"Voor meer info, zie\n"
-"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-
-#, c-format
-msgid ""
-"Your old settings were migrated from %s\n"
-"to %s\n"
-msgstr ""
-"Uw oude instellingen zijn gemigreerd van %s\n"
-"naar %s\n"
 
 msgid ""
 "Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
@@ -191,11 +166,11 @@ msgstr ""
 msgid "True color not supported with ncurses."
 msgstr "True color wordt in ncurses niet ondersteund."
 
-msgid "True color not supported in this slang version."
-msgstr "True color wordt in deze dialectversie niet ondersteund."
-
 msgid "Your terminal doesn't even seem to support 256 colors."
 msgstr "Je terminal lijkt 256-kleuren niet eens te ondersteunen. "
+
+msgid "True color not supported in this slang version."
+msgstr "True color wordt in deze dialectversie niet ondersteund."
 
 msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
 msgstr ""
@@ -565,18 +540,6 @@ msgid ""
 msgstr ""
 "Onverwachte fout in waitpid():\n"
 "%s"
-
-msgid "Warning"
-msgstr "Waarschuwing"
-
-msgid "Pipe failed"
-msgstr "Pijp mislukt"
-
-msgid "Dup failed"
-msgstr "Dup mislukt"
-
-msgid "Error dup'ing old error pipe"
-msgstr "Fout bij het dup'ing van de oude pipe error"
 
 #, c-format
 msgid "Directory cache expired for %s"
@@ -1083,6 +1046,9 @@ msgid ""
 msgstr ""
 "Bestand \"%s\" is te groot.\n"
 "Toch openen?"
+
+msgid "Warning"
+msgstr "Waarschuwing"
 
 #, c-format
 msgid "Error reading from pipe: %s"
@@ -1671,7 +1637,8 @@ msgstr ""
 "Een gebruikersvriendelijke tekstbewerker\n"
 "geschreven voor de Midnight Commander"
 
-msgid "Copyright (C) 1996-2020 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2021 the Free Software Foundation"
 msgstr "Copyright (C) 1996-2020 the Free Software Foundation"
 
 msgid "About"
@@ -2572,6 +2539,9 @@ msgstr ""
 "Kan geen tijdelijk opdrachtbestand maken \n"
 "%s "
 
+msgid "Pipe failed"
+msgstr "Pijp mislukt"
+
 #, c-format
 msgid " %s%s file error"
 msgstr " %s%s bestandsfout "
@@ -3344,6 +3314,10 @@ msgstr "Bestandsnaam:"
 msgid "&Find recursively"
 msgstr "&Vind recursief"
 
+#, fuzzy
+msgid "Follow s&ymlinks"
+msgstr "&Linken volgen"
+
 msgid "S&kip hidden"
 msgstr "S&la verborgen over"
 
@@ -3783,11 +3757,20 @@ msgstr "Toevoegen aan extern venster "
 msgid "Enter command label:"
 msgstr "Geef opdrachtlabel: "
 
-msgid "Cannot invoke command."
-msgstr "Opdracht oproepen mislukt."
+#, fuzzy, c-format
+msgid ""
+"External panelize:\n"
+"%s"
+msgstr "Plaatsen in extern venster"
 
-msgid "Pipe close failed"
-msgstr "Sluiten van pipe mislukt"
+#, fuzzy, c-format
+msgid ""
+"External panelize:\n"
+"failed to read data from child stdout:\n"
+"%s"
+msgstr ""
+"Kon geen data lezen van child stdout:\n"
+"%s"
 
 msgid "Cannot run external panelize in a non-local directory"
 msgstr "Uitvoeren extern venster is niet mogelijk in een niet-lokale map"
@@ -4180,16 +4163,20 @@ msgstr ""
 "Onverwacht einde van bestand in\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Cannot open %s archive\n"
+"%s:\n"
 "%s"
 msgstr ""
 "Kan archief %s niet openen\n"
 "%s"
 
-msgid "Inconsistent extfs archive"
-msgstr "Inconsistent extfs-archief"
+#, fuzzy, c-format
+msgid ""
+"EXTFS virtual file system:\n"
+"%s"
+msgstr "Virtuele bestandssystemen (VFS):"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4357,6 +4344,12 @@ msgid ""
 msgstr ""
 "~/. netrc bestand heeft verkeerde modus. Verwijder wachtwoord of corrigeer "
 "de modus"
+
+#, fuzzy, c-format
+msgid ""
+"SFS virtual file system:\n"
+"%s"
+msgstr "Virtuele bestandssystemen (VFS):"
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4664,3 +4657,43 @@ msgstr "Doorgaan vanaf het begin?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan geen lokale versie van /ftp://some.host/editme.txt ophalen"
+
+#, c-format
+#~ msgid "An error occurred while migrating user settings: %s"
+#~ msgstr ""
+#~ "Er trad een fout op tijdens de migratie van de gebruikersinstellingen: %s"
+
+#, c-format
+#~ msgid ""
+#~ "Your old settings were migrated from %s\n"
+#~ "to Freedesktop recommended dirs.\n"
+#~ "To get more info, please visit\n"
+#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+#~ msgstr ""
+#~ "Uw oude instellingen zijn gemigreerd van %s\n"
+#~ "naar de door Freedesktop aangeraden mappen.\n"
+#~ "Voor meer info, zie\n"
+#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+
+#, c-format
+#~ msgid ""
+#~ "Your old settings were migrated from %s\n"
+#~ "to %s\n"
+#~ msgstr ""
+#~ "Uw oude instellingen zijn gemigreerd van %s\n"
+#~ "naar %s\n"
+
+#~ msgid "Dup failed"
+#~ msgstr "Dup mislukt"
+
+#~ msgid "Error dup'ing old error pipe"
+#~ msgstr "Fout bij het dup'ing van de oude pipe error"
+
+#~ msgid "Cannot invoke command."
+#~ msgstr "Opdracht oproepen mislukt."
+
+#~ msgid "Pipe close failed"
+#~ msgstr "Sluiten van pipe mislukt"
+
+#~ msgid "Inconsistent extfs archive"
+#~ msgstr "Inconsistent extfs-archief"

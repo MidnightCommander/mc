@@ -1,7 +1,7 @@
 /*
    src - tests for execute_external_editor_or_viewer() function
 
-   Copyright (C) 2013-2020
+   Copyright (C) 2013-2021
    Free Software Foundation, Inc.
 
    Written by:
@@ -32,7 +32,8 @@
 /* --------------------------------------------------------------------------------------------- */
 
 char *execute_get_external_cmd_opts_from_config (const char *command,
-                                                 const vfs_path_t * filename_vpath, int start_line);
+                                                 const vfs_path_t * filename_vpath,
+                                                 long start_line);
 
 /* @CapturedValue */
 static char *execute_external_cmd_opts__command__captured;
@@ -47,7 +48,7 @@ static char *execute_external_cmd_opts__return_value;
 /* @Mock */
 char *
 execute_get_external_cmd_opts_from_config (const char *command, const vfs_path_t * filename_vpath,
-                                           int start_line)
+                                           long start_line)
 {
     execute_external_cmd_opts__command__captured = g_strdup (command);
     execute_external_cmd_opts__filename_vpath__captured = vfs_path_clone (filename_vpath);
@@ -68,7 +69,7 @@ static void
 execute_get_external_cmd_opts_from_config__deinit (void)
 {
     g_free (execute_external_cmd_opts__command__captured);
-    vfs_path_free (execute_external_cmd_opts__filename_vpath__captured);
+    vfs_path_free (execute_external_cmd_opts__filename_vpath__captured, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -174,7 +175,7 @@ START_TEST (do_open_external_editor_or_viewer)
     mctest_assert_str_eq (g_ptr_array_index (do_executev__argv__captured, 5), "/path/to/file.txt");
     mctest_assert_str_eq (g_ptr_array_index (do_executev__argv__captured, 6), "+123");
 
-    vfs_path_free (filename_vpath);
+    vfs_path_free (filename_vpath, TRUE);
 }
 /* *INDENT-OFF* */
 END_TEST

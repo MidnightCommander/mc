@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-01-10 13:15+0100\n"
+"POT-Creation-Date: 2021-03-14 19:59+0300\n"
 "PO-Revision-Date: 2020-12-31 14:19+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Belarusian (http://www.transifex.com/mc/mc/language/be/)\n"
@@ -81,31 +81,6 @@ msgstr "Нельга стварыць каталог «%s»"
 
 msgid "FATAL: not a directory:"
 msgstr "ХІБА: не з’яўляецца каталогам:"
-
-#, c-format
-msgid "An error occurred while migrating user settings: %s"
-msgstr "Падчас пераносу налад карыстальніка адбылася памылка: %s"
-
-#, c-format
-msgid ""
-"Your old settings were migrated from %s\n"
-"to Freedesktop recommended dirs.\n"
-"To get more info, please visit\n"
-"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-msgstr ""
-"Старыя налады перанесеныя з «%s»\n"
-" у каталогі, якія раіць «Freedesktop».\n"
-"Па падрабязнасці завітайце сюды:\n"
-"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-
-#, c-format
-msgid ""
-"Your old settings were migrated from %s\n"
-"to %s\n"
-msgstr ""
-"Старыя налады перанесеныя з\n"
-"«%s»\n"
-"у «%s»\n"
 
 msgid ""
 "Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
@@ -196,11 +171,11 @@ msgstr ""
 msgid "True color not supported with ncurses."
 msgstr "Колер не падтрымліваецца ncurses."
 
-msgid "True color not supported in this slang version."
-msgstr "Сапраўдны колер не падтрымліваецца ў гэтай версіі slang."
-
 msgid "Your terminal doesn't even seem to support 256 colors."
 msgstr "Здаецца, ваш тэрмінал не падтрымлівае 256 колераў."
+
+msgid "True color not supported in this slang version."
+msgstr "Сапраўдны колер не падтрымліваецца ў гэтай версіі slang."
 
 msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
 msgstr ""
@@ -570,18 +545,6 @@ msgid ""
 msgstr ""
 "Нечакана адбылася памылка ў waitpid():\n"
 "%s"
-
-msgid "Warning"
-msgstr "Увага"
-
-msgid "Pipe failed"
-msgstr "Хібны канал"
-
-msgid "Dup failed"
-msgstr "Не атрымалася падвоіць"
-
-msgid "Error dup'ing old error pipe"
-msgstr "Не атрымалася падвоіць стары канал памылак"
 
 #, c-format
 msgid "Directory cache expired for %s"
@@ -1091,6 +1054,9 @@ msgid ""
 msgstr ""
 "Файл \"%s\" — завялікі.\n"
 "Адкрыць яго?"
+
+msgid "Warning"
+msgstr "Увага"
 
 #, c-format
 msgid "Error reading from pipe: %s"
@@ -1679,7 +1645,8 @@ msgstr ""
 "Зручны тэкставы рэдактар,\n"
 "напісаны для Midnight Commander."
 
-msgid "Copyright (C) 1996-2020 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2021 the Free Software Foundation"
 msgstr "Copyright (C) 1996-2020 the Free Software Foundation"
 
 msgid "About"
@@ -2573,6 +2540,9 @@ msgstr ""
 "Немагчыма стварыць часовы загадны файл\n"
 "%s"
 
+msgid "Pipe failed"
+msgstr "Хібны канал"
+
 #, c-format
 msgid " %s%s file error"
 msgstr " Памылка ў файле %s%s"
@@ -3343,6 +3313,10 @@ msgstr "Назва файла:"
 msgid "&Find recursively"
 msgstr "Шукаць у падкаталогах(&F)"
 
+#, fuzzy
+msgid "Follow s&ymlinks"
+msgstr "Выкарыстоўваць спасылкі(&L)"
+
 msgid "S&kip hidden"
 msgstr "Мінаць схаваныя(&K)"
 
@@ -3787,11 +3761,20 @@ msgstr "Дадаць да загадаў"
 msgid "Enter command label:"
 msgstr "Увядзіце назву загада:"
 
-msgid "Cannot invoke command."
-msgstr "Немагчыма выканаць загад."
+#, fuzzy, c-format
+msgid ""
+"External panelize:\n"
+"%s"
+msgstr "Загад на вонкавую панэль"
 
-msgid "Pipe close failed"
-msgstr "Памылка падчас закрыцця канала"
+#, fuzzy, c-format
+msgid ""
+"External panelize:\n"
+"failed to read data from child stdout:\n"
+"%s"
+msgstr ""
+"Не атрымалася прачытаць даныя з нашчадка stdout:\n"
+"%s"
 
 msgid "Cannot run external panelize in a non-local directory"
 msgstr "Немагчыма запусціць загад у адлеглым каталозе"
@@ -4182,16 +4165,20 @@ msgstr ""
 "Нечаканы канец файла\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Cannot open %s archive\n"
+"%s:\n"
 "%s"
 msgstr ""
 "Немагчыма адкрыць архіў «%s»\n"
 "%s"
 
-msgid "Inconsistent extfs archive"
-msgstr "Несумяшчальны архіў extfs"
+#, fuzzy, c-format
+msgid ""
+"EXTFS virtual file system:\n"
+"%s"
+msgstr "Віртуальныя файлавыя сістэмы:"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4358,6 +4345,12 @@ msgid ""
 msgstr ""
 "У файла «~/.netrc» няправільныя дазволы (ўласнік).\n"
 "Выдаліце пароль або выпраўце дазволы (ўласніка)"
+
+#, fuzzy, c-format
+msgid ""
+"SFS virtual file system:\n"
+"%s"
+msgstr "Віртуальныя файлавыя сістэмы:"
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4675,3 +4668,43 @@ msgstr "Працягваць ад пачатку?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Немагчыма атрымаць лакальную копію /ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid "An error occurred while migrating user settings: %s"
+#~ msgstr "Падчас пераносу налад карыстальніка адбылася памылка: %s"
+
+#, c-format
+#~ msgid ""
+#~ "Your old settings were migrated from %s\n"
+#~ "to Freedesktop recommended dirs.\n"
+#~ "To get more info, please visit\n"
+#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+#~ msgstr ""
+#~ "Старыя налады перанесеныя з «%s»\n"
+#~ " у каталогі, якія раіць «Freedesktop».\n"
+#~ "Па падрабязнасці завітайце сюды:\n"
+#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+
+#, c-format
+#~ msgid ""
+#~ "Your old settings were migrated from %s\n"
+#~ "to %s\n"
+#~ msgstr ""
+#~ "Старыя налады перанесеныя з\n"
+#~ "«%s»\n"
+#~ "у «%s»\n"
+
+#~ msgid "Dup failed"
+#~ msgstr "Не атрымалася падвоіць"
+
+#~ msgid "Error dup'ing old error pipe"
+#~ msgstr "Не атрымалася падвоіць стары канал памылак"
+
+#~ msgid "Cannot invoke command."
+#~ msgstr "Немагчыма выканаць загад."
+
+#~ msgid "Pipe close failed"
+#~ msgstr "Памылка падчас закрыцця канала"
+
+#~ msgid "Inconsistent extfs archive"
+#~ msgstr "Несумяшчальны архіў extfs"

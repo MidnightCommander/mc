@@ -1,7 +1,7 @@
 /*
    Extension dependent execution.
 
-   Copyright (C) 1994-2020
+   Copyright (C) 1994-2021
    Free Software Foundation, Inc.
 
    Written by:
@@ -110,7 +110,7 @@ exec_cleanup_script (vfs_path_t * script_vpath)
     if (script_vpath != NULL)
     {
         (void) mc_unlink (script_vpath);
-        vfs_path_free (script_vpath);
+        vfs_path_free (script_vpath, TRUE);
     }
 }
 
@@ -130,7 +130,7 @@ exec_cleanup_file_name (const vfs_path_t * filename_vpath, gboolean has_changed)
         has_changed = localmtime != mystat.st_mtime;
     }
     mc_ungetlocalcopy (filename_vpath, localfilecopy_vpath, has_changed);
-    vfs_path_free (localfilecopy_vpath);
+    vfs_path_free (localfilecopy_vpath, TRUE);
     localfilecopy_vpath = NULL;
 }
 
@@ -408,7 +408,7 @@ exec_extension_cd (WPanel * panel)
 
     p_vpath = vfs_path_from_str_flags (pbuffer, VPF_NO_CANON);
     panel_cd (panel, p_vpath, cd_parse_command);
-    vfs_path_free (p_vpath);
+    vfs_path_free (p_vpath, TRUE);
 }
 
 
@@ -721,7 +721,7 @@ regex_check_type (const vfs_path_t * filename_vpath, const char *ptr, gboolean c
             /* No data */
             content_string[0] = '\0';
         }
-        vfs_path_free (localfile_vpath);
+        vfs_path_free (localfile_vpath, TRUE);
     }
 
     if (got_data == -1)

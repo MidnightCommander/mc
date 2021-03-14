@@ -348,20 +348,6 @@ enum
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
-typedef struct name_keymap_t
-{
-    const char *name;
-    long val;
-} name_keymap_t;
-
-typedef struct key_config_t
-{
-    time_t mtime;               /* mtime at the moment we read config file */
-    GArray *keymap;
-    GArray *ext_keymap;
-    gchar *labels[10];
-} key_config_t;
-
 /* The global keymaps are of this type */
 typedef struct global_keymap_t
 {

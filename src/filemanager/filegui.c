@@ -10,7 +10,7 @@
    Janne Kukonlehto added much error recovery to them for being used
    in an interactive program.
 
-   Copyright (C) 1994-2020
+   Copyright (C) 1994-2021
    Free Software Foundation, Inc.
 
    Written by:
@@ -522,7 +522,7 @@ overwrite_query_dialog (file_op_context_t * ctx, enum OperationMode mode)
     p = vfs_path_from_str (ui->src_filename);
     s1 = vfs_path_to_str_flags (p, 0, VPF_STRIP_HOME | VPF_STRIP_PASSWORD);
     NEW_LABEL (1, s1);
-    vfs_path_free (p);
+    vfs_path_free (p, TRUE);
     g_free (s1);
     /* new file size */
     size_trunc_len (s2, sizeof (s2), ui->src_stat->st_size, 0, panels_options.kilobyte_si);
@@ -537,7 +537,7 @@ overwrite_query_dialog (file_op_context_t * ctx, enum OperationMode mode)
     p = vfs_path_from_str (ui->tgt_filename);
     s1 = vfs_path_to_str_flags (p, 0, VPF_STRIP_HOME | VPF_STRIP_PASSWORD);
     NEW_LABEL (5, s1);
-    vfs_path_free (p);
+    vfs_path_free (p, TRUE);
     g_free (s1);
     /* existing file size */
     size_trunc_len (s2, sizeof (s2), ui->dst_stat->st_size, 0, panels_options.kilobyte_si);
@@ -1291,7 +1291,7 @@ file_mask_dialog (file_op_context_t * ctx, FileOperation operation,
     /* filter out a possible password from def_text */
     vpath = vfs_path_from_str_flags (def_text, only_one ? VPF_NO_CANON : VPF_NONE);
     tmp = vfs_path_to_str_flags (vpath, 0, VPF_STRIP_PASSWORD);
-    vfs_path_free (vpath);
+    vfs_path_free (vpath, TRUE);
 
     if (source_easy_patterns)
         def_text_secure = strutils_glob_escape (tmp);
@@ -1456,7 +1456,7 @@ file_mask_dialog (file_op_context_t * ctx, FileOperation operation,
             dest_dir = g_strdup ("./");
         }
 
-        vfs_path_free (vpath);
+        vfs_path_free (vpath, TRUE);
 
         if (val == B_USER)
             *do_bg = TRUE;

@@ -1,7 +1,7 @@
 /*
    Main dialog (file panels) of the Midnight Commander
 
-   Copyright (C) 1994-2020
+   Copyright (C) 1994-2021
    Free Software Foundation, Inc.
 
    Written by:
@@ -61,7 +61,7 @@
 #include "src/execute.h"        /* toggle_subshell */
 #include "src/setup.h"          /* variables */
 #include "src/learn.h"          /* learn_keys() */
-#include "src/keybind-defaults.h"
+#include "src/keymap.h"
 #include "lib/fileloc.h"        /* MC_FILEPOS_FILE */
 #include "lib/keybind.h"
 #include "lib/event.h"
@@ -148,14 +148,14 @@ treebox_cmd (void)
 {
     char *sel_dir;
 
-    sel_dir = tree_box (selection (current_panel)->fname);
+    sel_dir = tree_box (selection (current_panel)->fname->str);
     if (sel_dir != NULL)
     {
         vfs_path_t *sel_vdir;
 
         sel_vdir = vfs_path_from_str (sel_dir);
         panel_cd (current_panel, sel_vdir, cd_exact);
-        vfs_path_free (sel_vdir);
+        vfs_path_free (sel_vdir, TRUE);
         g_free (sel_dir);
     }
 }
@@ -663,7 +663,7 @@ create_panels (void)
         else
             vpath = vfs_path_append_new (original_dir, other_dir, (char *) NULL);
         mc_chdir (vpath);
-        vfs_path_free (vpath);
+        vfs_path_free (vpath, TRUE);
     }
     create_panel (other_index, other_mode);
 
@@ -679,7 +679,7 @@ create_panels (void)
         else
             vpath = vfs_path_append_new (original_dir, current_dir, (char *) NULL);
         mc_chdir (vpath);
-        vfs_path_free (vpath);
+        vfs_path_free (vpath, TRUE);
     }
     create_panel (current_index, current_mode);
 
@@ -690,7 +690,7 @@ create_panels (void)
     else
         current_panel = left_panel;
 
-    vfs_path_free (original_dir);
+    vfs_path_free (original_dir, TRUE);
 
 #ifdef ENABLE_VFS
     mc_event_add (MCEVENT_GROUP_CORE, "vfs_timestamp", check_other_panel_timestamp, NULL, NULL);
@@ -724,7 +724,7 @@ midnight_put_panel_path (WPanel * panel)
     if (!IS_PATH_SEP (cwd_vpath_str[strlen (cwd_vpath_str) - 1]))
         command_insert (cmdline, PATH_SEP_STR, FALSE);
 
-    vfs_path_free (cwd_vpath);
+    vfs_path_free (cwd_vpath, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -740,9 +740,10 @@ put_link (WPanel * panel)
         vfs_path_t *vpath;
         int i;
 
-        vpath = vfs_path_append_new (panel->cwd_vpath, selection (panel)->fname, (char *) NULL);
+        vpath =
+            vfs_path_append_new (panel->cwd_vpath, selection (panel)->fname->str, (char *) NULL);
         i = mc_readlink (vpath, buffer, sizeof (buffer) - 1);
-        vfs_path_free (vpath);
+        vfs_path_free (vpath, TRUE);
 
         if (i > 0)
         {
@@ -790,7 +791,7 @@ put_current_selected (void)
         tmp = vfs_path_as_str (selected_name);
     }
     else
-        tmp = selection (current_panel)->fname;
+        tmp = selection (current_panel)->fname->str;
 
     command_insert (cmdline, tmp, TRUE);
 }
@@ -810,12 +811,12 @@ put_tagged (WPanel * panel)
         for (i = 0; i < panel->dir.len; i++)
         {
             if (panel->dir.list[i].f.marked)
-                command_insert (cmdline, panel->dir.list[i].fname, TRUE);
+                command_insert (cmdline, panel->dir.list[i].fname->str, TRUE);
         }
     }
     else
     {
-        command_insert (cmdline, panel->dir.list[panel->selected].fname, TRUE);
+        command_insert (cmdline, panel->dir.list[panel->selected].fname->str, TRUE);
     }
     input_enable_update (cmdline);
 }
@@ -881,7 +882,7 @@ setup_dummy_mc (void)
     vpath = vfs_path_from_str (d);
     ret = mc_chdir (vpath);
     (void) ret;
-    vfs_path_free (vpath);
+    vfs_path_free (vpath, TRUE);
     g_free (d);
 }
 
@@ -955,7 +956,7 @@ prepend_cwd_on_local (const char *filename)
     if (!vfs_file_is_local (vpath) || g_path_is_absolute (filename))
         return vpath;
 
-    vfs_path_free (vpath);
+    vfs_path_free (vpath, TRUE);
 
     return vfs_path_append_new (vfs_get_raw_current_dir (), filename, (char *) NULL);
 }
@@ -985,7 +986,7 @@ mc_maybe_editor_or_viewer (void)
                 vpath = prepend_cwd_on_local ((char *) mc_run_param0);
 
             ret = view_file (vpath, FALSE, TRUE);
-            vfs_path_free (vpath);
+            vfs_path_free (vpath, TRUE);
             break;
         }
 #ifdef USE_DIFF_VIEW
@@ -1038,7 +1039,7 @@ show_editor_viewer_history (void)
         }
 
         g_free (s);
-        vfs_path_free (s_vpath);
+        vfs_path_free (s_vpath, TRUE);
     }
 }
 
@@ -1617,7 +1618,7 @@ midnight_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
         /* Handle shortcuts, menu, and buttonbar. */
         return midnight_execute_cmd (sender, parm);
 
-    case MSG_END:
+    case MSG_DESTROY:
         panel_deinit ();
         return MSG_HANDLED;
 

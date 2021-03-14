@@ -1,7 +1,7 @@
 /*
    Directory routines
 
-   Copyright (C) 1994-2020
+   Copyright (C) 1994-2021
    Free Software Foundation, Inc.
 
    Written by:
@@ -174,7 +174,7 @@ handle_dirent (struct vfs_dirent *dp, const char *fltr, struct stat *buf1, gbool
     /* A link to a file or a directory? */
     *link_to_dir = file_is_symlink_to_dir (vpath, buf1, stale_link);
 
-    vfs_path_free (vpath);
+    vfs_path_free (vpath, TRUE);
 
     return (S_ISDIR (buf1->st_mode) || *link_to_dir || fltr == NULL
             || mc_search (fltr, NULL, dp->d_name, MC_SEARCH_T_GLOB));
@@ -199,7 +199,7 @@ dir_get_dotdot_stat (const vfs_path_t * vpath, struct stat *st)
 
             tmp_vpath = vfs_path_append_new (vpath, "..", (char *) NULL);
             ret = mc_stat (tmp_vpath, st) == 0;
-            vfs_path_free (tmp_vpath);
+            vfs_path_free (tmp_vpath, TRUE);
         }
     }
 
@@ -294,8 +294,7 @@ dir_list_append (dir_list * list, const char *fname, const struct stat * st,
         return FALSE;
 
     fentry = &list->list[list->len];
-    fentry->fnamelen = strlen (fname);
-    fentry->fname = g_strndup (fname, fentry->fnamelen);
+    fentry->fname = g_string_new (fname);
     fentry->f.marked = 0;
     fentry->f.link_to_dir = link_to_dir ? 1 : 0;
     fentry->f.stale_link = stale_link ? 1 : 0;
@@ -332,9 +331,9 @@ sort_name (file_entry_t * a, file_entry_t * b)
     {
         /* create key if does not exist, key will be freed after sorting */
         if (a->sort_key == NULL)
-            a->sort_key = str_create_key_for_filename (a->fname, case_sensitive);
+            a->sort_key = str_create_key_for_filename (a->fname->str, case_sensitive);
         if (b->sort_key == NULL)
-            b->sort_key = str_create_key_for_filename (b->fname, case_sensitive);
+            b->sort_key = str_create_key_for_filename (b->fname->str, case_sensitive);
 
         return key_collate (a->sort_key, b->sort_key);
     }
@@ -351,7 +350,7 @@ sort_vers (file_entry_t * a, file_entry_t * b)
     int bd = MY_ISDIR (b);
 
     if (ad == bd || panels_options.mix_all_files)
-        return filevercmp (a->fname, b->fname) * reverse;
+        return filevercmp (a->fname->str, b->fname->str) * reverse;
 
     return bd - ad;
 }
@@ -369,9 +368,9 @@ sort_ext (file_entry_t * a, file_entry_t * b)
         int r;
 
         if (a->second_sort_key == NULL)
-            a->second_sort_key = str_create_key (extension (a->fname), case_sensitive);
+            a->second_sort_key = str_create_key (extension (a->fname->str), case_sensitive);
         if (b->second_sort_key == NULL)
-            b->second_sort_key = str_create_key (extension (b->fname), case_sensitive);
+            b->second_sort_key = str_create_key (extension (b->fname->str), case_sensitive);
 
         r = str_key_collate (a->second_sort_key, b->second_sort_key, case_sensitive);
         if (r != 0)
@@ -493,7 +492,7 @@ dir_list_sort (dir_list * list, GCompareFunc sort, const dir_sort_options_t * so
 
         /* If there is an ".." entry the caller must take care to
            ensure that it occupies the first list element. */
-        dot_dot_found = DIR_IS_DOTDOT (fentry->fname) ? 1 : 0;
+        dot_dot_found = DIR_IS_DOTDOT (fentry->fname->str) ? 1 : 0;
         reverse = sort_op->reverse ? -1 : 1;
         case_sensitive = sort_op->case_sensitive ? 1 : 0;
         exec_first = sort_op->exec_first;
@@ -516,7 +515,8 @@ dir_list_clean (dir_list * list)
         file_entry_t *fentry;
 
         fentry = &list->list[i];
-        MC_PTR_FREE (fentry->fname);
+        g_string_free (fentry->fname, TRUE);
+        fentry->fname = NULL;
     }
 
     list->len = 0;
@@ -536,7 +536,7 @@ dir_list_free_list (dir_list * list)
         file_entry_t *fentry;
 
         fentry = &list->list[i];
-        g_free (fentry->fname);
+        g_string_free (fentry->fname, TRUE);
     }
 
     MC_PTR_FREE (list->list);
@@ -561,8 +561,7 @@ dir_list_init (dir_list * list)
 
     fentry = &list->list[0];
     memset (fentry, 0, sizeof (*fentry));
-    fentry->fnamelen = 2;
-    fentry->fname = g_strndup ("..", fentry->fnamelen);
+    fentry->fname = g_string_new ("..");
     fentry->f.link_to_dir = 0;
     fentry->f.stale_link = 0;
     fentry->f.dir_size_computed = 0;
@@ -592,7 +591,7 @@ handle_path (const char *path, struct stat * buf1, gboolean * link_to_dir, gbool
     vpath = vfs_path_from_str (path);
     if (mc_lstat (vpath, buf1) == -1)
     {
-        vfs_path_free (vpath);
+        vfs_path_free (vpath, TRUE);
         return FALSE;
     }
 
@@ -612,7 +611,7 @@ handle_path (const char *path, struct stat * buf1, gboolean * link_to_dir, gbool
             *stale_link = TRUE;
     }
 
-    vfs_path_free (vpath);
+    vfs_path_free (vpath, TRUE);
 
     return TRUE;
 }
@@ -726,8 +725,7 @@ dir_list_reload (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
         fentry = &list->list[i];
         dfentry = &dir_copy.list[i];
 
-        dfentry->fnamelen = fentry->fnamelen;
-        dfentry->fname = g_strndup (fentry->fname, fentry->fnamelen);
+        dfentry->fname = mc_g_string_dup (fentry->fname);
         dfentry->f.marked = fentry->f.marked;
         dfentry->f.dir_size_computed = fentry->f.dir_size_computed;
         dfentry->f.link_to_dir = fentry->f.link_to_dir;
@@ -736,7 +734,7 @@ dir_list_reload (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
         dfentry->second_sort_key = NULL;
         if (fentry->f.marked)
         {
-            g_hash_table_insert (marked_files, dfentry->fname, dfentry);
+            g_hash_table_insert (marked_files, dfentry->fname->str, dfentry);
             marked_cnt++;
         }
     }

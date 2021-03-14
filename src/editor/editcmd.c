@@ -1,7 +1,7 @@
 /*
    Editor high level editing commands
 
-   Copyright (C) 1996-2020
+   Copyright (C) 1996-2021
    Free Software Foundation, Inc.
 
    Written by:
@@ -67,7 +67,7 @@
 #ifdef HAVE_CHARSET
 #include "src/selcodepage.h"
 #endif
-#include "src/keybind-defaults.h"
+#include "src/keymap.h"
 #include "src/util.h"           /* check_for_default() */
 
 #include "edit-impl.h"
@@ -238,7 +238,7 @@ edit_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
                 edit->skip_detach_prompt = 1;
                 break;
             default:
-                vfs_path_free (real_filename_vpath);
+                vfs_path_free (real_filename_vpath, TRUE);
                 return -1;
             }
         }
@@ -254,7 +254,7 @@ edit_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
                                      _("&Yes"), _("&Cancel"));
             if (rv != 0)
             {
-                vfs_path_free (real_filename_vpath);
+                vfs_path_free (real_filename_vpath, TRUE);
                 return -1;
             }
         }
@@ -277,7 +277,7 @@ edit_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
         g_free (saveprefix);
         if (savename_vpath == NULL)
         {
-            vfs_path_free (real_filename_vpath);
+            vfs_path_free (real_filename_vpath, TRUE);
             return 0;
         }
         /* FIXME:
@@ -392,7 +392,7 @@ edit_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
         g_free (tmp_store_filename);
 
         ok = (mc_rename (real_filename_vpath, tmp_vpath) != -1);
-        vfs_path_free (tmp_vpath);
+        vfs_path_free (tmp_vpath, TRUE);
         if (!ok)
             goto error_save;
     }
@@ -400,16 +400,16 @@ edit_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
     if (this_save_mode != EDIT_QUICK_SAVE && mc_rename (savename_vpath, real_filename_vpath) == -1)
         goto error_save;
 
-    vfs_path_free (real_filename_vpath);
-    vfs_path_free (savename_vpath);
+    vfs_path_free (real_filename_vpath, TRUE);
+    vfs_path_free (savename_vpath, TRUE);
     return 1;
   error_save:
     /*  FIXME: Is this safe ?
      *  if (this_save_mode != EDIT_QUICK_SAVE)
      *      mc_unlink (savename);
      */
-    vfs_path_free (real_filename_vpath);
-    vfs_path_free (savename_vpath);
+    vfs_path_free (real_filename_vpath, TRUE);
+    vfs_path_free (savename_vpath, TRUE);
     return 0;
 }
 
@@ -1501,27 +1501,26 @@ edit_macro_sort_by_hotkey (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static gboolean
-edit_get_macro (WEdit * edit, int hotkey, const macros_t ** macros, guint * indx)
+static int
+edit_get_macro (WEdit * edit, int hotkey)
 {
-    const macros_t *array_start = &g_array_index (macros_list, struct macros_t, 0);
+    macros_t *array_start;
     macros_t *result;
-    macros_t search_macro;
+    macros_t search_macro = {
+        .hotkey = hotkey
+    };
 
     (void) edit;
 
-    search_macro.hotkey = hotkey;
     result = bsearch (&search_macro, macros_list->data, macros_list->len,
                       sizeof (macros_t), (GCompareFunc) edit_macro_comparator);
 
-    if (result != NULL && result->macro != NULL)
-    {
-        *indx = (result - array_start);
-        *macros = result;
-        return TRUE;
-    }
-    *indx = 0;
-    return FALSE;
+    if (result == NULL || result->macro == NULL)
+        return (-1);
+
+    array_start = &g_array_index (macros_list, struct macros_t, 0);
+
+    return (int) (result - array_start);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1533,16 +1532,16 @@ edit_delete_macro (WEdit * edit, int hotkey)
     mc_config_t *macros_config = NULL;
     const char *section_name = "editor";
     gchar *macros_fname;
-    guint indx;
+    int indx;
     char *skeyname;
-    const macros_t *macros = NULL;
 
     /* clear array of actions for current hotkey */
-    while (edit_get_macro (edit, hotkey, &macros, &indx))
+    while ((indx = edit_get_macro (edit, hotkey) != -1))
     {
-        if (macros->macro != NULL)
-            g_array_free (macros->macro, TRUE);
-        macros = NULL;
+        macros_t *macros;
+
+        macros = &g_array_index (macros_list, struct macros_t, indx);
+        g_array_free (macros->macro, TRUE);
         g_array_remove_index (macros_list, indx);
         edit_macro_sort_by_hotkey ();
     }
@@ -1737,7 +1736,7 @@ edit_save_mode_cmd (void)
 void
 edit_set_filename (WEdit * edit, const vfs_path_t * name_vpath)
 {
-    vfs_path_free (edit->filename_vpath);
+    vfs_path_free (edit->filename_vpath, TRUE);
     edit->filename_vpath = vfs_path_clone (name_vpath);
 
     if (edit->dir_vpath == NULL)
@@ -1845,7 +1844,7 @@ edit_save_as_cmd (WEdit * edit)
     }
 
   ret:
-    vfs_path_free (exp_vpath);
+    vfs_path_free (exp_vpath, TRUE);
     edit->force |= REDRAW_COMPLETELY;
     return ret;
 }
@@ -1874,23 +1873,28 @@ edit_execute_macro (WEdit * edit, int hotkey)
 
     if (hotkey != 0)
     {
-        const macros_t *macros;
-        guint indx;
+        int indx;
 
-        if (edit_get_macro (edit, hotkey, &macros, &indx) &&
-            macros->macro != NULL && macros->macro->len != 0)
+        indx = edit_get_macro (edit, hotkey);
+        if (indx != -1)
         {
-            guint i;
+            const macros_t *macros;
 
-            edit->force |= REDRAW_PAGE;
-
-            for (i = 0; i < macros->macro->len; i++)
+            macros = &g_array_index (macros_list, struct macros_t, indx);
+            if (macros->macro->len != 0)
             {
-                const macro_action_t *m_act;
+                guint i;
 
-                m_act = &g_array_index (macros->macro, struct macro_action_t, i);
-                edit_execute_cmd (edit, m_act->action, m_act->ch);
-                res = TRUE;
+                edit->force |= REDRAW_PAGE;
+
+                for (i = 0; i < macros->macro->len; i++)
+                {
+                    const macro_action_t *m_act;
+
+                    m_act = &g_array_index (macros->macro, struct macro_action_t, i);
+                    edit_execute_cmd (edit, m_act->action, m_act->ch);
+                    res = TRUE;
+                }
             }
         }
     }
@@ -1906,14 +1910,13 @@ edit_store_macro_cmd (WEdit * edit)
 {
     int i;
     int hotkey;
-    GString *marcros_string;
-    mc_config_t *macros_config = NULL;
+    GString *macros_string = NULL;
     const char *section_name = "editor";
     gchar *macros_fname;
-    GArray *macros;             /* current macro */
+    GArray *macros = NULL;
     int tmp_act;
-    gboolean have_macro = FALSE;
-    char *skeyname = NULL;
+    mc_config_t *macros_config;
+    char *skeyname;
 
     hotkey =
         editcmd_dialog_raw_key_query (_("Save macro"), _("Press the macro's new hotkey:"), TRUE);
@@ -1921,7 +1924,6 @@ edit_store_macro_cmd (WEdit * edit)
         return FALSE;
 
     tmp_act = keybind_lookup_keymap_command (WIDGET (edit)->keymap, hotkey);
-
     /* return FALSE if try assign macro into restricted hotkeys */
     if (tmp_act == CK_MacroStartRecord
         || tmp_act == CK_MacroStopRecord || tmp_act == CK_MacroStartStopRecord)
@@ -1938,9 +1940,6 @@ edit_store_macro_cmd (WEdit * edit)
 
     edit_push_undo_action (edit, KEY_PRESS + edit->start_display);
 
-    marcros_string = g_string_sized_new (250);
-    macros = g_array_new (TRUE, FALSE, sizeof (macro_action_t));
-
     skeyname = lookup_key_by_code (hotkey);
 
     for (i = 0; i < macro_index; i++)
@@ -1949,19 +1948,22 @@ edit_store_macro_cmd (WEdit * edit)
         const char *action_name;
 
         action_name = keybind_lookup_actionname (record_macro_buf[i].action);
-
         if (action_name == NULL)
             break;
+
+        if (macros == NULL)
+        {
+            macros = g_array_new (TRUE, FALSE, sizeof (macro_action_t));
+            macros_string = g_string_sized_new (250);
+        }
 
         m_act.action = record_macro_buf[i].action;
         m_act.ch = record_macro_buf[i].ch;
         g_array_append_val (macros, m_act);
-        have_macro = TRUE;
-        g_string_append_printf (marcros_string, "%s:%i;", action_name,
-                                (int) record_macro_buf[i].ch);
+        g_string_append_printf (macros_string, "%s:%i;", action_name, (int) record_macro_buf[i].ch);
     }
 
-    if (!have_macro)
+    if (macros == NULL)
         mc_config_del_key (macros_config, section_name, skeyname);
     else
     {
@@ -1970,15 +1972,18 @@ edit_store_macro_cmd (WEdit * edit)
         macro.hotkey = hotkey;
         macro.macro = macros;
         g_array_append_val (macros_list, macro);
-        mc_config_set_string (macros_config, section_name, skeyname, marcros_string->str);
+        mc_config_set_string (macros_config, section_name, skeyname, macros_string->str);
     }
 
     g_free (skeyname);
+
     edit_macro_sort_by_hotkey ();
 
-    g_string_free (marcros_string, TRUE);
+    if (macros_string != NULL)
+        g_string_free (macros_string, TRUE);
     mc_config_save_file (macros_config, NULL);
     mc_config_deinit (macros_config);
+
     return TRUE;
 }
 
@@ -1987,38 +1992,40 @@ edit_store_macro_cmd (WEdit * edit)
 gboolean
 edit_repeat_macro_cmd (WEdit * edit)
 {
-    int i, j;
+    gboolean ok;
     char *f;
-    long count_repeat;
-    char *error = NULL;
+    long count_repeat = 0;
 
     f = input_dialog (_("Repeat last commands"), _("Repeat times:"), MC_HISTORY_EDIT_REPEAT, NULL,
                       INPUT_COMPLETE_NONE);
-    if (f == NULL || *f == '\0')
-    {
-        g_free (f);
-        return FALSE;
-    }
+    ok = (f != NULL && *f != '\0');
 
-    count_repeat = strtol (f, &error, 0);
-
-    if (*error != '\0')
+    if (ok)
     {
-        g_free (f);
-        return FALSE;
+        char *error = NULL;
+
+        count_repeat = strtol (f, &error, 0);
+
+        ok = (*error == '\0');
     }
 
     g_free (f);
 
-    edit_push_undo_action (edit, KEY_PRESS + edit->start_display);
-    edit->force |= REDRAW_PAGE;
+    if (ok)
+    {
+        int i, j;
 
-    for (j = 0; j < count_repeat; j++)
-        for (i = 0; i < macro_index; i++)
-            edit_execute_cmd (edit, record_macro_buf[i].action, record_macro_buf[i].ch);
+        edit_push_undo_action (edit, KEY_PRESS + edit->start_display);
+        edit->force |= REDRAW_PAGE;
 
-    edit_update_screen (edit);
-    return TRUE;
+        for (j = 0; j < count_repeat; j++)
+            for (i = 0; i < macro_index; i++)
+                edit_execute_cmd (edit, record_macro_buf[i].action, record_macro_buf[i].ch);
+
+        edit_update_screen (edit);
+    }
+
+    return ok;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2050,53 +2057,53 @@ edit_load_macro_cmd (WEdit * edit)
     for (profile_keys = keys; *profile_keys != NULL; profile_keys++)
     {
         int hotkey;
-        gboolean have_macro = FALSE;
-        GArray *macros;
+        GArray *macros = NULL;
         macros_t macro;
 
-        macros = g_array_new (TRUE, FALSE, sizeof (macro_action_t));
         values = mc_config_get_string_list (macros_config, section_name, *profile_keys, NULL);
         hotkey = lookup_key (*profile_keys, NULL);
 
         for (curr_values = values; *curr_values != NULL && *curr_values[0] != '\0'; curr_values++)
         {
-            char **macro_pair = NULL;
+            char **macro_pair;
 
             macro_pair = g_strsplit (*curr_values, ":", 2);
+
             if (macro_pair != NULL)
             {
-                macro_action_t m_act;
-                if (macro_pair[0] == NULL || macro_pair[0][0] == '\0')
-                    m_act.action = 0;
-                else
-                {
+                macro_action_t m_act = {
+                    .action = 0,
+                    .ch = -1
+                };
+
+                if (macro_pair[0] != NULL && macro_pair[0][0] != '\0')
                     m_act.action = keybind_lookup_action (macro_pair[0]);
-                    MC_PTR_FREE (macro_pair[0]);
-                }
-                if (macro_pair[1] == NULL || macro_pair[1][0] == '\0')
-                    m_act.ch = -1;
-                else
-                {
+
+                if (macro_pair[1] != NULL && macro_pair[1][0] != '\0')
                     m_act.ch = strtol (macro_pair[1], NULL, 0);
-                    MC_PTR_FREE (macro_pair[1]);
-                }
+
                 if (m_act.action != 0)
                 {
                     /* a shell command */
                     if ((m_act.action / CK_PipeBlock (0)) == 1)
                     {
-                        m_act.action = CK_PipeBlock (0) + (m_act.ch > 0 ? m_act.ch : 0);
+                        m_act.action = CK_PipeBlock (0);
+                        if (m_act.ch > 0)
+                            m_act.action += m_act.ch;
                         m_act.ch = -1;
                     }
+
+                    if (macros == NULL)
+                        macros = g_array_new (TRUE, FALSE, sizeof (m_act));
+
                     g_array_append_val (macros, m_act);
-                    have_macro = TRUE;
                 }
+
                 g_strfreev (macro_pair);
-                macro_pair = NULL;
             }
         }
 
-        if (have_macro)
+        if (macros != NULL)
         {
             macro.hotkey = hotkey;
             macro.macro = macros;
@@ -2166,7 +2173,7 @@ edit_load_cmd (WDialog * h)
 
         exp_vpath = vfs_path_from_str (exp);
         ret = edit_load_file_from_filename (h, exp_vpath);
-        vfs_path_free (exp_vpath);
+        vfs_path_free (exp_vpath, TRUE);
     }
 
     g_free (exp);
@@ -2195,7 +2202,7 @@ edit_load_file_from_history (WDialog * h)
 
         exp_vpath = vfs_path_from_str (exp);
         ret = edit_load_file_from_filename (h, exp_vpath);
-        vfs_path_free (exp_vpath);
+        vfs_path_free (exp_vpath, TRUE);
     }
 
     g_free (exp);
@@ -2226,7 +2233,7 @@ edit_load_syntax_file (WDialog * h)
         vfs_path_build_filename (mc_global.sysconfig_dir, "syntax", "Syntax", (char *) NULL);
     if (!exist_file (vfs_path_get_last_path_str (extdir_vpath)))
     {
-        vfs_path_free (extdir_vpath);
+        vfs_path_free (extdir_vpath, TRUE);
         extdir_vpath =
             vfs_path_build_filename (mc_global.share_data_dir, "syntax", "Syntax", (char *) NULL);
     }
@@ -2238,12 +2245,12 @@ edit_load_syntax_file (WDialog * h)
         user_syntax_file_vpath = mc_config_get_full_vpath (EDIT_HOME_SYNTAX_FILE);
         check_for_default (extdir_vpath, user_syntax_file_vpath);
         ret = edit_load_file_from_filename (h, user_syntax_file_vpath);
-        vfs_path_free (user_syntax_file_vpath);
+        vfs_path_free (user_syntax_file_vpath, TRUE);
     }
     else if (dir == 1)
         ret = edit_load_file_from_filename (h, extdir_vpath);
 
-    vfs_path_free (extdir_vpath);
+    vfs_path_free (extdir_vpath, TRUE);
 
     return ret;
 }
@@ -2272,7 +2279,7 @@ edit_load_menu_file (WDialog * h)
         vfs_path_build_filename (mc_global.sysconfig_dir, EDIT_GLOBAL_MENU, (char *) NULL);
     if (!exist_file (vfs_path_get_last_path_str (menufile_vpath)))
     {
-        vfs_path_free (menufile_vpath);
+        vfs_path_free (menufile_vpath, TRUE);
         menufile_vpath =
             vfs_path_build_filename (mc_global.share_data_dir, EDIT_GLOBAL_MENU, (char *) NULL);
     }
@@ -2295,21 +2302,21 @@ edit_load_menu_file (WDialog * h)
             vfs_path_build_filename (mc_global.sysconfig_dir, EDIT_GLOBAL_MENU, (char *) NULL);
         if (!exist_file (vfs_path_get_last_path_str (buffer_vpath)))
         {
-            vfs_path_free (buffer_vpath);
+            vfs_path_free (buffer_vpath, TRUE);
             buffer_vpath =
                 vfs_path_build_filename (mc_global.share_data_dir, EDIT_GLOBAL_MENU, (char *) NULL);
         }
         break;
 
     default:
-        vfs_path_free (menufile_vpath);
+        vfs_path_free (menufile_vpath, TRUE);
         return FALSE;
     }
 
     ret = edit_load_file_from_filename (h, buffer_vpath);
 
-    vfs_path_free (buffer_vpath);
-    vfs_path_free (menufile_vpath);
+    vfs_path_free (buffer_vpath, TRUE);
+    vfs_path_free (menufile_vpath, TRUE);
 
     return ret;
 }
@@ -2997,7 +3004,7 @@ edit_save_block (WEdit * edit, const char *filename, off_t start, off_t finish)
     vpath = vfs_path_from_str (filename);
     file = mc_open (vpath, O_CREAT | O_WRONLY | O_TRUNC,
                     S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH | O_BINARY);
-    vfs_path_free (vpath);
+    vfs_path_free (vpath, TRUE);
     if (file == -1)
         return FALSE;
 
@@ -3115,7 +3122,7 @@ edit_paste_from_X_buf_cmd (WEdit * edit)
     mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_from_ext_clip", NULL);
     tmp = mc_config_get_full_vpath (EDIT_HOME_CLIP_FILE);
     ret = (edit_insert_file (edit, tmp) >= 0);
-    vfs_path_free (tmp);
+    vfs_path_free (tmp, TRUE);
 
     return ret;
 }
@@ -3219,7 +3226,7 @@ edit_insert_file_cmd (WEdit * edit)
 
         exp_vpath = vfs_path_from_str (exp);
         ret = (edit_insert_file (edit, exp_vpath) >= 0);
-        vfs_path_free (exp_vpath);
+        vfs_path_free (exp_vpath, TRUE);
 
         if (!ret)
             edit_error_dialog (_("Insert file"), get_sys_error (_("Cannot insert file")));
@@ -3296,7 +3303,7 @@ edit_sort_cmd (WEdit * edit)
 
         tmp_vpath = mc_config_get_full_vpath (EDIT_HOME_TEMP_FILE);
         edit_insert_file (edit, tmp_vpath);
-        vfs_path_free (tmp_vpath);
+        vfs_path_free (tmp_vpath, TRUE);
     }
 
     return 0;
@@ -3344,7 +3351,7 @@ edit_ext_cmd (WEdit * edit)
 
         tmp_vpath = mc_config_get_full_vpath (EDIT_HOME_TEMP_FILE);
         edit_insert_file (edit, tmp_vpath);
-        vfs_path_free (tmp_vpath);
+        vfs_path_free (tmp_vpath, TRUE);
     }
 
     return 0;

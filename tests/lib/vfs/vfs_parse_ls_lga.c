@@ -1,7 +1,7 @@
 /*
    lib/vfs - test vfs_parse_ls_lga() functionality
 
-   Copyright (C) 2011-2020
+   Copyright (C) 2011-2021
    Free Software Foundation, Inc.
 
    Written by:
@@ -365,7 +365,7 @@ END_TEST
     if (! vfs_parse_ls_lga (ls_output,\
     &ent[ent_index]->ino->st, &ent[ent_index]->name, &ent[ent_index]->ino->linkname, &filepos))\
     {\
-        fail ("An error occurred while parse ls output");\
+        ck_abort_msg ("An error occurred while parse ls output");\
         return;\
     }\
     vfs_s_store_filename_leading_spaces (ent[ent_index], filepos);\
