@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-01-10 13:15+0100\n"
+"POT-Creation-Date: 2021-03-14 19:59+0300\n"
 "PO-Revision-Date: 2020-12-31 14:19+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Lithuanian (http://www.transifex.com/mc/mc/language/lt/)\n"
@@ -82,30 +82,6 @@ msgstr "Nepavyko sukurti %s aplanko"
 
 msgid "FATAL: not a directory:"
 msgstr "KLAIDA: ne aplankas:"
-
-#, c-format
-msgid "An error occurred while migrating user settings: %s"
-msgstr "Klaida perkeliant vartotojo nustatymus: %s"
-
-#, c-format
-msgid ""
-"Your old settings were migrated from %s\n"
-"to Freedesktop recommended dirs.\n"
-"To get more info, please visit\n"
-"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-msgstr ""
-"Jūsų anskstesni nustatymai buvo perkelti iš %s\n"
-"į Freedesktop rekomenduojamus aplankus.\n"
-"Daugiau informacijos rasite čia\n"
-"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-
-#, c-format
-msgid ""
-"Your old settings were migrated from %s\n"
-"to %s\n"
-msgstr ""
-"Jūsų anskstesni nustatymai buvo perkelti iš %s\n"
-"į %s\n"
 
 msgid ""
 "Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
@@ -195,11 +171,11 @@ msgstr ""
 msgid "True color not supported with ncurses."
 msgstr ""
 
-msgid "True color not supported in this slang version."
-msgstr ""
-
 msgid "Your terminal doesn't even seem to support 256 colors."
 msgstr "Panašu, kad terminalas nepalaiko 256 spalvų režimo."
+
+msgid "True color not supported in this slang version."
+msgstr ""
 
 msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
 msgstr ""
@@ -558,18 +534,6 @@ msgstr ""
 msgid ""
 "Unexpected error in waitpid():\n"
 "%s"
-msgstr ""
-
-msgid "Warning"
-msgstr "Įspėjimas"
-
-msgid "Pipe failed"
-msgstr ""
-
-msgid "Dup failed"
-msgstr ""
-
-msgid "Error dup'ing old error pipe"
 msgstr ""
 
 #, c-format
@@ -1044,6 +1008,9 @@ msgid ""
 msgstr ""
 "Failas \"%s\" yra per didelis.\n"
 "Vis tiek atidaryti?"
+
+msgid "Warning"
+msgstr "Įspėjimas"
 
 #, c-format
 msgid "Error reading from pipe: %s"
@@ -1634,7 +1601,7 @@ msgstr ""
 "Lengvas vartoti teksto redaktorius\n"
 "sukurtas Midnight Commander aplinkai."
 
-msgid "Copyright (C) 1996-2020 the Free Software Foundation"
+msgid "Copyright (C) 1996-2021 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -2512,6 +2479,9 @@ msgid ""
 "%s"
 msgstr ""
 
+msgid "Pipe failed"
+msgstr ""
+
 #, c-format
 msgid " %s%s file error"
 msgstr " %s%s failo klaida"
@@ -3233,6 +3203,10 @@ msgstr "Failo pavadinimas:"
 msgid "&Find recursively"
 msgstr "&Rasti rekursyviai"
 
+#, fuzzy
+msgid "Follow s&ymlinks"
+msgstr "Sekti nuorodas"
+
 msgid "S&kip hidden"
 msgstr ""
 
@@ -3675,11 +3649,18 @@ msgstr ""
 msgid "Enter command label:"
 msgstr "Įvesti komandos etiketę:"
 
-msgid "Cannot invoke command."
-msgstr "Nepavyko iškviesti komandos."
+#, fuzzy, c-format
+msgid ""
+"External panelize:\n"
+"%s"
+msgstr "Išorinis skydelis"
 
-msgid "Pipe close failed"
-msgstr "Konvejerio užvėrimas nepavyko"
+#, c-format
+msgid ""
+"External panelize:\n"
+"failed to read data from child stdout:\n"
+"%s"
+msgstr ""
 
 msgid "Cannot run external panelize in a non-local directory"
 msgstr ""
@@ -4059,16 +4040,20 @@ msgstr ""
 "Netikėta failo pabaiga\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Cannot open %s archive\n"
+"%s:\n"
 "%s"
 msgstr ""
 "Nepavyko atverti „%s“ archyvo\n"
 "%s"
 
-msgid "Inconsistent extfs archive"
-msgstr "Prieštaringas „extfs“ archyvas"
+#, fuzzy, c-format
+msgid ""
+"EXTFS virtual file system:\n"
+"%s"
+msgstr "Virtualios failų sistemos:"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4233,6 +4218,12 @@ msgid ""
 "~/.netrc file has incorrect mode\n"
 "Remove password or correct mode"
 msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+"SFS virtual file system:\n"
+"%s"
+msgstr "Virtualios failų sistemos:"
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4540,3 +4531,36 @@ msgstr "Tęsti nuo pradžios?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#, c-format
+#~ msgid "An error occurred while migrating user settings: %s"
+#~ msgstr "Klaida perkeliant vartotojo nustatymus: %s"
+
+#, c-format
+#~ msgid ""
+#~ "Your old settings were migrated from %s\n"
+#~ "to Freedesktop recommended dirs.\n"
+#~ "To get more info, please visit\n"
+#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+#~ msgstr ""
+#~ "Jūsų anskstesni nustatymai buvo perkelti iš %s\n"
+#~ "į Freedesktop rekomenduojamus aplankus.\n"
+#~ "Daugiau informacijos rasite čia\n"
+#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+
+#, c-format
+#~ msgid ""
+#~ "Your old settings were migrated from %s\n"
+#~ "to %s\n"
+#~ msgstr ""
+#~ "Jūsų anskstesni nustatymai buvo perkelti iš %s\n"
+#~ "į %s\n"
+
+#~ msgid "Cannot invoke command."
+#~ msgstr "Nepavyko iškviesti komandos."
+
+#~ msgid "Pipe close failed"
+#~ msgstr "Konvejerio užvėrimas nepavyko"
+
+#~ msgid "Inconsistent extfs archive"
+#~ msgstr "Prieštaringas „extfs“ archyvas"

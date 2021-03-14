@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-01-10 13:15+0100\n"
+"POT-Creation-Date: 2021-03-14 19:59+0300\n"
 "PO-Revision-Date: 2020-12-31 14:19+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Slovak (http://www.transifex.com/mc/mc/language/sk/)\n"
@@ -82,30 +82,6 @@ msgstr "Nepodarilo sa vytvoriť adresár %s"
 
 msgid "FATAL: not a directory:"
 msgstr "CHYBA: nie je adresár:"
-
-#, c-format
-msgid "An error occurred while migrating user settings: %s"
-msgstr "Vyskytla sa chyba počas migrácie používateľských nastavení: %s"
-
-#, c-format
-msgid ""
-"Your old settings were migrated from %s\n"
-"to Freedesktop recommended dirs.\n"
-"To get more info, please visit\n"
-"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-msgstr ""
-"Vaše staré nastavenia boli migrované z %s\n"
-"do adresárov, ktoré odporúča Freedesktop.\n"
-"Ďalšie informácie nájdete na\n"
-"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-
-#, c-format
-msgid ""
-"Your old settings were migrated from %s\n"
-"to %s\n"
-msgstr ""
-"Vaše staré nastavenia boli migrované z %s\n"
-"to %s\n"
 
 msgid ""
 "Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
@@ -194,11 +170,11 @@ msgstr ""
 msgid "True color not supported with ncurses."
 msgstr "Režim True color nie je v ncurses podporovaný."
 
-msgid "True color not supported in this slang version."
-msgstr "Režim True color nie je podpora v tejto verzii slang."
-
 msgid "Your terminal doesn't even seem to support 256 colors."
 msgstr "Váš terminál asi nepodporuje ani 256 farieb."
+
+msgid "True color not supported in this slang version."
+msgstr "Režim True color nie je podpora v tejto verzii slang."
 
 msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
 msgstr "Ak váš terminál proporuje True color, nastavte COLORTERM=truecolor."
@@ -560,18 +536,6 @@ msgid ""
 msgstr ""
 "Neočakávaná chyba vo waitpid():\n"
 "%s"
-
-msgid "Warning"
-msgstr "Upozornenie"
-
-msgid "Pipe failed"
-msgstr "Pipe zlyhalo"
-
-msgid "Dup failed"
-msgstr "Dup zlyhalo"
-
-msgid "Error dup'ing old error pipe"
-msgstr "Chyba pri duplikácii starej chybovej rúry"
 
 #, c-format
 msgid "Directory cache expired for %s"
@@ -1080,6 +1044,9 @@ msgid ""
 msgstr ""
 "Súbor „%s“ je príliš veľký.\n"
 "Otvoriť ho napriek tomu?"
+
+msgid "Warning"
+msgstr "Upozornenie"
 
 #, c-format
 msgid "Error reading from pipe: %s"
@@ -1672,7 +1639,7 @@ msgstr ""
 "Používateľsky prívetivý textový editor\n"
 "napísaný pre Midnight Commander."
 
-msgid "Copyright (C) 1996-2020 the Free Software Foundation"
+msgid "Copyright (C) 1996-2021 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -2566,6 +2533,9 @@ msgstr ""
 "Nemožno vytvoriť dočasný súbor príkazu\n"
 "%s"
 
+msgid "Pipe failed"
+msgstr "Pipe zlyhalo"
+
 #, c-format
 msgid " %s%s file error"
 msgstr " %s%s chyba v súbore"
@@ -3335,6 +3305,10 @@ msgstr "Názov súboru:"
 msgid "&Find recursively"
 msgstr "&Hľadať rekurzívne"
 
+#, fuzzy
+msgid "Follow s&ymlinks"
+msgstr "Nas&ledovať odkazy"
+
 msgid "S&kip hidden"
 msgstr "Pres&kočiť skryté"
 
@@ -3780,11 +3754,20 @@ msgstr "Pridať do externej panelizácie"
 msgid "Enter command label:"
 msgstr "Zadajte označenie príkazu:"
 
-msgid "Cannot invoke command."
-msgstr "Nepodarilo sa vyvolať príkaz."
+#, fuzzy, c-format
+msgid ""
+"External panelize:\n"
+"%s"
+msgstr "Panelizovať externým príkazom"
 
-msgid "Pipe close failed"
-msgstr "Neúspešné uzavretie rúry"
+#, fuzzy, c-format
+msgid ""
+"External panelize:\n"
+"failed to read data from child stdout:\n"
+"%s"
+msgstr ""
+"Nepodarilo sa prečítať dáta zo štand. výstupu procesu potomka:\n"
+"%s"
 
 msgid "Cannot run external panelize in a non-local directory"
 msgstr "Nie je možné spustiť panelizáciu v adresári, ktorý nie je lokálny"
@@ -4173,16 +4156,20 @@ msgstr ""
 "Neočakávaný koniec súboru\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Cannot open %s archive\n"
+"%s:\n"
 "%s"
 msgstr ""
 "Nepodarilo sa otvoriť archív %s\n"
 "%s"
 
-msgid "Inconsistent extfs archive"
-msgstr "Neúplný archív extfs"
+#, fuzzy, c-format
+msgid ""
+"EXTFS virtual file system:\n"
+"%s"
+msgstr "Virtuálne súborové systémy:"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4349,6 +4336,12 @@ msgid ""
 msgstr ""
 "súbor ~/.netrc nemá správne prístupové práva\n"
 "Odstráňte heslo alebo zmeňte práva"
+
+#, fuzzy, c-format
+msgid ""
+"SFS virtual file system:\n"
+"%s"
+msgstr "Virtuálne súborové systémy:"
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4666,3 +4659,42 @@ msgstr "Pokračovať od začiatku?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nemožno stiahnuť lokálnu kópiu /ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid "An error occurred while migrating user settings: %s"
+#~ msgstr "Vyskytla sa chyba počas migrácie používateľských nastavení: %s"
+
+#, c-format
+#~ msgid ""
+#~ "Your old settings were migrated from %s\n"
+#~ "to Freedesktop recommended dirs.\n"
+#~ "To get more info, please visit\n"
+#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+#~ msgstr ""
+#~ "Vaše staré nastavenia boli migrované z %s\n"
+#~ "do adresárov, ktoré odporúča Freedesktop.\n"
+#~ "Ďalšie informácie nájdete na\n"
+#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+
+#, c-format
+#~ msgid ""
+#~ "Your old settings were migrated from %s\n"
+#~ "to %s\n"
+#~ msgstr ""
+#~ "Vaše staré nastavenia boli migrované z %s\n"
+#~ "to %s\n"
+
+#~ msgid "Dup failed"
+#~ msgstr "Dup zlyhalo"
+
+#~ msgid "Error dup'ing old error pipe"
+#~ msgstr "Chyba pri duplikácii starej chybovej rúry"
+
+#~ msgid "Cannot invoke command."
+#~ msgstr "Nepodarilo sa vyvolať príkaz."
+
+#~ msgid "Pipe close failed"
+#~ msgstr "Neúspešné uzavretie rúry"
+
+#~ msgid "Inconsistent extfs archive"
+#~ msgstr "Neúplný archív extfs"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-01-10 13:15+0100\n"
+"POT-Creation-Date: 2021-03-14 19:59+0300\n"
 "PO-Revision-Date: 2020-12-31 14:19+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Serbian (http://www.transifex.com/mc/mc/language/sr/)\n"
@@ -76,30 +76,6 @@ msgstr "Не могу да направим директоријум „%s“"
 
 msgid "FATAL: not a directory:"
 msgstr "КОБНО: није директоријум:"
-
-#, c-format
-msgid "An error occurred while migrating user settings: %s"
-msgstr "Дошло је до грешке приликом премештања корисникових подешавања: %s"
-
-#, c-format
-msgid ""
-"Your old settings were migrated from %s\n"
-"to Freedesktop recommended dirs.\n"
-"To get more info, please visit\n"
-"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-msgstr ""
-"Ваша стара подешавања су премештена из „%s“\n"
-"у директоријум који препоручује Фридесктоп.\n"
-"За више података, посетите\n"
-"„http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html“"
-
-#, c-format
-msgid ""
-"Your old settings were migrated from %s\n"
-"to %s\n"
-msgstr ""
-"Ваша стара подешавања су премештена из „%s“\n"
-"у „%s“\n"
 
 msgid ""
 "Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
@@ -182,10 +158,10 @@ msgstr ""
 msgid "True color not supported with ncurses."
 msgstr ""
 
-msgid "True color not supported in this slang version."
+msgid "Your terminal doesn't even seem to support 256 colors."
 msgstr ""
 
-msgid "Your terminal doesn't even seem to support 256 colors."
+msgid "True color not supported in this slang version."
 msgstr ""
 
 msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
@@ -548,18 +524,6 @@ msgid ""
 msgstr ""
 "Неочекивана грешка у функцији чекања пид-а:\n"
 "%s"
-
-msgid "Warning"
-msgstr "Упозорење"
-
-msgid "Pipe failed"
-msgstr "Сојка није успела"
-
-msgid "Dup failed"
-msgstr "Удвостручавање није успело"
-
-msgid "Error dup'ing old error pipe"
-msgstr "Грешка удвостручавања старе спојке грешке"
 
 #, c-format
 msgid "Directory cache expired for %s"
@@ -1067,6 +1031,9 @@ msgid ""
 msgstr ""
 "Датотека „%s“ је превелика.\n"
 "Да је ипак отворим?"
+
+msgid "Warning"
+msgstr "Упозорење"
 
 #, c-format
 msgid "Error reading from pipe: %s"
@@ -1657,7 +1624,7 @@ msgstr ""
 "Уређивач текста наклоњен кориснику\n"
 "написан за Поноћног наредника."
 
-msgid "Copyright (C) 1996-2020 the Free Software Foundation"
+msgid "Copyright (C) 1996-2021 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -2551,6 +2518,9 @@ msgstr ""
 "Не могу да направим привремену датотеку наредбе\n"
 "%s"
 
+msgid "Pipe failed"
+msgstr "Сојка није успела"
+
 #, c-format
 msgid " %s%s file error"
 msgstr " %s%s грешка датотеке"
@@ -3312,6 +3282,10 @@ msgstr "Датотека:"
 msgid "&Find recursively"
 msgstr "Нађи &дубински"
 
+#, fuzzy
+msgid "Follow s&ymlinks"
+msgstr "Прати &везе"
+
 msgid "S&kip hidden"
 msgstr "Прескочи &скривене"
 
@@ -3753,11 +3727,20 @@ msgstr "Додај спољном програму за у окно"
 msgid "Enter command label:"
 msgstr "Унесите натпис наредбе:"
 
-msgid "Cannot invoke command."
-msgstr "Не могу да покренем наредбу."
+#, fuzzy, c-format
+msgid ""
+"External panelize:\n"
+"%s"
+msgstr "Спољним програмом у окно"
 
-msgid "Pipe close failed"
-msgstr "Затварање спојке није успело"
+#, fuzzy, c-format
+msgid ""
+"External panelize:\n"
+"failed to read data from child stdout:\n"
+"%s"
+msgstr ""
+"Нисам успео да прочитам податке из стандардног излаза порода:\n"
+"%s"
 
 msgid "Cannot run external panelize in a non-local directory"
 msgstr ""
@@ -4146,16 +4129,20 @@ msgstr ""
 "Неочекивани крај датотеке\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Cannot open %s archive\n"
+"%s:\n"
 "%s"
 msgstr ""
 "Не могу да отворим „%s“ архиву\n"
 "%s"
 
-msgid "Inconsistent extfs archive"
-msgstr "Недоследна екстсд архива"
+#, fuzzy, c-format
+msgid ""
+"EXTFS virtual file system:\n"
+"%s"
+msgstr "Виртуелни систем датотека:"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4322,6 +4309,12 @@ msgid ""
 msgstr ""
 "Датотека „~/.netrc“ има неисправан режим\n"
 "Уклоните лозинку или исправите режим"
+
+#, fuzzy, c-format
+msgid ""
+"SFS virtual file system:\n"
+"%s"
+msgstr "Виртуелни систем датотека:"
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4639,3 +4632,42 @@ msgstr "Да наставим са почетка?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не могу да довучем месни примерак „/ftp://some.host/editme.txt“"
+
+#, c-format
+#~ msgid "An error occurred while migrating user settings: %s"
+#~ msgstr "Дошло је до грешке приликом премештања корисникових подешавања: %s"
+
+#, c-format
+#~ msgid ""
+#~ "Your old settings were migrated from %s\n"
+#~ "to Freedesktop recommended dirs.\n"
+#~ "To get more info, please visit\n"
+#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+#~ msgstr ""
+#~ "Ваша стара подешавања су премештена из „%s“\n"
+#~ "у директоријум који препоручује Фридесктоп.\n"
+#~ "За више података, посетите\n"
+#~ "„http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html“"
+
+#, c-format
+#~ msgid ""
+#~ "Your old settings were migrated from %s\n"
+#~ "to %s\n"
+#~ msgstr ""
+#~ "Ваша стара подешавања су премештена из „%s“\n"
+#~ "у „%s“\n"
+
+#~ msgid "Dup failed"
+#~ msgstr "Удвостручавање није успело"
+
+#~ msgid "Error dup'ing old error pipe"
+#~ msgstr "Грешка удвостручавања старе спојке грешке"
+
+#~ msgid "Cannot invoke command."
+#~ msgstr "Не могу да покренем наредбу."
+
+#~ msgid "Pipe close failed"
+#~ msgstr "Затварање спојке није успело"
+
+#~ msgid "Inconsistent extfs archive"
+#~ msgstr "Недоследна екстсд архива"

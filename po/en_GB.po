@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-01-10 13:15+0100\n"
+"POT-Creation-Date: 2021-03-14 19:59+0300\n"
 "PO-Revision-Date: 2020-12-31 14:19+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: English (United Kingdom) (http://www.transifex.com/mc/mc/"
@@ -75,30 +75,6 @@ msgstr "Cannot create %s directory"
 
 msgid "FATAL: not a directory:"
 msgstr "FATAL: not a directory:"
-
-#, c-format
-msgid "An error occurred while migrating user settings: %s"
-msgstr "An error occurred while migrating user settings: %s"
-
-#, c-format
-msgid ""
-"Your old settings were migrated from %s\n"
-"to Freedesktop recommended dirs.\n"
-"To get more info, please visit\n"
-"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-msgstr ""
-"Your old settings were migrated from %s\n"
-"to Freedesktop recommended dirs.\n"
-"To get more info, please visit\n"
-"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-
-#, c-format
-msgid ""
-"Your old settings were migrated from %s\n"
-"to %s\n"
-msgstr ""
-"Your old settings were migrated from %s\n"
-"to %s\n"
 
 msgid ""
 "Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
@@ -188,11 +164,11 @@ msgstr ""
 msgid "True color not supported with ncurses."
 msgstr "True colour not supported with ncurses."
 
-msgid "True color not supported in this slang version."
-msgstr "True colour not supported in this slang version."
-
 msgid "Your terminal doesn't even seem to support 256 colors."
 msgstr "Your terminal doesn't even seem to support 256 colours."
+
+msgid "True color not supported in this slang version."
+msgstr "True colour not supported in this slang version."
 
 msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
 msgstr "Set COLORTERM=truecolor if your terminal really supports true colours."
@@ -547,18 +523,6 @@ msgstr ""
 msgid ""
 "Unexpected error in waitpid():\n"
 "%s"
-msgstr ""
-
-msgid "Warning"
-msgstr ""
-
-msgid "Pipe failed"
-msgstr ""
-
-msgid "Dup failed"
-msgstr ""
-
-msgid "Error dup'ing old error pipe"
 msgstr ""
 
 #, c-format
@@ -1020,6 +984,9 @@ msgstr ""
 msgid ""
 "File \"%s\" is too large.\n"
 "Open it anyway?"
+msgstr ""
+
+msgid "Warning"
 msgstr ""
 
 #, c-format
@@ -1603,7 +1570,7 @@ msgid ""
 "written for the Midnight Commander."
 msgstr ""
 
-msgid "Copyright (C) 1996-2020 the Free Software Foundation"
+msgid "Copyright (C) 1996-2021 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -2475,6 +2442,9 @@ msgid ""
 "%s"
 msgstr ""
 
+msgid "Pipe failed"
+msgstr ""
+
 #, c-format
 msgid " %s%s file error"
 msgstr ""
@@ -3164,6 +3134,9 @@ msgstr ""
 msgid "&Find recursively"
 msgstr ""
 
+msgid "Follow s&ymlinks"
+msgstr ""
+
 msgid "S&kip hidden"
 msgstr ""
 
@@ -3598,10 +3571,17 @@ msgstr ""
 msgid "Enter command label:"
 msgstr ""
 
-msgid "Cannot invoke command."
+#, c-format
+msgid ""
+"External panelize:\n"
+"%s"
 msgstr ""
 
-msgid "Pipe close failed"
+#, c-format
+msgid ""
+"External panelize:\n"
+"failed to read data from child stdout:\n"
+"%s"
 msgstr ""
 
 msgid "Cannot run external panelize in a non-local directory"
@@ -3951,10 +3931,14 @@ msgstr ""
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
+"%s:\n"
 "%s"
 msgstr ""
 
-msgid "Inconsistent extfs archive"
+#, c-format
+msgid ""
+"EXTFS virtual file system:\n"
+"%s"
 msgstr ""
 
 #, c-format
@@ -4119,6 +4103,12 @@ msgstr ""
 msgid ""
 "~/.netrc file has incorrect mode\n"
 "Remove password or correct mode"
+msgstr ""
+
+#, c-format
+msgid ""
+"SFS virtual file system:\n"
+"%s"
 msgstr ""
 
 #, c-format
@@ -4412,3 +4402,27 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#, c-format
+#~ msgid "An error occurred while migrating user settings: %s"
+#~ msgstr "An error occurred while migrating user settings: %s"
+
+#, c-format
+#~ msgid ""
+#~ "Your old settings were migrated from %s\n"
+#~ "to Freedesktop recommended dirs.\n"
+#~ "To get more info, please visit\n"
+#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+#~ msgstr ""
+#~ "Your old settings were migrated from %s\n"
+#~ "to Freedesktop recommended dirs.\n"
+#~ "To get more info, please visit\n"
+#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+
+#, c-format
+#~ msgid ""
+#~ "Your old settings were migrated from %s\n"
+#~ "to %s\n"
+#~ msgstr ""
+#~ "Your old settings were migrated from %s\n"
+#~ "to %s\n"

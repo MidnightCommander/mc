@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-01-10 13:15+0100\n"
+"POT-Creation-Date: 2021-03-14 19:59+0300\n"
 "PO-Revision-Date: 2020-12-31 14:19+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Romanian (http://www.transifex.com/mc/mc/language/ro/)\n"
@@ -82,30 +82,6 @@ msgstr "Nu se poate crea dosarul %s"
 
 msgid "FATAL: not a directory:"
 msgstr "FATAL: nu este un dosar:"
-
-#, c-format
-msgid "An error occurred while migrating user settings: %s"
-msgstr "A apărut o eroare în timpul migrării setărilor de utilizator: %s"
-
-#, c-format
-msgid ""
-"Your old settings were migrated from %s\n"
-"to Freedesktop recommended dirs.\n"
-"To get more info, please visit\n"
-"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-msgstr ""
-"Vechile tale setări au fost migrate din %s\n"
-"în dosarele recomandate de Freedesktop.\n"
-"Pentru mai multe informații, te rog vizitează\n"
-"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-
-#, c-format
-msgid ""
-"Your old settings were migrated from %s\n"
-"to %s\n"
-msgstr ""
-"Vechile tale setări au fost migrate din %s\n"
-"în %s\n"
 
 msgid ""
 "Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
@@ -195,11 +171,11 @@ msgstr ""
 msgid "True color not supported with ncurses."
 msgstr "CULORI REALE nu sunt acceptate cu ncurses."
 
-msgid "True color not supported in this slang version."
-msgstr "CULORI REALE  nu sunt acceptate în această versiune slang."
-
 msgid "Your terminal doesn't even seem to support 256 colors."
 msgstr "Terminalul dvs. nu pare ca nu suporta 256 de culori."
+
+msgid "True color not supported in this slang version."
+msgstr "CULORI REALE  nu sunt acceptate în această versiune slang."
 
 msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
 msgstr "Setați COLORTERM=truecolor dacă terminalul dvs. suporta culori reale."
@@ -561,18 +537,6 @@ msgid ""
 msgstr ""
 "Eroare surpriza in waitpid():\n"
 "%s"
-
-msgid "Warning"
-msgstr "Atenție"
-
-msgid "Pipe failed"
-msgstr "Pipe a eșuat"
-
-msgid "Dup failed"
-msgstr "Dup eșuat"
-
-msgid "Error dup'ing old error pipe"
-msgstr "Eroare de dup a erorii vechi de pipe"
 
 #, c-format
 msgid "Directory cache expired for %s"
@@ -1083,6 +1047,9 @@ msgid ""
 msgstr ""
 "Fișierul \"%s\" este prea mare.\n"
 "Îl deschizi oricum?"
+
+msgid "Warning"
+msgstr "Atenție"
 
 #, c-format
 msgid "Error reading from pipe: %s"
@@ -1674,7 +1641,7 @@ msgstr ""
 "Un editor de text ușor de utilizat\n"
 "creat pentru Midnight Commander."
 
-msgid "Copyright (C) 1996-2020 the Free Software Foundation"
+msgid "Copyright (C) 1996-2021 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -2568,6 +2535,9 @@ msgstr ""
 "Nu se poate crea fișierul temporar pentru linia de comandă\n"
 "%s"
 
+msgid "Pipe failed"
+msgstr "Pipe a eșuat"
+
 #, c-format
 msgid " %s%s file error"
 msgstr " %s%s eroare fișier"
@@ -3338,6 +3308,10 @@ msgstr "Nume de fișier:"
 msgid "&Find recursively"
 msgstr "&Caută recursiv"
 
+#, fuzzy
+msgid "Follow s&ymlinks"
+msgstr "Urmărește &legăturile"
+
 msgid "S&kip hidden"
 msgstr "Sări &peste ascunse"
 
@@ -3780,11 +3754,20 @@ msgstr "Adaugă la panelizarea externă"
 msgid "Enter command label:"
 msgstr "Introdu eticheta comenzii:"
 
-msgid "Cannot invoke command."
-msgstr "Nu se poate rula comanda."
+#, fuzzy, c-format
+msgid ""
+"External panelize:\n"
+"%s"
+msgstr "Panelizare externă"
 
-msgid "Pipe close failed"
-msgstr "Închiderea pipe a eșuat"
+#, fuzzy, c-format
+msgid ""
+"External panelize:\n"
+"failed to read data from child stdout:\n"
+"%s"
+msgstr ""
+"Eroare la citirea datelor de la stdout-ul copil:\n"
+"%s"
 
 msgid "Cannot run external panelize in a non-local directory"
 msgstr "Nu se poate rula panelizarea externă într-un dosar care nu este local"
@@ -4172,16 +4155,20 @@ msgstr ""
 "Sfârșit de fișier (EOF) neașteptat\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Cannot open %s archive\n"
+"%s:\n"
 "%s"
 msgstr ""
 "Nu pot deschide arhiva %s\n"
 "%s"
 
-msgid "Inconsistent extfs archive"
-msgstr "Arhivă extfs inconsistentă"
+#, fuzzy, c-format
+msgid ""
+"EXTFS virtual file system:\n"
+"%s"
+msgstr "Sistem virtual de fișiere:"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4350,6 +4337,12 @@ msgid ""
 msgstr ""
 "fișierul ~/.netrc are permisiuni incorecte\n"
 "Înlătură parola sau corectează permisiunile"
+
+#, fuzzy, c-format
+msgid ""
+"SFS virtual file system:\n"
+"%s"
+msgstr "Sistem virtual de fișiere:"
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4667,3 +4660,42 @@ msgstr "Continuă de la început?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nu se poate aduce o copie locală a /ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid "An error occurred while migrating user settings: %s"
+#~ msgstr "A apărut o eroare în timpul migrării setărilor de utilizator: %s"
+
+#, c-format
+#~ msgid ""
+#~ "Your old settings were migrated from %s\n"
+#~ "to Freedesktop recommended dirs.\n"
+#~ "To get more info, please visit\n"
+#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+#~ msgstr ""
+#~ "Vechile tale setări au fost migrate din %s\n"
+#~ "în dosarele recomandate de Freedesktop.\n"
+#~ "Pentru mai multe informații, te rog vizitează\n"
+#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+
+#, c-format
+#~ msgid ""
+#~ "Your old settings were migrated from %s\n"
+#~ "to %s\n"
+#~ msgstr ""
+#~ "Vechile tale setări au fost migrate din %s\n"
+#~ "în %s\n"
+
+#~ msgid "Dup failed"
+#~ msgstr "Dup eșuat"
+
+#~ msgid "Error dup'ing old error pipe"
+#~ msgstr "Eroare de dup a erorii vechi de pipe"
+
+#~ msgid "Cannot invoke command."
+#~ msgstr "Nu se poate rula comanda."
+
+#~ msgid "Pipe close failed"
+#~ msgstr "Închiderea pipe a eșuat"
+
+#~ msgid "Inconsistent extfs archive"
+#~ msgstr "Arhivă extfs inconsistentă"

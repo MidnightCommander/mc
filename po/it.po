@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-01-10 13:15+0100\n"
+"POT-Creation-Date: 2021-03-14 19:59+0300\n"
 "PO-Revision-Date: 2020-01-06 12:54+0100\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/mc/language/"
@@ -77,30 +77,6 @@ msgstr "Impossibile creare la directory %s"
 
 msgid "FATAL: not a directory:"
 msgstr "FATALE: non è una directory:"
-
-#, c-format
-msgid "An error occurred while migrating user settings: %s"
-msgstr "Errore durante la migrazione delle impostazioni dell'utente: %s"
-
-#, c-format
-msgid ""
-"Your old settings were migrated from %s\n"
-"to Freedesktop recommended dirs.\n"
-"To get more info, please visit\n"
-"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-msgstr ""
-"Le vecchie impostazioni sono state migrate da %s\n"
-"alle cartelle raccomandate da Freedesktop.\n"
-"Per avere ulteriori informazioni, consultare\n"
-"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-
-#, c-format
-msgid ""
-"Your old settings were migrated from %s\n"
-"to %s\n"
-msgstr ""
-"Le vecchie impostazioni sono state migrate da %s\n"
-"a %s\n"
 
 msgid ""
 "Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
@@ -190,11 +166,11 @@ msgstr ""
 msgid "True color not supported with ncurses."
 msgstr "True color non supportato con ncurses."
 
-msgid "True color not supported in this slang version."
-msgstr "True color non supportato in questa versione di slang."
-
 msgid "Your terminal doesn't even seem to support 256 colors."
 msgstr "Il terminale non sembra supportare neanche 256 colori."
+
+msgid "True color not supported in this slang version."
+msgstr "True color non supportato in questa versione di slang."
 
 msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
 msgstr "Impostare COLORTERM=truecolor se il terminale supporta il true color."
@@ -556,18 +532,6 @@ msgid ""
 msgstr ""
 "Errore inatteso in waitpid():\n"
 "%s"
-
-msgid "Warning"
-msgstr "Attenzione"
-
-msgid "Pipe failed"
-msgstr "Pipe fallita"
-
-msgid "Dup failed"
-msgstr "Dup fallita"
-
-msgid "Error dup'ing old error pipe"
-msgstr "Errore facendo il dup della vecchia pipe errori"
 
 #, c-format
 msgid "Directory cache expired for %s"
@@ -1077,6 +1041,9 @@ msgid ""
 msgstr ""
 "Il file \"%s\" è troppo grande.\n"
 "Aprirlo comunque?"
+
+msgid "Warning"
+msgstr "Attenzione"
 
 #, c-format
 msgid "Error reading from pipe: %s"
@@ -1668,7 +1635,7 @@ msgstr ""
 "scritto per il Midnight Commander."
 
 #, fuzzy
-msgid "Copyright (C) 1996-2020 the Free Software Foundation"
+msgid "Copyright (C) 1996-2021 the Free Software Foundation"
 msgstr "Copyright (C) 1996-2019 the Free Software Foundation"
 
 msgid "About"
@@ -2582,6 +2549,9 @@ msgstr ""
 "Non posso creare file comandi temporaneo \n"
 "%s"
 
+msgid "Pipe failed"
+msgstr "Pipe fallita"
+
 #, c-format
 msgid " %s%s file error"
 msgstr " errore nel file %s%s "
@@ -3352,6 +3322,10 @@ msgstr "Nome file:"
 msgid "&Find recursively"
 msgstr "&Trova ricorsivamente"
 
+#, fuzzy
+msgid "Follow s&ymlinks"
+msgstr "Segui i co&llegamenti"
+
 msgid "S&kip hidden"
 msgstr "Salta i &nascosti"
 
@@ -3790,11 +3764,20 @@ msgstr "Aggiungi al pannello esterno"
 msgid "Enter command label:"
 msgstr "Etichetta per il comando:"
 
-msgid "Cannot invoke command."
-msgstr "Impossibile eseguire comando."
+#, fuzzy, c-format
+msgid ""
+"External panelize:\n"
+"%s"
+msgstr "Pannello esterno"
 
-msgid "Pipe close failed"
-msgstr "Chiusura pipe fallita"
+#, fuzzy, c-format
+msgid ""
+"External panelize:\n"
+"failed to read data from child stdout:\n"
+"%s"
+msgstr ""
+"Fallita la lettura dati stdout processo figlio:\n"
+"%s"
 
 msgid "Cannot run external panelize in a non-local directory"
 msgstr "Impossibile eseguire il pannello esterno su directory non-locali"
@@ -4196,16 +4179,20 @@ msgstr ""
 "Inattesa fine del file\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Cannot open %s archive\n"
+"%s:\n"
 "%s"
 msgstr ""
 "Non posso aprire l'archivio %s\n"
 "%s"
 
-msgid "Inconsistent extfs archive"
-msgstr "Archivio extfs inconsistente"
+#, fuzzy, c-format
+msgid ""
+"EXTFS virtual file system:\n"
+"%s"
+msgstr "File System Virtuali:"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4372,6 +4359,12 @@ msgid ""
 msgstr ""
 "il file ~/.netrc è impostato male.\n"
 "Rimuovere la password o correggere i permessi."
+
+#, fuzzy, c-format
+msgid ""
+"SFS virtual file system:\n"
+"%s"
+msgstr "File System Virtuali:"
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4689,6 +4682,45 @@ msgstr "Continuare dall'inizio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Impossibile ricevere copia locale di /ftp://un.host/modificami.txt"
+
+#, c-format
+#~ msgid "An error occurred while migrating user settings: %s"
+#~ msgstr "Errore durante la migrazione delle impostazioni dell'utente: %s"
+
+#, c-format
+#~ msgid ""
+#~ "Your old settings were migrated from %s\n"
+#~ "to Freedesktop recommended dirs.\n"
+#~ "To get more info, please visit\n"
+#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+#~ msgstr ""
+#~ "Le vecchie impostazioni sono state migrate da %s\n"
+#~ "alle cartelle raccomandate da Freedesktop.\n"
+#~ "Per avere ulteriori informazioni, consultare\n"
+#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+
+#, c-format
+#~ msgid ""
+#~ "Your old settings were migrated from %s\n"
+#~ "to %s\n"
+#~ msgstr ""
+#~ "Le vecchie impostazioni sono state migrate da %s\n"
+#~ "a %s\n"
+
+#~ msgid "Dup failed"
+#~ msgstr "Dup fallita"
+
+#~ msgid "Error dup'ing old error pipe"
+#~ msgstr "Errore facendo il dup della vecchia pipe errori"
+
+#~ msgid "Cannot invoke command."
+#~ msgstr "Impossibile eseguire comando."
+
+#~ msgid "Pipe close failed"
+#~ msgstr "Chiusura pipe fallita"
+
+#~ msgid "Inconsistent extfs archive"
+#~ msgstr "Archivio extfs inconsistente"
 
 #~ msgid "Block is large, you may not be able to undo this action"
 #~ msgstr "Il blocco è grande, potresti non riuscire ad annullare l'azione."

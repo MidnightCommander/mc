@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-01-10 13:15+0100\n"
+"POT-Creation-Date: 2021-03-14 19:59+0300\n"
 "PO-Revision-Date: 2020-12-31 14:19+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Hungarian (http://www.transifex.com/mc/mc/language/hu/)\n"
@@ -78,30 +78,6 @@ msgstr "A(z) %s könyvtár nem létrehozható"
 
 msgid "FATAL: not a directory:"
 msgstr "HIBA: nem könyvtár:"
-
-#, c-format
-msgid "An error occurred while migrating user settings: %s"
-msgstr "Hiba történt a felhasználói adatok migrálásakor: %s"
-
-#, c-format
-msgid ""
-"Your old settings were migrated from %s\n"
-"to Freedesktop recommended dirs.\n"
-"To get more info, please visit\n"
-"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-msgstr ""
-"A régi beállítások innen: %s migrálva lettek\\n\n"
-"a Freedesktop ajánlás szerinti könyvtárakba.\\n\n"
-"További információ:\\n\n"
-"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-
-#, c-format
-msgid ""
-"Your old settings were migrated from %s\n"
-"to %s\n"
-msgstr ""
-"A régi beállítások innen: %s migrálva lettek\n"
-"migrálva lettek ide: %s\n"
 
 msgid ""
 "Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
@@ -184,10 +160,10 @@ msgstr ""
 msgid "True color not supported with ncurses."
 msgstr ""
 
-msgid "True color not supported in this slang version."
+msgid "Your terminal doesn't even seem to support 256 colors."
 msgstr ""
 
-msgid "Your terminal doesn't even seem to support 256 colors."
+msgid "True color not supported in this slang version."
 msgstr ""
 
 msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
@@ -546,18 +522,6 @@ msgid ""
 "Unexpected error in waitpid():\n"
 "%s"
 msgstr ""
-
-msgid "Warning"
-msgstr "Figyelem"
-
-msgid "Pipe failed"
-msgstr "Cső-hiba"
-
-msgid "Dup failed"
-msgstr "Sikertelen duplikálás"
-
-msgid "Error dup'ing old error pipe"
-msgstr "Hiba a régi hiba-cső duplikálásakor"
 
 #, c-format
 msgid "Directory cache expired for %s"
@@ -1067,6 +1031,9 @@ msgid ""
 msgstr ""
 " \"%s\" fájl túl nagy.\n"
 "Mindenképp megnyitja?"
+
+msgid "Warning"
+msgstr "Figyelem"
 
 #, c-format
 msgid "Error reading from pipe: %s"
@@ -1657,7 +1624,7 @@ msgstr ""
 "Felhasználóbarát szövegszerkesztő\n"
 "a Midnight Commander-hez készítve"
 
-msgid "Copyright (C) 1996-2020 the Free Software Foundation"
+msgid "Copyright (C) 1996-2021 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -2550,6 +2517,9 @@ msgstr ""
 "Nem sikerült ideiglenes parancsfájlt létrehozni\n"
 "%s"
 
+msgid "Pipe failed"
+msgstr "Cső-hiba"
+
 #, c-format
 msgid " %s%s file error"
 msgstr " %s%s fájlhiba"
@@ -3315,6 +3285,10 @@ msgstr "Fájlnév:"
 msgid "&Find recursively"
 msgstr "Rek&urzív keresés"
 
+#, fuzzy
+msgid "Follow s&ymlinks"
+msgstr "&Linkek követése"
+
 msgid "S&kip hidden"
 msgstr "&Rejtettek kihagyása"
 
@@ -3753,11 +3727,18 @@ msgstr "Külső panel-parancs hozzáadása"
 msgid "Enter command label:"
 msgstr "A parancshoz tartozó leírás:"
 
-msgid "Cannot invoke command."
-msgstr "A parancs nem hívható meg."
+#, fuzzy, c-format
+msgid ""
+"External panelize:\n"
+"%s"
+msgstr "Külső panel-parancs"
 
-msgid "Pipe close failed"
-msgstr "Nem sikerült lezárni a csövet."
+#, c-format
+msgid ""
+"External panelize:\n"
+"failed to read data from child stdout:\n"
+"%s"
+msgstr ""
 
 msgid "Cannot run external panelize in a non-local directory"
 msgstr "Távoli/virtuális könyvtáron nem megy a  külső panel-parancsot"
@@ -4148,16 +4129,20 @@ msgstr ""
 "Váratlan fájlvég:\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Cannot open %s archive\n"
+"%s:\n"
 "%s"
 msgstr ""
 "%s-archívum nem megnyitható\n"
 "%s"
 
-msgid "Inconsistent extfs archive"
-msgstr "Inkonzisztens Extfs-archívum."
+#, fuzzy, c-format
+msgid ""
+"EXTFS virtual file system:\n"
+"%s"
+msgstr "Virtuális fájlrendszerek:"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4324,6 +4309,12 @@ msgid ""
 msgstr ""
 "~/.netrc jogosultságai helytelenek.\n"
 "Szüntesse meg a jelszót vagy javítsa a jogosultságokat."
+
+#, fuzzy, c-format
+msgid ""
+"SFS virtual file system:\n"
+"%s"
+msgstr "Virtuális fájlrendszerek:"
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4637,3 +4628,42 @@ msgstr "Folytatás az elejéről?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nem sikerült behozni /ftp://some.host/editme.txt helyi másolatát"
+
+#, c-format
+#~ msgid "An error occurred while migrating user settings: %s"
+#~ msgstr "Hiba történt a felhasználói adatok migrálásakor: %s"
+
+#, c-format
+#~ msgid ""
+#~ "Your old settings were migrated from %s\n"
+#~ "to Freedesktop recommended dirs.\n"
+#~ "To get more info, please visit\n"
+#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+#~ msgstr ""
+#~ "A régi beállítások innen: %s migrálva lettek\\n\n"
+#~ "a Freedesktop ajánlás szerinti könyvtárakba.\\n\n"
+#~ "További információ:\\n\n"
+#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+
+#, c-format
+#~ msgid ""
+#~ "Your old settings were migrated from %s\n"
+#~ "to %s\n"
+#~ msgstr ""
+#~ "A régi beállítások innen: %s migrálva lettek\n"
+#~ "migrálva lettek ide: %s\n"
+
+#~ msgid "Dup failed"
+#~ msgstr "Sikertelen duplikálás"
+
+#~ msgid "Error dup'ing old error pipe"
+#~ msgstr "Hiba a régi hiba-cső duplikálásakor"
+
+#~ msgid "Cannot invoke command."
+#~ msgstr "A parancs nem hívható meg."
+
+#~ msgid "Pipe close failed"
+#~ msgstr "Nem sikerült lezárni a csövet."
+
+#~ msgid "Inconsistent extfs archive"
+#~ msgstr "Inkonzisztens Extfs-archívum."

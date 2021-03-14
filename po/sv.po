@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-01-10 13:15+0100\n"
+"POT-Creation-Date: 2021-03-14 19:59+0300\n"
 "PO-Revision-Date: 2020-12-31 14:19+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Swedish (http://www.transifex.com/mc/mc/language/sv/)\n"
@@ -82,30 +82,6 @@ msgstr "Kan inte skapa katalogen %s"
 
 msgid "FATAL: not a directory:"
 msgstr "ALLVARLIGT FEL: inte en katalog:"
-
-#, c-format
-msgid "An error occurred while migrating user settings: %s"
-msgstr "Ett fel uppstod under migreringen av användarinställningar: %s"
-
-#, c-format
-msgid ""
-"Your old settings were migrated from %s\n"
-"to Freedesktop recommended dirs.\n"
-"To get more info, please visit\n"
-"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-msgstr ""
-"Dina gamla inställningar migrerades från %s\n"
-"till kataloger rekommenderade av Freedesktop.\n"
-"För att få mer information, besök\n"
-"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-
-#, c-format
-msgid ""
-"Your old settings were migrated from %s\n"
-"to %s\n"
-msgstr ""
-"Dina gamla inställningar blev migrerade från %s\n"
-"till %s\n"
 
 msgid ""
 "Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
@@ -195,11 +171,11 @@ msgstr ""
 msgid "True color not supported with ncurses."
 msgstr "Fullfärg stöds inte med ncurses."
 
-msgid "True color not supported in this slang version."
-msgstr "Fullfärg stöds inte i den här versionen av slang."
-
 msgid "Your terminal doesn't even seem to support 256 colors."
 msgstr "Din terminal verkar inte ens stödja 256 färger."
+
+msgid "True color not supported in this slang version."
+msgstr "Fullfärg stöds inte i den här versionen av slang."
 
 msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
 msgstr "Sätt COLORTERM=truecolor om din terminal verkligen stödjer fullfärg."
@@ -561,18 +537,6 @@ msgid ""
 msgstr ""
 "Oväntat fel i waitpid():\n"
 "%s"
-
-msgid "Warning"
-msgstr "Varning"
-
-msgid "Pipe failed"
-msgstr "Tunnel misslyckades"
-
-msgid "Dup failed"
-msgstr "Dup misslyckades"
-
-msgid "Error dup'ing old error pipe"
-msgstr "Ett fel uppstod under duplicering av en gammal feltunnel"
 
 #, c-format
 msgid "Directory cache expired for %s"
@@ -1083,6 +1047,9 @@ msgid ""
 msgstr ""
 "Filen \"%s\" är för stor.\n"
 "Öppna ändå?"
+
+msgid "Warning"
+msgstr "Varning"
 
 #, c-format
 msgid "Error reading from pipe: %s"
@@ -1673,7 +1640,7 @@ msgstr ""
 "En användarvänlig texteditor\n"
 "skriven för Midnight Commander."
 
-msgid "Copyright (C) 1996-2020 the Free Software Foundation"
+msgid "Copyright (C) 1996-2021 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -2567,6 +2534,9 @@ msgstr ""
 "Skapandet av en temporär kommandofil misslyckades\n"
 "%s"
 
+msgid "Pipe failed"
+msgstr "Tunnel misslyckades"
+
 #, c-format
 msgid " %s%s file error"
 msgstr " %s%s filfel"
@@ -3337,6 +3307,10 @@ msgstr "Filnamn:"
 msgid "&Find recursively"
 msgstr "Sök i &underkataloger"
 
+#, fuzzy
+msgid "Follow s&ymlinks"
+msgstr "Följ &länkar"
+
 msgid "S&kip hidden"
 msgstr "Ignorera &dolda"
 
@@ -3775,11 +3749,20 @@ msgstr "Lägg till extern panelisering"
 msgid "Enter command label:"
 msgstr "Ange kommando-etikett:"
 
-msgid "Cannot invoke command."
-msgstr "Kan inte starta kommandot."
+#, fuzzy, c-format
+msgid ""
+"External panelize:\n"
+"%s"
+msgstr "Extern panelisering"
 
-msgid "Pipe close failed"
-msgstr "Stänga ner tunnel misslyckades"
+#, fuzzy, c-format
+msgid ""
+"External panelize:\n"
+"failed to read data from child stdout:\n"
+"%s"
+msgstr ""
+"Läsning av data från barn-stdout misslyckades:\n"
+"%s"
 
 msgid "Cannot run external panelize in a non-local directory"
 msgstr "Extern panelisering kan inte köras på en icke-lokal katalog"
@@ -4167,16 +4150,20 @@ msgstr ""
 "Oväntat filslut\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Cannot open %s archive\n"
+"%s:\n"
 "%s"
 msgstr ""
 "Kan inte öppna %s arkivet\n"
 "%s"
 
-msgid "Inconsistent extfs archive"
-msgstr "Inkonsistent extfsfil"
+#, fuzzy, c-format
+msgid ""
+"EXTFS virtual file system:\n"
+"%s"
+msgstr "Virtuella filsystem:"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4343,6 +4330,12 @@ msgid ""
 msgstr ""
 "~/.netrc-filen har fel läge\n"
 "Ta bort lösenordet eller korrigera läge"
+
+#, fuzzy, c-format
+msgid ""
+"SFS virtual file system:\n"
+"%s"
+msgstr "Virtuella filsystem:"
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4660,3 +4653,42 @@ msgstr "Fortsätt från början?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan inte hämta en lokal kopia av /ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid "An error occurred while migrating user settings: %s"
+#~ msgstr "Ett fel uppstod under migreringen av användarinställningar: %s"
+
+#, c-format
+#~ msgid ""
+#~ "Your old settings were migrated from %s\n"
+#~ "to Freedesktop recommended dirs.\n"
+#~ "To get more info, please visit\n"
+#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+#~ msgstr ""
+#~ "Dina gamla inställningar migrerades från %s\n"
+#~ "till kataloger rekommenderade av Freedesktop.\n"
+#~ "För att få mer information, besök\n"
+#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+
+#, c-format
+#~ msgid ""
+#~ "Your old settings were migrated from %s\n"
+#~ "to %s\n"
+#~ msgstr ""
+#~ "Dina gamla inställningar blev migrerade från %s\n"
+#~ "till %s\n"
+
+#~ msgid "Dup failed"
+#~ msgstr "Dup misslyckades"
+
+#~ msgid "Error dup'ing old error pipe"
+#~ msgstr "Ett fel uppstod under duplicering av en gammal feltunnel"
+
+#~ msgid "Cannot invoke command."
+#~ msgstr "Kan inte starta kommandot."
+
+#~ msgid "Pipe close failed"
+#~ msgstr "Stänga ner tunnel misslyckades"
+
+#~ msgid "Inconsistent extfs archive"
+#~ msgstr "Inkonsistent extfsfil"

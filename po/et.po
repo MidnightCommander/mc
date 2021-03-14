@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-01-10 13:15+0100\n"
+"POT-Creation-Date: 2021-03-14 19:59+0300\n"
 "PO-Revision-Date: 2020-12-31 14:19+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Estonian (http://www.transifex.com/mc/mc/language/et/)\n"
@@ -76,30 +76,6 @@ msgstr "%s kataloogi loomine nurjus"
 
 msgid "FATAL: not a directory:"
 msgstr "Viga: ei ole kataloog:"
-
-#, c-format
-msgid "An error occurred while migrating user settings: %s"
-msgstr "Viga kasutaja seadete migreerimisel: %s"
-
-#, c-format
-msgid ""
-"Your old settings were migrated from %s\n"
-"to Freedesktop recommended dirs.\n"
-"To get more info, please visit\n"
-"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-msgstr ""
-"Su vanad seaded toodi %s'st üle\n"
-"Freedesktopi soovitatud kataloogidesse.\n"
-"Lisainfot leiad aadressilt\n"
-"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-
-#, c-format
-msgid ""
-"Your old settings were migrated from %s\n"
-"to %s\n"
-msgstr ""
-"Su vanad seaded toodi failist %s\n"
-"üle faili %s\n"
 
 msgid ""
 "Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
@@ -189,11 +165,11 @@ msgstr ""
 msgid "True color not supported with ncurses."
 msgstr "Tõelised värvid ei ole toetatud teegiga ncurses."
 
-msgid "True color not supported in this slang version."
-msgstr "Tõelised värvid ei ole teegi slang selle versiooniga toetatud."
-
 msgid "Your terminal doesn't even seem to support 256 colors."
 msgstr "Su terminal ei paista toetavat isegi 256 värvi."
+
+msgid "True color not supported in this slang version."
+msgstr "Tõelised värvid ei ole teegi slang selle versiooniga toetatud."
 
 msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
 msgstr ""
@@ -557,18 +533,6 @@ msgid ""
 msgstr ""
 "Tundmatu viga funktsioonis waitpid():\n"
 "%s"
-
-msgid "Warning"
-msgstr "Hoiatus"
-
-msgid "Pipe failed"
-msgstr "Funktsioon pipe nurjus"
-
-msgid "Dup failed"
-msgstr "Funktsioon dup nurjus"
-
-msgid "Error dup'ing old error pipe"
-msgstr "Tõrge vana veatoru paljundamisel"
 
 #, c-format
 msgid "Directory cache expired for %s"
@@ -1077,6 +1041,9 @@ msgid ""
 msgstr ""
 "Fail \"%s\" on liiga suur.\n"
 "Kas avada ta ikkagi?"
+
+msgid "Warning"
+msgstr "Hoiatus"
 
 #, c-format
 msgid "Error reading from pipe: %s"
@@ -1667,7 +1634,8 @@ msgstr ""
 "Kasutajasõbralik tekstitoimeti, mis\n"
 "on loodud Midnight Commanderile."
 
-msgid "Copyright (C) 1996-2020 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2021 the Free Software Foundation"
 msgstr "Autoriõigus (C) 1996-2020 the Free Software Foundation"
 
 msgid "About"
@@ -2559,6 +2527,9 @@ msgstr ""
 "Ajutise käsufaili loomine nurjus\n"
 "%s"
 
+msgid "Pipe failed"
+msgstr "Funktsioon pipe nurjus"
+
 #, c-format
 msgid " %s%s file error"
 msgstr "%s%s faili viga"
@@ -3328,6 +3299,10 @@ msgstr "Faili nimi:"
 msgid "&Find recursively"
 msgstr "&Otsi rekursiivselt"
 
+#, fuzzy
+msgid "Follow s&ymlinks"
+msgstr "Järgi &viitasid"
+
 msgid "S&kip hidden"
 msgstr "&Eira peidetud"
 
@@ -3766,11 +3741,20 @@ msgstr "Lisa väliskäsk paneelile"
 msgid "Enter command label:"
 msgstr "Sisesta käsu silt:"
 
-msgid "Cannot invoke command."
-msgstr "Käsu käivitamine nurjus."
+#, fuzzy, c-format
+msgid ""
+"External panelize:\n"
+"%s"
+msgstr "Väliskäsk paneelile"
 
-msgid "Pipe close failed"
-msgstr "Toru sulgemine nurjus"
+#, fuzzy, c-format
+msgid ""
+"External panelize:\n"
+"failed to read data from child stdout:\n"
+"%s"
+msgstr ""
+"Nurjus tütre std. väljundist andmete lugemine:\n"
+"%s"
 
 msgid "Cannot run external panelize in a non-local directory"
 msgstr "Väliskäsu paneelile saatmine töötab ainult kohalike kataloogidega"
@@ -4158,16 +4142,20 @@ msgstr ""
 "Ootamatu faili lõpp\n"
 " %s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Cannot open %s archive\n"
+"%s:\n"
 "%s"
 msgstr ""
 "%s arhiivi avamine nurjus\n"
 " %s"
 
-msgid "Inconsistent extfs archive"
-msgstr "Vasturääkiv extfs arhiiv"
+#, fuzzy, c-format
+msgid ""
+"EXTFS virtual file system:\n"
+"%s"
+msgstr "Virtuaalsed failisüsteemid:"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4334,6 +4322,12 @@ msgid ""
 msgstr ""
 "~/.netrc on teistele loetav\n"
 "Kustuta failist salasõna või muuda õigused"
+
+#, fuzzy, c-format
+msgid ""
+"SFS virtual file system:\n"
+"%s"
+msgstr "Virtuaalsed failisüsteemid:"
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4651,3 +4645,42 @@ msgstr "Kas jätkata algusest?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kohaliku koopia hankimine failist /ftp://some.host/editme.txt nurjus"
+
+#, c-format
+#~ msgid "An error occurred while migrating user settings: %s"
+#~ msgstr "Viga kasutaja seadete migreerimisel: %s"
+
+#, c-format
+#~ msgid ""
+#~ "Your old settings were migrated from %s\n"
+#~ "to Freedesktop recommended dirs.\n"
+#~ "To get more info, please visit\n"
+#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+#~ msgstr ""
+#~ "Su vanad seaded toodi %s'st üle\n"
+#~ "Freedesktopi soovitatud kataloogidesse.\n"
+#~ "Lisainfot leiad aadressilt\n"
+#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+
+#, c-format
+#~ msgid ""
+#~ "Your old settings were migrated from %s\n"
+#~ "to %s\n"
+#~ msgstr ""
+#~ "Su vanad seaded toodi failist %s\n"
+#~ "üle faili %s\n"
+
+#~ msgid "Dup failed"
+#~ msgstr "Funktsioon dup nurjus"
+
+#~ msgid "Error dup'ing old error pipe"
+#~ msgstr "Tõrge vana veatoru paljundamisel"
+
+#~ msgid "Cannot invoke command."
+#~ msgstr "Käsu käivitamine nurjus."
+
+#~ msgid "Pipe close failed"
+#~ msgstr "Toru sulgemine nurjus"
+
+#~ msgid "Inconsistent extfs archive"
+#~ msgstr "Vasturääkiv extfs arhiiv"

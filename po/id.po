@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-01-10 13:15+0100\n"
+"POT-Creation-Date: 2021-03-14 19:59+0300\n"
 "PO-Revision-Date: 2020-12-31 14:19+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Indonesian (http://www.transifex.com/mc/mc/language/id/)\n"
@@ -76,30 +76,6 @@ msgstr "Tidak bisa membuat direktori %s"
 
 msgid "FATAL: not a directory:"
 msgstr "FATAL: bukan sebuah direktori:"
-
-#, c-format
-msgid "An error occurred while migrating user settings: %s"
-msgstr "Terjadi kesalahan saat migrasi setting pengguna: %s"
-
-#, c-format
-msgid ""
-"Your old settings were migrated from %s\n"
-"to Freedesktop recommended dirs.\n"
-"To get more info, please visit\n"
-"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-msgstr ""
-"Setting lama anda sudah dimigrasikan dari %s\n"
-"ke direktori yang direkomendasikan Freedesktop.\n"
-"Untuk penjelasan lebih lanjutm silahkan kunjungi\n"
-"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-
-#, c-format
-msgid ""
-"Your old settings were migrated from %s\n"
-"to %s\n"
-msgstr ""
-"Setting lama anda telah dimigrasikan dari %s\n"
-"ke %s\n"
 
 msgid ""
 "Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
@@ -182,10 +158,10 @@ msgstr ""
 msgid "True color not supported with ncurses."
 msgstr ""
 
-msgid "True color not supported in this slang version."
+msgid "Your terminal doesn't even seem to support 256 colors."
 msgstr ""
 
-msgid "Your terminal doesn't even seem to support 256 colors."
+msgid "True color not supported in this slang version."
 msgstr ""
 
 msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
@@ -548,18 +524,6 @@ msgid ""
 msgstr ""
 "Kesalahan tak terduga dalam waitpid()\n"
 "%s"
-
-msgid "Warning"
-msgstr "Peringatan"
-
-msgid "Pipe failed"
-msgstr "Pipa gagal"
-
-msgid "Dup failed"
-msgstr "Dup gagal"
-
-msgid "Error dup'ing old error pipe"
-msgstr "Kesalahan pada dup'ing error pipe"
 
 #, c-format
 msgid "Directory cache expired for %s"
@@ -1040,6 +1004,9 @@ msgid ""
 msgstr ""
 "File \"%s\" terlalu besar.\n"
 "Tetap dibuka?"
+
+msgid "Warning"
+msgstr "Peringatan"
 
 #, c-format
 msgid "Error reading from pipe: %s"
@@ -1622,7 +1589,7 @@ msgid ""
 "written for the Midnight Commander."
 msgstr ""
 
-msgid "Copyright (C) 1996-2020 the Free Software Foundation"
+msgid "Copyright (C) 1996-2021 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -2494,6 +2461,9 @@ msgid ""
 "%s"
 msgstr ""
 
+msgid "Pipe failed"
+msgstr "Pipa gagal"
+
 #, c-format
 msgid " %s%s file error"
 msgstr ""
@@ -3182,6 +3152,9 @@ msgstr ""
 msgid "&Find recursively"
 msgstr ""
 
+msgid "Follow s&ymlinks"
+msgstr ""
+
 msgid "S&kip hidden"
 msgstr ""
 
@@ -3613,10 +3586,17 @@ msgstr ""
 msgid "Enter command label:"
 msgstr ""
 
-msgid "Cannot invoke command."
+#, c-format
+msgid ""
+"External panelize:\n"
+"%s"
 msgstr ""
 
-msgid "Pipe close failed"
+#, c-format
+msgid ""
+"External panelize:\n"
+"failed to read data from child stdout:\n"
+"%s"
 msgstr ""
 
 msgid "Cannot run external panelize in a non-local directory"
@@ -3967,13 +3947,19 @@ msgid ""
 "%s"
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Cannot open %s archive\n"
+"%s:\n"
 "%s"
 msgstr ""
+"Tak bisa membuka arsip cpio\n"
+"%s"
 
-msgid "Inconsistent extfs archive"
+#, c-format
+msgid ""
+"EXTFS virtual file system:\n"
+"%s"
 msgstr ""
 
 #, c-format
@@ -4138,6 +4124,12 @@ msgstr ""
 msgid ""
 "~/.netrc file has incorrect mode\n"
 "Remove password or correct mode"
+msgstr ""
+
+#, c-format
+msgid ""
+"SFS virtual file system:\n"
+"%s"
 msgstr ""
 
 #, c-format
@@ -4431,3 +4423,33 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#, c-format
+#~ msgid "An error occurred while migrating user settings: %s"
+#~ msgstr "Terjadi kesalahan saat migrasi setting pengguna: %s"
+
+#, c-format
+#~ msgid ""
+#~ "Your old settings were migrated from %s\n"
+#~ "to Freedesktop recommended dirs.\n"
+#~ "To get more info, please visit\n"
+#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+#~ msgstr ""
+#~ "Setting lama anda sudah dimigrasikan dari %s\n"
+#~ "ke direktori yang direkomendasikan Freedesktop.\n"
+#~ "Untuk penjelasan lebih lanjutm silahkan kunjungi\n"
+#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+
+#, c-format
+#~ msgid ""
+#~ "Your old settings were migrated from %s\n"
+#~ "to %s\n"
+#~ msgstr ""
+#~ "Setting lama anda telah dimigrasikan dari %s\n"
+#~ "ke %s\n"
+
+#~ msgid "Dup failed"
+#~ msgstr "Dup gagal"
+
+#~ msgid "Error dup'ing old error pipe"
+#~ msgstr "Kesalahan pada dup'ing error pipe"

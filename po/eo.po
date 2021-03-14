@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-01-10 13:15+0100\n"
+"POT-Creation-Date: 2021-03-14 19:59+0300\n"
 "PO-Revision-Date: 2020-12-31 15:56+0000\n"
 "Last-Translator: Keith Bowes <zooplah@gmail.com>\n"
 "Language-Team: Esperanto (http://www.transifex.com/mc/mc/language/eo/)\n"
@@ -74,30 +74,6 @@ msgstr "Ne eblas krei dosierujon %s"
 
 msgid "FATAL: not a directory:"
 msgstr "PEREIGA: ne estas dosierujo:"
-
-#, c-format
-msgid "An error occurred while migrating user settings: %s"
-msgstr "Eraro okazis dum migrigi uzanto-agordon: %s"
-
-#, c-format
-msgid ""
-"Your old settings were migrated from %s\n"
-"to Freedesktop recommended dirs.\n"
-"To get more info, please visit\n"
-"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-msgstr ""
-"Via eksaj agordaĵoj estis migrintaj el %s\n"
-"al dosierujoj rekomendataj de Freedesktop.\n"
-"Por akiri pliajn informojn, bonvolu viziti\n"
-"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-
-#, c-format
-msgid ""
-"Your old settings were migrated from %s\n"
-"to %s\n"
-msgstr ""
-"Via eksa agordo estis elmigrinta el %s\n"
-"al %s\n"
 
 msgid ""
 "Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
@@ -187,11 +163,11 @@ msgstr ""
 msgid "True color not supported with ncurses."
 msgstr "Verkoloro ne estas regata per ncurses."
 
-msgid "True color not supported in this slang version."
-msgstr "Verkoloro ne estas regata de tiu eldono de S-Lang"
-
 msgid "Your terminal doesn't even seem to support 256 colors."
 msgstr "Via terminalo ŝajnas ne regi 256 kolorojn"
+
+msgid "True color not supported in this slang version."
+msgstr "Verkoloro ne estas regata de tiu eldono de S-Lang"
 
 msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
 msgstr ""
@@ -560,18 +536,6 @@ msgid ""
 msgstr ""
 "Neatendita eraro en waitpid():\n"
 "%s"
-
-msgid "Warning"
-msgstr "Averto"
-
-msgid "Pipe failed"
-msgstr "Dukto malsukcesis"
-
-msgid "Dup failed"
-msgstr "Duplikato malsukcesis"
-
-msgid "Error dup'ing old error pipe"
-msgstr "Erara dum duplikati malnovan eraran dukton"
 
 #, c-format
 msgid "Directory cache expired for %s"
@@ -1081,6 +1045,9 @@ msgid ""
 msgstr ""
 "Dosiero \"%s\" estas tro granda.\n"
 "Ĉu senkonsidere malfermi ĝin?"
+
+msgid "Warning"
+msgstr "Averto"
 
 #, c-format
 msgid "Error reading from pipe: %s"
@@ -1672,7 +1639,8 @@ msgstr ""
 "Afabla tekstoredaktilo\n"
 "verkita por Midnight Commander."
 
-msgid "Copyright (C) 1996-2020 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2021 the Free Software Foundation"
 msgstr "Kopirajto (C) 1996–2020 la Fondaĵo pri liberaj programoj"
 
 msgid "About"
@@ -2572,6 +2540,9 @@ msgstr ""
 "Ne eblas krei provizoran komandodosieron\n"
 "%s"
 
+msgid "Pipe failed"
+msgstr "Dukto malsukcesis"
+
 #, c-format
 msgid " %s%s file error"
 msgstr " %s%s: dosiera eraro"
@@ -3342,6 +3313,10 @@ msgstr "Dosiernomo:"
 msgid "&Find recursively"
 msgstr "&Trovi rekursie"
 
+#, fuzzy
+msgid "Follow s&ymlinks"
+msgstr "Sekvi &Ligilojn"
+
 msgid "S&kip hidden"
 msgstr "P&reterlasi kaŝitan"
 
@@ -3780,11 +3755,20 @@ msgstr "Aldoni al eksteraj flankoj"
 msgid "Enter command label:"
 msgstr "Enmetu komandan etikedon:"
 
-msgid "Cannot invoke command."
-msgstr "Ne eblas plenumi komandon."
+#, fuzzy, c-format
+msgid ""
+"External panelize:\n"
+"%s"
+msgstr "Eksterigi flankojn"
 
-msgid "Pipe close failed"
-msgstr "Dukta fermo malsukcesis"
+#, fuzzy, c-format
+msgid ""
+"External panelize:\n"
+"failed to read data from child stdout:\n"
+"%s"
+msgstr ""
+"Malsukcesis legi datumojn el ida ĉefeligujo:\n"
+"%s"
 
 msgid "Cannot run external panelize in a non-local directory"
 msgstr "Ne eblas plenumi eksterajn flanojn en fora dosierujo"
@@ -4176,16 +4160,20 @@ msgstr ""
 "Neatendita dosierfino\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Cannot open %s archive\n"
+"%s:\n"
 "%s"
 msgstr ""
 "Ne eblas malfermi dosiero %s\n"
 "%s"
 
-msgid "Inconsistent extfs archive"
-msgstr "Malkonsekvenca extfs-dosieron"
+#, fuzzy, c-format
+msgid ""
+"EXTFS virtual file system:\n"
+"%s"
+msgstr "Virtualaj dosiersistemoj:"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4352,6 +4340,12 @@ msgid ""
 msgstr ""
 "~/.netrc havas neĝustan reĝimon\n"
 "Forigi pasvorton aŭ alĝustigi reĝimon"
+
+#, fuzzy, c-format
+msgid ""
+"SFS virtual file system:\n"
+"%s"
+msgstr "Virtualaj dosiersistemoj:"
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4669,3 +4663,42 @@ msgstr "Ĉu deiri de la komenco?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Ne eblas atingi lokan kopion de /ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid "An error occurred while migrating user settings: %s"
+#~ msgstr "Eraro okazis dum migrigi uzanto-agordon: %s"
+
+#, c-format
+#~ msgid ""
+#~ "Your old settings were migrated from %s\n"
+#~ "to Freedesktop recommended dirs.\n"
+#~ "To get more info, please visit\n"
+#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+#~ msgstr ""
+#~ "Via eksaj agordaĵoj estis migrintaj el %s\n"
+#~ "al dosierujoj rekomendataj de Freedesktop.\n"
+#~ "Por akiri pliajn informojn, bonvolu viziti\n"
+#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+
+#, c-format
+#~ msgid ""
+#~ "Your old settings were migrated from %s\n"
+#~ "to %s\n"
+#~ msgstr ""
+#~ "Via eksa agordo estis elmigrinta el %s\n"
+#~ "al %s\n"
+
+#~ msgid "Dup failed"
+#~ msgstr "Duplikato malsukcesis"
+
+#~ msgid "Error dup'ing old error pipe"
+#~ msgstr "Erara dum duplikati malnovan eraran dukton"
+
+#~ msgid "Cannot invoke command."
+#~ msgstr "Ne eblas plenumi komandon."
+
+#~ msgid "Pipe close failed"
+#~ msgstr "Dukta fermo malsukcesis"
+
+#~ msgid "Inconsistent extfs archive"
+#~ msgstr "Malkonsekvenca extfs-dosieron"

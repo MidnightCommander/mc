@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-01-10 13:15+0100\n"
+"POT-Creation-Date: 2021-03-14 19:59+0300\n"
 "PO-Revision-Date: 2021-01-03 19:08+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/mc/mc/language/ca/)\n"
@@ -82,30 +82,6 @@ msgstr "No s'ha pogut crear el directori %s"
 
 msgid "FATAL: not a directory:"
 msgstr "FATAL: no és un directori:"
-
-#, c-format
-msgid "An error occurred while migrating user settings: %s"
-msgstr "Hi ha hagut un error mentre es migraven els ajustaments d'usuari: %s"
-
-#, c-format
-msgid ""
-"Your old settings were migrated from %s\n"
-"to Freedesktop recommended dirs.\n"
-"To get more info, please visit\n"
-"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-msgstr ""
-"Els vostres antics ajustaments s'han migrat de %s\n"
-"cap als directoris recomanats per Freedesktop.\n"
-"Per obtenir més informació, si us plau, visiteu\n"
-"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-
-#, c-format
-msgid ""
-"Your old settings were migrated from %s\n"
-"to %s\n"
-msgstr ""
-"Els vostres antics ajustaments s'han migrat de %s\n"
-"cap a %s\n"
 
 msgid ""
 "Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
@@ -197,11 +173,11 @@ msgstr ""
 msgid "True color not supported with ncurses."
 msgstr "El color veritable no està admès amb «ncurses»."
 
-msgid "True color not supported in this slang version."
-msgstr "El color veritable no està admès en aquesta versió de «slang»."
-
 msgid "Your terminal doesn't even seem to support 256 colors."
 msgstr "El terminal no sembla admetre 256 colors."
+
+msgid "True color not supported in this slang version."
+msgstr "El color veritable no està admès en aquesta versió de «slang»."
 
 msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
 msgstr ""
@@ -573,18 +549,6 @@ msgid ""
 msgstr ""
 "S'ha produït un error inesperat en waitpid():\n"
 "%s"
-
-msgid "Warning"
-msgstr "Avís"
-
-msgid "Pipe failed"
-msgstr "Ha fallat la canonada"
-
-msgid "Dup failed"
-msgstr "Dup ha fallat"
-
-msgid "Error dup'ing old error pipe"
-msgstr "Error en fer «dup» per un error de canonada antiga"
 
 #, c-format
 msgid "Directory cache expired for %s"
@@ -1095,6 +1059,9 @@ msgid ""
 msgstr ""
 "El fitxer «%s» és massa gran.\n"
 "L'obro igualment?"
+
+msgid "Warning"
+msgstr "Avís"
 
 #, c-format
 msgid "Error reading from pipe: %s"
@@ -1687,7 +1654,8 @@ msgstr ""
 "Un editor de text fàcil d'emprar\n"
 "escrit per al Midnight Commander."
 
-msgid "Copyright (C) 1996-2020 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2021 the Free Software Foundation"
 msgstr "Copyright (C) 1996-2020 la Free Software Foundation"
 
 msgid "About"
@@ -2587,6 +2555,9 @@ msgstr ""
 "No s'ha pogut crear el fitxer d'ordre temporal\n"
 "%s"
 
+msgid "Pipe failed"
+msgstr "Ha fallat la canonada"
+
 #, c-format
 msgid " %s%s file error"
 msgstr "Error en el fitxer %s%s"
@@ -3358,6 +3329,10 @@ msgstr "Nom del fitxer:"
 msgid "&Find recursively"
 msgstr "&Troba de forma recursiva"
 
+#, fuzzy
+msgid "Follow s&ymlinks"
+msgstr "Segueix els en&llaços"
+
 msgid "S&kip hidden"
 msgstr "O&met els ocults"
 
@@ -3798,11 +3773,20 @@ msgstr "Afegeix al quadre de cerca extern"
 msgid "Enter command label:"
 msgstr "Introduïu una etiqueta per a l'ordre:"
 
-msgid "Cannot invoke command."
-msgstr "No puc cridar l'ordre."
+#, fuzzy, c-format
+msgid ""
+"External panelize:\n"
+"%s"
+msgstr "Quadre de cerca extern"
 
-msgid "Pipe close failed"
-msgstr "Ha fallat el tancament del conducte"
+#, fuzzy, c-format
+msgid ""
+"External panelize:\n"
+"failed to read data from child stdout:\n"
+"%s"
+msgstr ""
+"Ha fallat en llegir les dades de la sortida estàndard filla:\n"
+"%s"
 
 msgid "Cannot run external panelize in a non-local directory"
 msgstr ""
@@ -4196,16 +4180,20 @@ msgstr ""
 "Fí de fitxer inesperat a\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Cannot open %s archive\n"
+"%s:\n"
 "%s"
 msgstr ""
 "No s'ha pogut obrir l'arxiu %s\n"
 "%s"
 
-msgid "Inconsistent extfs archive"
-msgstr "L'arxiu extfs no és consistent"
+#, fuzzy, c-format
+msgid ""
+"EXTFS virtual file system:\n"
+"%s"
+msgstr "Sistemes de fitxers virtuals:"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4373,6 +4361,12 @@ msgid ""
 msgstr ""
 "El fitxer ~/.netrc no té un mode correcte.\n"
 "Elimineu la contrasenya o el mode correcte"
+
+#, fuzzy, c-format
+msgid ""
+"SFS virtual file system:\n"
+"%s"
+msgstr "Sistemes de fitxers virtuals:"
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4693,3 +4687,43 @@ msgstr "Continuo des del començament?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "No s'ha pogut obtenir una còpia local de /ftp://algun.amfitrió/editam.txt"
+
+#, c-format
+#~ msgid "An error occurred while migrating user settings: %s"
+#~ msgstr ""
+#~ "Hi ha hagut un error mentre es migraven els ajustaments d'usuari: %s"
+
+#, c-format
+#~ msgid ""
+#~ "Your old settings were migrated from %s\n"
+#~ "to Freedesktop recommended dirs.\n"
+#~ "To get more info, please visit\n"
+#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+#~ msgstr ""
+#~ "Els vostres antics ajustaments s'han migrat de %s\n"
+#~ "cap als directoris recomanats per Freedesktop.\n"
+#~ "Per obtenir més informació, si us plau, visiteu\n"
+#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+
+#, c-format
+#~ msgid ""
+#~ "Your old settings were migrated from %s\n"
+#~ "to %s\n"
+#~ msgstr ""
+#~ "Els vostres antics ajustaments s'han migrat de %s\n"
+#~ "cap a %s\n"
+
+#~ msgid "Dup failed"
+#~ msgstr "Dup ha fallat"
+
+#~ msgid "Error dup'ing old error pipe"
+#~ msgstr "Error en fer «dup» per un error de canonada antiga"
+
+#~ msgid "Cannot invoke command."
+#~ msgstr "No puc cridar l'ordre."
+
+#~ msgid "Pipe close failed"
+#~ msgstr "Ha fallat el tancament del conducte"
+
+#~ msgid "Inconsistent extfs archive"
+#~ msgstr "L'arxiu extfs no és consistent"
