@@ -1725,11 +1725,16 @@ resolve_symlink (struct vfs_class *me, struct vfs_s_super *super, struct vfs_s_i
 static int
 ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 {
-    struct vfs_s_entry *ent;
     struct vfs_s_super *super = dir->super;
     ftp_super_t *ftp_super = FTP_SUPER (super);
-    int sock, num_entries = 0;
+    int sock;
+    char lc_buffer[BUF_8K];
+    int res;
     gboolean cd_first;
+    GSList *dirlist = NULL;
+    GSList *entlist;
+    GSList *iter;
+    int err_count = 0;
 
     cd_first = ftpfs_first_cd_then_ls || (ftp_super->strict == RFC_STRICT)
         || (strchr (remote_path, ' ') != NULL);
@@ -1783,25 +1788,16 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
         ERRNOR (EACCES, -1);
     }
 
-    vfs_parse_ls_lga_init ();
-
-    while (TRUE)
+    /* read full directory list, then parse it */
+    while ((res = vfs_s_get_line_interruptible (me, lc_buffer, sizeof (lc_buffer), sock)) != 0)
     {
-        int i;
-        size_t count_spaces = 0;
-        int res;
-        char lc_buffer[BUF_8K] = "\0";
-
-        res = vfs_s_get_line_interruptible (me, lc_buffer, sizeof (lc_buffer), sock);
-        if (res == 0)
-            break;
-
         if (res == EINTR)
         {
             me->verrno = ECONNRESET;
             close (sock);
             ftp_super->ctl_connection_busy = FALSE;
             ftpfs_get_reply (me, ftp_super->sock, NULL, 0);
+            g_slist_free_full (dirlist, g_free);
             vfs_print_message (_("%s: failure"), me->name);
             return (-1);
         }
@@ -1813,28 +1809,19 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
             fflush (me->logfile);
         }
 
-        ent = vfs_s_generate_entry (me, NULL, dir, 0);
-        i = ent->ino->st.st_nlink;
-
-        if (!vfs_parse_ls_lga
-            (lc_buffer, &ent->ino->st, &ent->name, &ent->ino->linkname, &count_spaces))
-            vfs_s_free_entry (me, ent);
-        else
-        {
-            ent->ino->st.st_nlink = i;  /* Ouch, we need to preserve our counts :-( */
-            num_entries++;
-            vfs_s_store_filename_leading_spaces (ent, count_spaces);
-            vfs_s_insert_entry (me, dir, ent);
-        }
+        dirlist = g_slist_prepend (dirlist, g_strdup (lc_buffer));
     }
 
     close (sock);
     ftp_super->ctl_connection_busy = FALSE;
     me->verrno = E_REMOTE;
     if ((ftpfs_get_reply (me, ftp_super->sock, NULL, 0) != COMPLETE))
+    {
+        g_slist_free_full (dirlist, g_free);
         goto fallback;
+    }
 
-    if (num_entries == 0 && !cd_first)
+    if (dirlist == NULL && !cd_first)
     {
         /* The LIST command may produce an empty output. In such scenario
            it is not clear whether this is caused by  'remote_path' being
@@ -1850,7 +1837,15 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
         goto again;
     }
 
-    vfs_s_normalize_filename_leading_spaces (dir, vfs_parse_ls_lga_get_final_spaces ());
+    /* parse server's reply */
+    dirlist = g_slist_reverse (dirlist);        /* restore order */
+    entlist = ftpfs_parse_long_list (me, dir, dirlist, &err_count);
+    g_slist_free_full (dirlist, g_free);
+
+    for (iter = entlist; iter != NULL; iter = g_slist_next (iter))
+        vfs_s_insert_entry (me, dir, VFS_ENTRY (iter->data));
+
+    g_slist_free (entlist);
 
     if (ftp_super->strict == RFC_AUTODETECT)
         ftp_super->strict = RFC_DARING;
