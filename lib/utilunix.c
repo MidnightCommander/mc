@@ -53,12 +53,6 @@
 #include <sys/select.h>
 #endif
 #include <sys/wait.h>
-#ifdef HAVE_SYS_IOCTL_H
-#include <sys/ioctl.h>
-#endif
-#ifdef HAVE_GET_PROCESS_STATS
-#include <sys/procstats.h>
-#endif
 #include <pwd.h>
 #include <grp.h>
 
@@ -116,9 +110,6 @@ typedef struct
 
 static int_cache uid_cache[UID_CACHE_SIZE];
 static int_cache gid_cache[GID_CACHE_SIZE];
-
-static int error_pipe[2];       /* File descriptors of error pipe */
-static int old_error;           /* File descriptor of old standard error */
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
@@ -277,6 +268,8 @@ mc_pread_stream (mc_pipe_stream_t * ps, const fd_set * fds)
         if (ps->null_term)
             ps->buf[(size_t) ps->len] = '\0';
     }
+
+    ps->pos = 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -503,13 +496,15 @@ my_systemv_flags (int flags, const char *command, char *const argv[])
  * Create pipe and run child process.
  *
  * @parameter command command line of child process
+ * @parameter read_out do or don't read the stdout of child process
+ * @parameter read_err do or don't read the stderr of child process
  * @paremeter error contains pointer to object to handle error code and message
  *
  * @return newly created object of mc_pipe_t class in success, NULL otherwise
  */
 
 mc_pipe_t *
-mc_popen (const char *command, GError ** error)
+mc_popen (const char *command, gboolean read_out, gboolean read_err, GError ** error)
 {
     mc_pipe_t *p;
     const char *const argv[] = { "/bin/sh", "sh", "-c", command, NULL };
@@ -522,9 +517,13 @@ mc_popen (const char *command, GError ** error)
         goto ret_err;
     }
 
+    p->out.fd = -1;
+    p->err.fd = -1;
+
     if (!g_spawn_async_with_pipes
-        (NULL, (gchar **) argv, NULL, G_SPAWN_DO_NOT_REAP_CHILD | G_SPAWN_FILE_AND_ARGV_ZERO,
-         NULL, NULL, &p->child_pid, NULL, &p->out.fd, &p->err.fd, error))
+        (NULL, (gchar **) argv, NULL, G_SPAWN_DO_NOT_REAP_CHILD | G_SPAWN_FILE_AND_ARGV_ZERO, NULL,
+         NULL, &p->child_pid, NULL, read_out ? &p->out.fd : NULL, read_err ? &p->err.fd : NULL,
+         error))
     {
         mc_replace_error (error, MC_PIPE_ERROR_CREATE_PIPE_STREAM, "%s",
                           _("Cannot create pipe streams"));
@@ -553,9 +552,9 @@ mc_popen (const char *command, GError ** error)
  * @parameter p pipe descriptor
  *
  * The lengths of read data contain in p->out.len and p->err.len.
- * Before read, p->xxx.len is an input:
- *   p->xxx.len > 0:  do read stream p->xxx and store data in p->xxx.buf;
- *   p->xxx.len <= 0: do not read stream p->xxx.
+ *
+ * Before read, p->xxx.len is an input. It defines the number of data to read.
+ * Should not be greater than MC_PIPE_BUFSIZE.
  *
  * After read, p->xxx.len is an output and contains the following:
  *   p->xxx.len > 0: an actual length of read data stored in p->xxx.buf;
@@ -577,8 +576,8 @@ mc_pread (mc_pipe_t * p, GError ** error)
     if (error != NULL)
         *error = NULL;
 
-    read_out = p->out.fd >= 0 && p->out.len > 0;
-    read_err = p->err.fd >= 0 && p->err.len > 0;
+    read_out = p->out.fd >= 0;
+    read_err = p->err.fd >= 0;
 
     if (!read_out && !read_err)
     {
@@ -620,6 +619,50 @@ mc_pread (mc_pipe_t * p, GError ** error)
         mc_pread_stream (&p->err, &fds);
     else
         p->err.len = MC_PIPE_STREAM_UNREAD;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Reads a line from @stream. Reading stops after an EOL or a newline. If a newline is read,
+ * it is appended to the line.
+ *
+ * @stream mc_pipe_stream_t object
+ *
+ * @return newly created GString or NULL in case of EOL;
+ */
+
+GString *
+mc_pstream_get_string (mc_pipe_stream_t * ps)
+{
+    char *s;
+    size_t size, i;
+    gboolean escape = FALSE;
+
+    g_return_val_if_fail (ps != NULL, NULL);
+
+    if (ps->len < 0)
+        return NULL;
+
+    size = ps->len - ps->pos;
+
+    if (size == 0)
+        return NULL;
+
+    s = ps->buf + ps->pos;
+
+    if (s[0] == '\0')
+        return NULL;
+
+    /* find '\0' or unescaped '\n' */
+    for (i = 0; i < size && !(s[i] == '\0' || (s[i] == '\n' && !escape)); i++)
+        escape = s[i] == '\\' ? !escape : FALSE;
+
+    if (i != size && s[i] == '\n')
+        i++;
+
+    ps->pos += i;
+
+    return g_string_new_len (s, i);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -703,121 +746,6 @@ tilde_expand (const char *directory)
         return g_strdup (directory);
 
     return g_strconcat (passwd->pw_dir, PATH_SEP_STR, q, (char *) NULL);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
- * Creates a pipe to hold standard error for a later analysis.
- * The pipe can hold 4096 bytes. Make sure no more is written
- * or a deadlock might occur.
- */
-
-void
-open_error_pipe (void)
-{
-    int error_fd = -1;
-
-    if (pipe (error_pipe) < 0)
-        message (D_NORMAL, _("Warning"), _("Pipe failed"));
-
-    old_error = dup (STDERR_FILENO);
-    if (old_error < 0 || close (STDERR_FILENO) != 0
-        || (error_fd = dup (error_pipe[1])) != STDERR_FILENO)
-    {
-        message (D_NORMAL, _("Warning"), _("Dup failed"));
-
-        close (error_pipe[0]);
-        error_pipe[0] = -1;
-    }
-    else
-    {
-        /*
-         * Settng stderr in nonblocking mode as we close it earlier, than
-         * program stops. We try to read some error at program startup,
-         * but we should not block on it.
-         *
-         * TODO: make piped stdin/stderr poll()/select()able to get rid
-         * of following hack.
-         */
-        int fd_flags;
-
-        fd_flags = fcntl (error_pipe[0], F_GETFL, NULL);
-        if (fd_flags != -1)
-        {
-            fd_flags |= O_NONBLOCK;
-
-            if (fcntl (error_pipe[0], F_SETFL, fd_flags) == -1)
-            {
-                /* TODO: handle it somehow */
-            }
-        }
-    }
-    if (error_fd >= 0)
-        close (error_fd);
-    /* we never write there */
-    close (error_pipe[1]);
-    error_pipe[1] = -1;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
- * Close a pipe
- *
- * @param error '-1' - ignore errors, '0' - display warning, '1' - display error
- * @param text is prepended to the error message from the pipe
- *
- * @return not 0 if an error was displayed
- */
-
-int
-close_error_pipe (int error, const char *text)
-{
-    const char *title;
-    char msg[MAX_PIPE_SIZE];
-    int len = 0;
-
-    /* already closed */
-    if (error_pipe[0] == -1)
-        return 0;
-
-    if (error < 0 || (error > 0 && (error & D_ERROR) != 0))
-        title = MSG_ERROR;
-    else
-        title = _("Warning");
-    if (old_error >= 0)
-    {
-        if (dup2 (old_error, STDERR_FILENO) == -1)
-        {
-            if (error < 0)
-                error = D_ERROR;
-
-            message (error, MSG_ERROR, _("Error dup'ing old error pipe"));
-            return 1;
-        }
-        close (old_error);
-        len = read (error_pipe[0], msg, sizeof (msg) - 1);
-
-        if (len >= 0)
-            msg[len] = 0;
-        close (error_pipe[0]);
-        error_pipe[0] = -1;
-    }
-    if (error < 0)
-        return 0;               /* Just ignore error message */
-    if (text == NULL)
-    {
-        if (len <= 0)
-            return 0;           /* Nothing to show */
-
-        /* Show message from pipe */
-        message (error, title, "%s", msg);
-    }
-    else
-    {
-        /* Show given text and possible message from pipe */
-        message (error, title, "%s\n%s", text, msg);
-    }
-    return 1;
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -87,11 +87,12 @@ typedef struct
     int fd;
     /* data read from fd */
     char buf[MC_PIPE_BUFSIZE];
-    /* positive: length of data in buf as before read as after;
-     * zero or negative before read: do not read drom fd;
-     * MC_PIPE_STREAM_EOF after read: EOF of fd;
-     * MC_PIPE_STREAM_UNREAD after read: there was not read from fd;
-     * MC_PIPE_ERROR_READ after read: reading error from fd.
+    /* current position in @buf (used by mc_pstream_get_string()) */
+    size_t pos;
+    /* positive: length of data in buf;
+     * MC_PIPE_STREAM_EOF: EOF of fd;
+     * MC_PIPE_STREAM_UNREAD: there was not read from fd;
+     * MC_PIPE_ERROR_READ: reading error from fd.
      */
     ssize_t len;
     /* whether buf is null-terminated or not */
@@ -207,20 +208,17 @@ const char *get_owner (uid_t uid);
 /* Returns a copy of *s until a \n is found and is below top */
 const char *extract_line (const char *s, const char *top);
 
-/* Error pipes */
-void open_error_pipe (void);
-void check_error_pipe (void);
-int close_error_pipe (int error, const char *text);
-
 /* Process spawning */
 int my_system (int flags, const char *shell, const char *command);
 int my_systeml (int flags, const char *shell, ...);
 int my_systemv (const char *command, char *const argv[]);
 int my_systemv_flags (int flags, const char *command, char *const argv[]);
 
-mc_pipe_t *mc_popen (const char *command, GError ** error);
+mc_pipe_t *mc_popen (const char *command, gboolean read_out, gboolean read_err, GError ** error);
 void mc_pread (mc_pipe_t * p, GError ** error);
 void mc_pclose (mc_pipe_t * p, GError ** error);
+
+GString *mc_pstream_get_string (mc_pipe_stream_t * ps);
 
 void my_exit (int status);
 void save_stop_handler (void);

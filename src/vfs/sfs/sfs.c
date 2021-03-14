@@ -140,6 +140,8 @@ sfs_vfmake (const vfs_path_t * vpath, vfs_path_t * cache_vpath)
     vfs_path_t *pname;          /* name of parent archive */
     char *pqname;               /* name of parent archive, quoted */
     const vfs_path_element_t *path_element;
+    mc_pipe_t *pip;
+    GError *error = NULL;
 
     path_element = vfs_path_get_by_index (vpath, -1);
     pname = vfs_path_clone (vpath);
@@ -216,14 +218,29 @@ sfs_vfmake (const vfs_path_t * vpath, vfs_path_t * cache_vpath)
     }
 
     g_free (pqname);
-    open_error_pipe ();
-    if (my_system (EXECUTE_AS_SHELL, "/bin/sh", pad))
+
+    /* don't read stdout */
+    pip = mc_popen (pad, FALSE, TRUE, &error);
+    if (pip == NULL)
     {
-        close_error_pipe (D_ERROR, NULL);
+        message (D_ERROR, MSG_ERROR, _("SFS virtual file system:\n%s"), error->message);
+        g_error_free (error);
         return (-1);
     }
 
-    close_error_pipe (D_NORMAL, NULL);
+    mc_pread (pip, &error);
+    if (error != NULL)
+    {
+        message (D_ERROR, MSG_ERROR, _("SFS virtual file system:\n%s"), error->message);
+        g_error_free (error);
+        mc_pclose (pip, NULL);
+        return (-1);
+    }
+
+    if (pip->err.len > 0)
+        message (D_ERROR, MSG_ERROR, _("SFS virtual file system:\n%s"), pip->err.buf);
+
+    mc_pclose (pip, NULL);
     return 0;                   /* OK */
 }
 

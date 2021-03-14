@@ -20,6 +20,7 @@ TESTS = \
 	mc_build_filename \
 	name_quote \
 	serialize \
+	utilunix__mc_pstream_get_string \
 	utilunix__my_system_fork_fail \
 	utilunix__my_system_fork_child_shell \
 	utilunix__my_system_fork_child \
@@ -45,6 +46,9 @@ name_quote_SOURCES = \
 
 serialize_SOURCES = \
 	serialize.c
+
+utilunix__mc_pstream_get_string_SOURCES = \
+	utilunix__mc_pstream_get_string.c
 
 utilunix__my_system_fork_fail_SOURCES = \
 	utilunix__my_system-fork_fail.c

@@ -109,7 +109,7 @@ clipboard_file_from_ext_clip (const gchar * event_group_name, const gchar * even
     if (clipboard_paste_path == NULL || clipboard_paste_path[0] == '\0')
         return TRUE;
 
-    p = mc_popen (clipboard_paste_path, NULL);
+    p = mc_popen (clipboard_paste_path, TRUE, TRUE, NULL);
     if (p == NULL)
         return TRUE;            /* don't show error message */
 
