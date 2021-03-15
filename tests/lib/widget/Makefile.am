@@ -19,7 +19,8 @@ TESTS = \
 	complete_engine \
 	hotkey_equal \
 	group_init_destroy \
-	widget_find_by_id
+	widget_find_by_id \
+	widget_make_global_local
 
 check_PROGRAMS = $(TESTS)
 
@@ -34,3 +35,6 @@ group_init_destroy_SOURCES = \
 
 widget_find_by_id_SOURCES = \
 	widget_find_by_id.c
+
+widget_make_global_local_SOURCES = \
+	widget_make_global_local.c

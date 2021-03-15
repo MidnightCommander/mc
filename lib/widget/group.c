@@ -177,6 +177,74 @@ group_send_broadcast_msg_custom (WGroup * g, widget_msg_t msg, gboolean reverse,
 /* --------------------------------------------------------------------------------------------- */
 
 /**
+  * Default group callback to convert group coordinates from local (relative to owner) to global
+  * (relative to screen).
+  *
+  * @param w widget
+  */
+
+static void
+group_default_make_global (Widget * w, const WRect * delta)
+{
+    GList *iter;
+
+    if (delta != NULL)
+    {
+        /* change own coordinates */
+        widget_default_make_global (w, delta);
+        /* change child widget coordinates */
+        for (iter = GROUP (w)->widgets; iter != NULL; iter = g_list_next (iter))
+            WIDGET (iter->data)->make_global (WIDGET (iter->data), delta);
+    }
+    else if (w->owner != NULL)
+    {
+        WRect r = { WIDGET (w->owner)->y, WIDGET (w->owner)->x, 0, 0 };
+
+        /* change own coordinates */
+        widget_default_make_global (w, &r);
+        /* change child widget coordinates */
+        for (iter = GROUP (w)->widgets; iter != NULL; iter = g_list_next (iter))
+            WIDGET (iter->data)->make_global (WIDGET (iter->data), &r);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+  * Default group callback to convert group coordinates from global (relative to screen) to local
+  * (relative to owner).
+  *
+  * @param w widget
+  */
+
+static void
+group_default_make_local (Widget * w, const WRect * delta)
+{
+    GList *iter;
+
+    if (delta != NULL)
+    {
+        /* change own coordinates */
+        widget_default_make_local (w, delta);
+        /* change child widget coordinates */
+        for (iter = GROUP (w)->widgets; iter != NULL; iter = g_list_next (iter))
+            WIDGET (iter->data)->make_local (WIDGET (iter->data), delta);
+    }
+    else if (w->owner != NULL)
+    {
+        WRect r = { WIDGET (w->owner)->y, WIDGET (w->owner)->x, 0, 0 };
+
+        /* change own coordinates */
+        widget_default_make_local (w, &r);
+        /* change child widget coordinates */
+        for (iter = GROUP (w)->widgets; iter != NULL; iter = g_list_next (iter))
+            WIDGET (iter->data)->make_local (WIDGET (iter->data), &r);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
  * Default group callback function to find widget in the group.
  *
  * @param w WGroup object
@@ -539,6 +607,9 @@ group_init (WGroup * g, int y1, int x1, int lines, int cols, widget_cb_fn callba
 
     w->mouse_handler = group_handle_mouse_event;
 
+    w->make_global = group_default_make_global;
+    w->make_local = group_default_make_local;
+
     w->find = group_default_find;
     w->find_by_type = group_default_find_by_type;
     w->find_by_id = group_default_find_by_id;
@@ -704,14 +775,13 @@ group_add_widget_autopos (WGroup * g, void *w, widget_pos_flags_t pos_flags, con
 
     if ((pos_flags & WPOS_CENTER_HORZ) != 0)
         ww->x = (wg->cols - ww->cols) / 2;
-    ww->x += wg->x;
 
     if ((pos_flags & WPOS_CENTER_VERT) != 0)
         ww->y = (wg->lines - ww->lines) / 2;
-    ww->y += wg->y;
 
     ww->owner = g;
     ww->pos_flags = pos_flags;
+    widget_make_global (ww);
 
     if (g->widgets == NULL || before == NULL)
     {
@@ -757,15 +827,16 @@ group_add_widget_autopos (WGroup * g, void *w, widget_pos_flags_t pos_flags, con
 void
 group_remove_widget (void *w)
 {
+    Widget *ww = WIDGET (w);
     WGroup *g;
     GList *d;
 
     /* Don't accept NULL widget. This shouldn't happen */
     assert (w != NULL);
 
-    g = WIDGET (w)->owner;
+    g = ww->owner;
 
-    d = g_list_find (g->widgets, w);
+    d = g_list_find (g->widgets, ww);
     if (d == g->current)
         group_set_current_widget_next (g);
 
@@ -780,7 +851,8 @@ group_remove_widget (void *w)
         group_select_current_widget (g);
     }
 
-    WIDGET (w)->owner = NULL;
+    widget_make_local (ww);
+    ww->owner = NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
