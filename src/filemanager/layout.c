@@ -816,8 +816,15 @@ setup_panels (void)
      * +--------+------------------------------------------------------+
      */
 
-    const Widget *mw = CONST_WIDGET (midnight_dlg);
+    Widget *mw = WIDGET (midnight_dlg);
     int start_y;
+    gboolean active;
+
+    active = widget_get_state (mw, WST_ACTIVE);
+
+    /* lock the group to avoid many redraws */
+    if (active)
+        widget_set_state (mw, WST_SUSPENDED, TRUE);
 
     /* iniitial height of panels */
     height =
@@ -896,6 +903,13 @@ setup_panels (void)
     widget_set_visibility (WIDGET (the_bar), mc_global.keybar_visible);
 
     update_xterm_title_path ();
+
+    /* unlock */
+    if (active)
+    {
+        widget_set_state (mw, WST_ACTIVE, TRUE);
+        widget_draw (mw);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
