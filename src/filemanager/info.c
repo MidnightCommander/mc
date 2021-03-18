@@ -63,10 +63,6 @@
 
 /*** file scope macro definitions ****************************************************************/
 
-#ifndef VERSION
-#define VERSION "undefined"
-#endif
-
 /*** file scope type declarations ****************************************************************/
 
 struct WInfo
@@ -125,7 +121,7 @@ info_show_info (WInfo * info)
 
     tty_setcolor (MARKED_COLOR);
     widget_gotoyx (w, 1, 3);
-    tty_printf (_("Midnight Commander %s"), VERSION);
+    tty_printf (_("Midnight Commander %s"), mc_global.mc_version);
 
     if (!info->ready)
         return;

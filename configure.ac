@@ -4,15 +4,34 @@ dnl
 
 dnl 2.64 is required at least for m4_esyscmd_s()
 AC_PREREQ(2.64)
+
+dnl AC_INIT defines PACKAGE_VERSION and PACKAGE_STRING macros in config.h
+dnl and puts a version into them.
+dnl Since a) version is changed after `git commit` (and config.h is recreated
+dnl as a result) and b) config.h is included in each .c file, the total
+dnl recompilation is performed after commit instead of recompilation
+dnl of modified files only.
+dnl
+dnl If AC_PACKAGE_VERSION and AC_PACKAGE_STRING macros are predefined before
+dnl AC_INIT call, AC_INIT doesn't redefine them.
+dnl As a result, config.h will not contain macros with variable version.
+m4_define([AC_PACKAGE_VERSION], [])
+m4_define([AC_PACKAGE_STRING], [])
 AC_INIT([GNU Midnight Commander], m4_esyscmd_s([maint/utils/version.sh .]),
         [https://www.midnight-commander.org/wiki/NewTicket], [mc],
         [https://www.midnight-commander.org/])
+
 m4_pattern_forbid(MC_)
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_AUX_DIR(config)
 AC_CONFIG_SRCDIR(src/main.c)
 AC_CONFIG_HEADERS(config.h)
-AM_INIT_AUTOMAKE
+
+dnl Apply "no-define" to avoid defining the VERSION macro in config.h
+AM_INIT_AUTOMAKE([no-define])
+dnl PACKAGE macro isn't defined if "no-define" is applied
+AC_DEFINE([PACKAGE], ["mc"], [Name of package])
+
 dnl Enable silent rules by default (if yes)
 m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 

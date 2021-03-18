@@ -30,6 +30,8 @@
 
 #include <config.h>
 
+#include "version.h"
+
 #include "global.h"
 
 /* *INDENT-OFF* */
@@ -47,7 +49,10 @@
 /*** global variables ****************************************************************************/
 
 /* *INDENT-OFF* */
-mc_global_t mc_global = {
+mc_global_t mc_global =
+{
+    .mc_version = MC_CURRENT_VERSION,
+
     .mc_run_mode = MC_RUN_FULL,
     .run_from_parent_mc = FALSE,
     .midnight_shutdown = FALSE,

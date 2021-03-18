@@ -139,31 +139,39 @@ edit_dlg_deinit (void)
 static void
 edit_about (void)
 {
-    quick_widget_t quick_widgets[] = {
-        /* *INDENT-OFF* */
-        QUICK_LABEL ("MCEdit " VERSION, NULL),
-        QUICK_SEPARATOR (TRUE),
-        QUICK_LABEL (N_("A user friendly text editor\n"
-                        "written for the Midnight Commander."), NULL),
-        QUICK_SEPARATOR (FALSE),
-        QUICK_LABEL (N_("Copyright (C) 1996-2021 the Free Software Foundation"), NULL),
-        QUICK_START_BUTTONS (TRUE, TRUE),
+    char *ver;
+
+    ver = g_strdup_printf ("MCEdit %s", mc_global.mc_version);
+
+    {
+        quick_widget_t quick_widgets[] = {
+            /* *INDENT-OFF* */
+            QUICK_LABEL (ver, NULL),
+            QUICK_SEPARATOR (TRUE),
+            QUICK_LABEL (N_("A user friendly text editor\n"
+                            "written for the Midnight Commander."), NULL),
+            QUICK_SEPARATOR (FALSE),
+            QUICK_LABEL (N_("Copyright (C) 1996-2021 the Free Software Foundation"), NULL),
+            QUICK_START_BUTTONS (TRUE, TRUE),
             QUICK_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
-        QUICK_END
-        /* *INDENT-ON* */
-    };
+            QUICK_END
+            /* *INDENT-ON* */
+        };
 
-    quick_dialog_t qdlg = {
-        -1, -1, 40,
-        N_("About"), "[Internal File Editor]",
-        quick_widgets, NULL, NULL
-    };
+        quick_dialog_t qdlg = {
+            -1, -1, 40,
+            N_("About"), "[Internal File Editor]",
+            quick_widgets, NULL, NULL
+        };
 
-    quick_widgets[0].pos_flags = WPOS_KEEP_TOP | WPOS_CENTER_HORZ;
-    quick_widgets[2].pos_flags = WPOS_KEEP_TOP | WPOS_CENTER_HORZ;
-    quick_widgets[4].pos_flags = WPOS_KEEP_TOP | WPOS_CENTER_HORZ;
+        quick_widgets[0].pos_flags = WPOS_KEEP_TOP | WPOS_CENTER_HORZ;
+        quick_widgets[2].pos_flags = WPOS_KEEP_TOP | WPOS_CENTER_HORZ;
+        quick_widgets[4].pos_flags = WPOS_KEEP_TOP | WPOS_CENTER_HORZ;
 
-    (void) quick_dialog (&qdlg);
+        (void) quick_dialog (&qdlg);
+    }
+
+    g_free (ver);
 }
 
 /* --------------------------------------------------------------------------------------------- */
