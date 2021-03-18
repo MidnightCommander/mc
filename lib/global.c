@@ -30,7 +30,7 @@
 
 #include <config.h>
 
-#include "version.h"
+#include "mc-version.h"
 
 #include "global.h"
 
