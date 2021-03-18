@@ -469,7 +469,8 @@ do_panelize_cd (WPanel * panel)
             tmp_vpath =
                 vfs_path_append_new (panelized_panel.root_vpath,
                                      panelized_panel.list.list[i].fname->str, (char *) NULL);
-            list->list[i].fname = g_string_new (vfs_path_free (tmp_vpath, FALSE));
+            list->list[i].fname = g_string_new (vfs_path_as_str (tmp_vpath));
+            vfs_path_free (tmp_vpath, TRUE);
         }
         list->list[i].f.link_to_dir = panelized_panel.list.list[i].f.link_to_dir;
         list->list[i].f.stale_link = panelized_panel.list.list[i].f.stale_link;
