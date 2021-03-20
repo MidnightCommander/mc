@@ -42,6 +42,7 @@ mc_print_version(){
 #endif
 EOF
     fi
+    echo "${CURR_MC_VERSION}"
     exit
 }
 

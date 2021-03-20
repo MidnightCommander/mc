@@ -2,17 +2,21 @@ dnl
 dnl Configure.in file for the Midnight Commander
 dnl
 
-AC_PREREQ(2.60)
-AC_INIT([GNU Midnight Commander], [], [mc-devel@gnome.org])
+dnl 2.64 is required at least for m4_esyscmd_s()
+AC_PREREQ(2.64)
+AC_INIT([GNU Midnight Commander], m4_esyscmd_s([maint/utils/version.sh .]),
+        [https://www.midnight-commander.org/wiki/NewTicket], [mc],
+        [https://www.midnight-commander.org/])
 m4_pattern_forbid(MC_)
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_AUX_DIR(config)
 AC_CONFIG_SRCDIR(src/main.c)
 AC_CONFIG_HEADERS(config.h)
-mc_VERSION
-AM_INIT_AUTOMAKE(mc, ${VERSION} )
+AM_INIT_AUTOMAKE
 dnl Enable silent rules by default (if yes)
 m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
+
+mc_VERSION
 
 AM_MAINTAINER_MODE
 

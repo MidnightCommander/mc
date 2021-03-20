@@ -16,7 +16,7 @@ Compiling from GIT
 To compile GNU Midnight commander from GIT, the following software is
 required:
 
-Autoconf 2.60 and above (latest is recommended)
+Autoconf 2.64 and above (latest is recommended)
 Automake 1.12 and above (latest is recommended)
 Gettext 0.18.1 and above
 Glib 2.30 and above

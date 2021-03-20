@@ -12,7 +12,7 @@ Build requirements for GNU Midnight Commander
 - glibc
 - gcc
 - make
-- autoconf >= 2.60
+- autoconf >= 2.64
 - automake >= 1.12
 - libtool
 - glib2 >= 2.30
