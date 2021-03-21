@@ -2,11 +2,7 @@
 #ifndef MC__TTY_SLANG_H
 #define MC__TTY_SLANG_H
 
-#ifdef HAVE_SLANG_SLANG_H
-#include <slang/slang.h>
-#else
 #include <slang.h>
-#endif /* HAVE_SLANG_SLANG_H */
 
 /*** typedefs(not structures) and defined constants **********************************************/
 

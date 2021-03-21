@@ -18,15 +18,11 @@ AC_DEFUN([mc_SLANG_TERMCAP], [
 	ac_save_LIBS="$LIBS"
 	LIBS="$LIBS -lslang"
 	AC_LINK_IFELSE([AC_LANG_PROGRAM([[
-#ifdef HAVE_SLANG_SLANG_H
-#include <slang/slang.h>
-#else
 #include <slang.h>
-#endif
-		    ]],
-		    [[SLtt_get_terminfo(); SLtt_tgetflag((char*)"");]])],
-		    [mc_cv_slang_termcap=no],
-		    [mc_cv_slang_termcap=yes])
+	]],
+	[[SLtt_get_terminfo(); SLtt_tgetflag((char*)"");]])],
+	[mc_cv_slang_termcap=no], [mc_cv_slang_termcap=yes])
+
 	LIBS="$ac_save_LIBS"
     ])
 
