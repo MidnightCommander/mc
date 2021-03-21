@@ -1,6 +1,3 @@
-## Process this file with automake to create Makefile.in.
-
-SUBDIRS = dist
 
 noinst_DATA = README.xterm
 
