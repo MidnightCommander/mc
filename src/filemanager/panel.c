@@ -901,7 +901,7 @@ format_file (WPanel * panel, int file_index, int width, int attr, gboolean issta
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-repaint_file (WPanel * panel, int file_index, gboolean mv, int attr, gboolean isstatus)
+repaint_file (WPanel * panel, int file_index, int attr, gboolean isstatus)
 {
     Widget *w = WIDGET (panel);
 
@@ -931,7 +931,7 @@ repaint_file (WPanel * panel, int file_index, gboolean mv, int attr, gboolean is
     if (width <= 0)
         return;
 
-    if (mv)
+    if (!isstatus)
     {
         ypos = file_index - panel->top_file;
 
@@ -950,7 +950,7 @@ repaint_file (WPanel * panel, int file_index, gboolean mv, int attr, gboolean is
         tty_print_one_vline (TRUE);
     }
 
-    if (ret_frm != FILENAME_NOSCROLL && mv)
+    if (!isstatus && ret_frm != FILENAME_NOSCROLL)
     {
         if (!panel_is_split && fln > 0)
         {
@@ -1033,7 +1033,7 @@ display_mini_info (WPanel * panel)
     }
     else
         /* Default behavior */
-        repaint_file (panel, panel->selected, FALSE, STATUS, TRUE);
+        repaint_file (panel, panel->selected, STATUS, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1058,7 +1058,7 @@ paint_dir (WPanel * panel)
             color += (panel->selected == i + panel->top_file && panel->active);
         }
 
-        repaint_file (panel, i + panel->top_file, TRUE, color, FALSE);
+        repaint_file (panel, i + panel->top_file, color, FALSE);
     }
 
     tty_set_normal_attrs ();
@@ -2036,7 +2036,7 @@ force_maybe_cd (WPanel * panel)
 static inline void
 unselect_item (WPanel * panel)
 {
-    repaint_file (panel, panel->selected, TRUE, 2 * selection (panel)->f.marked, FALSE);
+    repaint_file (panel, panel->selected, 2 * selection (panel)->f.marked, FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
