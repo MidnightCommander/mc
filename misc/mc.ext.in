@@ -386,7 +386,7 @@ type/\(Zip archive
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view zip
 
 # jar(zip)
-type/i/^Java\ (Jar\ file|archive)\ data\ \((zip|JAR)\)
+type/i/\(Java\ (Jar\ file|archive)\ data\ \((zip|JAR)\)
 	Open=%cd %p/uzip://
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view zip
 
