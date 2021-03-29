@@ -15,6 +15,10 @@ mc.1: $(srcdir)/mc.1.in
 	MAN_FILE='$(srcdir)/mc.1.in'; MAN_DATE=$$($(MAN_DATE_CMD)); \
 	$(SED) $(SED_PARAMETERS) '$(srcdir)/mc.1.in' > '$@'
 
+mcdiff.1: $(srcdir)/mcdiff.1.in
+	MAN_FILE='$(srcdir)/mcdiff.1.in'; MAN_DATE=$$($(MAN_DATE_CMD)); \
+	$(SED) $(SED_PARAMETERS) '$(srcdir)/mcdiff.1.in' > '$@'
+
 mcedit.1: $(srcdir)/mcedit.1.in
 	MAN_FILE='$(srcdir)/mcedit.1.in'; MAN_DATE=$$($(MAN_DATE_CMD)); \
 	$(SED) $(SED_PARAMETERS) '$(srcdir)/mcedit.1.in' > '$@'
