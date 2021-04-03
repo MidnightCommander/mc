@@ -2379,6 +2379,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
             }
 
             return_status = FILE_CONT;
+            mc_utime (dst_vpath, &times);
             goto ret_fast;
         }
     }
