@@ -288,8 +288,9 @@ mc_search__g_regex_match_full_safe (const GRegex * regex,
     }
 
     /* Correctly handle embedded NULs while copying */
-    p = string_safe = g_malloc (string_len);
+    p = string_safe = g_malloc (string_len + 1);
     memcpy (string_safe, string, string_len);
+    string_safe[string_len] = '\0';
     end = p + string_len;
 
     while (p < end)
