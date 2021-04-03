@@ -200,7 +200,7 @@ local_utime (const vfs_path_t * vpath, mc_timesbuf_t * times)
 
     path_element = vfs_path_get_by_index (vpath, -1);
 #ifdef HAVE_UTIMENSAT
-    ret = utimensat (AT_FDCWD, path_element->path, *times, 0);
+    ret = utimensat (AT_FDCWD, path_element->path, *times, AT_SYMLINK_NOFOLLOW);
 #else
     ret = utime (path_element->path, times);
 #endif

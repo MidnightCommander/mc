@@ -1251,7 +1251,16 @@ move_file_file (const WPanel * panel, file_op_total_context_t * tctx, file_op_co
         {
             return_status = make_symlink (ctx, s, d);
             if (return_status == FILE_CONT)
+            {
+                if (ctx->preserve)
+                {
+                    mc_timesbuf_t times;
+
+                    get_times (&src_stat, &times);
+                    mc_utime (dst_vpath, &times);
+                }
                 goto retry_src_remove;
+            }
             goto ret;
         }
 
@@ -2286,6 +2295,8 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
         }
     }
 
+    get_times (&src_stat, &times);
+
     if (!ctx->do_append)
     {
         /* Check the hardlinks */
@@ -2310,6 +2321,8 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
         if (S_ISLNK (src_stat.st_mode))
         {
             return_status = make_symlink (ctx, src_path, dst_path);
+            if (return_status == FILE_CONT && ctx->preserve)
+                mc_utime (dst_vpath, &times);
             goto ret_fast;
         }
 
@@ -2411,7 +2424,6 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
     src_mode = src_stat.st_mode;
     src_uid = src_stat.st_uid;
     src_gid = src_stat.st_gid;
-    get_times (&src_stat, &times);
     file_size = src_stat.st_size;
 
     open_flags = O_WRONLY;
