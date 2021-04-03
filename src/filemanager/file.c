@@ -476,27 +476,28 @@ check_hardlinks (const vfs_path_t * src_vpath, const struct stat *src_stat,
 
 /* --------------------------------------------------------------------------------------------- */
 /**
- * Duplicate the contents of the symbolic link src_path in dst_path.
+ * Duplicate the contents of the symbolic link src_vpath in dst_vpath.
  * Try to make a stable symlink if the option "stable symlink" was
  * set in the file mask dialog.
  * If dst_path is an existing symlink it will be deleted silently
- * (upper levels take already care of existing files at dst_path).
+ * (upper levels take already care of existing files at dst_vpath).
  */
 
 static FileProgressStatus
-make_symlink (file_op_context_t * ctx, const char *src_path, const char *dst_path)
+make_symlink (file_op_context_t * ctx, const vfs_path_t * src_vpath, const vfs_path_t * dst_vpath)
 {
+    const char *src_path;
+    const char *dst_path;
     char link_target[MC_MAXPATHLEN];
     int len;
     FileProgressStatus return_status;
     struct stat dst_stat;
-    vfs_path_t *src_vpath;
-    vfs_path_t *dst_vpath;
     gboolean dst_is_symlink;
     vfs_path_t *link_target_vpath = NULL;
 
-    src_vpath = vfs_path_from_str (src_path);
-    dst_vpath = vfs_path_from_str (dst_path);
+    src_path = vfs_path_as_str (src_vpath);
+    dst_path = vfs_path_as_str (dst_vpath);
+
     dst_is_symlink = (mc_lstat (dst_vpath, &dst_stat) == 0) && S_ISLNK (dst_stat.st_mode);
 
   retry_src_readlink:
@@ -598,8 +599,6 @@ make_symlink (file_op_context_t * ctx, const char *src_path, const char *dst_pat
     }
 
   ret:
-    vfs_path_free (src_vpath, TRUE);
-    vfs_path_free (dst_vpath, TRUE);
     vfs_path_free (link_target_vpath, TRUE);
     return return_status;
 }
@@ -1249,7 +1248,7 @@ move_file_file (const WPanel * panel, file_op_total_context_t * tctx, file_op_co
     {
         if (S_ISLNK (src_stat.st_mode) && ctx->stable_symlinks)
         {
-            return_status = make_symlink (ctx, s, d);
+            return_status = make_symlink (ctx, src_vpath, dst_vpath);
             if (return_status == FILE_CONT)
             {
                 if (ctx->preserve)
@@ -2320,7 +2319,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
 
         if (S_ISLNK (src_stat.st_mode))
         {
-            return_status = make_symlink (ctx, src_path, dst_path);
+            return_status = make_symlink (ctx, src_vpath, dst_vpath);
             if (return_status == FILE_CONT && ctx->preserve)
                 mc_utime (dst_vpath, &times);
             goto ret_fast;
