@@ -1,7 +1,7 @@
 .\" -*- mode: troff; coding: UTF-8 -*-
 .\"TOPICS "Разделы помощи:"
 .\" TODO: Перевести раздел EXTernal File System
-.TH MC 1 "%DATE_OF_MAN_PAGE%" "MC Version %DISTR_VERSION%" "GNU Midnight Commander"
+.TH MC 1 "%DATE_OF_MAN_PAGE%" "MC Version %MAN_VERSION%" "GNU Midnight Commander"
 .\"SKIP_SECTION"
 .SH "НАИМЕНОВАНИЕ"
 mc \- Визуальная оболочка для Unix\-подобных систем.

@@ -3,7 +3,7 @@ dnl
 dnl Get current version of Midnight Commander from git tags
 dnl
 dnl @author Slava Zanko <slavazanko@gmail.com>
-dnl @version 2021-03-28
+dnl @version 2021-04-04
 dnl @license GPL
 dnl @copyright Free Software Foundation, Inc.
 dnl @modified Andrew Borodin <aborodin@vmail.ru>
@@ -16,7 +16,6 @@ AC_DEFUN([mc_VERSION],[
     fi
 
     dnl Version without dashes for the man page
-    DISTR_VERSION=`echo $VERSION | sed 's/^\([[^\-]]*\).*/\1/'`
-
-    AC_SUBST(DISTR_VERSION)
+    MAN_VERSION=`echo $VERSION | sed 's/^\([[^\-]]*\).*/\1/'`
+    AC_SUBST(MAN_VERSION)
 ])
