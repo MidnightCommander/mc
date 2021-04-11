@@ -1760,7 +1760,7 @@ load_hint (gboolean force)
     {
         char text[BUF_SMALL];
 
-        g_snprintf (text, sizeof (text), _("GNU Midnight Commander %s\n"), VERSION);
+        g_snprintf (text, sizeof (text), _("GNU Midnight Commander %s\n"), mc_global.mc_version);
         set_hintbar (text);
     }
 }

@@ -11,11 +11,11 @@ EXTRA_DIST =
 
 dist_noinst_SCRIPTS = build-glib2.sh
 
-dist_noinst_HEADERS = $(top_srcdir)/version.h
+dist_noinst_HEADERS = $(top_srcdir)/mc-version.h
 
 ACLOCAL_AMFLAGS = -I m4
 
-CONFIG_STATUS_DEPENDENCIES = $(top_srcdir)/version.h
+CONFIG_STATUS_DEPENDENCIES = $(top_srcdir)/mc-version.h
 
 .PHONY: update-version \
         cppcheck \
@@ -32,13 +32,13 @@ update-version:
 	@if test -x $(top_srcdir)/maint/utils/version.sh; then \
 	    $(top_srcdir)/maint/utils/version.sh "$(top_srcdir)" 2>&1 >/dev/null; \
 	else \
-	    if test ! -e $(top_srcdir)/version.h; then \
+	    if test ! -e $(top_srcdir)/mc-version.h; then \
 	        echo "File not found: $(top_srcdir)/maint/utils/version.sh"; \
 	        exit 1; \
 	    fi; \
 	fi
 
-$(top_srcdir)/version.h: update-version
+$(top_srcdir)/mc-version.h: update-version
 
 CPPCHECK_CMD = cppcheck \
     --inline-suppr \

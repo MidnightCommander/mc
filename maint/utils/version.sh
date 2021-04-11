@@ -56,7 +56,7 @@ fi
 
 src_top_dir="$1"
 
-VERSION_FILE="${src_top_dir}/version.h"
+VERSION_FILE="${src_top_dir}/mc-version.h"
 PREV_MC_VERSION="unknown"
 CURR_MC_VERSION="${PREV_MC_VERSION}"
 

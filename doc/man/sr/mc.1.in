@@ -1,6 +1,6 @@
 .\" -*- mode: troff; coding: UTF-8 -*-
 .\"TOPICS "Теме:"
-.TH ПН 1 "%DATE_OF_MAN_PAGE%" "ПН верзија %DISTR_VERSION%" "ГНУ\-ов поноћни наредник"
+.TH ПН 1 "%DATE_OF_MAN_PAGE%" "ПН верзија %MAN_VERSION%" "ГНУ\-ов поноћни наредник"
 .\"SKIP_SECTION"
 .SH "НАЗИВ"
 mc \- Визуална љуска за Униксолике системе.

@@ -1,4 +1,4 @@
-.TH MCVIEW 1 "%DATE_OF_MAN_PAGE%" "MC Version %DISTR_VERSION%" "GNU Midnight Commander"
+.TH MCVIEW 1 "%DATE_OF_MAN_PAGE%" "MC Version %MAN_VERSION%" "GNU Midnight Commander"
 .SH NAME
 mcview \- Internal file viewer of GNU Midnight Commander.
 .SH SYNOPSIS

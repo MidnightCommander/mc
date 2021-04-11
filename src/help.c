@@ -512,8 +512,8 @@ help_show (WDialog * h, const char *paint_start)
                 break;
             case CHAR_VERSION:
                 widget_gotoyx (h, line + 2, col + 2);
-                tty_print_string (VERSION);
-                col += str_term_width1 (VERSION);
+                tty_print_string (mc_global.mc_version);
+                col += str_term_width1 (mc_global.mc_version);
                 break;
             case CHAR_FONT_BOLD:
                 tty_setcolor (HELP_BOLD_COLOR);

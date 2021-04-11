@@ -429,7 +429,8 @@ mc_args_add_extended_info_to_help (void)
                                                    ("\n"
                                                     "Please send any bug reports (including the output of 'mc -V')\n"
                                                     "as tickets at www.midnight-commander.org\n"));
-    mc_args__loc__header_string = g_strdup_printf (_("GNU Midnight Commander %s\n"), VERSION);
+    mc_args__loc__header_string =
+        g_strdup_printf (_("GNU Midnight Commander %s\n"), mc_global.mc_version);
 
     g_option_context_set_description (context, mc_args__loc__footer_string);
     g_option_context_set_summary (context, mc_args__loc__header_string);

@@ -6,7 +6,7 @@
 .\"	David H. Martín Alonso <david.martin@telefonica.net>
 .\"
 .\"TOPICS "Índice de Contenidos:"
-.TH MC 1 "%DATE_OF_MAN_PAGE%" "MC Versión %DISTR_VERSION%" "GNU Midnight Commander"
+.TH MC 1 "%DATE_OF_MAN_PAGE%" "MC Versión %MAN_VERSION%" "GNU Midnight Commander"
 .\"SKIP_SECTION"
 .SH "NOMBRE"
 mc \- entorno visual para sistemas tipo Unix.
