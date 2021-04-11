@@ -1153,14 +1153,14 @@ help_interactive_display (const gchar * event_group_name, const gchar * event_na
         history[history_ptr].link = selected_item;
     }
 
-    help_bar = buttonbar_new (TRUE);
+    help_bar = buttonbar_new ();
     WIDGET (help_bar)->y -= wh->y;
     WIDGET (help_bar)->x -= wh->x;
 
     md = mousedispatch_new (1, 1, help_lines, HELP_WINDOW_WIDTH - 2);
 
     group_add_widget (g, md);
-    group_add_widget (g, help_bar);
+    group_add_widget (g, help_bar);     /* FIXME */
 
     buttonbar_set_label (help_bar, 1, Q_ ("ButtonBar|Help"), wh->keymap, NULL);
     buttonbar_set_label (help_bar, 2, Q_ ("ButtonBar|Index"), wh->keymap, NULL);

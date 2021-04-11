@@ -816,8 +816,15 @@ setup_panels (void)
      * +--------+------------------------------------------------------+
      */
 
-    const Widget *mw = CONST_WIDGET (midnight_dlg);
+    Widget *mw = WIDGET (midnight_dlg);
     int start_y;
+    gboolean active;
+
+    active = widget_get_state (mw, WST_ACTIVE);
+
+    /* lock the group to avoid many redraws */
+    if (active)
+        widget_set_state (mw, WST_SUSPENDED, TRUE);
 
     /* iniitial height of panels */
     height =
@@ -841,7 +848,7 @@ setup_panels (void)
     }
 
     widget_set_size (WIDGET (the_menubar), mw->y, mw->x, 1, mw->cols);
-    menubar_set_visible (the_menubar, menubar_visible);
+    widget_set_visibility (WIDGET (the_menubar), menubar_visible);
 
     check_split (&panels_layout);
     start_y = mw->y + (menubar_visible ? 1 : 0);
@@ -865,11 +872,8 @@ setup_panels (void)
                          panels[1].widget->cols);
     }
 
-    if (mc_global.message_visible)
-        widget_set_size (WIDGET (the_hint), height + start_y, mw->x, 1, mw->cols);
-    else
-        /* make invisible */
-        widget_set_size (WIDGET (the_hint), 0, 0, 0, 0);
+    widget_set_size (WIDGET (the_hint), height + start_y, mw->x, 1, mw->cols);
+    widget_set_visibility (WIDGET (the_hint), mc_global.message_visible);
 
     /* Output window */
     if (mc_global.tty.console_flag != '\0' && output_lines != 0)
@@ -891,15 +895,21 @@ setup_panels (void)
     else
     {
         /* make invisible */
-        widget_set_size (WIDGET (cmdline), 0, 0, 0, 0);
-        widget_set_size (WIDGET (the_prompt), mw->lines, mw->cols, 0, 0);
+        widget_hide (WIDGET (cmdline));
+        widget_hide (WIDGET (the_prompt));
     }
 
-    widget_set_size (WIDGET (the_bar), mw->lines - 1, mw->x, mc_global.keybar_visible ? 1 : 0,
-                     mw->cols);
-    buttonbar_set_visible (the_bar, mc_global.keybar_visible);
+    widget_set_size (WIDGET (the_bar), mw->lines - 1, mw->x, 1, mw->cols);
+    widget_set_visibility (WIDGET (the_bar), mc_global.keybar_visible);
 
     update_xterm_title_path ();
+
+    /* unlock */
+    if (active)
+    {
+        widget_set_state (mw, WST_ACTIVE, TRUE);
+        widget_draw (mw);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1001,6 +1011,9 @@ setup_cmdline (void)
     widget_set_size (WIDGET (the_prompt), y, mw->x, 1, prompt_width);
     label_set_text (the_prompt, mc_prompt);
     widget_set_size (WIDGET (cmdline), y, mw->x + prompt_width, 1, mw->cols - prompt_width);
+
+    widget_show (WIDGET (the_prompt));
+    widget_show (WIDGET (cmdline));
 }
 
 /* --------------------------------------------------------------------------------------------- */

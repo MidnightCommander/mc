@@ -173,7 +173,7 @@ buttonbar_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
         return MSG_NOT_HANDLED;
 
     case MSG_DRAW:
-        if (bb->visible)
+        if (widget_get_state (w, WST_VISIBLE))
         {
             buttonbar_init_button_positions (bb);
             widget_gotoyx (w, 0, 0);
@@ -238,7 +238,7 @@ buttonbar_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 /* --------------------------------------------------------------------------------------------- */
 
 WButtonBar *
-buttonbar_new (gboolean visible)
+buttonbar_new (void)
 {
     WButtonBar *bb;
     Widget *w;
@@ -248,7 +248,6 @@ buttonbar_new (gboolean visible)
     widget_init (w, LINES - 1, 0, 1, COLS, buttonbar_callback, buttonbar_mouse_callback);
 
     w->pos_flags = WPOS_KEEP_HORZ | WPOS_KEEP_BOTTOM;
-    bb->visible = visible;
     widget_want_hotkey (w, TRUE);
 
     return bb;

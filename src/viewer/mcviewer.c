@@ -250,7 +250,7 @@ mcview_viewer (const char *command, const vfs_path_t * file_vpath, int start_lin
     lc_mcview = mcview_new (vw->y, vw->x, vw->lines - 1, vw->cols, FALSE);
     group_add_widget_autopos (g, lc_mcview, WPOS_KEEP_ALL, NULL);
 
-    b = WIDGET (buttonbar_new (TRUE));
+    b = WIDGET (buttonbar_new ());
     group_add_widget_autopos (g, b, b->pos_flags, NULL);
 
     view_dlg->get_title = mcview_get_title;

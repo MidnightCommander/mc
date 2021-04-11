@@ -3459,7 +3459,7 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
     w->keymap = diff_map;
     group_add_widget_autopos (g, w, WPOS_KEEP_ALL, NULL);
 
-    w = WIDGET (buttonbar_new (TRUE));
+    w = WIDGET (buttonbar_new ());
     group_add_widget_autopos (g, w, w->pos_flags, NULL);
 
     dview_dlg->get_title = dview_get_title;

@@ -918,7 +918,7 @@ create_file_manager (void)
     /* allow rebind tab */
     widget_want_tab (w, TRUE);
 
-    the_menubar = menubar_new (NULL, menubar_visible);
+    the_menubar = menubar_new (NULL);
     group_add_widget (g, the_menubar);
     init_menu ();
 
@@ -939,7 +939,7 @@ create_file_manager (void)
     the_prompt->transparent = TRUE;
     group_add_widget (g, the_prompt);
 
-    the_bar = buttonbar_new (mc_global.keybar_visible);
+    the_bar = buttonbar_new ();
     group_add_widget (g, the_bar);
     midnight_set_buttonbar (the_bar);
 }
@@ -1637,7 +1637,7 @@ update_menu (void)
     menu_set_name (left_menu, panels_layout.horizontal_split ? _("&Above") : _("&Left"));
     menu_set_name (right_menu, panels_layout.horizontal_split ? _("&Below") : _("&Right"));
     menubar_arrange (the_menubar);
-    menubar_set_visible (the_menubar, menubar_visible);
+    widget_set_visibility (WIDGET (the_menubar), menubar_visible);
 }
 
 /* --------------------------------------------------------------------------------------------- */

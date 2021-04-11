@@ -1082,7 +1082,7 @@ tree_box (const char *current_dir)
     mytree = tree_new (2, 2, wd->lines - 6, wd->cols - 5, FALSE);
     group_add_widget_autopos (g, mytree, WPOS_KEEP_ALL, NULL);
     group_add_widget_autopos (g, hline_new (wd->lines - 4, 1, -1), WPOS_KEEP_BOTTOM, NULL);
-    bar = buttonbar_new (TRUE);
+    bar = buttonbar_new ();
     group_add_widget (g, bar);
     /* restore ButtonBar coordinates after add_widget() */
     WIDGET (bar)->x = 0;
