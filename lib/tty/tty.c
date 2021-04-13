@@ -100,6 +100,7 @@ sigintr_handler (int signo)
  *         alacritty*
  *         foot*
  *         screen*
+ *         tmux*
  */
 gboolean
 tty_check_term (gboolean force_xterm)
@@ -120,7 +121,8 @@ tty_check_term (gboolean force_xterm)
         || strcmp (termvalue, "dtterm") == 0
         || strncmp (termvalue, "alacritty", 9) == 0
         || strncmp (termvalue, "foot", 4) == 0
-        || strncmp (termvalue, "screen", 6) == 0;
+        || strncmp (termvalue, "screen", 6) == 0
+        || strncmp (termvalue, "tmux", 4) == 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
