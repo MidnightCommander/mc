@@ -385,7 +385,7 @@ fish_free_archive (struct vfs_class *me, struct vfs_s_super *super)
 
     if (fish_super->sockw != -1)
     {
-        fish_command (me, super, NONE, "#BYE\nexit\n", -1);
+        fish_command (me, super, NONE, "exit\n", -1);
         close (fish_super->sockw);
         fish_super->sockw = -1;
     }
@@ -630,19 +630,6 @@ fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
         ERRNOR (E_PROTO, -1);
 
     vfs_print_message ("%s", _("fish: Sending initial line..."));
-    /*
-     * Run 'start_fish_server'. If it doesn't exist - no problem,
-     * we'll talk directly to the shell.
-     */
-
-    if (fish_command
-        (me, super, WAIT_REPLY, "#FISH\necho; start_fish_server 2>&1; echo '### 200'\n",
-         -1) != COMPLETE)
-        ERRNOR (E_PROTO, -1);
-
-    vfs_print_message ("%s", _("fish: Handshaking version..."));
-    if (fish_command (me, super, WAIT_REPLY, "#VER 0.0.3\necho '### 000'\n", -1) != COMPLETE)
-        ERRNOR (E_PROTO, -1);
 
     /* Set up remote locale to C, otherwise dates cannot be recognized */
     if (fish_command

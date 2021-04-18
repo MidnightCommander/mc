@@ -1,4 +1,3 @@
-#UTIME "$FISH_TOUCHATIME_W_NSEC" "$FISH_TOUCHMTIME_W_NSEC" "$FISH_FILENAME"
 if TZ=UTC touch -h -m -d "$FISH_TOUCHMTIME_W_NSEC" "/${FISH_FILENAME}" 2>/dev/null && \
    TZ=UTC touch -h -a -d "$FISH_TOUCHATIME_W_NSEC" "/${FISH_FILENAME}" 2>/dev/null; then
   echo "### 000"

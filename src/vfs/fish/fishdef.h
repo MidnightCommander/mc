@@ -11,7 +11,6 @@
 
 /* default 'ls' script */
 #define FISH_LS_DEF_CONTENT ""                                            \
-"#LIST /${FISH_FILENAME}\n"                                               \
 "export LC_TIME=C\n"                                                      \
 "ls -Qlan \"/${FISH_FILENAME}\" 2>/dev/null | grep '^[^cbt]' | (\n"       \
 "while read p l u g s m d y n; do\n"                                      \
@@ -35,13 +34,11 @@
 
 /* default file exists script */
 #define FISH_EXISTS_DEF_CONTENT ""                                        \
-"#ISEXISTS $FISH_FILENAME\n"                                              \
 "ls -l \"/${FISH_FILENAME}\" >/dev/null 2>/dev/null\n"                    \
 "echo '### '$?\n"
 
 /* default 'mkdir' script */
 #define FISH_MKDIR_DEF_CONTENT ""                                         \
-"#MKD $FISH_FILENAME\n"                                                   \
 "if mkdir \"/${FISH_FILENAME}\" 2>/dev/null; then\n"                      \
 "    echo \"### 000\"\n"                                                  \
 "else\n"                                                                  \
@@ -50,15 +47,14 @@
 
 /* default 'unlink' script */
 #define FISH_UNLINK_DEF_CONTENT ""                                        \
-"#DELE $FISH_FILENAME\n"                                                  \
 "if rm -f \"/${FISH_FILENAME}\" 2>/dev/null; then\n"                      \
 "    echo \"### 000\"\n"                                                  \
 "else\n"                                                                  \
 "    echo \"### 500\"\n"                                                  \
 "fi\n"
+
 /* default 'chown' script */
 #define FISH_CHOWN_DEF_CONTENT ""                                           \
-"#CHOWN $FISH_FILEOWNER:$FISH_FILEGROUP $FISH_FILENAME\n"                   \
 "if chown ${FISH_FILEOWNER}:${FISH_FILEGROUP} \"/${FISH_FILENAME}\"; then\n"\
 "    echo \"### 000\"\n"                                                    \
 "else\n"                                                                    \
@@ -67,7 +63,6 @@
 
 /* default 'chmod' script */
 #define FISH_CHMOD_DEF_CONTENT ""                                           \
-"#CHMOD $FISH_FILEMODE $FISH_FILENAME\n"                                    \
 "if chmod ${FISH_FILEMODE} \"/${FISH_FILENAME}\" 2>/dev/null; then\n"       \
 "    echo \"### 000\"\n"                                                    \
 "else\n"                                                                    \
@@ -93,7 +88,6 @@
 
 /* default 'rmdir' script */
 #define FISH_RMDIR_DEF_CONTENT ""                                           \
-"#RMD $FISH_FILENAME\n"                                                     \
 "if rmdir \"/${FISH_FILENAME}\" 2>/dev/null; then\n"                        \
 "   echo \"### 000\"\n"                                                     \
 "else\n"                                                                    \
@@ -102,7 +96,6 @@
 
 /* default 'ln -s' symlink script */
 #define FISH_LN_DEF_CONTENT ""                                              \
-"#SYMLINK $FISH_FILEFROM $FISH_FILETO\n"                                    \
 "if ln -s \"/${FISH_FILEFROM}\" \"/${FISH_FILETO}\" 2>/dev/null; then\n"    \
 "   echo \"### 000\"\n"                                                     \
 "else\n"                                                                    \
@@ -111,7 +104,6 @@
 
 /* default 'mv' script */
 #define FISH_MV_DEF_CONTENT ""                                              \
-"#RENAME $FISH_FILEFROM $FISH_FILETO\n"                                     \
 "if mv \"/${FISH_FILEFROM}\" \"/${FISH_FILETO}\" 2>/dev/null; then\n"       \
 "   echo \"### 000\"\n"                                                     \
 "else\n"                                                                    \
@@ -120,7 +112,6 @@
 
 /* default 'ln' hardlink script */
 #define FISH_HARDLINK_DEF_CONTENT ""                                        \
-"#LINK $FISH_FILEFROM $FISH_FILETO\n"                                       \
 "if ln \"/${FISH_FILEFROM}\" \"/${FISH_FILETO}\" 2>/dev/null; then\n"       \
 "   echo \"### 000\"\n"                                                     \
 "else\n"                                                                    \
@@ -130,7 +121,6 @@
 /* default 'retr'  script */
 #define FISH_GET_DEF_CONTENT ""                                                 \
 "export LC_TIME=C\n"                                                            \
-"#RETR $FISH_FILENAME\n"                                                        \
 "if dd if=\"/${FISH_FILENAME}\" of=/dev/null bs=1 count=1 2>/dev/null ; then\n" \
 "    ls -ln \"/${FISH_FILENAME}\" 2>/dev/null | (\n"                            \
 "       read p l u g s r\n"                                                     \
@@ -147,7 +137,6 @@
 #define FISH_SEND_DEF_CONTENT ""                                          \
 "FILENAME=\"/${FISH_FILENAME}\"\n"                                        \
 "FILESIZE=${FISH_FILESIZE}\n"                                             \
-"#STOR $FILESIZE $FILENAME\n"                                             \
 "echo \"### 001\"\n"                                                      \
 "{\n"                                                                     \
 "    while [ $FILESIZE -gt 0 ]; do\n"                                     \
@@ -161,7 +150,6 @@
 #define FISH_APPEND_DEF_CONTENT ""                                        \
 "FILENAME=\"/${FISH_FILENAME}\"\n"                                        \
 "FILESIZE=${FISH_FILESIZE}\n"                                             \
-"#APPE $FILESIZE $FILENAME\n"                                             \
 "echo \"### 001\"\n"                                                      \
 "res=`exec 3>&1\n"                                                        \
 "(\n"                                                                     \

@@ -1,4 +1,3 @@
-#RETR $FISH_FILENAME $FISH_START_OFFSET
 LC_TIME=C
 export LC_TIME
 fish_get_perl ()

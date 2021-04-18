@@ -3227,8 +3227,7 @@ The latter specifies the full path of the tar archive.
 .SH "  FIle transfer over SHell filesystem"
 The fish file system is a network based file system that allows you to
 manipulate the files in a remote machine as if they were local. To use
-this, the other side has to either run fish server, or has to have
-bash\-compatible shell.
+this, the other side has to have bash\-compatible shell.
 .PP
 To connect to a remote machine, you just need to chdir
 into a special directory which name is in the following

@@ -1,4 +1,3 @@
-#RMD $FISH_FILENAME
 if rmdir "/${FISH_FILENAME}" 2>/dev/null; then
    echo "### 000"
 else

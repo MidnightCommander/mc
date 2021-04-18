@@ -1,4 +1,3 @@
-#LIST /${FISH_DIR}
 LC_TIME=C
 export LC_TIME
 perl_res="1"
