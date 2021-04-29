@@ -96,7 +96,9 @@ static cb_ret_t edit_dialog_callback (Widget * w, Widget * sender, widget_msg_t 
 static void
 edit_dlg_init (void)
 {
-    if (edit_dlg_init_refcounter == 0)
+    edit_dlg_init_refcounter++;
+
+    if (edit_dlg_init_refcounter == 1)
     {
         edit_window_state_char = mc_skin_get ("widget-editor", "window-state-char", "*");
         edit_window_close_char = mc_skin_get ("widget-editor", "window-close-char", "X");
@@ -105,8 +107,6 @@ edit_dlg_init (void)
         aspell_init ();
 #endif
     }
-
-    edit_dlg_init_refcounter++;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -117,10 +117,7 @@ edit_dlg_init (void)
 static void
 edit_dlg_deinit (void)
 {
-    if (edit_dlg_init_refcounter != 0)
-        edit_dlg_init_refcounter--;
-
-    if (edit_dlg_init_refcounter == 0)
+    if (edit_dlg_init_refcounter == 1)
     {
         g_free (edit_window_state_char);
         g_free (edit_window_close_char);
@@ -129,6 +126,9 @@ edit_dlg_deinit (void)
         aspell_clean ();
 #endif
     }
+
+    if (edit_dlg_init_refcounter != 0)
+        edit_dlg_init_refcounter--;
 }
 
 /* --------------------------------------------------------------------------------------------- */
