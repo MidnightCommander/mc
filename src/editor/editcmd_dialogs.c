@@ -110,6 +110,141 @@ editcmd_dialog_select_definition_add (gpointer data, gpointer user_data)
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
+#ifdef HAVE_AES_256_GCM
+
+gboolean
+editcmd_get_encryption_password_dialog (char *user_pass, size_t max_user_pass)
+{
+    char *password[2] = { NULL, NULL }, *p = NULL, *p_end = NULL;
+    int dialog_result = B_CANCEL;
+    int passwords_match = 0;
+    size_t password_size = 0;
+    {
+        quick_widget_t quick_widgets[] = {
+            QUICK_LABELED_PASSWORD_INPUT(N_("Enter password:"), input_label_above, &password[0]),
+            QUICK_SEPARATOR(TRUE),
+            QUICK_LABELED_PASSWORD_INPUT(N_("Confirm entered password:"), input_label_above, &password[1]),
+            QUICK_START_BUTTONS(TRUE, TRUE),
+                QUICK_BUTTON(N_("&Encrypt"), B_ENTER, NULL, NULL),
+                QUICK_BUTTON(N_("&Cancel"), B_CANCEL, NULL, NULL),
+            QUICK_END
+        };
+        quick_dialog_t qdlg = {
+            -1, -1, 58,
+            N_("Encryption password"), "",
+            quick_widgets, NULL, NULL
+        };
+        dialog_result = quick_dialog (&qdlg);
+    }
+    passwords_match = (password[0] != NULL && password[1] != NULL);
+    if (dialog_result == B_ENTER && passwords_match) {
+        password_size = strlen(password[0]);
+        passwords_match = (password_size > 0 && password_size == strlen(password[1]));
+        if (passwords_match) {
+            passwords_match = (memcmp(password[0], password[1], password_size) == 0);
+        }
+    }
+
+    if (passwords_match) {
+        if (password_size < max_user_pass) {
+            memcpy (user_pass, password[0], password_size);
+        } else {
+            edit_error_dialog (_("Error"), "The informed password is too long!");
+            dialog_result = B_CANCEL;
+        }
+    } else {
+        if (password_size > 0) {
+            edit_error_dialog (_("Error"), "The passwords do not match!");
+        } else if (dialog_result == B_ENTER) {
+            edit_error_dialog (_("Error"), "Password not informed.");
+            dialog_result = B_CANCEL;
+        }
+        dialog_result = B_CANCEL;
+    }
+
+    /* Important avoid using memset to clear up entered passwords because it can be stripped out during optimizations,
+       here we want to avoid leaking this data through the heap. */
+
+    if (password[0] != NULL) {
+        p = &password[0][0];
+        p_end = p + strlen(password[0]);
+        while (p != p_end) {
+            *p = 0;
+            p++;
+        }
+        g_free(password[0]);
+    }
+
+    if (password[1] != NULL) {
+        p = &password[1][0];
+        p_end = p + strlen(password[1]);
+        while (p != p_end) {
+            *p = 0;
+            p++;
+        }
+        g_free(password[1]);
+    }
+
+    password_size = 0;
+
+    return (dialog_result == B_ENTER);
+}
+
+gboolean
+editcmd_get_decryption_password_dialog(char *user_pass, size_t max_user_pass)
+{
+    char *password = NULL, *p = NULL, *p_end = NULL;
+    int dialog_result = B_CANCEL;
+    size_t password_size = 0;
+    {
+        quick_widget_t quick_widgets[] = {
+            QUICK_LABELED_PASSWORD_INPUT(N_("Enter password:"), input_label_above, &password),
+            QUICK_SEPARATOR(TRUE),
+            QUICK_START_BUTTONS(TRUE, TRUE),
+                QUICK_BUTTON(N_("&Decrypt"), B_ENTER, NULL, NULL),
+                QUICK_BUTTON(N_("&Cancel"), B_CANCEL, NULL, NULL),
+            QUICK_END
+        };
+        quick_dialog_t qdlg = {
+            -1, -1, 58,
+            N_("Decryption password"), "",
+            quick_widgets, NULL, NULL
+        };
+        dialog_result = quick_dialog (&qdlg);
+    }
+
+    if (dialog_result == B_ENTER) {
+        password_size = strlen(password);
+        if (password_size > 0 && password_size < max_user_pass) {
+            memcpy(user_pass, password, password_size);
+        } else {
+            if (password_size > 0) {
+                edit_error_dialog (_("Error"), "The informed password is too long!");
+            } else if (dialog_result == B_ENTER) {
+                edit_error_dialog (_("Error"), "Password not informed.");
+                dialog_result = B_CANCEL;
+            }
+                dialog_result = B_CANCEL;
+        }
+    }
+
+    if (password != NULL) {
+        p = password;
+        p_end = p + strlen(password);
+        while (p != p_end) {
+            *p = 0;
+            p++;
+        }
+        g_free(password);
+    }
+
+    password_size = 0;
+
+    return (dialog_result == B_ENTER);
+}
+
+#endif /* HAVE_AES_256_GCM */
+
 gboolean
 editcmd_dialog_search_show (WEdit * edit)
 {

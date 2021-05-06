@@ -4669,11 +4669,9 @@ msgstr "Працягваць ад пачатку?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Немагчыма атрымаць лакальную копію /ftp://some.host/editme.txt"
 
-#, c-format
 #~ msgid "An error occurred while migrating user settings: %s"
 #~ msgstr "Падчас пераносу налад карыстальніка адбылася памылка: %s"
 
-#, c-format
 #~ msgid ""
 #~ "Your old settings were migrated from %s\n"
 #~ "to Freedesktop recommended dirs.\n"
@@ -4685,7 +4683,6 @@ msgstr "Немагчыма атрымаць лакальную копію /ftp:/
 #~ "Па падрабязнасці завітайце сюды:\n"
 #~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
 
-#, c-format
 #~ msgid ""
 #~ "Your old settings were migrated from %s\n"
 #~ "to %s\n"

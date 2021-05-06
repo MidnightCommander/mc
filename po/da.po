@@ -4666,11 +4666,9 @@ msgstr "Fortsæt fra begyndelsen?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan ikke hente en lokal kopi af /ftp://en.vært/editme.txt"
 
-#, c-format
 #~ msgid "An error occurred while migrating user settings: %s"
 #~ msgstr "Der opstod en fejl ved flytning af brugerindstillinger: %s"
 
-#, c-format
 #~ msgid ""
 #~ "Your old settings were migrated from %s\n"
 #~ "to Freedesktop recommended dirs.\n"
@@ -4683,7 +4681,6 @@ msgstr "Kan ikke hente en lokal kopi af /ftp://en.vært/editme.txt"
 #~ "latest.html\n"
 #~ "for mere information"
 
-#, c-format
 #~ msgid ""
 #~ "Your old settings were migrated from %s\n"
 #~ "to %s\n"

@@ -4658,11 +4658,9 @@ msgstr "Continuar desde o principio?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Non é posíbel obter unha copia local de /ftp://some.host/editme.txt"
 
-#, c-format
 #~ msgid "An error occurred while migrating user settings: %s"
 #~ msgstr "Produciuse un erro ao migrar a configuración do usuario: %s"
 
-#, c-format
 #~ msgid ""
 #~ "Your old settings were migrated from %s\n"
 #~ "to Freedesktop recommended dirs.\n"
@@ -4674,7 +4672,6 @@ msgstr "Non é posíbel obter unha copia local de /ftp://some.host/editme.txt"
 #~ "Para obter máis detalles consulte\n"
 #~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
 
-#, c-format
 #~ msgid ""
 #~ "Your old settings were migrated from %s\n"
 #~ "to %s\n"

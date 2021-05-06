@@ -278,6 +278,11 @@ void edit_syntax_dialog (WEdit * edit);
 void edit_mail_dialog (WEdit * edit);
 void format_paragraph (WEdit * edit, gboolean force);
 
+#ifdef HAVE_AES_256_GCM
+gboolean edit_encrypt_cmd (WEdit * edit);
+gboolean edit_decrypt_cmd (WEdit * edit);
+#endif /* HAVE_AES_256_GCM */
+
 /* either command or char_for_insertion must be passed as -1 */
 void edit_execute_cmd (WEdit * edit, long command, int char_for_insertion);
 

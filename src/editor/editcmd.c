@@ -78,6 +78,9 @@
 #include "spell_dialogs.h"
 #endif
 #include "etags.h"
+#ifdef HAVE_AES_256_GCM
+#include "aes_gcm.h"
+#endif /* HAVE_AES_GCM_256 */
 
 /*** global variables ****************************************************************************/
 
@@ -3649,6 +3652,133 @@ edit_get_match_keyword_cmd (WEdit * edit)
 
     g_string_free (match_expr, TRUE);
 }
+
+#ifdef HAVE_AES_256_GCM
+
+/* --------------------------------------------------------------------------------------------- */
+
+gboolean edit_encrypt_cmd (WEdit * edit)
+{
+    char user_pass[8192];
+    unsigned char *plaintext = NULL;
+    char *ciphertext = NULL;
+    size_t ciphertext_size = 0, plaintext_size = 0;
+    size_t i;
+    gboolean done = FALSE;
+
+    if (edit == NULL || edit->buffer.size == 0) {
+        edit_error_dialog (_("Error"), "There is nothing to encrypt.");
+        return FALSE;
+    }
+
+    done = editcmd_get_encryption_password_dialog (user_pass, sizeof(user_pass));
+
+    if (done) {
+        plaintext_size = edit->buffer.size;
+        plaintext = (unsigned char *) g_malloc0 (plaintext_size);
+        for (i = 0; i < plaintext_size; i++) {
+            plaintext[i] = edit_buffer_get_byte (&edit->buffer, i);
+        }
+
+        ciphertext = mc_aes256_gcm_encrypt_and_encode (plaintext, plaintext_size,
+                                                       user_pass, strlen(user_pass),
+                                                       &ciphertext_size);
+        if (ciphertext != NULL && ciphertext_size > 0) {
+            edit_move_to_line(edit, 0);
+            while (edit->buffer.lines > 0) {
+                edit_delete_line (edit);
+            }
+            edit_delete_line(edit);
+            for (i = 0; i < ciphertext_size; i++) {
+                edit_execute_cmd (edit, CK_InsertChar, ciphertext[i]);
+            }
+            edit_clean_actions (edit);
+            edit_delete_line (edit);
+            edit_move_to_line (edit, 0);
+            edit->force |= REDRAW_COMPLETELY;
+            edit_update_screen (edit);
+            if (ciphertext != NULL) {
+                g_free (ciphertext);
+            }
+        } else {
+            edit_error_dialog (_("Error"), "During encryption. Aborted.");
+            done = FALSE;
+        }
+
+        /* we need to clean up and mitigate timing attacks, memset can be dropped during optimizations. */
+        mc_clear_sensitive_buffer (user_pass, sizeof(user_pass));
+
+        if (plaintext != NULL) {
+            mc_clear_sensitive_buffer (plaintext, plaintext_size);
+            g_free (plaintext);
+            plaintext_size = 0;
+        }
+    }
+
+    return done;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+gboolean edit_decrypt_cmd (WEdit * edit)
+{
+    char user_pass[8192];
+    char *ciphertext = NULL;
+    size_t ciphertext_size = 0;
+    size_t i;
+    unsigned char *plaintext = NULL;
+    size_t plaintext_size = 0;
+    gboolean done = FALSE;
+
+    if (edit == NULL || edit->buffer.size == 0) {
+        edit_error_dialog (_("Error"), "There is nothing to decrypt.");
+        return FALSE;
+    }
+
+    done = editcmd_get_decryption_password_dialog (user_pass, sizeof(user_pass));
+
+    if (done) {
+        ciphertext_size = edit->buffer.size;
+        ciphertext = (char *) g_malloc0 (ciphertext_size);
+        for (i = 0; i < ciphertext_size; i++) {
+            ciphertext[i] = edit_buffer_get_byte (&edit->buffer, i);
+        }
+
+        plaintext = mc_aes256_gcm_decode_and_decrypt (ciphertext, ciphertext_size,
+                                                      user_pass, strlen(user_pass),
+                                                      &plaintext_size);
+        if (plaintext != NULL && plaintext_size > 0) {
+            edit_move_to_line(edit, 0);
+            while (edit->buffer.lines > 0) {
+                edit_delete_line (edit);
+            }
+            edit_delete_line(edit);
+            for (i = 0; i < plaintext_size; i++) {
+                edit_execute_cmd (edit, CK_InsertChar, plaintext[i]);
+            }
+            edit_move_to_line (edit, 0);
+            edit->force |= REDRAW_COMPLETELY;
+            edit_update_screen (edit);
+            mc_clear_sensitive_buffer (plaintext, plaintext_size);
+            if (plaintext != NULL) {
+                g_free (plaintext);
+            }
+        } else {
+            edit_error_dialog (_("Error"),
+                               "During decryption. Aborted.\nVerify your password. If Okay, the file was adultered.");
+        }
+        if (ciphertext != NULL) {
+            g_free (ciphertext);
+        }
+    }
+
+    /* we need to clean up and mitigate timing attacks, memset can be dropped during optimizations. */
+    mc_clear_sensitive_buffer (user_pass, sizeof(user_pass));
+
+    return done;
+}
+
+#endif /* HAVE_AES_256_GCM */
 
 /* --------------------------------------------------------------------------------------------- */
 

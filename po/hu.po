@@ -4629,11 +4629,9 @@ msgstr "Folytatás az elejéről?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nem sikerült behozni /ftp://some.host/editme.txt helyi másolatát"
 
-#, c-format
 #~ msgid "An error occurred while migrating user settings: %s"
 #~ msgstr "Hiba történt a felhasználói adatok migrálásakor: %s"
 
-#, c-format
 #~ msgid ""
 #~ "Your old settings were migrated from %s\n"
 #~ "to Freedesktop recommended dirs.\n"
@@ -4645,7 +4643,6 @@ msgstr "Nem sikerült behozni /ftp://some.host/editme.txt helyi másolatát"
 #~ "További információ:\\n\n"
 #~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
 
-#, c-format
 #~ msgid ""
 #~ "Your old settings were migrated from %s\n"
 #~ "to %s\n"

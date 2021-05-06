@@ -4682,11 +4682,9 @@ msgstr "Pokračovat od začátku?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nedaří získat místní kopii souboru /ftp://some.host/editme.txt"
 
-#, c-format
 #~ msgid "An error occurred while migrating user settings: %s"
 #~ msgstr "Nastala chyba při stěhování uživatelských nastavení: %s"
 
-#, c-format
 #~ msgid ""
 #~ "Your old settings were migrated from %s\n"
 #~ "to Freedesktop recommended dirs.\n"
@@ -4698,7 +4696,6 @@ msgstr "Nedaří získat místní kopii souboru /ftp://some.host/editme.txt"
 #~ "Další informace naleznete na\n"
 #~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
 
-#, c-format
 #~ msgid ""
 #~ "Your old settings were migrated from %s\n"
 #~ "to %s\n"

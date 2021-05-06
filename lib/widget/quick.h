@@ -80,6 +80,27 @@
     }                                                                           \
 }
 
+#define QUICK_LABELED_PASSWORD_INPUT(label_, label_loc, res)                    \
+{                                                                               \
+    .widget_type = quick_input,                                                 \
+    .options = WOP_DEFAULT,                                                     \
+    .pos_flags = WPOS_KEEP_DEFAULT,                                             \
+    .id = NULL,                                                                 \
+    .u = {                                                                      \
+        .input = {                                                              \
+            .label_text = label_,                                               \
+            .label_location = label_loc,                                        \
+            .label = NULL,                                                      \
+            .text = NULL,                                                       \
+            .completion_flags = INPUT_COMPLETE_NONE,                            \
+            .is_passwd = TRUE,                                                  \
+            .strip_passwd = TRUE,                                               \
+            .histname = NULL,                                                   \
+            .result = res                                                       \
+        }                                                                       \
+    }                                                                           \
+}
+
 #define QUICK_LABEL(txt, id_)                                                   \
 {                                                                               \
     .widget_type = quick_label,                                                 \

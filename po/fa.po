@@ -4391,6 +4391,5 @@ msgstr ""
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 
-#, c-format
 #~ msgid "An error occurred while migrating user settings: %s"
 #~ msgstr "هنگام انتقال اطلاعات کاربر خطایی رخ داد: %s"

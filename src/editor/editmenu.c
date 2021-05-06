@@ -192,6 +192,11 @@ create_command_menu (void)
 #endif /* HAVE_ASPELL */
     entries = g_list_prepend (entries, menu_entry_create (_("&Mail..."), CK_EditMail));
 
+#ifdef HAVE_AES_256_GCM
+    entries = g_list_prepend (entries, menu_separator_create());
+    entries = g_list_prepend (entries, menu_entry_create (_("En&crypt..."), CK_Encrypt));
+    entries = g_list_prepend (entries, menu_entry_create (_("&Decrypt..."), CK_Decrypt));
+#endif /* HAVE_AES_256_GCM */
 
     return g_list_reverse (entries);
 }

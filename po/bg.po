@@ -4635,11 +4635,9 @@ msgstr "Да се продължи ли от началото?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не може да се изтегли локално копие на /ftp://some.host/editme.txt"
 
-#, c-format
 #~ msgid "An error occurred while migrating user settings: %s"
 #~ msgstr "Грешка възникна при преместването на потребителските настройки: %s"
 
-#, c-format
 #~ msgid ""
 #~ "Your old settings were migrated from %s\n"
 #~ "to Freedesktop recommended dirs.\n"
@@ -4651,7 +4649,6 @@ msgstr "Не може да се изтегли локално копие на /f
 #~ "За повече информация, моля посетете\n"
 #~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
 
-#, c-format
 #~ msgid ""
 #~ "Your old settings were migrated from %s\n"
 #~ "to %s\n"

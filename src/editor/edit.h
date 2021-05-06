@@ -74,5 +74,9 @@ off_t edit_get_cursor_offset (const WEdit * edit);
 long edit_get_curs_col (const WEdit * edit);
 const char *edit_get_syntax_type (const WEdit * edit);
 
+#ifdef HAVE_AES_256_GCM
+void edit_clean_actions (WEdit * edit);
+#endif /* HAVE_AES_256_GCM */
+
 /*** inline functions ****************************************************************************/
 #endif /* MC__EDIT_H */

@@ -330,6 +330,11 @@ AC_CHECK_LIB(seq, get_process_stats, [
 		  [Define if you have function `get_process_stats' and
 have to use that instead of gettimeofday])])
 
+AC_CHECK_LIB(crypto, EVP_aes_256_gcm, [
+	LIBS="$LIBS -lcrypto"
+	AC_DEFINE(HAVE_AES_256_GCM, 1,
+		[Define if you are able to include mcedit's AES-256/GCM support])])
+
 mc_GET_FS_INFO
 
 

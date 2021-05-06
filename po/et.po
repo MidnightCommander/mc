@@ -4646,11 +4646,9 @@ msgstr "Kas jätkata algusest?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kohaliku koopia hankimine failist /ftp://some.host/editme.txt nurjus"
 
-#, c-format
 #~ msgid "An error occurred while migrating user settings: %s"
 #~ msgstr "Viga kasutaja seadete migreerimisel: %s"
 
-#, c-format
 #~ msgid ""
 #~ "Your old settings were migrated from %s\n"
 #~ "to Freedesktop recommended dirs.\n"
@@ -4662,7 +4660,6 @@ msgstr "Kohaliku koopia hankimine failist /ftp://some.host/editme.txt nurjus"
 #~ "Lisainfot leiad aadressilt\n"
 #~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
 
-#, c-format
 #~ msgid ""
 #~ "Your old settings were migrated from %s\n"
 #~ "to %s\n"

@@ -613,6 +613,14 @@ get_prev_undo_action (WEdit * edit)
     return c;
 }
 
+#ifdef HAVE_AES_256_GCM
+void edit_clean_actions (WEdit * edit)
+{
+    while (edit_pop_undo_action (edit) != STACK_BOTTOM)
+        ;
+}
+#endif /* HAVE_AES_256_GCM */
+
 /* --------------------------------------------------------------------------------------------- */
 /** is called whenever a modification is made by one of the four routines below */
 

@@ -4424,11 +4424,9 @@ msgstr ""
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 
-#, c-format
 #~ msgid "An error occurred while migrating user settings: %s"
 #~ msgstr "Terjadi kesalahan saat migrasi setting pengguna: %s"
 
-#, c-format
 #~ msgid ""
 #~ "Your old settings were migrated from %s\n"
 #~ "to Freedesktop recommended dirs.\n"
@@ -4440,7 +4438,6 @@ msgstr ""
 #~ "Untuk penjelasan lebih lanjutm silahkan kunjungi\n"
 #~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
 
-#, c-format
 #~ msgid ""
 #~ "Your old settings were migrated from %s\n"
 #~ "to %s\n"

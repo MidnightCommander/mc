@@ -26,10 +26,12 @@ endif
 EXTRA_DIST = mc.charsets test-data.txt.in
 
 TESTS = \
-	editcmd__edit_complete_word_cmd
+	editcmd__edit_complete_word_cmd \
+	aes_gcm
 
 check_PROGRAMS = $(TESTS)
 
 editcmd__edit_complete_word_cmd_SOURCES = \
-	editcmd__edit_complete_word_cmd.c
+	editcmd__edit_complete_word_cmd.c \
+	aes_gcm.c
 

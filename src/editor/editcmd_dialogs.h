@@ -30,5 +30,10 @@ char *editcmd_dialog_completion_show (const WEdit * edit, GQueue * compl, int ma
 void editcmd_dialog_select_definition_show (WEdit * edit, char *match_expr, GPtrArray * def_hash);
 
 int editcmd_dialog_replace_prompt_show (WEdit *, char *, char *, int, int);
+
+#ifdef HAVE_AES_256_GCM
+gboolean editcmd_get_encryption_password_dialog (char *, size_t);
+gboolean editcmd_get_decryption_password_dialog (char *, size_t);
+#endif /* HAVE_AES_256_GCM */
 /*** inline functions ****************************************************************************/
 #endif /* MC__EDITCMD_DIALOGS_H */

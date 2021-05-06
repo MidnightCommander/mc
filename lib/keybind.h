@@ -317,6 +317,8 @@ enum
     CK_ExternalCommand,
     CK_Date,
     CK_EditMail,
+    CK_Encrypt,
+    CK_Decrypt,
 
     /* viewer */
     CK_WrapMode = 600L,

@@ -482,6 +482,14 @@ edit_dialog_command_execute (WDialog * h, long command)
     case CK_SaveSetup:
         save_setup_cmd ();
         break;
+#ifdef HAVE_AES_256_GCM
+    case CK_Encrypt:
+        edit_encrypt_cmd ((WEdit *) g->current->data);
+        break;
+    case CK_Decrypt:
+        edit_decrypt_cmd ((WEdit *) g->current->data);
+        break;
+#endif /* HAVE_AES_256_GCM */
     default:
         ret = MSG_NOT_HANDLED;
         break;
