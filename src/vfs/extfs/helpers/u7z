@@ -17,7 +17,11 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-P7ZIP=`which 7z 2>/dev/null` || P7ZIP=`which 7za 2>/dev/null` || P7ZIP=`which 7zr 2>/dev/null` || P7ZIP=""
+P7ZIP=`which 7z 2>/dev/null` \
+    || P7ZIP=`which 7zz 2>/dev/null` \
+    || P7ZIP=`which 7za 2>/dev/null` \
+    || P7ZIP=`which 7zr 2>/dev/null` \
+    || P7ZIP=""
 
 # Let the test framework hook in:
 P7ZIP=${MC_TEST_EXTFS_LIST_CMD:-$P7ZIP}
