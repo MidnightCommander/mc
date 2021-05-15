@@ -545,7 +545,13 @@ execute_menu_command (const WEdit * edit_widget, const char *commands, gboolean 
 
     if (run_view)
     {
-        mcview_viewer (vfs_path_as_str (file_name_vpath), NULL, 0, 0, 0);
+        /* execute the command indirectly to allow execution even
+         * on no-exec filesystems. */
+        char *cmd;
+
+        cmd = g_strconcat ("/bin/sh ", vfs_path_as_str (file_name_vpath), (char *) NULL);
+        mcview_viewer (cmd, NULL, 0, 0, 0);
+        g_free (cmd);
         dialog_switch_process_pending ();
     }
     else
