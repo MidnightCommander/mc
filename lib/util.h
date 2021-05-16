@@ -282,7 +282,7 @@ exist_file (const char *name)
 static inline gboolean
 is_exe (mode_t mode)
 {
-    return (gboolean) ((S_IXUSR & mode) || (S_IXGRP & mode) || (S_IXOTH & mode));
+    return ((mode & (S_IXUSR | S_IXGRP | S_IXOTH)) != 0);
 }
 
 #endif /* MC_UTIL_H */
