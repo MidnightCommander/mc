@@ -1566,10 +1566,8 @@ extfs_get_plugins (const char *where, gboolean silent)
 
         g_snprintf (fullname, sizeof (fullname), "%s" PATH_SEP_STR "%s", dirname, filename);
 
-        if ((stat (fullname, &s) == 0)
-            && S_ISREG (s.st_mode) && !S_ISDIR (s.st_mode)
-            && (((s.st_mode & S_IXOTH) != 0) ||
-                ((s.st_mode & S_IXUSR) != 0) || ((s.st_mode & S_IXGRP) != 0)))
+        if ((stat (fullname, &s) == 0) && S_ISREG (s.st_mode) && !S_ISDIR (s.st_mode)
+            && is_exe (s.st_mode))
         {
             int f;
 
