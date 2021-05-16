@@ -83,7 +83,7 @@ static GOptionEntry entries[] = {
      NULL},
     {"format", 'f', 0, G_OPTION_ARG_CALLBACK, parse_format_name_argument,
      "Output format. Default: ls.", "<ls|yaml>"},
-    {NULL, '\0', 0, 0, NULL, NULL, NULL}        /* Make the compiler shut up by initializing everything. */
+    G_OPTION_ENTRY_NULL
 };
 
 /*** file scope functions ************************************************************************/
