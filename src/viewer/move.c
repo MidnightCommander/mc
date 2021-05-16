@@ -118,7 +118,7 @@ mcview_move_up (WView * view, off_t lines)
             view->hex_cursor -= bytes;
             if (view->hex_cursor < view->dpy_start)
             {
-                view->dpy_start = mcview_offset_doz (view->dpy_start, bytes);
+                view->dpy_start = DOZ (view->dpy_start, bytes);
                 view->dpy_paragraph_skip_lines = 0;
                 view->dpy_wrap_dirty = TRUE;
             }
@@ -148,7 +148,7 @@ mcview_move_down (WView * view, off_t lines)
     {
         off_t i, limit;
 
-        limit = mcview_offset_doz (last_byte, (off_t) view->bytes_per_line);
+        limit = DOZ (last_byte, (off_t) view->bytes_per_line);
 
         for (i = 0; i < lines && view->hex_cursor < limit; i++)
         {
@@ -189,7 +189,7 @@ mcview_move_left (WView * view, off_t columns)
                 view->hexedit_lownibble = !view->hexedit_lownibble;
     }
     else if (!view->mode_flags.wrap)
-        view->dpy_text_column = mcview_offset_doz (view->dpy_text_column, columns);
+        view->dpy_text_column = DOZ (view->dpy_text_column, columns);
     mcview_movement_fixups (view, FALSE);
 }
 
@@ -203,7 +203,8 @@ mcview_move_right (WView * view, off_t columns)
         off_t last_byte;
         off_t old_cursor = view->hex_cursor;
 
-        last_byte = mcview_offset_doz (mcview_get_filesize (view), 1);
+        last_byte = mcview_get_filesize (view);
+        last_byte = DOZ (last_byte, 1);
 
         g_assert (columns == 1);
 
@@ -252,7 +253,7 @@ mcview_moveto_bottom (WView * view)
 
     if (view->mode_flags.hex)
     {
-        view->hex_cursor = mcview_offset_doz (filesize, 1);
+        view->hex_cursor = DOZ (filesize, 1);
         mcview_movement_fixups (view, TRUE);
     }
     else
@@ -302,7 +303,7 @@ mcview_moveto_eol (WView * view)
         else
         {
             filesize = mcview_get_filesize (view);
-            view->hex_cursor = mcview_offset_doz (filesize, 1);
+            view->hex_cursor = DOZ (filesize, 1);
         }
     }
     else

@@ -54,6 +54,9 @@
  */
 #define _GL_CMP(n1, n2) (((n1) > (n2)) - ((n1) < (n2)))
 
+/* Difference of zero */
+#define DOZ(a, b) ((a) > (b) ? (a) - (b) : 0)
+
 /*** enums ***************************************************************************************/
 
 /* Pathname canonicalization */

@@ -639,8 +639,8 @@ listbox_select_last (WListbox * l)
 
     length = listbox_get_length (l);
 
-    l->pos = length > 0 ? length - 1 : 0;
-    l->top = length > lines ? length - lines : 0;
+    l->pos = DOZ (length, 1);
+    l->top = DOZ (length, lines);
 }
 
 /* --------------------------------------------------------------------------------------------- */

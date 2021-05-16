@@ -18,29 +18,11 @@
 
 /*** inline functions ****************************************************************************/
 
-/* difference or zero */
-static inline off_t
-mcview_offset_doz (off_t a, off_t b)
-{
-    return (a >= b) ? a - b : 0;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 static inline off_t
 mcview_offset_rounddown (off_t a, off_t b)
 {
     g_assert (b != 0);
     return a - a % b;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/* difference or zero */
-static inline screen_dimen
-mcview_dimen_doz (screen_dimen a, screen_dimen b)
-{
-    return (a >= b) ? a - b : 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
