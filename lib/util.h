@@ -223,16 +223,16 @@ void my_exit (int status);
 void save_stop_handler (void);
 
 /* Tilde expansion */
-char *tilde_expand (const char *);
+char *tilde_expand (const char *directory);
 
-void custom_canonicalize_pathname (char *, CANON_PATH_FLAGS);
-void canonicalize_pathname (char *);
+void custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags);
+void canonicalize_pathname (char *path);
 
 char *mc_realpath (const char *path, char *resolved_path);
 
 /* Looks for "magic" bytes at the start of the VFS file to guess the
  * compression type. Side effect: modifies the file position. */
-enum compression_type get_compression_type (int fd, const char *);
+enum compression_type get_compression_type (int fd, const char *name);
 const char *decompress_extension (int type);
 
 GList *list_append_unique (GList * list, char *text);
@@ -253,9 +253,9 @@ extern int ascii_alpha_to_cntrl (int ch);
 #undef Q_
 const char *Q_ (const char *s);
 
-gboolean mc_util_make_backup_if_possible (const char *, const char *);
-gboolean mc_util_restore_from_backup_if_possible (const char *, const char *);
-gboolean mc_util_unlink_backup_if_possible (const char *, const char *);
+gboolean mc_util_make_backup_if_possible (const char *file_name, const char *backup_suffix);
+gboolean mc_util_restore_from_backup_if_possible (const char *file_name, const char *backup_suffix);
+gboolean mc_util_unlink_backup_if_possible (const char *file_name, const char *backup_suffix);
 
 char *guess_message_value (void);
 

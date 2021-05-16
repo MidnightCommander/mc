@@ -232,12 +232,12 @@ cb_ret_t mcview_dialog_callback (Widget * w, Widget * sender, widget_msg_t msg, 
                                  void *data);
 
 /* ascii.c: */
-void mcview_display_text (WView *);
+void mcview_display_text (WView * view);
 void mcview_state_machine_init (mcview_state_machine_t *, off_t);
-void mcview_ascii_move_down (WView *, off_t);
-void mcview_ascii_move_up (WView *, off_t);
-void mcview_ascii_moveto_bol (WView *);
-void mcview_ascii_moveto_eol (WView *);
+void mcview_ascii_move_down (WView * view, off_t lines);
+void mcview_ascii_move_up (WView * view, off_t lines);
+void mcview_ascii_moveto_bol (WView * view);
+void mcview_ascii_moveto_eol (WView * view);
 
 /* coord_cache.c: */
 coord_cache_t *coord_cache_new (void);
@@ -250,21 +250,21 @@ void mcview_ccache_dump (WView * view);
 void mcview_ccache_lookup (WView * view, coord_cache_entry_t * coord, enum ccache_type lookup_what);
 
 /* datasource.c: */
-void mcview_set_datasource_none (WView *);
-off_t mcview_get_filesize (WView *);
+void mcview_set_datasource_none (WView * view);
+off_t mcview_get_filesize (WView * view);
 void mcview_update_filesize (WView * view);
-char *mcview_get_ptr_file (WView *, off_t);
-char *mcview_get_ptr_string (WView *, off_t);
+char *mcview_get_ptr_file (WView * view, off_t byte_index);
+char *mcview_get_ptr_string (WView * view, off_t byte_index);
 gboolean mcview_get_utf (WView * view, off_t byte_index, int *ch, int *ch_len);
-gboolean mcview_get_byte_string (WView *, off_t, int *);
-gboolean mcview_get_byte_none (WView *, off_t, int *);
-void mcview_set_byte (WView *, off_t, byte);
-void mcview_file_load_data (WView *, off_t);
-void mcview_close_datasource (WView *);
-void mcview_set_datasource_file (WView *, int, const struct stat *);
-gboolean mcview_load_command_output (WView *, const char *);
-void mcview_set_datasource_vfs_pipe (WView *, int);
-void mcview_set_datasource_string (WView *, const char *);
+gboolean mcview_get_byte_string (WView * view, off_t byte_index, int *retval);
+gboolean mcview_get_byte_none (WView * view, off_t byte_index, int *retval);
+void mcview_set_byte (WView * view, off_t offset, byte b);
+void mcview_file_load_data (WView * view, off_t byte_index);
+void mcview_close_datasource (WView * view);
+void mcview_set_datasource_file (WView * view, int fd, const struct stat *st);
+gboolean mcview_load_command_output (WView * view, const char *command);
+void mcview_set_datasource_vfs_pipe (WView * view, int fd);
+void mcview_set_datasource_string (WView * view, const char *s);
 
 /* dialog.c: */
 gboolean mcview_dialog_search (WView * view);
@@ -284,16 +284,16 @@ void mcview_growbuf_init (WView * view);
 void mcview_growbuf_done (WView * view);
 void mcview_growbuf_free (WView * view);
 off_t mcview_growbuf_filesize (WView * view);
-void mcview_growbuf_read_until (WView * view, off_t p);
-gboolean mcview_get_byte_growing_buffer (WView * view, off_t p, int *);
-char *mcview_get_ptr_growing_buffer (WView * view, off_t p);
+void mcview_growbuf_read_until (WView * view, off_t ofs);
+gboolean mcview_get_byte_growing_buffer (WView * view, off_t byte_index, int *retval);
+char *mcview_get_ptr_growing_buffer (WView * view, off_t byte_index);
 
 /* hex.c: */
 void mcview_display_hex (WView * view);
 gboolean mcview_hexedit_save_changes (WView * view);
 void mcview_toggle_hexedit_mode (WView * view);
 void mcview_hexedit_free_change_list (WView * view);
-void mcview_enqueue_change (struct hexedit_change_node **, struct hexedit_change_node *);
+void mcview_enqueue_change (struct hexedit_change_node **head, struct hexedit_change_node *node);
 
 /* lib.c: */
 void mcview_toggle_magic_mode (WView * view);
@@ -313,29 +313,29 @@ char *mcview_get_title (const WDialog * h, size_t len);
 int mcview_calc_percent (WView * view, off_t p);
 
 /* move.c */
-void mcview_move_up (WView *, off_t);
-void mcview_move_down (WView *, off_t);
-void mcview_move_left (WView *, off_t);
-void mcview_move_right (WView *, off_t);
-void mcview_moveto_top (WView *);
-void mcview_moveto_bottom (WView *);
-void mcview_moveto_bol (WView *);
-void mcview_moveto_eol (WView *);
-void mcview_moveto_offset (WView *, off_t);
-void mcview_moveto (WView *, off_t, off_t);
-void mcview_coord_to_offset (WView *, off_t *, off_t, off_t);
-void mcview_offset_to_coord (WView *, off_t *, off_t *, off_t);
-void mcview_place_cursor (WView *);
-void mcview_moveto_match (WView *);
+void mcview_move_up (WView * view, off_t lines);
+void mcview_move_down (WView * view, off_t lines);
+void mcview_move_left (WView * view, off_t columns);
+void mcview_move_right (WView * view, off_t columns);
+void mcview_moveto_top (WView * view);
+void mcview_moveto_bottom (WView * view);
+void mcview_moveto_bol (WView * view);
+void mcview_moveto_eol (WView * view);
+void mcview_moveto_offset (WView * view, off_t offset);
+void mcview_moveto (WView * view, off_t, off_t col);
+void mcview_coord_to_offset (WView * view, off_t * ret_offset, off_t line, off_t column);
+void mcview_offset_to_coord (WView * view, off_t * ret_line, off_t * ret_column, off_t offset);
+void mcview_place_cursor (WView * view);
+void mcview_moveto_match (WView * view);
 
 /* nroff.c: */
-int mcview__get_nroff_real_len (WView * view, off_t, off_t p);
-mcview_nroff_t *mcview_nroff_seq_new_num (WView * view, off_t p);
+int mcview__get_nroff_real_len (WView * view, off_t start, off_t length);
+mcview_nroff_t *mcview_nroff_seq_new_num (WView * view, off_t lc_index);
 mcview_nroff_t *mcview_nroff_seq_new (WView * view);
-void mcview_nroff_seq_free (mcview_nroff_t **);
-nroff_type_t mcview_nroff_seq_info (mcview_nroff_t *);
-int mcview_nroff_seq_next (mcview_nroff_t *);
-int mcview_nroff_seq_prev (mcview_nroff_t *);
+void mcview_nroff_seq_free (mcview_nroff_t ** nroff);
+nroff_type_t mcview_nroff_seq_info (mcview_nroff_t * nroff);
+int mcview_nroff_seq_next (mcview_nroff_t * nroff);
+int mcview_nroff_seq_prev (mcview_nroff_t * nroff);
 
 /* search.c: */
 mc_search_cbret_t mcview_search_cmd_callback (const void *user_data, gsize char_offset,

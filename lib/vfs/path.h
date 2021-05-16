@@ -70,7 +70,7 @@ vfs_path_t *vfs_path_from_str_flags (const char *path_str, vfs_path_flag_t flags
 vfs_path_t *vfs_path_build_filename (const char *first_element, ...);
 vfs_path_t *vfs_path_append_new (const vfs_path_t * vpath, const char *first_element, ...);
 vfs_path_t *vfs_path_append_vpath_new (const vfs_path_t * first_vpath, ...);
-size_t vfs_path_tokens_count (const vfs_path_t *);
+size_t vfs_path_tokens_count (const vfs_path_t * vpath);
 char *vfs_path_tokens_get (const vfs_path_t * vpath, ssize_t start_position, ssize_t length);
 vfs_path_t *vfs_path_vtokens_get (const vfs_path_t * vpath, ssize_t start_position, ssize_t length);
 

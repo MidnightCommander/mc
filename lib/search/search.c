@@ -403,7 +403,7 @@ mc_search_prepare_replace_str2 (mc_search_t * lc_mc_search, const char *replace_
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mc_search_is_fixed_search_str (mc_search_t * lc_mc_search)
+mc_search_is_fixed_search_str (const mc_search_t * lc_mc_search)
 {
     if (lc_mc_search == NULL)
         return FALSE;

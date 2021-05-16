@@ -52,7 +52,7 @@ extern char *user_old_timeformat;       /* time format string for older dates */
 /*** declarations of public functions ************************************************************/
 
 size_t i18n_checktimelength (void);
-const char *file_date (time_t);
+const char *file_date (time_t when);
 
 /*** inline functions ****************************************************************************/
 

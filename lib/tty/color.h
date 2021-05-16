@@ -35,8 +35,9 @@ void tty_init_colors (gboolean disable, gboolean force);
 void tty_colors_done (void);
 
 gboolean tty_use_colors (void);
-int tty_try_alloc_color_pair (const char *, const char *, const char *);
-int tty_try_alloc_color_pair2 (const char *, const char *, const char *, gboolean);
+int tty_try_alloc_color_pair (const char *fg, const char *bg, const char *attrs);
+int tty_try_alloc_color_pair2 (const char *fg, const char *bg, const char *attrs,
+                               gboolean is_temp_color);
 
 void tty_color_free_all_tmp (void);
 void tty_color_free_all_non_tmp (void);
@@ -45,10 +46,11 @@ void tty_setcolor (int color);
 void tty_lowlevel_setcolor (int color);
 void tty_set_normal_attrs (void);
 
-void tty_color_set_defaults (const char *, const char *, const char *);
+void tty_color_set_defaults (const char *fgcolor, const char *bgcolor, const char *attrs);
 
-extern gboolean tty_use_256colors (GError **);
-extern gboolean tty_use_truecolors (GError **);
+extern gboolean tty_use_256colors (GError ** error);
+extern gboolean tty_use_truecolors (GError ** error);
 
 /*** inline functions ****************************************************************************/
-#endif /* MC_COLOR_H */
+
+#endif /* MC__COLOR_H */

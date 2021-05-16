@@ -136,10 +136,11 @@ extern void tty_change_screen_size (void);
 /* Clear screen */
 extern void tty_clear_screen (void);
 
-extern int mc_tty_normalize_lines_char (const char *);
+extern int mc_tty_normalize_lines_char (const char *str);
 
 extern void tty_enter_ca_mode (void);
 extern void tty_exit_ca_mode (void);
 
 /*** inline functions ****************************************************************************/
-#endif /* MC_TTY_H */
+
+#endif /* MC__TTY_H */

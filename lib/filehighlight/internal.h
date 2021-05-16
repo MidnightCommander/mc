@@ -51,9 +51,9 @@ typedef struct mc_fhl_filter_struct
 
 /*** declarations of public functions ************************************************************/
 
-void mc_fhl_array_free (mc_fhl_t *);
+void mc_fhl_array_free (mc_fhl_t * fhl);
 
-gboolean mc_fhl_init_from_standard_files (mc_fhl_t *);
+gboolean mc_fhl_init_from_standard_files (mc_fhl_t * fhl);
 
 /*** inline functions ****************************************************************************/
 
