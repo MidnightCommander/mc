@@ -751,9 +751,9 @@ extfs_open_and_read_archive (int fstype, const char *name, struct extfs_super_t 
             message (D_ERROR, MSG_ERROR, _("EXTFS virtual file system:\n%s"), error->message);
             g_error_free (error);
         }
-    }
 
-    mc_pclose (pip, NULL);
+        mc_pclose (pip, NULL);
+    }
 
     return result;
 }
