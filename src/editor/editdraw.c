@@ -507,7 +507,6 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
     line_s *p = line;
     off_t q;
     int col, start_col_real;
-    int color;
     int abn_style;
     int book_mark = 0;
     char line_stat[LINE_STATE_WIDTH + 1] = "\0";
@@ -533,7 +532,6 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
             end_col--;
     }
 
-    color = edit_get_syntax_color (edit, b - 1);
     q = edit_move_forward3 (edit, b, start_col - edit->start_col, 0);
     col = (int) edit_move_forward3 (edit, b, 0, q);
     start_col_real = col + edit->start_col;
@@ -623,6 +621,8 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
                     p->style |= book_mark << 16;
                 else
                 {
+                    int color;
+
                     color = edit_get_syntax_color (edit, q);
                     p->style |= color << 16;
                 }
