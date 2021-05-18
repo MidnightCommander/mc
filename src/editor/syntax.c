@@ -525,7 +525,6 @@ apply_rules_going_right (WEdit * edit, off_t i)
                     if (e >= end && (_rule.keyword == 0 || keyword_foundright))
                     {
                         _rule.end = e;
-                        found_right = TRUE;
                         _rule.border = RULE_ON_LEFT_BORDER;
                         _rule._context = count;
                         if (!r->between_delimiters && _rule.keyword == 0)
