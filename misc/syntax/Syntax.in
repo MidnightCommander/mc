@@ -40,6 +40,9 @@ include lsm.syntax
 file .\*(bash(_completion|rc)|profile|\\.(sh|bash(rc|_(completion|profile|log(in|out)|aliases|exports|history))|profile|zlog(in|out)|zprofile|zsh(env|rc)))$ Shell\sScript ^#!\s\*/(.\*/|usr/bin/env\s)([a-z]?|ba|pdk)sh
 include sh.syntax
 
+file .\* OpenRC\sRunscript\sFile ^#!\s\*/sbin/openrc-run
+include sh.syntax
+
 file ..\*\\.((?i:ini)|desktop|busname|(auto)?mount|net(dev|work)|link|path|service|slice|socket|swap|target|timer)$ INI-based\sFile
 include ini.syntax
 
