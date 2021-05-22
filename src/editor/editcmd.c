@@ -2876,21 +2876,16 @@ edit_search_cmd (WEdit * edit, gboolean again)
             history = g_list_first (history);
             g_list_free_full (history, g_free);
 
-            if (!edit_search_init (edit, edit->last_search_string))
+            if (edit_search_init (edit, edit->last_search_string))
             {
-                /* if not... then ask for an expression */
-                MC_PTR_FREE (edit->last_search_string);
-                edit_search (edit);
-            }
-            else
                 edit_do_search (edit);
+                return;
+            }
         }
-        else
-        {
-            /* if not... then ask for an expression */
-            MC_PTR_FREE (edit->last_search_string);
-            edit_search (edit);
-        }
+
+        /* if not... then ask for an expression */
+        MC_PTR_FREE (edit->last_search_string);
+        edit_search (edit);
     }
 }
 
