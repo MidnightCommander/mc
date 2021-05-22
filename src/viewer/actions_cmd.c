@@ -147,21 +147,16 @@ mcview_continue_search_cmd (WView * view)
             history = g_list_first (history);
             g_list_free_full (history, g_free);
 
-            if (!mcview_search_init (view))
+            if (mcview_search_init (view))
             {
-                /* if not... then ask for an expression */
-                MC_PTR_FREE (view->last_search_string);
-                mcview_search (view, TRUE);
-            }
-            else
                 mcview_search (view, FALSE);
+                return;
+            }
         }
-        else
-        {
-            /* if not... then ask for an expression */
-            MC_PTR_FREE (view->last_search_string);
-            mcview_search (view, TRUE);
-        }
+
+        /* if not... then ask for an expression */
+        MC_PTR_FREE (view->last_search_string);
+        mcview_search (view, TRUE);
     }
 }
 
