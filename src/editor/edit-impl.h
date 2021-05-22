@@ -197,7 +197,6 @@ void edit_set_markers (WEdit * edit, off_t m1, off_t m2, long c1, long c2);
 void edit_push_markers (WEdit * edit);
 
 void edit_complete_word_cmd (WEdit * edit);
-void edit_get_match_keyword_cmd (WEdit * edit);
 
 gboolean edit_save_block (WEdit * edit, const char *filename, off_t start, off_t finish);
 gboolean edit_save_block_cmd (WEdit * edit);
