@@ -40,10 +40,6 @@
 #include "src/editor/etags.h"
 #include "src/editor/editcmd_dialogs.h"
 
-#ifdef HAVE_ASPELL
-#include "src/editor/spell.h"
-#endif
-
 /*** global variables ****************************************************************************/
 
 /*** file scope macro definitions ****************************************************************/

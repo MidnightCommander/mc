@@ -26,8 +26,7 @@ libedit_la_SOURCES = \
 if USE_ASPELL
 if HAVE_GMODULE
 libedit_la_SOURCES += \
-	spell.c spell.h \
-	spell_dialogs.c spell_dialogs.h
+	spell.c spell.h
 endif
 endif
 

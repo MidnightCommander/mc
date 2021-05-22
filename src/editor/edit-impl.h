@@ -199,12 +199,6 @@ void edit_push_markers (WEdit * edit);
 void edit_complete_word_cmd (WEdit * edit);
 void edit_get_match_keyword_cmd (WEdit * edit);
 
-#ifdef HAVE_ASPELL
-int edit_suggest_current_word (WEdit * edit);
-void edit_spellcheck_file (WEdit * edit);
-void edit_set_spell_lang (void);
-#endif
-
 gboolean edit_save_block (WEdit * edit, const char *filename, off_t start, off_t finish);
 gboolean edit_save_block_cmd (WEdit * edit);
 gboolean edit_insert_file_cmd (WEdit * edit);
