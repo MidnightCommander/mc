@@ -2869,8 +2869,9 @@ edit_search_cmd (WEdit * edit, gboolean again)
         GList *history;
 
         history = mc_config_history_get (MC_HISTORY_SHARED_SEARCH);
-        if (history != NULL && history->data != NULL)
+        if (history != NULL)
         {
+            /* FIXME: is it possible that history->data == NULL? */
             edit->last_search_string = (char *) history->data;
             history->data = NULL;
             history = g_list_first (history);
@@ -2881,10 +2882,12 @@ edit_search_cmd (WEdit * edit, gboolean again)
                 edit_do_search (edit);
                 return;
             }
+
+            /* found, but cannot init search */
+            MC_PTR_FREE (edit->last_search_string);
         }
 
         /* if not... then ask for an expression */
-        MC_PTR_FREE (edit->last_search_string);
         edit_search (edit);
     }
 }
