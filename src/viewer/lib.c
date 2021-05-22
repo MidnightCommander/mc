@@ -238,10 +238,9 @@ mcview_done (WView * view)
         view->converter = str_cnv_from_term;
     }
 
-    mc_search_free (view->search);
+    mcview_search_deinit (view);
     view->search = NULL;
-    MC_PTR_FREE (view->last_search_string);
-    mcview_nroff_seq_free (&view->search_nroff_seq);
+    view->last_search_string = NULL;
     mcview_hexedit_free_change_list (view);
 
     if (mc_global.mc_run_mode == MC_RUN_VIEWER && view->dir != NULL)
