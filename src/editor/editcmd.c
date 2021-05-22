@@ -2672,26 +2672,13 @@ edit_replace_cmd (WEdit * edit, gboolean again)
 
     if (edit->search == NULL)
     {
-#ifdef HAVE_CHARSET
-        edit->search = mc_search_new (input1, cp_source);
-#else
-        edit->search = mc_search_new (input1, NULL);
-#endif
-        if (edit->search == NULL)
+        if (edit_search_init (edit, input1))
+            edit_search_fix_search_start_if_selection (edit);
+        else
         {
             edit->search_start = edit->buffer.curs1;
             goto cleanup;
         }
-        edit->search->search_type = edit_search_options.type;
-#ifdef HAVE_CHARSET
-        edit->search->is_all_charsets = edit_search_options.all_codepages;
-#endif
-        edit->search->is_case_sensitive = edit_search_options.case_sens;
-        edit->search->whole_words = edit_search_options.whole_words;
-        edit->search->search_fn = edit_search_cmd_callback;
-        edit->search->update_fn = edit_search_update_callback;
-        edit->search_line_type = edit_get_search_line_type (edit->search);
-        edit_search_fix_search_start_if_selection (edit);
     }
 
     if (edit->found_len != 0 && edit->search_start == edit->found_start + 1
@@ -2872,9 +2859,6 @@ edit_search_update_callback (const void *user_data, gsize char_offset)
 void
 edit_search_cmd (WEdit * edit, gboolean again)
 {
-    if (edit == NULL)
-        return;
-
     if (!again)
         edit_search (edit);
     else if (edit->last_search_string != NULL)
@@ -2892,30 +2876,14 @@ edit_search_cmd (WEdit * edit, gboolean again)
             history = g_list_first (history);
             g_list_free_full (history, g_free);
 
-#ifdef HAVE_CHARSET
-            edit->search = mc_search_new (edit->last_search_string, cp_source);
-#else
-            edit->search = mc_search_new (edit->last_search_string, NULL);
-#endif
-            if (edit->search == NULL)
+            if (!edit_search_init (edit, edit->last_search_string))
             {
                 /* if not... then ask for an expression */
                 MC_PTR_FREE (edit->last_search_string);
                 edit_search (edit);
             }
             else
-            {
-                edit->search->search_type = edit_search_options.type;
-#ifdef HAVE_CHARSET
-                edit->search->is_all_charsets = edit_search_options.all_codepages;
-#endif
-                edit->search->is_case_sensitive = edit_search_options.case_sens;
-                edit->search->whole_words = edit_search_options.whole_words;
-                edit->search->search_fn = edit_search_cmd_callback;
-                edit->search->update_fn = edit_search_update_callback;
-                edit->search_line_type = edit_get_search_line_type (edit->search);
                 edit_do_search (edit);
-            }
         }
         else
         {

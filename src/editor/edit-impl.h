@@ -201,6 +201,9 @@ mc_search_cbret_t edit_search_cmd_callback (const void *user_data, gsize char_of
                                             int *current_char);
 mc_search_cbret_t edit_search_update_callback (const void *user_data, gsize char_offset);
 
+gboolean edit_search_init (WEdit * edit, const char *s);
+void edit_search_deinit (WEdit * edit);
+
 void edit_complete_word_cmd (WEdit * edit);
 void edit_get_match_keyword_cmd (WEdit * edit);
 

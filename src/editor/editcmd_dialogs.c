@@ -49,15 +49,6 @@
 
 /*** global variables ****************************************************************************/
 
-edit_search_options_t edit_search_options = {
-    .type = MC_SEARCH_T_NORMAL,
-    .case_sens = FALSE,
-    .backwards = FALSE,
-    .only_in_selection = FALSE,
-    .whole_words = FALSE,
-    .all_codepages = FALSE
-};
-
 /*** file scope macro definitions ****************************************************************/
 
 /*** file scope type declarations ****************************************************************/
@@ -177,28 +168,10 @@ editcmd_dialog_search_show (WEdit * edit)
     }
 #endif
 
-    g_free (edit->last_search_string);
+    edit_search_deinit (edit);
     edit->last_search_string = search_text;
-    mc_search_free (edit->search);
 
-#ifdef HAVE_CHARSET
-    edit->search = mc_search_new (edit->last_search_string, cp_source);
-#else
-    edit->search = mc_search_new (edit->last_search_string, NULL);
-#endif
-    if (edit->search != NULL)
-    {
-        edit->search->search_type = edit_search_options.type;
-#ifdef HAVE_CHARSET
-        edit->search->is_all_charsets = edit_search_options.all_codepages;
-#endif
-        edit->search->is_case_sensitive = edit_search_options.case_sens;
-        edit->search->whole_words = edit_search_options.whole_words;
-        edit->search->search_fn = edit_search_cmd_callback;
-        edit->search->update_fn = edit_search_update_callback;
-    }
-
-    return (edit->search != NULL);
+    return edit_search_init (edit, edit->last_search_string);
 }
 
 /* --------------------------------------------------------------------------------------------- */

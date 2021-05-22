@@ -17,6 +17,7 @@ libedit_la_SOURCES = \
 	editdraw.c \
 	editmenu.c \
 	editoptions.c \
+	editsearch.c \
 	editwidget.c editwidget.h \
 	etags.c etags.h \
 	format.c \
