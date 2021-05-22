@@ -143,7 +143,8 @@ mcview_continue_search_cmd (WView * view)
         history = mc_config_history_get (MC_HISTORY_SHARED_SEARCH);
         if (history != NULL && history->data != NULL)
         {
-            view->last_search_string = (gchar *) g_strdup (history->data);
+            view->last_search_string = (gchar *) history->data;
+            history->data = NULL;
             history = g_list_first (history);
             g_list_free_full (history, g_free);
 
