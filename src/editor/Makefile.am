@@ -8,7 +8,6 @@ endif
 
 libedit_la_SOURCES = \
 	bookmark.c \
-	choosesyntax.c \
 	edit-impl.h \
 	edit.c edit.h \
 	editbuffer.c editbuffer.h \

@@ -6,9 +6,10 @@
 
    Written by:
    Paul Sheer, 1998
+   Leonard den Ottolander <leonard den ottolander nl>, 2005, 2006
    Egmont Koblinger <egmont@gmail.com>, 2010
    Slava Zanko <slavazanko@gmail.com>, 2013
-   Andrew Borodin <aborodin@vmail.ru>, 2013, 2014
+   Andrew Borodin <aborodin@vmail.ru>, 2013, 2014, 2021
 
    This file is part of the Midnight Commander.
 
@@ -59,7 +60,7 @@
 #include "lib/fileloc.h"        /* EDIT_HOME_DIR, EDIT_HOME_SYNTAX_FILE */
 #include "lib/strutil.h"        /* utf string functions */
 #include "lib/util.h"
-#include "lib/widget.h"         /* message() */
+#include "lib/widget.h"         /* Listbox, message() */
 
 #include "edit-impl.h"
 #include "editwidget.h"
@@ -90,6 +91,10 @@ gboolean option_auto_syntax = TRUE;
 #define CONTEXT_RULE(x) ((context_rule_t *) (x))
 
 #define ARGS_LEN 1024
+
+#define MAX_ENTRY_LEN 40
+#define LIST_LINES 14
+#define N_DFLT_ENTRIES 2
 
 /*** file scope type declarations ****************************************************************/
 
@@ -1407,6 +1412,40 @@ get_first_editor_line (WEdit * edit)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static int
+pstrcmp (const void *p1, const void *p2)
+{
+    return strcmp (*(char *const *) p1, *(char *const *) p2);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+exec_edit_syntax_dialog (const GPtrArray * names, const char *current_syntax)
+{
+    size_t i;
+    Listbox *syntaxlist;
+
+    syntaxlist = create_listbox_window (LIST_LINES, MAX_ENTRY_LEN,
+                                        _("Choose syntax highlighting"), NULL);
+    LISTBOX_APPEND_TEXT (syntaxlist, 'A', _("< Auto >"), NULL, FALSE);
+    LISTBOX_APPEND_TEXT (syntaxlist, 'R', _("< Reload Current Syntax >"), NULL, FALSE);
+
+    for (i = 0; i < names->len; i++)
+    {
+        const char *name;
+
+        name = g_ptr_array_index (names, i);
+        LISTBOX_APPEND_TEXT (syntaxlist, 0, name, NULL, FALSE);
+        if (current_syntax != NULL && strcmp (name, current_syntax) == 0)
+            listbox_select_entry (syntaxlist->list, i + N_DFLT_ENTRIES);
+    }
+
+    return run_listbox (syntaxlist);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -1514,6 +1553,59 @@ const char *
 edit_get_syntax_type (const WEdit * edit)
 {
     return edit->syntax_type;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+edit_syntax_dialog (WEdit * edit)
+{
+    GPtrArray *names;
+    int syntax;
+
+    names = g_ptr_array_new ();
+
+    /* We fill the list of syntax files every time the editor is invoked.
+       Instead we could save the list to a file and update it once the syntax
+       file gets updated (either by testing or by explicit user command). */
+    edit_load_syntax (NULL, names, NULL);
+    g_ptr_array_sort (names, pstrcmp);
+
+    syntax = exec_edit_syntax_dialog (names, edit->syntax_type);
+    if (syntax >= 0)
+    {
+        gboolean force_reload = FALSE;
+        char *current_syntax;
+        gboolean old_auto_syntax;
+
+        current_syntax = g_strdup (edit->syntax_type);
+        old_auto_syntax = option_auto_syntax;
+
+        switch (syntax)
+        {
+        case 0:                /* auto syntax */
+            option_auto_syntax = TRUE;
+            break;
+        case 1:                /* reload current syntax */
+            force_reload = TRUE;
+            break;
+        default:
+            option_auto_syntax = FALSE;
+            g_free (edit->syntax_type);
+            edit->syntax_type = g_strdup (g_ptr_array_index (names, syntax - N_DFLT_ENTRIES));
+        }
+
+        /* Load or unload syntax rules if the option has changed */
+        if (force_reload || (option_auto_syntax && !old_auto_syntax) || old_auto_syntax ||
+            (current_syntax != NULL && edit->syntax_type != NULL &&
+             strcmp (current_syntax, edit->syntax_type) != 0))
+            edit_load_syntax (edit, NULL, edit->syntax_type);
+
+        g_free (current_syntax);
+    }
+
+    g_ptr_array_foreach (names, (GFunc) g_free, NULL);
+    g_ptr_array_free (names, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */

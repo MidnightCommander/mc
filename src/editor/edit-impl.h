@@ -249,6 +249,7 @@ void edit_set_filename (WEdit * edit, const vfs_path_t * name_vpath);
 void edit_load_syntax (WEdit * edit, GPtrArray * pnames, const char *type);
 void edit_free_syntax_rules (WEdit * edit);
 int edit_get_syntax_color (WEdit * edit, off_t byte_index);
+void edit_syntax_dialog (WEdit * edit);
 
 void book_mark_insert (WEdit * edit, long line, int c);
 gboolean book_mark_query_color (WEdit * edit, long line, int c);
@@ -263,7 +264,6 @@ void book_mark_restore (WEdit * edit, int color);
 gboolean edit_line_is_blank (WEdit * edit, long line);
 gboolean is_break_char (char c);
 void edit_options_dialog (WDialog * h);
-void edit_syntax_dialog (WEdit * edit);
 void edit_mail_dialog (WEdit * edit);
 void format_paragraph (WEdit * edit, gboolean force);
 
