@@ -68,6 +68,7 @@
 
 #include "edit-impl.h"
 #include "editwidget.h"
+#include "editsearch.h"
 #ifdef HAVE_ASPELL
 #include "spell.h"
 #endif
