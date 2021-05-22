@@ -141,8 +141,9 @@ mcview_continue_search_cmd (WView * view)
         GList *history;
 
         history = mc_config_history_get (MC_HISTORY_SHARED_SEARCH);
-        if (history != NULL && history->data != NULL)
+        if (history != NULL)
         {
+            /* FIXME: is it possible that history->data == NULL? */
             view->last_search_string = (gchar *) history->data;
             history->data = NULL;
             history = g_list_first (history);
@@ -153,10 +154,12 @@ mcview_continue_search_cmd (WView * view)
                 mcview_search (view, FALSE);
                 return;
             }
+
+            /* found, but cannot init search */
+            MC_PTR_FREE (view->last_search_string);
         }
 
         /* if not... then ask for an expression */
-        MC_PTR_FREE (view->last_search_string);
         mcview_search (view, TRUE);
     }
 }
