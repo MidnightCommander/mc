@@ -682,49 +682,6 @@ pipe_mail (const edit_buffer_t * buf, char *to, char *subject, char *cc)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** find first character of current word */
-
-static gboolean
-edit_find_word_start (const edit_buffer_t * buf, off_t * word_start, gsize * word_len)
-{
-    int c;
-    off_t i;
-
-    /* return if at begin of file */
-    if (buf->curs1 <= 0)
-        return FALSE;
-
-    c = edit_buffer_get_previous_byte (buf);
-    /* return if not at end or in word */
-    if (is_break_char (c))
-        return FALSE;
-
-    /* search start of word to be completed */
-    for (i = 1;; i++)
-    {
-        int last;
-
-        last = c;
-        c = edit_buffer_get_byte (buf, buf->curs1 - i - 1);
-
-        if (is_break_char (c))
-        {
-            /* return if word starts with digit */
-            if (isdigit (last))
-                return FALSE;
-
-            break;
-        }
-    }
-
-    /* success */
-    *word_start = buf->curs1 - i;       /* start found */
-    *word_len = (gsize) i;
-
-    return TRUE;
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /**
  * Get current word under cursor
  *
@@ -2664,7 +2621,7 @@ edit_complete_word_cmd (WEdit * edit)
     int max_width;
 
     /* search start of word to be completed */
-    if (!edit_find_word_start (&edit->buffer, &word_start, &word_len))
+    if (!edit_buffer_find_word_start (&edit->buffer, &word_start, &word_len))
         return;
 
     /* prepare match expression */
@@ -2835,7 +2792,7 @@ edit_get_match_keyword_cmd (WEdit * edit)
     GPtrArray *def_hash = NULL;
 
     /* search start of word to be completed */
-    if (!edit_find_word_start (&edit->buffer, &word_start, &word_len))
+    if (!edit_buffer_find_word_start (&edit->buffer, &word_start, &word_len))
         return;
 
     /* prepare match expression */

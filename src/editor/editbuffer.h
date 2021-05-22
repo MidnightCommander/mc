@@ -48,6 +48,8 @@ off_t edit_buffer_get_bol (const edit_buffer_t * buf, off_t current);
 off_t edit_buffer_get_eol (const edit_buffer_t * buf, off_t current);
 GString *edit_buffer_get_word_from_pos (const edit_buffer_t * buf, off_t start_pos, off_t * start,
                                         gsize * cut);
+gboolean edit_buffer_find_word_start (const edit_buffer_t * buf, off_t * word_start,
+                                      gsize * word_len);
 
 void edit_buffer_insert (edit_buffer_t * buf, int c);
 void edit_buffer_insert_ahead (edit_buffer_t * buf, int c);
