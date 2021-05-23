@@ -859,11 +859,6 @@ setup_mc (void)
 #endif /* HAVE_CHARSET */
 #endif /* HAVE_SLANG */
 
-#ifdef ENABLE_SUBSHELL
-    if (mc_global.tty.use_subshell)
-        add_select_channel (mc_global.tty.subshell_pty, load_prompt, NULL);
-#endif /* !ENABLE_SUBSHELL */
-
     if ((tty_baudrate () < 9600) || mc_global.tty.slow_terminal)
         verbose = FALSE;
 }
@@ -942,6 +937,13 @@ create_file_manager (void)
     the_bar = buttonbar_new ();
     group_add_widget (g, the_bar);
     midnight_set_buttonbar (the_bar);
+
+#ifdef ENABLE_SUBSHELL
+    /* Must be done after creation of cmdline and promt widgets to avoid potential
+       NULL dereference in load_prompt() -> ... -> setup_cmdline() -> label_set_text(). */
+    if (mc_global.tty.use_subshell)
+        add_select_channel (mc_global.tty.subshell_pty, load_prompt, NULL);
+#endif /* !ENABLE_SUBSHELL */
 }
 
 /* --------------------------------------------------------------------------------------------- */
