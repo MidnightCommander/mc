@@ -433,6 +433,7 @@ execute_menu_command (const WEdit * edit_widget, const char *commands, gboolean 
     int col;
     vfs_path_t *file_name_vpath;
     gboolean run_view = FALSE;
+    char *cmd;
 
     /* Skip menu entry title line */
     commands = strchr (commands, '\n');
@@ -543,44 +544,39 @@ execute_menu_command (const WEdit * edit_widget, const char *commands, gboolean 
     fclose (cmd_file);
     mc_chmod (file_name_vpath, S_IRWXU);
 
+    /* Execute the command indirectly to allow execution even on no-exec filesystems. */
+    cmd = g_strconcat ("/bin/sh ", vfs_path_as_str (file_name_vpath), (char *) NULL);
+
     if (run_view)
     {
-        mcview_viewer (vfs_path_as_str (file_name_vpath), NULL, 0, 0, 0);
+        mcview_viewer (cmd, NULL, 0, 0, 0);
         dialog_switch_process_pending ();
     }
+    else if (show_prompt)
+        shell_execute (cmd, EXECUTE_HIDE);
     else
     {
-        /* execute the command indirectly to allow execution even
-         * on no-exec filesystems. */
-        char *cmd;
+        gboolean ok;
 
-        cmd = g_strconcat ("/bin/sh ", vfs_path_as_str (file_name_vpath), (char *) NULL);
+        /* Prepare the terminal by setting its flag to the initial ones. This will cause \r
+         * to work as expected, instead of being ignored. */
+        tty_reset_shell_mode ();
 
-        if (show_prompt)
-            shell_execute (cmd, EXECUTE_HIDE);
-        else
-        {
-            gboolean ok;
+        ok = (system (cmd) != -1);
 
-            /* Prepare the terminal by setting its flag to the initial ones. This will cause \r
-             * to work as expected, instead of being ignored. */
-            tty_reset_shell_mode ();
+        /* Restore terminal configuration. */
+        tty_raw_mode ();
 
-            ok = (system (cmd) != -1);
+        /* Redraw the original screen's contents. */
+        tty_clear_screen ();
+        repaint_screen ();
 
-            /* Restore terminal configuration. */
-            tty_raw_mode ();
-
-            /* Redraw the original screen's contents. */
-            tty_clear_screen ();
-            repaint_screen ();
-
-            if (!ok)
-                message (D_ERROR, MSG_ERROR, "%s", _("Error calling program"));
-        }
-
-        g_free (cmd);
+        if (!ok)
+            message (D_ERROR, MSG_ERROR, "%s", _("Error calling program"));
     }
+
+    g_free (cmd);
+
     mc_unlink (file_name_vpath);
     vfs_path_free (file_name_vpath, TRUE);
 }
