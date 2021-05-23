@@ -1,7 +1,5 @@
-#ifndef MC__EDITCMD_DIALOGS_H
-#define MC__EDITCMD_DIALOGS_H
-
-#include "src/editor/edit.h"
+#ifndef MC__EDIT_COMPLETE_H
+#define MC__EDIT_COMPLETE_H
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -13,8 +11,11 @@
 
 /*** declarations of public functions ************************************************************/
 
-int editcmd_dialog_raw_key_query (const char *heading, const char *query, gboolean cancel);
+/* Public function for unit tests */
+char *edit_completion_dialog_show (const WEdit * edit, GQueue * compl, int max_width);
+
+void edit_complete_word_cmd (WEdit * edit);
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__EDITCMD_DIALOGS_H */
+#endif /* MC__EDIT_COMPLETE_H */

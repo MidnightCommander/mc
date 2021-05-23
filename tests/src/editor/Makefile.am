@@ -26,10 +26,10 @@ endif
 EXTRA_DIST = mc.charsets test-data.txt.in
 
 TESTS = \
-	editcmd__edit_complete_word_cmd
+	edit_complete_word_cmd
 
 check_PROGRAMS = $(TESTS)
 
-editcmd__edit_complete_word_cmd_SOURCES = \
-	editcmd__edit_complete_word_cmd.c
+edit_complete_word_cmd_SOURCES = \
+	edit_complete_word_cmd.c
 

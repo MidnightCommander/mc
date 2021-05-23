@@ -40,7 +40,8 @@
 #include "src/selcodepage.h"
 #endif
 #include "src/editor/editwidget.h"
-#include "src/editor/editcmd_dialogs.h"
+#include "src/editor/editmacros.h"      /* edit_load_macro_cmd() */
+#include "src/editor/editcomplete.h"
 
 static WGroup owner;
 static WEdit *test_edit;
@@ -88,60 +89,60 @@ edit_load_macro_cmd (WEdit * _edit)
 /* --------------------------------------------------------------------------------------------- */
 
 /* @CapturedValue */
-static const WEdit *editcmd_dialog_completion_show__edit;
+static const WEdit *edit_completion_dialog_show__edit;
 /* @CapturedValue */
-static int editcmd_dialog_completion_show__max_width;
+static int edit_completion_dialog_show__max_width;
 /* @CapturedValue */
-static GQueue *editcmd_dialog_completion_show__compl;
+static GQueue *edit_completion_dialog_show__compl;
 
 /* @ThenReturnValue */
-static char *editcmd_dialog_completion_show__return_value;
+static char *edit_completion_dialog_show__return_value;
 
 /* @Mock */
 char *
-editcmd_dialog_completion_show (const WEdit * edit, GQueue * compl, int max_width)
+edit_completion_dialog_show (const WEdit * edit, GQueue * compl, int max_width)
 {
 
-    editcmd_dialog_completion_show__edit = edit;
-    editcmd_dialog_completion_show__max_width = max_width;
+    edit_completion_dialog_show__edit = edit;
+    edit_completion_dialog_show__max_width = max_width;
 
     {
         GList *i;
 
-        editcmd_dialog_completion_show__compl = g_queue_new ();
+        edit_completion_dialog_show__compl = g_queue_new ();
 
         for (i = g_queue_peek_tail_link (compl); i != NULL; i = g_list_previous (i))
         {
             GString *s = (GString *) i->data;
 
-            g_queue_push_tail (editcmd_dialog_completion_show__compl, mc_g_string_dup (s));
+            g_queue_push_tail (edit_completion_dialog_show__compl, mc_g_string_dup (s));
         }
     }
 
-    return editcmd_dialog_completion_show__return_value;
+    return edit_completion_dialog_show__return_value;
 }
 
 static void
-editcmd_dialog_completion_show__init (void)
+edit_completion_dialog_show__init (void)
 {
-    editcmd_dialog_completion_show__edit = NULL;
-    editcmd_dialog_completion_show__max_width = 0;
-    editcmd_dialog_completion_show__compl = NULL;
-    editcmd_dialog_completion_show__return_value = NULL;
+    edit_completion_dialog_show__edit = NULL;
+    edit_completion_dialog_show__max_width = 0;
+    edit_completion_dialog_show__compl = NULL;
+    edit_completion_dialog_show__return_value = NULL;
 }
 
 static void
-editcmd_dialog_completion_show__string_free (gpointer data)
+edit_completion_dialog_show__string_free (gpointer data)
 {
     g_string_free ((GString *) data, TRUE);
 }
 
 static void
-editcmd_dialog_completion_show__deinit (void)
+edit_completion_dialog_show__deinit (void)
 {
-    if (editcmd_dialog_completion_show__compl != NULL)
-        g_queue_free_full (editcmd_dialog_completion_show__compl,
-                           editcmd_dialog_completion_show__string_free);
+    if (edit_completion_dialog_show__compl != NULL)
+        g_queue_free_full (edit_completion_dialog_show__compl,
+                           edit_completion_dialog_show__string_free);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -161,7 +162,7 @@ my_setup (void)
     load_codepages_list ();
 #endif /* HAVE_CHARSET */
 
-    mc_global.main_config = mc_config_init ("editcmd__edit_complete_word_cmd.ini", FALSE);
+    mc_global.main_config = mc_config_init ("edit_complete_word_cmd.ini", FALSE);
     mc_config_set_bool (mc_global.main_config, CONFIG_APP_SECTION,
                         "editor_wordcompletion_collect_all_files", TRUE);
 
@@ -170,7 +171,7 @@ my_setup (void)
     test_edit = edit_init (NULL, 0, 0, 24, 80, vfs_path_from_str ("test-data.txt"), 1);
     memset (&owner, 0, sizeof (owner));
     group_add_widget (&owner, WIDGET (test_edit));
-    editcmd_dialog_completion_show__init ();
+    edit_completion_dialog_show__init ();
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -179,7 +180,7 @@ my_setup (void)
 static void
 my_teardown (void)
 {
-    editcmd_dialog_completion_show__deinit ();
+    edit_completion_dialog_show__deinit ();
     edit_clean (test_edit);
     group_remove_widget (test_edit);
     g_free (test_edit);
@@ -216,7 +217,7 @@ static const struct test_autocomplete_ds
 } test_autocomplete_ds[] =
 {
     { /* 0. */
-        111,
+        102,
         "KOI8-R",
         0,
         "UTF-8",
@@ -225,11 +226,11 @@ static const struct test_autocomplete_ds
 
         16,
         2,
-        107,
+        98,
         "ÑÑŠÐ¹Ñ†ÑƒÐºÐµÐ½"
     },
     { /* 1. */
-        147,
+        138,
         "UTF-8",
         1,
         "KOI8-R",
@@ -238,7 +239,7 @@ static const struct test_autocomplete_ds
 
         8,
         2,
-        145,
+        136,
         "ÜßÊÃÕËÅÎ"
     },
 };
@@ -250,7 +251,7 @@ START_PARAMETRIZED_TEST (test_autocomplete, test_autocomplete_ds)
 /* *INDENT-ON* */
 {
     /* given */
-    editcmd_dialog_completion_show__return_value = g_strdup (data->input_completed_word);
+    edit_completion_dialog_show__return_value = g_strdup (data->input_completed_word);
 
 
     mc_global.source_codepage = data->input_source_codepage_id;
@@ -266,10 +267,10 @@ START_PARAMETRIZED_TEST (test_autocomplete, test_autocomplete_ds)
     edit_complete_word_cmd (test_edit);
 
     /* then */
-    mctest_assert_ptr_eq (editcmd_dialog_completion_show__edit, test_edit);
-    mctest_assert_int_eq (g_queue_get_length (editcmd_dialog_completion_show__compl),
+    mctest_assert_ptr_eq (edit_completion_dialog_show__edit, test_edit);
+    mctest_assert_int_eq (g_queue_get_length (edit_completion_dialog_show__compl),
                           data->expected_compl_word_count);
-    mctest_assert_int_eq (editcmd_dialog_completion_show__max_width, data->expected_max_width);
+    mctest_assert_int_eq (edit_completion_dialog_show__max_width, data->expected_max_width);
 
     {
         off_t i = 0;
@@ -314,13 +315,13 @@ static const struct test_autocomplete_single_ds
 } test_autocomplete_single_ds[] =
 {
     { /* 0. */
-        155,
+        146,
         "UTF-8",
         1,
         "KOI8-R",
         0,
 
-        154,
+        145,
         "ÆÙ×Á"
     },
 };
