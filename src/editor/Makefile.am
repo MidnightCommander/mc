@@ -13,7 +13,6 @@ libedit_la_SOURCES = \
 	editcomplete.c editcomplete.h \
 	editbuffer.c editbuffer.h \
 	editcmd.c \
-	editcmd_dialogs.c editcmd_dialogs.h \
 	editdraw.c \
 	editmenu.c \
 	editoptions.c \

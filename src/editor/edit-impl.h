@@ -267,6 +267,8 @@ void format_paragraph (WEdit * edit, gboolean force);
 /* either command or char_for_insertion must be passed as -1 */
 void edit_execute_cmd (WEdit * edit, long command, int char_for_insertion);
 
+int editcmd_dialog_raw_key_query (const char *heading, const char *query, gboolean cancel);
+
 /*** inline functions ****************************************************************************/
 
 /**
