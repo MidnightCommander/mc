@@ -460,6 +460,7 @@ exec_extension (WPanel * panel, void *target, const vfs_path_t * filename_vpath,
     {
         message (D_ERROR, MSG_ERROR,
                  _("Cannot create temporary command file\n%s"), unix_error_string (errno));
+        g_string_free (shell_string, TRUE);
         goto ret;
     }
 
