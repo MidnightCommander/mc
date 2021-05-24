@@ -251,6 +251,9 @@ mc_serialize_config (mc_config_t * data, GError ** error)
 
         g_strfreev (params);
     }
+
+    g_strfreev (groups);
+
     return g_string_free (buffer, FALSE);
 }
 
