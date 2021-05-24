@@ -914,7 +914,7 @@ edit_replace_cmd (WEdit * edit, gboolean again)
             GString *repl_str;
 
             edit->found_start = edit->search_start;
-            i = edit->found_len = len;
+            edit->found_len = len;
 
             edit_cursor_move (edit, edit->search_start - edit->buffer.curs1);
             edit_scroll_screen_over_cursor (edit);
