@@ -92,7 +92,7 @@ sigintr_handler (int signo)
  * @param force_xterm Set forced the XTerm type
  *
  * @return true if @param force_xterm is true or value of $TERM is one of term*, konsole*
- *              rxvt*, Eterm or dtterm
+ *              rxvt*, Eterm, dtterm or alacritty
  */
 gboolean
 tty_check_term (gboolean force_xterm)
@@ -116,6 +116,7 @@ tty_check_term (gboolean force_xterm)
         || strncmp (termvalue, "rxvt", 4) == 0
         || strcmp (termvalue, "Eterm") == 0
         || strcmp (termvalue, "dtterm") == 0
+        || strncmp (termvalue, "alacritty", 9) == 0
         || (strncmp (termvalue, "screen", 6) == 0 && xdisplay != NULL);
 }
 
