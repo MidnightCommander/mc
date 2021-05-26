@@ -17,7 +17,7 @@ dnl AC_INIT call, AC_INIT doesn't redefine them.
 dnl As a result, config.h will not contain macros with variable version.
 m4_define([AC_PACKAGE_VERSION], [])
 m4_define([AC_PACKAGE_STRING], [])
-AC_INIT([GNU Midnight Commander], m4_esyscmd_s([maint/utils/version.sh .]),
+AC_INIT([GNU Midnight Commander], m4_esyscmd_s([./version.sh .]),
         [https://www.midnight-commander.org/wiki/NewTicket], [mc],
         [https://www.midnight-commander.org/])
 

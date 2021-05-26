@@ -9,7 +9,9 @@ endif
 
 EXTRA_DIST = 
 
-dist_noinst_SCRIPTS = build-glib2.sh
+dist_noinst_SCRIPTS = \
+    build-glib2.sh \
+    version.sh
 
 dist_noinst_HEADERS = $(top_srcdir)/mc-version.h
 
@@ -29,11 +31,11 @@ CONFIG_STATUS_DEPENDENCIES = $(top_srcdir)/mc-version.h
 
 
 update-version:
-	@if test -x $(top_srcdir)/maint/utils/version.sh; then \
-	    $(top_srcdir)/maint/utils/version.sh "$(top_srcdir)" 2>&1 >/dev/null; \
+	@if test -x $(top_srcdir)/version.sh; then \
+	    $(top_srcdir)/version.sh "$(top_srcdir)" 2>&1 >/dev/null; \
 	else \
 	    if test ! -e $(top_srcdir)/mc-version.h; then \
-	        echo "File not found: $(top_srcdir)/maint/utils/version.sh"; \
+	        echo "File not found: $(top_srcdir)/version.sh"; \
 	        exit 1; \
 	    fi; \
 	fi
