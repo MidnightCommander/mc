@@ -1,0 +1,39 @@
+#
+# JSON syntax highlighting
+# for MC Editor/CoolEdit
+#
+# Author: Sergii Pylypenko <x.pelya.x@gmail.com>
+#
+
+context default
+
+    #=========================
+    # Constants
+    keyword whole true brightgreen
+    keyword whole false brightgreen
+    keyword whole null brightgreen
+
+    #=========================
+    # Numbers
+    keyword whole \[-\]\{0123456789\}\[0123456789\] brightgreen
+    keyword whole \[-\]\{0123456789\}\[0123456789\]\.\{0123456789\}\[0123456789\] brightgreen
+    keyword whole \[-\]\{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] brightgreen
+    keyword whole \[-\]\{0123456789\}\[0123456789\]\{eE\}\{\-\+\}\{0123456789\}\[0123456789\] brightgreen
+    keyword whole \[-\]\{0123456789\}\[0123456789\]\.\{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] brightgreen
+    keyword whole \[-\]\{0123456789\}\[0123456789\]\.\{0123456789\}\[0123456789\]\{eE\}\{\-\+\}\{0123456789\}\[0123456789\] brightgreen
+
+    #=========================
+    # Separators
+    keyword { brightcyan
+    keyword } brightcyan
+    keyword [ brightcyan
+    keyword ] brightcyan
+    keyword , brightcyan
+    keyword : brightcyan
+
+#=============================
+# Strings
+context " " green
+    spellcheck
+    keyword \\\{"\\/bfnrt\} brightgreen
+    keyword \\u\{0123456789ABCDEFabcdef\}\{0123456789ABCDEFabcdef\}\{0123456789ABCDEFabcdef\}\{0123456789ABCDEFabcdef\} brightgreen
