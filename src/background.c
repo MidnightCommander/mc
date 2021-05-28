@@ -281,10 +281,10 @@ background_attention (int fd, void *closure)
 
     if (to_child_fd == -1)
         message (D_ERROR, background_process_error, "%s", _("Unknown error in child"));
-
-    /* Handle the call */
-    if (type == Return_Integer)
+    else if (type == Return_Integer)
     {
+        /* Handle the call */
+
         int result = 0;
 
         if (have_ctx == 0)
