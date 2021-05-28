@@ -108,8 +108,12 @@ vfs_finduid (const char *uname)
     static int saveuid = GUID_DEFAULT_CONST;
     static char saveuname[TUNMLEN] = "\0";
 
+    size_t uname_len;
+
+    uname_len = strlen (uname);
+
     if (uname[0] != saveuname[0]        /* Quick test w/o proc call */
-        || 0 != strncmp (uname, saveuname, TUNMLEN))
+        || strncmp (uname, saveuname, MIN (uname_len, TUNMLEN - 1)) != 0)
     {
         struct passwd *pw;
 
