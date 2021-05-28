@@ -25,6 +25,8 @@
 
 #include <config.h>
 
+#include <assert.h>
+
 #include "lib/global.h"
 #include "lib/search.h"
 #include "lib/mcconfig.h"       /* mc_config_history_get */
@@ -575,8 +577,8 @@ edit_do_search (WEdit * edit)
     edit_search_status_msg_t esm;
     gsize len = 0;
 
-    if (edit->search == NULL)
-        edit->search_start = edit->buffer.curs1;
+    /* This shouldn't happen */
+    assert (edit->search != NULL);
 
     edit_push_undo_action (edit, KEY_PRESS + edit->start_display);
 
