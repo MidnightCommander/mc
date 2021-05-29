@@ -91,8 +91,14 @@ sigintr_handler (int signo)
  *
  * @param force_xterm Set forced the XTerm type
  *
- * @return true if @param force_xterm is true or value of $TERM is one of term*, konsole*
- *              rxvt*, Eterm, dtterm or alacritty
+ * @return true if @param force_xterm is true or value of $TERM is one of following:
+ *         term*
+ *         konsole*
+ *         rxvt*
+ *         Eterm
+ *         dtterm
+ *         alacritty*
+ *         screen* (and DISPLAY environment variable is set).
  */
 gboolean
 tty_check_term (gboolean force_xterm)
