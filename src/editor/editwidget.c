@@ -64,6 +64,7 @@
 
 #include "edit-impl.h"
 #include "editwidget.h"
+#include "editmacros.h"         /* edit_execute_macro() */
 #ifdef HAVE_ASPELL
 #include "spell.h"
 #endif

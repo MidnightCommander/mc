@@ -70,6 +70,7 @@
 #include "editwidget.h"
 #include "editsearch.h"
 #include "editcomplete.h"       /* edit_complete_word_cmd() */
+#include "editmacros.h"
 #include "etags.h"              /* edit_get_match_keyword_cmd() */
 #ifdef HAVE_ASPELL
 #include "spell.h"
