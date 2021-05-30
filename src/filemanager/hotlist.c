@@ -1210,7 +1210,6 @@ load_group (struct hotlist *grp)
         add2hotlist (mc_config_get_string (mc_global.main_config, group_section, *profile_keys, ""),
                      g_strdup (*profile_keys), HL_TYPE_GROUP, LISTBOX_APPEND_AT_END);
 
-    g_free (group_section);
     g_strfreev (keys);
 
     keys = mc_config_get_keys (mc_global.main_config, grp->directory, NULL);
@@ -1219,6 +1218,7 @@ load_group (struct hotlist *grp)
         add2hotlist (mc_config_get_string (mc_global.main_config, group_section, *profile_keys, ""),
                      g_strdup (*profile_keys), HL_TYPE_ENTRY, LISTBOX_APPEND_AT_END);
 
+    g_free (group_section);
     g_strfreev (keys);
 
     for (current = grp->head; current; current = current->next)
