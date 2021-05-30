@@ -98,6 +98,7 @@ sigintr_handler (int signo)
  *         Eterm
  *         dtterm
  *         alacritty*
+ *         foot*
  *         screen* (and DISPLAY environment variable is set).
  */
 gboolean
@@ -123,6 +124,7 @@ tty_check_term (gboolean force_xterm)
         || strcmp (termvalue, "Eterm") == 0
         || strcmp (termvalue, "dtterm") == 0
         || strncmp (termvalue, "alacritty", 9) == 0
+        || strncmp (termvalue, "foot", 4) == 0
         || (strncmp (termvalue, "screen", 6) == 0 && xdisplay != NULL);
 }
 
