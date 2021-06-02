@@ -174,7 +174,6 @@ sftpfs_open_file (vfs_file_handler_t * fh, int flags, mode_t mode, GError ** mce
         {
             sftpfs_ssherror_to_gliberror (super, libssh_errno, mcerror);
             g_free (name);
-            g_free (file);
             return FALSE;
         }
     }
