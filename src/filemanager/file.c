@@ -1467,21 +1467,19 @@ check_dir_is_empty (const vfs_path_t * vpath)
 {
     DIR *dir;
     struct vfs_dirent *d;
-    int i = 1;
+    int i = 0;
 
     dir = mc_opendir (vpath);
     if (dir == NULL)
         return -1;
 
-    for (d = mc_readdir (dir); d != NULL; d = mc_readdir (dir))
-        if (!DIR_IS_DOT (d->d_name) && !DIR_IS_DOTDOT (d->d_name))
-        {
-            i = 0;
+    /* https://stackoverflow.com/questions/6383584/check-if-a-directory-is-empty-using-c-on-linux */
+    while ((d = mc_readdir (dir)) != NULL)
+        if (++i > 2)
             break;
-        }
 
     mc_closedir (dir);
-    return i;
+    return i <= 2 ? 1 : 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
