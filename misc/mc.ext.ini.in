@@ -455,6 +455,11 @@ Include=editor
 Regex=\.(so|so\.[0-9\.]*)$
 View=%view{ascii} @EXTHELPERSDIR@/misc.sh view so
 
+# .dylib libraries
+[dylib]
+Regex=\.(dylib|dylib\.[0-9\.]*)$
+View=%view{ascii} @EXTHELPERSDIR@/misc.sh view dylib
+
 
 ### Documentation ###
 
@@ -893,6 +898,10 @@ Type=^ELF
 #Open=%var{PAGER:more} %f
 View=%view{ascii} @EXTHELPERSDIR@/misc.sh view elf
 
+[Mach-O]
+Type=^Mach-O
+#Open=%var{PAGER:more} %f
+View=%view{ascii} @EXTHELPERSDIR@/misc.sh view dylib
 
 ### Documentation ###
 
