@@ -1,9 +1,9 @@
 # The Midnight Commander Italian translation strings
-# Copyright (C) 1998-2019 Free Software Foundation, Inc.
+# Copyright (C) 1998-2021 Free Software Foundation, Inc.
 # This file is distributed under the same license as the Midnight Commander package.
 #
 # Translators:
-# Marco Ciampa <ciampix@libero.it>, 1999-2020
+# Marco Ciampa <ciampix@posteo.net>, 1999-2021
 # Andreas Troschka <signupbox001@om.it.eu.org>, 2012.
 # Giuliano Natali <diaolin@diaolin.com>, 1998.
 # Slava Zanko <slavazanko@gmail.com>, 2011.
@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-03-14 19:59+0300\n"
-"PO-Revision-Date: 2020-01-06 12:54+0100\n"
+"POT-Creation-Date: 2021-06-09 10:59+0200\n"
+"PO-Revision-Date: 2021-06-09 12:49+0200\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/mc/language/"
 "it/)\n"
@@ -464,23 +464,27 @@ msgstr "La variabile TERM non è definita!\n"
 msgid "Cannot check SIGWINCH pipe"
 msgstr "Impossibile controllare la pipe SIGWINCH"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Cannot create pipe for SIGWINCH: %s (%d)\n"
-msgstr "Impossibile creare la pipe SIGWINCH"
+msgstr ""
+"\n"
+"Impossibile creare la pipe per SIGWINCH: %s (%d)\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
-msgstr "Impossibile configurare la fine scrittura della pipe SIGWINCH"
+msgstr ""
+"\n"
+"Impossibile configurare la fine scrittura della pipe SIGWINCH: %s (%d)\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
-msgstr "Impossibile configurare la fine lettura della pipe SIGWINCH"
+msgstr "\nImpossibile configurare la fine lettura della pipe SIGWINCH: %s (%d)\n"
 
 #, c-format
 msgid ""
@@ -1634,9 +1638,8 @@ msgstr ""
 "Un semplice editor di testi\n"
 "scritto per il Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2021 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2019 the Free Software Foundation"
+msgstr "Copyright (C) 1996-2021 the Free Software Foundation"
 
 msgid "About"
 msgstr "Informazioni"
@@ -1788,13 +1791,12 @@ msgstr "Impossibile ricevere una copia locale di %s"
 msgid "The shell is already running a command"
 msgstr "La shell sta già eseguendo un comando"
 
-#, fuzzy
 msgid ""
 "Not an xterm or Linux console;\n"
 "the subshell cannot be toggled."
 msgstr ""
-"Non è né un xterm né una console; \n"
-"i pannelli non possono essere nascosti."
+"Non è un xterm né una console Linux; \n"
+"la subshell non può essere commutata."
 
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Battere 'exit' per tornare al Midnight Commander"
@@ -1820,9 +1822,9 @@ msgstr "altri"
 msgid "Flag"
 msgstr "Flag"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Permissions (octal): %o"
-msgstr "Permessi (ottale):"
+msgstr "Permessi (ottale): %o"
 
 msgid "Chown advanced command"
 msgstr "Comando chown avanzato"
@@ -1949,7 +1951,7 @@ msgid "Skin:"
 msgstr "Tema:"
 
 msgid "&Shadows"
-msgstr ""
+msgstr "O&mbre"
 
 msgid "Appearance"
 msgstr "Aspetto"
@@ -2183,90 +2185,80 @@ msgstr ""
 "Non posso entrare in \"%s\"\n"
 "%s"
 
-#, fuzzy
 msgid "Secure deletion"
-msgstr "&Inverti selezione"
+msgstr "Eliminazione sicura"
 
-#, fuzzy
 msgid "Undelete"
-msgstr "Elimina"
+msgstr "De-elimina"
 
 msgid "Synchronous updates"
-msgstr ""
+msgstr "Aggiornamenti sincroni"
 
-#, fuzzy
 msgid "Synchronous directory updates"
-msgstr "Mostra dimensione d&irectory"
+msgstr "Aggiornamento directory sincrono"
 
 msgid "Immutable"
-msgstr ""
+msgstr "Immutabile"
 
-#, fuzzy
 msgid "Append only"
-msgstr "&Appendi"
+msgstr "Solo aggiunta"
 
 msgid "No dump"
-msgstr ""
+msgstr "No dump"
 
 msgid "No update atime"
-msgstr ""
+msgstr "No agg.nto atime"
 
 msgid "Compress"
-msgstr ""
+msgstr "Comprimi"
 
 msgid "Compressed clusters"
-msgstr ""
+msgstr "Cluster compressi"
 
-#, fuzzy
 msgid "Compressed dirty file"
-msgstr "Confronta directory"
+msgstr "File dirty compresso"
 
 msgid "Compression raw access"
-msgstr ""
+msgstr "Accesso diretto compressione"
 
 msgid "Encrypted inode"
-msgstr ""
+msgstr "Inode crittato"
 
 msgid "Journaled data"
-msgstr ""
+msgstr "Dati journaled"
 
-#, fuzzy
 msgid "Indexed directory"
-msgstr "directory"
+msgstr "Directory indicizzata"
 
 msgid "No tail merging"
-msgstr ""
+msgstr "No fusione tail"
 
-#, fuzzy
 msgid "Top of directory hierarchies"
-msgstr "Mostra dimensione d&irectory"
+msgstr "Gerarchie top directory"
 
 msgid "Inode uses extents"
-msgstr ""
+msgstr "Inode usa gli extents"
 
-#, fuzzy
 msgid "Huge_file"
-msgstr "file"
+msgstr "File_enorme"
 
 msgid "No COW"
-msgstr ""
+msgstr "No COW"
 
-#, fuzzy
 msgid "Direct access for files"
-msgstr "Cache dir scaduta per %s"
+msgstr "Accesso diretto ai file"
 
-#, fuzzy
 msgid "Casefolded file"
-msgstr "Chiudi il file"
+msgstr "File casefolded"
 
 msgid "Inode has inline data"
-msgstr ""
+msgstr "Inode con dati inline"
 
 msgid "Project hierarchy"
-msgstr ""
+msgstr "Gerarchia del progetto"
 
 msgid "Verity protected inode"
-msgstr ""
+msgstr "Inode protetto verity"
 
 msgid "&Marked all"
 msgstr "M&od. tut."
@@ -2277,28 +2269,26 @@ msgstr "&Imp. marc."
 msgid "C&lear marked"
 msgstr "&Canc. marc."
 
-#, fuzzy
 msgid "Chattr command"
-msgstr "Altro comando"
+msgstr "Comando chattr"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot chattr \"%s\"\n"
 "%s"
 msgstr ""
-"Impossibile ottenere info dal file \"%s\"\n"
+"Impossibile chattr \"%s\"\n"
 "%s"
 
-#, fuzzy
 msgid "Cannot change attributes on non-local filesystems"
-msgstr "Impossibile eseguire comandi su filesystem non locali"
+msgstr "Impossibile cambiare gli attributi su filesystem non locali"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get flags of \"%s\"\n"
 "%s"
 msgstr ""
-"Impossibile spostare il file \"%s\" in \"%s\" \n"
+"Impossibile ottenere i flag di \"%s\"\n"
 "%s"
 
 msgid "set &user ID on execution"
@@ -3151,7 +3141,7 @@ msgid "&Advanced chown"
 msgstr "Proprietario &avanzato"
 
 msgid "Cha&ttr"
-msgstr ""
+msgstr "Cha&ttr"
 
 msgid "&Rename/Move"
 msgstr "Rinomina&/Sposta"
@@ -3322,12 +3312,11 @@ msgstr "Nome file:"
 msgid "&Find recursively"
 msgstr "&Trova ricorsivamente"
 
-#, fuzzy
 msgid "Follow s&ymlinks"
-msgstr "Segui i co&llegamenti"
+msgstr "Segui colle&gamenti"
 
 msgid "S&kip hidden"
-msgstr "Salta i &nascosti"
+msgstr "Salta &nascosti"
 
 msgid "Content:"
 msgstr "Contenuto:"
@@ -3546,14 +3535,14 @@ msgid "Links:      %d"
 msgstr "Collegamenti:  %d"
 
 msgid "Attributes: not supported"
-msgstr ""
+msgstr "Attributi: non supportati"
 
 #, c-format
 msgid "Attributes: %s"
-msgstr ""
+msgstr "Attributi: %s"
 
 msgid "Attributes: unavailable"
-msgstr ""
+msgstr "Attributi: non disponibili"
 
 #, c-format
 msgid "Mode:       %s (%04o)"
@@ -3764,18 +3753,21 @@ msgstr "Aggiungi al pannello esterno"
 msgid "Enter command label:"
 msgstr "Etichetta per il comando:"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "%s"
-msgstr "Pannello esterno"
+msgstr ""
+"Pannellizza esternamente:\n"
+"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "failed to read data from child stdout:\n"
 "%s"
 msgstr ""
+"Pannellizza esternamente:\n"
 "Fallita la lettura dati stdout processo figlio:\n"
 "%s"
 
@@ -3938,15 +3930,14 @@ msgstr ""
 msgid "Home directory path is not absolute"
 msgstr "Il percorso della directory home non è assoluto"
 
-#, fuzzy
 msgid ""
 "GNU Midnight Commander\n"
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""
-"GNU Midnight Commander è già in funzione su\n"
-"questo terminale.\n"
-"Il supporto alla subshell verrà disabilitato."
+"GNU Midnight Commander\n"
+"è già in funzione su questo terminale.\n"
+"Il supporto subshell verrà disabilitato."
 
 #, c-format
 msgid ""
@@ -3989,70 +3980,60 @@ msgstr "La shell è ancora attiva. Esco comunque?"
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Attenzione: non posso entrare su %s.\n"
 
-#, fuzzy
 msgid "With builtin Editor and Aspell support"
-msgstr "Con editor integrato e supporto Aspell\n"
+msgstr "Con editor integrato e supporto Aspell"
 
-#, fuzzy
 msgid "With builtin Editor"
-msgstr "Con editor integrato\n"
+msgstr "Con editor integrato"
 
-#, fuzzy
 msgid "With optional subshell support"
-msgstr "Con supporto opzionale subshell\n"
+msgstr "Con supporto opzionale subshell"
 
-#, fuzzy
 msgid "With subshell support as default"
-msgstr "Con supporto subshell predefinito\n"
+msgstr "Con supporto subshell predefinito"
 
-#, fuzzy
 msgid "With support for background operations"
-msgstr "Con supporto per processi in background\n"
+msgstr "Con supporto per processi in background"
 
-#, fuzzy
 msgid "With mouse support on xterm and Linux console"
-msgstr "Con supporto del mouse in xterm e in console Linux\n"
+msgstr "Con supporto del mouse in xterm e in console Linux"
 
-#, fuzzy
 msgid "With mouse support on xterm"
-msgstr "Con supporto del mouse in xterm\n"
+msgstr "Con supporto del mouse in xterm"
 
-#, fuzzy
 msgid "With support for X11 events"
-msgstr "Con supporto per eventi X11\n"
+msgstr "Con supporto per eventi X11"
 
-#, fuzzy
 msgid "With internationalization support"
-msgstr "Con supporto internazionale\n"
+msgstr "Con supporto internazionale"
 
-#, fuzzy
 msgid "With multiple codepages support"
-msgstr "Con supporto codepages multiple\n"
+msgstr "Con supporto codepages multiple"
 
 msgid "With ext2fs attributes support"
-msgstr ""
+msgstr "Con supporto attributi ext2fs"
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"
 msgstr "Creato con GLib %d.%d.%d\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with S-Lang %s with terminfo database\n"
-msgstr "Uso della libreria S-Lang con il database terminfo\n"
+msgstr "Creato con S-Lang %s con database terminfo\n"
 
 #, c-format
 msgid "Built with ncurses %s\n"
-msgstr ""
+msgstr "Creato con ncurses %s\n"
 
 msgid "Built with ncurses (unknown version)"
-msgstr ""
+msgstr "Creato con ncurses (versione sconosciuta)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with ncursesw %s\n"
-msgstr "Uso della libreria ncursesw\n"
+msgstr "Creato con ncursesw %s\n"
 
 msgid "Built with ncursesw (unknown version)"
-msgstr ""
+msgstr "Creato con ncursesw (versione sconosiuta)"
 
 msgid "Virtual File Systems:"
 msgstr "File System Virtuali:"
@@ -4179,20 +4160,23 @@ msgstr ""
 "Inattesa fine del file\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s:\n"
 "%s"
 msgstr ""
-"Non posso aprire l'archivio %s\n"
+"Impossibile aprire archivio %s\n"
+"%s:\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "EXTFS virtual file system:\n"
 "%s"
-msgstr "File System Virtuali:"
+msgstr ""
+"File system virtuale EXTFS:\n"
+"%s"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4360,11 +4344,13 @@ msgstr ""
 "il file ~/.netrc è impostato male.\n"
 "Rimuovere la password o correggere i permessi."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "SFS virtual file system:\n"
 "%s"
-msgstr "File System Virtuali:"
+msgstr ""
+"File system virtuale SFS:\n"
+"%s"
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4682,55 +4668,3 @@ msgstr "Continuare dall'inizio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Impossibile ricevere copia locale di /ftp://un.host/modificami.txt"
-
-#, c-format
-#~ msgid "An error occurred while migrating user settings: %s"
-#~ msgstr "Errore durante la migrazione delle impostazioni dell'utente: %s"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to Freedesktop recommended dirs.\n"
-#~ "To get more info, please visit\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-#~ msgstr ""
-#~ "Le vecchie impostazioni sono state migrate da %s\n"
-#~ "alle cartelle raccomandate da Freedesktop.\n"
-#~ "Per avere ulteriori informazioni, consultare\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to %s\n"
-#~ msgstr ""
-#~ "Le vecchie impostazioni sono state migrate da %s\n"
-#~ "a %s\n"
-
-#~ msgid "Dup failed"
-#~ msgstr "Dup fallita"
-
-#~ msgid "Error dup'ing old error pipe"
-#~ msgstr "Errore facendo il dup della vecchia pipe errori"
-
-#~ msgid "Cannot invoke command."
-#~ msgstr "Impossibile eseguire comando."
-
-#~ msgid "Pipe close failed"
-#~ msgstr "Chiusura pipe fallita"
-
-#~ msgid "Inconsistent extfs archive"
-#~ msgstr "Archivio extfs inconsistente"
-
-#~ msgid "Block is large, you may not be able to undo this action"
-#~ msgstr "Il blocco è grande, potresti non riuscire ad annullare l'azione."
-
-#~ msgid ""
-#~ "Current text was modified without a file save.\n"
-#~ "Continue discards these changes"
-#~ msgstr ""
-#~ "Il testo corrente è stato modificato senza salvare.\n"
-#~ "Continuando si perdono tutte le modifiche."
-
-#~ msgid "Using the ncurses library\n"
-#~ msgstr "Uso della libreria ncurses\n"
