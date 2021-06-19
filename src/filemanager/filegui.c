@@ -1057,11 +1057,11 @@ file_progress_show_total (file_op_total_context_t * tctx, file_op_context_t * ct
 
     if (ui->time_label != NULL)
     {
-        struct timeval tv_current;
+        gint64 tv_current;
         char buffer4[BUF_TINY];
 
-        gettimeofday (&tv_current, NULL);
-        file_frmt_time (buffer2, tv_current.tv_sec - tctx->transfer_start.tv_sec);
+        tv_current = g_get_real_time ();
+        file_frmt_time (buffer2, (tv_current - tctx->transfer_start) / G_USEC_PER_SEC);
 
         if (ctx->progress_totals_computed)
         {

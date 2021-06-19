@@ -10,7 +10,6 @@
 
 #include <sys/stat.h>
 #include <sys/types.h>
-#include <sys/time.h>
 #include <inttypes.h>           /* uintmax_t */
 
 #include "lib/global.h"
@@ -171,7 +170,7 @@ typedef struct
     uintmax_t copied_bytes;
     size_t bps;
     size_t bps_count;
-    struct timeval transfer_start;
+    gint64 transfer_start;
     double eta_secs;
 
     gboolean ask_overwrite;

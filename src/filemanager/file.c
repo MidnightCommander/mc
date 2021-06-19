@@ -101,6 +101,8 @@ const char *op_names[3] = {
 
 #define FILEOP_UPDATE_INTERVAL 2
 #define FILEOP_STALLING_INTERVAL 4
+#define FILEOP_UPDATE_INTERVAL_US (FILEOP_UPDATE_INTERVAL * G_USEC_PER_SEC)
+#define FILEOP_STALLING_INTERVAL_US (FILEOP_STALLING_INTERVAL * G_USEC_PER_SEC)
 
 /*** file scope type declarations ****************************************************************/
 
@@ -809,25 +811,26 @@ panel_operate_init_totals (const WPanel * panel, const vfs_path_t * source,
 static FileProgressStatus
 progress_update_one (file_op_total_context_t * tctx, file_op_context_t * ctx, off_t add)
 {
-    struct timeval tv_current;
-    static struct timeval tv_start = { 0, 0 };
+    gint64 tv_current;
+    static gint64 tv_start = -1;
 
     tctx->progress_count++;
     tctx->progress_bytes += (uintmax_t) add;
 
-    if (tv_start.tv_sec == 0)
-    {
-        gettimeofday (&tv_start, (struct timezone *) NULL);
-    }
-    gettimeofday (&tv_current, (struct timezone *) NULL);
-    if ((tv_current.tv_sec - tv_start.tv_sec) > FILEOP_UPDATE_INTERVAL)
+    if (tv_start < 0)
+        tv_start = g_get_real_time ();
+
+    tv_current = g_get_real_time ();
+
+    if (tv_current - tv_start > FILEOP_UPDATE_INTERVAL_US)
     {
         if (verbose && ctx->dialog_type == FILEGUI_DIALOG_MULTI_ITEM)
         {
             file_progress_show_count (ctx, tctx->progress_count, ctx->progress_count);
             file_progress_show_total (tctx, ctx, tctx->progress_bytes, TRUE);
         }
-        tv_start.tv_sec = tv_current.tv_sec;
+
+        tv_start = tv_current;
     }
 
     return check_progress_buttons (ctx);
@@ -1109,16 +1112,16 @@ files_error (const char *format, const char *file1, const char *file2)
 
 static void
 copy_file_file_display_progress (file_op_total_context_t * tctx, file_op_context_t * ctx,
-                                 struct timeval tv_current, struct timeval tv_transfer_start,
-                                 off_t file_size, off_t n_read_total)
+                                 gint64 tv_current, gint64 tv_transfer_start, off_t file_size,
+                                 off_t n_read_total)
 {
-    long dt;
+    gint64 dt;
 
-    /* 1. Update rotating dash after some time */
+    /* Update rotating dash after some time */
     rotate_dash (TRUE);
 
-    /* 3. Compute ETA */
-    dt = (tv_current.tv_sec - tv_transfer_start.tv_sec);
+    /* Compute ETA */
+    dt = (tv_current - tv_transfer_start) / G_USEC_PER_SEC;
 
     if (n_read_total == 0)
         ctx->eta_secs = 0.0;
@@ -1128,13 +1131,11 @@ copy_file_file_display_progress (file_op_total_context_t * tctx, file_op_context
         ctx->bps = n_read_total / ((dt < 1) ? 1 : dt);
     }
 
-    /* 4. Compute BPS rate */
-    ctx->bps_time = (tv_current.tv_sec - tv_transfer_start.tv_sec);
-    if (ctx->bps_time < 1)
-        ctx->bps_time = 1;
+    /* Compute BPS rate */
+    ctx->bps_time = MAX (1, dt);
     ctx->bps = n_read_total / ctx->bps_time;
 
-    /* 5. Compute total ETA and BPS */
+    /* Compute total ETA and BPS */
     if (ctx->progress_bytes != 0)
     {
         uintmax_t remain_bytes;
@@ -1142,10 +1143,10 @@ copy_file_file_display_progress (file_op_total_context_t * tctx, file_op_context
         remain_bytes = ctx->progress_bytes - tctx->copied_bytes;
 #if 1
         {
-            int total_secs = tv_current.tv_sec - tctx->transfer_start.tv_sec;
+            gint64 total_secs;
 
-            if (total_secs < 1)
-                total_secs = 1;
+            total_secs = (tv_current - tctx->transfer_start) / G_USEC_PER_SEC;
+            total_secs = MAX (1, total_secs);
 
             tctx->bps = tctx->copied_bytes / total_secs;
             tctx->eta_secs = (tctx->bps != 0) ? remain_bytes / tctx->bps : 0;
@@ -2224,7 +2225,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
     gboolean dst_exists = FALSE, appending = FALSE;
     off_t file_size = -1;
     FileProgressStatus return_status, temp_status;
-    struct timeval tv_transfer_start;
+    gint64 tv_transfer_start;
     dest_status_t dst_status = DEST_NONE;
     int open_flags;
     vfs_path_t *src_vpath = NULL, *dst_vpath = NULL;
@@ -2390,7 +2391,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
         }
     }
 
-    gettimeofday (&tv_transfer_start, (struct timezone *) NULL);
+    tv_transfer_start = g_get_real_time ();
 
     while ((src_desc = mc_open (src_vpath, O_RDONLY | O_LINEAR)) < 0 && !ctx->skip_all)
     {
@@ -2529,7 +2530,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
     ctx->eta_secs = 0.0;
     ctx->bps = 0;
 
-    if (tctx->bps == 0 || (file_size / (tctx->bps)) > FILEOP_UPDATE_INTERVAL)
+    if (tctx->bps == 0 || (file_size / tctx->bps) > FILEOP_UPDATE_INTERVAL)
         file_progress_show (ctx, 0, file_size, "", TRUE);
     else
         file_progress_show (ctx, 1, 1, "", TRUE);
@@ -2540,8 +2541,8 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
     {
         size_t bufsize;
         off_t n_read_total = 0;
-        struct timeval tv_current, tv_last_update, tv_last_input;
-        int secs, update_secs;
+        gint64 tv_current, tv_last_update, tv_last_input;
+        gint64 usecs, update_usecs;
         const char *stalled_msg = "";
         gboolean is_first_time = TRUE;
 
@@ -2571,7 +2572,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
             if (n_read == 0)
                 break;
 
-            gettimeofday (&tv_current, NULL);
+            tv_current = g_get_real_time ();
 
             if (n_read > 0)
             {
@@ -2579,7 +2580,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
 
                 n_read_total += n_read;
 
-                gettimeofday (&tv_last_input, NULL);
+                tv_last_input = g_get_real_time ();
 
                 /* dst_write */
                 while ((n_written = mc_write (dest_desc, t, (size_t) n_read)) < n_read)
@@ -2620,24 +2621,22 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
 
             tctx->copied_bytes = tctx->progress_bytes + n_read_total + ctx->do_reget;
 
-            secs = (tv_current.tv_sec - tv_last_update.tv_sec);
-            update_secs = (tv_current.tv_sec - tv_last_input.tv_sec);
+            usecs = tv_current - tv_last_update;
+            update_usecs = tv_current - tv_last_input;
 
-            if (is_first_time || secs > FILEOP_UPDATE_INTERVAL)
+            if (is_first_time || usecs > FILEOP_UPDATE_INTERVAL_US)
             {
-                copy_file_file_display_progress (tctx, ctx,
-                                                 tv_current,
-                                                 tv_transfer_start, file_size, n_read_total);
+                copy_file_file_display_progress (tctx, ctx, tv_current, tv_transfer_start,
+                                                 file_size, n_read_total);
                 tv_last_update = tv_current;
             }
 
             is_first_time = FALSE;
 
-            if (update_secs > FILEOP_STALLING_INTERVAL)
+            if (update_usecs > FILEOP_STALLING_INTERVAL_US)
                 stalled_msg = _("(stalled)");
 
-            force_update =
-                (tv_current.tv_sec - tctx->transfer_start.tv_sec) > FILEOP_UPDATE_INTERVAL;
+            force_update = (tv_current - tctx->transfer_start) > FILEOP_UPDATE_INTERVAL_US;
 
             if (verbose && ctx->dialog_type == FILEGUI_DIALOG_MULTI_ITEM)
             {
@@ -3273,7 +3272,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
     }
 
     tctx = file_op_total_context_new ();
-    gettimeofday (&tctx->transfer_start, (struct timezone *) NULL);
+    tctx->transfer_start = g_get_real_time ();
 
 #ifdef ENABLE_BACKGROUND
     /* Did the user select to do a background operation? */
