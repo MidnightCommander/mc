@@ -817,10 +817,10 @@ progress_update_one (file_op_total_context_t * tctx, file_op_context_t * ctx, of
     tctx->progress_count++;
     tctx->progress_bytes += (uintmax_t) add;
 
-    if (tv_start < 0)
-        tv_start = g_get_real_time ();
-
     tv_current = g_get_real_time ();
+
+    if (tv_start < 0)
+        tv_start = tv_current;
 
     if (tv_current - tv_start > FILEOP_UPDATE_INTERVAL_US)
     {
