@@ -1113,7 +1113,7 @@ files_error (const char *format, const char *file1, const char *file2)
 static void
 copy_file_file_display_progress (file_op_total_context_t * tctx, file_op_context_t * ctx,
                                  gint64 tv_current, gint64 tv_transfer_start, off_t file_size,
-                                 off_t n_read_total)
+                                 off_t file_part)
 {
     gint64 dt;
 
@@ -1123,14 +1123,14 @@ copy_file_file_display_progress (file_op_total_context_t * tctx, file_op_context
     /* Compute ETA */
     dt = (tv_current - tv_transfer_start) / G_USEC_PER_SEC;
 
-    if (n_read_total == 0)
+    if (file_part == 0)
         ctx->eta_secs = 0.0;
     else
-        ctx->eta_secs = ((dt / (double) n_read_total) * file_size) - dt;
+        ctx->eta_secs = ((dt / (double) file_part) * file_size) - dt;
 
     /* Compute BPS rate */
     ctx->bps_time = MAX (1, dt);
-    ctx->bps = n_read_total / ctx->bps_time;
+    ctx->bps = file_part / ctx->bps_time;
 
     /* Compute total ETA and BPS */
     if (ctx->progress_bytes != 0)
@@ -2537,7 +2537,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
     if (return_status == FILE_CONT)
     {
         size_t bufsize;
-        off_t n_read_total = 0;
+        off_t file_part = 0;
         gint64 tv_current, tv_last_update;
         gint64 tv_last_input = 0;
         gint64 usecs, update_usecs;
@@ -2576,7 +2576,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
             {
                 char *t = buf;
 
-                n_read_total += n_read;
+                file_part += n_read;
 
                 tv_last_input = tv_current;
 
@@ -2617,7 +2617,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
                 }
             }
 
-            tctx->copied_bytes = tctx->progress_bytes + n_read_total + ctx->do_reget;
+            tctx->copied_bytes = tctx->progress_bytes + file_part + ctx->do_reget;
 
             usecs = tv_current - tv_last_update;
             update_usecs = tv_current - tv_last_input;
@@ -2625,7 +2625,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
             if (is_first_time || usecs > FILEOP_UPDATE_INTERVAL_US)
             {
                 copy_file_file_display_progress (tctx, ctx, tv_current, tv_transfer_start,
-                                                 file_size, n_read_total);
+                                                 file_size, file_part);
                 tv_last_update = tv_current;
             }
 
@@ -2642,7 +2642,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
                 file_progress_show_total (tctx, ctx, tctx->copied_bytes, force_update);
             }
 
-            file_progress_show (ctx, n_read_total + ctx->do_reget, file_size, stalled_msg,
+            file_progress_show (ctx, file_part + ctx->do_reget, file_size, stalled_msg,
                                 force_update);
             mc_refresh ();
 
