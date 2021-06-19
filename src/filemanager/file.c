@@ -2538,7 +2538,8 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
     {
         size_t bufsize;
         off_t n_read_total = 0;
-        gint64 tv_current, tv_last_update, tv_last_input;
+        gint64 tv_current, tv_last_update;
+        gint64 tv_last_input = 0;
         gint64 usecs, update_usecs;
         const char *stalled_msg = "";
         gboolean is_first_time = TRUE;
@@ -2577,7 +2578,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
 
                 n_read_total += n_read;
 
-                tv_last_input = g_get_real_time ();
+                tv_last_input = tv_current;
 
                 /* dst_write */
                 while ((n_written = mc_write (dest_desc, t, (size_t) n_read)) < n_read)
