@@ -1126,10 +1126,7 @@ copy_file_file_display_progress (file_op_total_context_t * tctx, file_op_context
     if (n_read_total == 0)
         ctx->eta_secs = 0.0;
     else
-    {
         ctx->eta_secs = ((dt / (double) n_read_total) * file_size) - dt;
-        ctx->bps = n_read_total / ((dt < 1) ? 1 : dt);
-    }
 
     /* Compute BPS rate */
     ctx->bps_time = MAX (1, dt);
