@@ -1,0 +1,154 @@
+# CoffeScript syntax highlighting
+# for mcedit
+# Autor r72cccp
+# based on javascipt file from Vlad Romanenko and ruby file from Marco Ciampa:
+# ===================================================================================
+# JavaScript syntax highlighting
+# for MC Editor/CoolEdit
+#
+# Author: Vlad Romanenko <VladRomanenko@ukr.net>
+# Based on c.syntax
+# ===================================================================================
+# Ruby syntax file derived from perl syntax by Marco Ciampa <ciampix@libero.it>
+# alpha version 0.2 16/05/2003
+
+
+context default
+
+    #=========================
+    # Keywords
+    keyword whole arguments magenta
+    keyword whole break magenta
+    keyword whole caller magenta
+    keyword whole case magenta
+    keyword whole catch magenta
+    keyword whole constructor magenta
+    keyword whole continue magenta
+    keyword whole else magenta
+    keyword whole default magenta
+    keyword whole delete magenta
+    keyword whole for magenta
+    keyword whole function magenta
+    keyword whole if magenta
+    keyword whole then magenta
+    keyword whole in magenta
+    keyword whole instanceof magenta
+    keyword whole new magenta
+    keyword whole of magenta
+    keyword whole prototype magenta
+    keyword whole return magenta
+    keyword whole switch magenta
+    keyword whole this magenta
+    keyword whole throw magenta
+    keyword whole try magenta
+    keyword whole typeof magenta
+    keyword whole unless magenta
+    keyword whole var magenta
+    keyword whole while magenta
+    keyword whole with magenta
+
+    #=========================
+    # Objects
+    keyword whole ActiveXObject yellow
+    keyword whole Array yellow
+    keyword whole Boolean yellow
+    keyword whole Date yellow
+    keyword whole Dictionary yellow
+    keyword whole Enumerator yellow
+    keyword whole FileSystemObject yellow
+    keyword whole Function yellow
+    keyword whole Global yellow
+    keyword whole Image yellow
+    keyword whole Math yellow
+    keyword whole Number yellow
+    keyword whole Object yellow
+    keyword whole TextStream yellow
+    keyword whole RegExp yellow
+    keyword whole VBArray yellow
+
+    #=========================
+    # Most common functions
+    keyword whole alert red
+    keyword whole escape red
+    keyword whole eval red
+    keyword whole indexOf red
+    keyword whole isNaN red
+    keyword whole toString red
+    keyword whole unescape red
+    keyword whole valueOf red
+
+    #=========================
+    # Constants
+    keyword whole false brightgreen
+    keyword whole null brightgreen
+    keyword whole true brightgreen
+    keyword whole undefined red
+
+    #=========================
+    # Numbers
+    wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_.
+
+    keyword whole 0\{xX\}\{0123456789abcdefABCDEF\}\[0123456789abcdefABCDEF\] brightgreen
+    keyword whole \{0123456789\}\[0123456789\] brightgreen
+    keyword whole \[0123456789\]\.\{0123456789\}\[0123456789\] brightgreen
+    keyword whole \{0123456789\}\[0123456789\]\.\[0123456789\] brightgreen
+    keyword whole \{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] brightgreen
+    keyword whole \{0123456789\}\[0123456789\]\{eE\}\{\-\+\}\{0123456789\}\[0123456789\] brightgreen
+    keyword whole \{0123456789\}\[0123456789\]\.\{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] brightgreen
+    keyword whole \{0123456789\}\[0123456789\]\.\{0123456789\}\[0123456789\]\{eE\}\{\-\+\}\{0123456789\}\[0123456789\] brightgreen
+
+    #=========================
+    # Special symbols
+    keyword \. yellow
+    keyword \* yellow
+    keyword \+ yellow
+    keyword - yellow
+    keyword / yellow
+    keyword % yellow
+    keyword whole = yellow
+    keyword ! yellow
+    keyword & yellow
+    keyword | yellow
+    keyword ^ yellow
+    keyword ~ yellow
+    keyword > yellow
+    keyword < yellow
+
+    #=========================
+    # Separators
+    keyword { brightcyan
+    keyword } brightcyan
+    keyword ( brightcyan
+    keyword ) brightcyan
+    keyword [ brightcyan
+    keyword ] brightcyan
+    keyword , brightcyan
+    keyword ? brightcyan
+    keyword : brightcyan
+    keyword ; brightmagenta
+
+
+    #=========================
+    # Comments
+    context ### ### brown
+        spellcheck
+
+    context # \n brown
+        spellcheck
+
+#=============================
+# Strings
+
+context " " green
+    spellcheck
+    keyword \\\{\\'"abtnvfr\} brightgreen
+    keyword \\\{0123\}\{01234567\}\{01234567\} brightgreen
+
+    keyword ' brightgreen
+
+context ' ' green
+    spellcheck
+    keyword \\\{\\'"abtnvfr\} brightgreen
+    keyword \\\{0123\}\{01234567\}\{01234567\} brightgreen
+
+    keyword " brightgreen
