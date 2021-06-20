@@ -350,7 +350,7 @@ hotlist_run_cmd (int action)
             hotlist_state.moving = FALSE;
             listbox_get_current (l_movelist, NULL, (void **) &moveto_item);
             moveto_group = current_group;
-            dlg_destroy (movelist_dlg);
+            widget_destroy (WIDGET (movelist_dlg));
             current_group = saved;
             if (ret == B_CANCEL)
                 return 0;
@@ -891,7 +891,7 @@ init_movelist (struct hotlist *item)
 static void
 hotlist_done (void)
 {
-    dlg_destroy (hotlist_dlg);
+    widget_destroy (WIDGET (hotlist_dlg));
     l_hotlist = NULL;
 #if 0
     update_panels (UP_OPTIMIZE, UP_KEEPSEL);
@@ -1210,7 +1210,6 @@ load_group (struct hotlist *grp)
         add2hotlist (mc_config_get_string (mc_global.main_config, group_section, *profile_keys, ""),
                      g_strdup (*profile_keys), HL_TYPE_GROUP, LISTBOX_APPEND_AT_END);
 
-    g_free (group_section);
     g_strfreev (keys);
 
     keys = mc_config_get_keys (mc_global.main_config, grp->directory, NULL);
@@ -1219,6 +1218,7 @@ load_group (struct hotlist *grp)
         add2hotlist (mc_config_get_string (mc_global.main_config, group_section, *profile_keys, ""),
                      g_strdup (*profile_keys), HL_TYPE_ENTRY, LISTBOX_APPEND_AT_END);
 
+    g_free (group_section);
     g_strfreev (keys);
 
     for (current = grp->head; current; current = current->next)

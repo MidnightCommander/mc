@@ -288,7 +288,7 @@ history_show (history_descriptor_t * hd)
     if (WIDGET (query_dlg)->y < hd->y)
         z = g_list_reverse (z);
 
-    dlg_destroy (query_dlg);
+    widget_destroy (WIDGET (query_dlg));
 
     hd->list = g_list_first (hd->list);
     g_list_free_full (hd->list, hd->free);

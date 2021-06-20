@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-03-14 19:59+0300\n"
+"POT-Creation-Date: 2021-06-20 16:14+0300\n"
 "PO-Revision-Date: 2020-12-31 14:19+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Estonian (http://www.transifex.com/mc/mc/language/et/)\n"
@@ -999,15 +999,6 @@ msgstr "Erinevuste vaatur: vale režiim"
 msgid "Two files are needed to compare"
 msgstr "Võrdlemiseks on vaja kahte faili"
 
-msgid "Choose syntax highlighting"
-msgstr "Valsi süntaksi esiletoomine"
-
-msgid "< Auto >"
-msgstr "<Auto>"
-
-msgid "< Reload Current Syntax >"
-msgstr "<Valitud süntaksi taaslaadimine>"
-
 #, c-format
 msgid "Loading: %3d%%"
 msgstr "Laaditakse: %3d%%"
@@ -1052,14 +1043,6 @@ msgstr "Viga torust lugemisel: %s"
 #, c-format
 msgid "Cannot open pipe for reading: %s"
 msgstr "Toru avamine lugemiseks nurjus: %s"
-
-#, c-format
-msgid "Searching %s: %3d%%"
-msgstr "Otsitakse %s: %3d%%"
-
-#, c-format
-msgid "Searching %s"
-msgstr "Otsitakse %s"
 
 msgid "File has hard-links. Detach before saving?"
 msgstr "Failil on jäiku viitasid. Kas võtta need enne salvestamist lahti?"
@@ -1106,9 +1089,6 @@ msgstr "Vaheta reavahetused:"
 msgid "Save As"
 msgstr "Salvesta kui"
 
-msgid "Collect completions"
-msgstr "Koonda lõpetamised"
-
 msgid "&Quick save"
 msgstr "&Kiirsalvestus"
 
@@ -1138,27 +1118,6 @@ msgstr "K&irjuta üle"
 
 msgid "Cannot save file"
 msgstr "Faili salvestamine nurjus"
-
-msgid "Delete macro"
-msgstr "Kustuta makro"
-
-msgid "Press macro hotkey:"
-msgstr "Vajuta makro kiirklahv:"
-
-msgid "Macro not deleted"
-msgstr "Makrot ei kustutatud"
-
-msgid "Save macro"
-msgstr "Salvesta makro"
-
-msgid "Press the macro's new hotkey:"
-msgstr "Vajuta makro uus kiirklahv:"
-
-msgid "Repeat last commands"
-msgstr "Korda viimaseid käske"
-
-msgid "Repeat times:"
-msgstr "Korduste arv:"
 
 #, c-format
 msgid "Confirm save file: \"%s\""
@@ -1193,13 +1152,6 @@ msgstr "Millist menüü failidi soovid muuta?"
 
 msgid "&Local"
 msgstr "&Kohalik"
-
-msgid "Replace"
-msgstr "Asenda"
-
-#, c-format
-msgid "%ld replacements made"
-msgstr "Teostati %ld asendust"
 
 msgid "[NoName]"
 msgstr "[Nimetu]"
@@ -1309,35 +1261,35 @@ msgstr ""
 "Teksti on muudetud faili salvestamata.\n"
 "Jätkamine viskab muudatused ära."
 
-msgid "In se&lection"
-msgstr "&Valikus"
-
-msgid "&Find all"
-msgstr "&Otsi kõikjalt"
-
-msgid "Enter replacement string:"
-msgstr "Sisesta asendus string:"
-
-msgid "Replace with:"
-msgstr "Asenda:"
-
-msgid "&Replace"
-msgstr "&Asenda"
-
-msgid "A&ll"
-msgstr "&Kõik"
-
-msgid "&Skip"
-msgstr "&Jäta vahele"
-
-msgid "Confirm replace"
-msgstr "Kinnita asendamine"
-
 msgid "Cancel"
 msgstr "Tühista"
 
+msgid "Collect completions"
+msgstr "Koonda lõpetamised"
+
 msgid "NoName"
 msgstr "Nimetu"
+
+msgid "Save macro"
+msgstr "Salvesta makro"
+
+msgid "Press the macro's new hotkey:"
+msgstr "Vajuta makro uus kiirklahv:"
+
+msgid "Delete macro"
+msgstr "Kustuta makro"
+
+msgid "Press macro hotkey:"
+msgstr "Vajuta makro kiirklahv:"
+
+msgid "Macro not deleted"
+msgstr "Makrot ei kustutatud"
+
+msgid "Repeat last commands"
+msgstr "Korda viimaseid käske"
+
+msgid "Repeat times:"
+msgstr "Korduste arv:"
 
 msgid "&Open file..."
 msgstr "&Ava fail..."
@@ -1627,6 +1579,45 @@ msgstr "Sõna täpsusega reavahetuse rea pikkus:"
 msgid "Editor options"
 msgstr "Redaktori suvandid"
 
+msgid "In se&lection"
+msgstr "&Valikus"
+
+msgid "&Find all"
+msgstr "&Otsi kõikjalt"
+
+msgid "Enter replacement string:"
+msgstr "Sisesta asendus string:"
+
+msgid "Replace"
+msgstr "Asenda"
+
+msgid "Replace with:"
+msgstr "Asenda:"
+
+msgid "&Replace"
+msgstr "&Asenda"
+
+msgid "A&ll"
+msgstr "&Kõik"
+
+msgid "&Skip"
+msgstr "&Jäta vahele"
+
+msgid "Confirm replace"
+msgstr "Kinnita asendamine"
+
+#, c-format
+msgid "Searching %s: %3d%%"
+msgstr "Otsitakse %s: %3d%%"
+
+#, c-format
+msgid "Searching %s"
+msgstr "Otsitakse %s"
+
+#, c-format
+msgid "%ld replacements made"
+msgstr "Teostati %ld asendust"
+
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
@@ -1754,6 +1745,15 @@ msgstr "Soovita"
 
 msgid "Select language"
 msgstr "Vali keel"
+
+msgid "Choose syntax highlighting"
+msgstr "Valsi süntaksi esiletoomine"
+
+msgid "< Auto >"
+msgstr "<Auto>"
+
+msgid "< Reload Current Syntax >"
+msgstr "<Valitud süntaksi taaslaadimine>"
 
 msgid "Load syntax file"
 msgstr "Lae süntaksi fail"

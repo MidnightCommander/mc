@@ -64,6 +64,7 @@
 
 #include "edit-impl.h"
 #include "editwidget.h"
+#include "editmacros.h"         /* edit_execute_macro() */
 #ifdef HAVE_ASPELL
 #include "spell.h"
 #endif
@@ -1280,7 +1281,7 @@ edit_files (const GList * files)
         dlg_run (edit_dlg);
 
     if (!ok || widget_get_state (wd, WST_CLOSED))
-        dlg_destroy (edit_dlg);
+        widget_destroy (wd);
 
     return ok;
 }

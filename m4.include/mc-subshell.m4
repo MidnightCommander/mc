@@ -8,19 +8,24 @@ AC_DEFUN([mc_SUBSHELL], [
             [  --with-subshell          Compile in concurrent subshell @<:@yes@:>@
   --with-subshell=optional Don't run concurrent shell by default @<:@no@:>@],
             [
-                result=no
-                if test x$withval = xoptional; then
-                    AC_DEFINE(SUBSHELL_OPTIONAL, 1,  [Define to make subshell support optional])
-                    result="optional"
-                fi
-                if test x$withval = xyes; then
-                    result="yes"
-                fi
+                case "x$withval" in
+                    xyes)
+                        result="yes"
+                        ;;
+                    xoptional)
+                        result="optional"
+                        ;;
+                    *)
+                        result="no"
+                        ;;
+                esac
             ],
             [
                 dnl Default: enable the subshell support
                 result="yes"
             ])
+
+    AC_MSG_RESULT([$result])
 
     if test "x$result" != xno; then
         AC_DEFINE(ENABLE_SUBSHELL, 1, [Define to enable subshell support])
@@ -33,9 +38,12 @@ AC_DEFUN([mc_SUBSHELL], [
                     LIBS="$LIBS -lutil"]
             )
         )
+
+        if test "x$result" = xoptional; then
+            AC_DEFINE(SUBSHELL_OPTIONAL, 1, [Define to make subshell support optional])
+        fi
     fi
 
-    AC_MSG_RESULT([$result])
     subshell="$result"
 
     AM_CONDITIONAL(ENABLE_SUBSHELL, [test "x$result" != xno])

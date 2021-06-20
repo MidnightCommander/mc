@@ -38,7 +38,7 @@ extern int sigwinch_pipe[2];
 void tty_create_winch_pipe (void);
 void tty_destroy_winch_pipe (void);
 
-char *mc_tty_normalize_from_utf8 (const char *);
+char *mc_tty_normalize_from_utf8 (const char *str);
 void tty_init_xterm_support (gboolean is_xterm);
 int tty_lowlevel_getch (void);
 

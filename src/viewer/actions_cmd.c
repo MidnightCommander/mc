@@ -141,45 +141,26 @@ mcview_continue_search_cmd (WView * view)
         GList *history;
 
         history = mc_config_history_get (MC_HISTORY_SHARED_SEARCH);
-        if (history != NULL && history->data != NULL)
+        if (history != NULL)
         {
-            view->last_search_string = (gchar *) g_strdup (history->data);
+            /* FIXME: is it possible that history->data == NULL? */
+            view->last_search_string = (gchar *) history->data;
+            history->data = NULL;
             history = g_list_first (history);
             g_list_free_full (history, g_free);
 
-#ifdef HAVE_CHARSET
-            view->search = mc_search_new (view->last_search_string, cp_source);
-#else
-            view->search = mc_search_new (view->last_search_string, NULL);
-#endif
-            view->search_nroff_seq = mcview_nroff_seq_new (view);
-
-            if (view->search == NULL)
+            if (mcview_search_init (view))
             {
-                /* if not... then ask for an expression */
-                MC_PTR_FREE (view->last_search_string);
-                mcview_search (view, TRUE);
-            }
-            else
-            {
-                view->search->search_type = mcview_search_options.type;
-#ifdef HAVE_CHARSET
-                view->search->is_all_charsets = mcview_search_options.all_codepages;
-#endif
-                view->search->is_case_sensitive = mcview_search_options.case_sens;
-                view->search->whole_words = mcview_search_options.whole_words;
-                view->search->search_fn = mcview_search_cmd_callback;
-                view->search->update_fn = mcview_search_update_cmd_callback;
-
                 mcview_search (view, FALSE);
+                return;
             }
-        }
-        else
-        {
-            /* if not... then ask for an expression */
+
+            /* found, but cannot init search */
             MC_PTR_FREE (view->last_search_string);
-            mcview_search (view, TRUE);
         }
+
+        /* if not... then ask for an expression */
+        mcview_search (view, TRUE);
     }
 }
 

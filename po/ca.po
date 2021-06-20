@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-03-14 19:59+0300\n"
+"POT-Creation-Date: 2021-06-20 16:14+0300\n"
 "PO-Revision-Date: 2021-01-03 19:08+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/mc/mc/language/ca/)\n"
@@ -1017,15 +1017,6 @@ msgstr "Visor de diferències: mode no vàlid"
 msgid "Two files are needed to compare"
 msgstr "Per a comparar calen dos fitxers"
 
-msgid "Choose syntax highlighting"
-msgstr "Tria mode de ressaltat"
-
-msgid "< Auto >"
-msgstr "< Auto >"
-
-msgid "< Reload Current Syntax >"
-msgstr "< Torna a carregar la sintaxi actual >"
-
 #, c-format
 msgid "Loading: %3d%%"
 msgstr "S'està carregant: %3d%%"
@@ -1070,14 +1061,6 @@ msgstr "Error en llegir des de la canonada: %s"
 #, c-format
 msgid "Cannot open pipe for reading: %s"
 msgstr "No s'ha pogut obrir la canonada per a lectura: %s"
-
-#, c-format
-msgid "Searching %s: %3d%%"
-msgstr "S'està cercant %s: %3d%%"
-
-#, c-format
-msgid "Searching %s"
-msgstr "S'està cercant a %s"
 
 msgid "File has hard-links. Detach before saving?"
 msgstr "El fitxer té enllaços durs. Els separo abans de desar?"
@@ -1124,9 +1107,6 @@ msgstr "Canvia els salts de línia a:"
 msgid "Save As"
 msgstr "Desa com a"
 
-msgid "Collect completions"
-msgstr "Recull completat"
-
 msgid "&Quick save"
 msgstr "Desament &ràpid"
 
@@ -1156,27 +1136,6 @@ msgstr "S&obreescriu"
 
 msgid "Cannot save file"
 msgstr "No s'ha pogut desar el fitxer"
-
-msgid "Delete macro"
-msgstr "Suprimeix una macro"
-
-msgid "Press macro hotkey:"
-msgstr "Premeu la tecla de la macro:"
-
-msgid "Macro not deleted"
-msgstr "La macro no s'ha suprimit"
-
-msgid "Save macro"
-msgstr "Desa la macro"
-
-msgid "Press the macro's new hotkey:"
-msgstr "Premeu la tecla nova per a la macro:"
-
-msgid "Repeat last commands"
-msgstr "Repeteix la darrera ordre"
-
-msgid "Repeat times:"
-msgstr "Repeteix vegades:"
 
 #, c-format
 msgid "Confirm save file: \"%s\""
@@ -1211,13 +1170,6 @@ msgstr "Quin fitxer de menú voleu editar?"
 
 msgid "&Local"
 msgstr "&Local"
-
-msgid "Replace"
-msgstr "Substitueix"
-
-#, c-format
-msgid "%ld replacements made"
-msgstr "S'han fet %ld substitucions"
 
 msgid "[NoName]"
 msgstr "[SenseNom]"
@@ -1329,35 +1281,35 @@ msgstr ""
 "El text actual ha estat modificat sense desar-lo a un fitxer.\n"
 "Continueu i es descartaran aquests canvis."
 
-msgid "In se&lection"
-msgstr "A la se&lecció"
-
-msgid "&Find all"
-msgstr "Cer&ca'ls tots"
-
-msgid "Enter replacement string:"
-msgstr "Introduïu la cadena de substitució:"
-
-msgid "Replace with:"
-msgstr "Substitueix amb:"
-
-msgid "&Replace"
-msgstr "Su&bstitueix"
-
-msgid "A&ll"
-msgstr "&Tots"
-
-msgid "&Skip"
-msgstr "&Salta"
-
-msgid "Confirm replace"
-msgstr "Consigna la substitució"
-
 msgid "Cancel"
 msgstr "Cancel·la"
 
+msgid "Collect completions"
+msgstr "Recull completat"
+
 msgid "NoName"
 msgstr "Sense nom"
+
+msgid "Save macro"
+msgstr "Desa la macro"
+
+msgid "Press the macro's new hotkey:"
+msgstr "Premeu la tecla nova per a la macro:"
+
+msgid "Delete macro"
+msgstr "Suprimeix una macro"
+
+msgid "Press macro hotkey:"
+msgstr "Premeu la tecla de la macro:"
+
+msgid "Macro not deleted"
+msgstr "La macro no s'ha suprimit"
+
+msgid "Repeat last commands"
+msgstr "Repeteix la darrera ordre"
+
+msgid "Repeat times:"
+msgstr "Repeteix vegades:"
 
 msgid "&Open file..."
 msgstr "&Obre el fitxer..."
@@ -1647,6 +1599,45 @@ msgstr "Llargada de l'ajust de línia:"
 msgid "Editor options"
 msgstr "Opcions de l'editor"
 
+msgid "In se&lection"
+msgstr "A la se&lecció"
+
+msgid "&Find all"
+msgstr "Cer&ca'ls tots"
+
+msgid "Enter replacement string:"
+msgstr "Introduïu la cadena de substitució:"
+
+msgid "Replace"
+msgstr "Substitueix"
+
+msgid "Replace with:"
+msgstr "Substitueix amb:"
+
+msgid "&Replace"
+msgstr "Su&bstitueix"
+
+msgid "A&ll"
+msgstr "&Tots"
+
+msgid "&Skip"
+msgstr "&Salta"
+
+msgid "Confirm replace"
+msgstr "Consigna la substitució"
+
+#, c-format
+msgid "Searching %s: %3d%%"
+msgstr "S'està cercant %s: %3d%%"
+
+#, c-format
+msgid "Searching %s"
+msgstr "S'està cercant a %s"
+
+#, c-format
+msgid "%ld replacements made"
+msgstr "S'han fet %ld substitucions"
+
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
@@ -1774,6 +1765,15 @@ msgstr "Suggereix"
 
 msgid "Select language"
 msgstr "Escull un idioma"
+
+msgid "Choose syntax highlighting"
+msgstr "Tria mode de ressaltat"
+
+msgid "< Auto >"
+msgstr "< Auto >"
+
+msgid "< Reload Current Syntax >"
+msgstr "< Torna a carregar la sintaxi actual >"
 
 msgid "Load syntax file"
 msgstr "Carrega el fitxer de sintaxi"

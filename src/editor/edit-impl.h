@@ -195,20 +195,6 @@ void edit_mark_current_word_cmd (WEdit * edit);
 void edit_mark_current_line_cmd (WEdit * edit);
 void edit_set_markers (WEdit * edit, off_t m1, off_t m2, long c1, long c2);
 void edit_push_markers (WEdit * edit);
-void edit_replace_cmd (WEdit * edit, gboolean again);
-void edit_search_cmd (WEdit * edit, gboolean again);
-mc_search_cbret_t edit_search_cmd_callback (const void *user_data, gsize char_offset,
-                                            int *current_char);
-mc_search_cbret_t edit_search_update_callback (const void *user_data, gsize char_offset);
-
-void edit_complete_word_cmd (WEdit * edit);
-void edit_get_match_keyword_cmd (WEdit * edit);
-
-#ifdef HAVE_ASPELL
-int edit_suggest_current_word (WEdit * edit);
-void edit_spellcheck_file (WEdit * edit);
-void edit_set_spell_lang (void);
-#endif
 
 gboolean edit_save_block (WEdit * edit, const char *filename, off_t start, off_t finish);
 gboolean edit_save_block_cmd (WEdit * edit);
@@ -238,20 +224,12 @@ void edit_word_wrap (WEdit * edit);
 int edit_sort_cmd (WEdit * edit);
 int edit_ext_cmd (WEdit * edit);
 
-int edit_store_macro_cmd (WEdit * edit);
-gboolean edit_load_macro_cmd (WEdit * edit);
-void edit_delete_macro_cmd (WEdit * edit);
-gboolean edit_repeat_macro_cmd (WEdit * edit);
-
 gboolean edit_copy_to_X_buf_cmd (WEdit * edit);
 gboolean edit_cut_to_X_buf_cmd (WEdit * edit);
 gboolean edit_paste_from_X_buf_cmd (WEdit * edit);
 
 void edit_select_codepage_cmd (WEdit * edit);
 void edit_insert_literal_cmd (WEdit * edit);
-gboolean edit_execute_macro (WEdit * edit, int hotkey);
-void edit_begin_end_macro_cmd (WEdit * edit);
-void edit_begin_end_repeat_cmd (WEdit * edit);
 
 void edit_paste_from_history (WEdit * edit);
 
@@ -260,6 +238,7 @@ void edit_set_filename (WEdit * edit, const vfs_path_t * name_vpath);
 void edit_load_syntax (WEdit * edit, GPtrArray * pnames, const char *type);
 void edit_free_syntax_rules (WEdit * edit);
 int edit_get_syntax_color (WEdit * edit, off_t byte_index);
+void edit_syntax_dialog (WEdit * edit);
 
 void book_mark_insert (WEdit * edit, long line, int c);
 gboolean book_mark_query_color (WEdit * edit, long line, int c);
@@ -274,12 +253,13 @@ void book_mark_restore (WEdit * edit, int color);
 gboolean edit_line_is_blank (WEdit * edit, long line);
 gboolean is_break_char (char c);
 void edit_options_dialog (WDialog * h);
-void edit_syntax_dialog (WEdit * edit);
 void edit_mail_dialog (WEdit * edit);
 void format_paragraph (WEdit * edit, gboolean force);
 
 /* either command or char_for_insertion must be passed as -1 */
 void edit_execute_cmd (WEdit * edit, long command, int char_for_insertion);
+
+int editcmd_dialog_raw_key_query (const char *heading, const char *query, gboolean cancel);
 
 /*** inline functions ****************************************************************************/
 

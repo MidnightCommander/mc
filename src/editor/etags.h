@@ -19,9 +19,7 @@ typedef struct etags_hash_struct
 
 /*** declarations of public functions ************************************************************/
 
-
-GPtrArray *etags_set_definition_hash (const char *tagfile, const char *start_path,
-                                      const char *match_func);
+void edit_get_match_keyword_cmd (WEdit * edit);
 
 /*** inline functions ****************************************************************************/
 

@@ -872,7 +872,7 @@ find_parameters (WPanel * panel, char **start_dir, ssize_t * start_dir_len,
         }
     }
 
-    dlg_destroy (find_dlg);
+    widget_destroy (WIDGET (find_dlg));
 
     return return_value;
 }
@@ -1767,8 +1767,10 @@ run_process (void)
 static void
 kill_gui (void)
 {
-    widget_idle (WIDGET (find_dlg), FALSE);
-    dlg_destroy (find_dlg);
+    Widget *w = WIDGET (find_dlg);
+
+    widget_idle (w, FALSE);
+    widget_destroy (w);
 }
 
 /* --------------------------------------------------------------------------------------------- */

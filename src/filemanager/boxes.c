@@ -267,7 +267,7 @@ sel_skin_button (WButton * button, int action)
 
         button_set_text (button, str_fit_to_term (skin_label, 20, J_LEFT_FIT));
     }
-    dlg_destroy (skin_dlg);
+    widget_destroy (WIDGET (skin_dlg));
 
     return 0;
 }
@@ -1096,7 +1096,7 @@ tree_box (const char *current_dir)
         val = g_strdup (vfs_path_as_str (selected_name));
     }
 
-    dlg_destroy (dlg);
+    widget_destroy (wd);
     return val;
 }
 
@@ -1315,7 +1315,7 @@ jobs_box (void)
     }
 
     (void) dlg_run (jobs_dlg);
-    dlg_destroy (jobs_dlg);
+    widget_destroy (WIDGET (jobs_dlg));
 }
 #endif /* ENABLE_BACKGROUND */
 

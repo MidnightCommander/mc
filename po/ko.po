@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-03-14 19:59+0300\n"
+"POT-Creation-Date: 2021-06-20 16:14+0300\n"
 "PO-Revision-Date: 2020-12-31 14:19+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Korean (http://www.transifex.com/mc/mc/language/ko/)\n"
@@ -1001,15 +1001,6 @@ msgstr "Diff 뷰어: 잘못된 모드"
 msgid "Two files are needed to compare"
 msgstr "비교를 위해 두 개의 파일이 필요함"
 
-msgid "Choose syntax highlighting"
-msgstr "구문 강조 표시 선택"
-
-msgid "< Auto >"
-msgstr "< 자동 >"
-
-msgid "< Reload Current Syntax >"
-msgstr "<현재 구문 새로 고침>"
-
 #, c-format
 msgid "Loading: %3d%%"
 msgstr "불러오는 중: %3d%%"
@@ -1054,14 +1045,6 @@ msgstr "파이프에서 읽는 중 오류 발생: %s"
 #, c-format
 msgid "Cannot open pipe for reading: %s"
 msgstr "읽을 파이프를 열 수 없음: %s"
-
-#, c-format
-msgid "Searching %s: %3d%%"
-msgstr "%s 검색중: %3d%%"
-
-#, c-format
-msgid "Searching %s"
-msgstr "%s 검색중"
 
 msgid "File has hard-links. Detach before saving?"
 msgstr "파일에 하드-링크가 있습니다. 저장하기 전에 분리 하시겠습니까?"
@@ -1108,9 +1091,6 @@ msgstr "줄바꿈 변경:"
 msgid "Save As"
 msgstr "다른이름으로 저장"
 
-msgid "Collect completions"
-msgstr "수집 완료"
-
 msgid "&Quick save"
 msgstr "빠른 저장(&Q)"
 
@@ -1140,27 +1120,6 @@ msgstr "덮어쓰기(&O)"
 
 msgid "Cannot save file"
 msgstr "파일을 저장할 수 없음"
-
-msgid "Delete macro"
-msgstr "매크로 삭제"
-
-msgid "Press macro hotkey:"
-msgstr "매크로 단축키 누름:"
-
-msgid "Macro not deleted"
-msgstr "매크로가 삭제되지 않음"
-
-msgid "Save macro"
-msgstr "매크로 저장"
-
-msgid "Press the macro's new hotkey:"
-msgstr "매크로의 새 단축키 누르기:"
-
-msgid "Repeat last commands"
-msgstr "마지막 명령어 반복"
-
-msgid "Repeat times:"
-msgstr "반복 횟수:"
 
 #, c-format
 msgid "Confirm save file: \"%s\""
@@ -1195,13 +1154,6 @@ msgstr "어떤 메뉴 파일을 편집하시겠습니까?"
 
 msgid "&Local"
 msgstr "로컬(&L)"
-
-msgid "Replace"
-msgstr "바꾸기"
-
-#, c-format
-msgid "%ld replacements made"
-msgstr "%ld 교체"
 
 msgid "[NoName]"
 msgstr "[이름 없음]"
@@ -1311,35 +1263,35 @@ msgstr ""
 "파일 저장 없이 현재 텍스트가 수정됨.\n"
 "계속 이런 변경 내용을 삭제합니다."
 
-msgid "In se&lection"
-msgstr "선택 영역(&L)"
-
-msgid "&Find all"
-msgstr "모두 찾기(&F)"
-
-msgid "Enter replacement string:"
-msgstr "대체 문자열 입력:"
-
-msgid "Replace with:"
-msgstr "바꾸기:"
-
-msgid "&Replace"
-msgstr "바꾸기(&R)"
-
-msgid "A&ll"
-msgstr "모두(&L)"
-
-msgid "&Skip"
-msgstr "건너뛰기(&S)"
-
-msgid "Confirm replace"
-msgstr "바꾸기 확인"
-
 msgid "Cancel"
 msgstr "취소"
 
+msgid "Collect completions"
+msgstr "수집 완료"
+
 msgid "NoName"
 msgstr "이름없음"
+
+msgid "Save macro"
+msgstr "매크로 저장"
+
+msgid "Press the macro's new hotkey:"
+msgstr "매크로의 새 단축키 누르기:"
+
+msgid "Delete macro"
+msgstr "매크로 삭제"
+
+msgid "Press macro hotkey:"
+msgstr "매크로 단축키 누름:"
+
+msgid "Macro not deleted"
+msgstr "매크로가 삭제되지 않음"
+
+msgid "Repeat last commands"
+msgstr "마지막 명령어 반복"
+
+msgid "Repeat times:"
+msgstr "반복 횟수:"
 
 msgid "&Open file..."
 msgstr "파일 열기(&O)..."
@@ -1629,6 +1581,45 @@ msgstr "단어 줄바꿈 행 길이:"
 msgid "Editor options"
 msgstr "편집기 옵션"
 
+msgid "In se&lection"
+msgstr "선택 영역(&L)"
+
+msgid "&Find all"
+msgstr "모두 찾기(&F)"
+
+msgid "Enter replacement string:"
+msgstr "대체 문자열 입력:"
+
+msgid "Replace"
+msgstr "바꾸기"
+
+msgid "Replace with:"
+msgstr "바꾸기:"
+
+msgid "&Replace"
+msgstr "바꾸기(&R)"
+
+msgid "A&ll"
+msgstr "모두(&L)"
+
+msgid "&Skip"
+msgstr "건너뛰기(&S)"
+
+msgid "Confirm replace"
+msgstr "바꾸기 확인"
+
+#, c-format
+msgid "Searching %s: %3d%%"
+msgstr "%s 검색중: %3d%%"
+
+#, c-format
+msgid "Searching %s"
+msgstr "%s 검색중"
+
+#, c-format
+msgid "%ld replacements made"
+msgstr "%ld 교체"
+
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
@@ -1756,6 +1747,15 @@ msgstr "제안"
 
 msgid "Select language"
 msgstr "언어 선택"
+
+msgid "Choose syntax highlighting"
+msgstr "구문 강조 표시 선택"
+
+msgid "< Auto >"
+msgstr "< 자동 >"
+
+msgid "< Reload Current Syntax >"
+msgstr "<현재 구문 새로 고침>"
 
 msgid "Load syntax file"
 msgstr "구문 파일 불러오기"

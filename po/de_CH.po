@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-03-14 19:59+0300\n"
+"POT-Creation-Date: 2021-06-20 16:14+0300\n"
 "PO-Revision-Date: 2015-02-26 09:48+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: German (Switzerland) (http://www.transifex.com/projects/p/mc/"
@@ -927,15 +927,6 @@ msgstr ""
 msgid "Two files are needed to compare"
 msgstr ""
 
-msgid "Choose syntax highlighting"
-msgstr ""
-
-msgid "< Auto >"
-msgstr ""
-
-msgid "< Reload Current Syntax >"
-msgstr ""
-
 #, c-format
 msgid "Loading: %3d%%"
 msgstr ""
@@ -977,14 +968,6 @@ msgstr ""
 
 #, c-format
 msgid "Cannot open pipe for reading: %s"
-msgstr ""
-
-#, c-format
-msgid "Searching %s: %3d%%"
-msgstr ""
-
-#, c-format
-msgid "Searching %s"
 msgstr ""
 
 msgid "File has hard-links. Detach before saving?"
@@ -1032,9 +1015,6 @@ msgstr ""
 msgid "Save As"
 msgstr ""
 
-msgid "Collect completions"
-msgstr ""
-
 msgid "&Quick save"
 msgstr ""
 
@@ -1063,27 +1043,6 @@ msgid "&Overwrite"
 msgstr ""
 
 msgid "Cannot save file"
-msgstr ""
-
-msgid "Delete macro"
-msgstr ""
-
-msgid "Press macro hotkey:"
-msgstr ""
-
-msgid "Macro not deleted"
-msgstr ""
-
-msgid "Save macro"
-msgstr ""
-
-msgid "Press the macro's new hotkey:"
-msgstr ""
-
-msgid "Repeat last commands"
-msgstr ""
-
-msgid "Repeat times:"
 msgstr ""
 
 #, c-format
@@ -1118,13 +1077,6 @@ msgid "Which menu file do you want to edit?"
 msgstr ""
 
 msgid "&Local"
-msgstr ""
-
-msgid "Replace"
-msgstr ""
-
-#, c-format
-msgid "%ld replacements made"
 msgstr ""
 
 msgid "[NoName]"
@@ -1229,34 +1181,34 @@ msgid ""
 "Continue discards these changes."
 msgstr ""
 
-msgid "In se&lection"
-msgstr ""
-
-msgid "&Find all"
-msgstr ""
-
-msgid "Enter replacement string:"
-msgstr ""
-
-msgid "Replace with:"
-msgstr ""
-
-msgid "&Replace"
-msgstr ""
-
-msgid "A&ll"
-msgstr ""
-
-msgid "&Skip"
-msgstr ""
-
-msgid "Confirm replace"
-msgstr ""
-
 msgid "Cancel"
 msgstr ""
 
+msgid "Collect completions"
+msgstr ""
+
 msgid "NoName"
+msgstr ""
+
+msgid "Save macro"
+msgstr ""
+
+msgid "Press the macro's new hotkey:"
+msgstr ""
+
+msgid "Delete macro"
+msgstr ""
+
+msgid "Press macro hotkey:"
+msgstr ""
+
+msgid "Macro not deleted"
+msgstr ""
+
+msgid "Repeat last commands"
+msgstr ""
+
+msgid "Repeat times:"
 msgstr ""
 
 msgid "&Open file..."
@@ -1547,6 +1499,45 @@ msgstr ""
 msgid "Editor options"
 msgstr ""
 
+msgid "In se&lection"
+msgstr ""
+
+msgid "&Find all"
+msgstr ""
+
+msgid "Enter replacement string:"
+msgstr ""
+
+msgid "Replace"
+msgstr ""
+
+msgid "Replace with:"
+msgstr ""
+
+msgid "&Replace"
+msgstr ""
+
+msgid "A&ll"
+msgstr ""
+
+msgid "&Skip"
+msgstr ""
+
+msgid "Confirm replace"
+msgstr ""
+
+#, c-format
+msgid "Searching %s: %3d%%"
+msgstr ""
+
+#, c-format
+msgid "Searching %s"
+msgstr ""
+
+#, c-format
+msgid "%ld replacements made"
+msgstr ""
+
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
@@ -1670,6 +1661,15 @@ msgid "Suggest"
 msgstr ""
 
 msgid "Select language"
+msgstr ""
+
+msgid "Choose syntax highlighting"
+msgstr ""
+
+msgid "< Auto >"
+msgstr ""
+
+msgid "< Reload Current Syntax >"
 msgstr ""
 
 msgid "Load syntax file"

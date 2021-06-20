@@ -3470,7 +3470,7 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
         dlg_run (dview_dlg);
 
     if (error != 0 || widget_get_state (dw, WST_CLOSED))
-        dlg_destroy (dview_dlg);
+        widget_destroy (dw);
 
     return error == 0 ? 1 : 0;
 }

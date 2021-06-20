@@ -217,7 +217,7 @@ init_panelize (void)
 static void
 panelize_done (void)
 {
-    dlg_destroy (panelize_dlg);
+    widget_destroy (WIDGET (panelize_dlg));
     repaint_screen ();
 }
 
@@ -623,7 +623,7 @@ external_panelize (void)
             char *cmd;
 
             cmd = g_strdup (pname->buffer);
-            dlg_destroy (panelize_dlg);
+            widget_destroy (WIDGET (panelize_dlg));
             do_external_panelize (cmd);
             g_free (cmd);
             repaint_screen ();

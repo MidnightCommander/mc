@@ -901,7 +901,7 @@ format_file (WPanel * panel, int file_index, int width, int attr, gboolean issta
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-repaint_file (WPanel * panel, int file_index, gboolean mv, int attr, gboolean isstatus)
+repaint_file (WPanel * panel, int file_index, int attr, gboolean isstatus)
 {
     Widget *w = WIDGET (panel);
 
@@ -931,7 +931,7 @@ repaint_file (WPanel * panel, int file_index, gboolean mv, int attr, gboolean is
     if (width <= 0)
         return;
 
-    if (mv)
+    if (!isstatus)
     {
         ypos = file_index - panel->top_file;
 
@@ -950,7 +950,7 @@ repaint_file (WPanel * panel, int file_index, gboolean mv, int attr, gboolean is
         tty_print_one_vline (TRUE);
     }
 
-    if (ret_frm != FILENAME_NOSCROLL && mv)
+    if (!isstatus && ret_frm != FILENAME_NOSCROLL)
     {
         if (!panel_is_split && fln > 0)
         {
@@ -1033,7 +1033,7 @@ display_mini_info (WPanel * panel)
     }
     else
         /* Default behavior */
-        repaint_file (panel, panel->selected, FALSE, STATUS, TRUE);
+        repaint_file (panel, panel->selected, STATUS, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1058,7 +1058,7 @@ paint_dir (WPanel * panel)
             color += (panel->selected == i + panel->top_file && panel->active);
         }
 
-        repaint_file (panel, i + panel->top_file, TRUE, color, FALSE);
+        repaint_file (panel, i + panel->top_file, color, FALSE);
     }
 
     tty_set_normal_attrs ();
@@ -2036,7 +2036,7 @@ force_maybe_cd (WPanel * panel)
 static inline void
 unselect_item (WPanel * panel)
 {
-    repaint_file (panel, panel->selected, TRUE, 2 * selection (panel)->f.marked, FALSE);
+    repaint_file (panel, panel->selected, 2 * selection (panel)->f.marked, FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -3834,7 +3834,7 @@ panel_mouse_is_on_item (const WPanel * panel, int y, int x)
     {
         int width, lines;
 
-        width = (WIDGET (panel)->cols - 2) / panel->list_cols;
+        width = (CONST_WIDGET (panel)->cols - 2) / panel->list_cols;
         lines = panel_lines (panel);
         y += lines * (x / width);
     }
@@ -3869,7 +3869,7 @@ panel_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
                 directory_history_list (panel);
             else if (event->x == w->cols - 6)
                 /* "." button show/hide hidden files */
-                send_message (midnight_dlg, NULL, MSG_ACTION, CK_ShowHidden, NULL);
+                send_message (filemanager, NULL, MSG_ACTION, CK_ShowHidden, NULL);
             else
             {
                 /* no other events on 1st line, return MOU_UNHANDLED */
@@ -4180,7 +4180,10 @@ panel_recursive_cd_to_parent (const vfs_path_t * vpath)
         /* check if path contains only '/' */
         panel_cwd_path = vfs_path_as_str (cwd_vpath);
         if (panel_cwd_path != NULL && IS_PATH_SEP (panel_cwd_path[0]) && panel_cwd_path[1] == '\0')
+        {
+            vfs_path_free (cwd_vpath, TRUE);
             return NULL;
+        }
 
         tmp_vpath = vfs_path_vtokens_get (cwd_vpath, 0, -1);
         vfs_path_free (cwd_vpath, TRUE);

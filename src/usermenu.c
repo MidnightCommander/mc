@@ -480,6 +480,7 @@ execute_menu_command (const WEdit * edit_widget, const char *commands, gboolean 
                 if (parameter == NULL || *parameter == '\0')
                 {
                     /* User canceled */
+                    g_free (parameter);
                     fclose (cmd_file);
                     mc_unlink (file_name_vpath);
                     vfs_path_free (file_name_vpath, TRUE);

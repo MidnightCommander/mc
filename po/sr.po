@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-03-14 19:59+0300\n"
+"POT-Creation-Date: 2021-06-20 16:14+0300\n"
 "PO-Revision-Date: 2020-12-31 14:19+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Serbian (http://www.transifex.com/mc/mc/language/sr/)\n"
@@ -989,15 +989,6 @@ msgstr "Прегледач разлика: неисправан режим"
 msgid "Two files are needed to compare"
 msgstr "Две датотеке су потребне за поређење"
 
-msgid "Choose syntax highlighting"
-msgstr "Изаберите истицање синтаксе"
-
-msgid "< Auto >"
-msgstr "< Самостално >"
-
-msgid "< Reload Current Syntax >"
-msgstr "< Учитај текућу синтаксу >"
-
 #, c-format
 msgid "Loading: %3d%%"
 msgstr "Учитавам: %3d%%"
@@ -1042,14 +1033,6 @@ msgstr "Грешка читања из спојке: %s"
 #, c-format
 msgid "Cannot open pipe for reading: %s"
 msgstr "Не могу да отворим спојку за читање: %s"
-
-#, c-format
-msgid "Searching %s: %3d%%"
-msgstr "Тражим „%s“: %3d%%"
-
-#, c-format
-msgid "Searching %s"
-msgstr "Тражим „%s“"
 
 msgid "File has hard-links. Detach before saving?"
 msgstr "Датотека има чврсте везе. Да је откачим пре чувања?"
@@ -1096,9 +1079,6 @@ msgstr "Измени преломе редова на:"
 msgid "Save As"
 msgstr "Сачувај као"
 
-msgid "Collect completions"
-msgstr "Сакупи довршавања"
-
 msgid "&Quick save"
 msgstr "&Брзо сачувај"
 
@@ -1128,27 +1108,6 @@ msgstr "&Препиши"
 
 msgid "Cannot save file"
 msgstr "Не могу да сачувам датотеку"
-
-msgid "Delete macro"
-msgstr "Обриши макро"
-
-msgid "Press macro hotkey:"
-msgstr "Притисните макро пречицу:"
-
-msgid "Macro not deleted"
-msgstr "Макро није обрисан"
-
-msgid "Save macro"
-msgstr "Сачувај макро"
-
-msgid "Press the macro's new hotkey:"
-msgstr "Притисните нову пречицу макроа:"
-
-msgid "Repeat last commands"
-msgstr "Понови последње наредбе"
-
-msgid "Repeat times:"
-msgstr "Времена понављања:"
 
 #, c-format
 msgid "Confirm save file: \"%s\""
@@ -1183,13 +1142,6 @@ msgstr "Коју датотеку изборника желите да уређ�
 
 msgid "&Local"
 msgstr "&Месну"
-
-msgid "Replace"
-msgstr "Замени"
-
-#, c-format
-msgid "%ld replacements made"
-msgstr "%ld одрађене замене"
 
 msgid "[NoName]"
 msgstr "[Без назива]"
@@ -1299,35 +1251,35 @@ msgstr ""
 "Текући текст је измењен без чувања датотеке.\n"
 "Настављање ће одбацити ове измене."
 
-msgid "In se&lection"
-msgstr "У &избору"
-
-msgid "&Find all"
-msgstr "&Нађи све"
-
-msgid "Enter replacement string:"
-msgstr "Унесите ниску замене:"
-
-msgid "Replace with:"
-msgstr "Замени са:"
-
-msgid "&Replace"
-msgstr "&Замени"
-
-msgid "A&ll"
-msgstr "&Све"
-
-msgid "&Skip"
-msgstr "&Прескочи"
-
-msgid "Confirm replace"
-msgstr "Потврди замену"
-
 msgid "Cancel"
 msgstr "Откажи"
 
+msgid "Collect completions"
+msgstr "Сакупи довршавања"
+
 msgid "NoName"
 msgstr "Без назива"
+
+msgid "Save macro"
+msgstr "Сачувај макро"
+
+msgid "Press the macro's new hotkey:"
+msgstr "Притисните нову пречицу макроа:"
+
+msgid "Delete macro"
+msgstr "Обриши макро"
+
+msgid "Press macro hotkey:"
+msgstr "Притисните макро пречицу:"
+
+msgid "Macro not deleted"
+msgstr "Макро није обрисан"
+
+msgid "Repeat last commands"
+msgstr "Понови последње наредбе"
+
+msgid "Repeat times:"
+msgstr "Времена понављања:"
 
 msgid "&Open file..."
 msgstr "&Отвори датотеку..."
@@ -1617,6 +1569,45 @@ msgstr "Дужина реда прелома речи:"
 msgid "Editor options"
 msgstr "Опције уређивача"
 
+msgid "In se&lection"
+msgstr "У &избору"
+
+msgid "&Find all"
+msgstr "&Нађи све"
+
+msgid "Enter replacement string:"
+msgstr "Унесите ниску замене:"
+
+msgid "Replace"
+msgstr "Замени"
+
+msgid "Replace with:"
+msgstr "Замени са:"
+
+msgid "&Replace"
+msgstr "&Замени"
+
+msgid "A&ll"
+msgstr "&Све"
+
+msgid "&Skip"
+msgstr "&Прескочи"
+
+msgid "Confirm replace"
+msgstr "Потврди замену"
+
+#, c-format
+msgid "Searching %s: %3d%%"
+msgstr "Тражим „%s“: %3d%%"
+
+#, c-format
+msgid "Searching %s"
+msgstr "Тражим „%s“"
+
+#, c-format
+msgid "%ld replacements made"
+msgstr "%ld одрађене замене"
+
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
@@ -1743,6 +1734,15 @@ msgstr "Предложи"
 
 msgid "Select language"
 msgstr "Изабери језик"
+
+msgid "Choose syntax highlighting"
+msgstr "Изаберите истицање синтаксе"
+
+msgid "< Auto >"
+msgstr "< Самостално >"
+
+msgid "< Reload Current Syntax >"
+msgstr "< Учитај текућу синтаксу >"
 
 msgid "Load syntax file"
 msgstr "Учитај датотеку синтаксе"

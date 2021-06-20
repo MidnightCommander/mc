@@ -108,8 +108,12 @@ vfs_finduid (const char *uname)
     static int saveuid = GUID_DEFAULT_CONST;
     static char saveuname[TUNMLEN] = "\0";
 
+    size_t uname_len;
+
+    uname_len = strlen (uname);
+
     if (uname[0] != saveuname[0]        /* Quick test w/o proc call */
-        || 0 != strncmp (uname, saveuname, TUNMLEN))
+        || strncmp (uname, saveuname, MIN (uname_len, TUNMLEN - 1)) != 0)
     {
         struct passwd *pw;
 
@@ -140,13 +144,16 @@ vfs_findgid (const char *gname)
     static int savegid = GUID_DEFAULT_CONST;
     static char savegname[TGNMLEN] = "\0";
 
+    size_t gname_len;
+
+    gname_len = strlen (gname);
 
     if (gname[0] != savegname[0]        /* Quick test w/o proc call */
-        || 0 != strncmp (gname, savegname, TUNMLEN))
+        || strncmp (gname, savegname, MIN (gname_len, TGNMLEN - 1)) != 0)
     {
         struct group *gr;
 
-        g_strlcpy (savegname, gname, TUNMLEN);
+        g_strlcpy (savegname, gname, TGNMLEN);
         gr = getgrnam (gname);
         if (gr)
         {

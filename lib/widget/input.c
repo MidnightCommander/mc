@@ -85,11 +85,11 @@ static char *kill_buffer = NULL;
 /* --------------------------------------------------------------------------------------------- */
 
 static size_t
-get_history_length (const GList * history)
+get_history_length (GList * history)
 {
     size_t len = 0;
 
-    for (; history != NULL; history = (const GList *) g_list_previous (history))
+    for (; history != NULL; history = g_list_previous (history))
         len++;
 
     return len;

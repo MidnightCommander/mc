@@ -277,7 +277,6 @@ exec_make_shell_string (const char *lc_data, const vfs_path_t * filename_vpath)
             else
             {
                 int i;
-                char *v;
 
                 i = check_format_view (lc_data);
                 if (i != 0)
@@ -298,8 +297,10 @@ exec_make_shell_string (const char *lc_data, const vfs_path_t * filename_vpath)
                     }
                     else
                     {
+                        char *v;
+
                         i = check_format_var (lc_data, &v);
-                        if (i > 0 && v != NULL)
+                        if (i > 0)
                         {
                             g_string_append (shell_string, v);
                             g_free (v);
@@ -459,6 +460,7 @@ exec_extension (WPanel * panel, void *target, const vfs_path_t * filename_vpath,
     {
         message (D_ERROR, MSG_ERROR,
                  _("Cannot create temporary command file\n%s"), unix_error_string (errno));
+        g_string_free (shell_string, TRUE);
         goto ret;
     }
 

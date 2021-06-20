@@ -334,21 +334,19 @@ widget_init (Widget * w, int y, int x, int lines, int cols,
     w->options = WOP_DEFAULT;
     w->state = WST_CONSTRUCT | WST_VISIBLE;
 
+    w->make_global = widget_default_make_global;
+    w->make_local = widget_default_make_local;
+
+    w->make_global = widget_default_make_global;
+    w->make_local = widget_default_make_local;
+
     w->find = widget_default_find;
     w->find_by_type = widget_default_find_by_type;
     w->find_by_id = widget_default_find_by_id;
 
     w->set_state = widget_default_set_state;
+    w->destroy = widget_default_destroy;
     w->get_colors = widget_default_get_colors;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-widget_destroy (Widget * w)
-{
-    send_message (w, NULL, MSG_DESTROY, 0, NULL);
-    g_free (w);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -687,6 +685,56 @@ widget_lookup_key (Widget * w, int key)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+/**
+  * Default widget callback to convert widget coordinates from local (relative to owner) to global
+  * (relative to screen).
+  *
+  * @param w widget
+  * @delta offset for top-left corner coordinates. Used for child widgets of WGroup
+  */
+
+void
+widget_default_make_global (Widget * w, const WRect * delta)
+{
+    if (delta != NULL)
+    {
+        w->y += delta->y;
+        w->x += delta->x;
+    }
+    else if (w->owner != NULL)
+    {
+        w->y += WIDGET (w->owner)->y;
+        w->x += WIDGET (w->owner)->x;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+  * Default widget callback to convert widget coordinates from global (relative to screen) to local
+  * (relative to owner).
+  *
+  * @param w widget
+  * @delta offset for top-left corner coordinates. Used for child widgets of WGroup
+  */
+
+void
+widget_default_make_local (Widget * w, const WRect * delta)
+{
+    if (delta != NULL)
+    {
+        w->y -= delta->y;
+        w->x -= delta->x;
+    }
+    else if (w->owner != NULL)
+    {
+        w->y -= WIDGET (w->owner)->y;
+        w->x -= WIDGET (w->owner)->x;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /**
  * Default callback function to find widget.
  *
@@ -821,6 +869,20 @@ widget_default_set_state (Widget * w, widget_state_t state, gboolean enable)
     }
 
     return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Default callback function to destroy widget.
+ *
+ * @param w widget
+ */
+
+void
+widget_default_destroy (Widget * w)
+{
+    send_message (w, NULL, MSG_DESTROY, 0, NULL);
+    g_free (w);
 }
 
 /* --------------------------------------------------------------------------------------------- */

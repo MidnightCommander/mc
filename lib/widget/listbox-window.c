@@ -132,7 +132,7 @@ run_listbox (Listbox * l)
 
     if (dlg_run (l->dlg) != B_CANCEL)
         val = l->list->pos;
-    dlg_destroy (l->dlg);
+    widget_destroy (WIDGET (l->dlg));
     g_free (l);
     return val;
 }
@@ -167,7 +167,7 @@ run_listbox_with_data (Listbox * l, const void *select)
         }
     }
 
-    dlg_destroy (l->dlg);
+    widget_destroy (WIDGET (l->dlg));
     g_free (l);
     return val;
 }

@@ -10,7 +10,6 @@ libmcviewer_la_SOURCES = \
 	display.c \
 	growbuf.c \
 	hex.c \
-	inlines.h \
 	internal.h \
 	lib.c \
 	mcviewer.c \

@@ -3,6 +3,11 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
+#ifndef G_OPTION_ENTRY_NULL
+#define G_OPTION_ENTRY_NULL \
+  { NULL, '\0', 0, 0, NULL, NULL, NULL }
+#endif /* G_OPTION_ENTRY_NULL */
+
 /*** enums ***************************************************************************************/
 
 /*** structures declarations (and typedefs of structures)*****************************************/

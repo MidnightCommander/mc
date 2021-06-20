@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-03-14 19:59+0300\n"
+"POT-Creation-Date: 2021-06-20 16:14+0300\n"
 "PO-Revision-Date: 2020-12-31 14:19+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/mc/mc/language/uk/)\n"
@@ -1007,15 +1007,6 @@ msgstr "Переглядач diff: некоректний режим"
 msgid "Two files are needed to compare"
 msgstr "Для порівняння необхідно вказати два файли"
 
-msgid "Choose syntax highlighting"
-msgstr "Оберіть підсвітку синтаксису"
-
-msgid "< Auto >"
-msgstr "< Авто >"
-
-msgid "< Reload Current Syntax >"
-msgstr "< Оновити поточний синтаксис >"
-
 #, c-format
 msgid "Loading: %3d%%"
 msgstr "Завантаження: %3d%%"
@@ -1060,14 +1051,6 @@ msgstr "Сталася помилка читання з каналу: %s"
 #, c-format
 msgid "Cannot open pipe for reading: %s"
 msgstr "Не вдалося відкрити канал для читання: %s"
-
-#, c-format
-msgid "Searching %s: %3d%%"
-msgstr "Виконується пошук %s: %3d%%"
-
-#, c-format
-msgid "Searching %s"
-msgstr "Виконується пошук %s"
 
 msgid "File has hard-links. Detach before saving?"
 msgstr "Файл має жорсткі посилання. Відкріпити їх перед зберіганням?"
@@ -1114,9 +1097,6 @@ msgstr "Замінити закінчення рядків на:"
 msgid "Save As"
 msgstr "Зберегти як"
 
-msgid "Collect completions"
-msgstr "Зібрати доповнення"
-
 msgid "&Quick save"
 msgstr "&Швидке збереження"
 
@@ -1146,27 +1126,6 @@ msgstr "&Замістити"
 
 msgid "Cannot save file"
 msgstr "Не вдалося зберегти файл"
-
-msgid "Delete macro"
-msgstr "Видалити макрос"
-
-msgid "Press macro hotkey:"
-msgstr "Натисніть гарячу клавішу для макросу:"
-
-msgid "Macro not deleted"
-msgstr "Макрос не видалено"
-
-msgid "Save macro"
-msgstr "Зберегти макрос"
-
-msgid "Press the macro's new hotkey:"
-msgstr "Натисніть нову клавішу макросу:"
-
-msgid "Repeat last commands"
-msgstr "Повторити останні команди"
-
-msgid "Repeat times:"
-msgstr "Кількість повторень:"
 
 #, c-format
 msgid "Confirm save file: \"%s\""
@@ -1201,13 +1160,6 @@ msgstr "Який файл меню необхідно редагувати?"
 
 msgid "&Local"
 msgstr "&Місцевий"
-
-msgid "Replace"
-msgstr "Замінити"
-
-#, c-format
-msgid "%ld replacements made"
-msgstr "Виконано замін: %ld"
 
 msgid "[NoName]"
 msgstr "[БезНазви]"
@@ -1317,35 +1269,35 @@ msgstr ""
 "Поточний текст змінено і не збережено. \n"
 "Продовження операції призведе до втрати змін."
 
-msgid "In se&lection"
-msgstr "У вид&іленні"
-
-msgid "&Find all"
-msgstr "&Знайти все"
-
-msgid "Enter replacement string:"
-msgstr "Введіть рядок для заміни:"
-
-msgid "Replace with:"
-msgstr "Замінити на:"
-
-msgid "&Replace"
-msgstr "&Замінити"
-
-msgid "A&ll"
-msgstr "&Усі"
-
-msgid "&Skip"
-msgstr "П&ропустити"
-
-msgid "Confirm replace"
-msgstr "Підтвердити заміну"
-
 msgid "Cancel"
 msgstr "Скасувати"
 
+msgid "Collect completions"
+msgstr "Зібрати доповнення"
+
 msgid "NoName"
 msgstr "БезНазви"
+
+msgid "Save macro"
+msgstr "Зберегти макрос"
+
+msgid "Press the macro's new hotkey:"
+msgstr "Натисніть нову клавішу макросу:"
+
+msgid "Delete macro"
+msgstr "Видалити макрос"
+
+msgid "Press macro hotkey:"
+msgstr "Натисніть гарячу клавішу для макросу:"
+
+msgid "Macro not deleted"
+msgstr "Макрос не видалено"
+
+msgid "Repeat last commands"
+msgstr "Повторити останні команди"
+
+msgid "Repeat times:"
+msgstr "Кількість повторень:"
 
 msgid "&Open file..."
 msgstr "&Відкрити файл…"
@@ -1635,6 +1587,45 @@ msgstr "Переносити після досягнення довжини:"
 msgid "Editor options"
 msgstr "Параметри редактора"
 
+msgid "In se&lection"
+msgstr "У вид&іленні"
+
+msgid "&Find all"
+msgstr "&Знайти все"
+
+msgid "Enter replacement string:"
+msgstr "Введіть рядок для заміни:"
+
+msgid "Replace"
+msgstr "Замінити"
+
+msgid "Replace with:"
+msgstr "Замінити на:"
+
+msgid "&Replace"
+msgstr "&Замінити"
+
+msgid "A&ll"
+msgstr "&Усі"
+
+msgid "&Skip"
+msgstr "П&ропустити"
+
+msgid "Confirm replace"
+msgstr "Підтвердити заміну"
+
+#, c-format
+msgid "Searching %s: %3d%%"
+msgstr "Виконується пошук %s: %3d%%"
+
+#, c-format
+msgid "Searching %s"
+msgstr "Виконується пошук %s"
+
+#, c-format
+msgid "%ld replacements made"
+msgstr "Виконано замін: %ld"
+
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
@@ -1761,6 +1752,15 @@ msgstr "Запропонувати"
 
 msgid "Select language"
 msgstr "Вибрати мову"
+
+msgid "Choose syntax highlighting"
+msgstr "Оберіть підсвітку синтаксису"
+
+msgid "< Auto >"
+msgstr "< Авто >"
+
+msgid "< Reload Current Syntax >"
+msgstr "< Оновити поточний синтаксис >"
 
 msgid "Load syntax file"
 msgstr "Завантажити файл синтаксису"

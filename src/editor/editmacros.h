@@ -1,12 +1,7 @@
-#ifndef MC__EDIT_ASPELL_DIALOGS_H
-#define MC__EDIT_ASPELL_DIALOGS_H
-
-#include "lib/global.h"         /* include <glib.h> */
+#ifndef MC__EDIT_MACROS_H
+#define MC__EDIT_MACROS_H 1
 
 /*** typedefs(not structures) and defined constants **********************************************/
-
-#define B_SKIP_WORD (B_USER+3)
-#define B_ADD_WORD (B_USER+4)
 
 /*** enums ***************************************************************************************/
 
@@ -16,10 +11,14 @@
 
 /*** declarations of public functions ************************************************************/
 
-int spell_dialog_spell_suggest_show (WEdit * edit, const char *word, char **new_word,
-                                     GArray * suggest);
-char *spell_dialog_lang_list_show (GArray * languages);
+int edit_store_macro_cmd (WEdit * edit);
+gboolean edit_load_macro_cmd (WEdit * edit);
+void edit_delete_macro_cmd (WEdit * edit);
+gboolean edit_repeat_macro_cmd (WEdit * edit);
+gboolean edit_execute_macro (WEdit * edit, int hotkey);
+void edit_begin_end_macro_cmd (WEdit * edit);
+void edit_begin_end_repeat_cmd (WEdit * edit);
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__EDIT_ASPELL_DIALOGS_H */
+#endif /* MC__EDIT_MACROS_H */

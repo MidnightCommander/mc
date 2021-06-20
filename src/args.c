@@ -194,9 +194,7 @@ static const GOptionEntry argument_main_table[] = {
      N_("<file> ...")
     },
 
-    {
-     NULL, '\0', 0, 0, NULL, NULL, NULL /* Complete struct initialization */
-    }
+    G_OPTION_ENTRY_NULL
     /* *INDENT-ON* */
 };
 
@@ -279,9 +277,7 @@ static const GOptionEntry argument_terminal_table[] = {
      NULL
     },
 
-    {
-     NULL, '\0', 0, 0, NULL, NULL, NULL /* Complete struct initialization */
-    }
+    G_OPTION_ENTRY_NULL
     /* *INDENT-ON* */
 };
 
@@ -321,9 +317,7 @@ static const GOptionEntry argument_color_table[] = {
      N_("<string>")
     },
 
-    {
-     NULL, '\0', 0, 0, NULL, NULL, NULL /* Complete struct initialization */
-    }
+    G_OPTION_ENTRY_NULL
     /* *INDENT-ON* */
 };
 

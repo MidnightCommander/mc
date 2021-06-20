@@ -72,7 +72,7 @@ gboolean sftpfs_is_sftp_error (LIBSSH2_SFTP * sftp_session, int sftp_res, int sf
 void sftpfs_ssherror_to_gliberror (sftpfs_super_t * super, int libssh_errno, GError ** mcerror);
 gboolean sftpfs_waitsocket (sftpfs_super_t * super, int sftp_res, GError ** mcerror);
 
-const char *sftpfs_fix_filename (const char *file_name, unsigned int *length);
+const GString *sftpfs_fix_filename (const char *file_name);
 void sftpfs_attr_to_stat (const LIBSSH2_SFTP_ATTRIBUTES * attrs, struct stat *s);
 int sftpfs_lstat (const vfs_path_t * vpath, struct stat *buf, GError ** mcerror);
 int sftpfs_stat (const vfs_path_t * vpath, struct stat *buf, GError ** mcerror);

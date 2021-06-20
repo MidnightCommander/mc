@@ -265,7 +265,7 @@ mcview_viewer (const char *command, const vfs_path_t * file_vpath, int start_lin
         dlg_stop (view_dlg);
 
     if (widget_get_state (vw, WST_CLOSED))
-        dlg_destroy (view_dlg);
+        widget_destroy (vw);
 
     return succeeded;
 }

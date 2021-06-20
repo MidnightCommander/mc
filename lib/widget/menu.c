@@ -718,7 +718,7 @@ menubar_get_menu_by_x_coord (const WMenuBar * menubar, int x)
 static gboolean
 menubar_mouse_on_menu (const WMenuBar * menubar, int y, int x)
 {
-    Widget *w = WIDGET (menubar);
+    const Widget *w = CONST_WIDGET (menubar);
     menu_t *menu;
     int left_x, right_x, bottom_y;
 

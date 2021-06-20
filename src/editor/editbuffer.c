@@ -31,6 +31,7 @@
 
 #include <config.h>
 
+#include <ctype.h>              /* isdigit() */
 #include <stdlib.h>
 #include <string.h>
 #include <sys/types.h>
@@ -428,6 +429,58 @@ edit_buffer_get_word_from_pos (const edit_buffer_t * buf, off_t start_pos, off_t
     *cut = cut_len;
 
     return match_expr;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Find first character of current word
+ *
+ * @param buf editor buffer
+ * @param word_start position of first character of current word
+ * @param word_len length of current word
+ *
+ * @return TRUE if first character of word is found and this character is not 1) a digit and
+ *         2) a begin of file, FALSE otherwise
+ */
+
+gboolean
+edit_buffer_find_word_start (const edit_buffer_t * buf, off_t * word_start, gsize * word_len)
+{
+    int c;
+    off_t i;
+
+    /* return if at begin of file */
+    if (buf->curs1 <= 0)
+        return FALSE;
+
+    c = edit_buffer_get_previous_byte (buf);
+    /* return if not at end or in word */
+    if (is_break_char (c))
+        return FALSE;
+
+    /* search start of word */
+    for (i = 1;; i++)
+    {
+        int last;
+
+        last = c;
+        c = edit_buffer_get_byte (buf, buf->curs1 - i - 1);
+
+        if (is_break_char (c))
+        {
+            /* return if word starts with digit */
+            if (isdigit (last))
+                return FALSE;
+
+            break;
+        }
+    }
+
+    /* success */
+    *word_start = buf->curs1 - i;       /* start found */
+    *word_len = (gsize) i;
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */

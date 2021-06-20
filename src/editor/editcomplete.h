@@ -1,13 +1,5 @@
-/** \file usermenu.h
- *  \brief Header: user menu implementation
- */
-
-#ifndef MC__USERMENU_H
-#define MC__USERMENU_H
-
-#include "lib/global.h"
-
-#include "src/editor/edit.h"    /* WEdit */
+#ifndef MC__EDIT_COMPLETE_H
+#define MC__EDIT_COMPLETE_H
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -19,12 +11,11 @@
 
 /*** declarations of public functions ************************************************************/
 
-gboolean user_menu_cmd (const WEdit * edit_widget, const char *menu_file, int selected_entry);
-char *expand_format (const WEdit * edit_widget, char c, gboolean do_quote);
-int check_format_view (const char *p);
-int check_format_var (const char *p, char **v);
-int check_format_cd (const char *p);
+/* Public function for unit tests */
+char *edit_completion_dialog_show (const WEdit * edit, GQueue * compl, int max_width);
+
+void edit_complete_word_cmd (WEdit * edit);
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__USERMENU_H */
+#endif /* MC__EDIT_COMPLETE_H */

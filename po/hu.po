@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-03-14 19:59+0300\n"
+"POT-Creation-Date: 2021-06-20 16:14+0300\n"
 "PO-Revision-Date: 2020-12-31 14:19+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Hungarian (http://www.transifex.com/mc/mc/language/hu/)\n"
@@ -989,15 +989,6 @@ msgstr "Különbség megjelenítő: érvénytelen mód"
 msgid "Two files are needed to compare"
 msgstr "Két fájl kell az összehasonlításhoz"
 
-msgid "Choose syntax highlighting"
-msgstr "Válasszon szintaktikus szövegkiemelést"
-
-msgid "< Auto >"
-msgstr "< Automatikus >"
-
-msgid "< Reload Current Syntax >"
-msgstr "< Aktuális szintaktika újratöltése >"
-
 #, c-format
 msgid "Loading: %3d%%"
 msgstr "Betöltés: %3d%%"
@@ -1042,14 +1033,6 @@ msgstr "Hiba a cső olvasásakor: %s"
 #, c-format
 msgid "Cannot open pipe for reading: %s"
 msgstr "A cső nem megnyitható olvasásra: %s"
-
-#, c-format
-msgid "Searching %s: %3d%%"
-msgstr "%s keresése: %3d%%"
-
-#, c-format
-msgid "Searching %s"
-msgstr "\"%s\" keresése"
 
 msgid "File has hard-links. Detach before saving?"
 msgstr "A fájlban \"hard-link\" van. Leválaszt mentés előtt?"
@@ -1096,9 +1079,6 @@ msgstr "Sortörés formátum:"
 msgid "Save As"
 msgstr "Mentés másként"
 
-msgid "Collect completions"
-msgstr ""
-
 msgid "&Quick save"
 msgstr "Gyors mentés"
 
@@ -1128,27 +1108,6 @@ msgstr "&Felülírás"
 
 msgid "Cannot save file"
 msgstr "Nem sikerült a mentés."
-
-msgid "Delete macro"
-msgstr "Makró törlése"
-
-msgid "Press macro hotkey:"
-msgstr "Makró-gyorsbillentyű:"
-
-msgid "Macro not deleted"
-msgstr "A makró nem lett törölve"
-
-msgid "Save macro"
-msgstr "Makró mentése"
-
-msgid "Press the macro's new hotkey:"
-msgstr "A makró új gyorsbillentyűje:"
-
-msgid "Repeat last commands"
-msgstr "Utolsó parancsok ismétlése"
-
-msgid "Repeat times:"
-msgstr "Ismétlések száma:"
 
 #, c-format
 msgid "Confirm save file: \"%s\""
@@ -1183,13 +1142,6 @@ msgstr "Melyik menüfájlt kívánja szerkeszteni?"
 
 msgid "&Local"
 msgstr "&Könyvtárét (helyi)"
-
-msgid "Replace"
-msgstr "Csere"
-
-#, c-format
-msgid "%ld replacements made"
-msgstr "%ld csere történt."
 
 msgid "[NoName]"
 msgstr "[Névtelen]"
@@ -1299,35 +1251,35 @@ msgstr ""
 "A szöveg módosult a legutóbbi mentés óta. \n"
 "Ha továbblép, ezek a változások elvesznek."
 
-msgid "In se&lection"
-msgstr "Kijelöltben"
-
-msgid "&Find all"
-msgstr "Min&det"
-
-msgid "Enter replacement string:"
-msgstr "Új szöveg:"
-
-msgid "Replace with:"
-msgstr "Csere erre:"
-
-msgid "&Replace"
-msgstr "&Csere"
-
-msgid "A&ll"
-msgstr "Min&det"
-
-msgid "&Skip"
-msgstr "&Kihagyás"
-
-msgid "Confirm replace"
-msgstr "Csere megerősítése"
-
 msgid "Cancel"
 msgstr "Mégsem"
 
+msgid "Collect completions"
+msgstr ""
+
 msgid "NoName"
 msgstr "Névtelen"
+
+msgid "Save macro"
+msgstr "Makró mentése"
+
+msgid "Press the macro's new hotkey:"
+msgstr "A makró új gyorsbillentyűje:"
+
+msgid "Delete macro"
+msgstr "Makró törlése"
+
+msgid "Press macro hotkey:"
+msgstr "Makró-gyorsbillentyű:"
+
+msgid "Macro not deleted"
+msgstr "A makró nem lett törölve"
+
+msgid "Repeat last commands"
+msgstr "Utolsó parancsok ismétlése"
+
+msgid "Repeat times:"
+msgstr "Ismétlések száma:"
 
 msgid "&Open file..."
 msgstr "&Megnyitás..."
@@ -1617,6 +1569,45 @@ msgstr "Sortörési pozíció:"
 msgid "Editor options"
 msgstr "A szövegszerkesztő beállításai"
 
+msgid "In se&lection"
+msgstr "Kijelöltben"
+
+msgid "&Find all"
+msgstr "Min&det"
+
+msgid "Enter replacement string:"
+msgstr "Új szöveg:"
+
+msgid "Replace"
+msgstr "Csere"
+
+msgid "Replace with:"
+msgstr "Csere erre:"
+
+msgid "&Replace"
+msgstr "&Csere"
+
+msgid "A&ll"
+msgstr "Min&det"
+
+msgid "&Skip"
+msgstr "&Kihagyás"
+
+msgid "Confirm replace"
+msgstr "Csere megerősítése"
+
+#, c-format
+msgid "Searching %s: %3d%%"
+msgstr "%s keresése: %3d%%"
+
+#, c-format
+msgid "Searching %s"
+msgstr "\"%s\" keresése"
+
+#, c-format
+msgid "%ld replacements made"
+msgstr "%ld csere történt."
+
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
@@ -1743,6 +1734,15 @@ msgstr "Ajánlat"
 
 msgid "Select language"
 msgstr "Nyelv kiválasztása"
+
+msgid "Choose syntax highlighting"
+msgstr "Válasszon szintaktikus szövegkiemelést"
+
+msgid "< Auto >"
+msgstr "< Automatikus >"
+
+msgid "< Reload Current Syntax >"
+msgstr "< Aktuális szintaktika újratöltése >"
 
 msgid "Load syntax file"
 msgstr "Szintaxisfájl betöltése"

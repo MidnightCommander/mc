@@ -150,26 +150,26 @@ gboolean mc_search_prepare (mc_search_t * mc_search);
 gboolean mc_search_run (mc_search_t * mc_search, const void *user_data, gsize start_search,
                         gsize end_search, gsize * found_len);
 
-gboolean mc_search_is_type_avail (mc_search_type_t);
+gboolean mc_search_is_type_avail (mc_search_type_t search_type);
 
 const mc_search_type_str_t *mc_search_types_list_get (size_t * num);
 
 GString *mc_search_prepare_replace_str (mc_search_t * mc_search, GString * replace_str);
 char *mc_search_prepare_replace_str2 (mc_search_t * lc_mc_search, const char *replace_str);
 
-gboolean mc_search_is_fixed_search_str (mc_search_t *);
+gboolean mc_search_is_fixed_search_str (const mc_search_t * lc_mc_search);
 
 gchar **mc_search_get_types_strings_array (size_t * num);
 
 gboolean mc_search (const gchar * pattern, const gchar * pattern_charset, const gchar * str,
                     mc_search_type_t type);
 
-int mc_search_getstart_result_by_num (mc_search_t *, int);
-int mc_search_getend_result_by_num (mc_search_t *, int);
+int mc_search_getstart_result_by_num (mc_search_t * lc_mc_search, int lc_index);
+int mc_search_getend_result_by_num (mc_search_t * lc_mc_search, int lc_index);
 
 /* *INDENT-OFF* */
 void mc_search_set_error (mc_search_t * lc_mc_search, mc_search_error_t code, const gchar * format, ...)
      G_GNUC_PRINTF (3, 4);
 /* *INDENT-ON* */
 
-#endif
+#endif /* MC__SEARCH_H */

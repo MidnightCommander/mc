@@ -37,6 +37,7 @@
 #define VFS_SUBCLASS(a) ((struct vfs_s_subclass *) (a))
 
 #define VFS_SUPER(a) ((struct vfs_s_super *) (a))
+#define CONST_VFS_SUPER(a) ((const struct vfs_s_super *) (a))
 #define VFS_ENTRY(a) ((struct vfs_s_entry *) (a))
 #define VFS_INODE(a) ((struct vfs_s_inode *) (a))
 

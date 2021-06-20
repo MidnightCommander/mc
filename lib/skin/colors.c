@@ -356,6 +356,7 @@ mc_skin_color_check_bw_mode (mc_skin_t * mc_skin)
 gboolean
 mc_skin_color_parse_ini_file (mc_skin_t * mc_skin)
 {
+    gboolean ret = FALSE;
     gsize items_count;
     gchar **groups, **orig_groups;
     mc_skin_color_t *mc_skin_color;
@@ -364,16 +365,13 @@ mc_skin_color_parse_ini_file (mc_skin_t * mc_skin)
 
     orig_groups = mc_config_get_groups (mc_skin->config, &items_count);
     if (*orig_groups == NULL)
-    {
-        g_strfreev (orig_groups);
-        return FALSE;
-    }
+        goto ret;
 
     /* as first, need to set up default colors */
     mc_skin_color_set_default_for_terminal (mc_skin);
     mc_skin_color = mc_skin_color_get_from_ini_file (mc_skin, "core", "_default_");
     if (mc_skin_color == NULL)
-        return FALSE;
+        goto ret;
 
     tty_color_set_defaults (mc_skin_color->fgcolor, mc_skin_color->bgcolor, mc_skin_color->attrs);
     mc_skin_color_add_to_hash (mc_skin, "core", "_default_", mc_skin_color);
@@ -395,10 +393,14 @@ mc_skin_color_parse_ini_file (mc_skin_t * mc_skin)
         }
         g_strfreev (orig_keys);
     }
-    g_strfreev (orig_groups);
 
     mc_skin_color_cache_init ();
-    return TRUE;
+
+    ret = TRUE;
+
+  ret:
+    g_strfreev (orig_groups);
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */

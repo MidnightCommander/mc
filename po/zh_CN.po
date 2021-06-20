@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-03-14 19:59+0300\n"
+"POT-Creation-Date: 2021-06-20 16:14+0300\n"
 "PO-Revision-Date: 2020-12-31 14:19+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/mc/mc/language/"
@@ -1001,15 +1001,6 @@ msgstr "Diff 查看器: 模式无效"
 msgid "Two files are needed to compare"
 msgstr "比较时需要两个文件"
 
-msgid "Choose syntax highlighting"
-msgstr "选择语法突出显示"
-
-msgid "< Auto >"
-msgstr "<自动>"
-
-msgid "< Reload Current Syntax >"
-msgstr "<重新加载当前语法>"
-
 #, c-format
 msgid "Loading: %3d%%"
 msgstr "正在载入: %3d%%"
@@ -1054,14 +1045,6 @@ msgstr "读取管道时发生错误: %s"
 #, c-format
 msgid "Cannot open pipe for reading: %s"
 msgstr "无法打开管道读取: %s"
-
-#, c-format
-msgid "Searching %s: %3d%%"
-msgstr "正在搜索 %s: %3d%%"
-
-#, c-format
-msgid "Searching %s"
-msgstr "正在搜索 %s"
 
 msgid "File has hard-links. Detach before saving?"
 msgstr "文件有硬链接。保存文件前分离该链接吗?"
@@ -1108,9 +1091,6 @@ msgstr "更改换行符为: "
 msgid "Save As"
 msgstr "另存为"
 
-msgid "Collect completions"
-msgstr "收集补全"
-
 msgid "&Quick save"
 msgstr "快速保存(&Q)"
 
@@ -1140,27 +1120,6 @@ msgstr "覆盖(&O)"
 
 msgid "Cannot save file"
 msgstr "无法保存文件"
-
-msgid "Delete macro"
-msgstr "删除宏"
-
-msgid "Press macro hotkey:"
-msgstr "按下宏热键: "
-
-msgid "Macro not deleted"
-msgstr "宏没有删除"
-
-msgid "Save macro"
-msgstr "保存宏"
-
-msgid "Press the macro's new hotkey:"
-msgstr "为该宏按下新热键: "
-
-msgid "Repeat last commands"
-msgstr "重复上一个命令"
-
-msgid "Repeat times:"
-msgstr "重复次数: "
 
 #, c-format
 msgid "Confirm save file: \"%s\""
@@ -1195,13 +1154,6 @@ msgstr "您要编辑哪个菜单文件?"
 
 msgid "&Local"
 msgstr "本地(&L)"
-
-msgid "Replace"
-msgstr "替换"
-
-#, c-format
-msgid "%ld replacements made"
-msgstr "替换了 %ld 处"
 
 msgid "[NoName]"
 msgstr "[未命名]"
@@ -1311,35 +1263,35 @@ msgstr ""
 "当前文字被修改但没有保存。\n"
 "选择继续将丢失这些修改。"
 
-msgid "In se&lection"
-msgstr "在选择区域(&L)"
-
-msgid "&Find all"
-msgstr "查找全部(&F)"
-
-msgid "Enter replacement string:"
-msgstr "输入替换字符串: "
-
-msgid "Replace with:"
-msgstr "替换为: "
-
-msgid "&Replace"
-msgstr "替换(&R)"
-
-msgid "A&ll"
-msgstr "全部(&L)"
-
-msgid "&Skip"
-msgstr "跳过(&S)"
-
-msgid "Confirm replace"
-msgstr "确认替换"
-
 msgid "Cancel"
 msgstr "取消"
 
+msgid "Collect completions"
+msgstr "收集补全"
+
 msgid "NoName"
 msgstr "未命名"
+
+msgid "Save macro"
+msgstr "保存宏"
+
+msgid "Press the macro's new hotkey:"
+msgstr "为该宏按下新热键: "
+
+msgid "Delete macro"
+msgstr "删除宏"
+
+msgid "Press macro hotkey:"
+msgstr "按下宏热键: "
+
+msgid "Macro not deleted"
+msgstr "宏没有删除"
+
+msgid "Repeat last commands"
+msgstr "重复上一个命令"
+
+msgid "Repeat times:"
+msgstr "重复次数: "
 
 msgid "&Open file..."
 msgstr "打开文件(&O)..."
@@ -1629,6 +1581,45 @@ msgstr "换行位置: "
 msgid "Editor options"
 msgstr "编辑器选项"
 
+msgid "In se&lection"
+msgstr "在选择区域(&L)"
+
+msgid "&Find all"
+msgstr "查找全部(&F)"
+
+msgid "Enter replacement string:"
+msgstr "输入替换字符串: "
+
+msgid "Replace"
+msgstr "替换"
+
+msgid "Replace with:"
+msgstr "替换为: "
+
+msgid "&Replace"
+msgstr "替换(&R)"
+
+msgid "A&ll"
+msgstr "全部(&L)"
+
+msgid "&Skip"
+msgstr "跳过(&S)"
+
+msgid "Confirm replace"
+msgstr "确认替换"
+
+#, c-format
+msgid "Searching %s: %3d%%"
+msgstr "正在搜索 %s: %3d%%"
+
+#, c-format
+msgid "Searching %s"
+msgstr "正在搜索 %s"
+
+#, c-format
+msgid "%ld replacements made"
+msgstr "替换了 %ld 处"
+
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
@@ -1755,6 +1746,15 @@ msgstr "建议"
 
 msgid "Select language"
 msgstr "选择语言"
+
+msgid "Choose syntax highlighting"
+msgstr "选择语法突出显示"
+
+msgid "< Auto >"
+msgstr "<自动>"
+
+msgid "< Reload Current Syntax >"
+msgstr "<重新加载当前语法>"
 
 msgid "Load syntax file"
 msgstr "加载语法文件"

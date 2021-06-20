@@ -68,6 +68,10 @@
 
 #include "edit-impl.h"
 #include "editwidget.h"
+#include "editsearch.h"
+#include "editcomplete.h"       /* edit_complete_word_cmd() */
+#include "editmacros.h"
+#include "etags.h"              /* edit_get_match_keyword_cmd() */
 #ifdef HAVE_ASPELL
 #include "spell.h"
 #endif
@@ -2204,8 +2208,7 @@ edit_clean (WEdit * edit)
     g_free (edit->redo_stack);
     vfs_path_free (edit->filename_vpath, TRUE);
     vfs_path_free (edit->dir_vpath, TRUE);
-    mc_search_free (edit->search);
-    g_free (edit->last_search_string);
+    edit_search_deinit (edit);
 
 #ifdef HAVE_CHARSET
     if (edit->converter != str_cnv_from_term)

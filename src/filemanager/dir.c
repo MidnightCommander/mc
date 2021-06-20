@@ -756,6 +756,7 @@ dir_list_reload (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
         if (!dir_list_init (list))
         {
             dir_list_free_list (&dir_copy);
+            mc_closedir (dirp);
             return FALSE;
         }
 

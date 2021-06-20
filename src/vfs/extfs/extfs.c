@@ -515,12 +515,13 @@ extfs_open_archive (int fstype, const char *name, struct extfs_super_t **pparc, 
     static dev_t archive_counter = 0;
     mc_pipe_t *result = NULL;
     mode_t mode;
-    char *cmd;
+    char *cmd = NULL;
     struct stat mystat;
     struct extfs_super_t *current_archive;
     struct vfs_s_entry *root_entry;
     char *tmp = NULL;
     vfs_path_t *local_name_vpath = NULL;
+    const char *local_last_path = NULL;
     vfs_path_t *name_vpath;
 
     memset (&mystat, 0, sizeof (mystat));
@@ -540,16 +541,24 @@ extfs_open_archive (int fstype, const char *name, struct extfs_super_t **pparc, 
                 goto ret;
         }
 
-        tmp = name_quote (vfs_path_get_last_path_str (name_vpath), FALSE);
+        local_last_path = vfs_path_get_last_path_str (local_name_vpath);
+        if (local_last_path == NULL)
+            tmp = name_quote (vfs_path_get_last_path_str (name_vpath), FALSE);
     }
 
-    cmd = g_strconcat (info->path, info->prefix, " list ",
-                       vfs_path_get_last_path_str (local_name_vpath) != NULL ?
-                       vfs_path_get_last_path_str (local_name_vpath) : tmp, (char *) NULL);
-    g_free (tmp);
+    if (local_last_path != NULL)
+        cmd = g_strconcat (info->path, info->prefix, " list ", local_last_path, (char *) NULL);
+    else if (tmp != NULL)
+    {
+        cmd = g_strconcat (info->path, info->prefix, " list ", tmp, (char *) NULL);
+        g_free (tmp);
+    }
 
-    result = mc_popen (cmd, TRUE, TRUE, error);
-    g_free (cmd);
+    if (cmd != NULL)
+    {
+        result = mc_popen (cmd, TRUE, TRUE, error);
+        g_free (cmd);
+    }
 
     if (result == NULL)
     {
@@ -751,9 +760,9 @@ extfs_open_and_read_archive (int fstype, const char *name, struct extfs_super_t 
             message (D_ERROR, MSG_ERROR, _("EXTFS virtual file system:\n%s"), error->message);
             g_error_free (error);
         }
-    }
 
-    mc_pclose (pip, NULL);
+        mc_pclose (pip, NULL);
+    }
 
     return result;
 }
@@ -887,7 +896,7 @@ extfs_get_archive_name (const struct extfs_super_t *archive)
     if (archive->local_name != NULL)
         archive_name = archive->local_name;
     else
-        archive_name = VFS_SUPER (archive)->name;
+        archive_name = CONST_VFS_SUPER (archive)->name;
 
     if (archive_name == NULL || *archive_name == '\0')
         return g_strdup ("no_archive_name");
@@ -1566,10 +1575,8 @@ extfs_get_plugins (const char *where, gboolean silent)
 
         g_snprintf (fullname, sizeof (fullname), "%s" PATH_SEP_STR "%s", dirname, filename);
 
-        if ((stat (fullname, &s) == 0)
-            && S_ISREG (s.st_mode) && !S_ISDIR (s.st_mode)
-            && (((s.st_mode & S_IXOTH) != 0) ||
-                ((s.st_mode & S_IXUSR) != 0) || ((s.st_mode & S_IXGRP) != 0)))
+        if ((stat (fullname, &s) == 0) && S_ISREG (s.st_mode) && !S_ISDIR (s.st_mode)
+            && is_exe (s.st_mode))
         {
             int f;
 

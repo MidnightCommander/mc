@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-03-14 19:59+0300\n"
+"POT-Creation-Date: 2021-06-20 16:14+0300\n"
 "PO-Revision-Date: 2020-12-31 14:19+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Georgian (http://www.transifex.com/mc/mc/language/ka/)\n"
@@ -929,15 +929,6 @@ msgstr ""
 msgid "Two files are needed to compare"
 msgstr ""
 
-msgid "Choose syntax highlighting"
-msgstr ""
-
-msgid "< Auto >"
-msgstr ""
-
-msgid "< Reload Current Syntax >"
-msgstr ""
-
 #, c-format
 msgid "Loading: %3d%%"
 msgstr ""
@@ -979,14 +970,6 @@ msgstr ""
 
 #, c-format
 msgid "Cannot open pipe for reading: %s"
-msgstr ""
-
-#, c-format
-msgid "Searching %s: %3d%%"
-msgstr ""
-
-#, c-format
-msgid "Searching %s"
 msgstr ""
 
 msgid "File has hard-links. Detach before saving?"
@@ -1034,9 +1017,6 @@ msgstr ""
 msgid "Save As"
 msgstr "შეინახე როგორც"
 
-msgid "Collect completions"
-msgstr ""
-
 msgid "&Quick save"
 msgstr ""
 
@@ -1066,27 +1046,6 @@ msgstr ""
 
 msgid "Cannot save file"
 msgstr ""
-
-msgid "Delete macro"
-msgstr "მაკროსის წაშლა"
-
-msgid "Press macro hotkey:"
-msgstr ""
-
-msgid "Macro not deleted"
-msgstr "მაკროსი არ წაშლილა"
-
-msgid "Save macro"
-msgstr "მაკროსის შენახვა"
-
-msgid "Press the macro's new hotkey:"
-msgstr ""
-
-msgid "Repeat last commands"
-msgstr ""
-
-msgid "Repeat times:"
-msgstr "გამეორების დრო:"
 
 #, c-format
 msgid "Confirm save file: \"%s\""
@@ -1120,13 +1079,6 @@ msgid "Which menu file do you want to edit?"
 msgstr ""
 
 msgid "&Local"
-msgstr ""
-
-msgid "Replace"
-msgstr "გამოცვლა"
-
-#, c-format
-msgid "%ld replacements made"
 msgstr ""
 
 msgid "[NoName]"
@@ -1231,35 +1183,35 @@ msgid ""
 "Continue discards these changes."
 msgstr ""
 
-msgid "In se&lection"
-msgstr ""
-
-msgid "&Find all"
-msgstr "&ყველას პოვნა"
-
-msgid "Enter replacement string:"
-msgstr ""
-
-msgid "Replace with:"
-msgstr ""
-
-msgid "&Replace"
-msgstr ""
-
-msgid "A&ll"
-msgstr "ყვე&ლა"
-
-msgid "&Skip"
-msgstr "გამო&ტოვება"
-
-msgid "Confirm replace"
-msgstr ""
-
 msgid "Cancel"
 msgstr "შეწყვეტა"
 
+msgid "Collect completions"
+msgstr ""
+
 msgid "NoName"
 msgstr "უსახელო"
+
+msgid "Save macro"
+msgstr "მაკროსის შენახვა"
+
+msgid "Press the macro's new hotkey:"
+msgstr ""
+
+msgid "Delete macro"
+msgstr "მაკროსის წაშლა"
+
+msgid "Press macro hotkey:"
+msgstr ""
+
+msgid "Macro not deleted"
+msgstr "მაკროსი არ წაშლილა"
+
+msgid "Repeat last commands"
+msgstr ""
+
+msgid "Repeat times:"
+msgstr "გამეორების დრო:"
 
 msgid "&Open file..."
 msgstr ""
@@ -1549,6 +1501,45 @@ msgstr ""
 msgid "Editor options"
 msgstr ""
 
+msgid "In se&lection"
+msgstr ""
+
+msgid "&Find all"
+msgstr "&ყველას პოვნა"
+
+msgid "Enter replacement string:"
+msgstr ""
+
+msgid "Replace"
+msgstr "გამოცვლა"
+
+msgid "Replace with:"
+msgstr ""
+
+msgid "&Replace"
+msgstr ""
+
+msgid "A&ll"
+msgstr "ყვე&ლა"
+
+msgid "&Skip"
+msgstr "გამო&ტოვება"
+
+msgid "Confirm replace"
+msgstr ""
+
+#, c-format
+msgid "Searching %s: %3d%%"
+msgstr ""
+
+#, c-format
+msgid "Searching %s"
+msgstr ""
+
+#, c-format
+msgid "%ld replacements made"
+msgstr ""
+
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
@@ -1672,6 +1663,15 @@ msgid "Suggest"
 msgstr ""
 
 msgid "Select language"
+msgstr ""
+
+msgid "Choose syntax highlighting"
+msgstr ""
+
+msgid "< Auto >"
+msgstr ""
+
+msgid "< Reload Current Syntax >"
 msgstr ""
 
 msgid "Load syntax file"

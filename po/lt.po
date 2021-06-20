@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-03-14 19:59+0300\n"
+"POT-Creation-Date: 2021-06-20 16:14+0300\n"
 "PO-Revision-Date: 2020-12-31 14:19+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Lithuanian (http://www.transifex.com/mc/mc/language/lt/)\n"
@@ -966,15 +966,6 @@ msgstr "Diff peržiūra: neteisingas režimas"
 msgid "Two files are needed to compare"
 msgstr "Palyginimui reikalingi du failai"
 
-msgid "Choose syntax highlighting"
-msgstr "Pasirinkti sintaksės žymėjimą"
-
-msgid "< Auto >"
-msgstr "< Auto >"
-
-msgid "< Reload Current Syntax >"
-msgstr "< Įkelti esamą sintaksę iš naujo >"
-
 #, c-format
 msgid "Loading: %3d%%"
 msgstr ""
@@ -1019,14 +1010,6 @@ msgstr ""
 #, c-format
 msgid "Cannot open pipe for reading: %s"
 msgstr ""
-
-#, c-format
-msgid "Searching %s: %3d%%"
-msgstr ""
-
-#, c-format
-msgid "Searching %s"
-msgstr "Ieškoma %s"
 
 msgid "File has hard-links. Detach before saving?"
 msgstr ""
@@ -1073,9 +1056,6 @@ msgstr ""
 msgid "Save As"
 msgstr "Išsaugoti kaip"
 
-msgid "Collect completions"
-msgstr ""
-
 msgid "&Quick save"
 msgstr "&Greitas išsaugojimas"
 
@@ -1105,27 +1085,6 @@ msgstr "Perraš&yti"
 
 msgid "Cannot save file"
 msgstr "Nepavyko išsaugoti failo"
-
-msgid "Delete macro"
-msgstr "Šalinti macro"
-
-msgid "Press macro hotkey:"
-msgstr ""
-
-msgid "Macro not deleted"
-msgstr "Macro nepašalinta"
-
-msgid "Save macro"
-msgstr ""
-
-msgid "Press the macro's new hotkey:"
-msgstr ""
-
-msgid "Repeat last commands"
-msgstr ""
-
-msgid "Repeat times:"
-msgstr "Kartojimų skaičius:"
 
 #, c-format
 msgid "Confirm save file: \"%s\""
@@ -1160,13 +1119,6 @@ msgstr "Kurį meniu failą norite redaguoti?"
 
 msgid "&Local"
 msgstr "&Vietinį"
-
-msgid "Replace"
-msgstr "Pakeisti"
-
-#, c-format
-msgid "%ld replacements made"
-msgstr ""
 
 msgid "[NoName]"
 msgstr ""
@@ -1276,35 +1228,35 @@ msgstr ""
 "Teksto pakeitimai neišsaugoti faile.\n"
 "Tęsimas atšauks šiuos pakeitimus."
 
-msgid "In se&lection"
-msgstr ""
-
-msgid "&Find all"
-msgstr "&Rasti viską"
-
-msgid "Enter replacement string:"
-msgstr ""
-
-msgid "Replace with:"
-msgstr "Pakeisti:"
-
-msgid "&Replace"
-msgstr "Pa&keisti"
-
-msgid "A&ll"
-msgstr "&Visi"
-
-msgid "&Skip"
-msgstr "Pralei&sti"
-
-msgid "Confirm replace"
-msgstr "Patvirtinti pakeitimą"
-
 msgid "Cancel"
 msgstr "Atsisakyti"
 
+msgid "Collect completions"
+msgstr ""
+
 msgid "NoName"
 msgstr ""
+
+msgid "Save macro"
+msgstr ""
+
+msgid "Press the macro's new hotkey:"
+msgstr ""
+
+msgid "Delete macro"
+msgstr "Šalinti macro"
+
+msgid "Press macro hotkey:"
+msgstr ""
+
+msgid "Macro not deleted"
+msgstr "Macro nepašalinta"
+
+msgid "Repeat last commands"
+msgstr ""
+
+msgid "Repeat times:"
+msgstr "Kartojimų skaičius:"
 
 msgid "&Open file..."
 msgstr "At&verti failą..."
@@ -1594,6 +1546,45 @@ msgstr ""
 msgid "Editor options"
 msgstr "Redaktoriaus parinktys"
 
+msgid "In se&lection"
+msgstr ""
+
+msgid "&Find all"
+msgstr "&Rasti viską"
+
+msgid "Enter replacement string:"
+msgstr ""
+
+msgid "Replace"
+msgstr "Pakeisti"
+
+msgid "Replace with:"
+msgstr "Pakeisti:"
+
+msgid "&Replace"
+msgstr "Pa&keisti"
+
+msgid "A&ll"
+msgstr "&Visi"
+
+msgid "&Skip"
+msgstr "Pralei&sti"
+
+msgid "Confirm replace"
+msgstr "Patvirtinti pakeitimą"
+
+#, c-format
+msgid "Searching %s: %3d%%"
+msgstr ""
+
+#, c-format
+msgid "Searching %s"
+msgstr "Ieškoma %s"
+
+#, c-format
+msgid "%ld replacements made"
+msgstr ""
+
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
@@ -1720,6 +1711,15 @@ msgstr "Pasiūlyti"
 
 msgid "Select language"
 msgstr "Pasirinkti kalbą"
+
+msgid "Choose syntax highlighting"
+msgstr "Pasirinkti sintaksės žymėjimą"
+
+msgid "< Auto >"
+msgstr "< Auto >"
+
+msgid "< Reload Current Syntax >"
+msgstr "< Įkelti esamą sintaksę iš naujo >"
 
 msgid "Load syntax file"
 msgstr "Įkelti sintaksės failą"

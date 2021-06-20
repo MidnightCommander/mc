@@ -394,7 +394,7 @@ chattr_toggle_select (const WChattrBoxes * cb, int Id)
     Widget *w;
 
     /* find checkbox */
-    w = WIDGET (g_list_nth_data (GROUP (cb)->widgets, Id - cb->top));
+    w = WIDGET (g_list_nth_data (CONST_GROUP (cb)->widgets, Id - cb->top));
 
     check_attr[Id].selected = !check_attr[Id].selected;
 
@@ -511,7 +511,7 @@ checkboxes_save_state (const WChattrBoxes * cb)
     int i;
     GList *l;
 
-    for (i = cb->top, l = GROUP (cb)->widgets; l != NULL; i++, l = g_list_next (l))
+    for (i = cb->top, l = CONST_GROUP (cb)->widgets; l != NULL; i++, l = g_list_next (l))
     {
         int m;
 
@@ -880,16 +880,36 @@ chattrboxes_new (int y, int x, int height, int width)
 {
     WChattrBoxes *cb;
     Widget *w;
+    WGroup *cbg;
+    int i;
 
     if (height <= 0)
         height = 1;
 
     cb = g_new0 (WChattrBoxes, 1);
     w = WIDGET (cb);
-    group_init (GROUP (cb), y, x, height, width, chattrboxes_callback, chattrboxes_mouse_callback);
+    cbg = GROUP (cb);
+    group_init (cbg, y, x, height, width, chattrboxes_callback, chattrboxes_mouse_callback);
     w->options |= WOP_SELECTABLE | WOP_WANT_CURSOR;
     w->mouse_handler = chattrboxes_handle_mouse_event;
     w->keymap = chattr_map;
+
+    /* create checkboxes */
+    for (i = 0; i < height; i++)
+    {
+        int m;
+        WCheck *check;
+
+        m = check_attr_mod[i];
+
+        check = check_new (i, 0, check_attr[m].state, NULL);
+        group_add_widget (cbg, check);
+    }
+
+    chattrboxes_rename (cb);
+
+    /* select first checkbox */
+    cbg->current = cbg->widgets;
 
     return cb;
 }
@@ -944,7 +964,7 @@ chattr_init (void)
 static WDialog *
 chattr_dlg_create (WPanel * panel, const char *fname, unsigned long attr)
 {
-    const Widget *mw = CONST_WIDGET (midnight_dlg);
+    Widget *mw = WIDGET (WIDGET (panel)->owner);
     gboolean single_set;
     WDialog *ch_dlg;
     int lines, cols;
@@ -952,7 +972,7 @@ chattr_dlg_create (WPanel * panel, const char *fname, unsigned long attr)
     size_t i;
     int y;
     Widget *dw;
-    WGroup *dg, *cbg;
+    WGroup *dg;
     WChattrBoxes *cb;
     const int cb_scrollbar_width = 1;
 
@@ -996,25 +1016,11 @@ chattr_dlg_create (WPanel * panel, const char *fname, unsigned long attr)
         widget_set_size (dw, dw->y, dw->x, lines, cols + wx * 2);
     }
 
+    checkboxes_lines = MIN (check_attr_mod_num, checkboxes_lines);
     cb = chattrboxes_new (y++, wx, checkboxes_lines, cols);
-    cbg = GROUP (cb);
     group_add_widget_autopos (dg, cb, WPOS_KEEP_TOP | WPOS_KEEP_HORZ, NULL);
 
-    /* create checkboxes */
-    for (i = 0; i < (size_t) check_attr_mod_num && i < (size_t) checkboxes_lines; i++)
-    {
-        int m;
-        WCheck *check;
-
-        m = check_attr_mod[i];
-
-        check = check_new (i, 0, check_attr[m].state, NULL);
-        group_add_widget (cbg, check);
-    }
-
-    chattrboxes_rename (cb);
-
-    y += i - 1;
+    y += checkboxes_lines - 1;
     cols = 0;
 
     for (i = single_set ? (BUTTONS - 2) : 0; i < BUTTONS; i++)
@@ -1057,8 +1063,6 @@ chattr_dlg_create (WPanel * panel, const char *fname, unsigned long attr)
         }
     }
 
-    /* select first checkbox */
-    cbg->current = cbg->widgets;
     widget_select (WIDGET (cb));
 
     return ch_dlg;
@@ -1239,7 +1243,7 @@ chattr_cmd (WPanel * panel)
 
         ch_dlg = chattr_dlg_create (panel, fname->str, flags);
         result = dlg_run (ch_dlg);
-        dlg_destroy (ch_dlg);
+        widget_destroy (WIDGET (ch_dlg));
 
         switch (result)
         {

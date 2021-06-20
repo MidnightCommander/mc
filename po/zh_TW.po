@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-03-14 19:59+0300\n"
+"POT-Creation-Date: 2021-06-20 16:14+0300\n"
 "PO-Revision-Date: 2020-12-31 14:19+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/mc/mc/language/"
@@ -948,15 +948,6 @@ msgstr ""
 msgid "Two files are needed to compare"
 msgstr ""
 
-msgid "Choose syntax highlighting"
-msgstr ""
-
-msgid "< Auto >"
-msgstr "< 自動 >"
-
-msgid "< Reload Current Syntax >"
-msgstr "< 重新讀取當前語法 >"
-
 #, c-format
 msgid "Loading: %3d%%"
 msgstr "讀取中: %3d%%"
@@ -999,14 +990,6 @@ msgstr ""
 #, c-format
 msgid "Cannot open pipe for reading: %s"
 msgstr ""
-
-#, c-format
-msgid "Searching %s: %3d%%"
-msgstr "搜尋 %s: %3d%%"
-
-#, c-format
-msgid "Searching %s"
-msgstr "搜尋 %s"
 
 msgid "File has hard-links. Detach before saving?"
 msgstr ""
@@ -1053,9 +1036,6 @@ msgstr "切換行尾到:"
 msgid "Save As"
 msgstr "儲存為"
 
-msgid "Collect completions"
-msgstr ""
-
 msgid "&Quick save"
 msgstr "快速儲存"
 
@@ -1085,27 +1065,6 @@ msgstr "覆寫"
 
 msgid "Cannot save file"
 msgstr "無法儲存檔案"
-
-msgid "Delete macro"
-msgstr "刪除巨集"
-
-msgid "Press macro hotkey:"
-msgstr ""
-
-msgid "Macro not deleted"
-msgstr "巨集未被刪除"
-
-msgid "Save macro"
-msgstr ""
-
-msgid "Press the macro's new hotkey:"
-msgstr ""
-
-msgid "Repeat last commands"
-msgstr "重複最後的指令"
-
-msgid "Repeat times:"
-msgstr "重複次數:"
 
 #, c-format
 msgid "Confirm save file: \"%s\""
@@ -1140,13 +1099,6 @@ msgstr ""
 
 msgid "&Local"
 msgstr "本地"
-
-msgid "Replace"
-msgstr ""
-
-#, c-format
-msgid "%ld replacements made"
-msgstr ""
 
 msgid "[NoName]"
 msgstr "[無名稱]"
@@ -1250,35 +1202,35 @@ msgid ""
 "Continue discards these changes."
 msgstr ""
 
-msgid "In se&lection"
-msgstr "在選擇中"
-
-msgid "&Find all"
-msgstr "尋找全部"
-
-msgid "Enter replacement string:"
-msgstr ""
-
-msgid "Replace with:"
-msgstr "取代:"
-
-msgid "&Replace"
-msgstr "替換"
-
-msgid "A&ll"
-msgstr "全部"
-
-msgid "&Skip"
-msgstr "跳過"
-
-msgid "Confirm replace"
-msgstr "確認取代"
-
 msgid "Cancel"
 msgstr "取消"
 
+msgid "Collect completions"
+msgstr ""
+
 msgid "NoName"
 msgstr "無名稱"
+
+msgid "Save macro"
+msgstr ""
+
+msgid "Press the macro's new hotkey:"
+msgstr ""
+
+msgid "Delete macro"
+msgstr "刪除巨集"
+
+msgid "Press macro hotkey:"
+msgstr ""
+
+msgid "Macro not deleted"
+msgstr "巨集未被刪除"
+
+msgid "Repeat last commands"
+msgstr "重複最後的指令"
+
+msgid "Repeat times:"
+msgstr "重複次數:"
 
 msgid "&Open file..."
 msgstr "開啟檔案"
@@ -1568,6 +1520,45 @@ msgstr "文字換行行高:"
 msgid "Editor options"
 msgstr "編輯器選項"
 
+msgid "In se&lection"
+msgstr "在選擇中"
+
+msgid "&Find all"
+msgstr "尋找全部"
+
+msgid "Enter replacement string:"
+msgstr ""
+
+msgid "Replace"
+msgstr ""
+
+msgid "Replace with:"
+msgstr "取代:"
+
+msgid "&Replace"
+msgstr "替換"
+
+msgid "A&ll"
+msgstr "全部"
+
+msgid "&Skip"
+msgstr "跳過"
+
+msgid "Confirm replace"
+msgstr "確認取代"
+
+#, c-format
+msgid "Searching %s: %3d%%"
+msgstr "搜尋 %s: %3d%%"
+
+#, c-format
+msgid "Searching %s"
+msgstr "搜尋 %s"
+
+#, c-format
+msgid "%ld replacements made"
+msgstr ""
+
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
@@ -1693,6 +1684,15 @@ msgstr ""
 
 msgid "Select language"
 msgstr "選取語言"
+
+msgid "Choose syntax highlighting"
+msgstr ""
+
+msgid "< Auto >"
+msgstr "< 自動 >"
+
+msgid "< Reload Current Syntax >"
+msgstr "< 重新讀取當前語法 >"
 
 msgid "Load syntax file"
 msgstr ""

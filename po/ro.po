@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-03-14 19:59+0300\n"
+"POT-Creation-Date: 2021-06-20 16:14+0300\n"
 "PO-Revision-Date: 2020-12-31 14:19+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Romanian (http://www.transifex.com/mc/mc/language/ro/)\n"
@@ -1005,15 +1005,6 @@ msgstr "Vizualizator diff: mod invalid"
 msgid "Two files are needed to compare"
 msgstr "Sunt necesare două fișiere pentru comparare"
 
-msgid "Choose syntax highlighting"
-msgstr "Alege sintaxa de evidenţiere"
-
-msgid "< Auto >"
-msgstr "< Auto >"
-
-msgid "< Reload Current Syntax >"
-msgstr "< Reîncarcă sintaxa curentă >"
-
 #, c-format
 msgid "Loading: %3d%%"
 msgstr "Se încarcă: %3d%%"
@@ -1058,14 +1049,6 @@ msgstr "Eroare la citirea din pipe: %s"
 #, c-format
 msgid "Cannot open pipe for reading: %s"
 msgstr "Nu se poate deschide pipe pentru citire: %s"
-
-#, c-format
-msgid "Searching %s: %3d%%"
-msgstr "Caut %s: %3d%%"
-
-#, c-format
-msgid "Searching %s"
-msgstr "Caut %s"
 
 msgid "File has hard-links. Detach before saving?"
 msgstr "Fișierul are hard-links. Desprinzi înainte de a salva?"
@@ -1112,9 +1095,6 @@ msgstr "Schimbă finalul de linie în:"
 msgid "Save As"
 msgstr "Salvează ca"
 
-msgid "Collect completions"
-msgstr "Colecționează completări"
-
 msgid "&Quick save"
 msgstr "Salvare &rapidă"
 
@@ -1144,27 +1124,6 @@ msgstr "S&uprascrie"
 
 msgid "Cannot save file"
 msgstr "Nu se poate salva fișierul"
-
-msgid "Delete macro"
-msgstr "Șterge macro"
-
-msgid "Press macro hotkey:"
-msgstr "Apasă combinația de taste pentru macro:"
-
-msgid "Macro not deleted"
-msgstr "Macro nu a fost șters"
-
-msgid "Save macro"
-msgstr "Salvează macro"
-
-msgid "Press the macro's new hotkey:"
-msgstr "Apasă noua combinație de taste pentru macro:"
-
-msgid "Repeat last commands"
-msgstr "Repetă ultimele comenzi"
-
-msgid "Repeat times:"
-msgstr "Număr de repetări:"
 
 #, c-format
 msgid "Confirm save file: \"%s\""
@@ -1199,13 +1158,6 @@ msgstr "Ce fișier de meniu dorești să editezi?"
 
 msgid "&Local"
 msgstr "&Local"
-
-msgid "Replace"
-msgstr "Înlocuiește"
-
-#, c-format
-msgid "%ld replacements made"
-msgstr "%ld înlocuiri efectuate"
 
 msgid "[NoName]"
 msgstr "[FărăNume]"
@@ -1316,35 +1268,35 @@ msgstr ""
 "Textul curent a fost modificat fără a se salva fișierul.\n"
 "Dacă se continuă schimbările vor fi pierdute."
 
-msgid "In se&lection"
-msgstr "În se&lecție"
-
-msgid "&Find all"
-msgstr "&Găsește tot"
-
-msgid "Enter replacement string:"
-msgstr "Introdu șirul de înlocuire:"
-
-msgid "Replace with:"
-msgstr "Înlocuiește cu:"
-
-msgid "&Replace"
-msgstr "&Înlocuiește"
-
-msgid "A&ll"
-msgstr "Toa&te"
-
-msgid "&Skip"
-msgstr "&Sar"
-
-msgid "Confirm replace"
-msgstr "Confirmă înlocuirea"
-
 msgid "Cancel"
 msgstr "Renunță"
 
+msgid "Collect completions"
+msgstr "Colecționează completări"
+
 msgid "NoName"
 msgstr "FărăNume"
+
+msgid "Save macro"
+msgstr "Salvează macro"
+
+msgid "Press the macro's new hotkey:"
+msgstr "Apasă noua combinație de taste pentru macro:"
+
+msgid "Delete macro"
+msgstr "Șterge macro"
+
+msgid "Press macro hotkey:"
+msgstr "Apasă combinația de taste pentru macro:"
+
+msgid "Macro not deleted"
+msgstr "Macro nu a fost șters"
+
+msgid "Repeat last commands"
+msgstr "Repetă ultimele comenzi"
+
+msgid "Repeat times:"
+msgstr "Număr de repetări:"
 
 msgid "&Open file..."
 msgstr "D&eschide fișier..."
@@ -1634,6 +1586,45 @@ msgstr "Lungime linie pentru curgere cuvinte:"
 msgid "Editor options"
 msgstr "Opțiuni editor"
 
+msgid "In se&lection"
+msgstr "În se&lecție"
+
+msgid "&Find all"
+msgstr "&Găsește tot"
+
+msgid "Enter replacement string:"
+msgstr "Introdu șirul de înlocuire:"
+
+msgid "Replace"
+msgstr "Înlocuiește"
+
+msgid "Replace with:"
+msgstr "Înlocuiește cu:"
+
+msgid "&Replace"
+msgstr "&Înlocuiește"
+
+msgid "A&ll"
+msgstr "Toa&te"
+
+msgid "&Skip"
+msgstr "&Sar"
+
+msgid "Confirm replace"
+msgstr "Confirmă înlocuirea"
+
+#, c-format
+msgid "Searching %s: %3d%%"
+msgstr "Caut %s: %3d%%"
+
+#, c-format
+msgid "Searching %s"
+msgstr "Caut %s"
+
+#, c-format
+msgid "%ld replacements made"
+msgstr "%ld înlocuiri efectuate"
+
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
@@ -1760,6 +1751,15 @@ msgstr "Sugerează"
 
 msgid "Select language"
 msgstr "Selectează limba"
+
+msgid "Choose syntax highlighting"
+msgstr "Alege sintaxa de evidenţiere"
+
+msgid "< Auto >"
+msgstr "< Auto >"
+
+msgid "< Reload Current Syntax >"
+msgstr "< Reîncarcă sintaxa curentă >"
 
 msgid "Load syntax file"
 msgstr "Încarcă fișier de sintaxă"

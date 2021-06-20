@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-03-14 19:59+0300\n"
+"POT-Creation-Date: 2021-06-20 16:14+0300\n"
 "PO-Revision-Date: 2020-12-31 14:19+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Swedish (http://www.transifex.com/mc/mc/language/sv/)\n"
@@ -1005,15 +1005,6 @@ msgstr "Diff-visare: otillåtet läge"
 msgid "Two files are needed to compare"
 msgstr "Två filer behövs för att jämföra"
 
-msgid "Choose syntax highlighting"
-msgstr "Välj syntaxmarkering"
-
-msgid "< Auto >"
-msgstr "< Auto >"
-
-msgid "< Reload Current Syntax >"
-msgstr "< Ladda om nuvarande >"
-
 #, c-format
 msgid "Loading: %3d%%"
 msgstr "Laddar %3d%%"
@@ -1058,14 +1049,6 @@ msgstr "Fel vid lädning från tunnel: %s"
 #, c-format
 msgid "Cannot open pipe for reading: %s"
 msgstr "Tunnel kunde inte öppnas för läsning: %s"
-
-#, c-format
-msgid "Searching %s: %3d%%"
-msgstr "Söker %s: %3d%%"
-
-#, c-format
-msgid "Searching %s"
-msgstr "Söker efter %s"
 
 msgid "File has hard-links. Detach before saving?"
 msgstr "Filen har hårda länkar. Koppla loss innan sparning?"
@@ -1112,9 +1095,6 @@ msgstr "Ändra radbrytningar till:"
 msgid "Save As"
 msgstr "Spara som"
 
-msgid "Collect completions"
-msgstr "Samlar in kompletteringar"
-
 msgid "&Quick save"
 msgstr "S&nabbspara"
 
@@ -1144,27 +1124,6 @@ msgstr "&O Skriv över"
 
 msgid "Cannot save file"
 msgstr "Kan inte spara fil"
-
-msgid "Delete macro"
-msgstr "Ta bort makro"
-
-msgid "Press macro hotkey:"
-msgstr "Tryck makro-snabbtangent:"
-
-msgid "Macro not deleted"
-msgstr "Makro togs inte bort"
-
-msgid "Save macro"
-msgstr "Spara makro"
-
-msgid "Press the macro's new hotkey:"
-msgstr "Tryck på ny snabbtangent för makro:"
-
-msgid "Repeat last commands"
-msgstr "Repetera senaste kommandon"
-
-msgid "Repeat times:"
-msgstr "Repetitioner:"
 
 #, c-format
 msgid "Confirm save file: \"%s\""
@@ -1199,13 +1158,6 @@ msgstr "Vilken menyfil vill du editera?"
 
 msgid "&Local"
 msgstr "&Lokal"
-
-msgid "Replace"
-msgstr "Ersätt"
-
-#, c-format
-msgid "%ld replacements made"
-msgstr "%ld ersättningar gjordes"
 
 msgid "[NoName]"
 msgstr "[Namnlös]"
@@ -1315,35 +1267,35 @@ msgstr ""
 "Nuvarande text har modifierats utan att sparas.\n"
 "Fortsätt kastar bort dessa ändringar."
 
-msgid "In se&lection"
-msgstr "&I markerat"
-
-msgid "&Find all"
-msgstr "Hi&tta alla"
-
-msgid "Enter replacement string:"
-msgstr "Ange ersättningssträng:"
-
-msgid "Replace with:"
-msgstr "Ersätt med:"
-
-msgid "&Replace"
-msgstr "&Ersätt"
-
-msgid "A&ll"
-msgstr "A&lla"
-
-msgid "&Skip"
-msgstr "&Hoppa över"
-
-msgid "Confirm replace"
-msgstr "Bekräfta ersätt"
-
 msgid "Cancel"
 msgstr "Avbryt"
 
+msgid "Collect completions"
+msgstr "Samlar in kompletteringar"
+
 msgid "NoName"
 msgstr "Namnlös"
+
+msgid "Save macro"
+msgstr "Spara makro"
+
+msgid "Press the macro's new hotkey:"
+msgstr "Tryck på ny snabbtangent för makro:"
+
+msgid "Delete macro"
+msgstr "Ta bort makro"
+
+msgid "Press macro hotkey:"
+msgstr "Tryck makro-snabbtangent:"
+
+msgid "Macro not deleted"
+msgstr "Makro togs inte bort"
+
+msgid "Repeat last commands"
+msgstr "Repetera senaste kommandon"
+
+msgid "Repeat times:"
+msgstr "Repetitioner:"
 
 msgid "&Open file..."
 msgstr "&Öppna fil..."
@@ -1633,6 +1585,45 @@ msgstr "Radbrytning vid längd:"
 msgid "Editor options"
 msgstr "Editoralternativ"
 
+msgid "In se&lection"
+msgstr "&I markerat"
+
+msgid "&Find all"
+msgstr "Hi&tta alla"
+
+msgid "Enter replacement string:"
+msgstr "Ange ersättningssträng:"
+
+msgid "Replace"
+msgstr "Ersätt"
+
+msgid "Replace with:"
+msgstr "Ersätt med:"
+
+msgid "&Replace"
+msgstr "&Ersätt"
+
+msgid "A&ll"
+msgstr "A&lla"
+
+msgid "&Skip"
+msgstr "&Hoppa över"
+
+msgid "Confirm replace"
+msgstr "Bekräfta ersätt"
+
+#, c-format
+msgid "Searching %s: %3d%%"
+msgstr "Söker %s: %3d%%"
+
+#, c-format
+msgid "Searching %s"
+msgstr "Söker efter %s"
+
+#, c-format
+msgid "%ld replacements made"
+msgstr "%ld ersättningar gjordes"
+
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
@@ -1759,6 +1750,15 @@ msgstr "Föreslå"
 
 msgid "Select language"
 msgstr "Välj språk"
+
+msgid "Choose syntax highlighting"
+msgstr "Välj syntaxmarkering"
+
+msgid "< Auto >"
+msgstr "< Auto >"
+
+msgid "< Reload Current Syntax >"
+msgstr "< Ladda om nuvarande >"
 
 msgid "Load syntax file"
 msgstr "Ladda syntax-fil"

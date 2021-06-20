@@ -8,15 +8,16 @@ endif
 
 libedit_la_SOURCES = \
 	bookmark.c \
-	choosesyntax.c \
 	edit-impl.h \
 	edit.c edit.h \
+	editcomplete.c editcomplete.h \
 	editbuffer.c editbuffer.h \
 	editcmd.c \
-	editcmd_dialogs.c editcmd_dialogs.h \
 	editdraw.c \
+	editmacros.c editmacros.h \
 	editmenu.c \
 	editoptions.c \
+	editsearch.c editsearch.h \
 	editwidget.c editwidget.h \
 	etags.c etags.h \
 	format.c \
@@ -25,8 +26,7 @@ libedit_la_SOURCES = \
 if USE_ASPELL
 if HAVE_GMODULE
 libedit_la_SOURCES += \
-	spell.c spell.h \
-	spell_dialogs.c spell_dialogs.h
+	spell.c spell.h
 endif
 endif
 

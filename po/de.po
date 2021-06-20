@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-03-14 19:59+0300\n"
+"POT-Creation-Date: 2021-06-20 16:14+0300\n"
 "PO-Revision-Date: 2021-01-01 17:46+0000\n"
 "Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
 "Language-Team: German (http://www.transifex.com/mc/mc/language/de/)\n"
@@ -1021,15 +1021,6 @@ msgstr "Diff-Anzeige: ungültiger Modus"
 msgid "Two files are needed to compare"
 msgstr "Zum Vergleich werden zwei Dateien benötigt"
 
-msgid "Choose syntax highlighting"
-msgstr "Syntaxhervorhebung auswählen"
-
-msgid "< Auto >"
-msgstr "< Automatisch >"
-
-msgid "< Reload Current Syntax >"
-msgstr "< Aktuelle Hervorhebung neu laden >"
-
 #, c-format
 msgid "Loading: %3d%%"
 msgstr "Ladevorgang: %3d%%"
@@ -1074,14 +1065,6 @@ msgstr "Fehler beim Lesen aus einer Pipe: %s"
 #, c-format
 msgid "Cannot open pipe for reading: %s"
 msgstr "Kann Pipe zum Lesen nicht öffnen: %s"
-
-#, c-format
-msgid "Searching %s: %3d%%"
-msgstr "Suchvorgang %s: %3d%%"
-
-#, c-format
-msgid "Searching %s"
-msgstr "Suche %s"
 
 msgid "File has hard-links. Detach before saving?"
 msgstr ""
@@ -1129,9 +1112,6 @@ msgstr "Zeilenumbrüche ändern in:"
 msgid "Save As"
 msgstr "Speichern unter"
 
-msgid "Collect completions"
-msgstr "Fertigstellungen zusammentragen"
-
 msgid "&Quick save"
 msgstr "&Schnelles Speichern "
 
@@ -1161,27 +1141,6 @@ msgstr "Überschreiben"
 
 msgid "Cannot save file"
 msgstr "Kann Datei nicht speichern"
-
-msgid "Delete macro"
-msgstr "Makro löschen"
-
-msgid "Press macro hotkey:"
-msgstr "Drücken Sie einen Makro-Hotkey:"
-
-msgid "Macro not deleted"
-msgstr "Makro nicht gelöscht"
-
-msgid "Save macro"
-msgstr "Makro speichern"
-
-msgid "Press the macro's new hotkey:"
-msgstr "Den neuen Hotkey des Makros drücken:"
-
-msgid "Repeat last commands"
-msgstr "Letzten Befehl wiederholen"
-
-msgid "Repeat times:"
-msgstr "Anzahl Wiederholungen:"
 
 #, c-format
 msgid "Confirm save file: \"%s\""
@@ -1216,13 +1175,6 @@ msgstr "Welche Menüdatei möchten Sie bearbeiten?"
 
 msgid "&Local"
 msgstr "&Lokal"
-
-msgid "Replace"
-msgstr "Ersetzen"
-
-#, c-format
-msgid "%ld replacements made"
-msgstr "%ld Ersetzung(en) durchgeführt."
 
 msgid "[NoName]"
 msgstr "[KeinName]"
@@ -1332,35 +1284,35 @@ msgstr ""
 "Dieser Text wurde ohne zu speichern geändert.\n"
 "Wenn Sie fortfahren, werden diese Änderungen verworfen."
 
-msgid "In se&lection"
-msgstr "In der Auswah&l"
-
-msgid "&Find all"
-msgstr "Alles &finden"
-
-msgid "Enter replacement string:"
-msgstr "Ersatzstring eingeben:"
-
-msgid "Replace with:"
-msgstr "Ersetzen mit:"
-
-msgid "&Replace"
-msgstr "E&rsetzen"
-
-msgid "A&ll"
-msgstr "A&lle"
-
-msgid "&Skip"
-msgstr "Über&springen"
-
-msgid "Confirm replace"
-msgstr "Ersetzen bestätigen"
-
 msgid "Cancel"
 msgstr "Abbrechen"
 
+msgid "Collect completions"
+msgstr "Fertigstellungen zusammentragen"
+
 msgid "NoName"
 msgstr "NoName"
+
+msgid "Save macro"
+msgstr "Makro speichern"
+
+msgid "Press the macro's new hotkey:"
+msgstr "Den neuen Hotkey des Makros drücken:"
+
+msgid "Delete macro"
+msgstr "Makro löschen"
+
+msgid "Press macro hotkey:"
+msgstr "Drücken Sie einen Makro-Hotkey:"
+
+msgid "Macro not deleted"
+msgstr "Makro nicht gelöscht"
+
+msgid "Repeat last commands"
+msgstr "Letzten Befehl wiederholen"
+
+msgid "Repeat times:"
+msgstr "Anzahl Wiederholungen:"
 
 msgid "&Open file..."
 msgstr "Datei ö&ffnen..."
@@ -1650,6 +1602,45 @@ msgstr "Umbruch-Zeilenlänge:"
 msgid "Editor options"
 msgstr "Editoroptionen"
 
+msgid "In se&lection"
+msgstr "In der Auswah&l"
+
+msgid "&Find all"
+msgstr "Alles &finden"
+
+msgid "Enter replacement string:"
+msgstr "Ersatzstring eingeben:"
+
+msgid "Replace"
+msgstr "Ersetzen"
+
+msgid "Replace with:"
+msgstr "Ersetzen mit:"
+
+msgid "&Replace"
+msgstr "E&rsetzen"
+
+msgid "A&ll"
+msgstr "A&lle"
+
+msgid "&Skip"
+msgstr "Über&springen"
+
+msgid "Confirm replace"
+msgstr "Ersetzen bestätigen"
+
+#, c-format
+msgid "Searching %s: %3d%%"
+msgstr "Suchvorgang %s: %3d%%"
+
+#, c-format
+msgid "Searching %s"
+msgstr "Suche %s"
+
+#, c-format
+msgid "%ld replacements made"
+msgstr "%ld Ersetzung(en) durchgeführt."
+
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
@@ -1777,6 +1768,15 @@ msgstr "Vorschlag"
 
 msgid "Select language"
 msgstr "Sprache auswählen"
+
+msgid "Choose syntax highlighting"
+msgstr "Syntaxhervorhebung auswählen"
+
+msgid "< Auto >"
+msgstr "< Automatisch >"
+
+msgid "< Reload Current Syntax >"
+msgstr "< Aktuelle Hervorhebung neu laden >"
 
 msgid "Load syntax file"
 msgstr "Syntaxdatei laden"

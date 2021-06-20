@@ -82,14 +82,13 @@ sftpfs_opendir (const vfs_path_t * vpath, GError ** mcerror)
 
     while (TRUE)
     {
-        const char *fixfname;
-        unsigned int fixfname_len = 0;
+        const GString *fixfname;
         int libssh_errno;
 
-        fixfname = sftpfs_fix_filename (path_element->path, &fixfname_len);
+        fixfname = sftpfs_fix_filename (path_element->path);
 
         handle =
-            libssh2_sftp_open_ex (sftpfs_super->sftp_session, fixfname, fixfname_len, 0, 0,
+            libssh2_sftp_open_ex (sftpfs_super->sftp_session, fixfname->str, fixfname->len, 0, 0,
                                   LIBSSH2_SFTP_OPENDIR);
         if (handle != NULL)
             break;
@@ -195,12 +194,12 @@ sftpfs_mkdir (const vfs_path_t * vpath, mode_t mode, GError ** mcerror)
 
     do
     {
-        const char *fixfname;
-        unsigned int fixfname_len = 0;
+        const GString *fixfname;
 
-        fixfname = sftpfs_fix_filename (path_element->path, &fixfname_len);
+        fixfname = sftpfs_fix_filename (path_element->path);
 
-        res = libssh2_sftp_mkdir_ex (sftpfs_super->sftp_session, fixfname, fixfname_len, mode);
+        res =
+            libssh2_sftp_mkdir_ex (sftpfs_super->sftp_session, fixfname->str, fixfname->len, mode);
         if (res >= 0)
             break;
 
@@ -245,12 +244,11 @@ sftpfs_rmdir (const vfs_path_t * vpath, GError ** mcerror)
 
     do
     {
-        const char *fixfname;
-        unsigned int fixfname_len = 0;
+        const GString *fixfname;
 
-        fixfname = sftpfs_fix_filename (path_element->path, &fixfname_len);
+        fixfname = sftpfs_fix_filename (path_element->path);
 
-        res = libssh2_sftp_rmdir_ex (sftpfs_super->sftp_session, fixfname, fixfname_len);
+        res = libssh2_sftp_rmdir_ex (sftpfs_super->sftp_session, fixfname->str, fixfname->len);
         if (res >= 0)
             break;
 
