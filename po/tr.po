@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-03-14 19:59+0300\n"
+"POT-Creation-Date: 2021-06-20 16:14+0300\n"
 "PO-Revision-Date: 2020-12-31 14:19+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Turkish (http://www.transifex.com/mc/mc/language/tr/)\n"
@@ -994,15 +994,6 @@ msgstr "Fark görüntüleyici: geçersiz kip"
 msgid "Two files are needed to compare"
 msgstr "İki dosya karşılaştırma gerektiriyor"
 
-msgid "Choose syntax highlighting"
-msgstr "Sözdizimi aydınlatma seç"
-
-msgid "< Auto >"
-msgstr "< Otomatik >"
-
-msgid "< Reload Current Syntax >"
-msgstr "< Mevcut Sözdizimini Yükle >"
-
 #, c-format
 msgid "Loading: %3d%%"
 msgstr "Yükleniyor: %3d%%"
@@ -1047,14 +1038,6 @@ msgstr "Borudan okuma hatası: %s"
 #, c-format
 msgid "Cannot open pipe for reading: %s"
 msgstr "Boru okumak için açılamıyor: %s"
-
-#, c-format
-msgid "Searching %s: %3d%%"
-msgstr "Aranıyor %s: %3d%%"
-
-#, c-format
-msgid "Searching %s"
-msgstr "%s aranıyor"
 
 msgid "File has hard-links. Detach before saving?"
 msgstr "Dosyanın sabit bağları var. Kaydetmeden önce ayrılsın mı?"
@@ -1101,9 +1084,6 @@ msgstr "Satır sonu şunla değiştiriliyor:"
 msgid "Save As"
 msgstr "Farklı kaydet..."
 
-msgid "Collect completions"
-msgstr "Tamamlamaları topla"
-
 msgid "&Quick save"
 msgstr "&Çabuk kaydet"
 
@@ -1135,27 +1115,6 @@ msgstr "&Üzerine Yaz"
 
 msgid "Cannot save file"
 msgstr "Dosyayı kaydedilemiyor"
-
-msgid "Delete macro"
-msgstr "Makroyu sil"
-
-msgid "Press macro hotkey:"
-msgstr "Makro tuşuna bas:"
-
-msgid "Macro not deleted"
-msgstr "Makro silinmedi"
-
-msgid "Save macro"
-msgstr "Makroyu kaydet"
-
-msgid "Press the macro's new hotkey:"
-msgstr "Yeni Makro tuşuna basınız:"
-
-msgid "Repeat last commands"
-msgstr "1"
-
-msgid "Repeat times:"
-msgstr "Tekrar sayısı:"
 
 #, c-format
 msgid "Confirm save file: \"%s\""
@@ -1190,13 +1149,6 @@ msgstr "Düzenlenecek menü hangisi?"
 
 msgid "&Local"
 msgstr "Yere&l"
-
-msgid "Replace"
-msgstr "Yerleştir"
-
-#, c-format
-msgid "%ld replacements made"
-msgstr "%ld yerleştirme yapıldı"
 
 msgid "[NoName]"
 msgstr "[İsimsiz]"
@@ -1307,35 +1259,35 @@ msgstr ""
 "Mevcut metin kaydedilmemiş değişiklikler içeriyor\n"
 "Bu değişiklikler yoksayılarak devam edilsin mi?."
 
-msgid "In se&lection"
-msgstr "Seçi&li kısımda"
-
-msgid "&Find all"
-msgstr "&Tümünü bul"
-
-msgid "Enter replacement string:"
-msgstr "Yerleştirilecek metni verin:"
-
-msgid "Replace with:"
-msgstr "Bununla değiştir:"
-
-msgid "&Replace"
-msgstr "&Yerleştir"
-
-msgid "A&ll"
-msgstr "&Tümü"
-
-msgid "&Skip"
-msgstr "&Atla"
-
-msgid "Confirm replace"
-msgstr "Yer değişikliğini onaylat"
-
 msgid "Cancel"
 msgstr "Vazgeç"
 
+msgid "Collect completions"
+msgstr "Tamamlamaları topla"
+
 msgid "NoName"
 msgstr "İsimsiz"
+
+msgid "Save macro"
+msgstr "Makroyu kaydet"
+
+msgid "Press the macro's new hotkey:"
+msgstr "Yeni Makro tuşuna basınız:"
+
+msgid "Delete macro"
+msgstr "Makroyu sil"
+
+msgid "Press macro hotkey:"
+msgstr "Makro tuşuna bas:"
+
+msgid "Macro not deleted"
+msgstr "Makro silinmedi"
+
+msgid "Repeat last commands"
+msgstr "1"
+
+msgid "Repeat times:"
+msgstr "Tekrar sayısı:"
 
 msgid "&Open file..."
 msgstr "D&osyayı aç..."
@@ -1625,6 +1577,45 @@ msgstr "Satır sarmalama uzunluğu:"
 msgid "Editor options"
 msgstr "Düzenleyici seçenekleri"
 
+msgid "In se&lection"
+msgstr "Seçi&li kısımda"
+
+msgid "&Find all"
+msgstr "&Tümünü bul"
+
+msgid "Enter replacement string:"
+msgstr "Yerleştirilecek metni verin:"
+
+msgid "Replace"
+msgstr "Yerleştir"
+
+msgid "Replace with:"
+msgstr "Bununla değiştir:"
+
+msgid "&Replace"
+msgstr "&Yerleştir"
+
+msgid "A&ll"
+msgstr "&Tümü"
+
+msgid "&Skip"
+msgstr "&Atla"
+
+msgid "Confirm replace"
+msgstr "Yer değişikliğini onaylat"
+
+#, c-format
+msgid "Searching %s: %3d%%"
+msgstr "Aranıyor %s: %3d%%"
+
+#, c-format
+msgid "Searching %s"
+msgstr "%s aranıyor"
+
+#, c-format
+msgid "%ld replacements made"
+msgstr "%ld yerleştirme yapıldı"
+
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
@@ -1753,6 +1744,15 @@ msgstr "Öner"
 
 msgid "Select language"
 msgstr "Dil seç"
+
+msgid "Choose syntax highlighting"
+msgstr "Sözdizimi aydınlatma seç"
+
+msgid "< Auto >"
+msgstr "< Otomatik >"
+
+msgid "< Reload Current Syntax >"
+msgstr "< Mevcut Sözdizimini Yükle >"
 
 msgid "Load syntax file"
 msgstr "Sözdizimi dosyasını yükle"

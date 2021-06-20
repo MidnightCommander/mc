@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-03-14 19:59+0300\n"
+"POT-Creation-Date: 2021-06-20 16:14+0300\n"
 "PO-Revision-Date: 2020-12-31 15:56+0000\n"
 "Last-Translator: Keith Bowes <zooplah@gmail.com>\n"
 "Language-Team: Esperanto (http://www.transifex.com/mc/mc/language/eo/)\n"
@@ -1003,15 +1003,6 @@ msgstr "Diff-legilo: neprava reĝimo"
 msgid "Two files are needed to compare"
 msgstr "Du dosieroj estas bezonataj por kompari"
 
-msgid "Choose syntax highlighting"
-msgstr "Elekti sintaksan prilumadon"
-
-msgid "< Auto >"
-msgstr "< Aŭtomata >"
-
-msgid "< Reload Current Syntax >"
-msgstr "< Reŝargi nunan sintakson >"
-
 #, c-format
 msgid "Loading: %3d%%"
 msgstr "Ŝarganta: %3d%%"
@@ -1056,14 +1047,6 @@ msgstr "Eraro dum legi de dukto: %s"
 #, c-format
 msgid "Cannot open pipe for reading: %s"
 msgstr "Ne eblas malfermi dukton por legi: %s"
-
-#, c-format
-msgid "Searching %s: %3d%%"
-msgstr "Serĉanta en %s: %3d%%"
-
-#, c-format
-msgid "Searching %s"
-msgstr "Serĉanta en %s"
 
 msgid "File has hard-links. Detach before saving?"
 msgstr "Dosiero havas rektajn ligilojn. Ĉu elmeti antaŭ ol konservi?"
@@ -1110,9 +1093,6 @@ msgstr "ŝanĝi linirompojn al:"
 msgid "Save As"
 msgstr "Konservi kiel"
 
-msgid "Collect completions"
-msgstr "Kolekti kompletigojn"
-
 msgid "&Quick save"
 msgstr "&Rapida konservado"
 
@@ -1142,27 +1122,6 @@ msgstr "&Anstataŭigi"
 
 msgid "Cannot save file"
 msgstr "Ne eblas konservi dosieron"
-
-msgid "Delete macro"
-msgstr "Forigi makroon"
-
-msgid "Press macro hotkey:"
-msgstr "Premu makroan klavkomandon:"
-
-msgid "Macro not deleted"
-msgstr "Makroo ne forigita"
-
-msgid "Save macro"
-msgstr "Konservi makroon"
-
-msgid "Press the macro's new hotkey:"
-msgstr "Premu la novan klavkomandon de la makroo:"
-
-msgid "Repeat last commands"
-msgstr "Refari lastajn komandojn"
-
-msgid "Repeat times:"
-msgstr "Refari (n-fojojn):"
 
 #, c-format
 msgid "Confirm save file: \"%s\""
@@ -1197,13 +1156,6 @@ msgstr "Kiun menuo-dosiero vi volas redakti?"
 
 msgid "&Local"
 msgstr "&Loka"
-
-msgid "Replace"
-msgstr "Anstataŭigi"
-
-#, c-format
-msgid "%ld replacements made"
-msgstr "%ld anstataŭigoj faritaj"
 
 msgid "[NoName]"
 msgstr "[Sennoma]"
@@ -1314,35 +1266,35 @@ msgstr ""
 "Nuna teksto estis modifita sen dosiera konservado.\n"
 "Daŭri forviŝos tiujn ŝanĝojn."
 
-msgid "In se&lection"
-msgstr "En e&lekto"
-
-msgid "&Find all"
-msgstr "&Trovi ĉion"
-
-msgid "Enter replacement string:"
-msgstr "Enmetu anstataŭigan ĉenon:"
-
-msgid "Replace with:"
-msgstr "Anstataŭigi per:"
-
-msgid "&Replace"
-msgstr "&Anstataŭigi"
-
-msgid "A&ll"
-msgstr "Ĉ&io"
-
-msgid "&Skip"
-msgstr "&Preterlasi"
-
-msgid "Confirm replace"
-msgstr "Konfirmi anstataŭigon"
-
 msgid "Cancel"
 msgstr "Nuligi"
 
+msgid "Collect completions"
+msgstr "Kolekti kompletigojn"
+
 msgid "NoName"
 msgstr "Sennoma"
+
+msgid "Save macro"
+msgstr "Konservi makroon"
+
+msgid "Press the macro's new hotkey:"
+msgstr "Premu la novan klavkomandon de la makroo:"
+
+msgid "Delete macro"
+msgstr "Forigi makroon"
+
+msgid "Press macro hotkey:"
+msgstr "Premu makroan klavkomandon:"
+
+msgid "Macro not deleted"
+msgstr "Makroo ne forigita"
+
+msgid "Repeat last commands"
+msgstr "Refari lastajn komandojn"
+
+msgid "Repeat times:"
+msgstr "Refari (n-fojojn):"
 
 msgid "&Open file..."
 msgstr "&Malfermi dosieron..."
@@ -1632,6 +1584,45 @@ msgstr "Linifalda longo:"
 msgid "Editor options"
 msgstr "Redaktilaj agordaĵoj"
 
+msgid "In se&lection"
+msgstr "En e&lekto"
+
+msgid "&Find all"
+msgstr "&Trovi ĉion"
+
+msgid "Enter replacement string:"
+msgstr "Enmetu anstataŭigan ĉenon:"
+
+msgid "Replace"
+msgstr "Anstataŭigi"
+
+msgid "Replace with:"
+msgstr "Anstataŭigi per:"
+
+msgid "&Replace"
+msgstr "&Anstataŭigi"
+
+msgid "A&ll"
+msgstr "Ĉ&io"
+
+msgid "&Skip"
+msgstr "&Preterlasi"
+
+msgid "Confirm replace"
+msgstr "Konfirmi anstataŭigon"
+
+#, c-format
+msgid "Searching %s: %3d%%"
+msgstr "Serĉanta en %s: %3d%%"
+
+#, c-format
+msgid "Searching %s"
+msgstr "Serĉanta en %s"
+
+#, c-format
+msgid "%ld replacements made"
+msgstr "%ld anstataŭigoj faritaj"
+
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
@@ -1759,6 +1750,15 @@ msgstr "Proponi"
 
 msgid "Select language"
 msgstr "Elekti lingvon"
+
+msgid "Choose syntax highlighting"
+msgstr "Elekti sintaksan prilumadon"
+
+msgid "< Auto >"
+msgstr "< Aŭtomata >"
+
+msgid "< Reload Current Syntax >"
+msgstr "< Reŝargi nunan sintakson >"
 
 msgid "Load syntax file"
 msgstr "Ŝargi sintakso-dosieron"

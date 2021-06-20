@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-06-09 10:59+0200\n"
+"POT-Creation-Date: 2021-06-20 16:14+0300\n"
 "PO-Revision-Date: 2021-06-09 12:49+0200\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/mc/language/"
@@ -484,7 +484,9 @@ msgstr ""
 msgid ""
 "\n"
 "Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
-msgstr "\nImpossibile configurare la fine lettura della pipe SIGWINCH: %s (%d)\n"
+msgstr ""
+"\n"
+"Impossibile configurare la fine lettura della pipe SIGWINCH: %s (%d)\n"
 
 #, c-format
 msgid ""
@@ -1003,15 +1005,6 @@ msgstr "Visualizzatore diff: modalità non valida"
 msgid "Two files are needed to compare"
 msgstr "Per il confronto servono due file"
 
-msgid "Choose syntax highlighting"
-msgstr "Scegli la sintassi evidenziata"
-
-msgid "< Auto >"
-msgstr "< Auto >"
-
-msgid "< Reload Current Syntax >"
-msgstr "< Ricarica la sintassi corrente >"
-
 #, c-format
 msgid "Loading: %3d%%"
 msgstr "Caricamento: %3d%%"
@@ -1056,14 +1049,6 @@ msgstr "Errore leggendo dalla pipe: %s"
 #, c-format
 msgid "Cannot open pipe for reading: %s"
 msgstr "Impossibile aprire la pipe in lettura: %s"
-
-#, c-format
-msgid "Searching %s: %3d%%"
-msgstr "Cercando %s: %3d%%"
-
-#, c-format
-msgid "Searching %s"
-msgstr "Cercando %s"
 
 msgid "File has hard-links. Detach before saving?"
 msgstr "Il file ha collegamenti (link) hard. Scollegarli prima di salvare?"
@@ -1110,9 +1095,6 @@ msgstr "Cambia ritorno a capo a:"
 msgid "Save As"
 msgstr "Salva come"
 
-msgid "Collect completions"
-msgstr "Raccogli completion"
-
 msgid "&Quick save"
 msgstr "Salva &veloce"
 
@@ -1142,27 +1124,6 @@ msgstr "S&ovrascrivi"
 
 msgid "Cannot save file"
 msgstr "Impossibile salvare il file"
-
-msgid "Delete macro"
-msgstr "Elimina macro"
-
-msgid "Press macro hotkey:"
-msgstr "Premere tasto macro:"
-
-msgid "Macro not deleted"
-msgstr "Macro non cancellata"
-
-msgid "Save macro"
-msgstr "Salva macro"
-
-msgid "Press the macro's new hotkey:"
-msgstr "Premi nuovo tasto veloce macro:"
-
-msgid "Repeat last commands"
-msgstr "Ripeti l'ultimo comando"
-
-msgid "Repeat times:"
-msgstr "Numero ripetizioni:"
 
 #, c-format
 msgid "Confirm save file: \"%s\""
@@ -1197,13 +1158,6 @@ msgstr "Quale file menu vuoi modificare?"
 
 msgid "&Local"
 msgstr "&Locale"
-
-msgid "Replace"
-msgstr "Sostituisci"
-
-#, c-format
-msgid "%ld replacements made"
-msgstr "Eseguite %ld sostituzioni"
 
 msgid "[NoName]"
 msgstr "[SenzaNome]"
@@ -1313,35 +1267,35 @@ msgstr ""
 "Il testo corrente è stato modificato senza salvare.\n"
 "Continuando si perdono tutte le modifiche."
 
-msgid "In se&lection"
-msgstr "In se&lezione"
-
-msgid "&Find all"
-msgstr "Tro&va tutti"
-
-msgid "Enter replacement string:"
-msgstr "Inserire stringa di sostituzione:"
-
-msgid "Replace with:"
-msgstr "Sostituisci con:"
-
-msgid "&Replace"
-msgstr "&Rimpiazza"
-
-msgid "A&ll"
-msgstr "&Tutti"
-
-msgid "&Skip"
-msgstr "&Salta"
-
-msgid "Confirm replace"
-msgstr "Conferma sostituzione"
-
 msgid "Cancel"
 msgstr "Annulla"
 
+msgid "Collect completions"
+msgstr "Raccogli completion"
+
 msgid "NoName"
 msgstr "SenzaNome"
+
+msgid "Save macro"
+msgstr "Salva macro"
+
+msgid "Press the macro's new hotkey:"
+msgstr "Premi nuovo tasto veloce macro:"
+
+msgid "Delete macro"
+msgstr "Elimina macro"
+
+msgid "Press macro hotkey:"
+msgstr "Premere tasto macro:"
+
+msgid "Macro not deleted"
+msgstr "Macro non cancellata"
+
+msgid "Repeat last commands"
+msgstr "Ripeti l'ultimo comando"
+
+msgid "Repeat times:"
+msgstr "Numero ripetizioni:"
 
 msgid "&Open file..."
 msgstr "&Apri file..."
@@ -1631,6 +1585,45 @@ msgstr "Auto a capo colonna: "
 msgid "Editor options"
 msgstr "Opzioni editor"
 
+msgid "In se&lection"
+msgstr "In se&lezione"
+
+msgid "&Find all"
+msgstr "Tro&va tutti"
+
+msgid "Enter replacement string:"
+msgstr "Inserire stringa di sostituzione:"
+
+msgid "Replace"
+msgstr "Sostituisci"
+
+msgid "Replace with:"
+msgstr "Sostituisci con:"
+
+msgid "&Replace"
+msgstr "&Rimpiazza"
+
+msgid "A&ll"
+msgstr "&Tutti"
+
+msgid "&Skip"
+msgstr "&Salta"
+
+msgid "Confirm replace"
+msgstr "Conferma sostituzione"
+
+#, c-format
+msgid "Searching %s: %3d%%"
+msgstr "Cercando %s: %3d%%"
+
+#, c-format
+msgid "Searching %s"
+msgstr "Cercando %s"
+
+#, c-format
+msgid "%ld replacements made"
+msgstr "Eseguite %ld sostituzioni"
+
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
@@ -1757,6 +1750,15 @@ msgstr "Suggerimento"
 
 msgid "Select language"
 msgstr "Seleziona la lingua"
+
+msgid "Choose syntax highlighting"
+msgstr "Scegli la sintassi evidenziata"
+
+msgid "< Auto >"
+msgstr "< Auto >"
+
+msgid "< Reload Current Syntax >"
+msgstr "< Ricarica la sintassi corrente >"
 
 msgid "Load syntax file"
 msgstr "Carica file sintassi"

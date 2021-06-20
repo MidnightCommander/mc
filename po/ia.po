@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-03-14 19:59+0300\n"
+"POT-Creation-Date: 2021-06-20 16:14+0300\n"
 "PO-Revision-Date: 2020-12-31 14:19+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Interlingua (http://www.transifex.com/mc/mc/language/ia/)\n"
@@ -947,15 +947,6 @@ msgstr ""
 msgid "Two files are needed to compare"
 msgstr "Duo files es necessari pro comparar"
 
-msgid "Choose syntax highlighting"
-msgstr "Selige coloration syntactic"
-
-msgid "< Auto >"
-msgstr "< Auto >"
-
-msgid "< Reload Current Syntax >"
-msgstr "< Recargar syntaxe actual >"
-
 #, c-format
 msgid "Loading: %3d%%"
 msgstr ""
@@ -998,14 +989,6 @@ msgstr "Error de lectura ab tubo: %s"
 #, c-format
 msgid "Cannot open pipe for reading: %s"
 msgstr "Impossibile aperir tubo pro lectura: %s"
-
-#, c-format
-msgid "Searching %s: %3d%%"
-msgstr ""
-
-#, c-format
-msgid "Searching %s"
-msgstr "Cerca %s"
 
 msgid "File has hard-links. Detach before saving?"
 msgstr "Le file ha ligamines physic. Distachar ante salveguardar?"
@@ -1052,9 +1035,6 @@ msgstr ""
 msgid "Save As"
 msgstr "Salveguardar como"
 
-msgid "Collect completions"
-msgstr ""
-
 msgid "&Quick save"
 msgstr ""
 
@@ -1084,27 +1064,6 @@ msgstr ""
 
 msgid "Cannot save file"
 msgstr "Le file non pote esser salveguardate"
-
-msgid "Delete macro"
-msgstr "Deler le macro"
-
-msgid "Press macro hotkey:"
-msgstr ""
-
-msgid "Macro not deleted"
-msgstr ""
-
-msgid "Save macro"
-msgstr "Salveguardar le macro"
-
-msgid "Press the macro's new hotkey:"
-msgstr ""
-
-msgid "Repeat last commands"
-msgstr ""
-
-msgid "Repeat times:"
-msgstr ""
 
 #, c-format
 msgid "Confirm save file: \"%s\""
@@ -1139,13 +1098,6 @@ msgstr ""
 
 msgid "&Local"
 msgstr "&Local"
-
-msgid "Replace"
-msgstr ""
-
-#, c-format
-msgid "%ld replacements made"
-msgstr ""
 
 msgid "[NoName]"
 msgstr ""
@@ -1249,34 +1201,34 @@ msgid ""
 "Continue discards these changes."
 msgstr ""
 
-msgid "In se&lection"
-msgstr ""
-
-msgid "&Find all"
-msgstr ""
-
-msgid "Enter replacement string:"
-msgstr ""
-
-msgid "Replace with:"
-msgstr ""
-
-msgid "&Replace"
-msgstr ""
-
-msgid "A&ll"
-msgstr ""
-
-msgid "&Skip"
-msgstr "&Saltar"
-
-msgid "Confirm replace"
-msgstr ""
-
 msgid "Cancel"
 msgstr "Cancellar"
 
+msgid "Collect completions"
+msgstr ""
+
 msgid "NoName"
+msgstr ""
+
+msgid "Save macro"
+msgstr "Salveguardar le macro"
+
+msgid "Press the macro's new hotkey:"
+msgstr ""
+
+msgid "Delete macro"
+msgstr "Deler le macro"
+
+msgid "Press macro hotkey:"
+msgstr ""
+
+msgid "Macro not deleted"
+msgstr ""
+
+msgid "Repeat last commands"
+msgstr ""
+
+msgid "Repeat times:"
 msgstr ""
 
 msgid "&Open file..."
@@ -1567,6 +1519,45 @@ msgstr ""
 msgid "Editor options"
 msgstr "Optiones de editor"
 
+msgid "In se&lection"
+msgstr ""
+
+msgid "&Find all"
+msgstr ""
+
+msgid "Enter replacement string:"
+msgstr ""
+
+msgid "Replace"
+msgstr ""
+
+msgid "Replace with:"
+msgstr ""
+
+msgid "&Replace"
+msgstr ""
+
+msgid "A&ll"
+msgstr ""
+
+msgid "&Skip"
+msgstr "&Saltar"
+
+msgid "Confirm replace"
+msgstr ""
+
+#, c-format
+msgid "Searching %s: %3d%%"
+msgstr ""
+
+#, c-format
+msgid "Searching %s"
+msgstr "Cerca %s"
+
+#, c-format
+msgid "%ld replacements made"
+msgstr ""
+
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
@@ -1691,6 +1682,15 @@ msgstr ""
 
 msgid "Select language"
 msgstr ""
+
+msgid "Choose syntax highlighting"
+msgstr "Selige coloration syntactic"
+
+msgid "< Auto >"
+msgstr "< Auto >"
+
+msgid "< Reload Current Syntax >"
+msgstr "< Recargar syntaxe actual >"
 
 msgid "Load syntax file"
 msgstr ""

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-03-14 19:59+0300\n"
+"POT-Creation-Date: 2021-06-20 16:14+0300\n"
 "PO-Revision-Date: 2020-12-31 14:19+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Finnish (http://www.transifex.com/mc/mc/language/fi/)\n"
@@ -938,15 +938,6 @@ msgstr ""
 msgid "Two files are needed to compare"
 msgstr ""
 
-msgid "Choose syntax highlighting"
-msgstr ""
-
-msgid "< Auto >"
-msgstr ""
-
-msgid "< Reload Current Syntax >"
-msgstr ""
-
 #, c-format
 msgid "Loading: %3d%%"
 msgstr "Avataan: %3d%%"
@@ -989,14 +980,6 @@ msgstr ""
 #, c-format
 msgid "Cannot open pipe for reading: %s"
 msgstr ""
-
-#, c-format
-msgid "Searching %s: %3d%%"
-msgstr "Etsitään %s: %3d%%"
-
-#, c-format
-msgid "Searching %s"
-msgstr "Etsitään %s"
 
 msgid "File has hard-links. Detach before saving?"
 msgstr ""
@@ -1043,9 +1026,6 @@ msgstr ""
 msgid "Save As"
 msgstr "Tallenna nimellä"
 
-msgid "Collect completions"
-msgstr ""
-
 msgid "&Quick save"
 msgstr ""
 
@@ -1074,27 +1054,6 @@ msgid "&Overwrite"
 msgstr ""
 
 msgid "Cannot save file"
-msgstr ""
-
-msgid "Delete macro"
-msgstr ""
-
-msgid "Press macro hotkey:"
-msgstr ""
-
-msgid "Macro not deleted"
-msgstr ""
-
-msgid "Save macro"
-msgstr ""
-
-msgid "Press the macro's new hotkey:"
-msgstr ""
-
-msgid "Repeat last commands"
-msgstr ""
-
-msgid "Repeat times:"
 msgstr ""
 
 #, c-format
@@ -1130,13 +1089,6 @@ msgstr ""
 
 msgid "&Local"
 msgstr "&Paikallinen"
-
-msgid "Replace"
-msgstr "Korvaa"
-
-#, c-format
-msgid "%ld replacements made"
-msgstr ""
 
 msgid "[NoName]"
 msgstr ""
@@ -1240,34 +1192,34 @@ msgid ""
 "Continue discards these changes."
 msgstr ""
 
-msgid "In se&lection"
-msgstr ""
-
-msgid "&Find all"
-msgstr "&Etsi kaikki"
-
-msgid "Enter replacement string:"
-msgstr ""
-
-msgid "Replace with:"
-msgstr ""
-
-msgid "&Replace"
-msgstr "&Korvaa"
-
-msgid "A&ll"
-msgstr "K&aikki"
-
-msgid "&Skip"
-msgstr "&Ohita"
-
-msgid "Confirm replace"
-msgstr ""
-
 msgid "Cancel"
 msgstr "Peruuta"
 
+msgid "Collect completions"
+msgstr ""
+
 msgid "NoName"
+msgstr ""
+
+msgid "Save macro"
+msgstr ""
+
+msgid "Press the macro's new hotkey:"
+msgstr ""
+
+msgid "Delete macro"
+msgstr ""
+
+msgid "Press macro hotkey:"
+msgstr ""
+
+msgid "Macro not deleted"
+msgstr ""
+
+msgid "Repeat last commands"
+msgstr ""
+
+msgid "Repeat times:"
 msgstr ""
 
 msgid "&Open file..."
@@ -1558,6 +1510,45 @@ msgstr ""
 msgid "Editor options"
 msgstr ""
 
+msgid "In se&lection"
+msgstr ""
+
+msgid "&Find all"
+msgstr "&Etsi kaikki"
+
+msgid "Enter replacement string:"
+msgstr ""
+
+msgid "Replace"
+msgstr "Korvaa"
+
+msgid "Replace with:"
+msgstr ""
+
+msgid "&Replace"
+msgstr "&Korvaa"
+
+msgid "A&ll"
+msgstr "K&aikki"
+
+msgid "&Skip"
+msgstr "&Ohita"
+
+msgid "Confirm replace"
+msgstr ""
+
+#, c-format
+msgid "Searching %s: %3d%%"
+msgstr "Etsitään %s: %3d%%"
+
+#, c-format
+msgid "Searching %s"
+msgstr "Etsitään %s"
+
+#, c-format
+msgid "%ld replacements made"
+msgstr ""
+
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
@@ -1682,6 +1673,15 @@ msgstr ""
 
 msgid "Select language"
 msgstr "Valitse kieli"
+
+msgid "Choose syntax highlighting"
+msgstr ""
+
+msgid "< Auto >"
+msgstr ""
+
+msgid "< Reload Current Syntax >"
+msgstr ""
 
 msgid "Load syntax file"
 msgstr ""

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-03-14 19:59+0300\n"
+"POT-Creation-Date: 2021-06-20 16:14+0300\n"
 "PO-Revision-Date: 2020-12-31 14:19+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Dutch (http://www.transifex.com/mc/mc/language/nl/)\n"
@@ -1004,15 +1004,6 @@ msgstr "Diff viewer: ongeldige modus"
 msgid "Two files are needed to compare"
 msgstr "Er zijn twee bestanden nodig om te vergelijken"
 
-msgid "Choose syntax highlighting"
-msgstr "Kies syntax highlighting"
-
-msgid "< Auto >"
-msgstr "< Auto >"
-
-msgid "< Reload Current Syntax >"
-msgstr "< Herlaadt Huidige Syntax >"
-
 #, c-format
 msgid "Loading: %3d%%"
 msgstr "Laden: %3d%%"
@@ -1057,14 +1048,6 @@ msgstr "Probleem bij het lezen van pipe: %s "
 #, c-format
 msgid "Cannot open pipe for reading: %s"
 msgstr "Openen van pipe voor lezen mislukt: %s"
-
-#, c-format
-msgid "Searching %s: %3d%%"
-msgstr "Zoeken %s: %3d%%"
-
-#, c-format
-msgid "Searching %s"
-msgstr "Zoeken naar %s"
 
 msgid "File has hard-links. Detach before saving?"
 msgstr "Bestand heeft harde links. Ontkoppelen voor het opslaan? "
@@ -1111,9 +1094,6 @@ msgstr "Verander regeleindes naar:"
 msgid "Save As"
 msgstr "Opslaan als"
 
-msgid "Collect completions"
-msgstr "Verzamelen uitkomsten"
-
 msgid "&Quick save"
 msgstr "&Snel opslaan "
 
@@ -1143,27 +1123,6 @@ msgstr "&Overschrijven"
 
 msgid "Cannot save file"
 msgstr "Kan bestand niet opslaan"
-
-msgid "Delete macro"
-msgstr "Verwijder macro"
-
-msgid "Press macro hotkey:"
-msgstr "Druk op een macro sneltoets"
-
-msgid "Macro not deleted"
-msgstr "Macro niet verwijderd"
-
-msgid "Save macro"
-msgstr "Macro opslaan"
-
-msgid "Press the macro's new hotkey:"
-msgstr "Druk op de nieuwe sneltoets voor de macro:"
-
-msgid "Repeat last commands"
-msgstr "Herhaal laatste opdrachten"
-
-msgid "Repeat times:"
-msgstr "Aantal keren te herhalen:"
 
 #, c-format
 msgid "Confirm save file: \"%s\""
@@ -1198,13 +1157,6 @@ msgstr "Welk menubestand wilt u bewerken?"
 
 msgid "&Local"
 msgstr "&Lokaal"
-
-msgid "Replace"
-msgstr "Vervang"
-
-#, c-format
-msgid "%ld replacements made"
-msgstr "%ld vervangingen doorgevoerd"
 
 msgid "[NoName]"
 msgstr "[NoName]"
@@ -1312,35 +1264,35 @@ msgstr ""
 "Deze tekst is veranderd zonder te zijn opgeslagen.\n"
 "Doorgaan gooit alle wijzigingen weg."
 
-msgid "In se&lection"
-msgstr "In se&lectie"
-
-msgid "&Find all"
-msgstr "&Vind allemaal"
-
-msgid "Enter replacement string:"
-msgstr "Geef de vervangende string:"
-
-msgid "Replace with:"
-msgstr "Vervangen met:"
-
-msgid "&Replace"
-msgstr "Ve&rvangen"
-
-msgid "A&ll"
-msgstr "A&lle"
-
-msgid "&Skip"
-msgstr "Over&slaan"
-
-msgid "Confirm replace"
-msgstr "Vervangen bevestigen"
-
 msgid "Cancel"
 msgstr "Annuleren"
 
+msgid "Collect completions"
+msgstr "Verzamelen uitkomsten"
+
 msgid "NoName"
 msgstr "NoName"
+
+msgid "Save macro"
+msgstr "Macro opslaan"
+
+msgid "Press the macro's new hotkey:"
+msgstr "Druk op de nieuwe sneltoets voor de macro:"
+
+msgid "Delete macro"
+msgstr "Verwijder macro"
+
+msgid "Press macro hotkey:"
+msgstr "Druk op een macro sneltoets"
+
+msgid "Macro not deleted"
+msgstr "Macro niet verwijderd"
+
+msgid "Repeat last commands"
+msgstr "Herhaal laatste opdrachten"
+
+msgid "Repeat times:"
+msgstr "Aantal keren te herhalen:"
 
 msgid "&Open file..."
 msgstr "&Open bestand..."
@@ -1630,6 +1582,45 @@ msgstr "Regellengte voor afbreken:"
 msgid "Editor options"
 msgstr "Editor-opties"
 
+msgid "In se&lection"
+msgstr "In se&lectie"
+
+msgid "&Find all"
+msgstr "&Vind allemaal"
+
+msgid "Enter replacement string:"
+msgstr "Geef de vervangende string:"
+
+msgid "Replace"
+msgstr "Vervang"
+
+msgid "Replace with:"
+msgstr "Vervangen met:"
+
+msgid "&Replace"
+msgstr "Ve&rvangen"
+
+msgid "A&ll"
+msgstr "A&lle"
+
+msgid "&Skip"
+msgstr "Over&slaan"
+
+msgid "Confirm replace"
+msgstr "Vervangen bevestigen"
+
+#, c-format
+msgid "Searching %s: %3d%%"
+msgstr "Zoeken %s: %3d%%"
+
+#, c-format
+msgid "Searching %s"
+msgstr "Zoeken naar %s"
+
+#, c-format
+msgid "%ld replacements made"
+msgstr "%ld vervangingen doorgevoerd"
+
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
@@ -1757,6 +1748,15 @@ msgstr "Hint"
 
 msgid "Select language"
 msgstr "Kies taal"
+
+msgid "Choose syntax highlighting"
+msgstr "Kies syntax highlighting"
+
+msgid "< Auto >"
+msgstr "< Auto >"
+
+msgid "< Reload Current Syntax >"
+msgstr "< Herlaadt Huidige Syntax >"
 
 msgid "Load syntax file"
 msgstr "Laad syntaxbestand"

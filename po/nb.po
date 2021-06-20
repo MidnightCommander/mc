@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-03-14 19:59+0300\n"
+"POT-Creation-Date: 2021-06-20 16:14+0300\n"
 "PO-Revision-Date: 2020-12-31 14:19+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/mc/mc/language/"
@@ -1008,15 +1008,6 @@ msgstr "Diffviser: Ugyldig modus"
 msgid "Two files are needed to compare"
 msgstr "Trenger to filer for å sammenligne"
 
-msgid "Choose syntax highlighting"
-msgstr "Velg syntaksutheving"
-
-msgid "< Auto >"
-msgstr "< Auto >"
-
-msgid "< Reload Current Syntax >"
-msgstr "< Last gjeldende syntaks på nytt >"
-
 #, c-format
 msgid "Loading: %3d%%"
 msgstr "Laster: %3d%%"
@@ -1061,14 +1052,6 @@ msgstr "Klarte ikke lese fra rør: %s"
 #, c-format
 msgid "Cannot open pipe for reading: %s"
 msgstr "Klarte ikke åpne lesetilgang til rør: %s"
-
-#, c-format
-msgid "Searching %s: %3d%%"
-msgstr "Søker %s: %3d%%"
-
-#, c-format
-msgid "Searching %s"
-msgstr "Søker etter %s"
 
 msgid "File has hard-links. Detach before saving?"
 msgstr "Fila har harde lenker. Koble fra før lagring?"
@@ -1115,9 +1098,6 @@ msgstr "Endre linjeskift til:"
 msgid "Save As"
 msgstr "Lagre som"
 
-msgid "Collect completions"
-msgstr "Samle fullføringer"
-
 msgid "&Quick save"
 msgstr "&Rask lagring"
 
@@ -1147,27 +1127,6 @@ msgstr "&Overskriv"
 
 msgid "Cannot save file"
 msgstr "Klarte ikke lagre fil"
-
-msgid "Delete macro"
-msgstr "Slett makro"
-
-msgid "Press macro hotkey:"
-msgstr "Trykk på makroens hurtigtast:"
-
-msgid "Macro not deleted"
-msgstr "Slettet ikke makro"
-
-msgid "Save macro"
-msgstr "Lagre makro"
-
-msgid "Press the macro's new hotkey:"
-msgstr "Trykk på makroens nye hurtigtast:"
-
-msgid "Repeat last commands"
-msgstr "Gjenta siste kommandoer"
-
-msgid "Repeat times:"
-msgstr "Antall gjentakelser:"
 
 #, c-format
 msgid "Confirm save file: \"%s\""
@@ -1202,13 +1161,6 @@ msgstr "Hvilken menyfil vil du redigere?"
 
 msgid "&Local"
 msgstr "&Lokal"
-
-msgid "Replace"
-msgstr "Erstatt"
-
-#, c-format
-msgid "%ld replacements made"
-msgstr "Erstattet %ld forekomster"
 
 msgid "[NoName]"
 msgstr "[Navnløs]"
@@ -1320,35 +1272,35 @@ msgstr ""
 "Denne teksten er endret, men ikke lagret.\n"
 "Endringene kasseres hvis du fortsetter."
 
-msgid "In se&lection"
-msgstr "I &utvalg"
-
-msgid "&Find all"
-msgstr "&Finn alle"
-
-msgid "Enter replacement string:"
-msgstr "Erstatt med:"
-
-msgid "Replace with:"
-msgstr "Erstatt med:"
-
-msgid "&Replace"
-msgstr "E&rstatt"
-
-msgid "A&ll"
-msgstr "A&lle"
-
-msgid "&Skip"
-msgstr "&Hopp over"
-
-msgid "Confirm replace"
-msgstr "Bekreft erstatning"
-
 msgid "Cancel"
 msgstr "Avbryt"
 
+msgid "Collect completions"
+msgstr "Samle fullføringer"
+
 msgid "NoName"
 msgstr "Navnløs"
+
+msgid "Save macro"
+msgstr "Lagre makro"
+
+msgid "Press the macro's new hotkey:"
+msgstr "Trykk på makroens nye hurtigtast:"
+
+msgid "Delete macro"
+msgstr "Slett makro"
+
+msgid "Press macro hotkey:"
+msgstr "Trykk på makroens hurtigtast:"
+
+msgid "Macro not deleted"
+msgstr "Slettet ikke makro"
+
+msgid "Repeat last commands"
+msgstr "Gjenta siste kommandoer"
+
+msgid "Repeat times:"
+msgstr "Antall gjentakelser:"
 
 msgid "&Open file..."
 msgstr "&Åpne fil ..."
@@ -1638,6 +1590,45 @@ msgstr "Bryt tekst etter:"
 msgid "Editor options"
 msgstr "Redigeringsinnstillinger"
 
+msgid "In se&lection"
+msgstr "I &utvalg"
+
+msgid "&Find all"
+msgstr "&Finn alle"
+
+msgid "Enter replacement string:"
+msgstr "Erstatt med:"
+
+msgid "Replace"
+msgstr "Erstatt"
+
+msgid "Replace with:"
+msgstr "Erstatt med:"
+
+msgid "&Replace"
+msgstr "E&rstatt"
+
+msgid "A&ll"
+msgstr "A&lle"
+
+msgid "&Skip"
+msgstr "&Hopp over"
+
+msgid "Confirm replace"
+msgstr "Bekreft erstatning"
+
+#, c-format
+msgid "Searching %s: %3d%%"
+msgstr "Søker %s: %3d%%"
+
+#, c-format
+msgid "Searching %s"
+msgstr "Søker etter %s"
+
+#, c-format
+msgid "%ld replacements made"
+msgstr "Erstattet %ld forekomster"
+
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
@@ -1765,6 +1756,15 @@ msgstr "Forslag"
 
 msgid "Select language"
 msgstr "Velg språk"
+
+msgid "Choose syntax highlighting"
+msgstr "Velg syntaksutheving"
+
+msgid "< Auto >"
+msgstr "< Auto >"
+
+msgid "< Reload Current Syntax >"
+msgstr "< Last gjeldende syntaks på nytt >"
 
 msgid "Load syntax file"
 msgstr "Last syntaksfil"

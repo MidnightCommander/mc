@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-03-14 19:59+0300\n"
+"POT-Creation-Date: 2021-06-20 16:14+0300\n"
 "PO-Revision-Date: 2020-12-31 18:30+0000\n"
 "Last-Translator: David Martin <dhmartina@yahoo.es>\n"
 "Language-Team: Spanish (http://www.transifex.com/mc/mc/language/es/)\n"
@@ -1011,15 +1011,6 @@ msgstr ""
 "Para comparar se necesita\n"
 "un archivo en cada panel"
 
-msgid "Choose syntax highlighting"
-msgstr "Sintaxis coloreada"
-
-msgid "< Auto >"
-msgstr "< Auto >"
-
-msgid "< Reload Current Syntax >"
-msgstr "< Releer sintaxis >"
-
 #, c-format
 msgid "Loading: %3d%%"
 msgstr "Cargando: %3d%%"
@@ -1064,14 +1055,6 @@ msgstr "Error al leer en tubería: %s"
 #, c-format
 msgid "Cannot open pipe for reading: %s"
 msgstr "Imposible abrir tubería para lectura: %s"
-
-#, c-format
-msgid "Searching %s: %3d%%"
-msgstr "Buscando %s: %3d%%"
-
-#, c-format
-msgid "Searching %s"
-msgstr "Buscando %s"
 
 msgid "File has hard-links. Detach before saving?"
 msgstr "Hay otros enlaces al archivo. ¿Desea separarlo al guardar?"
@@ -1118,9 +1101,6 @@ msgstr "Cambiar saltos de línea por:"
 msgid "Save As"
 msgstr "Guardar como"
 
-msgid "Collect completions"
-msgstr "Encontrar finales"
-
 msgid "&Quick save"
 msgstr "guardar &Rápido"
 
@@ -1150,27 +1130,6 @@ msgstr "s&Obrescribir"
 
 msgid "Cannot save file"
 msgstr "Imposible guardar el archivo."
-
-msgid "Delete macro"
-msgstr "Eliminar macro"
-
-msgid "Press macro hotkey:"
-msgstr "Pulse la tecla de la macro:"
-
-msgid "Macro not deleted"
-msgstr "Macro no eliminada"
-
-msgid "Save macro"
-msgstr "Guardar macro"
-
-msgid "Press the macro's new hotkey:"
-msgstr "Presione la nueva tecla para la macro:"
-
-msgid "Repeat last commands"
-msgstr "Repetir órdenes anteriores"
-
-msgid "Repeat times:"
-msgstr "Número de repeticiones:"
 
 #, c-format
 msgid "Confirm save file: \"%s\""
@@ -1205,13 +1164,6 @@ msgstr "¿Qué archivo de menú desea editar?"
 
 msgid "&Local"
 msgstr "&Local"
-
-msgid "Replace"
-msgstr "Reemplazar"
-
-#, c-format
-msgid "%ld replacements made"
-msgstr "%ld reemplazos hechos."
 
 msgid "[NoName]"
 msgstr "[SinNombre]"
@@ -1321,35 +1273,35 @@ msgstr ""
 "El texto actual ha sido modificado y no ha sido guardado \n"
 "Continuar descartará estos cambios."
 
-msgid "In se&lection"
-msgstr "solo en se&Lección"
-
-msgid "&Find all"
-msgstr "buscar &Todos"
-
-msgid "Enter replacement string:"
-msgstr "Teclee el cambio a realizar:"
-
-msgid "Replace with:"
-msgstr "Reemplazar con:"
-
-msgid "&Replace"
-msgstr "&Reemplazar"
-
-msgid "A&ll"
-msgstr "&Todos"
-
-msgid "&Skip"
-msgstr "&Saltar"
-
-msgid "Confirm replace"
-msgstr "Confirmar cambios"
-
 msgid "Cancel"
 msgstr "Cancelar"
 
+msgid "Collect completions"
+msgstr "Encontrar finales"
+
 msgid "NoName"
 msgstr "SinNombre"
+
+msgid "Save macro"
+msgstr "Guardar macro"
+
+msgid "Press the macro's new hotkey:"
+msgstr "Presione la nueva tecla para la macro:"
+
+msgid "Delete macro"
+msgstr "Eliminar macro"
+
+msgid "Press macro hotkey:"
+msgstr "Pulse la tecla de la macro:"
+
+msgid "Macro not deleted"
+msgstr "Macro no eliminada"
+
+msgid "Repeat last commands"
+msgstr "Repetir órdenes anteriores"
+
+msgid "Repeat times:"
+msgstr "Número de repeticiones:"
 
 msgid "&Open file..."
 msgstr "abrir archiv&O..."
@@ -1639,6 +1591,45 @@ msgstr "Ancho del párrafo auto: "
 msgid "Editor options"
 msgstr "Opciones del editor"
 
+msgid "In se&lection"
+msgstr "solo en se&Lección"
+
+msgid "&Find all"
+msgstr "buscar &Todos"
+
+msgid "Enter replacement string:"
+msgstr "Teclee el cambio a realizar:"
+
+msgid "Replace"
+msgstr "Reemplazar"
+
+msgid "Replace with:"
+msgstr "Reemplazar con:"
+
+msgid "&Replace"
+msgstr "&Reemplazar"
+
+msgid "A&ll"
+msgstr "&Todos"
+
+msgid "&Skip"
+msgstr "&Saltar"
+
+msgid "Confirm replace"
+msgstr "Confirmar cambios"
+
+#, c-format
+msgid "Searching %s: %3d%%"
+msgstr "Buscando %s: %3d%%"
+
+#, c-format
+msgid "Searching %s"
+msgstr "Buscando %s"
+
+#, c-format
+msgid "%ld replacements made"
+msgstr "%ld reemplazos hechos."
+
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
@@ -1766,6 +1757,15 @@ msgstr "Sugerencias"
 
 msgid "Select language"
 msgstr "Elegir idioma"
+
+msgid "Choose syntax highlighting"
+msgstr "Sintaxis coloreada"
+
+msgid "< Auto >"
+msgstr "< Auto >"
+
+msgid "< Reload Current Syntax >"
+msgstr "< Releer sintaxis >"
 
 msgid "Load syntax file"
 msgstr "Cargar archivo de sintaxis"

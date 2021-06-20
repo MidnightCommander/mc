@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-03-14 19:59+0300\n"
+"POT-Creation-Date: 2021-06-20 16:14+0300\n"
 "PO-Revision-Date: 2020-12-31 14:19+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Slovak (http://www.transifex.com/mc/mc/language/sk/)\n"
@@ -1002,15 +1002,6 @@ msgstr "Prehliadač rozdielov: neplatný režim"
 msgid "Two files are needed to compare"
 msgstr "Porovnanie vyžaduje dva súbory"
 
-msgid "Choose syntax highlighting"
-msgstr "Vyberte zvýrazňovanie syntaxe"
-
-msgid "< Auto >"
-msgstr "< Auto >"
-
-msgid "< Reload Current Syntax >"
-msgstr "< Znovu načítať aktuálnu syntax >"
-
 #, c-format
 msgid "Loading: %3d%%"
 msgstr "Načítava sa: %3d%%"
@@ -1055,14 +1046,6 @@ msgstr "Chyba pri čítaní z rúry: %s"
 #, c-format
 msgid "Cannot open pipe for reading: %s"
 msgstr "Nemožno otvoriť rúru na čítanie: %s"
-
-#, c-format
-msgid "Searching %s: %3d%%"
-msgstr "Hľadá sa %s: %3d%%"
-
-#, c-format
-msgid "Searching %s"
-msgstr "Hľadanie %s"
 
 msgid "File has hard-links. Detach before saving?"
 msgstr "Súbor má pevné odkazy. Odpojiť pred uložením?"
@@ -1109,9 +1092,6 @@ msgstr "Zmeniť konce riadkov na:"
 msgid "Save As"
 msgstr "Uložiť ako"
 
-msgid "Collect completions"
-msgstr "Zhromaždiť doplnenia"
-
 msgid "&Quick save"
 msgstr "&Rýchle uloženie"
 
@@ -1141,27 +1121,6 @@ msgstr "&Prepísať"
 
 msgid "Cannot save file"
 msgstr "Nemožno uložiť súbor"
-
-msgid "Delete macro"
-msgstr "Zmazať makro"
-
-msgid "Press macro hotkey:"
-msgstr "Stlačte kláv. skratku makra:"
-
-msgid "Macro not deleted"
-msgstr "Makro nebolo zmazané"
-
-msgid "Save macro"
-msgstr "Uložiť makro"
-
-msgid "Press the macro's new hotkey:"
-msgstr "Stlačte novú kláv. skratku makra:"
-
-msgid "Repeat last commands"
-msgstr "Opakovať posledné príkazy"
-
-msgid "Repeat times:"
-msgstr "Opakovať koľkokrát:"
 
 #, c-format
 msgid "Confirm save file: \"%s\""
@@ -1196,13 +1155,6 @@ msgstr "Ktorú súbor menu chcete upraviť?"
 
 msgid "&Local"
 msgstr "&Miestny"
-
-msgid "Replace"
-msgstr "Nahradiť"
-
-#, c-format
-msgid "%ld replacements made"
-msgstr "Vykonaných %ld náhrad"
 
 msgid "[NoName]"
 msgstr "[BezNázvu]"
@@ -1314,35 +1266,35 @@ msgstr ""
 "Aktuálny text sa zmenil bez uloženia súboru.\n"
 "Pokračovaním tieto zmeny zrušíte"
 
-msgid "In se&lection"
-msgstr "&Vo výbere"
-
-msgid "&Find all"
-msgstr "&Nájsť všetky"
-
-msgid "Enter replacement string:"
-msgstr "Nahradiť textom:"
-
-msgid "Replace with:"
-msgstr "Nahradiť textom:"
-
-msgid "&Replace"
-msgstr "&Nahradiť"
-
-msgid "A&ll"
-msgstr "&Všetko"
-
-msgid "&Skip"
-msgstr "&Preskočiť"
-
-msgid "Confirm replace"
-msgstr "Potvrdiť nahradenie"
-
 msgid "Cancel"
 msgstr "Zruš"
 
+msgid "Collect completions"
+msgstr "Zhromaždiť doplnenia"
+
 msgid "NoName"
 msgstr "BezNázvu"
+
+msgid "Save macro"
+msgstr "Uložiť makro"
+
+msgid "Press the macro's new hotkey:"
+msgstr "Stlačte novú kláv. skratku makra:"
+
+msgid "Delete macro"
+msgstr "Zmazať makro"
+
+msgid "Press macro hotkey:"
+msgstr "Stlačte kláv. skratku makra:"
+
+msgid "Macro not deleted"
+msgstr "Makro nebolo zmazané"
+
+msgid "Repeat last commands"
+msgstr "Opakovať posledné príkazy"
+
+msgid "Repeat times:"
+msgstr "Opakovať koľkokrát:"
 
 msgid "&Open file..."
 msgstr "Otvoriť sú&bor..."
@@ -1632,6 +1584,45 @@ msgstr "Dĺžka riadka pre zalamovanie:"
 msgid "Editor options"
 msgstr "Voľby editora"
 
+msgid "In se&lection"
+msgstr "&Vo výbere"
+
+msgid "&Find all"
+msgstr "&Nájsť všetky"
+
+msgid "Enter replacement string:"
+msgstr "Nahradiť textom:"
+
+msgid "Replace"
+msgstr "Nahradiť"
+
+msgid "Replace with:"
+msgstr "Nahradiť textom:"
+
+msgid "&Replace"
+msgstr "&Nahradiť"
+
+msgid "A&ll"
+msgstr "&Všetko"
+
+msgid "&Skip"
+msgstr "&Preskočiť"
+
+msgid "Confirm replace"
+msgstr "Potvrdiť nahradenie"
+
+#, c-format
+msgid "Searching %s: %3d%%"
+msgstr "Hľadá sa %s: %3d%%"
+
+#, c-format
+msgid "Searching %s"
+msgstr "Hľadanie %s"
+
+#, c-format
+msgid "%ld replacements made"
+msgstr "Vykonaných %ld náhrad"
+
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
@@ -1758,6 +1749,15 @@ msgstr "Návrh"
 
 msgid "Select language"
 msgstr "Vybrať jazyk"
+
+msgid "Choose syntax highlighting"
+msgstr "Vyberte zvýrazňovanie syntaxe"
+
+msgid "< Auto >"
+msgstr "< Auto >"
+
+msgid "< Reload Current Syntax >"
+msgstr "< Znovu načítať aktuálnu syntax >"
 
 msgid "Load syntax file"
 msgstr "Načítať súbor so syntaxou"

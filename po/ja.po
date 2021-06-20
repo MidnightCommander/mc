@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-03-14 19:59+0300\n"
+"POT-Creation-Date: 2021-06-20 16:14+0300\n"
 "PO-Revision-Date: 2020-12-31 14:19+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Japanese (http://www.transifex.com/mc/mc/language/ja/)\n"
@@ -940,15 +940,6 @@ msgstr ""
 msgid "Two files are needed to compare"
 msgstr ""
 
-msgid "Choose syntax highlighting"
-msgstr ""
-
-msgid "< Auto >"
-msgstr ""
-
-msgid "< Reload Current Syntax >"
-msgstr ""
-
 #, c-format
 msgid "Loading: %3d%%"
 msgstr ""
@@ -991,14 +982,6 @@ msgstr ""
 #, c-format
 msgid "Cannot open pipe for reading: %s"
 msgstr ""
-
-#, c-format
-msgid "Searching %s: %3d%%"
-msgstr ""
-
-#, c-format
-msgid "Searching %s"
-msgstr "%sを検索中"
 
 msgid "File has hard-links. Detach before saving?"
 msgstr ""
@@ -1045,9 +1028,6 @@ msgstr ""
 msgid "Save As"
 msgstr "別名で保存"
 
-msgid "Collect completions"
-msgstr ""
-
 msgid "&Quick save"
 msgstr ""
 
@@ -1077,27 +1057,6 @@ msgstr "上書き(&O)"
 
 msgid "Cannot save file"
 msgstr "ファイルを保存できません"
-
-msgid "Delete macro"
-msgstr "マクロの削除"
-
-msgid "Press macro hotkey:"
-msgstr ""
-
-msgid "Macro not deleted"
-msgstr ""
-
-msgid "Save macro"
-msgstr "マクロの保存"
-
-msgid "Press the macro's new hotkey:"
-msgstr ""
-
-msgid "Repeat last commands"
-msgstr "最後のコマンドを繰り返す"
-
-msgid "Repeat times:"
-msgstr "繰り返し回数:"
 
 #, c-format
 msgid "Confirm save file: \"%s\""
@@ -1132,13 +1091,6 @@ msgstr ""
 
 msgid "&Local"
 msgstr "ローカル(&L)"
-
-msgid "Replace"
-msgstr "置換"
-
-#, c-format
-msgid "%ld replacements made"
-msgstr ""
 
 msgid "[NoName]"
 msgstr ""
@@ -1242,35 +1194,35 @@ msgid ""
 "Continue discards these changes."
 msgstr ""
 
-msgid "In se&lection"
-msgstr ""
-
-msgid "&Find all"
-msgstr "すべて検索(&F)"
-
-msgid "Enter replacement string:"
-msgstr ""
-
-msgid "Replace with:"
-msgstr ""
-
-msgid "&Replace"
-msgstr "置換(&R)"
-
-msgid "A&ll"
-msgstr "全部(&L)"
-
-msgid "&Skip"
-msgstr "スキップ(&S)"
-
-msgid "Confirm replace"
-msgstr "置換の確認"
-
 msgid "Cancel"
 msgstr "キャンセル"
 
+msgid "Collect completions"
+msgstr ""
+
 msgid "NoName"
 msgstr ""
+
+msgid "Save macro"
+msgstr "マクロの保存"
+
+msgid "Press the macro's new hotkey:"
+msgstr ""
+
+msgid "Delete macro"
+msgstr "マクロの削除"
+
+msgid "Press macro hotkey:"
+msgstr ""
+
+msgid "Macro not deleted"
+msgstr ""
+
+msgid "Repeat last commands"
+msgstr "最後のコマンドを繰り返す"
+
+msgid "Repeat times:"
+msgstr "繰り返し回数:"
 
 msgid "&Open file..."
 msgstr "ファイルを開く(&O)..."
@@ -1560,6 +1512,45 @@ msgstr ""
 msgid "Editor options"
 msgstr "編集のオプション"
 
+msgid "In se&lection"
+msgstr ""
+
+msgid "&Find all"
+msgstr "すべて検索(&F)"
+
+msgid "Enter replacement string:"
+msgstr ""
+
+msgid "Replace"
+msgstr "置換"
+
+msgid "Replace with:"
+msgstr ""
+
+msgid "&Replace"
+msgstr "置換(&R)"
+
+msgid "A&ll"
+msgstr "全部(&L)"
+
+msgid "&Skip"
+msgstr "スキップ(&S)"
+
+msgid "Confirm replace"
+msgstr "置換の確認"
+
+#, c-format
+msgid "Searching %s: %3d%%"
+msgstr ""
+
+#, c-format
+msgid "Searching %s"
+msgstr "%sを検索中"
+
+#, c-format
+msgid "%ld replacements made"
+msgstr ""
+
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
@@ -1683,6 +1674,15 @@ msgid "Suggest"
 msgstr ""
 
 msgid "Select language"
+msgstr ""
+
+msgid "Choose syntax highlighting"
+msgstr ""
+
+msgid "< Auto >"
+msgstr ""
+
+msgid "< Reload Current Syntax >"
 msgstr ""
 
 msgid "Load syntax file"

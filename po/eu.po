@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-03-14 19:59+0300\n"
+"POT-Creation-Date: 2021-06-20 16:14+0300\n"
 "PO-Revision-Date: 2020-12-31 14:19+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Basque (http://www.transifex.com/mc/mc/language/eu/)\n"
@@ -998,15 +998,6 @@ msgstr "Diff erakuslea: modu baliogabea"
 msgid "Two files are needed to compare"
 msgstr "Bi fitxategi behar dira konparatzeko"
 
-msgid "Choose syntax highlighting"
-msgstr "Hautatu sintaxi nabarmentzea"
-
-msgid "< Auto >"
-msgstr "< Auto >"
-
-msgid "< Reload Current Syntax >"
-msgstr "< Birzamatu uneko sintaxia >"
-
 #, c-format
 msgid "Loading: %3d%%"
 msgstr "Zamatzen: %3d%%"
@@ -1051,14 +1042,6 @@ msgstr "Akatsa hoditik irakurtzerakoan: %s"
 #, c-format
 msgid "Cannot open pipe for reading: %s"
 msgstr "Hodia irakurtzeko ezin ireki: %s"
-
-#, c-format
-msgid "Searching %s: %3d%%"
-msgstr "%s bilatzen: %3d%%"
-
-#, c-format
-msgid "Searching %s"
-msgstr "%s bilatzen"
 
 msgid "File has hard-links. Detach before saving?"
 msgstr "Fitxategiak esteka-trinkoak dauzka. Deslotu gorde aurretik?"
@@ -1105,9 +1088,6 @@ msgstr "Aldatu lerro hausturak hontara:"
 msgid "Save As"
 msgstr "Gorde honela"
 
-msgid "Collect completions"
-msgstr "Osatzeak bildu"
-
 msgid "&Quick save"
 msgstr "&Azker gordetzea"
 
@@ -1137,27 +1117,6 @@ msgstr "&Gainidatzi"
 
 msgid "Cannot save file"
 msgstr "Fitxategia ezin gorde"
-
-msgid "Delete macro"
-msgstr "Ezabatu makroa"
-
-msgid "Press macro hotkey:"
-msgstr "Sakatu makroaren laster-tekla:"
-
-msgid "Macro not deleted"
-msgstr "Makro ez ezabatua"
-
-msgid "Save macro"
-msgstr "Gorde makroa"
-
-msgid "Press the macro's new hotkey:"
-msgstr "Sakatu makroaren laster-tekla berria:"
-
-msgid "Repeat last commands"
-msgstr "Errepikatu azken komandoa"
-
-msgid "Repeat times:"
-msgstr "Zenbat aldiz errepikatu:"
 
 #, c-format
 msgid "Confirm save file: \"%s\""
@@ -1192,13 +1151,6 @@ msgstr "Zein menu fitxategi editatuko nahi duzu?"
 
 msgid "&Local"
 msgstr "&Lokala"
-
-msgid "Replace"
-msgstr "Ordezkatu"
-
-#, c-format
-msgid "%ld replacements made"
-msgstr "%ld ordezkapen egin dira"
 
 msgid "[NoName]"
 msgstr "[Izengabe]"
@@ -1310,35 +1262,35 @@ msgstr ""
 "Uneko testua aldatu da baino ez da fitxategian gorde.\n"
 "Jarraitzeak aldaketa hauek baztertuko ditu."
 
-msgid "In se&lection"
-msgstr "&Hautapenean"
-
-msgid "&Find all"
-msgstr "&Aurkitu dena"
-
-msgid "Enter replacement string:"
-msgstr "Sartu ordezko katea:"
-
-msgid "Replace with:"
-msgstr "Ordezkatu honekin:"
-
-msgid "&Replace"
-msgstr "&Ordeztu"
-
-msgid "A&ll"
-msgstr "&Guztia"
-
-msgid "&Skip"
-msgstr "&Saltatu"
-
-msgid "Confirm replace"
-msgstr "Berretsi ordezkapena"
-
 msgid "Cancel"
 msgstr "Utzi"
 
+msgid "Collect completions"
+msgstr "Osatzeak bildu"
+
 msgid "NoName"
 msgstr "Izengabe"
+
+msgid "Save macro"
+msgstr "Gorde makroa"
+
+msgid "Press the macro's new hotkey:"
+msgstr "Sakatu makroaren laster-tekla berria:"
+
+msgid "Delete macro"
+msgstr "Ezabatu makroa"
+
+msgid "Press macro hotkey:"
+msgstr "Sakatu makroaren laster-tekla:"
+
+msgid "Macro not deleted"
+msgstr "Makro ez ezabatua"
+
+msgid "Repeat last commands"
+msgstr "Errepikatu azken komandoa"
+
+msgid "Repeat times:"
+msgstr "Zenbat aldiz errepikatu:"
 
 msgid "&Open file..."
 msgstr "&Ireki fitxategia..."
@@ -1628,6 +1580,45 @@ msgstr "Itzulbiratutako lerroaren luzeera:"
 msgid "Editor options"
 msgstr "Editorearen aukerak"
 
+msgid "In se&lection"
+msgstr "&Hautapenean"
+
+msgid "&Find all"
+msgstr "&Aurkitu dena"
+
+msgid "Enter replacement string:"
+msgstr "Sartu ordezko katea:"
+
+msgid "Replace"
+msgstr "Ordezkatu"
+
+msgid "Replace with:"
+msgstr "Ordezkatu honekin:"
+
+msgid "&Replace"
+msgstr "&Ordeztu"
+
+msgid "A&ll"
+msgstr "&Guztia"
+
+msgid "&Skip"
+msgstr "&Saltatu"
+
+msgid "Confirm replace"
+msgstr "Berretsi ordezkapena"
+
+#, c-format
+msgid "Searching %s: %3d%%"
+msgstr "%s bilatzen: %3d%%"
+
+#, c-format
+msgid "Searching %s"
+msgstr "%s bilatzen"
+
+#, c-format
+msgid "%ld replacements made"
+msgstr "%ld ordezkapen egin dira"
+
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
@@ -1754,6 +1745,15 @@ msgstr "Iradoki"
 
 msgid "Select language"
 msgstr "Hautatu hizkuntza"
+
+msgid "Choose syntax highlighting"
+msgstr "Hautatu sintaxi nabarmentzea"
+
+msgid "< Auto >"
+msgstr "< Auto >"
+
+msgid "< Reload Current Syntax >"
+msgstr "< Birzamatu uneko sintaxia >"
 
 msgid "Load syntax file"
 msgstr "Zamatu sintaxi fitxategia"
