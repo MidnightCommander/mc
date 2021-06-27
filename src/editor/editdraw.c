@@ -921,10 +921,9 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
             {
                 long upto;
 
-                row = start_row;
                 b = edit->start_display;
                 upto = MIN (curs_row - 1, end_row);
-                while (row <= upto)
+                for (row = start_row; row <= upto; row++)
                 {
                     if (key_pending (edit))
                         return;
