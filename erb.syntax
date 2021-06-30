@@ -1,0 +1,2103 @@
+# erb syntax highlighting
+# for mcedit
+# Autor r72cccp
+# based on html file from mcedit and ruby file from Marco Ciampa:
+# ===================================================================================
+# Ruby syntax file derived from perl syntax by Marco Ciampa <ciampix@libero.it>
+# alpha version 0.2 16/05/2003
+# ===================================================================================
+# html highlighting
+
+caseinsensitive
+
+context default
+
+    keyword whole &*; brightgreen/16
+    spellcheck
+
+    keyword </A> brightcyan/17
+    keyword </ABBR> brightcyan/17
+    keyword </ADDRESS> brightcyan/17
+    keyword </APPLET> brightcyan/17
+    keyword </AREA> brightcyan/17
+    keyword </ASIDE> brightcyan/17
+    keyword </B> brightcyan/17
+    keyword </BASE> brightcyan/17
+    keyword </BASEFONT> brightcyan/17
+    keyword </BIG> brightcyan/17
+    keyword </BLOCKQUOTE> brightcyan/17
+    keyword </BODY> brightcyan/17
+    keyword </BR> brightcyan/17
+    keyword </BUTTON> brightcyan/17
+    keyword </CAPTION> brightcyan/17
+    keyword </CENTER> brightcyan/17
+    keyword </CITE> brightcyan/17
+    keyword </CODE> brightcyan/17
+    keyword </COL> brightcyan/17
+    keyword </COLGROUP> brightcyan/17
+    keyword </DD> brightcyan/17
+    keyword </DIR> brightcyan/17
+    keyword </DIV> brightcyan/17
+    keyword </DL> brightcyan/17
+    keyword </DT> brightcyan/17
+    keyword </EM> brightcyan/17
+    keyword </FIGURE> brightcyan/17
+    keyword </FONT> brightcyan/17
+    keyword </FOOTER> brightcyan/17
+    keyword </FORM> brightcyan/17
+    keyword </FRAME> brightcyan/17
+    keyword </FRAMESET> brightcyan/17
+    keyword </H1> brightcyan/17
+    keyword </H2> brightcyan/17
+    keyword </H3> brightcyan/17
+    keyword </H4> brightcyan/17
+    keyword </H5> brightcyan/17
+    keyword </H6> brightcyan/17
+    keyword </HEAD> brightcyan/17
+    keyword </HEADER> brightcyan/17
+    keyword </HR> brightcyan/17
+    keyword </HTML> brightcyan/17
+    keyword </I> brightcyan/17
+    keyword </INPUT> brightcyan/17
+    keyword </IMG> brightcyan/17
+    keyword </LABEL> brightcyan/17
+    keyword </LI> brightcyan/17
+    keyword </PRE> brightcyan/17
+    keyword </SMALL> brightcyan/17
+    keyword </SCRIPT> brightcyan/17
+    keyword </META> brightcyan/17
+    keyword </P> brightcyan/17
+    keyword </SPAN> brightcyan/17
+    keyword </TABLE> brightcyan/17
+    keyword </TEXTAREA> brightcyan/17
+    keyword </TBODY> brightcyan/17
+    keyword </TD> brightcyan/17
+    keyword </TITLE> brightcyan/17
+    keyword </TH> brightcyan/17
+    keyword </THEAD> brightcyan/17
+    keyword </TR> brightcyan/17
+    keyword </TT> brightcyan/17
+    keyword </U> brightcyan/17
+    keyword </UL> brightcyan/17
+
+context <A\s >                    brightcyan/17
+    keyword = brightred/18
+
+    keyword "http:*" magenta/22
+    keyword "ftp:*" magenta/22
+    keyword "news:*" magenta/22
+    keyword "mailto:*" magenta/22
+    keyword "gopher:*" magenta/22
+    keyword "telnet:*" magenta/22
+    keyword "file:*" magenta/22
+    keyword "javascript:*" magenta/22
+
+    keyword "Alternate" magenta/22
+    keyword "Stylesheet" magenta/22
+    keyword "Start" magenta/22
+    keyword "Next" magenta/22
+    keyword "Prev" magenta/22
+    keyword "Contents" magenta/22
+    keyword "Index" magenta/22
+    keyword "Glossary" magenta/22
+    keyword "Copyright" magenta/22
+    keyword "Chapter" magenta/22
+    keyword "Section" magenta/22
+    keyword "Subsection" magenta/22
+    keyword "Appendix" magenta/22
+    keyword "Help" magenta/22
+    keyword "Bookmark" magenta/22
+
+    keyword "_blank" magenta/22
+    keyword "_self" magenta/22
+    keyword "_parent" magenta/22
+    keyword "_top" magenta/22
+
+    keyword \sname yellow/24
+    keyword \shref yellow/24
+    keyword \sshape yellow/24
+    keyword \sitemprop yellow/24
+    keyword \scoords yellow/24
+    keyword \starget_element yellow/24
+    keyword \starget yellow/24
+    keyword \sonblur yellow/24
+    keyword \sonclick yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonfocus yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sdata-\[abcdefghijklmnopqrstuvwxyz\] yellow/24
+    keyword \srole yellow/24
+    keyword \sstyle yellow/24
+    keyword \stabindex yellow/24
+    keyword <%*%> green
+
+context <ABBR >                    brightcyan/17
+    keyword = brightred/18
+
+    keyword "http:*" magenta/22
+    keyword "ftp:*" magenta/22
+    keyword "news:*" magenta/22
+    keyword "mailto:*" magenta/22
+    keyword "gopher:*" magenta/22
+    keyword "telnet:*" magenta/22
+    keyword "file:*" magenta/22
+    keyword "javascript:*" magenta/22
+
+    keyword "Alternate" magenta/22
+    keyword "Stylesheet" magenta/22
+    keyword "Start" magenta/22
+    keyword "Next" magenta/22
+    keyword "Prev" magenta/22
+    keyword "Contents" magenta/22
+    keyword "Index" magenta/22
+    keyword "Glossary" magenta/22
+    keyword "Copyright" magenta/22
+    keyword "Chapter" magenta/22
+    keyword "Section" magenta/22
+    keyword "Subsection" magenta/22
+    keyword "Appendix" magenta/22
+    keyword "Help" magenta/22
+    keyword "Bookmark" magenta/22
+
+    keyword "_blank" magenta/22
+    keyword "_self" magenta/22
+    keyword "_parent" magenta/22
+    keyword "_top" magenta/22
+
+    keyword \sname yellow/24
+    keyword \shref yellow/24
+    keyword \sshape yellow/24
+    keyword \sitemprop yellow/24
+    keyword \scoords yellow/24
+    keyword \starget yellow/24
+    keyword \sonblur yellow/24
+    keyword \sonclick yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonfocus yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword <%*%> green
+
+context <ADDRESS >              brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sdir yellow/24
+    keyword \stitle yellow/24
+    keyword \slang yellow/24
+
+    keyword \sonblur yellow/24
+    keyword \sonclick yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonfocus yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+context <APPLET >               brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+
+    keyword \salign yellow/24
+    keyword \salt yellow/24
+    keyword \sarchive yellow/24
+    keyword \scode yellow/24
+    keyword \scodebase yellow/24
+    keyword \sheight yellow/24
+    keyword \shspace yellow/24
+    keyword \smayscript yellow/24
+    keyword \sname yellow/24
+    keyword \sobject yellow/24
+    keyword \svspace yellow/24
+    keyword \swidth yellow/24
+
+    keyword "http:*" magenta/22
+    keyword "ftp:*" magenta/22
+    keyword "news:*" magenta/22
+    keyword "mailto:*" magenta/22
+    keyword "gopher:*" magenta/22
+    keyword "telnet:*" magenta/22
+    keyword "file:*" magenta/22
+    keyword "javascript:*" magenta/22
+    keyword "*.class" magenta/22
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+context <AREA >                 brightcyan/17
+    keyword = brightred/18
+
+#    keyword \saccesskey     yellow/24
+#    keyword \salt           yellow/24
+    keyword \scoords yellow/24
+    keyword \shref yellow/24
+    keyword \snohref yellow/24
+    keyword \sshape yellow/24
+#    keyword \sonfocus       yellow/24
+#    keyword \sonblur        yellow/24
+    keyword \starget magenta/22
+    keyword "_blank" magenta/22
+    keyword "_self" magenta/22
+    keyword "_parent" magenta/22
+    keyword "_top" magenta/22
+
+    keyword "DEFAULT" magenta/22
+    keyword "CIRCLE" magenta/22
+    keyword "POLY" magenta/22
+    keyword "POLYGON" magenta/22
+    keyword "RECT" magenta/22
+    keyword "RECTANGLE" magenta/22
+
+    keyword "http:*" magenta/22
+    keyword "ftp:*" magenta/22
+    keyword "news:*" magenta/22
+    keyword "gopher:*" magenta/22
+    keyword "telnet:*" magenta/22
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+context <ASIDE >                 brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+
+#    keyword \saccesskey     yellow/24
+#    keyword \salt           yellow/24
+    keyword \scoords yellow/24
+    keyword \shref yellow/24
+    keyword \snohref yellow/24
+    keyword \sdata-hook yellow/24
+    keyword \sshape yellow/24
+#    keyword \sonfocus       yellow/24
+#    keyword \sonblur        yellow/24
+    keyword \starget magenta/22
+    keyword "_blank" magenta/22
+    keyword "_self" magenta/22
+    keyword "_parent" magenta/22
+    keyword "_top" magenta/22
+
+    keyword "DEFAULT" magenta/22
+    keyword "CIRCLE" magenta/22
+    keyword "POLY" magenta/22
+    keyword "POLYGON" magenta/22
+    keyword "RECT" magenta/22
+    keyword "RECTANGLE" magenta/22
+
+    keyword "http:*" magenta/22
+    keyword "ftp:*" magenta/22
+    keyword "news:*" magenta/22
+    keyword "gopher:*" magenta/22
+    keyword "telnet:*" magenta/22
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+context <BASE\s >                 brightcyan/17
+    keyword = brightred/18
+
+    keyword \shref yellow/24
+    keyword \starget yellow/24
+    keyword "_blank" magenta/22
+    keyword "_self" magenta/22
+    keyword "_parent" magenta/22
+    keyword "_top" magenta/22
+
+    keyword "http:*" magenta/22
+    keyword "ftp:*" magenta/22
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+context <BASEFONT >             brightcyan/17
+    keyword = brightred/18
+    keyword " magenta/22
+
+    keyword \sid yellow/24
+    keyword \ssize yellow/24
+    keyword \scolor yellow/24
+    keyword \sface yellow/24
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+context <BIG >                  brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+
+    keyword \sonclick yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+context <BLOCKQUOTE >           brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+
+    keyword \sonclick yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+
+    keyword \scite yellow/24
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+context <BODY >                 brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+
+    keyword \sonclick yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+
+    keyword \sonload yellow/24
+    keyword \sonunload yellow/24
+
+    keyword \salink yellow/24
+    keyword \sbackground yellow/24
+
+#    keyword "*.gif" brightred/19
+#    keyword "*.jpg" brightred/19
+#    keyword "*.png" brightred/19
+#    keyword "*" cyan/5
+
+    keyword \sbgcolor yellow/24
+    keyword \slink yellow/24
+    keyword \stext yellow/24
+    keyword \svlink yellow/24
+    keyword \seevlink yellow/24
+    keyword data-\[abcdefghijklmnopqrstuvwxyz\]-\[abcdefghijklmnopqrstuvwxyz\]-\[abcdefghijklmnopqrstuvwxyz\] yellow/24
+    keyword data-\[abcdefghijklmnopqrstuvwxyz\]-\[abcdefghijklmnopqrstuvwxyz\] yellow/24
+    keyword data-\[abcdefghijklmnopqrstuvwxyz\] yellow/24
+
+    keyword <%*%> green
+
+context <BR >                   brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+
+context <BUTTON >               brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+    keyword \sdata-\[abcdefghijklmnopqrstuvwxyz\] yellow/24
+    keyword \styp\[e\] yellow/24
+
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+
+    keyword \sonclick yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+context <B\s >                    brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+
+    keyword \sonclick yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+context <CAPTION >              brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+
+    keyword \sonclick yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+
+    keyword \salign yellow/24
+    keyword \svalign yellow/24
+    keyword \sonmouseup yellow/24
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+context <CENTER >               brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+
+    keyword \sonclick yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+
+context <CITE >                 brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+
+    keyword \sonclick yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+
+context <CODE >                 brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+
+    keyword \sonclick yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+context <COL >                 brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+
+    keyword \sonclick yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+context <COLGROUP >                 brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+
+    keyword \sonclick yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+context <DD >                   brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+
+    keyword \sonclick yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+context <DIR >                  brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+
+    keyword \sonclick yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+context <DIV >                  brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+
+    keyword \sitemscope yellow/24
+    keyword \sitemtype yellow/24
+    keyword \sitemprop yellow/24
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+
+    keyword \sonclick yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+
+    keyword \salign yellow/24
+    keyword whole "center" magenta/22
+    keyword whole "justify" magenta/22
+    keyword whole "left" magenta/22
+    keyword whole "right" magenta/22
+    keyword whole "right" magenta/22
+
+    keyword \sdata-hook yellow
+    keyword \sdata\-\{ABCDEFGHIJKLMNOPQRSTUVWXYZ_\-abcdefghijklmnopqrstuvwxyz\}\[\?\-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] yellow/24
+    keyword <%*%> green
+
+context <DL >                   brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+
+    keyword \sonclick yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+context <DT >                   brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+
+    keyword \sonclick yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+context <EM >                   brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+
+    keyword \sonclick yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+
+context <DT >                   brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+
+    keyword \sonclick yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+context <FIGURE >              brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sdir yellow/24
+    keyword \stitle yellow/24
+    keyword \sstyle yellow/24
+    keyword \slang yellow/24
+
+    keyword \sonblur yellow/24
+    keyword \sonclick yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonfocus yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+    keyword \sdata-hook yellow
+
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+context <FONT >                 brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+
+    keyword \sonclick yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+
+    keyword \ssize yellow/24
+    keyword \scolor yellow/24
+    keyword \sface yellow/24
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+context <FOOTER >                 brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+
+    keyword \sonclick yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+
+    keyword \ssize yellow/24
+    keyword \scolor yellow/24
+    keyword \sface yellow/24
+    keyword \sdata-hook yellow/24
+
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+context <FORM >                 brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+
+    keyword \sonclick yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+
+    keyword \saction yellow/24
+    keyword \senctype yellow/24
+    keyword \smethod yellow/24
+    keyword "GET" magenta/22
+    keyword "POST" magenta/22
+    keyword \sonreset yellow/24
+    keyword \sonsubmit yellow/24
+    keyword \starget yellow/24
+    keyword "_blank" magenta/22
+    keyword "_self" magenta/22
+    keyword "_parent" magenta/22
+    keyword "_top" magenta/22
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+
+context <FRAME >                brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+
+    keyword \sframeborder yellow/24
+    keyword \smarginheight yellow/24
+    keyword \smarginwidth yellow/24
+    keyword \sname yellow/24
+    keyword \snoresize yellow/24
+    keyword \sscrolling yellow/24
+    keyword "YES" magenta/22
+    keyword "NO" magenta/22
+    keyword "AUTO" magenta/22
+    keyword \ssrc yellow/24
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+
+context <FRAMESET >             brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+
+    keyword \sborder yellow/24
+    keyword \sbordercolor yellow/24
+    keyword \scols yellow/24
+    keyword \sonload yellow/24
+    keyword \sonunload yellow/24
+    keyword \srows yellow/24
+
+
+context <H1 >                   brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+    keyword \sitemprop yellow/24
+
+    keyword \sonclick yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+
+    keyword \salign yellow/24
+    keyword "CENTRE" magenta/22
+    keyword "LEFT" magenta/22
+    keyword "RIGHT" magenta/22
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+
+context <H2 >                   brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+    keyword \sitemprop yellow/24
+
+    keyword \sonclick yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+
+    keyword \salign yellow/24
+    keyword "CENTRE" magenta/22
+    keyword "LEFT" magenta/22
+    keyword "RIGHT" magenta/22
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+
+context <H3 >                   brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+    keyword \sitemprop yellow/24
+
+    keyword \sonclick yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+
+    keyword \salign yellow/24
+    keyword "CENTRE" magenta/22
+    keyword "LEFT" magenta/22
+    keyword "RIGHT" magenta/22
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+
+context <H4 >                   brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+    keyword \sitemprop yellow/24
+
+    keyword \sonclick yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+
+    keyword \salign yellow/24
+    keyword "CENTRE" magenta/22
+    keyword "LEFT" magenta/22
+    keyword "RIGHT" magenta/22
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+
+context <H5 >                   brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+    keyword \sitemprop yellow/24
+
+    keyword \sonclick yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+
+    keyword \salign yellow/24
+    keyword "centre" magenta/22
+    keyword "left" magenta/22
+    keyword "right" magenta/22
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+
+context <H6 >                   brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+    keyword \sitemprop yellow/24
+
+    keyword \sonclick yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+
+    keyword \salign yellow/24
+    keyword "centre" magenta/22
+    keyword "left" magenta/22
+    keyword "right" magenta/22
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+context <HEAD >                 brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+#    keyword "*" cyan/5
+    keyword \sdata-hook yellow
+    keyword <%*%> green
+
+context <HR >                   brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+    keyword \scolor yellow/24
+
+    keyword \sonclick yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+
+    keyword \salign yellow/24
+    keyword "centre" magenta/22
+    keyword "left" magenta/22
+    keyword "right" magenta/22
+    keyword \salign yellow/24
+    keyword \snoshade yellow/24
+    keyword \ssize yellow/24
+    keyword \swidth yellow/24
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+
+context <HTML >                 brightcyan/17
+    keyword = brightred/18
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+context <INPUT >                brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+    keyword \sname yellow/24
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+
+    keyword \sonclick yellow/24
+    keyword \su yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+
+    keyword \salt yellow/24
+    keyword \sborder yellow/24
+    keyword \sheight yellow/24
+    keyword \shspace yellow/24
+    keyword \sismap yellow/24
+    keyword \ssrc yellow/24
+#    keyword "*.gif" brightred/19
+#    keyword "*.jpg" brightred/19
+#    keyword "*.png" brightred/19
+    keyword \susemap yellow/24
+    keyword \svspace yellow/24
+    keyword \swidth yellow/24
+    keyword \svalue yellow/24
+    keyword \stype yellow/24
+#    keyword "*" cyan/5
+#    keyword <%*%> green
+    keyword data\-\{ABCDEFGHIJKLMNOPQRSTUVWXYZ_\-abcdefghijklmnopqrstuvwxyz\}\[\?\-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] yellow/24
+    keyword <%*%> green
+
+
+
+context <IMG >                  brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+
+    keyword \sonclick yellow/24
+    keyword \su yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+
+    keyword \salt yellow/24
+    keyword \sborder yellow/24
+    keyword \sheight yellow/24
+    keyword \shspace yellow/24
+    keyword \sismap yellow/24
+    keyword \ssrc yellow/24
+#    keyword "*.gif" brightred/19
+#    keyword "*.jpg" brightred/19
+#    keyword "*.png" brightred/19
+    keyword \susemap yellow/24
+    keyword \svspace yellow/24
+    keyword \swidth yellow/24
+#    keyword "*" cyan/5
+#    keyword <%*%> green
+    keyword <%*%> green
+
+context <I\s >                    brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+
+    keyword \sonclick yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+context <LABEL >                    brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sfor yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+
+    keyword \sonclick yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+
+context <LI >                   brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+    keyword \sdata-hook yellow/24
+    keyword \sitemtype yellow/24
+    keyword \sitemscope yellow/24
+
+    keyword \sonclick yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+    keyword <%*%> green
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+context <LINK >                 brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+
+    keyword \sonclick yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+
+    keyword \stype yellow/24
+
+    keyword "text/css" magenta/22
+    keyword "text/javascript" magenta/22
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+
+context <META >                 brightcyan/17
+    keyword = brightred/18
+
+    keyword \scontent yellow/24
+    keyword \shttp-equiv yellow/24
+    keyword \sname yellow/24
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+context <TEXTAREA >                brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+    keyword \sname yellow/24
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+
+    keyword \sonclick yellow/24
+    keyword \su yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+
+    keyword \salt yellow/24
+    keyword \sborder yellow/24
+    keyword \sheight yellow/24
+    keyword \shspace yellow/24
+    keyword \sismap yellow/24
+    keyword \ssrc yellow/24
+#    keyword "*.gif" brightred/19
+#    keyword "*.jpg" brightred/19
+#    keyword "*.png" brightred/19
+    keyword \susemap yellow/24
+    keyword \svspace yellow/24
+    keyword \swidth yellow/24
+    keyword \svalue yellow/24
+    keyword \stype yellow/24
+#    keyword "*" cyan/5
+#    keyword <%*%> green
+    keyword data\-\{ABCDEFGHIJKLMNOPQRSTUVWXYZ_\-abcdefghijklmnopqrstuvwxyz\}\[\?\-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] yellow/24
+    keyword <%*%> green
+
+
+context <TITLE >                brightcyan/17
+    keyword = brightred/18
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+context <SCRIPT >               brightcyan/17
+    keyword = brightred/18
+
+    keyword \slanguage yellow/24
+    keyword \ssrc yellow/24
+
+    keyword "JavaScript" magenta/22
+    keyword "JavaScript1.2" magenta/22
+    keyword "JavaScript1.1" magenta/22
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+context <TABLE >                brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+
+    keyword \sonclick yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+
+    keyword \salign yellow/24
+    keyword \sbgcolor yellow/24
+    keyword \sborder yellow/24
+    keyword \swidth yellow/24
+    keyword \scellspacing yellow/24
+    keyword \scellpadding yellow/24
+    keyword "right" magenta/22
+    keyword "left" magenta/22
+    keyword \sdata-\[abcdefghijklmnopqrstuvwxyz\]-\[abcdefghijklmnopqrstuvwxyz\]-\[abcdefghijklmnopqrstuvwxyz\] yellow/24
+    keyword \sdata-\[abcdefghijklmnopqrstuvwxyz\]-\[abcdefghijklmnopqrstuvwxyz\] yellow/24
+    keyword \sdata-\[abcdefghijklmnopqrstuvwxyz\] yellow/24
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+context <TBODY >                brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+
+    keyword \sonclick yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+
+    keyword \salign yellow/24
+    keyword \sbgcolor yellow/24
+    keyword \sborder yellow/24
+    keyword \swidth yellow/24
+    keyword \scellspacing yellow/24
+    keyword \scellpadding yellow/24
+    keyword "right" magenta/22
+    keyword "left" magenta/22
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+context <P\s >                  brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+
+    keyword \sdir yellow/24
+    keyword \sdata-hook yellow/24
+    keyword \slang yellow/24
+
+    keyword \sonclick yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+context <PRE >                  brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+
+context <SMALL >                brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+
+    keyword \sonclick yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+context <SPAN >                  brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+    keyword \sitemprop yellow/24
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+
+    keyword \sonclick yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+
+    keyword \salign yellow/24
+    keyword \s"center" magenta/22
+    keyword \s"justify" magenta/22
+    keyword \s"left" magenta/22
+    keyword \s"right" magenta/22
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+context <TD >                   brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+    keyword \sdata-\[abcdefghijklmnopqrstuvwxyz\]-\[abcdefghijklmnopqrstuvwxyz\]-\[abcdefghijklmnopqrstuvwxyz\] yellow/24
+    keyword \sdata-\[abcdefghijklmnopqrstuvwxyz\]-\[abcdefghijklmnopqrstuvwxyz\] yellow/24
+    keyword \sdata-\[abcdefghijklmnopqrstuvwxyz\] yellow/24
+
+    keyword \sonclick yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+
+    keyword \scolspan yellow/24
+    keyword \srowspan yellow/24
+    keyword \salign yellow/24
+    keyword "centre" magenta/22
+    keyword "char" magenta/22
+    keyword "justify" magenta/22
+    keyword "left" magenta/22
+    keyword "right" magenta/22
+    keyword \sbgcolor yellow/24
+    keyword \svalign yellow/24
+    keyword "baseline" magenta/22
+    keyword "bottom" magenta/22
+    keyword "middle" magenta/22
+    keyword "top" magenta/22
+    keyword \scolorspan yellow/24
+    keyword \sheight yellow/24
+    keyword \snowrap yellow/24
+    keyword \srowspan yellow/24
+    keyword \swidth yellow/24
+
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+context <TH\s >                   brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+
+    keyword \sonclick yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+
+    keyword \scolspan yellow/24
+    keyword \srowspan yellow/24
+    keyword \salign yellow/24
+    keyword "centre" magenta/22
+    keyword "char" magenta/22
+    keyword "justify" magenta/22
+    keyword "left" magenta/22
+    keyword "right" magenta/22
+    keyword \sbgcolor yellow/24
+    keyword \svalign yellow/24
+    keyword "baseline" magenta/22
+    keyword "bottom" magenta/22
+    keyword "middle" magenta/22
+    keyword "top" magenta/22
+    keyword \scolorspan yellow/24
+    keyword \sheight yellow/24
+    keyword \snowrap yellow/24
+    keyword \srowspan yellow/24
+    keyword \swidth yellow/24
+
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+context <THEAD >                   brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+
+    keyword \sonclick yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+
+    keyword \scolspan yellow/24
+    keyword \srowspan yellow/24
+    keyword \salign yellow/24
+    keyword "centre" magenta/22
+    keyword "char" magenta/22
+    keyword "justify" magenta/22
+    keyword "left" magenta/22
+    keyword "right" magenta/22
+    keyword \sbgcolor yellow/24
+    keyword \svalign yellow/24
+    keyword "baseline" magenta/22
+    keyword "bottom" magenta/22
+    keyword "middle" magenta/22
+    keyword "top" magenta/22
+    keyword \scolorspan yellow/24
+    keyword \sheight yellow/24
+    keyword \snowrap yellow/24
+    keyword \srowspan yellow/24
+    keyword \swidth yellow/24
+
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+
+context <TR >                   brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+    keyword \sdata-\[abcdefghijklmnopqrstuvwxyz\] yellow/24
+
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+
+    keyword \sonclick yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+
+    keyword \salign yellow/24
+    keyword "centre" magenta/22
+    keyword "char" magenta/22
+    keyword "justify" magenta/22
+    keyword "left" magenta/22
+    keyword "right" magenta/22
+
+    keyword \sbgcolor yellow/24
+    keyword \svalign yellow/24
+    keyword "baseline" magenta/22
+    keyword "bottom" magenta/22
+    keyword "middle" magenta/22
+    keyword "top" magenta/22
+
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+context <TT >                   brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+
+context <U\s >                    brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+
+context <UL >                   brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+
+    keyword \sdir yellow/24
+    keyword \sdata-hook yellow/24
+    keyword \slang yellow/24
+
+    keyword \sonclick yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+context <!-- -->                brown/22
+    spellcheck
+
+context <! > brightred/orange
+
+context <%# %>                     brown/15
+
+context <% %>                   1
+#Bang path
+
+    keyword whole linestart #!\[\s\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/bin/ruby brightcyan black
+    keyword whole linestart #!\[\s\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/bin/ruby brightcyan black
+    keyword whole linestart #!\[\s\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/bin/ruby brightcyan black
+    keyword whole linestart #!\[\s\]/\[abcdefghijklmnopqrstuvwxyz\]/bin/ruby brightcyan black
+    keyword whole linestart #!\[\s\]/bin/ruby brightcyan black
+
+# Symbols :bla-bla
+
+    keyword whole \:\{ABCDEFGHIJKLMNOPQRSTUVWXYZ_\-abcdefghijklmnopqrstuvwxyz\}\[\?\-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] white
+
+#Operators
+
+    keyword - yellow
+    keyword \+ yellow
+    keyword \* yellow
+    keyword / yellow
+    keyword = yellow
+    keyword \+= yellow
+    keyword -= yellow
+    keyword == yellow
+    keyword != yellow
+    keyword === yellow
+    keyword <=> yellow
+    keyword ! yellow
+    keyword ~ yellow
+    keyword =~ yellow
+    keyword & yellow
+    keyword | yellow
+    keyword .. yellow
+
+# hack for regexps
+    keyword $/ yellow
+    keyword $\{!@&\+`'=~/\\,.;<>_\*"$:F?\} red
+    keyword $\{\0123456789\} red
+    keyword $-+ red
+
+    keyword whole $defout red
+    keyword whole $DEBUG red
+    keyword whole $F red
+    keyword whole $FILENAME red
+    keyword whole $LOAD_PATH red
+    keyword whole $SAFE red
+    keyword whole $VERBOSE red
+    keyword whole __FILE__ red
+    keyword whole __LINE__ red
+    keyword whole BEGIN red
+#    keyword whole END red
+    keyword whole DATA red
+    keyword whole RUBY_PLATFORM red
+    keyword whole RUBY_RELEASE_DATE red
+    keyword whole RUBY_VERSION red
+    keyword whole $stdin red
+    keyword whole STDIN red
+    keyword whole $stdout red
+    keyword whole STDOUT red
+    keyword whole $stderr red
+    keyword whole STDERR red
+    keyword whole argv red
+    keyword whole ARGV red
+    keyword whole ARGF red
+    keyword whole env red
+    keyword whole ENV red
+
+#Braces &
+
+    keyword { brightcyan
+    keyword } brightcyan
+    keyword ( brightcyan
+    keyword ) brightcyan
+    keyword [ brightcyan
+    keyword ] brightcyan
+    keyword , brightcyan
+    keyword : brightcyan
+
+    keyword whole false brightred
+    keyword whole FALSE brightred
+    keyword whole nil brightred
+    keyword whole NIL brightred
+    keyword whole true brightred
+    keyword whole TRUE brightred
+
+#Variables
+
+    keyword wholeright $+ brightgreen
+    keyword wholeright @+ white
+    keyword \\" brightred
+    keyword \\' brightred
+
+#Reserved words (see ruby manual)
+
+    keyword whole def magenta
+
+    keyword whole alias magenta
+    keyword whole and magenta
+    keyword whole begin magenta
+    keyword whole break magenta
+    keyword whole case magenta
+    keyword whole class magenta
+    keyword whole defined\? magenta
+    keyword whole do magenta
+    keyword whole else magenta
+    keyword whole elsif magenta
+    keyword whole end magenta
+    keyword whole ensure magenta
+    keyword whole for magenta
+    keyword whole if magenta
+    keyword whole in magenta
+    keyword whole module magenta
+    keyword whole next magenta
+    keyword whole not magenta
+    keyword whole or magenta
+    keyword whole redo magenta
+    keyword whole rescue magenta
+    keyword whole retry magenta
+    keyword whole return magenta
+    keyword whole self magenta
+    keyword whole super magenta
+    keyword whole then magenta
+    keyword whole undef magenta
+    keyword whole unless magenta
+    keyword whole until magenta
+    keyword whole when magenta
+    keyword whole while magenta
+    keyword whole yeld magenta
+
+#First class methods
+
+    keyword whole new yellow
+    keyword whole inherited yellow
+    keyword whole superclass yellow
+
+#Class module
+#   exclusion
+    keyword whole include\? green
+    keyword whole include magenta
+    keyword whole require magenta
+    keyword whole require_relative magenta
+#    keyword whole where magenta
+
+#Class numeric
+
+    keyword whole abs red
+    keyword whole modulo red
+    keyword whole remainder red
+
+#Class IO
+
+    keyword whole close yellow
+    keyword whole crypt yellow
+    keyword whole delete yellow
+    keyword whole each yellow
+    keyword whole gets yellow
+    keyword whole grep yellow
+    keyword whole inspect yellow
+    keyword whole join yellow
+    keyword whole sync yellow
+
+#Class Array
+
+    keyword whole index yellow
+    keyword whole indexes yellow
+    keyword whole indices yellow
+    keyword whole size yellow
+    keyword whole pop yellow
+    keyword whole push yellow
+    keyword whole sort yellow
+    keyword whole shift yellow
+    keyword whole unshift yellow
+
+#Math module
+
+    keyword whole Math::PI red
+    keyword whole Math::E red
+    keyword whole atan2 red
+    keyword whole cos red
+    keyword whole exp red
+    keyword whole frexp red
+    keyword whole ldexp red
+    keyword whole log red
+    keyword whole log10 red
+    keyword whole sin red
+    keyword whole sqrt red
+    keyword whole tan red
+
+#Kernel module
+
+    keyword whole chomp yellow
+    keyword whole chomp! yellow
+    keyword whole chop yellow
+    keyword whole chop! yellow
+    keyword whole raise yellow
+    keyword whole fork yellow
+    keyword whole rand yellow
+    keyword whole srand yellow
+    keyword whole open yellow
+    keyword whole print yellow
+    keyword whole printf yellow
+    keyword whole sprintf yellow
+    keyword whole exec yellow
+    keyword whole eval yellow
+    keyword whole exit yellow
+    keyword whole sleep yellow
+
+#context < >                     cyan/15
