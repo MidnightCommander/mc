@@ -978,13 +978,13 @@ setup_cmdline (void)
         return;
 
 #ifdef ENABLE_SUBSHELL
-    /* Workaround: avoid crash on FreeBSD (see ticket #4213 for details)  */
-    if (subshell_prompt == NULL)
-        return;
-
     if (mc_global.tty.use_subshell)
     {
-        tmp_prompt = g_string_free (subshell_prompt, FALSE);
+        /* Workaround: avoid crash on FreeBSD (see ticket #4213 for details)  */
+        if (subshell_prompt != NULL)
+            tmp_prompt = g_string_free (subshell_prompt, FALSE);
+        else
+            tmp_prompt = g_strdup (mc_prompt);
         (void) strip_ctrl_codes (tmp_prompt);
     }
 #endif
