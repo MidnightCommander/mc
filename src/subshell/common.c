@@ -717,11 +717,33 @@ parse_subshell_prompt_string (const char *buffer, int bytes)
         subshell_prompt_temp_buffer = g_string_sized_new (INITIAL_PROMPT_SIZE);
 
     /* Extract the prompt from the shell output */
-    for (i = 0; i < bytes; i++)
-        if (buffer[i] == '\n' || buffer[i] == '\r')
-            g_string_set_size (subshell_prompt_temp_buffer, 0);
-        else if (buffer[i] != '\0')
-            g_string_append_c (subshell_prompt_temp_buffer, buffer[i]);
+
+    /* Remove trailing '\n' and '\r' */
+    for (i = bytes - 1; (buffer[i] == '\n' || buffer[i] == '\r') && i >= 0; i--)
+        ;
+    if (i < 0)
+    {
+        g_string_set_size (subshell_prompt_temp_buffer, 0);
+        return;
+    }
+
+    /* New length */
+    bytes = i + 1;
+
+    /* Get a part of buffer between last '\n' and/or '\r' and penultimate ones */
+    for (; buffer[i] != '\n' && buffer[i] != '\r' && i >= 0; i--)
+        ;
+    if (i >= 0)
+    {
+        i++;
+        buffer += i;
+        bytes -= i;
+    }
+    g_string_overwrite_len (subshell_prompt_temp_buffer, 0, buffer, bytes);
+    /* Make string nul-terminated */
+    g_string_set_size (subshell_prompt_temp_buffer, bytes);
+
+    /* FIXME: can buffer contain '\0'? */
 }
 
 /* --------------------------------------------------------------------------------------------- */
