@@ -99,13 +99,13 @@ sigintr_handler (int signo)
  *         dtterm
  *         alacritty*
  *         foot*
- *         screen* (and DISPLAY environment variable is set).
+ *         screen*
+ *         tmux*
  */
 gboolean
 tty_check_term (gboolean force_xterm)
 {
     const char *termvalue;
-    const char *xdisplay;
 
     termvalue = getenv ("TERM");
     if (termvalue == NULL || *termvalue == '\0')
@@ -114,10 +114,6 @@ tty_check_term (gboolean force_xterm)
         exit (EXIT_FAILURE);
     }
 
-    xdisplay = getenv ("DISPLAY");
-    if (xdisplay != NULL && *xdisplay == '\0')
-        xdisplay = NULL;
-
     return force_xterm || strncmp (termvalue, "xterm", 5) == 0
         || strncmp (termvalue, "konsole", 7) == 0
         || strncmp (termvalue, "rxvt", 4) == 0
@@ -125,7 +121,8 @@ tty_check_term (gboolean force_xterm)
         || strcmp (termvalue, "dtterm") == 0
         || strncmp (termvalue, "alacritty", 9) == 0
         || strncmp (termvalue, "foot", 4) == 0
-        || (strncmp (termvalue, "screen", 6) == 0 && xdisplay != NULL);
+        || strncmp (termvalue, "screen", 6) == 0
+        || strncmp (termvalue, "tmux", 4) == 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
