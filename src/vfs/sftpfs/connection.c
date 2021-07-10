@@ -464,12 +464,8 @@ sftpfs_open_connection (struct vfs_s_super *super, GError ** mcerror)
     /* ... start it up. This will trade welcome banners, exchange keys,
      * and setup crypto, compression, and MAC layers
      */
-#if LIBSSH2_VERSION_NUM < 0x010208
-    rc = libssh2_session_startup (sftpfs_super->session, sftpfs_super->socket_handle);
-#else
     rc = libssh2_session_handshake (sftpfs_super->session,
                                     (libssh2_socket_t) sftpfs_super->socket_handle);
-#endif
     if (rc != 0)
     {
         mc_propagate_error (mcerror, rc, "%s", _("sftp: Failure establishing SSH session"));
