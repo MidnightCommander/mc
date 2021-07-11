@@ -201,11 +201,6 @@ static int subshell_ready;
 /* Flag to indicate if the subshell supports the persistent buffer feature. */
 static gboolean use_persistent_buffer = FALSE;
 
-/* Flag to indicate if the contents of the subshell command line need to be cleared before */
-/* executing a command. This should only end up set to true if there is some sort of error. */
-/* This allows us to recover gracefully from an error. */
-static gboolean subshell_should_clear_command_line = FALSE;
-
 /* This is the local variable where the subshell prompt is stored while we are working on it. */
 static GString *subshell_prompt_temp_buffer = NULL;
 
@@ -752,10 +747,9 @@ feed_subshell (int how, gboolean fail_on_error)
     struct timeval *wptr;
 
     should_read_new_subshell_prompt = FALSE;
-    subshell_should_clear_command_line = FALSE;
 
-    /* we wait up to 10 seconds if fail_on_error, forever otherwise */
-    wtime.tv_sec = 10;
+    /* we wait up to 1 second if fail_on_error, forever otherwise */
+    wtime.tv_sec = 1;
     wtime.tv_usec = 0;
     wptr = fail_on_error ? &wtime : NULL;
 
@@ -878,9 +872,17 @@ feed_subshell (int how, gboolean fail_on_error)
                         if (subshell_ready && !read_command_line_buffer (FALSE))
                         {
                             /* If we got here, some unforseen error must have occurred. */
+                            if (mc_global.shell->type != SHELL_FISH)
+                            {
+                                write_all (mc_global.tty.subshell_pty, "\003", 1);
+                                subshell_state = RUNNING_COMMAND;
+                                if (feed_subshell (QUIETLY, TRUE))
+                                    if (read_command_line_buffer (FALSE))
+                                        return TRUE;
+                            }
+                            subshell_state = ACTIVE;
                             flush_subshell (0, VISIBLY);
                             input_assign_text (cmdline, "");
-                            subshell_should_clear_command_line = TRUE;
                         }
                     }
 
@@ -1455,14 +1457,16 @@ invoke_subshell (const char *command, int how, vfs_path_t ** new_dir_vpath)
         /* data is there, but only if we are using one of the shells that */
         /* doesn't support keeping command buffer contents, OR if there was */
         /* some sort of error. */
-        if (!use_persistent_buffer || subshell_should_clear_command_line)
+        if (!use_persistent_buffer)
         {
-            write_all (mc_global.tty.subshell_pty, "\003", 1);
-            subshell_state = RUNNING_COMMAND;
-            /* We need to call feed_subshell here if we are using fish, because of a quirk
-             * in the behavioral of that particular shell. */
+            /* We don't need to call feed_subshell here if we are using fish, because of a
+             * quirk in the behavior of that particular shell. */
             if (mc_global.shell->type != SHELL_FISH)
+            {
+                write_all (mc_global.tty.subshell_pty, "\003", 1);
+                subshell_state = RUNNING_COMMAND;
                 feed_subshell (QUIETLY, FALSE);
+            }
         }
 
         if (how == QUIETLY)
@@ -1667,12 +1671,16 @@ do_subshell_chdir (const vfs_path_t * vpath, gboolean update_prompt)
 
     /* If we are using a shell that doesn't support persistent command buffer, we need to clear
      * the command prompt before we send the cd command. */
-    if (!use_persistent_buffer || subshell_should_clear_command_line)
+    if (!use_persistent_buffer)
     {
         write_all (mc_global.tty.subshell_pty, "\003", 1);
         subshell_state = RUNNING_COMMAND;
         if (mc_global.shell->type != SHELL_FISH)
-            feed_subshell (QUIETLY, FALSE);
+            if (!feed_subshell (QUIETLY, TRUE))
+            {
+                subshell_state = ACTIVE;
+                return;
+            }
     }
     /* The initial space keeps this out of the command history (in bash
        because we set "HISTCONTROL=ignorespace") */
@@ -1703,7 +1711,11 @@ do_subshell_chdir (const vfs_path_t * vpath, gboolean update_prompt)
     write_all (mc_global.tty.subshell_pty, "\n", 1);
 
     subshell_state = RUNNING_COMMAND;
-    feed_subshell (QUIETLY, FALSE);
+    if (!feed_subshell (QUIETLY, TRUE))
+    {
+        subshell_state = ACTIVE;
+        return;
+    }
 
     if (subshell_alive)
     {
@@ -1745,7 +1757,7 @@ do_subshell_chdir (const vfs_path_t * vpath, gboolean update_prompt)
          * type a space and press return. */
         write_all (mc_global.tty.subshell_pty, " \n", 2);
         subshell_state = RUNNING_COMMAND;
-        feed_subshell (QUIETLY, FALSE);
+        feed_subshell (QUIETLY, TRUE);
     }
 
     update_subshell_prompt = FALSE;
