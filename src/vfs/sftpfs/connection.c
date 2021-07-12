@@ -42,6 +42,8 @@
 #include "lib/util.h"
 #include "lib/tty/tty.h"        /* tty_enable_interrupt_key () */
 #include "lib/vfs/utilvfs.h"
+#include "lib/mcconfig.h"       /* mc_config_get_home_dir () */
+#include "lib/widget.h"         /* query_dialog () */
 
 #include "internal.h"
 
@@ -49,9 +51,36 @@
 
 /*** file scope macro definitions ****************************************************************/
 
+#define SHA1_DIGEST_LENGTH 20
+
 /*** file scope type declarations ****************************************************************/
 
 /*** file scope variables ************************************************************************/
+
+#ifdef LIBSSH2_KNOWNHOST_KEY_ED25519
+static const char *const hostkey_method_ssh_ed25519 = "ssh-ed25519";
+#endif
+#ifdef LIBSSH2_KNOWNHOST_KEY_ECDSA_521
+static const char *const hostkey_method_ssh_ecdsa_521 = "ecdsa-sha2-nistp521";
+#endif
+#ifdef LIBSSH2_KNOWNHOST_KEY_ECDSA_384
+static const char *const hostkey_method_ssh_ecdsa_384 = "ecdsa-sha2-nistp384";
+#endif
+#ifdef LIBSSH2_KNOWNHOST_KEY_ECDSA_256
+static const char *const hostkey_method_ssh_ecdsa_256 = "ecdsa-sha2-nistp256";
+#endif
+static const char *const hostkey_method_ssh_rsa = "ssh-rsa";
+static const char *const hostkey_method_ssh_dss = "ssh-dss";
+
+/**
+ *
+ * The current implementation of know host key checking has following limitations:
+ *
+ *   - Only plain-text entries are supported (`HashKnownHosts no` OpenSSH option)
+ *   - Only HEX-encoded SHA1 fingerprint display is supported (`FingerprintHash` OpenSSH option)
+ *   - Resolved IP addresses are *not* saved/validated along with the hostnames
+ *
+ */
 
 static const char *kbi_passwd = NULL;
 static const struct vfs_s_super *kbi_super = NULL;
@@ -70,9 +99,12 @@ static const struct vfs_s_super *kbi_super = NULL;
 static int
 sftpfs_open_socket (struct vfs_s_super *super, GError ** mcerror)
 {
+    sftpfs_super_t *sftpfs_super = SFTP_SUPER (super);
     struct addrinfo hints, *res = NULL, *curr_res;
     int my_socket = 0;
     char port[BUF_TINY];
+    static char address_ipv4[INET_ADDRSTRLEN];
+    static char address_ipv6[INET6_ADDRSTRLEN];
     int e;
 
     mc_return_val_if_error (mcerror, LIBSSH2_INVALID_SOCKET);
@@ -120,6 +152,30 @@ sftpfs_open_socket (struct vfs_s_super *super, GError ** mcerror)
     {
         int save_errno;
 
+        switch (curr_res->ai_addr->sa_family)
+        {
+        case AF_INET:
+            sftpfs_super->ip_address =
+                inet_ntop (AF_INET, &((struct sockaddr_in *) curr_res->ai_addr)->sin_addr,
+                           address_ipv4, INET_ADDRSTRLEN);
+            break;
+        case AF_INET6:
+            sftpfs_super->ip_address =
+                inet_ntop (AF_INET6, &((struct sockaddr_in6 *) curr_res->ai_addr)->sin6_addr,
+                           address_ipv6, INET6_ADDRSTRLEN);
+            break;
+        default:
+            sftpfs_super->ip_address = NULL;
+        }
+
+        if (sftpfs_super->ip_address == NULL)
+        {
+            mc_propagate_error (mcerror, 0, "%s",
+                                _("sftp: failed to convert remote host IP address into text form"));
+            my_socket = LIBSSH2_INVALID_SOCKET;
+            goto ret;
+        }
+
         my_socket = socket (curr_res->ai_family, curr_res->ai_socktype, curr_res->ai_protocol);
 
         if (my_socket < 0)
@@ -161,8 +217,358 @@ sftpfs_open_socket (struct vfs_s_super *super, GError ** mcerror)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
 /**
- * Recognize authenticaion types supported by remote side and filling internal 'super' structure by
+ * Read ~/.ssh/known_hosts file.
+ *
+ * @param super connection data
+ * @param mcerror pointer to the error handler
+ * @return TRUE on success, FALSE otherwise
+ *
+ * Thanks the Curl project for the code used in this function.
+ */
+static gboolean
+sftpfs_read_known_hosts (struct vfs_s_super *super, GError ** mcerror)
+{
+    sftpfs_super_t *sftpfs_super = SFTP_SUPER (super);
+    struct libssh2_knownhost *store = NULL;
+    int rc;
+    gboolean found = FALSE;
+
+    sftpfs_super->known_hosts = libssh2_knownhost_init (sftpfs_super->session);
+    if (sftpfs_super->known_hosts == NULL)
+        goto err;
+
+    sftpfs_super->known_hosts_file =
+        mc_build_filename (mc_config_get_home_dir (), ".ssh", "known_hosts", (char *) NULL);
+    rc = libssh2_knownhost_readfile (sftpfs_super->known_hosts, sftpfs_super->known_hosts_file,
+                                     LIBSSH2_KNOWNHOST_FILE_OPENSSH);
+    if (rc > 0)
+    {
+        const char *kh_name_end = NULL;
+
+        while (!found && libssh2_knownhost_get (sftpfs_super->known_hosts, &store, store) == 0)
+        {
+            /* For non-standard ports, the name will be enclosed in
+             * square brackets, followed by a colon and the port */
+            if (store == NULL)
+                continue;
+
+            if (store->name == NULL)
+                found = TRUE;
+            else if (store->name[0] != '[')
+                found = strcmp (store->name, super->path_element->host) == 0;
+            else
+            {
+                int port;
+
+                kh_name_end = strstr (store->name, "]:");
+                if (kh_name_end == NULL)
+                    /* Invalid host pattern */
+                    continue;
+
+                port = (int) g_ascii_strtoll (kh_name_end + 2, NULL, 10);
+                if (port == super->path_element->port)
+                {
+                    size_t kh_name_size;
+
+                    kh_name_size = strlen (store->name) - 1 - strlen (kh_name_end);
+                    found = strncmp (store->name + 1, super->path_element->host, kh_name_size) == 0;
+                }
+            }
+        }
+    }
+
+    if (found)
+    {
+        int mask;
+        const char *hostkey_method = NULL;
+
+        mask = store->typemask & LIBSSH2_KNOWNHOST_KEY_MASK;
+
+        switch (mask)
+        {
+#ifdef LIBSSH2_KNOWNHOST_KEY_ED25519
+        case LIBSSH2_KNOWNHOST_KEY_ED25519:
+            hostkey_method = hostkey_method_ssh_ed25519;
+            break;
+#endif
+#ifdef LIBSSH2_KNOWNHOST_KEY_ECDSA_521
+        case LIBSSH2_KNOWNHOST_KEY_ECDSA_521:
+            hostkey_method = hostkey_method_ssh_ecdsa_521;
+            break;
+#endif
+#ifdef LIBSSH2_KNOWNHOST_KEY_ECDSA_384
+        case LIBSSH2_KNOWNHOST_KEY_ECDSA_384:
+            hostkey_method = hostkey_method_ssh_ecdsa_384;
+            break;
+#endif
+#ifdef LIBSSH2_KNOWNHOST_KEY_ECDSA_256
+        case LIBSSH2_KNOWNHOST_KEY_ECDSA_256:
+            hostkey_method = hostkey_method_ssh_ecdsa_256;
+            break;
+#endif
+        case LIBSSH2_KNOWNHOST_KEY_SSHRSA:
+            hostkey_method = hostkey_method_ssh_rsa;
+            break;
+        case LIBSSH2_KNOWNHOST_KEY_SSHDSS:
+            hostkey_method = hostkey_method_ssh_dss;
+            break;
+        case LIBSSH2_KNOWNHOST_KEY_RSA1:
+            mc_propagate_error (mcerror, 0, "%s",
+                                _("sftp: found host key of unsupported type: RSA1"));
+            return FALSE;
+        default:
+            mc_propagate_error (mcerror, 0, "%s %d", _("sftp: unknown host key type:"), mask);
+            return FALSE;
+        }
+
+        rc = libssh2_session_method_pref (sftpfs_super->session, LIBSSH2_METHOD_HOSTKEY,
+                                          hostkey_method);
+        if (rc < 0)
+            goto err;
+    }
+
+    return TRUE;
+
+  err:
+    {
+        int sftp_errno;
+
+        sftp_errno = libssh2_session_last_errno (sftpfs_super->session);
+        sftpfs_ssherror_to_gliberror (sftpfs_super, sftp_errno, mcerror);
+    }
+    return FALSE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Write new host + key pair to the ~/.ssh/known_hosts file.
+ *
+ * @param super connection data
+ * @param remote_key he key for the remote host
+ * @param remote_key_len length of @remote_key
+ * @param type_mask info about format of host name, key and key type
+ * @return 0 on success, regular libssh2 error code otherwise
+ *
+ * Thanks the Curl project for the code used in this function.
+ */
+static int
+sftpfs_update_known_hosts (struct vfs_s_super *super, const char *remote_key, size_t remote_key_len,
+                           int type_mask)
+{
+    sftpfs_super_t *sftpfs_super = SFTP_SUPER (super);
+    int rc;
+
+    /* add this host + key pair  */
+    rc = libssh2_knownhost_addc (sftpfs_super->known_hosts, super->path_element->host, NULL,
+                                 remote_key, remote_key_len, NULL, 0, type_mask, NULL);
+    if (rc < 0)
+        return rc;
+
+    /* write the entire in-memory list of known hosts to the known_hosts file */
+    rc = libssh2_knownhost_writefile (sftpfs_super->known_hosts, sftpfs_super->known_hosts_file,
+                                      LIBSSH2_KNOWNHOST_FILE_OPENSSH);
+
+    if (rc < 0)
+        return rc;
+
+    (void) message (D_NORMAL, _("Information"),
+                    _("Permanently added\n%s (%s)\nto the list of known hosts."),
+                    super->path_element->host, sftpfs_super->ip_address);
+
+    return 0;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Compute and return readable host key fingerprint hash.
+ *
+ * @param session libssh2 session handle
+ * @return pointer to static buffer on success, NULL otherwise
+ */
+static const char *
+sftpfs_compute_fingerprint_hash (LIBSSH2_SESSION * session)
+{
+    static char result[SHA1_DIGEST_LENGTH * 3 + 1];     /* "XX:" for each byte, and EOL */
+    const char *fingerprint;
+    size_t i;
+
+    /* The fingerprint points to static storage (!), don't free() it. */
+    fingerprint = libssh2_hostkey_hash (session, LIBSSH2_HOSTKEY_HASH_SHA1);
+    if (fingerprint == NULL)
+        return NULL;
+
+    for (i = 0; i < SHA1_DIGEST_LENGTH && i * 3 < sizeof (result) - 1; i++)
+        g_snprintf ((gchar *) (result + i * 3), 4, "%02x:", (guint8) fingerprint[i]);
+
+    /* remove last ":" */
+    result[i * 3 - 1] = '\0';
+
+    return result;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Process host info found in ~/.ssh/known_hosts file.
+ *
+ * @param super connection data
+ * @param mcerror pointer to the error handler
+ * @return TRUE on success, FALSE otherwise
+ *
+ * Thanks the Curl project for the code used in this function.
+ */
+static gboolean
+sftpfs_process_known_host (struct vfs_s_super *super, GError ** mcerror)
+{
+    sftpfs_super_t *sftpfs_super = SFTP_SUPER (super);
+    const char *remote_key;
+    const char *key_type;
+    const char *fingerprint_hash;
+    size_t remote_key_len = 0;
+    int remote_key_type = LIBSSH2_HOSTKEY_TYPE_UNKNOWN;
+    int keybit = 0;
+    struct libssh2_knownhost *host = NULL;
+    int rc;
+    char *msg = NULL;
+    gboolean handle_query = FALSE;
+
+    remote_key = libssh2_session_hostkey (sftpfs_super->session, &remote_key_len, &remote_key_type);
+    if (remote_key == NULL || remote_key_len == 0
+        || remote_key_type == LIBSSH2_HOSTKEY_TYPE_UNKNOWN)
+    {
+        mc_propagate_error (mcerror, 0, "%s", _("sftp: cannot get the remote host key"));
+        return FALSE;
+    }
+
+    switch (remote_key_type)
+    {
+    case LIBSSH2_HOSTKEY_TYPE_RSA:
+        keybit = LIBSSH2_KNOWNHOST_KEY_SSHRSA;
+        key_type = "RSA";
+        break;
+    case LIBSSH2_HOSTKEY_TYPE_DSS:
+        keybit = LIBSSH2_KNOWNHOST_KEY_SSHDSS;
+        key_type = "DSS";
+        break;
+#ifdef LIBSSH2_HOSTKEY_TYPE_ECDSA_256
+    case LIBSSH2_HOSTKEY_TYPE_ECDSA_256:
+        keybit = LIBSSH2_KNOWNHOST_KEY_ECDSA_256;
+        key_type = "ECDSA";
+        break;
+#endif
+#ifdef LIBSSH2_HOSTKEY_TYPE_ECDSA_384
+    case LIBSSH2_HOSTKEY_TYPE_ECDSA_384:
+        keybit = LIBSSH2_KNOWNHOST_KEY_ECDSA_384;
+        key_type = "ECDSA";
+        break;
+#endif
+#ifdef LIBSSH2_HOSTKEY_TYPE_ECDSA_521
+    case LIBSSH2_HOSTKEY_TYPE_ECDSA_521:
+        keybit = LIBSSH2_KNOWNHOST_KEY_ECDSA_521;
+        key_type = "ECDSA";
+        break;
+#endif
+#ifdef LIBSSH2_HOSTKEY_TYPE_ED25519
+    case LIBSSH2_HOSTKEY_TYPE_ED25519:
+        keybit = LIBSSH2_KNOWNHOST_KEY_ED25519;
+        key_type = "ED25519";
+        break;
+#endif
+    default:
+        mc_propagate_error (mcerror, 0, "%s",
+                            _("sftp: unsupported key type, can't check remote host key"));
+        return FALSE;
+    }
+
+    fingerprint_hash = sftpfs_compute_fingerprint_hash (sftpfs_super->session);
+    if (fingerprint_hash == NULL)
+    {
+        mc_propagate_error (mcerror, 0, "%s", _("sftp: can't compute host key fingerprint hash"));
+        return FALSE;
+    }
+
+    rc = libssh2_knownhost_checkp (sftpfs_super->known_hosts, super->path_element->host,
+                                   super->path_element->port, remote_key, remote_key_len,
+                                   LIBSSH2_KNOWNHOST_TYPE_PLAIN | LIBSSH2_KNOWNHOST_KEYENC_RAW |
+                                   keybit, &host);
+
+    switch (rc)
+    {
+    default:
+    case LIBSSH2_KNOWNHOST_CHECK_FAILURE:
+        /* something prevented the check to be made */
+        goto err;
+
+    case LIBSSH2_KNOWNHOST_CHECK_MATCH:
+        /* host + key pair matched -- OK */
+        break;
+
+    case LIBSSH2_KNOWNHOST_CHECK_NOTFOUND:
+        /* no host match was found -- add it to the known_hosts file */
+        msg = g_strdup_printf (_("The authenticity of host\n%s (%s)\ncan't be established!\n"
+                                 "%s key fingerprint hash is\nSHA1:%s.\n"
+                                 "Do you want to add it to the list of known hosts and continue connecting?"),
+                               super->path_element->host, sftpfs_super->ip_address,
+                               key_type, fingerprint_hash);
+        /* Select "No" initially */
+        query_set_sel (2);
+        rc = query_dialog (_("Warning"), msg, D_NORMAL, 3, _("&Yes"), _("&Ignore"), _("&No"));
+        g_free (msg);
+        handle_query = TRUE;
+        break;
+
+    case LIBSSH2_KNOWNHOST_CHECK_MISMATCH:
+        msg = g_strdup_printf (_("%s (%s)\nis found in the list of known hosts but\n"
+                                 "KEYS DO NOT MATCH! THIS COULD BE A MITM ATTACK!\n"
+                                 "Are you sure you want to add it to the list of known hosts and continue connecting?"),
+                               super->path_element->host, sftpfs_super->ip_address);
+        /* Select "No" initially */
+        query_set_sel (2);
+        rc = query_dialog (MSG_ERROR, msg, D_ERROR, 3, _("&Yes"), _("&Ignore"), _("&No"));
+        g_free (msg);
+        handle_query = TRUE;
+        break;
+    }
+
+    if (handle_query)
+        switch (rc)
+        {
+        case 0:
+            /* Yes: add this host + key pair, continue connecting */
+            if (sftpfs_update_known_hosts (super, remote_key, remote_key_len,
+                                           LIBSSH2_KNOWNHOST_TYPE_PLAIN
+                                           | LIBSSH2_KNOWNHOST_KEYENC_RAW | keybit) < 0)
+                goto err;
+            break;
+        case 1:
+            /* Ignore: do not add this host + key pair, continue connecting anyway */
+            break;
+        case 2:
+        default:
+            mc_propagate_error (mcerror, 0, "%s", _("sftp: host key verification failed"));
+            /* No: abort connection */
+            goto err;
+        }
+
+    return TRUE;
+
+  err:
+    {
+        int sftp_errno;
+
+        sftp_errno = libssh2_session_last_errno (sftpfs_super->session);
+        sftpfs_ssherror_to_gliberror (sftpfs_super, sftp_errno, mcerror);
+    }
+
+    return FALSE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Recognize authentication types supported by remote side and filling internal 'super' structure by
  * proper enum's values.
  *
  * @param super connection data
@@ -461,6 +867,9 @@ sftpfs_open_connection (struct vfs_s_super *super, GError ** mcerror)
     if (sftpfs_super->session == NULL)
         return (-1);
 
+    if (!sftpfs_read_known_hosts (super, mcerror))
+        return (-1);
+
     /* ... start it up. This will trade welcome banners, exchange keys,
      * and setup crypto, compression, and MAC layers
      */
@@ -475,13 +884,8 @@ sftpfs_open_connection (struct vfs_s_super *super, GError ** mcerror)
         return (-1);
     }
 
-    /* At this point we havn't yet authenticated.  The first thing to do
-     * is check the hostkey's fingerprint against our known hosts Your app
-     * may have it hard coded, may go to a file, may present it to the
-     * user, that's your call
-     */
-    sftpfs_super->fingerprint =
-        libssh2_hostkey_hash (sftpfs_super->session, LIBSSH2_HOSTKEY_HASH_SHA1);
+    if (!sftpfs_process_known_host (super, mcerror))
+        return (-1);
 
     if (!sftpfs_recognize_auth_types (super))
     {
@@ -538,7 +942,13 @@ sftpfs_close_connection (struct vfs_s_super *super, const char *shutdown_message
         sftpfs_super->agent = NULL;
     }
 
-    sftpfs_super->fingerprint = NULL;
+    if (sftpfs_super->known_hosts != NULL)
+    {
+        libssh2_knownhost_free (sftpfs_super->known_hosts);
+        sftpfs_super->known_hosts = NULL;
+    }
+
+    MC_PTR_FREE (sftpfs_super->known_hosts_file);
 
     if (sftpfs_super->session != NULL)
     {

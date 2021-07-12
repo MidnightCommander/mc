@@ -42,6 +42,9 @@ typedef struct
     sftpfs_auth_type_t auth_type;
     sftpfs_auth_type_t config_auth_type;
 
+    LIBSSH2_KNOWNHOSTS *known_hosts;
+    char *known_hosts_file;
+
     LIBSSH2_SESSION *session;
     LIBSSH2_SFTP *sftp_session;
 
@@ -51,7 +54,7 @@ typedef struct
     char *privkey;
 
     int socket_handle;
-    const char *fingerprint;
+    const char *ip_address;
     vfs_path_element_t *original_connection_info;
 } sftpfs_super_t;
 
