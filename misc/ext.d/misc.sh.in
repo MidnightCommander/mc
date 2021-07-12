@@ -35,6 +35,9 @@ do_view_action() {
     elf)
         file "${MC_EXT_FILENAME}" && nm -C "${MC_EXT_FILENAME}"
         ;;
+    dylib)
+        file "${MC_EXT_FILENAME}" && nm -n "${MC_EXT_FILENAME}"
+        ;;
     dbf)
         dbview -b "${MC_EXT_FILENAME}"
         ;;
