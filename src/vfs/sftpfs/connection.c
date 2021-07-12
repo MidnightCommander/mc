@@ -189,7 +189,7 @@ sftpfs_open_socket (struct vfs_s_super *super, GError ** mcerror)
  * Thanks the Curl project for the code used in this function.
  */
 static gboolean
-sftp_read_known_hosts (struct vfs_s_super *super, GError ** mcerror)
+sftpfs_read_known_hosts (struct vfs_s_super *super, GError ** mcerror)
 {
     sftpfs_super_t *sftpfs_super = SFTP_SUPER (super);
     struct libssh2_knownhost *store = NULL;
@@ -315,7 +315,7 @@ sftp_read_known_hosts (struct vfs_s_super *super, GError ** mcerror)
  * Thanks the Curl project for the code used in this function.
  */
 static gboolean
-sftp_process_known_host (struct vfs_s_super *super, GError ** mcerror)
+sftpfs_process_known_host (struct vfs_s_super *super, GError ** mcerror)
 {
     sftpfs_super_t *sftpfs_super = SFTP_SUPER (super);
     const char *remote_key;
@@ -732,7 +732,7 @@ sftpfs_open_connection (struct vfs_s_super *super, GError ** mcerror)
     if (sftpfs_super->session == NULL)
         return (-1);
 
-    if (!sftp_read_known_hosts (super, mcerror))
+    if (!sftpfs_read_known_hosts (super, mcerror))
         return (-1);
 
     /* ... start it up. This will trade welcome banners, exchange keys,
@@ -749,7 +749,7 @@ sftpfs_open_connection (struct vfs_s_super *super, GError ** mcerror)
         return (-1);
     }
 
-    if (!sftp_process_known_host (super, mcerror))
+    if (!sftpfs_process_known_host (super, mcerror))
         return (-1);
 
     if (!sftpfs_recognize_auth_types (super))
