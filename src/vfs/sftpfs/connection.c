@@ -306,6 +306,46 @@ sftpfs_read_known_hosts (struct vfs_s_super *super, GError ** mcerror)
 /* --------------------------------------------------------------------------------------------- */
 
 /**
+ * Write new host + key pair to the ~/.ssh/known_hosts file.
+ *
+ * @param super connection data
+ * @param remote_key he key for the remote host
+ * @param remote_key_len length of @remote_key
+ * @param type_mask info about format of host name, key and key type
+ * @return 0 on success, regular libssh2 error code otherwise
+ *
+ * Thanks the Curl project for the code used in this function.
+ */
+static int
+sftpfs_update_known_hosts (struct vfs_s_super *super, const char *remote_key, size_t remote_key_len,
+                           int type_mask)
+{
+    sftpfs_super_t *sftpfs_super = SFTP_SUPER (super);
+    int rc;
+
+    /* add this host + key pair  */
+    rc = libssh2_knownhost_addc (sftpfs_super->known_hosts, super->path_element->host, NULL,
+                                 remote_key, remote_key_len, NULL, 0, type_mask, NULL);
+    if (rc < 0)
+        return rc;
+
+    /* write the entire in-memory list of known hosts to the known_hosts file */
+    rc = libssh2_knownhost_writefile (sftpfs_super->known_hosts, sftpfs_super->known_hosts_file,
+                                      LIBSSH2_KNOWNHOST_FILE_OPENSSH);
+
+    if (rc < 0)
+        return rc;
+
+    (void) message (D_NORMAL, _("Information"),
+                    _("Permanently added\n%s\nto the list of known hosts"),
+                    super->path_element->host);
+
+    return 0;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
  * Process host info found in ~/.ssh/known_hosts file.
  *
  * @param super connection data
@@ -324,6 +364,8 @@ sftpfs_process_known_host (struct vfs_s_super *super, GError ** mcerror)
     int keybit = 0;
     struct libssh2_knownhost *host = NULL;
     int rc;
+    char *msg = NULL;
+    gboolean handle_query = FALSE;
 
     remote_key = libssh2_session_hostkey (sftpfs_super->session, &remote_key_len, &remote_key_type);
     if (remote_key == NULL || remote_key_len == 0
@@ -374,49 +416,57 @@ sftpfs_process_known_host (struct vfs_s_super *super, GError ** mcerror)
 
     switch (rc)
     {
+    default:
+    case LIBSSH2_KNOWNHOST_CHECK_FAILURE:
+        /* something prevented the check to be made */
+        goto err;
+
     case LIBSSH2_KNOWNHOST_CHECK_MATCH:
-        /* host + key pair matched */
+        /* host + key pair matched -- OK */
         break;
 
-    default:
-        {
-            char *msg;
+    case LIBSSH2_KNOWNHOST_CHECK_NOTFOUND:
+        /* no host match was found -- add it to the known_hosts file */
+        msg = g_strdup_printf (_("%s\nisn't found in the list of known hosts.\n"
+                                 "Do you want to add it and continue connecting?"),
+                               super->path_element->host);
+        rc = query_dialog (_("Warning"), msg, D_NORMAL, 3, _("&Yes"), _("&Ignore"), _("&No"));
+        g_free (msg);
+        handle_query = TRUE;
+        break;
 
-            msg = g_strdup_printf (_("The authenticity of host\n%s\ncan't be established.\n"
-                                     "Are you sure you want to continue connecting?"),
-                                   super->path_element->host);
-            rc = query_dialog ("sftp", msg, D_NORMAL, 2, _("&Yes"), _("&No"));
-            g_free (msg);
-
-            if (rc != 0)
-            {
-                /* If "No", do not continue the connect */
-                mc_propagate_error (mcerror, 0, "%s", _("sftp: host key verification failed"));
-                return FALSE;
-            }
-
-            /* host + key pair mismatched, or not found
-             * add this host + key pair  */
-            rc = libssh2_knownhost_addc (sftpfs_super->known_hosts, super->path_element->host, NULL,
-                                         remote_key, remote_key_len, NULL, 0,
-                                         LIBSSH2_KNOWNHOST_TYPE_PLAIN | LIBSSH2_KNOWNHOST_KEYENC_RAW
-                                         | keybit, NULL);
-            if (rc < 0)
-                goto err;
-
-            /* write the entire in-memory list of known hosts to the known_hosts file */
-            rc = libssh2_knownhost_writefile (sftpfs_super->known_hosts,
-                                              sftpfs_super->known_hosts_file,
-                                              LIBSSH2_KNOWNHOST_FILE_OPENSSH);
-            if (rc < 0)
-                goto err;
-
-            (void) message (D_NORMAL, _("sftp"),
-                            "Permanently added\n%s\nto the list of known hosts",
-                            super->path_element->host);
-        }
+    case LIBSSH2_KNOWNHOST_CHECK_MISMATCH:
+        msg = g_strdup_printf (_("%s\n is found in the list of known hosts but\n"
+                                 "KEYS ARE NOT MATCH!\n"
+                                 "Are you sure you want to continue connecting?"),
+                               super->path_element->host);
+        /* Select "No" initially */
+        query_set_sel (2);
+        rc = query_dialog (MSG_ERROR, msg, D_ERROR, 3, _("&Yes"), _("&Ignore"), _("&No"));
+        g_free (msg);
+        handle_query = TRUE;
         break;
     }
+
+    if (handle_query)
+        switch (rc)
+        {
+        case 0:
+            /* Yes: add this host + key pair, continue connect */
+            if (sftpfs_update_known_hosts (super, remote_key, remote_key_len,
+                                           LIBSSH2_KNOWNHOST_TYPE_PLAIN
+                                           | LIBSSH2_KNOWNHOST_KEYENC_RAW | keybit) < 0)
+                goto err;
+            break;
+        case 1:
+            /* Ignore: do not add this host + key pair, continue connect anyway */
+            break;
+        case 2:
+        default:
+            mc_propagate_error (mcerror, 0, "%s", _("sftp: host key verification failed"));
+            /* No: do not connect */
+            goto err;
+        }
 
     return TRUE;
 
