@@ -356,7 +356,7 @@ parse_ls_line (char *line, struct stat *s, char **filename, char **linkname)
 
     memset (&date, 0, sizeof (date));
 
-    if (vfs_parse_month (t, &date))
+    if (!vfs_parse_month (t, &date))
         date.tm_mon = 0;
 
     day_of_month = NEXT_TOKEN_R;
