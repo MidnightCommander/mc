@@ -16,8 +16,8 @@ GNU Midnight Commander (also referred to as MC) is a user shell with
 text-mode full-screen interface.  It can be run on the OS console,
 in xterm and other terminal emulators.
 
-GNU Midnight Commander allows you to manage files while making most of
-you screen and giving you a clear representation of the filesystem, yet
+GNU Midnight Commander allows you to manage files while making the most of
+your screen and giving you a clear representation of the filesystem, yet
 it's simple enough to be run over a telnet or ssh session.
 
 GNU Midnight Commander is released under the GNU General Public
