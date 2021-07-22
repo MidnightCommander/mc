@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: mc 4.8.26-213-g90fde37eb\n"
+"Project-Id-Version: mc 4.8.26-227-g2125152d7\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-06-20 16:14+0300\n"
+"POT-Creation-Date: 2021-07-25 20:57+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -570,7 +570,7 @@ msgstr ""
 msgid "The TERM environment variable is unset!\n"
 msgstr ""
 
-#: lib/tty/tty.c:204
+#: lib/tty/tty.c:201
 msgid "Cannot check SIGWINCH pipe"
 msgstr ""
 
@@ -753,7 +753,8 @@ msgstr ""
 #: src/filemanager/filegui.c:458 src/filemanager/filemanager.c:1065
 #: src/filemanager/filemanager.c:1073 src/filemanager/hotlist.c:1159
 #: src/filemanager/hotlist.c:1176 src/filemanager/panel.c:2826
-#: src/filemanager/tree.c:829 src/subshell/common.c:1617
+#: src/filemanager/tree.c:829 src/subshell/common.c:1621
+#: src/vfs/sftpfs/connection.c:518 src/vfs/sftpfs/connection.c:530
 #: src/viewer/actions_cmd.c:643 src/viewer/actions_cmd.c:649
 #: src/viewer/search.c:447
 msgid "&Yes"
@@ -766,7 +767,8 @@ msgstr ""
 #: src/filemanager/filemanager.c:1065 src/filemanager/filemanager.c:1073
 #: src/filemanager/hotlist.c:1159 src/filemanager/hotlist.c:1176
 #: src/filemanager/panel.c:2826 src/filemanager/tree.c:829
-#: src/subshell/common.c:1617 src/viewer/actions_cmd.c:643
+#: src/subshell/common.c:1621 src/vfs/sftpfs/connection.c:518
+#: src/vfs/sftpfs/connection.c:530 src/viewer/actions_cmd.c:643
 #: src/viewer/actions_cmd.c:649 src/viewer/search.c:448
 msgid "&No"
 msgstr ""
@@ -1305,8 +1307,8 @@ msgstr ""
 #: src/editor/editcmd.c:378 src/editor/editcmd.c:538 src/editor/editcmd.c:958
 #: src/editor/editcmd.c:2013 src/editor/editcmd.c:2042 src/editor/etags.c:371
 #: src/execute.c:135 src/filemanager/file.c:2398 src/filemanager/panel.c:4523
-#: src/help.c:362 src/main.c:408 src/subshell/common.c:1615
-#: src/viewer/actions_cmd.c:443
+#: src/help.c:362 src/main.c:408 src/subshell/common.c:1619
+#: src/vfs/sftpfs/connection.c:518 src/viewer/actions_cmd.c:443
 msgid "Warning"
 msgstr ""
 
@@ -2359,7 +2361,8 @@ msgstr ""
 
 #: src/filemanager/achown.c:859 src/filemanager/achown.c:894
 #: src/filemanager/chattr.c:1107 src/filemanager/chmod.c:437
-#: src/filemanager/chown.c:310
+#: src/filemanager/chown.c:310 src/vfs/sftpfs/connection.c:518
+#: src/vfs/sftpfs/connection.c:530
 msgid "&Ignore"
 msgstr ""
 
@@ -2609,6 +2612,7 @@ msgid "Panel options"
 msgstr ""
 
 #: src/filemanager/boxes.c:742 src/filemanager/info.c:86
+#: src/vfs/sftpfs/connection.c:377
 msgid "Information"
 msgstr ""
 
@@ -4940,16 +4944,16 @@ msgid ""
 "%s"
 msgstr ""
 
-#: src/subshell/common.c:1341
+#: src/subshell/common.c:1343
 #, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr ""
 
-#: src/subshell/common.c:1616
+#: src/subshell/common.c:1620
 msgid "The shell is still active. Quit anyway?"
 msgstr ""
 
-#: src/subshell/common.c:1735
+#: src/subshell/common.c:1747
 #, c-format
 msgid "Warning: Cannot change to %s.\n"
 msgstr ""
@@ -5432,49 +5436,106 @@ msgstr ""
 msgid "sftp: Unable to get current user name."
 msgstr ""
 
-#: src/vfs/sftpfs/connection.c:82 src/vfs/sftpfs/vfs_subclass.c:116
+#: src/vfs/sftpfs/connection.c:114 src/vfs/sftpfs/vfs_subclass.c:116
 msgid "sftp: Invalid host name."
 msgstr ""
 
-#: src/vfs/sftpfs/connection.c:114 src/vfs/sftpfs/connection.c:130
+#: src/vfs/sftpfs/connection.c:146 src/vfs/sftpfs/connection.c:186
 #, c-format
 msgid "sftp: %s"
 msgstr ""
 
-#: src/vfs/sftpfs/connection.c:135
+#: src/vfs/sftpfs/connection.c:174
+msgid "sftp: failed to convert remote host IP address into text form"
+msgstr ""
+
+#: src/vfs/sftpfs/connection.c:191
 #, c-format
 msgid "sftp: making connection to %s"
 msgstr ""
 
-#: src/vfs/sftpfs/connection.c:145
+#: src/vfs/sftpfs/connection.c:201
 msgid "sftp: connection interrupted by user"
 msgstr ""
 
-#: src/vfs/sftpfs/connection.c:147
+#: src/vfs/sftpfs/connection.c:203
 #, c-format
 msgid "sftp: connection to server failed: %s"
 msgstr ""
 
-#: src/vfs/sftpfs/connection.c:281
+#: src/vfs/sftpfs/connection.c:319
+msgid "sftp: found host key of unsupported type: RSA1"
+msgstr ""
+
+#: src/vfs/sftpfs/connection.c:322
+msgid "sftp: unknown host key type:"
+msgstr ""
+
+#: src/vfs/sftpfs/connection.c:378
+#, c-format
+msgid ""
+"Permanently added\n"
+"%s (%s)\n"
+"to the list of known hosts."
+msgstr ""
+
+#: src/vfs/sftpfs/connection.c:442
+msgid "sftp: cannot get the remote host key"
+msgstr ""
+
+#: src/vfs/sftpfs/connection.c:482
+msgid "sftp: unsupported key type, can't check remote host key"
+msgstr ""
+
+#: src/vfs/sftpfs/connection.c:489
+msgid "sftp: can't compute host key fingerprint hash"
+msgstr ""
+
+#: src/vfs/sftpfs/connection.c:511
+#, c-format
+msgid ""
+"The authenticity of host\n"
+"%s (%s)\n"
+"can't be established!\n"
+"%s key fingerprint hash is\n"
+"SHA1:%s.\n"
+"Do you want to add it to the list of known hosts and continue connecting?"
+msgstr ""
+
+#: src/vfs/sftpfs/connection.c:524
+#, c-format
+msgid ""
+"%s (%s)\n"
+"is found in the list of known hosts but\n"
+"KEYS DO NOT MATCH! THIS COULD BE A MITM ATTACK!\n"
+"Are you sure you want to add it to the list of known hosts and continue "
+"connecting?"
+msgstr ""
+
+#: src/vfs/sftpfs/connection.c:551
+msgid "sftp: host key verification failed"
+msgstr ""
+
+#: src/vfs/sftpfs/connection.c:687
 #, c-format
 msgid "sftp: Enter passphrase for %s "
 msgstr ""
 
-#: src/vfs/sftpfs/connection.c:286
+#: src/vfs/sftpfs/connection.c:692
 msgid "sftp: Passphrase is empty."
 msgstr ""
 
-#: src/vfs/sftpfs/connection.c:391
+#: src/vfs/sftpfs/connection.c:797
 #, c-format
 msgid "sftp: Enter password for %s "
 msgstr ""
 
-#: src/vfs/sftpfs/connection.c:396
+#: src/vfs/sftpfs/connection.c:802
 msgid "sftp: Password is empty."
 msgstr ""
 
-#: src/vfs/sftpfs/connection.c:475
-msgid "sftp: Failure establishing SSH session"
+#: src/vfs/sftpfs/connection.c:883
+msgid "sftp: failure establishing SSH session"
 msgstr ""
 
 #: src/vfs/sftpfs/file.c:277

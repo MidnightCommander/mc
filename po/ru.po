@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-06-20 16:14+0300\n"
+"POT-Creation-Date: 2021-07-25 20:57+0300\n"
 "PO-Revision-Date: 2020-12-31 14:19+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Russian (http://www.transifex.com/mc/mc/language/ru/)\n"
@@ -1650,9 +1650,8 @@ msgstr ""
 "Текстовый редактор с дружественным интерфейсом пользователя.\n"
 "Создан для Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2021 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2020 the Free Software Foundation"
+msgstr "Copyright (C) 1996-2021 the Free Software Foundation"
 
 msgid "About"
 msgstr "О программе"
@@ -3777,19 +3776,22 @@ msgstr "Добавить в список команд"
 msgid "Enter command label:"
 msgstr "Введите название команды:"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "%s"
-msgstr "Внешняя панелизация"
+msgstr ""
+"Внешняя панелизация:\n"
+"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "failed to read data from child stdout:\n"
 "%s"
 msgstr ""
-"Не удалось прочитать данные из дочернего stdout:\n"
+"Внешняя панелизация:\n"
+"не удалось прочитать данные из дочернего stdout:\n"
 "%s"
 
 msgid "Cannot run external panelize in a non-local directory"
@@ -4181,20 +4183,23 @@ msgstr ""
 "Неожиданный конец файла\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s:\n"
 "%s"
 msgstr ""
 "Не удалось открыть архив %s\n"
+"%s:\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "EXTFS virtual file system:\n"
 "%s"
-msgstr "Виртуальная файловая система:"
+msgstr ""
+"Виртуальная файловая система EXTFS:\n"
+"%s"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4362,11 +4367,13 @@ msgstr ""
 "Файл ~/.netrc имеет неверный режим доступа/владения.\n"
 "Удалите пароль или исправьте режим доступа/владения"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "SFS virtual file system:\n"
 "%s"
-msgstr "Виртуальная файловая система:"
+msgstr ""
+"Виртуальная файловая система SFS:\n"
+"%s"
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4402,6 +4409,9 @@ msgstr "sftp: неверное имя системы."
 msgid "sftp: %s"
 msgstr "sftp: %s"
 
+msgid "sftp: failed to convert remote host IP address into text form"
+msgstr ""
+
 #, c-format
 msgid "sftp: making connection to %s"
 msgstr "sftp: осуществляется соединение с %s"
@@ -4412,6 +4422,50 @@ msgstr "sftp: соединение прервано пользователем"
 #, c-format
 msgid "sftp: connection to server failed: %s"
 msgstr "sftp: сбой соединения с сервером: %s"
+
+msgid "sftp: found host key of unsupported type: RSA1"
+msgstr ""
+
+msgid "sftp: unknown host key type:"
+msgstr ""
+
+#, c-format
+msgid ""
+"Permanently added\n"
+"%s (%s)\n"
+"to the list of known hosts."
+msgstr ""
+
+msgid "sftp: cannot get the remote host key"
+msgstr ""
+
+msgid "sftp: unsupported key type, can't check remote host key"
+msgstr ""
+
+msgid "sftp: can't compute host key fingerprint hash"
+msgstr ""
+
+#, c-format
+msgid ""
+"The authenticity of host\n"
+"%s (%s)\n"
+"can't be established!\n"
+"%s key fingerprint hash is\n"
+"SHA1:%s.\n"
+"Do you want to add it to the list of known hosts and continue connecting?"
+msgstr ""
+
+#, c-format
+msgid ""
+"%s (%s)\n"
+"is found in the list of known hosts but\n"
+"KEYS DO NOT MATCH! THIS COULD BE A MITM ATTACK!\n"
+"Are you sure you want to add it to the list of known hosts and continue "
+"connecting?"
+msgstr ""
+
+msgid "sftp: host key verification failed"
+msgstr "sftp: cбой проверки ключа сервера"
 
 #, c-format
 msgid "sftp: Enter passphrase for %s "
@@ -4427,7 +4481,7 @@ msgstr "sftp: введите пароль для %s "
 msgid "sftp: Password is empty."
 msgstr "sftp: пароль пуст."
 
-msgid "sftp: Failure establishing SSH session"
+msgid "sftp: failure establishing SSH session"
 msgstr "sftp: сбой установки SSH-сессии"
 
 msgid "sftp: No file handler data present for reading file"
