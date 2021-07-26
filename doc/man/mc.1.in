@@ -3364,6 +3364,21 @@ Examples:
     sftp://joe@noncompressed.ssh.edu/private
     sftp://joe@somehost.ssh.edu:2222/private
 .fi
+.PP
+When establishing the connection, server key fingerprint is verified using
+the ~/.ssh/known_hosts file. If the host/key pair is not found or the host is found,
+but the key doesn't match, an appropriate message is shown.
+There are three buttons in the message dialog:
+.PP
+.B [Yes]
+add new host/key pair to the ~/.ssh/known_hosts file and continue.
+.PP
+.B [Ignore]
+do not add new host/key pair to the ~/.ssh/known_hosts file, but continue
+nevertheless (at you own risk).
+.PP
+.B [No]
+abort connection.
 .\"NODE "  Undelete File System"
 .SH "  Undelete File System"
 On Linux systems, if you asked configure to use the ext2fs undelete

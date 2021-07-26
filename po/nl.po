@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-06-20 16:14+0300\n"
+"POT-Creation-Date: 2021-07-25 20:57+0300\n"
 "PO-Revision-Date: 2020-12-31 14:19+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Dutch (http://www.transifex.com/mc/mc/language/nl/)\n"
@@ -4385,6 +4385,9 @@ msgstr "sftp: Ongeldige hostnaam."
 msgid "sftp: %s"
 msgstr "sftp: %s"
 
+msgid "sftp: failed to convert remote host IP address into text form"
+msgstr ""
+
 #, c-format
 msgid "sftp: making connection to %s"
 msgstr "sftp: aan het verbinden met %s"
@@ -4395,6 +4398,51 @@ msgstr "sftp: verbinding onderbroken door gebruiker"
 #, c-format
 msgid "sftp: connection to server failed: %s"
 msgstr "sftp: verbinding met server mislukt: %s"
+
+msgid "sftp: found host key of unsupported type: RSA1"
+msgstr ""
+
+msgid "sftp: unknown host key type:"
+msgstr ""
+
+#, c-format
+msgid ""
+"Permanently added\n"
+"%s (%s)\n"
+"to the list of known hosts."
+msgstr ""
+
+msgid "sftp: cannot get the remote host key"
+msgstr ""
+
+msgid "sftp: unsupported key type, can't check remote host key"
+msgstr ""
+
+msgid "sftp: can't compute host key fingerprint hash"
+msgstr ""
+
+#, c-format
+msgid ""
+"The authenticity of host\n"
+"%s (%s)\n"
+"can't be established!\n"
+"%s key fingerprint hash is\n"
+"SHA1:%s.\n"
+"Do you want to add it to the list of known hosts and continue connecting?"
+msgstr ""
+
+#, c-format
+msgid ""
+"%s (%s)\n"
+"is found in the list of known hosts but\n"
+"KEYS DO NOT MATCH! THIS COULD BE A MITM ATTACK!\n"
+"Are you sure you want to add it to the list of known hosts and continue "
+"connecting?"
+msgstr ""
+
+#, fuzzy
+msgid "sftp: host key verification failed"
+msgstr "Authenticatie mislukt"
 
 #, c-format
 msgid "sftp: Enter passphrase for %s "
@@ -4410,7 +4458,8 @@ msgstr "sftp: Geeft wachtwoord voor %s"
 msgid "sftp: Password is empty."
 msgstr "sftp: Wachtwoord is leeg."
 
-msgid "sftp: Failure establishing SSH session"
+#, fuzzy
+msgid "sftp: failure establishing SSH session"
 msgstr "sftp: SHH-sessie openen is niet gelukt"
 
 msgid "sftp: No file handler data present for reading file"
