@@ -807,10 +807,10 @@ static read_header
 tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, size_t * h_size)
 {
     tar_super_t *arch = TAR_SUPER (archive);
-    read_header checksum_status;
     union block *header;
     struct stat st;
     static char *next_long_name = NULL, *next_long_link = NULL;
+    read_header status;
 
     while (TRUE)
     {
@@ -818,9 +818,9 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, size_t * h_s
         if (header == NULL)
             return HEADER_END_OF_FILE;
 
-        checksum_status = tar_checksum (header);
-        if (checksum_status != HEADER_SUCCESS)
-            return checksum_status;
+        status = tar_checksum (header);
+        if (status != HEADER_SUCCESS)
+            return status;
 
         if (header->header.typeflag == LNKTYPE || header->header.typeflag == DIRTYPE)
             *h_size = 0;        /* Links 0 size on tape */
