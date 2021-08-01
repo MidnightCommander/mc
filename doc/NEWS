@@ -1,3 +1,69 @@
+Version 4.8.27
+
+- Core
+
+    * Minimal version of Autoconf is 2.64 (#3603)
+    * Minimal version of Automake is 1.12 (#3986)
+    * Minimal version of Gettext is 0.18.2 (#3603)
+    * Minimal version of libssh2 is 1.2.8 (#4259)
+    * Reimplement version detection (#3603, #4249)
+    * Significantly reduce rebuilt time after version change (#2252)
+    * Drop automatic migration of configuration from ~/.mc to XDG-based directories (#3682)
+    * zsh: support custom configuration file: ~/.local/share/mc/.zshrc (#4203)
+    * Widgets: implement WST_VISIBLE state to show/hide widgets (#2919)
+    * "Find File": add "Follow symlinks" option (#2020)
+
+- VFS
+
+    * extfs: support unrar-6 (#4154)
+    * extfs: support official 7z binary (7zz) (#4239)
+    * ftpfs: apply file list parser from lftp project (#2841, #3174)
+
+- Editor
+
+    * Word completion: get candidates from all open files (#4160)
+    * etags: get rid of hardcoded list length and window width (#4132)
+    * Update syntax files:
+        - Python (#4140)
+    * Add syntax highlighting:
+        - Verilog and SystemVerilog header files (#4215)
+        - JSON (#4250)
+        - openrc-run scripts (#4246)
+
+- Misc
+
+    * Code clean up (#4179, #4173)
+    * Filehighlight of c++ and h++ files as sources (#4194)
+    * Filehighlight of JSON files as documents (#4250)
+    * Support of alacritty terminal emulator (https://github.com/alacritty/alacritty) (#4248)
+    * Support of foot terminal emulator (https://codeberg.org/dnkl/foot) (#4251)
+    * Mouse support in screen: don't check $DISPLAY variable (#4233)
+    * mc.ext: support fb2 e-books (#4167)
+    * ext.d: use mediainfo to view info about various media files (#4167)
+    * Remove OS/distro-specific package-related stuff from source tree (#4217)
+
+- Fixes
+
+    * FTBFS against NCurses on OS X 10.9.5 (#4181)
+    * Segfault on dialog before panels get visible (#4244)
+    * Crash if shadow is out of screen (build against NCurses) (#4192)
+    * Crash in search (#4222)
+    * Crash on startup with enabled subshell in FreeBSD (workaround) (#4213)
+    * Hang on start randomly with zsh as subshell (#4198)
+    * If command line is invisible it's partially displayed (#4182)
+    * Broken handling of zip archives (#4180, #4183)
+    * Broken handling of jar files as zip archives (#4223)
+    * Timestamps of symlinks, sockets, fifos, etc are not preserved after copy/move (#3985)
+    * %view action in the user menu doesn't work on no-exec filesystem (#4242)
+    * Hardlinks are not colored by file type or extension (#3375)
+    * mcedit: silent macro makes terminal disrupted (#4171)
+    * mcedit: disrupting of TAGS file path (#4207)
+    * vfs: unable to browse compressed tar archives (#4191)
+    * sftpfs vfs: CVE-2021-36370: server fingerprint isn't verified (discovered by AUT-milCERT during an audit of open source software) (#4259)
+    * ftpfs vfs: month of file is always January (#4260)
+    * Tests: log files are written by libcheck and automake simultaneously (#3986)
+
+
 Version 4.8.26
 
 - Core
