@@ -5,7 +5,7 @@
 # Translators:
 # baua gonzo <baua.gonzo@gmail.com>, 2016
 # David D, 2017-2018
-# David Prudhomme <david7.prudhomme@gmail.com>, 2018
+# David Prudhomme <david7.prudhomme@gmail.com>, 2018,2021
 # dfd998a47e5ece82efa734d3c31b5c3e_071ebb8, 2015
 # Effede Effede <g2sainfroc@gmail.com>, 2016
 # Matthieu Crapet <mcrapet@gmail.com>, 2013-2016
@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-07-25 20:57+0300\n"
-"PO-Revision-Date: 2020-12-31 14:19+0000\n"
+"POT-Creation-Date: 2021-08-01 19:02+0200\n"
+"PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: French (http://www.transifex.com/mc/mc/language/fr/)\n"
 "Language: fr\n"
@@ -176,7 +176,7 @@ msgid "Your terminal doesn't even seem to support 256 colors."
 msgstr "Votre terminal ne semble même pas permettre 256 couleurs."
 
 msgid "True color not supported in this slang version."
-msgstr "Truecolor n'est pas permis cette version d'argot (\"slang version\")."
+msgstr "Truecolor non supporté dans cette version d'argot (\"slang version\")."
 
 msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
 msgstr ""
@@ -648,7 +648,7 @@ msgstr "Affiche le répertoire de données"
 
 msgid "Print extended info about used data directories"
 msgstr ""
-"Imprimer les informations étendues a propos des répertoires utilisés pour "
+"Imprimer les informations étendues à propos des répertoires utilisés pour "
 "les données"
 
 msgid "Print configure options"
@@ -658,7 +658,7 @@ msgid "Print last working directory to specified file"
 msgstr "Écrit le dernier répertoire courant dans le fichier donné"
 
 msgid "<file>"
-msgstr "<file>"
+msgstr "fichier"
 
 msgid "Enables subshell support (default)"
 msgstr "Active le support des sous-shells (par défaut)"
@@ -682,7 +682,7 @@ msgid "Edit files"
 msgstr "Éditer les fichiers"
 
 msgid "<file> ..."
-msgstr "<file> ..."
+msgstr "fichier ..."
 
 msgid "Forces xterm features"
 msgstr "Force un attribut xterm"
@@ -814,7 +814,7 @@ msgid ""
 "as tickets at www.midnight-commander.org\n"
 msgstr ""
 "\n"
-"Envoyez vos rapports d'anomalies (incluant la sortie de of 'mc -V')\n"
+"Envoyez vos rapports d'anomalies (incluant la sortie de 'mc -V')\n"
 "comme ticket de www.midnight-commander.org\n"
 "\n"
 
@@ -985,8 +985,7 @@ msgid ""
 "Midnight Commander is being shut down.\n"
 "Save modified file(s)?"
 msgstr ""
-"Midnight Commander va se s'éteindre.\n"
-"Enregistrer le(s) fichier(s) modifié(s) ?"
+"Midnight Commander va s'éteindre. Enregistrer le(s) fichier(s) modifié(s) ?"
 
 msgid "Diff:"
 msgstr "Comparaison:"
@@ -1041,7 +1040,7 @@ msgid ""
 "Open it anyway?"
 msgstr ""
 "Le fichier \"%s\" est trop gros.\n"
-"Voulez-vous tout de même l'Ouvrir ?"
+"Voulez-vous tout de même l'ouvrir ?"
 
 msgid "Warning"
 msgstr "Attention"
@@ -1314,7 +1313,7 @@ msgid "&Close"
 msgstr "&Fermer"
 
 msgid "&History..."
-msgstr ""
+msgstr "&Historique"
 
 msgid "Save &as..."
 msgstr "Enregi&strer sous..."
@@ -1831,7 +1830,7 @@ msgstr "Drapeau"
 
 #, c-format
 msgid "Permissions (octal): %o"
-msgstr ""
+msgstr "Permissions (octal) : %o"
 
 msgid "Chown advanced command"
 msgstr " Commande chown avancée"
@@ -2962,13 +2961,13 @@ msgid "%ld B/s"
 msgstr "%ld o/s"
 
 msgid "New     :"
-msgstr ""
+msgstr "Nouveau :"
 
 msgid "Existing:"
-msgstr ""
+msgstr "Actuel :"
 
 msgid "Overwrite this file?"
-msgstr ""
+msgstr "Écraser ce fichier ?"
 
 msgid "A&ppend"
 msgstr "a&joute"
@@ -2977,19 +2976,19 @@ msgid "&Reget"
 msgstr "&Réobtenir"
 
 msgid "Overwrite all files?"
-msgstr ""
+msgstr "Écraser tous les fichiers ?"
 
 msgid "Don't overwrite with &zero length file"
 msgstr ""
 
 msgid "&Older"
-msgstr ""
+msgstr "Plus ancien"
 
 msgid "S&maller"
-msgstr ""
+msgstr "Plus petit"
 
 msgid "&Size differs"
-msgstr ""
+msgstr "Taille différente"
 
 msgid "File exists"
 msgstr "Le fichier existe"
@@ -3193,7 +3192,7 @@ msgid "Command &history"
 msgstr "&Historique des commandes"
 
 msgid "Viewed/edited files hi&story"
-msgstr ""
+msgstr "Hi&storique des fichiers vus ou édités"
 
 msgid "Di&rectory hotlist"
 msgstr "Liste des répe&rtoires favoris"
@@ -3250,7 +3249,7 @@ msgstr "Panneaux :"
 msgid "You have %zu opened screen. Quit anyway?"
 msgid_plural "You have %zu opened screens. Quit anyway?"
 msgstr[0] "Il y a %zu fenêtre d'ouverte. Quitter ?"
-msgstr[1] "Il y a %zu fenêtres d'ouvertes. Quitter ?"
+msgstr[1] "Il y a %zu fenêtres ouvertes. Quitter ?"
 
 msgid "The Midnight Commander"
 msgstr "Midnight Commander"
@@ -3310,9 +3309,8 @@ msgstr "Nom du fichier :"
 msgid "&Find recursively"
 msgstr "&Recherche récursive"
 
-#, fuzzy
 msgid "Follow s&ymlinks"
-msgstr "Suivre les &liens"
+msgstr ""
 
 msgid "S&kip hidden"
 msgstr "Ignorer les &cachés"
@@ -3534,14 +3532,14 @@ msgid "Links:      %d"
 msgstr "Liens : %d"
 
 msgid "Attributes: not supported"
-msgstr ""
+msgstr "Attributs : non supporté"
 
 #, c-format
 msgid "Attributes: %s"
-msgstr ""
+msgstr "Attributs : %s"
 
 msgid "Attributes: unavailable"
-msgstr ""
+msgstr "Attributs : indisponible"
 
 #, c-format
 msgid "Mode:       %s (%04o)"
@@ -3754,20 +3752,18 @@ msgstr "Ajouter au panneau externe"
 msgid "Enter command label:"
 msgstr "Saissiez le libellé de la commande :"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "%s"
-msgstr "Panneau externe"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "failed to read data from child stdout:\n"
 "%s"
 msgstr ""
-"Impossible de lire des données sur le flux de sortie fils\n"
-"%s"
 
 msgid "Cannot run external panelize in a non-local directory"
 msgstr "Impossible d'exécuter le panneau externe dans un répertoire non local"
@@ -4157,20 +4153,18 @@ msgstr ""
 "Fin de fichier inattendue\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s:\n"
 "%s"
 msgstr ""
-"Ne peut ouvrir l'archive %s\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "EXTFS virtual file system:\n"
 "%s"
-msgstr "Systèmes des fichiers virtuels :"
+msgstr ""
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4340,11 +4334,11 @@ msgstr ""
 "Le fichier ~/.netrc n'a pas un mode correct.\n"
 "Enlevez le mot de passe ou corrigez le mode."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "SFS virtual file system:\n"
 "%s"
-msgstr "Systèmes des fichiers virtuels :"
+msgstr ""
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4435,9 +4429,8 @@ msgid ""
 "connecting?"
 msgstr ""
 
-#, fuzzy
 msgid "sftp: host key verification failed"
-msgstr " Échec de l'authentification"
+msgstr ""
 
 #, c-format
 msgid "sftp: Enter passphrase for %s "
@@ -4453,9 +4446,8 @@ msgstr "sftp : saisir le mot de passe pour %s"
 msgid "sftp: Password is empty."
 msgstr "sftp : mot de passe vide"
 
-#, fuzzy
 msgid "sftp: failure establishing SSH session"
-msgstr "sftp : impossible d'établir une session SSH"
+msgstr ""
 
 msgid "sftp: No file handler data present for reading file"
 msgstr ""
@@ -4712,44 +4704,3 @@ msgstr "Continuer à partir du début ?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Impossible de récupérer localement le fichier /ftp://some.host/editme.txt"
-
-#, c-format
-#~ msgid "An error occurred while migrating user settings: %s"
-#~ msgstr ""
-#~ "Une erreur est survenue lors de la migration des paramètres utilisateur : "
-#~ "%s"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to Freedesktop recommended dirs.\n"
-#~ "To get more info, please visit\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-#~ msgstr ""
-#~ "Vos anciens paramètres ont été migré de %s\n"
-#~ "vers les répertoires recommandés par Freedesktop\n"
-#~ "Pour plus d'informations, veuillez visiter\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to %s\n"
-#~ msgstr ""
-#~ "Vos anciens paramètres ont été migrés de %s\n"
-#~ "vers %s\n"
-
-#~ msgid "Dup failed"
-#~ msgstr "Échec système « dup »"
-
-#~ msgid "Error dup'ing old error pipe"
-#~ msgstr "Erreur système « dup » sur l'ancien tube"
-
-#~ msgid "Cannot invoke command."
-#~ msgstr "Ne peut invoquer la commande."
-
-#~ msgid "Pipe close failed"
-#~ msgstr "La fermeture du tube a échoué"
-
-#~ msgid "Inconsistent extfs archive"
-#~ msgstr "Archive extfs incohérente"

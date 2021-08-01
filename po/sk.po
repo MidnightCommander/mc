@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-07-25 20:57+0300\n"
-"PO-Revision-Date: 2020-12-31 14:19+0000\n"
+"POT-Creation-Date: 2021-08-01 19:02+0200\n"
+"PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Slovak (http://www.transifex.com/mc/mc/language/sk/)\n"
 "Language: sk\n"
@@ -3305,9 +3305,8 @@ msgstr "Názov súboru:"
 msgid "&Find recursively"
 msgstr "&Hľadať rekurzívne"
 
-#, fuzzy
 msgid "Follow s&ymlinks"
-msgstr "Nas&ledovať odkazy"
+msgstr ""
 
 msgid "S&kip hidden"
 msgstr "Pres&kočiť skryté"
@@ -3754,20 +3753,18 @@ msgstr "Pridať do externej panelizácie"
 msgid "Enter command label:"
 msgstr "Zadajte označenie príkazu:"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "%s"
-msgstr "Panelizovať externým príkazom"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "failed to read data from child stdout:\n"
 "%s"
 msgstr ""
-"Nepodarilo sa prečítať dáta zo štand. výstupu procesu potomka:\n"
-"%s"
 
 msgid "Cannot run external panelize in a non-local directory"
 msgstr "Nie je možné spustiť panelizáciu v adresári, ktorý nie je lokálny"
@@ -4156,20 +4153,18 @@ msgstr ""
 "Neočakávaný koniec súboru\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s:\n"
 "%s"
 msgstr ""
-"Nepodarilo sa otvoriť archív %s\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "EXTFS virtual file system:\n"
 "%s"
-msgstr "Virtuálne súborové systémy:"
+msgstr ""
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4337,11 +4332,11 @@ msgstr ""
 "súbor ~/.netrc nemá správne prístupové práva\n"
 "Odstráňte heslo alebo zmeňte práva"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "SFS virtual file system:\n"
 "%s"
-msgstr "Virtuálne súborové systémy:"
+msgstr ""
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4432,9 +4427,8 @@ msgid ""
 "connecting?"
 msgstr ""
 
-#, fuzzy
 msgid "sftp: host key verification failed"
-msgstr "Autentifikácia zlyhala"
+msgstr ""
 
 #, c-format
 msgid "sftp: Enter passphrase for %s "
@@ -4450,9 +4444,8 @@ msgstr "sftp: Zadajte heslo pre %s "
 msgid "sftp: Password is empty."
 msgstr "sftp: Heslo je prázdne."
 
-#, fuzzy
 msgid "sftp: failure establishing SSH session"
-msgstr "sftp: Chyba pri vytváraní SSH spojenia"
+msgstr ""
 
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: Na čítanie súboru nie sú prítomné dáta obsluhy súboru"
@@ -4708,42 +4701,3 @@ msgstr "Pokračovať od začiatku?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nemožno stiahnuť lokálnu kópiu /ftp://some.host/editme.txt"
-
-#, c-format
-#~ msgid "An error occurred while migrating user settings: %s"
-#~ msgstr "Vyskytla sa chyba počas migrácie používateľských nastavení: %s"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to Freedesktop recommended dirs.\n"
-#~ "To get more info, please visit\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-#~ msgstr ""
-#~ "Vaše staré nastavenia boli migrované z %s\n"
-#~ "do adresárov, ktoré odporúča Freedesktop.\n"
-#~ "Ďalšie informácie nájdete na\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to %s\n"
-#~ msgstr ""
-#~ "Vaše staré nastavenia boli migrované z %s\n"
-#~ "to %s\n"
-
-#~ msgid "Dup failed"
-#~ msgstr "Dup zlyhalo"
-
-#~ msgid "Error dup'ing old error pipe"
-#~ msgstr "Chyba pri duplikácii starej chybovej rúry"
-
-#~ msgid "Cannot invoke command."
-#~ msgstr "Nepodarilo sa vyvolať príkaz."
-
-#~ msgid "Pipe close failed"
-#~ msgstr "Neúspešné uzavretie rúry"
-
-#~ msgid "Inconsistent extfs archive"
-#~ msgstr "Neúplný archív extfs"

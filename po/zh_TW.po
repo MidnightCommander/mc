@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-07-25 20:57+0300\n"
-"PO-Revision-Date: 2020-12-31 14:19+0000\n"
+"POT-Creation-Date: 2021-08-01 19:02+0200\n"
+"PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/mc/mc/language/"
 "zh_TW/)\n"
@@ -1564,9 +1564,8 @@ msgid ""
 "written for the Midnight Commander."
 msgstr ""
 
-#, fuzzy
 msgid "Copyright (C) 1996-2021 the Free Software Foundation"
-msgstr "版權所有(C) 1996-2020 自由軟體基金會"
+msgstr ""
 
 msgid "About"
 msgstr "關於"
@@ -3151,9 +3150,8 @@ msgstr "檔案名稱:"
 msgid "&Find recursively"
 msgstr "遞迴尋找"
 
-#, fuzzy
 msgid "Follow s&ymlinks"
-msgstr "固定符號連結"
+msgstr ""
 
 msgid "S&kip hidden"
 msgstr "跳過隱藏"
@@ -3588,11 +3586,11 @@ msgstr ""
 msgid "Enter command label:"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "%s"
-msgstr "外部面板化"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -3980,20 +3978,18 @@ msgstr ""
 "未預期的檔案結束\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s:\n"
 "%s"
 msgstr ""
-"無法開啟 %s 檔案集\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "EXTFS virtual file system:\n"
 "%s"
-msgstr "虛擬檔案系統:"
+msgstr ""
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4159,11 +4155,11 @@ msgid ""
 "Remove password or correct mode"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "SFS virtual file system:\n"
 "%s"
-msgstr "虛擬檔案系統:"
+msgstr ""
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4271,9 +4267,8 @@ msgstr "sftp: 輸入 %s 的密碼"
 msgid "sftp: Password is empty."
 msgstr "sftp: 密碼為空。"
 
-#, fuzzy
 msgid "sftp: failure establishing SSH session"
-msgstr "sftp: 建立 SSH 連接失敗"
+msgstr ""
 
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: 讀取檔案時沒有處理程序資料"
@@ -4523,16 +4518,3 @@ msgstr "從頭開始?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "無法取得本地的副本在 ftp://some.host/editme.txt"
-
-#, c-format
-#~ msgid "An error occurred while migrating user settings: %s"
-#~ msgstr "遷移使用者設定時發生錯誤: %s"
-
-#~ msgid "Cannot invoke command."
-#~ msgstr "無法呼叫指令。"
-
-#~ msgid "Pipe close failed"
-#~ msgstr "管線關閉失敗"
-
-#~ msgid "Inconsistent extfs archive"
-#~ msgstr "不完整的 extfs 檔案集"

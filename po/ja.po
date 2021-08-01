@@ -7,13 +7,14 @@
 # Tadashi Jokagi <elf@poyo.jp>, 2012
 # Tadashi Jokagi <elf@poyo.jp>, 2011
 # linuxmetel <linuxmetel@gmail.com>, 2020
+# Takuro Onoue <kusanaginoturugi@gmail.com>, 2021
 # Yoshitaka Yamashita <drum@magic-touch.org>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-07-25 20:57+0300\n"
-"PO-Revision-Date: 2020-12-31 14:19+0000\n"
+"POT-Creation-Date: 2021-08-01 19:02+0200\n"
+"PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Japanese (http://www.transifex.com/mc/mc/language/ja/)\n"
 "Language: ja\n"
@@ -362,7 +363,7 @@ msgid "Colon"
 msgstr "コロン"
 
 msgid "Semicolon"
-msgstr ""
+msgstr "セミコロン"
 
 msgid "Exclamation mark"
 msgstr "感嘆符（！）"
@@ -371,16 +372,16 @@ msgid "Question mark"
 msgstr "疑問符（？）"
 
 msgid "Ampersand"
-msgstr ""
+msgstr "アンパサンド"
 
 msgid "Dollar sign"
 msgstr "＄"
 
 msgid "Quotation mark"
-msgstr ""
+msgstr "クォーテーションマーク"
 
 msgid "Percent sign"
-msgstr ""
+msgstr "パーセント記号"
 
 msgid "Caret"
 msgstr "キャレット"
@@ -401,22 +402,22 @@ msgid "Pipe"
 msgstr "パイプ"
 
 msgid "Left parenthesis"
-msgstr ""
+msgstr "左カッコ"
 
 msgid "Right parenthesis"
-msgstr ""
+msgstr "右カッコ"
 
 msgid "Left bracket"
-msgstr ""
+msgstr "左角カッコ"
 
 msgid "Right bracket"
-msgstr ""
+msgstr "右角カッコ"
 
 msgid "Left brace"
-msgstr ""
+msgstr "左中カッコ"
 
 msgid "Right brace"
-msgstr ""
+msgstr "右中カッコ"
 
 msgid "Enter"
 msgstr "エンター"
@@ -434,11 +435,11 @@ msgid "Backslash key"
 msgstr "バックスラッシュ キー"
 
 msgid "Number sign #"
-msgstr ""
+msgstr "番号記号 #"
 
 #. TRANSLATORS: Please translate as in "at sign" (@).
 msgid "At sign"
-msgstr ""
+msgstr "アットマーク"
 
 msgid "Ctrl"
 msgstr "Ctrl"
@@ -453,7 +454,7 @@ msgid "The TERM environment variable is unset!\n"
 msgstr "環境変数 TERM がセットされていません\n"
 
 msgid "Cannot check SIGWINCH pipe"
-msgstr ""
+msgstr "SIGWINCH パイプをチェックできません"
 
 #, c-format
 msgid ""
@@ -3134,9 +3135,8 @@ msgstr "ファイル名:"
 msgid "&Find recursively"
 msgstr ""
 
-#, fuzzy
 msgid "Follow s&ymlinks"
-msgstr "シンボリックリンクの編集(&Y)"
+msgstr ""
 
 msgid "S&kip hidden"
 msgstr ""
@@ -3569,11 +3569,11 @@ msgstr ""
 msgid "Enter command label:"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "%s"
-msgstr "外部パネル化"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -3953,20 +3953,18 @@ msgstr ""
 "予期しない EOF です\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s:\n"
 "%s"
 msgstr ""
-"%s アーカイブを開くことが出来ません\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "EXTFS virtual file system:\n"
 "%s"
-msgstr "仮想ファイル システム:"
+msgstr ""
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4132,11 +4130,11 @@ msgid ""
 "Remove password or correct mode"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "SFS virtual file system:\n"
 "%s"
-msgstr "仮想ファイル システム:"
+msgstr ""
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4486,15 +4484,3 @@ msgstr "初めから続けますか?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "Dup failed"
-#~ msgstr "複製に失敗しました"
-
-#~ msgid "Cannot invoke command."
-#~ msgstr "コマンドを実行できません"
-
-#~ msgid "Pipe close failed"
-#~ msgstr "パイプのクローズに失敗"
-
-#~ msgid "Inconsistent extfs archive"
-#~ msgstr "不整合な extfs アーカイブです"

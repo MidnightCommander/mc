@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-07-25 20:57+0300\n"
-"PO-Revision-Date: 2020-12-31 14:19+0000\n"
+"POT-Creation-Date: 2021-08-01 19:02+0200\n"
+"PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Turkish (http://www.transifex.com/mc/mc/language/tr/)\n"
 "Language: tr\n"
@@ -3297,9 +3297,8 @@ msgstr "Dosya ismi:"
 msgid "&Find recursively"
 msgstr "&özyinemeli bul"
 
-#, fuzzy
 msgid "Follow s&ymlinks"
-msgstr "&Bağları izle"
+msgstr ""
 
 msgid "S&kip hidden"
 msgstr "Gizlileri a&tla"
@@ -3739,20 +3738,18 @@ msgstr "Dış panellemeye ekle"
 msgid "Enter command label:"
 msgstr "Komut yaftası:"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "%s"
-msgstr "Dış panelleme"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "failed to read data from child stdout:\n"
 "%s"
 msgstr ""
-"Alt standar çıktıdan veri okuma başarısız:\n"
-"%s"
 
 msgid "Cannot run external panelize in a non-local directory"
 msgstr "Bir uzak dizine girilirken dış panalleme çalıştırılamaz"
@@ -4141,20 +4138,18 @@ msgstr ""
 "%s\n"
 "dosyasının sonu belirsiz"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s:\n"
 "%s"
 msgstr ""
-"%s\n"
-"%s arşivini açamadı"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "EXTFS virtual file system:\n"
 "%s"
-msgstr "Sanal Dosya Sistemleri:"
+msgstr ""
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4323,11 +4318,11 @@ msgstr ""
 "~/netrc dosyası doğru kipte değil .\n"
 "Ya parolayı silin ya da kipi düzeltin"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "SFS virtual file system:\n"
 "%s"
-msgstr "Sanal Dosya Sistemleri:"
+msgstr ""
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4418,9 +4413,8 @@ msgid ""
 "connecting?"
 msgstr ""
 
-#, fuzzy
 msgid "sftp: host key verification failed"
-msgstr "Kimlik denetimi başarısız oldu"
+msgstr ""
 
 #, c-format
 msgid "sftp: Enter passphrase for %s "
@@ -4436,9 +4430,8 @@ msgstr "sftp: %s için parola girin "
 msgid "sftp: Password is empty."
 msgstr "sftp: Parola boş."
 
-#, fuzzy
 msgid "sftp: failure establishing SSH session"
-msgstr "stp: SSH oturumu kurarken hata oluştu"
+msgstr ""
 
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: Dosya okumak için hiç dosya işleyici verisi mevcut değil "
@@ -4694,42 +4687,3 @@ msgstr "Başından devam edilsin mi?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr " /ftp://some.host/editme.txt 'in yerel kopyası alınamadı"
-
-#, c-format
-#~ msgid "An error occurred while migrating user settings: %s"
-#~ msgstr "Kullanıcı ayarları taşınırken hata oluştu: %s"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to Freedesktop recommended dirs.\n"
-#~ "To get more info, please visit\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-#~ msgstr ""
-#~ "Eski ayarlarınız %s dizininden \n"
-#~ "Freedesktop önerilen dizinlerine taşındı.\n"
-#~ "Daha fazla bilgi için, lütfen şu adresi ziyaret edin:\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to %s\n"
-#~ msgstr ""
-#~ "Eski ayarlarınız %sden\n"
-#~ "%s'e taşındı\n"
-
-#~ msgid "Dup failed"
-#~ msgstr "Tekrar başarısız"
-
-#~ msgid "Error dup'ing old error pipe"
-#~ msgstr "Eski hata borusu hata ikilemi"
-
-#~ msgid "Cannot invoke command."
-#~ msgstr "komut hatırlatmaz."
-
-#~ msgid "Pipe close failed"
-#~ msgstr "Veri yolu kapatılamadı"
-
-#~ msgid "Inconsistent extfs archive"
-#~ msgstr "Kararsız extfs arşivi"

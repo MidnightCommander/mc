@@ -20,9 +20,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-07-25 20:57+0300\n"
-"PO-Revision-Date: 2021-01-01 17:46+0000\n"
-"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
+"POT-Creation-Date: 2021-08-01 19:02+0200\n"
+"PO-Revision-Date: 2021-07-26 20:16+0000\n"
+"Last-Translator: Transifex Bot <>\n"
 "Language-Team: German (http://www.transifex.com/mc/mc/language/de/)\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -1648,9 +1648,8 @@ msgstr ""
 "Ein benutzerfreundlicher Texteditor,\n"
 "geschrieben für Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2021 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2020 the Free Software Foundation"
+msgstr ""
 
 msgid "About"
 msgstr "Über"
@@ -3332,9 +3331,8 @@ msgstr "Dateiname:"
 msgid "&Find recursively"
 msgstr "Rek&ursiv durchsuchen"
 
-#, fuzzy
 msgid "Follow s&ymlinks"
-msgstr "&Links folgen"
+msgstr ""
 
 msgid "S&kip hidden"
 msgstr "Versteckte überspringen"
@@ -3774,20 +3772,18 @@ msgstr "Zum externen Anordnen hinzufügen"
 msgid "Enter command label:"
 msgstr "Kommandobezeichnung eingeben:"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "%s"
-msgstr "Externes Anordnen"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "failed to read data from child stdout:\n"
 "%s"
 msgstr ""
-"Fehler beim Lesen der Daten aus einem Kindprozess:\n"
-"%s"
 
 msgid "Cannot run external panelize in a non-local directory"
 msgstr ""
@@ -4180,20 +4176,18 @@ msgstr ""
 "Unerwartetes Ende der Datei\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s:\n"
 "%s"
 msgstr ""
-"Kann Archiv %s nicht öffnen\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "EXTFS virtual file system:\n"
 "%s"
-msgstr "Virtuelles Dateisystem:"
+msgstr ""
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4363,11 +4357,11 @@ msgstr ""
 "~/.netrc hat ungültigen Dateimodus.\n"
 "Bitte Passwort entfernen oder den Modus korrigieren"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "SFS virtual file system:\n"
 "%s"
-msgstr "Virtuelles Dateisystem:"
+msgstr ""
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4458,9 +4452,8 @@ msgid ""
 "connecting?"
 msgstr ""
 
-#, fuzzy
 msgid "sftp: host key verification failed"
-msgstr "Authentifikation fehlgeschlagen"
+msgstr ""
 
 #, c-format
 msgid "sftp: Enter passphrase for %s "
@@ -4476,9 +4469,8 @@ msgstr "sftp: Passwort für %s eingeben"
 msgid "sftp: Password is empty."
 msgstr "sftp: Passwort ist leer."
 
-#, fuzzy
 msgid "sftp: failure establishing SSH session"
-msgstr "sftp: Fehler beim Herstellen der SSH-Sitzung"
+msgstr ""
 
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: Kein Dateihandler zum Lesen der Datei vorhanden"
@@ -4734,44 +4726,3 @@ msgstr "Am Anfang fortsetzen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kann lokale Kopie von /ftp://some.host/editme.txt nicht erstellen"
-
-#, c-format
-#~ msgid "An error occurred while migrating user settings: %s"
-#~ msgstr ""
-#~ "Während der Migration der Benutzereinstellungen ist ein Fehler "
-#~ "aufgetreten: %s"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to Freedesktop recommended dirs.\n"
-#~ "To get more info, please visit\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-#~ msgstr ""
-#~ "Ihre alten Einstellungen wurden von %s\n"
-#~ "in die von Freedesktop empfohlenen Verzeichnisse migriert.\n"
-#~ "Besuchen Sie für weitere Informationen\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to %s\n"
-#~ msgstr ""
-#~ "Ihre alten Einstellungen wurden von %s\n"
-#~ "nach %s migriert\n"
-
-#~ msgid "Dup failed"
-#~ msgstr "Dup fehlgeschlagen"
-
-#~ msgid "Error dup'ing old error pipe"
-#~ msgstr "Fehler beim Lesen aus einer älteren Fehler-Pipe"
-
-#~ msgid "Cannot invoke command."
-#~ msgstr "Kann Befehl nicht aufrufen."
-
-#~ msgid "Pipe close failed"
-#~ msgstr "Schließen der Pipe fehlgeschlagen"
-
-#~ msgid "Inconsistent extfs archive"
-#~ msgstr "Inkonsistentes extfs-Archiv"

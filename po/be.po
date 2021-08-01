@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-07-25 20:57+0300\n"
-"PO-Revision-Date: 2020-12-31 14:19+0000\n"
+"POT-Creation-Date: 2021-08-01 19:02+0200\n"
+"PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Belarusian (http://www.transifex.com/mc/mc/language/be/)\n"
 "Language: be\n"
@@ -1636,9 +1636,8 @@ msgstr ""
 "Зручны тэкставы рэдактар,\n"
 "напісаны для Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2021 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2020 the Free Software Foundation"
+msgstr ""
 
 msgid "About"
 msgstr "Пра праграму"
@@ -3313,9 +3312,8 @@ msgstr "Назва файла:"
 msgid "&Find recursively"
 msgstr "Шукаць у падкаталогах(&F)"
 
-#, fuzzy
 msgid "Follow s&ymlinks"
-msgstr "Выкарыстоўваць спасылкі(&L)"
+msgstr ""
 
 msgid "S&kip hidden"
 msgstr "Мінаць схаваныя(&K)"
@@ -3761,20 +3759,18 @@ msgstr "Дадаць да загадаў"
 msgid "Enter command label:"
 msgstr "Увядзіце назву загада:"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "%s"
-msgstr "Загад на вонкавую панэль"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "failed to read data from child stdout:\n"
 "%s"
 msgstr ""
-"Не атрымалася прачытаць даныя з нашчадка stdout:\n"
-"%s"
 
 msgid "Cannot run external panelize in a non-local directory"
 msgstr "Немагчыма запусціць загад у адлеглым каталозе"
@@ -4165,20 +4161,18 @@ msgstr ""
 "Нечаканы канец файла\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s:\n"
 "%s"
 msgstr ""
-"Немагчыма адкрыць архіў «%s»\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "EXTFS virtual file system:\n"
 "%s"
-msgstr "Віртуальныя файлавыя сістэмы:"
+msgstr ""
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4346,11 +4340,11 @@ msgstr ""
 "У файла «~/.netrc» няправільныя дазволы (ўласнік).\n"
 "Выдаліце пароль або выпраўце дазволы (ўласніка)"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "SFS virtual file system:\n"
 "%s"
-msgstr "Віртуальныя файлавыя сістэмы:"
+msgstr ""
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4441,9 +4435,8 @@ msgid ""
 "connecting?"
 msgstr ""
 
-#, fuzzy
 msgid "sftp: host key verification failed"
-msgstr "Аўтэнтыфікацыя не ўдалася"
+msgstr ""
 
 #, c-format
 msgid "sftp: Enter passphrase for %s "
@@ -4459,9 +4452,8 @@ msgstr "sftp: увядзіце пароль для «%s» "
 msgid "sftp: Password is empty."
 msgstr "sftp: пароль пусты."
 
-#, fuzzy
 msgid "sftp: failure establishing SSH session"
-msgstr "sftp: Збой стабілізацыі сеанса SSH"
+msgstr ""
 
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: няма апрацоўшчыка каб прачытаць файл"
@@ -4717,43 +4709,3 @@ msgstr "Працягваць ад пачатку?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Немагчыма атрымаць лакальную копію /ftp://some.host/editme.txt"
-
-#, c-format
-#~ msgid "An error occurred while migrating user settings: %s"
-#~ msgstr "Падчас пераносу налад карыстальніка адбылася памылка: %s"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to Freedesktop recommended dirs.\n"
-#~ "To get more info, please visit\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-#~ msgstr ""
-#~ "Старыя налады перанесеныя з «%s»\n"
-#~ " у каталогі, якія раіць «Freedesktop».\n"
-#~ "Па падрабязнасці завітайце сюды:\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to %s\n"
-#~ msgstr ""
-#~ "Старыя налады перанесеныя з\n"
-#~ "«%s»\n"
-#~ "у «%s»\n"
-
-#~ msgid "Dup failed"
-#~ msgstr "Не атрымалася падвоіць"
-
-#~ msgid "Error dup'ing old error pipe"
-#~ msgstr "Не атрымалася падвоіць стары канал памылак"
-
-#~ msgid "Cannot invoke command."
-#~ msgstr "Немагчыма выканаць загад."
-
-#~ msgid "Pipe close failed"
-#~ msgstr "Памылка падчас закрыцця канала"
-
-#~ msgid "Inconsistent extfs archive"
-#~ msgstr "Несумяшчальны архіў extfs"

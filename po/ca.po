@@ -16,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-07-25 20:57+0300\n"
-"PO-Revision-Date: 2021-01-03 19:08+0000\n"
-"Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
+"POT-Creation-Date: 2021-08-01 19:02+0200\n"
+"PO-Revision-Date: 2021-07-26 20:16+0000\n"
+"Last-Translator: Transifex Bot <>\n"
 "Language-Team: Catalan (http://www.transifex.com/mc/mc/language/ca/)\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
@@ -1645,9 +1645,8 @@ msgstr ""
 "Un editor de text fàcil d'emprar\n"
 "escrit per al Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2021 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2020 la Free Software Foundation"
+msgstr "Copyright (C) 1996-2021 la Free Software Foundation"
 
 msgid "About"
 msgstr "Quant a"
@@ -3329,9 +3328,8 @@ msgstr "Nom del fitxer:"
 msgid "&Find recursively"
 msgstr "&Troba de forma recursiva"
 
-#, fuzzy
 msgid "Follow s&ymlinks"
-msgstr "Segueix els en&llaços"
+msgstr "Segueix els enllaços s&imbòlics"
 
 msgid "S&kip hidden"
 msgstr "O&met els ocults"
@@ -3773,19 +3771,22 @@ msgstr "Afegeix al quadre de cerca extern"
 msgid "Enter command label:"
 msgstr "Introduïu una etiqueta per a l'ordre:"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "%s"
-msgstr "Quadre de cerca extern"
+msgstr ""
+"Quadre de cerca extern:\n"
+"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "failed to read data from child stdout:\n"
 "%s"
 msgstr ""
-"Ha fallat en llegir les dades de la sortida estàndard filla:\n"
+"Quadre de cerca extern:\n"
+"Ha fallat en llegir les dades des de la sortida estàndard filla:\n"
 "%s"
 
 msgid "Cannot run external panelize in a non-local directory"
@@ -4180,20 +4181,23 @@ msgstr ""
 "Fí de fitxer inesperat a\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s:\n"
 "%s"
 msgstr ""
 "No s'ha pogut obrir l'arxiu %s\n"
+"%s:\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "EXTFS virtual file system:\n"
 "%s"
-msgstr "Sistemes de fitxers virtuals:"
+msgstr ""
+"Sistema de fitxers virtual EXTFS:\n"
+"%s"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4362,11 +4366,13 @@ msgstr ""
 "El fitxer ~/.netrc no té un mode correcte.\n"
 "Elimineu la contrasenya o el mode correcte"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "SFS virtual file system:\n"
 "%s"
-msgstr "Sistemes de fitxers virtuals:"
+msgstr ""
+"Sistema de fitxers virtual SFS:\n"
+"%s"
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4457,9 +4463,8 @@ msgid ""
 "connecting?"
 msgstr ""
 
-#, fuzzy
 msgid "sftp: host key verification failed"
-msgstr "Ha fallat l'autenticació"
+msgstr ""
 
 #, c-format
 msgid "sftp: Enter passphrase for %s "
@@ -4475,9 +4480,8 @@ msgstr "sftp: introduïu la contrasenya per a %s "
 msgid "sftp: Password is empty."
 msgstr "sftp: la contrasenya és buida."
 
-#, fuzzy
 msgid "sftp: failure establishing SSH session"
-msgstr "sftp: ha fallat en establir la sessió SSH"
+msgstr ""
 
 msgid "sftp: No file handler data present for reading file"
 msgstr ""
@@ -4684,7 +4688,7 @@ msgid ""
 "Failed to read data from child stdout:\n"
 "%s"
 msgstr ""
-"Ha fallat en llegir les dades de la sortida estàndard filla:\n"
+"Ha fallat en llegir les dades des de la sortida estàndard filla:\n"
 "%s"
 
 #, c-format
@@ -4736,43 +4740,3 @@ msgstr "Continuo des del començament?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "No s'ha pogut obtenir una còpia local de /ftp://algun.amfitrió/editam.txt"
-
-#, c-format
-#~ msgid "An error occurred while migrating user settings: %s"
-#~ msgstr ""
-#~ "Hi ha hagut un error mentre es migraven els ajustaments d'usuari: %s"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to Freedesktop recommended dirs.\n"
-#~ "To get more info, please visit\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-#~ msgstr ""
-#~ "Els vostres antics ajustaments s'han migrat de %s\n"
-#~ "cap als directoris recomanats per Freedesktop.\n"
-#~ "Per obtenir més informació, si us plau, visiteu\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to %s\n"
-#~ msgstr ""
-#~ "Els vostres antics ajustaments s'han migrat de %s\n"
-#~ "cap a %s\n"
-
-#~ msgid "Dup failed"
-#~ msgstr "Dup ha fallat"
-
-#~ msgid "Error dup'ing old error pipe"
-#~ msgstr "Error en fer «dup» per un error de canonada antiga"
-
-#~ msgid "Cannot invoke command."
-#~ msgstr "No puc cridar l'ordre."
-
-#~ msgid "Pipe close failed"
-#~ msgstr "Ha fallat el tancament del conducte"
-
-#~ msgid "Inconsistent extfs archive"
-#~ msgstr "L'arxiu extfs no és consistent"

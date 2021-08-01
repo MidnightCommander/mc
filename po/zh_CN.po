@@ -6,7 +6,7 @@
 # Jacques Yip <cong-ye@163.com>, 2017
 # Jake Li <gnozil@gmail.com>, 2012
 # Kenneth Cheung <zjhken01@163.com>, 2018
-# liushuyu011 <liushuyu011@gmail.com>, 2016,2019
+# shuyu liu <liushuyu011@gmail.com>, 2016,2019
 # Mingcong Bai <jeffbai@aosc.xyz>, 2016,2018
 # qingxianhao <qinghao1@foxmail.com>, 2012
 # qingxianhao <qinghao1@foxmail.com>, 2012
@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-07-25 20:57+0300\n"
-"PO-Revision-Date: 2020-12-31 14:19+0000\n"
+"POT-Creation-Date: 2021-08-01 19:02+0200\n"
+"PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/mc/mc/language/"
 "zh_CN/)\n"
@@ -3297,9 +3297,8 @@ msgstr "文件名: "
 msgid "&Find recursively"
 msgstr "递归查找(&F)"
 
-#, fuzzy
 msgid "Follow s&ymlinks"
-msgstr "跟随链接(&L)"
+msgstr ""
 
 msgid "S&kip hidden"
 msgstr "跳过隐藏(&K)"
@@ -3736,20 +3735,18 @@ msgstr "添加到外部面板"
 msgid "Enter command label:"
 msgstr "输入命令标签: "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "%s"
-msgstr "外部面板"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "failed to read data from child stdout:\n"
 "%s"
 msgstr ""
-"无法从子进程的 stdout 读取数据:\n"
-"%s"
 
 msgid "Cannot run external panelize in a non-local directory"
 msgstr "在非本地目录无法执行外部面板"
@@ -4137,20 +4134,18 @@ msgstr ""
 "异常的文件结束\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s:\n"
 "%s"
 msgstr ""
-"无法打开 %s 档案\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "EXTFS virtual file system:\n"
 "%s"
-msgstr "虚拟文件系统: "
+msgstr ""
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4318,11 +4313,11 @@ msgstr ""
 "~/.netrc 文件权限不正确\n"
 "删除密码或者改正权限"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "SFS virtual file system:\n"
 "%s"
-msgstr "虚拟文件系统: "
+msgstr ""
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4413,9 +4408,8 @@ msgid ""
 "connecting?"
 msgstr ""
 
-#, fuzzy
 msgid "sftp: host key verification failed"
-msgstr "验证失败"
+msgstr ""
 
 #, c-format
 msgid "sftp: Enter passphrase for %s "
@@ -4431,9 +4425,8 @@ msgstr "sftp: 请输入 %s 的密码 "
 msgid "sftp: Password is empty."
 msgstr "sftp: 密码为空。"
 
-#, fuzzy
 msgid "sftp: failure establishing SSH session"
-msgstr "sftp: SSH 会话建立失败"
+msgstr ""
 
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: 读取的文件没有指定处理程序"
@@ -4689,42 +4682,3 @@ msgstr "从头继续搜索?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "无法获取 /ftp://some.host/editme.txt 的本地副本"
-
-#, c-format
-#~ msgid "An error occurred while migrating user settings: %s"
-#~ msgstr "迁移用户设置时发生了一个错误: %s"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to Freedesktop recommended dirs.\n"
-#~ "To get more info, please visit\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-#~ msgstr ""
-#~ "您的旧设置被从 %s 迁移\n"
-#~ "到 Freedesktop 推荐目录。\n"
-#~ "更多信息，请访问\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to %s\n"
-#~ msgstr ""
-#~ "您的旧设置被从 %s 迁移\n"
-#~ "到 %s\n"
-
-#~ msgid "Dup failed"
-#~ msgstr "复制失败"
-
-#~ msgid "Error dup'ing old error pipe"
-#~ msgstr "复制原有出错管道时发生错误"
-
-#~ msgid "Cannot invoke command."
-#~ msgstr "无法调用命令。"
-
-#~ msgid "Pipe close failed"
-#~ msgstr "关闭管道失败"
-
-#~ msgid "Inconsistent extfs archive"
-#~ msgstr "不完整的 extfs 档案"

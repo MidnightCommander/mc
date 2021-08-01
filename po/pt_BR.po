@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-07-25 20:57+0300\n"
-"PO-Revision-Date: 2020-12-31 14:19+0000\n"
+"POT-Creation-Date: 2021-08-01 19:02+0200\n"
+"PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/mc/mc/language/"
 "pt_BR/)\n"
@@ -3234,9 +3234,8 @@ msgstr "Nome de arquivo:"
 msgid "&Find recursively"
 msgstr ""
 
-#, fuzzy
 msgid "Follow s&ymlinks"
-msgstr "Cd segue lin&ks"
+msgstr ""
 
 msgid "S&kip hidden"
 msgstr ""
@@ -3673,11 +3672,11 @@ msgstr ""
 msgid "Enter command label:"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "%s"
-msgstr "Painéis externos"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -4061,20 +4060,18 @@ msgstr ""
 "Fim de arquivo inesperado\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s:\n"
 "%s"
 msgstr ""
-"Impossível abrir arquivo %s\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "EXTFS virtual file system:\n"
 "%s"
-msgstr "Sistema de arquivos: %s"
+msgstr ""
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4242,11 +4239,11 @@ msgstr ""
 "~ /.netrc possui modo incorreto\n"
 "Remova senha ou ajuste modo "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "SFS virtual file system:\n"
 "%s"
-msgstr "Sistema de arquivos: %s"
+msgstr ""
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4337,9 +4334,8 @@ msgid ""
 "connecting?"
 msgstr ""
 
-#, fuzzy
 msgid "sftp: host key verification failed"
-msgstr "Falha na autenticação"
+msgstr ""
 
 #, c-format
 msgid "sftp: Enter passphrase for %s "
@@ -4601,42 +4597,3 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#, c-format
-#~ msgid "An error occurred while migrating user settings: %s"
-#~ msgstr "Um erro ocorreu enquanto migrava as configurações do usuário: %s"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to Freedesktop recommended dirs.\n"
-#~ "To get more info, please visit\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-#~ msgstr ""
-#~ "Suas configurações antigas foram migradas de %s\n"
-#~ "para os diretórios recomendados de Freedesktop.\n"
-#~ "Para objer mais informações, visite\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to %s\n"
-#~ msgstr ""
-#~ "Suas configurações antigas foram migradas de %s\n"
-#~ "para %s\n"
-
-#~ msgid "Dup failed"
-#~ msgstr "Dup falhou"
-
-#~ msgid "Error dup'ing old error pipe"
-#~ msgstr "Erro ao dupar um error pipe antigo"
-
-#~ msgid "Cannot invoke command."
-#~ msgstr "Impossível executar comando"
-
-#~ msgid "Pipe close failed"
-#~ msgstr "Falha ao fechar conector"
-
-#~ msgid "Inconsistent extfs archive"
-#~ msgstr "Arquivo extfs inconsistente"

@@ -8,6 +8,7 @@
 # 666ac67b8cef279621e9f9f0d4368bd5_672ede5, 2018
 # 7ad110ef65cb8fea3e45887cffdf497a_28ca6f3 <3e77beb79c064caff61514bbc685d086_451299>, 2016
 # Nicolae Crefelean, 2014,2019
+# Simona Iacob <s@zp1.net>, 2021
 # Slava Zanko <slavazanko@gmail.com>, 2011
 # Sorin Sfirlogea, 2016
 # Vitalie Ciubotaru <vitalie@ciubotaru.tk>, 2015
@@ -15,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-07-25 20:57+0300\n"
-"PO-Revision-Date: 2020-12-31 14:19+0000\n"
+"POT-Creation-Date: 2021-08-01 19:02+0200\n"
+"PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Romanian (http://www.transifex.com/mc/mc/language/ro/)\n"
 "Language: ro\n"
@@ -467,25 +468,31 @@ msgid "The TERM environment variable is unset!\n"
 msgstr "Variabila de mediu TERM nu este setată!\n"
 
 msgid "Cannot check SIGWINCH pipe"
-msgstr ""
+msgstr "Nu se poate verifica conducta SIGWINCH"
 
 #, c-format
 msgid ""
 "\n"
 "Cannot create pipe for SIGWINCH: %s (%d)\n"
 msgstr ""
+"\n"
+"Nu se poate crea conducta pentru SIGWINCH: %s (%d)\n"
 
 #, c-format
 msgid ""
 "\n"
 "Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
 msgstr ""
+"\n"
+"Nu se poate configura capătul de scriere al conductei SIGWINCH: %s (%d)\n"
 
 #, c-format
 msgid ""
 "\n"
 "Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
 msgstr ""
+"\n"
+"Nu se poate configura capătul de citire al conductei SIGWINCH: %s (%d)\n"
 
 #, c-format
 msgid ""
@@ -1308,7 +1315,7 @@ msgid "&Close"
 msgstr "În&chide"
 
 msgid "&History..."
-msgstr ""
+msgstr "&Istoric..."
 
 msgid "Save &as..."
 msgstr "Salvează c&a..."
@@ -1633,7 +1640,7 @@ msgstr ""
 "creat pentru Midnight Commander."
 
 msgid "Copyright (C) 1996-2021 the Free Software Foundation"
-msgstr ""
+msgstr "Copyright (C) 1996-2021 Fundația pentru Software Liber"
 
 msgid "About"
 msgstr "Despre"
@@ -1798,6 +1805,8 @@ msgid ""
 "Not an xterm or Linux console;\n"
 "the subshell cannot be toggled."
 msgstr ""
+"Nu o consolă xterm sau Linux;\n"
+"subshell-ul nu poate fi comutat."
 
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Tastați `exit' pentru a reveni în Midnight Commander"
@@ -1825,7 +1834,7 @@ msgstr "Ind."
 
 #, c-format
 msgid "Permissions (octal): %o"
-msgstr ""
+msgstr "Permisiuni (octal): %o"
 
 msgid "Chown advanced command"
 msgstr "Comandă avansată chown"
@@ -1952,7 +1961,7 @@ msgid "Skin:"
 msgstr "Tematică:"
 
 msgid "&Shadows"
-msgstr ""
+msgstr "&Umbre"
 
 msgid "Appearance"
 msgstr "Aspect"
@@ -2186,79 +2195,79 @@ msgstr ""
 "%s"
 
 msgid "Secure deletion"
-msgstr ""
+msgstr "Ștergere securizată"
 
 msgid "Undelete"
-msgstr ""
+msgstr "Anuleaza ștergerea"
 
 msgid "Synchronous updates"
-msgstr ""
+msgstr "Actualizări sincronizate"
 
 msgid "Synchronous directory updates"
-msgstr ""
+msgstr "Actualizări sincronizate ale directoarelor"
 
 msgid "Immutable"
-msgstr ""
+msgstr "Imuabil"
 
 msgid "Append only"
-msgstr ""
+msgstr "Doar adăugare"
 
 msgid "No dump"
-msgstr ""
+msgstr "Nu se aruncă"
 
 msgid "No update atime"
-msgstr ""
+msgstr "Nici o actualizare atime"
 
 msgid "Compress"
-msgstr ""
+msgstr "Comprimare"
 
 msgid "Compressed clusters"
-msgstr ""
+msgstr "Clustere comprimate"
 
 msgid "Compressed dirty file"
-msgstr ""
+msgstr "Fișier murdar comprimat"
 
 msgid "Compression raw access"
-msgstr ""
+msgstr "Compresie acces brut"
 
 msgid "Encrypted inode"
-msgstr ""
+msgstr "Inode criptat"
 
 msgid "Journaled data"
-msgstr ""
+msgstr "Date jurnalizate"
 
 msgid "Indexed directory"
-msgstr ""
+msgstr "Director indexat"
 
 msgid "No tail merging"
-msgstr ""
+msgstr "Nici o îmbinare a cozii"
 
 msgid "Top of directory hierarchies"
-msgstr ""
+msgstr "Partea superioară a ierarhiilor de directoare"
 
 msgid "Inode uses extents"
-msgstr ""
+msgstr "Inode folosește extents"
 
 msgid "Huge_file"
-msgstr ""
+msgstr "Huge_fișier"
 
 msgid "No COW"
-msgstr ""
+msgstr "Fără COW"
 
 msgid "Direct access for files"
-msgstr ""
+msgstr "Acces direct pentru fișiere"
 
 msgid "Casefolded file"
-msgstr ""
+msgstr "Dosar împăturit"
 
 msgid "Inode has inline data"
-msgstr ""
+msgstr "Inode are date în linie"
 
 msgid "Project hierarchy"
-msgstr ""
+msgstr "Ierarhia proiectului"
 
 msgid "Verity protected inode"
-msgstr ""
+msgstr "Inode protejat de Verity"
 
 msgid "&Marked all"
 msgstr "&Tot marc."
@@ -2270,22 +2279,26 @@ msgid "C&lear marked"
 msgstr "Şter&g marc."
 
 msgid "Chattr command"
-msgstr ""
+msgstr "Comanda Chattr"
 
 #, c-format
 msgid ""
 "Cannot chattr \"%s\"\n"
 "%s"
 msgstr ""
+"Nu se poate chattr \"%s\"\n"
+"%s"
 
 msgid "Cannot change attributes on non-local filesystems"
-msgstr ""
+msgstr "Nu se pot modifica atributele pe sisteme de fișiere non-locale"
 
 #, c-format
 msgid ""
 "Cannot get flags of \"%s\"\n"
 "%s"
 msgstr ""
+"Nu se pot obține indicatorii de \"%s\"\n"
+"%s"
 
 msgid "set &user ID on execution"
 msgstr "Setează ID &proprietar la executare"
@@ -3136,7 +3149,7 @@ msgid "&Advanced chown"
 msgstr "Chown &avansat"
 
 msgid "Cha&ttr"
-msgstr ""
+msgstr "Cha&ttr"
 
 msgid "&Rename/Move"
 msgstr "&Redenumește/Mută"
@@ -3190,7 +3203,7 @@ msgid "Command &history"
 msgstr "&Istoric comenzi"
 
 msgid "Viewed/edited files hi&story"
-msgstr ""
+msgstr "Fișiere vizualizate/editate hi&story"
 
 msgid "Di&rectory hotlist"
 msgstr "Listă rapidă de dosa&re"
@@ -3308,9 +3321,8 @@ msgstr "Nume de fișier:"
 msgid "&Find recursively"
 msgstr "&Caută recursiv"
 
-#, fuzzy
 msgid "Follow s&ymlinks"
-msgstr "Urmărește &legăturile"
+msgstr "Urmăriți s&ymlinks"
 
 msgid "S&kip hidden"
 msgstr "Sări &peste ascunse"
@@ -3534,14 +3546,14 @@ msgid "Links:      %d"
 msgstr "Legături: %d"
 
 msgid "Attributes: not supported"
-msgstr ""
+msgstr "Atribute: nu este acceptat"
 
 #, c-format
 msgid "Attributes: %s"
-msgstr ""
+msgstr "Atribute: %s"
 
 msgid "Attributes: unavailable"
-msgstr ""
+msgstr "Atribute: indisponibil"
 
 #, c-format
 msgid "Mode:       %s (%04o)"
@@ -3754,19 +3766,22 @@ msgstr "Adaugă la panelizarea externă"
 msgid "Enter command label:"
 msgstr "Introdu eticheta comenzii:"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "%s"
-msgstr "Panelizare externă"
+msgstr ""
+"Panouri externe:\n"
+"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "failed to read data from child stdout:\n"
 "%s"
 msgstr ""
-"Eroare la citirea datelor de la stdout-ul copil:\n"
+"Panouri externe:\n"
+"nu a reușit să citească datele din stdout-ul copil:\n"
 "%s"
 
 msgid "Cannot run external panelize in a non-local directory"
@@ -3933,6 +3948,9 @@ msgid ""
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""
+"GNU Midnight Commander\n"
+"rulează deja pe acest terminal.\n"
+"Suportul pentru subshell-uri va fi dezactivat."
 
 #, c-format
 msgid ""
@@ -3976,37 +3994,37 @@ msgid "Warning: Cannot change to %s.\n"
 msgstr "Atenție: Nu se poate schimba în %s.\n"
 
 msgid "With builtin Editor and Aspell support"
-msgstr ""
+msgstr "Cu editor încorporat și suport Aspell"
 
 msgid "With builtin Editor"
-msgstr ""
+msgstr "Cu editor încorporat"
 
 msgid "With optional subshell support"
-msgstr ""
+msgstr "Cu suport opțional pentru subshell-uri"
 
 msgid "With subshell support as default"
-msgstr ""
+msgstr "Cu suport pentru subshell-uri în mod implicit"
 
 msgid "With support for background operations"
-msgstr ""
+msgstr "Cu suport pentru operațiuni în fundal"
 
 msgid "With mouse support on xterm and Linux console"
-msgstr ""
+msgstr "Cu suport pentru mouse pe xterm și consola Linux"
 
 msgid "With mouse support on xterm"
-msgstr ""
+msgstr "Cu suport pentru mouse pe xterm"
 
 msgid "With support for X11 events"
-msgstr ""
+msgstr "Cu suport pentru evenimente X11"
 
 msgid "With internationalization support"
-msgstr ""
+msgstr "Cu suport pentru internaționalizare"
 
 msgid "With multiple codepages support"
-msgstr ""
+msgstr "Cu suport pentru mai multe pagini de cod"
 
 msgid "With ext2fs attributes support"
-msgstr ""
+msgstr "Cu suport pentru atributele ext2fs"
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"
@@ -4014,21 +4032,21 @@ msgstr "Construit cu GLib %d.%d.%d\n"
 
 #, c-format
 msgid "Built with S-Lang %s with terminfo database\n"
-msgstr ""
+msgstr "Construit cu S-Lang %s cu baza de date terminfo\n"
 
 #, c-format
 msgid "Built with ncurses %s\n"
-msgstr ""
+msgstr "Construit cu ncurses %s\n"
 
 msgid "Built with ncurses (unknown version)"
-msgstr ""
+msgstr "Construit cu ncurses (versiune necunoscută)"
 
 #, c-format
 msgid "Built with ncursesw %s\n"
-msgstr ""
+msgstr "Construit cu ncursesw %s\n"
 
 msgid "Built with ncursesw (unknown version)"
-msgstr ""
+msgstr "Construit cu ncursesw (versiune necunoscută)"
 
 msgid "Virtual File Systems:"
 msgstr "Sistem virtual de fișiere:"
@@ -4155,20 +4173,23 @@ msgstr ""
 "Sfârșit de fișier (EOF) neașteptat\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s:\n"
 "%s"
 msgstr ""
-"Nu pot deschide arhiva %s\n"
+"Nu se poate deschide %s arhiva\n"
+"%s:\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "EXTFS virtual file system:\n"
 "%s"
-msgstr "Sistem virtual de fișiere:"
+msgstr ""
+"Sistem de fișiere virtuale EXTFS:\n"
+"%s"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4338,11 +4359,13 @@ msgstr ""
 "fișierul ~/.netrc are permisiuni incorecte\n"
 "Înlătură parola sau corectează permisiunile"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "SFS virtual file system:\n"
 "%s"
-msgstr "Sistem virtual de fișiere:"
+msgstr ""
+"Sistem de fișiere virtuale SFS:\n"
+"%s"
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4433,9 +4456,8 @@ msgid ""
 "connecting?"
 msgstr ""
 
-#, fuzzy
 msgid "sftp: host key verification failed"
-msgstr "Autentificarea a eșuat"
+msgstr ""
 
 #, c-format
 msgid "sftp: Enter passphrase for %s "
@@ -4451,9 +4473,8 @@ msgstr "sftp: Introdu parola pentru %s "
 msgid "sftp: Password is empty."
 msgstr "sftp: Parola este goală."
 
-#, fuzzy
 msgid "sftp: failure establishing SSH session"
-msgstr "sftp: Eroare la stabilirea unei sesiuni SSH"
+msgstr ""
 
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: Nu există date de manipulare a citirii fișierului"
@@ -4709,42 +4730,3 @@ msgstr "Continuă de la început?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nu se poate aduce o copie locală a /ftp://some.host/editme.txt"
-
-#, c-format
-#~ msgid "An error occurred while migrating user settings: %s"
-#~ msgstr "A apărut o eroare în timpul migrării setărilor de utilizator: %s"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to Freedesktop recommended dirs.\n"
-#~ "To get more info, please visit\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-#~ msgstr ""
-#~ "Vechile tale setări au fost migrate din %s\n"
-#~ "în dosarele recomandate de Freedesktop.\n"
-#~ "Pentru mai multe informații, te rog vizitează\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to %s\n"
-#~ msgstr ""
-#~ "Vechile tale setări au fost migrate din %s\n"
-#~ "în %s\n"
-
-#~ msgid "Dup failed"
-#~ msgstr "Dup eșuat"
-
-#~ msgid "Error dup'ing old error pipe"
-#~ msgstr "Eroare de dup a erorii vechi de pipe"
-
-#~ msgid "Cannot invoke command."
-#~ msgstr "Nu se poate rula comanda."
-
-#~ msgid "Pipe close failed"
-#~ msgstr "Închiderea pipe a eșuat"
-
-#~ msgid "Inconsistent extfs archive"
-#~ msgstr "Arhivă extfs inconsistentă"

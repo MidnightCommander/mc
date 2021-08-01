@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-07-25 20:57+0300\n"
-"PO-Revision-Date: 2020-12-31 14:19+0000\n"
+"POT-Creation-Date: 2021-08-01 19:02+0200\n"
+"PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/mc/mc/language/bg/)\n"
 "Language: bg\n"
@@ -3286,9 +3286,8 @@ msgstr "Име на файл:"
 msgid "&Find recursively"
 msgstr "&Намиране рекурсивно"
 
-#, fuzzy
 msgid "Follow s&ymlinks"
-msgstr "Следване на &линковете"
+msgstr ""
 
 msgid "S&kip hidden"
 msgstr "Пропускане на &скритите"
@@ -3728,20 +3727,18 @@ msgstr "Добавяне към външна панелизация"
 msgid "Enter command label:"
 msgstr "Въвеждане на етикет на команда:"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "%s"
-msgstr "Команда в панел"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "failed to read data from child stdout:\n"
 "%s"
 msgstr ""
-"Неуспех при четене на информация то дъщерния stdout:\n"
-"%s"
 
 msgid "Cannot run external panelize in a non-local directory"
 msgstr "Не може да се изпълни външна панелизация на не-локална директория"
@@ -4131,20 +4128,18 @@ msgstr ""
 "Неочакван край на файла\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s:\n"
 "%s"
 msgstr ""
-"Не може да се отвори архива %s\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "EXTFS virtual file system:\n"
 "%s"
-msgstr "Виртуални файлови системи:"
+msgstr ""
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4312,11 +4307,11 @@ msgstr ""
 "файлът /.netrc има неправилен режим\n"
 "Изтрийте паролата или поправете режима"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "SFS virtual file system:\n"
 "%s"
-msgstr "Виртуални файлови системи:"
+msgstr ""
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4407,9 +4402,8 @@ msgid ""
 "connecting?"
 msgstr ""
 
-#, fuzzy
 msgid "sftp: host key verification failed"
-msgstr "Грешка при автентикацията"
+msgstr ""
 
 #, c-format
 msgid "sftp: Enter passphrase for %s "
@@ -4425,9 +4419,8 @@ msgstr "sftp: Въвеждане на парола за %s"
 msgid "sftp: Password is empty."
 msgstr "sftp: Паролата е празна."
 
-#, fuzzy
 msgid "sftp: failure establishing SSH session"
-msgstr "sftp: Неуспешно установяване на SSH сесия"
+msgstr ""
 
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: Няма съществуващ обработчик за четене на файл"
@@ -4683,42 +4676,3 @@ msgstr "Да се продължи ли от началото?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не може да се изтегли локално копие на /ftp://some.host/editme.txt"
-
-#, c-format
-#~ msgid "An error occurred while migrating user settings: %s"
-#~ msgstr "Грешка възникна при преместването на потребителските настройки: %s"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to Freedesktop recommended dirs.\n"
-#~ "To get more info, please visit\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-#~ msgstr ""
-#~ "Старите ви настройки бяха преместени от %s\n"
-#~ "в препоръчваните от Freedesktop директории.\n"
-#~ "За повече информация, моля посетете\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to %s\n"
-#~ msgstr ""
-#~ "Старите ви настройки бяха преместени от %s\n"
-#~ "в %s\n"
-
-#~ msgid "Dup failed"
-#~ msgstr "Dup се провали"
-
-#~ msgid "Error dup'ing old error pipe"
-#~ msgstr "Грешка при дублиране на стар канал"
-
-#~ msgid "Cannot invoke command."
-#~ msgstr "Не може да се извика командата."
-
-#~ msgid "Pipe close failed"
-#~ msgstr "Затварянето на канала не успя"
-
-#~ msgid "Inconsistent extfs archive"
-#~ msgstr "Повреден extfs архив"

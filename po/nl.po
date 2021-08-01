@@ -4,7 +4,7 @@
 #
 # Translators:
 # flipthegreat <flipthegreat@hotmail.com>, 2011
-# Heimen Stoffels <vistausss@outlook.com>, 2013
+# Heimen Stoffels <vistausss@fastmail.com>, 2013
 # Richard E. van der Luit <nippur@fedoraproject.org>, 2012-2015,2017,2020
 # Slava Zanko <slavazanko@gmail.com>, 2011
 # toniotonba <TonioTonBa@gmail.com>, 2011
@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-07-25 20:57+0300\n"
-"PO-Revision-Date: 2020-12-31 14:19+0000\n"
+"POT-Creation-Date: 2021-08-01 19:02+0200\n"
+"PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Dutch (http://www.transifex.com/mc/mc/language/nl/)\n"
 "Language: nl\n"
@@ -1628,9 +1628,8 @@ msgstr ""
 "Een gebruikersvriendelijke tekstbewerker\n"
 "geschreven voor de Midnight Commander"
 
-#, fuzzy
 msgid "Copyright (C) 1996-2021 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2020 the Free Software Foundation"
+msgstr ""
 
 msgid "About"
 msgstr "Over"
@@ -3314,9 +3313,8 @@ msgstr "Bestandsnaam:"
 msgid "&Find recursively"
 msgstr "&Vind recursief"
 
-#, fuzzy
 msgid "Follow s&ymlinks"
-msgstr "&Linken volgen"
+msgstr ""
 
 msgid "S&kip hidden"
 msgstr "S&la verborgen over"
@@ -3757,20 +3755,18 @@ msgstr "Toevoegen aan extern venster "
 msgid "Enter command label:"
 msgstr "Geef opdrachtlabel: "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "%s"
-msgstr "Plaatsen in extern venster"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "failed to read data from child stdout:\n"
 "%s"
 msgstr ""
-"Kon geen data lezen van child stdout:\n"
-"%s"
 
 msgid "Cannot run external panelize in a non-local directory"
 msgstr "Uitvoeren extern venster is niet mogelijk in een niet-lokale map"
@@ -4163,20 +4159,18 @@ msgstr ""
 "Onverwacht einde van bestand in\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s:\n"
 "%s"
 msgstr ""
-"Kan archief %s niet openen\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "EXTFS virtual file system:\n"
 "%s"
-msgstr "Virtuele bestandssystemen (VFS):"
+msgstr ""
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4345,11 +4339,11 @@ msgstr ""
 "~/. netrc bestand heeft verkeerde modus. Verwijder wachtwoord of corrigeer "
 "de modus"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "SFS virtual file system:\n"
 "%s"
-msgstr "Virtuele bestandssystemen (VFS):"
+msgstr ""
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4440,9 +4434,8 @@ msgid ""
 "connecting?"
 msgstr ""
 
-#, fuzzy
 msgid "sftp: host key verification failed"
-msgstr "Authenticatie mislukt"
+msgstr ""
 
 #, c-format
 msgid "sftp: Enter passphrase for %s "
@@ -4458,9 +4451,8 @@ msgstr "sftp: Geeft wachtwoord voor %s"
 msgid "sftp: Password is empty."
 msgstr "sftp: Wachtwoord is leeg."
 
-#, fuzzy
 msgid "sftp: failure establishing SSH session"
-msgstr "sftp: SHH-sessie openen is niet gelukt"
+msgstr ""
 
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: Geen gegevens over bestand aanwezig om bestand te kunnen lezen"
@@ -4706,43 +4698,3 @@ msgstr "Doorgaan vanaf het begin?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan geen lokale versie van /ftp://some.host/editme.txt ophalen"
-
-#, c-format
-#~ msgid "An error occurred while migrating user settings: %s"
-#~ msgstr ""
-#~ "Er trad een fout op tijdens de migratie van de gebruikersinstellingen: %s"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to Freedesktop recommended dirs.\n"
-#~ "To get more info, please visit\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-#~ msgstr ""
-#~ "Uw oude instellingen zijn gemigreerd van %s\n"
-#~ "naar de door Freedesktop aangeraden mappen.\n"
-#~ "Voor meer info, zie\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to %s\n"
-#~ msgstr ""
-#~ "Uw oude instellingen zijn gemigreerd van %s\n"
-#~ "naar %s\n"
-
-#~ msgid "Dup failed"
-#~ msgstr "Dup mislukt"
-
-#~ msgid "Error dup'ing old error pipe"
-#~ msgstr "Fout bij het dup'ing van de oude pipe error"
-
-#~ msgid "Cannot invoke command."
-#~ msgstr "Opdracht oproepen mislukt."
-
-#~ msgid "Pipe close failed"
-#~ msgstr "Sluiten van pipe mislukt"
-
-#~ msgid "Inconsistent extfs archive"
-#~ msgstr "Inconsistent extfs-archief"

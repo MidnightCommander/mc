@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-07-25 20:57+0300\n"
-"PO-Revision-Date: 2020-12-31 14:19+0000\n"
+"POT-Creation-Date: 2021-08-01 19:02+0200\n"
+"PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Hungarian (http://www.transifex.com/mc/mc/language/hu/)\n"
 "Language: hu\n"
@@ -3285,9 +3285,8 @@ msgstr "Fájlnév:"
 msgid "&Find recursively"
 msgstr "Rek&urzív keresés"
 
-#, fuzzy
 msgid "Follow s&ymlinks"
-msgstr "&Linkek követése"
+msgstr ""
 
 msgid "S&kip hidden"
 msgstr "&Rejtettek kihagyása"
@@ -3727,11 +3726,11 @@ msgstr "Külső panel-parancs hozzáadása"
 msgid "Enter command label:"
 msgstr "A parancshoz tartozó leírás:"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "%s"
-msgstr "Külső panel-parancs"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -4129,20 +4128,18 @@ msgstr ""
 "Váratlan fájlvég:\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s:\n"
 "%s"
 msgstr ""
-"%s-archívum nem megnyitható\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "EXTFS virtual file system:\n"
 "%s"
-msgstr "Virtuális fájlrendszerek:"
+msgstr ""
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4310,11 +4307,11 @@ msgstr ""
 "~/.netrc jogosultságai helytelenek.\n"
 "Szüntesse meg a jelszót vagy javítsa a jogosultságokat."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "SFS virtual file system:\n"
 "%s"
-msgstr "Virtuális fájlrendszerek:"
+msgstr ""
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4405,9 +4402,8 @@ msgid ""
 "connecting?"
 msgstr ""
 
-#, fuzzy
 msgid "sftp: host key verification failed"
-msgstr "Azonosítás sikertelen"
+msgstr ""
 
 #, c-format
 msgid "sftp: Enter passphrase for %s "
@@ -4423,9 +4419,8 @@ msgstr "sftp: Adja meg %s jelszavát"
 msgid "sftp: Password is empty."
 msgstr "sftp: a jelszó üres."
 
-#, fuzzy
 msgid "sftp: failure establishing SSH session"
-msgstr "stp: Hiba lépett fel az ssh kapcsolat létrehozása közben"
+msgstr ""
 
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: Nincs jelenleg elérhető fájlkezelő adat a fájl olvasásához"
@@ -4677,42 +4672,3 @@ msgstr "Folytatás az elejéről?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nem sikerült behozni /ftp://some.host/editme.txt helyi másolatát"
-
-#, c-format
-#~ msgid "An error occurred while migrating user settings: %s"
-#~ msgstr "Hiba történt a felhasználói adatok migrálásakor: %s"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to Freedesktop recommended dirs.\n"
-#~ "To get more info, please visit\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-#~ msgstr ""
-#~ "A régi beállítások innen: %s migrálva lettek\\n\n"
-#~ "a Freedesktop ajánlás szerinti könyvtárakba.\\n\n"
-#~ "További információ:\\n\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to %s\n"
-#~ msgstr ""
-#~ "A régi beállítások innen: %s migrálva lettek\n"
-#~ "migrálva lettek ide: %s\n"
-
-#~ msgid "Dup failed"
-#~ msgstr "Sikertelen duplikálás"
-
-#~ msgid "Error dup'ing old error pipe"
-#~ msgstr "Hiba a régi hiba-cső duplikálásakor"
-
-#~ msgid "Cannot invoke command."
-#~ msgstr "A parancs nem hívható meg."
-
-#~ msgid "Pipe close failed"
-#~ msgstr "Nem sikerült lezárni a csövet."
-
-#~ msgid "Inconsistent extfs archive"
-#~ msgstr "Inkonzisztens Extfs-archívum."

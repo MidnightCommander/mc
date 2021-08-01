@@ -3,15 +3,16 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# Kjell Cato Heskjestad <cato@heskjestad.xyz>, 2019-2020
+# heskjestad <cato@heskjestad.xyz>, 2021
+# heskjestad <cato@heskjestad.xyz>, 2019-2021
 # Slava Zanko <slavazanko@gmail.com>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-07-25 20:57+0300\n"
-"PO-Revision-Date: 2020-12-31 14:19+0000\n"
-"Last-Translator: Transifex Bot <>\n"
+"POT-Creation-Date: 2021-08-01 19:02+0200\n"
+"PO-Revision-Date: 2021-07-29 12:31+0000\n"
+"Last-Translator: heskjestad <cato@heskjestad.xyz>\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/mc/mc/language/"
 "nb/)\n"
 "Language: nb\n"
@@ -1636,9 +1637,8 @@ msgstr ""
 "Et brukervennlig skriveprogram\n"
 "skrevet for Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2021 the Free Software Foundation"
-msgstr "Opphavsrett (C) 1996-2020 the Free Software Foundation"
+msgstr "Opphavsrett (C) 1996-2021 the Free Software Foundation"
 
 msgid "About"
 msgstr "Om"
@@ -1959,7 +1959,7 @@ msgid "Skin:"
 msgstr "Drakt:"
 
 msgid "&Shadows"
-msgstr ""
+msgstr "&Skygger"
 
 msgid "Appearance"
 msgstr "Presentasjonsdrakt"
@@ -2253,7 +2253,7 @@ msgid "No COW"
 msgstr "Ikke COW"
 
 msgid "Direct access for files"
-msgstr ""
+msgstr "Direkte adgang til filer"
 
 msgid "Casefolded file"
 msgstr "Ikke versalsensitiv"
@@ -3319,9 +3319,8 @@ msgstr "Filnavn:"
 msgid "&Find recursively"
 msgstr "Søk i alle &undermapper"
 
-#, fuzzy
 msgid "Follow s&ymlinks"
-msgstr "Følg &lenker"
+msgstr "Følg s&ymlenker"
 
 msgid "S&kip hidden"
 msgstr "Hopp over &skjulte"
@@ -3761,19 +3760,22 @@ msgstr "Ny kommando"
 msgid "Enter command label:"
 msgstr "Angi kommandoetikett:"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "%s"
-msgstr "Legg til eksternt i panel"
+msgstr ""
+"Legg til eksternt i panel:\n"
+"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "failed to read data from child stdout:\n"
 "%s"
 msgstr ""
-"Klarte ikke lese data fra barnets stdout:\n"
+"Legg til eksternt i panel:\n"
+"klarte ikke lese data fra barnets stdout:\n"
 "%s"
 
 msgid "Cannot run external panelize in a non-local directory"
@@ -4164,20 +4166,23 @@ msgstr ""
 "Uventet slutt på fil\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s:\n"
 "%s"
 msgstr ""
-"Klarte ikke åpne arkivet %s \n"
+"Klarte ikke åpne arkivet %s\n"
+"%s:\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "EXTFS virtual file system:\n"
 "%s"
-msgstr "Virtuelle filsystem:"
+msgstr ""
+"EXTFS virtuelt filsystem:\n"
+"%s"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4345,11 +4350,13 @@ msgstr ""
 "~/.netrc har ugyldige rettigheter\n"
 "Fjern passordet eller fiks rettighetene"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "SFS virtual file system:\n"
 "%s"
-msgstr "Virtuelle filsystem:"
+msgstr ""
+"SFS virtuelt filsystem:\n"
+"%s"
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4386,7 +4393,7 @@ msgid "sftp: %s"
 msgstr "sftp: %s"
 
 msgid "sftp: failed to convert remote host IP address into text form"
-msgstr ""
+msgstr "sftp: Klarte ikke konvertere den eksterne vertens IP til tekst"
 
 #, c-format
 msgid "sftp: making connection to %s"
@@ -4400,10 +4407,10 @@ msgid "sftp: connection to server failed: %s"
 msgstr "sftp: Tilkoblingen til tjeneren mislyktes: %s"
 
 msgid "sftp: found host key of unsupported type: RSA1"
-msgstr ""
+msgstr "sftp: Fant vertsnøkkel med type som ikke støttes: RSA1"
 
 msgid "sftp: unknown host key type:"
-msgstr ""
+msgstr "sftp: Vertsnøkkel har ukjent type:"
 
 #, c-format
 msgid ""
@@ -4411,15 +4418,19 @@ msgid ""
 "%s (%s)\n"
 "to the list of known hosts."
 msgstr ""
+"%s (%s)\n"
+"ble permanent lagt til\n"
+"listen over kjente verter."
 
 msgid "sftp: cannot get the remote host key"
-msgstr ""
+msgstr "sftp: Kan ikke hente den eksterne vertens nøkkel"
 
 msgid "sftp: unsupported key type, can't check remote host key"
 msgstr ""
+"sftp: Nøkkeltype støttes ikke; kan ikke kontrollere nøkkelen til ekstern vert"
 
 msgid "sftp: can't compute host key fingerprint hash"
-msgstr ""
+msgstr "sftp: Kan ikke beregne sjekksum til vertens nøkkel"
 
 #, c-format
 msgid ""
@@ -4430,6 +4441,13 @@ msgid ""
 "SHA1:%s.\n"
 "Do you want to add it to the list of known hosts and continue connecting?"
 msgstr ""
+"Kan ikke fastslå \n"
+"autentisiteten til verten\n"
+"%s (%s)\n"
+"Sjekksummen til\n"
+"nøkkelen til %s er:\n"
+"SHA1: %s.\n"
+"Vil du legge den til listen over kjente verter og fortsette tilkobling?"
 
 #, c-format
 msgid ""
@@ -4439,10 +4457,15 @@ msgid ""
 "Are you sure you want to add it to the list of known hosts and continue "
 "connecting?"
 msgstr ""
+"Fant %s (%s)\n"
+"i listen over kjente verter, men\n"
+"DET ER IKKE SAMSVAR MELLOM NØKLENE!\n"
+"DETTE KAN VÆRE ET MELLOMMANNS-ANGREP!\n"
+"Vil du virkelig legge den til i listen over kjente verter og fortsette "
+"tilkobling?"
 
-#, fuzzy
 msgid "sftp: host key verification failed"
-msgstr "Autentisering mislyktes"
+msgstr "sftp: Verifisering av vertsnøkkel mislyktes"
 
 #, c-format
 msgid "sftp: Enter passphrase for %s "
@@ -4458,7 +4481,6 @@ msgstr "sftp: Skriv inn passord for %s"
 msgid "sftp: Password is empty."
 msgstr "sftp: Passordet er tomt."
 
-#, fuzzy
 msgid "sftp: failure establishing SSH session"
 msgstr "sftp: Klarte ikke sette opp SSH-økt"
 
@@ -4716,42 +4738,3 @@ msgstr "Fortsett fra begynnelsen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Klarte ikke hente en lokal kopi av /ftp://some.host/editme.txt"
-
-#, c-format
-#~ msgid "An error occurred while migrating user settings: %s"
-#~ msgstr "Det oppstod en feil under migrering av brukers oppsett: %s"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to Freedesktop recommended dirs.\n"
-#~ "To get more info, please visit\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-#~ msgstr ""
-#~ "Migrerte det gamle oppsettet fra %s\n"
-#~ "til Freedesktops anbefalte mapper.\n"
-#~ "For mer informasjon, se\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to %s\n"
-#~ msgstr ""
-#~ "Migrerte det gamle oppsettet fra %s\n"
-#~ "til %s\n"
-
-#~ msgid "Dup failed"
-#~ msgstr "dup() mislyktes"
-
-#~ msgid "Error dup'ing old error pipe"
-#~ msgstr "Klarte ikke «dup»e gammelt feilrør"
-
-#~ msgid "Cannot invoke command."
-#~ msgstr "Klarte ikke kalle kommando."
-
-#~ msgid "Pipe close failed"
-#~ msgstr "Klarte ikke lukke rør"
-
-#~ msgid "Inconsistent extfs archive"
-#~ msgstr "Inkonsistent extfs-arkiv"

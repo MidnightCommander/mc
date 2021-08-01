@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-07-25 20:57+0300\n"
-"PO-Revision-Date: 2020-12-31 14:19+0000\n"
+"POT-Creation-Date: 2021-08-01 19:02+0200\n"
+"PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Serbian (http://www.transifex.com/mc/mc/language/sr/)\n"
 "Language: sr\n"
@@ -3282,9 +3282,8 @@ msgstr "Датотека:"
 msgid "&Find recursively"
 msgstr "Нађи &дубински"
 
-#, fuzzy
 msgid "Follow s&ymlinks"
-msgstr "Прати &везе"
+msgstr ""
 
 msgid "S&kip hidden"
 msgstr "Прескочи &скривене"
@@ -3727,20 +3726,18 @@ msgstr "Додај спољном програму за у окно"
 msgid "Enter command label:"
 msgstr "Унесите натпис наредбе:"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "%s"
-msgstr "Спољним програмом у окно"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "failed to read data from child stdout:\n"
 "%s"
 msgstr ""
-"Нисам успео да прочитам податке из стандардног излаза порода:\n"
-"%s"
 
 msgid "Cannot run external panelize in a non-local directory"
 msgstr ""
@@ -4129,20 +4126,18 @@ msgstr ""
 "Неочекивани крај датотеке\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s:\n"
 "%s"
 msgstr ""
-"Не могу да отворим „%s“ архиву\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "EXTFS virtual file system:\n"
 "%s"
-msgstr "Виртуелни систем датотека:"
+msgstr ""
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4310,11 +4305,11 @@ msgstr ""
 "Датотека „~/.netrc“ има неисправан режим\n"
 "Уклоните лозинку или исправите режим"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "SFS virtual file system:\n"
 "%s"
-msgstr "Виртуелни систем датотека:"
+msgstr ""
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4405,9 +4400,8 @@ msgid ""
 "connecting?"
 msgstr ""
 
-#, fuzzy
 msgid "sftp: host key verification failed"
-msgstr "Потврђивање идентитета није успело"
+msgstr ""
 
 #, c-format
 msgid "sftp: Enter passphrase for %s "
@@ -4680,42 +4674,3 @@ msgstr "Да наставим са почетка?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не могу да довучем месни примерак „/ftp://some.host/editme.txt“"
-
-#, c-format
-#~ msgid "An error occurred while migrating user settings: %s"
-#~ msgstr "Дошло је до грешке приликом премештања корисникових подешавања: %s"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to Freedesktop recommended dirs.\n"
-#~ "To get more info, please visit\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-#~ msgstr ""
-#~ "Ваша стара подешавања су премештена из „%s“\n"
-#~ "у директоријум који препоручује Фридесктоп.\n"
-#~ "За више података, посетите\n"
-#~ "„http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html“"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to %s\n"
-#~ msgstr ""
-#~ "Ваша стара подешавања су премештена из „%s“\n"
-#~ "у „%s“\n"
-
-#~ msgid "Dup failed"
-#~ msgstr "Удвостручавање није успело"
-
-#~ msgid "Error dup'ing old error pipe"
-#~ msgstr "Грешка удвостручавања старе спојке грешке"
-
-#~ msgid "Cannot invoke command."
-#~ msgstr "Не могу да покренем наредбу."
-
-#~ msgid "Pipe close failed"
-#~ msgstr "Затварање спојке није успело"
-
-#~ msgid "Inconsistent extfs archive"
-#~ msgstr "Недоследна екстсд архива"

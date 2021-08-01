@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-07-25 20:57+0300\n"
-"PO-Revision-Date: 2020-12-31 14:19+0000\n"
+"POT-Creation-Date: 2021-08-01 19:02+0200\n"
+"PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Danish (http://www.transifex.com/mc/mc/language/da/)\n"
 "Language: da\n"
@@ -1631,9 +1631,8 @@ msgstr ""
 "En brugervenlig teksteditor\n"
 "skrevet til Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2021 the Free Software Foundation"
-msgstr "Ophavsret (C) 1996-2020 Free Software Foundation"
+msgstr ""
 
 msgid "About"
 msgstr "Om"
@@ -3315,9 +3314,8 @@ msgstr "Filnavn:"
 msgid "&Find recursively"
 msgstr "&Find rekursivt"
 
-#, fuzzy
 msgid "Follow s&ymlinks"
-msgstr "Følg &henvisninger"
+msgstr ""
 
 msgid "S&kip hidden"
 msgstr "S&pring skjulte over"
@@ -3757,20 +3755,18 @@ msgstr "Tilføj til ekstern panelisering"
 msgid "Enter command label:"
 msgstr "Indtast kommandoetiket:"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "%s"
-msgstr "Eksternt panelisering"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "failed to read data from child stdout:\n"
 "%s"
 msgstr ""
-"Kunne ikke læse data fra barne-stdout:\n"
-"%s"
 
 msgid "Cannot run external panelize in a non-local directory"
 msgstr "Kan ikke køre ekstern panelisering i en mappe, der ikke er lokal"
@@ -4162,20 +4158,18 @@ msgstr ""
 "Uventet EOF\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s:\n"
 "%s"
 msgstr ""
-"Kunne ikke åbne arkivet %s\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "EXTFS virtual file system:\n"
 "%s"
-msgstr "Virtuelle filsystemer:"
+msgstr ""
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4343,11 +4337,11 @@ msgstr ""
 "Filen ~/.netrc har ukorrekt tilstand\n"
 "Fjern adgangskode eller tilpas tilstand"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "SFS virtual file system:\n"
 "%s"
-msgstr "Virtuelle filsystemer:"
+msgstr ""
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4438,9 +4432,8 @@ msgid ""
 "connecting?"
 msgstr ""
 
-#, fuzzy
 msgid "sftp: host key verification failed"
-msgstr "Godkendelse fejlede"
+msgstr ""
 
 #, c-format
 msgid "sftp: Enter passphrase for %s "
@@ -4456,9 +4449,8 @@ msgstr "sftp: Indtast adgangskode til %s "
 msgid "sftp: Password is empty."
 msgstr "sftp: Adgangskoden er tom."
 
-#, fuzzy
 msgid "sftp: failure establishing SSH session"
-msgstr "sftp: Kunne ikke etablere SSH-session"
+msgstr ""
 
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: Ingen tilgængelig filbehandlerdata til læsning af fil"
@@ -4714,43 +4706,3 @@ msgstr "Fortsæt fra begyndelsen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan ikke hente en lokal kopi af /ftp://en.vært/editme.txt"
-
-#, c-format
-#~ msgid "An error occurred while migrating user settings: %s"
-#~ msgstr "Der opstod en fejl ved flytning af brugerindstillinger: %s"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to Freedesktop recommended dirs.\n"
-#~ "To get more info, please visit\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-#~ msgstr ""
-#~ "Dine gamle indstillinger blev flyttet fra %s\n"
-#~ "til mapper anbefalet af Freedesktop.\n"
-#~ "Besøg venligst http://standards.freedesktop.org/basedir-spec/basedir-spec-"
-#~ "latest.html\n"
-#~ "for mere information"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to %s\n"
-#~ msgstr ""
-#~ "Dine gamle indstillinger blev flyttet fra %s\n"
-#~ "til %s\n"
-
-#~ msgid "Dup failed"
-#~ msgstr "Dup fejlede"
-
-#~ msgid "Error dup'ing old error pipe"
-#~ msgstr "Fejl ved dupning af gammel fejldatakanal"
-
-#~ msgid "Cannot invoke command."
-#~ msgstr "Kan ikke udføre kommando."
-
-#~ msgid "Pipe close failed"
-#~ msgstr "Fejl under lukning af datakanal"
-
-#~ msgid "Inconsistent extfs archive"
-#~ msgstr "Inkonsistent extfs-arkiv"

@@ -3,14 +3,15 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# Piotr Drąg <piotrdrag@gmail.com>, 2011-2020
+# Piotr Drąg <piotrdrag@gmail.com>, 2011-2021
 # Slava Zanko <slavazanko@gmail.com>, 2011
+# Waldemar Stoczkowski, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-07-25 20:57+0300\n"
-"PO-Revision-Date: 2020-12-31 17:15+0000\n"
+"POT-Creation-Date: 2021-08-01 19:02+0200\n"
+"PO-Revision-Date: 2021-07-27 11:29+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/mc/mc/language/pl/)\n"
 "Language: pl\n"
@@ -1639,9 +1640,8 @@ msgstr ""
 "Łatwy w obsłudze edytor tekstu,\n"
 "napisany dla programu Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2021 the Free Software Foundation"
-msgstr "Copyright © 1996-2020 Free Software Foundation"
+msgstr "Copyright © 1996-2021 Free Software Foundation"
 
 msgid "About"
 msgstr "O programie"
@@ -3196,7 +3196,7 @@ msgid "C&ompare files"
 msgstr "P&orównaj pliki"
 
 msgid "E&xternal panelize"
-msgstr "Panele ze&wnętrzne"
+msgstr "Filtr ze&wnętrzny"
 
 msgid "Show directory s&izes"
 msgstr "Wyśw&ietl rozmiary katalogów"
@@ -3324,9 +3324,8 @@ msgstr "Nazwa pliku:"
 msgid "&Find recursively"
 msgstr "&Znajdź rekurencyjnie"
 
-#, fuzzy
 msgid "Follow s&ymlinks"
-msgstr "Podążanie za &dowiązaniami"
+msgstr "Podążanie za dowiązaniami s&ymbolicznymi"
 
 msgid "S&kip hidden"
 msgstr "Pomiń u&kryte"
@@ -3773,19 +3772,22 @@ msgstr "Dodaj do filtrów zewnętrznych"
 msgid "Enter command label:"
 msgstr "Etykieta polecenia:"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "%s"
-msgstr "Filtr zewnętrzny"
+msgstr ""
+"Filtr zewnętrzny:\n"
+"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "failed to read data from child stdout:\n"
 "%s"
 msgstr ""
-"Odczytanie danych z potomnego standardowego wyjścia się nie powiodło:\n"
+"Filtr zewnętrzny:\n"
+"odczytanie danych z potomnego standardowego wyjścia się nie powiodło:\n"
 "%s"
 
 msgid "Cannot run external panelize in a non-local directory"
@@ -4178,20 +4180,23 @@ msgstr ""
 "Nieoczekiwany koniec pliku\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s:\n"
 "%s"
 msgstr ""
 "Nie można otworzyć archiwum %s\n"
+"%s:\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "EXTFS virtual file system:\n"
 "%s"
-msgstr "Wirtualne systemy plików:"
+msgstr ""
+"Wirtualny system plików EXTFS:\n"
+"%s"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4359,11 +4364,13 @@ msgstr ""
 "Plik ~/.netrc ma niepoprawny tryb\n"
 "Proszę usunąć hasło lub poprawić tryb"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "SFS virtual file system:\n"
 "%s"
-msgstr "Wirtualne systemy plików:"
+msgstr ""
+"Wirtualny system plików SFS:\n"
+"%s"
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4401,6 +4408,8 @@ msgstr "sftp: %s"
 
 msgid "sftp: failed to convert remote host IP address into text form"
 msgstr ""
+"sftp: konwersja adresu IP zdalnego komputera na formę tekstową się nie "
+"powiodła"
 
 #, c-format
 msgid "sftp: making connection to %s"
@@ -4414,10 +4423,10 @@ msgid "sftp: connection to server failed: %s"
 msgstr "sftp: połączenie z serwerem się nie powiodło: %s"
 
 msgid "sftp: found host key of unsupported type: RSA1"
-msgstr ""
+msgstr "sftp: odnaleziono klucz komputera o nieobsługiwanym typie: RSA1"
 
 msgid "sftp: unknown host key type:"
-msgstr ""
+msgstr "sftp: nieznany typ klucza komputera:"
 
 #, c-format
 msgid ""
@@ -4425,15 +4434,20 @@ msgid ""
 "%s (%s)\n"
 "to the list of known hosts."
 msgstr ""
+"Trwale dodano\n"
+"%s (%s)\n"
+"do listy znanych komputerów."
 
 msgid "sftp: cannot get the remote host key"
-msgstr ""
+msgstr "sftp: nie można uzyskać klucza zdalnego komputera"
 
 msgid "sftp: unsupported key type, can't check remote host key"
 msgstr ""
+"sftp: nieobsługiwany typ klucza, nie można sprawdzić klucza zdalnego "
+"komputera"
 
 msgid "sftp: can't compute host key fingerprint hash"
-msgstr ""
+msgstr "sftp: nie można obliczyć sumy odcisku klucza komputera"
 
 #, c-format
 msgid ""
@@ -4444,6 +4458,12 @@ msgid ""
 "SHA1:%s.\n"
 "Do you want to add it to the list of known hosts and continue connecting?"
 msgstr ""
+"Autentyczność komputera\n"
+"%s (%s)\n"
+"nie może zostać ustalona.\n"
+"Suma odcisku klucza %s to\n"
+"SHA1:%s.\n"
+"Dodać go do listy znanych komputerów i kontynuować łączenie?"
 
 #, c-format
 msgid ""
@@ -4453,10 +4473,13 @@ msgid ""
 "Are you sure you want to add it to the list of known hosts and continue "
 "connecting?"
 msgstr ""
+"%s (%s)\n"
+"znajduje się na liście znanych komputerów, ale\n"
+"KLUCZE SIĘ NIE ZGADZAJĄ! TO MOŻE BYĆ ATAK TYPU MITM!\n"
+"Na pewno dodać go do listy znanych komputerów i kontynuować łączenie?"
 
-#, fuzzy
 msgid "sftp: host key verification failed"
-msgstr "Uwierzytelnienie się nie powiodło"
+msgstr "sftp: weryfikacja klucza komputera się nie powiodła"
 
 #, c-format
 msgid "sftp: Enter passphrase for %s "
@@ -4472,7 +4495,6 @@ msgstr "sftp: hasło dla %s "
 msgid "sftp: Password is empty."
 msgstr "sftp: hasło jest puste."
 
-#, fuzzy
 msgid "sftp: failure establishing SSH session"
 msgstr "sftp: niepowodzenie podczas nawiązywania sesji SSH"
 
@@ -4731,42 +4753,3 @@ msgstr "Kontynuować od początku?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Nie można pobrać lokalnej kopii /ftp://jakiś.komputer/modyfikuj_mnie.txt"
-
-#, c-format
-#~ msgid "An error occurred while migrating user settings: %s"
-#~ msgstr "Wystąpił błąd podczas migrowania ustawień użytkownika: %s"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to Freedesktop recommended dirs.\n"
-#~ "To get more info, please visit\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-#~ msgstr ""
-#~ "Poprzednie ustawienia użytkownika zostały przeniesione z %s\n"
-#~ "do katalogów zalecanych przez freedesktop.org.\n"
-#~ "Więcej informacji znajduje się na stronie\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to %s\n"
-#~ msgstr ""
-#~ "Poprzednie ustawienia zostały przeniesione z %s\n"
-#~ "do %s\n"
-
-#~ msgid "Dup failed"
-#~ msgstr "Dup się nie powiodło"
-
-#~ msgid "Error dup'ing old error pipe"
-#~ msgstr "Błąd podczas duplikowania poprzedniego potoku błędu"
-
-#~ msgid "Cannot invoke command."
-#~ msgstr "Nie można wywołać polecenia."
-
-#~ msgid "Pipe close failed"
-#~ msgstr "Zamknięcie potoku się nie powiodło"
-
-#~ msgid "Inconsistent extfs archive"
-#~ msgstr "Niespójne archiwum extfs"

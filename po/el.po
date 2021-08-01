@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-07-25 20:57+0300\n"
-"PO-Revision-Date: 2020-12-31 14:19+0000\n"
+"POT-Creation-Date: 2021-08-01 19:02+0200\n"
+"PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Greek (http://www.transifex.com/mc/mc/language/el/)\n"
 "Language: el\n"
@@ -3202,9 +3202,8 @@ msgstr "Όνομα αρχείου:"
 msgid "&Find recursively"
 msgstr ""
 
-#, fuzzy
 msgid "Follow s&ymlinks"
-msgstr "Να ακολουθούνται οι &δεσμοί"
+msgstr ""
 
 msgid "S&kip hidden"
 msgstr "&Παράβλεψη κρυφών"
@@ -4024,20 +4023,18 @@ msgstr ""
 "Απροσδόκητο τέλος αρχείου\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s:\n"
 "%s"
 msgstr ""
-"Άνοιγμα αρχείου %s ανεπιτυχές\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "EXTFS virtual file system:\n"
 "%s"
-msgstr "Εικονικά συστήματα αρχείων:"
+msgstr ""
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4204,11 +4201,11 @@ msgid ""
 "Remove password or correct mode"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "SFS virtual file system:\n"
 "%s"
-msgstr "Εικονικά συστήματα αρχείων:"
+msgstr ""
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4299,9 +4296,8 @@ msgid ""
 "connecting?"
 msgstr ""
 
-#, fuzzy
 msgid "sftp: host key verification failed"
-msgstr "η πιστοποίηση απέτυχε"
+msgstr ""
 
 #, c-format
 msgid "sftp: Enter passphrase for %s "
@@ -4566,26 +4562,3 @@ msgstr "Συνέχεια από την αρχή;"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to Freedesktop recommended dirs.\n"
-#~ "To get more info, please visit\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-#~ msgstr ""
-#~ "Οι παλιές σας ρυθμίσεις μετακινήθηκαν από %s\n"
-#~ "στους προτεινόμενους καταλόγους του Freedesktop.\n"
-#~ "Για να λάβετε περισσότερες πληροφορίες, παρακαλούμε επισκεφτείτε το\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to %s\n"
-#~ msgstr ""
-#~ "Οι παλιές σας ρυθμίσεις μετακινήθηκαν από %s\n"
-#~ "σε %s\n"
-
-#~ msgid "Inconsistent extfs archive"
-#~ msgstr "Χαλασμένο αρχείο extfs"

@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-07-25 20:57+0300\n"
-"PO-Revision-Date: 2020-12-31 14:19+0000\n"
+"POT-Creation-Date: 2021-08-01 19:02+0200\n"
+"PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Lithuanian (http://www.transifex.com/mc/mc/language/lt/)\n"
 "Language: lt\n"
@@ -3203,9 +3203,8 @@ msgstr "Failo pavadinimas:"
 msgid "&Find recursively"
 msgstr "&Rasti rekursyviai"
 
-#, fuzzy
 msgid "Follow s&ymlinks"
-msgstr "Sekti nuorodas"
+msgstr ""
 
 msgid "S&kip hidden"
 msgstr ""
@@ -3649,11 +3648,11 @@ msgstr ""
 msgid "Enter command label:"
 msgstr "Įvesti komandos etiketę:"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "%s"
-msgstr "Išorinis skydelis"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -4040,20 +4039,18 @@ msgstr ""
 "Netikėta failo pabaiga\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s:\n"
 "%s"
 msgstr ""
-"Nepavyko atverti „%s“ archyvo\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "EXTFS virtual file system:\n"
 "%s"
-msgstr "Virtualios failų sistemos:"
+msgstr ""
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4219,11 +4216,11 @@ msgid ""
 "Remove password or correct mode"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "SFS virtual file system:\n"
 "%s"
-msgstr "Virtualios failų sistemos:"
+msgstr ""
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4578,36 +4575,3 @@ msgstr "Tęsti nuo pradžios?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#, c-format
-#~ msgid "An error occurred while migrating user settings: %s"
-#~ msgstr "Klaida perkeliant vartotojo nustatymus: %s"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to Freedesktop recommended dirs.\n"
-#~ "To get more info, please visit\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-#~ msgstr ""
-#~ "Jūsų anskstesni nustatymai buvo perkelti iš %s\n"
-#~ "į Freedesktop rekomenduojamus aplankus.\n"
-#~ "Daugiau informacijos rasite čia\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to %s\n"
-#~ msgstr ""
-#~ "Jūsų anskstesni nustatymai buvo perkelti iš %s\n"
-#~ "į %s\n"
-
-#~ msgid "Cannot invoke command."
-#~ msgstr "Nepavyko iškviesti komandos."
-
-#~ msgid "Pipe close failed"
-#~ msgstr "Konvejerio užvėrimas nepavyko"
-
-#~ msgid "Inconsistent extfs archive"
-#~ msgstr "Prieštaringas „extfs“ archyvas"

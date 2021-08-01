@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-07-25 20:57+0300\n"
-"PO-Revision-Date: 2020-12-31 15:56+0000\n"
-"Last-Translator: Keith Bowes <zooplah@gmail.com>\n"
+"POT-Creation-Date: 2021-08-01 19:02+0200\n"
+"PO-Revision-Date: 2021-07-26 20:16+0000\n"
+"Last-Translator: Transifex Bot <>\n"
 "Language-Team: Esperanto (http://www.transifex.com/mc/mc/language/eo/)\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
@@ -246,16 +246,16 @@ msgid "Backspace"
 msgstr "Retropaŝa klavo"
 
 msgid "Up arrow"
-msgstr "Supriga sagoklavo"
+msgstr "Supreniga sagoklavo"
 
 msgid "Down arrow"
-msgstr "Malsupriga sagoklavo"
+msgstr "Malsupreniga sagoklavo"
 
 msgid "Left arrow"
-msgstr "Maldekstriga sagoklavo"
+msgstr "Maldekstreniga sagoklavo"
 
 msgid "Right arrow"
-msgstr "Dekstriga sagoklavo"
+msgstr "Dekstreniga sagoklavo"
 
 msgid "Insert"
 msgstr "Enmeta klavo"
@@ -270,10 +270,10 @@ msgid "End key"
 msgstr "Finiga klavo"
 
 msgid "Page Up"
-msgstr "Klavo por suprenigi je ekranpleno"
+msgstr "Rulumi supren je paĝo"
 
 msgid "Page Down"
-msgstr "Klavo por malsuprenigi je ekranpleno"
+msgstr "Rulumi malsupren je paĝo"
 
 msgid "/ on keypad"
 msgstr "/ ĉe cifera klavaro"
@@ -288,16 +288,16 @@ msgid "+ on keypad"
 msgstr "+ ĉe cifera klavaro"
 
 msgid "Left arrow keypad"
-msgstr "Maldekstriga sagoklavo [cifera klavaro]"
+msgstr "Maldekstreniga sagoklavo [cifera klavaro]"
 
 msgid "Right arrow keypad"
-msgstr "Dekstriga sagoklavo [cifera klavaro]"
+msgstr "Dekstreniga sagoklavo [cifera klavaro]"
 
 msgid "Up arrow keypad"
-msgstr "Supriga sagoklavo [cifera klavaro]"
+msgstr "Supreniga sagoklavo [cifera klavaro]"
 
 msgid "Down arrow keypad"
-msgstr "Malsupriga sagoklavo [cifera klavaro]"
+msgstr "Malsupreniga sagoklavo [cifera klavaro]"
 
 msgid "Home on keypad"
 msgstr "Hejma klavo [cifera klavaro]"
@@ -675,7 +675,7 @@ msgid "Edit files"
 msgstr "Redakti dosierojn"
 
 msgid "<file> ..."
-msgstr "<dosiero> …"
+msgstr "<dosiero> ..."
 
 msgid "Forces xterm features"
 msgstr "Devigi xterm-trajtojn"
@@ -792,7 +792,7 @@ msgid "Color options"
 msgstr "Kolora agordo"
 
 msgid "[+lineno] file1[:lineno] [file2[:lineno]...]"
-msgstr "[+linia_numero] dosiero1[:linia_numero] [dosiero2[:linia_numero…]]"
+msgstr "[+linia_numero] dosiero1[:linia_numero] [dosiero2[:linia_numero]...]"
 
 msgid "file"
 msgstr "dosieron"
@@ -1306,7 +1306,7 @@ msgid "&Close"
 msgstr "&Fermi"
 
 msgid "&History..."
-msgstr "&Historio…"
+msgstr "&Historio..."
 
 msgid "Save &as..."
 msgstr "K&onservi kiel..."
@@ -1630,9 +1630,8 @@ msgstr ""
 "Afabla tekstoredaktilo\n"
 "verkita por Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2021 the Free Software Foundation"
-msgstr "Kopirajto (C) 1996–2020 la Fondaĵo pri liberaj programoj"
+msgstr "Kopirajto (C) 1996–2021 la Fondaĵo pri liberaj programoj"
 
 msgid "About"
 msgstr "Pri"
@@ -2247,7 +2246,7 @@ msgid "No COW"
 msgstr "Neniu COW"
 
 msgid "Direct access for files"
-msgstr "Senpera atingo de dosieroj"
+msgstr "Rekta atingo por dosieroj"
 
 msgid "Casefolded file"
 msgstr "Dosiero kun faldita uskleco"
@@ -3079,7 +3078,7 @@ msgid "&Tree"
 msgstr "&Arbo"
 
 msgid "&Listing format..."
-msgstr "&Listo-aranĝo…"
+msgstr "&Listo-aranĝo..."
 
 msgid "&Sort order..."
 msgstr "&Ordigi laŭ..."
@@ -3313,9 +3312,8 @@ msgstr "Dosiernomo:"
 msgid "&Find recursively"
 msgstr "&Trovi rekursie"
 
-#, fuzzy
 msgid "Follow s&ymlinks"
-msgstr "Sekvi &Ligilojn"
+msgstr "Sekvi Simbolajn &Ligilojn"
 
 msgid "S&kip hidden"
 msgstr "P&reterlasi kaŝitan"
@@ -3755,19 +3753,22 @@ msgstr "Aldoni al eksteraj flankoj"
 msgid "Enter command label:"
 msgstr "Enmetu komandan etikedon:"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "%s"
-msgstr "Eksterigi flankojn"
+msgstr ""
+"Eksterigi flankojn:\n"
+"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "failed to read data from child stdout:\n"
 "%s"
 msgstr ""
-"Malsukcesis legi datumojn el ida ĉefeligujo:\n"
+"Eksteraj paneloj:\n"
+"malsukcesis legi datumojn el ida ĉefeligujo\n"
 "%s"
 
 msgid "Cannot run external panelize in a non-local directory"
@@ -4142,7 +4143,7 @@ msgstr ""
 
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
-msgstr "%s enhavas duplikatajn erojn! Preterlasanta!"
+msgstr "%s enhavas duobligitajn erojn! Preterlasanta!"
 
 #, c-format
 msgid ""
@@ -4160,20 +4161,23 @@ msgstr ""
 "Neatendita dosierfino\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s:\n"
 "%s"
 msgstr ""
-"Ne eblas malfermi dosiero %s\n"
+"Ne eblas malfermi arĥivan dosieron %s\n"
+"%s:\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "EXTFS virtual file system:\n"
 "%s"
-msgstr "Virtualaj dosiersistemoj:"
+msgstr ""
+"Virtuala dosiersistemo EXTFS:\n"
+"%s"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4341,11 +4345,13 @@ msgstr ""
 "~/.netrc havas neĝustan reĝimon\n"
 "Forigi pasvorton aŭ alĝustigi reĝimon"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "SFS virtual file system:\n"
 "%s"
-msgstr "Virtualaj dosiersistemoj:"
+msgstr ""
+"Virtuala dosiersistemo SFS:\n"
+"%s"
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4436,9 +4442,8 @@ msgid ""
 "connecting?"
 msgstr ""
 
-#, fuzzy
 msgid "sftp: host key verification failed"
-msgstr "Atestado malsukcesis"
+msgstr ""
 
 #, c-format
 msgid "sftp: Enter passphrase for %s "
@@ -4454,9 +4459,8 @@ msgstr "sftp: Enmetu pasvorton por %s"
 msgid "sftp: Password is empty."
 msgstr "sftp: Pasvorto estas vaka."
 
-#, fuzzy
 msgid "sftp: failure establishing SSH session"
-msgstr "sftp: Malsukcesis starigi SSH-seancon"
+msgstr ""
 
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: Neniu dosiertraktila datumo ĉeestas por legi dosieron"
@@ -4712,42 +4716,3 @@ msgstr "Ĉu deiri de la komenco?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Ne eblas atingi lokan kopion de /ftp://some.host/editme.txt"
-
-#, c-format
-#~ msgid "An error occurred while migrating user settings: %s"
-#~ msgstr "Eraro okazis dum migrigi uzanto-agordon: %s"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to Freedesktop recommended dirs.\n"
-#~ "To get more info, please visit\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-#~ msgstr ""
-#~ "Via eksaj agordaĵoj estis migrintaj el %s\n"
-#~ "al dosierujoj rekomendataj de Freedesktop.\n"
-#~ "Por akiri pliajn informojn, bonvolu viziti\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to %s\n"
-#~ msgstr ""
-#~ "Via eksa agordo estis elmigrinta el %s\n"
-#~ "al %s\n"
-
-#~ msgid "Dup failed"
-#~ msgstr "Duplikato malsukcesis"
-
-#~ msgid "Error dup'ing old error pipe"
-#~ msgstr "Erara dum duplikati malnovan eraran dukton"
-
-#~ msgid "Cannot invoke command."
-#~ msgstr "Ne eblas plenumi komandon."
-
-#~ msgid "Pipe close failed"
-#~ msgstr "Dukta fermo malsukcesis"
-
-#~ msgid "Inconsistent extfs archive"
-#~ msgstr "Malkonsekvenca extfs-dosieron"

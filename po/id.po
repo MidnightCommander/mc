@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-07-25 20:57+0300\n"
-"PO-Revision-Date: 2020-12-31 14:19+0000\n"
+"POT-Creation-Date: 2021-08-01 19:02+0200\n"
+"PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Indonesian (http://www.transifex.com/mc/mc/language/id/)\n"
 "Language: id\n"
@@ -3947,14 +3947,12 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s:\n"
 "%s"
 msgstr ""
-"Tak bisa membuka arsip cpio\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -4470,33 +4468,3 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#, c-format
-#~ msgid "An error occurred while migrating user settings: %s"
-#~ msgstr "Terjadi kesalahan saat migrasi setting pengguna: %s"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to Freedesktop recommended dirs.\n"
-#~ "To get more info, please visit\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-#~ msgstr ""
-#~ "Setting lama anda sudah dimigrasikan dari %s\n"
-#~ "ke direktori yang direkomendasikan Freedesktop.\n"
-#~ "Untuk penjelasan lebih lanjutm silahkan kunjungi\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to %s\n"
-#~ msgstr ""
-#~ "Setting lama anda telah dimigrasikan dari %s\n"
-#~ "ke %s\n"
-
-#~ msgid "Dup failed"
-#~ msgstr "Dup gagal"
-
-#~ msgid "Error dup'ing old error pipe"
-#~ msgstr "Kesalahan pada dup'ing error pipe"

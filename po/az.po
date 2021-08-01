@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-07-25 20:57+0300\n"
-"PO-Revision-Date: 2020-12-31 14:19+0000\n"
+"POT-Creation-Date: 2021-08-01 19:02+0200\n"
+"PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Azerbaijani (http://www.transifex.com/mc/mc/language/az/)\n"
 "Language: az\n"
@@ -3556,11 +3556,11 @@ msgstr ""
 msgid "Enter command label:"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "%s"
-msgstr "Xarici panelləşdirmə"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -3942,20 +3942,18 @@ msgstr ""
 "Faylın gözlənilməz bitişi görüldü\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s:\n"
 "%s"
 msgstr ""
-"%s arxivi açıla bilmir\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "EXTFS virtual file system:\n"
 "%s"
-msgstr "Fayl sistemi: %s"
+msgstr ""
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4121,11 +4119,11 @@ msgid ""
 "Remove password or correct mode"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "SFS virtual file system:\n"
 "%s"
-msgstr "Fayl sistemi: %s"
+msgstr ""
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4471,12 +4469,3 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "Cannot invoke command."
-#~ msgstr "Əmr işə salına bilmir."
-
-#~ msgid "Pipe close failed"
-#~ msgstr "Borulama bacarılmadı"
-
-#~ msgid "Inconsistent extfs archive"
-#~ msgstr "extfs arxivi xəsərlidir"

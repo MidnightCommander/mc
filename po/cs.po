@@ -4,7 +4,7 @@
 #
 # Translators:
 # Jiří Vírava <appukonrad@gmail.com>, 2015,2017
-# k3dar <k3dar7@gmail.com>, 2020
+# k3dar <k3dar7@gmail.com>, 2020-2021
 # Karel Kopecky <kdkopx@protonmail.com>, 2017
 # Pavel Borecki <pavel.borecki@gmail.com>, 2017-2020
 # Radek Valášek <valin@buchlovice.org>, 2014
@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-07-25 20:57+0300\n"
-"PO-Revision-Date: 2020-12-31 14:19+0000\n"
+"POT-Creation-Date: 2021-08-01 19:02+0200\n"
+"PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Czech (http://www.transifex.com/mc/mc/language/cs/)\n"
 "Language: cs\n"
@@ -1635,9 +1635,8 @@ msgstr ""
 "Uživatelsky přívětivý textový editor\n"
 "napsaný pro Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2021 the Free Software Foundation"
-msgstr "Autorská práva © 1996-2020 nadace Free Software Foundation"
+msgstr ""
 
 msgid "About"
 msgstr "O programu"
@@ -1959,7 +1958,7 @@ msgid "Skin:"
 msgstr "Schéma vzhledu:"
 
 msgid "&Shadows"
-msgstr ""
+msgstr "&Stíny"
 
 msgid "Appearance"
 msgstr "Vzhled"
@@ -3323,9 +3322,8 @@ msgstr "Název souboru:"
 msgid "&Find recursively"
 msgstr "&Hledat i v podsložkách"
 
-#, fuzzy
 msgid "Follow s&ymlinks"
-msgstr "Nás&ledovat odkazy"
+msgstr ""
 
 msgid "S&kip hidden"
 msgstr "Přes&kočit skryté"
@@ -3771,20 +3769,18 @@ msgstr "Přidat do externí panelizace"
 msgid "Enter command label:"
 msgstr "Zadejte označení příkazu:"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "%s"
-msgstr "Externí panelizace"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "failed to read data from child stdout:\n"
 "%s"
 msgstr ""
-"Nepodařilo se načíst data ze standardního vstupu podřízeného procesu:\n"
-"%s"
 
 msgid "Cannot run external panelize in a non-local directory"
 msgstr "Při práci se složkou, která není místní, není možné zobrazit v panelu"
@@ -4177,20 +4173,18 @@ msgstr ""
 "Soubor neočekávaně končí\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s:\n"
 "%s"
 msgstr ""
-"Nedaří se otevřít %s archiv\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "EXTFS virtual file system:\n"
 "%s"
-msgstr "Virtuální souborové systémy:"
+msgstr ""
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4359,11 +4353,11 @@ msgstr ""
 "Soubor ~/.netrc nemá správná přístupová práva\n"
 "Odstraňte heslo nebo změňte práva"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "SFS virtual file system:\n"
 "%s"
-msgstr "Virtuální souborové systémy:"
+msgstr ""
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4454,9 +4448,8 @@ msgid ""
 "connecting?"
 msgstr ""
 
-#, fuzzy
 msgid "sftp: host key verification failed"
-msgstr "Ověření se nezdařilo"
+msgstr ""
 
 #, c-format
 msgid "sftp: Enter passphrase for %s "
@@ -4472,9 +4465,8 @@ msgstr "sftp: Zadejte heslo pro %s "
 msgid "sftp: Password is empty."
 msgstr "sftp: Heslo není vyplněné."
 
-#, fuzzy
 msgid "sftp: failure establishing SSH session"
-msgstr "sftp: Nepodařilo se navázat SSH sezení"
+msgstr ""
 
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: Není přítomen žádný obslužný program pro čtení souboru"
@@ -4730,42 +4722,3 @@ msgstr "Pokračovat od začátku?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nedaří získat místní kopii souboru /ftp://some.host/editme.txt"
-
-#, c-format
-#~ msgid "An error occurred while migrating user settings: %s"
-#~ msgstr "Nastala chyba při stěhování uživatelských nastavení: %s"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to Freedesktop recommended dirs.\n"
-#~ "To get more info, please visit\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-#~ msgstr ""
-#~ "Vaše původní nastavení byla přestěhována z %s\n"
-#~ "do složek dle doporučení Freedesktop.\n"
-#~ "Další informace naleznete na\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to %s\n"
-#~ msgstr ""
-#~ "Vaše původní nastavení byla přestěhována z %s\n"
-#~ "do %s\n"
-
-#~ msgid "Dup failed"
-#~ msgstr "dup() se nezdařilo"
-
-#~ msgid "Error dup'ing old error pipe"
-#~ msgstr "Chyba při duplikaci staré chybové roury"
-
-#~ msgid "Cannot invoke command."
-#~ msgstr "Příkaz se nedaří vyvolat."
-
-#~ msgid "Pipe close failed"
-#~ msgstr "Rouru (pipe) se nepodařilo zavřít"
-
-#~ msgid "Inconsistent extfs archive"
-#~ msgstr "Poškozený extfs archiv"

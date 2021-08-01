@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-07-25 20:57+0300\n"
-"PO-Revision-Date: 2020-12-31 14:19+0000\n"
+"POT-Creation-Date: 2021-08-01 19:02+0200\n"
+"PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Basque (http://www.transifex.com/mc/mc/language/eu/)\n"
 "Language: eu\n"
@@ -3307,9 +3307,8 @@ msgstr "Fitxategi izena:"
 msgid "&Find recursively"
 msgstr "&Bilatu errekurtsiboki"
 
-#, fuzzy
 msgid "Follow s&ymlinks"
-msgstr "jarraitu &estekei"
+msgstr ""
 
 msgid "S&kip hidden"
 msgstr "B&aztertu ezkutukoak"
@@ -3749,20 +3748,18 @@ msgstr "Erantsi kanpokora paneleraturi"
 msgid "Enter command label:"
 msgstr "Sartu komandoaren etiketa:"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "%s"
-msgstr "Kanpokora paneleratu"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "failed to read data from child stdout:\n"
 "%s"
 msgstr ""
-"Ume stdout-etik datuak irakurtzeak huts egin du:\n"
-"%s"
 
 msgid "Cannot run external panelize in a non-local directory"
 msgstr ""
@@ -4151,20 +4148,18 @@ msgstr ""
 "Ustekabeko fitxategi bukaera\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s:\n"
 "%s"
 msgstr ""
-"%s artxiboa ezin ireki\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "EXTFS virtual file system:\n"
 "%s"
-msgstr "Alegiazko fitxategi sistemak (VFS):"
+msgstr ""
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4333,11 +4328,11 @@ msgstr ""
 "~/.netrc fitxategiak modu okerra dauka.\n"
 "Kendu pasahitza edo zuzendu modua"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "SFS virtual file system:\n"
 "%s"
-msgstr "Alegiazko fitxategi sistemak (VFS):"
+msgstr ""
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4428,9 +4423,8 @@ msgid ""
 "connecting?"
 msgstr ""
 
-#, fuzzy
 msgid "sftp: host key verification failed"
-msgstr "Autentifikatzeak huts egin du"
+msgstr ""
 
 #, c-format
 msgid "sftp: Enter passphrase for %s "
@@ -4446,9 +4440,8 @@ msgstr "sftp: Sartu %s-rako pasahitza "
 msgid "sftp: Password is empty."
 msgstr "sftp: pasahitza hutsik dago."
 
-#, fuzzy
 msgid "sftp: failure establishing SSH session"
-msgstr "sftp: Hutsegitea SSH saioa ezartzean"
+msgstr ""
 
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: Ez dago fitxategi maneiatzaile daturik fitxategia irakurtzeko"
@@ -4706,42 +4699,3 @@ msgstr "Hasieratik jarraitu?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Ezin eskuratu ondokoaren bertako kopia bat: /ftp://some.host/editme.txt"
-
-#, c-format
-#~ msgid "An error occurred while migrating user settings: %s"
-#~ msgstr "Errore bat gertatu da erabiltzaile-ezarpenak migratzean: %s"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to Freedesktop recommended dirs.\n"
-#~ "To get more info, please visit\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-#~ msgstr ""
-#~ "Zure ezarpen zaharrak %s-tik \n"
-#~ "Freedesktop-ek gomendatutako direktorioetara migratu dira.\n"
-#~ "Info gehiago nahi baduzu, mesedez bisitatu\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to %s\n"
-#~ msgstr ""
-#~ "Zure ezarpen zaharrak %s-tik⏎\n"
-#~ "%s-ra migratu dira⏎\n"
-
-#~ msgid "Dup failed"
-#~ msgstr "\"Dup\"-ek huts egin du"
-
-#~ msgid "Error dup'ing old error pipe"
-#~ msgstr "Akatsa akats hodi zaharra bikoizterakoan (\"dup\")"
-
-#~ msgid "Cannot invoke command."
-#~ msgstr "Ezin da komandoa deitu."
-
-#~ msgid "Pipe close failed"
-#~ msgstr "Hodi ixteak huts egin du"
-
-#~ msgid "Inconsistent extfs archive"
-#~ msgstr "extfs artxibo inkoherentea"

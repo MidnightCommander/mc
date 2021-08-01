@@ -3,16 +3,17 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# Bruce Lee <daemul72@gmail.com>, 2019-2020
+# JungHee Lee <daemul72@gmail.com>, 2021
+# JungHee Lee <daemul72@gmail.com>, 2019-2020
 # JinYeong Bak <dongdm@gmail.com>, 2016
-# Bruce Lee <daemul72@gmail.com>, 2019-2020
+# JungHee Lee <daemul72@gmail.com>, 2019-2021
 # Slava Zanko <slavazanko@gmail.com>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-07-25 20:57+0300\n"
-"PO-Revision-Date: 2020-12-31 14:19+0000\n"
+"POT-Creation-Date: 2021-08-01 19:02+0200\n"
+"PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Korean (http://www.transifex.com/mc/mc/language/ko/)\n"
 "Language: ko\n"
@@ -1098,7 +1099,7 @@ msgid "&Safe save"
 msgstr "안전 저장(&S)"
 
 msgid "&Do backups with following extension:"
-msgstr "확장명을 다음과 같이 백업하지 않음(&D):"
+msgstr "다음 확장자로 백업 수행(&D):"
 
 msgid "Check &POSIX new line"
 msgstr "POSIX 새 행 확인(&P)"
@@ -1224,13 +1225,13 @@ msgid "Sort returned non-zero: %s"
 msgstr "정렬이 0이 아닌 값을 반환함: %s"
 
 msgid "Paste output of external command"
-msgstr "기타 명령의 출력 붙여넣기"
+msgstr "확장 명령의 출력 붙여넣기"
 
 msgid "Enter shell command(s):"
 msgstr "쉘 명령어 입력:"
 
 msgid "External command"
-msgstr "기타 명령어"
+msgstr "확장 명령어"
 
 msgid "Cannot execute command"
 msgstr "명령을 실행할 수 없음"
@@ -1453,7 +1454,7 @@ msgid "&Paste output of..."
 msgstr "출력 붙여 넣기(&P)..."
 
 msgid "&External formatter"
-msgstr "기타 포맷도구(&E)"
+msgstr "확장 포맷도구(&E)"
 
 msgid "&Move"
 msgstr "이동(&M)"
@@ -1627,9 +1628,8 @@ msgstr ""
 "사용자 친화적인 텍스트 편집기\n"
 "미드나잇 커맨더를 위해 작성됨."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2021 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2020 the Free Software Foundation"
+msgstr "Copyright (C) 1996-2021 the Free Software Foundation"
 
 msgid "About"
 msgstr "소개"
@@ -1949,7 +1949,7 @@ msgid "Skin:"
 msgstr "스킨:"
 
 msgid "&Shadows"
-msgstr ""
+msgstr "그림자(&S)"
 
 msgid "Appearance"
 msgstr "외형"
@@ -2243,7 +2243,7 @@ msgid "No COW"
 msgstr "COW 없음"
 
 msgid "Direct access for files"
-msgstr ""
+msgstr "파일에 대한 직접 액세스"
 
 msgid "Casefolded file"
 msgstr "대소문자 구분 파일"
@@ -2316,13 +2316,13 @@ msgid "execu&te/search by group"
 msgstr "그룹으로 실행/검색(&T)"
 
 msgid "read &by others"
-msgstr "기타로 읽기(&B)"
+msgstr "다른 사용자로 읽기(&B)"
 
 msgid "wr&ite by others"
-msgstr "기타로 쓰기(&I)"
+msgstr "다른 사용자로 쓰기(&I)"
 
 msgid "execute/searc&h by others"
-msgstr "기타로 실행/검색(&H)"
+msgstr "다른 사용자로 실행/검색(&H)"
 
 msgid "Name:"
 msgstr "이름 :"
@@ -3183,7 +3183,7 @@ msgid "C&ompare files"
 msgstr "파일 비교(&O)"
 
 msgid "E&xternal panelize"
-msgstr "기타 패널 크기조정(&X)"
+msgstr "확장 패널크기(&X)"
 
 msgid "Show directory s&izes"
 msgstr "디렉터리 크기 보기(&I)"
@@ -3308,9 +3308,8 @@ msgstr "파일 이름:"
 msgid "&Find recursively"
 msgstr "반복적으로 찾기(&F)"
 
-#, fuzzy
 msgid "Follow s&ymlinks"
-msgstr "링크 따라가기(&L)"
+msgstr "심링크 따라가기(&Y)"
 
 msgid "S&kip hidden"
 msgstr "건너뛰기 숨기기(&K)"
@@ -3485,7 +3484,7 @@ msgid "Type:       %s"
 msgstr "유형:       %s"
 
 msgid "non-local vfs"
-msgstr "로컬이 아닌 vfs"
+msgstr "원격 vfs"
 
 #, c-format
 msgid "Device:     %s"
@@ -3557,7 +3556,7 @@ msgid "Command &prompt"
 msgstr "명령 프롬프트(&P)"
 
 msgid "&Keybar visible"
-msgstr "단추모음 보이기(&K)"
+msgstr "펑션키 보이기(&K)"
 
 msgid "H&intbar visible"
 msgstr "힌트바 보이기(&I)"
@@ -3733,7 +3732,7 @@ msgid "&Add new"
 msgstr "새 항목 추가(&A)"
 
 msgid "External panelize"
-msgstr "기타 패널 크기조정"
+msgstr "확장 패널크기"
 
 msgid "Other command"
 msgstr "기타 명령어"
@@ -3742,28 +3741,31 @@ msgid "Command"
 msgstr "명령어"
 
 msgid "Add to external panelize"
-msgstr "기타 패널 크기조정에 추가"
+msgstr "확장 패널크기에 추가"
 
 msgid "Enter command label:"
 msgstr "명령어 레이블 입력:"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "%s"
-msgstr "기타 패널 크기조정"
+msgstr ""
+"확장 패널크기:\n"
+"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "failed to read data from child stdout:\n"
 "%s"
 msgstr ""
-"하위 프로세스의 표준 출력에서 ​​데이터를 읽을 수 없음:\n"
+"확장 패널크기:\n"
+"하위 프로세스의 stdout에서 ​​데이터를 읽을 수 없음:\n"
 "%s"
 
 msgid "Cannot run external panelize in a non-local directory"
-msgstr "로컬이 아닌 디렉토리에서 기타 패널 크기조정을 실행할 수 없음"
+msgstr "로컬이 아닌 디렉토리에서 확장 패널크기를 실행할 수 없음"
 
 msgid "Modified git files"
 msgstr "수정된 git 파일"
@@ -4151,20 +4153,23 @@ msgstr ""
 "%s\n"
 "파일의 예기치 않은 끝"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s:\n"
 "%s"
 msgstr ""
 "%s 압축파일을 열 수 없음\n"
+"%s:\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "EXTFS virtual file system:\n"
 "%s"
-msgstr "가상 파일 시스템:"
+msgstr ""
+"EXTFS 가상 파일 시스템:\n"
+"%s"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4332,11 +4337,13 @@ msgstr ""
 "~/.netrc 파일의 모드가 잘못됨\n"
 "비밀번호 또는 올바른 권한 제거"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "SFS virtual file system:\n"
 "%s"
-msgstr "가상 파일 시스템:"
+msgstr ""
+"SFS 가상 파일 시스템:\n"
+"%s"
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4427,9 +4434,8 @@ msgid ""
 "connecting?"
 msgstr ""
 
-#, fuzzy
 msgid "sftp: host key verification failed"
-msgstr "인증 실패"
+msgstr ""
 
 #, c-format
 msgid "sftp: Enter passphrase for %s "
@@ -4445,9 +4451,8 @@ msgstr "sftp: %s에 대한 비밀번호 입력 "
 msgid "sftp: Password is empty."
 msgstr "sftp: 비밀번호가 비어 있음."
 
-#, fuzzy
 msgid "sftp: failure establishing SSH session"
-msgstr "sftp: SSH 세션 설정 실패"
+msgstr ""
 
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: 파일을 읽기 위한 파일 처리기 데이터가 없음"
@@ -4652,7 +4657,7 @@ msgid ""
 "Failed to read data from child stdout:\n"
 "%s"
 msgstr ""
-"하위 프로세스의 표준 출력에서 ​​데이터를 읽을 수 없음:\n"
+"하위 프로세스의 stdout에서 ​​데이터를 읽을 수 없음:\n"
 "%s"
 
 #, c-format
@@ -4703,42 +4708,3 @@ msgstr "처음부터 계속하시겠습니까?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "/ftp://some.host/editme.txt의 로컬 복사본을 가져올 수 없음"
-
-#, c-format
-#~ msgid "An error occurred while migrating user settings: %s"
-#~ msgstr "사용자 설정을 이전하는 동안 오류가 발생함: %s"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to Freedesktop recommended dirs.\n"
-#~ "To get more info, please visit\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-#~ msgstr ""
-#~ "이전 설정이 %s에서 이전됨\n"
-#~ "Freedesktop 추천 디렉토리.\n"
-#~ "자세한 내용은 다음 웹 사이트를 참조하십시오.\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to %s\n"
-#~ msgstr ""
-#~ "기존 설정이 %s에서\n"
-#~ "%s로 이전됨\n"
-
-#~ msgid "Dup failed"
-#~ msgstr "복제 실패"
-
-#~ msgid "Error dup'ing old error pipe"
-#~ msgstr "이전 오류 파이프를 중복하는 동안 오류 발생"
-
-#~ msgid "Cannot invoke command."
-#~ msgstr "명령을 호출할 수 없음."
-
-#~ msgid "Pipe close failed"
-#~ msgstr "파이프 닫기 실패"
-
-#~ msgid "Inconsistent extfs archive"
-#~ msgstr "불완전한 extfs 압축파일"

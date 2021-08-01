@@ -3,26 +3,31 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# Alex Tkachenko <alex@bcs.zp.ua>, 1998
-# Sergey Panov <sipan@mit.edu>, 1999
-# Evgeny Bulgakov <bgav@netvision.net.il>, 1999
-# Andrew V. Samoilov <sav@bcs.zp.ua>, 1999, 2014
-# Valek Filippov <frob@df.ru>, 2000
-# Anton Sergeevich Chumak <nightfast@yahoo.co.uk>, 2005
-# Andrew Borodin <aborodin@vmail.ru>, 2009-2012
-# Ilia Maslakov <il.smind@gmail.com>, 2009
-# Slava Zanko <slavazanko@gmail.com>, 2009, 2011
+# Andrew Borodin <aborodin@vmail.ru>, 2011
 # AlexL <loginov.alex.valer@gmail.com>, 2015-2020
-# NaiLi (aka jamesjames) Rootaerc <theism@mail.ru>, 2012
+# Alex Tkachenko <alex@bcs.zp.ua>, 1998
+# and Alex Tkachenko <alex@bcs.zp.ua>, 1998
+# Andrew Borodin <aborodin@vmail.ru>, 2009-2012
+# Andrew V. Samoilov <sav@bcs.zp.ua>, 1999,2014
+# Anton Sergeevich Chumak <nightfast@yahoo.co.uk>, 2005
 # Dimitriy Ryazantcev <DJm00n@mail.ru>, 2015
-# Simple88, 2016
+# Evgeny Bulgakov <bgav@netvision.net.il>, 1999
+# Ilia Maslakov <il.smind@gmail.com>, 2009
+# Mr GreyWolf, 2016
+# Mr.GreyWolf, 2016
+# NaiLi (aka jamesjames) Rootaerc <theism@mail.ru>, 2012
 # Piotr Drąg <piotrdrag@gmail.com>, 2018
+# Sergey Panov <sipan@mit.edu>, 1999
+# Simple88, 2016
+# Simple88, 2016
+# Slava Zanko <slavazanko@gmail.com>, 2009,2011
+# Valek Filippov <frob@df.ru>, 2000
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-07-25 20:57+0300\n"
-"PO-Revision-Date: 2020-12-31 14:19+0000\n"
+"POT-Creation-Date: 2021-08-01 19:02+0200\n"
+"PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Russian (http://www.transifex.com/mc/mc/language/ru/)\n"
 "Language: ru\n"
@@ -881,7 +886,7 @@ msgid "Enter search string:"
 msgstr "Введите строку для поиска:"
 
 msgid "Cas&e sensitive"
-msgstr "У&чёт регистра"
+msgstr "С у&чётом регистра"
 
 msgid "&Backwards"
 msgstr "&Назад"
@@ -1651,7 +1656,7 @@ msgstr ""
 "Создан для Midnight Commander."
 
 msgid "Copyright (C) 1996-2021 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2021 the Free Software Foundation"
+msgstr ""
 
 msgid "About"
 msgstr "О программе"
@@ -1976,7 +1981,7 @@ msgid "Appearance"
 msgstr "Оформление"
 
 msgid "Case &insensitive"
-msgstr "Без &учета регистра"
+msgstr "Без &учёта регистра"
 
 msgid "Use panel sort mo&de"
 msgstr "&Использовать сортировку панели"
@@ -3049,7 +3054,7 @@ msgid "Source"
 msgstr "Источник"
 
 msgid "Target"
-msgstr "Приемник"
+msgstr "Приёмник"
 
 msgid "Deleting"
 msgstr "Удаление"
@@ -3328,9 +3333,8 @@ msgstr "Шаблон имени:"
 msgid "&Find recursively"
 msgstr "Найти ре&курсивно"
 
-#, fuzzy
 msgid "Follow s&ymlinks"
-msgstr "&Разыменовывать ссылки"
+msgstr ""
 
 msgid "S&kip hidden"
 msgstr "Пропускать скр&ытые"
@@ -3741,7 +3745,7 @@ msgid "&Files only"
 msgstr "Только файлы"
 
 msgid "&Case sensitive"
-msgstr "Учет ре&гистра"
+msgstr "С учётом ре&гистра"
 
 msgid "Select"
 msgstr "Отметить группу"
@@ -3781,8 +3785,6 @@ msgid ""
 "External panelize:\n"
 "%s"
 msgstr ""
-"Внешняя панелизация:\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -3790,9 +3792,6 @@ msgid ""
 "failed to read data from child stdout:\n"
 "%s"
 msgstr ""
-"Внешняя панелизация:\n"
-"не удалось прочитать данные из дочернего stdout:\n"
-"%s"
 
 msgid "Cannot run external panelize in a non-local directory"
 msgstr "Не удалось выполнить эту команду, находясь не в локальном каталоге"
@@ -4189,17 +4188,12 @@ msgid ""
 "%s:\n"
 "%s"
 msgstr ""
-"Не удалось открыть архив %s\n"
-"%s:\n"
-"%s"
 
 #, c-format
 msgid ""
 "EXTFS virtual file system:\n"
 "%s"
 msgstr ""
-"Виртуальная файловая система EXTFS:\n"
-"%s"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4372,8 +4366,6 @@ msgid ""
 "SFS virtual file system:\n"
 "%s"
 msgstr ""
-"Виртуальная файловая система SFS:\n"
-"%s"
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4465,7 +4457,7 @@ msgid ""
 msgstr ""
 
 msgid "sftp: host key verification failed"
-msgstr "sftp: cбой проверки ключа сервера"
+msgstr ""
 
 #, c-format
 msgid "sftp: Enter passphrase for %s "
@@ -4482,7 +4474,7 @@ msgid "sftp: Password is empty."
 msgstr "sftp: пароль пуст."
 
 msgid "sftp: failure establishing SSH session"
-msgstr "sftp: сбой установки SSH-сессии"
+msgstr ""
 
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: нет обработчика считываемого файла"

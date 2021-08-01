@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-07-25 20:57+0300\n"
-"PO-Revision-Date: 2020-12-31 14:19+0000\n"
+"POT-Creation-Date: 2021-08-01 19:02+0200\n"
+"PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Interlingua (http://www.transifex.com/mc/mc/language/ia/)\n"
 "Language: ia\n"
@@ -3942,14 +3942,12 @@ msgstr ""
 "Fin de file inexpectate\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s:\n"
 "%s"
 msgstr ""
-"Impossibile aperir le archivo %s\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -4220,9 +4218,8 @@ msgid ""
 "connecting?"
 msgstr ""
 
-#, fuzzy
 msgid "sftp: host key verification failed"
-msgstr "Authentication fallite"
+msgstr ""
 
 #, c-format
 msgid "sftp: Enter passphrase for %s "
@@ -4484,12 +4481,3 @@ msgstr "Continuar ab initio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "Dup failed"
-#~ msgstr "Duplication fallite"
-
-#~ msgid "Error dup'ing old error pipe"
-#~ msgstr "Error duplicante ancian tubo de error"
-
-#~ msgid "Inconsistent extfs archive"
-#~ msgstr "Archivo extfs inconsistente"

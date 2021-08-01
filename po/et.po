@@ -3,15 +3,16 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
+# Ivar Smolin <okul@linux.ee>, 2021
 # Kristjan Räts <kristjanrats@gmail.com>, 2013-2016,2018-2019
-# Priit Jõerüüt <transifex@joeruut.com>, 2020
-# vaba <vaba@riseup.net>, 2020
+# Priit Jõerüüt <transifex@joeruut.com>, 2020-2021
+# Marko Silluste <vaba@riseup.net>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-07-25 20:57+0300\n"
-"PO-Revision-Date: 2020-12-31 14:19+0000\n"
+"POT-Creation-Date: 2021-08-01 19:02+0200\n"
+"PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Estonian (http://www.transifex.com/mc/mc/language/et/)\n"
 "Language: et\n"
@@ -1625,9 +1626,8 @@ msgstr ""
 "Kasutajasõbralik tekstitoimeti, mis\n"
 "on loodud Midnight Commanderile."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2021 the Free Software Foundation"
-msgstr "Autoriõigus (C) 1996-2020 the Free Software Foundation"
+msgstr "Autoriõigused (C) 1996-2021 the Free Software Foundation"
 
 msgid "About"
 msgstr "Programmist"
@@ -1791,6 +1791,8 @@ msgid ""
 "Not an xterm or Linux console;\n"
 "the subshell cannot be toggled."
 msgstr ""
+"Sa ei kasuta xtermi või Linuxi konsooli;\n"
+"alamkesta ei saa sisse/välja lülitada."
 
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Midnight Commanderisse tagasipöördumiseks sisesta 'exit'"
@@ -3299,9 +3301,8 @@ msgstr "Faili nimi:"
 msgid "&Find recursively"
 msgstr "&Otsi rekursiivselt"
 
-#, fuzzy
 msgid "Follow s&ymlinks"
-msgstr "Järgi &viitasid"
+msgstr ""
 
 msgid "S&kip hidden"
 msgstr "&Eira peidetud"
@@ -3741,20 +3742,18 @@ msgstr "Lisa väliskäsk paneelile"
 msgid "Enter command label:"
 msgstr "Sisesta käsu silt:"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "%s"
-msgstr "Väliskäsk paneelile"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "failed to read data from child stdout:\n"
 "%s"
 msgstr ""
-"Nurjus tütre std. väljundist andmete lugemine:\n"
-"%s"
 
 msgid "Cannot run external panelize in a non-local directory"
 msgstr "Väliskäsu paneelile saatmine töötab ainult kohalike kataloogidega"
@@ -3920,6 +3919,9 @@ msgid ""
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""
+"GNU Midnight Commander juba\n"
+"töötab selles terminalis.\n"
+"Alamkesta tugi keelatakse."
 
 #, c-format
 msgid ""
@@ -3963,34 +3965,34 @@ msgid "Warning: Cannot change to %s.\n"
 msgstr "Hoiatus: sisenemine kataloogi %s nurjus.\n"
 
 msgid "With builtin Editor and Aspell support"
-msgstr ""
+msgstr "Sisseehitatud toimeti ja Aspelli toega"
 
 msgid "With builtin Editor"
-msgstr ""
+msgstr "Sisseehitatud toimetiga"
 
 msgid "With optional subshell support"
-msgstr ""
+msgstr "Valikulise alamkesta toega"
 
 msgid "With subshell support as default"
-msgstr ""
+msgstr "Alamkesta tugi vaikeväärtusena"
 
 msgid "With support for background operations"
-msgstr ""
+msgstr "Taustategevuste toega"
 
 msgid "With mouse support on xterm and Linux console"
-msgstr ""
+msgstr "Hiire toega xtermis ja Linuxi konsoolil"
 
 msgid "With mouse support on xterm"
-msgstr ""
+msgstr "Hiire toega xtermis"
 
 msgid "With support for X11 events"
-msgstr ""
+msgstr "X11 sündmuste toega"
 
 msgid "With internationalization support"
-msgstr ""
+msgstr "Internatsionaliseerimise toega"
 
 msgid "With multiple codepages support"
-msgstr ""
+msgstr "Mitme kooditabeli toega"
 
 msgid "With ext2fs attributes support"
 msgstr "Sealhulgas ext2fs atribuutide tugi"
@@ -4001,21 +4003,21 @@ msgstr "Ehitatud GLib teegiga %d.%d.%d\n"
 
 #, c-format
 msgid "Built with S-Lang %s with terminfo database\n"
-msgstr ""
+msgstr "Kompileerimisel on kaasatud S-Lang %s terminfo andmekoguga\n"
 
 #, c-format
 msgid "Built with ncurses %s\n"
-msgstr ""
+msgstr "Kompileerimisel on kaasatud ncurses %s\n"
 
 msgid "Built with ncurses (unknown version)"
-msgstr ""
+msgstr "Kompileerimisel on kaasatud ncurses (versioon pole teada)"
 
 #, c-format
 msgid "Built with ncursesw %s\n"
-msgstr ""
+msgstr "Kompileerimisel on kaasatud ncursesw %s\n"
 
 msgid "Built with ncursesw (unknown version)"
-msgstr ""
+msgstr "Kompileerimisel on kaasatud ncursesw (versioon pole teada)"
 
 msgid "Virtual File Systems:"
 msgstr "Virtuaalsed failisüsteemid:"
@@ -4142,20 +4144,23 @@ msgstr ""
 "Ootamatu faili lõpp\n"
 " %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s:\n"
 "%s"
 msgstr ""
-"%s arhiivi avamine nurjus\n"
-" %s"
+"%s arhiivi avamine ei õnnestu\n"
+"%s:\n"
+"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "EXTFS virtual file system:\n"
 "%s"
-msgstr "Virtuaalsed failisüsteemid:"
+msgstr ""
+"EXTFS virtuaalne failisüsteem:\n"
+"%s"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4323,11 +4328,13 @@ msgstr ""
 "~/.netrc on teistele loetav\n"
 "Kustuta failist salasõna või muuda õigused"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "SFS virtual file system:\n"
 "%s"
-msgstr "Virtuaalsed failisüsteemid:"
+msgstr ""
+"SFS virtuaalne failisüsteem:\n"
+"%s"
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4418,9 +4425,8 @@ msgid ""
 "connecting?"
 msgstr ""
 
-#, fuzzy
 msgid "sftp: host key verification failed"
-msgstr "Autentimine ebaõnnestus"
+msgstr ""
 
 #, c-format
 msgid "sftp: Enter passphrase for %s "
@@ -4436,9 +4442,8 @@ msgstr "sftp: sisesta parool masinale %s"
 msgid "sftp: Password is empty."
 msgstr "sftp: parool on tühi."
 
-#, fuzzy
 msgid "sftp: failure establishing SSH session"
-msgstr "sftp: nurjus SSH ühenduse loomine"
+msgstr ""
 
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: faili lugemiseks puuduvad faili käsitleja andmed"
@@ -4676,7 +4681,7 @@ msgstr ""
 "%s"
 
 msgid "Cannot view: not a regular file"
-msgstr "Vaataamine ei ole võimalik: tegemist ei ole hariliku failiga"
+msgstr "Vaatamine pole võimalik: see pole harilik fail"
 
 #, c-format
 msgid ""
@@ -4694,42 +4699,3 @@ msgstr "Kas jätkata algusest?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kohaliku koopia hankimine failist /ftp://some.host/editme.txt nurjus"
-
-#, c-format
-#~ msgid "An error occurred while migrating user settings: %s"
-#~ msgstr "Viga kasutaja seadete migreerimisel: %s"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to Freedesktop recommended dirs.\n"
-#~ "To get more info, please visit\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-#~ msgstr ""
-#~ "Su vanad seaded toodi %s'st üle\n"
-#~ "Freedesktopi soovitatud kataloogidesse.\n"
-#~ "Lisainfot leiad aadressilt\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to %s\n"
-#~ msgstr ""
-#~ "Su vanad seaded toodi failist %s\n"
-#~ "üle faili %s\n"
-
-#~ msgid "Dup failed"
-#~ msgstr "Funktsioon dup nurjus"
-
-#~ msgid "Error dup'ing old error pipe"
-#~ msgstr "Tõrge vana veatoru paljundamisel"
-
-#~ msgid "Cannot invoke command."
-#~ msgstr "Käsu käivitamine nurjus."
-
-#~ msgid "Pipe close failed"
-#~ msgstr "Toru sulgemine nurjus"
-
-#~ msgid "Inconsistent extfs archive"
-#~ msgstr "Vasturääkiv extfs arhiiv"

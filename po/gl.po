@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-07-25 20:57+0300\n"
-"PO-Revision-Date: 2020-12-31 14:19+0000\n"
+"POT-Creation-Date: 2021-08-01 19:02+0200\n"
+"PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Galician (http://www.transifex.com/mc/mc/language/gl/)\n"
 "Language: gl\n"
@@ -3311,9 +3311,8 @@ msgstr "Nome do ficheiro:"
 msgid "&Find recursively"
 msgstr "&Busca recursiva"
 
-#, fuzzy
 msgid "Follow s&ymlinks"
-msgstr "Seguir &Ligazóns"
+msgstr ""
 
 msgid "S&kip hidden"
 msgstr "i&Gnorar agochados"
@@ -3753,20 +3752,18 @@ msgstr "Engadir a panel externo"
 msgid "Enter command label:"
 msgstr "Introduza a etiqueta da orde:"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "%s"
-msgstr "Paneis externos"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "External panelize:\n"
 "failed to read data from child stdout:\n"
 "%s"
 msgstr ""
-"Produciuse un erro ao ler os datos da saída estándar filla:\n"
-"%s"
 
 msgid "Cannot run external panelize in a non-local directory"
 msgstr "Non é posíbel executar a panelización externa nun directorio non local"
@@ -4154,20 +4151,18 @@ msgstr ""
 "Fin de ficheiro inesperado\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s:\n"
 "%s"
 msgstr ""
-"Non é posíbel abrir o arquivo %s\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "EXTFS virtual file system:\n"
 "%s"
-msgstr "(VFS) Sistema de ficheiros virtual:"
+msgstr ""
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4335,11 +4330,11 @@ msgstr ""
 "Os permisos de ~/.netrc non son os apropiados.\n"
 "Elimine o contrasinal ou cambie os permisos."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "SFS virtual file system:\n"
 "%s"
-msgstr "(VFS) Sistema de ficheiros virtual:"
+msgstr ""
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4430,9 +4425,8 @@ msgid ""
 "connecting?"
 msgstr ""
 
-#, fuzzy
 msgid "sftp: host key verification failed"
-msgstr "Produciuse un fallo de autenticación"
+msgstr ""
 
 #, c-format
 msgid "sftp: Enter passphrase for %s "
@@ -4448,9 +4442,8 @@ msgstr "sftp: introduza o contrasinal para %s "
 msgid "sftp: Password is empty."
 msgstr "sftp: o contrasinal está baleiro."
 
-#, fuzzy
 msgid "sftp: failure establishing SSH session"
-msgstr "sftp: produciuse un fallo ao estabelecer a sesión SSH"
+msgstr ""
 
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: Sen datos del descritor do ficheiro para lelo."
@@ -4706,42 +4699,3 @@ msgstr "Continuar desde o principio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Non é posíbel obter unha copia local de /ftp://some.host/editme.txt"
-
-#, c-format
-#~ msgid "An error occurred while migrating user settings: %s"
-#~ msgstr "Produciuse un erro ao migrar a configuración do usuario: %s"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to Freedesktop recommended dirs.\n"
-#~ "To get more info, please visit\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-#~ msgstr ""
-#~ "A configuración antiga foi trasladada de %s\n"
-#~ "cara os directorios recomendados por Freedesktop.\n"
-#~ "Para obter máis detalles consulte\n"
-#~ "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-
-#, c-format
-#~ msgid ""
-#~ "Your old settings were migrated from %s\n"
-#~ "to %s\n"
-#~ msgstr ""
-#~ "A configuración previa foi trasladada de %s\n"
-#~ "a %s\n"
-
-#~ msgid "Dup failed"
-#~ msgstr "Fallou na duplicación"
-
-#~ msgid "Error dup'ing old error pipe"
-#~ msgstr "Produciuse un erro duplicando antigo erro de canalización"
-
-#~ msgid "Cannot invoke command."
-#~ msgstr "Non é posíbel invocar a orde."
-
-#~ msgid "Pipe close failed"
-#~ msgstr "Produciuse un fallo ao pechar a canalización"
-
-#~ msgid "Inconsistent extfs archive"
-#~ msgstr "Arquivo extfs inconsistente"
