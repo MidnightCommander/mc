@@ -38,7 +38,7 @@ Tip: Chcete opět váš shell? Stiskněte Ctrl-o. Do MC se vrátíte opět přes
 
 Tip: Nastavením proměnné CDPATH si můžete ušetřit psaní na klávesnici.
 
-Tip: Pokud chcete vidět soubory začínající tečkou, vyjádřete to v Nastavení.
+Tip: Pokud chcete vidět soubory začínající tečkou, povolte to v Nastavení.
 
 Tip: Chcete vidět zálohy svých souborů (končí ~)? Použijte Nastavení.
 

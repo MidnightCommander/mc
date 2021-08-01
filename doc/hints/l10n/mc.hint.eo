@@ -2,9 +2,9 @@ Konsilo: Stir-x t por kopii markitajn dosiernomojn al la komandlinio.
 
 Konsilo: Stir-x p por kopii la nunan vojnomon al la komandlinio.
 
-Konsilo: Alt-Tabo (aŭ Esk-Tabo) por finigi tajpatan frazon. Dufoje por listo.
+Konsilo: Reg-Tabo (aŭ Esk-Tabo) por finigi tajpatan frazon. Dufoje por listo.
 
-Konsilo: Alt-p kaj Alt-n por atingi la komandan historion.
+Konsilo: Reg-p kaj Reg-n por atingi la komandan historion.
 
 Konsilo: Stir-q por citi signon.
 
@@ -28,7 +28,7 @@ Konsilo: Ĉu vi volas navigadon laŭ la modelo de Lynx? Agordi en la agorda dial
 
 Konsilo: makrooj kun % funkcias eĉ ĉe la komandlinio.
 
-Konsilo: Alt-! por plenumigi programon kaj vidi la eligon en la dokumento-legilo.
+Konsilo: Reg-! por plenumigi programon kaj vidi la eligon en la dokumento-legilo.
 
 Konsilo: La aranĝon en la dosiera listo agordeblas.
 
@@ -42,7 +42,7 @@ Konsilo: Deklari en la agorda dialogujo tian, se vi volas vidi kaŝitajn dosiero
 
 Konsilo: Deklari en la agorda dialogujo tian, se vi volas vidi provizorajn dosierojn.
 
-Konsilo: Finigo funkcias ĉe tekstaj kampoj en ĉiuj dialogujoj. Premu: Alt-Tabo.
+Konsilo: Kompletigo funkcias ĉe tekstaj kampoj en ĉiuj dialogujoj. Premu: Reg-Tabo.
 
 Konsilo: La komandlinia parametro -s eble estus helpa por malrapidaj terminaloj.
 
@@ -50,7 +50,7 @@ Konsilo: Eblas prilabori la trovitajn dosierojn per la butono "Flankigi".
 
 Konsilo: Ĉu vi volas fari malsimplajn serĉojn? "Eksterigi Flankojn" uzeblas.
 
-Konsilo: Alt-c por ŝanĝi dosierujon dum tajpi komandon.
+Konsilo: Reg-c por ŝanĝi dosierujon dum tajpi komandon.
 
 Noto: Ŝelaj komandoj ne funkcias ĉe foraj dosiersistemoj.
 
@@ -58,9 +58,9 @@ Konsilo: Stir-y por revivigi tekston.
 
 Konsilo: Agordu/Lernu klavojn por certigi, ke ĉiuj klavoj funkcias.
 
-Konsilo: Alt-! por rigardi la eligon de komando en la dokumento-legilo.
+Konsilo: Reg-! por rigardi la eligon de komando en la dokumento-legilo.
 
-Konsilo: F13 (aŭ Reg-F3) por la dokumento-legilo en nuda reĝimo.
+Konsilo: F13 (aŭ Reg-F3) por la dokumento-legilo en kruda reĝimo.
 
 Konsilo: Specifi la tekstoredaktilon por F4 per la medivariablo EDITOR.
 
@@ -72,9 +72,9 @@ Konsilo: Stir-\ por ofte uzataj dosierujoj.
 
 Konsilo: 'cd ftp://machine.edu' por sennoma FTP-konekto al machine.org
 
-Konsilo: Dosiero/FTP por apriora FTP-kliento
+Konsilo: Dosiero/FTP por apriora FTP-kliento.
 
-Konsilo: Alt-t por rapide ŝanĝi la listan reĝimon
+Konsilo: Reg-t por rapide ŝanĝi la listan reĝimon.
 
 Konsilo: Specifi la salutnomon ĉe FTP-servilo per 'cd ftp://salutnomo@machine.edu'
 
