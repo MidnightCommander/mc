@@ -1149,7 +1149,7 @@ tar_open_archive (struct vfs_s_super *archive, const vfs_path_t * vpath,
         switch (status)
         {
         case HEADER_STILL_UNREAD:
-            message (D_ERROR, MSG_ERROR, _("%s\ndoesn't look like a tar archive."),
+            message (D_ERROR, MSG_ERROR, _("%s\ndoesn't look like a tar archive"),
                      vfs_path_as_str (vpath));
             return -1;
 
@@ -1169,7 +1169,7 @@ tar_open_archive (struct vfs_s_super *archive, const vfs_path_t * vpath,
                 /* Error on first block */
             case HEADER_ZERO_BLOCK:
                 {
-                    message (D_ERROR, MSG_ERROR, _("%s\ndoesn't look like a tar archive."),
+                    message (D_ERROR, MSG_ERROR, _("%s\ndoesn't look like a tar archive"),
                              vfs_path_as_str (vpath));
                     MC_FALLTHROUGH;
 
