@@ -602,7 +602,7 @@ uintmax_from_header (const char *p, size_t s)
 /* --------------------------------------------------------------------------------------------- */
 
 static union block *
-tar_get_next_block (tar_super_t * archive)
+tar_find_next_block (tar_super_t * archive)
 {
     int n;
 
@@ -814,7 +814,7 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, size_t * h_s
 
     while (TRUE)
     {
-        header = tar_get_next_block (arch);
+        header = tar_find_next_block (arch);
         if (header == NULL)
             return HEADER_END_OF_FILE;
 
@@ -864,7 +864,7 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, size_t * h_s
 
             for (size = *h_size; size > 0; size -= written)
             {
-                data = tar_get_next_block (arch)->buffer;
+                data = tar_find_next_block (arch)->buffer;
                 if (data == NULL)
                 {
                     MC_PTR_FREE (*longp);
@@ -1013,7 +1013,7 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, size_t * h_s
 
         if (arch->type == TAR_GNU && header->oldgnu_header.isextended)
         {
-            while (tar_get_next_block (arch)->sparse_header.isextended != 0)
+            while (tar_find_next_block (arch)->sparse_header.isextended != 0)
                 ;
 
             if (inode != NULL)
