@@ -32,7 +32,7 @@ Version 4.8.27
 
 - Misc
 
-    * Code clean up (#4179, #4173)
+    * Code clean up (#4179, #4173, #4269)
     * Filehighlight of c++ and h++ files as sources (#4194)
     * Filehighlight of JSON files as documents (#4250)
     * Support of alacritty terminal emulator (https://github.com/alacritty/alacritty) (#4248)
