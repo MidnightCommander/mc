@@ -37,6 +37,7 @@ Version 4.8.27
     * Filehighlight of JSON files as documents (#4250)
     * Support of alacritty terminal emulator (https://github.com/alacritty/alacritty) (#4248)
     * Support of foot terminal emulator (https://codeberg.org/dnkl/foot) (#4251)
+    * Support of (alt+)shift+arrow keys in st terminal emulator (st.suckless.org) (#4267)
     * Mouse support in screen: don't check $DISPLAY variable (#4233)
     * mc.ext: support fb2 e-books (#4167)
     * ext.d: use mediainfo to view info about various media files (#4167)
