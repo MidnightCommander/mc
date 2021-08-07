@@ -7,7 +7,7 @@ Version 4.8.27
     * Minimal version of Gettext is 0.18.2 (#3603)
     * Minimal version of libssh2 is 1.2.8 (#4259)
     * Reimplement version detection (#3603, #4249)
-    * Significantly reduce rebuilt time after version change (#2252)
+    * Significantly reduce rebuilt time after version change (#2252, #4266)
     * Drop automatic migration of configuration from ~/.mc to XDG-based directories (#3682)
     * zsh: support custom configuration file: ~/.local/share/mc/.zshrc (#4203)
     * Widgets: implement WST_VISIBLE state to show/hide widgets (#2919)

@@ -42,7 +42,7 @@ mc_print_version(){
 #endif
 EOF
     fi
-    echo "${CURR_MC_VERSION}"
+    echo "${SHOR_MC_VERSION}"
     exit
 }
 
@@ -59,11 +59,13 @@ src_top_dir="$1"
 VERSION_FILE="${src_top_dir}/mc-version.h"
 PREV_MC_VERSION="unknown"
 CURR_MC_VERSION="${PREV_MC_VERSION}"
+SHOR_MC_VERSION="${PREV_MC_VERSION}"
 
 if [ -r "${VERSION_FILE}" ]
   then
     PREV_MC_VERSION=`sed -n 's/^#define MC_CURRENT_VERSION "\(.*\)"$/\1/p' "${VERSION_FILE}"`
     CURR_MC_VERSION="${PREV_MC_VERSION}"
+    SHOR_MC_VERSION="${PREV_MC_VERSION}"
 fi
 
 git_head=`git --git-dir "${src_top_dir}/.git" rev-parse --verify HEAD 2>/dev/null`
@@ -71,10 +73,16 @@ git_head=`git --git-dir "${src_top_dir}/.git" rev-parse --verify HEAD 2>/dev/nul
 
 # try to store sha1
 CURR_MC_VERSION="${git_head}"
+SHOR_MC_VERSION="${CURR_MC_VERSION}"
 
 new_version=`git --git-dir "${src_top_dir}/.git" describe --always 2>/dev/null`
 [ -z "${new_version}" ] && mc_print_version
 
 # store pretty tagged version
 CURR_MC_VERSION="${new_version}"
+SHOR_MC_VERSION="${CURR_MC_VERSION}"
+
+# stop full rebuild by using not-exact git version string in config.h, see #2252, #4266
+SHOR_MC_VERSION=`git --git-dir "${src_top_dir}/.git" describe --always --abbrev=0 2>/dev/null`-git
+
 mc_print_version
