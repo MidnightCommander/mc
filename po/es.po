@@ -13,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-08-01 19:02+0200\n"
-"PO-Revision-Date: 2021-07-26 20:16+0000\n"
-"Last-Translator: Transifex Bot <>\n"
+"POT-Creation-Date: 2021-08-15 15:53+0200\n"
+"PO-Revision-Date: 2021-08-03 17:59+0000\n"
+"Last-Translator: David Martin <dhmartina@yahoo.es>\n"
 "Language-Team: Spanish (http://www.transifex.com/mc/mc/language/es/)\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -4395,7 +4395,7 @@ msgid "sftp: %s"
 msgstr "sftp: %s"
 
 msgid "sftp: failed to convert remote host IP address into text form"
-msgstr ""
+msgstr "sftp: Error al convertir a texto la dirección IP remota"
 
 #, c-format
 msgid "sftp: making connection to %s"
@@ -4409,10 +4409,10 @@ msgid "sftp: connection to server failed: %s"
 msgstr "sftp: Conexión al servidor fracasó: %s"
 
 msgid "sftp: found host key of unsupported type: RSA1"
-msgstr ""
+msgstr "sftp: Encontrada clave de equipo de tipo no soportado: RSA1"
 
 msgid "sftp: unknown host key type:"
-msgstr ""
+msgstr "sftp: Clave de equipo de tipo desconocido:"
 
 #, c-format
 msgid ""
@@ -4420,15 +4420,18 @@ msgid ""
 "%s (%s)\n"
 "to the list of known hosts."
 msgstr ""
+"%s (%s)\n"
+"añadido permanentemente a la\n"
+"lista de equipos conocidos."
 
 msgid "sftp: cannot get the remote host key"
-msgstr ""
+msgstr "sftp: Imposible obtener la clave del equipo remoto"
 
 msgid "sftp: unsupported key type, can't check remote host key"
-msgstr ""
+msgstr "sftp: Clave de tipo no soportado, imposible comprobar equipo remoto"
 
 msgid "sftp: can't compute host key fingerprint hash"
-msgstr ""
+msgstr "sftp: No se puede evaluar la huella de seguridad del equipo remoto"
 
 #, c-format
 msgid ""
@@ -4439,6 +4442,11 @@ msgid ""
 "SHA1:%s.\n"
 "Do you want to add it to the list of known hosts and continue connecting?"
 msgstr ""
+"No se puede establecer la autenticidad del equipo\n"
+"%s (%s)\n"
+"La huella de seguridad de %s es\n"
+"SHA1:%s.\n"
+"¿Desea añadirlo a la lista de equipos conocidos y continuar con la conexión?"
 
 #, c-format
 msgid ""
@@ -4448,9 +4456,14 @@ msgid ""
 "Are you sure you want to add it to the list of known hosts and continue "
 "connecting?"
 msgstr ""
+"%s (%s)\n"
+"se encuentra en la lista de equipos conocidos pero\n"
+"¡LAS CLAVES NO COINCIDEN! ¡PODRÍA SER UN ATAQUE DE «HOMBRE EN MEDIO»!\n"
+"¿Está seguro de querer añadirlo a la lista de equipos conocidos\n"
+"y continuar con la conexión?"
 
 msgid "sftp: host key verification failed"
-msgstr ""
+msgstr "sftp: Error al verificar la clave del equipo"
 
 #, c-format
 msgid "sftp: Enter passphrase for %s "
@@ -4467,7 +4480,7 @@ msgid "sftp: Password is empty."
 msgstr "sftp: Contraseña vacía."
 
 msgid "sftp: failure establishing SSH session"
-msgstr ""
+msgstr "sftp: Error al establecer sesión SSH"
 
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: Sin datos del descriptor de archivo al leer"
