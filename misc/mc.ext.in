@@ -108,6 +108,7 @@
 #
 # Reorganization: 2012-03-07 Slava Zanko <slavazanko@gmail.com>
 #                 2021-03-28 Andrew Borodin <aborodin@vmail.ru>
+#                 2021-08-24 Tomas Szepe <szepe@pinerecords.com>
 
 
 ### GIT Repo ###
@@ -306,103 +307,6 @@ regex/\.s?a$
 shell/i/.lib
 	Open=%cd %p/ulib://
 	View=%view{ascii} @EXTHELPERSDIR@/misc.sh view lib
-
-# ace
-shell/i/.ace
-	Open=%cd %p/uace://
-	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view ace
-	Extract=unace x %f
-
-# arc
-shell/i/.arc
-	Open=%cd %p/uarc://
-	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view arc
-	Extract=arc x %f '*'
-	Extract (with flags)=I=%{Enter any Arc flags:}; if test -n "$I"; then arc x $I %f; fi
-
-# zip
-shell/i/.zip
-	Open=%cd %p/uzip://
-	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view zip
-
-# zoo
-shell/i/.zoo
-	Open=%cd %p/uzoo://
-	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view zoo
-
-# lz4
-regex/\.lz4$
-	Open=@EXTHELPERSDIR@/archive.sh view lz4 %var{PAGER:more}
-	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view lz4
-
-# WIM
-shell/i/\.wim
-	Open=%cd %p/uwim://
-	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view wim
-
-# gzip
-type/\(gzip compressed
-	Open=@EXTHELPERSDIR@/archive.sh view gz %var{PAGER:more}
-	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view gz
-
-# bzip2
-type/\(bzip2 compressed
-	Open=@EXTHELPERSDIR@/archive.sh view bzip2 %var{PAGER:more}
-	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view bz2
-
-# bzip
-type/\(bzip compressed
-	Open=@EXTHELPERSDIR@/archive.sh view bzip %var{PAGER:more}
-	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view bzip
-
-# compress
-type/\(compress'd
-	Open=@EXTHELPERSDIR@/archive.sh view gz %var{PAGER:more}
-	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view gz
-
-# lz
-type/\(lzip compressed
-	Open=@EXTHELPERSDIR@/archive.sh view lz %var{PAGER:more}
-	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view lz
-
-# lzma
-type/\(LZMA compressed
-	Open=@EXTHELPERSDIR@/archive.sh view lzma %var{PAGER:more}
-	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view lzma
-
-# xz
-type/\(XZ compressed
-	Open=@EXTHELPERSDIR@/archive.sh view xz %var{PAGER:more}
-	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view xz
-
-# zstd
-type/\(Zstandard compressed
-	Open=@EXTHELPERSDIR@/archive.sh view zst %var{PAGER:more}
-	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view zst
-
-# zip
-type/\(Zip archive
-	Open=%cd %p/uzip://
-	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view zip
-
-# jar(zip)
-type/i/\(Java\ (Jar\ file|archive)\ data\ \((zip|JAR)\)
-	Open=%cd %p/uzip://
-	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view zip
-
-# lha
-type/^LHa\ .*archive
-	Open=%cd %p/ulha://
-	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view lha
-
-# PAK
-type/^PAK\ .*archive
-	Open=%cd %p/unar://
-	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view pak
-
-# Parity Archive
-type/^Parity\ Archive\ Volume\ Set
-	Open=@EXTHELPERSDIR@/archive.sh open par2
 
 # Mailboxes
 type/^ASCII\ mail\ text
@@ -819,6 +723,103 @@ shell/i/.torrent
 
 
 ### Plain compressed files ###
+
+# ace
+shell/i/.ace
+	Open=%cd %p/uace://
+	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view ace
+	Extract=unace x %f
+
+# arc
+shell/i/.arc
+	Open=%cd %p/uarc://
+	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view arc
+	Extract=arc x %f '*'
+	Extract (with flags)=I=%{Enter any Arc flags:}; if test -n "$I"; then arc x $I %f; fi
+
+# zip
+shell/i/.zip
+	Open=%cd %p/uzip://
+	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view zip
+
+# zoo
+shell/i/.zoo
+	Open=%cd %p/uzoo://
+	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view zoo
+
+# lz4
+shell/i/.lz4
+	Open=@EXTHELPERSDIR@/archive.sh view lz4 %var{PAGER:more}
+	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view lz4
+
+# WIM
+shell/i/\.wim
+	Open=%cd %p/uwim://
+	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view wim
+
+# gzip
+type/\(gzip compressed
+	Open=@EXTHELPERSDIR@/archive.sh view gz %var{PAGER:more}
+	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view gz
+
+# bzip2
+type/\(bzip2 compressed
+	Open=@EXTHELPERSDIR@/archive.sh view bzip2 %var{PAGER:more}
+	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view bz2
+
+# bzip
+type/\(bzip compressed
+	Open=@EXTHELPERSDIR@/archive.sh view bzip %var{PAGER:more}
+	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view bzip
+
+# compress
+type/\(compress'd
+	Open=@EXTHELPERSDIR@/archive.sh view gz %var{PAGER:more}
+	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view gz
+
+# lz
+type/\(lzip compressed
+	Open=@EXTHELPERSDIR@/archive.sh view lz %var{PAGER:more}
+	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view lz
+
+# lzma
+type/\(LZMA compressed
+	Open=@EXTHELPERSDIR@/archive.sh view lzma %var{PAGER:more}
+	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view lzma
+
+# xz
+type/\(XZ compressed
+	Open=@EXTHELPERSDIR@/archive.sh view xz %var{PAGER:more}
+	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view xz
+
+# zstd
+type/\(Zstandard compressed
+	Open=@EXTHELPERSDIR@/archive.sh view zst %var{PAGER:more}
+	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view zst
+
+# zip
+type/\(Zip archive
+	Open=%cd %p/uzip://
+	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view zip
+
+# jar(zip)
+type/i/\(Java\ (Jar\ file|archive)\ data\ \((zip|JAR)\)
+	Open=%cd %p/uzip://
+	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view zip
+
+# lha
+type/^LHa\ .*archive
+	Open=%cd %p/ulha://
+	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view lha
+
+# PAK
+type/^PAK\ .*archive
+	Open=%cd %p/unar://
+	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view pak
+
+# Parity Archive
+type/^Parity\ Archive\ Volume\ Set
+	Open=@EXTHELPERSDIR@/archive.sh open par2
 
 
 ### Includes
