@@ -280,7 +280,9 @@ appearance_box_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm
     switch (msg)
     {
     case MSG_INIT:
+#ifdef ENABLE_SHADOWS
         if (!tty_use_colors ())
+#endif
         {
             Widget *shadow;
 

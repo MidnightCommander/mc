@@ -560,6 +560,7 @@ tty_fill_region (int y, int x, int rows, int cols, unsigned char ch)
 void
 tty_colorize_area (int y, int x, int rows, int cols, int color)
 {
+#ifdef ENABLE_SHADOWS
     cchar_t *ctext;
     wchar_t wch[10];            /* TODO not sure if the length is correct */
     attr_t attrs;
@@ -585,6 +586,13 @@ tty_colorize_area (int y, int x, int rows, int cols, int color)
     }
 
     g_free (ctext);
+#else
+    (void) y;
+    (void) x;
+    (void) rows;
+    (void) cols;
+    (void) color;
+#endif /* ENABLE_SHADOWS */
 }
 
 /* --------------------------------------------------------------------------------------------- */

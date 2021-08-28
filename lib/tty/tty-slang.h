@@ -23,6 +23,8 @@
 #define COLS  SLtt_Screen_Cols
 #define LINES SLtt_Screen_Rows
 
+#define ENABLE_SHADOWS 1
+
 /*** enums ***************************************************************************************/
 
 enum
