@@ -30,6 +30,11 @@
 #define NCURSES_CONST const
 #endif
 
+/* do not draw shadows if NCurses is built with --disable-widec */
+#if defined(NCURSES_WIDECHAR) && NCURSES_WIDECHAR
+#define ENABLE_SHADOWS 1
+#endif
+
 /*** typedefs(not structures) and defined constants **********************************************/
 
 /*** enums ***************************************************************************************/
