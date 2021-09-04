@@ -77,11 +77,11 @@
 /* default 'utime' script */
 #define FISH_UTIME_DEF_CONTENT ""                                                                         \
 "#UTIME \"$FISH_TOUCHATIME_W_NSEC\" \"$FISH_TOUCHMTIME_W_NSEC\" $FISH_FILENAME\n"                         \
-"if TZ=UTC touch -m -d \"$FISH_TOUCHMTIME_W_NSEC\" \"/${FISH_FILENAME}\" 2>/dev/null && \\\n"             \
-"   TZ=UTC touch -a -d \"$FISH_TOUCHATIME_W_NSEC\" \"/${FISH_FILENAME}\" 2>/dev/null; then\n"             \
+"if TZ=UTC touch -h -m -d \"$FISH_TOUCHMTIME_W_NSEC\" \"/${FISH_FILENAME}\" 2>/dev/null && \\\n"          \
+"   TZ=UTC touch -h -a -d \"$FISH_TOUCHATIME_W_NSEC\" \"/${FISH_FILENAME}\" 2>/dev/null; then\n"          \
 "  echo \"### 000\"\n"                                                                                    \
-"elif TZ=UTC touch -m -t $FISH_TOUCHMTIME \"/${FISH_FILENAME}\" 2>/dev/null && \\\n"                      \
-"     TZ=UTC touch -a -t $FISH_TOUCHATIME \"/${FISH_FILENAME}\" 2>/dev/null; then\n"                      \
+"elif TZ=UTC touch -h -m -t $FISH_TOUCHMTIME \"/${FISH_FILENAME}\" 2>/dev/null && \\\n"                   \
+"     TZ=UTC touch -h -a -t $FISH_TOUCHATIME \"/${FISH_FILENAME}\" 2>/dev/null; then\n"                   \
 "  echo \"### 000\"\n"                                                                                    \
 "elif [ -n \"$FISH_HAVE_PERL\" ] && \\\n"                                                                 \
 "   perl -e 'utime '$FISH_FILEATIME','$FISH_FILEMTIME',@ARGV;' \"/${FISH_FILENAME}\" 2>/dev/null; then\n" \
