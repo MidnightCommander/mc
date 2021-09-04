@@ -5,9 +5,9 @@
 
 context default
 
-    keyword ->> brightred grey
-    keyword <<- brightred grey
-    keyword -> brightred grey
+    keyword ->> brightred gray
+    keyword <<- brightred gray
+    keyword -> brightred gray
 
     keyword <- brightred
 

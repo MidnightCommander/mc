@@ -215,7 +215,7 @@ context default
     keyword whole cast yellow
     keyword whole namespace yellow
     keyword whole using yellow
-    keyword whole row major yellow
+    keyword whole row_major yellow
     keyword whole early_fragment_tests yellow
 
 # Deprecated

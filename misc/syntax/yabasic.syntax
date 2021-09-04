@@ -79,7 +79,7 @@ context default yellow
     keyword whole let white
     keyword whole line white
     keyword whole local white
-    keyword whole lo gwhite
+    keyword whole lo white
     keyword whole loop white
     keyword whole lower white
     keyword whole ltrim white

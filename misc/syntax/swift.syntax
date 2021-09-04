@@ -134,7 +134,7 @@ context default
     keyword ^ operators
     keyword ~ operators
     keyword ! operators
-    keyword whole _ operatots
+    keyword whole _ operators
     keyword { brackets
     keyword } brackets
     keyword ( brackets

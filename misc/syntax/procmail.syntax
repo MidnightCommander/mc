@@ -191,7 +191,7 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
 context  " "            green
     keyword ${*} brightgreen
 
-context exclusive ` `        lightgrey black
+context exclusive ` `        lightgray black
     keyword '*' green
     keyword " green
     keyword \\` brightred

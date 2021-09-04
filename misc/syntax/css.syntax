@@ -418,7 +418,7 @@ context default
     keyword whole lightcoral brightgreen
     keyword whole lightcyan brightgreen
     keyword whole lightgoldenrodyellow brightgreen
-    keyword whole lightgrey brightgreen
+    keyword whole lightgray brightgreen
     keyword whole lightgreen brightgreen
     keyword whole lightpink brightgreen
     keyword whole lightsalmon brightgreen
@@ -504,8 +504,8 @@ context default
     keyword whole arial brightgreen
     keyword whole Narrow brightgreen
     keyword whole narrow brightgreen
-    keyword whole Trebuchet MS brightgreen
-    keyword whole trebuchet ms brightgreen
+    keyword whole Trebuchet\sMS brightgreen
+    keyword whole trebuchet\sms brightgreen
     keyword whole verdana brightgreen
     keyword whole Verdana brightgreen
     keyword whole sans-serif brightgreen
