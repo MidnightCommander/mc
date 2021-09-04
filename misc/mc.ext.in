@@ -373,27 +373,22 @@ shell/.ms
 	View=%view{ascii,nroff} @EXTHELPERSDIR@/text.sh view nroff.ms %var{PAGER:more}
 
 # Manual page - compressed
-type/^(ASCII )?troff.*gzip compressed
+type/troff.*gzip compressed
 	Open=@EXTHELPERSDIR@/text.sh open man.gz %var{PAGER:more}
 	View=%view{ascii,nroff} @EXTHELPERSDIR@/text.sh view man.gz %var{PAGER:more}
 
-type/^(ASCII )?troff.*bzip compressed
+type/troff.*bzip compressed
 	Open=@EXTHELPERSDIR@/text.sh open man.bz %var{PAGER:more}
 	View=%view{ascii,nroff} @EXTHELPERSDIR@/text.sh view man.bz %var{PAGER:more}
 
-type/^(ASCII )?troff.*bzip2 compressed
+type/troff.*bzip2 compressed
 	Open=@EXTHELPERSDIR@/text.sh open man.bz2 %var{PAGER:more}
 	View=%view{ascii,nroff} @EXTHELPERSDIR@/text.sh view man.bz2 %var{PAGER:more}
 
 # Manual page
-type/^(ASCII )?troff
+type/troff or preprocessor input
 	Open=@EXTHELPERSDIR@/text.sh open man %var{PAGER:more}
 	View=%view{ascii,nroff} @EXTHELPERSDIR@/text.sh view man %var{PAGER:more}
-
-# Perl pod page
-shell/.pod
-	Open=@EXTHELPERSDIR@/text.sh open pod %var{PAGER:more}
-	View=%view{ascii,nroff} @EXTHELPERSDIR@/text.sh view pod %var{PAGER:more}
 
 regex/([^0-9]|^[^\.]*)\.([1-9][A-Za-z]*|[ln])\.lz$
 	Open=@EXTHELPERSDIR@/text.sh open man.lz %var{PAGER:more}
@@ -414,6 +409,11 @@ regex/([^0-9]|^[^\.]*)\.([1-9][A-Za-z]*|[ln])\.xz$
 regex/([^0-9]|^[^\.]*)\.([1-9][A-Za-z]*|[ln])\.zst$
 	Open=@EXTHELPERSDIR@/text.sh open man.zst %var{PAGER:more}
 	View=%view{ascii,nroff} @EXTHELPERSDIR@/text.sh view man.zst %var{PAGER:more}
+
+# Perl pod page
+shell/.pod
+	Open=@EXTHELPERSDIR@/text.sh open pod %var{PAGER:more}
+	View=%view{ascii,nroff} @EXTHELPERSDIR@/text.sh view pod %var{PAGER:more}
 
 # CHM
 shell/i/.chm
