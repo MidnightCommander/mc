@@ -2771,6 +2771,9 @@ start_search (WPanel * panel)
 static void
 stop_search (WPanel * panel)
 {
+    if (!panel->quick_search.active)
+        return;
+
     panel->quick_search.active = FALSE;
 
     /* if user overrdied search string, we need to store it
