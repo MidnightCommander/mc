@@ -3240,6 +3240,8 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
     linklist = free_linklist (linklist);
     dest_dirs = free_linklist (dest_dirs);
 
+    save_cwds_stat ();
+
     if (single_entry)
     {
         source = check_single_entry (panel, force_single, &src_stat);
@@ -3458,6 +3460,9 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
     file_op_total_context_destroy (tctx);
   ret_fast:
     file_op_context_destroy (ctx);
+
+    update_panels (UP_OPTIMIZE, UP_KEEPSEL);
+    repaint_screen ();
 
     return ret_val;
 }

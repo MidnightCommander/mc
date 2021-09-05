@@ -9,6 +9,7 @@
 
 #include "lib/global.h"
 
+#include "file.h"               /* panel_operate() */
 #include "panel.h"
 
 /*** typedefs(not structures) and defined constants **********************************************/
@@ -56,13 +57,7 @@ void edit_cmd_new (void);
 #ifdef USE_INTERNAL_EDIT
 void edit_cmd_force_internal (const WPanel * panel);
 #endif
-void copy_cmd (WPanel * panel);
-void copy_cmd_local (WPanel * panel);
-void rename_cmd (WPanel * panel);
-void rename_cmd_local (WPanel * panel);
 void mkdir_cmd (WPanel * panel);
-void delete_cmd (WPanel * panel);
-void delete_cmd_local (WPanel * panel);
 void filter_cmd (void);
 void reread_cmd (void);
 void vfs_list (WPanel * panel);
@@ -104,5 +99,75 @@ const char *chattr_get_as_str (unsigned long attr);
 /* find.c */
 void find_cmd (WPanel * panel);
 
+/* --------------------------------------------------------------------------------------------- */
 /*** inline functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Copy, default to the other panel.
+ */
+
+static inline void
+copy_cmd (WPanel * panel)
+{
+    panel_operate (panel, OP_COPY, FALSE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Copy, default to the same panel, ignore marks.
+ */
+
+static inline void
+copy_cmd_local (WPanel * panel)
+{
+    panel_operate (panel, OP_COPY, TRUE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Move/rename, default to the other panel.
+ */
+
+static inline void
+rename_cmd (WPanel * panel)
+{
+    panel_operate (panel, OP_MOVE, FALSE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Move/rename, default to the same panel, ignore marks.
+ */
+
+static inline void
+rename_cmd_local (WPanel * panel)
+{
+    panel_operate (panel, OP_MOVE, TRUE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ *  Remove.
+ */
+
+static inline void
+delete_cmd (WPanel * panel)
+{
+    panel_operate (panel, OP_DELETE, FALSE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ *  Remove, ignore marks.
+ */
+
+static inline void
+delete_cmd_local (WPanel * panel)
+{
+    panel_operate (panel, OP_DELETE, TRUE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 #endif /* MC__CMD_H */
