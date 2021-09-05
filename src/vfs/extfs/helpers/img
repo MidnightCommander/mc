@@ -1,0 +1,94 @@
+#!/usr/bin/env perl
+# VFS-wrapper for MS-DOS IMG files using mtools
+#
+# Written by twojstaryzdomu (twojstaryzdomu@users.noreply.github.com), 2021
+#
+
+my ( $cmd, $archive, @args )        = @ARGV;
+die "$archive does not exist\n" unless -f "$archive";
+my $size_kb                         = ( -s $archive ) / 1024;
+my $drive                           = 'b';
+
+my $actions                         = {
+  list                              => "mdir -f -i \'$archive\'",
+  copyout                           => "mcopy -m -n -o -p -i \'$archive\'",
+  copyin                            => "mcopy -m -n -o -p -i \'$archive\'",
+  rm                                => "mdel -i \'$archive\'",
+  mkdir                             => "mmd -i \'$archive\'",
+  rmdir                             => "mrd -i \'$archive\'",
+  run                               => "dosbox -noautoexec -c \'IMGMOUNT -size $size_kb $drive: \'$archive\'\' -c '$drive:\' -c",
+  test                              => "logger \'$archive\'"
+};
+
+my $regex_list                      = qr"^(\S+)\s+(\S*)\s+(\S+)\s+(\d{4})-(\d{2})-(\d{2})\s+(\d{1,2}):(\d{1,2})(?:\s*)(\S+)*\s*$";
+
+sub print_debug {
+  print "@_\n" if exists $ENV{DEBUG};
+}
+
+sub run_cmd {
+  my $cmd                           = shift;
+  my @output                        = ( do { open( my $line, "$cmd | " ) or die "$0: Can't run $cmd"; <$line>; } );
+  print_debug "run_cmd $cmd";
+  return \@output;
+}
+
+sub check_mtools {
+  my $cmd                           = shift;
+  my ( $tool )                      = $actions->{ $cmd } =~ /^(\w+)/;
+  foreach ( split( ":", $ENV{PATH} ) ) {
+    return 1 if -e "$_/$tool"
+  }
+  return;
+}
+
+sub default_handler {
+  my ( $cmd, $archive, @args )      = ( @_ );
+  print_debug "default_handler: @args";
+  if ( $cmd eq 'copyin' ) {
+    if ( my ( $name, $ext )         = $args[0] =~ /(\w+)\.(\w+)$/ ) {
+      die "filename $name.$ext too long to copy to $archive\n" if ( length( $name ) > 8 || length( $ext ) > 3 );
+    }
+    $args[0]                        = "::$args[0]";
+    @args                           = reverse @args;
+  }
+  elsif ( $cmd eq 'copyout' ) {
+    $args[0]                        = "::$args[0]";
+  }
+  my $output                        = run_cmd "$actions->{ $cmd } @args";
+  if ( $cmd eq 'list' ) {
+    my $exec                        = check_mtools( run )
+                                    ? 'rwxr-xr-x'
+                                    : 'rw-r--r--';
+    foreach ( @{ $output } ) {
+      chomp;
+      next if /^$/;
+      if ( my ( $name, $ext, $size, $year, $mon, $day, $hours, $mins, $longname ) = $_ =~ /$regex_list/ ) {
+        print_debug "list: name = $name, ext = $ext, size = $size, year = $year, mon = $mon, day = $day, hours = $hours, mins = $mins, longname = $longname";
+        next if ( $name eq '.' || $name eq '..' );
+        my $perms                   = ( $size ne '<DIR>'
+                                    ? '-'
+                                    : 'd' )
+                                    . ( ( $ext eq 'exe' || $ext eq 'com' || $ext eq 'bat' )
+                                    ? $exec
+                                    : 'rw-r--r--' );
+        my $path                    = $longname
+                                    ? "$args[0]/$longname"
+                                    : uc( "$args[0]/$name" . ( $ext ? ".$ext" : "" ) );
+        $secs                       = defined $secs ? $secs : "00";
+        printf "%-10s    1 %-8d %-8d %8s %s/%s/%s %s:%s:%s %s", $perms, $<,
+                                    $(, $size ne '<DIR>' ? $size : 0, $mon, $day, $year, $hours, $mins, $secs, $path
+                                    . "\n";
+        default_handler( $cmd, $archive, $path ) if ( $size eq '<DIR>' );
+      }
+      else {
+        print_debug "list: skipped: $_";
+      }
+    }
+  }
+}
+
+print_debug "$0: cmd = $cmd; archive = $archive; args = @args";
+die "Cannot find command $cmd, are mtools installed?\n" unless check_mtools( $cmd );
+exists $actions->{ $cmd }           ? default_handler( $cmd, $archive, @args )
+                                    : die "mode $cmd not available\n";
