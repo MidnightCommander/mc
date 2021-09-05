@@ -2762,7 +2762,6 @@ start_search (WPanel * panel)
         panel->quick_search.ch[0] = '\0';
         panel->quick_search.chpoint = 0;
         display_mini_info (panel);
-        mc_refresh ();
     }
 }
 
