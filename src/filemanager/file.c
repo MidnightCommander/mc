@@ -180,7 +180,7 @@ static const char *prompt_parts[] = {
 static GSList *linklist = NULL;
 
 /* the files-to-be-erased list */
-static GSList *erase_list = NULL;
+static GQueue *erase_list = NULL;
 
 /*
  * In copy_dir_dir we use two additional single linked lists: The first -
@@ -301,6 +301,16 @@ free_link (void *data)
     vfs_path_free (lp->src_vpath, TRUE);
     vfs_path_free (lp->dst_vpath, TRUE);
     g_free (lp);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static inline void *
+free_erase_list (GQueue * lp)
+{
+    g_queue_free_full (lp, free_link);
+
+    return NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1517,16 +1527,17 @@ erase_dir_after_copy (file_op_total_context_t * tctx, file_op_context_t * ctx,
         /* Reset progress count before delete to avoid counting files twice */
         tctx->progress_count = tctx->prev_progress_count;
 
-        while (erase_list != NULL && *status != FILE_ABORT)
+        while (!g_queue_is_empty (erase_list) && *status != FILE_ABORT)
         {
-            struct link *lp = (struct link *) erase_list->data;
+            struct link *lp;
+
+            lp = (struct link *) g_queue_pop_head (erase_list);
 
             if (S_ISDIR (lp->st_mode))
                 *status = erase_dir_iff_empty (ctx, lp->src_vpath, tctx->progress_count);
             else
                 *status = erase_file (tctx, ctx, lp->src_vpath);
 
-            erase_list = g_slist_remove (erase_list, lp);
             free_link (lp);
         }
 
@@ -1695,7 +1706,7 @@ do_move_dir_dir (const WPanel * panel, file_op_total_context_t * tctx, file_op_c
     erase_dir_after_copy (tctx, ctx, src_vpath, &return_status);
 
   ret:
-    erase_list = free_linklist (erase_list);
+    erase_list = free_erase_list (erase_list);
   ret_fast:
     vfs_path_free (src_vpath, TRUE);
     vfs_path_free (dst_vpath, TRUE);
@@ -2983,10 +2994,13 @@ copy_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const cha
         {
             if (ctx->erase_at_end)
             {
+                if (erase_list == NULL)
+                    erase_list = g_queue_new ();
+
                 lp = g_new0 (struct link, 1);
                 lp->src_vpath = tmp_vpath;
                 lp->st_mode = dst_stat.st_mode;
-                erase_list = g_slist_append (erase_list, lp);
+                g_queue_push_tail (erase_list, lp);
                 tmp_vpath = NULL;
             }
             else if (S_ISDIR (dst_stat.st_mode))
