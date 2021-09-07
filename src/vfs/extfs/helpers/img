@@ -4,6 +4,8 @@
 # Written by twojstaryzdomu (twojstaryzdomu@users.noreply.github.com), 2021
 #
 
+# Undefine to disable upper-casing short names
+my $uc                              = 1;
 my ( $cmd, $archive, @args )        = @ARGV;
 die "$archive does not exist\n" unless -f "$archive";
 my $size_kb                         = ( -s $archive ) / 1024;
@@ -46,15 +48,9 @@ sub check_mtools {
 sub default_handler {
   my ( $cmd, $archive, @args )      = ( @_ );
   print_debug "default_handler: @args";
-  if ( $cmd eq 'copyin' ) {
-    if ( my ( $name, $ext )         = $args[0] =~ /(\w+)\.(\w+)$/ ) {
-      die "filename $name.$ext too long to copy to $archive\n" if ( length( $name ) > 8 || length( $ext ) > 3 );
-    }
+  if ( $cmd =~ /^copy(\S+)/ ) {
     $args[0]                        = "::$args[0]";
-    @args                           = reverse @args;
-  }
-  elsif ( $cmd eq 'copyout' ) {
-    $args[0]                        = "::$args[0]";
+    @args                           = reverse @args if ( $1 eq 'in' );
   }
   my $input                         = run_cmd "$actions->{ $cmd } @args";
   if ( $cmd eq 'list' ) {
@@ -67,7 +63,14 @@ sub default_handler {
       chomp;
       next if /^$/;
       if ( /$regex_dir/ ) {
-        $dir                        = "$1";
+        @dir                        = split( "/", $1 );
+        if ( $uc ) {
+          foreach ( 0 .. $#dir ) {
+            my $udir                = uc( $dir[$_] );
+            $dir[$_]                = $udir if exists $output->{ join( "/", @dir[0..$_-1] ) . "/$udir" };
+          }
+        }
+        $dir                        = join( "/", @dir );
         next;
       }
       if ( my ( $name, $ext, $size, $year, $mon, $day, $hours, $mins, $longname ) = $_ =~ /$regex_list/ ) {
@@ -78,10 +81,11 @@ sub default_handler {
                                     : ( $ext eq 'exe' || $ext eq 'com' || $ext eq 'bat' )
                                     ? $exec
                                     : '-rw-r--r--';
+        $name                       = uc( $name ) if $uc;
         my $path                    = ( $dir ? "/$dir/" : "/" )
-                                    . ( $longname ? $longname : $name )
-                                    . ( $ext ? ".$ext" : "" );
-        $path                       = uc( $path ) unless $longname;
+                                    . ( $longname
+                                    ? $longname
+                                    : $name . ( $ext ? ".$ext" : "" ) );
         $secs                       = defined $secs ? $secs : "00";
         print_debug "list: path = $path";
         $output->{ $path }          = sprintf "%-10s    1 %-8d %-8d %8s %s/%s/%s %s:%s:%s %s", $perms, $<,
@@ -96,7 +100,12 @@ sub default_handler {
   }
 }
 
+sub quote {
+  map { '"' . $_ . '"' } @_
+}
+
 print_debug "$0: cmd = $cmd; archive = $archive; args = @args";
+@args                               = quote( @args );
 $actions->{ $cmd }                  = $ENV{MC_TEST_EXTFS_LIST_CMD} if exists $ENV{MC_TEST_EXTFS_LIST_CMD};
 die "Cannot find command $cmd, are mtools installed?\n" unless check_mtools( $cmd );
 exists $actions->{ $cmd }           ? default_handler( $cmd, $archive, @args )
