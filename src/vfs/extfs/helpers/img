@@ -18,7 +18,7 @@ my $actions                         = {
   rm                                => "mdeltree -i \'$archive\'",
   mkdir                             => "mmd -D o -i \'$archive\'",
   rmdir                             => "mrd -i \'$archive\'",
-  run                               => "dosbox -noautoexec -c \'IMGMOUNT -size $size_kb $drive: \'$archive\'\' -c '$drive:\' -c",
+  run                               => "dosbox -noautoexec -c \'imgmount -size $size_kb $drive: \'$archive\'\' -c '$drive:\' -c",
   test                              => "logger \'$archive\'"
 };
 
