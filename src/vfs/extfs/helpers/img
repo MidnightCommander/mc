@@ -23,7 +23,9 @@ my $actions                         = {
 };
 
 my $regex_dir                       = qr"(?<=^Directory for ::/)(.*)$";
-my $regex_list                      = qr"^(\S+)\s+(\S*)\s+(\S+)\s+(\d{4})-(\d{2})-(\d{2})\s+(\d{1,2}):(\d{1,2})\s\s?(.*)$";
+# Required for regex
+$ENV{MTOOLS_DOTTED_DIR}             = 1;
+my $regex_list                      = qr"^(\S+)\s+(\S+)\s+(\d{4})-(\d{2})-(\d{2})\s+(\d{1,2}):(\d{1,2})\s\s?(.*)$";
 
 sub print_debug {
   print "@_\n" if exists $ENV{DEBUG};
@@ -73,19 +75,17 @@ sub default_handler {
         $dir                        = join( "/", @dir );
         next;
       }
-      if ( my ( $name, $ext, $size, $year, $mon, $day, $hours, $mins, $longname ) = $_ =~ /$regex_list/ ) {
-        print_debug "list: dir = $dir, name = $name, ext = $ext, size = $size, year = $year, mon = $mon, day = $day, hours = $hours, mins = $mins, longname = $longname;";
-        next if ( $name eq '.' || $name eq '..' );
+      if ( my ( $filename, $size, $year, $mon, $day, $hours, $mins, $longname ) = $_ =~ /$regex_list/ ) {
+        print_debug "list: dir = $dir, filename = $filename, size = $size, year = $year, mon = $mon, day = $day, hours = $hours, mins = $mins, longname = $longname;";
+        next if ( $filename =~ /^\.\.?$/ );
         my $perms                   = $size eq '<DIR>'
                                     ? 'drwxr-xr-x'
-                                    : ( $ext eq 'exe' || $ext eq 'com' || $ext eq 'bat' )
+                                    : $filename =~ /\.(?:exe|bat|com)$/i
                                     ? $exec
                                     : '-rw-r--r--';
-        $name                       = uc( $name ) if $uc;
+        $filename                   = uc( $filename ) if $uc;
         my $path                    = ( $dir ? "/$dir/" : "/" )
-                                    . ( $longname
-                                    ? $longname
-                                    : $name . ( $ext ? ".$ext" : "" ) );
+                                    . ( $longname ? $longname : $filename );
         $secs                       = defined $secs ? $secs : "00";
         print_debug "list: path = $path";
         $output->{ $path }          = sprintf "%-10s    1 %-8d %-8d %8s %s/%s/%s %s:%s:%s %s", $perms, $<,
