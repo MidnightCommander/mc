@@ -387,6 +387,8 @@ sftpfs_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2, GError ** 
     sftpfs_super_t *super = NULL;
     const vfs_path_element_t *path_element1;
     const vfs_path_element_t *path_element2 = NULL;
+    const char *path1;
+    size_t path1_len;
     const GString *ctmp_path;
     char *tmp_path;
     unsigned int tmp_path_len;
@@ -400,16 +402,14 @@ sftpfs_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2, GError ** 
     tmp_path_len = ctmp_path->len;
 
     path_element1 = vfs_path_get_by_index (vpath1, -1);
+    path1 = path_element1->path;
+    path1_len = strlen (path1);
 
     do
     {
-        const GString *fixfname;
-
-        fixfname = sftpfs_fix_filename (path_element1->path);
-
         res =
-            libssh2_sftp_symlink_ex (super->sftp_session, fixfname->str, fixfname->len, tmp_path,
-                                     tmp_path_len, LIBSSH2_SFTP_SYMLINK);
+            libssh2_sftp_symlink_ex (super->sftp_session, path1, path1_len, tmp_path, tmp_path_len,
+                                     LIBSSH2_SFTP_SYMLINK);
         if (res >= 0)
             break;
 
@@ -448,6 +448,7 @@ sftpfs_utime (const vfs_path_t * vpath, time_t atime, time_t mtime, GError ** mc
     if (res < 0)
         return res;
 
+    attrs.flags = LIBSSH2_SFTP_ATTR_ACMODTIME;
     attrs.atime = atime;
     attrs.mtime = mtime;
 
