@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-08-15 15:53+0200\n"
+"POT-Creation-Date: 2021-09-26 10:06+0300\n"
 "PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Korean (http://www.transifex.com/mc/mc/language/ko/)\n"
@@ -662,12 +662,6 @@ msgstr "subshell 지원 사용안함"
 
 msgid "Log ftp dialog to specified file"
 msgstr "지정된 파일에 ftp 대화상자 로그"
-
-msgid "Set debug level"
-msgstr "디버그 수준 설정"
-
-msgid "<integer>"
-msgstr "<integer>"
 
 msgid "Launches the file viewer on a file"
 msgstr "파일에서 파일 뷰어 실행"
@@ -2162,19 +2156,6 @@ msgid "Background jobs"
 msgstr "백그라운드 작업"
 
 #, c-format
-msgid "Password for \\\\%s\\%s"
-msgstr "\\\\%s\\%s의 비밀번호"
-
-msgid "Domain:"
-msgstr "도메인:"
-
-msgid "Username:"
-msgstr "사용자 이름:"
-
-msgid "SMB authentication"
-msgstr "SMB 인증"
-
-#, c-format
 msgid ""
 "Cannot chdir to \"%s\"\n"
 "%s"
@@ -2494,9 +2475,6 @@ msgstr "호스트에 SFTP"
 
 msgid "Shell link to machine"
 msgstr "호스트에 쉘 링크"
-
-msgid "SMB link to machine"
-msgstr "호스트에 SMB 링크"
 
 msgid "Undelete files on an ext2 file system"
 msgstr "ext2 파일 시스템에서 파일 삭제 해제"
@@ -3094,9 +3072,6 @@ msgstr "쉘 링크(&H)..."
 
 msgid "S&FTP link..."
 msgstr "SFTP 링크(&F)..."
-
-msgid "SM&B link..."
-msgstr "SMB 링크(&B)..."
 
 msgid "Paneli&ze"
 msgstr "패널 크기조정"
@@ -4469,33 +4444,6 @@ msgid "sftp: Listing done."
 msgstr "sftp: 목록 작성 완료."
 
 #, c-format
-msgid "reconnect to %s failed"
-msgstr "%s에 다시 연결 실패"
-
-msgid "Authentication failed"
-msgstr "인증 실패"
-
-#, c-format
-msgid "Error %s creating directory %s"
-msgstr "%s 디렉토리 %s을(를) 만드는 중"
-
-#, c-format
-msgid "Error %s removing directory %s"
-msgstr "%s 디렉토리 %s을(를) 제거하는 중 오류 발생"
-
-#, c-format
-msgid "%s opening remote file %s"
-msgstr "%s 원격 파일 %s 열기"
-
-#, c-format
-msgid "%s removing remote file %s"
-msgstr "%s 원격 파일 %s 제거"
-
-#, c-format
-msgid "%s renaming files\n"
-msgstr "파일 이름 변경 중 %s\n"
-
-#, c-format
 msgid ""
 "Cannot open tar archive\n"
 "%s"
@@ -4708,3 +4656,55 @@ msgstr "처음부터 계속하시겠습니까?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "/ftp://some.host/editme.txt의 로컬 복사본을 가져올 수 없음"
+
+#~ msgid "Set debug level"
+#~ msgstr "디버그 수준 설정"
+
+#~ msgid "<integer>"
+#~ msgstr "<integer>"
+
+#, c-format
+#~ msgid "Password for \\\\%s\\%s"
+#~ msgstr "\\\\%s\\%s의 비밀번호"
+
+#~ msgid "Domain:"
+#~ msgstr "도메인:"
+
+#~ msgid "Username:"
+#~ msgstr "사용자 이름:"
+
+#~ msgid "SMB authentication"
+#~ msgstr "SMB 인증"
+
+#~ msgid "SMB link to machine"
+#~ msgstr "호스트에 SMB 링크"
+
+#~ msgid "SM&B link..."
+#~ msgstr "SMB 링크(&B)..."
+
+#, c-format
+#~ msgid "reconnect to %s failed"
+#~ msgstr "%s에 다시 연결 실패"
+
+#~ msgid "Authentication failed"
+#~ msgstr "인증 실패"
+
+#, c-format
+#~ msgid "Error %s creating directory %s"
+#~ msgstr "%s 디렉토리 %s을(를) 만드는 중"
+
+#, c-format
+#~ msgid "Error %s removing directory %s"
+#~ msgstr "%s 디렉토리 %s을(를) 제거하는 중 오류 발생"
+
+#, c-format
+#~ msgid "%s opening remote file %s"
+#~ msgstr "%s 원격 파일 %s 열기"
+
+#, c-format
+#~ msgid "%s removing remote file %s"
+#~ msgstr "%s 원격 파일 %s 제거"
+
+#, c-format
+#~ msgid "%s renaming files\n"
+#~ msgstr "파일 이름 변경 중 %s\n"

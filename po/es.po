@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-08-15 15:53+0200\n"
+"POT-Creation-Date: 2021-09-26 10:06+0300\n"
 "PO-Revision-Date: 2021-08-03 17:59+0000\n"
 "Last-Translator: David Martin <dhmartina@yahoo.es>\n"
 "Language-Team: Spanish (http://www.transifex.com/mc/mc/language/es/)\n"
@@ -666,12 +666,6 @@ msgstr "Desactivar el uso de subshell"
 
 msgid "Log ftp dialog to specified file"
 msgstr "Registrar diálogos ftp en un archivo"
-
-msgid "Set debug level"
-msgstr "Fijar el nivel de depuración"
-
-msgid "<integer>"
-msgstr "<número>"
 
 msgid "Launches the file viewer on a file"
 msgstr "Abrir un archivo con el visor"
@@ -2172,19 +2166,6 @@ msgid "Background jobs"
 msgstr "Procesos en 2º plano"
 
 #, c-format
-msgid "Password for \\\\%s\\%s"
-msgstr "Contraseña para \\\\%s\\%s"
-
-msgid "Domain:"
-msgstr "Dominio:"
-
-msgid "Username:"
-msgstr "Usuario:"
-
-msgid "SMB authentication"
-msgstr "Autenticación SMB"
-
-#, c-format
 msgid ""
 "Cannot chdir to \"%s\"\n"
 "%s"
@@ -2504,9 +2485,6 @@ msgstr "Conexión por SFTP"
 
 msgid "Shell link to machine"
 msgstr "Conexión por SSH"
-
-msgid "SMB link to machine"
-msgstr "Conexión por SMB"
 
 msgid "Undelete files on an ext2 file system"
 msgstr "Recuperar archivos de un sistema de archivos ext2"
@@ -3105,9 +3083,6 @@ msgstr "conexión por SS&H..."
 
 msgid "S&FTP link..."
 msgstr "conexión por SF&TP..."
-
-msgid "SM&B link..."
-msgstr "conexión por &SMB..."
 
 msgid "Paneli&ze"
 msgstr "búsqueda e&Xterna"
@@ -4497,33 +4472,6 @@ msgid "sftp: Listing done."
 msgstr "sftp: Listado completo."
 
 #, c-format
-msgid "reconnect to %s failed"
-msgstr "falló la reconexión con %s"
-
-msgid "Authentication failed"
-msgstr "Autenticación fallida"
-
-#, c-format
-msgid "Error %s creating directory %s"
-msgstr "Error %s creando el directorio %s"
-
-#, c-format
-msgid "Error %s removing directory %s"
-msgstr "Error %s eliminando el directorio %s"
-
-#, c-format
-msgid "%s opening remote file %s"
-msgstr "%s abriendo archivo remoto %s"
-
-#, c-format
-msgid "%s removing remote file %s"
-msgstr "%s eliminando archivo remoto %s"
-
-#, c-format
-msgid "%s renaming files\n"
-msgstr "%s renombrando archivos\n"
-
-#, c-format
 msgid ""
 "Cannot open tar archive\n"
 "%s"
@@ -4736,3 +4684,55 @@ msgstr "¿Continuar desde el principio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Imposible obtener una copia local de /ftp://ese.equipo/edítame.txt"
+
+#~ msgid "Set debug level"
+#~ msgstr "Fijar el nivel de depuración"
+
+#~ msgid "<integer>"
+#~ msgstr "<número>"
+
+#, c-format
+#~ msgid "Password for \\\\%s\\%s"
+#~ msgstr "Contraseña para \\\\%s\\%s"
+
+#~ msgid "Domain:"
+#~ msgstr "Dominio:"
+
+#~ msgid "Username:"
+#~ msgstr "Usuario:"
+
+#~ msgid "SMB authentication"
+#~ msgstr "Autenticación SMB"
+
+#~ msgid "SMB link to machine"
+#~ msgstr "Conexión por SMB"
+
+#~ msgid "SM&B link..."
+#~ msgstr "conexión por &SMB..."
+
+#, c-format
+#~ msgid "reconnect to %s failed"
+#~ msgstr "falló la reconexión con %s"
+
+#~ msgid "Authentication failed"
+#~ msgstr "Autenticación fallida"
+
+#, c-format
+#~ msgid "Error %s creating directory %s"
+#~ msgstr "Error %s creando el directorio %s"
+
+#, c-format
+#~ msgid "Error %s removing directory %s"
+#~ msgstr "Error %s eliminando el directorio %s"
+
+#, c-format
+#~ msgid "%s opening remote file %s"
+#~ msgstr "%s abriendo archivo remoto %s"
+
+#, c-format
+#~ msgid "%s removing remote file %s"
+#~ msgstr "%s eliminando archivo remoto %s"
+
+#, c-format
+#~ msgid "%s renaming files\n"
+#~ msgstr "%s renombrando archivos\n"

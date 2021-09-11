@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-08-15 15:53+0200\n"
+"POT-Creation-Date: 2021-09-26 10:06+0300\n"
 "PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: German (http://www.transifex.com/mc/mc/language/de/)\n"
@@ -678,12 +678,6 @@ msgstr "Schaltet Subshell-Unterstützung ab"
 
 msgid "Log ftp dialog to specified file"
 msgstr "FTP-Dialog in die angegebene Datei protokollieren"
-
-msgid "Set debug level"
-msgstr "Debugging-Level setzen"
-
-msgid "<integer>"
-msgstr "<integer>"
 
 msgid "Launches the file viewer on a file"
 msgstr "Startet den Ansichtsmodus für eine Datei"
@@ -2182,19 +2176,6 @@ msgid "Background jobs"
 msgstr "Hintergrundaufgaben"
 
 #, c-format
-msgid "Password for \\\\%s\\%s"
-msgstr "Passwort für \\\\%s\\%s"
-
-msgid "Domain:"
-msgstr "Domain:"
-
-msgid "Username:"
-msgstr "Benutzername:"
-
-msgid "SMB authentication"
-msgstr "SMB-Authentifikation"
-
-#, c-format
 msgid ""
 "Cannot chdir to \"%s\"\n"
 "%s"
@@ -2514,9 +2495,6 @@ msgstr "SFTP zu Server"
 
 msgid "Shell link to machine"
 msgstr "Shell-Verbindung zu Server"
-
-msgid "SMB link to machine"
-msgstr "SMB-Verbindung zu Server"
 
 msgid "Undelete files on an ext2 file system"
 msgstr "Löschen von Dateien auf einem Ext2-Dateisystem rückgängig machen"
@@ -3116,9 +3094,6 @@ msgstr "S&hell-Verbindung..."
 
 msgid "S&FTP link..."
 msgstr "S&FTP-Verbindung..."
-
-msgid "SM&B link..."
-msgstr "S&MB-Verbindung..."
 
 msgid "Paneli&ze"
 msgstr "Anordnen"
@@ -4487,33 +4462,6 @@ msgid "sftp: Listing done."
 msgstr "sftp: Auflisten beendet."
 
 #, c-format
-msgid "reconnect to %s failed"
-msgstr "Wieder verbinden mit %s fehlgeschlagen"
-
-msgid "Authentication failed"
-msgstr "Authentifikation fehlgeschlagen"
-
-#, c-format
-msgid "Error %s creating directory %s"
-msgstr "Fehler %s beim Erstellen des Verzeichnisses %s"
-
-#, c-format
-msgid "Error %s removing directory %s"
-msgstr "Fehler %s beim Löschen des Verzeichnisses %s"
-
-#, c-format
-msgid "%s opening remote file %s"
-msgstr "%s beim Öffnen von entfernter Datei %s"
-
-#, c-format
-msgid "%s removing remote file %s"
-msgstr "%s beim Löschen von entfernter Datei %s"
-
-#, c-format
-msgid "%s renaming files\n"
-msgstr "%s beim Umbenennen von Dateien\n"
-
-#, c-format
 msgid ""
 "Cannot open tar archive\n"
 "%s"
@@ -4726,3 +4674,55 @@ msgstr "Am Anfang fortsetzen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kann lokale Kopie von /ftp://some.host/editme.txt nicht erstellen"
+
+#~ msgid "Set debug level"
+#~ msgstr "Debugging-Level setzen"
+
+#~ msgid "<integer>"
+#~ msgstr "<integer>"
+
+#, c-format
+#~ msgid "Password for \\\\%s\\%s"
+#~ msgstr "Passwort für \\\\%s\\%s"
+
+#~ msgid "Domain:"
+#~ msgstr "Domain:"
+
+#~ msgid "Username:"
+#~ msgstr "Benutzername:"
+
+#~ msgid "SMB authentication"
+#~ msgstr "SMB-Authentifikation"
+
+#~ msgid "SMB link to machine"
+#~ msgstr "SMB-Verbindung zu Server"
+
+#~ msgid "SM&B link..."
+#~ msgstr "S&MB-Verbindung..."
+
+#, c-format
+#~ msgid "reconnect to %s failed"
+#~ msgstr "Wieder verbinden mit %s fehlgeschlagen"
+
+#~ msgid "Authentication failed"
+#~ msgstr "Authentifikation fehlgeschlagen"
+
+#, c-format
+#~ msgid "Error %s creating directory %s"
+#~ msgstr "Fehler %s beim Erstellen des Verzeichnisses %s"
+
+#, c-format
+#~ msgid "Error %s removing directory %s"
+#~ msgstr "Fehler %s beim Löschen des Verzeichnisses %s"
+
+#, c-format
+#~ msgid "%s opening remote file %s"
+#~ msgstr "%s beim Öffnen von entfernter Datei %s"
+
+#, c-format
+#~ msgid "%s removing remote file %s"
+#~ msgstr "%s beim Löschen von entfernter Datei %s"
+
+#, c-format
+#~ msgid "%s renaming files\n"
+#~ msgstr "%s beim Umbenennen von Dateien\n"

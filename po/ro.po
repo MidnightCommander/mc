@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-08-15 15:53+0200\n"
+"POT-Creation-Date: 2021-09-26 10:06+0300\n"
 "PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Romanian (http://www.transifex.com/mc/mc/language/ro/)\n"
@@ -669,12 +669,6 @@ msgstr "Dezactivează suportul subshell"
 
 msgid "Log ftp dialog to specified file"
 msgstr "Înregistrează dialogul ftp în fișierul specificat"
-
-msgid "Set debug level"
-msgstr "Nivelul de depanare"
-
-msgid "<integer>"
-msgstr "<integer>"
 
 msgid "Launches the file viewer on a file"
 msgstr "Lansează vizualizatorul pe un fișier"
@@ -2174,19 +2168,6 @@ msgid "Background jobs"
 msgstr "Sarcini în fundal"
 
 #, c-format
-msgid "Password for \\\\%s\\%s"
-msgstr "Parola pentru \\\\%s\\%s"
-
-msgid "Domain:"
-msgstr "Domeniu:"
-
-msgid "Username:"
-msgstr "Nume proprietar:"
-
-msgid "SMB authentication"
-msgstr "Autentificare SMB"
-
-#, c-format
 msgid ""
 "Cannot chdir to \"%s\"\n"
 "%s"
@@ -2506,9 +2487,6 @@ msgstr "SFTP către mașina"
 
 msgid "Shell link to machine"
 msgstr "Legătură shell către mașina"
-
-msgid "SMB link to machine"
-msgstr "Legătură SMB către mașina"
 
 msgid "Undelete files on an ext2 file system"
 msgstr "Recuperare fișiere dintr-o partiție de tip ext2"
@@ -3105,9 +3083,6 @@ msgstr "Conectare s&hell..."
 
 msgid "S&FTP link..."
 msgstr "Conectare S&FTP..."
-
-msgid "SM&B link..."
-msgstr "Conectare SM&B..."
 
 msgid "Paneli&ze"
 msgstr "Paneli&zare"
@@ -4491,33 +4466,6 @@ msgid "sftp: Listing done."
 msgstr "sftp: Afișarea a fost efectuată."
 
 #, c-format
-msgid "reconnect to %s failed"
-msgstr "reconectarea la %s a eșuat"
-
-msgid "Authentication failed"
-msgstr "Autentificarea a eșuat"
-
-#, c-format
-msgid "Error %s creating directory %s"
-msgstr "Eroare %s la crearea dosarului %s"
-
-#, c-format
-msgid "Error %s removing directory %s"
-msgstr "Eroare %s la ștergerea dosarului %s"
-
-#, c-format
-msgid "%s opening remote file %s"
-msgstr "%s se deschide fișierul de la distanță %s"
-
-#, c-format
-msgid "%s removing remote file %s"
-msgstr "%s se șterge fișierul de la distanță %s"
-
-#, c-format
-msgid "%s renaming files\n"
-msgstr "%s se redenumesc fișierele\n"
-
-#, c-format
 msgid ""
 "Cannot open tar archive\n"
 "%s"
@@ -4730,3 +4678,55 @@ msgstr "Continuă de la început?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nu se poate aduce o copie locală a /ftp://some.host/editme.txt"
+
+#~ msgid "Set debug level"
+#~ msgstr "Nivelul de depanare"
+
+#~ msgid "<integer>"
+#~ msgstr "<integer>"
+
+#, c-format
+#~ msgid "Password for \\\\%s\\%s"
+#~ msgstr "Parola pentru \\\\%s\\%s"
+
+#~ msgid "Domain:"
+#~ msgstr "Domeniu:"
+
+#~ msgid "Username:"
+#~ msgstr "Nume proprietar:"
+
+#~ msgid "SMB authentication"
+#~ msgstr "Autentificare SMB"
+
+#~ msgid "SMB link to machine"
+#~ msgstr "Legătură SMB către mașina"
+
+#~ msgid "SM&B link..."
+#~ msgstr "Conectare SM&B..."
+
+#, c-format
+#~ msgid "reconnect to %s failed"
+#~ msgstr "reconectarea la %s a eșuat"
+
+#~ msgid "Authentication failed"
+#~ msgstr "Autentificarea a eșuat"
+
+#, c-format
+#~ msgid "Error %s creating directory %s"
+#~ msgstr "Eroare %s la crearea dosarului %s"
+
+#, c-format
+#~ msgid "Error %s removing directory %s"
+#~ msgstr "Eroare %s la ștergerea dosarului %s"
+
+#, c-format
+#~ msgid "%s opening remote file %s"
+#~ msgstr "%s se deschide fișierul de la distanță %s"
+
+#, c-format
+#~ msgid "%s removing remote file %s"
+#~ msgstr "%s se șterge fișierul de la distanță %s"
+
+#, c-format
+#~ msgid "%s renaming files\n"
+#~ msgstr "%s se redenumesc fișierele\n"

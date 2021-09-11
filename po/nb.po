@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-08-15 15:53+0200\n"
+"POT-Creation-Date: 2021-09-26 10:06+0300\n"
 "PO-Revision-Date: 2021-07-29 12:31+0000\n"
 "Last-Translator: heskjestad <cato@heskjestad.xyz>\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/mc/mc/language/"
@@ -665,12 +665,6 @@ msgstr "Slå av støtte for underskall"
 
 msgid "Log ftp dialog to specified file"
 msgstr "Logg FTP-dialogen til angitt fil"
-
-msgid "Set debug level"
-msgstr "Velg feilsøkingsnivå"
-
-msgid "<integer>"
-msgstr "<heltall>"
 
 msgid "Launches the file viewer on a file"
 msgstr "Vis innholdet til en fil"
@@ -2172,19 +2166,6 @@ msgid "Background jobs"
 msgstr "Bakgrunnsjobber"
 
 #, c-format
-msgid "Password for \\\\%s\\%s"
-msgstr "Passord for \\\\%s\\%s"
-
-msgid "Domain:"
-msgstr "Domene:"
-
-msgid "Username:"
-msgstr "Brukernavn:"
-
-msgid "SMB authentication"
-msgstr "SMB-autentisering"
-
-#, c-format
 msgid ""
 "Cannot chdir to \"%s\"\n"
 "%s"
@@ -2504,9 +2485,6 @@ msgstr "Koble til SFTP"
 
 msgid "Shell link to machine"
 msgstr "Koble til skall"
-
-msgid "SMB link to machine"
-msgstr "Koble til SMB"
 
 msgid "Undelete files on an ext2 file system"
 msgstr "Gjenopprett filer i et ext2-filsystem"
@@ -3104,9 +3082,6 @@ msgstr "Koble til &skall ..."
 
 msgid "S&FTP link..."
 msgstr "K&oble til SFTP ..."
-
-msgid "SM&B link..."
-msgstr "Koble til SM&B ..."
 
 msgid "Paneli&ze"
 msgstr "&Vis lagt til i panel"
@@ -4499,33 +4474,6 @@ msgid "sftp: Listing done."
 msgstr "sftp: Utlisting ferdig."
 
 #, c-format
-msgid "reconnect to %s failed"
-msgstr "klarte ikke koble til %s på nytt"
-
-msgid "Authentication failed"
-msgstr "Autentisering mislyktes"
-
-#, c-format
-msgid "Error %s creating directory %s"
-msgstr "Feilen «%s» oppstod under oppretting av mappa %s"
-
-#, c-format
-msgid "Error %s removing directory %s"
-msgstr "Feilen «%s» oppstod under sletting av mappa %s"
-
-#, c-format
-msgid "%s opening remote file %s"
-msgstr "%s ved åpning av ekstern fil %s"
-
-#, c-format
-msgid "%s removing remote file %s"
-msgstr "%s ved sletting av ekstern fil %s"
-
-#, c-format
-msgid "%s renaming files\n"
-msgstr "%s ved endring av filnavn\n"
-
-#, c-format
 msgid ""
 "Cannot open tar archive\n"
 "%s"
@@ -4738,3 +4686,55 @@ msgstr "Fortsett fra begynnelsen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Klarte ikke hente en lokal kopi av /ftp://some.host/editme.txt"
+
+#~ msgid "Set debug level"
+#~ msgstr "Velg feilsøkingsnivå"
+
+#~ msgid "<integer>"
+#~ msgstr "<heltall>"
+
+#, c-format
+#~ msgid "Password for \\\\%s\\%s"
+#~ msgstr "Passord for \\\\%s\\%s"
+
+#~ msgid "Domain:"
+#~ msgstr "Domene:"
+
+#~ msgid "Username:"
+#~ msgstr "Brukernavn:"
+
+#~ msgid "SMB authentication"
+#~ msgstr "SMB-autentisering"
+
+#~ msgid "SMB link to machine"
+#~ msgstr "Koble til SMB"
+
+#~ msgid "SM&B link..."
+#~ msgstr "Koble til SM&B ..."
+
+#, c-format
+#~ msgid "reconnect to %s failed"
+#~ msgstr "klarte ikke koble til %s på nytt"
+
+#~ msgid "Authentication failed"
+#~ msgstr "Autentisering mislyktes"
+
+#, c-format
+#~ msgid "Error %s creating directory %s"
+#~ msgstr "Feilen «%s» oppstod under oppretting av mappa %s"
+
+#, c-format
+#~ msgid "Error %s removing directory %s"
+#~ msgstr "Feilen «%s» oppstod under sletting av mappa %s"
+
+#, c-format
+#~ msgid "%s opening remote file %s"
+#~ msgstr "%s ved åpning av ekstern fil %s"
+
+#, c-format
+#~ msgid "%s removing remote file %s"
+#~ msgstr "%s ved sletting av ekstern fil %s"
+
+#, c-format
+#~ msgid "%s renaming files\n"
+#~ msgstr "%s ved endring av filnavn\n"

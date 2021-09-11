@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-08-15 15:53+0200\n"
+"POT-Creation-Date: 2021-09-26 10:06+0300\n"
 "PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Mongolian (http://www.transifex.com/mc/mc/language/mn/)\n"
@@ -634,12 +634,6 @@ msgstr "Subshell боломжыг хаах"
 
 msgid "Log ftp dialog to specified file"
 msgstr "Тусгайлсан файл руу тэмдэглэх FTP диалог"
-
-msgid "Set debug level"
-msgstr "Дебаг түвшинг тодорхойлох"
-
-msgid "<integer>"
-msgstr ""
 
 msgid "Launches the file viewer on a file"
 msgstr "Файл харагчыг ажиллуулах"
@@ -2065,19 +2059,6 @@ msgid "Background jobs"
 msgstr ""
 
 #, c-format
-msgid "Password for \\\\%s\\%s"
-msgstr "\\\\%s\\%s ийн Нууц үг"
-
-msgid "Domain:"
-msgstr "Домен:"
-
-msgid "Username:"
-msgstr "Хэрэглэгчийн нэр:"
-
-msgid "SMB authentication"
-msgstr ""
-
-#, c-format
 msgid ""
 "Cannot chdir to \"%s\"\n"
 "%s"
@@ -2388,9 +2369,6 @@ msgid "SFTP to machine"
 msgstr ""
 
 msgid "Shell link to machine"
-msgstr ""
-
-msgid "SMB link to machine"
 msgstr ""
 
 msgid "Undelete files on an ext2 file system"
@@ -2904,9 +2882,6 @@ msgstr "S&hell-холбоос..."
 
 msgid "S&FTP link..."
 msgstr ""
-
-msgid "SM&B link..."
-msgstr "SM&B-холбоос..."
 
 msgid "Paneli&ze"
 msgstr "&Панелиз"
@@ -4250,33 +4225,6 @@ msgid "sftp: Listing done."
 msgstr ""
 
 #, c-format
-msgid "reconnect to %s failed"
-msgstr ""
-
-msgid "Authentication failed"
-msgstr ""
-
-#, c-format
-msgid "Error %s creating directory %s"
-msgstr ""
-
-#, c-format
-msgid "Error %s removing directory %s"
-msgstr ""
-
-#, c-format
-msgid "%s opening remote file %s"
-msgstr ""
-
-#, c-format
-msgid "%s removing remote file %s"
-msgstr ""
-
-#, c-format
-msgid "%s renaming files\n"
-msgstr ""
-
-#, c-format
 msgid ""
 "Cannot open tar archive\n"
 "%s"
@@ -4471,3 +4419,19 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Set debug level"
+#~ msgstr "Дебаг түвшинг тодорхойлох"
+
+#, c-format
+#~ msgid "Password for \\\\%s\\%s"
+#~ msgstr "\\\\%s\\%s ийн Нууц үг"
+
+#~ msgid "Domain:"
+#~ msgstr "Домен:"
+
+#~ msgid "Username:"
+#~ msgstr "Хэрэглэгчийн нэр:"
+
+#~ msgid "SM&B link..."
+#~ msgstr "SM&B-холбоос..."

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-08-15 15:53+0200\n"
+"POT-Creation-Date: 2021-09-26 10:06+0300\n"
 "PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Turkish (http://www.transifex.com/mc/mc/language/tr/)\n"
@@ -653,12 +653,6 @@ msgstr "Altkabuk desteğini kapatır"
 
 msgid "Log ftp dialog to specified file"
 msgstr "ftp dialog günlüğünü belirtilen dosyaya yazar"
-
-msgid "Set debug level"
-msgstr "Hata ayıklama seviyesini ayarla"
-
-msgid "<integer>"
-msgstr "<integer>"
 
 msgid "Launches the file viewer on a file"
 msgstr "Bir dosyayı dosya göstericide açar"
@@ -2159,19 +2153,6 @@ msgid "Background jobs"
 msgstr "Artalan İşleri"
 
 #, c-format
-msgid "Password for \\\\%s\\%s"
-msgstr "\\\\%s\\%s için parola"
-
-msgid "Domain:"
-msgstr "Alan adı: "
-
-msgid "Username:"
-msgstr "Kullanıcı: "
-
-msgid "SMB authentication"
-msgstr "SMB kimlik doğrulama"
-
-#, c-format
 msgid ""
 "Cannot chdir to \"%s\"\n"
 "%s"
@@ -2487,9 +2468,6 @@ msgstr "makinaya SFTP"
 
 msgid "Shell link to machine"
 msgstr "Makinaya SSH bağ"
-
-msgid "SMB link to machine"
-msgstr "makinaya SMB bağ"
 
 msgid "Undelete files on an ext2 file system"
 msgstr "Bir ext2 dosya sistemi üzerinde silinen dosyaları kurtarır"
@@ -3082,9 +3060,6 @@ msgstr "&SSH bağı..."
 
 msgid "S&FTP link..."
 msgstr "FT&P bağı..."
-
-msgid "SM&B link..."
-msgstr "S&MB bağı..."
 
 msgid "Paneli&ze"
 msgstr "Pane&lle"
@@ -4448,33 +4423,6 @@ msgid "sftp: Listing done."
 msgstr "sftp: Listeleme yapıldı."
 
 #, c-format
-msgid "reconnect to %s failed"
-msgstr "%s ile tekrar bağlantı kurulamadı"
-
-msgid "Authentication failed"
-msgstr "Kimlik denetimi başarısız oldu"
-
-#, c-format
-msgid "Error %s creating directory %s"
-msgstr "%s %s dizinini yaratıyor"
-
-#, c-format
-msgid "Error %s removing directory %s"
-msgstr "%s %s dizinini siliyor"
-
-#, c-format
-msgid "%s opening remote file %s"
-msgstr "%s karşıdaki %s dosyasını açıyor"
-
-#, c-format
-msgid "%s removing remote file %s"
-msgstr "%s karşıdaki %s dosyasını siliyor"
-
-#, c-format
-msgid "%s renaming files\n"
-msgstr "%s dosyaları yeniden adlandırılıyor\n"
-
-#, c-format
 msgid ""
 "Cannot open tar archive\n"
 "%s"
@@ -4687,3 +4635,55 @@ msgstr "Başından devam edilsin mi?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr " /ftp://some.host/editme.txt 'in yerel kopyası alınamadı"
+
+#~ msgid "Set debug level"
+#~ msgstr "Hata ayıklama seviyesini ayarla"
+
+#~ msgid "<integer>"
+#~ msgstr "<integer>"
+
+#, c-format
+#~ msgid "Password for \\\\%s\\%s"
+#~ msgstr "\\\\%s\\%s için parola"
+
+#~ msgid "Domain:"
+#~ msgstr "Alan adı: "
+
+#~ msgid "Username:"
+#~ msgstr "Kullanıcı: "
+
+#~ msgid "SMB authentication"
+#~ msgstr "SMB kimlik doğrulama"
+
+#~ msgid "SMB link to machine"
+#~ msgstr "makinaya SMB bağ"
+
+#~ msgid "SM&B link..."
+#~ msgstr "S&MB bağı..."
+
+#, c-format
+#~ msgid "reconnect to %s failed"
+#~ msgstr "%s ile tekrar bağlantı kurulamadı"
+
+#~ msgid "Authentication failed"
+#~ msgstr "Kimlik denetimi başarısız oldu"
+
+#, c-format
+#~ msgid "Error %s creating directory %s"
+#~ msgstr "%s %s dizinini yaratıyor"
+
+#, c-format
+#~ msgid "Error %s removing directory %s"
+#~ msgstr "%s %s dizinini siliyor"
+
+#, c-format
+#~ msgid "%s opening remote file %s"
+#~ msgstr "%s karşıdaki %s dosyasını açıyor"
+
+#, c-format
+#~ msgid "%s removing remote file %s"
+#~ msgstr "%s karşıdaki %s dosyasını siliyor"
+
+#, c-format
+#~ msgid "%s renaming files\n"
+#~ msgstr "%s dosyaları yeniden adlandırılıyor\n"

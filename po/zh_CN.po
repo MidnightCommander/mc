@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-08-15 15:53+0200\n"
+"POT-Creation-Date: 2021-09-26 10:06+0300\n"
 "PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/mc/mc/language/"
@@ -662,12 +662,6 @@ msgstr "禁用子 shell 支持"
 
 msgid "Log ftp dialog to specified file"
 msgstr "记录 ftp 对话到指定的文件"
-
-msgid "Set debug level"
-msgstr "设置调试级别"
-
-msgid "<integer>"
-msgstr "<integer>"
 
 msgid "Launches the file viewer on a file"
 msgstr "在文件上启动文件查看器"
@@ -2158,19 +2152,6 @@ msgid "Background jobs"
 msgstr "后台任务"
 
 #, c-format
-msgid "Password for \\\\%s\\%s"
-msgstr "\\\\%s\\%s 的密码"
-
-msgid "Domain:"
-msgstr "域: "
-
-msgid "Username:"
-msgstr "用户名: "
-
-msgid "SMB authentication"
-msgstr "SMB 认证"
-
-#, c-format
 msgid ""
 "Cannot chdir to \"%s\"\n"
 "%s"
@@ -2486,9 +2467,6 @@ msgstr "SFTP 到主机"
 
 msgid "Shell link to machine"
 msgstr "Shell 链接到主机"
-
-msgid "SMB link to machine"
-msgstr "SMB 链接到主机"
 
 msgid "Undelete files on an ext2 file system"
 msgstr "反删除 ext2 文件系统上的文件"
@@ -3083,9 +3061,6 @@ msgstr "S&hell 链接..."
 
 msgid "S&FTP link..."
 msgstr "SFTP 链接(&S)..."
-
-msgid "SM&B link..."
-msgstr "SMB 链接(&B)..."
 
 msgid "Paneli&ze"
 msgstr "面板化(&Z)"
@@ -4443,33 +4418,6 @@ msgid "sftp: Listing done."
 msgstr "sftp: 列出完毕。"
 
 #, c-format
-msgid "reconnect to %s failed"
-msgstr "重新连接 %s 失败"
-
-msgid "Authentication failed"
-msgstr "验证失败"
-
-#, c-format
-msgid "Error %s creating directory %s"
-msgstr "创建目录 %s 时出错 %s"
-
-#, c-format
-msgid "Error %s removing directory %s"
-msgstr "删除目录 %s 时出错 %s"
-
-#, c-format
-msgid "%s opening remote file %s"
-msgstr "%s 正在打开远程文件 %s"
-
-#, c-format
-msgid "%s removing remote file %s"
-msgstr "%s 正在删除远程文件 %s"
-
-#, c-format
-msgid "%s renaming files\n"
-msgstr "%s 正在重命名文件\n"
-
-#, c-format
 msgid ""
 "Cannot open tar archive\n"
 "%s"
@@ -4682,3 +4630,55 @@ msgstr "从头继续搜索?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "无法获取 /ftp://some.host/editme.txt 的本地副本"
+
+#~ msgid "Set debug level"
+#~ msgstr "设置调试级别"
+
+#~ msgid "<integer>"
+#~ msgstr "<integer>"
+
+#, c-format
+#~ msgid "Password for \\\\%s\\%s"
+#~ msgstr "\\\\%s\\%s 的密码"
+
+#~ msgid "Domain:"
+#~ msgstr "域: "
+
+#~ msgid "Username:"
+#~ msgstr "用户名: "
+
+#~ msgid "SMB authentication"
+#~ msgstr "SMB 认证"
+
+#~ msgid "SMB link to machine"
+#~ msgstr "SMB 链接到主机"
+
+#~ msgid "SM&B link..."
+#~ msgstr "SMB 链接(&B)..."
+
+#, c-format
+#~ msgid "reconnect to %s failed"
+#~ msgstr "重新连接 %s 失败"
+
+#~ msgid "Authentication failed"
+#~ msgstr "验证失败"
+
+#, c-format
+#~ msgid "Error %s creating directory %s"
+#~ msgstr "创建目录 %s 时出错 %s"
+
+#, c-format
+#~ msgid "Error %s removing directory %s"
+#~ msgstr "删除目录 %s 时出错 %s"
+
+#, c-format
+#~ msgid "%s opening remote file %s"
+#~ msgstr "%s 正在打开远程文件 %s"
+
+#, c-format
+#~ msgid "%s removing remote file %s"
+#~ msgstr "%s 正在删除远程文件 %s"
+
+#, c-format
+#~ msgid "%s renaming files\n"
+#~ msgstr "%s 正在重命名文件\n"

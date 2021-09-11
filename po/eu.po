@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-08-15 15:53+0200\n"
+"POT-Creation-Date: 2021-09-26 10:06+0300\n"
 "PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Basque (http://www.transifex.com/mc/mc/language/eu/)\n"
@@ -656,12 +656,6 @@ msgstr "Subshell euskarria desgaitzen du"
 
 msgid "Log ftp dialog to specified file"
 msgstr "Gorde ftp elkarrizketa zehaztutako fitxategian"
-
-msgid "Set debug level"
-msgstr "Ezarri arazketa maila"
-
-msgid "<integer>"
-msgstr "<integer>"
 
 msgid "Launches the file viewer on a file"
 msgstr "Fitxategi-ikustailea fitxategian abiarazten du"
@@ -2161,19 +2155,6 @@ msgid "Background jobs"
 msgstr "Hondoko lanak"
 
 #, c-format
-msgid "Password for \\\\%s\\%s"
-msgstr "\\\\%s\\%s(r)entzako pasahitza"
-
-msgid "Domain:"
-msgstr "Domeinua:"
-
-msgid "Username:"
-msgstr "Erabiltzaile izena:"
-
-msgid "SMB authentication"
-msgstr "SMB autentikazioa"
-
-#, c-format
 msgid ""
 "Cannot chdir to \"%s\"\n"
 "%s"
@@ -2489,9 +2470,6 @@ msgstr "SFTP makinara"
 
 msgid "Shell link to machine"
 msgstr "Shell esteka makinara"
-
-msgid "SMB link to machine"
-msgstr "SMB esteka makinara"
 
 msgid "Undelete files on an ext2 file system"
 msgstr "Berreskuratu ezabatutako fitxategiak ext2 fitxategi sistema batean"
@@ -3092,9 +3070,6 @@ msgstr "S&hell esteka..."
 
 msgid "S&FTP link..."
 msgstr "S&FTP esteka..."
-
-msgid "SM&B link..."
-msgstr "S&MB esteka..."
 
 msgid "Paneli&ze"
 msgstr "Panelerat&u"
@@ -4458,33 +4433,6 @@ msgid "sftp: Listing done."
 msgstr "sftp: Zerrenda osatuta."
 
 #, c-format
-msgid "reconnect to %s failed"
-msgstr "%s(e)ra birkonektatzeak huts egin du"
-
-msgid "Authentication failed"
-msgstr "Autentifikatzeak huts egin du"
-
-#, c-format
-msgid "Error %s creating directory %s"
-msgstr "%s akatsa %s direktorioa sortzerakoan"
-
-#, c-format
-msgid "Error %s removing directory %s"
-msgstr "%s akatsa %s direktorioa ezabatzerakoan"
-
-#, c-format
-msgid "%s opening remote file %s"
-msgstr "%s urruneko %s fitxategia irekitzen"
-
-#, c-format
-msgid "%s removing remote file %s"
-msgstr "%s urruneko %s fitxategia ezabatzen"
-
-#, c-format
-msgid "%s renaming files\n"
-msgstr "%s fitxategiak berrizendatzen\n"
-
-#, c-format
 msgid ""
 "Cannot open tar archive\n"
 "%s"
@@ -4699,3 +4647,55 @@ msgstr "Hasieratik jarraitu?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Ezin eskuratu ondokoaren bertako kopia bat: /ftp://some.host/editme.txt"
+
+#~ msgid "Set debug level"
+#~ msgstr "Ezarri arazketa maila"
+
+#~ msgid "<integer>"
+#~ msgstr "<integer>"
+
+#, c-format
+#~ msgid "Password for \\\\%s\\%s"
+#~ msgstr "\\\\%s\\%s(r)entzako pasahitza"
+
+#~ msgid "Domain:"
+#~ msgstr "Domeinua:"
+
+#~ msgid "Username:"
+#~ msgstr "Erabiltzaile izena:"
+
+#~ msgid "SMB authentication"
+#~ msgstr "SMB autentikazioa"
+
+#~ msgid "SMB link to machine"
+#~ msgstr "SMB esteka makinara"
+
+#~ msgid "SM&B link..."
+#~ msgstr "S&MB esteka..."
+
+#, c-format
+#~ msgid "reconnect to %s failed"
+#~ msgstr "%s(e)ra birkonektatzeak huts egin du"
+
+#~ msgid "Authentication failed"
+#~ msgstr "Autentifikatzeak huts egin du"
+
+#, c-format
+#~ msgid "Error %s creating directory %s"
+#~ msgstr "%s akatsa %s direktorioa sortzerakoan"
+
+#, c-format
+#~ msgid "Error %s removing directory %s"
+#~ msgstr "%s akatsa %s direktorioa ezabatzerakoan"
+
+#, c-format
+#~ msgid "%s opening remote file %s"
+#~ msgstr "%s urruneko %s fitxategia irekitzen"
+
+#, c-format
+#~ msgid "%s removing remote file %s"
+#~ msgstr "%s urruneko %s fitxategia ezabatzen"
+
+#, c-format
+#~ msgid "%s renaming files\n"
+#~ msgstr "%s fitxategiak berrizendatzen\n"

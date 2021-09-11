@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-08-15 15:53+0200\n"
+"POT-Creation-Date: 2021-09-26 10:06+0300\n"
 "PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Serbian (http://www.transifex.com/mc/mc/language/sr/)\n"
@@ -649,12 +649,6 @@ msgstr "Искључује подршку за подљуске"
 
 msgid "Log ftp dialog to specified file"
 msgstr "Бележи садржај фтп прозорчета у задану датотеку"
-
-msgid "Set debug level"
-msgstr "Подешава ниво прочишћавања"
-
-msgid "<integer>"
-msgstr ""
 
 msgid "Launches the file viewer on a file"
 msgstr "Покреће прегледач датотека над датотеком"
@@ -2148,19 +2142,6 @@ msgid "Background jobs"
 msgstr "Позадински послови"
 
 #, c-format
-msgid "Password for \\\\%s\\%s"
-msgstr "Лозинка за „\\\\%s\\%s“"
-
-msgid "Domain:"
-msgstr "Домен:"
-
-msgid "Username:"
-msgstr "Корисник:"
-
-msgid "SMB authentication"
-msgstr "СМБ потврђивање идентитета"
-
-#, c-format
 msgid ""
 "Cannot chdir to \"%s\"\n"
 "%s"
@@ -2476,9 +2457,6 @@ msgstr "СФТП на рачунар"
 
 msgid "Shell link to machine"
 msgstr "Веза љуске на рачунар"
-
-msgid "SMB link to machine"
-msgstr "СМБ веза на рачунар"
 
 msgid "Undelete files on an ext2 file system"
 msgstr "Поништите брисање датотека на екст2 систему датотека"
@@ -3066,9 +3044,6 @@ msgstr "Веза &љуске..."
 
 msgid "S&FTP link..."
 msgstr "&СФТП веза..."
-
-msgid "SM&B link..."
-msgstr "СМ&Б веза..."
 
 msgid "Paneli&ze"
 msgstr "Претвори &у окно"
@@ -4435,33 +4410,6 @@ msgid "sftp: Listing done."
 msgstr "sftp: Исписивање је готово."
 
 #, c-format
-msgid "reconnect to %s failed"
-msgstr "поновно повезивање на „%s“ није успело"
-
-msgid "Authentication failed"
-msgstr "Потврђивање идентитета није успело"
-
-#, c-format
-msgid "Error %s creating directory %s"
-msgstr "Грешка „%s“ прављења директоријума „%s“"
-
-#, c-format
-msgid "Error %s removing directory %s"
-msgstr "Грешка „%s“ уклањања директоријума „%s“"
-
-#, c-format
-msgid "%s opening remote file %s"
-msgstr "„%s“ отвара удаљену датотеку „%s“"
-
-#, c-format
-msgid "%s removing remote file %s"
-msgstr "„%s“ уклања удаљену датотеку „%s“"
-
-#, c-format
-msgid "%s renaming files\n"
-msgstr "„%s“ преименује датотеке\n"
-
-#, c-format
 msgid ""
 "Cannot open tar archive\n"
 "%s"
@@ -4674,3 +4622,52 @@ msgstr "Да наставим са почетка?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не могу да довучем месни примерак „/ftp://some.host/editme.txt“"
+
+#~ msgid "Set debug level"
+#~ msgstr "Подешава ниво прочишћавања"
+
+#, c-format
+#~ msgid "Password for \\\\%s\\%s"
+#~ msgstr "Лозинка за „\\\\%s\\%s“"
+
+#~ msgid "Domain:"
+#~ msgstr "Домен:"
+
+#~ msgid "Username:"
+#~ msgstr "Корисник:"
+
+#~ msgid "SMB authentication"
+#~ msgstr "СМБ потврђивање идентитета"
+
+#~ msgid "SMB link to machine"
+#~ msgstr "СМБ веза на рачунар"
+
+#~ msgid "SM&B link..."
+#~ msgstr "СМ&Б веза..."
+
+#, c-format
+#~ msgid "reconnect to %s failed"
+#~ msgstr "поновно повезивање на „%s“ није успело"
+
+#~ msgid "Authentication failed"
+#~ msgstr "Потврђивање идентитета није успело"
+
+#, c-format
+#~ msgid "Error %s creating directory %s"
+#~ msgstr "Грешка „%s“ прављења директоријума „%s“"
+
+#, c-format
+#~ msgid "Error %s removing directory %s"
+#~ msgstr "Грешка „%s“ уклањања директоријума „%s“"
+
+#, c-format
+#~ msgid "%s opening remote file %s"
+#~ msgstr "„%s“ отвара удаљену датотеку „%s“"
+
+#, c-format
+#~ msgid "%s removing remote file %s"
+#~ msgstr "„%s“ уклања удаљену датотеку „%s“"
+
+#, c-format
+#~ msgid "%s renaming files\n"
+#~ msgstr "„%s“ преименује датотеке\n"

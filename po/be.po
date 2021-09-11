@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-08-15 15:53+0200\n"
+"POT-Creation-Date: 2021-09-26 10:06+0300\n"
 "PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Belarusian (http://www.transifex.com/mc/mc/language/be/)\n"
@@ -670,12 +670,6 @@ msgstr "Не падтрымліваць убудаваную абалонку"
 
 msgid "Log ftp dialog to specified file"
 msgstr "Запісваць дыялог па FTP у вызначаны файл"
-
-msgid "Set debug level"
-msgstr "Вызначыць узровень пошуку хібаў"
-
-msgid "<integer>"
-msgstr "<integer>"
 
 msgid "Launches the file viewer on a file"
 msgstr "Праглядзець файл"
@@ -2169,19 +2163,6 @@ msgid "Background jobs"
 msgstr "Фонавыя задачы"
 
 #, c-format
-msgid "Password for \\\\%s\\%s"
-msgstr "Пароль на \\\\%s\\%s"
-
-msgid "Domain:"
-msgstr "Дамен:"
-
-msgid "Username:"
-msgstr "Імя карыстальніка:"
-
-msgid "SMB authentication"
-msgstr "Аўтэнтыфікацыя SMB"
-
-#, c-format
 msgid ""
 "Cannot chdir to \"%s\"\n"
 "%s"
@@ -2497,9 +2478,6 @@ msgstr "Злучыцца праз SFTP"
 
 msgid "Shell link to machine"
 msgstr "Злучыцца праз абалонку"
-
-msgid "SMB link to machine"
-msgstr "Злучыцца праз SMB"
 
 msgid "Undelete files on an ext2 file system"
 msgstr "Аднавіць файлы на файлавай сістэме «ext2»"
@@ -3095,9 +3073,6 @@ msgstr "Злучэнне праз абалонку(&H)..."
 
 msgid "S&FTP link..."
 msgstr "Злучэнне праз SFTP(&F)..."
-
-msgid "SM&B link..."
-msgstr "Злучэнне праз SMB(&B)..."
 
 msgid "Paneli&ze"
 msgstr "На панэлі(&Z)"
@@ -4470,33 +4445,6 @@ msgid "sftp: Listing done."
 msgstr "sftp: спіс прачытаны."
 
 #, c-format
-msgid "reconnect to %s failed"
-msgstr "зноўку не атрымалася злучыцца з «%s»"
-
-msgid "Authentication failed"
-msgstr "Аўтэнтыфікацыя не ўдалася"
-
-#, c-format
-msgid "Error %s creating directory %s"
-msgstr "Памылка (%s) падчас стварэння каталога «%s»"
-
-#, c-format
-msgid "Error %s removing directory %s"
-msgstr "Памылка (%s) падчас выдалення каталога «%s»"
-
-#, c-format
-msgid "%s opening remote file %s"
-msgstr "%s падчас адкрыцця адлеглага файла «%s»"
-
-#, c-format
-msgid "%s removing remote file %s"
-msgstr "%s падчас выдалення адлеглага файла «%s»"
-
-#, c-format
-msgid "%s renaming files\n"
-msgstr "%s падчас змены назвы файла\n"
-
-#, c-format
 msgid ""
 "Cannot open tar archive\n"
 "%s"
@@ -4709,3 +4657,55 @@ msgstr "Працягваць ад пачатку?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Немагчыма атрымаць лакальную копію /ftp://some.host/editme.txt"
+
+#~ msgid "Set debug level"
+#~ msgstr "Вызначыць узровень пошуку хібаў"
+
+#~ msgid "<integer>"
+#~ msgstr "<integer>"
+
+#, c-format
+#~ msgid "Password for \\\\%s\\%s"
+#~ msgstr "Пароль на \\\\%s\\%s"
+
+#~ msgid "Domain:"
+#~ msgstr "Дамен:"
+
+#~ msgid "Username:"
+#~ msgstr "Імя карыстальніка:"
+
+#~ msgid "SMB authentication"
+#~ msgstr "Аўтэнтыфікацыя SMB"
+
+#~ msgid "SMB link to machine"
+#~ msgstr "Злучыцца праз SMB"
+
+#~ msgid "SM&B link..."
+#~ msgstr "Злучэнне праз SMB(&B)..."
+
+#, c-format
+#~ msgid "reconnect to %s failed"
+#~ msgstr "зноўку не атрымалася злучыцца з «%s»"
+
+#~ msgid "Authentication failed"
+#~ msgstr "Аўтэнтыфікацыя не ўдалася"
+
+#, c-format
+#~ msgid "Error %s creating directory %s"
+#~ msgstr "Памылка (%s) падчас стварэння каталога «%s»"
+
+#, c-format
+#~ msgid "Error %s removing directory %s"
+#~ msgstr "Памылка (%s) падчас выдалення каталога «%s»"
+
+#, c-format
+#~ msgid "%s opening remote file %s"
+#~ msgstr "%s падчас адкрыцця адлеглага файла «%s»"
+
+#, c-format
+#~ msgid "%s removing remote file %s"
+#~ msgstr "%s падчас выдалення адлеглага файла «%s»"
+
+#, c-format
+#~ msgid "%s renaming files\n"
+#~ msgstr "%s падчас змены назвы файла\n"

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-08-15 15:53+0200\n"
+"POT-Creation-Date: 2021-09-26 10:06+0300\n"
 "PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Czech (http://www.transifex.com/mc/mc/language/cs/)\n"
@@ -669,12 +669,6 @@ msgstr "Vypíná podporu podřízeného shellu"
 
 msgid "Log ftp dialog to specified file"
 msgstr "Zapsat ftp dialog do zadaného souboru"
-
-msgid "Set debug level"
-msgstr "Nastavit stupeň podrobnosti ladících informací"
-
-msgid "<integer>"
-msgstr "<integer>"
 
 msgid "Launches the file viewer on a file"
 msgstr "Otevře soubor v prohlížeči"
@@ -2171,19 +2165,6 @@ msgid "Background jobs"
 msgstr "Úlohy na pozadí"
 
 #, c-format
-msgid "Password for \\\\%s\\%s"
-msgstr "Heslo pro \\\\%s\\%s"
-
-msgid "Domain:"
-msgstr "Doména:"
-
-msgid "Username:"
-msgstr "Uživatelské jméno:"
-
-msgid "SMB authentication"
-msgstr "SMB ověření"
-
-#, c-format
 msgid ""
 "Cannot chdir to \"%s\"\n"
 "%s"
@@ -2503,9 +2484,6 @@ msgstr "SFTP spojení na počítač"
 
 msgid "Shell link to machine"
 msgstr "Shellové spojení na počítač"
-
-msgid "SMB link to machine"
-msgstr "SMB spojení na počítač"
 
 msgid "Undelete files on an ext2 file system"
 msgstr "Obnovit soubory na souborovém systému typu ext2"
@@ -3105,9 +3083,6 @@ msgstr "S&hell spojení…"
 
 msgid "S&FTP link..."
 msgstr "SFTP sp&ojení…"
-
-msgid "SM&B link..."
-msgstr "SM&B spojení…"
 
 msgid "Paneli&ze"
 msgstr "Zobra&zit v panelu"
@@ -4483,33 +4458,6 @@ msgid "sftp: Listing done."
 msgstr "sftp: Vypsání dokončeno."
 
 #, c-format
-msgid "reconnect to %s failed"
-msgstr "obnovení připojení k %s se nezdařilo"
-
-msgid "Authentication failed"
-msgstr "Ověření se nezdařilo"
-
-#, c-format
-msgid "Error %s creating directory %s"
-msgstr "Chyba %s při vytváření složky %s"
-
-#, c-format
-msgid "Error %s removing directory %s"
-msgstr "Chyba %s při odstraňování složky %s"
-
-#, c-format
-msgid "%s opening remote file %s"
-msgstr "%s otevírání vzdáleného souboru %s"
-
-#, c-format
-msgid "%s removing remote file %s"
-msgstr "%s odstraňování vzdáleného souboru %s"
-
-#, c-format
-msgid "%s renaming files\n"
-msgstr "%s přejmenování souborů\n"
-
-#, c-format
 msgid ""
 "Cannot open tar archive\n"
 "%s"
@@ -4722,3 +4670,55 @@ msgstr "Pokračovat od začátku?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nedaří získat místní kopii souboru /ftp://some.host/editme.txt"
+
+#~ msgid "Set debug level"
+#~ msgstr "Nastavit stupeň podrobnosti ladících informací"
+
+#~ msgid "<integer>"
+#~ msgstr "<integer>"
+
+#, c-format
+#~ msgid "Password for \\\\%s\\%s"
+#~ msgstr "Heslo pro \\\\%s\\%s"
+
+#~ msgid "Domain:"
+#~ msgstr "Doména:"
+
+#~ msgid "Username:"
+#~ msgstr "Uživatelské jméno:"
+
+#~ msgid "SMB authentication"
+#~ msgstr "SMB ověření"
+
+#~ msgid "SMB link to machine"
+#~ msgstr "SMB spojení na počítač"
+
+#~ msgid "SM&B link..."
+#~ msgstr "SM&B spojení…"
+
+#, c-format
+#~ msgid "reconnect to %s failed"
+#~ msgstr "obnovení připojení k %s se nezdařilo"
+
+#~ msgid "Authentication failed"
+#~ msgstr "Ověření se nezdařilo"
+
+#, c-format
+#~ msgid "Error %s creating directory %s"
+#~ msgstr "Chyba %s při vytváření složky %s"
+
+#, c-format
+#~ msgid "Error %s removing directory %s"
+#~ msgstr "Chyba %s při odstraňování složky %s"
+
+#, c-format
+#~ msgid "%s opening remote file %s"
+#~ msgstr "%s otevírání vzdáleného souboru %s"
+
+#, c-format
+#~ msgid "%s removing remote file %s"
+#~ msgstr "%s odstraňování vzdáleného souboru %s"
+
+#, c-format
+#~ msgid "%s renaming files\n"
+#~ msgstr "%s přejmenování souborů\n"
