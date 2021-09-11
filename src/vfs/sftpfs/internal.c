@@ -503,6 +503,7 @@ sftpfs_chmod (const vfs_path_t * vpath, mode_t mode, GError ** mcerror)
     if (res < 0)
         return res;
 
+    attrs.flags = LIBSSH2_SFTP_ATTR_PERMISSIONS;
     attrs.permissions = mode;
 
     do
