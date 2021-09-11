@@ -60,7 +60,6 @@ CPPCHECK_OUT_PREFIX = $(top_builddir)/cppcheck-
 CPPCHECK_OUT_EXT = log.txt
 
 CPPCHECK_SED_FILTER = \
-    -e '/\/src\/vfs\/smbfs\//d' \
     -e '/is reassigned a value before the old one has been used./d' \
     -e '/ Unmatched suppression: /d' \
     -e "/Skipping configuration '.*' since the value of '.*' is unknown./d"

@@ -25,9 +25,6 @@ extern gboolean mc_args__nokeymap;
 extern char *mc_args__last_wd_file;
 extern char *mc_args__netfs_logfile;
 extern char *mc_args__keymap_file;
-#ifdef ENABLE_VFS_SMB
-extern int mc_args__debug_level;
-#endif
 
 /*
  * MC_RUN_FULL: dir for left panel

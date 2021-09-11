@@ -181,9 +181,6 @@ static name_keymap_t command_names[] = {
 #ifdef ENABLE_VFS_SFTP
     ADD_KEYMAP_NAME (ConnectSftp),
 #endif
-#ifdef ENABLE_VFS_SMB
-    ADD_KEYMAP_NAME (ConnectSmb),
-#endif
     ADD_KEYMAP_NAME (PanelInfo),
 #ifdef ENABLE_BACKGROUND
     ADD_KEYMAP_NAME (Jobs),

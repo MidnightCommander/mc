@@ -2372,38 +2372,6 @@ dysku scsi Linux, będziesz musiał użyć następującej ścieżki:
 .PP
 Może to chwilkę potrwać zanim pliki zostaną pokazane i będziesz mógł je
 normalnie oglądać.
-.PP
-.\"NODE "  SMB File System"
-.SH "  SMB File System"
-The smbfs allows you to manipulate files on remote machines with SMB
-(or CIFS) protocol.  These include Windows for Workgroups,
-Windows 9x/ME/XP, Windows NT, Windows 2000 and Samba.
-To actually use it, you may try to use the panel command "SMB link..."
-(accessible from the menubar) or you may directly change your current
-directory to it using the cd command to a path name that looks like this:
-.PP
-.I smb://[user@]machine[/service][/remote\-dir]
-.PP
-The
-.IR user ,
-.I service
-and
-.I remote\-dir
-elements are optional.
-The
-.IR user ,
-.I domain
-and
-.I password
-can be specified in an input dialog.
-.PP
-Examples:
-.PP
-.nf
-    smb://machine/Share
-    smb://other_machine
-    smb://guest@machine/Public/Irlex
-.fi
 .\"NODE "  EXTernal File System"
 .SH "  EXTernal File System"
 .B extfs

@@ -54,10 +54,6 @@ Muestra opciones de configuración compiladas.
 .I \-d, \-\-nomouse
 Deshabilita el soporte de ratón.
 .TP
-.I \-D N, \-\-debuglevel=N
-Establece el nivel de depuración para el sistema de archivos virtual SMB.
-N puede estar en el rango 0\-10.
-.TP
 .I \-e [arch], \-\-edit[=arch]
 Iniciar el editor interno. Si se indica un archivo, editarlo. Véase la
 página de manual de
@@ -3108,10 +3104,7 @@ para manipular archivos a través de conexiones a shell como rsh o ssh.
 .PP
 Dependiendo de la forma en que fue compilado, puede disponer también de:
 .I sftpfs
-para manipular archivos en sistemas remotos a través de SFTP;
-.I SMBfs
-para  manipular archivos en sistemas remotos empleando el protocolo
-SMB (CIFS).
+para manipular archivos en sistemas remotos a través de SFTP.
 .PP
 Se facilita también un sistema de archivos genérico
 .I extfs
@@ -3266,37 +3259,6 @@ Ejemplos:
     sftp://pepe:k1abe@quiero.comprension.edu/privado
     sftp://pepe@sincomprimir.ssh.edu/privado
     sftp://pepe@maquina.ssh.edu:2222/privado
-.fi
-
-.\"NODE "  SMB File System"
-.SH "  Sistema de archivos SMB"
-El SMBfs permite manipular archivos en máquinas remotas con el protocolo
-denominado SMB (o CIFS). Esto incluye Windows Trabajo en Grupo, Windows
-9x/ME/XP, Windows NT, Windows 2000 y Samba. Para comenzar a usarlo,
-se puede emplear la "Conexión por SMB..." (accesible desde la barra de
-menús) o bien cambiar de directorio a un directorio virtual cuyo nombre
-sea de la forma:
-.PP
-.I smb://[usuario@]maquina[/recurso][/directorio\-remoto]
-.PP
-Los elementos
-.IR usuario ,
-.I recurso
-y
-.I directorio\-remoto
-son opcionales. El
-.IR usuario ,
-.I dominio
-y
-.I contraseña
-se pueden especificar en un cuadro de diálogo.
-.PP
-Ejemplos:
-.PP
-.nf
-    smb://maquina/Compartido
-    smb://otramaquina
-    smb://invitado@maquina/publico/leyes
 .fi
 
 .\"NODE "  Undelete File System"

@@ -34,10 +34,6 @@
 #include "lib/vfs/vfs.h"
 #include "lib/util.h"           /* x_basename() */
 
-#ifdef ENABLE_VFS_SMB
-#include "src/vfs/smbfs/smbfs.h"        /* smbfs_set_debugf()  */
-#endif
-
 #include "src/textconf.h"
 
 #include "src/args.h"
@@ -64,11 +60,6 @@ char *mc_args__netfs_logfile = NULL;
 
 /* keymap file */
 char *mc_args__keymap_file = NULL;
-
-/* Debug level */
-#ifdef ENABLE_VFS_SMB
-int mc_args__debug_level = 0;
-#endif
 
 void *mc_run_param0 = NULL;
 char *mc_run_param1 = NULL;
@@ -169,14 +160,6 @@ static const GOptionEntry argument_main_table[] = {
      N_("<file>")
     },
 #endif /* ENABLE_VFS_FTP */
-#ifdef ENABLE_VFS_SMB
-    {
-     "debuglevel", 'D', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_INT,
-     &mc_args__debug_level,
-     N_("Set debug level"),
-     N_("<integer>")
-    },
-#endif /* ENABLE_VFS_SMB */
 
     {
      /* handle arguments manually */
@@ -787,11 +770,6 @@ mc_setup_by_args (int argc, char **argv, GError ** mcerror)
         mc_global.tty.use_subshell = FALSE;
 #endif /* ENABLE_SUBSHELL */
 
-#ifdef ENABLE_VFS_SMB
-    if (mc_args__debug_level != 0)
-        smbfs_set_debug (mc_args__debug_level);
-#endif /* ENABLE_VFS_SMB */
-
     if (mc_args__netfs_logfile != NULL)
     {
         vfs_path_t *vpath;
@@ -800,11 +778,6 @@ mc_setup_by_args (int argc, char **argv, GError ** mcerror)
         mc_setctl (vpath, VFS_SETCTL_LOGFILE, (void *) mc_args__netfs_logfile);
         vfs_path_free (vpath, TRUE);
 #endif /* ENABLE_VFS_FTP */
-#ifdef ENABLE_VFS_SMB
-        vpath = vfs_path_from_str ("smb://");
-        mc_setctl (vpath, VFS_SETCTL_LOGFILE, (void *) mc_args__netfs_logfile);
-        vfs_path_free (vpath, TRUE);
-#endif /* ENABLE_VFS_SMB */
         (void) vpath;
     }
 

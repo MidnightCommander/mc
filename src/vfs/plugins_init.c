@@ -62,10 +62,6 @@
 #include "sfs/sfs.h"
 #endif
 
-#ifdef ENABLE_VFS_SMB
-#include "smbfs/smbfs.h"
-#endif
-
 #ifdef ENABLE_VFS_TAR
 #include "tar/tar.h"
 #endif
@@ -122,10 +118,6 @@ vfs_plugins_init (void)
 #ifdef ENABLE_VFS_FISH
     vfs_init_fish ();
 #endif /* ENABLE_VFS_FISH */
-#ifdef ENABLE_VFS_SMB
-    vfs_init_smbfs ();
-#endif /* ENABLE_VFS_SMB */
-
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -10,7 +10,7 @@ less=+%lineno %filename
 mcedit=%filename:%lineno
 
 [Special dirs]
-list=/afs;/coda;/:;/...;/net;/#smb
+list=/afs;/coda;/:;/...;/net
 
 [terminal:console]
 insert=\\e[2~

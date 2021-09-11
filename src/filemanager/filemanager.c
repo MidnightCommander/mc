@@ -214,9 +214,6 @@ create_panel_menu (void)
 #ifdef ENABLE_VFS_SFTP
     entries = g_list_prepend (entries, menu_entry_create (_("S&FTP link..."), CK_ConnectSftp));
 #endif
-#ifdef ENABLE_VFS_SMB
-    entries = g_list_prepend (entries, menu_entry_create (_("SM&B link..."), CK_ConnectSmb));
-#endif
     entries = g_list_prepend (entries, menu_entry_create (_("Paneli&ze"), CK_Panelize));
     entries = g_list_prepend (entries, menu_separator_create ());
     entries = g_list_prepend (entries, menu_entry_create (_("&Rescan"), CK_Reread));
@@ -1267,11 +1264,6 @@ midnight_execute_cmd (Widget * sender, long command)
         sftplink_cmd ();
         break;
 #endif
-#ifdef ENABLE_VFS_SMB
-    case CK_ConnectSmb:
-        smblink_cmd ();
-        break;
-#endif /* ENABLE_VFS_SMB */
     case CK_Panelize:
         cd_panelize_cmd ();
         break;

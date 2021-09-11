@@ -2610,9 +2610,7 @@ e file tar compressi; l'undelfs, usato per recuperare file cancellati
 su file system di tipo ext2 (il file system predefinito per sistemi
 Unix), fish (per manipolare file su connessioni shell come rsh e ssh) e
 per ultimo l'mcfs (file system del Midnight Commander), un file system
-basato sulla rete. Se il codice è stato compilato con il supporto smbfs,
-è possibile manipolare file su file system remoti con il protocollo SMB
-(CIFS).
+basato sulla rete.
 .PP
 Il codice di commutazione di file system interpreta tutti i nomi di 
 percorso utilizzati e li dirige al file system corretto; il formato
@@ -2751,36 +2749,6 @@ del primo disco SCSI su Linux, si dovrà usare il seguente percorso:
 .PP
 Il recupero può metterci un po' di tempo per caricare le informazioni
 necessarie per poter cominciare a navigare attraverso i file.
-.\"NODE "  SMB File System"
-.SH "  File system SMB"
-Il file system smb permette di gestire file su macchine remote con
-protocollo SMB (o CIFS). Queste includono Windows for Workgroups, 
-Windows 9x/ME, Windows NT/2000/XP, OS/2 e Samba.
-Per usarlo, si può provare il comando dal pannello 
-"Connessione SMB..." (accessibile dalla barra dei menu) o si può 
-direttamente cambiare directory corrente usando il comando cd verso
-un percorso simile a questo:
-.PP
-.I smb://[utente@]macchina[/servizio][/dir\-remota]
-.PP
-L'elemento
-.I utente, servizio
-e
-.I dir\-remota
-sono opzionali.
-Il
-.I nome utente, dominio
-e la
-.I password 
-possono essere specificati nella finestra di dialogo di ingresso.
-.PP
-Esempi:
-.PP
-.nf
-    smb://macchina/Condivisione
-    smb://altra_macchina
-    smb://guest@macchina/Public/Irlex
-.fi
 .\"NODE "  EXTernal File System"
 .SH "  EXTernal File System"
 .B extfs

@@ -72,9 +72,6 @@ static const char *const vfs_supported[] = {
 #ifdef ENABLE_VFS_FISH
     "fish",
 #endif
-#ifdef ENABLE_VFS_SMB
-    "smbfs",
-#endif /* ENABLE_VFS_SMB */
     NULL
 };
 #endif /* ENABLE_VFS */

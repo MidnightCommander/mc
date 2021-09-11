@@ -52,7 +52,6 @@ ScreenList = alt-prime
 # Filter =
 # ConnectFish =
 # ConnectFtp =
-# ConnectSmb =
 # Undelete =
 EditorViewerHistory = alt-shift-e
 ExtendedKeyMap = ctrl-x

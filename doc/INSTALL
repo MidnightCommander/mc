@@ -194,15 +194,6 @@ VFS options:
      libext2fs library available, this option adds support for
      recovering deleted files (the undel virtual file system).
 
-`--enable-vfs-smb'
-     (off by default)
-     This option enables remote VFS over the SMB protocol.  A stripped
-     down version of samba distributed with the sources is compiled and
-     linked with the mc executable.  It is recommended that you install
-     Samba client, since mc uses some files from Samba under certain
-     conditions.  Please visit http://www.samba.org/ to learn more.
-
-
 Screen library:
 - - - - - - - -
 

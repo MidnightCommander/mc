@@ -1329,17 +1329,6 @@ fishlink_cmd (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#ifdef ENABLE_VFS_SMB
-void
-smblink_cmd (void)
-{
-    nice_cd (_("SMB link to machine"), _(machine_str),
-             "[SMB File System]", ":smblink_cmd: SMB link to machine ", "smb://", 0, TRUE);
-}
-#endif /* ENABLE_VFS_SMB */
-
-/* --------------------------------------------------------------------------------------------- */
-
 #ifdef ENABLE_VFS_UNDELFS
 void
 undelete_cmd (void)
