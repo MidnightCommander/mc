@@ -8,7 +8,5 @@ libvfs_sftpfs_la_SOURCES = \
 	connection.c \
 	dir.c \
 	file.c \
-	init.c init.h \
 	internal.c internal.h \
-	vfs_class.c \
-	vfs_subclass.c
+	sftpfs.c sftpfs.h

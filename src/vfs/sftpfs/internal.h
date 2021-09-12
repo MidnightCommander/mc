@@ -62,12 +62,10 @@ typedef struct
 
 extern GString *sftpfs_filename_buffer;
 extern struct vfs_s_subclass sftpfs_subclass;
-extern struct vfs_class *sftpfs_class;
+extern struct vfs_class *vfs_sftpfs_ops;
 
 /*** declarations of public functions ************************************************************/
 
-void sftpfs_init_class (void);
-void sftpfs_init_subclass (void);
 void sftpfs_init_config_variables_patterns (void);
 void sftpfs_deinit_config_variables_patterns (void);
 
