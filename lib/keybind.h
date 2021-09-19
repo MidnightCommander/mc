@@ -1,9 +1,6 @@
 #ifndef MC__KEYBIND_H
 #define MC__KEYBIND_H
 
-#include <sys/types.h>
-#include <sys/time.h>           /* time_t */
-
 #include "lib/global.h"
 
 /*** typedefs(not structures) and defined constants **********************************************/
