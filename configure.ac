@@ -53,7 +53,7 @@ fi
 AC_ARG_ENABLE([werror],
     AS_HELP_STRING([--enable-werror], [Handle all compiler warnings as errors]))
 if test "x$enable_werror" = xyes; then
-    mc_CHECK_ONE_CFLAG([-Werror])
+    AX_APPEND_COMPILE_FLAGS([-Werror], [mc_configured_cflags])
 fi
 
 dnl Compiler can generate warnings for unrecognized flags added to CFLAGS
