@@ -43,9 +43,6 @@ Display configure options.
 .I \-d, \-\-nomouse
 Disable mouse support.
 .TP
-.I \-D N, \-\-debuglevel=N
-Save the debug level for SMB VFS. N is in 0\-10 range.
-.TP
 .I \-e [file], \-\-edit[=file]
 Start the internal editor.  If the file is specified, open it on
 startup.  See also
@@ -3201,10 +3198,6 @@ system for Linux systems),
 If the code was compiled with
 .I sftpfs
 (for manipulating files over SFTP connections).
-If the code was compiled with
-.I smbfs
-support, you can manipulate files on remote systems with the SMB (CIFS)
-protocol.
 .PP
 A generic
 .I extfs
@@ -3401,37 +3394,6 @@ first SCSI disk on Linux, you would use the following path name:
 .PP
 It may take a while for the undelfs to load the required information
 before you start browsing files there.
-.\"NODE "  SMB File System"
-.SH "  SMB File System"
-The smbfs allows you to manipulate files on remote machines with SMB
-(or CIFS) protocol.  These include Windows for Workgroups,
-Windows 9x/ME/XP, Windows NT, Windows 2000 and Samba.
-To actually use it, you may try to use the panel command "SMB link..."
-(accessible from the menubar) or you may directly change your current
-directory to it using the cd command to a path name that looks like this:
-.PP
-.I smb://[user@]machine[/service][/remote\-dir]
-.PP
-The
-.IR user ,
-.I service
-and
-.I remote\-dir
-elements are optional.
-The
-.IR user ,
-.I domain
-and
-.I password
-can be specified in an input dialog.
-.PP
-Examples:
-.PP
-.nf
-    smb://machine/Share
-    smb://other_machine
-    smb://guest@machine/Public/Irlex
-.fi
 .\"NODE "  EXTernal File System"
 .SH "  EXTernal File System"
 .B extfs

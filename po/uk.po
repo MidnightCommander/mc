@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-08-15 15:53+0200\n"
+"POT-Creation-Date: 2021-09-26 10:06+0300\n"
 "PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/mc/mc/language/uk/)\n"
@@ -674,12 +674,6 @@ msgstr "Вимикає підтримку вкладеної оболонки"
 
 msgid "Log ftp dialog to specified file"
 msgstr "Журналювати команди FTP у вказаний файл"
-
-msgid "Set debug level"
-msgstr "Встановити рівень відлагоджування"
-
-msgid "<integer>"
-msgstr "<integer>"
 
 msgid "Launches the file viewer on a file"
 msgstr "Запускає програму перегляду для файлу"
@@ -2173,19 +2167,6 @@ msgid "Background jobs"
 msgstr "Фонові завдання"
 
 #, c-format
-msgid "Password for \\\\%s\\%s"
-msgstr "Пароль для \\\\%s\\%s"
-
-msgid "Domain:"
-msgstr "Домен:"
-
-msgid "Username:"
-msgstr "Ім’я користувача:"
-
-msgid "SMB authentication"
-msgstr "SMB(самба) автентифікація"
-
-#, c-format
 msgid ""
 "Cannot chdir to \"%s\"\n"
 "%s"
@@ -2505,9 +2486,6 @@ msgstr "З’єднання по SFTP"
 
 msgid "Shell link to machine"
 msgstr "Shell-з’єднання з віддаленою машиною"
-
-msgid "SMB link to machine"
-msgstr "SMB-з’єднання з віддаленою машиною"
 
 msgid "Undelete files on an ext2 file system"
 msgstr "Відновлення файлів на файловій системі ext2"
@@ -3103,9 +3081,6 @@ msgstr "&Shell-з’єднання…"
 
 msgid "S&FTP link..."
 msgstr "S&FTP-з’єднання…"
-
-msgid "SM&B link..."
-msgstr "&SMB-з’єднання…"
 
 msgid "Paneli&ze"
 msgstr "Панелі&зувати"
@@ -4479,35 +4454,6 @@ msgid "sftp: Listing done."
 msgstr "sftp: Створення списку завершено."
 
 #, c-format
-msgid "reconnect to %s failed"
-msgstr ""
-"сталася помилка повторного з’єднання з %s\n"
-" "
-
-msgid "Authentication failed"
-msgstr "Сталася помилка авторизації "
-
-#, c-format
-msgid "Error %s creating directory %s"
-msgstr "Сталася помилка %s створення каталогу %s"
-
-#, c-format
-msgid "Error %s removing directory %s"
-msgstr "Сталася помилка %s видалення каталогу %s"
-
-#, c-format
-msgid "%s opening remote file %s"
-msgstr "%s відкриває віддалений файл %s"
-
-#, c-format
-msgid "%s removing remote file %s"
-msgstr "%s видаляє віддалений файл %s"
-
-#, c-format
-msgid "%s renaming files\n"
-msgstr "%s перейменовує файли\n"
-
-#, c-format
 msgid ""
 "Cannot open tar archive\n"
 "%s"
@@ -4721,3 +4667,57 @@ msgstr "Почати спочатку?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не вдалося отримати локальну копію /ftp://some.host/editme.txt"
+
+#~ msgid "Set debug level"
+#~ msgstr "Встановити рівень відлагоджування"
+
+#~ msgid "<integer>"
+#~ msgstr "<integer>"
+
+#, c-format
+#~ msgid "Password for \\\\%s\\%s"
+#~ msgstr "Пароль для \\\\%s\\%s"
+
+#~ msgid "Domain:"
+#~ msgstr "Домен:"
+
+#~ msgid "Username:"
+#~ msgstr "Ім’я користувача:"
+
+#~ msgid "SMB authentication"
+#~ msgstr "SMB(самба) автентифікація"
+
+#~ msgid "SMB link to machine"
+#~ msgstr "SMB-з’єднання з віддаленою машиною"
+
+#~ msgid "SM&B link..."
+#~ msgstr "&SMB-з’єднання…"
+
+#, c-format
+#~ msgid "reconnect to %s failed"
+#~ msgstr ""
+#~ "сталася помилка повторного з’єднання з %s\n"
+#~ " "
+
+#~ msgid "Authentication failed"
+#~ msgstr "Сталася помилка авторизації "
+
+#, c-format
+#~ msgid "Error %s creating directory %s"
+#~ msgstr "Сталася помилка %s створення каталогу %s"
+
+#, c-format
+#~ msgid "Error %s removing directory %s"
+#~ msgstr "Сталася помилка %s видалення каталогу %s"
+
+#, c-format
+#~ msgid "%s opening remote file %s"
+#~ msgstr "%s відкриває віддалений файл %s"
+
+#, c-format
+#~ msgid "%s removing remote file %s"
+#~ msgstr "%s видаляє віддалений файл %s"
+
+#, c-format
+#~ msgid "%s renaming files\n"
+#~ msgstr "%s перейменовує файли\n"

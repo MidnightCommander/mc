@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-08-15 15:53+0200\n"
+"POT-Creation-Date: 2021-09-26 10:06+0300\n"
 "PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Hungarian (http://www.transifex.com/mc/mc/language/hu/)\n"
@@ -647,12 +647,6 @@ msgstr "Háttér-shell használatának letiltása"
 
 msgid "Log ftp dialog to specified file"
 msgstr "FTP-párbeszéd naplózása megadott fájlba"
-
-msgid "Set debug level"
-msgstr "Nyomkövetési (debug) szint beállítása"
-
-msgid "<integer>"
-msgstr ""
 
 msgid "Launches the file viewer on a file"
 msgstr "Fájlmegjelenítés indítása a megadott fájlon"
@@ -2147,19 +2141,6 @@ msgid "Background jobs"
 msgstr "Háttérfolyamatok"
 
 #, c-format
-msgid "Password for \\\\%s\\%s"
-msgstr "\\\\%s\\%s jelszava:"
-
-msgid "Domain:"
-msgstr "Tartomány:"
-
-msgid "Username:"
-msgstr "Felhasználónév:"
-
-msgid "SMB authentication"
-msgstr "SMB hitelesítés"
-
-#, c-format
 msgid ""
 "Cannot chdir to \"%s\"\n"
 "%s"
@@ -2475,9 +2456,6 @@ msgstr "SFTP célgép"
 
 msgid "Shell link to machine"
 msgstr "Shell-kapcsolat egy másik géppel"
-
-msgid "SMB link to machine"
-msgstr "SMB-kapcsolat"
 
 msgid "Undelete files on an ext2 file system"
 msgstr "Törölt fájlok visszaállítása Ext2 fájlrendszeren"
@@ -3070,9 +3048,6 @@ msgstr "Sh&ell-kapcsolat..."
 
 msgid "S&FTP link..."
 msgstr "S&FTP link..."
-
-msgid "SM&B link..."
-msgstr "SM&B-kapcsolat..."
 
 msgid "Paneli&ze"
 msgstr "Panelra helye&zés"
@@ -4437,33 +4412,6 @@ msgid "sftp: Listing done."
 msgstr "sftp: A listázás kész."
 
 #, c-format
-msgid "reconnect to %s failed"
-msgstr "%s: újrakapcsolódás sikertelen"
-
-msgid "Authentication failed"
-msgstr "Azonosítás sikertelen"
-
-#, c-format
-msgid "Error %s creating directory %s"
-msgstr "%s könyvtár létrehozása: %s hiba"
-
-#, c-format
-msgid "Error %s removing directory %s"
-msgstr "%s könyvtár törlése: %s hiba"
-
-#, c-format
-msgid "%s opening remote file %s"
-msgstr "%s távoli fájl megnyitása: %s"
-
-#, c-format
-msgid "%s removing remote file %s"
-msgstr "%s távoli fájl törlése: %s"
-
-#, c-format
-msgid "%s renaming files\n"
-msgstr "%s: a fájlok átnevezésekor\n"
-
-#, c-format
 msgid ""
 "Cannot open tar archive\n"
 "%s"
@@ -4672,3 +4620,52 @@ msgstr "Folytatás az elejéről?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nem sikerült behozni /ftp://some.host/editme.txt helyi másolatát"
+
+#~ msgid "Set debug level"
+#~ msgstr "Nyomkövetési (debug) szint beállítása"
+
+#, c-format
+#~ msgid "Password for \\\\%s\\%s"
+#~ msgstr "\\\\%s\\%s jelszava:"
+
+#~ msgid "Domain:"
+#~ msgstr "Tartomány:"
+
+#~ msgid "Username:"
+#~ msgstr "Felhasználónév:"
+
+#~ msgid "SMB authentication"
+#~ msgstr "SMB hitelesítés"
+
+#~ msgid "SMB link to machine"
+#~ msgstr "SMB-kapcsolat"
+
+#~ msgid "SM&B link..."
+#~ msgstr "SM&B-kapcsolat..."
+
+#, c-format
+#~ msgid "reconnect to %s failed"
+#~ msgstr "%s: újrakapcsolódás sikertelen"
+
+#~ msgid "Authentication failed"
+#~ msgstr "Azonosítás sikertelen"
+
+#, c-format
+#~ msgid "Error %s creating directory %s"
+#~ msgstr "%s könyvtár létrehozása: %s hiba"
+
+#, c-format
+#~ msgid "Error %s removing directory %s"
+#~ msgstr "%s könyvtár törlése: %s hiba"
+
+#, c-format
+#~ msgid "%s opening remote file %s"
+#~ msgstr "%s távoli fájl megnyitása: %s"
+
+#, c-format
+#~ msgid "%s removing remote file %s"
+#~ msgstr "%s távoli fájl törlése: %s"
+
+#, c-format
+#~ msgid "%s renaming files\n"
+#~ msgstr "%s: a fájlok átnevezésekor\n"

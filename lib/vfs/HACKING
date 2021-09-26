@@ -27,7 +27,7 @@ Basics of code organization
 ===========================
 
 VFS code it to a certain extent object oriented.  The code dealing with
-a certain type of data (e.g. tar archives of SMB shares) can be thought
+a certain type of data (e.g. tar archives) can be thought
 of as a class in the terms of object oriented programming.  They may
 reuse some code from their parent classes.  For instance, tar and cpio
 archives have a common parent class direntry, which contains some common
@@ -63,7 +63,6 @@ vfs ---- direntry ---- cpio  } archives
    |
    |---- extfs ---- extfs archives
    |---- localfs ---- sfs ---- sfs archives
-   |---- smbfs
    |---- undelfs
 
 
@@ -80,7 +79,6 @@ ftpfs              no           yes            yes           no
 extfs              no           no             yes           yes
 localfs            no           no             N/A           N/A
 sfs                no           yes            yes           N/A
-smbfs              no           yes            no            no
 undelfs            no           yes            no            yes
 
 

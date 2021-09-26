@@ -17,7 +17,6 @@ m4_include([m4.include/vfs/mc-vfs-fish.m4])
 m4_include([m4.include/vfs/mc-vfs-undelfs.m4])
 m4_include([m4.include/vfs/mc-vfs-tarfs.m4])
 m4_include([m4.include/vfs/mc-vfs-cpiofs.m4])
-m4_include([m4.include/vfs/mc-vfs-samba.m4])
 
 dnl mc_VFS_CHECKS
 dnl   Check for various functions needed by libvfs.
@@ -75,13 +74,12 @@ AC_DEFUN([mc_VFS_CHECKS],
     mc_VFS_FTP
     mc_VFS_SFS
     mc_VFS_SFTP
-    mc_VFS_SMB
     mc_VFS_TARFS
     mc_VFS_UNDELFS
 
     AM_CONDITIONAL(ENABLE_VFS, [test x"$enable_vfs" = x"yes"])
 
-    if test x"$enable_vfs_ftp" = x"yes" -o x"$enable_vfs_fish" = x"yes" -o x"$enable_vfs_smb" = x"yes"; then
+    if test x"$enable_vfs_ftp" = x"yes" -o x"$enable_vfs_fish" = x"yes"; then
 	mc_ENABLE_VFS_NET
     fi
 

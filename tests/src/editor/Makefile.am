@@ -14,11 +14,6 @@ LIBS = @CHECK_LIBS@ \
 	$(top_builddir)/lib/libmc.la \
 	@PCRE_LIBS@
 
-if ENABLE_VFS_SMB
-# this is a hack for linking with own samba library in simple way
-LIBS += $(top_builddir)/src/vfs/smbfs/helpers/libsamba.a
-endif
-
 if ENABLE_MCLIB
 LIBS += $(GLIB_LIBS)
 endif

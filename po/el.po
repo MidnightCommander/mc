@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-08-15 15:53+0200\n"
+"POT-Creation-Date: 2021-09-26 10:06+0300\n"
 "PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Greek (http://www.transifex.com/mc/mc/language/el/)\n"
@@ -643,12 +643,6 @@ msgid "Disables subshell support"
 msgstr ""
 
 msgid "Log ftp dialog to specified file"
-msgstr ""
-
-msgid "Set debug level"
-msgstr "Ρύθμιση επιπέδου αποσφαλμάτωσης"
-
-msgid "<integer>"
 msgstr ""
 
 msgid "Launches the file viewer on a file"
@@ -2092,19 +2086,6 @@ msgid "Background jobs"
 msgstr ""
 
 #, c-format
-msgid "Password for \\\\%s\\%s"
-msgstr "Κωδικός πρόσβασης για \\\\%s\\%s"
-
-msgid "Domain:"
-msgstr ""
-
-msgid "Username:"
-msgstr "Όνομα χρήστη:"
-
-msgid "SMB authentication"
-msgstr ""
-
-#, c-format
 msgid ""
 "Cannot chdir to \"%s\"\n"
 "%s"
@@ -2418,9 +2399,6 @@ msgstr "SFTP σε μηχάνημα"
 
 msgid "Shell link to machine"
 msgstr "Δεσμός κελύφους σε μηχάνημα"
-
-msgid "SMB link to machine"
-msgstr "Δεσμός SMB σε μηχάνημα"
 
 msgid "Undelete files on an ext2 file system"
 msgstr "Επαναφορά αρχείων σε  ένα σύστημα αρχείων ext2"
@@ -2987,9 +2965,6 @@ msgstr "Δεσμος κε&λύφους..."
 
 msgid "S&FTP link..."
 msgstr "Δεσμός S&FTP..."
-
-msgid "SM&B link..."
-msgstr "Δεσμός SM&B..."
 
 msgid "Paneli&ze"
 msgstr ""
@@ -4331,33 +4306,6 @@ msgid "sftp: Listing done."
 msgstr ""
 
 #, c-format
-msgid "reconnect to %s failed"
-msgstr "η επανασύνδεση με %s απέτυχε"
-
-msgid "Authentication failed"
-msgstr "η πιστοποίηση απέτυχε"
-
-#, c-format
-msgid "Error %s creating directory %s"
-msgstr "Σφάλμα %s κατά τη δημιουργία του καταλόγου %s"
-
-#, c-format
-msgid "Error %s removing directory %s"
-msgstr "Σφάλμα %s κατά την αφαίρεση του καταλόγου %s"
-
-#, c-format
-msgid "%s opening remote file %s"
-msgstr "%s ανοίγει το απομακρυσμένο αρχείο %s"
-
-#, c-format
-msgid "%s removing remote file %s"
-msgstr "%s αφαιρεί το απομακρυσμένο αρχείο %s"
-
-#, c-format
-msgid "%s renaming files\n"
-msgstr "%s μετονομάζει αρχεία\n"
-
-#, c-format
 msgid ""
 "Cannot open tar archive\n"
 "%s"
@@ -4562,3 +4510,46 @@ msgstr "Συνέχεια από την αρχή;"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Set debug level"
+#~ msgstr "Ρύθμιση επιπέδου αποσφαλμάτωσης"
+
+#, c-format
+#~ msgid "Password for \\\\%s\\%s"
+#~ msgstr "Κωδικός πρόσβασης για \\\\%s\\%s"
+
+#~ msgid "Username:"
+#~ msgstr "Όνομα χρήστη:"
+
+#~ msgid "SMB link to machine"
+#~ msgstr "Δεσμός SMB σε μηχάνημα"
+
+#~ msgid "SM&B link..."
+#~ msgstr "Δεσμός SM&B..."
+
+#, c-format
+#~ msgid "reconnect to %s failed"
+#~ msgstr "η επανασύνδεση με %s απέτυχε"
+
+#~ msgid "Authentication failed"
+#~ msgstr "η πιστοποίηση απέτυχε"
+
+#, c-format
+#~ msgid "Error %s creating directory %s"
+#~ msgstr "Σφάλμα %s κατά τη δημιουργία του καταλόγου %s"
+
+#, c-format
+#~ msgid "Error %s removing directory %s"
+#~ msgstr "Σφάλμα %s κατά την αφαίρεση του καταλόγου %s"
+
+#, c-format
+#~ msgid "%s opening remote file %s"
+#~ msgstr "%s ανοίγει το απομακρυσμένο αρχείο %s"
+
+#, c-format
+#~ msgid "%s removing remote file %s"
+#~ msgstr "%s αφαιρεί το απομακρυσμένο αρχείο %s"
+
+#, c-format
+#~ msgid "%s renaming files\n"
+#~ msgstr "%s μετονομάζει αρχεία\n"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-08-15 15:53+0200\n"
+"POT-Creation-Date: 2021-09-26 10:06+0300\n"
 "PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Interlingua (http://www.transifex.com/mc/mc/language/ia/)\n"
@@ -642,12 +642,6 @@ msgstr "Disactivar le supporto de sub-shells"
 
 msgid "Log ftp dialog to specified file"
 msgstr "Registrar dialogos FTP in un file"
-
-msgid "Set debug level"
-msgstr "Fixar le nivello de recerca de faltas"
-
-msgid "<integer>"
-msgstr ""
 
 msgid "Launches the file viewer on a file"
 msgstr "Aperir un file con le visualisator"
@@ -2082,19 +2076,6 @@ msgid "Background jobs"
 msgstr ""
 
 #, c-format
-msgid "Password for \\\\%s\\%s"
-msgstr "Contrasigno pro \\\\%s\\%s"
-
-msgid "Domain:"
-msgstr "Dominio:"
-
-msgid "Username:"
-msgstr "Nomine de usator:"
-
-msgid "SMB authentication"
-msgstr ""
-
-#, c-format
 msgid ""
 "Cannot chdir to \"%s\"\n"
 "%s"
@@ -2405,9 +2386,6 @@ msgid "SFTP to machine"
 msgstr ""
 
 msgid "Shell link to machine"
-msgstr ""
-
-msgid "SMB link to machine"
 msgstr ""
 
 msgid "Undelete files on an ext2 file system"
@@ -2920,9 +2898,6 @@ msgid "S&hell link..."
 msgstr ""
 
 msgid "S&FTP link..."
-msgstr ""
-
-msgid "SM&B link..."
 msgstr ""
 
 msgid "Paneli&ze"
@@ -4253,33 +4228,6 @@ msgid "sftp: Listing done."
 msgstr ""
 
 #, c-format
-msgid "reconnect to %s failed"
-msgstr "reconnexion a %s fallite"
-
-msgid "Authentication failed"
-msgstr "Authentication fallite"
-
-#, c-format
-msgid "Error %s creating directory %s"
-msgstr "Error %s durante le creation del directorio %s"
-
-#, c-format
-msgid "Error %s removing directory %s"
-msgstr "Error %s durante le remotion del directorio %s"
-
-#, c-format
-msgid "%s opening remote file %s"
-msgstr "%s aperi file remote %s"
-
-#, c-format
-msgid "%s removing remote file %s"
-msgstr "%s remove file remote %s"
-
-#, c-format
-msgid "%s renaming files\n"
-msgstr "%s renomina files\n"
-
-#, c-format
 msgid ""
 "Cannot open tar archive\n"
 "%s"
@@ -4481,3 +4429,43 @@ msgstr "Continuar ab initio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Set debug level"
+#~ msgstr "Fixar le nivello de recerca de faltas"
+
+#, c-format
+#~ msgid "Password for \\\\%s\\%s"
+#~ msgstr "Contrasigno pro \\\\%s\\%s"
+
+#~ msgid "Domain:"
+#~ msgstr "Dominio:"
+
+#~ msgid "Username:"
+#~ msgstr "Nomine de usator:"
+
+#, c-format
+#~ msgid "reconnect to %s failed"
+#~ msgstr "reconnexion a %s fallite"
+
+#~ msgid "Authentication failed"
+#~ msgstr "Authentication fallite"
+
+#, c-format
+#~ msgid "Error %s creating directory %s"
+#~ msgstr "Error %s durante le creation del directorio %s"
+
+#, c-format
+#~ msgid "Error %s removing directory %s"
+#~ msgstr "Error %s durante le remotion del directorio %s"
+
+#, c-format
+#~ msgid "%s opening remote file %s"
+#~ msgstr "%s aperi file remote %s"
+
+#, c-format
+#~ msgid "%s removing remote file %s"
+#~ msgstr "%s remove file remote %s"
+
+#, c-format
+#~ msgid "%s renaming files\n"
+#~ msgstr "%s renomina files\n"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-08-15 15:53+0200\n"
+"POT-Creation-Date: 2021-09-26 10:06+0300\n"
 "PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Walloon (http://www.transifex.com/mc/mc/language/wa/)\n"
@@ -630,12 +630,6 @@ msgid "Disables subshell support"
 msgstr ""
 
 msgid "Log ftp dialog to specified file"
-msgstr ""
-
-msgid "Set debug level"
-msgstr ""
-
-msgid "<integer>"
 msgstr ""
 
 msgid "Launches the file viewer on a file"
@@ -2062,19 +2056,6 @@ msgid "Background jobs"
 msgstr ""
 
 #, c-format
-msgid "Password for \\\\%s\\%s"
-msgstr "Mot di passe po \\\\%s\\%s"
-
-msgid "Domain:"
-msgstr "Dominne:"
-
-msgid "Username:"
-msgstr "No di l' ûzeu:"
-
-msgid "SMB authentication"
-msgstr ""
-
-#, c-format
 msgid ""
 "Cannot chdir to \"%s\"\n"
 "%s"
@@ -2385,9 +2366,6 @@ msgid "SFTP to machine"
 msgstr ""
 
 msgid "Shell link to machine"
-msgstr ""
-
-msgid "SMB link to machine"
 msgstr ""
 
 msgid "Undelete files on an ext2 file system"
@@ -2901,9 +2879,6 @@ msgstr ""
 
 msgid "S&FTP link..."
 msgstr ""
-
-msgid "SM&B link..."
-msgstr "Loyén SM&B..."
 
 msgid "Paneli&ze"
 msgstr ""
@@ -4235,33 +4210,6 @@ msgid "sftp: Listing done."
 msgstr ""
 
 #, c-format
-msgid "reconnect to %s failed"
-msgstr ""
-
-msgid "Authentication failed"
-msgstr ""
-
-#, c-format
-msgid "Error %s creating directory %s"
-msgstr ""
-
-#, c-format
-msgid "Error %s removing directory %s"
-msgstr ""
-
-#, c-format
-msgid "%s opening remote file %s"
-msgstr ""
-
-#, c-format
-msgid "%s removing remote file %s"
-msgstr ""
-
-#, c-format
-msgid "%s renaming files\n"
-msgstr ""
-
-#, c-format
 msgid ""
 "Cannot open tar archive\n"
 "%s"
@@ -4453,3 +4401,16 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#, c-format
+#~ msgid "Password for \\\\%s\\%s"
+#~ msgstr "Mot di passe po \\\\%s\\%s"
+
+#~ msgid "Domain:"
+#~ msgstr "Dominne:"
+
+#~ msgid "Username:"
+#~ msgstr "No di l' ûzeu:"
+
+#~ msgid "SM&B link..."
+#~ msgstr "Loyén SM&B..."

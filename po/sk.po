@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-08-15 15:53+0200\n"
+"POT-Creation-Date: 2021-09-26 10:06+0300\n"
 "PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Slovak (http://www.transifex.com/mc/mc/language/sk/)\n"
@@ -661,12 +661,6 @@ msgstr "Vypína podporu pre subshell"
 
 msgid "Log ftp dialog to specified file"
 msgstr "Zapisovať protokol dialógu ftp do súboru"
-
-msgid "Set debug level"
-msgstr "Nastaviť ladiacu úroveň"
-
-msgid "<integer>"
-msgstr "<integer>"
 
 msgid "Launches the file viewer on a file"
 msgstr "Spustí prehliadač súborov na súbore"
@@ -2163,19 +2157,6 @@ msgid "Background jobs"
 msgstr "Úlohy v pozadí"
 
 #, c-format
-msgid "Password for \\\\%s\\%s"
-msgstr "Heslo pre \\\\%s\\%s"
-
-msgid "Domain:"
-msgstr "Doména:"
-
-msgid "Username:"
-msgstr "Meno použivateľa:"
-
-msgid "SMB authentication"
-msgstr "Autentifikácia SMB"
-
-#, c-format
 msgid ""
 "Cannot chdir to \"%s\"\n"
 "%s"
@@ -2491,9 +2472,6 @@ msgstr "Pripojiť pomocou SFTP"
 
 msgid "Shell link to machine"
 msgstr "Pripojiť pomocou shellu"
-
-msgid "SMB link to machine"
-msgstr "Pripojiť pomocou SMB"
 
 msgid "Undelete files on an ext2 file system"
 msgstr "Obnoviť zmazané súbory na súborovom systéme ext2"
@@ -3088,9 +3066,6 @@ msgstr "Pripojenie s&hell..."
 
 msgid "S&FTP link..."
 msgstr "Pripojenie S&FTP..."
-
-msgid "SM&B link..."
-msgstr "Pripojenie SM&B..."
 
 msgid "Paneli&ze"
 msgstr "Paneli&zovať"
@@ -4462,33 +4437,6 @@ msgid "sftp: Listing done."
 msgstr "sftp: Výpis - hotovo."
 
 #, c-format
-msgid "reconnect to %s failed"
-msgstr "obnovenie pripojenia k %s zlyhalo"
-
-msgid "Authentication failed"
-msgstr "Autentifikácia zlyhala"
-
-#, c-format
-msgid "Error %s creating directory %s"
-msgstr "Chyba %s pri vytváraní adresára %s"
-
-#, c-format
-msgid "Error %s removing directory %s"
-msgstr "Chyba %s pri odstraňovaní adresára %s"
-
-#, c-format
-msgid "%s opening remote file %s"
-msgstr "%s pri otváraní vzdialeného súboru %s"
-
-#, c-format
-msgid "%s removing remote file %s"
-msgstr "%s pri odstraňovaní vzdialeného súboru %s"
-
-#, c-format
-msgid "%s renaming files\n"
-msgstr "%s pri premenovávaní súborov\n"
-
-#, c-format
 msgid ""
 "Cannot open tar archive\n"
 "%s"
@@ -4701,3 +4649,55 @@ msgstr "Pokračovať od začiatku?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nemožno stiahnuť lokálnu kópiu /ftp://some.host/editme.txt"
+
+#~ msgid "Set debug level"
+#~ msgstr "Nastaviť ladiacu úroveň"
+
+#~ msgid "<integer>"
+#~ msgstr "<integer>"
+
+#, c-format
+#~ msgid "Password for \\\\%s\\%s"
+#~ msgstr "Heslo pre \\\\%s\\%s"
+
+#~ msgid "Domain:"
+#~ msgstr "Doména:"
+
+#~ msgid "Username:"
+#~ msgstr "Meno použivateľa:"
+
+#~ msgid "SMB authentication"
+#~ msgstr "Autentifikácia SMB"
+
+#~ msgid "SMB link to machine"
+#~ msgstr "Pripojiť pomocou SMB"
+
+#~ msgid "SM&B link..."
+#~ msgstr "Pripojenie SM&B..."
+
+#, c-format
+#~ msgid "reconnect to %s failed"
+#~ msgstr "obnovenie pripojenia k %s zlyhalo"
+
+#~ msgid "Authentication failed"
+#~ msgstr "Autentifikácia zlyhala"
+
+#, c-format
+#~ msgid "Error %s creating directory %s"
+#~ msgstr "Chyba %s pri vytváraní adresára %s"
+
+#, c-format
+#~ msgid "Error %s removing directory %s"
+#~ msgstr "Chyba %s pri odstraňovaní adresára %s"
+
+#, c-format
+#~ msgid "%s opening remote file %s"
+#~ msgstr "%s pri otváraní vzdialeného súboru %s"
+
+#, c-format
+#~ msgid "%s removing remote file %s"
+#~ msgstr "%s pri odstraňovaní vzdialeného súboru %s"
+
+#, c-format
+#~ msgid "%s renaming files\n"
+#~ msgstr "%s pri premenovávaní súborov\n"

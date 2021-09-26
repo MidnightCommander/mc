@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-08-15 15:53+0200\n"
+"POT-Creation-Date: 2021-09-26 10:06+0300\n"
 "PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Esperanto (http://www.transifex.com/mc/mc/language/eo/)\n"
@@ -661,12 +661,6 @@ msgstr "Malaktivigi subŝelon"
 
 msgid "Log ftp dialog to specified file"
 msgstr "Protokoli FTP-dialogon al specifa dosiero"
-
-msgid "Set debug level"
-msgstr "Specifi senerarigan nivelon"
-
-msgid "<integer>"
-msgstr "<entjero>"
 
 msgid "Launches the file viewer on a file"
 msgstr "Plenumigi la dosiero-legilon je la dosiero"
@@ -2165,19 +2159,6 @@ msgid "Background jobs"
 msgstr "Fonaj taskoj"
 
 #, c-format
-msgid "Password for \\\\%s\\%s"
-msgstr "Pasvorto por \\\\%s\\%s"
-
-msgid "Domain:"
-msgstr "Domajno:"
-
-msgid "Username:"
-msgstr "Salutnomo:"
-
-msgid "SMB authentication"
-msgstr "SMB-atestado"
-
-#, c-format
 msgid ""
 "Cannot chdir to \"%s\"\n"
 "%s"
@@ -2497,9 +2478,6 @@ msgstr "SFTP al servilo"
 
 msgid "Shell link to machine"
 msgstr "Ŝela ligilo al servilo"
-
-msgid "SMB link to machine"
-msgstr "SMB-ligilo al servilo"
 
 msgid "Undelete files on an ext2 file system"
 msgstr "Remeti dosierojn en ext2-dosiersistemon"
@@ -3097,9 +3075,6 @@ msgstr "Ŝ&ela ligilo..."
 
 msgid "S&FTP link..."
 msgstr "&SFTP-ligilo..."
-
-msgid "SM&B link..."
-msgstr "SM&B-a ligilo..."
 
 msgid "Paneli&ze"
 msgstr "&Flankigi"
@@ -4477,33 +4452,6 @@ msgid "sftp: Listing done."
 msgstr "sftp: Listado finita."
 
 #, c-format
-msgid "reconnect to %s failed"
-msgstr "rekonektiĝi al %s malsukcesis"
-
-msgid "Authentication failed"
-msgstr "Atestado malsukcesis"
-
-#, c-format
-msgid "Error %s creating directory %s"
-msgstr "Eraro %s dum krei dosierujon %s"
-
-#, c-format
-msgid "Error %s removing directory %s"
-msgstr "Eraro %s dum forigi dosierujon %s"
-
-#, c-format
-msgid "%s opening remote file %s"
-msgstr "%s malfermanta forajn dosierojn %s"
-
-#, c-format
-msgid "%s removing remote file %s"
-msgstr "%s dum forigi forajn dosierojn %s"
-
-#, c-format
-msgid "%s renaming files\n"
-msgstr "%s alinomanta dosierojn\n"
-
-#, c-format
 msgid ""
 "Cannot open tar archive\n"
 "%s"
@@ -4716,3 +4664,55 @@ msgstr "Ĉu deiri de la komenco?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Ne eblas atingi lokan kopion de /ftp://some.host/editme.txt"
+
+#~ msgid "Set debug level"
+#~ msgstr "Specifi senerarigan nivelon"
+
+#~ msgid "<integer>"
+#~ msgstr "<entjero>"
+
+#, c-format
+#~ msgid "Password for \\\\%s\\%s"
+#~ msgstr "Pasvorto por \\\\%s\\%s"
+
+#~ msgid "Domain:"
+#~ msgstr "Domajno:"
+
+#~ msgid "Username:"
+#~ msgstr "Salutnomo:"
+
+#~ msgid "SMB authentication"
+#~ msgstr "SMB-atestado"
+
+#~ msgid "SMB link to machine"
+#~ msgstr "SMB-ligilo al servilo"
+
+#~ msgid "SM&B link..."
+#~ msgstr "SM&B-a ligilo..."
+
+#, c-format
+#~ msgid "reconnect to %s failed"
+#~ msgstr "rekonektiĝi al %s malsukcesis"
+
+#~ msgid "Authentication failed"
+#~ msgstr "Atestado malsukcesis"
+
+#, c-format
+#~ msgid "Error %s creating directory %s"
+#~ msgstr "Eraro %s dum krei dosierujon %s"
+
+#, c-format
+#~ msgid "Error %s removing directory %s"
+#~ msgstr "Eraro %s dum forigi dosierujon %s"
+
+#, c-format
+#~ msgid "%s opening remote file %s"
+#~ msgstr "%s malfermanta forajn dosierojn %s"
+
+#, c-format
+#~ msgid "%s removing remote file %s"
+#~ msgstr "%s dum forigi forajn dosierojn %s"
+
+#, c-format
+#~ msgid "%s renaming files\n"
+#~ msgstr "%s alinomanta dosierojn\n"

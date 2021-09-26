@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-08-15 15:53+0200\n"
+"POT-Creation-Date: 2021-09-26 10:06+0300\n"
 "PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Finnish (http://www.transifex.com/mc/mc/language/fi/)\n"
@@ -664,12 +664,6 @@ msgstr "Poistaa subshell tuen käytöstä"
 
 msgid "Log ftp dialog to specified file"
 msgstr "Kirjaa ftp kyselyt tiedostoon"
-
-msgid "Set debug level"
-msgstr "Aseta debug-taso"
-
-msgid "<integer>"
-msgstr "<integer>"
 
 msgid "Launches the file viewer on a file"
 msgstr "Käynnistää tiedoston katseluohjelman"
@@ -2118,19 +2112,6 @@ msgid "Background jobs"
 msgstr "Taustatyöt"
 
 #, c-format
-msgid "Password for \\\\%s\\%s"
-msgstr "Salasana käyttäjälle \\\\%s\\%s"
-
-msgid "Domain:"
-msgstr "Verkkotunnus:"
-
-msgid "Username:"
-msgstr "Käyttäjätunnus:"
-
-msgid "SMB authentication"
-msgstr "SMB-todennus"
-
-#, c-format
 msgid ""
 "Cannot chdir to \"%s\"\n"
 "%s"
@@ -2441,9 +2422,6 @@ msgid "SFTP to machine"
 msgstr ""
 
 msgid "Shell link to machine"
-msgstr ""
-
-msgid "SMB link to machine"
 msgstr ""
 
 msgid "Undelete files on an ext2 file system"
@@ -3007,9 +2985,6 @@ msgstr "S&hell linkki..."
 
 msgid "S&FTP link..."
 msgstr "S&FTP linkki..."
-
-msgid "SM&B link..."
-msgstr "SM&B linkki..."
 
 msgid "Paneli&ze"
 msgstr ""
@@ -4324,33 +4299,6 @@ msgid "sftp: Listing done."
 msgstr ""
 
 #, c-format
-msgid "reconnect to %s failed"
-msgstr "uudelleenyritys kohteeseen %s epäonnistui"
-
-msgid "Authentication failed"
-msgstr "Authenkaatio epäonnistui"
-
-#, c-format
-msgid "Error %s creating directory %s"
-msgstr "Virhe %s luotaessa kansiota %s"
-
-#, c-format
-msgid "Error %s removing directory %s"
-msgstr "Virhe %s poistaessa hakemistoa %s"
-
-#, c-format
-msgid "%s opening remote file %s"
-msgstr "%s avautuva palvelintiedosto %s"
-
-#, c-format
-msgid "%s removing remote file %s"
-msgstr "%s poistaa palvelintiedostoa %s"
-
-#, c-format
-msgid "%s renaming files\n"
-msgstr "%s uudelleennimeää tiedostoja\n"
-
-#, c-format
 msgid ""
 "Cannot open tar archive\n"
 "%s"
@@ -4542,3 +4490,52 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Set debug level"
+#~ msgstr "Aseta debug-taso"
+
+#~ msgid "<integer>"
+#~ msgstr "<integer>"
+
+#, c-format
+#~ msgid "Password for \\\\%s\\%s"
+#~ msgstr "Salasana käyttäjälle \\\\%s\\%s"
+
+#~ msgid "Domain:"
+#~ msgstr "Verkkotunnus:"
+
+#~ msgid "Username:"
+#~ msgstr "Käyttäjätunnus:"
+
+#~ msgid "SMB authentication"
+#~ msgstr "SMB-todennus"
+
+#~ msgid "SM&B link..."
+#~ msgstr "SM&B linkki..."
+
+#, c-format
+#~ msgid "reconnect to %s failed"
+#~ msgstr "uudelleenyritys kohteeseen %s epäonnistui"
+
+#~ msgid "Authentication failed"
+#~ msgstr "Authenkaatio epäonnistui"
+
+#, c-format
+#~ msgid "Error %s creating directory %s"
+#~ msgstr "Virhe %s luotaessa kansiota %s"
+
+#, c-format
+#~ msgid "Error %s removing directory %s"
+#~ msgstr "Virhe %s poistaessa hakemistoa %s"
+
+#, c-format
+#~ msgid "%s opening remote file %s"
+#~ msgstr "%s avautuva palvelintiedosto %s"
+
+#, c-format
+#~ msgid "%s removing remote file %s"
+#~ msgstr "%s poistaa palvelintiedostoa %s"
+
+#, c-format
+#~ msgid "%s renaming files\n"
+#~ msgstr "%s uudelleennimeää tiedostoja\n"

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-08-15 15:53+0200\n"
+"POT-Creation-Date: 2021-09-26 10:06+0300\n"
 "PO-Revision-Date: 2021-08-08 12:32+0000\n"
 "Last-Translator: Priit Jõerüüt <transifex@joeruut.com>\n"
 "Language-Team: Estonian (http://www.transifex.com/mc/mc/language/et/)\n"
@@ -659,12 +659,6 @@ msgstr "Keelab alamkesta toe"
 
 msgid "Log ftp dialog to specified file"
 msgstr "Logi FTP dialoog määratud faili"
-
-msgid "Set debug level"
-msgstr "Määra silumistase"
-
-msgid "<integer>"
-msgstr "<integer>"
 
 msgid "Launches the file viewer on a file"
 msgstr "Käivitab failivaaturi failile"
@@ -2159,19 +2153,6 @@ msgid "Background jobs"
 msgstr "Tööd taustal"
 
 #, c-format
-msgid "Password for \\\\%s\\%s"
-msgstr "Salasõna teenusele \\\\%s\\%s"
-
-msgid "Domain:"
-msgstr "Domeen:"
-
-msgid "Username:"
-msgstr "Kasutaja:"
-
-msgid "SMB authentication"
-msgstr "SMB autentimine"
-
-#, c-format
 msgid ""
 "Cannot chdir to \"%s\"\n"
 "%s"
@@ -2487,9 +2468,6 @@ msgstr "SFTP masinasse"
 
 msgid "Shell link to machine"
 msgstr "Kesta ühendus masinaga"
-
-msgid "SMB link to machine"
-msgstr "SMB ühendus masinaga"
 
 msgid "Undelete files on an ext2 file system"
 msgstr "Failide taastamine ext2 failisüsteemis"
@@ -3086,9 +3064,6 @@ msgstr "K&esta ühendus..."
 
 msgid "S&FTP link..."
 msgstr "S&FTP ühendus..."
-
-msgid "SM&B link..."
-msgstr "SM&B ühendus..."
 
 msgid "Paneli&ze"
 msgstr "Pa&neelile"
@@ -4460,33 +4435,6 @@ msgid "sftp: Listing done."
 msgstr "sftp: Loendamine lõpetatud."
 
 #, c-format
-msgid "reconnect to %s failed"
-msgstr "Ühenduse taastamine serveriga %s nurjus"
-
-msgid "Authentication failed"
-msgstr "Autentimine ebaõnnestus"
-
-#, c-format
-msgid "Error %s creating directory %s"
-msgstr "Viga %s kataloogi %s loomisel"
-
-#, c-format
-msgid "Error %s removing directory %s"
-msgstr "Viga %s kataloogi %s kustutamisel"
-
-#, c-format
-msgid "%s opening remote file %s"
-msgstr "%s avatakse kaugfaili %s"
-
-#, c-format
-msgid "%s removing remote file %s"
-msgstr "%s kustutatakse kaugfaili %s"
-
-#, c-format
-msgid "%s renaming files\n"
-msgstr "%s failide ümbernimetamine\n"
-
-#, c-format
 msgid ""
 "Cannot open tar archive\n"
 "%s"
@@ -4699,3 +4647,55 @@ msgstr "Kas jätkata algusest?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kohaliku koopia hankimine failist /ftp://some.host/editme.txt nurjus"
+
+#~ msgid "Set debug level"
+#~ msgstr "Määra silumistase"
+
+#~ msgid "<integer>"
+#~ msgstr "<integer>"
+
+#, c-format
+#~ msgid "Password for \\\\%s\\%s"
+#~ msgstr "Salasõna teenusele \\\\%s\\%s"
+
+#~ msgid "Domain:"
+#~ msgstr "Domeen:"
+
+#~ msgid "Username:"
+#~ msgstr "Kasutaja:"
+
+#~ msgid "SMB authentication"
+#~ msgstr "SMB autentimine"
+
+#~ msgid "SMB link to machine"
+#~ msgstr "SMB ühendus masinaga"
+
+#~ msgid "SM&B link..."
+#~ msgstr "SM&B ühendus..."
+
+#, c-format
+#~ msgid "reconnect to %s failed"
+#~ msgstr "Ühenduse taastamine serveriga %s nurjus"
+
+#~ msgid "Authentication failed"
+#~ msgstr "Autentimine ebaõnnestus"
+
+#, c-format
+#~ msgid "Error %s creating directory %s"
+#~ msgstr "Viga %s kataloogi %s loomisel"
+
+#, c-format
+#~ msgid "Error %s removing directory %s"
+#~ msgstr "Viga %s kataloogi %s kustutamisel"
+
+#, c-format
+#~ msgid "%s opening remote file %s"
+#~ msgstr "%s avatakse kaugfaili %s"
+
+#, c-format
+#~ msgid "%s removing remote file %s"
+#~ msgstr "%s kustutatakse kaugfaili %s"
+
+#, c-format
+#~ msgid "%s renaming files\n"
+#~ msgstr "%s failide ümbernimetamine\n"

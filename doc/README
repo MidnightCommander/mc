@@ -45,7 +45,7 @@ familiar to the users of similar software for other operating systems.
 The features include:
 
 	* Built in Virtual File System: manipulate remote file systems
-          through the FTP and SMB protocols or over secure shell, browse
+          through the FTP and SFTP protocols or over secure shell, browse
           contents of tar, ar, rpm, zip, cpio, lha and rar archives just
 	  like local files.
 

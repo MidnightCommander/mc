@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-08-15 15:53+0200\n"
+"POT-Creation-Date: 2021-09-26 10:06+0300\n"
 "PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Catalan (http://www.transifex.com/mc/mc/language/ca/)\n"
@@ -674,12 +674,6 @@ msgstr "Inhabilita el suport de subintèrprets"
 
 msgid "Log ftp dialog to specified file"
 msgstr "Enregistra el diàleg FTP al fitxer especificat"
-
-msgid "Set debug level"
-msgstr "Determina el nivell de depuració"
-
-msgid "<integer>"
-msgstr "<integer>"
 
 msgid "Launches the file viewer on a file"
 msgstr "Llança el visor de fitxers amb un fitxer"
@@ -2180,19 +2174,6 @@ msgid "Background jobs"
 msgstr "Tasques en segon pla"
 
 #, c-format
-msgid "Password for \\\\%s\\%s"
-msgstr "Contrasenya per a \\\\%s\\%s"
-
-msgid "Domain:"
-msgstr "Domini:"
-
-msgid "Username:"
-msgstr "Nom d'usuari:"
-
-msgid "SMB authentication"
-msgstr "Autenticació SMB"
-
-#, c-format
 msgid ""
 "Cannot chdir to \"%s\"\n"
 "%s"
@@ -2512,9 +2493,6 @@ msgstr "SFTP amb la màquina"
 
 msgid "Shell link to machine"
 msgstr "Enllaç per a l'intèrpret amb la màquina"
-
-msgid "SMB link to machine"
-msgstr "Connexió per SMB"
 
 msgid "Undelete files on an ext2 file system"
 msgstr "Recupera els fitxers en un sistema de fitxers ext2"
@@ -3113,9 +3091,6 @@ msgstr "Enllaç per a l'i&ntèrpret..."
 
 msgid "S&FTP link..."
 msgstr "Enllaç per a &SFTP..."
-
-msgid "SM&B link..."
-msgstr "Enllaç per a SM&B..."
 
 msgid "Paneli&ze"
 msgstr "&Quadre de cerca"
@@ -4499,33 +4474,6 @@ msgid "sftp: Listing done."
 msgstr "sftp: el llistat s'ha completat."
 
 #, c-format
-msgid "reconnect to %s failed"
-msgstr "ha fallat la reconnexió amb %s"
-
-msgid "Authentication failed"
-msgstr "Ha fallat l'autenticació"
-
-#, c-format
-msgid "Error %s creating directory %s"
-msgstr "S'ha produït l'error %s en crear el directori %s"
-
-#, c-format
-msgid "Error %s removing directory %s"
-msgstr "S'ha produït l'error %s en suprimir el directori %s"
-
-#, c-format
-msgid "%s opening remote file %s"
-msgstr "%s està obrint el fitxer remot %s"
-
-#, c-format
-msgid "%s removing remote file %s"
-msgstr "%s està eliminant el fitxer remot %s"
-
-#, c-format
-msgid "%s renaming files\n"
-msgstr "%s està reanomenant els fitxers\n"
-
-#, c-format
 msgid ""
 "Cannot open tar archive\n"
 "%s"
@@ -4740,3 +4688,55 @@ msgstr "Continuo des del començament?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "No s'ha pogut obtenir una còpia local de /ftp://algun.amfitrió/editam.txt"
+
+#~ msgid "Set debug level"
+#~ msgstr "Determina el nivell de depuració"
+
+#~ msgid "<integer>"
+#~ msgstr "<integer>"
+
+#, c-format
+#~ msgid "Password for \\\\%s\\%s"
+#~ msgstr "Contrasenya per a \\\\%s\\%s"
+
+#~ msgid "Domain:"
+#~ msgstr "Domini:"
+
+#~ msgid "Username:"
+#~ msgstr "Nom d'usuari:"
+
+#~ msgid "SMB authentication"
+#~ msgstr "Autenticació SMB"
+
+#~ msgid "SMB link to machine"
+#~ msgstr "Connexió per SMB"
+
+#~ msgid "SM&B link..."
+#~ msgstr "Enllaç per a SM&B..."
+
+#, c-format
+#~ msgid "reconnect to %s failed"
+#~ msgstr "ha fallat la reconnexió amb %s"
+
+#~ msgid "Authentication failed"
+#~ msgstr "Ha fallat l'autenticació"
+
+#, c-format
+#~ msgid "Error %s creating directory %s"
+#~ msgstr "S'ha produït l'error %s en crear el directori %s"
+
+#, c-format
+#~ msgid "Error %s removing directory %s"
+#~ msgstr "S'ha produït l'error %s en suprimir el directori %s"
+
+#, c-format
+#~ msgid "%s opening remote file %s"
+#~ msgstr "%s està obrint el fitxer remot %s"
+
+#, c-format
+#~ msgid "%s removing remote file %s"
+#~ msgstr "%s està eliminant el fitxer remot %s"
+
+#, c-format
+#~ msgid "%s renaming files\n"
+#~ msgstr "%s està reanomenant els fitxers\n"

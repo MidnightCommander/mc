@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-08-15 15:53+0200\n"
+"POT-Creation-Date: 2021-09-26 10:06+0300\n"
 "PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Swedish (http://www.transifex.com/mc/mc/language/sv/)\n"
@@ -662,12 +662,6 @@ msgstr "Stäng av stöd för underskal"
 
 msgid "Log ftp dialog to specified file"
 msgstr "Logga ftpdialog till specificerad fil"
-
-msgid "Set debug level"
-msgstr "Ställ in felsökningsnivå"
-
-msgid "<integer>"
-msgstr "<heltal>"
 
 msgid "Launches the file viewer on a file"
 msgstr "Startar filvisaren"
@@ -2164,19 +2158,6 @@ msgid "Background jobs"
 msgstr "Bakgrundsjobb"
 
 #, c-format
-msgid "Password for \\\\%s\\%s"
-msgstr "Lösenord för \\\\%s\\%s"
-
-msgid "Domain:"
-msgstr "Domän:"
-
-msgid "Username:"
-msgstr "Användarnamn:"
-
-msgid "SMB authentication"
-msgstr "SMB-autentisering"
-
-#, c-format
 msgid ""
 "Cannot chdir to \"%s\"\n"
 "%s"
@@ -2492,9 +2473,6 @@ msgstr "SFTP till maskin"
 
 msgid "Shell link to machine"
 msgstr "Shell-länk till maskin"
-
-msgid "SMB link to machine"
-msgstr "SMB-länk till maskin"
 
 msgid "Undelete files on an ext2 file system"
 msgstr "Återställ borttagna filer på ett ext2-filsystem"
@@ -3092,9 +3070,6 @@ msgstr "S&kallänk..."
 
 msgid "S&FTP link..."
 msgstr "SFTP-l&änk..."
-
-msgid "SM&B link..."
-msgstr "SM&B-länk..."
 
 msgid "Paneli&ze"
 msgstr "Pa&nelisera"
@@ -4456,33 +4431,6 @@ msgid "sftp: Listing done."
 msgstr "sftp: Listning klar."
 
 #, c-format
-msgid "reconnect to %s failed"
-msgstr "återuppkoppling till %s misslyckades"
-
-msgid "Authentication failed"
-msgstr "Autentisering misslyckades"
-
-#, c-format
-msgid "Error %s creating directory %s"
-msgstr "Fel %s under skapande av katalog %s"
-
-#, c-format
-msgid "Error %s removing directory %s"
-msgstr "Fel %s under borttagning av katalog %s"
-
-#, c-format
-msgid "%s opening remote file %s"
-msgstr "%s under öppnande av fjärrfil %s"
-
-#, c-format
-msgid "%s removing remote file %s"
-msgstr "%s under borttagning av fjärrfil %s"
-
-#, c-format
-msgid "%s renaming files\n"
-msgstr "%s under omdöpning av filer\n"
-
-#, c-format
 msgid ""
 "Cannot open tar archive\n"
 "%s"
@@ -4695,3 +4643,55 @@ msgstr "Fortsätt från början?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan inte hämta en lokal kopia av /ftp://some.host/editme.txt"
+
+#~ msgid "Set debug level"
+#~ msgstr "Ställ in felsökningsnivå"
+
+#~ msgid "<integer>"
+#~ msgstr "<heltal>"
+
+#, c-format
+#~ msgid "Password for \\\\%s\\%s"
+#~ msgstr "Lösenord för \\\\%s\\%s"
+
+#~ msgid "Domain:"
+#~ msgstr "Domän:"
+
+#~ msgid "Username:"
+#~ msgstr "Användarnamn:"
+
+#~ msgid "SMB authentication"
+#~ msgstr "SMB-autentisering"
+
+#~ msgid "SMB link to machine"
+#~ msgstr "SMB-länk till maskin"
+
+#~ msgid "SM&B link..."
+#~ msgstr "SM&B-länk..."
+
+#, c-format
+#~ msgid "reconnect to %s failed"
+#~ msgstr "återuppkoppling till %s misslyckades"
+
+#~ msgid "Authentication failed"
+#~ msgstr "Autentisering misslyckades"
+
+#, c-format
+#~ msgid "Error %s creating directory %s"
+#~ msgstr "Fel %s under skapande av katalog %s"
+
+#, c-format
+#~ msgid "Error %s removing directory %s"
+#~ msgstr "Fel %s under borttagning av katalog %s"
+
+#, c-format
+#~ msgid "%s opening remote file %s"
+#~ msgstr "%s under öppnande av fjärrfil %s"
+
+#, c-format
+#~ msgid "%s removing remote file %s"
+#~ msgstr "%s under borttagning av fjärrfil %s"
+
+#, c-format
+#~ msgid "%s renaming files\n"
+#~ msgstr "%s under omdöpning av filer\n"
