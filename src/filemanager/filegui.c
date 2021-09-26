@@ -1270,8 +1270,7 @@ file_progress_real_query_replace (file_op_context_t * ctx, enum OperationMode mo
 /* --------------------------------------------------------------------------------------------- */
 
 char *
-file_mask_dialog (file_op_context_t * ctx, FileOperation operation,
-                  gboolean only_one,
+file_mask_dialog (file_op_context_t * ctx, FileOperation operation, gboolean only_one,
                   const char *format, const void *text, const char *def_text, gboolean * do_bg)
 {
     size_t fmd_xlen;
@@ -1336,16 +1335,16 @@ file_mask_dialog (file_op_context_t * ctx, FileOperation operation,
 
         quick_widget_t quick_widgets[] = {
             /* *INDENT-OFF* */
-            QUICK_LABELED_INPUT (fmd_buf, input_label_above,
-                                 easy_patterns ? "*" : "^(.*)$", "input-def", &source_mask,
-                                 NULL, FALSE, FALSE, INPUT_COMPLETE_FILENAMES),
+            QUICK_LABELED_INPUT (fmd_buf, input_label_above, easy_patterns ? "*" : "^(.*)$",
+                                 "input-def", &source_mask, NULL, FALSE, FALSE,
+                                 INPUT_COMPLETE_FILENAMES),
             QUICK_START_COLUMNS,
                 QUICK_SEPARATOR (FALSE),
             QUICK_NEXT_COLUMN,
                 QUICK_CHECKBOX (N_("&Using shell patterns"), &source_easy_patterns, NULL),
             QUICK_STOP_COLUMNS,
-            QUICK_LABELED_INPUT (N_("to:"), input_label_above,
-                                 def_text_secure, "input2", &dest_dir, NULL, FALSE, FALSE, INPUT_COMPLETE_FILENAMES),
+            QUICK_LABELED_INPUT (N_("to:"), input_label_above, def_text_secure, "input2", &dest_dir,
+                                 NULL, FALSE, FALSE, INPUT_COMPLETE_FILENAMES),
             QUICK_SEPARATOR (TRUE),
             QUICK_START_COLUMNS,
                 QUICK_CHECKBOX (N_("Follow &links"), &ctx->follow_links, NULL),
