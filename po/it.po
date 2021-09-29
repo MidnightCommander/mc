@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
 "POT-Creation-Date: 2021-09-26 10:06+0300\n"
-"PO-Revision-Date: 2021-06-09 12:49+0200\n"
+"PO-Revision-Date: 2021-09-29 09:45+0200\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/mc/language/"
 "it/)\n"
@@ -4364,7 +4364,7 @@ msgid "sftp: %s"
 msgstr "sftp: %s"
 
 msgid "sftp: failed to convert remote host IP address into text form"
-msgstr ""
+msgstr "sftp: fallita conversione indirizzo IP host remoto nella forma testuale"
 
 #, c-format
 msgid "sftp: making connection to %s"
@@ -4378,10 +4378,10 @@ msgid "sftp: connection to server failed: %s"
 msgstr "sftp: connessione al server fallita: %s"
 
 msgid "sftp: found host key of unsupported type: RSA1"
-msgstr ""
+msgstr "sftp: trovata chiave host di tipo non supportato: RSA1"
 
 msgid "sftp: unknown host key type:"
-msgstr ""
+msgstr "sftp: tipo chiave host sconosciuto:"
 
 #, c-format
 msgid ""
@@ -4389,15 +4389,18 @@ msgid ""
 "%s (%s)\n"
 "to the list of known hosts."
 msgstr ""
+"Aggiunto permanentemente\n"
+"%s (%s)\n"
+"all'elenco di host conosciuti."
 
 msgid "sftp: cannot get the remote host key"
-msgstr ""
+msgstr "sftp: impossibile ottenere la chiave host remoto"
 
 msgid "sftp: unsupported key type, can't check remote host key"
-msgstr ""
+msgstr "sftp: tipo chiave host remoto non supportata, verifica impossibile"
 
 msgid "sftp: can't compute host key fingerprint hash"
-msgstr ""
+msgstr "sftp: impossibile computare impronta hash chiave host"
 
 #, c-format
 msgid ""
@@ -4408,6 +4411,12 @@ msgid ""
 "SHA1:%s.\n"
 "Do you want to add it to the list of known hosts and continue connecting?"
 msgstr ""
+"L'autenticità dell'host\n"
+"%s (%s)\n"
+"non può essere confermata!\n"
+"%s l'hash impronta chiave è\n"
+"SHA1:%s.\n"
+"Aggiungerla all'elenco di host conosciuti e continuare la connessione?"
 
 #, c-format
 msgid ""
@@ -4417,10 +4426,13 @@ msgid ""
 "Are you sure you want to add it to the list of known hosts and continue "
 "connecting?"
 msgstr ""
+"%s (%s)\n"
+"trovato nell'elenco host conosciuti ma\n"
+"LE CHIAVI NON COMBACIANO! POTREBBE TRATTARSI DI ATTACCO MITM!\n"
+"Sicuri di aggiungerlo all'elenco host conosciuti e continuare la connessione?"
 
-#, fuzzy
 msgid "sftp: host key verification failed"
-msgstr "Autenticazione fallita"
+msgstr "sftp: fallita verifica chiave host"
 
 #, c-format
 msgid "sftp: Enter passphrase for %s "
@@ -4436,9 +4448,8 @@ msgstr "sftp: inserire password per %s "
 msgid "sftp: Password is empty."
 msgstr "sftp: la password è vuota."
 
-#, fuzzy
 msgid "sftp: failure establishing SSH session"
-msgstr "sftp: fallita avvio sessione SSH"
+msgstr "sftp: fallito avvio sessione SSH"
 
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: nessun file handler dati per la lettura del file"
@@ -4667,55 +4678,3 @@ msgstr "Continuare dall'inizio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Impossibile ricevere copia locale di /ftp://un.host/modificami.txt"
-
-#~ msgid "Set debug level"
-#~ msgstr "Imposta livello di debug"
-
-#~ msgid "<integer>"
-#~ msgstr "<integer>"
-
-#, c-format
-#~ msgid "Password for \\\\%s\\%s"
-#~ msgstr "Password per \\\\%s\\%s"
-
-#~ msgid "Domain:"
-#~ msgstr "Dominio:"
-
-#~ msgid "Username:"
-#~ msgstr "Nome utente:"
-
-#~ msgid "SMB authentication"
-#~ msgstr "Autenticazione SMB"
-
-#~ msgid "SMB link to machine"
-#~ msgstr "Connessione SMB"
-
-#~ msgid "SM&B link..."
-#~ msgstr "Connessione SM&B..."
-
-#, c-format
-#~ msgid "reconnect to %s failed"
-#~ msgstr "riconnessione a %s fallita"
-
-#~ msgid "Authentication failed"
-#~ msgstr "Autenticazione fallita"
-
-#, c-format
-#~ msgid "Error %s creating directory %s"
-#~ msgstr "Errore %s nella creazione directory %s"
-
-#, c-format
-#~ msgid "Error %s removing directory %s"
-#~ msgstr "Errore %s nella rimozione directory %s"
-
-#, c-format
-#~ msgid "%s opening remote file %s"
-#~ msgstr "%s durante l'apertura del file remoto %s"
-
-#, c-format
-#~ msgid "%s removing remote file %s"
-#~ msgstr "%s durante la rimozione del file remoto %s"
-
-#, c-format
-#~ msgid "%s renaming files\n"
-#~ msgstr "%s durante la rinomina file\n"
