@@ -308,7 +308,8 @@ free_link (void *data)
 static inline void *
 free_erase_list (GQueue * lp)
 {
-    g_queue_free_full (lp, free_link);
+    if (lp != NULL)
+        g_queue_free_full (lp, free_link);
 
     return NULL;
 }
