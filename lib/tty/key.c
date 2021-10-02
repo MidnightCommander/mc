@@ -223,8 +223,7 @@ const key_code_name_t key_name_conv_tab[] = {
 #define MC_MSEC_PER_SEC  1000
 #define MC_USEC_PER_MSEC 1000
 
-#define GET_TIME(tv)     (gettimeofday(&tv, (struct timezone *) NULL))
-#define DIF_TIME(t1, t2) ((t2.tv_sec  - t1.tv_sec) * MC_USEC_PER_MSEC + (t2.tv_usec - t1.tv_usec)/MC_USEC_PER_MSEC)
+#define GET_TIME(tv) (gettimeofday(&tv, (struct timezone *) NULL))
 
 /* The maximum sequence length (32 + null terminator) */
 #define SEQ_BUFFER_LEN 33
@@ -744,8 +743,7 @@ getch_with_delay (void)
 static void
 xmouse_get_event (Gpm_Event * ev, gboolean extended)
 {
-    static struct timeval tv1 = { 0, 0 };       /* Force first click as single */
-    static struct timeval tv2;
+    static gint64 tv1 = 0;      /* Force first click as single */
     static int clicks = 0;
     static int last_btn = 0;
     int btn;
@@ -814,13 +812,12 @@ xmouse_get_event (Gpm_Event * ev, gboolean extended)
                 /* don't generate GPM_UP after mouse wheel */
                 /* need for menu event handling */
                 ev->type = 0;
-                tv1.tv_sec = 0;
-                tv1.tv_usec = 0;
+                tv1 = 0;
             }
             else
             {
                 ev->type = GPM_UP | (GPM_SINGLE << clicks);
-                GET_TIME (tv1);
+                tv1 = g_get_real_time ();
             }
             ev->buttons = 0;
             last_btn = 0;
@@ -834,6 +831,8 @@ xmouse_get_event (Gpm_Event * ev, gboolean extended)
     }
     else
     {
+        gint64 tv2;
+
         if (btn >= 32 && btn <= 34)
         {
             btn -= 32;
@@ -842,8 +841,8 @@ xmouse_get_event (Gpm_Event * ev, gboolean extended)
         else
             ev->type = GPM_DOWN;
 
-        GET_TIME (tv2);
-        if (tv1.tv_sec != 0 && DIF_TIME (tv1, tv2) < double_click_speed)
+        tv2 = g_get_real_time ();
+        if (tv1 != 0 && tv2 - tv1 < (gint64) double_click_speed * MC_USEC_PER_MSEC)
         {
             clicks++;
             clicks %= 3;
