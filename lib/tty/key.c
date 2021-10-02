@@ -89,11 +89,11 @@
 
 /*** global variables ****************************************************************************/
 
-int mou_auto_repeat = 100;
-int double_click_speed = 250;
+int mou_auto_repeat = 100;      /* ms */
+int double_click_speed = 250;   /* ms */
 gboolean old_esc_mode = TRUE;
 /* timeout for old_esc_mode in usec */
-int old_esc_mode_timeout = 1000000;     /* settable via env */
+int old_esc_mode_timeout = G_USEC_PER_SEC;      /* us, settable via env */
 gboolean use_8th_bit_as_meta = FALSE;
 
 gboolean bracketed_pasting_in_progress = FALSE;
@@ -220,8 +220,11 @@ const key_code_name_t key_name_conv_tab[] = {
 
 /*** file scope macro definitions ****************************************************************/
 
+#define MC_MSEC_PER_SEC  1000
+#define MC_USEC_PER_MSEC 1000
+
 #define GET_TIME(tv)     (gettimeofday(&tv, (struct timezone *) NULL))
-#define DIF_TIME(t1, t2) ((t2.tv_sec  - t1.tv_sec) * 1000 + (t2.tv_usec - t1.tv_usec)/1000)
+#define DIF_TIME(t1, t2) ((t2.tv_sec  - t1.tv_sec) * MC_USEC_PER_MSEC + (t2.tv_usec - t1.tv_usec)/MC_USEC_PER_MSEC)
 
 /* The maximum sequence length (32 + null terminator) */
 #define SEQ_BUFFER_LEN 33
@@ -640,7 +643,7 @@ try_channels (gboolean set_timeout)
         if (set_timeout)
         {
             time_out.tv_sec = 0;
-            time_out.tv_usec = 100000;
+            time_out.tv_usec = 100 * MC_USEC_PER_MSEC;
             timeptr = &time_out;
         }
 
@@ -1153,8 +1156,8 @@ getch_with_timeout (unsigned int delay_us)
     int c;
     struct timeval time_out;
 
-    time_out.tv_sec = delay_us / 1000000u;
-    time_out.tv_usec = delay_us % 1000000u;
+    time_out.tv_sec = delay_us / G_USEC_PER_SEC;
+    time_out.tv_usec = delay_us % G_USEC_PER_SEC;
     tty_nodelay (TRUE);
     FD_ZERO (&Read_FD_Set);
     FD_SET (input_fd, &Read_FD_Set);
@@ -1797,11 +1800,11 @@ get_key_code (int no_delay)
                 return -1;
 
             GET_TIME (current);
-            time_out.tv_sec = old_esc_mode_timeout / 1000000 + esctime.tv_sec;
-            time_out.tv_usec = old_esc_mode_timeout % 1000000 + esctime.tv_usec;
-            if (time_out.tv_usec > 1000000)
+            time_out.tv_sec = old_esc_mode_timeout / G_USEC_PER_SEC + esctime.tv_sec;
+            time_out.tv_usec = old_esc_mode_timeout % G_USEC_PER_SEC + esctime.tv_usec;
+            if (time_out.tv_usec > G_USEC_PER_SEC)
             {
-                time_out.tv_usec -= 1000000;
+                time_out.tv_usec -= G_USEC_PER_SEC;
                 time_out.tv_sec++;
             }
             if (current.tv_sec < time_out.tv_sec ||
@@ -2000,7 +2003,7 @@ tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
 
         if (redo_event)
         {
-            time_out.tv_usec = mou_auto_repeat * 1000;
+            time_out.tv_usec = mou_auto_repeat * MC_USEC_PER_MSEC;
             time_out.tv_sec = 0;
 
             time_addr = &time_out;
@@ -2166,7 +2169,7 @@ char *
 learn_key (void)
 {
     /* LEARN_TIMEOUT in usec */
-#define LEARN_TIMEOUT 200000
+#define LEARN_TIMEOUT (200 * MC_USEC_PER_MSEC)
 
     fd_set Read_FD_Set;
     struct timeval endtime;
@@ -2183,9 +2186,9 @@ learn_key (void)
 
     GET_TIME (endtime);
     endtime.tv_usec += LEARN_TIMEOUT;
-    if (endtime.tv_usec > 1000000)
+    if (endtime.tv_usec > G_USEC_PER_SEC)
     {
-        endtime.tv_usec -= 1000000;
+        endtime.tv_usec -= G_USEC_PER_SEC;
         endtime.tv_sec++;
     }
 
