@@ -1733,7 +1733,7 @@ get_key_code (int no_delay)
 {
     int c;
     static key_def *this = NULL, *parent;
-    static struct timeval esctime = { -1, -1 };
+    static gint64 esc_time = -1;
     static int lastnodelay = -1;
 
     if (no_delay != lastnodelay)
@@ -1792,22 +1792,8 @@ get_key_code (int no_delay)
         tty_nodelay (FALSE);
         if (c == -1)
         {
-            struct timeval current, time_out;
-
             if (this == NULL || parent == NULL || parent->action != MCKEY_ESCAPE || !old_esc_mode ||
-                esctime.tv_sec == -1)
-                return -1;
-
-            GET_TIME (current);
-            time_out.tv_sec = old_esc_mode_timeout / G_USEC_PER_SEC + esctime.tv_sec;
-            time_out.tv_usec = old_esc_mode_timeout % G_USEC_PER_SEC + esctime.tv_usec;
-            if (time_out.tv_usec > G_USEC_PER_SEC)
-            {
-                time_out.tv_usec -= G_USEC_PER_SEC;
-                time_out.tv_sec++;
-            }
-            if (current.tv_sec < time_out.tv_sec ||
-                (current.tv_sec == time_out.tv_sec && current.tv_usec < time_out.tv_usec))
+                esc_time == -1 || g_get_real_time () < esc_time + old_esc_mode_timeout)
                 return -1;
 
             this = NULL;
@@ -1871,11 +1857,11 @@ get_key_code (int no_delay)
             {
                 if (no_delay != 0)
                 {
-                    GET_TIME (esctime);
+                    esc_time = g_get_real_time ();
                     goto nodelay_try_again;
                 }
 
-                esctime.tv_sec = -1;
+                esc_time = -1;
                 c = getch_with_timeout (old_esc_mode_timeout);
                 if (c != -1)
                     continue;
