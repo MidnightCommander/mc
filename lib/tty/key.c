@@ -2193,7 +2193,7 @@ learn_key (void)
     tty_keypad (TRUE);
     tty_nodelay (FALSE);
     *p = '\0';
-    return g_strdup (buffer);
+    return (buffer[0] != '\0' ? g_strdup (buffer) : NULL);
 #undef LEARN_TIMEOUT
 }
 

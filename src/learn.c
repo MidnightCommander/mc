@@ -105,7 +105,7 @@ learn_button (WButton * button, int action)
          */
         gboolean seq_ok = FALSE;
 
-        if (*seq != '\0' && strcmp (seq, "\\e") != 0 && strcmp (seq, "\\e\\e") != 0
+        if (strcmp (seq, "\\e") != 0 && strcmp (seq, "\\e\\e") != 0
             && strcmp (seq, "^m") != 0 && strcmp (seq, "^i") != 0
             && (seq[1] != '\0' || *seq < ' ' || *seq > '~'))
         {
