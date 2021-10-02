@@ -223,8 +223,6 @@ const key_code_name_t key_name_conv_tab[] = {
 #define MC_MSEC_PER_SEC  1000
 #define MC_USEC_PER_MSEC 1000
 
-#define GET_TIME(tv) (gettimeofday(&tv, (struct timezone *) NULL))
-
 /* The maximum sequence length (32 + null terminator) */
 #define SEQ_BUFFER_LEN 33
 
@@ -2153,12 +2151,11 @@ tty_getch (void)
 char *
 learn_key (void)
 {
-    /* LEARN_TIMEOUT in usec */
-#define LEARN_TIMEOUT (200 * MC_USEC_PER_MSEC)
+    /* LEARN_TIMEOUT in ms */
+#define LEARN_TIMEOUT 200
 
     fd_set Read_FD_Set;
-    struct timeval endtime;
-    struct timeval time_out;
+    gint64 end_time;
     int c;
     char buffer[256];
     char *p = buffer;
@@ -2169,32 +2166,25 @@ learn_key (void)
         c = tty_lowlevel_getch ();      /* Sanity check, should be unnecessary */
     learn_store_key (buffer, &p, c);
 
-    GET_TIME (endtime);
-    endtime.tv_usec += LEARN_TIMEOUT;
-    if (endtime.tv_usec > G_USEC_PER_SEC)
-    {
-        endtime.tv_usec -= G_USEC_PER_SEC;
-        endtime.tv_sec++;
-    }
+    end_time = g_get_real_time () + LEARN_TIMEOUT * MC_USEC_PER_MSEC;
 
     tty_nodelay (TRUE);
     while (TRUE)
     {
         while ((c = tty_lowlevel_getch ()) == -1)
         {
-            GET_TIME (time_out);
-            time_out.tv_usec = endtime.tv_usec - time_out.tv_usec;
-            if (time_out.tv_usec < 0)
-                time_out.tv_sec++;
-            time_out.tv_sec = endtime.tv_sec - time_out.tv_sec;
-            if (time_out.tv_sec >= 0 && time_out.tv_usec > 0)
-            {
-                FD_ZERO (&Read_FD_Set);
-                FD_SET (input_fd, &Read_FD_Set);
-                select (input_fd + 1, &Read_FD_Set, NULL, NULL, &time_out);
-            }
-            else
+            gint64 time_out;
+            struct timeval tv;
+
+            time_out = end_time - g_get_real_time ();
+            if (time_out <= 0)
                 break;
+
+            tv.tv_sec = time_out / G_USEC_PER_SEC;
+            tv.tv_usec = time_out % G_USEC_PER_SEC;
+            FD_ZERO (&Read_FD_Set);
+            FD_SET (input_fd, &Read_FD_Set);
+            select (input_fd + 1, &Read_FD_Set, NULL, NULL, &tv);
         }
         if (c == -1)
             break;
