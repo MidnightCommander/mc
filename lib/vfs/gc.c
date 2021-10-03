@@ -129,7 +129,7 @@ vfs_addstamp (struct vfs_class *v, vfsid id)
         stamp = g_new (struct vfs_stamping, 1);
         stamp->v = v;
         stamp->id = id;
-        stamp->time = g_get_real_time ();
+        stamp->time = g_get_monotonic_time ();
 
         stamps = g_slist_append (stamps, stamp);
     }
@@ -152,7 +152,7 @@ vfs_stamp (struct vfs_class *v, vfsid id)
     stamp = g_slist_find_custom (stamps, &what, vfs_stamp_compare);
     if (stamp != NULL && stamp->data != NULL)
     {
-        VFS_STAMPING (stamp->data)->time = g_get_real_time ();
+        VFS_STAMPING (stamp->data)->time = g_get_monotonic_time ();
         ret = TRUE;
     }
 
@@ -247,7 +247,7 @@ vfs_expire (gboolean now)
         return;
     locked = TRUE;
 
-    curr_time = g_get_real_time ();
+    curr_time = g_get_monotonic_time ();
     exp_time = curr_time - vfs_timeout * G_USEC_PER_SEC;
 
     if (now)

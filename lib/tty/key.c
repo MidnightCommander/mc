@@ -815,7 +815,7 @@ xmouse_get_event (Gpm_Event * ev, gboolean extended)
             else
             {
                 ev->type = GPM_UP | (GPM_SINGLE << clicks);
-                tv1 = g_get_real_time ();
+                tv1 = g_get_monotonic_time ();
             }
             ev->buttons = 0;
             last_btn = 0;
@@ -839,7 +839,7 @@ xmouse_get_event (Gpm_Event * ev, gboolean extended)
         else
             ev->type = GPM_DOWN;
 
-        tv2 = g_get_real_time ();
+        tv2 = g_get_monotonic_time ();
         if (tv1 != 0 && tv2 - tv1 < (gint64) double_click_speed * MC_USEC_PER_MSEC)
         {
             clicks++;
@@ -1791,7 +1791,7 @@ get_key_code (int no_delay)
         if (c == -1)
         {
             if (this == NULL || parent == NULL || parent->action != MCKEY_ESCAPE || !old_esc_mode ||
-                esc_time == -1 || g_get_real_time () < esc_time + old_esc_mode_timeout)
+                esc_time == -1 || g_get_monotonic_time () < esc_time + old_esc_mode_timeout)
                 return -1;
 
             this = NULL;
@@ -1855,7 +1855,7 @@ get_key_code (int no_delay)
             {
                 if (no_delay != 0)
                 {
-                    esc_time = g_get_real_time ();
+                    esc_time = g_get_monotonic_time ();
                     goto nodelay_try_again;
                 }
 
@@ -2166,7 +2166,7 @@ learn_key (void)
         c = tty_lowlevel_getch ();      /* Sanity check, should be unnecessary */
     learn_store_key (buffer, &p, c);
 
-    end_time = g_get_real_time () + LEARN_TIMEOUT * MC_USEC_PER_MSEC;
+    end_time = g_get_monotonic_time () + LEARN_TIMEOUT * MC_USEC_PER_MSEC;
 
     tty_nodelay (TRUE);
     while (TRUE)
@@ -2176,7 +2176,7 @@ learn_key (void)
             gint64 time_out;
             struct timeval tv;
 
-            time_out = end_time - g_get_real_time ();
+            time_out = end_time - g_get_monotonic_time ();
             if (time_out <= 0)
                 break;
 

@@ -817,7 +817,7 @@ progress_update_one (file_op_total_context_t * tctx, file_op_context_t * ctx, of
     tctx->progress_count++;
     tctx->progress_bytes += (uintmax_t) add;
 
-    tv_current = g_get_real_time ();
+    tv_current = g_get_monotonic_time ();
 
     if (tv_start < 0)
         tv_start = tv_current;
@@ -2388,7 +2388,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
         }
     }
 
-    tv_transfer_start = g_get_real_time ();
+    tv_transfer_start = g_get_monotonic_time ();
 
     while ((src_desc = mc_open (src_vpath, O_RDONLY | O_LINEAR)) < 0 && !ctx->skip_all)
     {
@@ -2570,7 +2570,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
             if (n_read == 0)
                 break;
 
-            tv_current = g_get_real_time ();
+            tv_current = g_get_monotonic_time ();
 
             if (n_read > 0)
             {
@@ -3270,7 +3270,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
     }
 
     tctx = file_op_total_context_new ();
-    tctx->transfer_start = g_get_real_time ();
+    tctx->transfer_start = g_get_monotonic_time ();
 
 #ifdef ENABLE_BACKGROUND
     /* Did the user select to do a background operation? */

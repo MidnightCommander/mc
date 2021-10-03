@@ -1493,14 +1493,14 @@ ftpfs_linear_abort (struct vfs_class *me, vfs_file_handler_t * fh)
             gint64 start_tim;
             char buf[BUF_8K];
 
-            start_tim = g_get_real_time ();
+            start_tim = g_get_monotonic_time ();
 
             /* flush the remaining data */
             while (read (dsock, buf, sizeof (buf)) > 0)
             {
                 gint64 tim;
 
-                tim = g_get_real_time ();
+                tim = g_get_monotonic_time ();
 
                 if (tim > start_tim + ABORT_TIMEOUT)
                 {
@@ -1752,7 +1752,7 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
         return (-1);
     }
 
-    dir->timestamp = g_get_real_time () + ftpfs_directory_timeout * G_USEC_PER_SEC;
+    dir->timestamp = g_get_monotonic_time () + ftpfs_directory_timeout * G_USEC_PER_SEC;
 
     if (ftp_super->strict == RFC_STRICT)
         sock = ftpfs_open_data_connection (me, super, "LIST", 0, TYPE_ASCII, 0);
