@@ -311,13 +311,6 @@ if test x$with_mmap != xno; then
     fi
 fi
 
-dnl Sequent wants getprocessstats
-AC_CHECK_LIB(seq, get_process_stats, [
-	LIBS="$LIBS -lseq"
-	AC_DEFINE(HAVE_GET_PROCESS_STATS, 1,
-		  [Define if you have function `get_process_stats' and
-have to use that instead of gettimeofday])])
-
 mc_GET_FS_INFO
 
 
