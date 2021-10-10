@@ -9,7 +9,7 @@
 
    Written by:
    Slava Zanko <slavazanko@gmail.com>, 2013
-   Andrew Borodin <aborodin@vmail.ru>, 2020
+   Andrew Borodin <aborodin@vmail.ru>, 2011-2022
 
    This file is part of the Midnight Commander.
 
@@ -81,7 +81,7 @@ static input_colors_t command_colors;
 static cb_ret_t
 enter (WInput * lc_cmdline)
 {
-    char *cmd = lc_cmdline->buffer;
+    const char *cmd = lc_cmdline->buffer->str;
 
     if (!command_prompt)
         return MSG_HANDLED;

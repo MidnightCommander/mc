@@ -597,7 +597,7 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
             case quick_input:
                 if ((item->quick_widget->u.input.completion_flags & INPUT_COMPLETE_CD) != 0)
                     *item->quick_widget->u.input.result =
-                        tilde_expand (INPUT (item->widget)->buffer);
+                        tilde_expand (INPUT (item->widget)->buffer->str);
                 else
                     *item->quick_widget->u.input.result = input_get_text (INPUT (item->widget));
                 break;

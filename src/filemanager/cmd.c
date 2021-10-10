@@ -6,7 +6,7 @@
    Free Software Foundation, Inc.
 
    Written by:
-   Andrew Borodin <aborodin@vmail.ru>, 2013-2015
+   Andrew Borodin <aborodin@vmail.ru>, 2013-2022
 
    This file is part of the Midnight Commander.
 
@@ -622,7 +622,7 @@ view_filtered_cmd (const WPanel * panel)
     if (input_is_empty (cmdline))
         initial_command = selection (panel)->fname->str;
     else
-        initial_command = cmdline->buffer;
+        initial_command = cmdline->buffer->str;
 
     command =
         input_dialog (_("Filtered view"),

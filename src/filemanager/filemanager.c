@@ -1462,10 +1462,10 @@ handle_cmdline_enter (void)
 {
     size_t i;
 
-    for (i = 0; cmdline->buffer[i] != '\0' && whitespace (cmdline->buffer[i]); i++)
+    for (i = 0; i < cmdline->buffer->len && whitespace (cmdline->buffer->str[i]); i++)
         ;
 
-    if (cmdline->buffer[i] != '\0')
+    if (i != cmdline->buffer->len)
     {
         send_message (cmdline, NULL, MSG_KEY, '\n', NULL);
         return TRUE;

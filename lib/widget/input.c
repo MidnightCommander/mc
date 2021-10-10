@@ -156,9 +156,9 @@ delete_region (WInput * in, int start, int end)
 
     input_mark_cmd (in, FALSE);
     in->point = first;
-    last = str_offset_to_pos (in->buffer, last);
-    first = str_offset_to_pos (in->buffer, first);
-    str_move (in->buffer + first, in->buffer + last);
+    last = str_offset_to_pos (in->buffer->str, last);
+    first = str_offset_to_pos (in->buffer->str, first);
+    g_string_erase (in->buffer, first, last - first);
     in->charpoint = 0;
     in->need_push = TRUE;
 }
@@ -277,18 +277,15 @@ push_history (WInput * in, const char *text)
 static void
 move_buffer_backward (WInput * in, int start, int end)
 {
-    int i, pos, len;
     int str_len;
 
-    str_len = str_length (in->buffer);
+    str_len = str_length (in->buffer->str);
     if (start >= str_len || end > str_len + 1)
         return;
 
-    pos = str_offset_to_pos (in->buffer, start);
-    len = str_offset_to_pos (in->buffer, end) - pos;
-
-    for (i = pos; in->buffer[i + len - 1]; i++)
-        in->buffer[i] = in->buffer[i + len];
+    start = str_offset_to_pos (in->buffer->str, start);
+    end = str_offset_to_pos (in->buffer->str, end);
+    g_string_erase (in->buffer, start, end - start);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -298,6 +295,7 @@ insert_char (WInput * in, int c_code)
 {
     int res;
     long m1, m2;
+    size_t ins_point;
 
     if (input_eval_marks (in, &m1, &m2))
         delete_region (in, m1, m2);
@@ -320,37 +318,11 @@ insert_char (WInput * in, int c_code)
     }
 
     in->need_push = TRUE;
-    if (strlen (in->buffer) + 1 + in->charpoint >= in->current_max_size)
-    {
-        /* Expand the buffer */
-        size_t new_length;
-        char *narea;
-
-        new_length = in->current_max_size + WIDGET (in)->cols + in->charpoint;
-        narea = g_try_renew (char, in->buffer, new_length);
-        if (narea != NULL)
-        {
-            in->buffer = narea;
-            in->current_max_size = new_length;
-        }
-    }
-
-    if (strlen (in->buffer) + in->charpoint < in->current_max_size)
-    {
-        size_t i;
-        /* bytes from begin */
-        size_t ins_point = str_offset_to_pos (in->buffer, in->point);
-        /* move chars */
-        size_t rest_bytes = strlen (in->buffer + ins_point);
-
-        for (i = rest_bytes + 1; i > 0; i--)
-            in->buffer[ins_point + i + in->charpoint - 1] = in->buffer[ins_point + i - 1];
-
-        memcpy (in->buffer + ins_point, in->charbuf, in->charpoint);
-        in->point++;
-    }
-
+    ins_point = str_offset_to_pos (in->buffer->str, in->point);
+    g_string_insert_len (in->buffer, ins_point, in->charbuf, in->charpoint);
+    in->point++;
     in->charpoint = 0;
+
     return MSG_HANDLED;
 }
 
@@ -368,7 +340,7 @@ beginning_of_line (WInput * in)
 static void
 end_of_line (WInput * in)
 {
-    in->point = str_length (in->buffer);
+    in->point = str_length (in->buffer->str);
     in->charpoint = 0;
 }
 
@@ -377,11 +349,14 @@ end_of_line (WInput * in)
 static void
 backward_char (WInput * in)
 {
-    const char *act;
-
-    act = in->buffer + str_offset_to_pos (in->buffer, in->point);
     if (in->point > 0)
-        in->point -= str_cprev_noncomb_char (&act, in->buffer);
+    {
+        const char *act;
+
+        act = in->buffer->str + str_offset_to_pos (in->buffer->str, in->point);
+        in->point -= str_cprev_noncomb_char (&act, in->buffer->str);
+    }
+
     in->charpoint = 0;
 }
 
@@ -392,7 +367,7 @@ forward_char (WInput * in)
 {
     const char *act;
 
-    act = in->buffer + str_offset_to_pos (in->buffer, in->point);
+    act = in->buffer->str + str_offset_to_pos (in->buffer->str, in->point);
     if (act[0] != '\0')
         in->point += str_cnext_noncomb_char (&act);
     in->charpoint = 0;
@@ -405,17 +380,13 @@ forward_word (WInput * in)
 {
     const char *p;
 
-    p = in->buffer + str_offset_to_pos (in->buffer, in->point);
-    while (p[0] != '\0' && (str_isspace (p) || str_ispunct (p)))
-    {
+    p = in->buffer->str + str_offset_to_pos (in->buffer->str, in->point);
+
+    for (; p[0] != '\0' && (str_isspace (p) || str_ispunct (p)); in->point++)
         str_cnext_char (&p);
-        in->point++;
-    }
-    while (p[0] != '\0' && !str_isspace (p) && !str_ispunct (p))
-    {
+
+    for (; p[0] != '\0' && !str_isspace (p) && !str_ispunct (p); in->point++)
         str_cnext_char (&p);
-        in->point++;
-    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -425,9 +396,9 @@ backward_word (WInput * in)
 {
     const char *p;
 
-    p = in->buffer + str_offset_to_pos (in->buffer, in->point);
+    p = in->buffer->str + str_offset_to_pos (in->buffer->str, in->point);
 
-    while (p != in->buffer)
+    for (; p != in->buffer->str; in->point--)
     {
         const char *p_tmp;
 
@@ -438,15 +409,13 @@ backward_word (WInput * in)
             p = p_tmp;
             break;
         }
-        in->point--;
     }
-    while (p != in->buffer)
+
+    for (; p != in->buffer->str; in->point--)
     {
         str_cprev_char (&p);
         if (str_isspace (p) || str_ispunct (p))
             break;
-
-        in->point--;
     }
 }
 
@@ -455,13 +424,14 @@ backward_word (WInput * in)
 static void
 backward_delete (WInput * in)
 {
-    const char *act = in->buffer + str_offset_to_pos (in->buffer, in->point);
+    const char *act;
     int start;
 
     if (in->point == 0)
         return;
 
-    start = in->point - str_cprev_noncomb_char (&act, in->buffer);
+    act = in->buffer->str + str_offset_to_pos (in->buffer->str, in->point);
+    start = in->point - str_cprev_noncomb_char (&act, in->buffer->str);
     move_buffer_backward (in, start, in->point);
     in->charpoint = 0;
     in->need_push = TRUE;
@@ -474,11 +444,10 @@ static void
 delete_char (WInput * in)
 {
     const char *act;
-    int end = in->point;
+    int end;
 
-    act = in->buffer + str_offset_to_pos (in->buffer, in->point);
-    end += str_cnext_noncomb_char (&act);
-
+    act = in->buffer->str + str_offset_to_pos (in->buffer->str, in->point);
+    end = in->point + str_cnext_noncomb_char (&act);
     move_buffer_backward (in, in->point, end);
     in->charpoint = 0;
     in->need_push = TRUE;
@@ -503,10 +472,10 @@ copy_region (WInput * in, int start, int end)
 
     g_free (kill_buffer);
 
-    first = str_offset_to_pos (in->buffer, first);
-    last = str_offset_to_pos (in->buffer, last);
+    first = str_offset_to_pos (in->buffer->str, first);
+    last = str_offset_to_pos (in->buffer->str, last);
 
-    kill_buffer = g_strndup (in->buffer + first, last - first);
+    kill_buffer = g_strndup (in->buffer->str + first, last - first);
 
     mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_text_to_file", kill_buffer);
     /* try use external clipboard utility */
@@ -569,10 +538,10 @@ kill_line (WInput * in)
 {
     int chp;
 
-    chp = str_offset_to_pos (in->buffer, in->point);
+    chp = str_offset_to_pos (in->buffer->str, in->point);
     g_free (kill_buffer);
-    kill_buffer = g_strdup (&in->buffer[chp]);
-    in->buffer[chp] = '\0';
+    kill_buffer = g_strndup (in->buffer->str + chp, in->buffer->len - chp);
+    g_string_set_size (in->buffer, chp);
     in->charpoint = 0;
 }
 
@@ -582,7 +551,7 @@ static void
 clear_line (WInput * in)
 {
     in->need_push = TRUE;
-    in->buffer[0] = '\0';
+    g_string_set_size (in->buffer, 0);
     in->point = 0;
     in->mark = -1;
     in->charpoint = 0;
@@ -623,7 +592,7 @@ hist_prev (WInput * in)
         return;
 
     if (in->need_push)
-        push_history (in, in->buffer);
+        push_history (in, in->buffer->str);
 
     prev = g_list_previous (in->history.current);
     if (prev != NULL)
@@ -644,7 +613,7 @@ hist_next (WInput * in)
 
     if (in->need_push)
     {
-        push_history (in, in->buffer);
+        push_history (in, in->buffer->str);
         input_assign_text (in, "");
         return;
     }
@@ -672,7 +641,7 @@ hist_next (WInput * in)
 static void
 port_region_marked_for_delete (WInput * in)
 {
-    in->buffer[0] = '\0';
+    g_string_set_size (in->buffer, 0);
     in->point = 0;
     in->first = FALSE;
     in->charpoint = 0;
@@ -875,7 +844,7 @@ input_save_history (const gchar * event_group_name, const gchar * event_name,
     {
         ev_history_load_save_t *ev = (ev_history_load_save_t *) data;
 
-        push_history (in, in->buffer);
+        push_history (in, in->buffer->str);
         if (in->history.changed)
             mc_config_history_save (ev->cfg, in->history.name, in->history.list);
         in->history.changed = FALSE;
@@ -905,7 +874,7 @@ input_destroy (WInput * in)
         g_list_free_full (in->history.list, g_free);
     }
     g_free (in->history.name);
-    g_free (in->buffer);
+    g_string_free (in->buffer, TRUE);
     MC_PTR_FREE (kill_buffer);
 }
 
@@ -922,10 +891,10 @@ input_screen_to_point (const WInput * in, int x)
     if (x < 0)
         return 0;
 
-    if (x < str_term_width1 (in->buffer))
-        return str_column_to_pos (in->buffer, x);
+    if (x < str_term_width1 (in->buffer->str))
+        return str_column_to_pos (in->buffer->str, x);
 
-    return str_length (in->buffer);
+    return str_length (in->buffer->str);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1006,8 +975,7 @@ input_new (int y, int x, const int *colors, int width, const char *def_text,
     in->strip_password = FALSE;
 
     /* in->buffer will be corrected in "history_load" event handler */
-    in->current_max_size = width + 1;
-    in->buffer = g_new0 (char, in->current_max_size);
+    in->buffer = g_string_sized_new (width);
 
     /* init completions before input_assign_text() call */
     in->completions = NULL;
@@ -1093,7 +1061,7 @@ input_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
         return MSG_HANDLED;
 
     case MSG_CURSOR:
-        widget_gotoyx (in, 0, str_term_width2 (in->buffer, in->point) - in->term_first_shown);
+        widget_gotoyx (in, 0, str_term_width2 (in->buffer->str, in->point) - in->term_first_shown);
         return MSG_HANDLED;
 
     case MSG_DESTROY:
@@ -1170,9 +1138,6 @@ input_handle_char (WInput * in, int key)
 void
 input_assign_text (WInput * in, const char *text)
 {
-    Widget *w = WIDGET (in);
-    size_t text_len, buffer_len;
-
     if (text == NULL)
         text = "";
 
@@ -1180,14 +1145,8 @@ input_assign_text (WInput * in, const char *text)
     in->mark = -1;
     in->need_push = TRUE;
     in->charpoint = 0;
-
-    text_len = strlen (text);
-    buffer_len = 1 + MAX ((size_t) w->cols, text_len);
-    in->current_max_size = buffer_len;
-    if (buffer_len > (size_t) w->cols)
-        in->buffer = g_realloc (in->buffer, buffer_len);
-    memmove (in->buffer, text, text_len + 1);
-    in->point = str_length (in->buffer);
+    g_string_assign (in->buffer, text);
+    in->point = str_length (in->buffer->str);
     input_update (in, TRUE);
 }
 
@@ -1207,7 +1166,7 @@ input_get_text (const WInput * in)
     if (input_is_empty (in))
         return NULL;
 
-    return g_strdup (in->buffer);
+    return g_strndup (in->buffer->str, in->buffer->len);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1221,7 +1180,7 @@ input_is_empty (const WInput * in)
     /* if in != NULL, in->buffer must be created */
     g_assert (in->buffer != NULL);
 
-    return in->buffer[0] == '\0';
+    return in->buffer->len == 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1246,7 +1205,7 @@ input_set_point (WInput * in, int pos)
 {
     int max_pos;
 
-    max_pos = str_length (in->buffer);
+    max_pos = str_length (in->buffer->str);
     pos = MIN (pos, max_pos);
     if (pos != in->point)
         input_complete_free (in);
@@ -1279,12 +1238,12 @@ input_update (WInput * in, gboolean clear_first)
     if (should_show_history_button (in))
         has_history = HISTORY_BUTTON_WIDTH;
 
-    buf_len = str_length (in->buffer);
+    buf_len = str_length (in->buffer->str);
 
     /* Adjust the mark */
     in->mark = MIN (in->mark, buf_len);
 
-    pw = str_term_width2 (in->buffer, in->point);
+    pw = str_term_width2 (in->buffer->str, in->point);
 
     /* Make the point visible */
     if ((pw < in->term_first_shown) || (pw >= in->term_first_shown + w->cols - has_history))
@@ -1309,7 +1268,7 @@ input_update (WInput * in, gboolean clear_first)
     if (!in->is_password)
     {
         if (in->mark < 0)
-            tty_print_string (str_term_substring (in->buffer, in->term_first_shown,
+            tty_print_string (str_term_substring (in->buffer->str, in->term_first_shown,
                                                   w->cols - has_history));
         else
         {
@@ -1318,26 +1277,27 @@ input_update (WInput * in, gboolean clear_first)
             if (input_eval_marks (in, &m1, &m2))
             {
                 tty_setcolor (in->color[WINPUTC_MAIN]);
-                cp = str_term_substring (in->buffer, in->term_first_shown, w->cols - has_history);
+                cp = str_term_substring (in->buffer->str, in->term_first_shown,
+                                         w->cols - has_history);
                 tty_print_string (cp);
                 tty_setcolor (in->color[WINPUTC_MARK]);
                 if (m1 < in->term_first_shown)
                 {
                     widget_gotoyx (in, 0, 0);
-                    tty_print_string (str_term_substring
-                                      (in->buffer, in->term_first_shown,
-                                       m2 - in->term_first_shown));
+                    m1 = in->term_first_shown;
+                    m2 -= m1;
                 }
                 else
                 {
-                    int sel_width, buf_width;
+                    int buf_width;
 
                     widget_gotoyx (in, 0, m1 - in->term_first_shown);
-                    buf_width = str_term_width2 (in->buffer, m1);
-                    sel_width =
-                        MIN (m2 - m1, (w->cols - has_history) - (buf_width - in->term_first_shown));
-                    tty_print_string (str_term_substring (in->buffer, m1, sel_width));
+                    buf_width = str_term_width2 (in->buffer->str, m1);
+                    m2 = MIN (m2 - m1,
+                              (w->cols - has_history) - (buf_width - in->term_first_shown));
                 }
+
+                tty_print_string (str_term_substring (in->buffer->str, m1, m2));
             }
         }
     }
@@ -1345,7 +1305,7 @@ input_update (WInput * in, gboolean clear_first)
     {
         int i;
 
-        cp = str_term_substring (in->buffer, in->term_first_shown, w->cols - has_history);
+        cp = str_term_substring (in->buffer->str, in->term_first_shown, w->cols - has_history);
         tty_setcolor (in->color[WINPUTC_MAIN]);
         for (i = 0; i < w->cols - has_history; i++)
         {
@@ -1386,9 +1346,9 @@ input_disable_update (WInput * in)
 void
 input_clean (WInput * in)
 {
-    push_history (in, in->buffer);
+    push_history (in, in->buffer->str);
     in->need_push = TRUE;
-    in->buffer[0] = '\0';
+    g_string_set_size (in->buffer, 0);
     in->point = 0;
     in->charpoint = 0;
     in->mark = -1;
