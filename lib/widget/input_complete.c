@@ -983,7 +983,11 @@ insert_text (WInput * in, char *text, ssize_t size)
 
     text_len = strlen (text);
     buff_len = str_length (in->buffer);
-    size = MIN (size, (ssize_t) text_len) + start - end;
+    if (size < 0)
+        size = (ssize_t) text_len;
+    else
+        size = MIN (size, (ssize_t) text_len);
+    size += start - end;
     if (strlen (in->buffer) + size >= (size_t) in->current_max_size)
     {
         /* Expand the buffer */
@@ -1210,7 +1214,7 @@ complete_engine (WInput * in, int what_to_do)
         {
             char *lc_complete = in->completions[0];
 
-            if (!insert_text (in, lc_complete, strlen (lc_complete)) || in->completions[1] != NULL)
+            if (!insert_text (in, lc_complete, -1) || in->completions[1] != NULL)
                 tty_beep ();
             else
                 input_complete_free (in);
@@ -1278,7 +1282,7 @@ complete_engine (WInput * in, int what_to_do)
             {
                 listbox_get_current (complete_list, &q, NULL);
                 if (q != NULL)
-                    insert_text (in, q, strlen (q));
+                    insert_text (in, q, -1);
             }
             if (q != NULL || end != min_end)
                 input_complete_free (in);
