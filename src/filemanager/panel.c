@@ -455,8 +455,7 @@ string_file_name (file_entry_t * fe, int len)
 {
     (void) len;
 
-    g_string_set_size (string_file_name_buffer, 0);
-    g_string_append_len (string_file_name_buffer, fe->fname->str, fe->fname->len);
+    mc_g_string_copy (string_file_name_buffer, fe->fname);
 
     return string_file_name_buffer->str;
 }
