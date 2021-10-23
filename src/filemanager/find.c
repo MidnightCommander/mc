@@ -782,21 +782,18 @@ find_parameters (WPanel * panel, char **start_dir, ssize_t * start_dir_len,
 
     case B_TREE:
         {
-            char *temp_dir;
+            const char *temp_dir;
 
-            temp_dir = in_start->buffer;
-            if (*temp_dir == '\0' || DIR_IS_DOT (temp_dir))
-                temp_dir = g_strdup (vfs_path_as_str (panel->cwd_vpath));
+            if (input_is_empty (in_start) || DIR_IS_DOT (in_start->buffer))
+                temp_dir = vfs_path_as_str (panel->cwd_vpath);
             else
-                temp_dir = g_strdup (temp_dir);
+                temp_dir = in_start->buffer;
 
             if (in_start_dir != INPUT_LAST_TEXT)
                 g_free (in_start_dir);
             in_start_dir = tree_box (temp_dir);
             if (in_start_dir == NULL)
-                in_start_dir = temp_dir;
-            else
-                g_free (temp_dir);
+                in_start_dir = g_strdup (temp_dir);
 
             input_assign_text (in_start, in_start_dir);
 
