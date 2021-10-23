@@ -10,7 +10,7 @@
    Jakub Jelinek, 1995
    Andrej Borsenkow, 1996
    Norbert Warmuth, 1997
-   Andrew Borodin <aborodin@vmail.ru>, 2009-2016
+   Andrew Borodin <aborodin@vmail.ru>, 2009-2022
 
    This file is part of the Midnight Commander.
 
@@ -1196,7 +1196,13 @@ input_assign_text (WInput * in, const char *text)
 gboolean
 input_is_empty (const WInput * in)
 {
-    return (in == NULL || in->buffer == NULL || in->buffer[0] == '\0');
+    if (in == NULL)
+        return TRUE;
+
+    /* if in != NULL, in->buffer must be created */
+    g_assert (in->buffer != NULL);
+
+    return in->buffer[0] == '\0';
 }
 
 /* --------------------------------------------------------------------------------------------- */
