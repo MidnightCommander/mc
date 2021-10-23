@@ -1193,6 +1193,25 @@ input_assign_text (WInput * in, const char *text)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/**
+ * Get text of input line.
+ *
+ * @param in input line
+ *
+ * @return newly allocated string that contains a copy of @in's text.
+ *         If @in is empty, return NULL.
+ */
+char *
+input_get_text (const WInput * in)
+{
+    if (input_is_empty (in))
+        return NULL;
+
+    return g_strdup (in->buffer);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 gboolean
 input_is_empty (const WInput * in)
 {

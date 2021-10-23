@@ -7,7 +7,7 @@
    Written  by:
    Miguel de Icaza, 1995
    Slava Zanko <slavazanko@gmail.com>, 2013
-   Andrew Borodin <aborodin@vmail.ru>, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2013-2022
 
    This file is part of the Midnight Commander.
 
@@ -820,12 +820,11 @@ find_parameters (WPanel * panel, char **start_dir, ssize_t * start_dir_len,
             options.skip_hidden = skip_hidden_cbox->state;
             options.ignore_dirs_enable = ignore_dirs_cbox->state;
             g_free (options.ignore_dirs);
-            options.ignore_dirs = g_strdup (in_ignore->buffer);
+            options.ignore_dirs = input_get_text (in_ignore);
 
-            *content = !input_is_empty (in_with) ? g_strdup (in_with->buffer) : NULL;
-            if (!input_is_empty (in_name))
-                *pattern = g_strdup (in_name->buffer);
-            else
+            *content = input_get_text (in_with);
+            *pattern = input_get_text (in_name);
+            if (*pattern == NULL)
                 *pattern = g_strdup (options.file_pattern ? "*" : ".*");
             *start_dir = !input_is_empty (in_start) ? in_start->buffer : (char *) ".";
             if (in_start_dir != INPUT_LAST_TEXT)
@@ -861,7 +860,7 @@ find_parameters (WPanel * panel, char **start_dir, ssize_t * start_dir_len,
                 || DIR_IS_DOT (in_ignore->buffer))
                 *ignore_dirs = NULL;
             else
-                *ignore_dirs = g_strdup (in_ignore->buffer);
+                *ignore_dirs = input_get_text (in_ignore);
 
             find_save_options ();
 

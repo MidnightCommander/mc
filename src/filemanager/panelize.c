@@ -7,6 +7,7 @@
    Written by:
    Janne Kukonlehto, 1995
    Jakub Jelinek, 1995
+   Andrew Borodin <aborodin@vmail.ru> 2011-2022
 
    This file is part of the Midnight Commander.
 
@@ -270,7 +271,7 @@ add2panelize_cmd (void)
         if (label == NULL || *label == '\0')
             g_free (label);
         else
-            add2panelize (label, g_strdup (pname->buffer));
+            add2panelize (label, input_get_text (pname));
     }
 }
 
@@ -622,7 +623,7 @@ external_panelize (void)
         {
             char *cmd;
 
-            cmd = g_strdup (pname->buffer);
+            cmd = input_get_text (pname);
             widget_destroy (WIDGET (panelize_dlg));
             do_external_panelize (cmd);
             g_free (cmd);

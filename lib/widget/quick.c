@@ -9,7 +9,7 @@
    Radek Doulik, 1994, 1995
    Jakub Jelinek, 1995
    Andrej Borsenkow, 1995
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2011, 2012, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2009-2022
 
    This file is part of the Midnight Commander.
 
@@ -599,7 +599,7 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
                     *item->quick_widget->u.input.result =
                         tilde_expand (INPUT (item->widget)->buffer);
                 else
-                    *item->quick_widget->u.input.result = g_strdup (INPUT (item->widget)->buffer);
+                    *item->quick_widget->u.input.result = input_get_text (INPUT (item->widget));
                 break;
 
             case quick_radio:
