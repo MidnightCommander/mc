@@ -20,7 +20,7 @@ do_view_action() {
          fi
         ;;
     cat)
-        /bin/cat "${MC_EXT_FILENAME}" 2>/dev/null
+        cat "${MC_EXT_FILENAME}" 2>/dev/null
         ;;
     ar)
         file "${MC_EXT_FILENAME}" && nm -C "${MC_EXT_FILENAME}"
