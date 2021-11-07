@@ -494,7 +494,7 @@ edit_dialog_command_execute (WDialog * h, long command)
 /* --------------------------------------------------------------------------------------------- */
 /*
  * Translate the keycode into either 'command' or 'char_for_insertion'.
- * 'command' is one of the editor commands from cmddef.h.
+ * 'command' is one of the editor commands from lib/keybind.h.
  */
 
 static gboolean
@@ -530,7 +530,7 @@ edit_translate_key (WEdit * edit, long x_key, int *cmd, int *ch)
         /* input from 8-bit locale */
         if (!mc_global.utf8_display)
         {
-            /* source in 8-bit codeset */
+            /* source is in 8-bit codeset */
             c = convert_from_input_c (x_key);
 
             if (is_printable (c))
@@ -556,7 +556,7 @@ edit_translate_key (WEdit * edit, long x_key, int *cmd, int *ch)
 
             if (edit->utf8)
             {
-                /* source in UTF-8 codeset */
+                /* source is in UTF-8 codeset */
                 if (res < 0)
                 {
                     char_for_insertion = x_key;
@@ -576,7 +576,7 @@ edit_translate_key (WEdit * edit, long x_key, int *cmd, int *ch)
                 /* 8-bit source */
                 if (res < 0)
                 {
-                    /* not finised multibyte input (in meddle multibyte utf-8 char) */
+                    /* not finished multibyte input (we're in the middle of multibyte utf-8 char) */
                     goto fin;
                 }
 
@@ -589,7 +589,7 @@ edit_translate_key (WEdit * edit, long x_key, int *cmd, int *ch)
                     goto fin;
                 }
 
-                /* unprinteble utf input, skip it */
+                /* non-printable utf-8 input, skip it */
                 edit->charbuf[0] = '\0';
                 edit->charpoint = 0;
             }
