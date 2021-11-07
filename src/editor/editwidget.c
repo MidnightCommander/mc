@@ -516,12 +516,12 @@ edit_translate_key (WEdit * edit, long x_key, int *cmd, int *ch)
 #else
         int c;
 
-        if (edit->charpoint >= 4)
+        if (edit->charpoint >= MB_LEN_MAX)
         {
             edit->charpoint = 0;
             edit->charbuf[edit->charpoint] = '\0';
         }
-        if (edit->charpoint < 4)
+        if (edit->charpoint < MB_LEN_MAX)
         {
             edit->charbuf[edit->charpoint++] = x_key;
             edit->charbuf[edit->charpoint] = '\0';
