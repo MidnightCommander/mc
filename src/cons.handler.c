@@ -134,8 +134,9 @@ show_console_contents_linux (int starty, unsigned char begin_line, unsigned char
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-handle_console_linux (console_action_t action)
+handle_console_linux (console_action_t _action)
 {
+    char action = (char)_action;
     int status;
 
     switch (action)
