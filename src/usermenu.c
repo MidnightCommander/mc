@@ -49,6 +49,7 @@
 #include "src/editor/edit.h"    /* WEdit, BLOCK_FILE */
 #include "src/viewer/mcviewer.h"        /* for default_* externs */
 
+#include "src/args.h"           /* mc_run_param0 */
 #include "src/execute.h"
 #include "src/setup.h"
 #include "src/history.h"
@@ -780,6 +781,11 @@ expand_format (const WEdit * edit_widget, char c, gboolean do_quote)
         fname = edit_get_file_name (edit_widget);
         break;
 #endif
+
+    case MC_RUN_VIEWER:
+        /* mc_run_param0 is not NULL here because mcviewer isn't run without input file */
+        fname = (const char *) mc_run_param0;
+        break;
 
     default:
         /* other modes don't use formats */
