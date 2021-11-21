@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-09-26 10:06+0300\n"
+"POT-Creation-Date: 2021-11-21 15:18+0300\n"
 "PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/mc/mc/language/"
@@ -2897,7 +2897,8 @@ msgstr "樹狀"
 msgid "&Listing format..."
 msgstr "列表格式..."
 
-msgid "&Sort order..."
+#, fuzzy
+msgid "S&ort order..."
 msgstr "排列順序..."
 
 msgid "&Filter..."
@@ -2912,7 +2913,8 @@ msgstr "連結 FTP..."
 msgid "S&hell link..."
 msgstr "連結 Shell..."
 
-msgid "S&FTP link..."
+#, fuzzy
+msgid "&SFTP link..."
 msgstr "連結 SFTP..."
 
 msgid "Paneli&ze"

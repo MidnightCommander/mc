@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-09-26 10:06+0300\n"
+"POT-Creation-Date: 2021-11-21 15:18+0300\n"
 "PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Czech (http://www.transifex.com/mc/mc/language/cs/)\n"
@@ -3066,7 +3066,8 @@ msgstr "S&trom"
 msgid "&Listing format..."
 msgstr "&Formát výpisu…"
 
-msgid "&Sort order..."
+#, fuzzy
+msgid "S&ort order..."
 msgstr "&Pořadí…"
 
 msgid "&Filter..."
@@ -3081,7 +3082,8 @@ msgstr "FT&P spojení…"
 msgid "S&hell link..."
 msgstr "S&hell spojení…"
 
-msgid "S&FTP link..."
+#, fuzzy
+msgid "&SFTP link..."
 msgstr "SFTP sp&ojení…"
 
 msgid "Paneli&ze"

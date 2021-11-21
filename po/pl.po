@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-09-26 10:06+0300\n"
+"POT-Creation-Date: 2021-11-21 15:18+0300\n"
 "PO-Revision-Date: 2021-07-27 11:29+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/mc/mc/language/pl/)\n"
@@ -3068,7 +3068,8 @@ msgstr "&Drzewo"
 msgid "&Listing format..."
 msgstr "&Format wyświetlania…"
 
-msgid "&Sort order..."
+#, fuzzy
+msgid "S&ort order..."
 msgstr "Porządek s&ortowania…"
 
 msgid "&Filter..."
@@ -3083,7 +3084,8 @@ msgstr "Połączenie FT&P…"
 msgid "S&hell link..."
 msgstr "Połączenie po po&włoce…"
 
-msgid "S&FTP link..."
+#, fuzzy
+msgid "&SFTP link..."
 msgstr "Połączenie S&FTP…"
 
 msgid "Paneli&ze"

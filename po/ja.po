@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-09-26 10:06+0300\n"
+"POT-Creation-Date: 2021-11-21 15:18+0300\n"
 "PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Japanese (http://www.transifex.com/mc/mc/language/ja/)\n"
@@ -2882,7 +2882,8 @@ msgstr "ツリー(&T)"
 msgid "&Listing format..."
 msgstr ""
 
-msgid "&Sort order..."
+#, fuzzy
+msgid "S&ort order..."
 msgstr "整列順(&S)..."
 
 msgid "&Filter..."
@@ -2897,8 +2898,9 @@ msgstr "FTP リンク(&P)..."
 msgid "S&hell link..."
 msgstr ""
 
-msgid "S&FTP link..."
-msgstr ""
+#, fuzzy
+msgid "&SFTP link..."
+msgstr "FTP リンク(&P)..."
 
 msgid "Paneli&ze"
 msgstr ""
