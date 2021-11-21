@@ -80,10 +80,8 @@
 #endif
 
 #include "fileopctx.h"
-#include "file.h"               /* file operation routines */
 #include "filenot.h"
 #include "hotlist.h"            /* hotlist_show() */
-#include "panel.h"              /* WPanel */
 #include "tree.h"               /* tree_chdir() */
 #include "filemanager.h"        /* change_panel() */
 #include "command.h"            /* cmdline */
@@ -770,66 +768,6 @@ edit_cmd_new (void)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** Invoked by F5.  Copy, default to the other panel.  */
-
-void
-copy_cmd (WPanel * panel)
-{
-    save_cwds_stat ();
-
-    if (panel_operate (panel, OP_COPY, FALSE))
-    {
-        update_panels (UP_OPTIMIZE, UP_KEEPSEL);
-        repaint_screen ();
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/** Invoked by F6.  Move/rename, default to the other panel, ignore marks.  */
-
-void
-rename_cmd (WPanel * panel)
-{
-    save_cwds_stat ();
-
-    if (panel_operate (panel, OP_MOVE, FALSE))
-    {
-        update_panels (UP_OPTIMIZE, UP_KEEPSEL);
-        repaint_screen ();
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/** Invoked by F15.  Copy, default to the same panel, ignore marks.  */
-
-void
-copy_cmd_local (WPanel * panel)
-{
-    save_cwds_stat ();
-
-    if (panel_operate (panel, OP_COPY, TRUE))
-    {
-        update_panels (UP_OPTIMIZE, UP_KEEPSEL);
-        repaint_screen ();
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/** Invoked by F16.  Move/rename, default to the same panel.  */
-
-void
-rename_cmd_local (WPanel * panel)
-{
-    save_cwds_stat ();
-
-    if (panel_operate (panel, OP_MOVE, TRUE))
-    {
-        update_panels (UP_OPTIMIZE, UP_KEEPSEL);
-        repaint_screen ();
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
 
 void
 mkdir_cmd (WPanel * panel)
@@ -878,35 +816,6 @@ mkdir_cmd (WPanel * panel)
         vfs_path_free (absdir, TRUE);
     }
     g_free (dir);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-delete_cmd (WPanel * panel)
-{
-    save_cwds_stat ();
-
-    if (panel_operate (panel, OP_DELETE, FALSE))
-    {
-        update_panels (UP_OPTIMIZE, UP_KEEPSEL);
-        repaint_screen ();
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/** Invoked by F18.  Remove selected file, regardless of marked files.  */
-
-void
-delete_cmd_local (WPanel * panel)
-{
-    save_cwds_stat ();
-
-    if (panel_operate (panel, OP_DELETE, TRUE))
-    {
-        update_panels (UP_OPTIMIZE, UP_KEEPSEL);
-        repaint_screen ();
-    }
 }
 
 /* --------------------------------------------------------------------------------------------- */

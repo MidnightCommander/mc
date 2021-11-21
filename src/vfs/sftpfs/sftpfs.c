@@ -1,12 +1,13 @@
 /* Virtual File System: SFTP file system.
-   The VFS class functions
+   The interface function
 
    Copyright (C) 2011-2021
    Free Software Foundation, Inc.
 
    Written by:
    Ilia Maslakov <il.smind@gmail.com>, 2011
-   Slava Zanko <slavazanko@gmail.com>, 2011, 2012
+   Slava Zanko <slavazanko@gmail.com>, 2011-2013
+   Andrew Borodin <aborodin@vmail.ru>, 2021
 
    This file is part of the Midnight Commander.
 
@@ -26,15 +27,24 @@
 
 #include <config.h>
 #include <errno.h>
+#include <stdlib.h>
+#include <string.h>             /* memset() */
 
 #include "lib/global.h"
-#include "lib/widget.h"
+#include "lib/vfs/netutil.h"
+#include "lib/vfs/utilvfs.h"
 #include "lib/vfs/gc.h"
+#include "lib/widget.h"
 #include "lib/tty/tty.h"        /* tty_enable_interrupt_key () */
 
 #include "internal.h"
 
+#include "sftpfs.h"
+
 /*** global variables ****************************************************************************/
+
+struct vfs_s_subclass sftpfs_subclass;
+struct vfs_class *vfs_sftpfs_ops = VFS_CLASS (&sftpfs_subclass);        /* used in file.c */
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -42,6 +52,7 @@
 
 /*** file scope variables ************************************************************************/
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 /**
@@ -326,6 +337,7 @@ sftpfs_cb_utime (const vfs_path_t * vpath, mc_timesbuf_t * times)
 {
     int rc;
     GError *mcerror = NULL;
+
 #ifdef HAVE_UTIMENSAT
     time_t atime = (*times)[0].tv_sec;
     time_t mtime = (*times)[1].tv_sec;
@@ -485,7 +497,7 @@ sftpfs_cb_close (void *data)
 
     super->fd_usage--;
     if (super->fd_usage == 0)
-        vfs_stamp_create (sftpfs_class, super);
+        vfs_stamp_create (vfs_sftpfs_ops, super);
 
     rc = sftpfs_close_file (fh, &mcerror);
     mc_error_message (&mcerror, NULL);
@@ -493,7 +505,7 @@ sftpfs_cb_close (void *data)
     if (fh->handle != -1)
         close (fh->handle);
 
-    vfs_s_free_inode (sftpfs_class, fh->ino);
+    vfs_s_free_inode (vfs_sftpfs_ops, fh->ino);
 
     return rc;
 }
@@ -630,6 +642,7 @@ static int
 sftpfs_cb_errno (struct vfs_class *me)
 {
     (void) me;
+
     return errno;
 }
 
@@ -662,47 +675,193 @@ sftpfs_cb_fill_names (struct vfs_class *me, fill_names_f func)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Callback for checking if connection is equal to existing connection.
+ *
+ * @param vpath_element path element with connetion data
+ * @param super         data with exists connection
+ * @param vpath         unused
+ * @param cookie        unused
+ * @return TRUE if connections is equal, FALSE otherwise
+ */
+
+static gboolean
+sftpfs_archive_same (const vfs_path_element_t * vpath_element, struct vfs_s_super *super,
+                     const vfs_path_t * vpath, void *cookie)
+{
+    int result;
+    vfs_path_element_t *orig_connect_info;
+
+    (void) vpath;
+    (void) cookie;
+
+    orig_connect_info = SFTP_SUPER (super)->original_connection_info;
+
+    result = ((g_strcmp0 (vpath_element->host, orig_connect_info->host) == 0)
+              && (g_strcmp0 (vpath_element->user, orig_connect_info->user) == 0)
+              && (vpath_element->port == orig_connect_info->port));
+
+    return result;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static struct vfs_s_super *
+sftpfs_new_archive (struct vfs_class *me)
+{
+    sftpfs_super_t *arch;
+
+    arch = g_new0 (sftpfs_super_t, 1);
+    arch->base.me = me;
+    arch->base.name = g_strdup (PATH_SEP_STR);
+    arch->auth_type = NONE;
+    arch->config_auth_type = NONE;
+    arch->socket_handle = LIBSSH2_INVALID_SOCKET;
+
+    return VFS_SUPER (arch);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Callback for opening new connection.
+ *
+ * @param super         connection data
+ * @param vpath         unused
+ * @param vpath_element path element with connetion data
+ * @return 0 if success, -1 otherwise
+ */
+
+static int
+sftpfs_open_archive (struct vfs_s_super *super, const vfs_path_t * vpath,
+                     const vfs_path_element_t * vpath_element)
+{
+    GError *mcerror = NULL;
+    sftpfs_super_t *sftpfs_super = SFTP_SUPER (super);
+    int ret_value;
+
+    (void) vpath;
+
+    if (vpath_element->host == NULL || *vpath_element->host == '\0')
+    {
+        vfs_print_message ("%s", _("sftp: Invalid host name."));
+        vpath_element->class->verrno = EPERM;
+        return -1;
+    }
+
+    sftpfs_super->original_connection_info = vfs_path_element_clone (vpath_element);
+    super->path_element = vfs_path_element_clone (vpath_element);
+
+    sftpfs_fill_connection_data_from_config (super, &mcerror);
+    if (mc_error_message (&mcerror, &ret_value))
+    {
+        vpath_element->class->verrno = ret_value;
+        return -1;
+    }
+
+    super->root =
+        vfs_s_new_inode (vpath_element->class, super,
+                         vfs_s_default_stat (vpath_element->class, S_IFDIR | 0755));
+
+    ret_value = sftpfs_open_connection (super, &mcerror);
+    mc_error_message (&mcerror, NULL);
+    return ret_value;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Callback for closing connection.
+ *
+ * @param me    unused
+ * @param super connection data
+ */
+
+static void
+sftpfs_free_archive (struct vfs_class *me, struct vfs_s_super *super)
+{
+    GError *mcerror = NULL;
+
+    (void) me;
+
+    sftpfs_close_connection (super, "Normal Shutdown", &mcerror);
+
+    vfs_path_element_free (SFTP_SUPER (super)->original_connection_info);
+
+    mc_error_message (&mcerror, NULL);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Callback for getting directory content.
+ *
+ * @param me          unused
+ * @param dir         unused
+ * @param remote_path unused
+ * @return always 0
+ */
+
+static int
+sftpfs_cb_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
+{
+    (void) me;
+    (void) dir;
+    (void) remote_path;
+
+    return 0;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 /**
- * Initialization of VFS class structure.
- *
- * @return the VFS class structure.
+ * Initialization of SFTP Virtual File Sysytem.
  */
 
 void
-sftpfs_init_class (void)
+vfs_init_sftpfs (void)
 {
-    sftpfs_class->init = sftpfs_cb_init;
-    sftpfs_class->done = sftpfs_cb_done;
+    tcp_init ();
 
-    sftpfs_class->fill_names = sftpfs_cb_fill_names;
+    vfs_init_subclass (&sftpfs_subclass, "sftpfs", VFSF_NOLINKS | VFSF_REMOTE, "sftp");
 
-    sftpfs_class->opendir = sftpfs_cb_opendir;
-    sftpfs_class->readdir = sftpfs_cb_readdir;
-    sftpfs_class->closedir = sftpfs_cb_closedir;
-    sftpfs_class->mkdir = sftpfs_cb_mkdir;
-    sftpfs_class->rmdir = sftpfs_cb_rmdir;
+    vfs_sftpfs_ops->init = sftpfs_cb_init;
+    vfs_sftpfs_ops->done = sftpfs_cb_done;
 
-    sftpfs_class->stat = sftpfs_cb_stat;
-    sftpfs_class->lstat = sftpfs_cb_lstat;
-    sftpfs_class->fstat = sftpfs_cb_fstat;
-    sftpfs_class->readlink = sftpfs_cb_readlink;
-    sftpfs_class->symlink = sftpfs_cb_symlink;
-    sftpfs_class->link = sftpfs_cb_link;
-    sftpfs_class->utime = sftpfs_cb_utime;
-    sftpfs_class->mknod = sftpfs_cb_mknod;
-    sftpfs_class->chown = sftpfs_cb_chown;
-    sftpfs_class->chmod = sftpfs_cb_chmod;
+    vfs_sftpfs_ops->fill_names = sftpfs_cb_fill_names;
 
-    sftpfs_class->open = sftpfs_cb_open;
-    sftpfs_class->read = sftpfs_cb_read;
-    sftpfs_class->write = sftpfs_cb_write;
-    sftpfs_class->close = sftpfs_cb_close;
-    sftpfs_class->lseek = sftpfs_cb_lseek;
-    sftpfs_class->unlink = sftpfs_cb_unlink;
-    sftpfs_class->rename = sftpfs_cb_rename;
-    sftpfs_class->ferrno = sftpfs_cb_errno;
+    vfs_sftpfs_ops->opendir = sftpfs_cb_opendir;
+    vfs_sftpfs_ops->readdir = sftpfs_cb_readdir;
+    vfs_sftpfs_ops->closedir = sftpfs_cb_closedir;
+    vfs_sftpfs_ops->mkdir = sftpfs_cb_mkdir;
+    vfs_sftpfs_ops->rmdir = sftpfs_cb_rmdir;
+
+    vfs_sftpfs_ops->stat = sftpfs_cb_stat;
+    vfs_sftpfs_ops->lstat = sftpfs_cb_lstat;
+    vfs_sftpfs_ops->fstat = sftpfs_cb_fstat;
+    vfs_sftpfs_ops->readlink = sftpfs_cb_readlink;
+    vfs_sftpfs_ops->symlink = sftpfs_cb_symlink;
+    vfs_sftpfs_ops->link = sftpfs_cb_link;
+    vfs_sftpfs_ops->utime = sftpfs_cb_utime;
+    vfs_sftpfs_ops->mknod = sftpfs_cb_mknod;
+    vfs_sftpfs_ops->chown = sftpfs_cb_chown;
+    vfs_sftpfs_ops->chmod = sftpfs_cb_chmod;
+
+    vfs_sftpfs_ops->open = sftpfs_cb_open;
+    vfs_sftpfs_ops->read = sftpfs_cb_read;
+    vfs_sftpfs_ops->write = sftpfs_cb_write;
+    vfs_sftpfs_ops->close = sftpfs_cb_close;
+    vfs_sftpfs_ops->lseek = sftpfs_cb_lseek;
+    vfs_sftpfs_ops->unlink = sftpfs_cb_unlink;
+    vfs_sftpfs_ops->rename = sftpfs_cb_rename;
+    vfs_sftpfs_ops->ferrno = sftpfs_cb_errno;
+
+    sftpfs_subclass.archive_same = sftpfs_archive_same;
+    sftpfs_subclass.new_archive = sftpfs_new_archive;
+    sftpfs_subclass.open_archive = sftpfs_open_archive;
+    sftpfs_subclass.free_archive = sftpfs_free_archive;
+    sftpfs_subclass.fh_new = sftpfs_fh_new;
+    sftpfs_subclass.dir_load = sftpfs_cb_dir_load;
+
+    vfs_register_class (vfs_sftpfs_ops);
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -991,18 +991,6 @@ canonicalize_pathname (char *path)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#ifdef HAVE_GET_PROCESS_STATS
-int
-gettimeofday (struct timeval *tp, void *tzp)
-{
-    (void) tzp;
-
-    return get_process_stats (tp, PS_SELF, 0, 0);
-}
-#endif /* HAVE_GET_PROCESS_STATS */
-
-/* --------------------------------------------------------------------------------------------- */
-
 char *
 mc_realpath (const char *path, char *resolved_path)
 {

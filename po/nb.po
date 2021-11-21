@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-09-26 10:06+0300\n"
+"POT-Creation-Date: 2021-11-21 15:18+0300\n"
 "PO-Revision-Date: 2021-07-29 12:31+0000\n"
 "Last-Translator: heskjestad <cato@heskjestad.xyz>\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/mc/mc/language/"
@@ -3065,7 +3065,8 @@ msgstr "&Tre"
 msgid "&Listing format..."
 msgstr "&Utlistingsformat ..."
 
-msgid "&Sort order..."
+#, fuzzy
+msgid "S&ort order..."
 msgstr "Sorterings&rekkefølge ..."
 
 msgid "&Filter..."
@@ -3080,7 +3081,8 @@ msgstr "Koble til FT&P ..."
 msgid "S&hell link..."
 msgstr "Koble til &skall ..."
 
-msgid "S&FTP link..."
+#, fuzzy
+msgid "&SFTP link..."
 msgstr "K&oble til SFTP ..."
 
 msgid "Paneli&ze"

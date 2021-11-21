@@ -3,8 +3,8 @@
  * \brief Header: SFTP FS
  */
 
-#ifndef MC__VFS_SFTPFS_INIT_H
-#define MC__VFS_SFTPFS_INIT_H
+#ifndef MC__VFS_SFTPFS_H
+#define MC__VFS_SFTPFS_H
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -20,4 +20,4 @@ void vfs_init_sftpfs (void);
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__VFS_SFTPFS_INIT_H */
+#endif /* MC__VFS_SFTPFS_H */

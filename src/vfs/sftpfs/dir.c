@@ -70,6 +70,7 @@ sftpfs_opendir (const vfs_path_t * vpath, GError ** mcerror)
     sftpfs_super_t *sftpfs_super;
     const vfs_path_element_t *path_element;
     LIBSSH2_SFTP_HANDLE *handle;
+    const GString *fixfname;
 
     mc_return_val_if_error (mcerror, NULL);
 
@@ -80,12 +81,11 @@ sftpfs_opendir (const vfs_path_t * vpath, GError ** mcerror)
 
     sftpfs_super = SFTP_SUPER (super);
 
+    fixfname = sftpfs_fix_filename (path_element->path);
+
     while (TRUE)
     {
-        const GString *fixfname;
         int libssh_errno;
-
-        fixfname = sftpfs_fix_filename (path_element->path);
 
         handle =
             libssh2_sftp_open_ex (sftpfs_super->sftp_session, fixfname->str, fixfname->len, 0, 0,
@@ -177,6 +177,7 @@ sftpfs_mkdir (const vfs_path_t * vpath, mode_t mode, GError ** mcerror)
     struct vfs_s_super *super;
     sftpfs_super_t *sftpfs_super;
     const vfs_path_element_t *path_element;
+    const GString *fixfname;
 
     mc_return_val_if_error (mcerror, -1);
 
@@ -192,12 +193,10 @@ sftpfs_mkdir (const vfs_path_t * vpath, mode_t mode, GError ** mcerror)
     if (sftpfs_super->sftp_session == NULL)
         return -1;
 
+    fixfname = sftpfs_fix_filename (path_element->path);
+
     do
     {
-        const GString *fixfname;
-
-        fixfname = sftpfs_fix_filename (path_element->path);
-
         res =
             libssh2_sftp_mkdir_ex (sftpfs_super->sftp_session, fixfname->str, fixfname->len, mode);
         if (res >= 0)
@@ -227,6 +226,7 @@ sftpfs_rmdir (const vfs_path_t * vpath, GError ** mcerror)
     struct vfs_s_super *super;
     sftpfs_super_t *sftpfs_super;
     const vfs_path_element_t *path_element;
+    const GString *fixfname;
 
     mc_return_val_if_error (mcerror, -1);
 
@@ -242,12 +242,10 @@ sftpfs_rmdir (const vfs_path_t * vpath, GError ** mcerror)
     if (sftpfs_super->sftp_session == NULL)
         return -1;
 
+    fixfname = sftpfs_fix_filename (path_element->path);
+
     do
     {
-        const GString *fixfname;
-
-        fixfname = sftpfs_fix_filename (path_element->path);
-
         res = libssh2_sftp_rmdir_ex (sftpfs_super->sftp_session, fixfname->str, fixfname->len);
         if (res >= 0)
             break;

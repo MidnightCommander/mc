@@ -27,6 +27,7 @@
 
 #include <stdlib.h>
 #include <langinfo.h>
+#include <limits.h>             /* MB_LEN_MAX */
 #include <string.h>
 
 #include "lib/global.h"
@@ -51,7 +52,7 @@ struct utf8_tool
 
 struct term_form
 {
-    char text[BUF_MEDIUM * 6];
+    char text[BUF_MEDIUM * MB_LEN_MAX];
     size_t width;
     gboolean compose;
 };
@@ -512,7 +513,7 @@ str_utf8_make_make_term_form (const char *text, size_t length)
 static const char *
 str_utf8_term_form (const char *text)
 {
-    static char result[BUF_MEDIUM * 6];
+    static char result[BUF_MEDIUM * MB_LEN_MAX];
     const struct term_form *pre_form;
 
     pre_form = str_utf8_make_make_term_form (text, (size_t) (-1));
@@ -677,7 +678,7 @@ utf8_tool_compose (char *buffer, size_t size)
 static const char *
 str_utf8_fit_to_term (const char *text, int width, align_crt_t just_mode)
 {
-    static char result[BUF_MEDIUM * 6];
+    static char result[BUF_MEDIUM * MB_LEN_MAX];
     const struct term_form *pre_form;
     struct utf8_tool tool;
 
@@ -750,7 +751,7 @@ str_utf8_fit_to_term (const char *text, int width, align_crt_t just_mode)
 static const char *
 str_utf8_term_trim (const char *text, int width)
 {
-    static char result[BUF_MEDIUM * 6];
+    static char result[BUF_MEDIUM * MB_LEN_MAX];
     const struct term_form *pre_form;
     struct utf8_tool tool;
 
@@ -827,7 +828,7 @@ str_utf8_term_char_width (const char *text)
 static const char *
 str_utf8_term_substring (const char *text, int start, int width)
 {
-    static char result[BUF_MEDIUM * 6];
+    static char result[BUF_MEDIUM * MB_LEN_MAX];
     const struct term_form *pre_form;
     struct utf8_tool tool;
 
@@ -858,7 +859,7 @@ str_utf8_term_substring (const char *text, int start, int width)
 static const char *
 str_utf8_trunc (const char *text, int width)
 {
-    static char result[MC_MAXPATHLEN * 6 * 2];
+    static char result[MC_MAXPATHLEN * MB_LEN_MAX * 2];
     const struct term_form *pre_form;
     struct utf8_tool tool;
 
@@ -920,7 +921,7 @@ str_utf8_column_to_pos (const char *text, size_t pos)
     {
         gunichar uni;
 
-        uni = g_utf8_get_char_validated (text, 6);
+        uni = g_utf8_get_char_validated (text, MB_LEN_MAX);
         if ((uni != (gunichar) (-1)) && (uni != (gunichar) (-2)))
         {
             if (g_unichar_isprint (uni))

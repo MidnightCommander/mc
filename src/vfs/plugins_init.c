@@ -55,7 +55,7 @@
 #endif
 
 #ifdef ENABLE_VFS_SFTP
-#include "sftpfs/init.h"
+#include "sftpfs/sftpfs.h"
 #endif
 
 #ifdef ENABLE_VFS_SFS

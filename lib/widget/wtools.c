@@ -587,7 +587,7 @@ status_msg_init (status_msg_t * sm, const char *title, double delay, status_msg_
     /* repaint screen to remove previous finished dialog */
     mc_refresh ();
 
-    start = g_get_real_time ();
+    start = g_get_monotonic_time ();
 
     sm->dlg = dlg_create (TRUE, 0, 0, 7, MIN (MAX (40, COLS / 2), COLS), WPOS_CENTER, FALSE,
                           dialog_colors, NULL, NULL, NULL, title);

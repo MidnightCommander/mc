@@ -765,7 +765,7 @@ fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 
     vfs_print_message (_("fish: Reading directory %s..."), remote_path);
 
-    dir->timestamp = g_get_real_time () + fish_directory_timeout * G_USEC_PER_SEC;
+    dir->timestamp = g_get_monotonic_time () + fish_directory_timeout * G_USEC_PER_SEC;
 
     quoted_path = strutils_shell_escape (remote_path);
     (void) fish_command_v (me, super, NONE, FISH_SUPER (super)->scr_ls, "FISH_FILENAME=%s;\n",

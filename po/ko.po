@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-09-26 10:06+0300\n"
+"POT-Creation-Date: 2021-11-21 15:18+0300\n"
 "PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Korean (http://www.transifex.com/mc/mc/language/ko/)\n"
@@ -3055,7 +3055,8 @@ msgstr "트리구조(&T)"
 msgid "&Listing format..."
 msgstr "목록 형식(&L)..."
 
-msgid "&Sort order..."
+#, fuzzy
+msgid "S&ort order..."
 msgstr "정렬 순서(&S)..."
 
 msgid "&Filter..."
@@ -3070,7 +3071,8 @@ msgstr "FTP 링크(&P)..."
 msgid "S&hell link..."
 msgstr "쉘 링크(&H)..."
 
-msgid "S&FTP link..."
+#, fuzzy
+msgid "&SFTP link..."
 msgstr "SFTP 링크(&F)..."
 
 msgid "Paneli&ze"

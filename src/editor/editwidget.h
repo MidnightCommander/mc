@@ -5,6 +5,8 @@
 #ifndef MC__EDIT_WIDGET_H
 #define MC__EDIT_WIDGET_H
 
+#include <limits.h>             /* MB_LEN_MAX */
+
 #include "lib/search.h"         /* mc_search_t */
 #include "lib/widget.h"         /* Widget */
 
@@ -80,7 +82,7 @@ struct WEdit
     /* multibyte support */
     gboolean utf8;              /* It's multibyte file codeset */
     GIConv converter;
-    char charbuf[4 + 1];
+    char charbuf[MB_LEN_MAX + 1];
     int charpoint;
 #endif
 

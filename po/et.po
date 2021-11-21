@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-09-26 10:06+0300\n"
+"POT-Creation-Date: 2021-11-21 15:18+0300\n"
 "PO-Revision-Date: 2021-08-08 12:32+0000\n"
 "Last-Translator: Priit Jõerüüt <transifex@joeruut.com>\n"
 "Language-Team: Estonian (http://www.transifex.com/mc/mc/language/et/)\n"
@@ -3047,7 +3047,8 @@ msgstr "&Puu"
 msgid "&Listing format..."
 msgstr "&Loendi vormindus"
 
-msgid "&Sort order..."
+#, fuzzy
+msgid "S&ort order..."
 msgstr "&Sortimine..."
 
 msgid "&Filter..."
@@ -3062,7 +3063,8 @@ msgstr "F&TP ühendus..."
 msgid "S&hell link..."
 msgstr "K&esta ühendus..."
 
-msgid "S&FTP link..."
+#, fuzzy
+msgid "&SFTP link..."
 msgstr "S&FTP ühendus..."
 
 msgid "Paneli&ze"

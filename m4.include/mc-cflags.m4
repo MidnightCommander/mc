@@ -3,104 +3,88 @@ dnl
 dnl Check flags supported by C compiler
 dnl
 dnl @author Slava Zanko <slavazanko@gmail.com>
-dnl @version 2013-01-16
+dnl @modified by Andrew Borodin <aborodin@vmail.ru>
+dnl @version 2021-09-19
 dnl @license GPL
 dnl @copyright Free Software Foundation, Inc.
-
-AC_DEFUN([mc_CHECK_ONE_CFLAG],[
-
-  AC_MSG_CHECKING([whether ${CC} accepts $1])
-
-  safe_CFLAGS=$CFLAGS
-
-  case "$CC" in
-    clang*)
-      CFLAGS="-Werror $1"
-      ;;
-    *)
-      CFLAGS="$1"
-      ;;
-  esac
-
-  AC_COMPILE_IFELSE(
-    [AC_LANG_PROGRAM([], [[return 0;]])],
-    [mc_check_one_cflag=yes],
-    [mc_check_one_cflag=no])
-
-  CFLAGS=$safe_CFLAGS
-  AC_MSG_RESULT([$mc_check_one_cflag])
-
-  if test x$mc_check_one_cflag = xyes; then
-    mc_configured_cflags="$mc_configured_cflags $1"
-  fi
-])
 
 AC_DEFUN([mc_CHECK_CFLAGS],[
     AC_LANG_PUSH(C)
 
     mc_configured_cflags=""
 
-dnl Sorted -f options:
-dnl AC_MSG_CHECKING([CC is $CC])
-case "$CC" in
-  gcc*)
-    mc_CHECK_ONE_CFLAG([-fdiagnostics-show-option])
-dnl    mc_CHECK_ONE_CFLAG([-fno-stack-protector])
-    ;;
-  *)
-    ;;
-esac
+dnl    AC_MSG_CHECKING([CC is $CC])
 
-dnl Sorted -W options:
-    mc_CHECK_ONE_CFLAG([-Wassign-enum])
-    mc_CHECK_ONE_CFLAG([-Wbad-function-cast])
-    mc_CHECK_ONE_CFLAG([-Wcomment])
-    mc_CHECK_ONE_CFLAG([-Wconditional-uninitialized])
-    mc_CHECK_ONE_CFLAG([-Wdeclaration-after-statement])
-    mc_CHECK_ONE_CFLAG([-Wfloat-conversion])
-    mc_CHECK_ONE_CFLAG([-Wfloat-equal])
-    mc_CHECK_ONE_CFLAG([-Wformat])
-    mc_CHECK_ONE_CFLAG([-Wformat-security])
-    mc_CHECK_ONE_CFLAG([-Wformat-signedness])
-    mc_CHECK_ONE_CFLAG([-Wimplicit])
-    mc_CHECK_ONE_CFLAG([-Wimplicit-fallthrough])
-    mc_CHECK_ONE_CFLAG([-Wignored-qualifiers])
-    mc_CHECK_ONE_CFLAG([-Wlogical-not-parentheses])
-    mc_CHECK_ONE_CFLAG([-Wmaybe-uninitialized])
-    mc_CHECK_ONE_CFLAG([-Wmissing-braces])
-    mc_CHECK_ONE_CFLAG([-Wmissing-declarations])
-    mc_CHECK_ONE_CFLAG([-Wmissing-field-initializers])
-    mc_CHECK_ONE_CFLAG([-Wmissing-format-attribute])
-    mc_CHECK_ONE_CFLAG([-Wmissing-parameter-type])
-    mc_CHECK_ONE_CFLAG([-Wmissing-prototypes])
-    mc_CHECK_ONE_CFLAG([-Wmissing-variable-declarations])
-    mc_CHECK_ONE_CFLAG([-Wnested-externs])
-    mc_CHECK_ONE_CFLAG([-Wno-long-long])
-    mc_CHECK_ONE_CFLAG([-Wno-unreachable-code])
-    mc_CHECK_ONE_CFLAG([-Wparentheses])
-    mc_CHECK_ONE_CFLAG([-Wpointer-arith])
-    mc_CHECK_ONE_CFLAG([-Wpointer-sign])
-    mc_CHECK_ONE_CFLAG([-Wredundant-decls])
-    mc_CHECK_ONE_CFLAG([-Wreturn-type])
-    mc_CHECK_ONE_CFLAG([-Wsequence-point])
-    mc_CHECK_ONE_CFLAG([-Wshadow])
-    mc_CHECK_ONE_CFLAG([-Wsign-compare])
-dnl  mc_CHECK_ONE_CFLAG([-Wstrict-aliasing])
-    mc_CHECK_ONE_CFLAG([-Wstrict-prototypes])
-    mc_CHECK_ONE_CFLAG([-Wswitch])
-    mc_CHECK_ONE_CFLAG([-Wswitch-default])
-    mc_CHECK_ONE_CFLAG([-Wtype-limits])
-    mc_CHECK_ONE_CFLAG([-Wundef])
-    mc_CHECK_ONE_CFLAG([-Wuninitialized])
-    mc_CHECK_ONE_CFLAG([-Wunreachable-code])
-    mc_CHECK_ONE_CFLAG([-Wunused-but-set-variable])
-    mc_CHECK_ONE_CFLAG([-Wunused-function])
-    mc_CHECK_ONE_CFLAG([-Wunused-label])
-    mc_CHECK_ONE_CFLAG([-Wunused-parameter])
-    mc_CHECK_ONE_CFLAG([-Wunused-result])
-    mc_CHECK_ONE_CFLAG([-Wunused-value])
-    mc_CHECK_ONE_CFLAG([-Wunused-variable])
-    mc_CHECK_ONE_CFLAG([-Wwrite-strings])
+    dnl https://stackoverflow.com/questions/52557417/how-to-check-support-compile-flag-in-autoconf-for-clang
+    case "$CC" in
+    clang*)
+        EXTRA_OPTION="-Werror"
+        ;;
+    *)
+        EXTRA_OPTION=""
+        ;;
+    esac
+
+    dnl Sorted -f options:
+    case "$CC" in
+    gcc*)
+        AX_APPEND_COMPILE_FLAGS([-fdiagnostics-show-option], [mc_configured_cflags])
+dnl        AX_APPEND_COMPILE_FLAGS([-fno-stack-protector], [mc_configured_cflags])
+        ;;
+    *)
+        ;;
+    esac
+
+    dnl Sorted -W options:
+    AX_APPEND_COMPILE_FLAGS([-Wassign-enum], [mc_configured_cflags], [$EXTRA_OPTION])
+    AX_APPEND_COMPILE_FLAGS([-Wbad-function-cast], [mc_configured_cflags], [$EXTRA_OPTION])
+    AX_APPEND_COMPILE_FLAGS([-Wcomment], [mc_configured_cflags], [$EXTRA_OPTION])
+    AX_APPEND_COMPILE_FLAGS([-Wconditional-uninitialized], [mc_configured_cflags], [$EXTRA_OPTION])
+    AX_APPEND_COMPILE_FLAGS([-Wdeclaration-after-statement], [mc_configured_cflags], [$EXTRA_OPTION])
+    AX_APPEND_COMPILE_FLAGS([-Wfloat-conversion], [mc_configured_cflags], [$EXTRA_OPTION])
+    AX_APPEND_COMPILE_FLAGS([-Wfloat-equal], [mc_configured_cflags], [$EXTRA_OPTION])
+    AX_APPEND_COMPILE_FLAGS([-Wformat], [mc_configured_cflags], [$EXTRA_OPTION])
+    AX_APPEND_COMPILE_FLAGS([-Wformat-security], [mc_configured_cflags], [$EXTRA_OPTION])
+    AX_APPEND_COMPILE_FLAGS([-Wformat-signedness], [mc_configured_cflags], [$EXTRA_OPTION])
+    AX_APPEND_COMPILE_FLAGS([-Wimplicit], [mc_configured_cflags], [$EXTRA_OPTION])
+    AX_APPEND_COMPILE_FLAGS([-Wimplicit-fallthrough], [mc_configured_cflags], [$EXTRA_OPTION])
+    AX_APPEND_COMPILE_FLAGS([-Wignored-qualifiers], [mc_configured_cflags], [$EXTRA_OPTION])
+    AX_APPEND_COMPILE_FLAGS([-Wlogical-not-parentheses], [mc_configured_cflags], [$EXTRA_OPTION])
+    AX_APPEND_COMPILE_FLAGS([-Wmaybe-uninitialized], [mc_configured_cflags], [$EXTRA_OPTION])
+    AX_APPEND_COMPILE_FLAGS([-Wmissing-braces], [mc_configured_cflags], [$EXTRA_OPTION])
+    AX_APPEND_COMPILE_FLAGS([-Wmissing-declarations], [mc_configured_cflags], [$EXTRA_OPTION])
+    AX_APPEND_COMPILE_FLAGS([-Wmissing-field-initializers], [mc_configured_cflags], [$EXTRA_OPTION])
+    AX_APPEND_COMPILE_FLAGS([-Wmissing-format-attribute], [mc_configured_cflags], [$EXTRA_OPTION])
+    AX_APPEND_COMPILE_FLAGS([-Wmissing-parameter-type], [mc_configured_cflags], [$EXTRA_OPTION])
+    AX_APPEND_COMPILE_FLAGS([-Wmissing-prototypes], [mc_configured_cflags], [$EXTRA_OPTION])
+    AX_APPEND_COMPILE_FLAGS([-Wmissing-variable-declarations], [mc_configured_cflags], [$EXTRA_OPTION])
+    AX_APPEND_COMPILE_FLAGS([-Wnested-externs], [mc_configured_cflags], [$EXTRA_OPTION])
+    AX_APPEND_COMPILE_FLAGS([-Wno-long-long], [mc_configured_cflags], [$EXTRA_OPTION])
+    AX_APPEND_COMPILE_FLAGS([-Wno-unreachable-code], [mc_configured_cflags], [$EXTRA_OPTION])
+    AX_APPEND_COMPILE_FLAGS([-Wparentheses], [mc_configured_cflags], [$EXTRA_OPTION])
+    AX_APPEND_COMPILE_FLAGS([-Wpointer-arith], [mc_configured_cflags], [$EXTRA_OPTION])
+    AX_APPEND_COMPILE_FLAGS([-Wpointer-sign], [mc_configured_cflags], [$EXTRA_OPTION])
+    AX_APPEND_COMPILE_FLAGS([-Wredundant-decls], [mc_configured_cflags], [$EXTRA_OPTION])
+    AX_APPEND_COMPILE_FLAGS([-Wreturn-type], [mc_configured_cflags], [$EXTRA_OPTION])
+    AX_APPEND_COMPILE_FLAGS([-Wsequence-point], [mc_configured_cflags], [$EXTRA_OPTION])
+    AX_APPEND_COMPILE_FLAGS([-Wshadow], [mc_configured_cflags], [$EXTRA_OPTION])
+    AX_APPEND_COMPILE_FLAGS([-Wsign-compare], [mc_configured_cflags], [$EXTRA_OPTION])
+dnl    AX_APPEND_COMPILE_FLAGS([-Wstrict-aliasing], [mc_configured_cflags], [$EXTRA_OPTION])
+    AX_APPEND_COMPILE_FLAGS([-Wstrict-prototypes], [mc_configured_cflags], [$EXTRA_OPTION])
+    AX_APPEND_COMPILE_FLAGS([-Wswitch], [mc_configured_cflags], [$EXTRA_OPTION])
+    AX_APPEND_COMPILE_FLAGS([-Wswitch-default], [mc_configured_cflags], [$EXTRA_OPTION])
+    AX_APPEND_COMPILE_FLAGS([-Wtype-limits], [mc_configured_cflags], [$EXTRA_OPTION])
+    AX_APPEND_COMPILE_FLAGS([-Wundef], [mc_configured_cflags], [$EXTRA_OPTION])
+    AX_APPEND_COMPILE_FLAGS([-Wuninitialized], [mc_configured_cflags], [$EXTRA_OPTION])
+    AX_APPEND_COMPILE_FLAGS([-Wunreachable-code], [mc_configured_cflags], [$EXTRA_OPTION])
+    AX_APPEND_COMPILE_FLAGS([-Wunused-but-set-variable], [mc_configured_cflags], [$EXTRA_OPTION])
+    AX_APPEND_COMPILE_FLAGS([-Wunused-function], [mc_configured_cflags], [$EXTRA_OPTION])
+    AX_APPEND_COMPILE_FLAGS([-Wunused-label], [mc_configured_cflags], [$EXTRA_OPTION])
+    AX_APPEND_COMPILE_FLAGS([-Wunused-parameter], [mc_configured_cflags], [$EXTRA_OPTION])
+    AX_APPEND_COMPILE_FLAGS([-Wunused-result], [mc_configured_cflags], [$EXTRA_OPTION])
+    AX_APPEND_COMPILE_FLAGS([-Wunused-value], [mc_configured_cflags], [$EXTRA_OPTION])
+    AX_APPEND_COMPILE_FLAGS([-Wunused-variable], [mc_configured_cflags], [$EXTRA_OPTION])
+    AX_APPEND_COMPILE_FLAGS([-Wwrite-strings], [mc_configured_cflags], [$EXTRA_OPTION])
 
     AC_LANG_POP()
 ])

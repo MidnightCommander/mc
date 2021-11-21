@@ -149,10 +149,10 @@ input_eval_marks (WInput * in, long *start_mark, long *end_mark)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-delete_region (WInput * in, int x_first, int x_last)
+delete_region (WInput * in, int start, int end)
 {
-    int first = MIN (x_first, x_last);
-    int last = MAX (x_first, x_last);
+    int first = MIN (start, end);
+    int last = MAX (start, end);
 
     input_mark_cmd (in, FALSE);
     in->point = first;
@@ -487,10 +487,10 @@ delete_char (WInput * in)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-copy_region (WInput * in, int x_first, int x_last)
+copy_region (WInput * in, int start, int end)
 {
-    int first = MIN (x_first, x_last);
-    int last = MAX (x_first, x_last);
+    int first = MIN (start, end);
+    int last = MAX (start, end);
 
     if (last == first)
     {

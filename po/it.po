@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-09-26 10:06+0300\n"
+"POT-Creation-Date: 2021-11-21 15:18+0300\n"
 "PO-Revision-Date: 2021-09-29 09:45+0200\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/mc/language/"
@@ -3060,7 +3060,8 @@ msgstr "A&lbero"
 msgid "&Listing format..."
 msgstr "Formato &lista..."
 
-msgid "&Sort order..."
+#, fuzzy
+msgid "S&ort order..."
 msgstr "&Ordina per..."
 
 msgid "&Filter..."
@@ -3075,7 +3076,8 @@ msgstr "Connessione FT&P..."
 msgid "S&hell link..."
 msgstr "Connessione S&hell..."
 
-msgid "S&FTP link..."
+#, fuzzy
+msgid "&SFTP link..."
 msgstr "Connessione S&FTP..."
 
 msgid "Paneli&ze"
@@ -4364,7 +4366,8 @@ msgid "sftp: %s"
 msgstr "sftp: %s"
 
 msgid "sftp: failed to convert remote host IP address into text form"
-msgstr "sftp: fallita conversione indirizzo IP host remoto nella forma testuale"
+msgstr ""
+"sftp: fallita conversione indirizzo IP host remoto nella forma testuale"
 
 #, c-format
 msgid "sftp: making connection to %s"

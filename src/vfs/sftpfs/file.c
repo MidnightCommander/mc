@@ -131,11 +131,12 @@ sftpfs_open_file (vfs_file_handler_t * fh, int flags, mode_t mode, GError ** mce
     sftpfs_file_handler_t *file = SFTP_FILE_HANDLER (fh);
     sftpfs_super_t *super = SFTP_SUPER (fh->ino->super);
     char *name;
+    const GString *fixfname;
 
     (void) mode;
     mc_return_val_if_error (mcerror, FALSE);
 
-    name = vfs_s_fullpath (sftpfs_class, fh->ino);
+    name = vfs_s_fullpath (vfs_sftpfs_ops, fh->ino);
     if (name == NULL)
         return FALSE;
 
@@ -156,12 +157,11 @@ sftpfs_open_file (vfs_file_handler_t * fh, int flags, mode_t mode, GError ** mce
     else
         sftp_open_flags = LIBSSH2_FXF_READ;
 
+    fixfname = sftpfs_fix_filename (name);
+
     while (TRUE)
     {
-        const GString *fixfname;
         int libssh_errno;
-
-        fixfname = sftpfs_fix_filename (name);
 
         file->handle =
             libssh2_sftp_open_ex (super->sftp_session, fixfname->str, fixfname->len,
