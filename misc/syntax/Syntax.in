@@ -70,6 +70,9 @@ include html.syntax
 file ..\*\\.((?i:xml|xsd|xslt?|dtd)|qpg|qpg\\.in)$ XML\sdocument (\\?xml\sversion|!DOCTYPE\s)
 include xml.syntax
 
+file ..\*\\.cir$ Spice\scircuit
+include spice.syntax
+
 file ..\*\\.(?i:tt)$ Template::Toolkit\sFile
 include tt.syntax
 

@@ -80,6 +80,7 @@ SYNTAXFILES =			\
 	slang.syntax		\
 	smalltalk.syntax	\
 	spec.syntax		\
+	spice.syntax		\
 	sql.syntax		\
 	strace.syntax 		\
 	swift.syntax		\
