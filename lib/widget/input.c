@@ -215,18 +215,20 @@ input_history_strip_password (char *url)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-push_history (WInput * in, const char *text)
+input_push_history (WInput * in)
 {
     char *t;
     gboolean empty;
 
-    if (text == NULL)
-        return;
-
-    t = g_strstrip (g_strdup (text));
+    /* FIXME: don't use input_get_text() to avoid extra checks */
+    t = g_strstrip (g_strndup (in->buffer->str, in->buffer->len));
     empty = *t == '\0';
-    g_free (t);
-    t = g_strdup (empty ? "" : text);
+    if (!empty)
+    {
+        g_free (t);
+        /* FIXME: don't use input_get_text() to avoid extra checks */
+        t = g_strndup (in->buffer->str, in->buffer->len);
+    }
 
     if (!empty && in->history.name != NULL && in->strip_password)
     {
@@ -590,7 +592,7 @@ hist_prev (WInput * in)
         return;
 
     if (in->need_push)
-        push_history (in, in->buffer->str);
+        input_push_history (in);
 
     prev = g_list_previous (in->history.current);
     if (prev != NULL)
@@ -611,7 +613,7 @@ hist_next (WInput * in)
 
     if (in->need_push)
     {
-        push_history (in, in->buffer->str);
+        input_push_history (in);
         input_assign_text (in, "");
         return;
     }
@@ -842,7 +844,7 @@ input_save_history (const gchar * event_group_name, const gchar * event_name,
     {
         ev_history_load_save_t *ev = (ev_history_load_save_t *) data;
 
-        push_history (in, in->buffer->str);
+        input_push_history (in);
         if (in->history.changed)
             mc_config_history_save (ev->cfg, in->history.name, in->history.list);
         in->history.changed = FALSE;
@@ -1344,7 +1346,7 @@ input_disable_update (WInput * in)
 void
 input_clean (WInput * in)
 {
-    push_history (in, in->buffer->str);
+    input_push_history (in);
     in->need_push = TRUE;
     g_string_set_size (in->buffer, 0);
     in->point = 0;
