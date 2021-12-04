@@ -88,7 +88,7 @@ mc_fhl_is_hlink (const file_entry_t * fe)
 inline static gboolean
 mc_fhl_is_link_to_dir (const file_entry_t * fe)
 {
-    return mc_fhl_is_link (fe) && (fe->f.link_to_dir);
+    return mc_fhl_is_link (fe) && fe->f.link_to_dir;
 }
 
 inline static gboolean
@@ -167,7 +167,7 @@ mc_fhl_get_color_filetype (const mc_fhl_filter_t * mc_filter, const mc_fhl_t * f
             my_color = TRUE;
         break;
     case MC_FLHGH_FTYPE_T_FILE_EXE:
-        if ((mc_fhl_is_file (fe)) && (mc_fhl_is_file_exec (fe)))
+        if (mc_fhl_is_file (fe) && mc_fhl_is_file_exec (fe))
             my_color = TRUE;
         break;
     case MC_FLHGH_FTYPE_T_DIR:
@@ -179,7 +179,7 @@ mc_fhl_get_color_filetype (const mc_fhl_filter_t * mc_filter, const mc_fhl_t * f
             my_color = TRUE;
         break;
     case MC_FLHGH_FTYPE_T_LINK:
-        if ((mc_fhl_is_link (fe)) || (mc_fhl_is_hlink (fe)))
+        if (mc_fhl_is_link (fe) || mc_fhl_is_hlink (fe))
             my_color = TRUE;
         break;
     case MC_FLHGH_FTYPE_T_HARDLINK:
@@ -195,7 +195,7 @@ mc_fhl_get_color_filetype (const mc_fhl_filter_t * mc_filter, const mc_fhl_t * f
             my_color = TRUE;
         break;
     case MC_FLHGH_FTYPE_T_DEVICE:
-        if ((mc_fhl_is_device_char (fe)) || (mc_fhl_is_device_block (fe)))
+        if (mc_fhl_is_device_char (fe) || mc_fhl_is_device_block (fe))
             my_color = TRUE;
         break;
     case MC_FLHGH_FTYPE_T_DEVICE_BLOCK:
@@ -226,7 +226,7 @@ mc_fhl_get_color_filetype (const mc_fhl_filter_t * mc_filter, const mc_fhl_t * f
         break;
     }
 
-    return (my_color) ? mc_filter->color_pair_index : -1;
+    return my_color ? mc_filter->color_pair_index : -1;
 }
 
 /* --------------------------------------------------------------------------------------------- */
