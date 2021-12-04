@@ -149,23 +149,6 @@ input_eval_marks (WInput * in, long *start_mark, long *end_mark)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-delete_region (WInput * in, int start, int end)
-{
-    int first = MIN (start, end);
-    int last = MAX (start, end);
-
-    input_mark_cmd (in, FALSE);
-    in->point = first;
-    last = str_offset_to_pos (in->buffer->str, last);
-    first = str_offset_to_pos (in->buffer->str, first);
-    g_string_erase (in->buffer, first, last - first);
-    in->charpoint = 0;
-    in->need_push = TRUE;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
 do_show_hist (WInput * in)
 {
     size_t len;
@@ -290,44 +273,6 @@ move_buffer_backward (WInput * in, int start, int end)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static cb_ret_t
-insert_char (WInput * in, int c_code)
-{
-    int res;
-    long m1, m2;
-    size_t ins_point;
-
-    if (input_eval_marks (in, &m1, &m2))
-        delete_region (in, m1, m2);
-
-    if (c_code == -1)
-        return MSG_NOT_HANDLED;
-
-    if (in->charpoint >= MB_LEN_MAX)
-        return MSG_HANDLED;
-
-    in->charbuf[in->charpoint] = c_code;
-    in->charpoint++;
-
-    res = str_is_valid_char (in->charbuf, in->charpoint);
-    if (res < 0)
-    {
-        if (res != -2)
-            in->charpoint = 0;  /* broken multibyte char, skip */
-        return MSG_HANDLED;
-    }
-
-    in->need_push = TRUE;
-    ins_point = str_offset_to_pos (in->buffer->str, in->point);
-    g_string_insert_len (in->buffer, ins_point, in->charbuf, in->charpoint);
-    in->point++;
-    in->charpoint = 0;
-
-    return MSG_HANDLED;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 static void
 beginning_of_line (WInput * in)
 {
@@ -441,21 +386,6 @@ backward_delete (WInput * in)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-delete_char (WInput * in)
-{
-    const char *act;
-    int end;
-
-    act = in->buffer->str + str_offset_to_pos (in->buffer->str, in->point);
-    end = in->point + str_cnext_noncomb_char (&act);
-    move_buffer_backward (in, in->point, end);
-    in->charpoint = 0;
-    in->need_push = TRUE;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
 copy_region (WInput * in, int start, int end)
 {
     int first = MIN (start, end);
@@ -480,6 +410,76 @@ copy_region (WInput * in, int start, int end)
     mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_text_to_file", kill_buffer);
     /* try use external clipboard utility */
     mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_to_ext_clip", NULL);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+delete_region (WInput * in, int start, int end)
+{
+    int first = MIN (start, end);
+    int last = MAX (start, end);
+
+    input_mark_cmd (in, FALSE);
+    in->point = first;
+    last = str_offset_to_pos (in->buffer->str, last);
+    first = str_offset_to_pos (in->buffer->str, first);
+    g_string_erase (in->buffer, first, last - first);
+    in->charpoint = 0;
+    in->need_push = TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static cb_ret_t
+insert_char (WInput * in, int c_code)
+{
+    int res;
+    long m1, m2;
+    size_t ins_point;
+
+    if (input_eval_marks (in, &m1, &m2))
+        delete_region (in, m1, m2);
+
+    if (c_code == -1)
+        return MSG_NOT_HANDLED;
+
+    if (in->charpoint >= MB_LEN_MAX)
+        return MSG_HANDLED;
+
+    in->charbuf[in->charpoint] = c_code;
+    in->charpoint++;
+
+    res = str_is_valid_char (in->charbuf, in->charpoint);
+    if (res < 0)
+    {
+        if (res != -2)
+            in->charpoint = 0;  /* broken multibyte char, skip */
+        return MSG_HANDLED;
+    }
+
+    in->need_push = TRUE;
+    ins_point = str_offset_to_pos (in->buffer->str, in->point);
+    g_string_insert_len (in->buffer, ins_point, in->charbuf, in->charpoint);
+    in->point++;
+    in->charpoint = 0;
+
+    return MSG_HANDLED;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+delete_char (WInput * in)
+{
+    const char *act;
+    int end;
+
+    act = in->buffer->str + str_offset_to_pos (in->buffer->str, in->point);
+    end = in->point + str_cnext_noncomb_char (&act);
+    move_buffer_backward (in, in->point, end);
+    in->charpoint = 0;
+    in->need_push = TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
