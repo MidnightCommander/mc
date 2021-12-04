@@ -47,7 +47,7 @@
 
 /*inline functions */
 inline static gboolean
-mc_fhl_is_file (file_entry_t * fe)
+mc_fhl_is_file (const file_entry_t * fe)
 {
 #if HAVE_S_ISREG == 0
     (void) fe;
@@ -56,13 +56,13 @@ mc_fhl_is_file (file_entry_t * fe)
 }
 
 inline static gboolean
-mc_fhl_is_file_exec (file_entry_t * fe)
+mc_fhl_is_file_exec (const file_entry_t * fe)
 {
     return is_exe (fe->st.st_mode);
 }
 
 inline static gboolean
-mc_fhl_is_dir (file_entry_t * fe)
+mc_fhl_is_dir (const file_entry_t * fe)
 {
 #if HAVE_S_ISDIR == 0
     (void) fe;
@@ -71,7 +71,7 @@ mc_fhl_is_dir (file_entry_t * fe)
 }
 
 inline static gboolean
-mc_fhl_is_link (file_entry_t * fe)
+mc_fhl_is_link (const file_entry_t * fe)
 {
 #if HAVE_S_ISLNK == 0
     (void) fe;
@@ -80,25 +80,25 @@ mc_fhl_is_link (file_entry_t * fe)
 }
 
 inline static gboolean
-mc_fhl_is_hlink (file_entry_t * fe)
+mc_fhl_is_hlink (const file_entry_t * fe)
 {
     return (fe->st.st_nlink > 1);
 }
 
 inline static gboolean
-mc_fhl_is_link_to_dir (file_entry_t * fe)
+mc_fhl_is_link_to_dir (const file_entry_t * fe)
 {
     return mc_fhl_is_link (fe) && (fe->f.link_to_dir);
 }
 
 inline static gboolean
-mc_fhl_is_stale_link (file_entry_t * fe)
+mc_fhl_is_stale_link (const file_entry_t * fe)
 {
     return mc_fhl_is_link (fe) ? fe->f.stale_link : !mc_fhl_is_file (fe);
 }
 
 inline static gboolean
-mc_fhl_is_device_char (file_entry_t * fe)
+mc_fhl_is_device_char (const file_entry_t * fe)
 {
 #if HAVE_S_ISCHR == 0
     (void) fe;
@@ -107,7 +107,7 @@ mc_fhl_is_device_char (file_entry_t * fe)
 }
 
 inline static gboolean
-mc_fhl_is_device_block (file_entry_t * fe)
+mc_fhl_is_device_block (const file_entry_t * fe)
 {
 #if HAVE_S_ISBLK == 0
     (void) fe;
@@ -116,7 +116,7 @@ mc_fhl_is_device_block (file_entry_t * fe)
 }
 
 inline static gboolean
-mc_fhl_is_special_socket (file_entry_t * fe)
+mc_fhl_is_special_socket (const file_entry_t * fe)
 {
 #if HAVE_S_ISSOCK == 0
     (void) fe;
@@ -125,7 +125,7 @@ mc_fhl_is_special_socket (file_entry_t * fe)
 }
 
 inline static gboolean
-mc_fhl_is_special_fifo (file_entry_t * fe)
+mc_fhl_is_special_fifo (const file_entry_t * fe)
 {
 #if HAVE_S_ISFIFO == 0
     (void) fe;
@@ -134,31 +134,30 @@ mc_fhl_is_special_fifo (file_entry_t * fe)
 }
 
 inline static gboolean
-mc_fhl_is_special_door (file_entry_t * fe)
+mc_fhl_is_special_door (const file_entry_t * fe)
 {
 #if HAVE_S_ISDOOR == 0
     (void) fe;
 #endif
-
     return S_ISDOOR (fe->st.st_mode);
 }
 
-
 inline static gboolean
-mc_fhl_is_special (file_entry_t * fe)
+mc_fhl_is_special (const file_entry_t * fe)
 {
     return
         (mc_fhl_is_special_socket (fe) || mc_fhl_is_special_fifo (fe)
          || mc_fhl_is_special_door (fe));
 }
 
-
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-mc_fhl_get_color_filetype (mc_fhl_filter_t * mc_filter, mc_fhl_t * fhl, file_entry_t * fe)
+mc_fhl_get_color_filetype (const mc_fhl_filter_t * mc_filter, const mc_fhl_t * fhl,
+                           const file_entry_t * fe)
 {
     gboolean my_color = FALSE;
+
     (void) fhl;
 
     switch (mc_filter->file_type)
@@ -233,9 +232,11 @@ mc_fhl_get_color_filetype (mc_fhl_filter_t * mc_filter, mc_fhl_t * fhl, file_ent
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-mc_fhl_get_color_regexp (mc_fhl_filter_t * mc_filter, mc_fhl_t * fhl, file_entry_t * fe)
+mc_fhl_get_color_regexp (const mc_fhl_filter_t * mc_filter, const mc_fhl_t * fhl,
+                         const file_entry_t * fe)
 {
     (void) fhl;
+
     if (mc_filter->search_condition == NULL)
         return -1;
 
@@ -252,7 +253,7 @@ mc_fhl_get_color_regexp (mc_fhl_filter_t * mc_filter, mc_fhl_t * fhl, file_entry
 /* --------------------------------------------------------------------------------------------- */
 
 int
-mc_fhl_get_color (mc_fhl_t * fhl, file_entry_t * fe)
+mc_fhl_get_color (const mc_fhl_t * fhl, const file_entry_t * fe)
 {
     guint i;
     int ret;
