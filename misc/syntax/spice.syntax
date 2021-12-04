@@ -9,12 +9,14 @@ context default
 
     # dot commands
     keyword whole .ac brightmagenta
+    keyword whole .control brightmagenta
     keyword whole .csparam brightmagenta
     keyword whole .dc brightmagenta
     keyword whole .disto brightmagenta
     keyword whole .else brightmagenta
     keyword whole .elseif brightmagenta
     keyword whole .end brightmagenta
+    keyword whole .endc brightmagenta
     keyword whole .endif brightmagenta
     keyword whole .ends brightmagenta
     keyword whole .four brightmagenta
@@ -186,15 +188,12 @@ context default
 
 context " " green
 
-context .control .endc
+context exclusive .control .endc
     keyword linestart \**\n brown
     keyword $*\n brown
     keyword ;*\n brown
     keyword //*\n brown
     keyword linestart \+ red
-
-    keyword .control brightmagenta
-    keyword .endc brightmagenta
 
     # commands
     keyword whole ac yellow
