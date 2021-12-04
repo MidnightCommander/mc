@@ -228,20 +228,20 @@ input_push_history (WInput * in)
         g_free (t);
         /* FIXME: don't use input_get_text() to avoid extra checks */
         t = g_strndup (in->buffer->str, in->buffer->len);
-    }
 
-    if (!empty && in->history.name != NULL && in->strip_password)
-    {
-        /*
-           We got string user:pass@host without any VFS prefixes
-           and vfs_path_to_str_flags (t, VPF_STRIP_PASSWORD) doesn't work.
-           Therefore we want to strip password in separate algorithm
-         */
-        char *url_with_stripped_password;
+        if (in->history.name != NULL && in->strip_password)
+        {
+            /*
+               We got string user:pass@host without any VFS prefixes
+               and vfs_path_to_str_flags (t, VPF_STRIP_PASSWORD) doesn't work.
+               Therefore we want to strip password in separate algorithm
+             */
+            char *url_with_stripped_password;
 
-        url_with_stripped_password = input_history_strip_password (t);
-        g_free (t);
-        t = url_with_stripped_password;
+            url_with_stripped_password = input_history_strip_password (t);
+            g_free (t);
+            t = url_with_stripped_password;
+        }
     }
 
     if (in->history.list == NULL || in->history.list->data == NULL
