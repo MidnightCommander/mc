@@ -422,9 +422,7 @@ delete_region (WInput * in, int start, int end)
 
     input_mark_cmd (in, FALSE);
     in->point = first;
-    last = str_offset_to_pos (in->buffer->str, last);
-    first = str_offset_to_pos (in->buffer->str, first);
-    g_string_erase (in->buffer, first, last - first);
+    move_buffer_backward (in, first, last);
     in->charpoint = 0;
     in->need_push = TRUE;
 }
