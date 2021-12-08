@@ -60,9 +60,9 @@ helyett a Midnight Commander által utoljára meglátogatott könyvtárra való
 átváltást (köszönet a funkcióért és a funkcióhoz szükséges kódért Torben
 Fjerdingstad\-nek és Sergey\-nek közreműködésükért). Kérlek, ne csinálj
 szó szerinti másolatot a funkció beállításairól. A fájlok forrása a
-.I %libexecdir%/mc/mc.sh
+.I %pkglibexecdir%/mc.sh
 (bash és zsh felhasználóknak), illetőleg a
-.I %libexecdir%/mc/mc.csh
+.I %pkglibexecdir%/mc.csh
 (tcsh felhasználóknak) fájl. Ilyenkor, amikor a funkció beállításokat
 változtatod, a profil értékeket nem szükséges megváltoztatnod, csak
 arról gondoskodj, hogy az MC\-t ne fordítsd eltérő beállításokkal.
@@ -1374,7 +1374,7 @@ nem talál ilyen fájlt, az
 .I ~/.config/mc/menu
 keresése a következő lépés, egyébként pedig az mc az alapértelmezett
 rendszerszintű menüt használja, pl.:
-.IR %prefix%/share/mc/mc.menu ,
+.IR %pkgdatadir%/mc.menu ,
 esetleg %sysconfdir%/mc/mc.menu.
 .PP
 A menü fájl formátuma nagyon egyszerű. A sorok, amelyek bármivel
@@ -1882,7 +1882,7 @@ beolvasni az
 .I ~/.config/mc/ini
 fájlból. Ha ez a fájl nem létezik, ezeket az információkat a
 rendszerszintű konfigurációs fájlból fogja beolvasni, amelyek a
-.I %prefix%/share/mc/mc.ini
+.I %pkgdatadir%/mc.ini
 fájlban találhatóak meg. Ha ez a rendszerszintű konfigurációs fájl sem
 létezik, a MC az alapértelmezett beállításokat használja.
 .PP
@@ -2632,7 +2632,7 @@ dialógus ablak másik beállítandó opciója az
 .I ftp proxy\-n keresztül
 opció. Ez beállítja a program számára azt, hogy mindig használja a proxy
 host\-ot. Ha ez a változó be van állítva, akkor a program két dolgot
-csinál: konzultál a %prefix%/share/mc.no_proxy fájl soraival, hogy azok
+csinál: konzultál a %sysconfdir%/mc/mc.no_proxy fájl soraival, hogy azok
 tartalmazzák\-e a host nevet, mint helyi eszközt (ha a host neve ponttal
 kezdődik, akkor ezt domainként tartja számon), és feltételezi azt, hogy
 a pont nélküli hostnevek közvetlenül felodhatók.
@@ -3149,11 +3149,11 @@ A progam minden ezzel kapcsolatos infomációt az
 környezeti változóban tárol. Ha ezt a változót nem állítottuk be, akkor
 ez vissza fog állítódni a /usr könyvtárra.
 .PP
-.I %prefix%/share/mc/help/mc.hlp
+.I %pkgdatadir%/help/mc.hlp
 .IP
 A program súgó fájlja.
 .PP
-.I %prefix%/share/mc/mc.ext
+.I %pkgdatadir%/mc.ext
 .IP
 Az alapértelmezett rendszerszintű kiterjesztés fájl.
 .PP
@@ -3163,12 +3163,12 @@ A felhasználó saját kiterjesztései, nézet beállítások és szerkesztési
 beállítások. Ezek felülbírálják a rendszerszintű fájl bejegyzéseit, ha
 van ilyen.
 .PP
-.I %prefix%/share/mc/mc.ini
+.I %pkgdatadir%/mc.ini
 .IP
 Az alapértelmezett rendszerszintű Midnight Commander beállítás, amelyet
 csak akkor használ, ha a felhasználónak nincs saját ~/.config/mc/ini fájlja.
 .PP
-.I %prefix%/share/mc/mc.lib
+.I %pkgdatadir%/mc.lib
 .IP
 A Midnight Commander globális beállításai. Az ebben a fájlban elvégzett
 beállítások minden felhasználó Midnight Commander\-jére vonatkoznak, ez
@@ -3180,12 +3180,12 @@ A felhasználó saját beállításai. Ha ez a fájl elérhető, akkor a
 beállítások ebből a fájlból olvasódnak be a rendszerszintű indító fájl
 helyett.
 .PP
-.I %prefix%/share/mc/hints/mc.hint
+.I %pkgdatadir%/hints/mc.hint
 .IP
 Ez a fájl tartalmazza a program által megjelenített útmutattásokat
 (cookie\-kat).
 .PP
-.I %prefix%/share/mc/mc.menu
+.I %pkgdatadir%/mc.menu
 .IP
 Ez a fájl azonos a rendszerszintű alkalmazás menüvel.
 .PP

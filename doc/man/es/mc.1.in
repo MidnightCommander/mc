@@ -91,9 +91,9 @@ directorio de trabajo en el archivo indicado.  Esta opción no debe ser
 usada directamente, sino desde un guión de shell adecuado, para dejar
 como directorio activo el directorio que estaba en uso dentro de
 Midnight Commander.  Consúltese en los archivos
-.B %libexecdir%/mc/mc.sh
+.B %pkglibexecdir%/mc.sh
 (usuarios de bash y zsh) y
-.B %libexecdir%/mc/mc.csh
+.B %pkglibexecdir%/mc.csh
 (usuarios de tcsh) la manera de definir
 .B mc
 como un alias para el correspondiente guión de shell.
@@ -347,7 +347,7 @@ La función de ciertas teclas se puede alterar a partir de un mapa de teclado
 almacenado en un archivo externo. Inicialmente el programa asigna esas funciones
 según el mapa definido en el código fuente. Posteriormente se cargan siempre
 los archivos
-.B %prefix%/share/mc/mc.keymap
+.B %pkgdatadir%/mc.keymap
 y
 .BR %sysconfdir%/mc/mc.keymap ,
 reasignando en el orden marcado las definiciones anteriores. Se cargan después
@@ -386,7 +386,7 @@ se procede a realizar una búsqueda por directorios hasta encontrarlo en:
 .B %sysconfdir%/mc/
 .br
 3)
-.B %prefix%/share/mc/
+.B %pkgdatadir%/
 .\"NODE "  Miscellaneous Keys"
 .SH "  Otras Teclas"
 Se incluyen aquí las teclas que no encajan en ninguna categoría concreta:
@@ -1512,7 +1512,7 @@ Abre el archivo
 .I ~/.config/mc/mc.ext
 en nuestro editor. El administrador puede optar por editar, en su lugar,
 el archivo de extensiones del sistema
-.IR %prefix%/share/mc/mc.ext .
+.IR %pkgdatadir%/mc.ext .
 El formato del archivo es como sigue:
 .PP
 Todas las líneas que empiecen con # o estén vacías serán ignoradas.
@@ -1597,7 +1597,7 @@ el archivo .mc.menu del directorio actual, pero solo si es propiedad del
 usuario o del superusuario y no es modificable por todos.
 Si no se encuentra allí el archivo, se intenta de la misma manera con ~/.config/mc/menu,
 y si no, mc utiliza el menú por defecto para todo el sistema
-%prefix%/share/mc/mc.menu.
+%pkgdatadir%/mc.menu.
 .PP
 El formato del menú de archivo es muy simple.  Todas las líneas, salvo
 las que empiezan con espacio o tabulación, son consideradas entradas
@@ -1997,7 +1997,7 @@ usando el color indicado por medio de la palabra clave
 .I selected.
 Si se activa el resaltado de tipos de archivos, los nombres aparecerán
 coloreados según las reglas almacenadas en el archivo
-.IR %prefix%/share/mc/filehighlight.ini .
+.IR %pkgdatadir%/filehighlight.ini .
 Para más información, véase la
 sección sobre
 .\"LINK2"
@@ -2242,7 +2242,7 @@ Si la opción
 .I Usar siempre proxy
 está puesta, el programa asume que cualquier nombre de máquina
 sin puntos es accesible directamente y también consulta el archivo
-%prefix%/share/mc.no_proxy en busca de nombres de máquinas locales (o
+%sysconfdir%/mc/mc.no_proxy en busca de nombres de máquinas locales (o
 dominios completos si el nombre empieza con un punto).  En todos los
 demás casos se usará siempre el proxy de FTP indicado arriba.
 .PP
@@ -2267,7 +2267,7 @@ archivo
 .IR ~/.config/mc/ini .
 Si este no existe, se cargará la información del
 archivo de configuración genérico del sistema,
-.IR %prefix%/share/mc/mc.ini .
+.IR %pkgdatadir%/mc.ini .
 Si el archivo de configuración genérico del sistema no existe, MC utiliza
 la configuración por defecto.
 .PP
@@ -3017,7 +3017,7 @@ formateará el bloque seleccionado (sea texto, código
 o
 .B C++
 u otro). Esto está controlado por el archivo
-.B %prefix%/share/mc/edit.indent.rc
+.B %pkgdatadir%/edit.indent.rc
 que se copia la primera vez que se usa en
 .B ~/.local/share/mc/mcedit/edit.indent.rc
 en el directorio personal.
@@ -3569,7 +3569,7 @@ del archivo de configuración.
 .BR %sysconfdir%/mc/skins/default.ini .
 .br
 5) El archivo
-.BR %prefix%/share/mc/skins/default.ini .
+.BR %pkgdatadir%/skins/default.ini .
 
 .PP
 En línea de órdenes, en la variable de entorno o el parámetro de la
@@ -3584,7 +3584,7 @@ en orden, en:
 .BR %sysconfdir%/mc/skins/ .
 .br
 3)
-.BR %prefix%/share/mc/skins/ .
+.BR %pkgdatadir%/skins/ .
 .br
 
 .PP
@@ -3888,7 +3888,7 @@ Skins\&.
 .\"Skins"
 .PP
 Las reglas de resaltado de nombres en el archivo se encuentran en
-.IR %prefix%/share/mc/filehighlight.ini .
+.IR %pkgdatadir%/filehighlight.ini .
 Los nombres de sección en este archivo tienen que ser iguales a los nombres
 empleados en la sección [filehighlight] del archivo de skin en uso.
 PP.
@@ -4058,7 +4058,7 @@ Midnight Commander permite especificar opciones para editores y visores
 externos.  Midnight Commander busca la sección
 .I [External editor or viewer parameters]
 en el archivo de inicialización del sistema
-.B %prefix%/share/mc/mc.lib
+.B %pkgdatadir%/mc.lib
 o en el del usuario
 .BR ~/.config/mc/ini .
 El nombre de la opción debe coincidir con el nombre (ruta completa) del editor
@@ -4094,7 +4094,7 @@ externo pueda guardar y restaurar posiciones en los archivos abiertos.
 Midnight Commander permite hacer ajustes a la base de datos de terminales
 del sistema sin necesidad de privilegios de superusuario. El programa
 busca definiciones de teclas en el archivo de inicialización del sistema
-.B %prefix%/share/mc/mc.lib
+.B %pkgdatadir%/mc.lib
 o en el del usuario
 .BR ~/.config/mc/ini ,
 en la sección "terminal:nuestro\-terminal" y si no en "terminal:general".
@@ -4157,13 +4157,13 @@ Los directorios indicados a continuación pueden variar de una
 instalación a otra.  También se pueden modificar con la variable de
 entorno
 .BR MC_DATADIR ,
-que de estar definida se emplearía en vez de %prefix%/share/mc.
+que de estar definida se emplearía en vez de %pkgdatadir%.
 .PP
-.I %prefix%/share/mc.hlp
+.I %pkgdatadir%/help/mc.hlp
 .IP
 Archivo de ayuda.
 .PP
-.I %prefix%/share/mc/mc.ext
+.I %pkgdatadir%/mc.ext
 .IP
 Archivo de extensiones por defecto del sistema.
 .PP
@@ -4172,13 +4172,13 @@ Archivo de extensiones por defecto del sistema.
 Archivo de usuario de extensiones y configuración de visor y editor. Si
 está presente prevalece sobre el contenido de los archivos del sistema.
 .PP
-.I %prefix%/share/mc/mc.ini
+.I %pkgdatadir%/mc.ini
 .IP
 Archivo de configuración del sistema para Midnight Commander, solo si
 el usuario no dispone de su propio
 .IR ~/.config/mc/ini .
 .PP
-.I %prefix%/share/mc/mc.lib
+.I %pkgdatadir%/mc.lib
 .IP
 Opciones globales de Midnight Commander. Se aplican siempre a todos los
 usuarios, tengan
@@ -4194,12 +4194,12 @@ Configuración personal del usuario. Si este archivo está presente entonces
 se cargará la configuración desde aquí en lugar de desde el archivo de
 configuración del sistema.
 .PP
-.I %prefix%/share/mc/hints/mc.hint
+.I %pkgdatadir%/hints/mc.hint
 .IP
 Este archivo contiene los mensajes cortos de ayuda mostrados por el
 programa.
 .PP
-.I %prefix%/share/mc/mc.menu
+.I %pkgdatadir%/mc.menu
 .IP
 Este archivo contiene el menú de aplicaciones por defecto para el sistema.
 .PP
