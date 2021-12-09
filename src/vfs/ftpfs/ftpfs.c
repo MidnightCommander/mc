@@ -782,7 +782,6 @@ ftpfs_load_no_proxy_list (void)
 static gboolean
 ftpfs_check_proxy (const char *host)
 {
-    GSList *npe;
 
     if (ftpfs_proxy_host == NULL || *ftpfs_proxy_host == '\0' || host == NULL || *host == '\0')
         return FALSE;           /* sanity check */
@@ -796,29 +795,35 @@ ftpfs_check_proxy (const char *host)
     if (strchr (host, '.') == NULL)
         return FALSE;
 
-    ftpfs_load_no_proxy_list ();
-    for (npe = no_proxy; npe != NULL; npe = g_slist_next (npe))
+    if (no_proxy == NULL)
     {
-        const char *domain = (const char *) npe->data;
+        GSList *npe;
 
-        if (domain[0] == '.')
+        ftpfs_load_no_proxy_list ();
+
+        for (npe = no_proxy; npe != NULL; npe = g_slist_next (npe))
         {
-            size_t ld, lh;
+            const char *domain = (const char *) npe->data;
 
-            ld = strlen (domain);
-            lh = strlen (host);
-
-            while (ld != 0 && lh != 0 && host[lh - 1] == domain[ld - 1])
+            if (domain[0] == '.')
             {
-                ld--;
-                lh--;
-            }
+                size_t ld, lh;
 
-            if (ld == 0)
+                ld = strlen (domain);
+                lh = strlen (host);
+
+                while (ld != 0 && lh != 0 && host[lh - 1] == domain[ld - 1])
+                {
+                    ld--;
+                    lh--;
+                }
+
+                if (ld == 0)
+                    return FALSE;
+            }
+            else if (g_ascii_strcasecmp (host, domain) == 0)
                 return FALSE;
         }
-        else if (g_ascii_strcasecmp (host, domain) == 0)
-            return FALSE;
     }
 
     return TRUE;
