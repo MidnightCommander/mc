@@ -27,6 +27,7 @@ SYNTAXFILES =			\
 	diff.syntax		\
 	dlink.syntax		\
 	dos.syntax		\
+	dot.syntax		\
 	ebuild.syntax		\
 	eiffel.syntax		\
 	erlang.syntax		\

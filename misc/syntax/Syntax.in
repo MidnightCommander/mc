@@ -103,6 +103,9 @@ include latex.syntax
 file ..\*\\.(?i:texi|texinfo)$ Texinfo\sDocument
 include texinfo.syntax
 
+file ..\*\\.(dot|gv)$ DOT/Graphviz\sgraph
+include dot.syntax
+
 file ..\*\\.c$ C\sProgram
 include c.syntax
 

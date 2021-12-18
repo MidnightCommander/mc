@@ -1,0 +1,227 @@
+# DOT/Graphviz graphs
+context default
+    keyword whole strict brightred
+    keyword whole graph brightred
+    keyword whole digraph brightred
+    keyword whole subgraph brightred
+
+    keyword whole node yellow
+    keyword whole edge yellow
+
+    keyword wholeleft cluster_ yellow
+
+    keyword whole -> brightred
+    keyword whole -- brightred
+
+    keyword whole _background white
+    keyword whole area white
+    keyword whole arrowhead white
+    keyword whole arrowsize white
+    keyword whole arrowtail white
+    keyword whole bb white
+    keyword whole bgcolor white
+    keyword whole center white
+    keyword whole charset white
+    keyword whole class white
+    keyword whole clusterrank white
+    keyword whole color white
+    keyword whole colorscheme white
+    keyword whole comment white
+    keyword whole compound white
+    keyword whole concentrate white
+    keyword whole constraint white
+    keyword whole Damping white
+    keyword whole decorate white
+    keyword whole defaultdist white
+    keyword whole dim white
+    keyword whole dimen white
+    keyword whole dir white
+    keyword whole diredgeconstraints white
+    keyword whole distortion white
+    keyword whole dpi white
+    keyword whole edgehref white
+    keyword whole edgetarget white
+    keyword whole edgetooltip white
+    keyword whole edgeURL white
+    keyword whole epsilon white
+    keyword whole esep white
+    keyword whole fillcolor white
+    keyword whole fixedsize white
+    keyword whole fontcolor white
+    keyword whole fontname white
+    keyword whole fontnames white
+    keyword whole fontpath white
+    keyword whole fontsize white
+    keyword whole forcelabels white
+    keyword whole gradientangle white
+    keyword whole group white
+    keyword whole head_lp white
+    keyword whole headclip white
+    keyword whole headhref white
+    keyword whole headlabel white
+    keyword whole headport white
+    keyword whole headtarget white
+    keyword whole headtooltip white
+    keyword whole headURL white
+    keyword whole height white
+    keyword whole href white
+    keyword whole id white
+    keyword whole image white
+    keyword whole imagepath white
+    keyword whole imagepos white
+    keyword whole imagescale white
+    keyword whole inputscale white
+    keyword whole K white
+    keyword whole label white
+    keyword whole label_scheme white
+    keyword whole labelangle white
+    keyword whole labeldistance white
+    keyword whole labelfloat white
+    keyword whole labelfontcolor white
+    keyword whole labelfontname white
+    keyword whole labelfontsize white
+    keyword whole labelhref white
+    keyword whole labeljust white
+    keyword whole labelloc white
+    keyword whole labeltarget white
+    keyword whole labeltooltip white
+    keyword whole labelURL white
+    keyword whole landscape white
+    keyword whole layer white
+    keyword whole layerlistsep white
+    keyword whole layers white
+    keyword whole layerselect white
+    keyword whole layersep white
+    keyword whole layout white
+    keyword whole len white
+    keyword whole levels white
+    keyword whole levelsgap white
+    keyword whole lhead white
+    keyword whole lheight white
+    keyword whole lp white
+    keyword whole ltail white
+    keyword whole lwidth white
+    keyword whole margin white
+    keyword whole maxiter white
+    keyword whole mclimit white
+    keyword whole mindist white
+    keyword whole minlen white
+    keyword whole mode white
+    keyword whole model white
+    keyword whole mosek white
+    keyword whole newrank white
+    keyword whole nodesep white
+    keyword whole nojustify white
+    keyword whole normalize white
+    keyword whole notranslate white
+    keyword whole nslimit white
+    keyword whole nslimit1 white
+    keyword whole ordering white
+    keyword whole orientation white
+    keyword whole outputorder white
+    keyword whole overlap white
+    keyword whole overlap_scaling white
+    keyword whole overlap_shrink white
+    keyword whole pack white
+    keyword whole packmode white
+    keyword whole pad white
+    keyword whole page white
+    keyword whole pagedir white
+    keyword whole pencolor white
+    keyword whole penwidth white
+    keyword whole peripheries white
+    keyword whole pin white
+    keyword whole pos white
+    keyword whole quadtree white
+    keyword whole quantum white
+    keyword whole rank white
+    keyword whole rankdir white
+    keyword whole ranksep white
+    keyword whole ratio white
+    keyword whole rects white
+    keyword whole regular white
+    keyword whole remincross white
+    keyword whole repulsiveforce white
+    keyword whole resolution white
+    keyword whole root white
+    keyword whole rotate white
+    keyword whole rotation white
+    keyword whole samehead white
+    keyword whole sametail white
+    keyword whole samplepoints white
+    keyword whole scale white
+    keyword whole searchsize white
+    keyword whole sep white
+    keyword whole shape white
+    keyword whole shapefile white
+    keyword whole showboxes white
+    keyword whole sides white
+    keyword whole size white
+    keyword whole skew white
+    keyword whole smoothing white
+    keyword whole sortv white
+    keyword whole splines white
+    keyword whole start white
+    keyword whole style white
+    keyword whole stylesheet white
+    keyword whole tail_lp white
+    keyword whole tailclip white
+    keyword whole tailhref white
+    keyword whole taillabel white
+    keyword whole tailport white
+    keyword whole tailtarget white
+    keyword whole tailtooltip white
+    keyword whole tailURL white
+    keyword whole target white
+    keyword whole tooltip white
+    keyword whole truecolor white
+    keyword whole URL white
+    keyword whole vertices white
+    keyword whole viewport white
+    keyword whole voro_margin white
+    keyword whole weight white
+    keyword whole width white
+    keyword whole xdotversion white
+    keyword whole xlabel white
+    keyword whole xlp white
+    keyword whole z white
+
+    keyword /\* brown
+    keyword \*/ brown
+    keyword // brown
+
+    keyword \+ red
+    keyword , brightcyan
+    keyword : brightcyan
+    keyword ; brightmagenta
+    keyword < green
+    keyword = yellow
+    keyword > green
+    keyword [ brightcyan
+    keyword ] brightcyan
+    keyword { brightcyan
+    keyword } brightcyan
+
+context exclusive /\* \*/ brown
+    spellcheck
+
+context exclusive // \n brown
+    spellcheck
+
+context linestart # \n brightred
+    keyword \\\n yellow
+    keyword /\**\*/ brown
+    keyword //*\n brown
+    keyword "+" red
+    keyword <+> red
+
+context exclusive < > green
+    spellcheck
+
+    keyword <*> cyan
+
+context " " green
+    spellcheck
+    keyword \\\n yellow
+    keyword \\" brightgreen
+    keyword \\\{abtnvfr\} brightgreen
