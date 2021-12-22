@@ -56,14 +56,8 @@
 
 #define number_of_parsers 7
 
-#define MINUTE (60)
-#define HOUR   (60 * MINUTE)
-#define DAY    (24 * HOUR)
-
 #define NO_SIZE     ((off_t) (-1L))
-#define NO_SIZE_YET ((off_t) (-2L))
 #define NO_DATE     ((time_t) (-1L))
-#define NO_DATE_YET ((time_t) (-2L))
 
 #define FIRST_TOKEN strtok (line, " \t")
 #define NEXT_TOKEN  strtok (NULL, " \t")

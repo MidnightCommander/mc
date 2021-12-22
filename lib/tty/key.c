@@ -220,7 +220,6 @@ const key_code_name_t key_name_conv_tab[] = {
 
 /*** file scope macro definitions ****************************************************************/
 
-#define MC_MSEC_PER_SEC  1000
 #define MC_USEC_PER_MSEC 1000
 
 /* The maximum sequence length (32 + null terminator) */

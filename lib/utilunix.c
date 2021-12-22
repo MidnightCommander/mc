@@ -80,10 +80,6 @@ struct sigaction startup_handler;
 #define UID_CACHE_SIZE 200
 #define GID_CACHE_SIZE 30
 
-/* Pipes are guaranteed to be able to hold at least 4096 bytes */
-/* More than that would be unportable */
-#define MAX_PIPE_SIZE 4096
-
 /*** file scope type declarations ****************************************************************/
 
 typedef struct
