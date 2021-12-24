@@ -3651,7 +3651,7 @@ tar\-файлов;
 файловых систем описаны в отдельных разделах по каждой ВФС:
 .IP
 .\"LINK2"
-Файловая система ftpfs (FTP File System)
+Файловая система ftpfs
 .\"FTP File System"
 .br
 .\"LINK2"
@@ -3669,9 +3669,7 @@ tar\-файлов;
 .\"LINK2"
 Файловая система UFS (Undelete File System)
 .\"Undelete File System"
-.br
-.\"LINK2"
-.\"NODE "  FTP File System"
+.\"NODE "FTP File System"
 .SH "Файловая система ftpfs"
 Файловая система ftpfs позволяет работать с файлами на удалённых
 компьютерах. Для этого можно использовать команду "FTP\-соединение"
