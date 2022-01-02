@@ -1,6 +1,6 @@
 /* src/vfs/ftpfs - tests for ftpfs_parse_long_list() function.
 
-   Copyright (C) 2021
+   Copyright (C) 2021-2022
    Free Software Foundation, Inc.
 
    Written by:

@@ -1,7 +1,7 @@
 /*
    Editor low level data handling and cursor fundamentals.
 
-   Copyright (C) 1996-2021
+   Copyright (C) 1996-2022
    Free Software Foundation, Inc.
 
    Written by:

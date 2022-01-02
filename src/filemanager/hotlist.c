@@ -1,7 +1,7 @@
 /*
    Directory hotlist -- for the Midnight Commander
 
-   Copyright (C) 1994-2021
+   Copyright (C) 1994-2022
    Free Software Foundation, Inc.
 
    Written by:

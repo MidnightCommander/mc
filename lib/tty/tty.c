@@ -1,7 +1,7 @@
 /*
    Interface to the terminal controlling library.
 
-   Copyright (C) 2005-2021
+   Copyright (C) 2005-2022
    Free Software Foundation, Inc.
 
    Written by:
