@@ -158,3 +158,6 @@ copy=st
 
 [terminal:st-git-256color]
 copy=st
+
+[terminal:xterm-kitty]
+copy=xterm
