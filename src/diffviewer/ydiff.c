@@ -28,8 +28,10 @@
 
 
 #include <config.h>
+
 #include <ctype.h>
 #include <errno.h>
+#include <stddef.h>             /* ptrdiff_t */
 #include <stdlib.h>
 #include <sys/stat.h>
 #include <sys/types.h>

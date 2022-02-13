@@ -35,6 +35,7 @@
 #include <config.h>
 
 #include <ctype.h>
+#include <stddef.h>             /* ptrdiff_t */
 #include <limits.h>
 #include <stdarg.h>
 #include <stdio.h>
