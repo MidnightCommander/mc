@@ -150,6 +150,7 @@ _str_convert (GIConv coder, const char *string, int size, GString * buffer)
             {
             case G_CONVERT_ERROR_NO_CONVERSION:
                 /* Conversion between the requested character sets is not supported. */
+                g_free (tmp_buff);
                 tmp_buff = g_strnfill (strlen (string), '?');
                 g_string_append (buffer, tmp_buff);
                 g_free (tmp_buff);
