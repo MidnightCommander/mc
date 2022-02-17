@@ -1277,7 +1277,8 @@ file_mask_dialog (file_op_context_t * ctx, FileOperation operation, gboolean onl
     vfs_path_t *vpath;
     gboolean source_easy_patterns = easy_patterns;
     char fmd_buf[BUF_MEDIUM];
-    char *dest_dir, *tmp;
+    char *dest_dir = NULL;
+    char *tmp;
     char *def_text_secure;
 
     if (ctx == NULL)
@@ -1329,7 +1330,8 @@ file_mask_dialog (file_op_context_t * ctx, FileOperation operation, gboolean onl
     }
 
     {
-        char *source_mask, *orig_mask;
+        char *source_mask = NULL;
+        char *orig_mask;
         int val;
         struct stat buf;
 
@@ -1409,8 +1411,8 @@ file_mask_dialog (file_op_context_t * ctx, FileOperation operation, gboolean onl
         if (ctx->search_handle == NULL)
         {
             message (D_ERROR, MSG_ERROR, _("Invalid source pattern '%s'"), source_mask);
-            g_free (dest_dir);
-            g_free (source_mask);
+            MC_PTR_FREE (dest_dir);
+            MC_PTR_FREE (source_mask);
             goto ask_file_mask;
         }
 
