@@ -217,13 +217,13 @@ START_PARAMETRIZED_TEST (mc_pstream_get_string_test, data_source)
     {
         GString *ret;
 
-        mctest_assert_int_eq (stream.pos, data->pos[j]);
+        ck_assert_int_eq (stream.pos, data->pos[j]);
 
         ret = mc_pstream_get_string (&stream);
         if (ret == NULL)
             break;
 
-        mctest_assert_int_eq (ret->len, data->len[j]);
+        ck_assert_int_eq (ret->len, data->len[j]);
         mctest_assert_str_eq (ret->str, data->str[j]);
 
         g_string_free (ret, TRUE);

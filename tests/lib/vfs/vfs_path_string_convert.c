@@ -182,7 +182,7 @@ START_PARAMETRIZED_TEST (test_from_to_string, test_from_to_string_ds)
     path_element = vfs_path_get_by_index (vpath, -1);
 
     /* then */
-    mctest_assert_int_eq (vpath_len, data->expected_elements_count);
+    ck_assert_int_eq (vpath_len, data->expected_elements_count);
     mctest_assert_str_eq (actual_result, data->expected_result);
     mctest_assert_ptr_eq (path_element->class, data->expected_vfs_class);
     mctest_assert_str_eq (path_element->path, data->expected_element_path);

@@ -147,7 +147,7 @@ START_PARAMETRIZED_TEST (test_empty_mean_home, test_empty_mean_home_ds)
     /* then */
     mctest_assert_str_eq (mc_config_get_home_dir__return_value,
                           vfs_path_as_str (do_cd__new_dir_vpath__captured));
-    mctest_assert_int_eq (do_cd__cd_type__captured, cd_parse_command);
+    ck_assert_int_eq (do_cd__cd_type__captured, cd_parse_command);
 }
 /* *INDENT-OFF* */
 END_PARAMETRIZED_TEST

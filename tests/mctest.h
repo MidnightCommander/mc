@@ -17,14 +17,6 @@
     g_assert_cmpstr (actual_result, ==, etalon_result); \
 }
 
-#define mctest_assert_int_eq(actual_result, etalon_result) { \
-    ck_assert_int_eq (actual_result, etalon_result); \
-}
-
-#define mctest_assert_int_ne(actual_result, etalon_result) { \
-    ck_assert_int_ne (actual_result, etalon_result); \
-}
-
 #define mctest_assert_ptr_eq(actual_pointer, etalon_pointer) { \
     ck_assert_msg ( actual_pointer == etalon_pointer, \
         "%s(%p) pointer should be equal to %s(%p)\n", \

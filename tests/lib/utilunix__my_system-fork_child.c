@@ -46,19 +46,19 @@ START_TEST (fork_child)
     actual_value = my_system (0, "/bin/some-command", "some parameter");
 
     /* then */
-    mctest_assert_int_eq (actual_value, 0);
+    ck_assert_int_eq (actual_value, 0);
 
     VERIFY_SIGACTION_CALLS ();
     VERIFY_SIGNAL_CALLS ();
 
     mctest_assert_str_eq (execvp__file__captured, "/bin/some-command");
-    mctest_assert_int_eq (execvp__args__captured->len, 2);
+    ck_assert_int_eq (execvp__args__captured->len, 2);
 
     mctest_assert_str_eq (g_ptr_array_index (execvp__args__captured, 0), "/bin/some-command");
     mctest_assert_str_eq (g_ptr_array_index (execvp__args__captured, 1), "some parameter");
 
     /* All exec* calls is mocked, so call to _exit() function with 127 status code it's a normal situation */
-    mctest_assert_int_eq (my_exit__status__captured, 127);
+    ck_assert_int_eq (my_exit__status__captured, 127);
 }
 /* *INDENT-OFF* */
 END_TEST

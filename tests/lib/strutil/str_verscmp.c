@@ -108,7 +108,7 @@ START_TEST (str_verscmp_test)
     actual_result = str_verscmp (data->s1, data->s2);
 
     /* then */
-    mctest_assert_int_eq (sign (actual_result), sign (data->expected_result));
+    ck_assert_int_eq (sign (actual_result), sign (data->expected_result));
 }
 /* *INDENT-OFF* */
 END_TEST

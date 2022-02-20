@@ -168,9 +168,7 @@ START_PARAMETRIZED_TEST (test_hex_translate_to_regex, test_hex_translate_to_rege
         g_string_free (dest_str, TRUE);
     }
     else
-    {
-        mctest_assert_int_eq (error, data->expected_error);
-    }
+        ck_assert_int_eq (error, data->expected_error);
 }
 /* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
