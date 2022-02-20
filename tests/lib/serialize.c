@@ -331,7 +331,7 @@ START_TEST (test_deserialize_config)
     mctest_assert_str_eq (actual_value, "some value ");
     g_free (actual_value);
 
-    ck_assert_int_eq (mc_config_get_bool (actual, "group2", "param1", FALSE), TRUE);
+    mctest_assert_true (mc_config_get_bool (actual, "group2", "param1", FALSE));
 
     ck_assert_int_eq (mc_config_get_int (actual, "group2", "param2", 0), 123456);
 
@@ -343,7 +343,7 @@ START_TEST (test_deserialize_config)
     mctest_assert_str_eq (actual_value, "bla-:p1:w:v2:12:g3:123:bla-bla\n");
     g_free (actual_value);
 
-    ck_assert_int_eq (mc_config_get_bool (actual, "group4", "param1", TRUE), FALSE);
+    mctest_assert_false (mc_config_get_bool (actual, "group4", "param1", TRUE));
 
     ck_assert_int_eq (mc_config_get_int (actual, "group4", "param2", 0), 654321);
 

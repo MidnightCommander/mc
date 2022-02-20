@@ -391,7 +391,7 @@ START_PARAMETRIZED_TEST (test_vfs_path_relative, test_vfs_path_relative_ds)
     vpath = vfs_path_from_str_flags (data->input_path, VPF_NO_CANON);
 
     /* then */
-    ck_assert_int_eq (vpath->relative, TRUE);
+    mctest_assert_true (vpath->relative);
     mctest_assert_str_eq (vfs_path_get_last_path_str (vpath), data->expected_last_path_in_element);
     mctest_assert_str_eq (vfs_path_as_str (vpath), data->expected_path);
 
@@ -418,7 +418,7 @@ START_PARAMETRIZED_TEST (test_vfs_path_relative_clone, test_vfs_path_relative_ds
     cloned_vpath = vfs_path_clone (vpath);
 
     /* then */
-    ck_assert_int_eq (cloned_vpath->relative, TRUE);
+    mctest_assert_true (cloned_vpath->relative);
     mctest_assert_str_eq (vfs_path_get_last_path_str (cloned_vpath),
                           data->expected_last_path_in_element);
     mctest_assert_str_eq (vfs_path_as_str (cloned_vpath), data->expected_path);

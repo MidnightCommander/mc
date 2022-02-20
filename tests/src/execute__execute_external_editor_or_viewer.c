@@ -156,8 +156,8 @@ START_TEST (do_open_external_editor_or_viewer)
 
     /* check call to execute_get_external_cmd_opts_from_config() */
     mctest_assert_str_eq (execute_external_cmd_opts__command__captured, "editor_or_viewer");
-    ck_assert_int_eq (vfs_path_equal
-                      (execute_external_cmd_opts__filename_vpath__captured, filename_vpath), TRUE);
+    mctest_assert_true (vfs_path_equal
+                        (execute_external_cmd_opts__filename_vpath__captured, filename_vpath));
     ck_assert_int_eq (execute_external_cmd_opts__start_line__captured, 123);
 
     /* check call to do_executev() */
