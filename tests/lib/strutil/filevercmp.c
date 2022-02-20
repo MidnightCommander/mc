@@ -178,11 +178,11 @@ START_TEST (filevercmp_test2)
         result = filevercmp (i, j);
 
         if (result < 0)
-            ck_assert_int_eq (! !((size_t) _i < _j), 1);
-        else if (0 < result)
-            ck_assert_int_eq (! !(_j < (size_t) _i), 1);
+            ck_assert_int_lt ((size_t) _i, _j);
+        else if (result > 0)
+            ck_assert_int_gt ((size_t) _i, _j);
         else
-            ck_assert_int_eq (! !(_j == (size_t) _i), 1);
+            ck_assert_int_eq ((size_t) _i, _j);
     }
 }
 /* *INDENT-OFF* */
@@ -215,11 +215,11 @@ START_TEST (filevercmp_test3)
         result = filevercmp (i, j);
 
         if (result < 0)
-            ck_assert_int_eq (! !((size_t) _i < _j), 1);
-        else if (0 < result)
-            ck_assert_int_eq (! !(_j < (size_t) _i), 1);
+            ck_assert_int_lt ((size_t) _i, _j);
+        else if (result > 0)
+            ck_assert_int_gt ((size_t) _i, _j);
         else
-            ck_assert_int_eq (! !(_j == (size_t) _i), 1);
+            ck_assert_int_eq ((size_t) _i, _j);
     }
 }
 /* *INDENT-OFF* */
@@ -253,11 +253,11 @@ START_TEST (filevercmp_test4)
         result = filevercmp (i, j);
 
         if (result < 0)
-            ck_assert_int_eq (! !((size_t) _i < _j), 1);
-        else if (0 < result)
-            ck_assert_int_eq (! !(_j < (size_t) _i), 1);
+            ck_assert_int_lt ((size_t) _i, _j);
+        else if (result > 0)
+            ck_assert_int_gt ((size_t) _i, _j);
         else
-            ck_assert_int_eq (! !(_j == (size_t) _i), 1);
+            ck_assert_int_eq ((size_t) _i, _j);
     }
 }
 /* *INDENT-OFF* */

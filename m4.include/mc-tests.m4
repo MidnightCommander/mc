@@ -22,7 +22,7 @@ AC_DEFUN([mc_UNIT_TESTS],[
     else
         PKG_CHECK_MODULES(
             CHECK,
-            [check >= 0.9.8],
+            [check >= 0.9.10],
             [
                 have_check=yes
                 tests_msg="yes"
