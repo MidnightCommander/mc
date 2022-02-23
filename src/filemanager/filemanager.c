@@ -1662,7 +1662,7 @@ get_random_hint (gboolean force)
     static const gint64 update_period = 60 * G_USEC_PER_SEC;
     static gint64 tv = 0;
 
-    char *data, *result = NULL, *eop;
+    char *data, *result, *eop;
     size_t len, start;
     GIConv conv;
 
@@ -1701,19 +1701,18 @@ get_random_hint (gboolean force)
     /* hint files are stored in utf-8 */
     /* try convert hint file from utf-8 to terminal encoding */
     conv = str_crt_conv_from ("UTF-8");
-    if (conv != INVALID_CONV)
+    if (conv == INVALID_CONV)
+        result = g_strndup (data + start, len - start);
+    else
     {
         GString *buffer;
+        gboolean nok;
 
         buffer = g_string_sized_new (len - start);
-        if (str_convert (conv, &data[start], buffer) != ESTR_FAILURE)
-            result = g_string_free (buffer, FALSE);
-        else
-            g_string_free (buffer, TRUE);
+        nok = (str_convert (conv, data + start, buffer) == ESTR_FAILURE);
+        result = g_string_free (buffer, nok);
         str_close_conv (conv);
     }
-    else
-        result = g_strndup (data + start, len - start);
 
     g_free (data);
     return result;
