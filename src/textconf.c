@@ -30,6 +30,10 @@
 #include <stdio.h>
 #include <sys/types.h>
 
+#if defined (ENABLE_VFS) && defined(ENABLE_VFS_SFTP)
+#include <libssh2.h>
+#endif /* ENABLE_VFS_SFTP && ENABLE_VFS */
+
 #include "lib/global.h"
 #include "lib/fileloc.h"
 #include "lib/mcconfig.h"
@@ -157,6 +161,11 @@ show_version (void)
 #else
 #error "Cannot compile mc without S-Lang or ncurses"
 #endif /* !HAVE_SLANG && !USE_NCURSES */
+
+#if defined (ENABLE_VFS) && defined(ENABLE_VFS_SFTP)
+    printf (_("Built with libssh2 %d.%d.%d\n"),
+            LIBSSH2_VERSION_MAJOR, LIBSSH2_VERSION_MINOR, LIBSSH2_VERSION_PATCH);
+#endif /* ENABLE_VFS_SFTP && ENABLE_VFS */
 
     for (i = 0; features[i] != NULL; i++)
         puts (_(features[i]));
