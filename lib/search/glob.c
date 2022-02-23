@@ -191,9 +191,12 @@ mc_search__run_glob (mc_search_t * lc_mc_search, const void *user_data,
 GString *
 mc_search_glob_prepare_replace_str (mc_search_t * lc_mc_search, GString * replace_str)
 {
-    GString *repl = mc_search__translate_replace_glob_to_regex (replace_str->str);
-    GString *res = mc_search_regex_prepare_replace_str (lc_mc_search, repl);
+    GString *repl, *res;
+
+    repl = mc_search__translate_replace_glob_to_regex (replace_str->str);
+    res = mc_search_regex_prepare_replace_str (lc_mc_search, repl);
     g_string_free (repl, TRUE);
+
     return res;
 }
 
