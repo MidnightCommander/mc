@@ -1,7 +1,7 @@
 /*
    src - tests for execute_external_editor_or_viewer() function
 
-   Copyright (C) 2013-2021
+   Copyright (C) 2013-2022
    Free Software Foundation, Inc.
 
    Written by:
@@ -156,15 +156,14 @@ START_TEST (do_open_external_editor_or_viewer)
 
     /* check call to execute_get_external_cmd_opts_from_config() */
     mctest_assert_str_eq (execute_external_cmd_opts__command__captured, "editor_or_viewer");
-    mctest_assert_int_eq (vfs_path_equal
-                          (execute_external_cmd_opts__filename_vpath__captured, filename_vpath),
-                          TRUE);
-    mctest_assert_int_eq (execute_external_cmd_opts__start_line__captured, 123);
+    mctest_assert_true (vfs_path_equal
+                        (execute_external_cmd_opts__filename_vpath__captured, filename_vpath));
+    ck_assert_int_eq (execute_external_cmd_opts__start_line__captured, 123);
 
     /* check call to do_executev() */
     mctest_assert_str_eq (do_executev__lc_shell__captured, "editor_or_viewer");
-    mctest_assert_int_eq (do_executev__flags__captured, EXECUTE_INTERNAL);
-    mctest_assert_int_eq (do_executev__argv__captured->len, 7);
+    ck_assert_int_eq (do_executev__flags__captured, EXECUTE_INTERNAL);
+    ck_assert_int_eq (do_executev__argv__captured->len, 7);
 
     mctest_assert_str_eq (g_ptr_array_index (do_executev__argv__captured, 0),
                           "param 1 with spaces");

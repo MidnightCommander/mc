@@ -1,7 +1,7 @@
 /*
    Routines for parsing output from the 'ls' command.
 
-   Copyright (C) 1988-2021
+   Copyright (C) 1988-2022
    Free Software Foundation, Inc.
 
    Copyright (C) 1995, 1996 Miguel de Icaza

@@ -1,7 +1,7 @@
 /*
    Hypertext file browser.
 
-   Copyright (C) 1994-2021
+   Copyright (C) 1994-2022
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
@@ -940,26 +940,20 @@ static void
 translate_file (char *filedata)
 {
     GIConv conv;
-    GString *translated_data;
-
-    /* initial allocation for largest whole help file */
-    translated_data = g_string_sized_new (32 * 1024);
 
     conv = str_crt_conv_from ("UTF-8");
-
-    if (conv == INVALID_CONV)
-        g_string_free (translated_data, TRUE);
-    else
+    if (conv != INVALID_CONV)
     {
+        GString *translated_data;
+        gboolean nok;
+
         g_free (fdata);
 
-        if (str_convert (conv, filedata, translated_data) != ESTR_FAILURE)
-            fdata = g_string_free (translated_data, FALSE);
-        else
-        {
-            fdata = NULL;
-            g_string_free (translated_data, TRUE);
-        }
+        /* initial allocation for largest whole help file */
+        translated_data = g_string_sized_new (32 * 1024);
+        nok = (str_convert (conv, filedata, translated_data) == ESTR_FAILURE);
+        fdata = g_string_free (translated_data, nok);
+
         str_close_conv (conv);
     }
 }

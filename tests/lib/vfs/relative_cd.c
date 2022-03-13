@@ -1,6 +1,6 @@
 /* lib/vfs - test vfs_path_t manipulation functions
 
-   Copyright (C) 2011-2021
+   Copyright (C) 2011-2022
    Free Software Foundation, Inc.
 
    Written by:
@@ -146,7 +146,7 @@ START_PARAMETRIZED_TEST (test_relative_cd, test_relative_cd_ds)
     {
         const vfs_path_element_t *element;
 
-        mctest_assert_int_eq (actual_result, 0);
+        ck_assert_int_eq (actual_result, 0);
         element = vfs_path_get_by_index (vpath, -1);
         mctest_assert_str_eq (element->path, data->expected_element_path);
         vfs_path_free (vpath, TRUE);

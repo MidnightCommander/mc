@@ -62,14 +62,14 @@ użytkownicy basha i zsh:
 mc ()
 {
         MC=$HOME/tmp/mc$$\-"$RANDOM"
-        %prefix%/bin/mc \-P "$@" > "$MC"
+        %bindir%/mc \-P "$@" > "$MC"
         cd "`cat $MC`"
         rm "$MC"
         unset MC;
 }
 
 użytkownicy tcsh:
-alias mc 'setenv MC `%prefix%/bin/mc \-P \!*`; cd $MC; unsetenv MC'
+alias mc 'setenv MC `%bindir%/mc \-P \!*`; cd $MC; unsetenv MC'
 .fi
 Wiem, że ta funkcja mogłaby być krótsza dla basha i zsh, ale małe cudzysłowy
 nie zaakceptowały by zawieszenia programu kombinacją
@@ -1170,7 +1170,7 @@ przy użyciu tego menu, ładowany jest plik .mc.menu z aktualnego katalogu, ale
 tylko wtedy kiedy jest on w posiadaniu użytkownika lub roota i mamy do niego
 prawa zapisu. Jeśli takiego nie ma próbuje się z plikiem ~/.config/mc/menu z tymi
 samymi założeniami, jeśli jego też nie ma \- używa się standardowego pliku
-systemowego, który znajduje się w %prefix%/share/mc/mc.menu.
+systemowego, który znajduje się w %pkgdatadir%/mc.menu.
 .PP
 Format pliku z menu użytkownika jest bardzo prosty. Linie zaczynające się
 od czegokolwiek innego niż spacja lub tabulacja, są traktowane jako
@@ -1608,7 +1608,7 @@ System plików FTP (FTP File System) po więcej szczegółów.
 .SH "    Zapisz ustawienia (Save Setup)"
 Na starcie Midnight Commander będzie próbował odczytać opcje startowe
 z pliku ~/.config/mc/ini. Jeśli on nie istnieje, odczyta on konfiguracje z
-ogólnodostępnego pliku %prefix%/share/mc/mc.ini. Jeśli on też nie istnieje MC
+ogólnodostępnego pliku %pkgdatadir%/mc.ini. Jeśli on też nie istnieje MC
 użyje swoich domyślnych ustawień.
 .PP
 Komenda
@@ -2273,7 +2273,7 @@ Inną możliwością jest ustawienie opcji
 w oknie konfiguracyjnym wirtualnego systemu plików. Skonfiguruje
 to program tak, aby zawsze
 używał serwera proxy. Jeśli ta zmienna jest ustawiona, program będzie robił
-dwie rzeczy: konsultował plik %prefix%/share/mc.no_proxy w celu znalezienia linii
+dwie rzeczy: konsultował plik %sysconfdir%/mc/mc.no_proxy w celu znalezienia linii
 zawierających nazwy serwerów, które są lokalne (jeśli nazwa hosta zaczyna
 się od kropki, uznaje się, że jest to domena) i sprawdza czy jakieś hosty
 bez kropek w nazwie są widoczne bezpośrednio.
@@ -2850,11 +2850,11 @@ Program będzie pobierał wszystkie swoje informacje ze zmiennej
 .BR MC_DATADIR ,
 jeśli jest ona nie ustawiona to znowu przetwarzany jest katalog /usr.
 .PP
-%prefix%/share/mc.hlp
+%pkgdatadir%/help/mc.hlp
 .IP
 Plik pomocy dla programu.
 .PP
-%prefix%/share/mc/mc.ext
+%pkgdatadir%/mc.ext
 .IP
 Standardowy plik rozszerzeń plików.
 .PP
@@ -2863,12 +2863,12 @@ Standardowy plik rozszerzeń plików.
 Własny plik użytkownika, konfiguruje podgląd i edycje plików. Ma wyższy
 priorytet niż plik systemowy.
 .PP
-%prefix%/share/mc/mc.ini
+%pkgdatadir%/mc.ini
 .IP
 Standardowy plik setupu do Midnight Commandera, używany tylko wówczas,
 kiedy użytkownik nie ma swojego własnego pliku ~/.config/mc/ini.
 .PP
-%prefix%/share/mc/mc.lib
+%pkgdatadir%/mc.lib
 .IP
 Globalne ustawienia Midnight Commandera. Ustawienia w tym pliku są
 uwzględniane przez wszystkie sesje Midnight Commandera, użyteczne do
@@ -2879,11 +2879,11 @@ definiowania ogólnosystemowych ustawień terminali.
 Własny setup użytkownika. Jeśli ten plik jest dostępny, jest ładowany
 zamiast pliku globalnego.
 .PP
-%prefix%/share/mc/hints/mc.hint
+%pkgdatadir%/hints/mc.hint
 .IP
 Plik zawierający podpowiedzi (hints) wyświetlane przez program.
 .PP
-%prefix%/share/mc/mc.menu
+%pkgdatadir%/mc.menu
 .IP
 Ten plik zawiera informacje o ogólnosystemowych aplikacjach w menu.
 .PP

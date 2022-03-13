@@ -1,7 +1,7 @@
 /*
    lib/vfs - test vfs_get_encoding() functionality
 
-   Copyright (C) 2013-2021
+   Copyright (C) 2013-2022
    Free Software Foundation, Inc.
 
    Written by:

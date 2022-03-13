@@ -1,7 +1,7 @@
 /*
    lib - tests lib/utilinux:my_system() function
 
-   Copyright (C) 2013-2021
+   Copyright (C) 2013-2022
    Free Software Foundation, Inc.
 
    Written by:
@@ -46,20 +46,20 @@ START_TEST (fork_child_as_shell)
     actual_value = my_system (EXECUTE_AS_SHELL, "/bin/shell", "some command");
 
     /* then */
-    mctest_assert_int_eq (actual_value, 0);
+    ck_assert_int_eq (actual_value, 0);
 
     VERIFY_SIGACTION_CALLS ();
     VERIFY_SIGNAL_CALLS ();
 
     mctest_assert_str_eq (execvp__file__captured, "/bin/shell");
-    mctest_assert_int_eq (execvp__args__captured->len, 3);
+    ck_assert_int_eq (execvp__args__captured->len, 3);
 
     mctest_assert_str_eq (g_ptr_array_index (execvp__args__captured, 0), "/bin/shell");
     mctest_assert_str_eq (g_ptr_array_index (execvp__args__captured, 1), "-c");
     mctest_assert_str_eq (g_ptr_array_index (execvp__args__captured, 2), "some command");
 
     /* All exec* calls is mocked, so call to _exit() function with 127 status code it's a normal situation */
-    mctest_assert_int_eq (my_exit__status__captured, 127);
+    ck_assert_int_eq (my_exit__status__captured, 127);
 }
 /* *INDENT-OFF* */
 END_TEST

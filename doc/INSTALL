@@ -210,14 +210,6 @@ ncurses):
      `ncurses' means ncurses library already installed on the system.
      The S-Lang library is used by default if found.
 
-`--with-slang-includes=[DIR]'
-     Set path to SLANG includes [default=/usr/include]; make sense
-     only if --with-screen=slang is used.
-
-`--with-slang-libs=[DIR]'
-     Set path to SLANG library [default=/usr/lib]; mke sense only
-     if --with-screen=slang is used.
-
 `--with-ncurses-includes=[DIR]'
      Set path to ncurses includes [default=/usr/include]; make
      sense only if --with-screen=ncurses is used;
@@ -459,6 +451,4 @@ to /usr/local:
 
   ./configure \
      --prefix=/usr/local \
-     --with-screen=slang \
-     --with-slang-includes=/usr/local/include \
-     --with-slang-libs=/usr/local/lib
+     --with-screen=slang

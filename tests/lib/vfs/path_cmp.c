@@ -1,6 +1,6 @@
 /* lib/vfs - vfs_path_t compare functions
 
-   Copyright (C) 2011-2021
+   Copyright (C) 2011-2022
    Free Software Foundation, Inc.
 
    Written by:
@@ -135,7 +135,7 @@ START_PARAMETRIZED_TEST (test_path_equal, test_path_equal_ds)
     actual_result = vfs_path_equal (vpath1, vpath2);
 
     /* then */
-    mctest_assert_int_eq (actual_result, data->expected_result);
+    ck_assert_int_eq (actual_result, data->expected_result);
 
     vfs_path_free (vpath1, TRUE);
     vfs_path_free (vpath2, TRUE);
@@ -223,7 +223,7 @@ START_PARAMETRIZED_TEST (test_path_equal_len, test_path_equal_len_ds)
     actual_result = vfs_path_equal_len (vpath1, vpath2, data->input_length);
 
     /* then */
-    mctest_assert_int_eq (actual_result, data->expected_result);
+    ck_assert_int_eq (actual_result, data->expected_result);
 
     vfs_path_free (vpath1, TRUE);
     vfs_path_free (vpath2, TRUE);

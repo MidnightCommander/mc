@@ -2,7 +2,7 @@
    lib/strutil - tests for lib/strutil/str_verscmp function.
    Testcases are taken from Gnulib.
 
-   Copyright (C) 2019-2021
+   Copyright (C) 2019-2022
    Free Software Foundation, Inc.
 
    Written by:
@@ -29,6 +29,7 @@
 #include "tests/mctest.h"
 
 #include "lib/strutil.h"
+#include "lib/util.h"           /* _GL_CMP() */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -58,7 +59,7 @@ teardown (void)
 static int
 sign (int n)
 {
-    return ((n < 0) ? -1 : (n == 0) ? 0 : 1);
+    return _GL_CMP (n, 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -108,7 +109,7 @@ START_TEST (str_verscmp_test)
     actual_result = str_verscmp (data->s1, data->s2);
 
     /* then */
-    mctest_assert_int_eq (sign (actual_result), sign (data->expected_result));
+    ck_assert_int_eq (sign (actual_result), sign (data->expected_result));
 }
 /* *INDENT-OFF* */
 END_TEST

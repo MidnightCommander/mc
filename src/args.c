@@ -1,7 +1,7 @@
 /*
    Handle command line arguments.
 
-   Copyright (C) 2009-2021
+   Copyright (C) 2009-2022
    Free Software Foundation, Inc.
 
    Written by:
@@ -770,16 +770,16 @@ mc_setup_by_args (int argc, char **argv, GError ** mcerror)
         mc_global.tty.use_subshell = FALSE;
 #endif /* ENABLE_SUBSHELL */
 
+#ifdef ENABLE_VFS_FTP
     if (mc_args__netfs_logfile != NULL)
     {
         vfs_path_t *vpath;
-#ifdef ENABLE_VFS_FTP
+
         vpath = vfs_path_from_str ("ftp://");
         mc_setctl (vpath, VFS_SETCTL_LOGFILE, (void *) mc_args__netfs_logfile);
         vfs_path_free (vpath, TRUE);
-#endif /* ENABLE_VFS_FTP */
-        (void) vpath;
     }
+#endif /* ENABLE_VFS_FTP */
 
     tmp = (argc > 0) ? argv[1] : NULL;
 

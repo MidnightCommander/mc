@@ -1,7 +1,7 @@
 /*
    src/filemanager - tests for is_wildcarded() function
 
-   Copyright (C) 2011-2021
+   Copyright (C) 2011-2022
    Free Software Foundation, Inc.
 
    Written by:
@@ -132,7 +132,7 @@ START_PARAMETRIZED_TEST (test_is_wildcarded, test_is_wildcarded_ds)
     /* when */
     actual_result = is_wildcarded (data->input_value);
     /* then */
-    mctest_assert_int_eq (actual_result, data->expected_result);
+    ck_assert_int_eq (actual_result, data->expected_result);
 }
 /* *INDENT-OFF* */
 END_PARAMETRIZED_TEST

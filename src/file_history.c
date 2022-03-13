@@ -1,7 +1,7 @@
 /*
    Load and show history of edited and viewed files
 
-   Copyright (C) 2020-2021
+   Copyright (C) 2020-2022
    Free Software Foundation, Inc.
 
    Written by:

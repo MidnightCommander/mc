@@ -1,7 +1,7 @@
 /*
    lib - tests lib/utilinux:my_system() function
 
-   Copyright (C) 2013-2021
+   Copyright (C) 2013-2022
    Free Software Foundation, Inc.
 
    Written by:
@@ -50,11 +50,11 @@ START_TEST (fork_fail)
     actual_value = my_system (0, NULL, NULL);
 
     /* then */
-    mctest_assert_int_eq (actual_value, -1);
+    ck_assert_int_eq (actual_value, -1);
 
     VERIFY_SIGACTION_CALLS ();
 
-    mctest_assert_int_eq (signal_signum__captured->len, 0);
+    ck_assert_int_eq (signal_signum__captured->len, 0);
 }
 /* *INDENT-OFF* */
 END_TEST

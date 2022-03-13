@@ -1,7 +1,7 @@
 /*
    lib/widget - tests for autocomplete feature
 
-   Copyright (C) 2013-2021
+   Copyright (C) 2013-2022
    Free Software Foundation, Inc.
 
    Written by:
@@ -208,9 +208,9 @@ START_PARAMETRIZED_TEST (test_complete_engine_fill_completions,
 
     /* then */
     mctest_assert_str_eq (try_complete__text__captured, data->input_buffer);
-    mctest_assert_int_eq (try_complete__lc_start__captured, data->expected_start);
-    mctest_assert_int_eq (try_complete__lc_end__captured, data->expected_end);
-    mctest_assert_int_eq (try_complete__flags__captured, data->input_completion_flags);
+    ck_assert_int_eq (try_complete__lc_start__captured, data->expected_start);
+    ck_assert_int_eq (try_complete__lc_end__captured, data->expected_end);
+    ck_assert_int_eq (try_complete__flags__captured, data->input_completion_flags);
 }
 /* *INDENT-OFF* */
 END_PARAMETRIZED_TEST

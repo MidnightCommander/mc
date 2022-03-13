@@ -1,7 +1,7 @@
 /*
    lib/vfs - manipulations with temp files and  dirs
 
-   Copyright (C) 2012-2021
+   Copyright (C) 2012-2022
    Free Software Foundation, Inc.
 
    Written by:
@@ -104,7 +104,7 @@ START_TEST (test_mc_mkstemps)
 
     /* then */
     close (fd);
-    mctest_assert_int_ne (fd, -1);
+    ck_assert_int_ne (fd, -1);
     ck_assert_msg (g_file_test
                    (vfs_path_as_str (pname_vpath), G_FILE_TEST_EXISTS | G_FILE_TEST_IS_REGULAR),
                    "\nNo such file: %s\n", vfs_path_as_str (pname_vpath));

@@ -2,7 +2,7 @@
    Search text engine.
    Interface functions
 
-   Copyright (C) 2009-2021
+   Copyright (C) 2009-2022
    Free Software Foundation, Inc.
 
    Written by:
@@ -94,17 +94,17 @@ mc_search__cond_struct_new (mc_search_t * lc_mc_search, const char *str,
 static void
 mc_search__cond_struct_free (mc_search_cond_t * mc_search_cond)
 {
-    if (mc_search_cond->upper)
+    if (mc_search_cond->upper != NULL)
         g_string_free (mc_search_cond->upper, TRUE);
 
-    if (mc_search_cond->lower)
+    if (mc_search_cond->lower != NULL)
         g_string_free (mc_search_cond->lower, TRUE);
 
     g_string_free (mc_search_cond->str, TRUE);
     g_free (mc_search_cond->charset);
 
 #ifdef SEARCH_TYPE_GLIB
-    if (mc_search_cond->regex_handle)
+    if (mc_search_cond->regex_handle != NULL)
         g_regex_unref (mc_search_cond->regex_handle);
 #else /* SEARCH_TYPE_GLIB */
     g_free (mc_search_cond->regex_handle);

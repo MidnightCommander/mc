@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-11-21 15:18+0300\n"
+"POT-Creation-Date: 2022-03-13 13:31+0300\n"
 "PO-Revision-Date: 2021-07-29 12:31+0000\n"
 "Last-Translator: heskjestad <cato@heskjestad.xyz>\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/mc/mc/language/"
@@ -1631,7 +1631,8 @@ msgstr ""
 "Et brukervennlig skriveprogram\n"
 "skrevet for Midnight Commander."
 
-msgid "Copyright (C) 1996-2021 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2022 the Free Software Foundation"
 msgstr "Opphavsrett (C) 1996-2021 the Free Software Foundation"
 
 msgid "About"
@@ -4017,6 +4018,10 @@ msgstr "Bruker ncursesw %s\n"
 
 msgid "Built with ncursesw (unknown version)"
 msgstr "Bruker ncursesw (ukjent versjon)"
+
+#, fuzzy, c-format
+msgid "Built with libssh2 %d.%d.%d\n"
+msgstr "Bygget med GLib %d.%d.%d\n"
 
 msgid "Virtual File Systems:"
 msgstr "Virtuelle filsystem:"

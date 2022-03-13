@@ -1,7 +1,7 @@
 /*
    Find file command for the Midnight Commander
 
-   Copyright (C) 1995-2021
+   Copyright (C) 1995-2022
    Free Software Foundation, Inc.
 
    Written  by:

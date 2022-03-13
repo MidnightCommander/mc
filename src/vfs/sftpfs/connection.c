@@ -1,7 +1,7 @@
 /* Virtual File System: SFTP file system.
    The internal functions: connections
 
-   Copyright (C) 2011-2021
+   Copyright (C) 2011-2022
    Free Software Foundation, Inc.
 
    Written by:
@@ -319,7 +319,8 @@ sftpfs_read_known_hosts (struct vfs_s_super *super, GError ** mcerror)
                                 _("sftp: found host key of unsupported type: RSA1"));
             return FALSE;
         default:
-            mc_propagate_error (mcerror, 0, "%s %d", _("sftp: unknown host key type:"), mask);
+            mc_propagate_error (mcerror, 0, "%s %u", _("sftp: unknown host key type:"),
+                                (unsigned int) mask);
             return FALSE;
         }
 

@@ -239,7 +239,7 @@ supports syntax highlighting.  This means that keywords and contexts
 colors.  The following section explains the format of the file
 .BR ~/.config/mc/mcedit/Syntax .
 If this file is missing, system\-wide
-.B %prefix%/share/mc/syntax/Syntax
+.B %pkgdatadir%/syntax/Syntax
 is used.
 The file
 .B ~/.config/mc/mcedit/Syntax
@@ -614,21 +614,21 @@ binary files, you should set
 to 7 bits in Midnight Commander's options menu to keep the spacing
 clean.
 .SH FILES
-.I %prefix%/share/mc/help/mc.hlp
+.I %pkgdatadir%/help/mc.hlp
 .IP
 The help file for the program.
 .PP
-.I %prefix%/share/mc/mc.ini
+.I %pkgdatadir%/mc.ini
 .IP
 The default system\-wide setup for GNU Midnight Commander, used only if
 the user's own ~/.config/mc/ini file is missing.
 .PP
-.I %prefix%/share/mc/mc.lib
+.I %pkgdatadir%/mc.lib
 .IP
 Global settings for Midnight Commander. Settings in this file
 affect all users, whether they have ~/.config/mc/ini or not.
 .PP
-.I %prefix%/share/mc/syntax/*
+.I %pkgdatadir%/syntax/*
 .IP
 The default system\-wide syntax files for mcedit, used only if
 the corresponding user's own ~/.local/share/mc/mcedit/ file is missing.

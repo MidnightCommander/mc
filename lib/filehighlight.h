@@ -23,7 +23,7 @@ typedef struct mc_fhl_struct
 mc_fhl_t *mc_fhl_new (gboolean need_auto_fill);
 void mc_fhl_free (mc_fhl_t ** fhl);
 
-int mc_fhl_get_color (mc_fhl_t * fhl, file_entry_t * fe);
+int mc_fhl_get_color (const mc_fhl_t * fhl, const file_entry_t * fe);
 
 gboolean mc_fhl_read_ini_file (mc_fhl_t * fhl, const gchar * filename);
 gboolean mc_fhl_parse_ini_file (mc_fhl_t * fhl);

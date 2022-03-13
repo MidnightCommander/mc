@@ -1,7 +1,7 @@
 /*
    src/editor - tests for edit_complete_word_cmd() function
 
-   Copyright (C) 2013-2021
+   Copyright (C) 2013-2022
    Free Software Foundation, Inc.
 
    Written by:
@@ -268,9 +268,9 @@ START_PARAMETRIZED_TEST (test_autocomplete, test_autocomplete_ds)
 
     /* then */
     mctest_assert_ptr_eq (edit_completion_dialog_show__edit, test_edit);
-    mctest_assert_int_eq (g_queue_get_length (edit_completion_dialog_show__compl),
-                          data->expected_compl_word_count);
-    mctest_assert_int_eq (edit_completion_dialog_show__max_width, data->expected_max_width);
+    ck_assert_int_eq (g_queue_get_length (edit_completion_dialog_show__compl),
+                      data->expected_compl_word_count);
+    ck_assert_int_eq (edit_completion_dialog_show__max_width, data->expected_max_width);
 
     {
         off_t i = 0;

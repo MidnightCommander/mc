@@ -1,6 +1,6 @@
 /* lib/vfs - test vfs_path_t manipulation functions
 
-   Copyright (C) 2011-2021
+   Copyright (C) 2011-2022
    Free Software Foundation, Inc.
 
    Written by:
@@ -160,7 +160,7 @@ START_PARAMETRIZED_TEST (test_vfs_path_tokens_count, test_vfs_path_tokens_count_
     tokens_count = vfs_path_tokens_count (vpath);
 
     /* then */
-    mctest_assert_int_eq (tokens_count, data->expected_token_count);
+    ck_assert_int_eq (tokens_count, data->expected_token_count);
 
     vfs_path_free (vpath, TRUE);
 }
@@ -343,7 +343,7 @@ START_PARAMETRIZED_TEST (test_vfs_path_append_vpath, test_vfs_path_append_vpath_
     vpath3 = vfs_path_append_vpath_new (vpath1, vpath2, NULL);
 
     /* then */
-    mctest_assert_int_eq (vfs_path_elements_count (vpath3), data->expected_element_count);
+    ck_assert_int_eq (vfs_path_elements_count (vpath3), data->expected_element_count);
     mctest_assert_str_eq (vfs_path_as_str (vpath3), data->expected_path);
 
     vfs_path_free (vpath1, TRUE);
@@ -391,7 +391,7 @@ START_PARAMETRIZED_TEST (test_vfs_path_relative, test_vfs_path_relative_ds)
     vpath = vfs_path_from_str_flags (data->input_path, VPF_NO_CANON);
 
     /* then */
-    mctest_assert_int_eq (vpath->relative, TRUE);
+    mctest_assert_true (vpath->relative);
     mctest_assert_str_eq (vfs_path_get_last_path_str (vpath), data->expected_last_path_in_element);
     mctest_assert_str_eq (vfs_path_as_str (vpath), data->expected_path);
 
@@ -418,7 +418,7 @@ START_PARAMETRIZED_TEST (test_vfs_path_relative_clone, test_vfs_path_relative_ds
     cloned_vpath = vfs_path_clone (vpath);
 
     /* then */
-    mctest_assert_int_eq (cloned_vpath->relative, TRUE);
+    mctest_assert_true (cloned_vpath->relative);
     mctest_assert_str_eq (vfs_path_get_last_path_str (cloned_vpath),
                           data->expected_last_path_in_element);
     mctest_assert_str_eq (vfs_path_as_str (cloned_vpath), data->expected_path);

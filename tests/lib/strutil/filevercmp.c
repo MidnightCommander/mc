@@ -1,7 +1,7 @@
 /*
    lib/strutil - tests for lib/strutil/fileverscmp function.
 
-   Copyright (C) 2019-2021
+   Copyright (C) 2019-2022
    Free Software Foundation, Inc.
 
    Written by:
@@ -28,6 +28,7 @@
 #include "tests/mctest.h"
 
 #include "lib/strutil.h"
+#include "lib/util.h"           /* _GL_CMP() */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -50,7 +51,41 @@ teardown (void)
 static int
 sign (int n)
 {
-    return ((n < 0) ? -1 : (n == 0) ? 0 : 1);
+    return _GL_CMP (n, 0);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/*
+ * Return filevercmp (a, a), checking that a similar result is gotten after replacing all '\1's
+ * with '\0's and calling filenvercmp with the embedded '\0's.
+ */
+static int
+test_filevercmp (char const *a, char const *b)
+{
+    int result;
+    char buffer[BUF_1K];
+    size_t alen, blen;
+    size_t i;
+    int nresult;
+
+    result = filevercmp (a, b);
+
+    alen = strlen (a);
+    blen = strlen (b);
+
+    ck_assert_int_le (alen + blen, sizeof (buffer));
+    memcpy (buffer, a, alen);
+    memcpy (buffer + alen, b, blen);
+
+    for (i = 0; i < alen + blen; i++)
+        if (buffer[i] == '\1')
+            buffer[i] = '\0';
+
+    nresult = filenvercmp (buffer, alen, buffer + alen, blen);
+    ck_assert_int_eq (sign (nresult), sign (result));
+
+    return result;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -69,7 +104,6 @@ static const struct filevercmp_test_struct
     { "a", "a", 0 },
     { "a", "b", -1 },
     { "b", "a", 1 },
-    { "a0", "a", 1 },
     { "00", "01", -1 },
     { "01", "010", -1 },
     { "9", "10", -1 },
@@ -91,7 +125,7 @@ START_TEST (filevercmp_test1)
     actual_result = filevercmp (data->s1, data->s2);
 
     /* then */
-    mctest_assert_int_eq (sign (actual_result), sign (data->expected_result));
+    ck_assert_int_eq (sign (actual_result), sign (data->expected_result));
 }
 /* *INDENT-OFF* */
 END_TEST
@@ -105,8 +139,6 @@ static const char *filevercmp_test_ds2[] = {
     "",
     ".",
     "..",
-    ".0",
-    ".9",
     ".A",
     ".Z",
     ".a~",
@@ -117,7 +149,14 @@ static const char *filevercmp_test_ds2[] = {
     ".zz~",
     ".zz",
     ".zz.~1~",
+    ".0",
+    ".9",
     ".zz.0",
+    ".\1",
+    ".\1.txt",
+    ".\1x",
+    ".\1x\1",
+    ".\1.0",
     "0",
     "9",
     "A",
@@ -128,6 +167,10 @@ static const char *filevercmp_test_ds2[] = {
     "a.b",
     "a.bc~",
     "a.bc",
+    "a+",
+    "a.",
+    "a..a",
+    "a.+",
     "b~",
     "b",
     "gcc-c++-10.fc9.tar.gz",
@@ -157,6 +200,13 @@ static const char *filevercmp_test_ds2[] = {
     "zz",
     "zz.~1~",
     "zz.0",
+    "zz.0.txt",
+    "\1",
+    "\1.txt",
+    "\1x",
+    "\1x\1",
+    "\1.0",
+    "#\1.b#",
     "#.b#"
 };
 
@@ -175,14 +225,14 @@ START_TEST (filevercmp_test2)
         const char *j = filevercmp_test_ds2[_j];
         int result;
 
-        result = filevercmp (i, j);
+        result = test_filevercmp (i, j);
 
         if (result < 0)
-            ck_assert_int_eq (! !((size_t) _i < _j), 1);
-        else if (0 < result)
-            ck_assert_int_eq (! !(_j < (size_t) _i), 1);
+            ck_assert_int_lt ((size_t) _i, _j);
+        else if (result > 0)
+            ck_assert_int_gt ((size_t) _i, _j);
         else
-            ck_assert_int_eq (! !(_j == (size_t) _i), 1);
+            ck_assert_int_eq ((size_t) _i, _j);
     }
 }
 /* *INDENT-OFF* */
@@ -215,11 +265,11 @@ START_TEST (filevercmp_test3)
         result = filevercmp (i, j);
 
         if (result < 0)
-            ck_assert_int_eq (! !((size_t) _i < _j), 1);
-        else if (0 < result)
-            ck_assert_int_eq (! !(_j < (size_t) _i), 1);
+            ck_assert_int_lt ((size_t) _i, _j);
+        else if (result > 0)
+            ck_assert_int_gt ((size_t) _i, _j);
         else
-            ck_assert_int_eq (! !(_j == (size_t) _i), 1);
+            ck_assert_int_eq ((size_t) _i, _j);
     }
 }
 /* *INDENT-OFF* */
@@ -253,12 +303,72 @@ START_TEST (filevercmp_test4)
         result = filevercmp (i, j);
 
         if (result < 0)
-            ck_assert_int_eq (! !((size_t) _i < _j), 1);
-        else if (0 < result)
-            ck_assert_int_eq (! !(_j < (size_t) _i), 1);
+            ck_assert_int_lt ((size_t) _i, _j);
+        else if (result > 0)
+            ck_assert_int_gt ((size_t) _i, _j);
         else
-            ck_assert_int_eq (! !(_j == (size_t) _i), 1);
+            ck_assert_int_eq ((size_t) _i, _j);
     }
+}
+/* *INDENT-OFF* */
+END_TEST
+/* *INDENT-ON* */
+
+
+/* @DataSource("filevercmp_test_ds5") */
+/* Testcases are taken from Gnulib */
+static const char *filevercmp_test_ds5[] = {
+    "a",
+    "a0",
+    "a0000",
+    NULL,
+    "a\1c-27.txt",
+    "a\1c-027.txt",
+    "a\1c-00000000000000000000000000000000000000000000000000000027.txt",
+    NULL,
+    ".a\1c-27.txt",
+    ".a\1c-027.txt",
+    ".a\1c-00000000000000000000000000000000000000000000000000000027.txt",
+    NULL,
+    "a\1c-",
+    "a\1c-0",
+    "a\1c-00",
+    NULL,
+    ".a\1c-",
+    ".a\1c-0",
+    ".a\1c-00",
+    NULL,
+    "a\1c-0.txt",
+    "a\1c-00.txt",
+    NULL,
+    ".a\1c-1\1.txt",
+    ".a\1c-001\1.txt",
+    NULL
+};
+
+const size_t filevercmp_test_ds5_len = G_N_ELEMENTS (filevercmp_test_ds5);
+
+/* @Test(dataSource = "filevercmp_test_ds5") */
+/* *INDENT-OFF* */
+START_TEST (filevercmp_test5)
+/* *INDENT-ON* */
+{
+    size_t _i;
+
+    for (_i = 0; _i < filevercmp_test_ds5_len; _i++)
+        for (; filevercmp_test_ds5[_i] != NULL; _i++)
+        {
+            const char *i = filevercmp_test_ds5[_i];
+            size_t _j;
+
+            for (_j = _i; filevercmp_test_ds5[_j] != NULL; _j++)
+            {
+                const char *j = filevercmp_test_ds5[_j];
+
+                ck_assert_int_eq (test_filevercmp (i, j), 0);
+                ck_assert_int_eq (test_filevercmp (j, i), 0);
+            }
+        }
 }
 /* *INDENT-OFF* */
 END_TEST
@@ -280,6 +390,7 @@ main (void)
     tcase_add_loop_test (tc_core, filevercmp_test2, 0, filevercmp_test_ds2_len);
     tcase_add_loop_test (tc_core, filevercmp_test3, 0, filevercmp_test_ds3_len);
     tcase_add_loop_test (tc_core, filevercmp_test4, 0, filevercmp_test_ds4_len);
+    tcase_add_test (tc_core, filevercmp_test5);
     /* *********************************** */
 
     return mctest_run_all (tc_core);

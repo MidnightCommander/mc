@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-11-21 15:18+0300\n"
+"POT-Creation-Date: 2022-03-13 13:31+0300\n"
 "PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Esperanto (http://www.transifex.com/mc/mc/language/eo/)\n"
@@ -1624,7 +1624,8 @@ msgstr ""
 "Afabla tekstoredaktilo\n"
 "verkita por Midnight Commander."
 
-msgid "Copyright (C) 1996-2021 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2022 the Free Software Foundation"
 msgstr "Kopirajto (C) 1996–2021 la Fondaĵo pri liberaj programoj"
 
 msgid "About"
@@ -4011,6 +4012,10 @@ msgstr "Muntita kun ncursesw %s\n"
 
 msgid "Built with ncursesw (unknown version)"
 msgstr "Muntita kun ncursesw (nekonata eldono)"
+
+#, fuzzy, c-format
+msgid "Built with libssh2 %d.%d.%d\n"
+msgstr "Muntita kun GLib %d.%d.%d\n"
 
 msgid "Virtual File Systems:"
 msgstr "Virtualaj dosiersistemoj:"

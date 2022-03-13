@@ -1,7 +1,7 @@
 /*
    lib/vfs - test vfs_parse_ls_lga() functionality
 
-   Copyright (C) 2011-2021
+   Copyright (C) 2011-2022
    Free Software Foundation, Inc.
 
    Written by:
@@ -274,37 +274,37 @@ START_PARAMETRIZED_TEST (test_vfs_parse_ls_lga, test_vfs_parse_ls_lga_ds)
         vfs_parse_ls_lga (data->input_string, &test_stat, &filename, &linkname, &filepos);
 
     /* then */
-    mctest_assert_int_eq (actual_result, data->expected_result);
+    ck_assert_int_eq (actual_result, data->expected_result);
 
     mctest_assert_str_eq (filename, data->expected_filename);
     mctest_assert_str_eq (linkname, data->expected_linkname);
 
-    mctest_assert_int_eq (etalon_stat.st_dev, test_stat.st_dev);
-    mctest_assert_int_eq (etalon_stat.st_ino, test_stat.st_ino);
-    mctest_assert_int_eq (etalon_stat.st_mode, test_stat.st_mode);
-    mctest_assert_int_eq (etalon_stat.st_uid, test_stat.st_uid);
-    mctest_assert_int_eq (etalon_stat.st_gid, test_stat.st_gid);
+    ck_assert_int_eq (etalon_stat.st_dev, test_stat.st_dev);
+    ck_assert_int_eq (etalon_stat.st_ino, test_stat.st_ino);
+    ck_assert_int_eq (etalon_stat.st_mode, test_stat.st_mode);
+    ck_assert_int_eq (etalon_stat.st_uid, test_stat.st_uid);
+    ck_assert_int_eq (etalon_stat.st_gid, test_stat.st_gid);
 #ifdef HAVE_STRUCT_STAT_ST_RDEV
-    mctest_assert_int_eq (etalon_stat.st_rdev, test_stat.st_rdev);
+    ck_assert_int_eq (etalon_stat.st_rdev, test_stat.st_rdev);
 #endif
-    mctest_assert_int_eq (etalon_stat.st_size, test_stat.st_size);
+    ck_assert_int_eq (etalon_stat.st_size, test_stat.st_size);
 #ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
-    mctest_assert_int_eq (etalon_stat.st_blksize, test_stat.st_blksize);
+    ck_assert_int_eq (etalon_stat.st_blksize, test_stat.st_blksize);
 #endif
 #ifdef HAVE_STRUCT_STAT_ST_BLOCKS
-    mctest_assert_int_eq (etalon_stat.st_blocks, test_stat.st_blocks);
+    ck_assert_int_eq (etalon_stat.st_blocks, test_stat.st_blocks);
 #endif
 
     /* FIXME: these commented checks are related to time zone!
-       mctest_assert_int_eq (etalon_stat.st_atime, test_stat.st_atime);
-       mctest_assert_int_eq (etalon_stat.st_mtime, test_stat.st_mtime);
-       mctest_assert_int_eq (etalon_stat.st_ctime, test_stat.st_ctime);
+       ck_assert_int_eq (etalon_stat.st_atime, test_stat.st_atime);
+       ck_assert_int_eq (etalon_stat.st_mtime, test_stat.st_mtime);
+       ck_assert_int_eq (etalon_stat.st_ctime, test_stat.st_ctime);
      */
 
 #ifdef HAVE_STRUCT_STAT_ST_MTIM
-    mctest_assert_int_eq (0, test_stat.st_atim.tv_nsec);
-    mctest_assert_int_eq (0, test_stat.st_mtim.tv_nsec);
-    mctest_assert_int_eq (0, test_stat.st_ctim.tv_nsec);
+    ck_assert_int_eq (0, test_stat.st_atim.tv_nsec);
+    ck_assert_int_eq (0, test_stat.st_mtim.tv_nsec);
+    ck_assert_int_eq (0, test_stat.st_ctim.tv_nsec);
 #endif
 
 }

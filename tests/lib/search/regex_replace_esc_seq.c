@@ -1,7 +1,7 @@
 /*
    libmc - checks for processing esc sequences in replace string
 
-   Copyright (C) 2011-2021
+   Copyright (C) 2011-2022
    Free Software Foundation, Inc.
 
    Written by:
@@ -196,9 +196,9 @@ START_PARAMETRIZED_TEST (test_regex_replace_esc_seq_prepare, test_regex_replace_
                                                  &actual_flags);
 
     /* then */
-    mctest_assert_int_eq (actual_result, data->expected_result);
-    mctest_assert_int_eq (actual_skipped_len, data->expected_skipped_len);
-    mctest_assert_int_eq (actual_flags, data->expected_flags);
+    ck_assert_int_eq (actual_result, data->expected_result);
+    ck_assert_int_eq (actual_skipped_len, data->expected_skipped_len);
+    ck_assert_int_eq (actual_flags, data->expected_flags);
 
     g_string_free (replace_str, TRUE);
 }

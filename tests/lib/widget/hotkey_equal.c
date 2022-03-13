@@ -1,7 +1,7 @@
 /*
    lib/widget - tests for hotkey comparision
 
-   Copyright (C) 2019-2021
+   Copyright (C) 2019-2022
    Free Software Foundation, Inc.
 
    Written by:
@@ -140,7 +140,7 @@ START_PARAMETRIZED_TEST (test_hotkey_equal,
     result = hotkey_equal (data->hotkey1, data->hotkey2);
 
     /* then */
-    mctest_assert_int_eq (result, data->expected_result);
+    ck_assert_int_eq (result, data->expected_result);
 }
 /* *INDENT-OFF* */
 END_PARAMETRIZED_TEST

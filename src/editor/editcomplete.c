@@ -1,7 +1,7 @@
 /*
    Editor word completion engine
 
-   Copyright (C) 2021
+   Copyright (C) 2021-2022
    Free Software Foundation, Inc.
 
    Written by:

@@ -81,9 +81,9 @@ Questa funzione non è fatta per un uso diretto, ma dovrebbe essere
 utilizzata da una speciale funzione shell che imposti automaticamente 
 l'ultima directory corrente della shell come l'ultima directory in cui
 stava il Midnight Commander. Prelevate i file
-.B %libexecdir%/mc/mc.sh
+.B %pkglibexecdir%/mc.sh
 (utenti bash e zsh) o rispettivamente
-.B %libexecdir%/mc/mc.csh
+.B %pkglibexecdir%/mc.csh
 (utenti tcsh) per definire
 .B mc
 come un alias allo script di shell appropriato.
@@ -1382,7 +1382,7 @@ utilizzato, se esiste, il file .mc.menu dalla directory corrente,
 ma solo se è di proprietà dell'utente o di root e se non è scrivibile
 a tutti. Se tale file non viene trovato, mc alla stessa maniera 
 prova con ~/.config/mc/menu altrimenti usa il menu di sistema
-%prefix%/share/mc/mc.menu.
+%pkgdatadir%/mc.menu.
 .PP
 Il formato del file menu è molto semplice. Le righe che cominciano
 con qualsiasi cosa che non sia uno spazio o una tabulazione sono
@@ -1894,7 +1894,7 @@ file system FTP
 per gli esempi.
 .PP
 Se quest'opzione è impostata, il programma farà due cose: consulterà 
-il file %prefix%/lib/mc/mc.no_proxy per le righe contenenti nomi host
+il file %sysconfdir%/mc/mc.no_proxy per le righe contenenti nomi host
 locali (se il nome host comincia con un punto, è considerato un 
 dominio) e assumendo che ogni nome host senza punti nel nome sia
 direttamente accessibile. Tutti gli altri host verranno contattati
@@ -1916,7 +1916,7 @@ funzionare con alcuni firewall.
 Alla partenza il Midnight Commander prova a caricare le informazioni di
 inizializzazione dal file ~/.config/mc/ini. Se questo file non esiste, 
 caricherà le informazioni dal file di configurazione di sistema 
-posizionato in %prefix%/share/mc/mc.ini. Se il file di configurazione di 
+posizionato in %pkgdatadir%/mc.ini. Se il file di configurazione di 
 sistema non esiste, MC userà le impostazioni predefinite.
 .PP
 Il comando
@@ -2537,7 +2537,7 @@ formatterà il blocco evidenziato correntemente (testo, codice
 o
 .B C++
 o altro). Questo comportamento viene controllato dal file 
-.B %prefix%/share/mc/edit.indent.rc
+.B %pkgdatadir%/edit.indent.rc
 che viene copiato nel 
 .B ~/.local/share/mc/mcedit/edit.indent.rc
 nella propria directory home la prima volta che lo si usa.
@@ -3140,13 +3140,13 @@ simpatici tasti dappertutto).
 Il programma recupera tutte le informazioni relative al proprio funzionamento
 dalla variabile ambiente
 .BR MC_DATADIR ,
-e se la variabile non è impostata, passerà alla directory %prefix%/share/mc .
+e se la variabile non è impostata, passerà alla directory %pkgdatadir% .
 .PP
-.I %prefix%/share/mc/help/mc.hlp
+.I %pkgdatadir%/help/mc.hlp
 .IP
 Il file di aiuto per il programma.
 .PP
-.I %prefix%/share/mc/mc.ext
+.I %pkgdatadir%/mc.ext
 .IP
 Il file delle estensioni di sistema predefinito.
 .PP
@@ -3156,12 +3156,12 @@ Le estensioni dell'utente, la configurazione del visualizzatore e
 dell'editor di file. Se presenti, questi file si sovrappongono ai file di 
 sistema.
 .PP
-.I %prefix%/share/mc/mc.ini
+.I %pkgdatadir%/mc.ini
 .IP
 La configurazione di sistema predefinita per il Midnight Commander, usata solo
 se l'utente non possiede il proprio file ~/.config/mc/ini.
 .PP
-.I %prefix%/share/mc/mc.lib
+.I %pkgdatadir%/mc.lib
 .IP
 Le impostazioni globali per il Midnight Commander. La modifica di questo
 file influisce su tutti gli utenti, che abbiano o no il file ~/.config/mc/ini .
@@ -3176,11 +3176,11 @@ da mc.lib.
 La configurazione dell'utente. Se questo file è presente, la configurazione
 viene caricata da qui invece che dal file di sistema.
 .PP
-.I %prefix%/share/mc/hints/mc.hint
+.I %pkgdatadir%/hints/mc.hint
 .IP
 Questo file contiene i suggerimenti (dritte) mostrate dal programma.
 .PP
-.I %prefix%/share/mc/mc.menu
+.I %pkgdatadir%/mc.menu
 .IP
 Questo file contiene il menu di sistema per le applicazioni.
 .PP

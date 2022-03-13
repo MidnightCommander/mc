@@ -1,7 +1,7 @@
 /*
    Return a list of mounted file systems
 
-   Copyright (C) 1991-2021
+   Copyright (C) 1991-2022
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.

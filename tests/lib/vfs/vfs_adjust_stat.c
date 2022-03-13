@@ -1,7 +1,7 @@
 /*
    lib/vfs - test vfs_adjust_stat() functionality
 
-   Copyright (C) 2017-2021
+   Copyright (C) 2017-2022
    Free Software Foundation, Inc.
 
    Written by:
@@ -177,9 +177,9 @@ START_PARAMETRIZED_TEST (test_vfs_adjust_stat, test_vfs_adjust_stat_ds)
     vfs_adjust_stat (&expected_stat);
 
     /* then */
-    mctest_assert_int_eq (data->etalon_stat.st_blocks, expected_stat.st_blocks);
+    ck_assert_int_eq (data->etalon_stat.st_blocks, expected_stat.st_blocks);
 #else
-    mctest_assert_int_eq (0, 0);
+    ck_assert_int_eq (0, 0);
 #endif /* HAVE_STRUCT_STAT_ST_BLOCKS */
 }
 /* *INDENT-OFF* */

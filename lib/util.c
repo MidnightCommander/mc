@@ -1,7 +1,7 @@
 /*
    Various utilities
 
-   Copyright (C) 1994-2021
+   Copyright (C) 1994-2022
    Free Software Foundation, Inc.
 
    Written by:
@@ -35,6 +35,7 @@
 #include <config.h>
 
 #include <ctype.h>
+#include <stddef.h>             /* ptrdiff_t */
 #include <limits.h>
 #include <stdarg.h>
 #include <stdio.h>

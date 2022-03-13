@@ -2,7 +2,7 @@
    Search text engine.
    Regex search
 
-   Copyright (C) 2009-2021
+   Copyright (C) 2009-2022
    Free Software Foundation, Inc.
 
    Written by:
@@ -820,7 +820,6 @@ mc_search__cond_struct_new_init_regex (const char *charset, mc_search_t * lc_mc_
                 tmp = mc_search_cond->str;
                 mc_search_cond->str = mc_search__cond_struct_new_regex_ci_str (charset, tmp);
                 g_string_free (tmp, TRUE);
-
             }
         }
 
@@ -847,16 +846,13 @@ mc_search__cond_struct_new_init_regex (const char *charset, mc_search_t * lc_mc_
             if (!lc_mc_search->is_case_sensitive)
                 pcre_options |= PCRE_CASELESS;
         }
-        else
+        else if (!lc_mc_search->is_case_sensitive)
         {
-            if (!lc_mc_search->is_case_sensitive)
-            {
-                GString *tmp;
+            GString *tmp;
 
-                tmp = mc_search_cond->str;
-                mc_search_cond->str = mc_search__cond_struct_new_regex_ci_str (charset, tmp);
-                g_string_free (tmp, TRUE);
-            }
+            tmp = mc_search_cond->str;
+            mc_search_cond->str = mc_search__cond_struct_new_regex_ci_str (charset, tmp);
+            g_string_free (tmp, TRUE);
         }
 
         mc_search_cond->regex_handle =

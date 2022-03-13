@@ -1,6 +1,6 @@
 /* lib/vfs - tests for vfspath_len() function.
 
-   Copyright (C) 2011-2021
+   Copyright (C) 2011-2022
    Free Software Foundation, Inc.
 
    Written by:
@@ -113,7 +113,7 @@ START_PARAMETRIZED_TEST (test_path_length, test_path_length_ds)
     actual_length = vfs_path_len (vpath);
 
     /* then */
-    mctest_assert_int_eq (actual_length, data->expected_length);
+    ck_assert_int_eq (actual_length, data->expected_length);
 
     vfs_path_free (vpath, TRUE);
 }

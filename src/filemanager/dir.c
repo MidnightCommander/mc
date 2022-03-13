@@ -1,7 +1,7 @@
 /*
    Directory routines
 
-   Copyright (C) 1994-2021
+   Copyright (C) 1994-2022
    Free Software Foundation, Inc.
 
    Written by:
@@ -145,7 +145,7 @@ clean_sort_keys (dir_list * list, int start, int count)
  */
 
 static gboolean
-handle_dirent (struct vfs_dirent *dp, const char *fltr, struct stat *buf1, gboolean * link_to_dir,
+handle_dirent (struct vfs_dirent *dp, const char *filter, struct stat *buf1, gboolean * link_to_dir,
                gboolean * stale_link)
 {
     vfs_path_t *vpath;
@@ -176,8 +176,8 @@ handle_dirent (struct vfs_dirent *dp, const char *fltr, struct stat *buf1, gbool
 
     vfs_path_free (vpath, TRUE);
 
-    return (S_ISDIR (buf1->st_mode) || *link_to_dir || fltr == NULL
-            || mc_search (fltr, NULL, dp->d_name, MC_SEARCH_T_GLOB));
+    return (S_ISDIR (buf1->st_mode) || *link_to_dir || filter == NULL
+            || mc_search (filter, NULL, dp->d_name, MC_SEARCH_T_GLOB));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -620,7 +620,7 @@ handle_path (const char *path, struct stat * buf1, gboolean * link_to_dir, gbool
 
 gboolean
 dir_list_load (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
-               const dir_sort_options_t * sort_op, const char *fltr)
+               const dir_sort_options_t * sort_op, const char *filter)
 {
     DIR *dirp;
     struct vfs_dirent *dp;
@@ -657,7 +657,7 @@ dir_list_load (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
         if (list->callback != NULL)
             list->callback (DIR_READ, dp);
 
-        if (!handle_dirent (dp, fltr, &st, &link_to_dir, &stale_link))
+        if (!handle_dirent (dp, filter, &st, &link_to_dir, &stale_link))
             continue;
 
         if (!dir_list_append (list, dp->d_name, &st, link_to_dir, stale_link))
@@ -689,11 +689,11 @@ if_link_is_exe (const vfs_path_t * full_name_vpath, const file_entry_t * file)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** If fltr is null, then it is a match */
+/** If filter is null, then it is a match */
 
 gboolean
 dir_list_reload (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
-                 const dir_sort_options_t * sort_op, const char *fltr)
+                 const dir_sort_options_t * sort_op, const char *filter)
 {
     DIR *dirp;
     struct vfs_dirent *dp;
@@ -776,7 +776,7 @@ dir_list_reload (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
         if (list->callback != NULL)
             list->callback (DIR_READ, dp);
 
-        if (!handle_dirent (dp, fltr, &st, &link_to_dir, &stale_link))
+        if (!handle_dirent (dp, filter, &st, &link_to_dir, &stale_link))
             continue;
 
         if (!dir_list_append (list, dp->d_name, &st, link_to_dir, stale_link))

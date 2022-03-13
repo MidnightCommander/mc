@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-11-21 15:18+0300\n"
+"POT-Creation-Date: 2022-03-13 13:31+0300\n"
 "PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Danish (http://www.transifex.com/mc/mc/language/da/)\n"
@@ -1625,7 +1625,7 @@ msgstr ""
 "En brugervenlig teksteditor\n"
 "skrevet til Midnight Commander."
 
-msgid "Copyright (C) 1996-2021 the Free Software Foundation"
+msgid "Copyright (C) 1996-2022 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -4009,6 +4009,10 @@ msgstr "Bygget med ncursesw %s\n"
 
 msgid "Built with ncursesw (unknown version)"
 msgstr "Bygget med ncursesw (ukendt version)"
+
+#, fuzzy, c-format
+msgid "Built with libssh2 %d.%d.%d\n"
+msgstr "Kompileret med GLib %d.%d.%d\n"
 
 msgid "Virtual File Systems:"
 msgstr "Virtuelle filsystemer:"

@@ -1,7 +1,7 @@
 /*
    Editor macros engine
 
-   Copyright (C) 2001-2021
+   Copyright (C) 2001-2022
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
