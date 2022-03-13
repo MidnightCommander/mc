@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: mc 4.8.27-57-ga73886ef9\n"
+"Project-Id-Version: mc 4.8.27-97-g1bdf81405\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-11-21 15:18+0300\n"
+"POT-Creation-Date: 2022-03-13 13:31+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -123,11 +123,11 @@ msgstr ""
 msgid "Invalid token number %d"
 msgstr ""
 
-#: lib/search/regex.c:340 lib/search/regex.c:835 src/filemanager/ext.c:749
+#: lib/search/regex.c:340 lib/search/regex.c:834 src/filemanager/ext.c:749
 msgid "Regular expression error"
 msgstr ""
 
-#: lib/search/search.c:53 src/diffviewer/ydiff.c:2357
+#: lib/search/search.c:53 src/diffviewer/ydiff.c:2359
 msgid "No&rmal"
 msgstr ""
 
@@ -602,50 +602,50 @@ msgid ""
 "Check the TERM environment variable.\n"
 msgstr ""
 
-#: lib/util.c:348
+#: lib/util.c:349
 msgid "B"
 msgstr ""
 
-#: lib/util.c:353
+#: lib/util.c:354
 msgid "kB"
 msgstr ""
 
-#: lib/util.c:353
+#: lib/util.c:354
 msgid "KiB"
 msgstr ""
 
-#: lib/util.c:358
+#: lib/util.c:359
 msgid "MB"
 msgstr ""
 
-#: lib/util.c:358
+#: lib/util.c:359
 msgid "MiB"
 msgstr ""
 
-#: lib/util.c:363
+#: lib/util.c:364
 msgid "GB"
 msgstr ""
 
-#: lib/util.c:363
+#: lib/util.c:364
 msgid "GiB"
 msgstr ""
 
-#: lib/utilunix.c:516
+#: lib/utilunix.c:512
 msgid "Cannot create pipe descriptor"
 msgstr ""
 
-#: lib/utilunix.c:529
+#: lib/utilunix.c:525
 msgid "Cannot create pipe streams"
 msgstr ""
 
-#: lib/utilunix.c:608
+#: lib/utilunix.c:604
 #, c-format
 msgid ""
 "Unexpected error in select() reading data from a child process:\n"
 "%s"
 msgstr ""
 
-#: lib/utilunix.c:695
+#: lib/utilunix.c:691
 #, c-format
 msgid ""
 "Unexpected error in waitpid():\n"
@@ -746,7 +746,7 @@ msgstr ""
 msgid "Do you want clean this history?"
 msgstr ""
 
-#: lib/widget/listbox.c:320 src/diffviewer/ydiff.c:3089 src/editor/edit.c:362
+#: lib/widget/listbox.c:320 src/diffviewer/ydiff.c:3091 src/editor/edit.c:362
 #: src/editor/editcmd.c:186 src/editor/editcmd.c:209 src/editor/editcmd.c:1521
 #: src/editor/editcmd.c:1527 src/filemanager/cmd.c:138
 #: src/filemanager/file.c:972 src/filemanager/file.c:1969
@@ -754,28 +754,28 @@ msgstr ""
 #: src/filemanager/filemanager.c:1070 src/filemanager/hotlist.c:1159
 #: src/filemanager/hotlist.c:1176 src/filemanager/panel.c:2827
 #: src/filemanager/tree.c:829 src/subshell/common.c:1621
-#: src/vfs/sftpfs/connection.c:518 src/vfs/sftpfs/connection.c:530
+#: src/vfs/sftpfs/connection.c:519 src/vfs/sftpfs/connection.c:531
 #: src/viewer/actions_cmd.c:643 src/viewer/actions_cmd.c:649
 #: src/viewer/search.c:447
 msgid "&Yes"
 msgstr ""
 
-#: lib/widget/listbox.c:320 src/diffviewer/ydiff.c:3089 src/editor/edit.c:362
+#: lib/widget/listbox.c:320 src/diffviewer/ydiff.c:3091 src/editor/edit.c:362
 #: src/editor/editcmd.c:186 src/editor/editcmd.c:1521 src/editor/editcmd.c:1527
 #: src/filemanager/cmd.c:138 src/filemanager/file.c:972
 #: src/filemanager/file.c:1969 src/filemanager/filegui.c:460
 #: src/filemanager/filemanager.c:1062 src/filemanager/filemanager.c:1070
 #: src/filemanager/hotlist.c:1159 src/filemanager/hotlist.c:1176
 #: src/filemanager/panel.c:2827 src/filemanager/tree.c:829
-#: src/subshell/common.c:1621 src/vfs/sftpfs/connection.c:518
-#: src/vfs/sftpfs/connection.c:530 src/viewer/actions_cmd.c:643
+#: src/subshell/common.c:1621 src/vfs/sftpfs/connection.c:519
+#: src/vfs/sftpfs/connection.c:531 src/viewer/actions_cmd.c:643
 #: src/viewer/actions_cmd.c:649 src/viewer/search.c:448
 msgid "&No"
 msgstr ""
 
 #: lib/widget/quick.h:215 src/editor/editsearch.c:103
 #: src/editor/editsearch.c:1007 src/editor/editwidget.c:157
-#: src/filemanager/boxes.c:1270 src/filemanager/filegui.c:1357
+#: src/filemanager/boxes.c:1270 src/filemanager/filegui.c:1359
 #: src/filemanager/find.c:602 src/filemanager/layout.c:508 src/main.c:411
 msgid "&OK"
 msgstr ""
@@ -790,7 +790,7 @@ msgstr ""
 #: src/filemanager/chattr.c:233 src/filemanager/chattr.c:1108
 #: src/filemanager/chmod.c:115 src/filemanager/chmod.c:438
 #: src/filemanager/chown.c:87 src/filemanager/chown.c:311
-#: src/filemanager/cmd.c:1057 src/filemanager/filegui.c:1361
+#: src/filemanager/cmd.c:1057 src/filemanager/filegui.c:1363
 #: src/filemanager/find.c:602 src/filemanager/hotlist.c:183
 #: src/filemanager/hotlist.c:1015 src/filemanager/hotlist.c:1077
 #: src/filemanager/layout.c:509 src/filemanager/panelize.c:143 src/learn.c:258
@@ -808,7 +808,7 @@ msgstr ""
 #: src/editor/editcmd.c:324 src/editor/editcmd.c:1625 src/editor/spell.c:322
 #: src/editor/spell.c:558 src/editor/spell.c:566
 #: tests/src/execute__common.c:152
-#: tests/src/execute__execute_with_vfs_arg.c:154
+#: tests/src/execute__execute_with_vfs_arg.c:152
 msgid "Error"
 msgstr ""
 
@@ -997,7 +997,7 @@ msgid ""
 "as tickets at www.midnight-commander.org\n"
 msgstr ""
 
-#: src/args.c:410 src/filemanager/filemanager.c:1755 src/textconf.c:138
+#: src/args.c:410 src/filemanager/filemanager.c:1754 src/textconf.c:142
 #, c-format
 msgid "GNU Midnight Commander %s\n"
 msgstr ""
@@ -1097,14 +1097,14 @@ msgstr ""
 msgid "Search is disabled"
 msgstr ""
 
-#: src/diffviewer/ydiff.c:176
+#: src/diffviewer/ydiff.c:178
 #, c-format
 msgid ""
 "Cannot create temporary diff file\n"
 "%s"
 msgstr ""
 
-#: src/diffviewer/ydiff.c:2208
+#: src/diffviewer/ydiff.c:2210
 #, c-format
 msgid ""
 "Cannot create backup file\n"
@@ -1112,134 +1112,134 @@ msgid ""
 "%s"
 msgstr ""
 
-#: src/diffviewer/ydiff.c:2217
+#: src/diffviewer/ydiff.c:2219
 #, c-format
 msgid ""
 "Cannot create temporary merge file\n"
 "%s"
 msgstr ""
 
-#: src/diffviewer/ydiff.c:2358
+#: src/diffviewer/ydiff.c:2360
 msgid "&Fastest (Assume large files)"
 msgstr ""
 
-#: src/diffviewer/ydiff.c:2359
+#: src/diffviewer/ydiff.c:2361
 msgid "&Minimal (Find a smaller set of change)"
 msgstr ""
 
-#: src/diffviewer/ydiff.c:2364
+#: src/diffviewer/ydiff.c:2366
 msgid "Diff algorithm"
 msgstr ""
 
-#: src/diffviewer/ydiff.c:2367
+#: src/diffviewer/ydiff.c:2369
 msgid "Diff extra options"
 msgstr ""
 
-#: src/diffviewer/ydiff.c:2368
+#: src/diffviewer/ydiff.c:2370
 msgid "&Ignore case"
 msgstr ""
 
-#: src/diffviewer/ydiff.c:2369
+#: src/diffviewer/ydiff.c:2371
 msgid "Ignore tab &expansion"
 msgstr ""
 
-#: src/diffviewer/ydiff.c:2370
+#: src/diffviewer/ydiff.c:2372
 msgid "Ignore &space change"
 msgstr ""
 
-#: src/diffviewer/ydiff.c:2371
+#: src/diffviewer/ydiff.c:2373
 msgid "Ignore all &whitespace"
 msgstr ""
 
-#: src/diffviewer/ydiff.c:2372
+#: src/diffviewer/ydiff.c:2374
 msgid "Strip &trailing carriage return"
 msgstr ""
 
-#: src/diffviewer/ydiff.c:2382
+#: src/diffviewer/ydiff.c:2384
 msgid "Diff Options"
 msgstr ""
 
-#: src/diffviewer/ydiff.c:2891
+#: src/diffviewer/ydiff.c:2893
 msgid "Edit"
 msgstr ""
 
-#: src/diffviewer/ydiff.c:2891
+#: src/diffviewer/ydiff.c:2893
 msgid "Edit is disabled"
 msgstr ""
 
-#: src/diffviewer/ydiff.c:2925
+#: src/diffviewer/ydiff.c:2927
 msgid "Goto line (left)"
 msgstr ""
 
-#: src/diffviewer/ydiff.c:2926
+#: src/diffviewer/ydiff.c:2928
 msgid "Goto line (right)"
 msgstr ""
 
-#: src/diffviewer/ydiff.c:2934 src/editor/editcmd.c:1708
+#: src/diffviewer/ydiff.c:2936 src/editor/editcmd.c:1708
 msgid "Enter line:"
 msgstr ""
 
-#: src/diffviewer/ydiff.c:2973 src/editor/editwidget.c:669
+#: src/diffviewer/ydiff.c:2975 src/editor/editwidget.c:669
 #: src/filemanager/filemanager.c:1642 src/filemanager/tree.c:1172
-#: src/help.c:1165 src/viewer/display.c:87
+#: src/help.c:1159 src/viewer/display.c:87
 msgid "ButtonBar|Help"
 msgstr ""
 
-#: src/diffviewer/ydiff.c:2974 src/editor/editwidget.c:670
+#: src/diffviewer/ydiff.c:2976 src/editor/editwidget.c:670
 #: src/viewer/display.c:99
 msgid "ButtonBar|Save"
 msgstr ""
 
-#: src/diffviewer/ydiff.c:2975 src/filemanager/filemanager.c:1645
+#: src/diffviewer/ydiff.c:2977 src/filemanager/filemanager.c:1645
 #: src/viewer/display.c:94
 msgid "ButtonBar|Edit"
 msgstr ""
 
-#: src/diffviewer/ydiff.c:2976
+#: src/diffviewer/ydiff.c:2978
 msgid "ButtonBar|Merge"
 msgstr ""
 
-#: src/diffviewer/ydiff.c:2977 src/editor/editwidget.c:675
+#: src/diffviewer/ydiff.c:2979 src/editor/editwidget.c:675
 #: src/viewer/display.c:109
 msgid "ButtonBar|Search"
 msgstr ""
 
-#: src/diffviewer/ydiff.c:2978
+#: src/diffviewer/ydiff.c:2980
 msgid "ButtonBar|Options"
 msgstr ""
 
-#: src/diffviewer/ydiff.c:2979 src/editor/editwidget.c:678
-#: src/filemanager/filemanager.c:1651 src/help.c:1174 src/viewer/display.c:118
+#: src/diffviewer/ydiff.c:2981 src/editor/editwidget.c:678
+#: src/filemanager/filemanager.c:1651 src/help.c:1168 src/viewer/display.c:118
 #: src/viewer/display.c:121
 msgid "ButtonBar|Quit"
 msgstr ""
 
-#: src/diffviewer/ydiff.c:3086 src/editor/editcmd.c:1527
+#: src/diffviewer/ydiff.c:3088 src/editor/editcmd.c:1527
 #: src/viewer/actions_cmd.c:641 src/viewer/actions_cmd.c:647
 msgid "Quit"
 msgstr ""
 
-#: src/diffviewer/ydiff.c:3087
+#: src/diffviewer/ydiff.c:3089
 msgid "File(s) was modified. Save with exit?"
 msgstr ""
 
-#: src/diffviewer/ydiff.c:3088
+#: src/diffviewer/ydiff.c:3090
 msgid ""
 "Midnight Commander is being shut down.\n"
 "Save modified file(s)?"
 msgstr ""
 
-#: src/diffviewer/ydiff.c:3421 src/diffviewer/ydiff.c:3424
+#: src/diffviewer/ydiff.c:3423 src/diffviewer/ydiff.c:3426
 msgid "Diff:"
 msgstr ""
 
-#: src/diffviewer/ydiff.c:3541 src/diffviewer/ydiff.c:3552
-#: src/diffviewer/ydiff.c:3572 src/diffviewer/ydiff.c:3589
+#: src/diffviewer/ydiff.c:3543 src/diffviewer/ydiff.c:3554
+#: src/diffviewer/ydiff.c:3574 src/diffviewer/ydiff.c:3591
 #, c-format
 msgid "\"%s\" is a directory"
 msgstr ""
 
-#: src/diffviewer/ydiff.c:3578 src/diffviewer/ydiff.c:3595
+#: src/diffviewer/ydiff.c:3580 src/diffviewer/ydiff.c:3597
 #: src/filemanager/file.c:1776 src/viewer/mcviewer.c:349
 #, c-format
 msgid ""
@@ -1247,11 +1247,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#: src/diffviewer/ydiff.c:3604
+#: src/diffviewer/ydiff.c:3606
 msgid "Diff viewer: invalid mode"
 msgstr ""
 
-#: src/diffviewer/ydiff.c:3633
+#: src/diffviewer/ydiff.c:3635
 msgid "Two files are needed to compare"
 msgstr ""
 
@@ -1300,7 +1300,7 @@ msgstr ""
 #: src/editor/editcmd.c:2013 src/editor/editcmd.c:2042 src/editor/etags.c:371
 #: src/execute.c:135 src/filemanager/file.c:2408 src/filemanager/panel.c:4524
 #: src/help.c:362 src/main.c:408 src/subshell/common.c:1619
-#: src/vfs/sftpfs/connection.c:518 src/viewer/actions_cmd.c:443
+#: src/vfs/sftpfs/connection.c:519 src/viewer/actions_cmd.c:443
 msgid "Warning"
 msgstr ""
 
@@ -2086,7 +2086,7 @@ msgid ""
 msgstr ""
 
 #: src/editor/editwidget.c:155
-msgid "Copyright (C) 1996-2021 the Free Software Foundation"
+msgid "Copyright (C) 1996-2022 the Free Software Foundation"
 msgstr ""
 
 #: src/editor/editwidget.c:164
@@ -2262,7 +2262,7 @@ msgstr ""
 msgid "Load syntax file"
 msgstr ""
 
-#: src/editor/syntax.c:1535 src/help.c:1101 src/usermenu.c:975
+#: src/editor/syntax.c:1535 src/help.c:1095 src/usermenu.c:975
 #: src/usermenu.c:1015
 #, c-format
 msgid ""
@@ -2353,8 +2353,8 @@ msgstr ""
 
 #: src/filemanager/achown.c:859 src/filemanager/achown.c:894
 #: src/filemanager/chattr.c:1107 src/filemanager/chmod.c:437
-#: src/filemanager/chown.c:310 src/vfs/sftpfs/connection.c:518
-#: src/vfs/sftpfs/connection.c:530
+#: src/filemanager/chown.c:310 src/vfs/sftpfs/connection.c:519
+#: src/vfs/sftpfs/connection.c:531
 msgid "&Ignore"
 msgstr ""
 
@@ -2604,7 +2604,7 @@ msgid "Panel options"
 msgstr ""
 
 #: src/filemanager/boxes.c:741 src/filemanager/info.c:86
-#: src/vfs/sftpfs/connection.c:377
+#: src/vfs/sftpfs/connection.c:378
 msgid "Information"
 msgstr ""
 
@@ -3761,36 +3761,36 @@ msgstr ""
 msgid "Deleting"
 msgstr ""
 
-#: src/filemanager/filegui.c:1344 src/filemanager/find.c:584
+#: src/filemanager/filegui.c:1346 src/filemanager/find.c:584
 #: src/filemanager/panel.c:2543
 msgid "&Using shell patterns"
 msgstr ""
 
-#: src/filemanager/filegui.c:1346
+#: src/filemanager/filegui.c:1348
 msgid "to:"
 msgstr ""
 
-#: src/filemanager/filegui.c:1350
+#: src/filemanager/filegui.c:1352
 msgid "Follow &links"
 msgstr ""
 
-#: src/filemanager/filegui.c:1351
+#: src/filemanager/filegui.c:1353
 msgid "Preserve &attributes"
 msgstr ""
 
-#: src/filemanager/filegui.c:1353
+#: src/filemanager/filegui.c:1355
 msgid "Di&ve into subdir if exists"
 msgstr ""
 
-#: src/filemanager/filegui.c:1354
+#: src/filemanager/filegui.c:1356
 msgid "&Stable symlinks"
 msgstr ""
 
-#: src/filemanager/filegui.c:1359
+#: src/filemanager/filegui.c:1361
 msgid "&Background"
 msgstr ""
 
-#: src/filemanager/filegui.c:1411
+#: src/filemanager/filegui.c:1414
 #, c-format
 msgid "Invalid source pattern '%s'"
 msgstr ""
@@ -4787,20 +4787,20 @@ msgstr ""
 msgid "Internal bug: Double start of link area"
 msgstr ""
 
-#: src/help.c:634 src/help.c:1123
+#: src/help.c:634 src/help.c:1117
 #, c-format
 msgid "Cannot find node %s in help file"
 msgstr ""
 
-#: src/help.c:1138
+#: src/help.c:1132
 msgid "Help"
 msgstr ""
 
-#: src/help.c:1166
+#: src/help.c:1160
 msgid "ButtonBar|Index"
 msgstr ""
 
-#: src/help.c:1167
+#: src/help.c:1161
 msgid "ButtonBar|Prev"
 msgstr ""
 
@@ -4925,119 +4925,124 @@ msgstr ""
 msgid "Warning: Cannot change to %s.\n"
 msgstr ""
 
-#: src/textconf.c:83
+#: src/textconf.c:87
 msgid "With builtin Editor and Aspell support"
 msgstr ""
 
-#: src/textconf.c:85
+#: src/textconf.c:89
 msgid "With builtin Editor"
 msgstr ""
 
-#: src/textconf.c:91
+#: src/textconf.c:95
 msgid "With optional subshell support"
 msgstr ""
 
-#: src/textconf.c:93
+#: src/textconf.c:97
 msgid "With subshell support as default"
 msgstr ""
 
-#: src/textconf.c:98
+#: src/textconf.c:102
 msgid "With support for background operations"
 msgstr ""
 
-#: src/textconf.c:102
+#: src/textconf.c:106
 msgid "With mouse support on xterm and Linux console"
 msgstr ""
 
-#: src/textconf.c:104
+#: src/textconf.c:108
 msgid "With mouse support on xterm"
 msgstr ""
 
-#: src/textconf.c:108
+#: src/textconf.c:112
 msgid "With support for X11 events"
 msgstr ""
 
-#: src/textconf.c:112
+#: src/textconf.c:116
 msgid "With internationalization support"
 msgstr ""
 
-#: src/textconf.c:116
+#: src/textconf.c:120
 msgid "With multiple codepages support"
 msgstr ""
 
-#: src/textconf.c:120
+#: src/textconf.c:124
 msgid "With ext2fs attributes support"
-msgstr ""
-
-#: src/textconf.c:140
-#, c-format
-msgid "Built with GLib %d.%d.%d\n"
 msgstr ""
 
 #: src/textconf.c:144
 #, c-format
+msgid "Built with GLib %d.%d.%d\n"
+msgstr ""
+
+#: src/textconf.c:148
+#, c-format
 msgid "Built with S-Lang %s with terminfo database\n"
 msgstr ""
 
-#: src/textconf.c:147
+#: src/textconf.c:151
 #, c-format
 msgid "Built with ncurses %s\n"
 msgstr ""
 
-#: src/textconf.c:149
+#: src/textconf.c:153
 msgid "Built with ncurses (unknown version)"
 msgstr ""
 
-#: src/textconf.c:153
+#: src/textconf.c:157
 #, c-format
 msgid "Built with ncursesw %s\n"
 msgstr ""
 
-#: src/textconf.c:155
+#: src/textconf.c:159
 msgid "Built with ncursesw (unknown version)"
 msgstr ""
 
-#: src/textconf.c:165
+#: src/textconf.c:166
+#, c-format
+msgid "Built with libssh2 %d.%d.%d\n"
+msgstr ""
+
+#: src/textconf.c:174
 msgid "Virtual File Systems:"
 msgstr ""
 
-#: src/textconf.c:171
+#: src/textconf.c:180
 msgid "Data types:"
 msgstr ""
 
-#: src/textconf.c:199
+#: src/textconf.c:208
 msgid "Home directory:"
 msgstr ""
 
-#: src/textconf.c:200
+#: src/textconf.c:209
 msgid "Profile root directory:"
 msgstr ""
 
-#: src/textconf.c:203
+#: src/textconf.c:212
 msgid "System data"
 msgstr ""
 
-#: src/textconf.c:205 src/textconf.c:223
+#: src/textconf.c:214 src/textconf.c:232
 msgid "Config directory:"
 msgstr ""
 
-#: src/textconf.c:206 src/textconf.c:224
+#: src/textconf.c:215 src/textconf.c:233
 msgid "Data directory:"
 msgstr ""
 
-#: src/textconf.c:208
+#: src/textconf.c:217
 msgid "File extension handlers:"
 msgstr ""
 
-#: src/textconf.c:211
+#: src/textconf.c:220
 msgid "VFS plugins and scripts:"
 msgstr ""
 
-#: src/textconf.c:221
+#: src/textconf.c:230
 msgid "User data"
 msgstr ""
 
-#: src/textconf.c:236
+#: src/textconf.c:245
 msgid "Cache directory:"
 msgstr ""
 
@@ -5198,13 +5203,13 @@ msgstr ""
 msgid "fish: Reading directory %s..."
 msgstr ""
 
-#: src/vfs/fish/fish.c:952 src/vfs/ftpfs/ftpfs.c:1853
+#: src/vfs/fish/fish.c:952 src/vfs/ftpfs/ftpfs.c:1858
 #: src/vfs/undelfs/undelfs.c:384
 #, c-format
 msgid "%s: done."
 msgstr ""
 
-#: src/vfs/fish/fish.c:959 src/vfs/ftpfs/ftpfs.c:1801
+#: src/vfs/fish/fish.c:959 src/vfs/ftpfs/ftpfs.c:1806
 #: src/vfs/undelfs/undelfs.c:387
 #, c-format
 msgid "%s: failure"
@@ -5275,94 +5280,94 @@ msgstr ""
 msgid "ftpfs: Login incorrect for user %s "
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:857
+#: src/vfs/ftpfs/ftpfs.c:862
 msgid "ftpfs: Invalid host name."
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:903 src/vfs/ftpfs/ftpfs.c:919
+#: src/vfs/ftpfs/ftpfs.c:908 src/vfs/ftpfs/ftpfs.c:924
 #, c-format
 msgid "ftpfs: %s"
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:926
+#: src/vfs/ftpfs/ftpfs.c:931
 #, c-format
 msgid "ftpfs: making connection to %s"
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:936
+#: src/vfs/ftpfs/ftpfs.c:941
 msgid "ftpfs: connection interrupted by user"
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:938
+#: src/vfs/ftpfs/ftpfs.c:943
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:993
+#: src/vfs/ftpfs/ftpfs.c:998
 #, c-format
 msgid "Waiting to retry... %d (Control-G to cancel)"
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:1305
+#: src/vfs/ftpfs/ftpfs.c:1310
 msgid "ftpfs: invalid address family"
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:1313
+#: src/vfs/ftpfs/ftpfs.c:1318
 #, c-format
 msgid "ftpfs: could not create socket: %s"
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:1348
+#: src/vfs/ftpfs/ftpfs.c:1353
 msgid "ftpfs: could not setup passive mode"
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:1468
+#: src/vfs/ftpfs/ftpfs.c:1473
 msgid "ftpfs: aborting transfer."
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:1472
+#: src/vfs/ftpfs/ftpfs.c:1477
 #, c-format
 msgid "ftpfs: abort error: %s"
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:1480
+#: src/vfs/ftpfs/ftpfs.c:1485
 msgid "ftpfs: abort failed"
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:1623 src/vfs/ftpfs/ftpfs.c:1751
+#: src/vfs/ftpfs/ftpfs.c:1628 src/vfs/ftpfs/ftpfs.c:1756
 msgid "ftpfs: CWD failed."
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:1632 src/vfs/ftpfs/ftpfs.c:1640
+#: src/vfs/ftpfs/ftpfs.c:1637 src/vfs/ftpfs/ftpfs.c:1645
 msgid "ftpfs: couldn't resolve symlink"
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:1714
+#: src/vfs/ftpfs/ftpfs.c:1719
 msgid "Resolving symlink..."
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:1743
+#: src/vfs/ftpfs/ftpfs.c:1748
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:1746
+#: src/vfs/ftpfs/ftpfs.c:1751
 msgid "(strict rfc959)"
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:1746
+#: src/vfs/ftpfs/ftpfs.c:1751
 msgid "(chdir first)"
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:1787
+#: src/vfs/ftpfs/ftpfs.c:1792
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:1942
+#: src/vfs/ftpfs/ftpfs.c:1947
 msgid "ftpfs: storing file"
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:2443
+#: src/vfs/ftpfs/ftpfs.c:2448
 msgid ""
 "~/.netrc file has incorrect mode\n"
 "Remove password or correct mode"
@@ -5438,7 +5443,7 @@ msgstr ""
 msgid "sftp: unknown host key type:"
 msgstr ""
 
-#: src/vfs/sftpfs/connection.c:378
+#: src/vfs/sftpfs/connection.c:379
 #, c-format
 msgid ""
 "Permanently added\n"
@@ -5446,19 +5451,19 @@ msgid ""
 "to the list of known hosts."
 msgstr ""
 
-#: src/vfs/sftpfs/connection.c:442
+#: src/vfs/sftpfs/connection.c:443
 msgid "sftp: cannot get the remote host key"
 msgstr ""
 
-#: src/vfs/sftpfs/connection.c:482
+#: src/vfs/sftpfs/connection.c:483
 msgid "sftp: unsupported key type, can't check remote host key"
 msgstr ""
 
-#: src/vfs/sftpfs/connection.c:489
+#: src/vfs/sftpfs/connection.c:490
 msgid "sftp: can't compute host key fingerprint hash"
 msgstr ""
 
-#: src/vfs/sftpfs/connection.c:511
+#: src/vfs/sftpfs/connection.c:512
 #, c-format
 msgid ""
 "The authenticity of host\n"
@@ -5469,7 +5474,7 @@ msgid ""
 "Do you want to add it to the list of known hosts and continue connecting?"
 msgstr ""
 
-#: src/vfs/sftpfs/connection.c:524
+#: src/vfs/sftpfs/connection.c:525
 #, c-format
 msgid ""
 "%s (%s)\n"
@@ -5479,29 +5484,29 @@ msgid ""
 "connecting?"
 msgstr ""
 
-#: src/vfs/sftpfs/connection.c:551
+#: src/vfs/sftpfs/connection.c:552
 msgid "sftp: host key verification failed"
 msgstr ""
 
-#: src/vfs/sftpfs/connection.c:687
+#: src/vfs/sftpfs/connection.c:688
 #, c-format
 msgid "sftp: Enter passphrase for %s "
 msgstr ""
 
-#: src/vfs/sftpfs/connection.c:692
+#: src/vfs/sftpfs/connection.c:693
 msgid "sftp: Passphrase is empty."
 msgstr ""
 
-#: src/vfs/sftpfs/connection.c:797
+#: src/vfs/sftpfs/connection.c:798
 #, c-format
 msgid "sftp: Enter password for %s "
 msgstr ""
 
-#: src/vfs/sftpfs/connection.c:802
+#: src/vfs/sftpfs/connection.c:803
 msgid "sftp: Password is empty."
 msgstr ""
 
-#: src/vfs/sftpfs/connection.c:883
+#: src/vfs/sftpfs/connection.c:884
 msgid "sftp: failure establishing SSH session"
 msgstr ""
 
@@ -5765,6 +5770,6 @@ msgstr ""
 msgid "Continue from beginning?"
 msgstr ""
 
-#: tests/src/execute__execute_with_vfs_arg.c:156
+#: tests/src/execute__execute_with_vfs_arg.c:154
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""

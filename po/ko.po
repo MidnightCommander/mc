@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-11-21 15:18+0300\n"
+"POT-Creation-Date: 2022-03-13 13:31+0300\n"
 "PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Korean (http://www.transifex.com/mc/mc/language/ko/)\n"
@@ -1622,7 +1622,8 @@ msgstr ""
 "사용자 친화적인 텍스트 편집기\n"
 "미드나잇 커맨더를 위해 작성됨."
 
-msgid "Copyright (C) 1996-2021 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2022 the Free Software Foundation"
 msgstr "Copyright (C) 1996-2021 the Free Software Foundation"
 
 msgid "About"
@@ -4004,6 +4005,10 @@ msgstr "ncursesw %s로 구축\n"
 
 msgid "Built with ncursesw (unknown version)"
 msgstr "ncursesw로 구축 (알 수 없는 버전)"
+
+#, fuzzy, c-format
+msgid "Built with libssh2 %d.%d.%d\n"
+msgstr "GLib %d.%d.%d로 빌드\n"
 
 msgid "Virtual File Systems:"
 msgstr "가상 파일 시스템:"

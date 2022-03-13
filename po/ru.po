@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-11-21 15:18+0300\n"
+"POT-Creation-Date: 2022-03-13 13:31+0300\n"
 "PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Russian (http://www.transifex.com/mc/mc/language/ru/)\n"
@@ -1644,7 +1644,7 @@ msgstr ""
 "Текстовый редактор с дружественным интерфейсом пользователя.\n"
 "Создан для Midnight Commander."
 
-msgid "Copyright (C) 1996-2021 the Free Software Foundation"
+msgid "Copyright (C) 1996-2022 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -2518,7 +2518,7 @@ msgid "Unable to save setup to %s"
 msgstr "Не удалось сохранить параметры в %s"
 
 msgid "Cannot execute commands on non-local filesystems"
-msgstr "Не удалось выполнять команды на нелокальных файловых системах"
+msgstr "Не удалось выполнить команды на нелокальных файловых системах"
 
 msgid "Parameter"
 msgstr "Параметр"
@@ -3870,7 +3870,7 @@ msgstr ""
 "Пожалуйста, нажмите клавишу %s\n"
 "и подождите, пока это сообщение пропадёт.\n"
 "\n"
-"Затем нажмите её еще раз, чтобы убедиться,\n"
+"Затем нажмите её ещё раз, чтобы убедиться,\n"
 "что справа от её названия появилось \"OK\".\n"
 "\n"
 "Если вы хотите прервать обучение, нажмите\n"
@@ -3967,7 +3967,7 @@ msgid "Cannot open named pipe %s\n"
 msgstr "Не удалось открыть именованный канал %s\n"
 
 msgid "The shell is still active. Quit anyway?"
-msgstr "Оболочка всё еще активна. Всё равно выйти?"
+msgstr "Оболочка всё ещё активна. Всё равно выйти?"
 
 #, c-format
 msgid "Warning: Cannot change to %s.\n"
@@ -4027,6 +4027,10 @@ msgstr "С библиотекой ncursesw %s\n"
 
 msgid "Built with ncursesw (unknown version)"
 msgstr "С библиотекой ncursesw (версия неизвестна)"
+
+#, c-format
+msgid "Built with libssh2 %d.%d.%d\n"
+msgstr "Скомпилирован с библиотекой libssh2 версии %d.%d.%d\n"
 
 msgid "Virtual File Systems:"
 msgstr "Виртуальная файловая система:"

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-11-21 15:18+0300\n"
+"POT-Creation-Date: 2022-03-13 13:31+0300\n"
 "PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Dutch (http://www.transifex.com/mc/mc/language/nl/)\n"
@@ -1622,7 +1622,7 @@ msgstr ""
 "Een gebruikersvriendelijke tekstbewerker\n"
 "geschreven voor de Midnight Commander"
 
-msgid "Copyright (C) 1996-2021 the Free Software Foundation"
+msgid "Copyright (C) 1996-2022 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -4009,6 +4009,10 @@ msgstr "Built met ncursesw %s\n"
 
 msgid "Built with ncursesw (unknown version)"
 msgstr "Built met ncursesw (onbekende versie)"
+
+#, fuzzy, c-format
+msgid "Built with libssh2 %d.%d.%d\n"
+msgstr "Gebouwd met GLib %d.%d.%d\n"
 
 msgid "Virtual File Systems:"
 msgstr "Virtuele bestandssystemen (VFS):"

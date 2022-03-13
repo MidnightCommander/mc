@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-11-21 15:18+0300\n"
+"POT-Creation-Date: 2022-03-13 13:31+0300\n"
 "PO-Revision-Date: 2021-07-26 20:16+0000\n"
 "Last-Translator: Transifex Bot <>\n"
 "Language-Team: Slovenian (http://www.transifex.com/mc/mc/language/sl/)\n"
@@ -1549,7 +1549,7 @@ msgid ""
 "written for the Midnight Commander."
 msgstr ""
 
-msgid "Copyright (C) 1996-2021 the Free Software Foundation"
+msgid "Copyright (C) 1996-2022 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -3811,6 +3811,10 @@ msgid "Built with ncursesw %s\n"
 msgstr ""
 
 msgid "Built with ncursesw (unknown version)"
+msgstr ""
+
+#, c-format
+msgid "Built with libssh2 %d.%d.%d\n"
 msgstr ""
 
 msgid "Virtual File Systems:"
