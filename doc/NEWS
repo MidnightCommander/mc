@@ -1,3 +1,45 @@
+Version 4.8.28
+
+- VFS
+
+  * Remove SMB support (#1)
+
+- Editor
+
+  * Add syntax highlighting:
+    * Ngspice/SPICE (http://ngspice.sourceforge.net/) (#4316, #4319)
+    * DOT/Graphviz (https://graphviz.org/doc/info/lang.html) (#4322)
+
+- Viewer
+
+  * Support file/dir macros from mc.ect for standalone viewer (#4150)
+
+- Misc
+
+  * Minimal version of "check" utility is 0.9.10.
+  * Code cleanup (#4270, #4330)
+  * Support Shift+Fn keys for KiTTY (#4325)
+  * Filehighlight:
+    * graphical formats: avif, jp2, jxl, heic, heif, psb, psd (#4328)
+    * Markdown (#4351)
+
+- Fixes
+
+  * FTBFS with ncurses build with --disable-widec (#4200)
+  * There is no exit on Ubuntu PPC64 big endian (#3887)
+  * Segfault on change panel mode (#4323)
+  * Accelerator conflict in Left/Right menu (#4284)
+  * move a lot of files across filesystems is slow (#4287)
+  * mc.ext: wrong order of rules: general matches are made before more specific ones (#4273)
+  * mc.ext: compressed man pages are shown unformatted (#4272)
+  * ext.d/misc.sh: invoking /bin/cat on systems that have no /bin/cat (like NixOS) (#4298)
+  * mcedit: errors in syntax definitions (#4286)
+  * VFS: FISH: when uploading a symbolic link, it creates both the link and its target (#4281)
+  * VFS: SFTP: timestamps are not preserved for uploaded symlink (#4285)
+  * VFS: EXTFS: incorrect test of isoinfo (#4326)
+  * Typo in skin files (#3146)
+
+
 Version 4.8.27
 
 - Core
