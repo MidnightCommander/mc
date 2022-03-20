@@ -3,16 +3,16 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# heskjestad <cato@heskjestad.xyz>, 2021
+# heskjestad <cato@heskjestad.xyz>, 2021-2022
 # heskjestad <cato@heskjestad.xyz>, 2019-2021
 # Slava Zanko <slavazanko@gmail.com>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-13 13:31+0300\n"
-"PO-Revision-Date: 2021-07-29 12:31+0000\n"
-"Last-Translator: heskjestad <cato@heskjestad.xyz>\n"
+"POT-Creation-Date: 2022-03-20 11:48+0100\n"
+"PO-Revision-Date: 2010-12-29 10:19+0000\n"
+"Last-Translator: heskjestad <cato@heskjestad.xyz>, 2021-2022\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/mc/mc/language/"
 "nb/)\n"
 "Language: nb\n"
@@ -1631,9 +1631,8 @@ msgstr ""
 "Et brukervennlig skriveprogram\n"
 "skrevet for Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2022 the Free Software Foundation"
-msgstr "Opphavsrett (C) 1996-2021 the Free Software Foundation"
+msgstr "Opphavsrett (C) 1996-2022 the Free Software Foundation"
 
 msgid "About"
 msgstr "Om"
@@ -3066,7 +3065,6 @@ msgstr "&Tre"
 msgid "&Listing format..."
 msgstr "&Utlistingsformat ..."
 
-#, fuzzy
 msgid "S&ort order..."
 msgstr "Sorterings&rekkefølge ..."
 
@@ -3082,7 +3080,6 @@ msgstr "Koble til FT&P ..."
 msgid "S&hell link..."
 msgstr "Koble til &skall ..."
 
-#, fuzzy
 msgid "&SFTP link..."
 msgstr "K&oble til SFTP ..."
 
@@ -4019,9 +4016,9 @@ msgstr "Bruker ncursesw %s\n"
 msgid "Built with ncursesw (unknown version)"
 msgstr "Bruker ncursesw (ukjent versjon)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with libssh2 %d.%d.%d\n"
-msgstr "Bygget med GLib %d.%d.%d\n"
+msgstr "Bygget med libssh2 %d.%d.%d\n"
 
 msgid "Virtual File Systems:"
 msgstr "Virtuelle filsystem:"
@@ -4693,55 +4690,3 @@ msgstr "Fortsett fra begynnelsen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Klarte ikke hente en lokal kopi av /ftp://some.host/editme.txt"
-
-#~ msgid "Set debug level"
-#~ msgstr "Velg feilsøkingsnivå"
-
-#~ msgid "<integer>"
-#~ msgstr "<heltall>"
-
-#, c-format
-#~ msgid "Password for \\\\%s\\%s"
-#~ msgstr "Passord for \\\\%s\\%s"
-
-#~ msgid "Domain:"
-#~ msgstr "Domene:"
-
-#~ msgid "Username:"
-#~ msgstr "Brukernavn:"
-
-#~ msgid "SMB authentication"
-#~ msgstr "SMB-autentisering"
-
-#~ msgid "SMB link to machine"
-#~ msgstr "Koble til SMB"
-
-#~ msgid "SM&B link..."
-#~ msgstr "Koble til SM&B ..."
-
-#, c-format
-#~ msgid "reconnect to %s failed"
-#~ msgstr "klarte ikke koble til %s på nytt"
-
-#~ msgid "Authentication failed"
-#~ msgstr "Autentisering mislyktes"
-
-#, c-format
-#~ msgid "Error %s creating directory %s"
-#~ msgstr "Feilen «%s» oppstod under oppretting av mappa %s"
-
-#, c-format
-#~ msgid "Error %s removing directory %s"
-#~ msgstr "Feilen «%s» oppstod under sletting av mappa %s"
-
-#, c-format
-#~ msgid "%s opening remote file %s"
-#~ msgstr "%s ved åpning av ekstern fil %s"
-
-#, c-format
-#~ msgid "%s removing remote file %s"
-#~ msgstr "%s ved sletting av ekstern fil %s"
-
-#, c-format
-#~ msgid "%s renaming files\n"
-#~ msgstr "%s ved endring av filnavn\n"

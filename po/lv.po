@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-13 13:31+0300\n"
-"PO-Revision-Date: 2021-07-26 20:16+0000\n"
-"Last-Translator: Transifex Bot <>\n"
+"POT-Creation-Date: 2022-03-20 11:48+0100\n"
+"PO-Revision-Date: 2010-12-29 10:19+0000\n"
+"Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
 "Language-Team: Latvian (http://www.transifex.com/mc/mc/language/lv/)\n"
 "Language: lv\n"
 "MIME-Version: 1.0\n"
@@ -2866,9 +2866,8 @@ msgstr "&Koks"
 msgid "&Listing format..."
 msgstr ""
 
-#, fuzzy
 msgid "S&ort order..."
-msgstr "&Kārtotā secībā..."
+msgstr ""
 
 msgid "&Filter..."
 msgstr "&Filtrs..."
@@ -2882,9 +2881,8 @@ msgstr "FT&P saite..."
 msgid "S&hell link..."
 msgstr ""
 
-#, fuzzy
 msgid "&SFTP link..."
-msgstr "FT&P saite..."
+msgstr ""
 
 msgid "Paneli&ze"
 msgstr ""
@@ -4431,16 +4429,3 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#, c-format
-#~ msgid "Password for \\\\%s\\%s"
-#~ msgstr "\\\\%s\\%s Parole"
-
-#~ msgid "Domain:"
-#~ msgstr "Domēns:"
-
-#~ msgid "Username:"
-#~ msgstr "Lietotājvārds:"
-
-#~ msgid "SM&B link..."
-#~ msgstr "SM&B saite..."

@@ -8,7 +8,7 @@
 # 666ac67b8cef279621e9f9f0d4368bd5_672ede5, 2018
 # 7ad110ef65cb8fea3e45887cffdf497a_28ca6f3 <3e77beb79c064caff61514bbc685d086_451299>, 2016
 # Nicolae Crefelean, 2014,2019
-# Simona Iacob <s@zp1.net>, 2021
+# Simona Iacob <s@zp1.net>, 2021-2022
 # Slava Zanko <slavazanko@gmail.com>, 2011
 # Sorin Sfirlogea, 2016
 # Vitalie Ciubotaru <vitalie@ciubotaru.tk>, 2015
@@ -16,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-13 13:31+0300\n"
-"PO-Revision-Date: 2021-07-26 20:16+0000\n"
-"Last-Translator: Transifex Bot <>\n"
+"POT-Creation-Date: 2022-03-20 11:48+0100\n"
+"PO-Revision-Date: 2010-12-29 10:19+0000\n"
+"Last-Translator: Simona Iacob <s@zp1.net>, 2021-2022\n"
 "Language-Team: Romanian (http://www.transifex.com/mc/mc/language/ro/)\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
@@ -1633,9 +1633,8 @@ msgstr ""
 "Un editor de text ușor de utilizat\n"
 "creat pentru Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2022 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2021 Fundația pentru Software Liber"
+msgstr ""
 
 msgid "About"
 msgstr "Despre"
@@ -3067,9 +3066,8 @@ msgstr "Arbore"
 msgid "&Listing format..."
 msgstr "formatul de  &listare "
 
-#, fuzzy
 msgid "S&ort order..."
-msgstr "&Ordinea sortării..."
+msgstr "S&ortează ordinea..."
 
 msgid "&Filter..."
 msgstr "&Filtru..."
@@ -3083,9 +3081,8 @@ msgstr "Conectare FT&P..."
 msgid "S&hell link..."
 msgstr "Conectare s&hell..."
 
-#, fuzzy
 msgid "&SFTP link..."
-msgstr "Conectare S&FTP..."
+msgstr "&SFTP legătură..."
 
 msgid "Paneli&ze"
 msgstr "Paneli&zare"
@@ -4026,9 +4023,9 @@ msgstr "Construit cu ncursesw %s\n"
 msgid "Built with ncursesw (unknown version)"
 msgstr "Construit cu ncursesw (versiune necunoscută)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with libssh2 %d.%d.%d\n"
-msgstr "Construit cu GLib %d.%d.%d\n"
+msgstr ""
 
 msgid "Virtual File Systems:"
 msgstr "Sistem virtual de fișiere:"
@@ -4385,6 +4382,8 @@ msgstr "sftp: %s"
 
 msgid "sftp: failed to convert remote host IP address into text form"
 msgstr ""
+"sftp: nu a reușit să convertească adresa IP a gazdei la distanță în format "
+"text"
 
 #, c-format
 msgid "sftp: making connection to %s"
@@ -4398,10 +4397,10 @@ msgid "sftp: connection to server failed: %s"
 msgstr "sftp: conectarea la server a eșuat: %s"
 
 msgid "sftp: found host key of unsupported type: RSA1"
-msgstr ""
+msgstr "sftp: a fost găsită o cheie gazdă de tip neacceptat: RSA1"
 
 msgid "sftp: unknown host key type:"
-msgstr ""
+msgstr "sftp: gazdă necunoscută tip cheie:"
 
 #, c-format
 msgid ""
@@ -4409,15 +4408,19 @@ msgid ""
 "%s (%s)\n"
 "to the list of known hosts."
 msgstr ""
+"Adăugat permanent\n"
+"%s (%s)\n"
+"la lista de gazde cunoscute."
 
 msgid "sftp: cannot get the remote host key"
-msgstr ""
+msgstr "sftp: nu se poate obține cheia gazdei la distanță"
 
 msgid "sftp: unsupported key type, can't check remote host key"
 msgstr ""
+"sftp: tip de cheie neacceptat, nu se poate verifica cheia gazdei la distanță"
 
 msgid "sftp: can't compute host key fingerprint hash"
-msgstr ""
+msgstr "sftp: nu poate calcula hash-ul de amprentă a cheii gazdă"
 
 #, c-format
 msgid ""
@@ -4428,6 +4431,12 @@ msgid ""
 "SHA1:%s.\n"
 "Do you want to add it to the list of known hosts and continue connecting?"
 msgstr ""
+"Autenticitatea găzduirii\n"
+"%s (%s)\n"
+"nu poate fi stabilită!\n"
+"%s hash-ul amprentei cheie este\n"
+"SHA1:%s.\n"
+"Doriți să o adăugați la lista de gazde cunoscute și să continuați conectarea?"
 
 #, c-format
 msgid ""
@@ -4437,9 +4446,14 @@ msgid ""
 "Are you sure you want to add it to the list of known hosts and continue "
 "connecting?"
 msgstr ""
+"%s (%s)\n"
+"se găsește în lista de gazde cunoscute, dar\n"
+"CHEILE NU SE POTRIVESC! ACESTA AR PUTEA FI UN ATAC MITM!\n"
+"Sunteți sigur că doriți să o adăugați la lista de gazde cunoscute și să "
+"continuați conectarea?"
 
 msgid "sftp: host key verification failed"
-msgstr ""
+msgstr "sftp: verificarea cheii gazdă a eșuat"
 
 #, c-format
 msgid "sftp: Enter passphrase for %s "
@@ -4456,7 +4470,7 @@ msgid "sftp: Password is empty."
 msgstr "sftp: Parola este goală."
 
 msgid "sftp: failure establishing SSH session"
-msgstr ""
+msgstr "sftp: eșec la stabilirea sesiunii SSH"
 
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: Nu există date de manipulare a citirii fișierului"
@@ -4685,55 +4699,3 @@ msgstr "Continuă de la început?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nu se poate aduce o copie locală a /ftp://some.host/editme.txt"
-
-#~ msgid "Set debug level"
-#~ msgstr "Nivelul de depanare"
-
-#~ msgid "<integer>"
-#~ msgstr "<integer>"
-
-#, c-format
-#~ msgid "Password for \\\\%s\\%s"
-#~ msgstr "Parola pentru \\\\%s\\%s"
-
-#~ msgid "Domain:"
-#~ msgstr "Domeniu:"
-
-#~ msgid "Username:"
-#~ msgstr "Nume proprietar:"
-
-#~ msgid "SMB authentication"
-#~ msgstr "Autentificare SMB"
-
-#~ msgid "SMB link to machine"
-#~ msgstr "Legătură SMB către mașina"
-
-#~ msgid "SM&B link..."
-#~ msgstr "Conectare SM&B..."
-
-#, c-format
-#~ msgid "reconnect to %s failed"
-#~ msgstr "reconectarea la %s a eșuat"
-
-#~ msgid "Authentication failed"
-#~ msgstr "Autentificarea a eșuat"
-
-#, c-format
-#~ msgid "Error %s creating directory %s"
-#~ msgstr "Eroare %s la crearea dosarului %s"
-
-#, c-format
-#~ msgid "Error %s removing directory %s"
-#~ msgstr "Eroare %s la ștergerea dosarului %s"
-
-#, c-format
-#~ msgid "%s opening remote file %s"
-#~ msgstr "%s se deschide fișierul de la distanță %s"
-
-#, c-format
-#~ msgid "%s removing remote file %s"
-#~ msgstr "%s se șterge fișierul de la distanță %s"
-
-#, c-format
-#~ msgid "%s renaming files\n"
-#~ msgstr "%s se redenumesc fișierele\n"

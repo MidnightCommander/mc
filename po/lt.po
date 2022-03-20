@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-13 13:31+0300\n"
-"PO-Revision-Date: 2021-07-26 20:16+0000\n"
-"Last-Translator: Transifex Bot <>\n"
+"POT-Creation-Date: 2022-03-20 11:48+0100\n"
+"PO-Revision-Date: 2010-12-29 10:19+0000\n"
+"Last-Translator: Mantas Kriaučiūnas Baltix <mantas@akl.lt>, 2020\n"
 "Language-Team: Lithuanian (http://www.transifex.com/mc/mc/language/lt/)\n"
 "Language: lt\n"
 "MIME-Version: 1.0\n"
@@ -2947,9 +2947,8 @@ msgstr "&Medis"
 msgid "&Listing format..."
 msgstr ""
 
-#, fuzzy
 msgid "S&ort order..."
-msgstr "Rik. t&varka..."
+msgstr ""
 
 msgid "&Filter..."
 msgstr "&Filtras..."
@@ -2963,9 +2962,8 @@ msgstr "FT&P ryšys..."
 msgid "S&hell link..."
 msgstr "Apli&nkos ryšys..."
 
-#, fuzzy
 msgid "&SFTP link..."
-msgstr "FT&P ryšys..."
+msgstr ""
 
 msgid "Paneli&ze"
 msgstr ""
@@ -4529,27 +4527,3 @@ msgstr "Tęsti nuo pradžios?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "Set debug level"
-#~ msgstr "Nurodo „debug“ lygį"
-
-#, c-format
-#~ msgid "Password for \\\\%s\\%s"
-#~ msgstr "\\\\%s\\%s slaptažodis"
-
-#~ msgid "Domain:"
-#~ msgstr "Domenas:"
-
-#~ msgid "Username:"
-#~ msgstr "Prisijungimo vardas:"
-
-#~ msgid "SM&B link..."
-#~ msgstr "SM&B ryšys..."
-
-#, c-format
-#~ msgid "Error %s creating directory %s"
-#~ msgstr "Klaida %s kuriant aplanką %s"
-
-#, c-format
-#~ msgid "Error %s removing directory %s"
-#~ msgstr "Klaida %s šalinant aplanką %s"

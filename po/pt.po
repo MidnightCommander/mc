@@ -5,16 +5,16 @@
 # Translators:
 # Gilberto J <2101458@my.ipleiria.pt>, 2012
 # Gilberto Jorge <gmj125@gmail.com>, 2012-2013
-# Gilberto Jorge <gmj125@gmail.com>, 2013-2021
+# Gilberto Jorge <gmj125@gmail.com>, 2013-2022
 # Peter J. Mello <admin@petermello.net>, 2021
 # Slava Zanko <slavazanko@gmail.com>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-13 13:31+0300\n"
-"PO-Revision-Date: 2021-07-26 23:56+0000\n"
-"Last-Translator: Gilberto Jorge <gmj125@gmail.com>\n"
+"POT-Creation-Date: 2022-03-20 11:48+0100\n"
+"PO-Revision-Date: 2010-12-29 10:19+0000\n"
+"Last-Translator: Gilberto Jorge <gmj125@gmail.com>, 2013-2022\n"
 "Language-Team: Portuguese (http://www.transifex.com/mc/mc/language/pt/)\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
@@ -1630,9 +1630,8 @@ msgstr ""
 "Um editor de texto amigo do utilizador\n"
 "escrito para o Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2022 the Free Software Foundation"
-msgstr "Direitos autorais © 1996-2021 a Fundação para o Software Livre"
+msgstr "Copyright (C) 1996-2022 the Free Software Foundation"
 
 msgid "About"
 msgstr "Acerca"
@@ -3066,9 +3065,8 @@ msgstr "&Árvore"
 msgid "&Listing format..."
 msgstr "Formato da &listagem..."
 
-#, fuzzy
 msgid "S&ort order..."
-msgstr "&Ordenação..."
+msgstr "&Ordem de classificação..."
 
 msgid "&Filter..."
 msgstr "&Filtro..."
@@ -3082,9 +3080,8 @@ msgstr "Ligação FT&P..."
 msgid "S&hell link..."
 msgstr "Ligação s&hell..."
 
-#, fuzzy
 msgid "&SFTP link..."
-msgstr "Ligação S&FTP..."
+msgstr "Ligação &SFTP..."
 
 msgid "Paneli&ze"
 msgstr "Em Pai&nel"
@@ -4021,9 +4018,9 @@ msgstr "Desenvolvido com ncursesw %s\n"
 msgid "Built with ncursesw (unknown version)"
 msgstr "Desenvolvido com ncursesw (versão desconhecida)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with libssh2 %d.%d.%d\n"
-msgstr "Compilado com GLib %d.%d.%d\n"
+msgstr "Compilado com libssh2 %d.%d.%d\n"
 
 msgid "Virtual File Systems:"
 msgstr "Sistemas de Ficheiros Virtuais:"
@@ -4693,55 +4690,3 @@ msgstr "Continuar do início?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Não é possível obter uma cópia local de /ftp://some.host/editme.txt"
-
-#~ msgid "Set debug level"
-#~ msgstr "Definir nível de depuração"
-
-#~ msgid "<integer>"
-#~ msgstr "<integer>"
-
-#, c-format
-#~ msgid "Password for \\\\%s\\%s"
-#~ msgstr "Senha para \\\\%s\\%s"
-
-#~ msgid "Domain:"
-#~ msgstr "Domínio:"
-
-#~ msgid "Username:"
-#~ msgstr "Utilizador:"
-
-#~ msgid "SMB authentication"
-#~ msgstr "Autenticação SMB"
-
-#~ msgid "SMB link to machine"
-#~ msgstr "Ligação SMB à máquina"
-
-#~ msgid "SM&B link..."
-#~ msgstr "Ligação SM&B..."
-
-#, c-format
-#~ msgid "reconnect to %s failed"
-#~ msgstr "reconexão a %s falhou"
-
-#~ msgid "Authentication failed"
-#~ msgstr "Falha de autenticação"
-
-#, c-format
-#~ msgid "Error %s creating directory %s"
-#~ msgstr "Erro %s ao criar diretório %s"
-
-#, c-format
-#~ msgid "Error %s removing directory %s"
-#~ msgstr "Erro %s ao remover diretório %s"
-
-#, c-format
-#~ msgid "%s opening remote file %s"
-#~ msgstr "%s ao abrir ficheiro remoto %s"
-
-#, c-format
-#~ msgid "%s removing remote file %s"
-#~ msgstr "%s ao remover ficheiro remoto %s"
-
-#, c-format
-#~ msgid "%s renaming files\n"
-#~ msgstr "%s ao renomear ficheiros\n"

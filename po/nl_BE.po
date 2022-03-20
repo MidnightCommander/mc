@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2021-08-01 19:02+0200\n"
-"PO-Revision-Date: 2021-07-26 20:16+0000\n"
-"Last-Translator: Transifex Bot <>\n"
+"POT-Creation-Date: 2022-03-13 13:31+0300\n"
+"PO-Revision-Date: 2010-12-29 10:19+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Dutch (Belgium) (http://www.transifex.com/mc/mc/language/nl_BE/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -629,12 +629,6 @@ msgid "Disables subshell support"
 msgstr ""
 
 msgid "Log ftp dialog to specified file"
-msgstr ""
-
-msgid "Set debug level"
-msgstr ""
-
-msgid "<integer>"
 msgstr ""
 
 msgid "Launches the file viewer on a file"
@@ -1542,7 +1536,7 @@ msgid ""
 "written for the Midnight Commander."
 msgstr ""
 
-msgid "Copyright (C) 1996-2021 the Free Software Foundation"
+msgid "Copyright (C) 1996-2022 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -2062,19 +2056,6 @@ msgid "Background jobs"
 msgstr ""
 
 #, c-format
-msgid "Password for \\\\%s\\%s"
-msgstr ""
-
-msgid "Domain:"
-msgstr ""
-
-msgid "Username:"
-msgstr ""
-
-msgid "SMB authentication"
-msgstr ""
-
-#, c-format
 msgid ""
 "Cannot chdir to \"%s\"\n"
 "%s"
@@ -2385,9 +2366,6 @@ msgid "SFTP to machine"
 msgstr ""
 
 msgid "Shell link to machine"
-msgstr ""
-
-msgid "SMB link to machine"
 msgstr ""
 
 msgid "Undelete files on an ext2 file system"
@@ -2884,7 +2862,7 @@ msgstr ""
 msgid "&Listing format..."
 msgstr ""
 
-msgid "&Sort order..."
+msgid "S&ort order..."
 msgstr ""
 
 msgid "&Filter..."
@@ -2899,10 +2877,7 @@ msgstr ""
 msgid "S&hell link..."
 msgstr ""
 
-msgid "S&FTP link..."
-msgstr ""
-
-msgid "SM&B link..."
+msgid "&SFTP link..."
 msgstr ""
 
 msgid "Paneli&ze"
@@ -3799,6 +3774,10 @@ msgstr ""
 msgid "Built with ncursesw (unknown version)"
 msgstr ""
 
+#, c-format
+msgid "Built with libssh2 %d.%d.%d\n"
+msgstr ""
+
 msgid "Virtual File Systems:"
 msgstr ""
 
@@ -4209,33 +4188,6 @@ msgid "sftp: (Ctrl-G break) Listing... %s"
 msgstr ""
 
 msgid "sftp: Listing done."
-msgstr ""
-
-#, c-format
-msgid "reconnect to %s failed"
-msgstr ""
-
-msgid "Authentication failed"
-msgstr ""
-
-#, c-format
-msgid "Error %s creating directory %s"
-msgstr ""
-
-#, c-format
-msgid "Error %s removing directory %s"
-msgstr ""
-
-#, c-format
-msgid "%s opening remote file %s"
-msgstr ""
-
-#, c-format
-msgid "%s removing remote file %s"
-msgstr ""
-
-#, c-format
-msgid "%s renaming files\n"
 msgstr ""
 
 #, c-format

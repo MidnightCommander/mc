@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-13 13:31+0300\n"
-"PO-Revision-Date: 2021-07-26 20:16+0000\n"
-"Last-Translator: Transifex Bot <>\n"
+"POT-Creation-Date: 2022-03-20 11:48+0100\n"
+"PO-Revision-Date: 2010-12-29 10:19+0000\n"
+"Last-Translator: Keith Bowes <zooplah@gmail.com>, 2011,2016,2018-2019\n"
 "Language-Team: Esperanto (http://www.transifex.com/mc/mc/language/eo/)\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
@@ -1624,9 +1624,8 @@ msgstr ""
 "Afabla tekstoredaktilo\n"
 "verkita por Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2022 the Free Software Foundation"
-msgstr "Kopirajto (C) 1996–2021 la Fondaĵo pri liberaj programoj"
+msgstr ""
 
 msgid "About"
 msgstr "Pri"
@@ -3059,7 +3058,6 @@ msgstr "&Arbo"
 msgid "&Listing format..."
 msgstr "&Listo-aranĝo..."
 
-#, fuzzy
 msgid "S&ort order..."
 msgstr "&Ordigi laŭ..."
 
@@ -3075,7 +3073,6 @@ msgstr "FT&P-ligilo..."
 msgid "S&hell link..."
 msgstr "Ŝ&ela ligilo..."
 
-#, fuzzy
 msgid "&SFTP link..."
 msgstr "&SFTP-ligilo..."
 
@@ -3513,14 +3510,14 @@ msgid "Links:      %d"
 msgstr "Ligiloj:        %d"
 
 msgid "Attributes: not supported"
-msgstr "Atributoj: ne komprenitaj"
+msgstr "Atributoj:      ne komprenataj"
 
 #, c-format
 msgid "Attributes: %s"
-msgstr "Atributoj: %s"
+msgstr "Atributoj:      %s"
 
 msgid "Attributes: unavailable"
-msgstr "Atributoj: nedisponeblaj"
+msgstr "Atributoj:      nedisponeblaj"
 
 #, c-format
 msgid "Mode:       %s (%04o)"
@@ -4013,9 +4010,9 @@ msgstr "Muntita kun ncursesw %s\n"
 msgid "Built with ncursesw (unknown version)"
 msgstr "Muntita kun ncursesw (nekonata eldono)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with libssh2 %d.%d.%d\n"
-msgstr "Muntita kun GLib %d.%d.%d\n"
+msgstr ""
 
 msgid "Virtual File Systems:"
 msgstr "Virtualaj dosiersistemoj:"
@@ -4370,7 +4367,7 @@ msgid "sftp: %s"
 msgstr "sftp: %s"
 
 msgid "sftp: failed to convert remote host IP address into text form"
-msgstr ""
+msgstr "sftp: malsukcesis konverti IP-adreson de fora retnodo al teksta formo"
 
 #, c-format
 msgid "sftp: making connection to %s"
@@ -4384,10 +4381,10 @@ msgid "sftp: connection to server failed: %s"
 msgstr "sftp: konekto al servilo fiaskis: %s"
 
 msgid "sftp: found host key of unsupported type: RSA1"
-msgstr ""
+msgstr "sftp: trovis retnodo-ŝlosilon kun nekomprenata tipo: RSA1"
 
 msgid "sftp: unknown host key type:"
-msgstr ""
+msgstr "sftp: nekonata retnodo-ŝlosila tipo"
 
 #, c-format
 msgid ""
@@ -4395,15 +4392,19 @@ msgid ""
 "%s (%s)\n"
 "to the list of known hosts."
 msgstr ""
+"Ĉiame aldonita\n"
+"%s (%s)\n"
+"al la listo de konatoj retnodoj."
 
 msgid "sftp: cannot get the remote host key"
-msgstr ""
+msgstr "sftp: ne eblas atingi la ŝlosilon de la fora retnodo"
 
 msgid "sftp: unsupported key type, can't check remote host key"
 msgstr ""
+"sftp: nekonata ŝlosilo-tipo, ne eblas konroli la ŝlosilon de la fora retnodo"
 
 msgid "sftp: can't compute host key fingerprint hash"
-msgstr ""
+msgstr "sftp: ne eblas komputi fingropreman hakaĵon de la retnoda ŝlosilo"
 
 #, c-format
 msgid ""
@@ -4414,6 +4415,11 @@ msgid ""
 "SHA1:%s.\n"
 "Do you want to add it to the list of known hosts and continue connecting?"
 msgstr ""
+"%s (%s)\n"
+"ne estas starigebla!\n"
+"Fingroprema hakaĵo de ŝlosilo %s estas\n"
+"SHA1:%s.\n"
+"Ĉu vi velas aldoni ĝin al la listo de konataj retnodoj kaj poste konektiĝi?"
 
 #, c-format
 msgid ""
@@ -4423,9 +4429,14 @@ msgid ""
 "Are you sure you want to add it to the list of known hosts and continue "
 "connecting?"
 msgstr ""
+"%s (%s)\n"
+"estas trovata en la listo de konataj retnodoj sed\n"
+"ŜLOSILOJ NE KONGRUAS! TIO EBLE ESTAS MEZULA ATAKO!\n"
+"Ĉu vi certas, ke vi volas aldoni ĝin al la listo de konataj retnodoj kaj "
+"poste konektiĝi?"
 
 msgid "sftp: host key verification failed"
-msgstr ""
+msgstr "sftp: malsukcesis aŭtentigo de la retnoda ŝlosilo"
 
 #, c-format
 msgid "sftp: Enter passphrase for %s "
@@ -4442,7 +4453,7 @@ msgid "sftp: Password is empty."
 msgstr "sftp: Pasvorto estas vaka."
 
 msgid "sftp: failure establishing SSH session"
-msgstr ""
+msgstr "sftp: malsukcesis starigi SSH-seancon"
 
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: Neniu dosiertraktila datumo ĉeestas por legi dosieron"
@@ -4671,55 +4682,3 @@ msgstr "Ĉu deiri de la komenco?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Ne eblas atingi lokan kopion de /ftp://some.host/editme.txt"
-
-#~ msgid "Set debug level"
-#~ msgstr "Specifi senerarigan nivelon"
-
-#~ msgid "<integer>"
-#~ msgstr "<entjero>"
-
-#, c-format
-#~ msgid "Password for \\\\%s\\%s"
-#~ msgstr "Pasvorto por \\\\%s\\%s"
-
-#~ msgid "Domain:"
-#~ msgstr "Domajno:"
-
-#~ msgid "Username:"
-#~ msgstr "Salutnomo:"
-
-#~ msgid "SMB authentication"
-#~ msgstr "SMB-atestado"
-
-#~ msgid "SMB link to machine"
-#~ msgstr "SMB-ligilo al servilo"
-
-#~ msgid "SM&B link..."
-#~ msgstr "SM&B-a ligilo..."
-
-#, c-format
-#~ msgid "reconnect to %s failed"
-#~ msgstr "rekonektiĝi al %s malsukcesis"
-
-#~ msgid "Authentication failed"
-#~ msgstr "Atestado malsukcesis"
-
-#, c-format
-#~ msgid "Error %s creating directory %s"
-#~ msgstr "Eraro %s dum krei dosierujon %s"
-
-#, c-format
-#~ msgid "Error %s removing directory %s"
-#~ msgstr "Eraro %s dum forigi dosierujon %s"
-
-#, c-format
-#~ msgid "%s opening remote file %s"
-#~ msgstr "%s malfermanta forajn dosierojn %s"
-
-#, c-format
-#~ msgid "%s removing remote file %s"
-#~ msgstr "%s dum forigi forajn dosierojn %s"
-
-#, c-format
-#~ msgid "%s renaming files\n"
-#~ msgstr "%s alinomanta dosierojn\n"

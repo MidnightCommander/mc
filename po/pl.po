@@ -3,16 +3,16 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# Piotr Drąg <piotrdrag@gmail.com>, 2011-2021
+# Piotr Drąg <piotrdrag@gmail.com>, 2011-2022
 # Slava Zanko <slavazanko@gmail.com>, 2011
 # Waldemar Stoczkowski, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-13 13:31+0300\n"
-"PO-Revision-Date: 2021-07-27 11:29+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2022-03-20 11:48+0100\n"
+"PO-Revision-Date: 2010-12-29 10:19+0000\n"
+"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>, 2011-2022\n"
 "Language-Team: Polish (http://www.transifex.com/mc/mc/language/pl/)\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -1634,9 +1634,8 @@ msgstr ""
 "Łatwy w obsłudze edytor tekstu,\n"
 "napisany dla programu Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2022 the Free Software Foundation"
-msgstr "Copyright © 1996-2021 Free Software Foundation"
+msgstr "Copyright © 1996-2022 Free Software Foundation"
 
 msgid "About"
 msgstr "O programie"
@@ -3069,7 +3068,6 @@ msgstr "&Drzewo"
 msgid "&Listing format..."
 msgstr "&Format wyświetlania…"
 
-#, fuzzy
 msgid "S&ort order..."
 msgstr "Porządek s&ortowania…"
 
@@ -3085,9 +3083,8 @@ msgstr "Połączenie FT&P…"
 msgid "S&hell link..."
 msgstr "Połączenie po po&włoce…"
 
-#, fuzzy
 msgid "&SFTP link..."
-msgstr "Połączenie S&FTP…"
+msgstr "Połączenie SF&TP…"
 
 msgid "Paneli&ze"
 msgstr "Filtru&j"
@@ -4033,9 +4030,9 @@ msgstr "Zbudowano za pomocą biblioteki ncursesw %s\n"
 msgid "Built with ncursesw (unknown version)"
 msgstr "Zbudowano za pomocą biblioteki ncursesw (nieznana wersja)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with libssh2 %d.%d.%d\n"
-msgstr "Zbudowano za pomocą biblioteki GLib %d.%d.%d\n"
+msgstr "Zbudowano za pomocą biblioteki libssh2 %d.%d.%d\n"
 
 msgid "Virtual File Systems:"
 msgstr "Wirtualne systemy plików:"
@@ -4708,55 +4705,3 @@ msgstr "Kontynuować od początku?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Nie można pobrać lokalnej kopii /ftp://jakiś.komputer/modyfikuj_mnie.txt"
-
-#~ msgid "Set debug level"
-#~ msgstr "Ustawia poziom debugowania"
-
-#~ msgid "<integer>"
-#~ msgstr "<liczba-całkowita>"
-
-#, c-format
-#~ msgid "Password for \\\\%s\\%s"
-#~ msgstr "Hasło dla \\\\%s\\%s"
-
-#~ msgid "Domain:"
-#~ msgstr "Domena:"
-
-#~ msgid "Username:"
-#~ msgstr "Nazwa użytkownika:"
-
-#~ msgid "SMB authentication"
-#~ msgstr "Uwierzytelnianie SMB"
-
-#~ msgid "SMB link to machine"
-#~ msgstr "Połączenie SMB z komputerem"
-
-#~ msgid "SM&B link..."
-#~ msgstr "Połączenie SM&B…"
-
-#, c-format
-#~ msgid "reconnect to %s failed"
-#~ msgstr "ponowne połączenie z %s się nie powiodło"
-
-#~ msgid "Authentication failed"
-#~ msgstr "Uwierzytelnienie się nie powiodło"
-
-#, c-format
-#~ msgid "Error %s creating directory %s"
-#~ msgstr "Błąd %s podczas tworzenia katalogu %s"
-
-#, c-format
-#~ msgid "Error %s removing directory %s"
-#~ msgstr "Błąd %s podczas usuwania katalogu %s"
-
-#, c-format
-#~ msgid "%s opening remote file %s"
-#~ msgstr "%s podczas otwierania zdalnego pliku %s"
-
-#, c-format
-#~ msgid "%s removing remote file %s"
-#~ msgstr "%s podczas usuwania zdalnego pliku %s"
-
-#, c-format
-#~ msgid "%s renaming files\n"
-#~ msgstr "%s podczas zmieniania nazw plików\n"

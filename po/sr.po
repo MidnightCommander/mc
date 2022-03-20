@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-13 13:31+0300\n"
-"PO-Revision-Date: 2021-07-26 20:16+0000\n"
-"Last-Translator: Transifex Bot <>\n"
+"POT-Creation-Date: 2022-03-20 11:48+0100\n"
+"PO-Revision-Date: 2010-12-29 10:19+0000\n"
+"Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
 "Language-Team: Serbian (http://www.transifex.com/mc/mc/language/sr/)\n"
 "Language: sr\n"
 "MIME-Version: 1.0\n"
@@ -3027,9 +3027,8 @@ msgstr "&Стабло"
 msgid "&Listing format..."
 msgstr ""
 
-#, fuzzy
 msgid "S&ort order..."
-msgstr "Редослед &ређања..."
+msgstr ""
 
 msgid "&Filter..."
 msgstr "&Пропусник..."
@@ -3043,9 +3042,8 @@ msgstr "&ФТП веза..."
 msgid "S&hell link..."
 msgstr "Веза &љуске..."
 
-#, fuzzy
 msgid "&SFTP link..."
-msgstr "&СФТП веза..."
+msgstr ""
 
 msgid "Paneli&ze"
 msgstr "Претвори &у окно"
@@ -3978,9 +3976,9 @@ msgstr ""
 msgid "Built with ncursesw (unknown version)"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with libssh2 %d.%d.%d\n"
-msgstr "Изграђено је Гбиблиотеком %d.%d.%d\n"
+msgstr ""
 
 msgid "Virtual File Systems:"
 msgstr "Виртуелни систем датотека:"
@@ -4628,52 +4626,3 @@ msgstr "Да наставим са почетка?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не могу да довучем месни примерак „/ftp://some.host/editme.txt“"
-
-#~ msgid "Set debug level"
-#~ msgstr "Подешава ниво прочишћавања"
-
-#, c-format
-#~ msgid "Password for \\\\%s\\%s"
-#~ msgstr "Лозинка за „\\\\%s\\%s“"
-
-#~ msgid "Domain:"
-#~ msgstr "Домен:"
-
-#~ msgid "Username:"
-#~ msgstr "Корисник:"
-
-#~ msgid "SMB authentication"
-#~ msgstr "СМБ потврђивање идентитета"
-
-#~ msgid "SMB link to machine"
-#~ msgstr "СМБ веза на рачунар"
-
-#~ msgid "SM&B link..."
-#~ msgstr "СМ&Б веза..."
-
-#, c-format
-#~ msgid "reconnect to %s failed"
-#~ msgstr "поновно повезивање на „%s“ није успело"
-
-#~ msgid "Authentication failed"
-#~ msgstr "Потврђивање идентитета није успело"
-
-#, c-format
-#~ msgid "Error %s creating directory %s"
-#~ msgstr "Грешка „%s“ прављења директоријума „%s“"
-
-#, c-format
-#~ msgid "Error %s removing directory %s"
-#~ msgstr "Грешка „%s“ уклањања директоријума „%s“"
-
-#, c-format
-#~ msgid "%s opening remote file %s"
-#~ msgstr "„%s“ отвара удаљену датотеку „%s“"
-
-#, c-format
-#~ msgid "%s removing remote file %s"
-#~ msgstr "„%s“ уклања удаљену датотеку „%s“"
-
-#, c-format
-#~ msgid "%s renaming files\n"
-#~ msgstr "„%s“ преименује датотеке\n"

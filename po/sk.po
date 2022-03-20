@@ -15,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-13 13:31+0300\n"
-"PO-Revision-Date: 2021-07-26 20:16+0000\n"
-"Last-Translator: Transifex Bot <>\n"
+"POT-Creation-Date: 2022-03-20 11:48+0100\n"
+"PO-Revision-Date: 2010-12-29 10:19+0000\n"
+"Last-Translator: hualahyja, 2019\n"
 "Language-Team: Slovak (http://www.transifex.com/mc/mc/language/sk/)\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
@@ -3049,9 +3049,8 @@ msgstr "&Strom"
 msgid "&Listing format..."
 msgstr "&Formát výpisu..."
 
-#, fuzzy
 msgid "S&ort order..."
-msgstr "&Poradie výpisu..."
+msgstr ""
 
 msgid "&Filter..."
 msgstr "&Filter..."
@@ -3065,9 +3064,8 @@ msgstr "&Pripojenie FTP..."
 msgid "S&hell link..."
 msgstr "Pripojenie s&hell..."
 
-#, fuzzy
 msgid "&SFTP link..."
-msgstr "Pripojenie S&FTP..."
+msgstr ""
 
 msgid "Paneli&ze"
 msgstr "Paneli&zovať"
@@ -4005,9 +4003,9 @@ msgstr ""
 msgid "Built with ncursesw (unknown version)"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with libssh2 %d.%d.%d\n"
-msgstr "Zostavené s GLib %d.%d.%d\n"
+msgstr ""
 
 msgid "Virtual File Systems:"
 msgstr "Virtuálne súborové systémy:"
@@ -4655,55 +4653,3 @@ msgstr "Pokračovať od začiatku?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nemožno stiahnuť lokálnu kópiu /ftp://some.host/editme.txt"
-
-#~ msgid "Set debug level"
-#~ msgstr "Nastaviť ladiacu úroveň"
-
-#~ msgid "<integer>"
-#~ msgstr "<integer>"
-
-#, c-format
-#~ msgid "Password for \\\\%s\\%s"
-#~ msgstr "Heslo pre \\\\%s\\%s"
-
-#~ msgid "Domain:"
-#~ msgstr "Doména:"
-
-#~ msgid "Username:"
-#~ msgstr "Meno použivateľa:"
-
-#~ msgid "SMB authentication"
-#~ msgstr "Autentifikácia SMB"
-
-#~ msgid "SMB link to machine"
-#~ msgstr "Pripojiť pomocou SMB"
-
-#~ msgid "SM&B link..."
-#~ msgstr "Pripojenie SM&B..."
-
-#, c-format
-#~ msgid "reconnect to %s failed"
-#~ msgstr "obnovenie pripojenia k %s zlyhalo"
-
-#~ msgid "Authentication failed"
-#~ msgstr "Autentifikácia zlyhala"
-
-#, c-format
-#~ msgid "Error %s creating directory %s"
-#~ msgstr "Chyba %s pri vytváraní adresára %s"
-
-#, c-format
-#~ msgid "Error %s removing directory %s"
-#~ msgstr "Chyba %s pri odstraňovaní adresára %s"
-
-#, c-format
-#~ msgid "%s opening remote file %s"
-#~ msgstr "%s pri otváraní vzdialeného súboru %s"
-
-#, c-format
-#~ msgid "%s removing remote file %s"
-#~ msgstr "%s pri odstraňovaní vzdialeného súboru %s"
-
-#, c-format
-#~ msgid "%s renaming files\n"
-#~ msgstr "%s pri premenovávaní súborov\n"

@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-13 13:31+0300\n"
-"PO-Revision-Date: 2021-08-08 12:32+0000\n"
-"Last-Translator: Priit Jõerüüt <transifex@joeruut.com>\n"
+"POT-Creation-Date: 2022-03-20 11:48+0100\n"
+"PO-Revision-Date: 2010-12-29 10:19+0000\n"
+"Last-Translator: Priit Jõerüüt <transifex@joeruut.com>, 2020-2021\n"
 "Language-Team: Estonian (http://www.transifex.com/mc/mc/language/et/)\n"
 "Language: et\n"
 "MIME-Version: 1.0\n"
@@ -1620,9 +1620,8 @@ msgstr ""
 "Kasutajasõbralik tekstitoimeti, mis\n"
 "on loodud Midnight Commanderile."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2022 the Free Software Foundation"
-msgstr "Autoriõigused (C) 1996-2021 the Free Software Foundation"
+msgstr ""
 
 msgid "About"
 msgstr "Programmist"
@@ -1942,7 +1941,7 @@ msgid "Skin:"
 msgstr "Nahk:"
 
 msgid "&Shadows"
-msgstr ""
+msgstr "&Varjud"
 
 msgid "Appearance"
 msgstr "Välimus"
@@ -3048,9 +3047,8 @@ msgstr "&Puu"
 msgid "&Listing format..."
 msgstr "&Loendi vormindus"
 
-#, fuzzy
 msgid "S&ort order..."
-msgstr "&Sortimine..."
+msgstr ""
 
 msgid "&Filter..."
 msgstr "Filtreeri&mine..."
@@ -3064,9 +3062,8 @@ msgstr "F&TP ühendus..."
 msgid "S&hell link..."
 msgstr "K&esta ühendus..."
 
-#, fuzzy
 msgid "&SFTP link..."
-msgstr "S&FTP ühendus..."
+msgstr ""
 
 msgid "Paneli&ze"
 msgstr "Pa&neelile"
@@ -3997,9 +3994,9 @@ msgstr "Kompileerimisel on kaasatud ncursesw %s\n"
 msgid "Built with ncursesw (unknown version)"
 msgstr "Kompileerimisel on kaasatud ncursesw (versioon pole teada)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with libssh2 %d.%d.%d\n"
-msgstr "Ehitatud GLib teegiga %d.%d.%d\n"
+msgstr ""
 
 msgid "Virtual File Systems:"
 msgstr "Virtuaalsed failisüsteemid:"
@@ -4654,55 +4651,3 @@ msgstr "Kas jätkata algusest?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kohaliku koopia hankimine failist /ftp://some.host/editme.txt nurjus"
-
-#~ msgid "Set debug level"
-#~ msgstr "Määra silumistase"
-
-#~ msgid "<integer>"
-#~ msgstr "<integer>"
-
-#, c-format
-#~ msgid "Password for \\\\%s\\%s"
-#~ msgstr "Salasõna teenusele \\\\%s\\%s"
-
-#~ msgid "Domain:"
-#~ msgstr "Domeen:"
-
-#~ msgid "Username:"
-#~ msgstr "Kasutaja:"
-
-#~ msgid "SMB authentication"
-#~ msgstr "SMB autentimine"
-
-#~ msgid "SMB link to machine"
-#~ msgstr "SMB ühendus masinaga"
-
-#~ msgid "SM&B link..."
-#~ msgstr "SM&B ühendus..."
-
-#, c-format
-#~ msgid "reconnect to %s failed"
-#~ msgstr "Ühenduse taastamine serveriga %s nurjus"
-
-#~ msgid "Authentication failed"
-#~ msgstr "Autentimine ebaõnnestus"
-
-#, c-format
-#~ msgid "Error %s creating directory %s"
-#~ msgstr "Viga %s kataloogi %s loomisel"
-
-#, c-format
-#~ msgid "Error %s removing directory %s"
-#~ msgstr "Viga %s kataloogi %s kustutamisel"
-
-#, c-format
-#~ msgid "%s opening remote file %s"
-#~ msgstr "%s avatakse kaugfaili %s"
-
-#, c-format
-#~ msgid "%s removing remote file %s"
-#~ msgstr "%s kustutatakse kaugfaili %s"
-
-#, c-format
-#~ msgid "%s renaming files\n"
-#~ msgstr "%s failide ümbernimetamine\n"

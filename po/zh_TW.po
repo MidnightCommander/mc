@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-13 13:31+0300\n"
-"PO-Revision-Date: 2021-07-26 20:16+0000\n"
-"Last-Translator: Transifex Bot <>\n"
+"POT-Creation-Date: 2022-03-20 11:48+0100\n"
+"PO-Revision-Date: 2010-12-29 10:19+0000\n"
+"Last-Translator: linwebs <thomas881114@gmail.com>, 2020\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/mc/mc/language/"
 "zh_TW/)\n"
 "Language: zh_TW\n"
@@ -2897,9 +2897,8 @@ msgstr "樹狀"
 msgid "&Listing format..."
 msgstr "列表格式..."
 
-#, fuzzy
 msgid "S&ort order..."
-msgstr "排列順序..."
+msgstr ""
 
 msgid "&Filter..."
 msgstr "過濾器..."
@@ -2913,9 +2912,8 @@ msgstr "連結 FTP..."
 msgid "S&hell link..."
 msgstr "連結 Shell..."
 
-#, fuzzy
 msgid "&SFTP link..."
-msgstr "連結 SFTP..."
+msgstr ""
 
 msgid "Paneli&ze"
 msgstr ""
@@ -4472,28 +4470,3 @@ msgstr "從頭開始?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "無法取得本地的副本在 ftp://some.host/editme.txt"
-
-#, c-format
-#~ msgid "Password for \\\\%s\\%s"
-#~ msgstr "\\\\%s\\%s 的密碼"
-
-#~ msgid "Domain:"
-#~ msgstr "網域: "
-
-#~ msgid "Username:"
-#~ msgstr "使用者名稱: "
-
-#~ msgid "SM&B link..."
-#~ msgstr "連結 SMB..."
-
-#, c-format
-#~ msgid "%s opening remote file %s"
-#~ msgstr "%s 開啟遠端檔案中 %s"
-
-#, c-format
-#~ msgid "%s removing remote file %s"
-#~ msgstr "%s 移除遠端檔案中 %s"
-
-#, c-format
-#~ msgid "%s renaming files\n"
-#~ msgstr "%s 重新命名檔案中\n"

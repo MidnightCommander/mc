@@ -14,9 +14,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-13 13:31+0300\n"
-"PO-Revision-Date: 2021-07-26 20:16+0000\n"
-"Last-Translator: Transifex Bot <>\n"
+"POT-Creation-Date: 2022-03-20 11:48+0100\n"
+"PO-Revision-Date: 2010-12-29 10:19+0000\n"
+"Last-Translator: Richard E. van der Luit <nippur@fedoraproject.org>, "
+"2012-2015,2017,2020\n"
 "Language-Team: Dutch (http://www.transifex.com/mc/mc/language/nl/)\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -3059,9 +3060,8 @@ msgstr "&Boom"
 msgid "&Listing format..."
 msgstr "&Lijstformaat..."
 
-#, fuzzy
 msgid "S&ort order..."
-msgstr "&Sorteervolgorde...     "
+msgstr ""
 
 msgid "&Filter..."
 msgstr "&Filter...              "
@@ -3075,9 +3075,8 @@ msgstr "FT&P-Verbinding...      "
 msgid "S&hell link..."
 msgstr "S&hellverbinding...    "
 
-#, fuzzy
 msgid "&SFTP link..."
-msgstr "S&FTP-link..."
+msgstr ""
 
 msgid "Paneli&ze"
 msgstr "Als vens&ter"
@@ -4010,9 +4009,9 @@ msgstr "Built met ncursesw %s\n"
 msgid "Built with ncursesw (unknown version)"
 msgstr "Built met ncursesw (onbekende versie)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with libssh2 %d.%d.%d\n"
-msgstr "Gebouwd met GLib %d.%d.%d\n"
+msgstr ""
 
 msgid "Virtual File Systems:"
 msgstr "Virtuele bestandssystemen (VFS):"
@@ -4652,55 +4651,3 @@ msgstr "Doorgaan vanaf het begin?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan geen lokale versie van /ftp://some.host/editme.txt ophalen"
-
-#~ msgid "Set debug level"
-#~ msgstr "Debugniveau instellen"
-
-#~ msgid "<integer>"
-#~ msgstr "<integer>"
-
-#, c-format
-#~ msgid "Password for \\\\%s\\%s"
-#~ msgstr "Wachtwoord voor \\\\%s\\%s"
-
-#~ msgid "Domain:"
-#~ msgstr "Domein:"
-
-#~ msgid "Username:"
-#~ msgstr " Gebruikersnaam:"
-
-#~ msgid "SMB authentication"
-#~ msgstr "SMB-authenticatie"
-
-#~ msgid "SMB link to machine"
-#~ msgstr "SMB-link naar machine"
-
-#~ msgid "SM&B link..."
-#~ msgstr "SM&B-Verbinding..."
-
-#, c-format
-#~ msgid "reconnect to %s failed"
-#~ msgstr "opnieuw verbinden met %s mislukt"
-
-#~ msgid "Authentication failed"
-#~ msgstr "Authenticatie mislukt"
-
-#, c-format
-#~ msgid "Error %s creating directory %s"
-#~ msgstr "Fout %s bij het maken van map %s"
-
-#, c-format
-#~ msgid "Error %s removing directory %s"
-#~ msgstr "Fout %s bij het verwijderen van map %s"
-
-#, c-format
-#~ msgid "%s opening remote file %s"
-#~ msgstr "Fout %s bij het openen van remote bestand %s"
-
-#, c-format
-#~ msgid "%s removing remote file %s"
-#~ msgstr "%s verwijderen remote bestand %s"
-
-#, c-format
-#~ msgid "%s renaming files\n"
-#~ msgstr "%s hernoemen bestanden\n"

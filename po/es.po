@@ -13,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-13 13:31+0300\n"
-"PO-Revision-Date: 2021-08-03 17:59+0000\n"
-"Last-Translator: David Martin <dhmartina@yahoo.es>\n"
+"POT-Creation-Date: 2022-03-20 11:48+0100\n"
+"PO-Revision-Date: 2010-12-29 10:19+0000\n"
+"Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
 "Language-Team: Spanish (http://www.transifex.com/mc/mc/language/es/)\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -1631,9 +1631,8 @@ msgstr ""
 "Un editor de texto amigable\n"
 "para Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2022 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2021 the Free Software Foundation"
+msgstr "Copyright (C) 1996-2022 the Free Software Foundation"
 
 msgid "About"
 msgstr "Acerca de..."
@@ -3067,7 +3066,6 @@ msgstr "ár&Bol"
 msgid "&Listing format..."
 msgstr "for&Mato de listado..."
 
-#, fuzzy
 msgid "S&ort order..."
 msgstr "&Ordenar..."
 
@@ -3083,7 +3081,6 @@ msgstr "conexión por FT&P..."
 msgid "S&hell link..."
 msgstr "conexión por SS&H..."
 
-#, fuzzy
 msgid "&SFTP link..."
 msgstr "conexión por SF&TP..."
 
@@ -4021,9 +4018,9 @@ msgstr "Incluye la biblioteca ncursesw %s\n"
 msgid "Built with ncursesw (unknown version)"
 msgstr "Incluye la biblioteca ncursesw (versión desconocida)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with libssh2 %d.%d.%d\n"
-msgstr "Incluye la biblioteca GLib %d.%d.%d\n"
+msgstr "Incluye la biblioteca libssh2 %d.%d.%d\n"
 
 msgid "Virtual File Systems:"
 msgstr "Sistemas de archivos virtuales:"
@@ -4691,55 +4688,3 @@ msgstr "¿Continuar desde el principio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Imposible obtener una copia local de /ftp://ese.equipo/edítame.txt"
-
-#~ msgid "Set debug level"
-#~ msgstr "Fijar el nivel de depuración"
-
-#~ msgid "<integer>"
-#~ msgstr "<número>"
-
-#, c-format
-#~ msgid "Password for \\\\%s\\%s"
-#~ msgstr "Contraseña para \\\\%s\\%s"
-
-#~ msgid "Domain:"
-#~ msgstr "Dominio:"
-
-#~ msgid "Username:"
-#~ msgstr "Usuario:"
-
-#~ msgid "SMB authentication"
-#~ msgstr "Autenticación SMB"
-
-#~ msgid "SMB link to machine"
-#~ msgstr "Conexión por SMB"
-
-#~ msgid "SM&B link..."
-#~ msgstr "conexión por &SMB..."
-
-#, c-format
-#~ msgid "reconnect to %s failed"
-#~ msgstr "falló la reconexión con %s"
-
-#~ msgid "Authentication failed"
-#~ msgstr "Autenticación fallida"
-
-#, c-format
-#~ msgid "Error %s creating directory %s"
-#~ msgstr "Error %s creando el directorio %s"
-
-#, c-format
-#~ msgid "Error %s removing directory %s"
-#~ msgstr "Error %s eliminando el directorio %s"
-
-#, c-format
-#~ msgid "%s opening remote file %s"
-#~ msgstr "%s abriendo archivo remoto %s"
-
-#, c-format
-#~ msgid "%s removing remote file %s"
-#~ msgstr "%s eliminando archivo remoto %s"
-
-#, c-format
-#~ msgid "%s renaming files\n"
-#~ msgstr "%s renombrando archivos\n"

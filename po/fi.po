@@ -4,16 +4,16 @@
 #
 # Translators:
 # Kimmo Kujansuu <mrkujansuu@gmail.com>, 2021
-# Nikolay Korotkiy <sikmir@gmail.com>, 2017-2019
+# Nikolay Korotkiy <sikmir@disroot.org>, 2017-2019
 # Slava Zanko <slavazanko@gmail.com>, 2011
 # hondakassi <kasvain@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-13 13:31+0300\n"
-"PO-Revision-Date: 2021-07-26 20:16+0000\n"
-"Last-Translator: Transifex Bot <>\n"
+"POT-Creation-Date: 2022-03-20 11:48+0100\n"
+"PO-Revision-Date: 2010-12-29 10:19+0000\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>, 2021\n"
 "Language-Team: Finnish (http://www.transifex.com/mc/mc/language/fi/)\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
@@ -1591,9 +1591,8 @@ msgstr ""
 "Midnight Commanderille kirjoitettu\n"
 "käyttäjäystävällinen tekstieditori."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2022 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2021 the Free Software Foundation"
+msgstr ""
 
 msgid "About"
 msgstr "Tietoja"
@@ -2969,9 +2968,8 @@ msgstr "&Puu"
 msgid "&Listing format..."
 msgstr "&Luettelomuoto..."
 
-#, fuzzy
 msgid "S&ort order..."
-msgstr "&Järjestys"
+msgstr ""
 
 msgid "&Filter..."
 msgstr "&Suodata..."
@@ -2985,9 +2983,8 @@ msgstr "FT&P linkki..."
 msgid "S&hell link..."
 msgstr "S&hell linkki..."
 
-#, fuzzy
 msgid "&SFTP link..."
-msgstr "S&FTP linkki..."
+msgstr ""
 
 msgid "Paneli&ze"
 msgstr ""
@@ -3883,9 +3880,9 @@ msgstr " Luotu ncursesw %s\n"
 msgid "Built with ncursesw (unknown version)"
 msgstr "Luotu ncursesw (tuntematon versio)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with libssh2 %d.%d.%d\n"
-msgstr " Luotu ncurses %s\n"
+msgstr ""
 
 msgid "Virtual File Systems:"
 msgstr ""
@@ -4497,52 +4494,3 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "Set debug level"
-#~ msgstr "Aseta debug-taso"
-
-#~ msgid "<integer>"
-#~ msgstr "<integer>"
-
-#, c-format
-#~ msgid "Password for \\\\%s\\%s"
-#~ msgstr "Salasana käyttäjälle \\\\%s\\%s"
-
-#~ msgid "Domain:"
-#~ msgstr "Verkkotunnus:"
-
-#~ msgid "Username:"
-#~ msgstr "Käyttäjätunnus:"
-
-#~ msgid "SMB authentication"
-#~ msgstr "SMB-todennus"
-
-#~ msgid "SM&B link..."
-#~ msgstr "SM&B linkki..."
-
-#, c-format
-#~ msgid "reconnect to %s failed"
-#~ msgstr "uudelleenyritys kohteeseen %s epäonnistui"
-
-#~ msgid "Authentication failed"
-#~ msgstr "Authenkaatio epäonnistui"
-
-#, c-format
-#~ msgid "Error %s creating directory %s"
-#~ msgstr "Virhe %s luotaessa kansiota %s"
-
-#, c-format
-#~ msgid "Error %s removing directory %s"
-#~ msgstr "Virhe %s poistaessa hakemistoa %s"
-
-#, c-format
-#~ msgid "%s opening remote file %s"
-#~ msgstr "%s avautuva palvelintiedosto %s"
-
-#, c-format
-#~ msgid "%s removing remote file %s"
-#~ msgstr "%s poistaa palvelintiedostoa %s"
-
-#, c-format
-#~ msgid "%s renaming files\n"
-#~ msgstr "%s uudelleennimeää tiedostoja\n"

@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-13 13:31+0300\n"
-"PO-Revision-Date: 2021-07-26 20:16+0000\n"
-"Last-Translator: Transifex Bot <>\n"
+"POT-Creation-Date: 2022-03-20 11:48+0100\n"
+"PO-Revision-Date: 2010-12-29 10:19+0000\n"
+"Last-Translator: Martijn Dekker <mcdutchie@hotmail.com>, 2012,2017\n"
 "Language-Team: Interlingua (http://www.transifex.com/mc/mc/language/ia/)\n"
 "Language: ia\n"
 "MIME-Version: 1.0\n"
@@ -2897,9 +2897,8 @@ msgstr "Ligamine FT&P..."
 msgid "S&hell link..."
 msgstr ""
 
-#, fuzzy
 msgid "&SFTP link..."
-msgstr "Ligamine FT&P..."
+msgstr ""
 
 msgid "Paneli&ze"
 msgstr ""
@@ -4434,43 +4433,3 @@ msgstr "Continuar ab initio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "Set debug level"
-#~ msgstr "Fixar le nivello de recerca de faltas"
-
-#, c-format
-#~ msgid "Password for \\\\%s\\%s"
-#~ msgstr "Contrasigno pro \\\\%s\\%s"
-
-#~ msgid "Domain:"
-#~ msgstr "Dominio:"
-
-#~ msgid "Username:"
-#~ msgstr "Nomine de usator:"
-
-#, c-format
-#~ msgid "reconnect to %s failed"
-#~ msgstr "reconnexion a %s fallite"
-
-#~ msgid "Authentication failed"
-#~ msgstr "Authentication fallite"
-
-#, c-format
-#~ msgid "Error %s creating directory %s"
-#~ msgstr "Error %s durante le creation del directorio %s"
-
-#, c-format
-#~ msgid "Error %s removing directory %s"
-#~ msgstr "Error %s durante le remotion del directorio %s"
-
-#, c-format
-#~ msgid "%s opening remote file %s"
-#~ msgstr "%s aperi file remote %s"
-
-#, c-format
-#~ msgid "%s removing remote file %s"
-#~ msgstr "%s remove file remote %s"
-
-#, c-format
-#~ msgid "%s renaming files\n"
-#~ msgstr "%s renomina files\n"

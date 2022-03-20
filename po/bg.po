@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-13 13:31+0300\n"
-"PO-Revision-Date: 2021-07-26 20:16+0000\n"
-"Last-Translator: Transifex Bot <>\n"
+"POT-Creation-Date: 2022-03-20 11:48+0100\n"
+"PO-Revision-Date: 2010-12-29 10:19+0000\n"
+"Last-Translator: Myselus, 2015-2017\n"
 "Language-Team: Bulgarian (http://www.transifex.com/mc/mc/language/bg/)\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
@@ -3032,9 +3032,8 @@ msgstr "Дърво"
 msgid "&Listing format..."
 msgstr "&Формат на списък"
 
-#, fuzzy
 msgid "S&ort order..."
-msgstr "Ред на сортиране..."
+msgstr ""
 
 msgid "&Filter..."
 msgstr "Филтър..."
@@ -3048,9 +3047,8 @@ msgstr "FTP връзка..."
 msgid "S&hell link..."
 msgstr "S&hell връзка..."
 
-#, fuzzy
 msgid "&SFTP link..."
-msgstr "S&FTP връзка..."
+msgstr ""
 
 msgid "Paneli&ze"
 msgstr "Покажи в панел"
@@ -3980,9 +3978,9 @@ msgstr ""
 msgid "Built with ncursesw (unknown version)"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with libssh2 %d.%d.%d\n"
-msgstr "Компилиран с GLib %d.%d.%d\n"
+msgstr ""
 
 msgid "Virtual File Systems:"
 msgstr "Виртуални файлови системи:"
@@ -4630,52 +4628,3 @@ msgstr "Да се продължи ли от началото?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не може да се изтегли локално копие на /ftp://some.host/editme.txt"
-
-#~ msgid "Set debug level"
-#~ msgstr "Задаване на ниво на дебъгване"
-
-#, c-format
-#~ msgid "Password for \\\\%s\\%s"
-#~ msgstr "Парола за \\\\%s\\%s"
-
-#~ msgid "Domain:"
-#~ msgstr "Домейн:"
-
-#~ msgid "Username:"
-#~ msgstr "Потребителско име:"
-
-#~ msgid "SMB authentication"
-#~ msgstr "SMB удостоверяване"
-
-#~ msgid "SMB link to machine"
-#~ msgstr "SMB връзка към машина"
-
-#~ msgid "SM&B link..."
-#~ msgstr "SMB връзка..."
-
-#, c-format
-#~ msgid "reconnect to %s failed"
-#~ msgstr "повторната връзка към %s беше неуспешна"
-
-#~ msgid "Authentication failed"
-#~ msgstr "Грешка при автентикацията"
-
-#, c-format
-#~ msgid "Error %s creating directory %s"
-#~ msgstr "Грешка %s при създаването на директория %s"
-
-#, c-format
-#~ msgid "Error %s removing directory %s"
-#~ msgstr "Грешка %s при изтриването на директория %s"
-
-#, c-format
-#~ msgid "%s opening remote file %s"
-#~ msgstr "%s отваряне на не-локален файл %s"
-
-#, c-format
-#~ msgid "%s removing remote file %s"
-#~ msgstr "%s изтриване на не-локален файл %s"
-
-#, c-format
-#~ msgid "%s renaming files\n"
-#~ msgstr "%s преименуване на файлове\n"

@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-13 13:31+0300\n"
-"PO-Revision-Date: 2021-07-26 20:16+0000\n"
-"Last-Translator: Transifex Bot <>\n"
+"POT-Creation-Date: 2022-03-20 11:48+0100\n"
+"PO-Revision-Date: 2010-12-29 10:19+0000\n"
+"Last-Translator: András Tőrös <toros.andras04@gmail.com>, 2020\n"
 "Language-Team: Hungarian (http://www.transifex.com/mc/mc/language/hu/)\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
@@ -3031,9 +3031,8 @@ msgstr "Köny&vtárfa"
 msgid "&Listing format..."
 msgstr ""
 
-#, fuzzy
 msgid "S&ort order..."
-msgstr "&Rendezési mód..."
+msgstr ""
 
 msgid "&Filter..."
 msgstr "&Szűrő..."
@@ -3047,9 +3046,8 @@ msgstr "&FTP-kapcsolat..."
 msgid "S&hell link..."
 msgstr "Sh&ell-kapcsolat..."
 
-#, fuzzy
 msgid "&SFTP link..."
-msgstr "S&FTP link..."
+msgstr ""
 
 msgid "Paneli&ze"
 msgstr "Panelra helye&zés"
@@ -3980,9 +3978,9 @@ msgstr ""
 msgid "Built with ncursesw (unknown version)"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with libssh2 %d.%d.%d\n"
-msgstr "GLib %d.%d.%d verzióval fordíva\n"
+msgstr ""
 
 msgid "Virtual File Systems:"
 msgstr "Virtuális fájlrendszerek:"
@@ -4626,52 +4624,3 @@ msgstr "Folytatás az elejéről?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nem sikerült behozni /ftp://some.host/editme.txt helyi másolatát"
-
-#~ msgid "Set debug level"
-#~ msgstr "Nyomkövetési (debug) szint beállítása"
-
-#, c-format
-#~ msgid "Password for \\\\%s\\%s"
-#~ msgstr "\\\\%s\\%s jelszava:"
-
-#~ msgid "Domain:"
-#~ msgstr "Tartomány:"
-
-#~ msgid "Username:"
-#~ msgstr "Felhasználónév:"
-
-#~ msgid "SMB authentication"
-#~ msgstr "SMB hitelesítés"
-
-#~ msgid "SMB link to machine"
-#~ msgstr "SMB-kapcsolat"
-
-#~ msgid "SM&B link..."
-#~ msgstr "SM&B-kapcsolat..."
-
-#, c-format
-#~ msgid "reconnect to %s failed"
-#~ msgstr "%s: újrakapcsolódás sikertelen"
-
-#~ msgid "Authentication failed"
-#~ msgstr "Azonosítás sikertelen"
-
-#, c-format
-#~ msgid "Error %s creating directory %s"
-#~ msgstr "%s könyvtár létrehozása: %s hiba"
-
-#, c-format
-#~ msgid "Error %s removing directory %s"
-#~ msgstr "%s könyvtár törlése: %s hiba"
-
-#, c-format
-#~ msgid "%s opening remote file %s"
-#~ msgstr "%s távoli fájl megnyitása: %s"
-
-#, c-format
-#~ msgid "%s removing remote file %s"
-#~ msgstr "%s távoli fájl törlése: %s"
-
-#, c-format
-#~ msgid "%s renaming files\n"
-#~ msgstr "%s: a fájlok átnevezésekor\n"

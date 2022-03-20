@@ -13,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-13 13:31+0300\n"
-"PO-Revision-Date: 2021-07-26 20:16+0000\n"
-"Last-Translator: Transifex Bot <>\n"
+"POT-Creation-Date: 2022-03-20 11:48+0100\n"
+"PO-Revision-Date: 2010-12-29 10:19+0000\n"
+"Last-Translator: Takuro Onoue <kusanaginoturugi@gmail.com>, 2021\n"
 "Language-Team: Japanese (http://www.transifex.com/mc/mc/language/ja/)\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
@@ -2882,9 +2882,8 @@ msgstr "ツリー(&T)"
 msgid "&Listing format..."
 msgstr ""
 
-#, fuzzy
 msgid "S&ort order..."
-msgstr "整列順(&S)..."
+msgstr ""
 
 msgid "&Filter..."
 msgstr "フィルタ(&F)..."
@@ -2898,9 +2897,8 @@ msgstr "FTP リンク(&P)..."
 msgid "S&hell link..."
 msgstr ""
 
-#, fuzzy
 msgid "&SFTP link..."
-msgstr "FTP リンク(&P)..."
+msgstr ""
 
 msgid "Paneli&ze"
 msgstr ""
@@ -4438,20 +4436,3 @@ msgstr "初めから続けますか?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#, c-format
-#~ msgid "Password for \\\\%s\\%s"
-#~ msgstr "\\\\%s\\%sのパスワード"
-
-#~ msgid "Domain:"
-#~ msgstr "ドメイン:"
-
-#~ msgid "Username:"
-#~ msgstr "ユーザ名:"
-
-#~ msgid "SM&B link..."
-#~ msgstr "SMBリンク(&B)..."
-
-#, c-format
-#~ msgid "reconnect to %s failed"
-#~ msgstr "%s への再接続に失敗しました"

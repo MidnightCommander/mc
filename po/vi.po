@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-13 13:31+0300\n"
-"PO-Revision-Date: 2021-07-26 20:16+0000\n"
-"Last-Translator: Transifex Bot <>\n"
+"POT-Creation-Date: 2022-03-20 11:48+0100\n"
+"PO-Revision-Date: 2010-12-29 10:19+0000\n"
+"Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
 "Language-Team: Vietnamese (http://www.transifex.com/mc/mc/language/vi/)\n"
 "Language: vi\n"
 "MIME-Version: 1.0\n"
@@ -2864,9 +2864,8 @@ msgstr "&Cây thư mục"
 msgid "&Listing format..."
 msgstr ""
 
-#, fuzzy
 msgid "S&ort order..."
-msgstr "t&Hứ tự sắp xếp..."
+msgstr ""
 
 msgid "&Filter..."
 msgstr "&Lọc tập tin..."
@@ -2880,9 +2879,8 @@ msgstr "kết nối &FTP..."
 msgid "S&hell link..."
 msgstr "kết nối &Shell..."
 
-#, fuzzy
 msgid "&SFTP link..."
-msgstr "kết nối &FTP..."
+msgstr ""
 
 msgid "Paneli&ze"
 msgstr ""
@@ -4420,19 +4418,3 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "Set debug level"
-#~ msgstr "Đặt mức độ tìm sửa lỗi (debug)"
-
-#, c-format
-#~ msgid "Password for \\\\%s\\%s"
-#~ msgstr "Mật khẩu cho \\\\%s\\%s"
-
-#~ msgid "Domain:"
-#~ msgstr "Miền (domain):"
-
-#~ msgid "Username:"
-#~ msgstr "Tên người dùng:"
-
-#~ msgid "SM&B link..."
-#~ msgstr "kết nối SM&B..."

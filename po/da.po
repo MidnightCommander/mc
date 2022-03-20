@@ -13,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-13 13:31+0300\n"
-"PO-Revision-Date: 2021-07-26 20:16+0000\n"
-"Last-Translator: Transifex Bot <>\n"
+"POT-Creation-Date: 2022-03-20 11:48+0100\n"
+"PO-Revision-Date: 2010-12-29 10:19+0000\n"
+"Last-Translator: scootergrisen, 2018-2020\n"
 "Language-Team: Danish (http://www.transifex.com/mc/mc/language/da/)\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
@@ -3060,9 +3060,8 @@ msgstr "&Træ"
 msgid "&Listing format..."
 msgstr "&Listeformat..."
 
-#, fuzzy
 msgid "S&ort order..."
-msgstr "&Sorteringsrækkefølge..."
+msgstr ""
 
 msgid "&Filter..."
 msgstr "&Filter..."
@@ -3076,9 +3075,8 @@ msgstr "FT&P-henvisning..."
 msgid "S&hell link..."
 msgstr "S&kalhenvisning..."
 
-#, fuzzy
 msgid "&SFTP link..."
-msgstr "S&FTP-link..."
+msgstr ""
 
 msgid "Paneli&ze"
 msgstr "Paneli&sér"
@@ -4010,9 +4008,9 @@ msgstr "Bygget med ncursesw %s\n"
 msgid "Built with ncursesw (unknown version)"
 msgstr "Bygget med ncursesw (ukendt version)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with libssh2 %d.%d.%d\n"
-msgstr "Kompileret med GLib %d.%d.%d\n"
+msgstr ""
 
 msgid "Virtual File Systems:"
 msgstr "Virtuelle filsystemer:"
@@ -4660,55 +4658,3 @@ msgstr "Fortsæt fra begyndelsen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan ikke hente en lokal kopi af /ftp://en.vært/editme.txt"
-
-#~ msgid "Set debug level"
-#~ msgstr "Angiv fejlsøgningsniveau"
-
-#~ msgid "<integer>"
-#~ msgstr "<heltal>"
-
-#, c-format
-#~ msgid "Password for \\\\%s\\%s"
-#~ msgstr "Adgangskode for \\\\%s\\%s"
-
-#~ msgid "Domain:"
-#~ msgstr "Domæne:"
-
-#~ msgid "Username:"
-#~ msgstr "Brugernavn:"
-
-#~ msgid "SMB authentication"
-#~ msgstr "SMB-godkendelse"
-
-#~ msgid "SMB link to machine"
-#~ msgstr "SMB-henvisning til maskine"
-
-#~ msgid "SM&B link..."
-#~ msgstr "SM&B-henvisning..."
-
-#, c-format
-#~ msgid "reconnect to %s failed"
-#~ msgstr "gentilkobling til %s fejlede"
-
-#~ msgid "Authentication failed"
-#~ msgstr "Godkendelse fejlede"
-
-#, c-format
-#~ msgid "Error %s creating directory %s"
-#~ msgstr "Fejl %s under oprettelse af mappe %s"
-
-#, c-format
-#~ msgid "Error %s removing directory %s"
-#~ msgstr "Fejl %s under fjernelse af mappe %s"
-
-#, c-format
-#~ msgid "%s opening remote file %s"
-#~ msgstr "%s åbner ekstern fil %s"
-
-#, c-format
-#~ msgid "%s removing remote file %s"
-#~ msgstr "%s fjerner ekstern fil %s"
-
-#, c-format
-#~ msgid "%s renaming files\n"
-#~ msgstr "%s omdøber filer\n"

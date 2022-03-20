@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
+# Gurbuzguven <6mehmet6@gmail.com>, 2021
 # Jacques Yip <cong-ye@163.com>, 2017
 # Jake Li <gnozil@gmail.com>, 2012
 # Kenneth Cheung <zjhken01@163.com>, 2018
@@ -17,9 +18,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-13 13:31+0300\n"
-"PO-Revision-Date: 2021-07-26 20:16+0000\n"
-"Last-Translator: Transifex Bot <>\n"
+"POT-Creation-Date: 2022-03-20 11:48+0100\n"
+"PO-Revision-Date: 2010-12-29 10:19+0000\n"
+"Last-Translator: Gurbuzguven <6mehmet6@gmail.com>, 2021\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/mc/mc/language/"
 "zh_CN/)\n"
 "Language: zh_CN\n"
@@ -1297,7 +1298,7 @@ msgid "&Close"
 msgstr "关闭(&C)"
 
 msgid "&History..."
-msgstr ""
+msgstr "＆历史记录..."
 
 msgid "Save &as..."
 msgstr "另存为(&A)..."
@@ -1786,6 +1787,8 @@ msgid ""
 "Not an xterm or Linux console;\n"
 "the subshell cannot be toggled."
 msgstr ""
+"不是一个 xterm 或 Linux 控制台；\n"
+"无法切换subshell窗口。"
 
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "输入 'exit' 返回 Midnight Commander"
@@ -3044,9 +3047,8 @@ msgstr "树(&T)"
 msgid "&Listing format..."
 msgstr "列表格式(&L)…"
 
-#, fuzzy
 msgid "S&ort order..."
-msgstr "排序(&S)..."
+msgstr ""
 
 msgid "&Filter..."
 msgstr "过滤(&F)..."
@@ -3060,9 +3062,8 @@ msgstr "FTP 链接(&P)..."
 msgid "S&hell link..."
 msgstr "S&hell 链接..."
 
-#, fuzzy
 msgid "&SFTP link..."
-msgstr "SFTP 链接(&S)..."
+msgstr ""
 
 msgid "Paneli&ze"
 msgstr "面板化(&Z)"
@@ -3986,9 +3987,9 @@ msgstr ""
 msgid "Built with ncursesw (unknown version)"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with libssh2 %d.%d.%d\n"
-msgstr "编译使用了 GLib %d.%d.%d\n"
+msgstr ""
 
 msgid "Virtual File Systems:"
 msgstr "虚拟文件系统: "
@@ -4636,55 +4637,3 @@ msgstr "从头继续搜索?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "无法获取 /ftp://some.host/editme.txt 的本地副本"
-
-#~ msgid "Set debug level"
-#~ msgstr "设置调试级别"
-
-#~ msgid "<integer>"
-#~ msgstr "<integer>"
-
-#, c-format
-#~ msgid "Password for \\\\%s\\%s"
-#~ msgstr "\\\\%s\\%s 的密码"
-
-#~ msgid "Domain:"
-#~ msgstr "域: "
-
-#~ msgid "Username:"
-#~ msgstr "用户名: "
-
-#~ msgid "SMB authentication"
-#~ msgstr "SMB 认证"
-
-#~ msgid "SMB link to machine"
-#~ msgstr "SMB 链接到主机"
-
-#~ msgid "SM&B link..."
-#~ msgstr "SMB 链接(&B)..."
-
-#, c-format
-#~ msgid "reconnect to %s failed"
-#~ msgstr "重新连接 %s 失败"
-
-#~ msgid "Authentication failed"
-#~ msgstr "验证失败"
-
-#, c-format
-#~ msgid "Error %s creating directory %s"
-#~ msgstr "创建目录 %s 时出错 %s"
-
-#, c-format
-#~ msgid "Error %s removing directory %s"
-#~ msgstr "删除目录 %s 时出错 %s"
-
-#, c-format
-#~ msgid "%s opening remote file %s"
-#~ msgstr "%s 正在打开远程文件 %s"
-
-#, c-format
-#~ msgid "%s removing remote file %s"
-#~ msgstr "%s 正在删除远程文件 %s"
-
-#, c-format
-#~ msgid "%s renaming files\n"
-#~ msgstr "%s 正在重命名文件\n"

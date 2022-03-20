@@ -13,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-13 13:31+0300\n"
-"PO-Revision-Date: 2021-07-26 20:16+0000\n"
-"Last-Translator: Transifex Bot <>\n"
+"POT-Creation-Date: 2022-03-20 11:48+0100\n"
+"PO-Revision-Date: 2010-12-29 10:19+0000\n"
+"Last-Translator: Mauro Hemerly Gazzani <mauro.hemerly@gmail.com>, 2017\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/mc/mc/language/"
 "pt_BR/)\n"
 "Language: pt_BR\n"
@@ -2980,9 +2980,8 @@ msgstr "&Árvore"
 msgid "&Listing format..."
 msgstr ""
 
-#, fuzzy
 msgid "S&ort order..."
-msgstr "&Ordem..."
+msgstr ""
 
 msgid "&Filter..."
 msgstr "&Filtro..."
@@ -2996,9 +2995,8 @@ msgstr "Ligação FT&P..."
 msgid "S&hell link..."
 msgstr ""
 
-#, fuzzy
 msgid "&SFTP link..."
-msgstr "Ligação FT&P..."
+msgstr ""
 
 msgid "Paneli&ze"
 msgstr ""
@@ -4551,46 +4549,3 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "Set debug level"
-#~ msgstr "Definir nível de depuração"
-
-#, c-format
-#~ msgid "Password for \\\\%s\\%s"
-#~ msgstr "Senha para \\\\%s\\%s"
-
-#~ msgid "Domain:"
-#~ msgstr "Domínio:"
-
-#~ msgid "Username:"
-#~ msgstr " Nome de usuário:"
-
-#~ msgid "SM&B link..."
-#~ msgstr "Ligação SM&B..."
-
-#, c-format
-#~ msgid "reconnect to %s failed"
-#~ msgstr "reconectar a %s falhou"
-
-#~ msgid "Authentication failed"
-#~ msgstr "Falha na autenticação"
-
-#, c-format
-#~ msgid "Error %s creating directory %s"
-#~ msgstr "Erro %s criando diretório %s"
-
-#, c-format
-#~ msgid "Error %s removing directory %s"
-#~ msgstr "Erro %s removendo diretório %s"
-
-#, c-format
-#~ msgid "%s opening remote file %s"
-#~ msgstr "%s abrindo arquivo remoto %s"
-
-#, c-format
-#~ msgid "%s removing remote file %s"
-#~ msgstr "%s removendo arquivo remoto %s"
-
-#, c-format
-#~ msgid "%s renaming files\n"
-#~ msgstr "%s renomeando arquivos\n"

@@ -4,13 +4,14 @@
 #
 # Translators:
 # George Machitidze <giomac@gmail.com>, 2012,2014
+# NorwayFun <temuri.doghonadze@gmail.com>, 2022
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-13 13:31+0300\n"
-"PO-Revision-Date: 2021-07-26 20:16+0000\n"
-"Last-Translator: Transifex Bot <>\n"
+"POT-Creation-Date: 2022-03-20 11:48+0100\n"
+"PO-Revision-Date: 2010-12-29 10:19+0000\n"
+"Last-Translator: NorwayFun <temuri.doghonadze@gmail.com>, 2022\n"
 "Language-Team: Georgian (http://www.transifex.com/mc/mc/language/ka/)\n"
 "Language: ka\n"
 "MIME-Version: 1.0\n"
@@ -67,10 +68,10 @@ msgstr "ბლოკირების &იგნორირება"
 
 #, c-format
 msgid "Cannot create %s directory"
-msgstr ""
+msgstr "საქაღალდე %s-ის შექმნა შეუძლებელია"
 
 msgid "FATAL: not a directory:"
-msgstr ""
+msgstr "შეცდომა: არ წარმოადგენს საქაღალდეს"
 
 msgid ""
 "Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
@@ -78,7 +79,7 @@ msgid ""
 msgstr ""
 
 msgid "Invalid character"
-msgstr ""
+msgstr "არასწორი სიმბოლო"
 
 msgid "Unmatched quotes character"
 msgstr ""
@@ -156,67 +157,67 @@ msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
 msgstr ""
 
 msgid "Escape"
-msgstr ""
+msgstr "ღილაკი Esc"
 
 msgid "Function key 1"
-msgstr ""
+msgstr "ღილაკი F1"
 
 msgid "Function key 2"
-msgstr ""
+msgstr "ღილაკი F2"
 
 msgid "Function key 3"
-msgstr ""
+msgstr "ღილაკი F3"
 
 msgid "Function key 4"
-msgstr ""
+msgstr "ღილაკი F4"
 
 msgid "Function key 5"
-msgstr ""
+msgstr "ღილაკი F5"
 
 msgid "Function key 6"
-msgstr ""
+msgstr "ღილაკი F6"
 
 msgid "Function key 7"
-msgstr ""
+msgstr "ღილაკი F7"
 
 msgid "Function key 8"
-msgstr ""
+msgstr "ღილაკი F8"
 
 msgid "Function key 9"
-msgstr ""
+msgstr "ღილაკი F9"
 
 msgid "Function key 10"
-msgstr ""
+msgstr "ღილაკი F10"
 
 msgid "Function key 11"
-msgstr ""
+msgstr "ღილაკი F11"
 
 msgid "Function key 12"
-msgstr ""
+msgstr "ღილაკი F12"
 
 msgid "Function key 13"
-msgstr ""
+msgstr "ღილაკი F13"
 
 msgid "Function key 14"
-msgstr ""
+msgstr "ღილაკი F14"
 
 msgid "Function key 15"
-msgstr ""
+msgstr "ღილაკი F15"
 
 msgid "Function key 16"
-msgstr ""
+msgstr "ღილაკი F16"
 
 msgid "Function key 17"
-msgstr ""
+msgstr "ღილაკი F17"
 
 msgid "Function key 18"
-msgstr ""
+msgstr "ღილაკი F18"
 
 msgid "Function key 19"
-msgstr ""
+msgstr "ღილაკი F19"
 
 msgid "Function key 20"
-msgstr ""
+msgstr "ღილაკი F20"
 
 msgid "Completion/M-tab"
 msgstr ""
@@ -228,34 +229,34 @@ msgid "Backspace"
 msgstr ""
 
 msgid "Up arrow"
-msgstr ""
+msgstr "ისარი ზემოთ"
 
 msgid "Down arrow"
-msgstr ""
+msgstr "ისარი ქვემოთ"
 
 msgid "Left arrow"
-msgstr ""
+msgstr "ისარი მარცხნივ"
 
 msgid "Right arrow"
-msgstr ""
+msgstr "ისარი მარჯვნივ"
 
 msgid "Insert"
-msgstr ""
+msgstr "ჩასმა"
 
 msgid "Delete"
-msgstr ""
+msgstr "წაშლა"
 
 msgid "Home"
-msgstr ""
+msgstr "ღილაკი Home"
 
 msgid "End key"
-msgstr ""
+msgstr "ღილაკი End"
 
 msgid "Page Up"
-msgstr ""
+msgstr "ღილაკი Page Up"
 
 msgid "Page Down"
-msgstr ""
+msgstr "ღილაკი Page Down"
 
 msgid "/ on keypad"
 msgstr ""
@@ -303,16 +304,16 @@ msgid "Enter on keypad"
 msgstr ""
 
 msgid "Function key 21"
-msgstr ""
+msgstr "ღილაკი F21"
 
 msgid "Function key 22"
-msgstr ""
+msgstr "ღილაკი F22"
 
 msgid "Function key 23"
-msgstr ""
+msgstr "ღილაკი F23"
 
 msgid "Function key 24"
-msgstr ""
+msgstr "ღილაკი F24"
 
 msgid "A1 key"
 msgstr "A1 ღილაკი"
@@ -351,7 +352,7 @@ msgid "Colon"
 msgstr "ორი წერტილი"
 
 msgid "Semicolon"
-msgstr ""
+msgstr "წერტილმძიმე"
 
 msgid "Exclamation mark"
 msgstr "ძახილის ნიშანი"
@@ -366,28 +367,28 @@ msgid "Dollar sign"
 msgstr "დოლარის ნიშანი"
 
 msgid "Quotation mark"
-msgstr ""
+msgstr "კითხვის ნიშანი"
 
 msgid "Percent sign"
 msgstr "პროცენტის ნიშანი"
 
 msgid "Caret"
-msgstr ""
+msgstr "კარეტის დაბრუნება"
 
 msgid "Tilda"
-msgstr ""
+msgstr "ტალღა"
 
 msgid "Prime"
 msgstr ""
 
 msgid "Underline"
-msgstr ""
+msgstr "ქვედა ტირე"
 
 msgid "Understrike"
 msgstr ""
 
 msgid "Pipe"
-msgstr ""
+msgstr "მილი"
 
 msgid "Left parenthesis"
 msgstr ""
@@ -411,23 +412,23 @@ msgid "Enter"
 msgstr ""
 
 msgid "Tab key"
-msgstr ""
+msgstr "ღილაკი Tab"
 
 msgid "Space key"
-msgstr ""
+msgstr "ღილაკი ჰარე"
 
 msgid "Slash key"
-msgstr ""
+msgstr "ღილაკი /"
 
 msgid "Backslash key"
-msgstr ""
+msgstr "ღილაკი \\"
 
 msgid "Number sign #"
-msgstr ""
+msgstr "ნომრის ნიშანი #"
 
 #. TRANSLATORS: Please translate as in "at sign" (@).
 msgid "At sign"
-msgstr ""
+msgstr "ძაღლუკა"
 
 msgid "Ctrl"
 msgstr "Ctrl"
@@ -471,25 +472,25 @@ msgstr ""
 "შეამოწმეთ გარემოს ცვლადი TERM.\n"
 
 msgid "B"
-msgstr ""
+msgstr "ბ"
 
 msgid "kB"
-msgstr ""
+msgstr "კბ"
 
 msgid "KiB"
-msgstr ""
+msgstr "კიბ"
 
 msgid "MB"
-msgstr ""
+msgstr "მბ"
 
 msgid "MiB"
-msgstr ""
+msgstr "მიბ"
 
 msgid "GB"
-msgstr ""
+msgstr "გბ"
 
 msgid "GiB"
-msgstr ""
+msgstr "გიბ"
 
 msgid "Cannot create pipe descriptor"
 msgstr ""
@@ -552,7 +553,7 @@ msgstr ""
 
 #, c-format
 msgid "Temporary files will not be created\n"
-msgstr ""
+msgstr "დროებითი ფალების შექმნის შეცდომა\n"
 
 msgid "Press any key to continue..."
 msgstr "გასაგრძელებლად დააჭირეთ ნებისმიერ ღილაკს..."
@@ -602,10 +603,10 @@ msgstr "შეცდომა"
 
 #, c-format
 msgid "%s (%d)"
-msgstr ""
+msgstr "%s(%d)"
 
 msgid "&Abort"
-msgstr ""
+msgstr "გაუქმება"
 
 msgid "Displays the current version"
 msgstr "აჩვენებს მიმდინარე ვერსიას"
@@ -623,7 +624,7 @@ msgid "Print last working directory to specified file"
 msgstr ""
 
 msgid "<file>"
-msgstr ""
+msgstr "<file>"
 
 msgid "Enables subshell support (default)"
 msgstr ""
@@ -641,7 +642,7 @@ msgid "Edit files"
 msgstr "ფაილების რედაქტირება"
 
 msgid "<file> ..."
-msgstr ""
+msgstr "<file> ..."
 
 msgid "Forces xterm features"
 msgstr ""
@@ -683,7 +684,7 @@ msgid "Specifies a color configuration"
 msgstr ""
 
 msgid "<string>"
-msgstr ""
+msgstr "<string>"
 
 msgid "Show mc with specified skin"
 msgstr ""
@@ -731,10 +732,10 @@ msgid "[+lineno] file1[:lineno] [file2[:lineno]...]"
 msgstr ""
 
 msgid "file"
-msgstr ""
+msgstr "ფაილი"
 
 msgid "file1 file2"
-msgstr ""
+msgstr "ფაილი1 ფაილი2"
 
 msgid "[this_dir] [other_panel_dir]"
 msgstr ""
@@ -785,7 +786,7 @@ msgid ""
 msgstr ""
 
 msgid "&Dismiss"
-msgstr ""
+msgstr "&მოცილება"
 
 msgid "Enter search string:"
 msgstr "შეიყვანეთ საძებნი სტრიქონი:"
@@ -797,10 +798,10 @@ msgid "&Backwards"
 msgstr "&უკან"
 
 msgid "&Whole words"
-msgstr ""
+msgstr "&მთლიანი სიტყვები"
 
 msgid "&All charsets"
-msgstr ""
+msgstr "&ყველა კოდირება"
 
 msgid "Search"
 msgstr "ძებნა"
@@ -864,10 +865,10 @@ msgid "Edit is disabled"
 msgstr "რედაქტირება გათიშულია"
 
 msgid "Goto line (left)"
-msgstr ""
+msgstr "ხაზზე გადასვლა (მარცხნვ)"
 
 msgid "Goto line (right)"
-msgstr ""
+msgstr "ხაზზე გადასვლა (მარჯვნივ)"
 
 msgid "Enter line:"
 msgstr "შეიყვანეთ სტრიქონი:"
@@ -925,21 +926,21 @@ msgstr ""
 
 #, c-format
 msgid "Loading: %3d%%"
-msgstr ""
+msgstr "ჩატვირთვა: %3d%%"
 
 msgid "Loading..."
-msgstr ""
+msgstr "ჩატვირთვა..."
 
 #, c-format
 msgid "Cannot open %s for reading"
-msgstr ""
+msgstr "%s-ის წაკითხვის შეცდომა"
 
 msgid "Load file"
-msgstr ""
+msgstr "ფაილის ჩატვირთვა"
 
 #, c-format
 msgid "Error reading %s"
-msgstr ""
+msgstr "%s-ის კითხვის შეცდომა"
 
 #, c-format
 msgid "Cannot get size/permissions for %s"
@@ -956,7 +957,7 @@ msgid ""
 msgstr ""
 
 msgid "Warning"
-msgstr ""
+msgstr "გაფრთხილება"
 
 #, c-format
 msgid "Error reading from pipe: %s"
@@ -2880,9 +2881,8 @@ msgstr ""
 msgid "S&hell link..."
 msgstr ""
 
-#, fuzzy
 msgid "&SFTP link..."
-msgstr "S&FTP ბმა..."
+msgstr ""
 
 msgid "Paneli&ze"
 msgstr "&პანელში"
@@ -4387,9 +4387,3 @@ msgstr "თავიდან დავიწყო?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "Username:"
-#~ msgstr "მომხმარებლის სახელი:"
-
-#~ msgid "Authentication failed"
-#~ msgstr "ავთენტიკაცია ვერ მოხერხდა"

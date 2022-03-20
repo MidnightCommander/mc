@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-13 13:31+0300\n"
-"PO-Revision-Date: 2021-07-26 20:16+0000\n"
-"Last-Translator: Transifex Bot <>\n"
+"POT-Creation-Date: 2022-03-20 11:48+0100\n"
+"PO-Revision-Date: 2010-12-29 10:19+0000\n"
+"Last-Translator: Shuree Nyam-Oidov <99shuree@gmail.com>, 2020\n"
 "Language-Team: Mongolian (http://www.transifex.com/mc/mc/language/mn/)\n"
 "Language: mn\n"
 "MIME-Version: 1.0\n"
@@ -2865,9 +2865,8 @@ msgstr "&Мод"
 msgid "&Listing format..."
 msgstr "&Жагшаалтын формат"
 
-#, fuzzy
 msgid "S&ort order..."
-msgstr "Эрэмбэлэх &дараалал..."
+msgstr ""
 
 msgid "&Filter..."
 msgstr "&Шүүлт..."
@@ -2881,9 +2880,8 @@ msgstr "&FTP-холбоос..."
 msgid "S&hell link..."
 msgstr "S&hell-холбоос..."
 
-#, fuzzy
 msgid "&SFTP link..."
-msgstr "&FTP-холбоос..."
+msgstr ""
 
 msgid "Paneli&ze"
 msgstr "&Панелиз"
@@ -4425,19 +4423,3 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "Set debug level"
-#~ msgstr "Дебаг түвшинг тодорхойлох"
-
-#, c-format
-#~ msgid "Password for \\\\%s\\%s"
-#~ msgstr "\\\\%s\\%s ийн Нууц үг"
-
-#~ msgid "Domain:"
-#~ msgstr "Домен:"
-
-#~ msgid "Username:"
-#~ msgstr "Хэрэглэгчийн нэр:"
-
-#~ msgid "SM&B link..."
-#~ msgstr "SM&B-холбоос..."

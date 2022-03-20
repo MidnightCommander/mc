@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# Andrij Mizyk <andmizyk@gmail.com>, 2021
+# Andrij Mizyk <andmizyk@gmail.com>, 2021-2022
 # Andriy Il <toelik@ukr.net>, 2016-2017
 # Andriy Smilyanets <smile.andriy@gmail.com>, 2019
 # Oleksandr Natalenko <oleksandr@natalenko.name>, 2011, 2012
@@ -16,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-13 13:31+0300\n"
-"PO-Revision-Date: 2021-07-26 20:16+0000\n"
-"Last-Translator: Transifex Bot <>\n"
+"POT-Creation-Date: 2022-03-20 11:48+0100\n"
+"PO-Revision-Date: 2010-12-29 10:19+0000\n"
+"Last-Translator: Andrij Mizyk <andmizyk@gmail.com>, 2021-2022\n"
 "Language-Team: Ukrainian (http://www.transifex.com/mc/mc/language/uk/)\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
@@ -514,19 +514,19 @@ msgid "kB"
 msgstr "кБ"
 
 msgid "KiB"
-msgstr "Кібібайт"
+msgstr "КіБ"
 
 msgid "MB"
 msgstr "Мб"
 
 msgid "MiB"
-msgstr "Мебібайт"
+msgstr "МіБ"
 
 msgid "GB"
 msgstr "Гб"
 
 msgid "GiB"
-msgstr "Гібібайт"
+msgstr "ГіБ"
 
 msgid "Cannot create pipe descriptor"
 msgstr "Не вдалося створити дескриптор каналу"
@@ -694,7 +694,7 @@ msgid "Tries to use an old highlight mouse tracking"
 msgstr "Намагатися використовувати застаріле стеження за виділенням мишкою"
 
 msgid "Disable mouse support in text version"
-msgstr "Вимкнути підтримку миші у текстовій версії"
+msgstr "Вимкнути підтримку миші в текстовій версії"
 
 msgid "Tries to use termcap instead of terminfo"
 msgstr "Пробує використовувати termcap замість terminfo"
@@ -1188,13 +1188,13 @@ msgid "This function is not implemented"
 msgstr "Цю функція ще не реалізовано"
 
 msgid "Copy to clipboard"
-msgstr "Скопіювати у буфер"
+msgstr "Скопіювати в буфер"
 
 msgid "Unable to save to file"
 msgstr "Не вдалося зберегти у файл"
 
 msgid "Cut to clipboard"
-msgstr "Вирізати у буфер"
+msgstr "Вирізати в буфер"
 
 msgid "Goto line"
 msgstr "Перейти на рядок"
@@ -1635,7 +1635,7 @@ msgstr ""
 "написаний для Midnight Commander."
 
 msgid "Copyright (C) 1996-2022 the Free Software Foundation"
-msgstr ""
+msgstr "Авторські права (C) 1996-2022 Фонд вільного програмного забезпечення"
 
 msgid "About"
 msgstr "Про програму"
@@ -1892,10 +1892,10 @@ msgid "Compute tota&ls"
 msgstr "Підраховувати за&гальний розмір"
 
 msgid "Classic pro&gressbar"
-msgstr "Класична панель прогресу"
+msgstr "Класична панель &поступу"
 
 msgid "Mkdi&r autoname"
-msgstr "Автоіменування нових каталогів"
+msgstr "Авто&йменування нових каталогів"
 
 msgid "&Preallocate space"
 msgstr "&Зарезервувати місце"
@@ -1931,7 +1931,7 @@ msgid "S&hell patterns"
 msgstr "Шаблони &oболонки"
 
 msgid "Co&mplete: show all"
-msgstr "Доп&овнення: показувати усі"
+msgstr "Доп&овнення: показувати всі"
 
 msgid "Rotating d&ash"
 msgstr "Обе&pтовий індикатор"
@@ -1973,7 +1973,7 @@ msgid "Use SI si&ze units"
 msgstr "&Використовувати розміри системи СІ"
 
 msgid "Mi&x all files"
-msgstr "Змішати &усі файли"
+msgstr "Змішати в&сі файли"
 
 msgid "Show &backup files"
 msgstr "Показувати ре&зервні файли"
@@ -2140,7 +2140,7 @@ msgid "Virtual File System Setting"
 msgstr "Параметри віртуальної файлової системи"
 
 msgid "cd"
-msgstr "Перейти у"
+msgstr "cd"
 
 msgid "Quick cd"
 msgstr "Швидка зміна каталогу"
@@ -2957,7 +2957,7 @@ msgid "Overwrite this file?"
 msgstr "Замістити цей файл?"
 
 msgid "A&ppend"
-msgstr "Дописати у &кінець"
+msgstr "Дописати в &кінець"
 
 msgid "&Reget"
 msgstr "Пере&читати"
@@ -3064,9 +3064,8 @@ msgstr "Д&eрево"
 msgid "&Listing format..."
 msgstr "&Формат списку"
 
-#, fuzzy
 msgid "S&ort order..."
-msgstr "Порядок &сортування…"
+msgstr "Порядок &сортування..."
 
 msgid "&Filter..."
 msgstr "&Фільтр…"
@@ -3080,9 +3079,8 @@ msgstr "&FTP-з’єднання…"
 msgid "S&hell link..."
 msgstr "&Shell-з’єднання…"
 
-#, fuzzy
 msgid "&SFTP link..."
-msgstr "S&FTP-з’єднання…"
+msgstr "S&FTP-зʼєднання..."
 
 msgid "Paneli&ze"
 msgstr "Панелі&зувати"
@@ -3298,7 +3296,7 @@ msgid "&Find recursively"
 msgstr "&Шукати рекурсивно"
 
 msgid "Follow s&ymlinks"
-msgstr ""
+msgstr "Переходити за с&имв. посиланнями"
 
 msgid "S&kip hidden"
 msgstr "П&ропускати приховані"
@@ -3560,7 +3558,7 @@ msgid "&XTerm window title"
 msgstr "Заголовок вікна &xterm"
 
 msgid "&Show free space"
-msgstr "Показати об'єм вільноно місця"
+msgstr "Показати обʼєм вільного місця"
 
 msgid "Panel split"
 msgstr "Розбиття панелей"
@@ -3750,6 +3748,8 @@ msgid ""
 "External panelize:\n"
 "%s"
 msgstr ""
+"Зовнішнє панелізування:\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -3757,9 +3757,12 @@ msgid ""
 "failed to read data from child stdout:\n"
 "%s"
 msgstr ""
+"Зовнішнє панелізування:\n"
+"не вдалося прочитати дані з підбуфера виводу:\n"
+"%s"
 
 msgid "Cannot run external panelize in a non-local directory"
-msgstr "Не вдалося виконати зовнішню панелізацію у нелокальному каталозі"
+msgstr "Не вдалося виконати зовнішнє панелізування в нелокальному каталозі"
 
 msgid "Modified git files"
 msgstr "Змінені файли git"
@@ -3861,10 +3864,10 @@ msgid ""
 "and wait as well."
 msgstr ""
 "Натисніть клавішу %s\n"
-"і почекайте, доки це повідомлення пропаде.\n"
+"і почекайте, доки це повідомлення зникне.\n"
 "\n"
-"Потім натисніть її ще раз, щоб пересвідчитися,\n"
-"що поруч з її назвою з’явилася мітка «OK».\n"
+"Потім натисніть її ще раз, щоб переконатися,\n"
+"що поруч із її назвою з’явилася мітка «OK».\n"
 "\n"
 "Якщо необхідно скасувати навчання, натисніть\n"
 "клавішу Esc і також зачекайте."
@@ -3968,37 +3971,37 @@ msgid "Warning: Cannot change to %s.\n"
 msgstr "Попередження: не вдалося змінити на %s.\n"
 
 msgid "With builtin Editor and Aspell support"
-msgstr "З вбудованим редактором і підтримкою Aspell"
+msgstr "Із вбудованим редактором і підтримкою Aspell"
 
 msgid "With builtin Editor"
-msgstr "З вбудованим редактором"
+msgstr "Із вбудованим редактором"
 
 msgid "With optional subshell support"
-msgstr "З необовʼязковою підтримкою підоболонки"
+msgstr "Із необовʼязковою підтримкою підоболонки"
 
 msgid "With subshell support as default"
-msgstr "З підтримкою підоболонки за замовчуванням"
+msgstr "Із підтримкою підоболонки за замовчуванням"
 
 msgid "With support for background operations"
-msgstr "З підтримкою фонових операцій"
+msgstr "Із підтримкою фонових операцій"
 
 msgid "With mouse support on xterm and Linux console"
-msgstr "З підтримкою миші в xterm та консолях Linux"
+msgstr "Із підтримкою миші в xterm та консолях Linux"
 
 msgid "With mouse support on xterm"
-msgstr "З підтримкою миші в xterm"
+msgstr "Із підтримкою миші в xterm"
 
 msgid "With support for X11 events"
-msgstr "З підтримкою подій X11"
+msgstr "Із підтримкою подій X11"
 
 msgid "With internationalization support"
-msgstr "З підтримкою інтернаціоналізації"
+msgstr "Із підтримкою інтернаціоналізації"
 
 msgid "With multiple codepages support"
-msgstr "З підтримкою багатьох кодових сторінок"
+msgstr "Із підтримкою кількох кодових сторінок"
 
 msgid "With ext2fs attributes support"
-msgstr "З підтримкою атрибутів ext2fs"
+msgstr "Із підтримкою атрибутів ext2fs"
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"
@@ -4022,9 +4025,9 @@ msgstr "Зібрано з ncursesw %s\n"
 msgid "Built with ncursesw (unknown version)"
 msgstr "Зібрано з ncursesw (невідома версія)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with libssh2 %d.%d.%d\n"
-msgstr "Зібрано із GLib %d.%d.%d\n"
+msgstr "Зібрано з libssh2 %d.%d.%d\n"
 
 msgid "Virtual File Systems:"
 msgstr "Віртуальні файлові системи:"
@@ -4157,12 +4160,17 @@ msgid ""
 "%s:\n"
 "%s"
 msgstr ""
+"Не можливо відкрити %s архів\n"
+"%s:\n"
+"%s"
 
 #, c-format
 msgid ""
 "EXTFS virtual file system:\n"
 "%s"
 msgstr ""
+"Віртуальна файлова система EXTFS:\n"
+"%s"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4335,6 +4343,8 @@ msgid ""
 "SFS virtual file system:\n"
 "%s"
 msgstr ""
+"Віртуальна файлова система SFS:\n"
+"%s"
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4364,7 +4374,7 @@ msgid "sftp: Unable to get current user name."
 msgstr "sftp: Неможливо отримати ім’я поточного користувача."
 
 msgid "sftp: Invalid host name."
-msgstr "sftp: Неправильне ім’я хоста."
+msgstr "sftp: Неправильна назва хоста."
 
 #, c-format
 msgid "sftp: %s"
@@ -4372,6 +4382,8 @@ msgstr "sftp: %s"
 
 msgid "sftp: failed to convert remote host IP address into text form"
 msgstr ""
+"sftp: не вдалося перетворити IP-адресу віддаленого компʼютера в текстовий "
+"формат"
 
 #, c-format
 msgid "sftp: making connection to %s"
@@ -4385,10 +4397,10 @@ msgid "sftp: connection to server failed: %s"
 msgstr "sftp: з’єдання з сервером невдале: %s"
 
 msgid "sftp: found host key of unsupported type: RSA1"
-msgstr ""
+msgstr "sftp: знайдено ключ господаря непідтримуваного типу: RSA1"
 
 msgid "sftp: unknown host key type:"
-msgstr ""
+msgstr "sftp: невідомий тип ключа господаря:"
 
 #, c-format
 msgid ""
@@ -4396,15 +4408,20 @@ msgid ""
 "%s (%s)\n"
 "to the list of known hosts."
 msgstr ""
+"Додано на постійно\n"
+"%s (%s)\n"
+"до списку відомих господарів."
 
 msgid "sftp: cannot get the remote host key"
-msgstr ""
+msgstr "sftp: не можливо отримати віддалений ключ господаря"
 
 msgid "sftp: unsupported key type, can't check remote host key"
 msgstr ""
+"sftp: непідтримуваний тип ключа, не можливо перевірити віддалений ключ "
+"господаря"
 
 msgid "sftp: can't compute host key fingerprint hash"
-msgstr ""
+msgstr "sftp: не можливо вирахувати hash-суму відбитка ключа господаря"
 
 #, c-format
 msgid ""
@@ -4415,6 +4432,12 @@ msgid ""
 "SHA1:%s.\n"
 "Do you want to add it to the list of known hosts and continue connecting?"
 msgstr ""
+"Справжність господаря\n"
+"%s (%s)\n"
+"не можливо визначити!\n"
+"hash-сума відбитка ключа %s\n"
+"SHA1: %s.\n"
+"Бажаєте додати її до списку відомих господарів і продовжити зʼєднання?"
 
 #, c-format
 msgid ""
@@ -4424,9 +4447,14 @@ msgid ""
 "Are you sure you want to add it to the list of known hosts and continue "
 "connecting?"
 msgstr ""
+"%s (%s)\n"
+"знайдено у списку відомих господарів, але\n"
+"КЛЮЧІ НЕ СПІВПАДАЮТЬ! ЦЕ МОЖЕ БУТИ АТАКОЮ MITM!\n"
+"Ви впевнені, що хочете додати його до списку відомих господарів і продовжити "
+"зʼєднання?"
 
 msgid "sftp: host key verification failed"
-msgstr ""
+msgstr "sftp: не вдалося перевірити ключ господаря"
 
 #, c-format
 msgid "sftp: Enter passphrase for %s "
@@ -4443,7 +4471,7 @@ msgid "sftp: Password is empty."
 msgstr "sftp: Пароль порожній."
 
 msgid "sftp: failure establishing SSH session"
-msgstr ""
+msgstr "sftp: невдале встановлення сеансу SSH"
 
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: Немає даних про  оброблювач для читання файлу"
@@ -4673,57 +4701,3 @@ msgstr "Почати спочатку?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не вдалося отримати локальну копію /ftp://some.host/editme.txt"
-
-#~ msgid "Set debug level"
-#~ msgstr "Встановити рівень відлагоджування"
-
-#~ msgid "<integer>"
-#~ msgstr "<integer>"
-
-#, c-format
-#~ msgid "Password for \\\\%s\\%s"
-#~ msgstr "Пароль для \\\\%s\\%s"
-
-#~ msgid "Domain:"
-#~ msgstr "Домен:"
-
-#~ msgid "Username:"
-#~ msgstr "Ім’я користувача:"
-
-#~ msgid "SMB authentication"
-#~ msgstr "SMB(самба) автентифікація"
-
-#~ msgid "SMB link to machine"
-#~ msgstr "SMB-з’єднання з віддаленою машиною"
-
-#~ msgid "SM&B link..."
-#~ msgstr "&SMB-з’єднання…"
-
-#, c-format
-#~ msgid "reconnect to %s failed"
-#~ msgstr ""
-#~ "сталася помилка повторного з’єднання з %s\n"
-#~ " "
-
-#~ msgid "Authentication failed"
-#~ msgstr "Сталася помилка авторизації "
-
-#, c-format
-#~ msgid "Error %s creating directory %s"
-#~ msgstr "Сталася помилка %s створення каталогу %s"
-
-#, c-format
-#~ msgid "Error %s removing directory %s"
-#~ msgstr "Сталася помилка %s видалення каталогу %s"
-
-#, c-format
-#~ msgid "%s opening remote file %s"
-#~ msgstr "%s відкриває віддалений файл %s"
-
-#, c-format
-#~ msgid "%s removing remote file %s"
-#~ msgstr "%s видаляє віддалений файл %s"
-
-#, c-format
-#~ msgid "%s renaming files\n"
-#~ msgstr "%s перейменовує файли\n"

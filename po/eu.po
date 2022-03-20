@@ -9,9 +9,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-13 13:31+0300\n"
-"PO-Revision-Date: 2021-07-26 20:16+0000\n"
-"Last-Translator: Transifex Bot <>\n"
+"POT-Creation-Date: 2022-03-20 11:48+0100\n"
+"PO-Revision-Date: 2010-12-29 10:19+0000\n"
+"Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>, "
+"2011,2015-2019\n"
 "Language-Team: Basque (http://www.transifex.com/mc/mc/language/eu/)\n"
 "Language: eu\n"
 "MIME-Version: 1.0\n"
@@ -3053,9 +3054,8 @@ msgstr "Zu&haitza"
 msgid "&Listing format..."
 msgstr "&Zerrenda formatua"
 
-#, fuzzy
 msgid "S&ort order..."
-msgstr "&Sailkatzeko ordena..."
+msgstr ""
 
 msgid "&Filter..."
 msgstr "I&ragazkia..."
@@ -3069,9 +3069,8 @@ msgstr "FT&P esteka..."
 msgid "S&hell link..."
 msgstr "S&hell esteka..."
 
-#, fuzzy
 msgid "&SFTP link..."
-msgstr "S&FTP esteka..."
+msgstr ""
 
 msgid "Paneli&ze"
 msgstr "Panelerat&u"
@@ -4000,9 +3999,9 @@ msgstr ""
 msgid "Built with ncursesw (unknown version)"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with libssh2 %d.%d.%d\n"
-msgstr "GLib %d.%d.%d erabiliz eraikita\n"
+msgstr ""
 
 msgid "Virtual File Systems:"
 msgstr "Alegiazko fitxategi sistemak (VFS):"
@@ -4653,55 +4652,3 @@ msgstr "Hasieratik jarraitu?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Ezin eskuratu ondokoaren bertako kopia bat: /ftp://some.host/editme.txt"
-
-#~ msgid "Set debug level"
-#~ msgstr "Ezarri arazketa maila"
-
-#~ msgid "<integer>"
-#~ msgstr "<integer>"
-
-#, c-format
-#~ msgid "Password for \\\\%s\\%s"
-#~ msgstr "\\\\%s\\%s(r)entzako pasahitza"
-
-#~ msgid "Domain:"
-#~ msgstr "Domeinua:"
-
-#~ msgid "Username:"
-#~ msgstr "Erabiltzaile izena:"
-
-#~ msgid "SMB authentication"
-#~ msgstr "SMB autentikazioa"
-
-#~ msgid "SMB link to machine"
-#~ msgstr "SMB esteka makinara"
-
-#~ msgid "SM&B link..."
-#~ msgstr "S&MB esteka..."
-
-#, c-format
-#~ msgid "reconnect to %s failed"
-#~ msgstr "%s(e)ra birkonektatzeak huts egin du"
-
-#~ msgid "Authentication failed"
-#~ msgstr "Autentifikatzeak huts egin du"
-
-#, c-format
-#~ msgid "Error %s creating directory %s"
-#~ msgstr "%s akatsa %s direktorioa sortzerakoan"
-
-#, c-format
-#~ msgid "Error %s removing directory %s"
-#~ msgstr "%s akatsa %s direktorioa ezabatzerakoan"
-
-#, c-format
-#~ msgid "%s opening remote file %s"
-#~ msgstr "%s urruneko %s fitxategia irekitzen"
-
-#, c-format
-#~ msgid "%s removing remote file %s"
-#~ msgstr "%s urruneko %s fitxategia ezabatzen"
-
-#, c-format
-#~ msgid "%s renaming files\n"
-#~ msgstr "%s fitxategiak berrizendatzen\n"

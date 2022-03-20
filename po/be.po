@@ -13,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-13 13:31+0300\n"
-"PO-Revision-Date: 2021-07-26 20:16+0000\n"
-"Last-Translator: Transifex Bot <>\n"
+"POT-Creation-Date: 2022-03-20 11:48+0100\n"
+"PO-Revision-Date: 2010-12-29 10:19+0000\n"
+"Last-Translator: Źmicier Turok <nashtlumach@gmail.com>, 2018\n"
 "Language-Team: Belarusian (http://www.transifex.com/mc/mc/language/be/)\n"
 "Language: be\n"
 "MIME-Version: 1.0\n"
@@ -3056,9 +3056,8 @@ msgstr "Дрэва(&T)"
 msgid "&Listing format..."
 msgstr "Фармат спіса(&L)..."
 
-#, fuzzy
 msgid "S&ort order..."
-msgstr "Упарадкаваць(&S)..."
+msgstr ""
 
 msgid "&Filter..."
 msgstr "Фільтраваць(&F)..."
@@ -3072,9 +3071,8 @@ msgstr "Злучэнне праз FTP(&F)..."
 msgid "S&hell link..."
 msgstr "Злучэнне праз абалонку(&H)..."
 
-#, fuzzy
 msgid "&SFTP link..."
-msgstr "Злучэнне праз SFTP(&F)..."
+msgstr ""
 
 msgid "Paneli&ze"
 msgstr "На панэлі(&Z)"
@@ -4012,9 +4010,9 @@ msgstr "Сабраны з ncursesw %s\n"
 msgid "Built with ncursesw (unknown version)"
 msgstr "Сабраны з ncursesw (невядомая версія)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with libssh2 %d.%d.%d\n"
-msgstr "Сабрана з бібліятэкай «GLib» версіі %d.%d.%d\n"
+msgstr ""
 
 msgid "Virtual File Systems:"
 msgstr "Віртуальныя файлавыя сістэмы:"
@@ -4663,55 +4661,3 @@ msgstr "Працягваць ад пачатку?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Немагчыма атрымаць лакальную копію /ftp://some.host/editme.txt"
-
-#~ msgid "Set debug level"
-#~ msgstr "Вызначыць узровень пошуку хібаў"
-
-#~ msgid "<integer>"
-#~ msgstr "<integer>"
-
-#, c-format
-#~ msgid "Password for \\\\%s\\%s"
-#~ msgstr "Пароль на \\\\%s\\%s"
-
-#~ msgid "Domain:"
-#~ msgstr "Дамен:"
-
-#~ msgid "Username:"
-#~ msgstr "Імя карыстальніка:"
-
-#~ msgid "SMB authentication"
-#~ msgstr "Аўтэнтыфікацыя SMB"
-
-#~ msgid "SMB link to machine"
-#~ msgstr "Злучыцца праз SMB"
-
-#~ msgid "SM&B link..."
-#~ msgstr "Злучэнне праз SMB(&B)..."
-
-#, c-format
-#~ msgid "reconnect to %s failed"
-#~ msgstr "зноўку не атрымалася злучыцца з «%s»"
-
-#~ msgid "Authentication failed"
-#~ msgstr "Аўтэнтыфікацыя не ўдалася"
-
-#, c-format
-#~ msgid "Error %s creating directory %s"
-#~ msgstr "Памылка (%s) падчас стварэння каталога «%s»"
-
-#, c-format
-#~ msgid "Error %s removing directory %s"
-#~ msgstr "Памылка (%s) падчас выдалення каталога «%s»"
-
-#, c-format
-#~ msgid "%s opening remote file %s"
-#~ msgstr "%s падчас адкрыцця адлеглага файла «%s»"
-
-#, c-format
-#~ msgid "%s removing remote file %s"
-#~ msgstr "%s падчас выдалення адлеглага файла «%s»"
-
-#, c-format
-#~ msgid "%s renaming files\n"
-#~ msgstr "%s падчас змены назвы файла\n"

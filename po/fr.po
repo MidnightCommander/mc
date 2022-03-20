@@ -17,9 +17,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-13 13:31+0300\n"
-"PO-Revision-Date: 2021-07-26 20:16+0000\n"
-"Last-Translator: Transifex Bot <>\n"
+"POT-Creation-Date: 2022-03-20 11:48+0100\n"
+"PO-Revision-Date: 2010-12-29 10:19+0000\n"
+"Last-Translator: David Prudhomme <david7.prudhomme@gmail.com>, 2018,2021\n"
 "Language-Team: French (http://www.transifex.com/mc/mc/language/fr/)\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -3055,9 +3055,8 @@ msgstr "&Arborescence"
 msgid "&Listing format..."
 msgstr "Format de &Listing ..."
 
-#, fuzzy
 msgid "S&ort order..."
-msgstr "&Ordre de tri..."
+msgstr ""
 
 msgid "&Filter..."
 msgstr "&Filtre..."
@@ -3071,9 +3070,8 @@ msgstr "Lien &FTP..."
 msgid "S&hell link..."
 msgstr "Lien S&hell..."
 
-#, fuzzy
 msgid "&SFTP link..."
-msgstr "Lien &SFTP..."
+msgstr ""
 
 msgid "Paneli&ze"
 msgstr "Mise en &panneaux"
@@ -4003,9 +4001,9 @@ msgstr ""
 msgid "Built with ncursesw (unknown version)"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with libssh2 %d.%d.%d\n"
-msgstr "Compilé avec GLib %d.%d.%d\n"
+msgstr ""
 
 msgid "Virtual File Systems:"
 msgstr "Systèmes des fichiers virtuels :"
@@ -4658,55 +4656,3 @@ msgstr "Continuer à partir du début ?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Impossible de récupérer localement le fichier /ftp://some.host/editme.txt"
-
-#~ msgid "Set debug level"
-#~ msgstr "Définit le niveau de débogage"
-
-#~ msgid "<integer>"
-#~ msgstr "<integer>"
-
-#, c-format
-#~ msgid "Password for \\\\%s\\%s"
-#~ msgstr "Mot de passe pour \\\\%s\\%s"
-
-#~ msgid "Domain:"
-#~ msgstr "Domaine:"
-
-#~ msgid "Username:"
-#~ msgstr "Nom d'utilisateur :"
-
-#~ msgid "SMB authentication"
-#~ msgstr "Authentification SMB"
-
-#~ msgid "SMB link to machine"
-#~ msgstr "Lien SMB vers une machine"
-
-#~ msgid "SM&B link..."
-#~ msgstr "Lien SM&B..."
-
-#, c-format
-#~ msgid "reconnect to %s failed"
-#~ msgstr " échec de la reconnexion à %s"
-
-#~ msgid "Authentication failed"
-#~ msgstr " Échec de l'authentification"
-
-#, c-format
-#~ msgid "Error %s creating directory %s"
-#~ msgstr "Erreur %s la création du répertoire %s"
-
-#, c-format
-#~ msgid "Error %s removing directory %s"
-#~ msgstr " Erreur %s destruction du répertoire %s"
-
-#, c-format
-#~ msgid "%s opening remote file %s"
-#~ msgstr "%s ouverture du fichier distant %s"
-
-#, c-format
-#~ msgid "%s removing remote file %s"
-#~ msgstr "%s suppression du fichier distant %s"
-
-#, c-format
-#~ msgid "%s renaming files\n"
-#~ msgstr "%s renommage des fichiers\n"

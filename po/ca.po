@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# Antoni Bella Pérez <antonibella5@yahoo.com>, 2017-2021
+# Antoni Bella Pérez <antonibella5@yahoo.com>, 2017-2022
 # Daniel <danicases@gmail.com>, 2011
 # Daniel <danicases@gmail.com>, 2011-2012
 # Daniel <danicases@gmail.com>, 2012
@@ -16,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-13 13:31+0300\n"
-"PO-Revision-Date: 2021-07-26 20:16+0000\n"
-"Last-Translator: Transifex Bot <>\n"
+"POT-Creation-Date: 2022-03-20 11:48+0100\n"
+"PO-Revision-Date: 2010-12-29 10:19+0000\n"
+"Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>, 2017-2022\n"
 "Language-Team: Catalan (http://www.transifex.com/mc/mc/language/ca/)\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
@@ -1639,9 +1639,8 @@ msgstr ""
 "Un editor de text fàcil d'emprar\n"
 "escrit per al Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2022 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2021 la Free Software Foundation"
+msgstr ""
 
 msgid "About"
 msgstr "Quant a"
@@ -3075,9 +3074,8 @@ msgstr "Ar&bre"
 msgid "&Listing format..."
 msgstr "Format del &llistat..."
 
-#, fuzzy
 msgid "S&ort order..."
-msgstr "&Ordenació..."
+msgstr "&Ordre de classificació..."
 
 msgid "&Filter..."
 msgstr "&Filtra..."
@@ -3091,9 +3089,8 @@ msgstr "Enllaç per a F&TP..."
 msgid "S&hell link..."
 msgstr "Enllaç per a l'i&ntèrpret..."
 
-#, fuzzy
 msgid "&SFTP link..."
-msgstr "Enllaç per a &SFTP..."
+msgstr "Enllaç &SFTP..."
 
 msgid "Paneli&ze"
 msgstr "&Quadre de cerca"
@@ -4034,9 +4031,9 @@ msgstr "Construïda amb ncursesw %s\n"
 msgid "Built with ncursesw (unknown version)"
 msgstr "Construïda amb ncursesw (versió desconeguda)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with libssh2 %d.%d.%d\n"
-msgstr "Construït amb GLib %d.%d.%d\n"
+msgstr ""
 
 msgid "Virtual File Systems:"
 msgstr "Sistemes de fitxers virtuals:"
@@ -4392,6 +4389,8 @@ msgstr "sftp: %s"
 
 msgid "sftp: failed to convert remote host IP address into text form"
 msgstr ""
+"SFTP: ha fallat en convertir l'adreça IP de l'amfitrió remot en format de "
+"text"
 
 #, c-format
 msgid "sftp: making connection to %s"
@@ -4405,10 +4404,10 @@ msgid "sftp: connection to server failed: %s"
 msgstr "sftp: la connexió amb el servidor ha fallat: %s"
 
 msgid "sftp: found host key of unsupported type: RSA1"
-msgstr ""
+msgstr "SFTP: ha trobat que la clau de l'amfitrió és de tipus no admès: RSA1"
 
 msgid "sftp: unknown host key type:"
-msgstr ""
+msgstr "SFTP: el tipus de clau de l'amfitrió és desconegut:"
 
 #, c-format
 msgid ""
@@ -4416,15 +4415,21 @@ msgid ""
 "%s (%s)\n"
 "to the list of known hosts."
 msgstr ""
+"S'ha afegit permanentment\n"
+"%s (%s)\n"
+"a la llista d'amfitrions coneguts."
 
 msgid "sftp: cannot get the remote host key"
-msgstr ""
+msgstr "SFTP: No s'ha pogut obtenir la clau de l'amfitrió remot"
 
 msgid "sftp: unsupported key type, can't check remote host key"
 msgstr ""
+"SFTP: tipus de clau no admès, no es pot comprovar la clau de l'amfitrió remot"
 
 msgid "sftp: can't compute host key fingerprint hash"
 msgstr ""
+"SFTP: no es pot calcular el resum de l'empremta digital de la clau de "
+"l'amfitrió"
 
 #, c-format
 msgid ""
@@ -4435,6 +4440,13 @@ msgid ""
 "SHA1:%s.\n"
 "Do you want to add it to the list of known hosts and continue connecting?"
 msgstr ""
+"L'autenticitat de l'amfitrió\n"
+"%s (%s)\n"
+"no es pot establir!\n"
+"La suma de l'empremta digital de la clau %s és\n"
+"SHA1:%s.\n"
+"Voleu afegir-la a la llista dels amfitrions coneguts i continuar amb la "
+"connexió?"
 
 #, c-format
 msgid ""
@@ -4444,9 +4456,14 @@ msgid ""
 "Are you sure you want to add it to the list of known hosts and continue "
 "connecting?"
 msgstr ""
+"%s (%s)\n"
+"es troba a la llista dels amfitrions coneguts, però\n"
+"LES CLAUS NO COINCIDEIXEN! ES PODRIA TRACTAR D'UN ATAC «MITM»!\n"
+"Esteu segur que voleu afegir-lo a la llista dels amfitrions coneguts i "
+"continuar amb la connexió?"
 
 msgid "sftp: host key verification failed"
-msgstr ""
+msgstr "SFTP: ha fallat en verificar la clau de l'amfitrió"
 
 #, c-format
 msgid "sftp: Enter passphrase for %s "
@@ -4463,7 +4480,7 @@ msgid "sftp: Password is empty."
 msgstr "sftp: la contrasenya és buida."
 
 msgid "sftp: failure establishing SSH session"
-msgstr ""
+msgstr "SFTP: ha fallat en establir la sessió SSH"
 
 msgid "sftp: No file handler data present for reading file"
 msgstr ""
@@ -4695,55 +4712,3 @@ msgstr "Continuo des del començament?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "No s'ha pogut obtenir una còpia local de /ftp://algun.amfitrió/editam.txt"
-
-#~ msgid "Set debug level"
-#~ msgstr "Determina el nivell de depuració"
-
-#~ msgid "<integer>"
-#~ msgstr "<integer>"
-
-#, c-format
-#~ msgid "Password for \\\\%s\\%s"
-#~ msgstr "Contrasenya per a \\\\%s\\%s"
-
-#~ msgid "Domain:"
-#~ msgstr "Domini:"
-
-#~ msgid "Username:"
-#~ msgstr "Nom d'usuari:"
-
-#~ msgid "SMB authentication"
-#~ msgstr "Autenticació SMB"
-
-#~ msgid "SMB link to machine"
-#~ msgstr "Connexió per SMB"
-
-#~ msgid "SM&B link..."
-#~ msgstr "Enllaç per a SM&B..."
-
-#, c-format
-#~ msgid "reconnect to %s failed"
-#~ msgstr "ha fallat la reconnexió amb %s"
-
-#~ msgid "Authentication failed"
-#~ msgstr "Ha fallat l'autenticació"
-
-#, c-format
-#~ msgid "Error %s creating directory %s"
-#~ msgstr "S'ha produït l'error %s en crear el directori %s"
-
-#, c-format
-#~ msgid "Error %s removing directory %s"
-#~ msgstr "S'ha produït l'error %s en suprimir el directori %s"
-
-#, c-format
-#~ msgid "%s opening remote file %s"
-#~ msgstr "%s està obrint el fitxer remot %s"
-
-#, c-format
-#~ msgid "%s removing remote file %s"
-#~ msgstr "%s està eliminant el fitxer remot %s"
-
-#, c-format
-#~ msgid "%s renaming files\n"
-#~ msgstr "%s està reanomenant els fitxers\n"

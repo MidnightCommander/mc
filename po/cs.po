@@ -6,7 +6,7 @@
 # Jiří Vírava <appukonrad@gmail.com>, 2015,2017
 # k3dar <k3dar7@gmail.com>, 2020-2021
 # Karel Kopecky <kdkopx@protonmail.com>, 2017
-# Pavel Borecki <pavel.borecki@gmail.com>, 2017-2020
+# Pavel Borecki <pavel.borecki@gmail.com>, 2017-2021
 # Radek Valášek <valin@buchlovice.org>, 2014
 # Robin Kriebel <kriebel.robin@gmail.com>, 2016
 # Slava Zanko <slavazanko@gmail.com>, 2011
@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-13 13:31+0300\n"
-"PO-Revision-Date: 2021-07-26 20:16+0000\n"
-"Last-Translator: Transifex Bot <>\n"
+"POT-Creation-Date: 2022-03-20 11:48+0100\n"
+"PO-Revision-Date: 2010-12-29 10:19+0000\n"
+"Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>, 2017-2021\n"
 "Language-Team: Czech (http://www.transifex.com/mc/mc/language/cs/)\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -2233,7 +2233,7 @@ msgid "No COW"
 msgstr "Nepoužít kopírování při zápisu (CoW)"
 
 msgid "Direct access for files"
-msgstr ""
+msgstr "Přímý přístup pro soubory"
 
 msgid "Casefolded file"
 msgstr "Casefolded file"
@@ -3066,9 +3066,8 @@ msgstr "S&trom"
 msgid "&Listing format..."
 msgstr "&Formát výpisu…"
 
-#, fuzzy
 msgid "S&ort order..."
-msgstr "&Pořadí…"
+msgstr "P&ořadí řazení"
 
 msgid "&Filter..."
 msgstr "&Filtr…"
@@ -3082,9 +3081,8 @@ msgstr "FT&P spojení…"
 msgid "S&hell link..."
 msgstr "S&hell spojení…"
 
-#, fuzzy
 msgid "&SFTP link..."
-msgstr "SFTP sp&ojení…"
+msgstr "&SFTP odkaz"
 
 msgid "Paneli&ze"
 msgstr "Zobra&zit v panelu"
@@ -3300,7 +3298,7 @@ msgid "&Find recursively"
 msgstr "&Hledat i v podsložkách"
 
 msgid "Follow s&ymlinks"
-msgstr ""
+msgstr "Následovat symbolické odkaz&y"
 
 msgid "S&kip hidden"
 msgstr "Přes&kočit skryté"
@@ -3751,6 +3749,8 @@ msgid ""
 "External panelize:\n"
 "%s"
 msgstr ""
+"Externí panelizace:\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -3758,6 +3758,9 @@ msgid ""
 "failed to read data from child stdout:\n"
 "%s"
 msgstr ""
+"Externí panelizace:\n"
+"nepodařilo se číst data ze std. výstupu podříz. procesu:\n"
+"%s"
 
 msgid "Cannot run external panelize in a non-local directory"
 msgstr "Při práci se složkou, která není místní, není možné zobrazit v panelu"
@@ -4025,9 +4028,9 @@ msgstr "Sestaveno s využitím ncursesw %s\n"
 msgid "Built with ncursesw (unknown version)"
 msgstr "Sestaveno s využitím ncursesw (neznámá verze)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Built with libssh2 %d.%d.%d\n"
-msgstr "Sestaveno s GLib %d.%d.%d\n"
+msgstr ""
 
 msgid "Virtual File Systems:"
 msgstr "Virtuální souborové systémy:"
@@ -4160,12 +4163,17 @@ msgid ""
 "%s:\n"
 "%s"
 msgstr ""
+"Nepodařilo se otevřít %s archiv\n"
+"%s:\n"
+"%s"
 
 #, c-format
 msgid ""
 "EXTFS virtual file system:\n"
 "%s"
 msgstr ""
+"Virtuální souborový systém EXTFS:\n"
+"%s"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4339,6 +4347,8 @@ msgid ""
 "SFS virtual file system:\n"
 "%s"
 msgstr ""
+"Virtuální souborový systém SFS:\n"
+"%s"
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4376,6 +4386,7 @@ msgstr "sftp: %s"
 
 msgid "sftp: failed to convert remote host IP address into text form"
 msgstr ""
+"sftp: nepodařilo se převést IP adresu vzdáleného hostitele do textové podoby"
 
 #, c-format
 msgid "sftp: making connection to %s"
@@ -4389,10 +4400,10 @@ msgid "sftp: connection to server failed: %s"
 msgstr "sftp: připojování k serveru se nezdařilo: %s"
 
 msgid "sftp: found host key of unsupported type: RSA1"
-msgstr ""
+msgstr "sftp: nalezeny klíče hostitele nepodporovaného typu: RSA1"
 
 msgid "sftp: unknown host key type:"
-msgstr ""
+msgstr "sftp: neznámý typ klíče hostitele"
 
 #, c-format
 msgid ""
@@ -4400,15 +4411,20 @@ msgid ""
 "%s (%s)\n"
 "to the list of known hosts."
 msgstr ""
+"%s (%s) trvale\n"
+"přidáno do seznamu\n"
+"známých hostitelů."
 
 msgid "sftp: cannot get the remote host key"
-msgstr ""
+msgstr "sftp: nepodařilo se získat klíč vzdáleného hostitele"
 
 msgid "sftp: unsupported key type, can't check remote host key"
 msgstr ""
+"sftp: nepodporovaný typ klíče – není možné zkontrolovat klíč vzdáleného "
+"hostitele"
 
 msgid "sftp: can't compute host key fingerprint hash"
-msgstr ""
+msgstr "sftp: nepodařilo se spočítat hash otisku klíče hostitele"
 
 #, c-format
 msgid ""
@@ -4419,6 +4435,12 @@ msgid ""
 "SHA1:%s.\n"
 "Do you want to add it to the list of known hosts and continue connecting?"
 msgstr ""
+"Nepodvrženost hostitele\n"
+"%s (%s)\n"
+"se nepodařilo ověřit!\n"
+"hash otisku klíče %s je\n"
+"SHA1:%s.\n"
+"Chcete ho přidat na seznam známých hostitelů a pokračovat v připojování?"
 
 #, c-format
 msgid ""
@@ -4428,9 +4450,14 @@ msgid ""
 "Are you sure you want to add it to the list of known hosts and continue "
 "connecting?"
 msgstr ""
+"%s (%s)\n"
+"je nalezeno na seznamu známých hostitelů ale\n"
+"KLÍČE SE NESHODUJÍ! TOTO BY MOHL BÝT ÚTOK TYPU „ČLOVĚK UPROSTŘED!“\n"
+"Opravdu ho chcete přidat do seznamu známých hostitelů a pokračovat v "
+"připojování?"
 
 msgid "sftp: host key verification failed"
-msgstr ""
+msgstr "sftp: ověření klíče hostitele se nezdařilo"
 
 #, c-format
 msgid "sftp: Enter passphrase for %s "
@@ -4447,7 +4474,7 @@ msgid "sftp: Password is empty."
 msgstr "sftp: Heslo není vyplněné."
 
 msgid "sftp: failure establishing SSH session"
-msgstr ""
+msgstr "sftp: nepodařilo se navázat SSH relaci"
 
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: Není přítomen žádný obslužný program pro čtení souboru"
@@ -4676,55 +4703,3 @@ msgstr "Pokračovat od začátku?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nedaří získat místní kopii souboru /ftp://some.host/editme.txt"
-
-#~ msgid "Set debug level"
-#~ msgstr "Nastavit stupeň podrobnosti ladících informací"
-
-#~ msgid "<integer>"
-#~ msgstr "<integer>"
-
-#, c-format
-#~ msgid "Password for \\\\%s\\%s"
-#~ msgstr "Heslo pro \\\\%s\\%s"
-
-#~ msgid "Domain:"
-#~ msgstr "Doména:"
-
-#~ msgid "Username:"
-#~ msgstr "Uživatelské jméno:"
-
-#~ msgid "SMB authentication"
-#~ msgstr "SMB ověření"
-
-#~ msgid "SMB link to machine"
-#~ msgstr "SMB spojení na počítač"
-
-#~ msgid "SM&B link..."
-#~ msgstr "SM&B spojení…"
-
-#, c-format
-#~ msgid "reconnect to %s failed"
-#~ msgstr "obnovení připojení k %s se nezdařilo"
-
-#~ msgid "Authentication failed"
-#~ msgstr "Ověření se nezdařilo"
-
-#, c-format
-#~ msgid "Error %s creating directory %s"
-#~ msgstr "Chyba %s při vytváření složky %s"
-
-#, c-format
-#~ msgid "Error %s removing directory %s"
-#~ msgstr "Chyba %s při odstraňování složky %s"
-
-#, c-format
-#~ msgid "%s opening remote file %s"
-#~ msgstr "%s otevírání vzdáleného souboru %s"
-
-#, c-format
-#~ msgid "%s removing remote file %s"
-#~ msgstr "%s odstraňování vzdáleného souboru %s"
-
-#, c-format
-#~ msgid "%s renaming files\n"
-#~ msgstr "%s přejmenování souborů\n"
