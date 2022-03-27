@@ -1,7 +1,10 @@
 # List of available translations
+af
+ar
 az
 be
 bg
+br
 ca
 cs
 da
@@ -17,21 +20,26 @@ fa
 fi
 fr
 fr_CA
+ga
 gl
+he
 hr
 hu
 ia
 id
+ie
 it
 ja
 ka
 kk
 ko
+kw
 lt
 lv
 mn
 nb
 nl
+nl_BE
 pl
 pt
 pt_BR
@@ -46,6 +54,7 @@ ta
 te
 tr
 uk
+uz
 vi
 wa
 zh_CN
