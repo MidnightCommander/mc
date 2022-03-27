@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
+# Alexander Kilian <alexander.kilian@gmail.com>, 2022
 # Cybjit <cybjit@gmail.com>, 2012
 # Cybjit <cybjit@gmail.com>, 2012
 # Henrik Mattsson-Mårn <h@reglage.net>, 2016
@@ -17,9 +18,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-20 11:48+0100\n"
+"POT-Creation-Date: 2022-03-27 13:41+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Ingemar Karlsson <ingemar@ingk.se>, 2021\n"
+"Last-Translator: Alexander Kilian <alexander.kilian@gmail.com>, 2022\n"
 "Language-Team: Swedish (http://www.transifex.com/mc/mc/language/sv/)\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
@@ -2202,22 +2203,22 @@ msgid "Compressed dirty file"
 msgstr ""
 
 msgid "Compression raw access"
-msgstr ""
+msgstr "Rå åtkomst till komprimeringen"
 
 msgid "Encrypted inode"
-msgstr ""
+msgstr "Krypterad inode"
 
 msgid "Journaled data"
 msgstr ""
 
 msgid "Indexed directory"
-msgstr ""
+msgstr "Indexerad katalog"
 
 msgid "No tail merging"
 msgstr ""
 
 msgid "Top of directory hierarchies"
-msgstr ""
+msgstr "Toppen av katalog hierarkin"
 
 msgid "Inode uses extents"
 msgstr ""
@@ -2229,7 +2230,7 @@ msgid "No COW"
 msgstr ""
 
 msgid "Direct access for files"
-msgstr ""
+msgstr "Direkt åtkomst för filer"
 
 msgid "Casefolded file"
 msgstr ""
@@ -2238,7 +2239,7 @@ msgid "Inode has inline data"
 msgstr ""
 
 msgid "Project hierarchy"
-msgstr ""
+msgstr "Projekt hierarki"
 
 msgid "Verity protected inode"
 msgstr ""
@@ -4366,7 +4367,7 @@ msgid "sftp: found host key of unsupported type: RSA1"
 msgstr ""
 
 msgid "sftp: unknown host key type:"
-msgstr ""
+msgstr "sftp: okänd värd nyckel typ"
 
 #, c-format
 msgid ""
@@ -4376,13 +4377,13 @@ msgid ""
 msgstr ""
 
 msgid "sftp: cannot get the remote host key"
-msgstr ""
+msgstr "sftp: kan inte få fjärr-värd nyckel"
 
 msgid "sftp: unsupported key type, can't check remote host key"
 msgstr ""
 
 msgid "sftp: can't compute host key fingerprint hash"
-msgstr ""
+msgstr "sftp: kan inte beräkna värd nyckelns fingeravtryck"
 
 #, c-format
 msgid ""
@@ -4404,7 +4405,7 @@ msgid ""
 msgstr ""
 
 msgid "sftp: host key verification failed"
-msgstr ""
+msgstr "sftp: värd nyckel verifiering fallerade"
 
 #, c-format
 msgid "sftp: Enter passphrase for %s "
