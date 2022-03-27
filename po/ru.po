@@ -3,30 +3,25 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# Andrew Borodin <aborodin@vmail.ru>, 2011
-# AlexL <loginov.alex.valer@gmail.com>, 2015-2020
 # Alex Tkachenko <alex@bcs.zp.ua>, 1998
-# and Alex Tkachenko <alex@bcs.zp.ua>, 1998
-# Andrew Borodin <aborodin@vmail.ru>, 2009-2012
-# Andrew V. Samoilov <sav@bcs.zp.ua>, 1999,2014
-# Anton Sergeevich Chumak <nightfast@yahoo.co.uk>, 2005
-# Dimitriy Ryazantcev <DJm00n@mail.ru>, 2015
+# Andrew V. Samoilov <sav@bcs.zp.ua>, 1999, 2014
 # Evgeny Bulgakov <bgav@netvision.net.il>, 1999
-# Ilia Maslakov <il.smind@gmail.com>, 2009
-# Mr GreyWolf, 2016
-# Mr.GreyWolf, 2016
-# NaiLi (aka jamesjames) Rootaerc <theism@mail.ru>, 2012
-# Piotr Drąg <piotrdrag@gmail.com>, 2018
 # Sergey Panov <sipan@mit.edu>, 1999
-# Simple88, 2016
-# Simple88, 2016
-# Slava Zanko <slavazanko@gmail.com>, 2009,2011
 # Valek Filippov <frob@df.ru>, 2000
+# Anton Sergeevich Chumak <nightfast@yahoo.co.uk>, 2005
+# Andrew Borodin <aborodin@vmail.ru>, 2009-2022
+# Ilia Maslakov <il.smind@gmail.com>, 2009
+# Slava Zanko <slavazanko@gmail.com>, 2009, 2011
+# NaiLi (aka jamesjames) Rootaerc <theism@mail.ru>, 2012
+# AlexL <loginov.alex.valer@gmail.com>, 2015-2020
+# Dimitriy Ryazantcev <DJm00n@mail.ru>, 2015
+# Simple88, 2016
+# Piotr Drąg <piotrdrag@gmail.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-20 11:48+0100\n"
+"POT-Creation-Date: 2022-03-27 11:48+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Valek Filippov <frob@df.ru>, 2000\n"
 "Language-Team: Russian (http://www.transifex.com/mc/mc/language/ru/)\n"
@@ -1650,7 +1645,7 @@ msgstr ""
 "Создан для Midnight Commander."
 
 msgid "Copyright (C) 1996-2022 the Free Software Foundation"
-msgstr ""
+msgstr "Copyright (C) 1996-2022 the Free Software Foundation"
 
 msgid "About"
 msgstr "О программе"
@@ -1815,6 +1810,8 @@ msgid ""
 "Not an xterm or Linux console;\n"
 "the subshell cannot be toggled."
 msgstr ""
+"Это не xterm и не консоль Linux;\n"
+"панели не могут быть отключены."
 
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Введите exit для возврата в Midnight Commander"
@@ -1842,7 +1839,7 @@ msgstr "Флаг"
 
 #, c-format
 msgid "Permissions (octal): %o"
-msgstr ""
+msgstr "Доступ (восьмеричный): %o"
 
 msgid "Chown advanced command"
 msgstr "Расширенная команда chown"
@@ -1969,7 +1966,7 @@ msgid "Skin:"
 msgstr "Скин:"
 
 msgid "&Shadows"
-msgstr ""
+msgstr "&Тени"
 
 msgid "Appearance"
 msgstr "Оформление"
@@ -2274,16 +2271,18 @@ msgid "C&lear marked"
 msgstr "&Очистить помеченное"
 
 msgid "Chattr command"
-msgstr ""
+msgstr "Команда chattr"
 
 #, c-format
 msgid ""
 "Cannot chattr \"%s\"\n"
 "%s"
 msgstr ""
+"Не удалось изменить атрибуты \"%s\"\n"
+"%s"
 
 msgid "Cannot change attributes on non-local filesystems"
-msgstr ""
+msgstr "Не удалось изменить атрибуты на нелокальной файловой системе"
 
 #, c-format
 msgid ""
@@ -2331,7 +2330,7 @@ msgid "Name:"
 msgstr "Имя"
 
 msgid "Permissions (octal):"
-msgstr "Доступ (восьмеричный)"
+msgstr "Доступ (восьмеричный):"
 
 msgid "Owner name:"
 msgstr "Владелец:"
@@ -2950,15 +2949,15 @@ msgstr "ETA %s"
 
 #, c-format
 msgid "%.2f MB/s"
-msgstr "%.2f Мб/с"
+msgstr "%.2f МБ/с"
 
 #, c-format
 msgid "%.2f KB/s"
-msgstr "%.2f кб/с"
+msgstr "%.2f кБ/с"
 
 #, c-format
 msgid "%ld B/s"
-msgstr "%ld б/с"
+msgstr "%ld Б/с"
 
 msgid "New     :"
 msgstr "Новый     :"
@@ -3135,7 +3134,7 @@ msgid "&Advanced chown"
 msgstr "Права (рас&ширенные)"
 
 msgid "Cha&ttr"
-msgstr ""
+msgstr "Изменение а&трибутов"
 
 msgid "&Rename/Move"
 msgstr "Пере&именование"
@@ -3535,14 +3534,14 @@ msgid "Links:      %d"
 msgstr "Ссылок: %d"
 
 msgid "Attributes: not supported"
-msgstr ""
+msgstr "Атрибуты: не поддерживаются"
 
 #, c-format
 msgid "Attributes: %s"
-msgstr ""
+msgstr "Атрибуты: %s"
 
 msgid "Attributes: unavailable"
-msgstr ""
+msgstr "Атрибуты: недоступно"
 
 #, c-format
 msgid "Mode:       %s (%04o)"
