@@ -728,7 +728,7 @@ set_prompt_string (void)
         return;
 
     if (subshell_prompt_temp_buffer->len != 0)
-        g_string_assign (subshell_prompt, subshell_prompt_temp_buffer->str);
+        mc_g_string_copy (subshell_prompt, subshell_prompt_temp_buffer);
 
     setup_cmdline ();
 }
