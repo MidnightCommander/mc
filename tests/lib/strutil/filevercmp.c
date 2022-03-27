@@ -353,17 +353,17 @@ const size_t filevercmp_test_ds5_len = G_N_ELEMENTS (filevercmp_test_ds5);
 START_TEST (filevercmp_test5)
 /* *INDENT-ON* */
 {
-    size_t _i;
+    size_t ii;
 
-    for (_i = 0; _i < filevercmp_test_ds5_len; _i++)
-        for (; filevercmp_test_ds5[_i] != NULL; _i++)
+    for (ii = 0; ii < filevercmp_test_ds5_len; ii++)
+        for (; filevercmp_test_ds5[ii] != NULL; ii++)
         {
-            const char *i = filevercmp_test_ds5[_i];
-            size_t _j;
+            const char *i = filevercmp_test_ds5[ii];
+            size_t jj;
 
-            for (_j = _i; filevercmp_test_ds5[_j] != NULL; _j++)
+            for (jj = ii; filevercmp_test_ds5[jj] != NULL; jj++)
             {
-                const char *j = filevercmp_test_ds5[_j];
+                const char *j = filevercmp_test_ds5[jj];
 
                 ck_assert_int_eq (test_filevercmp (i, j), 0);
                 ck_assert_int_eq (test_filevercmp (j, i), 0);
