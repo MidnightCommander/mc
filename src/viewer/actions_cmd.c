@@ -14,7 +14,7 @@
    Pavel Machek, 1998
    Roland Illig <roland.illig@gmx.de>, 2004, 2005
    Slava Zanko <slavazanko@google.com>, 2009, 2013
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2009-2022
    Ilia Maslakov <il.smind@gmail.com>, 2009
 
    This file is part of the Midnight Commander.
@@ -601,7 +601,7 @@ mcview_handle_key (WView * view, int key)
         return MSG_HANDLED;
 
 #ifdef MC_ENABLE_DEBUGGING_CODE
-    if (c == 't')
+    if (key == 't')
     {                           /* mnemonic: "test" */
         mcview_ccache_dump (view);
         return MSG_HANDLED;
