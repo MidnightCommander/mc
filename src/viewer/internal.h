@@ -81,13 +81,6 @@ typedef struct
     off_t cc_nroff_column;
 } coord_cache_entry_t;
 
-typedef struct
-{
-    size_t size;
-    size_t capacity;
-    coord_cache_entry_t **cache;
-} coord_cache_t;
-
 /* TODO: find a better name. This is not actually a "state machine",
  * but a "state machine's state", but that sounds silly.
  * Could be parser_state, formatter_state... */
@@ -153,7 +146,7 @@ struct WView
     gboolean utf8;              /* It's multibyte file codeset */
 #endif
 
-    coord_cache_t *coord_cache; /* Cache for mapping offsets to cursor positions */
+    GPtrArray *coord_cache;     /* Cache for mapping offsets to cursor positions */
 
     /* Display information */
     screen_dimen dpy_frame_size;        /* Size of the frame surrounding the real viewer */
@@ -242,10 +235,6 @@ void mcview_ascii_move_down (WView * view, off_t lines);
 void mcview_ascii_move_up (WView * view, off_t lines);
 void mcview_ascii_moveto_bol (WView * view);
 void mcview_ascii_moveto_eol (WView * view);
-
-/* coord_cache.c: */
-coord_cache_t *coord_cache_new (void);
-void coord_cache_free (coord_cache_t * cache);
 
 #ifdef MC_ENABLE_DEBUGGING_CODE
 void mcview_ccache_dump (WView * view);

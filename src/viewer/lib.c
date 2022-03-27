@@ -226,8 +226,8 @@ mcview_done (WView * view)
     mcview_close_datasource (view);
     /* the growing buffer is freed with the datasource */
 
-    coord_cache_free (view->coord_cache);
-    view->coord_cache = NULL;
+    if (view->coord_cache != NULL)
+        view->coord_cache = (GPtrArray *) g_ptr_array_free (view->coord_cache, TRUE);
 
     if (view->converter == INVALID_CONV)
         view->converter = str_cnv_from_term;
