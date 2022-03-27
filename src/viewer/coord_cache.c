@@ -14,7 +14,7 @@
    Pavel Machek, 1998
    Roland Illig <roland.illig@gmx.de>, 2004, 2005
    Slava Zanko <slavazanko@google.com>, 2009
-   Andrew Borodin <aborodin@vmail.ru>, 2009
+   Andrew Borodin <aborodin@vmail.ru>, 2009-2022
    Ilia Maslakov <il.smind@gmail.com>, 2009
 
    This file is part of the Midnight Commander.
@@ -71,6 +71,7 @@ typedef gboolean (*cmp_func_t) (const coord_cache_entry_t * a, const coord_cache
 
 /*** file scope variables ************************************************************************/
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -120,7 +121,6 @@ mcview_coord_cache_entry_less_plain (const coord_cache_entry_t * a, const coord_
     return FALSE;
 }
 
-
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
@@ -134,7 +134,6 @@ mcview_coord_cache_entry_less_nroff (const coord_cache_entry_t * a, const coord_
 
     return FALSE;
 }
-
 
 /* --------------------------------------------------------------------------------------------- */
 /** Find and return the index of the last cache entry that is
@@ -156,14 +155,17 @@ mcview_ccache_find (WView * view, const coord_cache_entry_t * coord, cmp_func_t 
         if (cmp_func (coord, view->coord_cache->cache[i]))
         {
             /* continue the search in the lower half of the cache */
+            ;
         }
         else
         {
             /* continue the search in the upper half of the cache */
             base = i;
         }
+
         limit = (limit + 1) / 2;
     }
+
     return base;
 }
 
@@ -220,6 +222,7 @@ mcview_ccache_dump (WView * view)
     f = fopen ("mcview-ccache.out", "w");
     if (f == NULL)
         return;
+
     (void) setvbuf (f, NULL, _IONBF, 0);
 
     /* cache entries */
@@ -317,7 +320,6 @@ mcview_ccache_lookup (WView * view, coord_cache_entry_t * coord, enum ccache_typ
     else
         cmp_func = mcview_coord_cache_entry_less_plain;
 
-
     tty_enable_interrupt_key ();
 
   retry:
@@ -340,20 +342,11 @@ mcview_ccache_lookup (WView * view, coord_cache_entry_t * coord, enum ccache_typ
         if (!mcview_get_byte (view, current.cc_offset, &c))
             break;
 
-        if (!cmp_func (&current, coord))
-        {
-            if (lookup_what == CCACHE_OFFSET && view->mode_flags.nroff
-                && nroff_state != NROFF_START)
-            {
-                /* don't break here */
-            }
-            else
-            {
-                break;
-            }
-        }
+        if (!cmp_func (&current, coord) &&
+            (lookup_what != CCACHE_OFFSET || !view->mode_flags.nroff || nroff_state == NROFF_START))
+            break;
 
-        /* Provide useful default values for ''next'' */
+        /* Provide useful default values for 'next' */
         next.cc_offset = current.cc_offset + 1;
         next.cc_line = current.cc_line;
         next.cc_column = current.cc_column + 1;
@@ -381,29 +374,23 @@ mcview_ccache_lookup (WView * view, coord_cache_entry_t * coord, enum ccache_typ
                 next.cc_column = 0;
                 next.cc_nroff_column = 0;
             }
-
         }
         else if (nroff_state == NROFF_BACKSPACE)
-        {
             next.cc_nroff_column = current.cc_nroff_column - 1;
-
-        }
         else if (c == '\t')
         {
             next.cc_column = mcview_offset_rounddown (current.cc_column, 8) + 8;
             next.cc_nroff_column = mcview_offset_rounddown (current.cc_nroff_column, 8) + 8;
-
         }
         else if (c == '\n')
         {
             next.cc_line = current.cc_line + 1;
             next.cc_column = 0;
             next.cc_nroff_column = 0;
-
         }
         else
         {
-            /* Use all default values from above */
+            ;                   /* Use all default values from above */
         }
 
         switch (nroff_state)
@@ -439,9 +426,7 @@ mcview_ccache_lookup (WView * view, coord_cache_entry_t * coord, enum ccache_typ
     tty_disable_interrupt_key ();
 
     if (lookup_what == CCACHE_OFFSET)
-    {
         coord->cc_offset = current.cc_offset;
-    }
     else
     {
         coord->cc_line = current.cc_line;
