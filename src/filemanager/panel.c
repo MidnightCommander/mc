@@ -8,7 +8,7 @@
    Miguel de Icaza, 1995
    Timur Bakeyev, 1997, 1999
    Slava Zanko <slavazanko@gmail.com>, 2013
-   Andrew Borodin <aborodin@vmail.ru>, 2013-2016
+   Andrew Borodin <aborodin@vmail.ru>, 2013-2022
 
    This file is part of the Midnight Commander.
 
@@ -116,6 +116,9 @@ mc_fhl_t *mc_filehighlight = NULL;
 #define MARKED          2
 #define MARKED_SELECTED 3
 #define STATUS          5
+
+/* select/unselect dialog results */
+#define SELECT_RESET ((mc_search_t *)(-1))
 
 /*** file scope type declarations ****************************************************************/
 
@@ -2522,17 +2525,16 @@ mark_file_left (WPanel * panel)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
-panel_select_unselect_files (WPanel * panel, const char *title, const char *history_name,
-                             gboolean do_select)
+static mc_search_t *
+panel_select_unselect_files_dialog (panel_select_flags_t * flags, const char *title,
+                                    const char *history_name, const char *help_section)
 {
-    gboolean files_only = (panels_options.select_flags & SELECT_FILES_ONLY) != 0;
-    gboolean case_sens = (panels_options.select_flags & SELECT_MATCH_CASE) != 0;
-    gboolean shell_patterns = (panels_options.select_flags & SELECT_SHELL_PATTERNS) != 0;
+    gboolean files_only = (*flags & SELECT_FILES_ONLY) != 0;
+    gboolean case_sens = (*flags & SELECT_MATCH_CASE) != 0;
+    gboolean shell_patterns = (*flags & SELECT_SHELL_PATTERNS) != 0;
 
     char *reg_exp;
     mc_search_t *search;
-    int i;
 
     quick_widget_t quick_widgets[] = {
         /* *INDENT-OFF* */
@@ -2549,24 +2551,54 @@ panel_select_unselect_files (WPanel * panel, const char *title, const char *hist
     };
 
     quick_dialog_t qdlg = {
-        -1, -1, 50,
-        title, "[Select/Unselect Files]",
+        -1, -1, 50, title, help_section,
         quick_widgets, NULL, NULL
     };
 
     if (quick_dialog (&qdlg) == B_CANCEL)
-        return;
+        return NULL;
 
     if (reg_exp == NULL || *reg_exp == '\0')
     {
         g_free (reg_exp);
-        return;
+        return SELECT_RESET;
     }
 
     search = mc_search_new (reg_exp, NULL);
     search->search_type = shell_patterns ? MC_SEARCH_T_GLOB : MC_SEARCH_T_REGEX;
     search->is_entire_line = TRUE;
     search->is_case_sensitive = case_sens;
+
+    g_free (reg_exp);
+
+    /* result flags */
+    *flags = 0;
+    if (case_sens)
+        *flags |= SELECT_MATCH_CASE;
+    if (files_only)
+        *flags |= SELECT_FILES_ONLY;
+    if (shell_patterns)
+        *flags |= SELECT_SHELL_PATTERNS;
+
+    return search;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+panel_select_unselect_files (WPanel * panel, const char *title, const char *history_name,
+                             const char *help_section, gboolean do_select)
+{
+    mc_search_t *search;
+    gboolean files_only;
+    int i;
+
+    search = panel_select_unselect_files_dialog (&panels_options.select_flags, title, history_name,
+                                                 help_section);
+    if (search == NULL || search == SELECT_RESET)
+        return;
+
+    files_only = (panels_options.select_flags & SELECT_FILES_ONLY) != 0;
 
     for (i = 0; i < panel->dir.len; i++)
     {
@@ -2581,16 +2613,6 @@ panel_select_unselect_files (WPanel * panel, const char *title, const char *hist
     }
 
     mc_search_free (search);
-    g_free (reg_exp);
-
-    /* result flags */
-    panels_options.select_flags = 0;
-    if (case_sens)
-        panels_options.select_flags |= SELECT_MATCH_CASE;
-    if (files_only)
-        panels_options.select_flags |= SELECT_FILES_ONLY;
-    if (shell_patterns)
-        panels_options.select_flags |= SELECT_SHELL_PATTERNS;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2598,7 +2620,8 @@ panel_select_unselect_files (WPanel * panel, const char *title, const char *hist
 static void
 panel_select_files (WPanel * panel)
 {
-    panel_select_unselect_files (panel, _("Select"), ":select_cmd: Select ", TRUE);
+    panel_select_unselect_files (panel, _("Select"), ":select_cmd: Select ",
+                                 "[Select/Unselect Files]", TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2606,7 +2629,8 @@ panel_select_files (WPanel * panel)
 static void
 panel_unselect_files (WPanel * panel)
 {
-    panel_select_unselect_files (panel, _("Unselect"), ":unselect_cmd: Unselect ", FALSE);
+    panel_select_unselect_files (panel, _("Unselect"), ":unselect_cmd: Unselect ",
+                                 "[Select/Unselect Files]", FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
