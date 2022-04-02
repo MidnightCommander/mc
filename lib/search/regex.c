@@ -364,12 +364,13 @@ mc_search__regex_found_cond (mc_search_t * lc_mc_search, GString * search_str)
 {
     gsize loop1;
 
-    for (loop1 = 0; loop1 < lc_mc_search->conditions->len; loop1++)
+    for (loop1 = 0; loop1 < lc_mc_search->prepared_conditions->len; loop1++)
     {
         mc_search_cond_t *mc_search_cond;
         mc_search__found_cond_t ret;
 
-        mc_search_cond = (mc_search_cond_t *) g_ptr_array_index (lc_mc_search->conditions, loop1);
+        mc_search_cond =
+            (mc_search_cond_t *) g_ptr_array_index (lc_mc_search->prepared_conditions, loop1);
 
         if (!mc_search_cond->regex_handle)
             continue;
