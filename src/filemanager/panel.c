@@ -119,6 +119,7 @@ mc_fhl_t *mc_filehighlight = NULL;
 
 /* select/unselect dialog results */
 #define SELECT_RESET ((mc_search_t *)(-1))
+#define SELECT_ERROR ((mc_search_t *)(-2))
 
 /*** file scope type declarations ****************************************************************/
 
@@ -2571,6 +2572,13 @@ panel_select_unselect_files_dialog (panel_select_flags_t * flags, const char *ti
 
     g_free (reg_exp);
 
+    if (!mc_search_prepare (search))
+    {
+        message (D_ERROR, MSG_ERROR, _("Malformed regular expression"));
+        mc_search_free (search);
+        return SELECT_ERROR;
+    }
+
     /* result flags */
     *flags = 0;
     if (case_sens)
@@ -2595,7 +2603,7 @@ panel_select_unselect_files (WPanel * panel, const char *title, const char *hist
 
     search = panel_select_unselect_files_dialog (&panels_options.select_flags, title, history_name,
                                                  help_section);
-    if (search == NULL || search == SELECT_RESET)
+    if (search == NULL || search == SELECT_RESET || search == SELECT_ERROR)
         return;
 
     files_only = (panels_options.select_flags & SELECT_FILES_ONLY) != 0;
