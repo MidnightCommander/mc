@@ -188,8 +188,8 @@ mc_search_free (mc_search_t * lc_mc_search)
 #endif
     g_free (lc_mc_search->error_str);
 
-    if (lc_mc_search->prepared_conditions != NULL)
-        mc_search__conditions_free (lc_mc_search->prepared_conditions);
+    if (lc_mc_search->prepared.conditions != NULL)
+        mc_search__conditions_free (lc_mc_search->prepared.conditions);
 
 #ifdef SEARCH_TYPE_GLIB
     if (lc_mc_search->regex_match_info != NULL)
@@ -210,6 +210,9 @@ gboolean
 mc_search_prepare (mc_search_t * lc_mc_search)
 {
     GPtrArray *ret;
+
+    if (lc_mc_search->prepared.conditions != NULL)
+        return lc_mc_search->prepared.result;
 
     ret = g_ptr_array_new ();
 #ifdef HAVE_CHARSET
@@ -256,9 +259,10 @@ mc_search_prepare (mc_search_t * lc_mc_search)
                                                  lc_mc_search->original_len,
                                                  str_detect_termencoding ()));
 #endif
-    lc_mc_search->prepared_conditions = ret;
+    lc_mc_search->prepared.conditions = ret;
+    lc_mc_search->prepared.result = (lc_mc_search->error == MC_SEARCH_E_OK);
 
-    return (lc_mc_search->error == MC_SEARCH_E_OK);
+    return lc_mc_search->prepared.result;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -299,7 +303,7 @@ mc_search_run (mc_search_t * lc_mc_search, const void *user_data,
 
     mc_search_set_error (lc_mc_search, MC_SEARCH_E_OK, NULL);
 
-    if ((lc_mc_search->prepared_conditions == NULL) && !mc_search_prepare (lc_mc_search))
+    if (!mc_search_prepare (lc_mc_search))
         return FALSE;
 
     switch (lc_mc_search->search_type)
