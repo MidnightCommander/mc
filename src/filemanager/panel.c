@@ -61,6 +61,7 @@
 #include "src/selcodepage.h"    /* select_charset (), SELECT_CHARSET_NO_TRANSLATE */
 #endif
 #include "src/keymap.h"         /* global_keymap_t */
+#include "src/history.h"
 #ifdef ENABLE_SUBSHELL
 #include "src/subshell/subshell.h"      /* do_subshell_chdir() */
 #endif
@@ -2628,7 +2629,7 @@ panel_select_unselect_files (WPanel * panel, const char *title, const char *hist
 static void
 panel_select_files (WPanel * panel)
 {
-    panel_select_unselect_files (panel, _("Select"), ":select_cmd: Select ",
+    panel_select_unselect_files (panel, _("Select"), MC_HISTORY_FM_PANEL_SELECT,
                                  "[Select/Unselect Files]", TRUE);
 }
 
@@ -2637,7 +2638,7 @@ panel_select_files (WPanel * panel)
 static void
 panel_unselect_files (WPanel * panel)
 {
-    panel_select_unselect_files (panel, _("Unselect"), ":unselect_cmd: Unselect ",
+    panel_select_unselect_files (panel, _("Unselect"), MC_HISTORY_FM_PANEL_UNSELECT,
                                  "[Select/Unselect Files]", FALSE);
 }
 
