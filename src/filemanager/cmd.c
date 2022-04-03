@@ -167,40 +167,6 @@ do_edit (const vfs_path_t * what_vpath)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
-set_panel_filter_to (WPanel * p, char *filter)
-{
-    MC_PTR_FREE (p->filter);
-
-    /* Three ways to clear filter: NULL, "", "*" */
-    if (filter == NULL || filter[0] == '\0' || (filter[0] == '*' && filter[1] == '\0'))
-        g_free (filter);
-    else
-        p->filter = filter;
-    reread_cmd ();
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/** Set a given panel filter expression */
-
-static void
-set_panel_filter (WPanel * p)
-{
-    char *reg_exp;
-    const char *x;
-
-    x = p->filter != NULL ? p->filter : easy_patterns ? "*" : ".";
-
-    reg_exp = input_dialog_help (_("Filter"),
-                                 _("Set expression for filtering filenames"),
-                                 "[Filter...]", MC_HISTORY_FM_PANEL_FILTER, x, FALSE,
-                                 INPUT_COMPLETE_FILENAMES);
-    if (reg_exp != NULL)
-        set_panel_filter_to (p, reg_exp);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 static int
 compare_files (const vfs_path_t * vpath1, const vfs_path_t * vpath2, off_t size)
 {
@@ -819,21 +785,6 @@ mkdir_cmd (WPanel * panel)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** Invoked from the left/right menus */
-
-void
-filter_cmd (void)
-{
-    if (SELECTED_IS_PANEL)
-    {
-        WPanel *p;
-
-        p = MENU_PANEL;
-        set_panel_filter (p);
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
 
 void
 reread_cmd (void)
@@ -1426,7 +1377,7 @@ listing_cmd (void)
     p = PANEL (get_panel_widget (MENU_PANEL_IDX));
 
     p->is_panelized = FALSE;
-    set_panel_filter_to (p, NULL);      /* including panel reload */
+    panel_set_filter (p, NULL); /* including panel reload */
 }
 
 /* --------------------------------------------------------------------------------------------- */

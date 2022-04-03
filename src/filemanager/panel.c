@@ -2659,6 +2659,24 @@ panel_select_invert_files (WPanel * panel)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static void
+panel_do_set_filter (WPanel * panel)
+{
+    char *reg_exp;
+    const char *x;
+
+    x = panel->filter != NULL ? panel->filter : easy_patterns ? "*" : ".";
+
+    reg_exp = input_dialog_help (_("Filter"),
+                                 _("Set expression for filtering filenames"),
+                                 "[Filter...]", MC_HISTORY_FM_PANEL_FILTER, x, FALSE,
+                                 INPUT_COMPLETE_FILENAMES);
+    if (reg_exp != NULL)
+        panel_set_filter (panel, reg_exp);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /** Incremental search of a file name in the panel.
   * @param panel instance of WPanel structure
   * @param c_code key code
@@ -3508,6 +3526,9 @@ panel_execute_cmd (WPanel * panel, long command)
         break;
     case CK_Unselect:
         panel_unselect_files (panel);
+        break;
+    case CK_Filter:
+        panel_do_set_filter (panel);
         break;
     case CK_PageDown:
         next_page (panel);
@@ -4568,6 +4589,22 @@ set_panel_formats (WPanel * p)
     }
 
     return retcode;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+panel_set_filter (WPanel * panel, char *filter)
+{
+    MC_PTR_FREE (panel->filter);
+
+    /* Three ways to clear filter: NULL, "", "*" */
+    if (filter == NULL || filter[0] == '\0' || (filter[0] == '*' && filter[1] == '\0'))
+        g_free (filter);
+    else
+        panel->filter = filter;
+
+    reread_cmd ();
 }
 
 /* --------------------------------------------------------------------------------------------- */
