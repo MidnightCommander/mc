@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-27 13:41+0200\n"
+"POT-Creation-Date: 2022-04-10 17:12+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>, 2021\n"
 "Language-Team: Finnish (http://www.transifex.com/mc/mc/language/fi/)\n"
@@ -2315,12 +2315,6 @@ msgstr "Tiedostot merkitty, vaihdetaanko hakemisto?"
 msgid "Cannot change directory"
 msgstr "Ei voitu vaihtaa hakemistoa"
 
-msgid "Filter"
-msgstr "Suodata"
-
-msgid "Set expression for filtering filenames"
-msgstr ""
-
 #, c-format
 msgid "Link %s to:"
 msgstr ""
@@ -3606,6 +3600,9 @@ msgstr "Valitse"
 
 msgid "Unselect"
 msgstr ""
+
+msgid "Filter"
+msgstr "Suodata"
 
 msgid "Do you really want to execute?"
 msgstr ""

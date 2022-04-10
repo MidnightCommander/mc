@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-27 13:41+0200\n"
+"POT-Creation-Date: 2022-04-10 17:12+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: András Tőrös <toros.andras04@gmail.com>, 2020\n"
 "Language-Team: Hungarian (http://www.transifex.com/mc/mc/language/hu/)\n"
@@ -2346,12 +2346,6 @@ msgstr "A fájlkijelölések elvesznek, folytatja?"
 msgid "Cannot change directory"
 msgstr "Nem sikerült könyvtárt váltani"
 
-msgid "Filter"
-msgstr "Szűrő"
-
-msgid "Set expression for filtering filenames"
-msgstr "Adja meg a fájlnevekre vonatkozó szűrőkifejezést"
-
 #, c-format
 msgid "Link %s to:"
 msgstr "\"%s\" linkelése ide:"
@@ -3674,6 +3668,9 @@ msgstr "Kiválaszt"
 msgid "Unselect"
 msgstr "Kijelölések megszüntetése"
 
+msgid "Filter"
+msgstr "Szűrő"
+
 msgid "Do you really want to execute?"
 msgstr "Biztosan futtatni kívánja a programot?"
 
@@ -4624,3 +4621,6 @@ msgstr "Folytatás az elejéről?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nem sikerült behozni /ftp://some.host/editme.txt helyi másolatát"
+
+#~ msgid "Set expression for filtering filenames"
+#~ msgstr "Adja meg a fájlnevekre vonatkozó szűrőkifejezést"

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-27 13:41+0200\n"
+"POT-Creation-Date: 2022-04-10 17:12+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Richard E. van der Luit <nippur@fedoraproject.org>, "
 "2012-2015,2017,2020\n"
@@ -2368,12 +2368,6 @@ msgstr "Bestanden gemarkeerd, veranderen van map?"
 msgid "Cannot change directory"
 msgstr "Veranderen van map mislukt"
 
-msgid "Filter"
-msgstr "Filter"
-
-msgid "Set expression for filtering filenames"
-msgstr " Zet expressie voor het filteren van bestandsnamen"
-
 #, c-format
 msgid "Link %s to:"
 msgstr "%s verbinden met:"
@@ -3703,6 +3697,9 @@ msgstr "Selectie maken"
 msgid "Unselect"
 msgstr "Selectie wissen"
 
+msgid "Filter"
+msgstr "Filter"
+
 msgid "Do you really want to execute?"
 msgstr "Wilt u die opdracht echt uitvoeren? "
 
@@ -4651,3 +4648,6 @@ msgstr "Doorgaan vanaf het begin?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan geen lokale versie van /ftp://some.host/editme.txt ophalen"
+
+#~ msgid "Set expression for filtering filenames"
+#~ msgstr " Zet expressie voor het filteren van bestandsnamen"

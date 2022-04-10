@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-27 13:41+0200\n"
+"POT-Creation-Date: 2022-04-10 17:12+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: scootergrisen, 2018-2020\n"
 "Language-Team: Danish (http://www.transifex.com/mc/mc/language/da/)\n"
@@ -2370,12 +2370,6 @@ msgstr "Filer mærket, vil du skifte mappe?"
 msgid "Cannot change directory"
 msgstr "Kunne ikke skifte mappe"
 
-msgid "Filter"
-msgstr "Filter"
-
-msgid "Set expression for filtering filenames"
-msgstr "Angiv udtryk til filtrering af filnavne"
-
 #, c-format
 msgid "Link %s to:"
 msgstr "Henvis %s til:"
@@ -3703,6 +3697,9 @@ msgstr "Vælg"
 msgid "Unselect"
 msgstr "Fravælg"
 
+msgid "Filter"
+msgstr "Filter"
+
 msgid "Do you really want to execute?"
 msgstr "Ønsker du virkelig at køre?"
 
@@ -4658,3 +4655,6 @@ msgstr "Fortsæt fra begyndelsen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan ikke hente en lokal kopi af /ftp://en.vært/editme.txt"
+
+#~ msgid "Set expression for filtering filenames"
+#~ msgstr "Angiv udtryk til filtrering af filnavne"

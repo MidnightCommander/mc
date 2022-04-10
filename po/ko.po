@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-27 13:41+0200\n"
+"POT-Creation-Date: 2022-04-10 17:12+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Junghee Lee <daemul72@gmail.com>, 2022\n"
 "Language-Team: Korean (http://www.transifex.com/mc/mc/language/ko/)\n"
@@ -2367,12 +2367,6 @@ msgstr "파일 태그됨, 디렉터리 변경을 하시겠습니까?"
 msgid "Cannot change directory"
 msgstr "디렉터리를 변경할 수 없습니다"
 
-msgid "Filter"
-msgstr "필터"
-
-msgid "Set expression for filtering filenames"
-msgstr "파일 이름을 필터링하기 위한 표현식 설정"
-
 #, c-format
 msgid "Link %s to:"
 msgstr "%s에 링크:"
@@ -3696,6 +3690,9 @@ msgstr "선택"
 msgid "Unselect"
 msgstr "선택 해제"
 
+msgid "Filter"
+msgstr "필터"
+
 msgid "Do you really want to execute?"
 msgstr "정말로 실행하시겠습니까?"
 
@@ -4674,3 +4671,6 @@ msgstr "처음부터 계속하시겠습니까?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "/ftp://some.host/editme.txt의 로컬 복사본을 가져올 수 없습니다"
+
+#~ msgid "Set expression for filtering filenames"
+#~ msgstr "파일 이름을 필터링하기 위한 표현식 설정"

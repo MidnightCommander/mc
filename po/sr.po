@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-27 13:41+0200\n"
+"POT-Creation-Date: 2022-04-10 17:12+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
 "Language-Team: Serbian (http://www.transifex.com/mc/mc/language/sr/)\n"
@@ -2347,12 +2347,6 @@ msgstr "Датотеке су означене, желите ли да пром�
 msgid "Cannot change directory"
 msgstr "Не могу да променим директоријум"
 
-msgid "Filter"
-msgstr "Пропусник"
-
-msgid "Set expression for filtering filenames"
-msgstr "Поставите израз за издвајање назива датотека"
-
 #, c-format
 msgid "Link %s to:"
 msgstr "Повежите „%s“ са:"
@@ -3674,6 +3668,9 @@ msgstr "Изаберите"
 msgid "Unselect"
 msgstr "Поништите избор"
 
+msgid "Filter"
+msgstr "Пропусник"
+
 msgid "Do you really want to execute?"
 msgstr "Да ли стварно желите да извршите?"
 
@@ -4626,3 +4623,6 @@ msgstr "Да наставим са почетка?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не могу да довучем месни примерак „/ftp://some.host/editme.txt“"
+
+#~ msgid "Set expression for filtering filenames"
+#~ msgstr "Поставите израз за издвајање назива датотека"

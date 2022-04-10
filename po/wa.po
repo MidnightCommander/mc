@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-27 13:41+0200\n"
+"POT-Creation-Date: 2022-04-10 17:12+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
 "Language-Team: Walloon (http://www.transifex.com/mc/mc/language/wa/)\n"
@@ -2259,12 +2259,6 @@ msgstr "Essegne metowe so les fitchîs, voloz-ve fé on cd?"
 msgid "Cannot change directory"
 msgstr "Dji n' sai candjî di ridant"
 
-msgid "Filter"
-msgstr ""
-
-msgid "Set expression for filtering filenames"
-msgstr ""
-
 #, c-format
 msgid "Link %s to:"
 msgstr ""
@@ -3499,6 +3493,9 @@ msgid "Select"
 msgstr ""
 
 msgid "Unselect"
+msgstr ""
+
+msgid "Filter"
 msgstr ""
 
 msgid "Do you really want to execute?"

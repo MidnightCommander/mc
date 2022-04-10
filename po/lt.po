@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-27 13:41+0200\n"
+"POT-Creation-Date: 2022-04-10 17:12+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Mantas Kriaučiūnas Baltix <mantas@akl.lt>, 2020\n"
 "Language-Team: Lithuanian (http://www.transifex.com/mc/mc/language/lt/)\n"
@@ -2314,12 +2314,6 @@ msgstr "Failai pažymėti, norite įvykdyti „cd“?"
 msgid "Cannot change directory"
 msgstr " Nepavyko pakeisti aplanko "
 
-msgid "Filter"
-msgstr "Filtras"
-
-msgid "Set expression for filtering filenames"
-msgstr "Failų vardų filtro išraiška"
-
 #, c-format
 msgid "Link %s to:"
 msgstr "Sukurti nuorodą iš „%s“ į:"
@@ -3596,6 +3590,9 @@ msgstr "Pasirinkti"
 msgid "Unselect"
 msgstr "Nebesirinkti"
 
+msgid "Filter"
+msgstr "Filtras"
+
 msgid "Do you really want to execute?"
 msgstr ""
 
@@ -4527,3 +4524,6 @@ msgstr "Tęsti nuo pradžios?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Set expression for filtering filenames"
+#~ msgstr "Failų vardų filtro išraiška"

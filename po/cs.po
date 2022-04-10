@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-27 13:41+0200\n"
+"POT-Creation-Date: 2022-04-10 17:12+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>, 2017-2021\n"
 "Language-Team: Czech (http://www.transifex.com/mc/mc/language/cs/)\n"
@@ -2374,12 +2374,6 @@ msgstr "Soubory označeny, chcete přejít do složky?"
 msgid "Cannot change directory"
 msgstr "Nedaří se přejít do složky"
 
-msgid "Filter"
-msgstr "Filtr"
-
-msgid "Set expression for filtering filenames"
-msgstr "Zadejte masku pro filtrování názvů souborů"
-
 #, c-format
 msgid "Link %s to:"
 msgstr "Odkaz %s do:"
@@ -3717,6 +3711,9 @@ msgstr "Výběr"
 msgid "Unselect"
 msgstr "Zrušit výběr"
 
+msgid "Filter"
+msgstr "Filtr"
+
 msgid "Do you really want to execute?"
 msgstr "Opravdu chcete spustit?"
 
@@ -4703,3 +4700,6 @@ msgstr "Pokračovat od začátku?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nedaří získat místní kopii souboru /ftp://some.host/editme.txt"
+
+#~ msgid "Set expression for filtering filenames"
+#~ msgstr "Zadejte masku pro filtrování názvů souborů"
