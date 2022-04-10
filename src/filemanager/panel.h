@@ -55,7 +55,7 @@ typedef enum
     SELECT_FILES_ONLY = 1 << 0,
     SELECT_MATCH_CASE = 1 << 1,
     SELECT_SHELL_PATTERNS = 1 << 2
-} panel_select_flags_t;
+} select_flags_t;
 
 /* run mode and params */
 

@@ -2528,7 +2528,7 @@ mark_file_left (WPanel * panel)
 /* --------------------------------------------------------------------------------------------- */
 
 static mc_search_t *
-panel_select_unselect_files_dialog (panel_select_flags_t * flags, const char *title,
+panel_select_unselect_files_dialog (select_flags_t * flags, const char *title,
                                     const char *history_name, const char *help_section)
 {
     gboolean files_only = (*flags & SELECT_FILES_ONLY) != 0;
