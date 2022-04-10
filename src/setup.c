@@ -1179,6 +1179,12 @@ panel_load_setup (WPanel * panel, const char *section)
 
     panel->user_mini_status =
         mc_config_get_bool (mc_global.panels_config, section, "user_mini_status", FALSE);
+
+    panel->filter.value =
+        mc_config_get_string (mc_global.panels_config, section, "filter_value", NULL);
+    panel->filter.flags =
+        mc_config_get_int (mc_global.panels_config, section, "filter_flags",
+                           (int) FILE_FILTER_DEFAULT_FLAGS);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1218,6 +1224,14 @@ panel_save_setup (WPanel * panel, const char *section)
 
     mc_config_set_bool (mc_global.panels_config, section, "user_mini_status",
                         panel->user_mini_status);
+
+    /* do not save the default filter */
+    if (panel->filter.handler != NULL)
+        mc_config_set_string (mc_global.panels_config, section, "filter_value",
+                              panel->filter.value);
+    else
+        mc_config_del_key (mc_global.panels_config, section, "filter_value");
+    mc_config_set_int (mc_global.panels_config, section, "filter_flags", (int) panel->filter.flags);
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -4419,6 +4419,21 @@ panel_sized_empty_new (const char *panel_name, int y, int x, int lines, int cols
     panel_load_setup (panel, section);
     g_free (section);
 
+    if (panel->filter.value != NULL)
+    {
+        gboolean case_sens = (panel->filter.flags & SELECT_MATCH_CASE) != 0;
+        gboolean shell_patterns = (panel->filter.flags & SELECT_SHELL_PATTERNS) != 0;
+
+        panel->filter.handler = mc_search_new (panel->filter.value, NULL);
+        panel->filter.handler->search_type = shell_patterns ? MC_SEARCH_T_GLOB : MC_SEARCH_T_REGEX;
+        panel->filter.handler->is_entire_line = TRUE;
+        panel->filter.handler->is_case_sensitive = case_sens;
+
+        /* FIXME: silent check -- do not display an error message */
+        if (!mc_search_prepare (panel->filter.handler))
+            file_filter_clear (&panel->filter);
+    }
+
     /* Load format strings */
     err = set_panel_formats (panel);
     if (err != 0)
