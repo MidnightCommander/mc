@@ -991,7 +991,7 @@ display_mini_info (WPanel * panel)
 {
     Widget *w = WIDGET (panel);
 
-    if (!panels_options.show_mini_info)
+    if (!panels_options.show_mini_info || panel->selected < 0)
         return;
 
     widget_gotoyx (w, panel_lines (panel) + 3, 1);
@@ -1497,6 +1497,8 @@ panel_destroy (WPanel * p)
     }
     g_free (p->dir_history.name);
 
+    file_filter_clear (&p->filter);
+
     g_slist_free_full (p->format, (GDestroyNotify) format_item_free);
     g_slist_free_full (p->status_format, (GDestroyNotify) format_item_free);
 
@@ -1592,10 +1594,10 @@ panel_print_header (const WPanel * panel)
 
                 g_string_append (format_txt, fi->title);
 
-                if (panel->filter != NULL && strcmp (fi->id, "name") == 0)
+                if (panel->filter.handler != NULL && strcmp (fi->id, "name") == 0)
                 {
                     g_string_append (format_txt, " [");
-                    g_string_append (format_txt, panel->filter);
+                    g_string_append (format_txt, panel->filter.value);
                     g_string_append (format_txt, "]");
                 }
 
@@ -2529,7 +2531,7 @@ mark_file_left (WPanel * panel)
 
 static mc_search_t *
 panel_select_unselect_files_dialog (select_flags_t * flags, const char *title,
-                                    const char *history_name, const char *help_section)
+                                    const char *history_name, const char *help_section, char **str)
 {
     gboolean files_only = (*flags & SELECT_FILES_ONLY) != 0;
     gboolean case_sens = (*flags & SELECT_MATCH_CASE) != 0;
@@ -2563,6 +2565,8 @@ panel_select_unselect_files_dialog (select_flags_t * flags, const char *title,
     if (reg_exp == NULL || *reg_exp == '\0')
     {
         g_free (reg_exp);
+        if (str != NULL)
+            *str = NULL;
         return SELECT_RESET;
     }
 
@@ -2571,7 +2575,10 @@ panel_select_unselect_files_dialog (select_flags_t * flags, const char *title,
     search->is_entire_line = TRUE;
     search->is_case_sensitive = case_sens;
 
-    g_free (reg_exp);
+    if (str != NULL)
+        *str = reg_exp;
+    else
+        g_free (reg_exp);
 
     if (!mc_search_prepare (search))
     {
@@ -2603,7 +2610,7 @@ panel_select_unselect_files (WPanel * panel, const char *title, const char *hist
     int i;
 
     search = panel_select_unselect_files_dialog (&panels_options.select_flags, title, history_name,
-                                                 help_section);
+                                                 help_section, NULL);
     if (search == NULL || search == SELECT_RESET || search == SELECT_ERROR)
         return;
 
@@ -2663,17 +2670,19 @@ panel_select_invert_files (WPanel * panel)
 static void
 panel_do_set_filter (WPanel * panel)
 {
-    char *reg_exp;
-    const char *x;
+    file_filter_t ff = {.value = NULL,.handler = NULL,.flags = panel->filter.flags };
 
-    x = panel->filter != NULL ? panel->filter : easy_patterns ? "*" : ".";
+    ff.handler =
+        panel_select_unselect_files_dialog (&ff.flags, _("Filter"), MC_HISTORY_FM_PANEL_FILTER,
+                                            "[Filter...]", &ff.value);
 
-    reg_exp = input_dialog_help (_("Filter"),
-                                 _("Set expression for filtering filenames"),
-                                 "[Filter...]", MC_HISTORY_FM_PANEL_FILTER, x, FALSE,
-                                 INPUT_COMPLETE_FILENAMES);
-    if (reg_exp != NULL)
-        panel_set_filter (panel, reg_exp);
+    if (ff.handler == NULL || ff.handler == SELECT_ERROR)
+        return;
+
+    if (ff.handler == SELECT_RESET)
+        ff.handler = NULL;
+
+    panel_set_filter (panel, &ff);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -3339,7 +3348,7 @@ panel_do_cd_int (WPanel * panel, const vfs_path_t * new_dir_vpath, enum cd_enum 
     panel_clean_dir (panel);
 
     if (!dir_list_load (&panel->dir, panel->cwd_vpath, panel->sort_field->sort_routine,
-                        &panel->sort_info, panel->filter))
+                        &panel->sort_info, &panel->filter))
         message (D_ERROR, MSG_ERROR, _("Cannot read directory contents"));
 
     try_to_select (panel, get_parent_dir_name (panel->cwd_vpath, olddir_vpath));
@@ -4383,6 +4392,8 @@ panel_sized_empty_new (const char *panel_name, int y, int x, int lines, int cols
     panel->list_format = list_full;
     panel->user_format = g_strdup (DEFAULT_USER_FORMAT);
 
+    panel->filter.flags = FILE_FILTER_DEFAULT_FLAGS;
+
     for (i = 0; i < LIST_FORMATS; i++)
         panel->user_status_format[i] = g_strdup (DEFAULT_USER_FORMAT);
 
@@ -4473,7 +4484,7 @@ panel_sized_with_dir_new (const char *panel_name, int y, int x, int lines, int c
 
     /* Load the default format */
     if (!dir_list_load (&panel->dir, panel->cwd_vpath, panel->sort_field->sort_routine,
-                        &panel->sort_info, panel->filter))
+                        &panel->sort_info, &panel->filter))
         message (D_ERROR, MSG_ERROR, _("Cannot read directory contents"));
 
     /* Restore old right path */
@@ -4521,7 +4532,7 @@ panel_reload (WPanel * panel)
     show_dir (panel);
 
     if (!dir_list_reload (&panel->dir, panel->cwd_vpath, panel->sort_field->sort_routine,
-                          &panel->sort_info, panel->filter))
+                          &panel->sort_info, &panel->filter))
         message (D_ERROR, MSG_ERROR, _("Cannot read directory contents"));
 
     panel->dirty = TRUE;
@@ -4594,15 +4605,15 @@ set_panel_formats (WPanel * p)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-panel_set_filter (WPanel * panel, char *filter)
+panel_set_filter (WPanel * panel, const file_filter_t * filter)
 {
-    MC_PTR_FREE (panel->filter);
+    MC_PTR_FREE (panel->filter.value);
+    mc_search_free (panel->filter.handler);
+    panel->filter.handler = NULL;
 
-    /* Three ways to clear filter: NULL, "", "*" */
-    if (filter == NULL || filter[0] == '\0' || (filter[0] == '*' && filter[1] == '\0'))
-        g_free (filter);
-    else
-        panel->filter = filter;
+    /* NULL to clear filter */
+    if (filter != NULL)
+        panel->filter = *filter;
 
     reread_cmd ();
 }
