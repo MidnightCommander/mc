@@ -945,9 +945,27 @@ menu (option
 .SH "    Filter..."
 The filter command allows you to specify a shell pattern (for example
 .BR "*.tar.gz" )
-which the files must match to be shown. Regardless
-of the filter pattern, the directories and the links to directories
-are always shown in the directory panel.
+which the files and directories must match to be shown.
+The
+.\"LINK2"
+input line
+.\"Input Line Keys"
+allow enter the pattern of file/directory names that will be shown
+in the panel.
+.PP
+When
+.I Files only
+checkbox is on, only files will be matched to the filter, and all
+directories will be shown. Otherwise, as files as directories will
+be filtered. When
+.I Shell Patterns
+checkbox is on, the regular expression is much like the filename globbing
+in the shell (* standing for zero or more characters and ? standing
+for one character). Otherwise, the matching of files/directoris is done
+with normal regular expressions (see ed(1)). When
+.I Case sensitive
+checkbox is on, the filtering will be case sensitive characters. Otherwise,
+the case will be ignored.
 .\"NODE "    Reread"
 .SH "    Reread"
 The reread command reload the list of files in the directory. It is
