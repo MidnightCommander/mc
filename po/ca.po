@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-27 13:41+0200\n"
+"POT-Creation-Date: 2022-04-10 17:12+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>, 2017-2022\n"
 "Language-Team: Catalan (http://www.transifex.com/mc/mc/language/ca/)\n"
@@ -2383,12 +2383,6 @@ msgstr "Hi ha fitxers seleccionats. Canvio de directori?"
 msgid "Cannot change directory"
 msgstr "No s'ha pogut canviar de directori"
 
-msgid "Filter"
-msgstr "Filtre"
-
-msgid "Set expression for filtering filenames"
-msgstr "Establiu l'expressió per a filtrar els noms de fitxer"
-
 #, c-format
 msgid "Link %s to:"
 msgstr "Enllaça %s a:"
@@ -3717,6 +3711,9 @@ msgstr "Selecciona"
 msgid "Unselect"
 msgstr "No seleccionis"
 
+msgid "Filter"
+msgstr "Filtre"
+
 msgid "Do you really want to execute?"
 msgstr "Realment el voleu executar?"
 
@@ -4712,3 +4709,6 @@ msgstr "Continuo des del començament?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "No s'ha pogut obtenir una còpia local de /ftp://algun.amfitrió/editam.txt"
+
+#~ msgid "Set expression for filtering filenames"
+#~ msgstr "Establiu l'expressió per a filtrar els noms de fitxer"

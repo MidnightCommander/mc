@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-27 13:41+0200\n"
+"POT-Creation-Date: 2022-04-10 17:12+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Simona Iacob <s@zp1.net>, 2021-2022\n"
 "Language-Team: Romanian (http://www.transifex.com/mc/mc/language/ro/)\n"
@@ -2377,12 +2377,6 @@ msgstr "Există fișiere marcate, doriți să cd?"
 msgid "Cannot change directory"
 msgstr "Nu pot deschide directorul %s"
 
-msgid "Filter"
-msgstr "Filtru"
-
-msgid "Set expression for filtering filenames"
-msgstr "Folosește expresia pentru filtrarea numelor de fișiere"
-
 #, c-format
 msgid "Link %s to:"
 msgstr "Leagă %s la:"
@@ -3713,6 +3707,9 @@ msgstr "Selectează"
 msgid "Unselect"
 msgstr "Deselectează"
 
+msgid "Filter"
+msgstr "Filtru"
+
 msgid "Do you really want to execute?"
 msgstr "Chiar dorești să execuți?"
 
@@ -4699,3 +4696,6 @@ msgstr "Continuă de la început?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nu se poate aduce o copie locală a /ftp://some.host/editme.txt"
+
+#~ msgid "Set expression for filtering filenames"
+#~ msgstr "Folosește expresia pentru filtrarea numelor de fișiere"

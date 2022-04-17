@@ -8,6 +8,7 @@
 #include <sys/stat.h>
 
 #include "lib/global.h"
+#include "lib/search.h"
 #include "lib/util.h"
 #include "lib/vfs/vfs.h"
 
@@ -22,6 +23,16 @@ typedef enum
     DIR_READ,
     DIR_CLOSE
 } dir_list_cb_state_t;
+
+/* selection flags */
+typedef enum
+{
+    SELECT_FILES_ONLY = 1 << 0,
+    SELECT_MATCH_CASE = 1 << 1,
+    SELECT_SHELL_PATTERNS = 1 << 2
+} select_flags_t;
+
+#define FILE_FILTER_DEFAULT_FLAGS (SELECT_FILES_ONLY | SELECT_MATCH_CASE | SELECT_SHELL_PATTERNS)
 
 /* dir_list callback */
 typedef void (*dir_list_cb_fn) (dir_list_cb_state_t state, void *data);
@@ -51,6 +62,14 @@ typedef struct dir_sort_options_struct
     gboolean exec_first;        /**< executables are at top of list */
 } dir_sort_options_t;
 
+/* filter  */
+typedef struct
+{
+    char *value;
+    mc_search_t *handler;
+    select_flags_t flags;
+} file_filter_t;
+
 /*** global variables defined in .c file *********************************************************/
 
 /*** declarations of public functions ************************************************************/
@@ -60,9 +79,9 @@ gboolean dir_list_append (dir_list * list, const char *fname, const struct stat 
                           gboolean link_to_dir, gboolean stale_link);
 
 gboolean dir_list_load (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
-                        const dir_sort_options_t * sort_op, const char *filter);
+                        const dir_sort_options_t * sort_op, const file_filter_t * filter);
 gboolean dir_list_reload (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
-                          const dir_sort_options_t * sort_op, const char *filter);
+                          const dir_sort_options_t * sort_op, const file_filter_t * filter);
 void dir_list_sort (dir_list * list, GCompareFunc sort, const dir_sort_options_t * sort_op);
 gboolean dir_list_init (dir_list * list);
 void dir_list_clean (dir_list * list);
@@ -82,6 +101,8 @@ int sort_size (file_entry_t * a, file_entry_t * b);
 int sort_inode (file_entry_t * a, file_entry_t * b);
 
 gboolean if_link_is_exe (const vfs_path_t * full_name, const file_entry_t * file);
+
+void file_filter_clear (file_filter_t * filter);
 
 /*** inline functions ****************************************************************************/
 

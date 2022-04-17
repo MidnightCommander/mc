@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-27 13:41+0200\n"
+"POT-Creation-Date: 2022-04-10 17:12+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Arya Hadi <arya.hadi97@gmail.com>, 2017\n"
 "Language-Team: Persian (http://www.transifex.com/mc/mc/language/fa/)\n"
@@ -2263,12 +2263,6 @@ msgstr ""
 msgid "Cannot change directory"
 msgstr ""
 
-msgid "Filter"
-msgstr "فیلتر"
-
-msgid "Set expression for filtering filenames"
-msgstr ""
-
 #, c-format
 msgid "Link %s to:"
 msgstr ""
@@ -3504,6 +3498,9 @@ msgstr "انتخاب"
 
 msgid "Unselect"
 msgstr ""
+
+msgid "Filter"
+msgstr "فیلتر"
 
 msgid "Do you really want to execute?"
 msgstr ""

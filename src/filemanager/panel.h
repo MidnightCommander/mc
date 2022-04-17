@@ -49,16 +49,7 @@ typedef enum
     UP_ONLY_CURRENT = 2
 } panel_update_flags_t;
 
-/* selection flags */
-typedef enum
-{
-    SELECT_FILES_ONLY = 1 << 0,
-    SELECT_MATCH_CASE = 1 << 1,
-    SELECT_SHELL_PATTERNS = 1 << 2
-} panel_select_flags_t;
-
 /* run mode and params */
-
 enum cd_enum
 {
     cd_parse_command,
@@ -129,7 +120,7 @@ typedef struct
     gboolean user_mini_status;  /* Is user_status_format used */
     char *user_status_format[LIST_FORMATS];     /* User format for status line */
 
-    char *filter;               /* File name filter */
+    file_filter_t filter;       /* File name filter */
 
     struct
     {
@@ -178,6 +169,8 @@ vfs_path_t *remove_encoding_from_path (const vfs_path_t * vpath);
 
 void update_panels (panel_update_flags_t flags, const char *current_file);
 int set_panel_formats (WPanel * p);
+
+void panel_set_filter (WPanel * panel, const file_filter_t * filter);
 
 void try_to_select (WPanel * panel, const char *name);
 

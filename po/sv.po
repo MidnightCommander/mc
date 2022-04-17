@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-27 13:41+0200\n"
+"POT-Creation-Date: 2022-04-10 17:12+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Alexander Kilian <alexander.kilian@gmail.com>, 2022\n"
 "Language-Team: Swedish (http://www.transifex.com/mc/mc/language/sv/)\n"
@@ -2367,12 +2367,6 @@ msgstr "Filerna är markerade, vill du byta katalog?"
 msgid "Cannot change directory"
 msgstr "Kan inte byta katalog"
 
-msgid "Filter"
-msgstr "Filter"
-
-msgid "Set expression for filtering filenames"
-msgstr "Ange uttryck för filnamnsfiltrering"
-
 #, c-format
 msgid "Link %s to:"
 msgstr "Länka %s till:"
@@ -3700,6 +3694,9 @@ msgstr "Markera"
 msgid "Unselect"
 msgstr "Avmarkera"
 
+msgid "Filter"
+msgstr "Filter"
+
 msgid "Do you really want to execute?"
 msgstr "Vill du verkligen exekvera?"
 
@@ -4651,3 +4648,6 @@ msgstr "Fortsätt från början?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan inte hämta en lokal kopia av /ftp://some.host/editme.txt"
+
+#~ msgid "Set expression for filtering filenames"
+#~ msgstr "Ange uttryck för filnamnsfiltrering"

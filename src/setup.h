@@ -54,7 +54,7 @@ typedef struct
     gboolean permission_mode;   /* If TRUE, we use permission hilighting */
     qsearch_mode_t qsearch_mode;        /* Quick search mode */
     gboolean torben_fj_mode;    /* If TRUE, use some usability hacks by Torben */
-    panel_select_flags_t select_flags;  /* Select/unselect file flags */
+    select_flags_t select_flags;        /* Select/unselect file flags */
 } panels_options_t;
 
 typedef struct macro_action_t

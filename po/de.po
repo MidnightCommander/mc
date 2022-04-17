@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-27 13:41+0200\n"
+"POT-Creation-Date: 2022-04-10 17:12+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Ettore Atalan <atalanttore@googlemail.com>, 2015-2021\n"
 "Language-Team: German (http://www.transifex.com/mc/mc/language/de/)\n"
@@ -2385,12 +2385,6 @@ msgstr "Dateien markiert, Verzeichnis wechseln?"
 msgid "Cannot change directory"
 msgstr "Konnte Verzeichnis nicht wechseln"
 
-msgid "Filter"
-msgstr "Filter"
-
-msgid "Set expression for filtering filenames"
-msgstr "Ausdruck zum Filtern von Dateinamen setzen"
-
 #, c-format
 msgid "Link %s to:"
 msgstr "Link %s zu:"
@@ -3720,6 +3714,9 @@ msgstr "Auswahl"
 msgid "Unselect"
 msgstr "Deselektieren"
 
+msgid "Filter"
+msgstr "Filter"
+
 msgid "Do you really want to execute?"
 msgstr "Möchten Sie wirklich ausführen?"
 
@@ -4693,3 +4690,6 @@ msgstr "Am Anfang fortsetzen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kann lokale Kopie von /ftp://some.host/editme.txt nicht erstellen"
+
+#~ msgid "Set expression for filtering filenames"
+#~ msgstr "Ausdruck zum Filtern von Dateinamen setzen"

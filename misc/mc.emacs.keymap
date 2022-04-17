@@ -127,6 +127,7 @@ Bottom = alt-gt; end; c1
 # SortByExt =
 # SortBySize =
 # SortByMTime =
+# Filter =
 # ScrollLeft =
 # ScrollRight =
 

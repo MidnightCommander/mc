@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-27 13:41+0200\n"
+"POT-Creation-Date: 2022-04-10 17:12+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: linwebs <thomas881114@gmail.com>, 2020\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/mc/mc/language/"
@@ -2286,12 +2286,6 @@ msgstr "有檔案貼上標籤了，還是要改變目錄？"
 msgid "Cannot change directory"
 msgstr "無法改變目錄"
 
-msgid "Filter"
-msgstr ""
-
-msgid "Set expression for filtering filenames"
-msgstr ""
-
 #, c-format
 msgid "Link %s to:"
 msgstr "連結 %s 到:"
@@ -3533,6 +3527,9 @@ msgstr "選取"
 
 msgid "Unselect"
 msgstr "取消選取"
+
+msgid "Filter"
+msgstr ""
 
 msgid "Do you really want to execute?"
 msgstr "您真的想要執行?"

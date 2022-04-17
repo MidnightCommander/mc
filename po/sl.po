@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-27 13:41+0200\n"
+"POT-Creation-Date: 2022-04-10 17:12+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Matej Urbančič <>, 2012\n"
 "Language-Team: Slovenian (http://www.transifex.com/mc/mc/language/sl/)\n"
@@ -2271,12 +2271,6 @@ msgstr "Datoteke označene, želite spremeniti imenik"
 msgid "Cannot change directory"
 msgstr "Ne morem spremeniti imenika"
 
-msgid "Filter"
-msgstr ""
-
-msgid "Set expression for filtering filenames"
-msgstr ""
-
 #, c-format
 msgid "Link %s to:"
 msgstr "Poveži %s na:"
@@ -3519,6 +3513,9 @@ msgid "Select"
 msgstr ""
 
 msgid "Unselect"
+msgstr ""
+
+msgid "Filter"
 msgstr ""
 
 msgid "Do you really want to execute?"

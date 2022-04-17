@@ -8,7 +8,7 @@
    Miguel de Icaza, 1995
    Timur Bakeyev, 1997, 1999
    Slava Zanko <slavazanko@gmail.com>, 2013
-   Andrew Borodin <aborodin@vmail.ru>, 2013-2016
+   Andrew Borodin <aborodin@vmail.ru>, 2013-2022
 
    This file is part of the Midnight Commander.
 
@@ -61,6 +61,7 @@
 #include "src/selcodepage.h"    /* select_charset (), SELECT_CHARSET_NO_TRANSLATE */
 #endif
 #include "src/keymap.h"         /* global_keymap_t */
+#include "src/history.h"
 #ifdef ENABLE_SUBSHELL
 #include "src/subshell/subshell.h"      /* do_subshell_chdir() */
 #endif
@@ -116,6 +117,10 @@ mc_fhl_t *mc_filehighlight = NULL;
 #define MARKED          2
 #define MARKED_SELECTED 3
 #define STATUS          5
+
+/* select/unselect dialog results */
+#define SELECT_RESET ((mc_search_t *)(-1))
+#define SELECT_ERROR ((mc_search_t *)(-2))
 
 /*** file scope type declarations ****************************************************************/
 
@@ -986,7 +991,7 @@ display_mini_info (WPanel * panel)
 {
     Widget *w = WIDGET (panel);
 
-    if (!panels_options.show_mini_info)
+    if (!panels_options.show_mini_info || panel->selected < 0)
         return;
 
     widget_gotoyx (w, panel_lines (panel) + 3, 1);
@@ -1492,6 +1497,8 @@ panel_destroy (WPanel * p)
     }
     g_free (p->dir_history.name);
 
+    file_filter_clear (&p->filter);
+
     g_slist_free_full (p->format, (GDestroyNotify) format_item_free);
     g_slist_free_full (p->status_format, (GDestroyNotify) format_item_free);
 
@@ -1587,10 +1594,10 @@ panel_print_header (const WPanel * panel)
 
                 g_string_append (format_txt, fi->title);
 
-                if (panel->filter != NULL && strcmp (fi->id, "name") == 0)
+                if (panel->filter.handler != NULL && strcmp (fi->id, "name") == 0)
                 {
                     g_string_append (format_txt, " [");
-                    g_string_append (format_txt, panel->filter);
+                    g_string_append (format_txt, panel->filter.value);
                     g_string_append (format_txt, "]");
                 }
 
@@ -2522,17 +2529,16 @@ mark_file_left (WPanel * panel)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
-panel_select_unselect_files (WPanel * panel, const char *title, const char *history_name,
-                             gboolean do_select)
+static mc_search_t *
+panel_select_unselect_files_dialog (select_flags_t * flags, const char *title,
+                                    const char *history_name, const char *help_section, char **str)
 {
-    gboolean files_only = (panels_options.select_flags & SELECT_FILES_ONLY) != 0;
-    gboolean case_sens = (panels_options.select_flags & SELECT_MATCH_CASE) != 0;
-    gboolean shell_patterns = (panels_options.select_flags & SELECT_SHELL_PATTERNS) != 0;
+    gboolean files_only = (*flags & SELECT_FILES_ONLY) != 0;
+    gboolean case_sens = (*flags & SELECT_MATCH_CASE) != 0;
+    gboolean shell_patterns = (*flags & SELECT_SHELL_PATTERNS) != 0;
 
     char *reg_exp;
     mc_search_t *search;
-    int i;
 
     quick_widget_t quick_widgets[] = {
         /* *INDENT-OFF* */
@@ -2549,24 +2555,66 @@ panel_select_unselect_files (WPanel * panel, const char *title, const char *hist
     };
 
     quick_dialog_t qdlg = {
-        -1, -1, 50,
-        title, "[Select/Unselect Files]",
+        -1, -1, 50, title, help_section,
         quick_widgets, NULL, NULL
     };
 
     if (quick_dialog (&qdlg) == B_CANCEL)
-        return;
+        return NULL;
 
     if (reg_exp == NULL || *reg_exp == '\0')
     {
         g_free (reg_exp);
-        return;
+        if (str != NULL)
+            *str = NULL;
+        return SELECT_RESET;
     }
 
     search = mc_search_new (reg_exp, NULL);
     search->search_type = shell_patterns ? MC_SEARCH_T_GLOB : MC_SEARCH_T_REGEX;
     search->is_entire_line = TRUE;
     search->is_case_sensitive = case_sens;
+
+    if (str != NULL)
+        *str = reg_exp;
+    else
+        g_free (reg_exp);
+
+    if (!mc_search_prepare (search))
+    {
+        message (D_ERROR, MSG_ERROR, _("Malformed regular expression"));
+        mc_search_free (search);
+        return SELECT_ERROR;
+    }
+
+    /* result flags */
+    *flags = 0;
+    if (case_sens)
+        *flags |= SELECT_MATCH_CASE;
+    if (files_only)
+        *flags |= SELECT_FILES_ONLY;
+    if (shell_patterns)
+        *flags |= SELECT_SHELL_PATTERNS;
+
+    return search;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+panel_select_unselect_files (WPanel * panel, const char *title, const char *history_name,
+                             const char *help_section, gboolean do_select)
+{
+    mc_search_t *search;
+    gboolean files_only;
+    int i;
+
+    search = panel_select_unselect_files_dialog (&panels_options.select_flags, title, history_name,
+                                                 help_section, NULL);
+    if (search == NULL || search == SELECT_RESET || search == SELECT_ERROR)
+        return;
+
+    files_only = (panels_options.select_flags & SELECT_FILES_ONLY) != 0;
 
     for (i = 0; i < panel->dir.len; i++)
     {
@@ -2581,16 +2629,6 @@ panel_select_unselect_files (WPanel * panel, const char *title, const char *hist
     }
 
     mc_search_free (search);
-    g_free (reg_exp);
-
-    /* result flags */
-    panels_options.select_flags = 0;
-    if (case_sens)
-        panels_options.select_flags |= SELECT_MATCH_CASE;
-    if (files_only)
-        panels_options.select_flags |= SELECT_FILES_ONLY;
-    if (shell_patterns)
-        panels_options.select_flags |= SELECT_SHELL_PATTERNS;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2598,7 +2636,8 @@ panel_select_unselect_files (WPanel * panel, const char *title, const char *hist
 static void
 panel_select_files (WPanel * panel)
 {
-    panel_select_unselect_files (panel, _("Select"), ":select_cmd: Select ", TRUE);
+    panel_select_unselect_files (panel, _("Select"), MC_HISTORY_FM_PANEL_SELECT,
+                                 "[Select/Unselect Files]", TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2606,7 +2645,8 @@ panel_select_files (WPanel * panel)
 static void
 panel_unselect_files (WPanel * panel)
 {
-    panel_select_unselect_files (panel, _("Unselect"), ":unselect_cmd: Unselect ", FALSE);
+    panel_select_unselect_files (panel, _("Unselect"), MC_HISTORY_FM_PANEL_UNSELECT,
+                                 "[Select/Unselect Files]", FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2623,6 +2663,26 @@ panel_select_invert_files (WPanel * panel)
         if (!panels_options.reverse_files_only || !S_ISDIR (file->st.st_mode))
             do_file_mark (panel, i, file->f.marked ? 0 : 1);
     }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+panel_do_set_filter (WPanel * panel)
+{
+    file_filter_t ff = {.value = NULL,.handler = NULL,.flags = panel->filter.flags };
+
+    ff.handler =
+        panel_select_unselect_files_dialog (&ff.flags, _("Filter"), MC_HISTORY_FM_PANEL_FILTER,
+                                            "[Filter...]", &ff.value);
+
+    if (ff.handler == NULL || ff.handler == SELECT_ERROR)
+        return;
+
+    if (ff.handler == SELECT_RESET)
+        ff.handler = NULL;
+
+    panel_set_filter (panel, &ff);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -3288,7 +3348,7 @@ panel_do_cd_int (WPanel * panel, const vfs_path_t * new_dir_vpath, enum cd_enum 
     panel_clean_dir (panel);
 
     if (!dir_list_load (&panel->dir, panel->cwd_vpath, panel->sort_field->sort_routine,
-                        &panel->sort_info, panel->filter))
+                        &panel->sort_info, &panel->filter))
         message (D_ERROR, MSG_ERROR, _("Cannot read directory contents"));
 
     try_to_select (panel, get_parent_dir_name (panel->cwd_vpath, olddir_vpath));
@@ -3475,6 +3535,9 @@ panel_execute_cmd (WPanel * panel, long command)
         break;
     case CK_Unselect:
         panel_unselect_files (panel);
+        break;
+    case CK_Filter:
+        panel_do_set_filter (panel);
         break;
     case CK_PageDown:
         next_page (panel);
@@ -4329,6 +4392,8 @@ panel_sized_empty_new (const char *panel_name, int y, int x, int lines, int cols
     panel->list_format = list_full;
     panel->user_format = g_strdup (DEFAULT_USER_FORMAT);
 
+    panel->filter.flags = FILE_FILTER_DEFAULT_FLAGS;
+
     for (i = 0; i < LIST_FORMATS; i++)
         panel->user_status_format[i] = g_strdup (DEFAULT_USER_FORMAT);
 
@@ -4353,6 +4418,21 @@ panel_sized_empty_new (const char *panel_name, int y, int x, int lines, int cols
     }
     panel_load_setup (panel, section);
     g_free (section);
+
+    if (panel->filter.value != NULL)
+    {
+        gboolean case_sens = (panel->filter.flags & SELECT_MATCH_CASE) != 0;
+        gboolean shell_patterns = (panel->filter.flags & SELECT_SHELL_PATTERNS) != 0;
+
+        panel->filter.handler = mc_search_new (panel->filter.value, NULL);
+        panel->filter.handler->search_type = shell_patterns ? MC_SEARCH_T_GLOB : MC_SEARCH_T_REGEX;
+        panel->filter.handler->is_entire_line = TRUE;
+        panel->filter.handler->is_case_sensitive = case_sens;
+
+        /* FIXME: silent check -- do not display an error message */
+        if (!mc_search_prepare (panel->filter.handler))
+            file_filter_clear (&panel->filter);
+    }
 
     /* Load format strings */
     err = set_panel_formats (panel);
@@ -4419,7 +4499,7 @@ panel_sized_with_dir_new (const char *panel_name, int y, int x, int lines, int c
 
     /* Load the default format */
     if (!dir_list_load (&panel->dir, panel->cwd_vpath, panel->sort_field->sort_routine,
-                        &panel->sort_info, panel->filter))
+                        &panel->sort_info, &panel->filter))
         message (D_ERROR, MSG_ERROR, _("Cannot read directory contents"));
 
     /* Restore old right path */
@@ -4467,7 +4547,7 @@ panel_reload (WPanel * panel)
     show_dir (panel);
 
     if (!dir_list_reload (&panel->dir, panel->cwd_vpath, panel->sort_field->sort_routine,
-                          &panel->sort_info, panel->filter))
+                          &panel->sort_info, &panel->filter))
         message (D_ERROR, MSG_ERROR, _("Cannot read directory contents"));
 
     panel->dirty = TRUE;
@@ -4535,6 +4615,22 @@ set_panel_formats (WPanel * p)
     }
 
     return retcode;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+panel_set_filter (WPanel * panel, const file_filter_t * filter)
+{
+    MC_PTR_FREE (panel->filter.value);
+    mc_search_free (panel->filter.handler);
+    panel->filter.handler = NULL;
+
+    /* NULL to clear filter */
+    if (filter != NULL)
+        panel->filter = *filter;
+
+    reread_cmd ();
 }
 
 /* --------------------------------------------------------------------------------------------- */

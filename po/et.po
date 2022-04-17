@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-27 13:41+0200\n"
+"POT-Creation-Date: 2022-04-10 17:12+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Priit Jõerüüt <transifex@joeruut.com>, 2020-2021\n"
 "Language-Team: Estonian (http://www.transifex.com/mc/mc/language/et/)\n"
@@ -2358,12 +2358,6 @@ msgstr "Failid märgitud, soovid kataloogi vahetada?"
 msgid "Cannot change directory"
 msgstr "Kataloogi vahetamine nurjus"
 
-msgid "Filter"
-msgstr "Filter"
-
-msgid "Set expression for filtering filenames"
-msgstr "Määra failinimede filtri väljend"
-
 #, c-format
 msgid "Link %s to:"
 msgstr "Loo link %s:"
@@ -3690,6 +3684,9 @@ msgstr "Vali"
 msgid "Unselect"
 msgstr "Tühista valik"
 
+msgid "Filter"
+msgstr "Filter"
+
 msgid "Do you really want to execute?"
 msgstr "Kas sa soovid tõesti käivitada?"
 
@@ -4651,3 +4648,6 @@ msgstr "Kas jätkata algusest?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kohaliku koopia hankimine failist /ftp://some.host/editme.txt nurjus"
+
+#~ msgid "Set expression for filtering filenames"
+#~ msgstr "Määra failinimede filtri väljend"

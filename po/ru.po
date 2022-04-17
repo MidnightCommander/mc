@@ -26,7 +26,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-27 13:41+0200\n"
+"POT-Creation-Date: 2022-04-10 17:12+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>, 2018\n"
 "Language-Team: Russian (http://www.transifex.com/mc/mc/language/ru/)\n"
@@ -2391,12 +2391,6 @@ msgstr "Файлы помечены, сменить каталог?"
 msgid "Cannot change directory"
 msgstr "Не удалось сменить каталог"
 
-msgid "Filter"
-msgstr "Фильтр"
-
-msgid "Set expression for filtering filenames"
-msgstr "Задайте выражение для выбора имен файлов"
-
 #, c-format
 msgid "Link %s to:"
 msgstr "Создать ссылку с %s на:"
@@ -3732,6 +3726,9 @@ msgstr "Отметить группу"
 msgid "Unselect"
 msgstr "Снять отметку"
 
+msgid "Filter"
+msgstr "Фильтр"
+
 msgid "Do you really want to execute?"
 msgstr "Вы действительно хотите выполнить это?"
 
@@ -4686,3 +4683,6 @@ msgstr "Продолжить с начала?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не удалось получить локальную копию /ftp://some.host/editme.txt"
+
+#~ msgid "Set expression for filtering filenames"
+#~ msgstr "Задайте выражение для выбора имен файлов"

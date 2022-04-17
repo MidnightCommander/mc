@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-27 13:41+0200\n"
+"POT-Creation-Date: 2022-04-10 17:12+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Myselus, 2015-2017\n"
 "Language-Team: Bulgarian (http://www.transifex.com/mc/mc/language/bg/)\n"
@@ -2344,12 +2344,6 @@ msgstr "Има маркирани файлове,"
 msgid "Cannot change directory"
 msgstr "Не може да се смени директорията"
 
-msgid "Filter"
-msgstr "Филтър"
-
-msgid "Set expression for filtering filenames"
-msgstr "Задаване на изражение за филтриране на файлови имена"
-
 #, c-format
 msgid "Link %s to:"
 msgstr "Свързване на %s с:"
@@ -3675,6 +3669,9 @@ msgstr "Избиране"
 msgid "Unselect"
 msgstr "Деселектиране"
 
+msgid "Filter"
+msgstr "Филтър"
+
 msgid "Do you really want to execute?"
 msgstr "Наистина ли искате на изпълните това?"
 
@@ -4628,3 +4625,6 @@ msgstr "Да се продължи ли от началото?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не може да се изтегли локално копие на /ftp://some.host/editme.txt"
+
+#~ msgid "Set expression for filtering filenames"
+#~ msgstr "Задаване на изражение за филтриране на файлови имена"

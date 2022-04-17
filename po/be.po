@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-27 13:41+0200\n"
+"POT-Creation-Date: 2022-04-10 17:12+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Źmicier Turok <nashtlumach@gmail.com>, 2018\n"
 "Language-Team: Belarusian (http://www.transifex.com/mc/mc/language/be/)\n"
@@ -2368,12 +2368,6 @@ msgstr "Файлы пазначаны, змяніць каталог?"
 msgid "Cannot change directory"
 msgstr "Немагчыма змяніць каталог"
 
-msgid "Filter"
-msgstr "Фільтраваць"
-
-msgid "Set expression for filtering filenames"
-msgstr "Вызначце выраз для фільтравання назваў файлаў"
-
 #, c-format
 msgid "Link %s to:"
 msgstr "Стварыць спасылку «%s» на:"
@@ -3707,6 +3701,9 @@ msgstr "Абраць"
 msgid "Unselect"
 msgstr "Не абіраць"
 
+msgid "Filter"
+msgstr "Фільтраваць"
+
 msgid "Do you really want to execute?"
 msgstr "Сапраўды выканаць?"
 
@@ -4661,3 +4658,6 @@ msgstr "Працягваць ад пачатку?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Немагчыма атрымаць лакальную копію /ftp://some.host/editme.txt"
+
+#~ msgid "Set expression for filtering filenames"
+#~ msgstr "Вызначце выраз для фільтравання назваў файлаў"

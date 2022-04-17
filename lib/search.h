@@ -107,8 +107,11 @@ typedef struct mc_search_struct
 
     /* private data */
 
-    /* prepared conditions */
-    GPtrArray *conditions;
+    struct
+    {
+        GPtrArray *conditions;
+        gboolean result;
+    } prepared;
 
     /* original search string */
     gchar *original;

@@ -1240,9 +1240,6 @@ midnight_execute_cmd (Widget * sender, long command)
     case CK_ExternalPanelize:
         external_panelize ();
         break;
-    case CK_Filter:
-        filter_cmd ();
-        break;
     case CK_ViewFiltered:
         view_filtered_cmd (current_panel);
         break;
@@ -1360,6 +1357,7 @@ midnight_execute_cmd (Widget * sender, long command)
     case CK_Select:
     case CK_Unselect:
     case CK_SelectInvert:
+    case CK_Filter:
         res = send_message (current_panel, filemanager, MSG_ACTION, command, NULL);
         break;
     case CK_Shell:

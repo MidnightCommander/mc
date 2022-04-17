@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-27 13:41+0200\n"
+"POT-Creation-Date: 2022-04-10 17:12+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Efstathios Iosifidis <iefstathios@gmail.com>, 2015\n"
 "Language-Team: Greek (http://www.transifex.com/mc/mc/language/el/)\n"
@@ -2291,12 +2291,6 @@ msgstr ""
 msgid "Cannot change directory"
 msgstr "Αδυναμία αλλαγής καταλόγου"
 
-msgid "Filter"
-msgstr "Φίλτρο"
-
-msgid "Set expression for filtering filenames"
-msgstr "Ρύθμιση έκφρασης για φιλτράρισμα ονομάτων αρχείων"
-
 #, c-format
 msgid "Link %s to:"
 msgstr "Δεσμός %s σε:"
@@ -3589,6 +3583,9 @@ msgstr "Επιλογή"
 msgid "Unselect"
 msgstr "Αποεπιλογή"
 
+msgid "Filter"
+msgstr "Φίλτρο"
+
 msgid "Do you really want to execute?"
 msgstr "Σίγουρα θέλετε να γίνει εκτέλεση;"
 
@@ -4514,3 +4511,6 @@ msgstr "Συνέχεια από την αρχή;"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Set expression for filtering filenames"
+#~ msgstr "Ρύθμιση έκφρασης για φιλτράρισμα ονομάτων αρχείων"

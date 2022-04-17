@@ -6,7 +6,7 @@
 
    Written by:
    Slava Zanko <slavazanko@gmail.com>, 2013
-   Andrew Borodin <aborodin@vmail.ru>, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2013-2022
 
    This file is part of the Midnight Commander.
 
@@ -145,10 +145,11 @@ clean_sort_keys (dir_list * list, int start, int count)
  */
 
 static gboolean
-handle_dirent (struct vfs_dirent *dp, const char *filter, struct stat *buf1, gboolean * link_to_dir,
-               gboolean * stale_link)
+handle_dirent (struct vfs_dirent *dp, const file_filter_t * filter, struct stat *buf1,
+               gboolean * link_to_dir, gboolean * stale_link)
 {
     vfs_path_t *vpath;
+    gboolean ok = TRUE;
 
     if (DIR_IS_DOT (dp->d_name) || DIR_IS_DOTDOT (dp->d_name))
         return FALSE;
@@ -176,8 +177,15 @@ handle_dirent (struct vfs_dirent *dp, const char *filter, struct stat *buf1, gbo
 
     vfs_path_free (vpath, TRUE);
 
-    return (S_ISDIR (buf1->st_mode) || *link_to_dir || filter == NULL
-            || mc_search (filter, NULL, dp->d_name, MC_SEARCH_T_GLOB));
+    if (filter != NULL && filter->handler != NULL)
+    {
+        gboolean files_only = (filter->flags & SELECT_FILES_ONLY) != 0;
+
+        ok = ((S_ISDIR (buf1->st_mode) || *link_to_dir) && files_only)
+            || mc_search_run (filter->handler, dp->d_name, 0, strlen (dp->d_name), NULL);
+    }
+
+    return ok;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -620,7 +628,7 @@ handle_path (const char *path, struct stat * buf1, gboolean * link_to_dir, gbool
 
 gboolean
 dir_list_load (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
-               const dir_sort_options_t * sort_op, const char *filter)
+               const dir_sort_options_t * sort_op, const file_filter_t * filter)
 {
     DIR *dirp;
     struct vfs_dirent *dp;
@@ -693,7 +701,7 @@ if_link_is_exe (const vfs_path_t * full_name_vpath, const file_entry_t * file)
 
 gboolean
 dir_list_reload (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
-                 const dir_sort_options_t * sort_op, const char *filter)
+                 const dir_sort_options_t * sort_op, const file_filter_t * filter)
 {
     DIR *dirp;
     struct vfs_dirent *dp;
@@ -811,6 +819,17 @@ dir_list_reload (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
     dir_list_free_list (&dir_copy);
 
     return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+file_filter_clear (file_filter_t * filter)
+{
+    MC_PTR_FREE (filter->value);
+    mc_search_free (filter->handler);
+    filter->handler = NULL;
+    /* keep filter->flags */
 }
 
 /* --------------------------------------------------------------------------------------------- */

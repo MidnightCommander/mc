@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-03-27 13:41+0200\n"
+"POT-Creation-Date: 2022-04-10 17:12+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2022\n"
 "Language-Team: Esperanto (http://www.transifex.com/mc/mc/language/eo/)\n"
@@ -2369,12 +2369,6 @@ msgstr "Dosieroj markitaj, ĉu vi volas al ŝanĝi la dosierujon?"
 msgid "Cannot change directory"
 msgstr "Ne eblas ŝanĝi dosierujon"
 
-msgid "Filter"
-msgstr "Filtri"
-
-msgid "Set expression for filtering filenames"
-msgstr "Agordi esprimon por filtri dosiernomojn"
-
 #, c-format
 msgid "Link %s to:"
 msgstr "Ligi je %s al:"
@@ -3702,6 +3696,9 @@ msgstr "Elekti"
 msgid "Unselect"
 msgstr "Malelekti"
 
+msgid "Filter"
+msgstr "Filtri"
+
 msgid "Do you really want to execute?"
 msgstr "Ĉu vi efekti volas plenumigi?"
 
@@ -4683,3 +4680,6 @@ msgstr "Ĉu deiri de la komenco?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Ne eblas atingi lokan kopion de /ftp://some.host/editme.txt"
+
+#~ msgid "Set expression for filtering filenames"
+#~ msgstr "Agordi esprimon por filtri dosiernomojn"
