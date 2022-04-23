@@ -903,9 +903,6 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, size_t * h_s
         recent_long_link =
             next_long_link != NULL ? next_long_link : g_strndup (header->header.linkname,
                                                                  sizeof (header->header.linkname));
-        len = strlen (recent_long_link);
-        if (len > 1 && IS_PATH_SEP (recent_long_link[len - 1]))
-            recent_long_link[len - 1] = '\0';
 
         recent_long_name = NULL;
         switch (arch->type)
@@ -952,13 +949,13 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, size_t * h_s
         }
 
         canonicalize_pathname (recent_long_name);
-        len = strlen (recent_long_name);
 
         data_position = current_tar_position;
 
         p = strrchr (recent_long_name, PATH_SEP);
         if (p == NULL)
         {
+            len = strlen (recent_long_name);
             p = recent_long_name;
             q = recent_long_name + len; /* "" */
         }
@@ -977,7 +974,17 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, size_t * h_s
 
         if (header->header.typeflag == LNKTYPE)
         {
-            inode = vfs_s_find_inode (me, archive, recent_long_link, LINK_NO_FOLLOW, FL_NONE);
+            if (*recent_long_link == '\0')
+                inode = NULL;
+            else
+            {
+                len = strlen (recent_long_link);
+                if (IS_PATH_SEP (recent_long_link[len - 1]))
+                    recent_long_link[len - 1] = '\0';
+
+                inode = vfs_s_find_inode (me, archive, recent_long_link, LINK_NO_FOLLOW, FL_NONE);
+            }
+
             if (inode == NULL)
                 message (D_ERROR, MSG_ERROR, _("Inconsistent tar archive"));
             else
