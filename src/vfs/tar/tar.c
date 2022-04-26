@@ -870,6 +870,74 @@ tar_fill_stat (struct vfs_s_super *archive, union block *header)
 /* --------------------------------------------------------------------------------------------- */
 
 static read_header
+tar_insert_entry (struct vfs_class *me, struct vfs_s_super *archive, union block *header,
+                  struct vfs_s_inode **inode)
+{
+    char *p, *q;
+    char *file_name = current_stat_info.file_name;
+    char *link_name = current_stat_info.link_name;
+    size_t len;
+    struct vfs_s_inode *parent;
+    struct vfs_s_entry *entry;
+
+    p = strrchr (file_name, PATH_SEP);
+    if (p == NULL)
+    {
+        len = strlen (file_name);
+        p = file_name;
+        q = file_name + len;    /* "" */
+    }
+    else
+    {
+        *(p++) = '\0';
+        q = file_name;
+    }
+
+    parent = vfs_s_find_inode (me, archive, q, LINK_NO_FOLLOW, FL_MKDIR);
+    if (parent == NULL)
+        return HEADER_FAILURE;
+
+    *inode = NULL;
+
+    if (header->header.typeflag == LNKTYPE)
+    {
+        if (*link_name != '\0')
+        {
+            len = strlen (link_name);
+            if (IS_PATH_SEP (link_name[len - 1]))
+                link_name[len - 1] = '\0';
+
+            *inode = vfs_s_find_inode (me, archive, link_name, LINK_NO_FOLLOW, FL_NONE);
+        }
+
+        if (*inode == NULL)
+            return HEADER_FAILURE;
+    }
+    else
+    {
+        if (S_ISDIR (current_stat_info.stat.st_mode))
+        {
+            entry = VFS_SUBCLASS (me)->find_entry (me, parent, p, LINK_NO_FOLLOW, FL_NONE);
+            if (entry != NULL)
+                return HEADER_SUCCESS;
+        }
+
+        *inode = vfs_s_new_inode (me, archive, &current_stat_info.stat);
+        (*inode)->data_offset = current_tar_position;
+
+        if (link_name != NULL && *link_name != '\0')
+            (*inode)->linkname = g_strdup (link_name);
+    }
+
+    entry = vfs_s_new_entry (me, p, *inode);
+    vfs_s_insert_entry (me, parent, entry);
+
+    return HEADER_SUCCESS;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static read_header
 tar_read_header (struct vfs_class *me, struct vfs_s_super *archive)
 {
     tar_super_t *arch = TAR_SUPER (archive);
@@ -956,12 +1024,8 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive)
     }
 
     {
-        struct vfs_s_entry *entry;
-        struct vfs_s_inode *inode = NULL, *parent;
-        off_t data_position;
-        char *p, *q;
-        size_t len;
         char *recent_long_name, *recent_long_link;
+        struct vfs_s_inode *inode = NULL;
 
         recent_long_link =
             next_long_link != NULL ? next_long_link : g_strndup (header->header.linkname,
@@ -1016,68 +1080,10 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive)
         canonicalize_pathname (recent_long_name);
         tar_assign_string (&current_stat_info.file_name, recent_long_name);
 
-        data_position = current_tar_position;
+        status = tar_insert_entry (me, archive, header, &inode);
+        if (status != HEADER_SUCCESS)
+            return status;
 
-        p = strrchr (recent_long_name, PATH_SEP);
-        if (p == NULL)
-        {
-            len = strlen (recent_long_name);
-            p = recent_long_name;
-            q = recent_long_name + len; /* "" */
-        }
-        else
-        {
-            *(p++) = '\0';
-            q = recent_long_name;
-        }
-
-        parent = vfs_s_find_inode (me, archive, q, LINK_NO_FOLLOW, FL_MKDIR);
-        if (parent == NULL)
-        {
-            message (D_ERROR, MSG_ERROR, _("Inconsistent tar archive"));
-            return HEADER_FAILURE;
-        }
-
-        if (header->header.typeflag == LNKTYPE)
-        {
-            if (*recent_long_link == '\0')
-                inode = NULL;
-            else
-            {
-                len = strlen (recent_long_link);
-                if (IS_PATH_SEP (recent_long_link[len - 1]))
-                    recent_long_link[len - 1] = '\0';
-
-                inode = vfs_s_find_inode (me, archive, recent_long_link, LINK_NO_FOLLOW, FL_NONE);
-            }
-
-            if (inode == NULL)
-                message (D_ERROR, MSG_ERROR, _("Inconsistent tar archive"));
-            else
-            {
-                entry = vfs_s_new_entry (me, p, inode);
-                vfs_s_insert_entry (me, parent, entry);
-                goto done;
-            }
-        }
-
-        if (S_ISDIR (st->st_mode))
-        {
-            entry = VFS_SUBCLASS (me)->find_entry (me, parent, p, LINK_NO_FOLLOW, FL_NONE);
-            if (entry != NULL)
-                goto done;
-        }
-
-        inode = vfs_s_new_inode (me, archive, st);
-        inode->data_offset = data_position;
-
-        if (*current_stat_info.linkname != '\0')
-            inode->linkname = g_strdup (current_stat_info.link_name);
-
-        entry = vfs_s_new_entry (me, p, inode);
-        vfs_s_insert_entry (me, parent, entry);
-
-      done:
         next_long_link = next_long_name = NULL;
 
         if (arch->type == TAR_GNU && header->oldgnu_header.isextended)
