@@ -39,7 +39,7 @@ do_view_action() {
         dbview -b "${MC_EXT_FILENAME}"
         ;;
     sqlite)
-        sqlite3 "${MC_EXT_FILENAME}" .dump
+        sqlite3 "file:${MC_EXT_FILENAME}?immutable=1" .dump
         ;;
     mo)
         msgunfmt "${MC_EXT_FILENAME}" || \
