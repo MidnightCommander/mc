@@ -926,8 +926,7 @@ edit_dialog_bg_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm
     {
     case MSG_INIT:
         w->rect = WIDGET (w->owner)->rect;
-        w->rect.y++;
-        w->rect.lines -= 2;
+        rect_grow (&w->rect, -1, 0);
         w->pos_flags |= WPOS_KEEP_ALL;
         return MSG_HANDLED;
 
@@ -1274,8 +1273,7 @@ edit_files (const GList * files)
         gboolean f_ok;
         WRect r = wd->rect;
 
-        r.y++;
-        r.lines -= 2;
+        rect_grow (&r, -1, 0);
 
         f_ok = edit_add_window (edit_dlg, r.y, r.x, r.lines, r.cols, f->file_vpath, f->line_number);
         /* at least one file has been opened succefully */
@@ -1542,8 +1540,7 @@ edit_toggle_fullscreen (WEdit * edit)
 
         edit_save_size (edit);
         r = WIDGET (w->owner)->rect;
-        r.y++;
-        r.lines -= 2;
+        rect_grow (&r, -1, 0);
         widget_set_size_rect (w, &r);
         /* follow screen size on resize */
         w->pos_flags = WPOS_KEEP_ALL;

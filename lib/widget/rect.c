@@ -4,7 +4,7 @@
    The Free Software Foundation, Inc.
 
    Written by:
-   Andrew Borodin <aborodin@vmail.ru>, 2020
+   Andrew Borodin <aborodin@vmail.ru>, 2020-2022
 
    This file is part of the Midnight Commander.
 
@@ -109,7 +109,7 @@ rect_move (WRect * r, int dy, int dx)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
-  * Change size of rectangle area.
+  * Change size of rectangle area keeping it's position.
   *
   * @param r WRect object
   * @param dl change size value of heigth
@@ -121,6 +121,28 @@ rect_resize (WRect * r, int dl, int dc)
 {
     r->lines += dl;
     r->cols += dc;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+  * Change size of rectangle area keeping it's center.
+  *
+  * @param r WRect object
+  * @param dl change size value of y-coordinate and heigth
+  *           Positive value means move up and increase heigth.
+  *           Negative value means move down and decrease heigth.
+  * @param dc change size value of x-coordinate and width
+  *           Positive value means move left and increase width.
+  *           Negative value means move right and decrease width.
+  */
+
+void
+rect_grow (WRect * r, int dl, int dc)
+{
+    r->y -= dl;
+    r->x -= dc;
+    r->lines += dl * 2;
+    r->cols += dc * 2;
 }
 
 /* --------------------------------------------------------------------------------------------- */

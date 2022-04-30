@@ -1063,12 +1063,7 @@ edit_scroll_screen_over_cursor (WEdit * edit)
                  -(EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width));
 
     if (!edit->fullscreen)
-    {
-        w->x++;
-        w->cols -= 2;
-        w->y++;
-        w->lines -= 2;
-    }
+        rect_grow (w, -1, -1);
 
     r_extreme = EDIT_RIGHT_EXTREME;
     l_extreme = EDIT_LEFT_EXTREME;
@@ -1119,12 +1114,7 @@ edit_scroll_screen_over_cursor (WEdit * edit)
     rect_resize (w, EDIT_TEXT_VERTICAL_OFFSET,
                  EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width);
     if (!edit->fullscreen)
-    {
-        w->x--;
-        w->cols += 2;
-        w->y--;
-        w->lines += 2;
-    }
+        rect_grow (w, 1, 1);
 }
 
 /* --------------------------------------------------------------------------------------------- */
