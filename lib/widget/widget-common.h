@@ -210,6 +210,7 @@ cb_ret_t widget_default_callback (Widget * w, Widget * sender, widget_msg_t msg,
 void widget_set_options (Widget * w, widget_options_t options, gboolean enable);
 void widget_adjust_position (widget_pos_flags_t pos_flags, int *y, int *x, int *lines, int *cols);
 void widget_set_size (Widget * w, int y, int x, int lines, int cols);
+void widget_set_size_rect (Widget * w, WRect * r);
 /* select color for widget in dependance of state */
 void widget_selectcolor (Widget * w, gboolean focused, gboolean hotkey);
 cb_ret_t widget_draw (Widget * w);
@@ -422,14 +423,6 @@ static inline gboolean
 widget_update_cursor (Widget * w)
 {
     return (send_message (w, NULL, MSG_CURSOR, 0, NULL) == MSG_HANDLED);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static inline void
-widget_set_size_rect (Widget * w, const WRect * r)
-{
-    widget_set_size (w, r->y, r->x, r->lines, r->cols);
 }
 
 /* --------------------------------------------------------------------------------------------- */

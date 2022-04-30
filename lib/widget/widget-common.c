@@ -10,7 +10,7 @@
    Jakub Jelinek, 1995
    Andrej Borsenkow, 1996
    Norbert Warmuth, 1997
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2011, 2012, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2009-2022
 
    This file is part of the Midnight Commander.
 
@@ -444,6 +444,21 @@ widget_set_size (Widget * w, int y, int x, int lines, int cols)
     WRect r = { y, x, lines, cols };
 
     send_message (w, NULL, MSG_RESIZE, 0, &r);
+    widget_draw (w);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Change widget position and size.
+ *
+ * @param w widget
+ * @param r WRect obgect that holds position and size
+ */
+
+void
+widget_set_size_rect (Widget * w, WRect * r)
+{
+    send_message (w, NULL, MSG_RESIZE, 0, r);
     widget_draw (w);
 }
 
