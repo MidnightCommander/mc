@@ -407,7 +407,7 @@ static int
 panel_lines (const WPanel * p)
 {
     /* 3 lines are: top frame, column header, botton frame */
-    return (CONST_WIDGET (p)->lines - 3 - (panels_options.show_mini_info ? 2 : 0));
+    return (CONST_WIDGET (p)->rect.lines - 3 - (panels_options.show_mini_info ? 2 : 0));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -918,7 +918,7 @@ repaint_file (WPanel * panel, int file_index, int attr, gboolean isstatus)
     int fln = 0;
 
     panel_is_split = !isstatus && panel->list_cols > 1;
-    width = w->cols - 2;
+    width = w->rect.cols - 2;
 
     if (panel_is_split)
     {
@@ -928,7 +928,7 @@ repaint_file (WPanel * panel, int file_index, int attr, gboolean isstatus)
         offset = width * nth_column;
 
         if (nth_column + 1 >= panel->list_cols)
-            width = w->cols - offset - 2;
+            width = w->rect.cols - offset - 2;
     }
 
     /* Nothing to paint */
@@ -1000,7 +1000,8 @@ display_mini_info (WPanel * panel)
     {
         tty_setcolor (INPUT_COLOR);
         tty_print_char ('/');
-        tty_print_string (str_fit_to_term (panel->quick_search.buffer->str, w->cols - 3, J_LEFT));
+        tty_print_string (str_fit_to_term
+                          (panel->quick_search.buffer->str, w->rect.cols - 3, J_LEFT));
         return;
     }
 
@@ -1022,10 +1023,10 @@ display_mini_info (WPanel * panel)
         {
             link_target[len] = 0;
             tty_print_string ("-> ");
-            tty_print_string (str_fit_to_term (link_target, w->cols - 5, J_LEFT_FIT));
+            tty_print_string (str_fit_to_term (link_target, w->rect.cols - 5, J_LEFT_FIT));
         }
         else
-            tty_print_string (str_fit_to_term (_("<readlink failed>"), w->cols - 2, J_LEFT));
+            tty_print_string (str_fit_to_term (_("<readlink failed>"), w->rect.cols - 2, J_LEFT));
     }
     else if (DIR_IS_DOTDOT (panel->dir.list[panel->selected].fname->str))
     {
@@ -1033,7 +1034,7 @@ display_mini_info (WPanel * panel)
          * while loading directory (dir_list_load() and dir_list_reload()),
          * the actual stat info about ".." directory isn't got;
          * so just don't display incorrect info about ".." directory */
-        tty_print_string (str_fit_to_term (_("UP--DIR"), w->cols - 2, J_LEFT));
+        tty_print_string (str_fit_to_term (_("UP--DIR"), w->rect.cols - 2, J_LEFT));
     }
     else
         /* Default behavior */
@@ -1083,7 +1084,7 @@ display_total_marked_size (const WPanel * panel, int y, int x, gboolean size_onl
         return;
 
     buf = size_only ? b_bytes : buffer;
-    cols = w->cols - 2;
+    cols = w->rect.cols - 2;
 
     g_strlcpy (b_bytes, size_trunc_sep (panel->total, panels_options.kilobyte_si),
                sizeof (b_bytes));
@@ -1098,7 +1099,7 @@ display_total_marked_size (const WPanel * panel, int y, int x, gboolean size_onl
 
     if (x < 0)
         /* center in panel */
-        x = (w->cols - str_term_width1 (buf)) / 2 - 1;
+        x = (w->rect.cols - str_term_width1 (buf)) / 2 - 1;
 
     /*
      * y == panel_lines (panel) + 2  for mini_info_separator
@@ -1122,7 +1123,7 @@ mini_info_separator (const WPanel * panel)
         y = panel_lines (panel) + 2;
 
         tty_setcolor (NORMAL_COLOR);
-        tty_draw_hline (w->y + y, w->x + 1, ACS_HLINE, w->cols - 2);
+        tty_draw_hline (w->rect.y + y, w->rect.x + 1, ACS_HLINE, w->rect.cols - 2);
         /* Status displays total marked size.
          * Centered in panel, full format. */
         display_total_marked_size (panel, y, -1, FALSE);
@@ -1169,7 +1170,7 @@ show_free_space (const WPanel * panel)
         g_snprintf (tmp, sizeof (tmp), " %s/%s (%d%%) ", buffer1, buffer2,
                     myfs_stats.total == 0 ? 0 :
                     (int) (100 * (long double) myfs_stats.avail / myfs_stats.total));
-        widget_gotoyx (w, w->lines - 1, w->cols - 2 - (int) strlen (tmp));
+        widget_gotoyx (w, w->rect.lines - 1, w->rect.cols - 2 - (int) strlen (tmp));
         tty_setcolor (NORMAL_COLOR);
         tty_print_string (tmp);
     }
@@ -1264,7 +1265,7 @@ show_dir (const WPanel * panel)
     gchar *tmp;
 
     set_colors (panel);
-    tty_draw_box (w->y, w->x, w->lines, w->cols, FALSE);
+    tty_draw_box (w->rect.y, w->rect.x, w->rect.lines, w->rect.cols, FALSE);
 
     if (panels_options.show_mini_info)
     {
@@ -1274,7 +1275,7 @@ show_dir (const WPanel * panel)
 
         widget_gotoyx (w, y, 0);
         tty_print_alt_char (ACS_LTEE, FALSE);
-        widget_gotoyx (w, y, w->cols - 1);
+        widget_gotoyx (w, y, w->rect.cols - 1);
         tty_print_alt_char (ACS_RTEE, FALSE);
     }
 
@@ -1285,7 +1286,7 @@ show_dir (const WPanel * panel)
     tmp = g_strdup_printf ("%s[%s]%s", tmp, panel_history_show_list_char,
                            panel_history_next_item_char);
 
-    widget_gotoyx (w, 0, w->cols - 6);
+    widget_gotoyx (w, 0, w->rect.cols - 6);
     tty_print_string (tmp);
 
     g_free (tmp);
@@ -1311,7 +1312,7 @@ show_dir (const WPanel * panel)
         tty_setcolor (REVERSE_COLOR);
 
     tmp = panel_correct_path_to_show (panel);
-    tty_printf (" %s ", str_term_trim (tmp, MIN (MAX (w->cols - 12, 0), w->cols)));
+    tty_printf (" %s ", str_term_trim (tmp, MIN (MAX (w->rect.cols - 12, 0), w->rect.cols)));
     g_free (tmp);
 
     if (!panels_options.show_mini_info)
@@ -1327,7 +1328,7 @@ show_dir (const WPanel * panel)
                             size_trunc_sep (panel->dir.list[panel->selected].st.st_size,
                                             panels_options.kilobyte_si));
                 tty_setcolor (NORMAL_COLOR);
-                widget_gotoyx (w, w->lines - 1, 4);
+                widget_gotoyx (w, w->rect.lines - 1, 4);
                 tty_print_string (buffer);
             }
         }
@@ -1335,7 +1336,7 @@ show_dir (const WPanel * panel)
         {
             /* Show total size of marked files
              * In the bottom of panel, display size only. */
-            display_total_marked_size (panel, w->lines - 1, 2, TRUE);
+            display_total_marked_size (panel, w->rect.lines - 1, 2, TRUE);
         }
     }
 
@@ -1571,7 +1572,7 @@ panel_print_header (const WPanel * panel)
     widget_gotoyx (w, 1, 1);
     tty_getyx (&y, &x);
     tty_setcolor (NORMAL_COLOR);
-    tty_draw_hline (y, x, ' ', w->cols - 2);
+    tty_draw_hline (y, x, ' ', w->rect.cols - 2);
 
     format_txt = g_string_new ("");
 
@@ -1847,7 +1848,7 @@ use_display_format (WPanel * panel, const char *format, char **error, gboolean i
 
     panel->dirty = TRUE;
 
-    usable_columns = WIDGET (panel)->cols - 2;
+    usable_columns = WIDGET (panel)->rect.cols - 2;
     /* Status needn't to be split */
     if (!isstatus)
     {
@@ -3429,8 +3430,8 @@ directory_history_list (WPanel * panel)
 
     pos = g_list_position (panel->dir_history.current, panel->dir_history.list);
 
-    history_descriptor_init (&hd, WIDGET (panel)->y, WIDGET (panel)->x, panel->dir_history.list,
-                             (int) pos);
+    history_descriptor_init (&hd, WIDGET (panel)->rect.y, WIDGET (panel)->rect.x,
+                             panel->dir_history.list, (int) pos);
     history_show (&hd);
 
     panel->dir_history.list = hd.list;
@@ -3900,7 +3901,7 @@ panel_mouse_is_on_item (const WPanel * panel, int y, int x)
     {
         int width, lines;
 
-        width = (CONST_WIDGET (panel)->cols - 2) / panel->list_cols;
+        width = (CONST_WIDGET (panel)->rect.cols - 2) / panel->list_cols;
         lines = panel_lines (panel);
         y += lines * (x / width);
     }
@@ -3927,13 +3928,13 @@ panel_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
             if (event->x == 1)
                 /* "<" button */
                 directory_history_prev (panel);
-            else if (event->x == w->cols - 2)
+            else if (event->x == w->rect.cols - 2)
                 /* ">" button */
                 directory_history_next (panel);
-            else if (event->x >= w->cols - 5 && event->x <= w->cols - 3)
+            else if (event->x >= w->rect.cols - 5 && event->x <= w->rect.cols - 3)
                 /* "^" button */
                 directory_history_list (panel);
-            else if (event->x == w->cols - 6)
+            else if (event->x == w->rect.cols - 6)
                 /* "." button show/hide hidden files */
                 send_message (filemanager, NULL, MSG_ACTION, CK_ShowHidden, NULL);
             else
@@ -4117,7 +4118,7 @@ do_select (WPanel * panel, int i)
     {
         panel->dirty = TRUE;
         panel->selected = i;
-        panel->top_file = panel->selected - (WIDGET (panel)->lines - 2) / 2;
+        panel->top_file = panel->selected - (WIDGET (panel)->rect.lines - 2) / 2;
         if (panel->top_file < 0)
             panel->top_file = 0;
     }

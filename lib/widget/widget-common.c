@@ -85,10 +85,7 @@ widget_default_resize (Widget * w, const WRect * r)
     if (r == NULL)
         return MSG_NOT_HANDLED;
 
-    w->y = r->y;
-    w->x = r->x;
-    w->lines = r->lines;
-    w->cols = r->cols;
+    w->rect = *r;
 
     return MSG_HANDLED;
 }
@@ -312,10 +309,7 @@ widget_init (Widget * w, int y, int x, int lines, int cols,
              widget_cb_fn callback, widget_mouse_cb_fn mouse_callback)
 {
     w->id = widget_set_id ();
-    w->x = x;
-    w->y = y;
-    w->cols = cols;
-    w->lines = lines;
+    rect_init (&w->rect, y, x, lines, cols);
     w->pos_flags = WPOS_KEEP_DEFAULT;
     w->callback = callback;
 
@@ -488,7 +482,7 @@ void
 widget_erase (Widget * w)
 {
     if (w != NULL)
-        tty_fill_region (w->y, w->x, w->lines, w->cols, ' ');
+        tty_fill_region (w->rect.y, w->rect.x, w->rect.lines, w->rect.cols, ' ');
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -665,22 +659,6 @@ widget_set_bottom (Widget * w)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
-  * Check whether two widgets are overlapped or not.
-  * @param a 1st widget
-  * @param b 2nd widget
-  *
-  * @return TRUE if widgets are overlapped, FALSE otherwise.
-  */
-
-gboolean
-widget_overlapped (const Widget * a, const Widget * b)
-{
-    return !((b->x >= a->x + a->cols)
-             || (a->x >= b->x + b->cols) || (b->y >= a->y + a->lines) || (a->y >= b->y + b->lines));
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
   * Look up key event of widget and translate it to command ID.
   * @param w   widget
   * @param key key event
@@ -714,15 +692,9 @@ void
 widget_default_make_global (Widget * w, const WRect * delta)
 {
     if (delta != NULL)
-    {
-        w->y += delta->y;
-        w->x += delta->x;
-    }
+        rect_move (&w->rect, delta->y, delta->x);
     else if (w->owner != NULL)
-    {
-        w->y += WIDGET (w->owner)->y;
-        w->x += WIDGET (w->owner)->x;
-    }
+        rect_move (&w->rect, WIDGET (w->owner)->rect.y, WIDGET (w->owner)->rect.x);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -739,15 +711,9 @@ void
 widget_default_make_local (Widget * w, const WRect * delta)
 {
     if (delta != NULL)
-    {
-        w->y -= delta->y;
-        w->x -= delta->x;
-    }
+        rect_move (&w->rect, -delta->y, -delta->x);
     else if (w->owner != NULL)
-    {
-        w->y -= WIDGET (w->owner)->y;
-        w->x -= WIDGET (w->owner)->x;
-    }
+        rect_move (&w->rect, -WIDGET (w->owner)->rect.y, -WIDGET (w->owner)->rect.x);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -912,8 +878,8 @@ mouse_get_local (const Gpm_Event * global, const Widget * w)
     memset (&local, 0, sizeof (local));
 
     local.buttons = global->buttons;
-    local.x = global->x - w->x;
-    local.y = global->y - w->y;
+    local.x = global->x - w->rect.x;
+    local.y = global->y - w->rect.y;
     local.type = global->type;
 
     return local;
@@ -924,8 +890,10 @@ mouse_get_local (const Gpm_Event * global, const Widget * w)
 gboolean
 mouse_global_in_widget (const Gpm_Event * event, const Widget * w)
 {
-    return (event->x > w->x) && (event->y > w->y) && (event->x <= w->x + w->cols)
-        && (event->y <= w->y + w->lines);
+    const WRect *r = &w->rect;
+
+    return (event->x > r->x) && (event->y > r->y) && (event->x <= r->x + r->cols)
+        && (event->y <= r->y + r->lines);
 }
 
 /* --------------------------------------------------------------------------------------------- */

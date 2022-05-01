@@ -10,7 +10,7 @@
    Jakub Jelinek, 1995
    Andrej Borsenkow, 1996
    Norbert Warmuth, 1997
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2009-2022
 
    This file is part of the Midnight Commander.
 
@@ -101,7 +101,7 @@ label_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
                 }
 
                 widget_gotoyx (w, y, 0);
-                tty_print_string (str_fit_to_term (p, w->cols, align));
+                tty_print_string (str_fit_to_term (p, w->rect.cols, align));
 
                 if (q == NULL)
                     break;
@@ -154,7 +154,7 @@ void
 label_set_text (WLabel * label, const char *text)
 {
     Widget *w = WIDGET (label);
-    int newcols = w->cols;
+    int newcols = w->rect.cols;
     int newlines;
 
     if (label->text != NULL && text != NULL && strcmp (label->text, text) == 0)
@@ -170,17 +170,14 @@ label_set_text (WLabel * label, const char *text)
         if (label->auto_adjust_cols)
         {
             str_msg_term_size (text, &newlines, &newcols);
-            if (newcols > w->cols)
-                w->cols = newcols;
-            if (newlines > w->lines)
-                w->lines = newlines;
+            w->rect.cols = MAX (newcols, w->rect.cols);
+            w->rect.lines = MAX (newlines, w->rect.lines);
         }
     }
 
     widget_draw (w);
 
-    if (newcols < w->cols)
-        w->cols = newcols;
+    w->rect.cols = MIN (newcols, w->rect.cols);
 }
 
 /* --------------------------------------------------------------------------------------------- */

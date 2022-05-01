@@ -2276,9 +2276,9 @@ dview_compute_areas (WDiff * dview)
 {
     Widget *w = WIDGET (dview);
 
-    dview->height = w->lines - 1;
-    dview->half1 = w->cols / 2;
-    dview->half2 = w->cols - dview->half1;
+    dview->height = w->rect.lines - 1;
+    dview->half1 = w->rect.cols / 2;
+    dview->half2 = w->rect.cols - dview->half1;
 
     dview_compute_split (dview, 0);
 }
@@ -3457,7 +3457,8 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
 
     dview = g_new0 (WDiff, 1);
     w = WIDGET (dview);
-    widget_init (w, dw->y, dw->x, dw->lines - 1, dw->cols, dview_callback, dview_mouse_callback);
+    widget_init (w, dw->rect.y, dw->rect.x, dw->rect.lines - 1, dw->rect.cols, dview_callback,
+                 dview_mouse_callback);
     w->options |= WOP_SELECTABLE;
     w->keymap = diff_map;
     group_add_widget_autopos (g, w, WPOS_KEEP_ALL, NULL);

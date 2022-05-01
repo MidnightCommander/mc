@@ -14,7 +14,7 @@
    Pavel Machek, 1998
    Roland Illig <roland.illig@gmx.de>, 2004, 2005
    Slava Zanko <slavazanko@google.com>, 2009, 2013
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2009-2022
    Ilia Maslakov <il.smind@gmail.com>, 2009
 
    This file is part of the Midnight Commander.
@@ -96,7 +96,7 @@ mcview_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
     case MSG_MOUSE_DOWN:
         if (mcview_is_in_panel (view))
         {
-            if (event->y == WIDGET (w->owner)->y)
+            if (event->y == WIDGET (w->owner)->rect.y)
             {
                 /* return MOU_UNHANDLED */
                 event->result.abort = TRUE;
@@ -247,7 +247,7 @@ mcview_viewer (const char *command, const vfs_path_t * file_vpath, int start_lin
 
     g = GROUP (view_dlg);
 
-    lc_mcview = mcview_new (vw->y, vw->x, vw->lines - 1, vw->cols, FALSE);
+    lc_mcview = mcview_new (vw->rect.y, vw->rect.x, vw->rect.lines - 1, vw->rect.cols, FALSE);
     group_add_widget_autopos (g, lc_mcview, WPOS_KEEP_ALL, NULL);
 
     b = WIDGET (buttonbar_new ());

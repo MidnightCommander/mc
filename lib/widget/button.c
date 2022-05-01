@@ -10,7 +10,7 @@
    Jakub Jelinek, 1995
    Andrej Borsenkow, 1996
    Norbert Warmuth, 1997
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2013, 2016
+   Andrew Borodin <aborodin@vmail.ru>, 2009-2022
 
    This file is part of the Midnight Commander.
 
@@ -250,7 +250,7 @@ button_set_text (WButton * b, const char *text)
     hotkey_free (b->text);
     b->text = hk;
     b->hotpos = (b->text.hotkey != NULL) ? str_term_width1 (b->text.start) : -1;
-    w->cols = button_get_len (b);
+    w->rect.cols = button_get_len (b);
     widget_draw (w);
 }
 

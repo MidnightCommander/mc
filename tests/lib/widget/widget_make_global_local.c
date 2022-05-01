@@ -5,7 +5,7 @@
    The Free Software Foundation, Inc.
 
    Written by:
-   Andrew Borodin <aborodin@vmail.ru>, 2021
+   Andrew Borodin <aborodin@vmail.ru>, 2021-2022
 
    This file is part of the Midnight Commander.
 
@@ -39,6 +39,7 @@
 START_TEST (test_widget_make_global_local)
 /* *INDENT-ON* */
 {
+    WRect r;
     WGroup *g0, *g1, *g2;
     Widget *w0, *w1, *w2;
 
@@ -75,41 +76,41 @@ START_TEST (test_widget_make_global_local)
 
     /* test global coordinates */
     /* w0 is a member of g0 */
-    ck_assert_int_eq (w0->y, 21);
-    ck_assert_int_eq (w0->x, 21);
+    ck_assert_int_eq (w0->rect.y, 21);
+    ck_assert_int_eq (w0->rect.x, 21);
     /* g1 is a member of g0 */
-    ck_assert_int_eq (WIDGET (g1)->y, 25);
-    ck_assert_int_eq (WIDGET (g1)->x, 25);
+    ck_assert_int_eq (WIDGET (g1)->rect.y, 25);
+    ck_assert_int_eq (WIDGET (g1)->rect.x, 25);
     /* w1 is a member of g1 */
-    ck_assert_int_eq (w1->y, 30);
-    ck_assert_int_eq (w1->x, 30);
+    ck_assert_int_eq (w1->rect.y, 30);
+    ck_assert_int_eq (w1->rect.x, 30);
     /* g2 is a member of g1 */
-    ck_assert_int_eq (WIDGET (g2)->y, 40);
-    ck_assert_int_eq (WIDGET (g2)->x, 40);
+    ck_assert_int_eq (WIDGET (g2)->rect.y, 40);
+    ck_assert_int_eq (WIDGET (g2)->rect.x, 40);
     /* w2 is a member of g2 */
-    ck_assert_int_eq (w2->y, 55);
-    ck_assert_int_eq (w2->x, 55);
+    ck_assert_int_eq (w2->rect.y, 55);
+    ck_assert_int_eq (w2->rect.x, 55);
 
     group_remove_widget (w0);
     group_remove_widget (g1);
 
     /* test local coordinates */
     /* w0 is not a member of g0 */
-    ck_assert_int_eq (w0->y, 1);
-    ck_assert_int_eq (w0->x, 1);
+    ck_assert_int_eq (w0->rect.y, 1);
+    ck_assert_int_eq (w0->rect.x, 1);
 
     /* g1 is not a member of g0 */
-    ck_assert_int_eq (WIDGET (g1)->y, 5);
-    ck_assert_int_eq (WIDGET (g1)->x, 5);
+    ck_assert_int_eq (WIDGET (g1)->rect.y, 5);
+    ck_assert_int_eq (WIDGET (g1)->rect.x, 5);
     /* w1 is a member of g1 */
-    ck_assert_int_eq (w1->y, 10);
-    ck_assert_int_eq (w1->x, 10);
+    ck_assert_int_eq (w1->rect.y, 10);
+    ck_assert_int_eq (w1->rect.x, 10);
     /* g2 is not a member of g1 */
-    ck_assert_int_eq (WIDGET (g2)->y, 20);
-    ck_assert_int_eq (WIDGET (g2)->x, 20);
+    ck_assert_int_eq (WIDGET (g2)->rect.y, 20);
+    ck_assert_int_eq (WIDGET (g2)->rect.x, 20);
     /* w2 is a member of g2 */
-    ck_assert_int_eq (w2->y, 35);
-    ck_assert_int_eq (w2->x, 35);
+    ck_assert_int_eq (w2->rect.y, 35);
+    ck_assert_int_eq (w2->rect.x, 35);
 
     widget_destroy (w0);
     widget_destroy (WIDGET (g1));

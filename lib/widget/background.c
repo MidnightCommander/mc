@@ -5,7 +5,7 @@
    The Free Software Foundation, Inc.
 
    Authors:
-   Andrew Borodin <aborodin@vmail.ru>, 2020
+   Andrew Borodin <aborodin@vmail.ru>, 2020-2022
 
    This file is part of the Midnight Commander.
 
@@ -60,13 +60,8 @@ static void
 background_adjust (WBackground * b)
 {
     Widget *w = WIDGET (b);
-    Widget *wo = WIDGET (w->owner);
 
-    w->y = wo->y;
-    w->x = wo->x;
-    w->lines = wo->lines;
-    w->cols = wo->cols;
-
+    w->rect = WIDGET (w->owner)->rect;
     w->pos_flags |= WPOS_KEEP_ALL;
 }
 
@@ -78,7 +73,7 @@ background_draw (const WBackground * b)
     const Widget *w = CONST_WIDGET (b);
 
     tty_setcolor (b->color);
-    tty_fill_region (w->y, w->x, w->lines, w->cols, b->pattern);
+    tty_fill_region (w->rect.y, w->rect.x, w->rect.lines, w->rect.cols, b->pattern);
 }
 
 /* --------------------------------------------------------------------------------------------- */

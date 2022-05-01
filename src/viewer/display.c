@@ -14,7 +14,7 @@
    Pavel Machek, 1998
    Roland Illig <roland.illig@gmx.de>, 2004, 2005
    Slava Zanko <slavazanko@google.com>, 2009
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2009-2022
    Ilia Maslakov <il.smind@gmail.com>, 2009, 2010
 
    This file is part of the Midnight Commander.
@@ -157,7 +157,7 @@ mcview_display_status (WView * view)
         return;
 
     tty_setcolor (STATUSBAR_COLOR);
-    tty_draw_hline (WIDGET (view)->y + top, WIDGET (view)->x + left, ' ', width);
+    tty_draw_hline (WIDGET (view)->rect.y + top, WIDGET (view)->rect.x + left, ' ', width);
 
     file_label =
         view->filename_vpath != NULL ?
@@ -268,8 +268,8 @@ mcview_compute_areas (WView * view)
 
     view_area.top = view->dpy_frame_size;
     view_area.left = view->dpy_frame_size;
-    view_area.height = DOZ ((screen_dimen) WIDGET (view)->lines, 2 * view->dpy_frame_size);
-    view_area.width = DOZ ((screen_dimen) WIDGET (view)->cols, 2 * view->dpy_frame_size);
+    view_area.height = DOZ ((screen_dimen) WIDGET (view)->rect.lines, 2 * view->dpy_frame_size);
+    view_area.width = DOZ ((screen_dimen) WIDGET (view)->rect.cols, 2 * view->dpy_frame_size);
 
     /* Most coordinates of the areas equal those of the whole viewer */
     view->status_area = view_area;
@@ -357,7 +357,7 @@ mcview_display_clean (WView * view)
     tty_setcolor (VIEW_NORMAL_COLOR);
     widget_erase (w);
     if (view->dpy_frame_size != 0)
-        tty_draw_box (w->y, w->x, w->lines, w->cols, FALSE);
+        tty_draw_box (w->rect.y, w->rect.x, w->rect.lines, w->rect.cols, FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */

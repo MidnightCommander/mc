@@ -10,7 +10,7 @@
    Jakub Jelinek, 1995
    Andrej Borsenkow, 1996
    Norbert Warmuth, 1997
-   Andrew Borodin <aborodin@vmail.ru>, 2009-2019
+   Andrew Borodin <aborodin@vmail.ru>, 2009-2022
 
    This file is part of the Midnight Commander.
 
@@ -240,7 +240,7 @@ history_show (history_descriptor_t * hd)
        center of it, and let dialog function resize it to needed size. */
     send_message (query_dlg, NULL, MSG_RESIZE, 0, NULL);
 
-    if (WIDGET (query_dlg)->y < hd->y)
+    if (WIDGET (query_dlg)->rect.y < hd->y)
     {
         /* history is above base widget -- revert order to place recent item at bottom */
         /* revert history direction */
@@ -285,7 +285,7 @@ history_show (history_descriptor_t * hd)
         z = g_list_prepend (z, hd->release (hd, LENTRY (hi->data)));
 
     /* restore history direction */
-    if (WIDGET (query_dlg)->y < hd->y)
+    if (WIDGET (query_dlg)->rect.y < hd->y)
         z = g_list_reverse (z);
 
     widget_destroy (WIDGET (query_dlg));

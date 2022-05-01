@@ -10,7 +10,7 @@
    Jakub Jelinek, 1995
    Andrej Borsenkow, 1996
    Norbert Warmuth, 1997
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2013, 2016
+   Andrew Borodin <aborodin@vmail.ru>, 2009-2022
 
    This file is part of the Midnight Commander.
 
@@ -178,7 +178,7 @@ buttonbar_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
             buttonbar_init_button_positions (bb);
             widget_gotoyx (w, 0, 0);
             tty_setcolor (DEFAULT_COLOR);
-            tty_printf ("%-*s", w->cols, "");
+            tty_printf ("%-*s", w->rect.cols, "");
             widget_gotoyx (w, 0, 0);
 
             for (i = 0; i < BUTTONBAR_LABELS_NUM; i++)

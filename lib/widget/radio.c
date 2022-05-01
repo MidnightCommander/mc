@@ -10,7 +10,7 @@
    Jakub Jelinek, 1995
    Andrej Borsenkow, 1996
    Norbert Warmuth, 1997
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2013, 2016
+   Andrew Borodin <aborodin@vmail.ru>, 2009-2022
 
    This file is part of the Midnight Commander.
 
@@ -164,7 +164,7 @@ radio_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
             {
                 widget_selectcolor (w, i == r->pos && focused, FALSE);
                 widget_gotoyx (w, i, 0);
-                tty_draw_hline (w->y + i, w->x, ' ', w->cols);
+                tty_draw_hline (w->rect.y + i, w->rect.x, ' ', w->rect.cols);
                 tty_print_string ((r->sel == i) ? "(*) " : "( ) ");
                 hotkey_draw (w, r->texts[i], i == r->pos && focused);
             }

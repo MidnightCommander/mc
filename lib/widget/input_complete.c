@@ -1245,8 +1245,8 @@ complete_engine (WInput * in, int what_to_do)
                     maxlen = i;
             }
 
-            start_x = WIDGET (in)->x;
-            start_y = WIDGET (in)->y;
+            start_x = WIDGET (in)->rect.x;
+            start_y = WIDGET (in)->rect.y;
             if (start_y - 2 >= count)
             {
                 y = start_y - 2 - count;

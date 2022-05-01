@@ -5,7 +5,7 @@
    Free Software Foundation, Inc.
 
    Written by:
-   Andrew Borodin <aborodin@vmail.ru>, 2021
+   Andrew Borodin <aborodin@vmail.ru>, 2021-2022
 
    This file is part of the Midnight Commander.
 
@@ -348,7 +348,7 @@ edit_completion_string_free (gpointer data)
 char *
 edit_completion_dialog_show (const WEdit * edit, GQueue * compl, int max_width)
 {
-    const Widget *we = CONST_WIDGET (edit);
+    const WRect *we = &CONST_WIDGET (edit)->rect;
     int start_x, start_y, offset;
     char *curr = NULL;
     WDialog *compl_dlg;

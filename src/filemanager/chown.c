@@ -258,11 +258,11 @@ chown_dlg_create (WPanel * panel)
     i = BUTTONS - 2;
     y = lines - chown_but[i].y;
     group_add_widget (g, hline_new (y - 1, -1, -1));
-    group_add_widget (g, button_new (y, WIDGET (ch_dlg)->cols / 2 - chown_but[i].len,
+    group_add_widget (g, button_new (y, WIDGET (ch_dlg)->rect.cols / 2 - chown_but[i].len,
                                      chown_but[i].ret_cmd, chown_but[i].flags, chown_but[i].text,
                                      NULL));
     i++;
-    group_add_widget (g, button_new (y, WIDGET (ch_dlg)->cols / 2 + 1, chown_but[i].ret_cmd,
+    group_add_widget (g, button_new (y, WIDGET (ch_dlg)->rect.cols / 2 + 1, chown_but[i].ret_cmd,
                                      chown_but[i].flags, chown_but[i].text, NULL));
 
     /* select first listbox */

@@ -187,7 +187,7 @@ init_panelize (void)
     listbox_select_entry (l_panelize, listbox_search_text (l_panelize, _("Other command")));
     group_add_widget (g, l_panelize);
 
-    y += WIDGET (l_panelize)->lines + 1;
+    y += WIDGET (l_panelize)->rect.lines + 1;
     group_add_widget (g, label_new (y++, UX, _("Command")));
     pname =
         input_new (y++, UX, input_colors, panelize_cols - UX * 2, "", "in",

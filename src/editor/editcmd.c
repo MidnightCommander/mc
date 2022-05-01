@@ -474,9 +474,12 @@ edit_save_cmd (WEdit * edit)
 static inline gboolean
 edit_load_file_from_filename (WDialog * h, const vfs_path_t * vpath)
 {
-    Widget *w = WIDGET (h);
+    WRect r = WIDGET (h)->rect;
 
-    return edit_add_window (h, w->y + 1, w->x, w->lines - 2, w->cols, vpath, 0);
+    r.y++;
+    r.lines -= 2;
+
+    return edit_add_window (h, r.y, r.x, r.lines, r.cols, vpath, 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1725,7 +1728,7 @@ edit_goto_cmd (WEdit * edit)
     if (l < 0)
         l = edit->buffer.lines + l + 2;
 
-    edit_move_display (edit, l - WIDGET (edit)->lines / 2 - 1);
+    edit_move_display (edit, l - WIDGET (edit)->rect.lines / 2 - 1);
     edit_move_to_line (edit, l - 1);
     edit->force |= REDRAW_COMPLETELY;
 

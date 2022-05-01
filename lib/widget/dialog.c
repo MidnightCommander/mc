@@ -377,7 +377,7 @@ dlg_default_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
     switch (msg)
     {
     case MSG_MOUSE_CLICK:
-        if (event->y < 0 || event->y >= w->lines || event->x < 0 || event->x >= w->cols)
+        if (event->y < 0 || event->y >= w->rect.lines || event->x < 0 || event->x >= w->rect.cols)
         {
             DIALOG (w)->ret_value = B_CANCEL;
             dlg_stop (DIALOG (w));
@@ -432,7 +432,8 @@ dlg_create (gboolean modal, int y1, int x1, int lines, int cols, widget_pos_flag
     {
         w->state |= WST_MODAL;
 
-        new_d->bg = WIDGET (frame_new (0, 0, w->lines, w->cols, title, FALSE, new_d->compact));
+        new_d->bg =
+            WIDGET (frame_new (0, 0, w->rect.lines, w->rect.cols, title, FALSE, new_d->compact));
         group_add_widget (g, new_d->bg);
         frame_set_title (FRAME (new_d->bg), title);
     }

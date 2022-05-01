@@ -8,7 +8,7 @@
    Miguel de Icaza, 1994, 1995, 1996, 1997
    Janne Kukonlehto, 1994, 1995
    Norbert Warmuth, 1997
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2012, 2013, 2020
+   Andrew Borodin <aborodin@vmail.ru>, 2009-2022
    Slava Zanko <slavazanko@gmail.com>, 2013
 
    This file is part of the Midnight Commander.
@@ -921,7 +921,7 @@ create_file_manager (void)
     the_hint = label_new (0, 0, 0);
     the_hint->transparent = TRUE;
     the_hint->auto_adjust_cols = 0;
-    WIDGET (the_hint)->cols = COLS;
+    WIDGET (the_hint)->rect.cols = COLS;
     group_add_widget (g, the_hint);
 
     cmdline = command_new (0, 0, 0);
@@ -1505,7 +1505,8 @@ midnight_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
         return MSG_HANDLED;
 
     case MSG_RESIZE:
-        widget_adjust_position (w->pos_flags, &w->y, &w->x, &w->lines, &w->cols);
+        widget_adjust_position (w->pos_flags, &w->rect.y, &w->rect.x, &w->rect.lines,
+                                &w->rect.cols);
         setup_panels ();
         menubar_arrange (the_menubar);
         return MSG_HANDLED;

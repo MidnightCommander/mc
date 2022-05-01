@@ -219,14 +219,14 @@ edit_dialog_replace_prompt_show (WEdit * edit, char *from_text, char *to_text, i
     int retval;
 
     if (xpos == -1)
-        xpos = w->x + option_line_state_width + 1;
+        xpos = w->rect.x + option_line_state_width + 1;
     if (ypos == -1)
-        ypos = w->y + w->lines / 2;
+        ypos = w->rect.y + w->rect.lines / 2;
     /* Sometimes menu can hide replaced text. I don't like it */
     if ((edit->curs_row >= ypos - 1) && (edit->curs_row <= ypos + dlg_height - 1))
         ypos -= dlg_height;
 
-    dlg_width = WIDGET (w->owner)->cols - xpos - 1;
+    dlg_width = WIDGET (w->owner)->rect.cols - xpos - 1;
 
     g_snprintf (tmp, sizeof (tmp), "\"%s\"", from_text);
     repl_from = g_strdup (str_trunc (tmp, dlg_width - 7));
@@ -745,12 +745,15 @@ edit_search_status_update_cb (status_msg_t * sm)
 
     if (esm->first)
     {
-        int wd_width;
         Widget *lw = WIDGET (ssm->label);
+        WRect r;
 
-        wd_width = MAX (wd->cols, lw->cols + 6);
-        widget_set_size (wd, wd->y, wd->x, wd->lines, wd_width);
-        widget_set_size (lw, lw->y, wd->x + (wd->cols - lw->cols) / 2, lw->lines, lw->cols);
+        r = wd->rect;
+        r.cols = MAX (r.cols, lw->rect.cols + 6);
+        widget_set_size_rect (wd, &r);
+        r = lw->rect;
+        r.x = wd->rect.x + (wd->rect.cols - r.cols) / 2;
+        widget_set_size_rect (lw, &r);
         esm->first = FALSE;
     }
 
@@ -927,7 +930,7 @@ edit_replace_cmd (WEdit * edit, gboolean again)
                 long l;
                 int prompt;
 
-                l = edit->curs_row - WIDGET (edit)->lines / 3;
+                l = edit->curs_row - WIDGET (edit)->rect.lines / 3;
                 if (l > 0)
                     edit_scroll_downward (edit, l);
                 if (l < 0)

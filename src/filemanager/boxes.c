@@ -189,13 +189,11 @@ skin_dlg_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
     case MSG_RESIZE:
         {
             WDialog *d = DIALOG (w);
-            Widget *wd = WIDGET (d->data);
-            int y, x;
-            WRect r;
+            const WRect *wd = &WIDGET (d->data)->rect;
+            WRect r = w->rect;
 
-            y = wd->y + (wd->lines - w->lines) / 2;
-            x = wd->x + wd->cols / 2;
-            rect_init (&r, y, x, w->lines, w->cols);
+            r.y = wd->y + (wd->lines - r.lines) / 2;
+            r.x = wd->x + wd->cols / 2;
 
             return dlg_default_callback (w, NULL, MSG_RESIZE, 0, &r);
         }
@@ -405,15 +403,16 @@ tree_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
     {
     case MSG_RESIZE:
         {
-            WRect r;
+            WRect r = w->rect;
             Widget *bar;
 
-            rect_init (&r, w->y, w->x, LINES - 9, COLS - 20);
+            r.lines = LINES - 9;
+            r.cols = COLS - 20;
             dlg_default_callback (w, NULL, MSG_RESIZE, 0, &r);
 
             bar = WIDGET (find_buttonbar (h));
-            bar->x = 0;
-            bar->y = LINES - 1;
+            bar->rect.x = 0;
+            bar->rect.y = LINES - 1;
             return MSG_HANDLED;
         }
 
@@ -1086,14 +1085,14 @@ tree_box (const char *current_dir)
     g = GROUP (dlg);
     wd = WIDGET (dlg);
 
-    mytree = tree_new (2, 2, wd->lines - 6, wd->cols - 5, FALSE);
+    mytree = tree_new (2, 2, wd->rect.lines - 6, wd->rect.cols - 5, FALSE);
     group_add_widget_autopos (g, mytree, WPOS_KEEP_ALL, NULL);
-    group_add_widget_autopos (g, hline_new (wd->lines - 4, 1, -1), WPOS_KEEP_BOTTOM, NULL);
+    group_add_widget_autopos (g, hline_new (wd->rect.lines - 4, 1, -1), WPOS_KEEP_BOTTOM, NULL);
     bar = buttonbar_new ();
     group_add_widget (g, bar);
     /* restore ButtonBar coordinates after add_widget() */
-    WIDGET (bar)->x = 0;
-    WIDGET (bar)->y = LINES - 1;
+    WIDGET (bar)->rect.x = 0;
+    WIDGET (bar)->rect.y = LINES - 1;
 
     if (dlg_run (dlg) == B_ENTER)
     {
@@ -1214,7 +1213,7 @@ cd_box (const WPanel * panel)
         QUICK_END
     };
 
-    WRect r = { w->y + w->lines - 6, w->x, 0, w->cols };
+    WRect r = { w->rect.y + w->rect.lines - 6, w->rect.x, 0, w->rect.cols };
 
     quick_dialog_t qdlg = {
         r, N_("Quick cd"), "[Quick cd]",

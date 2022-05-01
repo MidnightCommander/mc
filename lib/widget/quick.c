@@ -98,25 +98,25 @@ quick_create_labeled_input (GArray * widgets, int *y, int x, quick_widget_t * qu
     {
     case input_label_above:
         label.widget = WIDGET (label_new (*y, x, I18N (quick_widget->u.input.label_text)));
-        *y += label.widget->lines - 1;
+        *y += label.widget->rect.lines - 1;
         g_array_append_val (widgets, label);
 
         in.widget = WIDGET (quick_create_input (++(*y), x, quick_widget));
         in.quick_widget = quick_widget;
         g_array_append_val (widgets, in);
 
-        *width = MAX (label.widget->cols, in.widget->cols);
+        *width = MAX (label.widget->rect.cols, in.widget->rect.cols);
         break;
 
     case input_label_left:
         label.widget = WIDGET (label_new (*y, x, I18N (quick_widget->u.input.label_text)));
         g_array_append_val (widgets, label);
 
-        in.widget = WIDGET (quick_create_input (*y, x + label.widget->cols + 1, quick_widget));
+        in.widget = WIDGET (quick_create_input (*y, x + label.widget->rect.cols + 1, quick_widget));
         in.quick_widget = quick_widget;
         g_array_append_val (widgets, in);
 
-        *width = label.widget->cols + in.widget->cols + 1;
+        *width = label.widget->rect.cols + in.widget->rect.cols + 1;
         break;
 
     case input_label_right:
@@ -126,10 +126,10 @@ quick_create_labeled_input (GArray * widgets, int *y, int x, quick_widget_t * qu
 
         label.widget =
             WIDGET (label_new
-                    (*y, x + in.widget->cols + 1, I18N (quick_widget->u.input.label_text)));
+                    (*y, x + in.widget->rect.cols + 1, I18N (quick_widget->u.input.label_text)));
         g_array_append_val (widgets, label);
 
-        *width = label.widget->cols + in.widget->cols + 1;
+        *width = label.widget->rect.cols + in.widget->rect.cols + 1;
         break;
 
     case input_label_below:
@@ -138,10 +138,10 @@ quick_create_labeled_input (GArray * widgets, int *y, int x, quick_widget_t * qu
         g_array_append_val (widgets, in);
 
         label.widget = WIDGET (label_new (++(*y), x, I18N (quick_widget->u.input.label_text)));
-        *y += label.widget->lines - 1;
+        *y += label.widget->rect.lines - 1;
         g_array_append_val (widgets, label);
 
-        *width = MAX (label.widget->cols, in.widget->cols);
+        *width = MAX (label.widget->rect.cols, in.widget->rect.cols);
         break;
 
     default:
@@ -207,7 +207,7 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
                         (++y, x, *quick_widget->u.checkbox.state,
                          I18N (quick_widget->u.checkbox.text)));
             g_array_append_val (widgets, item);
-            width = item.widget->cols;
+            width = item.widget->rect.cols;
             if (g != NULL)
                 width += 2;
             if (two_columns)
@@ -224,7 +224,7 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
                                               I18N (quick_widget->u.button.text),
                                               quick_widget->u.button.callback));
             g_array_append_val (widgets, item);
-            width = item.widget->cols;
+            width = item.widget->rect.cols;
             if (g != NULL)
                 width += 2;
             if (two_columns)
@@ -245,7 +245,7 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
             {
                 item.widget = WIDGET (quick_create_input (y, x, quick_widget));
                 g_array_append_val (widgets, item);
-                width = item.widget->cols;
+                width = item.widget->rect.cols;
             }
             if (g != NULL)
                 width += 2;
@@ -258,8 +258,8 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
         case quick_label:
             item.widget = WIDGET (label_new (++y, x, I18N (quick_widget->u.label.text)));
             g_array_append_val (widgets, item);
-            y += item.widget->lines - 1;
-            width = item.widget->cols;
+            y += item.widget->rect.lines - 1;
+            width = item.widget->rect.cols;
             if (g != NULL)
                 width += 2;
             if (two_columns)
@@ -284,8 +284,8 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
                 g_strfreev (items);
                 item.widget = WIDGET (r);
                 g_array_append_val (widgets, item);
-                y += item.widget->lines - 1;
-                width = item.widget->cols;
+                y += item.widget->rect.lines - 1;
+                width = item.widget->rect.cols;
                 if (g != NULL)
                     width += 2;
                 if (two_columns)
@@ -310,7 +310,7 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
                 Widget *w = WIDGET (g);
 
                 y++;
-                w->lines = y + 1 - w->y;
+                w->rect.lines = y + 1 - w->rect.y;
                 g = NULL;
 
                 g_array_append_val (widgets, item);
@@ -369,7 +369,7 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
                                                   quick_widget->u.button.callback));
                 item.quick_widget = quick_widget;
                 g_array_append_val (widgets, item);
-                blen += item.widget->cols + 1;
+                blen += item.widget->rect.cols + 1;
             }
 
             /* stop dialog build here */
@@ -418,14 +418,16 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
     x2 = x1 + width2 + 1;
     g = NULL;
     two_columns = FALSE;
-    x = (WIDGET (dd)->cols - blen) / 2;
+    x = (WIDGET (dd)->rect.cols - blen) / 2;
 
     for (i = 0; i < widgets->len; i++)
     {
         quick_widget_item_t *item;
         int column_width;
+        WRect *r;
 
         item = &g_array_index (widgets, quick_widget_item_t, i);
+        r = &item->widget->rect;
         column_width = two_columns ? width2 : width1;
 
         /* adjust widget width and x position */
@@ -444,24 +446,24 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
             MC_FALLTHROUGH;
         case quick_checkbox:
         case quick_radio:
-            if (item->widget->x != x1)
-                item->widget->x = x2;
+            if (r->x != x1)
+                r->x = x2;
             if (g != NULL)
-                item->widget->x += 2;
+                r->x += 2;
             break;
 
         case quick_button:
             if (!put_buttons)
             {
-                if (item->widget->x != x1)
-                    item->widget->x = x2;
+                if (r->x != x1)
+                    r->x = x2;
                 if (g != NULL)
-                    item->widget->x += 2;
+                    r->x += 2;
             }
             else
             {
-                item->widget->x = x;
-                x += item->widget->cols + 1;
+                r->x = x;
+                x += r->cols + 1;
             }
             break;
 
@@ -477,39 +479,39 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
                 {
                 case input_label_left:
                     /* label was adjusted before; adjust input line */
-                    item->widget->x = label->x + label->cols + 1 - WIDGET (label->owner)->x;
-                    item->widget->cols = width - label->cols - 1;
+                    r->x = label->rect.x + label->rect.cols + 1 - WIDGET (label->owner)->rect.x;
+                    r->cols = width - label->rect.cols - 1;
                     break;
 
                 case input_label_right:
-                    if (item->widget->x != x1)
-                        item->widget->x = x2;
+                    if (r->x != x1)
+                        r->x = x2;
                     if (g != NULL)
-                        item->widget->x += 2;
-                    item->widget->cols = width - label->cols - 1;
-                    label->x = item->widget->x + item->widget->cols + 1;
+                        r->x += 2;
+                    r->cols = width - label->rect.cols - 1;
+                    label->rect.x = r->x + r->cols + 1;
                     break;
 
                 default:
-                    if (item->widget->x != x1)
-                        item->widget->x = x2;
+                    if (r->x != x1)
+                        r->x = x2;
                     if (g != NULL)
-                        item->widget->x += 2;
-                    item->widget->cols = width;
+                        r->x += 2;
+                    r->cols = width;
                     break;
                 }
 
-                /* forced update internal variables of inpuit line */
-                widget_set_size (item->widget, item->widget->y, item->widget->x, 1,
-                                 item->widget->cols);
+                /* forced update internal variables of input line */
+                r->lines = 1;
+                widget_set_size_rect (item->widget, r);
             }
             break;
 
         case quick_start_groupbox:
             g = GROUPBOX (item->widget);
-            if (item->widget->x != x1)
-                item->widget->x = x2;
-            item->widget->cols = column_width;
+            if (r->x != x1)
+                r->x = x2;
+            r->cols = column_width;
             break;
 
         case quick_stop_groupbox:
@@ -524,16 +526,16 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
                     Widget *wg = WIDGET (g);
 
                     HLINE (item->widget)->auto_adjust_cols = FALSE;
-                    item->widget->x = wg->x + 1 - WIDGET (wg->owner)->x;
-                    item->widget->cols = wg->cols;
+                    r->x = wg->rect.x + 1 - WIDGET (wg->owner)->rect.x;
+                    r->cols = wg->rect.cols;
                 }
                 else if (two_columns)
                 {
                     HLINE (item->widget)->auto_adjust_cols = FALSE;
-                    if (item->widget->x != x1)
-                        item->widget->x = x2;
-                    item->widget->x--;
-                    item->widget->cols = column_width + 2;
+                    if (r->x != x1)
+                        r->x = x2;
+                    r->x--;
+                    r->cols = column_width + 2;
                 }
                 else
                     HLINE (item->widget)->auto_adjust_cols = TRUE;

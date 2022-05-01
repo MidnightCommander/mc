@@ -70,7 +70,7 @@ input_colors_t input_colors;
 #endif
 
 #define should_show_history_button(in) \
-    (in->history.list != NULL && WIDGET (in)->cols > HISTORY_BUTTON_WIDTH * 2 + 1 \
+    (in->history.list != NULL && WIDGET (in)->rect.cols > HISTORY_BUTTON_WIDTH * 2 + 1 \
          && WIDGET (in)->owner != NULL)
 
 /*** file scope type declarations ****************************************************************/
@@ -110,13 +110,13 @@ draw_history_button (WInput * in)
     else
         c = '|';
 
-    widget_gotoyx (in, 0, WIDGET (in)->cols - HISTORY_BUTTON_WIDTH);
+    widget_gotoyx (in, 0, WIDGET (in)->rect.cols - HISTORY_BUTTON_WIDTH);
     disabled = widget_get_state (WIDGET (in), WST_DISABLED);
     tty_setcolor (disabled ? DISABLED_COLOR : in->color[WINPUTC_HISTORY]);
 
 #ifdef LARGE_HISTORY_BUTTON
     tty_print_string ("[ ]");
-    widget_gotoyx (in, 0, WIDGET (in)->cols - HISTORY_BUTTON_WIDTH + 1);
+    widget_gotoyx (in, 0, WIDGET (in)->rect.cols - HISTORY_BUTTON_WIDTH + 1);
 #endif
 
     tty_print_char (c);
@@ -156,7 +156,7 @@ do_show_hist (WInput * in)
 
     len = get_history_length (in->history.list);
 
-    history_descriptor_init (&hd, WIDGET (in)->y, WIDGET (in)->x, in->history.list,
+    history_descriptor_init (&hd, WIDGET (in)->rect.y, WIDGET (in)->rect.x, in->history.list,
                              g_list_position (in->history.list, in->history.list));
     history_show (&hd);
 
@@ -911,7 +911,7 @@ input_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
     case MSG_MOUSE_DOWN:
         widget_select (w);
 
-        if (event->x >= w->cols - HISTORY_BUTTON_WIDTH && should_show_history_button (in))
+        if (event->x >= w->rect.cols - HISTORY_BUTTON_WIDTH && should_show_history_button (in))
             do_show_hist (in);
         else
         {
@@ -1219,7 +1219,8 @@ input_set_point (WInput * in, int pos)
 void
 input_update (WInput * in, gboolean clear_first)
 {
-    Widget *w = WIDGET (in);
+    Widget *wi = WIDGET (in);
+    const WRect *w = &wi->rect;
     int has_history = 0;
     int buf_len;
     const char *cp;
@@ -1229,7 +1230,7 @@ input_update (WInput * in, gboolean clear_first)
         return;
 
     /* don't draw widget not put into dialog */
-    if (w->owner == NULL || !widget_get_state (WIDGET (w->owner), WST_ACTIVE))
+    if (wi->owner == NULL || !widget_get_state (WIDGET (wi->owner), WST_ACTIVE))
         return;
 
     if (clear_first)
@@ -1256,7 +1257,7 @@ input_update (WInput * in, gboolean clear_first)
     if (has_history != 0)
         draw_history_button (in);
 
-    if (widget_get_state (w, WST_DISABLED))
+    if (widget_get_state (wi, WST_DISABLED))
         tty_setcolor (DISABLED_COLOR);
     else if (in->first)
         tty_setcolor (in->color[WINPUTC_UNCHANGED]);

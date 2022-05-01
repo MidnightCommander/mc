@@ -11,7 +11,7 @@
    Jakub Jelinek, 1995, 1996
    Norbert Warmuth, 1997
    Pavel Machek, 1998
-   Andrew Borodin <aborodin@vmail.ru>, 2011-2014
+   Andrew Borodin <aborodin@vmail.ru>, 2011-2022
 
    The copy code was based in GNU's cp, and was written by:
    Torbjorn Granlund, David MacKenzie, and Jim Meyering.
@@ -206,28 +206,36 @@ dirsize_status_locate_buttons (dirsize_status_msg_t * dsm)
     status_msg_t *sm = STATUS_MSG (dsm);
     Widget *wd = WIDGET (sm->dlg);
     int y, x;
+    WRect r;
 
-    y = wd->y + 5;
-    x = wd->x;
+    y = wd->rect.y + 5;
+    x = wd->rect.x;
 
     if (!dsm->allow_skip)
     {
         /* single button: "Abort" */
-        x += (wd->cols - dsm->abort_button->cols) / 2;
-        widget_set_size (dsm->abort_button, y, x,
-                         dsm->abort_button->lines, dsm->abort_button->cols);
+        x += (wd->rect.cols - dsm->abort_button->rect.cols) / 2;
+        r = dsm->abort_button->rect;
+        r.y = y;
+        r.x = x;
+        widget_set_size_rect (dsm->abort_button, &r);
     }
     else
     {
         /* two buttons: "Abort" and "Skip" */
         int cols;
 
-        cols = dsm->abort_button->cols + dsm->skip_button->cols + 1;
-        x += (wd->cols - cols) / 2;
-        widget_set_size (dsm->abort_button, y, x, dsm->abort_button->lines,
-                         dsm->abort_button->cols);
-        x += dsm->abort_button->cols + 1;
-        widget_set_size (dsm->skip_button, y, x, dsm->skip_button->lines, dsm->skip_button->cols);
+        cols = dsm->abort_button->rect.cols + dsm->skip_button->rect.cols + 1;
+        x += (wd->rect.cols - cols) / 2;
+        r = dsm->abort_button->rect;
+        r.y = y;
+        r.x = x;
+        widget_set_size_rect (dsm->abort_button, &r);
+        x += dsm->abort_button->rect.cols + 1;
+        r = dsm->skip_button->rect;
+        r.y = y;
+        r.x = x;
+        widget_set_size_rect (dsm->skip_button, &r);
     }
 }
 
@@ -3092,6 +3100,7 @@ dirsize_status_init_cb (status_msg_t * sm)
     dirsize_status_msg_t *dsm = (dirsize_status_msg_t *) sm;
     WGroup *gd = GROUP (sm->dlg);
     Widget *wd = WIDGET (sm->dlg);
+    WRect r = wd->rect;
 
     const char *b1_name = N_("&Abort");
     const char *b2_name = N_("&Skip");
@@ -3122,7 +3131,9 @@ dirsize_status_init_cb (status_msg_t * sm)
         widget_select (dsm->skip_button);
     }
 
-    widget_set_size (wd, wd->y, wd->x, 8, ui_width);
+    r.lines = 8;
+    r.cols = ui_width;
+    widget_set_size_rect (wd, &r);
     dirsize_status_locate_buttons (dsm);
 }
 
@@ -3133,22 +3144,25 @@ dirsize_status_update_cb (status_msg_t * sm)
 {
     dirsize_status_msg_t *dsm = (dirsize_status_msg_t *) sm;
     Widget *wd = WIDGET (sm->dlg);
+    WRect r = wd->rect;
 
     /* update second (longer label) */
     label_set_textv (dsm->count_size, _("Directories: %zu, total size: %s"),
                      dsm->dir_count, size_trunc_sep (dsm->total_size, panels_options.kilobyte_si));
 
     /* enlarge dialog if required */
-    if (WIDGET (dsm->count_size)->cols + 6 > wd->cols)
+    if (WIDGET (dsm->count_size)->rect.cols + 6 > r.cols)
     {
-        widget_set_size (wd, wd->y, wd->x, wd->lines, WIDGET (dsm->count_size)->cols + 6);
+        r.cols = WIDGET (dsm->count_size)->rect.cols + 6;
+        widget_set_size_rect (wd, &r);
         dirsize_status_locate_buttons (dsm);
         widget_draw (wd);
         /* TODO: ret rid of double redraw */
     }
 
     /* adjust first label */
-    label_set_text (dsm->dirname, str_trunc (vfs_path_as_str (dsm->dirname_vpath), wd->cols - 6));
+    label_set_text (dsm->dirname,
+                    str_trunc (vfs_path_as_str (dsm->dirname_vpath), wd->rect.cols - 6));
 
     switch (status_msg_common_update (sm))
     {
