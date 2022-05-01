@@ -6,7 +6,7 @@
 
    Written by:
    Paul Sheer, 1996, 1997
-   Andrew Borodin <aborodin@vmail.ru>, 2012-2021
+   Andrew Borodin <aborodin@vmail.ru>, 2012-2022
    Ilia Maslakov <il.smind@gmail.com>, 2012
 
    This file is part of the Midnight Commander.
@@ -409,9 +409,10 @@ edit_get_save_file_as (WEdit * edit)
         /* *INDENT-ON* */
     };
 
+    WRect r = { -1, -1, 0, 64 };
+
     quick_dialog_t qdlg = {
-        -1, -1, 64,
-        N_("Save As"), "[Save File As]",
+        r, N_("Save As"), "[Save File As]",
         quick_widgets, NULL, NULL
     };
 
@@ -882,9 +883,10 @@ edit_save_mode_cmd (void)
             /* *INDENT-ON* */
         };
 
+        WRect r = { -1, -1, 0, 38 };
+
         quick_dialog_t qdlg = {
-            -1, -1, 38,
-            N_("Edit Save Mode"), "[Edit Save Mode]",
+            r, N_("Edit Save Mode"), "[Edit Save Mode]",
             quick_widgets, edit_save_mode_callback, NULL
         };
 
@@ -1963,9 +1965,10 @@ edit_mail_dialog (WEdit * edit)
         /* *INDENT-ON* */
     };
 
+    WRect r = { -1, -1, 0, 50 };
+
     quick_dialog_t qdlg = {
-        -1, -1, 50,
-        N_("Mail"), "[Input Line Keys]",
+        r, N_("Mail"), "[Input Line Keys]",
         quick_widgets, NULL, NULL
     };
 

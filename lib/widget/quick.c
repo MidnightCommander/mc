@@ -186,7 +186,7 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
     int return_val;
 
     len = str_term_width1 (I18N (quick_dlg->title)) + 6;
-    quick_dlg->cols = MAX (quick_dlg->cols, len);
+    quick_dlg->rect.cols = MAX (quick_dlg->rect.cols, len);
 
     y = 1;
     x = x1;
@@ -384,7 +384,7 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
     }
 
     /* adjust dialog width */
-    quick_dlg->cols = MAX (quick_dlg->cols, blen + 6);
+    quick_dlg->rect.cols = MAX (quick_dlg->rect.cols, blen + 6);
     if (have_groupbox)
     {
         if (width1 != 0)
@@ -401,16 +401,16 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
             len = MAX (len, width1 + 6);
     }
 
-    quick_dlg->cols = MAX (quick_dlg->cols, len);
-    width1 = quick_dlg->cols - 6;
-    width2 = (quick_dlg->cols - 7) / 2;
+    quick_dlg->rect.cols = MAX (quick_dlg->rect.cols, len);
+    width1 = quick_dlg->rect.cols - 6;
+    width2 = (quick_dlg->rect.cols - 7) / 2;
 
-    if (quick_dlg->x == -1 || quick_dlg->y == -1)
-        dd = dlg_create (TRUE, 0, 0, y + 3, quick_dlg->cols, WPOS_CENTER | WPOS_TRYUP, FALSE,
+    if (quick_dlg->rect.x == -1 || quick_dlg->rect.y == -1)
+        dd = dlg_create (TRUE, 0, 0, y + 3, quick_dlg->rect.cols, WPOS_CENTER | WPOS_TRYUP, FALSE,
                          dialog_colors, quick_dlg->callback, quick_dlg->mouse_callback,
                          quick_dlg->help, quick_dlg->title);
     else
-        dd = dlg_create (TRUE, quick_dlg->y, quick_dlg->x, y + 3, quick_dlg->cols,
+        dd = dlg_create (TRUE, quick_dlg->rect.y, quick_dlg->rect.x, y + 3, quick_dlg->rect.cols,
                          WPOS_KEEP_DEFAULT, FALSE, dialog_colors, quick_dlg->callback,
                          quick_dlg->mouse_callback, quick_dlg->help, quick_dlg->title);
 

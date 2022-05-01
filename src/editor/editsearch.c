@@ -5,7 +5,7 @@
    Free Software Foundation, Inc.
 
    Written by:
-   Andrew Borodin <aborodin@vmail.ru>, 2021
+   Andrew Borodin <aborodin@vmail.ru>, 2021-2022
 
    This file is part of the Midnight Commander.
 
@@ -107,9 +107,10 @@ edit_dialog_search_show (WEdit * edit)
             /* *INDENT-ON* */
         };
 
+        WRect r = { -1, -1, 0, 58 };
+
         quick_dialog_t qdlg = {
-            -1, -1, 58,
-            N_("Search"), "[Input Line Keys]",
+            r, N_("Search"), "[Input Line Keys]",
             quick_widgets, NULL, NULL
         };
 
@@ -183,9 +184,10 @@ edit_dialog_replace_show (WEdit * edit, const char *search_default, const char *
             /* *INDENT-ON* */
         };
 
+        WRect r = { -1, -1, 0, 58 };
+
         quick_dialog_t qdlg = {
-            -1, -1, 58,
-            N_("Replace"), "[Input Line Keys]",
+            r, N_("Replace"), "[Input Line Keys]",
             quick_widgets, NULL, NULL
         };
 
@@ -247,9 +249,10 @@ edit_dialog_replace_prompt_show (WEdit * edit, char *from_text, char *to_text, i
             /* *INDENT-ON* */
         };
 
+        WRect r = { ypos, xpos, 0, -1 };
+
         quick_dialog_t qdlg = {
-            ypos, xpos, -1,
-            N_("Confirm replace"), NULL,
+            r, N_("Confirm replace"), NULL,
             quick_widgets, NULL, NULL
         };
 

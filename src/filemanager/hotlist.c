@@ -9,7 +9,7 @@
    Janne Kukonlehto, 1995
    Andrej Borsenkow, 1996
    Norbert Warmuth, 1997
-   Andrew Borodin <aborodin@vmail.ru>, 2012, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2012-2022
 
    Janne did the original Hotlist code, Andrej made the groupable
    hotlist; the move hotlist and revamped the file format and made
@@ -1017,9 +1017,10 @@ add_new_entry_input (const char *header, const char *text1, const char *text2,
         /* *INDENT-ON* */
     };
 
+    WRect r = { -1, -1, 0, 64 };
+
     quick_dialog_t qdlg = {
-        -1, -1, 64,
-        header, help,
+        r, header, help,
         quick_widgets, NULL, NULL
     };
 
@@ -1079,9 +1080,10 @@ add_new_group_input (const char *header, const char *label, char **result)
         /* *INDENT-ON* */
     };
 
+    WRect r = { -1, -1, 0, 64 };
+
     quick_dialog_t qdlg = {
-        -1, -1, 64,
-        header, "[Hotlist]",
+        r, header, "[Hotlist]",
         quick_widgets, NULL, NULL
     };
 

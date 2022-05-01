@@ -21,7 +21,7 @@
    Norbert Warmuth, 1997
    Pavel Machek, 1998
    Slava Zanko, 2009, 2010, 2011, 2012, 2013
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2011, 2012, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2009-2022
 
    This file is part of the Midnight Commander.
 
@@ -1365,9 +1365,10 @@ file_mask_dialog (file_op_context_t * ctx, FileOperation operation, gboolean onl
             /* *INDENT-ON* */
         };
 
+        WRect r = { -1, -1, 0, fmd_xlen };
+
         quick_dialog_t qdlg = {
-            -1, -1, fmd_xlen,
-            op_names[operation], "[Mask Copy/Rename]",
+            r, op_names[operation], "[Mask Copy/Rename]",
             quick_widgets, NULL, NULL
         };
 

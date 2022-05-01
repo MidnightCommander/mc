@@ -6,7 +6,7 @@
 
    Written by:
    Paul Sheer, 1996, 1997
-   Andrew Borodin <aborodin@vmail.ru> 2012, 2013
+   Andrew Borodin <aborodin@vmail.ru> 2012-2022
 
    This file is part of the Midnight Commander.
 
@@ -159,9 +159,10 @@ edit_about (void)
             /* *INDENT-ON* */
         };
 
+        WRect r = { -1, -1, 0, 40 };
+
         quick_dialog_t qdlg = {
-            -1, -1, 40,
-            N_("About"), "[Internal File Editor]",
+            r, N_("About"), "[Internal File Editor]",
             quick_widgets, NULL, NULL
         };
 

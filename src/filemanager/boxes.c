@@ -7,7 +7,7 @@
    Written by:
    Miguel de Icaza, 1994, 1995
    Jakub Jelinek, 1995
-   Andrew Borodin <aborodin@vmail.ru>, 2009-2015
+   Andrew Borodin <aborodin@vmail.ru>, 2009-2022
 
    This file is part of the Midnight Commander.
 
@@ -591,9 +591,10 @@ configure_box (void)
             /* *INDENT-ON* */
         };
 
+        WRect r = { -1, -1, 0, 60 };
+
         quick_dialog_t qdlg = {
-            -1, -1, 60,
-            N_("Configure options"), "[Configuration]",
+            r, N_("Configure options"), "[Configuration]",
             quick_widgets, configure_callback, NULL
         };
 
@@ -644,9 +645,10 @@ appearance_box (void)
             /* *INDENT-ON* */
         };
 
+        WRect r = { -1, -1, 0, 54 };
+
         quick_dialog_t qdlg = {
-            -1, -1, 54,
-            N_("Appearance"), "[Appearance]",
+            r, N_("Appearance"), "[Appearance]",
             quick_widgets, appearance_box_callback, NULL
         };
 
@@ -724,9 +726,10 @@ panel_options_box (void)
             /* *INDENT-ON* */
         };
 
+        WRect r = { -1, -1, 0, 60 };
+
         quick_dialog_t qdlg = {
-            -1, -1, 60,
-            N_("Panel options"), "[Panel options]",
+            r, N_("Panel options"), "[Panel options]",
             quick_widgets, NULL, NULL
         };
 
@@ -800,9 +803,10 @@ panel_listing_box (WPanel * panel, int num, char **userp, char **minip, gboolean
             /* *INDENT-ON* */
         };
 
+        WRect r = { -1, -1, 0, 48 };
+
         quick_dialog_t qdlg = {
-            -1, -1, 48,
-            N_("Listing format"), "[Listing Format...]",
+            r, N_("Listing format"), "[Listing Format...]",
             quick_widgets, panel_listing_callback, NULL
         };
 
@@ -890,9 +894,10 @@ sort_box (dir_sort_options_t * op, const panel_field_t * sort_field)
             /* *INDENT-ON* */
         };
 
+        WRect r = { -1, -1, 0, 40 };
+
         quick_dialog_t qdlg = {
-            -1, -1, 40,
-            N_("Sort order"), "[Sort Order...]",
+            r, N_("Sort order"), "[Sort Order...]",
             quick_widgets, NULL, NULL
         };
 
@@ -929,9 +934,10 @@ confirm_box (void)
         /* *INDENT-ON* */
     };
 
+    WRect r = { -1, -1, 0, 46 };
+
     quick_dialog_t qdlg = {
-        -1, -1, 46,
-        N_("Confirmation"), "[Confirmation]",
+        r, N_("Confirmation"), "[Confirmation]",
         quick_widgets, NULL, NULL
     };
 
@@ -964,9 +970,10 @@ display_bits_box (void)
         /* *INDENT-ON* */
     };
 
+    WRect r = { -1, -1, 0, 46 };
+
     quick_dialog_t qdlg = {
-        -1, -1, 46,
-        _("Display bits"), "[Display bits]",
+        r, _("Display bits"), "[Display bits]",
         quick_widgets, NULL, NULL
     };
 
@@ -1022,9 +1029,10 @@ display_bits_box (void)
             /* *INDENT-ON* */
         };
 
+        WRect r = { -1, -1, 0, 46 };
+
         quick_dialog_t qdlg = {
-            -1, -1, 46,
-            N_("Display bits"), "[Display bits]",
+            r, N_("Display bits"), "[Display bits]",
             quick_widgets, NULL, NULL
         };
 
@@ -1149,9 +1157,10 @@ configure_vfs_box (void)
             /* *INDENT-ON* */
         };
 
+        WRect r = { -1, -1, 0, 56 };
+
         quick_dialog_t qdlg = {
-            -1, -1, 56,
-            N_("Virtual File System Setting"), "[Virtual FS]",
+            r, N_("Virtual File System Setting"), "[Virtual FS]",
             quick_widgets,
 #ifdef ENABLE_VFS_FTP
             confvfs_callback,
@@ -1205,9 +1214,10 @@ cd_box (const WPanel * panel)
         QUICK_END
     };
 
+    WRect r = { w->y + w->lines - 6, w->x, 0, w->cols };
+
     quick_dialog_t qdlg = {
-        w->y + w->lines - 6, w->x, w->cols,
-        N_("Quick cd"), "[Quick cd]",
+        r, N_("Quick cd"), "[Quick cd]",
         quick_widgets, NULL, NULL
     };
 
@@ -1234,9 +1244,10 @@ symlink_box (const vfs_path_t * existing_vpath, const vfs_path_t * new_vpath,
         /* *INDENT-ON* */
     };
 
+    WRect r = { -1, -1, 0, 64 };
+
     quick_dialog_t qdlg = {
-        -1, -1, 64,
-        N_("Symbolic link"), "[File Menu]",
+        r, N_("Symbolic link"), "[File Menu]",
         quick_widgets, NULL, NULL
     };
 

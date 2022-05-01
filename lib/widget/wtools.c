@@ -9,7 +9,7 @@
    Radek Doulik, 1994, 1995
    Jakub Jelinek, 1995
    Andrej Borsenkow, 1995
-   Andrew Borodin <aborodin@vmail.ru>, 2009-2014
+   Andrew Borodin <aborodin@vmail.ru>, 2009-2022
 
    This file is part of the Midnight Commander.
 
@@ -217,9 +217,11 @@ fg_input_dialog_help (const char *header, const char *text, const char *help,
             /* *INDENT-ON* */
         };
 
+        WRect r = { -1, -1, 0, COLS / 2 };
+
         quick_dialog_t qdlg = {
-            -1, -1, COLS / 2, header,
-            help, quick_widgets, NULL, NULL
+            r, header, help,
+            quick_widgets, NULL, NULL
         };
 
         ret = quick_dialog (&qdlg);

@@ -2554,8 +2554,10 @@ panel_select_unselect_files_dialog (select_flags_t * flags, const char *title,
         /* *INDENT-ON* */
     };
 
+    WRect r = { -1, -1, 0, 50 };
+
     quick_dialog_t qdlg = {
-        -1, -1, 50, title, help_section,
+        r, title, help_section,
         quick_widgets, NULL, NULL
     };
 

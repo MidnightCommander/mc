@@ -7,7 +7,7 @@
    Written by:
    Daniel Borca <dborca@yahoo.com>, 2007
    Slava Zanko <slavazanko@gmail.com>, 2010, 2013
-   Andrew Borodin <aborodin@vmail.ru>, 2010, 2012, 2013, 2016
+   Andrew Borodin <aborodin@vmail.ru>, 2010-2022
    Ilia Maslakov <il.smind@gmail.com>, 2010
 
    This file is part of the Midnight Commander.
@@ -2379,9 +2379,10 @@ dview_diff_options (WDiff * dview)
         /* *INDENT-ON* */
     };
 
+    WRect r = { -1, -1, 0, 56 };
+
     quick_dialog_t qdlg = {
-        -1, -1, 56,
-        N_("Diff Options"), "[Diff Options]",
+        r, N_("Diff Options"), "[Diff Options]",
         quick_widgets, NULL, NULL
     };
 
