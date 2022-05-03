@@ -14,7 +14,7 @@
    Pavel Machek, 1998
    Roland Illig <roland.illig@gmx.de>, 2004, 2005
    Slava Zanko <slavazanko@google.com>, 2009
-   Andrew Borodin <aborodin@vmail.ru>, 2009-2014
+   Andrew Borodin <aborodin@vmail.ru>, 2009-2022
    Ilia Maslakov <il.smind@gmail.com>, 2009
    Rewritten almost from scratch by:
    Egmont Koblinger <egmont@gmail.com>, 2014
@@ -573,12 +573,9 @@ static int
 mcview_display_line (WView * view, mcview_state_machine_t * state, int row,
                      gboolean * paragraph_ended, off_t * linewidth)
 {
-    const screen_dimen left = view->data_area.left;
-    const screen_dimen top = view->data_area.top;
-    const screen_dimen width = view->data_area.width;
-    const screen_dimen height = view->data_area.height;
+    const WRect *r = &view->data_area;
     off_t dpy_text_column = view->mode_flags.wrap ? 0 : view->dpy_text_column;
-    screen_dimen col = 0;
+    int col = 0;
     int cs[1 + MAX_COMBINING_CHARS];
     char str[(1 + MAX_COMBINING_CHARS) * UTF8_CHAR_LEN + 1];
     int i, j;
@@ -586,7 +583,7 @@ mcview_display_line (WView * view, mcview_state_machine_t * state, int row,
     if (paragraph_ended != NULL)
         *paragraph_ended = TRUE;
 
-    if (!view->mode_flags.wrap && (row < 0 || row >= (int) height) && linewidth == NULL)
+    if (!view->mode_flags.wrap && (row < 0 || row >= r->lines) && linewidth == NULL)
     {
         /* Optimization: Fast forward to the end of the line, rather than carefully
          * parsing and then not actually displaying it. */
@@ -655,7 +652,7 @@ mcview_display_line (WView * view, mcview_state_machine_t * state, int row,
         /* In wrap mode only: We're done with this row if the character sequence wouldn't fit.
          * Except if at the first column, because then it wouldn't fit in the next row either.
          * In this extreme case let the unwrapped code below do its best to display it. */
-        if (view->mode_flags.wrap && (off_t) col + charwidth > dpy_text_column + (off_t) width
+        if (view->mode_flags.wrap && (off_t) col + charwidth > dpy_text_column + (off_t) r->cols
             && col > 0)
         {
             *state = state_saved;
@@ -667,14 +664,14 @@ mcview_display_line (WView * view, mcview_state_machine_t * state, int row,
         }
 
         /* Display, unless outside of the viewport. */
-        if (row >= 0 && row < (int) height)
+        if (row >= 0 && row < r->lines)
         {
             if ((off_t) col >= dpy_text_column &&
-                (off_t) col + charwidth <= dpy_text_column + (off_t) width)
+                (off_t) col + charwidth <= dpy_text_column + (off_t) r->cols)
             {
                 /* The combining character sequence fits entirely in the viewport. Print it. */
                 tty_setcolor (color);
-                widget_gotoyx (view, top + row, left + ((off_t) col - dpy_text_column));
+                widget_gotoyx (view, r->y + row, r->x + ((off_t) col - dpy_text_column));
                 if (cs[0] == '\t')
                 {
                     for (i = 0; i < charwidth; i++)
@@ -700,22 +697,22 @@ mcview_display_line (WView * view, mcview_state_machine_t * state, int row,
                  * or spaces with the correct attributes for partial Tabs. */
                 tty_setcolor (color);
                 for (i = dpy_text_column;
-                     i < (off_t) col + charwidth && i < dpy_text_column + (off_t) width; i++)
+                     i < (off_t) col + charwidth && i < dpy_text_column + (off_t) r->cols; i++)
                 {
-                    widget_gotoyx (view, top + row, left + (i - dpy_text_column));
+                    widget_gotoyx (view, r->y + row, r->x + (i - dpy_text_column));
                     tty_print_anychar ((cs[0] == '\t') ? ' ' : PARTIAL_CJK_AT_LEFT_MARGIN);
                 }
             }
-            else if ((off_t) col < dpy_text_column + (off_t) width &&
-                     (off_t) col + charwidth > dpy_text_column + (off_t) width)
+            else if ((off_t) col < dpy_text_column + (off_t) r->cols &&
+                     (off_t) col + charwidth > dpy_text_column + (off_t) r->cols)
             {
                 /* The combining character sequence would cross the right edge of the viewport
                  * and we're not wrapping. Print replacement character(s),
                  * or spaces with the correct attributes for partial Tabs. */
                 tty_setcolor (color);
-                for (i = col; i < dpy_text_column + (off_t) width; i++)
+                for (i = col; i < dpy_text_column + (off_t) r->cols; i++)
                 {
-                    widget_gotoyx (view, top + row, left + (i - dpy_text_column));
+                    widget_gotoyx (view, r->y + row, r->x + (i - dpy_text_column));
                     tty_print_anychar ((cs[0] == '\t') ? ' ' : PARTIAL_CJK_AT_RIGHT_MARGIN);
                 }
             }
@@ -724,7 +721,7 @@ mcview_display_line (WView * view, mcview_state_machine_t * state, int row,
         col += charwidth;
         state->unwrapped_column += charwidth;
 
-        if (!view->mode_flags.wrap && (off_t) col >= dpy_text_column + (off_t) width
+        if (!view->mode_flags.wrap && (off_t) col >= dpy_text_column + (off_t) r->cols
             && linewidth == NULL)
         {
             /* Optimization: Fast forward to the end of the line, rather than carefully
@@ -767,7 +764,6 @@ mcview_display_line (WView * view, mcview_state_machine_t * state, int row,
 static int
 mcview_display_paragraph (WView * view, mcview_state_machine_t * state, int row)
 {
-    const screen_dimen height = view->data_area.height;
     int lines = 0;
 
     while (TRUE)
@@ -778,11 +774,11 @@ mcview_display_paragraph (WView * view, mcview_state_machine_t * state, int row)
         if (paragraph_ended)
             return lines;
 
-        if (row < (int) height)
+        if (row < view->data_area.lines)
         {
             row++;
             /* stop if bottom of screen reached */
-            if (row >= (int) height)
+            if (row >= view->data_area.lines)
                 return lines;
         }
     }
@@ -848,9 +844,7 @@ mcview_wrap_fixup (WView * view)
 void
 mcview_display_text (WView * view)
 {
-    const screen_dimen left = view->data_area.left;
-    const screen_dimen top = view->data_area.top;
-    const screen_dimen height = view->data_area.height;
+    const WRect *r = &view->data_area;
     int row;
     mcview_state_machine_t state;
     gboolean again;
@@ -872,7 +866,7 @@ mcview_display_text (WView * view)
             state = view->dpy_state_top;
         }
 
-        for (row = 0; row < (int) height; row += n)
+        for (row = 0; row < r->lines; row += n)
         {
             n = mcview_display_paragraph (view, &state, row);
             if (n == 0)
@@ -884,7 +878,7 @@ mcview_display_text (WView * view)
                  * charset change or enabling nroff. */
                 if ((view->mode_flags.wrap ? view->dpy_state_top.offset : view->dpy_start) > 0)
                 {
-                    mcview_ascii_move_up (view, height - row);
+                    mcview_ascii_move_up (view, r->lines - row);
                     again = TRUE;
                 }
                 break;
@@ -898,9 +892,9 @@ mcview_display_text (WView * view)
 
     tty_setcolor (VIEW_NORMAL_COLOR);
     if (mcview_show_eof != NULL && mcview_show_eof[0] != '\0')
-        while (row < (int) height)
+        while (row < r->lines)
         {
-            widget_gotoyx (view, top + row, left);
+            widget_gotoyx (view, r->y + row, r->x);
             /* TODO: should make it no wider than the viewport */
             tty_print_string (mcview_show_eof);
             row++;
@@ -1002,7 +996,7 @@ mcview_ascii_move_up (WView * view, off_t lines)
              * Normally we'd jump to the next paragraph and reset paragraph_skip_lines. But for
              * walking backwards this is exactly what we need. */
             view->dpy_paragraph_skip_lines =
-                mcview_display_paragraph (view, &view->dpy_state_top, view->data_area.height);
+                mcview_display_paragraph (view, &view->dpy_state_top, view->data_area.lines);
             view->force_max = -1;
         }
 
@@ -1038,7 +1032,7 @@ mcview_ascii_moveto_eol (WView * view)
         /* Get the width of the topmost paragraph. */
         mcview_state_machine_init (&state, view->dpy_start);
         mcview_display_line (view, &state, -1, NULL, &linewidth);
-        view->dpy_text_column = DOZ (linewidth, (off_t) view->data_area.width);
+        view->dpy_text_column = DOZ (linewidth, (off_t) view->data_area.cols);
     }
 }
 

@@ -510,16 +510,16 @@ mcview_execute_cmd (WView * view, long command)
         mcview_move_down (view, 1);
         break;
     case CK_HalfPageUp:
-        mcview_move_up (view, (view->data_area.height + 1) / 2);
+        mcview_move_up (view, (view->data_area.lines + 1) / 2);
         break;
     case CK_HalfPageDown:
-        mcview_move_down (view, (view->data_area.height + 1) / 2);
+        mcview_move_down (view, (view->data_area.lines + 1) / 2);
         break;
     case CK_PageUp:
-        mcview_move_up (view, view->data_area.height);
+        mcview_move_up (view, view->data_area.lines);
         break;
     case CK_PageDown:
-        mcview_move_down (view, view->data_area.height);
+        mcview_move_down (view, view->data_area.lines);
         break;
     case CK_Top:
         mcview_moveto_top (view);

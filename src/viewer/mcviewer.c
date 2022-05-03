@@ -89,6 +89,7 @@ static void
 mcview_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 {
     WView *view = (WView *) w;
+    const WRect *r = &view->data_area;
     gboolean ok = TRUE;
 
     switch (msg)
@@ -117,16 +118,16 @@ mcview_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
         if (!view->mode_flags.wrap)
         {
             /* Scrolling left and right */
-            screen_dimen x;
+            int x;
 
             x = event->x + 1;   /* FIXME */
 
-            if (x < view->data_area.width * 1 / 4)
+            if (x < r->cols * 1 / 4)
             {
                 mcview_move_left (view, 1);
                 event->result.repeat = msg == MSG_MOUSE_DOWN;
             }
-            else if (x < view->data_area.width * 3 / 4)
+            else if (x < r->cols * 3 / 4)
             {
                 /* ignore the click */
                 ok = FALSE;
@@ -140,20 +141,20 @@ mcview_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
         else
         {
             /* Scrolling up and down */
-            screen_dimen y;
+            int y;
 
             y = event->y + 1;   /* FIXME */
 
-            if (y < view->data_area.top + view->data_area.height * 1 / 3)
+            if (y < r->y + r->lines * 1 / 3)
             {
                 if (mcview_mouse_move_pages)
-                    mcview_move_up (view, view->data_area.height / 2);
+                    mcview_move_up (view, r->lines / 2);
                 else
                     mcview_move_up (view, 1);
 
                 event->result.repeat = msg == MSG_MOUSE_DOWN;
             }
-            else if (y < view->data_area.top + view->data_area.height * 2 / 3)
+            else if (y < r->y + r->lines * 2 / 3)
             {
                 /* ignore the click */
                 ok = FALSE;
@@ -161,7 +162,7 @@ mcview_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
             else
             {
                 if (mcview_mouse_move_pages)
-                    mcview_move_down (view, view->data_area.height / 2);
+                    mcview_move_down (view, r->lines / 2);
                 else
                     mcview_move_down (view, 1);
 

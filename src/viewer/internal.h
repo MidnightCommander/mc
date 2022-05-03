@@ -24,9 +24,6 @@
 
 typedef unsigned char byte;
 
-/* A width or height on the screen */
-typedef unsigned int screen_dimen;
-
 /*** enums ***************************************************************************************/
 
 /* data sources of the view */
@@ -60,12 +57,6 @@ struct hexedit_change_node
     struct hexedit_change_node *next;
     off_t offset;
     byte value;
-};
-
-struct area
-{
-    screen_dimen top, left;
-    screen_dimen height, width;
 };
 
 /* A cache entry for mapping offsets into line/column pairs and vice versa.
@@ -149,7 +140,7 @@ struct WView
     GPtrArray *coord_cache;     /* Cache for mapping offsets to cursor positions */
 
     /* Display information */
-    screen_dimen dpy_frame_size;        /* Size of the frame surrounding the real viewer */
+    int dpy_frame_size;         /* Size of the frame surrounding the real viewer */
     off_t dpy_start;            /* Offset of the displayed data (start of the paragraph in non-hex mode) */
     off_t dpy_end;              /* Offset after the displayed data */
     off_t dpy_paragraph_skip_lines;     /* Extra lines to skip in wrap mode */
@@ -158,12 +149,12 @@ struct WView
     gboolean dpy_wrap_dirty;    /* dpy_state_top needs to be recomputed */
     off_t dpy_text_column;      /* Number of skipped columns in non-wrap
                                  * text mode */
-    screen_dimen cursor_col;    /* Cursor column */
-    screen_dimen cursor_row;    /* Cursor row */
+    int cursor_col;             /* Cursor column */
+    int cursor_row;             /* Cursor row */
     struct hexedit_change_node *change_list;    /* Linked list of changes */
-    struct area status_area;    /* Where the status line is displayed */
-    struct area ruler_area;     /* Where the ruler is displayed */
-    struct area data_area;      /* Where the data is displayed */
+    WRect status_area;          /* Where the status line is displayed */
+    WRect ruler_area;           /* Where the ruler is displayed */
+    WRect data_area;            /* Where the data is displayed */
 
     ssize_t force_max;          /* Force a max offset, or -1 */
 
