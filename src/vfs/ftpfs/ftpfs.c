@@ -1237,12 +1237,29 @@ ftpfs_setup_active (struct vfs_class *me, struct vfs_s_super *super,
     if (addr == NULL)
         ERRNOR (ENOMEM, -1);
 
-    if (getnameinfo
-        ((struct sockaddr *) &data_addr, data_addrlen, addr, NI_MAXHOST, NULL, 0,
-         NI_NUMERICHOST) != 0)
+    res =
+        getnameinfo ((struct sockaddr *) &data_addr, data_addrlen, addr, NI_MAXHOST, NULL, 0,
+                     NI_NUMERICHOST);
+    if (res != 0)
     {
+        const char *err_str;
+
         g_free (addr);
-        ERRNOR (EIO, -1);
+
+        if (res == EAI_SYSTEM)
+        {
+            me->verrno = errno;
+            err_str = unix_error_string (me->verrno);
+        }
+        else
+        {
+            me->verrno = EIO;
+            err_str = gai_strerror (res);
+        }
+
+        vfs_print_message (_("ftpfs: could not make address-to-name translation: %s"), err_str);
+
+        return (-1);
     }
 
     /* If we are talking to an IPV4 server, try PORT, and, only if it fails, go for EPRT */
