@@ -6,7 +6,8 @@
 
    Written by:
    Pavel Machek <pavel@ucw.cz>, 1998
-   Slava Zanko <slavazanko@gmail.com>, 2013
+   Slava Zanko <slavazanko@gmail.com>, 2010-2013
+   Andrew Borodin <aborodin@vmail.ru> 2010-2022
 
    This file is part of the Midnight Commander.
 
@@ -69,7 +70,7 @@
 #include "lib/global.h"
 
 #include "lib/tty/tty.h"        /* enable/disable interrupt key */
-#include "lib/util.h"           /* custom_canonicalize_pathname() */
+#include "lib/util.h"           /* canonicalize_pathname_custom() */
 #if 0
 #include "lib/widget.h"         /* message() */
 #endif
@@ -181,7 +182,7 @@ vfs_s_find_entry_tree (struct vfs_class *me, struct vfs_s_inode *root,
     char *path = pathref;
 
     /* canonicalize as well, but don't remove '../' from path */
-    custom_canonicalize_pathname (path, CANON_PATH_ALL & (~CANON_PATH_REMDOUBLEDOTS));
+    canonicalize_pathname_custom (path, CANON_PATH_ALL & (~CANON_PATH_REMDOUBLEDOTS));
 
     while (root != NULL)
     {
@@ -245,7 +246,7 @@ vfs_s_find_entry_linear (struct vfs_class *me, struct vfs_s_inode *root,
         vfs_die ("We have to use _real_ root. Always. Sorry.");
 
     /* canonicalize as well, but don't remove '../' from path */
-    custom_canonicalize_pathname (path, CANON_PATH_ALL & (~CANON_PATH_REMDOUBLEDOTS));
+    canonicalize_pathname_custom (path, CANON_PATH_ALL & (~CANON_PATH_REMDOUBLEDOTS));
 
     if ((flags & FL_DIR) == 0)
     {
