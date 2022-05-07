@@ -7,7 +7,8 @@
    Written by: 1995 Miguel de Icaza
    Jakub Jelinek, 1995
    Pavel Machek, 1998
-   Slava Zanko <slavazanko@gmail.com>, 2013
+   Slava Zanko <slavazanko@gmail.com>, 2011-2013
+   Andrew Borodin <aborodin@vmail.ru>, 2011-2022
 
    This file is part of the Midnight Commander.
 
@@ -746,7 +747,7 @@ vfs_clone_file (int dest_vfs_fd, int src_vfs_fd)
     dest_class = vfs_class_find_by_handle (dest_vfs_fd, &dest_fd);
     if ((dest_class->flags & VFSF_LOCAL) == 0)
     {
-        errno = EOPNOTSUPP;
+        errno = ENOTSUP;
         return (-1);
     }
     if (dest_fd == NULL)
@@ -758,7 +759,7 @@ vfs_clone_file (int dest_vfs_fd, int src_vfs_fd)
     src_class = vfs_class_find_by_handle (src_vfs_fd, &src_fd);
     if ((src_class->flags & VFSF_LOCAL) == 0)
     {
-        errno = EOPNOTSUPP;
+        errno = ENOTSUP;
         return (-1);
     }
     if (src_fd == NULL)
@@ -771,7 +772,7 @@ vfs_clone_file (int dest_vfs_fd, int src_vfs_fd)
 #else
     (void) dest_vfs_fd;
     (void) src_vfs_fd;
-    errno = EOPNOTSUPP;
+    errno = ENOTSUP;
     return (-1);
 #endif
 }
