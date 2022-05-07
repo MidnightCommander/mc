@@ -649,7 +649,8 @@ mc_ungetlocalcopy (const vfs_path_t * pathname_vpath, const vfs_path_t * local_v
 /**
  * VFS chdir.
  *
- * @param vpath VFS-path
+ * @param vpath VFS path.
+ *              May be NULL. In this case NULL is returned and errno set to 0.
  *
  * @return 0 on success, -1 on failure.
  */
@@ -664,7 +665,10 @@ mc_chdir (const vfs_path_t * vpath)
     vfs_path_t *cd_vpath;
 
     if (vpath == NULL)
+    {
+        errno = 0;
         return (-1);
+    }
 
     if (vpath->relative)
         cd_vpath = vfs_path_to_absolute (vpath);
@@ -672,9 +676,17 @@ mc_chdir (const vfs_path_t * vpath)
         cd_vpath = vfs_path_clone (vpath);
 
     path_element = vfs_path_get_by_index (cd_vpath, -1);
-    if (!vfs_path_element_valid (path_element) || path_element->class->chdir == NULL)
+    if (!vfs_path_element_valid (path_element))
+    {
+        errno = EINVAL;
         goto error_end;
+    }
 
+    if (path_element->class->chdir == NULL)
+    {
+        errno = ENOTSUP;
+        goto error_end;
+    }
 
     result = path_element->class->chdir (cd_vpath);
     if (result == -1)
