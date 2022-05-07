@@ -12,7 +12,7 @@
    Pavel Machek, 1998
    Yury V. Zaytsev, 2010
    Slava Zanko <slavazanko@gmail.com>, 2010, 2013
-   Andrew Borodin <aborodin@vmail.ru>, 2010
+   Andrew Borodin <aborodin@vmail.ru>, 2010-2022
 
    This file is part of the Midnight Commander.
 
@@ -1767,7 +1767,7 @@ resolve_symlink (struct vfs_class *me, struct vfs_s_super *super, struct vfs_s_i
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
+ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, const char *remote_path)
 {
     struct vfs_s_super *super = dir->super;
     ftp_super_t *ftp_super = FTP_SUPER (super);

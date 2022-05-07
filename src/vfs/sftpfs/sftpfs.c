@@ -7,7 +7,7 @@
    Written by:
    Ilia Maslakov <il.smind@gmail.com>, 2011
    Slava Zanko <slavazanko@gmail.com>, 2011-2013
-   Andrew Borodin <aborodin@vmail.ru>, 2021
+   Andrew Borodin <aborodin@vmail.ru>, 2021-2022
 
    This file is part of the Midnight Commander.
 
@@ -800,7 +800,7 @@ sftpfs_free_archive (struct vfs_class *me, struct vfs_s_super *super)
  */
 
 static int
-sftpfs_cb_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
+sftpfs_cb_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, const char *remote_path)
 {
     (void) me;
     (void) dir;
