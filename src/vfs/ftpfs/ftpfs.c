@@ -233,7 +233,6 @@ typedef struct
 
 /*** file scope variables ************************************************************************/
 
-static int ftpfs_errno;
 static int code;
 
 static char reply_str[80];
@@ -860,7 +859,7 @@ ftpfs_open_socket (struct vfs_class *me, struct vfs_s_super *super)
     if (super->path_element->host == NULL || *super->path_element->host == '\0')
     {
         vfs_print_message ("%s", _("ftpfs: Invalid host name."));
-        ftpfs_errno = EINVAL;
+        me->verrno = EINVAL;
         return (-1);
     }
 
@@ -907,7 +906,7 @@ ftpfs_open_socket (struct vfs_class *me, struct vfs_s_super *super)
         tty_disable_interrupt_key ();
         vfs_print_message (_("ftpfs: %s"), gai_strerror (e));
         g_free (host);
-        ftpfs_errno = EINVAL;
+        me->verrno = EINVAL;
         return (-1);
     }
 
@@ -924,7 +923,7 @@ ftpfs_open_socket (struct vfs_class *me, struct vfs_s_super *super)
             vfs_print_message (_("ftpfs: %s"), unix_error_string (errno));
             g_free (host);
             freeaddrinfo (res);
-            ftpfs_errno = errno;
+            me->verrno = errno;
             return (-1);
         }
 
@@ -934,7 +933,7 @@ ftpfs_open_socket (struct vfs_class *me, struct vfs_s_super *super)
         if (connect (my_socket, curr_res->ai_addr, curr_res->ai_addrlen) >= 0)
             break;
 
-        ftpfs_errno = errno;
+        me->verrno = errno;
         close (my_socket);
 
         if (errno == EINTR && tty_got_interrupt ())
@@ -999,7 +998,7 @@ ftpfs_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
                 sleep (1);
                 if (tty_got_interrupt ())
                 {
-                    /* ftpfs_errno = E; */
+                    /* me->verrno = E; */
                     tty_disable_interrupt_key ();
                     return 0;
                 }
@@ -1100,7 +1099,7 @@ ftpfs_get_current_directory (struct vfs_class *me, struct vfs_s_super *super)
             }
     }
 
-    ftpfs_errno = EIO;
+    me->verrno = EIO;
     return NULL;
 }
 
@@ -1351,11 +1350,11 @@ ftpfs_init_data_socket (struct vfs_class *me, struct vfs_s_super *super,
     }
 
     result = socket (data_addr->ss_family, SOCK_STREAM, IPPROTO_TCP);
-
     if (result < 0)
     {
-        vfs_print_message (_("ftpfs: could not create socket: %s"), unix_error_string (errno));
-        return (-1);
+        me->verrno = errno;
+        vfs_print_message (_("ftpfs: could not create socket: %s"), unix_error_string (me->verrno));
+        result = -1;
     }
 
     return result;
@@ -1418,7 +1417,7 @@ ftpfs_initconn (struct vfs_class *me, struct vfs_s_super *super)
         ftp_super->proxy !=
         NULL ? ftpfs_use_passive_connections_over_proxy : ftpfs_use_passive_connections;
 
-    ftpfs_errno = EIO;
+    me->verrno = EIO;
     return (-1);
 }
 
@@ -1451,7 +1450,7 @@ ftpfs_open_data_connection (struct vfs_class *me, struct vfs_s_super *super, con
         if (j != CONTINUE)
         {
             close (s);
-            return (-1);
+            ERRNOR (EIO, -1);
         }
     }
 
@@ -1484,7 +1483,7 @@ ftpfs_open_data_connection (struct vfs_class *me, struct vfs_s_super *super, con
         tty_enable_interrupt_key ();
         data = accept (s, (struct sockaddr *) &from, &fromlen);
         if (data < 0)
-            ftpfs_errno = errno;
+            me->verrno = errno;
         tty_disable_interrupt_key ();
         close (s);
         if (data < 0)
@@ -1791,7 +1790,7 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, const char *remot
 
     if (cd_first && ftpfs_chdir_internal (me, super, remote_path) != COMPLETE)
     {
-        ftpfs_errno = ENOENT;
+        me->verrno = ENOENT;
         vfs_print_message ("%s", _("ftpfs: CWD failed."));
         return (-1);
     }
@@ -1924,6 +1923,7 @@ ftpfs_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, cha
 
     if (fstat (h, &s) == -1)
     {
+        me->verrno = errno;
         close (h);
         return (-1);
     }
@@ -1952,12 +1952,12 @@ ftpfs_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, cha
         {
             if (errno != EINTR)
             {
-                ftpfs_errno = errno;
+                me->verrno = errno;
                 goto error_return;
             }
             if (tty_got_interrupt ())
             {
-                ftpfs_errno = EINTR;
+                me->verrno = EINTR;
                 goto error_return;
             }
         }
@@ -1974,7 +1974,7 @@ ftpfs_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, cha
                 if (errno == EINTR && !tty_got_interrupt ())
                     continue;
 
-                ftpfs_errno = errno;
+                me->verrno = errno;
                 goto error_return;
             }
 
@@ -2187,7 +2187,7 @@ ftpfs_chown (const vfs_path_t * vpath, uid_t owner, gid_t group)
     (void) owner;
     (void) group;
 
-    ftpfs_errno = EPERM;
+    me->verrno = EPERM;
     return (-1);
 #else
     /* Everyone knows it is not possible to chown remotely, so why bother them.
@@ -2236,7 +2236,7 @@ ftpfs_chdir_internal (struct vfs_class *me, struct vfs_s_super *super, const cha
     g_free (p);
 
     if (r != COMPLETE)
-        ftpfs_errno = EIO;
+        me->verrno = EIO;
     else
     {
         g_free (ftp_super->current_dir);
