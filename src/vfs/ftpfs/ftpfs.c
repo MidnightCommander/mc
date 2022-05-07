@@ -1809,7 +1809,7 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, const char *remot
         char *path;
 
         /* Trailing "/." is necessary if remote_path is a symlink */
-        path = mc_build_filename (remote_path, ".", (char *) NULL);
+        path = g_strconcat (remote_path, PATH_SEP_STR ".", (char *) NULL);
         sock = ftpfs_open_data_connection (me, super, "LIST -la", path, TYPE_ASCII, 0);
         g_free (path);
     }
