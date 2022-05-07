@@ -1403,10 +1403,15 @@ ftpfs_initconn (struct vfs_class *me, struct vfs_s_super *super)
         if (data_sock < 0)
             return (-1);
 
-        if ((bind (data_sock, (struct sockaddr *) &data_addr, data_addrlen) == 0) &&
-            (getsockname (data_sock, (struct sockaddr *) &data_addr, &data_addrlen) == 0) &&
-            (listen (data_sock, 1) == 0) &&
-            (ftpfs_setup_active (me, super, data_addr, data_addrlen) != 0))
+        if ((bind (data_sock, (struct sockaddr *) &data_addr, data_addrlen) != 0) ||
+            (getsockname (data_sock, (struct sockaddr *) &data_addr, &data_addrlen) != 0) ||
+            (listen (data_sock, 1) != 0))
+        {
+            close (data_sock);
+            ERRNOR (errno, -1);
+        }
+
+        if (ftpfs_setup_active (me, super, data_addr, data_addrlen) != 0)
             return data_sock;
 
         close (data_sock);
