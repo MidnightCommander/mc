@@ -159,6 +159,12 @@ tar_stat_destroy (struct tar_stat_info *st)
     g_free (st->uname);
     g_free (st->gname);
 #endif
+    if (st->sparse_map != NULL)
+    {
+        g_array_free (st->sparse_map, TRUE);
+        st->sparse_map = NULL;
+    }
+    tar_xheader_destroy (&st->xhdr);
     memset (st, 0, sizeof (*st));
 }
 
@@ -249,29 +255,51 @@ uintmax_from_header (const char *p, size_t s)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static void
+tar_calc_sparse_offsets (struct vfs_s_inode *inode)
+{
+    off_t begin = inode->data_offset;
+    GArray *sm = (GArray *) inode->user_data;
+    size_t i;
+
+    for (i = 0; i < sm->len; i++)
+    {
+        struct sp_array *sp;
+
+        sp = &g_array_index (sm, struct sp_array, i);
+        sp->arch_offset = begin;
+        begin += BLOCKSIZE * (sp->numbytes / BLOCKSIZE + sp->numbytes % BLOCKSIZE);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static gboolean
 tar_skip_member (tar_super_t * archive, struct vfs_s_inode *inode)
 {
-    char save_typeflag = current_header->header.typeflag;
+    char save_typeflag;
+
+    if (current_stat_info.skipped)
+        return TRUE;
+
+    save_typeflag = current_header->header.typeflag;
 
     tar_set_next_block_after (current_header);
 
-    if (archive->type == TAR_OLDGNU && current_header->oldgnu_header.isextended)
+    if (current_stat_info.is_sparse)
     {
-        union block *exhdr;
+        if (inode != NULL)
+            inode->data_offset = BLOCKSIZE * tar_current_block_ordinal (archive);
 
-        do
-        {
-            exhdr = tar_find_next_block (archive);
-            if (exhdr == NULL)
-                return FALSE;
+        (void) tar_sparse_skip_file (archive, &current_stat_info);
 
-            tar_set_next_block_after (exhdr);
-        }
-        while (exhdr->sparse_header.isextended != 0);
+        /* use vfs_s_inode::user_data to keep the sparse map */
+        inode->user_data = current_stat_info.sparse_map;
+        current_stat_info.sparse_map = NULL;
+
+        tar_calc_sparse_offsets (inode);
     }
-
-    if (save_typeflag != DIRTYPE)
+    else if (save_typeflag != DIRTYPE)
     {
         if (inode != NULL)
             inode->data_offset = BLOCKSIZE * tar_current_block_ordinal (archive);
@@ -359,7 +387,11 @@ tar_decode_header (union block *header, tar_super_t * arch)
     {
         if (strcmp (header->header.magic, TMAGIC) == 0)
         {
-            if (header->header.typeflag == XGLTYPE)
+            if (header->star_header.prefix[130] == 0 && isodigit (header->star_header.atime[0])
+                && header->star_header.atime[11] == ' ' && isodigit (header->star_header.ctime[0])
+                && header->star_header.ctime[11] == ' ')
+                arch->type = TAR_STAR;
+            else if (current_stat_info.xhdr.buffer != NULL)
                 arch->type = TAR_POSIX;
             else
                 arch->type = TAR_USTAR;
@@ -468,6 +500,11 @@ tar_fill_stat (struct vfs_s_super *archive, union block *header)
         current_stat_info.atime.tv_sec = TIME_FROM_HEADER (header->oldgnu_header.atime);
         current_stat_info.ctime.tv_sec = TIME_FROM_HEADER (header->oldgnu_header.ctime);
     }
+    else if (arch->type == TAR_STAR)
+    {
+        current_stat_info.atime.tv_sec = TIME_FROM_HEADER (header->star_header.atime);
+        current_stat_info.ctime.tv_sec = TIME_FROM_HEADER (header->star_header.ctime);
+    }
     else
         current_stat_info.atime = current_stat_info.ctime = start_time;
 
@@ -475,6 +512,16 @@ tar_fill_stat (struct vfs_s_super *archive, union block *header)
     current_stat_info.stat.st_blksize = 8 * 1024;       /* FIXME */
 #endif
     vfs_adjust_stat (&current_stat_info.stat);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+tar_free_inode (struct vfs_class *me, struct vfs_s_inode *ino)
+{
+    /* free sparse_map */
+    if (ino->user_data != NULL)
+        g_array_free ((GArray *) ino->user_data, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -649,13 +696,37 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive)
 
             *bp = '\0';
         }
-        else if (header->header.typeflag == XHDTYPE || header->header.typeflag == XGLTYPE)
+        else if (header->header.typeflag == XHDTYPE || header->header.typeflag == SOLARIS_XHDTYPE)
         {
-            /* Skip over pax extended header and global extended header records. */
             if (arch->type == TAR_UNKNOWN)
                 arch->type = TAR_POSIX;
-            status = tar_skip_member (arch, NULL) ? HEADER_SUCCESS : HEADER_FAILURE;
-            goto ret;
+            if (!tar_xheader_read
+                (arch, &current_stat_info.xhdr, header, OFF_FROM_HEADER (header->header.size)))
+            {
+                message (D_ERROR, MSG_ERROR, _("Unexpected EOF on archive file"));
+                status = HEADER_FAILURE;
+                goto ret;
+            }
+        }
+        else if (header->header.typeflag == XGLTYPE)
+        {
+            struct xheader xhdr;
+            gboolean ok;
+
+            if (arch->type == TAR_UNKNOWN)
+                arch->type = TAR_POSIX;
+
+            memset (&xhdr, 0, sizeof (xhdr));
+            tar_xheader_read (arch, &xhdr, header, OFF_FROM_HEADER (header->header.size));
+            ok = tar_xheader_decode_global (&xhdr);
+            tar_xheader_destroy (&xhdr);
+
+            if (!ok)
+            {
+                message (D_ERROR, MSG_ERROR, _("Inconsistent tar archive"));
+                status = HEADER_FAILURE;
+                goto ret;
+            }
         }
         else
             break;
@@ -663,7 +734,7 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive)
 
     {
         static union block *recent_long_name = NULL, *recent_long_link = NULL;
-        struct posix_header const *h = &current_header->header;
+        struct posix_header const *h = &header->header;
         char *file_name = NULL;
         char *link_name;
         struct vfs_s_inode *inode = NULL;
@@ -683,14 +754,7 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive)
 
             /* Don't parse TAR_OLDGNU incremental headers as POSIX prefixes. */
             if (h->prefix[0] != '\0' && strcmp (h->magic, TMAGIC) == 0)
-            {
                 s1 = g_strndup (h->prefix, sizeof (h->prefix));
-
-                /* Prevent later references to current_header from mistakenly treating this
-                   as an old GNU header.
-                   This assignment invalidates h->prefix. */
-                current_header->oldgnu_header.isextended = 0;
-            }
 
             s2 = g_strndup (h->name, sizeof (h->name));
 
@@ -725,7 +789,31 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive)
 
         tar_assign_string (&current_stat_info.link_name, link_name);
 
-        tar_set_next_block_after (current_header);
+        if (current_stat_info.xhdr.buffer != NULL && !tar_xheader_decode (&current_stat_info))
+        {
+            status = HEADER_FAILURE;
+            goto ret;
+        }
+
+        if (tar_sparse_member_p (arch, &current_stat_info))
+        {
+            if (!tar_sparse_fixup_header (arch, &current_stat_info))
+            {
+                status = HEADER_FAILURE;
+                goto ret;
+            }
+
+            current_stat_info.is_sparse = TRUE;
+        }
+        else
+        {
+            current_stat_info.is_sparse = FALSE;
+
+            if (((arch->type == TAR_GNU || arch->type == TAR_OLDGNU)
+                 && current_header->header.typeflag == GNUTYPE_DUMPDIR)
+                || current_stat_info.dumpdir != NULL)
+                current_stat_info.is_dumpdir = TRUE;
+        }
 
         status = tar_insert_entry (me, archive, header, &inode);
         if (status != HEADER_SUCCESS)
@@ -993,22 +1081,173 @@ tar_super_same (const vfs_path_element_t * vpath_element, struct vfs_s_super *pa
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/* Get indes of current data chunk in a sparse file.
+ *
+ * @param sparse_map map of the sparse file
+ * @param offset offset in the sparse file
+ *
+ * @return an index of ahole or a data chunk
+ *      positive: pointer to the data chunk;
+ *      negative: pointer to the hole before data chunk;
+ *      zero: pointer to the hole after last data chunk
+ *
+ *         +--------+--------+-------+--------+-----+-------+--------+---------+
+ *         |  hole1 | chunk1 | hole2 | chunk2 | ... | holeN | chunkN | holeN+1 |
+ *         +--------+--------+-------+--------+-----+-------+--------+---------+
+ *             -1       1        -2      2             -N       N         0
+ */
+
+static ssize_t
+tar_get_sparse_chunk_idx (const GArray * sparse_map, off_t offset)
+{
+    size_t k;
+
+    for (k = 1; k <= sparse_map->len; k++)
+    {
+        const struct sp_array *chunk;
+
+        chunk = &g_array_index (sparse_map, struct sp_array, k - 1);
+
+        /* are we in the current chunk? */
+        if (offset >= chunk->offset && offset < chunk->offset + chunk->numbytes)
+            return k;
+
+        /* are we before the current chunk? */
+        if (offset < chunk->offset)
+            return -k;
+    }
+
+    /* after the last chunk */
+    return 0;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static ssize_t
+tar_read_sparse (vfs_file_handler_t * fh, char *buffer, size_t count)
+{
+    int fd = TAR_SUPER (fh->ino->super)->fd;
+    const GArray *sm = (const GArray *) fh->ino->user_data;
+    ssize_t chunk_idx;
+    const struct sp_array *chunk;
+    off_t remain;
+    ssize_t res;
+
+    chunk_idx = tar_get_sparse_chunk_idx (sm, fh->pos);
+    if (chunk_idx > 0)
+    {
+        /* we are in the chunk -- read data until chunk end */
+        chunk = &g_array_index (sm, struct sp_array, chunk_idx - 1);
+        remain = MIN ((off_t) count, chunk->offset + chunk->numbytes - fh->pos);
+        res = mc_read (fd, buffer, (size_t) remain);
+    }
+    else
+    {
+        if (chunk_idx == 0)
+        {
+            /* we are in the hole after last chunk -- return zeros until file end */
+            remain = MIN ((off_t) count, fh->ino->st.st_size - fh->pos);
+            /* FIXME: can remain be negative? */
+            remain = MAX (remain, 0);
+        }
+        else                    /* chunk_idx < 0 */
+        {
+            /* we are in the hole -- return zeros until next chunk start */
+            chunk = &g_array_index (sm, struct sp_array, -chunk_idx - 1);
+            remain = MIN ((off_t) count, chunk->offset - fh->pos);
+        }
+
+        memset (buffer, 0, (size_t) remain);
+        res = (ssize_t) remain;
+    }
+
+    return res;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static off_t
+tar_lseek_sparse (vfs_file_handler_t * fh, off_t offset)
+{
+    off_t saved_offset = offset;
+    int fd = TAR_SUPER (fh->ino->super)->fd;
+    const GArray *sm = (const GArray *) fh->ino->user_data;
+    ssize_t chunk_idx;
+    const struct sp_array *chunk;
+    off_t res;
+
+    chunk_idx = tar_get_sparse_chunk_idx (sm, offset);
+    if (chunk_idx > 0)
+    {
+        /* we are in the chunk */
+
+        chunk = &g_array_index (sm, struct sp_array, chunk_idx - 1);
+        /* offset in the chunk */
+        offset -= chunk->offset;
+        /* offset in the archive */
+        offset += chunk->arch_offset;
+    }
+    else
+    {
+        /* we are in the hole */
+
+        /* we cannot lseek in hole so seek to the hole begin or end */
+        switch (chunk_idx)
+        {
+        case -1:
+            offset = fh->ino->data_offset;
+            break;
+
+        case 0:
+            chunk = &g_array_index (sm, struct sp_array, sm->len - 1);
+            /* FIXME: can we seek beyond tar archive EOF here? */
+            offset = chunk->arch_offset + chunk->numbytes;
+            break;
+
+        default:
+            chunk = &g_array_index (sm, struct sp_array, -chunk_idx - 1);
+            offset = chunk->arch_offset + chunk->numbytes;
+            break;
+        }
+    }
+
+    res = mc_lseek (fd, offset, SEEK_SET);
+    /* return requested offset in success */
+    if (res == offset)
+        res = saved_offset;
+
+    return res;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 static ssize_t
 tar_read (void *fh, char *buffer, size_t count)
 {
     struct vfs_class *me = VFS_FILE_HANDLER_SUPER (fh)->me;
     vfs_file_handler_t *file = VFS_FILE_HANDLER (fh);
-    off_t begin = file->ino->data_offset;
     int fd = TAR_SUPER (VFS_FILE_HANDLER_SUPER (fh))->fd;
+    off_t begin = file->pos;
     ssize_t res;
 
-    if (mc_lseek (fd, begin + file->pos, SEEK_SET) != begin + file->pos)
-        ERRNOR (EIO, -1);
+    if (file->ino->user_data != NULL)
+    {
+        if (tar_lseek_sparse (file, begin) != begin)
+            ERRNOR (EIO, -1);
 
-    count = MIN (count, (size_t) (file->ino->st.st_size - file->pos));
+        res = tar_read_sparse (file, buffer, count);
+    }
+    else
+    {
+        begin += file->ino->data_offset;
 
-    res = mc_read (fd, buffer, count);
+        if (mc_lseek (fd, begin, SEEK_SET) != begin)
+            ERRNOR (EIO, -1);
+
+        count = (size_t) MIN ((off_t) count, file->ino->st.st_size - file->pos);
+        res = mc_read (fd, buffer, count);
+    }
+
     if (res == -1)
         ERRNOR (errno, -1);
 
@@ -1045,6 +1284,7 @@ vfs_init_tarfs (void)
     tarfs_subclass.new_archive = tar_new_archive;
     tarfs_subclass.open_archive = tar_open_archive;
     tarfs_subclass.free_archive = tar_free_archive;
+    tarfs_subclass.free_inode = tar_free_inode;
     tarfs_subclass.fh_open = tar_fh_open;
     vfs_register_class (vfs_tarfs_ops);
 

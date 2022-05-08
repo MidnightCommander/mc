@@ -29,6 +29,9 @@
 #define SPARSES_IN_OLDGNU_HEADER 4
 #define SPARSES_IN_SPARSE_HEADER 21
 
+#define SPARSES_IN_STAR_HEADER      4
+#define SPARSES_IN_STAR_EXT_HEADER 21
+
 /* *BEWARE* *BEWARE* *BEWARE* that the following information is still
    boiling, and may change.  Even if the OLDGNU format description should be
    accurate, the so-called GNU format is not yet fully decided.  It is
@@ -47,6 +50,11 @@
 
 /* Identifies the *next* file on the tape as having a long name.  */
 #define GNUTYPE_LONGNAME 'L'
+
+/* Solaris extended header */
+#define SOLARIS_XHDTYPE 'X'
+
+#define GNUTYPE_SPARSE 'S'
 
 
 /* These macros work even on ones'-complement hosts (!).
@@ -131,6 +139,52 @@ struct oldgnu_header
                                 /* 495 */
 };
 
+/* J@"org Schilling star header */
+struct star_header
+{                               /* byte offset */
+    char name[100];             /*   0 */
+    char mode[8];               /* 100 */
+    char uid[8];                /* 108 */
+    char gid[8];                /* 116 */
+    char size[12];              /* 124 */
+    char mtime[12];             /* 136 */
+    char chksum[8];             /* 148 */
+    char typeflag;              /* 156 */
+    char linkname[100];         /* 157 */
+    char magic[6];              /* 257 */
+    char version[2];            /* 263 */
+    char uname[32];             /* 265 */
+    char gname[32];             /* 297 */
+    char devmajor[8];           /* 329 */
+    char devminor[8];           /* 337 */
+    char prefix[131];           /* 345 */
+    char atime[12];             /* 476 */
+    char ctime[12];             /* 488 */
+                                /* 500 */
+};
+
+struct star_in_header
+{
+    char fill[345];             /*   0  Everything that is before t_prefix */
+    char prefix[1];             /* 345  t_name prefix */
+    char fill2;                 /* 346  */
+    char fill3[8];              /* 347  */
+    char isextended;            /* 355  */
+    struct sparse sp[SPARSES_IN_STAR_HEADER]; /* 356  */
+    char realsize[12];          /* 452  Actual size of the file */
+    char offset[12];            /* 464  Offset of multivolume contents */
+    char atime[12];             /* 476  */
+    char ctime[12];             /* 488  */
+    char mfill[8];              /* 500  */
+    char xmagic[4];             /* 508  "tar" */
+};
+
+struct star_ext_header
+{
+    struct sparse sp[SPARSES_IN_STAR_EXT_HEADER];
+    char isextended;
+};
+
 /* *INDENT-ON* */
 
 /* tar Header Block, overall structure */
@@ -138,8 +192,27 @@ union block
 {
     char buffer[BLOCKSIZE];
     struct posix_header header;
+    struct star_header star_header;
     struct oldgnu_header oldgnu_header;
     struct sparse_header sparse_header;
+    struct star_in_header star_in_header;
+    struct star_ext_header star_ext_header;
+};
+
+/* Information about a sparse file */
+struct sp_array
+{
+    off_t offset;       /* chunk offset in file */
+    off_t numbytes;     /* length of chunk */
+    off_t arch_offset;  /* chunk offset in archive */
+};
+
+enum dump_status
+{
+    dump_status_ok,
+    dump_status_short,
+    dump_status_fail,
+    dump_status_not_implemented
 };
 
 enum archive_format
@@ -149,6 +222,7 @@ enum archive_format
     TAR_OLDGNU,                 /**< GNU format as per before tar 1.12 */
     TAR_USTAR,                  /**< POSIX.1-1988 (ustar) format */
     TAR_POSIX,                  /**< POSIX.1-2001 format */
+    TAR_STAR,                   /**< star format defined in 1994 */
     TAR_GNU                     /**< almost same as OLDGNU_FORMAT */
 };
 
@@ -161,6 +235,12 @@ typedef struct
     enum archive_format type;   /**< type of the archive */
     union block *record_start;  /**< start of record of archive */
 } tar_super_t;
+
+struct xheader
+{
+    size_t size;
+    char *buffer;
+};
 
 struct tar_stat_info
 {
@@ -178,6 +258,29 @@ struct tar_stat_info
     struct timespec atime;
     struct timespec mtime;
     struct timespec ctime;
+
+    off_t archive_file_size;    /**< size of file as stored in the archive.
+                                     Equals stat.st_size for non-sparse files */
+    gboolean is_sparse;         /**< is the file sparse */
+
+    /* For sparse files */
+    unsigned int sparse_major;
+    unsigned int sparse_minor;
+    GArray *sparse_map;         /**< array of struct sp_array */
+
+    off_t real_size;            /**< real size of sparse file */
+    gboolean real_size_set;     /**< TRUE when GNU.sparse.realsize is set in archived file */
+
+    gboolean sparse_name_done;  /**< TRUE if 'GNU.sparse.name' header was processed pax header parsing.
+                                     Following 'path'  header (lower priority) will be ignored. */
+
+    /* Extended headers */
+    struct xheader xhdr;
+
+    /* For dumpdirs */
+    gboolean is_dumpdir;        /**< is the member a dumpdir? */
+    gboolean skipped;           /**< the member contents is already read (for GNUTYPE_DUMPDIR) */
+    char *dumpdir;              /**< contents of the dump directory */
 };
 
 /*** global variables defined in .c file *********************************************************/
@@ -210,6 +313,18 @@ union block *tar_find_next_block (tar_super_t * archive);
 gboolean tar_set_next_block_after (union block *block);
 off_t tar_current_block_ordinal (const tar_super_t * archive);
 gboolean tar_skip_file (tar_super_t * archive, off_t size);
+
+/* tar-sparse.c */
+gboolean tar_sparse_member_p (tar_super_t * archive, struct tar_stat_info *st);
+gboolean tar_sparse_fixup_header (tar_super_t * archive, struct tar_stat_info *st);
+enum dump_status tar_sparse_skip_file (tar_super_t * archive, struct tar_stat_info *st);
+
+/* tar-xheader.c */
+gboolean tar_xheader_decode (struct tar_stat_info *st);
+gboolean tar_xheader_read (tar_super_t * archive, struct xheader *xhdr, union block *header,
+                           off_t size);
+gboolean tar_xheader_decode_global (struct xheader *xhdr);
+void tar_xheader_destroy (struct xheader *xhdr);
 
 /*** inline functions ****************************************************************************/
 

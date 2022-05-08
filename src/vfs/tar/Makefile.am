@@ -5,4 +5,6 @@ noinst_LTLIBRARIES = libvfs-tar.la
 
 libvfs_tar_la_SOURCES = \
 	tar-internal.c tar-internal.h \
+	tar-sparse.c \
+	tar-xheader.c \
 	tar.c tar.h
