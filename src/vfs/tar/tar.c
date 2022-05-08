@@ -31,19 +31,11 @@
  * \author Jakub Jelinek
  * \author Pavel Machek
  * \date 1995, 1998
- *
- * Namespace: init_tarfs
  */
 
 #include <config.h>
 
-#include <ctype.h>              /* isspace() */
 #include <errno.h>
-#include <inttypes.h>           /* uintmax_t */
-#include <limits.h>             /* CHAR_BIT, INT_MAX, etc */
-#include <stdint.h>             /* UINTMAX_MAX, etc */
-#include <sys/types.h>
-#include <sys/stat.h>
 #include <string.h>             /* memset() */
 
 #ifdef hpux
@@ -58,18 +50,33 @@
 
 #include "lib/vfs/vfs.h"
 #include "lib/vfs/utilvfs.h"
-#include "lib/vfs/xdirentry.h"
 #include "lib/vfs/gc.h"         /* vfs_rmstamp */
 
+#include "tar-internal.h"
 #include "tar.h"
 
 /*** global variables ****************************************************************************/
 
+/* Size of each record, once in blocks, once in bytes. Those two variables are always related,
+   the second being BLOCKSIZE times the first. */
+const int blocking_factor = DEFAULT_BLOCKING;
+const size_t record_size = DEFAULT_BLOCKING * BLOCKSIZE;
+
+/* As we open one archive at a time, it is safe to have these static */
+union block *record_end;        /* last+1 block of archive record */
+union block *current_block;     /* current block of archive */
+off_t record_start_block;       /* block ordinal at record_start */
+
+union block *current_header;
+
+/* Have we hit EOF yet?  */
+gboolean hit_eof;
+
+struct tar_stat_info current_stat_info;
+
 /*** file scope macro definitions ****************************************************************/
 
 #define TAR_SUPER(super) ((tar_super_t *) (super))
-
-#define NAME_FIELD_SIZE 100
 
 /* tar Header Block, from POSIX 1003.1-1990.  */
 
@@ -88,63 +95,12 @@
 #define FIFOTYPE '6'            /* FIFO special */
 
 
-/* tar Header Block, GNU extensions.  */
-
-/* *BEWARE* *BEWARE* *BEWARE* that the following information is still
-   boiling, and may change.  Even if the OLDGNU format description should be
-   accurate, the so-called GNU format is not yet fully decided.  It is
-   surely meant to use only extensions allowed by POSIX, but the sketch
-   below repeats some ugliness from the OLDGNU format, which should rather
-   go away.  Sparse files should be saved in such a way that they do *not*
-   require two passes at archive creation time.  Huge files get some POSIX
-   fields to overflow, alternate solutions have to be sought for this.  */
-
-
-/* Sparse files are not supported in POSIX ustar format.  For sparse files
-   with a POSIX header, a GNU extra header is provided which holds overall
-   sparse information and a few sparse descriptors.  When an old GNU header
-   replaces both the POSIX header and the GNU extra header, it holds some
-   sparse descriptors too.  Whether POSIX or not, if more sparse descriptors
-   are still needed, they are put into as many successive sparse headers as
-   necessary.  The following constants tell how many sparse descriptors fit
-   in each kind of header able to hold them.  */
-
-#define SPARSES_IN_EXTRA_HEADER  16
-#define SPARSES_IN_OLDGNU_HEADER 4
-#define SPARSES_IN_SPARSE_HEADER 21
-
 /* OLDGNU_MAGIC uses both magic and version fields, which are contiguous.
    Found in an archive, it indicates an old GNU header format, which will be
    hopefully become obsolescent.  With OLDGNU_MAGIC, uname and gname are
    valid, though the header is not truly POSIX conforming.  */
 #define OLDGNU_MAGIC "ustar  "  /* 7 chars and a null */
 
-/* The standards committee allows only capital A through capital Z for user-defined expansion.  */
-
-/* This is a dir entry that contains the names of files that were in the
-   dir at the time the dump was made.  */
-#define GNUTYPE_DUMPDIR 'D'
-
-/* Identifies the *next* file on the tape as having a long linkname.  */
-#define GNUTYPE_LONGLINK 'K'
-
-/* Identifies the *next* file on the tape as having a long name.  */
-#define GNUTYPE_LONGNAME 'L'
-
-
-/* tar Header Block, overall structure.  */
-
-/* tar files are made in basic blocks of this size.  */
-#define BLOCKSIZE 512
-
-#define DEFAULT_BLOCKING 20
-
-#define isodigit(c) ( ((c) >= '0') && ((c) <= '7') )
-
-/* Log base 2 of common values. */
-#define LG_8 3
-#define LG_64 6
-#define LG_256 8
 
 /* Bits used in the mode field, values in octal.  */
 #define TSUID    04000          /* set UID on execution */
@@ -161,111 +117,15 @@
 #define TOWRITE  00002          /* write by other */
 #define TOEXEC   00001          /* execute/search by other */
 
-/* These macros work even on ones'-complement hosts (!).
-   The extra casts work around some compiler bugs. */
-#define TYPE_SIGNED(t) (!((t) 0 < (t) (-1)))
-#define TYPE_MINIMUM(t) (TYPE_SIGNED (t) ? ~(t) 0 << (sizeof (t) * CHAR_BIT - 1) : (t) 0)
-#define TYPE_MAXIMUM(t) (~(t) 0 - TYPE_MINIMUM (t))
-
 #define GID_FROM_HEADER(where) gid_from_header (where, sizeof (where))
 #define MAJOR_FROM_HEADER(where) major_from_header (where, sizeof (where))
 #define MINOR_FROM_HEADER(where) minor_from_header (where, sizeof (where))
 #define MODE_FROM_HEADER(where,hbits) mode_from_header (where, sizeof (where), hbits)
-#define OFF_FROM_HEADER(where) off_from_header (where, sizeof (where))
 #define TIME_FROM_HEADER(where) time_from_header (where, sizeof (where))
 #define UID_FROM_HEADER(where) uid_from_header (where, sizeof (where))
 #define UINTMAX_FROM_HEADER(where) uintmax_from_header (where, sizeof (where))
 
 /*** file scope type declarations ****************************************************************/
-
-/* *INDENT-OFF* */
-
-/* POSIX header */
-struct posix_header
-{                               /* byte offset */
-    char name[100];             /*   0 */
-    char mode[8];               /* 100 */
-    char uid[8];                /* 108 */
-    char gid[8];                /* 116 */
-    char size[12];              /* 124 */
-    char mtime[12];             /* 136 */
-    char chksum[8];             /* 148 */
-    char typeflag;              /* 156 */
-    char linkname[100];         /* 157 */
-    char magic[6];              /* 257 */
-    char version[2];            /* 263 */
-    char uname[32];             /* 265 */
-    char gname[32];             /* 297 */
-    char devmajor[8];           /* 329 */
-    char devminor[8];           /* 337 */
-    char prefix[155];           /* 345 */
-                                /* 500 */
-};
-
-/* Descriptor for a single file hole */
-struct sparse
-{                               /* byte offset */
-    /* cppcheck-suppress unusedStructMember */
-    char offset[12];            /*   0 */
-    /* cppcheck-suppress unusedStructMember */
-    char numbytes[12];          /*  12 */
-                                /*  24 */
-};
-
-/* Extension header for sparse files, used immediately after the GNU extra
-   header, and used only if all sparse information cannot fit into that
-   extra header.  There might even be many such extension headers, one after
-   the other, until all sparse information has been recorded.  */
-struct sparse_header
-{                               /* byte offset */
-    struct sparse sp[SPARSES_IN_SPARSE_HEADER];
-                                /*   0 */
-    char isextended;            /* 504 */
-                                /* 505 */
-};
-
-/* The old GNU format header conflicts with POSIX format in such a way that
-   POSIX archives may fool old GNU tar's, and POSIX tar's might well be
-   fooled by old GNU tar archives.  An old GNU format header uses the space
-   used by the prefix field in a POSIX header, and cumulates information
-   normally found in a GNU extra header.  With an old GNU tar header, we
-   never see any POSIX header nor GNU extra header.  Supplementary sparse
-   headers are allowed, however.  */
-struct oldgnu_header
-{                               /* byte offset */
-    char unused_pad1[345];      /*   0 */
-    char atime[12];             /* 345 */
-    char ctime[12];             /* 357 */
-    char offset[12];            /* 369 */
-    char longnames[4];          /* 381 */
-    char unused_pad2;           /* 385 */
-    struct sparse sp[SPARSES_IN_OLDGNU_HEADER];
-                                /* 386 */
-    char isextended;            /* 482 */
-    char realsize[12];          /* 483 */
-                                /* 495 */
-};
-
-/* *INDENT-ON* */
-
-/* tar Header Block, overall structure */
-union block
-{
-    char buffer[BLOCKSIZE];
-    struct posix_header header;
-    struct oldgnu_header oldgnu_header;
-    struct sparse_header sparse_header;
-};
-
-enum archive_format
-{
-    TAR_UNKNOWN = 0,            /* format to be decided later */
-    TAR_V7,                     /* old V7 tar format */
-    TAR_OLDGNU,                 /* GNU format as per before tar 1.12 */
-    TAR_USTAR,                  /* POSIX.1-1988 (ustar) format */
-    TAR_POSIX,                  /* POSIX.1-2001 format */
-    TAR_GNU                     /* Almost same as TAR_OLDGNU */
-};
 
 typedef enum
 {
@@ -276,87 +136,17 @@ typedef enum
     HEADER_FAILURE              /* ill-formed header, or bad checksum */
 } read_header;
 
-struct tar_stat_info
-{
-    char *orig_file_name;       /* name of file read from the archive header */
-    char *file_name;            /* name of file for the current archive entry after being normalized */
-    char *link_name;            /* name of link for the current archive entry  */
-#if 0
-    char *uname;                /* user name of owner */
-    char *gname;                /* group name of owner */
-#endif
-    struct stat stat;           /* regular filesystem stat */
-
-    /* stat() doesn't always have access, data modification, and status
-       change times in a convenient form, so store them separately.  */
-    struct timespec atime;
-    struct timespec mtime;
-    struct timespec ctime;
-};
-
-typedef struct
-{
-    struct vfs_s_super base;    /* base class */
-
-    int fd;
-    struct stat st;
-    enum archive_format type;   /* Type of the archive */
-    union block *record_start;  /* Start of record of archive */
-} tar_super_t;
-
 /*** forward declarations (file scope functions) *************************************************/
 
 /*** file scope variables ************************************************************************/
 
-/* Base 64 digits; see RFC 2045 Table 1.  */
-static char const base_64_digits[64] = {
-    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
-    'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-    'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
-    'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-    '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '/'
-};
-
-/* Table of base 64 digit values indexed by unsigned chars.
-   The value is 64 for unsigned chars that are not base 64 digits.  */
-static char base64_map[1 + (unsigned char) (-1)];
-
 static struct vfs_s_subclass tarfs_subclass;
 static struct vfs_class *vfs_tarfs_ops = VFS_CLASS (&tarfs_subclass);
-
-/* Size of each record, once in blocks, once in bytes. Those two variables are always related,
-   the second being BLOCKSIZE times the first. */
-static const int blocking_factor = DEFAULT_BLOCKING;
-static const size_t record_size = DEFAULT_BLOCKING * BLOCKSIZE;
-
-/* As we open one archive at a time, it is safe to have these static */
-
-union block *record_end;        /* last+1 block of archive record */
-union block *current_block;     /* current block of archive */
-static off_t record_start_block;        /* block ordinal at record_start */
-
-/* Have we hit EOF yet?  */
-static gboolean hit_eof;
-
-static union block *current_header;
-static struct tar_stat_info current_stat_info;
 
 static struct timespec start_time;
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-tar_base64_init (void)
-{
-    size_t i;
-
-    memset (base64_map, 64, sizeof base64_map);
-    for (i = 0; i < 64; i++)
-        base64_map[(int) base_64_digits[i]] = i;
-}
-
 /* --------------------------------------------------------------------------------------------- */
 
 static void
@@ -370,215 +160,6 @@ tar_stat_destroy (struct tar_stat_info *st)
     g_free (st->gname);
 #endif
     memset (st, 0, sizeof (*st));
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-tar_assign_string (char **string, char *value)
-{
-    g_free (*string);
-    *string = value;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-tar_assign_string_dup (char **string, const char *value)
-{
-    g_free (*string);
-    *string = g_strdup (value);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-tar_assign_string_dup_n (char **string, const char *value, size_t n)
-{
-    g_free (*string);
-    *string = g_strndup (value, n);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/**
- * Represent @n using a signed integer I such that (uintmax_t) I == @n.
-   With a good optimizing compiler, this is equivalent to (intmax_t) i
-   and requires zero machine instructions.  */
-#if !(UINTMAX_MAX / 2 <= INTMAX_MAX)
-#error "tar_represent_uintmax() returns intmax_t to represent uintmax_t"
-#endif
-static inline intmax_t
-tar_represent_uintmax (uintmax_t n)
-{
-    if (n <= INTMAX_MAX)
-        return n;
-
-    {
-        /* Avoid signed integer overflow on picky platforms.  */
-        intmax_t nd = n - INTMAX_MIN;
-        return nd + INTMAX_MIN;
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
- * Convert buffer at @where0 of size @digs from external format to intmax_t.
- * @digs must be positive.
- * If @type is non-NULL, data are of type @type.
- * The buffer must represent a value in the range -@minval through @maxval;
- * if the mathematically correct result V would be greater than INTMAX_MAX,
- * return a negative integer V such that (uintmax_t) V yields the correct result.
- * If @octal_only, allow only octal numbers instead of the other GNU extensions.
- *
- * Result is -1 if the field is invalid.
- */
-#if !(INTMAX_MAX <= UINTMAX_MAX && - (INTMAX_MIN + 1) <= UINTMAX_MAX)
-#error "tar_from_header() internally represents intmax_t as uintmax_t + sign"
-#endif
-#if !(UINTMAX_MAX / 2 <= INTMAX_MAX)
-#error "tar_from_header() returns intmax_t to represent uintmax_t"
-#endif
-static intmax_t
-tar_from_header (const char *where0, size_t digs, char const *type, intmax_t minval,
-                 uintmax_t maxval, gboolean octal_only)
-{
-    uintmax_t value = 0;
-    uintmax_t uminval = minval;
-    uintmax_t minus_minval = -uminval;
-    const char *where = where0;
-    char const *lim = where + digs;
-    gboolean negative = FALSE;
-
-    /* Accommodate buggy tar of unknown vintage, which outputs leading
-       NUL if the previous field overflows. */
-    if (*where == '\0')
-        where++;
-
-    /* Accommodate older tars, which output leading spaces. */
-    while (TRUE)
-    {
-        if (where == lim)
-            return (-1);
-
-        if (!isspace ((unsigned char) *where))
-            break;
-
-        where++;
-    }
-
-    if (isodigit (*where))
-    {
-        char const *where1 = where;
-        gboolean overflow = FALSE;
-
-        while (TRUE)
-        {
-            value += *where++ - '0';
-            if (where == lim || !isodigit (*where))
-                break;
-            overflow |= value != (value << LG_8 >> LG_8);
-            value <<= LG_8;
-        }
-
-        /* Parse the output of older, unportable tars, which generate
-           negative values in two's complement octal. If the leading
-           nonzero digit is 1, we can't recover the original value
-           reliably; so do this only if the digit is 2 or more. This
-           catches the common case of 32-bit negative time stamps. */
-        if ((overflow || maxval < value) && *where1 >= 2 && type != NULL)
-        {
-            /* Compute the negative of the input value, assuming two's complement. */
-            int digit;
-
-            digit = (*where1 - '0') | 4;
-            overflow = FALSE;
-            value = 0;
-            where = where1;
-
-            while (TRUE)
-            {
-                value += 7 - digit;
-                where++;
-                if (where == lim || !isodigit (*where))
-                    break;
-                digit = *where - '0';
-                overflow |= value != (value << LG_8 >> LG_8);
-                value <<= LG_8;
-            }
-
-            value++;
-            overflow |= value == 0;
-
-            if (!overflow && value <= minus_minval)
-                negative = TRUE;
-        }
-
-        if (overflow)
-            return (-1);
-    }
-    else if (octal_only)
-    {
-        /* Suppress the following extensions. */
-    }
-    else if (*where == '-' || *where == '+')
-    {
-        /* Parse base-64 output produced only by tar test versions
-           1.13.6 (1999-08-11) through 1.13.11 (1999-08-23).
-           Support for this will be withdrawn in future tar releases. */
-        int dig;
-
-        negative = *where++ == '-';
-
-        while (where != lim && (dig = base64_map[(unsigned char) *where]) < 64)
-        {
-            if (value << LG_64 >> LG_64 != value)
-                return (-1);
-            value = (value << LG_64) | dig;
-            where++;
-        }
-    }
-    else if (where <= lim - 2 && (*where == '\200'      /* positive base-256 */
-                                  || *where == '\377' /* negative base-256 */ ))
-    {
-        /* Parse base-256 output.  A nonnegative number N is
-           represented as (256**DIGS)/2 + N; a negative number -N is
-           represented as (256**DIGS) - N, i.e. as two's complement.
-           The representation guarantees that the leading bit is
-           always on, so that we don't confuse this format with the
-           others (assuming ASCII bytes of 8 bits or more). */
-
-        int signbit;
-        uintmax_t topbits;
-
-        signbit = *where & (1 << (LG_256 - 2));
-        topbits =
-            (((uintmax_t) - signbit) << (CHAR_BIT * sizeof (uintmax_t) - LG_256 - (LG_256 - 2)));
-
-        value = (*where++ & ((1 << (LG_256 - 2)) - 1)) - signbit;
-
-        while (TRUE)
-        {
-            value = (value << LG_256) + (unsigned char) *where++;
-            if (where == lim)
-                break;
-
-            if (((value << LG_256 >> LG_256) | topbits) != value)
-                return (-1);
-        }
-
-        negative = signbit != 0;
-        if (negative)
-            value = -value;
-    }
-
-    if (where != lim && *where != '\0' && !isspace ((unsigned char) *where))
-        return (-1);
-
-    if (value <= (negative ? minus_minval : maxval))
-        return tar_represent_uintmax (negative ? -value : value);
-
-    return (-1);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -644,16 +225,6 @@ mode_from_header (const char *p, size_t s, gboolean * hbits)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static inline off_t
-off_from_header (const char *p, size_t s)
-{
-    /* Negative offsets are not allowed in tar files, so invoke
-       from_header with minimum value 0, not TYPE_MINIMUM (off_t). */
-    return tar_from_header (p, s, "off_t", 0, TYPE_MAXIMUM (off_t), FALSE);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 static inline time_t
 time_from_header (const char *p, size_t s)
 {
@@ -674,201 +245,6 @@ static inline uintmax_t
 uintmax_from_header (const char *p, size_t s)
 {
     return tar_from_header (p, s, "uintmax_t", 0, UINTMAX_MAX, FALSE);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static gboolean
-tar_short_read (size_t status, tar_super_t * archive)
-{
-    size_t left;                /* bytes left */
-    char *more;                 /* pointer to next byte to read */
-
-    more = archive->record_start->buffer + status;
-    left = record_size - status;
-
-    while (left % BLOCKSIZE != 0 || (left != 0 && status != 0))
-    {
-        if (status != 0)
-        {
-            ssize_t r;
-
-            r = mc_read (archive->fd, more, left);
-            if (r == -1)
-                return FALSE;
-
-            status = (size_t) r;
-        }
-
-        if (status == 0)
-            break;
-
-        left -= status;
-        more += status;
-    }
-
-    record_end = archive->record_start + (record_size - left) / BLOCKSIZE;
-
-    return TRUE;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static gboolean
-tar_flush_read (tar_super_t * archive)
-{
-    size_t status;
-
-    status = mc_read (archive->fd, archive->record_start->buffer, record_size);
-    if (status == record_size)
-        return TRUE;
-
-    return tar_short_read (status, archive);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/**  Flush the current buffer from the archive.
- */
-static gboolean
-tar_flush_archive (tar_super_t * archive)
-{
-    record_start_block += record_end - archive->record_start;
-    current_block = archive->record_start;
-    record_end = archive->record_start + blocking_factor;
-
-    return tar_flush_read (archive);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/**
- * Return the location of the next available input or output block.
- * Return NULL for EOF.
- */
-static union block *
-tar_find_next_block (tar_super_t * archive)
-{
-    if (current_block == record_end)
-    {
-        if (hit_eof)
-            return NULL;
-
-        if (!tar_flush_archive (archive))
-        {
-            message (D_ERROR, MSG_ERROR, _("Inconsistent tar archive"));
-            return NULL;
-        }
-
-        if (current_block == record_end)
-        {
-            hit_eof = TRUE;
-            return NULL;
-        }
-    }
-
-    return current_block;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/**
- * Indicate that we have used all blocks up thru @block.
- */
-static gboolean
-tar_set_next_block_after (union block *block)
-{
-    while (block >= current_block)
-        current_block++;
-
-    /* Do *not* flush the archive here. If we do, the same argument to tar_set_next_block_after()
-       could mean the next block (if the input record is exactly one block long), which is not
-       what is intended.  */
-
-    return !(current_block > record_end);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/**
- * Compute and return the block ordinal at current_block.
- */
-static off_t
-tar_current_block_ordinal (const tar_super_t * archive)
-{
-    return record_start_block + (current_block - archive->record_start);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static off_t
-tar_seek_archive (tar_super_t * archive, off_t size)
-{
-    off_t start, offset;
-    off_t nrec, nblk;
-    off_t skipped;
-
-    skipped = (blocking_factor - (current_block - archive->record_start)) * BLOCKSIZE;
-    if (size <= skipped)
-        return 0;
-
-    /* Compute number of records to skip */
-    nrec = (size - skipped) / record_size;
-    if (nrec == 0)
-        return 0;
-
-    start = tar_current_block_ordinal (archive);
-
-    offset = mc_lseek (archive->fd, nrec * record_size, SEEK_CUR);
-    if (offset < 0)
-        return offset;
-
-#if 0
-    if ((offset % record_size) != 0)
-    {
-        message (D_ERROR, MSG_ERROR, _("tar: mc_lseek not stopped at a record boundary"));
-        return -1;
-    }
-#endif
-
-    /* Convert to number of records */
-    offset /= BLOCKSIZE;
-    /* Compute number of skipped blocks */
-    nblk = offset - start;
-
-    /* Update buffering info */
-    record_start_block = offset - blocking_factor;
-    current_block = record_end;
-
-    return nblk;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/**
- * Skip over @size bytes of data in blocks in the archive.
- */
-static gboolean
-tar_skip_file (tar_super_t * archive, off_t size)
-{
-    union block *x;
-    off_t nblk;
-
-    nblk = tar_seek_archive (archive, size);
-    if (nblk >= 0)
-        size -= nblk * BLOCKSIZE;
-
-    while (size > 0)
-    {
-        x = tar_find_next_block (archive);
-        if (x == NULL)
-            return FALSE;
-
-        tar_set_next_block_after (x);
-        size -= BLOCKSIZE;
-    }
-
-    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
