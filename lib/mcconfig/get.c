@@ -94,19 +94,7 @@ mc_config_get_string (mc_config_t * mc_config, const gchar * group,
     gchar *ret;
     estr_t conv_res;
 
-    if (mc_config == NULL || group == NULL || param == NULL)
-        return g_strdup (def);
-
-    if (!mc_config_has_param (mc_config, group, param))
-    {
-        if (def != NULL)
-            mc_config_set_string (mc_config, group, param, def);
-        return g_strdup (def);
-    }
-
-    ret = g_key_file_get_string (mc_config->handle, group, param, NULL);
-    if (ret == NULL)
-        ret = g_strdup (def);
+    ret = mc_config_get_string_raw (mc_config, group, param, def);
 
     if (mc_global.utf8_display)
         return ret;
