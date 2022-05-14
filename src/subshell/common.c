@@ -1262,6 +1262,37 @@ subshell_name_quote (const char *s)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * This function checks the pipe from which we receive data about the current working directory.
+ * If there is any data waiting, we clear it.
+ */
+
+static void
+clear_cwd_pipe (void)
+{
+    fd_set read_set;
+    struct timeval wtime = { 0, 0 };
+    int maxfdp;
+
+    FD_ZERO (&read_set);
+    FD_SET (subshell_pipe[READ], &read_set);
+    maxfdp = subshell_pipe[READ];
+
+    if (select (maxfdp + 1, &read_set, NULL, NULL, &wtime) > 0
+        && FD_ISSET (subshell_pipe[READ], &read_set))
+    {
+        if (read (subshell_pipe[READ], subshell_cwd, sizeof (subshell_cwd)) <= 0)
+        {
+            tcsetattr (STDOUT_FILENO, TCSANOW, &shell_mode);
+            fprintf (stderr, "read (subshell_pipe[READ]...): %s\r\n", unix_error_string (errno));
+            exit (EXIT_FAILURE);
+        }
+
+        synchronize ();
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -1457,7 +1488,9 @@ invoke_subshell (const char *command, int how, vfs_path_t ** new_dir_vpath)
         /* data is there, but only if we are using one of the shells that */
         /* doesn't support keeping command buffer contents, OR if there was */
         /* some sort of error. */
-        if (!use_persistent_buffer)
+        if (use_persistent_buffer)
+            clear_cwd_pipe ();
+        else
         {
             /* We don't need to call feed_subshell here if we are using fish, because of a
              * quirk in the behavior of that particular shell. */
