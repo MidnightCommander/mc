@@ -1284,18 +1284,57 @@ static int
 ftpfs_init_data_socket (struct vfs_class *me, struct vfs_s_super *super,
                         struct sockaddr_storage *data_addr, socklen_t * data_addrlen)
 {
+    const unsigned int attempts = 10;
+    unsigned int i;
     ftp_super_t *ftp_super = FTP_SUPER (super);
     int result;
 
-    memset (data_addr, 0, sizeof (*data_addr));
-    *data_addrlen = sizeof (*data_addr);
+    for (i = 0; i < attempts; i++)
+    {
+        memset (data_addr, 0, sizeof (*data_addr));
+        *data_addrlen = sizeof (*data_addr);
 
-    if (ftp_super->use_passive_connection)
-        result = getpeername (ftp_super->sock, (struct sockaddr *) data_addr, data_addrlen);
-    else
-        result = getsockname (ftp_super->sock, (struct sockaddr *) data_addr, data_addrlen);
+        if (ftp_super->use_passive_connection)
+        {
+            result = getpeername (ftp_super->sock, (struct sockaddr *) data_addr, data_addrlen);
+            if (result == 0)
+                break;
 
-    if (result == -1)
+            me->verrno = errno;
+
+            if (me->verrno == ENOTCONN)
+            {
+                vfs_print_message (_("ftpfs: try reconnect to server, attempt %u"), i);
+                if (ftpfs_reconnect (me, super))
+                    continue;   /* get name of new socket */
+            }
+            else
+            {
+                /* error -- stop loop */
+                vfs_print_message (_("ftpfs: could not get socket name: %s"),
+                                   unix_error_string (me->verrno));
+            }
+        }
+        else
+        {
+            result = getsockname (ftp_super->sock, (struct sockaddr *) data_addr, data_addrlen);
+            if (result == 0)
+                break;
+
+            me->verrno = errno;
+
+            vfs_print_message (_("ftpfs: try reconnect to server, attempt %u"), i);
+            if (ftpfs_reconnect (me, super))
+                continue;       /* get name of new socket */
+
+            /* error -- stop loop */
+            vfs_print_message ("%s", _("ftpfs: could not reconnect to server"));
+        }
+
+        i = attempts;
+    }
+
+    if (i >= attempts)
         return (-1);
 
     switch (data_addr->ss_family)
