@@ -397,18 +397,12 @@ static cb_ret_t
 edit_dialog_command_execute (WDialog * h, long command)
 {
     WGroup *g = GROUP (h);
-    Widget *wh = WIDGET (h);
     cb_ret_t ret = MSG_HANDLED;
 
     switch (command)
     {
     case CK_EditNew:
-        {
-            WRect r = wh->rect;
-
-            rect_resize_centered (&r, -1, 0);
-            edit_add_window (h, &r, NULL, 0);
-        }
+        edit_load_file_from_filename (h, NULL, 0);
         break;
     case CK_EditFile:
         edit_load_cmd (h);
@@ -1276,11 +1270,8 @@ edit_files (const GList * files)
     {
         mcedit_arg_t *f = (mcedit_arg_t *) file->data;
         gboolean f_ok;
-        WRect r = wd->rect;
 
-        rect_grow (&r, -1, 0);
-
-        f_ok = edit_add_window (edit_dlg, &r, f->file_vpath, f->line_number);
+        f_ok = edit_load_file_from_filename (edit_dlg, f->file_vpath, f->line_number);
         /* at least one file has been opened succefully */
         ok = ok || f_ok;
     }

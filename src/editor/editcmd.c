@@ -463,25 +463,6 @@ edit_save_cmd (WEdit * edit)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/**
- * Load file content
- *
- * @param h screen the owner of editor window
- * @param vpath vfs file path
- * @return TRUE if file content was successfully loaded, FALSE otherwise
- */
-
-static inline gboolean
-edit_load_file_from_filename (WDialog * h, const vfs_path_t * vpath)
-{
-    WRect r = WIDGET (h)->rect;
-
-    rect_grow (&r, -1, 0);
-
-    return edit_add_window (h, &r, vpath, 0);
-}
-
-/* --------------------------------------------------------------------------------------------- */
 
 static void
 edit_delete_column_of_text (WEdit * edit)
@@ -1068,13 +1049,34 @@ edit_load_cmd (WDialog * h)
         vfs_path_t *exp_vpath;
 
         exp_vpath = vfs_path_from_str (exp);
-        ret = edit_load_file_from_filename (h, exp_vpath);
+        ret = edit_load_file_from_filename (h, exp_vpath, 0);
         vfs_path_free (exp_vpath, TRUE);
     }
 
     g_free (exp);
 
     return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Load file content
+ *
+ * @param h screen the owner of editor window
+ * @param vpath vfs file path
+ * @param line line number
+ *
+ * @return TRUE if file content was successfully loaded, FALSE otherwise
+ */
+
+gboolean
+edit_load_file_from_filename (WDialog * h, const vfs_path_t * vpath, long line)
+{
+    WRect r = WIDGET (h)->rect;
+
+    rect_grow (&r, -1, 0);
+
+    return edit_add_window (h, &r, vpath, line);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1097,7 +1099,7 @@ edit_load_file_from_history (WDialog * h)
         vfs_path_t *exp_vpath;
 
         exp_vpath = vfs_path_from_str (exp);
-        ret = edit_load_file_from_filename (h, exp_vpath);
+        ret = edit_load_file_from_filename (h, exp_vpath, 0);
         vfs_path_free (exp_vpath, TRUE);
     }
 
@@ -1140,11 +1142,11 @@ edit_load_syntax_file (WDialog * h)
 
         user_syntax_file_vpath = mc_config_get_full_vpath (EDIT_HOME_SYNTAX_FILE);
         check_for_default (extdir_vpath, user_syntax_file_vpath);
-        ret = edit_load_file_from_filename (h, user_syntax_file_vpath);
+        ret = edit_load_file_from_filename (h, user_syntax_file_vpath, 0);
         vfs_path_free (user_syntax_file_vpath, TRUE);
     }
     else if (dir == 1)
-        ret = edit_load_file_from_filename (h, extdir_vpath);
+        ret = edit_load_file_from_filename (h, extdir_vpath, 0);
 
     vfs_path_free (extdir_vpath, TRUE);
 
@@ -1209,7 +1211,7 @@ edit_load_menu_file (WDialog * h)
         return FALSE;
     }
 
-    ret = edit_load_file_from_filename (h, buffer_vpath);
+    ret = edit_load_file_from_filename (h, buffer_vpath, 0);
 
     vfs_path_free (buffer_vpath, TRUE);
     vfs_path_free (menufile_vpath, TRUE);

@@ -184,6 +184,7 @@ WEdit *edit_init (WEdit * edit, const WRect * r, const vfs_path_t * filename_vpa
 gboolean edit_clean (WEdit * edit);
 gboolean edit_ok_to_exit (WEdit * edit);
 gboolean edit_load_cmd (WDialog * h);
+gboolean edit_load_file_from_filename (WDialog * h, const vfs_path_t * vpath, long line);
 gboolean edit_load_file_from_history (WDialog * h);
 gboolean edit_load_syntax_file (WDialog * h);
 gboolean edit_load_menu_file (WDialog * h);
