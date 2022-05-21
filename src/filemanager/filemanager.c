@@ -1505,8 +1505,7 @@ midnight_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
         return MSG_HANDLED;
 
     case MSG_RESIZE:
-        widget_adjust_position (w->pos_flags, &w->rect.y, &w->rect.x, &w->rect.lines,
-                                &w->rect.cols);
+        widget_adjust_position (w->pos_flags, &w->rect);
         setup_panels ();
         menubar_arrange (the_menubar);
         return MSG_HANDLED;

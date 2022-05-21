@@ -393,29 +393,29 @@ widget_set_options (Widget * w, widget_options_t options, gboolean enable)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-widget_adjust_position (widget_pos_flags_t pos_flags, int *y, int *x, int *lines, int *cols)
+widget_adjust_position (widget_pos_flags_t pos_flags, WRect * r)
 {
     if ((pos_flags & WPOS_FULLSCREEN) != 0)
     {
-        *y = 0;
-        *x = 0;
-        *lines = LINES;
-        *cols = COLS;
+        r->y = 0;
+        r->x = 0;
+        r->lines = LINES;
+        r->cols = COLS;
     }
     else
     {
         if ((pos_flags & WPOS_CENTER_HORZ) != 0)
-            *x = (COLS - *cols) / 2;
+            r->x = (COLS - r->cols) / 2;
 
         if ((pos_flags & WPOS_CENTER_VERT) != 0)
-            *y = (LINES - *lines) / 2;
+            r->y = (LINES - r->lines) / 2;
 
         if ((pos_flags & WPOS_TRYUP) != 0)
         {
-            if (*y > 3)
-                *y -= 2;
-            else if (*y == 3)
-                *y = 2;
+            if (r->y > 3)
+                r->y -= 2;
+            else if (r->y == 3)
+                r->y = 2;
         }
     }
 }

@@ -209,7 +209,7 @@ void widget_init (Widget * w, const WRect * r, widget_cb_fn callback,
 cb_ret_t widget_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
                                   void *data);
 void widget_set_options (Widget * w, widget_options_t options, gboolean enable);
-void widget_adjust_position (widget_pos_flags_t pos_flags, int *y, int *x, int *lines, int *cols);
+void widget_adjust_position (widget_pos_flags_t pos_flags, WRect * r);
 void widget_set_size (Widget * w, int y, int x, int lines, int cols);
 void widget_set_size_rect (Widget * w, WRect * r);
 /* select color for widget in dependance of state */

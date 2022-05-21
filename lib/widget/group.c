@@ -461,7 +461,7 @@ group_default_resize (WGroup * g, WRect * r)
     WRect r0;
 
     r0 = r != NULL ? *r : w->rect;
-    widget_adjust_position (w->pos_flags, &r0.y, &r0.x, &r0.lines, &r0.cols);
+    widget_adjust_position (w->pos_flags, &r0);
     group_set_position (g, &r0);
 }
 

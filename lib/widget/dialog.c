@@ -406,7 +406,7 @@ dlg_create (gboolean modal, int y1, int x1, int lines, int cols, widget_pos_flag
     new_d = g_new0 (WDialog, 1);
     w = WIDGET (new_d);
     g = GROUP (new_d);
-    widget_adjust_position (pos_flags, &r.y, &r.x, &r.lines, &r.cols);
+    widget_adjust_position (pos_flags, &r);
     group_init (g, &r, callback != NULL ? callback : dlg_default_callback,
                 mouse_callback != NULL ? mouse_callback : dlg_default_mouse_callback);
 
