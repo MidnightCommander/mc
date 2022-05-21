@@ -136,8 +136,7 @@ extern char *edit_window_close_char;
 
 /*** declarations of public functions ************************************************************/
 
-gboolean edit_add_window (WDialog * h, int y, int x, int lines, int cols,
-                          const vfs_path_t * f, long fline);
+gboolean edit_add_window (WDialog * h, const WRect * r, const vfs_path_t * f, long fline);
 WEdit *find_editor (const WDialog * h);
 gboolean edit_widget_is_editor (const Widget * w);
 gboolean edit_drop_hotkey_menu (WDialog * h, int key);

@@ -403,7 +403,12 @@ edit_dialog_command_execute (WDialog * h, long command)
     switch (command)
     {
     case CK_EditNew:
-        edit_add_window (h, wh->rect.y + 1, wh->rect.x, wh->rect.lines - 2, wh->rect.cols, NULL, 0);
+        {
+            WRect r = wh->rect;
+
+            rect_resize_centered (&r, -1, 0);
+            edit_add_window (h, &r, NULL, 0);
+        }
         break;
     case CK_EditFile:
         edit_load_cmd (h);
@@ -1275,7 +1280,7 @@ edit_files (const GList * files)
 
         rect_grow (&r, -1, 0);
 
-        f_ok = edit_add_window (edit_dlg, r.y, r.x, r.lines, r.cols, f->file_vpath, f->line_number);
+        f_ok = edit_add_window (edit_dlg, &r, f->file_vpath, f->line_number);
         /* at least one file has been opened succefully */
         ok = ok || f_ok;
     }
@@ -1374,12 +1379,12 @@ edit_save_size (WEdit * edit)
  */
 
 gboolean
-edit_add_window (WDialog * h, int y, int x, int lines, int cols, const vfs_path_t * f, long fline)
+edit_add_window (WDialog * h, const WRect * r, const vfs_path_t * f, long fline)
 {
     WEdit *edit;
     Widget *w;
 
-    edit = edit_init (NULL, y, x, lines, cols, f, fline);
+    edit = edit_init (NULL, r->y, r->x, r->lines, r->cols, f, fline);
     if (edit == NULL)
         return FALSE;
 

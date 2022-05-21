@@ -478,7 +478,7 @@ edit_load_file_from_filename (WDialog * h, const vfs_path_t * vpath)
 
     rect_grow (&r, -1, 0);
 
-    return edit_add_window (h, r.y, r.x, r.lines, r.cols, vpath, 0);
+    return edit_add_window (h, &r, vpath, 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */
