@@ -3444,6 +3444,7 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
     Widget *w;
     WDialog *dview_dlg;
     Widget *dw;
+    WRect r;
     WGroup *g;
 
     /* Create dialog and widgets, put them on the dialog */
@@ -3452,13 +3453,14 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
                     "[Diff Viewer]", NULL);
     dw = WIDGET (dview_dlg);
     widget_want_tab (dw, TRUE);
+    r = dw->rect;
 
     g = GROUP (dview_dlg);
 
     dview = g_new0 (WDiff, 1);
     w = WIDGET (dview);
-    widget_init (w, dw->rect.y, dw->rect.x, dw->rect.lines - 1, dw->rect.cols, dview_callback,
-                 dview_mouse_callback);
+    r.lines--;
+    widget_init (w, &r, dview_callback, dview_mouse_callback);
     w->options |= WOP_SELECTABLE;
     w->keymap = diff_map;
     group_add_widget_autopos (g, w, WPOS_KEEP_ALL, NULL);

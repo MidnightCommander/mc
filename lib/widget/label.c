@@ -129,17 +129,16 @@ label_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
 WLabel *
 label_new (int y, int x, const char *text)
 {
+    WRect r = { y, x, 1, 1 };
     WLabel *l;
     Widget *w;
-    int cols = 1;
-    int lines = 1;
 
     if (text != NULL)
-        str_msg_term_size (text, &lines, &cols);
+        str_msg_term_size (text, &r.lines, &r.cols);
 
     l = g_new (WLabel, 1);
     w = WIDGET (l);
-    widget_init (w, y, x, lines, cols, label_callback, NULL);
+    widget_init (w, &r, label_callback, NULL);
 
     l->text = g_strdup (text);
     l->auto_adjust_cols = TRUE;

@@ -49,7 +49,8 @@ START_TEST (test_widget_make_global_local)
 
     /* g0 child */
     w0 = g_new0 (Widget, 1);
-    widget_init (w0, 1, 1, 5, 5, widget_default_callback, NULL);
+    rect_init (&r, 1, 1, 5, 5);
+    widget_init (w0, &r, widget_default_callback, NULL);
     group_add_widget (g0, w0);
 
     /* g0 child */
@@ -58,7 +59,8 @@ START_TEST (test_widget_make_global_local)
 
     /* g1 child */
     w1 = g_new0 (Widget, 1);
-    widget_init (w1, 5, 5, 10, 10, widget_default_callback, NULL);
+    rect_init (&r, 5, 5, 10, 10);
+    widget_init (w1, &r, widget_default_callback, NULL);
     group_add_widget (g1, w1);
 
     /* g1 child */
@@ -68,7 +70,8 @@ START_TEST (test_widget_make_global_local)
 
     /* g2 child */
     w2 = g_new0 (Widget, 1);
-    widget_init (w2, 15, 15, 5, 5, widget_default_callback, NULL);
+    rect_init (&r, 15, 15, 5, 5);
+    widget_init (w2, &r, widget_default_callback, NULL);
     group_add_widget (g2, w2);
 
     /* g0 child */

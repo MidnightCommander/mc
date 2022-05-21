@@ -1047,12 +1047,12 @@ help_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 /* --------------------------------------------------------------------------------------------- */
 
 static Widget *
-mousedispatch_new (int y, int x, int yl, int xl)
+mousedispatch_new (const WRect * r)
 {
     Widget *w;
 
     w = g_new0 (Widget, 1);
-    widget_init (w, y, x, yl, xl, md_callback, help_mouse_callback);
+    widget_init (w, r, md_callback, help_mouse_callback);
     w->options |= WOP_SELECTABLE | WOP_WANT_CURSOR;
 
     return w;
@@ -1082,6 +1082,7 @@ help_interactive_display (const gchar * event_group_name, const gchar * event_na
     char *hlpfile = NULL;
     char *filedata;
     ev_help_t *event_data = (ev_help_t *) data;
+    WRect r = { 1, 1, 1, 1 };
 
     (void) event_group_name;
     (void) event_name;
@@ -1152,7 +1153,9 @@ help_interactive_display (const gchar * event_group_name, const gchar * event_na
     WIDGET (help_bar)->rect.y -= wh->rect.y;
     WIDGET (help_bar)->rect.x -= wh->rect.x;
 
-    md = mousedispatch_new (1, 1, help_lines, HELP_WINDOW_WIDTH - 2);
+    r.lines = help_lines;
+    r.cols = HELP_WINDOW_WIDTH - 2;
+    md = mousedispatch_new (&r);
 
     group_add_widget (g, md);
     group_add_widget (g, help_bar);     /* FIXME */

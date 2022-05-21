@@ -362,12 +362,13 @@ info_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
 WInfo *
 info_new (int y, int x, int lines, int cols)
 {
+    WRect r = { y, x, lines, cols };
     WInfo *info;
     Widget *w;
 
     info = g_new (struct WInfo, 1);
     w = WIDGET (info);
-    widget_init (w, y, x, lines, cols, info_callback, NULL);
+    widget_init (w, &r, info_callback, NULL);
 
     return info;
 }

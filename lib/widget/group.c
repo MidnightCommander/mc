@@ -597,10 +597,10 @@ void
 group_init (WGroup * g, int y1, int x1, int lines, int cols, widget_cb_fn callback,
             widget_mouse_cb_fn mouse_callback)
 {
+    WRect r = { y1, x1, lines, cols };
     Widget *w = WIDGET (g);
 
-    widget_init (w, y1, x1, lines, cols, callback != NULL ? callback : group_default_callback,
-                 mouse_callback);
+    widget_init (w, &r, callback != NULL ? callback : group_default_callback, mouse_callback);
 
     w->mouse_handler = group_handle_mouse_event;
 

@@ -305,11 +305,10 @@ hotkey_get_text (const hotkey_t hotkey)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-widget_init (Widget * w, int y, int x, int lines, int cols,
-             widget_cb_fn callback, widget_mouse_cb_fn mouse_callback)
+widget_init (Widget * w, const WRect * r, widget_cb_fn callback, widget_mouse_cb_fn mouse_callback)
 {
     w->id = widget_set_id ();
-    rect_init (&w->rect, y, x, lines, cols);
+    w->rect = *r;
     w->pos_flags = WPOS_KEEP_DEFAULT;
     w->callback = callback;
 

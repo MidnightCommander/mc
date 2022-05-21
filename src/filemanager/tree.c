@@ -1280,13 +1280,14 @@ tree_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 WTree *
 tree_new (int y, int x, int lines, int cols, gboolean is_panel)
 {
+    WRect r = { y, x, lines, cols };
     WTree *tree;
     Widget *w;
 
     tree = g_new (WTree, 1);
 
     w = WIDGET (tree);
-    widget_init (w, y, x, lines, cols, tree_callback, tree_mouse_callback);
+    widget_init (w, &r, tree_callback, tree_mouse_callback);
     w->options |= WOP_SELECTABLE | WOP_TOP_SELECT;
     w->keymap = tree_map;
 

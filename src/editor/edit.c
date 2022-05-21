@@ -2106,12 +2106,14 @@ edit_init (WEdit * edit, int y, int x, int lines, int cols, const vfs_path_t * f
     }
     else
     {
+        WRect r = { y, x, lines, cols };
         Widget *w;
+
         edit = g_malloc0 (sizeof (WEdit));
         to_free = TRUE;
 
         w = WIDGET (edit);
-        widget_init (w, y, x, lines, cols, NULL, NULL);
+        widget_init (w, &r, NULL, NULL);
         w->options |= WOP_SELECTABLE | WOP_TOP_SELECT | WOP_WANT_CURSOR;
         w->keymap = editor_map;
         w->ext_keymap = editor_x_map;

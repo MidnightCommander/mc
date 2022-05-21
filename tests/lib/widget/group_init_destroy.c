@@ -5,7 +5,7 @@
    The Free Software Foundation, Inc.
 
    Written by:
-   Andrew Borodin <aborodin@vmail.ru>, 2020
+   Andrew Borodin <aborodin@vmail.ru>, 2020-2022
 
    This file is part of the Midnight Commander.
 
@@ -85,6 +85,7 @@ START_TEST (test_group_init_deinit)
 {
     WGroup *g, *g0;
     Widget *w0;
+    WRect r;
 
     g = g_new0 (WGroup, 1);
     group_init (g, 0, 0, 20, 20, group_callback, NULL);
@@ -94,11 +95,13 @@ START_TEST (test_group_init_deinit)
     group_add_widget (g, g0);
 
     w0 = g_new0 (Widget, 1);
-    widget_init (w0, 0, 0, 5, 5, widget_callback, NULL);
+    rect_init (&r, 0, 0, 5, 5);
+    widget_init (w0, &r, widget_callback, NULL);
     group_add_widget (g0, w0);
 
     w0 = g_new0 (Widget, 1);
-    widget_init (w0, 5, 5, 5, 5, widget_callback, NULL);
+    rect_init (&r, 5, 5, 5, 5);
+    widget_init (w0, &r, widget_callback, NULL);
     group_add_widget (g0, w0);
 
     g0 = g_new0 (WGroup, 1);
@@ -106,15 +109,18 @@ START_TEST (test_group_init_deinit)
     group_add_widget (g, g0);
 
     w0 = g_new0 (Widget, 1);
-    widget_init (w0, 10, 10, 5, 5, widget_callback, NULL);
+    rect_init (&r, 10, 10, 5, 5);
+    widget_init (w0, &r, widget_callback, NULL);
     group_add_widget (g0, w0);
 
     w0 = g_new0 (Widget, 1);
-    widget_init (w0, 15, 15, 5, 5, widget_callback, NULL);
+    rect_init (&r, 15, 15, 5, 5);
+    widget_init (w0, &r, widget_callback, NULL);
     group_add_widget (g0, w0);
 
     w0 = g_new0 (Widget, 1);
-    widget_init (w0, 5, 5, 10, 10, widget_callback, NULL);
+    rect_init (&r, 5, 5, 10, 10);
+    widget_init (w0, &r, widget_callback, NULL);
     group_add_widget (g, w0);
 
     ck_assert_msg (w0->id == 7, "last id (%d) != 7", ref);

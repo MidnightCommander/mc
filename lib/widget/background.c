@@ -106,12 +106,13 @@ WBackground *
 background_new (int y, int x, int lines, int cols, int color, unsigned char pattern,
                 widget_cb_fn callback)
 {
+    WRect r = { y, x, lines, cols };
     WBackground *b;
     Widget *w;
 
     b = g_new (WBackground, 1);
     w = WIDGET (b);
-    widget_init (w, y, x, lines, cols, callback != NULL ? callback : background_callback, NULL);
+    widget_init (w, &r, callback != NULL ? callback : background_callback, NULL);
     w->get_colors = background_get_colors;
 
     b->color = color;

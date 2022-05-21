@@ -548,15 +548,14 @@ listbox_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 WListbox *
 listbox_new (int y, int x, int height, int width, gboolean deletable, lcback_fn callback)
 {
+    WRect r = { y, x, 1, width };
     WListbox *l;
     Widget *w;
 
-    if (height <= 0)
-        height = 1;
-
     l = g_new (WListbox, 1);
     w = WIDGET (l);
-    widget_init (w, y, x, height, width, listbox_callback, listbox_mouse_callback);
+    r.lines = height > 0 ? height : 1;
+    widget_init (w, &r, listbox_callback, listbox_mouse_callback);
     w->options |= WOP_SELECTABLE | WOP_WANT_HOTKEY;
     w->keymap = listbox_map;
 

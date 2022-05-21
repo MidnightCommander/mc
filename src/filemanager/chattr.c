@@ -360,14 +360,15 @@ fileattrtext_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, 
 static WFileAttrText *
 fileattrtext_new (int y, int x, const char *filename, unsigned long attr)
 {
+    WRect r = { y, x, 2, 1 };
     WFileAttrText *fat;
-    int width, cols;
+    int width;
 
     width = str_term_width1 (filename);
-    cols = MAX (width, (int) check_attr_num);
+    r.cols = MAX (width, (int) check_attr_num);
 
     fat = g_new (WFileAttrText, 1);
-    widget_init (WIDGET (fat), y, x, 2, cols, fileattrtext_callback, NULL);
+    widget_init (WIDGET (fat), &r, fileattrtext_callback, NULL);
 
     fat->filename = g_strdup (filename);
     fat->filename_width = width;

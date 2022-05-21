@@ -126,12 +126,13 @@ gauge_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
 WGauge *
 gauge_new (int y, int x, int cols, gboolean shown, int max, int current)
 {
+    WRect r = { y, x, 1, cols };
     WGauge *g;
     Widget *w;
 
     g = g_new (WGauge, 1);
     w = WIDGET (g);
-    widget_init (w, y, x, 1, cols, gauge_callback, NULL);
+    widget_init (w, &r, gauge_callback, NULL);
 
     g->shown = shown;
     if (max == 0)

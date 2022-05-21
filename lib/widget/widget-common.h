@@ -203,8 +203,8 @@ void hotkey_draw (Widget * w, const hotkey_t hotkey, gboolean focused);
 char *hotkey_get_text (const hotkey_t hotkey);
 
 /* widget initialization */
-void widget_init (Widget * w, int y, int x, int lines, int cols,
-                  widget_cb_fn callback, widget_mouse_cb_fn mouse_callback);
+void widget_init (Widget * w, const WRect * r, widget_cb_fn callback,
+                  widget_mouse_cb_fn mouse_callback);
 /* Default callback for widgets */
 cb_ret_t widget_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
                                   void *data);

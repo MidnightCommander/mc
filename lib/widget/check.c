@@ -133,6 +133,7 @@ check_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 WCheck *
 check_new (int y, int x, gboolean state, const char *text)
 {
+    WRect r = { y, x, 1, 1 };
     WCheck *c;
     Widget *w;
 
@@ -140,7 +141,8 @@ check_new (int y, int x, gboolean state, const char *text)
     w = WIDGET (c);
     c->text = hotkey_new (text);
     /* 4 is width of "[X] " */
-    widget_init (w, y, x, 1, 4 + hotkey_width (c->text), check_callback, check_mouse_callback);
+    r.cols = 4 + hotkey_width (c->text);
+    widget_init (w, &r, check_callback, check_mouse_callback);
     w->options |= WOP_SELECTABLE | WOP_WANT_CURSOR | WOP_WANT_HOTKEY;
     c->state = state;
 

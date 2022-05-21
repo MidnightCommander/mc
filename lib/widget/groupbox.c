@@ -95,12 +95,13 @@ groupbox_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
 WGroupbox *
 groupbox_new (int y, int x, int height, int width, const char *title)
 {
+    WRect r = { y, x, height, width };
     WGroupbox *g;
     Widget *w;
 
     g = g_new (WGroupbox, 1);
     w = WIDGET (g);
-    widget_init (w, y, x, height, width, groupbox_callback, NULL);
+    widget_init (w, &r, groupbox_callback, NULL);
 
     g->title = NULL;
     groupbox_set_title (g, title);

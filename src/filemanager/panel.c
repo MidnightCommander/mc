@@ -4370,6 +4370,7 @@ panel_set_lwd (WPanel * panel, const vfs_path_t * vpath)
 WPanel *
 panel_sized_empty_new (const char *panel_name, int y, int x, int lines, int cols)
 {
+    WRect r = { y, x, lines, cols };
     WPanel *panel;
     Widget *w;
     char *section;
@@ -4377,7 +4378,7 @@ panel_sized_empty_new (const char *panel_name, int y, int x, int lines, int cols
 
     panel = g_new0 (WPanel, 1);
     w = WIDGET (panel);
-    widget_init (w, y, x, lines, cols, panel_callback, panel_mouse_callback);
+    widget_init (w, &r, panel_callback, panel_mouse_callback);
     w->options |= WOP_SELECTABLE | WOP_TOP_SELECT;
     w->keymap = panel_map;
 

@@ -957,12 +957,13 @@ WInput *
 input_new (int y, int x, const int *colors, int width, const char *def_text,
            const char *histname, input_complete_t completion_flags)
 {
+    WRect r = { y, x, 1, width };
     WInput *in;
     Widget *w;
 
     in = g_new (WInput, 1);
     w = WIDGET (in);
-    widget_init (w, y, x, 1, width, input_callback, input_mouse_callback);
+    widget_init (w, &r, input_callback, input_mouse_callback);
     w->options |= WOP_SELECTABLE | WOP_IS_INPUT | WOP_WANT_CURSOR;
     w->keymap = input_map;
 

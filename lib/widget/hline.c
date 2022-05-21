@@ -144,13 +144,14 @@ hline_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
 WHLine *
 hline_new (int y, int x, int width)
 {
+    WRect r = { y, x, 1, width };
     WHLine *l;
     Widget *w;
-    int lines = 1;
 
     l = g_new (WHLine, 1);
     w = WIDGET (l);
-    widget_init (w, y, x, lines, width < 0 ? 1 : width, hline_callback, NULL);
+    r.cols = width < 0 ? 1 : width;
+    widget_init (w, &r, hline_callback, NULL);
     l->text = NULL;
     l->auto_adjust_cols = (width < 0);
     l->transparent = FALSE;

@@ -950,12 +950,13 @@ destroy_menu (menu_t * menu)
 WMenuBar *
 menubar_new (GList * menu)
 {
+    WRect r = { 0, 0, 1, COLS };
     WMenuBar *menubar;
     Widget *w;
 
     menubar = g_new0 (WMenuBar, 1);
     w = WIDGET (menubar);
-    widget_init (w, 0, 0, 1, COLS, menubar_callback, menubar_mouse_callback);
+    widget_init (w, &r, menubar_callback, menubar_mouse_callback);
     w->pos_flags = WPOS_KEEP_HORZ | WPOS_KEEP_TOP;
     /* initially, menubar is not selectable */
     widget_set_options (w, WOP_SELECTABLE, FALSE);

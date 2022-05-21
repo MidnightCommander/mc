@@ -95,12 +95,13 @@ frame_draw (const WFrame * f)
 WFrame *
 frame_new (int y, int x, int lines, int cols, const char *title, gboolean single, gboolean compact)
 {
+    WRect r = { y, x, lines, cols };
     WFrame *f;
     Widget *w;
 
     f = g_new (WFrame, 1);
     w = WIDGET (f);
-    widget_init (w, y, x, lines, cols, frame_callback, NULL);
+    widget_init (w, &r, frame_callback, NULL);
 
     f->single = single;
     f->compact = compact;

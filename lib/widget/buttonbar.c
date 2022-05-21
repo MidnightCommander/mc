@@ -240,12 +240,13 @@ buttonbar_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 WButtonBar *
 buttonbar_new (void)
 {
+    WRect r = { LINES - 1, 0, 1, COLS };
     WButtonBar *bb;
     Widget *w;
 
     bb = g_new0 (WButtonBar, 1);
     w = WIDGET (bb);
-    widget_init (w, LINES - 1, 0, 1, COLS, buttonbar_callback, buttonbar_mouse_callback);
+    widget_init (w, &r, buttonbar_callback, buttonbar_mouse_callback);
 
     w->pos_flags = WPOS_KEEP_HORZ | WPOS_KEEP_BOTTOM;
     widget_want_hotkey (w, TRUE);
