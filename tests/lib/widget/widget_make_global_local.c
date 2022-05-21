@@ -45,7 +45,8 @@ START_TEST (test_widget_make_global_local)
 
     /* top level group */
     g0 = g_new0 (WGroup, 1);
-    group_init (g0, 20, 20, 40, 40, NULL, NULL);
+    rect_init (&r, 20, 20, 40, 40);
+    group_init (g0, &r, NULL, NULL);
 
     /* g0 child */
     w0 = g_new0 (Widget, 1);
@@ -55,7 +56,8 @@ START_TEST (test_widget_make_global_local)
 
     /* g0 child */
     g1 = g_new0 (WGroup, 1);
-    group_init (g1, 5, 5, 30, 30, NULL, NULL);
+    rect_init (&r, 5, 5, 30, 30);
+    group_init (g1, &r, NULL, NULL);
 
     /* g1 child */
     w1 = g_new0 (Widget, 1);
@@ -65,7 +67,8 @@ START_TEST (test_widget_make_global_local)
 
     /* g1 child */
     g2 = g_new0 (WGroup, 1);
-    group_init (g2, 15, 15, 20, 20, NULL, NULL);
+    rect_init (&r, 15, 15, 20, 20);
+    group_init (g2, &r, NULL, NULL);
     group_add_widget (g1, g2);
 
     /* g2 child */

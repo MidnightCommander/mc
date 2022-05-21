@@ -877,26 +877,23 @@ chattrboxes_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 /* --------------------------------------------------------------------------------------------- */
 
 static WChattrBoxes *
-chattrboxes_new (int y, int x, int height, int width)
+chattrboxes_new (const WRect * r)
 {
     WChattrBoxes *cb;
     Widget *w;
     WGroup *cbg;
     int i;
 
-    if (height <= 0)
-        height = 1;
-
     cb = g_new0 (WChattrBoxes, 1);
     w = WIDGET (cb);
     cbg = GROUP (cb);
-    group_init (cbg, y, x, height, width, chattrboxes_callback, chattrboxes_mouse_callback);
+    group_init (cbg, r, chattrboxes_callback, chattrboxes_mouse_callback);
     w->options |= WOP_SELECTABLE | WOP_WANT_CURSOR;
     w->mouse_handler = chattrboxes_handle_mouse_event;
     w->keymap = chattr_map;
 
     /* create checkboxes */
-    for (i = 0; i < height; i++)
+    for (i = 0; i < r->lines; i++)
     {
         int m;
         WCheck *check;
@@ -976,6 +973,7 @@ chattr_dlg_create (WPanel * panel, const char *fname, unsigned long attr)
     WGroup *dg;
     WChattrBoxes *cb;
     const int cb_scrollbar_width = 1;
+    WRect r;
 
     /* prepate to set up checkbox states */
     for (i = 0; i < check_attr_num; i++)
@@ -1012,8 +1010,7 @@ chattr_dlg_create (WPanel * panel, const char *fname, unsigned long attr)
 
     if (cols < WIDGET (file_attr)->rect.cols)
     {
-        WRect r = dw->rect;
-
+        r = dw->rect;
         cols = WIDGET (file_attr)->rect.cols;
         cols = MIN (cols, mw->rect.cols - wx * 2);
         r.cols = cols + wx * 2;
@@ -1022,7 +1019,8 @@ chattr_dlg_create (WPanel * panel, const char *fname, unsigned long attr)
     }
 
     checkboxes_lines = MIN (check_attr_mod_num, checkboxes_lines);
-    cb = chattrboxes_new (y++, wx, checkboxes_lines, cols);
+    rect_init (&r, y++, wx, checkboxes_lines > 0 ? checkboxes_lines : 1, cols);
+    cb = chattrboxes_new (&r);
     group_add_widget_autopos (dg, cb, WPOS_KEEP_TOP | WPOS_KEEP_HORZ, NULL);
 
     y += checkboxes_lines - 1;
@@ -1053,8 +1051,7 @@ chattr_dlg_create (WPanel * panel, const char *fname, unsigned long attr)
     cols += 6;
     if (cols > dw->rect.cols)
     {
-        WRect r = dw->rect;
-
+        r = dw->rect;
         r.lines = lines;
         r.cols = cols;
         widget_set_size_rect (dw, &r);

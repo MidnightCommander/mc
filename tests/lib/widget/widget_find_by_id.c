@@ -44,10 +44,12 @@ START_TEST (test_widget_find_by_id)
     WRect r;
 
     g = g_new0 (WGroup, 1);
-    group_init (g, 0, 0, 20, 20, NULL, NULL);   /* ID = 0 */
+    rect_init (&r, 0, 0, 20, 20);
+    group_init (g, &r, NULL, NULL);     /* ID = 0 */
 
     g0 = g_new0 (WGroup, 1);
-    group_init (g0, 0, 0, 10, 10, NULL, NULL);  /* ID = 1 */
+    rect_init (&r, 0, 0, 10, 10);
+    group_init (g0, &r, NULL, NULL);    /* ID = 1 */
     group_add_widget (g, g0);
 
     w0 = g_new0 (Widget, 1);
@@ -61,7 +63,8 @@ START_TEST (test_widget_find_by_id)
     group_add_widget (g0, w0);
 
     g0 = g_new0 (WGroup, 1);
-    group_init (g0, 10, 10, 10, 10, NULL, NULL);        /* ID = 4 */
+    rect_init (&r, 10, 10, 10, 10);
+    group_init (g0, &r, NULL, NULL);    /* ID = 4 */
     group_add_widget (g, g0);
 
     w0 = g_new0 (Widget, 1);

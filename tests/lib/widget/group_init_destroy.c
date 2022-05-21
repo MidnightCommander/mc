@@ -88,10 +88,12 @@ START_TEST (test_group_init_deinit)
     WRect r;
 
     g = g_new0 (WGroup, 1);
-    group_init (g, 0, 0, 20, 20, group_callback, NULL);
+    rect_init (&r, 0, 0, 20, 20);
+    group_init (g, &r, group_callback, NULL);
 
     g0 = g_new0 (WGroup, 1);
-    group_init (g0, 0, 0, 10, 10, group_callback, NULL);
+    rect_init (&r, 0, 0, 10, 10);
+    group_init (g0, &r, group_callback, NULL);
     group_add_widget (g, g0);
 
     w0 = g_new0 (Widget, 1);
@@ -105,7 +107,8 @@ START_TEST (test_group_init_deinit)
     group_add_widget (g0, w0);
 
     g0 = g_new0 (WGroup, 1);
-    group_init (g0, 10, 10, 10, 10, group_callback, NULL);
+    rect_init (&r, 10, 10, 10, 10);
+    group_init (g0, &r, group_callback, NULL);
     group_add_widget (g, g0);
 
     w0 = g_new0 (Widget, 1);
