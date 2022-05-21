@@ -1384,7 +1384,7 @@ edit_add_window (WDialog * h, const WRect * r, const vfs_path_t * f, long fline)
     WEdit *edit;
     Widget *w;
 
-    edit = edit_init (NULL, r->y, r->x, r->lines, r->cols, f, fline);
+    edit = edit_init (NULL, r, f, fline);
     if (edit == NULL)
         return FALSE;
 

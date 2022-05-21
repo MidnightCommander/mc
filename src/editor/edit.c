@@ -2081,8 +2081,7 @@ edit_insert_file (WEdit * edit, const vfs_path_t * filename_vpath)
  */
 
 WEdit *
-edit_init (WEdit * edit, int y, int x, int lines, int cols, const vfs_path_t * filename_vpath,
-           long line)
+edit_init (WEdit * edit, const WRect * r, const vfs_path_t * filename_vpath, long line)
 {
     gboolean to_free = FALSE;
 
@@ -2106,14 +2105,13 @@ edit_init (WEdit * edit, int y, int x, int lines, int cols, const vfs_path_t * f
     }
     else
     {
-        WRect r = { y, x, lines, cols };
         Widget *w;
 
         edit = g_malloc0 (sizeof (WEdit));
         to_free = TRUE;
 
         w = WIDGET (edit);
-        widget_init (w, &r, NULL, NULL);
+        widget_init (w, r, NULL, NULL);
         w->options |= WOP_SELECTABLE | WOP_TOP_SELECT | WOP_WANT_CURSOR;
         w->keymap = editor_map;
         w->ext_keymap = editor_x_map;
@@ -2246,8 +2244,7 @@ edit_reload_line (WEdit * edit, const vfs_path_t * filename_vpath, long line)
     e->fullscreen = edit->fullscreen;
     e->loc_prev = edit->loc_prev;
 
-    if (edit_init (e, w->rect.y, w->rect.x, w->rect.lines, w->rect.cols, filename_vpath, line) ==
-        NULL)
+    if (edit_init (e, &w->rect, filename_vpath, line) == NULL)
     {
         g_free (e);
         return FALSE;

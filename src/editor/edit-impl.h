@@ -180,8 +180,7 @@ char *edit_get_write_filter (const vfs_path_t * write_name_vpath,
                              const vfs_path_t * filename_vpath);
 gboolean edit_save_confirm_cmd (WEdit * edit);
 gboolean edit_save_as_cmd (WEdit * edit);
-WEdit *edit_init (WEdit * edit, int y, int x, int lines, int cols,
-                  const vfs_path_t * filename_vpath, long line);
+WEdit *edit_init (WEdit * edit, const WRect * r, const vfs_path_t * filename_vpath, long line);
 gboolean edit_clean (WEdit * edit);
 gboolean edit_ok_to_exit (WEdit * edit);
 gboolean edit_load_cmd (WDialog * h);

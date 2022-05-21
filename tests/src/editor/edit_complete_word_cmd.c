@@ -6,7 +6,7 @@
 
    Written by:
    Slava Zanko <slavazanko@gmail.com>, 2013
-   Andrew Borodin <aborodin@vmail.ru>, 2021
+   Andrew Borodin <aborodin@vmail.ru>, 2021-2022
 
    This file is part of the Midnight Commander.
 
@@ -151,6 +151,8 @@ edit_completion_dialog_show__deinit (void)
 static void
 my_setup (void)
 {
+    WRect r;
+
     str_init_strings (NULL);
 
     vfs_init ();
@@ -168,7 +170,8 @@ my_setup (void)
 
     option_filesize_threshold = (char *) "64M";
 
-    test_edit = edit_init (NULL, 0, 0, 24, 80, vfs_path_from_str ("test-data.txt"), 1);
+    rect_init (&r, 0, 0, 24, 80);
+    test_edit = edit_init (NULL, &r, vfs_path_from_str ("test-data.txt"), 1);
     memset (&owner, 0, sizeof (owner));
     group_add_widget (&owner, WIDGET (test_edit));
     edit_completion_dialog_show__init ();
