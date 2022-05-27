@@ -1828,7 +1828,7 @@ edit_sort_cmd (WEdit * edit)
     g_free (tmp);
 
     exp = input_dialog (_("Run sort"),
-                        _("Enter sort options (see manpage) separated by whitespace:"),
+                        _("Enter sort options (see sort(1) manpage) separated by whitespace:"),
                         MC_HISTORY_EDIT_SORT, INPUT_LAST_TEXT, INPUT_COMPLETE_NONE);
 
     if (exp == NULL)
