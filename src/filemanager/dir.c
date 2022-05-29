@@ -117,6 +117,20 @@ key_collate (const char *t1, const char *t2)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static inline int
+compare_by_names (file_entry_t * a, file_entry_t * b)
+{
+    /* create key if does not exist, key will be freed after sorting */
+    if (a->sort_key == NULL)
+        a->sort_key = str_create_key_for_filename (a->fname->str, case_sensitive);
+    if (b->sort_key == NULL)
+        b->sort_key = str_create_key_for_filename (b->fname->str, case_sensitive);
+
+    return key_collate (a->sort_key, b->sort_key);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /**
  * clear keys, should be call after sorting is finished.
  */
@@ -336,15 +350,7 @@ sort_name (file_entry_t * a, file_entry_t * b)
     int bd = MY_ISDIR (b);
 
     if (ad == bd || panels_options.mix_all_files)
-    {
-        /* create key if does not exist, key will be freed after sorting */
-        if (a->sort_key == NULL)
-            a->sort_key = str_create_key_for_filename (a->fname->str, case_sensitive);
-        if (b->sort_key == NULL)
-            b->sort_key = str_create_key_for_filename (b->fname->str, case_sensitive);
-
-        return key_collate (a->sort_key, b->sort_key);
-    }
+        return compare_by_names (a, b);
 
     return bd - ad;
 }
@@ -365,7 +371,7 @@ sort_vers (file_entry_t * a, file_entry_t * b)
         if (result != 0)
             return result * reverse;
 
-        return sort_name (a, b);
+        return compare_by_names (a, b);
     }
 
     return bd - ad;
@@ -392,7 +398,7 @@ sort_ext (file_entry_t * a, file_entry_t * b)
         if (r != 0)
             return r * reverse;
 
-        return sort_name (a, b);
+        return compare_by_names (a, b);
     }
 
     return bd - ad;
@@ -413,7 +419,7 @@ sort_time (file_entry_t * a, file_entry_t * b)
         if (result != 0)
             return result * reverse;
 
-        return sort_name (a, b);
+        return compare_by_names (a, b);
     }
 
     return bd - ad;
@@ -434,7 +440,7 @@ sort_ctime (file_entry_t * a, file_entry_t * b)
         if (result != 0)
             return result * reverse;
 
-        return sort_name (a, b);
+        return compare_by_names (a, b);
     }
 
     return bd - ad;
@@ -455,7 +461,7 @@ sort_atime (file_entry_t * a, file_entry_t * b)
         if (result != 0)
             return result * reverse;
 
-        return sort_name (a, b);
+        return compare_by_names (a, b);
     }
 
     return bd - ad;
@@ -490,7 +496,7 @@ sort_size (file_entry_t * a, file_entry_t * b)
         if (result != 0)
             return result * reverse;
 
-        return sort_name (a, b);
+        return compare_by_names (a, b);
     }
 
     return bd - ad;
