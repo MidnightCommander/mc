@@ -358,7 +358,15 @@ sort_vers (file_entry_t * a, file_entry_t * b)
     int bd = MY_ISDIR (b);
 
     if (ad == bd || panels_options.mix_all_files)
-        return filevercmp (a->fname->str, b->fname->str) * reverse;
+    {
+        int result;
+
+        result = filevercmp (a->fname->str, b->fname->str);
+        if (result != 0)
+            return result * reverse;
+
+        return sort_name (a, b);
+    }
 
     return bd - ad;
 }
