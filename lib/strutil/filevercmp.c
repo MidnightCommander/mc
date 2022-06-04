@@ -39,6 +39,9 @@
 /* Return the length of a prefix of @s that corresponds to the suffix defined by this extended
  * regular expression in the C locale: (\.[A-Za-z~][A-Za-z0-9~]*)*$
  *
+ * Use the longest suffix matching this regular expression, except do not use all of s as a suffix
+ * if s is nonempty.
+ *
  * If *len is -1, s is a string; set *lem to s's length.
  * Otherwise, *len should be nonnegative, s is a char array, and *len does not change.
  */
@@ -46,16 +49,12 @@ static ssize_t
 file_prefixlen (const char *s, ssize_t * len)
 {
     size_t n = (size_t) (*len); /* SIZE_MAX if N == -1 */
-    size_t i;
+    size_t i = 0;
+    size_t prefixlen = 0;
 
-    for (i = 0;; i++)
+    while (TRUE)
     {
-        size_t prefixlen = i;
         gboolean done;
-
-        while (i + 1 < n && s[i] == '.' && (g_ascii_isalpha (s[i + 1]) || s[i + 1] == '~'))
-            for (i += 2; i < n && (g_ascii_isalnum (s[i]) || s[i] == '~'); i++)
-                ;
 
         if (*len < 0)
             done = s[i] == '\0';
@@ -67,6 +66,13 @@ file_prefixlen (const char *s, ssize_t * len)
             *len = (ssize_t) i;
             return (ssize_t) prefixlen;
         }
+
+        i++;
+        prefixlen = i;
+
+        while (i + 1 < n && s[i] == '.' && (g_ascii_isalpha (s[i + 1]) || s[i + 1] == '~'))
+            for (i += 2; i < n && (g_ascii_isalnum (s[i]) || s[i] == '~'); i++)
+                ;
     }
 }
 

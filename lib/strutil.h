@@ -577,6 +577,8 @@ int str_verscmp (const char *s1, const char *s2);
    (\.[A-Za-z~][A-Za-z0-9~]*)*$ are removed and the strings compared without them, using version sort
    without special priority; if they do not compare equal, this comparison result is used and
    the suffixes are effectively ignored. Otherwise, the entire strings are compared using version sort.
+   When removing a suffix from a nonempty string, remove the maximal-length suffix such that
+   the remaining string is nonempty.
  */
 int filevercmp (const char *a, const char *b);
 
