@@ -100,7 +100,7 @@ query_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
                 ypos = WIDGET (prev_dlg)->rect.y + 2;
 
             /* if dialog is too high, place it centered */
-            if (ypos + w->rect.lines < LINES / 2 )
+            if (ypos + w->rect.lines < LINES / 2)
                 w->pos_flags |= WPOS_CENTER;
 
             xpos = COLS / 2 - w->rect.cols / 2;
