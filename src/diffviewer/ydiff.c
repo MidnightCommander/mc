@@ -7,7 +7,7 @@
    Written by:
    Daniel Borca <dborca@yahoo.com>, 2007
    Slava Zanko <slavazanko@gmail.com>, 2010, 2013
-   Andrew Borodin <aborodin@vmail.ru>, 2010, 2012, 2013, 2016
+   Andrew Borodin <aborodin@vmail.ru>, 2010-2022
    Ilia Maslakov <il.smind@gmail.com>, 2010
 
    This file is part of the Midnight Commander.
@@ -2276,9 +2276,9 @@ dview_compute_areas (WDiff * dview)
 {
     Widget *w = WIDGET (dview);
 
-    dview->height = w->lines - 1;
-    dview->half1 = w->cols / 2;
-    dview->half2 = w->cols - dview->half1;
+    dview->height = w->rect.lines - 1;
+    dview->half1 = w->rect.cols / 2;
+    dview->half2 = w->rect.cols - dview->half1;
 
     dview_compute_split (dview, 0);
 }
@@ -2379,9 +2379,10 @@ dview_diff_options (WDiff * dview)
         /* *INDENT-ON* */
     };
 
+    WRect r = { -1, -1, 0, 56 };
+
     quick_dialog_t qdlg = {
-        -1, -1, 56,
-        N_("Diff Options"), "[Diff Options]",
+        r, N_("Diff Options"), "[Diff Options]",
         quick_widgets, NULL, NULL
     };
 
@@ -3443,6 +3444,7 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
     Widget *w;
     WDialog *dview_dlg;
     Widget *dw;
+    WRect r;
     WGroup *g;
 
     /* Create dialog and widgets, put them on the dialog */
@@ -3451,12 +3453,14 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
                     "[Diff Viewer]", NULL);
     dw = WIDGET (dview_dlg);
     widget_want_tab (dw, TRUE);
+    r = dw->rect;
 
     g = GROUP (dview_dlg);
 
     dview = g_new0 (WDiff, 1);
     w = WIDGET (dview);
-    widget_init (w, dw->y, dw->x, dw->lines - 1, dw->cols, dview_callback, dview_mouse_callback);
+    r.lines--;
+    widget_init (w, &r, dview_callback, dview_mouse_callback);
     w->options |= WOP_SELECTABLE;
     w->keymap = diff_map;
     group_add_widget_autopos (g, w, WPOS_KEEP_ALL, NULL);

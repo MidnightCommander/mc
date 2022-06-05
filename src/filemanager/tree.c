@@ -14,7 +14,7 @@
    Norbert Warmuth, 1997
    Miguel de Icaza, 1996, 1999
    Slava Zanko <slavazanko@gmail.com>, 2013
-   Andrew Borodin <aborodin@vmail.ru>, 2013, 2014, 2016
+   Andrew Borodin <aborodin@vmail.ru>, 2013-2022
 
    This file is part of the Midnight Commander.
 
@@ -82,8 +82,8 @@ gboolean xtree_mode = FALSE;
 
 /*** file scope macro definitions ****************************************************************/
 
-#define tlines(t) (t->is_panel ? WIDGET (t)->lines - 2 - \
-                    (panels_options.show_mini_info ? 2 : 0) : WIDGET (t)->lines)
+#define tlines(t) (t->is_panel ? WIDGET (t)->rect.lines - 2 - \
+                    (panels_options.show_mini_info ? 2 : 0) : WIDGET (t)->rect.lines)
 
 /*** file scope type declarations ****************************************************************/
 
@@ -237,7 +237,7 @@ tree_show_mini_info (WTree * tree, int tree_lines, int tree_cols)
     {
         /* Show search string */
         tty_setcolor (INPUT_COLOR);
-        tty_draw_hline (w->y + line, w->x + 1, ' ', tree_cols);
+        tty_draw_hline (w->rect.y + line, w->rect.x + 1, ' ', tree_cols);
         widget_gotoyx (w, line, 1);
         tty_print_char (PATH_SEP);
         tty_print_string (str_fit_to_term (tree->search_buffer->str, tree_cols - 2, J_LEFT_FIT));
@@ -251,7 +251,7 @@ tree_show_mini_info (WTree * tree, int tree_lines, int tree_cols)
 
         colors = widget_get_colors (w);
         tty_setcolor (tree->is_panel ? NORMAL_COLOR : colors[DLG_COLOR_NORMAL]);
-        tty_draw_hline (w->y + line, w->x + 1, ' ', tree_cols);
+        tty_draw_hline (w->rect.y + line, w->rect.x + 1, ' ', tree_cols);
         widget_gotoyx (w, line, 1);
         tty_print_string (str_fit_to_term
                           (vfs_path_as_str (tree->selected_ptr->name), tree_cols, J_LEFT_FIT));
@@ -272,7 +272,7 @@ show_tree (WTree * tree)
 
     /* Initialize */
     tree_lines = tlines (tree);
-    tree_cols = w->cols;
+    tree_cols = w->rect.cols;
 
     widget_gotoyx (w, y, x);
     if (tree->is_panel)
@@ -339,7 +339,7 @@ show_tree (WTree * tree)
         tty_setcolor (tree->is_panel ? NORMAL_COLOR : colors[DLG_COLOR_NORMAL]);
 
         /* Move to the beginning of the line */
-        tty_draw_hline (w->y + y + i, w->x + x, ' ', tree_cols);
+        tty_draw_hline (w->rect.y + y + i, w->rect.x + x, ' ', tree_cols);
 
         if (current == NULL)
             continue;
@@ -1127,21 +1127,21 @@ tree_frame (WDialog * h, WTree * tree)
         const char *title = _("Directory tree");
         const int len = str_term_width1 (title);
 
-        tty_draw_box (w->y, w->x, w->lines, w->cols, FALSE);
+        tty_draw_box (w->rect.y, w->rect.x, w->rect.lines, w->rect.cols, FALSE);
 
-        widget_gotoyx (w, 0, (w->cols - len - 2) / 2);
+        widget_gotoyx (w, 0, (w->rect.cols - len - 2) / 2);
         tty_printf (" %s ", title);
 
         if (panels_options.show_mini_info)
         {
             int y;
 
-            y = w->lines - 3;
+            y = w->rect.lines - 3;
             widget_gotoyx (w, y, 0);
             tty_print_alt_char (ACS_LTEE, FALSE);
-            widget_gotoyx (w, y, w->cols - 1);
+            widget_gotoyx (w, y, w->rect.cols - 1);
             tty_print_alt_char (ACS_RTEE, FALSE);
-            tty_draw_hline (w->y + y, w->x + 1, ACS_HLINE, w->cols - 2);
+            tty_draw_hline (w->rect.y + y, w->rect.x + 1, ACS_HLINE, w->rect.cols - 2);
         }
     }
 }
@@ -1225,7 +1225,7 @@ tree_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
     {
     case MSG_MOUSE_DOWN:
         /* rest of the upper frame - call menu */
-        if (tree->is_panel && event->y == WIDGET (w->owner)->y)
+        if (tree->is_panel && event->y == WIDGET (w->owner)->rect.y)
         {
             /* return MOU_UNHANDLED */
             event->result.abort = TRUE;
@@ -1280,13 +1280,14 @@ tree_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 WTree *
 tree_new (int y, int x, int lines, int cols, gboolean is_panel)
 {
+    WRect r = { y, x, lines, cols };
     WTree *tree;
     Widget *w;
 
     tree = g_new (WTree, 1);
 
     w = WIDGET (tree);
-    widget_init (w, y, x, lines, cols, tree_callback, tree_mouse_callback);
+    widget_init (w, &r, tree_callback, tree_mouse_callback);
     w->options |= WOP_SELECTABLE | WOP_TOP_SELECT;
     w->keymap = tree_map;
 
@@ -1297,7 +1298,7 @@ tree_new (int y, int x, int lines, int cols, gboolean is_panel)
     tree_store_add_entry_remove_hook (remove_callback, tree);
     tree->tree_shown = NULL;
     tree->search_buffer = g_string_sized_new (MC_MAXPATHLEN);
-    tree->topdiff = w->lines / 2;
+    tree->topdiff = w->rect.lines / 2;
     tree->searching = FALSE;
 
     load_tree (tree);

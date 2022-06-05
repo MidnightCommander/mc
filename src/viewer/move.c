@@ -14,7 +14,7 @@
    Pavel Machek, 1998
    Roland Illig <roland.illig@gmx.de>, 2004, 2005
    Slava Zanko <slavazanko@google.com>, 2009
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2009-2022
    Ilia Maslakov <il.smind@gmail.com>, 2009, 2010
 
    This file is part of the Midnight Commander.
@@ -77,7 +77,7 @@ mcview_scroll_to_cursor (WView * view)
         off_t topleft = view->dpy_start;
         off_t displaysize;
 
-        displaysize = view->data_area.height * bytes;
+        displaysize = view->data_area.lines * bytes;
         if (topleft + displaysize <= cursor)
             topleft = mcview_offset_rounddown (cursor, bytes) - (displaysize - bytes);
         if (cursor < topleft)
@@ -258,12 +258,10 @@ mcview_moveto_bottom (WView * view)
     }
     else
     {
-        const off_t datalines = view->data_area.height;
-
         view->dpy_start = filesize;
         view->dpy_paragraph_skip_lines = 0;
         view->dpy_wrap_dirty = TRUE;
-        mcview_move_up (view, datalines);
+        mcview_move_up (view, view->data_area.lines);
     }
 }
 
@@ -378,12 +376,12 @@ mcview_offset_to_coord (WView * view, off_t * ret_line, off_t * ret_column, off_
 void
 mcview_place_cursor (WView * view)
 {
-    const screen_dimen top = view->data_area.top;
-    const screen_dimen left = view->data_area.left;
-    screen_dimen col = view->cursor_col;
+    const WRect *r = &view->data_area;
+    int col = view->cursor_col;
+
     if (!view->hexview_in_text && view->hexedit_lownibble)
         col++;
-    widget_gotoyx (view, top + view->cursor_row, left + col);
+    widget_gotoyx (view, r->y + view->cursor_row, r->x + col);
 }
 
 /* --------------------------------------------------------------------------------------------- */

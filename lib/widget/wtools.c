@@ -9,7 +9,7 @@
    Radek Doulik, 1994, 1995
    Jakub Jelinek, 1995
    Andrej Borsenkow, 1995
-   Andrew Borodin <aborodin@vmail.ru>, 2009-2014
+   Andrew Borodin <aborodin@vmail.ru>, 2009-2022
 
    This file is part of the Midnight Commander.
 
@@ -95,14 +95,18 @@ query_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
 
             /* if previous dialog is not fullscreen'd -- overlap it */
             if (prev_dlg == NULL || (WIDGET (prev_dlg)->pos_flags & WPOS_FULLSCREEN) != 0)
-                ypos = LINES / 3 - (w->lines - 3) / 2;
+                ypos = LINES / 3 - (w->rect.lines - 3) / 2;
             else
-                ypos = WIDGET (prev_dlg)->y + 2;
+                ypos = WIDGET (prev_dlg)->rect.y + 2;
 
-            xpos = COLS / 2 - w->cols / 2;
+            /* if dialog is too high, place it centered */
+            if (ypos + w->rect.lines < LINES / 2 )
+                w->pos_flags |= WPOS_CENTER;
+
+            xpos = COLS / 2 - w->rect.cols / 2;
 
             /* set position */
-            rect_init (&r, ypos, xpos, w->lines, w->cols);
+            rect_init (&r, ypos, xpos, w->rect.lines, w->rect.cols);
 
             return dlg_default_callback (w, NULL, MSG_RESIZE, 0, &r);
         }
@@ -217,9 +221,11 @@ fg_input_dialog_help (const char *header, const char *text, const char *help,
             /* *INDENT-ON* */
         };
 
+        WRect r = { -1, -1, 0, COLS / 2 };
+
         quick_dialog_t qdlg = {
-            -1, -1, COLS / 2, header,
-            help, quick_widgets, NULL, NULL
+            r, header, help,
+            quick_widgets, NULL, NULL
         };
 
         ret = quick_dialog (&qdlg);
@@ -691,6 +697,7 @@ simple_status_msg_init_cb (status_msg_t * sm)
     simple_status_msg_t *ssm = SIMPLE_STATUS_MSG (sm);
     Widget *wd = WIDGET (sm->dlg);
     WGroup *wg = GROUP (sm->dlg);
+    WRect r;
 
     const char *b_name = N_("&Abort");
     int b_width;
@@ -702,7 +709,7 @@ simple_status_msg_init_cb (status_msg_t * sm)
 #endif
 
     b_width = str_term_width1 (b_name) + 4;
-    wd_width = MAX (wd->cols, b_width + 6);
+    wd_width = MAX (wd->rect.cols, b_width + 6);
 
     y = 2;
     ssm->label = label_new (y++, 3, "");
@@ -711,7 +718,10 @@ simple_status_msg_init_cb (status_msg_t * sm)
     b = WIDGET (button_new (y++, 3, B_CANCEL, NORMAL_BUTTON, b_name, NULL));
     group_add_widget_autopos (wg, b, WPOS_KEEP_TOP | WPOS_CENTER_HORZ, NULL);
 
-    widget_set_size (wd, wd->y, wd->x, y + 2, wd_width);
+    r = wd->rect;
+    r.lines = y + 2;
+    r.cols = wd_width;
+    widget_set_size_rect (wd, &r);
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -10,7 +10,7 @@
    Jakub Jelinek, 1995
    Andrej Borsenkow, 1996
    Norbert Warmuth, 1997
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2013, 2016
+   Andrew Borodin <aborodin@vmail.ru>, 2009-2022
 
    This file is part of the Midnight Commander.
 
@@ -86,16 +86,16 @@ listbox_entry_free (void *data)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-listbox_drawscroll (WListbox * l)
+listbox_drawscroll (const WListbox * l)
 {
-    Widget *w = WIDGET (l);
+    const WRect *w = &CONST_WIDGET (l)->rect;
     int max_line = w->lines - 1;
     int line = 0;
     int i;
     int length;
 
     /* Are we at the top? */
-    widget_gotoyx (w, 0, w->cols);
+    widget_gotoyx (l, 0, w->cols);
     if (l->top == 0)
         tty_print_one_vline (TRUE);
     else
@@ -116,7 +116,7 @@ listbox_drawscroll (WListbox * l)
 
     for (i = 1; i < max_line; i++)
     {
-        widget_gotoyx (w, i, w->cols);
+        widget_gotoyx (l, i, w->cols);
         if (i != line)
             tty_print_one_vline (TRUE);
         else
@@ -129,7 +129,8 @@ listbox_drawscroll (WListbox * l)
 static void
 listbox_draw (WListbox * l, gboolean focused)
 {
-    Widget *w = WIDGET (l);
+    Widget *wl = WIDGET (l);
+    const WRect *w = &CONST_WIDGET (l)->rect;
     const int *colors;
     gboolean disabled;
     int normalc, selc;
@@ -139,9 +140,9 @@ listbox_draw (WListbox * l, gboolean focused)
     int i;
     int sel_line = -1;
 
-    colors = widget_get_colors (w);
+    colors = widget_get_colors (wl);
 
-    disabled = widget_get_state (w, WST_DISABLED);
+    disabled = widget_get_state (wl, WST_DISABLED);
     normalc = disabled ? DISABLED_COLOR : colors[DLG_COLOR_NORMAL];
     selc = disabled ? DISABLED_COLOR : colors[focused ? DLG_COLOR_HOT_FOCUS : DLG_COLOR_FOCUS];
 
@@ -271,7 +272,7 @@ static cb_ret_t
 listbox_execute_cmd (WListbox * l, long command)
 {
     cb_ret_t ret = MSG_HANDLED;
-    Widget *w = WIDGET (l);
+    const WRect *w = &CONST_WIDGET (l)->rect;
 
     if (l->list == NULL || g_queue_is_empty (l->list))
         return MSG_NOT_HANDLED;
@@ -547,15 +548,14 @@ listbox_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 WListbox *
 listbox_new (int y, int x, int height, int width, gboolean deletable, lcback_fn callback)
 {
+    WRect r = { y, x, 1, width };
     WListbox *l;
     Widget *w;
 
-    if (height <= 0)
-        height = 1;
-
     l = g_new (WListbox, 1);
     w = WIDGET (l);
-    widget_init (w, y, x, height, width, listbox_callback, listbox_mouse_callback);
+    r.lines = height > 0 ? height : 1;
+    widget_init (w, &r, listbox_callback, listbox_mouse_callback);
     w->options |= WOP_SELECTABLE | WOP_WANT_HOTKEY;
     w->keymap = listbox_map;
 
@@ -634,7 +634,7 @@ listbox_select_first (WListbox * l)
 void
 listbox_select_last (WListbox * l)
 {
-    int lines = WIDGET (l)->lines;
+    int lines = WIDGET (l)->rect.lines;
     int length;
 
     length = listbox_get_length (l);
@@ -668,7 +668,7 @@ listbox_select_entry (WListbox * l, int dest)
                 l->top = l->pos;
             else
             {
-                int lines = WIDGET (l)->lines;
+                int lines = WIDGET (l)->rect.lines;
 
                 if (l->pos - l->top >= lines)
                     l->top = l->pos - lines + 1;

@@ -5,7 +5,7 @@
    Free Software Foundation, Inc.
 
    Written by:
-   Andrew Borodin <aborodin@vmail.ru>, 2020
+   Andrew Borodin <aborodin@vmail.ru>, 2020-2022
 
    This file is part of the Midnight Commander.
 
@@ -294,19 +294,19 @@ fileattrtext_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, 
             color = COLOR_NORMAL;
             tty_setcolor (color);
 
-            if (w->cols > fat->filename_width)
+            if (w->rect.cols > fat->filename_width)
             {
-                widget_gotoyx (w, 0, (w->cols - fat->filename_width) / 2);
+                widget_gotoyx (w, 0, (w->rect.cols - fat->filename_width) / 2);
                 tty_print_string (fat->filename);
             }
             else
             {
                 widget_gotoyx (w, 0, 0);
-                tty_print_string (str_trunc (fat->filename, w->cols));
+                tty_print_string (str_trunc (fat->filename, w->rect.cols));
             }
 
             /* hope that w->cols is greater than check_attr_num */
-            widget_gotoyx (w, 1, (w->cols - check_attr_num) / 2);
+            widget_gotoyx (w, 1, (w->rect.cols - check_attr_num) / 2);
             for (i = 0; i < check_attr_num; i++)
             {
                 /* Do not set new color for each symbol. Try to use previous color. */
@@ -334,14 +334,14 @@ fileattrtext_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, 
 
     case MSG_RESIZE:
         {
-            Widget *wo = WIDGET (w->owner);
+            const WRect *wo = &CONST_WIDGET (w->owner)->rect;
 
             widget_default_callback (w, sender, msg, parm, data);
             /* intially file name may be wider than screen */
             if (fat->filename_width > wo->cols - wx * 2)
             {
-                w->x = wo->x + wx;
-                w->cols = wo->cols - wx * 2;
+                w->rect.x = wo->x + wx;
+                w->rect.cols = wo->cols - wx * 2;
             }
             return MSG_HANDLED;
         }
@@ -360,14 +360,15 @@ fileattrtext_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, 
 static WFileAttrText *
 fileattrtext_new (int y, int x, const char *filename, unsigned long attr)
 {
+    WRect r = { y, x, 2, 1 };
     WFileAttrText *fat;
-    int width, cols;
+    int width;
 
     width = str_term_width1 (filename);
-    cols = MAX (width, (int) check_attr_num);
+    r.cols = MAX (width, (int) check_attr_num);
 
     fat = g_new (WFileAttrText, 1);
-    widget_init (WIDGET (fat), y, x, 2, cols, fileattrtext_callback, NULL);
+    widget_init (WIDGET (fat), &r, fileattrtext_callback, NULL);
 
     fat->filename = g_strdup (filename);
     fat->filename_width = width;
@@ -413,27 +414,27 @@ chattrboxes_draw_scrollbar (const WChattrBoxes * cb)
     int i;
 
     /* Are we at the top? */
-    widget_gotoyx (w, 0, w->cols);
+    widget_gotoyx (w, 0, w->rect.cols);
     if (cb->top == 0)
         tty_print_one_vline (TRUE);
     else
         tty_print_char ('^');
 
-    max_line = w->lines - 1;
+    max_line = w->rect.lines - 1;
 
     /* Are we at the bottom? */
-    widget_gotoyx (w, max_line, w->cols);
-    if (cb->top + w->lines == check_attr_mod_num || w->lines >= check_attr_mod_num)
+    widget_gotoyx (w, max_line, w->rect.cols);
+    if (cb->top + w->rect.lines == check_attr_mod_num || w->rect.lines >= check_attr_mod_num)
         tty_print_one_vline (TRUE);
     else
         tty_print_char ('v');
 
     /* Now draw the nice relative pointer */
-    line = 1 + (cb->pos * (w->lines - 2)) / check_attr_mod_num;
+    line = 1 + (cb->pos * (w->rect.lines - 2)) / check_attr_mod_num;
 
     for (i = 1; i < max_line; i++)
     {
-        widget_gotoyx (w, i, w->cols);
+        widget_gotoyx (w, i, w->rect.cols);
         if (i != line)
             tty_print_one_vline (TRUE);
         else
@@ -453,14 +454,14 @@ chattrboxes_draw (WChattrBoxes * cb)
 
     colors = widget_get_colors (w);
     tty_setcolor (colors[DLG_COLOR_NORMAL]);
-    tty_fill_region (w->y, w->x - 1, w->lines, w->cols + 1, ' ');
+    tty_fill_region (w->rect.y, w->rect.x - 1, w->rect.lines, w->rect.cols + 1, ' ');
 
     /* redraw checkboxes */
     group_default_callback (w, NULL, MSG_DRAW, 0, NULL);
 
     /* draw scrollbar */
     tty_setcolor (colors[DLG_COLOR_NORMAL]);
-    if (!mc_global.tty.slow_terminal && check_attr_mod_num > w->lines)
+    if (!mc_global.tty.slow_terminal && check_attr_mod_num > w->rect.lines)
         chattrboxes_draw_scrollbar (cb);
 
     /* mark selected checkboxes */
@@ -525,7 +526,7 @@ checkboxes_save_state (const WChattrBoxes * cb)
 static cb_ret_t
 chattrboxes_down (WChattrBoxes * cb)
 {
-    if (cb->pos == cb->top + WIDGET (cb)->lines - 1)
+    if (cb->pos == cb->top + WIDGET (cb)->rect.lines - 1)
     {
         /* We are on the last checkbox.
            Keep this position. */
@@ -570,7 +571,7 @@ chattrboxes_page_down (WChattrBoxes * cb)
     }
     else
     {
-        int i = WIDGET (cb)->lines;
+        int i = WIDGET (cb)->rect.lines;
 
         checkboxes_save_state (cb);
 
@@ -608,7 +609,7 @@ chattrboxes_end (WChattrBoxes * cb)
 
     checkboxes_save_state (cb);
     cb->pos = check_attr_mod_num - 1;
-    cb->top = cb->pos - WIDGET (cb)->lines + 1;
+    cb->top = cb->pos - WIDGET (cb)->rect.lines + 1;
     l = g_list_last (GROUP (cb)->widgets);
     chattrboxes_rename (cb);
     widget_select (WIDGET (l->data));
@@ -666,7 +667,7 @@ chattrboxes_page_up (WChattrBoxes * cb)
     }
     else
     {
-        int i = WIDGET (cb)->lines;
+        int i = WIDGET (cb)->rect.lines;
 
         checkboxes_save_state (cb);
 
@@ -876,26 +877,23 @@ chattrboxes_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 /* --------------------------------------------------------------------------------------------- */
 
 static WChattrBoxes *
-chattrboxes_new (int y, int x, int height, int width)
+chattrboxes_new (const WRect * r)
 {
     WChattrBoxes *cb;
     Widget *w;
     WGroup *cbg;
     int i;
 
-    if (height <= 0)
-        height = 1;
-
     cb = g_new0 (WChattrBoxes, 1);
     w = WIDGET (cb);
     cbg = GROUP (cb);
-    group_init (cbg, y, x, height, width, chattrboxes_callback, chattrboxes_mouse_callback);
+    group_init (cbg, r, chattrboxes_callback, chattrboxes_mouse_callback);
     w->options |= WOP_SELECTABLE | WOP_WANT_CURSOR;
     w->mouse_handler = chattrboxes_handle_mouse_event;
     w->keymap = chattr_map;
 
     /* create checkboxes */
-    for (i = 0; i < height; i++)
+    for (i = 0; i < r->lines; i++)
     {
         int m;
         WCheck *check;
@@ -975,6 +973,7 @@ chattr_dlg_create (WPanel * panel, const char *fname, unsigned long attr)
     WGroup *dg;
     WChattrBoxes *cb;
     const int cb_scrollbar_width = 1;
+    WRect r;
 
     /* prepate to set up checkbox states */
     for (i = 0; i < check_attr_num; i++)
@@ -988,11 +987,11 @@ chattr_dlg_create (WPanel * panel, const char *fname, unsigned long attr)
     if (!single_set)
         lines += 3;
 
-    if (lines >= mw->lines - 2)
+    if (lines >= mw->rect.lines - 2)
     {
         int dl;
 
-        dl = lines - (mw->lines - 2);
+        dl = lines - (mw->rect.lines - 2);
         lines -= dl;
         checkboxes_lines -= dl;
     }
@@ -1006,18 +1005,22 @@ chattr_dlg_create (WPanel * panel, const char *fname, unsigned long attr)
     y = 2;
     file_attr = fileattrtext_new (y, wx, fname, attr);
     group_add_widget_autopos (dg, file_attr, WPOS_KEEP_TOP | WPOS_CENTER_HORZ, NULL);
-    y += WIDGET (file_attr)->lines;
+    y += WIDGET (file_attr)->rect.lines;
     group_add_widget (dg, hline_new (y++, -1, -1));
 
-    if (cols < WIDGET (file_attr)->cols)
+    if (cols < WIDGET (file_attr)->rect.cols)
     {
-        cols = WIDGET (file_attr)->cols;
-        cols = MIN (cols, mw->cols - wx * 2);
-        widget_set_size (dw, dw->y, dw->x, lines, cols + wx * 2);
+        r = dw->rect;
+        cols = WIDGET (file_attr)->rect.cols;
+        cols = MIN (cols, mw->rect.cols - wx * 2);
+        r.cols = cols + wx * 2;
+        r.lines = lines;
+        widget_set_size_rect (dw, &r);
     }
 
     checkboxes_lines = MIN (check_attr_mod_num, checkboxes_lines);
-    cb = chattrboxes_new (y++, wx, checkboxes_lines, cols);
+    rect_init (&r, y++, wx, checkboxes_lines > 0 ? checkboxes_lines : 1, cols);
+    cb = chattrboxes_new (&r);
     group_add_widget_autopos (dg, cb, WPOS_KEEP_TOP | WPOS_KEEP_HORZ, NULL);
 
     y += checkboxes_lines - 1;
@@ -1028,38 +1031,47 @@ chattr_dlg_create (WPanel * panel, const char *fname, unsigned long attr)
         if (i == 0 || i == BUTTONS - 2)
             group_add_widget (dg, hline_new (y++, -1, -1));
 
-        chattr_but[i].button = WIDGET (button_new (y, dw->cols / 2 + 1 - chattr_but[i].width,
+        chattr_but[i].button = WIDGET (button_new (y, dw->rect.cols / 2 + 1 - chattr_but[i].width,
                                                    chattr_but[i].ret_cmd, chattr_but[i].flags,
                                                    chattr_but[i].text, NULL));
         group_add_widget (dg, chattr_but[i].button);
 
         i++;
-        chattr_but[i].button = WIDGET (button_new (y++, dw->cols / 2 + 2, chattr_but[i].ret_cmd,
-                                                   chattr_but[i].flags, chattr_but[i].text, NULL));
+        chattr_but[i].button =
+            WIDGET (button_new (y++, dw->rect.cols / 2 + 2, chattr_but[i].ret_cmd,
+                                chattr_but[i].flags, chattr_but[i].text, NULL));
         group_add_widget (dg, chattr_but[i].button);
 
         /* two buttons in a row */
-        cols = MAX (cols, chattr_but[i - 1].button->cols + 1 + chattr_but[i].button->cols);
+        cols =
+            MAX (cols, chattr_but[i - 1].button->rect.cols + 1 + chattr_but[i].button->rect.cols);
     }
 
     /* adjust dialog size and button positions */
     cols += 6;
-    if (cols > dw->cols)
+    if (cols > dw->rect.cols)
     {
-        widget_set_size (dw, dw->y, dw->x, lines, cols);
+        r = dw->rect;
+        r.lines = lines;
+        r.cols = cols;
+        widget_set_size_rect (dw, &r);
 
         /* dialog center */
-        cols = dw->x + dw->cols / 2 + 1;
+        cols = dw->rect.x + dw->rect.cols / 2 + 1;
 
         for (i = single_set ? (BUTTONS - 2) : 0; i < BUTTONS; i++)
         {
             Widget *b;
 
             b = chattr_but[i++].button;
-            widget_set_size (b, b->y, cols - b->cols, b->lines, b->cols);
+            r = b->rect;
+            r.x = cols - r.cols;
+            widget_set_size_rect (b, &r);
 
             b = chattr_but[i].button;
-            widget_set_size (b, b->y, cols + 1, b->lines, b->cols);
+            r = b->rect;
+            r.x = cols + 1;
+            widget_set_size_rect (b, &r);
         }
     }
 

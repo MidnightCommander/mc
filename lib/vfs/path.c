@@ -6,7 +6,7 @@
 
    Written by:
    Slava Zanko <slavazanko@gmail.com>, 2011, 2013
-   Andrew Borodin <aborodin@vmail.ru>, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2013-2022
 
    This file is part of the Midnight Commander.
 
@@ -33,6 +33,8 @@
 
 
 #include <config.h>
+
+#include <errno.h>
 
 #include "lib/global.h"
 #include "lib/strutil.h"
@@ -815,23 +817,36 @@ vfs_path_add_element (vfs_path_t * vpath, const vfs_path_element_t * path_elemen
 /*
  * Get one path element by index.
  *
- * @param vpath pointer to vfs_path_t object
- * @param element_index element index. May have negative value (in this case count was started at the end of list).
+ * @param vpath pointer to vfs_path_t object.
+ *              May be NULL. In this case NULL is returned and errno set to 0.
+ * @param element_index element index. May have negative value (in this case count was started at
+ *                      the end of list). If @element_index is out of range, NULL is returned and
+ *                      errno set to EINVAL.
  *
- * @return path element.
+ * @return path element
  */
 
 const vfs_path_element_t *
 vfs_path_get_by_index (const vfs_path_t * vpath, int element_index)
 {
+    int n;
+
     if (vpath == NULL)
+    {
+        errno = 0;
         return NULL;
+    }
+
+    n = vfs_path_elements_count (vpath);
 
     if (element_index < 0)
-        element_index += vfs_path_elements_count (vpath);
+        element_index += n;
 
-    if (element_index < 0)
-        vfs_die ("vfs_path_get_by_index: incorrect index!");
+    if (element_index < 0 || element_index > n)
+    {
+        errno = EINVAL;
+        return NULL;
+    }
 
     return g_array_index (vpath->path, vfs_path_element_t *, element_index);
 }

@@ -54,21 +54,25 @@
  */
 #define _GL_CMP(n1, n2) (((n1) > (n2)) - ((n1) < (n2)))
 
-/* Difference of zero */
+/* Difference or zero */
 #define DOZ(a, b) ((a) > (b) ? (a) - (b) : 0)
 
 /*** enums ***************************************************************************************/
 
 /* Pathname canonicalization */
+/* *INDENT-OFF* */
 typedef enum
 {
-    CANON_PATH_JOINSLASHES = 1L << 0,   /* Multiple '/'s are collapsed to a single '/'. */
-    CANON_PATH_REMSLASHDOTS = 1L << 1,  /* Leading './'s, '/'s and trailing '/.'s are removed. */
-    CANON_PATH_REMDOUBLEDOTS = 1L << 3, /* Non-leading '../'s and trailing '..'s are handled by removing */
-    CANON_PATH_GUARDUNC = 1L << 4,      /* Detect and preserve UNC paths: //server/... */
-    CANON_PATH_ALL = CANON_PATH_JOINSLASHES
-        | CANON_PATH_REMSLASHDOTS | CANON_PATH_REMDOUBLEDOTS | CANON_PATH_GUARDUNC
-} CANON_PATH_FLAGS;
+    CANON_PATH_NOCHANGE = 0,
+    CANON_PATH_JOINSLASHES = 1L << 0,   /**< Multiple '/'s are collapsed to a single '/' */
+    CANON_PATH_REMSLASHDOTS = 1L << 1,  /**< Leading './'s, '/'s and trailing '/.'s are removed */
+    CANON_PATH_REMDOUBLEDOTS = 1L << 3, /**< Non-leading '../'s and trailing '..'s are handled by removing
+                                             portions of the path */
+    CANON_PATH_GUARDUNC = 1L << 4,      /**< Detect and preserve UNC paths: //server/... */
+    CANON_PATH_ALL = CANON_PATH_JOINSLASHES | CANON_PATH_REMSLASHDOTS
+                   | CANON_PATH_REMDOUBLEDOTS | CANON_PATH_GUARDUNC  /**< All flags */
+} canon_path_flags_t;
+/* *INDENT-ON* */
 
 enum compression_type
 {
@@ -228,7 +232,7 @@ void save_stop_handler (void);
 /* Tilde expansion */
 char *tilde_expand (const char *directory);
 
-void custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags);
+void canonicalize_pathname_custom (char *path, canon_path_flags_t flags);
 void canonicalize_pathname (char *path);
 
 char *mc_realpath (const char *path, char *resolved_path);

@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-04-10 17:12+0300\n"
+"POT-Creation-Date: 2022-06-05 19:48+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>, 2017-2022\n"
 "Language-Team: Catalan (http://www.transifex.com/mc/mc/language/ca/)\n"
@@ -1220,7 +1220,8 @@ msgstr "En primer lloc heu de ressaltar un bloc de text"
 msgid "Run sort"
 msgstr "Executa l'ordenació"
 
-msgid "Enter sort options (see manpage) separated by whitespace:"
+#, fuzzy
+msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr ""
 "Introduïu les opcions d'ordrenació (vegeu la pàgina man), separades per "
 "espais en blanc:"
@@ -4289,6 +4290,22 @@ msgstr "ftpfs: ha fallat la connexió amb el servidor: %s"
 #, c-format
 msgid "Waiting to retry... %d (Control-G to cancel)"
 msgstr "Esperant abans d'insistir... %d (Ctrl-G per a cancel·lar)"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not make address-to-name translation: %s"
+msgstr "ftpfs: no s'ha pogut crear el sòcol: %s"
+
+#, fuzzy, c-format
+msgid "ftpfs: try reconnect to server, attempt %u"
+msgstr "ftpfs: ha fallat la connexió amb el servidor: %s"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not get socket name: %s"
+msgstr "ftpfs: no s'ha pogut crear el sòcol: %s"
+
+#, fuzzy
+msgid "ftpfs: could not reconnect to server"
+msgstr "ftpfs: no s'ha pogut crear el sòcol: %s"
 
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: família d'adreces no vàlida"

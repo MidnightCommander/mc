@@ -14,7 +14,7 @@
    Pavel Machek, 1998
    Roland Illig <roland.illig@gmx.de>, 2004, 2005
    Slava Zanko <slavazanko@google.com>, 2009
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2009-2022
    Ilia Maslakov <il.smind@gmail.com>, 2009
 
    This file is part of the Midnight Commander.
@@ -97,12 +97,15 @@ mcview_search_status_update_cb (status_msg_t * sm)
 
     if (vsm->first)
     {
-        int wd_width;
         Widget *lw = WIDGET (ssm->label);
+        WRect r;
 
-        wd_width = MAX (wd->cols, lw->cols + 6);
-        widget_set_size (wd, wd->y, wd->x, wd->lines, wd_width);
-        widget_set_size (lw, lw->y, wd->x + (wd->cols - lw->cols) / 2, lw->lines, lw->cols);
+        r = wd->rect;
+        r.cols = MAX (r.cols, lw->rect.cols + 6);
+        widget_set_size_rect (wd, &r);
+        r = lw->rect;
+        r.x = wd->rect.x + (wd->rect.cols - r.cols) / 2;
+        widget_set_size_rect (lw, &r);
         vsm->first = FALSE;
     }
 

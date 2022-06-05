@@ -5,7 +5,7 @@
    The Free Software Foundation, Inc.
 
    Written by:
-   Andrew Borodin <aborodin@vmail.ru>, 2020
+   Andrew Borodin <aborodin@vmail.ru>, 2020-2022
 
    This file is part of the Midnight Commander.
 
@@ -198,8 +198,10 @@ group_default_make_global (Widget * w, const WRect * delta)
     }
     else if (w->owner != NULL)
     {
-        WRect r = { WIDGET (w->owner)->y, WIDGET (w->owner)->x, 0, 0 };
+        WRect r = WIDGET (w->owner)->rect;
 
+        r.lines = 0;
+        r.cols = 0;
         /* change own coordinates */
         widget_default_make_global (w, &r);
         /* change child widget coordinates */
@@ -232,8 +234,10 @@ group_default_make_local (Widget * w, const WRect * delta)
     }
     else if (w->owner != NULL)
     {
-        WRect r = { WIDGET (w->owner)->y, WIDGET (w->owner)->x, 0, 0 };
+        WRect r = WIDGET (w->owner)->rect;
 
+        r.lines = 0;
+        r.cols = 0;
         /* change own coordinates */
         widget_default_make_local (w, &r);
         /* change child widget coordinates */
@@ -382,12 +386,12 @@ group_widget_set_position (gpointer data, gpointer user_data)
      */
 
     Widget *c = WIDGET (data);
-    Widget *g = WIDGET (c->owner);
+    const WRect *g = &CONST_WIDGET (c->owner)->rect;
     const widget_shift_scale_t *wss = (const widget_shift_scale_t *) user_data;
-    WRect r = { c->y, c->x, c->lines, c->cols };
+    WRect r = c->rect;
 
     if ((c->pos_flags & WPOS_CENTER_HORZ) != 0)
-        r.x = g->x + (g->cols - c->cols) / 2;
+        r.x = g->x + (g->cols - c->rect.cols) / 2;
     else if ((c->pos_flags & WPOS_KEEP_LEFT) != 0 && (c->pos_flags & WPOS_KEEP_RIGHT) != 0)
     {
         r.x += wss->shift_x;
@@ -399,7 +403,7 @@ group_widget_set_position (gpointer data, gpointer user_data)
         r.x += wss->shift_x + wss->scale_x;
 
     if ((c->pos_flags & WPOS_CENTER_VERT) != 0)
-        r.y = g->y + (g->lines - c->lines) / 2;
+        r.y = g->y + (g->lines - c->rect.lines) / 2;
     else if ((c->pos_flags & WPOS_KEEP_TOP) != 0 && (c->pos_flags & WPOS_KEEP_BOTTOM) != 0)
     {
         r.y += wss->shift_y;
@@ -418,15 +422,12 @@ group_widget_set_position (gpointer data, gpointer user_data)
 static void
 group_set_position (WGroup * g, const WRect * r)
 {
-    Widget *w = WIDGET (g);
+    WRect *w = &WIDGET (g)->rect;
     widget_shift_scale_t wss;
     /* save old positions, will be used to reposition childs */
-    WRect or = { w->y, w->x, w->lines, w->cols };
+    WRect or = *w;
 
-    w->x = r->x;
-    w->y = r->y;
-    w->lines = r->lines;
-    w->cols = r->cols;
+    *w = *r;
 
     /* dialog is empty */
     if (g->widgets == NULL)
@@ -459,12 +460,8 @@ group_default_resize (WGroup * g, WRect * r)
     Widget *w = WIDGET (g);
     WRect r0;
 
-    if (r == NULL)
-        rect_init (&r0, w->y, w->x, w->lines, w->cols);
-    else
-        r0 = *r;
-
-    widget_adjust_position (w->pos_flags, &r0.y, &r0.x, &r0.lines, &r0.cols);
+    r0 = r != NULL ? *r : w->rect;
+    widget_adjust_position (w->pos_flags, &r0);
     group_set_position (g, &r0);
 }
 
@@ -597,13 +594,11 @@ group_handle_hotkey (WGroup * g, int key)
  */
 
 void
-group_init (WGroup * g, int y1, int x1, int lines, int cols, widget_cb_fn callback,
-            widget_mouse_cb_fn mouse_callback)
+group_init (WGroup * g, const WRect * r, widget_cb_fn callback, widget_mouse_cb_fn mouse_callback)
 {
     Widget *w = WIDGET (g);
 
-    widget_init (w, y1, x1, lines, cols, callback != NULL ? callback : group_default_callback,
-                 mouse_callback);
+    widget_init (w, r, callback != NULL ? callback : group_default_callback, mouse_callback);
 
     w->mouse_handler = group_handle_mouse_event;
 
@@ -774,10 +769,10 @@ group_add_widget_autopos (WGroup * g, void *w, widget_pos_flags_t pos_flags, con
     assert (ww != NULL);
 
     if ((pos_flags & WPOS_CENTER_HORZ) != 0)
-        ww->x = (wg->cols - ww->cols) / 2;
+        ww->rect.x = (wg->rect.cols - ww->rect.cols) / 2;
 
     if ((pos_flags & WPOS_CENTER_VERT) != 0)
-        ww->y = (wg->lines - ww->lines) / 2;
+        ww->rect.y = (wg->rect.lines - ww->rect.lines) / 2;
 
     ww->owner = g;
     ww->pos_flags = pos_flags;

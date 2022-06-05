@@ -10,7 +10,7 @@
    Jakub Jelinek, 1995
    Andrej Borsenkow, 1996
    Norbert Warmuth, 1997
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2011, 2012, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2009-2022
 
    This file is part of the Midnight Commander.
 
@@ -85,10 +85,7 @@ widget_default_resize (Widget * w, const WRect * r)
     if (r == NULL)
         return MSG_NOT_HANDLED;
 
-    w->y = r->y;
-    w->x = r->x;
-    w->lines = r->lines;
-    w->cols = r->cols;
+    w->rect = *r;
 
     return MSG_HANDLED;
 }
@@ -308,14 +305,10 @@ hotkey_get_text (const hotkey_t hotkey)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-widget_init (Widget * w, int y, int x, int lines, int cols,
-             widget_cb_fn callback, widget_mouse_cb_fn mouse_callback)
+widget_init (Widget * w, const WRect * r, widget_cb_fn callback, widget_mouse_cb_fn mouse_callback)
 {
     w->id = widget_set_id ();
-    w->x = x;
-    w->y = y;
-    w->cols = cols;
-    w->lines = lines;
+    w->rect = *r;
     w->pos_flags = WPOS_KEEP_DEFAULT;
     w->callback = callback;
 
@@ -400,29 +393,29 @@ widget_set_options (Widget * w, widget_options_t options, gboolean enable)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-widget_adjust_position (widget_pos_flags_t pos_flags, int *y, int *x, int *lines, int *cols)
+widget_adjust_position (widget_pos_flags_t pos_flags, WRect * r)
 {
     if ((pos_flags & WPOS_FULLSCREEN) != 0)
     {
-        *y = 0;
-        *x = 0;
-        *lines = LINES;
-        *cols = COLS;
+        r->y = 0;
+        r->x = 0;
+        r->lines = LINES;
+        r->cols = COLS;
     }
     else
     {
         if ((pos_flags & WPOS_CENTER_HORZ) != 0)
-            *x = (COLS - *cols) / 2;
+            r->x = (COLS - r->cols) / 2;
 
         if ((pos_flags & WPOS_CENTER_VERT) != 0)
-            *y = (LINES - *lines) / 2;
+            r->y = (LINES - r->lines) / 2;
 
         if ((pos_flags & WPOS_TRYUP) != 0)
         {
-            if (*y > 3)
-                *y -= 2;
-            else if (*y == 3)
-                *y = 2;
+            if (r->y > 3)
+                r->y -= 2;
+            else if (r->y == 3)
+                r->y = 2;
         }
     }
 }
@@ -444,6 +437,21 @@ widget_set_size (Widget * w, int y, int x, int lines, int cols)
     WRect r = { y, x, lines, cols };
 
     send_message (w, NULL, MSG_RESIZE, 0, &r);
+    widget_draw (w);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Change widget position and size.
+ *
+ * @param w widget
+ * @param r WRect obgect that holds position and size
+ */
+
+void
+widget_set_size_rect (Widget * w, WRect * r)
+{
+    send_message (w, NULL, MSG_RESIZE, 0, r);
     widget_draw (w);
 }
 
@@ -473,7 +481,7 @@ void
 widget_erase (Widget * w)
 {
     if (w != NULL)
-        tty_fill_region (w->y, w->x, w->lines, w->cols, ' ');
+        tty_fill_region (w->rect.y, w->rect.x, w->rect.lines, w->rect.cols, ' ');
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -650,22 +658,6 @@ widget_set_bottom (Widget * w)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
-  * Check whether two widgets are overlapped or not.
-  * @param a 1st widget
-  * @param b 2nd widget
-  *
-  * @return TRUE if widgets are overlapped, FALSE otherwise.
-  */
-
-gboolean
-widget_overlapped (const Widget * a, const Widget * b)
-{
-    return !((b->x >= a->x + a->cols)
-             || (a->x >= b->x + b->cols) || (b->y >= a->y + a->lines) || (a->y >= b->y + b->lines));
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
   * Look up key event of widget and translate it to command ID.
   * @param w   widget
   * @param key key event
@@ -699,15 +691,9 @@ void
 widget_default_make_global (Widget * w, const WRect * delta)
 {
     if (delta != NULL)
-    {
-        w->y += delta->y;
-        w->x += delta->x;
-    }
+        rect_move (&w->rect, delta->y, delta->x);
     else if (w->owner != NULL)
-    {
-        w->y += WIDGET (w->owner)->y;
-        w->x += WIDGET (w->owner)->x;
-    }
+        rect_move (&w->rect, WIDGET (w->owner)->rect.y, WIDGET (w->owner)->rect.x);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -724,15 +710,9 @@ void
 widget_default_make_local (Widget * w, const WRect * delta)
 {
     if (delta != NULL)
-    {
-        w->y -= delta->y;
-        w->x -= delta->x;
-    }
+        rect_move (&w->rect, -delta->y, -delta->x);
     else if (w->owner != NULL)
-    {
-        w->y -= WIDGET (w->owner)->y;
-        w->x -= WIDGET (w->owner)->x;
-    }
+        rect_move (&w->rect, -WIDGET (w->owner)->rect.y, -WIDGET (w->owner)->rect.x);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -897,8 +877,8 @@ mouse_get_local (const Gpm_Event * global, const Widget * w)
     memset (&local, 0, sizeof (local));
 
     local.buttons = global->buttons;
-    local.x = global->x - w->x;
-    local.y = global->y - w->y;
+    local.x = global->x - w->rect.x;
+    local.y = global->y - w->rect.y;
     local.type = global->type;
 
     return local;
@@ -909,8 +889,10 @@ mouse_get_local (const Gpm_Event * global, const Widget * w)
 gboolean
 mouse_global_in_widget (const Gpm_Event * event, const Widget * w)
 {
-    return (event->x > w->x) && (event->y > w->y) && (event->x <= w->x + w->cols)
-        && (event->y <= w->y + w->lines);
+    const WRect *r = &w->rect;
+
+    return (event->x > r->x) && (event->y > r->y) && (event->x <= r->x + r->cols)
+        && (event->y <= r->y + r->lines);
 }
 
 /* --------------------------------------------------------------------------------------------- */

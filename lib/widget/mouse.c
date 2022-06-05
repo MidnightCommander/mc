@@ -61,8 +61,8 @@ init_mouse_event (mouse_event_t * event, mouse_msg_t msg, const Gpm_Event * glob
                   const Widget * w)
 {
     event->msg = msg;
-    event->x = global_gpm->x - w->x - 1;        /* '-1' because Gpm_Event is 1-based. */
-    event->y = global_gpm->y - w->y - 1;
+    event->x = global_gpm->x - w->rect.x - 1;   /* '-1' because Gpm_Event is 1-based. */
+    event->y = global_gpm->y - w->rect.y - 1;
     event->count = global_gpm->type & (GPM_SINGLE | GPM_DOUBLE | GPM_TRIPLE);
     event->buttons = global_gpm->buttons;
     event->result.abort = FALSE;

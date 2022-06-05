@@ -542,22 +542,22 @@ user_group_button_cb (WButton * button, int action)
         if (is_owner)
         {
             title = _("owner");
-            lxx = WIDGET (b_user)->x + 1;
+            lxx = WIDGET (b_user)->rect.x + 1;
         }
         else
         {
             title = _("group");
-            lxx = WIDGET (b_group)->x + 1;
+            lxx = WIDGET (b_group)->rect.x + 1;
         }
 
         chl_dlg =
-            dlg_create (TRUE, wh->y - 1, lxx, wh->lines + 2, 17, WPOS_KEEP_DEFAULT, TRUE,
+            dlg_create (TRUE, wh->rect.y - 1, lxx, wh->rect.lines + 2, 17, WPOS_KEEP_DEFAULT, TRUE,
                         dialog_colors, chl_callback, NULL, "[Advanced Chown]", title);
 
         /* get new listboxes */
         chl_list =
-            listbox_new (1, 1, WIDGET (chl_dlg)->lines - 2, WIDGET (chl_dlg)->cols - 2, FALSE,
-                         NULL);
+            listbox_new (1, 1, WIDGET (chl_dlg)->rect.lines - 2, WIDGET (chl_dlg)->rect.cols - 2,
+                         FALSE, NULL);
         listbox_add_item (chl_list, LISTBOX_APPEND_AT_END, 0, "<Unknown>", NULL, FALSE);
         if (is_owner)
         {
@@ -782,14 +782,15 @@ advanced_chown_dlg_create (WPanel * panel)
         group_add_widget (ch_grp, hline_new (y++, -1, -1));
         advanced_chown_but[i].id = group_add_widget (ch_grp,
                                                      button_new (y,
-                                                                 WIDGET (ch_dlg)->cols / 2 -
+                                                                 WIDGET (ch_dlg)->rect.cols / 2 -
                                                                  advanced_chown_but[i].len,
                                                                  advanced_chown_but[i].ret_cmd,
                                                                  advanced_chown_but[i].flags,
                                                                  advanced_chown_but[i].text, NULL));
         i++;
         advanced_chown_but[i].id = group_add_widget (ch_grp,
-                                                     button_new (y, WIDGET (ch_dlg)->cols / 2 + 1,
+                                                     button_new (y,
+                                                                 WIDGET (ch_dlg)->rect.cols / 2 + 1,
                                                                  advanced_chown_but[i].ret_cmd,
                                                                  advanced_chown_but[i].flags,
                                                                  advanced_chown_but[i].text, NULL));
@@ -800,14 +801,14 @@ advanced_chown_dlg_create (WPanel * panel)
     group_add_widget (ch_grp, hline_new (y++, -1, -1));
     advanced_chown_but[i].id = group_add_widget (ch_grp,
                                                  button_new (y,
-                                                             WIDGET (ch_dlg)->cols / 2 -
+                                                             WIDGET (ch_dlg)->rect.cols / 2 -
                                                              advanced_chown_but[i].len,
                                                              advanced_chown_but[i].ret_cmd,
                                                              advanced_chown_but[i].flags,
                                                              advanced_chown_but[i].text, NULL));
     i++;
     advanced_chown_but[i].id = group_add_widget (ch_grp,
-                                                 button_new (y, WIDGET (ch_dlg)->cols / 2 + 1,
+                                                 button_new (y, WIDGET (ch_dlg)->rect.cols / 2 + 1,
                                                              advanced_chown_but[i].ret_cmd,
                                                              advanced_chown_but[i].flags,
                                                              advanced_chown_but[i].text, NULL));
@@ -1032,7 +1033,7 @@ advanced_chown_cmd (WPanel * panel)
 
         file_idx = files_on_begin == 1 ? 1 : (files_on_begin - panel->marked + 1);
         label_set_textv (l_filename, "%s (%d/%d)",
-                         str_fit_to_term (fname->str, WIDGET (ch_dlg)->cols - 20, J_LEFT_FIT),
+                         str_fit_to_term (fname->str, WIDGET (ch_dlg)->rect.cols - 20, J_LEFT_FIT),
                          file_idx, files_on_begin);
         update_ownership ();
 

@@ -198,10 +198,8 @@ START_PARAMETRIZED_TEST (test_complete_engine_fill_completions,
     /* given */
     WInput *w_input;
 
-    w_input = g_new (WInput, 1);
-    w_input->buffer = g_strdup (data->input_buffer);
+    w_input = input_new (1, 1, NULL, 100, data->input_buffer, NULL, data->input_completion_flags);
     w_input->point = data->input_point;
-    w_input->completion_flags = data->input_completion_flags;
 
     /* when */
     complete_engine_fill_completions (w_input);

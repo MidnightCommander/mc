@@ -10,7 +10,7 @@
    Jakub Jelinek, 1995
    Andrej Borsenkow, 1996
    Norbert Warmuth, 1997
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2009-2022
 
    This file is part of the Midnight Commander.
 
@@ -68,7 +68,7 @@ gauge_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
         if (!g->shown)
         {
             tty_setcolor (colors[DLG_COLOR_NORMAL]);
-            tty_printf ("%*s", w->cols, "");
+            tty_printf ("%*s", w->rect.cols, "");
         }
         else
         {
@@ -90,7 +90,7 @@ gauge_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
                 done /= 256;
             }
 
-            gauge_len = w->cols - 7;    /* 7 positions for percentage */
+            gauge_len = w->rect.cols - 7;       /* 7 positions for percentage */
 
             percentage = (200 * done / total + 1) / 2;
             columns = (2 * gauge_len * done / total + 1) / 2;
@@ -126,12 +126,13 @@ gauge_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
 WGauge *
 gauge_new (int y, int x, int cols, gboolean shown, int max, int current)
 {
+    WRect r = { y, x, 1, cols };
     WGauge *g;
     Widget *w;
 
     g = g_new (WGauge, 1);
     w = WIDGET (g);
-    widget_init (w, y, x, 1, cols, gauge_callback, NULL);
+    widget_init (w, &r, gauge_callback, NULL);
 
     g->shown = shown;
     if (max == 0)

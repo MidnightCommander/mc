@@ -209,8 +209,8 @@ chmod_refresh (const WDialog * h)
     for (i = 0; i < BUTTONS_PERM; i++)
         chmod_draw_select (h, i);
 
-    y = WIDGET (file_gb)->y + 1;
-    x = WIDGET (file_gb)->x + 2;
+    y = WIDGET (file_gb)->rect.y + 1;
+    x = WIDGET (file_gb)->rect.x + 2;
 
     tty_gotoyx (y, x);
     tty_print_string (file_info_labels[0]);
@@ -372,11 +372,11 @@ chmod_dlg_create (WPanel * panel, const char *fname, const struct stat *sf_stat)
         for (; i < BUTTONS - 2; i++)
         {
             y = lines - chmod_but[i].y;
-            group_add_widget (g, button_new (y, WIDGET (ch_dlg)->cols / 2 - chmod_but[i].len,
+            group_add_widget (g, button_new (y, WIDGET (ch_dlg)->rect.cols / 2 - chmod_but[i].len,
                                              chmod_but[i].ret_cmd, chmod_but[i].flags,
                                              chmod_but[i].text, NULL));
             i++;
-            group_add_widget (g, button_new (y, WIDGET (ch_dlg)->cols / 2 + 1,
+            group_add_widget (g, button_new (y, WIDGET (ch_dlg)->rect.cols / 2 + 1,
                                              chmod_but[i].ret_cmd, chmod_but[i].flags,
                                              chmod_but[i].text, NULL));
         }
@@ -385,11 +385,11 @@ chmod_dlg_create (WPanel * panel, const char *fname, const struct stat *sf_stat)
     i = BUTTONS - 2;
     y = lines - chmod_but[i].y;
     group_add_widget (g, hline_new (y - 1, -1, -1));
-    group_add_widget (g, button_new (y, WIDGET (ch_dlg)->cols / 2 - chmod_but[i].len,
+    group_add_widget (g, button_new (y, WIDGET (ch_dlg)->rect.cols / 2 - chmod_but[i].len,
                                      chmod_but[i].ret_cmd, chmod_but[i].flags, chmod_but[i].text,
                                      NULL));
     i++;
-    group_add_widget (g, button_new (y, WIDGET (ch_dlg)->cols / 2 + 1, chmod_but[i].ret_cmd,
+    group_add_widget (g, button_new (y, WIDGET (ch_dlg)->rect.cols / 2 + 1, chmod_but[i].ret_cmd,
                                      chmod_but[i].flags, chmod_but[i].text, NULL));
 
     /* select first checkbox */

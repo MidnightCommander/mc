@@ -7,7 +7,7 @@
    Written by:
    Janne Kukonlehto, 1995
    Miguel de Icaza, 1995
-   Andrew Borodin <aborodin@vmail.ru>, 2011, 2012, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2011-2022
    Slava Zanko <slavazanko@gmail.com>, 2013
    Avi Kelman <patcherton.fixesthings@gmail.com>, 2013
 
@@ -213,7 +213,7 @@ check_split (panels_layout_t * layout)
     }
     else
     {
-        int md_cols = CONST_WIDGET (filemanager)->cols;
+        int md_cols = CONST_WIDGET (filemanager)->rect.cols;
 
         if (layout->vertical_equal)
             layout->left_panel_size = md_cols / 2;
@@ -251,7 +251,7 @@ update_split (const WDialog * h)
     if (panels_layout.horizontal_split)
         tty_printf ("%03d", height - panels_layout.top_panel_size);
     else
-        tty_printf ("%03d", CONST_WIDGET (filemanager)->cols - panels_layout.left_panel_size);
+        tty_printf ("%03d", CONST_WIDGET (filemanager)->rect.cols - panels_layout.left_panel_size);
 
     widget_gotoyx (h, 6, 12);
     tty_print_char ('=');
@@ -362,7 +362,7 @@ layout_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
 
             if (mc_global.tty.console_flag == '\0')
                 height =
-                    mw->lines - (_keybar_visible ? 1 : 0) - (_command_prompt ? 1 : 0) -
+                    mw->rect.lines - (_keybar_visible ? 1 : 0) - (_command_prompt ? 1 : 0) -
                     (_menubar_visible ? 1 : 0) - _output_lines - (_message_visible ? 1 : 0);
             else
             {
@@ -371,7 +371,7 @@ layout_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
                 if (_output_lines < 0)
                     _output_lines = 0;
                 height =
-                    mw->lines - (_keybar_visible ? 1 : 0) - (_command_prompt ? 1 : 0) -
+                    mw->rect.lines - (_keybar_visible ? 1 : 0) - (_command_prompt ? 1 : 0) -
                     (_menubar_visible ? 1 : 0) - _output_lines - (_message_visible ? 1 : 0);
                 minimum = MINHEIGHT * (1 + (panels_layout.horizontal_split ? 1 : 0));
                 if (height < minimum)
@@ -412,7 +412,7 @@ layout_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
                 {
                     eq = panels_layout.vertical_equal;
                     if (eq)
-                        panels_layout.left_panel_size = CONST_WIDGET (filemanager)->cols / 2;
+                        panels_layout.left_panel_size = CONST_WIDGET (filemanager)->rect.cols / 2;
                 }
 
                 widget_disable (WIDGET (bleft_widget), eq);
@@ -761,28 +761,28 @@ panel_update_cols (Widget * widget, panel_display_t frame_size)
 
     if (panels_layout.horizontal_split)
     {
-        widget->cols = mw->cols;
+        widget->rect.cols = mw->rect.cols;
         return;
     }
 
     if (frame_size == frame_full)
     {
-        cols = mw->cols;
-        x = mw->x;
+        cols = mw->rect.cols;
+        x = mw->rect.x;
     }
     else if (widget == get_panel_widget (0))
     {
         cols = panels_layout.left_panel_size;
-        x = mw->x;
+        x = mw->rect.x;
     }
     else
     {
-        cols = mw->cols - panels_layout.left_panel_size;
-        x = mw->x + panels_layout.left_panel_size;
+        cols = mw->rect.cols - panels_layout.left_panel_size;
+        x = mw->rect.x + panels_layout.left_panel_size;
     }
 
-    widget->cols = cols;
-    widget->x = x;
+    widget->rect.cols = cols;
+    widget->rect.x = x;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -817,8 +817,10 @@ setup_panels (void)
      */
 
     Widget *mw = WIDGET (filemanager);
+    const WRect *r = &CONST_WIDGET (mw)->rect;
     int start_y;
     gboolean active;
+    WRect rb;
 
     active = widget_get_state (mw, WST_ACTIVE);
 
@@ -828,7 +830,7 @@ setup_panels (void)
 
     /* iniitial height of panels */
     height =
-        mw->lines - (menubar_visible ? 1 : 0) - (mc_global.message_visible ? 1 : 0) -
+        r->lines - (menubar_visible ? 1 : 0) - (mc_global.message_visible ? 1 : 0) -
         (command_prompt ? 1 : 0) - (mc_global.keybar_visible ? 1 : 0);
 
     if (mc_global.tty.console_flag != '\0')
@@ -847,11 +849,13 @@ setup_panels (void)
         }
     }
 
-    widget_set_size (WIDGET (the_menubar), mw->y, mw->x, 1, mw->cols);
+    rb = *r;
+    rb.lines = 1;
+    widget_set_size_rect (WIDGET (the_menubar), &rb);
     widget_set_visibility (WIDGET (the_menubar), menubar_visible);
 
     check_split (&panels_layout);
-    start_y = mw->y + (menubar_visible ? 1 : 0);
+    start_y = r->y + (menubar_visible ? 1 : 0);
 
     /* update columns first... */
     panel_do_cols (0);
@@ -860,19 +864,19 @@ setup_panels (void)
     /* ...then rows and origin */
     if (panels_layout.horizontal_split)
     {
-        widget_set_size (panels[0].widget, start_y, mw->x, panels_layout.top_panel_size,
-                         panels[0].widget->cols);
-        widget_set_size (panels[1].widget, start_y + panels_layout.top_panel_size, mw->x,
-                         height - panels_layout.top_panel_size, panels[1].widget->cols);
+        widget_set_size (panels[0].widget, start_y, r->x, panels_layout.top_panel_size,
+                         panels[0].widget->rect.cols);
+        widget_set_size (panels[1].widget, start_y + panels_layout.top_panel_size, r->x,
+                         height - panels_layout.top_panel_size, panels[1].widget->rect.cols);
     }
     else
     {
-        widget_set_size (panels[0].widget, start_y, mw->x, height, panels[0].widget->cols);
-        widget_set_size (panels[1].widget, start_y, panels[1].widget->x, height,
-                         panels[1].widget->cols);
+        widget_set_size (panels[0].widget, start_y, r->x, height, panels[0].widget->rect.cols);
+        widget_set_size (panels[1].widget, start_y, panels[1].widget->rect.x, height,
+                         panels[1].widget->rect.cols);
     }
 
-    widget_set_size (WIDGET (the_hint), height + start_y, mw->x, 1, mw->cols);
+    widget_set_size (WIDGET (the_hint), height + start_y, r->x, 1, r->cols);
     widget_set_visibility (WIDGET (the_hint), mc_global.message_visible);
 
     /* Output window */
@@ -880,7 +884,7 @@ setup_panels (void)
     {
         unsigned char end_line;
 
-        end_line = mw->lines - (mc_global.keybar_visible ? 1 : 0) - 1;
+        end_line = r->lines - (mc_global.keybar_visible ? 1 : 0) - 1;
         output_start_y = end_line - (command_prompt ? 1 : 0) - output_lines + 1;
         show_console_contents (output_start_y, end_line - output_lines, end_line);
     }
@@ -899,7 +903,10 @@ setup_panels (void)
         widget_hide (WIDGET (the_prompt));
     }
 
-    widget_set_size (WIDGET (the_bar), mw->lines - 1, mw->x, 1, mw->cols);
+    rb = *r;
+    rb.y = r->lines - 1;
+    rb.lines = 1;
+    widget_set_size_rect (WIDGET (the_bar), &rb);
     widget_set_visibility (WIDGET (the_bar), mc_global.keybar_visible);
 
     update_xterm_title_path ();
@@ -970,6 +977,7 @@ void
 setup_cmdline (void)
 {
     const Widget *mw = CONST_WIDGET (filemanager);
+    const WRect *r = &mw->rect;
     int prompt_width;
     int y;
     char *tmp_prompt = (char *) mc_prompt;
@@ -992,11 +1000,11 @@ setup_cmdline (void)
     prompt_width = str_term_width1 (tmp_prompt);
 
     /* Check for prompts too big */
-    if (mw->cols > 8 && prompt_width > mw->cols - 8)
+    if (r->cols > 8 && prompt_width > r->cols - 8)
     {
         int prompt_len;
 
-        prompt_width = mw->cols - 8;
+        prompt_width = r->cols - 8;
         prompt_len = str_offset_to_pos (tmp_prompt, prompt_width);
         tmp_prompt[prompt_len] = '\0';
     }
@@ -1010,11 +1018,11 @@ setup_cmdline (void)
     }
 #endif
 
-    y = mw->lines - 1 - (mc_global.keybar_visible ? 1 : 0);
+    y = r->lines - 1 - (mc_global.keybar_visible ? 1 : 0);
 
-    widget_set_size (WIDGET (the_prompt), y, mw->x, 1, prompt_width);
+    widget_set_size (WIDGET (the_prompt), y, r->x, 1, prompt_width);
     label_set_text (the_prompt, mc_prompt);
-    widget_set_size (WIDGET (cmdline), y, mw->x + prompt_width, 1, mw->cols - prompt_width);
+    widget_set_size (WIDGET (cmdline), y, r->x + prompt_width, 1, r->cols - prompt_width);
 
     widget_show (WIDGET (the_prompt));
     widget_show (WIDGET (cmdline));
@@ -1058,7 +1066,7 @@ rotate_dash (gboolean show)
     if (show && !mc_time_elapsed (&timestamp, delay))
         return;
 
-    widget_gotoyx (w, menubar_visible ? 1 : 0, w->cols - 1);
+    widget_gotoyx (w, menubar_visible ? 1 : 0, w->rect.cols - 1);
     tty_setcolor (NORMAL_COLOR);
 
     if (!show)
@@ -1110,7 +1118,7 @@ get_nth_panel_name (int num)
 void
 create_panel (int num, panel_view_mode_t type)
 {
-    int x = 0, y = 0, cols = 0, lines = 0;
+    WRect r = { 0, 0, 0, 0 };
     unsigned int the_other = 0; /* Index to the other panel */
     const char *file_name = NULL;       /* For Quick view */
     Widget *new_widget = NULL, *old_widget = NULL;
@@ -1137,27 +1145,24 @@ create_panel (int num, panel_view_mode_t type)
         Widget *w = panels[num].widget;
         WPanel *panel = PANEL (w);
 
-        x = w->x;
-        y = w->y;
-        cols = w->cols;
-        lines = w->lines;
+        r = w->rect;
         old_widget = w;
         old_type = panels[num].type;
 
         if (old_type == view_listing && panel->frame_size == frame_full && type != view_listing)
         {
-            int md_cols = CONST_WIDGET (filemanager)->cols;
+            int md_cols = CONST_WIDGET (filemanager)->rect.cols;
 
             if (panels_layout.horizontal_split)
             {
-                cols = md_cols;
-                x = 0;
+                r.cols = md_cols;
+                r.x = 0;
             }
             else
             {
-                cols = md_cols - panels_layout.left_panel_size;
+                r.cols = md_cols - panels_layout.left_panel_size;
                 if (num == 1)
-                    x = panels_layout.left_panel_size;
+                    r.x = panels_layout.left_panel_size;
             }
         }
     }
@@ -1175,20 +1180,21 @@ create_panel (int num, panel_view_mode_t type)
             gboolean last_was_panel;
 
             last_was_panel = old_widget != NULL && get_panel_type (num) != view_listing;
-            new_widget = restore_into_right_dir_panel (num, last_was_panel, y, x, lines, cols);
+            new_widget =
+                restore_into_right_dir_panel (num, last_was_panel, r.y, r.x, r.lines, r.cols);
             break;
         }
 
     case view_info:
-        new_widget = WIDGET (info_new (y, x, lines, cols));
+        new_widget = WIDGET (info_new (r.y, r.x, r.lines, r.cols));
         break;
 
     case view_tree:
-        new_widget = WIDGET (tree_new (y, x, lines, cols, TRUE));
+        new_widget = WIDGET (tree_new (r.y, r.x, r.lines, r.cols, TRUE));
         break;
 
     case view_quick:
-        new_widget = WIDGET (mcview_new (y, x, lines, cols, TRUE));
+        new_widget = WIDGET (mcview_new (r.y, r.x, r.lines, r.cols, TRUE));
         the_other_panel = PANEL (panels[the_other].widget);
         if (the_other_panel != NULL)
             file_name = the_other_panel->dir.list[the_other_panel->selected].fname->str;
@@ -1320,7 +1326,7 @@ swap_panels (void)
     else
     {
         WPanel *tmp_panel;
-        int x, y, cols, lines;
+        WRect r;
         int tmp_type;
 
         tmp_panel = right_panel;
@@ -1344,20 +1350,9 @@ swap_panels (void)
             }
         }
 
-        x = panels[0].widget->x;
-        y = panels[0].widget->y;
-        cols = panels[0].widget->cols;
-        lines = panels[0].widget->lines;
-
-        panels[0].widget->x = panels[1].widget->x;
-        panels[0].widget->y = panels[1].widget->y;
-        panels[0].widget->cols = panels[1].widget->cols;
-        panels[0].widget->lines = panels[1].widget->lines;
-
-        panels[1].widget->x = x;
-        panels[1].widget->y = y;
-        panels[1].widget->cols = cols;
-        panels[1].widget->lines = lines;
+        r = panels[0].widget->rect;
+        panels[0].widget->rect = panels[1].widget->rect;
+        panels[1].widget->rect = r;
 
         tmp_widget = panels[0].widget;
         panels[0].widget = panels[1].widget;

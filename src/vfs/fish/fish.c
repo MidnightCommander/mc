@@ -8,7 +8,7 @@
    Written by:
    Pavel Machek, 1998
    Michal Svec, 2000
-   Andrew Borodin <aborodin@vmail.ru>, 2010-2019
+   Andrew Borodin <aborodin@vmail.ru>, 2010-2022
    Slava Zanko <slavazanko@gmail.com>, 2010, 2013
    Ilia Maslakov <il.smind@gmail.com>, 2010
 
@@ -747,7 +747,7 @@ fish_archive_same (const vfs_path_element_t * vpath_element, struct vfs_s_super 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
+fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, const char *remote_path)
 {
     struct vfs_s_super *super = dir->super;
     char buffer[BUF_8K] = "\0";

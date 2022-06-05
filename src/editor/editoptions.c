@@ -6,7 +6,7 @@
 
    Written by:
    Paul Sheer, 1996, 1997
-   Andrew Borodin <aborodin@vmail.ru>, 2012
+   Andrew Borodin <aborodin@vmail.ru>, 2012-2022
 
    This file is part of the Midnight Commander.
 
@@ -184,9 +184,10 @@ edit_options_dialog (WDialog * h)
             /* *INDENT-ON* */
         };
 
+        WRect r = { -1, -1, 0, 74 };
+
         quick_dialog_t qdlg = {
-            -1, -1, 74,
-            N_("Editor options"), "[Editor options]",
+            r, N_("Editor options"), "[Editor options]",
             quick_widgets, NULL, NULL
         };
 

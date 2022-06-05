@@ -6,6 +6,7 @@
 
    Written by:
    Slava Zanko <slavazanko@gmail.com>, 2011, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2011-2022
 
    This file is part of the Midnight Commander.
 
@@ -219,7 +220,7 @@ mc_open (const vfs_path_t * vpath, int flags, ...)
             result = vfs_new_handle (path_element->class, info);
     }
     else
-        errno = -EOPNOTSUPP;
+        errno = ENOTSUP;
 
     return result;
 }
@@ -243,7 +244,7 @@ int mc_##name inarg \
 \
     result = path_element->class->name != NULL ? path_element->class->name callarg : -1; \
     if (result == -1) \
-        errno = path_element->class->name != NULL ? vfs_ferrno (path_element->class) : E_NOTSUPP; \
+        errno = path_element->class->name != NULL ? vfs_ferrno (path_element->class) : ENOTSUP; \
     return result; \
 }
 
@@ -279,7 +280,7 @@ mc_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
             if (result == -1)
                 errno =
                     path_element->class->symlink != NULL ?
-                    vfs_ferrno (path_element->class) : E_NOTSUPP;
+                    vfs_ferrno (path_element->class) : ENOTSUP;
         }
     }
     return result;
@@ -305,7 +306,7 @@ ssize_t mc_##name (int handle, C void *buf, size_t count) \
 \
     result = vfs->name != NULL ? vfs->name (fsinfo, buf, count) : -1; \
     if (result == -1) \
-        errno = vfs->name != NULL ? vfs_ferrno (vfs) : E_NOTSUPP; \
+        errno = vfs->name != NULL ? vfs_ferrno (vfs) : ENOTSUP; \
     return result; \
 }
 
@@ -341,7 +342,7 @@ int mc_##name (const vfs_path_t *vpath1, const vfs_path_t *vpath2) \
     result = path_element1->class->name != NULL \
         ? path_element1->class->name (vpath1, vpath2) : -1; \
     if (result == -1) \
-        errno = path_element1->class->name != NULL ? vfs_ferrno (path_element1->class) : E_NOTSUPP; \
+        errno = path_element1->class->name != NULL ? vfs_ferrno (path_element1->class) : ENOTSUP; \
     return result; \
 }
 
@@ -427,14 +428,14 @@ mc_opendir (const vfs_path_t * vpath)
     path_element = (vfs_path_element_t *) vfs_path_get_by_index (vpath, -1);
     if (!vfs_path_element_valid (path_element))
     {
-        errno = E_NOTSUPP;
+        errno = ENOTSUP;
         return NULL;
     }
 
     info = path_element->class->opendir ? path_element->class->opendir (vpath) : NULL;
     if (info == NULL)
     {
-        errno = path_element->class->opendir ? vfs_ferrno (path_element->class) : E_NOTSUPP;
+        errno = path_element->class->opendir ? vfs_ferrno (path_element->class) : ENOTSUP;
         return NULL;
     }
 
@@ -494,7 +495,7 @@ mc_readdir (DIR * dirp)
         vfs_dirent_free (entry);
     }
     if (entry == NULL)
-        errno = vfs->readdir ? vfs_ferrno (vfs) : E_NOTSUPP;
+        errno = vfs->readdir ? vfs_ferrno (vfs) : ENOTSUP;
     return (entry != NULL) ? mc_readdir_result : NULL;
 }
 
@@ -550,7 +551,7 @@ mc_stat (const vfs_path_t * vpath, struct stat *buf)
     {
         result = path_element->class->stat ? path_element->class->stat (vpath, buf) : -1;
         if (result == -1)
-            errno = path_element->class->name ? vfs_ferrno (path_element->class) : E_NOTSUPP;
+            errno = path_element->class->name ? vfs_ferrno (path_element->class) : ENOTSUP;
     }
 
     return result;
@@ -572,7 +573,7 @@ mc_lstat (const vfs_path_t * vpath, struct stat *buf)
     {
         result = path_element->class->lstat ? path_element->class->lstat (vpath, buf) : -1;
         if (result == -1)
-            errno = path_element->class->name ? vfs_ferrno (path_element->class) : E_NOTSUPP;
+            errno = path_element->class->name ? vfs_ferrno (path_element->class) : ENOTSUP;
     }
 
     return result;
@@ -596,7 +597,7 @@ mc_fstat (int handle, struct stat *buf)
 
     result = vfs->fstat ? vfs->fstat (fsinfo, buf) : -1;
     if (result == -1)
-        errno = vfs->fstat ? vfs_ferrno (vfs) : E_NOTSUPP;
+        errno = vfs->fstat ? vfs_ferrno (vfs) : ENOTSUP;
     return result;
 }
 
@@ -648,7 +649,8 @@ mc_ungetlocalcopy (const vfs_path_t * pathname_vpath, const vfs_path_t * local_v
 /**
  * VFS chdir.
  *
- * @param vpath VFS-path
+ * @param vpath VFS path.
+ *              May be NULL. In this case NULL is returned and errno set to 0.
  *
  * @return 0 on success, -1 on failure.
  */
@@ -663,7 +665,10 @@ mc_chdir (const vfs_path_t * vpath)
     vfs_path_t *cd_vpath;
 
     if (vpath == NULL)
+    {
+        errno = 0;
         return (-1);
+    }
 
     if (vpath->relative)
         cd_vpath = vfs_path_to_absolute (vpath);
@@ -671,9 +676,17 @@ mc_chdir (const vfs_path_t * vpath)
         cd_vpath = vfs_path_clone (vpath);
 
     path_element = vfs_path_get_by_index (cd_vpath, -1);
-    if (!vfs_path_element_valid (path_element) || path_element->class->chdir == NULL)
+    if (!vfs_path_element_valid (path_element))
+    {
+        errno = EINVAL;
         goto error_end;
+    }
 
+    if (path_element->class->chdir == NULL)
+    {
+        errno = ENOTSUP;
+        goto error_end;
+    }
 
     result = path_element->class->chdir (cd_vpath);
     if (result == -1)
@@ -745,7 +758,7 @@ mc_lseek (int fd, off_t offset, int whence)
 
     result = vfs->lseek ? vfs->lseek (fsinfo, offset, whence) : -1;
     if (result == -1)
-        errno = vfs->lseek ? vfs_ferrno (vfs) : E_NOTSUPP;
+        errno = vfs->lseek ? vfs_ferrno (vfs) : ENOTSUP;
     return result;
 }
 

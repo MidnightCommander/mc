@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-04-10 17:12+0300\n"
+"POT-Creation-Date: 2022-06-05 19:48+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Mantas Kriaučiūnas Baltix <mantas@akl.lt>, 2020\n"
 "Language-Team: Lithuanian (http://www.transifex.com/mc/mc/language/lt/)\n"
@@ -1169,7 +1169,8 @@ msgstr ""
 msgid "Run sort"
 msgstr "Rikiuoti"
 
-msgid "Enter sort options (see manpage) separated by whitespace:"
+#, fuzzy
+msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr "Įveskite rikiavimo parinktis (žiūrėkite 'manpage') atskirtas tarpais:"
 
 msgid "Sort"
@@ -4141,6 +4142,22 @@ msgstr "ftpfs: jungimasis į serverį nepavyko: %s"
 #, c-format
 msgid "Waiting to retry... %d (Control-G to cancel)"
 msgstr ""
+
+#, c-format
+msgid "ftpfs: could not make address-to-name translation: %s"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "ftpfs: try reconnect to server, attempt %u"
+msgstr "ftpfs: jungimasis į serverį nepavyko: %s"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not get socket name: %s"
+msgstr "ftpfs: nepavyko nustatyti pasyvaus režimo"
+
+#, fuzzy
+msgid "ftpfs: could not reconnect to server"
+msgstr "ftpfs: jungimasis į serverį nepavyko: %s"
 
 msgid "ftpfs: invalid address family"
 msgstr ""

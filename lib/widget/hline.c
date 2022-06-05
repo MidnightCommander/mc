@@ -10,7 +10,7 @@
    Jakub Jelinek, 1995
    Andrej Borsenkow, 1996
    Norbert Warmuth, 1997
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2009-2022
 
    This file is part of the Midnight Commander.
 
@@ -61,10 +61,12 @@ hline_adjust_cols (WHLine * l)
 {
     if (l->auto_adjust_cols)
     {
-        Widget *w = WIDGET (l);
-        Widget *wo = WIDGET (w->owner);
+        Widget *wl = WIDGET (l);
+        const Widget *o = CONST_WIDGET (wl->owner);
+        WRect *w = &wl->rect;
+        const WRect *wo = &o->rect;
 
-        if (DIALOG (wo)->compact)
+        if (CONST_DIALOG (o)->compact)
         {
             w->x = wo->x;
             w->cols = wo->cols;
@@ -92,7 +94,7 @@ hline_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
 
     case MSG_RESIZE:
         hline_adjust_cols (l);
-        w->y = RECT (data)->y;
+        w->rect.y = RECT (data)->y;
         return MSG_HANDLED;
 
     case MSG_DRAW:
@@ -106,13 +108,13 @@ hline_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
             tty_setcolor (colors[DLG_COLOR_NORMAL]);
         }
 
-        tty_draw_hline (w->y, w->x + 1, ACS_HLINE, w->cols - 2);
+        tty_draw_hline (w->rect.y, w->rect.x + 1, ACS_HLINE, w->rect.cols - 2);
 
         if (l->auto_adjust_cols)
         {
             widget_gotoyx (w, 0, 0);
             tty_print_alt_char (ACS_LTEE, FALSE);
-            widget_gotoyx (w, 0, w->cols - 1);
+            widget_gotoyx (w, 0, w->rect.cols - 1);
             tty_print_alt_char (ACS_RTEE, FALSE);
         }
 
@@ -121,7 +123,7 @@ hline_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
             int text_width;
 
             text_width = str_term_width1 (l->text);
-            widget_gotoyx (w, 0, (w->cols - text_width) / 2);
+            widget_gotoyx (w, 0, (w->rect.cols - text_width) / 2);
             tty_print_string (l->text);
         }
         return MSG_HANDLED;
@@ -142,13 +144,14 @@ hline_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
 WHLine *
 hline_new (int y, int x, int width)
 {
+    WRect r = { y, x, 1, width };
     WHLine *l;
     Widget *w;
-    int lines = 1;
 
     l = g_new (WHLine, 1);
     w = WIDGET (l);
-    widget_init (w, y, x, lines, width < 0 ? 1 : width, hline_callback, NULL);
+    r.cols = width < 0 ? 1 : width;
+    widget_init (w, &r, hline_callback, NULL);
     l->text = NULL;
     l->auto_adjust_cols = (width < 0);
     l->transparent = FALSE;

@@ -5,7 +5,7 @@
    Free Software Foundation, Inc.
 
    Written by:
-   Andrew Borodin <aborodin@vmail.ru>, 2019.
+   Andrew Borodin <aborodin@vmail.ru>, 2019-2022
 
    This file is part of the Midnight Commander.
 
@@ -217,7 +217,7 @@ show_file_history (const Widget * w, int *action)
 
     file_list = g_list_last (file_list);
 
-    history_descriptor_init (&hd, w->y, w->x, file_list, 0);
+    history_descriptor_init (&hd, w->rect.y, w->rect.x, file_list, 0);
     /* redefine list-specific functions */
     hd.create = file_history_create_item;
     hd.release = file_history_release_item;

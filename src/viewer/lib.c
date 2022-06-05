@@ -14,7 +14,7 @@
    Pavel Machek, 1998
    Roland Illig <roland.illig@gmx.de>, 2004, 2005
    Slava Zanko <slavazanko@google.com>, 2009, 2013
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2013, 2014
+   Andrew Borodin <aborodin@vmail.ru>, 2009-2022
    Ilia Maslakov <il.smind@gmail.com>, 2009
 
    This file is part of the Midnight Commander.
@@ -226,8 +226,8 @@ mcview_done (WView * view)
     mcview_close_datasource (view);
     /* the growing buffer is freed with the datasource */
 
-    coord_cache_free (view->coord_cache);
-    view->coord_cache = NULL;
+    if (view->coord_cache != NULL)
+        view->coord_cache = (GPtrArray *) g_ptr_array_free (view->coord_cache, TRUE);
 
     if (view->converter == INVALID_CONV)
         view->converter = str_cnv_from_term;
@@ -398,12 +398,10 @@ mcview_get_title (const WDialog * h, size_t len)
 int
 mcview_calc_percent (WView * view, off_t p)
 {
-    const screen_dimen right = view->status_area.left + view->status_area.width;
-    const screen_dimen height = view->status_area.height;
     off_t filesize;
     int percent;
 
-    if (height < 1 || right < 4)
+    if (view->status_area.cols < 1 || (view->status_area.x + view->status_area.cols) < 4)
         return (-1);
     if (mcview_may_still_grow (view))
         return (-1);

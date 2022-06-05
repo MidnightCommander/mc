@@ -330,8 +330,8 @@ struct quick_widget_t
 
 typedef struct
 {
-    int y, x;                   /* if -1, then center the dialog */
-    int cols;                   /* heigth is calculated automatically */
+    WRect rect;                 /* if rect.x == -1 or rect.y == -1, then dialog is ceneterd;
+                                 * rect.lines is unused and ignored */
     const char *title;
     const char *help;
     quick_widget_t *widgets;

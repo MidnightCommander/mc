@@ -15,7 +15,7 @@
 #define WIDGET(x) ((Widget *)(x))
 #define CONST_WIDGET(x) ((const Widget *)(x))
 
-#define widget_gotoyx(w, _y, _x) tty_gotoyx (CONST_WIDGET(w)->y + (_y), CONST_WIDGET(w)->x + (_x))
+#define widget_gotoyx(w, _y, _x) tty_gotoyx (CONST_WIDGET(w)->rect.y + (_y), CONST_WIDGET(w)->rect.x + (_x))
 /* Sets/clear the specified flag in the options field */
 #define widget_want_cursor(w,i) widget_set_options(w, WOP_WANT_CURSOR, i)
 #define widget_want_hotkey(w,i) widget_set_options(w, WOP_WANT_HOTKEY, i)
@@ -130,8 +130,9 @@ typedef int (*widget_mouse_handle_fn) (Widget * w, Gpm_Event * event);
 /* Every Widget must have this as its first element */
 struct Widget
 {
-    int x, y;
-    int cols, lines;
+    WRect rect;                 /* position and size */
+    /* ATTENTION! For groups, don't change @rect members directly to avoid
+       incorrect reposion and resize of group members.  */
     widget_pos_flags_t pos_flags;       /* repositioning flags */
     widget_options_t options;
     widget_state_t state;
@@ -202,21 +203,21 @@ void hotkey_draw (Widget * w, const hotkey_t hotkey, gboolean focused);
 char *hotkey_get_text (const hotkey_t hotkey);
 
 /* widget initialization */
-void widget_init (Widget * w, int y, int x, int lines, int cols,
-                  widget_cb_fn callback, widget_mouse_cb_fn mouse_callback);
+void widget_init (Widget * w, const WRect * r, widget_cb_fn callback,
+                  widget_mouse_cb_fn mouse_callback);
 /* Default callback for widgets */
 cb_ret_t widget_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
                                   void *data);
 void widget_set_options (Widget * w, widget_options_t options, gboolean enable);
-void widget_adjust_position (widget_pos_flags_t pos_flags, int *y, int *x, int *lines, int *cols);
+void widget_adjust_position (widget_pos_flags_t pos_flags, WRect * r);
 void widget_set_size (Widget * w, int y, int x, int lines, int cols);
+void widget_set_size_rect (Widget * w, WRect * r);
 /* select color for widget in dependance of state */
 void widget_selectcolor (Widget * w, gboolean focused, gboolean hotkey);
 cb_ret_t widget_draw (Widget * w);
 void widget_erase (Widget * w);
 void widget_set_visibility (Widget * w, gboolean make_visible);
 gboolean widget_is_active (const void *w);
-gboolean widget_overlapped (const Widget * a, const Widget * b);
 void widget_replace (Widget * old, Widget * new);
 gboolean widget_is_focusable (const Widget * w);
 void widget_select (Widget * w);
@@ -427,14 +428,6 @@ widget_update_cursor (Widget * w)
 /* --------------------------------------------------------------------------------------------- */
 
 static inline void
-widget_set_size_rect (Widget * w, const WRect * r)
-{
-    widget_set_size (w, r->y, r->x, r->lines, r->cols);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static inline void
 widget_show (Widget * w)
 {
     widget_set_visibility (w, TRUE);
@@ -446,6 +439,22 @@ static inline void
 widget_hide (Widget * w)
 {
     widget_set_visibility (w, FALSE);
+}
+
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+  * Check whether two widgets are overlapped or not.
+  * @param a 1st widget
+  * @param b 2nd widget
+  *
+  * @return TRUE if widgets are overlapped, FALSE otherwise.
+  */
+
+static inline gboolean
+widget_overlapped (const Widget * a, const Widget * b)
+{
+    return rects_are_overlapped (&a->rect, &b->rect);
 }
 
 /* --------------------------------------------------------------------------------------------- */

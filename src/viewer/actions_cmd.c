@@ -14,7 +14,7 @@
    Pavel Machek, 1998
    Roland Illig <roland.illig@gmx.de>, 2004, 2005
    Slava Zanko <slavazanko@google.com>, 2009, 2013
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2009-2022
    Ilia Maslakov <il.smind@gmail.com>, 2009
 
    This file is part of the Midnight Commander.
@@ -510,16 +510,16 @@ mcview_execute_cmd (WView * view, long command)
         mcview_move_down (view, 1);
         break;
     case CK_HalfPageUp:
-        mcview_move_up (view, (view->data_area.height + 1) / 2);
+        mcview_move_up (view, (view->data_area.lines + 1) / 2);
         break;
     case CK_HalfPageDown:
-        mcview_move_down (view, (view->data_area.height + 1) / 2);
+        mcview_move_down (view, (view->data_area.lines + 1) / 2);
         break;
     case CK_PageUp:
-        mcview_move_up (view, view->data_area.height);
+        mcview_move_up (view, view->data_area.lines);
         break;
     case CK_PageDown:
-        mcview_move_down (view, view->data_area.height);
+        mcview_move_down (view, view->data_area.lines);
         break;
     case CK_Top:
         mcview_moveto_top (view);
@@ -601,7 +601,7 @@ mcview_handle_key (WView * view, int key)
         return MSG_HANDLED;
 
 #ifdef MC_ENABLE_DEBUGGING_CODE
-    if (c == 't')
+    if (key == 't')
     {                           /* mnemonic: "test" */
         mcview_ccache_dump (view);
         return MSG_HANDLED;

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-04-10 17:12+0300\n"
+"POT-Creation-Date: 2022-06-05 19:48+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
 "Language-Team: Vietnamese (http://www.transifex.com/mc/mc/language/vi/)\n"
@@ -1126,7 +1126,7 @@ msgstr ""
 msgid "Run sort"
 msgstr ""
 
-msgid "Enter sort options (see manpage) separated by whitespace:"
+msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr ""
 
 msgid "Sort"
@@ -4041,6 +4041,22 @@ msgstr "ftpfs: kết nối tới máy chủ không thành công: %s"
 #, c-format
 msgid "Waiting to retry... %d (Control-G to cancel)"
 msgstr ""
+
+#, c-format
+msgid "ftpfs: could not make address-to-name translation: %s"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "ftpfs: try reconnect to server, attempt %u"
+msgstr "ftpfs: kết nối tới máy chủ không thành công: %s"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not get socket name: %s"
+msgstr "ftpfs: không đặt được chế độ bị động (passive)"
+
+#, fuzzy
+msgid "ftpfs: could not reconnect to server"
+msgstr "ftpfs: kết nối tới máy chủ không thành công: %s"
 
 msgid "ftpfs: invalid address family"
 msgstr ""

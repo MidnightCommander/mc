@@ -10,7 +10,7 @@
    Jakub Jelinek, 1995
    Andrej Borsenkow, 1996
    Norbert Warmuth, 1997
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2009-2022
 
    This file is part of the Midnight Commander.
 
@@ -68,7 +68,7 @@ groupbox_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
 
             disabled = widget_get_state (w, WST_DISABLED);
             tty_setcolor (disabled ? DISABLED_COLOR : colors[DLG_COLOR_NORMAL]);
-            tty_draw_box (w->y, w->x, w->lines, w->cols, TRUE);
+            tty_draw_box (w->rect.y, w->rect.x, w->rect.lines, w->rect.cols, TRUE);
 
             if (g->title != NULL)
             {
@@ -95,12 +95,13 @@ groupbox_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
 WGroupbox *
 groupbox_new (int y, int x, int height, int width, const char *title)
 {
+    WRect r = { y, x, height, width };
     WGroupbox *g;
     Widget *w;
 
     g = g_new (WGroupbox, 1);
     w = WIDGET (g);
-    widget_init (w, y, x, height, width, groupbox_callback, NULL);
+    widget_init (w, &r, groupbox_callback, NULL);
 
     g->title = NULL;
     groupbox_set_title (g, title);

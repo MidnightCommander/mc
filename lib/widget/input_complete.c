@@ -8,7 +8,7 @@
    Written by:
    Jakub Jelinek, 1995
    Slava Zanko <slavazanko@gmail.com>, 2013
-   Andrew Borodin <aborodin@vmail.ru>, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2013-2022
 
    This file is part of the Midnight Commander.
 
@@ -980,38 +980,47 @@ insert_text (WInput * in, char *text, ssize_t size)
 {
     size_t text_len;
     int buff_len;
+    ssize_t new_size;
 
     text_len = strlen (text);
-    buff_len = str_length (in->buffer);
+    buff_len = str_length (in->buffer->str);
     if (size < 0)
         size = (ssize_t) text_len;
     else
         size = MIN (size, (ssize_t) text_len);
-    size += start - end;
-    if (strlen (in->buffer) + size >= (size_t) in->current_max_size)
-    {
-        /* Expand the buffer */
-        char *narea;
-        Widget *w = WIDGET (in);
 
-        narea = g_try_realloc (in->buffer, in->current_max_size + size + w->cols);
-        if (narea != NULL)
+    new_size = size + start - end;
+    if (new_size != 0)
+    {
+        /* make a hole within buffer */
+
+        size_t tail_len;
+
+        tail_len = in->buffer->len - end;
+        if (tail_len != 0)
         {
-            in->buffer = narea;
-            in->current_max_size += size + w->cols;
+            char *tail;
+            size_t hole_end;
+
+            tail = g_strndup (in->buffer->str + end, tail_len);
+
+            hole_end = end + new_size;
+            if (in->buffer->len < hole_end)
+                g_string_set_size (in->buffer, hole_end + tail_len);
+
+            g_string_overwrite_len (in->buffer, hole_end, tail, tail_len);
+
+            g_free (tail);
         }
     }
-    if (strlen (in->buffer) + 1 < (size_t) in->current_max_size)
-    {
-        if (size != 0)
-            memmove (in->buffer + end + size, in->buffer + end, strlen (&in->buffer[end]) + 1);
-        memmove (in->buffer + start, text, size - (start - end));
-        in->point += str_length (in->buffer) - buff_len;
-        input_update (in, TRUE);
-        end += size;
-    }
 
-    return size != 0;
+    g_string_overwrite_len (in->buffer, start, text, size);
+
+    in->point += str_length (in->buffer->str) - buff_len;
+    input_update (in, TRUE);
+    end += new_size;
+
+    return new_size != 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1047,7 +1056,7 @@ complete_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
             /* Refill the list box and start again */
             else if (end == min_end)
             {
-                end = str_get_prev_char (&input->buffer[end]) - input->buffer;
+                end = str_get_prev_char (input->buffer->str + end) - input->buffer->str;
                 input_handle_char (input, parm);
                 h->ret_value = B_USER;
                 dlg_stop (h);
@@ -1058,14 +1067,14 @@ complete_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
                 int i;
                 GList *e;
 
-                new_end = str_get_prev_char (&input->buffer[end]) - input->buffer;
+                new_end = str_get_prev_char (input->buffer->str + end) - input->buffer->str;
 
                 for (i = 0, e = listbox_get_first_link (LISTBOX (g->current->data));
                      e != NULL; i++, e = g_list_next (e))
                 {
                     WLEntry *le = LENTRY (e->data);
 
-                    if (strncmp (input->buffer + start, le->text, new_end - start) == 0)
+                    if (strncmp (input->buffer->str + start, le->text, new_end - start) == 0)
                     {
                         listbox_select_entry (LISTBOX (g->current->data), i);
                         end = new_end;
@@ -1119,8 +1128,8 @@ complete_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
                 {
                     WLEntry *le = LENTRY (e->data);
 
-                    if (strncmp (input->buffer + start, le->text, end - start) == 0
-                        && strncmp (&le->text[end - start], buff, bl) == 0)
+                    if (strncmp (input->buffer->str + start, le->text, end - start) == 0
+                        && strncmp (le->text + end - start, buff, bl) == 0)
                     {
                         if (need_redraw == 0)
                         {
@@ -1199,7 +1208,7 @@ complete_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
 static gboolean
 complete_engine (WInput * in, int what_to_do)
 {
-    if (in->completions != NULL && str_offset_to_pos (in->buffer, in->point) != end)
+    if (in->completions != NULL && str_offset_to_pos (in->buffer->str, in->point) != end)
         input_complete_free (in);
 
     if (in->completions == NULL)
@@ -1236,8 +1245,8 @@ complete_engine (WInput * in, int what_to_do)
                     maxlen = i;
             }
 
-            start_x = WIDGET (in)->x;
-            start_y = WIDGET (in)->y;
+            start_x = WIDGET (in)->rect.x;
+            start_y = WIDGET (in)->rect.y;
             if (start_y - 2 >= count)
             {
                 y = start_y - 2 - count;
@@ -1408,9 +1417,9 @@ complete_engine_fill_completions (WInput * in)
 
     word_separators = (in->completion_flags & INPUT_COMPLETE_SHELL_ESC) ? " \t;|<>" : "\t;|<>";
 
-    end = str_offset_to_pos (in->buffer, in->point);
+    end = str_offset_to_pos (in->buffer->str, in->point);
 
-    s = in->buffer;
+    s = in->buffer->str;
     if (in->point != 0)
     {
         /* get symbol before in->point */
@@ -1420,20 +1429,20 @@ complete_engine_fill_completions (WInput * in)
             str_next_char (&s);
     }
 
-    for (; s >= in->buffer; str_prev_char (&s))
+    for (; s >= in->buffer->str; str_prev_char (&s))
     {
-        start = s - in->buffer;
-        if (strchr (word_separators, *s) != NULL && !strutils_is_char_escaped (in->buffer, s))
+        start = s - in->buffer->str;
+        if (strchr (word_separators, *s) != NULL && !strutils_is_char_escaped (in->buffer->str, s))
             break;
     }
 
     if (start < end)
     {
         str_next_char (&s);
-        start = s - in->buffer;
+        start = s - in->buffer->str;
     }
 
-    in->completions = try_complete (in->buffer, &start, &end, in->completion_flags);
+    in->completions = try_complete (in->buffer->str, &start, &end, in->completion_flags);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1444,7 +1453,7 @@ input_complete (WInput * in)
 {
     int engine_flags;
 
-    if (!str_is_valid_string (in->buffer))
+    if (!str_is_valid_string (in->buffer->str))
         return;
 
     if (in->completions != NULL)

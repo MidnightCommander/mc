@@ -14,7 +14,7 @@
    Pavel Machek, 1998
    Roland Illig <roland.illig@gmx.de>, 2004, 2005
    Slava Zanko <slavazanko@google.com>, 2009
-   Andrew Borodin <aborodin@vmail.ru>, 2009
+   Andrew Borodin <aborodin@vmail.ru>, 2009-2022
    Ilia Maslakov <il.smind@gmail.com>, 2009
 
    This file is part of the Midnight Commander.
@@ -49,7 +49,7 @@
 
 #include <config.h>
 
-#include <string.h>             /* memmove() */
+#include <string.h>             /* memset() */
 #ifdef MC_ENABLE_DEBUGGING_CODE
 #include <inttypes.h>           /* uintmax_t */
 #endif
@@ -65,37 +65,27 @@
 #define VIEW_COORD_CACHE_GRANUL 1024
 #define CACHE_CAPACITY_DELTA 64
 
+#define coord_cache_index(c, i) ((coord_cache_entry_t *) g_ptr_array_index ((c), (i)))
+
 /*** file scope type declarations ****************************************************************/
 
 typedef gboolean (*cmp_func_t) (const coord_cache_entry_t * a, const coord_cache_entry_t * b);
 
 /*** file scope variables ************************************************************************/
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
 /* insert new cache entry into the cache */
-static void
-mcview_ccache_add_entry (coord_cache_t * cache, size_t pos, const coord_cache_entry_t * entry)
+static inline void
+mcview_ccache_add_entry (GPtrArray * cache, const coord_cache_entry_t * entry)
 {
-    if ((cache == NULL) || (entry == NULL))
-        return;
-
-    pos = MIN (pos, cache->size);
-
-    /* increase cache capacity if needed */
-    if (cache->size == cache->capacity)
-    {
-        cache->capacity += CACHE_CAPACITY_DELTA;
-        cache->cache = g_realloc (cache->cache, cache->capacity * sizeof (*cache->cache));
-    }
-
-    /* insert new entry */
-    if (pos != cache->size)
-        memmove (cache->cache[pos + 1], cache->cache[pos],
-                 (cache->size - pos) * sizeof (*cache->cache));
-    cache->cache[pos] = g_memdup (entry, sizeof (*entry));
-    cache->size++;
+#if GLIB_CHECK_VERSION (2, 68, 0)
+    g_ptr_array_add (cache, g_memdup2 (entry, sizeof (*entry)));
+#else
+    g_ptr_array_add (cache, g_memdup (entry, sizeof (*entry)));
+#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -120,7 +110,6 @@ mcview_coord_cache_entry_less_plain (const coord_cache_entry_t * a, const coord_
     return FALSE;
 }
 
-
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
@@ -135,7 +124,6 @@ mcview_coord_cache_entry_less_nroff (const coord_cache_entry_t * a, const coord_
     return FALSE;
 }
 
-
 /* --------------------------------------------------------------------------------------------- */
 /** Find and return the index of the last cache entry that is
  * smaller than ''coord'', according to the criterion ''sort_by''. */
@@ -144,7 +132,7 @@ static inline size_t
 mcview_ccache_find (WView * view, const coord_cache_entry_t * coord, cmp_func_t cmp_func)
 {
     size_t base = 0;
-    size_t limit = view->coord_cache->size;
+    size_t limit = view->coord_cache->len;
 
     g_assert (limit != 0);
 
@@ -153,54 +141,25 @@ mcview_ccache_find (WView * view, const coord_cache_entry_t * coord, cmp_func_t 
         size_t i;
 
         i = base + limit / 2;
-        if (cmp_func (coord, view->coord_cache->cache[i]))
+        if (cmp_func (coord, coord_cache_index (view->coord_cache, i)))
         {
             /* continue the search in the lower half of the cache */
+            ;
         }
         else
         {
             /* continue the search in the upper half of the cache */
             base = i;
         }
+
         limit = (limit + 1) / 2;
     }
+
     return base;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
-/* --------------------------------------------------------------------------------------------- */
-
-coord_cache_t *
-coord_cache_new (void)
-{
-    coord_cache_t *cache;
-
-    cache = g_new (coord_cache_t, 1);
-    cache->size = 0;
-    cache->capacity = CACHE_CAPACITY_DELTA;
-    cache->cache = g_malloc0 (cache->capacity * sizeof (*cache->cache));
-
-    return cache;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-coord_cache_free (coord_cache_t * cache)
-{
-    if (cache != NULL)
-    {
-        size_t i;
-
-        for (i = 0; i < cache->size; i++)
-            g_free (cache->cache[i]);
-
-        g_free (cache->cache);
-        g_free (cache);
-    }
-}
-
 /* --------------------------------------------------------------------------------------------- */
 
 #ifdef MC_ENABLE_DEBUGGING_CODE
@@ -211,7 +170,7 @@ mcview_ccache_dump (WView * view)
     FILE *f;
     off_t offset, line, column, nextline_offset, filesize;
     guint i;
-    const coord_cache_t *cache = view->coord_cache;
+    const GPtrArray *cache = view->coord_cache;
 
     g_assert (cache != NULL);
 
@@ -220,20 +179,22 @@ mcview_ccache_dump (WView * view)
     f = fopen ("mcview-ccache.out", "w");
     if (f == NULL)
         return;
+
     (void) setvbuf (f, NULL, _IONBF, 0);
 
     /* cache entries */
-    for (i = 0; i < cache->size; i++)
+    for (i = 0; i < cache->len; i++)
     {
+        coord_cache_entry_t *e;
+
+        e = coord_cache_index (cache, i);
         (void) fprintf (f,
                         "entry %8u  offset %8" PRIuMAX
                         "  line %8" PRIuMAX "  column %8" PRIuMAX
                         "  nroff_column %8" PRIuMAX "\n",
                         (unsigned int) i,
-                        (uintmax_t) cache->cache[i]->cc_offset,
-                        (uintmax_t) cache->cache[i]->cc_line,
-                        (uintmax_t) cache->cache[i]->cc_column,
-                        (uintmax_t) cache->cache[i]->cc_nroff_column);
+                        (uintmax_t) e->cc_offset, (uintmax_t) e->cc_line, (uintmax_t) e->cc_column,
+                        (uintmax_t) e->cc_nroff_column);
     }
     (void) fprintf (f, "\n");
 
@@ -281,7 +242,7 @@ void
 mcview_ccache_lookup (WView * view, coord_cache_entry_t * coord, enum ccache_type lookup_what)
 {
     size_t i;
-    coord_cache_t *cache;
+    GPtrArray *cache;
     coord_cache_entry_t current, next, entry;
     enum ccache_type sorter;
     off_t limit;
@@ -295,17 +256,14 @@ mcview_ccache_lookup (WView * view, coord_cache_entry_t * coord, enum ccache_typ
     } nroff_state;
 
     if (view->coord_cache == NULL)
-        view->coord_cache = coord_cache_new ();
+        view->coord_cache = g_ptr_array_new_full (CACHE_CAPACITY_DELTA, g_free);
 
     cache = view->coord_cache;
 
-    if (cache->size == 0)
+    if (cache->len == 0)
     {
-        current.cc_offset = 0;
-        current.cc_line = 0;
-        current.cc_column = 0;
-        current.cc_nroff_column = 0;
-        mcview_ccache_add_entry (cache, 0, &current);
+        memset (&current, 0, sizeof (current));
+        mcview_ccache_add_entry (cache, &current);
     }
 
     sorter = (lookup_what == CCACHE_OFFSET) ? CCACHE_LINECOL : CCACHE_OFFSET;
@@ -317,7 +275,6 @@ mcview_ccache_lookup (WView * view, coord_cache_entry_t * coord, enum ccache_typ
     else
         cmp_func = mcview_coord_cache_entry_less_plain;
 
-
     tty_enable_interrupt_key ();
 
   retry:
@@ -325,9 +282,9 @@ mcview_ccache_lookup (WView * view, coord_cache_entry_t * coord, enum ccache_typ
     i = mcview_ccache_find (view, coord, cmp_func);
     /* now i points to the lower neighbor in the cache */
 
-    current = *cache->cache[i];
-    if (i + 1 < view->coord_cache->size)
-        limit = cache->cache[i + 1]->cc_offset;
+    current = *coord_cache_index (cache, i);
+    if (i + 1 < view->coord_cache->len)
+        limit = coord_cache_index (cache, i + 1)->cc_offset;
     else
         limit = current.cc_offset + VIEW_COORD_CACHE_GRANUL;
 
@@ -340,20 +297,11 @@ mcview_ccache_lookup (WView * view, coord_cache_entry_t * coord, enum ccache_typ
         if (!mcview_get_byte (view, current.cc_offset, &c))
             break;
 
-        if (!cmp_func (&current, coord))
-        {
-            if (lookup_what == CCACHE_OFFSET && view->mode_flags.nroff
-                && nroff_state != NROFF_START)
-            {
-                /* don't break here */
-            }
-            else
-            {
-                break;
-            }
-        }
+        if (!cmp_func (&current, coord) &&
+            (lookup_what != CCACHE_OFFSET || !view->mode_flags.nroff || nroff_state == NROFF_START))
+            break;
 
-        /* Provide useful default values for ''next'' */
+        /* Provide useful default values for 'next' */
         next.cc_offset = current.cc_offset + 1;
         next.cc_line = current.cc_line;
         next.cc_column = current.cc_column + 1;
@@ -381,29 +329,23 @@ mcview_ccache_lookup (WView * view, coord_cache_entry_t * coord, enum ccache_typ
                 next.cc_column = 0;
                 next.cc_nroff_column = 0;
             }
-
         }
         else if (nroff_state == NROFF_BACKSPACE)
-        {
             next.cc_nroff_column = current.cc_nroff_column - 1;
-
-        }
         else if (c == '\t')
         {
             next.cc_column = mcview_offset_rounddown (current.cc_column, 8) + 8;
             next.cc_nroff_column = mcview_offset_rounddown (current.cc_nroff_column, 8) + 8;
-
         }
         else if (c == '\n')
         {
             next.cc_line = current.cc_line + 1;
             next.cc_column = 0;
             next.cc_nroff_column = 0;
-
         }
         else
         {
-            /* Use all default values from above */
+            ;                   /* Use all default values from above */
         }
 
         switch (nroff_state)
@@ -428,9 +370,9 @@ mcview_ccache_lookup (WView * view, coord_cache_entry_t * coord, enum ccache_typ
             entry = next;
     }
 
-    if (i + 1 == cache->size && entry.cc_offset != cache->cache[i]->cc_offset)
+    if (i + 1 == cache->len && entry.cc_offset != coord_cache_index (cache, i)->cc_offset)
     {
-        mcview_ccache_add_entry (cache, cache->size, &entry);
+        mcview_ccache_add_entry (cache, &entry);
 
         if (!tty_got_interrupt ())
             goto retry;
@@ -439,9 +381,7 @@ mcview_ccache_lookup (WView * view, coord_cache_entry_t * coord, enum ccache_typ
     tty_disable_interrupt_key ();
 
     if (lookup_what == CCACHE_OFFSET)
-    {
         coord->cc_offset = current.cc_offset;
-    }
     else
     {
         coord->cc_line = current.cc_line;

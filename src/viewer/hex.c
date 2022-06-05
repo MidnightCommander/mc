@@ -14,7 +14,7 @@
    Pavel Machek, 1998
    Roland Illig <roland.illig@gmx.de>, 2004, 2005
    Slava Zanko <slavazanko@google.com>, 2009, 2013
-   Andrew Borodin <aborodin@vmail.ru>, 2009
+   Andrew Borodin <aborodin@vmail.ru>, 2009-2022
    Ilia Maslakov <il.smind@gmail.com>, 2009
 
    This file is part of the Midnight Commander.
@@ -96,21 +96,17 @@ mcview_hex_calculate_boldflag (WView * view, off_t from, struct hexedit_change_n
 void
 mcview_display_hex (WView * view)
 {
-    const screen_dimen top = view->data_area.top;
-    const screen_dimen left = view->data_area.left;
-    const screen_dimen height = view->data_area.height;
-    const screen_dimen width = view->data_area.width;
-    const int ngroups = view->bytes_per_line / 4;
+    const WRect *r = &view->data_area;
+    int ngroups = view->bytes_per_line / 4;
     /* 8 characters are used for the file offset, and every hex group
      * takes 13 characters. Starting at width of 80 columns, the groups
      * are separated by an extra vertical line. Starting at width of 81,
      * there is an extra space before the text column. There is always a
      * mostly empty column on the right, to allow overflowing CJKs.
      */
-    const screen_dimen text_start = 8 + 13 * ngroups +
-        ((width < 80) ? 0 : (width == 80) ? (ngroups - 1) : (ngroups - 1 + 1));
+    int text_start;
 
-    int row;
+    int row = 0;
     off_t from;
     mark_t boldflag_byte = MARK_NORMAL;
     mark_t boldflag_char = MARK_NORMAL;
@@ -123,12 +119,14 @@ mcview_display_hex (WView * view)
 
     char hex_buff[10];          /* A temporary buffer for sprintf and mvwaddstr */
 
+    text_start = 8 + 13 * ngroups +
+        ((r->cols < 80) ? 0 : (r->cols == 80) ? (ngroups - 1) : (ngroups - 1 + 1));
+
     mcview_display_clean (view);
 
     /* Find the first displayable changed byte */
     /* In UTF-8 mode, go back by 1 or maybe 2 lines to handle continuation bytes properly. */
     from = view->dpy_start;
-    row = 0;
 #ifdef HAVE_CHARSET
     if (view->utf8)
     {
@@ -149,20 +147,20 @@ mcview_display_hex (WView * view)
         curr = curr->next;
     }
 
-    for (; mcview_get_byte (view, from, NULL) && row < (int) height; row++)
+    for (; mcview_get_byte (view, from, NULL) && row < r->lines; row++)
     {
-        screen_dimen col = 0;
+        int col = 0;
         int bytes;              /* Number of bytes already printed on the line */
 
         /* Print the hex offset */
         if (row >= 0)
         {
-            size_t i;
+            int i;
 
             g_snprintf (hex_buff, sizeof (hex_buff), "%08" PRIXMAX " ", (uintmax_t) from);
-            widget_gotoyx (view, top + row, left);
+            widget_gotoyx (view, r->y + row, r->x);
             tty_setcolor (VIEW_BOLD_COLOR);
-            for (i = 0; col < width && hex_buff[i] != '\0'; col++, i++)
+            for (i = 0; col < r->cols && hex_buff[i] != '\0'; col++, i++)
                 tty_print_char (hex_buff[i]);
             tty_setcolor (VIEW_NORMAL_COLOR);
         }
@@ -276,13 +274,13 @@ mcview_display_hex (WView * view)
                           view->hexview_in_text ? VIEW_SELECTED_COLOR : VIEW_UNDERLINED_COLOR);
 
             /* Print the hex number */
-            widget_gotoyx (view, top + row, left + col);
-            if (col < width)
+            widget_gotoyx (view, r->y + row, r->x + col);
+            if (col < r->cols)
             {
                 tty_print_char (hex_char[c / 16]);
                 col += 1;
             }
-            if (col < width)
+            if (col < r->cols)
             {
                 tty_print_char (hex_char[c % 16]);
                 col += 1;
@@ -292,7 +290,7 @@ mcview_display_hex (WView * view)
             tty_setcolor (VIEW_NORMAL_COLOR);
             if (bytes != view->bytes_per_line - 1)
             {
-                if (col < width)
+                if (col < r->cols)
                 {
                     tty_print_char (' ');
                     col += 1;
@@ -301,12 +299,12 @@ mcview_display_hex (WView * view)
                 /* After every four bytes, print a group separator */
                 if (bytes % 4 == 3)
                 {
-                    if (view->data_area.width >= 80 && col < width)
+                    if (view->data_area.cols >= 80 && col < r->cols)
                     {
                         tty_print_one_vline (TRUE);
                         col += 1;
                     }
-                    if (col < width)
+                    if (col < r->cols)
                     {
                         tty_print_char (' ');
                         col += 1;
@@ -347,9 +345,9 @@ mcview_display_hex (WView * view)
             }
 
             /* Print corresponding character on the text side */
-            if (text_start + bytes < width)
+            if (text_start + bytes < r->cols)
             {
-                widget_gotoyx (view, top + row, left + text_start + bytes);
+                widget_gotoyx (view, r->y + row, r->x + text_start + bytes);
 #ifdef HAVE_CHARSET
                 if (view->utf8)
                     tty_print_anychar (ch);

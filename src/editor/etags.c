@@ -12,6 +12,7 @@
    Written by:
    Ilia Maslakov <il.smind@gmail.com>, 2009
    Slava Zanko <slavazanko@gmail.com>, 2009
+   Andrew Borodin <aborodin@vmail.ru>, 2010-2022
 
    This file is part of the Midnight Commander.
 
@@ -313,7 +314,7 @@ editcmd_dialog_select_definition_add (gpointer data, gpointer user_data)
 static void
 editcmd_dialog_select_definition_show (WEdit * edit, char *match_expr, GPtrArray * def_hash)
 {
-    const Widget *we = CONST_WIDGET (edit);
+    const WRect *w = &CONST_WIDGET (edit)->rect;
     int start_x, start_y, offset;
     char *curr = NULL;
     WDialog *def_dlg;
@@ -324,14 +325,14 @@ editcmd_dialog_select_definition_show (WEdit * edit, char *match_expr, GPtrArray
     /* calculate the dialog metrics */
     def_dlg_h = def_hash->len + 2;
     def_dlg_w = COLS - 2;       /* will be clarified later */
-    start_x = we->x + edit->curs_col + edit->start_col + EDIT_TEXT_HORIZONTAL_OFFSET +
+    start_x = w->x + edit->curs_col + edit->start_col + EDIT_TEXT_HORIZONTAL_OFFSET +
         (edit->fullscreen ? 0 : 1) + option_line_state_width;
-    start_y = we->y + edit->curs_row + EDIT_TEXT_VERTICAL_OFFSET + (edit->fullscreen ? 0 : 1) + 1;
+    start_y = w->y + edit->curs_row + EDIT_TEXT_VERTICAL_OFFSET + (edit->fullscreen ? 0 : 1) + 1;
 
     if (start_x < 0)
         start_x = 0;
-    if (start_x < we->x + 1)
-        start_x = we->x + 1 + option_line_state_width;
+    if (start_x < w->x + 1)
+        start_x = w->x + 1 + option_line_state_width;
 
     if (def_dlg_h > LINES - 2)
         def_dlg_h = LINES - 2;

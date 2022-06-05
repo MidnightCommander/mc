@@ -10,7 +10,7 @@
    Jakub Jelinek, 1995
    Andrej Borsenkow, 1996
    Norbert Warmuth, 1997
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2013, 2016
+   Andrew Borodin <aborodin@vmail.ru>, 2009-2022
 
    This file is part of the Midnight Commander.
 
@@ -178,7 +178,7 @@ buttonbar_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
             buttonbar_init_button_positions (bb);
             widget_gotoyx (w, 0, 0);
             tty_setcolor (DEFAULT_COLOR);
-            tty_printf ("%-*s", w->cols, "");
+            tty_printf ("%-*s", w->rect.cols, "");
             widget_gotoyx (w, 0, 0);
 
             for (i = 0; i < BUTTONBAR_LABELS_NUM; i++)
@@ -240,12 +240,13 @@ buttonbar_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 WButtonBar *
 buttonbar_new (void)
 {
+    WRect r = { LINES - 1, 0, 1, COLS };
     WButtonBar *bb;
     Widget *w;
 
     bb = g_new0 (WButtonBar, 1);
     w = WIDGET (bb);
-    widget_init (w, LINES - 1, 0, 1, COLS, buttonbar_callback, buttonbar_mouse_callback);
+    widget_init (w, &r, buttonbar_callback, buttonbar_mouse_callback);
 
     w->pos_flags = WPOS_KEEP_HORZ | WPOS_KEEP_BOTTOM;
     widget_want_hotkey (w, TRUE);

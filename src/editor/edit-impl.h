@@ -136,8 +136,7 @@ extern char *edit_window_close_char;
 
 /*** declarations of public functions ************************************************************/
 
-gboolean edit_add_window (WDialog * h, int y, int x, int lines, int cols,
-                          const vfs_path_t * f, long fline);
+gboolean edit_add_window (WDialog * h, const WRect * r, const vfs_path_t * f, long fline);
 WEdit *find_editor (const WDialog * h);
 gboolean edit_widget_is_editor (const Widget * w);
 gboolean edit_drop_hotkey_menu (WDialog * h, int key);
@@ -181,11 +180,11 @@ char *edit_get_write_filter (const vfs_path_t * write_name_vpath,
                              const vfs_path_t * filename_vpath);
 gboolean edit_save_confirm_cmd (WEdit * edit);
 gboolean edit_save_as_cmd (WEdit * edit);
-WEdit *edit_init (WEdit * edit, int y, int x, int lines, int cols,
-                  const vfs_path_t * filename_vpath, long line);
+WEdit *edit_init (WEdit * edit, const WRect * r, const vfs_path_t * filename_vpath, long line);
 gboolean edit_clean (WEdit * edit);
 gboolean edit_ok_to_exit (WEdit * edit);
 gboolean edit_load_cmd (WDialog * h);
+gboolean edit_load_file_from_filename (WDialog * h, const vfs_path_t * vpath, long line);
 gboolean edit_load_file_from_history (WDialog * h);
 gboolean edit_load_syntax_file (WDialog * h);
 gboolean edit_load_menu_file (WDialog * h);

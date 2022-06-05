@@ -10,7 +10,7 @@
    Jakub Jelinek, 1995
    Andrej Borsenkow, 1996
    Norbert Warmuth, 1997
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2013, 2016
+   Andrew Borodin <aborodin@vmail.ru>, 2009-2022
 
    This file is part of the Midnight Commander.
 
@@ -133,6 +133,7 @@ check_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 WCheck *
 check_new (int y, int x, gboolean state, const char *text)
 {
+    WRect r = { y, x, 1, 1 };
     WCheck *c;
     Widget *w;
 
@@ -140,7 +141,8 @@ check_new (int y, int x, gboolean state, const char *text)
     w = WIDGET (c);
     c->text = hotkey_new (text);
     /* 4 is width of "[X] " */
-    widget_init (w, y, x, 1, 4 + hotkey_width (c->text), check_callback, check_mouse_callback);
+    r.cols = 4 + hotkey_width (c->text);
+    widget_init (w, &r, check_callback, check_mouse_callback);
     w->options |= WOP_SELECTABLE | WOP_WANT_CURSOR | WOP_WANT_HOTKEY;
     c->state = state;
 
@@ -166,9 +168,9 @@ check_set_text (WCheck * check, const char *text)
     check->text = hk;
 
     if (check->text.start[0] == '\0' && check->text.hotkey == NULL && check->text.end == NULL)
-        w->cols = 3;            /* "[ ]" */
+        w->rect.cols = 3;       /* "[ ]" */
     else
-        w->cols = 4 + hotkey_width (check->text);       /* "[ ]  text" */
+        w->rect.cols = 4 + hotkey_width (check->text);  /* "[ ]  text" */
 
     widget_draw (w);
 }

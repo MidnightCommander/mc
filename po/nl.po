@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-04-10 17:12+0300\n"
+"POT-Creation-Date: 2022-06-05 19:48+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Richard E. van der Luit <nippur@fedoraproject.org>, "
 "2012-2015,2017,2020\n"
@@ -1206,7 +1206,8 @@ msgstr "U moet eerst een blok selecteren"
 msgid "Run sort"
 msgstr "Sorteren"
 
-msgid "Enter sort options (see manpage) separated by whitespace:"
+#, fuzzy
+msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr "Geef sorteeropties (zie 'man'-pagina) gescheiden door spaties:"
 
 msgid "Sort"
@@ -4263,6 +4264,22 @@ msgstr "ftpfs: verbinding met server mislukt: %s"
 #, c-format
 msgid "Waiting to retry... %d (Control-G to cancel)"
 msgstr "Aan het wachten op nieuwe poging... %d (Control-C om af te breken)"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not make address-to-name translation: %s"
+msgstr "ftpfs: Kan socket niet creëren: %s"
+
+#, fuzzy, c-format
+msgid "ftpfs: try reconnect to server, attempt %u"
+msgstr "ftpfs: verbinding met server mislukt: %s"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not get socket name: %s"
+msgstr "ftpfs: Kan socket niet creëren: %s"
+
+#, fuzzy
+msgid "ftpfs: could not reconnect to server"
+msgstr "ftpfs: Kan socket niet creëren: %s"
 
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: Ongeldige adres familie"

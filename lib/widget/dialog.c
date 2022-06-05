@@ -377,7 +377,7 @@ dlg_default_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
     switch (msg)
     {
     case MSG_MOUSE_CLICK:
-        if (event->y < 0 || event->y >= w->lines || event->x < 0 || event->x >= w->cols)
+        if (event->y < 0 || event->y >= w->rect.lines || event->x < 0 || event->x >= w->rect.cols)
         {
             DIALOG (w)->ret_value = B_CANCEL;
             dlg_stop (DIALOG (w));
@@ -398,6 +398,7 @@ dlg_create (gboolean modal, int y1, int x1, int lines, int cols, widget_pos_flag
             gboolean compact, const int *colors, widget_cb_fn callback,
             widget_mouse_cb_fn mouse_callback, const char *help_ctx, const char *title)
 {
+    WRect r = { y1, x1, lines, cols };
     WDialog *new_d;
     Widget *w;
     WGroup *g;
@@ -405,8 +406,8 @@ dlg_create (gboolean modal, int y1, int x1, int lines, int cols, widget_pos_flag
     new_d = g_new0 (WDialog, 1);
     w = WIDGET (new_d);
     g = GROUP (new_d);
-    widget_adjust_position (pos_flags, &y1, &x1, &lines, &cols);
-    group_init (g, y1, x1, lines, cols, callback != NULL ? callback : dlg_default_callback,
+    widget_adjust_position (pos_flags, &r);
+    group_init (g, &r, callback != NULL ? callback : dlg_default_callback,
                 mouse_callback != NULL ? mouse_callback : dlg_default_mouse_callback);
 
     w->pos_flags = pos_flags;
@@ -432,7 +433,8 @@ dlg_create (gboolean modal, int y1, int x1, int lines, int cols, widget_pos_flag
     {
         w->state |= WST_MODAL;
 
-        new_d->bg = WIDGET (frame_new (0, 0, w->lines, w->cols, title, FALSE, new_d->compact));
+        new_d->bg =
+            WIDGET (frame_new (0, 0, w->rect.lines, w->rect.cols, title, FALSE, new_d->compact));
         group_add_widget (g, new_d->bg);
         frame_set_title (FRAME (new_d->bg), title);
     }

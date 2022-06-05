@@ -6,7 +6,7 @@
 
    Written by:
    Paul Sheer, 1996, 1997
-   Andrew Borodin <aborodin@vmail.ru> 2012, 2013
+   Andrew Borodin <aborodin@vmail.ru> 2012-2022
    Slava Zanko <slavazanko@gmail.com>, 2013
 
    This file is part of the Midnight Commander.
@@ -189,7 +189,7 @@ static inline void
 edit_status_fullscreen (WEdit * edit, int color)
 {
     Widget *h = WIDGET (WIDGET (edit)->owner);
-    const int w = h->cols;
+    const int w = h->rect.cols;
     const int gap = 3;          /* between the filename and the status */
     const int right_gap = 5;    /* at the right end of the screen */
     const int preferred_fname_len = 16;
@@ -254,7 +254,7 @@ edit_status_window (WEdit * edit)
 {
     Widget *w = WIDGET (edit);
     int y, x;
-    int cols = w->cols;
+    int cols = w->rect.cols;
 
     tty_setcolor (STATUSBAR_COLOR);
 
@@ -275,11 +275,11 @@ edit_status_window (WEdit * edit)
 #endif
 
         edit_move (2, 0);
-        tty_printf ("[%s]", str_term_trim (fname, w->cols - 8 - 6));
+        tty_printf ("[%s]", str_term_trim (fname, w->rect.cols - 8 - 6));
     }
 
     tty_getyx (&y, &x);
-    x -= w->x;
+    x -= w->rect.x;
     x += 4;
     if (x + 6 <= cols - 2 - 6)
     {
@@ -292,7 +292,7 @@ edit_status_window (WEdit * edit)
 
     if (cols > 30)
     {
-        edit_move (2, w->lines - 1);
+        edit_move (2, w->rect.lines - 1);
         tty_printf ("%3ld %5ld/%ld %6ld/%ld",
                     edit->curs_col + edit->over_col,
                     edit->buffer.curs_line + 1, edit->buffer.lines + 1, (long) edit->buffer.curs1,
@@ -306,7 +306,7 @@ edit_status_window (WEdit * edit)
      */
     if (cols > 46)
     {
-        edit_move (32, w->lines - 1);
+        edit_move (32, w->rect.lines - 1);
         if (edit->buffer.curs1 >= edit->buffer.size)
             tty_print_string ("[<EOF>       ]");
 #ifdef HAVE_CHARSET
@@ -348,12 +348,12 @@ edit_draw_frame (const WEdit * edit, int color, gboolean active)
     /* draw a frame around edit area */
     tty_setcolor (color);
     /* draw double frame for active window if skin supports that */
-    tty_draw_box (w->y, w->x, w->lines, w->cols, !active);
+    tty_draw_box (w->rect.y, w->rect.x, w->rect.lines, w->rect.cols, !active);
     /* draw a drag marker */
     if (edit->drag_state == MCEDIT_DRAG_NONE)
     {
         tty_setcolor (EDITOR_FRAME_DRAG);
-        widget_gotoyx (w, w->lines - 1, w->cols - 1);
+        widget_gotoyx (w, w->rect.lines - 1, w->rect.cols - 1);
         tty_print_alt_char (ACS_LRCORNER, TRUE);
     }
 }
@@ -374,9 +374,9 @@ edit_draw_window_icons (const WEdit * edit, int color)
 
     tty_setcolor (color);
     if (edit->fullscreen)
-        widget_gotoyx (w->owner, 0, WIDGET (w->owner)->cols - 6);
+        widget_gotoyx (w->owner, 0, WIDGET (w->owner)->rect.cols - 6);
     else
-        widget_gotoyx (w, 0, w->cols - 8);
+        widget_gotoyx (w, 0, w->rect.cols - 8);
     g_snprintf (tmp, sizeof (tmp), "[%s][%s]", edit_window_state_char, edit_window_close_char);
     tty_print_string (tmp);
 }
@@ -412,25 +412,25 @@ print_to_widget (WEdit * edit, long row, int start_col, int start_col_real,
     len = end_col + 1 - start_col;
     wrap_start = option_word_wrap_line_length + edit->start_col;
 
-    if (len > 0 && w->y + y >= 0)
+    if (len > 0 && w->rect.y + y >= 0)
     {
         if (!show_right_margin || wrap_start > end_col)
-            tty_draw_hline (w->y + y, w->x + x1, ' ', len);
+            tty_draw_hline (w->rect.y + y, w->rect.x + x1, ' ', len);
         else if (wrap_start < 0)
         {
             tty_setcolor (EDITOR_RIGHT_MARGIN_COLOR);
-            tty_draw_hline (w->y + y, w->x + x1, ' ', len);
+            tty_draw_hline (w->rect.y + y, w->rect.x + x1, ' ', len);
         }
         else
         {
             if (wrap_start > 0)
-                tty_draw_hline (w->y + y, w->x + x1, ' ', wrap_start);
+                tty_draw_hline (w->rect.y + y, w->rect.x + x1, ' ', wrap_start);
 
             len -= wrap_start;
             if (len > 0)
             {
                 tty_setcolor (EDITOR_RIGHT_MARGIN_COLOR);
-                tty_draw_hline (w->y + y, w->x + x1 + wrap_start, ' ', len);
+                tty_draw_hline (w->rect.y + y, w->rect.x + x1 + wrap_start, ' ', len);
             }
         }
     }
@@ -511,7 +511,7 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
     int book_mark = 0;
     char line_stat[LINE_STATE_WIDTH + 1] = "\0";
 
-    if (row > w->lines - 1 - EDIT_TEXT_VERTICAL_OFFSET - 2 * (edit->fullscreen ? 0 : 1))
+    if (row > w->rect.lines - 1 - EDIT_TEXT_VERTICAL_OFFSET - 2 * (edit->fullscreen ? 0 : 1))
         return;
 
     if (book_mark_query_color (edit, edit->start_line + row, BOOK_MARK_COLOR))
@@ -528,7 +528,7 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
     if (!edit->fullscreen)
     {
         end_col--;
-        if (w->x + w->cols <= WIDGET (w->owner)->cols)
+        if (w->rect.x + w->rect.cols <= WIDGET (w->owner)->rect.cols)
             end_col--;
     }
 
@@ -844,8 +844,9 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
     static long prev_curs_row = 0;
     static off_t prev_curs = 0;
 
-    Widget *w = WIDGET (edit);
-    Widget *wh = WIDGET (w->owner);
+    Widget *we = WIDGET (edit);
+    Widget *wh = WIDGET (we->owner);
+    WRect *w = &we->rect;
 
     int force = edit->force;
     int y1, x1, y2, x2;
@@ -853,24 +854,24 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
 
     /* draw only visible region */
 
-    last_line = wh->y + wh->lines - 1;
+    last_line = wh->rect.y + wh->rect.lines - 1;
 
     y1 = w->y;
     if (y1 > last_line - 1 /* buttonbar */ )
         return;
 
-    last_column = wh->x + wh->cols - 1;
+    last_column = wh->rect.x + wh->rect.cols - 1;
 
     x1 = w->x;
     if (x1 > last_column)
         return;
 
     y2 = w->y + w->lines - 1;
-    if (y2 < wh->y + 1 /* menubar */ )
+    if (y2 < wh->rect.y + 1 /* menubar */ )
         return;
 
     x2 = w->x + w->cols - 1;
-    if (x2 < wh->x)
+    if (x2 < wh->rect.x)
         return;
 
     if ((force & REDRAW_IN_BOUNDS) == 0)
@@ -880,17 +881,17 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
 
         if (y2 <= last_line - 1 /* buttonbar */ )
             end_row = w->lines - 1;
-        else if (y1 >= wh->y + 1 /* menubar */ )
-            end_row = wh->lines - 1 - y1 - 1;
+        else if (y1 >= wh->rect.y + 1 /* menubar */ )
+            end_row = wh->rect.lines - 1 - y1 - 1;
         else
-            end_row = start_row + wh->lines - 1 - 1;
+            end_row = start_row + wh->rect.lines - 1 - 1;
 
         if (x2 <= last_column)
             end_column = w->cols - 1;
-        else if (x1 >= wh->x)
-            end_column = wh->cols - 1 - x1;
+        else if (x1 >= wh->rect.x)
+            end_column = wh->rect.cols - 1 - x1;
         else
-            end_column = start_column + wh->cols - 1;
+            end_column = start_column + wh->rect.cols - 1;
     }
 
     /*
@@ -1049,7 +1050,7 @@ edit_status (WEdit * edit, gboolean active)
 void
 edit_scroll_screen_over_cursor (WEdit * edit)
 {
-    Widget *w = WIDGET (edit);
+    WRect *w = &WIDGET (edit)->rect;
 
     long p;
     long outby;
@@ -1058,16 +1059,11 @@ edit_scroll_screen_over_cursor (WEdit * edit)
     if (w->lines <= 0 || w->cols <= 0)
         return;
 
-    w->lines -= EDIT_TEXT_VERTICAL_OFFSET;
-    w->cols -= EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
+    rect_resize (w, -EDIT_TEXT_VERTICAL_OFFSET,
+                 -(EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width));
 
     if (!edit->fullscreen)
-    {
-        w->x++;
-        w->cols -= 2;
-        w->y++;
-        w->lines -= 2;
-    }
+        rect_grow (w, -1, -1);
 
     r_extreme = EDIT_RIGHT_EXTREME;
     l_extreme = EDIT_LEFT_EXTREME;
@@ -1115,15 +1111,10 @@ edit_scroll_screen_over_cursor (WEdit * edit)
         edit_scroll_upward (edit, outby);
     edit_update_curs_row (edit);
 
-    w->lines += EDIT_TEXT_VERTICAL_OFFSET;
-    w->cols += EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
+    rect_resize (w, EDIT_TEXT_VERTICAL_OFFSET,
+                 EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width);
     if (!edit->fullscreen)
-    {
-        w->x--;
-        w->cols += 2;
-        w->y--;
-        w->lines += 2;
-    }
+        rect_grow (w, 1, 1);
 }
 
 /* --------------------------------------------------------------------------------------------- */

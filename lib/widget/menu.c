@@ -5,7 +5,7 @@
    Free Software Foundation, Inc.
 
    Written by:
-   Andrew Borodin <aborodin@vmail.ru>, 2012, 2013, 2016
+   Andrew Borodin <aborodin@vmail.ru>, 2012-2022
 
    This file is part of the Midnight Commander.
 
@@ -120,7 +120,7 @@ menu_arrange (menu_t * menu, dlg_shortcut_str get_shortcut)
 static void
 menubar_paint_idx (const WMenuBar * menubar, unsigned int idx, int color)
 {
-    const Widget *w = CONST_WIDGET (menubar);
+    const WRect *w = &CONST_WIDGET (menubar)->rect;
     const menu_t *menu = MENU (g_list_nth_data (menubar->menu, menubar->selected));
     const menu_entry_t *entry = MENUENTRY (g_list_nth_data (menu->entries, idx));
     const int y = 2 + idx;
@@ -134,10 +134,10 @@ menubar_paint_idx (const WMenuBar * menubar, unsigned int idx, int color)
         /* menu separator */
         tty_setcolor (MENU_ENTRY_COLOR);
 
-        widget_gotoyx (w, y, x - 1);
+        widget_gotoyx (menubar, y, x - 1);
         tty_print_alt_char (ACS_LTEE, FALSE);
         tty_draw_hline (w->y + y, w->x + x, ACS_HLINE, menu->max_entry_len + 3);
-        widget_gotoyx (w, y, x + menu->max_entry_len + 3);
+        widget_gotoyx (menubar, y, x + menu->max_entry_len + 3);
         tty_print_alt_char (ACS_RTEE, FALSE);
     }
     else
@@ -146,7 +146,7 @@ menubar_paint_idx (const WMenuBar * menubar, unsigned int idx, int color)
 
         /* menu text */
         tty_setcolor (color);
-        widget_gotoyx (w, y, x);
+        widget_gotoyx (menubar, y, x);
         tty_print_char ((unsigned char) entry->first_letter);
         tty_getyx (&yt, &xt);
         tty_draw_hline (yt, xt, ' ', menu->max_entry_len + 2);  /* clear line */
@@ -164,12 +164,12 @@ menubar_paint_idx (const WMenuBar * menubar, unsigned int idx, int color)
 
         if (entry->shortcut != NULL)
         {
-            widget_gotoyx (w, y, x + menu->max_hotkey_len + 3);
+            widget_gotoyx (menubar, y, x + menu->max_hotkey_len + 3);
             tty_print_string (entry->shortcut);
         }
 
         /* move cursor to the start of entry text */
-        widget_gotoyx (w, y, x + 1);
+        widget_gotoyx (menubar, y, x + 1);
     }
 }
 
@@ -178,7 +178,7 @@ menubar_paint_idx (const WMenuBar * menubar, unsigned int idx, int color)
 static void
 menubar_draw_drop (const WMenuBar * menubar)
 {
-    const Widget *w = CONST_WIDGET (menubar);
+    const WRect *w = &CONST_WIDGET (menubar)->rect;
     const menu_t *menu = MENU (g_list_nth_data (menubar->menu, menubar->selected));
     const unsigned int count = g_list_length (menu->entries);
     int column = menu->start_x - 1;
@@ -217,11 +217,12 @@ menubar_set_color (const WMenuBar * menubar, gboolean current, gboolean hotkey)
 static void
 menubar_draw (const WMenuBar * menubar)
 {
-    const Widget *w = CONST_WIDGET (menubar);
+    const WRect *w = &CONST_WIDGET (menubar)->rect;
     GList *i;
 
     /* First draw the complete menubar */
-    tty_setcolor (widget_get_state (w, WST_FOCUSED) ? MENU_ENTRY_COLOR : MENU_INACTIVE_COLOR);
+    tty_setcolor (widget_get_state (WIDGET (menubar), WST_FOCUSED) ? MENU_ENTRY_COLOR :
+                  MENU_INACTIVE_COLOR);
     tty_draw_hline (w->y, w->x, ' ', w->cols);
 
     /* Now each one of the entries */
@@ -231,7 +232,7 @@ menubar_draw (const WMenuBar * menubar)
         gboolean is_selected = (menubar->selected == (gsize) g_list_position (menubar->menu, i));
 
         menubar_set_color (menubar, is_selected, FALSE);
-        widget_gotoyx (w, 0, menu->start_x);
+        widget_gotoyx (menubar, 0, menu->start_x);
 
         tty_print_char (' ');
         tty_print_string (menu->text.start);
@@ -252,7 +253,8 @@ menubar_draw (const WMenuBar * menubar)
     if (menubar->is_dropped)
         menubar_draw_drop (menubar);
     else
-        widget_gotoyx (w, 0, MENU (g_list_nth_data (menubar->menu, menubar->selected))->start_x);
+        widget_gotoyx (menubar, 0,
+                       MENU (g_list_nth_data (menubar->menu, menubar->selected))->start_x);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -311,7 +313,7 @@ menubar_finish (WMenuBar * menubar)
     Widget *w = WIDGET (menubar);
 
     menubar->is_dropped = FALSE;
-    w->lines = 1;
+    w->rect.lines = 1;
     widget_want_hotkey (w, FALSE);
     widget_set_options (w, WOP_SELECTABLE, FALSE);
 
@@ -624,7 +626,7 @@ menubar_refresh (WMenuBar * menubar)
         return FALSE;
 
     /* Trick to get all the mouse events */
-    w->lines = LINES;
+    w->rect.lines = LINES;
 
     /* Trick to get all of the hotkeys */
     widget_want_hotkey (w, TRUE);
@@ -718,7 +720,7 @@ menubar_get_menu_by_x_coord (const WMenuBar * menubar, int x)
 static gboolean
 menubar_mouse_on_menu (const WMenuBar * menubar, int y, int x)
 {
-    const Widget *w = CONST_WIDGET (menubar);
+    const WRect *w = &CONST_WIDGET (menubar)->rect;
     menu_t *menu;
     int left_x, right_x, bottom_y;
 
@@ -948,12 +950,13 @@ destroy_menu (menu_t * menu)
 WMenuBar *
 menubar_new (GList * menu)
 {
+    WRect r = { 0, 0, 1, COLS };
     WMenuBar *menubar;
     Widget *w;
 
     menubar = g_new0 (WMenuBar, 1);
     w = WIDGET (menubar);
-    widget_init (w, 0, 0, 1, COLS, menubar_callback, menubar_mouse_callback);
+    widget_init (w, &r, menubar_callback, menubar_mouse_callback);
     w->pos_flags = WPOS_KEEP_HORZ | WPOS_KEEP_TOP;
     /* initially, menubar is not selectable */
     widget_set_options (w, WOP_SELECTABLE, FALSE);
@@ -1009,7 +1012,7 @@ menubar_arrange (WMenuBar * menubar)
     if (menubar->menu == NULL)
         return;
 
-    gap = WIDGET (menubar)->cols - 2;
+    gap = WIDGET (menubar)->rect.cols - 2;
 
     /* First, calculate gap between items... */
     for (i = menubar->menu; i != NULL; i = g_list_next (i))

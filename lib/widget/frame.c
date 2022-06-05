@@ -5,7 +5,7 @@
    The Free Software Foundation, Inc.
 
    Authors:
-   Andrew Borodin <aborodin@vmail.ru>, 2020
+   Andrew Borodin <aborodin@vmail.ru>, 2020-2022
 
    This file is part of the Midnight Commander.
 
@@ -55,13 +55,8 @@ static void
 frame_adjust (WFrame * f)
 {
     Widget *w = WIDGET (f);
-    Widget *wo = WIDGET (w->owner);
 
-    w->y = wo->y;
-    w->x = wo->x;
-    w->lines = wo->lines;
-    w->cols = wo->cols;
-
+    w->rect = WIDGET (w->owner)->rect;
     w->pos_flags |= WPOS_KEEP_ALL;
 }
 
@@ -70,11 +65,12 @@ frame_adjust (WFrame * f)
 static void
 frame_draw (const WFrame * f)
 {
-    const Widget *w = CONST_WIDGET (f);
+    const Widget *wf = CONST_WIDGET (f);
+    const WRect *w = &wf->rect;
     int d = f->compact ? 0 : 1;
     const int *colors;
 
-    colors = widget_get_colors (w);
+    colors = widget_get_colors (wf);
 
     if (mc_global.tty.shadows)
         tty_draw_box_shadow (w->y, w->x, w->lines, w->cols, SHADOW_COLOR);
@@ -87,7 +83,7 @@ frame_draw (const WFrame * f)
     {
         /* TODO: truncate long title */
         tty_setcolor (colors[FRAME_COLOR_TITLE]);
-        widget_gotoyx (w, d, (w->cols - str_term_width1 (f->title)) / 2);
+        widget_gotoyx (f, d, (w->cols - str_term_width1 (f->title)) / 2);
         tty_print_string (f->title);
     }
 }
@@ -99,12 +95,13 @@ frame_draw (const WFrame * f)
 WFrame *
 frame_new (int y, int x, int lines, int cols, const char *title, gboolean single, gboolean compact)
 {
+    WRect r = { y, x, lines, cols };
     WFrame *f;
     Widget *w;
 
     f = g_new (WFrame, 1);
     w = WIDGET (f);
-    widget_init (w, y, x, lines, cols, frame_callback, NULL);
+    widget_init (w, &r, frame_callback, NULL);
 
     f->single = single;
     f->compact = compact;

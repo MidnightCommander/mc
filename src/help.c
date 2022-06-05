@@ -564,8 +564,8 @@ help_show (WDialog * h, const char *paint_start)
 #ifndef HAVE_SLANG
                             tty_print_char (acs_map[c]);
 #else
-                            SLsmg_draw_object (WIDGET (h)->y + line + 2, WIDGET (h)->x + col + 2,
-                                               c);
+                            SLsmg_draw_object (WIDGET (h)->rect.y + line + 2,
+                                               WIDGET (h)->rect.x + col + 2, c);
 #endif
                         col++;
                     }
@@ -882,10 +882,11 @@ help_resize (WDialog * h)
 {
     Widget *w = WIDGET (h);
     WButtonBar *bb;
-    WRect r;
+    WRect r = w->rect;
 
     help_lines = MIN (LINES - 4, MAX (2 * LINES / 3, 18));
-    rect_init (&r, w->y, w->x, help_lines + 4, HELP_WINDOW_WIDTH + 4);
+    r.lines = help_lines + 4;
+    r.cols = HELP_WINDOW_WIDTH + 4;
     dlg_default_callback (w, NULL, MSG_RESIZE, 0, &r);
     bb = find_buttonbar (h);
     widget_set_size (WIDGET (bb), LINES - 1, 0, 1, COLS);
@@ -967,7 +968,7 @@ md_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data
     {
     case MSG_RESIZE:
         widget_default_callback (w, NULL, MSG_RESIZE, 0, data);
-        w->lines = help_lines;
+        w->rect.lines = help_lines;
         return MSG_HANDLED;
 
     default:
@@ -1046,12 +1047,12 @@ help_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 /* --------------------------------------------------------------------------------------------- */
 
 static Widget *
-mousedispatch_new (int y, int x, int yl, int xl)
+mousedispatch_new (const WRect * r)
 {
     Widget *w;
 
     w = g_new0 (Widget, 1);
-    widget_init (w, y, x, yl, xl, md_callback, help_mouse_callback);
+    widget_init (w, r, md_callback, help_mouse_callback);
     w->options |= WOP_SELECTABLE | WOP_WANT_CURSOR;
 
     return w;
@@ -1081,6 +1082,7 @@ help_interactive_display (const gchar * event_group_name, const gchar * event_na
     char *hlpfile = NULL;
     char *filedata;
     ev_help_t *event_data = (ev_help_t *) data;
+    WRect r = { 1, 1, 1, 1 };
 
     (void) event_group_name;
     (void) event_name;
@@ -1148,10 +1150,12 @@ help_interactive_display (const gchar * event_group_name, const gchar * event_na
     }
 
     help_bar = buttonbar_new ();
-    WIDGET (help_bar)->y -= wh->y;
-    WIDGET (help_bar)->x -= wh->x;
+    WIDGET (help_bar)->rect.y -= wh->rect.y;
+    WIDGET (help_bar)->rect.x -= wh->rect.x;
 
-    md = mousedispatch_new (1, 1, help_lines, HELP_WINDOW_WIDTH - 2);
+    r.lines = help_lines;
+    r.cols = HELP_WINDOW_WIDTH - 2;
+    md = mousedispatch_new (&r);
 
     group_add_widget (g, md);
     group_add_widget (g, help_bar);     /* FIXME */

@@ -8,7 +8,7 @@
 
    Written by:
    Daniel Borca <dborca@yahoo.com>, 2007
-   Andrew Borodin <aborodin@vmail.ru>, 2010, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2010-2022
 
    This file is part of the Midnight Commander.
 
@@ -237,7 +237,7 @@ dialog_switch_list (void)
         char *title;
 
         if (dlg->get_title != NULL)
-            title = dlg->get_title (dlg, WIDGET (listbox->list)->cols - 2);
+            title = dlg->get_title (dlg, WIDGET (listbox->list)->rect.cols - 2);
         else
             title = g_strdup ("");
 

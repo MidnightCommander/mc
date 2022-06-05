@@ -46,16 +46,16 @@ typedef int input_colors_t[WINPUTC_COUNT_COLORS];
 typedef struct
 {
     Widget widget;
+
+    GString *buffer;
     const int *color;
     int point;                  /* cursor position in the input line in characters */
     int mark;                   /* the mark position in characters; negative value means no marked text */
     int term_first_shown;       /* column of the first shown character */
-    size_t current_max_size;    /* maximum length of input line (bytes) */
     gboolean first;             /* is first keystroke? */
     int disable_update;         /* do we want to skip updates? */
     gboolean is_password;       /* is this a password input line? */
     gboolean init_from_history; /* init text will be get from history */
-    char *buffer;               /* pointer to editing buffer */
     gboolean need_push;         /* need to push the current Input on hist? */
     gboolean strip_password;    /* need to strip password before placing string to history */
     char **completions;         /* possible completions array */
@@ -91,6 +91,7 @@ cb_ret_t input_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm
 void input_set_default_colors (void);
 cb_ret_t input_handle_char (WInput * in, int key);
 void input_assign_text (WInput * in, const char *text);
+char *input_get_text (const WInput * in);
 gboolean input_is_empty (const WInput * in);
 void input_insert (WInput * in, const char *text, gboolean insert_extra_space);
 void input_set_point (WInput * in, int pos);

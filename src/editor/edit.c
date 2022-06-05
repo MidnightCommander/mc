@@ -7,7 +7,7 @@
    Written by:
    Paul Sheer 1996, 1997
    Ilia Maslakov <il.smind@gmail.com> 2009, 2010, 2011
-   Andrew Borodin <aborodin@vmail.ru> 2012, 2013
+   Andrew Borodin <aborodin@vmail.ru> 2012-2022
 
    This file is part of the Midnight Commander.
 
@@ -160,12 +160,15 @@ edit_load_status_update_cb (status_msg_t * sm)
 
     if (rsm->first)
     {
-        int wd_width;
         Widget *lw = WIDGET (ssm->label);
+        WRect r;
 
-        wd_width = MAX (wd->cols, lw->cols + 6);
-        widget_set_size (wd, wd->y, wd->x, wd->lines, wd_width);
-        widget_set_size (lw, lw->y, wd->x + (wd->cols - lw->cols) / 2, lw->lines, lw->cols);
+        r = wd->rect;
+        r.cols = MAX (r.cols, lw->rect.cols + 6);
+        widget_set_size_rect (wd, &r);
+        r = lw->rect;
+        r.x = wd->rect.x + (wd->rect.cols - r.cols) / 2;
+        widget_set_size_rect (lw, &r);
         rsm->first = FALSE;
     }
 
@@ -497,7 +500,7 @@ edit_load_position (WEdit * edit, gboolean load_position)
     }
 
     edit_move_to_prev_col (edit, edit_buffer_get_current_bol (&edit->buffer));
-    edit_move_display (edit, line - (WIDGET (edit)->lines / 2));
+    edit_move_display (edit, line - (WIDGET (edit)->rect.lines / 2));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -821,7 +824,7 @@ static void
 edit_end_page (WEdit * edit)
 {
     edit_update_curs_row (edit);
-    edit_move_down (edit, WIDGET (edit)->lines - edit->curs_row - 1, FALSE);
+    edit_move_down (edit, WIDGET (edit)->rect.lines - edit->curs_row - 1, FALSE);
 }
 
 
@@ -852,7 +855,7 @@ edit_move_to_bottom (WEdit * edit)
         edit_move_down (edit, edit->buffer.lines - edit->curs_row, FALSE);
         edit->start_display = edit->buffer.size;
         edit->start_line = edit->buffer.lines;
-        edit_scroll_upward (edit, WIDGET (edit)->lines - 1);
+        edit_scroll_upward (edit, WIDGET (edit)->rect.lines - 1);
         edit->force |= REDRAW_PAGE;
     }
 }
@@ -1553,7 +1556,7 @@ edit_get_bracket (WEdit * edit, gboolean in_screen, unsigned long furthest_brack
                 break;
             /* count lines if searching downward */
             if (inc > 0 && a == '\n')
-                if (n++ >= WIDGET (edit)->lines - edit->curs_row)       /* out of screen */
+                if (n++ >= WIDGET (edit)->rect.lines - edit->curs_row)  /* out of screen */
                     break;
         }
         /* count bracket depth */
@@ -2078,8 +2081,7 @@ edit_insert_file (WEdit * edit, const vfs_path_t * filename_vpath)
  */
 
 WEdit *
-edit_init (WEdit * edit, int y, int x, int lines, int cols, const vfs_path_t * filename_vpath,
-           long line)
+edit_init (WEdit * edit, const WRect * r, const vfs_path_t * filename_vpath, long line)
 {
     gboolean to_free = FALSE;
 
@@ -2104,11 +2106,12 @@ edit_init (WEdit * edit, int y, int x, int lines, int cols, const vfs_path_t * f
     else
     {
         Widget *w;
+
         edit = g_malloc0 (sizeof (WEdit));
         to_free = TRUE;
 
         w = WIDGET (edit);
-        widget_init (w, y, x, lines, cols, NULL, NULL);
+        widget_init (w, r, NULL, NULL);
         w->options |= WOP_SELECTABLE | WOP_TOP_SELECT | WOP_WANT_CURSOR;
         w->keymap = editor_map;
         w->ext_keymap = editor_x_map;
@@ -2241,7 +2244,7 @@ edit_reload_line (WEdit * edit, const vfs_path_t * filename_vpath, long line)
     e->fullscreen = edit->fullscreen;
     e->loc_prev = edit->loc_prev;
 
-    if (edit_init (e, w->y, w->x, w->lines, w->cols, filename_vpath, line) == NULL)
+    if (edit_init (e, &w->rect, filename_vpath, line) == NULL)
     {
         g_free (e);
         return FALSE;
@@ -2898,7 +2901,7 @@ edit_scroll_downward (WEdit * edit, long i)
 {
     long lines_below;
 
-    lines_below = edit->buffer.lines - edit->start_line - (WIDGET (edit)->lines - 1);
+    lines_below = edit->buffer.lines - edit->start_line - (WIDGET (edit)->rect.lines - 1);
     if (lines_below > 0)
     {
         if (i > lines_below)
@@ -3250,7 +3253,7 @@ edit_execute_key_command (WEdit * edit, long command, int char_for_insertion)
 void
 edit_execute_cmd (WEdit * edit, long command, int char_for_insertion)
 {
-    Widget *w = WIDGET (edit);
+    WRect *w = &WIDGET (edit)->rect;
 
     if (command == CK_WindowFullscreen)
     {
@@ -3933,7 +3936,7 @@ edit_execute_cmd (WEdit * edit, long command, int char_for_insertion)
         edit_begin_end_repeat_cmd (edit);
         break;
     case CK_ExtendedKeyMap:
-        w->ext_mode = TRUE;
+        WIDGET (edit)->ext_mode = TRUE;
         break;
     default:
         break;

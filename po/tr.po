@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-04-10 17:12+0300\n"
+"POT-Creation-Date: 2022-06-05 19:48+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Serdar Sağlam <teknomobil@msn.com>, 2019-2020\n"
 "Language-Team: Turkish (http://www.transifex.com/mc/mc/language/tr/)\n"
@@ -1199,7 +1199,8 @@ msgstr "Önce bir metin blokunu aydınlatmalısınız"
 msgid "Run sort"
 msgstr "Sıralamayı çalıştır"
 
-msgid "Enter sort options (see manpage) separated by whitespace:"
+#, fuzzy
+msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr ""
 "Sıralama seçeneklerini (man sayfasına bakınız) boşluklarla ayırarak veriniz:"
 
@@ -4241,6 +4242,22 @@ msgstr "ftpfs: Sunucuya bağlantı başarısız: %s"
 #, c-format
 msgid "Waiting to retry... %d (Control-G to cancel)"
 msgstr "Yinelemek için bekleniyor... %d (iptal etmek için Ctrl-G)"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not make address-to-name translation: %s"
+msgstr "ftpfs: soket oluşturulamadı: %s"
+
+#, fuzzy, c-format
+msgid "ftpfs: try reconnect to server, attempt %u"
+msgstr "ftpfs: Sunucuya bağlantı başarısız: %s"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not get socket name: %s"
+msgstr "ftpfs: soket oluşturulamadı: %s"
+
+#, fuzzy
+msgid "ftpfs: could not reconnect to server"
+msgstr "ftpfs: soket oluşturulamadı: %s"
 
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: gereksiz adres ailesi"

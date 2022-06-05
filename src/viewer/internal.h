@@ -24,9 +24,6 @@
 
 typedef unsigned char byte;
 
-/* A width or height on the screen */
-typedef unsigned int screen_dimen;
-
 /*** enums ***************************************************************************************/
 
 /* data sources of the view */
@@ -62,12 +59,6 @@ struct hexedit_change_node
     byte value;
 };
 
-struct area
-{
-    screen_dimen top, left;
-    screen_dimen height, width;
-};
-
 /* A cache entry for mapping offsets into line/column pairs and vice versa.
  * cc_offset, cc_line, and cc_column are the 0-based values of the offset,
  * line and column of that cache entry. cc_nroff_column is the column
@@ -80,13 +71,6 @@ typedef struct
     off_t cc_column;
     off_t cc_nroff_column;
 } coord_cache_entry_t;
-
-typedef struct
-{
-    size_t size;
-    size_t capacity;
-    coord_cache_entry_t **cache;
-} coord_cache_t;
 
 /* TODO: find a better name. This is not actually a "state machine",
  * but a "state machine's state", but that sounds silly.
@@ -153,10 +137,10 @@ struct WView
     gboolean utf8;              /* It's multibyte file codeset */
 #endif
 
-    coord_cache_t *coord_cache; /* Cache for mapping offsets to cursor positions */
+    GPtrArray *coord_cache;     /* Cache for mapping offsets to cursor positions */
 
     /* Display information */
-    screen_dimen dpy_frame_size;        /* Size of the frame surrounding the real viewer */
+    int dpy_frame_size;         /* Size of the frame surrounding the real viewer */
     off_t dpy_start;            /* Offset of the displayed data (start of the paragraph in non-hex mode) */
     off_t dpy_end;              /* Offset after the displayed data */
     off_t dpy_paragraph_skip_lines;     /* Extra lines to skip in wrap mode */
@@ -165,12 +149,12 @@ struct WView
     gboolean dpy_wrap_dirty;    /* dpy_state_top needs to be recomputed */
     off_t dpy_text_column;      /* Number of skipped columns in non-wrap
                                  * text mode */
-    screen_dimen cursor_col;    /* Cursor column */
-    screen_dimen cursor_row;    /* Cursor row */
+    int cursor_col;             /* Cursor column */
+    int cursor_row;             /* Cursor row */
     struct hexedit_change_node *change_list;    /* Linked list of changes */
-    struct area status_area;    /* Where the status line is displayed */
-    struct area ruler_area;     /* Where the ruler is displayed */
-    struct area data_area;      /* Where the data is displayed */
+    WRect status_area;          /* Where the status line is displayed */
+    WRect ruler_area;           /* Where the ruler is displayed */
+    WRect data_area;            /* Where the data is displayed */
 
     ssize_t force_max;          /* Force a max offset, or -1 */
 
@@ -242,10 +226,6 @@ void mcview_ascii_move_down (WView * view, off_t lines);
 void mcview_ascii_move_up (WView * view, off_t lines);
 void mcview_ascii_moveto_bol (WView * view);
 void mcview_ascii_moveto_eol (WView * view);
-
-/* coord_cache.c: */
-coord_cache_t *coord_cache_new (void);
-void coord_cache_free (coord_cache_t * cache);
 
 #ifdef MC_ENABLE_DEBUGGING_CODE
 void mcview_ccache_dump (WView * view);

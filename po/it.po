@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-04-10 17:12+0300\n"
+"POT-Creation-Date: 2022-06-05 19:48+0300\n"
 "PO-Revision-Date: 2021-09-29 09:45+0200\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/mc/language/"
@@ -1208,7 +1208,8 @@ msgstr "Selezionare prima una parte di testo"
 msgid "Run sort"
 msgstr "Esegui ordinamento"
 
-msgid "Enter sort options (see manpage) separated by whitespace:"
+#, fuzzy
+msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr "Inserisci opzioni di ordinamento (vedi man sort) separate da spazi:"
 
 msgid "Sort"
@@ -4272,6 +4273,22 @@ msgstr "ftpfs: connessione al server fallita: %s"
 #, c-format
 msgid "Waiting to retry... %d (Control-G to cancel)"
 msgstr "In attesa di risposta... %d (Ctrl-G per annullare)"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not make address-to-name translation: %s"
+msgstr "ftpfs: impossibile creare il socket: %s"
+
+#, fuzzy, c-format
+msgid "ftpfs: try reconnect to server, attempt %u"
+msgstr "ftpfs: connessione al server fallita: %s"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not get socket name: %s"
+msgstr "ftpfs: impossibile creare il socket: %s"
+
+#, fuzzy
+msgid "ftpfs: could not reconnect to server"
+msgstr "ftpfs: impossibile creare il socket: %s"
 
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: famiglia di indirizzi non valida"

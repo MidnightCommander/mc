@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-04-10 17:12+0300\n"
+"POT-Creation-Date: 2022-06-05 19:48+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>, 2021\n"
 "Language-Team: Finnish (http://www.transifex.com/mc/mc/language/fi/)\n"
@@ -1174,7 +1174,7 @@ msgstr "Sinun pitää ensin korostaa tekstin alue"
 msgid "Run sort"
 msgstr "Suorita lajittelu"
 
-msgid "Enter sort options (see manpage) separated by whitespace:"
+msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr ""
 
 msgid "Sort"
@@ -4119,6 +4119,22 @@ msgstr "ftpfs: yhteys palvelimeen epäonnistui: %s"
 #, c-format
 msgid "Waiting to retry... %d (Control-G to cancel)"
 msgstr ""
+
+#, c-format
+msgid "ftpfs: could not make address-to-name translation: %s"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "ftpfs: try reconnect to server, attempt %u"
+msgstr "ftpfs: yhteys palvelimeen epäonnistui: %s"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not get socket name: %s"
+msgstr "ftpfs: passiivi-tilaan siirtyminen epäonnistui"
+
+#, fuzzy
+msgid "ftpfs: could not reconnect to server"
+msgstr "ftpfs: yhteys palvelimeen epäonnistui: %s"
 
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: Osoiteperhe ei ole validi"

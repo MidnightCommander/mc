@@ -9,7 +9,7 @@
    Janne Kukonlehto, 1995
    Andrej Borsenkow, 1996
    Norbert Warmuth, 1997
-   Andrew Borodin <aborodin@vmail.ru>, 2012, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2012-2022
 
    Janne did the original Hotlist code, Andrej made the groupable
    hotlist; the move hotlist and revamped the file format and made
@@ -254,11 +254,11 @@ update_path_name (void)
 
     p = g_strconcat (" ", current_group->label, " ", (char *) NULL);
     if (hotlist_state.moving)
-        groupbox_set_title (movelist_group, str_trunc (p, w->cols - 2));
+        groupbox_set_title (movelist_group, str_trunc (p, w->rect.cols - 2));
     else
     {
-        groupbox_set_title (hotlist_group, str_trunc (p, w->cols - 2));
-        label_set_text (pname, str_trunc (text, w->cols));
+        groupbox_set_title (hotlist_group, str_trunc (p, w->rect.cols - 2));
+        label_set_text (pname, str_trunc (text, w->rect.cols));
     }
     g_free (p);
 }
@@ -609,9 +609,10 @@ hotlist_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
 
     case MSG_RESIZE:
         {
-            WRect r;
+            WRect r = w->rect;
 
-            rect_init (&r, w->y, w->x, LINES - (h == hotlist_dlg ? 2 : 6), COLS - 6);
+            r.lines = LINES - (h == hotlist_dlg ? 2 : 6);
+            r.cols = COLS - 6;
 
             return dlg_default_callback (w, NULL, MSG_RESIZE, 0, &r);
         }
@@ -789,8 +790,8 @@ init_hotlist (hotlist_t list_type)
     group_add_widget_autopos (g, hotlist_widget, WPOS_KEEP_ALL, NULL);
 
     l_hotlist =
-        listbox_new (y + 1, UX + 1, hotlist_widget->lines - 2, hotlist_widget->cols - 2, FALSE,
-                     hotlist_listbox_callback);
+        listbox_new (y + 1, UX + 1, hotlist_widget->rect.lines - 2, hotlist_widget->rect.cols - 2,
+                     FALSE, hotlist_listbox_callback);
 
     /* Fill the hotlist with the active VFS or the hotlist */
 #ifdef ENABLE_VFS
@@ -807,14 +808,14 @@ init_hotlist (hotlist_t list_type)
     /* insert before groupbox to view scrollbar */
     group_add_widget_autopos (g, l_hotlist, WPOS_KEEP_ALL, NULL);
 
-    y += hotlist_widget->lines;
+    y += hotlist_widget->rect.lines;
 
-    path_box = groupbox_new (y, UX, 3, hotlist_widget->cols, _("Directory path"));
+    path_box = groupbox_new (y, UX, 3, hotlist_widget->rect.cols, _("Directory path"));
     group_add_widget_autopos (g, path_box, WPOS_KEEP_BOTTOM | WPOS_KEEP_HORZ, NULL);
 
     pname = label_new (y + 1, UX + 2, "");
     group_add_widget_autopos (g, pname, WPOS_KEEP_BOTTOM | WPOS_KEEP_LEFT, NULL);
-    y += WIDGET (path_box)->lines;
+    y += WIDGET (path_box)->rect.lines;
 
     group_add_widget_autopos (g, hline_new (y++, -1, -1), WPOS_KEEP_BOTTOM, NULL);
 
@@ -861,13 +862,13 @@ init_movelist (struct hotlist *item)
     group_add_widget_autopos (g, movelist_widget, WPOS_KEEP_ALL, NULL);
 
     l_movelist =
-        listbox_new (y + 1, UX + 1, movelist_widget->lines - 2, movelist_widget->cols - 2, FALSE,
-                     hotlist_listbox_callback);
+        listbox_new (y + 1, UX + 1, movelist_widget->rect.lines - 2, movelist_widget->rect.cols - 2,
+                     FALSE, hotlist_listbox_callback);
     fill_listbox (l_movelist);
     /* insert before groupbox to view scrollbar */
     group_add_widget_autopos (g, l_movelist, WPOS_KEEP_ALL, NULL);
 
-    y += movelist_widget->lines;
+    y += movelist_widget->rect.lines;
 
     group_add_widget_autopos (g, hline_new (y++, -1, -1), WPOS_KEEP_BOTTOM, NULL);
 
@@ -1017,9 +1018,10 @@ add_new_entry_input (const char *header, const char *text1, const char *text2,
         /* *INDENT-ON* */
     };
 
+    WRect r = { -1, -1, 0, 64 };
+
     quick_dialog_t qdlg = {
-        -1, -1, 64,
-        header, help,
+        r, header, help,
         quick_widgets, NULL, NULL
     };
 
@@ -1079,9 +1081,10 @@ add_new_group_input (const char *header, const char *label, char **result)
         /* *INDENT-ON* */
     };
 
+    WRect r = { -1, -1, 0, 64 };
+
     quick_dialog_t qdlg = {
-        -1, -1, 64,
-        header, "[Hotlist]",
+        r, header, "[Hotlist]",
         quick_widgets, NULL, NULL
     };
 

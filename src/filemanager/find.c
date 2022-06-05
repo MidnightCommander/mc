@@ -7,7 +7,7 @@
    Written  by:
    Miguel de Icaza, 1995
    Slava Zanko <slavazanko@gmail.com>, 2013
-   Andrew Borodin <aborodin@vmail.ru>, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2013-2022
 
    This file is part of the Midnight Commander.
 
@@ -501,7 +501,7 @@ find_parm_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
 
         /* check filename regexp */
         if (!file_pattern_cbox->state && !input_is_empty (in_name)
-            && !find_check_regexp (in_name->buffer))
+            && !find_check_regexp (in_name->buffer->str))
         {
             /* Don't stop the dialog */
             widget_set_state (w, WST_ACTIVE, TRUE);
@@ -511,7 +511,8 @@ find_parm_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
         }
 
         /* check content regexp */
-        if (content_regexp_cbox->state && !content_is_empty && !find_check_regexp (in_with->buffer))
+        if (content_regexp_cbox->state && !content_is_empty
+            && !find_check_regexp (in_with->buffer->str))
         {
             /* Don't stop the dialog */
             widget_set_state (w, WST_ACTIVE, TRUE);
@@ -782,21 +783,18 @@ find_parameters (WPanel * panel, char **start_dir, ssize_t * start_dir_len,
 
     case B_TREE:
         {
-            char *temp_dir;
+            const char *temp_dir;
 
-            temp_dir = in_start->buffer;
-            if (*temp_dir == '\0' || DIR_IS_DOT (temp_dir))
-                temp_dir = g_strdup (vfs_path_as_str (panel->cwd_vpath));
+            if (input_is_empty (in_start) || DIR_IS_DOT (in_start->buffer->str))
+                temp_dir = vfs_path_as_str (panel->cwd_vpath);
             else
-                temp_dir = g_strdup (temp_dir);
+                temp_dir = in_start->buffer->str;
 
             if (in_start_dir != INPUT_LAST_TEXT)
                 g_free (in_start_dir);
             in_start_dir = tree_box (temp_dir);
             if (in_start_dir == NULL)
-                in_start_dir = temp_dir;
-            else
-                g_free (temp_dir);
+                in_start_dir = g_strdup (temp_dir);
 
             input_assign_text (in_start, in_start_dir);
 
@@ -823,14 +821,13 @@ find_parameters (WPanel * panel, char **start_dir, ssize_t * start_dir_len,
             options.skip_hidden = skip_hidden_cbox->state;
             options.ignore_dirs_enable = ignore_dirs_cbox->state;
             g_free (options.ignore_dirs);
-            options.ignore_dirs = g_strdup (in_ignore->buffer);
+            options.ignore_dirs = input_get_text (in_ignore);
 
-            *content = !input_is_empty (in_with) ? g_strdup (in_with->buffer) : NULL;
-            if (!input_is_empty (in_name))
-                *pattern = g_strdup (in_name->buffer);
-            else
+            *content = input_get_text (in_with);
+            *pattern = input_get_text (in_name);
+            if (*pattern == NULL)
                 *pattern = g_strdup (options.file_pattern ? "*" : ".*");
-            *start_dir = !input_is_empty (in_start) ? in_start->buffer : (char *) ".";
+            *start_dir = !input_is_empty (in_start) ? in_start->buffer->str : (char *) ".";
             if (in_start_dir != INPUT_LAST_TEXT)
                 g_free (in_start_dir);
             in_start_dir = g_strdup (*start_dir);
@@ -861,10 +858,10 @@ find_parameters (WPanel * panel, char **start_dir, ssize_t * start_dir_len,
             }
 
             if (!options.ignore_dirs_enable || input_is_empty (in_ignore)
-                || DIR_IS_DOT (in_ignore->buffer))
+                || DIR_IS_DOT (in_ignore->buffer->str))
                 *ignore_dirs = NULL;
             else
-                *ignore_dirs = g_strdup (in_ignore->buffer);
+                *ignore_dirs = input_get_text (in_ignore);
 
             find_save_options ();
 
@@ -1033,7 +1030,7 @@ search_content (WDialog * h, const char *directory, const char *filename)
     if (s.st_size >= MIN_REFRESH_FILE_SIZE || (tv - last_refresh) > MAX_REFRESH_INTERVAL)
     {
         g_snprintf (buffer, sizeof (buffer), _("Grepping in %s"), filename);
-        status_update (str_trunc (buffer, WIDGET (h)->cols - 8));
+        status_update (str_trunc (buffer, WIDGET (h)->rect.cols - 8));
         mc_refresh ();
         last_refresh = tv;
         status_updated = TRUE;
@@ -1127,7 +1124,7 @@ search_content (WDialog * h, const char *directory, const char *filename)
                     /* if we add results for a file, we have to ensure that
                        name of this file is shown in status bar */
                     g_snprintf (result, sizeof (result), _("Grepping in %s"), filename);
-                    status_update (str_trunc (result, WIDGET (h)->cols - 8));
+                    status_update (str_trunc (result, WIDGET (h)->rect.cols - 8));
                     mc_refresh ();
                     last_refresh = tv;
                     status_updated = TRUE;
@@ -1255,7 +1252,7 @@ find_rotate_dash (const WDialog * h, gboolean show)
 
     colors = widget_get_colors (w);
     tty_setcolor (colors[DLG_COLOR_NORMAL]);
-    widget_gotoyx (h, w->lines - 7, w->cols - 4);
+    widget_gotoyx (h, w->rect.lines - 7, w->rect.cols - 4);
     tty_print_char (show ? rotating_dash[pos] : ' ');
     pos = (pos + 1) % sizeof (rotating_dash);
     mc_refresh ();
@@ -1346,7 +1343,7 @@ do_search (WDialog * h)
                     char buffer[BUF_MEDIUM];
 
                     g_snprintf (buffer, sizeof (buffer), _("Searching %s"), directory);
-                    status_update (str_trunc (directory, WIDGET (h)->cols - 8));
+                    status_update (str_trunc (directory, WIDGET (h)->rect.cols - 8));
                 }
 
                 dirp = mc_opendir (tmp_vpath);
@@ -1486,7 +1483,7 @@ view_edit_currently_selected_file (gboolean unparsed_view, gboolean edit)
 static void
 find_calc_button_locations (const WDialog * h, gboolean all_buttons)
 {
-    const int cols = CONST_WIDGET (h)->cols;
+    const int cols = CONST_WIDGET (h)->rect.cols;
 
     int l1, l2;
 
@@ -1522,10 +1519,10 @@ find_adjust_header (WDialog * h)
         g_snprintf (title, sizeof (title), _("Find File: \"%s\""), find_pattern);
 
     title_len = str_term_width1 (title);
-    if (title_len > WIDGET (h)->cols - 6)
+    if (title_len > WIDGET (h)->rect.cols - 6)
     {
         /* title is too wide, truncate it */
-        title_len = WIDGET (h)->cols - 6;
+        title_len = WIDGET (h)->rect.cols - 6;
         title_len = str_column_to_pos (title, title_len);
         title_len -= 3;         /* reserve space for three dots */
         title_len = str_offset_to_pos (title, title_len);
@@ -1546,7 +1543,7 @@ find_relocate_buttons (const WDialog * h, gboolean all_buttons)
     find_calc_button_locations (h, all_buttons);
 
     for (i = 0; i < fbuts_num; i++)
-        fbuts[i].button->x = CONST_WIDGET (h)->x + fbuts[i].x;
+        fbuts[i].button->rect.x = CONST_WIDGET (h)->rect.x + fbuts[i].x;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1555,9 +1552,10 @@ static cb_ret_t
 find_resize (WDialog * h)
 {
     Widget *w = WIDGET (h);
-    WRect r;
+    WRect r = w->rect;
 
-    rect_init (&r, w->y, w->x, LINES - 4, COLS - 16);
+    r.lines = LINES - 4;
+    r.cols = COLS - 16;
     dlg_default_callback (w, NULL, MSG_RESIZE, 0, &r);
     find_adjust_header (h);
     find_relocate_buttons (h, TRUE);
@@ -1691,7 +1689,7 @@ setup_gui (void)
     y = 2;
     find_list = listbox_new (y, 2, lines - 10, cols - 4, FALSE, NULL);
     group_add_widget_autopos (g, find_list, WPOS_KEEP_ALL, NULL);
-    y += WIDGET (find_list)->lines;
+    y += WIDGET (find_list)->rect.lines;
 
     group_add_widget_autopos (g, hline_new (y++, -1, -1), WPOS_KEEP_BOTTOM, NULL);
 
