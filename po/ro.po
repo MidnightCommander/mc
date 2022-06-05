@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-04-10 17:12+0300\n"
+"POT-Creation-Date: 2022-06-05 19:48+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Simona Iacob <s@zp1.net>, 2021-2022\n"
 "Language-Team: Romanian (http://www.transifex.com/mc/mc/language/ro/)\n"
@@ -1215,7 +1215,8 @@ msgstr "Mai întâi trebuie să evidențiezi un bloc de text"
 msgid "Run sort"
 msgstr "Rulează sortarea"
 
-msgid "Enter sort options (see manpage) separated by whitespace:"
+#, fuzzy
+msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr ""
 "Introdu opțiunile de sortare (vezi pagina de manual) separate prin spațiu:"
 
@@ -4282,6 +4283,22 @@ msgstr "ftpfs: conectarea la server a eșuat: %s"
 #, c-format
 msgid "Waiting to retry... %d (Control-G to cancel)"
 msgstr "Se reîncearcă... %d (Control-G pentru a renunța)"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not make address-to-name translation: %s"
+msgstr "ftpfs: nu se poate crea socketul: %s"
+
+#, fuzzy, c-format
+msgid "ftpfs: try reconnect to server, attempt %u"
+msgstr "ftpfs: conectarea la server a eșuat: %s"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not get socket name: %s"
+msgstr "ftpfs: nu se poate crea socketul: %s"
+
+#, fuzzy
+msgid "ftpfs: could not reconnect to server"
+msgstr "ftpfs: nu se poate crea socketul: %s"
 
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: familie de adrese incorectă"

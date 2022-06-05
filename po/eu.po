@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-04-10 17:12+0300\n"
+"POT-Creation-Date: 2022-06-05 19:48+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>, "
 "2011,2015-2019\n"
@@ -1202,7 +1202,8 @@ msgstr "Aurrena testu bloke bat nabarmendu behar duzu"
 msgid "Run sort"
 msgstr "Exekutatu \"sort\""
 
-msgid "Enter sort options (see manpage) separated by whitespace:"
+#, fuzzy
+msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr ""
 "Sartu sailkatzeko aukerak (begiratu eskuliburu (\"man\") orrialdea) zuriune "
 "bitartez banatuta:"
@@ -4252,6 +4253,22 @@ msgstr "ftpfs: zerbitzarirako konexioak huts egin du: %s"
 #, c-format
 msgid "Waiting to retry... %d (Control-G to cancel)"
 msgstr "Berriz saiatzeko itxoiten... %d (Ctrl-G uzteko)"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not make address-to-name translation: %s"
+msgstr "ftpfs: ezin izan da socket sortu: %s"
+
+#, fuzzy, c-format
+msgid "ftpfs: try reconnect to server, attempt %u"
+msgstr "ftpfs: zerbitzarirako konexioak huts egin du: %s"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not get socket name: %s"
+msgstr "ftpfs: ezin izan da socket sortu: %s"
+
+#, fuzzy
+msgid "ftpfs: could not reconnect to server"
+msgstr "ftpfs: ezin izan da socket sortu: %s"
 
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: baliogabeko helbide familia"

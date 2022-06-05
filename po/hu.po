@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-04-10 17:12+0300\n"
+"POT-Creation-Date: 2022-06-05 19:48+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: András Tőrös <toros.andras04@gmail.com>, 2020\n"
 "Language-Team: Hungarian (http://www.transifex.com/mc/mc/language/hu/)\n"
@@ -1192,7 +1192,8 @@ msgstr "Előbb ki kell jelölni egy szövegrészt."
 msgid "Run sort"
 msgstr "Rendezés futtatása"
 
-msgid "Enter sort options (see manpage) separated by whitespace:"
+#, fuzzy
+msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr "\"sort\" paraméterei (ld. man sort), szóközzel elválasztva:"
 
 msgid "Sort"
@@ -4230,6 +4231,22 @@ msgstr "Ftpfs: nem sikerült kapcsolódni a kiszolgálóhoz: %s"
 #, c-format
 msgid "Waiting to retry... %d (Control-G to cancel)"
 msgstr "Várakozás az ismétlésre... %d (megszakítás: Control-G)"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not make address-to-name translation: %s"
+msgstr "Ftpfs: aljzat nem létrehozható: %s"
+
+#, fuzzy, c-format
+msgid "ftpfs: try reconnect to server, attempt %u"
+msgstr "Ftpfs: nem sikerült kapcsolódni a kiszolgálóhoz: %s"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not get socket name: %s"
+msgstr "Ftpfs: aljzat nem létrehozható: %s"
+
+#, fuzzy
+msgid "ftpfs: could not reconnect to server"
+msgstr "Ftpfs: aljzat nem létrehozható: %s"
 
 msgid "ftpfs: invalid address family"
 msgstr "Ftpfs: hibás gépnév/-cím"

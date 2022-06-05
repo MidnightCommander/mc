@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-04-10 17:12+0300\n"
+"POT-Creation-Date: 2022-06-05 19:48+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Junghee Lee <daemul72@gmail.com>, 2022\n"
 "Language-Team: Korean (http://www.transifex.com/mc/mc/language/ko/)\n"
@@ -1207,7 +1207,8 @@ msgstr "먼저 텍스트 블록을 강조 표시해야 함"
 msgid "Run sort"
 msgstr "정렬 실행"
 
-msgid "Enter sort options (see manpage) separated by whitespace:"
+#, fuzzy
+msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr "화이트 스페이스로 구분된 정렬 옵션 입력(맨 페이지 참조):"
 
 msgid "Sort"
@@ -4262,6 +4263,22 @@ msgstr "ftpfs: 서버 연결 실패: %s"
 #, c-format
 msgid "Waiting to retry... %d (Control-G to cancel)"
 msgstr "재시도 대기 중... %d(Control-G가 취소됨)"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not make address-to-name translation: %s"
+msgstr "ftpfs: 소켓을 만들 수 없습니다: %s"
+
+#, fuzzy, c-format
+msgid "ftpfs: try reconnect to server, attempt %u"
+msgstr "ftpfs: 서버 연결 실패: %s"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not get socket name: %s"
+msgstr "ftpfs: 소켓을 만들 수 없습니다: %s"
+
+#, fuzzy
+msgid "ftpfs: could not reconnect to server"
+msgstr "ftpfs: 소켓을 만들 수 없습니다: %s"
 
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: 잘못된 주소 패밀리"

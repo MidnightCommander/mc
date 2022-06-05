@@ -26,7 +26,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-04-10 17:12+0300\n"
+"POT-Creation-Date: 2022-06-05 19:48+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>, 2018\n"
 "Language-Team: Russian (http://www.transifex.com/mc/mc/language/ru/)\n"
@@ -1232,7 +1232,8 @@ msgstr "Вы должны сначала выделить блок текста"
 msgid "Run sort"
 msgstr "Выполнить сортировку"
 
-msgid "Enter sort options (see manpage) separated by whitespace:"
+#, fuzzy
+msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr "Введите параметры сортировки (man sort(1)), разделённые пробелами:"
 
 msgid "Sort"
@@ -4288,6 +4289,22 @@ msgstr "ftpfs: сбой соединения с сервером: %s"
 #, c-format
 msgid "Waiting to retry... %d (Control-G to cancel)"
 msgstr "Ожидание повтора попытки... %d (Control-G для отмены)"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not make address-to-name translation: %s"
+msgstr "Не удалось создать сокет: %s"
+
+#, fuzzy, c-format
+msgid "ftpfs: try reconnect to server, attempt %u"
+msgstr "ftpfs: сбой соединения с сервером: %s"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not get socket name: %s"
+msgstr "Не удалось создать сокет: %s"
+
+#, fuzzy
+msgid "ftpfs: could not reconnect to server"
+msgstr "Не удалось создать сокет: %s"
 
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: неверный адрес системы."

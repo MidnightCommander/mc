@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-04-10 17:12+0300\n"
+"POT-Creation-Date: 2022-06-05 19:48+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Źmicier Turok <nashtlumach@gmail.com>, 2018\n"
 "Language-Team: Belarusian (http://www.transifex.com/mc/mc/language/be/)\n"
@@ -1213,7 +1213,8 @@ msgstr "Спачатку патрэбна абраць блок тэксту"
 msgid "Run sort"
 msgstr "Упарадкаваць"
 
-msgid "Enter sort options (see manpage) separated by whitespace:"
+#, fuzzy
+msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr "Увядзіце параметры парадкавання (глядзіце man), падзеленыя прагаламі:"
 
 msgid "Sort"
@@ -4263,6 +4264,22 @@ msgstr "ftpfs: не атрымалася злучыцца з серверам: %
 #, c-format
 msgid "Waiting to retry... %d (Control-G to cancel)"
 msgstr "Чакаецца яшчэ спроба… %d (скасаваць — «Ctrl-G»)"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not make address-to-name translation: %s"
+msgstr "ftpfs: нельга стварыць сокет: %s"
+
+#, fuzzy, c-format
+msgid "ftpfs: try reconnect to server, attempt %u"
+msgstr "ftpfs: не атрымалася злучыцца з серверам: %s"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not get socket name: %s"
+msgstr "ftpfs: нельга стварыць сокет: %s"
+
+#, fuzzy
+msgid "ftpfs: could not reconnect to server"
+msgstr "ftpfs: нельга стварыць сокет: %s"
 
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: хібная сям’я адрасоў"

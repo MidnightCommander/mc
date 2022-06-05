@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-04-10 17:12+0300\n"
+"POT-Creation-Date: 2022-06-05 19:48+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Myselus, 2015-2017\n"
 "Language-Team: Bulgarian (http://www.transifex.com/mc/mc/language/bg/)\n"
@@ -1187,7 +1187,8 @@ msgstr "Трябва първо да осветите блок от текст"
 msgid "Run sort"
 msgstr "Пускане на сортиране"
 
-msgid "Enter sort options (see manpage) separated by whitespace:"
+#, fuzzy
+msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr ""
 "Въвеждане на опции за сортиране (вижте man-страницата) отделени чрез бяло "
 "поле:"
@@ -4230,6 +4231,22 @@ msgstr "ftpfs: връзката със сървъра пропадна: %s"
 #, c-format
 msgid "Waiting to retry... %d (Control-G to cancel)"
 msgstr "Очакване за повторен опит... %d (Control-G за отказване)"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not make address-to-name translation: %s"
+msgstr "ftpfs: не може да се създаде сокет: %s"
+
+#, fuzzy, c-format
+msgid "ftpfs: try reconnect to server, attempt %u"
+msgstr "ftpfs: връзката със сървъра пропадна: %s"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not get socket name: %s"
+msgstr "ftpfs: не може да се създаде сокет: %s"
+
+#, fuzzy
+msgid "ftpfs: could not reconnect to server"
+msgstr "ftpfs: не може да се създаде сокет: %s"
 
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: невалиден вид на адреса"
