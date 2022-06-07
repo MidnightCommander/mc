@@ -1327,15 +1327,12 @@ vfs_s_open (const vfs_path_t * vpath, int flags, mode_t mode)
             return NULL;
 
         dirname = g_path_get_dirname (q);
-        name = g_path_get_basename (q);
         dir = vfs_s_find_inode (path_element->class, super, dirname, LINK_FOLLOW, FL_DIR);
+        g_free (dirname);
         if (dir == NULL)
-        {
-            g_free (dirname);
-            g_free (name);
             return NULL;
-        }
 
+        name = g_path_get_basename (q);
         ent = vfs_s_generate_entry (path_element->class, name, dir, 0755);
         ino = ent->ino;
         vfs_s_insert_entry (path_element->class, dir, ent);
@@ -1348,14 +1345,13 @@ vfs_s_open (const vfs_path_t * vpath, int flags, mode_t mode)
             ino->localname = vfs_path_free (tmp_vpath, FALSE);
             if (tmp_handle == -1)
             {
-                g_free (dirname);
                 g_free (name);
                 return NULL;
             }
 
             close (tmp_handle);
         }
-        g_free (dirname);
+
         g_free (name);
         was_changed = TRUE;
     }
