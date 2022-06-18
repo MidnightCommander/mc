@@ -1720,18 +1720,18 @@ vfs_s_normalize_filename_leading_spaces (struct vfs_s_inode *root_inode, size_t 
     {
         struct vfs_s_entry *entry = VFS_ENTRY (iter->data);
 
-        if ((size_t) entry->ino->data_offset > final_num_spaces)
+        if ((size_t) entry->leading_spaces > final_num_spaces)
         {
             char *source_name, *spacer;
 
             source_name = entry->name;
-            spacer = g_strnfill (entry->ino->data_offset - final_num_spaces, ' ');
+            spacer = g_strnfill ((size_t) entry->leading_spaces - final_num_spaces, ' ');
             entry->name = g_strconcat (spacer, source_name, (char *) NULL);
             g_free (spacer);
             g_free (source_name);
         }
 
-        entry->ino->data_offset = -1;
+        entry->leading_spaces = -1;
     }
 }
 
