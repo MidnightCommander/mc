@@ -561,7 +561,7 @@ static void
 ins_from_clip (WInput * in)
 {
     char *p = NULL;
-    ev_clipboard_text_from_file_t event_data;
+    ev_clipboard_text_from_file_t event_data = { NULL, FALSE };
 
     /* try use external clipboard utility */
     mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_from_ext_clip", NULL);
