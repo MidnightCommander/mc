@@ -414,11 +414,11 @@ static inline gboolean
 mcview_get_byte_indexed (WView * view, off_t base, off_t ofs, int *retval)
 {
     if (base <= OFFSETTYPE_MAX - ofs)
-    {
         return mcview_get_byte (view, base + ofs, retval);
-    }
-    if (retval)
+
+    if (retval != NULL)
         *retval = -1;
+
     return FALSE;
 }
 
@@ -429,9 +429,11 @@ mcview_count_backspaces (WView * view, off_t offset)
 {
     int backspaces = 0;
     int c;
+
     while (offset >= 2 * backspaces && mcview_get_byte (view, offset - 2 * backspaces, &c)
            && c == '\b')
         backspaces++;
+
     return backspaces;
 }
 
