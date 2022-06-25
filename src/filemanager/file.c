@@ -852,10 +852,39 @@ real_warn_same_file (enum OperationMode mode, const char *fmt, const char *a, co
     char *msg;
     int result = 0;
     const char *head_msg;
+    int width_a, width_b, width;
 
     head_msg = mode == Foreground ? MSG_ERROR : _("Background process error");
 
-    msg = g_strdup_printf (fmt, a, b);
+    width_a = str_term_width1 (a);
+    width_b = str_term_width1 (b);
+    width = COLS - 8;
+
+    if (width_a > width)
+    {
+        if (width_b > width)
+        {
+            char *s;
+
+            s = g_strndup (str_trunc (a, width), width);
+            b = str_trunc (b, width);
+            msg = g_strdup_printf (fmt, s, b);
+            g_free (s);
+        }
+        else
+        {
+            a = str_trunc (a, width);
+            msg = g_strdup_printf (fmt, a, b);
+        }
+    }
+    else
+    {
+        if (width_b > width)
+            b = str_trunc (b, width);
+
+        msg = g_strdup_printf (fmt, a, b);
+    }
+
     result = query_dialog (head_msg, msg, D_ERROR, 2, _("&Skip"), _("&Abort"));
     g_free (msg);
     do_refresh ();
