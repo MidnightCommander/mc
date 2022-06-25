@@ -96,7 +96,9 @@ extern gboolean only_leading_plus_minus;
 extern int cd_symlinks;
 extern gboolean auto_fill_mkdir_name;
 extern gboolean output_starts_shell;
+#ifdef USE_FILE_CMD
 extern gboolean use_file_to_check_type;
+#endif
 extern gboolean file_op_compute_totals;
 extern gboolean editor_ask_filename_before_edit;
 

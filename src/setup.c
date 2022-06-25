@@ -164,8 +164,10 @@ gboolean auto_fill_mkdir_name = TRUE;
 /* If set and you don't have subshell support, then C-o will give you a shell */
 gboolean output_starts_shell = FALSE;
 
+#ifdef USE_FILE_CMD
 /* If set, we execute the file command to check the file type */
 gboolean use_file_to_check_type = TRUE;
+#endif
 
 gboolean verbose = TRUE;
 
