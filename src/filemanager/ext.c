@@ -74,7 +74,11 @@
 /*** file scope macro definitions ****************************************************************/
 
 #ifdef USE_FILE_CMD
+#ifdef FILE_B
+#define FILE_CMD "file -z " FILE_B FILE_S FILE_L
+#else
 #define FILE_CMD "file -z " FILE_S FILE_L
+#endif
 #endif
 
 /*** file scope type declarations ****************************************************************/
@@ -646,7 +650,6 @@ regex_check_type (const vfs_path_t * filename_vpath, const char *ptr, gboolean c
     if (!*have_type)
     {
         vfs_path_t *localfile_vpath;
-        const char *realname;   /* name used with "file" */
 
 #ifdef HAVE_CHARSET
         static char encoding_id[21];    /* CSISO51INISCYRILLIC -- 20 */
@@ -664,7 +667,6 @@ regex_check_type (const vfs_path_t * filename_vpath, const char *ptr, gboolean c
             return FALSE;
         }
 
-        realname = vfs_path_get_last_path_str (localfile_vpath);
 
 #ifdef HAVE_CHARSET
         got_encoding_data = is_autodetect_codeset_enabled
@@ -694,26 +696,32 @@ regex_check_type (const vfs_path_t * filename_vpath, const char *ptr, gboolean c
         if (got_data > 0)
         {
             char *pp;
-            size_t real_len;
 
             pp = strchr (content_string, '\n');
             if (pp != NULL)
                 *pp = '\0';
 
-            real_len = strlen (realname);
-
-            if (strncmp (content_string, realname, real_len) == 0)
+#ifndef FILE_B
             {
-                /* Skip "realname: " */
-                content_shift = real_len;
-                if (content_string[content_shift] == ':')
+                const char *real_name;  /* name used with "file" */
+                size_t real_len;
+
+                real_name = vfs_path_get_last_path_str (localfile_vpath);
+                real_len = strlen (real_name);
+
+                if (strncmp (content_string, real_name, real_len) == 0)
                 {
+                    /* Skip "real_name: " */
+                    content_shift = real_len;
+
                     /* Solaris' file prints tab(s) after ':' */
-                    for (content_shift++; whitespace (content_string[content_shift]);
-                         content_shift++)
-                        ;
+                    if (content_string[content_shift] == ':')
+                        for (content_shift++; whitespace (content_string[content_shift]);
+                             content_shift++)
+                            ;
                 }
             }
+#endif /* FILE_B */
         }
         else
         {
