@@ -122,6 +122,11 @@ mc_fhl_t *mc_filehighlight = NULL;
 #define SELECT_RESET ((mc_search_t *)(-1))
 #define SELECT_ERROR ((mc_search_t *)(-2))
 
+/* mouse position relative to file list */
+#define MOUSE_UPPER_FILE_LIST (-1)
+#define MOUSE_BELOW_FILE_LIST (-2)
+#define MOUSE_AFTER_LAST_FILE (-3)
+
 /*** file scope type declarations ****************************************************************/
 
 typedef enum
@@ -3811,19 +3816,30 @@ mouse_set_mark (WPanel * panel)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static gboolean
-mark_if_marking (WPanel * panel, const mouse_event_t * event)
+static void
+mark_if_marking (WPanel * panel, const mouse_event_t * event, int previous_selected)
 {
-    if ((event->buttons & GPM_B_RIGHT) != 0)
-    {
-        if (event->msg == MSG_MOUSE_DOWN)
-            mouse_toggle_mark (panel);
-        else
-            mouse_set_mark (panel);
-        return TRUE;
-    }
+    if ((event->buttons & GPM_B_RIGHT) == 0)
+        return;
 
-    return FALSE;
+    if (event->msg == MSG_MOUSE_DOWN)
+        mouse_toggle_mark (panel);
+    else
+    {
+        int psel, sel1, sel2;
+
+        psel = panel->selected;
+        sel1 = MIN (previous_selected, panel->selected);
+        sel2 = MAX (previous_selected, panel->selected);
+
+        for (; sel1 <= sel2; sel1++)
+        {
+            panel->selected = sel1;
+            mouse_set_mark (panel);
+        }
+
+        panel->selected = psel;
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -3886,27 +3902,27 @@ mouse_sort_col (WPanel * panel, int x)
 static int
 panel_mouse_is_on_item (const WPanel * panel, int y, int x)
 {
-    int last;
+    int lines, col_width, col;
 
     if (y < 0)
-        return (-1);
+        return MOUSE_UPPER_FILE_LIST;
 
-    last = panel->dir.len - 1;
-    y += panel->top_file;
+    lines = panel_lines (panel);
+    if (y >= lines)
+        return MOUSE_BELOW_FILE_LIST;
 
-    if (y > last)
-        return (-1);
+    col_width = (CONST_WIDGET (panel)->rect.cols - 2) / panel->list_cols;
+    /* column where mouse is */
+    col = x / col_width;
 
-    if (panel->list_cols > 1)
-    {
-        int width, lines;
+    y += panel->top_file + lines * col;
 
-        width = (CONST_WIDGET (panel)->rect.cols - 2) / panel->list_cols;
-        lines = panel_lines (panel);
-        y += lines * (x / width);
-    }
+    /* are we below or in the next column of last file? */
+    if (y > panel->dir.len)
+        return MOUSE_AFTER_LAST_FILE;
 
-    return (y > last ? -1 : y);
+    /* we are on item of the file file; return an index to select a file */
+    return y;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -3961,10 +3977,27 @@ panel_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
     case MSG_MOUSE_DRAG:
         {
             int my_index;
+            int previous_selected;
 
             my_index = panel_mouse_is_on_item (panel, event->y - 2, event->x);
-            if (my_index >= 0)
+            previous_selected = panel->selected;
+
+            switch (my_index)
             {
+            case MOUSE_UPPER_FILE_LIST:
+                move_up (panel);
+                mark_if_marking (panel, event, previous_selected);
+                break;
+
+            case MOUSE_BELOW_FILE_LIST:
+                move_down (panel);
+                mark_if_marking (panel, event, previous_selected);
+                break;
+
+            case MOUSE_AFTER_LAST_FILE:
+                break;          /* do nothing */
+
+            default:
                 if (my_index != panel->selected)
                 {
                     unselect_item (panel);
@@ -3972,8 +4005,8 @@ panel_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
                     select_item (panel);
                 }
 
-                /* This one is new */
-                mark_if_marking (panel, event);
+                mark_if_marking (panel, event, previous_selected);
+                break;
             }
         }
         break;
