@@ -34,6 +34,27 @@ shell_patterns=0
             $CMD "$i"
         done
 
+%       View Midnight Commander macro substitution
+        %view
+        echo -e "%%m   The current menu name\n=>   %m"
+        echo "##########"
+        echo -e "%%p   The current file name (without path, but pwd is its path)\n=>   %p"
+        echo -e "%%f   The current file name (if non-local vfs, file will be copied \
+                 locally and %%f will be full path to it)\n=>   %f"
+        echo -e "%%x   The extension of current file name\n=>   %x"
+        echo -e "%%b   The current file name without extension\n=>   %b"
+        echo -e "%%d   The current directory name (pwd, without trailing slash)\n=>   %d"
+        echo -e "%%t   The currently tagged files (space separated list)\n=>   %t"
+        echo -e "%%u   Similar to the %%t macro, but in addition the files are \
+                 untagged\n=>   DOES NOT SHOW IN THIS EXAMPLE"
+        echo -e "%%s   The selected files (the tagged files if any, otherwise the \
+                 current file)\n=>   %s"
+        echo "##########"
+        echo -e "If the format letter is in uppercase (%%P, %%F, %%X, %%B, %%D, %%T, %%U \
+                 or %%S),\nit refers to the other (unselected, opposite) panel."
+        echo "##########"
+        echo -e "%%S   The selected files in the unselected panel\n=>   %S"
+
 0       Edit a bug report and send it to root
         I=`mktemp "${MC_TMPDIR:-/tmp}/mail.XXXXXX"` || exit 1
         ${EDITOR-vi} "$I"
