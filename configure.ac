@@ -126,7 +126,7 @@ fi
 AC_SUBST(MANDOC)
 AC_SUBST(MAN_FLAGS)
 
-dnl Check for -z, -L, and -S options to file
+dnl Check for -z, -b, -L, and -S options to file
 AC_CHECK_PROG(HAVE_FILECMD, file, true, false)
 if $HAVE_FILECMD; then
     dnl Don't use the file command if it doesn't accept the -z option
@@ -148,7 +148,22 @@ if $HAVE_FILECMD; then
     fi
 
     if test x$mc_cv_file_z = xyes; then
-        dnl file is used; check -L and -S options
+        dnl file is used; check -b, -L and -S options
+
+        AC_MSG_CHECKING([for -b option to file command])
+        AC_CACHE_VAL(mc_cv_file_b, [
+            file -b . > /dev/null 2>&1
+            if test $? = 0; then
+                mc_cv_file_b=yes
+            else
+                mc_cv_file_b=no
+            fi
+        ])
+        AC_MSG_RESULT([$mc_cv_file_b])
+
+        if test x$mc_cv_file_b = xyes; then
+            AC_DEFINE(FILE_B, "-b ", [Define if the file command accepts the -b option])
+        fi
 
         AC_MSG_CHECKING([for -L option to file command])
         AC_CACHE_VAL(mc_cv_file_L, [

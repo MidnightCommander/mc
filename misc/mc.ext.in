@@ -25,6 +25,8 @@
 #
 #    type  (file matches this if `file %f` matches regular expression desc
 #          (the filename: part from `file %f` is removed))
+#          Ignored if the "file" utility isn't used (not found in configure
+           step or disabled in ini file).
 #
 #    type/i (file matches this if `file %f` matches regular expression desc)
 #          The same as type but with case insensitive.

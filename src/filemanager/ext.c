@@ -50,7 +50,9 @@
 #include "lib/charsets.h"       /* get_codepage_index */
 #endif
 
+#ifdef USE_FILE_CMD
 #include "src/setup.h"          /* use_file_to_check_type */
+#endif
 #include "src/execute.h"
 #include "src/history.h"
 #include "src/usermenu.h"
@@ -72,10 +74,11 @@
 /*** file scope macro definitions ****************************************************************/
 
 #ifdef USE_FILE_CMD
-#define FILE_CMD "file -z " FILE_S FILE_L
+#ifdef FILE_B
+#define FILE_CMD "file -z " FILE_B FILE_S FILE_L
 #else
-/* actually file is unused, but define some reasonable command */
-#define FILE_CMD "file "
+#define FILE_CMD "file -z " FILE_S FILE_L
+#endif
 #endif
 
 /*** file scope type declarations ****************************************************************/
@@ -540,6 +543,7 @@ exec_extension (WPanel * panel, void *target, const vfs_path_t * filename_vpath,
  * NOTES: buf is null-terminated string.
  */
 
+#ifdef USE_FILE_CMD
 static int
 get_popen_information (const char *cmd_file, const char *args, char *buf, int buflen)
 {
@@ -643,13 +647,9 @@ regex_check_type (const vfs_path_t * filename_vpath, const char *ptr, gboolean c
 
     mc_return_val_if_error (mcerror, FALSE);
 
-    if (!use_file_to_check_type)
-        return FALSE;
-
     if (!*have_type)
     {
         vfs_path_t *localfile_vpath;
-        const char *realname;   /* name used with "file" */
 
 #ifdef HAVE_CHARSET
         static char encoding_id[21];    /* CSISO51INISCYRILLIC -- 20 */
@@ -667,7 +667,6 @@ regex_check_type (const vfs_path_t * filename_vpath, const char *ptr, gboolean c
             return FALSE;
         }
 
-        realname = vfs_path_get_last_path_str (localfile_vpath);
 
 #ifdef HAVE_CHARSET
         got_encoding_data = is_autodetect_codeset_enabled
@@ -697,26 +696,32 @@ regex_check_type (const vfs_path_t * filename_vpath, const char *ptr, gboolean c
         if (got_data > 0)
         {
             char *pp;
-            size_t real_len;
 
             pp = strchr (content_string, '\n');
             if (pp != NULL)
                 *pp = '\0';
 
-            real_len = strlen (realname);
-
-            if (strncmp (content_string, realname, real_len) == 0)
+#ifndef FILE_B
             {
-                /* Skip "realname: " */
-                content_shift = real_len;
-                if (content_string[content_shift] == ':')
+                const char *real_name;  /* name used with "file" */
+                size_t real_len;
+
+                real_name = vfs_path_get_last_path_str (localfile_vpath);
+                real_len = strlen (real_name);
+
+                if (strncmp (content_string, real_name, real_len) == 0)
                 {
+                    /* Skip "real_name: " */
+                    content_shift = real_len;
+
                     /* Solaris' file prints tab(s) after ':' */
-                    for (content_shift++; whitespace (content_string[content_shift]);
-                         content_shift++)
-                        ;
+                    if (content_string[content_shift] == ':')
+                        for (content_shift++; whitespace (content_string[content_shift]);
+                             content_shift++)
+                            ;
                 }
             }
+#endif /* FILE_B */
         }
         else
         {
@@ -752,6 +757,7 @@ regex_check_type (const vfs_path_t * filename_vpath, const char *ptr, gboolean c
 
     return found;
 }
+#endif /* USE_FILE_CMD */
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
@@ -792,7 +798,9 @@ regex_command_for (void *target, const vfs_path_t * filename_vpath, const char *
     int view_at_line_number = 0;
     char *include_target = NULL;
     size_t include_target_len = 0;
+#ifdef USE_FILE_CMD
     gboolean have_type = FALSE; /* Flag used by regex_check_type() */
+#endif
 
     if (filename_vpath == NULL)
         return 0;
@@ -961,7 +969,8 @@ regex_command_for (void *target, const vfs_path_t * filename_vpath, const char *
                         found = TRUE;
                 }
             }
-            else if (strncmp (p, "type/", 5) == 0)
+#ifdef USE_FILE_CMD
+            else if (use_file_to_check_type && strncmp (p, "type/", 5) == 0)
             {
                 GError *mcerror = NULL;
 
@@ -975,6 +984,7 @@ regex_command_for (void *target, const vfs_path_t * filename_vpath, const char *
                 if (mc_error_message (&mcerror, NULL))
                     error_flag = TRUE;  /* leave it if file cannot be opened */
             }
+#endif /* USE_FILE_CMD */
             else if (strncmp (p, "default/", 8) == 0)
                 found = TRUE;
 
