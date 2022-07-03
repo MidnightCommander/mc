@@ -960,6 +960,8 @@ extfs_cmd (const char *str_extfs_cmd, const struct extfs_super_t *archive,
         return (-1);
     }
 
+    pip->err.null_term = TRUE;
+
     mc_pread (pip, &error);
     if (error != NULL)
     {
