@@ -1,0 +1,155 @@
+# Privoxy action file syntax highlighting
+# Version: 2022-07-02
+# Author: Bogdan Pylypenko <bogdan.pylypenko107@gmail.com> 
+# This definition is under the GNU GPL version 3.0.
+
+context default
+
+context { }\n magenta
+    keyword \\ brown
+
+    keyword \+add-header yellow
+    keyword \+block yellow
+    keyword \+change-x-forwarded-for yellow
+    keyword \+client-header-filter yellow
+    keyword \+client-body-filter yellow
+    keyword \+client-header-tagger yellow
+    keyword \+content-type-overwrite yellow
+    keyword \+crunch-client-header yellow
+    keyword \+crunch-if-none-match yellow
+    keyword \+crunch-incoming-cookies yellow
+    keyword \+crunch-server-header yellow
+    keyword \+crunch-outgoing-cookies yellow
+    keyword \+deanimate-gifs yellow
+    keyword \+delay-response yellow
+    keyword \+downgrade-http-version yellow
+    keyword \+external-filter yellow
+    keyword \+fast-redirects yellow
+    keyword \+filter yellow
+    keyword \+force-text-mode yellow
+    keyword \+forward-override yellow
+    keyword \+handle-as-empty-document yellow
+    keyword \+handle-as-image yellow
+    keyword \+hide-accept-language yellow
+    keyword \+hide-content-disposition yellow
+    keyword \+hide-if-modified-since yellow
+    keyword \+hide-from-header yellow
+    keyword \+hide-referrer yellow
+    keyword \+hide-user-agent yellow
+    keyword \+https-inspection yellow
+    keyword \+ignore-certificate-errors yellow
+    keyword \+limit-connect yellow
+    keyword \+limit-cookie-lifetime yellow
+    keyword \+prevent-compression yellow
+    keyword \+overwrite-last-modified yellow
+    keyword \+redirect yellow
+    keyword \+server-header-filter yellow
+    keyword \+server-header-tagger yellow
+    keyword \+suppress-tag yellow
+    keyword \+session-cookies-only yellow
+    keyword \+set-image-blocker yellow
+
+    keyword \-add-header green
+    keyword \-block green
+    keyword \-change-x-forwarded-for green
+    keyword \-client-header-filter green
+    keyword \-client-body-filter green
+    keyword \-client-header-tagger green
+    keyword \-content-type-overwrite green
+    keyword \-crunch-client-header green
+    keyword \-crunch-if-none-match green
+    keyword \-crunch-incoming-cookies green
+    keyword \-crunch-server-header green
+    keyword \-crunch-outgoing-cookies green
+    keyword \-deanimate-gifs green
+    keyword \-delay-response green
+    keyword \-downgrade-http-version green
+    keyword \-external-filter green
+    keyword \-fast-redirects green
+    keyword \-filter green
+    keyword \-force-text-mode green
+    keyword \-forward-override green
+    keyword \-handle-as-empty-document green
+    keyword \-handle-as-image green
+    keyword \-hide-accept-language green
+    keyword \-hide-content-disposition green
+    keyword \-hide-if-modified-since green
+    keyword \-hide-from-header green
+    keyword \-hide-referrer green
+    keyword \-hide-user-agent green
+    keyword \-https-inspection green
+    keyword \-ignore-certificate-errors green
+    keyword \-limit-connect green
+    keyword \-limit-cookie-lifetime green
+    keyword \-prevent-compression green
+    keyword \-overwrite-last-modified green
+    keyword \-redirect green
+    keyword \-server-header-filter green
+    keyword \-server-header-tagger green
+    keyword \-suppress-tag green
+    keyword \-session-cookies-only green
+    keyword \-set-image-blocker green
+
+    keyword block cyan
+    keyword add cyan
+    keyword last cyan
+    keyword first  cyan
+    keyword simple-check cyan
+    keyword check-decoded-url cyan
+    keyword block cyan
+    keyword forward-socks4a cyan
+    keyword forward-socks5 cyan
+    keyword forward-webserver cyan
+    keyword forward cyan
+    keyword conditional-block cyan
+    keyword conditional-forge cyan
+    keyword forge cyan
+    keyword reset-to-request-time cyan
+    keyword randomize cyan
+
+    # 8.5.18 + 9.2
+    keyword js-annoyances  cyan
+    keyword js-events cyan
+    keyword html-annoyances cyan
+    keyword content-cookies cyan
+    keyword refresh-tags cyan
+    keyword unsolicited-popups cyan
+    keyword all-popups cyan
+    keyword img-reorder cyan
+    keyword banners-by-size cyan
+    keyword banners-by-link cyan
+    keyword webbugs cyan
+    keyword tiny-textforms cyan
+    keyword jumping-windows cyan
+    keyword frameset-borders cyan
+    keyword iframes cyan
+    keyword demoronizer cyan
+    keyword shockwave-flash cyan
+    keyword quicktime-kioskmode cyan
+    keyword fun cyan
+    keyword crude-parental cyan
+    keyword ie-exploits cyan
+    keyword site-specifics cyan
+    keyword no-ping cyan
+    keyword github cyan
+    keyword google cyan
+    keyword imdb cyan
+    keyword yahoo cyan
+    keyword msn cyan
+    keyword blogspot cyan
+    keyword sourceforge cyan
+    keyword xml-to-html cyan
+    keyword html-to-xml cyan
+    keyword no-ping cyan
+    keyword hide-tor-exit-notation cyan
+
+# Lines, which ignored by Privoxy, if it starts with "- ":
+context linestart -\s \n gray
+
+# Comments:
+context linestart # \n brown
+    spellcheck
+context linestart \s\[\s\]# \n brown
+    spellcheck
+context linestart /\s \n brown
+    spellcheck

@@ -325,5 +325,8 @@ include kotlin.syntax
 file ..\*\\.swift$ Swift\sProgram
 include swift.syntax
 
+file ..\*\\.action$ Privoxy\sFile
+include privoxy.syntax
+
 file .\* unknown
 include unknown.syntax

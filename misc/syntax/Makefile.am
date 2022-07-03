@@ -69,6 +69,7 @@ SYNTAXFILES =			\
 	php.syntax		\
 	po.syntax		\
 	povray.syntax		\
+	privoxy.syntax		\
 	procmail.syntax		\
 	properties.syntax	\
 	protobuf.syntax		\
