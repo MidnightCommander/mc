@@ -36,5 +36,6 @@ context ' ' green
     spellcheck
     keyword {{*}} brightred
 
-context exclusive |\[123456789\+\-\s\t\]\n \n- brown
-context exclusive >\[123456789\+\-\s\t\]\n \n- brown
+# The last word below may be: "\n*:\{\s\n\}", but used strict version suitable for more cases
+context exclusive |\[123456789\+\-\s\t\]\n \n\n\[\s-\]\[-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\]:\{\s\n\} brown
+context exclusive >\[123456789\+\-\s\t\]\n \n\n\[\s-\]\[-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\]:\{\s\n\} brown
