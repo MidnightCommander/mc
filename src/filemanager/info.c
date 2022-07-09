@@ -163,11 +163,11 @@ info_show_info (WInfo * info)
             (myfs_stats.nfree == (uintmax_t) (-1) && myfs_stats.nodes == (uintmax_t) (-1)))
             tty_print_string (_("No node information"));
         else if (myfs_stats.nfree == (uintmax_t) (-1))
-            tty_printf ("%s -/%" PRIuMAX, _("Free nodes:"), myfs_stats.nodes);
+            tty_printf ("%s - / %" PRIuMAX, _("Free nodes:"), myfs_stats.nodes);
         else if (myfs_stats.nodes == (uintmax_t) (-1))
-            tty_printf ("%s %" PRIuMAX "/-", _("Free nodes:"), myfs_stats.nfree);
+            tty_printf ("%s %" PRIuMAX " / -", _("Free nodes:"), myfs_stats.nfree);
         else
-            tty_printf ("%s %" PRIuMAX "/%" PRIuMAX " (%d%%)",
+            tty_printf ("%s %" PRIuMAX " / %" PRIuMAX " (%d%%)",
                         _("Free nodes:"),
                         myfs_stats.nfree, myfs_stats.nodes,
                         myfs_stats.nodes == 0 ? 0 :
@@ -183,7 +183,7 @@ info_show_info (WInfo * info)
 
             size_trunc_len (buffer1, 5, myfs_stats.avail, 1, panels_options.kilobyte_si);
             size_trunc_len (buffer2, 5, myfs_stats.total, 1, panels_options.kilobyte_si);
-            tty_printf (_("Free space: %s/%s (%d%%)"), buffer1, buffer2,
+            tty_printf (_("Free space: %s / %s (%d%%)"), buffer1, buffer2,
                         myfs_stats.total == 0 ? 0 :
                         (int) (100 * (long double) myfs_stats.avail / myfs_stats.total));
         }
