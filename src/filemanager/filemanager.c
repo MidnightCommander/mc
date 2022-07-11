@@ -199,7 +199,7 @@ create_panel_menu (void)
     entries =
         g_list_prepend (entries,
                         menu_entry_create (_("&Listing format..."), CK_SetupListingFormat));
-    entries = g_list_prepend (entries, menu_entry_create (_("S&ort order..."), CK_Sort));
+    entries = g_list_prepend (entries, menu_entry_create (_("&Sort order..."), CK_Sort));
     entries = g_list_prepend (entries, menu_entry_create (_("&Filter..."), CK_Filter));
 #ifdef HAVE_CHARSET
     entries = g_list_prepend (entries, menu_entry_create (_("&Encoding..."), CK_SelectCodepage));
@@ -212,7 +212,7 @@ create_panel_menu (void)
     entries = g_list_prepend (entries, menu_entry_create (_("S&hell link..."), CK_ConnectFish));
 #endif
 #ifdef ENABLE_VFS_SFTP
-    entries = g_list_prepend (entries, menu_entry_create (_("&SFTP link..."), CK_ConnectSftp));
+    entries = g_list_prepend (entries, menu_entry_create (_("SFTP li&nk..."), CK_ConnectSftp));
 #endif
     entries = g_list_prepend (entries, menu_entry_create (_("Paneli&ze"), CK_Panelize));
     entries = g_list_prepend (entries, menu_separator_create ());
