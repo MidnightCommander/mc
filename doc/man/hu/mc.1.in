@@ -1299,66 +1299,16 @@ A cd belső parancs
 leírásánál.
 .\"NODE "    Edit Extension File"
 .SH "    Társítások"
-Ez az ~/.config/mc/mc.ext szerkesztéséhez segítségül fogja hívni a
-szövegszerkesztődet. A fájl formátuma a következő (a formátum a 3.0\-ás
-verzióval megváltozott):
-.PP
-Minden # jellel kezdődő sor, vagy üres sor kommentárnak tekinthető.
-.PP
-A sorok az első rovatban látható formátumnak megfelelően kezdődnek:
-.PP
-.IR kulcsszó/desc ,
-pl. akármi a
-.I kulcsszó/
-után úgy, hogy a sor vége karakter előtt a
-.I desc
-áll kulcsszó lehet:
-.PP
-.I shell
-.IP
-bármely kiterjesztés esetén, amely ponttal kezdődik (nem szükséges a
-helyettesítő karaktert beírni, például: .tar az *.tar párja)
-.PP
-.I regex
-.IP
-(szabványos kifejezés; regular expression esetén)
-.PP
-.I type
-.IP
-(azokra a fájlokra illeszkedik, amelyek tartalmazzák a `file %f`
-szöveget. A fájlnév a `file %f` résztől törlődik)
-.PP
-.I default
-.IP
-(illeszkedik bármely fájlra, kiterjesztésétől függetlenül)
-.PP
-A többi sor kezdődhet szóközzel, vagy tabulátorral, a formátumuk pedig a
-következő:
-.PP
-.I keyword=command
-(szóközt nem szabad az egyenlőségjel mellé írni), ahol a
-.I kulcsszó
-lehet:
-.PP
-.I Open
-(ha a felhasználó lenyomja az Enter\-t, vagy duplán kattint),
-.I View
-(F3) és
-.I Edit
-(F4).
-.PP
-.I command
-ez bármely egysoros shell parancs lehet, az egyszerű
-.\"LINK2"
-Macro Helyettesítővel\&.
-.\"Macro Substitution"
-.PP
-A feladatokatokat fentről lefelé értékeljük ki (tehát a sorrend nagyon
-fontos).  Ha néhány műveletet keresünk, a keresés úgy folytatódik,
-mintha ez a cél nem létezne (pl. ha a fájl tartalmazza az első és a
-második bejegyzést és a Nézet művelet hiányzik az elsőből, akkor az F3
-lenyomására a Nézet művelet a második bejegyzést fogja használni.
-Alapértelmezésben végrehajt minden műveletet.
+Ez az
+.I ~/.config/mc/mc.ext.ini
+szerkesztéséhez segítségül fogja hívni a szövegszerkesztődet.
+If this file does not exist and you are not root, it will be copied from
+.IR %sysconfdir%/mc/mc.ext.ini .
+If you are root, you can choose the file to edit: user's
+.I ~/.config/mc/mc.ext.ini
+or system\-wide
+.IR %sysconfdir%/mc/mc.ext.ini .
+The format of this file is described in detail in it.
 .\"NODE "    Background jobs"
 .SH "    Háttérmunkák"
 Ezzel szabályozhatod néhány Commander háttérfolyamat állapotát (csak a
@@ -2393,7 +2343,7 @@ A következő egyezőt keresi.
 .PP
 .B F8
 Vált a Nyers és Feldolgozott mód között: ez a fájlt, úgy mutatja meg,
-ahogy megtalálta, vagy, ha folyamatszűrő meg van adva az mc.ext fájlban,
+ahogy megtalálta, vagy, ha folyamatszűrő meg van adva az mc.ext.ini fájlban,
 akkor a szűrő kimenetét. A Jelenlegi mód mindig a másik, mit amit a gomb
 felirata mutat.
 .PP
@@ -2663,7 +2613,7 @@ következő szintaktikájú parancs segítségével tudod átváltani könyvtár
 .PP
 .I /filename.tar:utar/[dir\-inside\-tar]
 .PP
-Az mc.ext fájl már tartalmaz gyorsbillentyűket a tar fájlokhoz, ezért
+Az mc.ext.ini fájl már tartalmaz gyorsbillentyűket a tar fájlokhoz, ezért
 csak rá kell mutatnod a tar fájlra és le kell nyomnod az entert ahhoz,
 hogy beléphess a tar fájlba, ehhez nézd meg a
 .\"LINK2"
@@ -3153,11 +3103,11 @@ ez vissza fog állítódni a /usr könyvtárra.
 .IP
 A program súgó fájlja.
 .PP
-.I %pkgdatadir%/mc.ext
+.I %pkgdatadir%/mc.ext.ini
 .IP
 Az alapértelmezett rendszerszintű kiterjesztés fájl.
 .PP
-.I ~/.config/mc/mc.ext
+.I ~/.config/mc/mc.ext.ini
 .IP
 A felhasználó saját kiterjesztései, nézet beállítások és szerkesztési
 beállítások. Ezek felülbírálják a rendszerszintű fájl bejegyzéseit, ha

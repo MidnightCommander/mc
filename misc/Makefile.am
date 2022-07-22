@@ -2,7 +2,7 @@
 
 SUBDIRS = ext.d macros.d skins syntax
 
-LIBFILES_OUT = mc.ext
+LIBFILES_OUT = mc.ext.ini
 
 noinst_DATA = xterm.ad
 

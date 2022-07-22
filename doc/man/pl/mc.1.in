@@ -1095,65 +1095,16 @@ przemieszczanie.
 .PP
 .\"NODE "    Edit Extension File"
 .SH "    Edycja rozszerzeń pliów (Edit Extension File)"
-Ta komenda wywoła twój edytor na plik ~/.config/mc/mc.ext. Format tego pliku jest
-następujący (zmienił się on począwszy od wersji 3.0):
-.PP
-Wszystkie linie zaczynające się od #, lub puste, nie są brane pod uwagę.
-.PP
-Linie zaczynające się od pierwszej kolumny powinny mieć następujący format:
-.PP
-.IR "słowo kluczowe/wzorzec" ,
-tj. wszystko po
-.I słowie kluczowym/
-dopóki nową linią nie jest
-.I wzorzec
-.PP
-słowami kluczowymi mogą być:
-.PP
-.I shell
-.IP
-(wzorzec jest wtedy wyrażeniem (bez jokerów), tj. pasują wszystkie pliki
-*wzorzec. Np.: .tar znaczy *.tar)
-.PP
-.I regex
-.IP
-(wzorzec jest normalnym wyrażeniem)
-.PP
-.I type
-.IP
-(plik spełnia wymagania jeśli `file %f` zgadza się z wyrażeniem wzorca
-(nazwa: część z `file %f` jest usuwana))
-.PP
-.I default
-.IP
-(wszystkie pliki spełniają, nie ważne jaki jest wzorzec)
-.PP
-Inne linie powinny zaczynać się od spacji lub tabulacji i powinny
-mieć one następujący format:
-.PP
-.I słowo kluczowe=komenda
-(bez spacji przy znaku =), gdzie
-.I słowem kluczowym
-powinno być:
-.PP
-.I Open (Otwórz)
-(jeśli użytkownik naciśnie Enter lub kliknie dwukrotnie),
-.I View (Podgląd)
-(F3),
-.I Edit (Edytuj)
-(F4).
-.PP
-.I command
-jest jakąkolwiek jedną linią powłoki, z zastosowaniem
-prostego makra.
-.PP
-Cele są przeliczane od góry do dołu (porządek jest tu istotny). Jeśli
-jakiejś akcji brakuje, poszukiwanie kontynuuje się tak jakby wcześniej
-nie nastąpiła żadna zgodność (tj. jeśli zgadza się z wzorcem pierwszym
-i trzecim i brakuje w pierwszym akcji View, to naciskając F3 użyta będzie
-akcja z trzeciego wzorca). Opcja default powinna wychwycić wszystkie możliwe
-akcje.
-.PP
+Ta komenda wywoła twój edytor na plik
+.IR ~/.config/mc/mc.ext.ini .
+If this file does not exist and you are not root, it will be copied from
+.IR %sysconfdir%/mc/mc.ext.ini .
+If you are root, you can choose the file to edit: user's
+.I ~/.config/mc/mc.ext.ini
+or system\-wide
+.IR %sysconfdir%/mc/mc.ext.ini .
+The format of this file is described in detail in it.
+PP
 .\"NODE "    Background Jobs"
 .SH "    Prace w tle (Background jobs)"
 Pozwalają ci one kontrolować status jakichkolwiek procesów wykonywanych
@@ -2052,7 +2003,7 @@ Szuka następnego wystąpienia.
 .B F8
 Przełącza tryby Raw i Parsed. Pokaże to plik w postaci takiej w jakiej
 został znaleziony na dysku, lub jeśli został wybrany jakiś filtr, bądź
-też plik spełnia wymagania w pliku mc.ext, wyświetlane jest to co
+też plik spełnia wymagania w pliku mc.ext.ini, wyświetlane jest to co
 przekazuje filtr. Aktualne ustawienie jest zawsze przeciwne niż to napisane
 na przycisku, przycisk wskazuje zawsze to co się stanie po jego
 naciśnięciu.
@@ -2300,7 +2251,7 @@ następującej konstrukcji:
 .PP
 .I /nazwa_pliku.tar:utar/[katalogu\-wewnątrza\-archiwum]
 .PP
-Plik mc.ext pozwala już na tworzenie skrótów do plików tar, oznacza to, że
+Plik mc.ext.ini pozwala już na tworzenie skrótów do plików tar, oznacza to, że
 możesz wybrać jakiś plik tar i nacisnąć enter aby do niego wejść, zobacz
 sekcję Edycja pliku rozszerzeń po więcej szczegółów na temat tego jak
 zostało to pomyślane.
@@ -2791,7 +2742,7 @@ Podświetlenie uprawnień również pracuje w tym trybie.
 .I use_file_to_guess_type
 .IP
 Jeśli ta zmienna jest ustawiona (standardowo) próbuje się dostosować
-rozszerzenie pliku do tego wybranego w pliku mc.ext.
+rozszerzenie pliku do tego wybranego w pliku mc.ext.ini.
 .PP
 .I xtree_mode
 .IP
@@ -2854,11 +2805,11 @@ jeśli jest ona nie ustawiona to znowu przetwarzany jest katalog /usr.
 .IP
 Plik pomocy dla programu.
 .PP
-%pkgdatadir%/mc.ext
+%pkgdatadir%/mc.ext.ini
 .IP
 Standardowy plik rozszerzeń plików.
 .PP
-~/.config/mc/mc.ext
+~/.config/mc/mc.ext.ini
 .IP
 Własny plik użytkownika, konfiguruje podgląd i edycje plików. Ma wyższy
 priorytet niż plik systemowy.

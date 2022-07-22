@@ -1483,87 +1483,14 @@ description.
 .\"NODE "    Edit Extension File"
 .SH "    Edit Extension File"
 This will invoke your editor on the file
-.IR ~/.config/mc/mc.ext .
-The format of this file following:
-.PP
-All lines starting with # or empty lines are thrown away.
-.PP
-Lines starting in the first column should have following format:
-.PP
-.IR keyword/expr ,
-i.e. everything after the slash until new line is
-.IR expr .
-.PP
-.I keyword
-can be:
-.TP
-.I shell
-\-
-.I expr
-is an extension (no wildcards).  File matches it its name ends
-with
-.IR expr .
-Example:
-.I shell/.tar
-matches
-.IR *.tar .
-.TP
-.I regex
-\-
-.I expr
-is a regular expression.  File matches if its name matches the regular
-expression.
-.TP
-.I directory
-\-
-.I expr
-is a regular expression.  File matches if it is a directory and its name
-matches the regular expression.
-.TP
-.I type
-\-
-.I expr
-is a regular expression.  File matches if the output of
-.I file %f
-without the initial "filename:" part matches regular expression
-.IR expr .
-.TP
-.I default
-\- matches any file.
-.I expr
-is ignored.
-.TP
-.I include
-\- denotes a common section.
-.I expr
-is the name of the section.
-.PP
-Other lines should start with a space or tab and should be of the format:
-.I keyword=command
-(with no spaces around =), where
-.I keyword
-should be:
-.I Open
-(invoked on Enter or double click),
-.I View
-(F3),
-.I Edit
-(F4) or
-.I Include
-(to add rules from the common section).
-.I command
-is any one\-line shell command, with the simple
-.\"LINK2"
-macro substitution\&.
-.\"Macro Substitution"
-.PP
-Rules are matched from top to bottom, thus the order is important.  If
-the appropriate action is missing, search continues as if this rule
-didn't match (i.e. if a file matches the first and second entry and View
-action is missing in the first one, then on pressing F3 the View action
-from the second entry will be used).
-.I default
-should match all the actions.
+.IR ~/.config/mc/mc.ext.ini .
+If this file does not exist and you are not root, it will be copied from
+.IR %sysconfdir%/mc/mc.ext.ini .
+If you are root, you can choose the file to edit: user's
+.I ~/.config/mc/mc.ext.ini
+or system\-wide
+.IR %sysconfdir%/mc/mc.ext.ini .
+The format of this file is described in detail in it.
 .\"NODE "    Background jobs"
 .SH "    Background Jobs"
 This lets you control the state of any background Midnight Commander
@@ -2975,7 +2902,7 @@ and vice versa.
 .TP
 .B F8
 Toggle Raw/Parsed mode: This will show the file as found on disk or if
-a processing filter has been specified in the mc.ext file, then the
+a processing filter has been specified in the mc.ext.ini file, then the
 output from the filter. Current mode is always the other than written
 on the button label, since on the button is the mode which you enter
 by that key.
@@ -3280,7 +3207,7 @@ tar file by using the following syntax:
 .PP
 .I /filename.tar/utar://[dir\-inside\-tar]
 .PP
-The mc.ext file already provides a shortcut for tar files, this means
+The mc.ext.ini file already provides a shortcut for tar files, this means
 that usually you just point to a tar file and press return to enter
 into the tar file, see the
 .\"LINK2"
@@ -4160,7 +4087,7 @@ the panel.
 If this variable is on (the default) it will spawn the file command to
 match the file types listed on the
 .\"LINK2"
-mc.ext file\&.
+mc.ext.ini file\&.
 .\"Edit Extension File"
 .TP
 .I xtree_mode
@@ -4308,11 +4235,11 @@ environment variable. If it's set, its value is used instead of
 .IP
 The help file for the program.
 .PP
-.I %pkgdatadir%/mc.ext
+.I %pkgdatadir%/mc.ext.ini
 .IP
 The default system\-wide extensions file.
 .PP
-.I ~/.config/mc/mc.ext
+.I ~/.config/mc/mc.ext.ini
 .IP
 User's own extension, view configuration and edit configuration
 file.  They override the contents of the system wide files if present.

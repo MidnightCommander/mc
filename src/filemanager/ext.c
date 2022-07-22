@@ -91,7 +91,8 @@ typedef char *(*quote_func_t) (const char *name, gboolean quote_percent);
  * With this we avoid loading/parsing the file each time we
  * need it
  */
-static char *data = NULL;
+static mc_config_t *ext_ini = NULL;
+static gchar **ext_ini_groups = NULL;
 static vfs_path_t *localfilecopy_vpath = NULL;
 static char buffer[BUF_1K];
 
@@ -102,6 +103,9 @@ static gboolean run_view = FALSE;
 static gboolean is_cd = FALSE;
 static gboolean written_nonspace = FALSE;
 static gboolean do_local_copy = FALSE;
+
+static const char *descr_group = "mc.ext.ini";
+static const char *default_group = "Default";
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
@@ -427,8 +431,6 @@ exec_extension (WPanel * panel, void *target, const vfs_path_t * filename_vpath,
     int cmd_file_fd;
     FILE *cmd_file;
     char *cmd = NULL;
-
-    g_return_val_if_fail (lc_data != NULL, NULL);
 
     pbuffer = NULL;
     localmtime = 0;
@@ -761,6 +763,22 @@ regex_check_type (const vfs_path_t * filename_vpath, const char *ptr, gboolean c
 
 /* --------------------------------------------------------------------------------------------- */
 
+static void
+check_old_extension_file (void)
+{
+    char *extension_old_file;
+
+    extension_old_file = mc_config_get_full_path (MC_EXT_OLD_FILE);
+    if (exist_file (extension_old_file))
+        message (D_ERROR, _("Warning"),
+                 _("You have an outdated %s file.\nMidnight Commander now uses %s file.\n"
+                   "Please copy your modifications of the old file to the new one."),
+                 extension_old_file, MC_EXT_FILE);
+    g_free (extension_old_file);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static gboolean
 load_extension_file (void)
 {
@@ -772,6 +790,9 @@ load_extension_file (void)
     if (!exist_file (extension_file))
     {
         g_free (extension_file);
+
+        check_old_extension_file ();
+
       check_stock_mc_ext:
         extension_file = mc_build_filename (mc_global.sysconfig_dir, MC_EXT_FILE, (char *) NULL);
         if (!exist_file (extension_file))
@@ -779,40 +800,41 @@ load_extension_file (void)
             g_free (extension_file);
             extension_file =
                 mc_build_filename (mc_global.share_data_dir, MC_EXT_FILE, (char *) NULL);
+            if (!exist_file (extension_file))
+                MC_PTR_FREE (extension_file);
         }
         mc_user_ext = FALSE;
     }
 
-    g_file_get_contents (extension_file, &data, NULL, NULL);
-    g_free (extension_file);
-    if (data == NULL)
+    if (extension_file != NULL)
+    {
+        ext_ini = mc_config_init (extension_file, TRUE);
+        g_free (extension_file);
+    }
+    if (ext_ini == NULL)
         return FALSE;
 
-    if (strstr (data, "default/") == NULL)
+    /* Check version */
+    if (!mc_config_has_group (ext_ini, descr_group))
     {
-        if (strstr (data, "regex/") == NULL && strstr (data, "shell/") == NULL &&
-            strstr (data, "type/") == NULL)
+        flush_extension_file ();
+
+        if (!mc_user_ext)
         {
-            MC_PTR_FREE (data);
+            char *title;
 
-            if (!mc_user_ext)
-            {
-                char *title;
-
-                title =
-                    g_strdup_printf (_(" %s%s file error"), mc_global.sysconfig_dir, MC_EXT_FILE);
-                message (D_ERROR, title,
-                         _("The format of the %s%s file has changed with version 3.0. "
-                           "It seems that the installation failed. Please fetch a fresh copy "
-                           "from the Midnight Commander package."),
-                         mc_global.sysconfig_dir, MC_EXT_FILE);
-                g_free (title);
-                return FALSE;
-            }
-
-            home_error = TRUE;
-            goto check_stock_mc_ext;
+            title = g_strdup_printf (_(" %s%s file error"), mc_global.sysconfig_dir, MC_EXT_FILE);
+            message (D_ERROR, title,
+                     _("The format of the %s%s file has changed with version 4.0. "
+                       "It seems that the installation has failed. Please fetch a fresh copy "
+                       "from the Midnight Commander package."),
+                     mc_global.sysconfig_dir, MC_EXT_FILE);
+            g_free (title);
+            return FALSE;
         }
+
+        home_error = TRUE;
+        goto check_stock_mc_ext;
     }
 
     if (home_error)
@@ -822,7 +844,7 @@ load_extension_file (void)
         extension_file = mc_config_get_full_path (MC_EXT_FILE);
         title = g_strdup_printf (_("%s file error"), extension_file);
         message (D_ERROR, title,
-                 _("The format of the %s file has changed with version 3.0. You may either want "
+                 _("The format of the %s file has changed with version 4.0. You may either want "
                    "to copy it from %s%s or use that file as an example of how to write it."),
                  extension_file, mc_global.sysconfig_dir, MC_EXT_FILE);
         g_free (extension_file);
@@ -839,7 +861,11 @@ load_extension_file (void)
 void
 flush_extension_file (void)
 {
-    MC_PTR_FREE (data);
+    g_strfreev (ext_ini_groups);
+    ext_ini_groups = NULL;
+
+    mc_config_deinit (ext_ini);
+    ext_ini = NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -861,19 +887,19 @@ int
 regex_command_for (void *target, const vfs_path_t * filename_vpath, const char *action,
                    vfs_path_t ** script_vpath)
 {
-    char *p, *q, *r, c;
     const char *filename;
-    size_t file_len;
+    size_t filename_len;
     gboolean found = FALSE;
     gboolean error_flag = FALSE;
     int ret = 0;
     struct stat mystat;
     int view_at_line_number = 0;
-    char *include_target = NULL;
-    size_t include_target_len = 0;
 #ifdef USE_FILE_CMD
     gboolean have_type = FALSE; /* Flag used by regex_check_type() */
 #endif
+    char **group_iter;
+    char *include_group = NULL;
+    const char *current_group;
 
     if (filename_vpath == NULL)
         return 0;
@@ -888,183 +914,169 @@ regex_command_for (void *target, const vfs_path_t * filename_vpath, const char *
         action = "View";
     }
 
-    if (data == NULL && !load_extension_file ())
+    if (ext_ini == NULL && !load_extension_file ())
         return 0;
 
     mc_stat (filename_vpath, &mystat);
 
     filename = vfs_path_get_last_path_str (filename_vpath);
     filename = x_basename (filename);
-    file_len = strlen (filename);
+    filename_len = strlen (filename);
 
-    for (p = data; *p != '\0'; p++)
+    if (ext_ini_groups == NULL)
+        ext_ini_groups = mc_config_get_groups (ext_ini, NULL);
+
+    /* find matched type, regex or shell pattern */
+    for (group_iter = ext_ini_groups; *group_iter != NULL && !found; group_iter++)
     {
-        for (q = p; whitespace (*q); q++)
-            ;
-        if (*q == '\n' || *q == '\0')
-            p = q;              /* empty line */
-        if (*p == '#')          /* comment */
-            while (*p != '\0' && *p != '\n')
-                p++;
-        if (*p == '\n')
-            continue;
-        if (*p == '\0')
-            break;
-        if (p == q)
+        enum
         {
-            /* i.e. starts in the first column, should be keyword/descNL */
-            gboolean case_insense;
+            TYPE_UNUSED,
+            TYPE_NOT_FOUND,
+            TYPE_FOUND
+        } type_state = TYPE_UNUSED;
 
-            found = FALSE;
-            q = strchr (p, '\n');
-            if (q == NULL)
-                q = strchr (p, '\0');
-            c = *q;
-            *q = '\0';
-            if (include_target != NULL)
-            {
-                if ((strncmp (p, "include/", 8) == 0)
-                    && (strncmp (p + 8, include_target, include_target_len) == 0))
-                    found = TRUE;
-            }
-            else if (strncmp (p, "regex/", 6) == 0)
-            {
-                mc_search_t *search;
+        const gchar *g = *group_iter;
+        gchar *pattern;
+        gboolean ignore_case;
 
-                p += 6;
-                case_insense = (strncmp (p, "i/", 2) == 0);
-                if (case_insense)
-                    p += 2;
+        if (strcmp (g, descr_group) == 0 || strncmp (g, "Include/", 8) == 0
+            || strcmp (g, default_group) == 0)
+            continue;
 
-                search = mc_search_new (p, DEFAULT_CHARSET);
-                if (search != NULL)
-                {
-                    search->search_type = MC_SEARCH_T_REGEX;
-                    search->is_case_sensitive = !case_insense;
-                    found = mc_search_run (search, filename, 0, file_len, NULL);
-                    mc_search_free (search);
-                }
-            }
-            else if (strncmp (p, "directory/", 10) == 0)
-            {
-                if (S_ISDIR (mystat.st_mode)
-                    && mc_search (p + 10, DEFAULT_CHARSET, vfs_path_as_str (filename_vpath),
-                                  MC_SEARCH_T_REGEX))
-                    found = TRUE;
-            }
-            else if (strncmp (p, "shell/", 6) == 0)
-            {
-                int (*cmp_func) (const char *s1, const char *s2, size_t n) = strncmp;
+        /* The "Directory" parameter is a special case: if it's present then
+           "Type", "Regex", and "Shell" parameters are ignored */
+        pattern = mc_config_get_string_raw (ext_ini, g, "Directory", NULL);
+        if (pattern != NULL)
+        {
+            found = S_ISDIR (mystat.st_mode)
+                && mc_search (pattern, DEFAULT_CHARSET, vfs_path_as_str (filename_vpath),
+                              MC_SEARCH_T_REGEX);
+            g_free (pattern);
 
-                p += 6;
-                case_insense = (strncmp (p, "i/", 2) == 0);
-                if (case_insense)
-                {
-                    p += 2;
-                    cmp_func = strncasecmp;
-                }
+            continue;           /* stop if found */
+        }
 
-                if (*p == '.' && file_len >= (size_t) (q - p))
-                {
-                    if (cmp_func (p, filename + file_len - (q - p), q - p) == 0)
-                        found = TRUE;
-                }
-                else
-                {
-                    if ((size_t) (q - p) == file_len && cmp_func (p, filename, file_len) == 0)
-                        found = TRUE;
-                }
-            }
 #ifdef USE_FILE_CMD
-            else if (use_file_to_check_type && strncmp (p, "type/", 5) == 0)
+        if (use_file_to_check_type)
+        {
+            pattern = mc_config_get_string_raw (ext_ini, g, "Type", NULL);
+            if (pattern != NULL)
             {
                 GError *mcerror = NULL;
 
-                p += 5;
+                ignore_case = mc_config_get_bool (ext_ini, g, "TypeIgnoreCase", FALSE);
+                type_state =
+                    regex_check_type (filename_vpath, pattern, ignore_case, &have_type, &mcerror)
+                    ? TYPE_FOUND : TYPE_NOT_FOUND;
+                g_free (pattern);
 
-                case_insense = (strncmp (p, "i/", 2) == 0);
-                if (case_insense)
-                    p += 2;
-
-                found = regex_check_type (filename_vpath, p, case_insense, &have_type, &mcerror);
                 if (mc_error_message (&mcerror, NULL))
                     error_flag = TRUE;  /* leave it if file cannot be opened */
-            }
-#endif /* USE_FILE_CMD */
-            else if (strncmp (p, "default/", 8) == 0)
-                found = TRUE;
 
-            *q = c;
+                if (type_state == TYPE_NOT_FOUND)
+                    continue;
+            }
+        }
+#endif /* USE_FILE_CMD */
+
+        pattern = mc_config_get_string_raw (ext_ini, g, "Regex", NULL);
+        if (pattern != NULL)
+        {
+            mc_search_t *search;
+
+            ignore_case = mc_config_get_bool (ext_ini, g, "RegexIgnoreCase", FALSE);
+            search = mc_search_new (pattern, DEFAULT_CHARSET);
+            g_free (pattern);
+
+            if (search != NULL)
+            {
+                search->search_type = MC_SEARCH_T_REGEX;
+                search->is_case_sensitive = !ignore_case;
+                found = mc_search_run (search, filename, 0, filename_len, NULL);
+                mc_search_free (search);
+            }
+
+            found = found && (type_state == TYPE_UNUSED || type_state == TYPE_FOUND);
         }
         else
-        {                       /* List of actions */
-            p = q;
-            q = strchr (p, '\n');
-            if (q == NULL)
-                q = strchr (p, '\0');
-            if (found && !error_flag)
+        {
+            pattern = mc_config_get_string_raw (ext_ini, g, "Shell", NULL);
+            if (pattern != NULL)
             {
-                r = strchr (p, '=');
-                if (r != NULL)
-                {
-                    c = *r;
-                    *r = '\0';
-                    if (strcmp (p, "Include") == 0)
-                    {
-                        char *t;
+                int (*cmp_func) (const char *s1, const char *s2, size_t n);
+                size_t pattern_len;
 
-                        include_target = p + 8;
-                        t = strchr (include_target, '\n');
+                ignore_case = mc_config_get_bool (ext_ini, g, "ShellIgnoreCase", FALSE);
+                cmp_func = ignore_case ? strncasecmp : strncmp;
+                pattern_len = strlen (pattern);
 
-                        if (t != NULL)
-                            include_target_len = (size_t) (t - include_target);
-                        else
-                            include_target_len = strlen (include_target);
+                if (*pattern == '.' && filename_len >= pattern_len)
+                    found =
+                        cmp_func (pattern, filename + filename_len - pattern_len, pattern_len) == 0;
+                else
+                    found = pattern_len == filename_len
+                        && cmp_func (pattern, filename, filename_len) == 0;
 
-                        *r = c;
-                        p = q;
-                        found = FALSE;
+                g_free (pattern);
 
-                        if (*p == '\0')
-                            break;
-                        continue;
-                    }
-
-                    if (strcmp (action, p) != 0)
-                        *r = c;
-                    else
-                    {
-                        *r = c;
-
-                        for (p = r + 1; whitespace (*p); p++)
-                            ;
-
-                        /* Empty commands just stop searching
-                         * through, they don't do anything
-                         */
-                        if (p < q)
-                        {
-                            vfs_path_t *sv;
-
-                            sv = exec_extension (current_panel, target, filename_vpath, r + 1,
-                                                 view_at_line_number);
-                            if (script_vpath != NULL)
-                                *script_vpath = sv;
-                            else
-                                exec_cleanup_script (sv);
-
-                            ret = 1;
-                        }
-                        break;
-                    }
-                }
+                found = found && (type_state == TYPE_UNUSED || type_state == TYPE_FOUND);
             }
+            else
+                found = type_state == TYPE_FOUND;
+        }
+    }
+
+    /* group is found, process actions */
+    if (found)
+    {
+        char *include_value;
+
+        group_iter--;
+
+        /* "Include" parameter has the highest priority over any actions */
+        include_value = mc_config_get_string_raw (ext_ini, *group_iter, "Include", NULL);
+        if (include_value != NULL)
+        {
+            /* find "Include/include_value" group */
+            include_group = g_strconcat ("Include/", include_value, (char *) NULL);
+            g_free (include_value);
+            found = mc_config_has_group (ext_ini, include_group);
+        }
+    }
+
+    if (found)
+        current_group = include_group != NULL ? include_group : *group_iter;
+    else
+    {
+        current_group = default_group;
+        found = mc_config_has_group (ext_ini, current_group);
+    }
+
+    if (found && !error_flag)
+    {
+        gchar *action_value;
+
+        action_value = mc_config_get_string_raw (ext_ini, current_group, action, NULL);
+        /* Empty commands just stop searching through, they don't do anything  */
+        if (action_value != NULL && *action_value != '\0')
+        {
+            vfs_path_t *sv;
+
+            sv = exec_extension (current_panel, target, filename_vpath, action_value,
+                                 view_at_line_number);
+            if (script_vpath != NULL)
+                *script_vpath = sv;
+            else
+                exec_cleanup_script (sv);
+
+            ret = 1;
         }
 
-        p = q;
-        if (*p == '\0')
-            break;
+        g_free (action_value);
     }
+
+    g_free (include_group);
 
     return (error_flag ? -1 : ret);
 }
