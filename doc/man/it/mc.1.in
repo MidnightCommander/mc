@@ -1314,7 +1314,7 @@ comando cd interno\&.
 .\"NODE "    Edit Extension File"
 .SH "    Modifica file estensioni"
 Questo comando invocherà l'editor sul file 
-.IR ~/.config/mc/mc.ext .
+.IR ~/.config/mc/mc.ext.ini .
 Il fomato di questo file è il seguente (il formato è cambiato dalla 
 versione 3.0):
 .PP
@@ -2425,7 +2425,7 @@ un'espressione di ricerca, altrimenti trova la prossima occorrenza.
 .PP
 .B F8
 Cambia tra modalità Normale/Filtrata: questo mostrerà il file come si
-trova su disco o se è stato specificato un filtro nel file mc.ext, come
+trova su disco o se è stato specificato un filtro nel file mc.ext.ini, come
 esce dal filtro. La modalità corrente è sempre quella diversa da quella
 mostrata dall'etichetta del tasto, dato che il bottone rappresenta la
 modalità nella quale si entra premendolo.
@@ -2672,7 +2672,7 @@ al file tar usare la seguente sintassi:
 .PP
 .I /nomefile.tar/utar://[dir\-dentro\-tar]
 .PP
-Il file mc.ext già fornisce un collegamento per il file tar; ciò
+Il file mc.ext.ini già fornisce un collegamento per il file tar; ciò
 significa che normalmente basta selezionare un file tar e premere invio
 per entrare nel file tar, vedere la sezione
 .\"LINK2"
@@ -3082,7 +3082,7 @@ pannello.
 Se questa variabile è abilitata (valore predefinito) userà il comando
 file per trovare delle corrispondenze sui tipi di file elencati nel
 .\"LINK2"
-file mc.ext\&.
+file mc.ext.ini\&.
 .\"Edit Extension File"
 .TP
 .I xtree_mode
@@ -3146,11 +3146,11 @@ e se la variabile non è impostata, passerà alla directory %pkgdatadir% .
 .IP
 Il file di aiuto per il programma.
 .PP
-.I %pkgdatadir%/mc.ext
+.I %pkgdatadir%/mc.ext.ini
 .IP
 Il file delle estensioni di sistema predefinito.
 .PP
-.I ~/.config/mc/mc.ext
+.I ~/.config/mc/mc.ext.ini
 .IP
 Le estensioni dell'utente, la configurazione del visualizzatore e
 dell'editor di file. Se presenti, questi file si sovrappongono ai file di 

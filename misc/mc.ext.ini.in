@@ -1,0 +1,1108 @@
+# Midnight Commander 4.0 extension file
+# Warning: Structure of this file has changed completely with version 4.0
+#
+# All lines starting with # or empty lines are ignoted.
+#
+# IMPORTANT: mc scans this file only on first call or after updating it using the
+# mc "Edit extension file" command (F9-c-e). If you edit the file otherwise
+# while mc is running, you will need to (F9-c-e) and exit the editor for your
+# changes to take effect, or exit mc and restart.
+#
+# Section name can be any with following exceptions:
+#    there are two reserved section names:
+#        mc.ext.ini
+#        Default
+#    special name pattern:
+#        Include/xxxxx
+# Detailed description see below.
+#
+# Section [mc.ext.ini] is mandatory. It contains a metainfo of this file.
+# Paramenter Version is mandatory. It contains the version of this file format.
+#
+# Section [Default] is optional. It is applied if no any matches was found.
+#
+# Section [Include/xxxx] is referenced by value of Include=xxxx key
+# from other section.
+#
+# Section are processed from top to bottom, thus the order is important.
+# [Default] should catch all the actions and be last.
+#
+# A section described file can contain following keys:
+#
+#    File descriptions:
+#
+#        Directory
+#            Matches any directory matching regular expression.
+#            Always case sensitive.
+#            This key has highest priority over other keys. If this key is in a section,
+#            other keys are ignored.
+#
+#        Type
+#            File matches this if `file %f` matches regular expression
+#            (the filename: part from `file %f` is removed).
+#            Ignored if the "file" utility isn't used (not found in configure step
+#            or disabled in ini file).
+#
+#        TypeIgnoreCase [true|false]
+#            A boolean value defines if Type value is case sensitive or not.
+#
+#        Regex
+#            An extended regular expression
+#            Please note that we are using the PCRE library and thus \| matches
+#            the literal | and | has special meaning (or) and () have special meaning
+#            and \( \) stand for literal ( ).
+#
+#            Example:
+#                Regex=\.t(ar\.lzma|lz)$
+#            matches *.tar.lzma or *.tlz.
+#
+#        RegexIgnoreCase [true|false]
+#            A boolean value defines if Regex value is case sensitive or not.
+#
+#        Shell
+#            Describes, when starting with a dot, an extension (no wildcars).
+#
+#            Example:
+#                Shell=.tar
+#            matches *.tar.
+#
+#            If it doesn't start with a dot, it matches only a file of that name.
+#
+#            If both keys Regex and Shell are in the same section, Regex is used
+#            and Shell is ignored.
+#
+#        ShellIgnoreCase [true|false]
+#            A boolean value defines if Shell value is case sensitive or not.
+#
+#        Include
+#            Reference to another section.
+#            Example:
+#                Include=video
+#            points to the [Include/video] section.
+#
+#    Commands:
+#
+#        Open
+#             Execute the command if the user presses Enter or doubleclicks it.
+#
+#        View
+#             Execute the command if the user presses F3.
+#
+#        Edit
+#             Execute the command if the user presses F4.
+#
+#    All commands are ignored if section contains the Include key.
+#
+#    Section can contain both Type and Regex or Type and Shell keys. In this case
+#    they are handled as AND condition.
+#    Example:
+#        Shell=.3gp
+#        Type=^ISO Media.*3GPP
+#    matches *.3gp files for which `file` output is a line starting from "ISO Media"
+#    and then containing "3GPP".
+#
+# Command is any one-line shell command, with the following substitutions:
+#
+#    %%
+#        The % character
+#
+#    %p
+#        Name of the current file (without path, but pwd is its path).
+#        Also provided to external application as MC_EXT_BASENAME global variable.
+#
+#    %f
+#        Name of the current file. Unlike %p, if file is located on a non-local
+#        virtual filesystem, i.e. either tarfs or ftpfs, then the file will be
+#        temporarily copied into a local directory and %f will be the full path
+#        to this local temporary file.
+#        If you don't want to get a local copy and want to get the virtual fs path
+#        (like /ftp://ftp.cvut.cz/pub/hungry/xword), then use %d/%p instead of %f.
+#        Also provided to external application as MC_EXT_FILENAME global variable.
+#
+#    %d
+#        Name of the current directory (pwd, without trailing slash).
+#        Also provided to external application as MC_EXT_CURRENTDIR global variable.
+#
+#    %s
+#        "Selected files", i.e. space separated list of tagged files if any or name
+#        of the current file.
+#        Also provided to external application as MC_EXT_SELECTED global variable.
+#
+#    %t
+#        List of tagged files.
+#        Also provided to external application as MC_EXT_ONLYTAGGED global variable.
+#
+#    %u
+#        List of tagged files (they'll be untaged after the command).
+#
+#    (If the letter following the % in uppercase, they refer to the other panel.
+#    But you shouldn't have to use it in this file.)
+#
+#    %cd
+#       The rest is a path mc should change into (cd won't work, since it's a child process).
+#       %cd handles even vfs names.
+#
+#    %view
+#       The command output will be piped into mc's internal file viewer. If you type
+#       only the %view and no command, viewer will load %f file instead (i.e. no piping,
+#       so it is different to %view cat %f).
+#
+#       %view may be directly followed by {} with one or more of the following
+#       separated by commas: 
+#           ascii (ascii mode)
+#           hex (hex mode),
+#           nroff (color highlighting for text using backspace for bold and underscore),
+#           unform (no highlighting for nroff sequences)
+#
+#    %var{VAR:default}
+#       This macro will expand to the value of the VAR variable in the environment if it's
+#       set, otherwise the value in default will be used. This is similar to the Bourne shell
+#       ${VAR-default} construct.
+#
+#
+# Any new entries you develop for you are always welcome if they are useful on more than one
+# system. You can post your modifications as tickets at www.midnight-commander.org.
+
+
+### Changes ###
+#
+# Reorganization: 2012-03-07 Slava Zanko <slavazanko@gmail.com>
+#                 2021-03-28 Andrew Borodin <aborodin@vmail.ru>
+#                 2021-08-24 Tomas Szepe <szepe@pinerecords.com>
+#                 2022-07-22 Andrew Borodin <aborodin@vmail.ru>: port to INI format.
+
+[mc.ext.ini]
+Version=4.0
+
+### GIT Repo ###
+[gitfs changeset]
+Regex=^\[git\]
+Open=%cd %p/changesetfs://
+View=%cd %p/patchsetfs://
+
+### Archives ###
+# Since we use "file -z", we should use Regex and Shell at first, then Type.
+
+
+######### Files by name (Regex and Shell) #########
+
+# .tgz, .tpz, .tar.gz, .tar.z, .tar.Z
+[tar.gzip]
+Regex=\.t([gp]?z|ar\.g?[zZ])$
+Include=tar.gz
+
+[ipk]
+Shell=.ipk
+Include=tar.gz
+
+[gem]
+Shell=.gem
+Include=tar.gz
+
+[tar.bzip]
+Shell=.tar.bz
+# Open=%cd %p/utar://
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view tar.bzip
+
+[tar.bzip2]
+Regex=\.t(ar\.bz2|bz2?|b2)$
+Open=%cd %p/utar://
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view tar.bzip2
+
+# .tar.lzma, .tlz
+[tar.lzma]
+Regex=\.t(ar\.lzma|lz)$
+Open=%cd %p/utar://
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view tar.lzma
+
+[tar.lz]
+Shell=.tar.lz
+Open=%cd %p/utar://
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view tar.lz
+
+# .tar.lz4, .tlz4
+[tar.lz4]
+Regex=\.t(ar\.lz4|lz4)$
+Open=%cd %p/utar://
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view tar.lz4
+
+# .tar.xz, .txz
+[tar.xz]
+Regex=\.t(ar\.xz|xz)$
+Open=%cd %p/utar://
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view tar.xz
+
+# .tar.zst, .tzst
+[tar.zst]
+Regex=\.t(ar\.zst|zst)$
+Open=%cd %p/utar://
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view tar.zst
+
+# .tar.F - used in QNX
+[tar.F]
+Shell=.tar.F
+# Open=%cd %p/utar://
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view tar.F
+
+# .qpr/.qpk - QNX Neutrino package installer files
+[tar.qpr]
+Regex=\.qp[rk]$
+Open=%cd %p/utar://
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view tar.qpr
+
+[tar]
+Shell=.tar
+ShellIgnoreCase=true
+Open=%cd %p/utar://
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view tar
+
+[arj]
+Regex=\.a(rj|[0-9][0-9])$
+RegexIgnoreCase=true
+Open=%cd %p/uarj://
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view arj
+
+[cab]
+Shell=.cab
+ShellIgnoreCase=true
+Open=%cd %p/ucab://
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view cab
+
+[ha]
+Shell=.ha
+ShellIgnoreCase=true
+Open=%cd %p/uha://
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view ha
+
+[rar]
+Regex=\.r(ar|[0-9][0-9])$
+RegexIgnoreCase=true
+Open=%cd %p/urar://
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view rar
+
+# ALZip
+[alz]
+Shell=.alz
+ShellIgnoreCase=true
+Open=%cd %p/ualz://
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view alz
+
+[cpio.Z]
+Shell=.cpio.Z
+Open=%cd %p/ucpio://
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view cpio.z
+
+[cpio.lz]
+Shell=.cpio.lz
+Open=%cd %p/ucpio://
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view cpio.lz
+
+[cpio.lz4]
+Shell=.cpio.lz4
+Open=%cd %p/ucpio://
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view cpio.lz4
+
+[cpio.xz]
+Shell=.cpio.xz
+Open=%cd %p/ucpio://
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view cpio.xz
+
+[cpio.zst]
+Shell=.cpio.zst
+Open=%cd %p/ucpio://
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view cpio.zst
+
+[cpio.gz]
+Shell=.cpio.gz
+Open=%cd %p/ucpio://
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view cpio.gz
+
+[cpio]
+Shell=.cpio
+ShellIgnoreCase=true
+Include=cpio
+
+[initrd]
+Regex=^(initramfs.*\.img|initrd(-.+)?\.img(-.+)?)$
+Include=cpio
+
+[7zip]
+Shell=.7z
+ShellIgnoreCase=true
+Open=%cd %p/u7z://
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view 7z
+
+[patch]
+Regex=\.(diff|patch)$
+Open=%cd %p/patchfs://
+View=%view{ascii} @EXTHELPERSDIR@/misc.sh view cat
+
+[patch.gz]
+Regex=\.(diff|patch)\.(gz|Z)$
+Open=%cd %p/patchfs://
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view gz
+
+[patch.bz2]
+Regex=\.(diff|patch)\.bz2$
+Open=%cd %p/patchfs://
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view bz2
+
+[patch.xz]
+Regex=\.(diff|patch)\.xz$
+Open=%cd %p/patchfs://
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view xz
+
+[patch.zst]
+Regex=\.(diff|patch)\.zst$
+Open=%cd %p/patchfs://
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view zst
+
+[ls-lR]
+Regex=(^|\.)ls-?lR(\.gz|Z|bz2)$
+Open=%cd %p/lslR://
+
+[trpm]
+Shell=.trpm
+Open=%cd %p/trpm://
+View=%view{ascii} @EXTHELPERSDIR@/package.sh view trpm
+
+# RPM packages (SuSE uses *.spm for source packages)
+[src.rpm]
+Regex=\.(src\.rpm|spm)$
+Open=%cd %p/rpm://
+View=%view{ascii} @EXTHELPERSDIR@/package.sh view src.rpm
+
+[rpm]
+Shell=.rpm
+Open=%cd %p/rpm://
+View=%view{ascii} @EXTHELPERSDIR@/package.sh view rpm
+
+[deb]
+Regex=\.u?deb$
+Open=%cd %p/deb://
+View=%view{ascii} @EXTHELPERSDIR@/package.sh view deb
+
+[dpkg]
+Shell=.debd
+Open=%cd %p/debd://
+View=%view{ascii} @EXTHELPERSDIR@/package.sh view debd
+
+[apt]
+Shell=.deba
+Open=%cd %p/deba://
+Ciew=%view{ascii} @EXTHELPERSDIR@/package.sh view deba
+
+[ISO9660]
+Shell=.iso
+ShellIgnoreCase=true
+Open=%cd %p/iso9660://
+View=%view{ascii} @EXTHELPERSDIR@/misc.sh view iso9660
+
+[ar]
+Regex=\.s?a$
+Open=%cd %p/uar://
+#Open=%view{ascii} ar tv %f
+View=%view{ascii} @EXTHELPERSDIR@/misc.sh view ar
+
+[gplib]
+Shell=.lib
+ShellIgnoreCase=true
+Open=%cd %p/ulib://
+View=%view{ascii} @EXTHELPERSDIR@/misc.sh view lib
+
+### Sources ###
+
+[C/C++]
+Regex=\.(c|cc|cpp)$
+RegexIgnoreCase=true
+Include=editor
+
+[C/C++ header]
+Regex=\.(h|hh|hpp)$
+RegexIgnoreCase=true
+Include=editor
+
+[Fortran]
+Shell=.f
+ShellIgnoreCase=true
+Include=editor
+
+[Assembler]
+Regex=\.(s|asm)$
+RegexIgnoreCase=true
+Include=editor
+
+# .so libraries
+[so]
+Regex=\.(so|so\.[0-9\.]*)$
+View=%view{ascii} @EXTHELPERSDIR@/misc.sh view so
+
+
+### Documentation ###
+
+#[Texinfo]
+#Regex=\.(te?xi|texinfo)$
+
+[info-by-shell]
+Shell=.info
+Open=@EXTHELPERSDIR@/text.sh open info
+
+# Exception: .3gp are video files not manual pages
+[3gp]
+Shell=.3gp
+ShellIgnoreCase=true
+Type=^ISO Media.*3GPP
+Include=video
+
+# Troff with me macros.
+# Exception - "read.me" is not a nroff file.
+[read.me]
+Shell=read.me
+Open=
+View=
+
+[troff]
+Shell=.me
+Open=@EXTHELPERSDIR@/text.sh open nroff.me %var{PAGER:more}
+View=%view{ascii,nroff} @EXTHELPERSDIR@/text.sh view nroff.me %var{PAGER:more}
+
+[roff with ms macros]
+Shell=.ms
+Open=@EXTHELPERSDIR@/text.sh open nroff.ms %var{PAGER:more}
+View=%view{ascii,nroff} @EXTHELPERSDIR@/text.sh view nroff.ms %var{PAGER:more}
+
+# Manual page
+
+[man.lz]
+Regex=([^0-9]|^[^\.]*)\.([1-9][A-Za-z]*|[ln])\.lz$
+Open=@EXTHELPERSDIR@/text.sh open man.lz %var{PAGER:more}
+View=%view{ascii,nroff} @EXTHELPERSDIR@/text.sh view man.lz %var{PAGER:more}
+
+[man.lz4]
+Regex=([^0-9]|^[^\.]*)\.([1-9][A-Za-z]*|[ln])\.lz4$
+Open=@EXTHELPERSDIR@/text.sh open man.lz4 %var{PAGER:more}
+View=%view{ascii,nroff} @EXTHELPERSDIR@/text.sh view man.lz4 %var{PAGER:more}
+
+[man.lzma]
+Regex=([^0-9]|^[^\.]*)\.([1-9][A-Za-z]*|[ln])\.lzma$
+Open=@EXTHELPERSDIR@/text.sh open man.lzma %var{PAGER:more}
+View=%view{ascii,nroff} @EXTHELPERSDIR@/text.sh view man.lzma %var{PAGER:more}
+
+[man.xz]
+Regex=([^0-9]|^[^\.]*)\.([1-9][A-Za-z]*|[ln])\.xz$
+Open=@EXTHELPERSDIR@/text.sh open man.xz %var{PAGER:more}
+View=%view{ascii,nroff} @EXTHELPERSDIR@/text.sh view man.xz %var{PAGER:more}
+
+[man.zst]
+Regex=([^0-9]|^[^\.]*)\.([1-9][A-Za-z]*|[ln])\.zst$
+Open=@EXTHELPERSDIR@/text.sh open man.zst %var{PAGER:more}
+View=%view{ascii,nroff} @EXTHELPERSDIR@/text.sh view man.zst %var{PAGER:more}
+
+# Perl pod page
+[pod]
+Shell=.pod
+Open=@EXTHELPERSDIR@/text.sh open pod %var{PAGER:more}
+View=%view{ascii,nroff} @EXTHELPERSDIR@/text.sh view pod %var{PAGER:more}
+
+[chm]
+Shell=.chm
+ShellIgnoreCase=true
+Open=@EXTHELPERSDIR@/text.sh open chm
+
+### Images ###
+
+[xcf]
+Shell=.xcf
+Open=@EXTHELPERSDIR@/image.sh open xcf
+
+[xbm]
+Shell=.xbm
+Open=@EXTHELPERSDIR@/image.sh open xbm
+
+[xpm]
+Shell=.xpm
+Include=image
+
+[ico]
+Shell=.ico
+Include=image
+
+[svg]
+Shell=.svg
+ShellIgnoreCase=true
+View=%view{ascii} @EXTHELPERSDIR@/image.sh view svg
+Open=@EXTHELPERSDIR@/image.sh open svg
+
+
+### Sound files ###
+
+[sound]
+Regex=\.(wav|snd|voc|au|smp|aiff|snd|m4a|ape|aac|wv|spx|flac)$
+RegexIgnoreCase=true
+Open=@EXTHELPERSDIR@/sound.sh open common
+View=%view{ascii} @EXTHELPERSDIR@/sound.sh view common
+
+[mod]
+Regex=\.(mod|s3m|xm|it|mtm|669|stm|ult|far)$
+RegexIgnoreCase=true
+Open=@EXTHELPERSDIR@/sound.sh open mod
+
+[wav22]
+Shell=.waw22
+ShellIgnoreCase=true
+Open=@EXTHELPERSDIR@/sound.sh open wav22
+
+[mp3]
+Shell=.mp3
+ShellIgnoreCase=true
+Open=@EXTHELPERSDIR@/sound.sh open mp3
+View=%view{ascii} @EXTHELPERSDIR@/sound.sh view mp3
+
+[ogg]
+Regex=\.og[gax]$
+RegexIgnoreCase=true
+Open=@EXTHELPERSDIR@/sound.sh open ogg
+View=%view{ascii} @EXTHELPERSDIR@/sound.sh view ogg
+
+[opus]
+Shell=.opus
+ShellIgnoreCase=true
+Open=@EXTHELPERSDIR@/sound.sh open opus
+View=%view{ascii} @EXTHELPERSDIR@/sound.sh view opus
+
+[midi]
+Regex=\.(midi?|rmid?)$
+RegexIgnoreCase=true
+Open=@EXTHELPERSDIR@/sound.sh open midi
+
+[wma]
+Shell=.wma
+ShellIgnoreCase=true
+Open=@EXTHELPERSDIR@/sound.sh open wma
+View=%view{ascii} @EXTHELPERSDIR@/sound.sh view wma
+
+# Play list
+[playlist]
+Regex=\.(m3u|pls)$
+RegexIgnoreCase=true
+Open=@EXTHELPERSDIR@/sound.sh open playlist
+
+
+### Video ###
+
+[avi]
+Shell=.avi
+ShellIgnoreCase=true
+Include=video
+
+[asf]
+Regex=\.as[fx]$
+RegexIgnoreCase=true
+Include=video
+
+[divx]
+Shell=.divx
+ShellIgnoreCase=true
+Include=video
+
+[mkv]
+Shell=.mkv
+ShellIgnoreCase=true
+Include=video
+
+[mov]
+Regex=\.(mov|qt)$
+RegexIgnoreCase=true
+Include=video
+
+[mp4]
+Regex=\.(mp4|m4v|mpe?g)$
+RegexIgnoreCase=true
+Include=video
+
+# MPEG-2 TS container + H.264 codec
+[mts]
+Shell=.mts
+ShellIgnoreCase=true
+Include=video
+
+[ts]
+Shell=.ts
+ShellIgnoreCase=true
+Include=video
+
+[bob]
+Shell=.vob
+ShellIgnoreCase=true
+Include=video
+
+[wmv]
+Shell=.wmv
+ShellIgnoreCase=true
+Include=video
+
+[fli]
+Regex=\.fl[icv]$
+RegexIgnoreCase=true
+Include=video
+
+[ogv]
+Shell=.ogv
+ShellIgnoreCase=true
+Include=video
+
+[realaudio]
+Regex=\.ra?m$
+RegexIgnoreCase=true
+Open=@EXTHELPERSDIR@/video.sh open ram
+
+[webm-by-shell]
+Shell=.webm
+ShellIgnoreCase=true
+Include=video
+
+
+### Documents ###
+
+[html]
+Regex=\.html?$
+RegexIgnoreCase=true
+Open=@EXTHELPERSDIR@/web.sh open html
+View=%view{ascii} @EXTHELPERSDIR@/web.sh view html
+
+[StarOffice-5.2]
+Shell=.sdw
+ShellIgnoreCase=true
+Open=@EXTHELPERSDIR@/doc.sh open ooffice
+
+# StarOffice 6 and OpenOffice.org formats
+[OpenOffice.org]
+Regex=\.(odt|fodt|ott|sxw|stw|ods|fods|ots|sxc|stc|odp|fodp|otp|sxi|sti|odg|fodg|otg|sxd|std|odb|odf|sxm|odm|sxg)$
+RegexIgnoreCase=true
+Open=@EXTHELPERSDIR@/doc.sh open ooffice
+View=%view{ascii} @EXTHELPERSDIR@/doc.sh view odt
+
+[AbiWord]
+Shell=.abw
+ShellIgnoreCase=true
+Open=@EXTHELPERSDIR@/doc.sh open abw
+
+[Gnumeric]
+Shell=.gnumeric
+ShellIgnoreCase=true
+Open=@EXTHELPERSDIR@/doc.sh open gnumeric
+
+[rtf]
+Shell=.rtf
+ShellIgnoreCase=true
+Open=@EXTHELPERSDIR@/doc.sh open msdoc
+
+# Microsoft Word Document
+[msdoc-by-shell]
+Regex=\.(do[ct]|wri|docx)$
+RegexIgnoreCase=true
+Open=@EXTHELPERSDIR@/doc.sh open msdoc
+View=%view{ascii} @EXTHELPERSDIR@/doc.sh view msdoc
+
+# Microsoft Excel Worksheet
+[msxls-by-shell]
+Regex=\.(xl[sw]|xlsx)$
+RegexIgnoreCase=true
+Open=@EXTHELPERSDIR@/doc.sh open msxls
+View=%view{ascii} @EXTHELPERSDIR@/doc.sh view msxls
+
+# Microsoft PowerPoint Presentation
+[msppt]
+Regex=\.(pp[ts]|pptx)$
+RegexIgnoreCase=true
+Open=@EXTHELPERSDIR@/doc.sh open msppt
+View=%view{ascii} @EXTHELPERSDIR@/doc.sh view msppt
+
+[dvi]
+Shell=.dvi
+ShellIgnoreCase=true
+Open=@EXTHELPERSDIR@/doc.sh open dvi
+View=%view{ascii} @EXTHELPERSDIR@/doc.sh view dvi
+
+[tex]
+Shell=.tex
+ShellIgnoreCase=true
+Include=editor
+
+[markdown]
+Shell=.md
+ShellIgnoreCase=true
+Include=editor
+
+[djvu]
+Regex=\.djvu?$
+RegexIgnoreCase=true
+Open=@EXTHELPERSDIR@/doc.sh open djvu
+View=%view{ascii} @EXTHELPERSDIR@/doc.sh view djvu
+
+# Comic Books
+[cbr]
+Regex=\.cb[zr]$
+RegexIgnoreCase=true
+Open=@EXTHELPERSDIR@/doc.sh open comic
+
+# Epup, mobi, fb2
+[ebook]
+Regex=\.(epub|mobi|fb2)$
+RegexIgnoreCase=true
+Open=@EXTHELPERSDIR@/doc.sh open ebook
+View=%view{ascii} @EXTHELPERSDIR@/doc.sh view ebook
+
+
+### Miscellaneous ###
+
+# Compiled Java classes
+[javaclass]
+Shell=.class
+View=%view{ascii} @EXTHELPERSDIR@/misc.sh view javaclass
+
+[Imakefile]
+Shell=Imakefile
+Open=xmkmf -a
+
+# Makefile.PL (MakeMaker)
+[Makefile.pl]
+Regex=^Makefile\.(PL|pl)$
+Open=%var{PERL:perl} %f
+
+[Makefile]
+Regex=[Mm]akefile
+Open=make -f %f %{Enter parameters}
+
+[dbf]
+Shell=.dbf
+ShellIgnoreCase=true
+Open=@EXTHELPERSDIR@/misc.sh open dbf
+View=%view{ascii} @EXTHELPERSDIR@/misc.sh view dbf
+
+# REXX script
+[rexx]
+Regex=\.(rexx?|cmd)$
+Open=rexx %f %{Enter parameters};echo "Press ENTER";read y
+
+# Disk images for Commodore computers (VIC20, C64, C128)
+[d64]
+Shell=.d64
+ShellIgnoreCase=true
+Open=%cd %p/uc1541://
+View=%view{ascii} c1541 %f -list
+
+# Glade, a user interface designer for GTK+ and GNOME
+[glade]
+Shell=.glade
+ShellIgnoreCase=true
+Open=@EXTHELPERSDIR@/misc.sh open glade
+
+# Gettext Catalogs
+[mo]
+Regex=.g?mo$
+View=%view{ascii} @EXTHELPERSDIR@/misc.sh view mo
+
+[po]
+Shell=.po
+Open=@EXTHELPERSDIR@/misc.sh open po
+
+[lyx]
+Shell=.lyx
+ShellIgnoreCase=true
+Open=@EXTHELPERSDIR@/misc.sh open lyx
+View=%view{ascii} @EXTHELPERSDIR@/misc.sh view lyx
+
+[torrent]
+Shell=.torrent
+ShellIgnoreCase=true
+View=%view{ascii} @EXTHELPERSDIR@/misc.sh view torrent
+
+
+### Plain compressed files ###
+
+[ace]
+Shell=.ace
+ShellIgnoreCase=true
+Open=%cd %p/uace://
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view ace
+
+[arc]
+Shell=.arc
+ShellIgnoreCase=true
+Open=%cd %p/uarc://
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view arc
+
+[zip-by-shell]
+Shell=.zip
+ShellIgnoreCase=true
+Open=%cd %p/uzip://
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view zip
+
+[zoo]
+Shell=.zoo
+ShellIgnoreCase=true
+Open=%cd %p/uzoo://
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view zoo
+
+[lz4]
+Shell=.lz4
+ShellIgnoreCase=true
+Open=@EXTHELPERSDIR@/archive.sh view lz4 %var{PAGER:more}
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view lz4
+
+[wim]
+Shell=.wim
+ShellIgnoreCase=true
+Open=%cd %p/uwim://
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view wim
+
+
+######### Files by Type #########
+
+### Archives ###
+
+[mailbox]
+Type=^ASCII\ mail\ text
+Open=%cd %p/mailfs://
+
+
+### Sources ###
+
+# Object
+[elf]
+Type=^ELF
+#Open=%var{PAGER:more} %f
+View=%view{ascii} @EXTHELPERSDIR@/misc.sh view elf
+
+
+### Documentation ###
+
+# GNU Info page
+[info-by-type]
+Type=^Info\ text
+Open=@EXTHELPERSDIR@/text.sh open info
+
+# Manual page - compressed
+[troff.gz]
+Type=troff.*gzip compressed
+Open=@EXTHELPERSDIR@/text.sh open man.gz %var{PAGER:more}
+View=%view{ascii,nroff} @EXTHELPERSDIR@/text.sh view man.gz %var{PAGER:more}
+
+[troff.bzip]
+Type=troff.*bzip compressed
+Open=@EXTHELPERSDIR@/text.sh open man.bz %var{PAGER:more}
+View=%view{ascii,nroff} @EXTHELPERSDIR@/text.sh view man.bz %var{PAGER:more}
+
+[troff.bzip2]
+Type=troff.*bzip2 compressed
+Open=@EXTHELPERSDIR@/text.sh open man.bz2 %var{PAGER:more}
+View=%view{ascii,nroff} @EXTHELPERSDIR@/text.sh view man.bz2 %var{PAGER:more}
+
+# Manual page
+[man]
+Type=troff or preprocessor input
+Open=@EXTHELPERSDIR@/text.sh open man %var{PAGER:more}
+View=%view{ascii,nroff} @EXTHELPERSDIR@/text.sh view man %var{PAGER:more}
+
+
+### Images ###
+
+[gif]
+Type=^GIF
+Include=image
+
+[jpeg]
+Type=^JPEG
+Include=image
+
+[bitmap]
+Type=^PC\ bitmap
+Include=image
+
+[png]
+Type=^PNG
+Include=image
+
+[jng]
+Type=^JNG
+Include=image
+
+[mng]
+Type=^MNG
+Include=image
+
+[tiff]
+Type=^TIFF
+Include=image
+
+[rbm]
+Type=^PBM
+Include=image
+
+[pgm]
+Type=^PGM
+Include=image
+
+[ppm]
+Type=^PPM
+Include=image
+
+[netpbm]
+Type=^Netpbm
+Include=image
+
+
+### Video ###
+
+[webm-by-type]
+Type=WebM
+Include=video
+
+
+### Documents ###
+
+[postscript]
+Type=^PostScript
+Open=@EXTHELPERSDIR@/doc.sh open ps
+View=%view{ascii} @EXTHELPERSDIR@/doc.sh view ps
+
+[pdf]
+Type=^PDF
+Open=@EXTHELPERSDIR@/doc.sh open pdf
+View=%view{ascii} @EXTHELPERSDIR@/doc.sh view pdf
+
+# Microsoft Word Document
+[msdoc-by-type]
+Type=^Microsoft\ Word
+Open=@EXTHELPERSDIR@/doc.sh open msdoc
+View=%view{ascii} @EXTHELPERSDIR@/doc.sh view msdoc
+
+# Microsoft Excel Worksheet
+[msxls-by-type]
+Type=^Microsoft\ Excel
+Open=@EXTHELPERSDIR@/doc.sh open msxls
+View=%view{ascii} @EXTHELPERSDIR@/doc.sh view msxls
+
+# Use OpenOffice.org/LibreOffice to open any MS Office documents
+[mso-doc-1]
+Type=^Microsoft\ Office\ Document
+Open=@EXTHELPERSDIR@/doc.sh open ooffice
+
+[mso-doc-2]
+Type=^Microsoft\ OOXML
+Open=@EXTHELPERSDIR@/doc.sh open ooffice
+
+[framemaker]
+Type=^FrameMaker
+Open=@EXTHELPERSDIR@/doc.sh open framemaker
+
+
+### Miscellaneous ###
+
+[sqlite3.db]
+Type=^SQLite 3.x database
+Open=@EXTHELPERSDIR@/misc.sh open sqlite
+View=%view{ascii} @EXTHELPERSDIR@/misc.sh view sqlite
+
+
+### Plain compressed files ###
+
+[gzip]
+Type=\(gzip compressed
+Open=@EXTHELPERSDIR@/archive.sh view gz %var{PAGER:more}
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view gz
+
+[bzip]
+Type=\(bzip compressed
+Open=@EXTHELPERSDIR@/archive.sh view bzip %var{PAGER:more}
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view bzip
+
+[bzip2]
+Type=\(bzip2 compressed
+Open=@EXTHELPERSDIR@/archive.sh view bzip2 %var{PAGER:more}
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view bz2
+
+[compress]
+Type=\(compress'd
+Open=@EXTHELPERSDIR@/archive.sh view gz %var{PAGER:more}
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view gz
+
+[lz]
+Type=\(lzip compressed
+Open=@EXTHELPERSDIR@/archive.sh view lz %var{PAGER:more}
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view lz
+
+[lzma]
+Type=\(LZMA compressed
+Open=@EXTHELPERSDIR@/archive.sh view lzma %var{PAGER:more}
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view lzma
+
+[xz]
+Type=\(XZ compressed
+Open=@EXTHELPERSDIR@/archive.sh view xz %var{PAGER:more}
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view xz
+
+[zstd]
+Type=\(Zstandard compressed
+Open=@EXTHELPERSDIR@/archive.sh view zst %var{PAGER:more}
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view zst
+
+[zip-by-type]
+Type=\(Zip archive
+Open=%cd %p/uzip://
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view zip
+
+[jar]
+Type=\(Java\ (Jar\ file|archive)\ data\ \((zip|JAR)\)
+TypeIgnoreCase=true
+Open=%cd %p/uzip://
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view zip
+
+[lha]
+Type=^LHa\ .*archive
+Open=%cd %p/ulha://
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view lha
+
+[pak]
+Type=^PAK\ .*archive
+Open=%cd %p/unar://
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view pak
+
+# Parity Archive
+[par2]
+Type=^Parity\ Archive\ Volume\ Set
+Open=@EXTHELPERSDIR@/archive.sh open par2
+
+
+######### Includes #########
+# includes should be at end of bindings
+
+[Include/tar.gz]
+Open=%cd %p/utar://
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view tar.gz
+
+[Include/cpio]
+Open=%cd %p/ucpio://
+View=%view{ascii} @EXTHELPERSDIR@/archive.sh view cpio
+
+[Include/editor]
+Open=%var{EDITOR:vi} %f
+
+[Include/image]
+Open=@EXTHELPERSDIR@/image.sh open ALL_FORMATS
+View=%view{ascii} @EXTHELPERSDIR@/image.sh view ALL_FORMATS
+
+[Include/video]
+Open=@EXTHELPERSDIR@/video.sh open ALL_FORMATS
+View=%view{ascii} @EXTHELPERSDIR@/video.sh view ALL_FORMATS
+
+
+######### Default #########
+
+# Default target for anything not described above
+[Default]
+Open=
+View=
+
+### EOF ###

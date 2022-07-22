@@ -1299,7 +1299,7 @@ A cd belső parancs
 leírásánál.
 .\"NODE "    Edit Extension File"
 .SH "    Társítások"
-Ez az ~/.config/mc/mc.ext szerkesztéséhez segítségül fogja hívni a
+Ez az ~/.config/mc/mc.ext.ini szerkesztéséhez segítségül fogja hívni a
 szövegszerkesztődet. A fájl formátuma a következő (a formátum a 3.0\-ás
 verzióval megváltozott):
 .PP
@@ -2393,7 +2393,7 @@ A következő egyezőt keresi.
 .PP
 .B F8
 Vált a Nyers és Feldolgozott mód között: ez a fájlt, úgy mutatja meg,
-ahogy megtalálta, vagy, ha folyamatszűrő meg van adva az mc.ext fájlban,
+ahogy megtalálta, vagy, ha folyamatszűrő meg van adva az mc.ext.ini fájlban,
 akkor a szűrő kimenetét. A Jelenlegi mód mindig a másik, mit amit a gomb
 felirata mutat.
 .PP
@@ -2663,7 +2663,7 @@ következő szintaktikájú parancs segítségével tudod átváltani könyvtár
 .PP
 .I /filename.tar:utar/[dir\-inside\-tar]
 .PP
-Az mc.ext fájl már tartalmaz gyorsbillentyűket a tar fájlokhoz, ezért
+Az mc.ext.ini fájl már tartalmaz gyorsbillentyűket a tar fájlokhoz, ezért
 csak rá kell mutatnod a tar fájlra és le kell nyomnod az entert ahhoz,
 hogy beléphess a tar fájlba, ehhez nézd meg a
 .\"LINK2"
@@ -3153,11 +3153,11 @@ ez vissza fog állítódni a /usr könyvtárra.
 .IP
 A program súgó fájlja.
 .PP
-.I %pkgdatadir%/mc.ext
+.I %pkgdatadir%/mc.ext.ini
 .IP
 Az alapértelmezett rendszerszintű kiterjesztés fájl.
 .PP
-.I ~/.config/mc/mc.ext
+.I ~/.config/mc/mc.ext.ini
 .IP
 A felhasználó saját kiterjesztései, nézet beállítások és szerkesztési
 beállítások. Ezek felülbírálják a rendszerszintű fájl bejegyzéseit, ha

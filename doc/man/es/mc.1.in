@@ -1509,10 +1509,10 @@ comando cd interno\&.
 .\"NODE "    Edit Extension File"
 .SH "    Editar el Archivo de Extensiones"
 Abre el archivo
-.I ~/.config/mc/mc.ext
+.I ~/.config/mc/mc.ext.ini
 en nuestro editor. El administrador puede optar por editar, en su lugar,
 el archivo de extensiones del sistema
-.IR %pkgdatadir%/mc.ext .
+.IR %pkgdatadir%/mc.ext.ini .
 El formato del archivo es como sigue:
 .PP
 Todas las líneas que empiecen con # o estén vacías serán ignoradas.
@@ -2900,7 +2900,7 @@ Buscar la próxima coincidencia.
 .PP
 .B F8
 Intercambia entre el modo crudo y procesado: esto mostrará el archivo como se encuentra en disco
-o si se ha especificado un filtro de visualización en el archivo mc.ext, entonces
+o si se ha especificado un filtro de visualización en el archivo mc.ext.ini, entonces
 la salida filtrada. El modo actual es siempre el contrario al mostrado
 en la etiqueta del botón, en tanto que el botón muestra el modo en el que entraremos
 con la pulsación de esa tecla.
@@ -3122,7 +3122,7 @@ de directorio empleando la siguiente sintaxis:
 .PP
 .I /archivo.tar/utar://[directorio\-dentro\-tar]
 .PP
-El archivo mc.ext también ofrece un atajo para los archivos tar, esto quiere decir
+El archivo mc.ext.ini también ofrece un atajo para los archivos tar, esto quiere decir
 que normalmente basta con apuntar a un archivo tar y pulsar Intro para entrar en el
 archivo tar.  Véase la sección
 .\"LINK2"
@@ -4009,7 +4009,7 @@ ya estemos ahí, en cuyo caso moverá la selección al último nombre de archivo
 Si esta variable está activada (por defecto lo está) se recurrirá al
 comando «file» para reconocer los tipos de archivo referidos en el archivo
 .\"LINK2"
-mc.ext\&.
+mc.ext.ini\&.
 .\"Edit Extension File"
 .TP
 .I xtree_mode
@@ -4163,11 +4163,11 @@ que de estar definida se emplearía en vez de %pkgdatadir%.
 .IP
 Archivo de ayuda.
 .PP
-.I %pkgdatadir%/mc.ext
+.I %pkgdatadir%/mc.ext.ini
 .IP
 Archivo de extensiones por defecto del sistema.
 .PP
-.I ~/.config/mc/mc.ext
+.I ~/.config/mc/mc.ext.ini
 .IP
 Archivo de usuario de extensiones y configuración de visor y editor. Si
 está presente prevalece sobre el contenido de los archivos del sistema.

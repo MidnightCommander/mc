@@ -1483,7 +1483,7 @@ description.
 .\"NODE "    Edit Extension File"
 .SH "    Edit Extension File"
 This will invoke your editor on the file
-.IR ~/.config/mc/mc.ext .
+.IR ~/.config/mc/mc.ext.ini .
 The format of this file following:
 .PP
 All lines starting with # or empty lines are thrown away.
@@ -2975,7 +2975,7 @@ and vice versa.
 .TP
 .B F8
 Toggle Raw/Parsed mode: This will show the file as found on disk or if
-a processing filter has been specified in the mc.ext file, then the
+a processing filter has been specified in the mc.ext.ini file, then the
 output from the filter. Current mode is always the other than written
 on the button label, since on the button is the mode which you enter
 by that key.
@@ -3280,7 +3280,7 @@ tar file by using the following syntax:
 .PP
 .I /filename.tar/utar://[dir\-inside\-tar]
 .PP
-The mc.ext file already provides a shortcut for tar files, this means
+The mc.ext.ini file already provides a shortcut for tar files, this means
 that usually you just point to a tar file and press return to enter
 into the tar file, see the
 .\"LINK2"
@@ -4160,7 +4160,7 @@ the panel.
 If this variable is on (the default) it will spawn the file command to
 match the file types listed on the
 .\"LINK2"
-mc.ext file\&.
+mc.ext.ini file\&.
 .\"Edit Extension File"
 .TP
 .I xtree_mode
@@ -4308,11 +4308,11 @@ environment variable. If it's set, its value is used instead of
 .IP
 The help file for the program.
 .PP
-.I %pkgdatadir%/mc.ext
+.I %pkgdatadir%/mc.ext.ini
 .IP
 The default system\-wide extensions file.
 .PP
-.I ~/.config/mc/mc.ext
+.I ~/.config/mc/mc.ext.ini
 .IP
 User's own extension, view configuration and edit configuration
 file.  They override the contents of the system wide files if present.
