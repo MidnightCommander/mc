@@ -104,7 +104,7 @@ edit_delete_macro (WEdit * edit, int hotkey)
     char *skeyname;
 
     /* clear array of actions for current hotkey */
-    while ((indx = edit_get_macro (edit, hotkey) != -1))
+    while ((indx = edit_get_macro (edit, hotkey)) != -1)
     {
         macros_t *macros;
 
