@@ -28,7 +28,6 @@
 #define MC_HELP                 "help" PATH_SEP_STR "mc.hlp"
 #define GLOBAL_KEYMAP_FILE      "mc.keymap"
 #define CHARSETS_LIST           "mc.charsets"
-#define MC_LIB_EXT              "mc.ext"
 #define MC_MACRO_FILE           "mc.macros"
 
 #define FISH_PREFIX             "fish"
@@ -56,7 +55,7 @@
 #define MC_ASHRC_FILE           "ashrc"
 #define MC_INPUTRC_FILE         "inputrc"
 #define MC_CONFIG_FILE          "ini"
-#define MC_FILEBIND_FILE        "mc.ext"
+#define MC_EXT_FILE             "mc.ext"
 #define MC_FILEPOS_FILE         "filepos"
 #define MC_HISTORY_FILE         "history"
 #define MC_HOTLIST_FILE         "hotlist"
