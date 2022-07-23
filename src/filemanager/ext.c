@@ -760,6 +760,79 @@ regex_check_type (const vfs_path_t * filename_vpath, const char *ptr, gboolean c
 #endif /* USE_FILE_CMD */
 
 /* --------------------------------------------------------------------------------------------- */
+
+static gboolean
+load_extension_file (void)
+{
+    char *extension_file;
+    gboolean mc_user_ext = TRUE;
+    gboolean home_error = FALSE;
+
+    extension_file = mc_config_get_full_path (MC_EXT_FILE);
+    if (!exist_file (extension_file))
+    {
+        g_free (extension_file);
+      check_stock_mc_ext:
+        extension_file = mc_build_filename (mc_global.sysconfig_dir, MC_EXT_FILE, (char *) NULL);
+        if (!exist_file (extension_file))
+        {
+            g_free (extension_file);
+            extension_file =
+                mc_build_filename (mc_global.share_data_dir, MC_EXT_FILE, (char *) NULL);
+        }
+        mc_user_ext = FALSE;
+    }
+
+    g_file_get_contents (extension_file, &data, NULL, NULL);
+    g_free (extension_file);
+    if (data == NULL)
+        return FALSE;
+
+    if (strstr (data, "default/") == NULL)
+    {
+        if (strstr (data, "regex/") == NULL && strstr (data, "shell/") == NULL &&
+            strstr (data, "type/") == NULL)
+        {
+            MC_PTR_FREE (data);
+
+            if (!mc_user_ext)
+            {
+                char *title;
+
+                title =
+                    g_strdup_printf (_(" %s%s file error"), mc_global.sysconfig_dir, MC_EXT_FILE);
+                message (D_ERROR, title,
+                         _("The format of the %s%s file has changed with version 3.0. "
+                           "It seems that the installation failed. Please fetch a fresh copy "
+                           "from the Midnight Commander package."),
+                         mc_global.sysconfig_dir, MC_EXT_FILE);
+                g_free (title);
+                return FALSE;
+            }
+
+            home_error = TRUE;
+            goto check_stock_mc_ext;
+        }
+    }
+
+    if (home_error)
+    {
+        char *title;
+
+        extension_file = mc_config_get_full_path (MC_EXT_FILE);
+        title = g_strdup_printf (_("%s file error"), extension_file);
+        message (D_ERROR, title,
+                 _("The format of the %s file has changed with version 3.0. You may either want "
+                   "to copy it from %s%s or use that file as an example of how to write it."),
+                 extension_file, mc_global.sysconfig_dir, MC_EXT_FILE);
+        g_free (extension_file);
+        g_free (title);
+    }
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -815,75 +888,8 @@ regex_command_for (void *target, const vfs_path_t * filename_vpath, const char *
         action = "View";
     }
 
-    if (data == NULL)
-    {
-        char *extension_file;
-        gboolean mc_user_ext = TRUE;
-        gboolean home_error = FALSE;
-
-        extension_file = mc_config_get_full_path (MC_EXT_FILE);
-        if (!exist_file (extension_file))
-        {
-            g_free (extension_file);
-          check_stock_mc_ext:
-            extension_file =
-                mc_build_filename (mc_global.sysconfig_dir, MC_EXT_FILE, (char *) NULL);
-            if (!exist_file (extension_file))
-            {
-                g_free (extension_file);
-                extension_file =
-                    mc_build_filename (mc_global.share_data_dir, MC_EXT_FILE, (char *) NULL);
-            }
-            mc_user_ext = FALSE;
-        }
-
-        g_file_get_contents (extension_file, &data, NULL, NULL);
-        g_free (extension_file);
-        if (data == NULL)
-            return 0;
-
-        if (strstr (data, "default/") == NULL)
-        {
-            if (strstr (data, "regex/") == NULL && strstr (data, "shell/") == NULL &&
-                strstr (data, "type/") == NULL)
-            {
-                MC_PTR_FREE (data);
-
-                if (!mc_user_ext)
-                {
-                    char *title;
-
-                    title = g_strdup_printf (_(" %s%s file error"),
-                                             mc_global.sysconfig_dir, MC_EXT_FILE);
-                    message (D_ERROR, title, _("The format of the %s%s file has changed with "
-                                               "version 3.0. It seems that the installation failed. "
-                                               "Please fetch a fresh copy from the "
-                                               "Midnight Commander package."),
-                             mc_global.sysconfig_dir, MC_EXT_FILE);
-                    g_free (title);
-                    return 0;
-                }
-
-                home_error = TRUE;
-                goto check_stock_mc_ext;
-            }
-        }
-
-        if (home_error)
-        {
-            char *title;
-
-            extension_file = mc_config_get_full_path (MC_EXT_FILE);
-            title = g_strdup_printf (_("%s file error"), extension_file);
-            message (D_ERROR, title,
-                     _("The format of the %s file has changed with version 3.0. "
-                       "You may either want to copy it from %s%s or use that file "
-                       "as an example of how to write it."),
-                     extension_file, mc_global.sysconfig_dir, MC_EXT_FILE);
-            g_free (extension_file);
-            g_free (title);
-        }
-    }
+    if (data == NULL && !load_extension_file ())
+        return 0;
 
     mc_stat (filename_vpath, &mystat);
 
