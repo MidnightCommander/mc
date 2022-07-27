@@ -104,14 +104,13 @@ edit_delete_macro (WEdit * edit, int hotkey)
     char *skeyname;
 
     /* clear array of actions for current hotkey */
-    while ((indx = edit_get_macro (edit, hotkey) != -1))
+    while ((indx = edit_get_macro (edit, hotkey)) != -1)
     {
         macros_t *macros;
 
         macros = &g_array_index (macros_list, struct macros_t, indx);
         g_array_free (macros->macro, TRUE);
         g_array_remove_index (macros_list, indx);
-        edit_macro_sort_by_hotkey ();
     }
 
     macros_fname = mc_config_get_full_path (MC_MACRO_FILE);
