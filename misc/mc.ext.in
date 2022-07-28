@@ -740,7 +740,7 @@ shell/i/.arc
 	Extract (with flags)=I=%{Enter any Arc flags:}; if test -n "$I"; then arc x $I %f; fi
 
 # zip
-shell/i/.zip
+shell/i/.(zip|vsix)
 	Open=%cd %p/uzip://
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view zip
 
