@@ -1151,29 +1151,6 @@ input_assign_text (WInput * in, const char *text)
 
 /* --------------------------------------------------------------------------------------------- */
 
-/**
- * Get text of input line.
- *
- * @param in input line
- *
- * @return newly allocated string that contains a copy of @in's text.
- */
-char *
-input_get_text (const WInput * in)
-{
-    return g_strndup (in->buffer->str, in->buffer->len);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-gboolean
-input_is_empty (const WInput * in)
-{
-    return in->buffer->len == 0;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 /* Inserts text in input line */
 void
 input_insert (WInput * in, const char *text, gboolean insert_extra_space)

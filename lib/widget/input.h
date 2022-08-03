@@ -91,8 +91,6 @@ cb_ret_t input_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm
 void input_set_default_colors (void);
 cb_ret_t input_handle_char (WInput * in, int key);
 void input_assign_text (WInput * in, const char *text);
-char *input_get_text (const WInput * in);
-gboolean input_is_empty (const WInput * in);
 void input_insert (WInput * in, const char *text, gboolean insert_extra_space);
 void input_set_point (WInput * in, int pos);
 void input_update (WInput * in, gboolean clear_first);
@@ -104,6 +102,39 @@ void input_clean (WInput * in);
 void input_complete (WInput * in);
 void input_complete_free (WInput * in);
 
+/* --------------------------------------------------------------------------------------------- */
 /*** inline functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Get text of input line.
+ *
+ * @param in input line
+ *
+ * @return newly allocated string that contains a copy of @in's text.
+ */
+static inline char *
+input_get_text (const WInput * in)
+{
+    return g_strndup (in->buffer->str, in->buffer->len);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Is input line empty or not.
+ *
+ * @param in input line
+ *
+ * @return TRUE if buffer of @in is empty, FALSE othewise.
+ */
+static inline gboolean
+input_is_empty (const WInput * in)
+{
+    return (in->buffer->len == 0);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 
 #endif /* MC__WIDGET_INPUT_H */
