@@ -220,14 +220,12 @@ input_push_history (WInput * in)
     char *t;
     gboolean empty;
 
-    /* FIXME: don't use input_get_text() to avoid extra checks */
-    t = g_strstrip (g_strndup (in->buffer->str, in->buffer->len));
+    t = g_strstrip (input_get_text (in));
     empty = *t == '\0';
     if (!empty)
     {
         g_free (t);
-        /* FIXME: don't use input_get_text() to avoid extra checks */
-        t = g_strndup (in->buffer->str, in->buffer->len);
+        t = input_get_text (in);
 
         if (in->history.name != NULL && in->strip_password)
         {
@@ -1159,14 +1157,10 @@ input_assign_text (WInput * in, const char *text)
  * @param in input line
  *
  * @return newly allocated string that contains a copy of @in's text.
- *         If @in is empty, return NULL.
  */
 char *
 input_get_text (const WInput * in)
 {
-    if (input_is_empty (in))
-        return NULL;
-
     return g_strndup (in->buffer->str, in->buffer->len);
 }
 

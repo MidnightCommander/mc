@@ -823,10 +823,11 @@ find_parameters (WPanel * panel, char **start_dir, ssize_t * start_dir_len,
             g_free (options.ignore_dirs);
             options.ignore_dirs = input_get_text (in_ignore);
 
-            *content = input_get_text (in_with);
-            *pattern = input_get_text (in_name);
-            if (*pattern == NULL)
+            *content = !input_is_empty (in_with) ? input_get_text (in_with) : NULL;
+            if (input_is_empty (in_name))
                 *pattern = g_strdup (options.file_pattern ? "*" : ".*");
+            else
+                *pattern = input_get_text (in_name);
             *start_dir = !input_is_empty (in_start) ? in_start->buffer->str : (char *) ".";
             if (in_start_dir != INPUT_LAST_TEXT)
                 g_free (in_start_dir);
