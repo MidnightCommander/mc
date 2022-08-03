@@ -1169,12 +1169,6 @@ input_get_text (const WInput * in)
 gboolean
 input_is_empty (const WInput * in)
 {
-    if (in == NULL)
-        return TRUE;
-
-    /* if in != NULL, in->buffer must be created */
-    g_assert (in->buffer != NULL);
-
     return in->buffer->len == 0;
 }
 
