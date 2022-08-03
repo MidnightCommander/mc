@@ -856,12 +856,6 @@ input_save_history (const gchar * event_group_name, const gchar * event_name,
 static void
 input_destroy (WInput * in)
 {
-    if (in == NULL)
-    {
-        fprintf (stderr, "Internal error: null Input *\n");
-        exit (EXIT_FAILURE);
-    }
-
     input_complete_free (in);
 
     /* clean history */
