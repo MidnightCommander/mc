@@ -1462,21 +1462,23 @@ invoke_subshell (const char *command, int how, vfs_path_t ** new_dir_vpath)
 
             if (use_persistent_buffer)
             {
+                const char *s;
                 size_t i;
                 int pos;
+
+                s = input_get_ctext (cmdline);
 
                 /* Check to make sure there are no non text characters in the command buffer,
                  * such as tab, or newline, as this could cause problems. */
                 for (i = 0; i < cmdline->buffer->len; i++)
-                    if ((unsigned char) cmdline->buffer->str[i] < 32
-                        || (unsigned char) cmdline->buffer->str[i] == 127)
+                    if ((unsigned char) s[i] < 32 || (unsigned char) s[i] == 127)
                         g_string_overwrite_len (cmdline->buffer, i, " ", 1);
 
                 /* Write the command buffer to the subshell. */
-                write_all (mc_global.tty.subshell_pty, cmdline->buffer->str, cmdline->buffer->len);
+                write_all (mc_global.tty.subshell_pty, s, cmdline->buffer->len);
 
                 /* Put the cursor in the correct place in the subshell. */
-                pos = str_length (cmdline->buffer->str) - cmdline->point;
+                pos = str_length (s) - cmdline->point;
                 for (i = 0; i < (size_t) pos; i++)
                     write_all (mc_global.tty.subshell_pty, ESC_STR "[D", 3);
             }

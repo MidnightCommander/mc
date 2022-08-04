@@ -1460,12 +1460,12 @@ is_cmdline_mute (void)
 static gboolean
 handle_cmdline_enter (void)
 {
-    size_t i;
+    const char *s;
 
-    for (i = 0; i < cmdline->buffer->len && whitespace (cmdline->buffer->str[i]); i++)
+    for (s = input_get_ctext (cmdline); *s != '\0' && whitespace (*s); s++)
         ;
 
-    if (i != cmdline->buffer->len)
+    if (*s != '\0')
     {
         send_message (cmdline, NULL, MSG_KEY, '\n', NULL);
         return TRUE;

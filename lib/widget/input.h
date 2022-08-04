@@ -122,6 +122,21 @@ input_get_text (const WInput * in)
 /* --------------------------------------------------------------------------------------------- */
 
 /**
+ * Get pointer to input line buffer.
+ *
+ * @param in input line
+ *
+ * @return pointer to @in->buffer->str.
+ */
+static inline const char *
+input_get_ctext (const WInput * in)
+{
+    return in->buffer->str;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
  * Is input line empty or not.
  *
  * @param in input line

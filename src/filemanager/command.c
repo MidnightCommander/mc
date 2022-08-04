@@ -81,10 +81,12 @@ static input_colors_t command_colors;
 static cb_ret_t
 enter (WInput * lc_cmdline)
 {
-    const char *cmd = lc_cmdline->buffer->str;
+    const char *cmd;
 
     if (!command_prompt)
         return MSG_HANDLED;
+
+    cmd = input_get_ctext (lc_cmdline);
 
     /* Any initial whitespace should be removed at this point */
     while (whiteness (*cmd))

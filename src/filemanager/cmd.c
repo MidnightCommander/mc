@@ -622,7 +622,7 @@ view_filtered_cmd (const WPanel * panel)
     if (input_is_empty (cmdline))
         initial_command = selection (panel)->fname->str;
     else
-        initial_command = cmdline->buffer->str;
+        initial_command = input_get_ctext (cmdline);
 
     command =
         input_dialog (_("Filtered view"),
