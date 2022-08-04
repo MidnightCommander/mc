@@ -612,7 +612,12 @@ configure_box (void)
 #endif
 
         if (quick_dialog (&qdlg) == B_ENTER)
-            old_esc_mode_timeout = atoi (time_out_new);
+        {
+            if (time_out_new[0] == '\0')
+                old_esc_mode_timeout = 0;
+            else
+                old_esc_mode_timeout = atoi (time_out_new);
+        }
 
         g_free (time_out_new);
     }
@@ -1177,7 +1182,10 @@ configure_vfs_box (void)
         if (quick_dialog (&qdlg) != B_CANCEL)
         {
             /* cppcheck-suppress uninitvar */
-            vfs_timeout = atoi (ret_timeout);
+            if (ret_timeout[0] == '\0')
+                vfs_timeout = 0;
+            else
+                vfs_timeout = atoi (ret_timeout);
             g_free (ret_timeout);
 
             if (vfs_timeout < 0 || vfs_timeout > 10000)
@@ -1190,7 +1198,10 @@ configure_vfs_box (void)
             /* cppcheck-suppress uninitvar */
             ftpfs_proxy_host = ret_ftp_proxy;
             /* cppcheck-suppress uninitvar */
-            ftpfs_directory_timeout = atoi (ret_directory_timeout);
+            if (ret_directory_timeout[0] == '\0')
+                ftpfs_directory_timeout = 0;
+            else
+                ftpfs_directory_timeout = atoi (ret_directory_timeout);
             g_free (ret_directory_timeout);
 #endif
         }

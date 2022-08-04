@@ -110,7 +110,7 @@ mcview_dialog_search (WView * view)
 
     g_strfreev (list_of_types);
 
-    if ((qd_result == B_CANCEL) || (exp == NULL) || (exp[0] == '\0'))
+    if (qd_result == B_CANCEL || exp[0] == '\0')
     {
         g_free (exp);
         return FALSE;
@@ -196,7 +196,7 @@ mcview_dialog_goto (WView * view, off_t * offset)
     *offset = -1;
 
     /* check input line value */
-    res = (qd_result != B_CANCEL && exp != NULL && exp[0] != '\0');
+    res = (qd_result != B_CANCEL && exp[0] != '\0');
     if (res)
     {
         int base = (current_goto_type == MC_VIEW_GOTO_OFFSET_HEX) ? 16 : 10;
