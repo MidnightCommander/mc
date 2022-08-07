@@ -902,7 +902,7 @@ mc_search__run_regex (mc_search_t * lc_mc_search, const void *user_data,
         {
             while (TRUE)
             {
-                int current_chr = '\n'; /* stop search symbol */
+                int current_chr = '\0'; /* stop search symbol */
 
                 ret = lc_mc_search->search_fn (user_data, current_pos, &current_chr);
 
@@ -921,7 +921,7 @@ mc_search__run_regex (mc_search_t * lc_mc_search, const void *user_data,
 
                 g_string_append_c (lc_mc_search->regex_buffer, (char) current_chr);
 
-                if ((char) current_chr == '\n' || virtual_pos > end_search)
+                if ((char) current_chr == '\0' || virtual_pos >= end_search)
                     break;
             }
         }
@@ -940,7 +940,7 @@ mc_search__run_regex (mc_search_t * lc_mc_search, const void *user_data,
 
                 current_pos++;
 
-                if (current_chr == '\n' || current_pos > end_search)
+                if (current_pos >= end_search)
                     break;
             }
 
