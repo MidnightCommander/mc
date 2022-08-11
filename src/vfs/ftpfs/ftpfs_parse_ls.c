@@ -323,7 +323,7 @@ parse_ls_line (char *line, struct stat *s, char **filename, char **linkname)
         long long size;
         int n;
 
-        s->st_gid = ftpfs_get_gid (t);
+        s->st_gid = ftpfs_get_gid (group_or_size);
 
         if (sscanf (t, "%lld%n", &size, &n) == 1 && t[n] == '\0')
             s->st_size = (off_t) size;
@@ -801,7 +801,7 @@ ftpfs_parse_long_list_MLSD (char *line, struct stat *s, char **filename, char **
     if (owner != NULL)
         s->st_uid = ftpfs_get_uid (owner);
     if (group != NULL)
-        s->st_uid = ftpfs_get_gid (group);
+        s->st_gid = ftpfs_get_gid (group);
 
     return TRUE;
 }
