@@ -754,6 +754,163 @@ fish_archive_same (const vfs_path_element_t * vpath_element, struct vfs_s_super 
 
 /* --------------------------------------------------------------------------------------------- */
 
+static void
+fish_parse_ls (char *buffer, struct vfs_s_entry *ent)
+{
+#define ST ent->ino->st
+
+    buffer++;
+
+    switch (buffer[-1])
+    {
+    case ':':
+        {
+            char *filename;
+            char *filename_bound;
+            char *temp;
+
+            filename = buffer;
+
+            if (strcmp (filename, "\".\"") == 0 || strcmp (filename, "\"..\"") == 0)
+                break;          /* We'll do "." and ".." ourselves */
+
+            filename_bound = filename + strlen (filename);
+
+            if (S_ISLNK (ST.st_mode))
+            {
+                char *linkname;
+                char *linkname_bound;
+                /* we expect: "escaped-name" -> "escaped-name"
+                   //     -> cannot occur in filenames,
+                   //     because it will be escaped to -\> */
+
+
+                linkname_bound = filename_bound;
+
+                if (*filename == '"')
+                    ++filename;
+
+                linkname = strstr (filename, "\" -> \"");
+                if (linkname == NULL)
+                {
+                    /* broken client, or smth goes wrong */
+                    linkname = filename_bound;
+                    if (filename_bound > filename && *(filename_bound - 1) == '"')
+                        --filename_bound;       /* skip trailing " */
+                }
+                else
+                {
+                    filename_bound = linkname;
+                    linkname += 6;      /* strlen ("\" -> \"") */
+                    if (*(linkname_bound - 1) == '"')
+                        --linkname_bound;       /* skip trailing " */
+                }
+
+                ent->name = g_strndup (filename, filename_bound - filename);
+                temp = ent->name;
+                ent->name = strutils_shell_unescape (ent->name);
+                g_free (temp);
+
+                ent->ino->linkname = g_strndup (linkname, linkname_bound - linkname);
+                temp = ent->ino->linkname;
+                ent->ino->linkname = strutils_shell_unescape (ent->ino->linkname);
+                g_free (temp);
+            }
+            else
+            {
+                /* we expect: "escaped-name" */
+                if (filename_bound - filename > 2)
+                {
+                    /*
+                       there is at least 2 "
+                       and we skip them
+                     */
+                    if (*filename == '"')
+                        ++filename;
+                    if (*(filename_bound - 1) == '"')
+                        --filename_bound;
+                }
+
+                ent->name = g_strndup (filename, filename_bound - filename);
+                temp = ent->name;
+                ent->name = strutils_shell_unescape (ent->name);
+                g_free (temp);
+            }
+            break;
+        }
+
+    case 'S':
+        ST.st_size = (off_t) g_ascii_strtoll (buffer, NULL, 10);
+        break;
+
+    case 'P':
+        {
+            size_t skipped;
+
+            vfs_parse_filemode (buffer, &skipped, &ST.st_mode);
+            break;
+        }
+
+    case 'R':
+        {
+            /*
+               raw filemode:
+               we expect: Roctal-filemode octal-filetype uid.gid
+             */
+            size_t skipped;
+
+            vfs_parse_raw_filemode (buffer, &skipped, &ST.st_mode);
+            break;
+        }
+
+    case 'd':
+        vfs_split_text (buffer);
+        if (vfs_parse_filedate (0, &ST.st_ctime) == 0)
+            break;
+        ST.st_atime = ST.st_mtime = ST.st_ctime;
+#ifdef HAVE_STRUCT_STAT_ST_MTIM
+        ST.st_atim.tv_nsec = ST.st_mtim.tv_nsec = ST.st_ctim.tv_nsec = 0;
+#endif
+        break;
+
+    case 'D':
+        {
+            struct tm tim;
+
+            memset (&tim, 0, sizeof (tim));
+            /* cppcheck-suppress invalidscanf */
+            if (sscanf (buffer, "%d %d %d %d %d %d", &tim.tm_year, &tim.tm_mon,
+                        &tim.tm_mday, &tim.tm_hour, &tim.tm_min, &tim.tm_sec) != 6)
+                break;
+            ST.st_atime = ST.st_mtime = ST.st_ctime = mktime (&tim);
+#ifdef HAVE_STRUCT_STAT_ST_MTIM
+            ST.st_atim.tv_nsec = ST.st_mtim.tv_nsec = ST.st_ctim.tv_nsec = 0;
+#endif
+        }
+        break;
+
+    case 'E':
+        {
+            int maj, min;
+
+            /* cppcheck-suppress invalidscanf */
+            if (sscanf (buffer, "%d,%d", &maj, &min) != 2)
+                break;
+#ifdef HAVE_STRUCT_STAT_ST_RDEV
+            ST.st_rdev = makedev (maj, min);
+#endif
+        }
+        break;
+
+    default:
+        break;
+    }
+
+#undef ST
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, const char *remote_path)
 {
@@ -802,154 +959,13 @@ fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, const char *remote
         }
         if (strncmp (buffer, "### ", 4) == 0)
             break;
-        if (buffer[0] == '\0')
+
+        if (buffer[0] != '\0')
+            fish_parse_ls (buffer, ent);
+        else if (ent->name != NULL)
         {
-            if (ent->name != NULL)
-            {
-                vfs_s_insert_entry (me, dir, ent);
-                ent = vfs_s_generate_entry (me, NULL, dir, 0);
-            }
-            continue;
-        }
-
-#define ST ent->ino->st
-
-        switch (buffer[0])
-        {
-        case ':':
-            {
-                char *temp;
-                char *data_start = buffer + 1;
-                char *filename = data_start;
-                char *filename_bound;
-
-                filename_bound = filename + strlen (filename);
-
-                if (strcmp (data_start, "\".\"") == 0 || strcmp (data_start, "\"..\"") == 0)
-                    break;      /* We'll do "." and ".." ourselves */
-
-                if (S_ISLNK (ST.st_mode))
-                {
-                    char *linkname;
-                    char *linkname_bound;
-                    /* we expect: "escaped-name" -> "escaped-name"
-                       //     -> cannot occur in filenames,
-                       //     because it will be escaped to -\> */
-
-
-                    linkname_bound = filename_bound;
-
-                    if (*filename == '"')
-                        ++filename;
-
-                    linkname = strstr (filename, "\" -> \"");
-                    if (linkname == NULL)
-                    {
-                        /* broken client, or smth goes wrong */
-                        linkname = filename_bound;
-                        if (filename_bound > filename && *(filename_bound - 1) == '"')
-                            --filename_bound;   /* skip trailing " */
-                    }
-                    else
-                    {
-                        filename_bound = linkname;
-                        linkname += 6;  /* strlen ("\" -> \"") */
-                        if (*(linkname_bound - 1) == '"')
-                            --linkname_bound;   /* skip trailing " */
-                    }
-
-                    ent->name = g_strndup (filename, filename_bound - filename);
-                    temp = ent->name;
-                    ent->name = strutils_shell_unescape (ent->name);
-                    g_free (temp);
-
-                    ent->ino->linkname = g_strndup (linkname, linkname_bound - linkname);
-                    temp = ent->ino->linkname;
-                    ent->ino->linkname = strutils_shell_unescape (ent->ino->linkname);
-                    g_free (temp);
-                }
-                else
-                {
-                    /* we expect: "escaped-name" */
-                    if (filename_bound - filename > 2)
-                    {
-                        /*
-                           there is at least 2 "
-                           and we skip them
-                         */
-                        if (*filename == '"')
-                            ++filename;
-                        if (*(filename_bound - 1) == '"')
-                            --filename_bound;
-                    }
-                    ent->name = g_strndup (filename, filename_bound - filename);
-                    temp = ent->name;
-                    ent->name = strutils_shell_unescape (ent->name);
-                    g_free (temp);
-                }
-                break;
-            }
-        case 'S':
-            ST.st_size = (off_t) g_ascii_strtoll (buffer + 1, NULL, 10);
-            break;
-        case 'P':
-            {
-                size_t skipped;
-
-                vfs_parse_filemode (buffer + 1, &skipped, &ST.st_mode);
-                break;
-            }
-        case 'R':
-            {
-                /*
-                   raw filemode:
-                   we expect: Roctal-filemode octal-filetype uid.gid
-                 */
-                size_t skipped;
-
-                vfs_parse_raw_filemode (buffer + 1, &skipped, &ST.st_mode);
-                break;
-            }
-        case 'd':
-            {
-                vfs_split_text (buffer + 1);
-                if (vfs_parse_filedate (0, &ST.st_ctime) == 0)
-                    break;
-                ST.st_atime = ST.st_mtime = ST.st_ctime;
-#ifdef HAVE_STRUCT_STAT_ST_MTIM
-                ST.st_atim.tv_nsec = ST.st_mtim.tv_nsec = ST.st_ctim.tv_nsec = 0;
-#endif
-            }
-            break;
-        case 'D':
-            {
-                struct tm tim;
-
-                memset (&tim, 0, sizeof (tim));
-                /* cppcheck-suppress invalidscanf */
-                if (sscanf (buffer + 1, "%d %d %d %d %d %d", &tim.tm_year, &tim.tm_mon,
-                            &tim.tm_mday, &tim.tm_hour, &tim.tm_min, &tim.tm_sec) != 6)
-                    break;
-                ST.st_atime = ST.st_mtime = ST.st_ctime = mktime (&tim);
-#ifdef HAVE_STRUCT_STAT_ST_MTIM
-                ST.st_atim.tv_nsec = ST.st_mtim.tv_nsec = ST.st_ctim.tv_nsec = 0;
-#endif
-            }
-            break;
-        case 'E':
-            {
-                int maj, min;
-
-                /* cppcheck-suppress invalidscanf */
-                if (sscanf (buffer + 1, "%d,%d", &maj, &min) != 2)
-                    break;
-#ifdef HAVE_STRUCT_STAT_ST_RDEV
-                ST.st_rdev = makedev (maj, min);
-#endif
-            }
-            break;
-        default:
-            break;
+            vfs_s_insert_entry (me, dir, ent);
+            ent = vfs_s_generate_entry (me, NULL, dir, 0);
         }
     }
 
