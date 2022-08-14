@@ -334,6 +334,7 @@ do_external_panelize (char *command)
         /* init buffers before call of mc_pread() */
         external->out.len = MC_PIPE_BUFSIZE;
         external->err.len = MC_PIPE_BUFSIZE;
+        external->err.null_term = TRUE;
 
         mc_pread (external, &error);
 

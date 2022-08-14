@@ -228,6 +228,8 @@ sfs_vfmake (const vfs_path_t * vpath, vfs_path_t * cache_vpath)
         return (-1);
     }
 
+    pip->err.null_term = TRUE;
+
     mc_pread (pip, &error);
     if (error != NULL)
     {
