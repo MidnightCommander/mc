@@ -1405,7 +1405,7 @@ file_mask_dialog (file_op_context_t * ctx, FileOperation operation, gboolean onl
                 ctx->umask_kill = i2 ^ 0777777;
             }
 
-            if (dest_dir == NULL || *dest_dir == '\0')
+            if (*dest_dir == '\0')
             {
                 g_free (def_text_secure);
                 g_free (source_mask);

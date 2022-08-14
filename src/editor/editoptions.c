@@ -200,7 +200,7 @@ edit_options_dialog (WDialog * h)
     if (!option_cursor_beyond_eol)
         g_list_foreach (GROUP (h)->widgets, edit_reset_over_col, NULL);
 
-    if (p != NULL)
+    if (*p != '\0')
     {
         option_word_wrap_line_length = atoi (p);
         if (option_word_wrap_line_length <= 0)
@@ -208,7 +208,7 @@ edit_options_dialog (WDialog * h)
         g_free (p);
     }
 
-    if (q != NULL)
+    if (*q != '\0')
     {
         option_tab_spacing = atoi (q);
         if (option_tab_spacing <= 0)

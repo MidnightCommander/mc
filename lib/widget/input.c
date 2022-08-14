@@ -220,14 +220,12 @@ input_push_history (WInput * in)
     char *t;
     gboolean empty;
 
-    /* FIXME: don't use input_get_text() to avoid extra checks */
-    t = g_strstrip (g_strndup (in->buffer->str, in->buffer->len));
+    t = g_strstrip (input_get_text (in));
     empty = *t == '\0';
     if (!empty)
     {
         g_free (t);
-        /* FIXME: don't use input_get_text() to avoid extra checks */
-        t = g_strndup (in->buffer->str, in->buffer->len);
+        t = input_get_text (in);
 
         if (in->history.name != NULL && in->strip_password)
         {
@@ -858,12 +856,6 @@ input_save_history (const gchar * event_group_name, const gchar * event_name,
 static void
 input_destroy (WInput * in)
 {
-    if (in == NULL)
-    {
-        fprintf (stderr, "Internal error: null Input *\n");
-        exit (EXIT_FAILURE);
-    }
-
     input_complete_free (in);
 
     /* clean history */
@@ -1149,39 +1141,6 @@ input_assign_text (WInput * in, const char *text)
     g_string_assign (in->buffer, text);
     in->point = str_length (in->buffer->str);
     input_update (in, TRUE);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/**
- * Get text of input line.
- *
- * @param in input line
- *
- * @return newly allocated string that contains a copy of @in's text.
- *         If @in is empty, return NULL.
- */
-char *
-input_get_text (const WInput * in)
-{
-    if (input_is_empty (in))
-        return NULL;
-
-    return g_strndup (in->buffer->str, in->buffer->len);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-gboolean
-input_is_empty (const WInput * in)
-{
-    if (in == NULL)
-        return TRUE;
-
-    /* if in != NULL, in->buffer must be created */
-    g_assert (in->buffer != NULL);
-
-    return in->buffer->len == 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */

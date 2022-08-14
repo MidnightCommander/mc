@@ -501,7 +501,7 @@ find_parm_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
 
         /* check filename regexp */
         if (!file_pattern_cbox->state && !input_is_empty (in_name)
-            && !find_check_regexp (in_name->buffer->str))
+            && !find_check_regexp (input_get_ctext (in_name)))
         {
             /* Don't stop the dialog */
             widget_set_state (w, WST_ACTIVE, TRUE);
@@ -512,7 +512,7 @@ find_parm_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
 
         /* check content regexp */
         if (content_regexp_cbox->state && !content_is_empty
-            && !find_check_regexp (in_with->buffer->str))
+            && !find_check_regexp (input_get_ctext (in_with)))
         {
             /* Don't stop the dialog */
             widget_set_state (w, WST_ACTIVE, TRUE);
@@ -783,12 +783,15 @@ find_parameters (WPanel * panel, char **start_dir, ssize_t * start_dir_len,
 
     case B_TREE:
         {
+            const char *start_cstr;
             const char *temp_dir;
 
-            if (input_is_empty (in_start) || DIR_IS_DOT (in_start->buffer->str))
+            start_cstr = input_get_ctext (in_start);
+
+            if (input_is_empty (in_start) || DIR_IS_DOT (start_cstr))
                 temp_dir = vfs_path_as_str (panel->cwd_vpath);
             else
-                temp_dir = in_start->buffer->str;
+                temp_dir = start_cstr;
 
             if (in_start_dir != INPUT_LAST_TEXT)
                 g_free (in_start_dir);
@@ -823,11 +826,12 @@ find_parameters (WPanel * panel, char **start_dir, ssize_t * start_dir_len,
             g_free (options.ignore_dirs);
             options.ignore_dirs = input_get_text (in_ignore);
 
-            *content = input_get_text (in_with);
-            *pattern = input_get_text (in_name);
-            if (*pattern == NULL)
+            *content = !input_is_empty (in_with) ? input_get_text (in_with) : NULL;
+            if (input_is_empty (in_name))
                 *pattern = g_strdup (options.file_pattern ? "*" : ".*");
-            *start_dir = !input_is_empty (in_start) ? in_start->buffer->str : (char *) ".";
+            else
+                *pattern = input_get_text (in_name);
+            *start_dir = (char *) (!input_is_empty (in_start) ? input_get_ctext (in_start) : ".");
             if (in_start_dir != INPUT_LAST_TEXT)
                 g_free (in_start_dir);
             in_start_dir = g_strdup (*start_dir);
@@ -858,7 +862,7 @@ find_parameters (WPanel * panel, char **start_dir, ssize_t * start_dir_len,
             }
 
             if (!options.ignore_dirs_enable || input_is_empty (in_ignore)
-                || DIR_IS_DOT (in_ignore->buffer->str))
+                || DIR_IS_DOT (input_get_ctext (in_ignore)))
                 *ignore_dirs = NULL;
             else
                 *ignore_dirs = input_get_text (in_ignore);

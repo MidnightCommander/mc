@@ -2570,7 +2570,7 @@ panel_select_unselect_files_dialog (select_flags_t * flags, const char *title,
     if (quick_dialog (&qdlg) == B_CANCEL)
         return NULL;
 
-    if (reg_exp == NULL || *reg_exp == '\0')
+    if (*reg_exp == '\0')
     {
         g_free (reg_exp);
         if (str != NULL)
