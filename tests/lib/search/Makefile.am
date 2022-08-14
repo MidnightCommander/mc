@@ -20,6 +20,7 @@ TESTS = \
 	hex_translate_to_regex \
 	regex_replace_esc_seq \
 	regex_process_escape_sequence \
+	regex_multiline_str \
 	translate_replace_glob_to_regex
 
 check_PROGRAMS = $(TESTS)
@@ -32,6 +33,9 @@ regex_replace_esc_seq_SOURCES = \
 
 regex_process_escape_sequence_SOURCES = \
 	regex_process_escape_sequence.c
+
+regex_multiline_str_SOURCES = \
+	regex_multiline_str.c
 
 translate_replace_glob_to_regex_SOURCES = \
 	translate_replace_glob_to_regex.c
