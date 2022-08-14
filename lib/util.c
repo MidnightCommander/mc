@@ -829,11 +829,11 @@ get_compression_type (int fd, const char *name)
         return COMPRESSION_NONE;
 
     /* GZIP_MAGIC and OLD_GZIP_MAGIC */
-    if (magic[0] == 037 && (magic[1] == 0213 || magic[1] == 0236))
+    if (magic[0] == 0x1F && (magic[1] == 0x8B || magic[1] == 0x9E))
         return COMPRESSION_GZIP;
 
     /* PKZIP_MAGIC */
-    if (magic[0] == 0120 && magic[1] == 0113 && magic[2] == 003 && magic[3] == 004)
+    if (magic[0] == 'P' && magic[1] == 'K' && magic[2] == 0x03 && magic[3] == 0x04)
     {
         /* Read compression type */
         mc_lseek (fd, 8, SEEK_SET);
@@ -849,7 +849,7 @@ get_compression_type (int fd, const char *name)
     }
 
     /* PACK_MAGIC and LZH_MAGIC and compress magic */
-    if (magic[0] == 037 && (magic[1] == 036 || magic[1] == 0240 || magic[1] == 0235))
+    if (magic[0] == 0x1F && (magic[1] == 0x1E || magic[1] == 0xA0 || magic[1] == 0x9D))
         /* Compatible with gzip */
         return COMPRESSION_GZIP;
 
