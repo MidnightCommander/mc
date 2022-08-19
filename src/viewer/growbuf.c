@@ -186,6 +186,16 @@ mcview_growbuf_read_until (WView * view, off_t ofs)
                 view->pipe_first_err_msg = FALSE;
 
                 mcview_show_error (view, sp->err.buf);
+
+                /* when switch from parse to raw mode and back,
+                 * do not close the already closed pipe (see call to mcview_growbuf_done below).
+                 * return from here since (sp == view->ds_stdio_pipe) would now be invalid.
+                 * NOTE: this check was removed by ticket #4103 but the above call to
+                 *       mcview_show_error triggers the stdio pipe handle to be closed:
+                 *       mcview_close_datasource -> mcview_growbuf_done
+                 */
+                if (view->ds_stdio_pipe == NULL)
+                    return;
             }
 
             if (sp->out.len > 0)

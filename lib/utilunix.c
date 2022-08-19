@@ -675,6 +675,13 @@ mc_pclose (mc_pipe_t * p, GError ** error)
 {
     int res;
 
+    if (p == NULL)
+    {
+        mc_replace_error (error, MC_PIPE_ERROR_READ, "%s",
+                          _("Cannot close pipe descriptor (p == NULL)"));
+        return;
+    }
+
     if (p->out.fd >= 0)
         res = close (p->out.fd);
     if (p->err.fd >= 0)
