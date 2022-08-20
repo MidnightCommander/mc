@@ -347,11 +347,13 @@ dnl ############################################################################
 case $host_os in
 *os400)
     AC_PATH_PROG([PERL], [perl], [/QOpenSys/pkgs/bin/perl])
+    AC_PATH_PROG([PERL_FOR_BUILD], [perl], [/QOpenSys/pkgs/bin/perl])
     AC_PATH_PROG([PYTHON], [python], [/QOpenSys/pkgs/bin/python2])
     AC_PATH_PROG([RUBY], [ruby], [/QOpenSys/pkgs/bin/ruby])
     ;;
 *)
     AC_PATH_PROG([PERL], [perl], [/usr/bin/perl])
+    AC_PATH_PROG([PERL_FOR_BUILD], [perl], [/usr/bin/perl])
     AC_PATH_PROG([PYTHON], [python], [/usr/bin/python])
     AC_PATH_PROG([RUBY], [ruby], [/usr/bin/ruby])
 esac
