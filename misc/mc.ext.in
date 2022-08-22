@@ -290,6 +290,10 @@ shell/.deba
         Open=%cd %p/deba://
 	View=%view{ascii} @EXTHELPERSDIR@/package.sh view deba
 
+# MS-DOS disk image
+shell/i/.img
+	Open=%cd %p/img://
+
 # ISO9660
 shell/i/.iso
 	Open=%cd %p/iso9660://

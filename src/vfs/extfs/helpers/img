@@ -1,0 +1,112 @@
+#!/usr/bin/env perl
+# VFS-wrapper for MS-DOS IMG files using mtools
+#
+# Written by twojstaryzdomu (twojstaryzdomu@users.noreply.github.com), 2021
+#
+
+# Undefine to disable upper-casing short names
+my $uc                              = 1;
+my ( $cmd, $archive, @args )        = @ARGV;
+die "$archive does not exist\n" unless -f "$archive";
+my $size_kb                         = ( -s $archive ) / 1024;
+my $drive                           = 'b';
+
+my $actions                         = {
+  list                              => "mdir -s -f -i \'$archive\'",
+  copyout                           => "mcopy -m -n -o -p -i \'$archive\'",
+  copyin                            => "mcopy -m -n -o -p -i \'$archive\'",
+  rm                                => "mdeltree -i \'$archive\'",
+  mkdir                             => "mmd -D o -i \'$archive\'",
+  rmdir                             => "mrd -i \'$archive\'",
+  run                               => "dosbox -noautoexec -c \'imgmount -size $size_kb $drive: \'$archive\'\' -c '$drive:\' -c",
+  test                              => "logger \'$archive\'"
+};
+
+my $regex_dir                       = qr"(?<=^Directory for ::/)(.*)$";
+# Required for regex
+$ENV{MTOOLS_DOTTED_DIR}             = 1;
+my $regex_list                      = qr"^(\S+)\s+(\S+)\s+(\d{4})-(\d{2})-(\d{2})\s+(\d{1,2}):(\d{1,2})\s\s?(.*)$";
+
+sub print_debug {
+  print "@_\n" if exists $ENV{DEBUG};
+}
+
+sub run_cmd {
+  my $cmd                           = shift;
+  my @output                        = ( do { open( my $line, "$cmd | " ) or die "$0: Can't run $cmd"; <$line>; } );
+  print_debug "run_cmd $cmd";
+  return \@output;
+}
+
+sub check_mtools {
+  my $cmd                           = shift;
+  my ( $tool )                      = $actions->{ $cmd } =~ /^(\w+)/;
+  foreach ( split( ":", $ENV{PATH} ) ) {
+    return 1 if -e "$_/$tool"
+  }
+  return;
+}
+
+sub default_handler {
+  my ( $cmd, $archive, @args )      = ( @_ );
+  print_debug "default_handler: @args";
+  if ( $cmd =~ /^copy(\S+)/ ) {
+    $args[0]                        = "::$args[0]";
+    @args                           = reverse @args if ( $1 eq 'in' );
+  }
+  my $input                         = run_cmd "$actions->{ $cmd } @args";
+  if ( $cmd eq 'list' ) {
+    my $output                      = {};
+    my $exec                        = check_mtools( run )
+                                    ? '-rwxr-xr-x'
+                                    : '-rw-r--r--';
+    my $dir;
+    foreach ( @{ $input } ) {
+      chomp;
+      next if /^$/;
+      if ( /$regex_dir/ ) {
+        @dir                        = split( "/", $1 );
+        if ( $uc ) {
+          foreach ( 0 .. $#dir ) {
+            my $udir                = uc( $dir[$_] );
+            $dir[$_]                = $udir if exists $output->{ join( "/", @dir[0..$_-1] ) . "/$udir" };
+          }
+        }
+        $dir                        = join( "/", @dir );
+        next;
+      }
+      if ( my ( $filename, $size, $year, $mon, $day, $hours, $mins, $longname ) = $_ =~ /$regex_list/ ) {
+        print_debug "list: dir = $dir, filename = $filename, size = $size, year = $year, mon = $mon, day = $day, hours = $hours, mins = $mins, longname = $longname;";
+        next if ( $filename =~ /^\.\.?$/ );
+        my $perms                   = $size eq '<DIR>'
+                                    ? 'drwxr-xr-x'
+                                    : $filename =~ /\.(?:exe|bat|com)$/i
+                                    ? $exec
+                                    : '-rw-r--r--';
+        $filename                   = uc( $filename ) if $uc;
+        my $path                    = ( $dir ? "/$dir/" : "/" )
+                                    . ( $longname ? $longname : $filename );
+        $secs                       = defined $secs ? $secs : "00";
+        print_debug "list: path = $path";
+        $output->{ $path }          = sprintf "%-10s    1 %-8d %-8d %8s %s/%s/%s %s:%s:%s %s", $perms, $<,
+                                    $(, $size ne '<DIR>' ? $size : 0, $mon, $day, $year, $hours, $mins, $secs, $path
+                                    . "\n";
+      }
+      else {
+        print_debug "list: skipped: $_";
+      }
+    }
+    print foreach map { $output->{ $_ } } sort keys %{ $output };
+  }
+}
+
+sub quote {
+  map { '"' . $_ . '"' } @_
+}
+
+print_debug "$0: cmd = $cmd; archive = $archive; args = @args";
+@args                               = quote( @args );
+$actions->{ $cmd }                  = $ENV{MC_TEST_EXTFS_LIST_CMD} if exists $ENV{MC_TEST_EXTFS_LIST_CMD};
+die "Cannot find command $cmd, are mtools installed?\n" unless check_mtools( $cmd );
+exists $actions->{ $cmd }           ? default_handler( $cmd, $archive, @args )
+                                    : die "mode $cmd not available\n";
