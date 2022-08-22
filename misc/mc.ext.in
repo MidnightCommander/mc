@@ -337,10 +337,18 @@ regex/i/\.(s|asm)$
 regex/\.(so|so\.[0-9\.]*)$
 	View=%view{ascii} @EXTHELPERSDIR@/misc.sh view so
 
+# .dylib libraries
+regex/\.(dylib|dylib\.[0-9\.]*)$
+	View=%view{ascii} @EXTHELPERSDIR@/misc.sh view dylib
+
 # Object
 type/^ELF
 	#Open=%var{PAGER:more} %f
 	View=%view{ascii} @EXTHELPERSDIR@/misc.sh view elf
+
+type/^Mach-O
+	#Open=%var{PAGER:more} %f
+	View=%view{ascii} @EXTHELPERSDIR@/misc.sh view dylib
 
 
 ### Documentation ###
