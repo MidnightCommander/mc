@@ -771,8 +771,8 @@ check_old_extension_file (void)
     extension_old_file = mc_config_get_full_path (MC_EXT_OLD_FILE);
     if (exist_file (extension_old_file))
         message (D_ERROR, _("Warning"),
-                 _("You have an outdated %s file.\nNow Midnight Commander uses %s file.\n"
-                   "Please copy your modifications of old file to new one."),
+                 _("You have an outdated %s file.\nMidnight Commander now uses %s file.\n"
+                   "Please copy your modifications of the old file to the new one."),
                    extension_old_file, MC_EXT_FILE);
 
     g_free (extension_old_file);
@@ -824,7 +824,7 @@ load_extension_file (void)
             title = g_strdup_printf (_(" %s%s file error"), mc_global.sysconfig_dir, MC_EXT_FILE);
             message (D_ERROR, title,
                      _("The format of the %s%s file has changed with version 4.0. "
-                       "It seems that the installation failed. Please fetch a fresh copy "
+                       "It seems that the installation has failed. Please fetch a fresh copy "
                        "from the Midnight Commander package."),
                      mc_global.sysconfig_dir, MC_EXT_FILE);
             g_free (title);

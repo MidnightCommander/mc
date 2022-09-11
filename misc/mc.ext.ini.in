@@ -1,55 +1,56 @@
 # Midnight Commander 4.0 extension file
-# Warning: Structure of this file has changed completely with version 4.0
+#
+# Warning: The structure of this file has been completely changed with the version 4.0!
 #
 # All lines starting with # or empty lines are ignoted.
 #
-# IMPORTANT: mc scans this file only on first call or after updating it using the
-# mc "Edit extension file" command (F9-c-e). If you edit the file otherwise
-# while mc is running, you will need to (F9-c-e) and exit the editor for your
-# changes to take effect, or exit mc and restart.
+# IMPORTANT: mc scans this file only upon startup or after editing it using the
+# mc "Edit extension file" command (F9-c-e). If you edit this file in any other way
+# while mc is running, you will need to press F9-c-e and exit the editor for your
+# changes to take effect, or exit mc and start it again.
 #
-# Section name can be any with following exceptions:
+# Section name can be anything with following exceptions:
 #    there are two reserved section names:
 #        mc.ext.ini
 #        Default
 #    special name pattern:
 #        Include/xxxxx
-# Detailed description see below.
+# See below for more details.
 #
-# Section [mc.ext.ini] is mandatory. It contains a metainfo of this file.
-# Paramenter Version is mandatory. It contains the version of this file format.
+# Section [mc.ext.ini] is mandatory. It contains file metadata.
+# "Version" parameter is mandatory. It contains the file format version.
 #
-# Section [Default] is optional. It is applied if no any matches was found.
+# Section [Default] is optional. It is applied only if no other match was found.
 #
-# Section [Include/xxxx] is referenced by value of Include=xxxx key
-# from other section.
+# Sections like [Include/xxxx] can be referenced as "Include=xxxx"
+# from other sections.
 #
-# Section are processed from top to bottom, thus the order is important.
-# [Default] should catch all the actions and be last.
+# Sections are processed from top to bottom, thus the order is important.
+# [Default] should be a catch-all action and come last.
 #
-# A section described file can contain following keys:
+# A section describing a file can contain following keys:
 #
 #    File descriptions:
 #
 #        Directory
 #            Matches any directory matching regular expression.
 #            Always case sensitive.
-#            This key has highest priority over other keys. If this key is in a section,
+#            This key has the highest priority over other keys. If this key is in a section,
 #            other keys are ignored.
 #
 #        Type
-#            File matches this if `file %f` matches regular expression
-#            (the filename: part from `file %f` is removed).
-#            Ignored if the "file" utility isn't used (not found in configure step
-#            or disabled in ini file).
+#            Matches files if `file %f` matches regular expression
+#            (the "filename:" part is removed from `file %f` output).
+#            Ignored if the "file" utility isn't used (not found during the configure step
+#            or disabled in the ini-file).
 #
 #        TypeIgnoreCase [true|false]
-#            A boolean value defines if Type value is case sensitive or not.
+#            Defines whether the Type value is case sensitive or not.
 #
 #        Regex
 #            An extended regular expression
 #            Please note that we are using the PCRE library and thus \| matches
-#            the literal | and | has special meaning (or) and () have special meaning
+#            the literal | and | has a special meaning (or), and () have a special meaning
 #            and \( \) stand for literal ( ).
 #
 #            Example:
@@ -57,10 +58,10 @@
 #            matches *.tar.lzma or *.tlz.
 #
 #        RegexIgnoreCase [true|false]
-#            A boolean value defines if Regex value is case sensitive or not.
+#            Defines whether the Regex value is case sensitive or not.
 #
 #        Shell
-#            Describes, when starting with a dot, an extension (no wildcars).
+#            Describes an extension when starting with a dot (no wildcards).
 #
 #            Example:
 #                Shell=.tar
@@ -72,10 +73,11 @@
 #            and Shell is ignored.
 #
 #        ShellIgnoreCase [true|false]
-#            A boolean value defines if Shell value is case sensitive or not.
+#            Defines whether the Shell value is case sensitive or not.
 #
 #        Include
 #            Reference to another section.
+#
 #            Example:
 #                Include=video
 #            points to the [Include/video] section.
@@ -91,15 +93,17 @@
 #        Edit
 #             Execute the command if the user presses F4.
 #
-#    All commands are ignored if section contains the Include key.
+#    All commands are ignored if the section contains the Include key.
 #
 #    Section can contain both Type and Regex or Type and Shell keys. In this case
-#    they are handled as AND condition.
+#    they are handled as an AND condition.
+
 #    Example:
 #        Shell=.3gp
 #        Type=^ISO Media.*3GPP
-#    matches *.3gp files for which `file` output is a line starting from "ISO Media"
-#    and then containing "3GPP".
+
+#    matches *.3gp files for which `file` output is a line starting with "ISO Media"
+#    and containing "3GPP".
 #
 # Command is any one-line shell command, with the following substitutions:
 #
@@ -107,35 +111,35 @@
 #        The % character
 #
 #    %p
-#        Name of the current file (without path, but pwd is its path).
-#        Also provided to external application as MC_EXT_BASENAME global variable.
+#        Name of the current file without the path.
+#        Also provided to the external application as MC_EXT_BASENAME environment variable.
 #
 #    %f
-#        Name of the current file. Unlike %p, if file is located on a non-local
+#        Name of the current file. Unlike %p, if the file is located on a non-local
 #        virtual filesystem, i.e. either tarfs or ftpfs, then the file will be
 #        temporarily copied into a local directory and %f will be the full path
 #        to this local temporary file.
 #        If you don't want to get a local copy and want to get the virtual fs path
 #        (like /ftp://ftp.cvut.cz/pub/hungry/xword), then use %d/%p instead of %f.
-#        Also provided to external application as MC_EXT_FILENAME global variable.
+#        Also provided to the external application as MC_EXT_FILENAME environment variable.
 #
 #    %d
-#        Name of the current directory (pwd, without trailing slash).
-#        Also provided to external application as MC_EXT_CURRENTDIR global variable.
+#        Name of the current directory without the trailing slash (`pwd`).
+#        Also provided to the external application as MC_EXT_CURRENTDIR environment variable.
 #
 #    %s
-#        "Selected files", i.e. space separated list of tagged files if any or name
+#        "Selected files", i.e. space separated list of tagged files if any or the name
 #        of the current file.
-#        Also provided to external application as MC_EXT_SELECTED global variable.
+#        Also provided to the external application as MC_EXT_SELECTED environment variable.
 #
 #    %t
-#        List of tagged files.
-#        Also provided to external application as MC_EXT_ONLYTAGGED global variable.
+#        List of the tagged files.
+#        Also provided to the external application as MC_EXT_ONLYTAGGED environment variable.
 #
 #    %u
-#        List of tagged files (they'll be untaged after the command).
+#        List of the tagged files (they will be untaged after the command is executed).
 #
-#    (If the letter following the % in uppercase, they refer to the other panel.
+#    (If the letter following the % is uppercase, then it refers to the opposite panel.
 #    But you shouldn't have to use it in this file.)
 #
 #    %cd
@@ -143,24 +147,24 @@
 #       %cd handles even vfs names.
 #
 #    %view
-#       The command output will be piped into mc's internal file viewer. If you type
-#       only the %view and no command, viewer will load %f file instead (i.e. no piping,
-#       so it is different to %view cat %f).
+#       The command output will be piped into mc's internal file viewer. If you use
+#       only %view and no command, the viewer will load %f file instead (i.e. no piping,
+#       which is the difference to %view cat %f).
 #
 #       %view may be directly followed by {} with one or more of the following
 #       separated by commas: 
 #           ascii (ascii mode)
 #           hex (hex mode),
-#           nroff (color highlighting for text using backspace for bold and underscore),
+#           nroff (color highlighting for text using escape sequences),
 #           unform (no highlighting for nroff sequences)
 #
 #    %var{VAR:default}
 #       This macro will expand to the value of the VAR variable in the environment if it's
-#       set, otherwise the value in default will be used. This is similar to the Bourne shell
+#       set, otherwise the default value will be used. This is similar to the Bourne shell
 #       ${VAR-default} construct.
 #
 #
-# Any new entries you develop for you are always welcome if they are useful on more than one
+# Any new entries you want to add are always welcome if they are useful on more than one
 # system. You can post your modifications as tickets at www.midnight-commander.org.
 
 
@@ -169,7 +173,7 @@
 # Reorganization: 2012-03-07 Slava Zanko <slavazanko@gmail.com>
 #                 2021-03-28 Andrew Borodin <aborodin@vmail.ru>
 #                 2021-08-24 Tomas Szepe <szepe@pinerecords.com>
-#                 2022-07-22 Andrew Borodin <aborodin@vmail.ru>: port to INI format.
+#                 2022-09-11 Andrew Borodin <aborodin@vmail.ru>: port to INI format.
 
 [mc.ext.ini]
 Version=4.0
@@ -181,7 +185,7 @@ Open=%cd %p/changesetfs://
 View=%cd %p/patchsetfs://
 
 ### Archives ###
-# Since we use "file -z", we should use Regex and Shell at first, then Type.
+# Since we use "file -z", we should use Regex and Shell first, then Type.
 
 
 ######### Files by name (Regex and Shell) #########
@@ -238,7 +242,7 @@ Regex=\.t(ar\.zst|zst)$
 Open=%cd %p/utar://
 View=%view{ascii} @EXTHELPERSDIR@/archive.sh view tar.zst
 
-# .tar.F - used in QNX
+# .tar.F - used on QNX
 [tar.F]
 Shell=.tar.F
 # Open=%cd %p/utar://
@@ -413,12 +417,12 @@ View=%view{ascii} @EXTHELPERSDIR@/misc.sh view lib
 ### Sources ###
 
 [C/C++]
-Regex=\.(c|cc|cpp)$
+Regex=\.(c|cc|cpp|cxx|c\+\+)$
 RegexIgnoreCase=true
 Include=editor
 
 [C/C++ header]
-Regex=\.(h|hh|hpp)$
+Regex=\.(h|hh|hpp|hxx|h\+\+)$
 RegexIgnoreCase=true
 Include=editor
 
@@ -447,7 +451,7 @@ View=%view{ascii} @EXTHELPERSDIR@/misc.sh view so
 Shell=.info
 Open=@EXTHELPERSDIR@/text.sh open info
 
-# Exception: .3gp are video files not manual pages
+# Exception: .3gp are video files, not manual pages
 [3gp]
 Shell=.3gp
 ShellIgnoreCase=true
@@ -730,7 +734,7 @@ ShellIgnoreCase=true
 Include=editor
 
 [markdown]
-Shell=.md
+Regex=\.(md|mkd)$
 ShellIgnoreCase=true
 Include=editor
 
@@ -1076,7 +1080,7 @@ Open=@EXTHELPERSDIR@/archive.sh open par2
 
 
 ######### Includes #########
-# includes should be at end of bindings
+# Includes should be at end of the bindings
 
 [Include/tar.gz]
 Open=%cd %p/utar://
