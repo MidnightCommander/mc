@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-06-05 19:48+0300\n"
+"POT-Creation-Date: 2022-09-17 14:27+0300\n"
 "PO-Revision-Date: 2021-09-29 09:45+0200\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/mc/language/"
@@ -530,6 +530,10 @@ msgid ""
 msgstr ""
 "Errore inaspettato in select() leggendo i dati da un processo figlio:\n"
 "%s"
+
+#, fuzzy
+msgid "Cannot close pipe descriptor (p == NULL)"
+msgstr "Impossibile creare il descrittore pipe"
 
 #, c-format
 msgid ""
@@ -2519,13 +2523,20 @@ msgid "Pipe failed"
 msgstr "Pipe fallita"
 
 #, c-format
+msgid ""
+"You have an outdated %s file.\n"
+"Midnight Commander now uses %s file.\n"
+"Please copy your modifications of the old file to the new one."
+msgstr ""
+
+#, c-format
 msgid " %s%s file error"
 msgstr " errore nel file %s%s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"The format of the %smc.ext file has changed with version 3.0. It seems that "
-"the installation failed. Please fetch a fresh copy from the Midnight "
+"The format of the %s%s file has changed with version 4.0. It seems that the "
+"installation has failed. Please fetch a fresh copy from the Midnight "
 "Commander package."
 msgstr ""
 "Il formato del file %smc.ext è cambiato con la versione 3.0. Sembra che "
@@ -2536,10 +2547,10 @@ msgstr ""
 msgid "%s file error"
 msgstr "Errore file %s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"The format of the %s file has changed with version 3.0. You may either want "
-"to copy it from %smc.ext or use that file as an example of how to write it."
+"The format of the %s file has changed with version 4.0. You may either want "
+"to copy it from %s%s or use that file as an example of how to write it."
 msgstr ""
 "Il formato del file %s è cambiato con la versione 3.0. È possibile sia "
 "copiarlo da %smc.ext o usare quel file come esempio per scriverne uno nuovo."
@@ -3057,7 +3068,7 @@ msgid "&Listing format..."
 msgstr "Formato &lista..."
 
 #, fuzzy
-msgid "S&ort order..."
+msgid "&Sort order..."
 msgstr "&Ordina per..."
 
 msgid "&Filter..."
@@ -3073,7 +3084,7 @@ msgid "S&hell link..."
 msgstr "Connessione S&hell..."
 
 #, fuzzy
-msgid "&SFTP link..."
+msgid "SFTP li&nk..."
 msgstr "Connessione S&FTP..."
 
 msgid "Paneli&ze"

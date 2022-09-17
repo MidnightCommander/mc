@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-06-05 19:48+0300\n"
+"POT-Creation-Date: 2022-09-17 14:27+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>, "
 "2011,2015-2019\n"
@@ -524,6 +524,10 @@ msgid ""
 msgstr ""
 "Ustekabeko errorea select()-ean ume prozesutik datuak irakurtzean:\n"
 "%s"
+
+#, fuzzy
+msgid "Cannot close pipe descriptor (p == NULL)"
+msgstr "Ezin da sortu hodi deskriptorea"
 
 #, c-format
 msgid ""
@@ -2509,13 +2513,20 @@ msgid "Pipe failed"
 msgstr "Hodiak huts egin du"
 
 #, c-format
+msgid ""
+"You have an outdated %s file.\n"
+"Midnight Commander now uses %s file.\n"
+"Please copy your modifications of the old file to the new one."
+msgstr ""
+
+#, c-format
 msgid " %s%s file error"
 msgstr " %s%s fitxategi akatsa"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"The format of the %smc.ext file has changed with version 3.0. It seems that "
-"the installation failed. Please fetch a fresh copy from the Midnight "
+"The format of the %s%s file has changed with version 4.0. It seems that the "
+"installation has failed. Please fetch a fresh copy from the Midnight "
 "Commander package."
 msgstr ""
 "%smc.ext fitxategiaren formatua aldatu egin da 3.0 bertsioarekin. "
@@ -2526,10 +2537,10 @@ msgstr ""
 msgid "%s file error"
 msgstr "%s fitxategi akatsa"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"The format of the %s file has changed with version 3.0. You may either want "
-"to copy it from %smc.ext or use that file as an example of how to write it."
+"The format of the %s file has changed with version 4.0. You may either want "
+"to copy it from %s%s or use that file as an example of how to write it."
 msgstr ""
 "%s fitxategiaren formatua aldatu egin da 3.0 bertsioarekin. %smc.ext "
 "fitxategitik kopiatu edo fitxategi hori nola idatzi adibide gisa erabili "
@@ -3049,8 +3060,9 @@ msgstr "Zu&haitza"
 msgid "&Listing format..."
 msgstr "&Zerrenda formatua"
 
-msgid "S&ort order..."
-msgstr ""
+#, fuzzy
+msgid "&Sort order..."
+msgstr "Sailkatzeko ordena"
 
 msgid "&Filter..."
 msgstr "I&ragazkia..."
@@ -3064,8 +3076,9 @@ msgstr "FT&P esteka..."
 msgid "S&hell link..."
 msgstr "S&hell esteka..."
 
-msgid "&SFTP link..."
-msgstr ""
+#, fuzzy
+msgid "SFTP li&nk..."
+msgstr "FT&P esteka..."
 
 msgid "Paneli&ze"
 msgstr "Panelerat&u"

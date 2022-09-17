@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-06-05 19:48+0300\n"
+"POT-Creation-Date: 2022-09-17 14:27+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Alexander Kilian <alexander.kilian@gmail.com>, 2022\n"
 "Language-Team: Swedish (http://www.transifex.com/mc/mc/language/sv/)\n"
@@ -531,6 +531,10 @@ msgid ""
 msgstr ""
 "Oväntat fel i select() under läsning av data från en barnprocess:\n"
 "%s"
+
+#, fuzzy
+msgid "Cannot close pipe descriptor (p == NULL)"
+msgstr "Tunnelbeskrivning kunde inte skapas"
 
 #, c-format
 msgid ""
@@ -2515,13 +2519,20 @@ msgid "Pipe failed"
 msgstr "Tunnel misslyckades"
 
 #, c-format
+msgid ""
+"You have an outdated %s file.\n"
+"Midnight Commander now uses %s file.\n"
+"Please copy your modifications of the old file to the new one."
+msgstr ""
+
+#, c-format
 msgid " %s%s file error"
 msgstr " %s%s filfel"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"The format of the %smc.ext file has changed with version 3.0. It seems that "
-"the installation failed. Please fetch a fresh copy from the Midnight "
+"The format of the %s%s file has changed with version 4.0. It seems that the "
+"installation has failed. Please fetch a fresh copy from the Midnight "
 "Commander package."
 msgstr ""
 "Formatet på filen %smc.ext har ändrats i version 3.0. Det verkar som att "
@@ -2532,10 +2543,10 @@ msgstr ""
 msgid "%s file error"
 msgstr "%s filfel"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"The format of the %s file has changed with version 3.0. You may either want "
-"to copy it from %smc.ext or use that file as an example of how to write it."
+"The format of the %s file has changed with version 4.0. You may either want "
+"to copy it from %s%s or use that file as an example of how to write it."
 msgstr ""
 "Formatet på filen %s har ändrats i version 3.0. Du kan antingen kopiera den "
 "från %smc.ext eller använda den filen som mall för hur den ska se ut."
@@ -3052,8 +3063,9 @@ msgstr "&Träd"
 msgid "&Listing format..."
 msgstr "&Listformat..."
 
-msgid "S&ort order..."
-msgstr ""
+#, fuzzy
+msgid "&Sort order..."
+msgstr "Sorteringsordning"
 
 msgid "&Filter..."
 msgstr "&Filter..."
@@ -3067,8 +3079,9 @@ msgstr "FT&P-länk..."
 msgid "S&hell link..."
 msgstr "S&kallänk..."
 
-msgid "&SFTP link..."
-msgstr ""
+#, fuzzy
+msgid "SFTP li&nk..."
+msgstr "FT&P-länk..."
 
 msgid "Paneli&ze"
 msgstr "Pa&nelisera"

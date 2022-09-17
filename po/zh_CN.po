@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-06-05 19:48+0300\n"
+"POT-Creation-Date: 2022-09-17 14:27+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Gurbuzguven <6mehmet6@gmail.com>, 2021\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/mc/mc/language/"
@@ -530,6 +530,10 @@ msgid ""
 msgstr ""
 "使用 select() 从子进程读取数据时发生未知错误：\n"
 "%s"
+
+#, fuzzy
+msgid "Cannot close pipe descriptor (p == NULL)"
+msgstr "无法创建管道标识符"
 
 #, c-format
 msgid ""
@@ -2508,13 +2512,20 @@ msgid "Pipe failed"
 msgstr "管道失败"
 
 #, c-format
+msgid ""
+"You have an outdated %s file.\n"
+"Midnight Commander now uses %s file.\n"
+"Please copy your modifications of the old file to the new one."
+msgstr ""
+
+#, c-format
 msgid " %s%s file error"
 msgstr " %s%s 文件错误"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"The format of the %smc.ext file has changed with version 3.0. It seems that "
-"the installation failed. Please fetch a fresh copy from the Midnight "
+"The format of the %s%s file has changed with version 4.0. It seems that the "
+"installation has failed. Please fetch a fresh copy from the Midnight "
 "Commander package."
 msgstr ""
 "文件 %smc.ext 的格式在3.0版本时已经被修改。似乎安装有错误。请获取新的"
@@ -2524,10 +2535,10 @@ msgstr ""
 msgid "%s file error"
 msgstr "%s 文件错误"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"The format of the %s file has changed with version 3.0. You may either want "
-"to copy it from %smc.ext or use that file as an example of how to write it."
+"The format of the %s file has changed with version 4.0. You may either want "
+"to copy it from %s%s or use that file as an example of how to write it."
 msgstr ""
 "%s 文件的格式在 3.0 版中已经改变。您可以或者将 %smc.ext 文件复制过来，或者将"
 "其为作为范本撰写您自己的版本。"
@@ -3042,8 +3053,9 @@ msgstr "树(&T)"
 msgid "&Listing format..."
 msgstr "列表格式(&L)…"
 
-msgid "S&ort order..."
-msgstr ""
+#, fuzzy
+msgid "&Sort order..."
+msgstr "排序"
 
 msgid "&Filter..."
 msgstr "过滤(&F)..."
@@ -3057,8 +3069,9 @@ msgstr "FTP 链接(&P)..."
 msgid "S&hell link..."
 msgstr "S&hell 链接..."
 
-msgid "&SFTP link..."
-msgstr ""
+#, fuzzy
+msgid "SFTP li&nk..."
+msgstr "FTP 链接(&P)..."
 
 msgid "Paneli&ze"
 msgstr "面板化(&Z)"

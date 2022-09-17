@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-06-05 19:48+0300\n"
+"POT-Creation-Date: 2022-09-17 14:27+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Efstathios Iosifidis <iefstathios@gmail.com>, 2015\n"
 "Language-Team: Greek (http://www.transifex.com/mc/mc/language/el/)\n"
@@ -510,6 +510,9 @@ msgstr ""
 msgid ""
 "Unexpected error in select() reading data from a child process:\n"
 "%s"
+msgstr ""
+
+msgid "Cannot close pipe descriptor (p == NULL)"
 msgstr ""
 
 #, c-format
@@ -2436,13 +2439,20 @@ msgid "Pipe failed"
 msgstr ""
 
 #, c-format
+msgid ""
+"You have an outdated %s file.\n"
+"Midnight Commander now uses %s file.\n"
+"Please copy your modifications of the old file to the new one."
+msgstr ""
+
+#, c-format
 msgid " %s%s file error"
 msgstr "Σφάλμα αρχείου %s%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"The format of the %smc.ext file has changed with version 3.0. It seems that "
-"the installation failed. Please fetch a fresh copy from the Midnight "
+"The format of the %s%s file has changed with version 4.0. It seems that the "
+"installation has failed. Please fetch a fresh copy from the Midnight "
 "Commander package."
 msgstr ""
 "Η μορφή του αρχείου %smc.ext άλλαξε με την έκδοση 3.0. Φαίνεται ότι η "
@@ -2453,10 +2463,10 @@ msgstr ""
 msgid "%s file error"
 msgstr "Σφάλμα αρχείου %s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"The format of the %s file has changed with version 3.0. You may either want "
-"to copy it from %smc.ext or use that file as an example of how to write it."
+"The format of the %s file has changed with version 4.0. You may either want "
+"to copy it from %s%s or use that file as an example of how to write it."
 msgstr ""
 "Η μορφή του αρχείου %s άλλαξε με την έκδοση 3.0. Ίσως θέλετε να το "
 "αντιγράψετε από %smc.ext ή να χρησιμοποιήσετε εκείνο το αρχείο ως παράδειγμα "
@@ -2942,8 +2952,9 @@ msgstr "&Δέντρο"
 msgid "&Listing format..."
 msgstr ""
 
-msgid "S&ort order..."
-msgstr ""
+#, fuzzy
+msgid "&Sort order..."
+msgstr "Σειρά ταξινόμησης"
 
 msgid "&Filter..."
 msgstr "&Φίλτρο..."
@@ -2957,8 +2968,9 @@ msgstr "Δεσμος FT&P..."
 msgid "S&hell link..."
 msgstr "Δεσμος κε&λύφους..."
 
-msgid "&SFTP link..."
-msgstr ""
+#, fuzzy
+msgid "SFTP li&nk..."
+msgstr "Δεσμος FT&P..."
 
 msgid "Paneli&ze"
 msgstr ""
