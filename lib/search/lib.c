@@ -68,30 +68,27 @@ mc_search__change_case_str (const char *charset, const char *str, gsize str_len,
     gchar *dst_ptr;
     gsize dst_len;
 #ifdef HAVE_CHARSET
-    gchar *converted_str;
-    gsize converted_str_len;
+    GString *converted_str;
     const char *src_ptr;
 
     if (charset == NULL)
         charset = cp_source;
 
-    converted_str = mc_search__recode_str (str, str_len, charset, cp_display, &converted_str_len);
+    converted_str = mc_search__recode_str (str, str_len, charset, cp_display);
 
-    dst_str = g_malloc (converted_str_len);
-    dst_len = converted_str_len + 1;    /* +1 is required for str_toupper/str_tolower */
+    dst_str = g_malloc (converted_str->len);
+    dst_len = converted_str->len + 1;   /* +1 is required for str_toupper/str_tolower */
 
-    for (src_ptr = converted_str, dst_ptr = dst_str;
+    for (src_ptr = converted_str->str, dst_ptr = dst_str;
          case_conv (src_ptr, &dst_ptr, &dst_len); src_ptr += str_length_char (src_ptr))
         ;
     *dst_ptr = '\0';
 
-    g_free (converted_str);
+    dst_len = converted_str->len;
+    g_string_free (converted_str, TRUE);
 
-    dst_ptr = mc_search__recode_str (dst_str, converted_str_len, cp_display, charset, &dst_len);
+    ret = mc_search__recode_str (dst_str, dst_len, cp_display, charset);
     g_free (dst_str);
-
-    ret = g_string_new_len (dst_ptr, dst_len);
-    g_free (dst_ptr);
 #else
     (void) charset;
 
@@ -112,11 +109,11 @@ mc_search__change_case_str (const char *charset, const char *str, gsize str_len,
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-gchar *
-mc_search__recode_str (const char *str, gsize str_len,
-                       const char *charset_from, const char *charset_to, gsize * bytes_written)
+GString *
+mc_search__recode_str (const char *str, gsize str_len, const char *charset_from,
+                       const char *charset_to)
 {
-    gchar *ret = NULL;
+    GString *ret = NULL;
 
     if (charset_from != NULL && charset_to != NULL
         && g_ascii_strcasecmp (charset_to, charset_from) != 0)
@@ -126,60 +123,61 @@ mc_search__recode_str (const char *str, gsize str_len,
         conv = g_iconv_open (charset_to, charset_from);
         if (conv != INVALID_CONV)
         {
-            gsize bytes_read;
+            gchar *val;
+            gsize bytes_read = 0;
+            gsize bytes_written = 0;
 
-            ret = g_convert_with_iconv (str, str_len, conv, &bytes_read, bytes_written, NULL);
+            val = g_convert_with_iconv (str, str_len, conv, &bytes_read, &bytes_written, NULL);
+
             g_iconv_close (conv);
+
+            if (val != NULL)
+            {
+                ret = g_string_new_len (val, bytes_written);
+                g_free (val);
+            }
         }
     }
 
     if (ret == NULL)
-    {
-        *bytes_written = str_len;
-        ret = g_strndup (str, str_len);
-    }
+        ret = g_string_new_len (str, str_len);
 
     return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-gchar *
+GString *
 mc_search__get_one_symbol (const char *charset, const char *str, gsize str_len,
                            gboolean * just_letters)
 {
-    gchar *converted_str;
+    GString *converted_str;
     const gchar *next_char;
 
-    gsize tmp_len;
 #ifdef HAVE_CHARSET
-    gsize converted_str_len;
-    gchar *converted_str2;
+    GString *converted_str2;
 
     if (charset == NULL)
         charset = cp_source;
 
-    converted_str = mc_search__recode_str (str, str_len, charset, cp_display, &converted_str_len);
+    converted_str = mc_search__recode_str (str, str_len, charset, cp_display);
 #else
     (void) charset;
 
-    converted_str = g_strndup (str, str_len);
+    converted_str = g_string_new_len (str, str_len);
 #endif
 
-    next_char = str_cget_next_char (converted_str);
-
-    tmp_len = next_char - converted_str;
-
-    converted_str[tmp_len] = '\0';
+    next_char = str_cget_next_char (converted_str->str);
+    g_string_set_size (converted_str, (gsize) (next_char - converted_str->str));
 
 #ifdef HAVE_CHARSET
     converted_str2 =
-        mc_search__recode_str (converted_str, tmp_len, cp_display, charset, &converted_str_len);
+        mc_search__recode_str (converted_str->str, converted_str->len, cp_display, charset);
 #endif
     if (just_letters != NULL)
-        *just_letters = str_isalnum (converted_str) && !str_isdigit (converted_str);
+        *just_letters = str_isalnum (converted_str->str) && !str_isdigit (converted_str->str);
 #ifdef HAVE_CHARSET
-    g_free (converted_str);
+    g_string_free (converted_str, TRUE);
     return converted_str2;
 #else
     return converted_str;

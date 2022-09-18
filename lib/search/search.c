@@ -222,8 +222,7 @@ mc_search_prepare (mc_search_t * lc_mc_search)
         for (loop1 = 0; loop1 < codepages->len; loop1++)
         {
             const char *id;
-            gsize recoded_str_len;
-            gchar *buffer;
+            GString *buffer;
 
             id = ((codepage_desc *) g_ptr_array_index (codepages, loop1))->id;
             if (g_ascii_strcasecmp (id, lc_mc_search->original.charset) == 0)
@@ -239,12 +238,12 @@ mc_search_prepare (mc_search_t * lc_mc_search)
             buffer =
                 mc_search__recode_str (lc_mc_search->original.str->str,
                                        lc_mc_search->original.str->len,
-                                       lc_mc_search->original.charset, id, &recoded_str_len);
+                                       lc_mc_search->original.charset, id);
 
             g_ptr_array_add (ret,
-                             mc_search__cond_struct_new (lc_mc_search, buffer,
-                                                         recoded_str_len, id));
-            g_free (buffer);
+                             mc_search__cond_struct_new (lc_mc_search, buffer->str,
+                                                         buffer->len, id));
+            g_string_free (buffer, TRUE);
         }
     }
     else
