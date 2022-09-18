@@ -51,11 +51,66 @@ const char *STR_E_RPL_INVALID_TOKEN = N_("Invalid token number %d");
 
 /*** file scope type declarations ****************************************************************/
 
+typedef gboolean (*case_conv_fn) (const char *ch, char **out, size_t * remain);
+
 /*** file scope variables ************************************************************************/
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
+static GString *
+mc_search__change_case_str (const char *charset, const char *str, gsize str_len,
+                            case_conv_fn case_conv)
+{
+    GString *ret;
+#ifdef HAVE_CHARSET
+    gchar *converted_str, *tmp_str1, *tmp_str2, *tmp_str3;
+    gsize converted_str_len;
+    gsize tmp_len;
+
+    if (charset == NULL)
+        charset = cp_source;
+
+    tmp_str2 = converted_str =
+        mc_search__recode_str (str, str_len, charset, cp_display, &converted_str_len);
+
+    tmp_len = converted_str_len + 1;
+
+    tmp_str3 = tmp_str1 = g_strdup (converted_str);
+
+    while (case_conv (tmp_str1, &tmp_str2, &tmp_len))
+        tmp_str1 += str_length_char (tmp_str1);
+
+    g_free (tmp_str3);
+    tmp_str2 =
+        mc_search__recode_str (converted_str, converted_str_len, cp_display, charset, &tmp_len);
+    g_free (converted_str);
+
+    ret = g_string_new_len (tmp_str2, tmp_len);
+    g_free (tmp_str2);
+    return ret;
+#else
+    const gchar *tmp_str1 = str;
+    gchar *converted_str, *tmp_str2;
+    gsize converted_str_len = str_len + 1;
+
+    (void) charset;
+
+    tmp_str2 = converted_str = g_strndup (str, str_len);
+
+    while (case_fn (tmp_str1, &tmp_str2, &converted_str_len))
+        tmp_str1 += str_length_char (tmp_str1);
+
+    ret = g_string_new_len (converted_str, str_len);
+    g_free (converted_str);
+    return ret;
+#endif
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 gchar *
 mc_search__recode_str (const char *str, gsize str_len,
@@ -136,49 +191,7 @@ mc_search__get_one_symbol (const char *charset, const char *str, gsize str_len,
 GString *
 mc_search__tolower_case_str (const char *charset, const char *str, gsize str_len)
 {
-    GString *ret;
-#ifdef HAVE_CHARSET
-    gchar *converted_str, *tmp_str1, *tmp_str2, *tmp_str3;
-    gsize converted_str_len;
-    gsize tmp_len;
-
-    if (charset == NULL)
-        charset = cp_source;
-
-    tmp_str2 = converted_str =
-        mc_search__recode_str (str, str_len, charset, cp_display, &converted_str_len);
-
-    tmp_len = converted_str_len + 1;
-
-    tmp_str3 = tmp_str1 = g_strdup (converted_str);
-
-    while (str_tolower (tmp_str1, &tmp_str2, &tmp_len))
-        tmp_str1 += str_length_char (tmp_str1);
-
-    g_free (tmp_str3);
-    tmp_str2 =
-        mc_search__recode_str (converted_str, converted_str_len, cp_display, charset, &tmp_len);
-    g_free (converted_str);
-
-    ret = g_string_new_len (tmp_str2, tmp_len);
-    g_free (tmp_str2);
-    return ret;
-#else
-    const gchar *tmp_str1 = str;
-    gchar *converted_str, *tmp_str2;
-    gsize converted_str_len = str_len + 1;
-
-    (void) charset;
-
-    tmp_str2 = converted_str = g_strndup (str, str_len);
-
-    while (str_tolower (tmp_str1, &tmp_str2, &converted_str_len))
-        tmp_str1 += str_length_char (tmp_str1);
-
-    ret = g_string_new_len (converted_str, str_len);
-    g_free (converted_str);
-    return ret;
-#endif
+    return mc_search__change_case_str (charset, str, str_len, str_tolower);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -186,51 +199,7 @@ mc_search__tolower_case_str (const char *charset, const char *str, gsize str_len
 GString *
 mc_search__toupper_case_str (const char *charset, const char *str, gsize str_len)
 {
-    GString *ret;
-#ifdef HAVE_CHARSET
-    gchar *converted_str, *tmp_str1, *tmp_str2, *tmp_str3;
-    gsize converted_str_len;
-    gsize tmp_len;
-
-    if (charset == NULL)
-        charset = cp_source;
-
-    tmp_str2 = converted_str =
-        mc_search__recode_str (str, str_len, charset, cp_display, &converted_str_len);
-
-    tmp_len = converted_str_len + 1;
-
-    tmp_str3 = tmp_str1 = g_strdup (converted_str);
-
-    while (str_toupper (tmp_str1, &tmp_str2, &tmp_len))
-        tmp_str1 += str_length_char (tmp_str1);
-
-    g_free (tmp_str3);
-
-    tmp_str2 =
-        mc_search__recode_str (converted_str, converted_str_len, cp_display, charset, &tmp_len);
-    g_free (converted_str);
-
-    ret = g_string_new_len (tmp_str2, tmp_len);
-    g_free (tmp_str2);
-    return ret;
-#else
-
-    const gchar *tmp_str1 = str;
-    gchar *converted_str, *tmp_str2;
-    gsize converted_str_len = str_len + 1;
-
-    (void) charset;
-
-    tmp_str2 = converted_str = g_strndup (str, str_len);
-
-    while (str_toupper (tmp_str1, &tmp_str2, &converted_str_len))
-        tmp_str1 += str_length_char (tmp_str1);
-
-    ret = g_string_new_len (converted_str, str_len);
-    g_free (converted_str);
-    return ret;
-#endif
+    return mc_search__change_case_str (charset, str, str_len, str_toupper);
 }
 
 /* --------------------------------------------------------------------------------------------- */
