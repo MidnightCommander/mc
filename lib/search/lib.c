@@ -64,48 +64,48 @@ mc_search__change_case_str (const char *charset, const char *str, gsize str_len,
                             case_conv_fn case_conv)
 {
     GString *ret;
+    gchar *dst_str;
+    gchar *dst_ptr;
+    gsize dst_len;
 #ifdef HAVE_CHARSET
-    gchar *converted_str, *tmp_str1, *tmp_str2, *tmp_str3;
+    gchar *converted_str;
     gsize converted_str_len;
-    gsize tmp_len;
+    const char *src_ptr;
 
     if (charset == NULL)
         charset = cp_source;
 
-    tmp_str2 = converted_str =
-        mc_search__recode_str (str, str_len, charset, cp_display, &converted_str_len);
+    converted_str = mc_search__recode_str (str, str_len, charset, cp_display, &converted_str_len);
 
-    tmp_len = converted_str_len + 1;
+    dst_str = g_malloc (converted_str_len);
+    dst_len = converted_str_len + 1;    /* +1 is required for str_toupper/str_tolower */
 
-    tmp_str3 = tmp_str1 = g_strdup (converted_str);
+    for (src_ptr = converted_str, dst_ptr = dst_str;
+         case_conv (src_ptr, &dst_ptr, &dst_len); src_ptr += str_length_char (src_ptr))
+        ;
+    *dst_ptr = '\0';
 
-    while (case_conv (tmp_str1, &tmp_str2, &tmp_len))
-        tmp_str1 += str_length_char (tmp_str1);
-
-    g_free (tmp_str3);
-    tmp_str2 =
-        mc_search__recode_str (converted_str, converted_str_len, cp_display, charset, &tmp_len);
     g_free (converted_str);
 
-    ret = g_string_new_len (tmp_str2, tmp_len);
-    g_free (tmp_str2);
-    return ret;
-#else
-    const gchar *tmp_str1 = str;
-    gchar *converted_str, *tmp_str2;
-    gsize converted_str_len = str_len + 1;
+    dst_ptr = mc_search__recode_str (dst_str, converted_str_len, cp_display, charset, &dst_len);
+    g_free (dst_str);
 
+    ret = g_string_new_len (dst_ptr, dst_len);
+    g_free (dst_ptr);
+#else
     (void) charset;
 
-    tmp_str2 = converted_str = g_strndup (str, str_len);
+    dst_str = g_malloc (str_len);
+    dst_len = str_len + 1;      /* +1 is required for str_toupper/str_tolower */
 
-    while (case_fn (tmp_str1, &tmp_str2, &converted_str_len))
-        tmp_str1 += str_length_char (tmp_str1);
+    for (dst_ptr = dst_str; case_conv (str, &dst_ptr, &dst_len); str += str_length_char (str))
+        ;
+    *dst_ptr = '\0';
 
-    ret = g_string_new_len (converted_str, str_len);
-    g_free (converted_str);
-    return ret;
+    ret = g_string_new_len (dst_str, dst_len);
+    g_free (dst_str);
 #endif
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
