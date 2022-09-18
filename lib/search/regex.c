@@ -122,13 +122,13 @@ mc_search__regex_str_append_if_special (GString * copy_to, const GString * regex
 
 static void
 mc_search__cond_struct_new_regex_hex_add (const char *charset, GString * str_to,
-                                          const char *one_char, gsize str_len)
+                                          const GString * one_char)
 {
     GString *upp, *low;
     gsize loop;
 
-    upp = mc_search__toupper_case_str (charset, one_char, str_len);
-    low = mc_search__tolower_case_str (charset, one_char, str_len);
+    upp = mc_search__toupper_case_str (charset, one_char->str, one_char->len);
+    low = mc_search__tolower_case_str (charset, one_char->str, one_char->len);
 
     for (loop = 0; loop < upp->len; loop++)
     {
@@ -177,8 +177,7 @@ mc_search__cond_struct_new_regex_accum_append (const char *charset, GString * st
             loop += one_char->len;
 
             if (just_letters)
-                mc_search__cond_struct_new_regex_hex_add (charset, recoded_part, one_char->str,
-                                                          one_char->len);
+                mc_search__cond_struct_new_regex_hex_add (charset, recoded_part, one_char);
             else
                 g_string_append_len (recoded_part, one_char->str, one_char->len);
         }
