@@ -155,9 +155,9 @@ mcview_find (mcview_search_status_msg_t * ssm, off_t search_start, off_t search_
             view->search_nroff_seq->index = search_start;
             mcview_nroff_seq_info (view->search_nroff_seq);
 
-            if (search_end > search_start + (off_t) view->search->original_len
+            if (search_end > search_start + (off_t) view->search->original.str->len
                 && mc_search_is_fixed_search_str (view->search))
-                search_end = search_start + view->search->original_len;
+                search_end = search_start + view->search->original.str->len;
 
             ok = mc_search_run (view->search, (void *) ssm, search_start, search_end, len);
             if (ok && view->search->normal_offset == search_start)
@@ -409,7 +409,7 @@ mcview_do_search (WView * view, off_t want_search_start)
         if (view->growbuf_in_use)
             growbufsize = mcview_growbuf_filesize (view);
         else
-            growbufsize = view->search->original_len;
+            growbufsize = view->search->original.str->len;
 
         if (mcview_find (&vsm, search_start, mcview_get_filesize (view), &match_len))
         {
@@ -425,7 +425,7 @@ mcview_do_search (WView * view, off_t want_search_start)
         if (view->search->error != MC_SEARCH_E_NOTFOUND)
             break;
 
-        search_start = growbufsize - view->search->original_len;
+        search_start = growbufsize - view->search->original.str->len;
     }
     while (search_start > 0 && mcview_may_still_grow (view));
 
