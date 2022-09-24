@@ -60,21 +60,20 @@ typedef gboolean (*case_conv_fn) (const char *ch, char **out, size_t * remain);
 /* --------------------------------------------------------------------------------------------- */
 
 static GString *
-mc_search__change_case_str (const char *charset, const char *str, gsize str_len,
-                            case_conv_fn case_conv)
+mc_search__change_case_str (const char *charset, const GString * str, case_conv_fn case_conv)
 {
     GString *ret;
+    const char *src_ptr;
     gchar *dst_str;
     gchar *dst_ptr;
     gsize dst_len;
 #ifdef HAVE_CHARSET
     GString *converted_str;
-    const char *src_ptr;
 
     if (charset == NULL)
         charset = cp_source;
 
-    converted_str = mc_search__recode_str (str, str_len, charset, cp_display);
+    converted_str = mc_search__recode_str (str->str, str->len, charset, cp_display);
 
     dst_str = g_malloc (converted_str->len);
     dst_len = converted_str->len + 1;   /* +1 is required for str_toupper/str_tolower */
@@ -92,10 +91,11 @@ mc_search__change_case_str (const char *charset, const char *str, gsize str_len,
 #else
     (void) charset;
 
-    dst_str = g_malloc (str_len);
-    dst_len = str_len + 1;      /* +1 is required for str_toupper/str_tolower */
+    dst_str = g_malloc (str->len);
+    dst_len = str->len + 1;     /* +1 is required for str_toupper/str_tolower */
 
-    for (dst_ptr = dst_str; case_conv (str, &dst_ptr, &dst_len); str += str_length_char (str))
+    for (src_ptr = str->str, dst_ptr = dst_str;
+         case_conv (src_ptr, &dst_ptr, &dst_len); src_ptr += str_length_char (src_ptr))
         ;
     *dst_ptr = '\0';
 
@@ -187,17 +187,17 @@ mc_search__get_one_symbol (const char *charset, const char *str, gsize str_len,
 /* --------------------------------------------------------------------------------------------- */
 
 GString *
-mc_search__tolower_case_str (const char *charset, const char *str, gsize str_len)
+mc_search__tolower_case_str (const char *charset, const GString * str)
 {
-    return mc_search__change_case_str (charset, str, str_len, str_tolower);
+    return mc_search__change_case_str (charset, str, str_tolower);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 GString *
-mc_search__toupper_case_str (const char *charset, const char *str, gsize str_len)
+mc_search__toupper_case_str (const char *charset, const GString * str)
 {
-    return mc_search__change_case_str (charset, str, str_len, str_toupper);
+    return mc_search__change_case_str (charset, str, str_toupper);
 }
 
 /* --------------------------------------------------------------------------------------------- */

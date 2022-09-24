@@ -127,8 +127,8 @@ mc_search__cond_struct_new_regex_hex_add (const char *charset, GString * str_to,
     GString *upp, *low;
     gsize loop;
 
-    upp = mc_search__toupper_case_str (charset, one_char->str, one_char->len);
-    low = mc_search__tolower_case_str (charset, one_char->str, one_char->len);
+    upp = mc_search__toupper_case_str (charset, one_char);
+    low = mc_search__tolower_case_str (charset, one_char);
 
     for (loop = 0; loop < upp->len; loop++)
     {
@@ -649,23 +649,23 @@ mc_search_regex__process_append_str (GString * dest_str, const char *from, gsize
         if ((*replace_flags & REPLACE_T_UPP_TRANSFORM_CHAR) != 0)
         {
             *replace_flags &= ~REPLACE_T_UPP_TRANSFORM_CHAR;
-            tmp_string = mc_search__toupper_case_str (NULL, s->str, char_len);
+            tmp_string = mc_search__toupper_case_str (NULL, s);
             g_string_append_len (dest_str, tmp_string->str, tmp_string->len);
         }
         else if ((*replace_flags & REPLACE_T_LOW_TRANSFORM_CHAR) != 0)
         {
             *replace_flags &= ~REPLACE_T_LOW_TRANSFORM_CHAR;
-            tmp_string = mc_search__tolower_case_str (NULL, s->str, char_len);
+            tmp_string = mc_search__tolower_case_str (NULL, s);
             g_string_append_len (dest_str, tmp_string->str, tmp_string->len);
         }
         else if ((*replace_flags & REPLACE_T_UPP_TRANSFORM) != 0)
         {
-            tmp_string = mc_search__toupper_case_str (NULL, s->str, char_len);
+            tmp_string = mc_search__toupper_case_str (NULL, s);
             g_string_append_len (dest_str, tmp_string->str, tmp_string->len);
         }
         else if ((*replace_flags & REPLACE_T_LOW_TRANSFORM) != 0)
         {
-            tmp_string = mc_search__tolower_case_str (NULL, s->str, char_len);
+            tmp_string = mc_search__tolower_case_str (NULL, s);
             g_string_append_len (dest_str, tmp_string->str, tmp_string->len);
         }
 
