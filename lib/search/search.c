@@ -60,13 +60,12 @@ static const mc_search_type_str_t mc_search__list_types[] = {
 /*** file scope functions ************************************************************************/
 
 static mc_search_cond_t *
-mc_search__cond_struct_new (mc_search_t * lc_mc_search, const char *str,
-                            gsize str_len, const char *charset)
+mc_search__cond_struct_new (mc_search_t * lc_mc_search, const GString * str, const char *charset)
 {
     mc_search_cond_t *mc_search_cond;
 
     mc_search_cond = g_malloc0 (sizeof (mc_search_cond_t));
-    mc_search_cond->str = g_string_new_len (str, str_len);
+    mc_search_cond->str = mc_g_string_dup (str);
     mc_search_cond->charset = g_strdup (charset);
 
     switch (lc_mc_search->search_type)
@@ -229,8 +228,7 @@ mc_search_prepare (mc_search_t * lc_mc_search)
             {
                 g_ptr_array_add (ret,
                                  mc_search__cond_struct_new (lc_mc_search,
-                                                             lc_mc_search->original.str->str,
-                                                             lc_mc_search->original.str->len,
+                                                             lc_mc_search->original.str,
                                                              lc_mc_search->original.charset));
                 continue;
             }
@@ -239,24 +237,19 @@ mc_search_prepare (mc_search_t * lc_mc_search)
                 mc_search__recode_str (lc_mc_search->original.str->str,
                                        lc_mc_search->original.str->len,
                                        lc_mc_search->original.charset, id);
-
-            g_ptr_array_add (ret,
-                             mc_search__cond_struct_new (lc_mc_search, buffer->str,
-                                                         buffer->len, id));
+            g_ptr_array_add (ret, mc_search__cond_struct_new (lc_mc_search, buffer, id));
             g_string_free (buffer, TRUE);
         }
     }
     else
     {
         g_ptr_array_add (ret,
-                         mc_search__cond_struct_new (lc_mc_search, lc_mc_search->original.str->str,
-                                                     lc_mc_search->original.str->len,
+                         mc_search__cond_struct_new (lc_mc_search, lc_mc_search->original.str,
                                                      lc_mc_search->original.charset));
     }
 #else
     g_ptr_array_add (ret,
-                     mc_search__cond_struct_new (lc_mc_search, lc_mc_search->original.str->str,
-                                                 lc_mc_search->original.str->len,
+                     mc_search__cond_struct_new (lc_mc_search, lc_mc_search->original.str,
                                                  str_detect_termencoding ()));
 #endif
     lc_mc_search->prepared.conditions = ret;
