@@ -654,29 +654,27 @@ mc_search_regex__process_append_str (GString * dest_str, const char *from, gsize
             *replace_flags &= ~REPLACE_T_UPP_TRANSFORM_CHAR;
             tmp_string = mc_search__toupper_case_str (NULL, tmp_str, char_len);
             g_string_append_len (dest_str, tmp_string->str, tmp_string->len);
-            g_string_free (tmp_string, TRUE);
         }
         else if ((*replace_flags & REPLACE_T_LOW_TRANSFORM_CHAR) != 0)
         {
             *replace_flags &= ~REPLACE_T_LOW_TRANSFORM_CHAR;
             tmp_string = mc_search__tolower_case_str (NULL, tmp_str, char_len);
             g_string_append_len (dest_str, tmp_string->str, tmp_string->len);
-            g_string_free (tmp_string, TRUE);
         }
         else if ((*replace_flags & REPLACE_T_UPP_TRANSFORM) != 0)
         {
             tmp_string = mc_search__toupper_case_str (NULL, tmp_str, char_len);
             g_string_append_len (dest_str, tmp_string->str, tmp_string->len);
-            g_string_free (tmp_string, TRUE);
         }
         else if ((*replace_flags & REPLACE_T_LOW_TRANSFORM) != 0)
         {
             tmp_string = mc_search__tolower_case_str (NULL, tmp_str, char_len);
             g_string_append_len (dest_str, tmp_string->str, tmp_string->len);
-            g_string_free (tmp_string, TRUE);
         }
 
         g_free (tmp_str);
+        if (tmp_string != NULL)
+            g_string_free (tmp_string, TRUE);
     }
 }
 
