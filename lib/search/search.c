@@ -214,38 +214,36 @@ mc_search_prepare (mc_search_t * lc_mc_search)
 
     ret = g_ptr_array_new ();
 #ifdef HAVE_CHARSET
-    if (lc_mc_search->is_all_charsets)
+    if (!lc_mc_search->is_all_charsets)
+        g_ptr_array_add (ret,
+                         mc_search__cond_struct_new (lc_mc_search, lc_mc_search->original.str,
+                                                     lc_mc_search->original.charset));
+    else
     {
         gsize loop1;
 
         for (loop1 = 0; loop1 < codepages->len; loop1++)
         {
             const char *id;
-            GString *buffer;
 
             id = ((codepage_desc *) g_ptr_array_index (codepages, loop1))->id;
             if (g_ascii_strcasecmp (id, lc_mc_search->original.charset) == 0)
-            {
                 g_ptr_array_add (ret,
                                  mc_search__cond_struct_new (lc_mc_search,
                                                              lc_mc_search->original.str,
                                                              lc_mc_search->original.charset));
-                continue;
-            }
+            else
+            {
+                GString *buffer;
 
-            buffer =
-                mc_search__recode_str (lc_mc_search->original.str->str,
-                                       lc_mc_search->original.str->len,
-                                       lc_mc_search->original.charset, id);
-            g_ptr_array_add (ret, mc_search__cond_struct_new (lc_mc_search, buffer, id));
-            g_string_free (buffer, TRUE);
+                buffer =
+                    mc_search__recode_str (lc_mc_search->original.str->str,
+                                           lc_mc_search->original.str->len,
+                                           lc_mc_search->original.charset, id);
+                g_ptr_array_add (ret, mc_search__cond_struct_new (lc_mc_search, buffer, id));
+                g_string_free (buffer, TRUE);
+            }
         }
-    }
-    else
-    {
-        g_ptr_array_add (ret,
-                         mc_search__cond_struct_new (lc_mc_search, lc_mc_search->original.str,
-                                                     lc_mc_search->original.charset));
     }
 #else
     g_ptr_array_add (ret,
