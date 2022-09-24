@@ -40,19 +40,17 @@
 
 /*** file scope variables ************************************************************************/
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
-static GString *
-mc_search__normal_translate_to_regex (const GString * astr)
+static void
+mc_search__normal_translate_to_regex (GString * str)
 {
-    const char *str = astr->str;
-    GString *buff;
     gsize loop;
 
-    buff = g_string_sized_new (32);
-
-    for (loop = 0; loop < astr->len; loop++)
-        switch (str[loop])
+    for (loop = 0; loop < str->len; loop++)
+        switch (str->str[loop])
         {
         case '*':
         case '?':
@@ -70,28 +68,22 @@ mc_search__normal_translate_to_regex (const GString * astr)
         case '^':
         case '-':
         case '|':
-            g_string_append_c (buff, '\\');
-            MC_FALLTHROUGH;
+            g_string_insert_c (str, loop, '\\');
+            loop++;
         default:
-            g_string_append_c (buff, str[loop]);
             break;
         }
-
-    return buff;
 }
 
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 void
 mc_search__cond_struct_new_init_normal (const char *charset, mc_search_t * lc_mc_search,
                                         mc_search_cond_t * mc_search_cond)
 {
-    GString *tmp;
-
-    tmp = mc_search__normal_translate_to_regex (mc_search_cond->str);
-    g_string_free (mc_search_cond->str, TRUE);
-
-    mc_search_cond->str = tmp;
+    mc_search__normal_translate_to_regex (mc_search_cond->str);
     mc_search__cond_struct_new_init_regex (charset, lc_mc_search, mc_search_cond);
 }
 
