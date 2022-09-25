@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-06-05 19:48+0300\n"
+"POT-Creation-Date: 2022-09-17 14:27+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Serdar Sağlam <teknomobil@msn.com>, 2019-2020\n"
 "Language-Team: Turkish (http://www.transifex.com/mc/mc/language/tr/)\n"
@@ -520,6 +520,10 @@ msgid ""
 msgstr ""
 "Alt işlemden select() ile veri okurken beklenmeyen hata oluştu:\n"
 "%s"
+
+#, fuzzy
+msgid "Cannot close pipe descriptor (p == NULL)"
+msgstr "Boru(|) belirteci oluşturulamadı"
 
 #, c-format
 msgid ""
@@ -2506,13 +2510,20 @@ msgid "Pipe failed"
 msgstr "Boru açılamadı"
 
 #, c-format
+msgid ""
+"You have an outdated %s file.\n"
+"Midnight Commander now uses %s file.\n"
+"Please copy your modifications of the old file to the new one."
+msgstr ""
+
+#, c-format
 msgid " %s%s file error"
 msgstr " %s%s dosya hatası"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"The format of the %smc.ext file has changed with version 3.0. It seems that "
-"the installation failed. Please fetch a fresh copy from the Midnight "
+"The format of the %s%s file has changed with version 4.0. It seems that the "
+"installation has failed. Please fetch a fresh copy from the Midnight "
 "Commander package."
 msgstr ""
 "%smc.ext dosyası sürüm 3.0 ile değişti. Kurulum başarısız görünüyor. Lütfen, "
@@ -2522,10 +2533,10 @@ msgstr ""
 msgid "%s file error"
 msgstr "%s dosya hatası"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"The format of the %s file has changed with version 3.0. You may either want "
-"to copy it from %smc.ext or use that file as an example of how to write it."
+"The format of the %s file has changed with version 4.0. You may either want "
+"to copy it from %s%s or use that file as an example of how to write it."
 msgstr ""
 "Sürüm 3.0 ile ~/%s dosyası değişti. İster %smc.ext dosyasını kopyalayarak "
 "ister o dosyayı örnek alarak yeniden oluşturunuz."
@@ -3038,8 +3049,9 @@ msgstr "&Ağaç"
 msgid "&Listing format..."
 msgstr "&Listeleme biçimi..."
 
-msgid "S&ort order..."
-msgstr ""
+#, fuzzy
+msgid "&Sort order..."
+msgstr "Sıralama türü"
 
 msgid "&Filter..."
 msgstr "&Süzgeç..."
@@ -3053,8 +3065,9 @@ msgstr "FT&P bağı..."
 msgid "S&hell link..."
 msgstr "&SSH bağı..."
 
-msgid "&SFTP link..."
-msgstr ""
+#, fuzzy
+msgid "SFTP li&nk..."
+msgstr "FT&P bağı..."
 
 msgid "Paneli&ze"
 msgstr "Pane&lle"

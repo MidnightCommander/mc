@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-06-05 19:48+0300\n"
+"POT-Creation-Date: 2022-09-17 14:27+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Andrij Mizyk <andmizyk@gmail.com>, 2021-2022\n"
 "Language-Team: Ukrainian (http://www.transifex.com/mc/mc/language/uk/)\n"
@@ -541,6 +541,10 @@ msgid ""
 msgstr ""
 "Виникла несподівана помилка під час читання select() з підлеглого процесу:\n"
 "%s"
+
+#, fuzzy
+msgid "Cannot close pipe descriptor (p == NULL)"
+msgstr "Не вдалося створити дескриптор каналу"
 
 #, c-format
 msgid ""
@@ -2524,13 +2528,20 @@ msgid "Pipe failed"
 msgstr "Сталася помилка каналу"
 
 #, c-format
+msgid ""
+"You have an outdated %s file.\n"
+"Midnight Commander now uses %s file.\n"
+"Please copy your modifications of the old file to the new one."
+msgstr ""
+
+#, c-format
 msgid " %s%s file error"
 msgstr " Сталася помилка файлу %s%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"The format of the %smc.ext file has changed with version 3.0. It seems that "
-"the installation failed. Please fetch a fresh copy from the Midnight "
+"The format of the %s%s file has changed with version 4.0. It seems that the "
+"installation has failed. Please fetch a fresh copy from the Midnight "
 "Commander package."
 msgstr ""
 "Формат файлу %smc.ext було змінено у версіі 3.0. Схоже що стався збій при "
@@ -2540,10 +2551,10 @@ msgstr ""
 msgid "%s file error"
 msgstr "Сталася помилка файлу %s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"The format of the %s file has changed with version 3.0. You may either want "
-"to copy it from %smc.ext or use that file as an example of how to write it."
+"The format of the %s file has changed with version 4.0. You may either want "
+"to copy it from %s%s or use that file as an example of how to write it."
 msgstr ""
 "Формат файлу %s змінився у версії 3.0. Можна або скопіювати його з %smc.ext, "
 "або використати вказаний файл як приклад для створення нового."
@@ -3059,7 +3070,8 @@ msgstr "Д&eрево"
 msgid "&Listing format..."
 msgstr "&Формат списку"
 
-msgid "S&ort order..."
+#, fuzzy
+msgid "&Sort order..."
 msgstr "Порядок &сортування..."
 
 msgid "&Filter..."
@@ -3074,7 +3086,8 @@ msgstr "&FTP-з’єднання…"
 msgid "S&hell link..."
 msgstr "&Shell-з’єднання…"
 
-msgid "&SFTP link..."
+#, fuzzy
+msgid "SFTP li&nk..."
 msgstr "S&FTP-зʼєднання..."
 
 msgid "Paneli&ze"

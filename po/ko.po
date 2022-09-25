@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-06-05 19:48+0300\n"
+"POT-Creation-Date: 2022-09-17 14:27+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Junghee Lee <daemul72@gmail.com>, 2022\n"
 "Language-Team: Korean (http://www.transifex.com/mc/mc/language/ko/)\n"
@@ -531,6 +531,10 @@ msgid ""
 msgstr ""
 "Select()에서 하위 프로세스의 데이터를 읽는 도중 예상치 못한 오류 발생:\n"
 "%s"
+
+#, fuzzy
+msgid "Cannot close pipe descriptor (p == NULL)"
+msgstr "파이프 설명도구를 작성할 수 없습니다"
 
 #, c-format
 msgid ""
@@ -2515,13 +2519,20 @@ msgid "Pipe failed"
 msgstr "파이프 실패"
 
 #, c-format
+msgid ""
+"You have an outdated %s file.\n"
+"Midnight Commander now uses %s file.\n"
+"Please copy your modifications of the old file to the new one."
+msgstr ""
+
+#, c-format
 msgid " %s%s file error"
 msgstr " %s%s 파일 오류"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"The format of the %smc.ext file has changed with version 3.0. It seems that "
-"the installation failed. Please fetch a fresh copy from the Midnight "
+"The format of the %s%s file has changed with version 4.0. It seems that the "
+"installation has failed. Please fetch a fresh copy from the Midnight "
 "Commander package."
 msgstr ""
 "%smc.ext 파일의 형식이 버전 3.0으로 변경되었습니다. 설치가 실패한 것 같습니"
@@ -2531,10 +2542,10 @@ msgstr ""
 msgid "%s file error"
 msgstr "%s 파일 오류"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"The format of the %s file has changed with version 3.0. You may either want "
-"to copy it from %smc.ext or use that file as an example of how to write it."
+"The format of the %s file has changed with version 4.0. You may either want "
+"to copy it from %s%s or use that file as an example of how to write it."
 msgstr ""
 "버전 3.0에서는 %s 파일의 형식이 변경되었습니다. %smc.ext에서 복사하거나 쓰기 "
 "방법의 예제로 그 파일을 사용할 수 있습니다."
@@ -3052,7 +3063,8 @@ msgstr "트리구조(&T)"
 msgid "&Listing format..."
 msgstr "목록 형식(&L)..."
 
-msgid "S&ort order..."
+#, fuzzy
+msgid "&Sort order..."
 msgstr "정렬 순서(&O)..."
 
 msgid "&Filter..."
@@ -3067,7 +3079,8 @@ msgstr "FTP 링크(&P)..."
 msgid "S&hell link..."
 msgstr "쉘 링크(&H)..."
 
-msgid "&SFTP link..."
+#, fuzzy
+msgid "SFTP li&nk..."
 msgstr "SFTP 링크(&S)..."
 
 msgid "Paneli&ze"

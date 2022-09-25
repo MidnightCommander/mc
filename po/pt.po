@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-06-05 19:48+0300\n"
+"POT-Creation-Date: 2022-09-17 14:27+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Gilberto Jorge <gmj125@gmail.com>, 2013-2022\n"
 "Language-Team: Portuguese (http://www.transifex.com/mc/mc/language/pt/)\n"
@@ -532,6 +532,10 @@ msgid ""
 msgstr ""
 "Erro inesperado em select() ao ler dados de um processo child:\n"
 "%s"
+
+#, fuzzy
+msgid "Cannot close pipe descriptor (p == NULL)"
+msgstr "Não é possível criar o descriptor do pipe"
 
 #, c-format
 msgid ""
@@ -2522,13 +2526,20 @@ msgid "Pipe failed"
 msgstr "Falha de Pipe"
 
 #, c-format
+msgid ""
+"You have an outdated %s file.\n"
+"Midnight Commander now uses %s file.\n"
+"Please copy your modifications of the old file to the new one."
+msgstr ""
+
+#, c-format
 msgid " %s%s file error"
 msgstr " %s%s erro de ficheiro"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"The format of the %smc.ext file has changed with version 3.0. It seems that "
-"the installation failed. Please fetch a fresh copy from the Midnight "
+"The format of the %s%s file has changed with version 4.0. It seems that the "
+"installation has failed. Please fetch a fresh copy from the Midnight "
 "Commander package."
 msgstr ""
 "O formato do ficheiro %smc.ext mudou com a versão 3.0. Parece que a "
@@ -2539,10 +2550,10 @@ msgstr ""
 msgid "%s file error"
 msgstr "%s erro de ficheiro"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"The format of the %s file has changed with version 3.0. You may either want "
-"to copy it from %smc.ext or use that file as an example of how to write it."
+"The format of the %s file has changed with version 4.0. You may either want "
+"to copy it from %s%s or use that file as an example of how to write it."
 msgstr ""
 "O formato do ficheiro %s mudou com a versão 3.0. Pode desejar copiá-lo de "
 "%smc.ext ou usar esse ficheiro como um exemplo de como o escrever."
@@ -3060,7 +3071,8 @@ msgstr "&Árvore"
 msgid "&Listing format..."
 msgstr "Formato da &listagem..."
 
-msgid "S&ort order..."
+#, fuzzy
+msgid "&Sort order..."
 msgstr "&Ordem de classificação..."
 
 msgid "&Filter..."
@@ -3075,7 +3087,8 @@ msgstr "Ligação FT&P..."
 msgid "S&hell link..."
 msgstr "Ligação s&hell..."
 
-msgid "&SFTP link..."
+#, fuzzy
+msgid "SFTP li&nk..."
 msgstr "Ligação &SFTP..."
 
 msgid "Paneli&ze"

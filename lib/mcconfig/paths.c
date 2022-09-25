@@ -69,7 +69,8 @@ static const struct
     { &mc_config_str, MC_PANELS_FILE },
 
     /* User should move this file with applying some changes in file */
-    { &mc_config_str, MC_FILEBIND_FILE },
+    { &mc_config_str, MC_EXT_FILE },
+    { &mc_config_str, MC_EXT_OLD_FILE },
 
     /* data */
     { &mc_data_str, MC_SKINS_DIR },

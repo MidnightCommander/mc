@@ -3,30 +3,25 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# Andrew Borodin <aborodin@vmail.ru>, 2011
-# AlexL <loginov.alex.valer@gmail.com>, 2015-2020
 # Alex Tkachenko <alex@bcs.zp.ua>, 1998
-# and Alex Tkachenko <alex@bcs.zp.ua>, 1998
-# Andrew Borodin <aborodin@vmail.ru>, 2009-2012
-# Andrew V. Samoilov <sav@bcs.zp.ua>, 1999,2014
-# Anton Sergeevich Chumak <nightfast@yahoo.co.uk>, 2005
-# Dimitriy Ryazantcev <DJm00n@mail.ru>, 2015
+# Andrew V. Samoilov <sav@bcs.zp.ua>, 1999, 2014
 # Evgeny Bulgakov <bgav@netvision.net.il>, 1999
-# Ilia Maslakov <il.smind@gmail.com>, 2009
-# Mr GreyWolf, 2016
-# Mr.GreyWolf, 2016
-# NaiLi (aka jamesjames) Rootaerc <theism@mail.ru>, 2012
-# Piotr Drąg <piotrdrag@gmail.com>, 2018
 # Sergey Panov <sipan@mit.edu>, 1999
-# Simple88, 2016
-# Simple88, 2016
-# Slava Zanko <slavazanko@gmail.com>, 2009,2011
 # Valek Filippov <frob@df.ru>, 2000
+# Anton Sergeevich Chumak <nightfast@yahoo.co.uk>, 2005
+# Andrew Borodin <aborodin@vmail.ru>, 2009-2012
+# Ilia Maslakov <il.smind@gmail.com>, 2009
+# Slava Zanko <slavazanko@gmail.com>, 2009, 2011
+# NaiLi (aka jamesjames) Rootaerc <theism@mail.ru>, 2012
+# AlexL <loginov.alex.valer@gmail.com>, 2015-2020
+# Dimitriy Ryazantcev <DJm00n@mail.ru>, 2015
+# Simple88, 2016
+# Piotr Drąg <piotrdrag@gmail.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-06-05 19:48+0300\n"
+"POT-Creation-Date: 2022-09-17 14:27+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>, 2018\n"
 "Language-Team: Russian (http://www.transifex.com/mc/mc/language/ru/)\n"
@@ -550,6 +545,9 @@ msgid ""
 msgstr ""
 "Неожиданная ошибка в select() при чтении данных из дочернего процесса:\n"
 "%s"
+
+msgid "Cannot close pipe descriptor (p == NULL)"
+msgstr "Не удалось закрыть дескриптор канала (p == NULL)"
 
 #, c-format
 msgid ""
@@ -1232,7 +1230,6 @@ msgstr "Вы должны сначала выделить блок текста"
 msgid "Run sort"
 msgstr "Выполнить сортировку"
 
-#, fuzzy
 msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr "Введите параметры сортировки (man sort(1)), разделённые пробелами:"
 
@@ -2539,13 +2536,20 @@ msgid "Pipe failed"
 msgstr "Сбой канала"
 
 #, c-format
+msgid ""
+"You have an outdated %s file.\n"
+"Midnight Commander now uses %s file.\n"
+"Please copy your modifications of the old file to the new one."
+msgstr ""
+
+#, c-format
 msgid " %s%s file error"
 msgstr "ошибка файла %s%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"The format of the %smc.ext file has changed with version 3.0. It seems that "
-"the installation failed. Please fetch a fresh copy from the Midnight "
+"The format of the %s%s file has changed with version 4.0. It seems that the "
+"installation has failed. Please fetch a fresh copy from the Midnight "
 "Commander package."
 msgstr ""
 "Формат %smc.ext изменён с версии 3.0. Возможно, произошёл сбой при "
@@ -2555,10 +2559,10 @@ msgstr ""
 msgid "%s file error"
 msgstr "ошибка файла %s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"The format of the %s file has changed with version 3.0. You may either want "
-"to copy it from %smc.ext or use that file as an example of how to write it."
+"The format of the %s file has changed with version 4.0. You may either want "
+"to copy it from %s%s or use that file as an example of how to write it."
 msgstr ""
 "Формат файла %s изменён с версии 3.0. Вы можете либо скопировать его с %s/mc."
 "ext, либо использовать этот файл как пример и написать свой."
@@ -3076,7 +3080,8 @@ msgstr "Дерев&о"
 msgid "&Listing format..."
 msgstr "Фор&мат списка..."
 
-msgid "S&ort order..."
+#, fuzzy
+msgid "&Sort order..."
 msgstr "Порядок &сортировки..."
 
 msgid "&Filter..."
@@ -3091,7 +3096,8 @@ msgstr "&FTP-соединение..."
 msgid "S&hell link..."
 msgstr "S&hell-соединение..."
 
-msgid "&SFTP link..."
+#, fuzzy
+msgid "SFTP li&nk..."
 msgstr "&SFTP-соединение..."
 
 msgid "Paneli&ze"
@@ -4700,6 +4706,3 @@ msgstr "Продолжить с начала?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не удалось получить локальную копию /ftp://some.host/editme.txt"
-
-#~ msgid "Set expression for filtering filenames"
-#~ msgstr "Задайте выражение для выбора имен файлов"

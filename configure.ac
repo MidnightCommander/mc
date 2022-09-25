@@ -605,7 +605,7 @@ misc/ext.d/misc.sh
 misc/ext.d/text.sh
 misc/ext.d/web.sh
 misc/macros.d/Makefile
-misc/mc.ext
+misc/mc.ext.ini
 
 src/Makefile
 src/consaver/Makefile

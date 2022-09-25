@@ -812,13 +812,13 @@ ext_cmd (void)
                             _("Which extension file you want to edit?"), D_NORMAL, 2,
                             _("&User"), _("&System Wide"));
 
-    extdir_vpath = vfs_path_build_filename (mc_global.sysconfig_dir, MC_LIB_EXT, (char *) NULL);
+    extdir_vpath = vfs_path_build_filename (mc_global.sysconfig_dir, MC_EXT_FILE, (char *) NULL);
 
     if (dir == 0)
     {
         vfs_path_t *buffer_vpath;
 
-        buffer_vpath = mc_config_get_full_vpath (MC_FILEBIND_FILE);
+        buffer_vpath = mc_config_get_full_vpath (MC_EXT_FILE);
         check_for_default (extdir_vpath, buffer_vpath);
         do_edit (buffer_vpath);
         vfs_path_free (buffer_vpath, TRUE);
@@ -829,7 +829,7 @@ ext_cmd (void)
         {
             vfs_path_free (extdir_vpath, TRUE);
             extdir_vpath =
-                vfs_path_build_filename (mc_global.share_data_dir, MC_LIB_EXT, (char *) NULL);
+                vfs_path_build_filename (mc_global.share_data_dir, MC_EXT_FILE, (char *) NULL);
         }
         do_edit (extdir_vpath);
     }

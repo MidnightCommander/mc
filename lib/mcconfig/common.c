@@ -161,10 +161,16 @@ mc_config_deinit (mc_config_t * mc_config)
 gboolean
 mc_config_has_param (const mc_config_t * mc_config, const char *group, const gchar * param)
 {
-    if (mc_config == NULL || group == NULL || param == NULL)
-        return FALSE;
+    char *value;
+    gboolean ret;
 
-    return g_key_file_has_key (mc_config->handle, group, param, NULL);
+    g_return_val_if_fail (mc_config != NULL, FALSE);
+
+    value = g_key_file_get_value (mc_config->handle, group, param, NULL);
+    ret = value != NULL;
+    g_free (value);
+
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */

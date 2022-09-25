@@ -1314,60 +1314,14 @@ comando cd interno\&.
 .\"NODE "    Edit Extension File"
 .SH "    Modifica file estensioni"
 Questo comando invocherà l'editor sul file 
-.IR ~/.config/mc/mc.ext .
-Il fomato di questo file è il seguente (il formato è cambiato dalla 
-versione 3.0):
-.PP
-Tutte le righe che iniziano per # vengono ignorate.
-.PP
-Le righe che cominciano dalla prima colonna devono avere il seguente formato:
-.PP
-.IR parolachiave/descrizione ,
-i.e. qualsiasi cosa dopo
-.I parolachiave/
-fino al fine riga è 
-.I descrizione
-.PP
-parolachiave può essere: 
-.TP
-.I shell
-(allora descrizione è qualsiasi estensione (no caratteri jolly), 
-cioè corrisponde a tutti i file *descrizione. Esempio: .tar corrisponde a *.tar)
-.TP
-.I regex
-(descrizione è un'espressione regolare)
-.TP
-.I type
-(file corrisponde se `file %f` corrisponde all'espressione regolare descrizione
-(nome del file: a partire da `file %f` viene rimosso))
-.TP
-.I default
-(corrisponde a qualsiasi file indipendentemente dalla descrizione)
-.PP
-Le altre linee devono cominciare con uno spazio o una tabulazione e devono essere nel formato:
-.I parolachiave=comando
-(senza spazi intorno a =), dove
-.I parolachiave
-deve essere: 
-.I Open
-(se l'utente preme Invio o fa doppio clic), 
-.I View
-(F3),
-.I Edit
-(F4).
-.I command
-è qualsiasi comando shell di una riga, con la semplice
-.\"LINK2"
-sostituzione macro\&.
-.\"Macro Substitution"
-.PP
-Gli obiettivi sono valutati dalla cima al fondo, perciò l'ordine è 
-importante. Se alcune azioni mancano, la ricerca continua come se 
-la regola non corrispondesse, cioè se un file corrisponde alla prima e
-alla seconda voce e manca la voce View in cima, allora premendo F3 verrà
-usata l'azione View della seconda voce.
-.I Normalmente 
-dovrebbero corrispondere tutte le azioni.
+.IR ~/.config/mc/mc.ext.ini .
+If this file does not exist and you are not root, it will be copied from
+.IR %sysconfdir%/mc/mc.ext.ini .
+If you are root, you can choose the file to edit: user's
+.I ~/.config/mc/mc.ext.ini
+or system\-wide
+.IR %sysconfdir%/mc/mc.ext.ini .
+The format of this file is described in detail in it.
 .\"NODE "    Background jobs"
 .SH "    Processi in background"
 Questo comando permette di controllare lo stato di ogni processo
@@ -2425,7 +2379,7 @@ un'espressione di ricerca, altrimenti trova la prossima occorrenza.
 .PP
 .B F8
 Cambia tra modalità Normale/Filtrata: questo mostrerà il file come si
-trova su disco o se è stato specificato un filtro nel file mc.ext, come
+trova su disco o se è stato specificato un filtro nel file mc.ext.ini, come
 esce dal filtro. La modalità corrente è sempre quella diversa da quella
 mostrata dall'etichetta del tasto, dato che il bottone rappresenta la
 modalità nella quale si entra premendolo.
@@ -2672,7 +2626,7 @@ al file tar usare la seguente sintassi:
 .PP
 .I /nomefile.tar/utar://[dir\-dentro\-tar]
 .PP
-Il file mc.ext già fornisce un collegamento per il file tar; ciò
+Il file mc.ext.ini già fornisce un collegamento per il file tar; ciò
 significa che normalmente basta selezionare un file tar e premere invio
 per entrare nel file tar, vedere la sezione
 .\"LINK2"
@@ -3082,7 +3036,7 @@ pannello.
 Se questa variabile è abilitata (valore predefinito) userà il comando
 file per trovare delle corrispondenze sui tipi di file elencati nel
 .\"LINK2"
-file mc.ext\&.
+file mc.ext.ini\&.
 .\"Edit Extension File"
 .TP
 .I xtree_mode
@@ -3146,11 +3100,11 @@ e se la variabile non è impostata, passerà alla directory %pkgdatadir% .
 .IP
 Il file di aiuto per il programma.
 .PP
-.I %pkgdatadir%/mc.ext
+.I %pkgdatadir%/mc.ext.ini
 .IP
 Il file delle estensioni di sistema predefinito.
 .PP
-.I ~/.config/mc/mc.ext
+.I ~/.config/mc/mc.ext.ini
 .IP
 Le estensioni dell'utente, la configurazione del visualizzatore e
 dell'editor di file. Se presenti, questi file si sovrappongono ai file di 

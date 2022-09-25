@@ -1509,80 +1509,15 @@ comando cd interno\&.
 .\"NODE "    Edit Extension File"
 .SH "    Editar el Archivo de Extensiones"
 Abre el archivo
-.I ~/.config/mc/mc.ext
-en nuestro editor. El administrador puede optar por editar, en su lugar,
-el archivo de extensiones del sistema
-.IR %pkgdatadir%/mc.ext .
-El formato del archivo es como sigue:
-.PP
-Todas las líneas que empiecen con # o estén vacías serán ignoradas.
-.PP
-Las líneas que comiencen en la primera columna deberán tener el siguiente formato:
-.PP
-.IR PalabraClave/descripción ,
-i. e. todo lo que vaya tras la «/» hasta el fin de línea será la
-.IR descripción .
-.PP
-Las palabras clave son:
-.TP
-.I shell
-\-
-.I Descripción
-será una extensión (sin comodines).  Un archivo coincide si su nombre acaba en
-.IR Descripción .
-Por ejemplo:
-.I shell/.tar
-corresponde a
-.IR *.tar .
-.TP
-.I regex
-\-
-.I Descripción
-es una expresión regular.  Un archivo coincide si la salida de
-.I file %f
-encaja con la expresión regular
-.I Descripción
-(quitando la parte inicial «nombre de archivo:»)
-.TP
-.I default
-\- Coincide para cualquier archivo. Se ignora la
-.IR descripción .
-.TP
-.I include
-\- Incorpora una sección común.
-.I Descripción
-es el nombre de la sección.
-.PP
-El resto de líneas deben comenzar con un espacio o tabulador y usar el
-siguiente formato:
-.I PalabraClave=comando
-(sin espacios alrededor de «=»), donde
-.I PalabraClave
-debe ser:
-.I Open
-(si el usuario pulsa
-.I Intro
-o dos veces el ratón),
-.I View
-(F3),
-.I Edit
-(F4) o
-.I Include
-(para agregar reglas de la sección común).
-.I Comando
-es cualquier comando en línea del shell, con
-.\"LINK2"
-sustitución de macro
-.\"Macro Substitution"
-simple.
-.PP
-Las reglas se aplican en estricto orden. Aunque se produzca una
-coincidencia, si la acción solicitada no está disponible, se ignora y la
-búsqueda continúa (por ejemplo, si un archivo encaja con dos entradas,
-pero la acción Ver no está definida en la primera, al pulsar F3, se
-ejecuta la acción Ver de la segunda).  Por eso, como último recurso
-.I default
-sí debe incluir todas las acciones.
+.I ~/.config/mc/mc.ext.ini
+en nuestro editor.
+If this file does not exist and you are not root, it will be copied from
+.IR %sysconfdir%/mc/mc.ext.ini .
+If you are root, you can choose the file to edit: user's
+.I ~/.config/mc/mc.ext.ini
+or system\-wide
+.IR %sysconfdir%/mc/mc.ext.ini .
+The format of this file is described in detail in it.
 .\"NODE "    Background jobs"
 .SH "    Trabajos en Segundo Plano"
 Nos permite controlar el estado de cualquier proceso de Midnight Commander
@@ -2900,7 +2835,7 @@ Buscar la próxima coincidencia.
 .PP
 .B F8
 Intercambia entre el modo crudo y procesado: esto mostrará el archivo como se encuentra en disco
-o si se ha especificado un filtro de visualización en el archivo mc.ext, entonces
+o si se ha especificado un filtro de visualización en el archivo mc.ext.ini, entonces
 la salida filtrada. El modo actual es siempre el contrario al mostrado
 en la etiqueta del botón, en tanto que el botón muestra el modo en el que entraremos
 con la pulsación de esa tecla.
@@ -3122,7 +3057,7 @@ de directorio empleando la siguiente sintaxis:
 .PP
 .I /archivo.tar/utar://[directorio\-dentro\-tar]
 .PP
-El archivo mc.ext también ofrece un atajo para los archivos tar, esto quiere decir
+El archivo mc.ext.ini también ofrece un atajo para los archivos tar, esto quiere decir
 que normalmente basta con apuntar a un archivo tar y pulsar Intro para entrar en el
 archivo tar.  Véase la sección
 .\"LINK2"
@@ -4009,7 +3944,7 @@ ya estemos ahí, en cuyo caso moverá la selección al último nombre de archivo
 Si esta variable está activada (por defecto lo está) se recurrirá al
 comando «file» para reconocer los tipos de archivo referidos en el archivo
 .\"LINK2"
-mc.ext\&.
+mc.ext.ini\&.
 .\"Edit Extension File"
 .TP
 .I xtree_mode
@@ -4163,11 +4098,11 @@ que de estar definida se emplearía en vez de %pkgdatadir%.
 .IP
 Archivo de ayuda.
 .PP
-.I %pkgdatadir%/mc.ext
+.I %pkgdatadir%/mc.ext.ini
 .IP
 Archivo de extensiones por defecto del sistema.
 .PP
-.I ~/.config/mc/mc.ext
+.I ~/.config/mc/mc.ext.ini
 .IP
 Archivo de usuario de extensiones y configuración de visor y editor. Si
 está presente prevalece sobre el contenido de los archivos del sistema.

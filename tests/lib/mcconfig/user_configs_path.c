@@ -110,7 +110,7 @@ static const struct test_user_config_paths_ds
     },
     { /* 8. */
         CONF_MAIN,
-        MC_FILEBIND_FILE
+        MC_EXT_FILE
     },
     { /* 9. */
         CONF_DATA,
