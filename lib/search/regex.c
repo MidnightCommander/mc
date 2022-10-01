@@ -216,7 +216,7 @@ mc_search__cond_struct_new_regex_ci_str (const char *charset, const GString * as
     spec_char = g_string_sized_new (64);
     loop = 0;
 
-    while (loop <= astr->len)
+    while (loop < astr->len)
     {
         if (mc_search__regex_str_append_if_special (spec_char, astr, &loop))
         {
