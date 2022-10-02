@@ -77,6 +77,7 @@ typedef enum
 enum compression_type
 {
     COMPRESSION_NONE,
+    COMPRESSION_ZIP,
     COMPRESSION_GZIP,
     COMPRESSION_BZIP,
     COMPRESSION_BZIP2,

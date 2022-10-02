@@ -840,12 +840,10 @@ get_compression_type (int fd, const char *name)
         if (mc_read (fd, (char *) magic, 2) != 2)
             return COMPRESSION_NONE;
 
-        /* Gzip can handle only deflated (8) or stored (0) files */
         if ((magic[0] != 8 && magic[0] != 0) || magic[1] != 0)
             return COMPRESSION_NONE;
 
-        /* Compatible with gzip */
-        return COMPRESSION_GZIP;
+        return COMPRESSION_ZIP;
     }
 
     /* PACK_MAGIC and LZH_MAGIC and compress magic */
@@ -910,6 +908,8 @@ decompress_extension (int type)
 {
     switch (type)
     {
+    case COMPRESSION_ZIP:
+        return "/uz" VFS_PATH_URL_DELIMITER;
     case COMPRESSION_GZIP:
         return "/ugz" VFS_PATH_URL_DELIMITER;
     case COMPRESSION_BZIP:
