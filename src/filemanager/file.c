@@ -1476,27 +1476,39 @@ recursive_erase (file_op_total_context_t * tctx, file_op_context_t * ctx, const 
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** Return -1 on error, 1 if there are no entries besides "." and ".." 
-   in the directory path points to, 0 else. */
-
+/**
+  * Check if directory is empty or not.
+  *
+  * @param vpath directory handler
+  *
+  * @returns -1 on error,
+  *          1 if there are no entries besides "." and ".." in the directory path points to,
+  *          0 else.
+  *
+  * ATTENTION! Be carefull when modifying this function (like commit 25e419ba0886f)!
+  * Some implementations of readdir() in MC VFS (for example, vfs_s_readdir(), whuch is uded
+  * in FISH) don't return "." and ".." entries.
+  */
 static int
 check_dir_is_empty (const vfs_path_t * vpath)
 {
     DIR *dir;
     struct vfs_dirent *d;
-    int i = 0;
+    int i = 1;
 
     dir = mc_opendir (vpath);
     if (dir == NULL)
         return -1;
 
-    /* https://stackoverflow.com/questions/6383584/check-if-a-directory-is-empty-using-c-on-linux */
-    while ((d = mc_readdir (dir)) != NULL)
-        if (++i > 2)
+    for (d = mc_readdir (dir); d != NULL; d = mc_readdir (dir))
+        if (!DIR_IS_DOT (d->d_name) && !DIR_IS_DOTDOT (d->d_name))
+        {
+            i = 0;
             break;
+        }
 
     mc_closedir (dir);
-    return i <= 2 ? 1 : 0;
+    return i;
 }
 
 /* --------------------------------------------------------------------------------------------- */
