@@ -515,13 +515,12 @@ extfs_open_archive (int fstype, const char *name, struct extfs_super_t **pparc, 
     static dev_t archive_counter = 0;
     mc_pipe_t *result = NULL;
     mode_t mode;
-    char *cmd = NULL;
+    char *cmd;
     struct stat mystat;
     struct extfs_super_t *current_archive;
     struct vfs_s_entry *root_entry;
     char *tmp = NULL;
     vfs_path_t *local_name_vpath = NULL;
-    const char *local_last_path = NULL;
     vfs_path_t *name_vpath;
 
     memset (&mystat, 0, sizeof (mystat));
@@ -541,24 +540,16 @@ extfs_open_archive (int fstype, const char *name, struct extfs_super_t **pparc, 
                 goto ret;
         }
 
-        local_last_path = vfs_path_get_last_path_str (local_name_vpath);
-        if (local_last_path == NULL)
-            tmp = name_quote (vfs_path_get_last_path_str (name_vpath), FALSE);
+        tmp = name_quote (vfs_path_get_last_path_str (name_vpath), FALSE);
     }
 
-    if (local_last_path != NULL)
-        cmd = g_strconcat (info->path, info->prefix, " list ", local_last_path, (char *) NULL);
-    else if (tmp != NULL)
-    {
-        cmd = g_strconcat (info->path, info->prefix, " list ", tmp, (char *) NULL);
-        g_free (tmp);
-    }
+    cmd = g_strconcat (info->path, info->prefix, " list ",
+                       vfs_path_get_last_path_str (local_name_vpath) != NULL ?
+                       vfs_path_get_last_path_str (local_name_vpath) : tmp, (char *) NULL);
+    g_free (tmp);
 
-    if (cmd != NULL)
-    {
-        result = mc_popen (cmd, TRUE, TRUE, error);
-        g_free (cmd);
-    }
+    result = mc_popen (cmd, TRUE, TRUE, error);
+    g_free (cmd);
 
     if (result == NULL)
     {

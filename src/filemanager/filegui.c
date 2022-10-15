@@ -1024,7 +1024,7 @@ file_progress_show_count (file_op_context_t * ctx, size_t done, size_t total)
         return;
 
     if (ctx->progress_totals_computed)
-        label_set_textv (ui->total_files_processed_label, _("Files processed: %zu/%zu"), done,
+        label_set_textv (ui->total_files_processed_label, _("Files processed: %zu / %zu"), done,
                          total);
     else
         label_set_textv (ui->total_files_processed_label, _("Files processed: %zu"), done);
@@ -1100,7 +1100,7 @@ file_progress_show_total (file_op_total_context_t * tctx, file_op_context_t * ct
         else
         {
             size_trunc_len (buffer3, 5, ctx->progress_bytes, 0, panels_options.kilobyte_si);
-            hline_set_textv (ui->total_bytes_label, _(" Total: %s/%s "), buffer2, buffer3);
+            hline_set_textv (ui->total_bytes_label, _(" Total: %s / %s "), buffer2, buffer3);
         }
     }
 }

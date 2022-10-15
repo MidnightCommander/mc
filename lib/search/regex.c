@@ -122,13 +122,13 @@ mc_search__regex_str_append_if_special (GString * copy_to, const GString * regex
 
 static void
 mc_search__cond_struct_new_regex_hex_add (const char *charset, GString * str_to,
-                                          const char *one_char, gsize str_len)
+                                          const GString * one_char)
 {
     GString *upp, *low;
     gsize loop;
 
-    upp = mc_search__toupper_case_str (charset, one_char, str_len);
-    low = mc_search__tolower_case_str (charset, one_char, str_len);
+    upp = mc_search__toupper_case_str (charset, one_char);
+    low = mc_search__tolower_case_str (charset, one_char);
 
     for (loop = 0; loop < upp->len; loop++)
     {
@@ -163,29 +163,26 @@ mc_search__cond_struct_new_regex_accum_append (const char *charset, GString * st
 
     while (loop < str_from->len)
     {
-        gchar *one_char;
-        gsize one_char_len;
+        GString *one_char;
         gboolean just_letters;
 
         one_char =
-            mc_search__get_one_symbol (charset, &(str_from->str[loop]),
+            mc_search__get_one_symbol (charset, str_from->str + loop,
                                        MIN (str_from->len - loop, 6), &just_letters);
-        one_char_len = strlen (one_char);
 
-        if (one_char_len == 0)
+        if (one_char->len == 0)
             loop++;
         else
         {
-            loop += one_char_len;
+            loop += one_char->len;
 
             if (just_letters)
-                mc_search__cond_struct_new_regex_hex_add (charset, recoded_part, one_char,
-                                                          one_char_len);
+                mc_search__cond_struct_new_regex_hex_add (charset, recoded_part, one_char);
             else
-                g_string_append_len (recoded_part, one_char, one_char_len);
+                g_string_append_len (recoded_part, one_char->str, one_char->len);
         }
 
-        g_free (one_char);
+        g_string_free (one_char, TRUE);
     }
 
     g_string_append_len (str_to, recoded_part->str, recoded_part->len);
@@ -219,7 +216,7 @@ mc_search__cond_struct_new_regex_ci_str (const char *charset, const GString * as
     spec_char = g_string_sized_new (64);
     loop = 0;
 
-    while (loop <= astr->len)
+    while (loop < astr->len)
     {
         if (mc_search__regex_str_append_if_special (spec_char, astr, &loop))
         {
@@ -644,39 +641,37 @@ mc_search_regex__process_append_str (GString * dest_str, const char *from, gsize
     for (loop = 0; loop < len; loop += char_len)
     {
         GString *tmp_string = NULL;
-        char *tmp_str;
+        GString *s;
 
-        tmp_str = mc_search__get_one_symbol (NULL, from + loop, len - loop, NULL);
-        char_len = strlen (tmp_str);
+        s = mc_search__get_one_symbol (NULL, from + loop, len - loop, NULL);
+        char_len = s->len;
 
         if ((*replace_flags & REPLACE_T_UPP_TRANSFORM_CHAR) != 0)
         {
             *replace_flags &= ~REPLACE_T_UPP_TRANSFORM_CHAR;
-            tmp_string = mc_search__toupper_case_str (NULL, tmp_str, char_len);
+            tmp_string = mc_search__toupper_case_str (NULL, s);
             g_string_append_len (dest_str, tmp_string->str, tmp_string->len);
-            g_string_free (tmp_string, TRUE);
         }
         else if ((*replace_flags & REPLACE_T_LOW_TRANSFORM_CHAR) != 0)
         {
             *replace_flags &= ~REPLACE_T_LOW_TRANSFORM_CHAR;
-            tmp_string = mc_search__tolower_case_str (NULL, tmp_str, char_len);
+            tmp_string = mc_search__tolower_case_str (NULL, s);
             g_string_append_len (dest_str, tmp_string->str, tmp_string->len);
-            g_string_free (tmp_string, TRUE);
         }
         else if ((*replace_flags & REPLACE_T_UPP_TRANSFORM) != 0)
         {
-            tmp_string = mc_search__toupper_case_str (NULL, tmp_str, char_len);
+            tmp_string = mc_search__toupper_case_str (NULL, s);
             g_string_append_len (dest_str, tmp_string->str, tmp_string->len);
-            g_string_free (tmp_string, TRUE);
         }
         else if ((*replace_flags & REPLACE_T_LOW_TRANSFORM) != 0)
         {
-            tmp_string = mc_search__tolower_case_str (NULL, tmp_str, char_len);
+            tmp_string = mc_search__tolower_case_str (NULL, s);
             g_string_append_len (dest_str, tmp_string->str, tmp_string->len);
-            g_string_free (tmp_string, TRUE);
         }
 
-        g_free (tmp_str);
+        g_string_free (s, TRUE);
+        if (tmp_string != NULL)
+            g_string_free (tmp_string, TRUE);
     }
 }
 

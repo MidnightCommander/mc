@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-09-17 14:27+0300\n"
+"POT-Creation-Date: 2022-10-15 12:35+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: scootergrisen, 2018-2020\n"
 "Language-Team: Danish (http://www.transifex.com/mc/mc/language/da/)\n"
@@ -2985,8 +2985,8 @@ msgstr "Fil findes"
 msgid "Background process: File exists"
 msgstr "Baggrundproces: Fil findes"
 
-#, c-format
-msgid "Files processed: %zu/%zu"
+#, fuzzy, c-format
+msgid "Files processed: %zu / %zu"
 msgstr "Filer behandlet: %zu/%zu"
 
 #, c-format
@@ -3013,8 +3013,8 @@ msgstr "Tid: %s (%s)"
 msgid " Total: %s "
 msgstr " Samlet: %s "
 
-#, c-format
-msgid " Total: %s/%s "
+#, fuzzy, c-format
+msgid " Total: %s / %s "
 msgstr " Samlet: %s/%s "
 
 msgid "Source"
@@ -3465,8 +3465,8 @@ msgstr "Ledige knuder:"
 msgid "No space information"
 msgstr "Ingen pladsinformation"
 
-#, c-format
-msgid "Free space: %s/%s (%d%%)"
+#, fuzzy, c-format
+msgid "Free space: %s / %s (%d%%)"
 msgstr "Ledig plads: %s/%s (%d%%)"
 
 #, c-format

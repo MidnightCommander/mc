@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-09-17 14:27+0300\n"
+"POT-Creation-Date: 2022-10-15 12:35+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Richard E. van der Luit <nippur@fedoraproject.org>, "
 "2012-2015,2017,2020\n"
@@ -2985,8 +2985,8 @@ msgstr "Bestand bestaat"
 msgid "Background process: File exists"
 msgstr "Achtergrond proces: Bestand bestaat"
 
-#, c-format
-msgid "Files processed: %zu/%zu"
+#, fuzzy, c-format
+msgid "Files processed: %zu / %zu"
 msgstr "Verwerkte bestanden: %zu van %zu"
 
 #, c-format
@@ -3013,8 +3013,8 @@ msgstr "Tijd: %s (%s)"
 msgid " Total: %s "
 msgstr " Totaal: %s "
 
-#, c-format
-msgid " Total: %s/%s "
+#, fuzzy, c-format
+msgid " Total: %s / %s "
 msgstr " Totaal: %s/%s "
 
 msgid "Source"
@@ -3465,8 +3465,8 @@ msgstr "Vrije nodes:"
 msgid "No space information"
 msgstr "Geen informatie over schijfruimte"
 
-#, c-format
-msgid "Free space: %s/%s (%d%%)"
+#, fuzzy, c-format
+msgid "Free space: %s / %s (%d%%)"
 msgstr "Vrij ruimte: %s/%s (%d%%)"
 
 #, c-format

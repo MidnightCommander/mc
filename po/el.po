@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-09-17 14:27+0300\n"
+"POT-Creation-Date: 2022-10-15 12:35+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Efstathios Iosifidis <iefstathios@gmail.com>, 2015\n"
 "Language-Team: Greek (http://www.transifex.com/mc/mc/language/el/)\n"
@@ -2871,8 +2871,8 @@ msgstr "Το αρχείο υπάρχει"
 msgid "Background process: File exists"
 msgstr "Διεργασία παρασκηνίου:Το αρχείο υπάρχει"
 
-#, c-format
-msgid "Files processed: %zu/%zu"
+#, fuzzy, c-format
+msgid "Files processed: %zu / %zu"
 msgstr "Αρχεία που προσπελάστηκαν: %zu/%zu"
 
 #, c-format
@@ -2899,8 +2899,8 @@ msgstr "Ώρα: %s (%s)"
 msgid " Total: %s "
 msgstr "Σύνολο: %s "
 
-#, c-format
-msgid " Total: %s/%s "
+#, fuzzy, c-format
+msgid " Total: %s / %s "
 msgstr "Σύνολο: %s/%s "
 
 msgid "Source"
@@ -3349,8 +3349,8 @@ msgstr ""
 msgid "No space information"
 msgstr ""
 
-#, c-format
-msgid "Free space: %s/%s (%d%%)"
+#, fuzzy, c-format
+msgid "Free space: %s / %s (%d%%)"
 msgstr "Ελεύθερος χώρος: %s/%s (%d%%)"
 
 #, c-format

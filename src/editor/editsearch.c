@@ -302,10 +302,10 @@ edit_get_search_line_type (mc_search_t * search)
     if (search->search_type != MC_SEARCH_T_REGEX)
         return search_line_type;
 
-    if (*search->original == '^')
+    if (search->original.str->str[0] == '^')
         search_line_type |= AT_START_LINE;
 
-    if (search->original[search->original_len - 1] == '$')
+    if (search->original.str->str[search->original.str->len - 1] == '$')
         search_line_type |= AT_END_LINE;
     return search_line_type;
 }
@@ -491,9 +491,9 @@ edit_find (edit_search_status_msg_t * esm, gsize * len)
         {
             gboolean ok;
 
-            if (search_end > (off_t) (search_start + edit->search->original_len)
+            if (search_end > (off_t) (search_start + edit->search->original.str->len)
                 && mc_search_is_fixed_search_str (edit->search))
-                search_end = search_start + edit->search->original_len;
+                search_end = search_start + edit->search->original.str->len;
 
             ok = mc_search_run (edit->search, (void *) esm, search_start, search_end, len);
 

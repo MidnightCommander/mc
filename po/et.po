@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-09-17 14:27+0300\n"
+"POT-Creation-Date: 2022-10-15 12:35+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Priit Jõerüüt <transifex@joeruut.com>, 2020-2021\n"
 "Language-Team: Estonian (http://www.transifex.com/mc/mc/language/et/)\n"
@@ -2972,8 +2972,8 @@ msgstr "Fail on olemas"
 msgid "Background process: File exists"
 msgstr "Taustaprotsess: Fail on olemas"
 
-#, c-format
-msgid "Files processed: %zu/%zu"
+#, fuzzy, c-format
+msgid "Files processed: %zu / %zu"
 msgstr "Faile töödeldud: %zu/%zu"
 
 #, c-format
@@ -3000,8 +3000,8 @@ msgstr "Aeg: %s (%s)"
 msgid " Total: %s "
 msgstr "Kokku: %s"
 
-#, c-format
-msgid " Total: %s/%s "
+#, fuzzy, c-format
+msgid " Total: %s / %s "
 msgstr "Kokku: %s/%s"
 
 msgid "Source"
@@ -3452,8 +3452,8 @@ msgstr "Vabad kirjed:"
 msgid "No space information"
 msgstr "Puudub mahu informatsioon"
 
-#, c-format
-msgid "Free space: %s/%s (%d%%)"
+#, fuzzy, c-format
+msgid "Free space: %s / %s (%d%%)"
 msgstr "Vaba ruum: %s/%s (%d%%)"
 
 #, c-format

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-09-17 14:27+0300\n"
+"POT-Creation-Date: 2022-10-15 12:35+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Serdar Sağlam <teknomobil@msn.com>, 2019-2020\n"
 "Language-Team: Turkish (http://www.transifex.com/mc/mc/language/tr/)\n"
@@ -2968,8 +2968,8 @@ msgstr "Dosya var"
 msgid "Background process: File exists"
 msgstr "Artalan süreç: Dosya var"
 
-#, c-format
-msgid "Files processed: %zu/%zu"
+#, fuzzy, c-format
+msgid "Files processed: %zu / %zu"
 msgstr "İşlenen dosyalar: %zu/%zu"
 
 #, c-format
@@ -2996,8 +2996,8 @@ msgstr "Süre: %s (%s)"
 msgid " Total: %s "
 msgstr " Toplam: %s  "
 
-#, c-format
-msgid " Total: %s/%s "
+#, fuzzy, c-format
+msgid " Total: %s / %s "
 msgstr " Toplam: %s/%s "
 
 msgid "Source"
@@ -3448,8 +3448,8 @@ msgstr "Boş düğümler:"
 msgid "No space information"
 msgstr "Alan bilgileri yok"
 
-#, c-format
-msgid "Free space: %s/%s (%d%%)"
+#, fuzzy, c-format
+msgid "Free space: %s / %s (%d%%)"
 msgstr "Boş alan: %s/%s (%d%%)"
 
 #, c-format

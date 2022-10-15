@@ -94,11 +94,13 @@ static void
 mcview_movement_fixups (WView * view, gboolean reset_search)
 {
     mcview_scroll_to_cursor (view);
+
     if (reset_search)
     {
         view->search_start = view->mode_flags.hex ? view->hex_cursor : view->dpy_start;
         view->search_end = view->search_start;
     }
+
     view->dirty++;
 }
 
@@ -109,11 +111,17 @@ mcview_movement_fixups (WView * view, gboolean reset_search)
 void
 mcview_move_up (WView * view, off_t lines)
 {
-    if (view->mode_flags.hex)
+    if (!view->mode_flags.hex)
+        mcview_ascii_move_up (view, lines);
+    else
     {
-        off_t bytes = lines * view->bytes_per_line;
+        off_t bytes;
 
-        if (view->hex_cursor >= bytes)
+        bytes = lines * view->bytes_per_line;
+
+        if (view->hex_cursor < bytes)
+            view->hex_cursor %= view->bytes_per_line;
+        else
         {
             view->hex_cursor -= bytes;
             if (view->hex_cursor < view->dpy_start)
@@ -123,15 +131,8 @@ mcview_move_up (WView * view, off_t lines)
                 view->dpy_wrap_dirty = TRUE;
             }
         }
-        else
-        {
-            view->hex_cursor %= view->bytes_per_line;
-        }
     }
-    else
-    {
-        mcview_ascii_move_up (view, lines);
-    }
+
     mcview_movement_fixups (view, TRUE);
 }
 
@@ -144,7 +145,9 @@ mcview_move_down (WView * view, off_t lines)
 
     last_byte = mcview_get_filesize (view);
 
-    if (view->mode_flags.hex)
+    if (!view->mode_flags.hex)
+        mcview_ascii_move_down (view, lines);
+    else
     {
         off_t i, limit;
 
@@ -153,6 +156,7 @@ mcview_move_down (WView * view, off_t lines)
         for (i = 0; i < lines && view->hex_cursor < limit; i++)
         {
             view->hex_cursor += view->bytes_per_line;
+
             if (lines != 1)
             {
                 view->dpy_start += view->bytes_per_line;
@@ -161,10 +165,7 @@ mcview_move_down (WView * view, off_t lines)
             }
         }
     }
-    else
-    {
-        mcview_ascii_move_down (view, lines);
-    }
+
     mcview_movement_fixups (view, TRUE);
 }
 
@@ -180,16 +181,16 @@ mcview_move_left (WView * view, off_t columns)
         g_assert (columns == 1);
 
         if (view->hexview_in_text || !view->hexedit_lownibble)
-        {
             if (view->hex_cursor > 0)
                 view->hex_cursor--;
-        }
+
         if (!view->hexview_in_text)
             if (old_cursor > 0 || view->hexedit_lownibble)
                 view->hexedit_lownibble = !view->hexedit_lownibble;
     }
     else if (!view->mode_flags.wrap)
         view->dpy_text_column = DOZ (view->dpy_text_column, columns);
+
     mcview_movement_fixups (view, FALSE);
 }
 
@@ -209,18 +210,16 @@ mcview_move_right (WView * view, off_t columns)
         g_assert (columns == 1);
 
         if (view->hexview_in_text || view->hexedit_lownibble)
-        {
             if (view->hex_cursor < last_byte)
                 view->hex_cursor++;
-        }
+
         if (!view->hexview_in_text)
             if (old_cursor < last_byte || !view->hexedit_lownibble)
                 view->hexedit_lownibble = !view->hexedit_lownibble;
     }
     else if (!view->mode_flags.wrap)
-    {
         view->dpy_text_column += columns;
-    }
+
     mcview_movement_fixups (view, FALSE);
 }
 
@@ -270,15 +269,14 @@ mcview_moveto_bottom (WView * view)
 void
 mcview_moveto_bol (WView * view)
 {
-    if (view->mode_flags.hex)
+    if (!view->mode_flags.hex)
+        mcview_ascii_moveto_bol (view);
+    else
     {
         view->hex_cursor -= view->hex_cursor % view->bytes_per_line;
         view->dpy_text_column = 0;
     }
-    else
-    {
-        mcview_ascii_moveto_bol (view);
-    }
+
     mcview_movement_fixups (view, TRUE);
 }
 
@@ -289,25 +287,23 @@ mcview_moveto_eol (WView * view)
 {
     off_t bol;
 
-    if (view->mode_flags.hex)
+    if (!view->mode_flags.hex)
+        mcview_ascii_moveto_eol (view);
+    else
     {
         off_t filesize;
 
         bol = mcview_offset_rounddown (view->hex_cursor, view->bytes_per_line);
-        if (mcview_get_byte_indexed (view, bol, view->bytes_per_line - 1, NULL) == TRUE)
-        {
+
+        if (mcview_get_byte_indexed (view, bol, view->bytes_per_line - 1, NULL))
             view->hex_cursor = bol + view->bytes_per_line - 1;
-        }
         else
         {
             filesize = mcview_get_filesize (view);
             view->hex_cursor = DOZ (filesize, 1);
         }
     }
-    else
-    {
-        mcview_ascii_moveto_eol (view);
-    }
+
     mcview_movement_fixups (view, FALSE);
 }
 
@@ -329,6 +325,7 @@ mcview_moveto_offset (WView * view, off_t offset)
         view->dpy_paragraph_skip_lines = 0;
         view->dpy_wrap_dirty = TRUE;
     }
+
     mcview_movement_fixups (view, TRUE);
 }
 
@@ -381,6 +378,7 @@ mcview_place_cursor (WView * view)
 
     if (!view->hexview_in_text && view->hexedit_lownibble)
         col++;
+
     widget_gotoyx (view, r->y + view->cursor_row, r->x + col);
 }
 

@@ -60,13 +60,12 @@ static const mc_search_type_str_t mc_search__list_types[] = {
 /*** file scope functions ************************************************************************/
 
 static mc_search_cond_t *
-mc_search__cond_struct_new (mc_search_t * lc_mc_search, const char *str,
-                            gsize str_len, const char *charset)
+mc_search__cond_struct_new (mc_search_t * lc_mc_search, const GString * str, const char *charset)
 {
     mc_search_cond_t *mc_search_cond;
 
     mc_search_cond = g_malloc0 (sizeof (mc_search_cond_t));
-    mc_search_cond->str = g_string_new_len (str, str_len);
+    mc_search_cond->str = mc_g_string_dup (str);
     mc_search_cond->charset = g_strdup (charset);
 
     switch (lc_mc_search->search_type)
@@ -161,10 +160,9 @@ mc_search_new_len (const gchar * original, gsize original_len, const gchar * ori
         return NULL;
 
     lc_mc_search = g_new0 (mc_search_t, 1);
-    lc_mc_search->original = g_strndup (original, original_len);
-    lc_mc_search->original_len = original_len;
+    lc_mc_search->original.str = g_string_new_len (original, original_len);
 #ifdef HAVE_CHARSET
-    lc_mc_search->original_charset =
+    lc_mc_search->original.charset =
         g_strdup (original_charset != NULL
                   && *original_charset != '\0' ? original_charset : cp_display);
 #else
@@ -182,9 +180,9 @@ mc_search_free (mc_search_t * lc_mc_search)
     if (lc_mc_search == NULL)
         return;
 
-    g_free (lc_mc_search->original);
+    g_string_free (lc_mc_search->original.str, TRUE);
 #ifdef HAVE_CHARSET
-    g_free (lc_mc_search->original_charset);
+    g_free (lc_mc_search->original.charset);
 #endif
     g_free (lc_mc_search->error_str);
 
@@ -216,47 +214,40 @@ mc_search_prepare (mc_search_t * lc_mc_search)
 
     ret = g_ptr_array_new ();
 #ifdef HAVE_CHARSET
-    if (lc_mc_search->is_all_charsets)
+    if (!lc_mc_search->is_all_charsets)
+        g_ptr_array_add (ret,
+                         mc_search__cond_struct_new (lc_mc_search, lc_mc_search->original.str,
+                                                     lc_mc_search->original.charset));
+    else
     {
         gsize loop1;
 
         for (loop1 = 0; loop1 < codepages->len; loop1++)
         {
             const char *id;
-            gsize recoded_str_len;
-            gchar *buffer;
 
             id = ((codepage_desc *) g_ptr_array_index (codepages, loop1))->id;
-            if (g_ascii_strcasecmp (id, lc_mc_search->original_charset) == 0)
-            {
+            if (g_ascii_strcasecmp (id, lc_mc_search->original.charset) == 0)
                 g_ptr_array_add (ret,
-                                 mc_search__cond_struct_new (lc_mc_search, lc_mc_search->original,
-                                                             lc_mc_search->original_len,
-                                                             lc_mc_search->original_charset));
-                continue;
+                                 mc_search__cond_struct_new (lc_mc_search,
+                                                             lc_mc_search->original.str,
+                                                             lc_mc_search->original.charset));
+            else
+            {
+                GString *buffer;
+
+                buffer =
+                    mc_search__recode_str (lc_mc_search->original.str->str,
+                                           lc_mc_search->original.str->len,
+                                           lc_mc_search->original.charset, id);
+                g_ptr_array_add (ret, mc_search__cond_struct_new (lc_mc_search, buffer, id));
+                g_string_free (buffer, TRUE);
             }
-
-            buffer =
-                mc_search__recode_str (lc_mc_search->original, lc_mc_search->original_len,
-                                       lc_mc_search->original_charset, id, &recoded_str_len);
-
-            g_ptr_array_add (ret,
-                             mc_search__cond_struct_new (lc_mc_search, buffer,
-                                                         recoded_str_len, id));
-            g_free (buffer);
         }
-    }
-    else
-    {
-        g_ptr_array_add (ret,
-                         mc_search__cond_struct_new (lc_mc_search, lc_mc_search->original,
-                                                     lc_mc_search->original_len,
-                                                     lc_mc_search->original_charset));
     }
 #else
     g_ptr_array_add (ret,
-                     mc_search__cond_struct_new (lc_mc_search, lc_mc_search->original,
-                                                 lc_mc_search->original_len,
+                     mc_search__cond_struct_new (lc_mc_search, lc_mc_search->original.str,
                                                  str_detect_termencoding ()));
 #endif
     lc_mc_search->prepared.conditions = ret;

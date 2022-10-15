@@ -149,7 +149,7 @@ gboolean should_read_new_subshell_prompt;
 #define FORK_FAILURE 69         /* Arbitrary */
 
 /* Length of the buffer for all I/O with the subshell */
-#define PTY_BUFFER_SIZE BUF_SMALL       /* Arbitrary; but keep it >= 80 */
+#define PTY_BUFFER_SIZE BUF_MEDIUM      /* Arbitrary; but keep it >= 80 */
 
 /*** file scope type declarations ****************************************************************/
 
