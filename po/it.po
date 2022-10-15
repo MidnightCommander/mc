@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-09-17 14:27+0300\n"
+"POT-Creation-Date: 2022-10-15 12:35+0300\n"
 "PO-Revision-Date: 2021-09-29 09:45+0200\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/mc/language/"
@@ -2986,8 +2986,8 @@ msgstr "Il file esiste"
 msgid "Background process: File exists"
 msgstr "Processo in background: il file esiste"
 
-#, c-format
-msgid "Files processed: %zu/%zu"
+#, fuzzy, c-format
+msgid "Files processed: %zu / %zu"
 msgstr "File elaborati: %zu/%zu"
 
 #, c-format
@@ -3014,8 +3014,8 @@ msgstr "Tempo: %s (%s)"
 msgid " Total: %s "
 msgstr " Totale: %s "
 
-#, c-format
-msgid " Total: %s/%s "
+#, fuzzy, c-format
+msgid " Total: %s / %s "
 msgstr " Totale: %s/%s "
 
 msgid "Source"
@@ -3466,8 +3466,8 @@ msgstr "Nodi liberi:  "
 msgid "No space information"
 msgstr "Nessuna info sullo spazio"
 
-#, c-format
-msgid "Free space: %s/%s (%d%%)"
+#, fuzzy, c-format
+msgid "Free space: %s / %s (%d%%)"
 msgstr "Spazio libero: %s/%s (%d%%)"
 
 #, c-format

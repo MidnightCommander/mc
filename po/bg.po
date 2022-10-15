@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-09-17 14:27+0300\n"
+"POT-Creation-Date: 2022-10-15 12:35+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Myselus, 2015-2017\n"
 "Language-Team: Bulgarian (http://www.transifex.com/mc/mc/language/bg/)\n"
@@ -2957,8 +2957,8 @@ msgstr "Файлът съществува"
 msgid "Background process: File exists"
 msgstr "Фонов процес: Файлът съществува"
 
-#, c-format
-msgid "Files processed: %zu/%zu"
+#, fuzzy, c-format
+msgid "Files processed: %zu / %zu"
 msgstr "Обработени файлове: %zu/%zu"
 
 #, c-format
@@ -2985,8 +2985,8 @@ msgstr "Време: %s (%s)"
 msgid " Total: %s "
 msgstr " Общо: %s "
 
-#, c-format
-msgid " Total: %s/%s "
+#, fuzzy, c-format
+msgid " Total: %s / %s "
 msgstr " Общо: %s/%s "
 
 msgid "Source"
@@ -3437,8 +3437,8 @@ msgstr "Свободни разклонения:"
 msgid "No space information"
 msgstr "Няма информация за пространството"
 
-#, c-format
-msgid "Free space: %s/%s (%d%%)"
+#, fuzzy, c-format
+msgid "Free space: %s / %s (%d%%)"
 msgstr "Свободно пространство %s/%s (%d%%)"
 
 #, c-format

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-09-17 14:27+0300\n"
+"POT-Creation-Date: 2022-10-15 12:35+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2022\n"
 "Language-Team: Esperanto (http://www.transifex.com/mc/mc/language/eo/)\n"
@@ -2984,8 +2984,8 @@ msgstr "Dosiero ekzistas"
 msgid "Background process: File exists"
 msgstr "Fona procezo: Dosiero ekzistas"
 
-#, c-format
-msgid "Files processed: %zu/%zu"
+#, fuzzy, c-format
+msgid "Files processed: %zu / %zu"
 msgstr "Dosieroj traktitaj: %zu/%zu"
 
 #, c-format
@@ -3012,8 +3012,8 @@ msgstr "Tempo: %s (%s)"
 msgid " Total: %s "
 msgstr " Kiomo: %s "
 
-#, c-format
-msgid " Total: %s/%s "
+#, fuzzy, c-format
+msgid " Total: %s / %s "
 msgstr " Kiomo: %s el %s "
 
 msgid "Source"
@@ -3464,8 +3464,8 @@ msgstr "Liberaj nodoj: "
 msgid "No space information"
 msgstr "Neniuj spacaj informoj"
 
-#, c-format
-msgid "Free space: %s/%s (%d%%)"
+#, fuzzy, c-format
+msgid "Free space: %s / %s (%d%%)"
 msgstr "Restanta spaco: %s el %s (%d%%)"
 
 #, c-format

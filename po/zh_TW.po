@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-09-17 14:27+0300\n"
+"POT-Creation-Date: 2022-10-15 12:35+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: linwebs <thomas881114@gmail.com>, 2020\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/mc/mc/language/"
@@ -2820,8 +2820,8 @@ msgstr "檔案已存在"
 msgid "Background process: File exists"
 msgstr "背景處理程序: 檔案已存在"
 
-#, c-format
-msgid "Files processed: %zu/%zu"
+#, fuzzy, c-format
+msgid "Files processed: %zu / %zu"
 msgstr "檔案處理程序: %zu/%zu"
 
 #, c-format
@@ -2848,8 +2848,8 @@ msgstr "時間: %s (%s)"
 msgid " Total: %s "
 msgstr " 總共: %s "
 
-#, c-format
-msgid " Total: %s/%s "
+#, fuzzy, c-format
+msgid " Total: %s / %s "
 msgstr " 總共: %s/%s "
 
 msgid "Source"
@@ -3297,7 +3297,7 @@ msgid "No space information"
 msgstr "沒有空間資訊"
 
 #, c-format
-msgid "Free space: %s/%s (%d%%)"
+msgid "Free space: %s / %s (%d%%)"
 msgstr ""
 
 #, c-format

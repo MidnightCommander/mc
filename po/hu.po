@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-09-17 14:27+0300\n"
+"POT-Creation-Date: 2022-10-15 12:35+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: András Tőrös <toros.andras04@gmail.com>, 2020\n"
 "Language-Team: Hungarian (http://www.transifex.com/mc/mc/language/hu/)\n"
@@ -2955,8 +2955,8 @@ msgstr "A fájl már létezik"
 msgid "Background process: File exists"
 msgstr "Háttérfolyamat: a fájl már létezik"
 
-#, c-format
-msgid "Files processed: %zu/%zu"
+#, fuzzy, c-format
+msgid "Files processed: %zu / %zu"
 msgstr "Feldolgozott fájl: %zu / %zu"
 
 #, c-format
@@ -2983,8 +2983,8 @@ msgstr "Idő: %s (%s)"
 msgid " Total: %s "
 msgstr " Összesen: %s "
 
-#, c-format
-msgid " Total: %s/%s "
+#, fuzzy, c-format
+msgid " Total: %s / %s "
 msgstr " Összesen: %s/%s"
 
 msgid "Source"
@@ -3435,8 +3435,8 @@ msgstr "Szabad csomópont:"
 msgid "No space information"
 msgstr "Nincs adat a tárolóhelyről"
 
-#, c-format
-msgid "Free space: %s/%s (%d%%)"
+#, fuzzy, c-format
+msgid "Free space: %s / %s (%d%%)"
 msgstr "Szabad hely: %s/%s (%d%%)"
 
 #, c-format

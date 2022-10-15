@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-09-17 14:27+0300\n"
+"POT-Creation-Date: 2022-10-15 12:35+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Simona Iacob <s@zp1.net>, 2021-2022\n"
 "Language-Team: Romanian (http://www.transifex.com/mc/mc/language/ro/)\n"
@@ -2991,8 +2991,8 @@ msgstr "Fișierul există"
 msgid "Background process: File exists"
 msgstr "Sarcină în fundal: Fișierul există"
 
-#, c-format
-msgid "Files processed: %zu/%zu"
+#, fuzzy, c-format
+msgid "Files processed: %zu / %zu"
 msgstr "Fișiere procesate: %zu/%zu"
 
 #, c-format
@@ -3019,8 +3019,8 @@ msgstr "Timp: %s (%s)"
 msgid " Total: %s "
 msgstr " Total: %s "
 
-#, c-format
-msgid " Total: %s/%s "
+#, fuzzy, c-format
+msgid " Total: %s / %s "
 msgstr " Total: %s/%s "
 
 msgid "Source"
@@ -3473,8 +3473,8 @@ msgstr "Noduri libere:"
 msgid "No space information"
 msgstr "Nu există date despre spațiul folosit"
 
-#, c-format
-msgid "Free space: %s/%s (%d%%)"
+#, fuzzy, c-format
+msgid "Free space: %s / %s (%d%%)"
 msgstr "Spațiu liber: %s/%s (%d%%)"
 
 #, c-format

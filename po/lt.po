@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-09-17 14:27+0300\n"
+"POT-Creation-Date: 2022-10-15 12:35+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Mantas Kriaučiūnas Baltix <mantas@akl.lt>, 2020\n"
 "Language-Team: Lithuanian (http://www.transifex.com/mc/mc/language/lt/)\n"
@@ -2872,7 +2872,7 @@ msgid "Background process: File exists"
 msgstr "Foninis procesas: failas egzistuoja"
 
 #, c-format
-msgid "Files processed: %zu/%zu"
+msgid "Files processed: %zu / %zu"
 msgstr ""
 
 #, c-format
@@ -2899,9 +2899,9 @@ msgstr "Laikas: %s (%s)"
 msgid " Total: %s "
 msgstr "Iš viso: %s"
 
-#, c-format
-msgid " Total: %s/%s "
-msgstr ""
+#, fuzzy, c-format
+msgid " Total: %s / %s "
+msgstr "Iš viso: %s"
 
 msgid "Source"
 msgstr "Iš"
@@ -3354,7 +3354,7 @@ msgid "No space information"
 msgstr "Nėra informacijos apie vietą"
 
 #, c-format
-msgid "Free space: %s/%s (%d%%)"
+msgid "Free space: %s / %s (%d%%)"
 msgstr ""
 
 #, c-format

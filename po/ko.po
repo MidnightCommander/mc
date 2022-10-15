@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-09-17 14:27+0300\n"
+"POT-Creation-Date: 2022-10-15 12:35+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Junghee Lee <daemul72@gmail.com>, 2022\n"
 "Language-Team: Korean (http://www.transifex.com/mc/mc/language/ko/)\n"
@@ -2982,8 +2982,8 @@ msgstr "파일이 있음"
 msgid "Background process: File exists"
 msgstr "백그라운드 프로세스: 파일 존재"
 
-#, c-format
-msgid "Files processed: %zu/%zu"
+#, fuzzy, c-format
+msgid "Files processed: %zu / %zu"
 msgstr "처리된 파일: %zu/%zu"
 
 #, c-format
@@ -3010,8 +3010,8 @@ msgstr "시간: %s (%s)"
 msgid " Total: %s "
 msgstr " 전체: %s "
 
-#, c-format
-msgid " Total: %s/%s "
+#, fuzzy, c-format
+msgid " Total: %s / %s "
 msgstr " 전체: %s/%s "
 
 msgid "Source"
@@ -3460,8 +3460,8 @@ msgstr "사용 가능한 노드:"
 msgid "No space information"
 msgstr "공간 정보 없습니다"
 
-#, c-format
-msgid "Free space: %s/%s (%d%%)"
+#, fuzzy, c-format
+msgid "Free space: %s / %s (%d%%)"
 msgstr "사용 가능한 공간: %s/%s (%d%%)"
 
 #, c-format
