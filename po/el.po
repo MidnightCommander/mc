@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-15 12:35+0300\n"
+"POT-Creation-Date: 2022-10-23 20:23+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Efstathios Iosifidis <iefstathios@gmail.com>, 2015\n"
 "Language-Team: Greek (http://www.transifex.com/mc/mc/language/el/)\n"
@@ -2736,6 +2736,17 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(σταμάτησε)"
 
+#, fuzzy
+msgid "Incomplete file was retrieved"
+msgstr "Ανακτήθηκε ατελές αρχείο. Να διατηρηθεί;"
+
+msgid "&Keep"
+msgstr "&Διατήρηση"
+
+#, fuzzy
+msgid "&Continue copy"
+msgstr "&Συνέχεια"
+
 #, c-format
 msgid ""
 "Cannot close source file \"%s\"\n"
@@ -2751,12 +2762,6 @@ msgid ""
 msgstr ""
 "Αδυναμία κλεισίματος αρχείου στόχου \"%s\"\n"
 "%s"
-
-msgid "Incomplete file was retrieved. Keep it?"
-msgstr "Ανακτήθηκε ατελές αρχείο. Να διατηρηθεί;"
-
-msgid "&Keep"
-msgstr "&Διατήρηση"
 
 #, c-format
 msgid ""

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-15 12:35+0300\n"
+"POT-Creation-Date: 2022-10-23 20:23+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Shuree Nyam-Oidov <99shuree@gmail.com>, 2020\n"
 "Language-Team: Mongolian (http://www.transifex.com/mc/mc/language/mn/)\n"
@@ -2665,6 +2665,17 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(гацсан)"
 
+#, fuzzy
+msgid "Incomplete file was retrieved"
+msgstr "Дутуу файл орж ирсэн байна. Хадгалах уу?"
+
+msgid "&Keep"
+msgstr "&Хадгалах"
+
+#, fuzzy
+msgid "&Continue copy"
+msgstr "&үргэлжлүүл"
+
 #, c-format
 msgid ""
 "Cannot close source file \"%s\"\n"
@@ -2676,12 +2687,6 @@ msgid ""
 "Cannot close target file \"%s\"\n"
 "%s"
 msgstr ""
-
-msgid "Incomplete file was retrieved. Keep it?"
-msgstr "Дутуу файл орж ирсэн байна. Хадгалах уу?"
-
-msgid "&Keep"
-msgstr "&Хадгалах"
 
 #, c-format
 msgid ""

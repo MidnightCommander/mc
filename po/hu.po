@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-15 12:35+0300\n"
+"POT-Creation-Date: 2022-10-23 20:23+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: András Tőrös <toros.andras04@gmail.com>, 2020\n"
 "Language-Team: Hungarian (http://www.transifex.com/mc/mc/language/hu/)\n"
@@ -2815,6 +2815,17 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(elakadt)"
 
+#, fuzzy
+msgid "Incomplete file was retrieved"
+msgstr "Nem másolódott át a teljes fájl. Megtartja a célfájlt?"
+
+msgid "&Keep"
+msgstr "&Megtartás"
+
+#, fuzzy
+msgid "&Continue copy"
+msgstr "&Tovább"
+
 #, c-format
 msgid ""
 "Cannot close source file \"%s\"\n"
@@ -2830,12 +2841,6 @@ msgid ""
 msgstr ""
 "Nem sikerült lezárni a(z) \"%s\" célfájlt. \n"
 "%s"
-
-msgid "Incomplete file was retrieved. Keep it?"
-msgstr "Nem másolódott át a teljes fájl. Megtartja a célfájlt?"
-
-msgid "&Keep"
-msgstr "&Megtartás"
 
 #, c-format
 msgid ""

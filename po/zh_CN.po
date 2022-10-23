@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-15 12:35+0300\n"
+"POT-Creation-Date: 2022-10-23 20:23+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Gurbuzguven <6mehmet6@gmail.com>, 2021\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/mc/mc/language/"
@@ -2833,6 +2833,17 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(暂停)"
 
+#, fuzzy
+msgid "Incomplete file was retrieved"
+msgstr "文件没有完整获取。保留它吗?"
+
+msgid "&Keep"
+msgstr "保留(&K)"
+
+#, fuzzy
+msgid "&Continue copy"
+msgstr "继续(&O)"
+
 #, c-format
 msgid ""
 "Cannot close source file \"%s\"\n"
@@ -2848,12 +2859,6 @@ msgid ""
 msgstr ""
 "无法关闭目标文件“%s”\n"
 "%s"
-
-msgid "Incomplete file was retrieved. Keep it?"
-msgstr "文件没有完整获取。保留它吗?"
-
-msgid "&Keep"
-msgstr "保留(&K)"
 
 #, c-format
 msgid ""

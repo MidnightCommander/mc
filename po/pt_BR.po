@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-15 12:35+0300\n"
+"POT-Creation-Date: 2022-10-23 20:23+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Mauro Hemerly Gazzani <mauro.hemerly@gmail.com>, 2017\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/mc/mc/language/"
@@ -2764,6 +2764,17 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(parado)"
 
+#, fuzzy
+msgid "Incomplete file was retrieved"
+msgstr "Arquivo incompleto foi recuperado. Manter ?"
+
+msgid "&Keep"
+msgstr "&Manter"
+
+#, fuzzy
+msgid "&Continue copy"
+msgstr "C&ontinuar"
+
 #, c-format
 msgid ""
 "Cannot close source file \"%s\"\n"
@@ -2779,12 +2790,6 @@ msgid ""
 msgstr ""
 "Não foi possível fechar arquivo alvo \"%s\"\n"
 "%s"
-
-msgid "Incomplete file was retrieved. Keep it?"
-msgstr "Arquivo incompleto foi recuperado. Manter ?"
-
-msgid "&Keep"
-msgstr "&Manter"
 
 #, c-format
 msgid ""

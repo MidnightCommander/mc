@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-15 12:35+0300\n"
+"POT-Creation-Date: 2022-10-23 20:23+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Matej Urbančič <>, 2012\n"
 "Language-Team: Slovenian (http://www.transifex.com/mc/mc/language/sl/)\n"
@@ -2674,6 +2674,17 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(zastoj)"
 
+#, fuzzy
+msgid "Incomplete file was retrieved"
+msgstr "Datoteka je bila prenešena nepopolno. Naj ostane?"
+
+msgid "&Keep"
+msgstr "&Obdrži"
+
+#, fuzzy
+msgid "&Continue copy"
+msgstr "&Nadaljuj"
+
 #, c-format
 msgid ""
 "Cannot close source file \"%s\"\n"
@@ -2685,12 +2696,6 @@ msgid ""
 "Cannot close target file \"%s\"\n"
 "%s"
 msgstr ""
-
-msgid "Incomplete file was retrieved. Keep it?"
-msgstr "Datoteka je bila prenešena nepopolno. Naj ostane?"
-
-msgid "&Keep"
-msgstr "&Obdrži"
 
 #, c-format
 msgid ""

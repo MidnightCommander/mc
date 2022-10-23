@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-15 12:35+0300\n"
+"POT-Creation-Date: 2022-10-23 20:23+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>, "
 "2011,2015-2019\n"
@@ -2840,6 +2840,17 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(trabatuta)"
 
+#, fuzzy
+msgid "Incomplete file was retrieved"
+msgstr "Osatu gabeko fitxategia eskuratu da. Mantendu?"
+
+msgid "&Keep"
+msgstr "&Gorde"
+
+#, fuzzy
+msgid "&Continue copy"
+msgstr "&Jarraitu"
+
 #, c-format
 msgid ""
 "Cannot close source file \"%s\"\n"
@@ -2855,12 +2866,6 @@ msgid ""
 msgstr ""
 "Ezin da itxi \"%s\" helburu fitxategia\n"
 "%s"
-
-msgid "Incomplete file was retrieved. Keep it?"
-msgstr "Osatu gabeko fitxategia eskuratu da. Mantendu?"
-
-msgid "&Keep"
-msgstr "&Gorde"
 
 #, c-format
 msgid ""

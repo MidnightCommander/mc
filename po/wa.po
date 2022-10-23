@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-15 12:35+0300\n"
+"POT-Creation-Date: 2022-10-23 20:23+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
 "Language-Team: Walloon (http://www.transifex.com/mc/mc/language/wa/)\n"
@@ -2662,6 +2662,17 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(a djok)"
 
+#, fuzzy
+msgid "Incomplete file was retrieved"
+msgstr "Dj' a rapexhî on fitchî nén etir. El fåt-i wårder?"
+
+msgid "&Keep"
+msgstr "&Wårder"
+
+#, fuzzy
+msgid "&Continue copy"
+msgstr "&Tcheryî"
+
 #, c-format
 msgid ""
 "Cannot close source file \"%s\"\n"
@@ -2673,12 +2684,6 @@ msgid ""
 "Cannot close target file \"%s\"\n"
 "%s"
 msgstr ""
-
-msgid "Incomplete file was retrieved. Keep it?"
-msgstr "Dj' a rapexhî on fitchî nén etir. El fåt-i wårder?"
-
-msgid "&Keep"
-msgstr "&Wårder"
 
 #, c-format
 msgid ""

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-15 12:35+0300\n"
+"POT-Creation-Date: 2022-10-23 20:23+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Miguel Anxo Bouzada <mbouzada@gmail.com>, "
 "2012,2014-2015,2019\n"
@@ -2844,6 +2844,17 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(atoado)"
 
+#, fuzzy
+msgid "Incomplete file was retrieved"
+msgstr "O ficheiro esta incompleto. Desexa conservalo?"
+
+msgid "&Keep"
+msgstr "&Manter"
+
+#, fuzzy
+msgid "&Continue copy"
+msgstr "c&Ontinuar"
+
 #, c-format
 msgid ""
 "Cannot close source file \"%s\"\n"
@@ -2859,12 +2870,6 @@ msgid ""
 msgstr ""
 "Non é posíbel pechar o ficheiro destino «%s»\n"
 "%s"
-
-msgid "Incomplete file was retrieved. Keep it?"
-msgstr "O ficheiro esta incompleto. Desexa conservalo?"
-
-msgid "&Keep"
-msgstr "&Manter"
 
 #, c-format
 msgid ""

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-15 12:35+0300\n"
+"POT-Creation-Date: 2022-10-23 20:23+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Gilberto Jorge <gmj125@gmail.com>, 2013-2022\n"
 "Language-Team: Portuguese (http://www.transifex.com/mc/mc/language/pt/)\n"
@@ -2851,6 +2851,17 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(estagnado)"
 
+#, fuzzy
+msgid "Incomplete file was retrieved"
+msgstr "Foi obtido ficheiro incompleto. Ficar com ele?"
+
+msgid "&Keep"
+msgstr "&Manter"
+
+#, fuzzy
+msgid "&Continue copy"
+msgstr "C&ontinuar"
+
 #, c-format
 msgid ""
 "Cannot close source file \"%s\"\n"
@@ -2866,12 +2877,6 @@ msgid ""
 msgstr ""
 "Não é possível fechar o ficheiro alvo \"%s\"\n"
 "%s"
-
-msgid "Incomplete file was retrieved. Keep it?"
-msgstr "Foi obtido ficheiro incompleto. Ficar com ele?"
-
-msgid "&Keep"
-msgstr "&Manter"
 
 #, c-format
 msgid ""

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-15 12:35+0300\n"
+"POT-Creation-Date: 2022-10-23 20:23+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
 "Language-Team: Azerbaijani (http://www.transifex.com/mc/mc/language/az/)\n"
@@ -2664,6 +2664,17 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(stalled)"
 
+#, fuzzy
+msgid "Incomplete file was retrieved"
+msgstr "Bütöv fayl alına bilmədi. Saxlayım mı?"
+
+msgid "&Keep"
+msgstr "&Saxla"
+
+#, fuzzy
+msgid "&Continue copy"
+msgstr "Davam&Et"
+
 #, c-format
 msgid ""
 "Cannot close source file \"%s\"\n"
@@ -2675,12 +2686,6 @@ msgid ""
 "Cannot close target file \"%s\"\n"
 "%s"
 msgstr ""
-
-msgid "Incomplete file was retrieved. Keep it?"
-msgstr "Bütöv fayl alına bilmədi. Saxlayım mı?"
-
-msgid "&Keep"
-msgstr "&Saxla"
 
 #, c-format
 msgid ""

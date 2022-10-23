@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-15 12:35+0300\n"
+"POT-Creation-Date: 2022-10-23 20:23+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Junghee Lee <daemul72@gmail.com>, 2022\n"
 "Language-Team: Korean (http://www.transifex.com/mc/mc/language/ko/)\n"
@@ -2843,6 +2843,17 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(지연됨)"
 
+#, fuzzy
+msgid "Incomplete file was retrieved"
+msgstr "불완전한 파일이 검색되었습니다. 파일을 보존할까요?"
+
+msgid "&Keep"
+msgstr "보존(&K)"
+
+#, fuzzy
+msgid "&Continue copy"
+msgstr "계속(&O)"
+
 #, c-format
 msgid ""
 "Cannot close source file \"%s\"\n"
@@ -2858,12 +2869,6 @@ msgid ""
 msgstr ""
 "\"%s\" 대상 파일을 닫을 수 없습니다\n"
 "%s"
-
-msgid "Incomplete file was retrieved. Keep it?"
-msgstr "불완전한 파일이 검색되었습니다. 파일을 보존할까요?"
-
-msgid "&Keep"
-msgstr "보존(&K)"
 
 #, c-format
 msgid ""

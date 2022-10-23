@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-15 12:35+0300\n"
+"POT-Creation-Date: 2022-10-23 20:23+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>, 2017-2022\n"
 "Language-Team: Catalan (http://www.transifex.com/mc/mc/language/ca/)\n"
@@ -2860,6 +2860,17 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(encallat)"
 
+#, fuzzy
+msgid "Incomplete file was retrieved"
+msgstr "S'ha recuperat un fitxer incomplet. Voleu conservar-lo?"
+
+msgid "&Keep"
+msgstr "&Conserva'l"
+
+#, fuzzy
+msgid "&Continue copy"
+msgstr "C&ontinua"
+
 #, c-format
 msgid ""
 "Cannot close source file \"%s\"\n"
@@ -2875,12 +2886,6 @@ msgid ""
 msgstr ""
 "No s'ha pogut tancar el fitxer de destinació «%s»\n"
 "%s"
-
-msgid "Incomplete file was retrieved. Keep it?"
-msgstr "S'ha recuperat un fitxer incomplet. Voleu conservar-lo?"
-
-msgid "&Keep"
-msgstr "&Conserva'l"
 
 #, c-format
 msgid ""

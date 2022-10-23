@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-15 12:35+0300\n"
+"POT-Creation-Date: 2022-10-23 20:23+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Richard E. van der Luit <nippur@fedoraproject.org>, "
 "2012-2015,2017,2020\n"
@@ -2846,6 +2846,17 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(geblokkeerd)"
 
+#, fuzzy
+msgid "Incomplete file was retrieved"
+msgstr "Onvolledige bestand opgehaald. Wilt u het behouden?"
+
+msgid "&Keep"
+msgstr "&Behouden"
+
+#, fuzzy
+msgid "&Continue copy"
+msgstr "D&oorgaan"
+
 #, c-format
 msgid ""
 "Cannot close source file \"%s\"\n"
@@ -2861,12 +2872,6 @@ msgid ""
 msgstr ""
 "Doelbestand \"%s\" kan niet gesloten worden \n"
 "%s "
-
-msgid "Incomplete file was retrieved. Keep it?"
-msgstr "Onvolledige bestand opgehaald. Wilt u het behouden?"
-
-msgid "&Keep"
-msgstr "&Behouden"
 
 #, c-format
 msgid ""

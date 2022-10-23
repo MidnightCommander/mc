@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-15 12:35+0300\n"
+"POT-Creation-Date: 2022-10-23 20:23+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Źmicier Turok <nashtlumach@gmail.com>, 2018\n"
 "Language-Team: Belarusian (http://www.transifex.com/mc/mc/language/be/)\n"
@@ -2844,6 +2844,17 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(затрымліваецца)"
 
+#, fuzzy
+msgid "Incomplete file was retrieved"
+msgstr "Быў атрыманы незавершаны файл. Пакінуць?"
+
+msgid "&Keep"
+msgstr "Захаваць(&K)"
+
+#, fuzzy
+msgid "&Continue copy"
+msgstr "Працягнуць(&C)"
+
 #, c-format
 msgid ""
 "Cannot close source file \"%s\"\n"
@@ -2859,12 +2870,6 @@ msgid ""
 msgstr ""
 "Немагчыма закрыць мэтавы файл «%s»\n"
 "%s"
-
-msgid "Incomplete file was retrieved. Keep it?"
-msgstr "Быў атрыманы незавершаны файл. Пакінуць?"
-
-msgid "&Keep"
-msgstr "Захаваць(&K)"
 
 #, c-format
 msgid ""
