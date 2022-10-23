@@ -121,9 +121,11 @@ struct link
 /* Status of the destination file */
 typedef enum
 {
-    DEST_NONE = 0,              /* Not created */
-    DEST_SHORT = 1,             /* Created, not fully copied */
-    DEST_FULL = 2               /* Created, fully copied */
+    DEST_NONE = 0,              /**< Not created */
+    DEST_SHORT_QUERY,           /**< Created, not fully copied, query to do */
+    DEST_SHORT_KEEP,            /**< Created, not fully copied, keep it */
+    DEST_SHORT_DELETE,          /**< Created, not fully copied, delete it */
+    DEST_FULL                   /**< Created, fully copied */
 } dest_status_t;
 
 /* Status of hard link creation */
@@ -2508,7 +2510,8 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
         goto ret;
     }
 
-    dst_status = DEST_SHORT;    /* file opened, but not fully copied */
+    /* file opened, but not fully copied */
+    dst_status = DEST_SHORT_QUERY;
 
     appending = ctx->do_append;
     ctx->do_append = FALSE;
@@ -2696,15 +2699,36 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
             mc_refresh ();
 
             return_status = check_progress_buttons (ctx);
-
             if (return_status != FILE_CONT)
             {
-                mc_refresh ();
-                goto ret;
+                int query_res;
+
+                query_res =
+                    query_dialog (Q_ ("DialogTitle|Copy"),
+                                  _("Incomplete file was retrieved"), D_ERROR, 3,
+                                  _("&Delete"), _("&Keep"), _("&Continue copy"));
+
+                switch (query_res)
+                {
+                case 0:
+                    /* delete */
+                    dst_status = DEST_SHORT_DELETE;
+                    goto ret;
+
+                case 1:
+                    /* keep */
+                    dst_status = DEST_SHORT_KEEP;
+                    goto ret;
+
+                default:
+                    /* continue copy */
+                    break;
+                }
             }
         }
 
-        dst_status = DEST_FULL; /* copy successful, don't remove target file */
+        /* copy successful */
+        dst_status = DEST_FULL;
     }
 
   ret:
@@ -2734,13 +2758,15 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
         break;
     }
 
-    if (dst_status == DEST_SHORT)
+    if (dst_status == DEST_SHORT_QUERY)
     {
         /* Query to remove short file */
-        if (query_dialog (Q_ ("DialogTitle|Copy"), _("Incomplete file was retrieved. Keep it?"),
+        if (query_dialog (Q_ ("DialogTitle|Copy"), _("Incomplete file was retrieved"),
                           D_ERROR, 2, _("&Delete"), _("&Keep")) == 0)
             mc_unlink (dst_vpath);
     }
+    else if (dst_status == DEST_SHORT_DELETE)
+        mc_unlink (dst_vpath);
     else if (dst_status == DEST_FULL && !appending)
     {
         /* Copy has succeeded */

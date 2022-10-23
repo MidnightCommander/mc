@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-15 12:35+0300\n"
+"POT-Creation-Date: 2022-10-23 20:23+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: hualahyja, 2019\n"
 "Language-Team: Slovak (http://www.transifex.com/mc/mc/language/sk/)\n"
@@ -2835,6 +2835,17 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(zastavený)"
 
+#, fuzzy
+msgid "Incomplete file was retrieved"
+msgstr "Bol získaný neúplný súbor. Ponechať ho?"
+
+msgid "&Keep"
+msgstr "Po&nechať"
+
+#, fuzzy
+msgid "&Continue copy"
+msgstr "P&okračovať"
+
 #, c-format
 msgid ""
 "Cannot close source file \"%s\"\n"
@@ -2850,12 +2861,6 @@ msgid ""
 msgstr ""
 "Nemožno zatvoriť cieľový súbor „%s“\n"
 "%s"
-
-msgid "Incomplete file was retrieved. Keep it?"
-msgstr "Bol získaný neúplný súbor. Ponechať ho?"
-
-msgid "&Keep"
-msgstr "Po&nechať"
 
 #, c-format
 msgid ""

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-15 12:35+0300\n"
+"POT-Creation-Date: 2022-10-23 20:23+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2022\n"
 "Language-Team: Esperanto (http://www.transifex.com/mc/mc/language/eo/)\n"
@@ -2845,6 +2845,17 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(paŭzinta)"
 
+#, fuzzy
+msgid "Incomplete file was retrieved"
+msgstr "Nekompleta dosiero estis akirita. Ĉu teni ĝin?"
+
+msgid "&Keep"
+msgstr "&Teni"
+
+#, fuzzy
+msgid "&Continue copy"
+msgstr "D&aŭrigi"
+
 #, c-format
 msgid ""
 "Cannot close source file \"%s\"\n"
@@ -2860,12 +2871,6 @@ msgid ""
 msgstr ""
 "Ne eblas fermi celan dosieron \"%s\"\n"
 "%s"
-
-msgid "Incomplete file was retrieved. Keep it?"
-msgstr "Nekompleta dosiero estis akirita. Ĉu teni ĝin?"
-
-msgid "&Keep"
-msgstr "&Teni"
 
 #, c-format
 msgid ""

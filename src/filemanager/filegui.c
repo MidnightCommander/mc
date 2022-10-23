@@ -380,6 +380,27 @@ file_bps_prepare_for_show (char *buffer, long bps)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static cb_ret_t
+file_ui_op_dlg_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+{
+    switch (msg)
+    {
+    case MSG_ACTION:
+        /* Do not close the dialog because the query dialog will be shown */
+        if (parm == CK_Cancel)
+        {
+            DIALOG (w)->ret_value = FILE_ABORT; /* for check_progress_buttons() */
+            return MSG_HANDLED;
+        }
+        return MSG_NOT_HANDLED;
+
+    default:
+        return dlg_default_callback (w, sender, msg, parm, data);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 /* The dialog layout:
  *
  * +---------------------- File exists -----------------------+
@@ -828,9 +849,8 @@ file_op_context_create_ui (file_op_context_t * ctx, gboolean with_eta,
     ui = ctx->ui;
     ui->replace_result = REPLACE_YES;
 
-    ui->op_dlg =
-        dlg_create (TRUE, 0, 0, dlg_height, dlg_width, WPOS_CENTER, FALSE, dialog_colors, NULL,
-                    NULL, NULL, op_names[ctx->operation]);
+    ui->op_dlg = dlg_create (TRUE, 0, 0, dlg_height, dlg_width, WPOS_CENTER, FALSE, dialog_colors,
+                             file_ui_op_dlg_callback, NULL, NULL, op_names[ctx->operation]);
     w = WIDGET (ui->op_dlg);
     g = GROUP (ui->op_dlg);
 

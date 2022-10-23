@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-15 12:35+0300\n"
+"POT-Creation-Date: 2022-10-23 20:23+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Priit Jõerüüt <transifex@joeruut.com>, 2020-2021\n"
 "Language-Team: Estonian (http://www.transifex.com/mc/mc/language/et/)\n"
@@ -2833,6 +2833,17 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(seiskunud)"
 
+#, fuzzy
+msgid "Incomplete file was retrieved"
+msgstr "Saadi lõpetamata fail. Kas hoida see alles?"
+
+msgid "&Keep"
+msgstr "&Hoia"
+
+#, fuzzy
+msgid "&Continue copy"
+msgstr "&Jätka"
+
 #, c-format
 msgid ""
 "Cannot close source file \"%s\"\n"
@@ -2848,12 +2859,6 @@ msgid ""
 msgstr ""
 "Sihtfaili \"%s\" sulgemine nurjus\n"
 "%s"
-
-msgid "Incomplete file was retrieved. Keep it?"
-msgstr "Saadi lõpetamata fail. Kas hoida see alles?"
-
-msgid "&Keep"
-msgstr "&Hoia"
 
 #, c-format
 msgid ""

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-15 12:35+0300\n"
+"POT-Creation-Date: 2022-10-23 20:23+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: scootergrisen, 2018-2020\n"
 "Language-Team: Danish (http://www.transifex.com/mc/mc/language/da/)\n"
@@ -2846,6 +2846,17 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(venter)"
 
+#, fuzzy
+msgid "Incomplete file was retrieved"
+msgstr "En fil der ikke er komplet blev hentet ned. Behold den?"
+
+msgid "&Keep"
+msgstr "&Behold"
+
+#, fuzzy
+msgid "&Continue copy"
+msgstr "&Fortsæt"
+
 #, c-format
 msgid ""
 "Cannot close source file \"%s\"\n"
@@ -2861,12 +2872,6 @@ msgid ""
 msgstr ""
 "Kan ikke lukke målfil »%s«\n"
 "%s"
-
-msgid "Incomplete file was retrieved. Keep it?"
-msgstr "En fil der ikke er komplet blev hentet ned. Behold den?"
-
-msgid "&Keep"
-msgstr "&Behold"
 
 #, c-format
 msgid ""

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-15 12:35+0300\n"
+"POT-Creation-Date: 2022-10-23 20:23+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Takuro Onoue <kusanaginoturugi@gmail.com>, 2021\n"
 "Language-Team: Japanese (http://www.transifex.com/mc/mc/language/ja/)\n"
@@ -2683,6 +2683,17 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(stalled)"
 
+#, fuzzy
+msgid "Incomplete file was retrieved"
+msgstr "ファイルを完全に取得できませんでした。保存しますか?"
+
+msgid "&Keep"
+msgstr "保存(&K)"
+
+#, fuzzy
+msgid "&Continue copy"
+msgstr "続ける(&O)"
+
 #, c-format
 msgid ""
 "Cannot close source file \"%s\"\n"
@@ -2694,12 +2705,6 @@ msgid ""
 "Cannot close target file \"%s\"\n"
 "%s"
 msgstr ""
-
-msgid "Incomplete file was retrieved. Keep it?"
-msgstr "ファイルを完全に取得できませんでした。保存しますか?"
-
-msgid "&Keep"
-msgstr "保存(&K)"
 
 #, c-format
 msgid ""

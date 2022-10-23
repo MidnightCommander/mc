@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-15 12:35+0300\n"
+"POT-Creation-Date: 2022-10-23 20:23+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>, 2021\n"
 "Language-Team: Finnish (http://www.transifex.com/mc/mc/language/fi/)\n"
@@ -2755,6 +2755,16 @@ msgstr ""
 msgid "(stalled)"
 msgstr ""
 
+msgid "Incomplete file was retrieved"
+msgstr ""
+
+msgid "&Keep"
+msgstr "&Pidä"
+
+#, fuzzy
+msgid "&Continue copy"
+msgstr "J&atka"
+
 #, c-format
 msgid ""
 "Cannot close source file \"%s\"\n"
@@ -2770,12 +2780,6 @@ msgid ""
 msgstr ""
 "Kohdetiedostoa ei voi sulkea \"%s\"\n"
 "%s"
-
-msgid "Incomplete file was retrieved. Keep it?"
-msgstr ""
-
-msgid "&Keep"
-msgstr "&Pidä"
 
 #, c-format
 msgid ""

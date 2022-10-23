@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-15 12:35+0300\n"
+"POT-Creation-Date: 2022-10-23 20:23+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Serdar Sağlam <teknomobil@msn.com>, 2019-2020\n"
 "Language-Team: Turkish (http://www.transifex.com/mc/mc/language/tr/)\n"
@@ -2829,6 +2829,17 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(durakladı)"
 
+#, fuzzy
+msgid "Incomplete file was retrieved"
+msgstr " Tamamlanmamış dosya alındı. Korunsun mu?"
+
+msgid "&Keep"
+msgstr "&Koru"
+
+#, fuzzy
+msgid "&Continue copy"
+msgstr "&Devam et"
+
 #, c-format
 msgid ""
 "Cannot close source file \"%s\"\n"
@@ -2844,12 +2855,6 @@ msgid ""
 msgstr ""
 "\"%s\" hedef dosyası kapatılamıyor \n"
 " %s"
-
-msgid "Incomplete file was retrieved. Keep it?"
-msgstr " Tamamlanmamış dosya alındı. Korunsun mu?"
-
-msgid "&Keep"
-msgstr "&Koru"
 
 #, c-format
 msgid ""

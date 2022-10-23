@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-15 12:35+0300\n"
+"POT-Creation-Date: 2022-10-23 20:23+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
 "Language-Team: Serbian (http://www.transifex.com/mc/mc/language/sr/)\n"
@@ -2813,6 +2813,17 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(застој)"
 
+#, fuzzy
+msgid "Incomplete file was retrieved"
+msgstr "Датотека није у потпуности преузета. Да је задржим?"
+
+msgid "&Keep"
+msgstr "&Задржи"
+
+#, fuzzy
+msgid "&Continue copy"
+msgstr "&Настави"
+
 #, c-format
 msgid ""
 "Cannot close source file \"%s\"\n"
@@ -2828,12 +2839,6 @@ msgid ""
 msgstr ""
 "Не могу да затворим циљну датотеку „%s“\n"
 "%s"
-
-msgid "Incomplete file was retrieved. Keep it?"
-msgstr "Датотека није у потпуности преузета. Да је задржим?"
-
-msgid "&Keep"
-msgstr "&Задржи"
 
 #, c-format
 msgid ""
