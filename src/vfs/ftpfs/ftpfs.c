@@ -2431,12 +2431,12 @@ ftpfs_fill_names (struct vfs_class *me, fill_names_f func)
     for (iter = VFS_SUBCLASS (me)->supers; iter != NULL; iter = g_list_next (iter))
     {
         const struct vfs_s_super *super = (const struct vfs_s_super *) iter->data;
-        char *name;
+        GString *name;
 
         name = vfs_path_element_build_pretty_path_str (super->path_element);
 
-        func (name);
-        g_free (name);
+        func (name->str);
+        g_string_free (name, TRUE);
     }
 }
 

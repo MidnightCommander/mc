@@ -1552,7 +1552,7 @@ vfs_path_build_url_params_str (const vfs_path_element_t * element, gboolean keep
  * @return newly allocated string
  */
 
-char *
+GString *
 vfs_path_element_build_pretty_path_str (const vfs_path_element_t * element)
 {
     char *url_params;
@@ -1569,7 +1569,7 @@ vfs_path_element_build_pretty_path_str (const vfs_path_element_t * element)
         g_string_append_c (pretty_path, PATH_SEP);
 
     g_string_append (pretty_path, element->path);
-    return g_string_free (pretty_path, FALSE);
+    return pretty_path;
 }
 
 /* --------------------------------------------------------------------------------------------- */
