@@ -127,24 +127,21 @@ sftpfs_cb_open (const vfs_path_t * vpath, int flags, mode_t mode)
 
     if (path_inode == NULL)
     {
-        char *dirname, *name;
+        char *name;
         struct vfs_s_entry *ent;
         struct vfs_s_inode *dir;
 
-        dirname = g_path_get_dirname (path_super);
-        name = g_path_get_basename (path_super);
-        dir = vfs_s_find_inode (path_element->class, super, dirname, LINK_FOLLOW, FL_DIR);
+        name = g_path_get_dirname (path_super);
+        dir = vfs_s_find_inode (path_element->class, super, name, LINK_FOLLOW, FL_DIR);
+        g_free (name);
         if (dir == NULL)
-        {
-            g_free (dirname);
-            g_free (name);
             return NULL;
-        }
+
+        name = g_path_get_basename (path_super);
         ent = vfs_s_generate_entry (path_element->class, name, dir, 0755);
+        g_free (name);
         path_inode = ent->ino;
         vfs_s_insert_entry (path_element->class, dir, ent);
-        g_free (dirname);
-        g_free (name);
         is_changed = TRUE;
     }
 
