@@ -274,13 +274,11 @@ static off_t
 edit_insert_stream (WEdit * edit, FILE * f)
 {
     int c;
-    off_t i = 0;
+    off_t i;
 
-    while ((c = fgetc (f)) >= 0)
-    {
+    for (i = 0; (c = fgetc (f)) >= 0; i++)
         edit_insert (edit, c);
-        i++;
-    }
+
     return i;
 }
 
