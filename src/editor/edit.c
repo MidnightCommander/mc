@@ -232,21 +232,18 @@ edit_load_file_fast (edit_buffer_t * buf, const vfs_path_t * filename_vpath)
 static int
 edit_find_filter (const vfs_path_t * filename_vpath)
 {
-    size_t i, l;
-
-    if (filename_vpath == NULL)
-        return -1;
-
-    l = strlen (vfs_path_as_str (filename_vpath));
-    for (i = 0; i < G_N_ELEMENTS (all_filters); i++)
+    if (filename_vpath != NULL)
     {
-        size_t e;
+        const char *s;
+        size_t i;
 
-        e = strlen (all_filters[i].extension);
-        if (l > e)
-            if (!strcmp (all_filters[i].extension, vfs_path_as_str (filename_vpath) + l - e))
+        s = vfs_path_as_str (filename_vpath);
+
+        for (i = 0; i < G_N_ELEMENTS (all_filters); i++)
+            if (g_str_has_suffix (s, all_filters[i].extension))
                 return i;
     }
+
     return -1;
 }
 
