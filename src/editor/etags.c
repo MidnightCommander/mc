@@ -41,7 +41,7 @@
 #include "lib/fileloc.h"        /* TAGS_NAME */
 #include "lib/tty/tty.h"        /* LINES, COLS */
 #include "lib/strutil.h"
-#include "lib/util.h"           /* canonicalize_pathname() */
+#include "lib/util.h"
 
 #include "editwidget.h"
 
@@ -253,7 +253,6 @@ etags_set_definition_hash (const char *tagfile, const char *start_path, const ch
                     def_hash = g_new (etags_hash_t, 1);
 
                     def_hash->fullpath = mc_build_filename (start_path, filename, (char *) NULL);
-                    canonicalize_pathname (def_hash->fullpath);
                     def_hash->filename = g_strdup (filename);
 
                     def_hash->line = 0;
