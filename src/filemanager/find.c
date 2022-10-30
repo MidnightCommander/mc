@@ -857,7 +857,7 @@ find_parameters (WPanel * panel, char **start_dir, ssize_t * start_dir_len,
                 /* relative paths will be used in panelization */
                 *start_dir =
                     mc_build_filename (vfs_path_as_str (panel->cwd_vpath), s, (char *) NULL);
-                *start_dir_len = (ssize_t) strlen (vfs_path_as_str (panel->cwd_vpath));
+                *start_dir_len = (ssize_t) vfs_path_len (panel->cwd_vpath);
                 g_free (s);
             }
 
