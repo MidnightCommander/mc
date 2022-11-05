@@ -143,7 +143,7 @@ typedef struct
     char *scr_append;
     char *scr_info;
     int host_flags;
-    char *scr_env;
+    GString *scr_env;
 } fish_super_t;
 
 typedef struct
@@ -309,7 +309,7 @@ fish_command_va (struct vfs_class *me, struct vfs_s_super *super, int wait_reply
     int r;
     GString *command;
 
-    command = g_string_new (FISH_SUPER (super)->scr_env);
+    command = mc_g_string_dup (FISH_SUPER (super)->scr_env);
     g_string_append_vprintf (command, vars, ap);
     g_string_append (command, scr);
     r = fish_command (me, super, wait_reply, command->str, command->len);
@@ -409,7 +409,7 @@ fish_free_archive (struct vfs_class *me, struct vfs_s_super *super)
     g_free (fish_super->scr_send);
     g_free (fish_super->scr_append);
     g_free (fish_super->scr_info);
-    g_free (fish_super->scr_env);
+    g_string_free (fish_super->scr_env, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -453,35 +453,35 @@ fish_pipeopen (struct vfs_s_super *super, const char *path, const char *argv[])
 
 /* --------------------------------------------------------------------------------------------- */
 
-static char *
+static GString *
 fish_set_env (int flags)
 {
-    GString *tmp;
+    GString *ret;
 
-    tmp = g_string_sized_new (250);
+    ret = g_string_sized_new (256);
 
     if ((flags & FISH_HAVE_HEAD) != 0)
-        g_string_append (tmp, "FISH_HAVE_HEAD=1 export FISH_HAVE_HEAD; ");
+        g_string_append (ret, "FISH_HAVE_HEAD=1 export FISH_HAVE_HEAD; ");
 
     if ((flags & FISH_HAVE_SED) != 0)
-        g_string_append (tmp, "FISH_HAVE_SED=1 export FISH_HAVE_SED; ");
+        g_string_append (ret, "FISH_HAVE_SED=1 export FISH_HAVE_SED; ");
 
     if ((flags & FISH_HAVE_AWK) != 0)
-        g_string_append (tmp, "FISH_HAVE_AWK=1 export FISH_HAVE_AWK; ");
+        g_string_append (ret, "FISH_HAVE_AWK=1 export FISH_HAVE_AWK; ");
 
     if ((flags & FISH_HAVE_PERL) != 0)
-        g_string_append (tmp, "FISH_HAVE_PERL=1 export FISH_HAVE_PERL; ");
+        g_string_append (ret, "FISH_HAVE_PERL=1 export FISH_HAVE_PERL; ");
 
     if ((flags & FISH_HAVE_LSQ) != 0)
-        g_string_append (tmp, "FISH_HAVE_LSQ=1 export FISH_HAVE_LSQ; ");
+        g_string_append (ret, "FISH_HAVE_LSQ=1 export FISH_HAVE_LSQ; ");
 
     if ((flags & FISH_HAVE_DATE_MDYT) != 0)
-        g_string_append (tmp, "FISH_HAVE_DATE_MDYT=1 export FISH_HAVE_DATE_MDYT; ");
+        g_string_append (ret, "FISH_HAVE_DATE_MDYT=1 export FISH_HAVE_DATE_MDYT; ");
 
     if ((flags & FISH_HAVE_TAIL) != 0)
-        g_string_append (tmp, "FISH_HAVE_TAIL=1 export FISH_HAVE_TAIL; ");
+        g_string_append (ret, "FISH_HAVE_TAIL=1 export FISH_HAVE_TAIL; ");
 
-    return g_string_free (tmp, FALSE);
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
