@@ -759,8 +759,6 @@ tilde_expand (const char *directory)
  * @param path path to file
  * @param flags canonicalization flags
  *
- * @return a new path
- *
  * All modifications of @path are made in place.
  * Well formed UNC paths are modified only in the local part.
  */
@@ -984,25 +982,6 @@ canonicalize_pathname_custom (char *path, canon_path_flags_t flags)
             break;
         }
     }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
- * Canonicalize path with CANON_PATH_ALL.
- *
- * @param path path to file
- * @param flags canonicalization flags
- *
- * @return a new path
- *
- * All modifications of @path are made in place.
- * Well formed UNC paths are modified only in the local part.
- */
-
-void
-canonicalize_pathname (char *path)
-{
-    canonicalize_pathname_custom (path, CANON_PATH_ALL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
