@@ -230,7 +230,7 @@ compare_files (const vfs_path_t * vpath1, const vfs_path_t * vpath2, off_t size)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-compare_dir (WPanel * panel, WPanel * other, enum CompareMode mode)
+compare_dir (WPanel * panel, const WPanel * other, enum CompareMode mode)
 {
     int i, j;
 
@@ -243,6 +243,7 @@ compare_dir (WPanel * panel, WPanel * other, enum CompareMode mode)
     for (i = 0; i < panel->dir.len; i++)
     {
         file_entry_t *source = &panel->dir.list[i];
+        const char *source_fname;
 
         /* Default: unmarked */
         file_mark (panel, i, 0);
@@ -251,10 +252,22 @@ compare_dir (WPanel * panel, WPanel * other, enum CompareMode mode)
         if (S_ISDIR (source->st.st_mode))
             continue;
 
+        source_fname = source->fname->str;
+        if (panel->is_panelized)
+            source_fname = x_basename (source_fname);
+
         /* Search the corresponding entry from the other panel */
         for (j = 0; j < other->dir.len; j++)
-            if (g_string_equal (source->fname, other->dir.list[j].fname))
+        {
+            const char *other_fname;
+
+            other_fname = other->dir.list[j].fname->str;
+            if (other->is_panelized)
+                other_fname = x_basename (other_fname);
+
+            if (strcmp (source_fname, other_fname) == 0)
                 break;
+        }
 
         if (j >= other->dir.len)
             /* Not found -> mark */
