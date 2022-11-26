@@ -90,6 +90,7 @@ SYNTAXFILES =			\
 	syntax.syntax		\
 	tcl.syntax		\
 	texinfo.syntax		\
+	toml.syntax		\
 	ts.syntax		\
 	tt.syntax		\
 	unknown.syntax		\

@@ -1,0 +1,22 @@
+# TOML: Tom's Obvious Minimal Language
+
+context default white
+
+# groups
+context [ \n brown
+    keyword [ yellow
+    keyword ] yellow
+
+# assignment
+context exclusive = \n write
+    keyword "*" brightgreen
+    keyword whole false brightcyan
+    keyword whole true brightcyan
+    keyword \{0123456789\} brightcyan
+
+# comments
+context # \n brown
+    spellcheck
+
+# other strings
+context " " brightgreen
