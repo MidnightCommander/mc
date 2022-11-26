@@ -748,8 +748,9 @@ feed_subshell (int how, gboolean fail_on_error)
 
     should_read_new_subshell_prompt = FALSE;
 
-    /* we wait up to 1 second if fail_on_error, forever otherwise */
-    wtime.tv_sec = 1;
+    /* have more than enough time to run subshell:
+       wait up to 10 second if fail_on_error, forever otherwise */
+    wtime.tv_sec = 10;
     wtime.tv_usec = 0;
     wptr = fail_on_error ? &wtime : NULL;
 
