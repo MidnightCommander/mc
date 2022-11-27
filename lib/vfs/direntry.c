@@ -1431,7 +1431,7 @@ vfs_s_retrieve_file (struct vfs_class *me, struct vfs_s_inode *ino)
 {
     /* If you want reget, you'll have to open file with O_LINEAR */
     off_t total = 0;
-    char buffer[8192];
+    char buffer[BUF_8K];
     int handle;
     ssize_t n;
     off_t stat_size = ino->st.st_size;
