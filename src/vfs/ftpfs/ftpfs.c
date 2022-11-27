@@ -1156,13 +1156,10 @@ ftpfs_setup_passive_epsv (struct vfs_class *me, struct vfs_s_super *super,
 
     /* (|||<port>|) */
     c = strchr (reply_str, '|');
-    if (c == NULL)
-        return FALSE;
-    if (strlen (c) > 3)
-        c += 3;
-    else
+    if (c == NULL || strlen (c) <= 3)
         return FALSE;
 
+    c += 3;
     port = atoi (c);
     if (port < 0 || port > 65535)
         return FALSE;
