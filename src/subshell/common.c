@@ -1722,12 +1722,16 @@ do_subshell_chdir (const vfs_path_t * vpath, gboolean update_prompt)
        because we set "HISTCONTROL=ignorespace") */
     write_all (mc_global.tty.subshell_pty, " cd ", 4);
 
-    if (vpath != NULL)
+    if (vpath == NULL)
+        write_all (mc_global.tty.subshell_pty, "/", 1);
+    else
     {
         const char *translate;
 
         translate = vfs_translate_path (vfs_path_as_str (vpath));
-        if (translate != NULL)
+        if (translate == NULL)
+            write_all (mc_global.tty.subshell_pty, ".", 1);
+        else
         {
             GString *temp;
 
@@ -1735,15 +1739,8 @@ do_subshell_chdir (const vfs_path_t * vpath, gboolean update_prompt)
             write_all (mc_global.tty.subshell_pty, temp->str, temp->len);
             g_string_free (temp, TRUE);
         }
-        else
-        {
-            write_all (mc_global.tty.subshell_pty, ".", 1);
-        }
     }
-    else
-    {
-        write_all (mc_global.tty.subshell_pty, "/", 1);
-    }
+
     write_all (mc_global.tty.subshell_pty, "\n", 1);
 
     subshell_state = RUNNING_COMMAND;
