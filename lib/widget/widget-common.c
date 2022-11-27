@@ -330,9 +330,6 @@ widget_init (Widget * w, const WRect * r, widget_cb_fn callback, widget_mouse_cb
     w->make_global = widget_default_make_global;
     w->make_local = widget_default_make_local;
 
-    w->make_global = widget_default_make_global;
-    w->make_local = widget_default_make_local;
-
     w->find = widget_default_find;
     w->find_by_type = widget_default_find_by_type;
     w->find_by_id = widget_default_find_by_id;
