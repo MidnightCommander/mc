@@ -57,7 +57,7 @@
 #include "lib/global.h"
 #include "lib/search.h"         /* search engine */
 #include "lib/skin.h"
-#include "lib/fileloc.h"        /* EDIT_HOME_DIR, EDIT_HOME_SYNTAX_FILE */
+#include "lib/fileloc.h"        /* EDIT_SYNTAX_DIR, EDIT_SYNTAX_FILE */
 #include "lib/strutil.h"        /* utf string functions */
 #include "lib/util.h"
 #include "lib/widget.h"         /* Listbox, message() */
@@ -887,20 +887,14 @@ open_include_file (const char *filename)
 
     g_free (error_file_name);
     error_file_name =
-        g_build_filename (mc_config_get_data_path (), EDIT_HOME_DIR, filename, (char *) NULL);
-    f = fopen (error_file_name, "r");
-    if (f != NULL)
-        return f;
-
-    g_free (error_file_name);
-    error_file_name = g_build_filename (mc_global.sysconfig_dir, "syntax", filename, (char *) NULL);
+        g_build_filename (mc_config_get_data_path (), EDIT_SYNTAX_DIR, filename, (char *) NULL);
     f = fopen (error_file_name, "r");
     if (f != NULL)
         return f;
 
     g_free (error_file_name);
     error_file_name =
-        g_build_filename (mc_global.share_data_dir, "syntax", filename, (char *) NULL);
+        g_build_filename (mc_global.share_data_dir, EDIT_SYNTAX_DIR, filename, (char *) NULL);
 
     return fopen (error_file_name, "r");
 }
@@ -1270,7 +1264,7 @@ edit_read_syntax_file (WEdit * edit, GPtrArray * pnames, const char *syntax_file
     f = fopen (syntax_file, "r");
     if (f == NULL)
     {
-        lib_file = g_build_filename (mc_global.share_data_dir, "syntax", "Syntax", (char *) NULL);
+        lib_file = g_build_filename (mc_global.share_data_dir, EDIT_SYNTAX_FILE, (char *) NULL);
         f = fopen (lib_file, "r");
         g_free (lib_file);
         if (f == NULL)
@@ -1521,7 +1515,7 @@ edit_load_syntax (WEdit * edit, GPtrArray * pnames, const char *type)
     if (edit != NULL && edit->filename_vpath == NULL)
         return;
 
-    f = mc_config_get_full_path (EDIT_HOME_SYNTAX_FILE);
+    f = mc_config_get_full_path (EDIT_SYNTAX_FILE);
     if (edit != NULL)
         r = edit_read_syntax_file (edit, pnames, f, vfs_path_as_str (edit->filename_vpath),
                                    get_first_editor_line (edit),

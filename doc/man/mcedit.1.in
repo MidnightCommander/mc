@@ -237,12 +237,12 @@ where equal is symbol "=" goes to next function in navigation list
 supports syntax highlighting.  This means that keywords and contexts
 (like C comments, string constants, etc) are highlighted in different
 colors.  The following section explains the format of the file
-.BR ~/.config/mc/mcedit/Syntax .
+.BR ~/.local/share/mc/syntax/Syntax .
 If this file is missing, system\-wide
 .B %pkgdatadir%/syntax/Syntax
 is used.
 The file
-.B ~/.config/mc/mcedit/Syntax
+.B ~/.local/share/mc/syntax/Syntax
 is rescanned on opening of every new editor file.  The file contains
 rules for highlighting, each of which is given on a separate line, and
 define which keywords will be highlighted with what color.
@@ -631,7 +631,9 @@ affect all users, whether they have ~/.config/mc/ini or not.
 .I %pkgdatadir%/syntax/*
 .IP
 The default system\-wide syntax files for mcedit, used only if
-the corresponding user's own ~/.local/share/mc/mcedit/ file is missing.
+the corresponding user's own file in
+.B ~/.local/share/mc/syntax/
+is missing.
 .PP
 .I ~/.config/mc/ini
 .IP

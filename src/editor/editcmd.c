@@ -1128,19 +1128,19 @@ edit_load_syntax_file (WDialog * h)
                             _("&User"), _("&System wide"));
 
     extdir_vpath =
-        vfs_path_build_filename (mc_global.sysconfig_dir, "syntax", "Syntax", (char *) NULL);
+        vfs_path_build_filename (mc_global.sysconfig_dir, EDIT_SYNTAX_FILE, (char *) NULL);
     if (!exist_file (vfs_path_get_last_path_str (extdir_vpath)))
     {
         vfs_path_free (extdir_vpath, TRUE);
         extdir_vpath =
-            vfs_path_build_filename (mc_global.share_data_dir, "syntax", "Syntax", (char *) NULL);
+            vfs_path_build_filename (mc_global.share_data_dir, EDIT_SYNTAX_FILE, (char *) NULL);
     }
 
     if (dir == 0)
     {
         vfs_path_t *user_syntax_file_vpath;
 
-        user_syntax_file_vpath = mc_config_get_full_vpath (EDIT_HOME_SYNTAX_FILE);
+        user_syntax_file_vpath = mc_config_get_full_vpath (EDIT_SYNTAX_FILE);
         check_for_default (extdir_vpath, user_syntax_file_vpath);
         ret = edit_load_file_from_filename (h, user_syntax_file_vpath, 0);
         vfs_path_free (user_syntax_file_vpath, TRUE);
