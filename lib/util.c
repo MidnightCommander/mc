@@ -451,8 +451,10 @@ size_trunc_len (char *buffer, unsigned int len, uintmax_t size, int units, gbool
 #endif
     };
     /* *INDENT-ON* */
-    static const char *const suffix[] = { "", "K", "M", "G", "T", "P", "E", "Z", "Y", NULL };
-    static const char *const suffix_lc[] = { "", "k", "m", "g", "t", "p", "e", "z", "y", NULL };
+    static const char *const suffix[] =
+        { "", "K", "M", "G", "T", "P", "E", "Z", "Y", "R", "Q", NULL };
+    static const char *const suffix_lc[] =
+        { "", "k", "m", "g", "t", "p", "e", "z", "y", "r", "q", NULL };
 
     const char *const *sfx = use_si ? suffix_lc : suffix;
     int j = 0;
