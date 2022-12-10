@@ -319,7 +319,7 @@ sftpfs_read_known_hosts (struct vfs_s_super *super, GError ** mcerror)
                                 _("sftp: found host key of unsupported type: RSA1"));
             return FALSE;
         default:
-            mc_propagate_error (mcerror, 0, "%s %u", _("sftp: unknown host key type:"),
+            mc_propagate_error (mcerror, 0, "%s 0x%x", _("sftp: unknown host key type:"),
                                 (unsigned int) mask);
             return FALSE;
         }
