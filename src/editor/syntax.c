@@ -1258,15 +1258,17 @@ edit_read_syntax_file (WEdit * edit, GPtrArray * pnames, const char *syntax_file
     char *args[ARGS_LEN], *l = NULL;
     long line = 0;
     int result = 0;
-    char *lib_file;
     gboolean found = FALSE;
 
     f = fopen (syntax_file, "r");
     if (f == NULL)
     {
-        lib_file = g_build_filename (mc_global.share_data_dir, EDIT_SYNTAX_FILE, (char *) NULL);
-        f = fopen (lib_file, "r");
-        g_free (lib_file);
+        char *global_syntax_file;
+
+        global_syntax_file =
+            g_build_filename (mc_global.share_data_dir, EDIT_SYNTAX_FILE, (char *) NULL);
+        f = fopen (global_syntax_file, "r");
+        g_free (global_syntax_file);
         if (f == NULL)
             return -1;
     }
