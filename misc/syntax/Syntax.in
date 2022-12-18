@@ -1,6 +1,20 @@
 # This file describes which highlighting scheme is applied to a particular
 # file in mcedit.
 #
+#
+# System-wide files (this and syntax definitions) are located in
+# @datarootdir@/@PACKAGE@/syntax/ directory.
+#
+# User's files (this and syntax definitions) are located in
+# ~/.local/share/@PACKAGE@/syntax directory.
+#
+# If user's file is missing, system-wide one is used.
+#
+#
+# This file is rescanned on opening of every new editor file.
+#
+# Format of this file is following.
+#
 # Each entry consists of two lines: a "file" specification and the
 # corresponding highlighting definition ("include"). A file specification
 # can have two or three fields, each separated by white-space characters.
