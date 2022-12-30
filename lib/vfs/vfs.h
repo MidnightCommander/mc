@@ -27,10 +27,6 @@
 
 #define VFS_CLASS(a) ((struct vfs_class *) (a))
 
-#if defined (ENABLE_VFS_FTP) || defined (ENABLE_VFS_FISH)
-#define ENABLE_VFS_NET 1
-#endif
-
 /**
  * This is the type of callback function passed to vfs_fill_names.
  * It gets the name of the virtual file system as its first argument.

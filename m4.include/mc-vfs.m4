@@ -44,6 +44,7 @@ AC_DEFUN([mc_ENABLE_VFS_NET],
 	AC_CHECK_RPC
 
 	enable_vfs_net=yes
+	AC_DEFINE(ENABLE_VFS_NET, [1], [Define to enable network VFSes support])
     fi
 ])
 
@@ -79,7 +80,7 @@ AC_DEFUN([mc_VFS_CHECKS],
 
     AM_CONDITIONAL(ENABLE_VFS, [test x"$enable_vfs" = x"yes"])
 
-    if test x"$enable_vfs_ftp" = x"yes" -o x"$enable_vfs_fish" = x"yes"; then
+    if test x"$enable_vfs_ftp" = x"yes" -o x"$enable_vfs_fish" = x"yes" -o x"$enable_vfs_sftp" = x"yes"; then
 	mc_ENABLE_VFS_NET
     fi
 
