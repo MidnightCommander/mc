@@ -958,8 +958,6 @@ menubar_new (GList * menu)
     w = WIDGET (menubar);
     widget_init (w, &r, menubar_callback, menubar_mouse_callback);
     w->pos_flags = WPOS_KEEP_HORZ | WPOS_KEEP_TOP;
-    /* initially, menubar is not selectable */
-    widget_set_options (w, WOP_SELECTABLE, FALSE);
     w->options |= WOP_TOP_SELECT;
     w->keymap = menu_map;
     menubar_set_menu (menubar, menu);
