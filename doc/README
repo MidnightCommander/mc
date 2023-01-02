@@ -160,9 +160,13 @@ https://www.midnight-commander.org/wiki/doc/reportDefects
 
 Also you can use mc mailing lists to discuss problems.
 
-There are two mailing lists, mc@gnome.org and mc-devel@gnome.org.  Use
-mc-devel@gnome.org if you are prepared for a more technical discussion
-with the developers of the package, otherwise use mc@gnome.org.
+There are two mailing lists:
+
+  - mc@lists.midnight-commander.org
+  - mc-devel@lists.midnight-commander.org
+
+Use mc-devel@ if you are prepared for a more technical discussion
+with the developers of the package, otherwise use mc@.
 
 Please don't sent HTML e-mail to either of those mailing lists.
 

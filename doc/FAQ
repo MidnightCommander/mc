@@ -2,7 +2,7 @@ GNU Midnight Commander
 Frequently Asked Questions
 
    The newest version of this document is available at
-   http://www.midnight-commander.org/browser/doc/FAQ
+   https://www.midnight-commander.org/browser/doc/FAQ
 
      * 1 Getting started
           + 1.1 What is Midnight Commander?
@@ -177,7 +177,7 @@ Frequently Asked Questions
 
 1.6 Where can I get GNU Midnight Commander?
 
-   The main site is http://www.midnight-commander.org
+   The main site is https://www.midnight-commander.org
 
 1.7 I cannot compile MC.  What should I do?
 
@@ -784,16 +784,16 @@ indenting increases with each line!
      * Adam Tla/lka
 
    Current list of active developers can be found here:
-   http://www.midnight-commander.org/wiki/McDevelopers
+   https://www.midnight-commander.org/wiki/McDevelopers
 
    This page lists everbody who has provided a patch or
    has written code for the Midnight Commander in the past:
-   http://www.midnight-commander.org/wiki/McContributors
+   https://www.midnight-commander.org/wiki/McContributors
 
 10.2 Do I dare to use a development version?
 
    Yes, of course. Feel free to test:
-   http://www.midnight-commander.org/wiki#Download
+   https://www.midnight-commander.org/wiki#Download
    As we do our development in git, please do a git checkout
    of the master branch and build it
 
@@ -808,10 +808,10 @@ indenting increases with each line!
    the bug is fixed or the feature is added already.
 
    If this is not the case, feel free to add a ticket in our ticket system,
-   which is located here: http://www.midnight-commander.org/newticket
+   which is located here: https://www.midnight-commander.org/newticket
 
-   If you want to send an email instead write your report to mc-devel@gnome.org 
-   or mc@gnome.org.
+   If you want to send an email instead write your report to
+   mc-devel@lists.midnight-commander.org or mc@lists.midnight-commander.org.
 
    These mailing lists are the most certain way to contact the
    developers.  Remember to mention if you are not on the mailing list
@@ -841,7 +841,7 @@ indenting increases with each line!
 10.4 How can I join the development?
 
    To join the development just code the feature you want to add and
-   send your patch for inclusion.  Email address is mc-devel@gnome.org.
+   send your patch for inclusion.  Email address is mc-devel@lists.midnight-commander.org.
    Before you start coding check the latest development version.  It
    might be that your feature has already been implemented.
 
@@ -863,21 +863,21 @@ an answer?
    fixed in the new versions.
 
    If you still can't find an answer, post your question to the Midnight
-   Commander mailing list.  Its address is mc@gnome.org.
+   Commander mailing list.  Its address is mc@lists.midnight-commander.org.
 
 11.2 What mailing lists are there for Midnight Commander?
 
    Following mailing lists discuss about Midnight Commander:
 
-   mc@gnome.org
+   mc@lists.midnight-commander.org
           General discussion of GNU Midnight Commander
           To subscribe visit
-          http://mail.gnome.org/mailman/listinfo/mc/
+          https://lists.midnight-commander.org/mailman/listinfo/mc/
 
-   mc-devel@gnome.org
+   mc-devel@lists.midnight-commander.org
           Technical development discussion
           To subscribe visit
-          http://mail.gnome.org/mailman/listinfo/mc-devel/
+          https://lists.midnight-commander.org/mailman/listinfo/mc-devel/
 
    mc-commits@googlegroups.com
           mailing list only for applyed commits into master/stable branches
@@ -893,7 +893,7 @@ an answer?
 
    There is a WWW page for Midnight Commander.  The URL is:
 
-     http://www.midnight-commander.org/
+     https://www.midnight-commander.org/
 
 11.4 Are the mailing lists archived anywhere?
 
@@ -912,7 +912,7 @@ an answer?
 12.2 Feedback is invited
 
    Send your comments about this document and GNU Midnight Commander to
-   mc@gnome.org
+   mc@lists.midnight-commander.org
 
 12.3 Disclaimer and copyright
 

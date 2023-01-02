@@ -4864,7 +4864,7 @@ zsh(1), mcedit(1).
 .PP
 .nf
 Страница, посвященная Midnight Commander, в World Wide Web:
-	http://www.midnight\-commander.org/
+	https://www.midnight\-commander.org/
 .fi
 .PP
 Данная страница оперативного руководства содержит информацию, актуальную
@@ -4917,7 +4917,7 @@ and Wim Osterholt (wim@djo.wtm.tudelft.nl).
 .PP
 Если вы обнаружили в программе какие\-то недостатки или недоработки,
 оформите, пожалуйста, ваши замечания по адресу
-.IR http://www.midnight\-commander.org/ .
+.IR https://www.midnight\-commander.org/ .
 .PP
 Дайте подробное описание обнаруженных недостатков (и/или ваших
 предложений по усовершенствованию программы), сообщите версию программы

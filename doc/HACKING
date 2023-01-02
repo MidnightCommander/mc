@@ -22,7 +22,7 @@ Gettext 0.18.2 and above
 Glib 2.30 and above
 
 Full list of requirements you can see at:
-http://www.midnight-commander.org/wiki/doc/buildAndInstall/req
+https://www.midnight-commander.org/wiki/doc/buildAndInstall/req
 
 It is recommended that all those tools are installed with the same
 prefix.  Make sure that the tools with the right version are first in
@@ -274,7 +274,7 @@ Where to Find Bug Reports and Patches
 
 The official place for bug reports is:
 
-    http://www.midnight-commander.org/
+    https://www.midnight-commander.org/
 
 
 There are various unofficial sources where bug reports and patches can

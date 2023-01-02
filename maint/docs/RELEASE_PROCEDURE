@@ -48,7 +48,7 @@ Given have votes from developers
 
 When I Want To: complete the release
 
-Then I Should: upload source packages and checksums to http://www.midnight-commander.org/downloads
+Then I Should: upload source packages and checksums to https://www.midnight-commander.org/downloads
            and update Wiki start page with ${next_version} release number
            and write an announcement in mc-dev and mc-users mailists: list user visible changes (bugs and features)
            and close  milestone with '${last_version}' version

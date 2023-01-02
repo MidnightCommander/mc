@@ -3148,7 +3148,7 @@ tcsh(1), zsh(1).
 .PP
 .nf
 Страница Поноћног наредника на Међународној мрежи:
-	http://www.midnight\-commander.org/
+	https://www.midnight\-commander.org/
 .fi
 .\"NODE "AUTHORS"
 .SH "АУТОРИ"
@@ -3160,7 +3160,7 @@ tcsh(1), zsh(1).
 остаје да се уради.
 .PP
 Ако желите да пријавите проблем у вези са програмом, молим да пошаљете
-еписмо на следећу адресу: mc\-devel@gnome.org.
+еписмо на следећу адресу: mc\-devel@lists.midnight-commander.org.
 .PP
 Доставите детаљан опис грешке, верзију програма коју користите
 .RI ( "mc \-V"

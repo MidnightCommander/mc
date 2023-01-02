@@ -4310,7 +4310,7 @@ tcsh(1), zsh(1).
 .PP
 .nf
 Midnight Commander's page on the World Wide Web:
-	http://www.midnight\-commander.org/
+	https://www.midnight\-commander.org/
 .fi
 .\"NODE "AUTHORS"
 .SH "AUTHORS"
@@ -4322,7 +4322,7 @@ See the file TODO in the distribution for information on what remains to
 be done.
 .PP
 If you want to report a problem with the program, please create bugreport
-at http://www.midnight\-commander.org/.
+at https://www.midnight\-commander.org/.
 .PP
 Provide a detailed description of the bug, the version of the program
 you are running

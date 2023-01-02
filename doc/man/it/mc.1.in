@@ -3173,7 +3173,7 @@ tcsh(1), zsh(1).
 .PP
 .nf
 La pagina Web del Midnight Commander:
-	http://www.midnight\-commander.org/
+	https://www.midnight\-commander.org/
 .fi
 .\"NODE "AUTHORS"
 .SH "AUTORI"
@@ -3214,7 +3214,8 @@ Vedere il file TODO nella distribuzione per informazioni su
 quello che rimane ancora da fare.
 .PP
 Se si vuole fare un rapporto di un problema nel programma, si prega di
-spedire un messaggio di posta a questo indirizzo: mc\-devel@gnome.org.
+spedire un messaggio di posta a questo indirizzo:
+mc\-devel@lists.midnight-commander.org.
 .PP
 Nel rapporto è necessario fornire una descrizione dettagliata del baco, 
 la versione del programma (mc \-v mostra quest'informazione), il sistema 

@@ -658,4 +658,4 @@ cooledit(1), mc(1), gpm(1), terminfo(1), scanf(3).
 Paul Sheer (psheer@obsidian.co.za) is the original author of
 Midnight Commander's internal editor.
 .SH BUGS
-Bugs should be reported to http://www.midnight\-commander.org/.
+Bugs should be reported to https://www.midnight\-commander.org/.

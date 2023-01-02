@@ -288,13 +288,13 @@ Where to get more information on GNU Midnight Commander
 
 There are two mailing lists for the program:
 
-mc@gnome.org:        Discussion on GNU Midnight Commander file manager.
-mc-devel@gnome.org:  Discussion between the developers of the program.
+mc@lists.midnight-commander.org:        Discussion on GNU Midnight Commander file manager.
+mc-devel@lists.midnight-commander.org:  Discussion between the developers of the program.
 
 To subscribe to the mailing lists, visit their respective pages:
 
-http://mail.gnome.org/mailman/listinfo/mc/
-http://mail.gnome.org/mailman/listinfo/mc-devel/
+https://lists.midnight-commander.org/mailman/listinfo/mc/
+https://lists.midnight-commander.org/mailman/listinfo/mc-devel/
 
 
 Notes about GNU Midnight Commander installation
@@ -351,9 +351,9 @@ sure which ones must go first.  If you would like to point us in the
 Right Direction we will be glad to hear from you.
 
 If you happen to find a feature that doesn't do what you expect, please
-write to mc@gnome.org telling as much as you can about the problem
-you're experiencing.  Please don't send personal messages to the
-maintainers.
+write to mc@lists.midnight-commander.org telling as much as you can
+about the problem you're experiencing.  Please don't send personal
+messages to the maintainers.
 
 
 Obtaining related software

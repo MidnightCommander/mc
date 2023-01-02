@@ -2879,7 +2879,7 @@ tcsh(1), zsh(1).
 .PP
 .nf
 Strona Midnight Commander w sieci World Wide Web:
-	http://www.midnight\-commander.org/
+	https://www.midnight\-commander.org/
 .fi
 .PP
 .\"NODE "AUTHORS"
@@ -2923,7 +2923,8 @@ W pliku TODO dystrybucji znajdziesz informacje na temat tego, co
 pozostało jeszcze do zrobienia.
 .PP
 Jeśli chcesz zgłosić kłopoty z programem [błędy w nim],
-wyślij e\-mail [po angielsku], na adres mc\-devel@gnome.org.
+wyślij e\-mail [po angielsku], na adres
+mc\-devel@lists.midnight-commander.org.
 .PP
 Do zgłoszenia błędu dołącz opis problemu, versję programu, którego używasz
 (wyświetla ją mc \-V), system operacyjny, na którym pracujesz i jeśli program

@@ -3180,7 +3180,7 @@ zsh(1).
 .nf
 A Midnight Commander World Wide Web oldalának címe a
 következő:
-	http://www.midnight\-commander.org/
+	https://www.midnight\-commander.org/
 .fi
 .\"NODE "AUTHORS"
 .SH "Szerzők"
@@ -3218,7 +3218,7 @@ Nézd meg a disztribúció TODO fájlát, hogy megtudhasd, milyen teendők
 vannak még vissza.
 .PP
 Ha a programmal kapcsolatos problémád van, akkor azt küld el az alábbi
-levélcímre: mc\-devel@gnome.org.
+levélcímre: mc\-devel@lists.midnight-commander.org.
 .PP
 Gondoskodj arról, hogy tartalmazza a hiba minél pontosabb
 meghatározását, a futtatott program verziószámát (az mc \-V parancs meg

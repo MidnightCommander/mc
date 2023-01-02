@@ -1,7 +1,7 @@
 
 The input file was created by running "zoo lq" on the archive at:
 
-    http://www.midnight-commander.org/ticket/3696
+    https://www.midnight-commander.org/ticket/3696
 
 Known bugs in our uzoo:
 - It doesn't support filenames with spaces.
