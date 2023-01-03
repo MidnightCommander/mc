@@ -570,7 +570,7 @@ should_skip_directory (const vfs_path_t * vpath)
 
         profile_name = setup_init ();
         process_special_dirs (&special_dirs, profile_name);
-        process_special_dirs (&special_dirs, global_profile_name);
+        process_special_dirs (&special_dirs, mc_global.profile_name);
 
         loaded = TRUE;
     }

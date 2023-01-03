@@ -171,6 +171,8 @@ typedef struct
     /* share_data_dir: Area for default settings from developers */
     char *share_data_dir;
 
+    char *profile_name;
+
     mc_config_t *main_config;
     mc_config_t *panels_config;
 
