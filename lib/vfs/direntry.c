@@ -1318,7 +1318,7 @@ vfs_s_open (const vfs_path_t * vpath, int flags, mode_t mode)
 
     if (ino == NULL)
     {
-        char *dirname, *name;
+        char *name;
         struct vfs_s_entry *ent;
         struct vfs_s_inode *dir;
 
@@ -1326,9 +1326,9 @@ vfs_s_open (const vfs_path_t * vpath, int flags, mode_t mode)
         if ((flags & O_CREAT) == 0 || path_element->class->write == NULL)
             return NULL;
 
-        dirname = g_path_get_dirname (q);
-        dir = vfs_s_find_inode (path_element->class, super, dirname, LINK_FOLLOW, FL_DIR);
-        g_free (dirname);
+        name = g_path_get_dirname (q);
+        dir = vfs_s_find_inode (path_element->class, super, name, LINK_FOLLOW, FL_DIR);
+        g_free (name);
         if (dir == NULL)
             return NULL;
 
