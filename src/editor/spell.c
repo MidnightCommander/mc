@@ -1,7 +1,7 @@
 /*
    Editor spell checker
 
-   Copyright (C) 2012-2022
+   Copyright (C) 2012-2023
    Free Software Foundation, Inc.
 
    Written by:

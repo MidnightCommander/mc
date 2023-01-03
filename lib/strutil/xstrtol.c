@@ -1,6 +1,6 @@
 /* A more useful interface to strtol.
 
-   Copyright (C) 1995-2022
+   Copyright (C) 1995-2023
    Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify

@@ -1,7 +1,7 @@
 /*
    Execution routines for GNU Midnight Commander
 
-   Copyright (C) 2003-2022
+   Copyright (C) 2003-2023
    Free Software Foundation, Inc.
 
    Written by:

@@ -1,7 +1,7 @@
 /*
    Search functions for diffviewer.
 
-   Copyright (C) 2010-2022
+   Copyright (C) 2010-2023
    Free Software Foundation, Inc.
 
    Written by:
