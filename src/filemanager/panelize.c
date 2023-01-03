@@ -7,7 +7,7 @@
    Written by:
    Janne Kukonlehto, 1995
    Jakub Jelinek, 1995
-   Andrew Borodin <aborodin@vmail.ru> 2011-2022
+   Andrew Borodin <aborodin@vmail.ru> 2011-2023
 
    This file is part of the Midnight Commander.
 
@@ -60,25 +60,59 @@
 
 /*** file scope type declarations ****************************************************************/
 
+typedef struct
+{
+    char *command;
+    char *label;
+} panelize_entry_t;
+
 /*** file scope variables ************************************************************************/
 
 static WListbox *l_panelize;
 static WDialog *panelize_dlg;
 static int last_listitem;
 static WInput *pname;
+static GSList *panelize = NULL;
 
 static const char *panelize_section = "Panelize";
 
-/* Directory panelize */
-static struct panelize
-{
-    char *command;
-    char *label;
-    struct panelize *next;
-} *panelize = NULL;
-
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+panelize_entry_free (gpointer data)
+{
+    panelize_entry_t *entry = (panelize_entry_t *) data;
+
+    g_free (entry->command);
+    g_free (entry->label);
+    g_free (entry);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+panelize_entry_cmp_by_label (gconstpointer a, gconstpointer b)
+{
+    const panelize_entry_t *entry = (const panelize_entry_t *) a;
+    const char *label = (const char *) b;
+
+    return strcmp (entry->label, label);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+panelize_entry_add_to_listbox (gpointer data, gpointer user_data)
+{
+    panelize_entry_t *entry = (panelize_entry_t *) data;
+
+    (void) user_data;
+
+    listbox_add_item (l_panelize, LISTBOX_APPEND_AT_END, 0, entry->label, entry, FALSE);
+}
+
 /* --------------------------------------------------------------------------------------------- */
 
 static void
@@ -86,7 +120,7 @@ update_command (void)
 {
     if (l_panelize->pos != last_listitem)
     {
-        struct panelize *data = NULL;
+        panelize_entry_t *data = NULL;
 
         last_listitem = l_panelize->pos;
         listbox_get_current (l_panelize, NULL, (void **) &data);
@@ -141,7 +175,6 @@ external_panelize_init (void)
     size_t i;
     int blen;
     int panelize_cols;
-    struct panelize *current;
     int x, y;
 
     last_listitem = 0;
@@ -173,8 +206,7 @@ external_panelize_init (void)
     group_add_widget (g, groupbox_new (y++, UX, 12, panelize_cols - UX * 2, ""));
 
     l_panelize = listbox_new (y, UX + 1, 10, panelize_cols - UX * 2 - 2, FALSE, NULL);
-    for (current = panelize; current != NULL; current = current->next)
-        listbox_add_item (l_panelize, LISTBOX_APPEND_AT_END, 0, current->label, current, FALSE);
+    g_slist_foreach (panelize, panelize_entry_add_to_listbox, NULL);
     listbox_select_entry (l_panelize, listbox_search_text (l_panelize, _("Other command")));
     group_add_widget (g, l_panelize);
 
@@ -218,32 +250,15 @@ external_panelize_done (void)
 static void
 add2panelize (char *label, char *command)
 {
-    struct panelize *current;
-    struct panelize *old = NULL;
+    panelize_entry_t *entry;
 
-    current = panelize;
-    while (current != NULL && strcmp (current->label, label) <= 0)
+    entry = g_try_new (panelize_entry_t, 1);
+    if (entry != NULL)
     {
-        old = current;
-        current = current->next;
-    }
+        entry->label = label;
+        entry->command = command;
 
-    if (old == NULL)
-    {
-        panelize = g_new (struct panelize, 1);
-        panelize->label = label;
-        panelize->command = command;
-        panelize->next = current;
-    }
-    else
-    {
-        struct panelize *new;
-
-        new = g_new (struct panelize, 1);
-        new->label = label;
-        new->command = command;
-        old->next = new;
-        new->next = current;
+        panelize = g_slist_insert_sorted (panelize, entry, panelize_entry_cmp_by_label);
     }
 }
 
@@ -269,26 +284,12 @@ add2panelize_cmd (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-remove_from_panelize (struct panelize *entry)
+remove_from_panelize (panelize_entry_t * entry)
 {
     if (strcmp (entry->label, _("Other command")) != 0)
     {
-        if (entry == panelize)
-            panelize = panelize->next;
-        else
-        {
-            struct panelize *current = panelize;
-
-            while (current != NULL && current->next != entry)
-                current = current->next;
-
-            if (current != NULL)
-                current->next = entry->next;
-        }
-
-        g_free (entry->label);
-        g_free (entry->command);
-        g_free (entry);
+        panelize = g_slist_remove (panelize, entry);
+        panelize_entry_free (entry);
     }
 }
 
@@ -457,7 +458,7 @@ external_panelize_cmd (void)
 
     case B_REMOVE:
         {
-            struct panelize *entry;
+            panelize_entry_t *entry;
 
             listbox_get_current (l_panelize, NULL, (void **) &entry);
             remove_from_panelize (entry);
@@ -543,14 +544,18 @@ external_panelize_load (void)
 void
 external_panelize_save (void)
 {
-    struct panelize *current;
+    GSList *l;
 
     mc_config_del_group (mc_global.main_config, panelize_section);
 
-    for (current = panelize; current != NULL; current = current->next)
+    for (l = panelize; l != NULL; l = g_slist_next (l))
+    {
+        panelize_entry_t *current = (panelize_entry_t *) l->data;
+
         if (strcmp (current->label, _("Other command")) != 0)
             mc_config_set_string (mc_global.main_config,
                                   panelize_section, current->label, current->command);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -558,15 +563,8 @@ external_panelize_save (void)
 void
 external_panelize_free (void)
 {
-    struct panelize *current, *next;
-
-    for (current = panelize; current != NULL; current = next)
-    {
-        next = current->next;
-        g_free (current->label);
-        g_free (current->command);
-        g_free (current);
-    }
+    g_clear_slist (&panelize, panelize_entry_free);
+    panelize = NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
