@@ -956,9 +956,7 @@ edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
         l = NULL;
 
         len = read_one_line (&l, f);
-        if (len != 0)
-            xx_lowerize_line (edit, l, len);
-        else
+        if (len == 0)
         {
             if (g == NULL)
                 break;
@@ -972,8 +970,9 @@ edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
             len = read_one_line (&l, f);
             if (len == 0)
                 break;
-            xx_lowerize_line (edit, l, len);
         }
+
+        xx_lowerize_line (edit, l, len);
 
         argc = get_args (l, args, args_size);
         a = args + 1;
