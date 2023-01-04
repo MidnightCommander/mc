@@ -100,7 +100,7 @@ gboolean option_auto_syntax = TRUE;
 
 typedef struct
 {
-    char *keyword;
+    GString *keyword;
     char *whole_word_chars_left;
     char *whole_word_chars_right;
     gboolean line_start;
@@ -109,9 +109,9 @@ typedef struct
 
 typedef struct
 {
-    char *left;
+    GString *left;
     unsigned char first_left;
-    char *right;
+    GString *right;
     unsigned char first_right;
     gboolean line_start_left;
     gboolean line_start_right;
@@ -143,7 +143,7 @@ syntax_keyword_free (gpointer keyword)
 {
     syntax_keyword_t *k = SYNTAX_KEYWORD (keyword);
 
-    g_free (k->keyword);
+    g_string_free (k->keyword, TRUE);
     g_free (k->whole_word_chars_left);
     g_free (k->whole_word_chars_right);
     g_free (k);
@@ -156,8 +156,8 @@ context_rule_free (gpointer rule)
 {
     context_rule_t *r = CONTEXT_RULE (rule);
 
-    g_free (r->left);
-    g_free (r->right);
+    g_string_free (r->left, TRUE);
+    g_string_free (r->right, TRUE);
     g_free (r->whole_word_chars_left);
     g_free (r->whole_word_chars_right);
     g_free (r->keyword_first_chars);
@@ -244,20 +244,17 @@ subst_defines (GTree * defines, char **argv, char **argv_end)
 /* --------------------------------------------------------------------------------------------- */
 
 static off_t
-compare_word_to_right (const WEdit * edit, off_t i, const char *text,
+compare_word_to_right (const WEdit * edit, off_t i, const GString * text,
                        const char *whole_left, const char *whole_right, gboolean line_start)
 {
     const unsigned char *p, *q;
     int c, d, j;
 
-    if (*text == '\0')
-        return -1;
-
     c = xx_tolower (edit, edit_buffer_get_byte (&edit->buffer, i - 1));
     if ((line_start && c != '\n') || (whole_left != NULL && strchr (whole_left, c) != NULL))
         return -1;
 
-    for (p = (const unsigned char *) text, q = p + strlen ((const char *) p); p < q; p++, i++)
+    for (p = (const unsigned char *) text->str, q = p + text->len; p < q; p++, i++)
     {
         switch (*p)
         {
@@ -286,7 +283,7 @@ compare_word_to_right (const WEdit * edit, off_t i, const char *text,
                 if (c == *p)
                 {
                     j = i;
-                    if (p[0] == text[0] && p[1] == '\0')        /* handle eg '+' and @+@ keywords properly */
+                    if (p[0] == text->str[0] && p[1] == '\0')   /* handle eg '+' and @+@ keywords properly */
                         break;
                 }
                 if (j != 0 && strchr ((const char *) p + 1, c) != NULL) /* c exists further down, so it will get matched later */
@@ -401,9 +398,11 @@ apply_rules_going_right (WEdit * edit, off_t i)
 
         r = CONTEXT_RULE (g_ptr_array_index (edit->rules, _rule.context));
         if (r->first_right == c && (edit->rule.border & RULE_ON_RIGHT_BORDER) == 0
-            && (e =
-                compare_word_to_right (edit, i, r->right, r->whole_word_chars_left,
-                                       r->whole_word_chars_right, r->line_start_right)) > 0)
+            && r->right->len != 0 && (e =
+                                      compare_word_to_right (edit, i, r->right,
+                                                             r->whole_word_chars_left,
+                                                             r->whole_word_chars_right,
+                                                             r->line_start_right)) > 0)
         {
             _rule.end = e;
             found_right = TRUE;
@@ -440,22 +439,23 @@ apply_rules_going_right (WEdit * edit, off_t i)
             {
                 syntax_keyword_t *k;
                 int count;
-                off_t e;
+                off_t e = -1;
 
                 count = p - r->keyword_first_chars;
                 k = SYNTAX_KEYWORD (g_ptr_array_index (r->keyword, count));
-                e = compare_word_to_right (edit, i, k->keyword, k->whole_word_chars_left,
-                                           k->whole_word_chars_right, k->line_start);
+                if (k->keyword != 0)
+                    e = compare_word_to_right (edit, i, k->keyword, k->whole_word_chars_left,
+                                               k->whole_word_chars_right, k->line_start);
                 if (e > 0)
                 {
                     /* when both context and keyword terminate with a newline,
                        the context overflows to the next line and colorizes it incorrectly */
                     if (e > i + 1 && _rule._context != 0
-                        && k->keyword[strlen (k->keyword) - 1] == '\n')
+                        && k->keyword->str[k->keyword->len - 1] == '\n')
                     {
                         r = CONTEXT_RULE (g_ptr_array_index (edit->rules, _rule._context));
-                        if (r->right != NULL && r->right[0] != '\0'
-                            && r->right[strlen (r->right) - 1] == '\n')
+                        if (r->right != NULL && r->right->len != 0
+                            && r->right->str[r->right->len - 1] == '\n')
                             e--;
                     }
 
@@ -493,10 +493,12 @@ apply_rules_going_right (WEdit * edit, off_t i)
 
                     if (r->first_right == c)
                     {
-                        off_t e;
+                        off_t e = -1;
 
-                        e = compare_word_to_right (edit, i, r->right, r->whole_word_chars_left,
-                                                   r->whole_word_chars_right, r->line_start_right);
+                        if (r->right->len != 0)
+                            e = compare_word_to_right (edit, i, r->right, r->whole_word_chars_left,
+                                                       r->whole_word_chars_right,
+                                                       r->line_start_right);
                         if (e >= end)
                         {
                             _rule.end = e;
@@ -518,10 +520,11 @@ apply_rules_going_right (WEdit * edit, off_t i)
                 r = CONTEXT_RULE (g_ptr_array_index (edit->rules, count));
                 if (r->first_left == c)
                 {
-                    off_t e;
+                    off_t e = -1;
 
-                    e = compare_word_to_right (edit, i, r->left, r->whole_word_chars_left,
-                                               r->whole_word_chars_right, r->line_start_left);
+                    if (r->left->len != 0)
+                        e = compare_word_to_right (edit, i, r->left, r->whole_word_chars_left,
+                                                   r->whole_word_chars_right, r->line_start_left);
                     if (e >= end && (_rule.keyword == 0 || keyword_foundright))
                     {
                         _rule.end = e;
@@ -551,12 +554,14 @@ apply_rules_going_right (WEdit * edit, off_t i)
         {
             syntax_keyword_t *k;
             int count;
-            off_t e;
+            off_t e = -1;
 
             count = p - r->keyword_first_chars;
             k = SYNTAX_KEYWORD (g_ptr_array_index (r->keyword, count));
-            e = compare_word_to_right (edit, i, k->keyword, k->whole_word_chars_left,
-                                       k->whole_word_chars_right, k->line_start);
+
+            if (k->keyword->len != 0)
+                e = compare_word_to_right (edit, i, k->keyword, k->whole_word_chars_left,
+                                           k->whole_word_chars_right, k->line_start);
             if (e > 0)
             {
                 _rule.end = e;
@@ -1033,8 +1038,8 @@ edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
                 a++;
                 c = g_new0 (context_rule_t, 1);
                 g_ptr_array_add (edit->rules, c);
-                c->left = g_strdup (" ");
-                c->right = g_strdup (" ");
+                c->left = g_string_new (" ");
+                c->right = g_string_new (" ");
             }
             else
             {
@@ -1070,7 +1075,7 @@ edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
                     c->line_start_left = TRUE;
                 }
                 check_a;
-                c->left = g_strdup (*a++);
+                c->left = g_string_new (*a++);
                 check_a;
                 if (strcmp (*a, "linestart") == 0)
                 {
@@ -1078,9 +1083,9 @@ edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
                     c->line_start_right = TRUE;
                 }
                 check_a;
-                c->right = g_strdup (*a++);
-                c->first_left = *c->left;
-                c->first_right = *c->right;
+                c->right = g_string_new (*a++);
+                c->first_left = c->left->str[0];
+                c->first_right = c->right->str[0];
             }
             c->keyword = g_ptr_array_new ();
             k = g_new0 (syntax_keyword_t, 1);
@@ -1100,7 +1105,7 @@ edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
             g_strlcpy (last_bg, bg != NULL ? bg : "", sizeof (last_bg));
             g_strlcpy (last_attrs, attrs != NULL ? attrs : "", sizeof (last_attrs));
             k->color = this_try_alloc_color_pair (fg, bg, attrs);
-            k->keyword = g_strdup (" ");
+            k->keyword = g_string_new (" ");
             check_not_a;
         }
         else if (strcmp (args[0], "spellcheck") == 0)
@@ -1149,7 +1154,7 @@ edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
             if (strcmp (*a, "whole") == 0)
                 break_a;
 
-            k->keyword = g_strdup (*a++);
+            k->keyword = g_string_new (*a++);
             subst_defines (edit->defines, a, &args[ARGS_LEN]);
             fg = *a;
             if (*a != NULL)
@@ -1235,7 +1240,7 @@ edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
                 syntax_keyword_t *k;
 
                 k = SYNTAX_KEYWORD (g_ptr_array_index (c->keyword, j));
-                g_string_append_c (first_chars, k->keyword[0]);
+                g_string_append_c (first_chars, k->keyword->str[0]);
             }
 
             c->keyword_first_chars = g_strndup (first_chars->str, first_chars->len);
