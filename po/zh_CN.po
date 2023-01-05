@@ -17,8 +17,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-23 20:23+0300\n"
+"Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2023-01-05 21:49+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Gurbuzguven <6mehmet6@gmail.com>, 2021\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/mc/mc/language/"
@@ -531,9 +531,8 @@ msgstr ""
 "使用 select() 从子进程读取数据时发生未知错误：\n"
 "%s"
 
-#, fuzzy
 msgid "Cannot close pipe descriptor (p == NULL)"
-msgstr "无法创建管道标识符"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1209,9 +1208,8 @@ msgstr "您必需先突出显示一个文字块"
 msgid "Run sort"
 msgstr "运行 sort"
 
-#, fuzzy
 msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
-msgstr "输入排序选项(查看 manpage)用空格分隔: "
+msgstr ""
 
 msgid "Sort"
 msgstr "排序"
@@ -2522,26 +2520,22 @@ msgstr ""
 msgid " %s%s file error"
 msgstr " %s%s 文件错误"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the %s%s file has changed with version 4.0. It seems that the "
 "installation has failed. Please fetch a fresh copy from the Midnight "
 "Commander package."
 msgstr ""
-"文件 %smc.ext 的格式在3.0版本时已经被修改。似乎安装有错误。请获取新的"
-"Midnight Commander软件包。"
 
 #, c-format
 msgid "%s file error"
 msgstr "%s 文件错误"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the %s file has changed with version 4.0. You may either want "
 "to copy it from %s%s or use that file as an example of how to write it."
 msgstr ""
-"%s 文件的格式在 3.0 版中已经改变。您可以或者将 %smc.ext 文件复制过来，或者将"
-"其为作为范本撰写您自己的版本。"
 
 msgid "DialogTitle|Copy"
 msgstr "DialogTitle|复制"
@@ -2833,16 +2827,14 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(暂停)"
 
-#, fuzzy
 msgid "Incomplete file was retrieved"
-msgstr "文件没有完整获取。保留它吗?"
+msgstr ""
 
 msgid "&Keep"
 msgstr "保留(&K)"
 
-#, fuzzy
 msgid "&Continue copy"
-msgstr "继续(&O)"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2977,9 +2969,9 @@ msgstr "文件已存在"
 msgid "Background process: File exists"
 msgstr "后台进程: 文件已存在"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Files processed: %zu / %zu"
-msgstr "已处理文件: %zu/%zu"
+msgstr ""
 
 #, c-format
 msgid "Files processed: %zu"
@@ -3005,9 +2997,9 @@ msgstr "时间: %s (%s)"
 msgid " Total: %s "
 msgstr " 总共: %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid " Total: %s / %s "
-msgstr " 总共: %s/%s "
+msgstr ""
 
 msgid "Source"
 msgstr "来源"
@@ -3058,9 +3050,8 @@ msgstr "树(&T)"
 msgid "&Listing format..."
 msgstr "列表格式(&L)…"
 
-#, fuzzy
 msgid "&Sort order..."
-msgstr "排序"
+msgstr ""
 
 msgid "&Filter..."
 msgstr "过滤(&F)..."
@@ -3074,9 +3065,8 @@ msgstr "FTP 链接(&P)..."
 msgid "S&hell link..."
 msgstr "S&hell 链接..."
 
-#, fuzzy
 msgid "SFTP li&nk..."
-msgstr "FTP 链接(&P)..."
+msgstr ""
 
 msgid "Paneli&ze"
 msgstr "面板化(&Z)"
@@ -3455,9 +3445,9 @@ msgstr "空闲结点: "
 msgid "No space information"
 msgstr "没有空间信息"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Free space: %s / %s (%d%%)"
-msgstr "空余空间: %s/%s (%d%%)"
+msgstr ""
 
 #, c-format
 msgid "Type:       %s"
@@ -4259,21 +4249,20 @@ msgstr "ftpfs: 连接服务器失败: %s"
 msgid "Waiting to retry... %d (Control-G to cancel)"
 msgstr "等待重试... %d (Ctrl-G 取消)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not make address-to-name translation: %s"
-msgstr "ftpfs: 无法创建套接字: %s"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: try reconnect to server, attempt %u"
-msgstr "ftpfs: 连接服务器失败: %s"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not get socket name: %s"
-msgstr "ftpfs: 无法创建套接字: %s"
+msgstr ""
 
-#, fuzzy
 msgid "ftpfs: could not reconnect to server"
-msgstr "ftpfs: 无法创建套接字: %s"
+msgstr ""
 
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: 无效的地址族"
@@ -4669,6 +4658,3 @@ msgstr "从头继续搜索?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "无法获取 /ftp://some.host/editme.txt 的本地副本"
-
-#~ msgid "Set expression for filtering filenames"
-#~ msgstr "设置过滤文件名的表达式"

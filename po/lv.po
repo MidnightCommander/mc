@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-23 20:23+0300\n"
+"Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2023-01-05 21:49+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
 "Language-Team: Latvian (http://www.transifex.com/mc/mc/language/lv/)\n"
@@ -2666,16 +2666,14 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(staļļots)"
 
-#, fuzzy
 msgid "Incomplete file was retrieved"
-msgstr "Tika saņemts nepilns fails. Paturēt to?"
+msgstr ""
 
 msgid "&Keep"
 msgstr "&Paturēt"
 
-#, fuzzy
 msgid "&Continue copy"
-msgstr "Tu&rpināt"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2875,9 +2873,8 @@ msgstr "&Koks"
 msgid "&Listing format..."
 msgstr ""
 
-#, fuzzy
 msgid "&Sort order..."
-msgstr "Kārtošanas secība"
+msgstr ""
 
 msgid "&Filter..."
 msgstr "&Filtrs..."
@@ -2891,9 +2888,8 @@ msgstr "FT&P saite..."
 msgid "S&hell link..."
 msgstr ""
 
-#, fuzzy
 msgid "SFTP li&nk..."
-msgstr "FT&P saite..."
+msgstr ""
 
 msgid "Paneli&ze"
 msgstr ""
@@ -4074,17 +4070,16 @@ msgstr ""
 msgid "ftpfs: could not make address-to-name translation: %s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: try reconnect to server, attempt %u"
-msgstr "ftpfs: savienojums ar serveri neizdevās: %s"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not get socket name: %s"
-msgstr "ftpfs: nevar uzstādīt pasīvo režīmu"
+msgstr ""
 
-#, fuzzy
 msgid "ftpfs: could not reconnect to server"
-msgstr "ftpfs: savienojums ar serveri neizdevās: %s"
+msgstr ""
 
 msgid "ftpfs: invalid address family"
 msgstr ""

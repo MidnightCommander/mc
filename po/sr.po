@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-23 20:23+0300\n"
+"Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2023-01-05 21:49+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
 "Language-Team: Serbian (http://www.transifex.com/mc/mc/language/sr/)\n"
@@ -17,8 +17,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -517,9 +517,8 @@ msgstr ""
 "Неочекивана грешка у функцији бирања података за читање из потпроцеса:\n"
 "%s"
 
-#, fuzzy
 msgid "Cannot close pipe descriptor (p == NULL)"
-msgstr "Не могу да направим описника спојке"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1196,9 +1195,8 @@ msgstr "Морате прво да изаберете блок текста"
 msgid "Run sort"
 msgstr "Покрени ређање"
 
-#, fuzzy
 msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
-msgstr "Унесите опције ређања (видите странице упутства) одвојене празнинама:"
+msgstr ""
 
 msgid "Sort"
 msgstr "Поређај"
@@ -2509,26 +2507,22 @@ msgstr ""
 msgid " %s%s file error"
 msgstr " %s%s грешка датотеке"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the %s%s file has changed with version 4.0. It seems that the "
 "installation has failed. Please fetch a fresh copy from the Midnight "
 "Commander package."
 msgstr ""
-"Запис датотеке „%smc.ext“ је измењен издањем 3.0. Изгледа да инсталација "
-"није успела. Набавите најновији примерак из пакета Поноћног наредника."
 
 #, c-format
 msgid "%s file error"
 msgstr "Грешка датотеке „%s“"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the %s file has changed with version 4.0. You may either want "
 "to copy it from %s%s or use that file as an example of how to write it."
 msgstr ""
-"Запис датотеке „%s“ је измењен издањем 3.0. Можда желите да је умножите из "
-"„%smc.ext“ или да користите ту датотеку као пример како је записати."
 
 msgid "DialogTitle|Copy"
 msgstr "Умножите"
@@ -2813,16 +2807,14 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(застој)"
 
-#, fuzzy
 msgid "Incomplete file was retrieved"
-msgstr "Датотека није у потпуности преузета. Да је задржим?"
+msgstr ""
 
 msgid "&Keep"
 msgstr "&Задржи"
 
-#, fuzzy
 msgid "&Continue copy"
-msgstr "&Настави"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2957,9 +2949,9 @@ msgstr "Датотека постоји"
 msgid "Background process: File exists"
 msgstr "Позадински процес: Датотека постоји"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Files processed: %zu / %zu"
-msgstr "Обрађене датотеке: %zu/%zu"
+msgstr ""
 
 #, c-format
 msgid "Files processed: %zu"
@@ -2985,9 +2977,9 @@ msgstr "Време: %s (%s)"
 msgid " Total: %s "
 msgstr " Укупно: %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid " Total: %s / %s "
-msgstr " Укупно: %s/%s "
+msgstr ""
 
 msgid "Source"
 msgstr "Извор"
@@ -3038,9 +3030,8 @@ msgstr "&Стабло"
 msgid "&Listing format..."
 msgstr ""
 
-#, fuzzy
 msgid "&Sort order..."
-msgstr "Редослед ређања"
+msgstr ""
 
 msgid "&Filter..."
 msgstr "&Пропусник..."
@@ -3054,9 +3045,8 @@ msgstr "&ФТП веза..."
 msgid "S&hell link..."
 msgstr "Веза &љуске..."
 
-#, fuzzy
 msgid "SFTP li&nk..."
-msgstr "&ФТП веза..."
+msgstr ""
 
 msgid "Paneli&ze"
 msgstr "Претвори &у окно"
@@ -3439,9 +3429,9 @@ msgstr "Слободних чворова:"
 msgid "No space information"
 msgstr "Нема података о простору"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Free space: %s / %s (%d%%)"
-msgstr "Слободан простор:  %s/%s (%d%%)"
+msgstr ""
 
 #, c-format
 msgid "Type:       %s"
@@ -4248,21 +4238,20 @@ msgstr "ftpfs: повезивање са сервером није успело:
 msgid "Waiting to retry... %d (Control-G to cancel)"
 msgstr "Чекам да бих поново покушао... %d (Ктрл-Г да откажете)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not make address-to-name translation: %s"
-msgstr "ftpfs: не могу да направим прикључницу: %s"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: try reconnect to server, attempt %u"
-msgstr "ftpfs: повезивање са сервером није успело: %s"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not get socket name: %s"
-msgstr "ftpfs: не могу да направим прикључницу: %s"
+msgstr ""
 
-#, fuzzy
 msgid "ftpfs: could not reconnect to server"
-msgstr "ftpfs: не могу да направим прикључницу: %s"
+msgstr ""
 
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: неисправна породица адресе"
@@ -4658,6 +4647,3 @@ msgstr "Да наставим са почетка?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не могу да довучем месни примерак „/ftp://some.host/editme.txt“"
-
-#~ msgid "Set expression for filtering filenames"
-#~ msgstr "Поставите израз за издвајање назива датотека"

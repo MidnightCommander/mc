@@ -15,8 +15,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-23 20:23+0300\n"
+"Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2023-01-05 21:49+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Simona Iacob <s@zp1.net>, 2021-2022\n"
 "Language-Team: Romanian (http://www.transifex.com/mc/mc/language/ro/)\n"
@@ -537,9 +537,8 @@ msgstr ""
 "Eroare neașteptată în select() se accesează datele dintr-un proces copil :\n"
 "%s"
 
-#, fuzzy
 msgid "Cannot close pipe descriptor (p == NULL)"
-msgstr "Nu pot crea descriptorul filtrului"
+msgstr "Nu se poate închide descriptorul de țeavă (p == NULL)"
 
 #, c-format
 msgid ""
@@ -1219,10 +1218,10 @@ msgstr "Mai întâi trebuie să evidențiezi un bloc de text"
 msgid "Run sort"
 msgstr "Rulează sortarea"
 
-#, fuzzy
 msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr ""
-"Introdu opțiunile de sortare (vezi pagina de manual) separate prin spațiu:"
+"Introduceți opțiunile de sortare (a se vedea pagina(1) de manual sort) "
+"separate prin spații albe:"
 
 msgid "Sort"
 msgstr "Sortare"
@@ -1639,7 +1638,7 @@ msgstr ""
 "creat pentru Midnight Commander."
 
 msgid "Copyright (C) 1996-2022 the Free Software Foundation"
-msgstr ""
+msgstr "Copyright (C) 1996-2022 Fundația pentru Software Liber"
 
 msgid "About"
 msgstr "Despre"
@@ -2534,31 +2533,36 @@ msgid ""
 "Midnight Commander now uses %s file.\n"
 "Please copy your modifications of the old file to the new one."
 msgstr ""
+"Aveți un fișier neactualizat %s.\n"
+"Midnight Commander folosește acum %s fișierul.\n"
+"Vă rugăm să copiați modificările din fișierul vechi în cel nou."
 
 #, c-format
 msgid " %s%s file error"
 msgstr " %s%s eroare fișier"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the %s%s file has changed with version 4.0. It seems that the "
 "installation has failed. Please fetch a fresh copy from the Midnight "
 "Commander package."
 msgstr ""
-"Formatul fișierului %smc.ext a fost schimbat în versiunea 3.0. Se pare că "
-"instalarea a eșuat. Te rog să obții o copie din pachetul Midnight Commander."
+"Formatul fișierului %s%s s-a schimbat odată cu versiunea 4.0. Se pare că "
+"instalarea a eșuat. Vă rugăm să obțineți o copie nouă din pachetul Midnight "
+"Commander."
 
 #, c-format
 msgid "%s file error"
 msgstr "%s eroare fișier"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the %s file has changed with version 4.0. You may either want "
 "to copy it from %s%s or use that file as an example of how to write it."
 msgstr ""
-"Formatul fișierului %s a fost schimbat în versiunea 3.0. Vei putea să îl "
-"copiezi din %smc.ext sau poți folosi acel fișier ca exemplu."
+"Formatul fișierului %s s-a schimbat odată cu versiunea 4.0. Este posibil să "
+"doriți să îl copiați de la%s%s sau să utilizați acest fișier ca exemplu de "
+"scriere."
 
 msgid "DialogTitle|Copy"
 msgstr "DialogTitle|Copiere"
@@ -2852,16 +2856,14 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(oprit)"
 
-#, fuzzy
 msgid "Incomplete file was retrieved"
-msgstr "Fișierul a fost transferat incomplet. Îl păstrez?"
+msgstr "A fost recuperat un fișier incomplet"
 
 msgid "&Keep"
 msgstr "&Păstrează"
 
-#, fuzzy
 msgid "&Continue copy"
-msgstr "C&ontinuă"
+msgstr "&Continuați să copiați"
 
 #, c-format
 msgid ""
@@ -2996,9 +2998,9 @@ msgstr "Fișierul există"
 msgid "Background process: File exists"
 msgstr "Sarcină în fundal: Fișierul există"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Files processed: %zu / %zu"
-msgstr "Fișiere procesate: %zu/%zu"
+msgstr "Fișiere prelucrate: %zu / %zu"
 
 #, c-format
 msgid "Files processed: %zu"
@@ -3024,9 +3026,9 @@ msgstr "Timp: %s (%s)"
 msgid " Total: %s "
 msgstr " Total: %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid " Total: %s / %s "
-msgstr " Total: %s/%s "
+msgstr " Total: %s / %s "
 
 msgid "Source"
 msgstr "Sursă"
@@ -3077,9 +3079,8 @@ msgstr "Arbore"
 msgid "&Listing format..."
 msgstr "formatul de  &listare "
 
-#, fuzzy
 msgid "&Sort order..."
-msgstr "S&ortează ordinea..."
+msgstr "&Ordinea de sortare..."
 
 msgid "&Filter..."
 msgstr "&Filtru..."
@@ -3093,9 +3094,8 @@ msgstr "Conectare FT&P..."
 msgid "S&hell link..."
 msgstr "Conectare s&hell..."
 
-#, fuzzy
 msgid "SFTP li&nk..."
-msgstr "&SFTP legătură..."
+msgstr "SFTP li&nk..."
 
 msgid "Paneli&ze"
 msgstr "Paneli&zare"
@@ -3478,9 +3478,9 @@ msgstr "Noduri libere:"
 msgid "No space information"
 msgstr "Nu există date despre spațiul folosit"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Free space: %s / %s (%d%%)"
-msgstr "Spațiu liber: %s/%s (%d%%)"
+msgstr "Spațiul liber: %s / %s (%d%%)"
 
 #, c-format
 msgid "Type:       %s"
@@ -4041,7 +4041,7 @@ msgstr "Construit cu ncursesw (versiune necunoscută)"
 
 #, c-format
 msgid "Built with libssh2 %d.%d.%d\n"
-msgstr ""
+msgstr "Construit cu libssh2 %d.%d.%d\n"
 
 msgid "Virtual File Systems:"
 msgstr "Sistem virtual de fișiere:"
@@ -4302,21 +4302,20 @@ msgstr "ftpfs: conectarea la server a eșuat: %s"
 msgid "Waiting to retry... %d (Control-G to cancel)"
 msgstr "Se reîncearcă... %d (Control-G pentru a renunța)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not make address-to-name translation: %s"
-msgstr "ftpfs: nu se poate crea socketul: %s"
+msgstr "ftpfs: nu a putut face traducerea de la adresă la nume: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: try reconnect to server, attempt %u"
-msgstr "ftpfs: conectarea la server a eșuat: %s"
+msgstr "ftpfs: încercați să vă reconectați la server, încercați %u"
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not get socket name: %s"
-msgstr "ftpfs: nu se poate crea socketul: %s"
+msgstr "ftpfs: nu a putut obține numele socket-ului: %s"
 
-#, fuzzy
 msgid "ftpfs: could not reconnect to server"
-msgstr "ftpfs: nu se poate crea socketul: %s"
+msgstr "ftpfs: nu s-a putut reconecta la server"
 
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: familie de adrese incorectă"
@@ -4731,6 +4730,3 @@ msgstr "Continuă de la început?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nu se poate aduce o copie locală a /ftp://some.host/editme.txt"
-
-#~ msgid "Set expression for filtering filenames"
-#~ msgstr "Folosește expresia pentru filtrarea numelor de fișiere"

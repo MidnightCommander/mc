@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-23 20:23+0300\n"
+"Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2023-01-05 21:49+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Martijn Dekker <mcdutchie@hotmail.com>, 2012,2017\n"
 "Language-Team: Interlingua (http://www.transifex.com/mc/mc/language/ia/)\n"
@@ -2688,9 +2688,8 @@ msgstr ""
 msgid "&Keep"
 msgstr ""
 
-#, fuzzy
 msgid "&Continue copy"
-msgstr "C&ontinuar"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2905,9 +2904,8 @@ msgstr "Ligamine FT&P..."
 msgid "S&hell link..."
 msgstr ""
 
-#, fuzzy
 msgid "SFTP li&nk..."
-msgstr "Ligamine FT&P..."
+msgstr ""
 
 msgid "Paneli&ze"
 msgstr ""
@@ -4062,21 +4060,20 @@ msgstr "ftpfs: le connexion al servitor falleva: %s"
 msgid "Waiting to retry... %d (Control-G to cancel)"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not make address-to-name translation: %s"
-msgstr "ftpfs: impossibile crear socket: %s"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: try reconnect to server, attempt %u"
-msgstr "ftpfs: le connexion al servitor falleva: %s"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not get socket name: %s"
-msgstr "ftpfs: impossibile crear socket: %s"
+msgstr ""
 
-#, fuzzy
 msgid "ftpfs: could not reconnect to server"
-msgstr "ftpfs: impossibile crear socket: %s"
+msgstr ""
 
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: familia de adresses invalide"

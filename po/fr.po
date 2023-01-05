@@ -12,24 +12,26 @@
 # Slava Zanko <slavazanko@gmail.com>, 2011
 # 4a14a73d523224463300dea5e0502458_3dab472, 2012
 # Towinet, 2017
+# Wallon Wallon, 2022
 # Yury V. Zaytsev <yury@shurup.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-23 20:23+0300\n"
+"Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2023-01-05 21:49+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: David Prudhomme <david7.prudhomme@gmail.com>, 2018,2021\n"
+"Last-Translator: Wallon Wallon, 2022\n"
 "Language-Team: French (http://www.transifex.com/mc/mc/language/fr/)\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % "
+"1000000 == 0 ? 1 : 2;\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
-msgstr "Avertissement: impossible de charger la liste des pages de code"
+msgstr "Avertissement : impossible de charger la liste des pages de code"
 
 msgid "7-bit ASCII"
 msgstr "ASCII 7 bits"
@@ -39,24 +41,24 @@ msgid "Cannot translate from %s to %s"
 msgstr "Ne peut convertir de %s vers %s"
 
 msgid "Event system already initialized"
-msgstr "Système d'évènement déjà initialisé"
+msgstr "Système d'événement déjà initialisé"
 
 msgid "Failed to initialize event system"
-msgstr "Echec de l'initialisation du système d'évènement"
+msgstr "Échec de l'initialisation du système d'événement"
 
 msgid "Event system not initialized"
-msgstr "Système d'évènement non initialisé"
+msgstr "Système d'événement non initialisé"
 
 msgid "Check input data! Some of parameters are NULL!"
-msgstr "Vérifiez les données d'entrée ! Certain paramètres sont NULL!"
+msgstr "Vérifiez les données d'entrée ! Certains paramètres sont NULL !"
 
 #, c-format
 msgid "Unable to create group '%s' for events!"
-msgstr "Impossible de créer le groupe « %s » pour les évènements !"
+msgstr "Impossible de créer le groupe « %s » pour les événements !"
 
 #, c-format
 msgid "Unable to create event '%s'!"
-msgstr "Impossible de créer l'évènement « %s » !"
+msgstr "Impossible de créer l'événement « %s » !"
 
 #, c-format
 msgid ""
@@ -82,7 +84,7 @@ msgid "Cannot create %s directory"
 msgstr "Ne peut créer le répertoire %s"
 
 msgid "FATAL: not a directory:"
-msgstr "FATAL: n'est pas un répertoire :"
+msgstr "FATAL : n'est pas un répertoire :"
 
 msgid ""
 "Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
@@ -106,7 +108,7 @@ msgstr ""
 "%s."
 
 msgid "Search string not found"
-msgstr " Chaîne non trouvée "
+msgstr "Chaîne de recherche introuvable"
 
 msgid "Not implemented yet"
 msgstr "Pas encore implémenté"
@@ -470,25 +472,31 @@ msgid "The TERM environment variable is unset!\n"
 msgstr "La variable d'environnement TERM n'est pas définie !\n"
 
 msgid "Cannot check SIGWINCH pipe"
-msgstr ""
+msgstr "Impossible de vérifier le tuyau SIGWINCH"
 
 #, c-format
 msgid ""
 "\n"
 "Cannot create pipe for SIGWINCH: %s (%d)\n"
 msgstr ""
+"\n"
+"Impossible de créer un tube pour SIGWINCH : %s (%d)\n"
 
 #, c-format
 msgid ""
 "\n"
 "Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
 msgstr ""
+"\n"
+"Impossible de configurer la fin d'écriture du tuyau SIGWINCH : %s (%d)\n"
 
 #, c-format
 msgid ""
 "\n"
 "Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
 msgstr ""
+"\n"
+"Impossible de configurer la fin de lecture du tuyau SIGWINCH : %s (%d)\n"
 
 #, c-format
 msgid ""
@@ -534,9 +542,8 @@ msgstr ""
 "fils :\n"
 "%s"
 
-#, fuzzy
 msgid "Cannot close pipe descriptor (p == NULL)"
-msgstr "Impossible de créer un descripteur de tube"
+msgstr "Impossible de fermer le descripteur de tube (p == NULL)"
 
 #, c-format
 msgid ""
@@ -1217,10 +1224,9 @@ msgstr "Vous devez d'abord sélectionner un bloc de texte"
 msgid "Run sort"
 msgstr " Lancer le tri"
 
-#, fuzzy
 msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr ""
-" Saisissez les options de tri (cf page de manuel) séparées par des espaces :"
+"Entrer les options de tri (voir manpage sort(1)) séparées par des espaces :"
 
 msgid "Sort"
 msgstr " Trier"
@@ -1637,7 +1643,7 @@ msgstr ""
 "écrit pour Midnight Commander."
 
 msgid "Copyright (C) 1996-2022 the Free Software Foundation"
-msgstr ""
+msgstr "Copyright (C) 1996-2022 la Free Software Foundation"
 
 msgid "About"
 msgstr "À propos"
@@ -1802,6 +1808,8 @@ msgid ""
 "Not an xterm or Linux console;\n"
 "the subshell cannot be toggled."
 msgstr ""
+"Pas un xterm ou une console Linux ;\n"
+"le sous-shell ne peut pas être commuté."
 
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Tapez « exit » pour retourner à Midnight Commander"
@@ -1956,7 +1964,7 @@ msgid "Skin:"
 msgstr "Thème :"
 
 msgid "&Shadows"
-msgstr ""
+msgstr "Ombre&s"
 
 msgid "Appearance"
 msgstr "Apparence"
@@ -2177,79 +2185,79 @@ msgstr ""
 "%s"
 
 msgid "Secure deletion"
-msgstr ""
+msgstr "Suppression sécurisée"
 
 msgid "Undelete"
-msgstr ""
+msgstr "Annuler la suppression"
 
 msgid "Synchronous updates"
-msgstr ""
+msgstr "Mises à jour synchrones"
 
 msgid "Synchronous directory updates"
-msgstr ""
+msgstr "Mises à jour synchrones du répertoire"
 
 msgid "Immutable"
-msgstr ""
+msgstr "Immuable"
 
 msgid "Append only"
-msgstr ""
+msgstr "Ajout uniquement"
 
 msgid "No dump"
-msgstr ""
+msgstr "Pas pour dump"
 
 msgid "No update atime"
-msgstr ""
+msgstr "Pas de mise à jour atime"
 
 msgid "Compress"
-msgstr ""
+msgstr "Compresser"
 
 msgid "Compressed clusters"
-msgstr ""
+msgstr "Clusters compressés"
 
 msgid "Compressed dirty file"
-msgstr ""
+msgstr "Dirty file compressé"
 
 msgid "Compression raw access"
-msgstr ""
+msgstr "Compression raw access"
 
 msgid "Encrypted inode"
-msgstr ""
+msgstr "Inode crypté"
 
 msgid "Journaled data"
-msgstr ""
+msgstr "Données journalisées"
 
 msgid "Indexed directory"
-msgstr ""
+msgstr "Répertoire indexé"
 
 msgid "No tail merging"
-msgstr ""
+msgstr "Pas de fusion des fins de fichiers"
 
 msgid "Top of directory hierarchies"
-msgstr ""
+msgstr "Répertoire racine"
 
 msgid "Inode uses extents"
-msgstr ""
+msgstr "Inode utilise des formats étendus"
 
 msgid "Huge_file"
-msgstr ""
+msgstr "Gros_fichier"
 
 msgid "No COW"
-msgstr ""
+msgstr "Pas de COW - dirty copy-on-write -"
 
 msgid "Direct access for files"
-msgstr ""
+msgstr "Accès direct aux fichiers"
 
 msgid "Casefolded file"
-msgstr ""
+msgstr "Fichier \"casefoldé\""
 
 msgid "Inode has inline data"
-msgstr ""
+msgstr "Inode a des données \"inline\""
 
 msgid "Project hierarchy"
-msgstr ""
+msgstr "Hiérarchie du projet"
 
 msgid "Verity protected inode"
-msgstr ""
+msgstr "Inode protégé par Verity"
 
 msgid "&Marked all"
 msgstr "Tous &Marqués"
@@ -2261,22 +2269,27 @@ msgid "C&lear marked"
 msgstr "&Supprimer les marqués"
 
 msgid "Chattr command"
-msgstr ""
+msgstr "Commande chattr"
 
 #, c-format
 msgid ""
 "Cannot chattr \"%s\"\n"
 "%s"
 msgstr ""
+"Chattr impossible \"%s\"\n"
+"%s"
 
 msgid "Cannot change attributes on non-local filesystems"
 msgstr ""
+"Impossible de modifier les attributs sur les systèmes de fichiers non locaux"
 
 #, c-format
 msgid ""
 "Cannot get flags of \"%s\"\n"
 "%s"
 msgstr ""
+"Impossible d'obtenir les drapeaux de \"%s\"\n"
+"%s"
 
 msgid "set &user ID on execution"
 msgstr "définir l'ID &utilisateur à l'exécution"
@@ -2526,32 +2539,36 @@ msgid ""
 "Midnight Commander now uses %s file.\n"
 "Please copy your modifications of the old file to the new one."
 msgstr ""
+"Vous avez un fichier %s obsolète.\n"
+"Midnight Commander utilise maintenant le fichier %s.\n"
+"Veuillez copier vos modifications de l'ancien fichier vers le nouveau."
 
 #, c-format
 msgid " %s%s file error"
 msgstr "%s%s erreur de fichier"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the %s%s file has changed with version 4.0. It seems that the "
 "installation has failed. Please fetch a fresh copy from the Midnight "
 "Commander package."
 msgstr ""
-"Le format du fichier %smc.ext a été changé avec la version 3.0. Il semble "
-"que l'installation ait échouée. Veullez mettre à jour Midnight Commander."
+"Le format du fichier %s%s a changé avec la version 4.0. Il semble que "
+"l'installation ait échoué. Veuillez récupérer une nouvelle copie à partir du "
+"paquet Midnight Commander."
 
 #, c-format
 msgid "%s file error"
 msgstr "%s erreurs fichier"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the %s file has changed with version 4.0. You may either want "
 "to copy it from %s%s or use that file as an example of how to write it."
 msgstr ""
-"Le format du fichier %s a été changé avec la version 3.0. Vous voulez "
-"probablement une copie de %smc.ext ou utiliser le fichier comme exemple "
-"d'édition."
+"Le format du fichier %s a changé avec la version 4.0. Vous pouvez soit le "
+"copier à partir de %s%s, soit utiliser ce fichier à titre d'exemple pour "
+"savoir comment il faut l'écrire."
 
 msgid "DialogTitle|Copy"
 msgstr "TitreDialog|Copie"
@@ -2600,16 +2617,21 @@ msgid ""
 "Cannot stat hardlink source file \"%s\"\n"
 "%s"
 msgstr ""
+"Impossible de statuer sur le fichier source de la liaison physique "
+"\"hardlink\" \"%s\"\n"
+"%s"
 
 #, c-format
 msgid ""
 "Cannot create target hardlink \"%s\"\n"
 "%s"
 msgstr ""
+"Impossible de créer un lien physique \"hardlink\" cible \"%s\"\n"
+"%s"
 
 #, c-format
 msgid "Cannot create target hardlink \"%s\""
-msgstr ""
+msgstr "Impossible de créer un lien physique \"hardlink\" cible \"%s\""
 
 #, c-format
 msgid ""
@@ -2625,8 +2647,8 @@ msgid ""
 "Option Stable Symlinks will be disabled"
 msgstr ""
 "Impossible de réaliser des liens symboliques stables entre systèmes de "
-"fichiers non-locaux : désactivation de l'option \"Liens symboliques stables"
-"\"."
+"fichiers non-locaux : désactivation de l'option \"Liens symboliques "
+"stables\"."
 
 #, c-format
 msgid ""
@@ -2841,16 +2863,14 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(au point mort)"
 
-#, fuzzy
 msgid "Incomplete file was retrieved"
-msgstr "Le fichier récupéré est incomplet. Le conserver quand même ?"
+msgstr "Un fichier incomplet a été récupéré"
 
 msgid "&Keep"
 msgstr "C&onserver"
 
-#, fuzzy
 msgid "&Continue copy"
-msgstr "C&ontinuer"
+msgstr "&Continuer à copier"
 
 #, c-format
 msgid ""
@@ -2968,7 +2988,7 @@ msgid "Overwrite all files?"
 msgstr "Écraser tous les fichiers ?"
 
 msgid "Don't overwrite with &zero length file"
-msgstr ""
+msgstr "Ne pas écraser avec le fichier de longueur &zero"
 
 msgid "&Older"
 msgstr "Plus ancien"
@@ -2985,9 +3005,9 @@ msgstr "Le fichier existe"
 msgid "Background process: File exists"
 msgstr "Tâche de fond : le fichier existe"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Files processed: %zu / %zu"
-msgstr "Fichiers traités: %zu/%zu"
+msgstr "Fichiers traités : %zu / %zu"
 
 #, c-format
 msgid "Files processed: %zu"
@@ -3013,9 +3033,9 @@ msgstr "Heure: %s (%s)"
 msgid " Total: %s "
 msgstr "Total : %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid " Total: %s / %s "
-msgstr "Total : %s/%s"
+msgstr " Total : %s / %s "
 
 msgid "Source"
 msgstr "Source"
@@ -3066,9 +3086,8 @@ msgstr "&Arborescence"
 msgid "&Listing format..."
 msgstr "Format de &Listing ..."
 
-#, fuzzy
 msgid "&Sort order..."
-msgstr "Ordre de tri"
+msgstr "&Ordre de tri..."
 
 msgid "&Filter..."
 msgstr "&Filtre..."
@@ -3082,9 +3101,8 @@ msgstr "Lien &FTP..."
 msgid "S&hell link..."
 msgstr "Lien S&hell..."
 
-#, fuzzy
 msgid "SFTP li&nk..."
-msgstr "Lien &FTP..."
+msgstr "SFTP lie&n..."
 
 msgid "Paneli&ze"
 msgstr "Mise en &panneaux"
@@ -3126,7 +3144,7 @@ msgid "&Advanced chown"
 msgstr "Chown &avancé"
 
 msgid "Cha&ttr"
-msgstr ""
+msgstr "Cha&ttr"
 
 msgid "&Rename/Move"
 msgstr "&Renommer/Déplacer"
@@ -3238,6 +3256,7 @@ msgid "You have %zu opened screen. Quit anyway?"
 msgid_plural "You have %zu opened screens. Quit anyway?"
 msgstr[0] "Il y a %zu fenêtre d'ouverte. Quitter ?"
 msgstr[1] "Il y a %zu fenêtres ouvertes. Quitter ?"
+msgstr[2] "Il y a %zu fenêtres ouvertes. Quitter ?"
 
 msgid "The Midnight Commander"
 msgstr "Midnight Commander"
@@ -3298,7 +3317,7 @@ msgid "&Find recursively"
 msgstr "&Recherche récursive"
 
 msgid "Follow s&ymlinks"
-msgstr ""
+msgstr "Suivre les liens s&ymboliques"
 
 msgid "S&kip hidden"
 msgstr "Ignorer les &cachés"
@@ -3339,14 +3358,15 @@ msgid "Finished (ignored %zu directory)"
 msgid_plural "Finished (ignored %zu directories)"
 msgstr[0] "Terminé (%zu répertoire ignoré)"
 msgstr[1] "Terminé (%zu répertoires ignorés)"
+msgstr[2] "Terminé (%zu répertoires ignorés)"
 
 #, c-format
 msgid "Find File: \"%s\". Content: \"%s\""
-msgstr ""
+msgstr "Chercher un fichier : \"%s\". Contenant : \"%s\""
 
 #, c-format
 msgid "Find File: \"%s\""
-msgstr ""
+msgstr "Chercher un fichier : \"%s\""
 
 msgid "Searching"
 msgstr "Recherche en cours"
@@ -3465,9 +3485,9 @@ msgstr "I-noeuds libres :"
 msgid "No space information"
 msgstr "Pas d'information sur l'espace disponible"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Free space: %s / %s (%d%%)"
-msgstr "Espace libre: %s/%s (%d%%)"
+msgstr "Espace libre : %s / %s (%d%%)"
 
 #, c-format
 msgid "Type:       %s"
@@ -3510,6 +3530,7 @@ msgid " (%lu block)"
 msgid_plural " (%lu blocks)"
 msgstr[0] "(%lu bloc)"
 msgstr[1] "(%lu blocs)"
+msgstr[2] "(%lu blocs)"
 
 #, c-format
 msgid "Owner:      %s/%s"
@@ -3692,6 +3713,7 @@ msgid "%s in %d file"
 msgid_plural "%s in %d files"
 msgstr[0] " %s octets dans %d fichier"
 msgstr[1] "%s dans %d fichiers"
+msgstr[2] "%s dans %d fichiers"
 
 msgid "Panelize"
 msgstr "Mettre en panneau"
@@ -3748,6 +3770,8 @@ msgid ""
 "External panelize:\n"
 "%s"
 msgstr ""
+"Panneau externe :\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -3755,6 +3779,9 @@ msgid ""
 "failed to read data from child stdout:\n"
 "%s"
 msgstr ""
+"Panneau externe :\n"
+"échec de la lecture des données du \"stdout\" enfant :\n"
+"%s"
 
 msgid "Cannot run external panelize in a non-local directory"
 msgstr "Impossible d'exécuter le panneau externe dans un répertoire non local"
@@ -3920,6 +3947,9 @@ msgid ""
 "is already running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""
+"GNU Midnight Commander\n"
+"est déjà lancé sur ce terminal.\n"
+"Le support du sous-shell sera désactivé."
 
 #, c-format
 msgid ""
@@ -3963,37 +3993,37 @@ msgid "Warning: Cannot change to %s.\n"
 msgstr "Attention : ne peut aller à %s.\n"
 
 msgid "With builtin Editor and Aspell support"
-msgstr ""
+msgstr "Avec un éditeur intégré et un support Aspell"
 
 msgid "With builtin Editor"
-msgstr ""
+msgstr "Avec l'éditeur intégré"
 
 msgid "With optional subshell support"
-msgstr ""
+msgstr "Avec prise en charge optionnelle du sous-shell"
 
 msgid "With subshell support as default"
-msgstr ""
+msgstr "Avec prise en charge du sous-shell par défaut"
 
 msgid "With support for background operations"
-msgstr ""
+msgstr "Avec prise en charge des opérations en arrière-plan"
 
 msgid "With mouse support on xterm and Linux console"
-msgstr ""
+msgstr "Avec prise en charge de la souris sur xterm et la console Linux"
 
 msgid "With mouse support on xterm"
-msgstr ""
+msgstr "Avec prise en charge de la souris sur xterm"
 
 msgid "With support for X11 events"
-msgstr ""
+msgstr "Avec prise en charge des événements X11"
 
 msgid "With internationalization support"
-msgstr ""
+msgstr "Avec prise en charge de l'internationalisation"
 
 msgid "With multiple codepages support"
-msgstr ""
+msgstr "Avec prise en charge de plusieurs codepages"
 
 msgid "With ext2fs attributes support"
-msgstr ""
+msgstr "Avec la prise en charge des attributs ext2fs"
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"
@@ -4001,25 +4031,25 @@ msgstr "Compilé avec GLib %d.%d.%d\n"
 
 #, c-format
 msgid "Built with S-Lang %s with terminfo database\n"
-msgstr ""
+msgstr "Construit avec S-Lang %s avec la base de données terminfo\n"
 
 #, c-format
 msgid "Built with ncurses %s\n"
-msgstr ""
+msgstr "Construit avec ncurses %s\n"
 
 msgid "Built with ncurses (unknown version)"
-msgstr ""
+msgstr "Construit avec ncurses (version inconnue)"
 
 #, c-format
 msgid "Built with ncursesw %s\n"
-msgstr ""
+msgstr "Construit avec ncursesw %s\n"
 
 msgid "Built with ncursesw (unknown version)"
-msgstr ""
+msgstr "Construit avec ncursesw (version inconnue)"
 
 #, c-format
 msgid "Built with libssh2 %d.%d.%d\n"
-msgstr ""
+msgstr "Construit avec libssh2 %d.%d.%d\n"
 
 msgid "Virtual File Systems:"
 msgstr "Systèmes des fichiers virtuels :"
@@ -4154,12 +4184,17 @@ msgid ""
 "%s:\n"
 "%s"
 msgstr ""
+"Impossible d'ouvrir l'archive %s\n"
+"%s :\n"
+"%s"
 
 #, c-format
 msgid ""
 "EXTFS virtual file system:\n"
 "%s"
 msgstr ""
+"Système de fichiers virtuel EXTFS :\n"
+"%s"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4277,21 +4312,20 @@ msgstr "ftpfs : connexion au serveur échouée: %s"
 msgid "Waiting to retry... %d (Control-G to cancel)"
 msgstr "Attente avant de réessayer... %d (Control-G pour annuler)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not make address-to-name translation: %s"
-msgstr "ftpfs : impossible de créer la socket : %s"
+msgstr "ftpfs : impossible de faire la conversion address-to-name : %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: try reconnect to server, attempt %u"
-msgstr "ftpfs : connexion au serveur échouée: %s"
+msgstr "ftpfs : essaye de se reconnecter au serveur, tentative %u"
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not get socket name: %s"
-msgstr "ftpfs : impossible de créer la socket : %s"
+msgstr "ftpfs : impossible d'obtenir le nom du socket : %s"
 
-#, fuzzy
 msgid "ftpfs: could not reconnect to server"
-msgstr "ftpfs : impossible de créer la socket : %s"
+msgstr "ftpfs : impossible de se reconnecter au serveur"
 
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs : type de famille d'adresse incorrecte"
@@ -4350,6 +4384,8 @@ msgid ""
 "SFS virtual file system:\n"
 "%s"
 msgstr ""
+"Système de fichiers virtuel SFS :\n"
+"%s"
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4387,6 +4423,8 @@ msgstr "sftp : %s"
 
 msgid "sftp: failed to convert remote host IP address into text form"
 msgstr ""
+"sftp : échec de la conversion de l'adresse IP de l'hôte distant en format "
+"texte"
 
 #, c-format
 msgid "sftp: making connection to %s"
@@ -4400,10 +4438,10 @@ msgid "sftp: connection to server failed: %s"
 msgstr "sftp : connexion au serveur échouée : %s"
 
 msgid "sftp: found host key of unsupported type: RSA1"
-msgstr ""
+msgstr "sftp : clé hôte trouvée de type non supporté : RSA1"
 
 msgid "sftp: unknown host key type:"
-msgstr ""
+msgstr "sftp : type de clé d'hôte inconnu :"
 
 #, c-format
 msgid ""
@@ -4411,15 +4449,22 @@ msgid ""
 "%s (%s)\n"
 "to the list of known hosts."
 msgstr ""
+"Ajout définitif de\n"
+"%s (%s)\n"
+"à la liste des hôtes connus."
 
 msgid "sftp: cannot get the remote host key"
-msgstr ""
+msgstr "sftp : impossible d'obtenir la clé de l'hôte distant"
 
 msgid "sftp: unsupported key type, can't check remote host key"
 msgstr ""
+"sftp : type de clé non pris en charge, impossible de vérifier la clé de "
+"l'hôte distant"
 
 msgid "sftp: can't compute host key fingerprint hash"
 msgstr ""
+"sftp : Impossible de calculer l'empreinte numérique \"hash\" de la clé de "
+"l'hôte"
 
 #, c-format
 msgid ""
@@ -4430,6 +4475,13 @@ msgid ""
 "SHA1:%s.\n"
 "Do you want to add it to the list of known hosts and continue connecting?"
 msgstr ""
+"L'authenticité de l'hôte\n"
+"%s (%s)\n"
+"ne peut pas être établie !\n"
+"L'emprunte numérique \"hash\" de la clé %s est\n"
+"SHA1:%s.\n"
+"Voulez-vous l'ajouter à la liste des hôtes connus et continuer à vous "
+"connecter ?"
 
 #, c-format
 msgid ""
@@ -4439,9 +4491,14 @@ msgid ""
 "Are you sure you want to add it to the list of known hosts and continue "
 "connecting?"
 msgstr ""
+"%s (%s)\n"
+"se trouve dans la liste des hôtes connus mais les CLES NE\n"
+"CORRESPONDENT PAS ! CELA POURRAIT ÊTRE UNE ATTAQUE MITM !\n"
+"Voulez-vous vraiment l'ajouter à la liste des hôtes connus et continuer à "
+"vous connecter ?"
 
 msgid "sftp: host key verification failed"
-msgstr ""
+msgstr "sftp : échec de la vérification de la clé de l'hôte"
 
 #, c-format
 msgid "sftp: Enter passphrase for %s "
@@ -4458,7 +4515,7 @@ msgid "sftp: Password is empty."
 msgstr "sftp : mot de passe vide"
 
 msgid "sftp: failure establishing SSH session"
-msgstr ""
+msgstr "sftp : échec de l'établissement de la session SSH"
 
 msgid "sftp: No file handler data present for reading file"
 msgstr ""
@@ -4688,6 +4745,3 @@ msgstr "Continuer à partir du début ?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Impossible de récupérer localement le fichier /ftp://some.host/editme.txt"
-
-#~ msgid "Set expression for filtering filenames"
-#~ msgstr " Expression pour filtrer les noms des fichiers"

@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-23 20:23+0300\n"
+"Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2023-01-05 21:49+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
 "Language-Team: Vietnamese (http://www.transifex.com/mc/mc/language/vi/)\n"
@@ -2664,16 +2664,14 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(bị nhốt)"
 
-#, fuzzy
 msgid "Incomplete file was retrieved"
-msgstr "Nhận được tập tin không đầy đủ. Giữ tập tin?"
+msgstr ""
 
 msgid "&Keep"
 msgstr "&Giữ"
 
-#, fuzzy
 msgid "&Continue copy"
-msgstr "&Tiếp tục"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2873,9 +2871,8 @@ msgstr "&Cây thư mục"
 msgid "&Listing format..."
 msgstr ""
 
-#, fuzzy
 msgid "&Sort order..."
-msgstr "Thứ tự sắp xếp"
+msgstr ""
 
 msgid "&Filter..."
 msgstr "&Lọc tập tin..."
@@ -2889,9 +2886,8 @@ msgstr "kết nối &FTP..."
 msgid "S&hell link..."
 msgstr "kết nối &Shell..."
 
-#, fuzzy
 msgid "SFTP li&nk..."
-msgstr "kết nối &FTP..."
+msgstr ""
 
 msgid "Paneli&ze"
 msgstr ""
@@ -4063,17 +4059,16 @@ msgstr ""
 msgid "ftpfs: could not make address-to-name translation: %s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: try reconnect to server, attempt %u"
-msgstr "ftpfs: kết nối tới máy chủ không thành công: %s"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not get socket name: %s"
-msgstr "ftpfs: không đặt được chế độ bị động (passive)"
+msgstr ""
 
-#, fuzzy
 msgid "ftpfs: could not reconnect to server"
-msgstr "ftpfs: kết nối tới máy chủ không thành công: %s"
+msgstr ""
 
 msgid "ftpfs: invalid address family"
 msgstr ""

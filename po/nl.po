@@ -13,8 +13,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-23 20:23+0300\n"
+"Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2023-01-05 21:49+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Richard E. van der Luit <nippur@fedoraproject.org>, "
 "2012-2015,2017,2020\n"
@@ -534,9 +534,8 @@ msgstr ""
 "Onverwachte fout in select() reading data van een child process:\n"
 "%s"
 
-#, fuzzy
 msgid "Cannot close pipe descriptor (p == NULL)"
-msgstr "Aanmaken van pipe discriptor mislukt"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1210,9 +1209,8 @@ msgstr "U moet eerst een blok selecteren"
 msgid "Run sort"
 msgstr "Sorteren"
 
-#, fuzzy
 msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
-msgstr "Geef sorteeropties (zie 'man'-pagina) gescheiden door spaties:"
+msgstr ""
 
 msgid "Sort"
 msgstr "Sorteren"
@@ -2530,28 +2528,22 @@ msgstr ""
 msgid " %s%s file error"
 msgstr " %s%s bestandsfout "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the %s%s file has changed with version 4.0. It seems that the "
 "installation has failed. Please fetch a fresh copy from the Midnight "
 "Commander package."
 msgstr ""
-"Het formaat van het %smc.ext bestand is veranderd met versie 3.0. De "
-"installatie lijkt mislukt. Haal een nieuwe versie van het Midnight Commander-"
-"pakket op."
 
 #, c-format
 msgid "%s file error"
 msgstr "%s bestandsfout"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the %s file has changed with version 4.0. You may either want "
 "to copy it from %s%s or use that file as an example of how to write it."
 msgstr ""
-"De format van het %s bestand is veranderd met versie 3.0. U kunt de format "
-"bekijken in %smc.ext of dat bestand zelf gebruiken als voorbeeld van hoe u "
-"het nu moet schrijven."
 
 msgid "DialogTitle|Copy"
 msgstr "Kopiëren"
@@ -2846,16 +2838,14 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(geblokkeerd)"
 
-#, fuzzy
 msgid "Incomplete file was retrieved"
-msgstr "Onvolledige bestand opgehaald. Wilt u het behouden?"
+msgstr ""
 
 msgid "&Keep"
 msgstr "&Behouden"
 
-#, fuzzy
 msgid "&Continue copy"
-msgstr "D&oorgaan"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2990,9 +2980,9 @@ msgstr "Bestand bestaat"
 msgid "Background process: File exists"
 msgstr "Achtergrond proces: Bestand bestaat"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Files processed: %zu / %zu"
-msgstr "Verwerkte bestanden: %zu van %zu"
+msgstr ""
 
 #, c-format
 msgid "Files processed: %zu"
@@ -3018,9 +3008,9 @@ msgstr "Tijd: %s (%s)"
 msgid " Total: %s "
 msgstr " Totaal: %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid " Total: %s / %s "
-msgstr " Totaal: %s/%s "
+msgstr ""
 
 msgid "Source"
 msgstr "Bron"
@@ -3071,9 +3061,8 @@ msgstr "&Boom"
 msgid "&Listing format..."
 msgstr "&Lijstformaat..."
 
-#, fuzzy
 msgid "&Sort order..."
-msgstr "Sortering"
+msgstr ""
 
 msgid "&Filter..."
 msgstr "&Filter...              "
@@ -3087,9 +3076,8 @@ msgstr "FT&P-Verbinding...      "
 msgid "S&hell link..."
 msgstr "S&hellverbinding...    "
 
-#, fuzzy
 msgid "SFTP li&nk..."
-msgstr "FT&P-Verbinding...      "
+msgstr ""
 
 msgid "Paneli&ze"
 msgstr "Als vens&ter"
@@ -3470,9 +3458,9 @@ msgstr "Vrije nodes:"
 msgid "No space information"
 msgstr "Geen informatie over schijfruimte"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Free space: %s / %s (%d%%)"
-msgstr "Vrij ruimte: %s/%s (%d%%)"
+msgstr ""
 
 #, c-format
 msgid "Type:       %s"
@@ -4283,21 +4271,20 @@ msgstr "ftpfs: verbinding met server mislukt: %s"
 msgid "Waiting to retry... %d (Control-G to cancel)"
 msgstr "Aan het wachten op nieuwe poging... %d (Control-C om af te breken)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not make address-to-name translation: %s"
-msgstr "ftpfs: Kan socket niet creëren: %s"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: try reconnect to server, attempt %u"
-msgstr "ftpfs: verbinding met server mislukt: %s"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not get socket name: %s"
-msgstr "ftpfs: Kan socket niet creëren: %s"
+msgstr ""
 
-#, fuzzy
 msgid "ftpfs: could not reconnect to server"
-msgstr "ftpfs: Kan socket niet creëren: %s"
+msgstr ""
 
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: Ongeldige adres familie"
@@ -4683,6 +4670,3 @@ msgstr "Doorgaan vanaf het begin?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan geen lokale versie van /ftp://some.host/editme.txt ophalen"
-
-#~ msgid "Set expression for filtering filenames"
-#~ msgstr " Zet expressie voor het filteren van bestandsnamen"

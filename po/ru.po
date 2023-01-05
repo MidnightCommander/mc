@@ -3,35 +3,42 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# Alex Tkachenko <alex@bcs.zp.ua>, 1998
-# Andrew V. Samoilov <sav@bcs.zp.ua>, 1999, 2014
-# Evgeny Bulgakov <bgav@netvision.net.il>, 1999
-# Sergey Panov <sipan@mit.edu>, 1999
-# Valek Filippov <frob@df.ru>, 2000
-# Anton Sergeevich Chumak <nightfast@yahoo.co.uk>, 2005
-# Andrew Borodin <aborodin@vmail.ru>, 2009-2012
-# Ilia Maslakov <il.smind@gmail.com>, 2009
-# Slava Zanko <slavazanko@gmail.com>, 2009, 2011
-# NaiLi (aka jamesjames) Rootaerc <theism@mail.ru>, 2012
+# Andrew Borodin <aborodin@vmail.ru>, 2011
 # AlexL <loginov.alex.valer@gmail.com>, 2015-2020
+# Alex Tkachenko <alex@bcs.zp.ua>, 1998
+# and Alex Tkachenko <alex@bcs.zp.ua>, 1998
+# Andrei Stepanov, 2023
+# Andrew Borodin <aborodin@vmail.ru>, 2009-2012
+# Andrew V. Samoilov <sav@bcs.zp.ua>, 1999,2014
+# Anton Sergeevich Chumak <nightfast@yahoo.co.uk>, 2005
 # Dimitriy Ryazantcev <DJm00n@mail.ru>, 2015
-# Simple88, 2016
+# Evgeny Bulgakov <bgav@netvision.net.il>, 1999
+# Ilia Maslakov <il.smind@gmail.com>, 2009
+# Mr GreyWolf, 2016
+# Mr.GreyWolf, 2016
+# NaiLi (aka jamesjames) Rootaerc <theism@mail.ru>, 2012
+# Pavel Suravezhkin, 2022
 # Piotr Drąg <piotrdrag@gmail.com>, 2018
+# Sergey Panov <sipan@mit.edu>, 1999
+# Simple88, 2016
+# Simple88, 2016
+# Slava Zanko <slavazanko@gmail.com>, 2009,2011
+# Valek Filippov <frob@df.ru>, 2000
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-23 20:23+0300\n"
+"Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2023-01-05 21:49+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>, 2018\n"
+"Last-Translator: Andrei Stepanov, 2023\n"
 "Language-Team: Russian (http://www.transifex.com/mc/mc/language/ru/)\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
-"%100>=11 && n%100<=14)? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -547,7 +554,7 @@ msgstr ""
 "%s"
 
 msgid "Cannot close pipe descriptor (p == NULL)"
-msgstr "Не удалось закрыть дескриптор канала (p == NULL)"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1231,7 +1238,7 @@ msgid "Run sort"
 msgstr "Выполнить сортировку"
 
 msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
-msgstr "Введите параметры сортировки (man sort(1)), разделённые пробелами:"
+msgstr "Введите параметры сортировки (см. man sort(1)), разделённые пробелами:"
 
 msgid "Sort"
 msgstr "Сортировка"
@@ -1813,8 +1820,8 @@ msgid ""
 "Not an xterm or Linux console;\n"
 "the subshell cannot be toggled."
 msgstr ""
-"Это не xterm и не консоль Linux;\n"
-"панели не могут быть отключены."
+"Это не консоль xterm или Linux;\n"
+"подоболочка не может быть переключена."
 
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Введите exit для возврата в Midnight Commander"
@@ -2190,79 +2197,79 @@ msgstr ""
 "%s"
 
 msgid "Secure deletion"
-msgstr ""
+msgstr "Надёжное удаление"
 
 msgid "Undelete"
-msgstr ""
+msgstr "Восстановить"
 
 msgid "Synchronous updates"
-msgstr ""
+msgstr "Синхронные обновления"
 
 msgid "Synchronous directory updates"
-msgstr ""
+msgstr "Синхронные обновления каталога"
 
 msgid "Immutable"
-msgstr ""
+msgstr "Неизменный"
 
 msgid "Append only"
-msgstr ""
+msgstr "Только добавить"
 
 msgid "No dump"
-msgstr ""
+msgstr "Дампа нет"
 
 msgid "No update atime"
-msgstr ""
+msgstr "Без обновления atime"
 
 msgid "Compress"
-msgstr ""
+msgstr "Сжатие"
 
 msgid "Compressed clusters"
-msgstr ""
+msgstr "Сжатые кластеры"
 
 msgid "Compressed dirty file"
-msgstr ""
+msgstr "Сжатый несохранённый файл"
 
 msgid "Compression raw access"
-msgstr ""
+msgstr "Сжатие необработанного доступа"
 
 msgid "Encrypted inode"
-msgstr ""
+msgstr "Зашифрованный inode"
 
 msgid "Journaled data"
-msgstr ""
+msgstr "Добавленные в журнал данные"
 
 msgid "Indexed directory"
-msgstr ""
+msgstr "Проиндексированный каталог"
 
 msgid "No tail merging"
-msgstr ""
+msgstr "Без слияния в конец"
 
 msgid "Top of directory hierarchies"
-msgstr ""
+msgstr "Верх иерархии каталога"
 
 msgid "Inode uses extents"
-msgstr ""
+msgstr "Inode использует экстенты"
 
 msgid "Huge_file"
-msgstr ""
+msgstr "Огромный_файл"
 
 msgid "No COW"
-msgstr ""
+msgstr "Без COW"
 
 msgid "Direct access for files"
-msgstr ""
+msgstr "Прямой доступ для файлов"
 
 msgid "Casefolded file"
-msgstr ""
+msgstr "Файл с игнорированием регистра"
 
 msgid "Inode has inline data"
-msgstr ""
+msgstr "Inode имеет встроенные данные"
 
 msgid "Project hierarchy"
-msgstr ""
+msgstr "Иерархия проекта"
 
 msgid "Verity protected inode"
-msgstr ""
+msgstr "Истинность защищённого inode"
 
 msgid "&Marked all"
 msgstr "Отметить вс&ё"
@@ -2292,6 +2299,8 @@ msgid ""
 "Cannot get flags of \"%s\"\n"
 "%s"
 msgstr ""
+"Невозможно получить флаги \"%s\"\n"
+"%s"
 
 msgid "set &user ID on execution"
 msgstr "присв. &UID при выполнении"
@@ -2546,26 +2555,22 @@ msgstr ""
 msgid " %s%s file error"
 msgstr "ошибка файла %s%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the %s%s file has changed with version 4.0. It seems that the "
 "installation has failed. Please fetch a fresh copy from the Midnight "
 "Commander package."
 msgstr ""
-"Формат %smc.ext изменён с версии 3.0. Возможно, произошёл сбой при "
-"установке. Пожалуйста, возьмите свежую копию из пакета Midnight Commander."
 
 #, c-format
 msgid "%s file error"
 msgstr "ошибка файла %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the %s file has changed with version 4.0. You may either want "
 "to copy it from %s%s or use that file as an example of how to write it."
 msgstr ""
-"Формат файла %s изменён с версии 3.0. Вы можете либо скопировать его с %s/mc."
-"ext, либо использовать этот файл как пример и написать свой."
 
 msgid "DialogTitle|Copy"
 msgstr "Копирование"
@@ -2860,16 +2865,14 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(застрял)"
 
-#, fuzzy
 msgid "Incomplete file was retrieved"
-msgstr "Был получен неполный файл. Сохранить?"
+msgstr "Был получен неполный файл"
 
 msgid "&Keep"
 msgstr "&Сохранить"
 
-#, fuzzy
 msgid "&Continue copy"
-msgstr "П&родолжить"
+msgstr "&Продолжить копирование"
 
 #, c-format
 msgid ""
@@ -3004,7 +3007,7 @@ msgstr "Файл существует"
 msgid "Background process: File exists"
 msgstr "Фоновый процесс: файл существует"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Files processed: %zu / %zu"
 msgstr "Обработано файлов: %zu/%zu"
 
@@ -3032,7 +3035,7 @@ msgstr "Время: %s (%s)"
 msgid " Total: %s "
 msgstr " Всего: %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid " Total: %s / %s "
 msgstr " Всего: %s/%s "
 
@@ -3085,9 +3088,8 @@ msgstr "Дерев&о"
 msgid "&Listing format..."
 msgstr "Фор&мат списка..."
 
-#, fuzzy
 msgid "&Sort order..."
-msgstr "Порядок &сортировки..."
+msgstr "Порядок &сортировки…"
 
 msgid "&Filter..."
 msgstr "&Фильтр..."
@@ -3101,9 +3103,8 @@ msgstr "&FTP-соединение..."
 msgid "S&hell link..."
 msgstr "S&hell-соединение..."
 
-#, fuzzy
 msgid "SFTP li&nk..."
-msgstr "&SFTP-соединение..."
+msgstr "SFTP-соед&инение…"
 
 msgid "Paneli&ze"
 msgstr "Па&нелизация"
@@ -3319,7 +3320,7 @@ msgid "&Find recursively"
 msgstr "Найти ре&курсивно"
 
 msgid "Follow s&ymlinks"
-msgstr ""
+msgstr "Следуйте s&ymlinks"
 
 msgid "S&kip hidden"
 msgstr "Пропускать скр&ытые"
@@ -3488,7 +3489,7 @@ msgstr "Свободно узлов:"
 msgid "No space information"
 msgstr "Нет информации о пространстве"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Free space: %s / %s (%d%%)"
 msgstr "Своб. место: %s/%s (%d%%)"
 
@@ -3773,6 +3774,8 @@ msgid ""
 "External panelize:\n"
 "%s"
 msgstr ""
+"Внешнее панелизирование:\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -3780,9 +3783,14 @@ msgid ""
 "failed to read data from child stdout:\n"
 "%s"
 msgstr ""
+"Внешнее панелизирование:\n"
+"не удалось прочитать данные из дочернего stdout:\n"
+"%s"
 
 msgid "Cannot run external panelize in a non-local directory"
-msgstr "Не удалось выполнить эту команду, находясь не в локальном каталоге"
+msgstr ""
+"Невозможно выполнить внешнее панелизирование, находясь не в локальном "
+"каталоге"
 
 msgid "Modified git files"
 msgstr "Изменённые файлы под контролем git"
@@ -4020,7 +4028,7 @@ msgid "With multiple codepages support"
 msgstr "С поддержкой многих кодировок"
 
 msgid "With ext2fs attributes support"
-msgstr ""
+msgstr "С поддержкой ext2fs атрибутов"
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"
@@ -4180,12 +4188,17 @@ msgid ""
 "%s:\n"
 "%s"
 msgstr ""
+"Невозможно открыть %s архив\n"
+"%s:\n"
+"%s"
 
 #, c-format
 msgid ""
 "EXTFS virtual file system:\n"
 "%s"
 msgstr ""
+"EXTFS виртуальная файловая система:\n"
+"%s"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4301,21 +4314,20 @@ msgstr "ftpfs: сбой соединения с сервером: %s"
 msgid "Waiting to retry... %d (Control-G to cancel)"
 msgstr "Ожидание повтора попытки... %d (Control-G для отмены)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not make address-to-name translation: %s"
-msgstr "Не удалось создать сокет: %s"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: try reconnect to server, attempt %u"
-msgstr "ftpfs: сбой соединения с сервером: %s"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not get socket name: %s"
-msgstr "Не удалось создать сокет: %s"
+msgstr ""
 
-#, fuzzy
 msgid "ftpfs: could not reconnect to server"
-msgstr "Не удалось создать сокет: %s"
+msgstr "ftpfs: не удалось переподключиться к серверу"
 
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: неверный адрес системы."
@@ -4374,6 +4386,8 @@ msgid ""
 "SFS virtual file system:\n"
 "%s"
 msgstr ""
+"SFS виртуальная файловая система:\n"
+"%s"
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4411,6 +4425,7 @@ msgstr "sftp: %s"
 
 msgid "sftp: failed to convert remote host IP address into text form"
 msgstr ""
+"sftp: не удалось преобразовать IP-адрес удаленного хоста в текстовую форму"
 
 #, c-format
 msgid "sftp: making connection to %s"
@@ -4424,10 +4439,10 @@ msgid "sftp: connection to server failed: %s"
 msgstr "sftp: сбой соединения с сервером: %s"
 
 msgid "sftp: found host key of unsupported type: RSA1"
-msgstr ""
+msgstr "sftp: найден ключ хоста неподдерживаемого типа: RSA1"
 
 msgid "sftp: unknown host key type:"
-msgstr ""
+msgstr "sftp: неизвестный тип ключа хоста:"
 
 #, c-format
 msgid ""
@@ -4435,15 +4450,19 @@ msgid ""
 "%s (%s)\n"
 "to the list of known hosts."
 msgstr ""
+"Добавлено на постоянной основе\n"
+"%s (%s)\n"
+"к списку известных хостов."
 
 msgid "sftp: cannot get the remote host key"
-msgstr ""
+msgstr "sftp: невозможно получить ключ удаленного хоста"
 
 msgid "sftp: unsupported key type, can't check remote host key"
 msgstr ""
+"sftp: неподдерживаемый тип ключа, невозможно проверить ключ удаленного хоста"
 
 msgid "sftp: can't compute host key fingerprint hash"
-msgstr ""
+msgstr "sftp: невозможно вычислить хэш отпечатка ключа хоста"
 
 #, c-format
 msgid ""
@@ -4454,6 +4473,12 @@ msgid ""
 "SHA1:%s.\n"
 "Do you want to add it to the list of known hosts and continue connecting?"
 msgstr ""
+"Подлинность хоста\n"
+"%s (%s)\n"
+"не может быть установлена!\n"
+"%s хэш отпечатка ключа\n"
+"SHA1:%s.\n"
+"Вы хотите добавить его в список известных хостов и продолжить подключение?"
 
 #, c-format
 msgid ""
@@ -4463,9 +4488,14 @@ msgid ""
 "Are you sure you want to add it to the list of known hosts and continue "
 "connecting?"
 msgstr ""
+"%s (%s)\n"
+"найден в списке известных хостов, но\n"
+"КЛЮЧИ НЕ СОВПАДАЮТ! ЭТО МОЖЕТ БЫТЬ MITM АТАКОЙ!\n"
+"Вы уверены, что хотите добавить его в список известных хостов и продолжить "
+"подключение?"
 
 msgid "sftp: host key verification failed"
-msgstr ""
+msgstr "sftp: проверка ключа хоста не удалась"
 
 #, c-format
 msgid "sftp: Enter passphrase for %s "
@@ -4482,7 +4512,7 @@ msgid "sftp: Password is empty."
 msgstr "sftp: пароль пуст."
 
 msgid "sftp: failure establishing SSH session"
-msgstr ""
+msgstr "sftp: сбой при установлении SSH сессии"
 
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: нет обработчика считываемого файла"

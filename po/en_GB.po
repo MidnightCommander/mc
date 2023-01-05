@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# Andi Chandler <andi@gowling.com>, 2016-2017,2020
+# Andi Chandler <andi@gowling.com>, 2016-2017,2020,2022
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-23 20:23+0300\n"
+"Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2023-01-05 21:49+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Andi Chandler <andi@gowling.com>, 2016-2017,2020\n"
+"Last-Translator: Andi Chandler <andi@gowling.com>, 2016-2017,2020,2022\n"
 "Language-Team: English (United Kingdom) (http://www.transifex.com/mc/mc/"
 "language/en_GB/)\n"
 "Language: en_GB\n"
@@ -180,103 +180,103 @@ msgid "Function key 1"
 msgstr "Function key 1"
 
 msgid "Function key 2"
-msgstr ""
+msgstr "Function key 2"
 
 msgid "Function key 3"
-msgstr ""
+msgstr "Function key 3"
 
 msgid "Function key 4"
-msgstr ""
+msgstr "Function key 4"
 
 msgid "Function key 5"
-msgstr ""
+msgstr "Function key 5"
 
 msgid "Function key 6"
-msgstr ""
+msgstr "Function key 6"
 
 msgid "Function key 7"
-msgstr ""
+msgstr "Function key 7"
 
 msgid "Function key 8"
-msgstr ""
+msgstr "Function key 8"
 
 msgid "Function key 9"
-msgstr ""
+msgstr "Function key 9"
 
 msgid "Function key 10"
-msgstr ""
+msgstr "Function key 10"
 
 msgid "Function key 11"
-msgstr ""
+msgstr "Function key 11"
 
 msgid "Function key 12"
-msgstr ""
+msgstr "Function key 12"
 
 msgid "Function key 13"
-msgstr ""
+msgstr "Function key 13"
 
 msgid "Function key 14"
-msgstr ""
+msgstr "Function key 14"
 
 msgid "Function key 15"
-msgstr ""
+msgstr "Function key 15"
 
 msgid "Function key 16"
-msgstr ""
+msgstr "Function key 16"
 
 msgid "Function key 17"
-msgstr ""
+msgstr "Function key 17"
 
 msgid "Function key 18"
-msgstr ""
+msgstr "Function key 18"
 
 msgid "Function key 19"
-msgstr ""
+msgstr "Function key 19"
 
 msgid "Function key 20"
-msgstr ""
+msgstr "Function key 20"
 
 msgid "Completion/M-tab"
-msgstr ""
+msgstr "Completion/M-tab"
 
 msgid "BackTab/S-tab"
-msgstr ""
+msgstr "BackTab/S-tab"
 
 msgid "Backspace"
-msgstr ""
+msgstr "Backspace"
 
 msgid "Up arrow"
-msgstr ""
+msgstr "Up arrow"
 
 msgid "Down arrow"
-msgstr ""
+msgstr "Down arrow"
 
 msgid "Left arrow"
 msgstr ""
 
 msgid "Right arrow"
-msgstr ""
+msgstr "Right arrow"
 
 msgid "Insert"
-msgstr ""
+msgstr "Insert"
 
 msgid "Delete"
-msgstr ""
+msgstr "Delete"
 
 msgid "Home"
-msgstr ""
+msgstr "Home"
 
 msgid "End key"
-msgstr ""
+msgstr "End key"
 
 msgid "Page Up"
-msgstr ""
+msgstr "Page Up"
 
 msgid "Page Down"
-msgstr ""
+msgstr "Page Down"
 
 msgid "/ on keypad"
-msgstr ""
+msgstr "/ on keypad"
 
 msgid "* on keypad"
 msgstr ""

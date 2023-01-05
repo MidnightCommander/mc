@@ -12,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-23 20:23+0300\n"
+"Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2023-01-05 21:49+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: scootergrisen, 2018-2020\n"
 "Language-Team: Danish (http://www.transifex.com/mc/mc/language/da/)\n"
@@ -533,9 +533,8 @@ msgstr ""
 "Uventet fejl i select() læser data fra en underproces:\n"
 "%s"
 
-#, fuzzy
 msgid "Cannot close pipe descriptor (p == NULL)"
-msgstr "Kan ikke oprette datakanal-deskriptor"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1212,9 +1211,8 @@ msgstr "Du skal først fremhæve en tekstblok"
 msgid "Run sort"
 msgstr "Udfør sortering"
 
-#, fuzzy
 msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
-msgstr "Indtast sorteringsindstillinger (se manualside) adskilt af mellemrum:"
+msgstr ""
 
 msgid "Sort"
 msgstr "Sortér"
@@ -2532,26 +2530,22 @@ msgstr ""
 msgid " %s%s file error"
 msgstr " %s%s-filfejl"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the %s%s file has changed with version 4.0. It seems that the "
 "installation has failed. Please fetch a fresh copy from the Midnight "
 "Commander package."
 msgstr ""
-"Formatet på filen %smc.ext er ændret med version 3.0. Installationen ser ud "
-"til at have fejlet. Hent venligst en ny kopi fra Midnight Commander-pakken."
 
 #, c-format
 msgid "%s file error"
 msgstr "%s filfejl"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the %s file has changed with version 4.0. You may either want "
 "to copy it from %s%s or use that file as an example of how to write it."
 msgstr ""
-"Formatet af %s-filen blev skiftet i version 3.0. Du kan enten kopiere den "
-"fra %smc.ext eller bruge filen som et eksempel på hvordan den skrives."
 
 msgid "DialogTitle|Copy"
 msgstr "Kopiér"
@@ -2846,16 +2840,14 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(venter)"
 
-#, fuzzy
 msgid "Incomplete file was retrieved"
-msgstr "En fil der ikke er komplet blev hentet ned. Behold den?"
+msgstr ""
 
 msgid "&Keep"
 msgstr "&Behold"
 
-#, fuzzy
 msgid "&Continue copy"
-msgstr "&Fortsæt"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2990,9 +2982,9 @@ msgstr "Fil findes"
 msgid "Background process: File exists"
 msgstr "Baggrundproces: Fil findes"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Files processed: %zu / %zu"
-msgstr "Filer behandlet: %zu/%zu"
+msgstr ""
 
 #, c-format
 msgid "Files processed: %zu"
@@ -3018,9 +3010,9 @@ msgstr "Tid: %s (%s)"
 msgid " Total: %s "
 msgstr " Samlet: %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid " Total: %s / %s "
-msgstr " Samlet: %s/%s "
+msgstr ""
 
 msgid "Source"
 msgstr "Kilde"
@@ -3071,9 +3063,8 @@ msgstr "&Træ"
 msgid "&Listing format..."
 msgstr "&Listeformat..."
 
-#, fuzzy
 msgid "&Sort order..."
-msgstr "Sorteringsrækkefølge"
+msgstr ""
 
 msgid "&Filter..."
 msgstr "&Filter..."
@@ -3087,9 +3078,8 @@ msgstr "FT&P-henvisning..."
 msgid "S&hell link..."
 msgstr "S&kalhenvisning..."
 
-#, fuzzy
 msgid "SFTP li&nk..."
-msgstr "FT&P-henvisning..."
+msgstr ""
 
 msgid "Paneli&ze"
 msgstr "Paneli&sér"
@@ -3470,9 +3460,9 @@ msgstr "Ledige knuder:"
 msgid "No space information"
 msgstr "Ingen pladsinformation"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Free space: %s / %s (%d%%)"
-msgstr "Ledig plads: %s/%s (%d%%)"
+msgstr ""
 
 #, c-format
 msgid "Type:       %s"
@@ -4280,21 +4270,20 @@ msgstr "ftpfs: Forbindelse til server mislykkedes: %s"
 msgid "Waiting to retry... %d (Control-G to cancel)"
 msgstr "Venter på at prøve igen... %d (Control-G for at annullere)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not make address-to-name translation: %s"
-msgstr "ftpfs: Kunne ikke oprette sokkel: %s"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: try reconnect to server, attempt %u"
-msgstr "ftpfs: Forbindelse til server mislykkedes: %s"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not get socket name: %s"
-msgstr "ftpfs: Kunne ikke oprette sokkel: %s"
+msgstr ""
 
-#, fuzzy
 msgid "ftpfs: could not reconnect to server"
-msgstr "ftpfs: Kunne ikke oprette sokkel: %s"
+msgstr ""
 
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: Ugyldig adressefamilie"
@@ -4690,6 +4679,3 @@ msgstr "Fortsæt fra begyndelsen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan ikke hente en lokal kopi af /ftp://en.vært/editme.txt"
-
-#~ msgid "Set expression for filtering filenames"
-#~ msgstr "Angiv udtryk til filtrering af filnavne"

@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-23 20:23+0300\n"
+"Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2023-01-05 21:49+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Shuree Nyam-Oidov <99shuree@gmail.com>, 2020\n"
 "Language-Team: Mongolian (http://www.transifex.com/mc/mc/language/mn/)\n"
@@ -2665,16 +2665,14 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(гацсан)"
 
-#, fuzzy
 msgid "Incomplete file was retrieved"
-msgstr "Дутуу файл орж ирсэн байна. Хадгалах уу?"
+msgstr ""
 
 msgid "&Keep"
 msgstr "&Хадгалах"
 
-#, fuzzy
 msgid "&Continue copy"
-msgstr "&үргэлжлүүл"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2874,9 +2872,8 @@ msgstr "&Мод"
 msgid "&Listing format..."
 msgstr "&Жагшаалтын формат"
 
-#, fuzzy
 msgid "&Sort order..."
-msgstr "Эрэмбэлэх дараалал"
+msgstr ""
 
 msgid "&Filter..."
 msgstr "&Шүүлт..."
@@ -2890,9 +2887,8 @@ msgstr "&FTP-холбоос..."
 msgid "S&hell link..."
 msgstr "S&hell-холбоос..."
 
-#, fuzzy
 msgid "SFTP li&nk..."
-msgstr "&FTP-холбоос..."
+msgstr ""
 
 msgid "Paneli&ze"
 msgstr "&Панелиз"
@@ -4067,17 +4063,16 @@ msgstr ""
 msgid "ftpfs: could not make address-to-name translation: %s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: try reconnect to server, attempt %u"
-msgstr "ftpfs: сервер руу холбогдолт амжилтгүй боллоо: %s"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not get socket name: %s"
-msgstr "ftpfs: пассив горимыг тохируулж чадсангүй"
+msgstr ""
 
-#, fuzzy
 msgid "ftpfs: could not reconnect to server"
-msgstr "ftpfs: сервер руу холбогдолт амжилтгүй боллоо: %s"
+msgstr ""
 
 msgid "ftpfs: invalid address family"
 msgstr ""

@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-23 20:23+0300\n"
+"Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2023-01-05 21:49+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
 "Language-Team: Walloon (http://www.transifex.com/mc/mc/language/wa/)\n"
@@ -2662,16 +2662,14 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(a djok)"
 
-#, fuzzy
 msgid "Incomplete file was retrieved"
-msgstr "Dj' a rapexhî on fitchî nén etir. El fåt-i wårder?"
+msgstr ""
 
 msgid "&Keep"
 msgstr "&Wårder"
 
-#, fuzzy
 msgid "&Continue copy"
-msgstr "&Tcheryî"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2871,9 +2869,8 @@ msgstr "Å&be"
 msgid "&Listing format..."
 msgstr ""
 
-#, fuzzy
 msgid "&Sort order..."
-msgstr "Ôrde po relire"
+msgstr ""
 
 msgid "&Filter..."
 msgstr "&Passete..."
@@ -2887,9 +2884,8 @@ msgstr "Loyén &FTP..."
 msgid "S&hell link..."
 msgstr ""
 
-#, fuzzy
 msgid "SFTP li&nk..."
-msgstr "Loyén &FTP..."
+msgstr ""
 
 msgid "Paneli&ze"
 msgstr ""
@@ -4056,17 +4052,16 @@ msgstr ""
 msgid "ftpfs: could not make address-to-name translation: %s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: try reconnect to server, attempt %u"
-msgstr "ftpfs: dj' a fwait berwete come dji m' raloyîve å sierveu: %s"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not get socket name: %s"
-msgstr "ftpfs: dj' a fwait berwete come dji m' raloyîve å sierveu: %s"
+msgstr ""
 
-#, fuzzy
 msgid "ftpfs: could not reconnect to server"
-msgstr "ftpfs: dj' a fwait berwete come dji m' raloyîve å sierveu: %s"
+msgstr ""
 
 msgid "ftpfs: invalid address family"
 msgstr ""

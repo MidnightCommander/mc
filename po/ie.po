@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-23 20:23+0300\n"
+"Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2023-01-05 21:49+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Interlingue (http://www.transifex.com/mc/mc/language/ie/)\n"
@@ -2671,9 +2671,8 @@ msgstr ""
 msgid "&Keep"
 msgstr "&Retener"
 
-#, fuzzy
 msgid "&Continue copy"
-msgstr "C&ontinuar"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2873,9 +2872,8 @@ msgstr "Árb&or"
 msgid "&Listing format..."
 msgstr ""
 
-#, fuzzy
 msgid "&Sort order..."
-msgstr "&Ordinar..."
+msgstr ""
 
 msgid "&Filter..."
 msgstr "&Filtre..."
@@ -2889,9 +2887,8 @@ msgstr "Conexion FT&P..."
 msgid "S&hell link..."
 msgstr ""
 
-#, fuzzy
 msgid "SFTP li&nk..."
-msgstr "Conexion FT&P..."
+msgstr ""
 
 msgid "Paneli&ze"
 msgstr "Pa&nelisar"

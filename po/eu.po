@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-23 20:23+0300\n"
+"Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2023-01-05 21:49+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>, "
 "2011,2015-2019\n"
@@ -525,9 +525,8 @@ msgstr ""
 "Ustekabeko errorea select()-ean ume prozesutik datuak irakurtzean:\n"
 "%s"
 
-#, fuzzy
 msgid "Cannot close pipe descriptor (p == NULL)"
-msgstr "Ezin da sortu hodi deskriptorea"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1206,11 +1205,8 @@ msgstr "Aurrena testu bloke bat nabarmendu behar duzu"
 msgid "Run sort"
 msgstr "Exekutatu \"sort\""
 
-#, fuzzy
 msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr ""
-"Sartu sailkatzeko aukerak (begiratu eskuliburu (\"man\") orrialdea) zuriune "
-"bitartez banatuta:"
 
 msgid "Sort"
 msgstr "Sailkatu"
@@ -2523,28 +2519,22 @@ msgstr ""
 msgid " %s%s file error"
 msgstr " %s%s fitxategi akatsa"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the %s%s file has changed with version 4.0. It seems that the "
 "installation has failed. Please fetch a fresh copy from the Midnight "
 "Commander package."
 msgstr ""
-"%smc.ext fitxategiaren formatua aldatu egin da 3.0 bertsioarekin. "
-"Instalatzeak huts egin duela diruri. Mesedez eskuratu kopia berri bat "
-"Midnight Commander paketetik."
 
 #, c-format
 msgid "%s file error"
 msgstr "%s fitxategi akatsa"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the %s file has changed with version 4.0. You may either want "
 "to copy it from %s%s or use that file as an example of how to write it."
 msgstr ""
-"%s fitxategiaren formatua aldatu egin da 3.0 bertsioarekin. %smc.ext "
-"fitxategitik kopiatu edo fitxategi hori nola idatzi adibide gisa erabili "
-"nahi izan dezakezu."
 
 msgid "DialogTitle|Copy"
 msgstr "Kopiatu"
@@ -2840,16 +2830,14 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(trabatuta)"
 
-#, fuzzy
 msgid "Incomplete file was retrieved"
-msgstr "Osatu gabeko fitxategia eskuratu da. Mantendu?"
+msgstr ""
 
 msgid "&Keep"
 msgstr "&Gorde"
 
-#, fuzzy
 msgid "&Continue copy"
-msgstr "&Jarraitu"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2984,9 +2972,9 @@ msgstr "Fitxategia existitzen da"
 msgid "Background process: File exists"
 msgstr "Hondoko prozesua: Fitxategia existitzen da"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Files processed: %zu / %zu"
-msgstr "Prozesatutako fitxategiak: %zu/%zu"
+msgstr ""
 
 #, c-format
 msgid "Files processed: %zu"
@@ -3012,9 +3000,9 @@ msgstr "Denbora: %s (%s)"
 msgid " Total: %s "
 msgstr " Guztira: %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid " Total: %s / %s "
-msgstr " Guztira: %s/%s "
+msgstr ""
 
 msgid "Source"
 msgstr "Iturburua"
@@ -3065,9 +3053,8 @@ msgstr "Zu&haitza"
 msgid "&Listing format..."
 msgstr "&Zerrenda formatua"
 
-#, fuzzy
 msgid "&Sort order..."
-msgstr "Sailkatzeko ordena"
+msgstr ""
 
 msgid "&Filter..."
 msgstr "I&ragazkia..."
@@ -3081,9 +3068,8 @@ msgstr "FT&P esteka..."
 msgid "S&hell link..."
 msgstr "S&hell esteka..."
 
-#, fuzzy
 msgid "SFTP li&nk..."
-msgstr "FT&P esteka..."
+msgstr ""
 
 msgid "Paneli&ze"
 msgstr "Panelerat&u"
@@ -3464,9 +3450,9 @@ msgstr "Nodo askeak:"
 msgid "No space information"
 msgstr "Ez dago leku-informaziorik"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Free space: %s / %s (%d%%)"
-msgstr "Leku askea: %s/%s (%d%%)"
+msgstr ""
 
 #, c-format
 msgid "Type:       %s"
@@ -4272,21 +4258,20 @@ msgstr "ftpfs: zerbitzarirako konexioak huts egin du: %s"
 msgid "Waiting to retry... %d (Control-G to cancel)"
 msgstr "Berriz saiatzeko itxoiten... %d (Ctrl-G uzteko)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not make address-to-name translation: %s"
-msgstr "ftpfs: ezin izan da socket sortu: %s"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: try reconnect to server, attempt %u"
-msgstr "ftpfs: zerbitzarirako konexioak huts egin du: %s"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not get socket name: %s"
-msgstr "ftpfs: ezin izan da socket sortu: %s"
+msgstr ""
 
-#, fuzzy
 msgid "ftpfs: could not reconnect to server"
-msgstr "ftpfs: ezin izan da socket sortu: %s"
+msgstr ""
 
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: baliogabeko helbide familia"
@@ -4684,6 +4669,3 @@ msgstr "Hasieratik jarraitu?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Ezin eskuratu ondokoaren bertako kopia bat: /ftp://some.host/editme.txt"
-
-#~ msgid "Set expression for filtering filenames"
-#~ msgstr "Ezarri fitxategi izenak iragazteko adierazpena"

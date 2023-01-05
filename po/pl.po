@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-23 20:23+0300\n"
+"Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2023-01-05 21:49+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>, 2011-2022\n"
 "Language-Team: Polish (http://www.transifex.com/mc/mc/language/pl/)\n"
@@ -18,9 +18,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n"
-"%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n"
-"%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && "
+"(n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && "
+"n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -536,9 +536,8 @@ msgstr ""
 "potomnego:\n"
 "%s"
 
-#, fuzzy
 msgid "Cannot close pipe descriptor (p == NULL)"
-msgstr "Nie można utworzyć deskryptora potoku"
+msgstr "Nie można zamknąć deskryptora potoku (p == NULL)"
 
 #, c-format
 msgid ""
@@ -1219,11 +1218,10 @@ msgstr "Należy najpierw wyróżnić blok tekstu"
 msgid "Run sort"
 msgstr "Wykonaj polecenie sort"
 
-#, fuzzy
 msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr ""
-"Proszę podać opcje polecenia sort (proszę zobaczyć stronę man), rozdzielone "
-"spacjami: "
+"Proszę podać opcje polecenia sort (strona podręcznika sort(1) zawiera więcej "
+"informacji), rozdzielone spacjami:"
 
 msgid "Sort"
 msgstr "Posortuj"
@@ -2534,18 +2532,21 @@ msgid ""
 "Midnight Commander now uses %s file.\n"
 "Please copy your modifications of the old file to the new one."
 msgstr ""
+"Plik %s jest przestarzały.\n"
+"Midnight Commander używa teraz pliku %s.\n"
+"Proszę skopiować wprowadzone zmiany z poprzedniego pliku do nowego."
 
 #, c-format
 msgid " %s%s file error"
 msgstr " Błąd pliku %s%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the %s%s file has changed with version 4.0. It seems that the "
 "installation has failed. Please fetch a fresh copy from the Midnight "
 "Commander package."
 msgstr ""
-"Format pliku %smc.ext uległ zmianie wraz z wersją 3.0. Wygląda na to, że "
+"Format pliku %s%s uległ zmianie wraz z wersją 4.0. Wygląda na to, że "
 "instalacja się nie powiodła. Proszę pobrać nową wersję tego pliku z pakietu "
 "programu Midnight Commander."
 
@@ -2553,13 +2554,13 @@ msgstr ""
 msgid "%s file error"
 msgstr "Błąd pliku %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the %s file has changed with version 4.0. You may either want "
 "to copy it from %s%s or use that file as an example of how to write it."
 msgstr ""
-"Format pliku %s został zmieniony w wersji 3.0. Można skopiować go z %smc.ext "
-"lub użyć tego pliku jako przykład."
+"Format pliku %s został zmieniony w wersji 4.0. Można skopiować go z %s%s lub "
+"użyć tego pliku jako przykład."
 
 msgid "DialogTitle|Copy"
 msgstr "Kopiowanie"
@@ -2854,16 +2855,14 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(wstrzymany)"
 
-#, fuzzy
 msgid "Incomplete file was retrieved"
-msgstr "Pobrano niepełny plik. Zachować go?"
+msgstr "Pobrano niepełny plik"
 
 msgid "&Keep"
 msgstr "&Zachowaj"
 
-#, fuzzy
 msgid "&Continue copy"
-msgstr "K&ontynuuj"
+msgstr "&Kontynuuj kopiowanie"
 
 #, c-format
 msgid ""
@@ -2998,7 +2997,7 @@ msgstr "Plik istnieje"
 msgid "Background process: File exists"
 msgstr "Proces w tle: plik istnieje"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Files processed: %zu / %zu"
 msgstr "Przetworzono pliki: %zu/%zu"
 
@@ -3026,7 +3025,7 @@ msgstr "Czas: %s (%s)"
 msgid " Total: %s "
 msgstr " Razem: %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid " Total: %s / %s "
 msgstr " Razem: %s/%s "
 
@@ -3079,7 +3078,6 @@ msgstr "&Drzewo"
 msgid "&Listing format..."
 msgstr "&Format wyświetlania…"
 
-#, fuzzy
 msgid "&Sort order..."
 msgstr "Porządek s&ortowania…"
 
@@ -3095,7 +3093,6 @@ msgstr "Połączenie FT&P…"
 msgid "S&hell link..."
 msgstr "Połączenie po po&włoce…"
 
-#, fuzzy
 msgid "SFTP li&nk..."
 msgstr "Połączenie SF&TP…"
 
@@ -3483,7 +3480,7 @@ msgstr "Wolne węzły:"
 msgid "No space information"
 msgstr "Brak informacji o miejscu"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Free space: %s / %s (%d%%)"
 msgstr "Wolne miejsce: %s/%s (%d%%)"
 
@@ -4307,21 +4304,20 @@ msgstr "ftpfs: połączenie z serwerem się nie powiodło: %s"
 msgid "Waiting to retry... %d (Control-G to cancel)"
 msgstr "Oczekiwanie na ponowienie… %d (Ctrl-G anuluje)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not make address-to-name translation: %s"
-msgstr "ftpfs: nie można utworzyć gniazda: %s"
+msgstr "ftpfs: nie można wykonać tłumaczenia adresu na nazwę: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: try reconnect to server, attempt %u"
-msgstr "ftpfs: połączenie z serwerem się nie powiodło: %s"
+msgstr "ftpfs: próba ponownego połączenia z serwerem, %u. próba"
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not get socket name: %s"
-msgstr "ftpfs: nie można utworzyć gniazda: %s"
+msgstr "ftpfs: nie można uzyskać nazwy gniazda: %s"
 
-#, fuzzy
 msgid "ftpfs: could not reconnect to server"
-msgstr "ftpfs: nie można utworzyć gniazda: %s"
+msgstr "ftpfs: nie można ponownie połączyć się z serwerem"
 
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: nieprawidłowa rodzina adresów"
@@ -4737,6 +4733,3 @@ msgstr "Kontynuować od początku?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Nie można pobrać lokalnej kopii /ftp://jakiś.komputer/modyfikuj_mnie.txt"
-
-#~ msgid "Set expression for filtering filenames"
-#~ msgstr "Wyrażenie filtrujące nazwy plików"

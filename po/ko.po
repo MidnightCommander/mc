@@ -13,8 +13,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-23 20:23+0300\n"
+"Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2023-01-05 21:49+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Junghee Lee <daemul72@gmail.com>, 2022\n"
 "Language-Team: Korean (http://www.transifex.com/mc/mc/language/ko/)\n"
@@ -134,7 +134,7 @@ msgid ""
 "Default skin has been loaded"
 msgstr ""
 "'%s' 스킨을 불러올 수 없습니다.\n"
-"기본 스킨이 로드됨"
+"기본 스킨이 불러오기 되었습니다"
 
 #, c-format
 msgid ""
@@ -142,7 +142,7 @@ msgid ""
 "Default skin has been loaded"
 msgstr ""
 "'%s' 스킨을 구문 분석할 수 없습니다.\n"
-"기본 스킨이 로드됨"
+"기본 스킨이 불러오기 되었습니다"
 
 #, c-format
 msgid ""
@@ -152,7 +152,7 @@ msgid ""
 msgstr ""
 "트루컬러를 지원하는 '%s' 스킨을 사용할 수 없습니다:\n"
 "%s\n"
-"기본 스킨이 로드됨"
+"기본 스킨이 불러오기 되었습니다"
 
 #, c-format
 msgid ""
@@ -160,9 +160,9 @@ msgid ""
 "on non-256 colors terminal.\n"
 "Default skin has been loaded"
 msgstr ""
-"256색이 아닌 '%s'스킨을 사용할 수 없습니다\n"
-"256 색이 아닌 터미널에서 지원됨\n"
-"기본 스킨이 로드됨"
+"256색이 아닌 터미널에서 256색을 지원하는\n"
+"'%s' 스킨을 사용할 수 없습니다.\n"
+"기본 스킨이 불러오기 되었습니다"
 
 msgid "True color not supported with ncurses."
 msgstr "트루 컬러는 ncurses에서 지원 되지 않습니다."
@@ -240,7 +240,7 @@ msgid "Function key 20"
 msgstr "F20"
 
 msgid "Completion/M-tab"
-msgstr "완료/M-tab"
+msgstr "완성/M-tab"
 
 msgid "BackTab/S-tab"
 msgstr "뒤로 탭/S-tab"
@@ -532,9 +532,8 @@ msgstr ""
 "Select()에서 하위 프로세스의 데이터를 읽는 도중 예상치 못한 오류 발생:\n"
 "%s"
 
-#, fuzzy
 msgid "Cannot close pipe descriptor (p == NULL)"
-msgstr "파이프 설명도구를 작성할 수 없습니다"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1087,7 +1086,7 @@ msgid "Enter file name:"
 msgstr "파일 이름 입력:"
 
 msgid "Change line breaks to:"
-msgstr "줄바꿈 변경:"
+msgstr "줄 바꿈을 다음으로 변경:"
 
 msgid "Save As"
 msgstr "다른이름으로 저장"
@@ -1211,9 +1210,8 @@ msgstr "먼저 텍스트 블록을 강조 표시해야 함"
 msgid "Run sort"
 msgstr "정렬 실행"
 
-#, fuzzy
 msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
-msgstr "화이트 스페이스로 구분된 정렬 옵션 입력(맨 페이지 참조):"
+msgstr ""
 
 msgid "Sort"
 msgstr "정렬"
@@ -1256,7 +1254,7 @@ msgid "Insert literal"
 msgstr "텍스트 삽입"
 
 msgid "Press any key:"
-msgstr "아무 키나 누르십시오:"
+msgstr "아무 키나 누르기:"
 
 msgid ""
 "Current text was modified without a file save.\n"
@@ -1269,7 +1267,7 @@ msgid "Cancel"
 msgstr "취소"
 
 msgid "Collect completions"
-msgstr "수집 완료"
+msgstr "완성 정보 수집"
 
 msgid "NoName"
 msgstr "이름없습니다"
@@ -1284,7 +1282,7 @@ msgid "Delete macro"
 msgstr "매크로 삭제"
 
 msgid "Press macro hotkey:"
-msgstr "매크로 단축키 누름:"
+msgstr "매크로 단축키 누르기:"
 
 msgid "Macro not deleted"
 msgstr "매크로가 삭제되지 않음"
@@ -1338,7 +1336,7 @@ msgid "To&ggle mark"
 msgstr "표시 전환(&G)"
 
 msgid "&Mark columns"
-msgstr "행 표시(&M)"
+msgstr "열 표시(&M)"
 
 msgid "Mark &all"
 msgstr "모두 표시(&A)"
@@ -1380,16 +1378,16 @@ msgid "&Replace..."
 msgstr "바꾸기(&R)..."
 
 msgid "&Toggle bookmark"
-msgstr "북마크 전환(&T)"
+msgstr "바로찾기 전환(&T)"
 
 msgid "&Next bookmark"
-msgstr "다음  북마크(&N)"
+msgstr "다음  바로찾기(&N)"
 
 msgid "&Prev bookmark"
-msgstr "이전 북마크(&P)"
+msgstr "이전 바로찾기(&P)"
 
 msgid "&Flush bookmarks"
-msgstr "북마크 정리(&F)"
+msgstr "바로찾기 갱신(&F)"
 
 msgid "&Go to line..."
 msgstr "행으로 이동(&G)..."
@@ -2249,7 +2247,7 @@ msgid "&Marked all"
 msgstr "모두 표시됨(&M)"
 
 msgid "S&et marked"
-msgstr "표시됨 설정(&E)"
+msgstr "표시됨 지정하기(&E)"
 
 msgid "C&lear marked"
 msgstr "표시됨 지우기(&L)"
@@ -2374,7 +2372,7 @@ msgstr "디렉터리를 변경할 수 없습니다"
 
 #, c-format
 msgid "Link %s to:"
-msgstr "%s에 링크:"
+msgstr "%s 링크 대상:"
 
 msgid "Link"
 msgstr "링크"
@@ -2529,26 +2527,22 @@ msgstr ""
 msgid " %s%s file error"
 msgstr " %s%s 파일 오류"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the %s%s file has changed with version 4.0. It seems that the "
 "installation has failed. Please fetch a fresh copy from the Midnight "
 "Commander package."
 msgstr ""
-"%smc.ext 파일의 형식이 버전 3.0으로 변경되었습니다. 설치가 실패한 것 같습니"
-"다. 미드나잇 커맨더 패키지에서 새 사본을 가져오세요."
 
 #, c-format
 msgid "%s file error"
 msgstr "%s 파일 오류"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the %s file has changed with version 4.0. You may either want "
 "to copy it from %s%s or use that file as an example of how to write it."
 msgstr ""
-"버전 3.0에서는 %s 파일의 형식이 변경되었습니다. %smc.ext에서 복사하거나 쓰기 "
-"방법의 예제로 그 파일을 사용할 수 있습니다."
 
 msgid "DialogTitle|Copy"
 msgstr "대화상자제목|복사"
@@ -2843,16 +2837,14 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(지연됨)"
 
-#, fuzzy
 msgid "Incomplete file was retrieved"
-msgstr "불완전한 파일이 검색되었습니다. 파일을 보존할까요?"
+msgstr ""
 
 msgid "&Keep"
 msgstr "보존(&K)"
 
-#, fuzzy
 msgid "&Continue copy"
-msgstr "계속(&O)"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2987,9 +2979,9 @@ msgstr "파일이 있음"
 msgid "Background process: File exists"
 msgstr "백그라운드 프로세스: 파일 존재"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Files processed: %zu / %zu"
-msgstr "처리된 파일: %zu/%zu"
+msgstr ""
 
 #, c-format
 msgid "Files processed: %zu"
@@ -3015,9 +3007,9 @@ msgstr "시간: %s (%s)"
 msgid " Total: %s "
 msgstr " 전체: %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid " Total: %s / %s "
-msgstr " 전체: %s/%s "
+msgstr ""
 
 msgid "Source"
 msgstr "원본"
@@ -3068,9 +3060,8 @@ msgstr "트리구조(&T)"
 msgid "&Listing format..."
 msgstr "목록 형식(&L)..."
 
-#, fuzzy
 msgid "&Sort order..."
-msgstr "정렬 순서(&O)..."
+msgstr ""
 
 msgid "&Filter..."
 msgstr "필터(&F)..."
@@ -3084,9 +3075,8 @@ msgstr "FTP 링크(&P)..."
 msgid "S&hell link..."
 msgstr "쉘 링크(&H)..."
 
-#, fuzzy
 msgid "SFTP li&nk..."
-msgstr "SFTP 링크(&S)..."
+msgstr ""
 
 msgid "Paneli&ze"
 msgstr "패널 크기조정"
@@ -3465,9 +3455,9 @@ msgstr "사용 가능한 노드:"
 msgid "No space information"
 msgstr "공간 정보 없습니다"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Free space: %s / %s (%d%%)"
-msgstr "사용 가능한 공간: %s/%s (%d%%)"
+msgstr ""
 
 #, c-format
 msgid "Type:       %s"
@@ -3782,11 +3772,11 @@ msgstr ""
 
 #, c-format
 msgid "Copy \"%s\" directory to:"
-msgstr "%s 디렉터리를 다음 위치에 복사:"
+msgstr "%s 디렉터리를 다음 위치로 복사:"
 
 #, c-format
 msgid "Move \"%s\" directory to:"
-msgstr "%s 디렉터리를 다음으로 이동:"
+msgstr "%s 디렉터리를 다음 위치로 이동:"
 
 #, c-format
 msgid ""
@@ -4193,7 +4183,7 @@ msgid "fish: Sending initial line..."
 msgstr "fish: 초기화 라인 보내기..."
 
 msgid "fish: Handshaking version..."
-msgstr "fish: 핸드셰이킹 버전..."
+msgstr "fish: 주고받기 버전..."
 
 msgid "fish: Getting host info..."
 msgstr "fish: 호스트 정보 가져오는 중..."
@@ -4282,21 +4272,20 @@ msgstr "ftpfs: 서버 연결 실패: %s"
 msgid "Waiting to retry... %d (Control-G to cancel)"
 msgstr "재시도 대기 중... %d(Control-G가 취소됨)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not make address-to-name translation: %s"
-msgstr "ftpfs: 소켓을 만들 수 없습니다: %s"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: try reconnect to server, attempt %u"
-msgstr "ftpfs: 서버 연결 실패: %s"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not get socket name: %s"
-msgstr "ftpfs: 소켓을 만들 수 없습니다: %s"
+msgstr ""
 
-#, fuzzy
 msgid "ftpfs: could not reconnect to server"
-msgstr "ftpfs: 소켓을 만들 수 없습니다: %s"
+msgstr ""
 
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: 잘못된 주소 패밀리"
@@ -4706,6 +4695,3 @@ msgstr "처음부터 계속하시겠습니까?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "/ftp://some.host/editme.txt의 로컬 복사본을 가져올 수 없습니다"
-
-#~ msgid "Set expression for filtering filenames"
-#~ msgstr "파일 이름을 필터링하기 위한 표현식 설정"

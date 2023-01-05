@@ -3,7 +3,9 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# Andrij Mizyk <andmizyk@gmail.com>, 2021-2022
+# Andrij Mizyk <andm1zyk@proton.me>, 2022
+# 1057792d4be8b9c6cf7b64c224fea2c1_7fc5896, 2022
+# f977cb811fcf66493f48eac227fd7473_b98aa5d <2419f1d8d12d92441152e78ae3e3bde0_722180>, 2021-2022
 # Andriy Il <toelik@ukr.net>, 2016-2017
 # Andriy Smilyanets <smile.andriy@gmail.com>, 2019
 # Oleksandr Natalenko <oleksandr@natalenko.name>, 2011, 2012
@@ -15,10 +17,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-23 20:23+0300\n"
+"Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2023-01-05 21:49+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Andrij Mizyk <andmizyk@gmail.com>, 2021-2022\n"
+"Last-Translator: Andrij Mizyk <andm1zyk@proton.me>, 2022\n"
 "Language-Team: Ukrainian (http://www.transifex.com/mc/mc/language/uk/)\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
@@ -542,9 +544,8 @@ msgstr ""
 "Виникла несподівана помилка під час читання select() з підлеглого процесу:\n"
 "%s"
 
-#, fuzzy
 msgid "Cannot close pipe descriptor (p == NULL)"
-msgstr "Не вдалося створити дескриптор каналу"
+msgstr "Неможливо закрити дескриптор каналу (p == NULL)"
 
 #, c-format
 msgid ""
@@ -1221,9 +1222,9 @@ msgstr "Спочатку необхідно відмітити блок текс
 msgid "Run sort"
 msgstr "Виконати сортування"
 
-#, fuzzy
 msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
-msgstr "Введіть параметри сортування (див. man sort), розділені пробілами:"
+msgstr ""
+"Уведіть параметри сортування (див. man-сторінку sort(1)) розділені пробілами:"
 
 msgid "Sort"
 msgstr "Сортування"
@@ -2533,31 +2534,34 @@ msgid ""
 "Midnight Commander now uses %s file.\n"
 "Please copy your modifications of the old file to the new one."
 msgstr ""
+"У вас застарів файл %s.\n"
+"Midnight Commander зараз використовує файл %s.\n"
+"Скопіюйте свою модифікацію старого файлу у новий."
 
 #, c-format
 msgid " %s%s file error"
 msgstr " Сталася помилка файлу %s%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the %s%s file has changed with version 4.0. It seems that the "
 "installation has failed. Please fetch a fresh copy from the Midnight "
 "Commander package."
 msgstr ""
-"Формат файлу %smc.ext було змінено у версіі 3.0. Схоже що стався збій при "
-"встановленні. Будь ласка, візьміть свіжу копію із пакету Midnight Commander."
+"Формат файлу %s%s змінено у версії 4.0.  Схоже, що інсталяція завершилася "
+"невдало. Будь ласка, отримайте свіжу копію з пакунка Midnight Commander."
 
 #, c-format
 msgid "%s file error"
 msgstr "Сталася помилка файлу %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the %s file has changed with version 4.0. You may either want "
 "to copy it from %s%s or use that file as an example of how to write it."
 msgstr ""
-"Формат файлу %s змінився у версії 3.0. Можна або скопіювати його з %smc.ext, "
-"або використати вказаний файл як приклад для створення нового."
+"Формат файлу %s змінено у версії 4.0. Ви можете скопіювати його з %s%s або "
+"використати цей файл як приклад для написання."
 
 msgid "DialogTitle|Copy"
 msgstr "DialogTitle|Копіювання"
@@ -2850,16 +2854,14 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(простоювання)"
 
-#, fuzzy
 msgid "Incomplete file was retrieved"
-msgstr "Отримано неповний файл. Залишити його?"
+msgstr "Отримано неповний файл"
 
 msgid "&Keep"
 msgstr "За&лишити"
 
-#, fuzzy
 msgid "&Continue copy"
-msgstr "Пр&одовжити"
+msgstr "&Продовжити копіювання"
 
 #, c-format
 msgid ""
@@ -2994,9 +2996,9 @@ msgstr "Файл існує"
 msgid "Background process: File exists"
 msgstr "Фоновий процес: файл існує"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Files processed: %zu / %zu"
-msgstr "Файлів оброблено: %zu/%zu"
+msgstr "Файлів оброблено: %zu / %zu"
 
 #, c-format
 msgid "Files processed: %zu"
@@ -3022,9 +3024,9 @@ msgstr "Час: %s (%s)"
 msgid " Total: %s "
 msgstr " Усього: %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid " Total: %s / %s "
-msgstr " Усього: %s/%s "
+msgstr "Усього: %s / %s "
 
 msgid "Source"
 msgstr "Джерело"
@@ -3075,9 +3077,8 @@ msgstr "Д&eрево"
 msgid "&Listing format..."
 msgstr "&Формат списку"
 
-#, fuzzy
 msgid "&Sort order..."
-msgstr "Порядок &сортування..."
+msgstr "&Порядок сортування..."
 
 msgid "&Filter..."
 msgstr "&Фільтр…"
@@ -3091,9 +3092,8 @@ msgstr "&FTP-з’єднання…"
 msgid "S&hell link..."
 msgstr "&Shell-з’єднання…"
 
-#, fuzzy
 msgid "SFTP li&nk..."
-msgstr "S&FTP-зʼєднання..."
+msgstr "SFTP-&зʼєднання"
 
 msgid "Paneli&ze"
 msgstr "Панелі&зувати"
@@ -3478,9 +3478,9 @@ msgstr "Вільних вузлів:"
 msgid "No space information"
 msgstr "Немає відомостей про простір"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Free space: %s / %s (%d%%)"
-msgstr "Вільне місце: %s/%s (%d%%)"
+msgstr "Вільний простір: %s / %s (%d%%)"
 
 #, c-format
 msgid "Type:       %s"
@@ -4302,21 +4302,20 @@ msgstr "ftpfs: сталася помилка з’єднання із серве
 msgid "Waiting to retry... %d (Control-G to cancel)"
 msgstr "Очікування повторення… %d (щоб скасувати, натисніть Ctrl+G)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not make address-to-name translation: %s"
-msgstr "ftpfs: не вдалося створити сокет: %s "
+msgstr "ftpfs: не можливо перекласти адресу на назву: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: try reconnect to server, attempt %u"
-msgstr "ftpfs: сталася помилка з’єднання із сервером: %s"
+msgstr "ftpfs: спробуйте перезʼєднатися зі сервером, спроба %u"
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not get socket name: %s"
-msgstr "ftpfs: не вдалося створити сокет: %s "
+msgstr "ftpfs: не можливо отримати назву сокета: %s"
 
-#, fuzzy
 msgid "ftpfs: could not reconnect to server"
-msgstr "ftpfs: не вдалося створити сокет: %s "
+msgstr "ftpfs: не можливо перезʼєднатися з сервером"
 
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: виявлено неправильний рід адреси"
@@ -4733,6 +4732,3 @@ msgstr "Почати спочатку?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не вдалося отримати локальну копію /ftp://some.host/editme.txt"
-
-#~ msgid "Set expression for filtering filenames"
-#~ msgstr "Задати вираз для відбору назв файлів"

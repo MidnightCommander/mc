@@ -5,7 +5,7 @@
 # Translators:
 # Atha Translate, 2016
 # cheese <cheese@nosuchhost.net>, 2016
-# Ettore Atalan <atalanttore@googlemail.com>, 2015-2021
+# Ettore Atalan <atalanttore@googlemail.com>, 2015-2022
 # Fabian Affolter <fab@fedoraproject.org>, 2012-2013
 # Johannes Hellmuth <johannes.hellmuth@gmail.com>, 2020
 # Karsten <waldstadt@web.de>, 2016
@@ -19,10 +19,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-23 20:23+0300\n"
+"Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2023-01-05 21:49+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>, 2015-2021\n"
+"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>, 2015-2022\n"
 "Language-Team: German (http://www.transifex.com/mc/mc/language/de/)\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -545,9 +545,8 @@ msgstr ""
 "Prozess:\n"
 "%s"
 
-#, fuzzy
 msgid "Cannot close pipe descriptor (p == NULL)"
-msgstr "Kann Pipe-Descriptor nicht erstellen"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1229,9 +1228,8 @@ msgstr "Sie müssen zuerst einen Block oder Text markieren"
 msgid "Run sort"
 msgstr "Sortierung ausführen"
 
-#, fuzzy
 msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
-msgstr "Sortieroptionen eingeben, mit Leerzeichen getrennt (siehe Man-Page):"
+msgstr ""
 
 msgid "Sort"
 msgstr "Sortieren"
@@ -2547,28 +2545,22 @@ msgstr ""
 msgid " %s%s file error"
 msgstr " Fehler in der Datei %s%s "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the %s%s file has changed with version 4.0. It seems that the "
 "installation has failed. Please fetch a fresh copy from the Midnight "
 "Commander package."
 msgstr ""
-"Das Format der Datei \"%smc.ext\" hat sich in Version 3.0 geändert. Die "
-"Installation scheint fehlgeschlagen. Bitte holen Sie sich eine frische Kopie "
-"aus dem \"Midnight Commander\"-Paket."
 
 #, c-format
 msgid "%s file error"
 msgstr "%s Dateifehler"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the %s file has changed with version 4.0. You may either want "
 "to copy it from %s%s or use that file as an example of how to write it."
 msgstr ""
-"Das Format der Datei %s hat sich mit Version 3.0 geändert. Entweder eine "
-"Kopie von %smc.ext erstellen oder diese Datei als Vorlage für eigene "
-"Einstellungen verwenden."
 
 msgid "DialogTitle|Copy"
 msgstr "DialogTitle|Kopieren"
@@ -2863,16 +2855,14 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(blockiert)"
 
-#, fuzzy
 msgid "Incomplete file was retrieved"
-msgstr "Unvollständige Datei empfangen. Behalten?"
+msgstr ""
 
 msgid "&Keep"
 msgstr "&Behalten"
 
-#, fuzzy
 msgid "&Continue copy"
-msgstr "Weiter"
+msgstr "Kopieren &fortsetzen"
 
 #, c-format
 msgid ""
@@ -3007,9 +2997,9 @@ msgstr "Datei schon vorhanden"
 msgid "Background process: File exists"
 msgstr "Hintergrundprozess: Datei schon vorhanden"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Files processed: %zu / %zu"
-msgstr "Verarbeitete Dateien: %zu/%zu"
+msgstr "Verarbeitete Dateien: %zu / %zu"
 
 #, c-format
 msgid "Files processed: %zu"
@@ -3033,11 +3023,11 @@ msgstr "Zeit: %s (%s)"
 
 #, c-format
 msgid " Total: %s "
-msgstr " Total: %s "
+msgstr " Insgesamt: %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid " Total: %s / %s "
-msgstr " Total: %s/%s "
+msgstr " Insgesamt: %s / %s "
 
 msgid "Source"
 msgstr "Quelle"
@@ -3088,9 +3078,8 @@ msgstr "&Baum"
 msgid "&Listing format..."
 msgstr "&Listenformat..."
 
-#, fuzzy
 msgid "&Sort order..."
-msgstr "Sortierreihenfolge"
+msgstr "&Sortierreihenfolge..."
 
 msgid "&Filter..."
 msgstr "&Filter..."
@@ -3104,9 +3093,8 @@ msgstr "FT&P-Verbindung..."
 msgid "S&hell link..."
 msgstr "S&hell-Verbindung..."
 
-#, fuzzy
 msgid "SFTP li&nk..."
-msgstr "FT&P-Verbindung..."
+msgstr "SFTP-Verbi&ndung..."
 
 msgid "Paneli&ze"
 msgstr "Anordnen"
@@ -3487,9 +3475,9 @@ msgstr "Freie Knoten:"
 msgid "No space information"
 msgstr "Keine Information über Speicherplatz"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Free space: %s / %s (%d%%)"
-msgstr "Freier Platz: %s/%s (%d%%)"
+msgstr "Freier Platz: %s / %s (%d%%)"
 
 #, c-format
 msgid "Type:       %s"
@@ -3768,6 +3756,8 @@ msgid ""
 "External panelize:\n"
 "%s"
 msgstr ""
+"Externes Anordnen:\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -4042,7 +4032,7 @@ msgstr "Gebaut mit ncursesw (unbekannte Version)"
 
 #, c-format
 msgid "Built with libssh2 %d.%d.%d\n"
-msgstr ""
+msgstr "Gebaut mit libssh2 %d.%d.%d\n"
 
 msgid "Virtual File Systems:"
 msgstr "Virtuelles Dateisystem:"
@@ -4305,21 +4295,20 @@ msgstr "ftpfs: Verbindung zum Server fehlgeschlagen: %s"
 msgid "Waiting to retry... %d (Control-G to cancel)"
 msgstr "Warte bis zum nächsten Versuch... %d (Strg+G zum Abbrechen)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not make address-to-name translation: %s"
-msgstr "ftpfs: Konnte Socket %s nicht erstellen "
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: try reconnect to server, attempt %u"
-msgstr "ftpfs: Verbindung zum Server fehlgeschlagen: %s"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not get socket name: %s"
-msgstr "ftpfs: Konnte Socket %s nicht erstellen "
+msgstr ""
 
-#, fuzzy
 msgid "ftpfs: could not reconnect to server"
-msgstr "ftpfs: Konnte Socket %s nicht erstellen "
+msgstr "ftpfs: Verbindung zum Server konnte nicht wiederhergestellt werden"
 
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: Ungültige Rechneradresse"
@@ -4479,7 +4468,7 @@ msgstr ""
 "die Verbindung fortsetzen möchten?"
 
 msgid "sftp: host key verification failed"
-msgstr ""
+msgstr "sftp: Verifizierung des Hostschlüssels fehlgeschlagen"
 
 #, c-format
 msgid "sftp: Enter passphrase for %s "
@@ -4725,6 +4714,3 @@ msgstr "Am Anfang fortsetzen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kann lokale Kopie von /ftp://some.host/editme.txt nicht erstellen"
-
-#~ msgid "Set expression for filtering filenames"
-#~ msgstr "Ausdruck zum Filtern von Dateinamen setzen"

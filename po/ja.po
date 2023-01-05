@@ -12,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-23 20:23+0300\n"
+"Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2023-01-05 21:49+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Takuro Onoue <kusanaginoturugi@gmail.com>, 2021\n"
 "Language-Team: Japanese (http://www.transifex.com/mc/mc/language/ja/)\n"
@@ -515,9 +515,8 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy
 msgid "Cannot close pipe descriptor (p == NULL)"
-msgstr "パイプディスクリプタを作成できません"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2683,16 +2682,14 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(stalled)"
 
-#, fuzzy
 msgid "Incomplete file was retrieved"
-msgstr "ファイルを完全に取得できませんでした。保存しますか?"
+msgstr ""
 
 msgid "&Keep"
 msgstr "保存(&K)"
 
-#, fuzzy
 msgid "&Continue copy"
-msgstr "続ける(&O)"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2892,9 +2889,8 @@ msgstr "ツリー(&T)"
 msgid "&Listing format..."
 msgstr ""
 
-#, fuzzy
 msgid "&Sort order..."
-msgstr "並び変える"
+msgstr ""
 
 msgid "&Filter..."
 msgstr "フィルタ(&F)..."
@@ -2908,9 +2904,8 @@ msgstr "FTP リンク(&P)..."
 msgid "S&hell link..."
 msgstr ""
 
-#, fuzzy
 msgid "SFTP li&nk..."
-msgstr "FTP リンク(&P)..."
+msgstr ""
 
 msgid "Paneli&ze"
 msgstr ""
@@ -3285,9 +3280,9 @@ msgstr "空きノード:"
 msgid "No space information"
 msgstr "空き領域情報がありません"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Free space: %s / %s (%d%%)"
-msgstr "空き容量: %s/%s (%d%%)"
+msgstr ""
 
 #, c-format
 msgid "Type:       %s"
@@ -4078,17 +4073,16 @@ msgstr ""
 msgid "ftpfs: could not make address-to-name translation: %s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: try reconnect to server, attempt %u"
-msgstr "ftpfs: サーバへの接続に失敗しました: %s"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not get socket name: %s"
-msgstr "ftpfs: パッシブモードに失敗しました"
+msgstr ""
 
-#, fuzzy
 msgid "ftpfs: could not reconnect to server"
-msgstr "ftpfs: サーバへの接続に失敗しました: %s"
+msgstr ""
 
 msgid "ftpfs: invalid address family"
 msgstr ""

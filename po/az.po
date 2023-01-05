@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-23 20:23+0300\n"
+"Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2023-01-05 21:49+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
 "Language-Team: Azerbaijani (http://www.transifex.com/mc/mc/language/az/)\n"
@@ -2664,16 +2664,14 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(stalled)"
 
-#, fuzzy
 msgid "Incomplete file was retrieved"
-msgstr "Bütöv fayl alına bilmədi. Saxlayım mı?"
+msgstr ""
 
 msgid "&Keep"
 msgstr "&Saxla"
 
-#, fuzzy
 msgid "&Continue copy"
-msgstr "Davam&Et"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2873,9 +2871,8 @@ msgstr "&Ağac"
 msgid "&Listing format..."
 msgstr ""
 
-#, fuzzy
 msgid "&Sort order..."
-msgstr "Süzmə əmri"
+msgstr ""
 
 msgid "&Filter..."
 msgstr "&Süzgəc ..."
@@ -2889,9 +2886,8 @@ msgstr "FT&P bağı ..."
 msgid "S&hell link..."
 msgstr ""
 
-#, fuzzy
 msgid "SFTP li&nk..."
-msgstr "FT&P bağı ..."
+msgstr ""
 
 msgid "Paneli&ze"
 msgstr ""
@@ -4066,17 +4062,16 @@ msgstr ""
 msgid "ftpfs: could not make address-to-name translation: %s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: try reconnect to server, attempt %u"
-msgstr "ftpfs : vericiyə bağlantı qurula bilmədi: %s"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not get socket name: %s"
-msgstr "ftpfs : passiv mod qurula bilmir"
+msgstr ""
 
-#, fuzzy
 msgid "ftpfs: could not reconnect to server"
-msgstr "ftpfs : vericiyə bağlantı qurula bilmədi: %s"
+msgstr ""
 
 msgid "ftpfs: invalid address family"
 msgstr ""

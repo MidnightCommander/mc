@@ -13,8 +13,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-23 20:23+0300\n"
+"Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2023-01-05 21:49+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Mantas Kriaučiūnas Baltix <mantas@akl.lt>, 2020\n"
 "Language-Team: Lithuanian (http://www.transifex.com/mc/mc/language/lt/)\n"
@@ -1172,9 +1172,8 @@ msgstr ""
 msgid "Run sort"
 msgstr "Rikiuoti"
 
-#, fuzzy
 msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
-msgstr "Įveskite rikiavimo parinktis (žiūrėkite 'manpage') atskirtas tarpais:"
+msgstr ""
 
 msgid "Sort"
 msgstr "Rikiuoti"
@@ -2742,16 +2741,14 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(sustojo)"
 
-#, fuzzy
 msgid "Incomplete file was retrieved"
-msgstr "Gautas nepilnas failas. Ar jį išlaikyti?"
+msgstr ""
 
 msgid "&Keep"
 msgstr "Išlai&kyti"
 
-#, fuzzy
 msgid "&Continue copy"
-msgstr "&Tęsti"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2904,9 +2901,9 @@ msgstr "Laikas: %s (%s)"
 msgid " Total: %s "
 msgstr "Iš viso: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid " Total: %s / %s "
-msgstr "Iš viso: %s"
+msgstr ""
 
 msgid "Source"
 msgstr "Iš"
@@ -2957,9 +2954,8 @@ msgstr "&Medis"
 msgid "&Listing format..."
 msgstr ""
 
-#, fuzzy
 msgid "&Sort order..."
-msgstr "Rikiavimo tvarka"
+msgstr ""
 
 msgid "&Filter..."
 msgstr "&Filtras..."
@@ -2973,9 +2969,8 @@ msgstr "FT&P ryšys..."
 msgid "S&hell link..."
 msgstr "Apli&nkos ryšys..."
 
-#, fuzzy
 msgid "SFTP li&nk..."
-msgstr "FT&P ryšys..."
+msgstr ""
 
 msgid "Paneli&ze"
 msgstr ""
@@ -4164,17 +4159,16 @@ msgstr ""
 msgid "ftpfs: could not make address-to-name translation: %s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: try reconnect to server, attempt %u"
-msgstr "ftpfs: jungimasis į serverį nepavyko: %s"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not get socket name: %s"
-msgstr "ftpfs: nepavyko nustatyti pasyvaus režimo"
+msgstr ""
 
-#, fuzzy
 msgid "ftpfs: could not reconnect to server"
-msgstr "ftpfs: jungimasis į serverį nepavyko: %s"
+msgstr ""
 
 msgid "ftpfs: invalid address family"
 msgstr ""
@@ -4558,6 +4552,3 @@ msgstr "Tęsti nuo pradžios?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "Set expression for filtering filenames"
-#~ msgstr "Failų vardų filtro išraiška"

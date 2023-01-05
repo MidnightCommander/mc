@@ -11,8 +11,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-23 20:23+0300\n"
+"Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2023-01-05 21:49+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Gilberto Jorge <gmj125@gmail.com>, 2013-2022\n"
 "Language-Team: Portuguese (http://www.transifex.com/mc/mc/language/pt/)\n"
@@ -20,7 +20,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % "
+"1000000 == 0 ? 1 : 2;\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -533,9 +534,8 @@ msgstr ""
 "Erro inesperado em select() ao ler dados de um processo child:\n"
 "%s"
 
-#, fuzzy
 msgid "Cannot close pipe descriptor (p == NULL)"
-msgstr "Não é possível criar o descriptor do pipe"
+msgstr "Não é possível fechar o pipe descriptor (p == NULL)"
 
 #, c-format
 msgid ""
@@ -1217,9 +1217,10 @@ msgstr "Primeiro tem de destacar um bloco de texto"
 msgid "Run sort"
 msgstr "Excutar ordenar"
 
-#, fuzzy
 msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
-msgstr "Insira opções de ordenar (ver manpage) separado por espaço branco:"
+msgstr ""
+"Introduza opções de ordenação (ver sort(1) manpage) separadas por espaço "
+"branco:"
 
 msgid "Sort"
 msgstr "Ordenar"
@@ -2531,32 +2532,35 @@ msgid ""
 "Midnight Commander now uses %s file.\n"
 "Please copy your modifications of the old file to the new one."
 msgstr ""
+"Tem um ficheiro %s desactualizado.\n"
+"Midnight Commander agora usa ficheiro %s.\n"
+"Por favor copie as suas modificações do ficheiro antigo para o novo."
 
 #, c-format
 msgid " %s%s file error"
 msgstr " %s%s erro de ficheiro"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the %s%s file has changed with version 4.0. It seems that the "
 "installation has failed. Please fetch a fresh copy from the Midnight "
 "Commander package."
 msgstr ""
-"O formato do ficheiro %smc.ext mudou com a versão 3.0. Parece que a "
-"instalação falhou. Por favor obtenha uma cópia recente do pacote do Midnight "
+"O formato do ficheiro %s%s foi alterado com a versão 4.0. Parece que a "
+"instalação falhou. Por favor obtenha uma cópia nova no pacote do Midnight "
 "Commander."
 
 #, c-format
 msgid "%s file error"
 msgstr "%s erro de ficheiro"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the %s file has changed with version 4.0. You may either want "
 "to copy it from %s%s or use that file as an example of how to write it."
 msgstr ""
-"O formato do ficheiro %s mudou com a versão 3.0. Pode desejar copiá-lo de "
-"%smc.ext ou usar esse ficheiro como um exemplo de como o escrever."
+"O formato do ficheiro %s foi alterado com a versão 4.0. Pode querer copia-lo "
+"do %s%s ou usar esse ficheiro como um exemplo de como escreve-lo."
 
 msgid "DialogTitle|Copy"
 msgstr "DialogTitle|Copiar"
@@ -2851,16 +2855,14 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(estagnado)"
 
-#, fuzzy
 msgid "Incomplete file was retrieved"
-msgstr "Foi obtido ficheiro incompleto. Ficar com ele?"
+msgstr "Foi obtido ficheiro incompleto"
 
 msgid "&Keep"
 msgstr "&Manter"
 
-#, fuzzy
 msgid "&Continue copy"
-msgstr "C&ontinuar"
+msgstr "&Continuar a copiar"
 
 #, c-format
 msgid ""
@@ -2995,9 +2997,9 @@ msgstr "Ficheiro existe"
 msgid "Background process: File exists"
 msgstr "Processo em background: Ficheiro existe"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Files processed: %zu / %zu"
-msgstr "Ficheiros processados: %zu/%zu"
+msgstr "Ficheiros processados: %zu / %zu"
 
 #, c-format
 msgid "Files processed: %zu"
@@ -3023,9 +3025,9 @@ msgstr "Hora: %s (%s)"
 msgid " Total: %s "
 msgstr " Total: %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid " Total: %s / %s "
-msgstr " Total: %s/%s "
+msgstr " Total: %s / %s "
 
 msgid "Source"
 msgstr "Fonte"
@@ -3076,9 +3078,8 @@ msgstr "&Árvore"
 msgid "&Listing format..."
 msgstr "Formato da &listagem..."
 
-#, fuzzy
 msgid "&Sort order..."
-msgstr "&Ordem de classificação..."
+msgstr "Ordem de cla&ssificação..."
 
 msgid "&Filter..."
 msgstr "&Filtro..."
@@ -3092,9 +3093,8 @@ msgstr "Ligação FT&P..."
 msgid "S&hell link..."
 msgstr "Ligação s&hell..."
 
-#, fuzzy
 msgid "SFTP li&nk..."
-msgstr "Ligação &SFTP..."
+msgstr "Lig&ação SFTP..."
 
 msgid "Paneli&ze"
 msgstr "Em Pai&nel"
@@ -3248,6 +3248,7 @@ msgid "You have %zu opened screen. Quit anyway?"
 msgid_plural "You have %zu opened screens. Quit anyway?"
 msgstr[0] "Tem %zu ecrã aberto. Terminar de qualquer modo?"
 msgstr[1] "Tem %zu ecrãs abertos. Terminar de qualquer modo?"
+msgstr[2] "Tem %zu ecrãs abertos. Terminar de qualquer modo?"
 
 msgid "The Midnight Commander"
 msgstr "O Midnight Commander"
@@ -3349,6 +3350,7 @@ msgid "Finished (ignored %zu directory)"
 msgid_plural "Finished (ignored %zu directories)"
 msgstr[0] "Terminado (%zu directório ignorado)"
 msgstr[1] "Terminado (%zu directórios ignorados)"
+msgstr[2] "Terminado (%zu directórios ignorados)"
 
 #, c-format
 msgid "Find File: \"%s\". Content: \"%s\""
@@ -3475,9 +3477,9 @@ msgstr "Nós livres:"
 msgid "No space information"
 msgstr "Nenhuma informação de espaço"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Free space: %s / %s (%d%%)"
-msgstr "Espaço livre: %s/%s (%d%%)"
+msgstr "Espaço livre: %s / %s (%d%%)"
 
 #, c-format
 msgid "Type:       %s"
@@ -3520,6 +3522,7 @@ msgid " (%lu block)"
 msgid_plural " (%lu blocks)"
 msgstr[0] " (%lu bloco)"
 msgstr[1] " (%lu blocos)"
+msgstr[2] " (%lu blocos)"
 
 #, c-format
 msgid "Owner:      %s/%s"
@@ -3702,6 +3705,7 @@ msgid "%s in %d file"
 msgid_plural "%s in %d files"
 msgstr[0] "%s em %d ficheiro"
 msgstr[1] "%s em %d ficheiros"
+msgstr[2] "%s em %d ficheiros"
 
 msgid "Panelize"
 msgstr "Em Panel"
@@ -4295,21 +4299,20 @@ msgstr "ftpfs: ligação ao servidor falhou: %s"
 msgid "Waiting to retry... %d (Control-G to cancel)"
 msgstr "Aguardando para repetir... %d (Control-G para cancelar)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not make address-to-name translation: %s"
-msgstr "ftpfs: não foi possível criar socket: %s"
+msgstr "ftpfs: não foi possível a tradução endereço-para-nome: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: try reconnect to server, attempt %u"
-msgstr "ftpfs: ligação ao servidor falhou: %s"
+msgstr "ftpfs: tentativa de reconexão ao servidor, tentativa %u"
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not get socket name: %s"
-msgstr "ftpfs: não foi possível criar socket: %s"
+msgstr "ftpfs: não foi possível obter o nome do socket: %s"
 
-#, fuzzy
 msgid "ftpfs: could not reconnect to server"
-msgstr "ftpfs: não foi possível criar socket: %s"
+msgstr "ftpfs: não foi possível reconectar ao servidor"
 
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: endereço de família inválido"
@@ -4722,6 +4725,3 @@ msgstr "Continuar do início?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Não é possível obter uma cópia local de /ftp://some.host/editme.txt"
-
-#~ msgid "Set expression for filtering filenames"
-#~ msgstr "Definir expressão para filtrar nomes de ficheiros"

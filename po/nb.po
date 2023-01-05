@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-23 20:23+0300\n"
+"Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2023-01-05 21:49+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: heskjestad <cato@heskjestad.xyz>, 2021-2022\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/mc/mc/language/"
@@ -531,9 +531,8 @@ msgstr ""
 "Uventet feil i select() ved lesing av data fra barneprosess:\n"
 "%s"
 
-#, fuzzy
 msgid "Cannot close pipe descriptor (p == NULL)"
-msgstr "Klarte ikke opprette rørdeskriptor"
+msgstr "Klarte ikke lukke rørdeskriptor (p == NULL)"
 
 #, c-format
 msgid ""
@@ -1216,10 +1215,9 @@ msgstr "Du må først utheve en tekstblokk"
 msgid "Run sort"
 msgstr "Kjør sortering"
 
-#, fuzzy
 msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr ""
-"Angi sorteringsalternativer (se manualside),\n"
+"Angi sorteringsalternativer (jf. «man 1 sort»),\n"
 "og skill dem med blanktegn:"
 
 msgid "Sort"
@@ -2532,18 +2530,21 @@ msgid ""
 "Midnight Commander now uses %s file.\n"
 "Please copy your modifications of the old file to the new one."
 msgstr ""
+"Fila %s er utdatert.\n"
+"Midnight Commandor bruker nå fila %s.\n"
+"Kopier ev. endringer i den gamle fila til den nye."
 
 #, c-format
 msgid " %s%s file error"
 msgstr "Feil i fila %s%s "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the %s%s file has changed with version 4.0. It seems that the "
 "installation has failed. Please fetch a fresh copy from the Midnight "
 "Commander package."
 msgstr ""
-"Formatet til fila %smc.ext ble endret i versjon 3.0. Det ser ut som om "
+"Formatet til fila %s%s ble endret i versjon 4.0. Det ser ut som om "
 "installasjonen mislyktes. Hent en oppdatert kopi fra Midnight Commander-"
 "pakken."
 
@@ -2551,13 +2552,13 @@ msgstr ""
 msgid "%s file error"
 msgstr "Feil i fila %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the %s file has changed with version 4.0. You may either want "
 "to copy it from %s%s or use that file as an example of how to write it."
 msgstr ""
-"Formatet til fila %s ble endret i versjon 3.0. Du kan enten hente det fra "
-"%smc.ext eller bruke fila som en eksempelfil."
+"Formatet til fila %s ble endret i versjon 4.0. Du kan enten hente det fra "
+"%s%s eller bruke fila som en eksempelfil."
 
 msgid "DialogTitle|Copy"
 msgstr "DialogTitle|Kopier"
@@ -2851,16 +2852,14 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(venter)"
 
-#, fuzzy
 msgid "Incomplete file was retrieved"
-msgstr "Leste ufullstendig fil. Beholde den?"
+msgstr "Leste ufullstendig fil"
 
 msgid "&Keep"
 msgstr "&Behold"
 
-#, fuzzy
 msgid "&Continue copy"
-msgstr "&Fortsett"
+msgstr "Fortsett &kopiering"
 
 #, c-format
 msgid ""
@@ -2995,9 +2994,9 @@ msgstr "Fila finnes"
 msgid "Background process: File exists"
 msgstr "Bakgrunnsprosess: Fila finnes"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Files processed: %zu / %zu"
-msgstr "Filer behandlet: %zu/%zu"
+msgstr "Filer behandlet: %zu / %zu"
 
 #, c-format
 msgid "Files processed: %zu"
@@ -3023,9 +3022,9 @@ msgstr "Tid: %s (%s)"
 msgid " Total: %s "
 msgstr " Totalt: %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid " Total: %s / %s "
-msgstr " Totalt: %s/%s "
+msgstr " Totalt: %s / %s "
 
 msgid "Source"
 msgstr "Kilde"
@@ -3076,7 +3075,6 @@ msgstr "&Tre"
 msgid "&Listing format..."
 msgstr "&Utlistingsformat ..."
 
-#, fuzzy
 msgid "&Sort order..."
 msgstr "Sorterings&rekkefølge ..."
 
@@ -3092,7 +3090,6 @@ msgstr "Koble til FT&P ..."
 msgid "S&hell link..."
 msgstr "Koble til &skall ..."
 
-#, fuzzy
 msgid "SFTP li&nk..."
 msgstr "K&oble til SFTP ..."
 
@@ -3475,9 +3472,9 @@ msgstr "Led. noder:"
 msgid "No space information"
 msgstr "Mangler info om ledig kapasitet"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Free space: %s / %s (%d%%)"
-msgstr "Ledig kap.: %s/%s (%d%%)"
+msgstr "Ledig kap.: %s / %s (%d%%)"
 
 #, c-format
 msgid "Type:       %s"
@@ -4293,21 +4290,20 @@ msgstr "ftpfs: tilkobling til tjener mislyktes: %s"
 msgid "Waiting to retry... %d (Control-G to cancel)"
 msgstr "Venter på å prøve igjen ... %d (Ctrl + G avbryter)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not make address-to-name translation: %s"
-msgstr "ftpfs: klarte ikke opprette socket: %s"
+msgstr "ftpfs: klarte ikke slå opp navn fra adresse: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: try reconnect to server, attempt %u"
-msgstr "ftpfs: tilkobling til tjener mislyktes: %s"
+msgstr "ftpfs: forsøk ny tilkobling til tjener, forsøk %u"
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not get socket name: %s"
-msgstr "ftpfs: klarte ikke opprette socket: %s"
+msgstr "ftpfs: klarte ikke hente socket-navn: %s"
 
-#, fuzzy
 msgid "ftpfs: could not reconnect to server"
-msgstr "ftpfs: klarte ikke opprette socket: %s"
+msgstr "ftpfs: ny tilkobling til tjener mislyktes"
 
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: ugyldig adressefamilie"
@@ -4722,6 +4718,3 @@ msgstr "Fortsett fra begynnelsen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Klarte ikke hente en lokal kopi av /ftp://some.host/editme.txt"
-
-#~ msgid "Set expression for filtering filenames"
-#~ msgstr "Skriv inn et filtreringsmønster for filnavn"

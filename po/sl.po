@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-23 20:23+0300\n"
+"Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2023-01-05 21:49+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Matej Urbančič <>, 2012\n"
 "Language-Team: Slovenian (http://www.transifex.com/mc/mc/language/sl/)\n"
@@ -18,8 +18,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
-"%100==4 ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
+"n%100==4 ? 2 : 3);\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -2674,16 +2674,14 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(zastoj)"
 
-#, fuzzy
 msgid "Incomplete file was retrieved"
-msgstr "Datoteka je bila prenešena nepopolno. Naj ostane?"
+msgstr ""
 
 msgid "&Keep"
 msgstr "&Obdrži"
 
-#, fuzzy
 msgid "&Continue copy"
-msgstr "&Nadaljuj"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2883,9 +2881,8 @@ msgstr "&Drevo"
 msgid "&Listing format..."
 msgstr ""
 
-#, fuzzy
 msgid "&Sort order..."
-msgstr "Vrstni red sortiranja"
+msgstr ""
 
 msgid "&Filter..."
 msgstr "&Filter..."
@@ -2899,9 +2896,8 @@ msgstr "FT&P povezava..."
 msgid "S&hell link..."
 msgstr "&Lupinska povezava..."
 
-#, fuzzy
 msgid "SFTP li&nk..."
-msgstr "FT&P povezava..."
+msgstr ""
 
 msgid "Paneli&ze"
 msgstr ""
@@ -4086,17 +4082,16 @@ msgstr ""
 msgid "ftpfs: could not make address-to-name translation: %s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: try reconnect to server, attempt %u"
-msgstr "ftpfs: povezava do strežnika ni bila uspešna: %s"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not get socket name: %s"
-msgstr "ftpfs: ne morem nastaviti pasivnega načina"
+msgstr ""
 
-#, fuzzy
 msgid "ftpfs: could not reconnect to server"
-msgstr "ftpfs: povezava do strežnika ni bila uspešna: %s"
+msgstr ""
 
 msgid "ftpfs: invalid address family"
 msgstr ""

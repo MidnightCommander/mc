@@ -11,8 +11,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-23 20:23+0300\n"
+"Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2023-01-05 21:49+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Efstathios Iosifidis <iefstathios@gmail.com>, 2015\n"
 "Language-Team: Greek (http://www.transifex.com/mc/mc/language/el/)\n"
@@ -2449,28 +2449,22 @@ msgstr ""
 msgid " %s%s file error"
 msgstr "Σφάλμα αρχείου %s%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the %s%s file has changed with version 4.0. It seems that the "
 "installation has failed. Please fetch a fresh copy from the Midnight "
 "Commander package."
 msgstr ""
-"Η μορφή του αρχείου %smc.ext άλλαξε με την έκδοση 3.0. Φαίνεται ότι η "
-"εγκατάσταση απέτυχε. Παρακαλούμε λάβετε ένα νέο αντίγραφο του πακέτου του "
-"Midnight Commander."
 
 #, c-format
 msgid "%s file error"
 msgstr "Σφάλμα αρχείου %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the %s file has changed with version 4.0. You may either want "
 "to copy it from %s%s or use that file as an example of how to write it."
 msgstr ""
-"Η μορφή του αρχείου %s άλλαξε με την έκδοση 3.0. Ίσως θέλετε να το "
-"αντιγράψετε από %smc.ext ή να χρησιμοποιήσετε εκείνο το αρχείο ως παράδειγμα "
-"για το πως να το γράψετε."
 
 msgid "DialogTitle|Copy"
 msgstr "ΤίτλοςΔιαλόγου|Αντιγραφή"
@@ -2736,16 +2730,14 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(σταμάτησε)"
 
-#, fuzzy
 msgid "Incomplete file was retrieved"
-msgstr "Ανακτήθηκε ατελές αρχείο. Να διατηρηθεί;"
+msgstr ""
 
 msgid "&Keep"
 msgstr "&Διατήρηση"
 
-#, fuzzy
 msgid "&Continue copy"
-msgstr "&Συνέχεια"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2876,9 +2868,9 @@ msgstr "Το αρχείο υπάρχει"
 msgid "Background process: File exists"
 msgstr "Διεργασία παρασκηνίου:Το αρχείο υπάρχει"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Files processed: %zu / %zu"
-msgstr "Αρχεία που προσπελάστηκαν: %zu/%zu"
+msgstr ""
 
 #, c-format
 msgid "Files processed: %zu"
@@ -2904,9 +2896,9 @@ msgstr "Ώρα: %s (%s)"
 msgid " Total: %s "
 msgstr "Σύνολο: %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid " Total: %s / %s "
-msgstr "Σύνολο: %s/%s "
+msgstr ""
 
 msgid "Source"
 msgstr "Πηγή"
@@ -2957,9 +2949,8 @@ msgstr "&Δέντρο"
 msgid "&Listing format..."
 msgstr ""
 
-#, fuzzy
 msgid "&Sort order..."
-msgstr "Σειρά ταξινόμησης"
+msgstr ""
 
 msgid "&Filter..."
 msgstr "&Φίλτρο..."
@@ -2973,9 +2964,8 @@ msgstr "Δεσμος FT&P..."
 msgid "S&hell link..."
 msgstr "Δεσμος κε&λύφους..."
 
-#, fuzzy
 msgid "SFTP li&nk..."
-msgstr "Δεσμος FT&P..."
+msgstr ""
 
 msgid "Paneli&ze"
 msgstr ""
@@ -3354,9 +3344,9 @@ msgstr ""
 msgid "No space information"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Free space: %s / %s (%d%%)"
-msgstr "Ελεύθερος χώρος: %s/%s (%d%%)"
+msgstr ""
 
 #, c-format
 msgid "Type:       %s"
@@ -4148,17 +4138,16 @@ msgstr "Αναμονή επαναπροσπάθειας... %d (Control-G για 
 msgid "ftpfs: could not make address-to-name translation: %s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: try reconnect to server, attempt %u"
-msgstr "ftpfs: ανεπιτυχής σύνδεση με τον εξυπηρέτη: %s"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not get socket name: %s"
-msgstr "ftpfs: δεν ήταν δυνατή η ρύθμιση παθητικής λειτουργίας"
+msgstr ""
 
-#, fuzzy
 msgid "ftpfs: could not reconnect to server"
-msgstr "ftpfs: ανεπιτυχής σύνδεση με τον εξυπηρέτη: %s"
+msgstr ""
 
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: μη έγκυρη οικογένεια διευθύνσεων"
@@ -4544,6 +4533,3 @@ msgstr "Συνέχεια από την αρχή;"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "Set expression for filtering filenames"
-#~ msgstr "Ρύθμιση έκφρασης για φιλτράρισμα ονομάτων αρχείων"

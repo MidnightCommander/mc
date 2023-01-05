@@ -10,8 +10,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-23 20:23+0300\n"
+"Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2023-01-05 21:49+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>, 2021\n"
 "Language-Team: Finnish (http://www.transifex.com/mc/mc/language/fi/)\n"
@@ -532,9 +532,8 @@ msgstr ""
 "Odottamaton virhe select() luettaessa dataa aliprosessista:\n"
 "%s"
 
-#, fuzzy
 msgid "Cannot close pipe descriptor (p == NULL)"
-msgstr "Putken kuvausta ei voi luoda"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2761,9 +2760,8 @@ msgstr ""
 msgid "&Keep"
 msgstr "&Pidä"
 
-#, fuzzy
 msgid "&Continue copy"
-msgstr "J&atka"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2896,9 +2894,9 @@ msgstr "Tiedosto saatavilla"
 msgid "Background process: File exists"
 msgstr "Taustaprosessi: Tiedosto saatavilla"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Files processed: %zu / %zu"
-msgstr "Käsitellyt tiedostot: %zu/%zu"
+msgstr ""
 
 #, c-format
 msgid "Files processed: %zu"
@@ -2924,9 +2922,9 @@ msgstr "Aika: %s (%s)"
 msgid " Total: %s "
 msgstr " Yhteensä: %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid " Total: %s / %s "
-msgstr " Yhteensä: %s/%s "
+msgstr ""
 
 msgid "Source"
 msgstr "Lähde"
@@ -2977,9 +2975,8 @@ msgstr "&Puu"
 msgid "&Listing format..."
 msgstr "&Luettelomuoto..."
 
-#, fuzzy
 msgid "&Sort order..."
-msgstr "Järjestys"
+msgstr ""
 
 msgid "&Filter..."
 msgstr "&Suodata..."
@@ -2993,9 +2990,8 @@ msgstr "FT&P linkki..."
 msgid "S&hell link..."
 msgstr "S&hell linkki..."
 
-#, fuzzy
 msgid "SFTP li&nk..."
-msgstr "FT&P linkki..."
+msgstr ""
 
 msgid "Paneli&ze"
 msgstr ""
@@ -4141,17 +4137,16 @@ msgstr ""
 msgid "ftpfs: could not make address-to-name translation: %s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: try reconnect to server, attempt %u"
-msgstr "ftpfs: yhteys palvelimeen epäonnistui: %s"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not get socket name: %s"
-msgstr "ftpfs: passiivi-tilaan siirtyminen epäonnistui"
+msgstr ""
 
-#, fuzzy
 msgid "ftpfs: could not reconnect to server"
-msgstr "ftpfs: yhteys palvelimeen epäonnistui: %s"
+msgstr ""
 
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: Osoiteperhe ei ole validi"

@@ -4,19 +4,19 @@
 #
 # Translators:
 # Jiří Vírava <appukonrad@gmail.com>, 2015,2017
-# k3dar <k3dar7@gmail.com>, 2020-2021
+# kEdAR, 2020-2021
 # Karel Kopecky <kdkopx@protonmail.com>, 2017
-# Pavel Borecki <pavel.borecki@gmail.com>, 2017-2021
+# Pavel Borecki <pavel.borecki@gmail.com>, 2017-2022
 # Radek Valášek <valin@buchlovice.org>, 2014
 # Robin Kriebel <kriebel.robin@gmail.com>, 2016
 # Slava Zanko <slavazanko@gmail.com>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-23 20:23+0300\n"
+"Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2023-01-05 21:49+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>, 2017-2021\n"
+"Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>, 2017-2022\n"
 "Language-Team: Czech (http://www.transifex.com/mc/mc/language/cs/)\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -537,9 +537,8 @@ msgstr ""
 "Nečekaná chyba v select() čtoucím data z podprocesu:\n"
 "%s"
 
-#, fuzzy
 msgid "Cannot close pipe descriptor (p == NULL)"
-msgstr "Nelze vytvořit popisovač roury"
+msgstr "Nedaří se zavřít popisovač pajpy (p == NULL)"
 
 #, c-format
 msgid ""
@@ -1216,9 +1215,8 @@ msgstr "Nejprve je třeba označit blok textu"
 msgid "Run sort"
 msgstr "Spustit třídění"
 
-#, fuzzy
 msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
-msgstr "Zadejte předvolby pro třídění (viz man sort) oddělované mezerami:"
+msgstr "Zadejte předvolby pro třídění (viz man sort(1) ) oddělované mezerami:"
 
 msgid "Sort"
 msgstr "Setřídit"
@@ -1635,7 +1633,7 @@ msgstr ""
 "napsaný pro Midnight Commander."
 
 msgid "Copyright (C) 1996-2022 the Free Software Foundation"
-msgstr ""
+msgstr "Autorská práva © 1996-2022 nadace Free Software Foundation"
 
 msgid "About"
 msgstr "O programu"
@@ -2533,30 +2531,33 @@ msgid ""
 "Midnight Commander now uses %s file.\n"
 "Please copy your modifications of the old file to the new one."
 msgstr ""
+"Máte zastaralý soubor %s.\n"
+"Midnight Commander nyní používá soubor %s.\n"
+"Zkopírujte si své úpravy původního souboru do toho nového."
 
 #, c-format
 msgid " %s%s file error"
 msgstr " %s%s chyba souboru"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the %s%s file has changed with version 4.0. It seems that the "
 "installation has failed. Please fetch a fresh copy from the Midnight "
 "Commander package."
 msgstr ""
-"Formát souboru %smc.ext byl upraven verzí 3.0. Zdá se, že instalace se "
+"Formát souboru %s%s byl upraven verzí 4.0. Zdá se, že instalace se "
 "nezdařila. Nahrajte si novou aktuální kopii z balíčku s Midnight Commander."
 
 #, c-format
 msgid "%s file error"
 msgstr "%s chyba souboru"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the %s file has changed with version 4.0. You may either want "
 "to copy it from %s%s or use that file as an example of how to write it."
 msgstr ""
-"Formát %s souboru se s verzí 3.0 změnil. Můžete buď zkopírovat z %smc.ext "
+"Formát %s souboru se s verzí 4.0 změnil. Můžete ho buď zkopírovat z %s%s "
 "nebo tento soubor použít jako ukázku jak ho napsat."
 
 msgid "DialogTitle|Copy"
@@ -2852,16 +2853,14 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(zamrzlo)"
 
-#, fuzzy
 msgid "Incomplete file was retrieved"
-msgstr "Získaný soubor není kompletní. Přesto uložit?"
+msgstr ""
 
 msgid "&Keep"
 msgstr "&Ponechat"
 
-#, fuzzy
 msgid "&Continue copy"
-msgstr "P&okračovat"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2996,9 +2995,9 @@ msgstr "Soubor existuje"
 msgid "Background process: File exists"
 msgstr "Proces na pozadí: soubor existuje"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Files processed: %zu / %zu"
-msgstr "Zpracované soubory: %zu/%zu"
+msgstr ""
 
 #, c-format
 msgid "Files processed: %zu"
@@ -3024,9 +3023,9 @@ msgstr "Čas: %s (%s)"
 msgid " Total: %s "
 msgstr " Celkem: %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid " Total: %s / %s "
-msgstr "Celkem: %s/%s "
+msgstr ""
 
 msgid "Source"
 msgstr "Zdroj"
@@ -3077,9 +3076,8 @@ msgstr "S&trom"
 msgid "&Listing format..."
 msgstr "&Formát výpisu…"
 
-#, fuzzy
 msgid "&Sort order..."
-msgstr "P&ořadí řazení"
+msgstr "&Pořadí řazení…"
 
 msgid "&Filter..."
 msgstr "&Filtr…"
@@ -3093,9 +3091,8 @@ msgstr "FT&P spojení…"
 msgid "S&hell link..."
 msgstr "S&hell spojení…"
 
-#, fuzzy
 msgid "SFTP li&nk..."
-msgstr "&SFTP odkaz"
+msgstr "&SFTP odkaz…"
 
 msgid "Paneli&ze"
 msgstr "Zobra&zit v panelu"
@@ -3480,9 +3477,9 @@ msgstr "Volné uzly:"
 msgid "No space information"
 msgstr "Informace o využití prostoru nejsou k dispozici"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Free space: %s / %s (%d%%)"
-msgstr "Volné místo: %s/%s (%d%%)"
+msgstr ""
 
 #, c-format
 msgid "Type:       %s"
@@ -4046,7 +4043,7 @@ msgstr "Sestaveno s využitím ncursesw (neznámá verze)"
 
 #, c-format
 msgid "Built with libssh2 %d.%d.%d\n"
-msgstr ""
+msgstr "Sestaveno s libssh2 %d.%d.%d\n"
 
 msgid "Virtual File Systems:"
 msgstr "Virtuální souborové systémy:"
@@ -4306,21 +4303,20 @@ msgstr "ftpfs: připojení k serveru se nezdařilo: %s"
 msgid "Waiting to retry... %d (Control-G to cancel)"
 msgstr "Čekání na opakovaný pokus… %d (Storno CTRL+G)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not make address-to-name translation: %s"
-msgstr "ftpfs: nedaří se vytvořit soket: %s"
+msgstr "ftpfs: nepodařilo se přeložit adresu na název: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: try reconnect to server, attempt %u"
-msgstr "ftpfs: připojení k serveru se nezdařilo: %s"
+msgstr "ftpfs: pokus o připojení k serveru, pokus %u"
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not get socket name: %s"
-msgstr "ftpfs: nedaří se vytvořit soket: %s"
+msgstr "ftpfs: nepodařilo se získat název soketu: %s"
 
-#, fuzzy
 msgid "ftpfs: could not reconnect to server"
-msgstr "ftpfs: nedaří se vytvořit soket: %s"
+msgstr "ftpfs: nepodařilo se opětovně připojit k serveru"
 
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: neplatná generace adresy"
@@ -4735,6 +4731,3 @@ msgstr "Pokračovat od začátku?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nedaří získat místní kopii souboru /ftp://some.host/editme.txt"
-
-#~ msgid "Set expression for filtering filenames"
-#~ msgstr "Zadejte masku pro filtrování názvů souborů"

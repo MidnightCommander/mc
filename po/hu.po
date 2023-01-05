@@ -11,8 +11,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-23 20:23+0300\n"
+"Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2023-01-05 21:49+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: András Tőrös <toros.andras04@gmail.com>, 2020\n"
 "Language-Team: Hungarian (http://www.transifex.com/mc/mc/language/hu/)\n"
@@ -1195,9 +1195,8 @@ msgstr "Előbb ki kell jelölni egy szövegrészt."
 msgid "Run sort"
 msgstr "Rendezés futtatása"
 
-#, fuzzy
 msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
-msgstr "\"sort\" paraméterei (ld. man sort), szóközzel elválasztva:"
+msgstr ""
 
 msgid "Sort"
 msgstr "Rendezés"
@@ -2507,27 +2506,22 @@ msgstr ""
 msgid " %s%s file error"
 msgstr " %s%s fájlhiba"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the %s%s file has changed with version 4.0. It seems that the "
 "installation has failed. Please fetch a fresh copy from the Midnight "
 "Commander package."
 msgstr ""
-"A(z) %smc.ext fájl formátuma a 3.0-s verzióval módosult. Úgy tűnik, hogy a "
-"Midnight Commander telepítésekor hiba történt. Szerezzen be egy friss "
-"verziót a Midnight Commander-csomagból."
 
 #, c-format
 msgid "%s file error"
 msgstr "%s fájl hiba"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the %s file has changed with version 4.0. You may either want "
 "to copy it from %s%s or use that file as an example of how to write it."
 msgstr ""
-"'%s' fájl formátuma a 3.0-s verzióval módosult. Lemásolhatja azt a(z) '%smc."
-"ext' fájlból, vagy elkészítheti az alapján."
 
 msgid "DialogTitle|Copy"
 msgstr "Másol"
@@ -2815,16 +2809,14 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(elakadt)"
 
-#, fuzzy
 msgid "Incomplete file was retrieved"
-msgstr "Nem másolódott át a teljes fájl. Megtartja a célfájlt?"
+msgstr ""
 
 msgid "&Keep"
 msgstr "&Megtartás"
 
-#, fuzzy
 msgid "&Continue copy"
-msgstr "&Tovább"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2960,9 +2952,9 @@ msgstr "A fájl már létezik"
 msgid "Background process: File exists"
 msgstr "Háttérfolyamat: a fájl már létezik"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Files processed: %zu / %zu"
-msgstr "Feldolgozott fájl: %zu / %zu"
+msgstr ""
 
 #, c-format
 msgid "Files processed: %zu"
@@ -2988,9 +2980,9 @@ msgstr "Idő: %s (%s)"
 msgid " Total: %s "
 msgstr " Összesen: %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid " Total: %s / %s "
-msgstr " Összesen: %s/%s"
+msgstr ""
 
 msgid "Source"
 msgstr "Forrás"
@@ -3041,9 +3033,8 @@ msgstr "Köny&vtárfa"
 msgid "&Listing format..."
 msgstr ""
 
-#, fuzzy
 msgid "&Sort order..."
-msgstr "Rendezési mód"
+msgstr ""
 
 msgid "&Filter..."
 msgstr "&Szűrő..."
@@ -3057,9 +3048,8 @@ msgstr "&FTP-kapcsolat..."
 msgid "S&hell link..."
 msgstr "Sh&ell-kapcsolat..."
 
-#, fuzzy
 msgid "SFTP li&nk..."
-msgstr "&FTP-kapcsolat..."
+msgstr ""
 
 msgid "Paneli&ze"
 msgstr "Panelra helye&zés"
@@ -3440,9 +3430,9 @@ msgstr "Szabad csomópont:"
 msgid "No space information"
 msgstr "Nincs adat a tárolóhelyről"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Free space: %s / %s (%d%%)"
-msgstr "Szabad hely: %s/%s (%d%%)"
+msgstr ""
 
 #, c-format
 msgid "Type:       %s"
@@ -4249,21 +4239,20 @@ msgstr "Ftpfs: nem sikerült kapcsolódni a kiszolgálóhoz: %s"
 msgid "Waiting to retry... %d (Control-G to cancel)"
 msgstr "Várakozás az ismétlésre... %d (megszakítás: Control-G)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not make address-to-name translation: %s"
-msgstr "Ftpfs: aljzat nem létrehozható: %s"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: try reconnect to server, attempt %u"
-msgstr "Ftpfs: nem sikerült kapcsolódni a kiszolgálóhoz: %s"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not get socket name: %s"
-msgstr "Ftpfs: aljzat nem létrehozható: %s"
+msgstr ""
 
-#, fuzzy
 msgid "ftpfs: could not reconnect to server"
-msgstr "Ftpfs: aljzat nem létrehozható: %s"
+msgstr ""
 
 msgid "ftpfs: invalid address family"
 msgstr "Ftpfs: hibás gépnév/-cím"
@@ -4655,6 +4644,3 @@ msgstr "Folytatás az elejéről?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nem sikerült behozni /ftp://some.host/editme.txt helyi másolatát"
-
-#~ msgid "Set expression for filtering filenames"
-#~ msgstr "Adja meg a fájlnevekre vonatkozó szűrőkifejezést"

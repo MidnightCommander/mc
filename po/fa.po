@@ -11,8 +11,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-23 20:23+0300\n"
+"Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2023-01-05 21:49+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Arya Hadi <arya.hadi97@gmail.com>, 2017\n"
 "Language-Team: Persian (http://www.transifex.com/mc/mc/language/fa/)\n"
@@ -2672,9 +2672,8 @@ msgstr ""
 msgid "&Keep"
 msgstr ""
 
-#, fuzzy
 msgid "&Continue copy"
-msgstr "ادامه"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2874,9 +2873,8 @@ msgstr ""
 msgid "&Listing format..."
 msgstr ""
 
-#, fuzzy
 msgid "&Sort order..."
-msgstr "ترتیب مرتب‌سازی"
+msgstr ""
 
 msgid "&Filter..."
 msgstr ""
@@ -4044,9 +4042,8 @@ msgstr ""
 msgid "ftpfs: could not get socket name: %s"
 msgstr ""
 
-#, fuzzy
 msgid "ftpfs: could not reconnect to server"
-msgstr "ftpfs: برقراری ارتباط با %s"
+msgstr ""
 
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: خانواده آدرس‌های نامعتبر"

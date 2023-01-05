@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2022-10-23 20:23+0300\n"
+"Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2023-01-05 21:49+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Ferriandy Chianiago <gpl4all@gmail.com>, 2015\n"
 "Language-Team: Indonesian (http://www.transifex.com/mc/mc/language/id/)\n"
@@ -517,9 +517,8 @@ msgstr ""
 "Kesalahan tak terduga dalam select() membaca data dari child process\n"
 "%s"
 
-#, fuzzy
 msgid "Cannot close pipe descriptor (p == NULL)"
-msgstr "Gagal membuat pipe descriptor"
+msgstr ""
 
 #, c-format
 msgid ""
