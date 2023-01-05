@@ -14,12 +14,14 @@ def init_sync_dir(root_dir: Path, resource: str) -> Path:
 
 
 def create_po4a_config(sync_dir: Path, script_dir: Path, source_dir: Path, resource: str) -> Path:
-    translations = get_translations(sync_dir)
+    langs = get_translations(sync_dir)
 
     config = get_config_file(script_dir, resource, "po4a.cfg").read_text()
 
+    config = config.replace("@translations@", " ".join(f"{lang}:var.d/$master/{lang}.po" for lang in langs))
+    config = config.replace("@resources@", " ".join(f"{lang}:@srcdir@/doc/hints/l10n/mc.hint.{lang}" for lang in langs))
+
     config = config.replace("@srcdir@", str(source_dir))
-    config = config.replace("@translations@", " ".join(f"{lang}:var.d/$master/{lang}.po" for lang in translations))
 
     config_path = sync_dir / "po4a.cfg"
     config_path.write_text(config)
