@@ -14,9 +14,9 @@
 
 提示: 若您的終端機沒有功能鍵，可使用【ESC+數字鍵】來代替。
 
-提示: GNU Midnight Commander 的網頁: http://www.midnight-commander.org/
+提示：Midnight Commander 网页：https://www.midnight-commander.org
 
-提示: 任何錯誤報告請傳送至 mc-devel@gnome.org
+提示：请发送错误报告到 mc-devel@lists.midnight-commander.org
 
 提示: Tab 可切換使用中的面板。
 
@@ -24,7 +24,7 @@
 
 提示: 我們有一個很棒的手冊頁。
 
-Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
+提示：你是否想使用 Lynx 的浏览方式？请到设置对话窗中设置。
 
 提示: % 巨集也可在命令列中使用。
 
@@ -52,7 +52,7 @@ Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
 
 提示: 要在輸入指令時中途改變目錄，可使用 M-c 指令 (快速的 cd)
 
-注意: 無法在非本地端的檔案系統中使用 Shell 指令。
+提示：在非本机的文件系统里无法使用 Shell 指令。
 
 提示: 可使用 C-y 將已刪除的文字重新顯示出來。
 
@@ -68,7 +68,7 @@ Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
 
 提示: 您可以在【選項/確認】中關閉所有的確認請求。
 
-Hint: Leap to frequently used directories in a single bound with C-\.
+提示: 可使用 C-\ 跳轉到常用的目錄。
 
 提示: 您可以在 mc 中使用匿名模式的 FTP，方法是輸入 'cd ftp://machine.edu'
 
@@ -84,4 +84,4 @@ Hint: Leap to frequently used directories in a single bound with C-\.
 
 提示: 要使用滑鼠來剪下和貼上需同時按住 Shift 鍵。
 
-Hint: Key frequently visited ftp sites in the hotlist: type C-\.
+提示: 若要將常用的 ftp 站點加入至常用列表中請按 C-\

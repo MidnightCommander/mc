@@ -14,9 +14,9 @@ Hint: For å velge mapper kan du legge til en skråstrek til slutt i søkemønst
 
 Hint: Hvis terminalen mangler funksjonstaster så kan du bruke ESC + tallet.
 
-Hint: Hjemmesiden til GNU Midnight Commander er http://www.midnight-commander.org/
+Hint: Hjemmesiden til GNU Midnight Commander er https://www.midnight-commander.org
 
-Hint: Du kan sende feilrapporter til mc-devel@gnome.org
+Hint: Du kan sende feilrapporter til mc-devel@lists.midnight-commander.org
 
 Hint: Tabulatoren endrer det aktive panelet.
 
@@ -52,7 +52,7 @@ Hint: Du kan bruke «Legg til eksternt i panel» for å utføre komplekse søk.
 
 Hint: Du kan skifte mappe mens du holder på å skrive en kommando med hurtigtasten M-c
 
-Merk: Skallkommandoer vil ikke virke i eksterne filsystemer.
+Hint: Skallkommandoer vil ikke virke i eksterne filsystemer.
 
 Hint: Du kan hente tilbake tekst med C-y.
 

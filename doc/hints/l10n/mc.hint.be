@@ -14,9 +14,9 @@
 
 Намінка. Калі тэрмінал ня мае функцыянальных клявішаў, ужывайце «ESC+лічба».
 
-Намінка. Бачына «Міднайт Камандэра» — http://www.midnight-commander.org/.
+Намінка. Бачына «Міднайт Камандэра» — https://www.midnight-commander.org.
 
-Намінка. Пра хібы паведамляйце на mc-devel@gnome.org.
+Намінка. Пра хібы паведамляйце на mc-devel@lists.midnight-commander.org.
 
 Намінка. «Tab» зьмяняе дзейную панэль.
 
@@ -24,7 +24,7 @@
 
 Намінка. У нас ёсьць добрае правадніцтва.
 
-Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
+Намінка. Хочаце перасоўвацца, як у «Lynx»? Вызначце гэта ў «Настаўленьнях».
 
 Намінка. Макрасы «%» працуюць нават у загадным радку.
 
@@ -52,7 +52,7 @@ Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
 
 Намінка. Каб хутка зьмяніць каталёґ, калі набіраеце загад, цісьніце «M-c».
 
-Уважце: загады абалонкі могуць не працаваць на немясцовых файлавых сыстэмах.
+Намінка: загады абалонкі могуць не працаваць на немясцовых файлавых сыстэмах.
 
 Намінка. «C-y» вяртае страчаны тэкст.
 
@@ -68,7 +68,7 @@ Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
 
 Намінка. Забараніць пытацца пацьвярджаць можна ў «Наладах» → «Пацьвярджаць».
 
-Hint: Leap to frequently used directories in a single bound with C-\.
+Намінка. Да каталёґаў, якія часта ўжываюцца, можна перайсьці па «C-\».
 
 Намінка. Можна ўвайсьці FTP безыменным, набраўшы «cd ftp://machine.edu»
 
@@ -84,4 +84,4 @@ Hint: Leap to frequently used directories in a single bound with C-\.
 
 Намінка. Каб выразаць і ўстаўляць мышкаю, можа спатрэбіцца трымаць «Shift».
 
-Hint: Key frequently visited ftp sites in the hotlist: type C-\.
+Намінка. Захавайце сайты FTP, якія часта наведваеце: націсьніце «C-\».

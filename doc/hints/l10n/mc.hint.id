@@ -14,9 +14,9 @@ Petunjuk: Memilih direktori: tambahkan garis miring di akhir pola yang cocok.
 
 Petunjuk: Bila terminal Anda tak punya tombol fungsi, gunakan urutan ESC+angka.
 
-Petunjuk: Laman web GNU Midnight Commander: http://www.midnight-commander.org/
+Petunjuk: Laman web GNU Midnight Commander: https://www.midnight-commander.org
 
-Petunjuk: Harap kirim laporan bug ke mc-devel@gnome.org
+Petunjuk: Harap kirim laporan bug ke mc-devel@lists.midnight-commander.org
 
 Petunjuk: Tab mengubah panel Anda saat ini.
 
@@ -24,7 +24,7 @@ Petunjuk: VFS itu keren: ketuk enter pada suatu file tar untuk memeriksa isinya.
 
 Petunjuk: Kami juga memiliki halaman manual yang bagus.
 
-Petunjuk: Apakah Anda ingin navigasi gaya lynx? Atur itu dalam dialog Konfigurasi.
+Petunjuk: Apakah Anda ingin navigasi gaya Lynx? Atur itu dalam dialog Konfigurasi.
 
 Petunjuk: makro bekerja bahkan pada command line.
 
@@ -38,7 +38,7 @@ Petunjuk: Ingin shell polos? Tekan C-o, dan kembali lagi ke MC dengan C-o lagi.
 
 Petunjuk: Menata variabel CDPATH dapat menghemat ketukan tombol dalam perintah cd.
 
-Petunjtuk: Bila Anda ingin melihat file .*, nyatakan saja dalam dialog Konfigurasi.
+Petunjuk: Bila Anda ingin melihat file .*, nyatakan saja dalam dialog Konfigurasi.
 
 Petunjuk: Ingin melihat file cadangan *~? Atur itu dalam dialog Konfigurasi.
 
@@ -50,9 +50,9 @@ Petunjuk: Cari File: Anda dapat bekerja pada file yang ditemukan memakai tombol 
 
 Petunjuk: Ingin melakukan pencarian rumit? Pakai perintah Panelkan Eksternal.
 
-Petunjul: Untuk pindah direktori saat tengah mengetikkan suatu perintah, gunakan M-c (cd cepat).
+Petunjuk: Untuk pindah direktori saat tengah mengetikkan suatu perintah, gunakan M-c (cd cepat).
 
-Catatan: Perintah shell tak akan bekerja bila Anda berada pada sistem file bukan lokal.
+Petunjuk: Perintah shell tak akan bekerja bila Anda berada pada sistem file bukan lokal.
 
 Petunjuk: Panggil kembali teks dari kematian dengan C-y.
 

@@ -14,9 +14,9 @@ Consell: Seleccionar directoris: afegiu «/» al final del patró de coincidènc
 
 Consell: Si no funcionen les tecles de funció, empreu la seqüència «ESC+número».
 
-Consell: La pàgina inicial del Midnight Commander de GNU és http://www.midnight-commander.org/
+Consell: La pàgina inicial del Midnight Commander de GNU és https://www.midnight-commander.org
 
-Consell: Si us plau, envieu qualsevol informe d'error a «mc-devel@gnome.org».
+Consell: Si us plau, envieu qualsevol informe d'error a «mc-devel@lists.midnight-commander.org».
 
 Consell: El tabulador canvia de plafó.
 
@@ -52,7 +52,7 @@ Consell: Voleu fer cerques complexes? Empreu l'ordre «Quadre de cerca externa»
 
 Consell: Canvieu a meitat de camí del directori escrivint una ordre, empreu «M-c» («cd» ràpid).
 
-Nota: Les ordres de l'intèrpret d'ordres no funcionaran quan s'està en un sistema de fitxers no local.
+Сonsell: Les ordres de l'intèrpret d'ordres no funcionaran quan s'està en un sistema de fitxers no local.
 
 Consell: Recupereu el text esborrat amb «Ctrl-y».
 

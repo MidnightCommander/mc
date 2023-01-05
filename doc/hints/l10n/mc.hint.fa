@@ -14,9 +14,9 @@ Hint: Need to quote a character? Use Control-q and the character.
 
 راهنمایی: اگر ترمینال شما از کلید‌های فانکشن پشتیبانی نمی‌کند، از Esc+عدد استفاده کنید.
 
-راهنمایی: نشانی وبگاه فرماندار نیمه‌شب:  http://www.midnight-commander.org/
+راهنمایی: نشانی وبگاه فرماندار نیمهشب: https://www.midnight-commander.org
 
-راهنمایی: لطفا هرگونه باگ را به mc-devel@gnome.org گزارش دهید.
+راهنمایی: لطفا هرگونه باگ را به mc-devel@lists.midnight-commander.org گزارش دهید.
 
 راهنمایی: Tab قاب فعلی را عوض می‌کند.
 
@@ -52,7 +52,7 @@ Hint: Want to do complex searches? Use the External Panelize command.
 
 راهنمایی: اگر خواستید در حین تایپ یک دستور پوشه را عوض کنید از ترکیب M-c استفاده کنید (quick cd).
 
-راهنمایی: زمانی که در یک فایل سیستم غیر محلی باشید دستورات شل کار نمی‌کنند.
+Hint: Shell commands will not work when you are on a non-local file system.
 
 Hint: Bring text back from the dead with C-y.
 

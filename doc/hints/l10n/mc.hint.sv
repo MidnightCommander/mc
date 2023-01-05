@@ -8,15 +8,15 @@ Tips: Använd M-p och M-n för att komma åt kommandohistoriken.
 
 Tips: Behöver du skriva ett kontrolltecken? Använd Control-q och tecknet.
 
-Är du trött på dessa meddelanden? Stäng av dem från Alternativ/Layout-menyn.
+Tips: Är du trött på dessa meddelanden? Stäng av dem från Alternativ/Layout-menyn.
 
 Tips: Välja kataloger: Lägg till snedstreck i slutet av det matchande mönstret.
 
 Tips: Om din terminal saknar funktionstangenter, använd ESC+siffersekvens.
 
-Tips: Hemsidan för GNU Midnight Commander: http://www.midnight-commander.org/
+Tips: Hemsidan för GNU Midnight Commander: https://www.midnight-commander.org
 
-Tips: Skicka felrapporter till mc-devel@gnome.org
+Tips: Skicka felrapporter till mc-devel@lists.midnight-commander.org
 
 Tips: Tab ändrar din nuvarande panel.
 
@@ -24,13 +24,13 @@ Tips: VFS användbarhet: tryck enter på en tar-fil för att se dess innehåll.
 
 Tips: Vi har också en trevlig manualsida.
 
-Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
+Tips: Vill du ha navigation i Lynx-stil? Ställ in det i konfigurationsdialogen.
 
 Tips: %-makron fungerar även på kommandoraden.
 
 Tips: M-! tillåter dig att exekvera program och se utskriften i filvisaren.
 
-Fillistningsformatet kan anpassas; kör "man mc" för detaljer.
+Tips: Fillistningsformatet kan anpassas; kör "man mc" för detaljer.
 
 Tips: %D/%T expanderar till de markerade filerna i katalogen mitt emot.
 
@@ -52,7 +52,7 @@ Tips: Vill du göra komplexa sökningar? Använd kommandot Extern panelisering.
 
 Tips: För att ändra katalog under kommandoinmatning, använd M-c (snabb-cd).
 
-Notera: Skalkommandon funkar inte när du är på ett icke-lokalt filsystem.
+Tips: Skalkommandon funkar inte när du är på ett icke-lokalt filsystem.
 
 Tips: Ta tillbaks text från de döda med C-y.
 
@@ -68,7 +68,7 @@ Tips: Du kan välja den externa filvisaren med skalvariabeln VIEWER eller PAGER.
 
 Tips: Du kan slå av alla är-du-säker-frågor i Alternativ/Konfirmation.
 
-Hint: Leap to frequently used directories in a single bound with C-\.
+Tips: Hoppa till ofta använda kataloger i ett steg med C-\.
 
 Tips: Du kan använda anonym FTP i mc genom att skriva 'cd ftp://dator.se'
 
@@ -84,4 +84,4 @@ Tips: För att markera kataloger i markera-dialogrutan, lägg till snedstreck.
 
 Tips: Skift kan behöva hållas ned för att använda klipp och klistra med musen.
 
-Hint: Key frequently visited ftp sites in the hotlist: type C-\.
+Tips: Mata in ofta använda ftp-sajter i favoriter: tryck C-\.

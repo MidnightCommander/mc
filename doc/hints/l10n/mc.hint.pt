@@ -2,7 +2,7 @@ Dica: Use C-x t para copiar nomes de ficheiro etiquetados para a linha de comand
 
 Dica: Use C-x p para copiar o caminho atual para a linha de comandos.
 
-Dica: Preenchimento: use M-Tab (ou Esc+Tab).  Duas vezes para obter a lista.
+Dica: Preenchimento: use M-Tab (ou Esc+Tab). Duas vezes para obter a lista.
 
 Dica: Use M-p e M-n para aceder ao histórico de comandos.
 
@@ -14,9 +14,9 @@ Dica: Seleção de diretórios: adicione uma barra no fim do padrão corresponde
 
 Dica: Se o seu terminal não tem algumas teclas de função, use a sequência ESC+número.
 
-Dica: A página do GNU Midnight Commander: http://www.midnight-commander.org/
+Dica: A página do GNU Midnight Commander: https://www.midnight-commander.org
 
-Dica: Por favor envie relatórios de bugs para mc-devel@gnome.org
+Dica: Por favor envie relatórios de bugs para mc-devel@lists.midnight-commander.org
 
 Dica: O tab altera o painel atual.
 
@@ -24,7 +24,7 @@ Dica: VFS coolness: pressione enter num ficheiro tar para examinar o seu conteú
 
 Dica: Também temos uma página manual interessante.
 
-Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
+Dica: Deseja navegação tipo Lynx? Ative-a no diálogo de Configuração.
 
 Dica: % macros funcionam mesmo na linha de comandos.
 
@@ -52,7 +52,7 @@ Dica: Deseja efetuar procuras complexas? Use o comando Externo Panelize.
 
 Dica: Para mudar de diretório a meio de um comando, use M-c (cd rápido).
 
-Note: Comandos shell não funcionarão quando estiver num sistema de ficheiros não local.
+Dica: Comandos shell não funcionarão quando estiver num sistema de ficheiros não local.
 
 Dica: Traga de volta o texto dos mortos com C-y.
 
@@ -68,7 +68,7 @@ Dica: Pode especificar o visualizador externo com as vars de shell VIEWER ou PAG
 
 Dica: Pode desabilitar todos os pedidos de confirmação em Opções/Confirmação.
 
-Hint: Leap to frequently used directories in a single bound with C-\.
+Dica: Salte para diretórios frequentemente usados de uma só vez através de C-\.
 
 Dica: Pode efetuar FTP anónimo com o mc digitando 'cd ftp://machine.edu'
 
@@ -84,4 +84,4 @@ Dica: Para marcar diretórios na caixa de diálogo de seleção, acrescente uma 
 
 Dica: Para usar o rato cortar e colar pode ser necessário prender a tecla shift
 
-Hint: Key frequently visited ftp sites in the hotlist: type C-\.
+Dica: Sites ftp chave frequentemente visitados na hotlist: digite C-\.

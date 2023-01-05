@@ -2,7 +2,7 @@ Tip: Pomocou C-x t skopírujete označené názvy súborov do príkazového riad
 
 Tip: Pomocou C-x p skopírujete aktuálnu cestu do príkazového riadka.
 
-Rada: Dopĺňanie pomocou M-Tab (alebo Esc+Tab). Ak ho napíšete dvakrát, zobrazí sa zoznam.
+Tip: Dopĺňanie pomocou M-Tab (alebo Esc+Tab). Ak ho napíšete dvakrát, zobrazí sa zoznam.
 
 Tip: Pomocou M-p a M-n zobrazíte históriu príkazov.
 
@@ -14,9 +14,9 @@ Tip: Výber adresárov: pridajte lomku na koniec vyhľadávacieho vzoru.
 
 Tip: Ak váš terminál nemá funkčné klávesy, použite ESC+číselnú postupnosť.
 
-Tip: Domovská stránka GNU Midnight Commander: http://www.midnight-commander.org/
+Tip: Domovská stránka GNU Midnight Commander: https://www.midnight-commander.org
 
-Tip: Hlásenia chýb posielajte na mc-devel@gnome.org
+Tip: Hlásenia chýb posielajte na mc-devel@lists.midnight-commander.org
 
 Tip: Tabulátor mení váš aktuálny panel.
 
@@ -24,7 +24,7 @@ Tip: VFS: stlačením Enter na súbore .tar preskúmate jeho obsah.
 
 Tip: Máme aj peknú manuálovú stránku.
 
-Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
+Tip: Chcete navigáciu v štýle Lynx? Nastavte si ju v dialógu Konfigurácia.
 
 Tip: Makrá % fungujú aj na príkazovom riadku.
 
@@ -68,7 +68,7 @@ Tip: Premennými prostredia VIEWER alebo PAGER môžete určiť externý prehlia
 
 Tip: Môžete zakázať všetky žiadosti o potvrdenie pomocou Možnosti/Konfigurácia.
 
-Hint: Leap to frequently used directories in a single bound with C-\.
+Tip: Do často používaných adresárov môžete skákať pomocou C-\.
 
 Tip: Prístup k anonymnému FTP z mc získate napísaním „cd ftp://machine.edu“
 
@@ -84,4 +84,4 @@ Tip: Adresáre v dialógovom okne výberu môžete označiť pridaním lomky.
 
 Tip: Na kopírovanie a vkladanie pomocou myši môže byť potrebné podržať Shift.
 
-Hint: Key frequently visited ftp sites in the hotlist: type C-\.
+Tip: Uložte si často navštevované servery FTP do hotlistu: C-\

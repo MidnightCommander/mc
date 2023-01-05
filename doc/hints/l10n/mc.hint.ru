@@ -14,9 +14,9 @@
 
 Совет: Если ваш терминал без функц. клавиш, вам поможет ESC+цифра.
 
-Совет: Домашняя страница Midnight Commander: http://www.midnight-commander.org/
+Совет: Домашняя страница Midnight Commander: https://www.midnight-commander.org
 
-Совет: Пожалуйста, шлите любые сообщения об ошибках на mc-devel@gnome.org
+Совет: Пожалуйста, шлите любые сообщения об ошибках на mc-devel@lists.midnight-commander.org
 
 Совет: Tab меняет текущую панель.
 
@@ -24,7 +24,7 @@
 
 Совет: У нас также имеется толковая страница руководства.
 
-Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
+Совет: Вы хотите навигацию в стиле Lynx? Установите это в диалоге Конфигурация.
 
 Совет: Макросы % работают даже в командной строке.
 
@@ -32,7 +32,7 @@ Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
 
 Совет: Формат списка файлов может быть изменен; наберите "man mc" для деталей.
 
-Подсказка: %D/%T распространяется на отмеченные файлы в противоположном каталоге.
+Совет: %D/%T распространяется на отмеченные файлы в противоположном каталоге.
 
 Совет: Хотите простую оболочку? Нажмите C-o, и снова C-o для возврата в МС.
 
@@ -52,7 +52,7 @@ Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
 
 Совет: Для смены каталога во время набора команды нажмите M-c (быстрая смена).
 
-Заметка: Команды оболочки не выполняются, если вы не в локальной файл. системе.
+Совет: Команды оболочки не выполняются, если вы не в локальной файл. системе.
 
 Совет: Удаленный текст можно вернуть с помощью C-y.
 
@@ -68,7 +68,7 @@ Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
 
 Совет: Вы можете отменить запросы на подтверждение в Настройки/Подтверждение.
 
-Hint: Leap to frequently used directories in a single bound with C-\.
+Совет: Переходите к часто используемым каталогам из справочника, набрав C-\.
 
 Совет: Вы можете использовать анонимный FTP с mc, набрав 'cd ftp://machine.edu'
 
@@ -84,4 +84,4 @@ Hint: Leap to frequently used directories in a single bound with C-\.
 
 Совет: Вырезание и вставка с помощью мыши может требовать удержания клавиши Shift.
 
-Hint: Key frequently visited ftp sites in the hotlist: type C-\.
+Совет: Храните список часто посещаемых FTP в справочнике каталогов: нажмите C-\.

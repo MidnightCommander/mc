@@ -6,17 +6,17 @@ Tipp: Kiegészítés: M-Tab (vagy Esc Tab). Kétszer lenyomva listát ad.
 
 Tipp: Korábbi parancsok előhozása: M-p illetve M-n
 
-Tipp: Speciális karakter beírásához használja ezt: Control-q <karakter>
+Tipp: Speciális karakter beírásához használja ezt: Control-q E<lt>karakterE<gt>
 
 Tipp: Az itt megjelenő üzenetek kikapcsolhatók a "Beállítások/Megjelenés"-nél.
 
 Tipp: Könyvtárak kijelölése a minta végére / jelet írva lehetséges.
 
-Tipp: Ha a terminálon nincsenek funkcióbillentyűk, használja ezt: Esc <szám>
+Tipp: Ha a terminálon nincsenek funkcióbillentyűk, használja ezt: Esc E<lt>számE<gt>
 
-Tipp: A Midnight Commander honlapja: http://www.midnight-commander.org/
+Tipp: A Midnight Commander honlapja: https://www.midnight-commander.org
 
-Tipp: Hibabejelentéseket a következő címre lehet küldeni: mc-devel@gnome.org
+Tipp: Hibabejelentéseket a következő címre lehet küldeni: mc-devel@lists.midnight-commander.org
 
 Tipp: A Tab billentyűvel lehet panelt váltani.
 
@@ -52,7 +52,7 @@ Tipp: Komplex keresések végzéséhez a "Külső panel-parancs" funkció javaso
 
 Tipp: Könyvtárváltás egy parancs begépelése közben: M-c (gyors könyvtárváltás).
 
-Megjegyzés: A shell-parancsok távoli fájlrendszereken nem használhatók.
+Tipp: A shell-parancsok távoli fájlrendszereken nem használhatók.
 
 Tipp: A pufferben levő (például "C-k"-val oda tett) szöveg visszahozása: C-y
 

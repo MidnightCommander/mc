@@ -2,7 +2,7 @@ Vihje: Kasuta C-x, et kopeerida märgitud failide nimed käsureale.
 
 Vihje: Kasuta C-x p, et kopeerida aktiivne otsingurada käsureale.
 
-Vihje: Lõpetamiseks kasuta M-Tab (või Esc-Tab).  Topeltsisestus kuvab listi.
+Vihje: Lõpetamiseks kasuta M-Tab (või Esc-Tab). Topeltsisestus kuvab listi.
 
 Vihje: Käskude ajaloo kasutamiseks kasuta M-p ja M-n.
 
@@ -14,9 +14,9 @@ Vihje: Kataloogide valimiseks lisa sobiva mustri lõppu kaldkriips.
 
 Vihje: Kui terminalil puuduvad funktsiooniklahvid, siis kasuta ESC+number jadasid.
 
-Vihje: GNU Midnight Commanderi koduleht: http://www.midnight-commander.org/
+Vihje: GNU Midnight Commanderi koduleht: https://www.midnight-commander.org
 
-Vihje: Palun saada vearaportid aadressile mc-devel@gnome.org
+Vihje: Palun saada vearaportid aadressile mc-devel@lists.midnight-commander.org
 
 Vihje: TAB vahetab aktiivset paneeli.
 
@@ -24,7 +24,7 @@ Vihje: VFS võimalused: tar-faili sisuga tutvumiseks vajuta ta peal ENTER.
 
 Vihje: Olemas on ka meeldiv manuaal.
 
-Vihje: Soovid lynxi stiilis navigeerimist? Luba see konfiguratsiooni dialoogist.
+Vihje: Soovid Lynxi stiilis navigeerimist? Luba see konfiguratsiooni dialoogist.
 
 Vihje: %-makrod töötavad ka käsureal.
 
@@ -52,7 +52,7 @@ Vihje: Soovid teha keerulisi otsinguid? Kasuta käsku Väline paneelile.
 
 Vihje: Kataloogi kiirvahetuseks käsu sisestamise ajal kasuta M-c (quick cd).
 
-NB! Kesta käsud töötavad ainult kohalikus failisüsteemis.
+Vihje: Kesta käsud töötavad ainult kohalikus failisüsteemis.
 
 Vihje: C-y taastab kustutatud teksti.
 

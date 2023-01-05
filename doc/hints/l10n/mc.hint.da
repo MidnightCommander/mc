@@ -14,9 +14,9 @@ Fif: Valg af mapper: tilføj en skråstreg til slutningen af det matchende møns
 
 Fif: Hvis din terminal mangler funktionstaster, så rug ESC+talsekvensen.
 
-Fif: Hjemmesiden for GNU Midnight Commander: http://www.midnight-commander.org/
+Fif: Hjemmesiden for GNU Midnight Commander: https://www.midnight-commander.org
 
-Fif: Send venligst eventuelle fejlrappporter til mc-devel@gnome.org
+Fif: Send venligst eventuelle fejlrappporter til mc-devel@lists.midnight-commander.org
 
 Fif: Tabulator skifter dit nuværende panel.
 
@@ -24,7 +24,7 @@ Fif: Cool VFS: tryk på enter på en tar-fil for at undersøge dens indhold.
 
 Fif: Vi har også en fin manualside.
 
-Fif: Vil du have navigation i lynx-stil? Sæt det i konfigurationsdialogen.
+Fif: Vil du have navigation i Lynx-stil? Sæt det i konfigurationsdialogen.
 
 Fif: %-makroer virker også på kommandolinjen.
 
@@ -44,7 +44,7 @@ Fif: Vil du se dine *~-backupfiler? Sæt det i konfigurationsdialogen.
 
 Fif: Fuldførelse virker på alle inputlinjer i alle dialoger. Tryk blot på M-Tab.
 
-Hint: På langsomme maskiner kan flaget -s hjælpe.
+Fif: På langsomme maskiner kan flaget -s hjælpe.
 
 Fif: Find fil: du kan arbejde på de fundne filer med Panelisér-knappen.
 
@@ -52,7 +52,7 @@ Fif: Vil du foretage komplekse søgninger? Brug Ekstern panelisering-kommandoen.
 
 Fif: Brug M-c (hurtig cd), til at skifte mappe halvvejs gennem indtastningen af en kommando.
 
-Bemærk: Skalkommandoer virker ikke når du er på et ikke-lokalt filsystem.
+Fif: Skalkommandoer virker ikke når du er på et ikke-lokalt filsystem.
 
 Fif: Bring tekst tilbage fra de døde med C-y.
 

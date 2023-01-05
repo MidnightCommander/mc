@@ -14,9 +14,9 @@ Tip: Složky vyberete přidáním lomítka na konec vzoru pro hledání shody v 
 
 Tip: Pokud váš terminál nezná nebo nemá funkční (F1-12) klávesy, použijte Esc+číslo.
 
-Tip: Domovská stránka GNU Midnight Commander je: http://www.midnight-commander.org/
+Tip: Domovská stránka GNU Midnight Commander je: https://www.midnight-commander.org
 
-Tip: Chyby hlaste na mc-devel@gnome.org (v angličtině).
+Tip: Chyby hlaste na mc-devel@lists.midnight-commander.org (v angličtině).
 
 Tip: Pomocí klávesy Tab přejdete na další panel.
 
@@ -24,7 +24,7 @@ Tip: Stiskem Enter na souboru .tar nebo .tar.gz si prohlédnete jeho obsah.
 
 Tip: Existuje také manuálová stránka [mc(1)].
 
-Tip: Přejete si klávesy stejně jako v prohlížeči lynx? Přepněte si to v Nastavení.
+Tip: Přejete si klávesy stejně jako v prohlížeči Lynx? Přepněte si to v Nastavení.
 
 Tip: Makra uvozená % fungují i na příkazovém řádku.
 
@@ -52,7 +52,7 @@ Tip: Pro opravdu složité vyhledávání zkuste příkaz příkaz Externí pane
 
 Tip: Pokud chcete změnit složku při práci na příkazovém řádku, zkuste Meta-c.
 
-Pozn.: Příkazy shellu nefungují, pokud nepracujete na lokálním systému souborů.
+Tip: Příkazy shellu nefungují, pokud nepracujete na lokálním systému souborů.
 
 Tip: Smazaný text obnovíte Ctrl-y.
 

@@ -14,9 +14,9 @@ Hint: Selecting directories: add a slash to the end of the matching pattern.
 
 Hint: If your terminal lacks functions keys, use the ESC+number sequence.
 
-Συμβουλή: Η ιστοσελίδα του GNU Midnight Commander: http://www.midnight-commander.org/
+Συμβουλή: Η ιστοσελίδα του GNU Midnight Commander: https://www.midnight-commander.org
 
-Συμβουλή: Παρακαλούμε στείλτε μας αναφορές σφαλμάτων στο mc-devel@gnome.org
+Συμβουλή: Παρακαλούμε στείλτε μας αναφορές σφαλμάτων στο mc-devel@lists.midnight-commander.org
 
 Hint: Tab changes your current panel.
 
@@ -24,7 +24,7 @@ Hint: VFS coolness: tap enter on a tar file to examine its contents.
 
 Hint: We also have a nice manual page.
 
-Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
+Συμβουλή: Θέλετε περιήγηση στο στυλ του Lynx; Ρυθμίστε το στο διάλογο Ρυθμίσεις.
 
 Hint: % macros work even on the command line.
 
@@ -52,7 +52,7 @@ Hint: Want to do complex searches? Use the External Panelize command.
 
 Συμβουλή: Για να αλλάξετε κατάλογο ενώ έχετε ήδη ξεκινήσει να πληκτρολογείτε μία εντολή, χρησιμοποιήστε το M-c (γρήγορο cd).
 
-Σημείωση: Οι εντολές κελύφους δε θα λειτουργήσουν όταν βρίσκεστε σε ένα μη τοπικό σύστημα αρχείων.
+Συμβουλή: Οι εντολές κελύφους δε θα λειτουργήσουν όταν βρίσκεστε σε ένα μη τοπικό σύστημα αρχείων.
 
 Hint: Bring text back from the dead with C-y.
 

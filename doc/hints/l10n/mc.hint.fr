@@ -14,9 +14,9 @@ Astuce: Sélection de répertoires: ajouter une barre oblique à la fin de motif
 
 Astuce: Si votre clavier n'a pas de touche de fonction, utilisez la combinaison ESC+nombre.
 
-Astuce: Site officiel de GNU Midnight Commander: http://www.midnight-commander.org/
+Astuce: Site officiel de GNU Midnight Commander: https://www.midnight-commander.org
 
-Astuce: Envoyez vos rapports de bogues à l'adresse mc-devel@gnome.org
+Astuce: Envoyez vos rapports de bogues à l'adresse mc-devel@lists.midnight-commander.org
 
 Astuce: La touche Tab permute le panneau courant.
 

@@ -14,9 +14,9 @@ Consejo: Para seleccionar directorios añadir «/» tras el patrón a buscar.
 
 Consejo: Si no funcionan las teclas de función, ESC+número sirve.
 
-Consejo: El sitio oficial del Midnight Commander es http://www.midnight-commander.org/
+Consejo: El sitio oficial del Midnight Commander es https://www.midnight-commander.org
 
-Consejo: Comunique cualquier defecto a mc-devel@gnome.org
+Consejo: Comunique cualquier defecto a mc-devel@lists.midnight-commander.org
 
 Consejo: El tabulador cambia de panel.
 
@@ -52,7 +52,7 @@ Consejo: Puede hacer y guardar búsquedas complejas con «Búsquedas externas».
 
 Consejo: Con M-c cambiar de directorio es un poco más cómodo.
 
-Nota: Las instrucciones de la Shell no funcionan fuera del sistema local.
+Consejo: Las instrucciones de la Shell no funcionan fuera del sistema local.
 
 Consejo: Con C-y puede recuperar texto eliminado.
 

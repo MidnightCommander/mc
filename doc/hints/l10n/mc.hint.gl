@@ -2,7 +2,7 @@ Consello: Use C-x t para copiar os nomes dos ficheiros marcados na liña de orde
 
 Consello: C-x p copia a ruta actual na liña de ordes.
 
-Consello: M-Tab (ou ESC+Tab) completa ordes/nomes  Dúas veces devolve unha lista.
+Consello: M-Tab (ou ESC+Tab) completa ordes/nomes Dúas veces devolve unha lista.
 
 Consello: Use M-p e M-n para acceder ao historial de ordes.
 
@@ -14,15 +14,15 @@ Consello: para seleccionar directorios: engada unha barra «/» na fin do patró
 
 Consello: se o seu terminal non ten teclas de función, use ESC+número.
 
-Consello: a páxina principal de GNU Midnight Commander é: http://www.midnight-commander.org/
+Consello: a páxina principal de GNU Midnight Commander é: https://www.midnight-commander.org
 
-Consello: informe de calquera erro a mc-devel@gnome.org
+Consello: informe de calquera erro a mc-devel@lists.midnight-commander.org
 
 Consello: a tecla Tab cambia o seu panel actual.
 
 Consello: o mellor VFS! Prema Intro nun arquivo «tar» para examinar o seu contido.
 
-Suxestión: temos tamén unha páxina de manual: «man mc»
+Consello: temos tamén unha páxina de manual: «man mc»
 
 Consello: quere navegar ao estilo «Lynx» coas frechas? axústeo no cadro de diálogo de configuración.
 
@@ -52,7 +52,7 @@ Consello: pode facer e gardar buscas complexas con «Buscas externas».
 
 Consello: escribindo M-c cambiar de directorio é un chisco máis doado.
 
-Nota: as ordes da consola non funcionan fora do sistema local.
+Consello: as ordes da consola non funcionan fora do sistema local.
 
 Consello: Con C-y pode recuperar texto eliminado.
 

@@ -2,7 +2,7 @@ Hint: Use C-x t to copy tagged file names to the command line.
 
 Hint: Use C-x p to copy the current pathname to the command line.
 
-Hint: Completion: use M-Tab (or Esc+Tab).  Type it twice to get a list.
+Hint: Completion: use M-Tab (or Esc+Tab). Type it twice to get a list.
 
 Hint: Use M-p and M-n to access the command history.
 
@@ -14,9 +14,9 @@ Hint: Selecting directories: add a slash to the end of the matching pattern.
 
 Hint: If your terminal lacks functions keys, use the ESC+number sequence.
 
-Patarimas: GNU Midnight Commander internetinė svetainė: http://www.midnight-commander.org/
+Patarimas: GNU Midnight Commander internetinė svetainė: https://www.midnight-commander.org
 
-Hint: Please send any bug reports to mc-devel@gnome.org
+Hint: Please send any bug reports to mc-devel@lists.midnight-commander.org
 
 Patarimas: Tab klavišas pakeičia esamą panelę.
 
@@ -52,7 +52,7 @@ Hint: Want to do complex searches? Use the External Panelize command.
 
 Hint: To change directory halfway through typing a command, use M-c (quick cd).
 
-Note: Shell commands will not work when you are on a non-local file system.
+Hint: Shell commands will not work when you are on a non-local file system.
 
 Hint: Bring text back from the dead with C-y.
 

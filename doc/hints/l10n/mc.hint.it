@@ -14,9 +14,9 @@ Suggerimento: Selezionare cartelle: aggiungere una barra dopo i caratteri di con
 
 Suggerimento: Se nel terminale mancano i tasti di funzione, utilizzare la sequenza ESC+numero.
 
-Suggerimento: La pagina principale su Internet di GNU Midnight Commander é: http://www.midnight-commander.org/
+Suggerimento: La pagina principale su Internet di GNU Midnight Commander é: https://www.midnight-commander.org
 
-Suggerimento: Inviare i rapporti d'errore a mc-devel@gnome.org
+Suggerimento: Inviare i rapporti d'errore a mc-devel@lists.midnight-commander.org
 
 Suggerimento: Tab modifica il pannello corrente.
 
@@ -52,7 +52,7 @@ Suggerimento: Si vogliono eseguire ricerche complicate? Usare il comando Pannell
 
 Suggerimento: Per cambiare la cartella attuale mentre si sta componendo un comando: M-c (cd rapido).
 
-Nota: I comandi della shell non sono disponibili in un file-system non locale.
+Suggerimento: I comandi della shell non sono disponibili in un file-system non locale.
 
 Suggerimento: Riprendere del testo con Ctrl-y.
 

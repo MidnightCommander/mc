@@ -14,9 +14,9 @@ Aholkua: Direktorioak hautatzea: erantsi «/» barra zeiharra bilaketa ereduaren
 
 Aholkua: Zure terminalari funtzio teklak falta bazaizkio, erabili Ihes+zenbakia sekuentzia.
 
-Aholkua: GNU Midnight Commander-ren atariko orria: http://www.midnight-commander.org/
+Aholkua: GNU Midnight Commander-ren atariko orria: https://www.midnight-commander.org
 
-Aholkua: Mesedez bidali akats txosten oro hona: mc-devel@gnome.org
+Aholkua: Mesedez bidali akats txosten oro hona: mc-devel@lists.midnight-commander.org
 
 Aholkua: Tab teklak zure uneko panela aldatzen du.
 
@@ -52,7 +52,7 @@ Aholkua: Bilaketa konplexuak egin nahi? Erabili Kanpora Paneleratu komandoa.
 
 Aholkua: Direktorioz aldatzeko komando bat tekleatzen erdibidean zaudela, erabili M-c (cd azkarra).
 
-Oharra: Shell komandoak ez dira ibiliko bertakoa ez den fitxategi-sisteman zaudenean.
+Aholkua: Shell komandoak ez dira ibiliko bertakoa ez den fitxategi-sisteman zaudenean.
 
 Aholkua: Ekarri atzera testua heriotzatik Ktrl-y erabilita.
 

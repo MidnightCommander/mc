@@ -14,9 +14,9 @@ Sfat: Selectarea dosarelor: adăugați slash la sfârșitul criteriului de selec
 
 Sfat: Dacă terminalul nu dispune de taste funcționale, folosiți ESC+ numărul de ordine.
 
-Sfat: Pagină de start pentru GNU Midnight Commander: http://www.midnight-commander.org/
+Sfat: Pagină de start pentru GNU Midnight Commander: https://www.midnight-commander.org
 
-Sfat: Vă rugăm semnalați orice bug la adresa mc-devel@gnome.org
+Sfat: Vă rugăm semnalați orice bug la adresa mc-devel@lists.midnight-commander.org
 
 Sfat: Tasta Tab schimbă panoul curent.
 
@@ -24,7 +24,7 @@ Sfat: facilități VFS: Apăsați ENTER pe un fișier tar pentru a examina conț
 
 Sfat: Avem de asemenea și o pagină de manual.
 
-Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
+Sfat: Dorești navigare în stilul Lynx? Poți seta în dialogul Configurare.
 
 Sfat: macro-urile funcționează și în linia de comandă.
 
@@ -52,7 +52,7 @@ Sfat: Doriți căutări complexe? Folosiți comanda de panelizare externă.
 
 Sfat: Pentru a schimba dosarul curent în timpul tastării unei comenzi, folosiți M-c (cd rapid).
 
-Nota: Comenzile shell nu funcționează în sisteme de fișiere care nu sunt locale.
+Sfat: Comenzile shell nu funcționează în sisteme de fișiere care nu sunt locale.
 
 Sfat: Puteți recupera textul șters cu C-y.
 
@@ -68,7 +68,7 @@ Sfat: Puteți specifica vizualizatorul extern cu ajutorul variabilelor de shell 
 
 Sfat: Puteți dezactiva toate cererile de confirmare în meniul Opțiuni/Confirmări.
 
-Hint: Leap to frequently used directories in a single bound with C-\.
+Sfat: Săriți la dosarele utilizate frecvent într-un singur pas cu C-\.
 
 Sfat: Puteți să vă conectați la FTP în mod anonim din MC tastând 'cd ftp://machine.edu'
 
@@ -84,4 +84,4 @@ Sfat: Pentru a marca dosarele în dialogul de selecție, adăugați slash.
 
 Sfat: Pentru a folosi mouse-ul pentru a decupa și insera, trebuie să țineți tasta Shift apăsată.
 
-Hint: Key frequently visited ftp sites in the hotlist: type C-\.
+Sfat: Pentru a păstra în lista rapida site-urile ftp vizitate frecvent: tastați C-\.

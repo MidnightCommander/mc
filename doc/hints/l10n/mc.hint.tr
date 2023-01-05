@@ -14,9 +14,9 @@
 
 İpucu: Eğer klavyenizde fonksiyon tuşları yoksa, ESC+numara kombinasyonunu kullanabilirsiniz.
 
-İpucu: GNU Midnight Commander web adresi: http://www.midnight-commander.org/
+İpucu: GNU Midnight Commander web adresi: https://www.midnight-commander.org
 
-İpucu: Tüm hata raporlarını mc-devel@gnome.org adresine gönderebilirsiniz.
+İpucu: Tüm hata raporlarını mc-devel@lists.midnight-commander.org adresine gönderebilirsiniz.
 
 İpucu: Tab aktif paneli değiştirir.
 
@@ -24,7 +24,7 @@
 
 İpucu: Aynı zamanda güzel bir kullanım kılavuzumuz da var.
 
-Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
+İpucu: Lynx-tarzı dolaşım ister misiniz? Yapılandırma diyaloğundan ayarlayabilirsiniz.
 
 İpucu: % makroları komut satırında bile çalışır.
 
@@ -52,7 +52,7 @@ Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
 
 İpucu: Komut yazarken arada klasör değiştirmek için M-c (çabuk cd) kullanın.
 
-Not: Yerel olmayan bir dosya sistemindeyseniz, kabuk komutları çalışmayacaktır.
+İpucu: Yerel olmayan bir dosya sistemindeyseniz, kabuk komutları çalışmayacaktır.
 
 İpucu: C-y ile metni kurtarabilirsiniz.
 
@@ -68,7 +68,7 @@ Not: Yerel olmayan bir dosya sistemindeyseniz, kabuk komutları çalışmayacakt
 
 İpucu: Seçenekler/Onaylar menüsünden tüm onay isteklerini devre dışı bırakabilirsiniz.
 
-Hint: Leap to frequently used directories in a single bound with C-\.
+İpucu: Sık kullanılan dizinlere tek hareketle geçmek için C-\ kullanabilirsiniz.
 
 İpucu: mc ile anonim FTP bağlantısı kurabilirsiniz. Örn: 'cd ftp://sunucu.edu.tr'
 
@@ -84,4 +84,4 @@ Hint: Leap to frequently used directories in a single bound with C-\.
 
 İpucu: Fare ile kopyalamak/yapıştırmak için Shift tuşunu basılı tutmanız gerekebilir.
 
-Hint: Key frequently visited ftp sites in the hotlist: type C-\.
+İpucu: Sıklıklar ziyaret edilen FTP sitelerini kısayollara eklemek için C-\ kullanın.
