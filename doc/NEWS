@@ -1,3 +1,61 @@
+Version 4.8.29
+
+- Core
+
+    * Add more options for panel filter (#1373):
+      * "Files only" (#4209)
+      * "Case sensitive" (#4334)
+      * "Using shell patterns"
+    * Continue copy after interrupt (#4409)
+    * Restore menu accelerator for "Sort order": back to "S"; change menu accelerator for "SFTP link" to "N" (#4373)
+    * Implement multi-line search in regex mode using '\n' character (#400)
+    * Add support for cross-compilation with PERL path different between --build and --host (#4399)
+    * Bootstrap with autotools providing direct support for Apple M1
+    * Port mc.ext to INI format and rename to mc.ext.ini (#4141, #3742, #3191)
+      * Implement compound (AND) conditions (Type/Shell and Type/Regex pairs) to disambiguate overloaded extensions
+      * There is no fallback to previous mc.ext format
+
+- Editor
+
+    * Change location of all user's syntax related stuff to ~/.local/share/mc/syntax/ directory (#4413)
+    * syntax/Syntax: document location of syntax files (#4320)
+    * Improvements of syntax highlighting:
+      * YAML: improve multiline blocks highliting (#4059)
+    * New syntax highlighting:
+      * Privoxy (https://www.privoxy.org) actions files (#4384)
+      * TOML (Tom's Obvious Minimal Language) (#4412)
+
+- Misc
+
+    * Code cleanup (#4357, #4397)
+    * sqlite3 view: use 'immutable=1' URI parameter to prevent leaving wal/shm files after viewing sqlite database (#4369)
+    * Support of contour terminal emulator (https://github.com/contour-terminal/contour) (#4396)
+    * mc.ext.ini: clarify regex for makefiles (#4419)
+    * Remove empty hints translations by setting 5% threshold (#3608)
+
+- Fixes
+
+    * Fail to build with only SFTP network VFS is enabled (#4420)
+    * Crash on quick view of archives (#4398)
+    * Wrong description of --enable-configure-args option (#4400)
+    * Wrong version sort (#4374)
+    * No subshell if subshell is initializing more than 1 second (#3121)
+    * Filter keyboard shortcut only affects left panel (#4383)
+    * File type check does not work with special character in filename (#4377)
+    * Select files keeping the right mouse button pressed doesn't select all files (#4381)
+    * Cannot scroll panel listing upwards using mouse (#4119)
+    * "Directory Compare" doesn't correct work with panelization (#3220)
+    * Wrong decompressing of zip files in quick view panel (#4404)
+    * mc.ext: 'include' keyword (for command class def) have no effect if it was defined before 'Include' keyword (for command def) (#2773)
+    * mcedit: infinite loop when deleting a macro (#4391)
+    * mcviewer: segfault when switching from raw to parsed mode and back (#4401)
+    * Broken handling of zip archives (#4368)
+    * FISH subshell: commands don't work after window resize (#4372)
+    * FTP VFS: doesn't reconnect to server after timeout (#3670)
+    * FISH VFS: cannot remove non-empty directory (#4364)
+    * Tests: variable redeclaration in filevercmp_test5 (#4358)
+
+
 Version 4.8.28
 
 - VFS
