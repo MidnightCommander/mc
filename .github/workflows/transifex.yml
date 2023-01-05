@@ -1,0 +1,32 @@
+name: Transifex
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  transifex-upload:
+
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install gettext & po4a
+        run: sudo apt-get install -y gettext po4a
+
+      - name: Install modern Transifex client
+        run: |
+          mkdir -p $HOME/.local/bin && cd $HOME/.local/bin
+          curl -o- https://raw.githubusercontent.com/transifex/cli/master/install.sh | bash
+          echo "${HOME}/.local/bin" >> $GITHUB_PATH
+
+      - run: ./maint/utils/sync-transifex/po-to-transifex.py
+        env:
+          TX_TOKEN: ${{ secrets.TX_TOKEN }}
+
+      - run: ./maint/utils/sync-transifex/hints-to-transifex.py
+        env:
+          TX_TOKEN: ${{ secrets.TX_TOKEN }}
