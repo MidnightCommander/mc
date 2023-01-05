@@ -19,7 +19,7 @@ def create_po4a_config(sync_dir: Path, script_dir: Path, source_dir: Path, resou
     config = get_config_file(script_dir, resource, "po4a.cfg").read_text()
 
     config = config.replace("@srcdir@", str(source_dir))
-    config = config.replace("@translations@", " ".join(translations))
+    config = config.replace("@translations@", " ".join(f"{lang}:var.d/$master/{lang}.po" for lang in translations))
 
     config_path = sync_dir / "po4a.cfg"
     config_path.write_text(config)
