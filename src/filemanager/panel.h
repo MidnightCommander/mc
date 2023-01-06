@@ -76,7 +76,7 @@ typedef struct
 {
     dir_list list;
     vfs_path_t *root_vpath;
-} panelized_panel_t;
+} panelized_descr_t;
 
 typedef struct
 {
@@ -88,7 +88,9 @@ typedef struct
 
     gboolean active;            /* If panel is currently selected */
     gboolean dirty;             /* Should we redisplay the panel? */
-    gboolean is_panelized;      /* Flag: special filelisting, can't reload */
+
+    gboolean is_panelized;      /* Panelization: special mode, can't reload the file list */
+    panelized_descr_t *panelized_descr; /* Panelization descriptor */
 
 #ifdef HAVE_CHARSET
     int codepage;               /* Panel codepage */
@@ -144,8 +146,6 @@ typedef struct
 
 /*** global variables defined in .c file *********************************************************/
 
-extern panelized_panel_t panelized_panel;
-
 extern hook_t *select_file_hook;
 
 extern mc_fhl_t *mc_filehighlight;
@@ -195,7 +195,7 @@ void panel_set_cwd (WPanel * panel, const vfs_path_t * vpath);
 void panel_set_lwd (WPanel * panel, const vfs_path_t * vpath);
 
 void panel_panelize_cd (void);
-void panel_panelize_change_root (const vfs_path_t * new_root);
+void panel_panelize_change_root (WPanel * panel, const vfs_path_t * new_root);
 void panel_panelize_absolutize_if_needed (WPanel * panel);
 void panel_panelize_save (WPanel * panel);
 

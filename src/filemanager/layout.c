@@ -1299,6 +1299,7 @@ swap_panels (void)
         panelswap (top_file);
         panelswap (selected);
         panelswap (is_panelized);
+        panelswap (panelized_descr);
         panelswap (dir_stat);
 #undef panelswap
 

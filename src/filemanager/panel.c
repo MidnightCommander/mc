@@ -85,10 +85,6 @@
 /* The hook list for the select file function */
 hook_t *select_file_hook = NULL;
 
-/* *INDENT-OFF* */
-panelized_panel_t panelized_panel = { {NULL, 0, -1, NULL}, NULL };
-/* *INDENT-ON* */
-
 static const char *string_file_name (file_entry_t *, int);
 static const char *string_file_size (file_entry_t *, int);
 static const char *string_file_size_brief (file_entry_t *, int);
@@ -384,6 +380,32 @@ static GString *string_file_name_buffer;
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+static panelized_descr_t *
+panelized_descr_new (void)
+{
+    panelized_descr_t *p;
+
+    p = g_new0 (panelized_descr_t, 1);
+    p->list.len = -1;
+
+    return p;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+panelized_descr_free (panelized_descr_t *p)
+{
+    if (p != NULL)
+    {
+        dir_list_free_list (&p->list);
+        vfs_path_free (p->root_vpath, TRUE);
+        g_free (p);
+    }
+}
+
 /* --------------------------------------------------------------------------------------------- */
 
 static void
@@ -1514,6 +1536,8 @@ panel_destroy (WPanel * p)
 
     g_free (p->name);
 
+    panelized_descr_free (p->panelized_descr);
+
     g_string_free (p->quick_search.buffer, TRUE);
     g_string_free (p->quick_search.prev_buffer, TRUE);
 
@@ -2290,7 +2314,7 @@ goto_parent_dir (WPanel * panel)
             char *fname2;
 
             fname2 =
-                mc_build_filename (vfs_path_as_str (panelized_panel.root_vpath), fname->str,
+                mc_build_filename (vfs_path_as_str (panel->panelized_descr->root_vpath), fname->str,
                                    (char *) NULL);
 
             fname = g_string_new (fname2);
@@ -5132,6 +5156,8 @@ panel_panelize_cd (void)
     WPanel *panel;
     int i;
     dir_list *list;
+    panelized_descr_t *pdescr;
+    dir_list *plist;
     gboolean panelized_same;
 
     if (!SELECTED_IS_PANEL)
@@ -5140,40 +5166,46 @@ panel_panelize_cd (void)
     panel = PANEL (get_panel_widget (MENU_PANEL_IDX));
 
     dir_list_clean (&panel->dir);
-    if (panelized_panel.root_vpath == NULL)
-        panel_panelize_change_root (current_panel->cwd_vpath);
 
-    if (panelized_panel.list.len < 1)
-        dir_list_init (&panelized_panel.list);
-    else if (panelized_panel.list.len > panel->dir.size)
-        dir_list_grow (&panel->dir, panelized_panel.list.len - panel->dir.size);
+    if (panel->panelized_descr == NULL)
+        panel->panelized_descr = panelized_descr_new ();
+
+    pdescr = panel->panelized_descr;
+    plist = &pdescr->list;
+
+    if (pdescr->root_vpath == NULL)
+        panel_panelize_change_root (panel, panel->cwd_vpath);
+
+    if (plist->len < 1)
+        dir_list_init (plist);
+    else if (plist->len > panel->dir.size)
+        dir_list_grow (&panel->dir, plist->len - panel->dir.size);
 
     list = &panel->dir;
-    list->len = panelized_panel.list.len;
+    list->len = plist->len;
 
-    panelized_same = vfs_path_equal (panelized_panel.root_vpath, panel->cwd_vpath);
+    panelized_same = vfs_path_equal (pdescr->root_vpath, panel->cwd_vpath);
 
-    for (i = 0; i < panelized_panel.list.len; i++)
+    for (i = 0; i < plist->len; i++)
     {
-        if (panelized_same || DIR_IS_DOTDOT (panelized_panel.list.list[i].fname->str))
-            list->list[i].fname = mc_g_string_dup (panelized_panel.list.list[i].fname);
+        if (panelized_same || DIR_IS_DOTDOT (plist->list[i].fname->str))
+            list->list[i].fname = mc_g_string_dup (plist->list[i].fname);
         else
         {
             vfs_path_t *tmp_vpath;
 
             tmp_vpath =
-                vfs_path_append_new (panelized_panel.root_vpath,
-                                     panelized_panel.list.list[i].fname->str, (char *) NULL);
+                vfs_path_append_new (pdescr->root_vpath, plist->list[i].fname->str, (char *) NULL);
             list->list[i].fname = g_string_new (vfs_path_as_str (tmp_vpath));
             vfs_path_free (tmp_vpath, TRUE);
         }
-        list->list[i].f.link_to_dir = panelized_panel.list.list[i].f.link_to_dir;
-        list->list[i].f.stale_link = panelized_panel.list.list[i].f.stale_link;
-        list->list[i].f.dir_size_computed = panelized_panel.list.list[i].f.dir_size_computed;
-        list->list[i].f.marked = panelized_panel.list.list[i].f.marked;
-        list->list[i].st = panelized_panel.list.list[i].st;
-        list->list[i].sort_key = panelized_panel.list.list[i].sort_key;
-        list->list[i].second_sort_key = panelized_panel.list.list[i].second_sort_key;
+        list->list[i].f.link_to_dir = plist->list[i].f.link_to_dir;
+        list->list[i].f.stale_link = plist->list[i].f.stale_link;
+        list->list[i].f.dir_size_computed = plist->list[i].f.dir_size_computed;
+        list->list[i].f.marked = plist->list[i].f.marked;
+        list->list[i].st = plist->list[i].st;
+        list->list[i].sort_key = plist->list[i].sort_key;
+        list->list[i].second_sort_key = plist->list[i].second_sort_key;
     }
 
     panel->is_panelized = TRUE;
@@ -5186,13 +5218,18 @@ panel_panelize_cd (void)
 
 /**
  * Change root directory of panelized content.
- * @param new_root - object with new path.
+ * @param panel file panel
+ * @param new_root new path
  */
 void
-panel_panelize_change_root (const vfs_path_t * new_root)
+panel_panelize_change_root (WPanel * panel, const vfs_path_t * new_root)
 {
-    vfs_path_free (panelized_panel.root_vpath, TRUE);
-    panelized_panel.root_vpath = vfs_path_clone (new_root);
+    if (panel->panelized_descr == NULL)
+        panel->panelized_descr = panelized_descr_new ();
+    else
+        vfs_path_free (panel->panelized_descr->root_vpath, TRUE);
+
+    panel->panelized_descr->root_vpath = vfs_path_clone (new_root);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -5240,28 +5277,31 @@ panel_panelize_save (WPanel * panel)
 {
     int i;
     dir_list *list = &panel->dir;
+    dir_list *plist;
 
-    panel_panelize_change_root (current_panel->cwd_vpath);
+    panel_panelize_change_root (panel, panel->cwd_vpath);
 
-    if (panelized_panel.list.len > 0)
-        dir_list_clean (&panelized_panel.list);
+    plist = &panel->panelized_descr->list;
+
+    if (plist->len > 0)
+        dir_list_clean (plist);
     if (panel->dir.len == 0)
         return;
 
-    if (panel->dir.len > panelized_panel.list.size)
-        dir_list_grow (&panelized_panel.list, panel->dir.len - panelized_panel.list.size);
-    panelized_panel.list.len = panel->dir.len;
+    if (panel->dir.len > plist->size)
+        dir_list_grow (plist, panel->dir.len - plist->size);
+    plist->len = panel->dir.len;
 
     for (i = 0; i < panel->dir.len; i++)
     {
-        panelized_panel.list.list[i].fname = mc_g_string_dup (list->list[i].fname);
-        panelized_panel.list.list[i].f.link_to_dir = list->list[i].f.link_to_dir;
-        panelized_panel.list.list[i].f.stale_link = list->list[i].f.stale_link;
-        panelized_panel.list.list[i].f.dir_size_computed = list->list[i].f.dir_size_computed;
-        panelized_panel.list.list[i].f.marked = list->list[i].f.marked;
-        panelized_panel.list.list[i].st = list->list[i].st;
-        panelized_panel.list.list[i].sort_key = list->list[i].sort_key;
-        panelized_panel.list.list[i].second_sort_key = list->list[i].second_sort_key;
+        plist->list[i].fname = mc_g_string_dup (list->list[i].fname);
+        plist->list[i].f.link_to_dir = list->list[i].f.link_to_dir;
+        plist->list[i].f.stale_link = list->list[i].f.stale_link;
+        plist->list[i].f.dir_size_computed = list->list[i].f.dir_size_computed;
+        plist->list[i].f.marked = list->list[i].f.marked;
+        plist->list[i].st = list->list[i].st;
+        plist->list[i].sort_key = list->list[i].sort_key;
+        plist->list[i].second_sort_key = list->list[i].second_sort_key;
     }
 }
 
@@ -5319,8 +5359,8 @@ panel_cd (WPanel * panel, const vfs_path_t * new_dir_vpath, enum cd_enum exact)
         size_t new_vpath_len;
 
         new_vpath_len = vfs_path_len (new_dir_vpath);
-        if (vfs_path_equal_len (new_dir_vpath, panelized_panel.root_vpath, new_vpath_len))
-            _new_dir_vpath = panelized_panel.root_vpath;
+        if (vfs_path_equal_len (new_dir_vpath, panel->panelized_descr->root_vpath, new_vpath_len))
+            _new_dir_vpath = panel->panelized_descr->root_vpath;
     }
 
     res = panel_do_cd (panel, _new_dir_vpath, exact);
