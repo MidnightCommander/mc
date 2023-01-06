@@ -788,14 +788,23 @@ widget_default_set_state (Widget * w, widget_state_t state, gboolean enable)
     if (enable)
     {
         /* exclusive bits */
-        if ((state & WST_CONSTRUCT) != 0)
+        switch (state)
+        {
+        case WST_CONSTRUCT:
             w->state &= ~(WST_ACTIVE | WST_SUSPENDED | WST_CLOSED);
-        else if ((state & WST_ACTIVE) != 0)
+            break;
+        case WST_ACTIVE:
             w->state &= ~(WST_CONSTRUCT | WST_SUSPENDED | WST_CLOSED);
-        else if ((state & WST_SUSPENDED) != 0)
+            break;
+        case WST_SUSPENDED:
             w->state &= ~(WST_CONSTRUCT | WST_ACTIVE | WST_CLOSED);
-        else if ((state & WST_CLOSED) != 0)
+            break;
+        case WST_CLOSED:
             w->state &= ~(WST_CONSTRUCT | WST_ACTIVE | WST_SUSPENDED);
+            break;
+        default:
+            break;
+        }
     }
 
     if (owner == NULL)
@@ -819,7 +828,6 @@ widget_default_set_state (Widget * w, widget_state_t state, gboolean enable)
             }
         }
         break;
-
 
     case WST_DISABLED:
         ret = send_message (w, NULL, enable ? MSG_DISABLE : MSG_ENABLE, 0, NULL);
