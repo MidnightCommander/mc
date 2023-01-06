@@ -1262,7 +1262,7 @@ midnight_execute_cmd (Widget * sender, long command)
         break;
 #endif
     case CK_Panelize:
-        cd_panelize_cmd ();
+        panel_panelize_cd ();
         break;
     case CK_Help:
         help_cmd ();

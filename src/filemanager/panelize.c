@@ -31,29 +31,20 @@
 
 #include <config.h>
 
-#include <errno.h>
-#include <stdio.h>
-#include <string.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <unistd.h>
-
 #include "lib/global.h"
 
 #include "lib/skin.h"
+#include "lib/tty/tty.h"
 #include "lib/vfs/vfs.h"
 #include "lib/mcconfig.h"       /* Load/save directories panelize */
 #include "lib/strutil.h"
-#include "lib/util.h"
 #include "lib/widget.h"
 
-#include "src/setup.h"          /* For profile_bname */
 #include "src/history.h"
 
-#include "dir.h"
 #include "filemanager.h"        /* current_panel */
 #include "layout.h"             /* rotate_dash() */
-#include "panel.h"              /* WPanel */
+#include "panel.h"              /* WPanel, dir.h */
 
 #include "panelize.h"
 
@@ -322,7 +313,7 @@ do_external_panelize (char *command)
     /* Clear the counters and the directory list */
     panel_clean_dir (current_panel);
 
-    panelize_change_root (current_panel->cwd_vpath);
+    panel_panelize_change_root (current_panel->cwd_vpath);
 
     dir_list_init (list);
 
@@ -430,7 +421,7 @@ do_external_panelize (char *command)
     mc_pclose (external, NULL);
 
     current_panel->is_panelized = TRUE;
-    panelize_absolutize_if_needed (current_panel);
+    panel_panelize_absolutize_if_needed (current_panel);
 
     try_to_select (current_panel, NULL);
     panel_re_sort (current_panel);
@@ -438,153 +429,7 @@ do_external_panelize (char *command)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
-static void
-do_panelize_cd (WPanel * panel)
-{
-    int i;
-    dir_list *list;
-    gboolean panelized_same;
-
-    dir_list_clean (&panel->dir);
-    if (panelized_panel.root_vpath == NULL)
-        panelize_change_root (current_panel->cwd_vpath);
-
-    if (panelized_panel.list.len < 1)
-        dir_list_init (&panelized_panel.list);
-    else if (panelized_panel.list.len > panel->dir.size)
-        dir_list_grow (&panel->dir, panelized_panel.list.len - panel->dir.size);
-
-    list = &panel->dir;
-    list->len = panelized_panel.list.len;
-
-    panelized_same = vfs_path_equal (panelized_panel.root_vpath, panel->cwd_vpath);
-
-    for (i = 0; i < panelized_panel.list.len; i++)
-    {
-        if (panelized_same || DIR_IS_DOTDOT (panelized_panel.list.list[i].fname->str))
-            list->list[i].fname = mc_g_string_dup (panelized_panel.list.list[i].fname);
-        else
-        {
-            vfs_path_t *tmp_vpath;
-
-            tmp_vpath =
-                vfs_path_append_new (panelized_panel.root_vpath,
-                                     panelized_panel.list.list[i].fname->str, (char *) NULL);
-            list->list[i].fname = g_string_new (vfs_path_as_str (tmp_vpath));
-            vfs_path_free (tmp_vpath, TRUE);
-        }
-        list->list[i].f.link_to_dir = panelized_panel.list.list[i].f.link_to_dir;
-        list->list[i].f.stale_link = panelized_panel.list.list[i].f.stale_link;
-        list->list[i].f.dir_size_computed = panelized_panel.list.list[i].f.dir_size_computed;
-        list->list[i].f.marked = panelized_panel.list.list[i].f.marked;
-        list->list[i].st = panelized_panel.list.list[i].st;
-        list->list[i].sort_key = panelized_panel.list.list[i].sort_key;
-        list->list[i].second_sort_key = panelized_panel.list.list[i].second_sort_key;
-    }
-
-    panel->is_panelized = TRUE;
-    panelize_absolutize_if_needed (panel);
-
-    try_to_select (panel, NULL);
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
-/* --------------------------------------------------------------------------------------------- */
-
-/**
- * Change root directory of panelized content.
- * @param new_root - object with new path.
- */
-void
-panelize_change_root (const vfs_path_t * new_root)
-{
-    vfs_path_free (panelized_panel.root_vpath, TRUE);
-    panelized_panel.root_vpath = vfs_path_clone (new_root);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-panelize_save_panel (WPanel * panel)
-{
-    int i;
-    dir_list *list = &panel->dir;
-
-    panelize_change_root (current_panel->cwd_vpath);
-
-    if (panelized_panel.list.len > 0)
-        dir_list_clean (&panelized_panel.list);
-    if (panel->dir.len == 0)
-        return;
-
-    if (panel->dir.len > panelized_panel.list.size)
-        dir_list_grow (&panelized_panel.list, panel->dir.len - panelized_panel.list.size);
-    panelized_panel.list.len = panel->dir.len;
-
-    for (i = 0; i < panel->dir.len; i++)
-    {
-        panelized_panel.list.list[i].fname = mc_g_string_dup (list->list[i].fname);
-        panelized_panel.list.list[i].f.link_to_dir = list->list[i].f.link_to_dir;
-        panelized_panel.list.list[i].f.stale_link = list->list[i].f.stale_link;
-        panelized_panel.list.list[i].f.dir_size_computed = list->list[i].f.dir_size_computed;
-        panelized_panel.list.list[i].f.marked = list->list[i].f.marked;
-        panelized_panel.list.list[i].st = list->list[i].st;
-        panelized_panel.list.list[i].sort_key = list->list[i].sort_key;
-        panelized_panel.list.list[i].second_sort_key = list->list[i].second_sort_key;
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/**
- * Conditionally switches a panel's directory to "/" (root).
- *
- * If a panelized panel's listing contain absolute paths, this function
- * sets the panel's directory to "/". Otherwise it does nothing.
- *
- * Rationale:
- *
- * This makes tokenized strings like "%d/%p" work. This also makes other
- * places work where such naive concatenation is done in code (e.g., when
- * pressing ctrl+shift+enter, for CK_PutCurrentFullSelected).
- *
- * When to call:
- *
- * You should always call this function after you populate the listing
- * of a panelized panel.
- */
-void
-panelize_absolutize_if_needed (WPanel * panel)
-{
-    const dir_list *const list = &panel->dir;
-
-    /* Note: We don't support mixing of absolute and relative paths, which is
-     * why it's ok for us to check only the 1st entry. */
-    if (list->len > 1 && g_path_is_absolute (list->list[1].fname->str))
-    {
-        vfs_path_t *root;
-
-        root = vfs_path_from_str (PATH_SEP_STR);
-        panel_set_cwd (panel, root);
-        if (panel == current_panel)
-            mc_chdir (root);
-        vfs_path_free (root, TRUE);
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-cd_panelize_cmd (void)
-{
-    if (!SELECTED_IS_PANEL)
-        create_panel (MENU_PANEL_IDX, view_listing);
-
-    do_panelize_cd (PANEL (get_panel_widget (MENU_PANEL_IDX)));
-}
-
 /* --------------------------------------------------------------------------------------------- */
 
 void

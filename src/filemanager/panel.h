@@ -194,6 +194,11 @@ char **panel_get_user_possible_fields (gsize * array_size);
 void panel_set_cwd (WPanel * panel, const vfs_path_t * vpath);
 void panel_set_lwd (WPanel * panel, const vfs_path_t * vpath);
 
+void panel_panelize_cd (void);
+void panel_panelize_change_root (const vfs_path_t * new_root);
+void panel_panelize_absolutize_if_needed (WPanel * panel);
+void panel_panelize_save (WPanel * panel);
+
 void panel_init (void);
 void panel_deinit (void);
 

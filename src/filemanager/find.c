@@ -1876,8 +1876,8 @@ do_find (WPanel * panel, const char *start_dir, ssize_t start_dir_len, const cha
         }
 
         panel->is_panelized = TRUE;
-        panelize_absolutize_if_needed (panel);
-        panelize_save_panel (panel);
+        panel_panelize_absolutize_if_needed (panel);
+        panel_panelize_save (panel);
     }
 
     kill_gui ();
