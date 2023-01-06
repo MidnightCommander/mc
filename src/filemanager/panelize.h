@@ -15,10 +15,10 @@
 
 /*** declarations of public functions ************************************************************/
 
-void external_panelize (void);
-void load_panelize (void);
-void save_panelize (void);
-void done_panelize (void);
+void external_panelize_cmd (void);
+void external_panelize_load (void);
+void external_panelize_save (void);
+void external_panelize_free (void);
 
 /*** inline functions ****************************************************************************/
 

@@ -891,7 +891,7 @@ load_setup (void)
     load_config ();
     load_layout ();
     panels_load_options ();
-    load_panelize ();
+    external_panelize_load ();
 
     /* Load time formats */
     user_recent_timeformat =
@@ -988,7 +988,7 @@ save_setup (gboolean save_options, gboolean save_panel_options)
         save_config ();
         save_layout ();
         panels_save_options ();
-        save_panelize ();
+        external_panelize_save ();
         /* directory_history_save (); */
 
 #ifdef ENABLE_VFS_FTP
@@ -1053,7 +1053,7 @@ done_setup (void)
         g_free (*str_options[i].opt_addr);
 
     done_hotlist ();
-    done_panelize ();
+    external_panelize_free ();
     /*    directory_history_free (); */
 
 #ifdef HAVE_CHARSET

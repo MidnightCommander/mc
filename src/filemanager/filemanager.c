@@ -1238,7 +1238,7 @@ midnight_execute_cmd (Widget * sender, long command)
         edit_symlink_cmd ();
         break;
     case CK_ExternalPanelize:
-        external_panelize ();
+        external_panelize_cmd ();
         break;
     case CK_ViewFiltered:
         view_filtered_cmd (current_panel);

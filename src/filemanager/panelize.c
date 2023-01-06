@@ -119,7 +119,7 @@ panelize_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-init_panelize (void)
+external_panelize_init (void)
 {
     struct
     {
@@ -207,7 +207,7 @@ init_panelize (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-panelize_done (void)
+external_panelize_done (void)
 {
     widget_destroy (WIDGET (panelize_dlg));
     repaint_screen ();
@@ -433,7 +433,7 @@ do_external_panelize (char *command)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-external_panelize (void)
+external_panelize_cmd (void)
 {
     if (!vfs_current_is_local ())
     {
@@ -441,7 +441,7 @@ external_panelize (void)
         return;
     }
 
-    init_panelize ();
+    external_panelize_init ();
 
     /* display file info */
     tty_setcolor (SELECTED_COLOR);
@@ -482,13 +482,13 @@ external_panelize (void)
         break;
     }
 
-    panelize_done ();
+    external_panelize_done ();
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 void
-load_panelize (void)
+external_panelize_load (void)
 {
     char **keys;
 
@@ -541,7 +541,7 @@ load_panelize (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-save_panelize (void)
+external_panelize_save (void)
 {
     struct panelize *current;
 
@@ -556,7 +556,7 @@ save_panelize (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-done_panelize (void)
+external_panelize_free (void)
 {
     struct panelize *current, *next;
 
