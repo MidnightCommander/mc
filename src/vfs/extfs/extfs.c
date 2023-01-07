@@ -254,7 +254,7 @@ extfs_find_entry_int (struct vfs_s_inode *dir, const char *name, GSList * list, 
         *q = '\0';
 
         if (DIR_IS_DOTDOT (p))
-            pent = pent->dir->ent;
+            pent = pent->dir != NULL ? pent->dir->ent : NULL;
         else
         {
             GList *pl;
