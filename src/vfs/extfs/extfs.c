@@ -1591,26 +1591,22 @@ extfs_get_plugins (const char *where, gboolean silent)
                 len = strlen (filename);
                 info.need_archive = (filename[len - 1] != '+');
                 info.path = g_strconcat (dirname, PATH_SEP_STR, (char *) NULL);
-                info.prefix = g_strdup (filename);
+                info.prefix = g_strndup (filename, len);
 
                 /* prepare to compare file names without trailing '+' */
                 if (!info.need_archive)
                     info.prefix[len - 1] = '\0';
 
                 /* don't overload already found plugin */
-                for (i = 0; i < extfs_plugins->len; i++)
+                for (i = 0; i < extfs_plugins->len && !found; i++)
                 {
                     extfs_plugin_info_t *p;
 
                     p = &g_array_index (extfs_plugins, extfs_plugin_info_t, i);
 
                     /* 2 files with same names cannot be in a directory */
-                    if ((strcmp (info.path, p->path) != 0)
-                        && (strcmp (info.prefix, p->prefix) == 0))
-                    {
-                        found = TRUE;
-                        break;
-                    }
+                    found = strcmp (info.path, p->path) != 0
+                        && strcmp (info.prefix, p->prefix) == 0;
                 }
 
                 if (found)
