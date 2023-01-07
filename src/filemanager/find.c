@@ -1029,7 +1029,7 @@ search_content (WDialog * h, const char *directory, const char *filename)
         return FALSE;
 
     /* get time elapsed from last refresh */
-    tv = g_get_real_time ();
+    tv = g_get_monotonic_time ();
 
     if (s.st_size >= MIN_REFRESH_FILE_SIZE || (tv - last_refresh) > MAX_REFRESH_INTERVAL)
     {
