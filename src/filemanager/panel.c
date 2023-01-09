@@ -1512,7 +1512,6 @@ panel_destroy (WPanel * p)
     for (i = 0; i < LIST_FORMATS; i++)
         g_free (p->user_status_format[i]);
 
-    g_free (p->dir.list);
     g_free (p->name);
 
     g_string_free (p->quick_search.buffer, TRUE);
