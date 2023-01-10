@@ -177,7 +177,7 @@ vfs_findgid (const char *gname)
  * Create a temporary file with a name resembling the original.
  * This is needed e.g. for local copies requested by extfs.
  * Some extfs scripts may look at the extension.
- * We also protect stupid scripts agains dangerous names.
+ * We also protect stupid scripts against dangerous names.
  */
 
 int

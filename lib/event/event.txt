@@ -75,7 +75,7 @@ where:
     name of the group, where event was initiated
 
  event_name:
-    event name. event_name ans event_group uniquely identify an event.
+    event name. event_name and event_group uniquely identify an event.
     These parameters can be useful if event handler is tied to several events
     and the distinguish between different events (for example, function of logging)
     is required.

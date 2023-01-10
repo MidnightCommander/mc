@@ -152,7 +152,7 @@ struct WEdit
     struct stat stat1;          /* Result of mc_fstat() on the file */
     unsigned int skip_detach_prompt:1;  /* Do not prompt whether to detach a file anymore */
 
-    /* syntax higlighting */
+    /* syntax highlighting */
     GSList *syntax_marker;
     GPtrArray *rules;
     off_t last_get_rule;

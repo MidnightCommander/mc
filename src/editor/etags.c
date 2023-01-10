@@ -346,7 +346,7 @@ editcmd_dialog_select_definition_show (WEdit * edit, char *match_expr, GPtrArray
     def_list = listbox_new (1, 1, def_dlg_h - 2, def_dlg_w - 2, FALSE, NULL);
     group_add_widget_autopos (GROUP (def_dlg), def_list, WPOS_KEEP_ALL, NULL);
 
-    /* fill the listbox with the completions and get the maximim width */
+    /* fill the listbox with the completions and get the maximum width */
     def_max_width = 0;
     g_ptr_array_foreach (def_hash, editcmd_dialog_select_definition_add, def_list);
 

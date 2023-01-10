@@ -141,7 +141,7 @@ input_get_ctext (const WInput * in)
  *
  * @param in input line
  *
- * @return TRUE if buffer of @in is empty, FALSE othewise.
+ * @return TRUE if buffer of @in is empty, FALSE otherwise.
  */
 static inline gboolean
 input_is_empty (const WInput * in)

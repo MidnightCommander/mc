@@ -1072,7 +1072,7 @@ vfs_path_element_need_cleanup_converter (const vfs_path_element_t * element)
  * @param vpath pointer to path structure
  * encoding name of charset
  *
- * @return pointer to path structure (for use function in anoter functions)
+ * @return pointer to path structure (for use function in another functions)
  */
 vfs_path_t *
 vfs_path_change_encoding (vfs_path_t * vpath, const char *encoding)

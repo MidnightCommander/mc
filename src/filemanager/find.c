@@ -217,7 +217,7 @@ static mc_search_t *search_content_handle = NULL;
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-/* don't use max macro to avoid double str_term_width1() call in widget length caclulation */
+/* don't use max macro to avoid double str_term_width1() call in widget length calculation */
 #undef max
 
 static int
@@ -556,7 +556,7 @@ find_parm_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
  * If the return value is TRUE, then the following holds:
  *
  * start_dir, ignore_dirs, pattern and content contain the information provided by the user.
- * They are newly allocated strings and must be freed when uneeded.
+ * They are newly allocated strings and must be freed when unneeded.
  *
  * start_dir_len is -1 when user entered an absolute path, otherwise it is a length
  * of start_dir (which is absolute). It is used to get a relative pats of find results.
@@ -638,7 +638,7 @@ find_parameters (WPanel * panel, char **start_dir, ssize_t * start_dir_len,
     }
 #endif /* ENABLE_NLS */
 
-    /* caclulate dialog width */
+    /* calculate dialog width */
 
     /* widget widths */
     cw = str_term_width1 (file_name_label);
@@ -1212,7 +1212,7 @@ find_ignore_dir_search (const char *dir)
             switch (iabs | dabs)
             {
             case 0:            /* both paths are relative */
-            case 3:            /* both paths are abolute */
+            case 3:            /* both paths are absolute */
                 /* if ignore dir is not a path  of dir -- skip it */
                 if (strncmp (dir, *ignore_dir, ilen) == 0)
                 {

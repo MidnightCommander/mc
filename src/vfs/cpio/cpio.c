@@ -83,7 +83,7 @@ enum
 {
     CPIO_UNKNOWN = 0,           /* Not determined yet */
     CPIO_BIN,                   /* Binary format */
-    CPIO_BINRE,                 /* Binary format, reverse endianity */
+    CPIO_BINRE,                 /* Binary format, reverse endianness */
     CPIO_OLDC,                  /* Old ASCII format */
     CPIO_NEWC,                  /* New ASCII format */
     CPIO_CRC                    /* New ASCII format + CRC */

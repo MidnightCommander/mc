@@ -186,7 +186,7 @@ open_temp (void **name)
 /* --------------------------------------------------------------------------------------------- */
 
 /**
- * Alocate file structure and associate file descriptor to it.
+ * Allocate file structure and associate file descriptor to it.
  *
  * @param fd file descriptor
  * @return file structure
@@ -358,7 +358,7 @@ f_gets (char *buf, size_t size, FBUF * fs)
  * @param off offset
  * @param whence seek directive: SEEK_SET, SEEK_CUR or SEEK_END
  *
- * @return position in file, starting from begginning
+ * @return position in file, starting from beginning
  */
 
 static off_t
@@ -846,7 +846,7 @@ dff_execute (const char *args, const char *extra, const char *file1, const char 
 /**
  * Reparse and display file according to diff statements.
  *
- * @param ord DIFF_LEFT if 1nd file is displayed , DIFF_RIGHT if 2nd file is displayed.
+ * @param ord DIFF_LEFT if 1st file is displayed , DIFF_RIGHT if 2nd file is displayed.
  * @param filename file name to display
  * @param ops list of diff statements
  * @param printer printf-like function to be used for displaying
@@ -3606,7 +3606,7 @@ dview_diff_cmd (const void *f0, const void *f1)
         }
 
     default:
-        /* this should not happaned */
+        /* this should not happened */
         message (D_ERROR, MSG_ERROR, _("Diff viewer: invalid mode"));
         return FALSE;
     }

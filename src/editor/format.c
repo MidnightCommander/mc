@@ -6,7 +6,7 @@
 
    Copyright (C) 1996 Paul Sheer
 
-   Writen by:
+   Written by:
    Paul Sheer, 1996
    Andrew Borodin <aborodin@vmail.ru>, 2013, 2014
 
@@ -218,7 +218,7 @@ next_tab_pos (off_t x)
 static inline off_t
 line_pixel_length (unsigned char *t, off_t b, off_t l, gboolean utf8)
 {
-    off_t xn, x;                /* position conters */
+    off_t xn, x;                /* position counters */
     off_t char_length;          /* character length in bytes */
 
 #ifndef HAVE_CHARSET

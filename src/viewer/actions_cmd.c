@@ -722,7 +722,7 @@ mcview_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
             delete_hook (&select_file_hook, mcview_hook);
 
             /*
-             * In some cases when mc startup is very slow and one panel is in quick vew mode,
+             * In some cases when mc startup is very slow and one panel is in quick view mode,
              * @view is registered in two hook lists at the same time:
              *   mcview_callback (MSG_INIT) -> add_hook (&select_file_hook)
              *   mcview_hook () -> add_hook (&idle_hook).

@@ -341,7 +341,7 @@ vfs_s_free_super (struct vfs_class *me, struct vfs_s_super *super)
     }
 
 #if 0
-    /* FIXME: We currently leak small ammount of memory, sometimes. Fix it if you can. */
+    /* FIXME: We currently leak small amount of memory, sometimes. Fix it if you can. */
     if (super->ino_usage != 0)
         message (D_ERROR, "Direntry warning",
                  "Super ino_usage is %d, memory leak", super->ino_usage);

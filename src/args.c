@@ -55,7 +55,7 @@ gboolean mc_args__nokeymap = FALSE;
 
 char *mc_args__last_wd_file = NULL;
 
-/* when enabled NETCODE, use folowing file as logfile */
+/* when enabled NETCODE, use following file as logfile */
 char *mc_args__netfs_logfile = NULL;
 
 /* keymap file */
@@ -804,7 +804,7 @@ mc_setup_by_args (int argc, char **argv, GError ** mcerror)
         if (argc < 3)
         {
             mc_propagate_error (mcerror, 0, "%s\n",
-                                _("Two files are required to envoke the diffviewer."));
+                                _("Two files are required to invoke the diffviewer."));
             return FALSE;
         }
         MC_FALLTHROUGH;

@@ -192,7 +192,7 @@ static GQueue *erase_list = NULL;
  * directories and is used to detect cyclic symbolic links.
  * The second ('dest_dirs' below) holds information about just created
  * target directories and is used to detect when an directory is copied
- * into itself (we don't want to copy infinitly).
+ * into itself (we don't want to copy infinitely).
  * Both lists don't use the linkcount and name structure members of struct
  * link.
  */
@@ -1347,7 +1347,7 @@ move_file_file (const WPanel * panel, file_op_total_context_t * tctx, file_op_co
     if (panel != NULL)
     {
         /* In case of single file, calculate totals. In case of many files,
-           totals are calcuated already. */
+           totals are calculated already. */
         return_status =
             panel_operate_init_totals (panel, src_vpath, &src_stat, ctx, TRUE,
                                        FILEGUI_DIALOG_ONE_ITEM);
@@ -1516,8 +1516,8 @@ recursive_erase (file_op_total_context_t * tctx, file_op_context_t * ctx, const 
   *          1 if there are no entries besides "." and ".." in the directory path points to,
   *          0 else.
   *
-  * ATTENTION! Be carefull when modifying this function (like commit 25e419ba0886f)!
-  * Some implementations of readdir() in MC VFS (for example, vfs_s_readdir(), whuch is uded
+  * ATTENTION! Be careful when modifying this function (like commit 25e419ba0886f)!
+  * Some implementations of readdir() in MC VFS (for example, vfs_s_readdir(), which is used
   * in FISH) don't return "." and ".." entries.
   */
 static int
@@ -1669,7 +1669,7 @@ do_move_dir_dir (const WPanel * panel, file_op_total_context_t * tctx, file_op_c
             if (panel != NULL)
             {
                 /* In case of single directory, calculate totals. In case of many directories,
-                   totals are calcuated already. */
+                   totals are calculated already. */
                 return_status =
                     panel_operate_init_totals (panel, src_vpath, &src_stat, ctx, TRUE,
                                                FILEGUI_DIALOG_MULTI_ITEM);
@@ -1724,7 +1724,7 @@ do_move_dir_dir (const WPanel * panel, file_op_total_context_t * tctx, file_op_c
     if (panel != NULL)
     {
         /* In case of single directory, calculate totals. In case of many directories,
-           totals are calcuated already. */
+           totals are calculated already. */
         return_status =
             panel_operate_init_totals (panel, src_vpath, &src_stat, ctx, TRUE,
                                        FILEGUI_DIALOG_MULTI_ITEM);
@@ -2866,7 +2866,7 @@ copy_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const cha
 
     if (is_in_linklist (dest_dirs, src_vpath, &src_stat) != NULL)
     {
-        /* Don't copy a directory we created before (we don't want to copy 
+        /* Don't copy a directory we created before (we don't want to copy
            infinitely if a directory is copied into itself) */
         /* FIXME: should there be an error message and FILE_SKIP? - Norbert */
         return_status = FILE_CONT;

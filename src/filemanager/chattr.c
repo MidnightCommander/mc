@@ -208,7 +208,7 @@ static struct
 /* number of attributes */
 static const size_t check_attr_num = G_N_ELEMENTS (check_attr);
 
-/* modifable attribute numbers */
+/* modifiable attribute numbers */
 static int check_attr_mod[32];
 static int check_attr_mod_num = 0;      /* 0..31 */
 
@@ -337,7 +337,7 @@ fileattrtext_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, 
             const WRect *wo = &CONST_WIDGET (w->owner)->rect;
 
             widget_default_callback (w, sender, msg, parm, data);
-            /* intially file name may be wider than screen */
+            /* initially file name may be wider than screen */
             if (fat->filename_width > wo->cols - wx * 2)
             {
                 w->rect.x = wo->x + wx;
@@ -975,7 +975,7 @@ chattr_dlg_create (WPanel * panel, const char *fname, unsigned long attr)
     const int cb_scrollbar_width = 1;
     WRect r;
 
-    /* prepate to set up checkbox states */
+    /* prepare to set up checkbox states */
     for (i = 0; i < check_attr_num; i++)
         check_attr[i].state = chattr_is_modifiable (i) && (attr & check_attr[i].flags) != 0;
 

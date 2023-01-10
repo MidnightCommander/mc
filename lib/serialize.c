@@ -98,7 +98,7 @@ go_to_end_of_serialized_string (const char *non_serialized_data,
 /**
  * Serialize some string object to string
  *
- * @param prefix prefix for serailization
+ * @param prefix prefix for serialization
  * @param data data for serialization
  * @param error contain pointer to object for handle error code and message
  *

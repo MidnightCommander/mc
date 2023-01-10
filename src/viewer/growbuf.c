@@ -1,6 +1,6 @@
 /*
    Internal file viewer for the Midnight Commander
-   Function for work with growing bufers
+   Function for work with growing buffers
 
    Copyright (C) 1994-2022
    Free Software Foundation, Inc.

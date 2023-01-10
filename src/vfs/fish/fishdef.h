@@ -33,7 +33,7 @@
 ")\n"                                                                     \
 "echo \"### 200\"\n"
 
-/* default file exisits script */
+/* default file exists script */
 #define FISH_EXISTS_DEF_CONTENT ""                                        \
 "#ISEXISTS $FISH_FILENAME\n"                                              \
 "ls -l \"/${FISH_FILENAME}\" >/dev/null 2>/dev/null\n"                    \

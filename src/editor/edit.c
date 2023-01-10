@@ -105,7 +105,7 @@ char *option_filesize_threshold = NULL;
 
 unsigned int edit_stack_iterator = 0;
 edit_stack_type edit_history_moveto[MAX_HISTORY_MOVETO];
-/* magic sequense for say than block is vertical */
+/* magic sequence for say than block is vertical */
 const char VERTICAL_MAGIC[] = { '\1', '\1', '\1', '\1', '\n' };
 
 /*** file scope macro definitions ****************************************************************/
@@ -466,7 +466,7 @@ edit_load_file (WEdit * edit)
  * Restore saved cursor position and/or bookmarks in the file
  *
  * @param edit editor object
- * @param load_position If TRUE, load bookmarks and cursor position and aply them.
+ * @param load_position If TRUE, load bookmarks and cursor position and apply them.
  *                      If FALSE, load bookmarks only.
  */
 
@@ -1510,7 +1510,7 @@ check_and_wrap_line (WEdit * edit)
 /** this find the matching bracket in either direction, and sets edit->bracket
  *
  * @param edit editor object
- * @param in_screen seach only on the current screen
+ * @param in_screen search only on the current screen
  * @param furthest_bracket_search count of the bytes for search
  *
  * @return position of the found bracket (-1 if no match)
@@ -2085,7 +2085,7 @@ edit_init (WEdit * edit, const WRect * r, const vfs_path_t * filename_vpath, lon
 {
     gboolean to_free = FALSE;
 
-    option_auto_syntax = TRUE;  /* Resetting to auto on every invokation */
+    option_auto_syntax = TRUE;  /* Resetting to auto on every invocation */
     option_line_state_width = option_line_state ? LINE_STATE_WIDTH : 0;
 
     if (edit != NULL)
@@ -2310,7 +2310,7 @@ edit_set_codeset (WEdit * edit)
  * d
  *
  * If the stack long int is 0-255 it represents a normal insert (from a backspace),
- * 256-512 is an insert ahead (from a delete), If it is betwen 600 and 700 it is one
+ * 256-512 is an insert ahead (from a delete), If it is between 600 and 700 it is one
  * of the cursor functions define'd in edit-impl.h. 1000 through 700'000'000 is to
  * set edit->mark1 position. 700'000'000 through 1400'000'000 is to set edit->mark2
  * position.

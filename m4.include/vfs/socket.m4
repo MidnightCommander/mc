@@ -8,6 +8,6 @@ AC_DEFUN([AC_REQUIRE_SOCKET],
 #include <sys/socket.h>
 		       ])
     else
-	AC_MSG_ERROR([Couldnt find socket functions])
+	AC_MSG_ERROR([Couldn't find socket functions])
     fi
 ])

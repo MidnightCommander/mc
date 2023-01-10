@@ -36,7 +36,7 @@
 #
 # Settings: (should be set via environment)
 #  Required:
-#    AWS_ACCESS_KEY_ID         : Amazon AWS acces key (required)
+#    AWS_ACCESS_KEY_ID         : Amazon AWS access key (required)
 #    AWS_SECRET_ACCESS_KEY     : Amazon AWS secret access key (required)
 #  Optional:
 #    MCVFS_EXTFS_S3_LOCATION   : where to create new buckets: "EU" - default, "USWest", "APNortheast" etc.

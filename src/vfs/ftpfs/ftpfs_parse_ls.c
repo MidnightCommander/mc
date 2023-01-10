@@ -208,7 +208,7 @@ mktime_from_utc (const struct tm *t)
     memcpy (&tc, t, sizeof (struct tm));
 
     /* UTC times are never DST; if we say -1, we'll introduce odd localtime-
-     * dependant errors. */
+     * dependent errors. */
 
     tc.tm_isdst = 0;
 

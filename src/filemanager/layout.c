@@ -828,7 +828,7 @@ setup_panels (void)
     if (active)
         widget_set_state (mw, WST_SUSPENDED, TRUE);
 
-    /* iniitial height of panels */
+    /* initial height of panels */
     height =
         r->lines - (menubar_visible ? 1 : 0) - (mc_global.message_visible ? 1 : 0) -
         (command_prompt ? 1 : 0) - (mc_global.keybar_visible ? 1 : 0);
@@ -1258,7 +1258,7 @@ create_panel (int num, panel_view_mode_t type)
      * It's just a quick hack to prevent segfaults. Comment out and
      * try following:
      * - select left panel
-     * - invoke menue left/tree
+     * - invoke menu left/tree
      * - as long as you stay in the left panel almost everything that uses
      *   current_panel causes segfault, e.g. C-Enter, C-x c, ...
      */

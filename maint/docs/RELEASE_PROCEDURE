@@ -33,7 +33,7 @@ When I Want To: release next version
 Then I Should: download archives from special upload area
            and download checksums for archives from special upload area
            and verify checksums and archives
-           and unpack arhives
+           and unpack archives
            and configure with default parameters
            and run 'make all install DESTDIR=/tmp/mc-release'
            and if everything is okay, keep vote in release ticket

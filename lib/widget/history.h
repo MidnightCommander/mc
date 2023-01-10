@@ -29,7 +29,7 @@ typedef struct history_descriptor_t
     int action;                 /**< return action in the history */
     char *text;                 /**< return text of selected item */
 
-    size_t max_width;           /**< maximum width of sring in history */
+    size_t max_width;           /**< maximum width of string in history */
     struct WListbox *listbox;   /**< listbox widget to draw history */
 
     history_create_item_func create;    /**< function to create item of @list */

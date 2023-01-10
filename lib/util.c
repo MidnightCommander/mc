@@ -384,7 +384,7 @@ size_trunc_sep (uintmax_t size, gboolean use_si)
     d = x + sizeof (x) - 1;
     *d-- = '\0';
     /* @size format is "size unit", i.e. "[digits][space][letters]".
-       Copy all charactes after digits. */
+       Copy all characters after digits. */
     while (p >= y && !g_ascii_isdigit (*p))
         *d-- = *p--;
     for (count = 0; p >= y; count++)
@@ -893,7 +893,7 @@ get_compression_type (int fd, const char *name)
         return COMPRESSION_ZSTD;
 
     str_len = strlen (name);
-    /* HACK: we must belive to extension of LZMA file :) ... */
+    /* HACK: we must believe to extension of LZMA file :) ... */
     if ((str_len > 5 && strcmp (&name[str_len - 5], ".lzma") == 0) ||
         (str_len > 4 && strcmp (&name[str_len - 4], ".tlz") == 0))
         return COMPRESSION_LZMA;

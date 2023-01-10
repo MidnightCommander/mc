@@ -284,7 +284,7 @@ Version 4.8.24
 
 - VFS
 
-    * sftpfs: support keyborad interactive authentication (#3921)
+    * sftpfs: support keyboard interactive authentication (#3921)
     * uc1541 extfs: update up to 3.3 version (#3936)
 
 - Editor
@@ -337,7 +337,7 @@ Version 4.8.23
 
     * Expanded syntax highlighting rules (#3975):
         - expanded file name regexp for sh.syntax
-        - use ini.syntax for systemd cofiguration files
+        - use ini.syntax for systemd configuration files
     * Syntax updates:
         - shell (#3981)
         - ebuild (#3988)
@@ -798,7 +798,7 @@ Version 4.8.14
     * Info panel can't obtain file system statistics on Solaris (#3277)
     * "Shell patterns" broken beyond repair (#2309)
     * File selection by patterns uses bytes instead of unicode characters (#2743)
-    * Copy files dosn't work as expected, when copying to a directory with the special symbol in its name (#3235)
+    * Copy files doesn't work as expected, when copying to a directory with the special symbol in its name (#3235)
     * Wrong order of old_colors table items (#3404)
     * Input line: Alt+Backspace on one-letter word erases too much (#3390)
     * "Directory scanning" window is too narrow (#3162)
@@ -851,7 +851,7 @@ Version 4.8.13
     * mcviewer: incorrect percentage in mcview hex mode (#3258)
     * RAR VFS incorrectly recognizes UnRAR version (#3240)
     * viewbold and viewselected are missing from some skins (#3244)
-    * Incorrect enconding name for manual page (#3239)
+    * Incorrect encoding name for manual page (#3239)
     * "User menu -> View manual page" doesn't do coloring (#3243)
 
 
@@ -1164,7 +1164,7 @@ Version 4.8.5
         - xlhtml text-mode handler for XLS files
         - ppthtml text-mode handler for PPT/PPS files
         - open=view+pager fallback (noX) for PostScript, PDF, OD[PST] and DVI
-        - standarized $DISPLAY checks
+        - standardized $DISPLAY checks
     * File extension support:
         - SQLite database files (#2103)
         - compiled Java files (*.class) (#2103)
@@ -1287,7 +1287,7 @@ Version 4.8.2
 
 - Core
 
-    * Added new flag -X (--no-x11) to allow dont't use X11 to get the state of modifiers Alt, Ctrl, Shift (#86)
+    * Added new flag -X (--no-x11) to allow don't use X11 to get the state of modifiers Alt, Ctrl, Shift (#86)
     * Support of '~' as home dir in 'Start at:' field in 'Find File' dialog (#2694)
     * Support of '~' as home dir in hotlists (#2747)
     * Learn of 'Back Tab' is possible now in 'Learn keys' dialog (#2628)
@@ -1409,7 +1409,7 @@ Version 4.8.0-pre2
 - VFS
 
     * New extfs plugin: gitfs (#2467)
-    * patchfs enchancement: join several hunks of the same file into one VFS entry (#2573) 
+    * patchfs enhancement: join several hunks of the same file into one VFS entry (#2573) 
 
 - Misc
 
@@ -1476,7 +1476,7 @@ Be aware.
       or stay old behaviour (current file under cursor) (#2266)
     * Added simple swap mode that means the swap of panel locations, in addition to current swap
       of panel content (#2368)
-    * Cofiguration files now moved to directory specified in XDG_CONFIG_HOME environment variable (#1851)
+    * Configuration files now moved to directory specified in XDG_CONFIG_HOME environment variable (#1851)
     * Panel options are read now from [Panels] section only. [Midnight-Commander] section is not read (#2305)
     * "Show mini info" checkbox was moved from the "Layout" dialog window to the "Panel options" one (#2305)
     * Select files by shift-left/right in file panel (#2534)
@@ -1511,7 +1511,7 @@ Be aware.
 
     * New engine of the editor macro (#323)
     * Multiply repeat of the recorded actions (#323)
-    * Call extermal scripts from the editor (#323, #2512)
+    * Call external scripts from the editor (#323, #2512)
     * Added REDO action (#25)
     * Group UNDO by action (#27)
     * Selection is not reset after execute user menu (#2463)

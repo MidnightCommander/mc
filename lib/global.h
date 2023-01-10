@@ -223,7 +223,7 @@ typedef struct
     {
         /* Use the specified skin */
         char *skin;
-        /* Dialog window and frop down menu have a shadow */
+        /* Dialog window and drop down menu have a shadow */
         gboolean shadows;
 
         char *setup_color_string;

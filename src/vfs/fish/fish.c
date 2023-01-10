@@ -1,5 +1,5 @@
 /*
-   Virtual File System: FISH implementation for transfering files over
+   Virtual File System: FISH implementation for transferring files over
    shell connections.
 
    Copyright (C) 1998-2022
@@ -32,7 +32,7 @@
 
 /**
  * \file
- * \brief Source: Virtual File System: FISH implementation for transfering files over
+ * \brief Source: Virtual File System: FISH implementation for transferring files over
  * shell connections
  * \author Pavel Machek
  * \author Michal Svec

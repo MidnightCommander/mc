@@ -678,7 +678,7 @@ sftpfs_cb_fill_names (struct vfs_class *me, fill_names_f func)
 /**
  * Callback for checking if connection is equal to existing connection.
  *
- * @param vpath_element path element with connetion data
+ * @param vpath_element path element with connection data
  * @param super         data with exists connection
  * @param vpath         unused
  * @param cookie        unused
@@ -727,7 +727,7 @@ sftpfs_new_archive (struct vfs_class *me)
  *
  * @param super         connection data
  * @param vpath         unused
- * @param vpath_element path element with connetion data
+ * @param vpath_element path element with connection data
  * @return 0 if success, -1 otherwise
  */
 

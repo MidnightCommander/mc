@@ -62,7 +62,7 @@
  *
  * (1) When the last open file in your filesystem gets closed, conditionally
  *     create a stamp. You do this with vfs_stamp_create(). (The meaning
- *     of "conditionaly" is explained below.)
+ *     of "conditionally" is explained below.)
  *
  * (2) When a file in your filesystem is opened, delete the stamp. You do
  *     this with vfs_rmstamp().
@@ -207,7 +207,7 @@ vfs_stamp_create (struct vfs_class *vclass, vfsid id)
     const vfs_path_element_t *path_element;
 
     /* There are three directories we have to take care of: current_dir,
-       current_panel->cwd and other_panel->cwd. Athough most of the time either
+       current_panel->cwd and other_panel->cwd. Although most of the time either
        current_dir and current_panel->cwd or current_dir and other_panel->cwd are the
        same, it's possible that all three are different -- Norbert */
 

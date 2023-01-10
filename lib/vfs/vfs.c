@@ -34,7 +34,7 @@
  * \author Pavel Machek
  * \date 1995, 1998
  * \warning functions like extfs_lstat() have right to destroy any
- * strings you pass to them. This is acutally ok as you g_strdup what
+ * strings you pass to them. This is actually ok as you g_strdup what
  * you are passing to them, anyway; still, beware.
  *
  * Namespace: exports *many* functions with vfs_ prefix; exports
@@ -110,8 +110,8 @@ static long vfs_free_handle_list = -1;
  * plugin to automatic detect encoding
  * path - path to translate
  * size - how many bytes from path translate
- * defcnv - convertor, that is used as default, when path does not contain any
- *          #enc: subtring
+ * defcnv - converter, that is used as default, when path does not contain any
+ *          #enc: substring
  * buffer - used to store result of translation
  */
 

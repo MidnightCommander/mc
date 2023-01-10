@@ -203,7 +203,7 @@ void panel_deinit (void);
 /**
  * Empty panel creation.
  *
- * @param panel_name name of panel for setup retieving
+ * @param panel_name name of panel for setup retrieving
  *
  * @return new instance of WPanel
  */
@@ -219,7 +219,7 @@ panel_empty_new (const char *panel_name)
 /**
  * Panel creation for specified directory.
  *
- * @param panel_name name of panel for setup retieving
+ * @param panel_name name of panel for setup retrieving
  * @param vpath working panel directory. If NULL then current directory is used
  *
  * @return new instance of WPanel
@@ -237,7 +237,7 @@ panel_with_dir_new (const char *panel_name, const vfs_path_t * vpath)
 /**
  * Panel creation.
  *
- * @param panel_name name of panel for setup retieving
+ * @param panel_name name of panel for setup retrieving
  *
  * @return new instance of WPanel
  */
@@ -252,7 +252,7 @@ panel_new (const char *panel_name)
 /**
  * Panel creation with specified size.
  *
- * @param panel_name name of panel for setup retieving
+ * @param panel_name name of panel for setup retrieving
  * @param y y coordinate of top-left corner
  * @param x x coordinate of top-left corner
  * @param lines vertical size

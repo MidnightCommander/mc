@@ -411,7 +411,7 @@ format_item_free (format_item_t * format)
 static int
 panel_lines (const WPanel * p)
 {
-    /* 3 lines are: top frame, column header, botton frame */
+    /* 3 lines are: top frame, column header, button frame */
     return (CONST_WIDGET (p)->rect.lines - 3 - (panels_options.show_mini_info ? 2 : 0));
 }
 
@@ -1400,16 +1400,16 @@ adjust_top_file (WPanel * panel)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** add "#enc:encodning" to end of path */
-/* if path end width a previous #enc:, only encoding is changed no additional 
+/** add "#enc:encoding" to end of path */
+/* if path end width a previous #enc:, only encoding is changed no additional
  * #enc: is appended
- * retun new string
+ * return new string
  */
 
 static char *
 panel_save_name (WPanel * panel)
 {
-    /* If the program is shuting down */
+    /* If the program is shutting down */
     if ((mc_global.midnight_shutdown && auto_save_setup) || saving_setup)
         return g_strdup (panel->name);
 
@@ -1710,7 +1710,7 @@ parse_display_format (WPanel * panel, const char *format, char **error, gboolean
 
     if (i18n_timelength == 0)
     {
-        i18n_timelength = i18n_checktimelength ();      /* Musn't be 0 */
+        i18n_timelength = i18n_checktimelength ();      /* Mustn't be 0 */
 
         for (i = 0; panel_fields[i].id != NULL; i++)
             if (strcmp ("time", panel_fields[i].id + 1) == 0)
@@ -3457,7 +3457,7 @@ directory_history_list (WPanel * panel)
     if (!ok)
     {
         /* Since history is fully modified in history_show(), panel->dir_history actually
-         * points to the invalid place. Try restore current postition here. */
+         * points to the invalid place. Try restore current position here. */
 
         size_t i;
 
@@ -4395,7 +4395,7 @@ panel_set_lwd (WPanel * panel, const vfs_path_t * vpath)
 /**
  * Creatie an empty panel with specified size.
  *
- * @param panel_name name of panel for setup retieving
+ * @param panel_name name of panel for setup receiving
  *
  * @return new instance of WPanel
  */
@@ -4483,7 +4483,7 @@ panel_sized_empty_new (const char *panel_name, int y, int x, int lines, int cols
 /**
  * Panel creation for specified size and directory.
  *
- * @param panel_name name of panel for setup retieving
+ * @param panel_name name of panel for setup retrieving
  * @param y y coordinate of top-left corner
  * @param x x coordinate of top-left corner
  * @param lines vertical size
@@ -4596,7 +4596,7 @@ panel_reload (WPanel * panel)
 
 /* --------------------------------------------------------------------------------------------- */
 /* Switches the panel to the mode specified in the format           */
-/* Seting up both format and status string. Return: 0 - on success; */
+/* Setting up both format and status string. Return: 0 - on success; */
 /* 1 - format error; 2 - status error; 3 - errors in both formats.  */
 
 int

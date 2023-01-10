@@ -445,7 +445,7 @@ widget_set_size (Widget * w, int y, int x, int lines, int cols)
  * Change widget position and size.
  *
  * @param w widget
- * @param r WRect obgect that holds position and size
+ * @param r WRect object that holds position and size
  */
 
 void
