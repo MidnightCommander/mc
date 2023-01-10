@@ -1,5 +1,5 @@
 #! /bin/sh
-# Midnight Commander - WIM suport
+# Midnight Commander - WIM support
 #
 # Written by:
 #  Vadim Kalinnikov <moose@ylsoftware.com>,
@@ -21,7 +21,7 @@ WIMFILENAME=$2
 
 mcwim_list() {
 	# Here we can use "Image count" from output,
-	# but on some borken images we can get garbage, instead of number
+	# but on some broken images we can get garbage, instead of number
 	IMAGECOUNT=`${WIM} info ${WIMFILENAME} | grep  Index: | grep -v Boot | wc -l`
 	IMGNUM=1
 	VUID=`id -nu`

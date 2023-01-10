@@ -64,7 +64,7 @@ with those from xterm.tcap.
 The xterm.ad translation table contains many items (some of them may be
 unnecessary) but are included only to make it work on all different xterms
 (xterm terminfo and termcap databases have different sequences for the same
-keys in every different database, so xterm.ad works as a stardard to make
+keys in every different database, so xterm.ad works as a standard to make
 xterm.ti and termcap happy). If you find that xterm works well even if you
 delete some lines from the translations, feel free to do it.
 

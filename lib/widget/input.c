@@ -161,7 +161,7 @@ do_show_hist (WInput * in)
     history_show (&hd);
 
     /* in->history.list was destroyed in history_show().
-     * Apply new history and current postition to avoid use-after-free. */
+     * Apply new history and current position to avoid use-after-free. */
     in->history.list = hd.list;
     in->history.current = in->history.list;
     if (hd.text != NULL)

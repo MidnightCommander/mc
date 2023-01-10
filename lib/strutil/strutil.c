@@ -380,7 +380,7 @@ str_detect_termencoding (void)
         /* On Linux, nl_langinfo (CODESET) returns upper case UTF-8 whether the LANG is set
            to utf-8 or UTF-8.
            On Mac OS X, it returns the same case as the LANG input.
-           So let tranform result of nl_langinfo (CODESET) to upper case  unconditionally. */
+           So let transform result of nl_langinfo (CODESET) to upper case  unconditionally. */
         term_encoding = g_ascii_strup (nl_langinfo (CODESET), -1);
     }
 
@@ -983,7 +983,7 @@ strrstr_skip_count (const char *haystack, const char *needle, size_t skip_count)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/* Interprete string as a non-negative decimal integer, optionally multiplied by various values.
+/* Interpret string as a non-negative decimal integer, optionally multiplied by various values.
  *
  * @param str input value
  * @param invalid set to TRUE if "str" does not represent a number in this format

@@ -92,7 +92,7 @@ local_opendir (const vfs_path_t * vpath)
 
     path_element = vfs_path_get_by_index (vpath, -1);
 
-    /* On Linux >= 5.1, MC sometimes shows empty directpries on mounted CIFS shares.
+    /* On Linux >= 5.1, MC sometimes shows empty directories on mounted CIFS shares.
      * Rereading directory restores the directory content.
      *
      * Reopen directory, if first readdir() returns NULL and errno == EINTR.

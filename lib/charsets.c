@@ -213,7 +213,7 @@ load_codepages_list (void)
 
     if (codepages == NULL)
     {
-        /* files are not found, add defaullt codepage */
+        /* files are not found, add default codepage */
         fprintf (stderr, "%s\n", _("Warning: cannot load codepages list"));
 
         codepages = g_ptr_array_new ();

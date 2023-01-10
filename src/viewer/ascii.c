@@ -177,7 +177,7 @@
  * scrolling back by a page) and then walking backwards is reasonably fast, even if the file is
  * extremely large and consists of maybe full zeros or something like that. If there's no newline
  * found within this limit, just start displaying from there and see what happens. We might get
- * some displaying parameteres (most importantly the columns) incorrect, but at least will show the
+ * some displaying parameters (most importantly the columns) incorrect, but at least will show the
  * file without spinning the CPU for ages. When scrolling back to that point, the user might see a
  * garbled first line (even starting with an invalid partial UTF-8), but then walking back by yet
  * another line should fix it.

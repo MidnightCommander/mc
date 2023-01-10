@@ -133,7 +133,7 @@ static const struct get_random_ds
     },
     { /* 4. */
         MC_HINT_FILE_SIZE + 50,
-        "P A R A _ 4 ", /* the trailing space it's a bug, but not critical and may be ommited */
+        "P A R A _ 4 ", /* the trailing space it's a bug, but not critical and may be omitted */
     },
 };
 /* *INDENT-ON* */

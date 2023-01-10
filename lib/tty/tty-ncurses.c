@@ -364,7 +364,7 @@ tty_reset_shell_mode (void)
 void
 tty_raw_mode (void)
 {
-    raw ();                     /* FIXME: uneeded? */
+    raw ();                     /* FIXME: unneeded? */
     cbreak ();
 }
 

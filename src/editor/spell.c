@@ -820,7 +820,7 @@ spell_dialog_spell_suggest_show (WEdit * edit, const char *word, char **new_word
  * Show dialog to select language for spell check.
  *
  * @param languages Array of available languages
- * @return name of choosed language
+ * @return name of chosen language
  */
 
 char *

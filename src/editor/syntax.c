@@ -34,7 +34,7 @@
  *  \author Mikhail Pobolovets
  *  \date 2010
  *
- *  Mispelled words are flushed from the syntax highlighting rules
+ *  Misspelled words are flushed from the syntax highlighting rules
  *  when they have been around longer than
  *  TRANSIENT_WORD_TIME_OUT seconds. At a cursor rate of 30
  *  chars per second and say 3 chars + a space per word, we can

@@ -130,7 +130,7 @@ OS_Setup (void)
     mc_shell_init ();
 
     /* This is the directory, where MC was installed, on Unix this is DATADIR */
-    /* and can be overriden by the MC_DATADIR environment variable */
+    /* and can be overridden by the MC_DATADIR environment variable */
     datadir_env = g_getenv ("MC_DATADIR");
     if (datadir_env != NULL)
         mc_global.sysconfig_dir = g_strdup (datadir_env);

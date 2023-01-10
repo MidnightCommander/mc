@@ -363,7 +363,7 @@ my_exit (int status)
  *                    Shell (or command) will be found in paths described in PATH variable
  *                    (if shell parameter doesn't begin from path delimiter)
  * @parameter command Command for shell (or first parameter for command, if flags contain EXECUTE_AS_SHELL)
- * @return 0 if successfull, -1 otherwise
+ * @return 0 if successful, -1 otherwise
  */
 
 int
@@ -378,12 +378,12 @@ my_system (int flags, const char *shell, const char *command)
  *
  * @parameter flags addition conditions for running external programs.
  * @parameter shell shell (if flags contain EXECUTE_AS_SHELL), command to run otherwise.
- *                  Shell (or command) will be found in pathes described in PATH variable
+ *                  Shell (or command) will be found in paths described in PATH variable
  *                  (if shell parameter doesn't begin from path delimiter)
  * @parameter ...   Command for shell with addition parameters for shell
  *                  (or parameters for command, if flags contain EXECUTE_AS_SHELL).
  *                  Should be NULL terminated.
- * @return 0 if successfull, -1 otherwise
+ * @return 0 if successful, -1 otherwise
  */
 
 int
@@ -416,7 +416,7 @@ my_systeml (int flags, const char *shell, ...)
  * @parameter command command to run. Command will be found in paths described in PATH variable
  *                    (if command parameter doesn't begin from path delimiter)
  * @parameter argv    Array of strings (NULL-terminated) with parameters for command
- * @return 0 if successfull, -1 otherwise
+ * @return 0 if successful, -1 otherwise
  */
 
 int
@@ -464,7 +464,7 @@ my_systemv (const char *command, char *const argv[])
  *                    Shell (or command) will be found in paths described in PATH variable
  *                    (if shell parameter doesn't begin from path delimiter)
  * @parameter argv    Array of strings (NULL-terminated) with parameters for command
- * @return 0 if successfull, -1 otherwise
+ * @return 0 if successful, -1 otherwise
  */
 
 int
@@ -495,7 +495,7 @@ my_systemv_flags (int flags, const char *command, char *const argv[])
  * @parameter command command line of child process
  * @parameter read_out do or don't read the stdout of child process
  * @parameter read_err do or don't read the stderr of child process
- * @paremeter error contains pointer to object to handle error code and message
+ * @parameter error contains pointer to object to handle error code and message
  *
  * @return newly created object of mc_pipe_t class in success, NULL otherwise
  */
@@ -559,7 +559,7 @@ mc_popen (const char *command, gboolean read_out, gboolean read_err, GError ** e
  *   p->xxx.len == MC_PIPE_STREAM_UNREAD: stream p->xxx was not read;
  *   p->xxx.len == MC_PIPE_ERROR_READ: reading error, and p->xxx.errno is set appropriately.
  *
- * @paremeter error contains pointer to object to handle error code and message
+ * @parameter error contains pointer to object to handle error code and message
  */
 
 void
@@ -666,8 +666,8 @@ mc_pstream_get_string (mc_pipe_stream_t * ps)
 /**
  * Close pipe and destroy pipe descriptor.
  *
- * @paremeter p pipe descriptor
- * @paremeter error contains pointer to object to handle error code and message
+ * @parameter p pipe descriptor
+ * @parameter error contains pointer to object to handle error code and message
  */
 
 void

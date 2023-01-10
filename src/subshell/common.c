@@ -872,7 +872,7 @@ feed_subshell (int how, gboolean fail_on_error)
                         set_prompt_string ();
                         if (subshell_ready && !read_command_line_buffer (FALSE))
                         {
-                            /* If we got here, some unforseen error must have occurred. */
+                            /* If we got here, some unforeseen error must have occurred. */
                             if (mc_global.shell->type != SHELL_FISH)
                             {
                                 write_all (mc_global.tty.subshell_pty, "\003", 1);

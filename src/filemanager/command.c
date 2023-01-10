@@ -75,7 +75,7 @@ static input_colors_t command_colors;
 /** Handle Enter on the command line
  *
  * @param lc_cmdline string for handling
- * @return MSG_HANDLED on sucsess else MSG_NOT_HANDLED
+ * @return MSG_HANDLED on success else MSG_NOT_HANDLED
  */
 
 static cb_ret_t

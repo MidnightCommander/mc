@@ -450,7 +450,7 @@ static key_define_t xterm_key_defines[] = {
     {0, NULL, MCKEY_NOACTION},
 };
 
-/* qansi-m terminals have a much more key combinatios,
+/* qansi-m terminals have a much more key combinations,
    which are undefined in termcap/terminfo */
 static key_define_t qansi_key_defines[] = {
     /* qansi-m terminal */
@@ -2164,7 +2164,7 @@ learn_key (void)
     char buffer[256];
     char *p = buffer;
 
-    tty_keypad (FALSE);         /* disable intepreting keys by ncurses */
+    tty_keypad (FALSE);         /* disable interpreting keys by ncurses */
     c = tty_lowlevel_getch ();
     while (c == -1)
         c = tty_lowlevel_getch ();      /* Sanity check, should be unnecessary */

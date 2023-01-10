@@ -87,7 +87,7 @@ START_PARAMETRIZED_TEST (realpath_test, data_source)
 {
     int ret;
 
-    /* realpath(3) produces a canonicalized absolute pathname using curent directory.
+    /* realpath(3) produces a canonicalized absolute pathname using current directory.
      * Change the current directory to produce correct pathname. */
     ret = chdir ("/");
 
