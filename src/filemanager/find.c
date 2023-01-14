@@ -1808,11 +1808,12 @@ do_find (WPanel * panel, const char *start_dir, ssize_t start_dir_len, const cha
         GList *entry;
         dir_list *list = &panel->dir;
         char *name = NULL;
+        gboolean ok = TRUE;
 
         panel_clean_dir (panel);
         dir_list_init (list);
 
-        for (entry = listbox_get_first_link (find_list); entry != NULL;
+        for (entry = listbox_get_first_link (find_list); entry != NULL && ok;
              entry = g_list_next (entry))
         {
             const char *lc_filename = NULL;
@@ -1845,12 +1846,6 @@ do_find (WPanel * panel, const char *start_dir, ssize_t start_dir_len, const cha
                 g_free (name);
                 continue;
             }
-            /* Need to grow the *list? */
-            if (list->len == list->size && !dir_list_grow (list, DIR_LIST_RESIZE_STEP))
-            {
-                g_free (name);
-                break;
-            }
 
             /* don't add files more than once to the panel */
             if (!content_is_empty && list->len != 0
@@ -1860,16 +1855,10 @@ do_find (WPanel * panel, const char *start_dir, ssize_t start_dir_len, const cha
                 continue;
             }
 
-            list->list[list->len].fname = g_string_new (p);
-            list->list[list->len].f.marked = 0;
-            list->list[list->len].f.link_to_dir = link_to_dir ? 1 : 0;
-            list->list[list->len].f.stale_link = stale_link ? 1 : 0;
-            list->list[list->len].f.dir_size_computed = 0;
-            list->list[list->len].st = st;
-            list->list[list->len].sort_key = NULL;
-            list->list[list->len].second_sort_key = NULL;
-            list->len++;
+            ok = dir_list_append (list, p, &st, link_to_dir, stale_link);
+
             g_free (name);
+
             if ((list->len & 15) == 0)
                 rotate_dash (TRUE);
         }
