@@ -27,7 +27,7 @@ Version 4.8.29
 
 - Misc
 
-    * Code cleanup (#4357, #4397)
+    * Code cleanup (#4357, #4397, #4425)
     * sqlite3 view: use 'immutable=1' URI parameter to prevent leaving wal/shm files after viewing sqlite database (#4369)
     * Support of contour terminal emulator (https://github.com/contour-terminal/contour) (#4396)
     * mc.ext.ini: clarify regex for makefiles (#4419)
