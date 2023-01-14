@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: mc 4.8.28-148-g9da2c857e\n"
+"Project-Id-Version: mc 4.8.29-pre1-5-g8a6b2cb91\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-01-02 21:20+0100\n"
+"POT-Creation-Date: 2023-01-14 20:00+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -5157,7 +5157,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#: src/vfs/extfs/extfs.c:738
+#: src/vfs/extfs/extfs.c:691
+msgid "Inconsistent archive"
+msgstr ""
+
+#: src/vfs/extfs/extfs.c:740
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
@@ -5165,15 +5169,15 @@ msgid ""
 "%s"
 msgstr ""
 
-#: src/vfs/extfs/extfs.c:751 src/vfs/extfs/extfs.c:949
-#: src/vfs/extfs/extfs.c:959 src/vfs/extfs/extfs.c:964
+#: src/vfs/extfs/extfs.c:753 src/vfs/extfs/extfs.c:951
+#: src/vfs/extfs/extfs.c:961 src/vfs/extfs/extfs.c:966
 #, c-format
 msgid ""
 "EXTFS virtual file system:\n"
 "%s"
 msgstr ""
 
-#: src/vfs/extfs/extfs.c:1556
+#: src/vfs/extfs/extfs.c:1558
 #, c-format
 msgid "Warning: cannot open %s directory\n"
 msgstr ""

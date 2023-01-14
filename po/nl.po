@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-01-05 21:49+0100\n"
+"POT-Creation-Date: 2023-01-14 20:00+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Richard E. van der Luit <nippur@fedoraproject.org>, "
 "2012-2015,2017,2020\n"
@@ -4142,6 +4142,10 @@ msgid ""
 msgstr ""
 "Onverwacht einde van bestand in\n"
 "%s"
+
+#, fuzzy
+msgid "Inconsistent archive"
+msgstr "Inconsistent tar-archief"
 
 #, c-format
 msgid ""

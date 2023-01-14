@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-01-05 21:49+0100\n"
+"POT-Creation-Date: 2023-01-14 20:00+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Priit Jõerüüt <transifex@joeruut.com>, 2020-2021\n"
 "Language-Team: Estonian (http://www.transifex.com/mc/mc/language/et/)\n"
@@ -4128,6 +4128,10 @@ msgid ""
 msgstr ""
 "Ootamatu faili lõpp\n"
 " %s"
+
+#, fuzzy
+msgid "Inconsistent archive"
+msgstr "Tar arhiiv sisaldab vasturääkivusi"
 
 #, c-format
 msgid ""

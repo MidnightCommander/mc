@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-01-05 21:49+0100\n"
+"POT-Creation-Date: 2023-01-14 20:00+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Matej Urbančič <>, 2012\n"
 "Language-Team: Slovenian (http://www.transifex.com/mc/mc/language/sl/)\n"
@@ -3949,6 +3949,10 @@ msgid ""
 msgstr ""
 "Nepričakovan konec datoteke\n"
 "%s"
+
+#, fuzzy
+msgid "Inconsistent archive"
+msgstr "Nekonsistenten tar arhiv"
 
 #, c-format
 msgid ""

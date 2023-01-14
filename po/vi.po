@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-01-05 21:49+0100\n"
+"POT-Creation-Date: 2023-01-14 20:00+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
 "Language-Team: Vietnamese (http://www.transifex.com/mc/mc/language/vi/)\n"
@@ -3927,6 +3927,10 @@ msgid ""
 msgstr ""
 "Kết thúc tập tin không mong đợi\n"
 "%s"
+
+#, fuzzy
+msgid "Inconsistent archive"
+msgstr "Tập tin tar không thích hợp"
 
 #, c-format
 msgid ""

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-01-05 21:49+0100\n"
+"POT-Creation-Date: 2023-01-14 20:00+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Junghee Lee <daemul72@gmail.com>, 2022\n"
 "Language-Team: Korean (http://www.transifex.com/mc/mc/language/ko/)\n"
@@ -4139,6 +4139,10 @@ msgid ""
 msgstr ""
 "%s\n"
 "파일의 예기치 않은 끝"
+
+#, fuzzy
+msgid "Inconsistent archive"
+msgstr "잘못된 tar 압축파일"
 
 #, c-format
 msgid ""

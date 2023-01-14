@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-01-05 21:49+0100\n"
+"POT-Creation-Date: 2023-01-14 20:00+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Ferriandy Chianiago <gpl4all@gmail.com>, 2015\n"
 "Language-Team: Indonesian (http://www.transifex.com/mc/mc/language/id/)\n"
@@ -3934,6 +3934,9 @@ msgstr ""
 msgid ""
 "Unexpected end of file\n"
 "%s"
+msgstr ""
+
+msgid "Inconsistent archive"
 msgstr ""
 
 #, c-format

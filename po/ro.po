@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-01-05 21:49+0100\n"
+"POT-Creation-Date: 2023-01-14 20:00+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Simona Iacob <s@zp1.net>, 2021-2022\n"
 "Language-Team: Romanian (http://www.transifex.com/mc/mc/language/ro/)\n"
@@ -4167,6 +4167,10 @@ msgid ""
 msgstr ""
 "Sfârșit de fișier (EOF) neașteptat\n"
 "%s"
+
+#, fuzzy
+msgid "Inconsistent archive"
+msgstr "Arhivă tar trunchiată"
 
 #, c-format
 msgid ""
