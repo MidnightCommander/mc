@@ -1804,7 +1804,6 @@ do_find (WPanel * panel, const char *start_dir, ssize_t start_dir_len, const cha
 
     if (return_value == B_PANELIZE && *filename)
     {
-        int i;
         struct stat st;
         GList *entry;
         dir_list *list = &panel->dir;
@@ -1813,8 +1812,8 @@ do_find (WPanel * panel, const char *start_dir, ssize_t start_dir_len, const cha
         panel_clean_dir (panel);
         dir_list_init (list);
 
-        for (i = 0, entry = listbox_get_first_link (find_list); entry != NULL;
-             i++, entry = g_list_next (entry))
+        for (entry = listbox_get_first_link (find_list); entry != NULL;
+             entry = g_list_next (entry))
         {
             const char *lc_filename = NULL;
             WLEntry *le = LENTRY (entry->data);
