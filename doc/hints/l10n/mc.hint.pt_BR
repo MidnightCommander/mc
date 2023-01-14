@@ -1,40 +1,40 @@
-Dica: Pressione simultaneamente as teclas Ctrl+X, em seguida, pressione a tecla T para copiar o nome dos arquivos marcados para a linha de comando.
+Dica: Pressione a tecla Ctrl junto com a tecla X, em seguida, pressione a tecla T para copiar o nome dos arquivos marcados para a linha de comando.
 
-Dica: Pressione simultaneamente as teclas Ctrl+X, em seguida, pressione a tecla P para copiar o nome do caminho atual para a linha de comando.
+Dica: Pressione a tecla Ctrl junto com a tecla X, em seguida, pressione a tecla P para copiar o nome do caminho atual para a linha de comando.
 
-Dica: Para concluir: Pressione simultaneamente as teclas M+Tab (ou Esc+Tab). Pressione duas vezes para obter uma lista.
+Dica: Para concluir: Pressione a tecla M junto com a tecla Tab (ou a tecla Esc junto com a tecla Tab). Pressione duas vezes para obter uma lista.
 
-Dica: Pressione simultaneamente as teclas M+P e M+N para acessar o histórico de comandos.
+Dica: Pressione a tecla M junto com a tecla P ou a tecla M junto com a tecla N para acessar o histórico de comandos.
 
-Dica: Para inserir um caractere especial, pressione simultaneamente as teclas Crtl+Q e o caractere.
+Dica: Para inserir um caractere especial, pressione a tecla Ctrl junto com a tecla Q e o caractere desejado.
 
 Dica: Para não exibir as mensagens das dicas de ferramentas, desative-as no menu Opções, Leiaute.
 
 Dica: Selecionando diretórios: Adicione uma barra ao final do padrão correspondente.
 
-Dica: Se o seu terminal não for compatível com as teclas de função, utilize a sequência com ESC+Número.
+Dica: Se o seu terminal não for compatível com as teclas de função, utilize a sequência com a tecla Esc junto com a tecla do número.
 
-Dica: A página do GNU Midnight Commander: https://www.midnight-commander.org
+Dica: A página eletrônica do Midnight Commander do GNU é https://www.midnight-commander.org
 
-Dica: Por favor envie relatórios de bugs para mc-devel@lists.midnight-commander.org
+Dica: Por favor, envie os relatórios de erros ou falhas para o endereço mc-devel@lists.midnight-commander.org
 
-Dica: A tecla Tab altera seu painel atual.
+Dica: A tecla Tab altera o seu painel atual.
 
 Dica: Coisas legais do VFS: Pressione a tecla Enter em um arquivo com a extensão .tar para examinar o seu conteúdo.
 
-Dica: Nós também temos uma ótima página com o manual do Midnight Commander.
+Dica: Nós também temos um ótimo manual na página do Midnight Commander.
 
-Dica: Deseja navegação tipo Lynx? Ative-a no diálogo de Configuração.
+Dica: Você deseja uma navegação do tipo Lynx? Ative-a na caixa de diálogo das Configurações.
 
 Dica: Os macros % funcionam mesmo na linha de comando.
 
-Dica: Pressione simultaneamente as teclas M+! para executar os programas aplicativos e exibir a saída no visualizador.
+Dica: Pressione a tecla M junto com a tecla ! para executar os programas aplicativos e exibir a saída no visualizador.
 
 Dica: O formato da listagem de arquivos pode ser personalizada; execute o comando "man mc" para obter mais informações.
 
 Dica: %D/%T expande para os arquivos marcados no diretório oposto.
 
-Dica: Para ter o Shell básico, pressione simultaneamente as teclas Ctrl+O e volte novamente para o Midnight Commander com as teclas Ctrl+O.
+Dica: Para ter o Shell básico, pressione a tecla Ctrl junto com a tecla O e volte novamente para o Midnight Commander pressionando a tecla C junto com a tecla O.
 
 Dica: Ao definir a variável CDPATH, você economizará digitações dos comandos cd.
 
@@ -42,7 +42,7 @@ Dica: Para exibir os seus arquivos .*, defina esta opção na caixa de diálogo 
 
 Dica: Para exibir os seus arquivos de cópia de segurança (backup) *~, defina esta opção na caixa de diálogo nas Configurações.
 
-Dica: A conclusão funciona em todas as linhas de entrada em todas as caixas de diálogos, pressione simultaneamente as teclas M+Tab.
+Dica: A conclusão funciona em todas as linhas de entrada em todas as caixas de diálogos, pressione as teclas M+Tab.
 
 Dica: Em emuladores de terminais lentos, a opção -s pode ajudar.
 
@@ -50,17 +50,17 @@ Dica: Encontrar um Arquivo: você pode trabalhar em arquivos encontrados utiliza
 
 Dica: Para fazer pesquisas complexas, pressione o comando de Painelização Externo.
 
-Dica: Para alterar o diretório por meio de um comando, pressione simultaneamente as teclas M+C (equivale ao preenchimento rápido do comando cd).
+Dica: Para alterar o diretório por meio de um comando, pressione a tecla M junto com a tecla C (equivale ao preenchimento rápido do comando cd).
 
 Dica: Comandos shell não funcionarão quando estiver num sistema de ficheiros não local.
 
-Dica: Para recuperar o texto de volta, pressione simultaneamente as teclas Ctrl-Y.
+Dica: Para recuperar o texto de volta, pressione a tecla Ctrl junto com a tecla Y.
 
 Dica: Se algumas das suas teclas não estão funcionando, verifique no menu Opções, Aprender as Teclas.
 
-Dica: Para exibir a saída de um comando no visualizador, pressione simultaneamente as teclas M-!.
+Dica: Para exibir a saída de um comando no visualizador, pressione a tecla M junto com a tecla !.
 
-Dica: Pressione a teclas F13 (ou Shift+F3) para invocar o visualizador no modo bruto.
+Dica: Pressione a tecla F13 (ou Shift junto com F3) para invocar o visualizador no modo bruto.
 
 Dica: Para especificar o editor, pressione com a tecla F4 com a variável EDITOR do Shell.
 
@@ -68,13 +68,13 @@ Dica: Para especificar o visualizador externo, utilize as variáveis VIEWER ou P
 
 Dica: Para desativar todas as solicitações de confirmação, defina esta opção no menu Opções, Confirmações.
 
-Dica: Para pular para os diretórios utilizados com mais frequência, pressione simultaneamente as teclas C+\.
+Dica: Para pular para os diretórios utilizados com mais frequência, pressione a tecla Ctrl junto com a tecla \.
 
 Dica: Para utilizar o FTP anonimamente com o Midnight Commander, insira o endereço 'cd ftp://maquina.edu'.
 
 Dica: O FTP está embutido no Midnight Commander, verifique o menu Arquivo, FTP.
 
-Dica: Para alterar rapidamente para o modo de listagem, pressione simultaneamente as teclas M+T.
+Dica: Para alterar rapidamente para o modo de listagem ou de lista, pressione a tecla M junto com a tecla T.
 
 Dica: Para especificar o nome de usuário quando for utilizar o ftps: 'cd ftp://user@machine.edu'.
 
@@ -84,4 +84,4 @@ Dica: Para marcar diretórios na caixa de diálogo selecionada, adicione ao fina
 
 Dica: Para utilizar os comandos "recortar" e "colar" com o cursor, pode ser necessário segurar a tecla Shift.
 
-Dica: Para definir a tecla de atalho para os endereços de FTP que são visitados com mais frequência no hotlist, pressione simultaneamente as teclas C+\.
+Dica: Para definir a tecla de atalho para os endereços de FTP que são visitados com mais frequência no 'hotlist', pressione a tecla Ctrl junto com a tecla \.
