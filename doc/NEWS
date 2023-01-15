@@ -8,7 +8,6 @@ Version 4.8.29
       * "Using shell patterns"
     * Continue copy after interrupt (#4409)
     * Restore menu accelerator for "Sort order": back to "S"; change menu accelerator for "SFTP link" to "N" (#4373)
-    * Implement multi-line search in regex mode using '\n' character (#400)
     * Add support for cross-compilation with PERL path different between --build and --host (#4399)
     * Bootstrap with autotools providing direct support for Apple M1
     * Port mc.ext to INI format and rename to mc.ext.ini (#4141, #3742, #3191)
