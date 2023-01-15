@@ -53,7 +53,7 @@ Version 4.8.29
     * FISH subshell: commands don't work after window resize (#4372)
     * FTP VFS: doesn't reconnect to server after timeout (#3670)
     * FISH VFS: cannot remove non-empty directory (#4364)
-    * EXTFS VFS:: segfault if archive contains file(s) in the parent directory (#4422)
+    * EXTFS VFS: segfault if archive contains file(s) in the parent directory (#4422, #4427)
     * Tests: variable redeclaration in filevercmp_test5 (#4358)
 
 

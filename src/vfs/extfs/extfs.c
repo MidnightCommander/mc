@@ -687,7 +687,7 @@ extfs_read_archive (mc_pipe_t * pip, struct extfs_super_t *archive, GError ** er
 
         g_string_free (err_msg, TRUE);
     }
-    else if (*error == NULL)
+    else if (ret == -1)
         mc_propagate_error (error, 0, "%s", _("Inconsistent archive"));
 
     return ret;
