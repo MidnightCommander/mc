@@ -2,7 +2,7 @@
 #
 # Warning: The structure of this file has been completely changed with the version 4.0!
 #
-# All lines starting with # or empty lines are ignoted.
+# All lines starting with # or empty lines are ignored.
 #
 # IMPORTANT: mc scans this file only upon first use or after editing it using the
 # mc "Edit extension file" command (F9-c-e). If you edit this file in any other way
