@@ -1058,8 +1058,19 @@ regex_command_for (void *target, const vfs_path_t * filename_vpath, const char *
         gchar *action_value;
 
         action_value = mc_config_get_string_raw (ext_ini, current_group, action, NULL);
-        /* Empty commands just stop searching through, they don't do anything  */
-        if (action_value != NULL && *action_value != '\0')
+        if (action_value == NULL)
+        {
+            /* Not found, try the action from default section */
+            action_value = mc_config_get_string_raw (ext_ini, default_group, action, NULL);
+            found = (action_value != NULL && *action_value != '\0');
+        }
+        else
+        {
+            /* If action's value is empty, ignore action from default section */
+            found = (*action_value != '\0');
+        }
+
+        if (found)
         {
             vfs_path_t *sv;
 
