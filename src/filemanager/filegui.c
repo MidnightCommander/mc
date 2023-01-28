@@ -21,7 +21,7 @@
    Norbert Warmuth, 1997
    Pavel Machek, 1998
    Slava Zanko, 2009, 2010, 2011, 2012, 2013
-   Andrew Borodin <aborodin@vmail.ru>, 2009-2022
+   Andrew Borodin <aborodin@vmail.ru>, 2009-2023
 
    This file is part of the Midnight Commander.
 
@@ -341,7 +341,7 @@ file_frmt_time (char *buffer, double eta_secs)
     eta_hours = (int) (eta_secs / (60 * 60));
     eta_mins = (int) ((eta_secs - (eta_hours * 60 * 60)) / 60);
     eta_s = (int) (eta_secs - (eta_hours * 60 * 60 + eta_mins * 60));
-    g_snprintf (buffer, BUF_TINY, _("%d:%02d.%02d"), eta_hours, eta_mins, eta_s);
+    g_snprintf (buffer, BUF_TINY, _("%d:%02d:%02d"), eta_hours, eta_mins, eta_s);
 }
 
 /* --------------------------------------------------------------------------------------------- */
