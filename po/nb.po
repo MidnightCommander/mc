@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-01-14 20:00+0100\n"
+"POT-Creation-Date: 2023-01-29 11:16+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: heskjestad <cato@heskjestad.xyz>, 2021-2022\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/mc/mc/language/"
@@ -829,7 +829,8 @@ msgstr "Klarte ikke tolke argumentene."
 msgid "No arguments given to the viewer."
 msgstr "Filviseren fikk ingen argumenter."
 
-msgid "Two files are required to envoke the diffviewer."
+#, fuzzy
+msgid "Two files are required to invoke the diffviewer."
 msgstr "Diffviseren trenger to filnavn for å starte."
 
 msgid "Background protocol error"
@@ -1634,7 +1635,8 @@ msgstr ""
 "Et brukervennlig skriveprogram\n"
 "skrevet for Midnight Commander."
 
-msgid "Copyright (C) 1996-2022 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2023 the Free Software Foundation"
 msgstr "Opphavsrett (C) 1996-2022 the Free Software Foundation"
 
 msgid "About"
@@ -2534,31 +2536,29 @@ msgstr ""
 "Midnight Commandor bruker nå fila %s.\n"
 "Kopier ev. endringer i den gamle fila til den nye."
 
-#, c-format
-msgid " %s%s file error"
-msgstr "Feil i fila %s%s "
-
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"The format of the %s%s file has changed with version 4.0. It seems that the "
-"installation has failed. Please fetch a fresh copy from the Midnight "
-"Commander package."
+"The format of the\n"
+"%s%s\n"
+"file has changed with version 4.0.\n"
+"It seems that the installation has failed.\n"
+"Please fetch a fresh copy from the Midnight Commander package."
 msgstr ""
 "Formatet til fila %s%s ble endret i versjon 4.0. Det ser ut som om "
 "installasjonen mislyktes. Hent en oppdatert kopi fra Midnight Commander-"
 "pakken."
 
-#, c-format
-msgid "%s file error"
-msgstr "Feil i fila %s"
-
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"The format of the %s file has changed with version 4.0. You may either want "
-"to copy it from %s%s or use that file as an example of how to write it."
+"The format of the\n"
+"%s\n"
+"file has changed with version 4.0.\n"
+"You may either want to copy it from\n"
+"%s%s\n"
+"or use that file as an example of how to write it."
 msgstr ""
-"Formatet til fila %s ble endret i versjon 4.0. Du kan enten hente det fra "
-"%s%s eller bruke fila som en eksempelfil."
+"Formatet til fila %s ble endret i versjon 4.0. Du kan enten hente det fra %s"
+"%s eller bruke fila som en eksempelfil."
 
 msgid "DialogTitle|Copy"
 msgstr "DialogTitle|Kopier"
@@ -2938,8 +2938,8 @@ msgstr "&Pause"
 msgid "Con&tinue"
 msgstr "&Fortsett"
 
-#, c-format
-msgid "%d:%02d.%02d"
+#, fuzzy, c-format
+msgid "%d:%02d:%02d"
 msgstr "%d:%02d.%02d"
 
 #, c-format
@@ -4722,3 +4722,11 @@ msgstr "Fortsett fra begynnelsen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Klarte ikke hente en lokal kopi av /ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid " %s%s file error"
+#~ msgstr "Feil i fila %s%s "
+
+#, c-format
+#~ msgid "%s file error"
+#~ msgstr "Feil i fila %s"

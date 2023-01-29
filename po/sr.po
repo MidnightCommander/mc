@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-01-14 20:00+0100\n"
+"POT-Creation-Date: 2023-01-29 11:16+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
 "Language-Team: Serbian (http://www.transifex.com/mc/mc/language/sr/)\n"
@@ -17,8 +17,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -811,7 +811,8 @@ msgstr "Грешка обраде аргумената!"
 msgid "No arguments given to the viewer."
 msgstr "Аргументи нису дати прегледачу."
 
-msgid "Two files are required to envoke the diffviewer."
+#, fuzzy
+msgid "Two files are required to invoke the diffviewer."
 msgstr "Потребне су две датотеке за призивање прегледача разлика."
 
 msgid "Background protocol error"
@@ -1612,7 +1613,7 @@ msgstr ""
 "Уређивач текста наклоњен кориснику\n"
 "написан за Поноћног наредника."
 
-msgid "Copyright (C) 1996-2022 the Free Software Foundation"
+msgid "Copyright (C) 1996-2023 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -2504,24 +2505,22 @@ msgid ""
 msgstr ""
 
 #, c-format
-msgid " %s%s file error"
-msgstr " %s%s грешка датотеке"
-
-#, c-format
 msgid ""
-"The format of the %s%s file has changed with version 4.0. It seems that the "
-"installation has failed. Please fetch a fresh copy from the Midnight "
-"Commander package."
+"The format of the\n"
+"%s%s\n"
+"file has changed with version 4.0.\n"
+"It seems that the installation has failed.\n"
+"Please fetch a fresh copy from the Midnight Commander package."
 msgstr ""
 
 #, c-format
-msgid "%s file error"
-msgstr "Грешка датотеке „%s“"
-
-#, c-format
 msgid ""
-"The format of the %s file has changed with version 4.0. You may either want "
-"to copy it from %s%s or use that file as an example of how to write it."
+"The format of the\n"
+"%s\n"
+"file has changed with version 4.0.\n"
+"You may either want to copy it from\n"
+"%s%s\n"
+"or use that file as an example of how to write it."
 msgstr ""
 
 msgid "DialogTitle|Copy"
@@ -2893,8 +2892,8 @@ msgstr "&Обустави"
 msgid "Con&tinue"
 msgstr "&Настави"
 
-#, c-format
-msgid "%d:%02d.%02d"
+#, fuzzy, c-format
+msgid "%d:%02d:%02d"
 msgstr "%d:%02d.%02d"
 
 #, c-format
@@ -4651,3 +4650,11 @@ msgstr "Да наставим са почетка?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не могу да довучем месни примерак „/ftp://some.host/editme.txt“"
+
+#, c-format
+#~ msgid " %s%s file error"
+#~ msgstr " %s%s грешка датотеке"
+
+#, c-format
+#~ msgid "%s file error"
+#~ msgstr "Грешка датотеке „%s“"
