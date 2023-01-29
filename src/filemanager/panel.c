@@ -2701,7 +2701,9 @@ panel_select_invert_files (WPanel * panel)
 static void
 panel_do_set_filter (WPanel * panel)
 {
-    file_filter_t ff = {.value = NULL,.handler = NULL,.flags = panel->filter.flags };
+    /* *INDENT-OFF* */
+    file_filter_t ff = { .value = NULL, .handler = NULL, .flags = panel->filter.flags };
+    /* *INDENT-ON* */
 
     ff.handler =
         panel_select_unselect_files_dialog (&ff.flags, _("Filter"), MC_HISTORY_FM_PANEL_FILTER,
