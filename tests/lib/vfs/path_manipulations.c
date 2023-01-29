@@ -1,6 +1,6 @@
 /* lib/vfs - test vfs_path_t manipulation functions
 
-   Copyright (C) 2011-2022
+   Copyright (C) 2011-2023
    Free Software Foundation, Inc.
 
    Written by:
@@ -217,7 +217,7 @@ static const struct test_vfs_path_tokens_get_ds
         2,
         "test2://path2/path3"
     },
-    { /* 6. get 'path2/path3' by 1,2  throught non-LOCAL VFS */
+    { /* 6. get 'path2/path3' by 1,2  through non-LOCAL VFS */
         "/path1/path2/test1://user:pass@some.host:12345/path3/path4",
         1,
         2,

@@ -1,7 +1,7 @@
 /*
    Directory cache support
 
-   Copyright (C) 1998-2022
+   Copyright (C) 1998-2023
    Free Software Foundation, Inc.
 
    Written by:
@@ -341,7 +341,7 @@ vfs_s_free_super (struct vfs_class *me, struct vfs_s_super *super)
     }
 
 #if 0
-    /* FIXME: We currently leak small ammount of memory, sometimes. Fix it if you can. */
+    /* FIXME: We currently leak small amount of memory, sometimes. Fix it if you can. */
     if (super->ino_usage != 0)
         message (D_ERROR, "Direntry warning",
                  "Super ino_usage is %d, memory leak", super->ino_usage);
@@ -1318,7 +1318,7 @@ vfs_s_open (const vfs_path_t * vpath, int flags, mode_t mode)
 
     if (ino == NULL)
     {
-        char *dirname, *name;
+        char *name;
         struct vfs_s_entry *ent;
         struct vfs_s_inode *dir;
 
@@ -1326,9 +1326,9 @@ vfs_s_open (const vfs_path_t * vpath, int flags, mode_t mode)
         if ((flags & O_CREAT) == 0 || path_element->class->write == NULL)
             return NULL;
 
-        dirname = g_path_get_dirname (q);
-        dir = vfs_s_find_inode (path_element->class, super, dirname, LINK_FOLLOW, FL_DIR);
-        g_free (dirname);
+        name = g_path_get_dirname (q);
+        dir = vfs_s_find_inode (path_element->class, super, name, LINK_FOLLOW, FL_DIR);
+        g_free (name);
         if (dir == NULL)
             return NULL;
 
@@ -1431,7 +1431,7 @@ vfs_s_retrieve_file (struct vfs_class *me, struct vfs_s_inode *ino)
 {
     /* If you want reget, you'll have to open file with O_LINEAR */
     off_t total = 0;
-    char buffer[8192];
+    char buffer[BUF_8K];
     int handle;
     ssize_t n;
     off_t stat_size = ino->st.st_size;

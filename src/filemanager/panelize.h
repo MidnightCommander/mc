@@ -15,14 +15,11 @@
 
 /*** declarations of public functions ************************************************************/
 
-void external_panelize (void);
-void load_panelize (void);
-void save_panelize (void);
-void done_panelize (void);
-void cd_panelize_cmd (void);
-void panelize_save_panel (WPanel * panel);
-void panelize_change_root (const vfs_path_t * new_root);
-void panelize_absolutize_if_needed (WPanel * panel);
+void external_panelize_cmd (void);
+void external_panelize_load (void);
+void external_panelize_save (void);
+void external_panelize_free (void);
 
 /*** inline functions ****************************************************************************/
+
 #endif /* MC__PANELIZE_H */

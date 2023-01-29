@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-01-14 20:00+0100\n"
+"POT-Creation-Date: 2023-01-29 11:16+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
 "Language-Team: Spanish (http://www.transifex.com/mc/mc/language/es/)\n"
@@ -832,7 +832,8 @@ msgstr "¡Error al analizar los argumentos!"
 msgid "No arguments given to the viewer."
 msgstr "No se han pasado argumentos al visor."
 
-msgid "Two files are required to envoke the diffviewer."
+#, fuzzy
+msgid "Two files are required to invoke the diffviewer."
 msgstr "Se necesitan dos archivos para comparar."
 
 msgid "Background protocol error"
@@ -1635,7 +1636,8 @@ msgstr ""
 "Un editor de texto amigable\n"
 "para Midnight Commander."
 
-msgid "Copyright (C) 1996-2022 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2023 the Free Software Foundation"
 msgstr "Copyright (C) 1996-2022 the Free Software Foundation"
 
 msgid "About"
@@ -2535,28 +2537,26 @@ msgstr ""
 "Midnight Commander usa ahora el archivo %s. Por favor,\n"
 "copie las modificaciones realizadas al nuevo."
 
-#, c-format
-msgid " %s%s file error"
-msgstr " error en el archivo %s%s "
-
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"The format of the %s%s file has changed with version 4.0. It seems that the "
-"installation has failed. Please fetch a fresh copy from the Midnight "
-"Commander package."
+"The format of the\n"
+"%s%s\n"
+"file has changed with version 4.0.\n"
+"It seems that the installation has failed.\n"
+"Please fetch a fresh copy from the Midnight Commander package."
 msgstr ""
 "El formato del archivo %s%s ha cambiado con la versión 4.0.\n"
 "Parece que la instalación falló. Por favor, trate de conseguir\n"
 "una copia intacta del paquete de Midnight Commander."
 
-#, c-format
-msgid "%s file error"
-msgstr "error en el archivo %s"
-
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"The format of the %s file has changed with version 4.0. You may either want "
-"to copy it from %s%s or use that file as an example of how to write it."
+"The format of the\n"
+"%s\n"
+"file has changed with version 4.0.\n"
+"You may either want to copy it from\n"
+"%s%s\n"
+"or use that file as an example of how to write it."
 msgstr ""
 "El formato del archivo %s ha cambiado con la versión 4.0. Puede hacer una "
 "copia de %s%s o bien emplearlo como modelo."
@@ -2939,8 +2939,8 @@ msgstr "&Detener"
 msgid "Con&tinue"
 msgstr "con&Tinuar"
 
-#, c-format
-msgid "%d:%02d.%02d"
+#, fuzzy, c-format
+msgid "%d:%02d:%02d"
 msgstr "%d:%02d.%02d"
 
 #, c-format
@@ -4724,3 +4724,11 @@ msgstr "¿Continuar desde el principio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Imposible obtener una copia local de /ftp://ese.equipo/edítame.txt"
+
+#, c-format
+#~ msgid " %s%s file error"
+#~ msgstr " error en el archivo %s%s "
+
+#, c-format
+#~ msgid "%s file error"
+#~ msgstr "error en el archivo %s"

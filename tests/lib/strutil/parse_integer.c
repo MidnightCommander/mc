@@ -1,7 +1,7 @@
 /*
    lib/strutil - tests for lib/strutil/parse_integer function.
 
-   Copyright (C) 2013-2022
+   Copyright (C) 2013-2023
    Free Software Foundation, Inc.
 
    Written by:
@@ -131,7 +131,7 @@ START_PARAMETRIZED_TEST (parse_integer_test, parse_integer_test_ds)
 
     /* then */
     ck_assert_msg (invalid == data->invalid && actual_result == data->expected_result,
-                   "actial ( %" PRIuMAX ") not equal to\nexpected (%" PRIuMAX ")",
+                   "actual ( %" PRIuMAX ") not equal to\nexpected (%" PRIuMAX ")",
                    actual_result, data->expected_result);
 }
 /* *INDENT-OFF* */

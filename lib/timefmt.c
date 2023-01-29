@@ -1,7 +1,7 @@
 /*
    Time formatting functions
 
-   Copyright (C) 1994-2022
+   Copyright (C) 1994-2023
    Free Software Foundation, Inc.
 
    Written by:
@@ -86,7 +86,7 @@ i18n_checktimelength (void)
 
     if (lt == NULL)
     {
-        /* huh, localtime() doesnt seem to work ... falling back to "(invalid)" */
+        /* huh, localtime() doesn't seem to work ... falling back to "(invalid)" */
         length = str_term_width1 (_(INVALID_TIME_TEXT));
     }
     else

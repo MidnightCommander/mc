@@ -2,7 +2,7 @@
    Search text engine.
    HEX-style pattern matching
 
-   Copyright (C) 2009-2022
+   Copyright (C) 2009-2023
    Free Software Foundation, Inc.
 
    Written by:

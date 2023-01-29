@@ -1,7 +1,7 @@
 
 /**
  * \file
- * \brief Header: Virtual File System: FISH implementation for transfering files over
+ * \brief Header: Virtual File System: FISH implementation for transferring files over
  * shell connections
  */
 

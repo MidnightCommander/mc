@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-01-14 20:00+0100\n"
+"POT-Creation-Date: 2023-01-29 11:16+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>, 2017-2022\n"
 "Language-Team: Czech (http://www.transifex.com/mc/mc/language/cs/)\n"
@@ -831,7 +831,8 @@ msgstr "Chyba vyhodnocování argumentů!"
 msgid "No arguments given to the viewer."
 msgstr "Prohlížeči nebyly zadány žádné parametry"
 
-msgid "Two files are required to envoke the diffviewer."
+#, fuzzy
+msgid "Two files are required to invoke the diffviewer."
 msgstr "Pro vyvolání prohlížeče rozdílů je třeba dvou souborů."
 
 msgid "Background protocol error"
@@ -1632,7 +1633,8 @@ msgstr ""
 "Uživatelsky přívětivý textový editor\n"
 "napsaný pro Midnight Commander."
 
-msgid "Copyright (C) 1996-2022 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2023 the Free Software Foundation"
 msgstr "Autorská práva © 1996-2022 nadace Free Software Foundation"
 
 msgid "About"
@@ -2535,27 +2537,25 @@ msgstr ""
 "Midnight Commander nyní používá soubor %s.\n"
 "Zkopírujte si své úpravy původního souboru do toho nového."
 
-#, c-format
-msgid " %s%s file error"
-msgstr " %s%s chyba souboru"
-
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"The format of the %s%s file has changed with version 4.0. It seems that the "
-"installation has failed. Please fetch a fresh copy from the Midnight "
-"Commander package."
+"The format of the\n"
+"%s%s\n"
+"file has changed with version 4.0.\n"
+"It seems that the installation has failed.\n"
+"Please fetch a fresh copy from the Midnight Commander package."
 msgstr ""
 "Formát souboru %s%s byl upraven verzí 4.0. Zdá se, že instalace se "
 "nezdařila. Nahrajte si novou aktuální kopii z balíčku s Midnight Commander."
 
-#, c-format
-msgid "%s file error"
-msgstr "%s chyba souboru"
-
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"The format of the %s file has changed with version 4.0. You may either want "
-"to copy it from %s%s or use that file as an example of how to write it."
+"The format of the\n"
+"%s\n"
+"file has changed with version 4.0.\n"
+"You may either want to copy it from\n"
+"%s%s\n"
+"or use that file as an example of how to write it."
 msgstr ""
 "Formát %s souboru se s verzí 4.0 změnil. Můžete ho buď zkopírovat z %s%s "
 "nebo tento soubor použít jako ukázku jak ho napsat."
@@ -2939,8 +2939,8 @@ msgstr "&Uspat"
 msgid "Con&tinue"
 msgstr "Pokračova&t"
 
-#, c-format
-msgid "%d:%02d.%02d"
+#, fuzzy, c-format
+msgid "%d:%02d:%02d"
 msgstr "%d:%02d.%02d"
 
 #, c-format
@@ -4735,3 +4735,11 @@ msgstr "Pokračovat od začátku?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nedaří získat místní kopii souboru /ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid " %s%s file error"
+#~ msgstr " %s%s chyba souboru"
+
+#, c-format
+#~ msgid "%s file error"
+#~ msgstr "%s chyba souboru"

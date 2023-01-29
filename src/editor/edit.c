@@ -1,7 +1,7 @@
 /*
    Editor low level data handling and cursor fundamentals.
 
-   Copyright (C) 1996-2022
+   Copyright (C) 1996-2023
    Free Software Foundation, Inc.
 
    Written by:
@@ -105,7 +105,7 @@ char *option_filesize_threshold = NULL;
 
 unsigned int edit_stack_iterator = 0;
 edit_stack_type edit_history_moveto[MAX_HISTORY_MOVETO];
-/* magic sequense for say than block is vertical */
+/* magic sequence for say than block is vertical */
 const char VERTICAL_MAGIC[] = { '\1', '\1', '\1', '\1', '\n' };
 
 /*** file scope macro definitions ****************************************************************/
@@ -232,21 +232,18 @@ edit_load_file_fast (edit_buffer_t * buf, const vfs_path_t * filename_vpath)
 static int
 edit_find_filter (const vfs_path_t * filename_vpath)
 {
-    size_t i, l;
-
-    if (filename_vpath == NULL)
-        return -1;
-
-    l = strlen (vfs_path_as_str (filename_vpath));
-    for (i = 0; i < G_N_ELEMENTS (all_filters); i++)
+    if (filename_vpath != NULL)
     {
-        size_t e;
+        const char *s;
+        size_t i;
 
-        e = strlen (all_filters[i].extension);
-        if (l > e)
-            if (!strcmp (all_filters[i].extension, vfs_path_as_str (filename_vpath) + l - e))
+        s = vfs_path_as_str (filename_vpath);
+
+        for (i = 0; i < G_N_ELEMENTS (all_filters); i++)
+            if (g_str_has_suffix (s, all_filters[i].extension))
                 return i;
     }
+
     return -1;
 }
 
@@ -274,13 +271,11 @@ static off_t
 edit_insert_stream (WEdit * edit, FILE * f)
 {
     int c;
-    off_t i = 0;
+    off_t i;
 
-    while ((c = fgetc (f)) >= 0)
-    {
+    for (i = 0; (c = fgetc (f)) >= 0; i++)
         edit_insert (edit, c);
-        i++;
-    }
+
     return i;
 }
 
@@ -466,7 +461,7 @@ edit_load_file (WEdit * edit)
  * Restore saved cursor position and/or bookmarks in the file
  *
  * @param edit editor object
- * @param load_position If TRUE, load bookmarks and cursor position and aply them.
+ * @param load_position If TRUE, load bookmarks and cursor position and apply them.
  *                      If FALSE, load bookmarks only.
  */
 
@@ -1510,7 +1505,7 @@ check_and_wrap_line (WEdit * edit)
 /** this find the matching bracket in either direction, and sets edit->bracket
  *
  * @param edit editor object
- * @param in_screen seach only on the current screen
+ * @param in_screen search only on the current screen
  * @param furthest_bracket_search count of the bytes for search
  *
  * @return position of the found bracket (-1 if no match)
@@ -2085,7 +2080,7 @@ edit_init (WEdit * edit, const WRect * r, const vfs_path_t * filename_vpath, lon
 {
     gboolean to_free = FALSE;
 
-    option_auto_syntax = TRUE;  /* Resetting to auto on every invokation */
+    option_auto_syntax = TRUE;  /* Resetting to auto on every invocation */
     option_line_state_width = option_line_state ? LINE_STATE_WIDTH : 0;
 
     if (edit != NULL)
@@ -2310,7 +2305,7 @@ edit_set_codeset (WEdit * edit)
  * d
  *
  * If the stack long int is 0-255 it represents a normal insert (from a backspace),
- * 256-512 is an insert ahead (from a delete), If it is betwen 600 and 700 it is one
+ * 256-512 is an insert ahead (from a delete), If it is between 600 and 700 it is one
  * of the cursor functions define'd in edit-impl.h. 1000 through 700'000'000 is to
  * set edit->mark1 position. 700'000'000 through 1400'000'000 is to set edit->mark2
  * position.

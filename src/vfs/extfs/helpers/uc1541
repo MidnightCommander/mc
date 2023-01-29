@@ -540,7 +540,7 @@ class Uc1541(object):
                 if '/' in display_name:
                     display_name = display_name.replace('/', '|')
 
-                # workaround for space and dash at the beggining of the
+                # workaround for space and dash at the beginning of the
                 # filename
                 char_map = {' ': '~',
                             '-': '_'}

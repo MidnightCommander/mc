@@ -35,7 +35,7 @@ enum
 /*** structures declarations (and typedefs of structures)*****************************************/
 
 /* Base class for status message of long-time operations.
-   Useful to show progress of long-time operaions and interrupt it. */
+   Useful to show progress of long-time operations and interrupt it. */
 
 struct status_msg_t
 {

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-01-14 20:00+0100\n"
+"POT-Creation-Date: 2023-01-29 11:16+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2022\n"
 "Language-Team: Esperanto (http://www.transifex.com/mc/mc/language/eo/)\n"
@@ -826,7 +826,8 @@ msgstr "Eraro dum analizi parametrojn!"
 msgid "No arguments given to the viewer."
 msgstr "Neniuj parametroj donitaj al la legilo."
 
-msgid "Two files are required to envoke the diffviewer."
+#, fuzzy
+msgid "Two files are required to invoke the diffviewer."
 msgstr "Du dosieroj estas postulitaj por voki la flikaĵo-legilon."
 
 msgid "Background protocol error"
@@ -1629,7 +1630,8 @@ msgstr ""
 "Afabla tekstoredaktilo\n"
 "verkita por Midnight Commander."
 
-msgid "Copyright (C) 1996-2022 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2023 the Free Software Foundation"
 msgstr "Kopirajto (C) 1996–2022 la Fondaĵo pri Libera Programaro"
 
 msgid "About"
@@ -2529,28 +2531,26 @@ msgstr ""
 "Midnight Cammander now uzas la dosieron %s.\n"
 "Bonvolu kopii viajn modifojn de la malnova dosiero al la nova."
 
-#, c-format
-msgid " %s%s file error"
-msgstr " %s%s: dosiera eraro"
-
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"The format of the %s%s file has changed with version 4.0. It seems that the "
-"installation has failed. Please fetch a fresh copy from the Midnight "
-"Commander package."
+"The format of the\n"
+"%s%s\n"
+"file has changed with version 4.0.\n"
+"It seems that the installation has failed.\n"
+"Please fetch a fresh copy from the Midnight Commander package."
 msgstr ""
 "La aranĝo de la dosiero %s%s ŝanĝiĝis en eldono 4.0. Ŝajne la instalado "
 "malsukcesis. Bonvolu havigi al vi freŝan ekzempleron de la pakaĵo Midnight "
 "Commander."
 
-#, c-format
-msgid "%s file error"
-msgstr "%s dosiera eraro"
-
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"The format of the %s file has changed with version 4.0. You may either want "
-"to copy it from %s%s or use that file as an example of how to write it."
+"The format of the\n"
+"%s\n"
+"file has changed with version 4.0.\n"
+"You may either want to copy it from\n"
+"%s%s\n"
+"or use that file as an example of how to write it."
 msgstr ""
 "La aranĝo de la dosiero %s ŝanĝiĝis en eldono 4.0. Vi eble povos aŭ kopii "
 "ĝin el %s%s aŭ uzi tiun dosieron kiel ekzemplon pri kiel skribi ĝin."
@@ -2933,8 +2933,8 @@ msgstr "P&aŭzigi"
 msgid "Con&tinue"
 msgstr "&Daŭrigi"
 
-#, c-format
-msgid "%d:%02d.%02d"
+#, fuzzy, c-format
+msgid "%d:%02d:%02d"
 msgstr "%d:%02d.%02d"
 
 #, c-format
@@ -4716,3 +4716,11 @@ msgstr "Ĉu deiri de la komenco?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Ne eblas atingi lokan kopion de /ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid " %s%s file error"
+#~ msgstr " %s%s: dosiera eraro"
+
+#, c-format
+#~ msgid "%s file error"
+#~ msgstr "%s dosiera eraro"

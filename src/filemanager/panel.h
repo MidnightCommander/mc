@@ -194,6 +194,11 @@ char **panel_get_user_possible_fields (gsize * array_size);
 void panel_set_cwd (WPanel * panel, const vfs_path_t * vpath);
 void panel_set_lwd (WPanel * panel, const vfs_path_t * vpath);
 
+void panel_panelize_cd (void);
+void panel_panelize_change_root (const vfs_path_t * new_root);
+void panel_panelize_absolutize_if_needed (WPanel * panel);
+void panel_panelize_save (WPanel * panel);
+
 void panel_init (void);
 void panel_deinit (void);
 
@@ -203,7 +208,7 @@ void panel_deinit (void);
 /**
  * Empty panel creation.
  *
- * @param panel_name name of panel for setup retieving
+ * @param panel_name name of panel for setup retrieving
  *
  * @return new instance of WPanel
  */
@@ -219,7 +224,7 @@ panel_empty_new (const char *panel_name)
 /**
  * Panel creation for specified directory.
  *
- * @param panel_name name of panel for setup retieving
+ * @param panel_name name of panel for setup retrieving
  * @param vpath working panel directory. If NULL then current directory is used
  *
  * @return new instance of WPanel
@@ -237,7 +242,7 @@ panel_with_dir_new (const char *panel_name, const vfs_path_t * vpath)
 /**
  * Panel creation.
  *
- * @param panel_name name of panel for setup retieving
+ * @param panel_name name of panel for setup retrieving
  *
  * @return new instance of WPanel
  */
@@ -252,7 +257,7 @@ panel_new (const char *panel_name)
 /**
  * Panel creation with specified size.
  *
- * @param panel_name name of panel for setup retieving
+ * @param panel_name name of panel for setup retrieving
  * @param y y coordinate of top-left corner
  * @param x x coordinate of top-left corner
  * @param lines vertical size

@@ -2,7 +2,7 @@
    Interface to the terminal controlling library.
    Ncurses wrapper.
 
-   Copyright (C) 2005-2022
+   Copyright (C) 2005-2023
    Free Software Foundation, Inc.
 
    Written by:
@@ -364,7 +364,7 @@ tty_reset_shell_mode (void)
 void
 tty_raw_mode (void)
 {
-    raw ();                     /* FIXME: uneeded? */
+    raw ();                     /* FIXME: unneeded? */
     cbreak ();
 }
 

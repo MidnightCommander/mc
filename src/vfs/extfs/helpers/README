@@ -19,14 +19,14 @@ to see what's inside it, path will be
 /anypath/my.zip/uzip://some_path/...
 
 In this example, .zip is suffix, but I call vfs 'uzip'. Why? Well,
-what this vfs essentially does is UNzip. UN is too long, so I choosed
+what this vfs essentially does is UNzip. UN is too long, so I chose
 U. Note that sometime in future filesystem like zip may exist: It will
 take whole tree and create .zip file from it. So /usr/zip:// will be
 zipfile containing whole /usr tree.
 
 If your vfs does not require file to work on, add '+' to the end of name.
 Note, that trailing '+' in file name is not a part of vfs name, it is
-just an vfs attribue. So you have not use it in vfs commands:
+just an vfs attribute. So you have not use it in vfs commands:
 
 cd rpms://
 

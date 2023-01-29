@@ -8,7 +8,7 @@
    created and destroyed.  This is required for the future vfs layer,
    it will be possible to have tree views over virtual file systems.
 
-   Copyright (C) 1999-2022
+   Copyright (C) 1999-2023
    Free Software Foundation, Inc.
 
    Written by:
@@ -570,7 +570,7 @@ should_skip_directory (const vfs_path_t * vpath)
 
         profile_name = setup_init ();
         process_special_dirs (&special_dirs, profile_name);
-        process_special_dirs (&special_dirs, global_profile_name);
+        process_special_dirs (&special_dirs, mc_global.profile_name);
 
         loaded = TRUE;
     }

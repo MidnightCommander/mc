@@ -129,7 +129,7 @@ d       Delete file if a copy exists in the other directory.
 + t t
 D       Delete tagged files if a copy exists in the other directory.
         if [ %d = %D ]; then
-            echo "The two directores must be different."
+            echo "The two directories must be different."
             exit 1
         fi
         for i in %t ; do

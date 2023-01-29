@@ -171,6 +171,8 @@ typedef struct
     /* share_data_dir: Area for default settings from developers */
     char *share_data_dir;
 
+    char *profile_name;
+
     mc_config_t *main_config;
     mc_config_t *panels_config;
 
@@ -223,7 +225,7 @@ typedef struct
     {
         /* Use the specified skin */
         char *skin;
-        /* Dialog window and frop down menu have a shadow */
+        /* Dialog window and drop down menu have a shadow */
         gboolean shadows;
 
         char *setup_color_string;

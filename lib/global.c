@@ -1,7 +1,7 @@
 /*
    Global structure for some library-related variables
 
-   Copyright (C) 2009-2022
+   Copyright (C) 2009-2023
    Free Software Foundation, Inc.
 
    Written by:
@@ -59,6 +59,8 @@ mc_global_t mc_global =
 
     .sysconfig_dir = NULL,
     .share_data_dir = NULL,
+
+    .profile_name = NULL,
 
 #ifdef HAVE_CHARSET
     .source_codepage = -1,

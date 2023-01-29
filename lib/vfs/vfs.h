@@ -27,13 +27,6 @@
 
 #define VFS_CLASS(a) ((struct vfs_class *) (a))
 
-/**
- * This is the type of callback function passed to vfs_fill_names.
- * It gets the name of the virtual file system as its first argument.
- * See also:
- *    vfs_fill_names().
- */
-
 #define VFS_ENCODING_PREFIX "#enc:"
 
 #define O_ALL (O_CREAT | O_EXCL | O_NOCTTY | O_NDELAY | O_SYNC | O_WRONLY | O_RDWR | O_RDONLY)
@@ -86,6 +79,12 @@
 #define E_PROTO EIO
 #endif
 
+/**
+ * This is the type of callback function passed to vfs_fill_names.
+ * It gets the name of the virtual file system as its first argument.
+ * See also:
+ *    vfs_fill_names().
+ */
 typedef void (*fill_names_f) (const char *);
 
 typedef void *vfsid;

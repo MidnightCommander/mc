@@ -1,7 +1,7 @@
 /*
    Panel managing.
 
-   Copyright (C) 1994-2022
+   Copyright (C) 1994-2023
    Free Software Foundation, Inc.
 
    Written by:
@@ -411,7 +411,7 @@ format_item_free (format_item_t * format)
 static int
 panel_lines (const WPanel * p)
 {
-    /* 3 lines are: top frame, column header, botton frame */
+    /* 3 lines are: top frame, column header, button frame */
     return (CONST_WIDGET (p)->rect.lines - 3 - (panels_options.show_mini_info ? 2 : 0));
 }
 
@@ -1400,16 +1400,16 @@ adjust_top_file (WPanel * panel)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** add "#enc:encodning" to end of path */
-/* if path end width a previous #enc:, only encoding is changed no additional 
+/** add "#enc:encoding" to end of path */
+/* if path ends width a previous #enc:, only encoding is changed no additional
  * #enc: is appended
- * retun new string
+ * return new string
  */
 
 static char *
 panel_save_name (WPanel * panel)
 {
-    /* If the program is shuting down */
+    /* If the program is shutting down */
     if ((mc_global.midnight_shutdown && auto_save_setup) || saving_setup)
         return g_strdup (panel->name);
 
@@ -1512,7 +1512,6 @@ panel_destroy (WPanel * p)
     for (i = 0; i < LIST_FORMATS; i++)
         g_free (p->user_status_format[i]);
 
-    g_free (p->dir.list);
     g_free (p->name);
 
     g_string_free (p->quick_search.buffer, TRUE);
@@ -1710,7 +1709,7 @@ parse_display_format (WPanel * panel, const char *format, char **error, gboolean
 
     if (i18n_timelength == 0)
     {
-        i18n_timelength = i18n_checktimelength ();      /* Musn't be 0 */
+        i18n_timelength = i18n_checktimelength ();      /* Mustn't be 0 */
 
         for (i = 0; panel_fields[i].id != NULL; i++)
             if (strcmp ("time", panel_fields[i].id + 1) == 0)
@@ -3457,7 +3456,7 @@ directory_history_list (WPanel * panel)
     if (!ok)
     {
         /* Since history is fully modified in history_show(), panel->dir_history actually
-         * points to the invalid place. Try restore current postition here. */
+         * points to the invalid place. Try restore current position here. */
 
         size_t i;
 
@@ -4395,7 +4394,7 @@ panel_set_lwd (WPanel * panel, const vfs_path_t * vpath)
 /**
  * Creatie an empty panel with specified size.
  *
- * @param panel_name name of panel for setup retieving
+ * @param panel_name name of panel for setup receiving
  *
  * @return new instance of WPanel
  */
@@ -4483,7 +4482,7 @@ panel_sized_empty_new (const char *panel_name, int y, int x, int lines, int cols
 /**
  * Panel creation for specified size and directory.
  *
- * @param panel_name name of panel for setup retieving
+ * @param panel_name name of panel for setup retrieving
  * @param y y coordinate of top-left corner
  * @param x x coordinate of top-left corner
  * @param lines vertical size
@@ -4596,7 +4595,7 @@ panel_reload (WPanel * panel)
 
 /* --------------------------------------------------------------------------------------------- */
 /* Switches the panel to the mode specified in the format           */
-/* Seting up both format and status string. Return: 0 - on success; */
+/* Setting up both format and status string. Return: 0 - on success; */
 /* 1 - format error; 2 - status error; 3 - errors in both formats.  */
 
 int
@@ -5123,6 +5122,147 @@ panel_get_user_possible_fields (gsize * array_size)
             ret[lc_index++] = g_strdup (_(panel_fields[i].title_hotkey));
 
     return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+panel_panelize_cd (void)
+{
+    WPanel *panel;
+    int i;
+    dir_list *list;
+    gboolean panelized_same;
+
+    if (!SELECTED_IS_PANEL)
+        create_panel (MENU_PANEL_IDX, view_listing);
+
+    panel = PANEL (get_panel_widget (MENU_PANEL_IDX));
+
+    dir_list_clean (&panel->dir);
+    if (panelized_panel.root_vpath == NULL)
+        panel_panelize_change_root (current_panel->cwd_vpath);
+
+    if (panelized_panel.list.len < 1)
+        dir_list_init (&panelized_panel.list);
+    else if (panelized_panel.list.len > panel->dir.size)
+        dir_list_grow (&panel->dir, panelized_panel.list.len - panel->dir.size);
+
+    list = &panel->dir;
+    list->len = panelized_panel.list.len;
+
+    panelized_same = vfs_path_equal (panelized_panel.root_vpath, panel->cwd_vpath);
+
+    for (i = 0; i < panelized_panel.list.len; i++)
+    {
+        if (panelized_same || DIR_IS_DOTDOT (panelized_panel.list.list[i].fname->str))
+            list->list[i].fname = mc_g_string_dup (panelized_panel.list.list[i].fname);
+        else
+        {
+            vfs_path_t *tmp_vpath;
+
+            tmp_vpath =
+                vfs_path_append_new (panelized_panel.root_vpath,
+                                     panelized_panel.list.list[i].fname->str, (char *) NULL);
+            list->list[i].fname = g_string_new (vfs_path_as_str (tmp_vpath));
+            vfs_path_free (tmp_vpath, TRUE);
+        }
+        list->list[i].f.link_to_dir = panelized_panel.list.list[i].f.link_to_dir;
+        list->list[i].f.stale_link = panelized_panel.list.list[i].f.stale_link;
+        list->list[i].f.dir_size_computed = panelized_panel.list.list[i].f.dir_size_computed;
+        list->list[i].f.marked = panelized_panel.list.list[i].f.marked;
+        list->list[i].st = panelized_panel.list.list[i].st;
+        list->list[i].sort_key = panelized_panel.list.list[i].sort_key;
+        list->list[i].second_sort_key = panelized_panel.list.list[i].second_sort_key;
+    }
+
+    panel->is_panelized = TRUE;
+    panel_panelize_absolutize_if_needed (panel);
+
+    try_to_select (panel, NULL);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Change root directory of panelized content.
+ * @param new_root - object with new path.
+ */
+void
+panel_panelize_change_root (const vfs_path_t * new_root)
+{
+    vfs_path_free (panelized_panel.root_vpath, TRUE);
+    panelized_panel.root_vpath = vfs_path_clone (new_root);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Conditionally switches a panel's directory to "/" (root).
+ *
+ * If a panelized panel's listing contain absolute paths, this function
+ * sets the panel's directory to "/". Otherwise it does nothing.
+ *
+ * Rationale:
+ *
+ * This makes tokenized strings like "%d/%p" work. This also makes other
+ * places work where such naive concatenation is done in code (e.g., when
+ * pressing ctrl+shift+enter, for CK_PutCurrentFullSelected).
+ *
+ * When to call:
+ *
+ * You should always call this function after you populate the listing
+ * of a panelized panel.
+ */
+void
+panel_panelize_absolutize_if_needed (WPanel * panel)
+{
+    const dir_list *const list = &panel->dir;
+
+    /* Note: We don't support mixing of absolute and relative paths, which is
+     * why it's ok for us to check only the 1st entry. */
+    if (list->len > 1 && g_path_is_absolute (list->list[1].fname->str))
+    {
+        vfs_path_t *root;
+
+        root = vfs_path_from_str (PATH_SEP_STR);
+        panel_set_cwd (panel, root);
+        if (panel == current_panel)
+            mc_chdir (root);
+        vfs_path_free (root, TRUE);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+panel_panelize_save (WPanel * panel)
+{
+    int i;
+    dir_list *list = &panel->dir;
+
+    panel_panelize_change_root (current_panel->cwd_vpath);
+
+    if (panelized_panel.list.len > 0)
+        dir_list_clean (&panelized_panel.list);
+    if (panel->dir.len == 0)
+        return;
+
+    if (panel->dir.len > panelized_panel.list.size)
+        dir_list_grow (&panelized_panel.list, panel->dir.len - panelized_panel.list.size);
+    panelized_panel.list.len = panel->dir.len;
+
+    for (i = 0; i < panel->dir.len; i++)
+    {
+        panelized_panel.list.list[i].fname = mc_g_string_dup (list->list[i].fname);
+        panelized_panel.list.list[i].f.link_to_dir = list->list[i].f.link_to_dir;
+        panelized_panel.list.list[i].f.stale_link = list->list[i].f.stale_link;
+        panelized_panel.list.list[i].f.dir_size_computed = list->list[i].f.dir_size_computed;
+        panelized_panel.list.list[i].f.marked = list->list[i].f.marked;
+        panelized_panel.list.list[i].st = list->list[i].st;
+        panelized_panel.list.list[i].sort_key = list->list[i].sort_key;
+        panelized_panel.list.list[i].second_sort_key = list->list[i].second_sort_key;
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */

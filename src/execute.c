@@ -1,7 +1,7 @@
 /*
    Execution routines for GNU Midnight Commander
 
-   Copyright (C) 2003-2022
+   Copyright (C) 2003-2023
    Free Software Foundation, Inc.
 
    Written by:
@@ -240,7 +240,7 @@ execute_get_opts_from_cfg (const char *command, const char *default_str)
     {
         mc_config_t *cfg;
 
-        cfg = mc_config_init (global_profile_name, TRUE);
+        cfg = mc_config_init (mc_global.profile_name, TRUE);
         if (cfg == NULL)
             return g_strdup (default_str);
 

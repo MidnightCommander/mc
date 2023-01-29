@@ -1,7 +1,7 @@
 /*
    Dialog box features module for the Midnight Commander
 
-   Copyright (C) 1994-2022
+   Copyright (C) 1994-2023
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
@@ -538,8 +538,7 @@ dlg_init (WDialog * h)
         group_set_current_widget_next (g);
 
     widget_set_state (wh, WST_ACTIVE, TRUE);
-    /* draw dialog and focus found widget */
-    widget_set_state (wh, WST_FOCUSED, TRUE);
+    widget_draw (wh);
 
     h->ret_value = 0;
 }

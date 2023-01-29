@@ -1,7 +1,7 @@
 /*
    Virtual File System: local file system.
 
-   Copyright (C) 1995-2022
+   Copyright (C) 1995-2023
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
@@ -92,7 +92,7 @@ local_opendir (const vfs_path_t * vpath)
 
     path_element = vfs_path_get_by_index (vpath, -1);
 
-    /* On Linux >= 5.1, MC sometimes shows empty directpries on mounted CIFS shares.
+    /* On Linux >= 5.1, MC sometimes shows empty directories on mounted CIFS shares.
      * Rereading directory restores the directory content.
      *
      * Reopen directory, if first readdir() returns NULL and errno == EINTR.

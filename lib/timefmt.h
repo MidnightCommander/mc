@@ -1,6 +1,6 @@
 
 /** \file timefmt.h
- *  \brief Header: time formating functions
+ *  \brief Header: time formatting functions
  */
 
 #ifndef MC__UTIL_TIMEFMT_H

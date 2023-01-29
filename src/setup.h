@@ -50,8 +50,8 @@ typedef struct
                                    the end or the beginning of the panel */
     gboolean scroll_center;     /* If TRUE, scroll when the cursor hits the middle of the panel */
     gboolean mouse_move_pages;  /* Scroll page/item using mouse wheel */
-    gboolean filetype_mode;     /* If TRUE then add per file type hilighting */
-    gboolean permission_mode;   /* If TRUE, we use permission hilighting */
+    gboolean filetype_mode;     /* If TRUE then add per file type highlighting */
+    gboolean permission_mode;   /* If TRUE, we use permission highlighting */
     qsearch_mode_t qsearch_mode;        /* Quick search mode */
     gboolean torben_fj_mode;    /* If TRUE, use some usability hacks by Torben */
     select_flags_t select_flags;        /* Select/unselect file flags */
@@ -74,7 +74,6 @@ struct mc_fhl_struct;
 /*** global variables defined in .c file *********************************************************/
 
 /* global parameters */
-extern char *global_profile_name;
 extern gboolean confirm_delete;
 extern gboolean confirm_directory_hotlist_delete;
 extern gboolean confirm_execute;

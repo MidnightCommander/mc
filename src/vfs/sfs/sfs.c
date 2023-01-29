@@ -1,7 +1,7 @@
 /*
    Single File fileSystem
 
-   Copyright (C) 1998-2022
+   Copyright (C) 1998-2023
    Free Software Foundation, Inc.
 
    Written by:

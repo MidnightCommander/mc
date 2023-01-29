@@ -1,6 +1,6 @@
 /* A more useful interface to strtol.
 
-   Copyright (C) 1995-2022
+   Copyright (C) 1995-2023
    Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
@@ -147,6 +147,8 @@ xstrtoumax (const char *s, char **ptr, int base, uintmax_t * val, const char *va
         case 'M':
         case 'm':
         case 'P':
+        case 'Q':
+        case 'R':
         case 'T':
         case 't':
         case 'Y':
@@ -219,6 +221,14 @@ xstrtoumax (const char *s, char **ptr, int base, uintmax_t * val, const char *va
 
         case 'P':              /* peta or pebi */
             overflow = bkm_scale_by_power (&tmp, base, 5);
+            break;
+
+        case 'Q':              /* quetta or 2**100 */
+            overflow = bkm_scale_by_power (&tmp, base, 10);
+            break;
+
+        case 'R':              /* ronna or 2**90 */
+            overflow = bkm_scale_by_power (&tmp, base, 9);
             break;
 
         case 'T':              /* tera or tebi */

@@ -11,7 +11,7 @@
 
    Partly rewritten by Jakub Jelinek <jakub@redhat.com>.
 
-   Copyright (C) 1994-2022
+   Copyright (C) 1994-2023
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
@@ -31,7 +31,7 @@
  */
 
 /* This code does _not_ need to be setuid root. However, it needs
-   read/write access to /dev/vcsa* (which is priviledged
+   read/write access to /dev/vcsa* (which is privileged
    operation). You should create user vcsa, make cons.saver setuid
    user vcsa, and make all vcsa's owned by user vcsa.
 
@@ -42,7 +42,7 @@
  *  \brief Source: general purpose Linux console screen save/restore server
  *
  *  This code does _not_ need to be setuid root. However, it needs
- *  read/write access to /dev/vcsa* (which is priviledged
+ *  read/write access to /dev/vcsa* (which is privileged
  *  operation). You should create user vcsa, make cons.saver setuid
  *  user vcsa, and make all vcsa's owned by user vcsa.
  *  Seeing other peoples consoles is bad thing, but believe me, full

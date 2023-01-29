@@ -1,7 +1,7 @@
 /*
    Utilities for VFS modules.
 
-   Copyright (C) 1988-2022
+   Copyright (C) 1988-2023
    Free Software Foundation, Inc.
 
    Copyright (C) 1995, 1996 Miguel de Icaza
@@ -177,7 +177,7 @@ vfs_findgid (const char *gname)
  * Create a temporary file with a name resembling the original.
  * This is needed e.g. for local copies requested by extfs.
  * Some extfs scripts may look at the extension.
- * We also protect stupid scripts agains dangerous names.
+ * We also protect stupid scripts against dangerous names.
  */
 
 int

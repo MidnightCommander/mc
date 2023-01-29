@@ -6,7 +6,7 @@
  *  node ends with a ^D character and starts with a bracket, then the
  *  name of the node and then a closing bracket. Right after the closing
  *  bracket a newline is placed. This newline is not to be displayed by
- *  the help viewer and must be skipped - its sole purpose is to faciliate
+ *  the help viewer and must be skipped - its sole purpose is to facilitate
  *  the work of the people managing the help file template (xnc.hlp) .
  *
  *  Links in the hypertext file are specified like this: the text that
@@ -17,7 +17,7 @@
  *  The file must contain a ^D at the beginning and at the end of the
  *  file or the program will not be able to detect the end of file.
  *
- *  Lazyness/widgeting attack: This file does use the dialog manager
+ *  Laziness/widgeting attack: This file does use the dialog manager
  *  and uses mainly the dialog to achieve the help work.  there is only
  *  one specialized widget and it's only used to forward the mouse messages
  *  to the appropriate routine.

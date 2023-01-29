@@ -1,7 +1,7 @@
 /*
    Provides a serialize/unserialize functionality for INI-like formats.
 
-   Copyright (C) 2011-2022
+   Copyright (C) 2011-2023
    Free Software Foundation, Inc.
 
    Written by:
@@ -98,7 +98,7 @@ go_to_end_of_serialized_string (const char *non_serialized_data,
 /**
  * Serialize some string object to string
  *
- * @param prefix prefix for serailization
+ * @param prefix prefix for serialization
  * @param data data for serialization
  * @param error contain pointer to object for handle error code and message
  *

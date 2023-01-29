@@ -1,7 +1,7 @@
 /*
    Setup loading/saving.
 
-   Copyright (C) 1994-2022
+   Copyright (C) 1994-2023
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
@@ -77,8 +77,6 @@
 #include "setup.h"
 
 /*** global variables ****************************************************************************/
-
-char *global_profile_name;      /* mc.lib */
 
 /* Only used at program boot */
 gboolean boot_current_is_left = TRUE;
@@ -872,12 +870,12 @@ load_setup (void)
 
     /* mc.lib is common for all users, but has priority lower than
        ${XDG_CONFIG_HOME}/mc/ini.  FIXME: it's only used for keys and treestore now */
-    global_profile_name =
+    mc_global.profile_name =
         g_build_filename (mc_global.sysconfig_dir, MC_GLOBAL_CONFIG_FILE, (char *) NULL);
-    if (!exist_file (global_profile_name))
+    if (!exist_file (mc_global.profile_name))
     {
-        g_free (global_profile_name);
-        global_profile_name =
+        g_free (mc_global.profile_name);
+        mc_global.profile_name =
             g_build_filename (mc_global.share_data_dir, MC_GLOBAL_CONFIG_FILE, (char *) NULL);
     }
 
@@ -893,7 +891,7 @@ load_setup (void)
     load_config ();
     load_layout ();
     panels_load_options ();
-    load_panelize ();
+    external_panelize_load ();
 
     /* Load time formats */
     user_recent_timeformat =
@@ -990,7 +988,7 @@ save_setup (gboolean save_options, gboolean save_panel_options)
         save_config ();
         save_layout ();
         panels_save_options ();
-        save_panelize ();
+        external_panelize_save ();
         /* directory_history_save (); */
 
 #ifdef ENABLE_VFS_FTP
@@ -1039,7 +1037,7 @@ done_setup (void)
 
     g_free (clipboard_store_path);
     g_free (clipboard_paste_path);
-    g_free (global_profile_name);
+    g_free (mc_global.profile_name);
     g_free (mc_global.tty.color_terminal_string);
     g_free (mc_global.tty.term_color_string);
     g_free (mc_global.tty.setup_color_string);
@@ -1055,7 +1053,7 @@ done_setup (void)
         g_free (*str_options[i].opt_addr);
 
     done_hotlist ();
-    done_panelize ();
+    external_panelize_free ();
     /*    directory_history_free (); */
 
 #ifdef HAVE_CHARSET
@@ -1093,7 +1091,7 @@ load_key_defs (void)
      */
     mc_config_t *mc_global_config;
 
-    mc_global_config = mc_config_init (global_profile_name, FALSE);
+    mc_global_config = mc_config_init (mc_global.profile_name, FALSE);
     if (mc_global_config != NULL)
     {
         load_keys_from_section ("general", mc_global_config);

@@ -1,7 +1,7 @@
 /* Virtual File System: SFTP file system.
    The interface function
 
-   Copyright (C) 2011-2022
+   Copyright (C) 2011-2023
    Free Software Foundation, Inc.
 
    Written by:
@@ -127,24 +127,21 @@ sftpfs_cb_open (const vfs_path_t * vpath, int flags, mode_t mode)
 
     if (path_inode == NULL)
     {
-        char *dirname, *name;
+        char *name;
         struct vfs_s_entry *ent;
         struct vfs_s_inode *dir;
 
-        dirname = g_path_get_dirname (path_super);
-        name = g_path_get_basename (path_super);
-        dir = vfs_s_find_inode (path_element->class, super, dirname, LINK_FOLLOW, FL_DIR);
+        name = g_path_get_dirname (path_super);
+        dir = vfs_s_find_inode (path_element->class, super, name, LINK_FOLLOW, FL_DIR);
+        g_free (name);
         if (dir == NULL)
-        {
-            g_free (dirname);
-            g_free (name);
             return NULL;
-        }
+
+        name = g_path_get_basename (path_super);
         ent = vfs_s_generate_entry (path_element->class, name, dir, 0755);
+        g_free (name);
         path_inode = ent->ino;
         vfs_s_insert_entry (path_element->class, dir, ent);
-        g_free (dirname);
-        g_free (name);
         is_changed = TRUE;
     }
 
@@ -665,12 +662,12 @@ sftpfs_cb_fill_names (struct vfs_class *me, fill_names_f func)
     for (iter = sftpfs_subclass.supers; iter != NULL; iter = g_list_next (iter))
     {
         const struct vfs_s_super *super = (const struct vfs_s_super *) iter->data;
-        char *name;
+        GString *name;
 
         name = vfs_path_element_build_pretty_path_str (super->path_element);
 
-        func (name);
-        g_free (name);
+        func (name->str);
+        g_string_free (name, TRUE);
     }
 }
 
@@ -678,7 +675,7 @@ sftpfs_cb_fill_names (struct vfs_class *me, fill_names_f func)
 /**
  * Callback for checking if connection is equal to existing connection.
  *
- * @param vpath_element path element with connetion data
+ * @param vpath_element path element with connection data
  * @param super         data with exists connection
  * @param vpath         unused
  * @param cookie        unused
@@ -727,7 +724,7 @@ sftpfs_new_archive (struct vfs_class *me)
  *
  * @param super         connection data
  * @param vpath         unused
- * @param vpath_element path element with connetion data
+ * @param vpath_element path element with connection data
  * @return 0 if success, -1 otherwise
  */
 

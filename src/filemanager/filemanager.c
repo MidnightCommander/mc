@@ -1,7 +1,7 @@
 /*
    Main dialog (file panels) of the Midnight Commander
 
-   Copyright (C) 1994-2022
+   Copyright (C) 1994-2023
    Free Software Foundation, Inc.
 
    Written by:
@@ -936,7 +936,7 @@ create_file_manager (void)
     midnight_set_buttonbar (the_bar);
 
 #ifdef ENABLE_SUBSHELL
-    /* Must be done after creation of cmdline and promt widgets to avoid potential
+    /* Must be done after creation of cmdline and prompt widgets to avoid potential
        NULL dereference in load_prompt() -> ... -> setup_cmdline() -> label_set_text(). */
     if (mc_global.tty.use_subshell)
         add_select_channel (mc_global.tty.subshell_pty, load_prompt, NULL);
@@ -1238,7 +1238,7 @@ midnight_execute_cmd (Widget * sender, long command)
         edit_symlink_cmd ();
         break;
     case CK_ExternalPanelize:
-        external_panelize ();
+        external_panelize_cmd ();
         break;
     case CK_ViewFiltered:
         view_filtered_cmd (current_panel);
@@ -1262,7 +1262,7 @@ midnight_execute_cmd (Widget * sender, long command)
         break;
 #endif
     case CK_Panelize:
-        cd_panelize_cmd ();
+        panel_panelize_cd ();
         break;
     case CK_Help:
         help_cmd ();
@@ -1444,7 +1444,7 @@ is_cmdline_mute (void)
     /* When one of panels is other than view_listing,
        current_panel points to view_listing panel all time independently of
        it's activity. Thus, we can't use get_current_type() here.
-       current_panel should point to actualy current active panel
+       current_panel should point to actually current active panel
        independently of it's type. */
     return (!current_panel->active
             && (get_other_type () == view_quick || get_other_type () == view_tree));
@@ -1548,7 +1548,7 @@ midnight_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
         {
             if (!only_leading_plus_minus)
             {
-                /* Special treatement, since the input line will eat them */
+                /* Special treatment, since the input line will eat them */
                 if (parm == '+')
                     return send_message (current_panel, filemanager, MSG_ACTION, CK_Select, NULL);
 
@@ -1561,7 +1561,7 @@ midnight_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
             }
             else if (!command_prompt || input_is_empty (cmdline))
             {
-                /* Special treatement '+', '-', '\', '*' only when this is
+                /* Special treatment '+', '-', '\', '*' only when this is
                  * first char on input line
                  */
                 if (parm == '+')

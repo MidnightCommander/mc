@@ -2,7 +2,7 @@
    Input line filename/username/hostname/variable/command completion.
    (Let mc type for you...)
 
-   Copyright (C) 1995-2022
+   Copyright (C) 1995-2023
    Free Software Foundation, Inc.
 
    Written by:
@@ -665,7 +665,6 @@ command_completion_function (const char *text, int state, input_complete_t flags
                 expanded = tilde_expand (*cur_path != '\0' ? cur_path : ".");
                 cur_word = mc_build_filename (expanded, u_text, (char *) NULL);
                 g_free (expanded);
-                canonicalize_pathname (cur_word);
                 cur_path = strchr (cur_path, '\0') + 1;
                 init_state = state;
             }

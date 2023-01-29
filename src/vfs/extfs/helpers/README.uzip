@@ -53,7 +53,7 @@ History
 	* Release 1.2.0.
 	* The 'rmdir' extfs command of uzip was modified not to fail
 	when deleting directories that doesn't exist. (A different/
-	better solution would be to recreate the automaticly deleted
+	better solution would be to recreate the automatically deleted
 	directories, but that's slower and harder to implement.)
 	Strangely, the zip man page does not mention this delete-
 	empty-directories behavior.
@@ -76,7 +76,7 @@ History
 
 	* Release 1.0.0: First version.
 
-Differencies between new (Perl) and old (sh/AWK) uzip
+Differences between new (Perl) and old (sh/AWK) uzip
 =====================================================
 
 The script is written purely in Perl, which (hopefully) means

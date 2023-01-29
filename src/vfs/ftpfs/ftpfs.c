@@ -1,7 +1,7 @@
 /*
    Virtual File System: FTP file system.
 
-   Copyright (C) 1995-2022
+   Copyright (C) 1995-2023
    Free Software Foundation, Inc.
 
    Written by:
@@ -258,7 +258,7 @@ static const char *netrcp;
    Currently only Amiga ftp servers are handled in a special manner.
 
    When the remote server is an amiga:
-   a) strip leading slash if necesarry
+   a) strip leading slash if necessary
    b) replace first occurrence of ":/" with ":"
    c) strip trailing "/."
  */
@@ -1156,13 +1156,10 @@ ftpfs_setup_passive_epsv (struct vfs_class *me, struct vfs_s_super *super,
 
     /* (|||<port>|) */
     c = strchr (reply_str, '|');
-    if (c == NULL)
-        return FALSE;
-    if (strlen (c) > 3)
-        c += 3;
-    else
+    if (c == NULL || strlen (c) <= 3)
         return FALSE;
 
+    c += 3;
     port = atoi (c);
     if (port < 0 || port > 65535)
         return FALSE;
@@ -1411,7 +1408,7 @@ ftpfs_initconn (struct vfs_class *me, struct vfs_s_super *super)
         close (data_sock);
     }
 
-    /* If passive setup is diabled or failed, fallback to active connections */
+    /* If passive setup is disabled or failed, fallback to active connections */
     if (!ftp_super->use_passive_connection)
     {
         int data_sock;
@@ -1597,7 +1594,7 @@ resolve_symlink_without_ls_options (struct vfs_class *me, struct vfs_s_super *su
     dir->symlink_status = FTPFS_RESOLVING_SYMLINKS;
     for (flist = dir->file_list->next; flist != dir->file_list; flist = flist->next)
     {
-        /* flist->data->l_stat is alread initialized with 0 */
+        /* flist->data->l_stat is already initialized with 0 */
         fel = flist->data;
         if (S_ISLNK (fel->s.st_mode) && fel->linkname != NULL)
         {
@@ -1890,13 +1887,13 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, const char *remot
     {
         /* The LIST command may produce an empty output. In such scenario
            it is not clear whether this is caused by  'remote_path' being
-           a non-existent path or for some other reason (listing emtpy
+           a non-existent path or for some other reason (listing empty
            directory without the -a option, non-readable directory, etc.).
 
            Since 'dir_load' is a crucial method, when it comes to determine
            whether a given path is a _directory_, the code must try its best
            to determine the type of 'remote_path'. The only reliable way to
-           achieve this is trough issuing a CWD command. */
+           achieve this is through issuing a CWD command. */
 
         cd_first = TRUE;
         goto again;
@@ -2431,12 +2428,12 @@ ftpfs_fill_names (struct vfs_class *me, fill_names_f func)
     for (iter = VFS_SUBCLASS (me)->supers; iter != NULL; iter = g_list_next (iter))
     {
         const struct vfs_s_super *super = (const struct vfs_s_super *) iter->data;
-        char *name;
+        GString *name;
 
         name = vfs_path_element_build_pretty_path_str (super->path_element);
 
-        func (name);
-        g_free (name);
+        func (name->str);
+        g_string_free (name, TRUE);
     }
 }
 

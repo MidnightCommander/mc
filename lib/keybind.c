@@ -1,7 +1,7 @@
 /*
    Definitions of key bindings.
 
-   Copyright (C) 2005-2022
+   Copyright (C) 2005-2023
    Free Software Foundation, Inc.
 
    Written by:

@@ -1,6 +1,6 @@
 /* Rectangular class for Midnight Commander widgets
 
-   Copyright (C) 2020-2022
+   Copyright (C) 2020-2023
    The Free Software Foundation, Inc.
 
    Written by:
@@ -52,7 +52,7 @@
   *
   * @param y y-coordinate of left-up corner
   * @param x x-coordinate of left-up corner
-  * @param lines heigth
+  * @param lines height
   * @param cols width
   *
   * @return newly allocated WRect object.
@@ -78,7 +78,7 @@ rect_new (int y, int x, int lines, int cols)
   * @param r WRect object
   * @param y y-coordinate of left-up corner
   * @param x x-coordinate of left-up corner
-  * @param lines heigth
+  * @param lines height
   * @param cols width
   */
 
@@ -112,7 +112,7 @@ rect_move (WRect * r, int dy, int dx)
   * Change size of rectangle area keeping it's position.
   *
   * @param r WRect object
-  * @param dl change size value of heigth
+  * @param dl change size value of height
   * @param dc change size value of width
   */
 
@@ -128,9 +128,9 @@ rect_resize (WRect * r, int dl, int dc)
   * Change size of rectangle area keeping it's center.
   *
   * @param r WRect object
-  * @param dl change size value of y-coordinate and heigth
-  *           Positive value means move up and increase heigth.
-  *           Negative value means move down and decrease heigth.
+  * @param dl change size value of y-coordinate and height
+  *           Positive value means move up and increase height.
+  *           Negative value means move down and decrease height.
   * @param dc change size value of x-coordinate and width
   *           Positive value means move left and increase width.
   *           Negative value means move right and decrease width.

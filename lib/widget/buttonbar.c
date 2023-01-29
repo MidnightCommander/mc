@@ -1,7 +1,7 @@
 /*
    Widgets for the Midnight Commander
 
-   Copyright (C) 1994-2022
+   Copyright (C) 1994-2023
    Free Software Foundation, Inc.
 
    Authors:
@@ -249,7 +249,7 @@ buttonbar_new (void)
     widget_init (w, &r, buttonbar_callback, buttonbar_mouse_callback);
 
     w->pos_flags = WPOS_KEEP_HORZ | WPOS_KEEP_BOTTOM;
-    widget_want_hotkey (w, TRUE);
+    w->options |= WOP_WANT_HOTKEY;
 
     return bb;
 }

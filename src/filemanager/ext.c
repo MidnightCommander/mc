@@ -1,7 +1,7 @@
 /*
    Extension dependent execution.
 
-   Copyright (C) 1994-2022
+   Copyright (C) 1994-2023
    Free Software Foundation, Inc.
 
    Written by:
@@ -821,15 +821,11 @@ load_extension_file (void)
 
         if (!mc_user_ext)
         {
-            char *title;
-
-            title = g_strdup_printf (_(" %s%s file error"), mc_global.sysconfig_dir, MC_EXT_FILE);
-            message (D_ERROR, title,
-                     _("The format of the %s%s file has changed with version 4.0. "
-                       "It seems that the installation has failed. Please fetch a fresh copy "
+            message (D_ERROR, MSG_ERROR,
+                     _("The format of the\n%s%s\nfile has changed with version 4.0.\n"
+                       "It seems that the installation has failed.\nPlease fetch a fresh copy "
                        "from the Midnight Commander package."),
                      mc_global.sysconfig_dir, MC_EXT_FILE);
-            g_free (title);
             return FALSE;
         }
 
@@ -839,16 +835,12 @@ load_extension_file (void)
 
     if (home_error)
     {
-        char *title;
-
         extension_file = mc_config_get_full_path (MC_EXT_FILE);
-        title = g_strdup_printf (_("%s file error"), extension_file);
-        message (D_ERROR, title,
-                 _("The format of the %s file has changed with version 4.0. You may either want "
-                   "to copy it from %s%s or use that file as an example of how to write it."),
+        message (D_ERROR, MSG_ERROR,
+                 _("The format of the\n%s\nfile has changed with version 4.0.\nYou may either want "
+                   "to copy it from\n%s%s\nor use that file as an example of how to write it."),
                  extension_file, mc_global.sysconfig_dir, MC_EXT_FILE);
         g_free (extension_file);
-        g_free (title);
     }
 
     return TRUE;

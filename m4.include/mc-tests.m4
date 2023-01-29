@@ -43,7 +43,7 @@ AC_DEFUN([mc_UNIT_TESTS],[
     AM_CONDITIONAL(HAVE_TESTS, test x"$have_check" = "xyes")
 
     dnl sighandler_t is GNU extension
-    dnl AC_USE_SYSTEM_EXTENSIONS is reguired
+    dnl AC_USE_SYSTEM_EXTENSIONS is required
     AC_CHECK_TYPES([sighandler_t], [], [], [
         #include <signal.h>
     ])

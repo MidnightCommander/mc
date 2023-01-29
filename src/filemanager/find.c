@@ -1,7 +1,7 @@
 /*
    Find file command for the Midnight Commander
 
-   Copyright (C) 1995-2022
+   Copyright (C) 1995-2023
    Free Software Foundation, Inc.
 
    Written  by:
@@ -217,7 +217,7 @@ static mc_search_t *search_content_handle = NULL;
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-/* don't use max macro to avoid double str_term_width1() call in widget length caclulation */
+/* don't use max macro to avoid double str_term_width1() call in widget length calculation */
 #undef max
 
 static int
@@ -556,7 +556,7 @@ find_parm_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
  * If the return value is TRUE, then the following holds:
  *
  * start_dir, ignore_dirs, pattern and content contain the information provided by the user.
- * They are newly allocated strings and must be freed when uneeded.
+ * They are newly allocated strings and must be freed when unneeded.
  *
  * start_dir_len is -1 when user entered an absolute path, otherwise it is a length
  * of start_dir (which is absolute). It is used to get a relative pats of find results.
@@ -638,7 +638,7 @@ find_parameters (WPanel * panel, char **start_dir, ssize_t * start_dir_len,
     }
 #endif /* ENABLE_NLS */
 
-    /* caclulate dialog width */
+    /* calculate dialog width */
 
     /* widget widths */
     cw = str_term_width1 (file_name_label);
@@ -857,7 +857,7 @@ find_parameters (WPanel * panel, char **start_dir, ssize_t * start_dir_len,
                 /* relative paths will be used in panelization */
                 *start_dir =
                     mc_build_filename (vfs_path_as_str (panel->cwd_vpath), s, (char *) NULL);
-                *start_dir_len = (ssize_t) strlen (vfs_path_as_str (panel->cwd_vpath));
+                *start_dir_len = (ssize_t) vfs_path_len (panel->cwd_vpath);
                 g_free (s);
             }
 
@@ -1029,7 +1029,7 @@ search_content (WDialog * h, const char *directory, const char *filename)
         return FALSE;
 
     /* get time elapsed from last refresh */
-    tv = g_get_real_time ();
+    tv = g_get_monotonic_time ();
 
     if (s.st_size >= MIN_REFRESH_FILE_SIZE || (tv - last_refresh) > MAX_REFRESH_INTERVAL)
     {
@@ -1212,7 +1212,7 @@ find_ignore_dir_search (const char *dir)
             switch (iabs | dabs)
             {
             case 0:            /* both paths are relative */
-            case 3:            /* both paths are abolute */
+            case 3:            /* both paths are absolute */
                 /* if ignore dir is not a path  of dir -- skip it */
                 if (strncmp (dir, *ignore_dir, ilen) == 0)
                 {
@@ -1804,17 +1804,17 @@ do_find (WPanel * panel, const char *start_dir, ssize_t start_dir_len, const cha
 
     if (return_value == B_PANELIZE && *filename)
     {
-        int i;
         struct stat st;
         GList *entry;
         dir_list *list = &panel->dir;
         char *name = NULL;
+        gboolean ok = TRUE;
 
         panel_clean_dir (panel);
         dir_list_init (list);
 
-        for (i = 0, entry = listbox_get_first_link (find_list); entry != NULL;
-             i++, entry = g_list_next (entry))
+        for (entry = listbox_get_first_link (find_list); entry != NULL && ok;
+             entry = g_list_next (entry))
         {
             const char *lc_filename = NULL;
             WLEntry *le = LENTRY (entry->data);
@@ -1846,12 +1846,6 @@ do_find (WPanel * panel, const char *start_dir, ssize_t start_dir_len, const cha
                 g_free (name);
                 continue;
             }
-            /* Need to grow the *list? */
-            if (list->len == list->size && !dir_list_grow (list, DIR_LIST_RESIZE_STEP))
-            {
-                g_free (name);
-                break;
-            }
 
             /* don't add files more than once to the panel */
             if (!content_is_empty && list->len != 0
@@ -1861,23 +1855,17 @@ do_find (WPanel * panel, const char *start_dir, ssize_t start_dir_len, const cha
                 continue;
             }
 
-            list->list[list->len].fname = g_string_new (p);
-            list->list[list->len].f.marked = 0;
-            list->list[list->len].f.link_to_dir = link_to_dir ? 1 : 0;
-            list->list[list->len].f.stale_link = stale_link ? 1 : 0;
-            list->list[list->len].f.dir_size_computed = 0;
-            list->list[list->len].st = st;
-            list->list[list->len].sort_key = NULL;
-            list->list[list->len].second_sort_key = NULL;
-            list->len++;
+            ok = dir_list_append (list, p, &st, link_to_dir, stale_link);
+
             g_free (name);
+
             if ((list->len & 15) == 0)
                 rotate_dash (TRUE);
         }
 
         panel->is_panelized = TRUE;
-        panelize_absolutize_if_needed (panel);
-        panelize_save_panel (panel);
+        panel_panelize_absolutize_if_needed (panel);
+        panel_panelize_save (panel);
     }
 
     kill_gui ();

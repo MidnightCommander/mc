@@ -29,7 +29,7 @@
  * displaynig: all handled as zero with characters, expect combing character 
  * at the begin of string, this character has with one (space add before), 
  * so str_term_width is not good for computing width of singles characters 
- * (never return zero, expect emtpy string)
+ * (never return zero, expect empty string)
  * for compatibility are strings composed before displaynig
  * comparing: comparing decompose all string before comparing, n-compare 
  * functions do not work as is usual, because same strings do not have to be 
@@ -54,7 +54,7 @@
  */
 typedef enum
 {
-    /* success means, that convertion has been finished successully
+    /* success means, that conversion has been finished successfully
      */
     ESTR_SUCCESS = 0,
     /* problem means, that not every characters was successfully converted (They are
@@ -156,7 +156,7 @@ struct str_class
 
 /*** global variables defined in .c file *********************************************************/
 
-/* standard convertors */
+/* standard converters */
 extern GIConv str_cnv_to_term;
 extern GIConv str_cnv_from_term;
 /* from terminal encoding to terminal encoding */
@@ -168,17 +168,17 @@ struct str_class str_utf8_init (void);
 struct str_class str_8bit_init (void);
 struct str_class str_ascii_init (void);
 
-/* create convertor from "from_enc" to terminal encoding
+/* create converter from "from_enc" to terminal encoding
  * if "from_enc" is not supported return INVALID_CONV 
  */
 GIConv str_crt_conv_from (const char *from_enc);
 
-/* create convertor from terminal encoding to "to_enc"
+/* create converter from terminal encoding to "to_enc"
  * if "to_enc" is not supported return INVALID_CONV 
  */
 GIConv str_crt_conv_to (const char *to_enc);
 
-/* close convertor, do not close str_cnv_to_term, str_cnv_from_term, 
+/* close converter, do not close str_cnv_to_term, str_cnv_from_term, 
  * str_cnv_not_convert 
  */
 void str_close_conv (GIConv conv);
@@ -352,13 +352,13 @@ gboolean str_isprint (const char *ch);
  */
 gboolean str_iscombiningmark (const char *ch);
 
-/* write lower from of fisrt characters in ch into out
+/* write lower from of first characters in ch into out
  * decrase remain by size of returned characters
  * if out is not big enough, do nothing
  */
 gboolean str_toupper (const char *ch, char **out, size_t * remain);
 
-/* write upper from of fisrt characters in ch into out
+/* write upper from of first characters in ch into out
  * decrase remain by size of returned characters
  * if out is not big enough, do nothing
  */
@@ -524,7 +524,7 @@ char *str_create_key_for_filename (const char *text, gboolean case_sen);
  */
 int str_key_collate (const char *t1, const char *t2, gboolean case_sen);
 
-/* release_key created by str_create_key, only rigth way to release key
+/* release_key created by str_create_key, only right way to release key
  * I
  */
 void str_release_key (char *key, gboolean case_sen);

@@ -1,4 +1,4 @@
-#! @PERL@ -w
+#! @PERL@
 #
 # External filesystem for mc, using mtools
 # Written Ludek Brukner <lubr@barco.cz>, 1997
@@ -8,6 +8,8 @@
 # 
 
 # These mtools components must be in PATH for this to work
+
+use warnings;
 
 sub quote {
     $_ = shift(@_);

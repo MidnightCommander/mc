@@ -1,4 +1,4 @@
-#! @PERL_FOR_BUILD@ -w
+#! @PERL_FOR_BUILD@
 #
 #  Man page to help file converter
 #  Copyright (C) 1994, 1995, 1998, 2000, 2001, 2002, 2003, 2004, 2005,

@@ -2,7 +2,9 @@
 # TypeScript syntax highlighting
 # for MC Editor/CoolEdit
 #
-# Author: Oleksandr Sidko <mortiy@gmail.com>
+# Authors:
+#    * Oleksandr Sidko <mortiy@gmail.com>
+#    * Timur Shemsedinov <timur.shemsedinov@gmail.com>
 # Based on js.syntax
 #
 
@@ -14,31 +16,36 @@ context default
     keyword whole abstract yellow
     keyword whole arguments yellow
     keyword whole as yellow
+    keyword whole async yellow
+    keyword whole await yellow
     keyword whole break yellow
     keyword whole caller yellow
     keyword whole case yellow
     keyword whole catch yellow
     keyword whole class yellow
-    keyword whole const yellow
     keyword whole constructor yellow
+    keyword whole const yellow
     keyword whole continue yellow
+    keyword whole debugger yellow
     keyword whole declare yellow
-    keyword whole else yellow
-    keyword whole enum yellow
-    keyword whole extends yellow
-    keyword whole export yellow
     keyword whole default yellow
     keyword whole delete yellow
+    keyword whole do yellow
+    keyword whole else yellow
+    keyword whole enum yellow
+    keyword whole export yellow
+    keyword whole extends yellow
+    keyword whole finally yellow
     keyword whole for yellow
     keyword whole from yellow
     keyword whole function yellow
     keyword whole get yellow
     keyword whole if yellow
-    keyword whole import yellow
     keyword whole implements yellow
-    keyword whole in yellow
+    keyword whole import yellow
     keyword whole instanceof yellow
     keyword whole interface yellow
+    keyword whole in yellow
     keyword whole let yellow
     keyword whole module yellow
     keyword whole namespace yellow
@@ -52,6 +59,7 @@ context default
     keyword whole return yellow
     keyword whole set yellow
     keyword whole static yellow
+    keyword whole super yellow
     keyword whole switch yellow
     keyword whole this yellow
     keyword whole throw yellow
@@ -64,58 +72,118 @@ context default
 
     #=========================
     # Basic Types
-    keyword whole string cyan
-    keyword whole number cyan
-    keyword whole boolean cyan
     keyword whole any cyan
+    keyword whole bigint cyan
+    keyword whole boolean cyan
+    keyword whole never cyan
+    keyword whole null cyan
+    keyword whole number cyan
+    keyword whole object cyan
+    keyword whole string cyan
+    keyword whole symbol cyan
+    keyword whole undefined cyan
+    keyword whole unknown cyan
     keyword whole void cyan
     keyword whole T cyan
 
     #=========================
     # Objects
-    keyword whole ActiveXObject yellow
+    keyword whole AbortController yellow
+    keyword whole AbortSignal yellow
+    keyword whole AggregateError yellow
     keyword whole Array yellow
+    keyword whole ArrayBuffer yellow
+    keyword whole AsyncFunction yellow
+    keyword whole AsyncGenerator yellow
+    keyword whole AsyncGeneratorFunction yellow
+    keyword whole Atomics yellow
+    keyword whole BigInt64Array yellow
+    keyword whole BigInt yellow
+    keyword whole BigUint64Array yellow
+    keyword whole Blob yellowOB
     keyword whole Boolean yellow
+    keyword whole Buffer yellow
+    keyword whole DataView yellow
     keyword whole Date yellow
-    keyword whole Dictionary yellow
-    keyword whole Enumerator yellow
-    keyword whole FileSystemObject yellow
+    keyword whole DOMException yellow
+    keyword whole Error yellow
+    keyword whole EvalError yellow
+    keyword whole Float32Array yellow
+    keyword whole Float64Array yellow
     keyword whole Function yellow
-    keyword whole Global yellow
+    keyword whole Generator yellow
+    keyword whole GeneratorFunction yellow
+    keyword whole global yellow
+    keyword whole globalThis yellow
     keyword whole Image yellow
-    keyword whole Math yellow
+    keyword whole Infinity yellow
+    keyword whole Int16Array yellow
+    keyword whole Int32Array yellow
+    keyword whole Int8Array yellow
+    keyword whole Intl yellow
+    keyword whole JSON yellow
     keyword whole Map yellow
+    keyword whole Math yellow
     keyword whole Number yellow
     keyword whole Object yellow
     keyword whole Promise yellow
+    keyword whole Promise yellow
     keyword whole Proxy yellow
+    keyword whole RangeError yellow
+    keyword whole ReferenceError yellow
     keyword whole Reflect yellow
-    keyword whole Set yellow
-    keyword whole String yellow
-    keyword whole Symbol yellow
-    keyword whole TextStream yellow
     keyword whole RegExp yellow
-    keyword whole VBArray yellow
+    keyword whole Set yellow
+    keyword whole SharedArrayBuffer yellow
+    keyword whole SyntaxError yellow
+    keyword whole TextDecoder yellow
+    keyword whole TypeError yellow
+    keyword whole Uint16Array yellow
+    keyword whole Uint32Array yellow
+    keyword whole Uint8Array yellow
+    keyword whole Uint8ClampedArray yellow
+    keyword whole URIError yellow
+    keyword whole URL yellow
+    keyword whole URLSearchParams yellow
     keyword whole WeakMap yellow
     keyword whole WeakSet yellow
+    keyword whole WebAssembly yellow
+    keyword whole window yellow
 
     #=========================
     # Most common functions
     keyword whole alert yellow
+    keyword whole clearInterval yellow
+    keyword whole clearTimeout yellow
+    keyword whole console yellow
+    keyword whole decodeURIComponent yellow
+    keyword whole decodeURI yellow
+    keyword whole encodeURIComponent yellow
     keyword whole escape yellow
     keyword whole eval yellow
-    keyword whole indexOf yellow
+    keyword whole fetch yellow
+    keyword whole isFinite yellow
     keyword whole isNaN yellow
-    keyword whole toString yellow
+    keyword whole module yellow
+    keyword whole parseFloat yellow
+    keyword whole parseInt yellow
+    keyword whole performance yellow
+    keyword whole process yellow
+    keyword whole queueMicrotask yellow
+    keyword whole require yellow
+    keyword whole setImmediate yellow
+    keyword whole setInterval yellow
+    keyword whole setTimeout yellow
+    keyword whole structuredClone yellow
     keyword whole unescape yellow
-    keyword whole valueOf yellow
 
     #=========================
     # Constants
-    keyword whole false brightgreen
-    keyword whole null brightgreen
     keyword whole true brightgreen
-    keyword whole undefined yellow
+    keyword whole false brightgreen
+    keyword whole NaN yellow
+    keyword whole __dirname yellow
+    keyword whole __filename yellow
 
     #=========================
     # Comments

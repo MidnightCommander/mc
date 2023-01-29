@@ -1,7 +1,7 @@
 /*
    Editor spell checker
 
-   Copyright (C) 2012-2022
+   Copyright (C) 2012-2023
    Free Software Foundation, Inc.
 
    Written by:
@@ -820,7 +820,7 @@ spell_dialog_spell_suggest_show (WEdit * edit, const char *word, char **new_word
  * Show dialog to select language for spell check.
  *
  * @param languages Array of available languages
- * @return name of choosed language
+ * @return name of chosen language
  */
 
 char *
