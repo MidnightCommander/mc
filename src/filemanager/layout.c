@@ -1300,7 +1300,6 @@ swap_panels (void)
         panelswap (selected);
         panelswap (is_panelized);
         panelswap (dir_stat);
-        panelswap (sort_field);
 #undef panelswap
 
         panel1->quick_search.active = FALSE;
