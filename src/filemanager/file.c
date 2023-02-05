@@ -3295,14 +3295,13 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
     const char *source = NULL;
     char *dest = NULL;
     vfs_path_t *dest_vpath = NULL;
-    char *save_cwd = NULL, *save_dest = NULL;
+    vfs_path_t *save_cwd = NULL, *save_dest = NULL;
     struct stat src_stat;
     gboolean ret_val = TRUE;
     int i;
     FileProgressStatus value;
     file_op_context_t *ctx;
     file_op_total_context_t *tctx;
-    vfs_path_t *tmp_vpath;
     filegui_dialog_type_t dialog_type = FILEGUI_DIALOG_ONE_ITEM;
 
     gboolean do_bg = FALSE;     /* do background operation? */
@@ -3396,11 +3395,11 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
        invalid data. */
     if ((dest != NULL)
         && (mc_setctl (dest_vpath, VFS_SETCTL_STALE_DATA, GUINT_TO_POINTER (1)) != 0))
-        save_dest = g_strdup (dest);
+        save_dest = vfs_path_from_str (dest);
 
     if ((vfs_path_tokens_count (panel->cwd_vpath) != 0)
         && (mc_setctl (panel->cwd_vpath, VFS_SETCTL_STALE_DATA, GUINT_TO_POINTER (1)) != 0))
-        save_cwd = g_strdup (vfs_path_as_str (panel->cwd_vpath));
+        save_cwd = vfs_path_clone (panel->cwd_vpath);
 
     /* Now, let's do the job */
 
@@ -3500,18 +3499,14 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
     /* Clean up */
     if (save_cwd != NULL)
     {
-        tmp_vpath = vfs_path_from_str (save_cwd);
-        mc_setctl (tmp_vpath, VFS_SETCTL_STALE_DATA, NULL);
-        vfs_path_free (tmp_vpath, TRUE);
-        g_free (save_cwd);
+        mc_setctl (save_cwd, VFS_SETCTL_STALE_DATA, NULL);
+        vfs_path_free (save_cwd, TRUE);
     }
 
     if (save_dest != NULL)
     {
-        tmp_vpath = vfs_path_from_str (save_dest);
-        mc_setctl (tmp_vpath, VFS_SETCTL_STALE_DATA, NULL);
-        vfs_path_free (tmp_vpath, TRUE);
-        g_free (save_dest);
+        mc_setctl (save_dest, VFS_SETCTL_STALE_DATA, NULL);
+        vfs_path_free (save_dest, TRUE);
     }
 
     linklist = free_linklist (linklist);
