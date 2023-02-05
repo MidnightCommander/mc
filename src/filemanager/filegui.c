@@ -1295,8 +1295,8 @@ file_progress_real_query_replace (file_op_context_t * ctx, enum OperationMode mo
 /* --------------------------------------------------------------------------------------------- */
 
 char *
-file_mask_dialog (file_op_context_t * ctx, FileOperation operation, gboolean only_one,
-                  const char *format, const void *text, const char *def_text, gboolean * do_bg)
+file_mask_dialog (file_op_context_t * ctx, gboolean only_one, const char *format, const void *text,
+                  const char *def_text, gboolean * do_bg)
 {
     size_t fmd_xlen;
     vfs_path_t *vpath;
@@ -1393,7 +1393,7 @@ file_mask_dialog (file_op_context_t * ctx, FileOperation operation, gboolean onl
         WRect r = { -1, -1, 0, fmd_xlen };
 
         quick_dialog_t qdlg = {
-            r, op_names[operation], "[Mask Copy/Rename]",
+            r, op_names[ctx->operation], "[Mask Copy/Rename]",
             quick_widgets, NULL, NULL
         };
 
