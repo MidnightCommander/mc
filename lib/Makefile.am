@@ -32,6 +32,7 @@ SRC_mc_utils = \
 libmc_la_SOURCES = \
 	$(SUBLIB_includes) \
 	$(SRC_mc_utils) \
+	file-entry.h \
 	fileloc.h \
 	fs.h \
 	hook.c hook.h \

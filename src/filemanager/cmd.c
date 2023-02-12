@@ -58,6 +58,7 @@
 #include "lib/vfs/vfs.h"
 #include "lib/fileloc.h"
 #include "lib/strutil.h"
+#include "lib/file-entry.h"
 #include "lib/util.h"
 #include "lib/widget.h"
 #include "lib/keybind.h"        /* CK_Down, CK_History */

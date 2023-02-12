@@ -11,6 +11,7 @@
 #include "lib/search.h"
 #include "lib/widget.h"
 #include "lib/vfs/vfs.h"        /* vfs_path_t */
+#include "lib/util.h"           /* mc_pipe_t */
 
 #include "src/keymap.h"         /* global_keymap_t */
 #include "src/filemanager/dir.h"        /* dir_list */

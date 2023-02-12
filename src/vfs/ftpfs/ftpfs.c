@@ -95,6 +95,7 @@ What to do with this?
 #include <inttypes.h>           /* uintmax_t */
 
 #include "lib/global.h"
+#include "lib/file-entry.h"
 #include "lib/util.h"
 #include "lib/strutil.h"        /* str_move() */
 #include "lib/mcconfig.h"

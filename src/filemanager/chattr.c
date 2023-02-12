@@ -45,6 +45,7 @@
 #include "lib/skin.h"           /* COLOR_NORMAL, DISABLED_COLOR */
 #include "lib/vfs/vfs.h"
 #include "lib/widget.h"
+#include "lib/util.h"           /* x_basename() */
 
 #include "src/keymap.h"         /* chattr_map */
 

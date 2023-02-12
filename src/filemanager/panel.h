@@ -13,6 +13,7 @@
 #include "lib/strutil.h"
 #include "lib/widget.h"         /* Widget */
 #include "lib/filehighlight.h"
+#include "lib/file-entry.h"
 
 #include "dir.h"                /* dir_list */
 

@@ -27,7 +27,10 @@
 #include <config.h>
 
 #include "lib/global.h"
+#include "lib/util.h"           /* MC_PTR_FREE */
+
 #include "lib/filehighlight.h"
+
 #include "internal.h"
 
 /*** global variables ****************************************************************************/

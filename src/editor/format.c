@@ -48,6 +48,7 @@
 #include <stdlib.h>
 
 #include "lib/global.h"
+#include "lib/util.h"           /* whitespace() */
 
 #include "src/setup.h"          /* option_tab_spacing */
 
