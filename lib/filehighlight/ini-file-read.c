@@ -234,7 +234,7 @@ mc_fhl_parse_ini_file (mc_fhl_t * fhl)
     gboolean ok;
 
     mc_fhl_array_free (fhl);
-    fhl->filters = g_ptr_array_new ();
+    fhl->filters = g_ptr_array_new_with_free_func (mc_fhl_filter_free);
 
     orig_group_names = mc_config_get_groups (fhl->config, NULL);
     ok = (*orig_group_names != NULL);

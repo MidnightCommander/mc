@@ -78,10 +78,9 @@ new_codepage_desc (const char *id, const char *name)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-free_codepage_desc (gpointer data, gpointer user_data)
+free_codepage_desc (gpointer data)
 {
     codepage_desc *desc = (codepage_desc *) data;
-    (void) user_data;
 
     g_free (desc->id);
     g_free (desc->name);
@@ -216,7 +215,7 @@ load_codepages_list (void)
         /* files are not found, add default codepage */
         fprintf (stderr, "%s\n", _("Warning: cannot load codepages list"));
 
-        codepages = g_ptr_array_new ();
+        codepages = g_ptr_array_new_with_free_func (free_codepage_desc);
         g_ptr_array_add (codepages, new_codepage_desc (DEFAULT_CHARSET, _("7-bit ASCII")));
     }
 }
@@ -226,7 +225,6 @@ load_codepages_list (void)
 void
 free_codepages_list (void)
 {
-    g_ptr_array_foreach (codepages, free_codepage_desc, NULL);
     g_ptr_array_free (codepages, TRUE);
     /* NULL-ize pointer to make unit tests happy */
     codepages = NULL;

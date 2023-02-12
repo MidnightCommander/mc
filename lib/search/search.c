@@ -91,8 +91,10 @@ mc_search__cond_struct_new (mc_search_t * lc_mc_search, const GString * str, con
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-mc_search__cond_struct_free (mc_search_cond_t * mc_search_cond)
+mc_search__cond_struct_free (gpointer data)
 {
+    mc_search_cond_t *mc_search_cond = (mc_search_cond_t *) data;
+
     if (mc_search_cond->upper != NULL)
         g_string_free (mc_search_cond->upper, TRUE);
 
@@ -110,15 +112,6 @@ mc_search__cond_struct_free (mc_search_cond_t * mc_search_cond)
 #endif /* SEARCH_TYPE_GLIB */
 
     g_free (mc_search_cond);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-mc_search__conditions_free (GPtrArray * array)
-{
-    g_ptr_array_foreach (array, (GFunc) mc_search__cond_struct_free, NULL);
-    g_ptr_array_free (array, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -187,7 +180,7 @@ mc_search_free (mc_search_t * lc_mc_search)
     g_free (lc_mc_search->error_str);
 
     if (lc_mc_search->prepared.conditions != NULL)
-        mc_search__conditions_free (lc_mc_search->prepared.conditions);
+        g_ptr_array_free (lc_mc_search->prepared.conditions, TRUE);
 
 #ifdef SEARCH_TYPE_GLIB
     if (lc_mc_search->regex_match_info != NULL)
@@ -212,7 +205,7 @@ mc_search_prepare (mc_search_t * lc_mc_search)
     if (lc_mc_search->prepared.conditions != NULL)
         return lc_mc_search->prepared.result;
 
-    ret = g_ptr_array_new ();
+    ret = g_ptr_array_new_with_free_func (mc_search__cond_struct_free);
 #ifdef HAVE_CHARSET
     if (!lc_mc_search->is_all_charsets)
         g_ptr_array_add (ret,

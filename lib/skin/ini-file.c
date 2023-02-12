@@ -133,7 +133,7 @@ mc_skin_list (void)
 {
     GPtrArray *list;
 
-    list = g_ptr_array_new ();
+    list = g_ptr_array_new_with_free_func (g_free);
     mc_skin_get_list_from_dir (mc_config_get_data_path (), list);
     mc_skin_get_list_from_dir (mc_global.sysconfig_dir, list);
     mc_skin_get_list_from_dir (mc_global.share_data_dir, list);

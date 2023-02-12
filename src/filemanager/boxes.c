@@ -667,7 +667,6 @@ appearance_box (void)
     }
 
     g_free (current_skin_name);
-    g_ptr_array_foreach (skin_names, (GFunc) g_free, NULL);
     g_ptr_array_free (skin_names, TRUE);
 }
 

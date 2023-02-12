@@ -97,7 +97,7 @@ static void
 do_executev__init (void)
 {
     do_executev__lc_shell__captured = NULL;
-    do_executev__argv__captured = g_ptr_array_new ();
+    do_executev__argv__captured = g_ptr_array_new_with_free_func (g_free);
     do_executev__flags__captured = 0;
 }
 
@@ -105,7 +105,6 @@ static void
 do_executev__deinit (void)
 {
     g_free (do_executev__lc_shell__captured);
-    g_ptr_array_foreach (do_executev__argv__captured, (GFunc) g_free, NULL);
     g_ptr_array_free (do_executev__argv__captured, TRUE);
 }
 

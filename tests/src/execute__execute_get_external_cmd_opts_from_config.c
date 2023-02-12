@@ -67,9 +67,9 @@ mc_config_get_string_raw (mc_config_t * config_ignored, const gchar * group,
 static void
 mc_config_get_string__init (void)
 {
-    mc_config_get_string__group__captured = g_ptr_array_new ();
-    mc_config_get_string__param__captured = g_ptr_array_new ();
-    mc_config_get_string__default_value__captured = g_ptr_array_new ();
+    mc_config_get_string__group__captured = g_ptr_array_new_with_free_func (g_free);
+    mc_config_get_string__param__captured = g_ptr_array_new_with_free_func (g_free);
+    mc_config_get_string__default_value__captured = g_ptr_array_new_with_free_func (g_free);
 
     mc_config_get_string__return_value = g_ptr_array_new ();
 }
@@ -77,13 +77,8 @@ mc_config_get_string__init (void)
 static void
 mc_config_get_string__deinit (void)
 {
-    g_ptr_array_foreach (mc_config_get_string__group__captured, (GFunc) g_free, NULL);
     g_ptr_array_free (mc_config_get_string__group__captured, TRUE);
-
-    g_ptr_array_foreach (mc_config_get_string__param__captured, (GFunc) g_free, NULL);
     g_ptr_array_free (mc_config_get_string__param__captured, TRUE);
-
-    g_ptr_array_foreach (mc_config_get_string__default_value__captured, (GFunc) g_free, NULL);
     g_ptr_array_free (mc_config_get_string__default_value__captured, TRUE);
 
     g_ptr_array_foreach (mc_config_get_string__return_value, (GFunc) g_free, NULL);
