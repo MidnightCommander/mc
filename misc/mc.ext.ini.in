@@ -748,8 +748,8 @@ ShellIgnoreCase=true
 Include=editor
 
 [markdown]
-Regex=\.(md|mkd)$
-ShellIgnoreCase=true
+Regex=\.mk?d$
+RegexIgnoreCase=true
 Include=editor
 
 [djvu]
