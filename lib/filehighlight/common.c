@@ -66,7 +66,10 @@ void
 mc_fhl_array_free (mc_fhl_t * fhl)
 {
     if (fhl->filters != NULL)
-        fhl->filters = (GPtrArray *) g_ptr_array_free (fhl->filters, TRUE);
+    {
+        g_ptr_array_free (fhl->filters, TRUE);
+        fhl->filters = NULL;
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
