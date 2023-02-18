@@ -219,16 +219,17 @@ static inline off_t
 line_pixel_length (unsigned char *t, off_t b, off_t l, gboolean utf8)
 {
     off_t xn, x;                /* position counters */
-    off_t char_length;          /* character length in bytes */
+    off_t char_length = 0;      /* character length in bytes */
 
 #ifndef HAVE_CHARSET
     (void) utf8;
 #endif
 
-    for (xn = 0, x = 0; xn <= l; x = xn, b += char_length)
+    for (xn = 0, x = 0; xn <= l; x = xn)
     {
         char *tb;
 
+        b += char_length;
         tb = (char *) t + b;
         char_length = 1;
 
