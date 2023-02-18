@@ -144,8 +144,8 @@ edit_buffer_get_byte_ptr (const edit_buffer_t * buf, off_t byte_index)
 void
 edit_buffer_init (edit_buffer_t * buf, off_t size)
 {
-    buf->b1 = g_ptr_array_sized_new (32);
-    buf->b2 = g_ptr_array_sized_new (32);
+    buf->b1 = g_ptr_array_new_full (32, g_free);
+    buf->b2 = g_ptr_array_new_full (32, g_free);
 
     buf->curs1 = 0;
     buf->curs2 = 0;
@@ -165,16 +165,10 @@ void
 edit_buffer_clean (edit_buffer_t * buf)
 {
     if (buf->b1 != NULL)
-    {
-        g_ptr_array_foreach (buf->b1, (GFunc) g_free, NULL);
         g_ptr_array_free (buf->b1, TRUE);
-    }
 
     if (buf->b2 != NULL)
-    {
-        g_ptr_array_foreach (buf->b2, (GFunc) g_free, NULL);
         g_ptr_array_free (buf->b2, TRUE);
-    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -577,7 +571,6 @@ edit_buffer_delete (edit_buffer_t * buf)
         j = buf->b2->len - 1;
         b = g_ptr_array_index (buf->b2, j);
         g_ptr_array_remove_index (buf->b2, j);
-        g_free (b);
     }
 
     buf->curs2 = prev;
@@ -618,7 +611,6 @@ edit_buffer_backspace (edit_buffer_t * buf)
         j = buf->b1->len - 1;
         b = g_ptr_array_index (buf->b1, j);
         g_ptr_array_remove_index (buf->b1, j);
-        g_free (b);
     }
 
     buf->curs1 = prev;
