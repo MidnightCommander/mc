@@ -1836,8 +1836,6 @@ do_nc (void)
 
         /* don't handle VFS timestamps for dirs opened in panels */
         mc_event_destroy (MCEVENT_GROUP_CORE, "vfs_timestamp");
-
-        dir_list_free_list (&panelized_panel.list);
     }
 
     /* Program end */

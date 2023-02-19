@@ -314,7 +314,7 @@ do_external_panelize (char *command)
     /* Clear the counters and the directory list */
     panel_clean_dir (current_panel);
 
-    panel_panelize_change_root (current_panel->cwd_vpath);
+    panel_panelize_change_root (current_panel, current_panel->cwd_vpath);
 
     dir_list_init (list);
 
