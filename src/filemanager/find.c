@@ -1352,18 +1352,18 @@ do_search (WDialog * h)
                 }
 
                 g_free (directory);
-                directory = g_strdup (vfs_path_as_str (tmp_vpath));
 
                 if (verbose)
                 {
                     char buffer[BUF_MEDIUM];
 
+                    directory = (char *) vfs_path_as_str (tmp_vpath);
                     g_snprintf (buffer, sizeof (buffer), _("Searching %s"), directory);
                     status_update (str_trunc (directory, WIDGET (h)->rect.cols - 8));
                 }
 
                 dirp = mc_opendir (tmp_vpath);
-                vfs_path_free (tmp_vpath, TRUE);
+                directory = vfs_path_free (tmp_vpath, FALSE);
             }                   /* while (!dirp) */
 
             /* skip invalid filenames */
