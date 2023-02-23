@@ -813,7 +813,7 @@ init_hotlist (hotlist_t list_type)
     path_box = groupbox_new (y, UX, 3, hotlist_widget->rect.cols, _("Directory path"));
     group_add_widget_autopos (g, path_box, WPOS_KEEP_BOTTOM | WPOS_KEEP_HORZ, NULL);
 
-    pname = label_new (y + 1, UX + 2, "");
+    pname = label_new (y + 1, UX + 2, NULL);
     group_add_widget_autopos (g, pname, WPOS_KEEP_BOTTOM | WPOS_KEEP_LEFT, NULL);
     y += WIDGET (path_box)->rect.lines;
 

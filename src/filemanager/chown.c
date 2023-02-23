@@ -234,7 +234,7 @@ chown_dlg_create (WPanel * panel)
     /* add widgets for the file information */
     for (i = 0; i < LABELS; i++)
     {
-        chown_label[i].l = label_new (chown_label[i].y, 7 + GW * 2, "");
+        chown_label[i].l = label_new (chown_label[i].y, 7 + GW * 2, NULL);
         group_add_widget (g, chown_label[i].l);
     }
 

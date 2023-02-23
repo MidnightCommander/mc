@@ -3181,9 +3181,9 @@ dirsize_status_init_cb (status_msg_t * sm)
         b_width += str_term_width1 (b2_name) + 4 + 1;
 
     ui_width = MAX (COLS / 2, b_width + 6);
-    dsm->dirname = label_new (2, 3, "");
+    dsm->dirname = label_new (2, 3, NULL);
     group_add_widget (gd, dsm->dirname);
-    dsm->count_size = label_new (3, 3, "");
+    dsm->count_size = label_new (3, 3, NULL);
     group_add_widget (gd, dsm->count_size);
     group_add_widget (gd, hline_new (4, -1, -1));
 

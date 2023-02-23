@@ -712,7 +712,7 @@ simple_status_msg_init_cb (status_msg_t * sm)
     wd_width = MAX (wd->rect.cols, b_width + 6);
 
     y = 2;
-    ssm->label = label_new (y++, 3, "");
+    ssm->label = label_new (y++, 3, NULL);
     group_add_widget_autopos (wg, ssm->label, WPOS_KEEP_TOP | WPOS_CENTER_HORZ, NULL);
     group_add_widget (wg, hline_new (y++, -1, -1));
     b = WIDGET (button_new (y++, 3, B_CANCEL, NORMAL_BUTTON, b_name, NULL));

@@ -753,7 +753,7 @@ advanced_chown_dlg_create (WPanel * panel)
     /* draw background */
     ch_dlg->bg->callback = advanced_chown_bg_callback;
 
-    l_filename = label_new (2, 3, "");
+    l_filename = label_new (2, 3, NULL);
     group_add_widget (ch_grp, l_filename);
 
     group_add_widget (ch_grp, hline_new (3, -1, -1));
@@ -772,7 +772,7 @@ advanced_chown_dlg_create (WPanel * panel)
     b_group = button_new (XTRACT (4, BY, user_group_button_cb));
     advanced_chown_but[4].id = group_add_widget (ch_grp, b_group);
 
-    l_mode = label_new (BY + 2, 3, "");
+    l_mode = label_new (BY + 2, 3, NULL);
     group_add_widget (ch_grp, l_mode);
 
     y = BY + 3;

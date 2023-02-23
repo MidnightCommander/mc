@@ -1709,7 +1709,7 @@ setup_gui (void)
 
     group_add_widget_autopos (g, hline_new (y++, -1, -1), WPOS_KEEP_BOTTOM, NULL);
 
-    found_num_label = label_new (y++, 4, "");
+    found_num_label = label_new (y++, 4, NULL);
     group_add_widget_autopos (g, found_num_label, WPOS_KEEP_BOTTOM, NULL);
 
     status_label = label_new (y++, 4, _("Searching"));

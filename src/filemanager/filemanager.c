@@ -918,7 +918,7 @@ create_file_manager (void)
     group_add_widget (g, get_panel_widget (0));
     group_add_widget (g, get_panel_widget (1));
 
-    the_hint = label_new (0, 0, 0);
+    the_hint = label_new (0, 0, NULL);
     the_hint->transparent = TRUE;
     the_hint->auto_adjust_cols = 0;
     WIDGET (the_hint)->rect.cols = COLS;
