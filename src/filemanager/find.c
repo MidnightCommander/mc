@@ -1339,13 +1339,8 @@ do_search (WDialog * h)
                     pop_start_dir = FALSE;
 
                     /* handle absolute ignore dirs here */
-                    {
-                        gboolean ok;
-
-                        ok = find_ignore_dir_search (vfs_path_as_str (tmp_vpath));
-                        if (!ok)
-                            break;
-                    }
+                    if (!find_ignore_dir_search (vfs_path_as_str (tmp_vpath)))
+                        break;
 
                     vfs_path_free (tmp_vpath, TRUE);
                     ignore_count++;
