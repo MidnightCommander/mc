@@ -427,7 +427,7 @@ dlg_create (gboolean modal, int y1, int x1, int lines, int cols, widget_pos_flag
     new_d->colors = colors;
     new_d->help_ctx = help_ctx;
     new_d->compact = compact;
-    new_d->data = NULL;
+    new_d->data.p = NULL;
 
     if (modal)
     {

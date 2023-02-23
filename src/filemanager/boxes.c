@@ -189,7 +189,7 @@ skin_dlg_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
     case MSG_RESIZE:
         {
             WDialog *d = DIALOG (w);
-            const WRect *wd = &WIDGET (d->data)->rect;
+            const WRect *wd = &WIDGET (d->data.p)->rect;
             WRect r = w->rect;
 
             r.y = wd->y + (wd->lines - r.lines) / 2;
@@ -221,7 +221,7 @@ sel_skin_button (WButton * button, int action)
         dlg_create (TRUE, 0, 0, 13, 24, WPOS_KEEP_DEFAULT, TRUE, dialog_colors, skin_dlg_callback,
                     NULL, "[Appearance]", _("Skins"));
     /* use Appearance dialog for positioning */
-    skin_dlg->data = WIDGET (button)->owner;
+    skin_dlg->data.p = WIDGET (button)->owner;
 
     /* set dialog location before all */
     send_message (skin_dlg, NULL, MSG_RESIZE, 0, NULL);

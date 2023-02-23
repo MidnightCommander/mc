@@ -73,10 +73,10 @@ history_dlg_reposition (WDialog * dlg_head)
     WRect r;
 
     /* guard checks */
-    if ((dlg_head == NULL) || (dlg_head->data == NULL))
+    if (dlg_head == NULL || dlg_head->data.p == NULL)
         return MSG_NOT_HANDLED;
 
-    data = (history_dlg_data *) dlg_head->data;
+    data = (history_dlg_data *) dlg_head->data.p;
 
     y = data->y;
     he = data->count + 2;
@@ -227,7 +227,7 @@ history_show (history_descriptor_t * hd)
     query_dlg =
         dlg_create (TRUE, 0, 0, 4, 4, WPOS_KEEP_DEFAULT, TRUE, dialog_colors, history_dlg_callback,
                     NULL, "[History-query]", _("History"));
-    query_dlg->data = &hist_data;
+    query_dlg->data.p = &hist_data;
 
     /* this call makes list stick to all sides of dialog, effectively make
        it be resized with dialog */
