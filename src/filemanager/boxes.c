@@ -88,6 +88,8 @@
 
 /*** file scope type declarations ****************************************************************/
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 static unsigned long configure_old_esc_mode_id, configure_time_out_id;

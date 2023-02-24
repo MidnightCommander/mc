@@ -130,6 +130,8 @@ typedef struct
     edit_syntax_rule_t rule;
 } syntax_marker_t;
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 static char *error_file_name = NULL;

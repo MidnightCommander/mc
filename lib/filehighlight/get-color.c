@@ -39,10 +39,12 @@
 
 /*** file scope type declarations ****************************************************************/
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
-
 /* --------------------------------------------------------------------------------------------- */
 
 /*inline functions */
@@ -55,11 +57,15 @@ mc_fhl_is_file (const file_entry_t * fe)
     return S_ISREG (fe->st.st_mode);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 inline static gboolean
 mc_fhl_is_file_exec (const file_entry_t * fe)
 {
     return is_exe (fe->st.st_mode);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 inline static gboolean
 mc_fhl_is_dir (const file_entry_t * fe)
@@ -70,6 +76,8 @@ mc_fhl_is_dir (const file_entry_t * fe)
     return S_ISDIR (fe->st.st_mode);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 inline static gboolean
 mc_fhl_is_link (const file_entry_t * fe)
 {
@@ -79,11 +87,15 @@ mc_fhl_is_link (const file_entry_t * fe)
     return S_ISLNK (fe->st.st_mode);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 inline static gboolean
 mc_fhl_is_hlink (const file_entry_t * fe)
 {
     return (fe->st.st_nlink > 1);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 inline static gboolean
 mc_fhl_is_link_to_dir (const file_entry_t * fe)
@@ -91,11 +103,15 @@ mc_fhl_is_link_to_dir (const file_entry_t * fe)
     return mc_fhl_is_link (fe) && fe->f.link_to_dir;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 inline static gboolean
 mc_fhl_is_stale_link (const file_entry_t * fe)
 {
     return mc_fhl_is_link (fe) ? fe->f.stale_link : !mc_fhl_is_file (fe);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 inline static gboolean
 mc_fhl_is_device_char (const file_entry_t * fe)
@@ -106,6 +122,8 @@ mc_fhl_is_device_char (const file_entry_t * fe)
     return S_ISCHR (fe->st.st_mode);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 inline static gboolean
 mc_fhl_is_device_block (const file_entry_t * fe)
 {
@@ -114,6 +132,8 @@ mc_fhl_is_device_block (const file_entry_t * fe)
 #endif
     return S_ISBLK (fe->st.st_mode);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 inline static gboolean
 mc_fhl_is_special_socket (const file_entry_t * fe)
@@ -124,6 +144,8 @@ mc_fhl_is_special_socket (const file_entry_t * fe)
     return S_ISSOCK (fe->st.st_mode);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 inline static gboolean
 mc_fhl_is_special_fifo (const file_entry_t * fe)
 {
@@ -133,6 +155,8 @@ mc_fhl_is_special_fifo (const file_entry_t * fe)
     return S_ISFIFO (fe->st.st_mode);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 inline static gboolean
 mc_fhl_is_special_door (const file_entry_t * fe)
 {
@@ -141,6 +165,8 @@ mc_fhl_is_special_door (const file_entry_t * fe)
 #endif
     return S_ISDOOR (fe->st.st_mode);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 inline static gboolean
 mc_fhl_is_special (const file_entry_t * fe)
@@ -245,8 +271,6 @@ mc_fhl_get_color_regexp (const mc_fhl_filter_t * mc_filter, const mc_fhl_t * fhl
 
     return -1;
 }
-
-/* --------------------------------------------------------------------------------------------- */
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/

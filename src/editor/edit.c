@@ -116,6 +116,8 @@ const char VERTICAL_MAGIC[] = { '\1', '\1', '\1', '\1', '\n' };
 
 /*** file scope type declarations ****************************************************************/
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 /* detecting an error on save is easy: just check if every byte has been written. */
@@ -565,6 +567,8 @@ edit_pop_undo_action (WEdit * edit)
     return c;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static long
 edit_pop_redo_action (WEdit * edit)
 {
@@ -593,6 +597,8 @@ edit_pop_redo_action (WEdit * edit)
 
     return c;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static long
 get_prev_undo_action (WEdit * edit)

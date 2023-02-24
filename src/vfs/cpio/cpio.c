@@ -139,6 +139,13 @@ typedef struct
     GSList *deferred;           /* List of inodes for which another entries may appear */
 } cpio_super_t;
 
+/*** forward declarations (file scope functions) *************************************************/
+
+static ssize_t cpio_find_head (struct vfs_class *me, struct vfs_s_super *super);
+static ssize_t cpio_read_bin_head (struct vfs_class *me, struct vfs_s_super *super);
+static ssize_t cpio_read_oldc_head (struct vfs_class *me, struct vfs_s_super *super);
+static ssize_t cpio_read_crc_head (struct vfs_class *me, struct vfs_s_super *super);
+
 /*** file scope variables ************************************************************************/
 
 static struct vfs_s_subclass cpio_subclass;
@@ -148,14 +155,6 @@ static off_t cpio_position;
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
-/* --------------------------------------------------------------------------------------------- */
-
-static ssize_t cpio_find_head (struct vfs_class *me, struct vfs_s_super *super);
-static ssize_t cpio_read_bin_head (struct vfs_class *me, struct vfs_s_super *super);
-static ssize_t cpio_read_oldc_head (struct vfs_class *me, struct vfs_s_super *super);
-static ssize_t cpio_read_crc_head (struct vfs_class *me, struct vfs_s_super *super);
-static ssize_t cpio_read (void *fh, char *buffer, size_t count);
-
 /* --------------------------------------------------------------------------------------------- */
 
 static int

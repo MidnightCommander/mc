@@ -60,6 +60,8 @@
 
 /*** file scope type declarations ****************************************************************/
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 /* Reverse flag */
@@ -73,21 +75,9 @@ static gboolean exec_first = TRUE;
 
 static dir_list dir_copy = { NULL, 0, 0, NULL };
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
-
-/*
-   sort_orders_t sort_orders [SORT_TYPES_TOTAL] = {
-   { N_("&Unsorted"),    unsorted },
-   { N_("&Name"),        sort_name },
-   { N_("&Extension"),   sort_ext },
-   { N_("&Modify time"), sort_time },
-   { N_("&Access time"), sort_atime },
-   { N_("C&Hange time"), sort_ctime },
-   { N_("&Size"),        sort_size },
-   { N_("&Inode"),       sort_inode },
-   };
- */
 
 static inline int
 key_collate (const char *t1, const char *t2)

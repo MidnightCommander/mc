@@ -148,6 +148,8 @@ struct hotlist
     struct hotlist *next;
 };
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 static WPanel *our_panel;

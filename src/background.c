@@ -68,6 +68,10 @@ enum ReturnType
     Return_Integer
 };
 
+/*** forward declarations (file scope functions) *************************************************/
+
+static int background_attention (int fd, void *closure);
+
 /*** file scope variables ************************************************************************/
 
 /* File descriptor for talking to our parent */
@@ -78,8 +82,7 @@ static int from_parent_fd;
 
 TaskList *task_list = NULL;
 
-static int background_attention (int fd, void *closure);
-
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 

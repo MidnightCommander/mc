@@ -67,6 +67,8 @@ typedef struct
     char *label;
 } panelize_entry_t;
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 static WListbox *l_panelize;

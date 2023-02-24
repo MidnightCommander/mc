@@ -52,6 +52,8 @@ char *clipboard_paste_path = NULL;
 
 /*** file scope type declarations ****************************************************************/
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 static const int clip_open_flags = O_CREAT | O_WRONLY | O_TRUNC | O_BINARY;

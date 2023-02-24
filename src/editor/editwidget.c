@@ -81,14 +81,14 @@ char *edit_window_close_char = NULL;
 
 /*** file scope type declarations ****************************************************************/
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
+
 static unsigned int edit_dlg_init_refcounter = 0;
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
-
-static cb_ret_t edit_dialog_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
-                                      void *data);
-
 /* --------------------------------------------------------------------------------------------- */
 /**
  * Init the 'edit' subsystem

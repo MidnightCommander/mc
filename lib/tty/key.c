@@ -275,6 +275,8 @@ typedef int (*ph_ov_f) (void *);
 typedef int (*ph_pqc_f) (unsigned short, PhCursorInfo_t *);
 #endif
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 static key_define_t mc_default_keys[] = {

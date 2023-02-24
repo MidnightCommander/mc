@@ -59,6 +59,8 @@ typedef struct aspell_struct
     AspellSpeller *speller;
 } spell_t;
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 static GModule *spell_module = NULL;

@@ -68,6 +68,8 @@ enum config_var_type
     FILENAME
 };
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 /* *INDENT-OFF* */

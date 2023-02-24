@@ -168,6 +168,8 @@ enum
  * the cursor. */
 #define SHELL_CURSOR_KEYBINDING "+"
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 /* tcsh closes all non-standard file descriptors, so we have to use a pipe */

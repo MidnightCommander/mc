@@ -95,6 +95,8 @@ struct vfs_openfile
     void *fsinfo;
 };
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 /** They keep track of the current directory */

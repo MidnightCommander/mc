@@ -38,6 +38,8 @@
 
 /*** file scope type declarations ****************************************************************/
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 /* --------------------------------------------------------------------------------------------- */
@@ -58,7 +60,6 @@ gboolean
 mc_event_add (const gchar * event_group_name, const gchar * event_name,
               mc_event_callback_func_t event_callback, gpointer event_init_data, GError ** mcerror)
 {
-
     GTree *event_group;
     GPtrArray *callbacks;
     mc_event_callback_t *cb;

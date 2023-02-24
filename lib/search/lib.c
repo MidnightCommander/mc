@@ -41,17 +41,21 @@
 
 /*** global variables ****************************************************************************/
 
+/* *INDENT-OFF* */
 const char *STR_E_NOTFOUND = N_("Search string not found");
 const char *STR_E_UNKNOWN_TYPE = N_("Not implemented yet");
 const char *STR_E_RPL_NOT_EQ_TO_FOUND =
-N_("Num of replace tokens not equal to num of found tokens");
+            N_("Num of replace tokens not equal to num of found tokens");
 const char *STR_E_RPL_INVALID_TOKEN = N_("Invalid token number %d");
+/* *INDENT-ON* */
 
 /*** file scope macro definitions ****************************************************************/
 
 /*** file scope type declarations ****************************************************************/
 
 typedef gboolean (*case_conv_fn) (const char *ch, char **out, size_t * remain);
+
+/*** forward declarations (file scope functions) *************************************************/
 
 /*** file scope variables ************************************************************************/
 

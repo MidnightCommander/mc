@@ -57,6 +57,12 @@ typedef enum
     FORMAT_LS
 } output_format_t;
 
+/*** forward declarations (file scope functions) *************************************************/
+
+static gboolean
+parse_format_name_argument (const gchar * option_name, const gchar * value, gpointer data,
+                            GError ** error);
+
 /*** file scope variables ************************************************************************/
 
 /* Command-line options. */
@@ -67,11 +73,6 @@ static output_format_t opt_output_format = FORMAT_LS;
 
 /* Misc. */
 static int error_count = 0;
-
-/* forward declarations */
-static gboolean
-parse_format_name_argument (const gchar * option_name, const gchar * value, gpointer data,
-                            GError ** error);
 
 static GOptionEntry entries[] = {
     {"drop-mtime", 0, 0, G_OPTION_ARG_NONE, &opt_drop_mtime, "Don't include mtime in the output.",
@@ -86,6 +87,7 @@ static GOptionEntry entries[] = {
     G_OPTION_ENTRY_NULL
 };
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 /**

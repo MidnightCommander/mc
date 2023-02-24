@@ -243,6 +243,8 @@ typedef struct
     enum archive_format type;   /* Type of the archive */
 } tar_super_t;
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 static struct vfs_s_subclass tarfs_subclass;

@@ -46,6 +46,8 @@ WDialog *filemanager = NULL;
 
 /*** file scope type declarations ****************************************************************/
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 /* List of dialogs: filemanagers, editors, viewers */
@@ -55,6 +57,7 @@ static GList *mc_current = NULL;
 /* Is there any dialogs that we have to run after returning to the manager from another dialog */
 static gboolean dialog_switch_pending = FALSE;
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 

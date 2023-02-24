@@ -90,6 +90,8 @@ typedef struct Link_Area
     const char *link_name;
 } Link_Area;
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 static char *fdata = NULL;      /* Pointer to the loaded data file */
@@ -113,8 +115,7 @@ static struct
 static GSList *link_area = NULL;
 static gboolean inside_link_area = FALSE;
 
-static cb_ret_t help_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data);
-
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 

@@ -87,6 +87,8 @@ struct WChattrBoxes
     int top;                    /* The first flag displayed */
 };
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 /* see /usr/include/ext2fs/ext2_fs.h

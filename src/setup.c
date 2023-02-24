@@ -222,6 +222,8 @@ GArray *macros_list;
 
 /*** file scope type declarations ****************************************************************/
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 static char *profile_name = NULL;       /* ${XDG_CONFIG_HOME}/mc/ini */

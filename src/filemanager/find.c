@@ -114,12 +114,14 @@ typedef struct
     gsize end;
 } find_match_location_t;
 
-/*** file scope variables ************************************************************************/
+/*** forward declarations (file scope functions) *************************************************/
 
 /* button callbacks */
 static int start_stop (WButton * button, int action);
 static int find_do_view_file (WButton * button, int action);
 static int find_do_edit_file (WButton * button, int action);
+
+/*** file scope variables ************************************************************************/
 
 /* Parsed ignore dirs */
 static char **find_ignore_dirs = NULL;

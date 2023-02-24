@@ -232,6 +232,16 @@ typedef struct
     gboolean append;
 } ftp_file_handler_t;
 
+/*** forward declarations (file scope functions) *************************************************/
+
+static char *ftpfs_get_current_directory (struct vfs_class *me, struct vfs_s_super *super);
+static int ftpfs_chdir_internal (struct vfs_class *me, struct vfs_s_super *super,
+                                 const char *remote_path);
+static int ftpfs_open_socket (struct vfs_class *me, struct vfs_s_super *super);
+static gboolean ftpfs_login_server (struct vfs_class *me, struct vfs_s_super *super,
+                                    const char *netrcpass);
+static gboolean ftpfs_netrc_lookup (const char *host, char **login, char **pass);
+
 /*** file scope variables ************************************************************************/
 
 static int code;
@@ -249,29 +259,6 @@ static const char *netrcp;
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
-/* --------------------------------------------------------------------------------------------- */
-
-/* char *ftpfs_translate_path (struct ftpfs_connection *bucket, char *remote_path)
-   Translate a Unix path, i.e. MC's internal path representation (e.g.
-   /somedir/somefile) to a path valid for the remote server. Every path
-   transferred to the remote server has to be mangled by this function
-   right prior to sending it.
-   Currently only Amiga ftp servers are handled in a special manner.
-
-   When the remote server is an amiga:
-   a) strip leading slash if necessary
-   b) replace first occurrence of ":/" with ":"
-   c) strip trailing "/."
- */
-
-static char *ftpfs_get_current_directory (struct vfs_class *me, struct vfs_s_super *super);
-static int ftpfs_chdir_internal (struct vfs_class *me, struct vfs_s_super *super,
-                                 const char *remote_path);
-static int ftpfs_open_socket (struct vfs_class *me, struct vfs_s_super *super);
-static gboolean ftpfs_login_server (struct vfs_class *me, struct vfs_s_super *super,
-                                    const char *netrcpass);
-static gboolean ftpfs_netrc_lookup (const char *host, char **login, char **pass);
-
 /* --------------------------------------------------------------------------------------------- */
 
 static void
@@ -299,6 +286,17 @@ ftpfs_default_stat (struct vfs_class *me)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* Translate a Unix path, i.e. MC's internal path representation (e.g.
+   /somedir/somefile) to a path valid for the remote server. Every path
+   transferred to the remote server has to be mangled by this function
+   right prior to sending it.
+   Currently only Amiga ftp servers are handled in a special manner.
+
+   When the remote server is an amiga:
+   a) strip leading slash if necessary
+   b) replace first occurrence of ":/" with ":"
+   c) strip trailing "/."
+ */
 static char *
 ftpfs_translate_path (struct vfs_class *me, struct vfs_s_super *super, const char *remote_path)
 {

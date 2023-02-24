@@ -47,6 +47,8 @@
 
 /*** file scope type declarations ****************************************************************/
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 static const mc_search_type_str_t mc_search__list_types[] = {
@@ -57,7 +59,9 @@ static const mc_search_type_str_t mc_search__list_types[] = {
     {NULL, MC_SEARCH_T_INVALID}
 };
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 static mc_search_cond_t *
 mc_search__cond_struct_new (mc_search_t * lc_mc_search, const GString * str, const char *charset)

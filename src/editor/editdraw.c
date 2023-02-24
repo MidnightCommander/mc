@@ -91,6 +91,8 @@ typedef struct
     unsigned int style;
 } line_s;
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 /*** file scope functions ************************************************************************/

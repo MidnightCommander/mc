@@ -87,6 +87,11 @@ typedef struct
     input_complete_t flags;
 } try_complete_automation_state_t;
 
+/*** forward declarations (file scope functions) *************************************************/
+
+char **try_complete (char *text, int *lc_start, int *lc_end, input_complete_t flags);
+void complete_engine_fill_completions (WInput * in);
+
 /*** file scope variables ************************************************************************/
 
 static char **hosts = NULL;
@@ -99,11 +104,9 @@ static int min_end;
 static int start = 0;
 static int end = 0;
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
-
-char **try_complete (char *text, int *lc_start, int *lc_end, input_complete_t flags);
-void complete_engine_fill_completions (WInput * in);
 
 #ifdef DO_COMPLETION_DEBUG
 /**

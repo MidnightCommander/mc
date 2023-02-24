@@ -83,6 +83,8 @@ struct listmode_label
     char *text;
 };
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 static WListbox *l_listmode;
@@ -104,6 +106,7 @@ static char *s_itemwidth[3] = { "Free width", "Fixed width", "Growable width" };
 
 static WRadio *radio_itemwidth;
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 

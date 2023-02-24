@@ -91,6 +91,8 @@ gboolean option_drop_selection_on_copy = TRUE;
 
 /*** file scope type declarations ****************************************************************/
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 static unsigned long edit_save_mode_radio_id, edit_save_mode_input_id;

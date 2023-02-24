@@ -100,6 +100,8 @@ struct vfs_stamping
     gint64 time;
 };
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 static GSList *stamps = NULL;

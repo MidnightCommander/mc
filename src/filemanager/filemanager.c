@@ -124,11 +124,15 @@ const char *mc_prompt = NULL;
 
 /*** file scope type declarations ****************************************************************/
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 static menu_t *left_menu, *right_menu;
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 /** Stop MC main dialog and the current dialog if it exists.
   * Needed to provide fast exit from MC viewer or editor on shell exit */

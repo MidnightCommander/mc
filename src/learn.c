@@ -65,6 +65,8 @@ typedef struct
     char *sequence;
 } learnkey_t;
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 static WDialog *learn_dlg;
@@ -75,6 +77,7 @@ static int learn_total;
 static int learnok;
 static gboolean learnchanged = FALSE;
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 

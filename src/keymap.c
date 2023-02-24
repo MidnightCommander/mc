@@ -93,6 +93,8 @@ typedef struct global_keymap_ini_t
     const char *value;
 } global_keymap_ini_t;
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 /* midnight */
@@ -617,12 +619,6 @@ static const global_keymap_ini_t default_diff_keymap[] = {
     {NULL, NULL}
 };
 #endif
-
-/*** file scope macro definitions ****************************************************************/
-
-/*** file scope type declarations ****************************************************************/
-
-/*** file scope variables ************************************************************************/
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/

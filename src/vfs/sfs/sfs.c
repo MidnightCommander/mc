@@ -102,6 +102,8 @@ typedef struct cachedfile
     char *cache;
 } cachedfile;
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 static GSList *head = NULL;
@@ -117,7 +119,9 @@ static struct
     sfs_flags_t flags;
 } sfs_info[MAXFS];
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 cachedfile_compare (const void *a, const void *b)

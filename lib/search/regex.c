@@ -57,10 +57,13 @@ typedef enum
     REPLACE_T_LOW_TRANSFORM = 8
 } replace_transform_type_t;
 
+/*** forward declarations (file scope functions) *************************************************/
 
 /*** file scope variables ************************************************************************/
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 static gboolean
 mc_search__regex_str_append_if_special (GString * copy_to, const GString * regex_str,

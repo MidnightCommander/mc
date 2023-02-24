@@ -178,6 +178,8 @@ static const char *prompt_parts[] = {
     N_(" with source mask:")
 };
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 /* the hard link cache */

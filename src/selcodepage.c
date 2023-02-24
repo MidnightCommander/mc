@@ -50,11 +50,13 @@
 
 /*** file scope type declarations ****************************************************************/
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
-
 
 static unsigned char
 get_hotkey (int n)
@@ -133,8 +135,8 @@ select_charset (int center_y, int center_x, int current_charset, gboolean seldis
     }
 }
 
-
 /* --------------------------------------------------------------------------------------------- */
+
 /** Set codepage */
 gboolean
 do_set_codepage (int codepage)
@@ -158,8 +160,8 @@ do_set_codepage (int codepage)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** Show menu selecting codepage */
 
+/** Show menu selecting codepage */
 gboolean
 do_select_codepage (void)
 {

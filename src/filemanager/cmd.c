@@ -113,6 +113,8 @@ enum CompareMode
     compare_thourough
 };
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 #ifdef ENABLE_VFS_NET

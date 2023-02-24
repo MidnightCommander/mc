@@ -45,6 +45,8 @@
 
 /*** file scope type declarations ****************************************************************/
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 static struct vfs_s_subclass local_subclass;
@@ -52,15 +54,6 @@ static struct vfs_class *vfs_local_ops = VFS_CLASS (&local_subclass);
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
-/* --------------------------------------------------------------------------------------------- */
-
-/**
- * Note: Some of this functions are not static. This has rather good
- * reason: exactly same functions would have to appear in sfs.c. This
- * saves both computer's memory and my work.  <pavel@ucw.cz>
- */
-
-
 /* --------------------------------------------------------------------------------------------- */
 
 static void *

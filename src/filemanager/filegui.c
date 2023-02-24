@@ -237,6 +237,8 @@ typedef struct
     struct stat *src_stat, *dst_stat;
 } file_op_context_ui_t;
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 static struct
