@@ -36,6 +36,7 @@
 #include "lib/charsets.h"
 #endif
 #include "lib/strutil.h"
+#include "lib/util.h"           /* MC_PTR_FREE() */
 #include "lib/tty/tty.h"        /* COLS, LINES */
 
 #include "src/setup.h"
