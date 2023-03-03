@@ -205,6 +205,7 @@ context default
     keyword whole srand yellow
     keyword whole open yellow
     keyword whole print yellow
+    keyword whole puts yellow
     keyword whole printf yellow
     keyword whole sprintf yellow
     keyword whole exec yellow
