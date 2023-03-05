@@ -1270,6 +1270,7 @@ do_search (WDialog * h)
     static struct vfs_dirent *dp = NULL;
     static DIR *dirp = NULL;
     static char *directory = NULL;
+    static gboolean pop_start_dir = TRUE;
     struct stat tmp_stat;
     gsize bytes_found;
     unsigned short count;
@@ -1283,6 +1284,7 @@ do_search (WDialog * h)
         }
         MC_PTR_FREE (directory);
         dp = NULL;
+        pop_start_dir = TRUE;
         return 1;
     }
 
@@ -1325,6 +1327,16 @@ do_search (WDialog * h)
                         stop_idle (h);
                         return 0;
                     }
+
+                    /* The start directory is the first one in the stack (see do_find() below).
+                       Do not apply ignore_dir to it. */
+                    if (pop_start_dir)
+                    {
+                        pop_start_dir = FALSE;
+                        break;
+                    }
+
+                    pop_start_dir = FALSE;
 
                     /* handle absolute ignore dirs here */
                     {
