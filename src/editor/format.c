@@ -50,18 +50,12 @@
 #include "lib/global.h"
 #include "lib/util.h"           /* whitespace() */
 
-#include "src/setup.h"          /* option_tab_spacing */
-
 #include "edit-impl.h"
 #include "editwidget.h"
 
 /*** global variables ****************************************************************************/
 
-char *option_stop_format_chars = NULL;
-
 /*** file scope macro definitions ****************************************************************/
-
-#define tab_width option_tab_spacing
 
 #define FONT_MEAN_WIDTH 1
 
@@ -116,7 +110,8 @@ bad_line_start (const edit_buffer_t * buf, off_t p)
                  && edit_buffer_get_byte (buf, p + 2) == '-');
     }
 
-    return (option_stop_format_chars != NULL && strchr (option_stop_format_chars, c) != NULL);
+    return (edit_options.stop_format_chars != NULL
+            && strchr (edit_options.stop_format_chars, c) != NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -213,7 +208,7 @@ strip_newlines (unsigned char *t, off_t size)
 static inline off_t
 next_tab_pos (off_t x)
 {
-    x += tab_width - x % tab_width;
+    x += TAB_SIZE - x % TAB_SIZE;
     return x;
 }
 
@@ -334,7 +329,7 @@ format_this (unsigned char *t, off_t size, long indent, gboolean utf8)
     off_t q = 0, ww;
 
     strip_newlines (t, size);
-    ww = option_word_wrap_line_length * FONT_MEAN_WIDTH - indent;
+    ww = edit_options.word_wrap_line_length * FONT_MEAN_WIDTH - indent;
     if (ww < FONT_MEAN_WIDTH * 2)
         ww = FONT_MEAN_WIDTH * 2;
 
@@ -391,7 +386,7 @@ edit_indent_width (const WEdit * edit, off_t p)
 static void
 edit_insert_indent (WEdit * edit, long indent)
 {
-    if (!option_fill_tabs_with_spaces)
+    if (!edit_options.fill_tabs_with_spaces)
         while (indent >= TAB_SIZE)
         {
             edit_insert (edit, '\t');
@@ -489,7 +484,7 @@ format_paragraph (WEdit * edit, gboolean force)
     unsigned char *t2;
     gboolean utf8 = FALSE;
 
-    if (option_word_wrap_line_length < 2)
+    if (edit_options.word_wrap_line_length < 2)
         return;
     if (edit_line_is_blank (edit, edit->buffer.curs_line))
         return;
@@ -506,17 +501,17 @@ format_paragraph (WEdit * edit, gboolean force)
         off_t i;
         char *stop_format_chars;
 
-        if (option_stop_format_chars != NULL
-            && strchr (option_stop_format_chars, t->str[0]) != NULL)
+        if (edit_options.stop_format_chars != NULL
+            && strchr (edit_options.stop_format_chars, t->str[0]) != NULL)
         {
             g_string_free (t, TRUE);
             return;
         }
 
-        if (option_stop_format_chars == NULL || *option_stop_format_chars == '\0')
+        if (edit_options.stop_format_chars == NULL || *edit_options.stop_format_chars == '\0')
             stop_format_chars = g_strdup ("\t");
         else
-            stop_format_chars = g_strconcat (option_stop_format_chars, "\t", (char *) NULL);
+            stop_format_chars = g_strconcat (edit_options.stop_format_chars, "\t", (char *) NULL);
 
         for (i = 0; i < size - 1; i++)
             if (t->str[i] == '\n' && strchr (stop_format_chars, t->str[i + 1]) != NULL)

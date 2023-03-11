@@ -61,7 +61,6 @@
 
 #include "src/history.h"
 #include "src/file_history.h"   /* show_file_history() */
-#include "src/setup.h"          /* option_tab_spacing */
 #ifdef HAVE_CHARSET
 #include "src/selcodepage.h"
 #endif
@@ -76,12 +75,6 @@
 
 /* search and replace: */
 int search_create_bookmark = FALSE;
-
-/* queries on a save */
-gboolean edit_confirm_save = TRUE;
-
-/* whether we need to drop selection on copy to buffer */
-gboolean option_drop_selection_on_copy = TRUE;
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -160,7 +153,7 @@ edit_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
     else
         real_filename_vpath = vfs_path_clone (filename_vpath);
 
-    this_save_mode = option_save_mode;
+    this_save_mode = edit_options.save_mode;
     if (this_save_mode != EDIT_QUICK_SAVE)
     {
         if (!vfs_file_is_local (real_filename_vpath))
@@ -339,13 +332,14 @@ edit_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
         vfs_path_t *tmp_vpath;
         gboolean ok;
 
-        g_assert (option_backup_ext != NULL);
+        g_assert (edit_options.backup_ext != NULL);
 
         /* add backup extension to the path */
         tmp_vpath = vfs_path_clone (real_filename_vpath);
         last_vpath_element = (vfs_path_element_t *) vfs_path_get_by_index (tmp_vpath, -1);
         tmp_store_filename = last_vpath_element->path;
-        last_vpath_element->path = g_strdup_printf ("%s%s", tmp_store_filename, option_backup_ext);
+        last_vpath_element->path =
+            g_strdup_printf ("%s%s", tmp_store_filename, edit_options.backup_ext);
         g_free (tmp_store_filename);
 
         ok = (mc_rename (real_filename_vpath, tmp_vpath) != -1);
@@ -375,7 +369,7 @@ edit_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
 static gboolean
 edit_check_newline (const edit_buffer_t * buf)
 {
-    return !(option_check_nl_at_eof && buf->size > 0
+    return !(edit_options.check_nl_at_eof && buf->size > 0
              && edit_buffer_get_byte (buf, buf->size - 1) != '\n'
              && edit_query_dialog2 (_("Warning"),
                                     _("The file you are saving does not end with a newline."),
@@ -520,7 +514,7 @@ edit_block_delete (WEdit * edit)
         edit_mark_cmd (edit, FALSE);
 
     /* Warning message with a query to continue or cancel the operation */
-    if ((end_mark - start_mark) > option_max_undo / 2 &&
+    if ((end_mark - start_mark) > max_undo / 2 &&
         edit_query_dialog2 (_("Warning"),
                             ("Block is large, you may not be able to undo this action"),
                             _("C&ontinue"), _("&Cancel")) != 0)
@@ -555,7 +549,7 @@ edit_block_delete (WEdit * edit)
             /* calculate line width and cursor position before cut */
             line_width = edit_move_forward3 (edit, edit_buffer_get_current_bol (&edit->buffer), 0,
                                              edit_buffer_get_current_eol (&edit->buffer));
-            if (option_cursor_beyond_eol && curs_pos > line_width)
+            if (edit_options.cursor_beyond_eol && curs_pos > line_width)
                 edit->over_col = curs_pos - line_width;
         }
         else
@@ -738,7 +732,7 @@ edit_syntax_onoff_cb (void *data, void *user_data)
     {
         WEdit *edit = EDIT (data);
 
-        if (option_syntax_highlighting)
+        if (edit_options.syntax_highlighting)
             edit_load_syntax (edit, NULL, edit->syntax_type);
         edit->force |= REDRAW_PAGE;
     }
@@ -785,7 +779,7 @@ edit_refresh_cmd (void)
 void
 edit_syntax_onoff_cmd (WDialog * h)
 {
-    option_syntax_highlighting = !option_syntax_highlighting;
+    edit_options.syntax_highlighting = !edit_options.syntax_highlighting;
     g_list_foreach (GROUP (h)->widgets, edit_syntax_onoff_cb, NULL);
     widget_draw (WIDGET (h));
 }
@@ -814,7 +808,7 @@ edit_show_tabs_tws_cmd (WDialog * h)
 void
 edit_show_margin_cmd (WDialog * h)
 {
-    show_right_margin = !show_right_margin;
+    edit_options.show_right_margin = !edit_options.show_right_margin;
     widget_draw (WIDGET (h));
 }
 
@@ -828,8 +822,8 @@ edit_show_margin_cmd (WDialog * h)
 void
 edit_show_numbers_cmd (WDialog * h)
 {
-    option_line_state = !option_line_state;
-    option_line_state_width = option_line_state ? LINE_STATE_WIDTH : 0;
+    edit_options.line_state = !edit_options.line_state;
+    edit_options.line_state_width = edit_options.line_state ? LINE_STATE_WIDTH : 0;
     widget_draw (WIDGET (h));
 }
 
@@ -853,16 +847,16 @@ edit_save_mode_cmd (void)
         str[i] = _(str[i]);
 #endif
 
-    g_assert (option_backup_ext != NULL);
+    g_assert (edit_options.backup_ext != NULL);
 
     {
         quick_widget_t quick_widgets[] = {
             /* *INDENT-OFF* */
-            QUICK_RADIO (3, str, &option_save_mode, &edit_save_mode_radio_id),
-            QUICK_INPUT (option_backup_ext, "edit-backup-ext", &str_result,
+            QUICK_RADIO (3, str, &edit_options.save_mode, &edit_save_mode_radio_id),
+            QUICK_INPUT (edit_options.backup_ext, "edit-backup-ext", &str_result,
                          &edit_save_mode_input_id, FALSE, FALSE, INPUT_COMPLETE_NONE),
             QUICK_SEPARATOR (TRUE),
-            QUICK_CHECKBOX (N_("Check &POSIX new line"), &option_check_nl_at_eof, NULL),
+            QUICK_CHECKBOX (N_("Check &POSIX new line"), &edit_options.check_nl_at_eof, NULL),
             QUICK_BUTTONS_OK_CANCEL,
             QUICK_END
             /* *INDENT-ON* */
@@ -877,8 +871,8 @@ edit_save_mode_cmd (void)
 
         if (quick_dialog (&qdlg) != B_CANCEL)
         {
-            g_free (option_backup_ext);
-            option_backup_ext = str_result;
+            g_free (edit_options.backup_ext);
+            edit_options.backup_ext = str_result;
         }
     }
 }
@@ -1013,7 +1007,7 @@ edit_save_confirm_cmd (WEdit * edit)
     if (!edit_check_newline (&edit->buffer))
         return FALSE;
 
-    if (edit_confirm_save)
+    if (edit_options.confirm_save)
     {
         char *f;
         gboolean ok;
@@ -1364,7 +1358,7 @@ edit_block_copy_cmd (WEdit * edit)
             edit_insert_ahead (edit, copy_buf[size]);
 
         /* Place cursor at the end of text selection */
-        if (option_cursor_after_inserted_block)
+        if (edit_options.cursor_after_inserted_block)
             edit_cursor_move (edit, size_orig);
     }
 
@@ -1441,7 +1435,7 @@ edit_block_move_cmd (WEdit * edit)
         edit_scroll_screen_over_cursor (edit);
 
         /* add TWS if need before block insertion */
-        if (option_cursor_beyond_eol && edit->over_col > 0)
+        if (edit_options.cursor_beyond_eol && edit->over_col > 0)
             edit_insert_over (edit);
 
         edit_insert_column_of_text (edit, copy_buf, size, b_width, &mark1, &mark2, &c1, &c2);
@@ -1472,7 +1466,7 @@ edit_block_move_cmd (WEdit * edit)
                           0);
 
         /* Place cursor at the end of text selection */
-        if (option_cursor_after_inserted_block)
+        if (edit_options.cursor_after_inserted_block)
             edit_cursor_move (edit, count_orig - start_mark);
     }
 
@@ -1651,7 +1645,7 @@ edit_copy_to_X_buf_cmd (WEdit * edit)
     /* try use external clipboard utility */
     mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_to_ext_clip", NULL);
 
-    if (option_drop_selection_on_copy)
+    if (edit_options.drop_selection_on_copy)
         edit_mark_cmd (edit, TRUE);
 
     return TRUE;

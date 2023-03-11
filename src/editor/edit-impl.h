@@ -17,6 +17,8 @@
 #include "lib/widget.h"         /* cb_ret_t */
 #include "lib/vfs/vfs.h"        /* vfs_path_t */
 
+#include "src/setup.h"          /* option_tab_spacing */
+
 #include "edit.h"
 
 /*** typedefs(not structures) and defined constants **********************************************/
@@ -124,10 +126,8 @@ extern edit_search_options_t edit_search_options;
 extern unsigned int edit_stack_iterator;
 extern edit_stack_type edit_history_moveto[MAX_HISTORY_MOVETO];
 
-extern int option_line_state_width;
-
-extern int option_max_undo;
-extern gboolean option_auto_syntax;
+extern int max_undo;
+extern gboolean auto_syntax;
 
 extern gboolean search_create_bookmark;
 

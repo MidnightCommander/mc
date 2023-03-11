@@ -67,8 +67,7 @@
 
 /*** global variables ****************************************************************************/
 
-gboolean option_syntax_highlighting = TRUE;
-gboolean option_auto_syntax = TRUE;
+gboolean auto_syntax = TRUE;
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -1453,7 +1452,7 @@ edit_get_syntax_color (WEdit * edit, off_t byte_index)
     if (!tty_use_colors ())
         return 0;
 
-    if (edit->rules != NULL && byte_index < edit->buffer.size && option_syntax_highlighting)
+    if (edit_options.syntax_highlighting && edit->rules != NULL && byte_index < edit->buffer.size)
     {
         edit_get_rule (edit, byte_index);
         return translate_rule_to_color (edit, &edit->rule);
@@ -1498,7 +1497,7 @@ edit_load_syntax (WEdit * edit, GPtrArray * pnames, const char *type)
     int r;
     char *f = NULL;
 
-    if (option_auto_syntax)
+    if (auto_syntax)
         type = NULL;
 
     if (edit != NULL)
@@ -1513,7 +1512,7 @@ edit_load_syntax (WEdit * edit, GPtrArray * pnames, const char *type)
     if (!tty_use_colors ())
         return;
 
-    if (!option_syntax_highlighting && (pnames == NULL || pnames->len == 0))
+    if (!edit_options.syntax_highlighting && (pnames == NULL || pnames->len == 0))
         return;
 
     if (edit != NULL && edit->filename_vpath == NULL)
@@ -1523,7 +1522,7 @@ edit_load_syntax (WEdit * edit, GPtrArray * pnames, const char *type)
     if (edit != NULL)
         r = edit_read_syntax_file (edit, pnames, f, vfs_path_as_str (edit->filename_vpath),
                                    get_first_editor_line (edit),
-                                   option_auto_syntax ? NULL : edit->syntax_type);
+                                   auto_syntax ? NULL : edit->syntax_type);
     else
         r = edit_read_syntax_file (NULL, pnames, f, NULL, "", NULL);
     if (r == -1)
@@ -1576,24 +1575,24 @@ edit_syntax_dialog (WEdit * edit)
         gboolean old_auto_syntax;
 
         current_syntax = g_strdup (edit->syntax_type);
-        old_auto_syntax = option_auto_syntax;
+        old_auto_syntax = auto_syntax;
 
         switch (syntax)
         {
         case 0:                /* auto syntax */
-            option_auto_syntax = TRUE;
+            auto_syntax = TRUE;
             break;
         case 1:                /* reload current syntax */
             force_reload = TRUE;
             break;
         default:
-            option_auto_syntax = FALSE;
+            auto_syntax = FALSE;
             g_free (edit->syntax_type);
             edit->syntax_type = g_strdup (g_ptr_array_index (names, syntax - N_DFLT_ENTRIES));
         }
 
         /* Load or unload syntax rules if the option has changed */
-        if (force_reload || (option_auto_syntax && !old_auto_syntax) || old_auto_syntax ||
+        if (force_reload || (auto_syntax && !old_auto_syntax) || old_auto_syntax ||
             (current_syntax != NULL && edit->syntax_type != NULL &&
              strcmp (current_syntax, edit->syntax_type) != 0))
             edit_load_syntax (edit, NULL, edit->syntax_type);

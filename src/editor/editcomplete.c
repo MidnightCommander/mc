@@ -363,13 +363,13 @@ edit_completion_dialog_show (const WEdit * edit, GQueue * compl, int max_width)
     compl_dlg_h = g_queue_get_length (compl) + 2;
     compl_dlg_w = max_width + 4;
     start_x = we->x + edit->curs_col + edit->start_col + EDIT_TEXT_HORIZONTAL_OFFSET +
-        (edit->fullscreen ? 0 : 1) + option_line_state_width;
+        (edit->fullscreen ? 0 : 1) + edit_options.line_state_width;
     start_y = we->y + edit->curs_row + EDIT_TEXT_VERTICAL_OFFSET + (edit->fullscreen ? 0 : 1) + 1;
 
     if (start_x < 0)
         start_x = 0;
     if (start_x < we->x + 1)
-        start_x = we->x + 1 + option_line_state_width;
+        start_x = we->x + 1 + edit_options.line_state_width;
     if (compl_dlg_w > COLS)
         compl_dlg_w = COLS;
     if (compl_dlg_h > LINES - 2)

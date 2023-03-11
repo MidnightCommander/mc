@@ -53,18 +53,10 @@
 #include "lib/charsets.h"
 #endif
 
-#include "src/setup.h"          /* edit_tab_spacing */
-
 #include "edit-impl.h"
 #include "editwidget.h"
 
 /*** global variables ****************************************************************************/
-
-/* Toggles statusbar draw style */
-gboolean simple_statusbar = FALSE;
-
-gboolean visible_tws = TRUE;
-gboolean visible_tabs = TRUE;
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -145,7 +137,7 @@ status_string (WEdit * edit, char *s, int w)
     }
 
     /* The field lengths just prevent the status line from shortening too much */
-    if (simple_statusbar)
+    if (edit_options.simple_statusbar)
         g_snprintf (s, w,
                     "%c%c%c%c %3ld %5ld/%ld %6ld/%ld %s %s",
                     edit->mark1 != edit->mark2 ? (edit->column_highlight ? 'C' : 'B') : '-',
@@ -210,7 +202,7 @@ edit_status_fullscreen (WEdit * edit, int color)
     {
         fname = vfs_path_get_last_path_str (edit->filename_vpath);
 
-        if (!option_state_full_filename)
+        if (!edit_options.state_full_filename)
             fname = x_basename (fname);
     }
 
@@ -232,7 +224,7 @@ edit_status_fullscreen (WEdit * edit, int color)
     printwstr (fname, fname_len + gap);
     printwstr (status, w - (fname_len + gap));
 
-    if (simple_statusbar && w > EDITOR_MINIMUM_TERMINAL_WIDTH)
+    if (edit_options.simple_statusbar && w > EDITOR_MINIMUM_TERMINAL_WIDTH)
     {
         int percent;
 
@@ -268,7 +260,7 @@ edit_status_window (WEdit * edit)
         {
             fname = vfs_path_get_last_path_str (edit->filename_vpath);
 
-            if (!option_state_full_filename)
+            if (!edit_options.state_full_filename)
                 fname = x_basename (fname);
         }
 #ifdef ENABLE_NLS
@@ -397,7 +389,7 @@ print_to_widget (WEdit * edit, long row, int start_col, int start_col_real,
     int len;
 
     x = start_col_real;
-    x1 = start_col + EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
+    x1 = start_col + EDIT_TEXT_HORIZONTAL_OFFSET + edit_options.line_state_width;
     y = row + EDIT_TEXT_VERTICAL_OFFSET;
     cols_to_skip = abs (x);
 
@@ -412,11 +404,11 @@ print_to_widget (WEdit * edit, long row, int start_col, int start_col_real,
         tty_setcolor (bookmarked);
 
     len = end_col + 1 - start_col;
-    wrap_start = option_word_wrap_line_length + edit->start_col;
+    wrap_start = edit_options.word_wrap_line_length + edit->start_col;
 
     if (len > 0 && w->rect.y + y >= 0)
     {
-        if (!show_right_margin || wrap_start > end_col)
+        if (!edit_options.show_right_margin || wrap_start > end_col)
             tty_draw_hline (w->rect.y + y, w->rect.x + x1, ' ', len);
         else if (wrap_start < 0)
         {
@@ -437,13 +429,13 @@ print_to_widget (WEdit * edit, long row, int start_col, int start_col_real,
         }
     }
 
-    if (option_line_state)
+    if (edit_options.line_state)
     {
         tty_setcolor (LINE_STATE_COLOR);
 
         for (i = 0; i < LINE_STATE_WIDTH; i++)
         {
-            edit_move (x1 + i - option_line_state_width, y);
+            edit_move (x1 + i - edit_options.line_state_width, y);
             if (status[i] == '\0')
                 status[i] = ' ';
             tty_print_char (status[i]);
@@ -487,9 +479,9 @@ print_to_widget (WEdit * edit, long row, int start_col, int start_col_real,
         else
             tty_lowlevel_setcolor (color);
 
-        if (show_right_margin)
+        if (edit_options.show_right_margin)
         {
-            if (i > option_word_wrap_line_length + edit->start_col)
+            if (i > edit_options.word_wrap_line_length + edit->start_col)
                 tty_setcolor (EDITOR_RIGHT_MARGIN_COLOR);
             i++;
         }
@@ -526,7 +518,7 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
     else
         abn_style = MOD_ABNORMAL;
 
-    end_col -= EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
+    end_col -= EDIT_TEXT_HORIZONTAL_OFFSET + edit_options.line_state_width;
     if (!edit->fullscreen)
     {
         end_col--;
@@ -538,7 +530,7 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
     col = (int) edit_move_forward3 (edit, b, 0, q);
     start_col_real = col + edit->start_col;
 
-    if (option_line_state)
+    if (edit_options.line_state)
     {
         long cur_line;
 
@@ -567,7 +559,7 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
         {
             off_t tws = 0;
 
-            if (tty_use_colors () && visible_tws)
+            if (edit_options.visible_tws && tty_use_colors ())
                 for (tws = edit_buffer_get_eol (&edit->buffer, b); tws > b; tws--)
                 {
                     unsigned int c;
@@ -645,8 +637,8 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
                         if (tab_over < 0)
                             i += tab_over;
                         col += i;
-                        if (tty_use_colors () && (visible_tabs || (visible_tws && q >= tws))
-                            && enable_show_tabs_tws)
+                        if ((edit_options.visible_tabs || (edit_options.visible_tws && q >= tws))
+                            && enable_show_tabs_tws && tty_use_colors ())
                         {
                             if ((p->style & MOD_MARKED) != 0)
                                 c = p->style;
@@ -685,8 +677,8 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
                                 p++;
                             }
                         }
-                        else if (tty_use_colors () && visible_tws && q >= tws
-                                 && enable_show_tabs_tws)
+                        else if (edit_options.visible_tws && q >= tws && enable_show_tabs_tws
+                                 && tty_use_colors ())
                         {
                             p->ch = '.';
                             p->style |= MOD_WHITESPACE;
@@ -715,7 +707,8 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
                     break;
 
                 case ' ':
-                    if (tty_use_colors () && visible_tws && q >= tws && enable_show_tabs_tws)
+                    if (edit_options.visible_tws && q >= tws && enable_show_tabs_tws
+                        && tty_use_colors ())
                     {
                         p->ch = '.';
                         p->style |= MOD_WHITESPACE;
@@ -1062,7 +1055,7 @@ edit_scroll_screen_over_cursor (WEdit * edit)
         return;
 
     rect_resize (w, -EDIT_TEXT_VERTICAL_OFFSET,
-                 -(EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width));
+                 -(EDIT_TEXT_HORIZONTAL_OFFSET + edit_options.line_state_width));
 
     if (!edit->fullscreen)
         rect_grow (w, -1, -1);
@@ -1114,7 +1107,7 @@ edit_scroll_screen_over_cursor (WEdit * edit)
     edit_update_curs_row (edit);
 
     rect_resize (w, EDIT_TEXT_VERTICAL_OFFSET,
-                 EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width);
+                 EDIT_TEXT_HORIZONTAL_OFFSET + edit_options.line_state_width);
     if (!edit->fullscreen)
         rect_grow (w, 1, 1);
 }

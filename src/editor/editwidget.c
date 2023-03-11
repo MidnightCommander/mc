@@ -711,8 +711,8 @@ edit_update_cursor (WEdit * edit, const mouse_event_t * event)
     if (event->msg == MSG_MOUSE_DOWN || event->msg == MSG_MOUSE_UP)
         edit_push_key_press (edit);
 
-    if (!option_cursor_beyond_eol)
-        edit->prev_col = x - edit->start_col - option_line_state_width;
+    if (!edit_options.cursor_beyond_eol)
+        edit->prev_col = x - edit->start_col - edit_options.line_state_width;
     else
     {
         long line_len;
@@ -723,13 +723,13 @@ edit_update_cursor (WEdit * edit, const mouse_event_t * event)
 
         if (x > line_len - 1)
         {
-            edit->over_col = x - line_len - edit->start_col - option_line_state_width;
+            edit->over_col = x - line_len - edit->start_col - edit_options.line_state_width;
             edit->prev_col = line_len;
         }
         else
         {
             edit->over_col = 0;
-            edit->prev_col = x - option_line_state_width - edit->start_col;
+            edit->prev_col = x - edit_options.line_state_width - edit->start_col;
         }
     }
 
@@ -983,8 +983,8 @@ edit_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
             int y, x;
 
             y = (e->fullscreen ? 0 : 1) + EDIT_TEXT_VERTICAL_OFFSET + e->curs_row;
-            x = (e->fullscreen ? 0 : 1) + EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width +
-                e->curs_col + e->start_col + e->over_col;
+            x = (e->fullscreen ? 0 : 1) + EDIT_TEXT_HORIZONTAL_OFFSET +
+                edit_options.line_state_width + e->curs_col + e->start_col + e->over_col;
 
             widget_gotoyx (w, y, x);
             return MSG_HANDLED;
