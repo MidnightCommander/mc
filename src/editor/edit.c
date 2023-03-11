@@ -1785,7 +1785,7 @@ user_menu (WEdit * edit, const char *menu_file, int selected_entry)
         edit_save_block (edit, block_file, start_mark, end_mark);
 
     /* run shell scripts from menu */
-    if (user_menu_cmd (edit, menu_file, selected_entry)
+    if (user_menu_cmd (CONST_WIDGET (edit), menu_file, selected_entry)
         && (mc_stat (block_file_vpath, &status) == 0) && (status.st_size != 0))
     {
         int rc = 0;
