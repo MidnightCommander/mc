@@ -89,7 +89,7 @@ edit_reset_over_col (void *data, void *user_data)
     (void) user_data;
 
     if (edit_widget_is_editor (CONST_WIDGET (data)))
-        ((WEdit *) data)->over_col = 0;
+        EDIT (data)->over_col = 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -108,7 +108,7 @@ edit_reload_syntax (void *data, void *user_data)
 
     if (edit_widget_is_editor (CONST_WIDGET (data)))
     {
-        WEdit *edit = (WEdit *) data;
+        WEdit *edit = EDIT (data);
 
         edit_load_syntax (edit, NULL, edit->syntax_type);
     }

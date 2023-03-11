@@ -20,6 +20,9 @@
 
 #define DEFAULT_WRAP_LINE_LENGTH 72
 
+#define EDIT(x) ((WEdit *)(x))
+#define CONST_EDIT(x) ((const WEdit *)(x))
+
 /*** enums ***************************************************************************************/
 
 /*** structures declarations (and typedefs of structures)*****************************************/

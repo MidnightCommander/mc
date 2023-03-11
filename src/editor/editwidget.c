@@ -326,7 +326,7 @@ edit_window_list (const WDialog * h)
     for (w = g->widgets; w != NULL; w = g_list_next (w))
         if (edit_widget_is_editor (CONST_WIDGET (w->data)))
         {
-            WEdit *e = (WEdit *) w->data;
+            WEdit *e = EDIT (w->data);
             char *fname;
 
             if (e->filename_vpath == NULL)
@@ -419,7 +419,7 @@ edit_dialog_command_execute (WDialog * h, long command)
     case CK_Close:
         /* if there are no opened files anymore, close MC editor */
         if (edit_widget_is_editor (CONST_WIDGET (g->current->data)) &&
-            edit_close_cmd ((WEdit *) g->current->data) && find_editor (h) == NULL)
+            edit_close_cmd (EDIT (g->current->data)) && find_editor (h) == NULL)
             dlg_stop (h);
         break;
     case CK_Help:
@@ -435,8 +435,8 @@ edit_dialog_command_execute (WDialog * h, long command)
         {
             Widget *w = WIDGET (g->current->data);
 
-            if (edit_widget_is_editor (w) && ((WEdit *) w)->drag_state != MCEDIT_DRAG_NONE)
-                edit_restore_size ((WEdit *) w);
+            if (edit_widget_is_editor (w) && EDIT (w)->drag_state != MCEDIT_DRAG_NONE)
+                edit_restore_size (EDIT (w));
             else if (command == CK_Quit)
                 dlg_stop (h);
         }
@@ -468,7 +468,7 @@ edit_dialog_command_execute (WDialog * h, long command)
     case CK_WindowMove:
     case CK_WindowResize:
         if (edit_widget_is_editor (CONST_WIDGET (g->current->data)))
-            edit_handle_move_resize ((WEdit *) g->current->data, command);
+            edit_handle_move_resize (EDIT (g->current->data), command);
         break;
     case CK_WindowList:
         edit_window_list (h);
@@ -632,7 +632,7 @@ edit_quit (WDialog * h)
     for (l = GROUP (h)->widgets; l != NULL; l = g_list_next (l))
         if (edit_widget_is_editor (CONST_WIDGET (l->data)))
         {
-            e = (WEdit *) l->data;
+            e = EDIT (l->data);
 
             if (e->drag_state != MCEDIT_DRAG_NONE)
             {
@@ -649,7 +649,7 @@ edit_quit (WDialog * h)
 
     for (me = m; me != NULL; me = g_slist_next (me))
     {
-        e = (WEdit *) me->data;
+        e = EDIT (me->data);
 
         widget_select (WIDGET (e));
 
@@ -881,8 +881,7 @@ edit_dialog_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 
             /* Try find top fullscreen window */
             for (l = g->widgets; l != NULL; l = g_list_next (l))
-                if (edit_widget_is_editor (CONST_WIDGET (l->data))
-                    && ((WEdit *) l->data)->fullscreen)
+                if (edit_widget_is_editor (CONST_WIDGET (l->data)) && EDIT (l->data)->fullscreen)
                     top = l;
 
             /* Handle fullscreen/close buttons in the top line */
@@ -890,7 +889,7 @@ edit_dialog_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 
             if (top != NULL && event->x >= x)
             {
-                WEdit *e = (WEdit *) top->data;
+                WEdit *e = EDIT (top->data);
 
                 if (top != g->current)
                 {
@@ -939,7 +938,7 @@ edit_dialog_bg_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm
 static cb_ret_t
 edit_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
-    WEdit *e = (WEdit *) w;
+    WEdit *e = EDIT (w);
 
     switch (msg)
     {
@@ -1012,7 +1011,7 @@ edit_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
 static void
 edit_mouse_handle_move_resize (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 {
-    WEdit *edit = (WEdit *) (w);
+    WEdit *edit = EDIT (w);
     WRect *r = &w->rect;
     const WRect *h = &CONST_WIDGET (w->owner)->rect;
     int global_x, global_y;
@@ -1072,7 +1071,7 @@ edit_mouse_handle_move_resize (Widget * w, mouse_msg_t msg, mouse_event_t * even
 static void
 edit_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 {
-    WEdit *edit = (WEdit *) w;
+    WEdit *edit = EDIT (w);
     /* buttons' distance from right edge */
     int dx = edit->fullscreen ? 0 : 2;
     /* location of 'Close' and 'Toggle fullscreen' pictograms */
@@ -1301,8 +1300,8 @@ find_editor (const WDialog * h)
     const WGroup *g = CONST_GROUP (h);
 
     if (edit_widget_is_editor (CONST_WIDGET (g->current->data)))
-        return (WEdit *) g->current->data;
-    return (WEdit *) widget_find_by_type (CONST_WIDGET (h), edit_callback);
+        return EDIT (g->current->data);
+    return EDIT (widget_find_by_type (CONST_WIDGET (h), edit_callback));
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -225,7 +225,7 @@ test_condition (const Widget * edit_widget, char *p, gboolean * condition)
     char arg[256];
     const mc_search_type_t search_type = easy_patterns ? MC_SEARCH_T_GLOB : MC_SEARCH_T_REGEX;
 #ifdef USE_INTERNAL_EDIT
-    const WEdit *e = (const WEdit *) edit_widget;
+    const WEdit *e = CONST_EDIT (edit_widget);
 #endif
 
     /* Handle one condition */
@@ -755,7 +755,7 @@ expand_format (const Widget * edit_widget, char c, gboolean do_quote)
     char c_lc;
 
 #ifdef USE_INTERNAL_EDIT
-    const WEdit *e = (const WEdit *) edit_widget;
+    const WEdit *e = CONST_EDIT (edit_widget);
 #else
     (void) edit_widget;
 #endif

@@ -280,7 +280,7 @@ edit_collect_completions (WEdit * edit, off_t word_start, gsize word_len,
             if (!edit_widget_is_editor (ww))
                 continue;
 
-            e = (WEdit *) ww;
+            e = EDIT (ww);
 
             if (e == edit)
                 continue;

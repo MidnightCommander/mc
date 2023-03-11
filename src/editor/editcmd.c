@@ -736,7 +736,7 @@ edit_syntax_onoff_cb (void *data, void *user_data)
 
     if (edit_widget_is_editor (CONST_WIDGET (data)))
     {
-        WEdit *edit = (WEdit *) data;
+        WEdit *edit = EDIT (data);
 
         if (option_syntax_highlighting)
             edit_load_syntax (edit, NULL, edit->syntax_type);
@@ -1247,7 +1247,7 @@ edit_close_cmd (WEdit * edit)
         widget_destroy (w);
 
         if (edit_widget_is_editor (CONST_WIDGET (g->current->data)))
-            edit = (WEdit *) (g->current->data);
+            edit = EDIT (g->current->data);
         else
         {
             edit = find_editor (DIALOG (g));
