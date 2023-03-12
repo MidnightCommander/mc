@@ -2101,10 +2101,11 @@ operate_single_file (const WPanel * panel, file_op_total_context_t * tctx, file_
 
             case OP_MOVE:
 #ifdef ENABLE_BACKGROUND
-                /* create UI to show confirmation dialog */
                 if (!mc_global.we_are_background)
-                    file_op_context_create_ui (ctx, TRUE, FILEGUI_DIALOG_ONE_ITEM);
 #endif
+                    /* create UI to show confirmation dialog */
+                    file_op_context_create_ui (ctx, TRUE, FILEGUI_DIALOG_ONE_ITEM);
+
                 if (is_file)
                     value = move_file_file (panel, tctx, ctx, src, dest);
                 else
