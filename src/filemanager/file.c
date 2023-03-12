@@ -3537,9 +3537,10 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
 
     file_op_total_context_destroy (tctx);
   ret_fast:
-    /* update panels before redraw screen in file_op_total_context_destroy() */
-    update_panels (UP_OPTIMIZE, UP_KEEPSEL);
     file_op_context_destroy (ctx);
+
+    update_panels (UP_OPTIMIZE, UP_KEEPSEL);
+    repaint_screen ();
 
     return ret_val;
 }
