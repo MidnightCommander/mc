@@ -1050,32 +1050,33 @@ advanced_chown_cmd (WPanel * panel)
             break;
 
         case B_ENTER:
-            if (panel->marked <= 1)
             {
-                /* single or last file */
-                if (mc_chmod (vpath, get_mode ()) == -1)
-                    message (D_ERROR, MSG_ERROR, _("Cannot chmod \"%s\"\n%s"),
-                             fname->str, unix_error_string (errno));
-                /* call mc_chown only, if mc_chmod didn't fail */
-                else if (mc_chown
-                         (vpath, (ch_flags[9] == '+') ? sf_stat.st_uid : (uid_t) (-1),
-                          (ch_flags[10] == '+') ? sf_stat.st_gid : (gid_t) (-1)) == -1)
-                    message (D_ERROR, MSG_ERROR, _("Cannot chown \"%s\"\n%s"), fname->str,
-                             unix_error_string (errno));
+                uid_t uid = ch_flags[9] == '+' ? sf_stat.st_uid : (uid_t) (-1);
+                gid_t gid = ch_flags[10] == '+' ? sf_stat.st_gid : (gid_t) (-1);
 
-                end_chown = TRUE;
-            }
-            else if (!try_advanced_chown
-                     (vpath, get_mode (), (ch_flags[9] == '+') ? sf_stat.st_uid : (uid_t) (-1),
-                      (ch_flags[10] == '+') ? sf_stat.st_gid : (gid_t) (-1)))
-            {
-                /* stop multiple files processing */
-                result = B_CANCEL;
-                end_chown = TRUE;
-            }
+                if (panel->marked <= 1)
+                {
+                    /* single or last file */
+                    if (mc_chmod (vpath, get_mode ()) == -1)
+                        message (D_ERROR, MSG_ERROR, _("Cannot chmod \"%s\"\n%s"),
+                                 fname->str, unix_error_string (errno));
+                    /* call mc_chown only, if mc_chmod didn't fail */
+                    else if (mc_chown (vpath, uid, gid) == -1)
+                        message (D_ERROR, MSG_ERROR, _("Cannot chown \"%s\"\n%s"), fname->str,
+                                 unix_error_string (errno));
 
-            need_update = TRUE;
-            break;
+                    end_chown = TRUE;
+                }
+                else if (!try_advanced_chown (vpath, get_mode (), uid, gid))
+                {
+                    /* stop multiple files processing */
+                    result = B_CANCEL;
+                    end_chown = TRUE;
+                }
+
+                need_update = TRUE;
+                break;
+            }
 
         case B_SETALL:
             apply_advanced_chowns (panel, vpath, &sf_stat);
