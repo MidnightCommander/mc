@@ -847,9 +847,7 @@ static gboolean
 try_advanced_chown (const vfs_path_t * p, mode_t m, uid_t u, gid_t g)
 {
     int chmod_result;
-    const char *fname;
-
-    fname = x_basename (vfs_path_as_str (p));
+    const char *fname = NULL;
 
     while ((chmod_result = mc_chmod (p, m)) == -1 && !ignore_all)
     {
@@ -857,6 +855,8 @@ try_advanced_chown (const vfs_path_t * p, mode_t m, uid_t u, gid_t g)
         int result;
         char *msg;
 
+        if (fname == NULL)
+            fname = x_basename (vfs_path_as_str (p));
         msg = g_strdup_printf (_("Cannot chmod \"%s\"\n%s"), fname, unix_error_string (my_errno));
         result =
             query_dialog (MSG_ERROR, msg, D_ERROR, 4, _("&Ignore"), _("Ignore &all"), _("&Retry"),
@@ -892,6 +892,8 @@ try_advanced_chown (const vfs_path_t * p, mode_t m, uid_t u, gid_t g)
         int result;
         char *msg;
 
+        if (fname == NULL)
+            fname = x_basename (vfs_path_as_str (p));
         msg = g_strdup_printf (_("Cannot chown \"%s\"\n%s"), fname, unix_error_string (my_errno));
         result =
             query_dialog (MSG_ERROR, msg, D_ERROR, 4, _("&Ignore"), _("Ignore &all"), _("&Retry"),

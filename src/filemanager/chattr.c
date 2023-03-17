@@ -5,7 +5,7 @@
    Free Software Foundation, Inc.
 
    Written by:
-   Andrew Borodin <aborodin@vmail.ru>, 2020-2022
+   Andrew Borodin <aborodin@vmail.ru>, 2020-2023
 
    This file is part of the Midnight Commander.
 
@@ -1109,15 +1109,17 @@ next_file (const WPanel * panel)
 static gboolean
 try_chattr (const char *p, unsigned long m)
 {
+    const char *fname = NULL;
+
     while (fsetflags (p, m) == -1 && !ignore_all)
     {
         int my_errno = errno;
         int result;
         char *msg;
 
-        msg =
-            g_strdup_printf (_("Cannot chattr \"%s\"\n%s"), x_basename (p),
-                             unix_error_string (my_errno));
+        if (fname == NULL)
+            fname = x_basename (vfs_path_as_str (p));
+        msg = g_strdup_printf (_("Cannot chattr \"%s\"\n%s"), fname, unix_error_string (my_errno));
         result =
             query_dialog (MSG_ERROR, msg, D_ERROR, 4, _("&Ignore"), _("Ignore &all"), _("&Retry"),
                           _("&Cancel"));

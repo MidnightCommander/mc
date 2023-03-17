@@ -426,15 +426,17 @@ next_file (const WPanel * panel)
 static gboolean
 try_chmod (const vfs_path_t * p, mode_t m)
 {
+    const char *fname = NULL;
+
     while (mc_chmod (p, m) == -1 && !ignore_all)
     {
         int my_errno = errno;
         int result;
         char *msg;
 
-        msg =
-            g_strdup_printf (_("Cannot chmod \"%s\"\n%s"), x_basename (vfs_path_as_str (p)),
-                             unix_error_string (my_errno));
+        if (fname == NULL)
+            fname = x_basename (vfs_path_as_str (p));
+        msg = g_strdup_printf (_("Cannot chmod \"%s\"\n%s"), fname, unix_error_string (my_errno));
         result =
             query_dialog (MSG_ERROR, msg, D_ERROR, 4, _("&Ignore"), _("Ignore &all"), _("&Retry"),
                           _("&Cancel"));
