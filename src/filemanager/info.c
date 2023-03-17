@@ -6,7 +6,7 @@
 
    Written by:
    Slava Zanko <slavazanko@gmail.com>, 2013
-   Andrew Borodin <aborodin@vmail.ru>, 2013-2022
+   Andrew Borodin <aborodin@vmail.ru>, 2013-2023
 
    This file is part of the Midnight Commander.
 
@@ -34,9 +34,6 @@
 #include <stdlib.h>
 #include <sys/stat.h>
 #include <inttypes.h>           /* PRIuMAX */
-#ifdef ENABLE_EXT2FS_ATTR
-#include <e2p/e2p.h>            /* fgetflags() */
-#endif
 
 #include "lib/global.h"
 #include "lib/unixcompat.h"
@@ -261,26 +258,20 @@ info_show_info (WInfo * info)
         MC_FALLTHROUGH;
     case 6:
         widget_gotoyx (w, 6, 3);
-#ifdef ENABLE_EXT2FS_ATTR
-        if (!vfs_current_is_local ())
-            tty_print_string (_("Attributes: not supported"));
-        else
+
         {
             vfs_path_t *vpath;
             unsigned long attr;
 
             vpath = vfs_path_from_str (current_panel->dir.list[current_panel->selected].fname->str);
 
-            if (fgetflags (vfs_path_as_str (vpath), &attr) == 0)
+            if (mc_fgetflags (vpath, &attr) == 0)
                 tty_printf (_("Attributes: %s"), chattr_get_as_str (attr));
             else
                 tty_print_string (_("Attributes: unavailable"));
 
             vfs_path_free (vpath, TRUE);
         }
-#else
-        tty_print_string (_("Attributes: not supported"));
-#endif
         MC_FALLTHROUGH;
     case 5:
         widget_gotoyx (w, 5, 3);

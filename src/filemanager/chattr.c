@@ -35,7 +35,6 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
-#include <e2p/e2p.h>
 #include <ext2fs/ext2_fs.h>
 
 #include "lib/global.h"
@@ -1107,11 +1106,11 @@ next_file (const WPanel * panel)
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-try_chattr (const char *p, unsigned long m)
+try_chattr (const vfs_path_t * p, unsigned long m)
 {
     const char *fname = NULL;
 
-    while (fsetflags (p, m) == -1 && !ignore_all)
+    while (mc_fsetflags (p, m) == -1 && !ignore_all)
     {
         int my_errno = errno;
         int result;
@@ -1160,7 +1159,7 @@ do_chattr (WPanel * panel, const vfs_path_t * p, unsigned long m)
     m &= and_mask;
     m |= or_mask;
 
-    ret = try_chattr (vfs_path_as_str (p), m);
+    ret = try_chattr (p, m);
 
     do_file_mark (panel, current_file, 0);
 
@@ -1182,7 +1181,8 @@ chattr_apply_mask (WPanel * panel, vfs_path_t * vpath, unsigned long m)
         const GString *fname;
 
         fname = next_file (panel);
-        ok = (fgetflags (fname->str, &m) == 0);
+        vpath = vfs_path_from_str (fname->str);
+        ok = (mc_fgetflags (vpath, &m) == 0);
 
         if (!ok)
         {
@@ -1195,7 +1195,6 @@ chattr_apply_mask (WPanel * panel, vfs_path_t * vpath, unsigned long m)
         }
         else
         {
-            vpath = vfs_path_from_str (fname->str);
             flags = m;
             ok = do_chattr (panel, vpath, m);
             vfs_path_free (vpath, TRUE);
@@ -1224,16 +1223,8 @@ chattr_cmd (WPanel * panel)
         vfs_path_t *vpath;
         WDialog *ch_dlg;
         const GString *fname;
-        const char *fname2;
         size_t i;
         int result;
-
-        if (!vfs_current_is_local ())
-        {
-            message (D_ERROR, MSG_ERROR, "%s",
-                     _("Cannot change attributes on non-local filesystems"));
-            break;
-        }
 
         do_refresh ();
 
@@ -1246,9 +1237,8 @@ chattr_cmd (WPanel * panel)
             fname = selection (panel)->fname;   /* single file */
 
         vpath = vfs_path_from_str (fname->str);
-        fname2 = vfs_path_as_str (vpath);
 
-        if (fgetflags (fname2, &flags) != 0)
+        if (mc_fgetflags (vpath, &flags) != 0)
         {
             message (D_ERROR, MSG_ERROR, _("Cannot get flags of \"%s\"\n%s"), fname->str,
                      unix_error_string (errno));
@@ -1274,12 +1264,12 @@ chattr_cmd (WPanel * panel)
                 if (panel->marked <= 1)
                 {
                     /* single or last file */
-                    if (fsetflags (fname2, flags) == -1 && !ignore_all)
+                    if (mc_fsetflags (vpath, flags) == -1 && !ignore_all)
                         message (D_ERROR, MSG_ERROR, _("Cannot chattr \"%s\"\n%s"), fname->str,
                                  unix_error_string (errno));
                     end_chattr = TRUE;
                 }
-                else if (!try_chattr (fname2, flags))
+                else if (!try_chattr (vpath, flags))
                 {
                     /* stop multiple files processing */
                     result = B_CANCEL;
