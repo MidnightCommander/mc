@@ -86,7 +86,7 @@ mcview_set_buttonbar (WView * view)
     WButtonBar *b;
     const global_keymap_t *keymap = view->mode_flags.hex ? view->hex_keymap : w->keymap;
 
-    b = find_buttonbar (h);
+    b = buttonbar_find (h);
     buttonbar_set_label (b, 1, Q_ ("ButtonBar|Help"), keymap, w);
 
     if (view->mode_flags.hex)
@@ -207,7 +207,7 @@ mcview_update (WView * view)
     {
         view->dpy_bbar_dirty = FALSE;
         mcview_set_buttonbar (view);
-        widget_draw (WIDGET (find_buttonbar (DIALOG (WIDGET (view)->owner))));
+        widget_draw (WIDGET (buttonbar_find (DIALOG (WIDGET (view)->owner))));
     }
 
     if (view->dirty > dirt_limit)

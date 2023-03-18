@@ -889,7 +889,7 @@ help_resize (WDialog * h)
     r.lines = help_lines + 4;
     r.cols = HELP_WINDOW_WIDTH + 4;
     dlg_default_callback (w, NULL, MSG_RESIZE, 0, &r);
-    bb = find_buttonbar (h);
+    bb = buttonbar_find (h);
     widget_set_size (WIDGET (bb), LINES - 1, 0, 1, COLS);
 
     return MSG_HANDLED;

@@ -2974,7 +2974,7 @@ dview_labels (WDiff * dview)
     Widget *d = WIDGET (dview);
     WButtonBar *b;
 
-    b = find_buttonbar (DIALOG (d->owner));
+    b = buttonbar_find (DIALOG (d->owner));
 
     buttonbar_set_label (b, 1, Q_ ("ButtonBar|Help"), d->keymap, d);
     buttonbar_set_label (b, 2, Q_ ("ButtonBar|Save"), d->keymap, d);

@@ -412,7 +412,7 @@ tree_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
             r.cols = COLS - 20;
             dlg_default_callback (w, NULL, MSG_RESIZE, 0, &r);
 
-            bar = WIDGET (find_buttonbar (h));
+            bar = WIDGET (buttonbar_find (h));
             bar->rect.x = 0;
             bar->rect.y = LINES - 1;
             return MSG_HANDLED;

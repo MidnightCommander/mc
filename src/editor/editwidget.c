@@ -943,7 +943,7 @@ edit_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
     switch (msg)
     {
     case MSG_FOCUS:
-        edit_set_buttonbar (e, find_buttonbar (DIALOG (w->owner)));
+        edit_set_buttonbar (e, buttonbar_find (DIALOG (w->owner)));
         return MSG_HANDLED;
 
     case MSG_DRAW:
@@ -1337,7 +1337,7 @@ edit_update_screen (WEdit * e)
         edit_render_keypress (e);
     }
 
-    widget_draw (WIDGET (find_buttonbar (DIALOG (WIDGET (e)->owner))));
+    widget_draw (WIDGET (buttonbar_find (DIALOG (WIDGET (e)->owner))));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1383,7 +1383,7 @@ edit_add_window (WDialog * h, const WRect * r, const vfs_path_t * f, long fline)
     w->mouse_callback = edit_mouse_callback;
 
     group_add_widget_autopos (GROUP (h), w, WPOS_KEEP_ALL, NULL);
-    edit_set_buttonbar (edit, find_buttonbar (h));
+    edit_set_buttonbar (edit, buttonbar_find (h));
     widget_draw (WIDGET (h));
 
     return TRUE;

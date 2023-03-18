@@ -39,7 +39,7 @@ typedef struct WButtonBar
 WButtonBar *buttonbar_new (void);
 void buttonbar_set_label (WButtonBar * bb, int idx, const char *text,
                           const global_keymap_t * keymap, Widget * receiver);
-WButtonBar *find_buttonbar (const WDialog * h);
+WButtonBar *buttonbar_find (const WDialog * h);
 
 /*** inline functions ****************************************************************************/
 

@@ -3781,7 +3781,7 @@ panel_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
         update_xterm_title_path ();
         select_item (panel);
 
-        bb = find_buttonbar (h);
+        bb = buttonbar_find (h);
         midnight_set_buttonbar (bb);
         widget_draw (WIDGET (bb));
         return MSG_HANDLED;
