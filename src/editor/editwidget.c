@@ -321,7 +321,7 @@ edit_window_list (const WDialog * h)
     lines = MIN ((size_t) (LINES * 2 / 3), dlg_num);
     cols = COLS * 2 / 3;
 
-    listbox = create_listbox_window (lines, cols, _("Open files"), "[Open files]");
+    listbox = listbox_window_new (lines, cols, _("Open files"), "[Open files]");
 
     for (w = g->widgets; w != NULL; w = g_list_next (w))
         if (edit_widget_is_editor (CONST_WIDGET (w->data)))
@@ -342,7 +342,7 @@ edit_window_list (const WDialog * h)
             g_free (fname);
         }
 
-    selected = run_listbox_with_data (listbox, g->current->data);
+    selected = listbox_run_with_data (listbox, g->current->data);
     if (selected != NULL)
         widget_select (WIDGET (selected));
 }
