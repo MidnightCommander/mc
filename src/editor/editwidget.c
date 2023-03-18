@@ -373,10 +373,13 @@ edit_get_shortcut (long command)
 static char *
 edit_get_title (const WDialog * h, size_t len)
 {
-    const WEdit *edit = find_editor (h);
-    const char *modified = edit->modified ? "(*) " : "    ";
+    const WEdit *edit;
+    const char *modified;
     const char *file_label;
     char *filename;
+
+    edit = edit_find_editor (h);
+    modified = edit->modified ? "(*) " : "    ";
 
     len -= 4;
 
@@ -419,7 +422,7 @@ edit_dialog_command_execute (WDialog * h, long command)
     case CK_Close:
         /* if there are no opened files anymore, close MC editor */
         if (edit_widget_is_editor (CONST_WIDGET (g->current->data)) &&
-            edit_close_cmd (EDIT (g->current->data)) && find_editor (h) == NULL)
+            edit_close_cmd (EDIT (g->current->data)) && edit_find_editor (h) == NULL)
             dlg_stop (h);
         break;
     case CK_Help:
@@ -1295,7 +1298,7 @@ edit_get_file_name (const WEdit * edit)
 /* --------------------------------------------------------------------------------------------- */
 
 WEdit *
-find_editor (const WDialog * h)
+edit_find_editor (const WDialog * h)
 {
     const WGroup *g = CONST_GROUP (h);
 

@@ -1244,7 +1244,7 @@ edit_close_cmd (WEdit * edit)
             edit = EDIT (g->current->data);
         else
         {
-            edit = find_editor (DIALOG (g));
+            edit = edit_find_editor (DIALOG (g));
             if (edit != NULL)
                 widget_select (WIDGET (edit));
         }
