@@ -770,7 +770,7 @@ edit_dialog_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
 
     case MSG_RESIZE:
         dlg_default_callback (w, NULL, MSG_RESIZE, 0, NULL);
-        menubar_arrange (find_menubar (h));
+        menubar_arrange (menubar_find (h));
         return MSG_HANDLED;
 
     case MSG_ACTION:
@@ -783,7 +783,7 @@ edit_dialog_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
 
             /* We forward any commands coming from the menu, and which haven't been
                handled by the dialog, to the focused WEdit window. */
-            if (result == MSG_NOT_HANDLED && sender == WIDGET (find_menubar (h)))
+            if (result == MSG_NOT_HANDLED && sender == WIDGET (menubar_find (h)))
                 result = send_message (g->current->data, NULL, MSG_ACTION, parm, NULL);
 
             return result;
@@ -869,7 +869,7 @@ edit_dialog_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
         WDialog *h = DIALOG (w);
         WMenuBar *b;
 
-        b = find_menubar (h);
+        b = menubar_find (h);
 
         if (!widget_get_state (WIDGET (b), WST_FOCUSED))
         {

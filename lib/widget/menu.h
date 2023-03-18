@@ -13,7 +13,7 @@
 
 #define MENUBAR(x) ((WMenuBar *)(x))
 
-#define menu_separator_create() NULL
+#define menu_separator_new() NULL
 
 /*** enums ***************************************************************************************/
 
@@ -42,19 +42,19 @@ extern const global_keymap_t *menu_map;
 
 /*** declarations of public functions ************************************************************/
 
-menu_entry_t *menu_entry_create (const char *name, long command);
+menu_entry_t *menu_entry_new (const char *name, long command);
 void menu_entry_free (menu_entry_t * me);
 
-menu_t *create_menu (const char *name, GList * entries, const char *help_node);
+menu_t *menu_new (const char *name, GList * entries, const char *help_node);
 void menu_set_name (menu_t * menu, const char *name);
-void destroy_menu (menu_t * menu);
+void menu_free (menu_t * menu);
 
 WMenuBar *menubar_new (GList * menu);
 void menubar_set_menu (WMenuBar * menubar, GList * menu);
 void menubar_add_menu (WMenuBar * menubar, menu_t * menu);
 void menubar_arrange (WMenuBar * menubar);
 
-WMenuBar *find_menubar (const WDialog * h);
+WMenuBar *menubar_find (const WDialog * h);
 
 void menubar_activate (WMenuBar * menubar, gboolean dropped, int which);
 

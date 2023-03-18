@@ -641,7 +641,7 @@ menubar_refresh (WMenuBar * menubar)
 static inline void
 menubar_free_menu (WMenuBar * menubar)
 {
-    g_clear_list (&menubar->menu, (GDestroyNotify) destroy_menu);
+    g_clear_list (&menubar->menu, (GDestroyNotify) menu_free);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -883,7 +883,7 @@ menubar_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 /* --------------------------------------------------------------------------------------------- */
 
 menu_entry_t *
-menu_entry_create (const char *name, long command)
+menu_entry_new (const char *name, long command)
 {
     menu_entry_t *entry;
 
@@ -912,7 +912,7 @@ menu_entry_free (menu_entry_t * entry)
 /* --------------------------------------------------------------------------------------------- */
 
 menu_t *
-create_menu (const char *name, GList * entries, const char *help_node)
+menu_new (const char *name, GList * entries, const char *help_node)
 {
     menu_t *menu;
 
@@ -940,7 +940,7 @@ menu_set_name (menu_t * menu, const char *name)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-destroy_menu (menu_t * menu)
+menu_free (menu_t * menu)
 {
     hotkey_free (menu->text);
     g_list_free_full (menu->entries, (GDestroyNotify) menu_entry_free);
@@ -1053,7 +1053,7 @@ menubar_arrange (WMenuBar * menubar)
 /** Find MenuBar widget in the dialog */
 
 WMenuBar *
-find_menubar (const WDialog * h)
+menubar_find (const WDialog * h)
 {
     return MENUBAR (widget_find_by_type (CONST_WIDGET (h), menubar_callback));
 }
