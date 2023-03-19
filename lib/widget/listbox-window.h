@@ -25,11 +25,11 @@ typedef struct
 /*** declarations of public functions ************************************************************/
 
 /* Listbox utility functions */
-Listbox *create_listbox_window_centered (int center_y, int center_x, int lines, int cols,
-                                         const char *title, const char *help);
-Listbox *create_listbox_window (int lines, int cols, const char *title, const char *help);
-int run_listbox (Listbox * l);
-void *run_listbox_with_data (Listbox * l, const void *select);
+Listbox *listbox_window_centered_new (int center_y, int center_x, int lines, int cols,
+                                      const char *title, const char *help);
+Listbox *listbox_window_new (int lines, int cols, const char *title, const char *help);
+int listbox_run (Listbox * l);
+void *listbox_run_with_data (Listbox * l, const void *select);
 
 /*** inline functions ****************************************************************************/
 

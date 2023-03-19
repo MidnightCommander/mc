@@ -75,6 +75,8 @@ const global_keymap_t *dialog_map = NULL;
 
 /*** file scope type declarations ****************************************************************/
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 /* --------------------------------------------------------------------------------------------- */
@@ -334,6 +336,7 @@ dlg_default_destroy (Widget * w)
     /* if some widgets have history, save all histories at one moment here */
     dlg_save_history (h);
     group_default_callback (w, NULL, MSG_DESTROY, 0, NULL);
+    send_message (w, NULL, MSG_DESTROY, 0, NULL);
     mc_event_group_del (h->event_group);
     g_free (h->event_group);
     g_free (h);
@@ -427,7 +430,7 @@ dlg_create (gboolean modal, int y1, int x1, int lines, int cols, widget_pos_flag
     new_d->colors = colors;
     new_d->help_ctx = help_ctx;
     new_d->compact = compact;
-    new_d->data = NULL;
+    new_d->data.p = NULL;
 
     if (modal)
     {

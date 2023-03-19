@@ -41,6 +41,8 @@ mc_skin_t mc_skin__default;
 
 /*** file scope type declarations ****************************************************************/
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 static gboolean mc_skin_is_init = FALSE;

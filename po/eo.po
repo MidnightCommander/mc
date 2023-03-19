@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-01-29 11:16+0300\n"
+"POT-Creation-Date: 2023-03-19 20:39+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2022\n"
 "Language-Team: Esperanto (http://www.transifex.com/mc/mc/language/eo/)\n"
@@ -2268,9 +2268,6 @@ msgstr ""
 "Ne eblas plenumi la komandon chattr por \"%s\"\n"
 "%s"
 
-msgid "Cannot change attributes on non-local filesystems"
-msgstr "Ne eblas ŝanĝi atributojn en foraj dosiersistemoj"
-
 #, c-format
 msgid ""
 "Cannot get flags of \"%s\"\n"
@@ -3521,9 +3518,6 @@ msgstr "Estro:          %s/%s"
 msgid "Links:      %d"
 msgstr "Ligiloj:        %d"
 
-msgid "Attributes: not supported"
-msgstr "Atributoj:      ne komprenataj"
-
 #, c-format
 msgid "Attributes: %s"
 msgstr "Atributoj:      %s"
@@ -4503,6 +4497,12 @@ msgstr "sftp: (Stir-G rompi) Listo... %s"
 msgid "sftp: Listing done."
 msgstr "sftp: Listado finita."
 
+msgid "Inconsistent tar archive"
+msgstr "Malkonsekvenca tar-dosiero"
+
+msgid "Unexpected EOF on archive file"
+msgstr "Neatendita dosierfino en dosiero"
+
 #, c-format
 msgid ""
 "Cannot open tar archive\n"
@@ -4510,12 +4510,6 @@ msgid ""
 msgstr ""
 "Ne eblas malfermi tar-dosieron\n"
 "%s"
-
-msgid "Inconsistent tar archive"
-msgstr "Malkonsekvenca tar-dosiero"
-
-msgid "Unexpected EOF on archive file"
-msgstr "Neatendita dosierfino en dosiero"
 
 #, c-format
 msgid ""
@@ -4716,6 +4710,12 @@ msgstr "Ĉu deiri de la komenco?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Ne eblas atingi lokan kopion de /ftp://some.host/editme.txt"
+
+#~ msgid "Cannot change attributes on non-local filesystems"
+#~ msgstr "Ne eblas ŝanĝi atributojn en foraj dosiersistemoj"
+
+#~ msgid "Attributes: not supported"
+#~ msgstr "Atributoj:      ne komprenataj"
 
 #, c-format
 #~ msgid " %s%s file error"

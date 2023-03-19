@@ -69,6 +69,8 @@ typedef struct
     off_t offset;
 } mcview_search_status_msg_t;
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 static int search_cb_char_curr_index = -1;

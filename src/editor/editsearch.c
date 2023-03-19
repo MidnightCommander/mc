@@ -64,6 +64,8 @@ edit_search_options_t edit_search_options = {
 
 /*** file scope type declarations ****************************************************************/
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 /* --------------------------------------------------------------------------------------------- */
@@ -219,7 +221,7 @@ edit_dialog_replace_prompt_show (WEdit * edit, char *from_text, char *to_text, i
     int retval;
 
     if (xpos == -1)
-        xpos = w->rect.x + option_line_state_width + 1;
+        xpos = w->rect.x + edit_options.line_state_width + 1;
     if (ypos == -1)
         ypos = w->rect.y + w->rect.lines / 2;
     /* Sometimes menu can hide replaced text. I don't like it */

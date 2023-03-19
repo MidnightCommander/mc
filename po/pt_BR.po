@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-01-29 11:16+0300\n"
+"POT-Creation-Date: 2023-03-19 20:39+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: marcelo cripe <marcelocripe@gmail.com>, 2022\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/mc/mc/language/"
@@ -2302,11 +2302,6 @@ msgstr ""
 "Não foi possível o comando chattr \"%s\"\n"
 "%s"
 
-msgid "Cannot change attributes on non-local filesystems"
-msgstr ""
-"Não é possível alterar os atributos nos sistemas de arquivos que não são "
-"locais"
-
 #, c-format
 msgid ""
 "Cannot get flags of \"%s\"\n"
@@ -3572,9 +3567,6 @@ msgstr "Proprietário:      %s/%s"
 msgid "Links:      %d"
 msgstr "Vínculos:      %d"
 
-msgid "Attributes: not supported"
-msgstr "Atributos: não suportados"
-
 #, c-format
 msgid "Attributes: %s"
 msgstr "Atributos: %s"
@@ -4587,6 +4579,12 @@ msgstr "O sftp está listando (pressione as teclas Ctrl+G para pausar)... %s"
 msgid "sftp: Listing done."
 msgstr "A listagem do sftp foi concluída com sucesso."
 
+msgid "Inconsistent tar archive"
+msgstr "O arquivo tar não é consistente"
+
+msgid "Unexpected EOF on archive file"
+msgstr "Ocorreu o fim inesperado do arquivo EOF (final do arquivo)"
+
 #, c-format
 msgid ""
 "Cannot open tar archive\n"
@@ -4594,12 +4592,6 @@ msgid ""
 msgstr ""
 "Não foi possível abrir arquivo tar\n"
 "%s"
-
-msgid "Inconsistent tar archive"
-msgstr "O arquivo tar não é consistente"
-
-msgid "Unexpected EOF on archive file"
-msgstr "Ocorreu o fim inesperado do arquivo EOF (final do arquivo)"
 
 #, c-format
 msgid ""
@@ -4802,6 +4794,14 @@ msgstr "Você quer continuar a partir do início?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Não foi possível obter uma cópia local do /ftp://some.host/editme.txt"
+
+#~ msgid "Cannot change attributes on non-local filesystems"
+#~ msgstr ""
+#~ "Não é possível alterar os atributos nos sistemas de arquivos que não são "
+#~ "locais"
+
+#~ msgid "Attributes: not supported"
+#~ msgstr "Atributos: não suportados"
 
 #, c-format
 #~ msgid " %s%s file error"

@@ -74,6 +74,8 @@ int reset_hp_softkeys = 0;
 
 /*** file scope type declarations ****************************************************************/
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 /* Various saved termios settings that we control here */

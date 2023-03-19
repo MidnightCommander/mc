@@ -111,6 +111,8 @@ typedef struct
     size_t count;               /* bytes to read */
 } undelfs_file;
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 /* We only allow one opened ext2fs */

@@ -56,8 +56,8 @@
 /* --------------------------------------------------------------------------------------------- */
 
 Listbox *
-create_listbox_window_centered (int center_y, int center_x, int lines, int cols,
-                                const char *title, const char *help)
+listbox_window_centered_new (int center_y, int center_x, int lines, int cols,
+                             const char *title, const char *help)
 {
     const int space = 4;
 
@@ -117,16 +117,16 @@ create_listbox_window_centered (int center_y, int center_x, int lines, int cols,
 /* --------------------------------------------------------------------------------------------- */
 
 Listbox *
-create_listbox_window (int lines, int cols, const char *title, const char *help)
+listbox_window_new (int lines, int cols, const char *title, const char *help)
 {
-    return create_listbox_window_centered (-1, -1, lines, cols, title, help);
+    return listbox_window_centered_new (-1, -1, lines, cols, title, help);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 /** Returns the number of the item selected */
 int
-run_listbox (Listbox * l)
+listbox_run (Listbox * l)
 {
     int val = -1;
 
@@ -140,14 +140,14 @@ run_listbox (Listbox * l)
 /* --------------------------------------------------------------------------------------------- */
 
 /**
- * A variant of run_listbox() which is more convenient to use when we
+ * A variant of listbox_run() which is more convenient to use when we
  * need to select arbitrary 'data'.
  *
  * @param select  the item to select initially, by its 'data'. Optional.
  * @return        the 'data' of the item selected, or NULL if none selected.
  */
 void *
-run_listbox_with_data (Listbox * l, const void *select)
+listbox_run_with_data (Listbox * l, const void *select)
 {
     void *val = NULL;
 

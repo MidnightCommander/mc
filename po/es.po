@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-01-29 11:16+0300\n"
+"POT-Creation-Date: 2023-03-19 20:39+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
 "Language-Team: Spanish (http://www.transifex.com/mc/mc/language/es/)\n"
@@ -2274,9 +2274,6 @@ msgstr ""
 "Imposible chattr a «%s»\n"
 "%s"
 
-msgid "Cannot change attributes on non-local filesystems"
-msgstr "Imposible cambiar atributos en sistemas de archivos no locales"
-
 #, c-format
 msgid ""
 "Cannot get flags of \"%s\"\n"
@@ -3530,9 +3527,6 @@ msgstr "Dueño:         %s/%s"
 msgid "Links:      %d"
 msgstr "Nº enlaces:    %d"
 
-msgid "Attributes: not supported"
-msgstr "Atributos: no soportado"
-
 #, c-format
 msgid "Attributes: %s"
 msgstr "Atributos: %s"
@@ -4511,6 +4505,12 @@ msgstr "sftp: (Ctrl-G para cancelar) Listando... %s"
 msgid "sftp: Listing done."
 msgstr "sftp: Listado completo."
 
+msgid "Inconsistent tar archive"
+msgstr "Archivo de tipo tar inconsistente"
+
+msgid "Unexpected EOF on archive file"
+msgstr "Fin de archivo inesperado"
+
 #, c-format
 msgid ""
 "Cannot open tar archive\n"
@@ -4518,12 +4518,6 @@ msgid ""
 msgstr ""
 "Imposible abrir archivo de tipo tar\n"
 "%s"
-
-msgid "Inconsistent tar archive"
-msgstr "Archivo de tipo tar inconsistente"
-
-msgid "Unexpected EOF on archive file"
-msgstr "Fin de archivo inesperado"
 
 #, c-format
 msgid ""
@@ -4724,6 +4718,12 @@ msgstr "¿Continuar desde el principio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Imposible obtener una copia local de /ftp://ese.equipo/edítame.txt"
+
+#~ msgid "Cannot change attributes on non-local filesystems"
+#~ msgstr "Imposible cambiar atributos en sistemas de archivos no locales"
+
+#~ msgid "Attributes: not supported"
+#~ msgstr "Atributos: no soportado"
 
 #, c-format
 #~ msgid " %s%s file error"

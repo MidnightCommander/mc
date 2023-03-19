@@ -51,6 +51,8 @@ typedef struct name_keymap_t
     long val;
 } name_keymap_t;
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 static name_keymap_t command_names[] = {
@@ -382,6 +384,7 @@ static name_keymap_t command_names[] = {
 static const size_t num_command_names = G_N_ELEMENTS (command_names) - 1;
 /* *INDENT-ON* */
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 

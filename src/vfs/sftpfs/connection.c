@@ -55,6 +55,8 @@
 
 /*** file scope type declarations ****************************************************************/
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 #ifdef LIBSSH2_KNOWNHOST_KEY_ED25519

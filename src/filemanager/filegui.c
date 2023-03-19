@@ -237,6 +237,8 @@ typedef struct
     struct stat *src_stat, *dst_stat;
 } file_op_context_ui_t;
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 static struct
@@ -859,16 +861,16 @@ file_op_context_create_ui (file_op_context_t * ctx, gboolean with_eta,
         ui->showing_eta = with_eta && ctx->progress_totals_computed;
         ui->showing_bps = with_eta;
 
-        ui->src_file_label = label_new (y++, x, "");
+        ui->src_file_label = label_new (y++, x, NULL);
         group_add_widget (g, ui->src_file_label);
 
-        ui->src_file = label_new (y++, x, "");
+        ui->src_file = label_new (y++, x, NULL);
         group_add_widget (g, ui->src_file);
 
-        ui->tgt_file_label = label_new (y++, x, "");
+        ui->tgt_file_label = label_new (y++, x, NULL);
         group_add_widget (g, ui->tgt_file_label);
 
-        ui->tgt_file = label_new (y++, x, "");
+        ui->tgt_file = label_new (y++, x, NULL);
         group_add_widget (g, ui->tgt_file);
 
         ui->progress_file_gauge = gauge_new (y++, x + 3, dlg_width - (x + 3) * 2, FALSE, 100, 0);
@@ -876,7 +878,7 @@ file_op_context_create_ui (file_op_context_t * ctx, gboolean with_eta,
             ui->progress_file_gauge->from_left_to_right = FALSE;
         group_add_widget_autopos (g, ui->progress_file_gauge, WPOS_KEEP_TOP | WPOS_KEEP_HORZ, NULL);
 
-        ui->progress_file_label = label_new (y++, x, "");
+        ui->progress_file_label = label_new (y++, x, NULL);
         group_add_widget (g, ui->progress_file_label);
 
         if (verbose && dialog_type == FILEGUI_DIALOG_MULTI_ITEM)
@@ -894,19 +896,19 @@ file_op_context_create_ui (file_op_context_t * ctx, gboolean with_eta,
                                           WPOS_KEEP_TOP | WPOS_KEEP_HORZ, NULL);
             }
 
-            ui->total_files_processed_label = label_new (y++, x, "");
+            ui->total_files_processed_label = label_new (y++, x, NULL);
             group_add_widget (g, ui->total_files_processed_label);
 
-            ui->time_label = label_new (y++, x, "");
+            ui->time_label = label_new (y++, x, NULL);
             group_add_widget (g, ui->time_label);
         }
     }
     else
     {
-        ui->src_file = label_new (y++, x, "");
+        ui->src_file = label_new (y++, x, NULL);
         group_add_widget (g, ui->src_file);
 
-        ui->total_files_processed_label = label_new (y++, x, "");
+        ui->total_files_processed_label = label_new (y++, x, NULL);
         group_add_widget (g, ui->total_files_processed_label);
     }
 
@@ -1150,8 +1152,8 @@ file_progress_show_source (file_op_context_t * ctx, const vfs_path_t * vpath)
     }
     else
     {
-        label_set_text (ui->src_file_label, "");
-        label_set_text (ui->src_file, "");
+        label_set_text (ui->src_file_label, NULL);
+        label_set_text (ui->src_file, NULL);
     }
 }
 
@@ -1174,8 +1176,8 @@ file_progress_show_target (file_op_context_t * ctx, const vfs_path_t * vpath)
     }
     else
     {
-        label_set_text (ui->tgt_file_label, "");
-        label_set_text (ui->tgt_file, "");
+        label_set_text (ui->tgt_file_label, NULL);
+        label_set_text (ui->tgt_file, NULL);
     }
 }
 
@@ -1295,8 +1297,8 @@ file_progress_real_query_replace (file_op_context_t * ctx, enum OperationMode mo
 /* --------------------------------------------------------------------------------------------- */
 
 char *
-file_mask_dialog (file_op_context_t * ctx, FileOperation operation, gboolean only_one,
-                  const char *format, const void *text, const char *def_text, gboolean * do_bg)
+file_mask_dialog (file_op_context_t * ctx, gboolean only_one, const char *format, const void *text,
+                  const char *def_text, gboolean * do_bg)
 {
     size_t fmd_xlen;
     vfs_path_t *vpath;
@@ -1393,7 +1395,7 @@ file_mask_dialog (file_op_context_t * ctx, FileOperation operation, gboolean onl
         WRect r = { -1, -1, 0, fmd_xlen };
 
         quick_dialog_t qdlg = {
-            r, op_names[operation], "[Mask Copy/Rename]",
+            r, op_names[ctx->operation], "[Mask Copy/Rename]",
             quick_widgets, NULL, NULL
         };
 

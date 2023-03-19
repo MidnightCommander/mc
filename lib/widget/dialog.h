@@ -69,9 +69,15 @@ struct WDialog
     int ret_value;              /* Result of dlg_run() */
 
     /* Internal variables */
-    void *data;                 /* Data can be passed to dialog */
     char *event_group;          /* Name of event group for this dialog */
     Widget *bg;                 /* WFrame or WBackground */
+
+    /* Data can be passed to dialog */
+    union
+    {
+        void *p;
+        int i;
+    } data;
 
     dlg_shortcut_str get_shortcut;      /* Shortcut string */
     dlg_title_str get_title;    /* useless for modal dialogs */

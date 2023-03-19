@@ -44,6 +44,8 @@ GIConv str_cnv_not_convert = INVALID_CONV;
 
 /*** file scope type declarations ****************************************************************/
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 /* names, that are used for utf-8 */

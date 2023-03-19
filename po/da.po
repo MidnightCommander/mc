@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-01-29 11:16+0300\n"
+"POT-Creation-Date: 2023-03-19 20:39+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: scootergrisen, 2018-2020\n"
 "Language-Team: Danish (http://www.transifex.com/mc/mc/language/da/)\n"
@@ -2267,9 +2267,6 @@ msgstr ""
 "Kan ikke chattr \"%s\"\n"
 "%s"
 
-msgid "Cannot change attributes on non-local filesystems"
-msgstr "Kan ikke ændre attributter på filsystemer som ikke er lokale"
-
 #, c-format
 msgid ""
 "Cannot get flags of \"%s\"\n"
@@ -3513,9 +3510,6 @@ msgstr "Ejer:       %s/%s"
 msgid "Links:      %d"
 msgstr "Henvisninger:      %d"
 
-msgid "Attributes: not supported"
-msgstr "Attributter: understøttes ikke"
-
 #, c-format
 msgid "Attributes: %s"
 msgstr "Attributter: %s"
@@ -4469,6 +4463,12 @@ msgstr "sftp: (Ctrl-G break) Liste... %s"
 msgid "sftp: Listing done."
 msgstr "sftp: Liste færdig."
 
+msgid "Inconsistent tar archive"
+msgstr "Inkonsistent tar-arkiv"
+
+msgid "Unexpected EOF on archive file"
+msgstr "Uventet EOF i arkivfilen"
+
 #, c-format
 msgid ""
 "Cannot open tar archive\n"
@@ -4476,12 +4476,6 @@ msgid ""
 msgstr ""
 "Kunne ikke åbne tar-arkiv\n"
 "%s"
-
-msgid "Inconsistent tar archive"
-msgstr "Inkonsistent tar-arkiv"
-
-msgid "Unexpected EOF on archive file"
-msgstr "Uventet EOF i arkivfilen"
 
 #, c-format
 msgid ""
@@ -4682,6 +4676,12 @@ msgstr "Fortsæt fra begyndelsen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan ikke hente en lokal kopi af /ftp://en.vært/editme.txt"
+
+#~ msgid "Cannot change attributes on non-local filesystems"
+#~ msgstr "Kan ikke ændre attributter på filsystemer som ikke er lokale"
+
+#~ msgid "Attributes: not supported"
+#~ msgstr "Attributter: understøttes ikke"
 
 #, c-format
 #~ msgid " %s%s file error"

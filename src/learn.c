@@ -65,6 +65,8 @@ typedef struct
     char *sequence;
 } learnkey_t;
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 static WDialog *learn_dlg;
@@ -75,6 +77,7 @@ static int learn_total;
 static int learnok;
 static gboolean learnchanged = FALSE;
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -310,7 +313,7 @@ init_learn (void)
 
         learnkeys[i].button =
             WIDGET (button_new (y, x, B_USER + i, NARROW_BUTTON, buffer, learn_button));
-        learnkeys[i].label = WIDGET (label_new (y, x + 19, ""));
+        learnkeys[i].label = WIDGET (label_new (y, x + 19, NULL));
         group_add_widget (g, learnkeys[i].button);
         group_add_widget (g, learnkeys[i].label);
 

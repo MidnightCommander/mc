@@ -112,8 +112,11 @@ typedef enum
     FROM_RIGHT_TO_LEFT
 } action_direction_t;
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -2971,7 +2974,7 @@ dview_labels (WDiff * dview)
     Widget *d = WIDGET (dview);
     WButtonBar *b;
 
-    b = find_buttonbar (DIALOG (d->owner));
+    b = buttonbar_find (DIALOG (d->owner));
 
     buttonbar_set_label (b, 1, Q_ ("ButtonBar|Help"), d->keymap, d);
     buttonbar_set_label (b, 2, Q_ ("ButtonBar|Save"), d->keymap, d);

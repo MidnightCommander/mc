@@ -67,8 +67,7 @@
 
 /*** global variables ****************************************************************************/
 
-gboolean option_syntax_highlighting = TRUE;
-gboolean option_auto_syntax = TRUE;
+gboolean auto_syntax = TRUE;
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -130,6 +129,8 @@ typedef struct
     edit_syntax_rule_t rule;
 } syntax_marker_t;
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 static char *error_file_name = NULL;
@@ -163,10 +164,7 @@ context_rule_free (gpointer rule)
     g_free (r->keyword_first_chars);
 
     if (r->keyword != NULL)
-    {
-        g_ptr_array_foreach (r->keyword, (GFunc) syntax_keyword_free, NULL);
         g_ptr_array_free (r->keyword, TRUE);
-    }
 
     g_free (r);
 }
@@ -941,7 +939,7 @@ edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
     strcpy (whole_left, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_01234567890");
     strcpy (whole_right, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_01234567890");
 
-    edit->rules = g_ptr_array_new ();
+    edit->rules = g_ptr_array_new_with_free_func (context_rule_free);
 
     if (edit->defines == NULL)
         edit->defines = g_tree_new ((GCompareFunc) strcmp);
@@ -1086,7 +1084,7 @@ edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
                 c->first_left = c->left->str[0];
                 c->first_right = c->right->str[0];
             }
-            c->keyword = g_ptr_array_new ();
+            c->keyword = g_ptr_array_new_with_free_func (syntax_keyword_free);
             k = g_new0 (syntax_keyword_t, 1);
             g_ptr_array_add (c->keyword, k);
             no_words = FALSE;
@@ -1426,7 +1424,7 @@ exec_edit_syntax_dialog (const GPtrArray * names, const char *current_syntax)
     size_t i;
     Listbox *syntaxlist;
 
-    syntaxlist = create_listbox_window (LIST_LINES, MAX_ENTRY_LEN,
+    syntaxlist = listbox_window_new (LIST_LINES, MAX_ENTRY_LEN,
                                         _("Choose syntax highlighting"), NULL);
     LISTBOX_APPEND_TEXT (syntaxlist, 'A', _("< Auto >"), NULL, FALSE);
     LISTBOX_APPEND_TEXT (syntaxlist, 'R', _("< Reload Current Syntax >"), NULL, FALSE);
@@ -1441,7 +1439,7 @@ exec_edit_syntax_dialog (const GPtrArray * names, const char *current_syntax)
             listbox_select_entry (syntaxlist->list, i + N_DFLT_ENTRIES);
     }
 
-    return run_listbox (syntaxlist);
+    return listbox_run (syntaxlist);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1454,7 +1452,7 @@ edit_get_syntax_color (WEdit * edit, off_t byte_index)
     if (!tty_use_colors ())
         return 0;
 
-    if (edit->rules != NULL && byte_index < edit->buffer.size && option_syntax_highlighting)
+    if (edit_options.syntax_highlighting && edit->rules != NULL && byte_index < edit->buffer.size)
     {
         edit_get_rule (edit, byte_index);
         return translate_rule_to_color (edit, &edit->rule);
@@ -1480,7 +1478,6 @@ edit_free_syntax_rules (WEdit * edit)
     edit_get_rule (edit, -1);
     MC_PTR_FREE (edit->syntax_type);
 
-    g_ptr_array_foreach (edit->rules, (GFunc) context_rule_free, NULL);
     g_ptr_array_free (edit->rules, TRUE);
     edit->rules = NULL;
     g_clear_slist (&edit->syntax_marker, g_free);
@@ -1500,7 +1497,7 @@ edit_load_syntax (WEdit * edit, GPtrArray * pnames, const char *type)
     int r;
     char *f = NULL;
 
-    if (option_auto_syntax)
+    if (auto_syntax)
         type = NULL;
 
     if (edit != NULL)
@@ -1515,7 +1512,7 @@ edit_load_syntax (WEdit * edit, GPtrArray * pnames, const char *type)
     if (!tty_use_colors ())
         return;
 
-    if (!option_syntax_highlighting && (pnames == NULL || pnames->len == 0))
+    if (!edit_options.syntax_highlighting && (pnames == NULL || pnames->len == 0))
         return;
 
     if (edit != NULL && edit->filename_vpath == NULL)
@@ -1525,7 +1522,7 @@ edit_load_syntax (WEdit * edit, GPtrArray * pnames, const char *type)
     if (edit != NULL)
         r = edit_read_syntax_file (edit, pnames, f, vfs_path_as_str (edit->filename_vpath),
                                    get_first_editor_line (edit),
-                                   option_auto_syntax ? NULL : edit->syntax_type);
+                                   auto_syntax ? NULL : edit->syntax_type);
     else
         r = edit_read_syntax_file (NULL, pnames, f, NULL, "", NULL);
     if (r == -1)
@@ -1562,7 +1559,7 @@ edit_syntax_dialog (WEdit * edit)
     GPtrArray *names;
     int syntax;
 
-    names = g_ptr_array_new ();
+    names = g_ptr_array_new_with_free_func (g_free);
 
     /* We fill the list of syntax files every time the editor is invoked.
        Instead we could save the list to a file and update it once the syntax
@@ -1578,24 +1575,24 @@ edit_syntax_dialog (WEdit * edit)
         gboolean old_auto_syntax;
 
         current_syntax = g_strdup (edit->syntax_type);
-        old_auto_syntax = option_auto_syntax;
+        old_auto_syntax = auto_syntax;
 
         switch (syntax)
         {
         case 0:                /* auto syntax */
-            option_auto_syntax = TRUE;
+            auto_syntax = TRUE;
             break;
         case 1:                /* reload current syntax */
             force_reload = TRUE;
             break;
         default:
-            option_auto_syntax = FALSE;
+            auto_syntax = FALSE;
             g_free (edit->syntax_type);
             edit->syntax_type = g_strdup (g_ptr_array_index (names, syntax - N_DFLT_ENTRIES));
         }
 
         /* Load or unload syntax rules if the option has changed */
-        if (force_reload || (option_auto_syntax && !old_auto_syntax) || old_auto_syntax ||
+        if (force_reload || (auto_syntax && !old_auto_syntax) || old_auto_syntax ||
             (current_syntax != NULL && edit->syntax_type != NULL &&
              strcmp (current_syntax, edit->syntax_type) != 0))
             edit_load_syntax (edit, NULL, edit->syntax_type);
@@ -1603,7 +1600,6 @@ edit_syntax_dialog (WEdit * edit)
         g_free (current_syntax);
     }
 
-    g_ptr_array_foreach (names, (GFunc) g_free, NULL);
     g_ptr_array_free (names, TRUE);
 }
 

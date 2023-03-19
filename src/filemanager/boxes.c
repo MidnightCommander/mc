@@ -88,6 +88,8 @@
 
 /*** file scope type declarations ****************************************************************/
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 static unsigned long configure_old_esc_mode_id, configure_time_out_id;
@@ -189,7 +191,7 @@ skin_dlg_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
     case MSG_RESIZE:
         {
             WDialog *d = DIALOG (w);
-            const WRect *wd = &WIDGET (d->data)->rect;
+            const WRect *wd = &WIDGET (d->data.p)->rect;
             WRect r = w->rect;
 
             r.y = wd->y + (wd->lines - r.lines) / 2;
@@ -221,7 +223,7 @@ sel_skin_button (WButton * button, int action)
         dlg_create (TRUE, 0, 0, 13, 24, WPOS_KEEP_DEFAULT, TRUE, dialog_colors, skin_dlg_callback,
                     NULL, "[Appearance]", _("Skins"));
     /* use Appearance dialog for positioning */
-    skin_dlg->data = WIDGET (button)->owner;
+    skin_dlg->data.p = WIDGET (button)->owner;
 
     /* set dialog location before all */
     send_message (skin_dlg, NULL, MSG_RESIZE, 0, NULL);
@@ -410,7 +412,7 @@ tree_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
             r.cols = COLS - 20;
             dlg_default_callback (w, NULL, MSG_RESIZE, 0, &r);
 
-            bar = WIDGET (find_buttonbar (h));
+            bar = WIDGET (buttonbar_find (h));
             bar->rect.x = 0;
             bar->rect.y = LINES - 1;
             return MSG_HANDLED;
@@ -667,7 +669,6 @@ appearance_box (void)
     }
 
     g_free (current_skin_name);
-    g_ptr_array_foreach (skin_names, (GFunc) g_free, NULL);
     g_ptr_array_free (skin_names, TRUE);
 }
 

@@ -100,23 +100,20 @@ sigaction (int signum, const struct sigaction *act, struct sigaction *oldact)
 static void
 sigaction__init (void)
 {
-    sigaction_signum__captured = g_ptr_array_new ();
-    sigaction_act__captured = g_ptr_array_new ();
-    sigaction_oldact__captured = g_ptr_array_new ();
+    sigaction_signum__captured = g_ptr_array_new_with_free_func (g_free);
+    sigaction_act__captured = g_ptr_array_new_with_free_func (g_free);
+    sigaction_oldact__captured = g_ptr_array_new_with_free_func (g_free);
 }
 
 static void
 sigaction__deinit (void)
 {
-    g_ptr_array_foreach (sigaction_signum__captured, (GFunc) g_free, NULL);
     g_ptr_array_free (sigaction_signum__captured, TRUE);
     sigaction_signum__captured = NULL;
 
-    g_ptr_array_foreach (sigaction_act__captured, (GFunc) g_free, NULL);
     g_ptr_array_free (sigaction_act__captured, TRUE);
     sigaction_act__captured = NULL;
 
-    g_ptr_array_foreach (sigaction_oldact__captured, (GFunc) g_free, NULL);
     g_ptr_array_free (sigaction_oldact__captured, TRUE);
     sigaction_oldact__captured = NULL;
 }
@@ -158,18 +155,16 @@ signal (int signum, sighandler_t handler)
 static void
 signal__init (void)
 {
-    signal_signum__captured = g_ptr_array_new ();
-    signal_handler__captured = g_ptr_array_new ();
+    signal_signum__captured = g_ptr_array_new_with_free_func (g_free);
+    signal_handler__captured = g_ptr_array_new_with_free_func (g_free);
 }
 
 static void
 signal__deinit (void)
 {
-    g_ptr_array_foreach (signal_signum__captured, (GFunc) g_free, NULL);
     g_ptr_array_free (signal_signum__captured, TRUE);
     signal_signum__captured = NULL;
 
-    g_ptr_array_foreach (signal_handler__captured, (GFunc) g_free, NULL);
     g_ptr_array_free (signal_handler__captured, TRUE);
     signal_handler__captured = NULL;
 }
@@ -222,13 +217,12 @@ execvp (const char *file, char *const argv[])
 static void
 execvp__init (void)
 {
-    execvp__args__captured = g_ptr_array_new ();
+    execvp__args__captured = g_ptr_array_new_with_free_func (g_free);
 }
 
 static void
 execvp__deinit (void)
 {
-    g_ptr_array_foreach (execvp__args__captured, (GFunc) g_free, NULL);
     g_ptr_array_free (execvp__args__captured, TRUE);
     execvp__args__captured = NULL;
     MC_PTR_FREE (execvp__file__captured);

@@ -27,6 +27,8 @@
 
 #include "tests/mctest.h"
 
+#include "lib/file-entry.h"
+
 #include "src/vfs/local/local.c"
 
 #include "src/filemanager/filemanager.c"

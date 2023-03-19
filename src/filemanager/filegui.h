@@ -22,9 +22,8 @@ void file_op_context_create_ui (file_op_context_t * ctx, gboolean with_eta,
                                 filegui_dialog_type_t dialog_type);
 void file_op_context_destroy_ui (file_op_context_t * ctx);
 
-char *file_mask_dialog (file_op_context_t * ctx, FileOperation operation, gboolean only_one,
-                        const char *format, const void *text, const char *def_text,
-                        gboolean * do_bg);
+char *file_mask_dialog (file_op_context_t * ctx, gboolean only_one, const char *format,
+                        const void *text, const char *def_text, gboolean * do_bg);
 
 FileProgressStatus check_progress_buttons (file_op_context_t * ctx);
 

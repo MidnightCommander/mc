@@ -100,6 +100,10 @@ struct WTree
                                    shown and the selected */
 };
 
+/*** forward declarations (file scope functions) *************************************************/
+
+static void tree_rescan (void *data);
+
 /*** file scope variables ************************************************************************/
 
 /* Specifies the display mode: 1d or 2d */
@@ -107,10 +111,6 @@ static gboolean tree_navigation_flag = FALSE;
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
-/* --------------------------------------------------------------------------------------------- */
-
-static void tree_rescan (void *data);
-
 /* --------------------------------------------------------------------------------------------- */
 
 static tree_entry *
@@ -979,7 +979,7 @@ tree_toggle_navig (WTree * tree)
 
     tree_navigation_flag = !tree_navigation_flag;
 
-    b = find_buttonbar (DIALOG (w->owner));
+    b = buttonbar_find (DIALOG (w->owner));
     buttonbar_set_label (b, 4,
                          tree_navigation_flag ? Q_ ("ButtonBar|Static") : Q_ ("ButtonBar|Dynamc"),
                          w->keymap, w);
@@ -1162,13 +1162,13 @@ tree_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
         show_tree (tree);
         if (widget_get_state (w, WST_FOCUSED))
         {
-            b = find_buttonbar (h);
+            b = buttonbar_find (h);
             widget_draw (WIDGET (b));
         }
         return MSG_HANDLED;
 
     case MSG_FOCUS:
-        b = find_buttonbar (h);
+        b = buttonbar_find (h);
         buttonbar_set_label (b, 1, Q_ ("ButtonBar|Help"), w->keymap, w);
         buttonbar_set_label (b, 2, Q_ ("ButtonBar|Rescan"), w->keymap, w);
         buttonbar_set_label (b, 3, Q_ ("ButtonBar|Forget"), w->keymap, w);

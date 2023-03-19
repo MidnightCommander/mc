@@ -85,25 +85,6 @@
 /* The hook list for the select file function */
 hook_t *select_file_hook = NULL;
 
-static const char *string_file_name (file_entry_t *, int);
-static const char *string_file_size (file_entry_t *, int);
-static const char *string_file_size_brief (file_entry_t *, int);
-static const char *string_file_type (file_entry_t *, int);
-static const char *string_file_mtime (file_entry_t *, int);
-static const char *string_file_atime (file_entry_t *, int);
-static const char *string_file_ctime (file_entry_t *, int);
-static const char *string_file_permission (file_entry_t *, int);
-static const char *string_file_perm_octal (file_entry_t *, int);
-static const char *string_file_nlinks (file_entry_t *, int);
-static const char *string_inode (file_entry_t *, int);
-static const char *string_file_nuid (file_entry_t *, int);
-static const char *string_file_ngid (file_entry_t *, int);
-static const char *string_file_owner (file_entry_t *, int);
-static const char *string_file_group (file_entry_t *, int);
-static const char *string_marked (file_entry_t *, int);
-static const char *string_space (file_entry_t *, int);
-static const char *string_dot (file_entry_t *, int);
-
 mc_fhl_t *mc_filehighlight = NULL;
 
 /*** file scope macro definitions ****************************************************************/
@@ -155,6 +136,27 @@ typedef enum
     FILENAME_SCROLL_LEFT = 2,
     FILENAME_SCROLL_RIGHT = 4
 } filename_scroll_flag_t;
+
+/*** forward declarations (file scope functions) *************************************************/
+
+static const char *string_file_name (file_entry_t *fe, int len);
+static const char *string_file_size (file_entry_t *fe, int len);
+static const char *string_file_size_brief (file_entry_t *fe, int len);
+static const char *string_file_type (file_entry_t *fe, int len);
+static const char *string_file_mtime (file_entry_t *fe, int len);
+static const char *string_file_atime (file_entry_t *fe, int len);
+static const char *string_file_ctime (file_entry_t *fe, int len);
+static const char *string_file_permission (file_entry_t *fe, int len);
+static const char *string_file_perm_octal (file_entry_t *fe, int len);
+static const char *string_file_nlinks (file_entry_t *fe, int len);
+static const char *string_inode (file_entry_t *fe, int len);
+static const char *string_file_nuid (file_entry_t *fe, int len);
+static const char *string_file_ngid (file_entry_t *fe, int len);
+static const char *string_file_owner (file_entry_t *fe, int len);
+static const char *string_file_group (file_entry_t *fe, int len);
+static const char *string_marked (file_entry_t *fe, int len);
+static const char *string_space (file_entry_t *fe, int len);
+static const char *string_dot (file_entry_t *fe, int len);
 
 /*** file scope variables ************************************************************************/
 
@@ -2701,7 +2703,9 @@ panel_select_invert_files (WPanel * panel)
 static void
 panel_do_set_filter (WPanel * panel)
 {
-    file_filter_t ff = {.value = NULL,.handler = NULL,.flags = panel->filter.flags };
+    /* *INDENT-OFF* */
+    file_filter_t ff = { .value = NULL, .handler = NULL, .flags = panel->filter.flags };
+    /* *INDENT-ON* */
 
     ff.handler =
         panel_select_unselect_files_dialog (&ff.flags, _("Filter"), MC_HISTORY_FM_PANEL_FILTER,
@@ -3777,7 +3781,7 @@ panel_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
         update_xterm_title_path ();
         select_item (panel);
 
-        bb = find_buttonbar (h);
+        bb = buttonbar_find (h);
         midnight_set_buttonbar (bb);
         widget_draw (WIDGET (bb));
         return MSG_HANDLED;

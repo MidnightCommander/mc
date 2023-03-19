@@ -114,12 +114,14 @@ typedef struct
     gsize end;
 } find_match_location_t;
 
-/*** file scope variables ************************************************************************/
+/*** forward declarations (file scope functions) *************************************************/
 
 /* button callbacks */
 static int start_stop (WButton * button, int action);
 static int find_do_view_file (WButton * button, int action);
 static int find_do_edit_file (WButton * button, int action);
+
+/*** file scope variables ************************************************************************/
 
 /* Parsed ignore dirs */
 static char **find_ignore_dirs = NULL;
@@ -1339,31 +1341,26 @@ do_search (WDialog * h)
                     pop_start_dir = FALSE;
 
                     /* handle absolute ignore dirs here */
-                    {
-                        gboolean ok;
-
-                        ok = find_ignore_dir_search (vfs_path_as_str (tmp_vpath));
-                        if (!ok)
-                            break;
-                    }
+                    if (!find_ignore_dir_search (vfs_path_as_str (tmp_vpath)))
+                        break;
 
                     vfs_path_free (tmp_vpath, TRUE);
                     ignore_count++;
                 }
 
                 g_free (directory);
-                directory = g_strdup (vfs_path_as_str (tmp_vpath));
 
                 if (verbose)
                 {
                     char buffer[BUF_MEDIUM];
 
+                    directory = (char *) vfs_path_as_str (tmp_vpath);
                     g_snprintf (buffer, sizeof (buffer), _("Searching %s"), directory);
                     status_update (str_trunc (directory, WIDGET (h)->rect.cols - 8));
                 }
 
                 dirp = mc_opendir (tmp_vpath);
-                vfs_path_free (tmp_vpath, TRUE);
+                directory = vfs_path_free (tmp_vpath, FALSE);
             }                   /* while (!dirp) */
 
             /* skip invalid filenames */
@@ -1709,7 +1706,7 @@ setup_gui (void)
 
     group_add_widget_autopos (g, hline_new (y++, -1, -1), WPOS_KEEP_BOTTOM, NULL);
 
-    found_num_label = label_new (y++, 4, "");
+    found_num_label = label_new (y++, 4, NULL);
     group_add_widget_autopos (g, found_num_label, WPOS_KEEP_BOTTOM, NULL);
 
     status_label = label_new (y++, 4, _("Searching"));

@@ -52,8 +52,11 @@
 
 /*** file scope type declarations ****************************************************************/
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -281,7 +284,7 @@ buttonbar_set_label (WButtonBar * bb, int idx, const char *text, const global_ke
 
 /* Find ButtonBar widget in the dialog */
 WButtonBar *
-find_buttonbar (const WDialog * h)
+buttonbar_find (const WDialog * h)
 {
     return BUTTONBAR (widget_find_by_type (CONST_WIDGET (h), buttonbar_callback));
 }

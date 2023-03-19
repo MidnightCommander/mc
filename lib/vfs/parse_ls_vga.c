@@ -54,6 +54,8 @@
 
 /*** file scope type declarations ****************************************************************/
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 static char *columns[MAXCOLS];  /* Points to the string in column n */

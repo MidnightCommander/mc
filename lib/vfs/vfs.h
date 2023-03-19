@@ -169,6 +169,10 @@ typedef struct vfs_class
 
     int (*chmod) (const vfs_path_t * vpath, mode_t mode);
     int (*chown) (const vfs_path_t * vpath, uid_t owner, gid_t group);
+
+    int (*fgetflags) (const vfs_path_t * vpath, unsigned long *flags);
+    int (*fsetflags) (const vfs_path_t * vpath, unsigned long flags);
+
     int (*utime) (const vfs_path_t * vpath, mc_timesbuf_t * times);
 
     int (*readlink) (const vfs_path_t * vpath, char *buf, size_t size);
@@ -318,6 +322,8 @@ int mc_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2);
 int mc_rename (const vfs_path_t * vpath1, const vfs_path_t * vpath2);
 int mc_chmod (const vfs_path_t * vpath, mode_t mode);
 int mc_chown (const vfs_path_t * vpath, uid_t owner, gid_t group);
+int mc_fgetflags (const vfs_path_t * vpath, unsigned long *flags);
+int mc_fsetflags (const vfs_path_t * vpath, unsigned long flags);
 int mc_chdir (const vfs_path_t * vpath);
 int mc_unlink (const vfs_path_t * vpath);
 int mc_ctl (int fd, int ctlop, void *arg);

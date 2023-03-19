@@ -103,6 +103,8 @@ typedef struct
     struct sigaction stop;
 } my_system_sigactions_t;
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 static int_cache uid_cache[UID_CACHE_SIZE];

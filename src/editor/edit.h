@@ -20,6 +20,9 @@
 
 #define DEFAULT_WRAP_LINE_LENGTH 72
 
+#define EDIT(x) ((WEdit *)(x))
+#define CONST_EDIT(x) ((const WEdit *)(x))
+
 /*** enums ***************************************************************************************/
 
 /*** structures declarations (and typedefs of structures)*****************************************/
@@ -28,37 +31,40 @@
 struct WEdit;
 typedef struct WEdit WEdit;
 
+typedef struct
+{
+    int word_wrap_line_length;
+    gboolean typewriter_wrap;
+    gboolean auto_para_formatting;
+    gboolean fill_tabs_with_spaces;
+    gboolean return_does_auto_indent;
+    gboolean backspace_through_tabs;
+    gboolean fake_half_tabs;
+    gboolean persistent_selections;
+    gboolean drop_selection_on_copy;    /* whether we need to drop selection on copy to buffer */
+    gboolean cursor_beyond_eol;
+    gboolean cursor_after_inserted_block;
+    gboolean state_full_filename;
+    gboolean line_state;
+    int line_state_width;
+    int save_mode;
+    gboolean confirm_save;      /* queries on a save */
+    gboolean save_position;
+    gboolean syntax_highlighting;
+    gboolean group_undo;
+    char *backup_ext;
+    char *filesize_threshold;
+    char *stop_format_chars;
+    gboolean visible_tabs;
+    gboolean visible_tws;
+    gboolean show_right_margin;
+    gboolean simple_statusbar;  /* statusbar draw style */
+    gboolean check_nl_at_eof;
+} edit_options_t;
+
 /*** global variables defined in .c file *********************************************************/
 
-extern int option_word_wrap_line_length;
-extern gboolean option_typewriter_wrap;
-extern gboolean option_auto_para_formatting;
-extern gboolean option_fill_tabs_with_spaces;
-extern gboolean option_return_does_auto_indent;
-extern gboolean option_backspace_through_tabs;
-extern gboolean option_fake_half_tabs;
-extern gboolean option_persistent_selections;
-extern gboolean option_drop_selection_on_copy;
-extern gboolean option_cursor_beyond_eol;
-extern gboolean option_cursor_after_inserted_block;
-extern gboolean option_state_full_filename;
-extern gboolean option_line_state;
-extern int option_save_mode;
-extern gboolean option_save_position;
-extern gboolean option_syntax_highlighting;
-extern gboolean option_group_undo;
-extern char *option_backup_ext;
-extern char *option_filesize_threshold;
-extern char *option_stop_format_chars;
-
-extern gboolean edit_confirm_save;
-
-extern gboolean visible_tabs;
-extern gboolean visible_tws;
-
-extern gboolean simple_statusbar;
-extern gboolean option_check_nl_at_eof;
-extern gboolean show_right_margin;
+extern edit_options_t edit_options;
 
 /*** declarations of public functions ************************************************************/
 

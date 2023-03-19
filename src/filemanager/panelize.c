@@ -39,6 +39,7 @@
 #include "lib/mcconfig.h"       /* Load/save directories panelize */
 #include "lib/strutil.h"
 #include "lib/widget.h"
+#include "lib/util.h"           /* mc_pipe_t */
 
 #include "src/history.h"
 
@@ -65,6 +66,8 @@ typedef struct
     char *command;
     char *label;
 } panelize_entry_t;
+
+/*** forward declarations (file scope functions) *************************************************/
 
 /*** file scope variables ************************************************************************/
 

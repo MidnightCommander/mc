@@ -63,9 +63,7 @@ int pause_after_run = pause_on_dumb_terminals;
 
 /*** file scope type declarations ****************************************************************/
 
-/*** file scope variables ************************************************************************/
-
-/*** file scope functions ************************************************************************/
+/*** forward declarations (file scope functions) *************************************************/
 
 void do_execute (const char *shell, const char *command, int flags);
 void do_executev (const char *shell, int flags, char *const argv[]);
@@ -73,6 +71,10 @@ char *execute_get_external_cmd_opts_from_config (const char *command,
                                                  const vfs_path_t * filename_vpath,
                                                  long start_line);
 
+/*** file scope variables ************************************************************************/
+
+/* --------------------------------------------------------------------------------------------- */
+/*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
 static void

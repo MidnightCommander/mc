@@ -50,6 +50,8 @@ typedef struct file_history_data_t
     char *file_pos;
 } file_history_data_t;
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 /* --------------------------------------------------------------------------------------------- */

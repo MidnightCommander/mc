@@ -52,6 +52,8 @@ typedef struct mc_tty_color_table_struct
     int value;
 } mc_tty_color_table_t;
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 static mc_tty_color_table_t const color_table[] = {

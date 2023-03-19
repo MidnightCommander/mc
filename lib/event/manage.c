@@ -38,23 +38,19 @@
 
 /*** file scope type declarations ****************************************************************/
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
 static void
 mc_event_group_destroy_value (gpointer data)
 {
-    GPtrArray *callbacks;
-
-    callbacks = (GPtrArray *) data;
-    g_ptr_array_foreach (callbacks, (GFunc) g_free, NULL);
-    g_ptr_array_free (callbacks, TRUE);
+    g_ptr_array_free ((GPtrArray *) data, TRUE);
 }
-
-/* --------------------------------------------------------------------------------------------- */
-
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
@@ -64,7 +60,6 @@ gboolean
 mc_event_add (const gchar * event_group_name, const gchar * event_name,
               mc_event_callback_func_t event_callback, gpointer event_init_data, GError ** mcerror)
 {
-
     GTree *event_group;
     GPtrArray *callbacks;
     mc_event_callback_t *cb;
@@ -120,12 +115,8 @@ mc_event_del (const gchar * event_group_name, const gchar * event_name,
         return;
 
     cb = mc_event_is_callback_in_array (callbacks, event_callback, event_init_data);
-
-    if (cb == NULL)
-        return;
-
-    g_ptr_array_remove (callbacks, (gpointer) cb);
-    g_free ((gpointer) cb);
+    if (cb != NULL)
+        g_ptr_array_remove (callbacks, (gpointer) cb);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -194,7 +185,7 @@ mc_event_get_event_by_name (GTree * event_group, const gchar * event_name, gbool
     callbacks = (GPtrArray *) g_tree_lookup (event_group, (gconstpointer) event_name);
     if (callbacks == NULL && create_new)
     {
-        callbacks = g_ptr_array_new ();
+        callbacks = g_ptr_array_new_with_free_func (g_free);
         if (callbacks == NULL)
         {
             mc_propagate_error (mcerror, 0, _("Unable to create event '%s'!"), event_name);

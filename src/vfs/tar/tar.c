@@ -36,9 +36,11 @@
  */
 
 #include <config.h>
-#include <sys/types.h>
-#include <errno.h>
+
 #include <ctype.h>
+#include <errno.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 
 #ifdef hpux
 /* major() and minor() macros (among other things) defined here for hpux */
@@ -169,25 +171,6 @@ struct sparse
                                 /*  24 */
 };
 
-/* The GNU extra header contains some information GNU tar needs, but not
-   foreseen in POSIX header format.  It is only used after a POSIX header
-   (and never with old GNU headers), and immediately follows this POSIX
-   header, when typeflag is a letter rather than a digit, so signaling a GNU
-   extension.  */
-struct extra_header
-{                               /* byte offset */
-    char atime[12];             /*   0 */
-    char ctime[12];             /*  12 */
-    char offset[12];            /*  24 */
-    char realsize[12];          /*  36 */
-    char longnames[4];          /*  48 */
-    char unused_pad1[68];       /*  52 */
-    struct sparse sp[SPARSES_IN_EXTRA_HEADER];
-                                /* 120 */
-    char isextended;            /* 504 */
-                                /* 505 */
-};
-
 /* Extension header for sparse files, used immediately after the GNU extra
    header, and used only if all sparse information cannot fit into that
    extra header.  There might even be many such extension headers, one after
@@ -229,7 +212,6 @@ union block
 {
     char buffer[BLOCKSIZE];
     struct posix_header header;
-    struct extra_header extra_header;
     struct oldgnu_header oldgnu_header;
     struct sparse_header sparse_header;
 };
@@ -245,11 +227,12 @@ enum archive_format
 
 typedef enum
 {
-    STATUS_BADCHECKSUM,
-    STATUS_SUCCESS,
-    STATUS_EOFMARK,
-    STATUS_EOF
-} ReadStatus;
+    HEADER_STILL_UNREAD,        /* for when read_header has not been called */
+    HEADER_SUCCESS,             /* header successfully read and checksummed */
+    HEADER_ZERO_BLOCK,          /* zero block where header expected */
+    HEADER_END_OF_FILE,         /* true end of file while header expected */
+    HEADER_FAILURE              /* ill-formed header, or bad checksum */
+} read_header;
 
 typedef struct
 {
@@ -259,6 +242,8 @@ typedef struct
     struct stat st;
     enum archive_format type;   /* Type of the archive */
 } tar_super_t;
+
+/*** forward declarations (file scope functions) *************************************************/
 
 /*** file scope variables ************************************************************************/
 
@@ -304,104 +289,6 @@ tar_from_oct (int digs, const char *where)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static struct vfs_s_super *
-tar_new_archive (struct vfs_class *me)
-{
-    tar_super_t *arch;
-
-    arch = g_new0 (tar_super_t, 1);
-    arch->base.me = me;
-    arch->fd = -1;
-    arch->type = TAR_UNKNOWN;
-
-    return VFS_SUPER (arch);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-tar_free_archive (struct vfs_class *me, struct vfs_s_super *archive)
-{
-    tar_super_t *arch = TAR_SUPER (archive);
-
-    (void) me;
-
-    if (arch->fd != -1)
-    {
-        mc_close (arch->fd);
-        arch->fd = -1;
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/* Returns fd of the open tar file */
-static int
-tar_open_archive_int (struct vfs_class *me, const vfs_path_t * vpath, struct vfs_s_super *archive)
-{
-    int result, type;
-    tar_super_t *arch;
-    mode_t mode;
-    struct vfs_s_inode *root;
-
-    result = mc_open (vpath, O_RDONLY);
-    if (result == -1)
-    {
-        message (D_ERROR, MSG_ERROR, _("Cannot open tar archive\n%s"), vfs_path_as_str (vpath));
-        ERRNOR (ENOENT, -1);
-    }
-
-    archive->name = g_strdup (vfs_path_as_str (vpath));
-    arch = TAR_SUPER (archive);
-    mc_stat (vpath, &arch->st);
-
-    /* Find out the method to handle this tar file */
-    type = get_compression_type (result, archive->name);
-    if (type == COMPRESSION_NONE)
-        mc_lseek (result, 0, SEEK_SET);
-    else
-    {
-        char *s;
-        vfs_path_t *tmp_vpath;
-
-        mc_close (result);
-        s = g_strconcat (archive->name, decompress_extension (type), (char *) NULL);
-        tmp_vpath = vfs_path_from_str_flags (s, VPF_NO_CANON);
-        result = mc_open (tmp_vpath, O_RDONLY);
-        vfs_path_free (tmp_vpath, TRUE);
-        if (result == -1)
-            message (D_ERROR, MSG_ERROR, _("Cannot open tar archive\n%s"), s);
-        g_free (s);
-        if (result == -1)
-        {
-            MC_PTR_FREE (archive->name);
-            ERRNOR (ENOENT, -1);
-        }
-    }
-
-    arch->fd = result;
-    mode = arch->st.st_mode & 07777;
-    if (mode & 0400)
-        mode |= 0100;
-    if (mode & 0040)
-        mode |= 0010;
-    if (mode & 0004)
-        mode |= 0001;
-    mode |= S_IFDIR;
-
-    root = vfs_s_new_inode (me, archive, &arch->st);
-    root->st.st_mode = mode;
-    root->data_offset = -1;
-    root->st.st_nlink++;
-    root->st.st_dev = VFS_SUBCLASS (me)->rdev++;
-
-    archive->root = root;
-
-    return result;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 static union block *
 tar_get_next_block (struct vfs_s_super *archive, int tard)
 {
@@ -419,7 +306,7 @@ tar_get_next_block (struct vfs_s_super *archive, int tard)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-tar_skip_n_records (struct vfs_s_super *archive, int tard, size_t n)
+tar_skip_n_records (struct vfs_s_super *archive, int tard, off_t n)
 {
     (void) archive;
 
@@ -429,48 +316,47 @@ tar_skip_n_records (struct vfs_s_super *archive, int tard, size_t n)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static ReadStatus
+/** Check header checksum.
+ */
+static read_header
 tar_checksum (const union block *header)
 {
-    long recsum;
-    long signed_sum = 0;
-    long sum = 0;
-    int i;
+    size_t i;
+    int unsigned_sum = 0;       /* the POSIX one :-) */
+    int signed_sum = 0;         /* the Sun one :-( */
+    int recorded_sum;
+    long parsed_sum;
     const char *p = header->buffer;
 
-    recsum = tar_from_oct (8, header->header.chksum);
-
-    for (i = sizeof (*header); --i >= 0;)
+    for (i = sizeof (*header); i-- != 0;)
     {
-        /*
-         * We can't use unsigned char here because of old compilers,
-         * e.g. V7.
-         */
-        signed_sum += *p;
-        sum += 0xFF & *p++;
+        unsigned_sum += (unsigned char) *p;
+        signed_sum += (signed char) (*p++);
     }
 
-    /* Adjust checksum to count the "chksum" field as blanks. */
-    for (i = sizeof (header->header.chksum); --i >= 0;)
+    if (unsigned_sum == 0)
+        return HEADER_ZERO_BLOCK;
+
+    /* Adjust checksum to count the "chksum" field as blanks.  */
+    for (i = sizeof (header->header.chksum); i-- != 0;)
     {
-        sum -= 0xFF & header->header.chksum[i];
-        signed_sum -= (char) header->header.chksum[i];
+        unsigned_sum -= (unsigned char) header->header.chksum[i];
+        signed_sum -= (signed char) (header->header.chksum[i]);
     }
 
-    sum += ' ' * sizeof (header->header.chksum);
+    unsigned_sum += ' ' * sizeof (header->header.chksum);
     signed_sum += ' ' * sizeof (header->header.chksum);
 
-    /*
-     * This is a zeroed block... whole block is 0's except
-     * for the 8 blanks we faked for the checksum field.
-     */
-    if (sum == 8 * ' ')
-        return STATUS_EOFMARK;
+    parsed_sum = tar_from_oct (8, header->header.chksum);
+    if (parsed_sum == -1)
+        return HEADER_FAILURE;
 
-    if (sum != recsum && signed_sum != recsum)
-        return STATUS_BADCHECKSUM;
+    recorded_sum = parsed_sum;
 
-    return STATUS_SUCCESS;
+    if (unsigned_sum != recorded_sum && signed_sum != recorded_sum)
+        return HEADER_FAILURE;
+
+    return HEADER_SUCCESS;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -492,7 +378,7 @@ tar_decode_header (union block *header, tar_super_t * arch)
             else
                 arch->type = TAR_USTAR;
         }
-        else if (strcmp (header->header.magic, OLDGNU_MAGIC) == 0)
+        else if (strcmp (header->buffer + offsetof (struct posix_header, magic), OLDGNU_MAGIC) == 0)
             arch->type = TAR_GNU;
     }
 
@@ -614,16 +500,12 @@ tar_fill_stat (struct vfs_s_super *archive, struct stat *st, union block *header
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/**
- * Return 1 for success, 0 if the checksum is bad, EOF on eof,
- * 2 for a block full of zeros (EOF marker).
- *
- */
-static ReadStatus
+
+static read_header
 tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, size_t * h_size)
 {
     tar_super_t *arch = TAR_SUPER (archive);
-    ReadStatus checksum_status;
+    read_header checksum_status;
     union block *header;
     static char *next_long_name = NULL, *next_long_link = NULL;
 
@@ -631,10 +513,10 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
     {
         header = tar_get_next_block (archive, tard);
         if (header == NULL)
-            return STATUS_EOF;
+            return HEADER_END_OF_FILE;
 
         checksum_status = tar_checksum (header);
-        if (checksum_status != STATUS_SUCCESS)
+        if (checksum_status != HEADER_SUCCESS)
             return checksum_status;
 
         *h_size = tar_decode_header (header, arch);
@@ -644,7 +526,7 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
         {
             if (arch->type == TAR_UNKNOWN)
                 arch->type = TAR_POSIX;
-            return STATUS_SUCCESS;
+            return HEADER_SUCCESS;
         }
 
         if (header->header.typeflag == GNUTYPE_LONGNAME
@@ -661,7 +543,7 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
             if (*h_size > MC_MAXPATHLEN)
             {
                 message (D_ERROR, MSG_ERROR, _("Inconsistent tar archive"));
-                return STATUS_BADCHECKSUM;
+                return HEADER_FAILURE;
             }
 
             longp = header->header.typeflag == GNUTYPE_LONGNAME ? &next_long_name : &next_long_link;
@@ -676,7 +558,7 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
                 {
                     MC_PTR_FREE (*longp);
                     message (D_ERROR, MSG_ERROR, _("Unexpected EOF on archive file"));
-                    return STATUS_BADCHECKSUM;
+                    return HEADER_FAILURE;
                 }
                 written = BLOCKSIZE;
                 if ((off_t) written > size)
@@ -690,7 +572,7 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
             {
                 MC_PTR_FREE (*longp);
                 message (D_ERROR, MSG_ERROR, _("Inconsistent tar archive"));
-                return STATUS_BADCHECKSUM;
+                return HEADER_FAILURE;
             }
 
             *bp = '\0';
@@ -779,7 +661,7 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
         if (parent == NULL)
         {
             message (D_ERROR, MSG_ERROR, _("Inconsistent tar archive"));
-            return STATUS_BADCHECKSUM;
+            return HEADER_FAILURE;
         }
 
         if (header->header.typeflag == LNKTYPE)
@@ -829,8 +711,106 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
             if (inode != NULL)
                 inode->data_offset = current_tar_position;
         }
-        return STATUS_SUCCESS;
+        return HEADER_SUCCESS;
     }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static struct vfs_s_super *
+tar_new_archive (struct vfs_class *me)
+{
+    tar_super_t *arch;
+
+    arch = g_new0 (tar_super_t, 1);
+    arch->base.me = me;
+    arch->fd = -1;
+    arch->type = TAR_UNKNOWN;
+
+    return VFS_SUPER (arch);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+tar_free_archive (struct vfs_class *me, struct vfs_s_super *archive)
+{
+    tar_super_t *arch = TAR_SUPER (archive);
+
+    (void) me;
+
+    if (arch->fd != -1)
+    {
+        mc_close (arch->fd);
+        arch->fd = -1;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/* Returns fd of the open tar file */
+static int
+tar_open_archive_int (struct vfs_class *me, const vfs_path_t * vpath, struct vfs_s_super *archive)
+{
+    int result, type;
+    tar_super_t *arch;
+    mode_t mode;
+    struct vfs_s_inode *root;
+
+    result = mc_open (vpath, O_RDONLY);
+    if (result == -1)
+    {
+        message (D_ERROR, MSG_ERROR, _("Cannot open tar archive\n%s"), vfs_path_as_str (vpath));
+        ERRNOR (ENOENT, -1);
+    }
+
+    archive->name = g_strdup (vfs_path_as_str (vpath));
+    arch = TAR_SUPER (archive);
+    mc_stat (vpath, &arch->st);
+
+    /* Find out the method to handle this tar file */
+    type = get_compression_type (result, archive->name);
+    if (type == COMPRESSION_NONE)
+        mc_lseek (result, 0, SEEK_SET);
+    else
+    {
+        char *s;
+        vfs_path_t *tmp_vpath;
+
+        mc_close (result);
+        s = g_strconcat (archive->name, decompress_extension (type), (char *) NULL);
+        tmp_vpath = vfs_path_from_str_flags (s, VPF_NO_CANON);
+        result = mc_open (tmp_vpath, O_RDONLY);
+        vfs_path_free (tmp_vpath, TRUE);
+        if (result == -1)
+            message (D_ERROR, MSG_ERROR, _("Cannot open tar archive\n%s"), s);
+        g_free (s);
+        if (result == -1)
+        {
+            MC_PTR_FREE (archive->name);
+            ERRNOR (ENOENT, -1);
+        }
+    }
+
+    arch->fd = result;
+    mode = arch->st.st_mode & 07777;
+    if (mode & 0400)
+        mode |= 0100;
+    if (mode & 0040)
+        mode |= 0010;
+    if (mode & 0004)
+        mode |= 0001;
+    mode |= S_IFDIR;
+
+    root = vfs_s_new_inode (me, archive, &arch->st);
+    root->st.st_mode = mode;
+    root->data_offset = -1;
+    root->st.st_nlink++;
+    root->st.st_dev = VFS_SUBCLASS (me)->rdev++;
+
+    archive->root = root;
+
+    return result;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -843,7 +823,7 @@ tar_open_archive (struct vfs_s_super *archive, const vfs_path_t * vpath,
                   const vfs_path_element_t * vpath_element)
 {
     /* Initial status at start of archive */
-    ReadStatus status = STATUS_EOFMARK;
+    read_header status = HEADER_STILL_UNREAD;
     int tard;
 
     current_tar_position = 0;
@@ -855,13 +835,19 @@ tar_open_archive (struct vfs_s_super *archive, const vfs_path_t * vpath,
     while (TRUE)
     {
         size_t h_size = 0;
-        ReadStatus prev_status = status;
+        read_header prev_status;
 
+        prev_status = status;
         status = tar_read_header (vpath_element->class, archive, tard, &h_size);
 
         switch (status)
         {
-        case STATUS_SUCCESS:
+        case HEADER_STILL_UNREAD:
+            message (D_ERROR, MSG_ERROR, _("%s\ndoesn't look like a tar archive."),
+                     vfs_path_as_str (vpath));
+            return -1;
+
+        case HEADER_SUCCESS:
             tar_skip_n_records (archive, tard, (h_size + BLOCKSIZE - 1) / BLOCKSIZE);
             continue;
 
@@ -871,11 +857,11 @@ tar_open_archive (struct vfs_s_super *archive, const vfs_path_t * vpath,
              * If the previous header was good, tell them
              * that we are skipping bad ones.
              */
-        case STATUS_BADCHECKSUM:
+        case HEADER_FAILURE:
             switch (prev_status)
             {
                 /* Error on first block */
-            case STATUS_EOFMARK:
+            case HEADER_ZERO_BLOCK:
                 {
                     message (D_ERROR, MSG_ERROR, _("%s\ndoesn't look like a tar archive."),
                              vfs_path_as_str (vpath));
@@ -883,13 +869,13 @@ tar_open_archive (struct vfs_s_super *archive, const vfs_path_t * vpath,
 
                     /* Error after header rec */
                 }
-            case STATUS_SUCCESS:
+            case HEADER_SUCCESS:
                 /* Error after error */
 
-            case STATUS_BADCHECKSUM:
+            case HEADER_FAILURE:
                 return -1;
 
-            case STATUS_EOF:
+            case HEADER_END_OF_FILE:
                 return 0;
 
             default:
@@ -898,10 +884,10 @@ tar_open_archive (struct vfs_s_super *archive, const vfs_path_t * vpath,
             MC_FALLTHROUGH;
 
             /* Record of zeroes */
-        case STATUS_EOFMARK:   /* If error after 0's */
+        case HEADER_ZERO_BLOCK:        /* If error after 0's */
             MC_FALLTHROUGH;
             /* exit from loop */
-        case STATUS_EOF:       /* End of archive */
+        case HEADER_END_OF_FILE:       /* End of archive */
             break;
         default:
             break;

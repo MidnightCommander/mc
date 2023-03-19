@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-01-29 11:16+0300\n"
+"POT-Creation-Date: 2023-03-19 20:39+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
 "Language-Team: Latvian (http://www.transifex.com/mc/mc/language/lv/)\n"
@@ -2161,9 +2161,6 @@ msgid ""
 "%s"
 msgstr ""
 
-msgid "Cannot change attributes on non-local filesystems"
-msgstr ""
-
 #, c-format
 msgid ""
 "Cannot get flags of \"%s\"\n"
@@ -3321,9 +3318,6 @@ msgstr ""
 msgid "Links:      %d"
 msgstr ""
 
-msgid "Attributes: not supported"
-msgstr ""
-
 #, c-format
 msgid "Attributes: %s"
 msgstr ""
@@ -4262,6 +4256,12 @@ msgstr ""
 msgid "sftp: Listing done."
 msgstr ""
 
+msgid "Inconsistent tar archive"
+msgstr "Neatbilstīgs tar arhīvs"
+
+msgid "Unexpected EOF on archive file"
+msgstr "Negaidītas arhīva faila beigas (EOF)"
+
 #, c-format
 msgid ""
 "Cannot open tar archive\n"
@@ -4269,12 +4269,6 @@ msgid ""
 msgstr ""
 "Nevar atvērt tar arhīvu\n"
 "%s"
-
-msgid "Inconsistent tar archive"
-msgstr "Neatbilstīgs tar arhīvs"
-
-msgid "Unexpected EOF on archive file"
-msgstr "Negaidītas arhīva faila beigas (EOF)"
 
 #, c-format
 msgid ""

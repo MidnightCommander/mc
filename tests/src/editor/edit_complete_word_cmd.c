@@ -168,7 +168,7 @@ my_setup (void)
     mc_config_set_bool (mc_global.main_config, CONFIG_APP_SECTION,
                         "editor_wordcompletion_collect_all_files", TRUE);
 
-    option_filesize_threshold = (char *) "64M";
+    edit_options.filesize_threshold = (char *) "64M";
 
     rect_init (&r, 0, 0, 24, 80);
     test_edit = edit_init (NULL, &r, vfs_path_from_str ("test-data.txt"), 1);

@@ -46,6 +46,8 @@ WDialog *filemanager = NULL;
 
 /*** file scope type declarations ****************************************************************/
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 /* List of dialogs: filemanagers, editors, viewers */
@@ -55,6 +57,7 @@ static GList *mc_current = NULL;
 /* Is there any dialogs that we have to run after returning to the manager from another dialog */
 static gboolean dialog_switch_pending = FALSE;
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -229,7 +232,7 @@ dialog_switch_list (void)
     lines = MIN ((size_t) (LINES * 2 / 3), dlg_num);
     cols = COLS * 2 / 3;
 
-    listbox = create_listbox_window (lines, cols, _("Screens"), "[Screen selector]");
+    listbox = listbox_window_new (lines, cols, _("Screens"), "[Screen selector]");
 
     for (h = mc_dialogs; h != NULL; h = g_list_next (h))
     {
@@ -246,7 +249,7 @@ dialog_switch_list (void)
         g_free (title);
     }
 
-    selected = run_listbox_with_data (listbox, mc_current);
+    selected = listbox_run_with_data (listbox, mc_current);
     if (selected != NULL)
         dialog_switch_goto (selected);
 }

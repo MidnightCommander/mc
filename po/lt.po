@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-01-29 11:16+0300\n"
+"POT-Creation-Date: 2023-03-19 20:39+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Mantas Kriaučiūnas Baltix <mantas@akl.lt>, 2020\n"
 "Language-Team: Lithuanian (http://www.transifex.com/mc/mc/language/lt/)\n"
@@ -2213,9 +2213,6 @@ msgid ""
 "%s"
 msgstr ""
 
-msgid "Cannot change attributes on non-local filesystems"
-msgstr ""
-
 #, c-format
 msgid ""
 "Cannot get flags of \"%s\"\n"
@@ -3408,9 +3405,6 @@ msgstr "Savininkas: %s/%s"
 msgid "Links:      %d"
 msgstr "Nuorodos: %d"
 
-msgid "Attributes: not supported"
-msgstr ""
-
 #, c-format
 msgid "Attributes: %s"
 msgstr ""
@@ -4352,6 +4346,12 @@ msgstr ""
 msgid "sftp: Listing done."
 msgstr ""
 
+msgid "Inconsistent tar archive"
+msgstr "Nevientisas tar archyvas"
+
+msgid "Unexpected EOF on archive file"
+msgstr "Netikėta archyvo failo pabaiga"
+
 #, c-format
 msgid ""
 "Cannot open tar archive\n"
@@ -4359,12 +4359,6 @@ msgid ""
 msgstr ""
 "Nepavyko atverti tar archyvo\n"
 "%s"
-
-msgid "Inconsistent tar archive"
-msgstr "Nevientisas tar archyvas"
-
-msgid "Unexpected EOF on archive file"
-msgstr "Netikėta archyvo failo pabaiga"
 
 #, c-format
 msgid ""

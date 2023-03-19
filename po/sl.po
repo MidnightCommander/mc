@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-01-29 11:16+0300\n"
+"POT-Creation-Date: 2023-03-19 20:39+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Matej Urbančič <>, 2012\n"
 "Language-Team: Slovenian (http://www.transifex.com/mc/mc/language/sl/)\n"
@@ -2169,9 +2169,6 @@ msgid ""
 "%s"
 msgstr ""
 
-msgid "Cannot change attributes on non-local filesystems"
-msgstr ""
-
 #, c-format
 msgid ""
 "Cannot get flags of \"%s\"\n"
@@ -3332,9 +3329,6 @@ msgstr ""
 msgid "Links:      %d"
 msgstr ""
 
-msgid "Attributes: not supported"
-msgstr ""
-
 #, c-format
 msgid "Attributes: %s"
 msgstr ""
@@ -4274,6 +4268,12 @@ msgstr ""
 msgid "sftp: Listing done."
 msgstr ""
 
+msgid "Inconsistent tar archive"
+msgstr "Nekonsistenten tar arhiv"
+
+msgid "Unexpected EOF on archive file"
+msgstr "Nepričakovan EOF (konec vrstice) v datoteki arhiva"
+
 #, c-format
 msgid ""
 "Cannot open tar archive\n"
@@ -4281,12 +4281,6 @@ msgid ""
 msgstr ""
 "Ne morem odpreti tar arhiva\n"
 "%s"
-
-msgid "Inconsistent tar archive"
-msgstr "Nekonsistenten tar arhiv"
-
-msgid "Unexpected EOF on archive file"
-msgstr "Nepričakovan EOF (konec vrstice) v datoteki arhiva"
 
 #, c-format
 msgid ""

@@ -9,7 +9,7 @@
 
 #include "lib/global.h"
 #include "lib/search.h"
-#include "lib/util.h"
+#include "lib/file-entry.h"
 #include "lib/vfs/vfs.h"
 
 /*** typedefs(not structures) and defined constants **********************************************/

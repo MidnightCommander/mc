@@ -50,11 +50,13 @@
 
 /*** file scope type declarations ****************************************************************/
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
-
 
 static unsigned char
 get_hotkey (int n)
@@ -75,15 +77,15 @@ get_hotkey (int n)
 int
 select_charset (int center_y, int center_x, int current_charset, gboolean seldisplay)
 {
+    Listbox *listbox;
     size_t i;
     int listbox_result;
     char buffer[255];
 
     /* Create listbox */
-    Listbox *listbox = create_listbox_window_centered (center_y, center_x,
-                                                       codepages->len + 1, ENTRY_LEN + 2,
-                                                       _("Choose codepage"),
-                                                       "[Codepages Translation]");
+    listbox =
+        listbox_window_centered_new (center_y, center_x, codepages->len + 1, ENTRY_LEN + 2,
+                                     _("Choose codepage"), "[Codepages Translation]");
 
     if (!seldisplay)
         LISTBOX_APPEND_TEXT (listbox, '-', _("-  < No translation >"), NULL, FALSE);
@@ -109,7 +111,7 @@ select_charset (int center_y, int center_x, int current_charset, gboolean seldis
 
     listbox_select_entry (listbox->list, i);
 
-    listbox_result = run_listbox (listbox);
+    listbox_result = listbox_run (listbox);
 
     if (listbox_result < 0)
     {
@@ -133,8 +135,8 @@ select_charset (int center_y, int center_x, int current_charset, gboolean seldis
     }
 }
 
-
 /* --------------------------------------------------------------------------------------------- */
+
 /** Set codepage */
 gboolean
 do_set_codepage (int codepage)
@@ -158,8 +160,8 @@ do_set_codepage (int codepage)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** Show menu selecting codepage */
 
+/** Show menu selecting codepage */
 gboolean
 do_select_codepage (void)
 {

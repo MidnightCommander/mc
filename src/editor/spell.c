@@ -36,6 +36,7 @@
 #include "lib/charsets.h"
 #endif
 #include "lib/strutil.h"
+#include "lib/util.h"           /* MC_PTR_FREE() */
 #include "lib/tty/tty.h"        /* COLS, LINES */
 
 #include "src/setup.h"
@@ -58,6 +59,8 @@ typedef struct aspell_struct
     AspellConfig *config;
     AspellSpeller *speller;
 } spell_t;
+
+/*** forward declarations (file scope functions) *************************************************/
 
 /*** file scope variables ************************************************************************/
 
@@ -835,13 +838,13 @@ spell_dialog_lang_list_show (GArray * languages)
     Listbox *lang_list;
 
     /* Create listbox */
-    lang_list = create_listbox_window_centered (-1, -1, lang_dlg_h, lang_dlg_w,
-                                                _("Select language"), "[ASpell]");
+    lang_list = listbox_window_centered_new (-1, -1, lang_dlg_h, lang_dlg_w,
+                                             _("Select language"), "[ASpell]");
 
     for (i = 0; i < languages->len; i++)
         LISTBOX_APPEND_TEXT (lang_list, 0, g_array_index (languages, char *, i), NULL, FALSE);
 
-    res = run_listbox (lang_list);
+    res = listbox_run (lang_list);
     if (res >= 0)
         selected_lang = g_strdup (g_array_index (languages, char *, (unsigned int) res));
 

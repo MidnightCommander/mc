@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-01-29 11:16+0300\n"
+"POT-Creation-Date: 2023-03-19 20:39+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>, "
 "2011,2015-2019\n"
@@ -2258,9 +2258,6 @@ msgid ""
 "%s"
 msgstr ""
 
-msgid "Cannot change attributes on non-local filesystems"
-msgstr ""
-
 #, c-format
 msgid ""
 "Cannot get flags of \"%s\"\n"
@@ -3503,9 +3500,6 @@ msgstr "Jabea: %s/%s"
 msgid "Links:      %d"
 msgstr "Estekak: %d"
 
-msgid "Attributes: not supported"
-msgstr ""
-
 #, c-format
 msgid "Attributes: %s"
 msgstr ""
@@ -4457,6 +4451,12 @@ msgstr "sftp: (Ktrl-G eteteko) Zerrendatzen... %s"
 msgid "sftp: Listing done."
 msgstr "sftp: Zerrenda osatuta."
 
+msgid "Inconsistent tar archive"
+msgstr "tar artxibo inkoherentea"
+
+msgid "Unexpected EOF on archive file"
+msgstr "Ustekabeko EOF artxibo fitxategian"
+
 #, c-format
 msgid ""
 "Cannot open tar archive\n"
@@ -4464,12 +4464,6 @@ msgid ""
 msgstr ""
 "tar artxiboa ezin ireki\n"
 "%s"
-
-msgid "Inconsistent tar archive"
-msgstr "tar artxibo inkoherentea"
-
-msgid "Unexpected EOF on archive file"
-msgstr "Ustekabeko EOF artxibo fitxategian"
 
 #, c-format
 msgid ""

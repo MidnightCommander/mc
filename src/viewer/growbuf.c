@@ -65,7 +65,7 @@ void
 mcview_growbuf_init (WView * view)
 {
     view->growbuf_in_use = TRUE;
-    view->growbuf_blockptr = g_ptr_array_new ();
+    view->growbuf_blockptr = g_ptr_array_new_with_free_func (g_free);
     view->growbuf_lastindex = VIEW_PAGE_SIZE;
     view->growbuf_finished = FALSE;
 }
@@ -96,10 +96,7 @@ mcview_growbuf_free (WView * view)
 {
     g_assert (view->growbuf_in_use);
 
-    g_ptr_array_foreach (view->growbuf_blockptr, (GFunc) g_free, NULL);
-
-    (void) g_ptr_array_free (view->growbuf_blockptr, TRUE);
-
+    g_ptr_array_free (view->growbuf_blockptr, TRUE);
     view->growbuf_blockptr = NULL;
     view->growbuf_in_use = FALSE;
 }

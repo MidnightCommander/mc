@@ -57,6 +57,8 @@
 typedef int (*mc_XErrorHandler_callback) (Display *, XErrorEvent *);
 typedef int (*mc_XIOErrorHandler_callback) (Display *);
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 #ifdef HAVE_GMODULE
@@ -66,6 +68,7 @@ static mc_XErrorHandler_callback (*func_XSetErrorHandler) (mc_XErrorHandler_call
 static mc_XIOErrorHandler_callback (*func_XSetIOErrorHandler) (mc_XIOErrorHandler_callback);
 static Bool (*func_XQueryPointer) (Display *, Window, Window *, Window *,
                                    int *, int *, int *, int *, unsigned int *);
+
 static GModule *x11_module;
 #endif
 
@@ -79,6 +82,7 @@ static gboolean lost_connection = FALSE;
 static jmp_buf x11_exception;   /* FIXME: get a better name */
 static gboolean longjmp_allowed = FALSE;
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 

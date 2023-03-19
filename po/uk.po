@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-01-29 11:16+0300\n"
+"POT-Creation-Date: 2023-03-19 20:39+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Andrij Mizyk <andm1zyk@proton.me>, 2022\n"
 "Language-Team: Ukrainian (http://www.transifex.com/mc/mc/language/uk/)\n"
@@ -2277,9 +2277,6 @@ msgstr ""
 "Не вдалося змінити атрибути \"%s\"\n"
 "%s"
 
-msgid "Cannot change attributes on non-local filesystems"
-msgstr "Не можливо змінити атрибути на нелокальних файлових системах"
-
 #, c-format
 msgid ""
 "Cannot get flags of \"%s\"\n"
@@ -3534,9 +3531,6 @@ msgstr "Власник:     %s/%s"
 msgid "Links:      %d"
 msgstr "Посилань: %d"
 
-msgid "Attributes: not supported"
-msgstr "Атрибути: не підтримуються"
-
 #, c-format
 msgid "Attributes: %s"
 msgstr "Атрибути: %s"
@@ -4522,6 +4516,12 @@ msgstr "sftp: (Ctrl-G перервати) Створення списку... %s"
 msgid "sftp: Listing done."
 msgstr "sftp: Створення списку завершено."
 
+msgid "Inconsistent tar archive"
+msgstr "Виявлено неузгоджений архів tar"
+
+msgid "Unexpected EOF on archive file"
+msgstr "Виявлено неочікуваний кінець архівного файлу"
+
 #, c-format
 msgid ""
 "Cannot open tar archive\n"
@@ -4529,12 +4529,6 @@ msgid ""
 msgstr ""
 "Не вдалося відкрити архів tar\n"
 "%s"
-
-msgid "Inconsistent tar archive"
-msgstr "Виявлено неузгоджений архів tar"
-
-msgid "Unexpected EOF on archive file"
-msgstr "Виявлено неочікуваний кінець архівного файлу"
 
 #, c-format
 msgid ""
@@ -4736,6 +4730,12 @@ msgstr "Почати спочатку?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не вдалося отримати локальну копію /ftp://some.host/editme.txt"
+
+#~ msgid "Cannot change attributes on non-local filesystems"
+#~ msgstr "Не можливо змінити атрибути на нелокальних файлових системах"
+
+#~ msgid "Attributes: not supported"
+#~ msgstr "Атрибути: не підтримуються"
 
 #, c-format
 #~ msgid " %s%s file error"

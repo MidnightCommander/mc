@@ -55,6 +55,8 @@ typedef struct mcdiffview_search_options_struct
     gboolean all_codepages;
 } mcdiffview_search_options_t;
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 static mcdiffview_search_options_t mcdiffview_search_options = {

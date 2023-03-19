@@ -52,7 +52,7 @@
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"        /* is_idle() */
 #include "lib/lock.h"           /* lock_file() */
-#include "lib/util.h"
+#include "lib/file-entry.h"
 #include "lib/widget.h"
 #ifdef HAVE_CHARSET
 #include "lib/charsets.h"
@@ -76,6 +76,8 @@
 /*** file scope macro definitions ****************************************************************/
 
 /*** file scope type declarations ****************************************************************/
+
+/*** forward declarations (file scope functions) *************************************************/
 
 /*** file scope variables ************************************************************************/
 

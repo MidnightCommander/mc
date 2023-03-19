@@ -63,7 +63,6 @@
 
 #include "src/usermenu.h"       /* user_menu_cmd() */
 
-#include "src/setup.h"          /* option_tab_spacing */
 #include "src/keymap.h"
 
 #include "edit-impl.h"
@@ -78,30 +77,39 @@
 
 /*** global variables ****************************************************************************/
 
-int option_word_wrap_line_length = DEFAULT_WRAP_LINE_LENGTH;
-gboolean option_typewriter_wrap = FALSE;
-gboolean option_auto_para_formatting = FALSE;
-gboolean option_fill_tabs_with_spaces = FALSE;
-gboolean option_return_does_auto_indent = TRUE;
-gboolean option_backspace_through_tabs = FALSE;
-gboolean option_fake_half_tabs = TRUE;
-int option_save_mode = EDIT_QUICK_SAVE;
-gboolean option_save_position = TRUE;
-int option_max_undo = 32768;
-gboolean option_persistent_selections = TRUE;
-gboolean option_cursor_beyond_eol = FALSE;
-gboolean option_line_state = FALSE;
-int option_line_state_width = 0;
-gboolean option_cursor_after_inserted_block = FALSE;
-gboolean option_state_full_filename = FALSE;
+edit_options_t edit_options = {
+    .word_wrap_line_length = DEFAULT_WRAP_LINE_LENGTH,
+    .typewriter_wrap = FALSE,
+    .auto_para_formatting = FALSE,
+    .fill_tabs_with_spaces = FALSE,
+    .return_does_auto_indent = TRUE,
+    .backspace_through_tabs = FALSE,
+    .fake_half_tabs = TRUE,
+    .persistent_selections = TRUE,
+    .drop_selection_on_copy = TRUE,
+    .cursor_beyond_eol = FALSE,
+    .cursor_after_inserted_block = FALSE,
+    .state_full_filename = FALSE,
+    .line_state = FALSE,
+    .line_state_width = 0,
+    .save_mode = EDIT_QUICK_SAVE,
+    .confirm_save = TRUE,
+    .save_position = TRUE,
+    .syntax_highlighting = TRUE,
+    .group_undo = FALSE,
+    .backup_ext = NULL,
+    .filesize_threshold = NULL,
+    .stop_format_chars = NULL,
+    .visible_tabs = TRUE,
+    .visible_tws = TRUE,
+    .show_right_margin = FALSE,
+    .simple_statusbar = FALSE,
+    .check_nl_at_eof = FALSE
+};
+
+int max_undo = 32768;
 
 gboolean enable_show_tabs_tws = TRUE;
-gboolean option_check_nl_at_eof = FALSE;
-gboolean option_group_undo = FALSE;
-gboolean show_right_margin = FALSE;
-
-char *option_backup_ext = NULL;
-char *option_filesize_threshold = NULL;
 
 unsigned int edit_stack_iterator = 0;
 edit_stack_type edit_history_moveto[MAX_HISTORY_MOVETO];
@@ -115,6 +123,8 @@ const char VERTICAL_MAGIC[] = { '\1', '\1', '\1', '\1', '\n' };
 #define space_width 1
 
 /*** file scope type declarations ****************************************************************/
+
+/*** forward declarations (file scope functions) *************************************************/
 
 /*** file scope variables ************************************************************************/
 
@@ -139,7 +149,7 @@ static const struct edit_filters
     /* *INDENT-ON* */
 };
 
-static const off_t option_filesize_default_threshold = 64 * 1024 * 1024;        /* 64 MB */
+static const off_t filesize_default_threshold = 64 * 1024 * 1024;       /* 64 MB */
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
@@ -339,9 +349,9 @@ check_file_access (WEdit * edit, const vfs_path_t * filename_vpath, struct stat 
     {
         gboolean err = FALSE;
 
-        threshold = parse_integer (option_filesize_threshold, &err);
+        threshold = parse_integer (edit_options.filesize_threshold, &err);
         if (err)
-            threshold = option_filesize_default_threshold;
+            threshold = filesize_default_threshold;
     }
 
     /*
@@ -565,6 +575,8 @@ edit_pop_undo_action (WEdit * edit)
     return c;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static long
 edit_pop_redo_action (WEdit * edit)
 {
@@ -593,6 +605,8 @@ edit_pop_redo_action (WEdit * edit)
 
     return c;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static long
 get_prev_undo_action (WEdit * edit)
@@ -886,7 +900,7 @@ my_type_of (int c)
 {
     unsigned long x, r = 0;
     const char *p, *q;
-    const char option_chars_move_whole_word[] =
+    const char chars_move_whole_word[] =
         "!=&|<>^~ !:;, !'!`!.?!\"!( !) !{ !} !Aa0 !+-*/= |<> ![ !] !\\#! ";
 
     if (c == 0)
@@ -904,12 +918,12 @@ my_type_of (int c)
         c = '0';
     else if (isspace (c))
         c = ' ';
-    q = strchr (option_chars_move_whole_word, c);
+    q = strchr (chars_move_whole_word, c);
     if (!q)
         return 0xFFFFFFFFUL;
     do
     {
-        for (x = 1, p = option_chars_move_whole_word; p < q; p++)
+        for (x = 1, p = chars_move_whole_word; p < q; p++)
             if (*p == '!')
                 x <<= 1;
         r |= x;
@@ -1015,7 +1029,7 @@ edit_right_char_move_cmd (WEdit * edit)
 #endif
         c = edit_buffer_get_current_byte (&edit->buffer);
 
-    if (option_cursor_beyond_eol && c == '\n')
+    if (edit_options.cursor_beyond_eol && c == '\n')
         edit->over_col++;
     else
         edit_cursor_move (edit, char_length);
@@ -1029,7 +1043,7 @@ edit_left_char_move_cmd (WEdit * edit)
     int char_length = 1;
 
     if (edit->column_highlight
-        && option_cursor_beyond_eol
+        && edit_options.cursor_beyond_eol
         && edit->mark1 != edit->mark2
         && edit->over_col == 0 && edit->buffer.curs1 == edit_buffer_get_current_bol (&edit->buffer))
         return;
@@ -1042,7 +1056,7 @@ edit_left_char_move_cmd (WEdit * edit)
     }
 #endif
 
-    if (option_cursor_beyond_eol && edit->over_col > 0)
+    if (edit_options.cursor_beyond_eol && edit->over_col > 0)
         edit->over_col--;
     else
         edit_cursor_move (edit, -char_length);
@@ -1318,10 +1332,10 @@ edit_group_undo (WEdit * edit)
         cur_ac = get_prev_undo_action (edit);
         edit_do_undo (edit);
         ac = get_prev_undo_action (edit);
-        /* exit from cycle if option_group_undo is not set,
+        /* exit from cycle if edit_options.group_undo is not set,
          * and make single UNDO operation
          */
-        if (!option_group_undo)
+        if (!edit_options.group_undo)
             ac = STACK_BOTTOM;
     }
 }
@@ -1425,7 +1439,7 @@ insert_spaces_tab (WEdit * edit, gboolean half)
     long i;
 
     edit_update_curs_col (edit);
-    i = option_tab_spacing * space_width;
+    i = TAB_SIZE * space_width;
     if (half)
         i /= 2;
     if (i != 0)
@@ -1444,12 +1458,12 @@ insert_spaces_tab (WEdit * edit, gboolean half)
 static inline void
 edit_tab_cmd (WEdit * edit)
 {
-    if (option_fake_half_tabs && is_in_indent (&edit->buffer))
+    if (edit_options.fake_half_tabs && is_in_indent (&edit->buffer))
     {
         /* insert a half tab (usually four spaces) unless there is a
            half tab already behind, then delete it and insert a
            full tab. */
-        if (option_fill_tabs_with_spaces || !right_of_four_spaces (edit))
+        if (edit_options.fill_tabs_with_spaces || !right_of_four_spaces (edit))
             insert_spaces_tab (edit, TRUE);
         else
         {
@@ -1460,7 +1474,7 @@ edit_tab_cmd (WEdit * edit)
             edit_insert (edit, '\t');
         }
     }
-    else if (option_fill_tabs_with_spaces)
+    else if (edit_options.fill_tabs_with_spaces)
         insert_spaces_tab (edit, FALSE);
     else
         edit_insert (edit, '\t');
@@ -1473,10 +1487,10 @@ check_and_wrap_line (WEdit * edit)
 {
     off_t curs;
 
-    if (!option_typewriter_wrap)
+    if (!edit_options.typewriter_wrap)
         return;
     edit_update_curs_col (edit);
-    if (edit->curs_col < option_word_wrap_line_length)
+    if (edit->curs_col < edit_options.word_wrap_line_length)
         return;
     curs = edit->buffer.curs1;
     while (TRUE)
@@ -1599,8 +1613,8 @@ edit_move_block_to_right (WEdit * edit)
         edit_cursor_move (edit, cur_bol - edit->buffer.curs1);
         if (!edit_line_is_blank (edit, edit->buffer.curs_line))
         {
-            if (option_fill_tabs_with_spaces)
-                insert_spaces_tab (edit, option_fake_half_tabs);
+            if (edit_options.fill_tabs_with_spaces)
+                insert_spaces_tab (edit, edit_options.fake_half_tabs);
             else
                 edit_insert (edit, '\t');
             edit_cursor_move (edit,
@@ -1638,10 +1652,7 @@ edit_move_block_to_left (WEdit * edit)
 
         edit_cursor_move (edit, cur_bol - edit->buffer.curs1);
 
-        if (option_fake_half_tabs)
-            del_tab_width = HALF_TAB_SIZE;
-        else
-            del_tab_width = option_tab_spacing;
+        del_tab_width = edit_options.fake_half_tabs ? HALF_TAB_SIZE : TAB_SIZE;
 
         next_char = edit_buffer_get_current_byte (&edit->buffer);
         if (next_char == '\t')
@@ -1779,7 +1790,7 @@ user_menu (WEdit * edit, const char *menu_file, int selected_entry)
         edit_save_block (edit, block_file, start_mark, end_mark);
 
     /* run shell scripts from menu */
-    if (user_menu_cmd (edit, menu_file, selected_entry)
+    if (user_menu_cmd (CONST_WIDGET (edit), menu_file, selected_entry)
         && (mc_stat (block_file_vpath, &status) == 0) && (status.st_size != 0))
     {
         int rc = 0;
@@ -1966,7 +1977,7 @@ edit_insert_file (WEdit * edit, const vfs_path_t * filename_vpath)
             edit_insert_stream (edit, f);
 
             /* Place cursor at the end of text selection */
-            if (!option_cursor_after_inserted_block)
+            if (!edit_options.cursor_after_inserted_block)
             {
                 ins_len = edit->buffer.curs1 - current;
                 edit_cursor_move (edit, -ins_len);
@@ -2023,7 +2034,7 @@ edit_insert_file (WEdit * edit, const vfs_path_t * filename_vpath)
             edit_set_markers (edit, edit->buffer.curs1, mark2, c1, c2);
 
             /* highlight inserted text then not persistent blocks */
-            if (!option_persistent_selections && edit->modified)
+            if (!edit_options.persistent_selections && edit->modified)
             {
                 if (!edit->column_highlight)
                     edit_push_undo_action (edit, COLUMN_OFF);
@@ -2040,7 +2051,7 @@ edit_insert_file (WEdit * edit, const vfs_path_t * filename_vpath)
                     edit_insert (edit, buf[i]);
             }
             /* highlight inserted text then not persistent blocks */
-            if (!option_persistent_selections && edit->modified)
+            if (!edit_options.persistent_selections && edit->modified)
             {
                 edit_set_markers (edit, edit->buffer.curs1, current, 0, 0);
                 if (edit->column_highlight)
@@ -2049,7 +2060,7 @@ edit_insert_file (WEdit * edit, const vfs_path_t * filename_vpath)
             }
 
             /* Place cursor at the end of text selection */
-            if (!option_cursor_after_inserted_block)
+            if (!edit_options.cursor_after_inserted_block)
             {
                 ins_len = edit->buffer.curs1 - current;
                 edit_cursor_move (edit, -ins_len);
@@ -2080,8 +2091,8 @@ edit_init (WEdit * edit, const WRect * r, const vfs_path_t * filename_vpath, lon
 {
     gboolean to_free = FALSE;
 
-    option_auto_syntax = TRUE;  /* Resetting to auto on every invocation */
-    option_line_state_width = option_line_state ? LINE_STATE_WIDTH : 0;
+    auto_syntax = TRUE;         /* Resetting to auto on every invocation */
+    edit_options.line_state_width = edit_options.line_state ? LINE_STATE_WIDTH : 0;
 
     if (edit != NULL)
     {
@@ -2158,7 +2169,7 @@ edit_init (WEdit * edit, const WRect * r, const vfs_path_t * filename_vpath, lon
     edit_get_syntax_color (edit, -1);
 
     /* load saved cursor position and/or boolmarks */
-    if ((line == 0) && option_save_position)
+    if ((line == 0) && edit_options.save_position)
         edit_load_position (edit, TRUE);
     else
     {
@@ -2188,7 +2199,7 @@ edit_clean (WEdit * edit)
         (void) unlock_file (edit->filename_vpath);
 
     /* save cursor position */
-    if (option_save_position)
+    if (edit_options.save_position)
         edit_save_position (edit);
     else if (edit->serialized_bookmarks != NULL)
         g_array_free (edit->serialized_bookmarks, TRUE);
@@ -2337,9 +2348,9 @@ edit_push_undo_action (WEdit * edit, long c)
     /* first enlarge the stack if necessary */
     if (sp > edit->undo_stack_size - 10)
     {                           /* say */
-        if (option_max_undo < 256)
-            option_max_undo = 256;
-        if (edit->undo_stack_size < (unsigned long) option_max_undo)
+        if (max_undo < 256)
+            max_undo = 256;
+        if (edit->undo_stack_size < (unsigned long) max_undo)
         {
             t = g_realloc (edit->undo_stack, (edit->undo_stack_size * 2 + 10) * sizeof (long));
             if (t)
@@ -2425,9 +2436,9 @@ edit_push_redo_action (WEdit * edit, long c)
     /* first enlarge the stack if necessary */
     if (sp > edit->redo_stack_size - 10)
     {                           /* say */
-        if (option_max_undo < 256)
-            option_max_undo = 256;
-        if (edit->redo_stack_size < (unsigned long) option_max_undo)
+        if (max_undo < 256)
+            max_undo = 256;
+        if (edit->redo_stack_size < (unsigned long) max_undo)
         {
             t = g_realloc (edit->redo_stack, (edit->redo_stack_size * 2 + 10) * sizeof (long));
             if (t)
@@ -2948,7 +2959,7 @@ edit_move_to_prev_col (WEdit * edit, off_t p)
     edit_cursor_move (edit,
                       edit_move_forward3 (edit, p, prev + edit->over_col, 0) - edit->buffer.curs1);
 
-    if (option_cursor_beyond_eol)
+    if (edit_options.cursor_beyond_eol)
     {
         long line_len;
 
@@ -2970,7 +2981,7 @@ edit_move_to_prev_col (WEdit * edit, off_t p)
     else
     {
         edit->over_col = 0;
-        if (option_fake_half_tabs && is_in_indent (&edit->buffer))
+        if (edit_options.fake_half_tabs && is_in_indent (&edit->buffer))
         {
             long fake_half_tabs;
 
@@ -3342,7 +3353,7 @@ edit_execute_cmd (WEdit * edit, long command, int char_for_insertion)
     if (char_for_insertion >= 0)
     {
         /* if non persistent selection and text selected */
-        if (!option_persistent_selections && edit->mark1 != edit->mark2)
+        if (!edit_options.persistent_selections && edit->mark1 != edit->mark2)
             edit_block_delete_cmd (edit);
 
         if (edit->overwrite)
@@ -3355,7 +3366,7 @@ edit_execute_cmd (WEdit * edit, long command, int char_for_insertion)
 
                     edit_delete (edit, FALSE);
         }
-        if (option_cursor_beyond_eol && edit->over_col > 0)
+        if (edit_options.cursor_beyond_eol && edit->over_col > 0)
             edit_insert_over (edit);
 #ifdef HAVE_CHARSET
         /**
@@ -3390,7 +3401,7 @@ edit_execute_cmd (WEdit * edit, long command, int char_for_insertion)
 #endif
             edit_insert (edit, char_for_insertion);
 
-        if (option_auto_para_formatting)
+        if (edit_options.auto_para_formatting)
         {
             format_paragraph (edit, FALSE);
             edit->force |= REDRAW_PAGE;
@@ -3420,7 +3431,7 @@ edit_execute_cmd (WEdit * edit, long command, int char_for_insertion)
     case CK_Right:
     case CK_WordLeft:
     case CK_WordRight:
-        if (!option_persistent_selections && edit->mark2 >= 0)
+        if (!edit_options.persistent_selections && edit->mark2 >= 0)
         {
             if (edit->column_highlight)
                 edit_push_undo_action (edit, COLUMN_ON);
@@ -3466,16 +3477,16 @@ edit_execute_cmd (WEdit * edit, long command, int char_for_insertion)
     {
     case CK_BackSpace:
         /* if non persistent selection and text selected */
-        if (!option_persistent_selections && edit->mark1 != edit->mark2)
+        if (!edit_options.persistent_selections && edit->mark1 != edit->mark2)
             edit_block_delete_cmd (edit);
-        else if (option_cursor_beyond_eol && edit->over_col > 0)
+        else if (edit_options.cursor_beyond_eol && edit->over_col > 0)
             edit->over_col--;
-        else if (option_backspace_through_tabs && is_in_indent (&edit->buffer))
+        else if (edit_options.backspace_through_tabs && is_in_indent (&edit->buffer))
         {
             while (edit_buffer_get_previous_byte (&edit->buffer) != '\n' && edit->buffer.curs1 > 0)
                 edit_backspace (edit, TRUE);
         }
-        else if (option_fake_half_tabs && is_in_indent (&edit->buffer)
+        else if (edit_options.fake_half_tabs && is_in_indent (&edit->buffer)
                  && right_of_four_spaces (edit))
         {
             int i;
@@ -3488,14 +3499,15 @@ edit_execute_cmd (WEdit * edit, long command, int char_for_insertion)
         break;
     case CK_Delete:
         /* if non persistent selection and text selected */
-        if (!option_persistent_selections && edit->mark1 != edit->mark2)
+        if (!edit_options.persistent_selections && edit->mark1 != edit->mark2)
             edit_block_delete_cmd (edit);
         else
         {
-            if (option_cursor_beyond_eol && edit->over_col > 0)
+            if (edit_options.cursor_beyond_eol && edit->over_col > 0)
                 edit_insert_over (edit);
 
-            if (option_fake_half_tabs && is_in_indent (&edit->buffer) && left_of_four_spaces (edit))
+            if (edit_options.fake_half_tabs && is_in_indent (&edit->buffer)
+                && left_of_four_spaces (edit))
             {
                 int i;
 
@@ -3511,7 +3523,7 @@ edit_execute_cmd (WEdit * edit, long command, int char_for_insertion)
         edit_left_delete_word (edit);
         break;
     case CK_DeleteToWordEnd:
-        if (option_cursor_beyond_eol && edit->over_col > 0)
+        if (edit_options.cursor_beyond_eol && edit->over_col > 0)
             edit_insert_over (edit);
 
         edit_right_delete_word (edit);
@@ -3527,17 +3539,17 @@ edit_execute_cmd (WEdit * edit, long command, int char_for_insertion)
         break;
     case CK_Enter:
         edit->over_col = 0;
-        if (option_auto_para_formatting)
+        if (edit_options.auto_para_formatting)
         {
             edit_double_newline (edit);
-            if (option_return_does_auto_indent && !bracketed_pasting_in_progress)
+            if (edit_options.return_does_auto_indent && !bracketed_pasting_in_progress)
                 edit_auto_indent (edit);
             format_paragraph (edit, FALSE);
         }
         else
         {
             edit_insert (edit, '\n');
-            if (option_return_does_auto_indent && !bracketed_pasting_in_progress)
+            if (edit_options.return_does_auto_indent && !bracketed_pasting_in_progress)
                 edit_auto_indent (edit);
         }
         break;
@@ -3564,9 +3576,10 @@ edit_execute_cmd (WEdit * edit, long command, int char_for_insertion)
         MC_FALLTHROUGH;
     case CK_Left:
     case CK_MarkLeft:
-        if (option_fake_half_tabs && is_in_indent (&edit->buffer) && right_of_four_spaces (edit))
+        if (edit_options.fake_half_tabs && is_in_indent (&edit->buffer)
+            && right_of_four_spaces (edit))
         {
-            if (option_cursor_beyond_eol && edit->over_col > 0)
+            if (edit_options.cursor_beyond_eol && edit->over_col > 0)
                 edit->over_col--;
             else
                 edit_cursor_move (edit, -HALF_TAB_SIZE);
@@ -3580,7 +3593,8 @@ edit_execute_cmd (WEdit * edit, long command, int char_for_insertion)
         MC_FALLTHROUGH;
     case CK_Right:
     case CK_MarkRight:
-        if (option_fake_half_tabs && is_in_indent (&edit->buffer) && left_of_four_spaces (edit))
+        if (edit_options.fake_half_tabs && is_in_indent (&edit->buffer)
+            && left_of_four_spaces (edit))
         {
             edit_cursor_move (edit, HALF_TAB_SIZE);
             edit->force &= (0xFFF - REDRAW_CHAR_ONLY);
@@ -3658,7 +3672,7 @@ edit_execute_cmd (WEdit * edit, long command, int char_for_insertion)
         break;
     case CK_Tab:
         /* if text marked shift block */
-        if (edit->mark1 != edit->mark2 && !option_persistent_selections)
+        if (edit->mark1 != edit->mark2 && !edit_options.persistent_selections)
         {
             if (edit->mark2 < 0)
                 edit_mark_cmd (edit, FALSE);
@@ -3666,10 +3680,10 @@ edit_execute_cmd (WEdit * edit, long command, int char_for_insertion)
         }
         else
         {
-            if (option_cursor_beyond_eol)
+            if (edit_options.cursor_beyond_eol)
                 edit_insert_over (edit);
             edit_tab_cmd (edit);
-            if (option_auto_para_formatting)
+            if (edit_options.auto_para_formatting)
             {
                 format_paragraph (edit, FALSE);
                 edit->force |= REDRAW_PAGE;
@@ -3776,7 +3790,7 @@ edit_execute_cmd (WEdit * edit, long command, int char_for_insertion)
         break;
 
     case CK_Copy:
-        if (option_cursor_beyond_eol && edit->over_col > 0)
+        if (edit_options.cursor_beyond_eol && edit->over_col > 0)
             edit_insert_over (edit);
         edit_block_copy_cmd (edit);
         break;
@@ -3803,12 +3817,12 @@ edit_execute_cmd (WEdit * edit, long command, int char_for_insertion)
         break;
     case CK_Paste:
         /* if non persistent selection and text selected */
-        if (!option_persistent_selections && edit->mark1 != edit->mark2)
+        if (!edit_options.persistent_selections && edit->mark1 != edit->mark2)
             edit_block_delete_cmd (edit);
-        if (option_cursor_beyond_eol && edit->over_col > 0)
+        if (edit_options.cursor_beyond_eol && edit->over_col > 0)
             edit_insert_over (edit);
         edit_paste_from_X_buf_cmd (edit);
-        if (!option_persistent_selections && edit->mark2 >= 0)
+        if (!edit_options.persistent_selections && edit->mark2 >= 0)
         {
             if (edit->column_highlight)
                 edit_push_undo_action (edit, COLUMN_ON);
@@ -3858,7 +3872,7 @@ edit_execute_cmd (WEdit * edit, long command, int char_for_insertion)
         break;
     case CK_Complete:
         /* if text marked shift block */
-        if (edit->mark1 != edit->mark2 && !option_persistent_selections)
+        if (edit->mark1 != edit->mark2 && !edit_options.persistent_selections)
             edit_move_block_to_left (edit);
         else
             edit_complete_word_cmd (edit);
@@ -3989,7 +4003,7 @@ edit_execute_cmd (WEdit * edit, long command, int char_for_insertion)
     }
     edit_find_bracket (edit);
 
-    if (option_auto_para_formatting)
+    if (edit_options.auto_para_formatting)
     {
         switch (command)
         {

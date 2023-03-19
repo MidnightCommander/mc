@@ -56,6 +56,8 @@ static inline int char_##func_name(char c)     \
 
 /*** file scope type declarations ****************************************************************/
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 static const char replch = '?';

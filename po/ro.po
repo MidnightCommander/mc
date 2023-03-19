@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-01-29 11:16+0300\n"
+"POT-Creation-Date: 2023-03-19 20:39+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Simona Iacob <s@zp1.net>, 2021-2022\n"
 "Language-Team: Romanian (http://www.transifex.com/mc/mc/language/ro/)\n"
@@ -2276,9 +2276,6 @@ msgstr ""
 "Nu se poate chattr \"%s\"\n"
 "%s"
 
-msgid "Cannot change attributes on non-local filesystems"
-msgstr "Nu se pot modifica atributele pe sisteme de fișiere non-locale"
-
 #, c-format
 msgid ""
 "Cannot get flags of \"%s\"\n"
@@ -3533,9 +3530,6 @@ msgstr "Proprietar: %s/%s"
 msgid "Links:      %d"
 msgstr "Legături: %d"
 
-msgid "Attributes: not supported"
-msgstr "Atribute: nu este acceptat"
-
 #, c-format
 msgid "Attributes: %s"
 msgstr "Atribute: %s"
@@ -4521,6 +4515,12 @@ msgstr "sftp: (Ctrl-G întrerupe) Afișare... %s"
 msgid "sftp: Listing done."
 msgstr "sftp: Afișarea a fost efectuată."
 
+msgid "Inconsistent tar archive"
+msgstr "Arhivă tar trunchiată"
+
+msgid "Unexpected EOF on archive file"
+msgstr "Sfârșit de fișier (EOF) neașteptat în fișierul arhivă"
+
 #, c-format
 msgid ""
 "Cannot open tar archive\n"
@@ -4528,12 +4528,6 @@ msgid ""
 msgstr ""
 "Nu pot deschide arhiva tar\n"
 "%s"
-
-msgid "Inconsistent tar archive"
-msgstr "Arhivă tar trunchiată"
-
-msgid "Unexpected EOF on archive file"
-msgstr "Sfârșit de fișier (EOF) neașteptat în fișierul arhivă"
 
 #, c-format
 msgid ""
@@ -4734,6 +4728,12 @@ msgstr "Continuă de la început?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nu se poate aduce o copie locală a /ftp://some.host/editme.txt"
+
+#~ msgid "Cannot change attributes on non-local filesystems"
+#~ msgstr "Nu se pot modifica atributele pe sisteme de fișiere non-locale"
+
+#~ msgid "Attributes: not supported"
+#~ msgstr "Atribute: nu este acceptat"
 
 #, c-format
 #~ msgid " %s%s file error"

@@ -31,6 +31,9 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <string.h>
+#ifdef ENABLE_EXT2FS_ATTR
+#include <e2p/e2p.h>            /* fgetflags(), fsetflags() */
+#endif
 
 #include "lib/global.h"
 
@@ -45,6 +48,8 @@
 
 /*** file scope type declarations ****************************************************************/
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 static struct vfs_s_subclass local_subclass;
@@ -52,15 +57,6 @@ static struct vfs_class *vfs_local_ops = VFS_CLASS (&local_subclass);
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
-/* --------------------------------------------------------------------------------------------- */
-
-/**
- * Note: Some of this functions are not static. This has rather good
- * reason: exactly same functions would have to appear in sfs.c. This
- * saves both computer's memory and my work.  <pavel@ucw.cz>
- */
-
-
 /* --------------------------------------------------------------------------------------------- */
 
 static void *
@@ -189,6 +185,32 @@ local_chown (const vfs_path_t * vpath, uid_t owner, gid_t group)
     path_element = vfs_path_get_by_index (vpath, -1);
     return chown (path_element->path, owner, group);
 }
+
+/* --------------------------------------------------------------------------------------------- */
+
+#ifdef ENABLE_EXT2FS_ATTR
+
+static int
+local_fgetflags (const vfs_path_t * vpath, unsigned long *flags)
+{
+    const vfs_path_element_t *path_element;
+
+    path_element = vfs_path_get_by_index (vpath, -1);
+    return fgetflags (path_element->path, flags);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+local_fsetflags (const vfs_path_t * vpath, unsigned long flags)
+{
+    const vfs_path_element_t *path_element;
+
+    path_element = vfs_path_get_by_index (vpath, -1);
+    return fsetflags (path_element->path, flags);
+}
+
+#endif /* ENABLE_EXT2FS_ATTR */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -476,6 +498,10 @@ vfs_init_localfs (void)
     vfs_local_ops->fstat = local_fstat;
     vfs_local_ops->chmod = local_chmod;
     vfs_local_ops->chown = local_chown;
+#ifdef ENABLE_EXT2FS_ATTR
+    vfs_local_ops->fgetflags = local_fgetflags;
+    vfs_local_ops->fsetflags = local_fsetflags;
+#endif
     vfs_local_ops->utime = local_utime;
     vfs_local_ops->readlink = local_readlink;
     vfs_local_ops->symlink = local_symlink;

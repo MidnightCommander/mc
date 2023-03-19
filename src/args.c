@@ -68,16 +68,17 @@ char *mc_run_param1 = NULL;
 
 /*** file scope type declarations ****************************************************************/
 
-/*** file scope variables ************************************************************************/
+/*** forward declarations (file scope functions) *************************************************/
 
-/* If true, show version info and exit */
-static gboolean mc_args__show_version = FALSE;
-
-/* forward declarations */
 static gboolean parse_mc_e_argument (const gchar * option_name, const gchar * value,
                                      gpointer data, GError ** mcerror);
 static gboolean parse_mc_v_argument (const gchar * option_name, const gchar * value,
                                      gpointer data, GError ** mcerror);
+
+/*** file scope variables ************************************************************************/
+
+/* If true, show version info and exit */
+static gboolean mc_args__show_version = FALSE;
 
 static GOptionContext *context;
 

@@ -32,6 +32,7 @@
 #include "lib/strescape.h"
 #include "lib/skin.h"
 #include "lib/util.h"           /* exist_file() */
+
 #include "lib/filehighlight.h"
 
 #include "internal.h"
@@ -42,8 +43,11 @@
 
 /*** file scope type declarations ****************************************************************/
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -51,6 +55,7 @@ static void
 mc_fhl_parse_fill_color_info (mc_fhl_filter_t * mc_filter, mc_fhl_t * fhl, const gchar * group_name)
 {
     (void) fhl;
+
     mc_filter->color_pair_index = mc_skin_color_get ("filehighlight", group_name);
 }
 
@@ -71,8 +76,9 @@ mc_fhl_parse_get_file_type_id (mc_fhl_t * fhl, const gchar * group_name)
         NULL
     };
     int i;
-    gchar *param_type = mc_config_get_string (fhl->config, group_name, "type", "");
+    gchar *param_type;
 
+    param_type = mc_config_get_string (fhl->config, group_name, "type", "");
     if (*param_type == '\0')
     {
         g_free (param_type);
@@ -80,11 +86,11 @@ mc_fhl_parse_get_file_type_id (mc_fhl_t * fhl, const gchar * group_name)
     }
 
     for (i = 0; types[i] != NULL; i++)
-    {
         if (strcmp (types[i], param_type) == 0)
             break;
-    }
+
     g_free (param_type);
+
     if (types[i] == NULL)
         return FALSE;
 
@@ -94,6 +100,7 @@ mc_fhl_parse_get_file_type_id (mc_fhl_t * fhl, const gchar * group_name)
     mc_fhl_parse_fill_color_info (mc_filter, fhl, group_name);
 
     g_ptr_array_add (fhl->filters, (gpointer) mc_filter);
+
     return TRUE;
 }
 
@@ -103,8 +110,9 @@ static gboolean
 mc_fhl_parse_get_regexp (mc_fhl_t * fhl, const gchar * group_name)
 {
     mc_fhl_filter_t *mc_filter;
-    gchar *regexp = mc_config_get_string (fhl->config, group_name, "regexp", "");
+    gchar *regexp;
 
+    regexp = mc_config_get_string (fhl->config, group_name, "regexp", "");
     if (*regexp == '\0')
     {
         g_free (regexp);
@@ -120,6 +128,7 @@ mc_fhl_parse_get_regexp (mc_fhl_t * fhl, const gchar * group_name)
     mc_fhl_parse_fill_color_info (mc_filter, fhl, group_name);
     g_ptr_array_add (fhl->filters, (gpointer) mc_filter);
     g_free (regexp);
+
     return TRUE;
 }
 
@@ -151,6 +160,7 @@ mc_fhl_parse_get_extensions (mc_fhl_t * fhl, const gchar * group_name)
         g_string_append (buf, esc_ext);
         g_free (esc_ext);
     }
+
     g_strfreev (exts_orig);
 
     g_string_prepend (buf, ".*\\.(");
@@ -166,6 +176,7 @@ mc_fhl_parse_get_extensions (mc_fhl_t * fhl, const gchar * group_name)
     mc_fhl_parse_fill_color_info (mc_filter, fhl, group_name);
     g_ptr_array_add (fhl->filters, (gpointer) mc_filter);
     g_string_free (buf, TRUE);
+
     return TRUE;
 }
 
@@ -183,6 +194,7 @@ mc_fhl_read_ini_file (mc_fhl_t * fhl, const gchar * filename)
         return mc_config_read_file (fhl->config, filename, TRUE, FALSE);
 
     fhl->config = mc_config_init (filename, TRUE);
+
     return (fhl->config != NULL);
 }
 
@@ -224,7 +236,7 @@ mc_fhl_parse_ini_file (mc_fhl_t * fhl)
     gboolean ok;
 
     mc_fhl_array_free (fhl);
-    fhl->filters = g_ptr_array_new ();
+    fhl->filters = g_ptr_array_new_with_free_func (mc_fhl_filter_free);
 
     orig_group_names = mc_config_get_groups (fhl->config, NULL);
     ok = (*orig_group_names != NULL);

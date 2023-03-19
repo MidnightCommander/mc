@@ -95,6 +95,10 @@ typedef struct
     gboolean need_archive;
 } extfs_plugin_info_t;
 
+/*** forward declarations (file scope functions) *************************************************/
+
+static struct vfs_s_entry *extfs_resolve_symlinks_int (struct vfs_s_entry *entry, GSList * list);
+
 /*** file scope variables ************************************************************************/
 
 static GArray *extfs_plugins = NULL;
@@ -109,10 +113,6 @@ static int my_errno = 0;
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
-/* --------------------------------------------------------------------------------------------- */
-
-static struct vfs_s_entry *extfs_resolve_symlinks_int (struct vfs_s_entry *entry, GSList * list);
-
 /* --------------------------------------------------------------------------------------------- */
 
 static struct extfs_super_t *

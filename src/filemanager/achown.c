@@ -62,6 +62,8 @@
 
 /*** file scope type declarations ****************************************************************/
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 static struct
@@ -753,7 +755,7 @@ advanced_chown_dlg_create (WPanel * panel)
     /* draw background */
     ch_dlg->bg->callback = advanced_chown_bg_callback;
 
-    l_filename = label_new (2, 3, "");
+    l_filename = label_new (2, 3, NULL);
     group_add_widget (ch_grp, l_filename);
 
     group_add_widget (ch_grp, hline_new (3, -1, -1));
@@ -772,7 +774,7 @@ advanced_chown_dlg_create (WPanel * panel)
     b_group = button_new (XTRACT (4, BY, user_group_button_cb));
     advanced_chown_but[4].id = group_add_widget (ch_grp, b_group);
 
-    l_mode = label_new (BY + 2, 3, "");
+    l_mode = label_new (BY + 2, 3, NULL);
     group_add_widget (ch_grp, l_mode);
 
     y = BY + 3;
@@ -845,9 +847,7 @@ static gboolean
 try_advanced_chown (const vfs_path_t * p, mode_t m, uid_t u, gid_t g)
 {
     int chmod_result;
-    const char *fname;
-
-    fname = x_basename (vfs_path_as_str (p));
+    const char *fname = NULL;
 
     while ((chmod_result = mc_chmod (p, m)) == -1 && !ignore_all)
     {
@@ -855,6 +855,8 @@ try_advanced_chown (const vfs_path_t * p, mode_t m, uid_t u, gid_t g)
         int result;
         char *msg;
 
+        if (fname == NULL)
+            fname = x_basename (vfs_path_as_str (p));
         msg = g_strdup_printf (_("Cannot chmod \"%s\"\n%s"), fname, unix_error_string (my_errno));
         result =
             query_dialog (MSG_ERROR, msg, D_ERROR, 4, _("&Ignore"), _("Ignore &all"), _("&Retry"),
@@ -890,6 +892,8 @@ try_advanced_chown (const vfs_path_t * p, mode_t m, uid_t u, gid_t g)
         int result;
         char *msg;
 
+        if (fname == NULL)
+            fname = x_basename (vfs_path_as_str (p));
         msg = g_strdup_printf (_("Cannot chown \"%s\"\n%s"), fname, unix_error_string (my_errno));
         result =
             query_dialog (MSG_ERROR, msg, D_ERROR, 4, _("&Ignore"), _("Ignore &all"), _("&Retry"),
@@ -1046,32 +1050,33 @@ advanced_chown_cmd (WPanel * panel)
             break;
 
         case B_ENTER:
-            if (panel->marked <= 1)
             {
-                /* single or last file */
-                if (mc_chmod (vpath, get_mode ()) == -1)
-                    message (D_ERROR, MSG_ERROR, _("Cannot chmod \"%s\"\n%s"),
-                             fname->str, unix_error_string (errno));
-                /* call mc_chown only, if mc_chmod didn't fail */
-                else if (mc_chown
-                         (vpath, (ch_flags[9] == '+') ? sf_stat.st_uid : (uid_t) (-1),
-                          (ch_flags[10] == '+') ? sf_stat.st_gid : (gid_t) (-1)) == -1)
-                    message (D_ERROR, MSG_ERROR, _("Cannot chown \"%s\"\n%s"), fname->str,
-                             unix_error_string (errno));
+                uid_t uid = ch_flags[9] == '+' ? sf_stat.st_uid : (uid_t) (-1);
+                gid_t gid = ch_flags[10] == '+' ? sf_stat.st_gid : (gid_t) (-1);
 
-                end_chown = TRUE;
-            }
-            else if (!try_advanced_chown
-                     (vpath, get_mode (), (ch_flags[9] == '+') ? sf_stat.st_uid : (uid_t) (-1),
-                      (ch_flags[10] == '+') ? sf_stat.st_gid : (gid_t) (-1)))
-            {
-                /* stop multiple files processing */
-                result = B_CANCEL;
-                end_chown = TRUE;
-            }
+                if (panel->marked <= 1)
+                {
+                    /* single or last file */
+                    if (mc_chmod (vpath, get_mode ()) == -1)
+                        message (D_ERROR, MSG_ERROR, _("Cannot chmod \"%s\"\n%s"),
+                                 fname->str, unix_error_string (errno));
+                    /* call mc_chown only, if mc_chmod didn't fail */
+                    else if (mc_chown (vpath, uid, gid) == -1)
+                        message (D_ERROR, MSG_ERROR, _("Cannot chown \"%s\"\n%s"), fname->str,
+                                 unix_error_string (errno));
 
-            need_update = TRUE;
-            break;
+                    end_chown = TRUE;
+                }
+                else if (!try_advanced_chown (vpath, get_mode (), uid, gid))
+                {
+                    /* stop multiple files processing */
+                    result = B_CANCEL;
+                    end_chown = TRUE;
+                }
+
+                need_update = TRUE;
+                break;
+            }
 
         case B_SETALL:
             apply_advanced_chowns (panel, vpath, &sf_stat);

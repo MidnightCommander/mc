@@ -79,7 +79,8 @@ typedef enum
 typedef gboolean (*ftpfs_line_parser) (char *line, struct stat * s, char **filename,
                                        char **linkname, int *err);
 
-/* formard declarations */
+/*** forward declarations (file scope functions) *************************************************/
+
 static gboolean ftpfs_parse_long_list_UNIX (char *line, struct stat *s, char **filename,
                                             char **linkname, int *err);
 static gboolean ftpfs_parse_long_list_NT (char *line, struct stat *s, char **filename,

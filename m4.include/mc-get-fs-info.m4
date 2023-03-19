@@ -3,11 +3,12 @@ dnl
 dnl posix_allocate() function detection
 dnl
 
-AC_DEFUN([gl_POSIX_FALLOCATE], [
+AC_DEFUN([POSIX_FALLOCATE], [
     dnl * Old glibcs have broken posix_fallocate(). Make sure not to use it.
     AC_LINK_IFELSE([AC_LANG_PROGRAM([[
         #define _XOPEN_SOURCE 600
         #include <stdlib.h>
+        #include <fcntl.h>
         #if defined(__GLIBC__) && (__GLIBC__ < 2 || __GLIBC_MINOR__ < 7)
             possibly broken posix_fallocate
         #endif
@@ -115,7 +116,7 @@ AC_DEFUN([mc_GET_FS_INFO], [
     fi
     gl_FSTYPENAME
 
-    gl_POSIX_FALLOCATE
+    POSIX_FALLOCATE
 
     mc_cu_PREREQ_STAT_PROG
 ])

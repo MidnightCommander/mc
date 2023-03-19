@@ -155,6 +155,8 @@ typedef struct
     gboolean append;
 } fish_file_handler_t;
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
 static char reply_str[80];

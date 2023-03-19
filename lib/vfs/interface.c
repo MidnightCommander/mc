@@ -71,8 +71,11 @@ extern struct vfs_dirent *mc_readdir_result;
 
 /*** file scope type declarations ****************************************************************/
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -250,6 +253,8 @@ int mc_##name inarg \
 
 MC_NAMEOP (chmod, (const vfs_path_t *vpath, mode_t mode), (vpath, mode))
 MC_NAMEOP (chown, (const vfs_path_t *vpath, uid_t owner, gid_t group), (vpath, owner, group))
+MC_NAMEOP (fgetflags, (const vfs_path_t *vpath, unsigned long *flags), (vpath, flags))
+MC_NAMEOP (fsetflags, (const vfs_path_t *vpath, unsigned long flags), (vpath, flags))
 MC_NAMEOP (utime, (const vfs_path_t *vpath, mc_timesbuf_t * times), (vpath, times))
 MC_NAMEOP (readlink, (const vfs_path_t *vpath, char *buf, size_t bufsiz), (vpath, buf, bufsiz))
 MC_NAMEOP (unlink, (const vfs_path_t *vpath), (vpath))

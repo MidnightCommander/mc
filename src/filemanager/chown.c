@@ -67,8 +67,9 @@
 
 /*** file scope type declarations ****************************************************************/
 
-/*** file scope variables ************************************************************************/
+/*** forward declarations (file scope functions) *************************************************/
 
+/*** file scope variables ************************************************************************/
 
 static struct
 {
@@ -234,7 +235,7 @@ chown_dlg_create (WPanel * panel)
     /* add widgets for the file information */
     for (i = 0; i < LABELS; i++)
     {
-        chown_label[i].l = label_new (chown_label[i].y, 7 + GW * 2, "");
+        chown_label[i].l = label_new (chown_label[i].y, 7 + GW * 2, NULL);
         group_add_widget (g, chown_label[i].l);
     }
 
@@ -297,15 +298,17 @@ next_file (const WPanel * panel)
 static gboolean
 try_chown (const vfs_path_t * p, uid_t u, gid_t g)
 {
+    const char *fname = NULL;
+
     while (mc_chown (p, u, g) == -1 && !ignore_all)
     {
         int my_errno = errno;
         int result;
         char *msg;
 
-        msg =
-            g_strdup_printf (_("Cannot chown \"%s\"\n%s"), x_basename (vfs_path_as_str (p)),
-                             unix_error_string (my_errno));
+        if (fname == NULL)
+            fname = x_basename (vfs_path_as_str (p));
+        msg = g_strdup_printf (_("Cannot chown \"%s\"\n%s"), fname, unix_error_string (my_errno));
         result =
             query_dialog (MSG_ERROR, msg, D_ERROR, 4, _("&Ignore"), _("Ignore &all"), _("&Retry"),
                           _("&Cancel"));
