@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-01-29 11:16+0300\n"
+"POT-Creation-Date: 2023-03-19 20:39+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
 "Language-Team: Serbian (http://www.transifex.com/mc/mc/language/sr/)\n"
@@ -2246,9 +2246,6 @@ msgid ""
 "%s"
 msgstr ""
 
-msgid "Cannot change attributes on non-local filesystems"
-msgstr ""
-
 #, c-format
 msgid ""
 "Cannot get flags of \"%s\"\n"
@@ -3483,9 +3480,6 @@ msgstr "Власник:      %s/%s"
 msgid "Links:      %d"
 msgstr "Везе:      %d"
 
-msgid "Attributes: not supported"
-msgstr ""
-
 #, c-format
 msgid "Attributes: %s"
 msgstr ""
@@ -4437,6 +4431,12 @@ msgstr "sftp: (Ктрл-Г прекида) Исписујем... %s"
 msgid "sftp: Listing done."
 msgstr "sftp: Исписивање је готово."
 
+msgid "Inconsistent tar archive"
+msgstr "Недоследна тар архива"
+
+msgid "Unexpected EOF on archive file"
+msgstr "Неочекивани крај датотеке у архиви"
+
 #, c-format
 msgid ""
 "Cannot open tar archive\n"
@@ -4444,12 +4444,6 @@ msgid ""
 msgstr ""
 "Не могу да отворим тар архиву\n"
 "%s"
-
-msgid "Inconsistent tar archive"
-msgstr "Недоследна тар архива"
-
-msgid "Unexpected EOF on archive file"
-msgstr "Неочекивани крај датотеке у архиви"
 
 #, c-format
 msgid ""

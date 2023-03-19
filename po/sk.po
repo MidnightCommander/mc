@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-01-29 11:16+0300\n"
+"POT-Creation-Date: 2023-03-19 20:39+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: hualahyja, 2019\n"
 "Language-Team: Slovak (http://www.transifex.com/mc/mc/language/sk/)\n"
@@ -2259,9 +2259,6 @@ msgid ""
 "%s"
 msgstr ""
 
-msgid "Cannot change attributes on non-local filesystems"
-msgstr ""
-
 #, c-format
 msgid ""
 "Cannot get flags of \"%s\"\n"
@@ -3505,9 +3502,6 @@ msgstr "Vlastník: %s/%s"
 msgid "Links:      %d"
 msgstr "Odkazy: %d"
 
-msgid "Attributes: not supported"
-msgstr ""
-
 #, c-format
 msgid "Attributes: %s"
 msgstr ""
@@ -4461,6 +4455,12 @@ msgstr "sftp: (Ctrl-G preruší) Výpis... %s"
 msgid "sftp: Listing done."
 msgstr "sftp: Výpis - hotovo."
 
+msgid "Inconsistent tar archive"
+msgstr "Poškodený archív .tar"
+
+msgid "Unexpected EOF on archive file"
+msgstr "Neočakávaný koniec archívneho súboru"
+
 #, c-format
 msgid ""
 "Cannot open tar archive\n"
@@ -4468,12 +4468,6 @@ msgid ""
 msgstr ""
 "Nie je možné otvoriť archív .tar\n"
 "%s"
-
-msgid "Inconsistent tar archive"
-msgstr "Poškodený archív .tar"
-
-msgid "Unexpected EOF on archive file"
-msgstr "Neočakávaný koniec archívneho súboru"
 
 #, c-format
 msgid ""

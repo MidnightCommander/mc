@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-01-29 11:16+0300\n"
+"POT-Creation-Date: 2023-03-19 20:39+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Priit Jõerüüt <transifex@joeruut.com>, 2020-2021\n"
 "Language-Team: Estonian (http://www.transifex.com/mc/mc/language/et/)\n"
@@ -2257,9 +2257,6 @@ msgid ""
 "%s"
 msgstr ""
 
-msgid "Cannot change attributes on non-local filesystems"
-msgstr "Kaugfailisüsteemides ei saa atribuute muuta "
-
 #, c-format
 msgid ""
 "Cannot get flags of \"%s\"\n"
@@ -3500,9 +3497,6 @@ msgstr "Omanik: %s/%s"
 msgid "Links:      %d"
 msgstr "Viidad: %d"
 
-msgid "Attributes: not supported"
-msgstr "Atribuudid: ei ole toetatud"
-
 #, c-format
 msgid "Attributes: %s"
 msgstr "Atribuudid: %s"
@@ -4462,6 +4456,12 @@ msgstr "sftp: (Ctrl+G katkestab) Loendamine... %s"
 msgid "sftp: Listing done."
 msgstr "sftp: Loendamine lõpetatud."
 
+msgid "Inconsistent tar archive"
+msgstr "Tar arhiiv sisaldab vasturääkivusi"
+
+msgid "Unexpected EOF on archive file"
+msgstr "Ootamatu arhiivi faili lõpp"
+
 #, c-format
 msgid ""
 "Cannot open tar archive\n"
@@ -4469,12 +4469,6 @@ msgid ""
 msgstr ""
 "Tar arhiivi avamine nurjus\n"
 "%s"
-
-msgid "Inconsistent tar archive"
-msgstr "Tar arhiiv sisaldab vasturääkivusi"
-
-msgid "Unexpected EOF on archive file"
-msgstr "Ootamatu arhiivi faili lõpp"
 
 #, c-format
 msgid ""
@@ -4675,6 +4669,12 @@ msgstr "Kas jätkata algusest?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kohaliku koopia hankimine failist /ftp://some.host/editme.txt nurjus"
+
+#~ msgid "Cannot change attributes on non-local filesystems"
+#~ msgstr "Kaugfailisüsteemides ei saa atribuute muuta "
+
+#~ msgid "Attributes: not supported"
+#~ msgstr "Atribuudid: ei ole toetatud"
 
 #, c-format
 #~ msgid " %s%s file error"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-01-29 11:16+0300\n"
+"POT-Creation-Date: 2023-03-19 20:39+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: linwebs <thomas881114@gmail.com>, 2020\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/mc/mc/language/"
@@ -2184,9 +2184,6 @@ msgid ""
 "%s"
 msgstr ""
 
-msgid "Cannot change attributes on non-local filesystems"
-msgstr ""
-
 #, c-format
 msgid ""
 "Cannot get flags of \"%s\"\n"
@@ -3348,9 +3345,6 @@ msgstr ""
 msgid "Links:      %d"
 msgstr "連結: %d"
 
-msgid "Attributes: not supported"
-msgstr ""
-
 #, c-format
 msgid "Attributes: %s"
 msgstr ""
@@ -4290,6 +4284,12 @@ msgstr "sftp: (Ctrl-G 跳出) 列表... %s"
 msgid "sftp: Listing done."
 msgstr "sftp: 列表完成。"
 
+msgid "Inconsistent tar archive"
+msgstr "不完整的 tar 檔案集"
+
+msgid "Unexpected EOF on archive file"
+msgstr "檔案集的檔案結尾不正常"
+
 #, c-format
 msgid ""
 "Cannot open tar archive\n"
@@ -4297,12 +4297,6 @@ msgid ""
 msgstr ""
 "無法開啟 tar 檔案集\n"
 "%s"
-
-msgid "Inconsistent tar archive"
-msgstr "不完整的 tar 檔案集"
-
-msgid "Unexpected EOF on archive file"
-msgstr "檔案集的檔案結尾不正常"
 
 #, c-format
 msgid ""

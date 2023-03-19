@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-01-29 11:16+0300\n"
+"POT-Creation-Date: 2023-03-19 20:39+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: András Tőrös <toros.andras04@gmail.com>, 2020\n"
 "Language-Team: Hungarian (http://www.transifex.com/mc/mc/language/hu/)\n"
@@ -2245,9 +2245,6 @@ msgid ""
 "%s"
 msgstr ""
 
-msgid "Cannot change attributes on non-local filesystems"
-msgstr ""
-
 #, c-format
 msgid ""
 "Cannot get flags of \"%s\"\n"
@@ -3483,9 +3480,6 @@ msgstr "Tulajdonos: %s/%s"
 msgid "Links:      %d"
 msgstr "Linkek száma: %d"
 
-msgid "Attributes: not supported"
-msgstr ""
-
 #, c-format
 msgid "Attributes: %s"
 msgstr ""
@@ -4438,6 +4432,12 @@ msgstr "sftp: %s listázása... (megszakítás: Ctrl-G)"
 msgid "sftp: Listing done."
 msgstr "sftp: A listázás kész."
 
+msgid "Inconsistent tar archive"
+msgstr "Inkonzisztens tar-archívum."
+
+msgid "Unexpected EOF on archive file"
+msgstr "Váratlan fájlvég az archívumfájlban"
+
 #, c-format
 msgid ""
 "Cannot open tar archive\n"
@@ -4445,12 +4445,6 @@ msgid ""
 msgstr ""
 "A tar-archívum nem nyitható meg\n"
 "%s"
-
-msgid "Inconsistent tar archive"
-msgstr "Inkonzisztens tar-archívum."
-
-msgid "Unexpected EOF on archive file"
-msgstr "Váratlan fájlvég az archívumfájlban"
 
 #, c-format
 msgid ""

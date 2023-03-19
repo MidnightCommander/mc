@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-01-29 11:16+0300\n"
+"POT-Creation-Date: 2023-03-19 20:39+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Miguel Anxo Bouzada <mbouzada@gmail.com>, "
 "2012,2014-2015,2019\n"
@@ -2266,9 +2266,6 @@ msgid ""
 "%s"
 msgstr ""
 
-msgid "Cannot change attributes on non-local filesystems"
-msgstr ""
-
 #, c-format
 msgid ""
 "Cannot get flags of \"%s\"\n"
@@ -3510,9 +3507,6 @@ msgstr "Propietario:  %s/%s"
 msgid "Links:      %d"
 msgstr "Ligazóns:     %d"
 
-msgid "Attributes: not supported"
-msgstr ""
-
 #, c-format
 msgid "Attributes: %s"
 msgstr ""
@@ -4462,6 +4456,12 @@ msgstr "sftp: (Ctrl-G interrompe) Listado... %s"
 msgid "sftp: Listing done."
 msgstr "sftp: Feito o listado."
 
+msgid "Inconsistent tar archive"
+msgstr "Arquivo de tipo tar inconsistente"
+
+msgid "Unexpected EOF on archive file"
+msgstr "Fin de ficheiro (EOF) inesperado"
+
 #, c-format
 msgid ""
 "Cannot open tar archive\n"
@@ -4469,12 +4469,6 @@ msgid ""
 msgstr ""
 "Non é posíbel abrir arquivos de tipo tar\n"
 "%s"
-
-msgid "Inconsistent tar archive"
-msgstr "Arquivo de tipo tar inconsistente"
-
-msgid "Unexpected EOF on archive file"
-msgstr "Fin de ficheiro (EOF) inesperado"
 
 #, c-format
 msgid ""

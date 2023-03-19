@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-01-29 11:16+0300\n"
+"POT-Creation-Date: 2023-03-19 20:39+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Pavel Suravezhkin, 2022\n"
 "Language-Team: Belarusian (http://www.transifex.com/mc/mc/language/be/)\n"
@@ -2273,9 +2273,6 @@ msgstr ""
 "Немагчыма chattr \"%s\"\n"
 "%s"
 
-msgid "Cannot change attributes on non-local filesystems"
-msgstr "Немагчыма змяніць атрыбуты ў нелакальных файлавых сістэмах"
-
 #, c-format
 msgid ""
 "Cannot get flags of \"%s\"\n"
@@ -3523,9 +3520,6 @@ msgstr "Уладальнік:      %s/%s"
 msgid "Links:      %d"
 msgstr "Спасылкі:      %d"
 
-msgid "Attributes: not supported"
-msgstr "Атрыбуты: не падтрымліваецца"
-
 #, c-format
 msgid "Attributes: %s"
 msgstr "Атрыбуты: %s"
@@ -4508,6 +4502,12 @@ msgstr "sftp: чытаецца спіс (спыніць — «Ctrl-G»)… %s"
 msgid "sftp: Listing done."
 msgstr "sftp: спіс прачытаны."
 
+msgid "Inconsistent tar archive"
+msgstr "Несумяшчальны архіў tar"
+
+msgid "Unexpected EOF on archive file"
+msgstr "Нечаканы канец файла архіва"
+
 #, c-format
 msgid ""
 "Cannot open tar archive\n"
@@ -4515,12 +4515,6 @@ msgid ""
 msgstr ""
 "Немагчыма адкрыць архіў tar\n"
 "%s"
-
-msgid "Inconsistent tar archive"
-msgstr "Несумяшчальны архіў tar"
-
-msgid "Unexpected EOF on archive file"
-msgstr "Нечаканы канец файла архіва"
 
 #, c-format
 msgid ""
@@ -4721,6 +4715,12 @@ msgstr "Працягваць ад пачатку?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Немагчыма атрымаць лакальную копію /ftp://some.host/editme.txt"
+
+#~ msgid "Cannot change attributes on non-local filesystems"
+#~ msgstr "Немагчыма змяніць атрыбуты ў нелакальных файлавых сістэмах"
+
+#~ msgid "Attributes: not supported"
+#~ msgstr "Атрыбуты: не падтрымліваецца"
 
 #, c-format
 #~ msgid " %s%s file error"

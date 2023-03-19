@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-01-29 11:16+0300\n"
+"POT-Creation-Date: 2023-03-19 20:39+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Serdar Sağlam <teknomobil@msn.com>, 2019-2020\n"
 "Language-Team: Turkish (http://www.transifex.com/mc/mc/language/tr/)\n"
@@ -2256,9 +2256,6 @@ msgid ""
 "%s"
 msgstr ""
 
-msgid "Cannot change attributes on non-local filesystems"
-msgstr ""
-
 #, c-format
 msgid ""
 "Cannot get flags of \"%s\"\n"
@@ -3495,9 +3492,6 @@ msgstr "Sahibi:     %s/%s"
 msgid "Links:      %d"
 msgstr "Bağlantılar:%d"
 
-msgid "Attributes: not supported"
-msgstr ""
-
 #, c-format
 msgid "Attributes: %s"
 msgstr ""
@@ -4449,6 +4443,12 @@ msgstr "sftp: (kesmek için Ctrl-G) Listeleniyor... %s"
 msgid "sftp: Listing done."
 msgstr "sftp: Listeleme yapıldı."
 
+msgid "Inconsistent tar archive"
+msgstr "Tar arşivi düzgün değil"
+
+msgid "Unexpected EOF on archive file"
+msgstr "Arşiv dosyasında dosya sonu belirsiz"
+
 #, c-format
 msgid ""
 "Cannot open tar archive\n"
@@ -4456,12 +4456,6 @@ msgid ""
 msgstr ""
 "%s\n"
 "tar arşivini açılamadı"
-
-msgid "Inconsistent tar archive"
-msgstr "Tar arşivi düzgün değil"
-
-msgid "Unexpected EOF on archive file"
-msgstr "Arşiv dosyasında dosya sonu belirsiz"
 
 #, c-format
 msgid ""

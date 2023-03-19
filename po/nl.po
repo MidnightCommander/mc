@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-01-29 11:16+0300\n"
+"POT-Creation-Date: 2023-03-19 20:39+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Richard E. van der Luit <nippur@fedoraproject.org>, "
 "2012-2015,2017,2020\n"
@@ -2265,9 +2265,6 @@ msgstr ""
 "Kan niet chattr \"%s\"\n"
 "%s"
 
-msgid "Cannot change attributes on non-local filesystems"
-msgstr "Kan attributen van niet-lokale bestandssystemen niet veranderen"
-
 #, c-format
 msgid ""
 "Cannot get flags of \"%s\"\n"
@@ -3511,9 +3508,6 @@ msgstr "Eigenaar: %s/%s"
 msgid "Links:      %d"
 msgstr "Links: %d"
 
-msgid "Attributes: not supported"
-msgstr "Attributies: niet ondersteund"
-
 #, c-format
 msgid "Attributes: %s"
 msgstr "Attributies: %s"
@@ -4470,6 +4464,12 @@ msgstr "sftp: (Ctrl-G break) Weergave lijst... %s"
 msgid "sftp: Listing done."
 msgstr "sftp: Klaar met opsomming."
 
+msgid "Inconsistent tar archive"
+msgstr "Inconsistent tar-archief"
+
+msgid "Unexpected EOF on archive file"
+msgstr "Onverwachte EOF in archiefbestand"
+
 #, c-format
 msgid ""
 "Cannot open tar archive\n"
@@ -4477,12 +4477,6 @@ msgid ""
 msgstr ""
 "Openen tar-archief mislukt\n"
 "%s"
-
-msgid "Inconsistent tar archive"
-msgstr "Inconsistent tar-archief"
-
-msgid "Unexpected EOF on archive file"
-msgstr "Onverwachte EOF in archiefbestand"
 
 #, c-format
 msgid ""
@@ -4673,6 +4667,12 @@ msgstr "Doorgaan vanaf het begin?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan geen lokale versie van /ftp://some.host/editme.txt ophalen"
+
+#~ msgid "Cannot change attributes on non-local filesystems"
+#~ msgstr "Kan attributen van niet-lokale bestandssystemen niet veranderen"
+
+#~ msgid "Attributes: not supported"
+#~ msgstr "Attributies: niet ondersteund"
 
 #, c-format
 #~ msgid " %s%s file error"

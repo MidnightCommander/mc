@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-01-29 11:16+0300\n"
+"POT-Creation-Date: 2023-03-19 20:39+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Alexander Kilian <alexander.kilian@gmail.com>, 2022\n"
 "Language-Team: Swedish (http://www.transifex.com/mc/mc/language/sv/)\n"
@@ -2266,9 +2266,6 @@ msgid ""
 "%s"
 msgstr ""
 
-msgid "Cannot change attributes on non-local filesystems"
-msgstr ""
-
 #, c-format
 msgid ""
 "Cannot get flags of \"%s\"\n"
@@ -3509,9 +3506,6 @@ msgstr "Ägare:      %s/%s"
 msgid "Links:      %d"
 msgstr "Länkar:     %d"
 
-msgid "Attributes: not supported"
-msgstr ""
-
 #, c-format
 msgid "Attributes: %s"
 msgstr ""
@@ -4461,6 +4455,12 @@ msgstr "sftp: (Ctrl-G avbryter) Listar... %s"
 msgid "sftp: Listing done."
 msgstr "sftp: Listning klar."
 
+msgid "Inconsistent tar archive"
+msgstr "Inkonsistensfel i tararkivet"
+
+msgid "Unexpected EOF on archive file"
+msgstr "Oväntad filslut i arkivfilen"
+
 #, c-format
 msgid ""
 "Cannot open tar archive\n"
@@ -4468,12 +4468,6 @@ msgid ""
 msgstr ""
 "Kan inte öppna tarfilen\n"
 "%s"
-
-msgid "Inconsistent tar archive"
-msgstr "Inkonsistensfel i tararkivet"
-
-msgid "Unexpected EOF on archive file"
-msgstr "Oväntad filslut i arkivfilen"
 
 #, c-format
 msgid ""

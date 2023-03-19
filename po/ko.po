@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-01-29 11:16+0300\n"
+"POT-Creation-Date: 2023-03-19 20:39+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Junghee Lee <daemul72@gmail.com>, 2022\n"
 "Language-Team: Korean (http://www.transifex.com/mc/mc/language/ko/)\n"
@@ -2265,9 +2265,6 @@ msgstr ""
 "\"%s\" 속성 변경을 할 수 없습니다\n"
 "%s"
 
-msgid "Cannot change attributes on non-local filesystems"
-msgstr "로컬이 아닌 파일 시스템의 속성을 변경할 수 없습니다"
-
 #, c-format
 msgid ""
 "Cannot get flags of \"%s\"\n"
@@ -3508,9 +3505,6 @@ msgstr "소유자:    %s/%s"
 msgid "Links:      %d"
 msgstr "링크:        %d"
 
-msgid "Attributes: not supported"
-msgstr "속성: 지원되지 않음"
-
 #, c-format
 msgid "Attributes: %s"
 msgstr "속성: %s"
@@ -4486,6 +4480,12 @@ msgstr "sftp: (Ctrl-G break) 목록... %s"
 msgid "sftp: Listing done."
 msgstr "sftp: 목록 작성 완료."
 
+msgid "Inconsistent tar archive"
+msgstr "잘못된 tar 압축파일"
+
+msgid "Unexpected EOF on archive file"
+msgstr "압축 파일에 예기치 않은 EOF가 있음"
+
 #, c-format
 msgid ""
 "Cannot open tar archive\n"
@@ -4493,12 +4493,6 @@ msgid ""
 msgstr ""
 "tar 압축파일을 열 수 없습니다\n"
 "%s"
-
-msgid "Inconsistent tar archive"
-msgstr "잘못된 tar 압축파일"
-
-msgid "Unexpected EOF on archive file"
-msgstr "압축 파일에 예기치 않은 EOF가 있음"
 
 #, c-format
 msgid ""
@@ -4699,6 +4693,12 @@ msgstr "처음부터 계속하시겠습니까?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "/ftp://some.host/editme.txt의 로컬 복사본을 가져올 수 없습니다"
+
+#~ msgid "Cannot change attributes on non-local filesystems"
+#~ msgstr "로컬이 아닌 파일 시스템의 속성을 변경할 수 없습니다"
+
+#~ msgid "Attributes: not supported"
+#~ msgstr "속성: 지원되지 않음"
 
 #, c-format
 #~ msgid " %s%s file error"
