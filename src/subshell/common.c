@@ -1585,7 +1585,6 @@ read_subshell_prompt (void)
     int rc = 0;
     ssize_t bytes = 0;
     struct timeval timeleft = { 0, 0 };
-    gboolean should_reset_prompt = TRUE;
     gboolean got_new_prompt = FALSE;
 
     fd_set tmp;
@@ -1611,11 +1610,6 @@ read_subshell_prompt (void)
         }
 
         bytes = read (mc_global.tty.subshell_pty, pty_buffer, sizeof (pty_buffer));
-        if (should_reset_prompt)
-        {
-            should_reset_prompt = FALSE;
-            clear_subshell_prompt_string ();
-        }
 
         parse_subshell_prompt_string (pty_buffer, bytes);
         got_new_prompt = TRUE;
