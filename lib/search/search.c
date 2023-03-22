@@ -71,7 +71,10 @@ mc_search__cond_struct_new (mc_search_t * lc_mc_search, const GString * str, con
     mc_search_cond = g_malloc0 (sizeof (mc_search_cond_t));
     mc_search_cond->str = mc_g_string_dup (str);
     mc_search_cond->charset = g_strdup (charset);
-
+#ifdef HAVE_PCRE2
+    lc_mc_search->regex_match_info = pcre2_match_data_create (MC_SEARCH__NUM_REPLACE_ARGS, NULL);
+    lc_mc_search->iovector = pcre2_get_ovector_pointer (lc_mc_search->regex_match_info);
+#endif
     switch (lc_mc_search->search_type)
     {
     case MC_SEARCH_T_GLOB:

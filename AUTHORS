@@ -66,6 +66,9 @@ Anton Chumak <nightfast@yahoo.co.uk>
 Antonio Palama, DOS port <palama@posso.dm.unipi.it>
 	DOS port.
 
+broly <gagan@hotmail.com>
+	Support of PCRE2
+
 Dmitry Koterov <dmitry.koterov@gmail.com>
 	s3 extfs bugfixes and improvements
 

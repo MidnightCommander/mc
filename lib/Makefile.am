@@ -73,5 +73,3 @@ if HAVE_GMODULE
 else
     libmc_la_LIBADD += $(GLIB_LIBS)
 endif
-
-libmc_la_LIBADD += $(PCRE_LIBS)

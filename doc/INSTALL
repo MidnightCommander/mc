@@ -375,8 +375,7 @@ Newer versions may work, but haven't been tested.
 PCRE
 ----
 
-If the version of glib you have installed is older than 2.14.x, then you
-also need to install PCRE library.
+Both PCRE and PCRE2 libraries are supported.
 
 You can get PCRE from
 

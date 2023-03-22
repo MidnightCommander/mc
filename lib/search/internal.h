@@ -6,7 +6,11 @@
 #ifdef SEARCH_TYPE_GLIB
 #define mc_search_regex_t GRegex
 #else
+#ifdef HAVE_PCRE2
+#define mc_search_regex_t pcre2_code
+#else
 #define mc_search_regex_t pcre
+#endif
 #endif
 
 /*** enums ***************************************************************************************/

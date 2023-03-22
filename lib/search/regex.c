@@ -345,9 +345,15 @@ mc_search__regex_found_cond_one (mc_search_t * lc_mc_search, mc_search_regex_t *
     }
     lc_mc_search->num_results = g_match_info_get_match_count (lc_mc_search->regex_match_info);
 #else /* SEARCH_TYPE_GLIB */
-    lc_mc_search->num_results = pcre_exec (regex, lc_mc_search->regex_match_info,
-                                           search_str->str, search_str->len, 0, 0,
-                                           lc_mc_search->iovector, MC_SEARCH__NUM_REPLACE_ARGS);
+
+    lc_mc_search->num_results =
+#ifdef HAVE_PCRE2
+        pcre2_match (regex, (unsigned char *) search_str->str, search_str->len, 0, 0,
+                     lc_mc_search->regex_match_info, NULL);
+#else
+        pcre_exec (regex, lc_mc_search->regex_match_info, search_str->str, search_str->len, 0, 0,
+                   lc_mc_search->iovector, MC_SEARCH__NUM_REPLACE_ARGS);
+#endif
     if (lc_mc_search->num_results < 0)
     {
         return COND__NOT_FOUND;
@@ -835,15 +841,29 @@ mc_search__cond_struct_new_init_regex (const char *charset, mc_search_t * lc_mc_
             return;
         }
 #else /* SEARCH_TYPE_GLIB */
+
+#ifdef HAVE_PCRE2
+        int errcode;
+        char error[BUF_SMALL];
+        size_t erroffset;
+        int pcre_options = PCRE2_MULTILINE;
+#else
         const char *error;
         int erroffset;
         int pcre_options = PCRE_EXTRA | PCRE_MULTILINE;
+#endif
 
         if (str_isutf8 (charset) && mc_global.utf8_display)
         {
+#ifdef HAVE_PCRE2
+            pcre_options |= PCRE2_UTF;
+            if (!lc_mc_search->is_case_sensitive)
+                pcre_options |= PCRE2_CASELESS;
+#else
             pcre_options |= PCRE_UTF8;
             if (!lc_mc_search->is_case_sensitive)
                 pcre_options |= PCRE_CASELESS;
+#endif
         }
         else if (!lc_mc_search->is_case_sensitive)
         {
@@ -855,14 +875,26 @@ mc_search__cond_struct_new_init_regex (const char *charset, mc_search_t * lc_mc_
         }
 
         mc_search_cond->regex_handle =
+#ifdef HAVE_PCRE2
+            pcre2_compile ((unsigned char *) mc_search_cond->str->str, PCRE2_ZERO_TERMINATED,
+                           pcre_options, &errcode, &erroffset, NULL);
+#else
             pcre_compile (mc_search_cond->str->str, pcre_options, &error, &erroffset, NULL);
+#endif
         if (mc_search_cond->regex_handle == NULL)
         {
+#ifdef HAVE_PCRE2
+            pcre2_get_error_message (errcode, (unsigned char *) error, sizeof (error));
+#endif
             mc_search_set_error (lc_mc_search, MC_SEARCH_E_REGEX_COMPILE, "%s", error);
             return;
         }
+#ifdef HAVE_PCRE2
+        if (pcre2_jit_compile (mc_search_cond->regex_handle, PCRE2_JIT_COMPLETE) && *error != '\0')
+#else
         lc_mc_search->regex_match_info = pcre_study (mc_search_cond->regex_handle, 0, &error);
         if (lc_mc_search->regex_match_info == NULL && error != NULL)
+#endif
         {
             mc_search_set_error (lc_mc_search, MC_SEARCH_E_REGEX_COMPILE, "%s", error);
             MC_PTR_FREE (mc_search_cond->regex_handle);
