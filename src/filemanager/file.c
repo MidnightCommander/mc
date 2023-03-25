@@ -1574,7 +1574,7 @@ static void
 erase_dir_after_copy (file_op_total_context_t * tctx, file_op_context_t * ctx,
                       const vfs_path_t * vpath, FileProgressStatus * status)
 {
-    if (ctx->erase_at_end)
+    if (ctx->erase_at_end && erase_list != NULL)
     {
         /* Reset progress count before delete to avoid counting files twice */
         tctx->progress_count = tctx->prev_progress_count;
