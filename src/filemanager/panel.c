@@ -139,24 +139,24 @@ typedef enum
 
 /*** forward declarations (file scope functions) *************************************************/
 
-static const char *string_file_name (file_entry_t *fe, int len);
-static const char *string_file_size (file_entry_t *fe, int len);
-static const char *string_file_size_brief (file_entry_t *fe, int len);
-static const char *string_file_type (file_entry_t *fe, int len);
-static const char *string_file_mtime (file_entry_t *fe, int len);
-static const char *string_file_atime (file_entry_t *fe, int len);
-static const char *string_file_ctime (file_entry_t *fe, int len);
-static const char *string_file_permission (file_entry_t *fe, int len);
-static const char *string_file_perm_octal (file_entry_t *fe, int len);
-static const char *string_file_nlinks (file_entry_t *fe, int len);
-static const char *string_inode (file_entry_t *fe, int len);
-static const char *string_file_nuid (file_entry_t *fe, int len);
-static const char *string_file_ngid (file_entry_t *fe, int len);
-static const char *string_file_owner (file_entry_t *fe, int len);
-static const char *string_file_group (file_entry_t *fe, int len);
-static const char *string_marked (file_entry_t *fe, int len);
-static const char *string_space (file_entry_t *fe, int len);
-static const char *string_dot (file_entry_t *fe, int len);
+static const char *string_file_name (file_entry_t * fe, int len);
+static const char *string_file_size (file_entry_t * fe, int len);
+static const char *string_file_size_brief (file_entry_t * fe, int len);
+static const char *string_file_type (file_entry_t * fe, int len);
+static const char *string_file_mtime (file_entry_t * fe, int len);
+static const char *string_file_atime (file_entry_t * fe, int len);
+static const char *string_file_ctime (file_entry_t * fe, int len);
+static const char *string_file_permission (file_entry_t * fe, int len);
+static const char *string_file_perm_octal (file_entry_t * fe, int len);
+static const char *string_file_nlinks (file_entry_t * fe, int len);
+static const char *string_inode (file_entry_t * fe, int len);
+static const char *string_file_nuid (file_entry_t * fe, int len);
+static const char *string_file_ngid (file_entry_t * fe, int len);
+static const char *string_file_owner (file_entry_t * fe, int len);
+static const char *string_file_group (file_entry_t * fe, int len);
+static const char *string_marked (file_entry_t * fe, int len);
+static const char *string_space (file_entry_t * fe, int len);
+static const char *string_dot (file_entry_t * fe, int len);
 
 /*** file scope variables ************************************************************************/
 
@@ -398,7 +398,7 @@ panelized_descr_new (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-panelized_descr_free (panelized_descr_t *p)
+panelized_descr_free (panelized_descr_t * p)
 {
     if (p != NULL)
     {
