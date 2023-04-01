@@ -299,7 +299,7 @@ remove_from_panelize (panelize_entry_t * entry)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-do_external_panelize (char *command)
+do_external_panelize (const char *command)
 {
     dir_list *list = &current_panel->dir;
     mc_pipe_t *external;
