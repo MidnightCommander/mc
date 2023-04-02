@@ -1247,10 +1247,7 @@ panel_correct_path_to_show (const WPanel * panel)
         }
     }
     else
-    {
-        last_vpath = vfs_path_new ();
-        last_vpath->relative = TRUE;
-    }
+        last_vpath = vfs_path_new (TRUE);
 
     vfs_path_add_element (last_vpath, path_element);
     return_path =
@@ -4947,7 +4944,7 @@ remove_encoding_from_path (const vfs_path_t * vpath)
     GString *tmp_conv;
     int indx;
 
-    ret_vpath = vfs_path_new ();
+    ret_vpath = vfs_path_new (FALSE);
 
     tmp_conv = g_string_new ("");
 

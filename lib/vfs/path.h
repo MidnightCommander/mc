@@ -57,7 +57,7 @@ typedef struct
 
 /*** declarations of public functions ************************************************************/
 
-vfs_path_t *vfs_path_new (void);
+vfs_path_t *vfs_path_new (gboolean relative);
 vfs_path_t *vfs_path_clone (const vfs_path_t * vpath);
 void vfs_path_remove_element_by_index (vfs_path_t * vpath, int element_index);
 char *vfs_path_free (vfs_path_t * path, gboolean free_str);
