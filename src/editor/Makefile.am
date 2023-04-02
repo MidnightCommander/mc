@@ -30,4 +30,4 @@ libedit_la_SOURCES += \
 endif
 endif
 
-AM_CPPFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir) $(PCRE_CPPFLAGS)
+AM_CPPFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir)

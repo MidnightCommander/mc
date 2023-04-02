@@ -5,4 +5,4 @@ libdiffviewer_la_SOURCES = \
 	search.c \
 	ydiff.c ydiff.h
 
-AM_CPPFLAGS = -I$(top_srcdir) $(GLIB_CFLAGS) $(PCRE_CPPFLAGS)
+AM_CPPFLAGS = -I$(top_srcdir) $(GLIB_CFLAGS)

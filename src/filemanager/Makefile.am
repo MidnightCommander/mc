@@ -30,7 +30,7 @@ libmcfilemanager_la_SOURCES = \
 # Unmaintained, unsupported, etc
 #	listmode.c listmode.h
 
-AM_CPPFLAGS = -I$(top_srcdir) $(GLIB_CFLAGS) $(PCRE_CPPFLAGS)
+AM_CPPFLAGS = -I$(top_srcdir) $(GLIB_CFLAGS)
 
 if ENABLE_EXT2FS_ATTR
 libmcfilemanager_la_SOURCES += \

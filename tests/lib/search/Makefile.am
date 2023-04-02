@@ -4,11 +4,10 @@ AM_CPPFLAGS = \
 	$(GLIB_CFLAGS) \
 	-I$(top_srcdir) \
 	-I$(top_srcdir)/lib/search \
-	@CHECK_CFLAGS@ \
-	@PCRE_CPPFLAGS@
+	@CHECK_CFLAGS@
 
 LIBS = @CHECK_LIBS@ \
-	$(top_builddir)/lib/libmc.la @PCRE_LIBS@
+	$(top_builddir)/lib/libmc.la
 
 if ENABLE_MCLIB
 LIBS += $(GLIB_LIBS)

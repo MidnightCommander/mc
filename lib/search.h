@@ -8,9 +8,13 @@
 #include <sys/types.h>
 
 #ifdef SEARCH_TYPE_PCRE
+#ifdef HAVE_PCRE2
+#define PCRE2_CODE_UNIT_WIDTH 8
+#include <pcre2.h>
+#else
 #include <pcre.h>
 #endif
-
+#endif /* SEARCH_TYPE_PCRE */
 /*** typedefs(not structures) and defined constants **********************************************/
 
 typedef enum mc_search_cbret_t mc_search_cbret_t;
@@ -24,7 +28,14 @@ typedef mc_search_cbret_t (*mc_update_fn) (const void *user_data, gsize char_off
 #ifdef SEARCH_TYPE_GLIB
 #define mc_search_matchinfo_t GMatchInfo
 #else
+#ifdef HAVE_PCRE2
+/* no pcre_extra in PCRE2. pcre2_jit_compile (equivalent of pcre_study) handles
+ * all of this internally. but we can use this to hold the pcre2_matches data
+ * until the search is complete */
+#define mc_search_matchinfo_t pcre2_match_data
+#else
 #define mc_search_matchinfo_t pcre_extra
+#endif
 #endif
 
 /*** enums ***************************************************************************************/
@@ -102,7 +113,12 @@ typedef struct mc_search_struct
     mc_search_matchinfo_t *regex_match_info;
     GString *regex_buffer;
 #ifdef SEARCH_TYPE_PCRE
+#ifdef HAVE_PCRE2
+    /* pcre2 will provide a pointer to a match_data structure that can be manipulated like an iovector*/
+    size_t *iovector;
+#else
     int iovector[MC_SEARCH__NUM_REPLACE_ARGS * 2];
+#endif
 #endif                          /* SEARCH_TYPE_PCRE */
 
     /* private data */

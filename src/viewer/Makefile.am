@@ -18,4 +18,4 @@ libmcviewer_la_SOURCES = \
 	nroff.c \
 	search.c
 
-AM_CPPFLAGS = -I$(top_srcdir) $(GLIB_CFLAGS) $(PCRE_CPPFLAGS)
+AM_CPPFLAGS = -I$(top_srcdir) $(GLIB_CFLAGS)
