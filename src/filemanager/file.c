@@ -559,35 +559,36 @@ make_symlink (file_op_context_t * ctx, const vfs_path_t * src_vpath, const vfs_p
         r = strrchr (src_path, PATH_SEP);
         if (r != NULL)
         {
-            char *p;
+            size_t slen;
+            GString *p;
             vfs_path_t *q;
 
-            p = g_strndup (src_path, r - src_path + 1);
+            slen = r - src_path + 1;
+
+            p = g_string_sized_new (slen + len);
+            g_string_append_len (p, src_path, slen);
+
             if (g_path_is_absolute (dst_path))
                 q = vfs_path_from_str_flags (dst_path, VPF_NO_CANON);
             else
-                q = vfs_path_build_filename (p, dst_path, (char *) NULL);
+                q = vfs_path_build_filename (p->str, dst_path, (char *) NULL);
 
             if (vfs_path_tokens_count (q) > 1)
             {
-                char *s;
+                char *s = NULL;
                 vfs_path_t *tmp_vpath1, *tmp_vpath2;
 
+                g_string_append_len (p, link_target, len);
                 tmp_vpath1 = vfs_path_vtokens_get (q, -1, 1);
-                s = g_strconcat (p, link_target, (char *) NULL);
-                g_strlcpy (link_target, s, sizeof (link_target));
-                g_free (s);
-                tmp_vpath2 = vfs_path_from_str (link_target);
+                tmp_vpath2 = vfs_path_from_str (p->str);
                 s = diff_two_paths (tmp_vpath1, tmp_vpath2);
-                vfs_path_free (tmp_vpath1, TRUE);
                 vfs_path_free (tmp_vpath2, TRUE);
-                if (s != NULL)
-                {
-                    g_strlcpy (link_target, s, sizeof (link_target));
-                    g_free (s);
-                }
+                vfs_path_free (tmp_vpath1, TRUE);
+                g_strlcpy (link_target, s != NULL ? s : p->str, sizeof (link_target));
+                g_free (s);
             }
-            g_free (p);
+
+            g_string_free (p, TRUE);
             vfs_path_free (q, TRUE);
         }
     }
