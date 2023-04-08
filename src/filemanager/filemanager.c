@@ -864,7 +864,7 @@ setup_dummy_mc (void)
     char *d;
     int ret;
 
-    d = _vfs_get_cwd ();
+    d = vfs_get_cwd ();
     setup_mc ();
     vpath = vfs_path_from_str (d);
     ret = mc_chdir (vpath);

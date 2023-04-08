@@ -293,7 +293,7 @@ struct vfs_class *vfs_class_find_by_handle (int handle, void **fsinfo);
 void vfs_free_handle (int handle);
 
 void vfs_setup_cwd (void);
-char *_vfs_get_cwd (void);
+char *vfs_get_cwd (void);
 
 int vfs_preallocate (int dest_desc, off_t src_fsize, off_t dest_fsize);
 

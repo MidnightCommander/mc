@@ -46,7 +46,7 @@
 #include "lib/tty/key.h"
 #include "lib/tty/mouse.h"
 #include "lib/mcconfig.h"
-#include "lib/vfs/vfs.h"        /* For _vfs_get_cwd () */
+#include "lib/vfs/vfs.h"        /* vfs_get_cwd () */
 #include "lib/strutil.h"
 #include "lib/widget.h"
 #include "lib/event.h"
@@ -1173,7 +1173,7 @@ create_panel (int num, panel_view_mode_t type)
     /* Restoring saved path from panels.ini for nonlist panel */
     /* when it's first creation (for example view_info) */
     if (old_widget == NULL && type != view_listing)
-        panels[num].last_saved_dir = _vfs_get_cwd ();
+        panels[num].last_saved_dir = vfs_get_cwd ();
 
     switch (type)
     {

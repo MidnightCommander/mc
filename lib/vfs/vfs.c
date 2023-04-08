@@ -688,13 +688,10 @@ vfs_setup_cwd (void)
  */
 
 char *
-_vfs_get_cwd (void)
+vfs_get_cwd (void)
 {
-    const vfs_path_t *current_dir_vpath;
-
     vfs_setup_cwd ();
-    current_dir_vpath = vfs_get_raw_current_dir ();
-    return g_strdup (vfs_path_as_str (current_dir_vpath));
+    return vfs_get_current_dir_n ();
 }
 
 /* --------------------------------------------------------------------------------------------- */

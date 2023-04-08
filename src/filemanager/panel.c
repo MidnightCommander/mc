@@ -4531,7 +4531,7 @@ panel_sized_with_dir_new (const char *panel_name, int y, int x, int lines, int c
 
     if (vpath != NULL)
     {
-        curdir = _vfs_get_cwd ();
+        curdir = vfs_get_cwd ();
         panel_set_cwd (panel, vpath);
     }
     else
