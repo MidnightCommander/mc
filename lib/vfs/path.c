@@ -631,7 +631,9 @@ vfs_path_to_str_flags (const vfs_path_t * vpath, int elements_count, vfs_path_fl
 {
     int element_index;
     GString *buffer;
-    GString *recode_buffer;
+#ifdef HAVE_CHARSET
+    GString *recode_buffer = NULL;
+#endif
 
     if (vpath == NULL)
         return NULL;
@@ -643,7 +645,6 @@ vfs_path_to_str_flags (const vfs_path_t * vpath, int elements_count, vfs_path_fl
         elements_count = vfs_path_elements_count (vpath) + elements_count;
 
     buffer = g_string_new ("");
-    recode_buffer = g_string_new ("");
 
     for (element_index = 0; element_index < elements_count; element_index++)
     {
@@ -682,9 +683,14 @@ vfs_path_to_str_flags (const vfs_path_t * vpath, int elements_count, vfs_path_fl
                 g_string_append (buffer, VFS_ENCODING_PREFIX);
                 g_string_append (buffer, element->encoding);
             }
+
+            if (recode_buffer == NULL)
+                recode_buffer = g_string_sized_new (32);
+            else
+                g_string_set_size (recode_buffer, 0);
+
             str_vfs_convert_from (element->dir.converter, element->path, recode_buffer);
             vfs_append_from_path (recode_buffer->str, is_relative);
-            g_string_set_size (recode_buffer, 0);
         }
         else
 #endif
@@ -692,7 +698,12 @@ vfs_path_to_str_flags (const vfs_path_t * vpath, int elements_count, vfs_path_fl
             vfs_append_from_path (element->path, is_relative);
         }
     }
-    g_string_free (recode_buffer, TRUE);
+
+#ifdef HAVE_CHARSET
+    if (recode_buffer != NULL)
+        g_string_free (recode_buffer, TRUE);
+#endif
+
     return g_string_free (buffer, FALSE);
 }
 
