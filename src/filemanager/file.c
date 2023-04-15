@@ -1797,7 +1797,7 @@ panel_get_file (const WPanel * panel)
                 return panel->dir.list[i].fname->str;
     }
 
-    return panel->dir.list[panel->selected].fname->str;
+    return panel_current_entry (panel)->fname->str;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1809,7 +1809,7 @@ check_single_entry (const WPanel * panel, gboolean force_single, struct stat *sr
     gboolean ok;
 
     if (force_single)
-        source = selection (panel)->fname->str;
+        source = panel_current_entry (panel)->fname->str;
     else
         source = panel_get_file (panel);
 
@@ -3277,7 +3277,7 @@ compute_dir_size (const vfs_path_t * dirname_vpath, dirsize_status_msg_t * sm,
 /**
  * panel_operate:
  *
- * Performs one of the operations on the selection on the source_panel
+ * Performs one of the operations on the current on the source_panel
  * (copy, delete, move).
  *
  * Returns TRUE if did change the directory
@@ -3381,7 +3381,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
     {
         if (operation == OP_DELETE)
             dialog_type = FILEGUI_DIALOG_DELETE_ITEM;
-        else if (single_entry && S_ISDIR (selection (panel)->st.st_mode))
+        else if (single_entry && S_ISDIR (panel_current_entry (panel)->st.st_mode))
             dialog_type = FILEGUI_DIALOG_MULTI_ITEM;
         else if (single_entry || force_single)
             dialog_type = FILEGUI_DIALOG_ONE_ITEM;

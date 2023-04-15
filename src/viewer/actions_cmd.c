@@ -194,7 +194,7 @@ mcview_hook (void *v)
 
     mcview_done (view);
     mcview_init (view);
-    mcview_load (view, 0, panel->dir.list[panel->selected].fname->str, 0, 0, 0);
+    mcview_load (view, 0, panel_current_entry (panel)->fname->str, 0, 0, 0);
     mcview_display (view);
 }
 
@@ -274,7 +274,7 @@ mcview_load_next_prev_init (WView * view)
     {
         /* get file list from current panel. Update it each time */
         view->dir = &current_panel->dir;
-        view->dir_idx = &current_panel->selected;
+        view->dir_idx = &current_panel->current;
     }
     else if (view->dir == NULL)
     {

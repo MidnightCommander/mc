@@ -76,7 +76,7 @@ START_TEST (sanitize_variables)
     GString *actual_string;
     const char *expected_string;
 
-    current_panel->selected = 0;
+    current_panel->current = 0;
     current_panel->dir.len = 3;
     current_panel->dir.list[0].fname = g_string_new ("selected file.txt");
     current_panel->dir.list[1].fname = g_string_new ("tagged file1.txt");

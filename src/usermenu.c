@@ -170,7 +170,9 @@ static gboolean
 test_type (WPanel * panel, char *arg)
 {
     int result = 0;             /* False by default */
-    mode_t st_mode = panel->dir.list[panel->selected].st.st_mode;
+    mode_t st_mode;
+
+    st_mode = panel_current_entry (panel)->st.st_mode;
 
     for (; *arg != '\0'; arg++)
     {
@@ -263,7 +265,7 @@ test_condition (const Widget * edit_widget, char *p, gboolean * condition)
             else
 #endif
                 *condition = panel != NULL &&
-                    mc_search (arg, DEFAULT_CHARSET, panel->dir.list[panel->selected].fname->str,
+                    mc_search (arg, DEFAULT_CHARSET, panel_current_entry (panel)->fname->str,
                                search_type);
             break;
         case 'y':              /* syntax pattern */
@@ -781,7 +783,7 @@ expand_format (const Widget * edit_widget, char c, gboolean do_quote)
                 panel = other_panel;
             }
 
-            fname = panel->dir.list[panel->selected].fname->str;
+            fname = panel_current_entry (panel)->fname->str;
         }
         break;
 

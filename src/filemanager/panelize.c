@@ -427,7 +427,7 @@ do_external_panelize (const char *command)
     current_panel->is_panelized = TRUE;
     panel_panelize_absolutize_if_needed (current_panel);
 
-    try_to_select (current_panel, NULL);
+    panel_set_current_by_name (current_panel, NULL);
     panel_re_sort (current_panel);
     rotate_dash (FALSE);
 }

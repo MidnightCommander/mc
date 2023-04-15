@@ -3534,26 +3534,28 @@ dview_diff_cmd (const void *f0, const void *f1)
             /* run from panels */
             const WPanel *panel0 = (const WPanel *) f0;
             const WPanel *panel1 = (const WPanel *) f1;
+            const file_entry_t *fe0;
+            const file_entry_t *fe1;
 
+            fe0 = panel_current_entry (panel0);
             file0 =
-                vfs_path_append_new (panel0->cwd_vpath, selection (panel0)->fname->str,
-                                     (char *) NULL);
-            is_dir0 = S_ISDIR (selection (panel0)->st.st_mode);
+                vfs_path_append_new (panel0->cwd_vpath, fe0->fname->str, (char *) NULL);
+            is_dir0 = S_ISDIR (fe0->st.st_mode);
             if (is_dir0)
             {
                 message (D_ERROR, MSG_ERROR, _("\"%s\" is a directory"),
-                         path_trunc (selection (panel0)->fname->str, 30));
+                         path_trunc (fe0->fname->str, 30));
                 goto ret;
             }
 
+            fe1 = panel_current_entry (panel1);
             file1 =
-                vfs_path_append_new (panel1->cwd_vpath, selection (panel1)->fname->str,
-                                     (char *) NULL);
-            is_dir1 = S_ISDIR (selection (panel1)->st.st_mode);
+                vfs_path_append_new (panel1->cwd_vpath, fe1->fname->str, (char *) NULL);
+            is_dir1 = S_ISDIR (fe1->st.st_mode);
             if (is_dir1)
             {
                 message (D_ERROR, MSG_ERROR, _("\"%s\" is a directory"),
-                         path_trunc (selection (panel1)->fname->str, 30));
+                         path_trunc (fe1->fname->str, 30));
                 goto ret;
             }
             break;

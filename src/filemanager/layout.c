@@ -1200,7 +1200,7 @@ create_panel (int num, panel_view_mode_t type)
         new_widget = WIDGET (mcview_new (r.y, r.x, r.lines, r.cols, TRUE));
         the_other_panel = PANEL (panels[the_other].widget);
         if (the_other_panel != NULL)
-            file_name = the_other_panel->dir.list[the_other_panel->selected].fname->str;
+            file_name = panel_current_entry (the_other_panel)->fname->str;
         else
             file_name = "";
 
@@ -1300,7 +1300,7 @@ swap_panels (void)
         panelswap (dirs_marked);
         panelswap (total);
         panelswap (top_file);
-        panelswap (selected);
+        panelswap (current);
         panelswap (is_panelized);
         panelswap (panelized_descr);
         panelswap (dir_stat);
