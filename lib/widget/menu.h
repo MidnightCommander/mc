@@ -32,7 +32,7 @@ typedef struct WMenuBar
 
     gboolean is_dropped;        /* If the menubar has dropped */
     GList *menu;                /* The actual menus */
-    guint selected;             /* Selected menu on the top bar */
+    guint current;              /* Current menu on the top bar */
     unsigned long previous_widget;      /* Selected widget ID before activating menu */
 } WMenuBar;
 
