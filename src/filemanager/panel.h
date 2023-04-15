@@ -115,7 +115,7 @@ typedef struct
     int dirs_marked;            /* Count of marked directories */
     uintmax_t total;            /* Bytes in marked files */
 
-    int top_file;               /* The file showed on the top of the panel */
+    int top;                    /* The file shown on the top of the panel */
     int current;                /* Index to the currently selected file */
 
     GSList *status_format;      /* Mini status format */

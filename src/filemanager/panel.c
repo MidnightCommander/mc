@@ -951,7 +951,7 @@ repaint_file (WPanel * panel, int file_index, int attr, gboolean isstatus)
 
     if (panel_is_split)
     {
-        nth_column = (file_index - panel->top_file) / panel_lines (panel);
+        nth_column = (file_index - panel->top) / panel_lines (panel);
         width /= panel->list_cols;
 
         offset = width * nth_column;
@@ -966,7 +966,7 @@ repaint_file (WPanel * panel, int file_index, int attr, gboolean isstatus)
 
     if (!isstatus)
     {
-        ypos = file_index - panel->top_file;
+        ypos = file_index - panel->top;
 
         if (panel_is_split)
             ypos %= panel_lines (panel);
@@ -1087,13 +1087,13 @@ paint_dir (WPanel * panel)
     {
         int color = 0;          /* Color value of the line */
 
-        if (i + panel->top_file < panel->dir.len)
+        if (i + panel->top < panel->dir.len)
         {
-            color = 2 * (panel->dir.list[i + panel->top_file].f.marked);
-            color += (panel->current == i + panel->top_file && panel->active);
+            color = 2 * (panel->dir.list[i + panel->top].f.marked);
+            color += (panel->current == i + panel->top && panel->active);
         }
 
-        repaint_file (panel, i + panel->top_file, color, FALSE);
+        repaint_file (panel, i + panel->top, color, FALSE);
     }
 
     tty_set_normal_attrs ();
@@ -1396,7 +1396,7 @@ adjust_top_file (WPanel * panel)
     if (panel->dir.len <= items)
     {
         /* If all files fit, show them all. */
-        panel->top_file = 0;
+        panel->top = 0;
     }
     else
     {
@@ -1408,19 +1408,19 @@ adjust_top_file (WPanel * panel)
            no empty space wasted.
            Within these ranges, adjust it by as little as possible. */
 
-        if (panel->top_file < 0)
-            panel->top_file = 0;
+        if (panel->top < 0)
+            panel->top = 0;
 
         i = panel->current - items + 1;
-        if (panel->top_file < i)
-            panel->top_file = i;
+        if (panel->top < i)
+            panel->top = i;
 
         i = panel->dir.len - items;
-        if (panel->top_file > i)
-            panel->top_file = i;
+        if (panel->top > i)
+            panel->top = i;
 
-        if (panel->top_file > panel->current)
-            panel->top_file = panel->current;
+        if (panel->top > panel->current)
+            panel->top = panel->current;
     }
 }
 
@@ -2141,7 +2141,7 @@ panel_current_at_half (const WPanel * panel)
     lines = panel_lines (panel);
 
     /* define top file of column */
-    top = panel->top_file;
+    top = panel->top;
     if (panel->list_cols > 1)
         top += lines * ((panel->current - top) / lines);
 
@@ -2163,20 +2163,20 @@ move_down (WPanel * panel)
 
     items = panel_items (panel);
 
-    if (panels_options.scroll_pages && panel->current - panel->top_file == items)
+    if (panels_options.scroll_pages && panel->current - panel->top == items)
     {
         /* Scroll window half screen */
-        panel->top_file += items / 2;
-        if (panel->top_file > panel->dir.len - items)
-            panel->top_file = panel->dir.len - items;
+        panel->top += items / 2;
+        if (panel->top > panel->dir.len - items)
+            panel->top = panel->dir.len - items;
         paint_dir (panel);
     }
     else if (panels_options.scroll_center && panel_current_at_half (panel) > 0)
     {
         /* Scroll window when cursor is halfway down */
-        panel->top_file++;
-        if (panel->top_file > panel->dir.len - items)
-            panel->top_file = panel->dir.len - items;
+        panel->top++;
+        if (panel->top > panel->dir.len - items)
+            panel->top = panel->dir.len - items;
     }
     select_item (panel);
 }
@@ -2192,20 +2192,20 @@ move_up (WPanel * panel)
     unselect_item (panel);
     panel->current--;
 
-    if (panels_options.scroll_pages && panel->current < panel->top_file)
+    if (panels_options.scroll_pages && panel->current < panel->top)
     {
         /* Scroll window half screen */
-        panel->top_file -= panel_items (panel) / 2;
-        if (panel->top_file < 0)
-            panel->top_file = 0;
+        panel->top -= panel_items (panel) / 2;
+        if (panel->top < 0)
+            panel->top = 0;
         paint_dir (panel);
     }
     else if (panels_options.scroll_center && panel_current_at_half (panel) < 0)
     {
         /* Scroll window when cursor is halfway up */
-        panel->top_file--;
-        if (panel->top_file < 0)
-            panel->top_file = 0;
+        panel->top--;
+        if (panel->top < 0)
+            panel->top = 0;
     }
     select_item (panel);
 }
@@ -2229,24 +2229,24 @@ panel_move_current (WPanel * panel, int lines)
     unselect_item (panel);
     panel->current = new_pos;
 
-    if (panel->current - panel->top_file >= panel_items (panel))
+    if (panel->current - panel->top >= panel_items (panel))
     {
-        panel->top_file += lines;
+        panel->top += lines;
         adjust = TRUE;
     }
 
-    if (panel->current - panel->top_file < 0)
+    if (panel->current - panel->top < 0)
     {
-        panel->top_file += lines;
+        panel->top += lines;
         adjust = TRUE;
     }
 
     if (adjust)
     {
-        if (panel->top_file > panel->current)
-            panel->top_file = panel->current;
-        if (panel->top_file < 0)
-            panel->top_file = 0;
+        if (panel->top > panel->current)
+            panel->top = panel->current;
+        if (panel->top < 0)
+            panel->top = 0;
         paint_dir (panel);
     }
     select_item (panel);
@@ -2287,18 +2287,18 @@ prev_page (WPanel * panel)
 {
     int items;
 
-    if (panel->current == 0 && panel->top_file == 0)
+    if (panel->current == 0 && panel->top == 0)
         return;
 
     unselect_item (panel);
     items = panel_items (panel);
-    if (panel->top_file < items)
-        items = panel->top_file;
+    if (panel->top < items)
+        items = panel->top;
     if (items == 0)
         panel->current = 0;
     else
         panel->current -= items;
-    panel->top_file -= items;
+    panel->top -= items;
 
     select_item (panel);
     paint_dir (panel);
@@ -2363,15 +2363,15 @@ next_page (WPanel * panel)
 
     unselect_item (panel);
     items = panel_items (panel);
-    if (panel->top_file > panel->dir.len - 2 * items)
-        items = panel->dir.len - items - panel->top_file;
-    if (panel->top_file + items < 0)
-        items = -panel->top_file;
+    if (panel->top > panel->dir.len - 2 * items)
+        items = panel->dir.len - items - panel->top;
+    if (panel->top + items < 0)
+        items = -panel->top;
     if (items == 0)
         panel->current = panel->dir.len - 1;
     else
         panel->current += items;
-    panel->top_file += items;
+    panel->top += items;
 
     select_item (panel);
     paint_dir (panel);
@@ -2402,7 +2402,7 @@ static void
 goto_top_file (WPanel * panel)
 {
     unselect_item (panel);
-    panel->current = panel->top_file;
+    panel->current = panel->top;
     select_item (panel);
 }
 
@@ -2412,7 +2412,7 @@ static void
 goto_middle_file (WPanel * panel)
 {
     unselect_item (panel);
-    panel->current = panel->top_file + panel_items (panel) / 2;
+    panel->current = panel->top + panel_items (panel) / 2;
     select_item (panel);
 }
 
@@ -2422,7 +2422,7 @@ static void
 goto_bottom_file (WPanel * panel)
 {
     unselect_item (panel);
-    panel->current = panel->top_file + panel_items (panel) - 1;
+    panel->current = panel->top + panel_items (panel) - 1;
     select_item (panel);
 }
 
@@ -2440,21 +2440,21 @@ move_home (WPanel * panel)
     {
         int middle_pos;
 
-        middle_pos = panel->top_file + panel_items (panel) / 2;
+        middle_pos = panel->top + panel_items (panel) / 2;
 
         if (panel->current > middle_pos)
         {
             goto_middle_file (panel);
             return;
         }
-        if (panel->current != panel->top_file)
+        if (panel->current != panel->top)
         {
             goto_top_file (panel);
             return;
         }
     }
 
-    panel->top_file = 0;
+    panel->top = 0;
     panel->current = 0;
 
     paint_dir (panel);
@@ -2476,14 +2476,14 @@ move_end (WPanel * panel)
         int items, middle_pos;
 
         items = panel_items (panel);
-        middle_pos = panel->top_file + items / 2;
+        middle_pos = panel->top + items / 2;
 
         if (panel->current < middle_pos)
         {
             goto_middle_file (panel);
             return;
         }
-        if (panel->current != panel->top_file + items - 1)
+        if (panel->current != panel->top + items - 1)
         {
             goto_bottom_file (panel);
             return;
@@ -3965,7 +3965,7 @@ panel_mouse_is_on_item (const WPanel * panel, int y, int x)
     /* column where mouse is */
     col = x / col_width;
 
-    y += panel->top_file + lines * col;
+    y += panel->top + lines * col;
 
     /* are we below or in the next column of last file? */
     if (y > panel->dir.len)
@@ -4076,7 +4076,7 @@ panel_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
     case MSG_MOUSE_SCROLL_UP:
         if (is_active)
         {
-            if (panels_options.mouse_move_pages && panel->top_file > 0)
+            if (panels_options.mouse_move_pages && panel->top > 0)
                 prev_page (panel);
             else                /* We are in first page */
                 move_up (panel);
@@ -4087,7 +4087,7 @@ panel_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
         if (is_active)
         {
             if (panels_options.mouse_move_pages
-                && panel->top_file + panel_items (panel) < panel->dir.len)
+                && panel->top + panel_items (panel) < panel->dir.len)
                 next_page (panel);
             else                /* We are in last page */
                 move_down (panel);
@@ -4203,9 +4203,9 @@ panel_set_current (WPanel * panel, int i)
     {
         panel->dirty = TRUE;
         panel->current = i;
-        panel->top_file = panel->current - (WIDGET (panel)->rect.lines - 2) / 2;
-        if (panel->top_file < 0)
-            panel->top_file = 0;
+        panel->top = panel->current - (WIDGET (panel)->rect.lines - 2) / 2;
+        if (panel->top < 0)
+            panel->top = 0;
     }
 }
 
@@ -4385,7 +4385,7 @@ panel_set_current_by_name (WPanel * panel, const char *name)
 void
 panel_clean_dir (WPanel * panel)
 {
-    panel->top_file = 0;
+    panel->top = 0;
     panel->current = 0;
     panel->marked = 0;
     panel->dirs_marked = 0;
@@ -4867,7 +4867,7 @@ panel_re_sort (WPanel * panel)
         }
 
     g_free (filename);
-    panel->top_file = panel->current - panel_items (panel) / 2;
+    panel->top = panel->current - panel_items (panel) / 2;
     select_item (panel);
     panel->dirty = TRUE;
 }

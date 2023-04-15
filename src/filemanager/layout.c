@@ -1299,7 +1299,7 @@ swap_panels (void)
         panelswap (marked);
         panelswap (dirs_marked);
         panelswap (total);
-        panelswap (top_file);
+        panelswap (top);
         panelswap (current);
         panelswap (is_panelized);
         panelswap (panelized_descr);
