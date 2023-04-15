@@ -750,7 +750,7 @@ editcmd_dialog_raw_key_query_cb (Widget * w, Widget * sender, widget_msg_t msg, 
     {
     case MSG_KEY:
         h->ret_value = parm;
-        dlg_stop (h);
+        dlg_close (h);
         return MSG_HANDLED;
     default:
         return dlg_default_callback (w, sender, msg, parm, data);

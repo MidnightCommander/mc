@@ -605,7 +605,7 @@ tree_chdir_sel (WTree * tree)
         WDialog *h = DIALOG (WIDGET (tree)->owner);
 
         h->ret_value = B_ENTER;
-        dlg_stop (h);
+        dlg_close (h);
     }
 }
 
@@ -1048,7 +1048,7 @@ tree_execute_cmd (WTree * tree, long command)
         break;
     case CK_Quit:
         if (!tree->is_panel)
-            dlg_stop (DIALOG (WIDGET (tree)->owner));
+            dlg_close (DIALOG (WIDGET (tree)->owner));
         return res;
     default:
         res = MSG_NOT_HANDLED;

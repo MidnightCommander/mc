@@ -142,7 +142,7 @@ history_dlg_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
                 return MSG_NOT_HANDLED;
             }
 
-            dlg_stop (d);
+            dlg_close (d);
             return MSG_HANDLED;
         }
 

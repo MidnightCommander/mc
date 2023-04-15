@@ -426,7 +426,7 @@ listbox_do_action (WListbox * l)
         WDialog *h = DIALOG (WIDGET (l)->owner);
 
         h->ret_value = B_ENTER;
-        dlg_stop (h);
+        dlg_close (h);
     }
 }
 

@@ -123,7 +123,7 @@ char *dlg_get_title (const WDialog * h, size_t len);
 cb_ret_t dlg_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data);
 void dlg_default_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event);
 
-void dlg_stop (WDialog * h);
+void dlg_close (WDialog * h);
 
 /* Redraw all dialogs */
 void do_refresh (void);

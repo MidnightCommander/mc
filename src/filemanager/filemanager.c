@@ -139,10 +139,10 @@ static menu_t *left_menu, *right_menu;
 static void
 stop_dialogs (void)
 {
-    dlg_stop (filemanager);
+    dlg_close (filemanager);
 
     if (top_dlg != NULL)
-        dlg_stop (DIALOG (top_dlg->data));
+        dlg_close (DIALOG (top_dlg->data));
 }
 
 /* --------------------------------------------------------------------------------------------- */

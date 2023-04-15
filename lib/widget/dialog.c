@@ -143,11 +143,11 @@ dlg_execute_cmd (WDialog * h, long command)
     {
     case CK_Ok:
         h->ret_value = B_ENTER;
-        dlg_stop (h);
+        dlg_close (h);
         break;
     case CK_Cancel:
         h->ret_value = B_CANCEL;
-        dlg_stop (h);
+        dlg_close (h);
         break;
 
     case CK_Up:
@@ -383,7 +383,7 @@ dlg_default_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
         if (event->y < 0 || event->y >= w->rect.lines || event->x < 0 || event->x >= w->rect.cols)
         {
             DIALOG (w)->ret_value = B_CANCEL;
-            dlg_stop (DIALOG (w));
+            dlg_close (DIALOG (w));
         }
         break;
 
@@ -505,7 +505,7 @@ do_refresh (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-dlg_stop (WDialog * h)
+dlg_close (WDialog * h)
 {
     widget_set_state (WIDGET (h), WST_CLOSED, TRUE);
 }

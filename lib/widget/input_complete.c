@@ -1044,7 +1044,7 @@ complete_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
         case KEY_RIGHT:
             bl = 0;
             h->ret_value = 0;
-            dlg_stop (h);
+            dlg_close (h);
             return MSG_HANDLED;
 
         case KEY_BACKSPACE:
@@ -1053,7 +1053,7 @@ complete_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
             if (end == 0)
             {
                 h->ret_value = 0;
-                dlg_stop (h);
+                dlg_close (h);
             }
             /* Refill the list box and start again */
             else if (end == min_end)
@@ -1061,7 +1061,7 @@ complete_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
                 end = str_get_prev_char (input->buffer->str + end) - input->buffer->str;
                 input_handle_char (input, parm);
                 h->ret_value = B_USER;
-                dlg_stop (h);
+                dlg_close (h);
             }
             else
             {
@@ -1100,7 +1100,7 @@ complete_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
 
                 /* This means we want to refill the list box and start again */
                 h->ret_value = B_USER;
-                dlg_stop (h);
+                dlg_close (h);
             }
             else
             {
@@ -1192,7 +1192,7 @@ complete_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
                 else if (need_redraw == 1)
                 {
                     h->ret_value = B_ENTER;
-                    dlg_stop (h);
+                    dlg_close (h);
                 }
                 bl = 0;
             }

@@ -3321,7 +3321,7 @@ dview_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
     case MSG_KEY:
         i = dview_handle_key (dview, parm);
         if (dview->view_quit)
-            dlg_stop (h);
+            dlg_close (h);
         else
             dview_update (dview);
         return i;
@@ -3329,7 +3329,7 @@ dview_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
     case MSG_ACTION:
         i = dview_execute_cmd (dview, parm);
         if (dview->view_quit)
-            dlg_stop (h);
+            dlg_close (h);
         else
             dview_update (dview);
         return i;
@@ -3398,7 +3398,7 @@ dview_dialog_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, 
         /* don't stop the dialog before final decision */
         widget_set_state (w, WST_ACTIVE, TRUE);
         if (dview_ok_to_exit (dview))
-            dlg_stop (h);
+            dlg_close (h);
         return MSG_HANDLED;
 
     default:

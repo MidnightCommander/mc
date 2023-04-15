@@ -492,7 +492,7 @@ chl_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *dat
                 WDialog *h = DIALOG (w);
 
                 h->ret_value = parm;
-                dlg_stop (h);
+                dlg_close (h);
             }
             break;
         default:

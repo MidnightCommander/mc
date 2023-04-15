@@ -202,7 +202,7 @@ learn_check_key (int c)
                          ("Great! You have a complete terminal database!\n"
                           "All your keys work well."));
             }
-            dlg_stop (learn_dlg);
+            dlg_close (learn_dlg);
         }
         return TRUE;
     }
