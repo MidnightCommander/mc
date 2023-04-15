@@ -4183,46 +4183,6 @@ do_select (WPanel * panel, int i)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
-do_try_to_select (WPanel * panel, const char *name)
-{
-    int i;
-    char *subdir;
-
-    if (name == NULL)
-    {
-        do_select (panel, 0);
-        return;
-    }
-
-    /* We only want the last component of the directory,
-     * and from this only the name without suffix.
-     * Cut prefix if the panel is not panelized */
-
-    if (panel->is_panelized)
-        subdir = vfs_strip_suffix_from_filename (name);
-    else
-        subdir = vfs_strip_suffix_from_filename (x_basename (name));
-
-    /* Search that subdir or filename without prefix (if not panelized panel), select it if found */
-    for (i = 0; i < panel->dir.len; i++)
-    {
-        if (strcmp (subdir, panel->dir.list[i].fname->str) == 0)
-        {
-            do_select (panel, i);
-            g_free (subdir);
-            return;
-        }
-    }
-
-    /* Try to select a file near the file that is missing */
-    if (panel->selected >= panel->dir.len)
-        do_select (panel, panel->dir.len - 1);
-    g_free (subdir);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 /* event callback */
 static gboolean
 event_update_panels (const gchar * event_group_name, const gchar * event_name,
@@ -4356,7 +4316,38 @@ panel_dir_list_callback (dir_list_cb_state_t state, void *data)
 void
 try_to_select (WPanel * panel, const char *name)
 {
-    do_try_to_select (panel, name);
+    int i;
+    char *subdir;
+
+    if (name == NULL)
+    {
+        do_select (panel, 0);
+        return;
+    }
+
+    /* We only want the last component of the directory,
+     * and from this only the name without suffix.
+     * Cut prefix if the panel is not panelized */
+
+    if (panel->is_panelized)
+        subdir = vfs_strip_suffix_from_filename (name);
+    else
+        subdir = vfs_strip_suffix_from_filename (x_basename (name));
+
+    /* Search that subdir or filename without prefix (if not panelized panel), select it if found */
+    for (i = 0; i < panel->dir.len; i++)
+        if (strcmp (subdir, panel->dir.list[i].fname->str) == 0)
+        {
+            do_select (panel, i);
+            g_free (subdir);
+            return;
+        }
+
+    /* Try to select a file near the file that is missing */
+    if (panel->selected >= panel->dir.len)
+        do_select (panel, panel->dir.len - 1);
+    g_free (subdir);
+
     select_item (panel);
 }
 
