@@ -993,7 +993,7 @@ add2hotlist (char *label, char *directory, enum HotListType type, listbox_append
         }
         else
             listbox_add_item (l_hotlist, pos, 0, new->label, new, FALSE);
-        listbox_select_entry (l_hotlist, l_hotlist->pos);
+        listbox_set_current (l_hotlist, l_hotlist->current);
     }
 
     return new;

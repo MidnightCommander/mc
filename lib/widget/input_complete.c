@@ -1078,7 +1078,7 @@ complete_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
 
                     if (strncmp (input->buffer->str + start, le->text, new_end - start) == 0)
                     {
-                        listbox_select_entry (LISTBOX (g->current->data), i);
+                        listbox_set_current (LISTBOX (g->current->data), i);
                         end = new_end;
                         input_handle_char (input, parm);
                         widget_draw (WIDGET (g->current->data));
@@ -1136,7 +1136,7 @@ complete_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
                         if (need_redraw == 0)
                         {
                             need_redraw = 1;
-                            listbox_select_entry (LISTBOX (g->current->data), i);
+                            listbox_set_current (LISTBOX (g->current->data), i);
                             last_text = le->text;
                         }
                         else

@@ -1151,7 +1151,7 @@ user_menu_cmd (const Widget * edit_widget, const char *menu_file, int selected_e
                                      extract_line (p, p + MAX_ENTRY_LEN), p, FALSE);
             }
             /* Select the default entry */
-            listbox_select_entry (listbox->list, selected);
+            listbox_set_current (listbox->list, selected);
 
             selected = listbox_run (listbox);
         }
