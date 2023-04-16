@@ -1016,7 +1016,7 @@ repaint_file (WPanel * panel, int file_index, file_attr_t attr)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-repaint_status (WPanel * panel, int file_index)
+repaint_status (WPanel * panel)
 {
     int width;
 
@@ -5250,8 +5250,8 @@ panel_panelize_cd (void)
         list->list[i].f.dir_size_computed = plist->list[i].f.dir_size_computed;
         list->list[i].f.marked = plist->list[i].f.marked;
         list->list[i].st = plist->list[i].st;
-        list->list[i].sort_key = plist->list[i].sort_key;
-        list->list[i].second_sort_key = plist->list[i].second_sort_key;
+        list->list[i].name_sort_key = plist->list[i].name_sort_key;
+        list->list[i].extension_sort_key = plist->list[i].extension_sort_key;
     }
 
     panel->is_panelized = TRUE;
@@ -5346,8 +5346,8 @@ panel_panelize_save (WPanel * panel)
         plist->list[i].f.dir_size_computed = list->list[i].f.dir_size_computed;
         plist->list[i].f.marked = list->list[i].f.marked;
         plist->list[i].st = list->list[i].st;
-        plist->list[i].sort_key = list->list[i].sort_key;
-        plist->list[i].second_sort_key = list->list[i].second_sort_key;
+        plist->list[i].name_sort_key = list->list[i].name_sort_key;
+        plist->list[i].extension_sort_key = list->list[i].extension_sort_key;
     }
 }
 

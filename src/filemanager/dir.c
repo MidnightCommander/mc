@@ -112,12 +112,12 @@ static inline int
 compare_by_names (file_entry_t * a, file_entry_t * b)
 {
     /* create key if does not exist, key will be freed after sorting */
-    if (a->sort_key == NULL)
-        a->sort_key = str_create_key_for_filename (a->fname->str, case_sensitive);
-    if (b->sort_key == NULL)
-        b->sort_key = str_create_key_for_filename (b->fname->str, case_sensitive);
+    if (a->name_sort_key == NULL)
+        a->name_sort_key = str_create_key_for_filename (a->fname->str, case_sensitive);
+    if (b->name_sort_key == NULL)
+        b->name_sort_key = str_create_key_for_filename (b->fname->str, case_sensitive);
 
-    return key_collate (a->sort_key, b->sort_key);
+    return key_collate (a->name_sort_key, b->name_sort_key);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -135,10 +135,10 @@ clean_sort_keys (dir_list * list, int start, int count)
         file_entry_t *fentry;
 
         fentry = &list->list[i + start];
-        str_release_key (fentry->sort_key, case_sensitive);
-        fentry->sort_key = NULL;
-        str_release_key (fentry->second_sort_key, case_sensitive);
-        fentry->second_sort_key = NULL;
+        str_release_key (fentry->name_sort_key, case_sensitive);
+        fentry->name_sort_key = NULL;
+        str_release_key (fentry->extension_sort_key, case_sensitive);
+        fentry->extension_sort_key = NULL;
     }
 }
 
@@ -312,8 +312,8 @@ dir_list_append (dir_list * list, const char *fname, const struct stat * st,
     fentry->f.stale_link = stale_link ? 1 : 0;
     fentry->f.dir_size_computed = 0;
     fentry->st = *st;
-    fentry->sort_key = NULL;
-    fentry->second_sort_key = NULL;
+    fentry->name_sort_key = NULL;
+    fentry->extension_sort_key = NULL;
 
     list->len++;
 
@@ -379,12 +379,12 @@ sort_ext (file_entry_t * a, file_entry_t * b)
     {
         int r;
 
-        if (a->second_sort_key == NULL)
-            a->second_sort_key = str_create_key (extension (a->fname->str), case_sensitive);
-        if (b->second_sort_key == NULL)
-            b->second_sort_key = str_create_key (extension (b->fname->str), case_sensitive);
+        if (a->extension_sort_key == NULL)
+            a->extension_sort_key = str_create_key (extension (a->fname->str), case_sensitive);
+        if (b->extension_sort_key == NULL)
+            b->extension_sort_key = str_create_key (extension (b->fname->str), case_sensitive);
 
-        r = str_key_collate (a->second_sort_key, b->second_sort_key, case_sensitive);
+        r = str_key_collate (a->extension_sort_key, b->extension_sort_key, case_sensitive);
         if (r != 0)
             return r * reverse;
 
@@ -742,8 +742,8 @@ dir_list_reload (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
         dfentry->f.dir_size_computed = fentry->f.dir_size_computed;
         dfentry->f.link_to_dir = fentry->f.link_to_dir;
         dfentry->f.stale_link = fentry->f.stale_link;
-        dfentry->sort_key = NULL;
-        dfentry->second_sort_key = NULL;
+        dfentry->name_sort_key = NULL;
+        dfentry->extension_sort_key = NULL;
         if (fentry->f.marked)
         {
             g_hash_table_insert (marked_files, dfentry->fname->str, dfentry);

@@ -24,9 +24,9 @@ typedef struct
     /* File attributes */
     struct stat st;
     /* Key used for comparing names */
-    char *sort_key;
+    char *name_sort_key;
     /* Key used for comparing extensions */
-    char *second_sort_key;
+    char *extension_sort_key;
 
     /* Flags */
     struct
