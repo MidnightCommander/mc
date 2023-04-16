@@ -937,7 +937,7 @@ format_file (WPanel * panel, int file_index, int width, file_attr_t attr, gboole
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-repaint_file (WPanel * panel, int file_index, file_attr_t attr, gboolean isstatus)
+repaint_file (WPanel * panel, int file_index, file_attr_t attr)
 {
     Widget *w = WIDGET (panel);
 
@@ -949,7 +949,7 @@ repaint_file (WPanel * panel, int file_index, file_attr_t attr, gboolean isstatu
     gboolean panel_is_split;
     int fln = 0;
 
-    panel_is_split = !isstatus && panel->list_cols > 1;
+    panel_is_split = panel->list_cols > 1;
     width = w->rect.cols - 2;
 
     if (panel_is_split)
@@ -967,18 +967,15 @@ repaint_file (WPanel * panel, int file_index, file_attr_t attr, gboolean isstatu
     if (width <= 0)
         return;
 
-    if (!isstatus)
-    {
-        ypos = file_index - panel->top;
+    ypos = file_index - panel->top;
 
-        if (panel_is_split)
-            ypos %= panel_lines (panel);
+    if (panel_is_split)
+        ypos %= panel_lines (panel);
 
-        ypos += 2;              /* top frame and header */
-        widget_gotoyx (w, ypos, offset + 1);
-    }
+    ypos += 2;                  /* top frame and header */
+    widget_gotoyx (w, ypos, offset + 1);
 
-    ret_frm = format_file (panel, file_index, width, attr, isstatus, &fln);
+    ret_frm = format_file (panel, file_index, width, attr, FALSE, &fln);
 
     if (panel_is_split && nth_column + 1 < panel->list_cols)
     {
@@ -986,7 +983,7 @@ repaint_file (WPanel * panel, int file_index, file_attr_t attr, gboolean isstatu
         tty_print_one_vline (TRUE);
     }
 
-    if (!isstatus && ret_frm != FILENAME_NOSCROLL)
+    if (ret_frm != FILENAME_NOSCROLL)
     {
         if (!panel_is_split && fln > 0)
         {
@@ -1013,6 +1010,22 @@ repaint_file (WPanel * panel, int file_index, file_attr_t attr, gboolean isstatu
             tty_setcolor (NORMAL_COLOR);
             tty_print_string (panel_filename_scroll_right_char);
         }
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+repaint_status (WPanel * panel, int file_index)
+{
+    int width;
+
+    width = WIDGET (panel)->rect.cols - 2;
+    if (width > 0)
+    {
+        int fln = 0;
+
+        (void) format_file (panel, panel->current, width, FATTR_STATUS, TRUE, &fln);
     }
 }
 
@@ -1071,7 +1084,7 @@ display_mini_info (WPanel * panel)
     }
     else
         /* Default behavior */
-        repaint_file (panel, panel->current, FATTR_STATUS, TRUE);
+        repaint_status (panel);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1103,7 +1116,7 @@ paint_dir (WPanel * panel)
                 attr = FATTR_MARKED;
         }
 
-        repaint_file (panel, n, attr, FALSE);
+        repaint_file (panel, n, attr);
     }
 
     tty_set_normal_attrs ();
@@ -2089,7 +2102,7 @@ static inline void
 unselect_item (WPanel * panel)
 {
     repaint_file (panel, panel->current,
-                  panel_current_entry (panel)->f.marked ? FATTR_MARKED : FATTR_NORMAL, FALSE);
+                  panel_current_entry (panel)->f.marked ? FATTR_MARKED : FATTR_NORMAL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
