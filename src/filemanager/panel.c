@@ -89,11 +89,14 @@ mc_fhl_t *mc_filehighlight = NULL;
 
 /*** file scope macro definitions ****************************************************************/
 
-#define NORMAL          0
-#define CURRENT         1
-#define MARKED          2
-#define MARKED_CURRENT  3
-#define STATUS          5
+typedef enum
+{
+    FATTR_NORMAL = 0,
+    FATTR_CURRENT,
+    FATTR_MARKED,
+    FATTR_MARKED_CURRENT,
+    FATTR_STATUS
+} file_attr_t;
 
 /* select/unselect dialog results */
 #define SELECT_RESET ((mc_search_t *)(-1))
@@ -443,7 +446,7 @@ panel_lines (const WPanel * p)
 /** This code relies on the default justification!!! */
 
 static void
-add_permission_string (const char *dest, int width, file_entry_t * fe, int attr, int color,
+add_permission_string (const char *dest, int width, file_entry_t * fe, file_attr_t attr, int color,
                        gboolean is_octal)
 {
     int i, r, l;
@@ -467,7 +470,7 @@ add_permission_string (const char *dest, int width, file_entry_t * fe, int attr,
     {
         if (i >= l && i < r)
         {
-            if (attr == CURRENT || attr == MARKED_CURRENT)
+            if (attr == FATTR_CURRENT || attr == FATTR_MARKED_CURRENT)
                 tty_setcolor (MARKED_SELECTED_COLOR);
             else
                 tty_setcolor (MARKED_COLOR);
@@ -787,19 +790,19 @@ string_dot (file_entry_t * fe, int len)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-file_compute_color (int attr, file_entry_t * fe)
+file_compute_color (file_attr_t attr, file_entry_t * fe)
 {
     switch (attr)
     {
-    case CURRENT:
+    case FATTR_CURRENT:
         return (SELECTED_COLOR);
-    case MARKED:
+    case FATTR_MARKED:
         return (MARKED_COLOR);
-    case MARKED_CURRENT:
+    case FATTR_MARKED_CURRENT:
         return (MARKED_SELECTED_COLOR);
-    case STATUS:
+    case FATTR_STATUS:
         return (NORMAL_COLOR);
-    case NORMAL:
+    case FATTR_NORMAL:
     default:
         if (!panels_options.filetype_mode)
             return (NORMAL_COLOR);
@@ -821,7 +824,7 @@ panel_items (const WPanel * p)
 /** Formats the file number file_index of panel in the buffer dest */
 
 static filename_scroll_flag_t
-format_file (WPanel * panel, int file_index, int width, int attr, gboolean isstatus,
+format_file (WPanel * panel, int file_index, int width, file_attr_t attr, gboolean isstatus,
              int *field_length)
 {
     int color = NORMAL_COLOR;
@@ -911,7 +914,7 @@ format_file (WPanel * panel, int file_index, int width, int attr, gboolean issta
         }
         else
         {
-            if (attr == CURRENT || attr == MARKED_CURRENT)
+            if (attr == FATTR_CURRENT || attr == FATTR_MARKED_CURRENT)
                 tty_setcolor (SELECTED_COLOR);
             else
                 tty_setcolor (NORMAL_COLOR);
@@ -934,7 +937,7 @@ format_file (WPanel * panel, int file_index, int width, int attr, gboolean issta
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-repaint_file (WPanel * panel, int file_index, int attr, gboolean isstatus)
+repaint_file (WPanel * panel, int file_index, file_attr_t attr, gboolean isstatus)
 {
     Widget *w = WIDGET (panel);
 
@@ -1068,7 +1071,7 @@ display_mini_info (WPanel * panel)
     }
     else
         /* Default behavior */
-        repaint_file (panel, panel->current, STATUS, TRUE);
+        repaint_file (panel, panel->current, FATTR_STATUS, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1085,15 +1088,22 @@ paint_dir (WPanel * panel)
 
     for (i = 0; i < items; i++)
     {
-        int color = 0;          /* Color value of the line */
+        file_attr_t attr = FATTR_NORMAL;        /* Color value of the line */
+        int n;
+        gboolean marked;
 
-        if (i + panel->top < panel->dir.len)
+        n = i + panel->top;
+        marked = (panel->dir.list[n].f.marked != 0);
+
+        if (n < panel->dir.len)
         {
-            color = 2 * (panel->dir.list[i + panel->top].f.marked);
-            color += (panel->current == i + panel->top && panel->active);
+            if (panel->current == n && panel->active)
+                attr = marked ? FATTR_MARKED_CURRENT : FATTR_CURRENT;
+            else if (marked)
+                attr = FATTR_MARKED;
         }
 
-        repaint_file (panel, i + panel->top, color, FALSE);
+        repaint_file (panel, n, attr, FALSE);
     }
 
     tty_set_normal_attrs ();
@@ -2078,7 +2088,8 @@ force_maybe_cd (WPanel * panel)
 static inline void
 unselect_item (WPanel * panel)
 {
-    repaint_file (panel, panel->current, 2 * panel_current_entry (panel)->f.marked, FALSE);
+    repaint_file (panel, panel->current,
+                  panel_current_entry (panel)->f.marked ? FATTR_MARKED : FATTR_NORMAL, FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
