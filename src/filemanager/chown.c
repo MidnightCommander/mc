@@ -287,7 +287,7 @@ chown_done (gboolean need_update)
 static const GString *
 next_file (const WPanel * panel)
 {
-    while (!panel->dir.list[current_file].f.marked)
+    while (panel->dir.list[current_file].f.marked == 0)
         current_file++;
 
     return panel->dir.list[current_file].fname;

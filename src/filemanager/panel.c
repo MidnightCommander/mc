@@ -589,7 +589,7 @@ string_file_type (file_entry_t * fe, int len)
     {
         if (link_isdir (fe))
             buffer[0] = '~';
-        else if (fe->f.stale_link)
+        else if (fe->f.stale_link != 0)
             buffer[0] = '!';
         else
             buffer[0] = '@';
@@ -760,7 +760,7 @@ string_marked (file_entry_t * fe, int len)
 {
     (void) len;
 
-    return fe->f.marked ? "*" : " ";
+    return fe->f.marked != 0 ? "*" : " ";
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2102,7 +2102,7 @@ static inline void
 unselect_item (WPanel * panel)
 {
     repaint_file (panel, panel->current,
-                  panel_current_entry (panel)->f.marked ? FATTR_MARKED : FATTR_NORMAL);
+                  panel_current_entry (panel)->f.marked != 0 ? FATTR_MARKED : FATTR_NORMAL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2124,7 +2124,7 @@ panel_select_ext_cmd (WPanel * panel)
     if (filename == NULL)
         return;
 
-    do_select = !fe->f.marked;
+    do_select = (fe->f.marked == 0);
 
     cur_file_ext = strutils_regex_escape (extension (filename->str));
     if (cur_file_ext[0] != '\0')
@@ -3866,7 +3866,7 @@ static void
 mouse_toggle_mark (WPanel * panel)
 {
     do_mark_file (panel, MARK_DONT_MOVE);
-    mouse_marking = panel_current_entry (panel)->f.marked;
+    mouse_marking = (panel_current_entry (panel)->f.marked != 0);
     mouse_mark_panel = current_panel;
 }
 
@@ -3881,9 +3881,9 @@ mouse_set_mark (WPanel * panel)
 
         fe = panel_current_entry (panel);
 
-        if (mouse_marking && !fe->f.marked)
+        if (mouse_marking && fe->f.marked == 0)
             do_mark_file (panel, MARK_DONT_MOVE);
-        else if (!mouse_marking && fe->f.marked)
+        else if (!mouse_marking && fe->f.marked != 0)
             do_mark_file (panel, MARK_DONT_MOVE);
     }
 }
@@ -4783,7 +4783,7 @@ recalculate_panel_summary (WPanel * panel)
     panel->total = 0;
 
     for (i = 0; i < panel->dir.len; i++)
-        if (panel->dir.list[i].f.marked)
+        if (panel->dir.list[i].f.marked != 0)
         {
             /* do_file_mark will return immediately if newmark == oldmark.
                So we have to first unmark it to get panel's summary information
@@ -4807,13 +4807,13 @@ do_file_mark (WPanel * panel, int idx, int mark)
         return;
 
     file_mark (panel, idx, mark);
-    if (panel->dir.list[idx].f.marked)
+    if (panel->dir.list[idx].f.marked != 0)
     {
         panel->marked++;
 
         if (S_ISDIR (panel->dir.list[idx].st.st_mode))
         {
-            if (panel->dir.list[idx].f.dir_size_computed)
+            if (panel->dir.list[idx].f.dir_size_computed != 0)
                 panel->total += (uintmax_t) panel->dir.list[idx].st.st_size;
             panel->dirs_marked++;
         }
@@ -4826,7 +4826,7 @@ do_file_mark (WPanel * panel, int idx, int mark)
     {
         if (S_ISDIR (panel->dir.list[idx].st.st_mode))
         {
-            if (panel->dir.list[idx].f.dir_size_computed)
+            if (panel->dir.list[idx].f.dir_size_computed != 0)
                 panel->total -= (uintmax_t) panel->dir.list[idx].st.st_size;
             panel->dirs_marked--;
         }

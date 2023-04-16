@@ -80,9 +80,9 @@ START_TEST (sanitize_variables)
     current_panel->dir.len = 3;
     current_panel->dir.list[0].fname = g_string_new ("selected file.txt");
     current_panel->dir.list[1].fname = g_string_new ("tagged file1.txt");
-    current_panel->dir.list[1].f.marked = TRUE;
+    current_panel->dir.list[1].f.marked = 1;
     current_panel->dir.list[2].fname = g_string_new ("tagged file2.txt");
-    current_panel->dir.list[2].f.marked = TRUE;
+    current_panel->dir.list[2].f.marked = 1;
 
     /* when */
     filename_vpath = vfs_path_from_str ("/tmp/blabla.txt");

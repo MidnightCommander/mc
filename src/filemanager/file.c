@@ -1793,7 +1793,7 @@ panel_get_file (const WPanel * panel)
         int i;
 
         for (i = 0; i < panel->dir.len; i++)
-            if (panel->dir.list[i].f.marked)
+            if (panel->dir.list[i].f.marked != 0)
                 return panel->dir.list[i].fname->str;
     }
 
@@ -3462,7 +3462,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
             {
                 const char *source2;
 
-                if (!panel->dir.list[i].f.marked)
+                if (panel->dir.list[i].f.marked == 0)
                     continue;   /* Skip the unmarked ones */
 
                 source2 = panel->dir.list[i].fname->str;

@@ -1316,7 +1316,7 @@ dirsizes_cmd (WPanel * panel)
 
     for (i = 0; i < panel->dir.len; i++)
         if (S_ISDIR (panel->dir.list[i].st.st_mode)
-            && ((panel->dirs_marked != 0 && panel->dir.list[i].f.marked)
+            && ((panel->dirs_marked != 0 && panel->dir.list[i].f.marked != 0)
                 || panel->dirs_marked == 0) && !DIR_IS_DOTDOT (panel->dir.list[i].fname->str))
         {
             vfs_path_t *p;

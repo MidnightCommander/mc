@@ -805,10 +805,8 @@ put_tagged (WPanel * panel)
         int i;
 
         for (i = 0; i < panel->dir.len; i++)
-        {
-            if (panel->dir.list[i].f.marked)
+            if (panel->dir.list[i].f.marked != 0)
                 command_insert (cmdline, panel->dir.list[i].fname->str, TRUE);
-        }
     }
     else
         command_insert (cmdline, panel_current_entry (panel)->fname->str, TRUE);

@@ -926,7 +926,7 @@ expand_format (const Widget * edit_widget, char c, gboolean do_quote)
             block = g_string_sized_new (16);
 
             for (i = 0; i < panel->dir.len; i++)
-                if (panel->dir.list[i].f.marked)
+                if (panel->dir.list[i].f.marked != 0)
                 {
                     char *tmp;
 

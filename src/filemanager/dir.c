@@ -744,7 +744,7 @@ dir_list_reload (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
         dfentry->f.stale_link = fentry->f.stale_link;
         dfentry->name_sort_key = NULL;
         dfentry->extension_sort_key = NULL;
-        if (fentry->f.marked)
+        if (fentry->f.marked != 0)
         {
             g_hash_table_insert (marked_files, dfentry->fname->str, dfentry);
             marked_cnt++;
@@ -805,8 +805,8 @@ dir_list_reload (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
              * we copied one.
              */
             fentry->f.marked = (marked_cnt > 0
-                                && g_hash_table_lookup (marked_files, dp->d_name) != NULL);
-            if (fentry->f.marked)
+                                && g_hash_table_lookup (marked_files, dp->d_name) != NULL) ? 1 : 0;
+            if (fentry->f.marked != 0)
                 marked_cnt--;
         }
     }
