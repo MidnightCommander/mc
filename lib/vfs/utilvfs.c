@@ -254,12 +254,12 @@ vfs_url_split (const char *path, int default_port, vfs_url_flags_t flags)
 
     if ((flags & URL_NOSLASH) == 0)
     {
-        char *dir = pcopy;
+        char *dir;
 
         /* locate path component */
-        while (!IS_PATH_SEP (*dir) && *dir != '\0')
-            dir++;
-        if (*dir == '\0')
+        dir = strchr (pcopy, PATH_SEP);
+
+        if (dir == NULL)
             path_element->path = g_strdup (PATH_SEP_STR);
         else
         {
