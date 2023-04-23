@@ -90,12 +90,9 @@ extern dlg_colors_t dialog_colors;
 extern dlg_colors_t alarm_colors;
 extern dlg_colors_t listbox_colors;
 
-extern GList *top_dlg;
-
 /* A hook list for idle events */
 extern hook_t *idle_hook;
 
-extern gboolean fast_refresh;
 extern gboolean mouse_close_dialog;
 
 extern const global_keymap_t *dialog_map;
@@ -124,9 +121,6 @@ cb_ret_t dlg_default_callback (Widget * w, Widget * sender, widget_msg_t msg, in
 void dlg_default_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event);
 
 void dlg_close (WDialog * h);
-
-/* Redraw all dialogs */
-void do_refresh (void);
 
 /* --------------------------------------------------------------------------------------------- */
 /*** inline functions ****************************************************************************/

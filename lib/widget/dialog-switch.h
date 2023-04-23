@@ -12,6 +12,10 @@
 
 /*** global variables defined in .c file *********************************************************/
 
+extern GList *top_dlg;
+
+extern gboolean fast_refresh;
+
 extern WDialog *filemanager;
 
 /*** declarations of public functions ************************************************************/
@@ -27,6 +31,9 @@ void dialog_switch_list (void);
 int dialog_switch_process_pending (void);
 void dialog_switch_got_winch (void);
 void dialog_switch_shutdown (void);
+
+/* Redraw all dialogs */
+void do_refresh (void);
 
 void repaint_screen (void);
 void mc_refresh (void);

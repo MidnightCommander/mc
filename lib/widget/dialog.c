@@ -55,16 +55,8 @@ dlg_colors_t dialog_colors;
 dlg_colors_t alarm_colors;
 dlg_colors_t listbox_colors;
 
-/* Primitive way to check if the the current dialog is our dialog */
-/* This is needed by async routines like load_prompt */
-GList *top_dlg = NULL;
-
 /* A hook list for idle events */
 hook_t *idle_hook = NULL;
-
-/* If set then dialogs just clean the screen when refreshing, else */
-/* they do a complete refresh, refreshing all the parts of the program */
-gboolean fast_refresh = FALSE;
 
 /* left click outside of dialog closes it */
 gboolean mouse_close_dialog = FALSE;
@@ -470,36 +462,6 @@ dlg_set_default_colors (void)
     listbox_colors[DLG_COLOR_HOT_NORMAL] = PMENU_ENTRY_COLOR;
     listbox_colors[DLG_COLOR_HOT_FOCUS] = PMENU_SELECTED_COLOR;
     listbox_colors[DLG_COLOR_TITLE] = PMENU_TITLE_COLOR;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-do_refresh (void)
-{
-    GList *d = top_dlg;
-
-    if (fast_refresh)
-    {
-        if (d != NULL)
-            widget_draw (WIDGET (d->data));
-    }
-    else
-    {
-        /* Search first fullscreen dialog */
-        for (; d != NULL; d = g_list_next (d))
-            if ((WIDGET (d->data)->pos_flags & WPOS_FULLSCREEN) != 0)
-                break;
-
-        /* when small dialog (i.e. error message) is created first,
-           there is no fullscreen dialog in the stack */
-        if (d == NULL)
-            d = g_list_last (top_dlg);
-
-        /* back to top dialog */
-        for (; d != NULL; d = g_list_previous (d))
-            widget_draw (WIDGET (d->data));
-    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
