@@ -3,8 +3,8 @@
  *  \brief Header: shared stuff of widgets
  */
 
-#ifndef MC__WIDGET_INTERNAL_H
-#define MC__WIDGET_INTERNAL_H
+#ifndef MC__WIDGET_COMMON_H
+#define MC__WIDGET_COMMON_H
 
 #include "lib/keybind.h"        /* global_keymap_t */
 #include "lib/tty/mouse.h"
@@ -459,4 +459,4 @@ widget_overlapped (const Widget * a, const Widget * b)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#endif /* MC__WIDGET_INTERNAL_H */
+#endif /* MC__WIDGET_COMMON_H */
