@@ -40,7 +40,6 @@
 
 #include "lib/global.h"
 #include "lib/unixcompat.h"
-#include "lib/util.h"           /* mc_mkstemps() */
 #include "lib/widget.h"         /* message() */
 #include "lib/strutil.h"        /* INVALID_CONV */
 
@@ -67,11 +66,13 @@
 
 /*** file scope type declarations ****************************************************************/
 
+/*** forward declarations (file scope functions) *************************************************/
+
 /*** file scope variables ************************************************************************/
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
-
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
@@ -89,7 +90,8 @@ vfs_get_local_username (void)
 
     p_i = getpwuid (geteuid ());
 
-    return (p_i && p_i->pw_name) ? g_strdup (p_i->pw_name) : g_strdup ("anonymous");    /* Unknown UID, strange */
+    /* Unknown UID, strange */
+    return (p_i != NULL && p_i->pw_name != NULL) ? g_strdup (p_i->pw_name) : g_strdup ("anonymous");
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -99,8 +101,6 @@ vfs_get_local_username (void)
  * This file should be modified for non-unix systems to do something
  * reasonable.
  */
-
-/* --------------------------------------------------------------------------------------------- */
 
 int
 vfs_finduid (const char *uname)
@@ -119,10 +119,8 @@ vfs_finduid (const char *uname)
 
         g_strlcpy (saveuname, uname, TUNMLEN);
         pw = getpwnam (uname);
-        if (pw)
-        {
+        if (pw != NULL)
             saveuid = pw->pw_uid;
-        }
         else
         {
             static int my_uid = GUID_DEFAULT_CONST;
@@ -133,6 +131,7 @@ vfs_finduid (const char *uname)
             saveuid = my_uid;
         }
     }
+
     return saveuid;
 }
 
@@ -155,10 +154,8 @@ vfs_findgid (const char *gname)
 
         g_strlcpy (savegname, gname, TGNMLEN);
         gr = getgrnam (gname);
-        if (gr)
-        {
+        if (gr != NULL)
             savegid = gr->gr_gid;
-        }
         else
         {
             static int my_gid = GUID_DEFAULT_CONST;
@@ -169,6 +166,7 @@ vfs_findgid (const char *gname)
             savegid = my_gid;
         }
     }
+
     return savegid;
 }
 
