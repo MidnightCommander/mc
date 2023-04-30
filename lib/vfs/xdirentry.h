@@ -95,6 +95,7 @@ struct vfs_s_inode
     char *localname;            /* Filename of local file, if we have one */
     gint64 timestamp;           /* Subclass specific */
     off_t data_offset;          /* Subclass specific */
+    void *user_data;            /* Subclass specific */
 };
 
 /* Data associated with an open file */
