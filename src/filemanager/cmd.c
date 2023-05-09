@@ -90,7 +90,7 @@
 #include "ext.h"                /* regex_command() */
 #include "boxes.h"              /* cd_box() */
 #include "dir.h"
-#include "cd.h"                 /* cd_to() */
+#include "cd.h"
 
 #include "cmd.h"                /* Our definitions */
 
@@ -147,7 +147,7 @@ do_view_cmd (WPanel * panel, gboolean plain_view)
 
         fname_vpath = vfs_path_from_str (fe->fname->str);
         if (!panel_cd (panel, fname_vpath, cd_exact))
-            message (D_ERROR, MSG_ERROR, _("Cannot change directory"));
+            cd_error_message (fe->fname->str);
         vfs_path_free (fname_vpath, TRUE);
     }
     else
@@ -446,7 +446,7 @@ nice_cd (const char *text, const char *xtext, const char *help,
         cd_vpath = vfs_path_from_str_flags (cd_path, VPF_NO_CANON);
         if (!panel_do_cd (MENU_PANEL, cd_vpath, cd_parse_command))
         {
-            message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\""), cd_path);
+            cd_error_message (cd_path);
 
             if (save_type != view_listing)
                 create_panel (MENU_PANEL_IDX, save_type);
@@ -1009,7 +1009,7 @@ vfs_list (WPanel * panel)
 
     target_vpath = vfs_path_from_str (target);
     if (!panel_cd (current_panel, target_vpath, cd_exact))
-        message (D_ERROR, MSG_ERROR, _("Cannot change directory"));
+        cd_error_message (target);
     vfs_path_free (target_vpath, TRUE);
     g_free (target);
 }

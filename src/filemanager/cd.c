@@ -38,6 +38,7 @@
 #include "lib/vfs/vfs.h"
 #include "lib/strescape.h"      /* strutils_shell_unescape() */
 #include "lib/util.h"           /* whitespace() */
+#include "lib/widget.h"         /* message() */
 
 #include "filemanager.h"        /* current_panel, panel.h, layout.h */
 #include "tree.h"               /* sync_tree() */
@@ -286,8 +287,7 @@ cd_to (const char *path)
             char *d;
 
             d = vfs_path_to_str_flags (q_vpath, 0, VPF_STRIP_PASSWORD);
-            message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\"\n%s"), d,
-                     unix_error_string (errno));
+            cd_error_message (d);
             g_free (d);
         }
 
@@ -296,6 +296,15 @@ cd_to (const char *path)
     }
 
     g_free (p);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+cd_error_message (const char *path)
+{
+    message (D_ERROR, MSG_ERROR, _("Cannot change directory to\n%s\n%s"), path,
+             unix_error_string (errno));
 }
 
 /* --------------------------------------------------------------------------------------------- */

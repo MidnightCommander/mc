@@ -66,6 +66,7 @@
 #include "treestore.h"
 #include "cmd.h"
 #include "filegui.h"
+#include "cd.h"                 /* cd_error_message() */
 
 #include "tree.h"
 
@@ -593,8 +594,7 @@ tree_chdir_sel (WTree * tree)
         if (panel_cd (p, tree->selected_ptr->name, cd_exact))
             select_item (p);
         else
-            message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\"\n%s"),
-                     vfs_path_as_str (tree->selected_ptr->name), unix_error_string (errno));
+            cd_error_message (vfs_path_as_str (tree->selected_ptr->name));
 
         widget_draw (WIDGET (p));
         (void) change_panel ();

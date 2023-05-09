@@ -32,7 +32,6 @@
 
 #include <config.h>
 
-#include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -77,6 +76,7 @@
 #include "command.h"            /* cmdline */
 #include "filemanager.h"
 #include "mountlist.h"          /* my_statfs */
+#include "cd.h"                 /* cd_error_message() */
 
 #include "panel.h"
 
@@ -2936,7 +2936,7 @@ do_enter_on_file_entry (WPanel * panel, file_entry_t * fe)
 
         fname_vpath = vfs_path_from_str (fname);
         if (!panel_cd (panel, fname_vpath, cd_exact))
-            message (D_ERROR, MSG_ERROR, _("Cannot change directory"));
+            cd_error_message (fname);
         vfs_path_free (fname_vpath, TRUE);
         return TRUE;
     }
@@ -3519,7 +3519,7 @@ directory_history_list (WPanel * panel)
         if (ok)
             directory_history_add (panel, panel->cwd_vpath);
         else
-            message (D_ERROR, MSG_ERROR, _("Cannot change directory"));
+            cd_error_message (hd.text);
         vfs_path_free (s_vpath, TRUE);
         g_free (hd.text);
     }
@@ -3814,8 +3814,7 @@ panel_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
             char *cwd;
 
             cwd = vfs_path_to_str_flags (panel->cwd_vpath, 0, VPF_STRIP_PASSWORD);
-            message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\"\n%s"),
-                     cwd, unix_error_string (errno));
+            cd_error_message (cwd);
             g_free (cwd);
         }
         else
@@ -4971,8 +4970,7 @@ panel_change_encoding (WPanel * panel)
         vfs_path_change_encoding (panel->cwd_vpath, encoding);
 
         if (!panel_do_cd (panel, panel->cwd_vpath, cd_parse_command))
-            message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\""),
-                     vfs_path_as_str (panel->cwd_vpath));
+            cd_error_message (vfs_path_as_str (panel->cwd_vpath));
     }
 }
 

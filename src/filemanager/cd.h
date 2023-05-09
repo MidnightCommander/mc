@@ -16,6 +16,7 @@
 /*** declarations of public functions ************************************************************/
 
 void cd_to (const char *path);
+void cd_error_message (const char *path);
 
 /*** inline functions ****************************************************************************/
 
