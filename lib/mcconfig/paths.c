@@ -27,7 +27,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <errno.h>
 
 #include "lib/global.h"
 #include "lib/fileloc.h"

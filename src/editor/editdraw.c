@@ -39,7 +39,6 @@
 #include <unistd.h>
 #include <string.h>
 #include <ctype.h>
-#include <errno.h>
 #include <sys/stat.h>
 
 #include "lib/global.h"

@@ -38,7 +38,6 @@
  */
 
 #include <config.h>
-#include <errno.h>
 #include <sys/types.h>
 #include <unistd.h>
 #include <stdio.h>

@@ -38,7 +38,6 @@
 #include <unistd.h>
 #include <string.h>
 #include <ctype.h>
-#include <errno.h>
 #include <sys/stat.h>
 #include <stdint.h>             /* UINTMAX_MAX */
 #include <stdlib.h>
