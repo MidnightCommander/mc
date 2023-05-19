@@ -1,7 +1,7 @@
 
 update-po: Makefile
 	$(MAKE) $(DOMAIN).pot-update && \
-	sed \
+	$(SED) \
 	    -e '/#, fuzzy/d' \
 	    -e 's/Project-Id-Version: PACKAGE VERSION/Project-Id-Version: $(PACKAGE) $(VERSION)/' \
 	    -e 's/^"Plural-Forms: nplurals=INTEGER;/# "Plural-Forms: nplurals=INTEGER;/' \

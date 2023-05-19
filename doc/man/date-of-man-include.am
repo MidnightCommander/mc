@@ -13,12 +13,12 @@ MAN_DATE_CMD = \
 
 mc.1: $(srcdir)/mc.1.in
 	MAN_FILE=$<; MAN_DATE=$$($(MAN_DATE_CMD)); \
-	sed $(SED_PARAMETERS) $< > $@
+	$(SED) $(SED_PARAMETERS) $< > $@
 
 mcedit.1: $(srcdir)/mcedit.1.in
 	MAN_FILE=$<; MAN_DATE=$$($(MAN_DATE_CMD)); \
-	sed $(SED_PARAMETERS) $< > $@
+	$(SED) $(SED_PARAMETERS) $< > $@
 
 mcview.1: $(srcdir)/mcview.1.in
 	MAN_FILE=$<; MAN_DATE=$$($(MAN_DATE_CMD)); \
-	sed $(SED_PARAMETERS) $< > $@
+	$(SED) $(SED_PARAMETERS) $< > $@

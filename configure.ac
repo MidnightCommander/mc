@@ -707,7 +707,7 @@ po/Makefile.in
 
 dnl https://stackoverflow.com/questions/30897170/ac-subst-does-not-expand-variable/30932102#30932102
 AC_CONFIG_FILES(
-[misc/syntax/Syntax], [sed -i -e "s%\${prefix}%$PREFIX%" misc/syntax/Syntax], [export PREFIX=$prefix]
+[misc/syntax/Syntax], [${SED-sed} -i -e "s%\${prefix}%$PREFIX%" misc/syntax/Syntax], [export PREFIX=$prefix]
 )
 
 AC_CONFIG_FILES([
