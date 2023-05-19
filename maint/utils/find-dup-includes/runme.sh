@@ -37,7 +37,7 @@ findIncludeDupsInDir() {
     dir_name=$1; shift
 
     for i in $(find "${dir_name}" -name '*.[ch]'); do
-        file_name=$(echo $i | sed 's@'"${MC_SOURCE_ROOT_DIR}/"'@@g')
+        file_name=$(echo $i | ${SED-sed} 's@'"${MC_SOURCE_ROOT_DIR}/"'@@g')
         [ $(grep "^\s*${file_name}$" -c "${MC_SOURCE_ROOT_DIR}/maint/utils/find-dup-includes/exclude-list.cfg") -ne 0 ] && continue
         "${MC_SOURCE_ROOT_DIR}/maint/utils/find-dup-includes/find-in-one-file.pl" "${i}"
     done

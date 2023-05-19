@@ -10,7 +10,7 @@ dnl @modified Andrew Borodin <aborodin@vmail.ru>
 
 AC_DEFUN([mc_VERSION],[
     if test -f ${srcdir}/mc-version.h; then
-        VERSION=$(grep '^#define MC_CURRENT_VERSION' ${srcdir}/mc-version.h | sed 's/.*"\(.*\)"$/\1/')
+        VERSION=$(grep '^#define MC_CURRENT_VERSION' ${srcdir}/mc-version.h | ${SED-sed} 's/.*"\(.*\)"$/\1/')
     else
         VERSION="unknown"
     fi
