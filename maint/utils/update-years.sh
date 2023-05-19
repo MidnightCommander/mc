@@ -19,4 +19,5 @@ for i in "$SOURCES"; do
 done
 
 # special case
-${SED-sed} -i -e "/$LINE/s/-[0-9]\{4\} the/-$YEAR the/" src/editor/editwidget.c
+${SED-sed} -e "/$LINE/s/-[0-9]\{4\} the/-$YEAR the/" src/editor/editwidget.c > src/editor/editwidget.c.tmp && \
+  mv -f src/editor/editwidget.c.tmp src/editor/editwidget.c

@@ -65,38 +65,46 @@ CPPCHECK_SED_FILTER = \
     -e "/Skipping configuration '.*' since the value of '.*' is unknown./d"
 
 cppcheck:
-	$(CPPCHECK_CMD) --enable=all $(CPPCHECK_DIRS) 2>$(CPPCHECK_OUT_PREFIX)all.$(CPPCHECK_OUT_EXT);
-	$(SED) -i $(CPPCHECK_SED_FILTER) $(CPPCHECK_OUT_PREFIX)all.$(CPPCHECK_OUT_EXT)
+	$(CPPCHECK_CMD) --enable=all $(CPPCHECK_DIRS) 2>$(CPPCHECK_OUT_PREFIX)all.$(CPPCHECK_OUT_EXT).tmp;
+	$(SED) $(CPPCHECK_SED_FILTER) $(CPPCHECK_OUT_PREFIX)all.$(CPPCHECK_OUT_EXT).tmp > $(CPPCHECK_OUT_PREFIX)all.$(CPPCHECK_OUT_EXT)
+	rm -f $(CPPCHECK_OUT_PREFIX)all.$(CPPCHECK_OUT_EXT).tmp
 
 cppcheck-all: cppcheck
 
 cppcheck-information:
-	$(CPPCHECK_CMD) --enable=information $(CPPCHECK_DIRS) 2>$(CPPCHECK_OUT_PREFIX)information.$(CPPCHECK_OUT_EXT);
-	$(SED) -i $(CPPCHECK_SED_FILTER) $(CPPCHECK_OUT_PREFIX)information.$(CPPCHECK_OUT_EXT)
+	$(CPPCHECK_CMD) --enable=information $(CPPCHECK_DIRS) 2>$(CPPCHECK_OUT_PREFIX)information.$(CPPCHECK_OUT_EXT).tmp;
+	$(SED) $(CPPCHECK_SED_FILTER) $(CPPCHECK_OUT_PREFIX)information.$(CPPCHECK_OUT_EXT).tmp > $(CPPCHECK_OUT_PREFIX)information.$(CPPCHECK_OUT_EXT)
+	rm -f $(CPPCHECK_OUT_PREFIX)all.$(CPPCHECK_OUT_EXT).tmp
 
 cppcheck-performance:
-	$(CPPCHECK_CMD) --enable=performance $(CPPCHECK_DIRS) 2>$(CPPCHECK_OUT_PREFIX)performance.$(CPPCHECK_OUT_EXT);
-	$(SED) -i $(CPPCHECK_SED_FILTER) $(CPPCHECK_OUT_PREFIX)performance.$(CPPCHECK_OUT_EXT)
+	$(CPPCHECK_CMD) --enable=performance $(CPPCHECK_DIRS) 2>$(CPPCHECK_OUT_PREFIX)performance.$(CPPCHECK_OUT_EXT).tmp;
+	$(SED) $(CPPCHECK_SED_FILTER) $(CPPCHECK_OUT_PREFIX)performance.$(CPPCHECK_OUT_EXT).tmp > $(CPPCHECK_OUT_PREFIX)performance.$(CPPCHECK_OUT_EXT)
+	rm -f $(CPPCHECK_OUT_PREFIX)performance.$(CPPCHECK_OUT_EXT).tmp
 
 cppcheck-portability:
-	$(CPPCHECK_CMD) --enable=portability $(CPPCHECK_DIRS) 2>$(CPPCHECK_OUT_PREFIX)portability.$(CPPCHECK_OUT_EXT);
-	$(SED) -i $(CPPCHECK_SED_FILTER) $(CPPCHECK_OUT_PREFIX)portability.$(CPPCHECK_OUT_EXT)
+	$(CPPCHECK_CMD) --enable=portability $(CPPCHECK_DIRS) 2>$(CPPCHECK_OUT_PREFIX)portability.$(CPPCHECK_OUT_EXT).tmp;
+	$(SED) $(CPPCHECK_SED_FILTER) $(CPPCHECK_OUT_PREFIX)portability.$(CPPCHECK_OUT_EXT).tmp > $(CPPCHECK_OUT_PREFIX)portability.$(CPPCHECK_OUT_EXT)
+	rm -f $(CPPCHECK_OUT_PREFIX)portability.$(CPPCHECK_OUT_EXT).tmp
 
 cppcheck-style:
-	$(CPPCHECK_CMD) --enable=style $(CPPCHECK_DIRS) 2>$(CPPCHECK_OUT_PREFIX)style.$(CPPCHECK_OUT_EXT);
-	$(SED) -i $(CPPCHECK_SED_FILTER) $(CPPCHECK_OUT_PREFIX)style.$(CPPCHECK_OUT_EXT)
+	$(CPPCHECK_CMD) --enable=style $(CPPCHECK_DIRS) 2>$(CPPCHECK_OUT_PREFIX)style.$(CPPCHECK_OUT_EXT).tmp;
+	$(SED) $(CPPCHECK_SED_FILTER) $(CPPCHECK_OUT_PREFIX)style.$(CPPCHECK_OUT_EXT).tmp > $(CPPCHECK_OUT_PREFIX)style.$(CPPCHECK_OUT_EXT)
+	rm -f $(CPPCHECK_OUT_PREFIX)style.$(CPPCHECK_OUT_EXT).tmp
 
 cppcheck-warning:
-	$(CPPCHECK_CMD) --enable=warning $(CPPCHECK_DIRS) 2>$(CPPCHECK_OUT_PREFIX)warning.$(CPPCHECK_OUT_EXT);
-	$(SED) -i $(CPPCHECK_SED_FILTER) $(CPPCHECK_OUT_PREFIX)warning.$(CPPCHECK_OUT_EXT)
+	$(CPPCHECK_CMD) --enable=warning $(CPPCHECK_DIRS) 2>$(CPPCHECK_OUT_PREFIX)warning.$(CPPCHECK_OUT_EXT).tmp;
+	$(SED) $(CPPCHECK_SED_FILTER) $(CPPCHECK_OUT_PREFIX)warning.$(CPPCHECK_OUT_EXT).tmp > $(CPPCHECK_OUT_PREFIX)warning.$(CPPCHECK_OUT_EXT)
+	rm -f $(CPPCHECK_OUT_PREFIX)warning.$(CPPCHECK_OUT_EXT).tmp
 
 cppcheck-unusedFunction:
-	$(CPPCHECK_CMD) --enable=unusedFunction $(CPPCHECK_DIRS) 2>$(CPPCHECK_OUT_PREFIX)unusedFunction.$(CPPCHECK_OUT_EXT);
-	$(SED) -i $(CPPCHECK_SED_FILTER) $(CPPCHECK_OUT_PREFIX)unusedFunction.$(CPPCHECK_OUT_EXT)
+	$(CPPCHECK_CMD) --enable=unusedFunction $(CPPCHECK_DIRS) 2>$(CPPCHECK_OUT_PREFIX)unusedFunction.$(CPPCHECK_OUT_EXT).tmp;
+	$(SED) $(CPPCHECK_SED_FILTER) $(CPPCHECK_OUT_PREFIX)unusedFunction.$(CPPCHECK_OUT_EXT).tmp > $(CPPCHECK_OUT_PREFIX)unusedFunction.$(CPPCHECK_OUT_EXT)
+	rm -f $(CPPCHECK_OUT_PREFIX)unusedFunction.$(CPPCHECK_OUT_EXT).tmp
 
 cppcheck-missingInclude:
-	$(CPPCHECK_CMD) --enable=missingInclude $(CPPCHECK_DIRS) 2>$(CPPCHECK_OUT_PREFIX)missingInclude.$(CPPCHECK_OUT_EXT);
-	$(SED) -i $(CPPCHECK_SED_FILTER) $(CPPCHECK_OUT_PREFIX)missingInclude.$(CPPCHECK_OUT_EXT)
+	$(CPPCHECK_CMD) --enable=missingInclude $(CPPCHECK_DIRS) 2>$(CPPCHECK_OUT_PREFIX)missingInclude.$(CPPCHECK_OUT_EXT).tmp;
+	$(SED) $(CPPCHECK_SED_FILTER) $(CPPCHECK_OUT_PREFIX)missingInclude.$(CPPCHECK_OUT_EXT).tmp > $(CPPCHECK_OUT_PREFIX)missingInclude.$(CPPCHECK_OUT_EXT)
+	rm -f $(CPPCHECK_OUT_PREFIX)missingInclude.$(CPPCHECK_OUT_EXT).tmp
 
 cppcheck-split-all: \
     cppcheck-information \
