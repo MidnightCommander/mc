@@ -49,7 +49,7 @@ AC_DEFUN([mc_G_MODULE_SUPPORTED], [
             esac
 
             if test -n "$lib"; then
-                lib1=`echo $i | sed 's/^-l//'`
+                lib1=`echo $i | ${SED-sed} 's/^-l//'`
                 if test -f "$GLIB_LIBDIR/lib${lib1}.a"; then
                     add="$GLIB_LIBDIR/lib${lib1}.a"
                 else
