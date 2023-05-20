@@ -9,7 +9,7 @@ LINE="Copyright (C)"
 for i in "$SOURCES"; do
     # replace year: XXXX-YYYY -> XXXX-ZZZZ
     # add year: XXXX -> XXXX-ZZZZ
-    sed -i -e "
+    ${SED-sed} -i -e "
         1,20 {
                 /$LINE/s/-[0-9]\{4\}$/-$YEAR/
         };
@@ -19,4 +19,5 @@ for i in "$SOURCES"; do
 done
 
 # special case
-sed -i -e "/$LINE/s/-[0-9]\{4\} the/-$YEAR the/" src/editor/editwidget.c
+${SED-sed} -e "/$LINE/s/-[0-9]\{4\} the/-$YEAR the/" src/editor/editwidget.c > src/editor/editwidget.c.tmp && \
+  mv -f src/editor/editwidget.c.tmp src/editor/editwidget.c

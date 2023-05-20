@@ -19,14 +19,14 @@ EXTRA_DIST = \
 	$(noinst_DATA)
 
 mc.csh: $(top_builddir)/config.status $(srcdir)/mc.csh.in
-	sed "s%@""pkglibexecdir@%$(pkglibexecdir)%" $(srcdir)/mc.csh.in > mc.csh
+	$(SED) "s%@""pkglibexecdir@%$(pkglibexecdir)%" $(srcdir)/mc.csh.in > mc.csh
 
 mc.sh: $(top_builddir)/config.status $(srcdir)/mc.sh.in
-	sed "s%@""pkglibexecdir@%$(pkglibexecdir)%" $(srcdir)/mc.sh.in > mc.sh
+	$(SED) "s%@""pkglibexecdir@%$(pkglibexecdir)%" $(srcdir)/mc.sh.in > mc.sh
 
 mc-wrapper.csh: $(top_builddir)/config.status $(srcdir)/mc-wrapper.csh.in
-	sed "s%@""bindir@%$(bindir)%" $(srcdir)/mc-wrapper.csh.in > mc-wrapper.csh
+	$(SED) "s%@""bindir@%$(bindir)%" $(srcdir)/mc-wrapper.csh.in > mc-wrapper.csh
 
 mc-wrapper.sh: $(top_builddir)/config.status $(srcdir)/mc-wrapper.sh.in
-	sed "s%@""bindir@%$(bindir)%" $(srcdir)/mc-wrapper.sh.in > mc-wrapper.sh
+	$(SED) "s%@""bindir@%$(bindir)%" $(srcdir)/mc-wrapper.sh.in > mc-wrapper.sh
 

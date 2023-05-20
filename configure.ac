@@ -71,6 +71,7 @@ dnl ############################################################################
 dnl Check for programs
 dnl ############################################################################
 
+AC_PROG_SED
 PKG_PROG_PKG_CONFIG
 AC_PROG_INSTALL
 AC_PROG_LN_S
@@ -709,7 +710,8 @@ po/Makefile.in
 
 dnl https://stackoverflow.com/questions/30897170/ac-subst-does-not-expand-variable/30932102#30932102
 AC_CONFIG_FILES(
-[misc/syntax/Syntax], [sed -i -e "s%\${prefix}%$PREFIX%" misc/syntax/Syntax], [export PREFIX=$prefix]
+[misc/syntax/Syntax], [${SED-sed} -e "s%\${prefix}%$PREFIX%" misc/syntax/Syntax > misc/syntax/Syntax.tmp && \
+  mv -f misc/syntax/Syntax.tmp misc/syntax/Syntax], [export PREFIX=$prefix]
 )
 
 AC_CONFIG_FILES([

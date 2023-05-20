@@ -13,7 +13,7 @@ rm -f INSTALL && ln -s doc/INSTALL
 
 # Generate po/POTFILES.in
 ${XGETTEXT:-xgettext} --keyword=_ --keyword=N_ --keyword=Q_ --output=- \
-	`find . -name '*.[ch]'` | sed -ne '/^#:/{s/#://;s/:[0-9]*/\
+	`find . -name '*.[ch]'` | ${SED-sed} -ne '/^#:/{s/#://;s/:[0-9]*/\
 /g;s/ //g;p;}' | \
 	grep -v '^$' | sort | uniq >po/POTFILES.in
 
