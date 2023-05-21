@@ -5,8 +5,6 @@
 #ifndef MC__QUICK_H
 #define MC__QUICK_H
 
-#include "lib/tty/mouse.h"
-
 /*** typedefs(not structures) and defined constants **********************************************/
 
 #define QUICK_CHECKBOX(txt, st, id_)                                            \
