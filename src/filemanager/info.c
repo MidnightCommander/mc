@@ -259,6 +259,7 @@ info_show_info (WInfo * info)
     case 6:
         widget_gotoyx (w, 6, 3);
 
+#ifdef ENABLE_EXT2FS_ATTR
         {
             vfs_path_t *vpath;
             unsigned long attr;
@@ -272,6 +273,9 @@ info_show_info (WInfo * info)
 
             vfs_path_free (vpath, TRUE);
         }
+#else
+        tty_print_string (_("Attributes: unavailable"));
+#endif
         MC_FALLTHROUGH;
     case 5:
         widget_gotoyx (w, 5, 3);
