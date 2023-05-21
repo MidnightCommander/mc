@@ -626,8 +626,6 @@ edit_suggest_current_word (WEdit * edit)
 
                 if (retval == B_ENTER && new_word != NULL)
                 {
-                    char *cp_word;
-
 #ifdef HAVE_CHARSET
                     if (mc_global.source_codepage >= 0 &&
                         (mc_global.source_codepage != mc_global.display_codepage))
@@ -635,19 +633,19 @@ edit_suggest_current_word (WEdit * edit)
                         GString *tmp_word;
 
                         tmp_word = str_convert_to_input (new_word);
-                        g_free (new_word);
+                        MC_PTR_FREE (new_word);
                         if (tmp_word != NULL)
                             new_word = g_string_free (tmp_word, FALSE);
-                        else
-                            new_word = g_strdup ("");
                     }
 #endif
-                    cp_word = new_word;
                     for (i = 0; i < word_len; i++)
                         edit_backspace (edit, TRUE);
-                    for (; *new_word; new_word++)
-                        edit_insert (edit, *new_word);
-                    g_free (cp_word);
+                    if (new_word != NULL)
+                    {
+                        for (i = 0; new_word[i] != '\0'; i++)
+                            edit_insert (edit, new_word[i]);
+                        g_free (new_word);
+                    }
                 }
                 else if (retval == B_ADD_WORD)
                     aspell_add_to_dict (match_word->str, (int) word_len);
