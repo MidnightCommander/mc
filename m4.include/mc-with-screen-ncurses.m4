@@ -122,7 +122,7 @@ AC_DEFUN([mc_WITH_NCURSES], [
             MCLIBS="$LIBS"
         fi
         LIBS="$MCLIBS"
-        AC_SEARCH_LIBS([stdscr], [tinfow tinfo], [MCLIBS="$MCLIBS $LIBS"],
+        AC_SEARCH_LIBS([stdscr], [tinfow tinfo], [],
                        [AC_MSG_ERROR([Cannot find a library providing stdscr])])
         MCLIBS="$LIBS"
 
