@@ -327,10 +327,12 @@ edit_complete_word_insert_recoded_completion (WEdit * edit, char *completion, gs
     GString *temp;
 
     temp = str_convert_to_input (completion);
-
-    for (completion = temp->str + word_len; *completion != '\0'; completion++)
-        edit_insert (edit, *completion);
-    g_string_free (temp, TRUE);
+    if (temp != NULL)
+    {
+        for (completion = temp->str + word_len; *completion != '\0'; completion++)
+            edit_insert (edit, *completion);
+        g_string_free (temp, TRUE);
+    }
 #else
     for (completion += word_len; *completion != '\0'; completion++)
         edit_insert (edit, *completion);

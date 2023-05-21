@@ -390,7 +390,7 @@ str_nconvert_to_input (const char *str, int len)
     GIConv conv;
 
     if (str == NULL)
-        return g_string_new ("");
+        return NULL;
 
     if (cp_display == cp_source)
         return g_string_new (str);
