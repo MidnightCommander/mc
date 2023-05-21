@@ -265,9 +265,11 @@ info_show_info (WInfo * info)
 
             vpath = vfs_path_from_str (current_panel->dir.list[current_panel->selected].fname->str);
 
+#ifdef ENABLE_EXT2FS_ATTR
             if (mc_fgetflags (vpath, &attr) == 0)
                 tty_printf (_("Attributes: %s"), chattr_get_as_str (attr));
             else
+#endif
                 tty_print_string (_("Attributes: unavailable"));
 
             vfs_path_free (vpath, TRUE);
