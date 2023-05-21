@@ -183,13 +183,17 @@ edit_collect_completion_from_one_buffer (gboolean active_buffer, GQueue ** compl
         {
             GString *recoded;
 
-            recoded = str_convert_to_display (temp->str);
-            if (recoded->len != 0)
-                mc_g_string_copy (temp, recoded);
+            recoded = str_nconvert_to_display (temp->str, temp->len);
+            if (recoded != NULL)
+            {
+                if (recoded->len != 0)
+                    mc_g_string_copy (temp, recoded);
 
-            g_string_free (recoded, TRUE);
+                g_string_free (recoded, TRUE);
+            }
         }
 #endif
+
         if (active_buffer)
             g_queue_push_tail (*compl, temp);
         else

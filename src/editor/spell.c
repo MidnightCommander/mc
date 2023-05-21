@@ -599,67 +599,74 @@ edit_suggest_current_word (WEdit * edit)
         match_word = tmp_word;
     }
 #endif
-    if (!aspell_check (match_word->str, (int) word_len))
+    if (match_word != NULL)
     {
-        GArray *suggest;
-        unsigned int res;
-        guint i;
-
-        suggest = g_array_new (TRUE, FALSE, sizeof (char *));
-
-        res = aspell_suggest (suggest, match_word->str, (int) word_len);
-        if (res != 0)
+        if (!aspell_check (match_word->str, (int) word_len))
         {
-            char *new_word = NULL;
+            GArray *suggest;
+            unsigned int res;
+            guint i;
 
-            edit->found_start = word_start;
-            edit->found_len = word_len;
-            edit->force |= REDRAW_PAGE;
-            edit_scroll_screen_over_cursor (edit);
-            edit_render_keypress (edit);
+            suggest = g_array_new (TRUE, FALSE, sizeof (char *));
 
-            retval = spell_dialog_spell_suggest_show (edit, match_word->str, &new_word, suggest);
-            edit_cursor_move (edit, word_len - cut_len);
-
-            if (retval == B_ENTER && new_word != NULL)
+            res = aspell_suggest (suggest, match_word->str, (int) word_len);
+            if (res != 0)
             {
-                char *cp_word;
+                char *new_word = NULL;
+
+                edit->found_start = word_start;
+                edit->found_len = word_len;
+                edit->force |= REDRAW_PAGE;
+                edit_scroll_screen_over_cursor (edit);
+                edit_render_keypress (edit);
+
+                retval =
+                    spell_dialog_spell_suggest_show (edit, match_word->str, &new_word, suggest);
+                edit_cursor_move (edit, word_len - cut_len);
+
+                if (retval == B_ENTER && new_word != NULL)
+                {
+                    char *cp_word;
 
 #ifdef HAVE_CHARSET
-                if (mc_global.source_codepage >= 0 &&
-                    (mc_global.source_codepage != mc_global.display_codepage))
-                {
-                    GString *tmp_word;
+                    if (mc_global.source_codepage >= 0 &&
+                        (mc_global.source_codepage != mc_global.display_codepage))
+                    {
+                        GString *tmp_word;
 
-                    tmp_word = str_convert_to_input (new_word);
-                    g_free (new_word);
-                    new_word = g_string_free (tmp_word, FALSE);
-                }
+                        tmp_word = str_convert_to_input (new_word);
+                        g_free (new_word);
+                        if (tmp_word != NULL)
+                            new_word = g_string_free (tmp_word, FALSE);
+                        else
+                            new_word = g_strdup ("");
+                    }
 #endif
-                cp_word = new_word;
-                for (i = 0; i < word_len; i++)
-                    edit_backspace (edit, TRUE);
-                for (; *new_word; new_word++)
-                    edit_insert (edit, *new_word);
-                g_free (cp_word);
+                    cp_word = new_word;
+                    for (i = 0; i < word_len; i++)
+                        edit_backspace (edit, TRUE);
+                    for (; *new_word; new_word++)
+                        edit_insert (edit, *new_word);
+                    g_free (cp_word);
+                }
+                else if (retval == B_ADD_WORD)
+                    aspell_add_to_dict (match_word->str, (int) word_len);
             }
-            else if (retval == B_ADD_WORD)
-                aspell_add_to_dict (match_word->str, (int) word_len);
+
+            for (i = 0; i < suggest->len; i++)
+            {
+                char *cur_sugg_word;
+
+                cur_sugg_word = g_array_index (suggest, char *, i);
+                g_free (cur_sugg_word);
+            }
+            g_array_free (suggest, TRUE);
+            edit->found_start = 0;
+            edit->found_len = 0;
         }
 
-        for (i = 0; i < suggest->len; i++)
-        {
-            char *cur_sugg_word;
-
-            cur_sugg_word = g_array_index (suggest, char *, i);
-            g_free (cur_sugg_word);
-        }
-        g_array_free (suggest, TRUE);
-        edit->found_start = 0;
-        edit->found_len = 0;
+        g_string_free (match_word, TRUE);
     }
-
-    g_string_free (match_word, TRUE);
 
     return retval;
 }
