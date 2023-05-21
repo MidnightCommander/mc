@@ -688,14 +688,11 @@ edit_set_spell_lang (void)
     lang_list = g_ptr_array_new_with_free_func (g_free);
     if (aspell_get_lang_list (lang_list) != 0)
     {
-        char *lang;
+        const char *lang;
 
         lang = spell_dialog_lang_list_show (lang_list);
         if (lang != NULL)
-        {
             (void) aspell_set_lang (lang);
-            g_free (lang);
-        }
     }
     aspell_array_clean (lang_list);
 }
@@ -809,13 +806,13 @@ spell_dialog_spell_suggest_show (WEdit * edit, const char *word, char **new_word
  * @return name of chosen language
  */
 
-char *
+const char *
 spell_dialog_lang_list_show (const GPtrArray * languages)
 {
 
     int lang_dlg_h = 12;        /* dialog height */
     int lang_dlg_w = 30;        /* dialog width */
-    char *selected_lang = NULL;
+    const char *selected_lang = NULL;
     unsigned int i;
     int res;
     Listbox *lang_list;
@@ -829,7 +826,7 @@ spell_dialog_lang_list_show (const GPtrArray * languages)
 
     res = listbox_run (lang_list);
     if (res >= 0)
-        selected_lang = g_strdup (g_ptr_array_index (languages, (unsigned int) res));
+        selected_lang = g_ptr_array_index (languages, (unsigned int) res);
 
     return selected_lang;
 }

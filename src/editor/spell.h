@@ -29,7 +29,7 @@ void edit_set_spell_lang (void);
 
 int spell_dialog_spell_suggest_show (WEdit * edit, const char *word, char **new_word,
                                      const GPtrArray * suggest);
-char *spell_dialog_lang_list_show (const GPtrArray * languages);
+const char *spell_dialog_lang_list_show (const GPtrArray * languages);
 
 /*** inline functions ****************************************************************************/
 
