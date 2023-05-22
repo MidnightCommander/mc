@@ -264,7 +264,9 @@ info_show_info (WInfo * info)
 
         {
             vfs_path_t *vpath;
+#ifdef ENABLE_EXT2FS_ATTR
             unsigned long attr;
+#endif
 
             vpath = vfs_path_from_str (fe->fname->str);
 
