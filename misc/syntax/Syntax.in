@@ -150,7 +150,7 @@ include php.syntax
 file ..\*\\.ij[xs]$ J\sFile
 include j.syntax
 
-file ..\*\\.(?i:java?|groovy)$ Java\sProgram
+file ..\*\\.(?i:java?|groovy|Jenkinsfile)$ Java\sProgram
 include java.syntax
 
 file ..\*\\.(properties|config)$ Java\sFile
