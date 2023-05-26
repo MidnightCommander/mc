@@ -2432,7 +2432,6 @@ edit_push_redo_action (WEdit * edit, long c)
 {
     unsigned long sp = edit->redo_stack_pointer;
     unsigned long spm1;
-    long *t;
     /* first enlarge the stack if necessary */
     if (sp > edit->redo_stack_size - 10)
     {                           /* say */
@@ -2440,8 +2439,10 @@ edit_push_redo_action (WEdit * edit, long c)
             max_undo = 256;
         if (edit->redo_stack_size < (unsigned long) max_undo)
         {
+            long *t;
+
             t = g_realloc (edit->redo_stack, (edit->redo_stack_size * 2 + 10) * sizeof (long));
-            if (t)
+            if (t != NULL)
             {
                 edit->redo_stack = t;
                 edit->redo_stack_size <<= 1;
