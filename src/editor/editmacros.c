@@ -249,7 +249,6 @@ edit_load_macro_cmd (WEdit * edit)
     {
         int hotkey;
         GArray *macros = NULL;
-        macros_t macro;
 
         values = mc_config_get_string_list (macros_config, section_name, *profile_keys, NULL);
         hotkey = tty_keyname_to_keycode (*profile_keys, NULL);
@@ -296,8 +295,11 @@ edit_load_macro_cmd (WEdit * edit)
 
         if (macros != NULL)
         {
-            macro.hotkey = hotkey;
-            macro.macro = macros;
+            macros_t macro = {
+                .hotkey = hotkey,
+                .macro = macros
+            };
+
             g_array_append_val (macros_list, macro);
         }
 
