@@ -2342,7 +2342,6 @@ edit_push_undo_action (WEdit * edit, long c)
 {
     unsigned long sp = edit->undo_stack_pointer;
     unsigned long spm1;
-    long *t;
 
     /* first enlarge the stack if necessary */
     if (sp > edit->undo_stack_size - 10)
@@ -2351,8 +2350,10 @@ edit_push_undo_action (WEdit * edit, long c)
             max_undo = 256;
         if (edit->undo_stack_size < (unsigned long) max_undo)
         {
+            long *t;
+
             t = g_realloc (edit->undo_stack, (edit->undo_stack_size * 2 + 10) * sizeof (long));
-            if (t)
+            if (t != NULL)
             {
                 edit->undo_stack = t;
                 edit->undo_stack_size <<= 1;
