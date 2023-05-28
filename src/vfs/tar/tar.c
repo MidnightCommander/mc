@@ -489,11 +489,10 @@ tar_fill_stat (struct vfs_s_super *archive, union block *header)
         break;
     }
 
-#ifdef HAVE_STRUCT_STAT_ST_MTIM
     current_stat_info.atime.tv_nsec = 0;
     current_stat_info.mtime.tv_nsec = 0;
     current_stat_info.ctime.tv_nsec = 0;
-#endif
+
     current_stat_info.mtime.tv_sec = TIME_FROM_HEADER (header->header.mtime);
     if (arch->type == TAR_GNU || arch->type == TAR_OLDGNU)
     {
@@ -580,6 +579,10 @@ tar_insert_entry (struct vfs_class *me, struct vfs_s_super *archive, union block
         }
 
         *inode = vfs_s_new_inode (me, archive, &current_stat_info.stat);
+        /* assgin timestamps after decoding of extended headers */
+        (*inode)->st.st_mtime = current_stat_info.mtime.tv_sec;
+        (*inode)->st.st_atime = current_stat_info.atime.tv_sec;
+        (*inode)->st.st_ctime = current_stat_info.ctime.tv_sec;
         (*inode)->data_offset = BLOCKSIZE * tar_current_block_ordinal (TAR_SUPER (archive));
 
         if (link_name != NULL && *link_name != '\0')
