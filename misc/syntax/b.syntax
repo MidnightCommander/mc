@@ -1,0 +1,382 @@
+# B language keywords
+# by Gyorgy Rotter
+#
+# For the proper syntax highlight the order of the keywords are
+# important. This is why the related keywords are not listed in a block.
+# To create semantic relationship between the keywords I used groups.
+# Some keywords are in a group (the name of the group is
+# indicated in a commented line above the keyword definition)
+#
+# With the one-liner for example we could replace
+# the color of the keywords which are the members of the
+# "Sequences" group from "yellow" to "red"...
+#
+#  echo Sequences yellow red | xargs -l bash -c 'sed -z "s/\(# $0\n[^\n]*\)$1/\1$2/g" b.syntax'
+#         ^         ^     ^
+#         |         |     |
+#         |         |     -- new_color
+#         |         -- actual_color
+#         -- groupname
+#
+#
+# Usable groups:
+#   Relations, Sequences, Logical, Arithmetic, Sets, Substitutions
+#
+# Usable colors:
+#   described in the Syntax file
+#
+
+context default
+    keyword whole ABSTRACT_CONSTANTS yellow
+    keyword whole ABSTRACT_VARIABLES yellow
+    keyword whole CONCRETE_CONSTANTS yellow
+    keyword whole CONCRETE_VARIABLES yellow
+    keyword whole LOCAL_OPERATIONS yellow
+    keyword whole IMPLEMENTATION yellow
+    keyword whole INITIALISATION yellow
+    keyword whole CONSTRAINTS yellow
+    keyword whole DEFINITIONS yellow
+    keyword whole ASSERTIONS yellow
+    keyword whole OPERATIONS yellow
+    keyword whole PROPERTIES yellow
+    keyword whole REFINEMENT yellow
+    keyword whole CONSTANTS yellow
+    keyword whole INVARIANT yellow
+    keyword whole sequences yellow
+    keyword whole VARIABLES yellow
+    keyword whole Cardinal yellow
+
+    # Relations
+    keyword whole closure1 white
+
+    keyword whole INCLUDES yellow
+
+    # Arithmetic
+    keyword whole NATURAL1 yellow
+
+    keyword whole PROMOTES yellow
+    keyword whole Boolean yellow
+    keyword whole EXTENDS yellow
+    keyword whole IMPORTS yellow
+
+    # Arithmetic
+    keyword whole INTEGER yellow
+
+    keyword whole iterate yellow
+    keyword whole MACHINE yellow
+
+    # Arithmetic
+    keyword whole NATURAL yellow
+
+    keyword whole postfix yellow
+    keyword whole REFINES yellow
+    keyword whole subtree yellow
+    keyword whole VARIANT yellow
+    keyword whole ASSERT yellow
+    keyword whole CHOICE yellow
+
+    # Relations
+    keyword whole closure white
+
+    keyword whole EITHER yellow
+    keyword whole father yellow
+    keyword whole MAXINT yellow
+    keyword whole MININT yellow
+    keyword whole mirror yellow
+    keyword whole modulo yellow
+    keyword whole prefix yellow
+    keyword whole SELECT yellow
+    keyword whole STRING yellow
+    keyword whole struct yellow
+    keyword whole VALUES yellow
+    keyword whole arity yellow
+    keyword whole BEGIN yellow
+    keyword whole btree yellow
+    keyword whole const yellow
+    keyword whole ELSIF yellow
+    keyword whole FALSE yellow
+    keyword whole first yellow
+    keyword whole front yellow
+    keyword whole infix yellow
+
+    # Sets
+    keyword whole INTER yellow
+
+    keyword whole inter yellow
+    keyword whole iseq1 yellow
+    keyword whole right yellow
+
+    # Arithmetic
+    keyword whole SIGMA yellow
+
+    keyword whole sizet yellow
+
+    # Sets
+    keyword whole UNION yellow
+
+    keyword whole union yellow
+    keyword whole WHERE yellow
+    keyword whole WHILE yellow
+    keyword whole bool yellow
+    keyword whole BOOL yellow
+    keyword whole card yellow
+    keyword whole CASE yellow
+    keyword whole conc yellow
+    keyword whole ELSE yellow
+
+    # Sets
+    keyword whole FIN1 yellow
+
+    keyword whole iseq yellow
+    keyword whole last yellow
+    keyword whole left yellow
+    keyword whole NAT1 yellow
+
+    # Sets
+    keyword whole POW1 yellow
+
+    keyword whole perm yellow
+    keyword whole pred yellow
+    keyword whole prj1 yellow
+    keyword whole prj2 yellow
+    keyword whole rank yellow
+    keyword whole SEES yellow
+    keyword whole seq1 yellow
+    keyword whole SETS yellow
+    keyword whole size yellow
+    keyword whole skip yellow
+    keyword whole sons yellow
+    keyword whole succ yellow
+    keyword whole tail yellow
+    keyword whole THEN yellow
+    keyword whole tree yellow
+    keyword whole TRUE yellow
+    keyword whole USES yellow
+    keyword whole WHEN yellow
+    keyword whole ANY yellow
+    keyword whole bin yellow
+    keyword whole dom yellow
+    keyword whole END yellow
+
+    # Sets
+    keyword whole FIN yellow
+
+    keyword whole fnc yellow
+    keyword whole INT yellow
+    keyword whole LET yellow
+    keyword whole max yellow
+    keyword whole min yellow
+    keyword whole mod yellow
+    keyword whole NAT yellow
+
+    # Logical
+    keyword whole not cyan
+
+    # Sets
+    keyword whole POW yellow
+
+    keyword whole PRE yellow
+    keyword whole ran yellow
+    keyword whole rec yellow
+    keyword whole rel yellow
+    keyword whole rev yellow
+    keyword whole seq yellow
+    keyword whole Set yellow
+    keyword whole son yellow
+    keyword whole top yellow
+    keyword whole VAR yellow
+    keyword whole BE yellow
+    keyword whole DO yellow
+    keyword whole id yellow
+    keyword whole IF yellow
+    keyword whole IN yellow
+    keyword whole OF yellow
+    keyword whole OR yellow
+
+    # Logical
+    keyword whole or cyan
+
+    # Arithmetic
+    keyword whole PI yellow
+
+# prevents - keyword from interfering with comment
+    keyword /\* green
+    keyword \*/ green
+    keyword // green
+
+
+    keyword <-- yellow
+    keyword := yellow
+
+
+    # Relations
+    keyword \+->> white
+
+    # Relations
+    keyword -->> white
+
+    # Sets
+    keyword /<<: yellow
+
+    # Sequences
+    keyword /|\\ magenta
+
+    # Relations
+    keyword >->> white
+
+    # Relations
+    keyword >\+> white
+
+    # Arithmetic
+    keyword \*\* yellow
+
+    # Relations
+    keyword \+-> white
+
+    # Sequences
+    keyword \\|/ magenta
+
+    # Relations
+    keyword --> white
+
+    # Sets
+    keyword /<: yellow
+
+    # Sets
+    keyword /\\ yellow
+
+    # Relations
+    keyword <-> white
+
+    # Sets
+    keyword <<: yellow
+
+    # Relations
+    keyword <<| white
+
+    # Logical
+    keyword <=> cyan
+
+    # Relations
+    keyword <\+ white
+
+    # Relations
+    keyword >-> white
+
+    # Sets
+    keyword \\/ yellow
+
+    # Relations
+    keyword |-> white
+
+    # Relations
+    keyword |>> white
+
+    keyword != yellow
+
+    # Sequences
+    keyword -> magenta
+
+    # Sets
+    keyword /: yellow
+
+    # Logical
+    keyword /= cyan
+
+    # Substitutions
+    keyword :: yellow
+
+    # Sequences
+    keyword <- magenta
+
+    # Sets
+    keyword <: yellow
+
+    # Arithmetic
+    keyword <= yellow
+
+    # Relations
+    keyword <| white
+
+    keyword == yellow
+
+    # Logical
+    keyword => cyan
+
+    # Relations
+    keyword >< white
+
+    # Arithmetic
+    keyword >= yellow
+
+    # Arithmetic
+    keyword \* yellow
+
+    # Arithmetic
+    keyword \+ yellow
+
+    # Sets
+    keyword {} yellow
+
+    # Relations
+    keyword |> white
+
+    # Logical
+    keyword ! cyan
+
+    # Logical
+    keyword # cyan
+
+    # Relations
+    keyword % white
+
+    # Logical
+    keyword & cyan
+
+    keyword ( yellow
+    keyword ) yellow
+    keyword , yellow
+
+    # Arithmetic
+    keyword - yellow
+
+    # Arithmetic
+    keyword / yellow
+
+    # Sets
+    keyword : yellow
+
+    keyword ; yellow
+
+    # Arithmetic
+    keyword < yellow
+
+    # Logical
+    keyword = cyan
+
+    # Arithmetic
+    keyword > yellow
+
+    keyword ? yellow
+    keyword [ yellow
+    keyword ] yellow
+
+    # Sequences
+    keyword ^ magenta
+
+    keyword { yellow
+    keyword } yellow
+
+    keyword | yellow
+
+    # Relations
+    keyword ~ white
+
+
+context exclusive /\* \*/ green
+    spellcheck
+
+context exclusive // \n green
+    spellcheck
+
+context " "    brightgreen

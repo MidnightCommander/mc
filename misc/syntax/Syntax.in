@@ -345,5 +345,8 @@ include privoxy.syntax
 file .\*\\.toml$ TOML\sFile
 include toml.syntax
 
+file .\*\\.(mch|ref|imp)$ B\sFile
+include b.syntax
+
 file .\* unknown
 include unknown.syntax

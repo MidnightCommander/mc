@@ -9,6 +9,7 @@ SYNTAXFILES =			\
 	aspx.syntax		\
 	assembler.syntax	\
 	awk.syntax		\
+	b.syntax		\
 	c.syntax		\
 	cabal.syntax		\
 	changelog.syntax	\
