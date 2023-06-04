@@ -426,8 +426,6 @@ ftpfs_parse_long_list_UNIX (char *line, struct stat *s, char **filename, char **
 
     if (strncasecmp (line, "Status of ", 10) == 0)
         return FALSE;           /* STAT output. */
-    if (strchr ("bcpsD", line[0]) != NULL)      /* block, char, pipe, socket, Door. */
-        return FALSE;
 
     ret = parse_ls_line (line, s, filename, linkname);
     if (!ret)
