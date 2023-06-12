@@ -21,8 +21,6 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
-#define ALLOC_COLOR_PAIR_INDEX 1
-
 /*** enums ***************************************************************************************/
 
 /*** structures declarations (and typedefs of structures)*****************************************/
