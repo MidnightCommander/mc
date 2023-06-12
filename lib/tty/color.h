@@ -43,8 +43,8 @@ void tty_colors_done (void);
 gboolean tty_use_colors (void);
 int tty_try_alloc_color_pair (const tty_color_pair_t * color, gboolean is_temp);
 
-void tty_color_free_all_tmp (void);
-void tty_color_free_all_non_tmp (void);
+void tty_color_free_temp (void);
+void tty_color_free_all (void);
 
 void tty_setcolor (int color);
 void tty_lowlevel_setcolor (int color);

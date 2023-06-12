@@ -1482,7 +1482,7 @@ edit_free_syntax_rules (WEdit * edit)
     g_ptr_array_free (edit->rules, TRUE);
     edit->rules = NULL;
     g_clear_slist (&edit->syntax_marker, g_free);
-    tty_color_free_all_tmp ();
+    tty_color_free_temp ();
 }
 
 /* --------------------------------------------------------------------------------------------- */

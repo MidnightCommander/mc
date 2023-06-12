@@ -181,8 +181,7 @@ mc_skin_init (const gchar * skin_override, GError ** mcerror)
 void
 mc_skin_deinit (void)
 {
-    tty_color_free_all_tmp ();
-    tty_color_free_all_non_tmp ();
+    tty_color_free_all ();
 
     MC_PTR_FREE (mc_skin__default.name);
     g_hash_table_destroy (mc_skin__default.colors);

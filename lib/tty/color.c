@@ -84,24 +84,12 @@ mc_color__deinit (tty_color_pair_t * color)
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-tty_color_free_condition_cb (gpointer key, gpointer value, gpointer user_data)
+tty_color_free_temp_cb (gpointer key, gpointer value, gpointer user_data)
 {
-    tty_color_lib_pair_t *mc_color_pair = (tty_color_lib_pair_t *) value;
-    gboolean is_temp_color;
-
     (void) key;
+    (void) user_data;
 
-    is_temp_color = user_data != NULL;
-    return (mc_color_pair->is_temp == is_temp_color);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-tty_color_free_all (gboolean is_temp_color)
-{
-    g_hash_table_foreach_remove (mc_tty_color__hashtable, tty_color_free_condition_cb,
-                                 is_temp_color ? GSIZE_TO_POINTER (1) : NULL);
+    return ((tty_color_lib_pair_t *) value)->is_temp;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -216,17 +204,17 @@ tty_try_alloc_color_pair (const tty_color_pair_t * color, gboolean is_temp)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-tty_color_free_all_tmp (void)
+tty_color_free_temp (void)
 {
-    tty_color_free_all (TRUE);
+    g_hash_table_foreach_remove (mc_tty_color__hashtable, tty_color_free_temp_cb, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 void
-tty_color_free_all_non_tmp (void)
+tty_color_free_all (void)
 {
-    tty_color_free_all (FALSE);
+    g_hash_table_remove_all (mc_tty_color__hashtable);
 }
 
 /* --------------------------------------------------------------------------------------------- */
