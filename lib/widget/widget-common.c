@@ -457,7 +457,7 @@ widget_set_size_rect (Widget * w, WRect * r)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-widget_selectcolor (Widget * w, gboolean focused, gboolean hotkey)
+widget_selectcolor (const Widget * w, gboolean focused, gboolean hotkey)
 {
     int color;
     const int *colors;

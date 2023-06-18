@@ -213,7 +213,7 @@ void widget_adjust_position (widget_pos_flags_t pos_flags, WRect * r);
 void widget_set_size (Widget * w, int y, int x, int lines, int cols);
 void widget_set_size_rect (Widget * w, WRect * r);
 /* select color for widget in dependence of state */
-void widget_selectcolor (Widget * w, gboolean focused, gboolean hotkey);
+void widget_selectcolor (const Widget * w, gboolean focused, gboolean hotkey);
 cb_ret_t widget_draw (Widget * w);
 void widget_erase (Widget * w);
 void widget_set_visibility (Widget * w, gboolean make_visible);
