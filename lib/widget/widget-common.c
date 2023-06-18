@@ -262,7 +262,7 @@ hotkey_equal (const hotkey_t hotkey1, const hotkey_t hotkey2)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-hotkey_draw (Widget * w, const hotkey_t hotkey, gboolean focused)
+hotkey_draw (const Widget * w, const hotkey_t hotkey, gboolean focused)
 {
     if (hotkey.start[0] != '\0')
     {
