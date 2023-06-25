@@ -293,11 +293,14 @@ tar_skip_member (tar_super_t * archive, struct vfs_s_inode *inode)
 
         (void) tar_sparse_skip_file (archive, &current_stat_info);
 
-        /* use vfs_s_inode::user_data to keep the sparse map */
-        inode->user_data = current_stat_info.sparse_map;
-        current_stat_info.sparse_map = NULL;
+        if (inode != NULL)
+        {
+            /* use vfs_s_inode::user_data to keep the sparse map */
+            inode->user_data = current_stat_info.sparse_map;
+            current_stat_info.sparse_map = NULL;
 
-        tar_calc_sparse_offsets (inode);
+            tar_calc_sparse_offsets (inode);
+        }
     }
     else if (save_typeflag != DIRTYPE)
     {
