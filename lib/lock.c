@@ -95,15 +95,15 @@ lock_build_name (void)
     struct passwd *pw;
 
     pw = getpwuid (getuid ());
-    if (pw)
+    if (pw != NULL)
         user = pw->pw_name;
-    if (!user)
+    if (user == NULL)
         user = getenv ("USER");
-    if (!user)
+    if (user == NULL)
         user = getenv ("USERNAME");
-    if (!user)
+    if (user == NULL)
         user = getenv ("LOGNAME");
-    if (!user)
+    if (user == NULL)
         user = "";
 
     /** \todo Use FQDN, no clean interface, so requires lot of code */
