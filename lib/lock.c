@@ -107,7 +107,7 @@ lock_build_name (void)
         user = "";
 
     /** \todo Use FQDN, no clean interface, so requires lot of code */
-    if (gethostname (host, BUF_SIZE - 1) == -1)
+    if (gethostname (host, sizeof (host) - 1) == -1)
         *host = '\0';
 
     return g_strdup_printf ("%s@%s.%d", user, host, (int) getpid ());
@@ -154,17 +154,17 @@ lock_extract_info (const char *str)
 
     /* Everything before last '.' is user@host */
     i = 0;
-    for (s = str; i < BUF_SIZE && s < p; s++)
+    for (s = str; i < sizeof (who) && s < p; s++)
         who[i++] = *s;
-    if (i == BUF_SIZE)
+    if (i == sizeof (who))
         i--;
     who[i] = '\0';
 
     /* Treat text between '.' and ':' or '\0' as pid */
     i = 0;
-    for (p = p + 1; i < PID_BUF_SIZE && p < str + len && *p != ':'; p++)
+    for (p = p + 1; i < sizeof (pid) && p < str + len && *p != ':'; p++)
         pid[i++] = *p;
-    if (i == PID_BUF_SIZE)
+    if (i == sizeof (pid))
         i--;
     pid[i] = '\0';
 
@@ -184,7 +184,7 @@ lock_get_info (const char *lockfname)
     ssize_t cnt;
     static char buf[BUF_SIZE];
 
-    cnt = readlink (lockfname, buf, BUF_SIZE - 1);
+    cnt = readlink (lockfname, buf, sizeof (buf) - 1);
     if (cnt == -1 || *buf == '\0')
         return NULL;
     buf[cnt] = '\0';
