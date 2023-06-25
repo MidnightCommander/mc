@@ -148,22 +148,19 @@ lock_extract_info (const char *str)
 
     len = strlen (str);
 
-    for (p = str + len - 1; p >= str; p--)
-        if (*p == '.')
-            break;
+    for (p = str + len - 1; p >= str && *p != '.'; p--)
+        ;
 
     /* Everything before last '.' is user@host */
-    i = 0;
-    for (s = str; i < sizeof (who) && s < p; s++)
-        who[i++] = *s;
+    for (i = 0, s = str; i < sizeof (who) && s < p; i++, s++)
+        who[i] = *s;
     if (i == sizeof (who))
         i--;
     who[i] = '\0';
 
     /* Treat text between '.' and ':' or '\0' as pid */
-    i = 0;
-    for (p = p + 1; i < sizeof (pid) && p < str + len && *p != ':'; p++)
-        pid[i++] = *p;
+    for (i = 0, p++, s = str + len; i < sizeof (pid) && p < s && *p != ':'; i++, p++)
+        pid[i] = *p;
     if (i == sizeof (pid))
         i--;
     pid[i] = '\0';
