@@ -279,8 +279,7 @@ int
 unlock_file (const vfs_path_t * fname_vpath)
 {
     char *lockfname;
-    struct stat statbuf;
-    const char *elpath, *lock;
+    const char *elpath;
 
     if (fname_vpath == NULL)
         return 0;
@@ -291,27 +290,24 @@ unlock_file (const vfs_path_t * fname_vpath)
         return 0;
 
     lockfname = lock_build_symlink_name (fname_vpath);
-
-    if (lockfname == NULL)
-        return 0;
-
-    /* Check if lock exists */
-    if (lstat (lockfname, &statbuf) == -1)
-        goto ret;
-
-    lock = lock_get_info (lockfname);
-    if (lock != NULL)
+    if (lockfname != NULL)
     {
-        /* Don't touch if lock is not ours */
-        if (lock_extract_info (lock)->pid != getpid ())
-            goto ret;
+        struct stat statbuf;
+
+        /* Check if lock exists */
+        if (lstat (lockfname, &statbuf) != -1)
+        {
+            const char *lock;
+
+            lock = lock_get_info (lockfname);
+            /* Don't touch if lock is not ours */
+            if (lock == NULL || lock_extract_info (lock)->pid == getpid ())
+                unlink (lockfname);
+        }
+
+        g_free (lockfname);
     }
 
-    /* Remove lock */
-    unlink (lockfname);
-
-  ret:
-    g_free (lockfname);
     return 0;
 }
 
