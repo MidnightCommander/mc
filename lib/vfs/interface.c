@@ -295,12 +295,12 @@ mc_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 
 /* *INDENT-OFF* */
 
-#define MC_HANDLEOP(name) \
-ssize_t mc_##name (int handle, C void *buf, size_t count) \
+#define MC_HANDLEOP(rettype, name, inarg, callarg) \
+rettype mc_##name inarg \
 { \
     struct vfs_class *vfs; \
     void *fsinfo = NULL; \
-    int result; \
+    rettype result; \
 \
     if (handle == -1) \
         return (-1); \
@@ -309,18 +309,15 @@ ssize_t mc_##name (int handle, C void *buf, size_t count) \
     if (vfs == NULL) \
         return (-1); \
 \
-    result = vfs->name != NULL ? vfs->name (fsinfo, buf, count) : -1; \
+    result = vfs->name != NULL ? vfs->name callarg : -1; \
     if (result == -1) \
         errno = vfs->name != NULL ? vfs_ferrno (vfs) : ENOTSUP; \
     return result; \
 }
 
-#define C
-MC_HANDLEOP (read)
-#undef C
-#define C const
-MC_HANDLEOP (write)
-#undef C
+MC_HANDLEOP (ssize_t, read, (int handle, void *buf, size_t count), (fsinfo, buf, count))
+MC_HANDLEOP (ssize_t, write, (int handle, const void *buf, size_t count), (fsinfo, buf, count))
+MC_HANDLEOP (int, fstat, (int handle, struct stat *buf), (fsinfo, buf))
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -568,28 +565,6 @@ MC_STATOP (stat)
 MC_STATOP (lstat)
 
 /* *INDENT-ON* */
-
-/* --------------------------------------------------------------------------------------------- */
-
-int
-mc_fstat (int handle, struct stat *buf)
-{
-    struct vfs_class *vfs;
-    void *fsinfo = NULL;
-    int result;
-
-    if (handle == -1)
-        return (-1);
-
-    vfs = vfs_class_find_by_handle (handle, &fsinfo);
-    if (vfs == NULL)
-        return (-1);
-
-    result = vfs->fstat ? vfs->fstat (fsinfo, buf) : -1;
-    if (result == -1)
-        errno = vfs->fstat ? vfs_ferrno (vfs) : ENOTSUP;
-    return result;
-}
 
 /* --------------------------------------------------------------------------------------------- */
 
