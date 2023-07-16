@@ -202,9 +202,9 @@ union block
 /* Information about a sparse file */
 struct sp_array
 {
-    off_t offset;       /* chunk offset in file */
-    off_t numbytes;     /* length of chunk */
-    off_t arch_offset;  /* chunk offset in archive */
+    off_t offset;               /* chunk offset in file */
+    off_t numbytes;             /* length of chunk */
+    off_t arch_offset;          /* chunk offset in archive */
 };
 
 enum dump_status

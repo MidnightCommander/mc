@@ -56,8 +56,7 @@ vpath_captured_free (gpointer data)
 static void
 vfs_file_is_local__init (void)
 {
-    vfs_file_is_local__vpath__captured =
-        g_ptr_array_new_with_free_func (vpath_captured_free);
+    vfs_file_is_local__vpath__captured = g_ptr_array_new_with_free_func (vpath_captured_free);
 }
 
 static void

@@ -3538,8 +3538,7 @@ dview_diff_cmd (const void *f0, const void *f1)
             const file_entry_t *fe1;
 
             fe0 = panel_current_entry (panel0);
-            file0 =
-                vfs_path_append_new (panel0->cwd_vpath, fe0->fname->str, (char *) NULL);
+            file0 = vfs_path_append_new (panel0->cwd_vpath, fe0->fname->str, (char *) NULL);
             is_dir0 = S_ISDIR (fe0->st.st_mode);
             if (is_dir0)
             {
@@ -3549,8 +3548,7 @@ dview_diff_cmd (const void *f0, const void *f1)
             }
 
             fe1 = panel_current_entry (panel1);
-            file1 =
-                vfs_path_append_new (panel1->cwd_vpath, fe1->fname->str, (char *) NULL);
+            file1 = vfs_path_append_new (panel1->cwd_vpath, fe1->fname->str, (char *) NULL);
             is_dir1 = S_ISDIR (fe1->st.st_mode);
             if (is_dir1)
             {

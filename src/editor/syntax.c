@@ -1425,7 +1425,7 @@ exec_edit_syntax_dialog (const GPtrArray * names, const char *current_syntax)
     Listbox *syntaxlist;
 
     syntaxlist = listbox_window_new (LIST_LINES, MAX_ENTRY_LEN,
-                                        _("Choose syntax highlighting"), NULL);
+                                     _("Choose syntax highlighting"), NULL);
     LISTBOX_APPEND_TEXT (syntaxlist, 'A', _("< Auto >"), NULL, FALSE);
     LISTBOX_APPEND_TEXT (syntaxlist, 'R', _("< Reload Current Syntax >"), NULL, FALSE);
 

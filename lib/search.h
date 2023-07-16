@@ -114,7 +114,7 @@ typedef struct mc_search_struct
     GString *regex_buffer;
 #ifdef SEARCH_TYPE_PCRE
 #ifdef HAVE_PCRE2
-    /* pcre2 will provide a pointer to a match_data structure that can be manipulated like an iovector*/
+    /* pcre2 will provide a pointer to a match_data structure that can be manipulated like an iovector */
     size_t *iovector;
 #else
     int iovector[MC_SEARCH__NUM_REPLACE_ARGS * 2];

@@ -198,8 +198,7 @@ menubar_draw_drop (const WMenuBar * menubar)
     tty_draw_box (w->y + 1, w->x + column, count + 2, menu->max_entry_len + 5, FALSE);
 
     for (i = 0; i < count; i++)
-        menubar_paint_idx (menubar, i,
-                           i == menu->current ? MENU_SELECTED_COLOR : MENU_ENTRY_COLOR);
+        menubar_paint_idx (menubar, i, i == menu->current ? MENU_SELECTED_COLOR : MENU_ENTRY_COLOR);
 }
 
 /* --------------------------------------------------------------------------------------------- */
