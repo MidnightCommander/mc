@@ -542,47 +542,32 @@ mc_closedir (DIR * dirp)
 
 /* --------------------------------------------------------------------------------------------- */
 
-int
-mc_stat (const vfs_path_t * vpath, struct stat *buf)
-{
-    int result = -1;
-    const vfs_path_element_t *path_element;
+/* *INDENT-OFF* */
 
-    if (vpath == NULL)
-        return (-1);
-
-    path_element = vfs_path_get_by_index (vpath, -1);
-    if (vfs_path_element_valid (path_element))
-    {
-        result = path_element->class->stat ? path_element->class->stat (vpath, buf) : -1;
-        if (result == -1)
-            errno = path_element->class->name ? vfs_ferrno (path_element->class) : ENOTSUP;
-    }
-
-    return result;
+#define MC_STATOP(name) \
+int mc_##name (const vfs_path_t *vpath, struct stat *buf) \
+{ \
+    int result = -1; \
+    const vfs_path_element_t *path_element; \
+\
+    if (vpath == NULL) \
+        return (-1); \
+\
+    path_element = vfs_path_get_by_index (vpath, -1); \
+    if (vfs_path_element_valid (path_element)) \
+    { \
+        result = path_element->class->name ? path_element->class->name (vpath, buf) : -1; \
+        if (result == -1) \
+            errno = path_element->class->name ? vfs_ferrno (path_element->class) : ENOTSUP; \
+    } \
+\
+    return result; \
 }
 
-/* --------------------------------------------------------------------------------------------- */
+MC_STATOP (stat)
+MC_STATOP (lstat)
 
-int
-mc_lstat (const vfs_path_t * vpath, struct stat *buf)
-{
-    int result = -1;
-    const vfs_path_element_t *path_element;
-
-    if (vpath == NULL)
-        return (-1);
-
-    path_element = vfs_path_get_by_index (vpath, -1);
-    if (vfs_path_element_valid (path_element))
-    {
-        result = path_element->class->lstat ? path_element->class->lstat (vpath, buf) : -1;
-        if (result == -1)
-            errno = path_element->class->name ? vfs_ferrno (path_element->class) : ENOTSUP;
-    }
-
-    return result;
-}
+/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
