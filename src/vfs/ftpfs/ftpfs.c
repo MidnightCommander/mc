@@ -2121,28 +2121,28 @@ ftpfs_send_command (const vfs_path_t * vpath, const char *cmd, int flags)
     char *p;
     struct vfs_s_super *super;
     int r;
-    const vfs_path_element_t *path_element;
+    struct vfs_class *me;
     gboolean flush_directory_cache = (flags & OPT_FLUSH) != 0;
 
-    path_element = vfs_path_get_by_index (vpath, -1);
+    me = VFS_CLASS (vfs_path_get_last_path_vfs (vpath));
 
     rpath = vfs_s_get_path (vpath, &super, 0);
     if (rpath == NULL)
         return (-1);
 
-    p = ftpfs_translate_path (path_element->class, super, rpath);
-    r = ftpfs_command (path_element->class, super, WAIT_REPLY, cmd, p);
+    p = ftpfs_translate_path (me, super, rpath);
+    r = ftpfs_command (me, super, WAIT_REPLY, cmd, p);
     g_free (p);
     vfs_stamp_create (vfs_ftpfs_ops, super);
     if ((flags & OPT_IGNORE_ERROR) != 0)
         r = COMPLETE;
     if (r != COMPLETE)
     {
-        path_element->class->verrno = EPERM;
+        me->verrno = EPERM;
         return (-1);
     }
     if (flush_directory_cache)
-        vfs_s_invalidate (path_element->class, super);
+        vfs_s_invalidate (me, super);
     return 0;
 }
 

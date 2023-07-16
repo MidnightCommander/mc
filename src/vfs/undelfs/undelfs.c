@@ -333,9 +333,9 @@ static void *
 undelfs_opendir (const vfs_path_t * vpath)
 {
     char *file, *f = NULL;
-    const vfs_path_element_t *path_element;
+    const char *class_name;
 
-    path_element = vfs_path_get_by_index (vpath, -1);
+    class_name = vfs_path_get_last_path_vfs (vpath)->name;
     undelfs_get_path (vpath, &file, &f);
     if (file == NULL)
     {
@@ -379,10 +379,10 @@ undelfs_opendir (const vfs_path_t * vpath)
     /* Now load the deleted information */
     if (!undelfs_loaddel ())
         goto quit_opendir;
-    vfs_print_message (_("%s: done."), path_element->class->name);
+    vfs_print_message (_("%s: done."), class_name);
     return fs;
   quit_opendir:
-    vfs_print_message (_("%s: failure"), path_element->class->name);
+    vfs_print_message (_("%s: failure"), class_name);
     ext2fs_close (fs);
     fs = NULL;
     return 0;

@@ -481,8 +481,6 @@ vfs_init (void)
 void
 vfs_setup_work_dir (void)
 {
-    const vfs_path_element_t *path_element;
-
     vfs_setup_cwd ();
 
     /* FIXME: is we really need for this check? */
@@ -491,8 +489,7 @@ vfs_setup_work_dir (void)
        vfs_die ("Current dir too long.\n");
      */
 
-    path_element = vfs_path_get_by_index (current_path, -1);
-    current_vfs = path_element->class;
+    current_vfs = VFS_CLASS (vfs_path_get_last_path_vfs (current_path));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -640,7 +637,7 @@ vfs_setup_cwd (void)
 {
     char *current_dir;
     vfs_path_t *tmp_vpath;
-    const vfs_path_element_t *path_element;
+    const struct vfs_class *me;
 
     if (vfs_get_raw_current_dir () == NULL)
     {
@@ -660,9 +657,8 @@ vfs_setup_cwd (void)
         }
     }
 
-    path_element = vfs_path_get_by_index (vfs_get_raw_current_dir (), -1);
-
-    if ((path_element->class->flags & VFSF_LOCAL) != 0)
+    me = vfs_path_get_last_path_vfs (vfs_get_raw_current_dir ());
+    if ((me->flags & VFSF_LOCAL) != 0)
     {
         current_dir = g_get_current_dir ();
         tmp_vpath = vfs_path_from_str (current_dir);

@@ -2919,7 +2919,7 @@ copy_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const cha
     }
 
     lp = g_new0 (struct link, 1);
-    lp->vfs = vfs_path_get_by_index (src_vpath, -1)->class;
+    lp->vfs = vfs_path_get_last_path_vfs (src_vpath);
     lp->ino = src_stat.st_ino;
     lp->dev = src_stat.st_dev;
     parent_dirs = g_slist_prepend (parent_dirs, lp);
@@ -2995,7 +2995,7 @@ copy_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const cha
 
         lp = g_new0 (struct link, 1);
         mc_stat (dst_vpath, &dst_stat);
-        lp->vfs = vfs_path_get_by_index (dst_vpath, -1)->class;
+        lp->vfs = vfs_path_get_last_path_vfs (dst_vpath);
         lp->ino = dst_stat.st_ino;
         lp->dev = dst_stat.st_dev;
         dest_dirs = g_slist_prepend (dest_dirs, lp);

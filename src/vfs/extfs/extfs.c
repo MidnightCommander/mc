@@ -1279,10 +1279,7 @@ extfs_readlink (const vfs_path_t * vpath, char *buf, size_t size)
         goto cleanup;
     if (!S_ISLNK (entry->ino->st.st_mode))
     {
-        const vfs_path_element_t *path_element;
-
-        path_element = vfs_path_get_by_index (vpath, -1);
-        path_element->class->verrno = EINVAL;
+        VFS_CLASS (vfs_path_get_last_path_vfs (vpath))->verrno = EINVAL;
         goto cleanup;
     }
     len = strlen (entry->ino->linkname);
@@ -1348,10 +1345,7 @@ extfs_unlink (const vfs_path_t * vpath)
         goto cleanup;
     if (S_ISDIR (entry->ino->st.st_mode))
     {
-        const vfs_path_element_t *path_element;
-
-        path_element = vfs_path_get_by_index (vpath, -1);
-        path_element->class->verrno = EISDIR;
+        VFS_CLASS (vfs_path_get_last_path_vfs (vpath))->verrno = EISDIR;
         goto cleanup;
     }
     if (extfs_cmd (" rm ", archive, entry, ""))
@@ -1374,18 +1368,18 @@ extfs_mkdir (const vfs_path_t * vpath, mode_t mode)
     const char *q;
     struct vfs_s_entry *entry;
     int result = -1;
-    const vfs_path_element_t *path_element;
+    struct vfs_class *me;
 
     (void) mode;
 
-    path_element = vfs_path_get_by_index (vpath, -1);
+    me = VFS_CLASS (vfs_path_get_last_path_vfs (vpath));
     q = extfs_get_path (vpath, &archive, FL_NONE);
     if (q == NULL)
         goto cleanup;
     entry = extfs_find_entry (VFS_SUPER (archive)->root, q, FL_NONE);
     if (entry != NULL)
     {
-        path_element->class->verrno = EEXIST;
+        me->verrno = EEXIST;
         goto cleanup;
     }
     entry = extfs_find_entry (VFS_SUPER (archive)->root, q, FL_MKDIR);
@@ -1396,7 +1390,7 @@ extfs_mkdir (const vfs_path_t * vpath, mode_t mode)
         goto cleanup;
     if (!S_ISDIR (entry->ino->st.st_mode))
     {
-        path_element->class->verrno = ENOTDIR;
+        me->verrno = ENOTDIR;
         goto cleanup;
     }
 
@@ -1432,10 +1426,7 @@ extfs_rmdir (const vfs_path_t * vpath)
         goto cleanup;
     if (!S_ISDIR (entry->ino->st.st_mode))
     {
-        const vfs_path_element_t *path_element;
-
-        path_element = vfs_path_get_by_index (vpath, -1);
-        path_element->class->verrno = ENOTDIR;
+        VFS_CLASS (vfs_path_get_last_path_vfs (vpath))->verrno = ENOTDIR;
         goto cleanup;
     }
 

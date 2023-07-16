@@ -596,7 +596,6 @@ sftpfs_rename (const vfs_path_t * vpath1, const vfs_path_t * vpath2, GError ** m
     tmp_path_len = ctmp_path->len;
 
     path1 = vfs_path_get_last_path_str (vpath1);
-
     fixfname = sftpfs_fix_filename (path1);
 
     do

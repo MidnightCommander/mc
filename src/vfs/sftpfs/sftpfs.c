@@ -107,23 +107,23 @@ static void *
 sftpfs_cb_open (const vfs_path_t * vpath, int flags, mode_t mode)
 {
     vfs_file_handler_t *fh;
-    const vfs_path_element_t *path_element;
+    struct vfs_class *me;
     struct vfs_s_super *super;
     const char *path_super;
     struct vfs_s_inode *path_inode;
     GError *mcerror = NULL;
     gboolean is_changed = FALSE;
 
-    path_element = vfs_path_get_by_index (vpath, -1);
-
     path_super = vfs_s_get_path (vpath, &super, 0);
     if (path_super == NULL)
         return NULL;
 
-    path_inode = vfs_s_find_inode (path_element->class, super, path_super, LINK_FOLLOW, FL_NONE);
+    me = VFS_CLASS (vfs_path_get_last_path_vfs (vpath));
+
+    path_inode = vfs_s_find_inode (me, super, path_super, LINK_FOLLOW, FL_NONE);
     if (path_inode != NULL && ((flags & (O_CREAT | O_EXCL)) == (O_CREAT | O_EXCL)))
     {
-        path_element->class->verrno = EEXIST;
+        me->verrno = EEXIST;
         return NULL;
     }
 
@@ -134,22 +134,22 @@ sftpfs_cb_open (const vfs_path_t * vpath, int flags, mode_t mode)
         struct vfs_s_inode *dir;
 
         name = g_path_get_dirname (path_super);
-        dir = vfs_s_find_inode (path_element->class, super, name, LINK_FOLLOW, FL_DIR);
+        dir = vfs_s_find_inode (me, super, name, LINK_FOLLOW, FL_DIR);
         g_free (name);
         if (dir == NULL)
             return NULL;
 
         name = g_path_get_basename (path_super);
-        ent = vfs_s_generate_entry (path_element->class, name, dir, 0755);
+        ent = vfs_s_generate_entry (me, name, dir, 0755);
         g_free (name);
         path_inode = ent->ino;
-        vfs_s_insert_entry (path_element->class, dir, ent);
+        vfs_s_insert_entry (me, dir, ent);
         is_changed = TRUE;
     }
 
     if (S_ISDIR (path_inode->st.st_mode))
     {
-        path_element->class->verrno = EISDIR;
+        me->verrno = EISDIR;
         return NULL;
     }
 
@@ -162,7 +162,7 @@ sftpfs_cb_open (const vfs_path_t * vpath, int flags, mode_t mode)
         return NULL;
     }
 
-    vfs_rmstamp (path_element->class, (vfsid) super);
+    vfs_rmstamp (me, (vfsid) super);
     super->fd_usage++;
     fh->ino->st.st_nlink++;
     return fh;
