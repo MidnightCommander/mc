@@ -1826,17 +1826,17 @@ char *
 edit_get_write_filter (const vfs_path_t * write_name_vpath, const vfs_path_t * filename_vpath)
 {
     int i;
-    char *p, *writename;
-    const vfs_path_element_t *path_element;
+    const char *write_name;
+    char *p, *write_name_quoted;
 
     i = edit_find_filter (filename_vpath);
     if (i < 0)
         return NULL;
 
-    path_element = vfs_path_get_by_index (write_name_vpath, -1);
-    writename = name_quote (path_element->path, FALSE);
-    p = g_strdup_printf (all_filters[i].write, writename);
-    g_free (writename);
+    write_name = vfs_path_get_last_path_str (write_name_vpath);
+    write_name_quoted = name_quote (write_name, FALSE);
+    p = g_strdup_printf (all_filters[i].write, write_name_quoted);
+    g_free (write_name_quoted);
     return p;
 }
 

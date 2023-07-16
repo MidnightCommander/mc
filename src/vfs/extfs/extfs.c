@@ -897,11 +897,11 @@ extfs_get_archive_name (const struct extfs_super_t *archive)
     {
         char *ret_str;
         vfs_path_t *vpath;
-        const vfs_path_element_t *path_element;
+        const char *path;
 
         vpath = vfs_path_from_str (archive_name);
-        path_element = vfs_path_get_by_index (vpath, -1);
-        ret_str = g_strdup (path_element->path);
+        path = vfs_path_get_last_path_str (vpath);
+        ret_str = g_strdup (path);
         vfs_path_free (vpath, TRUE);
         return ret_str;
     }
@@ -1040,7 +1040,7 @@ extfs_open (const vfs_path_t * vpath, int flags, mode_t mode)
         if (local_handle == -1)
             return NULL;
         close (local_handle);
-        local_filename = vfs_path_get_by_index (local_filename_vpath, -1)->path;
+        local_filename = vfs_path_get_last_path_str (local_filename_vpath);
 
         if (!created && ((flags & O_TRUNC) == 0)
             && extfs_cmd (" copyout ", archive, entry, local_filename))

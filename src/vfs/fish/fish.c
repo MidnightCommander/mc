@@ -1334,7 +1334,7 @@ fish_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
         return -1;
 
     rpath = strutils_shell_escape (crpath);
-    qsetto = strutils_shell_escape (vfs_path_get_by_index (vpath1, -1)->path);
+    qsetto = strutils_shell_escape (vfs_path_get_last_path_str (vpath1));
 
     ret =
         fish_send_command (path_element->class, super, OPT_FLUSH, FISH_SUPER (super)->scr_ln,

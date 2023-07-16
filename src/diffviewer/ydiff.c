@@ -139,7 +139,7 @@ rewrite_backup_content (const vfs_path_t * from_file_name_vpath, const char *to_
     gsize length;
     const char *from_file_name;
 
-    from_file_name = vfs_path_get_by_index (from_file_name_vpath, -1)->path;
+    from_file_name = vfs_path_get_last_path_str (from_file_name_vpath);
     if (!g_file_get_contents (from_file_name, &contents, &length, NULL))
         return FALSE;
 
