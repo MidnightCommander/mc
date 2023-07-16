@@ -113,32 +113,6 @@ sftpfs_internal_waitsocket (sftpfs_super_t * super, GError ** mcerror)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static gboolean
-sftpfs_op_init (sftpfs_super_t ** super, const vfs_path_element_t ** path_element,
-                const vfs_path_t * vpath, GError ** mcerror)
-{
-    struct vfs_s_super *lc_super = NULL;
-
-    mc_return_val_if_error (mcerror, FALSE);
-
-    if (vfs_s_get_path (vpath, &lc_super, 0) == NULL)
-        return FALSE;
-
-    if (lc_super == NULL)
-        return FALSE;
-
-    *super = SFTP_SUPER (lc_super);
-
-    if ((*super)->sftp_session == NULL)
-        return FALSE;
-
-    *path_element = vfs_path_get_by_index (vpath, -1);
-
-    return TRUE;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 static int
 sftpfs_stat_init (sftpfs_super_t ** super, const vfs_path_element_t ** path_element,
                   const vfs_path_t * vpath, GError ** mcerror, int stat_type,
@@ -241,6 +215,31 @@ sftpfs_fix_filename (const char *file_name)
 {
     g_string_printf (sftpfs_filename_buffer, "%c%s", PATH_SEP, file_name);
     return sftpfs_filename_buffer;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+gboolean
+sftpfs_op_init (sftpfs_super_t ** super, const vfs_path_element_t ** path_element,
+                const vfs_path_t * vpath, GError ** mcerror)
+{
+    struct vfs_s_super *lc_super = NULL;
+
+    mc_return_val_if_error (mcerror, FALSE);
+
+    if (vfs_s_get_path (vpath, &lc_super, 0) == NULL)
+        return FALSE;
+
+    if (lc_super == NULL)
+        return FALSE;
+
+    *super = SFTP_SUPER (lc_super);
+    if ((*super)->sftp_session == NULL)
+        return FALSE;
+
+    *path_element = vfs_path_get_by_index (vpath, -1);
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
