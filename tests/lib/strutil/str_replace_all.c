@@ -143,6 +143,13 @@ static const struct str_replace_all_test_ds
         "111\t1 1\n1111",
         "111\t1 1\n1111 111\t1 1\n1111",
     },
+    {
+        /* 12. empty string */
+        "",
+        "blablablabla",
+        "1234567890",
+        NULL,
+    },
 };
 /* *INDENT-ON* */
 
