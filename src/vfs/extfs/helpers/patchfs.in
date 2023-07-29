@@ -174,7 +174,7 @@ sub diff_filename
 #     false - ie. copyout mode, print just the file
 sub parse($$$$)
 {
-    my $archive=quotemeta shift;
+    my $archive=shift;
     my $fh=shift;
     my $file=shift;
     my $rmmod=shift;
@@ -295,7 +295,7 @@ sub parse($$$$)
 	    elsif(ord($first) == ord(' ')) { $h_ctx++; }
 	    elsif(ord($first) == ord('\\')) { 0; }
 	    elsif(ord($first) == ord('@')) { error "Malformed hunk, header came too early"; }
-	    else { error "Unrecognized character in hunk"; }
+	    else { error "$archive:$line: Unrecognized character '$first' in hunk"; }
 	}
     }
     if($file eq '' && $filetoprint) {
@@ -304,7 +304,8 @@ sub parse($$$$)
     }
 
     # use uid and gid from file
-    my ($uid,$gid)=(`ls -l $archive`=~/$ls_extract_id/o);
+    my $qarchive = quotemeta $archive;
+    my ($uid,$gid)=(`ls -l $qarchive`=~/$ls_extract_id/o);
 
     # flush all file names with cumulative file size
     while(my ($fn, $fs) = each %fmap_size) {
