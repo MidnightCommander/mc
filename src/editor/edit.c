@@ -38,7 +38,6 @@
 #include <unistd.h>
 #include <string.h>
 #include <ctype.h>
-#include <errno.h>
 #include <sys/stat.h>
 #include <stdint.h>             /* UINTMAX_MAX */
 #include <stdlib.h>
@@ -1827,17 +1826,17 @@ char *
 edit_get_write_filter (const vfs_path_t * write_name_vpath, const vfs_path_t * filename_vpath)
 {
     int i;
-    char *p, *writename;
-    const vfs_path_element_t *path_element;
+    const char *write_name;
+    char *p, *write_name_quoted;
 
     i = edit_find_filter (filename_vpath);
     if (i < 0)
         return NULL;
 
-    path_element = vfs_path_get_by_index (write_name_vpath, -1);
-    writename = name_quote (path_element->path, FALSE);
-    p = g_strdup_printf (all_filters[i].write, writename);
-    g_free (writename);
+    write_name = vfs_path_get_last_path_str (write_name_vpath);
+    write_name_quoted = name_quote (write_name, FALSE);
+    p = g_strdup_printf (all_filters[i].write, write_name_quoted);
+    g_free (write_name_quoted);
     return p;
 }
 
@@ -2343,7 +2342,6 @@ edit_push_undo_action (WEdit * edit, long c)
 {
     unsigned long sp = edit->undo_stack_pointer;
     unsigned long spm1;
-    long *t;
 
     /* first enlarge the stack if necessary */
     if (sp > edit->undo_stack_size - 10)
@@ -2352,8 +2350,10 @@ edit_push_undo_action (WEdit * edit, long c)
             max_undo = 256;
         if (edit->undo_stack_size < (unsigned long) max_undo)
         {
+            long *t;
+
             t = g_realloc (edit->undo_stack, (edit->undo_stack_size * 2 + 10) * sizeof (long));
-            if (t)
+            if (t != NULL)
             {
                 edit->undo_stack = t;
                 edit->undo_stack_size <<= 1;
@@ -2432,7 +2432,6 @@ edit_push_redo_action (WEdit * edit, long c)
 {
     unsigned long sp = edit->redo_stack_pointer;
     unsigned long spm1;
-    long *t;
     /* first enlarge the stack if necessary */
     if (sp > edit->redo_stack_size - 10)
     {                           /* say */
@@ -2440,8 +2439,10 @@ edit_push_redo_action (WEdit * edit, long c)
             max_undo = 256;
         if (edit->redo_stack_size < (unsigned long) max_undo)
         {
+            long *t;
+
             t = g_realloc (edit->redo_stack, (edit->redo_stack_size * 2 + 10) * sizeof (long));
-            if (t)
+            if (t != NULL)
             {
                 edit->redo_stack = t;
                 edit->redo_stack_size <<= 1;

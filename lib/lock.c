@@ -95,19 +95,19 @@ lock_build_name (void)
     struct passwd *pw;
 
     pw = getpwuid (getuid ());
-    if (pw)
+    if (pw != NULL)
         user = pw->pw_name;
-    if (!user)
+    if (user == NULL)
         user = getenv ("USER");
-    if (!user)
+    if (user == NULL)
         user = getenv ("USERNAME");
-    if (!user)
+    if (user == NULL)
         user = getenv ("LOGNAME");
-    if (!user)
+    if (user == NULL)
         user = "";
 
     /** \todo Use FQDN, no clean interface, so requires lot of code */
-    if (gethostname (host, BUF_SIZE - 1) == -1)
+    if (gethostname (host, sizeof (host) - 1) == -1)
         *host = '\0';
 
     return g_strdup_printf ("%s@%s.%d", user, host, (int) getpid ());
@@ -148,23 +148,20 @@ lock_extract_info (const char *str)
 
     len = strlen (str);
 
-    for (p = str + len - 1; p >= str; p--)
-        if (*p == '.')
-            break;
+    for (p = str + len - 1; p >= str && *p != '.'; p--)
+        ;
 
     /* Everything before last '.' is user@host */
-    i = 0;
-    for (s = str; i < BUF_SIZE && s < p; s++)
-        who[i++] = *s;
-    if (i == BUF_SIZE)
+    for (i = 0, s = str; i < sizeof (who) && s < p; i++, s++)
+        who[i] = *s;
+    if (i == sizeof (who))
         i--;
     who[i] = '\0';
 
     /* Treat text between '.' and ':' or '\0' as pid */
-    i = 0;
-    for (p = p + 1; i < PID_BUF_SIZE && p < str + len && *p != ':'; p++)
-        pid[i++] = *p;
-    if (i == PID_BUF_SIZE)
+    for (i = 0, p++, s = str + len; i < sizeof (pid) && p < s && *p != ':'; i++, p++)
+        pid[i] = *p;
+    if (i == sizeof (pid))
         i--;
     pid[i] = '\0';
 
@@ -184,7 +181,7 @@ lock_get_info (const char *lockfname)
     ssize_t cnt;
     static char buf[BUF_SIZE];
 
-    cnt = readlink (lockfname, buf, BUF_SIZE - 1);
+    cnt = readlink (lockfname, buf, sizeof (buf) - 1);
     if (cnt == -1 || *buf == '\0')
         return NULL;
     buf[cnt] = '\0';
@@ -282,8 +279,7 @@ int
 unlock_file (const vfs_path_t * fname_vpath)
 {
     char *lockfname;
-    struct stat statbuf;
-    const char *elpath, *lock;
+    const char *elpath;
 
     if (fname_vpath == NULL)
         return 0;
@@ -294,27 +290,24 @@ unlock_file (const vfs_path_t * fname_vpath)
         return 0;
 
     lockfname = lock_build_symlink_name (fname_vpath);
-
-    if (lockfname == NULL)
-        return 0;
-
-    /* Check if lock exists */
-    if (lstat (lockfname, &statbuf) == -1)
-        goto ret;
-
-    lock = lock_get_info (lockfname);
-    if (lock != NULL)
+    if (lockfname != NULL)
     {
-        /* Don't touch if lock is not ours */
-        if (lock_extract_info (lock)->pid != getpid ())
-            goto ret;
+        struct stat statbuf;
+
+        /* Check if lock exists */
+        if (lstat (lockfname, &statbuf) != -1)
+        {
+            const char *lock;
+
+            lock = lock_get_info (lockfname);
+            /* Don't touch if lock is not ours */
+            if (lock == NULL || lock_extract_info (lock)->pid == getpid ())
+                unlink (lockfname);
+        }
+
+        g_free (lockfname);
     }
 
-    /* Remove lock */
-    unlink (lockfname);
-
-  ret:
-    g_free (lockfname);
     return 0;
 }
 

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-03-19 20:39+0300\n"
+"POT-Creation-Date: 2023-08-04 21:17+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2022\n"
 "Language-Team: Esperanto (http://www.transifex.com/mc/mc/language/eo/)\n"
@@ -2165,13 +2165,12 @@ msgstr "&Mortigi"
 msgid "Background jobs"
 msgstr "Fonaj taskoj"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chdir to \"%s\"\n"
+"Cannot change directory to\n"
+"%s\n"
 "%s"
-msgstr ""
-"Ne eblas ŝanĝi dosierujon al \"%s\"\n"
-"%s"
+msgstr "Ne eblas ŝanĝi dosierujon"
 
 msgid "Secure deletion"
 msgstr "Sekura forigo"
@@ -2369,9 +2368,6 @@ msgstr "Enmetu servilan nomon (F1 por detaloj):"
 msgid "Files tagged, want to cd?"
 msgstr "Dosieroj markitaj, ĉu vi volas al ŝanĝi la dosierujon?"
 
-msgid "Cannot change directory"
-msgstr "Ne eblas ŝanĝi dosierujon"
-
 #, c-format
 msgid "Link %s to:"
 msgstr "Ligi je %s al:"
@@ -2386,10 +2382,6 @@ msgstr "ligilo: %s"
 #, c-format
 msgid "symlink: %s"
 msgstr "simbola ligilo: %s"
-
-#, c-format
-msgid "Cannot chdir to \"%s\""
-msgstr "Ne eblas ŝanĝi dosierujon al \"%s\""
 
 msgid "View file"
 msgstr "Vidi dosieron"
@@ -4511,13 +4503,16 @@ msgstr ""
 "Ne eblas malfermi tar-dosieron\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "%s\n"
-"doesn't look like a tar archive."
+"doesn't look like a tar archive"
 msgstr ""
 "%s\n"
 "ne aspektas kiel tar-dosieron."
+
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
 
 msgid "undelfs: error"
 msgstr "undelfs: eraro"
@@ -4710,6 +4705,18 @@ msgstr "Ĉu deiri de la komenco?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Ne eblas atingi lokan kopion de /ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot chdir to \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Ne eblas ŝanĝi dosierujon al \"%s\"\n"
+#~ "%s"
+
+#, c-format
+#~ msgid "Cannot chdir to \"%s\""
+#~ msgstr "Ne eblas ŝanĝi dosierujon al \"%s\""
 
 #~ msgid "Cannot change attributes on non-local filesystems"
 #~ msgstr "Ne eblas ŝanĝi atributojn en foraj dosiersistemoj"

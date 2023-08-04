@@ -142,7 +142,7 @@ history_dlg_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
                 return MSG_NOT_HANDLED;
             }
 
-            dlg_stop (d);
+            dlg_close (d);
             return MSG_HANDLED;
         }
 
@@ -252,13 +252,13 @@ history_show (history_descriptor_t * hd)
         if (hd->current < 0 || (size_t) hd->current >= count)
             listbox_select_last (hd->listbox);
         else
-            listbox_select_entry (hd->listbox, count - 1 - (size_t) hd->current);
+            listbox_set_current (hd->listbox, count - 1 - (size_t) hd->current);
     }
     else
     {
         /* history is below base widget -- keep order to place recent item on top  */
         if (hd->current > 0)
-            listbox_select_entry (hd->listbox, hd->current);
+            listbox_set_current (hd->listbox, hd->current);
     }
 
     dlg_ret = dlg_run (query_dlg);

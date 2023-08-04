@@ -109,7 +109,7 @@ void file_filter_clear (file_filter_t * filter);
 static inline gboolean
 link_isdir (const file_entry_t * file)
 {
-    return (gboolean) file->f.link_to_dir;
+    return (file->f.link_to_dir != 0);
 }
 
 #endif /* MC__DIR_H */

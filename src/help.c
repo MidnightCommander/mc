@@ -835,7 +835,7 @@ help_execute_cmd (long command)
         help_prev_node ();
         break;
     case CK_Quit:
-        dlg_stop (whelp);
+        dlg_close (whelp);
         break;
     default:
         ret = MSG_NOT_HANDLED;

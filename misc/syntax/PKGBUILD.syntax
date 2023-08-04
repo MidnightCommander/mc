@@ -26,6 +26,7 @@ context default
     keyword whole linestart backup brightcyan
     keyword whole linestart changelog brightcyan
     keyword whole linestart validpgpkeys brightcyan
+    keyword whole linestart b2sums brightcyan
     keyword whole linestart md5sums brightcyan
     keyword whole linestart sha1sums brightcyan
     keyword whole linestart sha256sums brightcyan

@@ -1,5 +1,5 @@
 /*
-   lib/strutil - tests for lib/strutil/replace:str_replace_all() function.
+   lib/strutil - tests for lib/strutil/replace.c:str_replace_all() function.
 
    Copyright (C) 2013-2023
    Free Software Foundation, Inc.
@@ -143,6 +143,13 @@ static const struct str_replace_all_test_ds
         "111\t1 1\n1111",
         "111\t1 1\n1111 111\t1 1\n1111",
     },
+    {
+        /* 12. empty string */
+        "",
+        "blablablabla",
+        "1234567890",
+        NULL,
+    },
 };
 /* *INDENT-ON* */
 
@@ -158,7 +165,7 @@ START_PARAMETRIZED_TEST (str_replace_all_test, str_replace_all_test_ds)
     actual_result = str_replace_all (data->haystack, data->needle, data->replacement);
 
     /* then */
-    g_assert_cmpstr (actual_result, ==, data->expected_result);
+    mctest_assert_str_eq (actual_result, data->expected_result);
     g_free (actual_result);
 }
 /* *INDENT-OFF* */

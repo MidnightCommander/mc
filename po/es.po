@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-03-19 20:39+0300\n"
+"POT-Creation-Date: 2023-08-04 21:17+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
 "Language-Team: Spanish (http://www.transifex.com/mc/mc/language/es/)\n"
@@ -2171,13 +2171,12 @@ msgstr "&Matar"
 msgid "Background jobs"
 msgstr "Procesos en 2º plano"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chdir to \"%s\"\n"
+"Cannot change directory to\n"
+"%s\n"
 "%s"
-msgstr ""
-"Imposible cambiar al directorio «%s»\n"
-"%s"
+msgstr "Imposible cambiar de directorio"
 
 msgid "Secure deletion"
 msgstr "Borrado seguro"
@@ -2375,9 +2374,6 @@ msgstr "Teclee el nombre de la máquina (F1 para más detalles):"
 msgid "Files tagged, want to cd?"
 msgstr "Hay archivos marcados. ¿Quiere cambiar de directorio?"
 
-msgid "Cannot change directory"
-msgstr "Imposible cambiar de directorio"
-
 #, c-format
 msgid "Link %s to:"
 msgstr "Crear enlace a %s como:"
@@ -2392,10 +2388,6 @@ msgstr "enlace: %s"
 #, c-format
 msgid "symlink: %s"
 msgstr "enlace simbólico: %s"
-
-#, c-format
-msgid "Cannot chdir to \"%s\""
-msgstr "Imposible cambiar al directorio «%s»"
 
 msgid "View file"
 msgstr "Ver archivo"
@@ -4519,13 +4511,16 @@ msgstr ""
 "Imposible abrir archivo de tipo tar\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "%s\n"
-"doesn't look like a tar archive."
+"doesn't look like a tar archive"
 msgstr ""
 "%s\n"
 "no parece un archivo de tipo tar."
+
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
 
 msgid "undelfs: error"
 msgstr "undelfs: Error"
@@ -4718,6 +4713,18 @@ msgstr "¿Continuar desde el principio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Imposible obtener una copia local de /ftp://ese.equipo/edítame.txt"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot chdir to \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Imposible cambiar al directorio «%s»\n"
+#~ "%s"
+
+#, c-format
+#~ msgid "Cannot chdir to \"%s\""
+#~ msgstr "Imposible cambiar al directorio «%s»"
 
 #~ msgid "Cannot change attributes on non-local filesystems"
 #~ msgstr "Imposible cambiar atributos en sistemas de archivos no locales"

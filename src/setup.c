@@ -628,7 +628,7 @@ load_keys_from_section (const char *terminal, mc_config_t * cfg)
             continue;
         }
 
-        key_code = lookup_key (*profile_keys, NULL);
+        key_code = tty_keyname_to_keycode (*profile_keys, NULL);
         if (key_code != 0)
         {
             gchar **values;

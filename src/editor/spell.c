@@ -360,7 +360,7 @@ aspell_clean (void)
  */
 
 unsigned int
-aspell_get_lang_list (GArray * lang_list)
+aspell_get_lang_list (GPtrArray * lang_list)
 {
     AspellDictInfoList *dlist;
     AspellDictInfoEnumeration *elem;
@@ -375,16 +375,11 @@ aspell_get_lang_list (GArray * lang_list)
     elem = mc_aspell_dict_info_list_elements (dlist);
 
     while ((entry = mc_aspell_dict_info_enumeration_next (elem)) != NULL)
-    {
         if (entry->name != NULL)
         {
-            char *tmp;
-
-            tmp = g_strdup (entry->name);
-            g_array_append_val (lang_list, tmp);
+            g_ptr_array_add (lang_list, g_strdup (entry->name));
             i++;
         }
-    }
 
     mc_delete_aspell_dict_info_enumeration (elem);
 
@@ -399,21 +394,10 @@ aspell_get_lang_list (GArray * lang_list)
  */
 
 void
-aspell_array_clean (GArray * array)
+aspell_array_clean (GPtrArray * array)
 {
     if (array != NULL)
-    {
-        guint i = 0;
-
-        for (i = 0; i < array->len; ++i)
-        {
-            char *tmp;
-
-            tmp = g_array_index (array, char *, i);
-            g_free (tmp);
-        }
-        g_array_free (array, TRUE);
-    }
+        g_ptr_array_free (array, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -510,7 +494,7 @@ aspell_check (const char *word, const int word_size)
  */
 
 unsigned int
-aspell_suggest (GArray * suggest, const char *word, const int word_size)
+aspell_suggest (GPtrArray * suggest, const char *word, const int word_size)
 {
     unsigned int size = 0;
 
@@ -531,9 +515,9 @@ aspell_suggest (GArray * suggest, const char *word, const int word_size)
             {
                 const char *cur_sugg_word;
 
-                cur_sugg_word = g_strdup (mc_aspell_string_enumeration_next (elements));
+                cur_sugg_word = mc_aspell_string_enumeration_next (elements);
                 if (cur_sugg_word != NULL)
-                    g_array_append_val (suggest, cur_sugg_word);
+                    g_ptr_array_add (suggest, g_strdup (cur_sugg_word));
             }
 
             mc_delete_aspell_string_enumeration (elements);
@@ -599,67 +583,65 @@ edit_suggest_current_word (WEdit * edit)
         match_word = tmp_word;
     }
 #endif
-    if (!aspell_check (match_word->str, (int) word_len))
+    if (match_word != NULL)
     {
-        GArray *suggest;
-        unsigned int res;
-        guint i;
-
-        suggest = g_array_new (TRUE, FALSE, sizeof (char *));
-
-        res = aspell_suggest (suggest, match_word->str, (int) word_len);
-        if (res != 0)
+        if (!aspell_check (match_word->str, (int) word_len))
         {
-            char *new_word = NULL;
+            GPtrArray *suggest;
+            unsigned int res;
+            guint i;
 
-            edit->found_start = word_start;
-            edit->found_len = word_len;
-            edit->force |= REDRAW_PAGE;
-            edit_scroll_screen_over_cursor (edit);
-            edit_render_keypress (edit);
+            suggest = g_ptr_array_new_with_free_func (g_free);
 
-            retval = spell_dialog_spell_suggest_show (edit, match_word->str, &new_word, suggest);
-            edit_cursor_move (edit, word_len - cut_len);
-
-            if (retval == B_ENTER && new_word != NULL)
+            res = aspell_suggest (suggest, match_word->str, (int) word_len);
+            if (res != 0)
             {
-                char *cp_word;
+                char *new_word = NULL;
 
-#ifdef HAVE_CHARSET
-                if (mc_global.source_codepage >= 0 &&
-                    (mc_global.source_codepage != mc_global.display_codepage))
+                edit->found_start = word_start;
+                edit->found_len = word_len;
+                edit->force |= REDRAW_PAGE;
+                edit_scroll_screen_over_cursor (edit);
+                edit_render_keypress (edit);
+
+                retval =
+                    spell_dialog_spell_suggest_show (edit, match_word->str, &new_word, suggest);
+                edit_cursor_move (edit, word_len - cut_len);
+
+                if (retval == B_ENTER && new_word != NULL)
                 {
-                    GString *tmp_word;
+#ifdef HAVE_CHARSET
+                    if (mc_global.source_codepage >= 0 &&
+                        (mc_global.source_codepage != mc_global.display_codepage))
+                    {
+                        GString *tmp_word;
 
-                    tmp_word = str_convert_to_input (new_word);
-                    g_free (new_word);
-                    new_word = g_string_free (tmp_word, FALSE);
-                }
+                        tmp_word = str_convert_to_input (new_word);
+                        MC_PTR_FREE (new_word);
+                        if (tmp_word != NULL)
+                            new_word = g_string_free (tmp_word, FALSE);
+                    }
 #endif
-                cp_word = new_word;
-                for (i = 0; i < word_len; i++)
-                    edit_backspace (edit, TRUE);
-                for (; *new_word; new_word++)
-                    edit_insert (edit, *new_word);
-                g_free (cp_word);
+                    for (i = 0; i < word_len; i++)
+                        edit_backspace (edit, TRUE);
+                    if (new_word != NULL)
+                    {
+                        for (i = 0; new_word[i] != '\0'; i++)
+                            edit_insert (edit, new_word[i]);
+                        g_free (new_word);
+                    }
+                }
+                else if (retval == B_ADD_WORD)
+                    aspell_add_to_dict (match_word->str, (int) word_len);
             }
-            else if (retval == B_ADD_WORD)
-                aspell_add_to_dict (match_word->str, (int) word_len);
+
+            g_ptr_array_free (suggest, TRUE);
+            edit->found_start = 0;
+            edit->found_len = 0;
         }
 
-        for (i = 0; i < suggest->len; i++)
-        {
-            char *cur_sugg_word;
-
-            cur_sugg_word = g_array_index (suggest, char *, i);
-            g_free (cur_sugg_word);
-        }
-        g_array_free (suggest, TRUE);
-        edit->found_start = 0;
-        edit->found_len = 0;
+        g_string_free (match_word, TRUE);
     }
-
-    g_string_free (match_word, TRUE);
 
     return retval;
 }
@@ -701,19 +683,16 @@ edit_spellcheck_file (WEdit * edit)
 void
 edit_set_spell_lang (void)
 {
-    GArray *lang_list;
+    GPtrArray *lang_list;
 
-    lang_list = g_array_new (TRUE, FALSE, sizeof (char *));
+    lang_list = g_ptr_array_new_with_free_func (g_free);
     if (aspell_get_lang_list (lang_list) != 0)
     {
-        char *lang;
+        const char *lang;
 
         lang = spell_dialog_lang_list_show (lang_list);
         if (lang != NULL)
-        {
             (void) aspell_set_lang (lang);
-            g_free (lang);
-        }
     }
     aspell_array_clean (lang_list);
 }
@@ -730,7 +709,8 @@ edit_set_spell_lang (void)
  */
 
 int
-spell_dialog_spell_suggest_show (WEdit * edit, const char *word, char **new_word, GArray * suggest)
+spell_dialog_spell_suggest_show (WEdit * edit, const char *word, char **new_word,
+                                 const GPtrArray * suggest)
 {
 
     int sug_dlg_h = 14;         /* dialog height */
@@ -791,8 +771,8 @@ spell_dialog_spell_suggest_show (WEdit * edit, const char *word, char **new_word
 
     sug_list = listbox_new (5, 2, sug_dlg_h - 7, 24, FALSE, NULL);
     for (i = 0; i < suggest->len; i++)
-        listbox_add_item (sug_list, LISTBOX_APPEND_AT_END, 0, g_array_index (suggest, char *, i),
-                          NULL, FALSE);
+        listbox_add_item (sug_list, LISTBOX_APPEND_AT_END, 0, g_ptr_array_index (suggest, i), NULL,
+                          FALSE);
     group_add_widget (g, sug_list);
 
     group_add_widget (g, add_btn);
@@ -826,13 +806,13 @@ spell_dialog_spell_suggest_show (WEdit * edit, const char *word, char **new_word
  * @return name of chosen language
  */
 
-char *
-spell_dialog_lang_list_show (GArray * languages)
+const char *
+spell_dialog_lang_list_show (const GPtrArray * languages)
 {
 
     int lang_dlg_h = 12;        /* dialog height */
     int lang_dlg_w = 30;        /* dialog width */
-    char *selected_lang = NULL;
+    const char *selected_lang = NULL;
     unsigned int i;
     int res;
     Listbox *lang_list;
@@ -842,14 +822,13 @@ spell_dialog_lang_list_show (GArray * languages)
                                              _("Select language"), "[ASpell]");
 
     for (i = 0; i < languages->len; i++)
-        LISTBOX_APPEND_TEXT (lang_list, 0, g_array_index (languages, char *, i), NULL, FALSE);
+        LISTBOX_APPEND_TEXT (lang_list, 0, g_ptr_array_index (languages, i), NULL, FALSE);
 
     res = listbox_run (lang_list);
     if (res >= 0)
-        selected_lang = g_strdup (g_array_index (languages, char *, (unsigned int) res));
+        selected_lang = g_ptr_array_index (languages, (unsigned int) res);
 
     return selected_lang;
-
 }
 
 /* --------------------------------------------------------------------------------------------- */

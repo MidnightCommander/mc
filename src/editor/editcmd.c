@@ -41,7 +41,6 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <string.h>
-#include <errno.h>
 #include <sys/stat.h>
 #include <stdlib.h>
 
@@ -300,12 +299,12 @@ edit_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
     else
     {                           /* change line breaks */
         FILE *file;
-        const vfs_path_element_t *path_element;
+        const char *savename;
 
         mc_close (fd);
 
-        path_element = vfs_path_get_by_index (savename_vpath, -1);
-        file = (FILE *) fopen (path_element->path, "w");
+        savename = vfs_path_get_last_path_str (savename_vpath);
+        file = (FILE *) fopen (savename, "w");
         if (file != NULL)
         {
             filelen = edit_write_stream (edit, file);
@@ -315,7 +314,7 @@ edit_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
         {
             char *msg;
 
-            msg = g_strdup_printf (_("Cannot open file for writing: %s"), path_element->path);
+            msg = g_strdup_printf (_("Cannot open file for writing: %s"), savename);
             edit_error_dialog (_("Error"), msg);
             g_free (msg);
             goto error_save;
@@ -750,7 +749,7 @@ editcmd_dialog_raw_key_query_cb (Widget * w, Widget * sender, widget_msg_t msg, 
     {
     case MSG_KEY:
         h->ret_value = parm;
-        dlg_stop (h);
+        dlg_close (h);
         return MSG_HANDLED;
     default:
         return dlg_default_callback (w, sender, msg, parm, data);

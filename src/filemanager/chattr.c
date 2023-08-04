@@ -1097,7 +1097,7 @@ chattr_done (gboolean need_update)
 static const GString *
 next_file (const WPanel * panel)
 {
-    while (!panel->dir.list[current_file].f.marked)
+    while (panel->dir.list[current_file].f.marked == 0)
         current_file++;
 
     return panel->dir.list[current_file].fname;
@@ -1234,7 +1234,7 @@ chattr_cmd (WPanel * panel)
         if (panel->marked != 0)
             fname = next_file (panel);  /* next marked file */
         else
-            fname = selection (panel)->fname;   /* single file */
+            fname = panel_current_entry (panel)->fname; /* single file */
 
         vpath = vfs_path_from_str (fname->str);
 

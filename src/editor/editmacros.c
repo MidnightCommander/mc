@@ -26,7 +26,7 @@
 
 #include "lib/global.h"
 #include "lib/mcconfig.h"
-#include "lib/tty/key.h"        /* lookup_key*() */
+#include "lib/tty/key.h"        /* tty_keyname_to_keycode*() */
 #include "lib/keybind.h"        /* keybind_lookup_actionname() */
 #include "lib/fileloc.h"
 
@@ -122,7 +122,7 @@ edit_delete_macro (WEdit * edit, int hotkey)
     if (macros_config == NULL)
         return FALSE;
 
-    skeyname = lookup_key_by_code (hotkey);
+    skeyname = tty_keycode_to_keyname (hotkey);
     while (mc_config_del_key (macros_config, section_name, skeyname))
         ;
     g_free (skeyname);
@@ -171,7 +171,7 @@ edit_store_macro_cmd (WEdit * edit)
 
     edit_push_undo_action (edit, KEY_PRESS + edit->start_display);
 
-    skeyname = lookup_key_by_code (hotkey);
+    skeyname = tty_keycode_to_keyname (hotkey);
 
     for (i = 0; i < macro_index; i++)
     {
@@ -249,10 +249,9 @@ edit_load_macro_cmd (WEdit * edit)
     {
         int hotkey;
         GArray *macros = NULL;
-        macros_t macro;
 
         values = mc_config_get_string_list (macros_config, section_name, *profile_keys, NULL);
-        hotkey = lookup_key (*profile_keys, NULL);
+        hotkey = tty_keyname_to_keycode (*profile_keys, NULL);
 
         for (curr_values = values; *curr_values != NULL && *curr_values[0] != '\0'; curr_values++)
         {
@@ -296,8 +295,11 @@ edit_load_macro_cmd (WEdit * edit)
 
         if (macros != NULL)
         {
-            macro.hotkey = hotkey;
-            macro.macro = macros;
+            macros_t macro = {
+                .hotkey = hotkey,
+                .macro = macros
+            };
+
             g_array_append_val (macros_list, macro);
         }
 

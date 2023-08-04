@@ -139,19 +139,19 @@ START_PARAMETRIZED_TEST (test_path_recode, test_path_recode_ds)
 {
     /* given */
     vfs_path_t *vpath;
-    const vfs_path_element_t *element;
+    const char *element_path;
     const char *vpath_str;
 
     test_init_vfs (data->input_codepage);
 
     /* when */
     vpath = vfs_path_from_str (data->input_path);
-    element = vfs_path_get_by_index (vpath, -1);
+    element_path = vfs_path_get_last_path_str (vpath);
 
     /* then */
     vpath_str = vfs_path_as_str (vpath);
     mctest_assert_ptr_ne (vpath, NULL);
-    mctest_assert_str_eq (element->path, data->expected_element_path);
+    mctest_assert_str_eq (element_path, data->expected_element_path);
     mctest_assert_str_eq (vpath_str, data->expected_recoded_path);
 
     vfs_path_free (vpath, TRUE);

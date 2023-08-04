@@ -100,7 +100,7 @@ mc_fhl_is_hlink (const file_entry_t * fe)
 inline static gboolean
 mc_fhl_is_link_to_dir (const file_entry_t * fe)
 {
-    return mc_fhl_is_link (fe) && fe->f.link_to_dir;
+    return mc_fhl_is_link (fe) && fe->f.link_to_dir != 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -108,7 +108,7 @@ mc_fhl_is_link_to_dir (const file_entry_t * fe)
 inline static gboolean
 mc_fhl_is_stale_link (const file_entry_t * fe)
 {
-    return mc_fhl_is_link (fe) ? fe->f.stale_link : !mc_fhl_is_file (fe);
+    return mc_fhl_is_link (fe) ? (fe->f.stale_link != 0) : !mc_fhl_is_file (fe);
 }
 
 /* --------------------------------------------------------------------------------------------- */

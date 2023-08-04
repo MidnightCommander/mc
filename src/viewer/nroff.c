@@ -42,8 +42,6 @@
 #include "lib/charsets.h"
 #endif
 
-#include "src/setup.h"          /* option_tab_spacing */
-
 #include "internal.h"
 
 /*** global variables ****************************************************************************/

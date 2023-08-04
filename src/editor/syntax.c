@@ -1425,7 +1425,7 @@ exec_edit_syntax_dialog (const GPtrArray * names, const char *current_syntax)
     Listbox *syntaxlist;
 
     syntaxlist = listbox_window_new (LIST_LINES, MAX_ENTRY_LEN,
-                                        _("Choose syntax highlighting"), NULL);
+                                     _("Choose syntax highlighting"), NULL);
     LISTBOX_APPEND_TEXT (syntaxlist, 'A', _("< Auto >"), NULL, FALSE);
     LISTBOX_APPEND_TEXT (syntaxlist, 'R', _("< Reload Current Syntax >"), NULL, FALSE);
 
@@ -1436,7 +1436,7 @@ exec_edit_syntax_dialog (const GPtrArray * names, const char *current_syntax)
         name = g_ptr_array_index (names, i);
         LISTBOX_APPEND_TEXT (syntaxlist, 0, name, NULL, FALSE);
         if (current_syntax != NULL && strcmp (name, current_syntax) == 0)
-            listbox_select_entry (syntaxlist->list, i + N_DFLT_ENTRIES);
+            listbox_set_current (syntaxlist->list, i + N_DFLT_ENTRIES);
     }
 
     return listbox_run (syntaxlist);

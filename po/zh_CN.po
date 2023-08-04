@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-03-19 20:39+0300\n"
+"POT-Creation-Date: 2023-08-04 21:17+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Gurbuzguven <6mehmet6@gmail.com>, 2021\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/mc/mc/language/"
@@ -2158,13 +2158,12 @@ msgstr "杀死(&K)"
 msgid "Background jobs"
 msgstr "后台任务"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chdir to \"%s\"\n"
+"Cannot change directory to\n"
+"%s\n"
 "%s"
-msgstr ""
-"无法进入目录“%s”\n"
-"%s"
+msgstr "无法改变目录"
 
 msgid "Secure deletion"
 msgstr ""
@@ -2358,9 +2357,6 @@ msgstr "输入机器名 (F1 查看细节): "
 msgid "Files tagged, want to cd?"
 msgstr "文件已经标记，要更改目录吗?"
 
-msgid "Cannot change directory"
-msgstr "无法改变目录"
-
 #, c-format
 msgid "Link %s to:"
 msgstr "链接 %s 到: "
@@ -2375,10 +2371,6 @@ msgstr "链接: %s"
 #, c-format
 msgid "symlink: %s"
 msgstr "符号链接: %s"
-
-#, c-format
-msgid "Cannot chdir to \"%s\""
-msgstr "无法进入目录“%s”"
 
 msgid "View file"
 msgstr "查看文件"
@@ -4456,13 +4448,16 @@ msgstr ""
 "无法打开 tar 档案文件\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "%s\n"
-"doesn't look like a tar archive."
+"doesn't look like a tar archive"
 msgstr ""
 "%s\n"
 "不是 tar 档案文件。"
+
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
 
 msgid "undelfs: error"
 msgstr "undelfs: 错误"
@@ -4655,6 +4650,18 @@ msgstr "从头继续搜索?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "无法获取 /ftp://some.host/editme.txt 的本地副本"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot chdir to \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "无法进入目录“%s”\n"
+#~ "%s"
+
+#, c-format
+#~ msgid "Cannot chdir to \"%s\""
+#~ msgstr "无法进入目录“%s”"
 
 #, c-format
 #~ msgid " %s%s file error"

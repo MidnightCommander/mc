@@ -131,7 +131,7 @@ listbox_run (Listbox * l)
     int val = -1;
 
     if (dlg_run (l->dlg) != B_CANCEL)
-        val = l->list->pos;
+        val = l->list->current;
     widget_destroy (WIDGET (l->dlg));
     g_free (l);
     return val;
@@ -152,12 +152,13 @@ listbox_run_with_data (Listbox * l, const void *select)
     void *val = NULL;
 
     if (select != NULL)
-        listbox_select_entry (l->list, listbox_search_data (l->list, select));
+        listbox_set_current (l->list, listbox_search_data (l->list, select));
 
     if (dlg_run (l->dlg) != B_CANCEL)
     {
         WLEntry *e;
-        e = listbox_get_nth_item (l->list, l->list->pos);
+
+        e = listbox_get_nth_entry (l->list, l->list->current);
         if (e != NULL)
         {
             /* The assert guards against returning a soon-to-be deallocated

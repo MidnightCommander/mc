@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-03-19 20:39+0300\n"
+"POT-Creation-Date: 2023-08-04 21:17+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Andrij Mizyk <andm1zyk@proton.me>, 2022\n"
 "Language-Team: Ukrainian (http://www.transifex.com/mc/mc/language/uk/)\n"
@@ -2174,13 +2174,12 @@ msgstr "&Завершити"
 msgid "Background jobs"
 msgstr "Фонові завдання"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chdir to \"%s\"\n"
+"Cannot change directory to\n"
+"%s\n"
 "%s"
-msgstr ""
-"Не вдалося змінити каталог на «%s»\n"
-"%s "
+msgstr "Не вдалося змінити каталог"
 
 msgid "Secure deletion"
 msgstr "Безпечне видалення"
@@ -2378,9 +2377,6 @@ msgstr "Введіть назву машини (F1 — подробиці):"
 msgid "Files tagged, want to cd?"
 msgstr "Відмічено файли, змінити каталог?"
 
-msgid "Cannot change directory"
-msgstr "Не вдалося змінити каталог"
-
 #, c-format
 msgid "Link %s to:"
 msgstr "Створити посилання на %s:"
@@ -2395,10 +2391,6 @@ msgstr "посилання: %s"
 #, c-format
 msgid "symlink: %s"
 msgstr "символьне посилання: %s"
-
-#, c-format
-msgid "Cannot chdir to \"%s\""
-msgstr "Не вдалося перейти в каталог «%s»"
 
 msgid "View file"
 msgstr "Перегляд файлу"
@@ -4530,13 +4522,16 @@ msgstr ""
 "Не вдалося відкрити архів tar\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "%s\n"
-"doesn't look like a tar archive."
+"doesn't look like a tar archive"
 msgstr ""
 "Файл %s\n"
 "не схожий на архів tar."
+
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
 
 msgid "undelfs: error"
 msgstr "undelfs: сталася помилка"
@@ -4730,6 +4725,18 @@ msgstr "Почати спочатку?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не вдалося отримати локальну копію /ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot chdir to \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Не вдалося змінити каталог на «%s»\n"
+#~ "%s "
+
+#, c-format
+#~ msgid "Cannot chdir to \"%s\""
+#~ msgstr "Не вдалося перейти в каталог «%s»"
 
 #~ msgid "Cannot change attributes on non-local filesystems"
 #~ msgstr "Не можливо змінити атрибути на нелокальних файлових системах"

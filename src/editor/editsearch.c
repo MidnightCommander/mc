@@ -136,7 +136,10 @@ edit_dialog_search_show (WEdit * edit)
 
         tmp = str_convert_to_input (search_text);
         g_free (search_text);
-        search_text = g_string_free (tmp, FALSE);
+        if (tmp != NULL)
+            search_text = g_string_free (tmp, FALSE);
+        else
+            search_text = g_strdup ("");
     }
 #endif
 
@@ -556,9 +559,12 @@ edit_replace_cmd__conv_to_input (char *str)
     GString *tmp;
 
     tmp = str_convert_to_input (str);
-    if (tmp->len != 0)
-        return g_string_free (tmp, FALSE);
-    g_string_free (tmp, TRUE);
+    if (tmp != NULL)
+    {
+        if (tmp->len != 0)
+            return g_string_free (tmp, FALSE);
+        g_string_free (tmp, TRUE);
+    }
 #endif
     return g_strdup (str);
 }

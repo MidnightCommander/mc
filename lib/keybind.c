@@ -438,7 +438,7 @@ keybind_cmd_bind (GArray * keymap, const char *keybind, long action)
     char *caption = NULL;
     long key;
 
-    key = lookup_key (keybind, &caption);
+    key = tty_keyname_to_keycode (keybind, &caption);
     keymap_add (keymap, key, action, caption);
     g_free (caption);
 }

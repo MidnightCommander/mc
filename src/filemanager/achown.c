@@ -492,7 +492,7 @@ chl_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *dat
                 WDialog *h = DIALOG (w);
 
                 h->ret_value = parm;
-                dlg_stop (h);
+                dlg_close (h);
             }
             break;
         default:
@@ -531,7 +531,7 @@ user_group_button_cb (WButton * button, int action)
 
         gboolean is_owner = (f_pos == BUTTONS_PERM - 2);
         const char *title;
-        int lxx, b_pos;
+        int lxx, b_current;
         WDialog *chl_dlg;
         WListbox *chl_list;
         int result;
@@ -582,16 +582,16 @@ user_group_button_cb (WButton * button, int action)
             fe = listbox_search_text (chl_list, get_group (sf_stat.st_gid));
         }
 
-        listbox_select_entry (chl_list, fe);
+        listbox_set_current (chl_list, fe);
 
-        b_pos = chl_list->pos;
+        b_current = chl_list->current;
         group_add_widget (GROUP (chl_dlg), chl_list);
 
         result = dlg_run (chl_dlg);
 
         if (result != B_CANCEL)
         {
-            if (b_pos != chl_list->pos)
+            if (b_current != chl_list->current)
             {
                 gboolean ok = FALSE;
                 char *text;
@@ -835,7 +835,7 @@ advanced_chown_done (gboolean need_update)
 static const GString *
 next_file (const WPanel * panel)
 {
-    while (!panel->dir.list[current_file].f.marked)
+    while (panel->dir.list[current_file].f.marked == 0)
         current_file++;
 
     return panel->dir.list[current_file].fname;
@@ -1021,7 +1021,7 @@ advanced_chown_cmd (WPanel * panel)
         if (panel->marked != 0)
             fname = next_file (panel);  /* next marked file */
         else
-            fname = selection (panel)->fname;   /* single file */
+            fname = panel_current_entry (panel)->fname; /* single file */
 
         vpath = vfs_path_from_str (fname->str);
 

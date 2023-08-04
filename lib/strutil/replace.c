@@ -43,77 +43,62 @@
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-static GString *
-str_ptr_array_join (const GPtrArray * str_splints)
-{
-    GString *return_str;
-    guint i;
-
-    return_str = g_string_sized_new (32);
-    for (i = 0; i < str_splints->len; i++)
-        g_string_append (return_str, g_ptr_array_index (str_splints, i));
-
-    return return_str;
-}
-
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 /**
  * Replace all substrings 'needle' in string 'haystack' by 'replacement'.
- * If the 'needle' in the 'haystack' will be escaped by backslash,
+ * If the 'needle' in the 'haystack' is escaped by backslash,
  * then this occurrence isn't be replaced.
  *
- * @param haystack    string contains substrings for replacement
- * @param needle      string for search
- * @param replacement string for replace
- * @return newly allocated string with replaced substrings
+ * @param haystack    string contains substrings for replacement. Cannot be NULL.
+ * @param needle      string for search. Cannot be NULL.
+ * @param replacement string for replace. Cannot be NULL.
+ * @return newly allocated string with replaced substrings or NULL if @haystack is empty.
  */
 
 char *
 str_replace_all (const char *haystack, const char *needle, const char *replacement)
 {
-    size_t needle_len;
-    GPtrArray *str_splints;
-    GString *return_str;
+    size_t needle_len, replacement_len;
+    GString *return_str = NULL;
+    char *needle_in_str;
 
     needle_len = strlen (needle);
+    replacement_len = strlen (replacement);
 
-    str_splints = g_ptr_array_new_with_free_func (g_free);
-
-    while (TRUE)
+    while ((needle_in_str = strstr (haystack, needle)) != NULL)
     {
-        char *needle_in_str;
-
-        needle_in_str = strstr (haystack, needle);
-        if (needle_in_str == NULL)
-        {
-            if (*haystack != '\0')
-                g_ptr_array_add (str_splints, g_strdup (haystack));
-            break;
-        }
+        if (return_str == NULL)
+            return_str = g_string_sized_new (32);
 
         if (strutils_is_char_escaped (haystack, needle_in_str))
         {
             char *backslash = needle_in_str - 1;
 
             if (haystack != backslash)
-                g_ptr_array_add (str_splints, g_strndup (haystack, backslash - haystack));
-
-            g_ptr_array_add (str_splints, g_strndup (backslash + 1, needle_in_str - backslash));
+                g_string_append_len (return_str, haystack, backslash - haystack);
+            g_string_append_len (return_str, needle_in_str, needle_in_str - backslash);
             haystack = needle_in_str + 1;
-            continue;
         }
-        if (needle_in_str - haystack > 0)
-            g_ptr_array_add (str_splints, g_strndup (haystack, needle_in_str - haystack));
-        g_ptr_array_add (str_splints, g_strdup (replacement));
-        haystack = needle_in_str + needle_len;
+        else
+        {
+            if (needle_in_str != haystack)
+                g_string_append_len (return_str, haystack, needle_in_str - haystack);
+            g_string_append_len (return_str, replacement, replacement_len);
+            haystack = needle_in_str + needle_len;
+        }
     }
-    return_str = str_ptr_array_join (str_splints);
 
-    g_ptr_array_free (str_splints, TRUE);
+    if (*haystack != '\0')
+    {
+        if (return_str == NULL)
+            return strdup (haystack);
 
-    return g_string_free (return_str, FALSE);
+        g_string_append (return_str, haystack);
+    }
+
+    return (return_str != NULL ? g_string_free (return_str, FALSE) : NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */

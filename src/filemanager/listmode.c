@@ -302,7 +302,7 @@ collect_new_format (void)
     last = NULL;
     for (i = 0;; i++)
     {
-        listbox_select_entry (l_listmode, i);
+        listbox_set_current (l_listmode, i);
         listbox_get_current (l_listmode, &text, &extra);
         if (text == last)
             break;

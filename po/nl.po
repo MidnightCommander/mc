@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-03-19 20:39+0300\n"
+"POT-Creation-Date: 2023-08-04 21:17+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Richard E. van der Luit <nippur@fedoraproject.org>, "
 "2012-2015,2017,2020\n"
@@ -2162,13 +2162,12 @@ msgstr "&Kill"
 msgid "Background jobs"
 msgstr "Achtergrondtaken"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chdir to \"%s\"\n"
+"Cannot change directory to\n"
+"%s\n"
 "%s"
-msgstr ""
-"Veranderen naar map \"%s\" mislukt \n"
-"%s "
+msgstr "Veranderen van map mislukt"
 
 msgid "Secure deletion"
 msgstr "Secure verwijderen"
@@ -2366,9 +2365,6 @@ msgstr "Voer computernaam in (F1 voor details):"
 msgid "Files tagged, want to cd?"
 msgstr "Bestanden gemarkeerd, veranderen van map?"
 
-msgid "Cannot change directory"
-msgstr "Veranderen van map mislukt"
-
 #, c-format
 msgid "Link %s to:"
 msgstr "%s verbinden met:"
@@ -2383,10 +2379,6 @@ msgstr "link: %s"
 #, c-format
 msgid "symlink: %s"
 msgstr "symlink: %s"
-
-#, c-format
-msgid "Cannot chdir to \"%s\""
-msgstr "'chdir' naar %s mislukt"
 
 msgid "View file"
 msgstr "Bestand bekijken"
@@ -4478,11 +4470,14 @@ msgstr ""
 "Openen tar-archief mislukt\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "%s\n"
-"doesn't look like a tar archive."
+"doesn't look like a tar archive"
 msgstr "%s lijkt niet op een tar archief"
+
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
 
 msgid "undelfs: error"
 msgstr "undelfs: fout"
@@ -4667,6 +4662,18 @@ msgstr "Doorgaan vanaf het begin?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan geen lokale versie van /ftp://some.host/editme.txt ophalen"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot chdir to \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Veranderen naar map \"%s\" mislukt \n"
+#~ "%s "
+
+#, c-format
+#~ msgid "Cannot chdir to \"%s\""
+#~ msgstr "'chdir' naar %s mislukt"
 
 #~ msgid "Cannot change attributes on non-local filesystems"
 #~ msgstr "Kan attributen van niet-lokale bestandssystemen niet veranderen"

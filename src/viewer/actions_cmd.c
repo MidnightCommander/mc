@@ -44,7 +44,6 @@
 
 #include <config.h>
 
-#include <errno.h>
 #include <stdlib.h>
 
 #include "lib/global.h"
@@ -194,7 +193,7 @@ mcview_hook (void *v)
 
     mcview_done (view);
     mcview_init (view);
-    mcview_load (view, 0, panel->dir.list[panel->selected].fname->str, 0, 0, 0);
+    mcview_load (view, 0, panel_current_entry (panel)->fname->str, 0, 0, 0);
     mcview_display (view);
 }
 
@@ -274,7 +273,7 @@ mcview_load_next_prev_init (WView * view)
     {
         /* get file list from current panel. Update it each time */
         view->dir = &current_panel->dir;
-        view->dir_idx = &current_panel->selected;
+        view->dir_idx = &current_panel->current;
     }
     else if (view->dir == NULL)
     {
@@ -561,7 +560,7 @@ mcview_execute_cmd (WView * view, long command)
         break;
     case CK_Quit:
         if (!mcview_is_in_panel (view))
-            dlg_stop (DIALOG (WIDGET (view)->owner));
+            dlg_close (DIALOG (WIDGET (view)->owner));
         break;
     case CK_Cancel:
         /* don't close viewer due to SIGINT */
@@ -778,7 +777,7 @@ mcview_dialog_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
         /* don't stop the dialog before final decision */
         widget_set_state (w, WST_ACTIVE, TRUE);
         if (mcview_ok_to_quit (view))
-            dlg_stop (h);
+            dlg_close (h);
         else
             mcview_update (view);
         return MSG_HANDLED;

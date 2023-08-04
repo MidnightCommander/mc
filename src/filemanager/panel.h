@@ -20,7 +20,6 @@
 /*** typedefs(not structures) and defined constants **********************************************/
 
 #define PANEL(x) ((WPanel *)(x))
-#define selection(p) (&(p->dir.list[p->selected]))
 #define DEFAULT_USER_FORMAT "half type name | size | perm"
 
 #define LIST_FORMATS 4
@@ -116,8 +115,8 @@ typedef struct
     int dirs_marked;            /* Count of marked directories */
     uintmax_t total;            /* Bytes in marked files */
 
-    int top_file;               /* The file showed on the top of the panel */
-    int selected;               /* Index to the selected file */
+    int top;                    /* The file shown on the top of the panel */
+    int current;                /* Index to the currently selected file */
 
     GSList *status_format;      /* Mini status format */
     gboolean user_mini_status;  /* Is user_status_format used */
@@ -173,7 +172,7 @@ int set_panel_formats (WPanel * p);
 
 void panel_set_filter (WPanel * panel, const file_filter_t * filter);
 
-void try_to_select (WPanel * panel, const char *name);
+void panel_set_current_by_name (WPanel * panel, const char *name);
 
 void unmark_files (WPanel * panel);
 void select_item (WPanel * panel);
@@ -271,6 +270,14 @@ static inline WPanel *
 panel_sized_new (const char *panel_name, int y, int x, int lines, int cols)
 {
     return panel_sized_with_dir_new (panel_name, y, x, lines, cols, NULL);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static inline file_entry_t *
+panel_current_entry (const WPanel * panel)
+{
+    return &(panel->dir.list[panel->current]);
 }
 
 /* --------------------------------------------------------------------------------------------- */

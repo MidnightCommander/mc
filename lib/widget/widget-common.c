@@ -262,7 +262,7 @@ hotkey_equal (const hotkey_t hotkey1, const hotkey_t hotkey2)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-hotkey_draw (Widget * w, const hotkey_t hotkey, gboolean focused)
+hotkey_draw (const Widget * w, const hotkey_t hotkey, gboolean focused)
 {
     if (hotkey.start[0] != '\0')
     {
@@ -457,7 +457,7 @@ widget_set_size_rect (Widget * w, WRect * r)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-widget_selectcolor (Widget * w, gboolean focused, gboolean hotkey)
+widget_selectcolor (const Widget * w, gboolean focused, gboolean hotkey)
 {
     int color;
     const int *colors;

@@ -3,8 +3,8 @@
  *  \brief Header: shared stuff of widgets
  */
 
-#ifndef MC__WIDGET_INTERNAL_H
-#define MC__WIDGET_INTERNAL_H
+#ifndef MC__WIDGET_COMMON_H
+#define MC__WIDGET_COMMON_H
 
 #include "lib/keybind.h"        /* global_keymap_t */
 #include "lib/tty/mouse.h"
@@ -198,7 +198,7 @@ int hotkey_width (const hotkey_t hotkey);
 /* compare two hotkeys */
 gboolean hotkey_equal (const hotkey_t hotkey1, const hotkey_t hotkey2);
 /* draw hotkey of widget */
-void hotkey_draw (Widget * w, const hotkey_t hotkey, gboolean focused);
+void hotkey_draw (const Widget * w, const hotkey_t hotkey, gboolean focused);
 /* get text of hotkey */
 char *hotkey_get_text (const hotkey_t hotkey);
 
@@ -213,7 +213,7 @@ void widget_adjust_position (widget_pos_flags_t pos_flags, WRect * r);
 void widget_set_size (Widget * w, int y, int x, int lines, int cols);
 void widget_set_size_rect (Widget * w, WRect * r);
 /* select color for widget in dependence of state */
-void widget_selectcolor (Widget * w, gboolean focused, gboolean hotkey);
+void widget_selectcolor (const Widget * w, gboolean focused, gboolean hotkey);
 cb_ret_t widget_draw (Widget * w);
 void widget_erase (Widget * w);
 void widget_set_visibility (Widget * w, gboolean make_visible);
@@ -459,4 +459,4 @@ widget_overlapped (const Widget * a, const Widget * b)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#endif /* MC__WIDGET_INTERNAL_H */
+#endif /* MC__WIDGET_COMMON_H */

@@ -168,7 +168,7 @@ START_PARAMETRIZED_TEST (test_cd, test_cd_ds)
     {
         char *actual_cd_path;
 
-        actual_cd_path = _vfs_get_cwd ();
+        actual_cd_path = vfs_get_cwd ();
         mctest_assert_str_eq (actual_cd_path, data->expected_cd_path);
         g_free (actual_cd_path);
     }

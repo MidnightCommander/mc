@@ -70,12 +70,12 @@ static GHashTable *mc_tty_color__hashtable = NULL;
 static gboolean
 tty_color_free_condition_cb (gpointer key, gpointer value, gpointer user_data)
 {
+    tty_color_pair_t *mc_color_pair = (tty_color_pair_t *) value;
     gboolean is_temp_color;
-    tty_color_pair_t *mc_color_pair;
+
     (void) key;
 
     is_temp_color = user_data != NULL;
-    mc_color_pair = (tty_color_pair_t *) value;
     return (mc_color_pair->is_temp == is_temp_color);
 }
 
@@ -93,12 +93,10 @@ tty_color_free_all (gboolean is_temp_color)
 static gboolean
 tty_color_get_next_cpn_cb (gpointer key, gpointer value, gpointer user_data)
 {
-    size_t cp;
-    tty_color_pair_t *mc_color_pair;
-    (void) key;
+    tty_color_pair_t *mc_color_pair = (tty_color_pair_t *) value;
+    size_t cp = GPOINTER_TO_SIZE (user_data);
 
-    cp = GPOINTER_TO_SIZE (user_data);
-    mc_color_pair = (tty_color_pair_t *) value;
+    (void) key;
 
     return (cp == mc_color_pair->pair_index);
 }
@@ -161,11 +159,11 @@ tty_try_alloc_color_pair2 (const char *fg, const char *bg, const char *attrs,
     tty_color_pair_t *mc_color_pair;
     int ifg, ibg, attr;
 
-    if (fg == NULL || !strcmp (fg, "base"))
+    if (fg == NULL || strcmp (fg, "base") == 0)
         fg = tty_color_defaults__fg;
-    if (bg == NULL || !strcmp (bg, "base"))
+    if (bg == NULL || strcmp (bg, "base") == 0)
         bg = tty_color_defaults__bg;
-    if (attrs == NULL || !strcmp (attrs, "base"))
+    if (attrs == NULL || strcmp (attrs, "base") == 0)
         attrs = tty_color_defaults__attrs;
 
     ifg = tty_color_get_index_by_name (fg);

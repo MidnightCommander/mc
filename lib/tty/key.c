@@ -1451,7 +1451,7 @@ channels_down (void)
  */
 
 long
-lookup_key (const char *name, char **label)
+tty_keyname_to_keycode (const char *name, char **label)
 {
     char **lc_keys, **p;
     char *cname;
@@ -1566,7 +1566,7 @@ lookup_key (const char *name, char **label)
 /* --------------------------------------------------------------------------------------------- */
 
 char *
-lookup_key_by_code (const int keycode)
+tty_keycode_to_keyname (const int keycode)
 {
     /* code without modifier */
     unsigned int k = keycode & ~KEY_M_MASK;

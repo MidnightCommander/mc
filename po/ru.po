@@ -3,32 +3,27 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# Andrew Borodin <aborodin@vmail.ru>, 2011
-# AlexL <loginov.alex.valer@gmail.com>, 2015-2020
 # Alex Tkachenko <alex@bcs.zp.ua>, 1998
-# and Alex Tkachenko <alex@bcs.zp.ua>, 1998
-# Andrei Stepanov, 2023
-# Andrew Borodin <aborodin@vmail.ru>, 2009-2012
-# Andrew V. Samoilov <sav@bcs.zp.ua>, 1999,2014
-# Anton Sergeevich Chumak <nightfast@yahoo.co.uk>, 2005
-# Dimitriy Ryazantcev <DJm00n@mail.ru>, 2015
 # Evgeny Bulgakov <bgav@netvision.net.il>, 1999
-# Ilia Maslakov <il.smind@gmail.com>, 2009
-# Mr GreyWolf, 2016
-# Mr.GreyWolf, 2016
-# NaiLi (aka jamesjames) Rootaerc <theism@mail.ru>, 2012
-# Pavel Suravezhkin, 2022
-# Piotr Drąg <piotrdrag@gmail.com>, 2018
+# Andrew V. Samoilov <sav@bcs.zp.ua>, 1999,2014
 # Sergey Panov <sipan@mit.edu>, 1999
-# Simple88, 2016
-# Simple88, 2016
-# Slava Zanko <slavazanko@gmail.com>, 2009,2011
 # Valek Filippov <frob@df.ru>, 2000
+# Anton Sergeevich Chumak <nightfast@yahoo.co.uk>, 2005
+# Slava Zanko <slavazanko@gmail.com>, 2009,2011
+# Ilia Maslakov <il.smind@gmail.com>, 2009
+# Andrew Borodin <aborodin@vmail.ru>, 2009-2023
+# NaiLi (aka jamesjames) Rootaerc <theism@mail.ru>, 2012
+# AlexL <loginov.alex.valer@gmail.com>, 2015-2020
+# Dimitriy Ryazantcev <DJm00n@mail.ru>, 2015
+# Simple88, 2016
+# Piotr Drąg <piotrdrag@gmail.com>, 2018
+# Pavel Suravezhkin, 2022
+# Andrei Stepanov, 2023
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-03-19 20:39+0300\n"
+"POT-Creation-Date: 2023-08-04 21:17+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Andrei Stepanov, 2023\n"
 "Language-Team: Russian (http://www.transifex.com/mc/mc/language/ru/)\n"
@@ -2190,13 +2185,12 @@ msgstr "&Снять"
 msgid "Background jobs"
 msgstr "Фоновые задания"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chdir to \"%s\"\n"
+"Cannot change directory to\n"
+"%s\n"
 "%s"
-msgstr ""
-"Не удалось перейти в \"%s\"\n"
-"%s"
+msgstr "Не удалось сменить каталог"
 
 msgid "Secure deletion"
 msgstr "Надёжное удаление"
@@ -2394,9 +2388,6 @@ msgstr "Введите имя машины (детали по F1):"
 msgid "Files tagged, want to cd?"
 msgstr "Файлы помечены, сменить каталог?"
 
-msgid "Cannot change directory"
-msgstr "Не удалось сменить каталог"
-
 #, c-format
 msgid "Link %s to:"
 msgstr "Создать ссылку с %s на:"
@@ -2411,10 +2402,6 @@ msgstr "ссылка: %s"
 #, c-format
 msgid "symlink: %s"
 msgstr "символическая ссылка: %s"
-
-#, c-format
-msgid "Cannot chdir to \"%s\""
-msgstr "Не удалось перейти в \"%s\""
 
 msgid "View file"
 msgstr "Просмотр файла"
@@ -2948,7 +2935,7 @@ msgstr "При&остановить"
 msgid "Con&tinue"
 msgstr "Продолжить"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%d:%02d:%02d"
 msgstr "%d:%02d:%02d"
 
@@ -4176,9 +4163,8 @@ msgstr ""
 "Неожиданный конец файла\n"
 "%s"
 
-#, fuzzy
 msgid "Inconsistent archive"
-msgstr "Несогласованный архив tar"
+msgstr "Несогласованный архив"
 
 #, c-format
 msgid ""
@@ -4543,10 +4529,13 @@ msgstr ""
 #, c-format
 msgid ""
 "%s\n"
-"doesn't look like a tar archive."
+"doesn't look like a tar archive"
 msgstr ""
 "%s\n"
 "не похож на архив tar."
+
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
 
 msgid "undelfs: error"
 msgstr "undelfs: ошибка"
@@ -4739,17 +4728,3 @@ msgstr "Продолжить с начала?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не удалось получить локальную копию /ftp://some.host/editme.txt"
-
-#~ msgid "Cannot change attributes on non-local filesystems"
-#~ msgstr "Не удалось изменить атрибуты на нелокальной файловой системе"
-
-#~ msgid "Attributes: not supported"
-#~ msgstr "Атрибуты: не поддерживаются"
-
-#, c-format
-#~ msgid " %s%s file error"
-#~ msgstr "ошибка файла %s%s"
-
-#, c-format
-#~ msgid "%s file error"
-#~ msgstr "ошибка файла %s"

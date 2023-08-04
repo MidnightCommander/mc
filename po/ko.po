@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-03-19 20:39+0300\n"
+"POT-Creation-Date: 2023-08-04 21:17+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Junghee Lee <daemul72@gmail.com>, 2022\n"
 "Language-Team: Korean (http://www.transifex.com/mc/mc/language/ko/)\n"
@@ -2162,13 +2162,12 @@ msgstr "죽임(&K)"
 msgid "Background jobs"
 msgstr "백그라운드 작업"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chdir to \"%s\"\n"
+"Cannot change directory to\n"
+"%s\n"
 "%s"
-msgstr ""
-"\"%s\"로 디렉터리 변경할 수 없습니다\n"
-"%s"
+msgstr "디렉터리를 변경할 수 없습니다"
 
 msgid "Secure deletion"
 msgstr "안전한 삭제"
@@ -2366,9 +2365,6 @@ msgstr "호스트 이름 입력(자세한 내용은 F1):"
 msgid "Files tagged, want to cd?"
 msgstr "파일 태그됨, 디렉터리 변경을 하시겠습니까?"
 
-msgid "Cannot change directory"
-msgstr "디렉터리를 변경할 수 없습니다"
-
 #, c-format
 msgid "Link %s to:"
 msgstr "%s 링크 대상:"
@@ -2383,10 +2379,6 @@ msgstr "링크: %s"
 #, c-format
 msgid "symlink: %s"
 msgstr "심볼릭링크: %s"
-
-#, c-format
-msgid "Cannot chdir to \"%s\""
-msgstr "%s로 디렉터리 변경을 할 수 없습니다"
 
 msgid "View file"
 msgstr "파일 보기"
@@ -4494,13 +4486,16 @@ msgstr ""
 "tar 압축파일을 열 수 없습니다\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "%s\n"
-"doesn't look like a tar archive."
+"doesn't look like a tar archive"
 msgstr ""
 "%s\n"
 " tar 압축파일처럼 보이지 않음."
+
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
 
 msgid "undelfs: error"
 msgstr "unelfs: 오류"
@@ -4693,6 +4688,18 @@ msgstr "처음부터 계속하시겠습니까?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "/ftp://some.host/editme.txt의 로컬 복사본을 가져올 수 없습니다"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot chdir to \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "\"%s\"로 디렉터리 변경할 수 없습니다\n"
+#~ "%s"
+
+#, c-format
+#~ msgid "Cannot chdir to \"%s\""
+#~ msgstr "%s로 디렉터리 변경을 할 수 없습니다"
 
 #~ msgid "Cannot change attributes on non-local filesystems"
 #~ msgstr "로컬이 아닌 파일 시스템의 속성을 변경할 수 없습니다"

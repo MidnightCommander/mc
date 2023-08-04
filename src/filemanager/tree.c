@@ -66,6 +66,7 @@
 #include "treestore.h"
 #include "cmd.h"
 #include "filegui.h"
+#include "cd.h"                 /* cd_error_message() */
 
 #include "tree.h"
 
@@ -593,8 +594,7 @@ tree_chdir_sel (WTree * tree)
         if (panel_cd (p, tree->selected_ptr->name, cd_exact))
             select_item (p);
         else
-            message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\"\n%s"),
-                     vfs_path_as_str (tree->selected_ptr->name), unix_error_string (errno));
+            cd_error_message (vfs_path_as_str (tree->selected_ptr->name));
 
         widget_draw (WIDGET (p));
         (void) change_panel ();
@@ -605,7 +605,7 @@ tree_chdir_sel (WTree * tree)
         WDialog *h = DIALOG (WIDGET (tree)->owner);
 
         h->ret_value = B_ENTER;
-        dlg_stop (h);
+        dlg_close (h);
     }
 }
 
@@ -745,10 +745,6 @@ tree_move (WTree * tree, const char *default_dest)
 {
     char msg[BUF_MEDIUM];
     char *dest;
-    struct stat buf;
-    file_op_context_t *ctx;
-    file_op_total_context_t *tctx;
-    vfs_path_t *dest_vpath = NULL;
 
     if (tree->selected_ptr == NULL)
         return;
@@ -759,33 +755,34 @@ tree_move (WTree * tree, const char *default_dest)
         input_expand_dialog (Q_ ("DialogTitle|Move"), msg, MC_HISTORY_FM_TREE_MOVE, default_dest,
                              INPUT_COMPLETE_FILENAMES | INPUT_COMPLETE_CD);
 
-    if (dest == NULL || *dest == '\0')
-        goto ret;
-
-    dest_vpath = vfs_path_from_str (dest);
-
-    if (mc_stat (dest_vpath, &buf))
+    if (dest != NULL && *dest != '\0')
     {
-        message (D_ERROR, MSG_ERROR, _("Cannot stat the destination\n%s"),
-                 unix_error_string (errno));
-        goto ret;
+        vfs_path_t *dest_vpath;
+        struct stat buf;
+
+        dest_vpath = vfs_path_from_str (dest);
+
+        if (mc_stat (dest_vpath, &buf))
+            message (D_ERROR, MSG_ERROR, _("Cannot stat the destination\n%s"),
+                     unix_error_string (errno));
+        else if (!S_ISDIR (buf.st_mode))
+            file_error (TRUE, _("Destination \"%s\" must be a directory\n%s"), dest);
+        else
+        {
+            file_op_context_t *ctx;
+            file_op_total_context_t *tctx;
+
+            ctx = file_op_context_new (OP_MOVE);
+            tctx = file_op_total_context_new ();
+            file_op_context_create_ui (ctx, FALSE, FILEGUI_DIALOG_ONE_ITEM);
+            move_dir_dir (tctx, ctx, vfs_path_as_str (tree->selected_ptr->name), dest);
+            file_op_total_context_destroy (tctx);
+            file_op_context_destroy (ctx);
+        }
+
+        vfs_path_free (dest_vpath, TRUE);
     }
 
-    if (!S_ISDIR (buf.st_mode))
-    {
-        file_error (TRUE, _("Destination \"%s\" must be a directory\n%s"), dest);
-        goto ret;
-    }
-
-    ctx = file_op_context_new (OP_MOVE);
-    tctx = file_op_total_context_new ();
-    file_op_context_create_ui (ctx, FALSE, FILEGUI_DIALOG_ONE_ITEM);
-    move_dir_dir (tctx, ctx, vfs_path_as_str (tree->selected_ptr->name), dest);
-    file_op_total_context_destroy (tctx);
-    file_op_context_destroy (ctx);
-
-  ret:
-    vfs_path_free (dest_vpath, TRUE);
     g_free (dest);
 }
 
@@ -1048,7 +1045,7 @@ tree_execute_cmd (WTree * tree, long command)
         break;
     case CK_Quit:
         if (!tree->is_panel)
-            dlg_stop (DIALOG (WIDGET (tree)->owner));
+            dlg_close (DIALOG (WIDGET (tree)->owner));
         return res;
     default:
         res = MSG_NOT_HANDLED;

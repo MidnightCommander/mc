@@ -34,7 +34,6 @@
 #include <config.h>
 
 #include <ctype.h>
-#include <errno.h>
 #include <locale.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -139,10 +138,10 @@ static menu_t *left_menu, *right_menu;
 static void
 stop_dialogs (void)
 {
-    dlg_stop (filemanager);
+    dlg_close (filemanager);
 
     if (top_dlg != NULL)
-        dlg_stop (DIALOG (top_dlg->data));
+        dlg_close (DIALOG (top_dlg->data));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -152,7 +151,7 @@ treebox_cmd (void)
 {
     char *sel_dir;
 
-    sel_dir = tree_box (selection (current_panel)->fname->str);
+    sel_dir = tree_box (panel_current_entry (current_panel)->fname->str);
     if (sel_dir != NULL)
     {
         vfs_path_t *sel_vdir;
@@ -466,11 +465,10 @@ check_panel_timestamp (const WPanel * panel, panel_view_mode_t mode, struct vfs_
 {
     if (mode == view_listing)
     {
-        const vfs_path_element_t *path_element;
+        const struct vfs_class *me;
 
-        path_element = vfs_path_get_by_index (panel->cwd_vpath, -1);
-
-        if (path_element->class != vclass)
+        me = vfs_path_get_last_path_vfs (panel->cwd_vpath);
+        if (me != vclass)
             return FALSE;
 
         if (vfs_getid (panel->cwd_vpath) != id)
@@ -724,16 +722,20 @@ midnight_put_panel_path (WPanel * panel)
 static void
 put_link (WPanel * panel)
 {
+    const file_entry_t *fe;
+
     if (!command_prompt)
         return;
-    if (S_ISLNK (selection (panel)->st.st_mode))
+
+    fe = panel_current_entry (panel);
+
+    if (S_ISLNK (fe->st.st_mode))
     {
         char buffer[MC_MAXPATHLEN];
         vfs_path_t *vpath;
         int i;
 
-        vpath =
-            vfs_path_append_new (panel->cwd_vpath, selection (panel)->fname->str, (char *) NULL);
+        vpath = vfs_path_append_new (panel->cwd_vpath, fe->fname->str, (char *) NULL);
         i = mc_readlink (vpath, buffer, sizeof (buffer) - 1);
         vfs_path_free (vpath, TRUE);
 
@@ -783,7 +785,7 @@ put_current_selected (void)
         tmp = vfs_path_as_str (selected_name);
     }
     else
-        tmp = selection (current_panel)->fname->str;
+        tmp = panel_current_entry (current_panel)->fname->str;
 
     command_insert (cmdline, tmp, TRUE);
 }
@@ -801,15 +803,12 @@ put_tagged (WPanel * panel)
         int i;
 
         for (i = 0; i < panel->dir.len; i++)
-        {
-            if (panel->dir.list[i].f.marked)
+            if (panel->dir.list[i].f.marked != 0)
                 command_insert (cmdline, panel->dir.list[i].fname->str, TRUE);
-        }
     }
     else
-    {
-        command_insert (cmdline, panel->dir.list[panel->selected].fname->str, TRUE);
-    }
+        command_insert (cmdline, panel_current_entry (panel)->fname->str, TRUE);
+
     input_enable_update (cmdline);
 }
 
@@ -864,7 +863,7 @@ setup_dummy_mc (void)
     char *d;
     int ret;
 
-    d = _vfs_get_cwd ();
+    d = vfs_get_cwd ();
     setup_mc ();
     vpath = vfs_path_from_str (d);
     ret = mc_chdir (vpath);
@@ -1027,7 +1026,7 @@ show_editor_viewer_history (void)
                 d = g_path_get_dirname (s);
                 s_vpath = vfs_path_from_str (d);
                 panel_cd (current_panel, s_vpath, cd_exact);
-                try_to_select (current_panel, s);
+                panel_set_current_by_name (current_panel, s);
                 g_free (d);
             }
         }

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-03-19 20:39+0300\n"
+"POT-Creation-Date: 2023-08-04 21:17+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Serdar Sağlam <teknomobil@msn.com>, 2019-2020\n"
 "Language-Team: Turkish (http://www.transifex.com/mc/mc/language/tr/)\n"
@@ -2155,13 +2155,12 @@ msgstr "&Öldür"
 msgid "Background jobs"
 msgstr "Artalan İşleri"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chdir to \"%s\"\n"
+"Cannot change directory to\n"
+"%s\n"
 "%s"
-msgstr ""
-" \"%s\" dizinine geçilemedi \n"
-" %s "
+msgstr "Dizin değiştirilemedi"
 
 msgid "Secure deletion"
 msgstr ""
@@ -2355,9 +2354,6 @@ msgstr "makina ismi (ayrıntılar için F1):"
 msgid "Files tagged, want to cd?"
 msgstr "Dosyalar işaretli, dizin değişsin mi?"
 
-msgid "Cannot change directory"
-msgstr "Dizin değiştirilemedi"
-
 #, c-format
 msgid "Link %s to:"
 msgstr "%s bağı:"
@@ -2372,10 +2368,6 @@ msgstr "bağ: %s"
 #, c-format
 msgid "symlink: %s"
 msgstr "sembağ: %s"
-
-#, c-format
-msgid "Cannot chdir to \"%s\""
-msgstr "\"%s dizinine geçilemedi"
 
 msgid "View file"
 msgstr "Dosyayı görüntüle"
@@ -4457,13 +4449,16 @@ msgstr ""
 "%s\n"
 "tar arşivini açılamadı"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "%s\n"
-"doesn't look like a tar archive."
+"doesn't look like a tar archive"
 msgstr ""
 "%s\n"
 "tar arşivi gibi görünmüyor."
+
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
 
 msgid "undelfs: error"
 msgstr "undelfs: hata"
@@ -4656,6 +4651,18 @@ msgstr "Başından devam edilsin mi?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr " /ftp://some.host/editme.txt 'in yerel kopyası alınamadı"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot chdir to \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ " \"%s\" dizinine geçilemedi \n"
+#~ " %s "
+
+#, c-format
+#~ msgid "Cannot chdir to \"%s\""
+#~ msgstr "\"%s dizinine geçilemedi"
 
 #, c-format
 #~ msgid " %s%s file error"

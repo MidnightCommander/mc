@@ -287,7 +287,7 @@ chown_done (gboolean need_update)
 static const GString *
 next_file (const WPanel * panel)
 {
-    while (!panel->dir.list[current_file].f.marked)
+    while (panel->dir.list[current_file].f.marked == 0)
         current_file++;
 
     return panel->dir.list[current_file].fname;
@@ -423,7 +423,7 @@ chown_cmd (WPanel * panel)
         if (panel->marked != 0)
             fname = next_file (panel);  /* next marked file */
         else
-            fname = selection (panel)->fname;   /* single file */
+            fname = panel_current_entry (panel)->fname; /* single file */
 
         vpath = vfs_path_from_str (fname->str);
 
@@ -436,8 +436,8 @@ chown_cmd (WPanel * panel)
         ch_dlg = chown_dlg_create (panel);
 
         /* select in listboxes */
-        listbox_select_entry (l_user, listbox_search_text (l_user, get_owner (sf_stat.st_uid)));
-        listbox_select_entry (l_group, listbox_search_text (l_group, get_group (sf_stat.st_gid)));
+        listbox_set_current (l_user, listbox_search_text (l_user, get_owner (sf_stat.st_uid)));
+        listbox_set_current (l_group, listbox_search_text (l_group, get_group (sf_stat.st_gid)));
 
         chown_label (0, str_trunc (fname->str, GW - 4));
         chown_label (1, str_trunc (get_owner (sf_stat.st_uid), GW - 4));

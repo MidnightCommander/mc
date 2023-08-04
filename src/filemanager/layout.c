@@ -46,7 +46,7 @@
 #include "lib/tty/key.h"
 #include "lib/tty/mouse.h"
 #include "lib/mcconfig.h"
-#include "lib/vfs/vfs.h"        /* For _vfs_get_cwd () */
+#include "lib/vfs/vfs.h"        /* vfs_get_cwd () */
 #include "lib/strutil.h"
 #include "lib/widget.h"
 #include "lib/event.h"
@@ -1173,7 +1173,7 @@ create_panel (int num, panel_view_mode_t type)
     /* Restoring saved path from panels.ini for nonlist panel */
     /* when it's first creation (for example view_info) */
     if (old_widget == NULL && type != view_listing)
-        panels[num].last_saved_dir = _vfs_get_cwd ();
+        panels[num].last_saved_dir = vfs_get_cwd ();
 
     switch (type)
     {
@@ -1200,7 +1200,7 @@ create_panel (int num, panel_view_mode_t type)
         new_widget = WIDGET (mcview_new (r.y, r.x, r.lines, r.cols, TRUE));
         the_other_panel = PANEL (panels[the_other].widget);
         if (the_other_panel != NULL)
-            file_name = the_other_panel->dir.list[the_other_panel->selected].fname->str;
+            file_name = panel_current_entry (the_other_panel)->fname->str;
         else
             file_name = "";
 
@@ -1299,8 +1299,8 @@ swap_panels (void)
         panelswap (marked);
         panelswap (dirs_marked);
         panelswap (total);
-        panelswap (top_file);
-        panelswap (selected);
+        panelswap (top);
+        panelswap (current);
         panelswap (is_panelized);
         panelswap (panelized_descr);
         panelswap (dir_stat);

@@ -423,7 +423,7 @@ edit_dialog_command_execute (WDialog * h, long command)
         /* if there are no opened files anymore, close MC editor */
         if (edit_widget_is_editor (CONST_WIDGET (g->current->data)) &&
             edit_close_cmd (EDIT (g->current->data)) && edit_find_editor (h) == NULL)
-            dlg_stop (h);
+            dlg_close (h);
         break;
     case CK_Help:
         edit_help ();
@@ -441,7 +441,7 @@ edit_dialog_command_execute (WDialog * h, long command)
             if (edit_widget_is_editor (w) && EDIT (w)->drag_state != MCEDIT_DRAG_NONE)
                 edit_restore_size (EDIT (w));
             else if (command == CK_Quit)
-                dlg_stop (h);
+                dlg_close (h);
         }
         break;
     case CK_About:
@@ -662,7 +662,7 @@ edit_quit (WDialog * h)
 
     /* if all files were checked, quit editor */
     if (me == NULL)
-        dlg_stop (h);
+        dlg_close (h);
 
     g_slist_free (m);
 }

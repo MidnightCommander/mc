@@ -121,11 +121,11 @@ panelize_entry_add_to_listbox (gpointer data, gpointer user_data)
 static void
 update_command (void)
 {
-    if (l_panelize->pos != last_listitem)
+    if (l_panelize->current != last_listitem)
     {
         panelize_entry_t *data = NULL;
 
-        last_listitem = l_panelize->pos;
+        last_listitem = l_panelize->current;
         listbox_get_current (l_panelize, NULL, (void **) &data);
         input_assign_text (pname, data->command);
         pname->point = 0;
@@ -210,7 +210,7 @@ external_panelize_init (void)
 
     l_panelize = listbox_new (y, UX + 1, 10, panelize_cols - UX * 2 - 2, FALSE, NULL);
     g_slist_foreach (panelize, panelize_entry_add_to_listbox, NULL);
-    listbox_select_entry (l_panelize, listbox_search_text (l_panelize, _("Other command")));
+    listbox_set_current (l_panelize, listbox_search_text (l_panelize, _("Other command")));
     group_add_widget (g, l_panelize);
 
     y += WIDGET (l_panelize)->rect.lines + 1;
@@ -299,7 +299,7 @@ remove_from_panelize (panelize_entry_t * entry)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-do_external_panelize (char *command)
+do_external_panelize (const char *command)
 {
     dir_list *list = &current_panel->dir;
     mc_pipe_t *external;
@@ -427,7 +427,7 @@ do_external_panelize (char *command)
     current_panel->is_panelized = TRUE;
     panel_panelize_absolutize_if_needed (current_panel);
 
-    try_to_select (current_panel, NULL);
+    panel_set_current_by_name (current_panel, NULL);
     panel_re_sort (current_panel);
     rotate_dash (FALSE);
 }

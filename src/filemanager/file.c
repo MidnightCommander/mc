@@ -559,35 +559,36 @@ make_symlink (file_op_context_t * ctx, const vfs_path_t * src_vpath, const vfs_p
         r = strrchr (src_path, PATH_SEP);
         if (r != NULL)
         {
-            char *p;
+            size_t slen;
+            GString *p;
             vfs_path_t *q;
 
-            p = g_strndup (src_path, r - src_path + 1);
+            slen = r - src_path + 1;
+
+            p = g_string_sized_new (slen + len);
+            g_string_append_len (p, src_path, slen);
+
             if (g_path_is_absolute (dst_path))
                 q = vfs_path_from_str_flags (dst_path, VPF_NO_CANON);
             else
-                q = vfs_path_build_filename (p, dst_path, (char *) NULL);
+                q = vfs_path_build_filename (p->str, dst_path, (char *) NULL);
 
             if (vfs_path_tokens_count (q) > 1)
             {
-                char *s;
+                char *s = NULL;
                 vfs_path_t *tmp_vpath1, *tmp_vpath2;
 
+                g_string_append_len (p, link_target, len);
                 tmp_vpath1 = vfs_path_vtokens_get (q, -1, 1);
-                s = g_strconcat (p, link_target, (char *) NULL);
-                g_strlcpy (link_target, s, sizeof (link_target));
-                g_free (s);
-                tmp_vpath2 = vfs_path_from_str (link_target);
+                tmp_vpath2 = vfs_path_from_str (p->str);
                 s = diff_two_paths (tmp_vpath1, tmp_vpath2);
-                vfs_path_free (tmp_vpath1, TRUE);
                 vfs_path_free (tmp_vpath2, TRUE);
-                if (s != NULL)
-                {
-                    g_strlcpy (link_target, s, sizeof (link_target));
-                    g_free (s);
-                }
+                vfs_path_free (tmp_vpath1, TRUE);
+                g_strlcpy (link_target, s != NULL ? s : p->str, sizeof (link_target));
+                g_free (s);
             }
-            g_free (p);
+
+            g_string_free (p, TRUE);
             vfs_path_free (q, TRUE);
         }
     }
@@ -1574,7 +1575,7 @@ static void
 erase_dir_after_copy (file_op_total_context_t * tctx, file_op_context_t * ctx,
                       const vfs_path_t * vpath, FileProgressStatus * status)
 {
-    if (ctx->erase_at_end)
+    if (ctx->erase_at_end && erase_list != NULL)
     {
         /* Reset progress count before delete to avoid counting files twice */
         tctx->progress_count = tctx->prev_progress_count;
@@ -1792,11 +1793,11 @@ panel_get_file (const WPanel * panel)
         int i;
 
         for (i = 0; i < panel->dir.len; i++)
-            if (panel->dir.list[i].f.marked)
+            if (panel->dir.list[i].f.marked != 0)
                 return panel->dir.list[i].fname->str;
     }
 
-    return panel->dir.list[panel->selected].fname->str;
+    return panel_current_entry (panel)->fname->str;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1808,7 +1809,7 @@ check_single_entry (const WPanel * panel, gboolean force_single, struct stat *sr
     gboolean ok;
 
     if (force_single)
-        source = selection (panel)->fname->str;
+        source = panel_current_entry (panel)->fname->str;
     else
         source = panel_get_file (panel);
 
@@ -2918,7 +2919,7 @@ copy_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const cha
     }
 
     lp = g_new0 (struct link, 1);
-    lp->vfs = vfs_path_get_by_index (src_vpath, -1)->class;
+    lp->vfs = vfs_path_get_last_path_vfs (src_vpath);
     lp->ino = src_stat.st_ino;
     lp->dev = src_stat.st_dev;
     parent_dirs = g_slist_prepend (parent_dirs, lp);
@@ -2994,7 +2995,7 @@ copy_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const cha
 
         lp = g_new0 (struct link, 1);
         mc_stat (dst_vpath, &dst_stat);
-        lp->vfs = vfs_path_get_by_index (dst_vpath, -1)->class;
+        lp->vfs = vfs_path_get_last_path_vfs (dst_vpath);
         lp->ino = dst_stat.st_ino;
         lp->dev = dst_stat.st_dev;
         dest_dirs = g_slist_prepend (dest_dirs, lp);
@@ -3276,7 +3277,7 @@ compute_dir_size (const vfs_path_t * dirname_vpath, dirsize_status_msg_t * sm,
 /**
  * panel_operate:
  *
- * Performs one of the operations on the selection on the source_panel
+ * Performs one of the operations on the current on the source_panel
  * (copy, delete, move).
  *
  * Returns TRUE if did change the directory
@@ -3380,7 +3381,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
     {
         if (operation == OP_DELETE)
             dialog_type = FILEGUI_DIALOG_DELETE_ITEM;
-        else if (single_entry && S_ISDIR (selection (panel)->st.st_mode))
+        else if (single_entry && S_ISDIR (panel_current_entry (panel)->st.st_mode))
             dialog_type = FILEGUI_DIALOG_MULTI_ITEM;
         else if (single_entry || force_single)
             dialog_type = FILEGUI_DIALOG_ONE_ITEM;
@@ -3461,7 +3462,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
             {
                 const char *source2;
 
-                if (!panel->dir.list[i].f.marked)
+                if (panel->dir.list[i].f.marked == 0)
                     continue;   /* Skip the unmarked ones */
 
                 source2 = panel->dir.list[i].fname->str;

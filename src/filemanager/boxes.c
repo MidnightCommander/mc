@@ -234,7 +234,7 @@ sel_skin_button (WButton * button, int action)
                       (void *) skin_name, FALSE);
 
     if (strcmp (skin_name, current_skin_name) == 0)
-        listbox_select_entry (skin_list, 0);
+        listbox_set_current (skin_list, 0);
 
     for (i = 0; i < skin_names->len; i++)
     {
@@ -244,7 +244,7 @@ sel_skin_button (WButton * button, int action)
             listbox_add_item (skin_list, LISTBOX_APPEND_AT_END, 0, skin_name_to_label (skin_name),
                               (void *) skin_name, FALSE);
             if (strcmp (skin_name, current_skin_name) == 0)
-                listbox_select_entry (skin_list, pos);
+                listbox_set_current (skin_list, pos);
             pos++;
         }
     }

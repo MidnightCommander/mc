@@ -1931,10 +1931,13 @@ find_cmd (WPanel * panel)
                 dirname_vpath = vfs_path_from_str (dirname);
                 panel_cd (panel, dirname_vpath, cd_exact);
                 vfs_path_free (dirname_vpath, TRUE);
+                /* *INDENT-OFF* */
                 if (filename != NULL)
-                    try_to_select (panel,
-                                   filename + (content_pattern != NULL
-                                               ? strchr (filename + 4, ':') - filename + 1 : 4));
+                    panel_set_current_by_name (panel,
+                                               filename + (content_pattern != NULL
+                                                           ? strchr (filename + 4, ':') - filename + 1
+                                                           : 4));
+                /* *INDENT-ON* */
             }
             else if (filename != NULL)
             {
@@ -1956,7 +1959,7 @@ find_cmd (WPanel * panel)
         if (v == B_PANELIZE)
         {
             panel_re_sort (panel);
-            try_to_select (panel, NULL);
+            panel_set_current_by_name (panel, NULL);
             break;
         }
     }

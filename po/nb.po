@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-03-19 20:39+0300\n"
+"POT-Creation-Date: 2023-08-04 21:17+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: heskjestad <cato@heskjestad.xyz>, 2021-2022\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/mc/mc/language/"
@@ -2170,13 +2170,12 @@ msgstr "&Tving stopp"
 msgid "Background jobs"
 msgstr "Bakgrunnsjobber"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chdir to \"%s\"\n"
+"Cannot change directory to\n"
+"%s\n"
 "%s"
-msgstr ""
-"Klarte ikke bytte mappe til «%s»\n"
-"%s"
+msgstr " Klarte ikke bytte mappe"
 
 msgid "Secure deletion"
 msgstr "Sikker sletting"
@@ -2374,9 +2373,6 @@ msgstr "Skriv inn tjenernavn (F1 for hjelp):"
 msgid "Files tagged, want to cd?"
 msgstr "Merket filer. Vil du bytte mappe?"
 
-msgid "Cannot change directory"
-msgstr " Klarte ikke bytte mappe"
-
 #, c-format
 msgid "Link %s to:"
 msgstr "Lag lenke fra %s til:"
@@ -2391,10 +2387,6 @@ msgstr "lenke: %s"
 #, c-format
 msgid "symlink: %s"
 msgstr "symlenke: %s"
-
-#, c-format
-msgid "Cannot chdir to \"%s\""
-msgstr "Klarte ikke bytte mappe til «%s»"
 
 msgid "View file"
 msgstr "Vis fil"
@@ -4517,13 +4509,16 @@ msgstr ""
 "Klarte ikke åpne tar-arkiv\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "%s\n"
-"doesn't look like a tar archive."
+"doesn't look like a tar archive"
 msgstr ""
 "%s\n"
 "fremstår ikke som et tar-arkiv."
+
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
 
 msgid "undelfs: error"
 msgstr "undelfs: feil"
@@ -4716,6 +4711,18 @@ msgstr "Fortsett fra begynnelsen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Klarte ikke hente en lokal kopi av /ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot chdir to \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Klarte ikke bytte mappe til «%s»\n"
+#~ "%s"
+
+#, c-format
+#~ msgid "Cannot chdir to \"%s\""
+#~ msgstr "Klarte ikke bytte mappe til «%s»"
 
 #~ msgid "Cannot change attributes on non-local filesystems"
 #~ msgstr "Kan ikke endre attributter i eksterne filsystemer"

@@ -107,6 +107,7 @@ static void
 info_show_info (WInfo * info)
 {
     const WRect *w = &CONST_WIDGET (info)->rect;
+    const file_entry_t *fe;
     static int i18n_adjust = 0;
     static const char *file_label;
     GString *buff;
@@ -136,7 +137,9 @@ info_show_info (WInfo * info)
 
     my_statfs (&myfs_stats, p_rp_cwd);
 
-    st = current_panel->dir.list[current_panel->selected].st;
+    fe = panel_current_entry (current_panel);
+
+    st = fe->st;
 
     /* Print only lines which fit */
 
@@ -261,9 +264,11 @@ info_show_info (WInfo * info)
 
         {
             vfs_path_t *vpath;
+#ifdef ENABLE_EXT2FS_ATTR
             unsigned long attr;
+#endif
 
-            vpath = vfs_path_from_str (current_panel->dir.list[current_panel->selected].fname->str);
+            vpath = vfs_path_from_str (fe->fname->str);
 
 #ifdef ENABLE_EXT2FS_ATTR
             if (mc_fgetflags (vpath, &attr) == 0)
@@ -289,7 +294,7 @@ info_show_info (WInfo * info)
             const char *fname;
 
             widget_gotoyx (w, 3, 2);
-            fname = current_panel->dir.list[current_panel->selected].fname->str;
+            fname = fe->fname->str;
             str_printf (buff, file_label, str_trunc (fname, w->cols - i18n_adjust));
             tty_print_string (buff->str);
         }

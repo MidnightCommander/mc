@@ -380,7 +380,7 @@ vfs_path_from_str_deprecated_parser (char *path)
     struct vfs_class *class;
     const char *local, *op;
 
-    vpath = vfs_path_new ();
+    vpath = vfs_path_new (FALSE);
 
     while ((class = _vfs_split_with_semi_skip_count (path, &local, &op, 0)) != NULL)
     {
@@ -443,8 +443,7 @@ vfs_path_from_str_uri_parser (char *path)
     vfs_path_element_t *element;
     char *url_delimiter;
 
-    vpath = vfs_path_new ();
-    vpath->relative = path != NULL && !IS_PATH_SEP (*path);
+    vpath = vfs_path_new (path != NULL && !IS_PATH_SEP (*path));
 
     while ((url_delimiter = g_strrstr (path, VFS_PATH_URL_DELIMITER)) != NULL)
     {
@@ -632,7 +631,9 @@ vfs_path_to_str_flags (const vfs_path_t * vpath, int elements_count, vfs_path_fl
 {
     int element_index;
     GString *buffer;
-    GString *recode_buffer;
+#ifdef HAVE_CHARSET
+    GString *recode_buffer = NULL;
+#endif
 
     if (vpath == NULL)
         return NULL;
@@ -644,7 +645,6 @@ vfs_path_to_str_flags (const vfs_path_t * vpath, int elements_count, vfs_path_fl
         elements_count = vfs_path_elements_count (vpath) + elements_count;
 
     buffer = g_string_new ("");
-    recode_buffer = g_string_new ("");
 
     for (element_index = 0; element_index < elements_count; element_index++)
     {
@@ -683,9 +683,14 @@ vfs_path_to_str_flags (const vfs_path_t * vpath, int elements_count, vfs_path_fl
                 g_string_append (buffer, VFS_ENCODING_PREFIX);
                 g_string_append (buffer, element->encoding);
             }
+
+            if (recode_buffer == NULL)
+                recode_buffer = g_string_sized_new (32);
+            else
+                g_string_set_size (recode_buffer, 0);
+
             str_vfs_convert_from (element->dir.converter, element->path, recode_buffer);
             vfs_append_from_path (recode_buffer->str, is_relative);
-            g_string_set_size (recode_buffer, 0);
         }
         else
 #endif
@@ -693,7 +698,12 @@ vfs_path_to_str_flags (const vfs_path_t * vpath, int elements_count, vfs_path_fl
             vfs_append_from_path (element->path, is_relative);
         }
     }
-    g_string_free (recode_buffer, TRUE);
+
+#ifdef HAVE_CHARSET
+    if (recode_buffer != NULL)
+        g_string_free (recode_buffer, TRUE);
+#endif
+
     return g_string_free (buffer, FALSE);
 }
 
@@ -776,12 +786,13 @@ vfs_path_from_str (const char *path_str)
  */
 
 vfs_path_t *
-vfs_path_new (void)
+vfs_path_new (gboolean relative)
 {
     vfs_path_t *vpath;
 
     vpath = g_new0 (vfs_path_t, 1);
     vpath->path = g_array_new (FALSE, TRUE, sizeof (vfs_path_element_t *));
+    vpath->relative = relative;
 
     return vpath;
 }
@@ -936,8 +947,7 @@ vfs_path_clone (const vfs_path_t * vpath)
     if (vpath == NULL)
         return NULL;
 
-    new_vpath = vfs_path_new ();
-    new_vpath->relative = vpath->relative;
+    new_vpath = vfs_path_new (vpath->relative);
 
     for (vpath_element_index = 0; vpath_element_index < vfs_path_elements_count (vpath);
          vpath_element_index++)
@@ -1181,7 +1191,7 @@ vfs_path_deserialize (const char *data, GError ** mcerror)
     if (cpath == NULL)
         return NULL;
 
-    vpath = vfs_path_new ();
+    vpath = vfs_path_new (FALSE);
 
     for (element_index = 0;; element_index++)
     {
@@ -1321,7 +1331,7 @@ vfs_path_append_vpath_new (const vfs_path_t * first_vpath, ...)
     if (first_vpath == NULL)
         return NULL;
 
-    ret_vpath = vfs_path_new ();
+    ret_vpath = vfs_path_new (FALSE);
 
     va_start (args, first_vpath);
     do

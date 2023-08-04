@@ -69,7 +69,7 @@ struct menu_t
     GList *entries;
     size_t max_entry_len;       /* cached max length of entry texts (text + shortcut) */
     size_t max_hotkey_len;      /* cached max length of shortcuts */
-    unsigned int selected;      /* pointer to current menu entry */
+    unsigned int current;       /* pointer to current menu entry */
     char *help_node;
 };
 
@@ -124,7 +124,7 @@ static void
 menubar_paint_idx (const WMenuBar * menubar, unsigned int idx, int color)
 {
     const WRect *w = &CONST_WIDGET (menubar)->rect;
-    const menu_t *menu = MENU (g_list_nth_data (menubar->menu, menubar->selected));
+    const menu_t *menu = MENU (g_list_nth_data (menubar->menu, menubar->current));
     const menu_entry_t *entry = MENUENTRY (g_list_nth_data (menu->entries, idx));
     const int y = 2 + idx;
     int x = menu->start_x;
@@ -182,7 +182,7 @@ static void
 menubar_draw_drop (const WMenuBar * menubar)
 {
     const WRect *w = &CONST_WIDGET (menubar)->rect;
-    const menu_t *menu = MENU (g_list_nth_data (menubar->menu, menubar->selected));
+    const menu_t *menu = MENU (g_list_nth_data (menubar->menu, menubar->current));
     const unsigned int count = g_list_length (menu->entries);
     int column = menu->start_x - 1;
     unsigned int i;
@@ -198,8 +198,7 @@ menubar_draw_drop (const WMenuBar * menubar)
     tty_draw_box (w->y + 1, w->x + column, count + 2, menu->max_entry_len + 5, FALSE);
 
     for (i = 0; i < count; i++)
-        menubar_paint_idx (menubar, i,
-                           i == menu->selected ? MENU_SELECTED_COLOR : MENU_ENTRY_COLOR);
+        menubar_paint_idx (menubar, i, i == menu->current ? MENU_SELECTED_COLOR : MENU_ENTRY_COLOR);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -232,7 +231,7 @@ menubar_draw (const WMenuBar * menubar)
     for (i = menubar->menu; i != NULL; i = g_list_next (i))
     {
         menu_t *menu = MENU (i->data);
-        gboolean is_selected = (menubar->selected == (gsize) g_list_position (menubar->menu, i));
+        gboolean is_selected = (menubar->current == (gsize) g_list_position (menubar->menu, i));
 
         menubar_set_color (menubar, is_selected, FALSE);
         widget_gotoyx (menubar, 0, menu->start_x);
@@ -257,7 +256,7 @@ menubar_draw (const WMenuBar * menubar)
         menubar_draw_drop (menubar);
     else
         widget_gotoyx (menubar, 0,
-                       MENU (g_list_nth_data (menubar->menu, menubar->selected))->start_x);
+                       MENU (g_list_nth_data (menubar->menu, menubar->current))->start_x);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -291,10 +290,10 @@ static void
 menubar_left (WMenuBar * menubar)
 {
     menubar_remove (menubar);
-    if (menubar->selected == 0)
-        menubar->selected = g_list_length (menubar->menu) - 1;
+    if (menubar->current == 0)
+        menubar->current = g_list_length (menubar->menu) - 1;
     else
-        menubar->selected--;
+        menubar->current--;
     menubar_draw (menubar);
 }
 
@@ -304,7 +303,7 @@ static void
 menubar_right (WMenuBar * menubar)
 {
     menubar_remove (menubar);
-    menubar->selected = (menubar->selected + 1) % g_list_length (menubar->menu);
+    menubar->current = (menubar->current + 1) % g_list_length (menubar->menu);
     menubar_draw (menubar);
 }
 
@@ -343,7 +342,7 @@ static void
 menubar_drop (WMenuBar * menubar, unsigned int selected)
 {
     menubar->is_dropped = TRUE;
-    menubar->selected = selected;
+    menubar->current = selected;
     menubar_draw (menubar);
 }
 
@@ -352,14 +351,14 @@ menubar_drop (WMenuBar * menubar, unsigned int selected)
 static void
 menubar_execute (WMenuBar * menubar)
 {
-    const menu_t *menu = MENU (g_list_nth_data (menubar->menu, menubar->selected));
-    const menu_entry_t *entry = MENUENTRY (g_list_nth_data (menu->entries, menu->selected));
+    const menu_t *menu = MENU (g_list_nth_data (menubar->menu, menubar->current));
+    const menu_entry_t *entry = MENUENTRY (g_list_nth_data (menu->entries, menu->current));
 
     if ((entry != NULL) && (entry->command != CK_IgnoreKey))
     {
         Widget *w = WIDGET (menubar);
 
-        mc_global.widget.is_right = (menubar->selected != 0);
+        mc_global.widget.is_right = (menubar->current != 0);
         menubar_finish (menubar);
         send_message (w->owner, w, MSG_ACTION, entry->command, NULL);
         do_refresh ();
@@ -371,20 +370,20 @@ menubar_execute (WMenuBar * menubar)
 static void
 menubar_down (WMenuBar * menubar)
 {
-    menu_t *menu = MENU (g_list_nth_data (menubar->menu, menubar->selected));
+    menu_t *menu = MENU (g_list_nth_data (menubar->menu, menubar->current));
     const unsigned int len = g_list_length (menu->entries);
     menu_entry_t *entry;
 
-    menubar_paint_idx (menubar, menu->selected, MENU_ENTRY_COLOR);
+    menubar_paint_idx (menubar, menu->current, MENU_ENTRY_COLOR);
 
     do
     {
-        menu->selected = (menu->selected + 1) % len;
-        entry = MENUENTRY (g_list_nth_data (menu->entries, menu->selected));
+        menu->current = (menu->current + 1) % len;
+        entry = MENUENTRY (g_list_nth_data (menu->entries, menu->current));
     }
     while ((entry == NULL) || (entry->command == CK_IgnoreKey));
 
-    menubar_paint_idx (menubar, menu->selected, MENU_SELECTED_COLOR);
+    menubar_paint_idx (menubar, menu->current, MENU_SELECTED_COLOR);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -392,23 +391,23 @@ menubar_down (WMenuBar * menubar)
 static void
 menubar_up (WMenuBar * menubar)
 {
-    menu_t *menu = MENU (g_list_nth_data (menubar->menu, menubar->selected));
+    menu_t *menu = MENU (g_list_nth_data (menubar->menu, menubar->current));
     const unsigned int len = g_list_length (menu->entries);
     menu_entry_t *entry;
 
-    menubar_paint_idx (menubar, menu->selected, MENU_ENTRY_COLOR);
+    menubar_paint_idx (menubar, menu->current, MENU_ENTRY_COLOR);
 
     do
     {
-        if (menu->selected == 0)
-            menu->selected = len - 1;
+        if (menu->current == 0)
+            menu->current = len - 1;
         else
-            menu->selected--;
-        entry = MENUENTRY (g_list_nth_data (menu->entries, menu->selected));
+            menu->current--;
+        entry = MENUENTRY (g_list_nth_data (menu->entries, menu->current));
     }
     while ((entry == NULL) || (entry->command == CK_IgnoreKey));
 
-    menubar_paint_idx (menubar, menu->selected, MENU_SELECTED_COLOR);
+    menubar_paint_idx (menubar, menu->current, MENU_SELECTED_COLOR);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -418,32 +417,32 @@ menubar_first (WMenuBar * menubar)
 {
     if (menubar->is_dropped)
     {
-        menu_t *menu = MENU (g_list_nth_data (menubar->menu, menubar->selected));
+        menu_t *menu = MENU (g_list_nth_data (menubar->menu, menubar->current));
 
-        if (menu->selected == 0)
+        if (menu->current == 0)
             return;
 
-        menubar_paint_idx (menubar, menu->selected, MENU_ENTRY_COLOR);
+        menubar_paint_idx (menubar, menu->current, MENU_ENTRY_COLOR);
 
-        menu->selected = 0;
+        menu->current = 0;
 
         while (TRUE)
         {
             menu_entry_t *entry;
 
-            entry = MENUENTRY (g_list_nth_data (menu->entries, menu->selected));
+            entry = MENUENTRY (g_list_nth_data (menu->entries, menu->current));
 
             if ((entry == NULL) || (entry->command == CK_IgnoreKey))
-                menu->selected++;
+                menu->current++;
             else
                 break;
         }
 
-        menubar_paint_idx (menubar, menu->selected, MENU_SELECTED_COLOR);
+        menubar_paint_idx (menubar, menu->current, MENU_SELECTED_COLOR);
     }
     else
     {
-        menubar->selected = 0;
+        menubar->current = 0;
         menubar_draw (menubar);
     }
 }
@@ -455,29 +454,29 @@ menubar_last (WMenuBar * menubar)
 {
     if (menubar->is_dropped)
     {
-        menu_t *menu = MENU (g_list_nth_data (menubar->menu, menubar->selected));
+        menu_t *menu = MENU (g_list_nth_data (menubar->menu, menubar->current));
         const unsigned int len = g_list_length (menu->entries);
         menu_entry_t *entry;
 
-        if (menu->selected == len - 1)
+        if (menu->current == len - 1)
             return;
 
-        menubar_paint_idx (menubar, menu->selected, MENU_ENTRY_COLOR);
+        menubar_paint_idx (menubar, menu->current, MENU_ENTRY_COLOR);
 
-        menu->selected = len;
+        menu->current = len;
 
         do
         {
-            menu->selected--;
-            entry = MENUENTRY (g_list_nth_data (menu->entries, menu->selected));
+            menu->current--;
+            entry = MENUENTRY (g_list_nth_data (menu->entries, menu->current));
         }
         while ((entry == NULL) || (entry->command == CK_IgnoreKey));
 
-        menubar_paint_idx (menubar, menu->selected, MENU_SELECTED_COLOR);
+        menubar_paint_idx (menubar, menu->current, MENU_SELECTED_COLOR);
     }
     else
     {
-        menubar->selected = g_list_length (menubar->menu) - 1;
+        menubar->current = g_list_length (menubar->menu) - 1;
         menubar_draw (menubar);
     }
 }
@@ -511,7 +510,7 @@ menubar_try_exec_menu (WMenuBar * menubar, int hotkey)
     menu_t *menu;
     GList *i;
 
-    menu = g_list_nth_data (menubar->menu, menubar->selected);
+    menu = g_list_nth_data (menubar->menu, menubar->current);
 
     for (i = menu->entries; i != NULL; i = g_list_next (i))
     {
@@ -520,7 +519,7 @@ menubar_try_exec_menu (WMenuBar * menubar, int hotkey)
         if (entry != NULL && entry->text.hotkey != NULL
             && hotkey == g_ascii_tolower (entry->text.hotkey[0]))
         {
-            menu->selected = g_list_position (menu->entries, i);
+            menu->current = g_list_position (menu->entries, i);
             menubar_execute (menubar);
             return MSG_HANDLED;
         }
@@ -544,7 +543,7 @@ menubar_execute_cmd (WMenuBar * menubar, long command)
 
             if (menubar->is_dropped)
                 event_data.node =
-                    MENU (g_list_nth_data (menubar->menu, menubar->selected))->help_node;
+                    MENU (g_list_nth_data (menubar->menu, menubar->current))->help_node;
             else
                 event_data.node = "[Menu Bar]";
 
@@ -567,7 +566,7 @@ menubar_execute_cmd (WMenuBar * menubar, long command)
         if (menubar->is_dropped)
             menubar_down (menubar);
         else
-            menubar_drop (menubar, menubar->selected);
+            menubar_drop (menubar, menubar->current);
         break;
     case CK_Home:
         menubar_first (menubar);
@@ -580,7 +579,7 @@ menubar_execute_cmd (WMenuBar * menubar, long command)
         if (menubar->is_dropped)
             menubar_execute (menubar);
         else
-            menubar_drop (menubar, menubar->selected);
+            menubar_drop (menubar, menubar->current);
         break;
     case CK_Quit:
         menubar_finish (menubar);
@@ -730,7 +729,7 @@ menubar_mouse_on_menu (const WMenuBar * menubar, int y, int x)
     if (!menubar->is_dropped)
         return FALSE;
 
-    menu = MENU (g_list_nth_data (menubar->menu, menubar->selected));
+    menu = MENU (g_list_nth_data (menubar->menu, menubar->current));
     left_x = menu->start_x;
     right_x = left_x + menu->max_entry_len + 3;
     if (right_x > w->cols)
@@ -753,14 +752,14 @@ menubar_change_selected_item (WMenuBar * menubar, int y)
     menu_entry_t *entry;
 
     y -= 2;                     /* skip bar and top frame */
-    menu = MENU (g_list_nth_data (menubar->menu, menubar->selected));
+    menu = MENU (g_list_nth_data (menubar->menu, menubar->current));
     entry = MENUENTRY (g_list_nth_data (menu->entries, y));
 
     if (entry != NULL && entry->command != CK_IgnoreKey)
     {
-        menubar_paint_idx (menubar, menu->selected, MENU_ENTRY_COLOR);
-        menu->selected = y;
-        menubar_paint_idx (menubar, menu->selected, MENU_SELECTED_COLOR);
+        menubar_paint_idx (menubar, menu->current, MENU_ENTRY_COLOR);
+        menu->current = y;
+        menubar_paint_idx (menubar, menu->current, MENU_SELECTED_COLOR);
     }
 }
 
@@ -922,7 +921,7 @@ menu_new (const char *name, GList * entries, const char *help_node)
     menu->entries = entries;
     menu->max_entry_len = 1;
     menu->max_hotkey_len = 0;
-    menu->selected = 0;
+    menu->current = 0;
     menu->help_node = g_strdup (help_node);
 
     return menu;
@@ -978,7 +977,7 @@ menubar_set_menu (WMenuBar * menubar, GList * menu)
     /* add new menu */
     menubar->is_dropped = FALSE;
     menubar->menu = menu;
-    menubar->selected = 0;
+    menubar->current = 0;
     menubar_arrange (menubar);
     widget_set_state (WIDGET (menubar), WST_FOCUSED, FALSE);
 }
@@ -1080,7 +1079,7 @@ menubar_activate (WMenuBar * menubar, gboolean dropped, int which)
 
         menubar->is_dropped = dropped;
         if (which >= 0)
-            menubar->selected = (guint) which;
+            menubar->current = (guint) which;
 
         menubar->previous_widget = group_get_current_widget_id (w->owner);
 

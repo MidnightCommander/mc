@@ -127,7 +127,10 @@ mcdiffview_dialog_search (WDiff * dview)
 
         tmp = str_convert_to_input (exp);
         g_free (exp);
-        exp = g_string_free (tmp, FALSE);
+        if (tmp != NULL)
+            exp = g_string_free (tmp, FALSE);
+        else
+            exp = g_strdup ("");
     }
 #endif
 

@@ -507,7 +507,7 @@ hotlist_handle_key (WDialog * h, int key)
         if (hotlist_button_callback (NULL, B_ENTER) != 0)
         {
             h->ret_value = B_ENTER;
-            dlg_stop (h);
+            dlg_close (h);
         }
         return MSG_HANDLED;
 
@@ -550,7 +550,7 @@ hotlist_handle_key (WDialog * h, int key)
                     input_insert (cmdline, tmp, FALSE);
                     g_free (tmp);
                     h->ret_value = B_CANCEL;
-                    dlg_stop (h);
+                    dlg_close (h);
                 }
             }
         }
@@ -644,7 +644,7 @@ hotlist_listbox_callback (WListbox * list)
             if (hlp->type == HL_TYPE_ENTRY)
             {
                 dlg->ret_value = B_ENTER;
-                dlg_stop (dlg);
+                dlg_close (dlg);
                 return LISTBOX_DONE;
             }
             else
@@ -657,7 +657,7 @@ hotlist_listbox_callback (WListbox * list)
         else
         {
             dlg->ret_value = B_ENTER;
-            dlg_stop (dlg);
+            dlg_close (dlg);
             return LISTBOX_DONE;
         }
     }
@@ -993,7 +993,7 @@ add2hotlist (char *label, char *directory, enum HotListType type, listbox_append
         }
         else
             listbox_add_item (l_hotlist, pos, 0, new->label, new, FALSE);
-        listbox_select_entry (l_hotlist, l_hotlist->pos);
+        listbox_set_current (l_hotlist, l_hotlist->current);
     }
 
     return new;

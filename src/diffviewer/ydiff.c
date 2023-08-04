@@ -139,7 +139,7 @@ rewrite_backup_content (const vfs_path_t * from_file_name_vpath, const char *to_
     gsize length;
     const char *from_file_name;
 
-    from_file_name = vfs_path_get_by_index (from_file_name_vpath, -1)->path;
+    from_file_name = vfs_path_get_last_path_str (from_file_name_vpath);
     if (!g_file_get_contents (from_file_name, &contents, &length, NULL))
         return FALSE;
 
@@ -3321,7 +3321,7 @@ dview_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
     case MSG_KEY:
         i = dview_handle_key (dview, parm);
         if (dview->view_quit)
-            dlg_stop (h);
+            dlg_close (h);
         else
             dview_update (dview);
         return i;
@@ -3329,7 +3329,7 @@ dview_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
     case MSG_ACTION:
         i = dview_execute_cmd (dview, parm);
         if (dview->view_quit)
-            dlg_stop (h);
+            dlg_close (h);
         else
             dview_update (dview);
         return i;
@@ -3398,7 +3398,7 @@ dview_dialog_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, 
         /* don't stop the dialog before final decision */
         widget_set_state (w, WST_ACTIVE, TRUE);
         if (dview_ok_to_exit (dview))
-            dlg_stop (h);
+            dlg_close (h);
         return MSG_HANDLED;
 
     default:
@@ -3534,26 +3534,26 @@ dview_diff_cmd (const void *f0, const void *f1)
             /* run from panels */
             const WPanel *panel0 = (const WPanel *) f0;
             const WPanel *panel1 = (const WPanel *) f1;
+            const file_entry_t *fe0;
+            const file_entry_t *fe1;
 
-            file0 =
-                vfs_path_append_new (panel0->cwd_vpath, selection (panel0)->fname->str,
-                                     (char *) NULL);
-            is_dir0 = S_ISDIR (selection (panel0)->st.st_mode);
+            fe0 = panel_current_entry (panel0);
+            file0 = vfs_path_append_new (panel0->cwd_vpath, fe0->fname->str, (char *) NULL);
+            is_dir0 = S_ISDIR (fe0->st.st_mode);
             if (is_dir0)
             {
                 message (D_ERROR, MSG_ERROR, _("\"%s\" is a directory"),
-                         path_trunc (selection (panel0)->fname->str, 30));
+                         path_trunc (fe0->fname->str, 30));
                 goto ret;
             }
 
-            file1 =
-                vfs_path_append_new (panel1->cwd_vpath, selection (panel1)->fname->str,
-                                     (char *) NULL);
-            is_dir1 = S_ISDIR (selection (panel1)->st.st_mode);
+            fe1 = panel_current_entry (panel1);
+            file1 = vfs_path_append_new (panel1->cwd_vpath, fe1->fname->str, (char *) NULL);
+            is_dir1 = S_ISDIR (fe1->st.st_mode);
             if (is_dir1)
             {
                 message (D_ERROR, MSG_ERROR, _("\"%s\" is a directory"),
-                         path_trunc (selection (panel1)->fname->str, 30));
+                         path_trunc (fe1->fname->str, 30));
                 goto ret;
             }
             break;

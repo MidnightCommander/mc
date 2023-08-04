@@ -416,7 +416,7 @@ mc_args_add_extended_info_to_help (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static gchar *
+static GString *
 mc_args__convert_help_to_syscharset (const gchar * charset, const gchar * error_message_str,
                                      const gchar * help_str)
 {
@@ -433,7 +433,7 @@ mc_args__convert_help_to_syscharset (const gchar * charset, const gchar * error_
     g_free (full_help_str);
     g_iconv_close (conv);
 
-    return g_string_free (buffer, FALSE);
+    return buffer;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -695,13 +695,13 @@ mc_args_parse (int *argc, char ***argv, const char *translation_domain, GError *
                                   help_str);
             else
             {
-                gchar *full_help_str;
+                GString *full_help_str;
 
                 full_help_str =
                     mc_args__convert_help_to_syscharset (_system_codepage, (*mcerror)->message,
                                                          help_str);
-                mc_replace_error (mcerror, (*mcerror)->code, "%s", full_help_str);
-                g_free (full_help_str);
+                mc_replace_error (mcerror, (*mcerror)->code, "%s", full_help_str->str);
+                g_string_free (full_help_str, TRUE);
             }
             g_free (help_str);
         }

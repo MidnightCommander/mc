@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-03-19 20:39+0300\n"
+"POT-Creation-Date: 2023-08-04 21:17+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Takuro Onoue <kusanaginoturugi@gmail.com>, 2021\n"
 "Language-Team: Japanese (http://www.transifex.com/mc/mc/language/ja/)\n"
@@ -2076,13 +2076,12 @@ msgstr "強制終了(&K)"
 msgid "Background jobs"
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chdir to \"%s\"\n"
+"Cannot change directory to\n"
+"%s\n"
 "%s"
-msgstr ""
-"「%s」に移動できません\n"
-"%s"
+msgstr "ディレクトリを変更できません"
 
 msgid "Secure deletion"
 msgstr ""
@@ -2276,9 +2275,6 @@ msgstr ""
 msgid "Files tagged, want to cd?"
 msgstr "ファイルはタグ付られています。cd しますか?"
 
-msgid "Cannot change directory"
-msgstr "ディレクトリを変更できません"
-
 #, c-format
 msgid "Link %s to:"
 msgstr ""
@@ -2293,10 +2289,6 @@ msgstr "リンク: %s"
 #, c-format
 msgid "symlink: %s"
 msgstr "シンボリックリンク: %s"
-
-#, c-format
-msgid "Cannot chdir to \"%s\""
-msgstr "%s に移動できません"
 
 msgid "View file"
 msgstr ""
@@ -4276,7 +4268,10 @@ msgstr ""
 #, c-format
 msgid ""
 "%s\n"
-"doesn't look like a tar archive."
+"doesn't look like a tar archive"
+msgstr ""
+
+msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"
@@ -4457,3 +4452,15 @@ msgstr "初めから続けますか?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#, c-format
+#~ msgid ""
+#~ "Cannot chdir to \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "「%s」に移動できません\n"
+#~ "%s"
+
+#, c-format
+#~ msgid "Cannot chdir to \"%s\""
+#~ msgstr "%s に移動できません"

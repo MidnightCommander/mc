@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-03-19 20:39+0300\n"
+"POT-Creation-Date: 2023-08-04 21:17+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Simona Iacob <s@zp1.net>, 2021-2022\n"
 "Language-Team: Romanian (http://www.transifex.com/mc/mc/language/ro/)\n"
@@ -2173,13 +2173,12 @@ msgstr "&Omoară"
 msgid "Background jobs"
 msgstr "Sarcini în fundal"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chdir to \"%s\"\n"
+"Cannot change directory to\n"
+"%s\n"
 "%s"
-msgstr ""
-"Nu se poate chdir în \"%s\"\n"
-"%s"
+msgstr "Nu pot deschide directorul %s"
 
 msgid "Secure deletion"
 msgstr "Ștergere securizată"
@@ -2377,9 +2376,6 @@ msgstr "Introdu numele mașinii (F1 pentru detalii):"
 msgid "Files tagged, want to cd?"
 msgstr "Există fișiere marcate, doriți să cd?"
 
-msgid "Cannot change directory"
-msgstr "Nu pot deschide directorul %s"
-
 #, c-format
 msgid "Link %s to:"
 msgstr "Leagă %s la:"
@@ -2394,10 +2390,6 @@ msgstr "legătură: %s"
 #, c-format
 msgid "symlink: %s"
 msgstr "legătură: %s"
-
-#, c-format
-msgid "Cannot chdir to \"%s\""
-msgstr "Nu se poate chdir în \"%s\""
 
 msgid "View file"
 msgstr "Vizualizare fișier"
@@ -4529,13 +4521,16 @@ msgstr ""
 "Nu pot deschide arhiva tar\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "%s\n"
-"doesn't look like a tar archive."
+"doesn't look like a tar archive"
 msgstr ""
 "%s\n"
 "nu pare a fi o arhivă tar."
+
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
 
 msgid "undelfs: error"
 msgstr "undelfs: eroare"
@@ -4728,6 +4723,18 @@ msgstr "Continuă de la început?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nu se poate aduce o copie locală a /ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot chdir to \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Nu se poate chdir în \"%s\"\n"
+#~ "%s"
+
+#, c-format
+#~ msgid "Cannot chdir to \"%s\""
+#~ msgstr "Nu se poate chdir în \"%s\""
 
 #~ msgid "Cannot change attributes on non-local filesystems"
 #~ msgstr "Nu se pot modifica atributele pe sisteme de fișiere non-locale"

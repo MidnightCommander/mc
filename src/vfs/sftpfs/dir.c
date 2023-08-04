@@ -66,20 +66,13 @@ void *
 sftpfs_opendir (const vfs_path_t * vpath, GError ** mcerror)
 {
     sftpfs_dir_data_t *sftpfs_dir;
-    struct vfs_s_super *super;
     sftpfs_super_t *sftpfs_super;
     const vfs_path_element_t *path_element;
     LIBSSH2_SFTP_HANDLE *handle;
     const GString *fixfname;
 
-    mc_return_val_if_error (mcerror, NULL);
-
-    path_element = vfs_path_get_by_index (vpath, -1);
-
-    if (vfs_s_get_path (vpath, &super, 0) == NULL)
+    if (!sftpfs_op_init (&sftpfs_super, &path_element, vpath, mcerror))
         return NULL;
-
-    sftpfs_super = SFTP_SUPER (super);
 
     fixfname = sftpfs_fix_filename (path_element->path);
 
@@ -174,23 +167,11 @@ int
 sftpfs_mkdir (const vfs_path_t * vpath, mode_t mode, GError ** mcerror)
 {
     int res;
-    struct vfs_s_super *super;
     sftpfs_super_t *sftpfs_super;
     const vfs_path_element_t *path_element;
     const GString *fixfname;
 
-    mc_return_val_if_error (mcerror, -1);
-
-    path_element = vfs_path_get_by_index (vpath, -1);
-
-    if (vfs_s_get_path (vpath, &super, 0) == NULL)
-        return -1;
-
-    if (super == NULL)
-        return -1;
-
-    sftpfs_super = SFTP_SUPER (super);
-    if (sftpfs_super->sftp_session == NULL)
+    if (!sftpfs_op_init (&sftpfs_super, &path_element, vpath, mcerror))
         return -1;
 
     fixfname = sftpfs_fix_filename (path_element->path);
@@ -223,23 +204,11 @@ int
 sftpfs_rmdir (const vfs_path_t * vpath, GError ** mcerror)
 {
     int res;
-    struct vfs_s_super *super;
     sftpfs_super_t *sftpfs_super;
     const vfs_path_element_t *path_element;
     const GString *fixfname;
 
-    mc_return_val_if_error (mcerror, -1);
-
-    path_element = vfs_path_get_by_index (vpath, -1);
-
-    if (vfs_s_get_path (vpath, &super, 0) == NULL)
-        return -1;
-
-    if (super == NULL)
-        return -1;
-
-    sftpfs_super = SFTP_SUPER (super);
-    if (sftpfs_super->sftp_session == NULL)
+    if (!sftpfs_op_init (&sftpfs_super, &path_element, vpath, mcerror))
         return -1;
 
     fixfname = sftpfs_fix_filename (path_element->path);
