@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-03-19 20:39+0300\n"
+"POT-Creation-Date: 2023-08-04 21:17+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Gilberto Jorge <gmj125@gmail.com>, 2013-2022\n"
 "Language-Team: Portuguese (http://www.transifex.com/mc/mc/language/pt/)\n"
@@ -2172,13 +2172,12 @@ msgstr "&Matar"
 msgid "Background jobs"
 msgstr "Jobs em background"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chdir to \"%s\"\n"
+"Cannot change directory to\n"
+"%s\n"
 "%s"
-msgstr ""
-"Não é possível chdir para \"%s\"\n"
-"%s"
+msgstr "Não é possível mudar de directório"
 
 msgid "Secure deletion"
 msgstr "Eliminação segura"
@@ -2376,9 +2375,6 @@ msgstr "Insira nome da máquina (F1 para detalhes):"
 msgid "Files tagged, want to cd?"
 msgstr "Ficheiros etiquetados, quer executar cd?"
 
-msgid "Cannot change directory"
-msgstr "Não é possível mudar de directório"
-
 #, c-format
 msgid "Link %s to:"
 msgstr "Ligar %s a:"
@@ -2393,10 +2389,6 @@ msgstr "ligar: %s"
 #, c-format
 msgid "symlink: %s"
 msgstr "symlink: %s"
-
-#, c-format
-msgid "Cannot chdir to \"%s\""
-msgstr "Não é possível chdir para \"%s\""
 
 msgid "View file"
 msgstr "Ver ficheiro"
@@ -4524,13 +4516,16 @@ msgstr ""
 "Não é possível abrir arquivo tar\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "%s\n"
-"doesn't look like a tar archive."
+"doesn't look like a tar archive"
 msgstr ""
 "%s\n"
 "não parece ser um ficheiro tar."
+
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
 
 msgid "undelfs: error"
 msgstr "undelfs: erro"
@@ -4723,6 +4718,18 @@ msgstr "Continuar do início?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Não é possível obter uma cópia local de /ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot chdir to \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Não é possível chdir para \"%s\"\n"
+#~ "%s"
+
+#, c-format
+#~ msgid "Cannot chdir to \"%s\""
+#~ msgstr "Não é possível chdir para \"%s\""
 
 #~ msgid "Cannot change attributes on non-local filesystems"
 #~ msgstr ""

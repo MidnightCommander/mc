@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-03-19 20:39+0300\n"
+"POT-Creation-Date: 2023-08-04 21:17+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>, 2022\n"
 "Language-Team: Georgian (http://www.transifex.com/mc/mc/language/ka/)\n"
@@ -2071,11 +2071,12 @@ msgstr "მოკვლა"
 msgid "Background jobs"
 msgstr "ფონური ამოცანები"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chdir to \"%s\"\n"
+"Cannot change directory to\n"
+"%s\n"
 "%s"
-msgstr ""
+msgstr "საქაღალდე %s-ის შექმნა შეუძლებელია"
 
 msgid "Secure deletion"
 msgstr "უსაფრთხოდ წაშლა"
@@ -2269,9 +2270,6 @@ msgstr ""
 msgid "Files tagged, want to cd?"
 msgstr ""
 
-msgid "Cannot change directory"
-msgstr ""
-
 #, c-format
 msgid "Link %s to:"
 msgstr "%s-ის მიბმა:"
@@ -2286,10 +2284,6 @@ msgstr "ბმული: %s"
 #, c-format
 msgid "symlink: %s"
 msgstr "სიმბმული: %s"
-
-#, c-format
-msgid "Cannot chdir to \"%s\""
-msgstr ""
 
 msgid "View file"
 msgstr "ფაილის ჩვენება"
@@ -4239,7 +4233,10 @@ msgstr ""
 #, c-format
 msgid ""
 "%s\n"
-"doesn't look like a tar archive."
+"doesn't look like a tar archive"
+msgstr ""
+
+msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"

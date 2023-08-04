@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-03-19 20:39+0300\n"
+"POT-Creation-Date: 2023-08-04 21:17+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>, "
 "2011,2015-2019\n"
@@ -2157,13 +2157,12 @@ msgstr "&Hil"
 msgid "Background jobs"
 msgstr "Hondoko lanak"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chdir to \"%s\"\n"
+"Cannot change directory to\n"
+"%s\n"
 "%s"
-msgstr ""
-"Ezin da \"%s\" direktoriora aldatu\n"
-"%s"
+msgstr "Direktorioa ezin aldatu"
 
 msgid "Secure deletion"
 msgstr ""
@@ -2357,9 +2356,6 @@ msgstr "Sartu makinaren izena (F1 xehetasunetarako):"
 msgid "Files tagged, want to cd?"
 msgstr "Fitxategiak hautatuta, direktoria aldatu nahi?"
 
-msgid "Cannot change directory"
-msgstr "Direktorioa ezin aldatu"
-
 #, c-format
 msgid "Link %s to:"
 msgstr "Estekatu %s hona:"
@@ -2374,10 +2370,6 @@ msgstr "esteka: %s"
 #, c-format
 msgid "symlink: %s"
 msgstr "esteka sinbolikoa: %s"
-
-#, c-format
-msgid "Cannot chdir to \"%s\""
-msgstr "\"%s\" direktoriora ezin aldatu (\"chdir\")"
 
 msgid "View file"
 msgstr "Ikusi fitxategia"
@@ -4465,13 +4457,16 @@ msgstr ""
 "tar artxiboa ezin ireki\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "%s\n"
-"doesn't look like a tar archive."
+"doesn't look like a tar archive"
 msgstr ""
 "%s\n"
 "ez dirudi tar artxiboa denik."
+
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
 
 msgid "undelfs: error"
 msgstr "undelfs: akatsa"
@@ -4666,6 +4661,18 @@ msgstr "Hasieratik jarraitu?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Ezin eskuratu ondokoaren bertako kopia bat: /ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot chdir to \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Ezin da \"%s\" direktoriora aldatu\n"
+#~ "%s"
+
+#, c-format
+#~ msgid "Cannot chdir to \"%s\""
+#~ msgstr "\"%s\" direktoriora ezin aldatu (\"chdir\")"
 
 #, c-format
 #~ msgid " %s%s file error"

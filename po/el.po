@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-03-19 20:39+0300\n"
+"POT-Creation-Date: 2023-08-04 21:17+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Efstathios Iosifidis <iefstathios@gmail.com>, 2015\n"
 "Language-Team: Greek (http://www.transifex.com/mc/mc/language/el/)\n"
@@ -2088,13 +2088,12 @@ msgstr "&Σκότωμα"
 msgid "Background jobs"
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chdir to \"%s\"\n"
+"Cannot change directory to\n"
+"%s\n"
 "%s"
-msgstr ""
-"Αδυναμία chdir σε \"%s\"\n"
-"%s"
+msgstr "Αδυναμία αλλαγής καταλόγου"
 
 msgid "Secure deletion"
 msgstr ""
@@ -2288,9 +2287,6 @@ msgstr "Εισάγετε το όνομα του μηχανήματος (F1 γι�
 msgid "Files tagged, want to cd?"
 msgstr ""
 
-msgid "Cannot change directory"
-msgstr "Αδυναμία αλλαγής καταλόγου"
-
 #, c-format
 msgid "Link %s to:"
 msgstr "Δεσμός %s σε:"
@@ -2305,10 +2301,6 @@ msgstr "δεσμός: %s"
 #, c-format
 msgid "symlink: %s"
 msgstr ""
-
-#, c-format
-msgid "Cannot chdir to \"%s\""
-msgstr "Αδυναμία chdir στο \"%s\""
 
 msgid "View file"
 msgstr "Προβολή αρχείου"
@@ -4338,13 +4330,16 @@ msgstr ""
 "Άνοιγμα αρχειοθήκης tar ανεπιτυχές\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "%s\n"
-"doesn't look like a tar archive."
+"doesn't look like a tar archive"
 msgstr ""
 "%s\n"
 "δε μοιάζει με αρχειοθήκη tar."
+
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
 
 msgid "undelfs: error"
 msgstr "undelfs: σφάλμα"
@@ -4529,6 +4524,18 @@ msgstr "Συνέχεια από την αρχή;"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#, c-format
+#~ msgid ""
+#~ "Cannot chdir to \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Αδυναμία chdir σε \"%s\"\n"
+#~ "%s"
+
+#, c-format
+#~ msgid "Cannot chdir to \"%s\""
+#~ msgstr "Αδυναμία chdir στο \"%s\""
 
 #, c-format
 #~ msgid " %s%s file error"

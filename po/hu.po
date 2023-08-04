@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-03-19 20:39+0300\n"
+"POT-Creation-Date: 2023-08-04 21:17+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: András Tőrös <toros.andras04@gmail.com>, 2020\n"
 "Language-Team: Hungarian (http://www.transifex.com/mc/mc/language/hu/)\n"
@@ -2144,13 +2144,12 @@ msgstr "&Töröl"
 msgid "Background jobs"
 msgstr "Háttérfolyamatok"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chdir to \"%s\"\n"
+"Cannot change directory to\n"
+"%s\n"
 "%s"
-msgstr ""
-"Nem sikerült belépni a(z) \"%s\" könyvtárba.\n"
-"%s"
+msgstr "Nem sikerült könyvtárt váltani"
 
 msgid "Secure deletion"
 msgstr ""
@@ -2344,9 +2343,6 @@ msgstr "Gépnév (részletek: F1 billentyű):"
 msgid "Files tagged, want to cd?"
 msgstr "A fájlkijelölések elvesznek, folytatja?"
 
-msgid "Cannot change directory"
-msgstr "Nem sikerült könyvtárt váltani"
-
 #, c-format
 msgid "Link %s to:"
 msgstr "\"%s\" linkelése ide:"
@@ -2361,10 +2357,6 @@ msgstr "link: %s"
 #, c-format
 msgid "symlink: %s"
 msgstr "szimbolikus link: %s"
-
-#, c-format
-msgid "Cannot chdir to \"%s\""
-msgstr "Nem sikerült belépni a(z) \"%s\" könyvtárba"
 
 msgid "View file"
 msgstr "Fájl megjelenítése"
@@ -4446,13 +4438,16 @@ msgstr ""
 "A tar-archívum nem nyitható meg\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "%s\n"
-"doesn't look like a tar archive."
+"doesn't look like a tar archive"
 msgstr ""
 "%s\n"
 "valószínűleg nem tar-archívum."
+
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
 
 msgid "undelfs: error"
 msgstr "undelfs: hiba"
@@ -4641,6 +4636,18 @@ msgstr "Folytatás az elejéről?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nem sikerült behozni /ftp://some.host/editme.txt helyi másolatát"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot chdir to \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Nem sikerült belépni a(z) \"%s\" könyvtárba.\n"
+#~ "%s"
+
+#, c-format
+#~ msgid "Cannot chdir to \"%s\""
+#~ msgstr "Nem sikerült belépni a(z) \"%s\" könyvtárba"
 
 #, c-format
 #~ msgid " %s%s file error"

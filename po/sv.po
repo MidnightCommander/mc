@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-03-19 20:39+0300\n"
+"POT-Creation-Date: 2023-08-04 21:17+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Alexander Kilian <alexander.kilian@gmail.com>, 2022\n"
 "Language-Team: Swedish (http://www.transifex.com/mc/mc/language/sv/)\n"
@@ -2165,13 +2165,12 @@ msgstr "&Döda"
 msgid "Background jobs"
 msgstr "Bakgrundsjobb"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chdir to \"%s\"\n"
+"Cannot change directory to\n"
+"%s\n"
 "%s"
-msgstr ""
-"Chdir till \"%s\" misslyckades\n"
-"%s"
+msgstr "Kan inte byta katalog"
 
 msgid "Secure deletion"
 msgstr "säker radering"
@@ -2365,9 +2364,6 @@ msgstr "Ange maskinnamn (F1 för detaljer):"
 msgid "Files tagged, want to cd?"
 msgstr "Filerna är markerade, vill du byta katalog?"
 
-msgid "Cannot change directory"
-msgstr "Kan inte byta katalog"
-
 #, c-format
 msgid "Link %s to:"
 msgstr "Länka %s till:"
@@ -2382,10 +2378,6 @@ msgstr "länk: %s"
 #, c-format
 msgid "symlink: %s"
 msgstr "symlänk: %s"
-
-#, c-format
-msgid "Cannot chdir to \"%s\""
-msgstr "Chdir till \"%s\" misslyckades"
 
 msgid "View file"
 msgstr "Visa fil"
@@ -4469,13 +4461,16 @@ msgstr ""
 "Kan inte öppna tarfilen\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "%s\n"
-"doesn't look like a tar archive."
+"doesn't look like a tar archive"
 msgstr ""
 "%s\n"
 "ser inte ut som ett tar-arkiv."
+
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
 
 msgid "undelfs: error"
 msgstr "undelfs: fel"
@@ -4668,6 +4663,18 @@ msgstr "Fortsätt från början?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan inte hämta en lokal kopia av /ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot chdir to \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Chdir till \"%s\" misslyckades\n"
+#~ "%s"
+
+#, c-format
+#~ msgid "Cannot chdir to \"%s\""
+#~ msgstr "Chdir till \"%s\" misslyckades"
 
 #, c-format
 #~ msgid " %s%s file error"

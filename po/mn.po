@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-03-19 20:39+0300\n"
+"POT-Creation-Date: 2023-08-04 21:17+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Shuree Nyam-Oidov <99shuree@gmail.com>, 2020\n"
 "Language-Team: Mongolian (http://www.transifex.com/mc/mc/language/mn/)\n"
@@ -2061,11 +2061,12 @@ msgstr "&Устгах"
 msgid "Background jobs"
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chdir to \"%s\"\n"
+"Cannot change directory to\n"
+"%s\n"
 "%s"
-msgstr ""
+msgstr "Хавтас руу шилжиж чадсангүй"
 
 msgid "Secure deletion"
 msgstr ""
@@ -2259,9 +2260,6 @@ msgstr ""
 msgid "Files tagged, want to cd?"
 msgstr "Файлууд тэмдэглэгдсэн байна, шилжих үү?"
 
-msgid "Cannot change directory"
-msgstr "Хавтас руу шилжиж чадсангүй"
-
 #, c-format
 msgid "Link %s to:"
 msgstr "%s руу холбох:"
@@ -2275,10 +2273,6 @@ msgstr ""
 
 #, c-format
 msgid "symlink: %s"
-msgstr ""
-
-#, c-format
-msgid "Cannot chdir to \"%s\""
 msgstr ""
 
 msgid "View file"
@@ -4266,7 +4260,10 @@ msgstr ""
 #, c-format
 msgid ""
 "%s\n"
-"doesn't look like a tar archive."
+"doesn't look like a tar archive"
+msgstr ""
+
+msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
 
 msgid "undelfs: error"

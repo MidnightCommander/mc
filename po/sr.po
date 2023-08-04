@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-03-19 20:39+0300\n"
+"POT-Creation-Date: 2023-08-04 21:17+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
 "Language-Team: Serbian (http://www.transifex.com/mc/mc/language/sr/)\n"
@@ -2145,13 +2145,12 @@ msgstr "&Убиј"
 msgid "Background jobs"
 msgstr "Позадински послови"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot chdir to \"%s\"\n"
+"Cannot change directory to\n"
+"%s\n"
 "%s"
-msgstr ""
-"Не могу да пређем у директоријум „%s“\n"
-"%s"
+msgstr "Не могу да променим директоријум"
 
 msgid "Secure deletion"
 msgstr ""
@@ -2345,9 +2344,6 @@ msgstr "Унесите назив рачунара (Ф1 за појединос�
 msgid "Files tagged, want to cd?"
 msgstr "Датотеке су означене, желите ли да променим директоријум?"
 
-msgid "Cannot change directory"
-msgstr "Не могу да променим директоријум"
-
 #, c-format
 msgid "Link %s to:"
 msgstr "Повежите „%s“ са:"
@@ -2362,10 +2358,6 @@ msgstr "веза: %s"
 #, c-format
 msgid "symlink: %s"
 msgstr "симболичка веза: %s"
-
-#, c-format
-msgid "Cannot chdir to \"%s\""
-msgstr "Не могу да пређем у директоријум „%s“"
 
 msgid "View file"
 msgstr "Прегледајте датотеку"
@@ -4445,13 +4437,16 @@ msgstr ""
 "Не могу да отворим тар архиву\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "%s\n"
-"doesn't look like a tar archive."
+"doesn't look like a tar archive"
 msgstr ""
 "%s\n"
 "не изгледа да је тар архива."
+
+msgid "tar: mc_lseek not stopped at a record boundary"
+msgstr ""
 
 msgid "undelfs: error"
 msgstr "undelfs: грешка"
@@ -4644,6 +4639,18 @@ msgstr "Да наставим са почетка?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не могу да довучем месни примерак „/ftp://some.host/editme.txt“"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot chdir to \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Не могу да пређем у директоријум „%s“\n"
+#~ "%s"
+
+#, c-format
+#~ msgid "Cannot chdir to \"%s\""
+#~ msgstr "Не могу да пређем у директоријум „%s“"
 
 #, c-format
 #~ msgid " %s%s file error"
