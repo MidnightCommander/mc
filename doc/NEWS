@@ -1,3 +1,54 @@
+Version 4.8.30
+
+- Core
+
+    * Support PCRE2 as search engine (via ----with-search-engine=pcre2) (#4450)
+    * Implement panelization buffers for both file panels (#4370)
+
+- VFS
+
+    * tar: support extended headers (including long file names and sparse files) (#1952, #2201)
+    * extfs helpers: replace "perl -w" with "use warnings" (MidnightCommander/mc#174)
+    * extfs/patchfs: be more specific in error message (#4485)
+
+- Editor
+
+    * Add syntax highlighting:
+        - Jenkinsfiles (#4469)
+        - B language (#4470)
+    * Improve syntax highlighting:
+        - ECMAScript (MidnightCommander/mc#172)
+        - ECMAScript in TypeScript (MidnightCommander/mc#172)
+        - use diff syntax highlighting for git commit messages (COMMIT_EDITMSG) (MidnightCommander/mc#85)
+
+- Misc
+
+    * Code cleanup (#4426, #4438)
+    * Filehighlight:
+        - recognize vsix files as zip files (MidnightCommander/mc#171)
+    * Skin updates:
+        - julia256 (#4441, #4445)
+
+- Fixes
+
+    * Usage of 'sed' in build system/makefiles is not portable (#4459, #4466)
+    * Unportable '$<' in Makefiles (#4460)
+    * FTBFS if ncurses used without --with-ncurses-includes= configure parameter (#4462)
+    * Ncurses library is duplicated in MCLIBS (#4463, #4465)
+    * FTBFS without ext2fs attributes support (#4464)
+    * Wrong sort order after swapping panels (#4432)
+    * Incorrect time delimiter in the copy/move progress window (#4437)
+    * Incorrect redraw of overlapped file panels (#4408)
+    * Subshell/Command line prompt is empty/missing (#3121)
+    * Find file: relative ignore directory is applied to the start search directory (#4235)
+    * Diff viewer: options are not applied on second run (#4486)
+    * mc.ext.ini: 'Edit' command from 'Default' section is ignored (#4434)
+    * mc.ext.ini: .md files are not recognized as Markdown ones by extension (#4444)
+    * mcedit: off-by-one error in paragraph formatting (#4446)
+    * ftp: incomplete file listing: block and character devices, pipes, sockets are missed (#4472)
+    * Various typos in the source code (MidnightCommander/mc#177, MidnightCommander/mc#178)
+
+
 Version 4.8.29
 
 - Core
