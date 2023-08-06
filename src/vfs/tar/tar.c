@@ -521,6 +521,8 @@ tar_fill_stat (struct vfs_s_super *archive, union block *header)
 static void
 tar_free_inode (struct vfs_class *me, struct vfs_s_inode *ino)
 {
+    (void) me;
+
     /* free sparse_map */
     if (ino->user_data != NULL)
         g_array_free ((GArray *) ino->user_data, TRUE);
