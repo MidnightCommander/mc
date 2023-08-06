@@ -694,7 +694,7 @@ pax_decode_header (tar_super_t * archive, struct tar_sparse_file *file)
             sp.offset = u;
             COPY_BUF (archive, blk, nbuf, p);
             if (!decode_num (&u, nbuf, TYPE_MAXIMUM (size_t)) || INT_ADD_OVERFLOW (sp.offset, u)
-                || file->stat_info->stat.st_size < sp.offset + u)
+                || (uintmax_t) file->stat_info->stat.st_size < sp.offset + u)
             {
                 /* malformed sparse archive member */
                 return FALSE;
