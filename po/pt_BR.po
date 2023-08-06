@@ -5,7 +5,7 @@
 # Translators:
 # Enrico Nicoletto <enrico.BR@gmx.co.uk>, 2013
 # Heitor Adão Júnior <heitoradao@gmail.com>, 2017
-# marcelo cripe <marcelocripe@gmail.com>, 2022
+# marcelo cripe <marcelocripe@gmail.com>, 2022-2023
 # Mauro Hemerly Gazzani <mauro.hemerly@gmail.com>, 2017
 # Rafael Fontenelle <rffontenelle@gmail.com>, 2012
 # Slava Zanko <slavazanko@gmail.com>, 2011
@@ -14,10 +14,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-08-04 21:17+0300\n"
+"POT-Creation-Date: 2023-08-06 15:50+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: marcelo cripe <marcelocripe@gmail.com>, 2022\n"
-"Language-Team: Portuguese (Brazil) (http://www.transifex.com/mc/mc/language/"
+"Last-Translator: marcelo cripe <marcelocripe@gmail.com>, 2022-2023\n"
+"Language-Team: Portuguese (Brazil) (http://app.transifex.com/mc/mc/language/"
 "pt_BR/)\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
@@ -848,11 +848,10 @@ msgstr "Ocorreu um erro na análise dos argumentos!"
 msgid "No arguments given to the viewer."
 msgstr "Nenhum argumento foi passado para o visualizador"
 
-#, fuzzy
 msgid "Two files are required to invoke the diffviewer."
 msgstr ""
 "Dois arquivos são necessários para invocar o visualizador de diferenças "
-"diffviewer."
+"'diffviewer'."
 
 msgid "Background protocol error"
 msgstr "Ocorreu um erro no protocolo que está sendo executado em segundo plano"
@@ -1659,9 +1658,8 @@ msgstr ""
 "Um editor de texto amigável\n"
 "escrito para o Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2023 the Free Software Foundation"
-msgstr "Direitos de Autor (c) 1996-2022 a Fundação Free Software Foundation"
+msgstr "Direitos de Autor (c) 1996-2023 a Fundação Free Software Foundation"
 
 msgid "About"
 msgstr "Sobre"
@@ -2199,12 +2197,16 @@ msgstr "&Finalizar"
 msgid "Background jobs"
 msgstr "Trabalhos em segundo plano"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot change directory to\n"
 "%s\n"
 "%s"
-msgstr "Não é possível alterar o diretório"
+msgstr ""
+"Não foi possível alterar o diretório de\n"
+"%s\n"
+"para\n"
+"%s"
 
 msgid "Secure deletion"
 msgstr "Exclusão segura"
@@ -2559,7 +2561,7 @@ msgstr ""
 "Por favor, copie as suas modificações do arquivo\n"
 "antigo para o novo arquivo de configurações."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the\n"
 "%s%s\n"
@@ -2567,11 +2569,13 @@ msgid ""
 "It seems that the installation has failed.\n"
 "Please fetch a fresh copy from the Midnight Commander package."
 msgstr ""
-"O formato do arquivo %s %s mudou com a versão 4.0. Ao que parece a "
-"instalação falhou. Por favor, obtenha uma cópia do novo pacote do Midnight "
-"Commander."
+"O formato do arquivo\n"
+"%s%s\n"
+"mudou com a versão 4.0.\n"
+"Ao que parece, a instalação falhou.\n"
+"Por favor, obtenha uma nova cópia do pacote Midnight Commander."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the\n"
 "%s\n"
@@ -2580,8 +2584,12 @@ msgid ""
 "%s%s\n"
 "or use that file as an example of how to write it."
 msgstr ""
-"O formato do arquivo %s mudou com a versão 4.0. Você pode querer copiá-lo de "
-"%s %s ou utilizar este arquivo como um exemplo de como escrevê-lo."
+"O formato do arquivo\n"
+"%s\n"
+"mudou com a versão 4.0.\n"
+"Você pode querer copiá-lo de\n"
+"%s%s\n"
+"ou utilize este arquivo como um exemplo de como escrevê-lo."
 
 msgid "DialogTitle|Copy"
 msgstr "TítuloDiálogo|Copiar"
@@ -2965,9 +2973,9 @@ msgstr "S&uspender"
 msgid "Con&tinue"
 msgstr "Con&tinuar"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%d:%02d:%02d"
-msgstr "%d:%02d.%02d"
+msgstr "%d:%02d:%02d"
 
 #, c-format
 msgid "ETA %s"
@@ -4202,9 +4210,8 @@ msgstr ""
 "Ocorreu o fim inesperado do arquivo\n"
 "%s"
 
-#, fuzzy
 msgid "Inconsistent archive"
-msgstr "O arquivo tar não é consistente"
+msgstr "O arquivo é inconsistente"
 
 #, c-format
 msgid ""
@@ -4585,16 +4592,16 @@ msgstr ""
 "Não foi possível abrir arquivo tar\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
 msgstr ""
 "%s\n"
-"não parece ser um arquivo tar."
+"não parece ser um arquivo do tipo .tar"
 
 msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr ""
+msgstr "tar: o mc_lseek não parou no limite do registro"
 
 msgid "undelfs: error"
 msgstr "Ocorreu um erro no undelfs"
@@ -4789,31 +4796,3 @@ msgstr "Você quer continuar a partir do início?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Não foi possível obter uma cópia local do /ftp://some.host/editme.txt"
-
-#, c-format
-#~ msgid ""
-#~ "Cannot chdir to \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Não é possível o chdir para \"%s\"\n"
-#~ "%s"
-
-#, c-format
-#~ msgid "Cannot chdir to \"%s\""
-#~ msgstr "Não foi possível executar o comando chdir para \"%s\""
-
-#~ msgid "Cannot change attributes on non-local filesystems"
-#~ msgstr ""
-#~ "Não é possível alterar os atributos nos sistemas de arquivos que não são "
-#~ "locais"
-
-#~ msgid "Attributes: not supported"
-#~ msgstr "Atributos: não suportados"
-
-#, c-format
-#~ msgid " %s%s file error"
-#~ msgstr "Ocorreu um erro no arquivo %s%s "
-
-#, c-format
-#~ msgid "%s file error"
-#~ msgstr "Ocorreu um erro no arquivo %s"

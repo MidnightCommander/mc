@@ -6,7 +6,7 @@
 # Junghee Lee <daemul72@gmail.com>, 2021
 # Junghee Lee <daemul72@gmail.com>, 2019-2020
 # JinYeong Bak <dongdm@gmail.com>, 2016
-# Junghee Lee <daemul72@gmail.com>, 2022
+# Junghee Lee <daemul72@gmail.com>, 2022-2023
 # Junghee Lee <daemul72@gmail.com>, 2022
 # Junghee Lee <daemul72@gmail.com>, 2019-2021
 # Slava Zanko <slavazanko@gmail.com>, 2011
@@ -14,10 +14,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-08-04 21:17+0300\n"
+"POT-Creation-Date: 2023-08-06 15:50+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Junghee Lee <daemul72@gmail.com>, 2022\n"
-"Language-Team: Korean (http://www.transifex.com/mc/mc/language/ko/)\n"
+"Last-Translator: Junghee Lee <daemul72@gmail.com>, 2022-2023\n"
+"Language-Team: Korean (http://app.transifex.com/mc/mc/language/ko/)\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -180,64 +180,64 @@ msgid "Escape"
 msgstr "Esc"
 
 msgid "Function key 1"
-msgstr "F1"
+msgstr "기능 키 1"
 
 msgid "Function key 2"
-msgstr "F2"
+msgstr "기능 키 2"
 
 msgid "Function key 3"
-msgstr "F3"
+msgstr "기능 키 3"
 
 msgid "Function key 4"
-msgstr "F4"
+msgstr "기능 키 4"
 
 msgid "Function key 5"
-msgstr "F5"
+msgstr "기능 키 5"
 
 msgid "Function key 6"
-msgstr "F6"
+msgstr "기능 키 6"
 
 msgid "Function key 7"
-msgstr "F7"
+msgstr "기능 키 7"
 
 msgid "Function key 8"
-msgstr "F8"
+msgstr "기능 키 8"
 
 msgid "Function key 9"
-msgstr "F9"
+msgstr "기능 키 9"
 
 msgid "Function key 10"
-msgstr "F10"
+msgstr "기능 키 10"
 
 msgid "Function key 11"
-msgstr "F11"
+msgstr "기능 키 11"
 
 msgid "Function key 12"
-msgstr "F12"
+msgstr "기능 키 12"
 
 msgid "Function key 13"
-msgstr "F13"
+msgstr "기능 키 13"
 
 msgid "Function key 14"
-msgstr "F14"
+msgstr "기능 키 14"
 
 msgid "Function key 15"
-msgstr "F15"
+msgstr "기능 키 15"
 
 msgid "Function key 16"
-msgstr "F16"
+msgstr "기능 키 16"
 
 msgid "Function key 17"
-msgstr "F17"
+msgstr "기능 키 17"
 
 msgid "Function key 18"
-msgstr "F18"
+msgstr "기능 키 18"
 
 msgid "Function key 19"
-msgstr "F19"
+msgstr "기능 키 19"
 
 msgid "Function key 20"
-msgstr "F20"
+msgstr "기능 키 20"
 
 msgid "Completion/M-tab"
 msgstr "완성/M-tab"
@@ -324,16 +324,16 @@ msgid "Enter on keypad"
 msgstr "키패드 Enter"
 
 msgid "Function key 21"
-msgstr "F21"
+msgstr "기능 키 21"
 
 msgid "Function key 22"
-msgstr "F22"
+msgstr "기능 키 22"
 
 msgid "Function key 23"
-msgstr "F23"
+msgstr "기능 키 23"
 
 msgid "Function key 24"
-msgstr "F24"
+msgstr "기능 키 24"
 
 msgid "A1 key"
 msgstr "A1 키"
@@ -533,7 +533,7 @@ msgstr ""
 "%s"
 
 msgid "Cannot close pipe descriptor (p == NULL)"
-msgstr ""
+msgstr "파이프 설명자를 닫을 수 없습니다(p == NULL)"
 
 #, c-format
 msgid ""
@@ -607,14 +607,14 @@ msgid "Screens"
 msgstr "화면"
 
 msgid "History"
-msgstr "기록"
+msgstr "히스토리"
 
 #. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
 msgid "DialogTitle|History cleanup"
-msgstr "대화상자제목|기록 지우기"
+msgstr "히스토리 정리"
 
 msgid "Do you want clean this history?"
-msgstr "이 기록을 지우시겠습니까?"
+msgstr "이 히스토리를 지우시겠습니까?"
 
 msgid "&Yes"
 msgstr "예(&Y)"
@@ -826,7 +826,6 @@ msgstr "인수 구문 분석 오류!"
 msgid "No arguments given to the viewer."
 msgstr "뷰어에 지정된 인수가 없습니다."
 
-#, fuzzy
 msgid "Two files are required to invoke the diffviewer."
 msgstr "Diffviewer를 호출하려면 두 개의 파일이 필요합니다."
 
@@ -948,25 +947,25 @@ msgid "Enter line:"
 msgstr "행 번호 입력:"
 
 msgid "ButtonBar|Help"
-msgstr "버튼바|도움말"
+msgstr "도움말"
 
 msgid "ButtonBar|Save"
-msgstr "버튼바|저장"
+msgstr "저장"
 
 msgid "ButtonBar|Edit"
-msgstr "버튼바|편집"
+msgstr "편집"
 
 msgid "ButtonBar|Merge"
-msgstr "버튼바|병합"
+msgstr "병합"
 
 msgid "ButtonBar|Search"
-msgstr "버튼바|검색"
+msgstr "검색"
 
 msgid "ButtonBar|Options"
-msgstr "버튼바|옵션"
+msgstr "옵션"
 
 msgid "ButtonBar|Quit"
-msgstr "버튼바|종료"
+msgstr "종료"
 
 msgid "Quit"
 msgstr "종료"
@@ -1212,7 +1211,7 @@ msgid "Run sort"
 msgstr "정렬 실행"
 
 msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
-msgstr ""
+msgstr "공백으로 구분된 정렬 옵션을 입력합니다(sort(1) 매뉴얼 페이지 참조):"
 
 msgid "Sort"
 msgstr "정렬"
@@ -1304,7 +1303,7 @@ msgid "&Close"
 msgstr "닫기(&C)"
 
 msgid "&History..."
-msgstr "기록(&H)..."
+msgstr "히스토리(&H)..."
 
 msgid "Save &as..."
 msgstr "다른 이름으로 저장(&A)..."
@@ -1628,9 +1627,8 @@ msgstr ""
 "사용자 친화적인 텍스트 편집기\n"
 "미드나잇 커맨더를 위해 작성됨."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2023 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2022 자유 소프트웨어 재단"
+msgstr "Copyright (C) 1996-2023 자유 소프트웨어 재단"
 
 msgid "About"
 msgstr "소개"
@@ -1642,22 +1640,22 @@ msgid "Edit: "
 msgstr "편집: "
 
 msgid "ButtonBar|Mark"
-msgstr "버튼바|표시"
+msgstr "표시"
 
 msgid "ButtonBar|Replac"
-msgstr "버튼바|바꾸기"
+msgstr "바꾸기"
 
 msgid "ButtonBar|Copy"
-msgstr "버튼바|복사"
+msgstr "복사"
 
 msgid "ButtonBar|Move"
-msgstr "버튼바|이동"
+msgstr "이동"
 
 msgid "ButtonBar|Delete"
-msgstr "버튼바|삭제"
+msgstr "삭제"
 
 msgid "ButtonBar|PullDn"
-msgstr "버튼바|풀다운"
+msgstr "풀다운"
 
 msgid "Breton"
 msgstr "브르타뉴어"
@@ -2067,22 +2065,22 @@ msgstr "정렬 순서"
 
 #. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 msgid "Confirmation|&Delete"
-msgstr "확인|삭제(&D)"
+msgstr "삭제(&D)"
 
 msgid "Confirmation|O&verwrite"
-msgstr "확인|덮어쓰기(&V)"
+msgstr "덮어쓰기(&V)"
 
 msgid "Confirmation|&Execute"
-msgstr "확인|실행(&E)"
+msgstr "실행(&E)"
 
 msgid "Confirmation|E&xit"
-msgstr "확인|종료(&X)"
+msgstr "종료(&X)"
 
 msgid "Confirmation|Di&rectory hotlist delete"
-msgstr "확인|디렉터리 단축목록 삭제(&R)"
+msgstr "디렉터리 단축목록 삭제(&R)"
 
 msgid "Confirmation|&History cleanup"
-msgstr "확인|기록 청소(&H)"
+msgstr "히스토리 정리(&H)"
 
 msgid "Confirmation"
 msgstr "확인"
@@ -2162,12 +2160,12 @@ msgstr "죽임(&K)"
 msgid "Background jobs"
 msgstr "백그라운드 작업"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot change directory to\n"
 "%s\n"
 "%s"
-msgstr "디렉터리를 변경할 수 없습니다"
+msgstr ""
 
 msgid "Secure deletion"
 msgstr "안전한 삭제"
@@ -2477,7 +2475,7 @@ msgstr ""
 "다음 파일: (자세한 내용은 F1)"
 
 msgid "Directory scanning"
-msgstr "디렉터리 경로"
+msgstr "디렉터리 스캐닝"
 
 msgid "Setup"
 msgstr "설정"
@@ -2513,6 +2511,9 @@ msgid ""
 "Midnight Commander now uses %s file.\n"
 "Please copy your modifications of the old file to the new one."
 msgstr ""
+"오래된 %s 파일이 있습니다.\n"
+"Midnight Commander는 이제 %s 파일을 사용합니다.\n"
+"이전 파일의 수정 사항을 새 파일에 복사합니다."
 
 #, c-format
 msgid ""
@@ -2522,6 +2523,10 @@ msgid ""
 "It seems that the installation has failed.\n"
 "Please fetch a fresh copy from the Midnight Commander package."
 msgstr ""
+"%s%s\n"
+"파일의 형식이 버전 4.0에서 변경되었습니다.\n"
+"설치가 실패한 것 같습니다.\n"
+"Midnight Commander 패키지에서 새 사본을 가져오십시오."
 
 #, c-format
 msgid ""
@@ -2532,24 +2537,29 @@ msgid ""
 "%s%s\n"
 "or use that file as an example of how to write it."
 msgstr ""
+"%s\n"
+"파일의 형식이 버전 4.0에서 변경되었습니다.\n"
+"%s%s에서\n"
+"복사하거나 해당 파일을 작성 방법의 예로\n"
+"사용할 수 있습니다."
 
 msgid "DialogTitle|Copy"
-msgstr "대화상자제목|복사"
+msgstr "복사"
 
 msgid "DialogTitle|Move"
-msgstr "대화상자제목|이동"
+msgstr "이동"
 
 msgid "DialogTitle|Delete"
-msgstr "대화상자제목|삭제"
+msgstr "삭제"
 
 msgid "FileOperation|Copy"
-msgstr "파일작업|복사"
+msgstr "복사"
 
 msgid "FileOperation|Move"
-msgstr "파일작업|이동"
+msgstr "이동"
 
 msgid "FileOperation|Delete"
-msgstr "파일작업|삭제"
+msgstr "삭제"
 
 #, no-c-format
 msgid "%o %f%n\"%s\"%m"
@@ -2827,13 +2837,13 @@ msgid "(stalled)"
 msgstr "(지연됨)"
 
 msgid "Incomplete file was retrieved"
-msgstr ""
+msgstr "불완전한 파일을 검색했습니다"
 
 msgid "&Keep"
 msgstr "보존(&K)"
 
 msgid "&Continue copy"
-msgstr ""
+msgstr "복사 계속하기(&C)"
 
 #, c-format
 msgid ""
@@ -2912,9 +2922,9 @@ msgstr "일시 중단(&U)"
 msgid "Con&tinue"
 msgstr "계속(&T)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%d:%02d:%02d"
-msgstr "%d:%02d.%02d"
+msgstr "%d:%02d:%02d"
 
 #, c-format
 msgid "ETA %s"
@@ -2970,7 +2980,7 @@ msgstr "백그라운드 프로세스: 파일 존재"
 
 #, c-format
 msgid "Files processed: %zu / %zu"
-msgstr ""
+msgstr "파일 처리됨: %zu / %zu"
 
 #, c-format
 msgid "Files processed: %zu"
@@ -2998,7 +3008,7 @@ msgstr " 전체: %s "
 
 #, c-format
 msgid " Total: %s / %s "
-msgstr ""
+msgstr " 전체: %s / %s "
 
 msgid "Source"
 msgstr "원본"
@@ -3050,7 +3060,7 @@ msgid "&Listing format..."
 msgstr "목록 형식(&L)..."
 
 msgid "&Sort order..."
-msgstr ""
+msgstr "정렬 순서(&S)..."
 
 msgid "&Filter..."
 msgstr "필터(&F)..."
@@ -3065,13 +3075,13 @@ msgid "S&hell link..."
 msgstr "쉘 링크(&H)..."
 
 msgid "SFTP li&nk..."
-msgstr ""
+msgstr "SFTP 링크(&S)..."
 
 msgid "Paneli&ze"
 msgstr "패널 크기조정"
 
 msgid "&Rescan"
-msgstr "재검색(&R)"
+msgstr "재스캔(&R)"
 
 msgid "&View"
 msgstr "보기(&V)"
@@ -3158,7 +3168,7 @@ msgid "Show directory s&izes"
 msgstr "디렉터리 크기 보기(&I)"
 
 msgid "Command &history"
-msgstr "명령 기록(&H)"
+msgstr "명령 히스토리(&H)"
 
 msgid "Viewed/edited files hi&story"
 msgstr "보기/편집된 파일 기록(&s)"
@@ -3238,16 +3248,16 @@ msgid "&Right"
 msgstr "오른쪽(&R)"
 
 msgid "ButtonBar|Menu"
-msgstr "버튼바|메뉴"
+msgstr "메뉴"
 
 msgid "ButtonBar|View"
-msgstr "버튼바|보기"
+msgstr "보기"
 
 msgid "ButtonBar|RenMov"
-msgstr "버튼바|이름변경/이동"
+msgstr "이름변경/이동"
 
 msgid "ButtonBar|Mkdir"
-msgstr "버튼바|디렉생성"
+msgstr "디렉생성"
 
 msgid "&Chdir"
 msgstr "디렉터리 이동(&C)"
@@ -3446,7 +3456,7 @@ msgstr "공간 정보 없습니다"
 
 #, c-format
 msgid "Free space: %s / %s (%d%%)"
-msgstr ""
+msgstr "여유 공간: %s / %s (%d%%)"
 
 #, c-format
 msgid "Type:       %s"
@@ -3557,7 +3567,7 @@ msgstr "메모리 소진됨!"
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|u"
-msgstr "정렬|u"
+msgstr "u"
 
 msgid "&Unsorted"
 msgstr "정렬 안함(&U)"
@@ -3565,7 +3575,7 @@ msgstr "정렬 안함(&U)"
 #. TRANSLATORS: one single character to represent 'name' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|n"
-msgstr "정렬|n"
+msgstr "n"
 
 msgid "&Name"
 msgstr "이름(&N)"
@@ -3573,7 +3583,7 @@ msgstr "이름(&N)"
 #. TRANSLATORS: one single character to represent 'version' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|v"
-msgstr "정렬|v"
+msgstr "v"
 
 msgid "&Version"
 msgstr "버전(&V)"
@@ -3581,7 +3591,7 @@ msgstr "버전(&V)"
 #. TRANSLATORS: one single character to represent 'extension' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|e"
-msgstr "정렬|e"
+msgstr "e"
 
 msgid "E&xtension"
 msgstr "확장자(&X)"
@@ -3589,7 +3599,7 @@ msgstr "확장자(&X)"
 #. TRANSLATORS: one single character to represent 'size' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|s"
-msgstr "정렬|s"
+msgstr "s"
 
 msgid "&Size"
 msgstr "크기(&S)"
@@ -3600,7 +3610,7 @@ msgstr "블럭 크기"
 #. TRANSLATORS: one single character to represent 'Modify time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|m"
-msgstr "정렬|m"
+msgstr "m"
 
 msgid "&Modify time"
 msgstr "시간 수정(&M)"
@@ -3608,7 +3618,7 @@ msgstr "시간 수정(&M)"
 #. TRANSLATORS: one single character to represent 'Access time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|a"
-msgstr "정렬|a"
+msgstr "a"
 
 msgid "&Access time"
 msgstr "호출 시간(&A)"
@@ -3616,7 +3626,7 @@ msgstr "호출 시간(&A)"
 #. TRANSLATORS: one single character to represent 'Change time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|h"
-msgstr "정렬|h"
+msgstr "h"
 
 msgid "C&hange time"
 msgstr "시간 변경(&H)"
@@ -3630,7 +3640,7 @@ msgstr "Nl"
 #. TRANSLATORS: one single character to represent 'inode' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|i"
-msgstr "정렬|i"
+msgstr "i"
 
 msgid "&Inode"
 msgstr "아이 노드(&I)"
@@ -3777,19 +3787,19 @@ msgid "Delete %s?"
 msgstr "%s을(를) 삭제하시겠습니까?"
 
 msgid "ButtonBar|Static"
-msgstr "버튼바|고정"
+msgstr "정적"
 
 msgid "ButtonBar|Dynamc"
-msgstr "버튼바|다이나믹"
+msgstr "동적"
 
 msgid "ButtonBar|Rescan"
-msgstr "버튼바|재검색"
+msgstr "재스캔"
 
 msgid "ButtonBar|Forget"
-msgstr "버튼바|잊기"
+msgstr "잊기"
 
 msgid "ButtonBar|Rmdir"
-msgstr "버튼바|디렉제거"
+msgstr "디렉제거"
 
 #, c-format
 msgid ""
@@ -3813,10 +3823,10 @@ msgid "Help"
 msgstr "도움말"
 
 msgid "ButtonBar|Index"
-msgstr "버튼바|목차"
+msgstr "색인"
 
 msgid "ButtonBar|Prev"
-msgstr "버튼바|이전"
+msgstr "이전"
 
 msgid "Learn keys"
 msgstr "학습 키"
@@ -4083,7 +4093,7 @@ msgid ""
 "Cannot open cpio archive\n"
 "%s"
 msgstr ""
-"cpio 압축파일을 열 수 없습니다\n"
+"cpio 압축파일을 열 수 없음\n"
 "%s"
 
 #, c-format
@@ -4126,9 +4136,8 @@ msgstr ""
 "%s\n"
 "파일의 예기치 않은 끝"
 
-#, fuzzy
 msgid "Inconsistent archive"
-msgstr "잘못된 tar 압축파일"
+msgstr "일관성 없는 압축파일"
 
 #, c-format
 msgid ""
@@ -4173,7 +4182,7 @@ msgid "fish: Sending initial line..."
 msgstr "fish: 초기화 라인 보내기..."
 
 msgid "fish: Handshaking version..."
-msgstr "fish: 주고받기 버전..."
+msgstr "fish: 핸드셰이킹 버전..."
 
 msgid "fish: Getting host info..."
 msgstr "fish: 호스트 정보 가져오는 중..."
@@ -4264,18 +4273,18 @@ msgstr "재시도 대기 중... %d(Control-G가 취소됨)"
 
 #, c-format
 msgid "ftpfs: could not make address-to-name translation: %s"
-msgstr ""
+msgstr "ftpfs: 주소를 이름으로 변환할 수 없습니다: %s"
 
 #, c-format
 msgid "ftpfs: try reconnect to server, attempt %u"
-msgstr ""
+msgstr "ftpfs: 서버에 다시 연결 시도, %u 시도"
 
 #, c-format
 msgid "ftpfs: could not get socket name: %s"
-msgstr ""
+msgstr "ftpfs: 소켓 이름을 가져올 수 없습니다: %s"
 
 msgid "ftpfs: could not reconnect to server"
-msgstr ""
+msgstr "ftpfs: 서버에 다시 연결할 수 없습니다"
 
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: 잘못된 주소 패밀리"
@@ -4486,13 +4495,11 @@ msgstr ""
 "tar 압축파일을 열 수 없습니다\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
 msgstr ""
-"%s\n"
-" tar 압축파일처럼 보이지 않음."
 
 msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
@@ -4504,7 +4511,7 @@ msgid "not enough memory"
 msgstr "메모리 부족"
 
 msgid "while allocating block buffer"
-msgstr "블록 버퍼를 할당하는 중"
+msgstr "블록 버퍼를 할당하는 동안"
 
 #, c-format
 msgid "open_inode_scan: %d"
@@ -4512,7 +4519,7 @@ msgstr "open_inode_scan: %d"
 
 #, c-format
 msgid "while starting inode scan %d"
-msgstr "inode 검사를 시작하는 중 %d"
+msgstr "inode 스캔 %d를 시작하는 동안"
 
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
@@ -4527,7 +4534,7 @@ msgstr "배열을 재할당하는 동안 메모리가 더 이상 없습니다"
 
 #, c-format
 msgid "while doing inode scan %d"
-msgstr "inode 검색을 수행하는 동안 %d"
+msgstr "inode 스캔 %d를 수행하는 동안"
 
 #, c-format
 msgid "Cannot open file %s"
@@ -4603,34 +4610,34 @@ msgid "Goto"
 msgstr "건너뛰기"
 
 msgid "ButtonBar|Ascii"
-msgstr "버튼바|Ascii"
+msgstr "Ascii"
 
 msgid "ButtonBar|HxSrch"
-msgstr "버튼바|16비트 검색"
+msgstr "16비트 검색"
 
 msgid "ButtonBar|UnWrap"
-msgstr "버튼바|줄바꿀 해제"
+msgstr "줄바꿈 해제"
 
 msgid "ButtonBar|Wrap"
-msgstr "버튼바|줄바꿈"
+msgstr "줄바꿈"
 
 msgid "ButtonBar|Hex"
-msgstr "버튼바|16비트"
+msgstr " 16비트"
 
 msgid "ButtonBar|Goto"
-msgstr "버튼바|Goto"
+msgstr " Goto"
 
 msgid "ButtonBar|Raw"
-msgstr "버튼바|원본 형식"
+msgstr " 원본 형식"
 
 msgid "ButtonBar|Parse"
-msgstr "버튼바|구문 분석"
+msgstr " 구문 분석"
 
 msgid "ButtonBar|Unform"
-msgstr "버튼바|형식화되지 않음"
+msgstr " 형식화되지 않음"
 
 msgid "ButtonBar|Format"
-msgstr "버튼바|형식"
+msgstr " 형식"
 
 #, c-format
 msgid ""
@@ -4688,29 +4695,3 @@ msgstr "처음부터 계속하시겠습니까?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "/ftp://some.host/editme.txt의 로컬 복사본을 가져올 수 없습니다"
-
-#, c-format
-#~ msgid ""
-#~ "Cannot chdir to \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "\"%s\"로 디렉터리 변경할 수 없습니다\n"
-#~ "%s"
-
-#, c-format
-#~ msgid "Cannot chdir to \"%s\""
-#~ msgstr "%s로 디렉터리 변경을 할 수 없습니다"
-
-#~ msgid "Cannot change attributes on non-local filesystems"
-#~ msgstr "로컬이 아닌 파일 시스템의 속성을 변경할 수 없습니다"
-
-#~ msgid "Attributes: not supported"
-#~ msgstr "속성: 지원되지 않음"
-
-#, c-format
-#~ msgid " %s%s file error"
-#~ msgstr " %s%s 파일 오류"
-
-#, c-format
-#~ msgid "%s file error"
-#~ msgstr "%s 파일 오류"

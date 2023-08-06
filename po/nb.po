@@ -3,17 +3,17 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# heskjestad <cato@heskjestad.xyz>, 2021-2022
+# heskjestad <cato@heskjestad.xyz>, 2021-2023
 # heskjestad <cato@heskjestad.xyz>, 2019-2021
 # Slava Zanko <slavazanko@gmail.com>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-08-04 21:17+0300\n"
+"POT-Creation-Date: 2023-08-06 15:50+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: heskjestad <cato@heskjestad.xyz>, 2021-2022\n"
-"Language-Team: Norwegian Bokmål (http://www.transifex.com/mc/mc/language/"
+"Last-Translator: heskjestad <cato@heskjestad.xyz>, 2021-2023\n"
+"Language-Team: Norwegian Bokmål (http://app.transifex.com/mc/mc/language/"
 "nb/)\n"
 "Language: nb\n"
 "MIME-Version: 1.0\n"
@@ -829,7 +829,6 @@ msgstr "Klarte ikke tolke argumentene."
 msgid "No arguments given to the viewer."
 msgstr "Filviseren fikk ingen argumenter."
 
-#, fuzzy
 msgid "Two files are required to invoke the diffviewer."
 msgstr "Diffviseren trenger to filnavn for å starte."
 
@@ -1635,9 +1634,8 @@ msgstr ""
 "Et brukervennlig skriveprogram\n"
 "skrevet for Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2023 the Free Software Foundation"
-msgstr "Opphavsrett (C) 1996-2022 the Free Software Foundation"
+msgstr "Opphavsrett (C) 1996-2023 the Free Software Foundation"
 
 msgid "About"
 msgstr "Om"
@@ -2170,12 +2168,12 @@ msgstr "&Tving stopp"
 msgid "Background jobs"
 msgstr "Bakgrunnsjobber"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot change directory to\n"
 "%s\n"
 "%s"
-msgstr " Klarte ikke bytte mappe"
+msgstr ""
 
 msgid "Secure deletion"
 msgstr "Sikker sletting"
@@ -2525,7 +2523,7 @@ msgstr ""
 "Midnight Commandor bruker nå fila %s.\n"
 "Kopier ev. endringer i den gamle fila til den nye."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the\n"
 "%s%s\n"
@@ -2533,11 +2531,13 @@ msgid ""
 "It seems that the installation has failed.\n"
 "Please fetch a fresh copy from the Midnight Commander package."
 msgstr ""
-"Formatet til fila %s%s ble endret i versjon 4.0. Det ser ut som om "
-"installasjonen mislyktes. Hent en oppdatert kopi fra Midnight Commander-"
-"pakken."
+"Formatet til fila\n"
+"%s%s\n"
+"ble endret i versjon 4.0.\n"
+"Det ser ut som om installasjonen mislyktes.\n"
+"Hent en oppdatert kopi fra Midnight Commander-pakken."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the\n"
 "%s\n"
@@ -2546,8 +2546,12 @@ msgid ""
 "%s%s\n"
 "or use that file as an example of how to write it."
 msgstr ""
-"Formatet til fila %s ble endret i versjon 4.0. Du kan enten hente det fra %s"
-"%s eller bruke fila som en eksempelfil."
+"Formatet til fila\n"
+"%s\n"
+"ble endret i versjon 4.0.\n"
+"Du kan enten hente det fra\n"
+"%s%s\n"
+"eller bruke fila som en eksempelfil."
 
 msgid "DialogTitle|Copy"
 msgstr "DialogTitle|Kopier"
@@ -2927,9 +2931,9 @@ msgstr "&Pause"
 msgid "Con&tinue"
 msgstr "&Fortsett"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%d:%02d:%02d"
-msgstr "%d:%02d.%02d"
+msgstr "%d:%02d:%02d"
 
 #, c-format
 msgid "ETA %s"
@@ -4144,9 +4148,8 @@ msgstr ""
 "Uventet slutt på fil\n"
 "%s"
 
-#, fuzzy
 msgid "Inconsistent archive"
-msgstr "Inkonsistent tar-arkiv"
+msgstr "Inkonsistent arkiv"
 
 #, c-format
 msgid ""
@@ -4509,13 +4512,11 @@ msgstr ""
 "Klarte ikke åpne tar-arkiv\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
 msgstr ""
-"%s\n"
-"fremstår ikke som et tar-arkiv."
 
 msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
@@ -4711,29 +4712,3 @@ msgstr "Fortsett fra begynnelsen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Klarte ikke hente en lokal kopi av /ftp://some.host/editme.txt"
-
-#, c-format
-#~ msgid ""
-#~ "Cannot chdir to \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Klarte ikke bytte mappe til «%s»\n"
-#~ "%s"
-
-#, c-format
-#~ msgid "Cannot chdir to \"%s\""
-#~ msgstr "Klarte ikke bytte mappe til «%s»"
-
-#~ msgid "Cannot change attributes on non-local filesystems"
-#~ msgstr "Kan ikke endre attributter i eksterne filsystemer"
-
-#~ msgid "Attributes: not supported"
-#~ msgstr "Attributter: Støttes ikke"
-
-#, c-format
-#~ msgid " %s%s file error"
-#~ msgstr "Feil i fila %s%s "
-
-#, c-format
-#~ msgid "%s file error"
-#~ msgstr "Feil i fila %s"

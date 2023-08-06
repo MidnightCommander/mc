@@ -6,14 +6,15 @@
 # George Machitidze <giomac@gmail.com>, 2012,2014
 # Temuri Doghonadze <temuri.doghonadze@gmail.com>, 2022
 # Temuri Doghonadze <temuri.doghonadze@gmail.com>, 2022
+# Temuri Doghonadze <temuri.doghonadze@gmail.com>, 2022
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-08-04 21:17+0300\n"
+"POT-Creation-Date: 2023-08-06 15:50+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>, 2022\n"
-"Language-Team: Georgian (http://www.transifex.com/mc/mc/language/ka/)\n"
+"Language-Team: Georgian (http://app.transifex.com/mc/mc/language/ka/)\n"
 "Language: ka\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -83,7 +84,7 @@ msgid "Invalid character"
 msgstr "არასწორი სიმბოლო"
 
 msgid "Unmatched quotes character"
-msgstr ""
+msgstr "დაუმთხვეველი ბრჭყალების სიმბოლო"
 
 #, c-format
 msgid ""
@@ -102,7 +103,7 @@ msgstr ""
 
 #, c-format
 msgid "Invalid token number %d"
-msgstr ""
+msgstr "კოდის არასწორი ნომერი %d"
 
 msgid "Regular expression error"
 msgstr "შეცდომა რეგულარულ გამოსახულებაში"
@@ -117,7 +118,7 @@ msgid "He&xadecimal"
 msgstr "ტე&ქვსმეტობითი"
 
 msgid "Wil&dcard search"
-msgstr ""
+msgstr "&ვაილდკარდით ძებნა"
 
 #, c-format
 msgid ""
@@ -441,7 +442,7 @@ msgid "Shift"
 msgstr "Shift"
 
 msgid "The TERM environment variable is unset!\n"
-msgstr ""
+msgstr "გარემოს ცვლადი TERM დაყენებული არაა!\n"
 
 msgid "Cannot check SIGWINCH pipe"
 msgstr ""
@@ -539,7 +540,7 @@ msgstr "ფაილის ცვლილებები დაიკარგ�
 
 #, c-format
 msgid "%s is not a directory\n"
-msgstr "%s არ არის დირექტორია\n"
+msgstr "%s საქაღალდე არაა\n"
 
 #, c-format
 msgid "Directory %s is not owned by you\n"
@@ -551,7 +552,7 @@ msgstr ""
 
 #, c-format
 msgid "Cannot create temporary directory %s: %s\n"
-msgstr ""
+msgstr "დროებითი საქაღალდის (%s) შექმნა შეუძლებელია: %s\n"
 
 #, c-format
 msgid "Temporary files will be created in %s\n"
@@ -666,7 +667,7 @@ msgid "Tries to use termcap instead of terminfo"
 msgstr ""
 
 msgid "To run on slow terminals"
-msgstr ""
+msgstr "ნელ ტერმინალებზე გასაშვებად"
 
 msgid "Use stickchars to draw"
 msgstr ""
@@ -681,13 +682,13 @@ msgid "Don't load definitions of key bindings from file, use defaults"
 msgstr ""
 
 msgid "Requests to run in black and white"
-msgstr ""
+msgstr "შავ-თეთრ რეჟიმში გაშვება"
 
 msgid "Request to run in color mode"
-msgstr ""
+msgstr "ფერად რეჟიმში გაშვება"
 
 msgid "Specifies a color configuration"
-msgstr ""
+msgstr "ფერების კონფიგურაციის მითითება"
 
 msgid "<string>"
 msgstr "<string>"
@@ -716,6 +717,25 @@ msgid ""
 "   Viewer:       viewnormal,viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 msgstr ""
+"--colors KEYWORD={FORE},{BACK},{ATTR}:KEYWORD2=...\n"
+"\n"
+"{FORE}, {BACK} და {ATTR} შეგიძლიათ გამოტოვოთ.გამოყენებული იქნება "
+"ნაგულისხმები მნიშვნელობები\n"
+"\n"
+" საკვანძო სიტყვები:\n"
+"   გლობალური:       errors, disabled, reverse, gauge, header\n"
+"                 input, inputmark, inputunchanged, commandlinemark\n"
+"                 bbarhotkey, bbarbutton, statusbar\n"
+"   ფაილის ჩვენება: normal, selected, marked, markselect\n"
+"   ფანჯრები: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"                 errdhotfocus\n"
+"   მენიუები:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
+"   მხტუნარა მენიუები:  pmenunormal, pmenusel, pmenutitle\n"
+"   რედაქტორი:       editnormal, editbold, editmarked, editwhitespace,\n"
+"                 editlinestate, editbg, editframe, editframeactive\n"
+"                 editframedrag\n"
+"   მნახველი:       viewnormal,viewbold, viewunderline, viewselected\n"
+"   დახმარება:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 
 #. TRANSLATORS: don't translate color names and attributes
 msgid ""
@@ -735,7 +755,7 @@ msgid "Color options"
 msgstr "ფერების პარამეტრები"
 
 msgid "[+lineno] file1[:lineno] [file2[:lineno]...]"
-msgstr ""
+msgstr "[+lineno] file1[:lineno] [file2[:lineno]...]"
 
 msgid "file"
 msgstr "ფაილი"
@@ -744,7 +764,7 @@ msgid "file1 file2"
 msgstr "ფაილი1 ფაილი2"
 
 msgid "[this_dir] [other_panel_dir]"
-msgstr ""
+msgstr "[this_dir] [other_panel_dir]"
 
 msgid ""
 "\n"
@@ -763,10 +783,10 @@ msgid "Terminal options"
 msgstr "ტერმინალის პარამეტრები"
 
 msgid "Arguments parse error!"
-msgstr ""
+msgstr "არგუმენტების დამუშავების შეცდომა!"
 
 msgid "No arguments given to the viewer."
-msgstr ""
+msgstr "მნახველისთვის არგუმენტები გადაცემული არაა."
 
 msgid "Two files are required to invoke the diffviewer."
 msgstr ""
@@ -781,10 +801,10 @@ msgid "Background process error"
 msgstr "ფონური პროცესის შეცდომა"
 
 msgid "Unknown error in child"
-msgstr ""
+msgstr "უცნობი შეცდომა შვილში"
 
 msgid "Child died unexpectedly"
-msgstr ""
+msgstr "შვილი მოულოდნელად მოკვდა"
 
 msgid ""
 "Background process sent us a request for more arguments\n"
@@ -798,7 +818,7 @@ msgid "Enter search string:"
 msgstr "შეიყვანეთ საძებნი სტრიქონი:"
 
 msgid "Cas&e sensitive"
-msgstr ""
+msgstr "&რეგისტრზე-დამოკიდებული"
 
 msgid "&Backwards"
 msgstr "&უკან"
@@ -916,7 +936,7 @@ msgstr "განსხვავება:"
 
 #, c-format
 msgid "\"%s\" is a directory"
-msgstr "\"%s\" დირექტორიაა"
+msgstr "\"%s\" საქაღალდეა"
 
 #, c-format
 msgid ""
@@ -954,7 +974,7 @@ msgstr ""
 
 #, c-format
 msgid "\"%s\" is not a regular file"
-msgstr ""
+msgstr "\"%s\" ჩვეულებრივი ფაილი არაა"
 
 #, c-format
 msgid ""
@@ -981,7 +1001,7 @@ msgstr ""
 
 #, c-format
 msgid "Error writing to pipe: %s"
-msgstr ""
+msgstr "ფაიფში ჩაწერის შეცდომა: %s"
 
 #, c-format
 msgid "Cannot open pipe for writing: %s"
@@ -1944,13 +1964,13 @@ msgid ""
 msgstr ""
 
 msgid "&Full file list"
-msgstr ""
+msgstr "&ფაილების სრული სია"
 
 msgid "&Brief file list:"
-msgstr ""
+msgstr "&მოკლე ფაილების სია:"
 
 msgid "&Long file list"
-msgstr ""
+msgstr "ფაილების &გრძელი სია"
 
 msgid "&User defined:"
 msgstr ""
@@ -1968,7 +1988,7 @@ msgid "Executable &first"
 msgstr ""
 
 msgid "&Reverse"
-msgstr ""
+msgstr "&რევერსი"
 
 msgid "Sort order"
 msgstr "დალაგების წესი"
@@ -1996,28 +2016,28 @@ msgid "Confirmation"
 msgstr "დასტური"
 
 msgid "&UTF-8 output"
-msgstr ""
+msgstr "&UTF-8 გამოტანა"
 
 msgid "&Full 8 bits output"
-msgstr ""
+msgstr "&სრული8 ბიტის გამოტანა"
 
 msgid "&ISO 8859-1"
-msgstr ""
+msgstr "&ISO 8859-1"
 
 msgid "7 &bits"
-msgstr ""
+msgstr "7 &ბიტიანი"
 
 msgid "F&ull 8 bits input"
-msgstr ""
+msgstr "სრული 8 ბიტიანი შეყვანა"
 
 msgid "Display bits"
-msgstr ""
+msgstr "ბიტების ცვენება"
 
 msgid "Input / display codepage:"
 msgstr ""
 
 msgid "Directory tree"
-msgstr "დირექტორიების ხე"
+msgstr "საქაღალდეების ხე"
 
 msgid "Timeout for freeing VFSs (sec):"
 msgstr ""
@@ -2032,10 +2052,10 @@ msgid "&Always use ftp proxy:"
 msgstr ""
 
 msgid "&Use ~/.netrc"
-msgstr ""
+msgstr "~/.netrc-ის &გამოყენება"
 
 msgid "Use &passive mode"
-msgstr ""
+msgstr "პასიური რეჟიმის&გამოყენება"
 
 msgid "Use passive mode over pro&xy"
 msgstr ""
@@ -2071,12 +2091,12 @@ msgstr "მოკვლა"
 msgid "Background jobs"
 msgstr "ფონური ამოცანები"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot change directory to\n"
 "%s\n"
 "%s"
-msgstr "საქაღალდე %s-ის შექმნა შეუძლებელია"
+msgstr ""
 
 msgid "Secure deletion"
 msgstr "უსაფრთხოდ წაშლა"
@@ -2304,7 +2324,7 @@ msgid "Create a new Directory"
 msgstr "ახალი საქაღალდის შექმნა"
 
 msgid "Enter directory name:"
-msgstr "შეიყვანეთ დირექტორიის სახელი:"
+msgstr "შეიყვანეთ საქაღალდის სახელი:"
 
 msgid "Extension file edit"
 msgstr ""
@@ -2322,7 +2342,7 @@ msgid "Which highlighting file you want to edit?"
 msgstr ""
 
 msgid "Compare directories"
-msgstr ""
+msgstr "საქაღალდეების შედარება"
 
 msgid "Select compare method:"
 msgstr ""
@@ -2433,26 +2453,26 @@ msgid ""
 msgstr ""
 
 msgid "DialogTitle|Copy"
-msgstr ""
+msgstr "კოპირება"
 
 msgid "DialogTitle|Move"
-msgstr ""
+msgstr "გადატანა"
 
 msgid "DialogTitle|Delete"
-msgstr ""
+msgstr "წაშლა"
 
 msgid "FileOperation|Copy"
-msgstr ""
+msgstr "კოპირება"
 
 msgid "FileOperation|Move"
-msgstr ""
+msgstr "გადატანა"
 
 msgid "FileOperation|Delete"
-msgstr ""
+msgstr "წაშლა"
 
 #, no-c-format
 msgid "%o %f%n\"%s\"%m"
-msgstr ""
+msgstr "%o %f%n\"%s\"%m"
 
 #, no-c-format
 msgid "%o %d %f%m"
@@ -2465,14 +2485,14 @@ msgid "directory"
 msgstr "საქაღალდე"
 
 msgid "directories"
-msgstr ""
+msgstr "საქაღალდეები"
 
 msgid "files/directories"
-msgstr ""
+msgstr "ფაილები/საქაღალდეები"
 
 #. TRANSLATORS: keep leading space here to split words in Copy/Move dialog
 msgid " with source mask:"
-msgstr ""
+msgstr " წყაროს ნიღბით:"
 
 #, c-format
 msgid ""
@@ -2525,13 +2545,15 @@ msgid ""
 msgstr ""
 
 msgid "Ski&p all"
-msgstr ""
+msgstr "&ყველას გამოტოვება"
 
 #, c-format
 msgid ""
 "Directory \"%s\" not empty.\n"
 "Delete it recursively?"
 msgstr ""
+"საქაღალდე \"%s\"ცარიელი არაა.\n"
+"წავშალო რეკურსიულად?"
 
 #, c-format
 msgid ""
@@ -2668,7 +2690,7 @@ msgid "Incomplete file was retrieved"
 msgstr ""
 
 msgid "&Keep"
-msgstr ""
+msgstr "&შენარჩუნება"
 
 msgid "&Continue copy"
 msgstr ""
@@ -2729,18 +2751,18 @@ msgid "Sorry, I could not put the job in background"
 msgstr ""
 
 msgid "S&uspend"
-msgstr ""
+msgstr "&შეჩერება"
 
 msgid "Con&tinue"
-msgstr ""
+msgstr "&გაგრძელება"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%d:%02d:%02d"
-msgstr "%d:%02d.%02d"
+msgstr "%d:%02d:%02d"
 
 #, c-format
 msgid "ETA %s"
-msgstr ""
+msgstr "დარჩენილია %s"
 
 #, c-format
 msgid "%.2f MB/s"
@@ -2755,34 +2777,34 @@ msgid "%ld B/s"
 msgstr "%ld ბ/წმ"
 
 msgid "New     :"
-msgstr ""
+msgstr "ახალი     :"
 
 msgid "Existing:"
-msgstr ""
+msgstr "არსებული:"
 
 msgid "Overwrite this file?"
-msgstr ""
+msgstr "გადავაწერო ამ ფაილს?"
 
 msgid "A&ppend"
-msgstr ""
+msgstr "&ბოლოშიმიწერა"
 
 msgid "&Reget"
-msgstr ""
+msgstr "&თავიდან მიღება"
 
 msgid "Overwrite all files?"
-msgstr ""
+msgstr "გადავაწერო ყველა ფაილს?"
 
 msgid "Don't overwrite with &zero length file"
 msgstr ""
 
 msgid "&Older"
-msgstr ""
+msgstr "&ძველს"
 
 msgid "S&maller"
-msgstr ""
+msgstr "&პატარას"
 
 msgid "&Size differs"
-msgstr ""
+msgstr "&ზომის სხვაობით"
 
 msgid "File exists"
 msgstr "ფაილი უკვე არსებობს"
@@ -2792,7 +2814,7 @@ msgstr ""
 
 #, c-format
 msgid "Files processed: %zu / %zu"
-msgstr ""
+msgstr "დამუშავებული ფაილები: %zu / %zu"
 
 #, c-format
 msgid "Files processed: %zu"
@@ -2820,7 +2842,7 @@ msgstr " სულ: %s "
 
 #, c-format
 msgid " Total: %s / %s "
-msgstr ""
+msgstr " სულ: %s / %s "
 
 msgid "Source"
 msgstr "წყარო"
@@ -2835,13 +2857,13 @@ msgid "&Using shell patterns"
 msgstr "გარსის შაბლონების გამოყენება"
 
 msgid "to:"
-msgstr ""
+msgstr "სადამდე:"
 
 msgid "Follow &links"
 msgstr "&ბმულებზე მიყოლა"
 
 msgid "Preserve &attributes"
-msgstr ""
+msgstr "&ატრიბუტების შენარჩუნება"
 
 msgid "Di&ve into subdir if exists"
 msgstr ""
@@ -2850,7 +2872,7 @@ msgid "&Stable symlinks"
 msgstr ""
 
 msgid "&Background"
-msgstr ""
+msgstr "&ფონი"
 
 #, c-format
 msgid "Invalid source pattern '%s'"
@@ -2872,7 +2894,7 @@ msgid "&Listing format..."
 msgstr "&სიის ფორმატი..."
 
 msgid "&Sort order..."
-msgstr ""
+msgstr "&დალაგების წესი."
 
 msgid "&Filter..."
 msgstr "&ფილტრი..."
@@ -2956,7 +2978,7 @@ msgid "&User menu"
 msgstr "&მომხმარებლის მენიუ"
 
 msgid "&Directory tree"
-msgstr "&დირექტორიების ხე"
+msgstr "&საქაღალდეების ხე"
 
 msgid "&Find file"
 msgstr "ფაილის მოძებნა"
@@ -3167,7 +3189,7 @@ msgid "&Add current"
 msgstr ""
 
 msgid "&Up"
-msgstr ""
+msgstr "&მაღლა"
 
 msgid "New &group"
 msgstr ""
@@ -3253,7 +3275,7 @@ msgstr ""
 
 #, c-format
 msgid "File: %s"
-msgstr ""
+msgstr "ფაილი: %s"
 
 msgid "No node information"
 msgstr ""
@@ -3472,7 +3494,7 @@ msgid "[dev]"
 msgstr "[dev]"
 
 msgid "UP--DIR"
-msgstr "ზედა-დირექტორია"
+msgstr "ზედა-საქაღალდე"
 
 msgid "SYMLINK"
 msgstr "სიმბმული"
@@ -3803,10 +3825,10 @@ msgid "System data"
 msgstr "სისტემური მონაცემები"
 
 msgid "Config directory:"
-msgstr "კონფიგურაციის დირექტორია:"
+msgstr "კონფიგურაციის საქაღალდე:"
 
 msgid "Data directory:"
-msgstr "მონაცემების დირექტორია:"
+msgstr "მონაცემების საქაღალდე:"
 
 msgid "File extension handlers:"
 msgstr ""
@@ -3860,7 +3882,7 @@ msgid "No suitable entries found in %s"
 msgstr ""
 
 msgid "User menu"
-msgstr ""
+msgstr "მომხმარებლის მენიუ"
 
 #, c-format
 msgid ""
@@ -3946,7 +3968,7 @@ msgstr "fish: ჰოსტის ინფორმაციის მიღე�
 
 #, c-format
 msgid "fish: Reading directory %s..."
-msgstr "fish: იკითხება %s დირექტორია..."
+msgstr "fish: იკითხება %s საქაღალდე..."
 
 #, c-format
 msgid "%s: done."
@@ -4294,7 +4316,7 @@ msgid ""
 msgstr ""
 
 msgid "vfs_info is not fs!"
-msgstr ""
+msgstr "vfs_info ფაილური სისტემა არაა!"
 
 msgid "You have to chdir to extract files first"
 msgstr ""
@@ -4310,13 +4332,13 @@ msgid "Ext2lib error"
 msgstr "Ext2lib-ის შეცდომა"
 
 msgid "Invalid value"
-msgstr ""
+msgstr "არასწორი მნიშვნელობა"
 
 msgid "File was modified. Save with exit?"
 msgstr ""
 
 msgid "&Cancel quit"
-msgstr ""
+msgstr "&გასვლის გაუქმება"
 
 msgid ""
 "Midnight Commander is being shut down.\n"
@@ -4324,16 +4346,16 @@ msgid ""
 msgstr ""
 
 msgid "&Line number"
-msgstr ""
+msgstr "&ხაზის ნომერი"
 
 msgid "Pe&rcents"
-msgstr ""
+msgstr "&პროცენტები"
 
 msgid "&Decimal offset"
-msgstr ""
+msgstr "&ათობითის წანაცვლება"
 
 msgid "He&xadecimal offset"
-msgstr ""
+msgstr "&თექვსმეტობითის წანაცვლება"
 
 msgid "Goto"
 msgstr "გადასვლა"
@@ -4348,7 +4370,7 @@ msgid "ButtonBar|UnWrap"
 msgstr "გაშლა"
 
 msgid "ButtonBar|Wrap"
-msgstr ""
+msgstr "გატანა"
 
 msgid "ButtonBar|Hex"
 msgstr "Hex"
@@ -4388,7 +4410,7 @@ msgid ""
 msgstr ""
 
 msgid "View: "
-msgstr ""
+msgstr "ნახვა: "
 
 #, c-format
 msgid ""
@@ -4406,13 +4428,10 @@ msgid ""
 msgstr ""
 
 msgid "Search done"
-msgstr ""
+msgstr "ძებნა დასრულდა"
 
 msgid "Continue from beginning?"
 msgstr "თავიდან დავიწყო?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "Attributes: not supported"
-#~ msgstr "ატრიბუტები: მხარდაუჭერელია"

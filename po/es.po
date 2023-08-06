@@ -13,10 +13,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-08-04 21:17+0300\n"
+"POT-Creation-Date: 2023-08-06 15:50+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
-"Language-Team: Spanish (http://www.transifex.com/mc/mc/language/es/)\n"
+"Language-Team: Spanish (http://app.transifex.com/mc/mc/language/es/)\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -832,7 +832,6 @@ msgstr "¡Error al analizar los argumentos!"
 msgid "No arguments given to the viewer."
 msgstr "No se han pasado argumentos al visor."
 
-#, fuzzy
 msgid "Two files are required to invoke the diffviewer."
 msgstr "Se necesitan dos archivos para comparar."
 
@@ -1636,9 +1635,8 @@ msgstr ""
 "Un editor de texto amigable\n"
 "para Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2023 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2022 the Free Software Foundation"
+msgstr "Copyright (C) 1996-2023 the Free Software Foundation"
 
 msgid "About"
 msgstr "Acerca de..."
@@ -2171,12 +2169,15 @@ msgstr "&Matar"
 msgid "Background jobs"
 msgstr "Procesos en 2º plano"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot change directory to\n"
 "%s\n"
 "%s"
-msgstr "Imposible cambiar de directorio"
+msgstr ""
+"Imposible cambiar al directorio\n"
+"%s\n"
+"%s"
 
 msgid "Secure deletion"
 msgstr "Borrado seguro"
@@ -2526,7 +2527,7 @@ msgstr ""
 "Midnight Commander usa ahora el archivo %s. Por favor,\n"
 "copie las modificaciones realizadas al nuevo."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the\n"
 "%s%s\n"
@@ -2534,11 +2535,13 @@ msgid ""
 "It seems that the installation has failed.\n"
 "Please fetch a fresh copy from the Midnight Commander package."
 msgstr ""
-"El formato del archivo %s%s ha cambiado con la versión 4.0.\n"
+"El formato del archivo \n"
+"%s%s\n"
+"ha cambiado con la versión 4.0.\n"
 "Parece que la instalación falló. Por favor, trate de conseguir\n"
 "una copia intacta del paquete de Midnight Commander."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the\n"
 "%s\n"
@@ -2547,8 +2550,12 @@ msgid ""
 "%s%s\n"
 "or use that file as an example of how to write it."
 msgstr ""
-"El formato del archivo %s ha cambiado con la versión 4.0. Puede hacer una "
-"copia de %s%s o bien emplearlo como modelo."
+"El formato del archivo\n"
+"%s\n"
+"ha cambiado con la versión 4.0.\n"
+"Puede hacer una copia de\n"
+"%s%s\n"
+"o bien emplearlo como modelo."
 
 msgid "DialogTitle|Copy"
 msgstr "Copiar"
@@ -2928,9 +2935,9 @@ msgstr "&Detener"
 msgid "Con&tinue"
 msgstr "con&Tinuar"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%d:%02d:%02d"
-msgstr "%d:%02d.%02d"
+msgstr "%d:%02d:%02d"
 
 #, c-format
 msgid "ETA %s"
@@ -4139,7 +4146,7 @@ msgid ""
 "Corrupted cpio header encountered in\n"
 "%s"
 msgstr ""
-"Cabecera cpio corrupta encontrada en\n"
+"Cabecera cpio corrupta, encontrada en\n"
 "%s"
 
 #, c-format
@@ -4150,9 +4157,8 @@ msgstr ""
 "Fin de archivo inesperado\n"
 "%s"
 
-#, fuzzy
 msgid "Inconsistent archive"
-msgstr "Archivo de tipo tar inconsistente"
+msgstr "Archivo inconsistente"
 
 #, c-format
 msgid ""
@@ -4511,16 +4517,16 @@ msgstr ""
 "Imposible abrir archivo de tipo tar\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
 msgstr ""
 "%s\n"
-"no parece un archivo de tipo tar."
+"no parece un archivo de tipo tar"
 
 msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr ""
+msgstr "tar: mc_lseek no se ha detenido en un borde de registro"
 
 msgid "undelfs: error"
 msgstr "undelfs: Error"
@@ -4713,29 +4719,3 @@ msgstr "¿Continuar desde el principio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Imposible obtener una copia local de /ftp://ese.equipo/edítame.txt"
-
-#, c-format
-#~ msgid ""
-#~ "Cannot chdir to \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Imposible cambiar al directorio «%s»\n"
-#~ "%s"
-
-#, c-format
-#~ msgid "Cannot chdir to \"%s\""
-#~ msgstr "Imposible cambiar al directorio «%s»"
-
-#~ msgid "Cannot change attributes on non-local filesystems"
-#~ msgstr "Imposible cambiar atributos en sistemas de archivos no locales"
-
-#~ msgid "Attributes: not supported"
-#~ msgstr "Atributos: no soportado"
-
-#, c-format
-#~ msgid " %s%s file error"
-#~ msgstr " error en el archivo %s%s "
-
-#, c-format
-#~ msgid "%s file error"
-#~ msgstr "error en el archivo %s"

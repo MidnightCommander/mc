@@ -9,16 +9,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-08-04 21:17+0300\n"
+"POT-Creation-Date: 2023-08-06 15:50+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
-"Language-Team: Serbian (http://www.transifex.com/mc/mc/language/sr/)\n"
+"Language-Team: Serbian (http://app.transifex.com/mc/mc/language/sr/)\n"
 "Language: sr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -811,9 +811,8 @@ msgstr "Грешка обраде аргумената!"
 msgid "No arguments given to the viewer."
 msgstr "Аргументи нису дати прегледачу."
 
-#, fuzzy
 msgid "Two files are required to invoke the diffviewer."
-msgstr "Потребне су две датотеке за призивање прегледача разлика."
+msgstr ""
 
 msgid "Background protocol error"
 msgstr "Грешка позадинског протокола"
@@ -2145,12 +2144,12 @@ msgstr "&Убиј"
 msgid "Background jobs"
 msgstr "Позадински послови"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot change directory to\n"
 "%s\n"
 "%s"
-msgstr "Не могу да променим директоријум"
+msgstr ""
 
 msgid "Secure deletion"
 msgstr ""
@@ -2881,9 +2880,9 @@ msgstr "&Обустави"
 msgid "Con&tinue"
 msgstr "&Настави"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%d:%02d:%02d"
-msgstr "%d:%02d.%02d"
+msgstr ""
 
 #, c-format
 msgid "ETA %s"
@@ -4096,9 +4095,8 @@ msgstr ""
 "Неочекивани крај датотеке\n"
 "%s"
 
-#, fuzzy
 msgid "Inconsistent archive"
-msgstr "Недоследна тар архива"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -4437,13 +4435,11 @@ msgstr ""
 "Не могу да отворим тар архиву\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
 msgstr ""
-"%s\n"
-"не изгледа да је тар архива."
 
 msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
@@ -4639,23 +4635,3 @@ msgstr "Да наставим са почетка?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не могу да довучем месни примерак „/ftp://some.host/editme.txt“"
-
-#, c-format
-#~ msgid ""
-#~ "Cannot chdir to \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Не могу да пређем у директоријум „%s“\n"
-#~ "%s"
-
-#, c-format
-#~ msgid "Cannot chdir to \"%s\""
-#~ msgstr "Не могу да пређем у директоријум „%s“"
-
-#, c-format
-#~ msgid " %s%s file error"
-#~ msgstr " %s%s грешка датотеке"
-
-#, c-format
-#~ msgid "%s file error"
-#~ msgstr "Грешка датотеке „%s“"

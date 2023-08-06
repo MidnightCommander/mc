@@ -3,10 +3,10 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# Jiří Vírava <appukonrad@gmail.com>, 2015,2017
-# kEdAR, 2020-2021
+# Appukonrad <appukonrad@gmail.com>, 2015,2017
+# k3dar, 2020-2021
 # Karel Kopecky <kdkopx@protonmail.com>, 2017
-# Pavel Borecki <pavel.borecki@gmail.com>, 2017-2022
+# Pavel Borecki <pavel.borecki@gmail.com>, 2017-2023
 # Radek Valášek <valin@buchlovice.org>, 2014
 # Robin Kriebel <kriebel.robin@gmail.com>, 2016
 # Slava Zanko <slavazanko@gmail.com>, 2011
@@ -14,10 +14,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-08-04 21:17+0300\n"
+"POT-Creation-Date: 2023-08-06 15:50+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>, 2017-2022\n"
-"Language-Team: Czech (http://www.transifex.com/mc/mc/language/cs/)\n"
+"Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>, 2017-2023\n"
+"Language-Team: Czech (http://app.transifex.com/mc/mc/language/cs/)\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -831,7 +831,6 @@ msgstr "Chyba vyhodnocování argumentů!"
 msgid "No arguments given to the viewer."
 msgstr "Prohlížeči nebyly zadány žádné parametry"
 
-#, fuzzy
 msgid "Two files are required to invoke the diffviewer."
 msgstr "Pro vyvolání prohlížeče rozdílů je třeba dvou souborů."
 
@@ -1633,9 +1632,8 @@ msgstr ""
 "Uživatelsky přívětivý textový editor\n"
 "napsaný pro Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2023 the Free Software Foundation"
-msgstr "Autorská práva © 1996-2022 nadace Free Software Foundation"
+msgstr "Autorská práva © 1996-2023 nadace Free Software Foundation"
 
 msgid "About"
 msgstr "O programu"
@@ -2169,12 +2167,15 @@ msgstr "Vynutit u&končení"
 msgid "Background jobs"
 msgstr "Úlohy na pozadí"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot change directory to\n"
 "%s\n"
 "%s"
-msgstr "Nedaří se přejít do složky"
+msgstr ""
+"Nedaří se přejít do složky\n"
+"%s\n"
+"%s"
 
 msgid "Secure deletion"
 msgstr "Bezpečné smazání"
@@ -2526,7 +2527,7 @@ msgstr ""
 "Midnight Commander nyní používá soubor %s.\n"
 "Zkopírujte si své úpravy původního souboru do toho nového."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the\n"
 "%s%s\n"
@@ -2534,10 +2535,13 @@ msgid ""
 "It seems that the installation has failed.\n"
 "Please fetch a fresh copy from the Midnight Commander package."
 msgstr ""
-"Formát souboru %s%s byl upraven verzí 4.0. Zdá se, že instalace se "
-"nezdařila. Nahrajte si novou aktuální kopii z balíčku s Midnight Commander."
+"Formát souboru\n"
+"%s%s\n"
+"byl upraven verzí 4.0.\n"
+"Zdá se, že instalace se nezdařila.\n"
+"Nahrajte si novou aktuální kopii z balíčku s Midnight Commander."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the\n"
 "%s\n"
@@ -2546,7 +2550,11 @@ msgid ""
 "%s%s\n"
 "or use that file as an example of how to write it."
 msgstr ""
-"Formát %s souboru se s verzí 4.0 změnil. Můžete ho buď zkopírovat z %s%s "
+"Formát souboru\n"
+"%s\n"
+"se s verzí 4.0 změnil.\n"
+"Můžete ho buď zkopírovat z\n"
+"%s%s\n"
 "nebo tento soubor použít jako ukázku jak ho napsat."
 
 msgid "DialogTitle|Copy"
@@ -2843,13 +2851,13 @@ msgid "(stalled)"
 msgstr "(zamrzlo)"
 
 msgid "Incomplete file was retrieved"
-msgstr ""
+msgstr "Obdržen neúplný soubor"
 
 msgid "&Keep"
 msgstr "&Ponechat"
 
 msgid "&Continue copy"
-msgstr ""
+msgstr "&Pokračovat v kopírování"
 
 #, c-format
 msgid ""
@@ -2928,9 +2936,9 @@ msgstr "&Uspat"
 msgid "Con&tinue"
 msgstr "Pokračova&t"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%d:%02d:%02d"
-msgstr "%d:%02d.%02d"
+msgstr "%d:%02d:%02d"
 
 #, c-format
 msgid "ETA %s"
@@ -2986,7 +2994,7 @@ msgstr "Proces na pozadí: soubor existuje"
 
 #, c-format
 msgid "Files processed: %zu / %zu"
-msgstr ""
+msgstr "Zpracované soubory: %zu / %zu"
 
 #, c-format
 msgid "Files processed: %zu"
@@ -3014,7 +3022,7 @@ msgstr " Celkem: %s "
 
 #, c-format
 msgid " Total: %s / %s "
-msgstr ""
+msgstr "Celkem: %s / %s "
 
 msgid "Source"
 msgstr "Zdroj"
@@ -3468,7 +3476,7 @@ msgstr "Informace o využití prostoru nejsou k dispozici"
 
 #, c-format
 msgid "Free space: %s / %s (%d%%)"
-msgstr ""
+msgstr "Volné místo: %s / %s (%d%%)"
 
 #, c-format
 msgid "Type:       %s"
@@ -4156,9 +4164,8 @@ msgstr ""
 "Soubor neočekávaně končí\n"
 "%s"
 
-#, fuzzy
 msgid "Inconsistent archive"
-msgstr "Nekonzistentní archiv .tar"
+msgstr "Poškozený archiv"
 
 #, c-format
 msgid ""
@@ -4522,16 +4529,16 @@ msgstr ""
 ".tar archiv se nedaří otevřít\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
 msgstr ""
 "%s\n"
-"nevypadá jako archiv .tar."
+"nevypadá jako archiv .tar"
 
 msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr ""
+msgstr "tar: mc_lseek nezastavilo na hranici záznamu"
 
 msgid "undelfs: error"
 msgstr "undelfs: chyba"
@@ -4724,29 +4731,3 @@ msgstr "Pokračovat od začátku?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nedaří získat místní kopii souboru /ftp://some.host/editme.txt"
-
-#, c-format
-#~ msgid ""
-#~ "Cannot chdir to \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Nedaří se přejít do složky „%s“\n"
-#~ "%s"
-
-#, c-format
-#~ msgid "Cannot chdir to \"%s\""
-#~ msgstr "Nedaří se přejít do složky „%s“"
-
-#~ msgid "Cannot change attributes on non-local filesystems"
-#~ msgstr "Není možné měnit atributy souborových systémů, které nejsou lokální"
-
-#~ msgid "Attributes: not supported"
-#~ msgstr "Atributy: nepodporováno"
-
-#, c-format
-#~ msgid " %s%s file error"
-#~ msgstr " %s%s chyba souboru"
-
-#, c-format
-#~ msgid "%s file error"
-#~ msgstr "%s chyba souboru"

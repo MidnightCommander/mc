@@ -6,17 +6,17 @@
 # Henry Madsen Jensen <henry@madsen-jensen.dk>, 2016
 # Henry Madsen Jensen <henry@madsen-jensen.dk>, 2016
 # Joe Hansen <joedalton2@yahoo.dk>, 2014
-# Morten Bo Johansen <mortenbo@hotmail.com>, 2018
+# Morten Bo Johansen <mortenbo@hotmail.com>, 2018,2023
 # scootergrisen, 2018-2020
 # Slava Zanko <slavazanko@gmail.com>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-08-04 21:17+0300\n"
+"POT-Creation-Date: 2023-08-06 15:50+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: scootergrisen, 2018-2020\n"
-"Language-Team: Danish (http://www.transifex.com/mc/mc/language/da/)\n"
+"Last-Translator: Morten Bo Johansen <mortenbo@hotmail.com>, 2018,2023\n"
+"Language-Team: Danish (http://app.transifex.com/mc/mc/language/da/)\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -534,7 +534,7 @@ msgstr ""
 "%s"
 
 msgid "Cannot close pipe descriptor (p == NULL)"
-msgstr ""
+msgstr "Kan ikke lukke datakanal-deskriptor (p == NULL)"
 
 #, c-format
 msgid ""
@@ -827,9 +827,8 @@ msgstr "Fejl ved fortolkning af argumenter!"
 msgid "No arguments given to the viewer."
 msgstr "Ingen argumenter givet til fremviseren."
 
-#, fuzzy
 msgid "Two files are required to invoke the diffviewer."
-msgstr "Der kræves to filer for at vise diff-fremviseren."
+msgstr "Der kræves to filer for at aktivere diff-fremviseren."
 
 msgid "Background protocol error"
 msgstr "Fejl i baggrundsprotokol"
@@ -1214,6 +1213,7 @@ msgstr "Udfør sortering"
 
 msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr ""
+" Anfør sorteringsindstillinger (se manualsiden sort(1)) adskilt af mellemrum:"
 
 msgid "Sort"
 msgstr "Sortér"
@@ -1630,7 +1630,7 @@ msgstr ""
 "skrevet til Midnight Commander."
 
 msgid "Copyright (C) 1996-2023 the Free Software Foundation"
-msgstr ""
+msgstr "Ophavsret (C) 1996-2023, The Free Software Foundation"
 
 msgid "About"
 msgstr "Om"
@@ -1951,7 +1951,7 @@ msgid "Skin:"
 msgstr "Tema:"
 
 msgid "&Shadows"
-msgstr ""
+msgstr "&Skygger"
 
 msgid "Appearance"
 msgstr "Fremtoning"
@@ -2164,12 +2164,12 @@ msgstr "&Dræb"
 msgid "Background jobs"
 msgstr "Baggrundsjobs"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot change directory to\n"
 "%s\n"
 "%s"
-msgstr "Kunne ikke skifte mappe"
+msgstr ""
 
 msgid "Secure deletion"
 msgstr "Sikker sletning"
@@ -2232,7 +2232,7 @@ msgid "No COW"
 msgstr "Ingen COW"
 
 msgid "Direct access for files"
-msgstr ""
+msgstr "Direkte adgang for filer"
 
 msgid "Casefolded file"
 msgstr "Casefold'et fil"
@@ -2515,6 +2515,9 @@ msgid ""
 "Midnight Commander now uses %s file.\n"
 "Please copy your modifications of the old file to the new one."
 msgstr ""
+"Du har en forældet %s-fil.\n"
+"Midnight Commander bruger nu %s-fil\n"
+"Kopier dine ændringer i den gamle fil til den nye fil-"
 
 #, c-format
 msgid ""
@@ -2524,6 +2527,11 @@ msgid ""
 "It seems that the installation has failed.\n"
 "Please fetch a fresh copy from the Midnight Commander package."
 msgstr ""
+"Formatet på\n"
+"%s%s\n"
+"filen er ændret med version 4.0.\n"
+"Det ser ud som om installeringen fejlede.\n"
+"Hent en frisk kopi fra Midnight Commander-pakken."
 
 #, c-format
 msgid ""
@@ -2534,6 +2542,12 @@ msgid ""
 "%s%s\n"
 "or use that file as an example of how to write it."
 msgstr ""
+"Formatet på\n"
+"%s\n"
+"filen er ændret med version 4.0.\n"
+"Du kan enten kopiere den fra\n"
+"%s%s\n"
+"eller bruge denne fil som eksempel på, hvordan den skal skrives."
 
 msgid "DialogTitle|Copy"
 msgstr "Kopiér"
@@ -2829,7 +2843,7 @@ msgid "(stalled)"
 msgstr "(venter)"
 
 msgid "Incomplete file was retrieved"
-msgstr ""
+msgstr "En ufuldstændig fil blev hentet"
 
 msgid "&Keep"
 msgstr "&Behold"
@@ -2914,9 +2928,9 @@ msgstr "&Suspendér"
 msgid "Con&tinue"
 msgstr "For&tsæt"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%d:%02d:%02d"
-msgstr "%d:%02d.%02d"
+msgstr "%d:%02d:%02d"
 
 #, c-format
 msgid "ETA %s"
@@ -2972,7 +2986,7 @@ msgstr "Baggrundproces: Fil findes"
 
 #, c-format
 msgid "Files processed: %zu / %zu"
-msgstr ""
+msgstr "Behandlede filer: %zu / %zu"
 
 #, c-format
 msgid "Files processed: %zu"
@@ -3000,7 +3014,7 @@ msgstr " Samlet: %s "
 
 #, c-format
 msgid " Total: %s / %s "
-msgstr ""
+msgstr "Total: %s / %s"
 
 msgid "Source"
 msgstr "Kilde"
@@ -3052,7 +3066,7 @@ msgid "&Listing format..."
 msgstr "&Listeformat..."
 
 msgid "&Sort order..."
-msgstr ""
+msgstr "&Sorteringsrækkefølge"
 
 msgid "&Filter..."
 msgstr "&Filter..."
@@ -3067,7 +3081,7 @@ msgid "S&hell link..."
 msgstr "S&kalhenvisning..."
 
 msgid "SFTP li&nk..."
-msgstr ""
+msgstr "SFTP-li&nk ..."
 
 msgid "Paneli&ze"
 msgstr "Paneli&sér"
@@ -3281,7 +3295,7 @@ msgid "&Find recursively"
 msgstr "&Find rekursivt"
 
 msgid "Follow s&ymlinks"
-msgstr ""
+msgstr "Følg s&ymbolske links"
 
 msgid "S&kip hidden"
 msgstr "S&pring skjulte over"
@@ -3450,7 +3464,7 @@ msgstr "Ingen pladsinformation"
 
 #, c-format
 msgid "Free space: %s / %s (%d%%)"
-msgstr ""
+msgstr "Ledig plads: %s / %s (%d%%)"
 
 #, c-format
 msgid "Type:       %s"
@@ -3726,6 +3740,8 @@ msgid ""
 "External panelize:\n"
 "%s"
 msgstr ""
+"Ekstern panelisering:\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -3733,6 +3749,9 @@ msgid ""
 "failed to read data from child stdout:\n"
 "%s"
 msgstr ""
+"Ekstern panelisering:\n"
+"Kunne ikke læse data fra barneproces' standard-uddata:\n"
+"%s"
 
 msgid "Cannot run external panelize in a non-local directory"
 msgstr "Kan ikke køre ekstern panelisering i en mappe, der ikke er lokal"
@@ -4001,7 +4020,7 @@ msgstr "Bygget med ncursesw (ukendt version)"
 
 #, c-format
 msgid "Built with libssh2 %d.%d.%d\n"
-msgstr ""
+msgstr "Bygget med libssh2 %d.%d.%d\n"
 
 msgid "Virtual File Systems:"
 msgstr "Virtuelle filsystemer:"
@@ -4128,9 +4147,8 @@ msgstr ""
 "Uventet EOF\n"
 "%s"
 
-#, fuzzy
 msgid "Inconsistent archive"
-msgstr "Inkonsistent tar-arkiv"
+msgstr "Inkonsistent arkiv"
 
 #, c-format
 msgid ""
@@ -4138,12 +4156,17 @@ msgid ""
 "%s:\n"
 "%s"
 msgstr ""
+"Kan ikke åbne arkivet %s\n"
+"%s\n"
+"%s"
 
 #, c-format
 msgid ""
 "EXTFS virtual file system:\n"
 "%s"
 msgstr ""
+"Virtuelt EXTFS-filsystem:\n"
+"%s"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4261,18 +4284,18 @@ msgstr "Venter på at prøve igen... %d (Control-G for at annullere)"
 
 #, c-format
 msgid "ftpfs: could not make address-to-name translation: %s"
-msgstr ""
+msgstr "ftpfs: kunne ikke foretage adresse-til-navn-oversættelse: %s "
 
 #, c-format
 msgid "ftpfs: try reconnect to server, attempt %u"
-msgstr ""
+msgstr "ftpfs: prøver at gentilslutte til server, forsøg %u"
 
 #, c-format
 msgid "ftpfs: could not get socket name: %s"
-msgstr ""
+msgstr "ftpfs: kunne ikke finde navn på sokkel: %s "
 
 msgid "ftpfs: could not reconnect to server"
-msgstr ""
+msgstr "ftpfs: kunne ikke gentilslutte til server"
 
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: Ugyldig adressefamilie"
@@ -4331,6 +4354,8 @@ msgid ""
 "SFS virtual file system:\n"
 "%s"
 msgstr ""
+"Virtuelt SFS-filsystem:\n"
+"%s"
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -4367,7 +4392,7 @@ msgid "sftp: %s"
 msgstr "sftp: %s"
 
 msgid "sftp: failed to convert remote host IP address into text form"
-msgstr ""
+msgstr "sftp: kunne ikke omdanne fjernværtens IP-adresse til tekstform"
 
 #, c-format
 msgid "sftp: making connection to %s"
@@ -4381,10 +4406,10 @@ msgid "sftp: connection to server failed: %s"
 msgstr "sftp: forbindelse til server mislykkedes: %s"
 
 msgid "sftp: found host key of unsupported type: RSA1"
-msgstr ""
+msgstr "sftp: fandt en type nøgle på vært, som ikke er understøttet: RSA1"
 
 msgid "sftp: unknown host key type:"
-msgstr ""
+msgstr "sftp: ukendt type på værts nøgle:"
 
 #, c-format
 msgid ""
@@ -4392,15 +4417,19 @@ msgid ""
 "%s (%s)\n"
 "to the list of known hosts."
 msgstr ""
+"Tilføjede varigt\n"
+"%s (%s)\n"
+"til listen over kendte værter."
 
 msgid "sftp: cannot get the remote host key"
-msgstr ""
+msgstr "sftp: kan ikke hente fjernværtens nøgle"
 
 msgid "sftp: unsupported key type, can't check remote host key"
 msgstr ""
+"sftp: nøgletype er ikke understøttet, kan ikke kontrollere fjernværtens nøgle"
 
 msgid "sftp: can't compute host key fingerprint hash"
-msgstr ""
+msgstr "sftp: kan ikke beregne fjernværtens fingeraftrykshash"
 
 #, c-format
 msgid ""
@@ -4411,6 +4440,12 @@ msgid ""
 "SHA1:%s.\n"
 "Do you want to add it to the list of known hosts and continue connecting?"
 msgstr ""
+"Autenciteten af værten\n"
+"%s (%s)\n"
+"kan ikke godtgøres\n"
+"%s fingeraftrykshash på nøgle er\n"
+"SHA1: %s\n"
+"Vil du føje det til listen over kendte værter og fortsætte med at tilslutte?"
 
 #, c-format
 msgid ""
@@ -4420,9 +4455,14 @@ msgid ""
 "Are you sure you want to add it to the list of known hosts and continue "
 "connecting?"
 msgstr ""
+"%s (%s)\n"
+"er fundet i listen over kendte værter, men\n"
+"NØGLER MATCHER IKKE! DETTE KUNNE VÆRE ET MITM-ANGREB!\n"
+"Er du sikker på at du vil føje den til listen over kendte værter og "
+"fortsætte med at tilslutte?"
 
 msgid "sftp: host key verification failed"
-msgstr ""
+msgstr "sftp: verificering af værtsnøgle mislykkedes"
 
 #, c-format
 msgid "sftp: Enter passphrase for %s "
@@ -4439,7 +4479,7 @@ msgid "sftp: Password is empty."
 msgstr "sftp: Adgangskoden er tom."
 
 msgid "sftp: failure establishing SSH session"
-msgstr ""
+msgstr "sftp: kunne ikke oprette en SSH-session"
 
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: Ingen tilgængelig filbehandlerdata til læsning af fil"
@@ -4469,13 +4509,11 @@ msgstr ""
 "Kunne ikke åbne tar-arkiv\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
 msgstr ""
-"%s\n"
-"ligner ikke et tar-arkiv."
 
 msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
@@ -4671,29 +4709,3 @@ msgstr "Fortsæt fra begyndelsen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan ikke hente en lokal kopi af /ftp://en.vært/editme.txt"
-
-#, c-format
-#~ msgid ""
-#~ "Cannot chdir to \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Kan ikke chdir til »%s«\n"
-#~ "%s"
-
-#, c-format
-#~ msgid "Cannot chdir to \"%s\""
-#~ msgstr "Kan ikke chdir til »%s«"
-
-#~ msgid "Cannot change attributes on non-local filesystems"
-#~ msgstr "Kan ikke ændre attributter på filsystemer som ikke er lokale"
-
-#~ msgid "Attributes: not supported"
-#~ msgstr "Attributter: understøttes ikke"
-
-#, c-format
-#~ msgid " %s%s file error"
-#~ msgstr " %s%s-filfejl"
-
-#, c-format
-#~ msgid "%s file error"
-#~ msgstr "%s filfejl"

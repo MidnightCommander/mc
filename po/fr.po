@@ -12,16 +12,16 @@
 # Slava Zanko <slavazanko@gmail.com>, 2011
 # 4a14a73d523224463300dea5e0502458_3dab472, 2012
 # Towinet, 2017
-# Wallon Wallon, 2022
+# Wallon Wallon, 2022-2023
 # Yury V. Zaytsev <yury@shurup.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-08-04 21:17+0300\n"
+"POT-Creation-Date: 2023-08-06 15:50+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Wallon Wallon, 2022\n"
-"Language-Team: French (http://www.transifex.com/mc/mc/language/fr/)\n"
+"Last-Translator: Wallon Wallon, 2022-2023\n"
+"Language-Team: French (http://app.transifex.com/mc/mc/language/fr/)\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -41,16 +41,16 @@ msgid "Cannot translate from %s to %s"
 msgstr "Ne peut convertir de %s vers %s"
 
 msgid "Event system already initialized"
-msgstr "Système d'événement déjà initialisé"
+msgstr "Système d’événement déjà initialisé"
 
 msgid "Failed to initialize event system"
-msgstr "Échec de l'initialisation du système d'événement"
+msgstr "Échec de l’initialisation du système d’événement"
 
 msgid "Event system not initialized"
-msgstr "Système d'événement non initialisé"
+msgstr "Système d’événement non initialisé"
 
 msgid "Check input data! Some of parameters are NULL!"
-msgstr "Vérifiez les données d'entrée ! Certains paramètres sont NULL !"
+msgstr "Vérifiez les données d’entrée ! Certains paramètres sont NULL !"
 
 #, c-format
 msgid "Unable to create group '%s' for events!"
@@ -58,7 +58,7 @@ msgstr "Impossible de créer le groupe « %s » pour les événements !"
 
 #, c-format
 msgid "Unable to create event '%s'!"
-msgstr "Impossible de créer l'événement « %s » !"
+msgstr "Impossible de créer l’événement « %s » !"
 
 #, c-format
 msgid ""
@@ -66,7 +66,7 @@ msgid ""
 "User: %s\n"
 "Process ID: %d"
 msgstr ""
-"Le fichier \"%s\" est en cours d'édition.\n"
+"Le fichier « %s » est en cours d’édition.\n"
 "Utilisateur : %s\n"
 "ID Processus : %d"
 
@@ -84,13 +84,13 @@ msgid "Cannot create %s directory"
 msgstr "Ne peut créer le répertoire %s"
 
 msgid "FATAL: not a directory:"
-msgstr "FATAL : n'est pas un répertoire :"
+msgstr "FATAL : n’est pas un répertoire :"
 
 msgid ""
 "Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
 "hex)"
 msgstr ""
-"Nombre hors de portée (devrait être dans la gamme d'octet : 0 <= n <= 0xFF, "
+"Nombre hors de portée (devrait être dans la gamme d’octet : 0 <= n <= 0xFF, "
 "exprimé en hexa)"
 
 msgid "Invalid character"
@@ -148,7 +148,7 @@ msgid ""
 "Unable to parse '%s' skin.\n"
 "Default skin has been loaded"
 msgstr ""
-"Impossible d'analyser le thème « %s ».\n"
+"Impossible d’analyser le thème « %s ».\n"
 "Le thème par défaut a été chargé"
 
 #, c-format
@@ -157,7 +157,7 @@ msgid ""
 "%s\n"
 "Default skin has been loaded"
 msgstr ""
-"Impossible d'utiliser le thème « %s » avec le support de Truecolor :\n"
+"Impossible d’utiliser le thème « %s » avec le support de Truecolor :\n"
 "%s\n"
 "Le thème par défaut a été chargé"
 
@@ -167,18 +167,18 @@ msgid ""
 "on non-256 colors terminal.\n"
 "Default skin has been loaded"
 msgstr ""
-"Impossible d'utiliser le thème « %s » avec le support\n"
+"Impossible d’utiliser le thème « %s » avec le support\n"
 "256 couleurs sur un terminal non-256 couleurs.\n"
 "Le thème par défaut a été chargé"
 
 msgid "True color not supported with ncurses."
-msgstr "Truecolor n'est pas permis avec Ncurses."
+msgstr "Truecolor n’est pas permis avec Ncurses."
 
 msgid "Your terminal doesn't even seem to support 256 colors."
-msgstr "Votre terminal ne semble même pas permettre 256 couleurs."
+msgstr "Votre terminal ne semble même pas prendre en charge 256 couleurs."
 
 msgid "True color not supported in this slang version."
-msgstr "Truecolor non supporté dans cette version d'argot (\"slang version\")."
+msgstr "Truecolor non supporté dans cette version d’argot (« slang version »)."
 
 msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
 msgstr ""
@@ -384,10 +384,10 @@ msgid "Semicolon"
 msgstr "Point-virgule"
 
 msgid "Exclamation mark"
-msgstr "Point d'exclamation"
+msgstr "Point d’exclamation"
 
 msgid "Question mark"
-msgstr "Point d'interrogation"
+msgstr "Point d’interrogation"
 
 msgid "Ampersand"
 msgstr "Esperluette"
@@ -469,7 +469,7 @@ msgid "Shift"
 msgstr "Maj"
 
 msgid "The TERM environment variable is unset!\n"
-msgstr "La variable d'environnement TERM n'est pas définie !\n"
+msgstr "La variable d’environnement TERM n’est pas définie !\n"
 
 msgid "Cannot check SIGWINCH pipe"
 msgstr "Impossible de vérifier le tuyau SIGWINCH"
@@ -488,7 +488,7 @@ msgid ""
 "Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
 msgstr ""
 "\n"
-"Impossible de configurer la fin d'écriture du tuyau SIGWINCH : %s (%d)\n"
+"Impossible de configurer la fin d’écriture du tuyau SIGWINCH : %s (%d)\n"
 
 #, c-format
 msgid ""
@@ -503,8 +503,8 @@ msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
 msgstr ""
-"La taille de l'écran %dx%d n'est pas supportée.\n"
-"Vérifiez la variable d'environnement TERM.\n"
+"La taille de l’écran %dx%d n’est pas supportée.\n"
+"Vérifiez la variable d’environnement TERM.\n"
 
 msgid "B"
 msgstr "O"
@@ -538,7 +538,7 @@ msgid ""
 "Unexpected error in select() reading data from a child process:\n"
 "%s"
 msgstr ""
-"Erreur inattendue dans select() pendant la lecture de données d'un processus "
+"Erreur inattendue dans select() pendant la lecture de données d’un processus "
 "fils :\n"
 "%s"
 
@@ -576,11 +576,11 @@ msgstr "Les modifications du fichier sont perdus"
 
 #, c-format
 msgid "%s is not a directory\n"
-msgstr "%s n'est pas un répertoire\n"
+msgstr "%s n’est pas un répertoire\n"
 
 #, c-format
 msgid "Directory %s is not owned by you\n"
-msgstr "Vous n'êtes pas propriétaire du répertoire %s\n"
+msgstr "Vous n’êtes pas propriétaire du répertoire %s\n"
 
 #, c-format
 msgid "Cannot set correct permissions for directory %s\n"
@@ -602,16 +602,16 @@ msgid "Press any key to continue..."
 msgstr "Appuyez sur une touche pour continuer..."
 
 msgid "Cannot parse:"
-msgstr "Ne peut analyser:"
+msgstr "Ne peut analyser :"
 
 msgid "More parsing errors will be ignored."
-msgstr "Les prochaines erreurs d'analyse seront ignorées."
+msgstr "Les prochaines erreurs d’analyse seront ignorées."
 
 msgid "Internal error:"
 msgstr "Erreur interne :"
 
 msgid "Password:"
-msgstr "Mot de passe:"
+msgstr "Mot de passe :"
 
 msgid "Screens"
 msgstr "Écrans"
@@ -621,10 +621,10 @@ msgstr "Historique"
 
 #. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
 msgid "DialogTitle|History cleanup"
-msgstr "DialogTitle|Effacer l'historique"
+msgstr "DialogTitle|Effacer l’historique"
 
 msgid "Do you want clean this history?"
-msgstr "Voulez-vous supprimer cet historique?"
+msgstr "Voulez-vous supprimer cet historique ?"
 
 msgid "&Yes"
 msgstr "&Oui"
@@ -639,7 +639,7 @@ msgid "&Cancel"
 msgstr "&Annuler"
 
 msgid "Background process:"
-msgstr "Processus en tâche de fond:"
+msgstr "Processus en tâche de fond :"
 
 msgid "Error"
 msgstr "Erreur"
@@ -696,13 +696,13 @@ msgid "Disable X11 support"
 msgstr "Désactiver la prise en charge de X11"
 
 msgid "Tries to use an old highlight mouse tracking"
-msgstr "Essaie d'utiliser un ancien \"highlight mouse tracking\""
+msgstr "Essaie d’utiliser un ancien « highlight mouse tracking »"
 
 msgid "Disable mouse support in text version"
 msgstr "Désactive le support de la souris pour la version texte"
 
 msgid "Tries to use termcap instead of terminfo"
-msgstr "Essaie d'utiliser termcap au lieu de terminfo"
+msgstr "Essaie d’utiliser termcap au lieu de terminfo"
 
 msgid "To run on slow terminals"
 msgstr "À exécuter sur les terminaux lents"
@@ -760,20 +760,20 @@ msgstr ""
 "--colors KEYWORD={FORE},{BACK},{ATTR}:KEYWORD2=...\n"
 "{FORE}, {BACK} et {ATTR} peuvent être omis, et la valeur par défaut sera "
 "utilisée\n"
-"Mot clés:\n"
-"Global: errors, disabled, reverse, gauge, header\n"
+"Mot clés :\n"
+"Global : errors, disabled, reverse, gauge, header\n"
 "input, inputmark, inputunchanged, commandlinemark\n"
 "bbarhotkey, bbarbutton, statusbar\n"
 "Affichage fichier: normal, selected, marked, markselect\n"
-"Boîtes de dialogue: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"Boîtes de dialogue : dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "errdhotfocus\n"
-"Menus: menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
-"Menus popup: pmenunormal, pmenusel, pmenutitle\n"
-"Éditeur: editnormal, editbold, editmarked, editwhitespace,\n"
+"Menus : menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
+"Menus popup : pmenunormal, pmenusel, pmenutitle\n"
+"Éditeur : editnormal, editbold, editmarked, editwhitespace,\n"
 "editlinestate, editbg, editframe, editframeactive\n"
 "editframedrag\n"
-"Visionneuse: viewnormal,viewbold, viewunderline, viewselected\n"
-"Aide: helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"Visionneuse : viewnormal,viewbold, viewunderline, viewselected\n"
+"Aide : helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 
 #. TRANSLATORS: don't translate color names and attributes
 msgid ""
@@ -788,15 +788,15 @@ msgid ""
 "Attributes:\n"
 "   bold, italic, underline, reverse, blink; append more with '+'\n"
 msgstr ""
-"Coleurs standard:\n"
+"Coleurs standard :\n"
 "black, gray, red, brightred, green, brightgreen, brown,\n"
 "yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
 "brightcyan, lightgray et white\n"
 "\n"
-"Couleurs étendues, lorsque les 256 couleurs sont disponibles:\n"
+"Couleurs étendues, lorsque les 256 couleurs sont disponibles :\n"
 "de color16 à color255, ou de rgb000 à rgb555 et de gray0 à gray23\n"
-"Attributs:\n"
-"bold, italic, underline, reverse, blink; ajouter avec '+'\n"
+"Attributs :\n"
+"bold, italic, underline, reverse, blink ; ajouter avec « + »\n"
 
 msgid "Color options"
 msgstr "Options de couleur"
@@ -819,9 +819,8 @@ msgid ""
 "as tickets at www.midnight-commander.org\n"
 msgstr ""
 "\n"
-"Envoyez vos rapports d'anomalies (incluant la sortie de 'mc -V')\n"
+"Envoyez vos rapports d’anomalies (incluant la sortie de « mc -V »)\n"
 "comme ticket de www.midnight-commander.org\n"
-"\n"
 
 #, c-format
 msgid "GNU Midnight Commander %s\n"
@@ -834,14 +833,13 @@ msgid "Terminal options"
 msgstr "Options du terminal"
 
 msgid "Arguments parse error!"
-msgstr "Erreur lors de l'analyse des arguments !"
+msgstr "Erreur lors de l’analyse des arguments !"
 
 msgid "No arguments given to the viewer."
 msgstr "Aucun argument passé à la visionneuse."
 
-#, fuzzy
 msgid "Two files are required to invoke the diffviewer."
-msgstr "Deux fichiers sont necessaires pour appeler diffviewer"
+msgstr "Deux fichiers sont nécessaires pour invoquer diffviewer."
 
 msgid "Background protocol error"
 msgstr "Erreur de protocole en tâche de fond"
@@ -869,7 +867,7 @@ msgid "&Dismiss"
 msgstr "&Fermer"
 
 msgid "Enter search string:"
-msgstr " Saisissez la chaîne à rechercher:"
+msgstr " Saisissez la chaîne à rechercher :"
 
 msgid "Cas&e sensitive"
 msgstr "Sensible la ca&sse"
@@ -931,10 +929,10 @@ msgid "&Ignore case"
 msgstr "&Ignorer la casse"
 
 msgid "Ignore tab &expansion"
-msgstr "Ignorer l'expansion des tabulations"
+msgstr "Ignorer l’expansion des tabulations"
 
 msgid "Ignore &space change"
-msgstr "Ignorer les modifications d'espace"
+msgstr "Ignorer les modifications d’espace"
 
 msgid "Ignore all &whitespace"
 msgstr "Ignorer tous les &espaces"
@@ -958,7 +956,7 @@ msgid "Goto line (right)"
 msgstr "Aller à la ligne (droite)"
 
 msgid "Enter line:"
-msgstr "Saisir la ligne:"
+msgstr "Saisir la ligne :"
 
 msgid "ButtonBar|Help"
 msgstr "ButtonBar|Aide"
@@ -991,10 +989,10 @@ msgid ""
 "Midnight Commander is being shut down.\n"
 "Save modified file(s)?"
 msgstr ""
-"Midnight Commander va s'éteindre. Enregistrer le(s) fichier(s) modifié(s) ?"
+"Midnight Commander va s’éteindre. Enregistrer le(s) fichier(s) modifié(s) ?"
 
 msgid "Diff:"
-msgstr "Comparaison:"
+msgstr "Comparaison :"
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -1005,7 +1003,7 @@ msgid ""
 "Cannot stat \"%s\"\n"
 "%s"
 msgstr ""
-"Impossible d'obtenir les caractéristiques de « %s »\n"
+"Impossible d’obtenir les caractéristiques de « %s »\n"
 "%s"
 
 msgid "Diff viewer: invalid mode"
@@ -1016,14 +1014,14 @@ msgstr "Deux fichiers sont nécessaires à la comparaison"
 
 #, c-format
 msgid "Loading: %3d%%"
-msgstr "Chargement: %3d%%"
+msgstr "Chargement : %3d%%"
 
 msgid "Loading..."
 msgstr "Chargement..."
 
 #, c-format
 msgid "Cannot open %s for reading"
-msgstr "Impossible d'ouvrir %s en lecture"
+msgstr "Impossible d’ouvrir %s en lecture"
 
 msgid "Load file"
 msgstr "Chargement du fichier"
@@ -1034,30 +1032,30 @@ msgstr "Erreur de lecture de %s"
 
 #, c-format
 msgid "Cannot get size/permissions for %s"
-msgstr "Impossible d'obtenir la taille ou les permissions de %s"
+msgstr "Impossible d’obtenir la taille ou les permissions de %s"
 
 #, c-format
 msgid "\"%s\" is not a regular file"
-msgstr "« %s » n'est pas un fichier régulier"
+msgstr "« %s » n’est pas un fichier régulier"
 
 #, c-format
 msgid ""
 "File \"%s\" is too large.\n"
 "Open it anyway?"
 msgstr ""
-"Le fichier \"%s\" est trop gros.\n"
-"Voulez-vous tout de même l'ouvrir ?"
+"Le fichier « %s » est trop gros.\n"
+"Voulez-vous tout de même l’ouvrir ?"
 
 msgid "Warning"
 msgstr "Attention"
 
 #, c-format
 msgid "Error reading from pipe: %s"
-msgstr "Erreur de lecture dans le tube: %s"
+msgstr "Erreur de lecture dans le tube : %s"
 
 #, c-format
 msgid "Cannot open pipe for reading: %s"
-msgstr "Impossible d'ouvrir le tube pour lire: %s"
+msgstr "Impossible d’ouvrir le tube pour lire : %s"
 
 msgid "File has hard-links. Detach before saving?"
 msgstr "Le fichier est un lien physique. Détacher avant de sauvegarder ?"
@@ -1067,15 +1065,15 @@ msgstr "Le fichier a été modifié entre temps. Enregistrer quand même ?"
 
 #, c-format
 msgid "Error writing to pipe: %s"
-msgstr "Erreur d'écriture dans le tube: %s"
+msgstr "Erreur d’écriture dans le tube : %s"
 
 #, c-format
 msgid "Cannot open pipe for writing: %s"
-msgstr "Impossible d'ouvrir le tube en écriture: %s"
+msgstr "Impossible d’ouvrir le tube en écriture : %s"
 
 #, c-format
 msgid "Cannot open file for writing: %s"
-msgstr "Impossible d'ouvrir le fichier en écriture: %s"
+msgstr "Impossible d’ouvrir le fichier en écriture : %s"
 
 msgid "The file you are saving does not end with a newline."
 msgstr ""
@@ -1112,7 +1110,7 @@ msgid "&Safe save"
 msgstr "&Enregistrement sûr"
 
 msgid "&Do backups with following extension:"
-msgstr "&Faire les sauvegardes avec l'extension suivante:"
+msgstr "&Faire les sauvegardes avec l’extension suivante :"
 
 msgid "Check &POSIX new line"
 msgstr "Vérifier les nouvelles lignes &POSIX"
@@ -1125,7 +1123,7 @@ msgstr "Enregistrer sous"
 
 msgid "Cannot save: destination is not a regular file"
 msgstr ""
-"Impossible de sauvegarder: la destination n'est pas un fichier régulier"
+"Impossible de sauvegarder : la destination n’est pas un fichier régulier"
 
 msgid "A file already exists with this name"
 msgstr "Un fichier de même nom existe déjà"
@@ -1134,7 +1132,7 @@ msgid "&Overwrite"
 msgstr "É&craser"
 
 msgid "Cannot save file"
-msgstr "Impossible d'enregistrer le fichier"
+msgstr "Impossible d’enregistrer le fichier"
 
 #, c-format
 msgid "Confirm save file: \"%s\""
@@ -1189,17 +1187,17 @@ msgid ""
 "Midnight Commander is being shut down.\n"
 "Save modified file %s?"
 msgstr ""
-"Midnight Commander va s'éteindre.\n"
+"Midnight Commander va s’éteindre.\n"
 "Enregistrer le fichier modifié %s ?"
 
 msgid "This function is not implemented"
-msgstr "Cette fonction n'est pas implémentée"
+msgstr "Cette fonction n’est pas implémentée"
 
 msgid "Copy to clipboard"
 msgstr "Copier vers le presse-papiers"
 
 msgid "Unable to save to file"
-msgstr "Impossible d'enregistrer le fichier"
+msgstr "Impossible d’enregistrer le fichier"
 
 msgid "Cut to clipboard"
 msgstr "Couper vers le presse-papiers"
@@ -1214,13 +1212,13 @@ msgid "Insert file"
 msgstr "Insérer fichier"
 
 msgid "Cannot insert file"
-msgstr "Impossible d'insérer le fichier"
+msgstr "Impossible d’insérer le fichier"
 
 msgid "Sort block"
 msgstr "Trier le bloc"
 
 msgid "You must first highlight a block of text"
-msgstr "Vous devez d'abord sélectionner un bloc de texte"
+msgstr "Vous devez d’abord sélectionner un bloc de texte"
 
 msgid "Run sort"
 msgstr " Lancer le tri"
@@ -1233,23 +1231,23 @@ msgid "Sort"
 msgstr " Trier"
 
 msgid "Cannot execute sort command"
-msgstr "Impossible d'exécuter la commande de tri "
+msgstr "Impossible d’exécuter la commande de tri "
 
 #, c-format
 msgid "Sort returned non-zero: %s"
 msgstr "Le code de retour du tri est non nul : %s"
 
 msgid "Paste output of external command"
-msgstr "Coller la sortie d'une commande externe"
+msgstr "Coller la sortie d’une commande externe"
 
 msgid "Enter shell command(s):"
-msgstr "Saisissez la ou les commandes shell:"
+msgstr "Saisissez la ou les commandes shell :"
 
 msgid "External command"
 msgstr "Commande externe"
 
 msgid "Cannot execute command"
-msgstr "Impossible d'exécuter la commande"
+msgstr "Impossible d’exécuter la commande"
 
 msgid "mail -s <subject> -c <cc> <to>"
 msgstr "mail -s <suject> -c <cc> <to>"
@@ -1270,7 +1268,7 @@ msgid "Insert literal"
 msgstr "Insérer un littéral"
 
 msgid "Press any key:"
-msgstr "Appuyez sur une touche:"
+msgstr "Appuyez sur une touche :"
 
 msgid ""
 "Current text was modified without a file save.\n"
@@ -1292,13 +1290,13 @@ msgid "Save macro"
 msgstr "Enregistrer une macro"
 
 msgid "Press the macro's new hotkey:"
-msgstr "Appuyez sur le nouveau raccourci macro:"
+msgstr "Appuyez sur le nouveau raccourci macro :"
 
 msgid "Delete macro"
 msgstr "Supprimer la macro"
 
 msgid "Press macro hotkey:"
-msgstr "Appuyez sur le raccourci macro:"
+msgstr "Appuyez sur le raccourci macro :"
 
 msgid "Macro not deleted"
 msgstr "Macro non supprimée"
@@ -1307,7 +1305,7 @@ msgid "Repeat last commands"
 msgstr "Répéter la dernière commande"
 
 msgid "Repeat times:"
-msgstr "Nombre de répétitions:"
+msgstr "Nombre de répétitions :"
 
 msgid "&Open file..."
 msgstr "&Ouvrir un fichier..."
@@ -1409,7 +1407,7 @@ msgid "&Go to line..."
 msgstr "&Aller à la ligne..."
 
 msgid "&Toggle line state"
-msgstr "I&nverser l'état de la ligne"
+msgstr "I&nverser l’état de la ligne"
 
 msgid "Go to matching &bracket"
 msgstr "Aller au &crochet correspondant"
@@ -1430,10 +1428,10 @@ msgid "Encod&ing..."
 msgstr "&Encodage..."
 
 msgid "&Refresh screen"
-msgstr "&Rafraîchir l'écran"
+msgstr "&Rafraîchir l’écran"
 
 msgid "&Start/Stop record macro"
-msgstr "&Démarrer/Arrêter l'enregistrement de la macro"
+msgstr "&Démarrer/Arrêter l’enregistrement de la macro"
 
 msgid "Delete macr&o..."
 msgstr "Effacer la macr&o..."
@@ -1556,7 +1554,7 @@ msgid "Fill tabs with &spaces"
 msgstr "&Convertir les tabulations en espaces"
 
 msgid "Tab spacing:"
-msgstr "Espacement d'une tabulation :"
+msgstr "Espacement d’une tabulation :"
 
 msgid "Other options"
 msgstr "Autres options"
@@ -1565,7 +1563,7 @@ msgid "&Return does autoindent"
 msgstr "Auto-&indentation par « Entrée »"
 
 msgid "Confir&m before saving"
-msgstr "Confir&mer avant d'enregistrer"
+msgstr "Confir&mer avant d’enregistrer"
 
 msgid "Save file &position"
 msgstr "Enregistrer la position dans le fichier"
@@ -1595,7 +1593,7 @@ msgid "Word wrap line length:"
 msgstr "Longueur avant césure à la ligne :"
 
 msgid "Editor options"
-msgstr "Options de l'éditeur"
+msgstr "Options de l’éditeur"
 
 msgid "In se&lection"
 msgstr "Dans la sé&lection"
@@ -1640,12 +1638,11 @@ msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
 msgstr ""
-"Un éditeur de text facile d'utilisation.\n"
+"Un éditeur de text facile d’utilisation.\n"
 "écrit pour Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2023 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2022 la Free Software Foundation"
+msgstr "Copyright (C) 1996-2023 the Free Software Foundation"
 
 msgid "About"
 msgstr "À propos"
@@ -1654,7 +1651,7 @@ msgid "Open files"
 msgstr "Ouvrir les fichiers"
 
 msgid "Edit: "
-msgstr "Modification: "
+msgstr "Modification : "
 
 msgid "ButtonBar|Mark"
 msgstr "ButtonBar|Marquer"
@@ -1747,7 +1744,7 @@ msgid "Ukrainian"
 msgstr "Ukrainien"
 
 msgid "&Add word"
-msgstr "&Ajout d'un mot"
+msgstr "&Ajout d’un mot"
 
 msgid "Language"
 msgstr "Langage"
@@ -1781,7 +1778,7 @@ msgid ""
 "Cannot open file %s\n"
 "%s"
 msgstr ""
-"Impossible d'ouvrir le fichier %s\n"
+"Impossible d’ouvrir le fichier %s\n"
 "%s"
 
 #, c-format
@@ -1804,7 +1801,7 @@ msgid "Cannot fetch a local copy of %s"
 msgstr "Impossible de récupérer une copie locale de %s "
 
 msgid "The shell is already running a command"
-msgstr " Le shell est déjà en train d'exécuter une commande "
+msgstr " Le shell est déjà en train d’exécuter une commande "
 
 msgid ""
 "Not an xterm or Linux console;\n"
@@ -1866,7 +1863,7 @@ msgid ""
 "Cannot chown \"%s\"\n"
 "%s"
 msgstr ""
-"Ne peut changer l'appartenance de « %s »\n"
+"Ne peut changer l’appartenance de « %s »\n"
 "%s"
 
 msgid "< Default >"
@@ -1906,10 +1903,10 @@ msgid "Classic pro&gressbar"
 msgstr "Barre de pro&gression classique"
 
 msgid "Mkdi&r autoname"
-msgstr "Mkdi&r \"autoname\""
+msgstr "Mkdi&r « autoname »"
 
 msgid "&Preallocate space"
-msgstr "Préalloue l'espace"
+msgstr "Préalloue l’espace"
 
 msgid "Esc key mode"
 msgstr "Mode touche Echap"
@@ -1921,10 +1918,10 @@ msgid "Timeout:"
 msgstr "Expiration :"
 
 msgid "Pause after run"
-msgstr "Pause après exécution d'une commande"
+msgstr "Pause après exécution d’une commande"
 
 msgid "Use internal edi&t"
-msgstr "Utiliser l'éditeur intégré"
+msgstr "Utiliser l’éditeur intégré"
 
 msgid "Use internal vie&w"
 msgstr "Utiliser la &visionneuse intégrée"
@@ -2046,9 +2043,9 @@ msgid ""
 "manual reload of the directory. See the man page for\n"
 "the details."
 msgstr ""
-"Utiliser l'option \"rafraîchissement rapide\" pourrait ne pas \n"
+"Utiliser l’option « rafraîchissement rapide » pourrait ne pas \n"
 "refléter le contenu réel des répertoires. Dans ce cas, \n"
-"actualisez manuellement l'affichage. Consulter la page \"man\" \n"
+"actualisez manuellement l’affichage. Consulter la page « man » \n"
 "pour plus de détails."
 
 msgid "&Full file list"
@@ -2061,7 +2058,7 @@ msgid "&Long file list"
 msgstr "Liste &longue de fichiers"
 
 msgid "&User defined:"
-msgstr "Définie par l'&utilisateur :"
+msgstr "Définie par l’&utilisateur :"
 
 msgid "columns"
 msgstr "colonnes"
@@ -2098,7 +2095,7 @@ msgid "Confirmation|Di&rectory hotlist delete"
 msgstr "Confirmation|E&ffacer un répertoire des favoris"
 
 msgid "Confirmation|&History cleanup"
-msgstr "Confirmation|Effacer l'&historique"
+msgstr "Confirmation|Effacer l’&historique"
 
 msgid "Confirmation"
 msgstr " Confirmation "
@@ -2119,10 +2116,10 @@ msgid "F&ull 8 bits input"
 msgstr "Entrée 8 &bits"
 
 msgid "Display bits"
-msgstr "Bits d'affichage"
+msgstr "Bits d’affichage"
 
 msgid "Input / display codepage:"
-msgstr "Entrée / affichage d'encodage :"
+msgstr "Entrée / affichage d’encodage :"
 
 msgid "Directory tree"
 msgstr "Arborescence des répertoires"
@@ -2178,12 +2175,15 @@ msgstr "&Tuer"
 msgid "Background jobs"
 msgstr "Processus en arrière plan"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot change directory to\n"
 "%s\n"
 "%s"
-msgstr " Ne peut changer de répertoire"
+msgstr ""
+"Impossible de changer de répertoire en\n"
+"%s\n"
+"%s"
 
 msgid "Secure deletion"
 msgstr "Suppression sécurisée"
@@ -2249,10 +2249,10 @@ msgid "Direct access for files"
 msgstr "Accès direct aux fichiers"
 
 msgid "Casefolded file"
-msgstr "Fichier \"casefoldé\""
+msgstr "Fichier « casefoldé »"
 
 msgid "Inode has inline data"
-msgstr "Inode a des données \"inline\""
+msgstr "Inode a des données « inline »"
 
 msgid "Project hierarchy"
 msgstr "Hiérarchie du projet"
@@ -2277,7 +2277,7 @@ msgid ""
 "Cannot chattr \"%s\"\n"
 "%s"
 msgstr ""
-"Chattr impossible \"%s\"\n"
+"Chattr impossible « %s »\n"
 "%s"
 
 #, c-format
@@ -2285,14 +2285,14 @@ msgid ""
 "Cannot get flags of \"%s\"\n"
 "%s"
 msgstr ""
-"Impossible d'obtenir les drapeaux de \"%s\"\n"
+"Impossible d’obtenir les drapeaux de « %s »\n"
 "%s"
 
 msgid "set &user ID on execution"
-msgstr "définir l'ID &utilisateur à l'exécution"
+msgstr "définir l’ID &utilisateur à l’exécution"
 
 msgid "set &group ID on execution"
-msgstr "définir l'ID &groupe à l'exécution"
+msgstr "définir l’ID &groupe à l’exécution"
 
 msgid "stick&y bit"
 msgstr "bit collant (stick&y)"
@@ -2367,7 +2367,7 @@ msgid "Chown command"
 msgstr "Commande chown"
 
 msgid "User name"
-msgstr "Nom d'utilisateur"
+msgstr "Nom d’utilisateur"
 
 msgid "<Unknown user>"
 msgstr "<Utilisateur inconnu>"
@@ -2390,7 +2390,7 @@ msgstr "Lien"
 
 #, c-format
 msgid "link: %s"
-msgstr "lien: %s"
+msgstr "lien : %s"
 
 #, c-format
 msgid "symlink: %s"
@@ -2400,7 +2400,7 @@ msgid "View file"
 msgstr "Voir le fichier"
 
 msgid "Filename:"
-msgstr "Nom du fichier:"
+msgstr "Nom du fichier :"
 
 msgid "Filtered view"
 msgstr "Vue &filtrée "
@@ -2456,7 +2456,7 @@ msgstr ""
 
 #, c-format
 msgid "'%s' is not a symbolic link"
-msgstr "« %s » n'est pas un lien symbolique"
+msgstr "« %s » n’est pas un lien symbolique"
 
 #, c-format
 msgid "Symlink '%s' points to:"
@@ -2467,7 +2467,7 @@ msgstr "Éditer le lien symbolique"
 
 #, c-format
 msgid "edit symlink, unable to remove %s: %s"
-msgstr "édition de lien symbolique, incapable d'enlever %s : %s "
+msgstr "édition de lien symbolique, incapable d’enlever %s : %s "
 
 #, c-format
 msgid "edit symlink: %s"
@@ -2504,7 +2504,7 @@ msgstr "Enregistrement de la configuration dans %s"
 
 #, c-format
 msgid "Unable to save setup to %s"
-msgstr "Impossible d'enregistrer la configuration dans %s"
+msgstr "Impossible d’enregistrer la configuration dans %s"
 
 msgid "Cannot execute commands on non-local filesystems"
 msgstr " Ne peut pas exécuter de commande sur un système de fichiers non local"
@@ -2531,9 +2531,9 @@ msgid ""
 msgstr ""
 "Vous avez un fichier %s obsolète.\n"
 "Midnight Commander utilise maintenant le fichier %s.\n"
-"Veuillez copier vos modifications de l'ancien fichier vers le nouveau."
+"Veuillez copier vos modifications de l’ancien fichier vers le nouveau."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the\n"
 "%s%s\n"
@@ -2541,11 +2541,13 @@ msgid ""
 "It seems that the installation has failed.\n"
 "Please fetch a fresh copy from the Midnight Commander package."
 msgstr ""
-"Le format du fichier %s%s a changé avec la version 4.0. Il semble que "
-"l'installation ait échoué. Veuillez récupérer une nouvelle copie à partir du "
-"paquet Midnight Commander."
+"Le format du fichier\n"
+"%s%s\n"
+"a changé avec la version 4.0.\n"
+"L’installation semble avoir échoué.\n"
+"Veuillez récupérer une nouvelle copie du paquet Midnight Commander."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the\n"
 "%s\n"
@@ -2554,9 +2556,12 @@ msgid ""
 "%s%s\n"
 "or use that file as an example of how to write it."
 msgstr ""
-"Le format du fichier %s a changé avec la version 4.0. Vous pouvez soit le "
-"copier à partir de %s%s, soit utiliser ce fichier à titre d'exemple pour "
-"savoir comment il faut l'écrire."
+"Le format du fichier\n"
+"%s\n"
+"a changé avec la version 4.0.\n"
+"Vous pouvez soit le copier à partir de\n"
+"%s%s\n"
+"soit utiliser ce fichier comme exemple de rédaction."
 
 msgid "DialogTitle|Copy"
 msgstr "TitreDialog|Copie"
@@ -2578,7 +2583,7 @@ msgstr "FileOperation|Supprime"
 
 #, no-c-format
 msgid "%o %f%n\"%s\"%m"
-msgstr "%o %f%n\"%s\"%m"
+msgstr "%o %f%n« %s »%m"
 
 #, no-c-format
 msgid "%o %d %f%m"
@@ -2605,8 +2610,8 @@ msgid ""
 "Cannot stat hardlink source file \"%s\"\n"
 "%s"
 msgstr ""
-"Impossible de statuer sur le fichier source de la liaison physique \"hardlink"
-"\" \"%s\"\n"
+"Impossible de statuer sur le fichier source de la liaison physique « "
+"hardlink » « %s »\n"
 "%s"
 
 #, c-format
@@ -2614,12 +2619,12 @@ msgid ""
 "Cannot create target hardlink \"%s\"\n"
 "%s"
 msgstr ""
-"Impossible de créer un lien physique \"hardlink\" cible \"%s\"\n"
+"Impossible de créer un lien physique « hardlink » cible « %s »\n"
 "%s"
 
 #, c-format
 msgid "Cannot create target hardlink \"%s\""
-msgstr "Impossible de créer un lien physique \"hardlink\" cible \"%s\""
+msgstr "Impossible de créer un lien physique « hardlink » cible « %s »"
 
 #, c-format
 msgid ""
@@ -2635,8 +2640,8 @@ msgid ""
 "Option Stable Symlinks will be disabled"
 msgstr ""
 "Impossible de réaliser des liens symboliques stables entre systèmes de "
-"fichiers non-locaux : désactivation de l'option \"Liens symboliques stables"
-"\"."
+"fichiers non-locaux : désactivation de l’option « Liens symboliques stables "
+"»."
 
 #, c-format
 msgid ""
@@ -2699,7 +2704,7 @@ msgid ""
 "Cannot remove file \"%s\"\n"
 "%s"
 msgstr ""
-"Impossible d'effacer le fichier « %s »\n"
+"Impossible d’effacer le fichier « %s »\n"
 "%s"
 
 #, c-format
@@ -2707,12 +2712,12 @@ msgid ""
 "Cannot stat file \"%s\"\n"
 "%s"
 msgstr ""
-"Impossible d'obtenir les caractéristiques du fichier « %s »\n"
+"Impossible d’obtenir les caractéristiques du fichier « %s »\n"
 "%s"
 
 #, c-format
 msgid "Cannot overwrite directory \"%s\""
-msgstr "Impossible d'écraser le répertoire « %s »"
+msgstr "Impossible d’écraser le répertoire « %s »"
 
 #, c-format
 msgid ""
@@ -2727,7 +2732,7 @@ msgid ""
 "Cannot remove directory \"%s\"\n"
 "%s"
 msgstr ""
-"Impossible d'effacer le répertoire « %s »\n"
+"Impossible d’effacer le répertoire « %s »\n"
 "%s"
 
 #, c-format
@@ -2735,7 +2740,7 @@ msgid ""
 "Cannot overwrite directory \"%s\"\n"
 "%s"
 msgstr ""
-"Impossible d'écraser le répertoire « %s »\n"
+"Impossible d’écraser le répertoire « %s »\n"
 "%s"
 
 #, c-format
@@ -2743,7 +2748,7 @@ msgid ""
 "Cannot overwrite file \"%s\"\n"
 "%s"
 msgstr ""
-"Impossible d'écraser le fichier « %s »\n"
+"Impossible d’écraser le fichier « %s »\n"
 "%s"
 
 #, c-format
@@ -2762,7 +2767,7 @@ msgid ""
 "Cannot stat source file \"%s\"\n"
 "%s"
 msgstr ""
-"Impossible d'obtenir les caractéristiques du fichier source « %s »\n"
+"Impossible d’obtenir les caractéristiques du fichier source « %s »\n"
 "%s"
 
 #, c-format
@@ -2794,18 +2799,18 @@ msgid ""
 "Cannot open source file \"%s\"\n"
 "%s"
 msgstr ""
-"Impossible d'ouvrir le fichier source « %s »\n"
+"Impossible d’ouvrir le fichier source « %s »\n"
 "%s"
 
 msgid "Reget failed, about to overwrite file"
-msgstr "Reget a échoué, sur le point d'écraser le fichier"
+msgstr "Reget a échoué, sur le point d’écraser le fichier"
 
 #, c-format
 msgid ""
 "Cannot fstat source file \"%s\"\n"
 "%s"
 msgstr ""
-"Impossible d'obtenir les caractéristiques du fichier source « %s »\n"
+"Impossible d’obtenir les caractéristiques du fichier source « %s »\n"
 "%s"
 
 #, c-format
@@ -2821,7 +2826,7 @@ msgid ""
 "Cannot fstat target file \"%s\"\n"
 "%s"
 msgstr ""
-"Impossible d'obtenir les caractéristiques du fichier cible « %s »\n"
+"Impossible d’obtenir les caractéristiques du fichier cible « %s »\n"
 "%s"
 
 #, c-format
@@ -2829,7 +2834,7 @@ msgid ""
 "Cannot preallocate space for target file \"%s\"\n"
 "%s"
 msgstr ""
-"Impossible de préallouer l'espace pour le fichier cible « %s »\n"
+"Impossible de préallouer l’espace pour le fichier cible « %s »\n"
 "%s"
 
 #, c-format
@@ -2845,7 +2850,7 @@ msgid ""
 "Cannot write target file \"%s\"\n"
 "%s"
 msgstr ""
-"Impossible d'écrire dans le fichier cible « %s »\n"
+"Impossible d’écrire dans le fichier cible « %s »\n"
 "%s"
 
 msgid "(stalled)"
@@ -2881,7 +2886,7 @@ msgid ""
 "Cannot stat source directory \"%s\"\n"
 "%s"
 msgstr ""
-"Impossible d'obtenir les caractéristiques du fichier source « %s »\n"
+"Impossible d’obtenir les caractéristiques du fichier source « %s »\n"
 "%s"
 
 #, c-format
@@ -2889,7 +2894,7 @@ msgid ""
 "Source \"%s\" is not a directory\n"
 "%s"
 msgstr ""
-"La source « %s » n'est pas un répertoire\n"
+"La source « %s » n’est pas un répertoire\n"
 "%s"
 
 #, c-format
@@ -2937,9 +2942,9 @@ msgstr "S&uspendre"
 msgid "Con&tinue"
 msgstr "Con&tinuer"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%d:%02d:%02d"
-msgstr "%d:%02d.%02d"
+msgstr "%d:%02d:%02d"
 
 #, c-format
 msgid "ETA %s"
@@ -3011,11 +3016,11 @@ msgstr "Heure : %s %s (%s)"
 
 #, c-format
 msgid "Time: %s"
-msgstr "Heure: %s"
+msgstr "Heure : %s"
 
 #, c-format
 msgid "Time: %s (%s)"
-msgstr "Heure: %s (%s)"
+msgstr "Heure : %s (%s)"
 
 #, c-format
 msgid " Total: %s "
@@ -3038,7 +3043,7 @@ msgid "&Using shell patterns"
 msgstr "&Utiliser les « shell patterns »"
 
 msgid "to:"
-msgstr "vers:"
+msgstr "vers :"
 
 msgid "Follow &links"
 msgstr "Suivre les &liens"
@@ -3047,7 +3052,7 @@ msgid "Preserve &attributes"
 msgstr "Préserver les &attributs"
 
 msgid "Di&ve into subdir if exists"
-msgstr "Suivre les sous-répertoires s'il y en a"
+msgstr "Suivre les sous-répertoires s’il y en a"
 
 msgid "&Stable symlinks"
 msgstr "Lien symboliques &stables"
@@ -3231,7 +3236,7 @@ msgid "&Appearance..."
 msgstr "&Apparence..."
 
 msgid "&Display bits..."
-msgstr "&Bits d'affichage..."
+msgstr "&Bits d’affichage..."
 
 msgid "&Virtual FS..."
 msgstr "Système de Fichiers &Virtuel (VFS)..."
@@ -3242,7 +3247,7 @@ msgstr "Panneaux :"
 #, c-format
 msgid "You have %zu opened screen. Quit anyway?"
 msgid_plural "You have %zu opened screens. Quit anyway?"
-msgstr[0] "Il y a %zu fenêtre d'ouverte. Quitter ?"
+msgstr[0] "Il y a %zu fenêtre d’ouverte. Quitter ?"
 msgstr[1] "Il y a %zu fenêtres ouvertes. Quitter ?"
 msgstr[2] "Il y a %zu fenêtres ouvertes. Quitter ?"
 
@@ -3350,11 +3355,11 @@ msgstr[2] "Terminé (%zu répertoires ignorés)"
 
 #, c-format
 msgid "Find File: \"%s\". Content: \"%s\""
-msgstr "Chercher un fichier : \"%s\". Contenant : \"%s\""
+msgstr "Chercher un fichier : « %s ». Contenant : « %s »"
 
 #, c-format
 msgid "Find File: \"%s\""
-msgstr "Chercher un fichier : \"%s\""
+msgstr "Chercher un fichier : « %s »"
 
 msgid "Searching"
 msgstr "Recherche en cours"
@@ -3418,7 +3423,7 @@ msgid "Directory label:"
 msgstr "Nom du répertoire :"
 
 msgid "Directory path:"
-msgstr "Chemin:"
+msgstr "Chemin du répertoire :"
 
 msgid "New hotlist group"
 msgstr "Nouveau groupe de favoris"
@@ -3428,14 +3433,14 @@ msgstr "Nom du nouveau groupe :"
 
 #, c-format
 msgid "Are you sure you want to remove entry \"%s\"?"
-msgstr "Êtes-vous sûr de bien vouloir effacer l'élément « %s » ?"
+msgstr "Êtes-vous sûr de bien vouloir effacer l’élément « %s » ?"
 
 #, c-format
 msgid ""
 "Group \"%s\" is not empty.\n"
 "Remove it?"
 msgstr ""
-"Le groupe « %s » n'est pas vide.\n"
+"Le groupe « %s » n’est pas vide.\n"
 "Le supprimer ?"
 
 msgid "Hotlist Load"
@@ -3446,8 +3451,8 @@ msgid ""
 "MC was unable to write %s file,\n"
 "your old hotlist entries were not deleted"
 msgstr ""
-"MC n'a pas pu écrire dans le fichier %s,\n"
-"vos anciens favoris n'ont pas été effacés"
+"MC n’a pas pu écrire dans le fichier %s,\n"
+"vos anciens favoris n’ont pas été effacés"
 
 #, c-format
 msgid "Label for \"%s\":"
@@ -3465,13 +3470,13 @@ msgid "File: %s"
 msgstr "Fichier : %s"
 
 msgid "No node information"
-msgstr "Pas d'information sur les I-noeuds"
+msgstr "Pas d’information sur les I-noeuds"
 
 msgid "Free nodes:"
 msgstr "I-noeuds libres :"
 
 msgid "No space information"
-msgstr "Pas d'information sur l'espace disponible"
+msgstr "Pas d’information sur l’espace disponible"
 
 #, c-format
 msgid "Free space: %s / %s (%d%%)"
@@ -3490,7 +3495,7 @@ msgstr "Périphérique : %s"
 
 #, c-format
 msgid "Filesystem: %s"
-msgstr "Système de fichiers: %s"
+msgstr "Système de fichiers : %s"
 
 #, c-format
 msgid "Accessed:   %s"
@@ -3562,7 +3567,7 @@ msgid "&XTerm window title"
 msgstr "Titre de la fenêtre &XTerm"
 
 msgid "&Show free space"
-msgstr "Afficher l'espace libre"
+msgstr "Afficher l’espace libre"
 
 msgid "Panel split"
 msgstr "Séparation des panneaux"
@@ -3642,7 +3647,7 @@ msgid "sort|a"
 msgstr "sort|a"
 
 msgid "&Access time"
-msgstr "Date d'&accès"
+msgstr "Date d’&accès"
 
 #. TRANSLATORS: one single character to represent 'Change time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -3650,7 +3655,7 @@ msgid "sort|h"
 msgstr "sort|c"
 
 msgid "C&hange time"
-msgstr "&Modifier l'heure"
+msgstr "&Modifier l’heure"
 
 msgid "Perm"
 msgstr "Permissions"
@@ -3704,7 +3709,7 @@ msgid "Panelize"
 msgstr "Mettre en panneau"
 
 msgid "Unknown tag on display format:"
-msgstr "Tag inconnu au format d'affichage :"
+msgstr "Tag inconnu au format d’affichage :"
 
 msgid "&Files only"
 msgstr "&Fichiers seulement"
@@ -3722,14 +3727,14 @@ msgid "Filter"
 msgstr "Filtre"
 
 msgid "Do you really want to execute?"
-msgstr "Voulez-vous vraiment l'exécuter ?"
+msgstr "Voulez-vous vraiment l’exécuter ?"
 
 msgid "Cannot read directory contents"
 msgstr " Ne peut lire le contenu du répertoire"
 
 msgid "User supplied format looks invalid, reverting to default."
 msgstr ""
-"Le format fourni par l'utilisateur semble invalide, revient aux valeurs par "
+"Le format fourni par l’utilisateur semble invalide, revient aux valeurs par "
 "défaut."
 
 msgid "&Add new"
@@ -3765,11 +3770,11 @@ msgid ""
 "%s"
 msgstr ""
 "Panneau externe :\n"
-"échec de la lecture des données du \"stdout\" enfant :\n"
+"échec de la lecture des données du « stdout » enfant :\n"
 "%s"
 
 msgid "Cannot run external panelize in a non-local directory"
-msgstr "Impossible d'exécuter le panneau externe dans un répertoire non local"
+msgstr "Impossible d’exécuter le panneau externe dans un répertoire non local"
 
 msgid "Modified git files"
 msgstr "Fichiers git modifiés"
@@ -3804,7 +3809,7 @@ msgid ""
 "Cannot stat the destination\n"
 "%s"
 msgstr ""
-"Impossible d'obtenir les caractéristiques de la cible\n"
+"Impossible d’obtenir les caractéristiques de la cible\n"
 "%s"
 
 #, c-format
@@ -3835,14 +3840,14 @@ msgstr ""
 "%s\n"
 
 msgid "Help file format error\n"
-msgstr "Mauvais format du fichier d'aide\n"
+msgstr "Mauvais format du fichier d’aide\n"
 
 msgid "Internal bug: Double start of link area"
 msgstr "Bug interne : double départ dans la zone de lien"
 
 #, c-format
 msgid "Cannot find node %s in help file"
-msgstr "Impossible de trouver la section %s dans l'aide"
+msgstr "Impossible de trouver la section %s dans l’aide"
 
 msgid "Help"
 msgstr "Aide"
@@ -3873,11 +3878,11 @@ msgstr ""
 "Appuyez sur « %s »\n"
 "et attendez la disparition de ce message.\n"
 "\n"
-"Ensuite, appuyez à nouveau pour voir « Vu » s'afficher\n"
-"à l'emplacement prévu.\n"
+"Ensuite, appuyez à nouveau pour voir « Vu » s’afficher\n"
+"à l’emplacement prévu.\n"
 "\n"
 "Pour annuler, appuyez sur la touche Échappement\n"
-"jusqu'à la disparition de ce panneau."
+"jusqu’à la disparition de ce panneau."
 
 msgid "Cannot accept this key"
 msgstr "Ne peut pas utiliser cette touche"
@@ -3912,8 +3917,8 @@ msgid ""
 "which keys are not marked with OK. Press space on the missing\n"
 "key, or click with the mouse to define it. Move around with Tab."
 msgstr ""
-"Pressez chacune des touches suivantes, puis vérifiez celles n'étant \n"
-"pas marquées \"Vu\". Pressez <Espace> ou cliquez sur ces touches \n"
+"Pressez chacune des touches suivantes, puis vérifiez celles n’étant \n"
+"pas marquées « Vu ». Pressez <Espace> ou cliquez sur ces touches \n"
 "pour les définir. Utilisez <TAB> pour vous déplacer."
 
 #, c-format
@@ -3921,11 +3926,11 @@ msgid ""
 "Failed to run:\n"
 "%s\n"
 msgstr ""
-"Échec de l'exécution :\n"
+"Échec de l’exécution :\n"
 "%s\n"
 
 msgid "Home directory path is not absolute"
-msgstr "Le chemin vers le répertoire utilisateur n'est pas absolu"
+msgstr "Le chemin vers le répertoire utilisateur n’est pas absolu"
 
 msgid ""
 "GNU Midnight Commander\n"
@@ -3963,7 +3968,7 @@ msgid ""
 "Cannot save file %s:\n"
 "%s"
 msgstr ""
-"Impossible d'enregistrer le fichier « %s » :\n"
+"Impossible d’enregistrer le fichier « %s » :\n"
 "%s"
 
 #, c-format
@@ -3981,7 +3986,7 @@ msgid "With builtin Editor and Aspell support"
 msgstr "Avec un éditeur intégré et un support Aspell"
 
 msgid "With builtin Editor"
-msgstr "Avec l'éditeur intégré"
+msgstr "Avec l’éditeur intégré"
 
 msgid "With optional subshell support"
 msgstr "Avec prise en charge optionnelle du sous-shell"
@@ -4002,7 +4007,7 @@ msgid "With support for X11 events"
 msgstr "Avec prise en charge des événements X11"
 
 msgid "With internationalization support"
-msgstr "Avec prise en charge de l'internationalisation"
+msgstr "Avec prise en charge de l’internationalisation"
 
 msgid "With multiple codepages support"
 msgstr "Avec prise en charge de plusieurs codepages"
@@ -4043,7 +4048,7 @@ msgid "Data types:"
 msgstr "Types de données :"
 
 msgid "Home directory:"
-msgstr "Répertoire de l'utilisateur :"
+msgstr "Répertoire de l’utilisateur :"
 
 msgid "Profile root directory:"
 msgstr "Répertoire racine de profil :"
@@ -4058,7 +4063,7 @@ msgid "Data directory:"
 msgstr "Répertoire de données :"
 
 msgid "File extension handlers:"
-msgstr "Associations d'extension de fichiers :"
+msgstr "Associations d’extension de fichiers :"
 
 msgid "VFS plugins and scripts:"
 msgstr "Greffons et scripts VFS :"
@@ -4092,21 +4097,21 @@ msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
 msgstr ""
-"Le fichier « %s » n'appartient ni à vous ni au super-utilisateur ou alors il "
+"Le fichier « %s » n’appartient ni à vous ni au super-utilisateur ou alors il "
 "est\n"
 "modifiable par tout le monde. Son utilisation peut compromettre votre "
 "sécurité"
 
 msgid "Format error on file Extensions File"
-msgstr "Erreur de format du fichier de paramères d'extensions"
+msgstr "Erreur de format du fichier de paramères d’extensions"
 
 #, c-format
 msgid "The %%var macro has no default"
-msgstr "La macro %%var n'a pas de valeur par default"
+msgstr "La macro %%var n’a pas de valeur par default"
 
 #, c-format
 msgid "The %%var macro has no variable"
-msgstr "La macro %%var n'a aucune variable"
+msgstr "La macro %%var n’a aucune variable"
 
 #, c-format
 msgid "No suitable entries found in %s"
@@ -4120,7 +4125,7 @@ msgid ""
 "Cannot open cpio archive\n"
 "%s"
 msgstr ""
-"Ne peut ouvrir l'archive cpio\n"
+"Ne peut ouvrir l’archive cpio\n"
 "%s"
 
 #, c-format
@@ -4128,7 +4133,7 @@ msgid ""
 "Premature end of cpio archive\n"
 "%s"
 msgstr ""
-"Fin de l'archive cpio prématurée\n"
+"Fin de l’archive cpio prématurée\n"
 "%s"
 
 #, c-format
@@ -4140,7 +4145,7 @@ msgid ""
 msgstr ""
 "Lien physique inconsistant de\n"
 "%s\n"
-"dans l'archive cpio\n"
+"dans l’archive cpio\n"
 "%s"
 
 #, c-format
@@ -4163,9 +4168,8 @@ msgstr ""
 "Fin de fichier inattendue\n"
 "%s"
 
-#, fuzzy
 msgid "Inconsistent archive"
-msgstr "Archive tar incohérente"
+msgstr "Archive incohérente"
 
 #, c-format
 msgid ""
@@ -4173,7 +4177,7 @@ msgid ""
 "%s:\n"
 "%s"
 msgstr ""
-"Impossible d'ouvrir l'archive %s\n"
+"Impossible d’ouvrir l’archive %s\n"
 "%s :\n"
 "%s"
 
@@ -4187,7 +4191,7 @@ msgstr ""
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
-msgstr "Avertissement: impossible d'ouvrir le répertoire %s\n"
+msgstr "Avertissement : impossible d’ouvrir le répertoire %s\n"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -4199,7 +4203,7 @@ msgstr "fish : attente de la première ligne..."
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr ""
 "Désolé, nous ne pouvons pas faire de connexion authentifiée par mot de passe "
-"pour l'instant."
+"pour l’instant."
 
 #, c-format
 msgid "fish: Password is required for %s"
@@ -4215,7 +4219,7 @@ msgid "fish: Handshaking version..."
 msgstr "fish : vérification des numéros de version..."
 
 msgid "fish: Getting host info..."
-msgstr "fish : récupère les informations de l'hôte..."
+msgstr "fish : récupère les informations de l’hôte..."
 
 #, c-format
 msgid "fish: Reading directory %s..."
@@ -4243,7 +4247,7 @@ msgid "Aborting transfer..."
 msgstr "Abandon du transfert..."
 
 msgid "Error reported after abort."
-msgstr "Erreur rapportée après l'abandon."
+msgstr "Erreur rapportée après l’abandon."
 
 msgid "Aborted transfer would be successful."
 msgstr "Le transfert abandonné devrait avoir réussi."
@@ -4257,17 +4261,17 @@ msgid "FTP: Password required for %s"
 msgstr "FTP : Mot de passe requis pour %s"
 
 msgid "ftpfs: sending login name"
-msgstr "ftpfs : envoi du nom d'utilisateur"
+msgstr "ftpfs : envoi du nom d’utilisateur"
 
 msgid "ftpfs: sending user password"
 msgstr "ftpfs : envoi du mot de passe"
 
 #, c-format
 msgid "FTP: Account required for user %s"
-msgstr "FTP : Compte requis pour l'utilisateur %s"
+msgstr "FTP : Compte requis pour l’utilisateur %s"
 
 msgid "Account:"
-msgstr "Compte:"
+msgstr "Compte :"
 
 msgid "ftpfs: sending user account"
 msgstr "ftpfs : envoie du compte utilisateur"
@@ -4277,10 +4281,10 @@ msgstr "ftpfs : connecté"
 
 #, c-format
 msgid "ftpfs: Login incorrect for user %s "
-msgstr "ftpfs : login incorrect pour l'utilisateur %s"
+msgstr "ftpfs : login incorrect pour l’utilisateur %s"
 
 msgid "ftpfs: Invalid host name."
-msgstr "ftpfs : nom d'hôte invalide"
+msgstr "ftpfs : nom d’hôte invalide"
 
 #, c-format
 msgid "ftpfs: %s"
@@ -4291,11 +4295,11 @@ msgid "ftpfs: making connection to %s"
 msgstr "ftpfs : établissement de la connexion à %s"
 
 msgid "ftpfs: connection interrupted by user"
-msgstr "ftpfs : connexion interrompue par l'utilisateur"
+msgstr "ftpfs : connexion interrompue par l’utilisateur"
 
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
-msgstr "ftpfs : connexion au serveur échouée: %s"
+msgstr "ftpfs : connexion au serveur échouée : %s"
 
 #, c-format
 msgid "Waiting to retry... %d (Control-G to cancel)"
@@ -4311,30 +4315,30 @@ msgstr "ftpfs : essaye de se reconnecter au serveur, tentative %u"
 
 #, c-format
 msgid "ftpfs: could not get socket name: %s"
-msgstr "ftpfs : impossible d'obtenir le nom du socket : %s"
+msgstr "ftpfs : impossible d’obtenir le nom du socket : %s"
 
 msgid "ftpfs: could not reconnect to server"
 msgstr "ftpfs : impossible de se reconnecter au serveur"
 
 msgid "ftpfs: invalid address family"
-msgstr "ftpfs : type de famille d'adresse incorrecte"
+msgstr "ftpfs : type de famille d’adresse incorrecte"
 
 #, c-format
 msgid "ftpfs: could not create socket: %s"
 msgstr "ftpfs : impossible de créer la socket : %s"
 
 msgid "ftpfs: could not setup passive mode"
-msgstr "ftpfs : impossible d'activer le mode passif"
+msgstr "ftpfs : impossible d’activer le mode passif"
 
 msgid "ftpfs: aborting transfer."
 msgstr "ftpfs : abandon du transfert"
 
 #, c-format
 msgid "ftpfs: abort error: %s"
-msgstr "ftpfs : erreur d'abandon : %s"
+msgstr "ftpfs : erreur d’abandon : %s"
 
 msgid "ftpfs: abort failed"
-msgstr "ftpfs : échec de l'abandon"
+msgstr "ftpfs : échec de l’abandon"
 
 msgid "ftpfs: CWD failed."
 msgstr "ftpfs : échec de la commande CWD"
@@ -4353,10 +4357,10 @@ msgid "(strict rfc959)"
 msgstr "(rfc959 strict)"
 
 msgid "(chdir first)"
-msgstr "(chdir d'abord)"
+msgstr "(chdir d’abord)"
 
 msgid "ftpfs: failed; nowhere to fallback to"
-msgstr "ftpfs : échec; nulle part où retomber"
+msgstr "ftpfs : échec ; nulle part où retomber"
 
 msgid "ftpfs: storing file"
 msgstr "ftpfs : enregistrement du fichier"
@@ -4365,7 +4369,7 @@ msgid ""
 "~/.netrc file has incorrect mode\n"
 "Remove password or correct mode"
 msgstr ""
-"Le fichier ~/.netrc n'a pas un mode correct.\n"
+"Le fichier ~/.netrc n’a pas un mode correct.\n"
 "Enlevez le mot de passe ou corrigez le mode."
 
 #, c-format
@@ -4385,7 +4389,7 @@ msgid ""
 "Warning: Invalid line in %s:\n"
 "%s\n"
 msgstr ""
-"Attention : ligne invalide dans %s:\n"
+"Attention : ligne invalide dans %s :\n"
 "%s\n"
 
 #, c-format
@@ -4401,10 +4405,10 @@ msgid "sftp: an error occurred while reading %s: %s"
 msgstr "sftp : une erreur est survenue pendant la lecture de %s : %s"
 
 msgid "sftp: Unable to get current user name."
-msgstr "sftp : impossible d'obtenir le nom utilisateur."
+msgstr "sftp : impossible d’obtenir le nom utilisateur."
 
 msgid "sftp: Invalid host name."
-msgstr "sftp : nom d'hôte invalide."
+msgstr "sftp : nom d’hôte invalide."
 
 #, c-format
 msgid "sftp: %s"
@@ -4412,7 +4416,7 @@ msgstr "sftp : %s"
 
 msgid "sftp: failed to convert remote host IP address into text form"
 msgstr ""
-"sftp : échec de la conversion de l'adresse IP de l'hôte distant en format "
+"sftp : échec de la conversion de l’adresse IP de l’hôte distant en format "
 "texte"
 
 #, c-format
@@ -4420,7 +4424,7 @@ msgid "sftp: making connection to %s"
 msgstr "sftp : établissement de la connexion à %s"
 
 msgid "sftp: connection interrupted by user"
-msgstr "sftp : connexion interrompue par l'utilisateur"
+msgstr "sftp : connexion interrompue par l’utilisateur"
 
 #, c-format
 msgid "sftp: connection to server failed: %s"
@@ -4430,7 +4434,7 @@ msgid "sftp: found host key of unsupported type: RSA1"
 msgstr "sftp : clé hôte trouvée de type non supporté : RSA1"
 
 msgid "sftp: unknown host key type:"
-msgstr "sftp : type de clé d'hôte inconnu :"
+msgstr "sftp : type de clé d’hôte inconnu :"
 
 #, c-format
 msgid ""
@@ -4443,17 +4447,17 @@ msgstr ""
 "à la liste des hôtes connus."
 
 msgid "sftp: cannot get the remote host key"
-msgstr "sftp : impossible d'obtenir la clé de l'hôte distant"
+msgstr "sftp : impossible d’obtenir la clé de l’hôte distant"
 
 msgid "sftp: unsupported key type, can't check remote host key"
 msgstr ""
 "sftp : type de clé non pris en charge, impossible de vérifier la clé de "
-"l'hôte distant"
+"l’hôte distant"
 
 msgid "sftp: can't compute host key fingerprint hash"
 msgstr ""
-"sftp : Impossible de calculer l'empreinte numérique \"hash\" de la clé de "
-"l'hôte"
+"sftp : Impossible de calculer l’empreinte numérique « hash » de la clé de "
+"l’hôte"
 
 #, c-format
 msgid ""
@@ -4464,12 +4468,12 @@ msgid ""
 "SHA1:%s.\n"
 "Do you want to add it to the list of known hosts and continue connecting?"
 msgstr ""
-"L'authenticité de l'hôte\n"
+"L’authenticité de l’hôte\n"
 "%s (%s)\n"
 "ne peut pas être établie !\n"
-"L'emprunte numérique \"hash\" de la clé %s est\n"
+"L’emprunte numérique « hash » de la clé %s est\n"
 "SHA1:%s.\n"
-"Voulez-vous l'ajouter à la liste des hôtes connus et continuer à vous "
+"Voulez-vous l’ajouter à la liste des hôtes connus et continuer à vous "
 "connecter ?"
 
 #, c-format
@@ -4483,11 +4487,11 @@ msgstr ""
 "%s (%s)\n"
 "se trouve dans la liste des hôtes connus mais les CLES NE\n"
 "CORRESPONDENT PAS ! CELA POURRAIT ÊTRE UNE ATTAQUE MITM !\n"
-"Voulez-vous vraiment l'ajouter à la liste des hôtes connus et continuer à "
-"vous connecter ?"
+"Voulez-vous vraiment l’ajouter à la liste des hôtes connus et continuer à "
+"vous connecter ?"
 
 msgid "sftp: host key verification failed"
-msgstr "sftp : échec de la vérification de la clé de l'hôte"
+msgstr "sftp : échec de la vérification de la clé de l’hôte"
 
 #, c-format
 msgid "sftp: Enter passphrase for %s "
@@ -4504,7 +4508,7 @@ msgid "sftp: Password is empty."
 msgstr "sftp : mot de passe vide"
 
 msgid "sftp: failure establishing SSH session"
-msgstr "sftp : échec de l'établissement de la session SSH"
+msgstr "sftp : échec de l’établissement de la session SSH"
 
 msgid "sftp: No file handler data present for reading file"
 msgstr ""
@@ -4532,10 +4536,10 @@ msgid ""
 "Cannot open tar archive\n"
 "%s"
 msgstr ""
-"Ne peut ouvrir l'archive tar\n"
+"Ne peut ouvrir l’archive tar\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
@@ -4544,7 +4548,7 @@ msgstr ""
 "ne ressemble pas à une archive tar."
 
 msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr ""
+msgstr "tar : mc_lseek ne s’est pas arrêté à une limite d’enregistrement."
 
 msgid "undelfs: error"
 msgstr " undelfs : erreur"
@@ -4553,7 +4557,7 @@ msgid "not enough memory"
 msgstr " pas assez de mémoire"
 
 msgid "while allocating block buffer"
-msgstr "lors de l'allocation d'un bloc tampon"
+msgstr "lors de l’allocation d’un bloc tampon"
 
 #, c-format
 msgid "open_inode_scan: %d"
@@ -4561,37 +4565,37 @@ msgstr " open_inode_scan : %d"
 
 #, c-format
 msgid "while starting inode scan %d"
-msgstr "lors du démarrage du scan de l'i-noeud %d"
+msgstr "lors du démarrage du scan de l’i-noeud %d"
 
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
 msgstr ""
-"undelfs : chargement le l'information de fichiers supprimés de %d i-noeuds"
+"undelfs : chargement le l’information de fichiers supprimés de %d i-noeuds"
 
 #, c-format
 msgid "while calling ext2_block_iterate %d"
-msgstr "lors de l'appel à ext2_block_iterate %d"
+msgstr "lors de l’appel à ext2_block_iterate %d"
 
 msgid "no more memory while reallocating array"
 msgstr "pas plus de mémoire lors de la ré-allocation du tableau"
 
 #, c-format
 msgid "while doing inode scan %d"
-msgstr "lors du scan de l'i-noeud %d"
+msgstr "lors du scan de l’i-noeud %d"
 
 #, c-format
 msgid "Cannot open file %s"
-msgstr "Impossible d'ouvrir le fichier %s"
+msgstr "Impossible d’ouvrir le fichier %s"
 
 msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs : lecture de l'i-noeud bitmap..."
+msgstr "undelfs : lecture de l’i-noeud bitmap..."
 
 #, c-format
 msgid ""
 "Cannot load inode bitmap from:\n"
 "%s"
 msgstr ""
-"Ne peut charger le bitmap d'i-noeud depuis : \n"
+"Ne peut charger le bitmap d’i-noeud depuis : \n"
 "%s"
 
 msgid "undelfs: reading block bitmap..."
@@ -4606,13 +4610,13 @@ msgstr ""
 "%s"
 
 msgid "vfs_info is not fs!"
-msgstr "vfs_info n'est pas fs !"
+msgstr "vfs_info n’est pas fs !"
 
 msgid "You have to chdir to extract files first"
 msgstr "Vous devez changer de répertoire pour extraire les fichiers en premier"
 
 msgid "while iterating over blocks"
-msgstr "lors de l'itération sur les blocs"
+msgstr "lors de l’itération sur les blocs"
 
 #, c-format
 msgid "Cannot open file \"%s\""
@@ -4625,7 +4629,7 @@ msgid "Invalid value"
 msgstr "Valeur invalide"
 
 msgid "File was modified. Save with exit?"
-msgstr "Le fichier a été modifié. Sauvegarder puis quitter?"
+msgstr "Le fichier a été modifié. Sauvegarder puis quitter ?"
 
 msgid "&Cancel quit"
 msgstr "&Annuler quitter"
@@ -4633,7 +4637,7 @@ msgstr "&Annuler quitter"
 msgid ""
 "Midnight Commander is being shut down.\n"
 "Save modified file?"
-msgstr "Midnight Commander va s'éteindre. Enregistrer le fichier modifié ?"
+msgstr "Midnight Commander va s’éteindre. Enregistrer le fichier modifié ?"
 
 msgid "&Line number"
 msgstr "&Numéro de ligne"
@@ -4696,14 +4700,14 @@ msgid ""
 msgstr ""
 "Erreur pendant la fermeture du fichier :\n"
 "%s\n"
-"Certaines données n'ont peut-être pas été écrites"
+"Certaines données n’ont peut-être pas été écrites"
 
 #, c-format
 msgid ""
 "Cannot save file:\n"
 "%s"
 msgstr ""
-"Impossible d'enregistrer le fichier :\n"
+"Impossible d’enregistrer le fichier :\n"
 "%s"
 
 msgid "View: "
@@ -4714,18 +4718,18 @@ msgid ""
 "Cannot open \"%s\"\n"
 "%s"
 msgstr ""
-"Impossible d'ouvrir « %s »\n"
+"Impossible d’ouvrir « %s »\n"
 "%s"
 
 msgid "Cannot view: not a regular file"
-msgstr "Visualisation impossible : ce n'est pas un fichier régulier"
+msgstr "Visualisation impossible : ce n’est pas un fichier régulier"
 
 #, c-format
 msgid ""
 "Cannot open \"%s\" in parse mode\n"
 "%s"
 msgstr ""
-"Impossible d'ouvrir « %s » en mode analyse\n"
+"Impossible d’ouvrir « %s » en mode analyse\n"
 "%s"
 
 msgid "Search done"
@@ -4737,31 +4741,3 @@ msgstr "Continuer à partir du début ?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Impossible de récupérer localement le fichier /ftp://some.host/editme.txt"
-
-#, c-format
-#~ msgid ""
-#~ "Cannot chdir to \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Ne peut aller dans le répertoire « %s »\n"
-#~ "%s"
-
-#, c-format
-#~ msgid "Cannot chdir to \"%s\""
-#~ msgstr "Impossible d'aller dans le répertoire « %s »"
-
-#~ msgid "Cannot change attributes on non-local filesystems"
-#~ msgstr ""
-#~ "Impossible de modifier les attributs sur les systèmes de fichiers non "
-#~ "locaux"
-
-#~ msgid "Attributes: not supported"
-#~ msgstr "Attributs : non supporté"
-
-#, c-format
-#~ msgid " %s%s file error"
-#~ msgstr "%s%s erreur de fichier"
-
-#, c-format
-#~ msgid "%s file error"
-#~ msgstr "%s erreurs fichier"

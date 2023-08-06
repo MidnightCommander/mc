@@ -4,26 +4,27 @@
 #
 # Translators:
 # Atha Translate, 2016
+# Benjamin M. Berwien <alt.ji-f7q3y0v@courriel.fr.nf>, 2023
 # cheese <cheese@nosuchhost.net>, 2016
-# Ettore Atalan <atalanttore@googlemail.com>, 2015-2022
+# Ettore Atalan <atalanttore@googlemail.com>, 2015-2023
 # Fabian Affolter <fab@fedoraproject.org>, 2012-2013
 # Johannes Hellmuth <johannes.hellmuth@gmail.com>, 2020
 # Karsten <waldstadt@web.de>, 2016
 # Larson März <larson@protonmail.ch>, 2016
-# Mr.Update, 2019-2020
+# Mr.Update, 2019-2020,2023
 # Slow Rider, 2015,2018
 # Slava Zanko <slavazanko@gmail.com>, 2011
-# username <my.somewhat.lengthy.loginname@gmail.com>, 2011
+# 14c4b06b824ec593239362517f538b29_ed1ad11 <ff0d3a0ccce92a0e8d6afacec89fb289_1123>, 2011
 # valsu <valsu@hylia.de>, 2016
 # Yury V. Zaytsev <yury@shurup.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-08-04 21:17+0300\n"
+"POT-Creation-Date: 2023-08-06 15:50+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>, 2015-2022\n"
-"Language-Team: German (http://www.transifex.com/mc/mc/language/de/)\n"
+"Last-Translator: Benjamin M. Berwien <alt.ji-f7q3y0v@courriel.fr.nf>, 2023\n"
+"Language-Team: German (http://app.transifex.com/mc/mc/language/de/)\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -546,7 +547,7 @@ msgstr ""
 "%s"
 
 msgid "Cannot close pipe descriptor (p == NULL)"
-msgstr ""
+msgstr "Kann Pipe Deskriptor nicht schliessen (p == NULL)"
 
 #, c-format
 msgid ""
@@ -843,9 +844,8 @@ msgstr "Fehler beim Analysieren der Argumente!"
 msgid "No arguments given to the viewer."
 msgstr "Keine Argumente an den Viewer übergeben."
 
-#, fuzzy
 msgid "Two files are required to invoke the diffviewer."
-msgstr "2 Dateien werden benötigt, um den Diffviewer aufzurufen."
+msgstr "Zwei Dateien werden benötigt, um den Diffviewer aufzurufen."
 
 msgid "Background protocol error"
 msgstr "Fehler im Hintergrundprotokoll"
@@ -1231,6 +1231,8 @@ msgstr "Sortierung ausführen"
 
 msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr ""
+"Gib Sortierungs-Optionen ein (siehe sort(1) manpage), getrennt durch "
+"Leerzeichen:"
 
 msgid "Sort"
 msgstr "Sortieren"
@@ -1647,7 +1649,7 @@ msgstr ""
 "geschrieben für Midnight Commander."
 
 msgid "Copyright (C) 1996-2023 the Free Software Foundation"
-msgstr ""
+msgstr "Copyright (C) 1996-2023 the Free Software Foundation"
 
 msgid "About"
 msgstr "Über"
@@ -2179,12 +2181,12 @@ msgstr "&Killen"
 msgid "Background jobs"
 msgstr "Hintergrundaufgaben"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot change directory to\n"
 "%s\n"
 "%s"
-msgstr "Konnte Verzeichnis nicht wechseln"
+msgstr ""
 
 msgid "Secure deletion"
 msgstr "Sicheres Löschen"
@@ -2238,7 +2240,7 @@ msgid "Top of directory hierarchies"
 msgstr "Top of directory hierarchy"
 
 msgid "Inode uses extents"
-msgstr ""
+msgstr "Inode verwendet Erweiterungen"
 
 msgid "Huge_file"
 msgstr "Huge file"
@@ -2250,7 +2252,7 @@ msgid "Direct access for files"
 msgstr "Direktzugriff für Dateien"
 
 msgid "Casefolded file"
-msgstr ""
+msgstr "kleingeschriebene Datei"
 
 msgid "Inode has inline data"
 msgstr "Inode hat Inline-Daten"
@@ -2259,7 +2261,7 @@ msgid "Project hierarchy"
 msgstr "Projekthierarchie"
 
 msgid "Verity protected inode"
-msgstr ""
+msgstr "wertgeschützter Inode"
 
 msgid "&Marked all"
 msgstr "Alle &markieren"
@@ -2530,6 +2532,9 @@ msgid ""
 "Midnight Commander now uses %s file.\n"
 "Please copy your modifications of the old file to the new one."
 msgstr ""
+"Sie haben eine veraltete Datei %s.\n"
+"Midnight Commander verwendet jetzt eine neue Datei %s.\n"
+"Bitte kopieren Sie Ihre Änderungen der alten Datei in die neue Datei."
 
 #, c-format
 msgid ""
@@ -2539,6 +2544,11 @@ msgid ""
 "It seems that the installation has failed.\n"
 "Please fetch a fresh copy from the Midnight Commander package."
 msgstr ""
+"Das Format der Datei\n"
+"%s%s\n"
+"hat sich mit Version 4.0 geändert.\n"
+"Es scheint, dass die Installation fehlgeschlagen ist.\n"
+"Bitte holen Sie sich eine neue Kopie aus dem Midnight Commander-Paket."
 
 #, c-format
 msgid ""
@@ -2549,6 +2559,12 @@ msgid ""
 "%s%s\n"
 "or use that file as an example of how to write it."
 msgstr ""
+"Das Format der Datei\n"
+"%s\n"
+"hat sich mit Version 4.0 geändert.\n"
+"Sie können sie entweder von\n"
+"%s%s\n"
+"kopieren oder diese Datei als Vorlage für eigene Einstellungen verwenden."
 
 msgid "DialogTitle|Copy"
 msgstr "DialogTitle|Kopieren"
@@ -2844,7 +2860,7 @@ msgid "(stalled)"
 msgstr "(blockiert)"
 
 msgid "Incomplete file was retrieved"
-msgstr ""
+msgstr "Es wurde eine unvollständige Datei abgerufen"
 
 msgid "&Keep"
 msgstr "&Behalten"
@@ -2929,9 +2945,9 @@ msgstr "&Unterbrechen"
 msgid "Con&tinue"
 msgstr "Weiter"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%d:%02d:%02d"
-msgstr "%d:%02d.%02d"
+msgstr "%d:%02d:%02d"
 
 #, c-format
 msgid "ETA %s"
@@ -3750,6 +3766,9 @@ msgid ""
 "failed to read data from child stdout:\n"
 "%s"
 msgstr ""
+"Externe Spaltenanzeige:\n"
+"Fehler beim Lesen der Daten aus einem Kindprozess:\n"
+"%s"
 
 msgid "Cannot run external panelize in a non-local directory"
 msgstr ""
@@ -4146,9 +4165,8 @@ msgstr ""
 "Unerwartetes Ende der Datei\n"
 "%s"
 
-#, fuzzy
 msgid "Inconsistent archive"
-msgstr "Inkonsistentes tar-Archiv"
+msgstr "Inkonsistentes Archiv"
 
 #, c-format
 msgid ""
@@ -4286,15 +4304,15 @@ msgstr "Warte bis zum nächsten Versuch... %d (Strg+G zum Abbrechen)"
 
 #, c-format
 msgid "ftpfs: could not make address-to-name translation: %s"
-msgstr ""
+msgstr "ftpfs: Adresse-zu-Name Übersetzung fehlgeschlagen: %s"
 
 #, c-format
 msgid "ftpfs: try reconnect to server, attempt %u"
-msgstr ""
+msgstr "ftpfs: versuche nochmals mit Server zu verbinden, Anlauf %u"
 
 #, c-format
 msgid "ftpfs: could not get socket name: %s"
-msgstr ""
+msgstr "ftpfs: konnte Socket-Name nicht auslesen: %s"
 
 msgid "ftpfs: could not reconnect to server"
 msgstr "ftpfs: Verbindung zum Server konnte nicht wiederhergestellt werden"
@@ -4394,7 +4412,7 @@ msgid "sftp: %s"
 msgstr "sftp: %s"
 
 msgid "sftp: failed to convert remote host IP address into text form"
-msgstr ""
+msgstr "sftp: Fehler beim Konvertieren der Remote Host IP-Adresse in Textform"
 
 #, c-format
 msgid "sftp: making connection to %s"
@@ -4408,10 +4426,10 @@ msgid "sftp: connection to server failed: %s"
 msgstr "sftp: Verbindung zum Server fehlgeschlagen: %s"
 
 msgid "sftp: found host key of unsupported type: RSA1"
-msgstr ""
+msgstr "sftp: Host-Key gefunden, aber nicht unterstützter Typ: RSA1"
 
 msgid "sftp: unknown host key type:"
-msgstr ""
+msgstr "sftp: unbekannter Host-Key Typ:"
 
 #, c-format
 msgid ""
@@ -4424,13 +4442,14 @@ msgstr ""
 "zur Liste der bekannten Hosts."
 
 msgid "sftp: cannot get the remote host key"
-msgstr ""
+msgstr "sftp: bekomme keinen Remote Host-Key "
 
 msgid "sftp: unsupported key type, can't check remote host key"
 msgstr ""
+"sftp: nicht unterstützter Key-Typ, kann Remote Host-Key nicht überprüfen"
 
 msgid "sftp: can't compute host key fingerprint hash"
-msgstr ""
+msgstr "sftp: kann Host-Key Fingerprint-Hash nicht berechnen"
 
 #, c-format
 msgid ""
@@ -4441,6 +4460,12 @@ msgid ""
 "SHA1:%s.\n"
 "Do you want to add it to the list of known hosts and continue connecting?"
 msgstr ""
+"Die Authentizität des Hosts\n"
+"%s (%s)\n"
+"kann nicht festgestellt werden!\n"
+"%s Host-Key Fingerprint-Hash ist\n"
+"SHA1:%s.\n"
+"Willst Du ihn zur Known-Hosts-Liste hinzufügen und weiter verbinden?"
 
 #, c-format
 msgid ""
@@ -4504,13 +4529,11 @@ msgstr ""
 "Kann tar-Archiv nicht öffnen\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
 msgstr ""
-"%s\n"
-"sieht nicht wie ein tar-Archiv aus."
 
 msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
@@ -4706,29 +4729,3 @@ msgstr "Am Anfang fortsetzen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kann lokale Kopie von /ftp://some.host/editme.txt nicht erstellen"
-
-#, c-format
-#~ msgid ""
-#~ "Cannot chdir to \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Kann nicht ins Verzeichnis \"%s\" wechseln\n"
-#~ "%s"
-
-#, c-format
-#~ msgid "Cannot chdir to \"%s\""
-#~ msgstr "Kann nicht ins Verzeichnis \"%s\" wechseln"
-
-#~ msgid "Cannot change attributes on non-local filesystems"
-#~ msgstr "Kann Attribute auf nicht-lokalen Dateisystemen nicht ändern"
-
-#~ msgid "Attributes: not supported"
-#~ msgstr "Attribute: nicht unterstützt"
-
-#, c-format
-#~ msgid " %s%s file error"
-#~ msgstr " Fehler in der Datei %s%s "
-
-#, c-format
-#~ msgid "%s file error"
-#~ msgstr "%s Dateifehler"

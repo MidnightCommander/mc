@@ -18,10 +18,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-08-04 21:17+0300\n"
+"POT-Creation-Date: 2023-08-06 15:50+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Gurbuzguven <6mehmet6@gmail.com>, 2021\n"
-"Language-Team: Chinese (China) (http://www.transifex.com/mc/mc/language/"
+"Language-Team: Chinese (China) (http://app.transifex.com/mc/mc/language/"
 "zh_CN/)\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
@@ -824,9 +824,8 @@ msgstr "参数解析错误!"
 msgid "No arguments given to the viewer."
 msgstr "查看器没有指定参数。"
 
-#, fuzzy
 msgid "Two files are required to invoke the diffviewer."
-msgstr "需要两个文件才能调用差异查看器。"
+msgstr ""
 
 msgid "Background protocol error"
 msgstr "后台协议错误"
@@ -2158,12 +2157,12 @@ msgstr "杀死(&K)"
 msgid "Background jobs"
 msgstr "后台任务"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot change directory to\n"
 "%s\n"
 "%s"
-msgstr "无法改变目录"
+msgstr ""
 
 msgid "Secure deletion"
 msgstr ""
@@ -2901,9 +2900,9 @@ msgstr "挂起(&U)"
 msgid "Con&tinue"
 msgstr "继续(&T)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%d:%02d:%02d"
-msgstr "%d:%02d.%02d"
+msgstr ""
 
 #, c-format
 msgid "ETA %s"
@@ -4107,9 +4106,8 @@ msgstr ""
 "异常的文件结束\n"
 "%s"
 
-#, fuzzy
 msgid "Inconsistent archive"
-msgstr "不完整的 tar 档案文件"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -4448,13 +4446,11 @@ msgstr ""
 "无法打开 tar 档案文件\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
 msgstr ""
-"%s\n"
-"不是 tar 档案文件。"
 
 msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
@@ -4650,23 +4646,3 @@ msgstr "从头继续搜索?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "无法获取 /ftp://some.host/editme.txt 的本地副本"
-
-#, c-format
-#~ msgid ""
-#~ "Cannot chdir to \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "无法进入目录“%s”\n"
-#~ "%s"
-
-#, c-format
-#~ msgid "Cannot chdir to \"%s\""
-#~ msgstr "无法进入目录“%s”"
-
-#, c-format
-#~ msgid " %s%s file error"
-#~ msgstr " %s%s 文件错误"
-
-#, c-format
-#~ msgid "%s file error"
-#~ msgstr "%s 文件错误"

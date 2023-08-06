@@ -9,11 +9,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-08-04 21:17+0300\n"
+"POT-Creation-Date: 2023-08-06 15:50+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>, "
 "2011,2015-2019\n"
-"Language-Team: Basque (http://www.transifex.com/mc/mc/language/eu/)\n"
+"Language-Team: Basque (http://app.transifex.com/mc/mc/language/eu/)\n"
 "Language: eu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -821,9 +821,8 @@ msgstr "Argumentuen azterketak akatsa!"
 msgid "No arguments given to the viewer."
 msgstr "Ez zaizkio argumentuak eman erakusleari."
 
-#, fuzzy
 msgid "Two files are required to invoke the diffviewer."
-msgstr "Bi fitxategi behar dira diffviewer deitzeko."
+msgstr ""
 
 msgid "Background protocol error"
 msgstr "Hondoko protokolo baten akatsa"
@@ -2157,12 +2156,12 @@ msgstr "&Hil"
 msgid "Background jobs"
 msgstr "Hondoko lanak"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot change directory to\n"
 "%s\n"
 "%s"
-msgstr "Direktorioa ezin aldatu"
+msgstr ""
 
 msgid "Secure deletion"
 msgstr ""
@@ -2904,9 +2903,9 @@ msgstr "E&seki"
 msgid "Con&tinue"
 msgstr "&Jarraitu"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%d:%02d:%02d"
-msgstr "%d:%02d.%02d"
+msgstr ""
 
 #, c-format
 msgid "ETA %s"
@@ -4115,9 +4114,8 @@ msgstr ""
 "Ustekabeko fitxategi bukaera\n"
 "%s"
 
-#, fuzzy
 msgid "Inconsistent archive"
-msgstr "tar artxibo inkoherentea"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -4457,13 +4455,11 @@ msgstr ""
 "tar artxiboa ezin ireki\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
 msgstr ""
-"%s\n"
-"ez dirudi tar artxiboa denik."
 
 msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
@@ -4661,23 +4657,3 @@ msgstr "Hasieratik jarraitu?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Ezin eskuratu ondokoaren bertako kopia bat: /ftp://some.host/editme.txt"
-
-#, c-format
-#~ msgid ""
-#~ "Cannot chdir to \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Ezin da \"%s\" direktoriora aldatu\n"
-#~ "%s"
-
-#, c-format
-#~ msgid "Cannot chdir to \"%s\""
-#~ msgstr "\"%s\" direktoriora ezin aldatu (\"chdir\")"
-
-#, c-format
-#~ msgid " %s%s file error"
-#~ msgstr " %s%s fitxategi akatsa"
-
-#, c-format
-#~ msgid "%s file error"
-#~ msgstr "%s fitxategi akatsa"

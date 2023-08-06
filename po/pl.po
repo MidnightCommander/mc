@@ -3,24 +3,24 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# Piotr Drąg <piotrdrag@gmail.com>, 2011-2022
+# Piotr Drąg <piotrdrag@gmail.com>, 2011-2023
 # Slava Zanko <slavazanko@gmail.com>, 2011
 # Waldemar Stoczkowski, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-08-04 21:17+0300\n"
+"POT-Creation-Date: 2023-08-06 15:50+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>, 2011-2022\n"
-"Language-Team: Polish (http://www.transifex.com/mc/mc/language/pl/)\n"
+"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>, 2011-2023\n"
+"Language-Team: Polish (http://app.transifex.com/mc/mc/language/pl/)\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n"
-"%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n"
-"%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && "
+"(n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && "
+"n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -834,7 +834,6 @@ msgstr "Błąd podczas przetwarzania parametrów."
 msgid "No arguments given to the viewer."
 msgstr "Nie podano parametrów dla przeglądarki."
 
-#, fuzzy
 msgid "Two files are required to invoke the diffviewer."
 msgstr "Wymagane są dwa pliki, aby wywołać program diffviewer."
 
@@ -1638,9 +1637,8 @@ msgstr ""
 "Łatwy w obsłudze edytor tekstu,\n"
 "napisany dla programu Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2023 the Free Software Foundation"
-msgstr "Copyright © 1996-2022 Free Software Foundation"
+msgstr "Copyright © 1996-2023 Free Software Foundation"
 
 msgid "About"
 msgstr "O programie"
@@ -2172,12 +2170,15 @@ msgstr "Za&bij"
 msgid "Background jobs"
 msgstr "Zadania w tle"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot change directory to\n"
 "%s\n"
 "%s"
-msgstr "Nie można zmienić katalogu"
+msgstr ""
+"Nie można zmienić katalogu na\n"
+"%s\n"
+"%s"
 
 msgid "Secure deletion"
 msgstr "Bezpieczne usunięcie"
@@ -2527,7 +2528,7 @@ msgstr ""
 "Midnight Commander używa teraz pliku %s.\n"
 "Proszę skopiować wprowadzone zmiany z poprzedniego pliku do nowego."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the\n"
 "%s%s\n"
@@ -2535,11 +2536,13 @@ msgid ""
 "It seems that the installation has failed.\n"
 "Please fetch a fresh copy from the Midnight Commander package."
 msgstr ""
-"Format pliku %s%s uległ zmianie wraz z wersją 4.0. Wygląda na to, że "
-"instalacja się nie powiodła. Proszę pobrać nową wersję tego pliku z pakietu "
-"programu Midnight Commander."
+"Format pliku\n"
+"%s%s\n"
+"uległ zmianie wraz z wersją 4.0.\n"
+"Wygląda na to, że instalacja się nie powiodła.\n"
+"Proszę pobrać nową wersję tego pliku z pakietu programu Midnight Commander."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the\n"
 "%s\n"
@@ -2548,8 +2551,12 @@ msgid ""
 "%s%s\n"
 "or use that file as an example of how to write it."
 msgstr ""
-"Format pliku %s został zmieniony w wersji 4.0. Można skopiować go z %s%s lub "
-"użyć tego pliku jako przykład."
+"Format pliku\n"
+"%s\n"
+"został zmieniony w wersji 4.0.\n"
+"Można skopiować go z\n"
+"%s%s\n"
+"lub użyć tego pliku jako przykład."
 
 msgid "DialogTitle|Copy"
 msgstr "Kopiowanie"
@@ -2930,9 +2937,9 @@ msgstr "&Uśpij"
 msgid "Con&tinue"
 msgstr "Kon&tynuuj"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%d:%02d:%02d"
-msgstr "%d:%02d.%02d"
+msgstr "%d:%02d:%02d"
 
 #, c-format
 msgid "ETA %s"
@@ -4158,9 +4165,8 @@ msgstr ""
 "Nieoczekiwany koniec pliku\n"
 "%s"
 
-#, fuzzy
 msgid "Inconsistent archive"
-msgstr "Niespójne archiwum tar"
+msgstr "Niespójne archiwum"
 
 #, c-format
 msgid ""
@@ -4523,16 +4529,16 @@ msgstr ""
 "Nie można otworzyć archiwum tar\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
 msgstr ""
 "%s\n"
-"nie wygląda na archiwum tar."
+"nie wygląda na archiwum tar"
 
 msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr ""
+msgstr "tar: mc_lseek nie zatrzymało się na granicy wpisu"
 
 msgid "undelfs: error"
 msgstr "undelfs: błąd"
@@ -4726,29 +4732,3 @@ msgstr "Kontynuować od początku?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Nie można pobrać lokalnej kopii /ftp://jakiś.komputer/modyfikuj_mnie.txt"
-
-#, c-format
-#~ msgid ""
-#~ "Cannot chdir to \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Nie można zmienić katalogu na „%s”\n"
-#~ "%s"
-
-#, c-format
-#~ msgid "Cannot chdir to \"%s\""
-#~ msgstr "Nie można zmienić katalogu na „%s”"
-
-#~ msgid "Cannot change attributes on non-local filesystems"
-#~ msgstr "Nie można zmienić atrybutów na nielokalnych systemach plików"
-
-#~ msgid "Attributes: not supported"
-#~ msgstr "Atrybuty: nieobsługiwane"
-
-#, c-format
-#~ msgid " %s%s file error"
-#~ msgstr " Błąd pliku %s%s"
-
-#, c-format
-#~ msgid "%s file error"
-#~ msgstr "Błąd pliku %s"

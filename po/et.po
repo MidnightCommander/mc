@@ -5,16 +5,17 @@
 # Translators:
 # Ivar Smolin <okul@linux.ee>, 2021
 # Kristjan Räts <kristjanrats@gmail.com>, 2013-2016,2018-2019
-# Priit Jõerüüt <transifex@joeruut.com>, 2020-2021
-# Marko Silluste <vaba@riseup.net>, 2020
+# Priit Jõerüüt <transifex@joeruut.com>, 2020-2021,2023
+# vaba <vaba@riseup.net>, 2020
+# vaba <vaba@riseup.net>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-08-04 21:17+0300\n"
+"POT-Creation-Date: 2023-08-06 15:50+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Priit Jõerüüt <transifex@joeruut.com>, 2020-2021\n"
-"Language-Team: Estonian (http://www.transifex.com/mc/mc/language/et/)\n"
+"Last-Translator: vaba <vaba@riseup.net>, 2020\n"
+"Language-Team: Estonian (http://app.transifex.com/mc/mc/language/et/)\n"
 "Language: et\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -464,13 +465,15 @@ msgid "The TERM environment variable is unset!\n"
 msgstr "Keskkonnamuutujat TERM on määramata!\n"
 
 msgid "Cannot check SIGWINCH pipe"
-msgstr ""
+msgstr "SIGWINCH toru ei saa kontrollida"
 
 #, c-format
 msgid ""
 "\n"
 "Cannot create pipe for SIGWINCH: %s (%d)\n"
 msgstr ""
+"\n"
+"SIGWINCHi jaoks ei saa toru luua: %s (%d)\n"
 
 #, c-format
 msgid ""
@@ -822,9 +825,8 @@ msgstr "Parameetrite parsimise viga!"
 msgid "No arguments given to the viewer."
 msgstr "Vaaturile parameetreid ei antud."
 
-#, fuzzy
 msgid "Two files are required to invoke the diffviewer."
-msgstr "Erinevuste vaatamiseks on vaja kahte faili."
+msgstr "Diffvieweri käivitamiseks on vaja kahte faili."
 
 msgid "Background protocol error"
 msgstr "Tausta protokolli viga"
@@ -1209,6 +1211,8 @@ msgstr "Räivita sortimine"
 
 msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr ""
+"Sisesta sortimissuvandid (vt sortimise (1) man lehekülg), eraldades "
+"tühikutega:"
 
 msgid "Sort"
 msgstr "Sorteeri"
@@ -1372,7 +1376,7 @@ msgid "Search &again"
 msgstr "Otsi &uuesti"
 
 msgid "&Replace..."
-msgstr "&Asenda"
+msgstr "&Asenda..."
 
 msgid "&Toggle bookmark"
 msgstr "&Lülita järjehoidja"
@@ -1625,7 +1629,7 @@ msgstr ""
 "on loodud Midnight Commanderile."
 
 msgid "Copyright (C) 1996-2023 the Free Software Foundation"
-msgstr ""
+msgstr "Autoriõigused (C) 1996-2023 the Free Software Foundation"
 
 msgid "About"
 msgstr "Programmist"
@@ -1634,7 +1638,7 @@ msgid "Open files"
 msgstr "Ava fail"
 
 msgid "Edit: "
-msgstr "Muuda:"
+msgstr "Muuda: "
 
 msgid "ButtonBar|Mark"
 msgstr "ButtonBar|Märgi"
@@ -2156,12 +2160,12 @@ msgstr "&Tapa"
 msgid "Background jobs"
 msgstr "Tööd taustal"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot change directory to\n"
 "%s\n"
 "%s"
-msgstr "Kataloogi vahetamine nurjus"
+msgstr ""
 
 msgid "Secure deletion"
 msgstr "Turvaline kustutamine"
@@ -2179,7 +2183,7 @@ msgid "Immutable"
 msgstr "Muudetamatu"
 
 msgid "Append only"
-msgstr ""
+msgstr "Ainult lisa"
 
 msgid "No dump"
 msgstr ""
@@ -2188,22 +2192,22 @@ msgid "No update atime"
 msgstr "Jäta atime uuendamata"
 
 msgid "Compress"
-msgstr ""
+msgstr "Pakkimine"
 
 msgid "Compressed clusters"
-msgstr ""
+msgstr "Kokkusurutud klastrid"
 
 msgid "Compressed dirty file"
-msgstr ""
+msgstr "Kokkusurutud määrdunud fail"
 
 msgid "Compression raw access"
-msgstr ""
+msgstr "Tihendamise töötlemata juurdepääs"
 
 msgid "Encrypted inode"
 msgstr "Krüptitud i-kirje"
 
 msgid "Journaled data"
-msgstr ""
+msgstr "Kiirjastatud andmed"
 
 msgid "Indexed directory"
 msgstr "Indekseeritud kataloog"
@@ -2212,10 +2216,10 @@ msgid "No tail merging"
 msgstr ""
 
 msgid "Top of directory hierarchies"
-msgstr ""
+msgstr "Kataloogihierarhiate tipp"
 
 msgid "Inode uses extents"
-msgstr ""
+msgstr "Inode kasutab ulatusi"
 
 msgid "Huge_file"
 msgstr ""
@@ -2224,7 +2228,7 @@ msgid "No COW"
 msgstr ""
 
 msgid "Direct access for files"
-msgstr ""
+msgstr "Otsene juurdepääs failidele"
 
 msgid "Casefolded file"
 msgstr ""
@@ -2233,10 +2237,10 @@ msgid "Inode has inline data"
 msgstr "I-kirjel on põimitud andmeid"
 
 msgid "Project hierarchy"
-msgstr ""
+msgstr "Projekti hierarhia"
 
 msgid "Verity protected inode"
-msgstr ""
+msgstr "Tõepoolest kaitstud, inode"
 
 msgid "&Marked all"
 msgstr "&Vali kõik"
@@ -2248,7 +2252,7 @@ msgid "C&lear marked"
 msgstr "Tü&hista valik"
 
 msgid "Chattr command"
-msgstr ""
+msgstr "Chattr käsk"
 
 #, c-format
 msgid ""
@@ -2261,6 +2265,8 @@ msgid ""
 "Cannot get flags of \"%s\"\n"
 "%s"
 msgstr ""
+"\"%s\" lippe ei saa hankida\n"
+"%s"
 
 msgid "set &user ID on execution"
 msgstr "kas&utaja ID käivitamisel"
@@ -2503,6 +2509,9 @@ msgid ""
 "Midnight Commander now uses %s file.\n"
 "Please copy your modifications of the old file to the new one."
 msgstr ""
+"Teil on aegunud %s fail.\n"
+"Midnight Commander kasutab nüüd faili %s.\n"
+"Palun kopeerige oma vana faili muudatused uude."
 
 #, c-format
 msgid ""
@@ -2512,6 +2521,11 @@ msgid ""
 "It seems that the installation has failed.\n"
 "Please fetch a fresh copy from the Midnight Commander package."
 msgstr ""
+"Formaat\n"
+"%s%s\n"
+"faili on versiooniga 4.0 muudetud.\n"
+"Näib, et installimine ebaõnnestus.\n"
+"Palun hankige Midnight Commanderi paketist uus koopia."
 
 #, c-format
 msgid ""
@@ -2522,6 +2536,12 @@ msgid ""
 "%s%s\n"
 "or use that file as an example of how to write it."
 msgstr ""
+"Formaat\n"
+"%s\n"
+"faili on versiooniga 4.0 muudetud.\n"
+"Võib-olla soovite selle kopeerida\n"
+"%s%s\n"
+"või kasutage seda faili selle kirjutamise näitena."
 
 msgid "DialogTitle|Copy"
 msgstr "DialogTitle|Kopeerimine"
@@ -2563,7 +2583,7 @@ msgstr "failid/kataloogid"
 
 #. TRANSLATORS: keep leading space here to split words in Copy/Move dialog
 msgid " with source mask:"
-msgstr "lähtemaskiga:"
+msgstr " lähtemaskiga:"
 
 #, c-format
 msgid ""
@@ -2816,13 +2836,13 @@ msgid "(stalled)"
 msgstr "(seiskunud)"
 
 msgid "Incomplete file was retrieved"
-msgstr ""
+msgstr "Laaditi välja mittetäielik fail"
 
 msgid "&Keep"
 msgstr "&Hoia"
 
 msgid "&Continue copy"
-msgstr ""
+msgstr "&Jätka kopeerimist"
 
 #, c-format
 msgid ""
@@ -2901,9 +2921,9 @@ msgstr "Se&iska"
 msgid "Con&tinue"
 msgstr "&Jätka"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%d:%02d:%02d"
-msgstr "%d:%02d.%02d"
+msgstr "%d:%02d:%02d"
 
 #, c-format
 msgid "ETA %s"
@@ -2959,7 +2979,7 @@ msgstr "Taustaprotsess: Fail on olemas"
 
 #, c-format
 msgid "Files processed: %zu / %zu"
-msgstr ""
+msgstr "Töödeldud failid: %zu / %zu"
 
 #, c-format
 msgid "Files processed: %zu"
@@ -2983,11 +3003,11 @@ msgstr "Aeg: %s (%s)"
 
 #, c-format
 msgid " Total: %s "
-msgstr "Kokku: %s"
+msgstr " Kokku: %s "
 
 #, c-format
 msgid " Total: %s / %s "
-msgstr ""
+msgstr " Kokku: %s / %s "
 
 msgid "Source"
 msgstr "Lähtekoht"
@@ -3036,10 +3056,10 @@ msgid "&Tree"
 msgstr "&Puu"
 
 msgid "&Listing format..."
-msgstr "&Loendi vormindus"
+msgstr "&Loendi vormindus..."
 
 msgid "&Sort order..."
-msgstr ""
+msgstr "&Sordi järjekord..."
 
 msgid "&Filter..."
 msgstr "Filtreeri&mine..."
@@ -3054,7 +3074,7 @@ msgid "S&hell link..."
 msgstr "K&esta ühendus..."
 
 msgid "SFTP li&nk..."
-msgstr ""
+msgstr "SFTP li&nk..."
 
 msgid "Paneli&ze"
 msgstr "Pa&neelile"
@@ -3096,7 +3116,7 @@ msgid "&Advanced chown"
 msgstr "Täpsem omani&ku vahetus"
 
 msgid "Cha&ttr"
-msgstr ""
+msgstr "Cha&ttr"
 
 msgid "&Rename/Move"
 msgstr "Teisal&da/nimeta"
@@ -3195,7 +3215,7 @@ msgid "&Appearance..."
 msgstr "&Välimus..."
 
 msgid "&Display bits..."
-msgstr "K&uva bitid"
+msgstr "K&uva bitid..."
 
 msgid "&Virtual FS..."
 msgstr "Vi&rtuaalne FS..."
@@ -3268,7 +3288,7 @@ msgid "&Find recursively"
 msgstr "&Otsi rekursiivselt"
 
 msgid "Follow s&ymlinks"
-msgstr ""
+msgstr "Järgi s&ümbollinke"
 
 msgid "S&kip hidden"
 msgstr "&Eira peidetud"
@@ -3437,7 +3457,7 @@ msgstr "Puudub mahu informatsioon"
 
 #, c-format
 msgid "Free space: %s / %s (%d%%)"
-msgstr ""
+msgstr "Vaba ruum: %s / %s (%d%%)"
 
 #, c-format
 msgid "Type:       %s"
@@ -3478,8 +3498,8 @@ msgstr "Suurus: %s"
 #, c-format
 msgid " (%lu block)"
 msgid_plural " (%lu blocks)"
-msgstr[0] "(%lu plokk)"
-msgstr[1] "(%lu plokki)"
+msgstr[0] " (%lu plokk)"
+msgstr[1] " (%lu plokki)"
 
 #, c-format
 msgid "Owner:      %s/%s"
@@ -3713,6 +3733,8 @@ msgid ""
 "External panelize:\n"
 "%s"
 msgstr ""
+"Väline paneel:\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -3720,6 +3742,9 @@ msgid ""
 "failed to read data from child stdout:\n"
 "%s"
 msgstr ""
+"Väline paneel:\n"
+"alamstdouti andmete lugemine ebaõnnestus:\n"
+"%s"
 
 msgid "Cannot run external panelize in a non-local directory"
 msgstr "Väliskäsu paneelile saatmine töötab ainult kohalike kataloogidega"
@@ -3987,7 +4012,7 @@ msgstr "Kompileerimisel on kaasatud ncursesw (versioon pole teada)"
 
 #, c-format
 msgid "Built with libssh2 %d.%d.%d\n"
-msgstr ""
+msgstr "Ehitatud libssh2-ga %d.%d.%d\n"
 
 msgid "Virtual File Systems:"
 msgstr "Virtuaalsed failisüsteemid:"
@@ -4114,9 +4139,8 @@ msgstr ""
 "Ootamatu faili lõpp\n"
 " %s"
 
-#, fuzzy
 msgid "Inconsistent archive"
-msgstr "Tar arhiiv sisaldab vasturääkivusi"
+msgstr "Ebaühtlane arhiiv"
 
 #, c-format
 msgid ""
@@ -4226,7 +4250,7 @@ msgstr "ftpfs: logiti sisse"
 
 #, c-format
 msgid "ftpfs: Login incorrect for user %s "
-msgstr "ftpfs: Kasutaja %s logimine vigane"
+msgstr "ftpfs: Kasutaja %s logimine vigane "
 
 msgid "ftpfs: Invalid host name."
 msgstr "ftpfs: Vigane hosti nimi."
@@ -4252,18 +4276,18 @@ msgstr "Oodatakse kordamist... %d (Ctrl-G tühistab)"
 
 #, c-format
 msgid "ftpfs: could not make address-to-name translation: %s"
-msgstr ""
+msgstr "ftpfs: aadressist nimeks ei saanud tõlkida: %s"
 
 #, c-format
 msgid "ftpfs: try reconnect to server, attempt %u"
-msgstr ""
+msgstr "ftpfs: proovige uuesti serveriga ühendust luua, proovige %u"
 
 #, c-format
 msgid "ftpfs: could not get socket name: %s"
-msgstr ""
+msgstr "ftpfs: sokli nime ei õnnestunud hankida: %s"
 
 msgid "ftpfs: could not reconnect to server"
-msgstr ""
+msgstr "ftpfs: serveriga ei saa uuesti ühendust luua"
 
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: vigane aadressi perekond"
@@ -4286,7 +4310,7 @@ msgid "ftpfs: abort failed"
 msgstr "ftpfs: katkestamine nurjus"
 
 msgid "ftpfs: CWD failed."
-msgstr "ftpfs: CWD nurjus"
+msgstr "ftpfs: CWD nurjus."
 
 msgid "ftpfs: couldn't resolve symlink"
 msgstr "ftpfs: nimeviida lahendamine nurjus"
@@ -4360,7 +4384,7 @@ msgid "sftp: %s"
 msgstr "sftp: %s"
 
 msgid "sftp: failed to convert remote host IP address into text form"
-msgstr ""
+msgstr "sftp: kaughosti IP-aadressi tekstivormiks teisendamine ebaõnnestus"
 
 #, c-format
 msgid "sftp: making connection to %s"
@@ -4374,10 +4398,10 @@ msgid "sftp: connection to server failed: %s"
 msgstr "sftp: ühenduse loomine masinaga nurjus: %s"
 
 msgid "sftp: found host key of unsupported type: RSA1"
-msgstr ""
+msgstr "sftp: leiti toetamata tüüpi hostivõti: RSA1"
 
 msgid "sftp: unknown host key type:"
-msgstr ""
+msgstr "sftp: tundmatu hostivõtme tüüp:"
 
 #, c-format
 msgid ""
@@ -4385,15 +4409,18 @@ msgid ""
 "%s (%s)\n"
 "to the list of known hosts."
 msgstr ""
+"Püsivalt lisatud\n"
+"%s (%s)\n"
+"teadaolevate hostide loendisse."
 
 msgid "sftp: cannot get the remote host key"
-msgstr ""
+msgstr "sftp: ei saa kaughosti võtit hankida"
 
 msgid "sftp: unsupported key type, can't check remote host key"
-msgstr ""
+msgstr "sftp: võtmetüüp ei toetata, kaughosti võtit ei saa kontrollida"
 
 msgid "sftp: can't compute host key fingerprint hash"
-msgstr ""
+msgstr "sftp: hosti võtme sõrmejälje räsi ei saa arvutada"
 
 #, c-format
 msgid ""
@@ -4404,6 +4431,13 @@ msgid ""
 "SHA1:%s.\n"
 "Do you want to add it to the list of known hosts and continue connecting?"
 msgstr ""
+"Hosti autentsus\n"
+"%s (%s)\n"
+"ei saa kindlaks teha!\n"
+"%s võtme sõrmejälje räsi on\n"
+"SHA1:%s.\n"
+"Kas soovite selle teadaolevate hostide loendisse lisada ja ühenduse loomist "
+"jätkata?"
 
 #, c-format
 msgid ""
@@ -4413,20 +4447,25 @@ msgid ""
 "Are you sure you want to add it to the list of known hosts and continue "
 "connecting?"
 msgstr ""
+"%s (%s)\n"
+"on leitud tuntud hostide loendist, kuid\n"
+"VÕTMED EI SOBI KOKKU! SEE VÕIB OLLA MITM rünnak!\n"
+"Kas olete kindel, et soovite selle teadaolevate hostide loendisse lisada ja "
+"ühenduse loomist jätkata?"
 
 msgid "sftp: host key verification failed"
-msgstr ""
+msgstr "sftp: hostivõtme kinnitamine ebaõnnestus"
 
 #, c-format
 msgid "sftp: Enter passphrase for %s "
-msgstr "sftp: sisesta paroolifraas masinale %s"
+msgstr "sftp: sisesta paroolifraas masinale %s "
 
 msgid "sftp: Passphrase is empty."
 msgstr "sftp: paroolifraas on tühi."
 
 #, c-format
 msgid "sftp: Enter password for %s "
-msgstr "sftp: sisesta parool masinale %s"
+msgstr "sftp: sisesta parool masinale %s "
 
 msgid "sftp: Password is empty."
 msgstr "sftp: parool on tühi."
@@ -4462,13 +4501,11 @@ msgstr ""
 "Tar arhiivi avamine nurjus\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
 msgstr ""
-"%s\n"
-"ei meenuta tar arhiivi."
 
 msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
@@ -4635,7 +4672,7 @@ msgstr ""
 "%s"
 
 msgid "View: "
-msgstr "Vaade:"
+msgstr "Vaade: "
 
 #, c-format
 msgid ""
@@ -4664,29 +4701,3 @@ msgstr "Kas jätkata algusest?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kohaliku koopia hankimine failist /ftp://some.host/editme.txt nurjus"
-
-#, c-format
-#~ msgid ""
-#~ "Cannot chdir to \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Kataloogi \"%s\" sisenemine nurjus\n"
-#~ "%s"
-
-#, c-format
-#~ msgid "Cannot chdir to \"%s\""
-#~ msgstr "Kataloogi \"%s\" sisenemine nurjus"
-
-#~ msgid "Cannot change attributes on non-local filesystems"
-#~ msgstr "Kaugfailisüsteemides ei saa atribuute muuta "
-
-#~ msgid "Attributes: not supported"
-#~ msgstr "Atribuudid: ei ole toetatud"
-
-#, c-format
-#~ msgid " %s%s file error"
-#~ msgstr "%s%s faili viga"
-
-#, c-format
-#~ msgid "%s file error"
-#~ msgstr "%s faili viga"

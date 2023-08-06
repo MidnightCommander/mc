@@ -4,6 +4,7 @@
 #
 # Translators:
 # Hüsamettin Ertürk <hsmertk@gmail.com>, 2016
+# Mehmet Akif 9oglu, 2023
 # Muhammet Kara <muhammetk@gmail.com>, 2014
 # Muhammet Kara <muhammetk@gmail.com>, 2014
 # Serdar Sağlam <teknomobil@msn.com>, 2019-2020
@@ -14,10 +15,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-08-04 21:17+0300\n"
+"POT-Creation-Date: 2023-08-06 15:50+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Serdar Sağlam <teknomobil@msn.com>, 2019-2020\n"
-"Language-Team: Turkish (http://www.transifex.com/mc/mc/language/tr/)\n"
+"Last-Translator: Mehmet Akif 9oglu, 2023\n"
+"Language-Team: Turkish (http://app.transifex.com/mc/mc/language/tr/)\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -85,6 +86,8 @@ msgid ""
 "Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
 "hex)"
 msgstr ""
+"Sayı aralığın dışında (bayt aralığında olmalıdır, 0 <= n <= 0xFF, onaltılık "
+"ifade edilir)"
 
 msgid "Invalid character"
 msgstr "Geçersiz karakter"
@@ -97,6 +100,8 @@ msgid ""
 "Hex pattern error at position %d:\n"
 "%s."
 msgstr ""
+"%dpozisyonda onaltılı desen hatası:\n"
+"%s."
 
 msgid "Search string not found"
 msgstr "Aranan metin bulunamadı"
@@ -148,6 +153,9 @@ msgid ""
 "%s\n"
 "Default skin has been loaded"
 msgstr ""
+"Gerçek renkler desteğiyle '%s' skin kullanılamıyor:\n"
+"%s\n"
+"Varsayılan skin yüklendi"
 
 #, c-format
 msgid ""
@@ -170,6 +178,7 @@ msgstr "Gerçek renk bu slang sürümünde desteklenmiyor."
 
 msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
 msgstr ""
+"Uçbirim gerçek renkleri destekliyorsa COLORTERM=truecolor olarak ayarlayın."
 
 msgid "Escape"
 msgstr "Vazgeç"
@@ -458,25 +467,31 @@ msgid "The TERM environment variable is unset!\n"
 msgstr "TERM çevre değişkeni atanmamış!\n"
 
 msgid "Cannot check SIGWINCH pipe"
-msgstr ""
+msgstr "SIGWINCH borusu kontrol edilemiyor"
 
 #, c-format
 msgid ""
 "\n"
 "Cannot create pipe for SIGWINCH: %s (%d)\n"
 msgstr ""
+"\n"
+"SIGWINCH için boru oluşturulamıyor: %s (%d)\n"
 
 #, c-format
 msgid ""
 "\n"
 "Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
 msgstr ""
+"\n"
+"SIGWINCH hattının yazma ucu yapılandırılamıyor:%s(%d)\n"
 
 #, c-format
 msgid ""
 "\n"
 "Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
 msgstr ""
+"\n"
+"SIGWINCH hattının okuma ucu yapılandırılamıyor:%s(%d)\n"
 
 #, c-format
 msgid ""
@@ -522,7 +537,7 @@ msgstr ""
 "%s"
 
 msgid "Cannot close pipe descriptor (p == NULL)"
-msgstr ""
+msgstr "Boru tanımlayıcısı kapatılamıyor (p == NULL)"
 
 #, c-format
 msgid ""
@@ -780,7 +795,7 @@ msgid "Color options"
 msgstr "Renk seçenekleri"
 
 msgid "[+lineno] file1[:lineno] [file2[:lineno]...]"
-msgstr ""
+msgstr "[+satırno] dosya1[:satırno] [dosya2[:satırno]...]"
 
 msgid "file"
 msgstr "dosya:"
@@ -816,9 +831,8 @@ msgstr "Arguman ayrıştırma hatası!"
 msgid "No arguments given to the viewer."
 msgstr "Görüntüleyiciye hiç bağımsız değişken verilmedi"
 
-#, fuzzy
 msgid "Two files are required to invoke the diffviewer."
-msgstr "İki dosya için fark görüntüleyicisinin çalıştırılması gerekiyor."
+msgstr "Diffviewer'ı çalıştırmak için iki dosya gerekir."
 
 msgid "Background protocol error"
 msgstr "Artalan protokol hatası"
@@ -1205,6 +1219,8 @@ msgstr "Sıralamayı çalıştır"
 
 msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr ""
+"Boşlukla ayrılmış sıralama seçeneklerini girin (bkz. sort(1) kılavuz "
+"sayfası):"
 
 msgid "Sort"
 msgstr "Sıralama"
@@ -1621,7 +1637,7 @@ msgstr ""
 "Midnight Commander için yazıldı"
 
 msgid "Copyright (C) 1996-2023 the Free Software Foundation"
-msgstr ""
+msgstr "Telif Hakkı (C) 1996-2023 Özgür Yazılım Vakfı"
 
 msgid "About"
 msgstr "Hakkında"
@@ -1788,6 +1804,8 @@ msgid ""
 "Not an xterm or Linux console;\n"
 "the subshell cannot be toggled."
 msgstr ""
+"Bir xterm veya Linux konsolu değil;\n"
+"alt kabuk değiştirilemez."
 
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Midnight Commander'a dönmek için 'exit' yazın"
@@ -1815,7 +1833,7 @@ msgstr "İm"
 
 #, c-format
 msgid "Permissions (octal): %o"
-msgstr ""
+msgstr "İzinler (sekizlik):%o"
 
 msgid "Chown advanced command"
 msgstr "Dosya özellikleri"
@@ -1942,7 +1960,7 @@ msgid "Skin:"
 msgstr "Tema"
 
 msgid "&Shadows"
-msgstr ""
+msgstr "&Gölgeler"
 
 msgid "Appearance"
 msgstr "Görünüm"
@@ -2155,87 +2173,87 @@ msgstr "&Öldür"
 msgid "Background jobs"
 msgstr "Artalan İşleri"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot change directory to\n"
 "%s\n"
 "%s"
-msgstr "Dizin değiştirilemedi"
+msgstr ""
 
 msgid "Secure deletion"
-msgstr ""
+msgstr "Güvenli sil"
 
 msgid "Undelete"
-msgstr ""
+msgstr "Silmeyi geri al"
 
 msgid "Synchronous updates"
-msgstr ""
+msgstr "Eşzamanlı güncellemeler"
 
 msgid "Synchronous directory updates"
-msgstr ""
+msgstr "Eşzamanlı dizin güncellemeleri"
 
 msgid "Immutable"
-msgstr ""
+msgstr "Sabit"
 
 msgid "Append only"
-msgstr ""
+msgstr "Yalnızca ekle"
 
 msgid "No dump"
-msgstr ""
+msgstr "Boşaltma yok"
 
 msgid "No update atime"
-msgstr ""
+msgstr "atime güncellemesi yok"
 
 msgid "Compress"
-msgstr ""
+msgstr "Sıkıştır"
 
 msgid "Compressed clusters"
-msgstr ""
+msgstr "Sıkıştırılmış kümeler"
 
 msgid "Compressed dirty file"
-msgstr ""
+msgstr "Sıkıştırılmış kirli dosya"
 
 msgid "Compression raw access"
-msgstr ""
+msgstr "Ham sıkıştırma erişimi"
 
 msgid "Encrypted inode"
-msgstr ""
+msgstr "Şifreli inode"
 
 msgid "Journaled data"
-msgstr ""
+msgstr "Günlüklenmiş veri"
 
 msgid "Indexed directory"
-msgstr ""
+msgstr "İndekslenmiş dizin"
 
 msgid "No tail merging"
-msgstr ""
+msgstr "Uç birleştirme yok"
 
 msgid "Top of directory hierarchies"
-msgstr ""
+msgstr "En üstteki dizin hiyerarşisi"
 
 msgid "Inode uses extents"
-msgstr ""
+msgstr "Inode uzantıları kullanır"
 
 msgid "Huge_file"
-msgstr ""
+msgstr "Büyük_dosya"
 
 msgid "No COW"
-msgstr ""
+msgstr "COW yok"
 
 msgid "Direct access for files"
-msgstr ""
+msgstr "Dosyalara doğrudan erişim"
 
 msgid "Casefolded file"
-msgstr ""
+msgstr "Kasalı dosya"
 
 msgid "Inode has inline data"
-msgstr ""
+msgstr "Inode satır içi verilere sahip"
 
 msgid "Project hierarchy"
-msgstr ""
+msgstr "Proje hiyerarşisi"
 
 msgid "Verity protected inode"
-msgstr ""
+msgstr "Verity korumalı inode"
 
 msgid "&Marked all"
 msgstr "Tü&münü seç"
@@ -2247,7 +2265,7 @@ msgid "C&lear marked"
 msgstr "İşa&retlenenleri Temizle"
 
 msgid "Chattr command"
-msgstr ""
+msgstr "Chattr komutu"
 
 #, c-format
 msgid ""
@@ -2896,9 +2914,9 @@ msgstr "A&skıya Al"
 msgid "Con&tinue"
 msgstr "&Devam Et"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%d:%02d:%02d"
-msgstr "%d:%02d.%02d"
+msgstr ""
 
 #, c-format
 msgid "ETA %s"
@@ -4107,9 +4125,8 @@ msgstr ""
 "%s\n"
 "dosyasının sonu belirsiz"
 
-#, fuzzy
 msgid "Inconsistent archive"
-msgstr "Tar arşivi düzgün değil"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -4449,13 +4466,11 @@ msgstr ""
 "%s\n"
 "tar arşivini açılamadı"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
 msgstr ""
-"%s\n"
-"tar arşivi gibi görünmüyor."
 
 msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
@@ -4651,23 +4666,3 @@ msgstr "Başından devam edilsin mi?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr " /ftp://some.host/editme.txt 'in yerel kopyası alınamadı"
-
-#, c-format
-#~ msgid ""
-#~ "Cannot chdir to \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ " \"%s\" dizinine geçilemedi \n"
-#~ " %s "
-
-#, c-format
-#~ msgid "Cannot chdir to \"%s\""
-#~ msgstr "\"%s dizinine geçilemedi"
-
-#, c-format
-#~ msgid " %s%s file error"
-#~ msgstr " %s%s dosya hatası"
-
-#, c-format
-#~ msgid "%s file error"
-#~ msgstr "%s dosya hatası"

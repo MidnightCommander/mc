@@ -9,10 +9,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-08-04 21:17+0300\n"
+"POT-Creation-Date: 2023-08-06 15:50+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2022\n"
-"Language-Team: Esperanto (http://www.transifex.com/mc/mc/language/eo/)\n"
+"Language-Team: Esperanto (http://app.transifex.com/mc/mc/language/eo/)\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -826,9 +826,8 @@ msgstr "Eraro dum analizi parametrojn!"
 msgid "No arguments given to the viewer."
 msgstr "Neniuj parametroj donitaj al la legilo."
 
-#, fuzzy
 msgid "Two files are required to invoke the diffviewer."
-msgstr "Du dosieroj estas postulitaj por voki la flikaĵo-legilon."
+msgstr "Du dosieroj estas postulataj por voki la flikaĵo-legilon."
 
 msgid "Background protocol error"
 msgstr "Eraro ĉe fona protokolo"
@@ -1630,9 +1629,8 @@ msgstr ""
 "Afabla tekstoredaktilo\n"
 "verkita por Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2023 the Free Software Foundation"
-msgstr "Kopirajto (C) 1996–2022 la Fondaĵo pri Libera Programaro"
+msgstr "Kopirajto (C) 1996–2023 la Fondaĵo pri Libera Programaro"
 
 msgid "About"
 msgstr "Pri"
@@ -2165,12 +2163,12 @@ msgstr "&Mortigi"
 msgid "Background jobs"
 msgstr "Fonaj taskoj"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot change directory to\n"
 "%s\n"
 "%s"
-msgstr "Ne eblas ŝanĝi dosierujon"
+msgstr ""
 
 msgid "Secure deletion"
 msgstr "Sekura forigo"
@@ -2520,7 +2518,7 @@ msgstr ""
 "Midnight Cammander now uzas la dosieron %s.\n"
 "Bonvolu kopii viajn modifojn de la malnova dosiero al la nova."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the\n"
 "%s%s\n"
@@ -2528,11 +2526,12 @@ msgid ""
 "It seems that the installation has failed.\n"
 "Please fetch a fresh copy from the Midnight Commander package."
 msgstr ""
-"La aranĝo de la dosiero %s%s ŝanĝiĝis en eldono 4.0. Ŝajne la instalado "
-"malsukcesis. Bonvolu havigi al vi freŝan ekzempleron de la pakaĵo Midnight "
-"Commander."
+"La aranĝo de la dosiero\n"
+"%s%s\n"
+"ŝanĝiĝis en eldono 4.0. Ŝajne la instalado malsukcesis.\n"
+"Bonvolu havigi al vi freŝan ekzempleron de la pakaĵo Midnight Commander."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the\n"
 "%s\n"
@@ -2541,8 +2540,11 @@ msgid ""
 "%s%s\n"
 "or use that file as an example of how to write it."
 msgstr ""
-"La aranĝo de la dosiero %s ŝanĝiĝis en eldono 4.0. Vi eble povos aŭ kopii "
-"ĝin el %s%s aŭ uzi tiun dosieron kiel ekzemplon pri kiel skribi ĝin."
+"La aranĝo de la dosiero\n"
+"%s\n"
+"ŝanĝiĝis en eldono 4.0.\n"
+"Vi eble povos aŭ kopii ĝin el %s%s\n"
+"aŭ uzi tiun dosieron kiel ekzemplon pri kiel skribi ĝin."
 
 msgid "DialogTitle|Copy"
 msgstr "DialogTitle|Kopii"
@@ -2922,9 +2924,9 @@ msgstr "P&aŭzigi"
 msgid "Con&tinue"
 msgstr "&Daŭrigi"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%d:%02d:%02d"
-msgstr "%d:%02d.%02d"
+msgstr "%d:%02d:%02d"
 
 #, c-format
 msgid "ETA %s"
@@ -4141,9 +4143,8 @@ msgstr ""
 "Neatendita dosierfino\n"
 "%s"
 
-#, fuzzy
 msgid "Inconsistent archive"
-msgstr "Malkonsekvenca tar-dosiero"
+msgstr "Malkonsekvenca arĥivo"
 
 #, c-format
 msgid ""
@@ -4503,13 +4504,11 @@ msgstr ""
 "Ne eblas malfermi tar-dosieron\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
 msgstr ""
-"%s\n"
-"ne aspektas kiel tar-dosieron."
 
 msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
@@ -4705,29 +4704,3 @@ msgstr "Ĉu deiri de la komenco?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Ne eblas atingi lokan kopion de /ftp://some.host/editme.txt"
-
-#, c-format
-#~ msgid ""
-#~ "Cannot chdir to \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Ne eblas ŝanĝi dosierujon al \"%s\"\n"
-#~ "%s"
-
-#, c-format
-#~ msgid "Cannot chdir to \"%s\""
-#~ msgstr "Ne eblas ŝanĝi dosierujon al \"%s\""
-
-#~ msgid "Cannot change attributes on non-local filesystems"
-#~ msgstr "Ne eblas ŝanĝi atributojn en foraj dosiersistemoj"
-
-#~ msgid "Attributes: not supported"
-#~ msgstr "Atributoj:      ne komprenataj"
-
-#, c-format
-#~ msgid " %s%s file error"
-#~ msgstr " %s%s: dosiera eraro"
-
-#, c-format
-#~ msgid "%s file error"
-#~ msgstr "%s dosiera eraro"

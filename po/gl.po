@@ -12,11 +12,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-08-04 21:17+0300\n"
+"POT-Creation-Date: 2023-08-06 15:50+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Miguel Anxo Bouzada <mbouzada@gmail.com>, "
 "2012,2014-2015,2019\n"
-"Language-Team: Galician (http://www.transifex.com/mc/mc/language/gl/)\n"
+"Language-Team: Galician (http://app.transifex.com/mc/mc/language/gl/)\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -830,9 +830,8 @@ msgstr "Produciuse un erro ao analizar os argumentos!"
 msgid "No arguments given to the viewer."
 msgstr "Non hai argumentos para o visor."
 
-#, fuzzy
 msgid "Two files are required to invoke the diffviewer."
-msgstr "Precísanse dous ficheiros para invocar o visor de diferenzas."
+msgstr ""
 
 msgid "Background protocol error"
 msgstr "Produciuse un erro de protocolo en proceso en 2º plano"
@@ -2165,12 +2164,12 @@ msgstr "&Eliminar"
 msgid "Background jobs"
 msgstr "Traballos en segundo plano"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot change directory to\n"
 "%s\n"
 "%s"
-msgstr "Non é posíbel cambiar de directorio"
+msgstr ""
 
 msgid "Secure deletion"
 msgstr ""
@@ -2911,9 +2910,9 @@ msgstr "s&Uspender"
 msgid "Con&tinue"
 msgstr "Con&Tinuar"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%d:%02d:%02d"
-msgstr "%d:%02d.%02d"
+msgstr ""
 
 #, c-format
 msgid "ETA %s"
@@ -4121,9 +4120,8 @@ msgstr ""
 "Fin de ficheiro inesperado\n"
 "%s"
 
-#, fuzzy
 msgid "Inconsistent archive"
-msgstr "Arquivo de tipo tar inconsistente"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -4462,13 +4460,11 @@ msgstr ""
 "Non é posíbel abrir arquivos de tipo tar\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
 msgstr ""
-"%s\n"
-"non parece un arquivo de tipo tar."
 
 msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
@@ -4664,23 +4660,3 @@ msgstr "Continuar desde o principio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Non é posíbel obter unha copia local de /ftp://some.host/editme.txt"
-
-#, c-format
-#~ msgid ""
-#~ "Cannot chdir to \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Non é posíbel cambiar ao directorio «%s»\n"
-#~ "%s"
-
-#, c-format
-#~ msgid "Cannot chdir to \"%s\""
-#~ msgstr "Non é posíbel cambiar ao directorio «%s»"
-
-#, c-format
-#~ msgid " %s%s file error"
-#~ msgstr "Produciuse un erro no ficheiro  %s%s"
-
-#, c-format
-#~ msgid "%s file error"
-#~ msgstr "Erro no ficheiro %s"

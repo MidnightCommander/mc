@@ -12,10 +12,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-08-04 21:17+0300\n"
+"POT-Creation-Date: 2023-08-06 15:50+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: András Tőrös <toros.andras04@gmail.com>, 2020\n"
-"Language-Team: Hungarian (http://www.transifex.com/mc/mc/language/hu/)\n"
+"Language-Team: Hungarian (http://app.transifex.com/mc/mc/language/hu/)\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -811,9 +811,8 @@ msgstr "Argumentum feldolgozási hiba!"
 msgid "No arguments given to the viewer."
 msgstr "Hiányzó paraméterek a nézethez."
 
-#, fuzzy
 msgid "Two files are required to invoke the diffviewer."
-msgstr "Két fájl kell a diff-nézet indításához."
+msgstr ""
 
 msgid "Background protocol error"
 msgstr "Háttérprotokoll-hiba"
@@ -2144,12 +2143,12 @@ msgstr "&Töröl"
 msgid "Background jobs"
 msgstr "Háttérfolyamatok"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot change directory to\n"
 "%s\n"
 "%s"
-msgstr "Nem sikerült könyvtárt váltani"
+msgstr ""
 
 msgid "Secure deletion"
 msgstr ""
@@ -2884,9 +2883,9 @@ msgstr "&Felfüggesztés"
 msgid "Con&tinue"
 msgstr "&Folytatás"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%d:%02d:%02d"
-msgstr "%d:%02d:%02d"
+msgstr ""
 
 #, c-format
 msgid "ETA %s"
@@ -4097,9 +4096,8 @@ msgstr ""
 "Váratlan fájlvég:\n"
 "%s"
 
-#, fuzzy
 msgid "Inconsistent archive"
-msgstr "Inkonzisztens tar-archívum."
+msgstr ""
 
 #, c-format
 msgid ""
@@ -4438,13 +4436,11 @@ msgstr ""
 "A tar-archívum nem nyitható meg\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
 msgstr ""
-"%s\n"
-"valószínűleg nem tar-archívum."
 
 msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
@@ -4636,23 +4632,3 @@ msgstr "Folytatás az elejéről?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nem sikerült behozni /ftp://some.host/editme.txt helyi másolatát"
-
-#, c-format
-#~ msgid ""
-#~ "Cannot chdir to \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Nem sikerült belépni a(z) \"%s\" könyvtárba.\n"
-#~ "%s"
-
-#, c-format
-#~ msgid "Cannot chdir to \"%s\""
-#~ msgstr "Nem sikerült belépni a(z) \"%s\" könyvtárba"
-
-#, c-format
-#~ msgid " %s%s file error"
-#~ msgstr " %s%s fájlhiba"
-
-#, c-format
-#~ msgid "%s file error"
-#~ msgstr "%s fájl hiba"

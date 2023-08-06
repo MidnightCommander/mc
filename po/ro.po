@@ -8,7 +8,7 @@
 # 666ac67b8cef279621e9f9f0d4368bd5_672ede5, 2018
 # 7ad110ef65cb8fea3e45887cffdf497a_28ca6f3 <3e77beb79c064caff61514bbc685d086_451299>, 2016
 # Nicolae Crefelean, 2014,2019
-# Simona Iacob <s@zp1.net>, 2021-2022
+# Simona Iacob <s@zp1.net>, 2021-2023
 # Slava Zanko <slavazanko@gmail.com>, 2011
 # Sorin Sfirlogea, 2016
 # Vitalie Ciubotaru <vitalie@ciubotaru.tk>, 2015
@@ -16,10 +16,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-08-04 21:17+0300\n"
+"POT-Creation-Date: 2023-08-06 15:50+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Simona Iacob <s@zp1.net>, 2021-2022\n"
-"Language-Team: Romanian (http://www.transifex.com/mc/mc/language/ro/)\n"
+"Last-Translator: Simona Iacob <s@zp1.net>, 2021-2023\n"
+"Language-Team: Romanian (http://app.transifex.com/mc/mc/language/ro/)\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -834,9 +834,8 @@ msgstr "Eroare de interpretare a argumentelor!"
 msgid "No arguments given to the viewer."
 msgstr "Nu au fost date argumente către vizualizator."
 
-#, fuzzy
 msgid "Two files are required to invoke the diffviewer."
-msgstr "Sunt necesare două fișiere pentru a invoca vizualizatorul de diferențe"
+msgstr "Sunt necesare două fișiere pentru a invoca diffviewer."
 
 msgid "Background protocol error"
 msgstr "Eroare în protocolul de fundal"
@@ -1638,9 +1637,8 @@ msgstr ""
 "Un editor de text ușor de utilizat\n"
 "creat pentru Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2023 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2022 Fundația pentru Software Liber"
+msgstr "Copyright (C) 1996-2023 Fundația pentru Software Liber"
 
 msgid "About"
 msgstr "Despre"
@@ -2173,12 +2171,12 @@ msgstr "&Omoară"
 msgid "Background jobs"
 msgstr "Sarcini în fundal"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot change directory to\n"
 "%s\n"
 "%s"
-msgstr "Nu pot deschide directorul %s"
+msgstr ""
 
 msgid "Secure deletion"
 msgstr "Ștergere securizată"
@@ -2528,7 +2526,7 @@ msgstr ""
 "Midnight Commander folosește acum %s fișierul.\n"
 "Vă rugăm să copiați modificările din fișierul vechi în cel nou."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the\n"
 "%s%s\n"
@@ -2536,11 +2534,13 @@ msgid ""
 "It seems that the installation has failed.\n"
 "Please fetch a fresh copy from the Midnight Commander package."
 msgstr ""
-"Formatul fișierului %s%s s-a schimbat odată cu versiunea 4.0. Se pare că "
-"instalarea a eșuat. Vă rugăm să obțineți o copie nouă din pachetul Midnight "
-"Commander."
+"Formatul de\n"
+"%s%s\n"
+"s-a modificat odată cu versiunea 4.0.\n"
+"Se pare că instalarea a eșuat.\n"
+"Vă rugăm să obțineți o copie nouă din pachetul Midnight Commander."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the\n"
 "%s\n"
@@ -2549,9 +2549,12 @@ msgid ""
 "%s%s\n"
 "or use that file as an example of how to write it."
 msgstr ""
-"Formatul fișierului %s s-a schimbat odată cu versiunea 4.0. Este posibil să "
-"doriți să îl copiați de la%s%s sau să utilizați acest fișier ca exemplu de "
-"scriere."
+"Formatul de\n"
+"%s\n"
+"s-a modificat odată cu versiunea 4.0.\n"
+"Este posibil să doriți să îl copiați de la\n"
+"%s%s\n"
+"sau folosiți fișierul respectiv ca exemplu de scriere a acestuia."
 
 msgid "DialogTitle|Copy"
 msgstr "DialogTitle|Copiere"
@@ -2931,9 +2934,9 @@ msgstr "S&uspendă"
 msgid "Con&tinue"
 msgstr "Con&tinuă"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%d:%02d:%02d"
-msgstr "%d:%02d.%02d"
+msgstr "%d:%02d:%02d"
 
 #, c-format
 msgid "ETA %s"
@@ -4154,9 +4157,8 @@ msgstr ""
 "Sfârșit de fișier (EOF) neașteptat\n"
 "%s"
 
-#, fuzzy
 msgid "Inconsistent archive"
-msgstr "Arhivă tar trunchiată"
+msgstr "Arhivă inconsistentă"
 
 #, c-format
 msgid ""
@@ -4521,13 +4523,11 @@ msgstr ""
 "Nu pot deschide arhiva tar\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
 msgstr ""
-"%s\n"
-"nu pare a fi o arhivă tar."
 
 msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
@@ -4723,29 +4723,3 @@ msgstr "Continuă de la început?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nu se poate aduce o copie locală a /ftp://some.host/editme.txt"
-
-#, c-format
-#~ msgid ""
-#~ "Cannot chdir to \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Nu se poate chdir în \"%s\"\n"
-#~ "%s"
-
-#, c-format
-#~ msgid "Cannot chdir to \"%s\""
-#~ msgstr "Nu se poate chdir în \"%s\""
-
-#~ msgid "Cannot change attributes on non-local filesystems"
-#~ msgstr "Nu se pot modifica atributele pe sisteme de fișiere non-locale"
-
-#~ msgid "Attributes: not supported"
-#~ msgstr "Atribute: nu este acceptat"
-
-#, c-format
-#~ msgid " %s%s file error"
-#~ msgstr " %s%s eroare fișier"
-
-#, c-format
-#~ msgid "%s file error"
-#~ msgstr "%s eroare fișier"

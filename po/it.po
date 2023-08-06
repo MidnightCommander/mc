@@ -6,6 +6,7 @@
 # Andreas Troschka <signupbox001@om.it.eu.org>, 2012
 # Giuliano Natali <diaolin@diaolin.com>, 1998
 # Marco Ciampa <ciampix@posteo.net>, 2012,2015
+# Marco Ciampa <ciampix@posteo.net>, 2023
 # Marco Falgari <marco.ledpro@gmail.com>, 2018
 # Marco Manuzzi <marco.manuzzi@icloud.com>, 2021
 # Slava Zanko <slavazanko@gmail.com>, 2011
@@ -13,10 +14,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-08-04 21:17+0300\n"
+"POT-Creation-Date: 2023-08-06 15:50+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
-"Language-Team: Italian (http://www.transifex.com/mc/mc/language/it/)\n"
+"Last-Translator: Marco Ciampa <ciampix@posteo.net>, 2023\n"
+"Language-Team: Italian (http://app.transifex.com/mc/mc/language/it/)\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -535,7 +536,7 @@ msgstr ""
 "%s"
 
 msgid "Cannot close pipe descriptor (p == NULL)"
-msgstr ""
+msgstr "Impossibile chiudere il descrittore pipe (p == NULL)"
 
 #, c-format
 msgid ""
@@ -830,9 +831,8 @@ msgstr "Errore di analisi argomenti!"
 msgid "No arguments given to the viewer."
 msgstr "Nessun argomento fornito al visualizzatore"
 
-#, fuzzy
 msgid "Two files are required to invoke the diffviewer."
-msgstr "Sono necessari due file il visualizzatore diff."
+msgstr "Sono necessari due file per eseguire diffviewer."
 
 msgid "Background protocol error"
 msgstr "Errore del protocollo in background "
@@ -1216,7 +1216,7 @@ msgid "Run sort"
 msgstr "Esegui ordinamento"
 
 msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
-msgstr ""
+msgstr "Inserire opzioni ordinamento (vedere man sort(1)) separate da spazi:"
 
 msgid "Sort"
 msgstr "Ordina"
@@ -1633,7 +1633,7 @@ msgstr ""
 "scritto per il Midnight Commander."
 
 msgid "Copyright (C) 1996-2023 the Free Software Foundation"
-msgstr ""
+msgstr "Copyright (C) 1996-2023 the Free Software Foundation"
 
 msgid "About"
 msgstr "Informazioni"
@@ -2167,12 +2167,12 @@ msgstr "&Ferma"
 msgid "Background jobs"
 msgstr "Processi in background"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot change directory to\n"
 "%s\n"
 "%s"
-msgstr "Non posso cambiare directory"
+msgstr ""
 
 msgid "Secure deletion"
 msgstr "Eliminazione sicura"
@@ -2831,13 +2831,13 @@ msgid "(stalled)"
 msgstr "(in attesa)"
 
 msgid "Incomplete file was retrieved"
-msgstr ""
+msgstr "È stato recuperato un file incompleto"
 
 msgid "&Keep"
 msgstr "&Mantieni"
 
 msgid "&Continue copy"
-msgstr ""
+msgstr "&Continuare la copia"
 
 #, c-format
 msgid ""
@@ -2916,9 +2916,9 @@ msgstr "S&ospendi"
 msgid "Con&tinue"
 msgstr "Con&tinua"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%d:%02d:%02d"
-msgstr "%d:%02d.%02d"
+msgstr "%d:%02d:%02d"
 
 #, c-format
 msgid "ETA %s"
@@ -2974,7 +2974,7 @@ msgstr "Processo in background: il file esiste"
 
 #, c-format
 msgid "Files processed: %zu / %zu"
-msgstr ""
+msgstr "File elaborati: %zu / %zu"
 
 #, c-format
 msgid "Files processed: %zu"
@@ -3002,7 +3002,7 @@ msgstr " Totale: %s "
 
 #, c-format
 msgid " Total: %s / %s "
-msgstr ""
+msgstr " Totale: %s / %s "
 
 msgid "Source"
 msgstr "Sorgente"
@@ -3054,7 +3054,7 @@ msgid "&Listing format..."
 msgstr "Formato &lista..."
 
 msgid "&Sort order..."
-msgstr ""
+msgstr "&Ordinamento..."
 
 msgid "&Filter..."
 msgstr "&Filtro"
@@ -3069,7 +3069,7 @@ msgid "S&hell link..."
 msgstr "Connessione S&hell..."
 
 msgid "SFTP li&nk..."
-msgstr ""
+msgstr "Co&ll. SFTP..."
 
 msgid "Paneli&ze"
 msgstr "Pannelli&zza"
@@ -3221,9 +3221,9 @@ msgstr "Pannelli:"
 #, c-format
 msgid "You have %zu opened screen. Quit anyway?"
 msgid_plural "You have %zu opened screens. Quit anyway?"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Hai %zu schermo aperto. Uscire comunque?"
+msgstr[1] "Hai %zu schermi aperti. Uscire comunque?"
+msgstr[2] "Hai %zu schermi aperti. Uscire comunque?"
 
 msgid "The Midnight Commander"
 msgstr "Il Midnight Commander"
@@ -3323,9 +3323,9 @@ msgstr "Terminato"
 #, c-format
 msgid "Finished (ignored %zu directory)"
 msgid_plural "Finished (ignored %zu directories)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Finito (ignorata %zu cartella)"
+msgstr[1] "Finito (ignorate %zu cartelle)"
+msgstr[2] "Finito (ignorate %zu cartelle)"
 
 #, c-format
 msgid "Find File: \"%s\". Content: \"%s\""
@@ -3454,7 +3454,7 @@ msgstr "Nessuna info sullo spazio"
 
 #, c-format
 msgid "Free space: %s / %s (%d%%)"
-msgstr ""
+msgstr "Spazio libero: %s / %s (%d%%)"
 
 #, c-format
 msgid "Type:       %s"
@@ -3495,9 +3495,9 @@ msgstr "Dimensione:    %s"
 #, c-format
 msgid " (%lu block)"
 msgid_plural " (%lu blocks)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "(%lu blocco)"
+msgstr[1] "(%lu blocchi)"
+msgstr[2] "(%lu blocchi)"
 
 #, c-format
 msgid "Owner:      %s/%s"
@@ -4138,9 +4138,8 @@ msgstr ""
 "Inattesa fine del file\n"
 "%s"
 
-#, fuzzy
 msgid "Inconsistent archive"
-msgstr "Archivio tar inconsistente"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -4287,7 +4286,7 @@ msgid "ftpfs: could not get socket name: %s"
 msgstr ""
 
 msgid "ftpfs: could not reconnect to server"
-msgstr ""
+msgstr "ftpfs: impossibile riconnettersi al server"
 
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: famiglia di indirizzi non valida"
@@ -4500,13 +4499,11 @@ msgstr ""
 "Non posso aprire l'archivio tar\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
 msgstr ""
-"%s\n"
-"non sembra un archivio tar."
 
 msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
@@ -4702,29 +4699,3 @@ msgstr "Continuare dall'inizio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Impossibile ricevere copia locale di /ftp://un.host/modificami.txt"
-
-#, c-format
-#~ msgid ""
-#~ "Cannot chdir to \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Non posso entrare in \"%s\"\n"
-#~ "%s"
-
-#, c-format
-#~ msgid "Cannot chdir to \"%s\""
-#~ msgstr "Impossibile entrare in \"%s\""
-
-#~ msgid "Cannot change attributes on non-local filesystems"
-#~ msgstr "Impossibile cambiare gli attributi su filesystem non locali"
-
-#~ msgid "Attributes: not supported"
-#~ msgstr "Attributi: non supportati"
-
-#, c-format
-#~ msgid " %s%s file error"
-#~ msgstr " errore nel file %s%s "
-
-#, c-format
-#~ msgid "%s file error"
-#~ msgstr "Errore file %s"

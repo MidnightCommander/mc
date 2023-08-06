@@ -4,7 +4,9 @@
 #
 # Translators:
 # Pavel Suravezhkin, 2022
+# debconf <prach.by@gmail.com>, 2023
 # Slava Zanko <slavazanko@gmail.com>, 2011
+# Viačasłaŭ Chalikin, 2023
 # Viktar Palstsiuk <vipals@gmail.com>, 2015
 # Yury V. Zaytsev <yury@shurup.com>, 2019
 # Źmicier Turok <nashtlumach@gmail.com>, 2018
@@ -14,17 +16,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-08-04 21:17+0300\n"
+"POT-Creation-Date: 2023-08-06 15:50+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Pavel Suravezhkin, 2022\n"
-"Language-Team: Belarusian (http://www.transifex.com/mc/mc/language/be/)\n"
+"Last-Translator: debconf <prach.by@gmail.com>, 2023\n"
+"Language-Team: Belarusian (http://app.transifex.com/mc/mc/language/be/)\n"
 "Language: be\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
-"%100>=11 && n%100<=14)? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -74,7 +76,7 @@ msgid "&Grab lock"
 msgstr "Захапіць блакаванне(&G)"
 
 msgid "&Ignore lock"
-msgstr "Не зважаць на блакаванне(&I)"
+msgstr "Ігнараваць блакаванне(&I)"
 
 #, c-format
 msgid "Cannot create %s directory"
@@ -146,7 +148,7 @@ msgid ""
 "Unable to parse '%s' skin.\n"
 "Default skin has been loaded"
 msgstr ""
-"Немагчыма разабраць абалонку «%s».\n"
+"Немагчыма аналізаваць абалонку «%s».\n"
 "Ужываецца звычайная"
 
 #, c-format
@@ -165,23 +167,23 @@ msgid ""
 "on non-256 colors terminal.\n"
 "Default skin has been loaded"
 msgstr ""
-"Немагчыма ўжыць абалонку «%s»: трэба 256 колераў,\n"
-"але тэрмінал не падтрымлівае столькі.\n"
+"Немагчыма ўжыць абалонку «%s»:  з 256 колерамі,\n"
+"тэрмінал не падтрымлівае столькі.\n"
 "Ужываецца звычайная"
 
 msgid "True color not supported with ncurses."
-msgstr "Колер не падтрымліваецца ncurses."
+msgstr "Колеры не падтрымліваюцца ncurses."
 
 msgid "Your terminal doesn't even seem to support 256 colors."
 msgstr "Здаецца, ваш тэрмінал не падтрымлівае 256 колераў."
 
 msgid "True color not supported in this slang version."
-msgstr "Сапраўдны колер не падтрымліваецца ў гэтай версіі slang."
+msgstr "True color не падтрымліваецца ў гэтай версіі slang."
 
 msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
 msgstr ""
-"Вызначце COLORTERM=truecolor, калі ваш тэрмінал сапраўды падтрымлівае "
-"сапраўдныя колеры."
+"Вызначце COLORTERM=truecolor, калі ваш тэрмінал сапраўды падтрымлівае такія "
+"колеры."
 
 msgid "Escape"
 msgstr "Escape"
@@ -394,7 +396,7 @@ msgid "Dollar sign"
 msgstr "Знак даляра"
 
 msgid "Quotation mark"
-msgstr "Знак цытавання"
+msgstr "Двукоссе"
 
 msgid "Percent sign"
 msgstr "Знак адсотка"
@@ -508,10 +510,10 @@ msgid "B"
 msgstr "Б"
 
 msgid "kB"
-msgstr "КБ"
+msgstr "кБ"
 
 msgid "KiB"
-msgstr "КіБ"
+msgstr "кіБ"
 
 msgid "MB"
 msgstr "МБ"
@@ -520,10 +522,10 @@ msgid "MiB"
 msgstr "МіБ"
 
 msgid "GB"
-msgstr "Гбайт"
+msgstr "ГБ"
 
 msgid "GiB"
-msgstr "Гбайт"
+msgstr "ГіБайт"
 
 msgid "Cannot create pipe descriptor"
 msgstr "Немагчыма стварыць дэскрыптар канала"
@@ -540,14 +542,14 @@ msgstr ""
 "%s"
 
 msgid "Cannot close pipe descriptor (p == NULL)"
-msgstr ""
+msgstr "Немагчыма закрыць дэскрыптар канала (p == NULL)"
 
 #, c-format
 msgid ""
 "Unexpected error in waitpid():\n"
 "%s"
 msgstr ""
-"Нечакана адбылася памылка ў waitpid():\n"
+"Нечаканая памылка ў waitpid():\n"
 "%s"
 
 #, c-format
@@ -599,7 +601,7 @@ msgid "Press any key to continue..."
 msgstr "Каб працягнуць, націсніце хоць-якую клавішу..."
 
 msgid "Cannot parse:"
-msgstr "Немагчыма разабраць:"
+msgstr "Немагчыма прааналізаваць:"
 
 msgid "More parsing errors will be ignored."
 msgstr "На іншыя памылкі разбору не зважаць."
@@ -655,7 +657,7 @@ msgid "Print data directory"
 msgstr "Вывесці назву каталога"
 
 msgid "Print extended info about used data directories"
-msgstr "Вывесці дадатковыя звесткі пра ўжываемыя каталогі"
+msgstr "Вывесці дадатковыя звесткі пра ўжываныя каталогі"
 
 msgid "Print configure options"
 msgstr "Вывесці параметры"
@@ -676,7 +678,7 @@ msgid "Log ftp dialog to specified file"
 msgstr "Запісваць дыялог па FTP у вызначаны файл"
 
 msgid "Launches the file viewer on a file"
-msgstr "Праглядзець файл"
+msgstr "Запусціць прашлядальнік для файла"
 
 msgid "Edit files"
 msgstr "Рэдагаваць файлы"
@@ -835,9 +837,8 @@ msgstr "Памылка падчас разбору аргумента!"
 msgid "No arguments given to the viewer."
 msgstr "Праграма для прагляду не атрымала аргументаў."
 
-#, fuzzy
 msgid "Two files are required to invoke the diffviewer."
-msgstr "Для параўнання патрабуецца два файла."
+msgstr "Для параўнання праз diffviewer патрабуецца два файла."
 
 msgid "Background protocol error"
 msgstr "Памылка пратаколу ў фоне"
@@ -1220,6 +1221,8 @@ msgstr "Упарадкаваць"
 
 msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr ""
+"Увядзіце опцыі сартавання (глядзіце даведку man sort(1)), раздзяляючы "
+"прагаламі:"
 
 msgid "Sort"
 msgstr "Упарадкаваць"
@@ -1326,7 +1329,7 @@ msgid "&User menu..."
 msgstr "Меню карыстальніка(&U)..."
 
 msgid "A&bout..."
-msgstr "Пра праграму(&B)"
+msgstr "Аб Праграме(&B)"
 
 msgid "&Quit"
 msgstr "Выйсці(&Q)"
@@ -1407,7 +1410,7 @@ msgid "Go to matching &bracket"
 msgstr "Перайсці да парнай дужкі(&B)"
 
 msgid "Toggle s&yntax highlighting"
-msgstr "Падсвятляць або не сінтаксіс(&Y)"
+msgstr "Падсвятляць сінтаксіс(&Y)"
 
 msgid "&Find declaration"
 msgstr "Шукаць вызначэнне(&F)"
@@ -1635,9 +1638,8 @@ msgstr ""
 "Зручны тэкставы рэдактар,\n"
 "напісаны для Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2023 the Free Software Foundation"
-msgstr "Усе правы абаронены (C) 1996-2022 Free Software Foundation"
+msgstr "Аўтарскія правы (C) 1996-2023 Free Software Foundation"
 
 msgid "About"
 msgstr "Пра праграму"
@@ -2170,12 +2172,12 @@ msgstr "Забіць(&K)"
 msgid "Background jobs"
 msgstr "Фонавыя задачы"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot change directory to\n"
 "%s\n"
 "%s"
-msgstr "Немагчыма змяніць каталог"
+msgstr ""
 
 msgid "Secure deletion"
 msgstr "Надзейнае выдаленне"
@@ -2521,6 +2523,9 @@ msgid ""
 "Midnight Commander now uses %s file.\n"
 "Please copy your modifications of the old file to the new one."
 msgstr ""
+"Ваш файл %s састарэлы.\n"
+"Midnight Commander зараз выкарыстоўвае файл %s .\n"
+"Калі ласка скапіруйце змены старога файла ў новы."
 
 #, c-format
 msgid ""
@@ -2530,6 +2535,11 @@ msgid ""
 "It seems that the installation has failed.\n"
 "Please fetch a fresh copy from the Midnight Commander package."
 msgstr ""
+"Фармат файла\n"
+"%s%s\n"
+"зменены з эпохі версіі 4.0.\n"
+"Здаецца, інсталяцыя не ўдалася.\n"
+"Калі ласка, знайдзіце свежую копію пакета Midnight Commander."
 
 #, c-format
 msgid ""
@@ -2540,6 +2550,12 @@ msgid ""
 "%s%s\n"
 "or use that file as an example of how to write it."
 msgstr ""
+"Фармат файла\n"
+"%s\n"
+"зменены з эпохі версіі 4.0.\n"
+"Вы можаце або скапіраваць яго з\n"
+"%s%s\n"
+"або ўжываць гэты файл у якасці ўзора таго, як яго пісаць."
 
 msgid "DialogTitle|Copy"
 msgstr "Капіяваць"
@@ -2835,7 +2851,7 @@ msgid "(stalled)"
 msgstr "(затрымліваецца)"
 
 msgid "Incomplete file was retrieved"
-msgstr ""
+msgstr "Быў атрыманы незавершаны файл"
 
 msgid "&Keep"
 msgstr "Захаваць(&K)"
@@ -2918,9 +2934,9 @@ msgstr "Прыпыніць(&U)"
 msgid "Con&tinue"
 msgstr "Працягваць(&T)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%d:%02d:%02d"
-msgstr "%d:%02d.%02d"
+msgstr "%d:%02d:%02d"
 
 #, c-format
 msgid "ETA %s"
@@ -2976,7 +2992,7 @@ msgstr "Працэс у фоне: файл існуе"
 
 #, c-format
 msgid "Files processed: %zu / %zu"
-msgstr ""
+msgstr "Апрацавана файлаў: %zu / %zu"
 
 #, c-format
 msgid "Files processed: %zu"
@@ -3004,7 +3020,7 @@ msgstr " Агулам: %s "
 
 #, c-format
 msgid " Total: %s / %s "
-msgstr ""
+msgstr " Агулам: %s / %s "
 
 msgid "Source"
 msgstr "Крыніца"
@@ -3056,7 +3072,7 @@ msgid "&Listing format..."
 msgstr "Фармат спіса(&L)..."
 
 msgid "&Sort order..."
-msgstr ""
+msgstr "Напрамак (&S) сартавання"
 
 msgid "&Filter..."
 msgstr "Фільтраваць(&F)..."
@@ -3071,7 +3087,7 @@ msgid "S&hell link..."
 msgstr "Злучэнне праз абалонку(&H)..."
 
 msgid "SFTP li&nk..."
-msgstr ""
+msgstr "Злучэнне праз SFTP (&n)"
 
 msgid "Paneli&ze"
 msgstr "На панэлі(&Z)"
@@ -3113,7 +3129,7 @@ msgid "&Advanced chown"
 msgstr "Дазволы (пашыраныя)(&A)"
 
 msgid "Cha&ttr"
-msgstr ""
+msgstr "Cha&ttr"
 
 msgid "&Rename/Move"
 msgstr "Змяніць назву або перамясціць(&R)"
@@ -3458,7 +3474,7 @@ msgstr "Няма звестак пра прастору"
 
 #, c-format
 msgid "Free space: %s / %s (%d%%)"
-msgstr ""
+msgstr "Парожняя прастора: %s / %s (%d%%)"
 
 #, c-format
 msgid "Type:       %s"
@@ -3528,7 +3544,7 @@ msgid "Location:   %Xh:%Xh"
 msgstr "Размяшчэнне:   %Xh:%Xh"
 
 msgid "&Equal split"
-msgstr "Аднолькавыя памеры(&E)"
+msgstr "Аднолькавае падзяленне(&E)"
 
 msgid "&Menubar visible"
 msgstr "Адлюстроўваць меню(&M)"
@@ -3543,7 +3559,7 @@ msgid "H&intbar visible"
 msgstr "Радок падказак(&I)"
 
 msgid "&XTerm window title"
-msgstr "Загаловак акна(&X)"
+msgstr "Загаловак акна &XTerm"
 
 msgid "&Show free space"
 msgstr "Паказваць вольнае месца(&S)"
@@ -4144,9 +4160,8 @@ msgstr ""
 "Нечаканы канец файла\n"
 "%s"
 
-#, fuzzy
 msgid "Inconsistent archive"
-msgstr "Несумяшчальны архіў tar"
+msgstr "Супярэчлівы архіў"
 
 #, c-format
 msgid ""
@@ -4282,18 +4297,18 @@ msgstr "Чакаецца яшчэ спроба… %d (скасаваць — «C
 
 #, c-format
 msgid "ftpfs: could not make address-to-name translation: %s"
-msgstr ""
+msgstr "ftpfs: немагчыма пераўтварць адрас у імя: %s"
 
 #, c-format
 msgid "ftpfs: try reconnect to server, attempt %u"
-msgstr ""
+msgstr "ftpfs: спрабую перападключыцца да сервера, спроба %u"
 
 #, c-format
 msgid "ftpfs: could not get socket name: %s"
-msgstr ""
+msgstr "ftpfs: не магу атрымаць імя сокета: %s"
 
 msgid "ftpfs: could not reconnect to server"
-msgstr ""
+msgstr "ftpfs: не ўдалося паўторна злучыцца з серверам"
 
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: хібная сям’я адрасоў"
@@ -4505,16 +4520,14 @@ msgid ""
 "Cannot open tar archive\n"
 "%s"
 msgstr ""
-"Немагчыма адкрыць архіў tar\n"
+"Немагчыма адкрыць tar-архіў\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s\n"
 "doesn't look like a tar archive"
 msgstr ""
-"«%s»\n"
-"не падобны да архіву tar."
 
 msgid "tar: mc_lseek not stopped at a record boundary"
 msgstr ""
@@ -4534,7 +4547,7 @@ msgstr "open_inode_scan: %d"
 
 #, c-format
 msgid "while starting inode scan %d"
-msgstr "пры запуску сканавання вузла %d"
+msgstr "пры запуску сканавання inode %d"
 
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
@@ -4710,29 +4723,3 @@ msgstr "Працягваць ад пачатку?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Немагчыма атрымаць лакальную копію /ftp://some.host/editme.txt"
-
-#, c-format
-#~ msgid ""
-#~ "Cannot chdir to \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Немагчыма перайсці ў «%s»\n"
-#~ "%s"
-
-#, c-format
-#~ msgid "Cannot chdir to \"%s\""
-#~ msgstr "Немагчыма перайсці ў «%s»"
-
-#~ msgid "Cannot change attributes on non-local filesystems"
-#~ msgstr "Немагчыма змяніць атрыбуты ў нелакальных файлавых сістэмах"
-
-#~ msgid "Attributes: not supported"
-#~ msgstr "Атрыбуты: не падтрымліваецца"
-
-#, c-format
-#~ msgid " %s%s file error"
-#~ msgstr " Памылка ў файле %s%s"
-
-#, c-format
-#~ msgid "%s file error"
-#~ msgstr "Памылка ў файле %s"
