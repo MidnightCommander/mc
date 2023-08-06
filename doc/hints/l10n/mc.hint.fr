@@ -1,87 +1,87 @@
-Astuce: Faire C-x t pour copier les noms des fichiers sélectionnés vers la ligne de commande.
+Astuce : Faire C-x t pour copier les noms des fichiers sélectionnés vers la ligne de commande.
 
-Astuce: Faire C-x p pour copier le chemin courant vers la ligne de commande.
+Astuce : Faire C-x p pour copier le chemin courant vers la ligne de commande.
 
-Astuce: Complétion: faire M-Tab (ou Esc+Tab). Réfaire une deuxième fois pour avoir une liste.
+Astuce : Complétion: faire M-Tab (ou Esc+Tab). Réfaire une deuxième fois pour avoir une liste.
 
-Astuce: Faire M-p et M-n pour accéder à l'historique des commandes.
+Astuce : Faire M-p et M-n pour accéder à l’historique des commandes.
 
-Astuce: Besoin de quoter un caractère? Faire C-q suivi du caractère.
+Astuce : Besoin de quoter un caractère ? Faire C-q suivi du caractère.
 
-Astuce: Lassé de lire ces messages? Désactivez les dans le menu Options/Présentation.
+Astuce : Lassé de lire ces messages ? Désactivez les dans le menu Options/Présentation.
 
-Astuce: Sélection de répertoires: ajouter une barre oblique à la fin de motif de recherche.
+Astuce : Sélection de répertoires: ajouter une barre oblique à la fin de motif de recherche.
 
-Astuce: Si votre clavier n'a pas de touche de fonction, utilisez la combinaison ESC+nombre.
+Astuce : Si votre clavier n’a pas de touche de fonction, utilisez la combinaison ESC+nombre.
 
-Astuce: Site officiel de GNU Midnight Commander: https://www.midnight-commander.org
+Astuce : Site officiel de GNU Midnight Commander : https://www.midnight-commander.org
 
-Astuce: Envoyez vos rapports de bogues à l'adresse mc-devel@lists.midnight-commander.org
+Astuce : Envoyez vos rapports de bogues à l’adresse mc-devel@lists.midnight-commander.org
 
-Astuce: La touche Tab permute le panneau courant.
+Astuce : La touche Tab permute le panneau courant.
 
-Astuce: VFS: taper Entrée sur une archive tar pour en visualiser son contenu.
+Astuce : VFS : taper Entrée sur une archive tar pour en visualiser son contenu.
 
-Astuce: Une documentation complète est disponible: "man mc".
+Astuce : Une documentation complète est disponible : « man mc ».
 
-Astuce: Vous cherchez une navigation à la Lynx? Activez-là dans le menu Options/Configuration.
+Astuce : Vous cherchez une navigation à la Lynx ? Activez-là dans le menu Options/Configuration.
 
-Astuce: Les macros % fonctionnent également dans la ligne de commande.
+Astuce : Les macros % fonctionnent également dans la ligne de commande.
 
-Astuce: M-! permet d'executer un programme et d'afficher le résultat dans le viewer.
+Astuce : M-! permet d’exécuter un programme et d’afficher le résultat dans la visionneuse.
 
-Astuce: Le listing des fichiers peut-être customisée; consultez "man mc" pour plus d'informations.
+Astuce : Le listing des fichiers peut-être customisée ; consultez « man mc » pour plus d’informations.
 
-Astuce: %D/%T substitue le répertoire et la liste des fichiers sélectionnés dans le panneau opposé.
+Astuce : %D/%T substitue le répertoire et la liste des fichiers sélectionnés dans le panneau opposé.
 
-Astuce: Vous voulez un shell plein écran? Taper C-o, puis revenez à MC en tapant C-o à nouveau.
+Astuce : Vous voulez un shell plein écran ? Tapez C-o, puis revenez à MC en tapant C-o à nouveau.
 
-Astuce: Assigner des répertoires à la variable d'environnement CDPATH peut rendre plus concise la commande cd.
+Astuce : Assigner des répertoires à la variable d’environnement CDPATH peut rendre plus concise la commande cd.
 
-Astuce: Pour visualiser les fichiers cachés, paramétrez-le dans le menu Options/Configuration.
+Astuce : Pour visualiser les fichiers cachés, paramétrez-le dans le menu Options/Configuration.
 
-Astuce: Visualiser les fichiers de sauvegardes *~ ? Paramétrez-le dans le menu Options/Configuration.
+Astuce : Visualiser les fichiers de sauvegardes *~ ? Paramétrez-le dans le menu Options/Configuration.
 
-Astuce: La complétion fonctionne sur toutes les saisies dans toutes les fenêtres. Taper M-Tab.
+Astuce : La complétion fonctionne sur toutes les saisies dans toutes les fenêtres. Taper M-Tab.
 
-Astuce: Pour les terminaux lents, lancer MC avec l'argument -s peut aider.
+Astuce : Pour les terminaux lents, lancer MC avec l’argument -s peut aider.
 
-Astuce: Recherche de fichier: travaillez avec les fichiers trouvés en utilisant la fonction "Mettre en panneau".
+Astuce : Recherche de fichier : travaillez avec les fichiers trouvés en utilisant la fonction « Mettre en panneau ».
 
-Astuce: Vous souhaitez faire des recherches complexes? Rendez-vous dans le menu Commande/Panneau externe.
+Astuce : Vous souhaitez faire des recherches complexes ? Rendez-vous dans le menu Commande/Panneau externe.
 
-Astuce: Pour changer de répertoire rapidement, utiliser M-c (cd rapide).
+Astuce : Pour changer de répertoire rapidement, utiliser M-c (cd rapide).
 
-Astuce: Les commandes shell ne fonctionnent que sur des systèmes de fichiers locaux.
+Astuce : Les commandes shell ne fonctionnent que sur des systèmes de fichiers locaux.
 
-Astuce: Coller du texte dans la ligne de commande avec C-y.
+Astuce : Coller du texte dans la ligne de commande avec C-y.
 
-Astuce: Tous les raccourcis claviers ne fonctionnent pas? Vérifier dans le menu Options/Apprendre les touches.
+Astuce : Tous les raccourcis claviers ne fonctionnent pas ? Vérifiez dans le menu Options/Apprendre les touches.
 
-Astuce: Pour voir le résultat d'une commande dans le visionneur, faire M-!.
+Astuce : Pour voir le résultat d’une commande dans la visionneuse, utilisez M-!
 
-Astuce: F13 (ou Shift-F3) exécute le visionneur interne (raw viewer).
+Astuce : F13 (ou Shift-F3) exécute la visionneuse en mode brut.
 
-Astuce: Vous pouvez définir l'editeur utilisé avec la touche F4 via la variable d'environnement EDITOR.
+Astuce : Vous pouvez définir l’éditeur utilisé avec la touche F4 via la variable d’environnement EDITOR.
 
-Astuce: Vous pouvez définir le visionneur externe utilisé par le shell via la variable d'environnement VIEWER ou PAGER.
+Astuce : Vous pouvez définir la visionneuse externe via les variables d’environnement VIEWER ou PAGER dans un shell.
 
-Astuce: Vous pouvez désactiver toutes les demandes de confirmation dans le menu Options/Confirmation.
+Astuce : Vous pouvez désactiver toutes les demandes de confirmation dans le menu Options/Confirmation.
 
-Astuce: Allez dans vos répertoires favoris rapidement avec C-backslash.
+Astuce : Allez dans vos répertoires favoris rapidement avec C-backslash.
 
-Astuce: Vous pouvez faire du FTP anonyme avec MC en tapant 'cd ftp://machine.edu'.
+Astuce : Vous pouvez faire du FTP anonyme avec MC en tapant « cd ftp://machine.edu ».
 
-Astuce: Le support FTP est intégré à Midnight Commander, voir le menu "Lien FTP...".
+Astuce : Le support FTP est intégré à Midnight Commander, voir le menu « Lien FTP ».
 
-Astuce: M-t change le mode de listing courant.
+Astuce : M-t change le mode de listing courant.
 
-Astuce: Vous pouvez définir l'utilisateur en utilisant FTP: 'cd ftp://utilisateur@machine.edu'.
+Astuce : Vous pouvez définir l’utilisateur quand vous utilisez FTP : « cd ftp://user@machine.edu ».
 
-Astuce: VFS: parcourez le contenu des fichiers RPM en tapant Entrée sur le fichier.
+Astuce : VFS: parcourez le contenu des fichiers RPM en tapant Entrée sur le fichier.
 
-Astuce: Pour ne sélectionner que les répertoires (dans la fenêtre "Selectionner"), taper le caractère oblique '/'.
+Astuce : Pour ne sélectionner que les répertoires dans la fenêtre, sélectionnez (menu Fichiers/Sélectionner les groupes), ajoutez un « / ».
 
-Astuce: Le copier-coller par la souris peut nécessiter de maintenir la touche Shift.
+Astuce : Le copier-coller par la souris peut nécessiter de maintenir la touche Shift.
 
-Astuce: Définissez vos sites FTP favoris dans la hotlist: taper C-backslash.
+Astuce : Définissez vos sites FTP favoris dans la hotlist : taper C-backslash.
