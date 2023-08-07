@@ -994,7 +994,7 @@ strrstr_skip_count (const char *haystack, const char *needle, size_t skip_count)
  */
 
 uintmax_t
-parse_integer (const char *str, gboolean * invalid) 
+parse_integer (const char *str, gboolean * invalid)
 {
     uintmax_t n;
     char *suffix;
