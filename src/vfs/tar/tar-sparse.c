@@ -657,6 +657,7 @@ pax_decode_header (tar_super_t * archive, struct tar_sparse_file *file)
         char nbuf[UINTMAX_STRSIZE_BOUND];
         union block *blk;
         char *p;
+        size_t sparse_map_len;
         size_t i;
         off_t start;
 
@@ -681,7 +682,9 @@ pax_decode_header (tar_super_t * archive, struct tar_sparse_file *file)
         else
             g_array_set_size (file->stat_info->sparse_map, u);
 
-        for (i = 0; i < u; i++)
+        sparse_map_len = u;
+
+        for (i = 0; i < sparse_map_len; i++)
         {
             struct sp_array sp;
 
