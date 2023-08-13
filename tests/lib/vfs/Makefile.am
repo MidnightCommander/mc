@@ -15,7 +15,8 @@ LIBS = @CHECK_LIBS@ \
 	$(top_builddir)/lib/libmc.la
 
 if ENABLE_MCLIB
-LIBS += $(GLIB_LIBS)
+LIBS += $(GLIB_LIBS) \
+	@E2P_LIBS@
 endif
 
 TESTS = \
