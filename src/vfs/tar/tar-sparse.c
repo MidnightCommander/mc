@@ -28,6 +28,17 @@
  * \brief Source: Virtual File System: GNU Tar file system
  */
 
+/*
+ * Avoid following error:
+ *   comparison of unsigned expression < 0 is always false [-Werror=type-limits]
+ *
+ * https://www.boost.org/doc/libs/1_55_0/libs/integer/test/cstdint_test.cpp
+ *   We can't suppress this warning on the command line as not all GCC versions support -Wno-type-limits
+ */
+#if defined(__GNUC__) && (__GNUC__ > 4) || ((__GNUC__ == 4) && (__GNUC_MINOR__ >= 4))
+#pragma GCC diagnostic ignored "-Wtype-limits"
+#endif
+
 #include <config.h>
 
 #include <ctype.h>              /* isdigit() */
