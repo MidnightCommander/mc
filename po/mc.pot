@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: mc 4.8.29-210-g623fcd131\n"
+"Project-Id-Version: mc 4.8.30-pre1-7-g7f7ae6e04\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-08-04 21:17+0300\n"
+"POT-Creation-Date: 2023-08-13 20:47+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -5543,23 +5543,23 @@ msgstr ""
 msgid "sftp: Listing done."
 msgstr ""
 
-#: src/vfs/tar/tar.c:659 src/vfs/tar/tar.c:732 src/vfs/tar/tar.c:827
+#: src/vfs/tar/tar.c:661 src/vfs/tar/tar.c:734 src/vfs/tar/tar.c:829
 #: src/vfs/tar/tar-internal.c:411
 msgid "Inconsistent tar archive"
 msgstr ""
 
-#: src/vfs/tar/tar.c:689 src/vfs/tar/tar.c:712
+#: src/vfs/tar/tar.c:691 src/vfs/tar/tar.c:714
 msgid "Unexpected EOF on archive file"
 msgstr ""
 
-#: src/vfs/tar/tar.c:914 src/vfs/tar/tar.c:936
+#: src/vfs/tar/tar.c:916 src/vfs/tar/tar.c:938
 #, c-format
 msgid ""
 "Cannot open tar archive\n"
 "%s"
 msgstr ""
 
-#: src/vfs/tar/tar.c:996 src/vfs/tar/tar.c:1021
+#: src/vfs/tar/tar.c:998 src/vfs/tar/tar.c:1023
 #, c-format
 msgid ""
 "%s\n"
