@@ -12,9 +12,8 @@ AC_DEFUN([mc_EXT2FS_ATTR],
 
         if test x"$found_e2p" = "xyes"; then
             AC_DEFINE(ENABLE_EXT2FS_ATTR, 1, [Define to enable support for ext2fs attributes])
-            AC_SUBST(EXT2FS_CFLAGS)
-            AC_SUBST(E2P_CFLAGS)
             MCLIBS="$MCLIBS $E2P_LIBS"
+            CPPFLAGS="$CPPFLAGS $EXT2FS_CFLAGS $E2P_CFLAGS"
             ext2fs_attr_msg="yes"
         else
             AC_MSG_WARN([e2p library not found or version too old (must be >= 1.42.4)])
