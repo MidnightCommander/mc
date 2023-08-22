@@ -68,33 +68,31 @@ mc_skin_lines_parse_ini_file (mc_skin_t * mc_skin)
         mc_skin_hardcoded_space_lines (mc_skin);
     else if (mc_global.tty.ugly_line_drawing)
         mc_skin_hardcoded_ugly_lines (mc_skin);
-    else
-    {
-        /* single lines */
-        mc_tty_frm[MC_TTY_FRM_VERT] = mc_skin_lines_load_frm (mc_skin, "vert");
-        mc_tty_frm[MC_TTY_FRM_HORIZ] = mc_skin_lines_load_frm (mc_skin, "horiz");
-        mc_tty_frm[MC_TTY_FRM_LEFTTOP] = mc_skin_lines_load_frm (mc_skin, "lefttop");
-        mc_tty_frm[MC_TTY_FRM_RIGHTTOP] = mc_skin_lines_load_frm (mc_skin, "righttop");
-        mc_tty_frm[MC_TTY_FRM_LEFTBOTTOM] = mc_skin_lines_load_frm (mc_skin, "leftbottom");
-        mc_tty_frm[MC_TTY_FRM_RIGHTBOTTOM] = mc_skin_lines_load_frm (mc_skin, "rightbottom");
-        mc_tty_frm[MC_TTY_FRM_TOPMIDDLE] = mc_skin_lines_load_frm (mc_skin, "topmiddle");
-        mc_tty_frm[MC_TTY_FRM_BOTTOMMIDDLE] = mc_skin_lines_load_frm (mc_skin, "bottommiddle");
-        mc_tty_frm[MC_TTY_FRM_LEFTMIDDLE] = mc_skin_lines_load_frm (mc_skin, "leftmiddle");
-        mc_tty_frm[MC_TTY_FRM_RIGHTMIDDLE] = mc_skin_lines_load_frm (mc_skin, "rightmiddle");
-        mc_tty_frm[MC_TTY_FRM_CROSS] = mc_skin_lines_load_frm (mc_skin, "cross");
 
-        /* double lines */
-        mc_tty_frm[MC_TTY_FRM_DVERT] = mc_skin_lines_load_frm (mc_skin, "dvert");
-        mc_tty_frm[MC_TTY_FRM_DHORIZ] = mc_skin_lines_load_frm (mc_skin, "dhoriz");
-        mc_tty_frm[MC_TTY_FRM_DLEFTTOP] = mc_skin_lines_load_frm (mc_skin, "dlefttop");
-        mc_tty_frm[MC_TTY_FRM_DRIGHTTOP] = mc_skin_lines_load_frm (mc_skin, "drighttop");
-        mc_tty_frm[MC_TTY_FRM_DLEFTBOTTOM] = mc_skin_lines_load_frm (mc_skin, "dleftbottom");
-        mc_tty_frm[MC_TTY_FRM_DRIGHTBOTTOM] = mc_skin_lines_load_frm (mc_skin, "drightbottom");
-        mc_tty_frm[MC_TTY_FRM_DTOPMIDDLE] = mc_skin_lines_load_frm (mc_skin, "dtopmiddle");
-        mc_tty_frm[MC_TTY_FRM_DBOTTOMMIDDLE] = mc_skin_lines_load_frm (mc_skin, "dbottommiddle");
-        mc_tty_frm[MC_TTY_FRM_DLEFTMIDDLE] = mc_skin_lines_load_frm (mc_skin, "dleftmiddle");
-        mc_tty_frm[MC_TTY_FRM_DRIGHTMIDDLE] = mc_skin_lines_load_frm (mc_skin, "drightmiddle");
-    }
+    /* single lines */
+    mc_tty_frm[MC_TTY_FRM_VERT] = mc_skin_lines_load_frm (mc_skin, "vert");
+    mc_tty_frm[MC_TTY_FRM_HORIZ] = mc_skin_lines_load_frm (mc_skin, "horiz");
+    mc_tty_frm[MC_TTY_FRM_LEFTTOP] = mc_skin_lines_load_frm (mc_skin, "lefttop");
+    mc_tty_frm[MC_TTY_FRM_RIGHTTOP] = mc_skin_lines_load_frm (mc_skin, "righttop");
+    mc_tty_frm[MC_TTY_FRM_LEFTBOTTOM] = mc_skin_lines_load_frm (mc_skin, "leftbottom");
+    mc_tty_frm[MC_TTY_FRM_RIGHTBOTTOM] = mc_skin_lines_load_frm (mc_skin, "rightbottom");
+    mc_tty_frm[MC_TTY_FRM_TOPMIDDLE] = mc_skin_lines_load_frm (mc_skin, "topmiddle");
+    mc_tty_frm[MC_TTY_FRM_BOTTOMMIDDLE] = mc_skin_lines_load_frm (mc_skin, "bottommiddle");
+    mc_tty_frm[MC_TTY_FRM_LEFTMIDDLE] = mc_skin_lines_load_frm (mc_skin, "leftmiddle");
+    mc_tty_frm[MC_TTY_FRM_RIGHTMIDDLE] = mc_skin_lines_load_frm (mc_skin, "rightmiddle");
+    mc_tty_frm[MC_TTY_FRM_CROSS] = mc_skin_lines_load_frm (mc_skin, "cross");
+
+    /* double lines */
+    mc_tty_frm[MC_TTY_FRM_DVERT] = mc_skin_lines_load_frm (mc_skin, "dvert");
+    mc_tty_frm[MC_TTY_FRM_DHORIZ] = mc_skin_lines_load_frm (mc_skin, "dhoriz");
+    mc_tty_frm[MC_TTY_FRM_DLEFTTOP] = mc_skin_lines_load_frm (mc_skin, "dlefttop");
+    mc_tty_frm[MC_TTY_FRM_DRIGHTTOP] = mc_skin_lines_load_frm (mc_skin, "drighttop");
+    mc_tty_frm[MC_TTY_FRM_DLEFTBOTTOM] = mc_skin_lines_load_frm (mc_skin, "dleftbottom");
+    mc_tty_frm[MC_TTY_FRM_DRIGHTBOTTOM] = mc_skin_lines_load_frm (mc_skin, "drightbottom");
+    mc_tty_frm[MC_TTY_FRM_DTOPMIDDLE] = mc_skin_lines_load_frm (mc_skin, "dtopmiddle");
+    mc_tty_frm[MC_TTY_FRM_DBOTTOMMIDDLE] = mc_skin_lines_load_frm (mc_skin, "dbottommiddle");
+    mc_tty_frm[MC_TTY_FRM_DLEFTMIDDLE] = mc_skin_lines_load_frm (mc_skin, "dleftmiddle");
+    mc_tty_frm[MC_TTY_FRM_DRIGHTMIDDLE] = mc_skin_lines_load_frm (mc_skin, "drightmiddle");
 }
 
 /* --------------------------------------------------------------------------------------------- */
