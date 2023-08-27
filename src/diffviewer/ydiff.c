@@ -2356,12 +2356,11 @@ dview_select_encoding (WDiff * dview)
 static void
 dview_load_options (WDiff * dview)
 {
-    gboolean show_numbers, show_symbols;
+    gboolean show_numbers;
     int tab_size;
 
-    show_symbols = mc_config_get_bool (mc_global.main_config, "DiffView", "show_symbols", FALSE);
-    if (show_symbols)
-        dview->display_symbols = 1;
+    dview->display_symbols =
+        mc_config_get_bool (mc_global.main_config, "DiffView", "show_symbols", FALSE);
     show_numbers = mc_config_get_bool (mc_global.main_config, "DiffView", "show_numbers", FALSE);
     if (show_numbers)
         dview->display_numbers = 1;
@@ -2392,8 +2391,7 @@ dview_load_options (WDiff * dview)
 static void
 dview_save_options (WDiff * dview)
 {
-    mc_config_set_bool (mc_global.main_config, "DiffView", "show_symbols",
-                        dview->display_symbols != 0);
+    mc_config_set_bool (mc_global.main_config, "DiffView", "show_symbols", dview->display_symbols);
     mc_config_set_bool (mc_global.main_config, "DiffView", "show_numbers",
                         dview->display_numbers != 0);
     mc_config_set_int (mc_global.main_config, "DiffView", "tab_size", dview->tab_size);
@@ -2497,7 +2495,7 @@ dview_init (WDiff * dview, const char *args, const char *file1, const char *file
     dview->new_frame = TRUE;
     dview->skip_rows = 0;
     dview->skip_cols = 0;
-    dview->display_symbols = 0;
+    dview->display_symbols = FALSE;
     dview->display_numbers = 0;
     dview->show_cr = TRUE;
     dview->tab_size = 8;
@@ -2589,7 +2587,7 @@ dview_display_file (const WDiff * dview, diff_place_t ord, int r, int c, int hei
     char buf[BUFSIZ];
     FBUF *f = dview->f[ord];
     int skip = dview->skip_cols;
-    int display_symbols = dview->display_symbols;
+    gboolean display_symbols = dview->display_symbols;
     int display_numbers = dview->display_numbers;
     gboolean show_cr = dview->show_cr;
     int tab_size = 8;
@@ -2597,16 +2595,18 @@ dview_display_file (const WDiff * dview, diff_place_t ord, int r, int c, int hei
     int nwidth = display_numbers;
     int xwidth;
 
-    xwidth = display_symbols + display_numbers;
+    xwidth = display_numbers;
+    if (display_symbols)
+        xwidth++;
     if (dview->tab_size > 0 && dview->tab_size < 9)
         tab_size = dview->tab_size;
 
     if (xwidth != 0)
     {
-        if (xwidth > width && display_symbols != 0)
+        if (xwidth > width && display_symbols)
         {
             xwidth--;
-            display_symbols = 0;
+            display_symbols = FALSE;
         }
         if (xwidth > width && display_numbers != 0)
         {
@@ -2637,7 +2637,7 @@ dview_display_file (const WDiff * dview, diff_place_t ord, int r, int c, int hei
         p = (DIFFLN *) & g_array_index (dview->a[ord], DIFFLN, i);
         ch = p->ch;
         tty_setcolor (NORMAL_COLOR);
-        if (display_symbols != 0)
+        if (display_symbols)
         {
             tty_gotoyx (r + j, c - 2);
             tty_print_char (ch);
@@ -2899,7 +2899,9 @@ dview_update (WDiff * dview)
         int xwidth;
 
         tty_setcolor (NORMAL_COLOR);
-        xwidth = dview->display_symbols + dview->display_numbers;
+        xwidth = dview->display_numbers;
+        if (dview->display_symbols)
+            xwidth++;
         if (width1 > 1)
             tty_draw_box (1, 0, height, width1, FALSE);
         if (width2 > 1)
@@ -3129,7 +3131,7 @@ dview_execute_cmd (WDiff * dview, long command)
     switch (command)
     {
     case CK_ShowSymbols:
-        dview->display_symbols = dview->display_symbols == 0 ? 1 : 0;
+        dview->display_symbols = !dview->display_symbols;
         dview->new_frame = TRUE;
         break;
     case CK_ShowNumbers:
