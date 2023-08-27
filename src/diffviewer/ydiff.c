@@ -71,19 +71,6 @@
 
 /*** file scope macro definitions ****************************************************************/
 
-#define g_array_foreach(a, TP, cbf) \
-do { \
-    size_t g_array_foreach_i;\
-    \
-    for (g_array_foreach_i = 0; g_array_foreach_i < a->len; g_array_foreach_i++) \
-    { \
-        TP *g_array_foreach_var; \
-        \
-        g_array_foreach_var = &g_array_index (a, TP, g_array_foreach_i); \
-        (*cbf) (g_array_foreach_var); \
-    } \
-} while (0)
-
 #define FILE_READ_BUF 4096
 #define FILE_FLAG_TEMP (1 << 0)
 
@@ -1670,9 +1657,9 @@ cvt_fget (FBUF * f, off_t off, char *dst, size_t dstsize, int skip, int ts, gboo
 /* diff printers et al ****************************************************** */
 
 static void
-cc_free_elt (void *elt)
+cc_free_elt (gpointer elt)
 {
-    DIFFLN *p = elt;
+    DIFFLN *p = (DIFFLN *) elt;
 
     if (p != NULL)
         g_free (p->p);
@@ -2287,18 +2274,14 @@ dview_reread (WDiff * dview)
 
     destroy_hdiff (dview);
     if (dview->a[DIFF_LEFT] != NULL)
-    {
-        g_array_foreach (dview->a[DIFF_LEFT], DIFFLN, cc_free_elt);
         g_array_free (dview->a[DIFF_LEFT], TRUE);
-    }
     if (dview->a[DIFF_RIGHT] != NULL)
-    {
-        g_array_foreach (dview->a[DIFF_RIGHT], DIFFLN, cc_free_elt);
         g_array_free (dview->a[DIFF_RIGHT], TRUE);
-    }
 
     dview->a[DIFF_LEFT] = g_array_new (FALSE, FALSE, sizeof (DIFFLN));
+    g_array_set_clear_func (dview->a[DIFF_LEFT], cc_free_elt);
     dview->a[DIFF_RIGHT] = g_array_new (FALSE, FALSE, sizeof (DIFFLN));
+    g_array_set_clear_func (dview->a[DIFF_RIGHT], cc_free_elt);
 
     ndiff = redo_diff (dview);
     if (ndiff >= 0)
@@ -2519,7 +2502,9 @@ dview_init (WDiff * dview, const char *args, const char *file1, const char *file
     dview_set_codeset (dview);
 #endif
     dview->a[DIFF_LEFT] = g_array_new (FALSE, FALSE, sizeof (DIFFLN));
+    g_array_set_clear_func (dview->a[DIFF_LEFT], cc_free_elt);
     dview->a[DIFF_RIGHT] = g_array_new (FALSE, FALSE, sizeof (DIFFLN));
+    g_array_set_clear_func (dview->a[DIFF_RIGHT], cc_free_elt);
 
     ndiff = redo_diff (dview);
     if (ndiff < 0)
@@ -2556,13 +2541,11 @@ dview_fini (WDiff * dview)
     destroy_hdiff (dview);
     if (dview->a[DIFF_LEFT] != NULL)
     {
-        g_array_foreach (dview->a[DIFF_LEFT], DIFFLN, cc_free_elt);
         g_array_free (dview->a[DIFF_LEFT], TRUE);
         dview->a[DIFF_LEFT] = NULL;
     }
     if (dview->a[DIFF_RIGHT] != NULL)
     {
-        g_array_foreach (dview->a[DIFF_RIGHT], DIFFLN, cc_free_elt);
         g_array_free (dview->a[DIFF_RIGHT], TRUE);
         dview->a[DIFF_RIGHT] = NULL;
     }
