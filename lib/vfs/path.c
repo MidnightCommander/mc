@@ -546,13 +546,12 @@ vfs_path_tokens_add_class_info (const vfs_path_element_t * element, GString * re
         g_string_append (ret_tokens, VFS_PATH_URL_DELIMITER);
 
         url_str = vfs_path_build_url_params_str (element, TRUE);
-        if (url_str->len != 0)
+        if (url_str != NULL)
         {
             g_string_append_len (ret_tokens, url_str->str, url_str->len);
             g_string_append_c (ret_tokens, PATH_SEP);
+            g_string_free (url_str, TRUE);
         }
-
-        g_string_free (url_str, TRUE);
     }
 
 #ifdef HAVE_CHARSET
@@ -663,13 +662,12 @@ vfs_path_to_str_flags (const vfs_path_t * vpath, int elements_count, vfs_path_fl
             g_string_append (buffer, VFS_PATH_URL_DELIMITER);
 
             url_str = vfs_path_build_url_params_str (element, !(flags & VPF_STRIP_PASSWORD));
-            if (url_str->len != 0)
+            if (url_str != NULL)
             {
                 g_string_append_len (buffer, url_str->str, url_str->len);
                 g_string_append_c (buffer, PATH_SEP);
+                g_string_free (url_str, TRUE);
             }
-
-            g_string_free (url_str, TRUE);
         }
 
 #ifdef HAVE_CHARSET
@@ -1514,7 +1512,7 @@ vfs_path_vtokens_get (const vfs_path_t * vpath, ssize_t start_position, ssize_t 
  * @param element path element
  * @param keep_password TRUE or FALSE
  *
- * @return newly allocated string
+ * @return newly allocated non-empty string or NULL
  */
 
 GString *
@@ -1553,7 +1551,11 @@ vfs_path_build_url_params_str (const vfs_path_element_t * element, gboolean keep
         g_string_append_printf (buffer, "%d", element->port);
     }
 
-    return buffer;
+    if (buffer->len != 0)
+        return buffer;
+
+    g_string_free (buffer, TRUE);
+    return NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1574,14 +1576,16 @@ vfs_path_element_build_pretty_path_str (const vfs_path_element_t * element)
     g_string_append (pretty_path, VFS_PATH_URL_DELIMITER);
 
     url_params = vfs_path_build_url_params_str (element, FALSE);
-    g_string_append_len (pretty_path, url_params->str, url_params->len);
-    g_string_free (url_params, TRUE);
+    if (url_params != NULL)
+    {
+        g_string_append_len (pretty_path, url_params->str, url_params->len);
+        g_string_free (url_params, TRUE);
+    }
 
     if (!IS_PATH_SEP (*element->path))
         g_string_append_c (pretty_path, PATH_SEP);
 
-    g_string_append (pretty_path, element->path);
-    return pretty_path;
+    return g_string_append (pretty_path, element->path);
 }
 
 /* --------------------------------------------------------------------------------------------- */
