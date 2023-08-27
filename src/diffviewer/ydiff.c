@@ -1799,38 +1799,36 @@ redo_diff (WDiff * dview)
 
     if (dview->dsrc == DATA_SRC_MEM && HDIFF_ENABLE)
     {
+        size_t i;
+
         dview->hdiff = g_ptr_array_new ();
-        if (dview->hdiff != NULL)
+
+        for (i = 0; i < dview->a[DIFF_LEFT]->len; i++)
         {
-            size_t i;
+            GArray *h = NULL;
+            const DIFFLN *p;
+            const DIFFLN *q;
 
-            for (i = 0; i < dview->a[DIFF_LEFT]->len; i++)
+            p = &g_array_index (dview->a[DIFF_LEFT], DIFFLN, i);
+            q = &g_array_index (dview->a[DIFF_RIGHT], DIFFLN, i);
+            if (p->line != 0 && q->line != 0 && p->ch == CHG_CH)
             {
-                GArray *h = NULL;
-                const DIFFLN *p;
-                const DIFFLN *q;
-
-                p = &g_array_index (dview->a[DIFF_LEFT], DIFFLN, i);
-                q = &g_array_index (dview->a[DIFF_RIGHT], DIFFLN, i);
-                if (p->line != 0 && q->line != 0 && p->ch == CHG_CH)
+                h = g_array_new (FALSE, FALSE, sizeof (BRACKET));
+                if (h != NULL)
                 {
-                    h = g_array_new (FALSE, FALSE, sizeof (BRACKET));
-                    if (h != NULL)
-                    {
-                        gboolean runresult;
+                    gboolean runresult;
 
-                        runresult =
-                            hdiff_scan (p->p, p->u.len, q->p, q->u.len, HDIFF_MINCTX, h,
-                                        HDIFF_DEPTH);
-                        if (!runresult)
-                        {
-                            g_array_free (h, TRUE);
-                            h = NULL;
-                        }
+                    runresult =
+                        hdiff_scan (p->p, p->u.len, q->p, q->u.len, HDIFF_MINCTX, h, HDIFF_DEPTH);
+                    if (!runresult)
+                    {
+                        g_array_free (h, TRUE);
+                        h = NULL;
                     }
                 }
-                g_ptr_array_add (dview->hdiff, h);
             }
+
+            g_ptr_array_add (dview->hdiff, h);
         }
     }
     return ndiff;
