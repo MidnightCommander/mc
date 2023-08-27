@@ -236,7 +236,7 @@ f_free (FBUF * fs)
 {
     int rv = 0;
 
-    if (fs->flags & FILE_FLAG_TEMP)
+    if ((fs->flags & FILE_FLAG_TEMP) != 0)
     {
         rv = unlink (fs->data);
         g_free (fs->data);
@@ -330,13 +330,13 @@ f_gets (char *buf, size_t size, FBUF * fs)
     do
     {
         int i;
-        int stop = 0;
+        gboolean stop = FALSE;
 
         for (i = fs->pos; j < size && i < fs->len && !stop; i++, j++)
         {
             buf[j] = fs->buf[i];
             if (buf[j] == '\n')
-                stop = 1;
+                stop = TRUE;
         }
         fs->pos = i;
 
@@ -369,7 +369,7 @@ f_seek (FBUF * fs, off_t off, int whence)
 {
     off_t rv;
 
-    if (fs->len && whence != SEEK_END)
+    if (fs->len != 0 && whence != SEEK_END)
     {
         rv = lseek (fs->fd, 0, SEEK_CUR);
         if (rv != -1)
@@ -694,7 +694,7 @@ scan_line (const char *p, GArray * ops)
     int f1, f2;
     int t1, t2;
     int cmd;
-    int range;
+    gboolean range = FALSE;
 
     /* handle the following cases:
      *  NUMaNUM[,NUM]
@@ -707,20 +707,19 @@ scan_line (const char *p, GArray * ops)
         return -1;
 
     f2 = f1;
-    range = 0;
     if (*p == ',')
     {
         p++;
         if (scan_deci (&p, &f2) != 0 || f2 < f1)
             return -1;
 
-        range = 1;
+        range = TRUE;
     }
 
     cmd = *p++;
     if (cmd == 'a')
     {
-        if (range != 0)
+        if (range)
             return -1;
     }
     else if (cmd != 'c' && cmd != 'd')
@@ -730,17 +729,17 @@ scan_line (const char *p, GArray * ops)
         return -1;
 
     t2 = t1;
-    range = 0;
+    range = FALSE;
     if (*p == ',')
     {
         p++;
         if (scan_deci (&p, &t2) != 0 || t2 < t1)
             return -1;
 
-        range = 1;
+        range = TRUE;
     }
 
-    if (cmd == 'd' && range != 0)
+    if (cmd == 'd' && range)
         return -1;
 
     op.a[0][0] = f1;
@@ -869,22 +868,25 @@ dff_reparse (diff_place_t ord, const char *filename, const GArray * ops, DFUNC p
     off_t off = 0;
     const DIFFCMD *op;
     diff_place_t eff;
-    int add_cmd;
-    int del_cmd;
+    int add_cmd, del_cmd;
 
     f = f_open (filename, O_RDONLY);
     if (f == NULL)
         return -1;
 
-    ord &= 1;
+    if (ord != DIFF_LEFT)
+        ord = DIFF_RIGHT;
     eff = ord;
 
-    add_cmd = 'a';
-    del_cmd = 'd';
-    if (ord != 0)
+    if (ord != DIFF_LEFT)
     {
         add_cmd = 'd';
         del_cmd = 'a';
+    }
+    else
+    {
+        add_cmd = 'a';
+        del_cmd = 'd';
     }
 #define F1 a[eff][0]
 #define F2 a[eff][1]
@@ -895,7 +897,10 @@ dff_reparse (diff_place_t ord, const char *filename, const GArray * ops, DFUNC p
         int n;
 
         op = &g_array_index (ops, DIFFCMD, i);
-        n = op->F1 - (op->cmd != add_cmd);
+
+        n = op->F1;
+        if (op->cmd != add_cmd)
+            n--;
 
         while (line < n && (sz = f_gets (buf, sizeof (buf), f)) != 0)
         {
@@ -1642,7 +1647,6 @@ cvt_fget (FBUF * f, off_t off, char *dst, size_t dstsize, int skip, int ts, gboo
 
     dst[sz] = lastch;
     for (i = 0; i < sz && dst[i] != '\n'; i++)
-    {
         if (dst[i] == '\r' && dst[i + 1] == '\n')
         {
             if (show_cr)
@@ -1653,13 +1657,10 @@ cvt_fget (FBUF * f, off_t off, char *dst, size_t dstsize, int skip, int ts, gboo
                     dst[i++] = 'M';
                 }
                 else
-                {
                     dst[i++] = '*';
-                }
             }
             break;
         }
-    }
 
     for (; i < dstsize; i++)
         dst[i] = ' ';
@@ -1741,8 +1742,8 @@ redo_diff (WDiff * dview)
     PRINTER_CTX ctx;
     GArray *ops;
     int ndiff;
-    int rv;
-    char extra[256];
+    int rv = 0;
+    char extra[BUF_MEDIUM];
 
     extra[0] = '\0';
     if (dview->opt.quality == 2)
@@ -1776,8 +1777,6 @@ redo_diff (WDiff * dview)
     }
 
     ctx.dsrc = dview->dsrc;
-
-    rv = 0;
     ctx.a = dview->a[DIFF_LEFT];
     ctx.f = f[DIFF_LEFT];
     rv |= dff_reparse (DIFF_LEFT, dview->file[DIFF_LEFT], ops, printer, &ctx);
@@ -1813,7 +1812,7 @@ redo_diff (WDiff * dview)
 
                 p = &g_array_index (dview->a[DIFF_LEFT], DIFFLN, i);
                 q = &g_array_index (dview->a[DIFF_RIGHT], DIFFLN, i);
-                if (p->line && q->line && p->ch == CHG_CH)
+                if (p->line != 0 && q->line != 0 && p->ch == CHG_CH)
                 {
                     h = g_array_new (FALSE, FALSE, sizeof (BRACKET));
                     if (h != NULL)
@@ -1874,7 +1873,7 @@ get_digits (unsigned int n)
 {
     int d = 1;
 
-    while (n /= 10)
+    while ((n /= 10) != 0)
         d++;
     return d;
 }
@@ -2090,8 +2089,7 @@ dview_add_hunk (WDiff * dview, FILE * merge_file, int from1, int from2, int to2,
 {
     int line;
     char buf[BUF_10K];
-    FILE *f0;
-    FILE *f1;
+    FILE *f0, *f1;
 
     if (merge_direction == FROM_RIGHT_TO_LEFT)
     {
@@ -2141,10 +2139,10 @@ static void
 dview_replace_hunk (WDiff * dview, FILE * merge_file, int from1, int to1, int from2, int to2,
                     action_direction_t merge_direction)
 {
-    int line1 = 0, line2 = 0;
+    int line1 = 0;
+    int line2 = 0;
     char buf[BUF_10K];
-    FILE *f0;
-    FILE *f1;
+    FILE *f0, *f1;
 
     if (merge_direction == FROM_RIGHT_TO_LEFT)
     {
@@ -2605,12 +2603,12 @@ dview_display_file (const WDiff * dview, diff_place_t ord, int r, int c, int hei
 
     if (xwidth != 0)
     {
-        if (xwidth > width && display_symbols)
+        if (xwidth > width && display_symbols != 0)
         {
             xwidth--;
             display_symbols = 0;
         }
-        if (xwidth > width && display_numbers)
+        if (xwidth > width && display_numbers != 0)
         {
             xwidth = width;
             display_numbers = width;
@@ -2631,20 +2629,22 @@ dview_display_file (const WDiff * dview, diff_place_t ord, int r, int c, int hei
 
     for (i = dview->skip_rows, j = 0; i < dview->a[ord]->len && j < height; j++, i++)
     {
-        int ch, next_ch = 0, col;
+        int ch;
+        int next_ch = 0;
+        int col;
         size_t cnt;
 
         p = (DIFFLN *) & g_array_index (dview->a[ord], DIFFLN, i);
         ch = p->ch;
         tty_setcolor (NORMAL_COLOR);
-        if (display_symbols)
+        if (display_symbols != 0)
         {
             tty_gotoyx (r + j, c - 2);
             tty_print_char (ch);
         }
         if (p->line != 0)
         {
-            if (display_numbers)
+            if (display_numbers != 0)
             {
                 tty_gotoyx (r + j, c - xwidth);
                 g_snprintf (buf, display_numbers + 1, "%*d", nwidth, p->line);
@@ -2734,7 +2734,7 @@ dview_display_file (const WDiff * dview, diff_place_t ord, int r, int c, int hei
         }
         else
         {
-            if (display_numbers)
+            if (display_numbers != 0)
             {
                 tty_gotoyx (r + j, c - xwidth);
                 memset (buf, ' ', display_numbers);
@@ -2776,10 +2776,8 @@ dview_display_file (const WDiff * dview, diff_place_t ord, int r, int c, int hei
                 if (mc_global.utf8_display)
                 {
                     if (!dview->utf8)
-                    {
                         next_ch =
                             convert_from_8bit_to_utf_c ((unsigned char) next_ch, dview->converter);
-                    }
                 }
                 else if (dview->utf8)
                     next_ch = convert_from_utf_to_current_c (next_ch, dview->converter);
@@ -2852,7 +2850,7 @@ dview_status (const WDiff * dview, diff_place_t ord, int width, int c)
 static void
 dview_redo (WDiff * dview)
 {
-    if (dview->display_numbers)
+    if (dview->display_numbers != 0)
     {
         int old;
 
@@ -2869,8 +2867,7 @@ static void
 dview_update (WDiff * dview)
 {
     int height = dview->height;
-    int width1;
-    int width2;
+    int width1, width2;
     int last;
 
     last = dview->a[DIFF_LEFT]->len - 1;
@@ -2938,8 +2935,11 @@ dview_update (WDiff * dview)
     }
     if (width2 > 2)
     {
-        dview_status (dview, dview->ord ^ 1, width2, width1);
-        dview_display_file (dview, dview->ord ^ 1, 2, width1 + 1, height - 2, width2 - 2);
+        diff_place_t ord;
+
+        ord = dview->ord == DIFF_LEFT ? DIFF_RIGHT : DIFF_LEFT;
+        dview_status (dview, ord, width2, width1);
+        dview_display_file (dview, ord, 2, width1 + 1, height - 2, width2 - 2);
     }
 }
 
@@ -3008,7 +3008,6 @@ dview_goto_cmd (WDiff * dview, diff_place_t ord)
             size_t i = 0;
 
             if (newline > 0)
-            {
                 for (; i < dview->a[ord]->len; i++)
                 {
                     const DIFFLN *p;
@@ -3017,9 +3016,10 @@ dview_goto_cmd (WDiff * dview, diff_place_t ord)
                     if (p->line == newline)
                         break;
                 }
-            }
+
             dview->skip_rows = dview->search.last_accessed_num_line = (ssize_t) i;
         }
+
         g_free (input);
     }
 
@@ -3129,7 +3129,7 @@ dview_execute_cmd (WDiff * dview, long command)
     switch (command)
     {
     case CK_ShowSymbols:
-        dview->display_symbols ^= 1;
+        dview->display_symbols = dview->display_symbols == 0 ? 1 : 0;
         dview->new_frame = TRUE;
         break;
     case CK_ShowNumbers:
@@ -3506,9 +3506,9 @@ while (0)
 #define UNGET_FILE(n) \
 do \
 { \
-    if (use_copy##n) \
+    if (use_copy##n != 0) \
     { \
-        int changed = 0; \
+        gboolean changed = FALSE; \
         if (use_copy##n > 0) \
         { \
             time_t mtime; \
@@ -3538,8 +3538,7 @@ dview_diff_cmd (const void *f0, const void *f1)
             /* run from panels */
             const WPanel *panel0 = (const WPanel *) f0;
             const WPanel *panel1 = (const WPanel *) f1;
-            const file_entry_t *fe0;
-            const file_entry_t *fe1;
+            const file_entry_t *fe0, *fe1;
 
             fe0 = panel_current_entry (panel0);
             file0 = vfs_path_append_new (panel0->cwd_vpath, fe0->fname->str, (char *) NULL);
@@ -3617,12 +3616,9 @@ dview_diff_cmd (const void *f0, const void *f1)
         rv = -1;
         if (file0 != NULL && file1 != NULL)
         {
-            int use_copy0;
-            int use_copy1;
-            struct stat st0;
-            struct stat st1;
-            vfs_path_t *real_file0;
-            vfs_path_t *real_file1;
+            int use_copy0, use_copy1;
+            struct stat st0, st1;
+            vfs_path_t *real_file0, *real_file1;
 
             GET_FILE_AND_STAMP (0);
             GET_FILE_AND_STAMP (1);
