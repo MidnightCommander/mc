@@ -1813,18 +1813,16 @@ redo_diff (WDiff * dview)
             q = &g_array_index (dview->a[DIFF_RIGHT], DIFFLN, i);
             if (p->line != 0 && q->line != 0 && p->ch == CHG_CH)
             {
-                h = g_array_new (FALSE, FALSE, sizeof (BRACKET));
-                if (h != NULL)
-                {
-                    gboolean runresult;
+                gboolean runresult;
 
-                    runresult =
-                        hdiff_scan (p->p, p->u.len, q->p, q->u.len, HDIFF_MINCTX, h, HDIFF_DEPTH);
-                    if (!runresult)
-                    {
-                        g_array_free (h, TRUE);
-                        h = NULL;
-                    }
+                h = g_array_new (FALSE, FALSE, sizeof (BRACKET));
+
+                runresult =
+                    hdiff_scan (p->p, p->u.len, q->p, q->u.len, HDIFF_MINCTX, h, HDIFF_DEPTH);
+                if (!runresult)
+                {
+                    g_array_free (h, TRUE);
+                    h = NULL;
                 }
             }
 
