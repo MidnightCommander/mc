@@ -87,6 +87,8 @@ struct tar_stat_info current_stat_info;
 #define XGLTYPE 'g'             /* Global extended header */
 
 /* Values used in typeflag field.  */
+#define REGTYPE  '0'            /* regular file */
+#define AREGTYPE '\0'           /* regular file */
 #define LNKTYPE  '1'            /* link */
 #define SYMTYPE  '2'            /* symbolic link */
 #define CHRTYPE  '3'            /* character special */
@@ -304,7 +306,7 @@ tar_skip_member (tar_super_t * archive, struct vfs_s_inode *inode)
     }
     else if (save_typeflag != DIRTYPE)
     {
-        if (inode != NULL)
+        if (inode != NULL && (save_typeflag == REGTYPE || save_typeflag == AREGTYPE))
             inode->data_offset = BLOCKSIZE * tar_current_block_ordinal (archive);
 
         return tar_skip_file (archive, current_stat_info.stat.st_size);
@@ -588,7 +590,6 @@ tar_insert_entry (struct vfs_class *me, struct vfs_s_super *archive, union block
         (*inode)->st.st_mtime = current_stat_info.mtime.tv_sec;
         (*inode)->st.st_atime = current_stat_info.atime.tv_sec;
         (*inode)->st.st_ctime = current_stat_info.ctime.tv_sec;
-        (*inode)->data_offset = BLOCKSIZE * tar_current_block_ordinal (TAR_SUPER (archive));
 
         if (link_name != NULL && *link_name != '\0')
             (*inode)->linkname = g_strdup (link_name);
