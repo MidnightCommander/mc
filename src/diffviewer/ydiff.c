@@ -1150,8 +1150,6 @@ hdiff_multi (const char *s, const char *t, const BRACKET bracket, int min, GArra
         int len;
 
         ret = g_array_new (FALSE, TRUE, sizeof (PAIR));
-        if (ret == NULL)
-            return FALSE;
 
         len = lcsubstr (s + bracket[DIFF_LEFT].off, bracket[DIFF_LEFT].len,
                         t + bracket[DIFF_RIGHT].off, bracket[DIFF_RIGHT].len, ret, min);
