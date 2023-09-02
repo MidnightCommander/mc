@@ -183,7 +183,7 @@ open_temp (void **name)
  */
 
 static FBUF *
-f_dopen (int fd)
+dview_fdopen (int fd)
 {
     FBUF *fs;
 
@@ -219,7 +219,7 @@ f_dopen (int fd)
  */
 
 static int
-f_free (FBUF * fs)
+dview_ffree (FBUF * fs)
 {
     int rv = 0;
 
@@ -242,19 +242,19 @@ f_free (FBUF * fs)
  * @return file structure
  */
 static FBUF *
-f_temp (void)
+dview_ftemp (void)
 {
     int fd;
     FBUF *fs;
 
-    fs = f_dopen (0);
+    fs = dview_fdopen (0);
     if (fs == NULL)
         return NULL;
 
     fd = open_temp (&fs->data);
     if (fd < 0)
     {
-        f_free (fs);
+        dview_ffree (fs);
         return NULL;
     }
 
@@ -275,19 +275,19 @@ f_temp (void)
  */
 
 static FBUF *
-f_open (const char *filename, int flags)
+dview_fopen (const char *filename, int flags)
 {
     int fd;
     FBUF *fs;
 
-    fs = f_dopen (0);
+    fs = dview_fdopen (0);
     if (fs == NULL)
         return NULL;
 
     fd = open (filename, flags);
     if (fd < 0)
     {
-        f_free (fs);
+        dview_ffree (fs);
         return NULL;
     }
 
@@ -310,7 +310,7 @@ f_open (const char *filename, int flags)
  */
 
 static size_t
-f_gets (char *buf, size_t size, FBUF * fs)
+dview_fgets (char *buf, size_t size, FBUF * fs)
 {
     size_t j = 0;
 
@@ -352,7 +352,7 @@ f_gets (char *buf, size_t size, FBUF * fs)
  */
 
 static off_t
-f_seek (FBUF * fs, off_t off, int whence)
+dview_fseek (FBUF * fs, off_t off, int whence)
 {
     off_t rv;
 
@@ -391,7 +391,7 @@ f_seek (FBUF * fs, off_t off, int whence)
  */
 
 static off_t
-f_reset (FBUF * fs)
+dview_freset (FBUF * fs)
 {
     off_t rv;
 
@@ -415,7 +415,7 @@ f_reset (FBUF * fs)
  */
 
 static ssize_t
-f_write (FBUF * fs, const char *buf, size_t size)
+dview_fwrite (FBUF * fs, const char *buf, size_t size)
 {
     ssize_t rv;
 
@@ -437,7 +437,7 @@ f_write (FBUF * fs, const char *buf, size_t size)
  */
 
 static off_t
-f_trunc (FBUF * fs)
+dview_ftrunc (FBUF * fs)
 {
     off_t off;
 
@@ -466,14 +466,14 @@ f_trunc (FBUF * fs)
  */
 
 static int
-f_close (FBUF * fs)
+dview_fclose (FBUF * fs)
 {
     int rv = -1;
 
     if (fs != NULL)
     {
         rv = close (fs->fd);
-        f_free (fs);
+        dview_ffree (fs);
     }
 
     return rv;
@@ -491,7 +491,7 @@ f_close (FBUF * fs)
  */
 
 static FBUF *
-p_open (const char *cmd, int flags)
+dview_popen (const char *cmd, int flags)
 {
     FILE *f;
     FBUF *fs;
@@ -505,14 +505,14 @@ p_open (const char *cmd, int flags)
     if (type == NULL)
         return NULL;
 
-    fs = f_dopen (0);
+    fs = dview_fdopen (0);
     if (fs == NULL)
         return NULL;
 
     f = popen (cmd, type);
     if (f == NULL)
     {
-        f_free (fs);
+        dview_ffree (fs);
         return NULL;
     }
 
@@ -531,14 +531,14 @@ p_open (const char *cmd, int flags)
  */
 
 static int
-p_close (FBUF * fs)
+dview_pclose (FBUF * fs)
 {
     int rv = -1;
 
     if (fs != NULL)
     {
         rv = pclose (fs->data);
-        f_free (fs);
+        dview_ffree (fs);
     }
 
     return rv;
@@ -754,7 +754,7 @@ scan_diff (FBUF * f, GArray * ops)
     int sz;
     char buf[BUFSIZ];
 
-    while ((sz = f_gets (buf, sizeof (buf) - 1, f)) != 0)
+    while ((sz = dview_fgets (buf, sizeof (buf) - 1, f)) != 0)
     {
         if (isdigit (buf[0]))
         {
@@ -768,7 +768,7 @@ scan_diff (FBUF * f, GArray * ops)
             continue;
         }
 
-        while (buf[sz - 1] != '\n' && (sz = f_gets (buf, sizeof (buf), f)) != 0)
+        while (buf[sz - 1] != '\n' && (sz = dview_fgets (buf, sizeof (buf), f)) != 0)
             ;
     }
 
@@ -815,14 +815,14 @@ dff_execute (const char *args, const char *extra, const char *file1, const char 
     if (cmd == NULL)
         return -1;
 
-    f = p_open (cmd, O_RDONLY);
+    f = dview_popen (cmd, O_RDONLY);
     g_free (cmd);
 
     if (f == NULL)
         return -1;
 
     rv = scan_diff (f, ops);
-    code = p_close (f);
+    code = dview_pclose (f);
 
     if (rv < 0 || code == -1 || !WIFEXITED (code) || WEXITSTATUS (code) == 2)
         rv = -1;
@@ -857,7 +857,7 @@ dff_reparse (diff_place_t ord, const char *filename, const GArray * ops, DFUNC p
     diff_place_t eff;
     int add_cmd, del_cmd;
 
-    f = f_open (filename, O_RDONLY);
+    f = dview_fopen (filename, O_RDONLY);
     if (f == NULL)
         return -1;
 
@@ -889,14 +889,14 @@ dff_reparse (diff_place_t ord, const char *filename, const GArray * ops, DFUNC p
         if (op->cmd != add_cmd)
             n--;
 
-        while (line < n && (sz = f_gets (buf, sizeof (buf), f)) != 0)
+        while (line < n && (sz = dview_fgets (buf, sizeof (buf), f)) != 0)
         {
             line++;
             printer (ctx, EQU_CH, line, off, sz, buf);
             off += sz;
             while (buf[sz - 1] != '\n')
             {
-                sz = f_gets (buf, sizeof (buf), f);
+                sz = dview_fgets (buf, sizeof (buf), f);
                 if (sz == 0)
                 {
                     printer (ctx, 0, 0, 0, 1, "\n");
@@ -923,14 +923,14 @@ dff_reparse (diff_place_t ord, const char *filename, const GArray * ops, DFUNC p
         if (op->cmd == del_cmd)
         {
             n = op->F2 - op->F1 + 1;
-            while (n != 0 && (sz = f_gets (buf, sizeof (buf), f)) != 0)
+            while (n != 0 && (sz = dview_fgets (buf, sizeof (buf), f)) != 0)
             {
                 line++;
                 printer (ctx, ADD_CH, line, off, sz, buf);
                 off += sz;
                 while (buf[sz - 1] != '\n')
                 {
-                    sz = f_gets (buf, sizeof (buf), f);
+                    sz = dview_fgets (buf, sizeof (buf), f);
                     if (sz == 0)
                     {
                         printer (ctx, 0, 0, 0, 1, "\n");
@@ -949,14 +949,14 @@ dff_reparse (diff_place_t ord, const char *filename, const GArray * ops, DFUNC p
         if (op->cmd == 'c')
         {
             n = op->F2 - op->F1 + 1;
-            while (n != 0 && (sz = f_gets (buf, sizeof (buf), f)) != 0)
+            while (n != 0 && (sz = dview_fgets (buf, sizeof (buf), f)) != 0)
             {
                 line++;
                 printer (ctx, CHG_CH, line, off, sz, buf);
                 off += sz;
                 while (buf[sz - 1] != '\n')
                 {
-                    sz = f_gets (buf, sizeof (buf), f);
+                    sz = dview_fgets (buf, sizeof (buf), f);
                     if (sz == 0)
                     {
                         printer (ctx, 0, 0, 0, 1, "\n");
@@ -984,14 +984,14 @@ dff_reparse (diff_place_t ord, const char *filename, const GArray * ops, DFUNC p
 #undef F2
 #undef F1
 
-    while ((sz = f_gets (buf, sizeof (buf), f)) != 0)
+    while ((sz = dview_fgets (buf, sizeof (buf), f)) != 0)
     {
         line++;
         printer (ctx, EQU_CH, line, off, sz, buf);
         off += sz;
         while (buf[sz - 1] != '\n')
         {
-            sz = f_gets (buf, sizeof (buf), f);
+            sz = dview_fgets (buf, sizeof (buf), f);
             if (sz == 0)
             {
                 printer (ctx, 0, 0, 0, 1, "\n");
@@ -1002,11 +1002,11 @@ dff_reparse (diff_place_t ord, const char *filename, const GArray * ops, DFUNC p
         }
     }
 
-    f_close (f);
+    dview_fclose (f);
     return 0;
 
   err:
-    f_close (f);
+    dview_fclose (f);
     return -1;
 }
 
@@ -1576,12 +1576,12 @@ cvt_fget (FBUF * f, off_t off, char *dst, size_t dstsize, int skip, int ts, gboo
         return 0;
     }
 
-    f_seek (f, off, SEEK_SET);
+    dview_fseek (f, off, SEEK_SET);
 
     while (skip > base)
     {
         old_base = base;
-        sz = f_gets (tmp, amount, f);
+        sz = dview_fgets (tmp, amount, f);
         if (sz == 0)
             break;
 
@@ -1611,7 +1611,7 @@ cvt_fget (FBUF * f, off_t off, char *dst, size_t dstsize, int skip, int ts, gboo
 
         if (q == NULL)
         {
-            sz = f_gets (tmp, dstsize - useful + 1, f);
+            sz = dview_fgets (tmp, dstsize - useful + 1, f);
             if (sz != 0)
             {
                 const char *ptr = tmp;
@@ -1713,7 +1713,7 @@ printer (void *ctx, int ch, int line, off_t off, size_t sz, const char *str)
     if (dsrc == DATA_SRC_TMP && (line != 0 || ch == 0))
     {
         FBUF *f = ((PRINTER_CTX *) ctx)->f;
-        f_write (f, str, sz);
+        dview_fwrite (f, str, sz);
     }
     return 0;
 }
@@ -1748,8 +1748,8 @@ redo_diff (WDiff * dview)
 
     if (dview->dsrc != DATA_SRC_MEM)
     {
-        f_reset (f[DIFF_LEFT]);
-        f_reset (f[DIFF_RIGHT]);
+        dview_freset (f[DIFF_LEFT]);
+        dview_freset (f[DIFF_RIGHT]);
     }
 
     ops = g_array_new (FALSE, FALSE, sizeof (DIFFCMD));
@@ -1778,8 +1778,8 @@ redo_diff (WDiff * dview)
 
     if (dview->dsrc == DATA_SRC_TMP)
     {
-        f_trunc (f[DIFF_LEFT]);
-        f_trunc (f[DIFF_RIGHT]);
+        dview_ftrunc (f[DIFF_LEFT]);
+        dview_ftrunc (f[DIFF_RIGHT]);
     }
 
     if (dview->dsrc == DATA_SRC_MEM && HDIFF_ENABLE)
@@ -2441,27 +2441,27 @@ dview_init (WDiff * dview, const char *args, const char *file1, const char *file
 
     if (dsrc == DATA_SRC_TMP)
     {
-        f[DIFF_LEFT] = f_temp ();
+        f[DIFF_LEFT] = dview_ftemp ();
         if (f[DIFF_LEFT] == NULL)
             return -1;
 
-        f[DIFF_RIGHT] = f_temp ();
+        f[DIFF_RIGHT] = dview_ftemp ();
         if (f[DIFF_RIGHT] == NULL)
         {
-            f_close (f[DIFF_LEFT]);
+            dview_fclose (f[DIFF_LEFT]);
             return -1;
         }
     }
     else if (dsrc == DATA_SRC_ORG)
     {
-        f[DIFF_LEFT] = f_open (file1, O_RDONLY);
+        f[DIFF_LEFT] = dview_fopen (file1, O_RDONLY);
         if (f[DIFF_LEFT] == NULL)
             return -1;
 
-        f[DIFF_RIGHT] = f_open (file2, O_RDONLY);
+        f[DIFF_RIGHT] = dview_fopen (file2, O_RDONLY);
         if (f[DIFF_RIGHT] == NULL)
         {
-            f_close (f[DIFF_LEFT]);
+            dview_fclose (f[DIFF_LEFT]);
             return -1;
         }
     }
@@ -2510,8 +2510,8 @@ dview_init (WDiff * dview, const char *args, const char *file1, const char *file
     if (ndiff < 0)
     {
         /* goto MSG_DESTROY stage: dview_fini() */
-        f_close (f[DIFF_LEFT]);
-        f_close (f[DIFF_RIGHT]);
+        dview_fclose (f[DIFF_LEFT]);
+        dview_fclose (f[DIFF_RIGHT]);
         return -1;
     }
 
@@ -2529,8 +2529,8 @@ dview_fini (WDiff * dview)
 {
     if (dview->dsrc != DATA_SRC_MEM)
     {
-        f_close (dview->f[DIFF_RIGHT]);
-        f_close (dview->f[DIFF_LEFT]);
+        dview_fclose (dview->f[DIFF_RIGHT]);
+        dview_fclose (dview->f[DIFF_LEFT]);
     }
 
 #ifdef HAVE_CHARSET
