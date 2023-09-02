@@ -847,6 +847,38 @@ dff_execute (const char *args, const char *extra, const char *file1, const char 
 
 /* --------------------------------------------------------------------------------------------- */
 
+static gboolean
+printer_for (char ch, DFUNC printer, void *ctx, FBUF * f, int *line, off_t * off)
+{
+    size_t sz;
+    char buf[BUFSIZ];
+
+    sz = dview_fgets (buf, sizeof (buf), f);
+    if (sz == 0)
+        return FALSE;
+
+    (*line)++;
+    printer (ctx, ch, *line, *off, sz, buf);
+    *off += sz;
+
+    while (buf[sz - 1] != '\n')
+    {
+        sz = dview_fgets (buf, sizeof (buf), f);
+        if (sz == 0)
+        {
+            printer (ctx, 0, 0, 0, 1, "\n");
+            break;
+        }
+
+        printer (ctx, 0, 0, 0, sz, buf);
+        *off += sz;
+    }
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 /**
  * Reparse and display file according to diff statements.
  *
@@ -864,8 +896,6 @@ dff_reparse (diff_place_t ord, const char *filename, const GArray * ops, DFUNC p
 {
     size_t i;
     FBUF *f;
-    size_t sz;
-    char buf[BUFSIZ];
     int line = 0;
     off_t off = 0;
     const DIFFCMD *op;
@@ -904,23 +934,8 @@ dff_reparse (diff_place_t ord, const char *filename, const GArray * ops, DFUNC p
         if (op->cmd != add_cmd)
             n--;
 
-        while (line < n && (sz = dview_fgets (buf, sizeof (buf), f)) != 0)
-        {
-            line++;
-            printer (ctx, EQU_CH, line, off, sz, buf);
-            off += sz;
-            while (buf[sz - 1] != '\n')
-            {
-                sz = dview_fgets (buf, sizeof (buf), f);
-                if (sz == 0)
-                {
-                    printer (ctx, 0, 0, 0, 1, "\n");
-                    break;
-                }
-                printer (ctx, 0, 0, 0, sz, buf);
-                off += sz;
-            }
-        }
+        while (line < n && printer_for (EQU_CH, printer, ctx, f, &line, &off))
+            ;
 
         if (line != n)
             goto err;
@@ -931,24 +946,9 @@ dff_reparse (diff_place_t ord, const char *filename, const GArray * ops, DFUNC p
 
         if (op->cmd == del_cmd)
         {
-            for (n = op->F2 - op->F1 + 1; n != 0 && (sz = dview_fgets (buf, sizeof (buf), f)) != 0;
-                 n--)
-            {
-                line++;
-                printer (ctx, ADD_CH, line, off, sz, buf);
-                off += sz;
-                while (buf[sz - 1] != '\n')
-                {
-                    sz = dview_fgets (buf, sizeof (buf), f);
-                    if (sz == 0)
-                    {
-                        printer (ctx, 0, 0, 0, 1, "\n");
-                        break;
-                    }
-                    printer (ctx, 0, 0, 0, sz, buf);
-                    off += sz;
-                }
-            }
+            for (n = op->F2 - op->F1 + 1;
+                 n != 0 && printer_for (ADD_CH, printer, ctx, f, &line, &off); n--)
+                ;
 
             if (n != 0)
                 goto err;
@@ -957,23 +957,8 @@ dff_reparse (diff_place_t ord, const char *filename, const GArray * ops, DFUNC p
         if (op->cmd == 'c')
         {
             for (n = op->F2 - op->F1 + 1;
-                 n != 0 && (sz = dview_fgets (buf, sizeof (buf), f)) != 0; n--)
-            {
-                line++;
-                printer (ctx, CHG_CH, line, off, sz, buf);
-                off += sz;
-                while (buf[sz - 1] != '\n')
-                {
-                    sz = dview_fgets (buf, sizeof (buf), f);
-                    if (sz == 0)
-                    {
-                        printer (ctx, 0, 0, 0, 1, "\n");
-                        break;
-                    }
-                    printer (ctx, 0, 0, 0, sz, buf);
-                    off += sz;
-                }
-            }
+                 n != 0 && printer_for (CHG_CH, printer, ctx, f, &line, &off); n--)
+                ;
 
             if (n != 0)
                 goto err;
@@ -987,23 +972,8 @@ dff_reparse (diff_place_t ord, const char *filename, const GArray * ops, DFUNC p
 #undef F2
 #undef F1
 
-    while ((sz = dview_fgets (buf, sizeof (buf), f)) != 0)
-    {
-        line++;
-        printer (ctx, EQU_CH, line, off, sz, buf);
-        off += sz;
-        while (buf[sz - 1] != '\n')
-        {
-            sz = dview_fgets (buf, sizeof (buf), f);
-            if (sz == 0)
-            {
-                printer (ctx, 0, 0, 0, 1, "\n");
-                break;
-            }
-            printer (ctx, 0, 0, 0, sz, buf);
-            off += sz;
-        }
-    }
+    while (printer_for (EQU_CH, printer, ctx, f, &line, &off))
+        ;
 
     dview_fclose (f);
     return 0;
