@@ -781,12 +781,10 @@ scan_diff (FBUF * f, GArray * ops)
             buf[sz] = '\0';
             if (scan_line (buf, ops) != 0)
                 return -1;
-
-            continue;
         }
-
-        while (buf[sz - 1] != '\n' && (sz = dview_fgets (buf, sizeof (buf), f)) != 0)
-            ;
+        else
+            while (buf[sz - 1] != '\n' && (sz = dview_fgets (buf, sizeof (buf), f)) != 0)
+                ;
     }
 
     return ops->len;
