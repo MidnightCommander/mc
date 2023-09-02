@@ -118,6 +118,23 @@ TAB_SKIP (int ts, int pos)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/**
+ * Fill buffer by spaces
+ *
+ * @param buf buffer
+ * @param n number of spaces
+ * @param zero_terminate add a nul after @n spaces
+ */
+static void
+fill_by_space (char *buf, size_t n, gboolean zero_terminate)
+{
+    memset (buf, ' ', n);
+    if (zero_terminate)
+        buf[n] = '\0';
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static gboolean
 rewrite_backup_content (const vfs_path_t * from_file_name_vpath, const char *to_file_name)
 {
@@ -1285,9 +1302,8 @@ cvt_cpy (char *dst, const char *src, size_t srcsize, int base, int ts)
 
             j = TAB_SKIP (ts, i + base);
             i += j - 1;
-            while (j-- > 0)
-                *dst++ = ' ';
-            dst--;
+            fill_by_space (dst, j, FALSE);
+            dst += j - 1;
         }
     }
     return i + base;
@@ -1329,9 +1345,8 @@ cvt_ncpy (char *dst, int dstsize, const char **_src, size_t srcsize, int base, i
             if (j > dstsize - i)
                 j = dstsize - i;
             i += j - 1;
-            while (j-- > 0)
-                *dst++ = ' ';
-            dst--;
+            fill_by_space (dst, j, FALSE);
+            dst += j - 1;
         }
     }
     *_src = src;
@@ -1425,12 +1440,9 @@ cvt_mget (const char *src, size_t srcsize, char *dst, int dstsize, int skip, int
         }
         sz = dst - tmp;
     }
-    while (dstsize != 0)
-    {
-        dstsize--;
-        *dst++ = ' ';
-    }
-    *dst = '\0';
+
+    fill_by_space (dst, dstsize, TRUE);
+
     return sz;
 }
 
@@ -1528,13 +1540,10 @@ cvt_mgeta (const char *src, size_t srcsize, char *dst, int dstsize, int skip, in
         }
         sz = dst - tmp;
     }
-    while (dstsize != 0)
-    {
-        dstsize--;
-        *att++ = '\0';
-        *dst++ = ' ';
-    }
-    *dst = '\0';
+
+    memset (att, '\0', dstsize);
+    fill_by_space (dst, dstsize, TRUE);
+
     return sz;
 }
 
@@ -1571,8 +1580,7 @@ cvt_fget (FBUF * f, off_t off, char *dst, size_t dstsize, int skip, int ts, gboo
     if (sizeof (tmp) < amount || sizeof (tmp) <= dstsize || sizeof (cvt) < 8 * amount)
     {
         /* abnormal, but avoid buffer overflow */
-        memset (dst, ' ', dstsize);
-        dst[dstsize] = '\0';
+        fill_by_space (dst, dstsize, TRUE);
         return 0;
     }
 
@@ -1596,8 +1604,7 @@ cvt_fget (FBUF * f, off_t off, char *dst, size_t dstsize, int skip, int ts, gboo
 
     if (base < skip)
     {
-        memset (dst, ' ', dstsize);
-        dst[dstsize] = '\0';
+        fill_by_space (dst, dstsize, TRUE);
         return 0;
     }
 
@@ -1647,9 +1654,8 @@ cvt_fget (FBUF * f, off_t off, char *dst, size_t dstsize, int skip, int ts, gboo
             break;
         }
 
-    for (; i < dstsize; i++)
-        dst[i] = ' ';
-    dst[i] = '\0';
+    fill_by_space (dst, dstsize, TRUE);
+
     return sz;
 }
 
@@ -2714,16 +2720,14 @@ dview_display_file (const WDiff * dview, diff_place_t ord, int r, int c, int hei
             if (display_numbers != 0)
             {
                 tty_gotoyx (r + j, c - xwidth);
-                memset (buf, ' ', display_numbers);
-                buf[display_numbers] = '\0';
+                fill_by_space (buf, display_numbers, TRUE);
                 tty_print_string (buf);
             }
             if (ch == DEL_CH)
                 tty_setcolor (DFF_DEL_COLOR);
             if (ch == CHG_CH)
                 tty_setcolor (DFF_CHD_COLOR);
-            memset (buf, ' ', width);
-            buf[width] = '\0';
+            fill_by_space (buf, width, TRUE);
         }
         tty_gotoyx (r + j, c);
         /* tty_print_nstring (buf, width); */
@@ -2771,8 +2775,7 @@ dview_display_file (const WDiff * dview, diff_place_t ord, int r, int c, int hei
     k = width;
     if (width < xwidth - 1)
         k = xwidth - 1;
-    memset (buf, ' ', k);
-    buf[k] = '\0';
+    fill_by_space (buf, k, TRUE);
     for (; j < height; j++)
     {
         if (xwidth != 0)
