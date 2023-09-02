@@ -926,19 +926,13 @@ dff_reparse (diff_place_t ord, const char *filename, const GArray * ops, DFUNC p
             goto err;
 
         if (op->cmd == add_cmd)
-        {
-            n = op->T2 - op->T1 + 1;
-            while (n != 0)
-            {
+            for (n = op->T2 - op->T1 + 1; n != 0; n--)
                 printer (ctx, DEL_CH, 0, 0, 1, "\n");
-                n--;
-            }
-        }
 
         if (op->cmd == del_cmd)
         {
-            n = op->F2 - op->F1 + 1;
-            while (n != 0 && (sz = dview_fgets (buf, sizeof (buf), f)) != 0)
+            for (n = op->F2 - op->F1 + 1; n != 0 && (sz = dview_fgets (buf, sizeof (buf), f)) != 0;
+                 n--)
             {
                 line++;
                 printer (ctx, ADD_CH, line, off, sz, buf);
@@ -954,7 +948,6 @@ dff_reparse (diff_place_t ord, const char *filename, const GArray * ops, DFUNC p
                     printer (ctx, 0, 0, 0, sz, buf);
                     off += sz;
                 }
-                n--;
             }
 
             if (n != 0)
@@ -963,8 +956,8 @@ dff_reparse (diff_place_t ord, const char *filename, const GArray * ops, DFUNC p
 
         if (op->cmd == 'c')
         {
-            n = op->F2 - op->F1 + 1;
-            while (n != 0 && (sz = dview_fgets (buf, sizeof (buf), f)) != 0)
+            for (n = op->F2 - op->F1 + 1;
+                 n != 0 && (sz = dview_fgets (buf, sizeof (buf), f)) != 0; n--)
             {
                 line++;
                 printer (ctx, CHG_CH, line, off, sz, buf);
@@ -980,18 +973,13 @@ dff_reparse (diff_place_t ord, const char *filename, const GArray * ops, DFUNC p
                     printer (ctx, 0, 0, 0, sz, buf);
                     off += sz;
                 }
-                n--;
             }
 
             if (n != 0)
                 goto err;
 
-            n = op->T2 - op->T1 - (op->F2 - op->F1);
-            while (n > 0)
-            {
+            for (n = op->T2 - op->T1 - (op->F2 - op->F1); n > 0; n--)
                 printer (ctx, CHG_CH, 0, 0, 1, "\n");
-                n--;
-            }
         }
     }
 #undef T2
@@ -1919,19 +1907,19 @@ static int
 find_prev_hunk (const GArray * a, int pos)
 {
 #if 1
-    while (pos > 0 && ((DIFFLN *) & g_array_index (a, DIFFLN, pos))->ch != EQU_CH)
-        pos--;
-    while (pos > 0 && ((DIFFLN *) & g_array_index (a, DIFFLN, pos))->ch == EQU_CH)
-        pos--;
-    while (pos > 0 && ((DIFFLN *) & g_array_index (a, DIFFLN, pos))->ch != EQU_CH)
-        pos--;
+    for (; pos > 0 && ((DIFFLN *) & g_array_index (a, DIFFLN, pos))->ch != EQU_CH; pos--)
+        ;
+    for (; pos > 0 && ((DIFFLN *) & g_array_index (a, DIFFLN, pos))->ch == EQU_CH; pos--)
+        ;
+    for (; pos > 0 && ((DIFFLN *) & g_array_index (a, DIFFLN, pos))->ch != EQU_CH; pos--)
+        ;
     if (pos > 0 && (size_t) pos < a->len)
         pos++;
 #else
-    while (pos > 0 && ((DIFFLN *) & g_array_index (a, DIFFLN, pos - 1))->ch == EQU_CH)
-        pos--;
-    while (pos > 0 && ((DIFFLN *) & g_array_index (a, DIFFLN, pos - 1))->ch != EQU_CH)
-        pos--;
+    for (; pos > 0 && ((DIFFLN *) & g_array_index (a, DIFFLN, pos - 1))->ch == EQU_CH; pos--)
+        ;
+    for (; pos > 0 && ((DIFFLN *) & g_array_index (a, DIFFLN, pos - 1))->ch != EQU_CH; pos--)
+        ;
 #endif
 
     return pos;
@@ -1942,10 +1930,10 @@ find_prev_hunk (const GArray * a, int pos)
 static size_t
 find_next_hunk (const GArray * a, size_t pos)
 {
-    while (pos < a->len && ((DIFFLN *) & g_array_index (a, DIFFLN, pos))->ch != EQU_CH)
-        pos++;
-    while (pos < a->len && ((DIFFLN *) & g_array_index (a, DIFFLN, pos))->ch == EQU_CH)
-        pos++;
+    for (; pos < a->len && ((DIFFLN *) & g_array_index (a, DIFFLN, pos))->ch != EQU_CH; pos++)
+        ;
+    for (; pos < a->len && ((DIFFLN *) & g_array_index (a, DIFFLN, pos))->ch == EQU_CH; pos++)
+        ;
     return pos;
 }
 
@@ -1993,15 +1981,17 @@ get_current_hunk (WDiff * dview, int *start_line1, int *end_line1, int *start_li
         default:
             break;
         }
-        while (pos > 0 && ((DIFFLN *) & g_array_index (a0, DIFFLN, pos))->ch != EQU_CH)
-            pos--;
+
+        for (; pos > 0 && ((DIFFLN *) & g_array_index (a0, DIFFLN, pos))->ch != EQU_CH; pos--)
+            ;
         if (pos > 0)
         {
             *start_line1 = ((DIFFLN *) & g_array_index (a0, DIFFLN, pos))->line + 1;
             *start_line2 = ((DIFFLN *) & g_array_index (a1, DIFFLN, pos))->line + 1;
         }
-        pos = dview->skip_rows;
-        while (pos < a0->len && ((DIFFLN *) & g_array_index (a0, DIFFLN, pos))->ch != EQU_CH)
+
+        for (pos = dview->skip_rows;
+             pos < a0->len && ((DIFFLN *) & g_array_index (a0, DIFFLN, pos))->ch != EQU_CH; pos++)
         {
             int l0, l1;
 
@@ -2011,7 +2001,6 @@ get_current_hunk (WDiff * dview, int *start_line1, int *end_line1, int *start_li
                 *end_line1 = MAX (*start_line1, l0);
             if (l1 > 0)
                 *end_line2 = MAX (*start_line2, l1);
-            pos++;
         }
     }
     return res;
@@ -2041,12 +2030,9 @@ dview_remove_hunk (WDiff * dview, FILE * merge_file, int from1, int to1,
     else
         f0 = fopen (dview->file[DIFF_LEFT], "r");
 
-    line = 0;
-    while (fgets (buf, sizeof (buf), f0) != NULL && line < from1 - 1)
-    {
-        line++;
+    for (line = 0; fgets (buf, sizeof (buf), f0) != NULL && line < from1 - 1; line++)
         fputs (buf, merge_file);
-    }
+
     while (fgets (buf, sizeof (buf), f0) != NULL)
     {
         line++;
@@ -2087,14 +2073,9 @@ dview_add_hunk (WDiff * dview, FILE * merge_file, int from1, int from2, int to2,
         f1 = fopen (dview->file[DIFF_RIGHT], "r");
     }
 
-    line = 0;
-    while (fgets (buf, sizeof (buf), f0) != NULL && line < from1 - 1)
-    {
-        line++;
+    for (line = 0; fgets (buf, sizeof (buf), f0) != NULL && line < from1 - 1; line++)
         fputs (buf, merge_file);
-    }
-    line = 0;
-    while (fgets (buf, sizeof (buf), f1) != NULL && line <= to2)
+    for (line = 0; fgets (buf, sizeof (buf), f1) != NULL && line <= to2;)
     {
         line++;
         if (line >= from2)
@@ -2124,8 +2105,7 @@ static void
 dview_replace_hunk (WDiff * dview, FILE * merge_file, int from1, int to1, int from2, int to2,
                     action_direction_t merge_direction)
 {
-    int line1 = 0;
-    int line2 = 0;
+    int line1, line2;
     char buf[BUF_10K];
     FILE *f0, *f1;
 
@@ -2140,12 +2120,9 @@ dview_replace_hunk (WDiff * dview, FILE * merge_file, int from1, int to1, int fr
         f1 = fopen (dview->file[DIFF_RIGHT], "r");
     }
 
-    while (fgets (buf, sizeof (buf), f0) != NULL && line1 < from1 - 1)
-    {
-        line1++;
+    for (line1 = 0; fgets (buf, sizeof (buf), f0) != NULL && line1 < from1 - 1; line1++)
         fputs (buf, merge_file);
-    }
-    while (fgets (buf, sizeof (buf), f1) != NULL && line2 <= to2)
+    for (line2 = 0; fgets (buf, sizeof (buf), f1) != NULL && line2 <= to2;)
     {
         line2++;
         if (line2 >= from2)
