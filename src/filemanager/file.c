@@ -2765,9 +2765,12 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
         /* Query to remove short file */
         if (query_dialog (Q_ ("DialogTitle|Copy"), _("Incomplete file was retrieved"),
                           D_ERROR, 2, _("&Delete"), _("&Keep")) == 0)
-            mc_unlink (dst_vpath);
+            dst_status = DEST_SHORT_DELETE;
+        else
+            dst_status = DEST_SHORT_KEEP;
     }
-    else if (dst_status == DEST_SHORT_DELETE)
+
+    if (dst_status == DEST_SHORT_DELETE)
         mc_unlink (dst_vpath);
     else if (dst_status == DEST_FULL && !appending)
     {
@@ -2812,9 +2815,11 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
             src_mode = 0100666 & ~src_mode;
             mc_chmod (dst_vpath, (src_mode & ctx->umask_kill));
         }
-
-        mc_utime (dst_vpath, &times);
     }
+
+    /* Always sync timestamps */
+    if (dst_status == DEST_FULL || dst_status == DEST_SHORT_KEEP)
+        mc_utime (dst_vpath, &times);
 
     if (return_status == FILE_CONT)
         return_status = progress_update_one (tctx, ctx, file_size);
