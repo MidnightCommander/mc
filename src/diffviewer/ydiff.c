@@ -2366,7 +2366,7 @@ dview_load_options (WDiff * dview)
         dview->display_symbols = 1;
     show_numbers = mc_config_get_bool (mc_global.main_config, "DiffView", "show_numbers", FALSE);
     if (show_numbers)
-        dview->display_numbers = calc_nwidth ((const GArray * const *) dview->a);
+        dview->display_numbers = 1;
     tab_size = mc_config_get_int (mc_global.main_config, "DiffView", "tab_size", 8);
     if (tab_size > 0 && tab_size < 9)
         dview->tab_size = tab_size;
@@ -2884,6 +2884,10 @@ dview_update (WDiff * dview)
 
     if (height < 2)
         return;
+
+    /* use an actual length of dview->a */
+    if (dview->display_numbers != 0)
+        dview->display_numbers = calc_nwidth ((const GArray * const *) dview->a);
 
     width1 = dview->half1 + dview->bias;
     width2 = dview->half2 - dview->bias;
