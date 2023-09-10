@@ -10,14 +10,6 @@
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
-typedef struct mc_skin_color_struct
-{
-    gchar *fgcolor;
-    gchar *bgcolor;
-    gchar *attrs;
-    int pair_index;
-} mc_skin_color_t;
-
 /*** global variables defined in .c file *********************************************************/
 
 /*** declarations of public functions ************************************************************/

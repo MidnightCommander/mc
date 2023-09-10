@@ -21,6 +21,14 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
+typedef struct
+{
+    char *fg;
+    char *bg;
+    char *attrs;
+    size_t pair_index;
+} tty_color_pair_t;
+
 /*** enums ***************************************************************************************/
 
 /*** structures declarations (and typedefs of structures)*****************************************/

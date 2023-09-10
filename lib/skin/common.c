@@ -54,9 +54,10 @@ static gboolean mc_skin_is_init = FALSE;
 static void
 mc_skin_hash_destroy_value (gpointer data)
 {
-    mc_skin_color_t *mc_skin_color = (mc_skin_color_t *) data;
-    g_free (mc_skin_color->fgcolor);
-    g_free (mc_skin_color->bgcolor);
+    tty_color_pair_t *mc_skin_color = (tty_color_pair_t *) data;
+
+    g_free (mc_skin_color->fg);
+    g_free (mc_skin_color->bg);
     g_free (mc_skin_color->attrs);
     g_free (mc_skin_color);
 }
