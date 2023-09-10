@@ -46,9 +46,15 @@
 
 /*** global variables ****************************************************************************/
 
-static char *tty_color_defaults__fg = NULL;
-static char *tty_color_defaults__bg = NULL;
-static char *tty_color_defaults__attrs = NULL;
+/* *INDENT-OFF* */
+static tty_color_pair_t tty_color_defaults =
+{
+    .fg = NULL,
+    .bg = NULL,
+    .attrs = NULL,
+    .pair_index = 0
+};
+/* *INDENT-ON* */
 
 /* Set if we are actually using colors */
 gboolean use_colors = FALSE;
@@ -65,6 +71,16 @@ static GHashTable *mc_tty_color__hashtable = NULL;
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+mc_color__deinit (tty_color_pair_t * color)
+{
+    g_free (color->fg);
+    g_free (color->bg);
+    g_free (color->attrs);
+}
+
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
@@ -134,10 +150,7 @@ void
 tty_colors_done (void)
 {
     tty_color_deinit_lib ();
-    g_free (tty_color_defaults__fg);
-    g_free (tty_color_defaults__bg);
-    g_free (tty_color_defaults__attrs);
-
+    mc_color__deinit (&tty_color_defaults);
     g_hash_table_destroy (mc_tty_color__hashtable);
 }
 
@@ -160,11 +173,11 @@ tty_try_alloc_color_pair2 (const char *fg, const char *bg, const char *attrs,
     int ifg, ibg, attr;
 
     if (fg == NULL || strcmp (fg, "base") == 0)
-        fg = tty_color_defaults__fg;
+        fg = tty_color_defaults.fg;
     if (bg == NULL || strcmp (bg, "base") == 0)
-        bg = tty_color_defaults__bg;
+        bg = tty_color_defaults.bg;
     if (attrs == NULL || strcmp (attrs, "base") == 0)
-        attrs = tty_color_defaults__attrs;
+        attrs = tty_color_defaults.attrs;
 
     ifg = tty_color_get_index_by_name (fg);
     ibg = tty_color_get_index_by_name (bg);
@@ -233,13 +246,12 @@ tty_color_free_all_non_tmp (void)
 void
 tty_color_set_defaults (const char *fgcolor, const char *bgcolor, const char *attrs)
 {
-    g_free (tty_color_defaults__fg);
-    g_free (tty_color_defaults__bg);
-    g_free (tty_color_defaults__attrs);
+    mc_color__deinit (&tty_color_defaults);
 
-    tty_color_defaults__fg = g_strdup (fgcolor);
-    tty_color_defaults__bg = g_strdup (bgcolor);
-    tty_color_defaults__attrs = g_strdup (attrs);
+    tty_color_defaults.fg = g_strdup (fgcolor);
+    tty_color_defaults.bg = g_strdup (bgcolor);
+    tty_color_defaults.attrs = g_strdup (attrs);
+    tty_color_defaults.pair_index = 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
