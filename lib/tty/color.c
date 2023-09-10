@@ -70,7 +70,7 @@ static GHashTable *mc_tty_color__hashtable = NULL;
 static gboolean
 tty_color_free_condition_cb (gpointer key, gpointer value, gpointer user_data)
 {
-    tty_color_pair_t *mc_color_pair = (tty_color_pair_t *) value;
+    tty_color_lib_pair_t *mc_color_pair = (tty_color_lib_pair_t *) value;
     gboolean is_temp_color;
 
     (void) key;
@@ -93,7 +93,7 @@ tty_color_free_all (gboolean is_temp_color)
 static gboolean
 tty_color_get_next_cpn_cb (gpointer key, gpointer value, gpointer user_data)
 {
-    tty_color_pair_t *mc_color_pair = (tty_color_pair_t *) value;
+    tty_color_lib_pair_t *mc_color_pair = (tty_color_lib_pair_t *) value;
     size_t cp = GPOINTER_TO_SIZE (user_data);
 
     (void) key;
@@ -156,7 +156,7 @@ tty_try_alloc_color_pair2 (const char *fg, const char *bg, const char *attrs,
                            gboolean is_temp_color)
 {
     gchar *color_pair;
-    tty_color_pair_t *mc_color_pair;
+    tty_color_lib_pair_t *mc_color_pair;
     int ifg, ibg, attr;
 
     if (fg == NULL || strcmp (fg, "base") == 0)
@@ -175,7 +175,8 @@ tty_try_alloc_color_pair2 (const char *fg, const char *bg, const char *attrs,
         return 0;
 
     mc_color_pair =
-        (tty_color_pair_t *) g_hash_table_lookup (mc_tty_color__hashtable, (gpointer) color_pair);
+        (tty_color_lib_pair_t *) g_hash_table_lookup (mc_tty_color__hashtable,
+                                                      (gpointer) color_pair);
 
     if (mc_color_pair != NULL)
     {
@@ -183,7 +184,7 @@ tty_try_alloc_color_pair2 (const char *fg, const char *bg, const char *attrs,
         return mc_color_pair->pair_index;
     }
 
-    mc_color_pair = g_try_new0 (tty_color_pair_t, 1);
+    mc_color_pair = g_try_new0 (tty_color_lib_pair_t, 1);
     if (mc_color_pair == NULL)
     {
         g_free (color_pair);
@@ -191,12 +192,12 @@ tty_try_alloc_color_pair2 (const char *fg, const char *bg, const char *attrs,
     }
 
     mc_color_pair->is_temp = is_temp_color;
-    mc_color_pair->ifg = ifg;
-    mc_color_pair->ibg = ibg;
+    mc_color_pair->fg = ifg;
+    mc_color_pair->bg = ibg;
     mc_color_pair->attr = attr;
     mc_color_pair->pair_index = tty_color_get_next__color_pair_number ();
 
-    tty_color_try_alloc_pair_lib (mc_color_pair);
+    tty_color_try_alloc_lib_pair (mc_color_pair);
 
     g_hash_table_insert (mc_tty_color__hashtable, (gpointer) color_pair, (gpointer) mc_color_pair);
 

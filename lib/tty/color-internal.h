@@ -31,14 +31,15 @@ typedef enum {
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
-typedef struct mc_color_pair_struct
+/* Screen library specific color pair */
+typedef struct
 {
-    int ifg;
-    int ibg;
+    int fg;
+    int bg;
     int attr;
     size_t pair_index;
     gboolean is_temp;
-} tty_color_pair_t;
+} tty_color_lib_pair_t;
 
 /*** global variables defined in .c file *********************************************************/
 
@@ -54,7 +55,7 @@ int tty_attr_get_bits (const char *attrs);
 void tty_color_init_lib (gboolean disable, gboolean force);
 void tty_color_deinit_lib (void);
 
-void tty_color_try_alloc_pair_lib (tty_color_pair_t * mc_color_pair);
+void tty_color_try_alloc_lib_pair (tty_color_lib_pair_t * mc_color_pair);
 
 /*** inline functions ****************************************************************************/
 
