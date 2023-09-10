@@ -136,6 +136,7 @@ load_codepages_list_from_file (GPtrArray ** list, const char *fname)
             if (*list == NULL)
             {
                 *list = g_ptr_array_sized_new (16);
+                g_ptr_array_set_free_func (*list, free_codepage_desc);
                 g_ptr_array_add (*list, new_codepage_desc (id, p));
             }
             else
