@@ -26,8 +26,8 @@
 # Section [Include/xxxx] can be located as before as after sections that point to it.
 #
 # Sections are processed from top to bottom, thus the order is important.
-# If there are more than one sections with the same name in this file, the first
-# section will be used.
+# Multiple sections with the same name are allowed, they are merged together.
+# Sections may contain the same key multiple times; the last entry wins.
 #
 # [Default] should be a catch-all action and come last.
 #
