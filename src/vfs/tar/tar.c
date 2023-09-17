@@ -392,8 +392,10 @@ tar_decode_header (union block *header, tar_super_t * arch)
     {
         if (strcmp (header->header.magic, TMAGIC) == 0)
         {
-            if (header->star_header.prefix[130] == 0 && isodigit (header->star_header.atime[0])
-                && header->star_header.atime[11] == ' ' && isodigit (header->star_header.ctime[0])
+            if (header->star_header.prefix[130] == 0
+                && is_octal_digit (header->star_header.atime[0])
+                && header->star_header.atime[11] == ' '
+                && is_octal_digit (header->star_header.ctime[0])
                 && header->star_header.ctime[11] == ' ')
                 arch->type = TAR_STAR;
             else if (current_stat_info.xhdr.buffer != NULL)

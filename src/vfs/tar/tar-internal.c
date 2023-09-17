@@ -184,6 +184,14 @@ tar_seek_archive (tar_super_t * archive, off_t size)
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
+gboolean
+is_octal_digit (char c)
+{
+    return '0' <= c && c <= '7';
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 void
 tar_base64_init (void)
 {
@@ -268,7 +276,7 @@ tar_from_header (const char *where0, size_t digs, char const *type, intmax_t min
         where++;
     }
 
-    if (isodigit (*where))
+    if (is_octal_digit (*where))
     {
         char const *where1 = where;
         gboolean overflow = FALSE;
@@ -276,7 +284,7 @@ tar_from_header (const char *where0, size_t digs, char const *type, intmax_t min
         while (TRUE)
         {
             value += *where++ - '0';
-            if (where == lim || !isodigit (*where))
+            if (where == lim || !is_octal_digit (*where))
                 break;
             overflow |= value != (value << LG_8 >> LG_8);
             value <<= LG_8;
@@ -301,7 +309,7 @@ tar_from_header (const char *where0, size_t digs, char const *type, intmax_t min
             {
                 value += 7 - digit;
                 where++;
-                if (where == lim || !isodigit (*where))
+                if (where == lim || !is_octal_digit (*where))
                     break;
                 digit = *where - '0';
                 overflow |= value != (value << LG_8 >> LG_8);
