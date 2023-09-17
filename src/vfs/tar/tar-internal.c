@@ -32,7 +32,6 @@
 
 #include <config.h>
 
-#include <ctype.h>              /* isspace() */
 #include <inttypes.h>           /* uintmax_t */
 #include <stdint.h>             /* UINTMAX_MAX, etc */
 
@@ -270,7 +269,7 @@ tar_from_header (const char *where0, size_t digs, char const *type, intmax_t min
         if (where == lim)
             return (-1);
 
-        if (!isspace ((unsigned char) *where))
+        if (!g_ascii_isspace (*where))
             break;
 
         where++;
@@ -381,7 +380,7 @@ tar_from_header (const char *where0, size_t digs, char const *type, intmax_t min
             value = -value;
     }
 
-    if (where != lim && *where != '\0' && !isspace ((unsigned char) *where))
+    if (where != lim && *where != '\0' && !g_ascii_isspace (*where))
         return (-1);
 
     if (value <= (negative ? minus_minval : maxval))
