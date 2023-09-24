@@ -128,7 +128,7 @@ These are hints for the text mode edition:
 
 * The Virtual File System is a cute addition to the project, you may
   browse in tar and compressed tar files as well as browsing remote
-  machines with the fish file system.
+  machines with the shell file system.
 
 * Please read the manual page.
 

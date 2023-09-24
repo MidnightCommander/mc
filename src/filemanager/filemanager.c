@@ -210,8 +210,8 @@ create_panel_menu (void)
 #ifdef ENABLE_VFS_FTP
     entries = g_list_prepend (entries, menu_entry_new (_("FT&P link..."), CK_ConnectFtp));
 #endif
-#ifdef ENABLE_VFS_FISH
-    entries = g_list_prepend (entries, menu_entry_new (_("S&hell link..."), CK_ConnectFish));
+#ifdef ENABLE_VFS_SHELL
+    entries = g_list_prepend (entries, menu_entry_new (_("S&hell link..."), CK_ConnectShell));
 #endif
 #ifdef ENABLE_VFS_SFTP
     entries = g_list_prepend (entries, menu_entry_new (_("SFTP li&nk..."), CK_ConnectSftp));
@@ -1240,9 +1240,9 @@ midnight_execute_cmd (Widget * sender, long command)
     case CK_Find:
         find_cmd (current_panel);
         break;
-#ifdef ENABLE_VFS_FISH
-    case CK_ConnectFish:
-        fishlink_cmd ();
+#ifdef ENABLE_VFS_SHELL
+    case CK_ConnectShell:
+        shelllink_cmd ();
         break;
 #endif
 #ifdef ENABLE_VFS_FTP

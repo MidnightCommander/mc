@@ -1,13 +1,13 @@
 
 /**
  * \file
- * \brief Header: Virtual File System: FISH implementation for transferring files over
+ * \brief Header: Virtual File System: SHELL implementation for transferring files over
  * shell connections
  */
 
 
-#ifndef MC__VFS_FISH_H
-#define MC__VFS_FISH_H
+#ifndef MC__VFS_SHELL_H
+#define MC__VFS_SHELL_H
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -17,12 +17,12 @@
 
 /*** global variables defined in .c file *********************************************************/
 
-extern int fish_directory_timeout;
+extern int shell_directory_timeout;
 
 /*** declarations of public functions ************************************************************/
 
-void vfs_init_fish (void);
+void vfs_init_shell (void);
 
 /*** inline functions ****************************************************************************/
 
-#endif
+#endif /* MC__VFS_SHELL_H */

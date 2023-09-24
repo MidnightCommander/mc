@@ -1,12 +1,12 @@
 LC_TIME=C
 export LC_TIME
-#FISH_HAVE_HEAD         1
-#FISH_HAVE_SED          2
-#FISH_HAVE_AWK          4
-#FISH_HAVE_PERL         8
-#FISH_HAVE_LSQ         16
-#FISH_HAVE_DATE_MDYT   32
-#FISH_HAVE_TAIL        64
+#SHELL_HAVE_HEAD         1
+#SHELL_HAVE_SED          2
+#SHELL_HAVE_AWK          4
+#SHELL_HAVE_PERL         8
+#SHELL_HAVE_LSQ         16
+#SHELL_HAVE_DATE_MDYT   32
+#SHELL_HAVE_TAIL        64
 res=0
 if `echo yes| head -c 1 > /dev/null 2>&1` ; then
     res=`expr $res + 1`

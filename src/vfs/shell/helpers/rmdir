@@ -1,0 +1,5 @@
+if rmdir "/${SHELL_FILENAME}" 2>/dev/null; then
+   echo "### 000"
+else
+   echo "### 500"
+fi

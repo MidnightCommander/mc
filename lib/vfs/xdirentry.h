@@ -109,7 +109,7 @@ typedef struct
 } vfs_file_handler_t;
 
 /*
- * One of our subclasses (tar, cpio, fish, ftpfs) with data and methods.
+ * One of our subclasses (tar, cpio, shell, ftpfs) with data and methods.
  * Extends vfs_class.
  */
 struct vfs_s_subclass

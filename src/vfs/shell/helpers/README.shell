@@ -17,8 +17,8 @@ current user has host-specific overrides in his per-user MC configuration
 directory. User-defined overrides take priority over sytem-wide scripts
 if they exist. The order in which the directories are traversed is as follows:
 
-    /usr/libexec/mc/fish
-    ~/.local/share/mc/fish/<hostname>/
+    /usr/libexec/mc/shell
+    ~/.local/share/mc/shell/<hostname>/
 
 Server's reply is multiline, but always ends with
 
@@ -37,7 +37,7 @@ PRELIMinary success, if they were, it marks failure
 
                                 Connecting
                                 ~~~~~~~~~~
-MC uses "echo FISH:;/bin/sh" as command executed on remote machine.
+MC uses "echo SHELL:;/bin/sh" as command executed on remote machine.
 
                                  Actions
                                  ~~~~~~~
@@ -201,26 +201,26 @@ Script: ln
 --------------------------------------------------------------------------------
 
 You can use following parameters:
-FISH_FILESIZE
-FISH_FILENAME
-FISH_FILEMODE
-FISH_FILEOWNER
-FISH_FILEGROUPE
-FISH_FILEFROM
-FISH_FILETO
+SHELL_FILESIZE
+SHELL_FILENAME
+SHELL_FILEMODE
+SHELL_FILEOWNER
+SHELL_FILEGROUPE
+SHELL_FILEFROM
+SHELL_FILETO
 
 NB:
-'FISH_FILESIZE' is used if we operate with single file name in 'unlink', 'rmdir', 'chmod', etc...
-'FISH_FILEFROM','FISH_FILETO' are used if we operate with two files in 'ln', 'hardlink', 'mv' etc...
-'FISH_FILEOWNER', 'FISH_FILEGROUPE' are a new user/group in chown
+'SHELL_FILESIZE' is used if we operate with single file name in 'unlink', 'rmdir', 'chmod', etc...
+'SHELL_FILEFROM','SHELL_FILETO' are used if we operate with two files in 'ln', 'hardlink', 'mv' etc...
+'SHELL_FILEOWNER', 'SHELL_FILEGROUPE' are a new user/group in chown
 
 and flags:
-FISH_HAVE_HEAD
-FISH_HAVE_SED
-FISH_HAVE_AWK
-FISH_HAVE_PERL
-FISH_HAVE_LSQ
-FISH_HAVE_DATE_MDYT
+SHELL_HAVE_HEAD
+SHELL_HAVE_SED
+SHELL_HAVE_AWK
+SHELL_HAVE_PERL
+SHELL_HAVE_LSQ
+SHELL_HAVE_DATE_MDYT
 
 That's all, folks!
                                              pavel@ucw.cz

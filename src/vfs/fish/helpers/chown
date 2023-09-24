@@ -1,5 +1,0 @@
-if chown ${FISH_FILEOWNER}:${FISH_FILEGROUP} "/${FISH_FILENAME}" ; then
-    echo "### 000"
-else
-    echo "### 500"
-fi

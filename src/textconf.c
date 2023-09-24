@@ -75,8 +75,8 @@ static const char *const vfs_supported[] = {
 #ifdef ENABLE_VFS_SFTP
     "sftpfs",
 #endif
-#ifdef ENABLE_VFS_FISH
-    "fish",
+#ifdef ENABLE_VFS_SHELL
+    "shell",
 #endif
     NULL
 };
@@ -218,15 +218,15 @@ show_datadirs_extended (void)
 
     PRINTF_SECTION (_("File extension handlers:"), EXTHELPERSDIR);
 
-#if defined ENABLE_VFS_EXTFS || defined ENABLE_VFS_FISH
+#if defined ENABLE_VFS_EXTFS || defined ENABLE_VFS_SHELL
     PRINTF_SECTION (_("VFS plugins and scripts:"), LIBEXECDIR);
 #ifdef ENABLE_VFS_EXTFS
     PRINTF2 ("extfs.d:", LIBEXECDIR, MC_EXTFS_DIR PATH_SEP_STR);
 #endif
-#ifdef ENABLE_VFS_FISH
-    PRINTF2 ("fish:", LIBEXECDIR, FISH_PREFIX PATH_SEP_STR);
+#ifdef ENABLE_VFS_SHELL
+    PRINTF2 ("shell:", LIBEXECDIR, VFS_SHELL_PREFIX PATH_SEP_STR);
 #endif
-#endif /* ENABLE_VFS_EXTFS || defiined ENABLE_VFS_FISH */
+#endif /* ENABLE_VFS_EXTFS || defiined ENABLE_VFS_SHELL */
     (void) puts ("");
 
     PRINTF_GROUP (_("User data"));
@@ -237,8 +237,8 @@ show_datadirs_extended (void)
 #ifdef ENABLE_VFS_EXTFS
     PRINTF ("extfs.d:", mc_config_get_data_path (), MC_EXTFS_DIR PATH_SEP_STR);
 #endif
-#ifdef ENABLE_VFS_FISH
-    PRINTF ("fish:", mc_config_get_data_path (), FISH_PREFIX PATH_SEP_STR);
+#ifdef ENABLE_VFS_SHELL
+    PRINTF ("shell:", mc_config_get_data_path (), VFS_SHELL_PREFIX PATH_SEP_STR);
 #endif
 #ifdef USE_INTERNAL_EDIT
     PRINTF ("mcedit macros:", mc_config_get_data_path (), MC_MACRO_FILE);

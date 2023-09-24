@@ -44,8 +44,8 @@
 #ifdef ENABLE_VFS_FTP
 #include "src/vfs/ftpfs/ftpfs.h"
 #endif
-#ifdef ENABLE_VFS_FISH
-#include "src/vfs/fish/fish.h"
+#ifdef ENABLE_VFS_SHELL
+#include "src/vfs/shell/shell.h"
 #endif
 
 #ifdef HAVE_CHARSET
@@ -386,9 +386,9 @@ static const struct
     { "ftpfs_directory_timeout", &ftpfs_directory_timeout },
     { "ftpfs_retry_seconds", &ftpfs_retry_seconds },
 #endif /* ENABLE_VFS_FTP */
-#ifdef ENABLE_VFS_FISH
-    { "fish_directory_timeout", &fish_directory_timeout },
-#endif /* ENABLE_VFS_FISH */
+#ifdef ENABLE_VFS_SHELL
+    { "shell_directory_timeout", &shell_directory_timeout },
+#endif /* ENABLE_VFS_SHELL */
 #endif /* ENABLE_VFS */
     /* option_tab_spacing is used in internal viewer */
     { "editor_tab_spacing", &option_tab_spacing },

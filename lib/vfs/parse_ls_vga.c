@@ -49,7 +49,7 @@
 
 /*** file scope macro definitions ****************************************************************/
 
-/* Parsing code is used by ftpfs, fish and extfs */
+/* Parsing code is used by ftpfs, shell and extfs */
 #define MAXCOLS         30
 
 /*** file scope type declarations ****************************************************************/

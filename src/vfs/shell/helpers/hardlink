@@ -1,5 +1,5 @@
-FILEFROM="/${FISH_FILEFROM}"
-FILETO="/${FISH_FILETO}"
+FILEFROM="/${SHELL_FILEFROM}"
+FILETO="/${SHELL_FILETO}"
 if ln "${FILEFROM}" "${FILETO}" 2>/dev/null; then
    echo "### 000"
 else
