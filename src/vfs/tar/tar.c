@@ -125,7 +125,6 @@ struct tar_stat_info current_stat_info;
 #define MODE_FROM_HEADER(where,hbits) mode_from_header (where, sizeof (where), hbits)
 #define TIME_FROM_HEADER(where) time_from_header (where, sizeof (where))
 #define UID_FROM_HEADER(where) uid_from_header (where, sizeof (where))
-#define UINTMAX_FROM_HEADER(where) uintmax_from_header (where, sizeof (where))
 
 /*** file scope type declarations ****************************************************************/
 
@@ -245,14 +244,6 @@ static inline uid_t
 uid_from_header (const char *p, size_t s)
 {
     return tar_from_header (p, s, "uid_t", TYPE_MINIMUM (uid_t), TYPE_MAXIMUM (uid_t), FALSE);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static inline uintmax_t
-uintmax_from_header (const char *p, size_t s)
-{
-    return tar_from_header (p, s, "uintmax_t", 0, UINTMAX_MAX, FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
