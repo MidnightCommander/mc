@@ -553,7 +553,10 @@ do_background (file_op_context_t * ctx, char *info)
     {
         int nullfd;
 
+        (void) close (comm[0]);
         parent_fd = comm[1];
+
+        (void) close (back_comm[1]);
         from_parent_fd = back_comm[0];
 
         mc_global.we_are_background = TRUE;
@@ -580,6 +583,8 @@ do_background (file_op_context_t * ctx, char *info)
     }
     else
     {
+        (void) close (comm[1]);
+        (void) close (back_comm[0]);
         ctx->pid = pid;
         register_task_running (ctx, pid, comm[0], back_comm[1], info);
         return 1;
