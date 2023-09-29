@@ -548,7 +548,7 @@ oldgnu_get_sparse_info (tar_super_t * archive, struct tar_sparse_file *file)
     size_t i;
     union block *h = current_header;
     int ext_p;
-    enum oldgnu_add_status rc;
+    enum oldgnu_add_status rc = add_fail;
 
     if (file->stat_info->sparse_map != NULL)
         g_array_set_size (file->stat_info->sparse_map, 0);
