@@ -677,13 +677,14 @@ str_8bit_casecmp (const char *s1, const char *s2)
 
     return strcasecmp (s1, s2);
 #else
-    gint c1, c2;
 
     g_return_val_if_fail (s1 != NULL, 0);
     g_return_val_if_fail (s2 != NULL, 0);
 
     while (*s1 != '\0' && *s2 != '\0')
     {
+        gint c1, c2;
+
         /* According to A. Cox, some platforms have islower's that
          * don't work right on non-uppercase
          */
@@ -716,10 +717,11 @@ str_8bit_ncasecmp (const char *s1, const char *s2)
 #ifdef HAVE_STRNCASECMP
     return strncasecmp (s1, s2, n);
 #else
-    gint c1, c2;
 
     while (n != 0 && *s1 != '\0' && *s2 != '\0')
     {
+        gint c1, c2;
+
         n -= 1;
         /* According to A. Cox, some platforms have islower's that
          * don't work right on non-uppercase
