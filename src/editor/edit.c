@@ -1687,10 +1687,10 @@ edit_move_block_to_left (WEdit * edit)
 static size_t
 edit_print_string (WEdit * e, const char *s)
 {
-    size_t i = 0;
+    size_t i;
 
-    while (s[i] != '\0')
-        edit_execute_cmd (e, CK_InsertChar, (unsigned char) s[i++]);
+    for (i = 0; s[i] != '\0'; i++)
+        edit_execute_cmd (e, CK_InsertChar, (unsigned char) s[i]);
     e->force |= REDRAW_COMPLETELY;
     edit_update_screen (e);
     return i;
