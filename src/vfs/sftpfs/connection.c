@@ -74,6 +74,37 @@ static const char *const hostkey_method_ssh_ecdsa_256 = "ecdsa-sha2-nistp256";
 static const char *const hostkey_method_ssh_rsa = "ssh-rsa";
 static const char *const hostkey_method_ssh_dss = "ssh-dss";
 
+/* *INDENT-OFF* */
+static const char *default_hostkey_methods =
+#ifdef LIBSSH2_KNOWNHOST_KEY_ECDSA_256
+    "ecdsa-sha2-nistp256,"
+#endif
+#ifdef LIBSSH2_KNOWNHOST_KEY_ECDSA_384
+    "ecdsa-sha2-nistp384,"
+#endif
+#ifdef LIBSSH2_KNOWNHOST_KEY_ECDSA_521
+    "ecdsa-sha2-nistp521,"
+#endif
+#ifdef LIBSSH2_KNOWNHOST_KEY_ECDSA_256
+    "ecdsa-sha2-nistp256-cert-v01@openssh.com,"
+#endif
+#ifdef LIBSSH2_KNOWNHOST_KEY_ECDSA_384
+    "ecdsa-sha2-nistp384-cert-v01@openssh.com,"
+#endif
+#ifdef LIBSSH2_KNOWNHOST_KEY_ECDSA_521
+    "ecdsa-sha2-nistp521-cert-v01@openssh.com,"
+#endif
+#ifdef LIBSSH2_KNOWNHOST_KEY_ED25519
+    "ssh-ed25519,"
+    "ssh-ed25519-cert-v01@openssh.com,"
+#endif
+    "rsa-sha2-256,"
+    "rsa-sha2-512,"
+    "ssh-rsa,"
+    "ssh-rsa-cert-v01@openssh.com,"
+    "ssh-dss";
+/* *INDENT-ON* */
+
 /**
  *
  * The current implementation of know host key checking has following limitations:
@@ -257,8 +288,10 @@ sftpfs_read_known_hosts (struct vfs_s_super *super, GError ** mcerror)
                 continue;
 
             if (store->name == NULL)
-                found = TRUE;
-            else if (store->name[0] != '[')
+                /* Ignore hashed hostnames. Currently, libssh2 offers no way for us to match it */
+                continue;
+
+            if (store->name[0] != '[')
                 found = strcmp (store->name, super->path_element->host) == 0;
             else
             {
@@ -285,6 +318,7 @@ sftpfs_read_known_hosts (struct vfs_s_super *super, GError ** mcerror)
     {
         int mask;
         const char *hostkey_method = NULL;
+        char *hostkey_methods;
 
         mask = store->typemask & LIBSSH2_KNOWNHOST_KEY_MASK;
 
@@ -326,8 +360,15 @@ sftpfs_read_known_hosts (struct vfs_s_super *super, GError ** mcerror)
             return FALSE;
         }
 
+        /* Append the default hostkey methods (with lower priority).
+         * Since we ignored hashed hostnames, the actual matching host
+         * key might have different type than the one found in
+         * known_hosts for non-hashed hostname. Methods not supported
+         * by libssh2 it are ignored. */
+        hostkey_methods = g_strdup_printf ("%s,%s", hostkey_method, default_hostkey_methods);
         rc = libssh2_session_method_pref (sftpfs_super->session, LIBSSH2_METHOD_HOSTKEY,
-                                          hostkey_method);
+                                          hostkey_methods);
+        g_free (hostkey_methods);
         if (rc < 0)
             goto err;
     }
