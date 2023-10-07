@@ -547,7 +547,7 @@ oldgnu_get_sparse_info (tar_super_t * archive, struct tar_sparse_file *file)
 {
     size_t i;
     union block *h = current_header;
-    int ext_p;
+    gboolean ext_p;
     enum oldgnu_add_status rc = add_fail;
 
     if (file->stat_info->sparse_map != NULL)
@@ -560,8 +560,8 @@ oldgnu_get_sparse_info (tar_super_t * archive, struct tar_sparse_file *file)
             break;
     }
 
-    for (ext_p = h->oldgnu_header.isextended ? 1 : 0; rc == add_ok && ext_p != 0;
-         ext_p = h->sparse_header.isextended ? 1 : 0)
+    for (ext_p = h->oldgnu_header.isextended != 0; rc == add_ok && ext_p;
+         ext_p = h->sparse_header.isextended != 0)
     {
         h = tar_find_next_block (archive);
         if (h == NULL)
@@ -612,7 +612,7 @@ star_get_sparse_info (tar_super_t * archive, struct tar_sparse_file *file)
 {
     size_t i;
     union block *h = current_header;
-    int ext_p = 1;
+    gboolean ext_p = TRUE;
     enum oldgnu_add_status rc = add_ok;
 
     if (file->stat_info->sparse_map != NULL)
@@ -628,10 +628,10 @@ star_get_sparse_info (tar_super_t * archive, struct tar_sparse_file *file)
                 break;
         }
 
-        ext_p = h->star_in_header.isextended ? 1 : 0;
+        ext_p = h->star_in_header.isextended != 0;
     }
 
-    for (; rc == add_ok && ext_p != 0; ext_p = h->star_ext_header.isextended ? 1 : 0)
+    for (; rc == add_ok && ext_p; ext_p = h->star_ext_header.isextended != 0)
     {
         h = tar_find_next_block (archive);
         if (h == NULL)
