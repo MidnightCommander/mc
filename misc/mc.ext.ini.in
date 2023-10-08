@@ -798,7 +798,7 @@ Regex=^Makefile\\.(PL|pl)$
 Open=%var{PERL:perl} %f
 
 [Makefile]
-Regex=^[Mm]akefile
+Regex=^[Mm]akefile$
 Open=make -f %f %{Enter parameters}
 
 [dbf]
