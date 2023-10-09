@@ -560,6 +560,10 @@ ShellIgnoreCase=true
 View=%view{ascii} @EXTHELPERSDIR@/image.sh view svg
 Open=@EXTHELPERSDIR@/image.sh open svg
 
+[webp]
+Shell=.webp
+Open=@EXTHELPERSDIR@/image.sh open webp
+
 
 ### Sound files ###
 
