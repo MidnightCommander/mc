@@ -86,19 +86,20 @@ static char *menu = NULL;
 static char *
 strip_ext (char *ss)
 {
-    char *s = ss;
+    char *s;
     char *e = NULL;
 
-    while (*s != '\0')
+    for (s = ss; *s != '\0'; s++)
     {
         if (*s == '.')
             e = s;
         if (IS_PATH_SEP (*s) && e != NULL)
             e = NULL;           /* '.' in *directory* name */
-        s++;
     }
+
     if (e != NULL)
         *e = '\0';
+
     return ss;
 }
 
