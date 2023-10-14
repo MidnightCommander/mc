@@ -823,16 +823,13 @@ expand_format (const Widget * edit_widget, char c, gboolean do_quote)
     case 'd':
         {
             const char *cwd;
-            char *qstr;
 
             if (panel != NULL)
                 cwd = vfs_path_as_str (panel->cwd_vpath);
             else
                 cwd = vfs_get_current_dir ();
 
-            qstr = quote_func (cwd, FALSE);
-
-            result = qstr;
+            result = quote_func (cwd, FALSE);
             goto ret;
         }
     case 'c':
