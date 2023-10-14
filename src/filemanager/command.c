@@ -139,8 +139,11 @@ enter (WInput * lc_cmdline)
                 char *s;
 
                 s = expand_format (NULL, cmd[++i], TRUE);
-                g_string_append (command, s);
-                g_free (s);
+                if (s != NULL)
+                {
+                    g_string_append (command, s);
+                    g_free (s);
+                }
             }
         }
 
@@ -248,8 +251,11 @@ command_insert (WInput * in, const char *text, gboolean insert_extra_space)
     char *quoted_text;
 
     quoted_text = name_quote (text, TRUE);
-    input_insert (in, quoted_text, insert_extra_space);
-    g_free (quoted_text);
+    if (quoted_text != NULL)
+    {
+        input_insert (in, quoted_text, insert_extra_space);
+        g_free (quoted_text);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */

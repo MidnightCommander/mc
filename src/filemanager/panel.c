@@ -2923,6 +2923,7 @@ static gboolean
 do_enter_on_file_entry (WPanel * panel, file_entry_t * fe)
 {
     const char *fname = fe->fname->str;
+    char *fname_quoted;
     vfs_path_t *full_name_vpath;
     gboolean ok;
 
@@ -2973,12 +2974,14 @@ do_enter_on_file_entry (WPanel * panel, file_entry_t * fe)
         return confirm_execute || (ret == 0);
     }
 
+    fname_quoted = name_quote (fname, FALSE);
+    if (fname_quoted != NULL)
     {
-        char *tmp, *cmd;
+        char *cmd;
 
-        tmp = name_quote (fname, FALSE);
-        cmd = g_strconcat (".", PATH_SEP_STR, tmp, (char *) NULL);
-        g_free (tmp);
+        cmd = g_strconcat ("." PATH_SEP_STR, fname_quoted, (char *) NULL);
+        g_free (fname_quoted);
+
         shell_execute (cmd, 0);
         g_free (cmd);
     }

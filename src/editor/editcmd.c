@@ -631,15 +631,28 @@ static void
 pipe_mail (const edit_buffer_t * buf, char *to, char *subject, char *cc)
 {
     FILE *p = 0;
-    char *s;
+    char *s = NULL;
 
     to = name_quote (to, FALSE);
-    subject = name_quote (subject, FALSE);
-    cc = name_quote (cc, FALSE);
-    s = g_strconcat ("mail -s ", subject, *cc ? " -c " : "", cc, " ", to, (char *) NULL);
-    g_free (to);
-    g_free (subject);
-    g_free (cc);
+    if (to != NULL)
+    {
+        subject = name_quote (subject, FALSE);
+        if (subject != NULL)
+        {
+            cc = name_quote (cc, FALSE);
+            if (cc == NULL)
+                s = g_strdup_printf ("mail -s %s %s", subject, to);
+            else
+            {
+                s = g_strdup_printf ("mail -s %s -c %s %s", subject, cc, to);
+                g_free (cc);
+            }
+
+            g_free (subject);
+        }
+
+        g_free (to);
+    }
 
     if (s != NULL)
     {

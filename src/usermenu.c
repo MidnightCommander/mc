@@ -89,6 +89,9 @@ strip_ext (char *ss)
     char *s;
     char *e = NULL;
 
+    if (ss == NULL)
+        return NULL;
+
     for (s = ss; *s != '\0'; s++)
     {
         if (*s == '.')
@@ -100,7 +103,7 @@ strip_ext (char *ss)
     if (e != NULL)
         *e = '\0';
 
-    return ss;
+    return (*ss == '\0' ? NULL : ss);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -502,8 +505,11 @@ execute_menu_command (const Widget * edit_widget, const char *commands, gboolean
                     char *tmp;
 
                     tmp = name_quote (parameter, FALSE);
-                    fputs (tmp, cmd_file);
-                    g_free (tmp);
+                    if (tmp != NULL)
+                    {
+                        fputs (tmp, cmd_file);
+                        g_free (tmp);
+                    }
                 }
                 else
                     fputs (parameter, cmd_file);
@@ -529,8 +535,11 @@ execute_menu_command (const Widget * edit_widget, const char *commands, gboolean
                 char *text;
 
                 text = expand_format (edit_widget, *commands, do_quote);
-                fputs (text, cmd_file);
-                g_free (text);
+                if (text != NULL)
+                {
+                    fputs (text, cmd_file);
+                    g_free (text);
+                }
             }
         }
         else if (*commands == '%')
@@ -780,7 +789,7 @@ expand_format (const Widget * edit_widget, char c, gboolean do_quote)
             else
             {
                 if (get_other_type () != view_listing)
-                    return g_strdup ("");
+                    return NULL;
                 panel = other_panel;
             }
 
@@ -801,7 +810,7 @@ expand_format (const Widget * edit_widget, char c, gboolean do_quote)
 
     default:
         /* other modes don't use formats */
-        return g_strdup ("");
+        return NULL;
     }
 
     if (do_quote)
@@ -912,16 +921,14 @@ expand_format (const Widget * edit_widget, char c, gboolean do_quote)
     case 't':
     case 'u':
         {
-            GString *block;
+            GString *block = NULL;
             int i;
 
             if (panel == NULL)
             {
-                result = g_strdup ("");
+                result = NULL;
                 goto ret;
             }
-
-            block = g_string_sized_new (16);
 
             for (i = 0; i < panel->dir.len; i++)
                 if (panel->dir.list[i].f.marked != 0)
@@ -929,14 +936,20 @@ expand_format (const Widget * edit_widget, char c, gboolean do_quote)
                     char *tmp;
 
                     tmp = quote_func (panel->dir.list[i].fname->str, FALSE);
-                    g_string_append (block, tmp);
-                    g_string_append_c (block, ' ');
-                    g_free (tmp);
+                    if (tmp != NULL)
+                    {
+                        if (block == NULL)
+                            block = g_string_new (tmp);
+                        else
+                            g_string_append (block, tmp);
+                        g_string_append_c (block, ' ');
+                        g_free (tmp);
+                    }
 
                     if (c_lc == 'u')
                         do_file_mark (panel, i, 0);
                 }
-            result = g_string_free (block, FALSE);
+            result = block == NULL ? NULL : g_string_free (block, block->len == 0);
             goto ret;
         }                       /* sub case block */
     default:
