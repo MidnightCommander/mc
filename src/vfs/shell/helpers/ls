@@ -122,9 +122,8 @@ SHELL_DIR=$1
 perl -e '
 use strict;
 use POSIX;
-use Fcntl;
-use POSIX ":fcntl_h"; #S_ISLNK was here until 5.6
-import Fcntl ":mode" unless defined &S_ISLNK; #and is now here
+use Fcntl ":mode";      # S_ISLNK, S_IFMT, S_IMODE are here
+use POSIX ":fcntl_h";   # S_ISLNK might be here as well
 my $dirname = $ARGV[0];
 if (opendir (DIR, $dirname)) {
 while((my $filename = readdir (DIR))){
