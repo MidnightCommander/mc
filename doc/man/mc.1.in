@@ -3138,7 +3138,7 @@ used to manipulate tar and compressed tar files; the
 .IR undelfs ,
 used to recover deleted files on ext2 file systems (the default file
 system for Linux systems),
-.I fish
+.I shell
 (for manipulating files over shell connections such as rsh and ssh).
 If the code was compiled with
 .I sftpfs
@@ -3225,10 +3225,9 @@ Examples:
 The latter specifies the full path of the tar archive.
 .\"NODE "  FIle transfer over SHell filesystem"
 .SH "  FIle transfer over SHell filesystem"
-The fish file system is a network based file system that allows you to
+The shell file system is a network based file system that allows you to
 manipulate the files in a remote machine as if they were local. To use
-this, the other side has to either run fish server, or has to have
-bash\-compatible shell.
+this, the other side has to have bash\-compatible shell.
 .PP
 To connect to a remote machine, you just need to chdir
 into a special directory which name is in the following
@@ -4095,7 +4094,7 @@ If this variable is on (default is off) when you browse the file system
 on a Tree panel, it will automatically reload the other panel with the
 contents of the selected directory.
 .TP
-.I fish_directory_timeout
+.I shell_directory_timeout
 This variable holds the lifetime of a directory cache entry in seconds. The
 default value is 900 seconds.
 .TP

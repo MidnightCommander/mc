@@ -1,0 +1,5 @@
+if chown ${SHELL_FILEOWNER}:${SHELL_FILEGROUP} "/${SHELL_FILENAME}" ; then
+    echo "### 000"
+else
+    echo "### 500"
+fi

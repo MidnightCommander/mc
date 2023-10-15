@@ -118,7 +118,7 @@ static const struct test_user_config_paths_ds
     },
     { /* 10. */
         CONF_DATA,
-        FISH_PREFIX
+        VFS_SHELL_PREFIX
     },
     { /* 11. */
         CONF_DATA,

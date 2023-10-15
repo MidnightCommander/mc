@@ -6,8 +6,8 @@ AM_CPPFLAGS = \
 	$(GLIB_CFLAGS) \
 	-I$(top_srcdir)
 
-noinst_LTLIBRARIES = libvfs-fish.la
+noinst_LTLIBRARIES = libvfs-shell.la
 
-libvfs_fish_la_SOURCES = \
-	fish.c fish.h \
-	fishdef.h
+libvfs_shell_la_SOURCES = \
+	shell.c shell.h \
+	shelldef.h

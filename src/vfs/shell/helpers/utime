@@ -1,0 +1,12 @@
+if TZ=UTC touch -h -m -d "$SHELL_TOUCHMTIME_W_NSEC" "/${SHELL_FILENAME}" 2>/dev/null && \
+   TZ=UTC touch -h -a -d "$SHELL_TOUCHATIME_W_NSEC" "/${SHELL_FILENAME}" 2>/dev/null; then
+  echo "### 000"
+elif TZ=UTC touch -h -m -t $SHELL_TOUCHMTIME "/${SHELL_FILENAME}" 2>/dev/null && \
+     TZ=UTC touch -h -a -t $SHELL_TOUCHATIME "/${SHELL_FILENAME}" 2>/dev/null; then
+  echo "### 000"
+elif [ -n "$SHELL_HAVE_PERL" ] &&
+   perl -e 'utime '$SHELL_FILEATIME','$SHELL_FILEMTIME',@ARGV;' "/${SHELL_FILENAME}" 2>/dev/null; then
+  echo "### 000"
+else
+  echo "### 500"
+fi

@@ -1199,15 +1199,15 @@ sftplink_cmd (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#ifdef ENABLE_VFS_FISH
+#ifdef ENABLE_VFS_SHELL
 void
-fishlink_cmd (void)
+shelllink_cmd (void)
 {
     nice_cd (_("Shell link to machine"), _(machine_str),
              "[FIle transfer over SHell filesystem]", ":fishlink_cmd: Shell link to machine ",
              "sh://", 1, TRUE);
 }
-#endif /* ENABLE_VFS_FISH */
+#endif /* ENABLE_VFS_SHELL */
 
 /* --------------------------------------------------------------------------------------------- */
 

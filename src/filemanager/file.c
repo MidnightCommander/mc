@@ -1521,7 +1521,7 @@ recursive_erase (file_op_total_context_t * tctx, file_op_context_t * ctx, const 
   *
   * ATTENTION! Be careful when modifying this function (like commit 25e419ba0886f)!
   * Some implementations of readdir() in MC VFS (for example, vfs_s_readdir(), which is used
-  * in FISH) don't return "." and ".." entries.
+  * in SHELL) don't return "." and ".." entries.
   */
 static int
 check_dir_is_empty (const vfs_path_t * vpath)

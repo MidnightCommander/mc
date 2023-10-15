@@ -1,7 +1,6 @@
-#RETR $FISH_FILENAME $FISH_START_OFFSET
 LC_TIME=C
 export LC_TIME
-fish_get_perl ()
+shell_get_perl ()
 {
 FILENAME=$1
 OFFSET=$2
@@ -35,7 +34,7 @@ exit 0
 ' "${FILENAME}" $OFFSET
 }
 
-fish_get_tail ()
+shell_get_tail ()
 {
 FILENAME=$1
 OFFSET=$2
@@ -67,7 +66,7 @@ else
 fi
 }
 
-fish_get_dd ()
+shell_get_dd ()
 {
 FILENAME=$1
 OFFSET=$2
@@ -96,10 +95,10 @@ else
 fi
 }
 
-if [ -n "${FISH_HAVE_PERL}" ]; then
-    fish_get_perl "/${FISH_FILENAME}" ${FISH_START_OFFSET}
-elif [ -n "${FISH_HAVE_TAIL}" ]; then
-    fish_get_tail "/${FISH_FILENAME}" ${FISH_START_OFFSET}
+if [ -n "${SHELL_HAVE_PERL}" ]; then
+    shell_get_perl "/${SHELL_FILENAME}" ${SHELL_START_OFFSET}
+elif [ -n "${SHELL_HAVE_TAIL}" ]; then
+    shell_get_tail "/${SHELL_FILENAME}" ${SHELL_START_OFFSET}
 else
-    fish_get_dd "/${FISH_FILENAME}" ${FISH_START_OFFSET}
+    shell_get_dd "/${SHELL_FILENAME}" ${SHELL_START_OFFSET}
 fi

@@ -73,7 +73,7 @@ window title.
 Better date parser - don't allow seconds and year in ftp listings on the
 same line.
 
-Report errors in fish operations and recover from them.
+Report errors in shell operations and recover from them.
 
 Allow colors to be defined in the mc.lib file.  Make it possible to
 avoid using a super-long line to redefine all colors.
@@ -82,7 +82,7 @@ Filters in the editor should operate on the open file - don't close and
 reopen the file.  They don't work on VFS now.  For example, a gzipped
 files on FTP cannot be edited.
 
-ftp and fish with home != '/' - readjust directory to the home.
+ftp and shell with home != '/' - readjust directory to the home.
 
 Make "Find File" dialog more responsive.  Keep state in a structure and
 preserve it when the search is suspended.

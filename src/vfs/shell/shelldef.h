@@ -1,19 +1,18 @@
 
 /**
  * \file
- * \brief Header: FISH script defaults
+ * \brief Header: SHELL script defaults
  */
 
-#ifndef MC__FISH_DEF_H
-#define MC__FISH_DEF_H
+#ifndef MC__VFS_SHELL_DEF_H
+#define MC__VFS_SHELL_DEF_H
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
 /* default 'ls' script */
-#define FISH_LS_DEF_CONTENT ""                                            \
-"#LIST /${FISH_FILENAME}\n"                                               \
+#define VFS_SHELL_LS_DEF_CONTENT ""                                       \
 "export LC_TIME=C\n"                                                      \
-"ls -Qlan \"/${FISH_FILENAME}\" 2>/dev/null | grep '^[^cbt]' | (\n"       \
+"ls -Qlan \"/${SHELL_FILENAME}\" 2>/dev/null | grep '^[^cbt]' | (\n"      \
 "while read p l u g s m d y n; do\n"                                      \
 "    echo \"P$p $u.$g\"\n"                                                \
 "    echo \"S$s\"\n"                                                      \
@@ -22,7 +21,7 @@
 "    echo\n"                                                              \
 "done\n"                                                                  \
 ")\n"                                                                     \
-"ls -Qlan \"/${FISH_FILENAME}\" 2>/dev/null | grep '^[cb]' | (\n"         \
+"ls -Qlan \"/${SHELL_FILENAME}\" 2>/dev/null | grep '^[cb]' | (\n"        \
 "while read p l u g a i m d y n; do\n"                                    \
 "    echo \"P$p $u.$g\"\n"                                                \
 "    echo \"E$a$i\"\n"                                                    \
@@ -34,120 +33,109 @@
 "echo \"### 200\"\n"
 
 /* default file exists script */
-#define FISH_EXISTS_DEF_CONTENT ""                                        \
-"#ISEXISTS $FISH_FILENAME\n"                                              \
-"ls -l \"/${FISH_FILENAME}\" >/dev/null 2>/dev/null\n"                    \
+#define VFS_SHELL_EXISTS_DEF_CONTENT ""                                   \
+"ls -l \"/${SHELL_FILENAME}\" >/dev/null 2>/dev/null\n"                   \
 "echo '### '$?\n"
 
 /* default 'mkdir' script */
-#define FISH_MKDIR_DEF_CONTENT ""                                         \
-"#MKD $FISH_FILENAME\n"                                                   \
-"if mkdir \"/${FISH_FILENAME}\" 2>/dev/null; then\n"                      \
+#define VFS_SHELL_MKDIR_DEF_CONTENT ""                                    \
+"if mkdir \"/${SHELL_FILENAME}\" 2>/dev/null; then\n"                     \
 "    echo \"### 000\"\n"                                                  \
 "else\n"                                                                  \
 "    echo \"### 500\"\n"                                                  \
 "fi\n"
 
 /* default 'unlink' script */
-#define FISH_UNLINK_DEF_CONTENT ""                                        \
-"#DELE $FISH_FILENAME\n"                                                  \
-"if rm -f \"/${FISH_FILENAME}\" 2>/dev/null; then\n"                      \
+#define VFS_SHELL_UNLINK_DEF_CONTENT ""                                   \
+"if rm -f \"/${SHELL_FILENAME}\" 2>/dev/null; then\n"                     \
 "    echo \"### 000\"\n"                                                  \
 "else\n"                                                                  \
 "    echo \"### 500\"\n"                                                  \
 "fi\n"
+
 /* default 'chown' script */
-#define FISH_CHOWN_DEF_CONTENT ""                                           \
-"#CHOWN $FISH_FILEOWNER:$FISH_FILEGROUP $FISH_FILENAME\n"                   \
-"if chown ${FISH_FILEOWNER}:${FISH_FILEGROUP} \"/${FISH_FILENAME}\"; then\n"\
-"    echo \"### 000\"\n"                                                    \
-"else\n"                                                                    \
-"    echo \"### 500\"\n"                                                    \
+#define VFS_SHELL_CHOWN_DEF_CONTENT ""                                          \
+"if chown ${SHELL_FILEOWNER}:${SHELL_FILEGROUP} \"/${SHELL_FILENAME}\"; then\n" \
+"    echo \"### 000\"\n"                                                        \
+"else\n"                                                                        \
+"    echo \"### 500\"\n"                                                        \
 "fi\n"
 
 /* default 'chmod' script */
-#define FISH_CHMOD_DEF_CONTENT ""                                           \
-"#CHMOD $FISH_FILEMODE $FISH_FILENAME\n"                                    \
-"if chmod ${FISH_FILEMODE} \"/${FISH_FILENAME}\" 2>/dev/null; then\n"       \
+#define VFS_SHELL_CHMOD_DEF_CONTENT ""                                      \
+"if chmod ${SHELL_FILEMODE} \"/${SHELL_FILENAME}\" 2>/dev/null; then\n"     \
 "    echo \"### 000\"\n"                                                    \
 "else\n"                                                                    \
 "    echo \"### 500\"\n"                                                    \
 "fi\n"
 
 /* default 'utime' script */
-#define FISH_UTIME_DEF_CONTENT ""                                                                         \
-"#UTIME \"$FISH_TOUCHATIME_W_NSEC\" \"$FISH_TOUCHMTIME_W_NSEC\" $FISH_FILENAME\n"                         \
-"if TZ=UTC touch -h -m -d \"$FISH_TOUCHMTIME_W_NSEC\" \"/${FISH_FILENAME}\" 2>/dev/null && \\\n"          \
-"   TZ=UTC touch -h -a -d \"$FISH_TOUCHATIME_W_NSEC\" \"/${FISH_FILENAME}\" 2>/dev/null; then\n"          \
-"  echo \"### 000\"\n"                                                                                    \
-"elif TZ=UTC touch -h -m -t $FISH_TOUCHMTIME \"/${FISH_FILENAME}\" 2>/dev/null && \\\n"                   \
-"     TZ=UTC touch -h -a -t $FISH_TOUCHATIME \"/${FISH_FILENAME}\" 2>/dev/null; then\n"                   \
-"  echo \"### 000\"\n"                                                                                    \
-"elif [ -n \"$FISH_HAVE_PERL\" ] && \\\n"                                                                 \
-"   perl -e 'utime '$FISH_FILEATIME','$FISH_FILEMTIME',@ARGV;' \"/${FISH_FILENAME}\" 2>/dev/null; then\n" \
-"  echo \"### 000\"\n"                                                                                    \
-"else\n"                                                                                                  \
-"  echo \"### 500\"\n"                                                                                    \
+#define VFS_SHELL_UTIME_DEF_CONTENT ""                                                                       \
+"#UTIME \"$SHELL_TOUCHATIME_W_NSEC\" \"$SHELL_TOUCHMTIME_W_NSEC\" $SHELL_FILENAME\n"                         \
+"if TZ=UTC touch -h -m -d \"$SHELL_TOUCHMTIME_W_NSEC\" \"/${SHELL_FILENAME}\" 2>/dev/null && \\\n"           \
+"   TZ=UTC touch -h -a -d \"$SHELL_TOUCHATIME_W_NSEC\" \"/${SHELL_FILENAME}\" 2>/dev/null; then\n"           \
+"  echo \"### 000\"\n"                                                                                       \
+"elif TZ=UTC touch -h -m -t $SHELL_TOUCHMTIME \"/${SHELL_FILENAME}\" 2>/dev/null && \\\n"                    \
+"     TZ=UTC touch -h -a -t $SHELL_TOUCHATIME \"/${SHELL_FILENAME}\" 2>/dev/null; then\n"                    \
+"  echo \"### 000\"\n"                                                                                       \
+"elif [ -n \"$SHELL_HAVE_PERL\" ] && \\\n"                                                                   \
+"   perl -e 'utime '$SHELL_FILEATIME','$SHELL_FILEMTIME',@ARGV;' \"/${SHELL_FILENAME}\" 2>/dev/null; then\n" \
+"  echo \"### 000\"\n"                                                                                       \
+"else\n"                                                                                                     \
+"  echo \"### 500\"\n"                                                                                       \
 "fi\n"
 
-
 /* default 'rmdir' script */
-#define FISH_RMDIR_DEF_CONTENT ""                                           \
-"#RMD $FISH_FILENAME\n"                                                     \
-"if rmdir \"/${FISH_FILENAME}\" 2>/dev/null; then\n"                        \
+#define VFS_SHELL_RMDIR_DEF_CONTENT ""                                      \
+"if rmdir \"/${SHELL_FILENAME}\" 2>/dev/null; then\n"                       \
 "   echo \"### 000\"\n"                                                     \
 "else\n"                                                                    \
 "   echo \"### 500\"\n"                                                     \
 "fi\n"
 
 /* default 'ln -s' symlink script */
-#define FISH_LN_DEF_CONTENT ""                                              \
-"#SYMLINK $FISH_FILEFROM $FISH_FILETO\n"                                    \
-"if ln -s \"/${FISH_FILEFROM}\" \"/${FISH_FILETO}\" 2>/dev/null; then\n"    \
+#define VFS_SHELL_LN_DEF_CONTENT ""                                         \
+"if ln -s \"/${SHELL_FILEFROM}\" \"/${SHELL_FILETO}\" 2>/dev/null; then\n"  \
 "   echo \"### 000\"\n"                                                     \
 "else\n"                                                                    \
 "   echo \"### 500\"\n"                                                     \
 "fi\n"
 
 /* default 'mv' script */
-#define FISH_MV_DEF_CONTENT ""                                              \
-"#RENAME $FISH_FILEFROM $FISH_FILETO\n"                                     \
-"if mv \"/${FISH_FILEFROM}\" \"/${FISH_FILETO}\" 2>/dev/null; then\n"       \
+#define VFS_SHELL_MV_DEF_CONTENT ""                                         \
+"if mv \"/${SHELL_FILEFROM}\" \"/${SHELL_FILETO}\" 2>/dev/null; then\n"     \
 "   echo \"### 000\"\n"                                                     \
 "else\n"                                                                    \
 "   echo \"### 500\"\n"                                                     \
 "fi\n"
 
 /* default 'ln' hardlink script */
-#define FISH_HARDLINK_DEF_CONTENT ""                                        \
-"#LINK $FISH_FILEFROM $FISH_FILETO\n"                                       \
-"if ln \"/${FISH_FILEFROM}\" \"/${FISH_FILETO}\" 2>/dev/null; then\n"       \
+#define VFS_SHELL_HARDLINK_DEF_CONTENT ""                                   \
+"if ln \"/${SHELL_FILEFROM}\" \"/${SHELL_FILETO}\" 2>/dev/null; then\n"     \
 "   echo \"### 000\"\n"                                                     \
 "else\n"                                                                    \
 "   echo \"### 500\"\n"                                                     \
 "fi\n"
 
 /* default 'retr'  script */
-#define FISH_GET_DEF_CONTENT ""                                                 \
-"export LC_TIME=C\n"                                                            \
-"#RETR $FISH_FILENAME\n"                                                        \
-"if dd if=\"/${FISH_FILENAME}\" of=/dev/null bs=1 count=1 2>/dev/null ; then\n" \
-"    ls -ln \"/${FISH_FILENAME}\" 2>/dev/null | (\n"                            \
-"       read p l u g s r\n"                                                     \
-"       echo $s\n"                                                              \
-"    )\n"                                                                       \
-"    echo \"### 100\"\n"                                                        \
-"    cat \"/${FISH_FILENAME}\"\n"                                               \
-"    echo \"### 200\"\n"                                                        \
-"else\n"                                                                        \
-"    echo \"### 500\"\n"                                                        \
+#define VFS_SHELL_GET_DEF_CONTENT ""                                             \
+"export LC_TIME=C\n"                                                             \
+"if dd if=\"/${SHELL_FILENAME}\" of=/dev/null bs=1 count=1 2>/dev/null ; then\n" \
+"    ls -ln \"/${SHELL_FILENAME}\" 2>/dev/null | (\n"                            \
+"       read p l u g s r\n"                                                      \
+"       echo $s\n"                                                               \
+"    )\n"                                                                        \
+"    echo \"### 100\"\n"                                                         \
+"    cat \"/${SHELL_FILENAME}\"\n"                                               \
+"    echo \"### 200\"\n"                                                         \
+"else\n"                                                                         \
+"    echo \"### 500\"\n"                                                         \
 "fi\n"
 
 /* default 'stor'  script */
-#define FISH_SEND_DEF_CONTENT ""                                          \
-"FILENAME=\"/${FISH_FILENAME}\"\n"                                        \
-"FILESIZE=${FISH_FILESIZE}\n"                                             \
-"#STOR $FILESIZE $FILENAME\n"                                             \
+#define VFS_SHELL_SEND_DEF_CONTENT ""                                     \
+"FILENAME=\"/${SHELL_FILENAME}\"\n"                                       \
+"FILESIZE=${SHELL_FILESIZE}\n"                                            \
 "echo \"### 001\"\n"                                                      \
 "{\n"                                                                     \
 "    while [ $FILESIZE -gt 0 ]; do\n"                                     \
@@ -158,10 +146,9 @@
 "}; echo \"### 200\"\n"
 
 /* default 'appe'  script */
-#define FISH_APPEND_DEF_CONTENT ""                                        \
-"FILENAME=\"/${FISH_FILENAME}\"\n"                                        \
-"FILESIZE=${FISH_FILESIZE}\n"                                             \
-"#APPE $FILESIZE $FILENAME\n"                                             \
+#define VFS_SHELL_APPEND_DEF_CONTENT ""                                   \
+"FILENAME=\"/${SHELL_FILENAME}\"\n"                                       \
+"FILESIZE=${SHELL_FILESIZE}\n"                                            \
 "echo \"### 001\"\n"                                                      \
 "res=`exec 3>&1\n"                                                        \
 "(\n"                                                                     \
@@ -180,15 +167,15 @@
 "}; echo \"### 200\"\n"
 
 /* default 'info'  script */
-#define FISH_INFO_DEF_CONTENT ""                                          \
+#define VFS_SHELL_INFO_DEF_CONTENT ""                                     \
 "export LC_TIME=C\n"                                                      \
-"#FISH_HAVE_HEAD         1\n"                                             \
-"#FISH_HAVE_SED          2\n"                                             \
-"#FISH_HAVE_AWK          4\n"                                             \
-"#FISH_HAVE_PERL         8\n"                                             \
-"#FISH_HAVE_LSQ         16\n"                                             \
-"#FISH_HAVE_DATE_MDYT   32\n"                                             \
-"#FISH_HAVE_TAIL        64\n"                                             \
+"#SHELL_HAVE_HEAD         1\n"                                            \
+"#SHELL_HAVE_SED          2\n"                                            \
+"#SHELL_HAVE_AWK          4\n"                                            \
+"#SHELL_HAVE_PERL         8\n"                                            \
+"#SHELL_HAVE_LSQ         16\n"                                            \
+"#SHELL_HAVE_DATE_MDYT   32\n"                                            \
+"#SHELL_HAVE_TAIL        64\n"                                            \
 "res=0\n"                                                                 \
 "if `echo yes| head -c 1 > /dev/null 2>&1` ; then\n"                      \
 "    res=`expr $res + 1`\n"                                               \
@@ -233,4 +220,5 @@
 /*** declarations of public functions ************************************************************/
 
 /*** inline functions ****************************************************************************/
-#endif
+
+#endif /* MC__VFS_SHELL_DEF_H */

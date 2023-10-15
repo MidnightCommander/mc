@@ -68,7 +68,7 @@
 #endif
 
 #ifdef EREMOTEIO
-#define E_REMOTE EREMOTEIO      /* if other side of ftp/fish reports error */
+#define E_REMOTE EREMOTEIO      /* if other side of ftp/shell reports error */
 #else
 #define E_REMOTE ENETUNREACH    /* :-( there's no EREMOTEIO on some systems */
 #endif
@@ -133,7 +133,7 @@ typedef struct vfs_class
 {
     const char *name;           /* "FIles over SHell" */
     vfs_flags_t flags;
-    const char *prefix;         /* "fish:" */
+    const char *prefix;         /* "shell:" */
     int verrno;                 /* can't use errno because glibc2 might define errno as function */
     gboolean flush;             /* if set to TRUE, invalidate directory cache */
     FILE *logfile;

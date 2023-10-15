@@ -171,9 +171,9 @@ VFS options:
      (on by default)
      Support for FTP vfs
 
-`--enable-vfs-fish'
+`--enable-vfs-shell'
      (on by default)
-     Support for FISH vfs
+     Support for SHELL vfs
 
 `--enable-vfs-sftp'
      (auto)

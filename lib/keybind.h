@@ -151,7 +151,7 @@ enum
     CK_LinkSymbolicEdit,
     CK_ExternalPanelize,
     CK_Filter,
-    CK_ConnectFish,
+    CK_ConnectShell,
     CK_ConnectFtp,
     CK_ConnectSftp,
     CK_PanelInfo,

@@ -16,9 +16,9 @@ SUBDIRS += extfs
 libmc_vfs_la_LIBADD += extfs/libvfs-extfs.la
 endif
 
-if ENABLE_VFS_FISH
-SUBDIRS += fish
-libmc_vfs_la_LIBADD += fish/libvfs-fish.la
+if ENABLE_VFS_SHELL
+SUBDIRS += shell
+libmc_vfs_la_LIBADD += shell/libvfs-shell.la
 endif
 
 if ENABLE_VFS_FTP

@@ -1,0 +1,2 @@
+ls -l "/${SHELL_FILENAME}" >/dev/null 2>/dev/null
+echo '### '$?
