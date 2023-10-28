@@ -957,8 +957,10 @@ edit_left_word_move (WEdit * edit, int s)
         if (edit->buffer.curs1 == 0)
             break;
         c1 = edit_buffer_get_previous_byte (&edit->buffer);
+        if (c1 == '\n')
+            break;
         c2 = edit_buffer_get_current_byte (&edit->buffer);
-        if (c1 == '\n' || c2 == '\n')
+        if (c2 == '\n')
             break;
         if ((my_type_of (c1) & my_type_of (c2)) == 0)
             break;
@@ -996,8 +998,10 @@ edit_right_word_move (WEdit * edit, int s)
         if (edit->buffer.curs1 >= edit->buffer.size)
             break;
         c1 = edit_buffer_get_previous_byte (&edit->buffer);
+        if (c1 == '\n')
+            break;
         c2 = edit_buffer_get_current_byte (&edit->buffer);
-        if (c1 == '\n' || c2 == '\n')
+        if (c2 == '\n')
             break;
         if ((my_type_of (c1) & my_type_of (c2)) == 0)
             break;
@@ -1126,8 +1130,10 @@ edit_right_delete_word (WEdit * edit)
         int c1, c2;
 
         c1 = edit_delete (edit, TRUE);
+        if (c1 == '\n')
+            break;
         c2 = edit_buffer_get_current_byte (&edit->buffer);
-        if (c1 == '\n' || c2 == '\n')
+        if (c2 == '\n')
             break;
         if ((isspace (c1) == 0) != (isspace (c2) == 0))
             break;
@@ -1146,8 +1152,10 @@ edit_left_delete_word (WEdit * edit)
         int c1, c2;
 
         c1 = edit_backspace (edit, TRUE);
+        if (c1 == '\n')
+            break;
         c2 = edit_buffer_get_previous_byte (&edit->buffer);
-        if (c1 == '\n' || c2 == '\n')
+        if (c2 == '\n')
             break;
         if ((isspace (c1) == 0) != (isspace (c2) == 0))
             break;
