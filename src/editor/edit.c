@@ -3381,7 +3381,7 @@ edit_execute_cmd (WEdit * edit, long command, int char_for_insertion)
             && !mc_global.utf8_display)
         {
             unsigned char str[UTF8_CHAR_LEN + 1];
-            size_t i = 0;
+            size_t i;
             int res;
 
             res = g_unichar_to_utf8 (char_for_insertion, (char *) str);
@@ -3394,11 +3394,10 @@ edit_execute_cmd (WEdit * edit, long command, int char_for_insertion)
             {
                 str[res] = '\0';
             }
-            while (i <= UTF8_CHAR_LEN && str[i] != '\0')
+            for (i = 0; i <= UTF8_CHAR_LEN && str[i] != '\0'; i++)
             {
                 char_for_insertion = str[i];
                 edit_insert (edit, char_for_insertion);
-                i++;
             }
         }
         else
