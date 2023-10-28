@@ -1447,14 +1447,8 @@ insert_spaces_tab (WEdit * edit, gboolean half)
     if (half)
         i /= 2;
     if (i != 0)
-    {
-        i = ((edit->curs_col / i) + 1) * i - edit->curs_col;
-        while (i > 0)
-        {
+        for (i = ((edit->curs_col / i) + 1) * i - edit->curs_col; i > 0; i -= space_width)
             edit_insert (edit, ' ');
-            i -= space_width;
-        }
-    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
