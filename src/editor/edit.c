@@ -1782,7 +1782,7 @@ edit_insert_column_from_file (WEdit * edit, int file, off_t * start_pos, off_t *
 /** User edit menu, like user menu (F2) but only in editor. */
 
 void
-user_menu (WEdit * edit, const char *menu_file, int selected_entry)
+edit_user_menu (WEdit * edit, const char *menu_file, int selected_entry)
 {
     char *block_file;
     gboolean nomark;
@@ -3933,7 +3933,7 @@ edit_execute_cmd (WEdit * edit, long command, int char_for_insertion)
         edit_goto_matching_bracket (edit);
         break;
     case CK_UserMenu:
-        user_menu (edit, NULL, -1);
+        edit_user_menu (edit, NULL, -1);
         break;
     case CK_Sort:
         edit_sort_cmd (edit);

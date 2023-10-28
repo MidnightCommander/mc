@@ -141,7 +141,7 @@ WEdit *edit_find_editor (const WDialog * h);
 gboolean edit_widget_is_editor (const Widget * w);
 gboolean edit_drop_hotkey_menu (WDialog * h, int key);
 void edit_menu_cmd (WDialog * h);
-void user_menu (WEdit * edit, const char *menu_file, int selected_entry);
+void edit_user_menu (WEdit * edit, const char *menu_file, int selected_entry);
 void edit_init_menu (WMenuBar * menubar);
 void edit_save_mode_cmd (void);
 off_t edit_move_forward3 (const WEdit * edit, off_t current, long cols, off_t upto);

@@ -1947,7 +1947,7 @@ edit_block_process_cmd (WEdit * edit, int macro_number)
 
     fname = g_strdup_printf ("%s.%i.sh", EDIT_HOME_MACRO_FILE, macro_number);
     macros_fname = g_build_filename (mc_config_get_data_path (), fname, (char *) NULL);
-    user_menu (edit, macros_fname, 0);
+    edit_user_menu (edit, macros_fname, 0);
     g_free (fname);
     g_free (macros_fname);
     edit->force |= REDRAW_COMPLETELY;
