@@ -902,8 +902,8 @@ edit_cursor_to_eol (WEdit * edit)
 static unsigned long
 my_type_of (int c)
 {
-    unsigned long x, r = 0;
-    const char *p, *q;
+    unsigned long r = 0;
+    const char *q;
     const char chars_move_whole_word[] =
         "!=&|<>^~ !:;, !'!`!.?!\"!( !) !{ !} !Aa0 !+-*/= |<> ![ !] !\\#! ";
 
@@ -927,6 +927,9 @@ my_type_of (int c)
         return 0xFFFFFFFFUL;
     do
     {
+        unsigned long x;
+        const char *p;
+
         for (x = 1, p = chars_move_whole_word; p < q; p++)
             if (*p == '!')
                 x <<= 1;
