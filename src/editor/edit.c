@@ -642,7 +642,7 @@ edit_modification (WEdit * edit)
     edit->caches_valid = FALSE;
 
     /* raise lock when file modified */
-    if (!edit->modified && !edit->delete_file)
+    if (edit->modified == 0 && edit->delete_file == 0)
         edit->locked = lock_file (edit->filename_vpath);
     edit->modified = 1;
 }
@@ -702,7 +702,8 @@ is_blank (const edit_buffer_t * buf, off_t offset)
 static off_t
 edit_find_line (WEdit * edit, long line)
 {
-    long i, j = 0;
+    long i;
+    long j = 0;
     long m = 2000000000;        /* what is the magic number? */
 
     if (!edit->caches_valid)
@@ -923,8 +924,9 @@ my_type_of (int c)
     else if (isspace (c))
         c = ' ';
     q = strchr (chars_move_whole_word, c);
-    if (!q)
+    if (q == NULL)
         return 0xFFFFFFFFUL;
+
     do
     {
         unsigned long x;
@@ -935,7 +937,8 @@ my_type_of (int c)
                 x <<= 1;
         r |= x;
     }
-    while ((q = strchr (q + 1, c)));
+    while ((q = strchr (q + 1, c)) != NULL);
+
     return r;
 }
 
@@ -1312,7 +1315,7 @@ edit_do_redo (WEdit * edit)
                                            0, edit->mark2);
         }
         /* more than one pop usually means something big */
-        if (count++)
+        if (count++ != 0)
             edit->force |= REDRAW_PAGE;
     }
 
@@ -1342,6 +1345,7 @@ edit_group_undo (WEdit * edit)
 {
     long ac = KEY_PRESS;
     long cur_ac = KEY_PRESS;
+
     while (ac != STACK_BOTTOM && ac == cur_ac)
     {
         cur_ac = get_prev_undo_action (edit);
@@ -1390,7 +1394,8 @@ is_aligned_on_a_tab (WEdit * edit)
 static gboolean
 right_of_four_spaces (WEdit * edit)
 {
-    int i, ch = 0;
+    int i;
+    int ch = 0;
 
     for (i = 1; i <= HALF_TAB_SIZE; i++)
         ch |= edit_buffer_get_byte (&edit->buffer, edit->buffer.curs1 - i);
@@ -1964,7 +1969,7 @@ edit_write_stream (WEdit * edit, FILE * f)
 gboolean
 is_break_char (char c)
 {
-    return (isspace (c) || strchr ("{}[]()<>=|/\\!?~-+`'\",.;:#$%^&*", c));
+    return (isspace (c) || strchr ("{}[]()<>=|/\\!?~-+`'\",.;:#$%^&*", c) != NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2391,6 +2396,7 @@ edit_push_undo_action (WEdit * edit, long c)
         && ((sp - 2) & edit->undo_stack_size_mask) != edit->undo_stack_bottom)
     {
         long d;
+
         if (edit->undo_stack[spm1] < 0)
         {
             d = edit->undo_stack[(sp - 2) & edit->undo_stack_size_mask];
@@ -2471,6 +2477,7 @@ edit_push_redo_action (WEdit * edit, long c)
         && ((sp - 2) & edit->redo_stack_size_mask) != edit->redo_stack_bottom)
     {
         long d;
+
         if (edit->redo_stack[spm1] < 0)
         {
             d = edit->redo_stack[(sp - 2) & edit->redo_stack_size_mask];
@@ -2914,7 +2921,6 @@ edit_scroll_upward (WEdit * edit, long i)
     edit_update_curs_row (edit);
 }
 
-
 /* --------------------------------------------------------------------------------------------- */
 
 void
@@ -3082,7 +3088,6 @@ edit_set_markers (WEdit * edit, off_t m1, off_t m2, long c1, long c2)
     edit->column1 = c1;
     edit->column2 = c2;
 }
-
 
 /* --------------------------------------------------------------------------------------------- */
 /** highlight marker toggle */
@@ -3378,7 +3383,6 @@ edit_execute_cmd (WEdit * edit, long command, int char_for_insertion)
             if (!mc_global.utf8_display || edit->charpoint == 0)
 #endif
                 if (edit_buffer_get_current_byte (&edit->buffer) != '\n')
-
                     edit_delete (edit, FALSE);
         }
         if (edit_options.cursor_beyond_eol && edit->over_col > 0)
@@ -3402,9 +3406,8 @@ edit_execute_cmd (WEdit * edit, long command, int char_for_insertion)
                 str[1] = '\0';
             }
             else
-            {
                 str[res] = '\0';
-            }
+
             for (i = 0; i <= UTF8_CHAR_LEN && str[i] != '\0'; i++)
             {
                 char_for_insertion = str[i];
