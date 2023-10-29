@@ -65,7 +65,7 @@ int num_history_items_recorded = 60;
 /* --------------------------------------------------------------------------------------------- */
 
 /**
- * Load the history from the ${XDG_CACHE_HOME}/mc/history file.
+ * Load the history from the ${XDG_DATA_HOME}/mc/history file.
  * It is called with the widgets history name and returns the GList list.
  */
 

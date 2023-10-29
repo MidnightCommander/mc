@@ -83,7 +83,7 @@ dlg_default_get_colors (const Widget * w)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
-  * Read histories from the ${XDG_CACHE_HOME}/mc/history file
+  * Read histories from the ${XDG_DATA_HOME}/mc/history file
   */
 static void
 dlg_read_history (WDialog * h)
@@ -571,7 +571,7 @@ dlg_run (WDialog * h)
 /* --------------------------------------------------------------------------------------------- */
 
 /**
-  * Write history to the ${XDG_CACHE_HOME}/mc/history file
+  * Write history to the ${XDG_DATA_HOME}/mc/history file
   */
 void
 dlg_save_history (WDialog * h)
