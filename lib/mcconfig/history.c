@@ -95,6 +95,33 @@ mc_config_history_get (const char *name)
 /* --------------------------------------------------------------------------------------------- */
 
 /**
+ * Get the recent item of a history from the ${XDG_DATA_HOME}/mc/history file.
+ *
+ * TODO: get rid of load the entire history to get the only top item.
+ */
+
+char *
+mc_config_history_get_recent_item (const char *name)
+{
+    GList *history;
+    char *item = NULL;
+
+    history = mc_config_history_get (name);
+    if (history != NULL)
+    {
+        /* FIXME: can history->data be NULL? */
+        item = (char *) history->data;
+        history->data = NULL;
+        history = g_list_first (history);
+        g_list_free_full (history, g_free);
+    }
+
+    return item;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
  * Load history from the mc_config
  */
 GList *

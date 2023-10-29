@@ -105,6 +105,8 @@ vfs_path_t *mc_config_get_full_vpath (const char *config_name);
 
 /* read history to the mc_config, but don't save config to file */
 GList *mc_config_history_get (const char *name);
+/* read recent item from the history */
+char *mc_config_history_get_recent_item (const char *name);
 /* load history from the mc_config */
 GList *mc_config_history_load (mc_config_t * cfg, const char *name);
 /* save history to the mc_config, but don't save config to file */
