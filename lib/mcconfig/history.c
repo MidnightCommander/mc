@@ -204,8 +204,7 @@ mc_config_history_save (mc_config_t * cfg, const char *name, GList * h)
     for (i = 0; (i < num_history_items_recorded - 1) && (h->prev != NULL); i++)
         h = g_list_previous (h);
 
-    if (name != NULL)
-        mc_config_del_group (cfg, name);
+    mc_config_del_group (cfg, name);
 
     /* create charset conversion handler to convert strings
        from system codepage to UTF-8 */
