@@ -1,5 +1,5 @@
 /*
-   Widgets for the Midnight Commander
+   Configure module for the Midnight Commander
 
    Copyright (C) 1994-2023
    Free Software Foundation, Inc.
@@ -10,7 +10,7 @@
    Jakub Jelinek, 1995
    Andrej Borsenkow, 1996
    Norbert Warmuth, 1997
-   Andrew Borodin <aborodin@vmail.ru>, 2009-2019
+   Andrew Borodin <aborodin@vmail.ru>, 2009-2023
 
    This file is part of the Midnight Commander.
 
