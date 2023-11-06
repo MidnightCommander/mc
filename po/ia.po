@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-08-06 15:50+0200\n"
+"POT-Creation-Date: 2023-11-06 21:09+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Martijn Dekker <mcdutchie@hotmail.com>, 2012,2017\n"
 "Language-Team: Interlingua (http://app.transifex.com/mc/mc/language/ia/)\n"
@@ -3933,68 +3933,24 @@ msgid ""
 "%s"
 msgstr ""
 
+msgid ""
+"EXTFS virtual file system:\n"
+"wrong file name"
+msgstr ""
+
+msgid ""
+"EXTFS virtual file system:\n"
+"wrong archive name"
+msgstr ""
+
+msgid ""
+"EXTFS virtual file system:\n"
+"cannot build command"
+msgstr ""
+
 #, c-format
 msgid "Warning: cannot open %s directory\n"
 msgstr "Attention: impossibile aperir directorio %s\n"
-
-#, c-format
-msgid "fish: Disconnecting from %s"
-msgstr "fish: Disconnecte de %s"
-
-msgid "fish: Waiting for initial line..."
-msgstr "fish: Attende le linea initial..."
-
-msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr ""
-"Pro le momento il es impossibile establir connexiones authenticate con "
-"contrasigno."
-
-#, c-format
-msgid "fish: Password is required for %s"
-msgstr "fish: Un contrasigno es necessari pro %s"
-
-msgid "fish: Sending password..."
-msgstr "fish: Invia contrasigno..."
-
-msgid "fish: Sending initial line..."
-msgstr "fish: Invia linea initial..."
-
-msgid "fish: Handshaking version..."
-msgstr "fish: Negotia version..."
-
-msgid "fish: Getting host info..."
-msgstr "fish: Obtene info sur host..."
-
-#, c-format
-msgid "fish: Reading directory %s..."
-msgstr "fish: Lege directorio %s..."
-
-#, c-format
-msgid "%s: done."
-msgstr "%s: finite."
-
-#, c-format
-msgid "%s: failure"
-msgstr "%s: fallimento"
-
-#, c-format
-msgid "fish: store %s: sending command..."
-msgstr "fish: immagazina %s: invia commando..."
-
-msgid "fish: Local read failed, sending zeros"
-msgstr "fish: Lectura local fallite, invia zeros"
-
-msgid "fish: storing file"
-msgstr "fish: immagazina file"
-
-msgid "Aborting transfer..."
-msgstr "Aborta transferentia..."
-
-msgid "Error reported after abort."
-msgstr "Error reportate post abortamento."
-
-msgid "Aborted transfer would be successful."
-msgstr "Le transferentia abortate haberea succedite."
 
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
@@ -4105,6 +4061,14 @@ msgstr "(chdir primo)"
 
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: fallite; nulle parte a que revenir"
+
+#, c-format
+msgid "%s: failure"
+msgstr "%s: fallimento"
+
+#, c-format
+msgid "%s: done."
+msgstr "%s: finite."
 
 msgid "ftpfs: storing file"
 msgstr "ftpfs: immagazina file"
@@ -4244,6 +4208,60 @@ msgstr ""
 
 msgid "sftp: Listing done."
 msgstr ""
+
+#, fuzzy, c-format
+msgid "shell: Disconnecting from %s"
+msgstr "fish: Disconnecte de %s"
+
+#, fuzzy
+msgid "shell: Waiting for initial line..."
+msgstr "fish: Attende le linea initial..."
+
+msgid "Sorry, we cannot do password authenticated connections for now."
+msgstr ""
+"Pro le momento il es impossibile establir connexiones authenticate con "
+"contrasigno."
+
+#, fuzzy, c-format
+msgid "shell: Password is required for %s"
+msgstr "fish: Un contrasigno es necessari pro %s"
+
+#, fuzzy
+msgid "shell: Sending password..."
+msgstr "fish: Invia contrasigno..."
+
+#, fuzzy
+msgid "shell: Sending initial line..."
+msgstr "fish: Invia linea initial..."
+
+#, fuzzy
+msgid "shell: Getting host info..."
+msgstr "fish: Obtene info sur host..."
+
+#, fuzzy, c-format
+msgid "shell: Reading directory %s..."
+msgstr "fish: Lege directorio %s..."
+
+#, fuzzy, c-format
+msgid "shell: store %s: sending command..."
+msgstr "fish: immagazina %s: invia commando..."
+
+#, fuzzy
+msgid "shell: Local read failed, sending zeros"
+msgstr "fish: Lectura local fallite, invia zeros"
+
+#, fuzzy
+msgid "shell: storing file"
+msgstr "fish: immagazina file"
+
+msgid "Aborting transfer..."
+msgstr "Aborta transferentia..."
+
+msgid "Error reported after abort."
+msgstr "Error reportate post abortamento."
+
+msgid "Aborted transfer would be successful."
+msgstr "Le transferentia abortate haberea succedite."
 
 msgid "Inconsistent tar archive"
 msgstr "Archivo tar inconsistente"
@@ -4448,3 +4466,6 @@ msgstr "Continuar ab initio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "fish: Handshaking version..."
+#~ msgstr "fish: Negotia version..."

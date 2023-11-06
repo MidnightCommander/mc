@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-08-06 15:50+0200\n"
+"POT-Creation-Date: 2023-11-06 21:09+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Alexander Kilian <alexander.kilian@gmail.com>, 2022\n"
 "Language-Team: Swedish (http://app.transifex.com/mc/mc/language/sv/)\n"
@@ -4135,66 +4135,24 @@ msgid ""
 "%s"
 msgstr ""
 
+msgid ""
+"EXTFS virtual file system:\n"
+"wrong file name"
+msgstr ""
+
+msgid ""
+"EXTFS virtual file system:\n"
+"wrong archive name"
+msgstr ""
+
+msgid ""
+"EXTFS virtual file system:\n"
+"cannot build command"
+msgstr ""
+
 #, c-format
 msgid "Warning: cannot open %s directory\n"
 msgstr "Varning: Öppning av katalogen %s misslyckades\n"
-
-#, c-format
-msgid "fish: Disconnecting from %s"
-msgstr "fish: Kopplar ned från %s"
-
-msgid "fish: Waiting for initial line..."
-msgstr "fish: Väntar på första raden..."
-
-msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr "Kan inte göra lösenords autentiserade anslutningar för närvarande."
-
-#, c-format
-msgid "fish: Password is required for %s"
-msgstr "fish: Lösenord krävs för %s"
-
-msgid "fish: Sending password..."
-msgstr "fish: Sänder lösenord..."
-
-msgid "fish: Sending initial line..."
-msgstr "fish: Sänder första raden..."
-
-msgid "fish: Handshaking version..."
-msgstr "fish: Handskakning version..."
-
-msgid "fish: Getting host info..."
-msgstr "fish: Mottar värd-info..."
-
-#, c-format
-msgid "fish: Reading directory %s..."
-msgstr "fish: Läser katalog %s..."
-
-#, c-format
-msgid "%s: done."
-msgstr "%s: klar."
-
-#, c-format
-msgid "%s: failure"
-msgstr "%s: fel"
-
-#, c-format
-msgid "fish: store %s: sending command..."
-msgstr "fish: lagrar %s: sänder kommando..."
-
-msgid "fish: Local read failed, sending zeros"
-msgstr "fish: Lokal läsning misslyckades, sänder nollor"
-
-msgid "fish: storing file"
-msgstr "fish: sparar fil"
-
-msgid "Aborting transfer..."
-msgstr "Avbryter överföringen..."
-
-msgid "Error reported after abort."
-msgstr "Fel rapporterades efter avslutningen."
-
-msgid "Aborted transfer would be successful."
-msgstr "Avbruten överföring skulle ha varit lyckad."
 
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
@@ -4305,6 +4263,14 @@ msgstr "(chdir först)"
 
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: misslyckades: det finns ingenstans att falla tillbaka på"
+
+#, c-format
+msgid "%s: failure"
+msgstr "%s: fel"
+
+#, c-format
+msgid "%s: done."
+msgstr "%s: klar."
 
 msgid "ftpfs: storing file"
 msgstr "ftpfs: sparar fil"
@@ -4444,6 +4410,58 @@ msgstr "sftp: (Ctrl-G avbryter) Listar... %s"
 
 msgid "sftp: Listing done."
 msgstr "sftp: Listning klar."
+
+#, fuzzy, c-format
+msgid "shell: Disconnecting from %s"
+msgstr "fish: Kopplar ned från %s"
+
+#, fuzzy
+msgid "shell: Waiting for initial line..."
+msgstr "fish: Väntar på första raden..."
+
+msgid "Sorry, we cannot do password authenticated connections for now."
+msgstr "Kan inte göra lösenords autentiserade anslutningar för närvarande."
+
+#, fuzzy, c-format
+msgid "shell: Password is required for %s"
+msgstr "fish: Lösenord krävs för %s"
+
+#, fuzzy
+msgid "shell: Sending password..."
+msgstr "fish: Sänder lösenord..."
+
+#, fuzzy
+msgid "shell: Sending initial line..."
+msgstr "fish: Sänder första raden..."
+
+#, fuzzy
+msgid "shell: Getting host info..."
+msgstr "fish: Mottar värd-info..."
+
+#, fuzzy, c-format
+msgid "shell: Reading directory %s..."
+msgstr "fish: Läser katalog %s..."
+
+#, fuzzy, c-format
+msgid "shell: store %s: sending command..."
+msgstr "fish: lagrar %s: sänder kommando..."
+
+#, fuzzy
+msgid "shell: Local read failed, sending zeros"
+msgstr "fish: Lokal läsning misslyckades, sänder nollor"
+
+#, fuzzy
+msgid "shell: storing file"
+msgstr "fish: sparar fil"
+
+msgid "Aborting transfer..."
+msgstr "Avbryter överföringen..."
+
+msgid "Error reported after abort."
+msgstr "Fel rapporterades efter avslutningen."
+
+msgid "Aborted transfer would be successful."
+msgstr "Avbruten överföring skulle ha varit lyckad."
 
 msgid "Inconsistent tar archive"
 msgstr "Inkonsistensfel i tararkivet"
@@ -4659,3 +4677,6 @@ msgstr "Fortsätt från början?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan inte hämta en lokal kopia av /ftp://some.host/editme.txt"
+
+#~ msgid "fish: Handshaking version..."
+#~ msgstr "fish: Handskakning version..."

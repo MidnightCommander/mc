@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-08-06 15:50+0200\n"
+"POT-Creation-Date: 2023-11-06 21:09+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: debconf <prach.by@gmail.com>, 2023\n"
 "Language-Team: Belarusian (http://app.transifex.com/mc/mc/language/be/)\n"
@@ -24,9 +24,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
-"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -4181,66 +4181,33 @@ msgstr ""
 "Віртуальная файлавая сістэма EXTFS:\n"
 "%s"
 
+#, fuzzy
+msgid ""
+"EXTFS virtual file system:\n"
+"wrong file name"
+msgstr ""
+"Віртуальная файлавая сістэма EXTFS:\n"
+"%s"
+
+#, fuzzy
+msgid ""
+"EXTFS virtual file system:\n"
+"wrong archive name"
+msgstr ""
+"Віртуальная файлавая сістэма EXTFS:\n"
+"%s"
+
+#, fuzzy
+msgid ""
+"EXTFS virtual file system:\n"
+"cannot build command"
+msgstr ""
+"Віртуальная файлавая сістэма EXTFS:\n"
+"%s"
+
 #, c-format
 msgid "Warning: cannot open %s directory\n"
 msgstr "Увага: немагчыма адкрыць каталог «%s»\n"
-
-#, c-format
-msgid "fish: Disconnecting from %s"
-msgstr "fish: адлучаемся ад «%s»"
-
-msgid "fish: Waiting for initial line..."
-msgstr "fish: чакаецца пачатковы радок..."
-
-msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr "Пакуль немагчыма злучыцца і ўвесці пароль."
-
-#, c-format
-msgid "fish: Password is required for %s"
-msgstr "fish: «%s» патрабуе пароль"
-
-msgid "fish: Sending password..."
-msgstr "fish: адпраўляецца пароль..."
-
-msgid "fish: Sending initial line..."
-msgstr "fish: адпраўляецца пачатковы радок..."
-
-msgid "fish: Handshaking version..."
-msgstr "fish: пацвярджаецца версія..."
-
-msgid "fish: Getting host info..."
-msgstr "fish: атрымліваюцца звесткі пра вузел..."
-
-#, c-format
-msgid "fish: Reading directory %s..."
-msgstr "fish: чытаецца каталог «%s»..."
-
-#, c-format
-msgid "%s: done."
-msgstr "%s: завершана."
-
-#, c-format
-msgid "%s: failure"
-msgstr "%s: не атрымалася"
-
-#, c-format
-msgid "fish: store %s: sending command..."
-msgstr "fish: захаваць «%s»: адпраўляецца загад..."
-
-msgid "fish: Local read failed, sending zeros"
-msgstr "fish: не атрымалася прачытаць лакальнае, адпраўляюцца нулі"
-
-msgid "fish: storing file"
-msgstr "fish: захоўваецца файл"
-
-msgid "Aborting transfer..."
-msgstr "Перадача скасоўваецца..."
-
-msgid "Error reported after abort."
-msgstr "Пасля скасавання выяўлена памылка."
-
-msgid "Aborted transfer would be successful."
-msgstr "Перадача скасаваная."
 
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
@@ -4351,6 +4318,14 @@ msgstr "(спачатку «chdir»)"
 
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: памылка; няма куды вярнуцца ў аварыйны стан"
+
+#, c-format
+msgid "%s: failure"
+msgstr "%s: не атрымалася"
+
+#, c-format
+msgid "%s: done."
+msgstr "%s: завершана."
 
 msgid "ftpfs: storing file"
 msgstr "ftpfs: захоўваецца файл"
@@ -4508,6 +4483,58 @@ msgstr "sftp: чытаецца спіс (спыніць — «Ctrl-G»)… %s"
 
 msgid "sftp: Listing done."
 msgstr "sftp: спіс прачытаны."
+
+#, fuzzy, c-format
+msgid "shell: Disconnecting from %s"
+msgstr "fish: адлучаемся ад «%s»"
+
+#, fuzzy
+msgid "shell: Waiting for initial line..."
+msgstr "fish: чакаецца пачатковы радок..."
+
+msgid "Sorry, we cannot do password authenticated connections for now."
+msgstr "Пакуль немагчыма злучыцца і ўвесці пароль."
+
+#, fuzzy, c-format
+msgid "shell: Password is required for %s"
+msgstr "fish: «%s» патрабуе пароль"
+
+#, fuzzy
+msgid "shell: Sending password..."
+msgstr "fish: адпраўляецца пароль..."
+
+#, fuzzy
+msgid "shell: Sending initial line..."
+msgstr "fish: адпраўляецца пачатковы радок..."
+
+#, fuzzy
+msgid "shell: Getting host info..."
+msgstr "fish: атрымліваюцца звесткі пра вузел..."
+
+#, fuzzy, c-format
+msgid "shell: Reading directory %s..."
+msgstr "fish: чытаецца каталог «%s»..."
+
+#, fuzzy, c-format
+msgid "shell: store %s: sending command..."
+msgstr "fish: захаваць «%s»: адпраўляецца загад..."
+
+#, fuzzy
+msgid "shell: Local read failed, sending zeros"
+msgstr "fish: не атрымалася прачытаць лакальнае, адпраўляюцца нулі"
+
+#, fuzzy
+msgid "shell: storing file"
+msgstr "fish: захоўваецца файл"
+
+msgid "Aborting transfer..."
+msgstr "Перадача скасоўваецца..."
+
+msgid "Error reported after abort."
+msgstr "Пасля скасавання выяўлена памылка."
+
+msgid "Aborted transfer would be successful."
+msgstr "Перадача скасаваная."
 
 msgid "Inconsistent tar archive"
 msgstr "Несумяшчальны архіў tar"
@@ -4723,3 +4750,6 @@ msgstr "Працягваць ад пачатку?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Немагчыма атрымаць лакальную копію /ftp://some.host/editme.txt"
+
+#~ msgid "fish: Handshaking version..."
+#~ msgstr "fish: пацвярджаецца версія..."

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-08-06 15:50+0200\n"
+"POT-Creation-Date: 2023-11-06 21:09+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Mantas Kriaučiūnas Baltix <mantas@akl.lt>, 2020\n"
 "Language-Team: Lithuanian (http://app.transifex.com/mc/mc/language/lt/)\n"
@@ -4030,66 +4030,24 @@ msgid ""
 "%s"
 msgstr ""
 
+msgid ""
+"EXTFS virtual file system:\n"
+"wrong file name"
+msgstr ""
+
+msgid ""
+"EXTFS virtual file system:\n"
+"wrong archive name"
+msgstr ""
+
+msgid ""
+"EXTFS virtual file system:\n"
+"cannot build command"
+msgstr ""
+
 #, c-format
 msgid "Warning: cannot open %s directory\n"
 msgstr "Įspėjimas: nepavyko pereiti į aplanką %s\n"
-
-#, c-format
-msgid "fish: Disconnecting from %s"
-msgstr "fish: atsijungiama nuo %s"
-
-msgid "fish: Waiting for initial line..."
-msgstr "fish: laukiama pradinės eilutės..."
-
-msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr "Šiuo metu slaptažodžių apsaugotų prisijungimų atlikti negalima."
-
-#, c-format
-msgid "fish: Password is required for %s"
-msgstr ""
-
-msgid "fish: Sending password..."
-msgstr "fish: siunčiamas slaptažodis..."
-
-msgid "fish: Sending initial line..."
-msgstr "fish: siunčiama pradinė linija..."
-
-msgid "fish: Handshaking version..."
-msgstr "fish: derinamos versijos..."
-
-msgid "fish: Getting host info..."
-msgstr ""
-
-#, c-format
-msgid "fish: Reading directory %s..."
-msgstr "fish: atveriamas aplankas %s..."
-
-#, c-format
-msgid "%s: done."
-msgstr "%s: atlikta."
-
-#, c-format
-msgid "%s: failure"
-msgstr "%s: nepavyko"
-
-#, c-format
-msgid "fish: store %s: sending command..."
-msgstr "fish: „%s“ siuntimas: siunčiamas slaptažodis..."
-
-msgid "fish: Local read failed, sending zeros"
-msgstr "fish: vietinis skaitymas nepavyko, siunčiami nuliai"
-
-msgid "fish: storing file"
-msgstr ""
-
-msgid "Aborting transfer..."
-msgstr "Nutraukiamas siuntimas..."
-
-msgid "Error reported after abort."
-msgstr "Po nutraukties pranešta klaida."
-
-msgid "Aborted transfer would be successful."
-msgstr "Nutrauktas siuntimas būtų sėkmingas."
 
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
@@ -4200,6 +4158,14 @@ msgstr "(keičiamas katalogas)"
 
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: nepavyko; nėra kur grįžti"
+
+#, c-format
+msgid "%s: failure"
+msgstr "%s: nepavyko"
+
+#, c-format
+msgid "%s: done."
+msgstr "%s: atlikta."
 
 msgid "ftpfs: storing file"
 msgstr ""
@@ -4337,6 +4303,57 @@ msgstr ""
 
 msgid "sftp: Listing done."
 msgstr ""
+
+#, fuzzy, c-format
+msgid "shell: Disconnecting from %s"
+msgstr "fish: atsijungiama nuo %s"
+
+#, fuzzy
+msgid "shell: Waiting for initial line..."
+msgstr "fish: laukiama pradinės eilutės..."
+
+msgid "Sorry, we cannot do password authenticated connections for now."
+msgstr "Šiuo metu slaptažodžių apsaugotų prisijungimų atlikti negalima."
+
+#, c-format
+msgid "shell: Password is required for %s"
+msgstr ""
+
+#, fuzzy
+msgid "shell: Sending password..."
+msgstr "fish: siunčiamas slaptažodis..."
+
+#, fuzzy
+msgid "shell: Sending initial line..."
+msgstr "fish: siunčiama pradinė linija..."
+
+msgid "shell: Getting host info..."
+msgstr ""
+
+#, fuzzy, c-format
+msgid "shell: Reading directory %s..."
+msgstr "fish: atveriamas aplankas %s..."
+
+#, fuzzy, c-format
+msgid "shell: store %s: sending command..."
+msgstr "fish: „%s“ siuntimas: siunčiamas slaptažodis..."
+
+#, fuzzy
+msgid "shell: Local read failed, sending zeros"
+msgstr "fish: vietinis skaitymas nepavyko, siunčiami nuliai"
+
+#, fuzzy
+msgid "shell: storing file"
+msgstr "Parsiunčiamas failas"
+
+msgid "Aborting transfer..."
+msgstr "Nutraukiamas siuntimas..."
+
+msgid "Error reported after abort."
+msgstr "Po nutraukties pranešta klaida."
+
+msgid "Aborted transfer would be successful."
+msgstr "Nutrauktas siuntimas būtų sėkmingas."
 
 msgid "Inconsistent tar archive"
 msgstr "Nevientisas tar archyvas"
@@ -4544,3 +4561,6 @@ msgstr "Tęsti nuo pradžios?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "fish: Handshaking version..."
+#~ msgstr "fish: derinamos versijos..."

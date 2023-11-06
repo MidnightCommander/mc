@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-08-06 15:50+0200\n"
+"POT-Creation-Date: 2023-11-06 21:09+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Meng Pang Wang, 2023\n"
 "Language-Team: Chinese (Taiwan) (http://app.transifex.com/mc/mc/language/"
@@ -3985,66 +3985,24 @@ msgid ""
 "%s"
 msgstr ""
 
+msgid ""
+"EXTFS virtual file system:\n"
+"wrong file name"
+msgstr ""
+
+msgid ""
+"EXTFS virtual file system:\n"
+"wrong archive name"
+msgstr ""
+
+msgid ""
+"EXTFS virtual file system:\n"
+"cannot build command"
+msgstr ""
+
 #, c-format
 msgid "Warning: cannot open %s directory\n"
 msgstr "警告：無法開啟目錄 %s\n"
-
-#, c-format
-msgid "fish: Disconnecting from %s"
-msgstr "fish: 結束至 %s 的連線"
-
-msgid "fish: Waiting for initial line..."
-msgstr "fish: 等待起始化訊息"
-
-msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr "不好意思，目前無法進行經過密碼認證的連線。"
-
-#, c-format
-msgid "fish: Password is required for %s"
-msgstr "fish: %s 要求輸入密碼"
-
-msgid "fish: Sending password..."
-msgstr "fish: 正在送出登入密碼"
-
-msgid "fish: Sending initial line..."
-msgstr "fish: 送出起始化訊息"
-
-msgid "fish: Handshaking version..."
-msgstr "fish: 交握版本"
-
-msgid "fish: Getting host info..."
-msgstr "fish: 取得主機資訊..."
-
-#, c-format
-msgid "fish: Reading directory %s..."
-msgstr "fish：正在讀取目錄 %s..."
-
-#, c-format
-msgid "%s: done."
-msgstr "%s: 完成。"
-
-#, c-format
-msgid "%s: failure"
-msgstr "%s: 失敗"
-
-#, c-format
-msgid "fish: store %s: sending command..."
-msgstr "fish: 儲存%s: 送出命令"
-
-msgid "fish: Local read failed, sending zeros"
-msgstr "fish: 本地端讀取錯誤, 沒有送出"
-
-msgid "fish: storing file"
-msgstr "fish: 儲存檔案"
-
-msgid "Aborting transfer..."
-msgstr "放棄傳輸...."
-
-msgid "Error reported after abort."
-msgstr "放棄後回報錯誤"
-
-msgid "Aborted transfer would be successful."
-msgstr "將成功放棄傳輸"
 
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
@@ -4155,6 +4113,14 @@ msgstr "(先切換路徑)"
 
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: 失敗; 無法轉移到其它目錄"
+
+#, c-format
+msgid "%s: failure"
+msgstr "%s: 失敗"
+
+#, c-format
+msgid "%s: done."
+msgstr "%s: 完成。"
 
 msgid "ftpfs: storing file"
 msgstr "ftpfs: 儲存檔案"
@@ -4292,6 +4258,58 @@ msgstr "sftp: (Ctrl-G 跳出) 列表... %s"
 
 msgid "sftp: Listing done."
 msgstr "sftp: 列表完成。"
+
+#, fuzzy, c-format
+msgid "shell: Disconnecting from %s"
+msgstr "fish: 結束至 %s 的連線"
+
+#, fuzzy
+msgid "shell: Waiting for initial line..."
+msgstr "fish: 等待起始化訊息"
+
+msgid "Sorry, we cannot do password authenticated connections for now."
+msgstr "不好意思，目前無法進行經過密碼認證的連線。"
+
+#, fuzzy, c-format
+msgid "shell: Password is required for %s"
+msgstr "fish: %s 要求輸入密碼"
+
+#, fuzzy
+msgid "shell: Sending password..."
+msgstr "fish: 正在送出登入密碼"
+
+#, fuzzy
+msgid "shell: Sending initial line..."
+msgstr "fish: 送出起始化訊息"
+
+#, fuzzy
+msgid "shell: Getting host info..."
+msgstr "fish: 取得主機資訊..."
+
+#, fuzzy, c-format
+msgid "shell: Reading directory %s..."
+msgstr "fish：正在讀取目錄 %s..."
+
+#, fuzzy, c-format
+msgid "shell: store %s: sending command..."
+msgstr "fish: 儲存%s: 送出命令"
+
+#, fuzzy
+msgid "shell: Local read failed, sending zeros"
+msgstr "fish: 本地端讀取錯誤, 沒有送出"
+
+#, fuzzy
+msgid "shell: storing file"
+msgstr "fish: 儲存檔案"
+
+msgid "Aborting transfer..."
+msgstr "放棄傳輸...."
+
+msgid "Error reported after abort."
+msgstr "放棄後回報錯誤"
+
+msgid "Aborted transfer would be successful."
+msgstr "將成功放棄傳輸"
 
 msgid "Inconsistent tar archive"
 msgstr "不完整的 tar 檔案集"
@@ -4503,3 +4521,6 @@ msgstr "從頭開始?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "無法取得本地的副本在 ftp://some.host/editme.txt"
+
+#~ msgid "fish: Handshaking version..."
+#~ msgstr "fish: 交握版本"
