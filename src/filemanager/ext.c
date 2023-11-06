@@ -331,15 +331,19 @@ exec_make_shell_string (const char *lc_data, const vfs_path_t * filename_vpath)
                                 }
                             }
 
-                            if (!is_cd)
-                                g_string_append (shell_string, text);
-                            else
+                            if (text != NULL)
                             {
-                                strcpy (pbuffer, text);
-                                pbuffer = strchr (pbuffer, 0);
+                                if (!is_cd)
+                                    g_string_append (shell_string, text);
+                                else
+                                {
+                                    strcpy (pbuffer, text);
+                                    pbuffer = strchr (pbuffer, '\0');
+                                }
+
+                                g_free (text);
                             }
 
-                            g_free (text);
                             written_nonspace = TRUE;
                         }
                     }
@@ -593,12 +597,15 @@ get_popen_information (const char *cmd_file, const char *args, char *buf, int bu
 static int
 get_file_type_local (const vfs_path_t * filename_vpath, char *buf, int buflen)
 {
-    char *tmp;
-    int ret;
+    char *filename_quoted;
+    int ret = 0;
 
-    tmp = name_quote (vfs_path_get_last_path_str (filename_vpath), FALSE);
-    ret = get_popen_information (FILE_CMD, tmp, buf, buflen);
-    g_free (tmp);
+    filename_quoted = name_quote (vfs_path_get_last_path_str (filename_vpath), FALSE);
+    if (filename_quoted != NULL)
+    {
+        ret = get_popen_information (FILE_CMD, filename_quoted, buf, buflen);
+        g_free (filename_quoted);
+    }
 
     return ret;
 }
@@ -613,18 +620,28 @@ get_file_type_local (const vfs_path_t * filename_vpath, char *buf, int buflen)
 static int
 get_file_encoding_local (const vfs_path_t * filename_vpath, char *buf, int buflen)
 {
-    char *tmp, *lang, *args;
-    int ret;
+    char *filename_quoted;
+    int ret = 0;
 
-    tmp = name_quote (vfs_path_get_last_path_str (filename_vpath), FALSE);
-    lang = name_quote (autodetect_codeset, FALSE);
-    args = g_strconcat (" -L", lang, " -i ", tmp, (char *) NULL);
+    filename_quoted = name_quote (vfs_path_get_last_path_str (filename_vpath), FALSE);
+    if (filename_quoted != NULL)
+    {
+        char *lang;
 
-    ret = get_popen_information ("enca", args, buf, buflen);
+        lang = name_quote (autodetect_codeset, FALSE);
+        if (lang != NULL)
+        {
+            char *args;
 
-    g_free (args);
-    g_free (lang);
-    g_free (tmp);
+            args = g_strdup_printf (" -L %s -i %s", lang, filename_quoted);
+            g_free (lang);
+
+            ret = get_popen_information ("enca", args, buf, buflen);
+            g_free (args);
+        }
+
+        g_free (filename_quoted);
+    }
 
     return ret;
 }

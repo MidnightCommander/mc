@@ -46,9 +46,15 @@
 
 /*** global variables ****************************************************************************/
 
-static char *tty_color_defaults__fg = NULL;
-static char *tty_color_defaults__bg = NULL;
-static char *tty_color_defaults__attrs = NULL;
+/* *INDENT-OFF* */
+static tty_color_pair_t tty_color_defaults =
+{
+    .fg = NULL,
+    .bg = NULL,
+    .attrs = NULL,
+    .pair_index = 0
+};
+/* *INDENT-ON* */
 
 /* Set if we are actually using colors */
 gboolean use_colors = FALSE;
@@ -67,25 +73,23 @@ static GHashTable *mc_tty_color__hashtable = NULL;
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-static gboolean
-tty_color_free_condition_cb (gpointer key, gpointer value, gpointer user_data)
+static void
+mc_color__deinit (tty_color_pair_t * color)
 {
-    tty_color_pair_t *mc_color_pair = (tty_color_pair_t *) value;
-    gboolean is_temp_color;
-
-    (void) key;
-
-    is_temp_color = user_data != NULL;
-    return (mc_color_pair->is_temp == is_temp_color);
+    g_free (color->fg);
+    g_free (color->bg);
+    g_free (color->attrs);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
-tty_color_free_all (gboolean is_temp_color)
+static gboolean
+tty_color_free_temp_cb (gpointer key, gpointer value, gpointer user_data)
 {
-    g_hash_table_foreach_remove (mc_tty_color__hashtable, tty_color_free_condition_cb,
-                                 is_temp_color ? GSIZE_TO_POINTER (1) : NULL);
+    (void) key;
+    (void) user_data;
+
+    return ((tty_color_lib_pair_t *) value)->is_temp;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -93,7 +97,7 @@ tty_color_free_all (gboolean is_temp_color)
 static gboolean
 tty_color_get_next_cpn_cb (gpointer key, gpointer value, gpointer user_data)
 {
-    tty_color_pair_t *mc_color_pair = (tty_color_pair_t *) value;
+    tty_color_lib_pair_t *mc_color_pair = (tty_color_lib_pair_t *) value;
     size_t cp = GPOINTER_TO_SIZE (user_data);
 
     (void) key;
@@ -134,10 +138,7 @@ void
 tty_colors_done (void)
 {
     tty_color_deinit_lib ();
-    g_free (tty_color_defaults__fg);
-    g_free (tty_color_defaults__bg);
-    g_free (tty_color_defaults__attrs);
-
+    mc_color__deinit (&tty_color_defaults);
     g_hash_table_destroy (mc_tty_color__hashtable);
 }
 
@@ -152,30 +153,27 @@ tty_use_colors (void)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-tty_try_alloc_color_pair2 (const char *fg, const char *bg, const char *attrs,
-                           gboolean is_temp_color)
+tty_try_alloc_color_pair (const tty_color_pair_t * color, gboolean is_temp)
 {
+    gboolean is_base;
     gchar *color_pair;
-    tty_color_pair_t *mc_color_pair;
+    tty_color_lib_pair_t *mc_color_pair;
     int ifg, ibg, attr;
 
-    if (fg == NULL || strcmp (fg, "base") == 0)
-        fg = tty_color_defaults__fg;
-    if (bg == NULL || strcmp (bg, "base") == 0)
-        bg = tty_color_defaults__bg;
-    if (attrs == NULL || strcmp (attrs, "base") == 0)
-        attrs = tty_color_defaults__attrs;
-
-    ifg = tty_color_get_index_by_name (fg);
-    ibg = tty_color_get_index_by_name (bg);
-    attr = tty_attr_get_bits (attrs);
+    is_base = (color->fg == NULL || strcmp (color->fg, "base") == 0);
+    ifg = tty_color_get_index_by_name (is_base ? tty_color_defaults.fg : color->fg);
+    is_base = (color->bg == NULL || strcmp (color->bg, "base") == 0);
+    ibg = tty_color_get_index_by_name (is_base ? tty_color_defaults.bg : color->bg);
+    is_base = (color->attrs == NULL || strcmp (color->attrs, "base") == 0);
+    attr = tty_attr_get_bits (is_base ? tty_color_defaults.attrs : color->attrs);
 
     color_pair = g_strdup_printf ("%d.%d.%d", ifg, ibg, attr);
     if (color_pair == NULL)
         return 0;
 
     mc_color_pair =
-        (tty_color_pair_t *) g_hash_table_lookup (mc_tty_color__hashtable, (gpointer) color_pair);
+        (tty_color_lib_pair_t *) g_hash_table_lookup (mc_tty_color__hashtable,
+                                                      (gpointer) color_pair);
 
     if (mc_color_pair != NULL)
     {
@@ -183,20 +181,20 @@ tty_try_alloc_color_pair2 (const char *fg, const char *bg, const char *attrs,
         return mc_color_pair->pair_index;
     }
 
-    mc_color_pair = g_try_new0 (tty_color_pair_t, 1);
+    mc_color_pair = g_try_new0 (tty_color_lib_pair_t, 1);
     if (mc_color_pair == NULL)
     {
         g_free (color_pair);
         return 0;
     }
 
-    mc_color_pair->is_temp = is_temp_color;
-    mc_color_pair->ifg = ifg;
-    mc_color_pair->ibg = ibg;
+    mc_color_pair->is_temp = is_temp;
+    mc_color_pair->fg = ifg;
+    mc_color_pair->bg = ibg;
     mc_color_pair->attr = attr;
     mc_color_pair->pair_index = tty_color_get_next__color_pair_number ();
 
-    tty_color_try_alloc_pair_lib (mc_color_pair);
+    tty_color_try_alloc_lib_pair (mc_color_pair);
 
     g_hash_table_insert (mc_tty_color__hashtable, (gpointer) color_pair, (gpointer) mc_color_pair);
 
@@ -205,40 +203,31 @@ tty_try_alloc_color_pair2 (const char *fg, const char *bg, const char *attrs,
 
 /* --------------------------------------------------------------------------------------------- */
 
-int
-tty_try_alloc_color_pair (const char *fg, const char *bg, const char *attrs)
+void
+tty_color_free_temp (void)
 {
-    return tty_try_alloc_color_pair2 (fg, bg, attrs, TRUE);
+    g_hash_table_foreach_remove (mc_tty_color__hashtable, tty_color_free_temp_cb, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 void
-tty_color_free_all_tmp (void)
+tty_color_free_all (void)
 {
-    tty_color_free_all (TRUE);
+    g_hash_table_remove_all (mc_tty_color__hashtable);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 void
-tty_color_free_all_non_tmp (void)
+tty_color_set_defaults (const tty_color_pair_t * color)
 {
-    tty_color_free_all (FALSE);
-}
+    mc_color__deinit (&tty_color_defaults);
 
-/* --------------------------------------------------------------------------------------------- */
-
-void
-tty_color_set_defaults (const char *fgcolor, const char *bgcolor, const char *attrs)
-{
-    g_free (tty_color_defaults__fg);
-    g_free (tty_color_defaults__bg);
-    g_free (tty_color_defaults__attrs);
-
-    tty_color_defaults__fg = g_strdup (fgcolor);
-    tty_color_defaults__bg = g_strdup (bgcolor);
-    tty_color_defaults__attrs = g_strdup (attrs);
+    tty_color_defaults.fg = g_strdup (color->fg);
+    tty_color_defaults.bg = g_strdup (color->bg);
+    tty_color_defaults.attrs = g_strdup (color->attrs);
+    tty_color_defaults.pair_index = 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */

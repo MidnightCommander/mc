@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-08-06 15:50+0200\n"
+"POT-Creation-Date: 2023-11-06 21:09+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Gilberto Jorge <gmj125@gmail.com>, 2013-2023\n"
 "Language-Team: Portuguese (http://app.transifex.com/mc/mc/language/pt/)\n"
@@ -4181,66 +4181,33 @@ msgstr ""
 "Sistema de ficheiro virtual EXTFS:\n"
 "%s"
 
+#, fuzzy
+msgid ""
+"EXTFS virtual file system:\n"
+"wrong file name"
+msgstr ""
+"Sistema de ficheiro virtual EXTFS:\n"
+"%s"
+
+#, fuzzy
+msgid ""
+"EXTFS virtual file system:\n"
+"wrong archive name"
+msgstr ""
+"Sistema de ficheiro virtual EXTFS:\n"
+"%s"
+
+#, fuzzy
+msgid ""
+"EXTFS virtual file system:\n"
+"cannot build command"
+msgstr ""
+"Sistema de ficheiro virtual EXTFS:\n"
+"%s"
+
 #, c-format
 msgid "Warning: cannot open %s directory\n"
 msgstr "Aviso: não é possível abrir o diretório %s\n"
-
-#, c-format
-msgid "fish: Disconnecting from %s"
-msgstr "fish: A desligar de %s"
-
-msgid "fish: Waiting for initial line..."
-msgstr "fish: A aguardar por linha inicial..."
-
-msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr "Desculpe, por ora ligações com senha autenticada não são possíveis."
-
-#, c-format
-msgid "fish: Password is required for %s"
-msgstr "fish: É necessário senha para %s"
-
-msgid "fish: Sending password..."
-msgstr "fish: A enviar senha..."
-
-msgid "fish: Sending initial line..."
-msgstr "fish: A enviar linha inicial..."
-
-msgid "fish: Handshaking version..."
-msgstr "fish: Versão de protocolo (handshacking)..."
-
-msgid "fish: Getting host info..."
-msgstr "fish: A obter informação de host..."
-
-#, c-format
-msgid "fish: Reading directory %s..."
-msgstr "fish: A ler directório %s..."
-
-#, c-format
-msgid "%s: done."
-msgstr "%s: terminado."
-
-#, c-format
-msgid "%s: failure"
-msgstr "%s: falha"
-
-#, c-format
-msgid "fish: store %s: sending command..."
-msgstr "fish: armazenar %s: a enviar comando..."
-
-msgid "fish: Local read failed, sending zeros"
-msgstr "fish: Leitura local falhou, a enviar zeros"
-
-msgid "fish: storing file"
-msgstr "fish: a guardar ficheiro"
-
-msgid "Aborting transfer..."
-msgstr "A abortar transferência..."
-
-msgid "Error reported after abort."
-msgstr "Erro reportado após abortar."
-
-msgid "Aborted transfer would be successful."
-msgstr "Transferência abortada teria tido sucesso."
 
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
@@ -4351,6 +4318,14 @@ msgstr "(chdir primeiro)"
 
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: falhou; nenhum local para onde ir"
+
+#, c-format
+msgid "%s: failure"
+msgstr "%s: falha"
+
+#, c-format
+msgid "%s: done."
+msgstr "%s: terminado."
 
 msgid "ftpfs: storing file"
 msgstr "ftpfs: a guardar ficheiro"
@@ -4507,6 +4482,58 @@ msgstr "sftp: (Ctrl-G break) A listar... %s"
 
 msgid "sftp: Listing done."
 msgstr "sftp: Listagem efetuada."
+
+#, fuzzy, c-format
+msgid "shell: Disconnecting from %s"
+msgstr "fish: A desligar de %s"
+
+#, fuzzy
+msgid "shell: Waiting for initial line..."
+msgstr "fish: A aguardar por linha inicial..."
+
+msgid "Sorry, we cannot do password authenticated connections for now."
+msgstr "Desculpe, por ora ligações com senha autenticada não são possíveis."
+
+#, fuzzy, c-format
+msgid "shell: Password is required for %s"
+msgstr "fish: É necessário senha para %s"
+
+#, fuzzy
+msgid "shell: Sending password..."
+msgstr "fish: A enviar senha..."
+
+#, fuzzy
+msgid "shell: Sending initial line..."
+msgstr "fish: A enviar linha inicial..."
+
+#, fuzzy
+msgid "shell: Getting host info..."
+msgstr "fish: A obter informação de host..."
+
+#, fuzzy, c-format
+msgid "shell: Reading directory %s..."
+msgstr "fish: A ler directório %s..."
+
+#, fuzzy, c-format
+msgid "shell: store %s: sending command..."
+msgstr "fish: armazenar %s: a enviar comando..."
+
+#, fuzzy
+msgid "shell: Local read failed, sending zeros"
+msgstr "fish: Leitura local falhou, a enviar zeros"
+
+#, fuzzy
+msgid "shell: storing file"
+msgstr "fish: a guardar ficheiro"
+
+msgid "Aborting transfer..."
+msgstr "A abortar transferência..."
+
+msgid "Error reported after abort."
+msgstr "Erro reportado após abortar."
+
+msgid "Aborted transfer would be successful."
+msgstr "Transferência abortada teria tido sucesso."
 
 msgid "Inconsistent tar archive"
 msgstr "Arquivo tar inconsistente"
@@ -4724,3 +4751,6 @@ msgstr "Continuar do início?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Não é possível obter uma cópia local de /ftp://some.host/editme.txt"
+
+#~ msgid "fish: Handshaking version..."
+#~ msgstr "fish: Versão de protocolo (handshacking)..."

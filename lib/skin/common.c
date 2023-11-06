@@ -54,9 +54,10 @@ static gboolean mc_skin_is_init = FALSE;
 static void
 mc_skin_hash_destroy_value (gpointer data)
 {
-    mc_skin_color_t *mc_skin_color = (mc_skin_color_t *) data;
-    g_free (mc_skin_color->fgcolor);
-    g_free (mc_skin_color->bgcolor);
+    tty_color_pair_t *mc_skin_color = (tty_color_pair_t *) data;
+
+    g_free (mc_skin_color->fg);
+    g_free (mc_skin_color->bg);
     g_free (mc_skin_color->attrs);
     g_free (mc_skin_color);
 }
@@ -180,8 +181,7 @@ mc_skin_init (const gchar * skin_override, GError ** mcerror)
 void
 mc_skin_deinit (void)
 {
-    tty_color_free_all_tmp ();
-    tty_color_free_all_non_tmp ();
+    tty_color_free_all ();
 
     MC_PTR_FREE (mc_skin__default.name);
     g_hash_table_destroy (mc_skin__default.colors);

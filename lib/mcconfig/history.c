@@ -1,5 +1,5 @@
 /*
-   Widgets for the Midnight Commander
+   Configure module for the Midnight Commander
 
    Copyright (C) 1994-2023
    Free Software Foundation, Inc.
@@ -10,7 +10,7 @@
    Jakub Jelinek, 1995
    Andrej Borsenkow, 1996
    Norbert Warmuth, 1997
-   Andrew Borodin <aborodin@vmail.ru>, 2009-2019
+   Andrew Borodin <aborodin@vmail.ru>, 2009-2023
 
    This file is part of the Midnight Commander.
 
@@ -65,7 +65,7 @@ int num_history_items_recorded = 60;
 /* --------------------------------------------------------------------------------------------- */
 
 /**
- * Load the history from the ${XDG_CACHE_HOME}/mc/history file.
+ * Load the history from the ${XDG_DATA_HOME}/mc/history file.
  * It is called with the widgets history name and returns the GList list.
  */
 
@@ -90,6 +90,33 @@ mc_config_history_get (const char *name)
     g_free (profile);
 
     return hist;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Get the recent item of a history from the ${XDG_DATA_HOME}/mc/history file.
+ *
+ * TODO: get rid of load the entire history to get the only top item.
+ */
+
+char *
+mc_config_history_get_recent_item (const char *name)
+{
+    GList *history;
+    char *item = NULL;
+
+    history = mc_config_history_get (name);
+    if (history != NULL)
+    {
+        /* FIXME: can history->data be NULL? */
+        item = (char *) history->data;
+        history->data = NULL;
+        history = g_list_first (history);
+        g_list_free_full (history, g_free);
+    }
+
+    return item;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -177,8 +204,7 @@ mc_config_history_save (mc_config_t * cfg, const char *name, GList * h)
     for (i = 0; (i < num_history_items_recorded - 1) && (h->prev != NULL); i++)
         h = g_list_previous (h);
 
-    if (name != NULL)
-        mc_config_del_group (cfg, name);
+    mc_config_del_group (cfg, name);
 
     /* create charset conversion handler to convert strings
        from system codepage to UTF-8 */

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-08-06 15:50+0200\n"
+"POT-Creation-Date: 2023-11-06 21:09+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>, "
 "2011,2015-2019\n"
@@ -4130,67 +4130,24 @@ msgid ""
 "%s"
 msgstr ""
 
+msgid ""
+"EXTFS virtual file system:\n"
+"wrong file name"
+msgstr ""
+
+msgid ""
+"EXTFS virtual file system:\n"
+"wrong archive name"
+msgstr ""
+
+msgid ""
+"EXTFS virtual file system:\n"
+"cannot build command"
+msgstr ""
+
 #, c-format
 msgid "Warning: cannot open %s directory\n"
 msgstr "Abisua: %s direktorioa ezin ireki\n"
-
-#, c-format
-msgid "fish: Disconnecting from %s"
-msgstr "fish: %s(e)tik deskonektatzen"
-
-msgid "fish: Waiting for initial line..."
-msgstr "fish: Hasierako lerroaren zain..."
-
-msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr ""
-"Barkatu, oraingoz ezin dugu pasahitz bidez autentikatutako konexiorik egin."
-
-#, c-format
-msgid "fish: Password is required for %s"
-msgstr "fish: %s(a)rentzako pasahitza behar da"
-
-msgid "fish: Sending password..."
-msgstr "fish: Pasahitza bidaltzen..."
-
-msgid "fish: Sending initial line..."
-msgstr "fish: Hasierako lerroa bidaltzen..."
-
-msgid "fish: Handshaking version..."
-msgstr "fish: bertsioak egiaztatzen (Handshaking)..."
-
-msgid "fish: Getting host info..."
-msgstr "fish: Ostalariaren info eskuratzen..."
-
-#, c-format
-msgid "fish: Reading directory %s..."
-msgstr "fish: %s direktorioa irakurtzen..."
-
-#, c-format
-msgid "%s: done."
-msgstr "%s: eginda."
-
-#, c-format
-msgid "%s: failure"
-msgstr "%s: hutsegitea"
-
-#, c-format
-msgid "fish: store %s: sending command..."
-msgstr "fish: %s biltegiratu: komandoa bidaltzen..."
-
-msgid "fish: Local read failed, sending zeros"
-msgstr "fish: Irakurtze lokalak huts egin du, zeroak bidaltzen"
-
-msgid "fish: storing file"
-msgstr "fish: fitxategia biltegiratzen"
-
-msgid "Aborting transfer..."
-msgstr "Transferentzia galarazten..."
-
-msgid "Error reported after abort."
-msgstr "Akatsaren berri eman da galarazi ondoren."
-
-msgid "Aborted transfer would be successful."
-msgstr "Galarazitako transferentzia arrakastatsua izango zen."
 
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
@@ -4301,6 +4258,14 @@ msgstr "(aurrena chdir)"
 
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: huts egin du; ez dauka nora itzuli"
+
+#, c-format
+msgid "%s: failure"
+msgstr "%s: hutsegitea"
+
+#, c-format
+msgid "%s: done."
+msgstr "%s: eginda."
 
 msgid "ftpfs: storing file"
 msgstr "ftpfs: fitxategia biltegiratzen"
@@ -4440,6 +4405,59 @@ msgstr "sftp: (Ktrl-G eteteko) Zerrendatzen... %s"
 
 msgid "sftp: Listing done."
 msgstr "sftp: Zerrenda osatuta."
+
+#, fuzzy, c-format
+msgid "shell: Disconnecting from %s"
+msgstr "fish: %s(e)tik deskonektatzen"
+
+#, fuzzy
+msgid "shell: Waiting for initial line..."
+msgstr "fish: Hasierako lerroaren zain..."
+
+msgid "Sorry, we cannot do password authenticated connections for now."
+msgstr ""
+"Barkatu, oraingoz ezin dugu pasahitz bidez autentikatutako konexiorik egin."
+
+#, fuzzy, c-format
+msgid "shell: Password is required for %s"
+msgstr "fish: %s(a)rentzako pasahitza behar da"
+
+#, fuzzy
+msgid "shell: Sending password..."
+msgstr "fish: Pasahitza bidaltzen..."
+
+#, fuzzy
+msgid "shell: Sending initial line..."
+msgstr "fish: Hasierako lerroa bidaltzen..."
+
+#, fuzzy
+msgid "shell: Getting host info..."
+msgstr "fish: Ostalariaren info eskuratzen..."
+
+#, fuzzy, c-format
+msgid "shell: Reading directory %s..."
+msgstr "fish: %s direktorioa irakurtzen..."
+
+#, fuzzy, c-format
+msgid "shell: store %s: sending command..."
+msgstr "fish: %s biltegiratu: komandoa bidaltzen..."
+
+#, fuzzy
+msgid "shell: Local read failed, sending zeros"
+msgstr "fish: Irakurtze lokalak huts egin du, zeroak bidaltzen"
+
+#, fuzzy
+msgid "shell: storing file"
+msgstr "fish: fitxategia biltegiratzen"
+
+msgid "Aborting transfer..."
+msgstr "Transferentzia galarazten..."
+
+msgid "Error reported after abort."
+msgstr "Akatsaren berri eman da galarazi ondoren."
+
+msgid "Aborted transfer would be successful."
+msgstr "Galarazitako transferentzia arrakastatsua izango zen."
 
 msgid "Inconsistent tar archive"
 msgstr "tar artxibo inkoherentea"
@@ -4657,3 +4675,6 @@ msgstr "Hasieratik jarraitu?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Ezin eskuratu ondokoaren bertako kopia bat: /ftp://some.host/editme.txt"
+
+#~ msgid "fish: Handshaking version..."
+#~ msgstr "fish: bertsioak egiaztatzen (Handshaking)..."

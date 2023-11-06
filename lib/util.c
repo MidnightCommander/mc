@@ -256,6 +256,9 @@ name_quote (const char *s, gboolean quote_percent)
 {
     GString *ret;
 
+    if (s == NULL || *s == '\0')
+        return NULL;
+
     ret = g_string_sized_new (64);
 
     if (*s == '-')
@@ -305,7 +308,7 @@ name_quote (const char *s, gboolean quote_percent)
         g_string_append_c (ret, *s);
     }
 
-    return g_string_free (ret, FALSE);
+    return g_string_free (ret, ret->len == 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -314,7 +317,8 @@ char *
 fake_name_quote (const char *s, gboolean quote_percent)
 {
     (void) quote_percent;
-    return g_strdup (s);
+
+    return (s == NULL || *s == '\0' ? NULL : g_strdup (s));
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-08-06 15:50+0200\n"
+"POT-Creation-Date: 2023-11-06 21:09+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>, 2011-2023\n"
 "Language-Team: Polish (http://app.transifex.com/mc/mc/language/pl/)\n"
@@ -18,9 +18,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && "
-"(n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && "
-"n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n"
+"%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n"
+"%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -4186,66 +4186,33 @@ msgstr ""
 "Wirtualny system plików EXTFS:\n"
 "%s"
 
+#, fuzzy
+msgid ""
+"EXTFS virtual file system:\n"
+"wrong file name"
+msgstr ""
+"Wirtualny system plików EXTFS:\n"
+"%s"
+
+#, fuzzy
+msgid ""
+"EXTFS virtual file system:\n"
+"wrong archive name"
+msgstr ""
+"Wirtualny system plików EXTFS:\n"
+"%s"
+
+#, fuzzy
+msgid ""
+"EXTFS virtual file system:\n"
+"cannot build command"
+msgstr ""
+"Wirtualny system plików EXTFS:\n"
+"%s"
+
 #, c-format
 msgid "Warning: cannot open %s directory\n"
 msgstr "Ostrzeżenie: nie można utworzyć katalogu %s\n"
-
-#, c-format
-msgid "fish: Disconnecting from %s"
-msgstr "fish: rozłączanie z %s"
-
-msgid "fish: Waiting for initial line..."
-msgstr "fish: oczekiwanie na wiersz początkowy…"
-
-msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr "Połączenia uwierzytelniane hasłem nie są na razie obsługiwane."
-
-#, c-format
-msgid "fish: Password is required for %s"
-msgstr "fish: wymagane jest hasło dla %s"
-
-msgid "fish: Sending password..."
-msgstr "fish: wysyłanie hasła…"
-
-msgid "fish: Sending initial line..."
-msgstr "fish: wysyłanie wiersza początkowego…"
-
-msgid "fish: Handshaking version..."
-msgstr "fish: ustalanie wersji…"
-
-msgid "fish: Getting host info..."
-msgstr "fish: pobieranie informacji o komputerze…"
-
-#, c-format
-msgid "fish: Reading directory %s..."
-msgstr "fish: odczytywanie katalogu %s…"
-
-#, c-format
-msgid "%s: done."
-msgstr "%s: ukończono."
-
-#, c-format
-msgid "%s: failure"
-msgstr "%s: niepowodzenie"
-
-#, c-format
-msgid "fish: store %s: sending command..."
-msgstr "fish: zapis %s: wysyłanie polecenia…"
-
-msgid "fish: Local read failed, sending zeros"
-msgstr "fish: lokalny odczyt się nie powiódł, wysyłanie zer"
-
-msgid "fish: storing file"
-msgstr "fish: wysyłanie pliku"
-
-msgid "Aborting transfer..."
-msgstr "Przerywanie przesyłania…"
-
-msgid "Error reported after abort."
-msgstr "Zgłoszono błąd po przerwaniu."
-
-msgid "Aborted transfer would be successful."
-msgstr "Przerwane przesyłanie zostałoby pomyślnie zakończone."
 
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
@@ -4356,6 +4323,14 @@ msgstr "(najpierw chdir)"
 
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: niepowodzenie; brak możliwości wycofania"
+
+#, c-format
+msgid "%s: failure"
+msgstr "%s: niepowodzenie"
+
+#, c-format
+msgid "%s: done."
+msgstr "%s: ukończono."
 
 msgid "ftpfs: storing file"
 msgstr "ftpfs: wysyłanie pliku"
@@ -4514,6 +4489,58 @@ msgstr "sftp: (Ctrl-G przerywa) wyświetlanie listy… %s"
 
 msgid "sftp: Listing done."
 msgstr "sftp: ukończono wyświetlanie listy."
+
+#, fuzzy, c-format
+msgid "shell: Disconnecting from %s"
+msgstr "fish: rozłączanie z %s"
+
+#, fuzzy
+msgid "shell: Waiting for initial line..."
+msgstr "fish: oczekiwanie na wiersz początkowy…"
+
+msgid "Sorry, we cannot do password authenticated connections for now."
+msgstr "Połączenia uwierzytelniane hasłem nie są na razie obsługiwane."
+
+#, fuzzy, c-format
+msgid "shell: Password is required for %s"
+msgstr "fish: wymagane jest hasło dla %s"
+
+#, fuzzy
+msgid "shell: Sending password..."
+msgstr "fish: wysyłanie hasła…"
+
+#, fuzzy
+msgid "shell: Sending initial line..."
+msgstr "fish: wysyłanie wiersza początkowego…"
+
+#, fuzzy
+msgid "shell: Getting host info..."
+msgstr "fish: pobieranie informacji o komputerze…"
+
+#, fuzzy, c-format
+msgid "shell: Reading directory %s..."
+msgstr "fish: odczytywanie katalogu %s…"
+
+#, fuzzy, c-format
+msgid "shell: store %s: sending command..."
+msgstr "fish: zapis %s: wysyłanie polecenia…"
+
+#, fuzzy
+msgid "shell: Local read failed, sending zeros"
+msgstr "fish: lokalny odczyt się nie powiódł, wysyłanie zer"
+
+#, fuzzy
+msgid "shell: storing file"
+msgstr "fish: wysyłanie pliku"
+
+msgid "Aborting transfer..."
+msgstr "Przerywanie przesyłania…"
+
+msgid "Error reported after abort."
+msgstr "Zgłoszono błąd po przerwaniu."
+
+msgid "Aborted transfer would be successful."
+msgstr "Przerwane przesyłanie zostałoby pomyślnie zakończone."
 
 msgid "Inconsistent tar archive"
 msgstr "Niespójne archiwum tar"
@@ -4732,3 +4759,6 @@ msgstr "Kontynuować od początku?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Nie można pobrać lokalnej kopii /ftp://jakiś.komputer/modyfikuj_mnie.txt"
+
+#~ msgid "fish: Handshaking version..."
+#~ msgstr "fish: ustalanie wersji…"

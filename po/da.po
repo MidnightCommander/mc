@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-08-06 15:50+0200\n"
+"POT-Creation-Date: 2023-11-06 21:09+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Morten Bo Johansen <mortenbo@hotmail.com>, 2018,2023\n"
 "Language-Team: Danish (http://app.transifex.com/mc/mc/language/da/)\n"
@@ -4168,66 +4168,33 @@ msgstr ""
 "Virtuelt EXTFS-filsystem:\n"
 "%s"
 
+#, fuzzy
+msgid ""
+"EXTFS virtual file system:\n"
+"wrong file name"
+msgstr ""
+"Virtuelt EXTFS-filsystem:\n"
+"%s"
+
+#, fuzzy
+msgid ""
+"EXTFS virtual file system:\n"
+"wrong archive name"
+msgstr ""
+"Virtuelt EXTFS-filsystem:\n"
+"%s"
+
+#, fuzzy
+msgid ""
+"EXTFS virtual file system:\n"
+"cannot build command"
+msgstr ""
+"Virtuelt EXTFS-filsystem:\n"
+"%s"
+
 #, c-format
 msgid "Warning: cannot open %s directory\n"
 msgstr "Advarsel: Kan ikke åbne mappen %s\n"
-
-#, c-format
-msgid "fish: Disconnecting from %s"
-msgstr "fisk: Afkobler fra %s"
-
-msgid "fish: Waiting for initial line..."
-msgstr "fisk: Venter på begyndelseslinje..."
-
-msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr "Beklager, vi kan ikke lave adgangskodebekræftede forbindelser endnu."
-
-#, c-format
-msgid "fish: Password is required for %s"
-msgstr "fisk: Adgangskode er krævet for %s"
-
-msgid "fish: Sending password..."
-msgstr "fisk: Sender adgangskode..."
-
-msgid "fish: Sending initial line..."
-msgstr "fisk: Sender begyndelseslinje..."
-
-msgid "fish: Handshaking version..."
-msgstr "fisk: Håndrystende version..."
-
-msgid "fish: Getting host info..."
-msgstr "fisk: Indhenter værtsinformation..."
-
-#, c-format
-msgid "fish: Reading directory %s..."
-msgstr "fisk: Læser mappe %s..."
-
-#, c-format
-msgid "%s: done."
-msgstr "%s: færdig."
-
-#, c-format
-msgid "%s: failure"
-msgstr "%s: fejl"
-
-#, c-format
-msgid "fish: store %s: sending command..."
-msgstr "fisk: gem %s: sender kommando..."
-
-msgid "fish: Local read failed, sending zeros"
-msgstr "fisk: Lokal læsning fejlede, sender nuller"
-
-msgid "fish: storing file"
-msgstr "fisk: gemmer fil"
-
-msgid "Aborting transfer..."
-msgstr "Afbryder overførsel..."
-
-msgid "Error reported after abort."
-msgstr "Fejl meldt tilbage efter afbrydelse."
-
-msgid "Aborted transfer would be successful."
-msgstr "Afbrudt overførsel ville være lykkedes."
 
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
@@ -4338,6 +4305,14 @@ msgstr "(chdir først)"
 
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: Fejlede; ingen steder at falde tilbage på"
+
+#, c-format
+msgid "%s: failure"
+msgstr "%s: fejl"
+
+#, c-format
+msgid "%s: done."
+msgstr "%s: færdig."
 
 msgid "ftpfs: storing file"
 msgstr "ftpfs: Gemmer fil"
@@ -4494,6 +4469,58 @@ msgstr "sftp: (Ctrl-G break) Liste... %s"
 
 msgid "sftp: Listing done."
 msgstr "sftp: Liste færdig."
+
+#, fuzzy, c-format
+msgid "shell: Disconnecting from %s"
+msgstr "fisk: Afkobler fra %s"
+
+#, fuzzy
+msgid "shell: Waiting for initial line..."
+msgstr "fisk: Venter på begyndelseslinje..."
+
+msgid "Sorry, we cannot do password authenticated connections for now."
+msgstr "Beklager, vi kan ikke lave adgangskodebekræftede forbindelser endnu."
+
+#, fuzzy, c-format
+msgid "shell: Password is required for %s"
+msgstr "fisk: Adgangskode er krævet for %s"
+
+#, fuzzy
+msgid "shell: Sending password..."
+msgstr "fisk: Sender adgangskode..."
+
+#, fuzzy
+msgid "shell: Sending initial line..."
+msgstr "fisk: Sender begyndelseslinje..."
+
+#, fuzzy
+msgid "shell: Getting host info..."
+msgstr "fisk: Indhenter værtsinformation..."
+
+#, fuzzy, c-format
+msgid "shell: Reading directory %s..."
+msgstr "fisk: Læser mappe %s..."
+
+#, fuzzy, c-format
+msgid "shell: store %s: sending command..."
+msgstr "fisk: gem %s: sender kommando..."
+
+#, fuzzy
+msgid "shell: Local read failed, sending zeros"
+msgstr "fisk: Lokal læsning fejlede, sender nuller"
+
+#, fuzzy
+msgid "shell: storing file"
+msgstr "fisk: gemmer fil"
+
+msgid "Aborting transfer..."
+msgstr "Afbryder overførsel..."
+
+msgid "Error reported after abort."
+msgstr "Fejl meldt tilbage efter afbrydelse."
+
+msgid "Aborted transfer would be successful."
+msgstr "Afbrudt overførsel ville være lykkedes."
 
 msgid "Inconsistent tar archive"
 msgstr "Inkonsistent tar-arkiv"
@@ -4709,3 +4736,6 @@ msgstr "Fortsæt fra begyndelsen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan ikke hente en lokal kopi af /ftp://en.vært/editme.txt"
+
+#~ msgid "fish: Handshaking version..."
+#~ msgstr "fisk: Håndrystende version..."

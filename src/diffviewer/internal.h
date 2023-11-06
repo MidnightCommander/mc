@@ -108,7 +108,7 @@ typedef struct WDiff
     gboolean new_frame;
     int skip_rows;
     int skip_cols;
-    int display_symbols;
+    gboolean display_symbols;
     int display_numbers;
     gboolean show_cr;
     int tab_size;

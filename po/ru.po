@@ -3,32 +3,28 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# Andrew Borodin <aborodin@vmail.ru>, 2011
-# AlexL <loginov.alex.valer@gmail.com>, 2015-2020
+
 # Alex Tkachenko <alex@bcs.zp.ua>, 1998
-# and Alex Tkachenko <alex@bcs.zp.ua>, 1998
-# Andrei Stepanov, 2023
-# Andrew Borodin <aborodin@vmail.ru>, 2009-2012
 # Andrew V. Samoilov <sav@bcs.zp.ua>, 1999,2014
-# Anton Sergeevich Chumak <nightfast@yahoo.co.uk>, 2005
-# Dimitriy Ryazantcev <DJm00n@mail.ru>, 2015
 # Evgeny Bulgakov <bgav@netvision.net.il>, 1999
-# Ilia Maslakov <il.smind@gmail.com>, 2009
-# Mr GreyWolf, 2016
-# Mr.GreyWolf, 2016
-# NaiLi (aka jamesjames) Rootaerc <theism@mail.ru>, 2012
-# Pavel Suravezhkin, 2022
-# Piotr Drąg <piotrdrag@gmail.com>, 2018
 # Sergey Panov <sipan@mit.edu>, 1999
-# Simple88, 2016
-# Simple88, 2016
-# Slava Zanko <slavazanko@gmail.com>, 2009,2011
 # Valek Filippov <frob@df.ru>, 2000
+# Anton Sergeevich Chumak <nightfast@yahoo.co.uk>, 2005
+# Andrew Borodin <aborodin@vmail.ru>, 2009-2012
+# Slava Zanko <slavazanko@gmail.com>, 2009,2011
+# Ilia Maslakov <il.smind@gmail.com>, 2009
+# NaiLi (aka jamesjames) Rootaerc <theism@mail.ru>, 2012
+# AlexL <loginov.alex.valer@gmail.com>, 2015-2020
+# Dimitriy Ryazantcev <DJm00n@mail.ru>, 2015
+# Simple88, 2016
+# Piotr Drąg <piotrdrag@gmail.com>, 2018
+# Pavel Suravezhkin, 2022
+# Andrei Stepanov, 2023
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-08-06 15:50+0200\n"
+"POT-Creation-Date: 2023-11-06 21:09+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Andrei Stepanov, 2023\n"
 "Language-Team: Russian (http://app.transifex.com/mc/mc/language/ru/)\n"
@@ -36,9 +32,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
-"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -4199,66 +4195,33 @@ msgstr ""
 "Виртуальная файловая система EXTFS:\n"
 "%s"
 
+#, fuzzy
+msgid ""
+"EXTFS virtual file system:\n"
+"wrong file name"
+msgstr ""
+"Виртуальная файловая система EXTFS:\n"
+"%s"
+
+#, fuzzy
+msgid ""
+"EXTFS virtual file system:\n"
+"wrong archive name"
+msgstr ""
+"Виртуальная файловая система EXTFS:\n"
+"%s"
+
+#, fuzzy
+msgid ""
+"EXTFS virtual file system:\n"
+"cannot build command"
+msgstr ""
+"Виртуальная файловая система EXTFS:\n"
+"%s"
+
 #, c-format
 msgid "Warning: cannot open %s directory\n"
 msgstr "Внимание: не удалось открыть каталог %s\n"
-
-#, c-format
-msgid "fish: Disconnecting from %s"
-msgstr "fish: отсоединение от %s"
-
-msgid "fish: Waiting for initial line..."
-msgstr "fish: ожидается начальная строка..."
-
-msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr "Извините, не удалось создать авторизованные паролем соединения."
-
-#, c-format
-msgid "fish: Password is required for %s"
-msgstr "fish: требуется пароль для %s"
-
-msgid "fish: Sending password..."
-msgstr "fish: посылается пароль..."
-
-msgid "fish: Sending initial line..."
-msgstr "fish: посылается начальная строка..."
-
-msgid "fish: Handshaking version..."
-msgstr "fish: версия подтверждения связи..."
-
-msgid "fish: Getting host info..."
-msgstr "fish: собирается информация об удалённой машине..."
-
-#, c-format
-msgid "fish: Reading directory %s..."
-msgstr "fish: Чтение каталога %s..."
-
-#, c-format
-msgid "%s: done."
-msgstr "%s: готово."
-
-#, c-format
-msgid "%s: failure"
-msgstr "%s: ошибка"
-
-#, c-format
-msgid "fish: store %s: sending command..."
-msgstr "fish: запись %s: посылается команда..."
-
-msgid "fish: Local read failed, sending zeros"
-msgstr "fish: сбой локального чтения, посылаются нули"
-
-msgid "fish: storing file"
-msgstr "fish: запись файла"
-
-msgid "Aborting transfer..."
-msgstr "Прерывание передачи..."
-
-msgid "Error reported after abort."
-msgstr "Отмечена ошибка после прерывания."
-
-msgid "Aborted transfer would be successful."
-msgstr "Передача успешно прервана."
 
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
@@ -4369,6 +4332,14 @@ msgstr "(сначала chdir)"
 
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: ошибка; некуда перейти на аварийный режим"
+
+#, c-format
+msgid "%s: failure"
+msgstr "%s: ошибка"
+
+#, c-format
+msgid "%s: done."
+msgstr "%s: готово."
 
 msgid "ftpfs: storing file"
 msgstr "ftpfs: запись файла"
@@ -4526,6 +4497,58 @@ msgstr "sftp: чтение списка файлов (прерывание по 
 
 msgid "sftp: Listing done."
 msgstr "sftp: Чтение списка файлов завершено."
+
+#, fuzzy, c-format
+msgid "shell: Disconnecting from %s"
+msgstr "fish: отсоединение от %s"
+
+#, fuzzy
+msgid "shell: Waiting for initial line..."
+msgstr "fish: ожидается начальная строка..."
+
+msgid "Sorry, we cannot do password authenticated connections for now."
+msgstr "Извините, не удалось создать авторизованные паролем соединения."
+
+#, fuzzy, c-format
+msgid "shell: Password is required for %s"
+msgstr "fish: требуется пароль для %s"
+
+#, fuzzy
+msgid "shell: Sending password..."
+msgstr "fish: посылается пароль..."
+
+#, fuzzy
+msgid "shell: Sending initial line..."
+msgstr "fish: посылается начальная строка..."
+
+#, fuzzy
+msgid "shell: Getting host info..."
+msgstr "fish: собирается информация об удалённой машине..."
+
+#, fuzzy, c-format
+msgid "shell: Reading directory %s..."
+msgstr "fish: Чтение каталога %s..."
+
+#, fuzzy, c-format
+msgid "shell: store %s: sending command..."
+msgstr "fish: запись %s: посылается команда..."
+
+#, fuzzy
+msgid "shell: Local read failed, sending zeros"
+msgstr "fish: сбой локального чтения, посылаются нули"
+
+#, fuzzy
+msgid "shell: storing file"
+msgstr "fish: запись файла"
+
+msgid "Aborting transfer..."
+msgstr "Прерывание передачи..."
+
+msgid "Error reported after abort."
+msgstr "Отмечена ошибка после прерывания."
+
+msgid "Aborted transfer would be successful."
+msgstr "Передача успешно прервана."
 
 msgid "Inconsistent tar archive"
 msgstr "Несогласованный архив tar"
@@ -4741,3 +4764,6 @@ msgstr "Продолжить с начала?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не удалось получить локальную копию /ftp://some.host/editme.txt"
+
+#~ msgid "fish: Handshaking version..."
+#~ msgstr "fish: версия подтверждения связи..."

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-08-06 15:50+0200\n"
+"POT-Creation-Date: 2023-11-06 21:09+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Takuro Onoue <kusanaginoturugi@gmail.com>, 2021\n"
 "Language-Team: Japanese (http://app.transifex.com/mc/mc/language/ja/)\n"
@@ -3942,66 +3942,24 @@ msgid ""
 "%s"
 msgstr ""
 
+msgid ""
+"EXTFS virtual file system:\n"
+"wrong file name"
+msgstr ""
+
+msgid ""
+"EXTFS virtual file system:\n"
+"wrong archive name"
+msgstr ""
+
+msgid ""
+"EXTFS virtual file system:\n"
+"cannot build command"
+msgstr ""
+
 #, c-format
 msgid "Warning: cannot open %s directory\n"
 msgstr "警告: ディレクトリ %s を閲覧できません\n"
-
-#, c-format
-msgid "fish: Disconnecting from %s"
-msgstr "fish: %s から切断しています"
-
-msgid "fish: Waiting for initial line..."
-msgstr "fish: 最初の行を待っています..."
-
-msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr "すいませんが，今のところパスワードを証明することが出来ません"
-
-#, c-format
-msgid "fish: Password is required for %s"
-msgstr ""
-
-msgid "fish: Sending password..."
-msgstr "fish: パスワード送信中..."
-
-msgid "fish: Sending initial line..."
-msgstr "fish: 最初の行を送信..."
-
-msgid "fish: Handshaking version..."
-msgstr "fish: バージョンのハンドシェイク..."
-
-msgid "fish: Getting host info..."
-msgstr ""
-
-#, c-format
-msgid "fish: Reading directory %s..."
-msgstr "fish: ディレクトリ%sを読み込み中... "
-
-#, c-format
-msgid "%s: done."
-msgstr "%s: 完了"
-
-#, c-format
-msgid "%s: failure"
-msgstr "%s: 失敗"
-
-#, c-format
-msgid "fish: store %s: sending command..."
-msgstr "fish: store %s: コマンドを送信中..."
-
-msgid "fish: Local read failed, sending zeros"
-msgstr "fish: 局部読み込みに失敗しました。zeroを送信します"
-
-msgid "fish: storing file"
-msgstr ""
-
-msgid "Aborting transfer..."
-msgstr "転送を中断します..."
-
-msgid "Error reported after abort."
-msgstr "中断後にエラーが報告されました"
-
-msgid "Aborted transfer would be successful."
-msgstr "転送中断に成功しました"
 
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
@@ -4112,6 +4070,14 @@ msgstr "(初めに chdir)"
 
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: 失敗しました。フォールバックできません"
+
+#, c-format
+msgid "%s: failure"
+msgstr "%s: 失敗"
+
+#, c-format
+msgid "%s: done."
+msgstr "%s: 完了"
 
 msgid "ftpfs: storing file"
 msgstr ""
@@ -4249,6 +4215,57 @@ msgstr ""
 
 msgid "sftp: Listing done."
 msgstr ""
+
+#, fuzzy, c-format
+msgid "shell: Disconnecting from %s"
+msgstr "fish: %s から切断しています"
+
+#, fuzzy
+msgid "shell: Waiting for initial line..."
+msgstr "fish: 最初の行を待っています..."
+
+msgid "Sorry, we cannot do password authenticated connections for now."
+msgstr "すいませんが，今のところパスワードを証明することが出来ません"
+
+#, c-format
+msgid "shell: Password is required for %s"
+msgstr ""
+
+#, fuzzy
+msgid "shell: Sending password..."
+msgstr "fish: パスワード送信中..."
+
+#, fuzzy
+msgid "shell: Sending initial line..."
+msgstr "fish: 最初の行を送信..."
+
+msgid "shell: Getting host info..."
+msgstr ""
+
+#, fuzzy, c-format
+msgid "shell: Reading directory %s..."
+msgstr "fish: ディレクトリ%sを読み込み中... "
+
+#, fuzzy, c-format
+msgid "shell: store %s: sending command..."
+msgstr "fish: store %s: コマンドを送信中..."
+
+#, fuzzy
+msgid "shell: Local read failed, sending zeros"
+msgstr "fish: 局部読み込みに失敗しました。zeroを送信します"
+
+#, fuzzy
+msgid "shell: storing file"
+msgstr "ファイル取得中"
+
+msgid "Aborting transfer..."
+msgstr "転送を中断します..."
+
+msgid "Error reported after abort."
+msgstr "中断後にエラーが報告されました"
+
+msgid "Aborted transfer would be successful."
+msgstr "転送中断に成功しました"
 
 msgid "Inconsistent tar archive"
 msgstr "tar アーカイブに不整合"
@@ -4451,3 +4468,6 @@ msgstr "初めから続けますか?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "fish: Handshaking version..."
+#~ msgstr "fish: バージョンのハンドシェイク..."

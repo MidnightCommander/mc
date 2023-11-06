@@ -32,7 +32,6 @@
 
 #include <config.h>
 
-#include <ctype.h>              /* isspace() */
 #include <inttypes.h>           /* uintmax_t */
 #include <stdint.h>             /* UINTMAX_MAX, etc */
 
@@ -184,6 +183,14 @@ tar_seek_archive (tar_super_t * archive, off_t size)
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
+gboolean
+is_octal_digit (char c)
+{
+    return '0' <= c && c <= '7';
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 void
 tar_base64_init (void)
 {
@@ -262,13 +269,13 @@ tar_from_header (const char *where0, size_t digs, char const *type, intmax_t min
         if (where == lim)
             return (-1);
 
-        if (!isspace ((unsigned char) *where))
+        if (!g_ascii_isspace (*where))
             break;
 
         where++;
     }
 
-    if (isodigit (*where))
+    if (is_octal_digit (*where))
     {
         char const *where1 = where;
         gboolean overflow = FALSE;
@@ -276,7 +283,7 @@ tar_from_header (const char *where0, size_t digs, char const *type, intmax_t min
         while (TRUE)
         {
             value += *where++ - '0';
-            if (where == lim || !isodigit (*where))
+            if (where == lim || !is_octal_digit (*where))
                 break;
             overflow |= value != (value << LG_8 >> LG_8);
             value <<= LG_8;
@@ -301,7 +308,7 @@ tar_from_header (const char *where0, size_t digs, char const *type, intmax_t min
             {
                 value += 7 - digit;
                 where++;
-                if (where == lim || !isodigit (*where))
+                if (where == lim || !is_octal_digit (*where))
                     break;
                 digit = *where - '0';
                 overflow |= value != (value << LG_8 >> LG_8);
@@ -373,7 +380,7 @@ tar_from_header (const char *where0, size_t digs, char const *type, intmax_t min
             value = -value;
     }
 
-    if (where != lim && *where != '\0' && !isspace ((unsigned char) *where))
+    if (where != lim && *where != '\0' && !g_ascii_isspace (*where))
         return (-1);
 
     if (value <= (negative ? minus_minval : maxval))

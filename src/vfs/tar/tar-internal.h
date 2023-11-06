@@ -65,8 +65,6 @@
 
 #define OFF_FROM_HEADER(where) off_from_header (where, sizeof (where))
 
-#define isodigit(c) ( ((c) >= '0') && ((c) <= '7') )
-
 /*** enums ***************************************************************************************/
 
 /*** structures declarations (and typedefs of structures)*****************************************/
@@ -302,6 +300,7 @@ extern struct tar_stat_info current_stat_info;
 /*** declarations of public functions ************************************************************/
 
 /* tar-internal.c */
+gboolean is_octal_digit (char c);
 void tar_base64_init (void);
 void tar_assign_string (char **string, char *value);
 void tar_assign_string_dup (char **string, const char *value);

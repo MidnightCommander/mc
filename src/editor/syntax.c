@@ -801,44 +801,44 @@ get_args (char *l, char **args, int args_size)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-this_try_alloc_color_pair (const char *fg, const char *bg, const char *attrs)
+this_try_alloc_color_pair (tty_color_pair_t * color)
 {
     char f[80], b[80], a[80], *p;
 
-    if (bg != NULL && *bg == '\0')
-        bg = NULL;
-    if (fg != NULL && *fg == '\0')
-        fg = NULL;
-    if (attrs != NULL && *attrs == '\0')
-        attrs = NULL;
+    if (color->bg != NULL && *color->bg == '\0')
+        color->bg = NULL;
+    if (color->fg != NULL && *color->fg == '\0')
+        color->fg = NULL;
+    if (color->attrs != NULL && *color->attrs == '\0')
+        color->attrs = NULL;
 
-    if ((fg == NULL) && (bg == NULL))
+    if (color->fg == NULL && color->bg == NULL)
         return EDITOR_NORMAL_COLOR;
 
-    if (fg != NULL)
+    if (color->fg != NULL)
     {
-        g_strlcpy (f, fg, sizeof (f));
+        g_strlcpy (f, color->fg, sizeof (f));
         p = strchr (f, '/');
         if (p != NULL)
             *p = '\0';
-        fg = f;
+        color->fg = f;
     }
-    if (bg != NULL)
+    if (color->bg != NULL)
     {
-        g_strlcpy (b, bg, sizeof (b));
+        g_strlcpy (b, color->bg, sizeof (b));
         p = strchr (b, '/');
         if (p != NULL)
             *p = '\0';
-        bg = b;
+        color->bg = b;
     }
-    if ((fg == NULL) || (bg == NULL))
+    if (color->fg == NULL || color->bg == NULL)
     {
         /* get colors from skin */
         char *editnormal;
 
         editnormal = mc_skin_get ("editor", "_default_", "default;default");
 
-        if (fg == NULL)
+        if (color->fg == NULL)
         {
             g_strlcpy (f, editnormal, sizeof (f));
             p = strchr (f, ';');
@@ -846,24 +846,24 @@ this_try_alloc_color_pair (const char *fg, const char *bg, const char *attrs)
                 *p = '\0';
             if (f[0] == '\0')
                 g_strlcpy (f, "default", sizeof (f));
-            fg = f;
+            color->fg = f;
         }
-        if (bg == NULL)
+        if (color->bg == NULL)
         {
             p = strchr (editnormal, ';');
             if ((p != NULL) && (*(++p) != '\0'))
                 g_strlcpy (b, p, sizeof (b));
             else
                 g_strlcpy (b, "default", sizeof (b));
-            bg = b;
+            color->bg = b;
         }
 
         g_free (editnormal);
     }
 
-    if (attrs != NULL)
+    if (color->attrs != NULL)
     {
-        g_strlcpy (a, attrs, sizeof (a));
+        g_strlcpy (a, color->attrs, sizeof (a));
         p = strchr (a, '/');
         if (p != NULL)
             *p = '\0';
@@ -871,9 +871,10 @@ this_try_alloc_color_pair (const char *fg, const char *bg, const char *attrs)
         p = a;
         while ((p = strchr (p, SYNTAX_TOKEN_PLUS)) != NULL)
             *p++ = '+';
-        attrs = a;
+        color->attrs = a;
     }
-    return tty_try_alloc_color_pair (fg, bg, attrs);
+
+    return tty_try_alloc_color_pair (color, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -923,7 +924,7 @@ static int
 edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
 {
     FILE *g = NULL;
-    char *fg, *bg, *attrs;
+    tty_color_pair_t color;
     char last_fg[32] = "", last_bg[32] = "", last_attrs[64] = "";
     char whole_right[512];
     char whole_left[512];
@@ -1089,19 +1090,19 @@ edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
             g_ptr_array_add (c->keyword, k);
             no_words = FALSE;
             subst_defines (edit->defines, a, &args[ARGS_LEN]);
-            fg = *a;
+            color.fg = *a;
             if (*a != NULL)
                 a++;
-            bg = *a;
+            color.bg = *a;
             if (*a != NULL)
                 a++;
-            attrs = *a;
+            color.attrs = *a;
             if (*a != NULL)
                 a++;
-            g_strlcpy (last_fg, fg != NULL ? fg : "", sizeof (last_fg));
-            g_strlcpy (last_bg, bg != NULL ? bg : "", sizeof (last_bg));
-            g_strlcpy (last_attrs, attrs != NULL ? attrs : "", sizeof (last_attrs));
-            k->color = this_try_alloc_color_pair (fg, bg, attrs);
+            g_strlcpy (last_fg, color.fg != NULL ? color.fg : "", sizeof (last_fg));
+            g_strlcpy (last_bg, color.bg != NULL ? color.bg : "", sizeof (last_bg));
+            g_strlcpy (last_attrs, color.attrs != NULL ? color.attrs : "", sizeof (last_attrs));
+            k->color = this_try_alloc_color_pair (&color);
             k->keyword = g_string_new (" ");
             check_not_a;
         }
@@ -1153,22 +1154,22 @@ edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
 
             k->keyword = g_string_new (*a++);
             subst_defines (edit->defines, a, &args[ARGS_LEN]);
-            fg = *a;
+            color.fg = *a;
             if (*a != NULL)
                 a++;
-            bg = *a;
+            color.bg = *a;
             if (*a != NULL)
                 a++;
-            attrs = *a;
+            color.attrs = *a;
             if (*a != NULL)
                 a++;
-            if (fg == NULL)
-                fg = last_fg;
-            if (bg == NULL)
-                bg = last_bg;
-            if (attrs == NULL)
-                attrs = last_attrs;
-            k->color = this_try_alloc_color_pair (fg, bg, attrs);
+            if (color.fg == NULL)
+                color.fg = last_fg;
+            if (color.bg == NULL)
+                color.bg = last_bg;
+            if (color.attrs == NULL)
+                color.attrs = last_attrs;
+            k->color = this_try_alloc_color_pair (&color);
             check_not_a;
         }
         else if (*(args[0]) == '#')
@@ -1481,7 +1482,7 @@ edit_free_syntax_rules (WEdit * edit)
     g_ptr_array_free (edit->rules, TRUE);
     edit->rules = NULL;
     g_clear_slist (&edit->syntax_marker, g_free);
-    tty_color_free_all_tmp ();
+    tty_color_free_temp ();
 }
 
 /* --------------------------------------------------------------------------------------------- */

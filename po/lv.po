@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-08-06 15:50+0200\n"
+"POT-Creation-Date: 2023-11-06 21:09+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
 "Language-Team: Latvian (http://app.transifex.com/mc/mc/language/lv/)\n"
@@ -3940,67 +3940,24 @@ msgid ""
 "%s"
 msgstr ""
 
+msgid ""
+"EXTFS virtual file system:\n"
+"wrong file name"
+msgstr ""
+
+msgid ""
+"EXTFS virtual file system:\n"
+"wrong archive name"
+msgstr ""
+
+msgid ""
+"EXTFS virtual file system:\n"
+"cannot build command"
+msgstr ""
+
 #, c-format
 msgid "Warning: cannot open %s directory\n"
 msgstr ""
-
-#, c-format
-msgid "fish: Disconnecting from %s"
-msgstr "fish: Atvienojamies no %s"
-
-msgid "fish: Waiting for initial line..."
-msgstr "fish: Gaidām sākotnējo līniju..."
-
-msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr ""
-"Piedodiet, mēs patreiz nevaram veikt ar paroli autorizētus savienojumus."
-
-#, c-format
-msgid "fish: Password is required for %s"
-msgstr ""
-
-msgid "fish: Sending password..."
-msgstr "fish: Sūtam paroli..."
-
-msgid "fish: Sending initial line..."
-msgstr "fish: Sūtam sākotnējo līniju..."
-
-msgid "fish: Handshaking version..."
-msgstr "fish: Rokspiešanas versija..."
-
-msgid "fish: Getting host info..."
-msgstr ""
-
-#, c-format
-msgid "fish: Reading directory %s..."
-msgstr "fish: Lasām direktoriju %s..."
-
-#, c-format
-msgid "%s: done."
-msgstr "%s: izdarīts."
-
-#, c-format
-msgid "%s: failure"
-msgstr "%s: neveiksme"
-
-#, c-format
-msgid "fish: store %s: sending command..."
-msgstr "fish: glabājam %s: sutām komandu..."
-
-msgid "fish: Local read failed, sending zeros"
-msgstr "fish: Lokālā lasīšana kļūdaina, sūtam nulles"
-
-msgid "fish: storing file"
-msgstr ""
-
-msgid "Aborting transfer..."
-msgstr "Pātraucam pārraidīšanu..."
-
-msgid "Error reported after abort."
-msgstr "Kļūda paziņota pēc pātraukšanas."
-
-msgid "Aborted transfer would be successful."
-msgstr "Pātraukā pārraidīšana varētu būt veiksmīga"
 
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
@@ -4111,6 +4068,14 @@ msgstr "(chdir vispirms)"
 
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: neizdevās; nav kur atkrist"
+
+#, c-format
+msgid "%s: failure"
+msgstr "%s: neveiksme"
+
+#, c-format
+msgid "%s: done."
+msgstr "%s: izdarīts."
 
 msgid "ftpfs: storing file"
 msgstr ""
@@ -4248,6 +4213,58 @@ msgstr ""
 
 msgid "sftp: Listing done."
 msgstr ""
+
+#, fuzzy, c-format
+msgid "shell: Disconnecting from %s"
+msgstr "fish: Atvienojamies no %s"
+
+#, fuzzy
+msgid "shell: Waiting for initial line..."
+msgstr "fish: Gaidām sākotnējo līniju..."
+
+msgid "Sorry, we cannot do password authenticated connections for now."
+msgstr ""
+"Piedodiet, mēs patreiz nevaram veikt ar paroli autorizētus savienojumus."
+
+#, c-format
+msgid "shell: Password is required for %s"
+msgstr ""
+
+#, fuzzy
+msgid "shell: Sending password..."
+msgstr "fish: Sūtam paroli..."
+
+#, fuzzy
+msgid "shell: Sending initial line..."
+msgstr "fish: Sūtam sākotnējo līniju..."
+
+msgid "shell: Getting host info..."
+msgstr ""
+
+#, fuzzy, c-format
+msgid "shell: Reading directory %s..."
+msgstr "fish: Lasām direktoriju %s..."
+
+#, fuzzy, c-format
+msgid "shell: store %s: sending command..."
+msgstr "fish: glabājam %s: sutām komandu..."
+
+#, fuzzy
+msgid "shell: Local read failed, sending zeros"
+msgstr "fish: Lokālā lasīšana kļūdaina, sūtam nulles"
+
+#, fuzzy
+msgid "shell: storing file"
+msgstr "Dabūjam failu"
+
+msgid "Aborting transfer..."
+msgstr "Pātraucam pārraidīšanu..."
+
+msgid "Error reported after abort."
+msgstr "Kļūda paziņota pēc pātraukšanas."
+
+msgid "Aborted transfer would be successful."
+msgstr "Pātraukā pārraidīšana varētu būt veiksmīga"
 
 msgid "Inconsistent tar archive"
 msgstr "Neatbilstīgs tar arhīvs"
@@ -4446,3 +4463,6 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "fish: Handshaking version..."
+#~ msgstr "fish: Rokspiešanas versija..."

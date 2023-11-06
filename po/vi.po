@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-08-06 15:50+0200\n"
+"POT-Creation-Date: 2023-11-06 21:09+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
 "Language-Team: Vietnamese (http://app.transifex.com/mc/mc/language/vi/)\n"
@@ -3930,66 +3930,24 @@ msgid ""
 "%s"
 msgstr ""
 
+msgid ""
+"EXTFS virtual file system:\n"
+"wrong file name"
+msgstr ""
+
+msgid ""
+"EXTFS virtual file system:\n"
+"wrong archive name"
+msgstr ""
+
+msgid ""
+"EXTFS virtual file system:\n"
+"cannot build command"
+msgstr ""
+
 #, c-format
 msgid "Warning: cannot open %s directory\n"
 msgstr ""
-
-#, c-format
-msgid "fish: Disconnecting from %s"
-msgstr "fish: Ngừng kết nối từ %s"
-
-msgid "fish: Waiting for initial line..."
-msgstr "fish: Đang chời dòng đầu tiên..."
-
-msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr "Xin lỗi, bây giờ không thể tạo kết nối xác thực theo mật khẩu."
-
-#, c-format
-msgid "fish: Password is required for %s"
-msgstr ""
-
-msgid "fish: Sending password..."
-msgstr "fish: Đang gửi mật khẩu..."
-
-msgid "fish: Sending initial line..."
-msgstr "fish: Đang gửi dòng đầu tiên..."
-
-msgid "fish: Handshaking version..."
-msgstr "fish: Đang xác nhận phiên bản..."
-
-msgid "fish: Getting host info..."
-msgstr ""
-
-#, c-format
-msgid "fish: Reading directory %s..."
-msgstr "fish: Đọc thư mục %s..."
-
-#, c-format
-msgid "%s: done."
-msgstr "%s: xong."
-
-#, c-format
-msgid "%s: failure"
-msgstr "%s: lỗi"
-
-#, c-format
-msgid "fish: store %s: sending command..."
-msgstr "fish: bản ghi %s: đang gửi câu lệnh..."
-
-msgid "fish: Local read failed, sending zeros"
-msgstr "fish: Lỗi đọc nội bộ, đang gửi các số không"
-
-msgid "fish: storing file"
-msgstr ""
-
-msgid "Aborting transfer..."
-msgstr "Dừng truyền tải..."
-
-msgid "Error reported after abort."
-msgstr "Có lỗi báo cáo sau khi dừng."
-
-msgid "Aborted transfer would be successful."
-msgstr "Dừng truyền tải thành công."
 
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
@@ -4100,6 +4058,14 @@ msgstr "(đầu tiên chdir)"
 
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: lỗi; không có nơi nào để quay lại về"
+
+#, c-format
+msgid "%s: failure"
+msgstr "%s: lỗi"
+
+#, c-format
+msgid "%s: done."
+msgstr "%s: xong."
 
 msgid "ftpfs: storing file"
 msgstr ""
@@ -4237,6 +4203,57 @@ msgstr ""
 
 msgid "sftp: Listing done."
 msgstr ""
+
+#, fuzzy, c-format
+msgid "shell: Disconnecting from %s"
+msgstr "fish: Ngừng kết nối từ %s"
+
+#, fuzzy
+msgid "shell: Waiting for initial line..."
+msgstr "fish: Đang chời dòng đầu tiên..."
+
+msgid "Sorry, we cannot do password authenticated connections for now."
+msgstr "Xin lỗi, bây giờ không thể tạo kết nối xác thực theo mật khẩu."
+
+#, c-format
+msgid "shell: Password is required for %s"
+msgstr ""
+
+#, fuzzy
+msgid "shell: Sending password..."
+msgstr "fish: Đang gửi mật khẩu..."
+
+#, fuzzy
+msgid "shell: Sending initial line..."
+msgstr "fish: Đang gửi dòng đầu tiên..."
+
+msgid "shell: Getting host info..."
+msgstr ""
+
+#, fuzzy, c-format
+msgid "shell: Reading directory %s..."
+msgstr "fish: Đọc thư mục %s..."
+
+#, fuzzy, c-format
+msgid "shell: store %s: sending command..."
+msgstr "fish: bản ghi %s: đang gửi câu lệnh..."
+
+#, fuzzy
+msgid "shell: Local read failed, sending zeros"
+msgstr "fish: Lỗi đọc nội bộ, đang gửi các số không"
+
+#, fuzzy
+msgid "shell: storing file"
+msgstr "Nhận tập tin"
+
+msgid "Aborting transfer..."
+msgstr "Dừng truyền tải..."
+
+msgid "Error reported after abort."
+msgstr "Có lỗi báo cáo sau khi dừng."
+
+msgid "Aborted transfer would be successful."
+msgstr "Dừng truyền tải thành công."
 
 msgid "Inconsistent tar archive"
 msgstr "Tập tin tar không thích hợp"
@@ -4435,3 +4452,6 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "fish: Handshaking version..."
+#~ msgstr "fish: Đang xác nhận phiên bản..."

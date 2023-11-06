@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-08-06 15:50+0200\n"
+"POT-Creation-Date: 2023-11-06 21:09+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>, 2021\n"
 "Language-Team: Finnish (http://app.transifex.com/mc/mc/language/fi/)\n"
@@ -4007,67 +4007,24 @@ msgid ""
 "%s"
 msgstr ""
 
+msgid ""
+"EXTFS virtual file system:\n"
+"wrong file name"
+msgstr ""
+
+msgid ""
+"EXTFS virtual file system:\n"
+"wrong archive name"
+msgstr ""
+
+msgid ""
+"EXTFS virtual file system:\n"
+"cannot build command"
+msgstr ""
+
 #, c-format
 msgid "Warning: cannot open %s directory\n"
 msgstr "Varoitus: Kansion %s avaaminen ei onnistu\n"
-
-#, c-format
-msgid "fish: Disconnecting from %s"
-msgstr "fish: Katkaistaan yhteys kohteesta %s"
-
-msgid "fish: Waiting for initial line..."
-msgstr ""
-
-msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr ""
-"Sori, mutta emme voi tehdä salasanan authenkaatiota yhteyksille juuri nyt."
-
-#, c-format
-msgid "fish: Password is required for %s"
-msgstr "fish: Salasana pakollinen kohteelle %s"
-
-msgid "fish: Sending password..."
-msgstr "fish: Lähetetään salasana..."
-
-msgid "fish: Sending initial line..."
-msgstr ""
-
-msgid "fish: Handshaking version..."
-msgstr ""
-
-msgid "fish: Getting host info..."
-msgstr "fish: Haetaan palveluntarjoajan tietoja..."
-
-#, c-format
-msgid "fish: Reading directory %s..."
-msgstr "fish: Luetaan kansiota %s..."
-
-#, c-format
-msgid "%s: done."
-msgstr "%s: valmis."
-
-#, c-format
-msgid "%s: failure"
-msgstr "%s: nyt tuli jokin moka"
-
-#, c-format
-msgid "fish: store %s: sending command..."
-msgstr "fish: Säilytä %s: lähettämällä komento ..."
-
-msgid "fish: Local read failed, sending zeros"
-msgstr "fish: Paikallisen tiedoston luku epäonnistui, lähetetään nollia"
-
-msgid "fish: storing file"
-msgstr ""
-
-msgid "Aborting transfer..."
-msgstr "Keskeytetään transferrointi..."
-
-msgid "Error reported after abort."
-msgstr "Virhe raportoitu keskeyttämisen jälkeen."
-
-msgid "Aborted transfer would be successful."
-msgstr "Keskeytetty siirto olisi onnistunut."
 
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
@@ -4178,6 +4135,14 @@ msgstr ""
 
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr ""
+
+#, c-format
+msgid "%s: failure"
+msgstr "%s: nyt tuli jokin moka"
+
+#, c-format
+msgid "%s: done."
+msgstr "%s: valmis."
 
 msgid "ftpfs: storing file"
 msgstr ""
@@ -4315,6 +4280,57 @@ msgstr ""
 
 msgid "sftp: Listing done."
 msgstr ""
+
+#, fuzzy, c-format
+msgid "shell: Disconnecting from %s"
+msgstr "fish: Katkaistaan yhteys kohteesta %s"
+
+msgid "shell: Waiting for initial line..."
+msgstr ""
+
+msgid "Sorry, we cannot do password authenticated connections for now."
+msgstr ""
+"Sori, mutta emme voi tehdä salasanan authenkaatiota yhteyksille juuri nyt."
+
+#, fuzzy, c-format
+msgid "shell: Password is required for %s"
+msgstr "fish: Salasana pakollinen kohteelle %s"
+
+#, fuzzy
+msgid "shell: Sending password..."
+msgstr "fish: Lähetetään salasana..."
+
+msgid "shell: Sending initial line..."
+msgstr ""
+
+#, fuzzy
+msgid "shell: Getting host info..."
+msgstr "fish: Haetaan palveluntarjoajan tietoja..."
+
+#, fuzzy, c-format
+msgid "shell: Reading directory %s..."
+msgstr "fish: Luetaan kansiota %s..."
+
+#, fuzzy, c-format
+msgid "shell: store %s: sending command..."
+msgstr "fish: Säilytä %s: lähettämällä komento ..."
+
+#, fuzzy
+msgid "shell: Local read failed, sending zeros"
+msgstr "fish: Paikallisen tiedoston luku epäonnistui, lähetetään nollia"
+
+#, fuzzy
+msgid "shell: storing file"
+msgstr "Tuodaan tiedostoa"
+
+msgid "Aborting transfer..."
+msgstr "Keskeytetään transferrointi..."
+
+msgid "Error reported after abort."
+msgstr "Virhe raportoitu keskeyttämisen jälkeen."
+
+msgid "Aborted transfer would be successful."
+msgstr "Keskeytetty siirto olisi onnistunut."
 
 msgid "Inconsistent tar archive"
 msgstr ""

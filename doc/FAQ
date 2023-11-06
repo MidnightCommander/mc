@@ -152,7 +152,7 @@ Frequently Asked Questions
    You need a POSIX (Unix compatible) operating system.  If you are
    running Windows, use Cygwin.
 
-   To compile any edition you need to have glib >= 2.30  installed.
+   To compile any edition you need to have glib >= 2.32  installed.
    It's available at https://download.gnome.org/sources/glib/.
 
    If you want to use mouse on the Linux console you need the gpm daemon
