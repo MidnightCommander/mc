@@ -93,6 +93,15 @@ shell_patterns=0
         tar cf - "$Pwd" | zstd -f > "$tar.tar.zst" && \
         echo "../$tar.tar.zst created."
 
+8       Compress the current subdirectory (tar.lzo)
+        Pwd=`basename %d /`
+        echo -n "Name of the compressed file (without extension) [$Pwd]: "
+        read tar
+        [ "$tar"x = x ] && tar="$Pwd"
+        cd .. && \
+        tar cf - "$Pwd" | lzop -f > "$tar.tar.lzo" && \
+        echo "../$tar.tar.lzo created."
+
 = f \.c$ & t r
 + f \.c$ & t r & ! t t
 c       Compile and link current .c file
@@ -228,7 +237,7 @@ U       Uudecode marked news articles (needs work)
         fi
         echo "Please test the output file before deleting anything."
 
-=+ f \.tar\.gz$ | f \.tar\.z$ | f \.tgz$ | f \.tpz$ | f \.tar\.lz$ | f \.tar\.lz4$ | f \.tar\.lzma$ | f \.tar\.7z$ | f \.tar\.xz$ | f \.tar\.zst | f \.tar\.Z$ | f \.tar\.bz2$ & t rl
+=+ f \.tar\.gz$ | f \.tar\.z$ | f \.tgz$ | f \.tpz$ | f \.tar\.lz$ | f \.tar\.lz4$ | f \.tar\.lzma$ | f \.tar\.lzo$ | f \.tar\.7z$ | f \.tar\.xz$ | f \.tar\.zst | f \.tar\.Z$ | f \.tar\.bz2$ & t rl
 x       Extract the contents of a compressed tar file
         unset PRG
         case %f in
@@ -238,6 +247,7 @@ x       Extract the contents of a compressed tar file
             *.tar.lz)   PRG="lzip -dc";;
             *.tar.lz4)  PRG="lz4 -dc";;
             *.tar.lzma) PRG="lzma -dc";;
+            *.tar.lzo)  PRG="lzop -dc";;
             *.tar.xz)   PRG="xz -dc";;
             *.tar.zst)  PRG="zstd -dc";;
             *)          exit 1;;

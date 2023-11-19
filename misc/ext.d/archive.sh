@@ -32,6 +32,9 @@ do_view_action() {
     lzma)
         lzma -dc "${MC_EXT_FILENAME}" 2>/dev/null
         ;;
+    lzo)
+        lzop -dc "${MC_EXT_FILENAME}" 2>/dev/null
+        ;;
     xz)
         xz -dc "${MC_EXT_FILENAME}" 2>/dev/null
         ;;
@@ -63,6 +66,10 @@ do_view_action() {
         ;;
     tar.lzma)
         lzma -dc "${MC_EXT_FILENAME}" 2>/dev/null | \
+            tar tvvf -
+        ;;
+    tar.lzo|tzo)
+        lzop -dc "${MC_EXT_FILENAME}" 2>/dev/null | \
             tar tvvf -
         ;;
     tar.xz)
@@ -112,6 +119,10 @@ do_view_action() {
         ;;
     cpio.lz4)
         lz4 -dc "${MC_EXT_FILENAME}" | \
+            cpio -itv 2>/dev/null
+        ;;
+    cpio.lzo)
+        lzop -dc "${MC_EXT_FILENAME}" | \
             cpio -itv 2>/dev/null
         ;;
     cpio.xz)
@@ -176,6 +187,9 @@ do_open_action() {
         ;;
     lzma)
         lzma -dc "${MC_EXT_FILENAME}" | ${pager}
+        ;;
+    lzo)
+        lzop -dc "${MC_EXT_FILENAME}" | ${pager}
         ;;
     xz)
         xz -dc "${MC_EXT_FILENAME}" | ${pager}

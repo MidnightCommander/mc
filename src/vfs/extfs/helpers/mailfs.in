@@ -11,6 +11,7 @@ $bzcat="bzip2 -dc";           # bunzip2 to stdout
 $lzipcat="lzip -dc";          # unlzip to stdout
 $lz4cat="lz4 -dc";            # unlz4 to stdout
 $lzcat="lzma -dc";            # unlzma to stdout
+$lzocat="lzop -dc";           # unlzo to stdout
 $xzcat="xz -dc";              # unxz to stdout
 $zstdcat="zstd -dc";          # unzstd to stdout
 $file="file";                 # "file" command
@@ -194,6 +195,8 @@ if (/gzip/) {
     exit 1 unless (open IN, "$lz4cat $mbox_qname|");
 } elsif (/lzma/) {
     exit 1 unless (open IN, "$lzcat $mbox_qname|");
+} elsif (/lzo/) {
+    exit 1 unless (open IN, "$lzocat $mbox_qname|");
 } elsif (/xz/) {
     exit 1 unless (open IN, "$xzcat $mbox_qname|");
 } elsif (/zst/) {

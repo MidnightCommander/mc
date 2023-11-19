@@ -17,6 +17,7 @@ use File::Temp 'tempfile';
 my $lzip = 'lzip';
 my $lz4  = 'lz4';
 my $lzma = 'lzma';
+my $lzo  = 'lzop';
 my $xz   = 'xz';
 my $zstd = 'zstd';
 my $bzip = 'bzip2';
@@ -88,6 +89,8 @@ sub myin
 	return "$lzip -dc $qfname";
     } elsif (/^'*lzma/) {
 	return "$lzma -dc $qfname";
+    } elsif (/^'*lzo/) {
+	return "$lzo -dc $qfname";
     } elsif (/^'*xz/) {
 	return "$xz -dc $qfname";
     } elsif (/^'*zst/) {
@@ -114,6 +117,8 @@ sub myout
 	return "$lzip -c $sep $qfname";
     } elsif (/^'*lzma/) {
 	return "$lzma -c $sep $qfname";
+    } elsif (/^'*lzo/) {
+	return "$lzo -c $sep $qfname";
     } elsif (/^'*xz/) {
 	return "$xz -c $sep $qfname";
     } elsif (/^'*zst/) {
