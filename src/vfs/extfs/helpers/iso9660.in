@@ -132,6 +132,7 @@ mcisofs_list () {
       *.lz)  MYCAT="lzip -dc";;
       *.lz4) MYCAT="lz4 -dc";;
       *.lzma) MYCAT="lzma -dc";;
+      *.lzo) MYCAT="lzop -dc";;
       *.xz)  MYCAT="xz -dc";;
       *.zst) MYCAT="zstd -dc";;
       *.bz2) MYCAT="bzip2 -dc";;

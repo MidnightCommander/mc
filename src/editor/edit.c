@@ -142,6 +142,7 @@ static const struct edit_filters
     { "lz4 -cd %s 2>&1", "lz4 > %s", ".lz4" },
     { "lzip -cd %s 2>&1", "lzip > %s", ".lz"},
     { "lzma -cd %s 2>&1", "lzma > %s", ".lzma" },
+    { "lzop -cd %s 2>&1", "lzop > %s", ".lzo"},
     { "bzip2 -cd %s 2>&1", "bzip2 > %s", ".bz2" },
     { "gzip -cd %s 2>&1", "gzip > %s", ".gz" },
     { "gzip -cd %s 2>&1", "gzip > %s", ".Z" }

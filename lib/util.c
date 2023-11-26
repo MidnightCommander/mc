@@ -891,6 +891,11 @@ get_compression_type (int fd, const char *name)
         && magic[2] == 'Z' && magic[3] == 'M' && magic[4] == 'A' && magic[5] == 0x00)
         return COMPRESSION_LZMA;
 
+    /* LZO format - \x89\x4c\x5a\x4f\x00\x0d\x0a\x1a\x0a    lzop compressed data */
+    if (magic[0] == 0x89 && magic[1] == 0x4c &&
+        magic[2] == 0x5a && magic[3] == 0x4f && magic[4] == 0x00 && magic[5] == 0x0d)
+        return COMPRESSION_LZO;
+
     /* XZ compression magic */
     if (magic[0] == 0xFD
         && magic[1] == 0x37
@@ -930,6 +935,8 @@ decompress_extension (int type)
         return "/ulz4" VFS_PATH_URL_DELIMITER;
     case COMPRESSION_LZMA:
         return "/ulzma" VFS_PATH_URL_DELIMITER;
+    case COMPRESSION_LZO:
+        return "/ulzo" VFS_PATH_URL_DELIMITER;
     case COMPRESSION_XZ:
         return "/uxz" VFS_PATH_URL_DELIMITER;
     case COMPRESSION_ZSTD:
