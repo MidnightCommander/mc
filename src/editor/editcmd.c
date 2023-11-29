@@ -460,13 +460,11 @@ edit_save_cmd (WEdit * edit)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-edit_delete_column_of_text (WEdit * edit)
+edit_delete_column_of_text (WEdit * edit, off_t m1, off_t m2)
 {
-    off_t m1, m2;
     off_t n;
     long b, c, d;
 
-    eval_marks (edit, &m1, &m2);
     n = edit_buffer_get_forward_offset (&edit->buffer, m1, 0, m2) + 1;
     c = (long) edit_move_forward3 (edit, edit_buffer_get_bol (&edit->buffer, m1), 0, m1);
     d = (long) edit_move_forward3 (edit, edit_buffer_get_bol (&edit->buffer, m2), 0, m2);
@@ -500,14 +498,10 @@ edit_delete_column_of_text (WEdit * edit)
 /** if success return 0 */
 
 static int
-edit_block_delete (WEdit * edit)
+edit_block_delete (WEdit * edit, off_t start_mark, off_t end_mark)
 {
-    off_t start_mark, end_mark;
     off_t curs_pos;
     long curs_line, c1, c2;
-
-    if (!eval_marks (edit, &start_mark, &end_mark))
-        return 0;
 
     if (edit->column_highlight && edit->mark2 < 0)
         edit_mark_cmd (edit, FALSE);
@@ -542,7 +536,7 @@ edit_block_delete (WEdit * edit)
 
             if (edit->mark2 < 0)
                 edit_mark_cmd (edit, FALSE);
-            edit_delete_column_of_text (edit);
+            edit_delete_column_of_text (edit, start_mark, end_mark);
             /* move cursor to the saved position */
             edit_move_to_line (edit, curs_line);
             /* calculate line width and cursor position before cut */
@@ -1496,7 +1490,7 @@ edit_block_delete_cmd (WEdit * edit)
     off_t start_mark, end_mark;
 
     if (eval_marks (edit, &start_mark, &end_mark))
-        return edit_block_delete (edit);
+        return edit_block_delete (edit, start_mark, end_mark);
 
     edit_delete_line (edit);
 
