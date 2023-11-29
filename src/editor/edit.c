@@ -1808,14 +1808,14 @@ edit_user_menu (WEdit * edit, const char *menu_file, int selected_entry)
     if (user_menu_cmd (CONST_WIDGET (edit), menu_file, selected_entry)
         && (mc_stat (block_file_vpath, &status) == 0) && (status.st_size != 0))
     {
-        int rc = 0;
+        gboolean rc = FALSE;
         FILE *fd;
 
         /* i.e. we have marked block */
         if (mark)
             rc = edit_block_delete_cmd (edit);
 
-        if (rc == 0)
+        if (!rc)
         {
             off_t ins_len;
 

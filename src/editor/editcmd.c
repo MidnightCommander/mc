@@ -495,9 +495,9 @@ edit_delete_column_of_text (WEdit * edit, off_t m1, off_t m2)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** if success return 0 */
+/** if success return TRUE */
 
-static int
+static gboolean
 edit_block_delete (WEdit * edit, off_t start_mark, off_t end_mark)
 {
     off_t curs_pos;
@@ -511,7 +511,7 @@ edit_block_delete (WEdit * edit, off_t start_mark, off_t end_mark)
         edit_query_dialog2 (_("Warning"),
                             ("Block is large, you may not be able to undo this action"),
                             _("C&ontinue"), _("&Cancel")) != 0)
-        return 1;
+        return FALSE;
 
     c1 = MIN (edit->column1, edit->column2);
     c2 = MAX (edit->column1, edit->column2);
@@ -557,7 +557,7 @@ edit_block_delete (WEdit * edit, off_t start_mark, off_t end_mark)
     edit_set_markers (edit, 0, 0, 0, 0);
     edit->force |= REDRAW_PAGE;
 
-    return 0;
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1482,9 +1482,9 @@ edit_block_move_cmd (WEdit * edit)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** returns 1 if canceelled by user */
+/** returns FALSE if canceelled by user */
 
-int
+gboolean
 edit_block_delete_cmd (WEdit * edit)
 {
     off_t start_mark, end_mark;
@@ -1494,7 +1494,7 @@ edit_block_delete_cmd (WEdit * edit)
 
     edit_delete_line (edit);
 
-    return 0;
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1866,7 +1866,7 @@ edit_sort_cmd (WEdit * edit)
 
     edit->force |= REDRAW_COMPLETELY;
 
-    if (edit_block_delete_cmd (edit))
+    if (!edit_block_delete_cmd (edit))
         return 1;
 
     {
