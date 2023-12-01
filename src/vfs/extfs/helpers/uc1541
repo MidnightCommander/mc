@@ -1,24 +1,25 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """
 UC1541 Virtual filesystem
 
 Author: Roman 'gryf' Dobosz <gryf73@gmail.com>
-Date: 2019-09-20
-Version: 3.3
+Date: 2023-10-04
+Version: 3.6
 Licence: BSD
 source: https://bitbucket.org/gryf/uc1541
 mirror: https://github.com/gryf/uc1541
 """
-
-import sys
-import re
-import os
+import argparse
 import gzip
-from subprocess import Popen, PIPE
+import logging
+import os
+import re
+import subprocess
+import sys
 
+
+LOG = logging.getLogger('UC1541')
 if os.getenv('UC1541_DEBUG'):
-    import logging
-    LOG = logging.getLogger('UC1541')
     LOG.setLevel(logging.DEBUG)
     FILE_HANDLER = logging.FileHandler("/tmp/uc1541.log")
     FILE_FORMATTER = logging.Formatter("%(asctime)s %(levelname)-8s "
@@ -26,45 +27,9 @@ if os.getenv('UC1541_DEBUG'):
     FILE_HANDLER.setFormatter(FILE_FORMATTER)
     FILE_HANDLER.setLevel(logging.DEBUG)
     LOG.addHandler(FILE_HANDLER)
-else:
-    class LOG(object):
-        """
-        Dummy logger object. Does nothing.
-        """
-        @classmethod
-        def debug(*args, **kwargs):
-            pass
-
-        @classmethod
-        def info(*args, **kwargs):
-            pass
-
-        @classmethod
-        def warning(*args, **kwargs):
-            pass
-
-        @classmethod
-        def error(*args, **kwargs):
-            pass
-
-        @classmethod
-        def critical(*args, **kwargs):
-            pass
 
 
 SECLEN = 256
-
-
-def _ord(string_or_int):
-    """
-    Return an int value for the (possible) string passed in argument. This
-    function is for compatibility between python2 and python3, where single
-    element in byte string array is a string or an int respectively.
-    """
-    try:
-        return ord(string_or_int)
-    except TypeError:
-        return string_or_int
 
 
 def _get_raw(dimage):
@@ -160,10 +125,10 @@ class Disk(object):
         filename = list()
 
         for chr_ in string:
-            if _ord(chr_) == 160:  # shift+space character; $a0
+            if chr_ == 160:  # shift+space character; $a0
                 break
 
-            character = D64.CHAR_MAP.get(_ord(chr_), '?')
+            character = D64.CHAR_MAP.get(chr_, '?')
             filename.append(character)
 
         # special cases
@@ -204,8 +169,8 @@ class Disk(object):
         if not self.current_sector_data:
             return False
 
-        self.next_track = _ord(self.current_sector_data[0])
-        self.next_sector = _ord(self.current_sector_data[1])
+        self.next_track = self.current_sector_data[0]
+        self.next_sector = self.current_sector_data[1]
 
         if (self.next_track, self.next_sector) in self._already_done:
             # Just a failsafe. Endless loop is not what is expected.
@@ -239,7 +204,7 @@ class Disk(object):
         sector = self.current_sector_data
         for dummy in range(8):
             entry = sector[:32]
-            ftype = _ord(entry[2])
+            ftype = entry[2]
 
             if ftype == 0:  # deleted
                 sector = sector[32:]
@@ -247,12 +212,12 @@ class Disk(object):
 
             type_verbose = self._get_ftype(ftype)
 
-            protect = _ord(entry[2]) & 64 and "<" or " "
+            protect = entry[2] & 64 and "<" or " "
             fname = entry[5:21]
             if ftype == 'rel':
-                size = _ord(entry[23])
+                size = entry[23]
             else:
-                size = _ord(entry[30]) + _ord(entry[31]) * 226
+                size = entry[30] + entry[31] * 226
 
             self._dir_contents.append({'fname': self._map_filename(fname),
                                        'ftype': type_verbose,
@@ -392,7 +357,7 @@ class Uc1541(object):
     """
     Class for interact with c1541 program and MC
     """
-    PRG = re.compile(r'(\d+)\s+"([^"]*)".+?\s(del|prg|rel|seq|usr)([\s<])')
+    PRG = re.compile(r'(\d+)\s+"([^"]*)".+?(del|prg|rel|seq|usr)([\s<])')
 
     def __init__(self, archname):
         self.arch = archname
@@ -430,11 +395,7 @@ class Uc1541(object):
         """
         LOG.info("Removing file %s", dst)
         dst = self._get_masked_fname(dst)
-
-        if not self._call_command('delete', dst=dst):
-            return self._show_error()
-
-        return 0
+        return self._call_command('delete', dst=dst)
 
     def copyin(self, dst, src):
         """
@@ -442,11 +403,7 @@ class Uc1541(object):
         """
         LOG.info("Copy into D64 %s as %s", src, dst)
         dst = self._correct_fname(dst)
-
-        if not self._call_command('write', src=src, dst=dst):
-            return self._show_error()
-
-        return 0
+        return self._call_command('write', src=src, dst=dst)
 
     def copyout(self, src, dst):
         """
@@ -459,10 +416,7 @@ class Uc1541(object):
 
         src = self._get_masked_fname(src)
 
-        if not self._call_command('read', src=src, dst=dst):
-            return self._show_error()
-
-        return 0
+        return self._call_command('read', src=src, dst=dst)
 
     def mkdir(self, dirname):
         """Not supported"""
@@ -523,8 +477,9 @@ class Uc1541(object):
         uid = os.getuid()
         gid = os.getgid()
 
-        if not self._call_command('list'):
-            return self._show_error()
+        res = self._call_command('list')
+        if res != 0:
+            return res
 
         idx = 0
         for line in self.out.split("\n"):
@@ -540,7 +495,7 @@ class Uc1541(object):
                 if '/' in display_name:
                     display_name = display_name.replace('/', '|')
 
-                # workaround for space and dash at the beginning of the
+                # workaround for space and dash at the beggining of the
                 # filename
                 char_map = {' ': '~',
                             '-': '_'}
@@ -593,13 +548,16 @@ class Uc1541(object):
         universal_newlines = True
         if cmd in ['delete', 'write']:
             universal_newlines = False
-        self.out, self.err = Popen(command,
-                                   universal_newlines=universal_newlines,
-                                   stdout=PIPE, stderr=PIPE).communicate()
+        (self.out,
+         self.err) = subprocess.Popen(command,
+                                      universal_newlines=universal_newlines,
+                                      stdout=subprocess.PIPE,
+                                      stderr=subprocess.PIPE).communicate()
 
         if self.err:
             LOG.debug('an err: %s', self.err)
-        return not self.err
+            return self._show_error()
+        return 0
 
 
 CALL_MAP = {'list': lambda a: Uc1541(a.arch).list(),
@@ -612,7 +570,7 @@ CALL_MAP = {'list': lambda a: Uc1541(a.arch).list(),
 
 def parse_args():
     """Use ArgumentParser to check for script arguments and execute."""
-    parser = ArgumentParser()
+    parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers(help='supported commands',
                                        dest='subcommand')
     subparsers.required = True
@@ -659,44 +617,6 @@ def parse_args():
     return args.func(args)
 
 
-def no_parse():
-    """Failsafe argument "parsing". Note, that it blindly takes positional
-    arguments without checking them. In case of wrong arguments it will
-    silently exit"""
-    try:
-        if sys.argv[1] not in ('list', 'copyin', 'copyout', 'rm', 'mkdir',
-                               "run"):
-            sys.exit(2)
-    except IndexError:
-        sys.exit(2)
-
-    class Arg(object):
-        """Mimic argparse object"""
-        dst = None
-        src = None
-        arch = None
-
-    arg = Arg()
-
-    try:
-        arg.arch = sys.argv[2]
-        if sys.argv[1] in ('copyin', 'copyout'):
-            arg.src = sys.argv[3]
-            arg.dst = sys.argv[4]
-        elif sys.argv[1] in ('rm', 'run', 'mkdir'):
-            arg.dst = sys.argv[3]
-    except IndexError:
-        sys.exit(2)
-
-    return CALL_MAP[sys.argv[1]](arg)
-
-
 if __name__ == "__main__":
     LOG.debug("Script params: %s", str(sys.argv))
-    try:
-        from argparse import ArgumentParser
-        PARSE_FUNC = parse_args
-    except ImportError:
-        PARSE_FUNC = no_parse
-
-    sys.exit(PARSE_FUNC())
+    sys.exit(parse_args())
