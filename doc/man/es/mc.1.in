@@ -3405,8 +3405,8 @@ de error: errdfocus, errdhotnormal, errdhotfocus, errdtitle; los colores
 de la ayuda: helpnormal, helpitalic, helpbold, helplink, helpslink,
 helptitle; los colores del visor: viewnormal, viewbold, viewunderline,
 viewselected; loc colores del editor: editnormal, editbold, editmarked,
-editwhitespace, editlinestate; los colores de los menús desplegables:
-pmenunormal, pmenusel, pmenutitle.
+editwhitespace, editnonprintable, editlinestate; los colores de los menús
+desplegables: pmenunormal, pmenusel, pmenutitle.
 .PP
 .I header
 determina el color del encabezado de los paneles, la línea con los

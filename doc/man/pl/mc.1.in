@@ -2542,8 +2542,8 @@ dhotfocus; Kolory pomocy: helpnormal, helpitalic, helpbold, helplink,
 helpslink; Kolory podglądu: viewunderline; Specjalne tryby podświetlenia:
 executable, directory, link, device, special. Viewer colors are: viewnormal,
 viewbold, viewunderline, viewselected. Editor colors are: editnormal, editbold,
-editmarked, editwhitespace, editlinestate. Popup menu colors are: pmenunormal,
-pmenusel, pmenutitle.
+editmarked, editwhitespace, editnonprintable, editlinestate. Popup menu colors
+are: pmenunormal, pmenusel, pmenutitle.
 [nie tłumaczyłem nazw z racji tego, że trzeba je stosować w ich angielskim
 brzmieniu \- jeśli jesteś aż tak zaawansowany, użyj słownika].
 .PP

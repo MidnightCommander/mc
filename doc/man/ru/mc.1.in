@@ -4019,7 +4019,8 @@ bbarhotkey, bbarbutton.
 Цвета в диалоге\-сообщении об ошибке: errdfocus, errdhotnormal, errdhotfocus, errdtitle.
 Цвета в окне встроенной помощи: helpnormal, helpitalic, helpbold, helplink, helpslink.
 Цвета в окне программы просмотра: viewnormal, viewbold, viewunderline, viewselected.
-Цвета в редакторе: editnormal, editbold, editmarked, editwhitespace, editlinestate.
+Цвета в редакторе: editnormal, editbold, editmarked, editwhitespace, editnonprintable,
+editlinestate.
 Цвета окна всплывающего меню: pmenunormal, pmenusel, pmenutitle.
 .PP
 Цвета задавать не обязательно. Цвет какого именно поля определяется

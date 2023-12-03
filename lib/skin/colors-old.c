@@ -69,6 +69,7 @@ static const mc_skin_colors_old_t old_colors[] = {
     {"editframedrag", "editor", "editframedrag"},
     {"editlinestate", "editor", "editlinestate"},
     {"editmarked", "editor", "editmarked"},
+    {"editnonprintable", "editor", "editnonprintable"},
     {"editnormal", "editor", "_default_"},
     {"editwhitespace", "editor", "editwhitespace"},
     {"errdhotfocus", "error", "errdhotfocus"},

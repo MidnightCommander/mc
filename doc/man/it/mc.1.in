@@ -2881,7 +2881,7 @@ Il colore del visualizzatore è: viewunderline.
 Colori speciali di evidenziazione: executable, directory, link, device, 
 special, core.
 I colori dell'viewer sono: viewnormal, viewbold, viewunderline, viewselected.
-I colori dell'editor sono: editnormal, editbold, editmarked.
+I colori dell'editor sono: editnormal, editbold, editmarked, editnonprintable.
 .PP
 .I input 
 determina il colore delle righe di input usate delle finestre di dialogo.
