@@ -916,8 +916,8 @@ extfs_cmd (const char *str_extfs_cmd, const struct extfs_super_t *archive,
 {
     char *file;
     char *quoted_file;
-    char *quoted_localname;
     char *archive_name, *quoted_archive_name;
+    const extfs_plugin_info_t *info;
     char *cmd = NULL;
     int retval = 0;
     GError *error = NULL;
@@ -946,14 +946,18 @@ extfs_cmd (const char *str_extfs_cmd, const struct extfs_super_t *archive,
         return (-1);
     }
 
-    quoted_localname = name_quote (localname, FALSE);
-    if (quoted_localname != NULL)
-    {
-        const extfs_plugin_info_t *info;
+    info = &g_array_index (extfs_plugins, extfs_plugin_info_t, archive->fstype);
 
-        info = &g_array_index (extfs_plugins, extfs_plugin_info_t, archive->fstype);
-        cmd = g_strconcat (info->path, info->prefix, str_extfs_cmd,
-                           quoted_archive_name, " ", file, " ", quoted_localname, (char *) NULL);
+    if (localname == NULL || *localname == '\0')
+        cmd = g_strconcat (info->path, info->prefix, str_extfs_cmd, quoted_archive_name, " ",
+                           file, (char *) NULL);
+    else
+    {
+        char *quoted_localname;
+
+        quoted_localname = name_quote (localname, FALSE);
+        cmd = g_strconcat (info->path, info->prefix, str_extfs_cmd, quoted_archive_name, " ",
+                           file, " ", quoted_localname, (char *) NULL);
         g_free (quoted_localname);
     }
 
