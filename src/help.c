@@ -131,16 +131,12 @@ search_string (const char *start, const char *text)
     const char *e = start;
 
     local_text = g_strdup (text);
-    d = local_text;
 
     /* fmt sometimes replaces a space with a newline in the help file */
     /* Replace the newlines in the link name with spaces to correct the situation */
-    while (*d != '\0')
-    {
+    for (d = local_text; *d != '\0'; str_next_char (&d))
         if (*d == '\n')
             *d = ' ';
-        str_next_char (&d);
-    }
 
     /* Do search */
     for (d = local_text; *e != '\0'; e++)
@@ -1147,9 +1143,8 @@ help_interactive_display (const gchar * event_group_name, const gchar * event_na
     selected_item = search_string_node (main_node, STRING_LINK_START) - 1;
     currentpoint = main_node + 1;       /* Skip the newline following the start of the node */
 
-    for (history_ptr = HISTORY_SIZE; history_ptr != 0 ;)
+    for (history_ptr = HISTORY_SIZE - 1; history_ptr >= 0; history_ptr--)
     {
-        history_ptr--;
         history[history_ptr].page = currentpoint;
         history[history_ptr].link = selected_item;
     }
