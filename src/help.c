@@ -272,7 +272,7 @@ move_backward (int i)
 static void
 move_to_top (void)
 {
-    while (((int) (currentpoint > fdata) > 0) && (*currentpoint != CHAR_NODE_END))
+    while (((int) (currentpoint - fdata) > 0) && (*currentpoint != CHAR_NODE_END))
         currentpoint--;
 
     while (*currentpoint != ']')
