@@ -126,9 +126,12 @@ static const char *
 search_string (const char *start, const char *text)
 {
     const char *result = NULL;
-    char *local_text = g_strdup (text);
-    char *d = local_text;
+    char *local_text;
+    char *d;
     const char *e = start;
+
+    local_text = g_strdup (text);
+    d = local_text;
 
     /* fmt sometimes replaces a space with a newline in the help file */
     /* Replace the newlines in the link name with spaces to correct the situation */
@@ -140,7 +143,7 @@ search_string (const char *start, const char *text)
     }
 
     /* Do search */
-    for (d = local_text; *e; e++)
+    for (d = local_text; *e != '\0'; e++)
     {
         if (*d == *e)
             d++;
@@ -170,7 +173,7 @@ search_string_node (const char *start, const char *text)
     const char *e = start;
 
     if (start != NULL)
-        for (; *e && *e != CHAR_NODE_END; e++)
+        for (; *e != '\0' && *e != CHAR_NODE_END; e++)
         {
             if (*d == *e)
                 d++;
@@ -301,7 +304,7 @@ help_follow_link (const char *start, const char *lc_selected_item)
     if (lc_selected_item == NULL)
         return start;
 
-    for (p = lc_selected_item; *p && *p != CHAR_NODE_END && *p != CHAR_LINK_POINTER; p++)
+    for (p = lc_selected_item; *p != '\0' && *p != CHAR_NODE_END && *p != CHAR_LINK_POINTER; p++)
         ;
     if (*p == CHAR_LINK_POINTER)
     {
@@ -309,7 +312,8 @@ help_follow_link (const char *start, const char *lc_selected_item)
         char link_name[MAXLINKNAME];
 
         link_name[0] = '[';
-        for (i = 1; *p != CHAR_LINK_END && *p && *p != CHAR_NODE_END && i < MAXLINKNAME - 3;)
+        for (i = 1;
+             *p != CHAR_LINK_END && *p != '\0' && *p != CHAR_NODE_END && i < MAXLINKNAME - 3;)
             link_name[i++] = *++p;
         link_name[i - 1] = ']';
         link_name[i] = '\0';
@@ -597,7 +601,7 @@ help_show (WDialog * h, const char *paint_start)
     g_string_free (word, TRUE);
 
     /* Position the cursor over a nice link */
-    if (active_col)
+    if (active_col != 0)
         widget_gotoyx (h, active_line, active_col);
 }
 
@@ -1143,7 +1147,7 @@ help_interactive_display (const gchar * event_group_name, const gchar * event_na
     selected_item = search_string_node (main_node, STRING_LINK_START) - 1;
     currentpoint = main_node + 1;       /* Skip the newline following the start of the node */
 
-    for (history_ptr = HISTORY_SIZE; history_ptr;)
+    for (history_ptr = HISTORY_SIZE; history_ptr != 0 ;)
     {
         history_ptr--;
         history[history_ptr].page = currentpoint;
