@@ -165,11 +165,12 @@ search_string (const char *start, const char *text)
 static const char *
 search_string_node (const char *start, const char *text)
 {
-    const char *d = text;
-    const char *e = start;
-
     if (start != NULL)
-        for (; *e != '\0' && *e != CHAR_NODE_END; e++)
+    {
+        const char *d = text;
+        const char *e;
+
+        for (e = start; *e != '\0' && *e != CHAR_NODE_END; e++)
         {
             if (*d == *e)
                 d++;
@@ -178,6 +179,7 @@ search_string_node (const char *start, const char *text)
             if (*d == '\0')
                 return e + 1;
         }
+    }
 
     return NULL;
 }
@@ -447,10 +449,7 @@ help_print_word (WDialog * h, GString * word, int *col, int *line, gboolean add_
 static void
 help_show (WDialog * h, const char *paint_start)
 {
-    const char *p, *n;
-    int col, line, c;
     gboolean painting = TRUE;
-    gboolean acs;               /* Flag: Alternate character set active? */
     gboolean repeat_paint;
     int active_col, active_line;        /* Active link position */
     char buff[MB_LEN_MAX + 1];
@@ -461,9 +460,15 @@ help_show (WDialog * h, const char *paint_start)
     tty_setcolor (HELP_NORMAL_COLOR);
     do
     {
-        line = col = active_col = active_line = 0;
+        int line = 0;
+        int col = 0;
+        gboolean acs = FALSE;   /* Flag: Is alternate character set active? */
+        const char *p, *n;
+
+        active_col = 0;
+        active_line = 0;
+
         repeat_paint = FALSE;
-        acs = FALSE;
 
         clear_link_areas ();
         if ((int) (selected_item - paint_start) < 0)
@@ -473,6 +478,8 @@ help_show (WDialog * h, const char *paint_start)
         n = paint_start;
         while ((n[0] != '\0') && (n[0] != CHAR_NODE_END) && (line < help_lines))
         {
+            int c;
+
             p = n;
             n = str_cget_next_char (p);
             memcpy (buff, p, n - p);
