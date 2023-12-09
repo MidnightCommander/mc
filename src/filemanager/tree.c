@@ -985,6 +985,16 @@ tree_toggle_navig (WTree * tree)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static void
+tree_help (void)
+{
+    ev_help_t event_data = { NULL, "[Directory Tree]" };
+
+    mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static cb_ret_t
 tree_execute_cmd (WTree * tree, long command)
 {
@@ -996,10 +1006,7 @@ tree_execute_cmd (WTree * tree, long command)
     switch (command)
     {
     case CK_Help:
-        {
-            ev_help_t event_data = { NULL, "[Directory Tree]" };
-            mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data);
-        }
+        tree_help ();
         break;
     case CK_Forget:
         tree_forget (tree);
