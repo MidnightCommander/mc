@@ -122,6 +122,16 @@ refresh_cmd (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static void
+dlg_help (const WDialog * h)
+{
+    ev_help_t event_data = { NULL, h->help_ctx };
+
+    mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static cb_ret_t
 dlg_execute_cmd (WDialog * h, long command)
 {
@@ -152,10 +162,7 @@ dlg_execute_cmd (WDialog * h, long command)
         break;
 
     case CK_Help:
-        {
-            ev_help_t event_data = { NULL, h->help_ctx };
-            mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data);
-        }
+        dlg_help (h);
         break;
 
     case CK_Suspend:
