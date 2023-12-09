@@ -182,9 +182,10 @@ edit_about (void)
  */
 
 static void
-edit_help (void)
+edit_help (const WDialog * h)
 {
-    ev_help_t event_data = { NULL, "[Internal File Editor]" };
+    ev_help_t event_data = { NULL, h->help_ctx };
+
     mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data);
 }
 
@@ -426,8 +427,7 @@ edit_dialog_command_execute (WDialog * h, long command)
             dlg_close (h);
         break;
     case CK_Help:
-        edit_help ();
-        /* edit->force |= REDRAW_COMPLETELY; */
+        edit_help (h);
         break;
     case CK_Menu:
         edit_menu_cmd (h);
