@@ -3513,8 +3513,8 @@ dhotnormal, dhotfocus, dtitle. Error dialog colors are: errdfocus, errdhotnormal
 errdhotfocus, errdtitle.  Help colors are: helpnormal, helpitalic, helpbold,
 helplink, helpslink, helptitle.  Viewer colors are: viewnormal, viewbold,
 viewunderline, viewselected. Editor colors are: editnormal, editbold, editmarked,
-editwhitespace, editlinestate. Popup menu colors are: pmenunormal, pmenusel,
-pmenutitle.
+editwhitespace, editnonprintable, editlinestate. Popup menu colors are: pmenunormal,
+pmenusel, pmenutitle.
 .PP
 .I header
 determines the color of panel header, the line that contains column titles

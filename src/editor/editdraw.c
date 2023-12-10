@@ -448,7 +448,6 @@ print_to_widget (WEdit * edit, long row, int start_col, int start_col_real,
     {
         int style;
         unsigned int textchar;
-        int color;
 
         if (cols_to_skip != 0)
         {
@@ -458,8 +457,6 @@ print_to_widget (WEdit * edit, long row, int start_col, int start_col_real,
 
         style = p->style & 0xFF00;
         textchar = p->ch;
-        /* If non-printable - use black background */
-        color = (style & MOD_ABNORMAL) != 0 ? 0 : p->style >> 16;
 
         if ((style & MOD_WHITESPACE) != 0)
         {
@@ -475,8 +472,10 @@ print_to_widget (WEdit * edit, long row, int start_col, int start_col_real,
             tty_setcolor (EDITOR_BOLD_COLOR);
         else if ((style & MOD_MARKED) != 0)
             tty_setcolor (EDITOR_MARKED_COLOR);
+        else if ((style & MOD_ABNORMAL) != 0)
+            tty_setcolor (EDITOR_NONPRINTABLE_COLOR);
         else
-            tty_lowlevel_setcolor (color);
+            tty_lowlevel_setcolor (p->style >> 16);
 
         if (edit_options.show_right_margin)
         {

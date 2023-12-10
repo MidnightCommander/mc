@@ -302,6 +302,7 @@ mc_skin_color_cache_init (void)
     EDITOR_BOLD_COLOR = mc_skin_color_get ("editor", "editbold");
     EDITOR_MARKED_COLOR = mc_skin_color_get ("editor", "editmarked");
     EDITOR_WHITESPACE_COLOR = mc_skin_color_get ("editor", "editwhitespace");
+    EDITOR_NONPRINTABLE_COLOR = mc_skin_color_get ("editor", "editnonprintable");
     EDITOR_RIGHT_MARGIN_COLOR = mc_skin_color_get ("editor", "editrightmargin");
     LINE_STATE_COLOR = mc_skin_color_get ("editor", "editlinestate");
     EDITOR_BACKGROUND = mc_skin_color_get ("editor", "editbg");

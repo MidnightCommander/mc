@@ -2869,7 +2869,7 @@ dhotnormal, dhotfocus; Súgó színek: helpnormal, helpitalic, helpbold,
 helplink, helpslink; Fájlnéző színek: viewunderline; Speciális kijelölés
 színei: executable, directory, link, stalelink, device, special, core;
 Viewer colors are: viewnormal, viewbold, viewunderline, viewselected.
-Szerkesztő színei: editnormal, editbold, editmarked.
+Szerkesztő színei: editnormal, editbold, editmarked, editnonprintable.
 .PP
 .I input
 maghatározza a beviteli sorok színét a dialogus ablakora vonatkozóan.
