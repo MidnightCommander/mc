@@ -685,12 +685,12 @@ is_blank (const edit_buffer_t * buf, off_t offset)
     off_t s, f;
 
     s = edit_buffer_get_bol (buf, offset);
-    f = edit_buffer_get_eol (buf, offset) - 1;
-    while (s <= f)
+    f = edit_buffer_get_eol (buf, offset);
+    for (; s < f; s++)
     {
         int c;
 
-        c = edit_buffer_get_byte (buf, s++);
+        c = edit_buffer_get_byte (buf, s);
         if (!isspace (c))
             return FALSE;
     }
