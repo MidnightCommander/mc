@@ -248,7 +248,8 @@ compare_word_to_right (const WEdit * edit, off_t i, const GString * text,
     const unsigned char *p, *q;
     int c, d, j;
 
-    c = xx_tolower (edit, edit_buffer_get_byte (&edit->buffer, i - 1));
+    c = edit_buffer_get_byte (&edit->buffer, i - 1);
+    c = xx_tolower (edit, c);
     if ((line_start && c != '\n') || (whole_left != NULL && strchr (whole_left, c) != NULL))
         return -1;
 
@@ -261,7 +262,8 @@ compare_word_to_right (const WEdit * edit, off_t i, const GString * text,
                 return -1;
             while (TRUE)
             {
-                c = xx_tolower (edit, edit_buffer_get_byte (&edit->buffer, i));
+                c = edit_buffer_get_byte (&edit->buffer, i);
+                c = xx_tolower (edit, c);
                 if (*p == '\0' && whole_right != NULL && strchr (whole_right, c) == NULL)
                     break;
                 if (c == *p)
@@ -277,7 +279,8 @@ compare_word_to_right (const WEdit * edit, off_t i, const GString * text,
             j = 0;
             while (TRUE)
             {
-                c = xx_tolower (edit, edit_buffer_get_byte (&edit->buffer, i));
+                c = edit_buffer_get_byte (&edit->buffer, i);
+                c = xx_tolower (edit, c);
                 if (c == *p)
                 {
                     j = i;
@@ -308,7 +311,8 @@ compare_word_to_right (const WEdit * edit, off_t i, const GString * text,
             while (TRUE)
             {
                 d = c;
-                c = xx_tolower (edit, edit_buffer_get_byte (&edit->buffer, i));
+                c = edit_buffer_get_byte (&edit->buffer, i);
+                c = xx_tolower (edit, c);
                 for (j = 0; p[j] != SYNTAX_TOKEN_BRACKET && p[j] != '\0'; j++)
                     if (c == p[j])
                         goto found_char2;
@@ -327,7 +331,8 @@ compare_word_to_right (const WEdit * edit, off_t i, const GString * text,
         case SYNTAX_TOKEN_BRACE:
             if (++p > q)
                 return -1;
-            c = xx_tolower (edit, edit_buffer_get_byte (&edit->buffer, i));
+            c = edit_buffer_get_byte (&edit->buffer, i);
+            c = xx_tolower (edit, c);
             for (; *p != SYNTAX_TOKEN_BRACE && *p != '\0'; p++)
                 if (c == *p)
                     goto found_char3;
@@ -337,13 +342,18 @@ compare_word_to_right (const WEdit * edit, off_t i, const GString * text,
                 p++;
             break;
         default:
-            if (*p != xx_tolower (edit, edit_buffer_get_byte (&edit->buffer, i)))
+            c = edit_buffer_get_byte (&edit->buffer, i);
+            if (*p != xx_tolower (edit, c))
                 return -1;
         }
     }
-    return (whole_right != NULL &&
-            strchr (whole_right,
-                    xx_tolower (edit, edit_buffer_get_byte (&edit->buffer, i))) != NULL) ? -1 : i;
+
+    if (whole_right == NULL)
+        return i;
+
+    c = edit_buffer_get_byte (&edit->buffer, i);
+    c = xx_tolower (edit, c);
+    return strchr (whole_right, c) != NULL ? -1 : i;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -371,7 +381,8 @@ apply_rules_going_right (WEdit * edit, off_t i)
     off_t end = 0;
     edit_syntax_rule_t _rule = edit->rule;
 
-    c = xx_tolower (edit, edit_buffer_get_byte (&edit->buffer, i));
+    c = edit_buffer_get_byte (&edit->buffer, i);
+    c = xx_tolower (edit, c);
     if (c == 0)
         return;
 

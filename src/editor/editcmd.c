@@ -463,17 +463,20 @@ static void
 edit_delete_column_of_text (WEdit * edit, off_t m1, off_t m2)
 {
     off_t n;
+    off_t r;
     long b, c, d;
 
     n = edit_buffer_get_forward_offset (&edit->buffer, m1, 0, m2) + 1;
-    c = (long) edit_move_forward3 (edit, edit_buffer_get_bol (&edit->buffer, m1), 0, m1);
-    d = (long) edit_move_forward3 (edit, edit_buffer_get_bol (&edit->buffer, m2), 0, m2);
+    r = edit_buffer_get_bol (&edit->buffer, m1);
+    c = (long) edit_move_forward3 (edit, r, 0, m1);
+    r = edit_buffer_get_bol (&edit->buffer, m2);
+    d = (long) edit_move_forward3 (edit, r, 0, m2);
     b = MAX (MIN (c, d), MIN (edit->column1, edit->column2));
     c = MAX (c, MAX (edit->column1, edit->column2));
 
     while (n-- != 0)
     {
-        off_t r, p, q;
+        off_t p, q;
 
         r = edit_buffer_get_current_bol (&edit->buffer);
         p = edit_move_forward3 (edit, r, b, 0);
@@ -488,9 +491,10 @@ edit_delete_column_of_text (WEdit * edit, off_t m1, off_t m2)
 
         /* move to next line except on the last delete */
         if (n != 0)
-            edit_cursor_move (edit,
-                              edit_buffer_get_forward_offset (&edit->buffer, edit->buffer.curs1, 1,
-                                                              0) - edit->buffer.curs1);
+        {
+            r = edit_buffer_get_forward_offset (&edit->buffer, edit->buffer.curs1, 1, 0);
+            edit_cursor_move (edit, r - edit->buffer.curs1);
+        }
     }
 }
 
@@ -532,6 +536,7 @@ edit_block_delete (WEdit * edit, off_t start_mark, off_t end_mark)
     {
         if (edit->column_highlight)
         {
+            off_t b, e;
             off_t line_width;
 
             if (edit->mark2 < 0)
@@ -540,8 +545,9 @@ edit_block_delete (WEdit * edit, off_t start_mark, off_t end_mark)
             /* move cursor to the saved position */
             edit_move_to_line (edit, curs_line);
             /* calculate line width and cursor position before cut */
-            line_width = edit_move_forward3 (edit, edit_buffer_get_current_bol (&edit->buffer), 0,
-                                             edit_buffer_get_current_eol (&edit->buffer));
+            b = edit_buffer_get_current_bol (&edit->buffer);
+            e = edit_buffer_get_current_eol (&edit->buffer);
+            line_width = edit_move_forward3 (edit, b, 0, e);
             if (edit_options.cursor_beyond_eol && curs_pos > line_width)
                 edit->over_col = curs_pos - line_width;
         }
@@ -580,7 +586,8 @@ edit_get_block (WEdit * edit, off_t start, off_t finish, off_t * l)
             int c;
             off_t x;
 
-            x = edit_move_forward3 (edit, edit_buffer_get_bol (&edit->buffer, start), 0, start);
+            x = edit_buffer_get_bol (&edit->buffer, start);
+            x = edit_move_forward3 (edit, x, 0, start);
             c = edit_buffer_get_byte (&edit->buffer, start);
             if ((x >= edit->column1 && x < edit->column2)
                 || (x >= edit->column2 && x < edit->column1) || c == '\n')
@@ -1339,6 +1346,7 @@ edit_block_move_cmd (WEdit * edit)
         off_t size;
         long c1, c2, b_width;
         long x, x2;
+        off_t b1, b2;
 
         c1 = MIN (edit->column1, edit->column2);
         c2 = MAX (edit->column1, edit->column2);
@@ -1350,8 +1358,9 @@ edit_block_move_cmd (WEdit * edit)
         x2 = x + edit->over_col;
 
         /* do nothing when cursor inside first line of selected area */
-        if ((edit_buffer_get_eol (&edit->buffer, edit->buffer.curs1) ==
-             edit_buffer_get_eol (&edit->buffer, start_mark)) && x2 > c1 && x2 <= c2)
+        b1 = edit_buffer_get_eol (&edit->buffer, edit->buffer.curs1);
+        b2 = edit_buffer_get_eol (&edit->buffer, start_mark);
+        if (b1 == b2 && x2 > c1 && x2 <= c2)
             return;
 
         if (edit->buffer.curs1 > start_mark
@@ -1370,7 +1379,8 @@ edit_block_move_cmd (WEdit * edit)
 
         edit->over_col = MAX (0, edit->over_col - b_width);
         /* calculate the cursor pos after delete block */
-        current = edit_move_forward3 (edit, edit_buffer_get_current_bol (&edit->buffer), x, 0);
+        b1 = edit_buffer_get_current_bol (&edit->buffer);
+        current = edit_move_forward3 (edit, b1, x, 0);
         edit_cursor_move (edit, current - edit->buffer.curs1);
         edit_scroll_screen_over_cursor (edit);
 
@@ -1384,6 +1394,7 @@ edit_block_move_cmd (WEdit * edit)
     else
     {
         off_t count, count_orig;
+        off_t x;
 
         current = edit->buffer.curs1;
         copy_buf = g_malloc0 (end_mark - start_mark);
@@ -1394,9 +1405,8 @@ edit_block_move_cmd (WEdit * edit)
             copy_buf[end_mark - count - 1] = edit_delete (edit, TRUE);
 
         edit_scroll_screen_over_cursor (edit);
-        edit_cursor_move (edit,
-                          current - edit->buffer.curs1 -
-                          (((current - edit->buffer.curs1) > 0) ? end_mark - start_mark : 0));
+        x = current > edit->buffer.curs1 ? end_mark - start_mark : 0;
+        edit_cursor_move (edit, current - edit->buffer.curs1 - x);
         edit_scroll_screen_over_cursor (edit);
         count_orig = count;
         while (count-- > start_mark)

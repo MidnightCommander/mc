@@ -485,6 +485,7 @@ edit_load_position (WEdit * edit, gboolean load_position)
 {
     long line, column;
     off_t offset;
+    off_t b;
 
     if (edit->filename_vpath == NULL
         || *(vfs_path_get_by_index (edit->filename_vpath, 0)->path) == '\0')
@@ -509,7 +510,8 @@ edit_load_position (WEdit * edit, gboolean load_position)
         edit->search_start = edit->buffer.curs1;
     }
 
-    edit_move_to_prev_col (edit, edit_buffer_get_current_bol (&edit->buffer));
+    b = edit_buffer_get_current_bol (&edit->buffer);
+    edit_move_to_prev_col (edit, b);
     edit_move_display (edit, line - (WIDGET (edit)->rect.lines / 2));
 }
 
@@ -881,7 +883,10 @@ edit_move_to_bottom (WEdit * edit)
 static void
 edit_cursor_to_bol (WEdit * edit)
 {
-    edit_cursor_move (edit, edit_buffer_get_current_bol (&edit->buffer) - edit->buffer.curs1);
+    off_t b;
+
+    b = edit_buffer_get_current_bol (&edit->buffer);
+    edit_cursor_move (edit, b - edit->buffer.curs1);
     edit->search_start = edit->buffer.curs1;
     edit->prev_col = edit_get_col (edit);
     edit->over_col = 0;
@@ -893,7 +898,10 @@ edit_cursor_to_bol (WEdit * edit)
 static void
 edit_cursor_to_eol (WEdit * edit)
 {
-    edit_cursor_move (edit, edit_buffer_get_current_eol (&edit->buffer) - edit->buffer.curs1);
+    off_t b;
+
+    b = edit_buffer_get_current_eol (&edit->buffer);
+    edit_cursor_move (edit, b - edit->buffer.curs1);
     edit->search_start = edit->buffer.curs1;
     edit->prev_col = edit_get_col (edit);
     edit->over_col = 0;
@@ -1182,8 +1190,11 @@ edit_do_undo (WEdit * edit)
 
     edit->undo_stack_disable = 1;       /* don't record undo's onto undo stack! */
     edit->over_col = 0;
+
     while ((ac = edit_pop_undo_action (edit)) < KEY_PRESS)
     {
+        off_t b;
+
         switch ((int) ac)
         {
         case STACK_BOTTOM:
@@ -1219,16 +1230,14 @@ edit_do_undo (WEdit * edit)
         if (ac >= MARK_1 - 2 && ac < MARK_2 - 2)
         {
             edit->mark1 = ac - MARK_1;
-            edit->column1 =
-                (long) edit_move_forward3 (edit, edit_buffer_get_bol (&edit->buffer, edit->mark1),
-                                           0, edit->mark1);
+            b = edit_buffer_get_bol (&edit->buffer, edit->mark1);
+            edit->column1 = (long) edit_move_forward3 (edit, b, 0, edit->mark1);
         }
         if (ac >= MARK_2 - 2 && ac < MARK_CURS - 2)
         {
             edit->mark2 = ac - MARK_2;
-            edit->column2 =
-                (long) edit_move_forward3 (edit, edit_buffer_get_bol (&edit->buffer, edit->mark2),
-                                           0, edit->mark2);
+            b = edit_buffer_get_bol (&edit->buffer, edit->mark2);
+            edit->column2 = (long) edit_move_forward3 (edit, b, 0, edit->mark2);
         }
         else if (ac >= MARK_CURS - 2 && ac < KEY_PRESS)
         {
@@ -1269,8 +1278,11 @@ edit_do_redo (WEdit * edit)
         return;
 
     edit->over_col = 0;
+
     while ((ac = edit_pop_redo_action (edit)) < KEY_PRESS)
     {
+        off_t b;
+
         switch ((int) ac)
         {
         case STACK_BOTTOM:
@@ -1304,16 +1316,14 @@ edit_do_redo (WEdit * edit)
         if (ac >= MARK_1 - 2 && ac < MARK_2 - 2)
         {
             edit->mark1 = ac - MARK_1;
-            edit->column1 =
-                (long) edit_move_forward3 (edit, edit_buffer_get_bol (&edit->buffer, edit->mark1),
-                                           0, edit->mark1);
+            b = edit_buffer_get_bol (&edit->buffer, edit->mark1);
+            edit->column1 = (long) edit_move_forward3 (edit, b, 0, edit->mark1);
         }
         else if (ac >= MARK_2 - 2 && ac < KEY_PRESS)
         {
             edit->mark2 = ac - MARK_2;
-            edit->column2 =
-                (long) edit_move_forward3 (edit, edit_buffer_get_bol (&edit->buffer, edit->mark2),
-                                           0, edit->mark2);
+            b = edit_buffer_get_bol (&edit->buffer, edit->mark2);
+            edit->column2 = (long) edit_move_forward3 (edit, b, 0, edit->mark2);
         }
         /* more than one pop usually means something big */
         if (count++ != 0)
@@ -1625,6 +1635,8 @@ edit_move_block_to_right (WEdit * edit)
 
     do
     {
+        off_t b;
+
         edit_cursor_move (edit, cur_bol - edit->buffer.curs1);
         if (!edit_line_is_blank (edit, edit->buffer.curs_line))
         {
@@ -1632,8 +1644,9 @@ edit_move_block_to_right (WEdit * edit)
                 insert_spaces_tab (edit, edit_options.fake_half_tabs);
             else
                 edit_insert (edit, '\t');
-            edit_cursor_move (edit,
-                              edit_buffer_get_bol (&edit->buffer, cur_bol) - edit->buffer.curs1);
+
+            b = edit_buffer_get_bol (&edit->buffer, cur_bol);
+            edit_cursor_move (edit, b - edit->buffer.curs1);
         }
 
         if (cur_bol == 0)
@@ -2870,8 +2883,10 @@ edit_get_cursor_offset (const WEdit * edit)
 long
 edit_get_col (const WEdit * edit)
 {
-    return (long) edit_move_forward3 (edit, edit_buffer_get_current_bol (&edit->buffer), 0,
-                                      edit->buffer.curs1);
+    off_t b;
+
+    b = edit_buffer_get_current_bol (&edit->buffer);
+    return (long) edit_move_forward3 (edit, b, 0, edit->buffer.curs1);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2889,8 +2904,10 @@ edit_update_curs_row (WEdit * edit)
 void
 edit_update_curs_col (WEdit * edit)
 {
-    edit->curs_col = (long) edit_move_forward3 (edit, edit_buffer_get_current_bol (&edit->buffer),
-                                                0, edit->buffer.curs1);
+    off_t b;
+
+    b = edit_buffer_get_current_bol (&edit->buffer);
+    edit->curs_col = (long) edit_move_forward3 (edit, b, 0, edit->buffer.curs1);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2977,16 +2994,19 @@ edit_move_to_prev_col (WEdit * edit, off_t p)
 {
     long prev = edit->prev_col;
     long over = edit->over_col;
+    off_t b;
 
     edit_cursor_move (edit,
                       edit_move_forward3 (edit, p, prev + edit->over_col, 0) - edit->buffer.curs1);
 
     if (edit_options.cursor_beyond_eol)
     {
+        off_t e;
         long line_len;
 
-        line_len = (long) edit_move_forward3 (edit, edit_buffer_get_current_bol (&edit->buffer), 0,
-                                              edit_buffer_get_current_eol (&edit->buffer));
+        b = edit_buffer_get_current_bol (&edit->buffer);
+        e = edit_buffer_get_current_eol (&edit->buffer);
+        line_len = (long) edit_move_forward3 (edit, b, 0, e);
         if (line_len < prev + edit->over_col)
         {
             edit->over_col = prev + over - line_len;
@@ -2995,9 +3015,9 @@ edit_move_to_prev_col (WEdit * edit, off_t p)
         }
         else
         {
-            edit->curs_col = prev + over;
-            edit->prev_col = edit->curs_col;
             edit->over_col = 0;
+            edit->prev_col = edit->curs_col;
+            edit->curs_col = prev + over;
         }
     }
     else
@@ -3017,12 +3037,13 @@ edit_move_to_prev_col (WEdit * edit, off_t p)
                 q = edit->curs_col;
                 edit->curs_col -= (edit->curs_col % fake_half_tabs);
                 p = edit_buffer_get_current_bol (&edit->buffer);
-                edit_cursor_move (edit,
-                                  edit_move_forward3 (edit, p, edit->curs_col,
-                                                      0) - edit->buffer.curs1);
+                b = edit_move_forward3 (edit, p, edit->curs_col, 0);
+                edit_cursor_move (edit, b - edit->buffer.curs1);
                 if (!left_of_four_spaces (edit))
-                    edit_cursor_move (edit,
-                                      edit_move_forward3 (edit, p, q, 0) - edit->buffer.curs1);
+                {
+                    b = edit_move_forward3 (edit, p, q, 0);
+                    edit_cursor_move (edit, b - edit->buffer.curs1);
+                }
             }
         }
     }
