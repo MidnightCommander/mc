@@ -3,10 +3,11 @@
 YEAR=`date +%Y`
 
 SOURCES="`find lib src tests -name '*.c'`"
+SOURCES="$SOURCES src/man2hlp/man2hlp.in"
 
 LINE="Copyright (C)"
 
-for i in "$SOURCES"; do
+for i in $SOURCES; do
     # replace year: XXXX-YYYY -> XXXX-ZZZZ
     # add year: XXXX -> XXXX-ZZZZ
     ${SED-sed} -i -e "
