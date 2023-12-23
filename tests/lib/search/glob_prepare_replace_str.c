@@ -77,7 +77,7 @@ START_PARAMETRIZED_TEST (test_glob_prepare_replace_str, test_glob_prepare_replac
 
     /* when */
     mc_search_run (s, data->input_value, 0, strlen (data->input_value), NULL);
-    dest_str = mc_search_prepare_replace_str2 (s, (char *) data->replace_str);
+    dest_str = mc_search_prepare_replace_str2 (s, data->replace_str);
 
     /* then */
     mctest_assert_str_eq (dest_str, data->expected_result);
