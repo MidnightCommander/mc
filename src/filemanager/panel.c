@@ -2353,8 +2353,7 @@ goto_parent_dir (WPanel * panel)
                 mc_build_filename (vfs_path_as_str (panel->panelized_descr->root_vpath), fname->str,
                                    (char *) NULL);
 
-            fname = g_string_new (fname2);
-            g_free (fname2);
+            fname = g_string_new_take (fname2);
         }
 
         bname = x_basename (fname->str);
@@ -5243,8 +5242,7 @@ panel_panelize_cd (void)
 
             tmp_vpath =
                 vfs_path_append_new (pdescr->root_vpath, plist->list[i].fname->str, (char *) NULL);
-            list->list[i].fname = g_string_new (vfs_path_as_str (tmp_vpath));
-            vfs_path_free (tmp_vpath, TRUE);
+            list->list[i].fname = g_string_new_take (vfs_path_free (tmp_vpath, FALSE));
         }
         list->list[i].f.link_to_dir = plist->list[i].f.link_to_dir;
         list->list[i].f.stale_link = plist->list[i].f.stale_link;

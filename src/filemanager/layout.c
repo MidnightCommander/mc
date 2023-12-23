@@ -1015,8 +1015,7 @@ setup_cmdline (void)
 #ifdef ENABLE_SUBSHELL
     if (mc_global.tty.use_subshell)
     {
-        subshell_prompt = g_string_new (tmp_prompt);
-        g_free (tmp_prompt);
+        subshell_prompt = g_string_new_take (tmp_prompt);
         mc_prompt = subshell_prompt->str;
     }
 #endif

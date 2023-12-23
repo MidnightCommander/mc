@@ -939,11 +939,13 @@ expand_format (const Widget * edit_widget, char c, gboolean do_quote)
                     if (tmp != NULL)
                     {
                         if (block == NULL)
-                            block = g_string_new (tmp);
+                            block = g_string_new_take (tmp);
                         else
+                        {
                             g_string_append (block, tmp);
+                            g_free (tmp);
+                        }
                         g_string_append_c (block, ' ');
-                        g_free (tmp);
                     }
 
                     if (c_lc == 'u')

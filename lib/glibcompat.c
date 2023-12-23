@@ -140,6 +140,41 @@ g_queue_clear_full (GQueue * queue, GDestroyNotify free_func)
 
 /* --------------------------------------------------------------------------------------------- */
 
+#if ! GLIB_CHECK_VERSION (2, 77, 0)
+/**
+ * g_string_new_take:
+ * @init: (nullable): initial text used as the string.
+ *     Ownership of the string is transferred to the #GString.
+ *     Passing NULL creates an empty string.
+ *
+ * Creates a new #GString, initialized with the given string.
+ *
+ * After this call, @init belongs to the #GString and may no longer be
+ * modified by the caller. The memory of @data has to be dynamically
+ * allocated and will eventually be freed with g_free().
+ *
+ * Returns: the new #GString
+ */
+GString *
+g_string_new_take (char *init)
+{
+    GString *string;
+
+    if (init == NULL)
+        return g_string_new (NULL);
+
+    string = g_slice_new (GString);
+
+    string->str = init;
+    string->len = strlen (string->str);
+    string->allocated_len = string->len + 1;
+
+    return string;
+}
+#endif /* ! GLIB_CHECK_VERSION (2, 77, 0) */
+
+/* --------------------------------------------------------------------------------------------- */
+
 /**
  * mc_g_string_copy:
  * @dest: (not nullable): the destination #GString. Its current contents are destroyed

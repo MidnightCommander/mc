@@ -25,6 +25,10 @@ void g_clear_list (GList ** list_ptr, GDestroyNotify destroy);
 void g_queue_clear_full (GQueue * queue, GDestroyNotify free_func);
 #endif /* ! GLIB_CHECK_VERSION (2, 60, 0) */
 
+#if ! GLIB_CHECK_VERSION (2, 77, 0)
+GString *g_string_new_take (char *init);
+#endif /* ! GLIB_CHECK_VERSION (2, 77, 0) */
+
 /* There is no such API in GLib2 */
 GString *mc_g_string_copy (GString * dest, const GString * src);
 
