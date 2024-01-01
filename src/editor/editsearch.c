@@ -1,7 +1,7 @@
 /*
    Search & replace engine of MCEditor.
 
-   Copyright (C) 2021-2023
+   Copyright (C) 2021-2024
    Free Software Foundation, Inc.
 
    Written by:

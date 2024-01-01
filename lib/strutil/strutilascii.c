@@ -1,7 +1,7 @@
 /*
    ASCII strings utilities
 
-   Copyright (C) 2007-2023
+   Copyright (C) 2007-2024
    Free Software Foundation, Inc.
 
    Written by:

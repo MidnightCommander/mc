@@ -1,7 +1,7 @@
 /*
    Virtual File System: FTP file system
 
-   Copyright (C) 2015-2023
+   Copyright (C) 2015-2024
    The Free Software Foundation, Inc.
 
    Written by: Andrew Borodin <aborodin@vmail.ru>, 2013

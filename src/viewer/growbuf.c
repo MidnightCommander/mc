@@ -2,7 +2,7 @@
    Internal file viewer for the Midnight Commander
    Function for work with growing buffers
 
-   Copyright (C) 1994-2023
+   Copyright (C) 1994-2024
    Free Software Foundation, Inc.
 
    Written by:

@@ -1,7 +1,7 @@
 /*
    Proxy functions for getting access to public variables into 'filemanager' module.
 
-   Copyright (C) 2015-2023
+   Copyright (C) 2015-2024
    Free Software Foundation, Inc.
 
    Written by:

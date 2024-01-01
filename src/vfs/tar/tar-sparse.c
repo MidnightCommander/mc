@@ -1,7 +1,7 @@
 /*
    Virtual File System: GNU Tar file system.
 
-   Copyright (C) 2003-2023
+   Copyright (C) 2003-2024
    Free Software Foundation, Inc.
 
    Written by:
