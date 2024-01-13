@@ -578,6 +578,7 @@ Open=@EXTHELPERSDIR@/image.sh open svg
 
 [webp]
 Shell=.webp
+View=%view{ascii} @EXTHELPERSDIR@/image.sh view webp
 Open=@EXTHELPERSDIR@/image.sh open webp
 
 
