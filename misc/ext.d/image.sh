@@ -17,7 +17,7 @@ do_view_action() {
         which exif >/dev/null 2>&1 && exif "${MC_EXT_FILENAME}" 2>/dev/null
         ;;
     xpm)
-        sxpm "${MC_EXT_FILENAME}"
+        [ -n "$DISPLAY" ] && sxpm "${MC_EXT_FILENAME}"
         ;;
     *)
         identify "${MC_EXT_FILENAME}"
