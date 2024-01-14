@@ -1,6 +1,6 @@
 /* Rectangular class for Midnight Commander widgets
 
-   Copyright (C) 2020-2023
+   Copyright (C) 2020-2024
    The Free Software Foundation, Inc.
 
    Written by:

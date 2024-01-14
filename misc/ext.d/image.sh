@@ -12,14 +12,19 @@ do_view_action() {
     filetype=$1
 
     case "${filetype}" in
-    jpeg)
-        identify "${MC_EXT_FILENAME}"
-        which exif >/dev/null 2>&1 && exif "${MC_EXT_FILENAME}" 2>/dev/null
-        ;;
     xpm)
-        sxpm "${MC_EXT_FILENAME}"
+        [ -n "$DISPLAY" ] && sxpm "${MC_EXT_FILENAME}"
         ;;
     *)
+        if which exif >/dev/null 2>&1; then
+            exif "${MC_EXT_FILENAME}" 2>/dev/null
+            E=$?
+        else
+            E=1
+        fi
+        if [ $E != 0 ] && which exiftool >/dev/null 2>&1; then
+            exiftool "${MC_EXT_FILENAME}" 2>/dev/null
+        fi
         identify "${MC_EXT_FILENAME}"
         ;;
     esac

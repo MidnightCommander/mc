@@ -1,7 +1,7 @@
 /*
    Internal stuff of the terminal controlling library.
 
-   Copyright (C) 2019-2023
+   Copyright (C) 2019-2024
    Free Software Foundation, Inc.
 
    Written by:

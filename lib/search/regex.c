@@ -2,7 +2,7 @@
    Search text engine.
    Regex search
 
-   Copyright (C) 2009-2023
+   Copyright (C) 2009-2024
    Free Software Foundation, Inc.
 
    Written by:
@@ -397,17 +397,16 @@ mc_search_regex__get_max_num_of_replace_tokens (const gchar * str, gsize len)
 {
     int max_token = 0;
     gsize loop;
+
     for (loop = 0; loop < len - 1; loop++)
-    {
         if (str[loop] == '\\' && g_ascii_isdigit (str[loop + 1]))
         {
             if (strutils_is_char_escaped (str, &str[loop]))
                 continue;
             if (max_token < str[loop + 1] - '0')
                 max_token = str[loop + 1] - '0';
-            continue;
         }
-        if (str[loop] == '$' && str[loop + 1] == '{')
+        else if (str[loop] == '$' && str[loop + 1] == '{')
         {
             gsize tmp_len;
 
@@ -430,7 +429,7 @@ mc_search_regex__get_max_num_of_replace_tokens (const gchar * str, gsize len)
                 g_free (tmp_str);
             }
         }
-    }
+
     return max_token;
 }
 

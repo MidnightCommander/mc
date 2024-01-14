@@ -1,7 +1,7 @@
 /*
    Editor initialisation and callback handler.
 
-   Copyright (C) 1996-2023
+   Copyright (C) 1996-2024
    Free Software Foundation, Inc.
 
    Written by:
@@ -152,7 +152,7 @@ edit_about (void)
             QUICK_LABEL (N_("A user friendly text editor\n"
                             "written for the Midnight Commander."), NULL),
             QUICK_SEPARATOR (FALSE),
-            QUICK_LABEL (N_("Copyright (C) 1996-2023 the Free Software Foundation"), NULL),
+            QUICK_LABEL (N_("Copyright (C) 1996-2024 the Free Software Foundation"), NULL),
             QUICK_START_BUTTONS (TRUE, TRUE),
             QUICK_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
             QUICK_END
@@ -182,9 +182,10 @@ edit_about (void)
  */
 
 static void
-edit_help (void)
+edit_help (const WDialog * h)
 {
-    ev_help_t event_data = { NULL, "[Internal File Editor]" };
+    ev_help_t event_data = { NULL, h->help_ctx };
+
     mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data);
 }
 
@@ -426,8 +427,7 @@ edit_dialog_command_execute (WDialog * h, long command)
             dlg_close (h);
         break;
     case CK_Help:
-        edit_help ();
-        /* edit->force |= REDRAW_COMPLETELY; */
+        edit_help (h);
         break;
     case CK_Menu:
         edit_menu_cmd (h);

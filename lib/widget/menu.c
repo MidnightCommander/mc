@@ -1,7 +1,7 @@
 /*
    Pulldown menu code
 
-   Copyright (C) 1994-2023
+   Copyright (C) 1994-2024
    Free Software Foundation, Inc.
 
    Written by:
@@ -530,6 +530,24 @@ menubar_try_exec_menu (WMenuBar * menubar, int hotkey)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static void
+menubar_help (const WMenuBar * menubar)
+{
+    ev_help_t event_data;
+
+    event_data.filename = NULL;
+
+    if (menubar->is_dropped)
+        event_data.node = MENU (g_list_nth_data (menubar->menu, menubar->current))->help_node;
+    else
+        event_data.node = "[Menu Bar]";
+
+    mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data);
+    menubar_draw (menubar);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static cb_ret_t
 menubar_execute_cmd (WMenuBar * menubar, long command)
 {
@@ -538,18 +556,7 @@ menubar_execute_cmd (WMenuBar * menubar, long command)
     switch (command)
     {
     case CK_Help:
-        {
-            ev_help_t event_data = { NULL, NULL };
-
-            if (menubar->is_dropped)
-                event_data.node =
-                    MENU (g_list_nth_data (menubar->menu, menubar->current))->help_node;
-            else
-                event_data.node = "[Menu Bar]";
-
-            mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data);
-            menubar_draw (menubar);
-        }
+        menubar_help (menubar);
         break;
 
     case CK_Left:

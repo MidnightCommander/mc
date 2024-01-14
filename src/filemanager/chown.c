@@ -1,7 +1,7 @@
 /*
    Chown command -- for the Midnight Commander
 
-   Copyright (C) 1994-2023
+   Copyright (C) 1994-2024
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.

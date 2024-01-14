@@ -1,7 +1,7 @@
 /*
    Search & replace engine of MCEditor.
 
-   Copyright (C) 2021-2023
+   Copyright (C) 2021-2024
    Free Software Foundation, Inc.
 
    Written by:
@@ -873,7 +873,8 @@ edit_replace_cmd (WEdit * edit, gboolean again)
         edit->search = NULL;
     }
 
-    input2_str = g_string_new (input2);
+    input2_str = g_string_new_take (input2);
+    input2 = NULL;
 
     if (edit->search == NULL)
     {

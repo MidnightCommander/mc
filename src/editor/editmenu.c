@@ -1,7 +1,7 @@
 /*
    Editor menu definitions and initialisation
 
-   Copyright (C) 1996-2023
+   Copyright (C) 1996-2024
    Free Software Foundation, Inc.
 
    Written by:

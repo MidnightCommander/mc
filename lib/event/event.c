@@ -2,7 +2,7 @@
    Handle  events in application.
    Interface functions: init/deinit; start/stop
 
-   Copyright (C) 2011-2023
+   Copyright (C) 2011-2024
    Free Software Foundation, Inc.
 
    Written by:

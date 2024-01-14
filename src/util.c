@@ -1,7 +1,7 @@
 /*
    Various non-library utilities
 
-   Copyright (C) 2003-2023
+   Copyright (C) 2003-2024
    Free Software Foundation, Inc.
 
    Written by:

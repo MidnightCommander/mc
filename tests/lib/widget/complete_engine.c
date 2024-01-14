@@ -1,7 +1,7 @@
 /*
    lib/widget - tests for autocomplete feature
 
-   Copyright (C) 2013-2023
+   Copyright (C) 2013-2024
    Free Software Foundation, Inc.
 
    Written by:

@@ -1,7 +1,7 @@
 /*
    UTF-8 strings utilities
 
-   Copyright (C) 2007-2023
+   Copyright (C) 2007-2024
    Free Software Foundation, Inc.
 
    Written by:
@@ -901,12 +901,12 @@ str_utf8_offset_to_pos (const char *text, size_t length)
     else
     {
         int result;
-        GString *buffer;
+        char *buffer;
 
-        buffer = g_string_new (text);
-        str_utf8_fix_string (buffer->str);
-        result = g_utf8_offset_to_pointer (buffer->str, length) - buffer->str;
-        g_string_free (buffer, TRUE);
+        buffer = g_strdup (text);
+        str_utf8_fix_string (buffer);
+        result = g_utf8_offset_to_pointer (buffer, length) - buffer;
+        g_free (buffer);
         return result;
     }
 }

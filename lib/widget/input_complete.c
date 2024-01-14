@@ -2,7 +2,7 @@
    Input line filename/username/hostname/variable/command completion.
    (Let mc type for you...)
 
-   Copyright (C) 1995-2023
+   Copyright (C) 1995-2024
    Free Software Foundation, Inc.
 
    Written by:
@@ -98,7 +98,6 @@ static char **hosts = NULL;
 static char **hosts_p = NULL;
 static int hosts_alloclen = 0;
 
-static int complete_height, complete_width;
 static WInput *input;
 static int min_end;
 static int start = 0;
@@ -1275,11 +1274,9 @@ complete_engine (WInput * in, int what_to_do)
 
             input = in;
             min_end = end;
-            complete_height = h;
-            complete_width = w;
 
             complete_dlg =
-                dlg_create (TRUE, y, x, complete_height, complete_width, WPOS_KEEP_DEFAULT, TRUE,
+                dlg_create (TRUE, y, x, h, w, WPOS_KEEP_DEFAULT, TRUE,
                             dialog_colors, complete_callback, NULL, "[Completion]", NULL);
             complete_list = listbox_new (1, 1, h - 2, w - 2, FALSE, NULL);
             group_add_widget (GROUP (complete_dlg), complete_list);

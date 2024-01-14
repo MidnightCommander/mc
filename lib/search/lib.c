@@ -2,7 +2,7 @@
    Search text engine.
    Common share code for module.
 
-   Copyright (C) 2009-2023
+   Copyright (C) 2009-2024
    Free Software Foundation, Inc.
 
    Written by:

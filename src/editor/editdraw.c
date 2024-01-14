@@ -1,7 +1,7 @@
 /*
    Editor text drawing.
 
-   Copyright (C) 1996-2023
+   Copyright (C) 1996-2024
    Free Software Foundation, Inc.
 
    Written by:
@@ -950,9 +950,8 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
             if ((force & REDRAW_LINE_ABOVE) != 0 && curs_row >= 1)
             {
                 row = curs_row - 1;
-                b = edit_buffer_get_backward_offset (&edit->buffer,
-                                                     edit_buffer_get_current_bol (&edit->buffer),
-                                                     1);
+                b = edit_buffer_get_current_bol (&edit->buffer);
+                b = edit_buffer_get_backward_offset (&edit->buffer, b, 1);
                 if (row >= start_row && row <= end_row)
                 {
                     if (key_pending (edit))

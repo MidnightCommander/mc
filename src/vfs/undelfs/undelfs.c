@@ -7,7 +7,7 @@
    Parts of this program were taken from the lsdel.c and dump.c files
    written by Ted Ts'o (tytso@mit.edu) for the ext2fs package.
 
-   Copyright (C) 1995-2023
+   Copyright (C) 1995-2024
    Free Software Foundation, Inc.
 
    Written by:

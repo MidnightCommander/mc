@@ -1,7 +1,7 @@
 /*
    Chattr command -- for the Midnight Commander
 
-   Copyright (C) 2020-2023
+   Copyright (C) 2020-2024
    Free Software Foundation, Inc.
 
    Written by:

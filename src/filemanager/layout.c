@@ -1,7 +1,7 @@
 /*
    Panel layout module for the Midnight Commander
 
-   Copyright (C) 1995-2023
+   Copyright (C) 1995-2024
    Free Software Foundation, Inc.
 
    Written by:
@@ -1015,8 +1015,7 @@ setup_cmdline (void)
 #ifdef ENABLE_SUBSHELL
     if (mc_global.tty.use_subshell)
     {
-        subshell_prompt = g_string_new (tmp_prompt);
-        g_free (tmp_prompt);
+        subshell_prompt = g_string_new_take (tmp_prompt);
         mc_prompt = subshell_prompt->str;
     }
 #endif

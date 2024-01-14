@@ -2,7 +2,7 @@
    Internal file viewer for the Midnight Commander
    Callback function for some actions (hotkeys, menu)
 
-   Copyright (C) 1994-2023
+   Copyright (C) 1994-2024
    Free Software Foundation, Inc.
 
    Written by:
@@ -401,12 +401,6 @@ mcview_execute_cmd (WView * view, long command)
 
     switch (command)
     {
-    case CK_Help:
-        {
-            ev_help_t event_data = { NULL, "[Internal File Viewer]" };
-            mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data);
-        }
-        break;
     case CK_HexMode:
         /* Toggle between hex view and text view */
         mcview_toggle_hex_mode (view);

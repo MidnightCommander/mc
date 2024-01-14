@@ -1,7 +1,7 @@
 /*
    Terminal management xterm and rxvt support
 
-   Copyright (C) 1995-2023
+   Copyright (C) 1995-2024
    Free Software Foundation, Inc.
 
    Written by:

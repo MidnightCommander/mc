@@ -1,7 +1,7 @@
 /*
    Virtual File System: local file system.
 
-   Copyright (C) 1995-2023
+   Copyright (C) 1995-2024
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
