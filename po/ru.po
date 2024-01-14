@@ -3,7 +3,6 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-
 # Alex Tkachenko <alex@bcs.zp.ua>, 1998
 # Andrew V. Samoilov <sav@bcs.zp.ua>, 1999,2014
 # Evgeny Bulgakov <bgav@netvision.net.il>, 1999
@@ -24,7 +23,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2023-11-06 21:09+0300\n"
+"POT-Creation-Date: 2024-01-14 17:58+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Andrei Stepanov, 2023\n"
 "Language-Team: Russian (http://app.transifex.com/mc/mc/language/ru/)\n"
@@ -741,6 +740,7 @@ msgid "Show mc with specified skin"
 msgstr "Показать mc с указанным скином"
 
 #. TRANSLATORS: don't translate keywords
+#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK},{ATTR}:KEYWORD2=...\n"
 "\n"
@@ -755,7 +755,8 @@ msgid ""
 "                 errdhotfocus\n"
 "   Menus:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Popup menus:  pmenunormal, pmenusel, pmenutitle\n"
-"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
+"   Editor:       editnormal, editbold, editmarked, editwhitespace, "
+"editnonprintable,\n"
 "                 editlinestate, editbg, editframe, editframeactive\n"
 "                 editframedrag\n"
 "   Viewer:       viewnormal,viewbold, viewunderline, viewselected\n"
@@ -1650,7 +1651,8 @@ msgstr ""
 "Текстовый редактор с дружественным интерфейсом пользователя.\n"
 "Создан для Midnight Commander."
 
-msgid "Copyright (C) 1996-2023 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2024 the Free Software Foundation"
 msgstr "Copyright (C) 1996-2023 the Free Software Foundation"
 
 msgid "About"
