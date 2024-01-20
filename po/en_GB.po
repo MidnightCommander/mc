@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-01-14 17:58+0300\n"
+"POT-Creation-Date: 2024-01-20 20:51+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Andi Chandler <andi@gowling.com>, 2016-2017,2020,2022-2023\n"
 "Language-Team: English (United Kingdom) (http://app.transifex.com/mc/mc/"
@@ -720,7 +720,6 @@ msgid "Show mc with specified skin"
 msgstr "Show mc with specified skin"
 
 #. TRANSLATORS: don't translate keywords
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK},{ATTR}:KEYWORD2=...\n"
 "\n"
@@ -742,24 +741,6 @@ msgid ""
 "   Viewer:       viewnormal,viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 msgstr ""
-"--colors KEYWORD={FORE},{BACK},{ATTR}:KEYWORD2=...\n"
-"\n"
-"{FORE}, {BACK} and {ATTR} can be omitted, and the default will be used\n"
-"\n"
-" Keywords:\n"
-"   Global:       errors, disabled, reverse, gauge, header\n"
-"                 input, inputmark, inputunchanged, commandlinemark\n"
-"                 bbarhotkey, bbarbutton, statusbar\n"
-"   File display: normal, selected, marked, markselect\n"
-"   Dialogue boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-"                 errdhotfocus\n"
-"   Menus:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
-"   Popup menus:  pmenunormal, pmenusel, pmenutitle\n"
-"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
-"                 editlinestate, editbg, editframe, editframeactive\n"
-"                 editframedrag\n"
-"   Viewer:       viewnormal,viewbold, viewunderline, viewselected\n"
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 
 #. TRANSLATORS: don't translate color names and attributes
 msgid ""
@@ -1344,205 +1325,205 @@ msgid "Unmar&k"
 msgstr "Unmar&k"
 
 msgid "Cop&y"
-msgstr ""
+msgstr "Cop&y"
 
 msgid "Mo&ve"
-msgstr ""
+msgstr "Mo&ve"
 
 msgid "&Delete"
-msgstr ""
+msgstr "&Delete"
 
 msgid "Co&py to clipfile"
-msgstr ""
+msgstr "Co&py to clipfile"
 
 msgid "&Cut to clipfile"
-msgstr ""
+msgstr "&Cut to clipfile"
 
 msgid "Pa&ste from clipfile"
-msgstr ""
+msgstr "Pa&ste from clipfile"
 
 msgid "&Beginning"
-msgstr ""
+msgstr "&Beginning"
 
 msgid "&End"
-msgstr ""
+msgstr "&End"
 
 msgid "&Search..."
-msgstr ""
+msgstr "&Search..."
 
 msgid "Search &again"
-msgstr ""
+msgstr "Search &again"
 
 msgid "&Replace..."
-msgstr ""
+msgstr "&Replace..."
 
 msgid "&Toggle bookmark"
-msgstr ""
+msgstr "&Toggle bookmark"
 
 msgid "&Next bookmark"
-msgstr ""
+msgstr "&Next bookmark"
 
 msgid "&Prev bookmark"
-msgstr ""
+msgstr "&Prev bookmark"
 
 msgid "&Flush bookmarks"
-msgstr ""
+msgstr "&Flush bookmarks"
 
 msgid "&Go to line..."
-msgstr ""
+msgstr "&Go to line..."
 
 msgid "&Toggle line state"
-msgstr ""
+msgstr "&Toggle line state"
 
 msgid "Go to matching &bracket"
-msgstr ""
+msgstr "Go to matching &bracket"
 
 msgid "Toggle s&yntax highlighting"
-msgstr ""
+msgstr "Toggle s&yntax highlighting"
 
 msgid "&Find declaration"
-msgstr ""
+msgstr "&Find declaration"
 
 msgid "Back from &declaration"
-msgstr ""
+msgstr "Back from &declaration"
 
 msgid "For&ward to declaration"
-msgstr ""
+msgstr "For&ward to declaration"
 
 msgid "Encod&ing..."
-msgstr ""
+msgstr "Encod&ing..."
 
 msgid "&Refresh screen"
-msgstr ""
+msgstr "&Refresh screen"
 
 msgid "&Start/Stop record macro"
-msgstr ""
+msgstr "&Start/Stop record macro"
 
 msgid "Delete macr&o..."
-msgstr ""
+msgstr "Delete macr&o..."
 
 msgid "Record/Repeat &actions"
-msgstr ""
+msgstr "Record/Repeat &actions"
 
 msgid "S&pell check"
-msgstr ""
+msgstr "S&pell check"
 
 msgid "C&heck word"
-msgstr ""
+msgstr "C&heck word"
 
 msgid "Change spelling &language..."
-msgstr ""
+msgstr "Change spelling &language..."
 
 msgid "&Mail..."
-msgstr ""
+msgstr "&Mail..."
 
 msgid "Insert &literal..."
-msgstr ""
+msgstr "Insert &literal..."
 
 msgid "Insert &date/time"
-msgstr ""
+msgstr "Insert &date/time"
 
 msgid "&Format paragraph"
-msgstr ""
+msgstr "&Format paragraph"
 
 msgid "&Sort..."
-msgstr ""
+msgstr "&Sort..."
 
 msgid "&Paste output of..."
-msgstr ""
+msgstr "&Paste output of..."
 
 msgid "&External formatter"
-msgstr ""
+msgstr "&External formatter"
 
 msgid "&Move"
-msgstr ""
+msgstr "&Move"
 
 msgid "&Resize"
-msgstr ""
+msgstr "&Resize"
 
 msgid "&Toggle fullscreen"
-msgstr ""
+msgstr "&Toggle fullscreen"
 
 msgid "&Next"
-msgstr ""
+msgstr "&Next"
 
 msgid "&Previous"
-msgstr ""
+msgstr "&Previous"
 
 msgid "&List..."
-msgstr ""
+msgstr "&List..."
 
 msgid "&General..."
-msgstr ""
+msgstr "&General..."
 
 msgid "Save &mode..."
-msgstr ""
+msgstr "Save &mode..."
 
 msgid "Learn &keys..."
-msgstr ""
+msgstr "Learn &keys..."
 
 msgid "Syntax &highlighting..."
-msgstr ""
+msgstr "Syntax &highlighting..."
 
 msgid "S&yntax file"
-msgstr ""
+msgstr "S&yntax file"
 
 msgid "&Menu file"
-msgstr ""
+msgstr "&Menu file"
 
 msgid "&Save setup"
-msgstr ""
+msgstr "&Save setup"
 
 msgid "&File"
-msgstr ""
+msgstr "&File"
 
 msgid "&Edit"
-msgstr ""
+msgstr "&Edit"
 
 msgid "&Search"
-msgstr ""
+msgstr "&Search"
 
 msgid "&Command"
-msgstr ""
+msgstr "&Command"
 
 msgid "For&mat"
-msgstr ""
+msgstr "For&mat"
 
 msgid "&Window"
-msgstr ""
+msgstr "&Window"
 
 msgid "&Options"
-msgstr ""
+msgstr "&Options"
 
 msgid "&None"
-msgstr ""
+msgstr "&None"
 
 msgid "&Dynamic paragraphing"
-msgstr ""
+msgstr "&Dynamic paragraphing"
 
 msgid "Type &writer wrap"
-msgstr ""
+msgstr "Type &writer wrap"
 
 msgid "Wrap mode"
-msgstr ""
+msgstr "Wrap mode"
 
 msgid "Tabulation"
-msgstr ""
+msgstr "Tabulation"
 
 msgid "&Fake half tabs"
-msgstr ""
+msgstr "&Fake half tabs"
 
 msgid "&Backspace through tabs"
-msgstr ""
+msgstr "&Backspace through tabs"
 
 msgid "Fill tabs with &spaces"
-msgstr ""
+msgstr "Fill tabs with &spaces"
 
 msgid "Tab spacing:"
-msgstr ""
+msgstr "Tab spacing:"
 
 msgid "Other options"
-msgstr ""
+msgstr "Other options"
 
 msgid "&Return does autoindent"
 msgstr ""
@@ -4289,9 +4270,8 @@ msgstr ""
 msgid "shell: Local read failed, sending zeros"
 msgstr ""
 
-#, fuzzy
 msgid "shell: storing file"
-msgstr "Getting file"
+msgstr ""
 
 msgid "Aborting transfer..."
 msgstr ""

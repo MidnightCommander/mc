@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-01-14 17:58+0300\n"
+"POT-Creation-Date: 2024-01-20 20:51+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>, 2017-2023\n"
 "Language-Team: Czech (http://app.transifex.com/mc/mc/language/cs/)\n"
@@ -728,7 +728,6 @@ msgid "Show mc with specified skin"
 msgstr "Zobrazit mc se zadaným tématem vzhledu"
 
 #. TRANSLATORS: don't translate keywords
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK},{ATTR}:KEYWORD2=...\n"
 "\n"
@@ -750,24 +749,6 @@ msgid ""
 "   Viewer:       viewnormal,viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 msgstr ""
-"--colors KLICOVESLOVO={FORE},{BACK},{ATTR}:KEYWORD2=...\n"
-"\n"
-"{FORE}, {BACK} and {ATTR} can be omitted, and the default will be used\n"
-"\n"
-" Klíčová slova:\n"
-"   Globální:       errors, disabled, reverse, gauge, header\n"
-"                 input, inputmark, inputunchanged, commandlinemark\n"
-"                 bbarhotkey, bbarbutton, statusbar\n"
-"   Zobrazení souborů: normal, selected, marked, markselect\n"
-"   Dialogy: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-"                 errdhotfocus\n"
-"   Nabídka:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
-"   Vyskakovcí nabídka:  pmenunormal, pmenusel, pmenutitle\n"
-"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
-"                 editlinestate, editbg, editframe, editframeactive\n"
-"                 editframedrag\n"
-"   Prohlížeč:       viewnormal,viewbold, viewunderline, viewselected\n"
-"   Nápověda:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 
 #. TRANSLATORS: don't translate color names and attributes
 msgid ""
@@ -1634,9 +1615,8 @@ msgstr ""
 "Uživatelsky přívětivý textový editor\n"
 "napsaný pro Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2024 the Free Software Foundation"
-msgstr "Autorská práva © 1996-2023 nadace Free Software Foundation"
+msgstr ""
 
 msgid "About"
 msgstr "O programu"
@@ -4188,29 +4168,20 @@ msgstr ""
 "Virtuální souborový systém EXTFS:\n"
 "%s"
 
-#, fuzzy
 msgid ""
 "EXTFS virtual file system:\n"
 "wrong file name"
 msgstr ""
-"Virtuální souborový systém EXTFS:\n"
-"%s"
 
-#, fuzzy
 msgid ""
 "EXTFS virtual file system:\n"
 "wrong archive name"
 msgstr ""
-"Virtuální souborový systém EXTFS:\n"
-"%s"
 
-#, fuzzy
 msgid ""
 "EXTFS virtual file system:\n"
 "cannot build command"
 msgstr ""
-"Virtuální souborový systém EXTFS:\n"
-"%s"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4492,49 +4463,42 @@ msgstr "sftp: (přerušení CTRL+G) vypisování… %s"
 msgid "sftp: Listing done."
 msgstr "sftp: Vypsání dokončeno."
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Disconnecting from %s"
-msgstr "fish: Odpojování od %s"
+msgstr ""
 
-#, fuzzy
 msgid "shell: Waiting for initial line..."
-msgstr "fish: Čekání na úvodní spojení…"
+msgstr ""
 
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Je nám líto, ale prozatím nelze navazovat heslem se ověřující spojení."
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Password is required for %s"
-msgstr "fish: Pro %s je vyžadováno heslo"
+msgstr ""
 
-#, fuzzy
 msgid "shell: Sending password..."
-msgstr "fish: Odesílání hesla…"
+msgstr ""
 
-#, fuzzy
 msgid "shell: Sending initial line..."
-msgstr "fish: Odesílá se úvodní řádek…"
+msgstr ""
 
-#, fuzzy
 msgid "shell: Getting host info..."
-msgstr "fish: Získávání informací o hostiteli…"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Reading directory %s..."
-msgstr "fish: Načítaní složky %s…"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: store %s: sending command..."
-msgstr "fish: ukládání %s: odesílání příkazu…"
+msgstr ""
 
-#, fuzzy
 msgid "shell: Local read failed, sending zeros"
 msgstr ""
-"fish: Načtení místního souboru se nezdařilo, náhradně se odesílají nuly"
 
-#, fuzzy
 msgid "shell: storing file"
-msgstr "fish: ukládání souboru"
+msgstr ""
 
 msgid "Aborting transfer..."
 msgstr "Přerušení přenosu…"
@@ -4761,6 +4725,3 @@ msgstr "Pokračovat od začátku?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nedaří získat místní kopii souboru /ftp://some.host/editme.txt"
-
-#~ msgid "fish: Handshaking version..."
-#~ msgstr "fish: Domlouvání verze…"

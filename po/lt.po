@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-01-14 17:58+0300\n"
+"POT-Creation-Date: 2024-01-20 20:51+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Mantas Kriaučiūnas Baltix <mantas@akl.lt>, 2020\n"
 "Language-Team: Lithuanian (http://app.transifex.com/mc/mc/language/lt/)\n"
@@ -4305,13 +4305,12 @@ msgstr ""
 msgid "sftp: Listing done."
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Disconnecting from %s"
-msgstr "fish: atsijungiama nuo %s"
+msgstr ""
 
-#, fuzzy
 msgid "shell: Waiting for initial line..."
-msgstr "fish: laukiama pradinės eilutės..."
+msgstr ""
 
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Šiuo metu slaptažodžių apsaugotų prisijungimų atlikti negalima."
@@ -4320,32 +4319,28 @@ msgstr "Šiuo metu slaptažodžių apsaugotų prisijungimų atlikti negalima."
 msgid "shell: Password is required for %s"
 msgstr ""
 
-#, fuzzy
 msgid "shell: Sending password..."
-msgstr "fish: siunčiamas slaptažodis..."
+msgstr ""
 
-#, fuzzy
 msgid "shell: Sending initial line..."
-msgstr "fish: siunčiama pradinė linija..."
+msgstr ""
 
 msgid "shell: Getting host info..."
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Reading directory %s..."
-msgstr "fish: atveriamas aplankas %s..."
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: store %s: sending command..."
-msgstr "fish: „%s“ siuntimas: siunčiamas slaptažodis..."
+msgstr ""
 
-#, fuzzy
 msgid "shell: Local read failed, sending zeros"
-msgstr "fish: vietinis skaitymas nepavyko, siunčiami nuliai"
+msgstr ""
 
-#, fuzzy
 msgid "shell: storing file"
-msgstr "Parsiunčiamas failas"
+msgstr ""
 
 msgid "Aborting transfer..."
 msgstr "Nutraukiamas siuntimas..."
@@ -4562,6 +4557,3 @@ msgstr "Tęsti nuo pradžios?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "fish: Handshaking version..."
-#~ msgstr "fish: derinamos versijos..."

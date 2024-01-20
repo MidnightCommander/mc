@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-01-14 17:58+0300\n"
+"POT-Creation-Date: 2024-01-20 20:51+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
 "Language-Team: Latvian (http://app.transifex.com/mc/mc/language/lv/)\n"
@@ -4215,13 +4215,12 @@ msgstr ""
 msgid "sftp: Listing done."
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Disconnecting from %s"
-msgstr "fish: Atvienojamies no %s"
+msgstr ""
 
-#, fuzzy
 msgid "shell: Waiting for initial line..."
-msgstr "fish: Gaidām sākotnējo līniju..."
+msgstr ""
 
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr ""
@@ -4231,32 +4230,28 @@ msgstr ""
 msgid "shell: Password is required for %s"
 msgstr ""
 
-#, fuzzy
 msgid "shell: Sending password..."
-msgstr "fish: Sūtam paroli..."
+msgstr ""
 
-#, fuzzy
 msgid "shell: Sending initial line..."
-msgstr "fish: Sūtam sākotnējo līniju..."
+msgstr ""
 
 msgid "shell: Getting host info..."
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Reading directory %s..."
-msgstr "fish: Lasām direktoriju %s..."
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: store %s: sending command..."
-msgstr "fish: glabājam %s: sutām komandu..."
+msgstr ""
 
-#, fuzzy
 msgid "shell: Local read failed, sending zeros"
-msgstr "fish: Lokālā lasīšana kļūdaina, sūtam nulles"
+msgstr ""
 
-#, fuzzy
 msgid "shell: storing file"
-msgstr "Dabūjam failu"
+msgstr ""
 
 msgid "Aborting transfer..."
 msgstr "Pātraucam pārraidīšanu..."
@@ -4464,6 +4459,3 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "fish: Handshaking version..."
-#~ msgstr "fish: Rokspiešanas versija..."

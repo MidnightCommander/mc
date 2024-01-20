@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-01-14 17:58+0300\n"
+"POT-Creation-Date: 2024-01-20 20:51+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Gurbuzguven <6mehmet6@gmail.com>, 2021\n"
 "Language-Team: Chinese (China) (http://app.transifex.com/mc/mc/language/"
@@ -722,7 +722,6 @@ msgid "Show mc with specified skin"
 msgstr "用指定的皮肤显示 MC"
 
 #. TRANSLATORS: don't translate keywords
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK},{ATTR}:KEYWORD2=...\n"
 "\n"
@@ -744,24 +743,6 @@ msgid ""
 "   Viewer:       viewnormal,viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 msgstr ""
-"--colors KEYWORD={FORE},{BACK},{ATTR}:KEYWORD2=...\n"
-"\n"
-"{FORE}, {BACK} 及 {ATTR} 可以省略，省略时使用默认值\n"
-"\n"
-"关键词: \n"
-"全局: errors, disabled, reverse, gauge, header\n"
-"          input, inputmark, inputunchanged, commandlinemark\n"
-"          bbarhotkey, bbarbutton, statusbar\n"
-"文件显示: normal, selected, marked, markselect\n"
-"对话框窗口:dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal, "
-"errdhotfocus\n"
-"菜单: menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
-"弹出菜单:pmenunormal, pmenusel, pmenutitle\n"
-"编辑器:editnormal, editbold, editmarked, editwhitespace,\n"
-"            editlinestate, editbg, editframe, editframeactive\n"
-"            editframedrag\n"
-"查看器:viewbold, viewunderline, viewselected\n"
-"帮助:helpnormal, helpi talic, helpbold, helplink, helpslink\n"
 
 #. TRANSLATORS: don't translate color names and attributes
 msgid ""
@@ -4400,48 +4381,42 @@ msgstr "sftp: (Ctrl-G 终止) 正在列出... %s"
 msgid "sftp: Listing done."
 msgstr "sftp: 列出完毕。"
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Disconnecting from %s"
-msgstr "fish: 正在从 %s 断开连接"
+msgstr ""
 
-#, fuzzy
 msgid "shell: Waiting for initial line..."
-msgstr "fish: 正在等待初始化行..."
+msgstr ""
 
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "抱歉，目前无法建立密码验证的连接。"
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Password is required for %s"
-msgstr "fish: %s 需要密码"
+msgstr ""
 
-#, fuzzy
 msgid "shell: Sending password..."
-msgstr "fish: 正在发送密码..."
+msgstr ""
 
-#, fuzzy
 msgid "shell: Sending initial line..."
-msgstr "fish: 正在发送初始化行..."
+msgstr ""
 
-#, fuzzy
 msgid "shell: Getting host info..."
-msgstr "fish: 正在获取主机信息..."
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Reading directory %s..."
-msgstr "fish: 正在读取目录 %s..."
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: store %s: sending command..."
-msgstr "fish: 保存 %s: 正在发送命令..."
+msgstr ""
 
-#, fuzzy
 msgid "shell: Local read failed, sending zeros"
-msgstr "fish: 本地读取失败，正在发送零"
+msgstr ""
 
-#, fuzzy
 msgid "shell: storing file"
-msgstr "fish: 正在保存文件"
+msgstr ""
 
 msgid "Aborting transfer..."
 msgstr "正在中止传输..."
@@ -4666,6 +4641,3 @@ msgstr "从头继续搜索?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "无法获取 /ftp://some.host/editme.txt 的本地副本"
-
-#~ msgid "fish: Handshaking version..."
-#~ msgstr "fish: 正在握手，协商版本..."

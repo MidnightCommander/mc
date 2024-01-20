@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-01-14 17:58+0300\n"
+"POT-Creation-Date: 2024-01-20 20:51+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
 "Language-Team: Vietnamese (http://app.transifex.com/mc/mc/language/vi/)\n"
@@ -4205,13 +4205,12 @@ msgstr ""
 msgid "sftp: Listing done."
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Disconnecting from %s"
-msgstr "fish: Ngừng kết nối từ %s"
+msgstr ""
 
-#, fuzzy
 msgid "shell: Waiting for initial line..."
-msgstr "fish: Đang chời dòng đầu tiên..."
+msgstr ""
 
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Xin lỗi, bây giờ không thể tạo kết nối xác thực theo mật khẩu."
@@ -4220,32 +4219,28 @@ msgstr "Xin lỗi, bây giờ không thể tạo kết nối xác thực theo m�
 msgid "shell: Password is required for %s"
 msgstr ""
 
-#, fuzzy
 msgid "shell: Sending password..."
-msgstr "fish: Đang gửi mật khẩu..."
+msgstr ""
 
-#, fuzzy
 msgid "shell: Sending initial line..."
-msgstr "fish: Đang gửi dòng đầu tiên..."
+msgstr ""
 
 msgid "shell: Getting host info..."
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Reading directory %s..."
-msgstr "fish: Đọc thư mục %s..."
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: store %s: sending command..."
-msgstr "fish: bản ghi %s: đang gửi câu lệnh..."
+msgstr ""
 
-#, fuzzy
 msgid "shell: Local read failed, sending zeros"
-msgstr "fish: Lỗi đọc nội bộ, đang gửi các số không"
+msgstr ""
 
-#, fuzzy
 msgid "shell: storing file"
-msgstr "Nhận tập tin"
+msgstr ""
 
 msgid "Aborting transfer..."
 msgstr "Dừng truyền tải..."
@@ -4453,6 +4448,3 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "fish: Handshaking version..."
-#~ msgstr "fish: Đang xác nhận phiên bản..."

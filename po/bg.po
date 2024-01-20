@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-01-14 17:58+0300\n"
+"POT-Creation-Date: 2024-01-20 20:51+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Alexander Shopov <ash@kambanaria.org>, 2022\n"
 "Language-Team: Bulgarian (http://app.transifex.com/mc/mc/language/bg/)\n"
@@ -725,7 +725,6 @@ msgid "Show mc with specified skin"
 msgstr "Показване на mc с определена тема"
 
 #. TRANSLATORS: don't translate keywords
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK},{ATTR}:KEYWORD2=...\n"
 "\n"
@@ -747,25 +746,6 @@ msgid ""
 "   Viewer:       viewnormal,viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 msgstr ""
-"--colors КЛЮЧОВА_ДУМА={ЦВЯТ},{ФОН},{АТРИБУТ}:КЛЮЧОВА_ДУМА_2=…\n"
-"\n"
-"Когато пропуснете {ЦВЯТ}, {ФОН} или {АТРИБУТ}, се ползват стандартните\n"
-"стойности\n"
-"\n"
-"Ключови думи:\n"
-" Глобални:           errors, disabled, reverse, gauge, header,\n"
-"                     input, inputmark, inputunchanged, commandlinemark,\n"
-"                     bbarhotkey, bbarbutton, statusbar\n"
-" Файлове:            normal, selected, marked, markselect\n"
-" Диалогови прозорци: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-"                     errdhotfocus\n"
-" Менюта:             menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
-" Изскачащи менюта:   pmenunormal, pmenusel, pmenutitle\n"
-" Редактор:           editnormal, editbold, editmarked, editwhitespace,\n"
-"                     editlinestate, editbg, editframe, editframeactive,\n"
-"                     editframedrag\n"
-" Преглед:            viewnormal, viewbold, viewunderline, viewselected\n"
-" Помощ:              helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 
 #. TRANSLATORS: don't translate color names and attributes
 msgid ""
@@ -4159,29 +4139,20 @@ msgstr ""
 "Виртуална ФС по EXTFS:\n"
 "%s"
 
-#, fuzzy
 msgid ""
 "EXTFS virtual file system:\n"
 "wrong file name"
 msgstr ""
-"Виртуална ФС по EXTFS:\n"
-"%s"
 
-#, fuzzy
 msgid ""
 "EXTFS virtual file system:\n"
 "wrong archive name"
 msgstr ""
-"Виртуална ФС по EXTFS:\n"
-"%s"
 
-#, fuzzy
 msgid ""
 "EXTFS virtual file system:\n"
 "cannot build command"
 msgstr ""
-"Виртуална ФС по EXTFS:\n"
-"%s"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4462,48 +4433,42 @@ msgstr "sftp: (прекъсване с Ctrl-G) Извеждане… %s"
 msgid "sftp: Listing done."
 msgstr "sftp: Извеждането приключи."
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Disconnecting from %s"
-msgstr "fish: Изключване от %s"
+msgstr ""
 
-#, fuzzy
 msgid "shell: Waiting for initial line..."
-msgstr "fish: Изчаква се начален ред…"
+msgstr ""
 
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Засега връзки с парола не може да се осъществят."
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Password is required for %s"
-msgstr "fish: Нужна е парола за %s"
+msgstr ""
 
-#, fuzzy
 msgid "shell: Sending password..."
-msgstr "fish: Изпращане на парола…"
+msgstr ""
 
-#, fuzzy
 msgid "shell: Sending initial line..."
-msgstr "fish: Изпращане на начален ред…"
+msgstr ""
 
-#, fuzzy
 msgid "shell: Getting host info..."
-msgstr "fish: Получаване на данни за хоста…"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Reading directory %s..."
-msgstr "fish: Прочитане на директорията %s…"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: store %s: sending command..."
-msgstr "fish: запис на %s: изпращане на командата…"
+msgstr ""
 
-#, fuzzy
 msgid "shell: Local read failed, sending zeros"
-msgstr "fish: Неуспешно локалнот четене, изпращат се нули"
+msgstr ""
 
-#, fuzzy
 msgid "shell: storing file"
-msgstr "fish: запис на файл"
+msgstr ""
 
 msgid "Aborting transfer..."
 msgstr "Отмяна на пренасянето…"
@@ -4728,6 +4693,3 @@ msgstr "Да се продължи ли от началото?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не може да се изтегли локално копие на „/ftp://some.host/editme.txt“"
-
-#~ msgid "fish: Handshaking version..."
-#~ msgstr "fish: Потвърждаване на версията…"

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-01-14 17:58+0300\n"
+"POT-Creation-Date: 2024-01-20 20:51+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>, 2022\n"
 "Language-Team: Georgian (http://app.transifex.com/mc/mc/language/ka/)\n"
@@ -697,7 +697,6 @@ msgid "Show mc with specified skin"
 msgstr ""
 
 #. TRANSLATORS: don't translate keywords
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK},{ATTR}:KEYWORD2=...\n"
 "\n"
@@ -719,25 +718,6 @@ msgid ""
 "   Viewer:       viewnormal,viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 msgstr ""
-"--colors KEYWORD={FORE},{BACK},{ATTR}:KEYWORD2=...\n"
-"\n"
-"{FORE}, {BACK} და {ATTR} შეგიძლიათ გამოტოვოთ.გამოყენებული იქნება "
-"ნაგულისხმები მნიშვნელობები\n"
-"\n"
-" საკვანძო სიტყვები:\n"
-"   გლობალური:       errors, disabled, reverse, gauge, header\n"
-"                 input, inputmark, inputunchanged, commandlinemark\n"
-"                 bbarhotkey, bbarbutton, statusbar\n"
-"   ფაილის ჩვენება: normal, selected, marked, markselect\n"
-"   ფანჯრები: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-"                 errdhotfocus\n"
-"   მენიუები:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
-"   მხტუნარა მენიუები:  pmenunormal, pmenusel, pmenutitle\n"
-"   რედაქტორი:       editnormal, editbold, editmarked, editwhitespace,\n"
-"                 editlinestate, editbg, editframe, editframeactive\n"
-"                 editframedrag\n"
-"   მნახველი:       viewnormal,viewbold, viewunderline, viewselected\n"
-"   დახმარება:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 
 #. TRANSLATORS: don't translate color names and attributes
 msgid ""
@@ -4208,9 +4188,9 @@ msgstr ""
 msgid "sftp: Listing done."
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Disconnecting from %s"
-msgstr "ftpfs: დაკავშირება ჰოსტთან %s"
+msgstr ""
 
 msgid "shell: Waiting for initial line..."
 msgstr ""
@@ -4222,31 +4202,28 @@ msgstr ""
 msgid "shell: Password is required for %s"
 msgstr ""
 
-#, fuzzy
 msgid "shell: Sending password..."
-msgstr "fish: პაროლის გაგზავნა..."
+msgstr ""
 
 msgid "shell: Sending initial line..."
 msgstr ""
 
-#, fuzzy
 msgid "shell: Getting host info..."
-msgstr "fish: ჰოსტის ინფორმაციის მიღება..."
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Reading directory %s..."
-msgstr "fish: იკითხება %s საქაღალდე..."
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: store %s: sending command..."
-msgstr "fish: საცავი %s: ბრძანების გაგზავნა..."
+msgstr ""
 
 msgid "shell: Local read failed, sending zeros"
 msgstr ""
 
-#, fuzzy
 msgid "shell: storing file"
-msgstr "fish: ფაილის ჩაწერა"
+msgstr ""
 
 msgid "Aborting transfer..."
 msgstr ""

@@ -3,24 +3,24 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# Piotr Drąg <piotrdrag@gmail.com>, 2011-2023
+# Piotr Drąg <piotrdrag@gmail.com>, 2011-2024
 # Slava Zanko <slavazanko@gmail.com>, 2011
 # Waldemar Stoczkowski, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-01-14 17:58+0300\n"
+"POT-Creation-Date: 2024-01-20 20:51+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>, 2011-2023\n"
+"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>, 2011-2024\n"
 "Language-Team: Polish (http://app.transifex.com/mc/mc/language/pl/)\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n"
-"%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n"
-"%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && "
+"(n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && "
+"n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -729,7 +729,6 @@ msgid "Show mc with specified skin"
 msgstr "Wyświetla program mc za pomocą podanej skórki"
 
 #. TRANSLATORS: don't translate keywords
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK},{ATTR}:KEYWORD2=...\n"
 "\n"
@@ -751,9 +750,9 @@ msgid ""
 "   Viewer:       viewnormal,viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 msgstr ""
-"--colors KEYWORD={TEKST},{TŁO},{ATR}:SŁOWO_KLUCZOWE2=…\n"
+"--colors SŁOWO_KLUCZOWE={TEKST},{TŁO},{ATR}:SŁOWO_KLUCZOWE2=…\n"
 "\n"
-"{TEKST}, {TŁO} i {ATR} można pominąć, zostaną użyte wartości domyślne\n"
+"{TEKST}, {TŁO} i {ATR} można pominąć, zostaną użyte wartości domyślne\n"
 "\n"
 " Słowa kluczowe:\n"
 "   Globalne:     errors, disabled, reverse, gauge, header\n"
@@ -763,8 +762,9 @@ msgstr ""
 "   Okna dialogowe: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
 "   Menu:         menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
-"   Menu wyskakujące: pmenunormal, pmenusel, pmenutitle\n"
-"   Edytor:       editnormal, editbold, editmarked, editwhitespace,\n"
+"   Menu wyskakujące:  pmenunormal, pmenusel, pmenutitle\n"
+"   Edytor:       editnormal, editbold, editmarked, editwhitespace, "
+"editnonprintable,\n"
 "                 editlinestate, editbg, editframe, editframeactive\n"
 "                 editframedrag\n"
 "   Przeglądarka: viewnormal,viewbold, viewunderline, viewselected\n"
@@ -1639,9 +1639,8 @@ msgstr ""
 "Łatwy w obsłudze edytor tekstu,\n"
 "napisany dla programu Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2024 the Free Software Foundation"
-msgstr "Copyright © 1996-2023 Free Software Foundation"
+msgstr "Copyright © 1996-2024 Free Software Foundation"
 
 msgid "About"
 msgstr "O programie"
@@ -4189,29 +4188,26 @@ msgstr ""
 "Wirtualny system plików EXTFS:\n"
 "%s"
 
-#, fuzzy
 msgid ""
 "EXTFS virtual file system:\n"
 "wrong file name"
 msgstr ""
 "Wirtualny system plików EXTFS:\n"
-"%s"
+"błędna nazwa pliku"
 
-#, fuzzy
 msgid ""
 "EXTFS virtual file system:\n"
 "wrong archive name"
 msgstr ""
 "Wirtualny system plików EXTFS:\n"
-"%s"
+"błędna nazwa archiwum"
 
-#, fuzzy
 msgid ""
 "EXTFS virtual file system:\n"
 "cannot build command"
 msgstr ""
 "Wirtualny system plików EXTFS:\n"
-"%s"
+"nie można zbudować polecenia"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4493,48 +4489,42 @@ msgstr "sftp: (Ctrl-G przerywa) wyświetlanie listy… %s"
 msgid "sftp: Listing done."
 msgstr "sftp: ukończono wyświetlanie listy."
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Disconnecting from %s"
-msgstr "fish: rozłączanie z %s"
+msgstr "powłoka: rozłączanie z %s"
 
-#, fuzzy
 msgid "shell: Waiting for initial line..."
-msgstr "fish: oczekiwanie na wiersz początkowy…"
+msgstr "powłoka: oczekiwanie na wiersz początkowy…"
 
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Połączenia uwierzytelniane hasłem nie są na razie obsługiwane."
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Password is required for %s"
-msgstr "fish: wymagane jest hasło dla %s"
+msgstr "powłoka: wymagane jest hasło dla %s"
 
-#, fuzzy
 msgid "shell: Sending password..."
-msgstr "fish: wysyłanie hasła…"
+msgstr "powłoka: wysyłanie hasła…"
 
-#, fuzzy
 msgid "shell: Sending initial line..."
-msgstr "fish: wysyłanie wiersza początkowego…"
+msgstr "powłoka: wysyłanie wiersza początkowego…"
 
-#, fuzzy
 msgid "shell: Getting host info..."
-msgstr "fish: pobieranie informacji o komputerze…"
+msgstr "powłoka: pobieranie informacji o komputerze…"
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Reading directory %s..."
-msgstr "fish: odczytywanie katalogu %s…"
+msgstr "powłoka: odczytywanie katalogu %s…"
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: store %s: sending command..."
-msgstr "fish: zapis %s: wysyłanie polecenia…"
+msgstr "powłoka: zapis %s: wysyłanie polecenia…"
 
-#, fuzzy
 msgid "shell: Local read failed, sending zeros"
-msgstr "fish: lokalny odczyt się nie powiódł, wysyłanie zer"
+msgstr "powłoka: lokalny odczyt się nie powiódł, wysyłanie zer"
 
-#, fuzzy
 msgid "shell: storing file"
-msgstr "fish: wysyłanie pliku"
+msgstr "powłoka: wysyłanie pliku"
 
 msgid "Aborting transfer..."
 msgstr "Przerywanie przesyłania…"
@@ -4762,6 +4752,3 @@ msgstr "Kontynuować od początku?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Nie można pobrać lokalnej kopii /ftp://jakiś.komputer/modyfikuj_mnie.txt"
-
-#~ msgid "fish: Handshaking version..."
-#~ msgstr "fish: ustalanie wersji…"

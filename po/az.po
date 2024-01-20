@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-01-14 17:58+0300\n"
+"POT-Creation-Date: 2024-01-20 20:51+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
 "Language-Team: Azerbaijani (http://app.transifex.com/mc/mc/language/az/)\n"
@@ -4208,13 +4208,12 @@ msgstr ""
 msgid "sftp: Listing done."
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Disconnecting from %s"
-msgstr "balıq: %s dən qopdum"
+msgstr ""
 
-#, fuzzy
 msgid "shell: Waiting for initial line..."
-msgstr "balıq: Birinci xətti gözləyirəm..."
+msgstr ""
 
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Bağışlayın, indilik parollu tanıtma bağlantıları qura bilmirik."
@@ -4223,32 +4222,28 @@ msgstr "Bağışlayın, indilik parollu tanıtma bağlantıları qura bilmirik."
 msgid "shell: Password is required for %s"
 msgstr ""
 
-#, fuzzy
 msgid "shell: Sending password..."
-msgstr "balıq: Parol göndərilir..."
+msgstr ""
 
-#, fuzzy
 msgid "shell: Sending initial line..."
-msgstr "balıq: Birinci xətt göndərilir..."
+msgstr ""
 
 msgid "shell: Getting host info..."
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Reading directory %s..."
-msgstr "balıq: %s Qovluğu oxunur..."
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: store %s: sending command..."
-msgstr "balıq: %s göndər: göndərmə əmri..."
+msgstr ""
 
-#, fuzzy
 msgid "shell: Local read failed, sending zeros"
-msgstr "balıq: Yerli oxuma bacarılmadı, sıfır göndərilir"
+msgstr ""
 
-#, fuzzy
 msgid "shell: storing file"
-msgstr "Faylı alıram"
+msgstr ""
 
 msgid "Aborting transfer..."
 msgstr "Daşıma ləğv edilər..."
@@ -4456,6 +4451,3 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "fish: Handshaking version..."
-#~ msgstr "balıq: Əl sıxışmalı yol..."

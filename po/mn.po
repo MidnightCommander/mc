@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-01-14 17:58+0300\n"
+"POT-Creation-Date: 2024-01-20 20:51+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Shuree Nyam-Oidov <99shuree@gmail.com>, 2020\n"
 "Language-Team: Mongolian (http://app.transifex.com/mc/mc/language/mn/)\n"
@@ -4209,13 +4209,12 @@ msgstr ""
 msgid "sftp: Listing done."
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Disconnecting from %s"
-msgstr "fish: %s аас салгагдаж байна"
+msgstr ""
 
-#, fuzzy
 msgid "shell: Waiting for initial line..."
-msgstr "fish: Эхлэл мөрийг хүлээж байна..."
+msgstr ""
 
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Уучлаарай, Бид энэ холболтод нууц үг ашиглаж чадахгүй байна."
@@ -4224,32 +4223,28 @@ msgstr "Уучлаарай, Бид энэ холболтод нууц үг аш�
 msgid "shell: Password is required for %s"
 msgstr ""
 
-#, fuzzy
 msgid "shell: Sending password..."
-msgstr "fish: Нууц үгийг илгээж байна..."
+msgstr ""
 
-#, fuzzy
 msgid "shell: Sending initial line..."
-msgstr "fish: эхлэл мөрийг илгээж байна..."
+msgstr ""
 
 msgid "shell: Getting host info..."
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Reading directory %s..."
-msgstr "fish: %s лавлахыг уншиж байна..."
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: store %s: sending command..."
-msgstr "fish: %s сэргээх: командыг илгээж байна..."
+msgstr ""
 
-#, fuzzy
 msgid "shell: Local read failed, sending zeros"
-msgstr "fish: локал уншилт бүтсэнгүй, тэгийг илгээж байна"
+msgstr ""
 
-#, fuzzy
 msgid "shell: storing file"
-msgstr "Файл хүлээн авч байна"
+msgstr ""
 
 msgid "Aborting transfer..."
 msgstr "Дамжуулалтыг таслаж байна..."
@@ -4458,6 +4453,3 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "fish: Handshaking version..."
-#~ msgstr "fish: Handshaking version..."

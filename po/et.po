@@ -4,7 +4,7 @@
 #
 # Translators:
 # Ivar Smolin <okul@linux.ee>, 2021
-# Kristjan Räts <kristjanrats@gmail.com>, 2013-2016,2018-2019
+# Kristjan Räts <kristjanrats@gmail.com>, 2013-2016,2018-2019,2024
 # Priit Jõerüüt <transifex@joeruut.com>, 2020-2021,2023
 # vaba <vaba@riseup.net>, 2020
 # vaba <vaba@riseup.net>, 2020
@@ -12,9 +12,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-01-14 17:58+0300\n"
+"POT-Creation-Date: 2024-01-20 20:51+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: vaba <vaba@riseup.net>, 2020\n"
+"Last-Translator: Kristjan Räts <kristjanrats@gmail.com>, "
+"2013-2016,2018-2019,2024\n"
 "Language-Team: Estonian (http://app.transifex.com/mc/mc/language/et/)\n"
 "Language: et\n"
 "MIME-Version: 1.0\n"
@@ -480,12 +481,18 @@ msgid ""
 "\n"
 "Cannot configure write end of SIGWINCH pipe: %s (%d)\n"
 msgstr ""
+"\n"
+"SIGWINCH saatmispoolt ei saa\n"
+"konfigureerida: %s (%d)\n"
 
 #, c-format
 msgid ""
 "\n"
 "Cannot configure read end of SIGWINCH pipe: %s (%d)\n"
 msgstr ""
+"\n"
+"SIGWINCH lugemispoolt ei saa\n"
+"konfigureerida: %s (%d)\n"
 
 #, c-format
 msgid ""
@@ -531,7 +538,7 @@ msgstr ""
 "%s"
 
 msgid "Cannot close pipe descriptor (p == NULL)"
-msgstr ""
+msgstr "Toru deskriptor ei saa sulgeda (p == NULL)"
 
 #, c-format
 msgid ""
@@ -721,7 +728,6 @@ msgid "Show mc with specified skin"
 msgstr "Kuva mc määratud nahaga"
 
 #. TRANSLATORS: don't translate keywords
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK},{ATTR}:KEYWORD2=...\n"
 "\n"
@@ -760,7 +766,7 @@ msgstr ""
 "   Toimeti:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate, editbg, editframe, editframeactive\n"
 "                 editframedrag\n"
-"   Kuvaja:       viewnormal,viewbold, viewunderline, viewselected\n"
+"   Kuvaja:       viewnormal, viewbold, viewunderline, viewselected\n"
 "   Abi:          helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 
 #. TRANSLATORS: don't translate color names and attributes
@@ -1209,7 +1215,7 @@ msgid "You must first highlight a block of text"
 msgstr "Esmalt vali tekstiplokk"
 
 msgid "Run sort"
-msgstr "Räivita sortimine"
+msgstr "Käivita sortimine"
 
 msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr ""
@@ -1630,9 +1636,8 @@ msgstr ""
 "Kasutajasõbralik tekstitoimeti, mis\n"
 "on loodud Midnight Commanderile."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2024 the Free Software Foundation"
-msgstr "Autoriõigused (C) 1996-2023 the Free Software Foundation"
+msgstr "Autoriõigused (C) 1996-2024 the Free Software Foundation"
 
 msgid "About"
 msgstr "Programmist"
@@ -2037,13 +2042,13 @@ msgstr ""
 "Lisainfot leiad manuaalist."
 
 msgid "&Full file list"
-msgstr "&Täielik failide loend"
+msgstr "&Täielik faililoend"
 
 msgid "&Brief file list:"
-msgstr "&Lühike failide loend:"
+msgstr "&Lühike faililoend:"
 
 msgid "&Long file list"
-msgstr "&Pikk failide loend"
+msgstr "&Pikk faililoend"
 
 msgid "&User defined:"
 msgstr "&Kasutaja määratud:"
@@ -2169,6 +2174,9 @@ msgid ""
 "%s\n"
 "%s"
 msgstr ""
+"Nurjus vahetus kataloogiks \n"
+"%s \n"
+"%s"
 
 msgid "Secure deletion"
 msgstr "Turvaline kustutamine"
@@ -2189,7 +2197,7 @@ msgid "Append only"
 msgstr "Ainult lisa"
 
 msgid "No dump"
-msgstr ""
+msgstr "Tõmmis puudub"
 
 msgid "No update atime"
 msgstr "Jäta atime uuendamata"
@@ -2216,7 +2224,7 @@ msgid "Indexed directory"
 msgstr "Indekseeritud kataloog"
 
 msgid "No tail merging"
-msgstr ""
+msgstr "Keela lõppude mestimine"
 
 msgid "Top of directory hierarchies"
 msgstr "Kataloogihierarhiate tipp"
@@ -2225,16 +2233,16 @@ msgid "Inode uses extents"
 msgstr "Inode kasutab ulatusi"
 
 msgid "Huge_file"
-msgstr ""
+msgstr "suurfail"
 
 msgid "No COW"
-msgstr ""
+msgstr "COW puudub"
 
 msgid "Direct access for files"
 msgstr "Otsene juurdepääs failidele"
 
 msgid "Casefolded file"
-msgstr ""
+msgstr "Tõstutundetustatud fail"
 
 msgid "Inode has inline data"
 msgstr "I-kirjel on põimitud andmeid"
@@ -2262,6 +2270,8 @@ msgid ""
 "Cannot chattr \"%s\"\n"
 "%s"
 msgstr ""
+"\"%s\" attribuutide muutmine nurjus\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -2434,8 +2444,8 @@ msgid ""
 "Both panels should be in the listing mode\n"
 "to use this command"
 msgstr ""
-"Selle käsu kasutamiseks peaksid mõlemad\n"
-"paneelid kuvama failide loendit"
+"Selle käsu kasutamiseks peaksid\n"
+"mõlemad paneelid kuvama faililoendit"
 
 #, c-format
 msgid "'%s' is not a symbolic link"
@@ -3047,7 +3057,7 @@ msgid "Invalid source pattern '%s'"
 msgstr "Vigane lähtemuster \"%s\""
 
 msgid "File listin&g"
-msgstr "F&ailide loend"
+msgstr "F&aililoend"
 
 msgid "&Quick view"
 msgstr "&Kiirvaade"
@@ -3056,7 +3066,7 @@ msgid "&Info"
 msgstr "&Info"
 
 msgid "&Tree"
-msgstr "&Puu"
+msgstr "P&uu"
 
 msgid "&Listing format..."
 msgstr "&Loendi vormindus..."
@@ -3080,7 +3090,7 @@ msgid "SFTP li&nk..."
 msgstr "SFTP li&nk..."
 
 msgid "Paneli&ze"
-msgstr "Pa&neelile"
+msgstr "&Paneelile"
 
 msgid "&Rescan"
 msgstr "Ko&rdusskannimine"
@@ -3191,7 +3201,7 @@ msgid "&Undelete files (ext2fs only)"
 msgstr "F&ailide taastamine (ainult ext2fs)"
 
 msgid "&Listing format edit"
-msgstr "&Loend vorminduse muutmine"
+msgstr "Muuda &loendi vormindust"
 
 msgid "Edit &extension file"
 msgstr "Muuda &laiendite faili"
@@ -3575,7 +3585,7 @@ msgid "sort|u"
 msgstr "sort|m"
 
 msgid "&Unsorted"
-msgstr "Sorti&mata"
+msgstr "S&ortimata"
 
 #. TRANSLATORS: one single character to represent 'name' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -4163,29 +4173,26 @@ msgstr ""
 "EXTFS virtuaalne failisüsteem:\n"
 "%s"
 
-#, fuzzy
 msgid ""
 "EXTFS virtual file system:\n"
 "wrong file name"
 msgstr ""
 "EXTFS virtuaalne failisüsteem:\n"
-"%s"
+"vale failinimi"
 
-#, fuzzy
 msgid ""
 "EXTFS virtual file system:\n"
 "wrong archive name"
 msgstr ""
 "EXTFS virtuaalne failisüsteem:\n"
-"%s"
+"vale arhiivinimi"
 
-#, fuzzy
 msgid ""
 "EXTFS virtual file system:\n"
 "cannot build command"
 msgstr ""
 "EXTFS virtuaalne failisüsteem:\n"
-"%s"
+"käsu loomine nurjus"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4389,7 +4396,7 @@ msgid ""
 msgstr ""
 "Püsivalt lisatud\n"
 "%s (%s)\n"
-"teadaolevate hostide loendisse."
+"tuntud hostide loendisse."
 
 msgid "sftp: cannot get the remote host key"
 msgstr "sftp: ei saa kaughosti võtit hankida"
@@ -4409,13 +4416,12 @@ msgid ""
 "SHA1:%s.\n"
 "Do you want to add it to the list of known hosts and continue connecting?"
 msgstr ""
-"Hosti autentsus\n"
+"Hosti autentsust ei saa kindlaks teha!\n"
 "%s (%s)\n"
-"ei saa kindlaks teha!\n"
 "%s võtme sõrmejälje räsi on\n"
 "SHA1:%s.\n"
-"Kas soovite selle teadaolevate hostide loendisse lisada ja ühenduse loomist "
-"jätkata?"
+"Kas soovite selle lisada tuntud hostide loendisse ja jätkata ühenduse "
+"loomist?"
 
 #, c-format
 msgid ""
@@ -4428,7 +4434,7 @@ msgstr ""
 "%s (%s)\n"
 "on leitud tuntud hostide loendist, kuid\n"
 "VÕTMED EI SOBI KOKKU! SEE VÕIB OLLA MITM rünnak!\n"
-"Kas olete kindel, et soovite selle teadaolevate hostide loendisse lisada ja "
+"Kas olete kindel, et soovite selle tuntud hostide loendisse lisada ja "
 "ühenduse loomist jätkata?"
 
 msgid "sftp: host key verification failed"
@@ -4465,48 +4471,42 @@ msgstr "sftp: (Ctrl+G katkestab) Loendamine... %s"
 msgid "sftp: Listing done."
 msgstr "sftp: Loendamine lõpetatud."
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Disconnecting from %s"
-msgstr "fish: katkestatakse ühendus serveriga %s"
+msgstr "kest: katkestatakse ühendus serveriga %s"
 
-#, fuzzy
 msgid "shell: Waiting for initial line..."
-msgstr "fish: oodatakse serveri vastust..."
+msgstr "kest: oodatakse serveri vastust..."
 
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Vabandust, parooliga autenditud ühendused ei ole hetkel võimalikud."
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Password is required for %s"
-msgstr "fish: Server %s küsib parooli"
+msgstr "kest: server %s küsib parooli"
 
-#, fuzzy
 msgid "shell: Sending password..."
-msgstr "fish: saadetakse parooli..."
+msgstr "kest: parooli saatmine..."
 
-#, fuzzy
 msgid "shell: Sending initial line..."
-msgstr "fish: lähtestamine..."
+msgstr "kest: lähtestamine..."
 
-#, fuzzy
 msgid "shell: Getting host info..."
-msgstr "fish: Hangitakse hosti infot..."
+msgstr "kest: hosti info hankimine..."
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Reading directory %s..."
-msgstr "fish: Loetakse kataloogi %s..."
+msgstr "kest: loetakse kataloogi %s..."
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: store %s: sending command..."
-msgstr "fish: salvesta %s: saadetakse käsku..."
+msgstr "kes: salvesta %s: saadetakse käsku..."
 
-#, fuzzy
 msgid "shell: Local read failed, sending zeros"
-msgstr "fish: kohalik lugemine nurjus, saadetakse nullid"
+msgstr "kest: kohalik lugemine nurjus, saadetakse nullid"
 
-#, fuzzy
 msgid "shell: storing file"
-msgstr "fish: salvestatakse fail"
+msgstr "kest: faili salvestamine"
 
 msgid "Aborting transfer..."
 msgstr "Saatmine katkestatakse..."
@@ -4536,9 +4536,11 @@ msgid ""
 "%s\n"
 "doesn't look like a tar archive"
 msgstr ""
+"%s\n"
+"ei meenuta tar arhiivi"
 
 msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr ""
+msgstr "tar: mc_lseek ei peatunud kirje piiril"
 
 msgid "undelfs: error"
 msgstr "undelfs: viga"
@@ -4731,6 +4733,3 @@ msgstr "Kas jätkata algusest?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kohaliku koopia hankimine failist /ftp://some.host/editme.txt nurjus"
-
-#~ msgid "fish: Handshaking version..."
-#~ msgstr "fish: Versiooni kokku leppimine..."

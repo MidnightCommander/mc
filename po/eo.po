@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-01-14 17:58+0300\n"
+"POT-Creation-Date: 2024-01-20 20:51+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2022\n"
 "Language-Team: Esperanto (http://app.transifex.com/mc/mc/language/eo/)\n"
@@ -721,7 +721,6 @@ msgid "Show mc with specified skin"
 msgstr "Montri kun specifa etoso"
 
 #. TRANSLATORS: don't translate keywords
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK},{ATTR}:KEYWORD2=...\n"
 "\n"
@@ -743,26 +742,6 @@ msgid ""
 "   Viewer:       viewnormal,viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 msgstr ""
-"--colors Ŝlosilvorto={teksto},{fono},{atributo}:Ŝlosilvorto2=...\n"
-"Se {teksto}, {fono} aŭ {atributo} estas ellasitaj, la aprioraj estas uzotaj\n"
-"\n"
-" Ŝlosilvortoj:\n"
-"   Tutprograma:        errors, disabled, reverse, gauge, header\n"
-"                       input, inputmark, inputunchanged, commandlinemark\n"
-"                       bbarhotkey, bbarhotbutton, statusbar\n"
-"   Dosieradministrado: normal, selected, marked, markselect\n"
-"   Dialogujo:          dnormal, dfocus, dhotnormal, dhotfocus, "
-"errdhotnormal,\n"
-"                       errdhotfocus\n"
-"   Menuoj:             menunormal, menuhot, menusel, menuhotsel, "
-"menuinactive\n"
-"   Ŝprucmenuoj:        pmenunormal, pmenusel, pmenutitle\n"
-"   Tekstoredaktilo:    editnormal, editbold, editmarked, editwhitespace\n"
-"                       editlinestate, editbg, editframe, editframeactive\n"
-"                       editframedrag\n"
-"   Tekstolegilo:       viewnormal, viewbold, viewunderline, viewselected\n"
-"   Helpilo:            helpnormal, helpitalic, helpbold, helplink, "
-"helpslink\n"
 
 #. TRANSLATORS: don't translate color names and attributes
 msgid ""
@@ -1631,9 +1610,8 @@ msgstr ""
 "Afabla tekstoredaktilo\n"
 "verkita por Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2024 the Free Software Foundation"
-msgstr "Kopirajto (C) 1996–2023 la Fondaĵo pri Libera Programaro"
+msgstr ""
 
 msgid "About"
 msgstr "Pri"
@@ -2172,6 +2150,9 @@ msgid ""
 "%s\n"
 "%s"
 msgstr ""
+"Ne eblas ŝanĝi dosierujon al\n"
+"%s\n"
+"%s"
 
 msgid "Secure deletion"
 msgstr "Sekura forigo"
@@ -4167,29 +4148,26 @@ msgstr ""
 "Virtuala dosiersistemo EXTFS:\n"
 "%s"
 
-#, fuzzy
 msgid ""
 "EXTFS virtual file system:\n"
 "wrong file name"
 msgstr ""
 "Virtuala dosiersistemo EXTFS:\n"
-"%s"
+"malĝusta dosiernomo"
 
-#, fuzzy
 msgid ""
 "EXTFS virtual file system:\n"
 "wrong archive name"
 msgstr ""
 "Virtuala dosiersistemo EXTFS:\n"
-"%s"
+"malĝusta arkivnomo"
 
-#, fuzzy
 msgid ""
 "EXTFS virtual file system:\n"
 "cannot build command"
 msgstr ""
 "Virtuala dosiersistemo EXTFS:\n"
-"%s"
+"ne eblas konstrui komandon"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4468,48 +4446,42 @@ msgstr "sftp: (Stir-G rompi) Listo... %s"
 msgid "sftp: Listing done."
 msgstr "sftp: Listado finita."
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Disconnecting from %s"
-msgstr "fish: Malkonektiĝanta de %s"
+msgstr "ŝelo: Malkonektiĝanta de %s"
 
-#, fuzzy
 msgid "shell: Waiting for initial line..."
-msgstr "fish: Atendanta komencan linion..."
+msgstr "ŝelo: Atendanta komencan linion..."
 
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Bedaŭrinde ni ne povas nun fari pasvortajn atestadajn konektojn."
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Password is required for %s"
-msgstr "fish: Pasvorto estas postulita por %s"
+msgstr "ŝelo: Pasvorto estas postulita por %s"
 
-#, fuzzy
 msgid "shell: Sending password..."
-msgstr "fish: Sendanta pasvorton..."
+msgstr "ŝelo: Sendanta pasvorton..."
 
-#, fuzzy
 msgid "shell: Sending initial line..."
-msgstr "fish: Sendanta komencan linion..."
+msgstr "ŝelo: Sendanta komencan linion..."
 
-#, fuzzy
 msgid "shell: Getting host info..."
-msgstr "fish: Akiranta gastiganto-informojn..."
+msgstr "ŝelo: Akiranta gastiganto-informojn..."
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Reading directory %s..."
-msgstr "fish: Leganta dosierujon %s..."
+msgstr "ŝelo: Leganta dosierujon %s..."
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: store %s: sending command..."
-msgstr "fish: teno %s: sendanta komandon..."
+msgstr "ŝelo: teno %s: sendanta komandon..."
 
-#, fuzzy
 msgid "shell: Local read failed, sending zeros"
-msgstr "fish: Loka legado malsukcesis, sendanta nulojn"
+msgstr "ŝelo: Loka legado malsukcesis, sendanta nulojn"
 
-#, fuzzy
 msgid "shell: storing file"
-msgstr "fish: konservanta dosieron"
+msgstr "ŝelo: konservanta dosieron"
 
 msgid "Aborting transfer..."
 msgstr "Ĉesiganta transigon..."
@@ -4539,9 +4511,11 @@ msgid ""
 "%s\n"
 "doesn't look like a tar archive"
 msgstr ""
+"%s\n"
+"ne ŝajnas esti TAR-arkivo"
 
 msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr ""
+msgstr "tar: mc_lsek ne ĉesigita je rikorda limo"
 
 msgid "undelfs: error"
 msgstr "undelfs: eraro"
@@ -4734,6 +4708,3 @@ msgstr "Ĉu deiri de la komenco?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Ne eblas atingi lokan kopion de /ftp://some.host/editme.txt"
-
-#~ msgid "fish: Handshaking version..."
-#~ msgstr "fish: Konsentanta eldonon..."

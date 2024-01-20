@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-01-14 17:58+0300\n"
+"POT-Creation-Date: 2024-01-20 20:51+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Rostyslav Haitkulov <info@ubilling.net.ua>, 2023\n"
 "Language-Team: Ukrainian (http://app.transifex.com/mc/mc/language/uk/)\n"
@@ -736,7 +736,6 @@ msgid "Show mc with specified skin"
 msgstr "Показати mc із обраною обкладинкою"
 
 #. TRANSLATORS: don't translate keywords
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK},{ATTR}:KEYWORD2=...\n"
 "\n"
@@ -758,25 +757,6 @@ msgid ""
 "   Viewer:       viewnormal,viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 msgstr ""
-"--colors КЛЮЧ={ТЕКСТ},{ФОН},{АТРИБУТ}:KEYWORD2=...\n"
-"\n"
-"{ТЕКСТ}, {ФОН} та {АТРИБУТ} можна не вказувати, в такому випадку будуть "
-"використовуватись стандартні значення\n"
-"\n"
-"Ключі :\n"
-"   Глобальні:       errors, disabled, reverse, gauge, header\n"
-"                 input, inputmark, inputunchanged, commandlinemark\n"
-"                 bbarhotkey, bbarbutton, statusbar\n"
-"   Відображення файлів: normal, selected, marked, markselect\n"
-"   Діалогові вікна: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-"                 errdhotfocus\n"
-"   Меню:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
-"   Контекстні меню:  pmenunormal, pmenusel, pmenutitle\n"
-"   Редактор:       editnormal, editbold, editmarked, editwhitespace,\n"
-"                 editlinestate, editbg, editframe, editframeactive\n"
-"                 editframedrag\n"
-"   Переглядач:       viewnormal,viewbold, viewunderline, viewselected\n"
-"   Довідка:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 
 #. TRANSLATORS: don't translate color names and attributes
 msgid ""
@@ -4174,29 +4154,20 @@ msgstr ""
 "Віртуальна файлова система EXTFS:\n"
 "%s"
 
-#, fuzzy
 msgid ""
 "EXTFS virtual file system:\n"
 "wrong file name"
 msgstr ""
-"Віртуальна файлова система EXTFS:\n"
-"%s"
 
-#, fuzzy
 msgid ""
 "EXTFS virtual file system:\n"
 "wrong archive name"
 msgstr ""
-"Віртуальна файлова система EXTFS:\n"
-"%s"
 
-#, fuzzy
 msgid ""
 "EXTFS virtual file system:\n"
 "cannot build command"
 msgstr ""
-"Віртуальна файлова система EXTFS:\n"
-"%s"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4479,48 +4450,42 @@ msgstr "sftp: (Ctrl-G перервати) Створення списку... %s"
 msgid "sftp: Listing done."
 msgstr "sftp: Створення списку завершено."
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Disconnecting from %s"
-msgstr "fish: триває від’єднання від %s"
+msgstr ""
 
-#, fuzzy
 msgid "shell: Waiting for initial line..."
-msgstr "fish: очікується початковий рядок…"
+msgstr ""
 
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Зараз немає змоги створювати з’єднання, авторизовані паролем."
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Password is required for %s"
-msgstr "fish: вимагається пароль для %s"
+msgstr ""
 
-#, fuzzy
 msgid "shell: Sending password..."
-msgstr "fish: триває надсилання пароля…"
+msgstr ""
 
-#, fuzzy
 msgid "shell: Sending initial line..."
-msgstr "fish: триває надсилання початкового рядка…"
+msgstr ""
 
-#, fuzzy
 msgid "shell: Getting host info..."
-msgstr "fish: триває отримання відомостей про вузол…"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Reading directory %s..."
-msgstr "fish: триває читання каталога %s…"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: store %s: sending command..."
-msgstr "fish: запис %s: триває надсилання команди…"
+msgstr ""
 
-#, fuzzy
 msgid "shell: Local read failed, sending zeros"
-msgstr "fish: сталася помилка локального читання, надсилаються нулі"
+msgstr ""
 
-#, fuzzy
 msgid "shell: storing file"
-msgstr "fish: триває зберігання файлу"
+msgstr ""
 
 msgid "Aborting transfer..."
 msgstr "Триває переривання перенесення…"
@@ -4746,6 +4711,3 @@ msgstr "Почати спочатку?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не вдалося отримати локальну копію /ftp://some.host/editme.txt"
-
-#~ msgid "fish: Handshaking version..."
-#~ msgstr "fish: тривають переговори про версію…"

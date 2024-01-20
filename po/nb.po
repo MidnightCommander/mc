@@ -3,16 +3,17 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# heskjestad <cato@heskjestad.xyz>, 2021-2023
-# heskjestad <cato@heskjestad.xyz>, 2019-2021
+# heskjestad <kc.madderloss@gmail.com>, 2021-2023
+# heskjestad <kc.madderloss@gmail.com>, 2024
+# heskjestad <kc.madderloss@gmail.com>, 2019-2021
 # Slava Zanko <slavazanko@gmail.com>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-01-14 17:58+0300\n"
+"POT-Creation-Date: 2024-01-20 20:51+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: heskjestad <cato@heskjestad.xyz>, 2021-2023\n"
+"Last-Translator: heskjestad <kc.madderloss@gmail.com>, 2024\n"
 "Language-Team: Norwegian Bokmål (http://app.transifex.com/mc/mc/language/"
 "nb/)\n"
 "Language: nb\n"
@@ -726,7 +727,6 @@ msgid "Show mc with specified skin"
 msgstr "Vis mc med angitt presentasjonsdrakt"
 
 #. TRANSLATORS: don't translate keywords
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK},{ATTR}:KEYWORD2=...\n"
 "\n"
@@ -748,24 +748,25 @@ msgid ""
 "   Viewer:       viewnormal,viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 msgstr ""
-"--colors NØKKELORD={FORGR},{BAKGR},{ATTR}:NØKKELORD2=...\n"
+"--colors NØKKELORD={FORAN},{BAK},{ATTR}:NØKKELORD2=...\n"
 "\n"
-"{FORGR}, {BAKGR} og {ATTR} kan utelates for å bruke forvalgte verdier\n"
+"{FORAN}, {BAK} and {ATTR} kan utelates for å ta i bruk standardverdier\n"
 "\n"
 " Nøkkelord:\n"
-"   Globale:      errors, disabled, reverse, gauge, header\n"
+"   Globale:       errors, disabled, reverse, gauge, header\n"
 "                 input, inputmark, inputunchanged, commandlinemark\n"
 "                 bbarhotkey, bbarbutton, statusbar\n"
-"   Filvisning:   normal, selected, marked, markselect\n"
-"   Dialogbokser: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"   Filvisning: normal, selected, marked, markselect\n"
+"   Dialogvinduer: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Menyer:       menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
-"   Sprettoppmenyer: pmenunormal, pmenusel, pmenutitle\n"
-"   Tekstprogram:  editnormal, editbold, editmarked, editwhitespace,\n"
+"   Menyer:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Sprettoppmenyer:  pmenunormal, pmenusel, pmenutitle\n"
+"   Redigering:       editnormal, editbold, editmarked, editwhitespace, "
+"editnonprintable,\n"
 "                 editlinestate, editbg, editframe, editframeactive\n"
 "                 editframedrag\n"
-"   Tekstviser:   viewnormal,viewbold, viewunderline, viewselected\n"
-"   Hjelp:        helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   Visning:       viewnormal,viewbold, viewunderline, viewselected\n"
+"   Hjelp:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 
 #. TRANSLATORS: don't translate color names and attributes
 msgid ""
@@ -1636,9 +1637,8 @@ msgstr ""
 "Et brukervennlig skriveprogram\n"
 "skrevet for Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2024 the Free Software Foundation"
-msgstr "Opphavsrett (C) 1996-2023 the Free Software Foundation"
+msgstr "Opphavsrett (C) 1996-2024 Free Software Foundation"
 
 msgid "About"
 msgstr "Om"
@@ -4175,29 +4175,26 @@ msgstr ""
 "EXTFS virtuelt filsystem:\n"
 "%s"
 
-#, fuzzy
 msgid ""
 "EXTFS virtual file system:\n"
 "wrong file name"
 msgstr ""
 "EXTFS virtuelt filsystem:\n"
-"%s"
+"feil filnavn"
 
-#, fuzzy
 msgid ""
 "EXTFS virtual file system:\n"
 "wrong archive name"
 msgstr ""
 "EXTFS virtuelt filsystem:\n"
-"%s"
+"feil arkivnavn"
 
-#, fuzzy
 msgid ""
 "EXTFS virtual file system:\n"
 "cannot build command"
 msgstr ""
 "EXTFS virtuelt filsystem:\n"
-"%s"
+"kan ikke kjøre kommando"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4479,48 +4476,42 @@ msgstr "sftp: (Ctrl + G avbryter) Lister ut ... %s"
 msgid "sftp: Listing done."
 msgstr "sftp: Utlisting ferdig."
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Disconnecting from %s"
-msgstr "fish: Kobler fra %s"
+msgstr "skall: Kobler fra %s"
 
-#, fuzzy
 msgid "shell: Waiting for initial line..."
-msgstr "fish: Venter på innledende linje ..."
+msgstr "skall: Venter på innledende linje ..."
 
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Passordautentisering av tilkoblinger støttes ikke per i dag."
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Password is required for %s"
-msgstr "fish: Trenger passord for %s"
+msgstr "skall: Trenger passord for %s"
 
-#, fuzzy
 msgid "shell: Sending password..."
-msgstr "fish: Sender passord ..."
+msgstr "skall: Sender passord ..."
 
-#, fuzzy
 msgid "shell: Sending initial line..."
-msgstr "fish: Sender innledende linje ..."
+msgstr "skall: Sender innledende linje ..."
 
-#, fuzzy
 msgid "shell: Getting host info..."
-msgstr "fish: Henter vertsinformasjon ..."
+msgstr "skall: Henter vertsinformasjon ..."
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Reading directory %s..."
-msgstr "fish: Leser mappa %s ..."
+msgstr "skall: Leser mappa %s ..."
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: store %s: sending command..."
-msgstr "fish: lagre %s: sender kommando ..."
+msgstr "skall: lagre %s: sender kommando ..."
 
-#, fuzzy
 msgid "shell: Local read failed, sending zeros"
-msgstr "fish: Lokal lesekommando mislyktes, sender nuller"
+msgstr "skall: Lokal lesekommando mislyktes, sender nuller"
 
-#, fuzzy
 msgid "shell: storing file"
-msgstr "fish: lagrer fil"
+msgstr "skall: lagrer fil"
 
 msgid "Aborting transfer..."
 msgstr "Avbryter overføring ..."
@@ -4747,6 +4738,3 @@ msgstr "Fortsett fra begynnelsen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Klarte ikke hente en lokal kopi av /ftp://some.host/editme.txt"
-
-#~ msgid "fish: Handshaking version..."
-#~ msgstr "fish: Avklarer versjon ..."

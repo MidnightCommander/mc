@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# András Tőrös <toros.andras04@gmail.com>, 2020
+# 6bdcf737f9bcb6037ecba892a70fb951_e9eeb40 <b76b5e2faba6aa74d4498ee4c87ab010_661337>, 2020
 # Mátyás Demeter <mathias.demeter@gmail.com>, 2014
 # Rezső Páder <rezso@rezso.net>, 2012-2017,2019
 # Slava Zanko <slavazanko@gmail.com>, 2011
@@ -12,9 +12,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-01-14 17:58+0300\n"
+"POT-Creation-Date: 2024-01-20 20:51+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: András Tőrös <toros.andras04@gmail.com>, 2020\n"
+"Last-Translator: 6bdcf737f9bcb6037ecba892a70fb951_e9eeb40 "
+"<b76b5e2faba6aa74d4498ee4c87ab010_661337>, 2020\n"
 "Language-Team: Hungarian (http://app.transifex.com/mc/mc/language/hu/)\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
@@ -708,7 +709,6 @@ msgid "Show mc with specified skin"
 msgstr "MC a megadott borítással"
 
 #. TRANSLATORS: don't translate keywords
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK},{ATTR}:KEYWORD2=...\n"
 "\n"
@@ -730,24 +730,6 @@ msgid ""
 "   Viewer:       viewnormal,viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 msgstr ""
-"--colors KEYWORD={FORE},{BACK},{ATTR}:KEYWORD2=...\n"
-"\n"
-"{FORE}, {BACK} és {ATTR} elhagyható, akkor az alapértelmezett lesz "
-"használva\n"
-" Keywords:\n"
-"   Általános:       errors, disabled, reverse, gauge, header\n"
-"                 input, inputmark, inputunchanged, commandlinemark\n"
-"                 bbarhotkey, bbarbutton, statusbar\n"
-"   Fájl megjelenítés: normal, selected, marked, markselect\n"
-"   Dialógus dobozok: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-"                 errdhotfocus\n"
-"   Menük:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
-"   Popup menük:  pmenunormal, pmenusel, pmenutitle\n"
-"   Szerkesztő:       editnormal, editbold, editmarked, editwhitespace,\n"
-"                 editlinestate, editbg, editframe, editframeactive\n"
-"                 editframedrag\n"
-"   Megjelenítő:       viewnormal,viewbold, viewunderline, viewselected\n"
-"   Súgó:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 
 #. TRANSLATORS: don't translate color names and attributes
 msgid ""
@@ -4390,48 +4372,42 @@ msgstr "sftp: %s listázása... (megszakítás: Ctrl-G)"
 msgid "sftp: Listing done."
 msgstr "sftp: A listázás kész."
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Disconnecting from %s"
-msgstr "Fish: lekapcsolódás a kiszolgálóról: %s"
+msgstr ""
 
-#, fuzzy
 msgid "shell: Waiting for initial line..."
-msgstr "Fish: várakozás kezdősorra..."
+msgstr ""
 
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Jelszavas azonosítás egyelőre nem lehetséges."
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Password is required for %s"
-msgstr "Fish: Jelszó kell %s azonosításához"
+msgstr ""
 
-#, fuzzy
 msgid "shell: Sending password..."
-msgstr "Fish: jelszó küldése..."
+msgstr ""
 
-#, fuzzy
 msgid "shell: Sending initial line..."
-msgstr "Fish: kezdősor küldése..."
+msgstr ""
 
-#, fuzzy
 msgid "shell: Getting host info..."
-msgstr "Fish: Gép info lekérdezés..."
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Reading directory %s..."
-msgstr "Fish: könyvtár olvasása: %s..."
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: store %s: sending command..."
-msgstr "Fish: \"%s\" tárolása: parancs küldése..."
+msgstr ""
 
-#, fuzzy
 msgid "shell: Local read failed, sending zeros"
-msgstr "Fish: nem sikerült a helyi olvasás; nullák küldése..."
+msgstr ""
 
-#, fuzzy
 msgid "shell: storing file"
-msgstr "fish: fájl tárolása"
+msgstr ""
 
 msgid "Aborting transfer..."
 msgstr "Átvitel megszakítása..."
@@ -4652,6 +4628,3 @@ msgstr "Folytatás az elejéről?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nem sikerült behozni /ftp://some.host/editme.txt helyi másolatát"
-
-#~ msgid "fish: Handshaking version..."
-#~ msgstr "Fish: verzióegyeztetés..."

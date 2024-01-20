@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-01-14 17:58+0300\n"
+"POT-Creation-Date: 2024-01-20 20:51+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: hualahyja, 2019\n"
 "Language-Team: Slovak (http://app.transifex.com/mc/mc/language/sk/)\n"
@@ -721,7 +721,6 @@ msgid "Show mc with specified skin"
 msgstr "Zobraziť mc s uvedenou témou vzhľadu"
 
 #. TRANSLATORS: don't translate keywords
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK},{ATTR}:KEYWORD2=...\n"
 "\n"
@@ -743,24 +742,6 @@ msgid ""
 "   Viewer:       viewnormal,viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 msgstr ""
-"--colors KĽÚČ_SLOVO={POPRED},{POZAD},{ATRIB}:KĽÚČ_SLOVO2=...\n"
-"\n"
-"{POPRED}, {POZAD} a {ATRIB} je možné vynechať a použijú sa predvolené\n"
-"\n"
-"Kľúčové slová:\n"
-"   Globálne:     errors, disabled, reverse, gauge, header\n"
-"                 input, inputmark, inputunchanged, commandlinemark\n"
-"                 bbarhotkey, bbarbutton, statusbar\n"
-"   Zobr. súbor.: normal, selected, marked, markselect\n"
-"   Dialóg. okná: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-"                 errdhotfocus\n"
-"   Menu:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
-"   Rolet. menu:   pmenunormal, pmenusel, pmenutitle\n"
-"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
-"                 editlinestate, editbg, editframe, editframeactive\n"
-"                 editframedrag\n"
-"   Prehliadač:    viewnormal,viewbold, viewunderline, viewselected\n"
-"   Pomocník:     helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 
 #. TRANSLATORS: don't translate color names and attributes
 msgid ""
@@ -4413,48 +4394,42 @@ msgstr "sftp: (Ctrl-G preruší) Výpis... %s"
 msgid "sftp: Listing done."
 msgstr "sftp: Výpis - hotovo."
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Disconnecting from %s"
-msgstr "fish: Odpája sa z %s"
+msgstr ""
 
-#, fuzzy
 msgid "shell: Waiting for initial line..."
-msgstr "fish: Čaká sa na inicializačný riadok..."
+msgstr ""
 
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Ľutujeme, zatiaľ nedokážeme pracovať s autentifikovanými spojeniami."
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Password is required for %s"
-msgstr "fish: %s vyžaduje heslo"
+msgstr ""
 
-#, fuzzy
 msgid "shell: Sending password..."
-msgstr "fish: Posiela sa heslo..."
+msgstr ""
 
-#, fuzzy
 msgid "shell: Sending initial line..."
-msgstr "fish: Posiela sa inicializačný riadok..."
+msgstr ""
 
-#, fuzzy
 msgid "shell: Getting host info..."
-msgstr "fish: Získavajú sa informácie o hostiteľovi"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Reading directory %s..."
-msgstr "fish: Načítava sa adresár %s..."
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: store %s: sending command..."
-msgstr "fish: store %s: posiela sa príkaz..."
+msgstr ""
 
-#, fuzzy
 msgid "shell: Local read failed, sending zeros"
-msgstr "fish: Miestne čítanie zlyhalo, posielajú sa nuly"
+msgstr ""
 
-#, fuzzy
 msgid "shell: storing file"
-msgstr "fish: ukladá sa súbor"
+msgstr ""
 
 msgid "Aborting transfer..."
 msgstr "Prerušuje sa prenos..."
@@ -4679,6 +4654,3 @@ msgstr "Pokračovať od začiatku?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nemožno stiahnuť lokálnu kópiu /ftp://some.host/editme.txt"
-
-#~ msgid "fish: Handshaking version..."
-#~ msgstr "fish: Dohaduje sa verzia..."

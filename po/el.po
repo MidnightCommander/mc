@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-01-14 17:58+0300\n"
+"POT-Creation-Date: 2024-01-20 20:51+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Efstathios Iosifidis <iefstathios@gmail.com>, 2015\n"
 "Language-Team: Greek (http://app.transifex.com/mc/mc/language/el/)\n"
@@ -4281,9 +4281,9 @@ msgstr ""
 msgid "sftp: Listing done."
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Disconnecting from %s"
-msgstr "fish: Γίνεται αποσύνδεση από %s"
+msgstr ""
 
 msgid "shell: Waiting for initial line..."
 msgstr ""
@@ -4292,36 +4292,32 @@ msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr ""
 "Λυπούμαστε, αλλά προς το παρόν συνδέσεις με χρήση κωδικού δεν υποστηρίζονται."
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Password is required for %s"
-msgstr "fish: Απαιτείται κωδικός πρόσβασης για %s"
+msgstr ""
 
-#, fuzzy
 msgid "shell: Sending password..."
-msgstr "fish: Αποστολή κωδικού πρόσβασης..."
+msgstr ""
 
 msgid "shell: Sending initial line..."
 msgstr ""
 
-#, fuzzy
 msgid "shell: Getting host info..."
-msgstr "fish: Γίνεται λήψη πληροφοριών υπολογιστή..."
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Reading directory %s..."
-msgstr "fish: Ανάγνωση φακέλου %s..."
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: store %s: sending command..."
-msgstr "fish: αποθήκευση %s: αποστολή εντολής..."
+msgstr ""
 
-#, fuzzy
 msgid "shell: Local read failed, sending zeros"
-msgstr "fish: Η τοπική ανάγνωση απέτυψε, αποστέλνονται μηδενικά"
+msgstr ""
 
-#, fuzzy
 msgid "shell: storing file"
-msgstr "fish: το αρχείο αποθηκεύεται"
+msgstr ""
 
 msgid "Aborting transfer..."
 msgstr "Ακύρωση μεταφοράς..."

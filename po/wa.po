@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-01-14 17:58+0300\n"
+"POT-Creation-Date: 2024-01-20 20:51+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
 "Language-Team: Walloon (http://app.transifex.com/mc/mc/language/wa/)\n"
@@ -4194,9 +4194,9 @@ msgstr ""
 msgid "sftp: Listing done."
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Disconnecting from %s"
-msgstr "fish: Dji m' disraloye di %s"
+msgstr ""
 
 msgid "shell: Waiting for initial line..."
 msgstr ""
@@ -4208,9 +4208,8 @@ msgstr ""
 msgid "shell: Password is required for %s"
 msgstr ""
 
-#, fuzzy
 msgid "shell: Sending password..."
-msgstr "fish: dj' evoye li scret di l' ûzeu..."
+msgstr ""
 
 msgid "shell: Sending initial line..."
 msgstr ""
@@ -4218,9 +4217,9 @@ msgstr ""
 msgid "shell: Getting host info..."
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Reading directory %s..."
-msgstr "fish: Dji lé li ridant FTP %s..."
+msgstr ""
 
 #, c-format
 msgid "shell: store %s: sending command..."
@@ -4229,9 +4228,8 @@ msgstr ""
 msgid "shell: Local read failed, sending zeros"
 msgstr ""
 
-#, fuzzy
 msgid "shell: storing file"
-msgstr "Aberwetant l' fitchî"
+msgstr ""
 
 msgid "Aborting transfer..."
 msgstr ""

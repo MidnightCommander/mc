@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-01-14 17:58+0300\n"
+"POT-Creation-Date: 2024-01-20 20:51+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Meng Pang Wang, 2023\n"
 "Language-Team: Chinese (Taiwan) (http://app.transifex.com/mc/mc/language/"
@@ -4260,48 +4260,42 @@ msgstr "sftp: (Ctrl-G 跳出) 列表... %s"
 msgid "sftp: Listing done."
 msgstr "sftp: 列表完成。"
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Disconnecting from %s"
-msgstr "fish: 結束至 %s 的連線"
+msgstr ""
 
-#, fuzzy
 msgid "shell: Waiting for initial line..."
-msgstr "fish: 等待起始化訊息"
+msgstr ""
 
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "不好意思，目前無法進行經過密碼認證的連線。"
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Password is required for %s"
-msgstr "fish: %s 要求輸入密碼"
+msgstr ""
 
-#, fuzzy
 msgid "shell: Sending password..."
-msgstr "fish: 正在送出登入密碼"
+msgstr ""
 
-#, fuzzy
 msgid "shell: Sending initial line..."
-msgstr "fish: 送出起始化訊息"
+msgstr ""
 
-#, fuzzy
 msgid "shell: Getting host info..."
-msgstr "fish: 取得主機資訊..."
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Reading directory %s..."
-msgstr "fish：正在讀取目錄 %s..."
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: store %s: sending command..."
-msgstr "fish: 儲存%s: 送出命令"
+msgstr ""
 
-#, fuzzy
 msgid "shell: Local read failed, sending zeros"
-msgstr "fish: 本地端讀取錯誤, 沒有送出"
+msgstr ""
 
-#, fuzzy
 msgid "shell: storing file"
-msgstr "fish: 儲存檔案"
+msgstr ""
 
 msgid "Aborting transfer..."
 msgstr "放棄傳輸...."
@@ -4522,6 +4516,3 @@ msgstr "從頭開始?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "無法取得本地的副本在 ftp://some.host/editme.txt"
-
-#~ msgid "fish: Handshaking version..."
-#~ msgstr "fish: 交握版本"

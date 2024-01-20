@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# Antoni Bella Pérez <antonibella5@yahoo.com>, 2017-2023
+# Antoni Bella Pérez <antonibella5@yahoo.com>, 2017-2024
 # Daniel <danicases@gmail.com>, 2011
 # Daniel <danicases@gmail.com>, 2011-2012
 # Daniel <danicases@gmail.com>, 2012
@@ -16,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-01-14 17:58+0300\n"
+"POT-Creation-Date: 2024-01-20 20:51+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>, 2017-2023\n"
+"Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>, 2017-2024\n"
 "Language-Team: Catalan (http://app.transifex.com/mc/mc/language/ca/)\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
@@ -736,7 +736,6 @@ msgid "Show mc with specified skin"
 msgstr "Mostra l'«mc» amb el tema especificat"
 
 #. TRANSLATORS: don't translate keywords
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK},{ATTR}:KEYWORD2=...\n"
 "\n"
@@ -758,24 +757,27 @@ msgid ""
 "   Viewer:       viewnormal,viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 msgstr ""
-"--colors KEYWORD={FORE},{BACK},{ATTR}:KEYWORD2=...\n"
+"--colors PARAULA_CLAU={FORE},{BACK},{ATTR}:PARAULA_CLAU_2=...\n"
 "\n"
-"{FORE}, {BACK} i {ATTR} es poden ometre i s'usarà el valor predeterminat\n"
+"{FORE}, {BACK} i {ATTR} es pot ometre i s'usarà el valor predeterminat\n"
 "\n"
 " Paraules clau:\n"
-"   Global:       errors, disabled, reverse, gauge, header\n"
-"                 input, inputmark, inputunchanged, commandlinemark\n"
-"                 bbarhotkey, bbarbutton, statusbar\n"
-"   Visor fitxer: normal, selected, marked, markselect\n"
-"   Diàlegs:      dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-"                 errdhotfocus\n"
-"   Menús:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
-"   Menús emerg:  pmenunormal, pmenusel, pmenutitle\n"
-"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
-"                 editlinestate, editbg, editframe, editframeactive\n"
-"                 editframedrag\n"
-"   Visor:        viewnormal,viewbold, viewunderline, viewselected\n"
-"   Ajuda:        helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   Global:             errors, disabled, reverse, gauge, header,\n"
+"                        input, inputmark, inputunchanged, commandlinemark,\n"
+"                        bbarhotkey, bbarbutton i statusbar.\n"
+"   Mostra els fitxers: normal, selected, marked i markselect.\n"
+"   Diàlegs:            dnormal, dfocus, dhotnormal, dhotfocus, "
+"errdhotnormal\n"
+"                        i errdhotfocus.\n"
+"   Menús:              menunormal, menuhot, menusel, menuhotsel i "
+"menuinactive.\n"
+"   Menús emergents:    pmenunormal, pmenusel i pmenutitle.\n"
+"   Editor:             editnormal, editbold, editmarked, editwhitespace,\n"
+"                        editnonprintable, editlinestate, editbg, editframe,\n"
+"                        editframeactive i editframedrag.\n"
+"   Visor:              viewnormal,viewbold, viewunderline i viewselected.\n"
+"   Ajuda:              helpnormal, helpitalic, helpbold, helplink i "
+"helpslink.\n"
 
 #. TRANSLATORS: don't translate color names and attributes
 msgid ""
@@ -1646,9 +1648,8 @@ msgstr ""
 "Un editor de text fàcil d'emprar\n"
 "escrit per al Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2024 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2023 la «Free Software Foundation»"
+msgstr "Copyright (C) 1996-2024 la Free Software Foundation"
 
 msgid "About"
 msgstr "Quant a"
@@ -2187,6 +2188,9 @@ msgid ""
 "%s\n"
 "%s"
 msgstr ""
+"No s'ha pogut canviar el directori a\n"
+"%s\n"
+"%s"
 
 msgid "Secure deletion"
 msgstr "Supressió segura"
@@ -4189,29 +4193,26 @@ msgstr ""
 "Sistema de fitxers virtual EXTFS:\n"
 "%s"
 
-#, fuzzy
 msgid ""
 "EXTFS virtual file system:\n"
 "wrong file name"
 msgstr ""
 "Sistema de fitxers virtual EXTFS:\n"
-"%s"
+"nom de fitxer incorrecte"
 
-#, fuzzy
 msgid ""
 "EXTFS virtual file system:\n"
 "wrong archive name"
 msgstr ""
 "Sistema de fitxers virtual EXTFS:\n"
-"%s"
+"nom d'arxiu incorrecte"
 
-#, fuzzy
 msgid ""
 "EXTFS virtual file system:\n"
 "cannot build command"
 msgstr ""
 "Sistema de fitxers virtual EXTFS:\n"
-"%s"
+"no s'ha pogut crear l'ordre"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4497,49 +4498,43 @@ msgstr "sftp: (Ctrl-G per a cancel·lar) s'està llistant... %s"
 msgid "sftp: Listing done."
 msgstr "sftp: el llistat s'ha completat."
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Disconnecting from %s"
-msgstr "fish: S'està desconnectant de %s"
+msgstr "intèrpret d'ordres: S'està desconnectant de %s"
 
-#, fuzzy
 msgid "shell: Waiting for initial line..."
-msgstr "fish: Està esperant a la línia inicial..."
+msgstr "intèrpret d'ordres: S'està esperant la línia inicial..."
 
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr ""
 "Ho sentim, de moment no es poden fer connexions autenticades amb contrasenya."
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Password is required for %s"
-msgstr "fish: Contrasenya requerida per %s"
+msgstr "intèrpret d'ordres: Es requereix una contrasenya per a %s"
 
-#, fuzzy
 msgid "shell: Sending password..."
-msgstr "fish: S'està enviant la contrasenya..."
+msgstr "intèrpret d'ordres: S'està enviant la contrasenya..."
 
-#, fuzzy
 msgid "shell: Sending initial line..."
-msgstr "fish: S'està enviant la línia inicial..."
+msgstr "intèrpret d'ordres: S'està enviant la línia inicial..."
 
-#, fuzzy
 msgid "shell: Getting host info..."
-msgstr "fish: S'està obtenint informació de l'amfitrió..."
+msgstr "intèrpret d'ordres: S'està rebent informació de l'amfitrió..."
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Reading directory %s..."
-msgstr "fish: S'està llegint el directori %s..."
+msgstr "intèrpret d'ordres: S'està llegint el directori %s..."
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: store %s: sending command..."
-msgstr "fish: emmagatzema %s: s'està enviant l'ordre..."
+msgstr "intèrpret d'ordres: emmagatzematge %s: s'està enviant l'ordre..."
 
-#, fuzzy
 msgid "shell: Local read failed, sending zeros"
-msgstr "fish: Ha fallat la lectura local, s'estan enviant zeros"
+msgstr "intèrpret d'ordres: La lectura local ha fallat, s'estan enviant zeros"
 
-#, fuzzy
 msgid "shell: storing file"
-msgstr "fish: s'està emmagatzemant el fitxer"
+msgstr "intèrpret d'ordres: fitxer d'emmagatzematge"
 
 msgid "Aborting transfer..."
 msgstr "S'està interrompent la transferència..."
@@ -4569,9 +4564,11 @@ msgid ""
 "%s\n"
 "doesn't look like a tar archive"
 msgstr ""
+"%s\n"
+"no sembla un arxiu tar"
 
 msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr ""
+msgstr "tar: «mc_lseek» no s'ha aturat en un límit de registre"
 
 msgid "undelfs: error"
 msgstr "undelfs: error"
@@ -4766,6 +4763,3 @@ msgstr "Voleu continuar des del començament?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "No s'ha pogut obtenir una còpia local de /ftp://algun.amfitrió/editam.txt"
-
-#~ msgid "fish: Handshaking version..."
-#~ msgstr "fish: S'està intercanviant la versió..."

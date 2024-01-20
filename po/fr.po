@@ -12,15 +12,15 @@
 # Slava Zanko <slavazanko@gmail.com>, 2011
 # 4a14a73d523224463300dea5e0502458_3dab472, 2012
 # Towinet, 2017
-# Wallon Wallon, 2022-2023
+# Wallon Wallon, 2022-2024
 # Yury V. Zaytsev <yury@shurup.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-01-14 17:58+0300\n"
+"POT-Creation-Date: 2024-01-20 20:51+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Wallon Wallon, 2022-2023\n"
+"Last-Translator: Wallon Wallon, 2022-2024\n"
 "Language-Team: French (http://app.transifex.com/mc/mc/language/fr/)\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -737,7 +737,6 @@ msgid "Show mc with specified skin"
 msgstr "Afficher mc avec le thème donné"
 
 #. TRANSLATORS: don't translate keywords
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK},{ATTR}:KEYWORD2=...\n"
 "\n"
@@ -760,22 +759,25 @@ msgid ""
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 msgstr ""
 "--colors KEYWORD={FORE},{BACK},{ATTR}:KEYWORD2=...\n"
-"{FORE}, {BACK} et {ATTR} peuvent être omis, et la valeur par défaut sera "
-"utilisée\n"
-"Mot clés :\n"
-"Global : errors, disabled, reverse, gauge, header\n"
-"input, inputmark, inputunchanged, commandlinemark\n"
-"bbarhotkey, bbarbutton, statusbar\n"
-"Affichage fichier: normal, selected, marked, markselect\n"
-"Boîtes de dialogue : dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-"errdhotfocus\n"
-"Menus : menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
-"Menus popup : pmenunormal, pmenusel, pmenutitle\n"
-"Éditeur : editnormal, editbold, editmarked, editwhitespace,\n"
-"editlinestate, editbg, editframe, editframeactive\n"
-"editframedrag\n"
-"Visionneuse : viewnormal,viewbold, viewunderline, viewselected\n"
-"Aide : helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"\n"
+"{FORE}, {BACK} et {ATTR} peuvent être omis. La valeur par défaut sera "
+"utilisée.\n"
+"\n"
+" Mots-clés:\n"
+"   Global:       errors, disabled, reverse, gauge, header\n"
+"                 input, inputmark, inputunchanged, commandlinemark\n"
+"                 bbarhotkey, bbarbutton, statusbar\n"
+"   File display: normal, selected, marked, markselect\n"
+"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"                 errdhotfocus\n"
+"   Menus:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Popup menus:  pmenunormal, pmenusel, pmenutitle\n"
+"   Editor:       editnormal, editbold, editmarked, editwhitespace, "
+"editnonprintable,\n"
+"                 editlinestate, editbg, editframe, editframeactive\n"
+"                 editframedrag\n"
+"   Viewer:       viewnormal,viewbold, viewunderline, viewselected\n"
+"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 
 #. TRANSLATORS: don't translate color names and attributes
 msgid ""
@@ -1643,9 +1645,8 @@ msgstr ""
 "Un éditeur de text facile d’utilisation.\n"
 "écrit pour Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2024 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2023 the Free Software Foundation"
+msgstr "Copyright (C) 1996-2024 the Free Software Foundation"
 
 msgid "About"
 msgstr "À propos"
@@ -4192,29 +4193,26 @@ msgstr ""
 "Système de fichiers virtuel EXTFS :\n"
 "%s"
 
-#, fuzzy
 msgid ""
 "EXTFS virtual file system:\n"
 "wrong file name"
 msgstr ""
-"Système de fichiers virtuel EXTFS :\n"
-"%s"
+"Système de fichier virtuel EXTFS :\n"
+"nom de fichier erroné"
 
-#, fuzzy
 msgid ""
 "EXTFS virtual file system:\n"
 "wrong archive name"
 msgstr ""
-"Système de fichiers virtuel EXTFS :\n"
-"%s"
+"Système de fichier virtuel EXTFS :\n"
+"mauvais nom d’archive"
 
-#, fuzzy
 msgid ""
 "EXTFS virtual file system:\n"
 "cannot build command"
 msgstr ""
-"Système de fichiers virtuel EXTFS :\n"
-"%s"
+"Système de fichier virtuel EXTFS :\n"
+"impossible de construire la commande"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4501,50 +4499,44 @@ msgstr "sftp : (Ctrl-G break) Listing... %s"
 msgid "sftp: Listing done."
 msgstr "sftp : listing effectué."
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Disconnecting from %s"
-msgstr "fish : Déconnexion de %s"
+msgstr "shell : Déconnexion de %s"
 
-#, fuzzy
 msgid "shell: Waiting for initial line..."
-msgstr "fish : attente de la première ligne..."
+msgstr "shell : En attente de la ligne initiale..."
 
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr ""
 "Désolé, nous ne pouvons pas faire de connexion authentifiée par mot de passe "
 "pour l’instant."
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Password is required for %s"
-msgstr "fish : mot de passe requis pour %s"
+msgstr "shell : Le mot de passe est nécessaire pour %s"
 
-#, fuzzy
 msgid "shell: Sending password..."
-msgstr "fish : envoi du mot de passe..."
+msgstr "shell : Envoi du mot de passe..."
 
-#, fuzzy
 msgid "shell: Sending initial line..."
-msgstr "fish : envoi de la ligne initiale..."
+msgstr "shell : Envoi de la ligne initiale..."
 
-#, fuzzy
 msgid "shell: Getting host info..."
-msgstr "fish : récupère les informations de l’hôte..."
+msgstr "shell : Obtention d’informations sur l’hôte..."
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Reading directory %s..."
-msgstr "fish : lecture du répertoire %s..."
+msgstr "shell : Lecture du répertoire %s..."
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: store %s: sending command..."
-msgstr "fish : sauve %s : envoi de la commande..."
+msgstr "shell : stocker %s : envoi de la commande..."
 
-#, fuzzy
 msgid "shell: Local read failed, sending zeros"
-msgstr "fish : échec de lecture locale, envoie de zéros"
+msgstr "shell : Échec de la lecture locale, envoi de zéros"
 
-#, fuzzy
 msgid "shell: storing file"
-msgstr "fish: enregistrement du fichier"
+msgstr "shell : stockage du fichier"
 
 msgid "Aborting transfer..."
 msgstr "Abandon du transfert..."
@@ -4771,6 +4763,3 @@ msgstr "Continuer à partir du début ?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Impossible de récupérer localement le fichier /ftp://some.host/editme.txt"
-
-#~ msgid "fish: Handshaking version..."
-#~ msgstr "fish : vérification des numéros de version..."

@@ -3,27 +3,34 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# Alex Tkachenko <alex@bcs.zp.ua>, 1998
-# Andrew V. Samoilov <sav@bcs.zp.ua>, 1999,2014
-# Evgeny Bulgakov <bgav@netvision.net.il>, 1999
-# Sergey Panov <sipan@mit.edu>, 1999
-# Valek Filippov <frob@df.ru>, 2000
-# Anton Sergeevich Chumak <nightfast@yahoo.co.uk>, 2005
-# Andrew Borodin <aborodin@vmail.ru>, 2009-2012
-# Slava Zanko <slavazanko@gmail.com>, 2009,2011
-# Ilia Maslakov <il.smind@gmail.com>, 2009
-# NaiLi (aka jamesjames) Rootaerc <theism@mail.ru>, 2012
+# Andrew Borodin <aborodin@vmail.ru>, 2011
 # AlexL <loginov.alex.valer@gmail.com>, 2015-2020
-# Dimitriy Ryazantcev <DJm00n@mail.ru>, 2015
-# Simple88, 2016
-# Piotr Drąg <piotrdrag@gmail.com>, 2018
-# Pavel Suravezhkin, 2022
+# Alex Tkachenko <alex@bcs.zp.ua>, 1998
+# and Alex Tkachenko <alex@bcs.zp.ua>, 1998
 # Andrei Stepanov, 2023
+# Andrei Stepanov, 2023
+# Andrew Borodin <aborodin@vmail.ru>, 2009-2012
+# Andrew V. Samoilov <sav@bcs.zp.ua>, 1999,2014
+# Anton Sergeevich Chumak <nightfast@yahoo.co.uk>, 2005
+# Dimitriy Ryazantcev <DJm00n@mail.ru>, 2015
+# Evgeny Bulgakov <bgav@netvision.net.il>, 1999
+# Ilia Maslakov <il.smind@gmail.com>, 2009
+# Mr GreyWolf, 2016
+# Mr.GreyWolf, 2016
+# NaiLi (aka jamesjames) Rootaerc <theism@mail.ru>, 2012
+# Pavel Suravezhkin, 2022
+# Pavel Suravezhkin, 2022
+# Piotr Drąg <piotrdrag@gmail.com>, 2018
+# Sergey Panov <sipan@mit.edu>, 1999
+# Simple88, 2016
+# Simple88, 2016
+# Slava Zanko <slavazanko@gmail.com>, 2009,2011
+# Valek Filippov <frob@df.ru>, 2000
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-01-14 17:58+0300\n"
+"POT-Creation-Date: 2024-01-20 20:51+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Andrei Stepanov, 2023\n"
 "Language-Team: Russian (http://app.transifex.com/mc/mc/language/ru/)\n"
@@ -31,9 +38,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
-"%100>=11 && n%100<=14)? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -182,7 +189,7 @@ msgid "True color not supported with ncurses."
 msgstr "True Color не поддерживается ncurses."
 
 msgid "Your terminal doesn't even seem to support 256 colors."
-msgstr "Кажется, ваш терминал не поддерживает даже 256 цветов."
+msgstr "Похоже, ваш терминал не поддерживает даже 256 цветов."
 
 msgid "True color not supported in this slang version."
 msgstr "True Color не поддерживается в этой версии slang."
@@ -740,7 +747,6 @@ msgid "Show mc with specified skin"
 msgstr "Показать mc с указанным скином"
 
 #. TRANSLATORS: don't translate keywords
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK},{ATTR}:KEYWORD2=...\n"
 "\n"
@@ -762,28 +768,6 @@ msgid ""
 "   Viewer:       viewnormal,viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 msgstr ""
-"--colors КЛЮЧЕВОЕ_СЛОВО={ТЕКСТ},{ФОН},{АТРИБУТ}:КЛЮЧЕВОЕ_СЛОВО2=...\n"
-"\n"
-"{ТЕКСТ}, {ФОН} и {АТРИБУТ} можно опустить, чтобы использовать значения по "
-"умолчанию\n"
-"\n"
-"Ключевые слова:\n"
-"   Общие:              errors, disabled, reverse, gauge, header\n"
-"                       input, inputmark, inputunchanged, commandlinemark\n"
-"                       bbarhotkey, bbarbutton, statusbar\n"
-"   Отображение файлов: normal, selected, marked, markselect\n"
-"   Диалоги:            dnormal, dfocus, dhotnormal, dhotfocus, "
-"errdhotnormal,\n"
-"                       errdhotfocus\n"
-"   Меню:               menunormal, menuhot, menusel, menuhotsel, "
-"menuinactive\n"
-"   Всплывающие меню:   pmenunormal, pmenusel, pmenutitle\n"
-"   Редактор:           editnormal, editbold, editmarked, editwhitespace,\n"
-"                       editlinestate, editbg, editframe, editframeactive\n"
-"                       editframedrag\n"
-"   Просмотрщик:        viewnormal, viewbold, viewunderline, viewselected\n"
-"   Справка:            helpnormal, helpitalic, helpbold, helplink, "
-"helpslink\n"
 
 #. TRANSLATORS: don't translate color names and attributes
 msgid ""
@@ -974,7 +958,7 @@ msgid "ButtonBar|Help"
 msgstr "Помощь"
 
 msgid "ButtonBar|Save"
-msgstr "Сохранить"
+msgstr "Сохран"
 
 msgid "ButtonBar|Edit"
 msgstr "Правка"
@@ -986,7 +970,7 @@ msgid "ButtonBar|Search"
 msgstr "Поиск"
 
 msgid "ButtonBar|Options"
-msgstr "Настройки"
+msgstr "Настр"
 
 msgid "ButtonBar|Quit"
 msgstr "Выход"
@@ -1543,10 +1527,10 @@ msgid "&None"
 msgstr "Не&т"
 
 msgid "&Dynamic paragraphing"
-msgstr "Динамический"
+msgstr "&Динамический"
 
 msgid "Type &writer wrap"
-msgstr "Автоматический перенос"
+msgstr "&Автоматический перенос"
 
 msgid "Wrap mode"
 msgstr "Режим переноса строк"
@@ -1570,13 +1554,13 @@ msgid "Other options"
 msgstr "Прочие настройки"
 
 msgid "&Return does autoindent"
-msgstr "&Автоотступ \"Вводом\""
+msgstr "А&втоотступ \"Вводом\""
 
 msgid "Confir&m before saving"
-msgstr "П&одтверждать запись файла"
+msgstr "Подтверждать запись &файла"
 
 msgid "Save file &position"
-msgstr "Со&хранять позицию в файле"
+msgstr "Сох&ранять позицию в файле"
 
 msgid "&Visible trailing spaces"
 msgstr "Отображать проб&елы"
@@ -1651,9 +1635,8 @@ msgstr ""
 "Текстовый редактор с дружественным интерфейсом пользователя.\n"
 "Создан для Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2024 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2023 the Free Software Foundation"
+msgstr ""
 
 msgid "About"
 msgstr "О программе"
@@ -1926,7 +1909,7 @@ msgid "S&ingle press"
 msgstr "Одино&чное нажатие"
 
 msgid "Timeout:"
-msgstr "Интервал:"
+msgstr "Период:"
 
 msgid "Pause after run"
 msgstr "Пауза после выполнения"
@@ -1983,10 +1966,10 @@ msgid "Case &insensitive"
 msgstr "Без &учёта регистра"
 
 msgid "Use panel sort mo&de"
-msgstr "&Использовать сортировку панели"
+msgstr "И&спользовать сортировку панели"
 
 msgid "Show mi&ni-status"
-msgstr "Показывать &мини-статус"
+msgstr "&Показывать строку состояния"
 
 msgid "Use SI si&ze units"
 msgstr "Вывод в единицах &СИ"
@@ -2004,7 +1987,7 @@ msgid "&Fast dir reload"
 msgstr "&Быстрая загрузка каталога"
 
 msgid "Ma&rk moves down"
-msgstr "&Отметка перемещает курсор"
+msgstr "Отметка переме&щает курсор"
 
 msgid "Re&verse files only"
 msgstr "Обрат&ить только файлы"
@@ -2069,22 +2052,22 @@ msgid "&Long file list"
 msgstr "&Расширенный"
 
 msgid "&User defined:"
-msgstr "&Определённый пользователем"
+msgstr "&Заданный пользователем:"
 
 msgid "columns"
 msgstr "столбцы"
 
 msgid "User &mini status"
-msgstr "Строка &мини-статуса в формате пользователя"
+msgstr "&Пользовательская строка состояния"
 
 msgid "Listing format"
 msgstr "Формат списка файлов"
 
 msgid "Executable &first"
-msgstr "Исполняемые &вначале"
+msgstr "Сперва испо&лняемые"
 
 msgid "&Reverse"
-msgstr "&Обратный"
+msgstr "Обра&тный"
 
 msgid "Sort order"
 msgstr "Порядок сортировки"
@@ -2106,7 +2089,7 @@ msgid "Confirmation|Di&rectory hotlist delete"
 msgstr "Удаление списка &каталогов"
 
 msgid "Confirmation|&History cleanup"
-msgstr "&Очистка истории"
+msgstr "О&чистка истории"
 
 msgid "Confirmation"
 msgstr "Подтверждение"
@@ -2192,6 +2175,9 @@ msgid ""
 "%s\n"
 "%s"
 msgstr ""
+"Не удалось сменить каталог на\n"
+"%s\n"
+"%s"
 
 msgid "Secure deletion"
 msgstr "Надёжное удаление"
@@ -2453,7 +2439,7 @@ msgid "&Size only"
 msgstr "По &размеру"
 
 msgid "&Thorough"
-msgstr "По&байтный"
+msgstr "Поб&айтный"
 
 msgid ""
 "Both panels should be in the listing mode\n"
@@ -2508,11 +2494,11 @@ msgstr "Настройка"
 
 #, c-format
 msgid "Setup saved to %s"
-msgstr "Параметры сохранены в %s"
+msgstr "Настройки сохранены в %s"
 
 #, c-format
 msgid "Unable to save setup to %s"
-msgstr "Не удалось сохранить параметры в %s"
+msgstr "Не удалось сохранить настройки в %s"
 
 msgid "Cannot execute commands on non-local filesystems"
 msgstr "Не удалось выполнить команды на нелокальных файловых системах"
@@ -2618,7 +2604,7 @@ msgid ""
 "Cannot stat hardlink source file \"%s\"\n"
 "%s"
 msgstr ""
-"Не удалось получить свойства исходного файла жёст. ссылки\"%s\"\n"
+"Не удалось получить свойства исходного файла жёст. ссылки \"%s\"\n"
 "%s"
 
 #, c-format
@@ -3082,13 +3068,13 @@ msgid "&Info"
 msgstr "Инфо&рмация"
 
 msgid "&Tree"
-msgstr "Дерев&о"
+msgstr "&Дерево"
 
 msgid "&Listing format..."
 msgstr "Фор&мат списка..."
 
 msgid "&Sort order..."
-msgstr "Порядок &сортировки..."
+msgstr "Порядок сор&тировки..."
 
 msgid "&Filter..."
 msgstr "&Фильтр..."
@@ -3109,7 +3095,7 @@ msgid "Paneli&ze"
 msgstr "Па&нелизация"
 
 msgid "&Rescan"
-msgstr "&Перепроверить"
+msgstr "&Обновить"
 
 msgid "&View"
 msgstr "П&росмотр"
@@ -3337,7 +3323,7 @@ msgid "A&ll charsets"
 msgstr "Вс&е кодировки"
 
 msgid "Fir&st hit"
-msgstr "До первого в&хождения"
+msgstr "До первого вхо&ждения"
 
 msgid "Find File"
 msgstr "Поиск файла"
@@ -3483,7 +3469,7 @@ msgid "No node information"
 msgstr "Нет информации об узле"
 
 msgid "Free nodes:"
-msgstr "Свободно узлов:"
+msgstr "Своб. узлов:"
 
 msgid "No space information"
 msgstr "Нет информации о пространстве"
@@ -3509,7 +3495,7 @@ msgstr "ФС: %s"
 
 #, c-format
 msgid "Accessed:   %s"
-msgstr "Обращение: %s"
+msgstr "Доступ: %s"
 
 #, c-format
 msgid "Modified:   %s"
@@ -3650,7 +3636,7 @@ msgid "sort|m"
 msgstr "м"
 
 msgid "&Modify time"
-msgstr "Время &правки"
+msgstr "Дата &правки"
 
 #. TRANSLATORS: one single character to represent 'Access time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -3658,7 +3644,7 @@ msgid "sort|a"
 msgstr "д"
 
 msgid "&Access time"
-msgstr "Время &доступа"
+msgstr "Дата &доступа"
 
 #. TRANSLATORS: one single character to represent 'Change time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -3666,7 +3652,7 @@ msgid "sort|h"
 msgstr "п"
 
 msgid "C&hange time"
-msgstr "В&ремя правки атрибутов"
+msgstr "Дата &смены"
 
 msgid "Perm"
 msgstr "Права"
@@ -3724,7 +3710,7 @@ msgid "Unknown tag on display format:"
 msgstr "Неизвестный тег в формате отображения:"
 
 msgid "&Files only"
-msgstr "Только файлы"
+msgstr "Только &файлы"
 
 msgid "&Case sensitive"
 msgstr "С учётом ре&гистра"
@@ -3834,7 +3820,7 @@ msgid "ButtonBar|Dynamc"
 msgstr "Динамч"
 
 msgid "ButtonBar|Rescan"
-msgstr "Пересм"
+msgstr "Обновить"
 
 msgid "ButtonBar|Forget"
 msgstr "Забыть"
@@ -3873,7 +3859,7 @@ msgid "Learn keys"
 msgstr "Определение клавиш"
 
 msgid "Teach me a key"
-msgstr "Обучите меня клавише"
+msgstr "Привязка клавиши"
 
 #, c-format
 msgid ""
@@ -3928,9 +3914,9 @@ msgid ""
 "which keys are not marked with OK. Press space on the missing\n"
 "key, or click with the mouse to define it. Move around with Tab."
 msgstr ""
-"Нажмите все перечисленные выше клавиши. После нажатий найдите,\n"
-"какие клавиши не имеют пометки \"OK\". Для обучения клавише выберите\n"
-"её при помощи Tab или мышкой и нажмите пробел."
+"Нажмите все перечисленные выше клавиши. После найдите\n"
+"клавиши без пометки \"OK\". Для привязки клавиши выберите\n"
+"её через Tab и нажмите пробел, или щёлкните мышкой."
 
 #, c-format
 msgid ""
@@ -4197,29 +4183,26 @@ msgstr ""
 "Виртуальная файловая система EXTFS:\n"
 "%s"
 
-#, fuzzy
 msgid ""
 "EXTFS virtual file system:\n"
 "wrong file name"
 msgstr ""
 "Виртуальная файловая система EXTFS:\n"
-"%s"
+"неправильное имя файла"
 
-#, fuzzy
 msgid ""
 "EXTFS virtual file system:\n"
 "wrong archive name"
 msgstr ""
 "Виртуальная файловая система EXTFS:\n"
-"%s"
+"неправильное имя архива"
 
-#, fuzzy
 msgid ""
 "EXTFS virtual file system:\n"
 "cannot build command"
 msgstr ""
 "Виртуальная файловая система EXTFS:\n"
-"%s"
+"не удаётся собрать команду"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4500,48 +4483,42 @@ msgstr "sftp: чтение списка файлов (прерывание по 
 msgid "sftp: Listing done."
 msgstr "sftp: Чтение списка файлов завершено."
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Disconnecting from %s"
-msgstr "fish: отсоединение от %s"
+msgstr "shell: Отключение от %s"
 
-#, fuzzy
 msgid "shell: Waiting for initial line..."
-msgstr "fish: ожидается начальная строка..."
+msgstr "shell: Ожидание начальное строки..."
 
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Извините, не удалось создать авторизованные паролем соединения."
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Password is required for %s"
-msgstr "fish: требуется пароль для %s"
+msgstr "shell: Требуется пароль для %s"
 
-#, fuzzy
 msgid "shell: Sending password..."
-msgstr "fish: посылается пароль..."
+msgstr "shell: Отправляется пароль..."
 
-#, fuzzy
 msgid "shell: Sending initial line..."
-msgstr "fish: посылается начальная строка..."
+msgstr "shell: Отправляется начальная строка..."
 
-#, fuzzy
 msgid "shell: Getting host info..."
-msgstr "fish: собирается информация об удалённой машине..."
+msgstr "shell: Получение данных хоста..."
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Reading directory %s..."
-msgstr "fish: Чтение каталога %s..."
+msgstr "shell: Чтение каталога %s..."
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: store %s: sending command..."
-msgstr "fish: запись %s: посылается команда..."
+msgstr "shell: хранилище %s: отправляется команда..."
 
-#, fuzzy
 msgid "shell: Local read failed, sending zeros"
-msgstr "fish: сбой локального чтения, посылаются нули"
+msgstr "shell: Локальное чтение не удалось, отправляются нули"
 
-#, fuzzy
 msgid "shell: storing file"
-msgstr "fish: запись файла"
+msgstr "shell: сохранение файла"
 
 msgid "Aborting transfer..."
 msgstr "Прерывание передачи..."
@@ -4571,9 +4548,11 @@ msgid ""
 "%s\n"
 "doesn't look like a tar archive"
 msgstr ""
+"%s\n"
+"не похож на архив tar"
 
 msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr ""
+msgstr "tar: mc_lseek не остановился границе записи"
 
 msgid "undelfs: error"
 msgstr "undelfs: ошибка"
@@ -4766,6 +4745,3 @@ msgstr "Продолжить с начала?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не удалось получить локальную копию /ftp://some.host/editme.txt"
-
-#~ msgid "fish: Handshaking version..."
-#~ msgstr "fish: версия подтверждения связи..."

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-01-14 17:58+0300\n"
+"POT-Creation-Date: 2024-01-20 20:51+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Miguel Anxo Bouzada <mbouzada@gmail.com>, "
 "2012,2014-2015,2019\n"
@@ -723,7 +723,6 @@ msgid "Show mc with specified skin"
 msgstr "Mostrar mc co tema especificado"
 
 #. TRANSLATORS: don't translate keywords
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK},{ATTR}:KEYWORD2=...\n"
 "\n"
@@ -745,28 +744,6 @@ msgid ""
 "   Viewer:       viewnormal,viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 msgstr ""
-"--colors CONTEXTO={FRENTE},{FONDO},{ATRIBUTOS}:CONTEXTO2=...\n"
-"\n"
-"{FRENTE}, {FONDO} e {ATRIBUTOS}poden omitirse, empregarase o valor "
-"predeterminado\n"
-"\n"
-" Contextos:\n"
-"   Globais:            errors, disabled, reverse, gauge, header\n"
-"                       input, inputmark, inputunchanged, commandlinemark\n"
-"                       bbarhotkey, bbarbutton, statusbar\n"
-"   Visor de ficheiros: normal, selected, marked, markselect\n"
-"   Diálogos:           dnormal, dfocus, dhotnormal, dhotfocus, "
-"errdhotnormal,\n"
-"                       errdhotfocus\n"
-"   Menús:              menunormal, menuhot, menusel, menuhotsel, "
-"menuinactive\n"
-"   Menús emerxentes:   pmenunormal, pmenusel, pmenutitle\n"
-"   Editor:             editnormal, editbold, editmarked, editwhitespace,\n"
-"                       editlinestate, editbg, editframe, editframeactive\n"
-"                       editframedrag\n"
-"   Visor:              viewnormal,viewbold, viewunderline, viewselected\n"
-"   Axuda:              helpnormal, helpitalic, helpbold, helplink, "
-"helpslink\n"
 
 #. TRANSLATORS: don't translate color names and attributes
 msgid ""
@@ -4414,48 +4391,42 @@ msgstr "sftp: (Ctrl-G interrompe) Listado... %s"
 msgid "sftp: Listing done."
 msgstr "sftp: Feito o listado."
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Disconnecting from %s"
-msgstr "fish: desconectando de %s"
+msgstr ""
 
-#, fuzzy
 msgid "shell: Waiting for initial line..."
-msgstr "fish: esperando liña de inicio..."
+msgstr ""
 
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Síntoo, as conexións con contrasinal aínda non son posíbeis."
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Password is required for %s"
-msgstr "fish: precisase contrasinal para %s"
+msgstr ""
 
-#, fuzzy
 msgid "shell: Sending password..."
-msgstr "fish: enviando contrasinal de usuario..."
+msgstr ""
 
-#, fuzzy
 msgid "shell: Sending initial line..."
-msgstr "fish: enviando liña de inicio..."
+msgstr ""
 
-#, fuzzy
 msgid "shell: Getting host info..."
-msgstr "fish: obtendo información do servidor..."
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Reading directory %s..."
-msgstr "fish: lendo o directorio %s..."
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: store %s: sending command..."
-msgstr "fish: gardar %s: enviando orde..."
+msgstr ""
 
-#, fuzzy
 msgid "shell: Local read failed, sending zeros"
-msgstr "fish: fallo local de lectura, enviando ceros"
+msgstr ""
 
-#, fuzzy
 msgid "shell: storing file"
-msgstr "fish: gardando ficheiro"
+msgstr ""
 
 msgid "Aborting transfer..."
 msgstr "Interrompendo transferencia..."
@@ -4680,6 +4651,3 @@ msgstr "Continuar desde o principio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Non é posíbel obter unha copia local de /ftp://some.host/editme.txt"
-
-#~ msgid "fish: Handshaking version..."
-#~ msgstr "fish: negociando versión..."

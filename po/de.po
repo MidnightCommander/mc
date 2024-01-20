@@ -6,7 +6,7 @@
 # Atha Translate, 2016
 # Benjamin M. Berwien <alt.ji-f7q3y0v@courriel.fr.nf>, 2023
 # cheese <cheese@nosuchhost.net>, 2016
-# Ettore Atalan <atalanttore@googlemail.com>, 2015-2023
+# Ettore Atalan <atalanttore@googlemail.com>, 2015-2024
 # Fabian Affolter <fab@fedoraproject.org>, 2012-2013
 # Johannes Hellmuth <johannes.hellmuth@gmail.com>, 2020
 # Karsten <waldstadt@web.de>, 2016
@@ -21,9 +21,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-01-14 17:58+0300\n"
+"POT-Creation-Date: 2024-01-20 20:51+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Benjamin M. Berwien <alt.ji-f7q3y0v@courriel.fr.nf>, 2023\n"
+"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>, 2015-2024\n"
 "Language-Team: German (http://app.transifex.com/mc/mc/language/de/)\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -547,7 +547,7 @@ msgstr ""
 "%s"
 
 msgid "Cannot close pipe descriptor (p == NULL)"
-msgstr "Kann Pipe Deskriptor nicht schliessen (p == NULL)"
+msgstr "Kann Pipe-Deskriptor nicht schließen (p == NULL)"
 
 #, c-format
 msgid ""
@@ -740,7 +740,6 @@ msgid "Show mc with specified skin"
 msgstr "MC mit dem angegebenen Skin anzeigen"
 
 #. TRANSLATORS: don't translate keywords
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK},{ATTR}:KEYWORD2=...\n"
 "\n"
@@ -762,25 +761,6 @@ msgid ""
 "   Viewer:       viewnormal,viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 msgstr ""
-"--colors KEYWORD={FORE},{BACK},{ATTR}:KEYWORD2=...\n"
-"\n"
-"{FORE}, {BACK} und {ATTR} kann weggelassen werden und der Standardwert wird "
-"verwendet\n"
-"\n"
-" Schlüsselwörter:\n"
-"   Global:       errors, disabled, reverse, gauge, header\n"
-"                 input, inputmark, inputunchanged, commandlinemark\n"
-"                 bbarhotkey, bbarbutton, statusbar\n"
-"   Datei-Anzeiger: normal, selected, marked, markselect\n"
-"   Dialogboxen: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-"                 errdhotfocus\n"
-"   Menü:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
-"   Pop-up-Menü:  pmenunormal, pmenusel, pmenutitle\n"
-"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
-"                 editlinestate, editbg, editframe, editframeactive\n"
-"                 editframedrag\n"
-"   Betrachter:       viewnormal, viewbold, viewunderline, viewselected\n"
-"   Hilfe:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 
 #. TRANSLATORS: don't translate color names and attributes
 msgid ""
@@ -1233,7 +1213,7 @@ msgstr "Sortierung ausführen"
 
 msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr ""
-"Gib Sortierungs-Optionen ein (siehe sort(1) manpage), getrennt durch "
+"Geben Sie Sortieroptionen ein (siehe sort(1) manpage), getrennt durch "
 "Leerzeichen:"
 
 msgid "Sort"
@@ -1650,9 +1630,8 @@ msgstr ""
 "Ein benutzerfreundlicher Texteditor,\n"
 "geschrieben für Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2024 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2023 the Free Software Foundation"
+msgstr "Copyright (C) 1996-2024 the Free Software Foundation"
 
 msgid "About"
 msgstr "Über"
@@ -2190,6 +2169,9 @@ msgid ""
 "%s\n"
 "%s"
 msgstr ""
+"Kann Verzeichnis nicht wechseln zu\n"
+"%s\n"
+"%s"
 
 msgid "Secure deletion"
 msgstr "Sicheres Löschen"
@@ -4189,29 +4171,24 @@ msgstr ""
 "Virtuelles Dateisystem EXTFS:\n"
 "%s"
 
-#, fuzzy
 msgid ""
 "EXTFS virtual file system:\n"
 "wrong file name"
 msgstr ""
 "Virtuelles Dateisystem EXTFS:\n"
-"%s"
+"falscher Dateiname"
 
-#, fuzzy
 msgid ""
 "EXTFS virtual file system:\n"
 "wrong archive name"
 msgstr ""
 "Virtuelles Dateisystem EXTFS:\n"
-"%s"
+"falscher Archivname"
 
-#, fuzzy
 msgid ""
 "EXTFS virtual file system:\n"
 "cannot build command"
 msgstr ""
-"Virtuelles Dateisystem EXTFS:\n"
-"%s"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4219,11 +4196,11 @@ msgstr "Warnung: Kann Verzeichnis \"%s\" nicht öffnen\n"
 
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
-msgstr "ftpfs: Trenne von %s"
+msgstr "ftpfs: Trennen der Verbindung von %s"
 
 #, c-format
 msgid "FTP: Password required for %s"
-msgstr "FTP: Passwort benötigt für %s"
+msgstr "FTP: Passwort ist erforderlich für %s"
 
 msgid "ftpfs: sending login name"
 msgstr "ftpfs: Sende Loginnamen"
@@ -4272,7 +4249,7 @@ msgstr "Warte bis zum nächsten Versuch... %d (Strg+G zum Abbrechen)"
 
 #, c-format
 msgid "ftpfs: could not make address-to-name translation: %s"
-msgstr "ftpfs: Adresse-zu-Name Übersetzung fehlgeschlagen: %s"
+msgstr "ftpfs: Adresse-zu-Name-Übersetzung fehlgeschlagen: %s"
 
 #, c-format
 msgid "ftpfs: try reconnect to server, attempt %u"
@@ -4280,7 +4257,7 @@ msgstr "ftpfs: versuche nochmals mit Server zu verbinden, Anlauf %u"
 
 #, c-format
 msgid "ftpfs: could not get socket name: %s"
-msgstr "ftpfs: konnte Socket-Name nicht auslesen: %s"
+msgstr "ftpfs: konnte Socket-Namen nicht auslesen: %s"
 
 msgid "ftpfs: could not reconnect to server"
 msgstr "ftpfs: Verbindung zum Server konnte nicht wiederhergestellt werden"
@@ -4388,7 +4365,9 @@ msgid "sftp: %s"
 msgstr "sftp: %s"
 
 msgid "sftp: failed to convert remote host IP address into text form"
-msgstr "sftp: Fehler beim Konvertieren der Remote Host IP-Adresse in Textform"
+msgstr ""
+"sftp: Konvertierung der IP-Adresse des entfernten Hosts in Textform "
+"fehlgeschlagen"
 
 #, c-format
 msgid "sftp: making connection to %s"
@@ -4402,10 +4381,10 @@ msgid "sftp: connection to server failed: %s"
 msgstr "sftp: Verbindung zum Server fehlgeschlagen: %s"
 
 msgid "sftp: found host key of unsupported type: RSA1"
-msgstr "sftp: Host-Key gefunden, aber nicht unterstützter Typ: RSA1"
+msgstr "sftp: Hostschlüssel von nicht unterstütztem Typ gefunden: RSA1"
 
 msgid "sftp: unknown host key type:"
-msgstr "sftp: unbekannter Host-Key Typ:"
+msgstr "sftp: unbekannter Hostschlüsseltyp:"
 
 #, c-format
 msgid ""
@@ -4418,14 +4397,15 @@ msgstr ""
 "zur Liste der bekannten Hosts."
 
 msgid "sftp: cannot get the remote host key"
-msgstr "sftp: bekomme keinen Remote Host-Key "
+msgstr "sftp: kann den Schlüssel des entfernten Hosts nicht erhalten"
 
 msgid "sftp: unsupported key type, can't check remote host key"
 msgstr ""
-"sftp: nicht unterstützter Key-Typ, kann Remote Host-Key nicht überprüfen"
+"sftp: nicht unterstützter Schlüsseltyp, kann den Schlüssel des entfernten "
+"Hosts nicht überprüfen"
 
 msgid "sftp: can't compute host key fingerprint hash"
-msgstr "sftp: kann Host-Key Fingerprint-Hash nicht berechnen"
+msgstr "sftp: kann den Fingerprint-Hash des Hostschlüssels nicht berechnen"
 
 #, c-format
 msgid ""
@@ -4439,9 +4419,10 @@ msgstr ""
 "Die Authentizität des Hosts\n"
 "%s (%s)\n"
 "kann nicht festgestellt werden!\n"
-"%s Host-Key Fingerprint-Hash ist\n"
+"%s Schlüssel-Fingerprint-Hash ist\n"
 "SHA1:%s.\n"
-"Willst Du ihn zur Known-Hosts-Liste hinzufügen und weiter verbinden?"
+"Möchten Sie ihn in die Liste der bekannten Hosts aufnehmen und die "
+"Verbindung fortsetzen?"
 
 #, c-format
 msgid ""
@@ -4491,50 +4472,44 @@ msgstr "sftp: Auflisten... %s (Strg+G zum Unterbrechen)"
 msgid "sftp: Listing done."
 msgstr "sftp: Auflisten beendet."
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Disconnecting from %s"
-msgstr "fish: Trenne von %s"
+msgstr "shell: Trennen der Verbindung von %s"
 
-#, fuzzy
 msgid "shell: Waiting for initial line..."
-msgstr "fish: Warte auf erste Zeile..."
+msgstr ""
 
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr ""
 "Entschuldigung, aber wir können momentan noch keine passwortgesicherten\n"
 "Verbindungen benutzen."
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Password is required for %s"
-msgstr "fish: Passwort benötigt für %s"
+msgstr "shell: Passwort ist erforderlich für %s"
 
-#, fuzzy
 msgid "shell: Sending password..."
-msgstr "fish: Sende Passwort..."
+msgstr "Shell: Passwort wird gesendet..."
 
-#, fuzzy
 msgid "shell: Sending initial line..."
-msgstr "fish: Sende erste Zeile..."
+msgstr ""
 
-#, fuzzy
 msgid "shell: Getting host info..."
-msgstr "fish: Hole Hostinformation..."
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Reading directory %s..."
-msgstr "fish: Lese Verzeichnis %s..."
+msgstr "Shell: Verzeichnis %s wird gelesen..."
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: store %s: sending command..."
-msgstr "fish: Speichere %s: Sende Befehl..."
+msgstr ""
 
-#, fuzzy
 msgid "shell: Local read failed, sending zeros"
-msgstr "fish: Lokales Lesen fehlgeschlagen, sende Nullen"
+msgstr ""
 
-#, fuzzy
 msgid "shell: storing file"
-msgstr "fish: Datei speichern"
+msgstr "shell: Datei speichern"
 
 msgid "Aborting transfer..."
 msgstr "Breche Transfer ab..."
@@ -4564,9 +4539,11 @@ msgid ""
 "%s\n"
 "doesn't look like a tar archive"
 msgstr ""
+"%s\n"
+"sieht nicht wie ein tar-Archiv aus"
 
 msgid "tar: mc_lseek not stopped at a record boundary"
-msgstr ""
+msgstr "tar: mc_lseek hält nicht an einer Satzgrenze an"
 
 msgid "undelfs: error"
 msgstr "undelfs: Fehler"
@@ -4759,6 +4736,3 @@ msgstr "Am Anfang fortsetzen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kann lokale Kopie von /ftp://some.host/editme.txt nicht erstellen"
-
-#~ msgid "fish: Handshaking version..."
-#~ msgstr "fish: Tausche Versionsnummer aus..."

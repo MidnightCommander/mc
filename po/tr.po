@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-01-14 17:58+0300\n"
+"POT-Creation-Date: 2024-01-20 20:51+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Mehmet Akif 9oglu, 2023\n"
 "Language-Team: Turkish (http://app.transifex.com/mc/mc/language/tr/)\n"
@@ -727,7 +727,6 @@ msgid "Show mc with specified skin"
 msgstr "Mc'yi belirtilen önyüz ile göster"
 
 #. TRANSLATORS: don't translate keywords
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK},{ATTR}:KEYWORD2=...\n"
 "\n"
@@ -749,25 +748,6 @@ msgid ""
 "   Viewer:       viewnormal,viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 msgstr ""
-"--colors KEYWORD={FORE},{BACK},{ATTR}:KEYWORD2=...\n"
-"\n"
-"{FORE}, {BACK} ve {ATTR} kaldırılabilir, ve varsayılan kullanılacaktır\n"
-"\n"
-" Keywords:\n"
-"   Genel:       errors, disabled, reverse, gauge, header\n"
-"                 input, inputmark, inputunchanged, commandlinemark\n"
-"                 bbarhotkey, bbarbutton, statusbar\n"
-"   Dosya görüntüsü: normal, selected, marked, markselect\n"
-"   İletişim kutucukları: dnormal, dfocus, dhotnormal, dhotfocus, "
-"errdhotnormal,\n"
-"                 errdhotfocus\n"
-"   Menüler:         menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
-"   Açılır pencere menüleri: pmenunormal, pmenusel, pmenutitle\n"
-"   Düzenleyici:  editnormal, editbold, editmarked, editwhitespace,\n"
-"                 editlinestate, editbg, editframe, editframeactive\n"
-"                 editframedrag\n"
-"   Görüntüleyici: viewnormal,viewbold, viewunderline, viewselected\n"
-"   Yardım:       helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 
 #. TRANSLATORS: don't translate color names and attributes
 msgid ""
@@ -1638,9 +1618,8 @@ msgstr ""
 "Kullanıcı dostu bir metin düzenleyici\n"
 "Midnight Commander için yazıldı"
 
-#, fuzzy
 msgid "Copyright (C) 1996-2024 the Free Software Foundation"
-msgstr "Telif Hakkı (C) 1996-2023 Özgür Yazılım Vakfı"
+msgstr ""
 
 msgid "About"
 msgstr "Hakkında"
@@ -4420,49 +4399,43 @@ msgstr "sftp: (kesmek için Ctrl-G) Listeleniyor... %s"
 msgid "sftp: Listing done."
 msgstr "sftp: Listeleme yapıldı."
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Disconnecting from %s"
-msgstr "fish: %s bağlantısı kapanıyor"
+msgstr ""
 
-#, fuzzy
 msgid "shell: Waiting for initial line..."
-msgstr "fish: Kendi satırı için bekliyor..."
+msgstr ""
 
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr ""
 "Üzgünüm, şimdilik parola ile kimlik bildirimi yapılan bağlantılar yapılamıyor"
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Password is required for %s"
-msgstr "fish: %s için parola gerekli"
+msgstr ""
 
-#, fuzzy
 msgid "shell: Sending password..."
-msgstr "fish: Parola gönderimi..."
+msgstr ""
 
-#, fuzzy
 msgid "shell: Sending initial line..."
-msgstr "fish: Satır gönderimi..."
+msgstr ""
 
-#, fuzzy
 msgid "shell: Getting host info..."
-msgstr "fish: İstemci bilgisi alınıyor"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Reading directory %s..."
-msgstr "fish: %s dizini okunuyor..."
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: store %s: sending command..."
-msgstr "fish: %s kaydet: komut gönderiliyor..."
+msgstr ""
 
-#, fuzzy
 msgid "shell: Local read failed, sending zeros"
-msgstr "fish: Yerel okuma başarısız, sıfırlar gönderiliyor"
+msgstr ""
 
-#, fuzzy
 msgid "shell: storing file"
-msgstr "fish: dosya saklama"
+msgstr ""
 
 msgid "Aborting transfer..."
 msgstr "Aktarım durduruluyor..."
@@ -4687,6 +4660,3 @@ msgstr "Başından devam edilsin mi?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr " /ftp://some.host/editme.txt 'in yerel kopyası alınamadı"
-
-#~ msgid "fish: Handshaking version..."
-#~ msgstr "fish: Sürüm anlaşması..."

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-01-14 17:58+0300\n"
+"POT-Creation-Date: 2024-01-20 20:51+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Morten Bo Johansen <mortenbo@hotmail.com>, 2018,2023\n"
 "Language-Team: Danish (http://app.transifex.com/mc/mc/language/da/)\n"
@@ -724,7 +724,6 @@ msgid "Show mc with specified skin"
 msgstr "Vis mc med angivet tema"
 
 #. TRANSLATORS: don't translate keywords
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK},{ATTR}:KEYWORD2=...\n"
 "\n"
@@ -746,24 +745,6 @@ msgid ""
 "   Viewer:       viewnormal,viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 msgstr ""
-"--colors NØGLEORD={FORG},{BAGG},{ATTR}:NØGLEORD2=...\n"
-"\n"
-"{FORG}, {BAGG} og {ATTR} kan udelades, så bruges standarden\n"
-"\n"
-" Nøgleord:\n"
-"   Globale:       errors, disabled, reverse, gauge, header\n"
-"                  input, inputmark, inputunchanged, commandlinemark\n"
-"                  bbarhotkey, bbarbutton, statusbar\n"
-"   Filvisning:    normal, selected, marked, markselect\n"
-"   Dialogbokse:   dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-"                  errdhotfocus\n"
-"   Menuer:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
-"   Pop op-menuer: pmenunormal, pmenusel, pmenutitle\n"
-"   Editor:        editnormal, editbold, editmarked, editwhitespace,\n"
-"                  editlinestate, editbg, editframe, editframeactive\n"
-"                  editframedrag\n"
-"   Fremviser:     viewnormal,viewbold, viewunderline, viewselected\n"
-"   Hjælp:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 
 #. TRANSLATORS: don't translate color names and attributes
 msgid ""
@@ -1631,9 +1612,8 @@ msgstr ""
 "En brugervenlig teksteditor\n"
 "skrevet til Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2024 the Free Software Foundation"
-msgstr "Ophavsret (C) 1996-2023, The Free Software Foundation"
+msgstr ""
 
 msgid "About"
 msgstr "Om"
@@ -4171,29 +4151,20 @@ msgstr ""
 "Virtuelt EXTFS-filsystem:\n"
 "%s"
 
-#, fuzzy
 msgid ""
 "EXTFS virtual file system:\n"
 "wrong file name"
 msgstr ""
-"Virtuelt EXTFS-filsystem:\n"
-"%s"
 
-#, fuzzy
 msgid ""
 "EXTFS virtual file system:\n"
 "wrong archive name"
 msgstr ""
-"Virtuelt EXTFS-filsystem:\n"
-"%s"
 
-#, fuzzy
 msgid ""
 "EXTFS virtual file system:\n"
 "cannot build command"
 msgstr ""
-"Virtuelt EXTFS-filsystem:\n"
-"%s"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4473,48 +4444,42 @@ msgstr "sftp: (Ctrl-G break) Liste... %s"
 msgid "sftp: Listing done."
 msgstr "sftp: Liste færdig."
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Disconnecting from %s"
-msgstr "fisk: Afkobler fra %s"
+msgstr ""
 
-#, fuzzy
 msgid "shell: Waiting for initial line..."
-msgstr "fisk: Venter på begyndelseslinje..."
+msgstr ""
 
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Beklager, vi kan ikke lave adgangskodebekræftede forbindelser endnu."
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Password is required for %s"
-msgstr "fisk: Adgangskode er krævet for %s"
+msgstr ""
 
-#, fuzzy
 msgid "shell: Sending password..."
-msgstr "fisk: Sender adgangskode..."
+msgstr ""
 
-#, fuzzy
 msgid "shell: Sending initial line..."
-msgstr "fisk: Sender begyndelseslinje..."
+msgstr ""
 
-#, fuzzy
 msgid "shell: Getting host info..."
-msgstr "fisk: Indhenter værtsinformation..."
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: Reading directory %s..."
-msgstr "fisk: Læser mappe %s..."
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "shell: store %s: sending command..."
-msgstr "fisk: gem %s: sender kommando..."
+msgstr ""
 
-#, fuzzy
 msgid "shell: Local read failed, sending zeros"
-msgstr "fisk: Lokal læsning fejlede, sender nuller"
+msgstr ""
 
-#, fuzzy
 msgid "shell: storing file"
-msgstr "fisk: gemmer fil"
+msgstr ""
 
 msgid "Aborting transfer..."
 msgstr "Afbryder overførsel..."
@@ -4739,6 +4704,3 @@ msgstr "Fortsæt fra begyndelsen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan ikke hente en lokal kopi af /ftp://en.vært/editme.txt"
-
-#~ msgid "fish: Handshaking version..."
-#~ msgstr "fisk: Håndrystende version..."
