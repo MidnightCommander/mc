@@ -1,3 +1,36 @@
+Version 4.8.31
+
+- Core
+
+  * Minimal version of GLib is 2.32.0.
+
+- VFS
+
+  * fish: drop support of native FISH server and protocol. Rename VFS to shell (#4232)
+  * extfs;
+    * uc1541 extfs: update up to 3.6 version (#4511)
+    * s3+: port to Python3 (#4324)
+  * Support for LZO/LZOP compression format (#4509)
+
+- Misc
+
+  * Skins: add color for non-printable characters in editor (#4433)
+
+- Fixes
+
+  * FTBFS on FreeBSD with ext2fs attribute support (#4493)
+  * Broken stickchars (-a) mode (#4498)
+  * Wrong timestamp after resuming of file copy operation (#4499)
+  * Editor: wrong deletion of marked column (#3761)
+  * Diff viewer: segfault when display of line numbers is enabled (#4500)
+  * Tar VFS: broken handling of hard links (#4494)
+  * Sftp VFS: failure establishing SSH session due hashed host names in ~/.ssh/known_hosts (#4506)
+  * Shell VFS: incorrect file names with cyrillic or diacritic symbols (#4507)
+  * mc.ext.ini: incorrect description of of how multiple sections and keys with same names are processed (#4497)
+  * mc.ext.ini: unescaped backslash \ is treated as invalid escape sequence in glib-2.77.3 and glib-2.79 (#4502)
+  * mc.ext.ini: file "Makefile.zip" is handled as Makefile not as zip-arhive (#4419)
+
+
 Version 4.8.30
 
 - Core
