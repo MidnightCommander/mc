@@ -3156,6 +3156,6 @@ context exclusive /\* \*/ brown
 context exclusive // \n brown
     spellcheck
 
-context linestart # \n brown
+context # \n brown
     spellcheck
 
