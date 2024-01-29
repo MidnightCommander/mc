@@ -3017,9 +3017,9 @@ edit_move_to_prev_col (WEdit * edit, off_t p)
         }
         else
         {
-            edit->over_col = 0;
-            edit->prev_col = edit->curs_col;
             edit->curs_col = prev + over;
+            edit->prev_col = edit->curs_col;
+            edit->over_col = 0;
         }
     }
     else
