@@ -669,7 +669,6 @@ edit_search (WEdit * edit)
 {
     if (edit_dialog_search_show (edit))
     {
-        edit->search_line_type = edit_get_search_line_type (edit->search);
         edit_search_fix_search_start_if_selection (edit);
         edit_do_search (edit);
     }
@@ -699,6 +698,8 @@ edit_search_init (WEdit * edit, const char *str)
     edit->search->whole_words = edit_search_options.whole_words;
     edit->search->search_fn = edit_search_cmd_callback;
     edit->search->update_fn = edit_search_update_callback;
+
+    edit->search_line_type = edit_get_search_line_type (edit->search);
 
     return TRUE;
 }
