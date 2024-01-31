@@ -1,66 +1,97 @@
 context default
+    keyword whole alignas yellow
+    keyword whole alignof yellow
+    keyword whole and yellow
+    keyword whole and_eq yellow
+    keyword whole asm yellow
     keyword whole auto yellow
+    keyword whole bitand yellow
+    keyword whole bitor yellow
+    keyword whole bool yellow
     keyword whole break yellow
     keyword whole case yellow
+    keyword whole catch yellow
+    keyword whole char8_t yellow
+    keyword whole char16_t yellow
+    keyword whole char32_t yellow
     keyword whole char yellow
+    keyword whole class yellow
+    keyword whole compl yellow
+    keyword whole concept yellow
+    keyword whole concept yellow
+    keyword whole consteval yellow
+    keyword whole constexpr yellow
+    keyword whole constinit yellow
     keyword whole const yellow
+    keyword whole const_cast yellow
     keyword whole continue yellow
+    keyword whole co_await yellow
+    keyword whole co_return yellow
+    keyword whole co_yield yellow
+    keyword whole decltype yellow
     keyword whole default yellow
-    keyword whole do yellow
+    keyword whole delete yellow
     keyword whole double yellow
+    keyword whole do yellow
+    keyword whole dynamic_cast yellow
     keyword whole else yellow
     keyword whole enum yellow
+    keyword whole explicit yellow
+    keyword whole export yellow
     keyword whole extern yellow
+    keyword whole false yellow
     keyword whole float yellow
     keyword whole for yellow
+    keyword whole friend yellow
     keyword whole goto yellow
     keyword whole if yellow
+    keyword whole inline yellow
     keyword whole int yellow
     keyword whole long yellow
+    keyword whole mutable yellow
+    keyword whole namespace yellow
+    keyword whole new yellow
+    keyword whole noexcept yellow
+    keyword whole not yellow
+    keyword whole not_eq yellow
+    keyword whole nullptr yellow
+    keyword whole operator yellow
+    keyword whole or yellow
+    keyword whole or_eq yellow
+    keyword whole private yellow
+    keyword whole protected yellow
+    keyword whole public yellow
     keyword whole register yellow
+    keyword whole reinterpret_cast yellow
+    keyword whole requires yellow
     keyword whole return yellow
     keyword whole short yellow
     keyword whole signed yellow
     keyword whole sizeof yellow
     keyword whole static yellow
+    keyword whole static_assert yellow
+    keyword whole static_cast yellow
     keyword whole struct yellow
     keyword whole switch yellow
-    keyword whole typedef yellow
-    keyword whole union yellow
-    keyword whole unsigned yellow
-    keyword whole void yellow
-    keyword whole volatile yellow
-    keyword whole while yellow
-    keyword whole asm yellow
-    keyword whole catch yellow
-    keyword whole class yellow
-    keyword whole friend yellow
-    keyword whole delete yellow
-    keyword whole inline yellow
-    keyword whole new yellow
-    keyword whole operator yellow
-    keyword whole private yellow
-    keyword whole protected yellow
-    keyword whole public yellow
-    keyword whole this yellow
-    keyword whole throw yellow
     keyword whole template yellow
-    keyword whole try yellow
-    keyword whole virtual yellow
-    keyword whole bool yellow
-    keyword whole const_cast yellow
-    keyword whole dynamic_cast yellow
-    keyword whole explicit yellow
-    keyword whole false yellow
-    keyword whole mutable yellow
-    keyword whole namespace yellow
-    keyword whole reinterpret_cast yellow
-    keyword whole static_cast yellow
+    keyword whole this yellow
+    keyword whole thread_local yellow
+    keyword whole throw yellow
     keyword whole true yellow
+    keyword whole try yellow
+    keyword whole typedef yellow
     keyword whole typeid yellow
     keyword whole typename yellow
+    keyword whole union yellow
+    keyword whole unsigned yellow
     keyword whole using yellow
+    keyword whole virtual yellow
+    keyword whole void yellow
+    keyword whole volatile yellow
     keyword whole wchar_t yellow
+    keyword whole while yellow
+    keyword whole xor yellow
+    keyword whole xor_eq yellow
     keyword whole ... yellow
     keyword linestart \{\s\t\}\[\s\t\]#*\n brightmagenta
 
