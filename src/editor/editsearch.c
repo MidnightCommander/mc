@@ -300,18 +300,19 @@ edit_search_get_current_end_line_char (const WEdit * edit)
  */
 
 static edit_search_line_t
-edit_get_search_line_type (mc_search_t * search)
+edit_get_search_line_type (const mc_search_t * search)
 {
     edit_search_line_t search_line_type = 0;
 
-    if (search->search_type != MC_SEARCH_T_REGEX)
-        return search_line_type;
+    if (search->search_type == MC_SEARCH_T_REGEX)
+    {
+        if (search->original.str->str[0] == '^')
+            search_line_type |= AT_START_LINE;
 
-    if (search->original.str->str[0] == '^')
-        search_line_type |= AT_START_LINE;
+        if (search->original.str->str[search->original.str->len - 1] == '$')
+            search_line_type |= AT_END_LINE;
+    }
 
-    if (search->original.str->str[search->original.str->len - 1] == '$')
-        search_line_type |= AT_END_LINE;
     return search_line_type;
 }
 
