@@ -913,6 +913,7 @@ setup_panels (void)
     widget_set_visibility (WIDGET (the_bar), mc_global.keybar_visible);
 
     update_xterm_title_path ();
+    update_terminal_cwd ();
 
     /* unlock */
     if (active)
@@ -1573,6 +1574,29 @@ update_xterm_title_path (void)
         if (!mc_global.tty.alternate_plus_minus)
             numeric_keypad_mode ();
         (void) fflush (stdout);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/** Tell the current directory to the terminal so it can open new tabs there */
+void
+update_terminal_cwd (void)
+{
+    if (mc_global.tty.xterm_flag && vfs_current_is_local ())
+    {
+        const gchar *host;
+        char *path, *path_uri;
+
+        host = g_get_host_name ();
+        path = vfs_path_to_str_flags (current_panel->cwd_vpath, 0, VPF_NONE);
+        path_uri = g_uri_escape_string (path, "/", FALSE);
+
+        fprintf (stdout, "\33]7;file://%s%s\33\\", host, path_uri);
+        (void) fflush (stdout);
+
+        g_free (path_uri);
+        g_free (path);
     }
 }
 

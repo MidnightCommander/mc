@@ -373,6 +373,7 @@ do_executev (const char *shell, int flags, char *const argv[])
     {
         update_panels (UP_OPTIMIZE, UP_KEEPSEL);
         update_xterm_title_path ();
+        update_terminal_cwd ();
     }
 
     do_refresh ();
@@ -567,6 +568,7 @@ toggle_subshell (void)
     {
         update_panels (UP_OPTIMIZE, UP_KEEPSEL);
         update_xterm_title_path ();
+        update_terminal_cwd ();
     }
 
     if (was_sigwinch != 0 || tty_got_winch ())
