@@ -1568,7 +1568,7 @@ update_xterm_title_path (void)
         g_free (login);
         g_free (path);
 
-        fprintf (stdout, "\33]0;%s\7", str_term_form (p));
+        fprintf (stdout, "\33]0;%s\33\\", str_term_form (p));
         g_free (p);
 
         if (!mc_global.tty.alternate_plus_minus)
