@@ -1568,7 +1568,7 @@ update_xterm_title_path (void)
         g_free (login);
         g_free (path);
 
-        fprintf (stdout, "\33]0;%s\33\\", str_term_form (p));
+        fprintf (stdout, ESC_STR "]0;%s" ESC_STR "\\", str_term_form (p));
         g_free (p);
 
         if (!mc_global.tty.alternate_plus_minus)
@@ -1592,7 +1592,7 @@ update_terminal_cwd (void)
         path = vfs_path_to_str_flags (current_panel->cwd_vpath, 0, VPF_NONE);
         path_uri = g_uri_escape_string (path, "/", FALSE);
 
-        fprintf (stdout, "\33]7;file://%s%s\33\\", host, path_uri);
+        fprintf (stdout, ESC_STR "]7;file://%s%s" ESC_STR "\\", host, path_uri);
         (void) fflush (stdout);
 
         g_free (path_uri);
