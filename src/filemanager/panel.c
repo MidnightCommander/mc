@@ -3436,6 +3436,7 @@ panel_do_cd_int (WPanel * panel, const vfs_path_t * new_dir_vpath, enum cd_enum 
     load_hint (FALSE);
     panel->dirty = TRUE;
     update_xterm_title_path ();
+    update_terminal_cwd ();
 
     vfs_path_free (olddir_vpath, TRUE);
 
@@ -3823,6 +3824,7 @@ panel_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
             subshell_chdir (panel->cwd_vpath);
 
         update_xterm_title_path ();
+        update_terminal_cwd ();
         select_item (panel);
 
         bb = buttonbar_find (h);

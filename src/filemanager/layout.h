@@ -90,6 +90,7 @@ int load_prompt (int fd, void *unused);
 #endif
 
 void update_xterm_title_path (void);
+void update_terminal_cwd (void);
 
 void title_path_prepare (char **path, char **login);
 
