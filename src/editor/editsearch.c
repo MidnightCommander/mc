@@ -668,11 +668,7 @@ static void
 edit_search (WEdit * edit)
 {
     if (edit_dialog_search_show (edit))
-    {
-        edit->search_line_type = edit_get_search_line_type (edit->search);
-        edit_search_fix_search_start_if_selection (edit);
         edit_do_search (edit);
-    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -699,6 +695,10 @@ edit_search_init (WEdit * edit, const char *str)
     edit->search->whole_words = edit_search_options.whole_words;
     edit->search->search_fn = edit_search_cmd_callback;
     edit->search->update_fn = edit_search_update_callback;
+
+    edit->search_line_type = edit_get_search_line_type (edit->search);
+
+    edit_search_fix_search_start_if_selection (edit);
 
     return TRUE;
 }
@@ -876,15 +876,10 @@ edit_replace_cmd (WEdit * edit, gboolean again)
     input2_str = g_string_new_take (input2);
     input2 = NULL;
 
-    if (edit->search == NULL)
+    if (edit->search == NULL && !edit_search_init (edit, input1))
     {
-        if (edit_search_init (edit, input1))
-            edit_search_fix_search_start_if_selection (edit);
-        else
-        {
-            edit->search_start = edit->buffer.curs1;
-            goto cleanup;
-        }
+        edit->search_start = edit->buffer.curs1;
+        goto cleanup;
     }
 
     if (edit->found_len != 0 && edit->search_start == edit->found_start + 1
