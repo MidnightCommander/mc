@@ -1221,12 +1221,12 @@ mc_build_filenamev (const char *first_element, va_list args)
     GString *path;
     char *ret;
 
-    if (element == NULL)
+    if (first_element == NULL)
         return NULL;
 
-    path = g_string_new ("");
-
     absolute = IS_PATH_SEP (*first_element);
+
+    path = g_string_new (absolute ? PATH_SEP_STR : "");
 
     do
     {
@@ -1235,7 +1235,6 @@ mc_build_filenamev (const char *first_element, va_list args)
         else
         {
             char *tmp_element;
-            size_t len;
             const char *start;
 
             tmp_element = g_strdup (element);
@@ -1243,20 +1242,16 @@ mc_build_filenamev (const char *first_element, va_list args)
             element = va_arg (args, char *);
 
             canonicalize_pathname (tmp_element);
-            len = strlen (tmp_element);
             start = IS_PATH_SEP (tmp_element[0]) ? tmp_element + 1 : tmp_element;
 
             g_string_append (path, start);
-            if (!IS_PATH_SEP (tmp_element[len - 1]) && element != NULL)
+            if (!IS_PATH_SEP (path->str[path->len - 1]) && element != NULL)
                 g_string_append_c (path, PATH_SEP);
 
             g_free (tmp_element);
         }
     }
     while (element != NULL);
-
-    if (absolute)
-        g_string_prepend_c (path, PATH_SEP);
 
     ret = g_string_free (path, FALSE);
     canonicalize_pathname (ret);
