@@ -43,12 +43,10 @@
 
 #include "lib/global.h"
 
-#include "lib/tty/tty.h"        /* KEY_F */
-#include "lib/tty/key.h"        /* XCTRL */
+#include "lib/tty/key.h"        /* ALT */
 #include "lib/widget.h"
 
 #include "src/setup.h"          /* drop_menus */
-#include "src/keymap.h"
 
 #include "edit-impl.h"
 #include "editwidget.h"
