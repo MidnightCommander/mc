@@ -460,21 +460,11 @@ toggle_panels_split (void)
 #ifdef ENABLE_VFS
 /* event helper */
 static gboolean
-check_panel_timestamp (const WPanel * panel, panel_view_mode_t mode, struct vfs_class *vclass,
-                       vfsid id)
+check_panel_timestamp (const WPanel * panel, panel_view_mode_t mode, const struct vfs_class *vclass,
+                       const vfsid id)
 {
-    if (mode == view_listing)
-    {
-        const struct vfs_class *me;
-
-        me = vfs_path_get_last_path_vfs (panel->cwd_vpath);
-        if (me != vclass)
-            return FALSE;
-
-        if (vfs_getid (panel->cwd_vpath) != id)
-            return FALSE;
-    }
-    return TRUE;
+    return (mode != view_listing || (vfs_path_get_last_path_vfs (panel->cwd_vpath) == vclass
+                                     && vfs_getid (panel->cwd_vpath) == id));
 }
 
 /* --------------------------------------------------------------------------------------------- */
