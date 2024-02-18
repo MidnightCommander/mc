@@ -1188,7 +1188,7 @@ create_panel (int num, panel_view_mode_t type)
         }
 
     case view_info:
-        new_widget = WIDGET (info_new (r.y, r.x, r.lines, r.cols));
+        new_widget = WIDGET (info_new (&r));
         break;
 
     case view_tree:
