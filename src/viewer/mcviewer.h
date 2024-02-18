@@ -6,6 +6,7 @@
 #define MC__VIEWER_H
 
 #include "lib/global.h"
+#include "lib/widget.h"         /* WRect */
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -37,10 +38,8 @@ extern char *mcview_show_eof;
 
 /*** declarations of public functions ************************************************************/
 
-/* Creates a new WView object with the given properties. Caveat: the
- * origin is in y-x order, while the extent is in x-y order. */
-extern WView *mcview_new (int y, int x, int lines, int cols, gboolean is_panel);
-
+/* Creates a new WView object with the given properties. */
+extern WView *mcview_new (const WRect * r, gboolean is_panel);
 
 /* Shows {file} or the output of {command} in the internal viewer,
  * starting in line {start_line}.
