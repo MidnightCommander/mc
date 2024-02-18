@@ -787,8 +787,12 @@ put_tagged (WPanel * panel)
 {
     if (!command_prompt)
         return;
+
     input_disable_update (cmdline);
-    if (panel->marked)
+
+    if (panel->marked == 0)
+        command_insert (cmdline, panel_current_entry (panel)->fname->str, TRUE);
+    else
     {
         int i;
 
@@ -796,8 +800,6 @@ put_tagged (WPanel * panel)
             if (panel->dir.list[i].f.marked != 0)
                 command_insert (cmdline, panel->dir.list[i].fname->str, TRUE);
     }
-    else
-        command_insert (cmdline, panel_current_entry (panel)->fname->str, TRUE);
 
     input_enable_update (cmdline);
 }
