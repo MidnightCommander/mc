@@ -1123,10 +1123,8 @@ create_panel (int num, panel_view_mode_t type)
 {
     WRect r = { 0, 0, 0, 0 };
     unsigned int the_other = 0; /* Index to the other panel */
-    const char *file_name = NULL;       /* For Quick view */
     Widget *new_widget = NULL, *old_widget = NULL;
     panel_view_mode_t old_type = view_listing;
-    WPanel *the_other_panel = NULL;
 
     if (num >= MAX_VIEWS)
     {
@@ -1196,15 +1194,18 @@ create_panel (int num, panel_view_mode_t type)
         break;
 
     case view_quick:
-        new_widget = WIDGET (mcview_new (&r, TRUE));
-        the_other_panel = PANEL (panels[the_other].widget);
-        if (the_other_panel != NULL)
-            file_name = panel_current_entry (the_other_panel)->fname->str;
-        else
-            file_name = "";
+        {
+            WPanel *the_other_panel;
+            const char *file_name = "";
 
-        mcview_load ((WView *) new_widget, 0, file_name, 0, 0, 0);
-        break;
+            new_widget = WIDGET (mcview_new (&r, TRUE));
+            the_other_panel = PANEL (panels[the_other].widget);
+            if (the_other_panel != NULL)
+                file_name = panel_current_entry (the_other_panel)->fname->str;
+
+            mcview_load ((WView *) new_widget, 0, file_name, 0, 0, 0);
+            break;
+        }
 
     default:
         break;
