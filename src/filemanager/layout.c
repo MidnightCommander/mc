@@ -1192,7 +1192,7 @@ create_panel (int num, panel_view_mode_t type)
         break;
 
     case view_tree:
-        new_widget = WIDGET (tree_new (r.y, r.x, r.lines, r.cols, TRUE));
+        new_widget = WIDGET (tree_new (&r, TRUE));
         break;
 
     case view_quick:

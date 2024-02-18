@@ -22,7 +22,7 @@ extern gboolean xtree_mode;
 
 /*** declarations of public functions ************************************************************/
 
-WTree *tree_new (int y, int x, int lines, int cols, gboolean is_panel);
+WTree *tree_new (const WRect * r, gboolean is_panel);
 
 void tree_chdir (WTree * tree, const vfs_path_t * dir);
 const vfs_path_t *tree_selected_name (const WTree * tree);
