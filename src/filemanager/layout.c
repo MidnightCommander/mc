@@ -649,7 +649,7 @@ panel_do_cols (int idx)
 /** Save current list_view widget directory into panel */
 
 static Widget *
-restore_into_right_dir_panel (int idx, gboolean last_was_panel, int y, int x, int lines, int cols)
+restore_into_right_dir_panel (int idx, gboolean last_was_panel, const WRect * r)
 {
     WPanel *new_widget;
     const char *p_name;
@@ -661,11 +661,11 @@ restore_into_right_dir_panel (int idx, gboolean last_was_panel, int y, int x, in
         vfs_path_t *saved_dir_vpath;
 
         saved_dir_vpath = vfs_path_from_str (panels[idx].last_saved_dir);
-        new_widget = panel_sized_with_dir_new (p_name, y, x, lines, cols, saved_dir_vpath);
+        new_widget = panel_sized_with_dir_new (p_name, r, saved_dir_vpath);
         vfs_path_free (saved_dir_vpath, TRUE);
     }
     else
-        new_widget = panel_sized_new (p_name, y, x, lines, cols);
+        new_widget = panel_sized_new (p_name, r);
 
     return WIDGET (new_widget);
 }
@@ -1183,8 +1183,7 @@ create_panel (int num, panel_view_mode_t type)
             gboolean last_was_panel;
 
             last_was_panel = old_widget != NULL && get_panel_type (num) != view_listing;
-            new_widget =
-                restore_into_right_dir_panel (num, last_was_panel, r.y, r.x, r.lines, r.cols);
+            new_widget = restore_into_right_dir_panel (num, last_was_panel, &r);
             break;
         }
 
