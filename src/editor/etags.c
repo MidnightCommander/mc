@@ -394,8 +394,7 @@ editcmd_dialog_select_definition_show (WEdit * edit, char *match_expr, GPtrArray
             edit_stack_iterator++;
             edit_arg_assign (&edit_history_moveto[edit_stack_iterator],
                              vfs_path_from_str ((char *) curr_def->fullpath), curr_def->line);
-            edit_reload_line (edit, edit_history_moveto[edit_stack_iterator].file_vpath,
-                              edit_history_moveto[edit_stack_iterator].line_number);
+            edit_reload_line (edit, &edit_history_moveto[edit_stack_iterator]);
         }
     }
 

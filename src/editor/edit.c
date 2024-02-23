@@ -2114,14 +2114,15 @@ edit_insert_file (WEdit * edit, const vfs_path_t * filename_vpath)
  * Fill in the edit structure.  Return NULL on failure.  Pass edit as
  * NULL to allocate a new structure.
  *
- * If line is 0, try to restore saved position.  Otherwise put the
+ * If arg is NULL or arg->line_number is 0, try to restore saved position.  Otherwise put the
  * cursor on that line and show it in the middle of the screen.
  */
 
 WEdit *
-edit_init (WEdit * edit, const WRect * r, const vfs_path_t * filename_vpath, long line)
+edit_init (WEdit * edit, const WRect * r, const edit_arg_t * arg)
 {
     gboolean to_free = FALSE;
+    long line;
 
     auto_syntax = TRUE;         /* Resetting to auto on every invocation */
     edit_options.line_state_width = edit_options.line_state ? LINE_STATE_WIDTH : 0;
@@ -2164,7 +2165,7 @@ edit_init (WEdit * edit, const WRect * r, const vfs_path_t * filename_vpath, lon
     edit->stat1.st_gid = getgid ();
     edit->stat1.st_mtime = 0;
 
-    edit->attrs_ok = (mc_fgetflags (filename_vpath, &edit->attrs) == 0);
+    edit->attrs_ok = (mc_fgetflags (arg->file_vpath, &edit->attrs) == 0);
 
     edit->over_col = 0;
     edit->bracket = -1;
@@ -2172,7 +2173,16 @@ edit_init (WEdit * edit, const WRect * r, const vfs_path_t * filename_vpath, lon
     edit->force |= REDRAW_PAGE;
 
     /* set file name before load file */
-    edit_set_filename (edit, filename_vpath);
+    if (arg != NULL)
+    {
+        edit_set_filename (edit, arg->file_vpath);
+        line = arg->line_number;
+    }
+    else
+    {
+        edit_set_filename (edit, NULL);
+        line = 0;
+    }
 
     edit->undo_stack_size = START_STACK_SIZE;
     edit->undo_stack_size_mask = START_STACK_SIZE - 1;
@@ -2273,7 +2283,7 @@ edit_clean (WEdit * edit)
  * @return TRUE on success, FALSE on failure.
  */
 gboolean
-edit_reload_line (WEdit * edit, const vfs_path_t * filename_vpath, long line)
+edit_reload_line (WEdit * edit, const edit_arg_t * arg)
 {
     Widget *w = WIDGET (edit);
     WEdit *e;
@@ -2284,7 +2294,7 @@ edit_reload_line (WEdit * edit, const vfs_path_t * filename_vpath, long line)
     e->fullscreen = edit->fullscreen;
     e->loc_prev = edit->loc_prev;
 
-    if (edit_init (e, &w->rect, filename_vpath, line) == NULL)
+    if (edit_init (e, &w->rect, arg) == NULL)
     {
         g_free (e);
         return FALSE;

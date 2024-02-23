@@ -664,7 +664,11 @@ edit_file_at_line (const vfs_path_t * what_vpath, gboolean internal, long start_
 
 #ifdef USE_INTERNAL_EDIT
     if (internal)
-        edit_file (what_vpath, start_line);
+    {
+        const edit_arg_t arg = { (vfs_path_t *) what_vpath, start_line };
+
+        edit_file (&arg);
+    }
     else
 #endif /* USE_INTERNAL_EDIT */
     {

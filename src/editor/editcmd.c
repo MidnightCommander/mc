@@ -1058,9 +1058,11 @@ edit_load_cmd (WDialog * h)
     if (exp != NULL && *exp != '\0')
     {
         vfs_path_t *exp_vpath;
+        edit_arg_t arg;
 
         exp_vpath = vfs_path_from_str (exp);
-        ret = edit_load_file_from_filename (h, exp_vpath, 0);
+        edit_arg_init (&arg, exp_vpath, 0);
+        ret = edit_load_file_from_filename (h, &arg);
         vfs_path_free (exp_vpath, TRUE);
     }
 
@@ -1081,13 +1083,13 @@ edit_load_cmd (WDialog * h)
  */
 
 gboolean
-edit_load_file_from_filename (WDialog * h, const vfs_path_t * vpath, long line)
+edit_load_file_from_filename (WDialog * h, const edit_arg_t * arg)
 {
     WRect r = WIDGET (h)->rect;
 
     rect_grow (&r, -1, 0);
 
-    return edit_add_window (h, &r, vpath, line);
+    return edit_add_window (h, &r, arg);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1108,9 +1110,11 @@ edit_load_file_from_history (WDialog * h)
     if (exp != NULL && (action == CK_Edit || action == CK_Enter))
     {
         vfs_path_t *exp_vpath;
+        edit_arg_t arg;
 
         exp_vpath = vfs_path_from_str (exp);
-        ret = edit_load_file_from_filename (h, exp_vpath, 0);
+        edit_arg_init (&arg, exp_vpath, 0);
+        ret = edit_load_file_from_filename (h, &arg);
         vfs_path_free (exp_vpath, TRUE);
     }
 
@@ -1131,6 +1135,7 @@ edit_load_syntax_file (WDialog * h)
 {
     vfs_path_t *extdir_vpath;
     int dir = 0;
+    edit_arg_t arg;
     gboolean ret = FALSE;
 
     if (geteuid () == 0)
@@ -1153,11 +1158,15 @@ edit_load_syntax_file (WDialog * h)
 
         user_syntax_file_vpath = mc_config_get_full_vpath (EDIT_SYNTAX_FILE);
         check_for_default (extdir_vpath, user_syntax_file_vpath);
-        ret = edit_load_file_from_filename (h, user_syntax_file_vpath, 0);
+        edit_arg_init (&arg, user_syntax_file_vpath, 0);
+        ret = edit_load_file_from_filename (h, &arg);
         vfs_path_free (user_syntax_file_vpath, TRUE);
     }
     else if (dir == 1)
-        ret = edit_load_file_from_filename (h, extdir_vpath, 0);
+    {
+        edit_arg_init (&arg, extdir_vpath, 0);
+        ret = edit_load_file_from_filename (h, &arg);
+    }
 
     vfs_path_free (extdir_vpath, TRUE);
 
@@ -1177,6 +1186,7 @@ edit_load_menu_file (WDialog * h)
     vfs_path_t *buffer_vpath;
     vfs_path_t *menufile_vpath;
     int dir;
+    edit_arg_t arg;
     gboolean ret;
 
     query_set_sel (1);
@@ -1222,7 +1232,8 @@ edit_load_menu_file (WDialog * h)
         return FALSE;
     }
 
-    ret = edit_load_file_from_filename (h, buffer_vpath, 0);
+    edit_arg_init (&arg, buffer_vpath, 0);
+    ret = edit_load_file_from_filename (h, &arg);
 
     vfs_path_free (buffer_vpath, TRUE);
     vfs_path_free (menufile_vpath, TRUE);
@@ -1982,8 +1993,7 @@ edit_load_forward_cmd (WEdit * edit)
 
     edit_stack_iterator++;
     if (edit_history_moveto[edit_stack_iterator].file_vpath != NULL)
-        return edit_reload_line (edit, edit_history_moveto[edit_stack_iterator].file_vpath,
-                                 edit_history_moveto[edit_stack_iterator].line_number);
+        return edit_reload_line (edit, &edit_history_moveto[edit_stack_iterator]);
 
     return FALSE;
 }
@@ -2009,8 +2019,7 @@ edit_load_back_cmd (WEdit * edit)
 
     edit_stack_iterator--;
     if (edit_history_moveto[edit_stack_iterator].file_vpath != NULL)
-        return edit_reload_line (edit, edit_history_moveto[edit_stack_iterator].file_vpath,
-                                 edit_history_moveto[edit_stack_iterator].line_number);
+        return edit_reload_line (edit, &edit_history_moveto[edit_stack_iterator]);
 
     return FALSE;
 }
