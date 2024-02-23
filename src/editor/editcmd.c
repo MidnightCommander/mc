@@ -1977,13 +1977,13 @@ edit_load_forward_cmd (WEdit * edit)
     if (edit_stack_iterator + 1 >= MAX_HISTORY_MOVETO)
         return FALSE;
 
-    if (edit_history_moveto[edit_stack_iterator + 1].line < 1)
+    if (edit_history_moveto[edit_stack_iterator + 1].line_number < 1)
         return FALSE;
 
     edit_stack_iterator++;
-    if (edit_history_moveto[edit_stack_iterator].filename_vpath != NULL)
-        return edit_reload_line (edit, edit_history_moveto[edit_stack_iterator].filename_vpath,
-                                 edit_history_moveto[edit_stack_iterator].line);
+    if (edit_history_moveto[edit_stack_iterator].file_vpath != NULL)
+        return edit_reload_line (edit, edit_history_moveto[edit_stack_iterator].file_vpath,
+                                 edit_history_moveto[edit_stack_iterator].line_number);
 
     return FALSE;
 }
@@ -2008,9 +2008,9 @@ edit_load_back_cmd (WEdit * edit)
         return FALSE;
 
     edit_stack_iterator--;
-    if (edit_history_moveto[edit_stack_iterator].filename_vpath != NULL)
-        return edit_reload_line (edit, edit_history_moveto[edit_stack_iterator].filename_vpath,
-                                 edit_history_moveto[edit_stack_iterator].line);
+    if (edit_history_moveto[edit_stack_iterator].file_vpath != NULL)
+        return edit_reload_line (edit, edit_history_moveto[edit_stack_iterator].file_vpath,
+                                 edit_history_moveto[edit_stack_iterator].line_number);
 
     return FALSE;
 }

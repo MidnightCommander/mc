@@ -111,7 +111,7 @@ int max_undo = 32768;
 gboolean enable_show_tabs_tws = TRUE;
 
 unsigned int edit_stack_iterator = 0;
-edit_stack_type edit_history_moveto[MAX_HISTORY_MOVETO];
+edit_arg_t edit_history_moveto[MAX_HISTORY_MOVETO];
 /* magic sequence for say than block is vertical */
 const char VERTICAL_MAGIC[] = { '\1', '\1', '\1', '\1', '\n' };
 
@@ -4136,8 +4136,8 @@ edit_stack_init (void)
 {
     for (edit_stack_iterator = 0; edit_stack_iterator < MAX_HISTORY_MOVETO; edit_stack_iterator++)
     {
-        edit_history_moveto[edit_stack_iterator].filename_vpath = NULL;
-        edit_history_moveto[edit_stack_iterator].line = -1;
+        edit_history_moveto[edit_stack_iterator].file_vpath = NULL;
+        edit_history_moveto[edit_stack_iterator].line_number = -1;
     }
 
     edit_stack_iterator = 0;
@@ -4149,7 +4149,7 @@ void
 edit_stack_free (void)
 {
     for (edit_stack_iterator = 0; edit_stack_iterator < MAX_HISTORY_MOVETO; edit_stack_iterator++)
-        vfs_path_free (edit_history_moveto[edit_stack_iterator].filename_vpath, TRUE);
+        vfs_path_free (edit_history_moveto[edit_stack_iterator].file_vpath, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
