@@ -2384,7 +2384,6 @@ static int
 dview_init (WDiff * dview, const char *args, const char *file1, const char *file2,
             const char *label1, const char *label2, DSRC dsrc)
 {
-    int ndiff;
     FBUF *f[DIFF_COUNT];
 
     f[DIFF_LEFT] = NULL;
@@ -2456,19 +2455,6 @@ dview_init (WDiff * dview, const char *args, const char *file1, const char *file
     g_array_set_clear_func (dview->a[DIFF_LEFT], cc_free_elt);
     dview->a[DIFF_RIGHT] = g_array_new (FALSE, FALSE, sizeof (DIFFLN));
     g_array_set_clear_func (dview->a[DIFF_RIGHT], cc_free_elt);
-
-    ndiff = redo_diff (dview);
-    if (ndiff < 0)
-    {
-        /* goto MSG_DESTROY stage: dview_fini() */
-        dview_fclose (f[DIFF_LEFT]);
-        dview_fclose (f[DIFF_RIGHT]);
-        return -1;
-    }
-
-    dview->ndiff = ndiff;
-
-    dview_compute_areas (dview);
 
     return 0;
 }
@@ -3399,6 +3385,14 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
     dview_dlg->get_title = dview_get_title;
 
     error = dview_init (dview, "-a", file1, file2, label1, label2, DATA_SRC_MEM);       /* XXX binary diff? */
+    if (error >= 0)
+        error = redo_diff (dview);
+    if (error >= 0)
+    {
+        dview->ndiff = error;
+        dview_compute_areas (dview);
+        error = 0;
+    }
 
     if (error == 0)
         dlg_run (dview_dlg);
