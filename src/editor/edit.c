@@ -4171,3 +4171,53 @@ edit_move_down (WEdit * edit, long i, gboolean do_scroll)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Create edit_arg_t object from vfs_path_t object and the line number.
+ *
+ * @param file_vpath  file path object
+ * @param line_number line number. If value is 0, try to restore saved position.
+ * @return edit_arg_t object
+ */
+
+edit_arg_t *
+edit_arg_vpath_new (vfs_path_t * file_vpath, long line_number)
+{
+    edit_arg_t *arg;
+
+    arg = g_new (edit_arg_t, 1);
+    arg->file_vpath = file_vpath;
+    arg->line_number = line_number;
+
+    return arg;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Create edit_arg_t object from file name and the line number.
+ *
+ * @param file_name   file name
+ * @param line_number line number. If value is 0, try to restore saved position.
+ * @return edit_arg_t object
+ */
+
+edit_arg_t *
+edit_arg_new (const char *file_name, long line_number)
+{
+    return edit_arg_vpath_new (vfs_path_from_str (file_name), line_number);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Free the edit_arg_t object.
+ *
+ * @param arg edit_arg_t object
+ */
+
+void
+edit_arg_free (edit_arg_t * arg)
+{
+    vfs_path_free (arg->file_vpath, TRUE);
+    g_free (arg);
+}
+
+/* --------------------------------------------------------------------------------------------- */

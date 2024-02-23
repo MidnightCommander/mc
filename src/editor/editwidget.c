@@ -60,7 +60,6 @@
 #include "src/execute.h"        /* toggle_subshell()  */
 #include "src/filemanager/cmd.h"        /* save_setup_cmd()  */
 #include "src/learn.h"          /* learn_keys() */
-#include "src/args.h"           /* mcedit_arg_t */
 
 #include "edit-impl.h"
 #include "editwidget.h"
@@ -1199,7 +1198,7 @@ edit_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 gboolean
 edit_file (const vfs_path_t * file_vpath, long line)
 {
-    mcedit_arg_t arg = { (vfs_path_t *) file_vpath, line };
+    edit_arg_t arg = { (vfs_path_t *) file_vpath, line };
     GList *files;
     gboolean ok;
 
@@ -1270,7 +1269,7 @@ edit_files (const GList * files)
 
     for (file = files; file != NULL; file = g_list_next (file))
     {
-        mcedit_arg_t *f = (mcedit_arg_t *) file->data;
+        edit_arg_t *f = (edit_arg_t *) file->data;
         gboolean f_ok;
 
         f_ok = edit_load_file_from_filename (edit_dlg, f->file_vpath, f->line_number);

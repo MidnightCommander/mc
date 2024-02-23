@@ -10,12 +10,6 @@
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
-typedef struct
-{
-    vfs_path_t *file_vpath;
-    long line_number;
-} mcedit_arg_t;
-
 /*** global variables defined in .c file *********************************************************/
 
 extern gboolean mc_args__force_xterm;
@@ -47,8 +41,6 @@ void mc_setup_run_mode (char **argv);
 gboolean mc_args_parse (int *argc, char ***argv, const char *translation_domain, GError ** mcerror);
 gboolean mc_args_show_info (void);
 gboolean mc_setup_by_args (int argc, char **argv, GError ** mcerror);
-
-void mcedit_arg_free (mcedit_arg_t * arg);
 
 /*** inline functions ****************************************************************************/
 

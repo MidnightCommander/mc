@@ -62,6 +62,12 @@ typedef struct
     gboolean check_nl_at_eof;
 } edit_options_t;
 
+typedef struct
+{
+    vfs_path_t *file_vpath;
+    long line_number;
+} edit_arg_t;
+
 /*** global variables defined in .c file *********************************************************/
 
 extern edit_options_t edit_options;
@@ -74,6 +80,10 @@ void edit_stack_free (void);
 
 gboolean edit_file (const vfs_path_t * file_vpath, long line);
 gboolean edit_files (const GList * files);
+
+edit_arg_t *edit_arg_vpath_new (vfs_path_t * file_vpath, long line_number);
+edit_arg_t *edit_arg_new (const char *file_name, long line_number);
+void edit_arg_free (edit_arg_t * arg);
 
 const char *edit_get_file_name (const WEdit * edit);
 off_t edit_get_cursor_offset (const WEdit * edit);
