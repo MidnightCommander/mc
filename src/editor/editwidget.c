@@ -1288,14 +1288,6 @@ edit_files (const GList * files)
 
 /* --------------------------------------------------------------------------------------------- */
 
-const char *
-edit_get_file_name (const WEdit * edit)
-{
-    return vfs_path_as_str (edit->filename_vpath);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 WEdit *
 edit_find_editor (const WDialog * h)
 {
