@@ -63,6 +63,10 @@
 #include "filemanager/command.h"        /* cmdline */
 #include "filemanager/panel.h"  /* panalized_panel */
 
+#ifdef USE_INTERNAL_EDIT
+#include "editor/edit.h"        /* edit_arg_free() */
+#endif
+
 #include "vfs/plugins_init.h"
 
 #include "events_init.h"
@@ -532,8 +536,10 @@ main (int argc, char *argv[])
 
     if (mc_global.mc_run_mode != MC_RUN_EDITOR)
         g_free (mc_run_param0);
+#ifdef USE_INTERNAL_EDIT
     else
-        g_list_free_full ((GList *) mc_run_param0, (GDestroyNotify) mcedit_arg_free);
+        g_list_free_full ((GList *) mc_run_param0, (GDestroyNotify) edit_arg_free);
+#endif /* USE_INTERNAL_EDIT */
 
     g_free (mc_run_param1);
     g_free (saved_other_dir);
