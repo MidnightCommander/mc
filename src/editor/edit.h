@@ -78,7 +78,7 @@ extern edit_options_t edit_options;
 void edit_stack_init (void);
 void edit_stack_free (void);
 
-gboolean edit_file (const vfs_path_t * file_vpath, long line);
+gboolean edit_file (const edit_arg_t * arg);
 gboolean edit_files (const GList * files);
 
 edit_arg_t *edit_arg_vpath_new (vfs_path_t * file_vpath, long line_number);
