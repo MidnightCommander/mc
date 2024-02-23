@@ -4135,10 +4135,7 @@ void
 edit_stack_init (void)
 {
     for (edit_stack_iterator = 0; edit_stack_iterator < MAX_HISTORY_MOVETO; edit_stack_iterator++)
-    {
-        edit_history_moveto[edit_stack_iterator].file_vpath = NULL;
-        edit_history_moveto[edit_stack_iterator].line_number = -1;
-    }
+        edit_arg_init (&edit_history_moveto[edit_stack_iterator], NULL, -1);
 
     edit_stack_iterator = 0;
 }
@@ -4204,6 +4201,38 @@ edit_arg_t *
 edit_arg_new (const char *file_name, long line_number)
 {
     return edit_arg_vpath_new (vfs_path_from_str (file_name), line_number);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Initialize edit_arg_t object.
+ *
+ * @param arg  edit_arg_t object
+ * @param vpath vfs_path_t object
+ * @param line line number
+ */
+
+void
+edit_arg_init (edit_arg_t * arg, vfs_path_t * vpath, long line)
+{
+    arg->file_vpath = (vfs_path_t *) vpath;
+    arg->line_number = line;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Apply new values to edit_arg_t object members.
+ *
+ * @param arg  edit_arg_t object
+ * @param vpath vfs_path_t object
+ * @param line line number
+ */
+
+void
+edit_arg_assign (edit_arg_t * arg, vfs_path_t * vpath, long line)
+{
+    vfs_path_free (arg->file_vpath, TRUE);
+    edit_arg_init (arg, vpath, line);
 }
 
 /* --------------------------------------------------------------------------------------------- */

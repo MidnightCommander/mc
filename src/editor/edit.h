@@ -83,6 +83,8 @@ gboolean edit_files (const GList * files);
 
 edit_arg_t *edit_arg_vpath_new (vfs_path_t * file_vpath, long line_number);
 edit_arg_t *edit_arg_new (const char *file_name, long line_number);
+void edit_arg_init (edit_arg_t * arg, vfs_path_t * vpath, long line);
+void edit_arg_assign (edit_arg_t * arg, vfs_path_t * vpath, long line);
 void edit_arg_free (edit_arg_t * arg);
 
 const char *edit_get_file_name (const WEdit * edit);
