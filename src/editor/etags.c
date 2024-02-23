@@ -380,25 +380,25 @@ editcmd_dialog_select_definition_show (WEdit * edit, char *match_expr, GPtrArray
 
         if (curr != NULL && do_moveto && edit_stack_iterator + 1 < MAX_HISTORY_MOVETO)
         {
-            vfs_path_free (edit_history_moveto[edit_stack_iterator].filename_vpath, TRUE);
+            vfs_path_free (edit_history_moveto[edit_stack_iterator].file_vpath, TRUE);
 
             /* Is file path absolute? Prepend with dir_vpath if necessary */
             if (edit->filename_vpath != NULL && edit->filename_vpath->relative
                 && edit->dir_vpath != NULL)
-                edit_history_moveto[edit_stack_iterator].filename_vpath =
+                edit_history_moveto[edit_stack_iterator].file_vpath =
                     vfs_path_append_vpath_new (edit->dir_vpath, edit->filename_vpath, NULL);
             else
-                edit_history_moveto[edit_stack_iterator].filename_vpath =
+                edit_history_moveto[edit_stack_iterator].file_vpath =
                     vfs_path_clone (edit->filename_vpath);
 
-            edit_history_moveto[edit_stack_iterator].line = edit->start_line + edit->curs_row + 1;
+            edit_history_moveto[edit_stack_iterator].line_number = edit->start_line + edit->curs_row + 1;
             edit_stack_iterator++;
-            vfs_path_free (edit_history_moveto[edit_stack_iterator].filename_vpath, TRUE);
-            edit_history_moveto[edit_stack_iterator].filename_vpath =
+            vfs_path_free (edit_history_moveto[edit_stack_iterator].file_vpath, TRUE);
+            edit_history_moveto[edit_stack_iterator].file_vpath =
                 vfs_path_from_str ((char *) curr_def->fullpath);
-            edit_history_moveto[edit_stack_iterator].line = curr_def->line;
-            edit_reload_line (edit, edit_history_moveto[edit_stack_iterator].filename_vpath,
-                              edit_history_moveto[edit_stack_iterator].line);
+            edit_history_moveto[edit_stack_iterator].line_number = curr_def->line;
+            edit_reload_line (edit, edit_history_moveto[edit_stack_iterator].file_vpath,
+                              edit_history_moveto[edit_stack_iterator].line_number);
         }
     }
 

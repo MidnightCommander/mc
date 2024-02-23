@@ -109,12 +109,6 @@ typedef struct edit_search_options_t
     gboolean all_codepages;
 } edit_search_options_t;
 
-typedef struct edit_stack_type
-{
-    long line;
-    vfs_path_t *filename_vpath;
-} edit_stack_type;
-
 /*** global variables defined in .c file *********************************************************/
 
 extern const char VERTICAL_MAGIC[5];
@@ -124,7 +118,7 @@ extern gboolean enable_show_tabs_tws;
 extern edit_search_options_t edit_search_options;
 
 extern unsigned int edit_stack_iterator;
-extern edit_stack_type edit_history_moveto[MAX_HISTORY_MOVETO];
+extern edit_arg_t edit_history_moveto[MAX_HISTORY_MOVETO];
 
 extern int max_undo;
 extern gboolean auto_syntax;
