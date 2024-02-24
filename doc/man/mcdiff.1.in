@@ -1,0 +1,97 @@
+.TH MCDIFF 1 "%DATE_OF_MAN_PAGE%" "MC Version %MAN_VERSION%" "GNU Midnight Commander"
+.SH NAME
+mcdiff \- Internal diff viewer of GNU Midnight Commander.
+.SH USAGE
+.B mcdiff
+[\-bcCdfhstVx?] file1 file2
+.SH DESCRIPTION
+.LP
+mcdiff is a link to
+.BR mc ,
+the main GNU Midnight Commander executable.  Executing GNU Midnight
+Commander under this name requests starting the internal diff viewer
+which compares
+.I file1
+and
+.I file2
+specified on the command line.
+.SH OPTIONS
+.TP
+.I "\-b"
+Force black and white display.
+.TP
+.I "\-c"
+Force color mode on terminals where
+.B mcdiff
+defaults to black and white.
+.TP
+.I "\-C <keyword>=<fgcolor>,<bgcolor>,<attributes>:<keyword>= ..."
+Specify a different color set.  See the
+.B Colors
+section in mc(1) for more information.
+.TP
+.I "\-d"
+Disable mouse support.
+.TP
+.I "\-f"
+Display the compiled\-in search paths for Midnight Commander files.
+.TP
+.I "\-t"
+Used only if the code was compiled with S\-Lang and terminfo: it makes
+the Midnight Commander use the value of the
+.B TERMCAP
+variable for the terminal information instead of the information on
+the system wide terminal database
+.TP
+.I "\-V"
+Displays the version of the program.
+.TP
+.I "\-x"
+Forces xterm mode.  Used when running on xterm\-capable terminals (two
+screen modes, and able to send mouse escape sequences).
+.PP
+.SH COLORS
+The default colors may be changed by appending to the
+.B MC_COLOR_TABLE
+environment variable.  Foreground and background colors pairs may be
+specified for example with:
+.PP
+.nf
+MC_COLOR_TABLE="$MC_COLOR_TABLE:\\
+normal=lightgray,black:\\
+selected=black,green"
+.fi
+.PP
+.SH FILES
+.I %pkgdatadir%/mc.hlp
+.IP
+The help file for the program.
+.PP
+.I %pkgdatadir%/mc.ini
+.IP
+The default system\-wide setup for GNU Midnight Commander, used only if
+the user's own ~/.config/mc/ini file is missing.
+.PP
+.I %pkgdatadir%/mc.lib
+.IP
+Global settings for the Midnight Commander.  Settings in this file
+affect all users, whether they have ~/.config/mc/ini or not.
+.PP
+.I ~/.config/mc/ini
+.IP
+User's own setup.  If this file is present, the setup is loaded from
+here instead of the system\-wide startup file.
+.PP
+.SH LICENSE
+This program is distributed under the terms of the GNU General Public
+License as published by the Free Software Foundation.  See the built\-in
+help of the Midnight Commander for details on the License and the lack
+of warranty.
+.SH AVAILABILITY
+The latest version of this program can be found at
+http://ftp.midnight\-commander.org/.
+.SH SEE ALSO
+mc(1), mcedit(1), mcview(1)
+.PP
+.SH BUGS
+Bugs should be reported to https://www.midnight\-commander.org/.
