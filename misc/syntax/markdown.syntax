@@ -1,30 +1,84 @@
-# Markdown syntax highlighting
+# Markdown syntax highlight config for MC (MidnigntCommander)
+# (not full, but usable)
+#
+# https://gist.github.com/rb2/1f6b23ea5ea848c75a8c
+#
+# Authors:
+#   Ruslan Brest, http://rb.labtodo.com, 2013
+#
+# Usage:
+#
+# $ mc --version
+# GNU Midnight Commander 4.8.15
+#
+# 1. copy to `~/.local/share/mc/syntax/markdown.syntax`
+# 2. Add these 2 lines to `~/.config/mc/mcedit/Syntax`:
+#
+#     file ..\*\\.(md|markdown|txt|text)$ Markdown
+#     include /home/rb/.local/share/mc/syntax/markdown.syntax
 
-context default lightgray
+
+context default
+## Links
+##    keyword [*](http*)		brightcyan/17
+    keyword [*]		cyan
+    keyword <*>		yellow
+    keyword (http*)		brightmagenta
+    keyword (ftp*)		brightmagenta
+    keyword (//*)		brightmagenta
+
+## **Bold** or __Bold__
+    keyword \*\**\*\*	yellow
+    keyword __*__		yellow
+## *italic* or _italic_
+    keyword \s\**\*\s		white
+    keyword \s_*_\s			white
+
+
+## Horisontal ruler
+    keyword linestart -+ white
+
+## List
+    keyword linestart \* brightgreen
+    keyword linestart - brightgreen
+
+#	keyword \{0123456789\}    white
+
+## Headings
+#context linestart #+ \n lightgray brightred bold
+context linestart #+ \n black yellow bold
     spellcheck
-    # links
-    keyword whole [*](*) yellow
-    keyword \*\* white
-    keyword \*   yellow
-    keyword \\_  lightgray
-    keyword wholeleft  __ white
-    keyword wholeright __ white
-    keyword wholeleft  _  yellow
-    keyword wholeright _  yellow
 
-context linestart #### \n red
+## (not Markdown) TODO
+context linestart TODO: \n brightred
+
+
+## Code, tt, pre
+context ``` ``` brightred
+context ` ` brightred
+
+context linestart From:\s \n\n cyan
+    keyword linestart From: brightgreen
+    keyword linestart From\s brightred
+    keyword <*@*> white
+    keyword whole +@+ white
+    keyword linestart To: brightmagenta
+    keyword linestart Subject: brightred/Orange
+    keyword linestart +: brown
+
+context linestart Date:\s \n\n cyan
+    keyword linestart From: brightgreen
+    keyword linestart From\s brightred
+    keyword <*@*> white
+    keyword whole +@+ white
+    keyword linestart To: brightmagenta
+    keyword linestart Subject: brightred/Orange
+    keyword linestart +: brown
+
+context linestart Title:\s \n\n cyan
+    keyword linestart Author: brightgreen
+    keyword linestart +: brown
+
+context " " green
     spellcheck
 
-context linestart # \n brightred
-    spellcheck
-
-context linestart > \n green
-    spellcheck
-
-context linestart \s\s\s\s \n cyan
-
-context ``` ``` cyan
-
-context `` `` cyan
-
-context ` ` cyan
