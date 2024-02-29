@@ -159,6 +159,9 @@ gboolean only_leading_plus_minus = TRUE;
 /* Automatically fills name with current selected item name on mkdir */
 gboolean auto_fill_mkdir_name = TRUE;
 
+/* Erase files and directories at the end of moving */
+gboolean erase_at_end = TRUE;
+
 /* If set and you don't have subshell support, then C-o will give you a shell */
 gboolean output_starts_shell = FALSE;
 
@@ -365,6 +368,7 @@ static const struct
     { "shadows", &mc_global.tty.shadows },
     { "mcview_remember_file_position", &mcview_remember_file_position },
     { "auto_fill_mkdir_name", &auto_fill_mkdir_name },
+    { "erase_at_end", &erase_at_end },
     { "copymove_persistent_attr", &copymove_persistent_attr },
     { NULL, NULL }
 };

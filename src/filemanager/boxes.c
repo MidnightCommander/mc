@@ -556,6 +556,7 @@ configure_box (void)
                     QUICK_CHECKBOX (N_("Mkdi&r autoname"), &auto_fill_mkdir_name, NULL),
                     QUICK_CHECKBOX (N_("&Preallocate space"), &mc_global.vfs.preallocate_space,
                                     NULL),
+                    QUICK_CHECKBOX (N_("&Erase at end of move"), &erase_at_end, NULL),
                 QUICK_STOP_GROUPBOX,
                 QUICK_START_GROUPBOX (N_("Esc key mode")),
                     QUICK_CHECKBOX (N_("S&ingle press"), &old_esc_mode, &configure_old_esc_mode_id),
