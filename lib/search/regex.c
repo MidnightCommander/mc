@@ -33,7 +33,6 @@
 #include "lib/global.h"
 #include "lib/strutil.h"
 #include "lib/search.h"
-#include "lib/strescape.h"
 #include "lib/util.h"           /* MC_PTR_FREE */
 
 #include "internal.h"

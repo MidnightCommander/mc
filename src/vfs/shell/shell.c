@@ -60,7 +60,7 @@
 
 #include "lib/global.h"
 #include "lib/tty/tty.h"        /* enable/disable interrupt key */
-#include "lib/strescape.h"
+#include "lib/strutil.h"
 #include "lib/unixcompat.h"
 #include "lib/fileloc.h"
 #include "lib/util.h"           /* my_exit() */

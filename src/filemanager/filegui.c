@@ -147,7 +147,6 @@ statfs (char const *filename, struct fs_info *buf)
 #include "lib/mcconfig.h"
 #include "lib/search.h"
 #include "lib/vfs/vfs.h"
-#include "lib/strescape.h"
 #include "lib/strutil.h"
 #include "lib/timefmt.h"        /* file_date() */
 #include "lib/util.h"

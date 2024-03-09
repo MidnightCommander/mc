@@ -46,7 +46,6 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 #include "lib/strutil.h"
-#include "lib/strescape.h"      /* strutils_glob_escape() */
 #ifdef HAVE_CHARSET
 #include "lib/charsets.h"
 #endif

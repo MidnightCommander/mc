@@ -54,7 +54,7 @@
 #include "lib/mcconfig.h"
 #include "lib/vfs/vfs.h"
 #include "lib/fileloc.h"
-#include "lib/strescape.h"
+#include "lib/strutil.h"
 #include "lib/hook.h"
 #include "lib/util.h"
 

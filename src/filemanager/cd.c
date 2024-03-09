@@ -36,7 +36,7 @@
 
 #include "lib/global.h"
 #include "lib/vfs/vfs.h"
-#include "lib/strescape.h"      /* strutils_shell_unescape() */
+#include "lib/strutil.h"
 #include "lib/util.h"           /* whitespace() */
 #include "lib/widget.h"         /* message() */
 

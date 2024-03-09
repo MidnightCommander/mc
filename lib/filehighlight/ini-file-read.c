@@ -29,7 +29,7 @@
 
 #include "lib/global.h"
 #include "lib/fileloc.h"
-#include "lib/strescape.h"
+#include "lib/strutil.h"
 #include "lib/skin.h"
 #include "lib/util.h"           /* exist_file() */
 

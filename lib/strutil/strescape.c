@@ -27,7 +27,7 @@
 #include <config.h>
 
 #include "lib/global.h"
-#include "lib/strescape.h"
+#include "lib/strutil.h"
 
 /*** global variables ****************************************************************************/
 

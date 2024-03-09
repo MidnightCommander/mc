@@ -29,7 +29,6 @@
 #include "lib/global.h"
 #include "lib/strutil.h"
 #include "lib/search.h"
-#include "lib/strescape.h"
 
 #include "internal.h"
 

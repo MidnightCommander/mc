@@ -29,7 +29,6 @@
 
 #include "lib/mcconfig.h"
 #include "lib/strutil.h"
-#include "lib/strescape.h"
 #include "lib/vfs/vfs.h"
 #include "src/vfs/local/local.c"
 

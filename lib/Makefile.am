@@ -19,7 +19,6 @@ SUBLIB_includes = \
 	mcconfig.h \
 	search.h \
 	skin.h \
-	strescape.h \
 	strutil.h \
 	widget.h
 
