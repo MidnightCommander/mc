@@ -46,7 +46,6 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 #include "lib/strutil.h"
-#include "lib/strescape.h"      /* strutils_glob_escape() */
 #ifdef HAVE_CHARSET
 #include "lib/charsets.h"
 #endif
@@ -821,8 +820,8 @@ dff_execute (const char *args, const char *extra, const char *file1, const char 
     char *file1_esc, *file2_esc;
 
     /* escape potential $ to avoid shell variable substitutions in popen() */
-    file1_esc = strutils_shell_escape (file1);
-    file2_esc = strutils_shell_escape (file2);
+    file1_esc = str_shell_escape (file1);
+    file2_esc = str_shell_escape (file2);
     cmd = g_strdup_printf ("diff %s %s %s %s %s", args, extra, opt, file1_esc, file2_esc);
     g_free (file1_esc);
     g_free (file2_esc);

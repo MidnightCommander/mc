@@ -29,7 +29,7 @@
 
 #include "lib/global.h"
 #include "lib/fileloc.h"
-#include "lib/strescape.h"
+#include "lib/strutil.h"
 #include "lib/skin.h"
 #include "lib/util.h"           /* exist_file() */
 
@@ -154,7 +154,7 @@ mc_fhl_parse_get_extensions (mc_fhl_t * fhl, const gchar * group_name)
     {
         char *esc_ext;
 
-        esc_ext = strutils_regex_escape (*exts);
+        esc_ext = str_regex_escape (*exts);
         if (buf->len != 0)
             g_string_append_c (buf, '|');
         g_string_append (buf, esc_ext);

@@ -54,7 +54,7 @@
 #include "lib/mcconfig.h"
 #include "lib/vfs/vfs.h"
 #include "lib/fileloc.h"
-#include "lib/strescape.h"
+#include "lib/strutil.h"
 #include "lib/hook.h"
 #include "lib/util.h"
 
@@ -322,7 +322,7 @@ tree_store_load_from (const char *name)
 static char *
 encode (const vfs_path_t * vpath, size_t offset)
 {
-    return strutils_escape (vfs_path_as_str (vpath) + offset, -1, "\n\\", FALSE);
+    return str_escape (vfs_path_as_str (vpath) + offset, -1, "\n\\", FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */

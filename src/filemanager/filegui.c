@@ -147,7 +147,6 @@ statfs (char const *filename, struct fs_info *buf)
 #include "lib/mcconfig.h"
 #include "lib/search.h"
 #include "lib/vfs/vfs.h"
-#include "lib/strescape.h"
 #include "lib/strutil.h"
 #include "lib/timefmt.h"        /* file_date() */
 #include "lib/util.h"
@@ -1322,9 +1321,9 @@ file_mask_dialog (file_op_context_t * ctx, gboolean only_one, const char *format
     vfs_path_free (vpath, TRUE);
 
     if (source_easy_patterns)
-        def_text_secure = strutils_glob_escape (tmp);
+        def_text_secure = str_glob_escape (tmp);
     else
-        def_text_secure = strutils_regex_escape (tmp);
+        def_text_secure = str_regex_escape (tmp);
     g_free (tmp);
 
     if (only_one)

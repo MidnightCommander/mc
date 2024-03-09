@@ -48,7 +48,6 @@
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"        /* XCTRL and ALT macros */
 #include "lib/vfs/vfs.h"
-#include "lib/strescape.h"
 #include "lib/strutil.h"
 #include "lib/util.h"
 #include "lib/widget.h"
@@ -151,12 +150,12 @@ filename_completion_function (const char *text, int state, input_complete_t flag
         char *result;
         char *e_result;
 
-        u_text = strutils_shell_unescape (text);
+        u_text = str_shell_unescape (text);
 
         result = filename_completion_function (u_text, state, flags & (~INPUT_COMPLETE_SHELL_ESC));
         g_free (u_text);
 
-        e_result = strutils_shell_escape (result);
+        e_result = str_shell_escape (result);
         g_free (result);
 
         return e_result;
@@ -587,7 +586,7 @@ command_completion_function (const char *text, int state, input_complete_t flags
     if ((flags & INPUT_COMPLETE_COMMANDS) == 0)
         return NULL;
 
-    u_text = strutils_shell_unescape (text);
+    u_text = str_shell_unescape (text);
     flags &= ~INPUT_COMPLETE_SHELL_ESC;
 
     if (state == 0)
@@ -621,7 +620,7 @@ command_completion_function (const char *text, int state, input_complete_t flags
         {
             char *temp_p = p;
 
-            p = strutils_shell_escape (p);
+            p = str_shell_escape (p);
             g_free (temp_p);
         }
 
@@ -688,7 +687,7 @@ command_completion_function (const char *text, int state, input_complete_t flags
         {
             char *tmp = found;
 
-            found = strutils_shell_escape (p + 1);
+            found = str_shell_escape (p + 1);
             g_free (tmp);
         }
     }
@@ -884,7 +883,7 @@ try_complete_find_start_sign (try_complete_automation_state_t * state)
         state->q = strrchr (state->word, '$');
 
         /* don't substitute variable in \$ case */
-        if (strutils_is_char_escaped (state->word, state->q))
+        if (str_is_char_escaped (state->word, state->q))
         {
             /* drop '\\' */
             str_move (state->q - 1, state->q);
@@ -1398,7 +1397,7 @@ try_complete (char *text, int *lc_start, int *lc_end, input_complete_t flags)
             char *p;
 
             p = *m;
-            *m = strutils_shell_escape (*m);
+            *m = str_shell_escape (*m);
             g_free (p);
         }
     }
@@ -1431,7 +1430,7 @@ complete_engine_fill_completions (WInput * in)
     for (; s >= in->buffer->str; str_prev_char (&s))
     {
         start = s - in->buffer->str;
-        if (strchr (word_separators, *s) != NULL && !strutils_is_char_escaped (in->buffer->str, s))
+        if (strchr (word_separators, *s) != NULL && !str_is_char_escaped (in->buffer->str, s))
             break;
     }
 

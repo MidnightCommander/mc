@@ -41,7 +41,7 @@
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"        /* XCTRL and ALT macros  */
 #include "lib/skin.h"
-#include "lib/strescape.h"
+#include "lib/strutil.h"
 #include "lib/mcconfig.h"
 #include "lib/vfs/vfs.h"
 #include "lib/unixcompat.h"
@@ -2126,7 +2126,7 @@ panel_select_ext_cmd (WPanel * panel)
 
     do_select = (fe->f.marked == 0);
 
-    cur_file_ext = strutils_regex_escape (extension (filename->str));
+    cur_file_ext = str_regex_escape (extension (filename->str));
     if (cur_file_ext[0] != '\0')
         reg_exp = g_strconcat ("^.*\\.", cur_file_ext, "$", (char *) NULL);
     else
@@ -2810,7 +2810,7 @@ do_search (WPanel * panel, int c_code)
     }
 
     reg_exp = g_strdup_printf ("%s*", panel->quick_search.buffer->str);
-    esc_str = strutils_escape (reg_exp, -1, ",|\\{}[]", TRUE);
+    esc_str = str_escape (reg_exp, -1, ",|\\{}[]", TRUE);
     search = mc_search_new (esc_str, NULL);
     search->search_type = MC_SEARCH_T_GLOB;
     search->is_entire_line = TRUE;

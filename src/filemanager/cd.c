@@ -36,7 +36,7 @@
 
 #include "lib/global.h"
 #include "lib/vfs/vfs.h"
-#include "lib/strescape.h"      /* strutils_shell_unescape() */
+#include "lib/strutil.h"
 #include "lib/util.h"           /* whitespace() */
 #include "lib/widget.h"         /* message() */
 
@@ -90,7 +90,7 @@ examine_cd (const char *_path)
     char *p;
 
     /* Tilde expansion */
-    path = strutils_shell_unescape (_path);
+    path = str_shell_unescape (_path);
     path_tilde = tilde_expand (path);
     g_free (path);
 

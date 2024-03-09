@@ -64,7 +64,6 @@
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"
 #include "lib/search.h"
-#include "lib/strescape.h"
 #include "lib/strutil.h"
 #include "lib/util.h"
 #include "lib/vfs/vfs.h"
