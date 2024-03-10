@@ -144,6 +144,10 @@ tar_seek_archive (tar_super_t * archive, off_t size)
     off_t nrec, nblk;
     off_t skipped;
 
+    /* If low level I/O is already at EOF, do not try to seek further. */
+    if (record_end < archive->record_start + blocking_factor)
+        return 0;
+
     skipped = (blocking_factor - (current_block - archive->record_start)) * BLOCKSIZE;
     if (size <= skipped)
         return 0;
