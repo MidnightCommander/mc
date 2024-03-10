@@ -57,6 +57,11 @@
 /* Difference or zero */
 #define DOZ(a, b) ((a) > (b) ? (a) - (b) : 0)
 
+/* flags for shell_execute */
+#define EXECUTE_INTERNAL (1 << 0)
+#define EXECUTE_AS_SHELL (1 << 2)
+#define EXECUTE_HIDE     (1 << 3)
+
 /*** enums ***************************************************************************************/
 
 /* Pathname canonicalization */

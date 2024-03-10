@@ -23,7 +23,7 @@ SUBLIB_includes = \
 	widget.h
 
 SRC_mc_utils = \
-	utilunix.c utilunix.h \
+	utilunix.c \
 	unixcompat.h \
 	util.c util.h
 

@@ -70,8 +70,6 @@
 #include "lib/charsets.h"
 #endif
 
-#include "utilunix.h"
-
 /*** global variables ****************************************************************************/
 
 struct sigaction startup_handler;
