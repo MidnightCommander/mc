@@ -31,7 +31,6 @@
 #include <unistd.h>
 
 #include "lib/util.h"
-#include "lib/utilunix.h"
 
 #include "utilunix__my_system-common.c"
 
