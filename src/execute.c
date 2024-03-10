@@ -425,7 +425,7 @@ shell_execute (const char *command, int flags)
 {
     char *cmd = NULL;
 
-    if (flags & EXECUTE_HIDE)
+    if ((flags & EXECUTE_HIDE) != 0)
     {
         cmd = g_strconcat (" ", command, (char *) NULL);
         flags ^= EXECUTE_HIDE;
@@ -435,13 +435,14 @@ shell_execute (const char *command, int flags)
     if (mc_global.tty.use_subshell)
     {
         if (subshell_state == INACTIVE)
-            do_execute (mc_global.shell->path, cmd ? cmd : command, flags | EXECUTE_AS_SHELL);
+            do_execute (mc_global.shell->path, cmd != NULL ? cmd : command,
+                        flags | EXECUTE_AS_SHELL);
         else
             message (D_ERROR, MSG_ERROR, "%s", _("The shell is already running a command"));
     }
     else
 #endif /* ENABLE_SUBSHELL */
-        do_execute (mc_global.shell->path, cmd ? cmd : command, flags | EXECUTE_AS_SHELL);
+        do_execute (mc_global.shell->path, cmd != NULL ? cmd : command, flags | EXECUTE_AS_SHELL);
 
     g_free (cmd);
 }
