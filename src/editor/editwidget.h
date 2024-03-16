@@ -150,6 +150,9 @@ struct WEdit
     unsigned int redo_stack_reset:1;    /* If 1, need clear redo stack */
 
     struct stat stat1;          /* Result of mc_fstat() on the file */
+    unsigned long attrs;        /* Result of mc_fgetflags() on the file */
+    gboolean attrs_ok;          /* mc_fgetflags() == 0 */
+
     unsigned int skip_detach_prompt:1;  /* Do not prompt whether to detach a file anymore */
 
     /* syntax highlighting */
