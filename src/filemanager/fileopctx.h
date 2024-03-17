@@ -92,13 +92,6 @@ typedef struct
     size_t progress_count;
     uintmax_t progress_bytes;
 
-    /* The value of the "preserve Attributes" checkbox in the copy file dialog.
-     * We can't use the value of "ctx->preserve" because it can change in order
-     * to preserve file attributes when moving files across filesystem boundaries
-     * (we want to keep the value of the checkbox between copy operations).
-     */
-    gboolean op_preserve;
-
     /* Result from the recursive query */
     FileCopyMode recursive_result;
 
