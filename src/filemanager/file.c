@@ -2272,6 +2272,8 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
     mode_t src_mode = 0;        /* The mode of the source file */
     struct stat src_stat, dst_stat;
     mc_timesbuf_t times;
+    unsigned long attrs;
+    gboolean attrs_ok = ctx->preserve;
     gboolean dst_exists = FALSE, appending = FALSE;
     off_t file_size = -1;
     FileProgressStatus return_status, temp_status;
@@ -2336,6 +2338,30 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
             goto ret_fast;
     }
 
+    while (attrs_ok && mc_fgetflags (src_vpath, &attrs) != 0)
+    {
+        attrs_ok = FALSE;
+
+        /* don't show an error message if attributes aren't supported in this FS */
+        if (errno == ENOTSUP)
+            return_status = FILE_CONT;
+        else if (ctx->skip_all)
+            return_status = FILE_SKIPALL;
+        else
+        {
+            return_status =
+                file_error (TRUE, _("Cannot get attributes of source file \"%s\"\n%s"), src_path);
+            if (return_status == FILE_SKIPALL)
+                ctx->skip_all = TRUE;
+        }
+
+        if (return_status != FILE_RETRY)
+            break;
+
+        /* yet another attempt */
+        attrs_ok = TRUE;
+    }
+
     if (dst_exists)
     {
         /* Destination already exists */
@@ -2379,7 +2405,30 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
         {
             return_status = make_symlink (ctx, src_vpath, dst_vpath);
             if (return_status == FILE_CONT && ctx->preserve)
+            {
                 mc_utime (dst_vpath, &times);
+
+                while (attrs_ok && mc_fsetflags (dst_vpath, attrs) != 0 && !ctx->skip_all)
+                {
+                    attrs_ok = FALSE;
+
+                    /* don't show an error message if attributes aren't supported in this FS */
+                    if (errno == ENOTSUP)
+                        return_status = FILE_CONT;
+                    else if (return_status == FILE_SKIPALL)
+                        ctx->skip_all = TRUE;
+                    else
+                        return_status =
+                            file_error (TRUE, _("Cannot set attributes of target file \"%s\"\n%s"),
+                                        dst_path);
+
+                    if (return_status != FILE_RETRY)
+                        break;
+
+                    /* yet another attempt */
+                    attrs_ok = TRUE;
+                }
+            }
             goto ret_fast;
         }
 
@@ -2433,6 +2482,31 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
                     return_status = temp_status;
                     goto ret_fast;
                 }
+            }
+
+            while (attrs_ok && mc_fsetflags (dst_vpath, attrs) != 0 && !ctx->skip_all)
+            {
+                attrs_ok = FALSE;
+
+                /* don't show an error message if attributes aren't supported in this FS */
+                if (errno == ENOTSUP)
+                    break;
+
+                temp_status =
+                    file_error (TRUE, _("Cannot set attributes of target file \"%s\"\n%s"),
+                                dst_path);
+                if (temp_status == FILE_SKIP)
+                    break;
+                if (temp_status == FILE_SKIPALL)
+                    ctx->skip_all = TRUE;
+                if (temp_status != FILE_RETRY)
+                {
+                    return_status = temp_status;
+                    goto ret_fast;
+                }
+
+                /* yet another attempt */
+                attrs_ok = TRUE;
             }
 
             return_status = FILE_CONT;
@@ -2817,9 +2891,39 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
         }
     }
 
-    /* Always sync timestamps */
     if (dst_status == DEST_FULL || dst_status == DEST_SHORT_KEEP)
+    {
+        /* Always sync timestamps */
         mc_utime (dst_vpath, &times);
+
+        while (attrs_ok && mc_fsetflags (dst_vpath, attrs) != 0 && !ctx->skip_all)
+        {
+            attrs_ok = FALSE;
+
+            /* don't show an error message if attributes aren't supported in this FS */
+            if (errno == ENOTSUP)
+            {
+                return_status = FILE_CONT;
+                break;
+            }
+
+            temp_status = file_error (TRUE, _("Cannot set attributes for target file \"%s\"\n%s"),
+                                      dst_path);
+            if (temp_status == FILE_RETRY)
+            {
+                attrs_ok = TRUE;
+                continue;
+            }
+            if (temp_status == FILE_SKIPALL)
+            {
+                ctx->skip_all = TRUE;
+                return_status = FILE_CONT;
+            }
+            if (temp_status == FILE_SKIP)
+                return_status = FILE_CONT;
+            break;
+        }
+    }
 
     if (return_status == FILE_CONT)
         return_status = progress_update_one (tctx, ctx, file_size);
@@ -2844,6 +2948,8 @@ copy_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const cha
 {
     struct vfs_dirent *next;
     struct stat dst_stat, src_stat;
+    unsigned long attrs;
+    gboolean attrs_ok = ctx->preserve;
     DIR *reading;
     FileProgressStatus return_status = FILE_CONT;
     struct link *lp;
@@ -2865,6 +2971,34 @@ copy_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const cha
             return_status = file_error (TRUE, _("Cannot stat source directory \"%s\"\n%s"), s);
             if (return_status == FILE_RETRY)
                 goto retry_src_stat;
+            if (return_status == FILE_SKIPALL)
+                ctx->skip_all = TRUE;
+        }
+        goto ret_fast;
+    }
+
+    while (attrs_ok && mc_fgetflags (src_vpath, &attrs) != 0)
+    {
+        attrs_ok = FALSE;
+
+        /* don't show an error message if attributes aren't supported in this FS */
+        if (errno == ENOTSUP)
+        {
+            return_status = FILE_CONT;
+            break;
+        }
+
+        if (ctx->skip_all)
+            return_status = FILE_SKIPALL;
+        else
+        {
+            return_status =
+                file_error (TRUE, _("Cannot get attributes of source directory \"%s\"\n%s"), s);
+            if (return_status == FILE_RETRY)
+            {
+                attrs_ok = TRUE;
+                continue;
+            }
             if (return_status == FILE_SKIPALL)
                 ctx->skip_all = TRUE;
         }
@@ -3097,6 +3231,10 @@ copy_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const cha
         mc_timesbuf_t times;
 
         mc_chmod (dst_vpath, src_stat.st_mode & ctx->umask_kill);
+
+        if (attrs_ok)
+            mc_fsetflags (dst_vpath, attrs);
+
         get_times (&src_stat, &times);
         mc_utime (dst_vpath, &times);
     }
