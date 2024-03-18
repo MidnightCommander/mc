@@ -13,8 +13,12 @@ skin_DATA = \
 	julia256.ini \
 	mc46.ini \
 	modarcon16-defbg.ini \
+	modarcon16-defbg-thin.ini \
 	modarcon16.ini \
+	modarcon16-thin.ini \
 	modarcon16root-defbg.ini \
+	modarcon16root-defbg-thin.ini \
+	modarcon16root-thin.ini \
 	modarcon16root.ini \
 	modarin256-defbg.ini \
 	modarin256.ini \
