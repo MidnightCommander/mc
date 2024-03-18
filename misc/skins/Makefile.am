@@ -20,9 +20,13 @@ skin_DATA = \
 	modarcon16root-defbg-thin.ini \
 	modarcon16root-thin.ini \
 	modarcon16root.ini \
+	modarin256-defbg-thin.ini \
 	modarin256-defbg.ini \
+	modarin256-thin.ini \
 	modarin256.ini \
+	modarin256root-defbg-thin.ini \
 	modarin256root-defbg.ini \
+	modarin256root-thin.ini \
 	modarin256root.ini \
 	nicedark.ini \
 	sand256.ini \
