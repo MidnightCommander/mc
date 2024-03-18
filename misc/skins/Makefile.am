@@ -26,7 +26,9 @@ skin_DATA = \
 	seasons-spring16M.ini \
 	seasons-summer16M.ini \
 	seasons-winter16M.ini \
+	xoria256-thin.ini \
 	xoria256.ini \
+	xoria256root-thin.ini \
 	yadt256-defbg.ini \
 	yadt256.ini
 
