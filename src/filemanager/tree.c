@@ -762,7 +762,7 @@ tree_move (WTree * tree, const char *default_dest)
 
         dest_vpath = vfs_path_from_str (dest);
 
-        if (mc_stat (dest_vpath, &buf))
+        if (mc_stat (dest_vpath, &buf) != 0)
             message (D_ERROR, MSG_ERROR, _("Cannot stat the destination\n%s"),
                      unix_error_string (errno));
         else if (!S_ISDIR (buf.st_mode))
