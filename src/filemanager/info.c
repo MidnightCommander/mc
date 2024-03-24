@@ -262,23 +262,23 @@ info_show_info (WInfo * info)
     case 6:
         widget_gotoyx (w, 6, 3);
 
+#ifdef ENABLE_EXT2FS_ATTR
         {
             vfs_path_t *vpath;
-#ifdef ENABLE_EXT2FS_ATTR
             unsigned long attr;
-#endif
 
             vpath = vfs_path_from_str (fe->fname->str);
 
-#ifdef ENABLE_EXT2FS_ATTR
             if (mc_fgetflags (vpath, &attr) == 0)
                 tty_printf (_("Attributes: %s"), chattr_get_as_str (attr));
             else
-#endif
                 tty_print_string (_("Attributes: unavailable"));
 
             vfs_path_free (vpath, TRUE);
         }
+#else
+        tty_print_string (_("Attributes: unavailable"));
+#endif /* ENABLE_EXT2FS_ATTR */
         MC_FALLTHROUGH;
     case 5:
         widget_gotoyx (w, 5, 3);
