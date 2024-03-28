@@ -1,40 +1,65 @@
 # Syntax rules for the C and the C++ programming languages
 
 context default
+    keyword whole alignas yellow
+    keyword whole alignof yellow
+    keyword whole asm yellow
     keyword whole auto yellow
     keyword whole break yellow
     keyword whole case yellow
     keyword whole char yellow
+    keyword whole constexpr yellow
     keyword whole const yellow
     keyword whole continue yellow
-    keyword whole do yellow
+    keyword whole default yellow
     keyword whole double yellow
+    keyword whole do yellow
     keyword whole else yellow
     keyword whole enum yellow
     keyword whole extern yellow
+    keyword whole false yellow
     keyword whole float yellow
     keyword whole for yellow
     keyword whole goto yellow
     keyword whole if yellow
+    keyword whole inline yellow
     keyword whole int yellow
     keyword whole long yellow
+    keyword whole nullptr yellow
     keyword whole register yellow
+    keyword whole restrict yellow
     keyword whole return yellow
     keyword whole short yellow
     keyword whole signed yellow
     keyword whole sizeof yellow
     keyword whole static yellow
+    keyword whole static_assert yellow
     keyword whole struct yellow
     keyword whole switch yellow
+    keyword whole thread_local yellow
+    keyword whole true yellow
     keyword whole typedef yellow
+    keyword whole typeof yellow
+    keyword whole typeof_unqual yellow
     keyword whole union yellow
     keyword whole unsigned yellow
     keyword whole void yellow
     keyword whole volatile yellow
-    keyword whole while yellow
-    keyword whole asm yellow
-    keyword whole inline yellow
     keyword whole wchar_t yellow
+    keyword whole while yellow
+    keyword whole _Alignas yellow
+    keyword whole _Alignof yellow
+    keyword whole _Atomic yellow
+    keyword whole _Bool yellow
+    keyword whole _Complex yellow
+    keyword whole _Decimal32 yellow
+    keyword whole _Decimal64 yellow
+    keyword whole _Decimal128 yellow
+    keyword whole _Generic yellow
+    keyword whole _Imaginary yellow
+    keyword whole _Noreturn yellow
+    keyword whole _Static_assert yellow
+    keyword whole _Thread_local yellow
     keyword whole ... yellow
     keyword linestart \{\s\t\}\[\s\t\]#*\n brightmagenta
     keyword whole \[\s\t\]default yellow
