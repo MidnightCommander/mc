@@ -362,7 +362,7 @@ main (int argc, char *argv[])
 
 #ifdef ENABLE_SUBSHELL
     /* Disallow subshell when invoked as standalone viewer or editor from running mc */
-    if (mc_global.mc_run_mode != MC_RUN_FULL && mc_global.run_from_parent_mc)
+    if (mc_global.shell->type == SHELL_SH || (mc_global.mc_run_mode != MC_RUN_FULL && mc_global.run_from_parent_mc))
         mc_global.tty.use_subshell = FALSE;
 
     if (mc_global.tty.use_subshell)
