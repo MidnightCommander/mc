@@ -16,6 +16,11 @@
 
 /*** declarations of public functions ************************************************************/
 
+#if ! GLIB_CHECK_VERSION (2, 54, 0)
+gboolean g_ptr_array_find_with_equal_func (GPtrArray * haystack, gconstpointer needle,
+                                           GEqualFunc equal_func, guint * index_);
+#endif /* ! GLIB_CHECK_VERSION (2, 54, 0) */
+
 #if ! GLIB_CHECK_VERSION (2, 63, 3)
 void g_clear_slist (GSList ** slist_ptr, GDestroyNotify destroy);
 void g_clear_list (GList ** list_ptr, GDestroyNotify destroy);
