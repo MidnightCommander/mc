@@ -10,7 +10,7 @@
    Dugan Porter, 1994, 1995, 1996
    Jakub Jelinek, 1994, 1995, 1996
    Mauricio Plaza, 1994, 1995, 1996
-   Andrew Borodin <aborodin@vmail.ru> 2010-2022
+   Andrew Borodin <aborodin@vmail.ru> 2010-2024
 
    The mc_realpath routine is mostly from uClibc package, written
    by Rick Sladkey <jrs@world.std.com>
@@ -61,7 +61,7 @@
 
 #include "lib/unixcompat.h"
 #include "lib/vfs/vfs.h"        /* VFS_ENCODING_PREFIX */
-#include "lib/strutil.h"        /* str_move() */
+#include "lib/strutil.h"        /* str_move(), str_tokenize() */
 #include "lib/util.h"
 #include "lib/widget.h"         /* message() */
 #include "lib/vfs/xdirentry.h"
@@ -198,30 +198,24 @@ my_system__restore_sigaction_handlers (my_system_sigactions_t * sigactions)
 /* --------------------------------------------------------------------------------------------- */
 
 static GPtrArray *
-my_system_make_arg_array (int flags, const char *shell, char **execute_name)
+my_system_make_arg_array (int flags, const char *shell)
 {
     GPtrArray *args_array;
 
-    args_array = g_ptr_array_new ();
-
     if ((flags & EXECUTE_AS_SHELL) != 0)
     {
+        args_array = g_ptr_array_new ();
         g_ptr_array_add (args_array, (gpointer) shell);
         g_ptr_array_add (args_array, (gpointer) "-c");
-        *execute_name = g_strdup (shell);
+    }
+    else if (shell == NULL || *shell == '\0')
+    {
+        args_array = g_ptr_array_new ();
+        g_ptr_array_add (args_array, NULL);
     }
     else
-    {
-        char *shell_token;
+        args_array = str_tokenize (shell);
 
-        shell_token = shell != NULL ? strchr (shell, ' ') : NULL;
-        if (shell_token == NULL)
-            *execute_name = g_strdup (shell);
-        else
-            *execute_name = g_strndup (shell, (gsize) (shell_token - shell));
-
-        g_ptr_array_add (args_array, (gpointer) shell);
-    }
     return args_array;
 }
 
@@ -472,11 +466,13 @@ my_systemv (const char *command, char *const argv[])
 int
 my_systemv_flags (int flags, const char *command, char *const argv[])
 {
-    char *execute_name = NULL;
+    const char *execute_name;
     GPtrArray *args_array;
     int status = 0;
 
-    args_array = my_system_make_arg_array (flags, command, &execute_name);
+    args_array = my_system_make_arg_array (flags, command);
+
+    execute_name = g_ptr_array_index (args_array, 0);
 
     for (; argv != NULL && *argv != NULL; argv++)
         g_ptr_array_add (args_array, *argv);
@@ -484,7 +480,6 @@ my_systemv_flags (int flags, const char *command, char *const argv[])
     g_ptr_array_add (args_array, NULL);
     status = my_systemv (execute_name, (char *const *) args_array->pdata);
 
-    g_free (execute_name);
     g_ptr_array_free (args_array, TRUE);
 
     return status;
