@@ -239,6 +239,8 @@ edit_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
 
     (void) mc_chown (savename_vpath, edit->stat1.st_uid, edit->stat1.st_gid);
     (void) mc_chmod (savename_vpath, edit->stat1.st_mode);
+    if (edit->attrs_ok)
+        (void) mc_fsetflags (savename_vpath, edit->attrs);
 
     fd = mc_open (savename_vpath, O_CREAT | O_WRONLY | O_TRUNC | O_BINARY, edit->stat1.st_mode);
     if (fd == -1)

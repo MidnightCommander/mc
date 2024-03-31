@@ -2164,6 +2164,8 @@ edit_init (WEdit * edit, const WRect * r, const vfs_path_t * filename_vpath, lon
     edit->stat1.st_gid = getgid ();
     edit->stat1.st_mtime = 0;
 
+    edit->attrs_ok = (mc_fgetflags (filename_vpath, &edit->attrs) == 0);
+
     edit->over_col = 0;
     edit->bracket = -1;
     edit->last_bracket = -1;
