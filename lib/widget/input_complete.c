@@ -402,9 +402,7 @@ static void
 fetch_hosts (const char *filename, GPtrArray * hosts)
 {
     FILE *file;
-    char buffer[256];
-    char *name;
-    char *lc_start;
+    char buffer[BUF_MEDIUM];
     char *bi;
 
     file = fopen (filename, "r");
@@ -427,14 +425,14 @@ fetch_hosts (const char *filename, GPtrArray * hosts)
             char *includefile, *t;
 
             /* Find start of filename. */
-            includefile = bi + 9;
-            while (*includefile != '\0' && whitespace (*includefile))
-                includefile++;
+            for (includefile = bi + 9; includefile[0] != '\0' && whitespace (includefile[0]);
+                 includefile++)
+                ;
             t = includefile;
 
             /* Find end of filename. */
-            while (t[0] != '\0' && !str_isspace (t))
-                str_next_char (&t);
+            for (; t[0] != '\0' && !str_isspace (t); str_next_char (&t))
+                ;
             *t = '\0';
 
             fetch_hosts (includefile, hosts);
@@ -442,16 +440,19 @@ fetch_hosts (const char *filename, GPtrArray * hosts)
         }
 
         /* Skip IP #s. */
-        while (bi[0] != '\0' && !str_isspace (bi))
-            str_next_char (&bi);
+        for (; bi[0] != '\0' && !str_isspace (bi); str_next_char (&bi))
+            ;
 
         /* Get the host names separated by white space. */
         while (bi[0] != '\0' && bi[0] != '#')
         {
-            while (bi[0] != '\0' && str_isspace (bi))
-                str_next_char (&bi);
+            char *lc_start, *name;
+
+            for (; bi[0] != '\0' && str_isspace (bi); str_next_char (&bi))
+                ;
             if (bi[0] == '#')
                 continue;
+
             for (lc_start = bi; bi[0] != '\0' && !str_isspace (bi); str_next_char (&bi))
                 ;
 
