@@ -111,7 +111,6 @@ typedef struct
     const struct vfs_class *vfs;
     dev_t dev;
     ino_t ino;
-    short linkcount;
     mode_t st_mode;
     vfs_path_t *src_vpath;
     vfs_path_t *dst_vpath;
@@ -481,7 +480,6 @@ check_hardlinks (const vfs_path_t * src_vpath, const struct stat *src_stat,
         lnk->vfs = vfs_path_get_last_path_vfs (src_vpath);
         lnk->ino = ino;
         lnk->dev = dev;
-        lnk->linkcount = 0;
         lnk->st_mode = 0;
         lnk->src_vpath = vfs_path_clone (src_vpath);
         lnk->dst_vpath = vfs_path_clone (dst_vpath);
