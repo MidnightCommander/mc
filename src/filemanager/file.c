@@ -188,14 +188,8 @@ static GSList *linklist = NULL;
 static GQueue *erase_list = NULL;
 
 /*
- * In copy_dir_dir we use two additional single linked lists: The first -
- * variable name 'parent_dirs' - holds information about already copied
- * directories and is used to detect cyclic symbolic links.
- * The second ('dest_dirs' below) holds information about just created
- * target directories and is used to detect when an directory is copied
- * into itself (we don't want to copy infinitely).
- * Both lists don't use the linkcount and name structure members of struct
- * link_t.
+ * This list holds information about just created target directories and is used to detect
+ * when an directory is copied into itself (we don't want to copy infinitely).
  */
 static GSList *dest_dirs = NULL;
 
