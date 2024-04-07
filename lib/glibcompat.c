@@ -44,10 +44,85 @@
 
 /*** file scope variables ************************************************************************/
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+#if ! GLIB_CHECK_VERSION (2, 54, 0)
+/**
+ * g_direct_equal:
+ * @v1: (nullable): a key
+ * @v2: (nullable): a key to compare with @v1
+ *
+ * Compares two #gpointer arguments and returns %TRUE if they are equal.
+ * It can be passed to g_hash_table_new() as the @key_equal_func
+ * parameter, when using opaque pointers compared by pointer value as
+ * keys in a #GHashTable.
+ *
+ * This equality function is also appropriate for keys that are integers
+ * stored in pointers, such as `GINT_TO_POINTER (n)`.
+ *
+ * Returns: %TRUE if the two keys match.
+ */
+
+static gboolean
+g_direct_equal (gconstpointer v1, gconstpointer v2)
+{
+    return v1 == v2;
+}
+#endif /* ! GLIB_CHECK_VERSION (2, 54, 0) */
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+#if ! GLIB_CHECK_VERSION (2, 54, 0)
+/**
+ * g_ptr_array_find_with_equal_func: (skip)
+ * @haystack: pointer array to be searched
+ * @needle: pointer to look for
+ * @equal_func: (nullable): the function to call for each element, which should
+ *    return %TRUE when the desired element is found; or %NULL to use pointer
+ *    equality
+ * @index_: (optional) (out): return location for the index of
+ *    the element, if found
+ *
+ * Checks whether @needle exists in @haystack, using the given @equal_func.
+ * If the element is found, %TRUE is returned and the element^A^A^As index is
+ * returned in @index_ (if non-%NULL). Otherwise, %FALSE is returned and @index_
+ * is undefined. If @needle exists multiple times in @haystack, the index of
+ * the first instance is returned.
+ *
+ * @equal_func is called with the element from the array as its first parameter,
+ * and @needle as its second parameter. If @equal_func is %NULL, pointer
+ * equality is used.
+ *
+ * Returns: %TRUE if @needle is one of the elements of @haystack
+ * Since: 2.54
+ */
+gboolean
+g_ptr_array_find_with_equal_func (GPtrArray * haystack, gconstpointer needle, GEqualFunc equal_func,
+                                  guint * index_)
+{
+    guint i;
+
+    g_return_val_if_fail (haystack != NULL, FALSE);
+
+    if (equal_func == NULL)
+        equal_func = g_direct_equal;
+
+    for (i = 0; i < haystack->len; i++)
+        if (equal_func (g_ptr_array_index (haystack, i), needle))
+        {
+            if (index_ != NULL)
+                *index_ = i;
+            return TRUE;
+        }
+
+    return FALSE;
+}
+#endif /* ! GLIB_CHECK_VERSION (2, 54, 0) */
+
 /* --------------------------------------------------------------------------------------------- */
 
 #if ! GLIB_CHECK_VERSION (2, 63, 3)

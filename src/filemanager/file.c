@@ -64,7 +64,6 @@
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"
 #include "lib/search.h"
-#include "lib/strescape.h"
 #include "lib/strutil.h"
 #include "lib/util.h"
 #include "lib/vfs/vfs.h"
@@ -107,16 +106,15 @@ const char *op_names[3] = {
 /*** file scope type declarations ****************************************************************/
 
 /* This is a hard link cache */
-struct link
+typedef struct
 {
     const struct vfs_class *vfs;
     dev_t dev;
     ino_t ino;
-    short linkcount;
     mode_t st_mode;
     vfs_path_t *src_vpath;
     vfs_path_t *dst_vpath;
-};
+} link_t;
 
 /* Status of the destination file */
 typedef enum
@@ -189,14 +187,8 @@ static GSList *linklist = NULL;
 static GQueue *erase_list = NULL;
 
 /*
- * In copy_dir_dir we use two additional single linked lists: The first -
- * variable name 'parent_dirs' - holds information about already copied
- * directories and is used to detect cyclic symbolic links.
- * The second ('dest_dirs' below) holds information about just created
- * target directories and is used to detect when an directory is copied
- * into itself (we don't want to copy infinitely).
- * Both lists don't use the linkcount and name structure members of struct
- * link.
+ * This list holds information about just created target directories and is used to detect
+ * when an directory is copied into itself (we don't want to copy infinitely).
  */
 static GSList *dest_dirs = NULL;
 
@@ -310,7 +302,7 @@ build_dest (file_op_context_t * ctx, const char *src, const char *dest, FileProg
 static void
 free_link (void *data)
 {
-    struct link *lp = (struct link *) data;
+    link_t *lp = (link_t *) data;
 
     vfs_path_free (lp->src_vpath, TRUE);
     vfs_path_free (lp->dst_vpath, TRUE);
@@ -340,7 +332,7 @@ free_linklist (GSList * lp)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static const struct link *
+static const link_t *
 is_in_linklist (const GSList * lp, const vfs_path_t * vpath, const struct stat *sb)
 {
     const struct vfs_class *class;
@@ -351,7 +343,7 @@ is_in_linklist (const GSList * lp, const vfs_path_t * vpath, const struct stat *
 
     for (; lp != NULL; lp = (const GSList *) g_slist_next (lp))
     {
-        const struct link *lnk = (const struct link *) lp->data;
+        const link_t *lnk = (const link_t *) lp->data;
 
         if (lnk->vfs == class && lnk->ino == ino && lnk->dev == dev)
             return lnk;
@@ -372,7 +364,7 @@ static hardlink_status_t
 check_hardlinks (const vfs_path_t * src_vpath, const struct stat *src_stat,
                  const vfs_path_t * dst_vpath, gboolean * skip_all)
 {
-    struct link *lnk;
+    link_t *lnk;
     ino_t ino = src_stat->st_ino;
     dev_t dev = src_stat->st_dev;
 
@@ -381,7 +373,7 @@ check_hardlinks (const vfs_path_t * src_vpath, const struct stat *src_stat,
     if ((vfs_file_class_flags (src_vpath) & VFSF_NOLINKS) != 0)
         return HARDLINK_UNSUPPORTED;
 
-    lnk = (struct link *) is_in_linklist (linklist, src_vpath, src_stat);
+    lnk = (link_t *) is_in_linklist (linklist, src_vpath, src_stat);
     if (lnk != NULL)
     {
         int stat_result;
@@ -482,13 +474,12 @@ check_hardlinks (const vfs_path_t * src_vpath, const struct stat *src_stat,
         return HARDLINK_ERROR;
     }
 
-    lnk = g_try_new (struct link, 1);
+    lnk = g_try_new (link_t, 1);
     if (lnk != NULL)
     {
         lnk->vfs = vfs_path_get_last_path_vfs (src_vpath);
         lnk->ino = ino;
         lnk->dev = dev;
-        lnk->linkcount = 0;
         lnk->st_mode = 0;
         lnk->src_vpath = vfs_path_clone (src_vpath);
         lnk->dst_vpath = vfs_path_clone (dst_vpath);
@@ -1582,9 +1573,9 @@ erase_dir_after_copy (file_op_total_context_t * tctx, file_op_context_t * ctx,
 
         while (!g_queue_is_empty (erase_list) && *status != FILE_ABORT)
         {
-            struct link *lp;
+            link_t *lp;
 
-            lp = (struct link *) g_queue_pop_head (erase_list);
+            lp = (link_t *) g_queue_pop_head (erase_list);
 
             if (S_ISDIR (lp->st_mode))
                 *status = erase_dir_iff_empty (ctx, lp->src_vpath, tctx->progress_count);
@@ -2952,7 +2943,7 @@ copy_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const cha
     gboolean attrs_ok = ctx->preserve;
     DIR *reading;
     FileProgressStatus return_status = FILE_CONT;
-    struct link *lp;
+    link_t *lp;
     vfs_path_t *src_vpath, *dst_vpath;
     gboolean do_mkdir = TRUE;
 
@@ -3057,7 +3048,7 @@ copy_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const cha
         goto ret_fast;
     }
 
-    lp = g_new0 (struct link, 1);
+    lp = g_new0 (link_t, 1);
     lp->vfs = vfs_path_get_last_path_vfs (src_vpath);
     lp->ino = src_stat.st_ino;
     lp->dev = src_stat.st_dev;
@@ -3132,7 +3123,7 @@ copy_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const cha
                 goto ret;
         }
 
-        lp = g_new0 (struct link, 1);
+        lp = g_new0 (link_t, 1);
         mc_stat (dst_vpath, &dst_stat);
         lp->vfs = vfs_path_get_last_path_vfs (dst_vpath);
         lp->ino = dst_stat.st_ino;
@@ -3211,7 +3202,7 @@ copy_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const cha
                 if (erase_list == NULL)
                     erase_list = g_queue_new ();
 
-                lp = g_new0 (struct link, 1);
+                lp = g_new0 (link_t, 1);
                 lp->src_vpath = tmp_vpath;
                 lp->st_mode = dst_stat.st_mode;
                 g_queue_push_tail (erase_list, lp);

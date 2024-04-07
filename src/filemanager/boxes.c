@@ -1077,6 +1077,7 @@ char *
 tree_box (const char *current_dir)
 {
     WTree *mytree;
+    WRect r;
     WDialog *dlg;
     WGroup *g;
     Widget *wd;
@@ -1091,7 +1092,8 @@ tree_box (const char *current_dir)
     g = GROUP (dlg);
     wd = WIDGET (dlg);
 
-    mytree = tree_new (2, 2, wd->rect.lines - 6, wd->rect.cols - 5, FALSE);
+    rect_init (&r, 2, 2, wd->rect.lines - 6, wd->rect.cols - 5);
+    mytree = tree_new (&r, FALSE);
     group_add_widget_autopos (g, mytree, WPOS_KEEP_ALL, NULL);
     group_add_widget_autopos (g, hline_new (wd->rect.lines - 4, 1, -1), WPOS_KEEP_BOTTOM, NULL);
     bar = buttonbar_new ();

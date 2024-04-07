@@ -109,12 +109,6 @@ typedef struct edit_search_options_t
     gboolean all_codepages;
 } edit_search_options_t;
 
-typedef struct edit_stack_type
-{
-    long line;
-    vfs_path_t *filename_vpath;
-} edit_stack_type;
-
 /*** global variables defined in .c file *********************************************************/
 
 extern const char VERTICAL_MAGIC[5];
@@ -124,7 +118,7 @@ extern gboolean enable_show_tabs_tws;
 extern edit_search_options_t edit_search_options;
 
 extern unsigned int edit_stack_iterator;
-extern edit_stack_type edit_history_moveto[MAX_HISTORY_MOVETO];
+extern edit_arg_t edit_history_moveto[MAX_HISTORY_MOVETO];
 
 extern int max_undo;
 extern gboolean auto_syntax;
@@ -136,7 +130,7 @@ extern char *edit_window_close_char;
 
 /*** declarations of public functions ************************************************************/
 
-gboolean edit_add_window (WDialog * h, const WRect * r, const vfs_path_t * f, long fline);
+gboolean edit_add_window (WDialog * h, const WRect * r, const edit_arg_t * arg);
 WEdit *edit_find_editor (const WDialog * h);
 gboolean edit_widget_is_editor (const Widget * w);
 gboolean edit_drop_hotkey_menu (WDialog * h, int key);
@@ -158,7 +152,7 @@ long edit_get_col (const WEdit * edit);
 void edit_update_curs_row (WEdit * edit);
 void edit_update_curs_col (WEdit * edit);
 void edit_find_bracket (WEdit * edit);
-gboolean edit_reload_line (WEdit * edit, const vfs_path_t * filename_vpath, long line);
+gboolean edit_reload_line (WEdit * edit, const edit_arg_t * arg);
 void edit_set_codeset (WEdit * edit);
 
 void edit_block_copy_cmd (WEdit * edit);
@@ -180,11 +174,11 @@ char *edit_get_write_filter (const vfs_path_t * write_name_vpath,
                              const vfs_path_t * filename_vpath);
 gboolean edit_save_confirm_cmd (WEdit * edit);
 gboolean edit_save_as_cmd (WEdit * edit);
-WEdit *edit_init (WEdit * edit, const WRect * r, const vfs_path_t * filename_vpath, long line);
+WEdit *edit_init (WEdit * edit, const WRect * r, const edit_arg_t * arg);
 gboolean edit_clean (WEdit * edit);
 gboolean edit_ok_to_exit (WEdit * edit);
 gboolean edit_load_cmd (WDialog * h);
-gboolean edit_load_file_from_filename (WDialog * h, const vfs_path_t * vpath, long line);
+gboolean edit_load_file_from_filename (WDialog * h, const edit_arg_t * arg);
 gboolean edit_load_file_from_history (WDialog * h);
 gboolean edit_load_syntax_file (WDialog * h);
 gboolean edit_load_menu_file (WDialog * h);
@@ -272,7 +266,11 @@ int editcmd_dialog_raw_key_query (const char *heading, const char *query, gboole
 static inline gboolean
 edit_reload (WEdit * edit, const vfs_path_t * filename_vpath)
 {
-    return edit_reload_line (edit, filename_vpath, 0);
+    edit_arg_t arg;
+
+    edit_arg_init (&arg, (vfs_path_t *) filename_vpath, 0);
+
+    return edit_reload_line (edit, &arg);
 }
 
 #endif /* MC__EDIT_IMPL_H */

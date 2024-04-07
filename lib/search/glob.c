@@ -29,7 +29,6 @@
 #include "lib/global.h"
 #include "lib/strutil.h"
 #include "lib/search.h"
-#include "lib/strescape.h"
 
 #include "internal.h"
 
@@ -62,28 +61,28 @@ mc_search__glob_translate_to_regex (const GString * astr)
         switch (str[loop])
         {
         case '*':
-            if (!strutils_is_char_escaped (str, &(str[loop])))
+            if (!str_is_char_escaped (str, &(str[loop])))
             {
                 g_string_append (buff, inside_group ? ".*" : "(.*)");
                 continue;
             }
             break;
         case '?':
-            if (!strutils_is_char_escaped (str, &(str[loop])))
+            if (!str_is_char_escaped (str, &(str[loop])))
             {
                 g_string_append (buff, inside_group ? "." : "(.)");
                 continue;
             }
             break;
         case ',':
-            if (!strutils_is_char_escaped (str, &(str[loop])))
+            if (!str_is_char_escaped (str, &(str[loop])))
             {
                 g_string_append_c (buff, inside_group ? '|' : ',');
                 continue;
             }
             break;
         case '{':
-            if (!strutils_is_char_escaped (str, &(str[loop])))
+            if (!str_is_char_escaped (str, &(str[loop])))
             {
                 g_string_append_c (buff, '(');
                 inside_group = TRUE;
@@ -91,7 +90,7 @@ mc_search__glob_translate_to_regex (const GString * astr)
             }
             break;
         case '}':
-            if (!strutils_is_char_escaped (str, &(str[loop])))
+            if (!str_is_char_escaped (str, &(str[loop])))
             {
                 g_string_append_c (buff, ')');
                 inside_group = FALSE;

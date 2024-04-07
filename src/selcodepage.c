@@ -93,19 +93,24 @@ select_charset (int center_y, int center_x, int current_charset, gboolean seldis
     /* insert all the items found */
     for (i = 0; i < codepages->len; i++)
     {
-        const char *name = ((codepage_desc *) g_ptr_array_index (codepages, i))->name;
+        const char *name;
+
+        name = ((codepage_desc *) g_ptr_array_index (codepages, i))->name;
         g_snprintf (buffer, sizeof (buffer), "%c  %s", get_hotkey (i), name);
         LISTBOX_APPEND_TEXT (listbox, get_hotkey (i), buffer, NULL, FALSE);
     }
+
     if (seldisplay)
     {
-        unsigned char hotkey = get_hotkey (codepages->len);
+        unsigned char hotkey;
+
+        hotkey = get_hotkey (codepages->len);
         g_snprintf (buffer, sizeof (buffer), "%c  %s", hotkey, _("Other 8 bit"));
         LISTBOX_APPEND_TEXT (listbox, hotkey, buffer, NULL, FALSE);
     }
 
     /* Select the default entry */
-    i = (seldisplay)
+    i = seldisplay
         ? ((current_charset < 0) ? codepages->len : (size_t) current_charset)
         : ((size_t) current_charset + 1);
 
@@ -114,25 +119,16 @@ select_charset (int center_y, int center_x, int current_charset, gboolean seldis
     listbox_result = listbox_run (listbox);
 
     if (listbox_result < 0)
-    {
         /* Cancel dialog */
         return SELECT_CHARSET_CANCEL;
-    }
-    else
-    {
-        /* some charset has been selected */
-        if (seldisplay)
-        {
-            /* charset list is finished with "Other 8 bit" item */
-            return (listbox_result >= (int) codepages->len)
-                ? SELECT_CHARSET_OTHER_8BIT : listbox_result;
-        }
-        else
-        {
-            /* charset list is began with "-  < No translation >" item */
-            return (listbox_result - 1);
-        }
-    }
+
+    /* some charset has been selected */
+    if (seldisplay)
+        /* charset list is finished with "Other 8 bit" item */
+        return (listbox_result >= (int) codepages->len) ? SELECT_CHARSET_OTHER_8BIT : listbox_result;
+
+    /* charset list is began with "-  < No translation >" item */
+    return (listbox_result - 1);
 }
 
 /* --------------------------------------------------------------------------------------------- */

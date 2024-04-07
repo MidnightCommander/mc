@@ -613,6 +613,21 @@ strtol_error_t xstrtoumax (const char *s, char **ptr, int base, uintmax_t * val,
                            const char *valid_suffixes);
 uintmax_t parse_integer (const char *str, gboolean * invalid);
 
+char *str_escape (const char *src, gsize src_len, const char *escaped_chars,
+                  gboolean escape_non_printable);
+char *str_unescape (const char *src, gsize src_len, const char *unescaped_chars,
+                    gboolean unescape_non_printable);
+char *str_shell_unescape (const char *text);
+char *str_shell_escape (const char *text);
+
+char *str_glob_escape (const char *text);
+char *str_glob_unescape (const char *text);
+
+char *str_regex_escape (const char *text);
+char *str_regex_unescape (const char *text);
+
+gboolean str_is_char_escaped (const char *start, const char *current);
+
 /* --------------------------------------------------------------------------------------------- */
 /*** inline functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */

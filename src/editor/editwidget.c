@@ -60,7 +60,6 @@
 #include "src/execute.h"        /* toggle_subshell()  */
 #include "src/filemanager/cmd.h"        /* save_setup_cmd()  */
 #include "src/learn.h"          /* learn_keys() */
-#include "src/args.h"           /* mcedit_arg_t */
 
 #include "edit-impl.h"
 #include "editwidget.h"
@@ -406,7 +405,7 @@ edit_dialog_command_execute (WDialog * h, long command)
     switch (command)
     {
     case CK_EditNew:
-        edit_load_file_from_filename (h, NULL, 0);
+        edit_load_file_from_filename (h, NULL);
         break;
     case CK_EditFile:
         edit_load_cmd (h);
@@ -1197,13 +1196,12 @@ edit_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
  */
 
 gboolean
-edit_file (const vfs_path_t * file_vpath, long line)
+edit_file (const edit_arg_t * arg)
 {
-    mcedit_arg_t arg = { (vfs_path_t *) file_vpath, line };
     GList *files;
     gboolean ok;
 
-    files = g_list_prepend (NULL, &arg);
+    files = g_list_prepend (NULL, (edit_arg_t *) arg);
     ok = edit_files (files);
     g_list_free (files);
 
@@ -1270,10 +1268,9 @@ edit_files (const GList * files)
 
     for (file = files; file != NULL; file = g_list_next (file))
     {
-        mcedit_arg_t *f = (mcedit_arg_t *) file->data;
         gboolean f_ok;
 
-        f_ok = edit_load_file_from_filename (edit_dlg, f->file_vpath, f->line_number);
+        f_ok = edit_load_file_from_filename (edit_dlg, (const edit_arg_t *) file->data);
         /* at least one file has been opened succefully */
         ok = ok || f_ok;
     }
@@ -1285,14 +1282,6 @@ edit_files (const GList * files)
         widget_destroy (wd);
 
     return ok;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-const char *
-edit_get_file_name (const WEdit * edit)
-{
-    return vfs_path_as_str (edit->filename_vpath);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1372,12 +1361,12 @@ edit_save_size (WEdit * edit)
  */
 
 gboolean
-edit_add_window (WDialog * h, const WRect * r, const vfs_path_t * f, long fline)
+edit_add_window (WDialog * h, const WRect * r, const edit_arg_t * arg)
 {
     WEdit *edit;
     Widget *w;
 
-    edit = edit_init (NULL, r, f, fline);
+    edit = edit_init (NULL, r, arg);
     if (edit == NULL)
         return FALSE;
 

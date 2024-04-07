@@ -762,7 +762,7 @@ tree_move (WTree * tree, const char *default_dest)
 
         dest_vpath = vfs_path_from_str (dest);
 
-        if (mc_stat (dest_vpath, &buf))
+        if (mc_stat (dest_vpath, &buf) != 0)
             message (D_ERROR, MSG_ERROR, _("Cannot stat the destination\n%s"),
                      unix_error_string (errno));
         else if (!S_ISDIR (buf.st_mode))
@@ -1282,16 +1282,15 @@ tree_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 /* --------------------------------------------------------------------------------------------- */
 
 WTree *
-tree_new (int y, int x, int lines, int cols, gboolean is_panel)
+tree_new (const WRect * r, gboolean is_panel)
 {
-    WRect r = { y, x, lines, cols };
     WTree *tree;
     Widget *w;
 
     tree = g_new (WTree, 1);
 
     w = WIDGET (tree);
-    widget_init (w, &r, tree_callback, tree_mouse_callback);
+    widget_init (w, r, tree_callback, tree_mouse_callback);
     w->options |= WOP_SELECTABLE | WOP_TOP_SELECT;
     w->keymap = tree_map;
 

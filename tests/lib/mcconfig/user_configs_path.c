@@ -28,7 +28,6 @@
 #include "tests/mctest.h"
 
 #include "lib/strutil.h"
-#include "lib/strescape.h"
 #include "lib/vfs/vfs.h"
 #include "lib/fileloc.h"
 

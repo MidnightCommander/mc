@@ -48,7 +48,6 @@
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"        /* XCTRL and ALT macros */
 #include "lib/vfs/vfs.h"
-#include "lib/strescape.h"
 #include "lib/strutil.h"
 #include "lib/util.h"
 #include "lib/widget.h"
@@ -93,10 +92,6 @@ char **try_complete (char *text, int *lc_start, int *lc_end, input_complete_t fl
 void complete_engine_fill_completions (WInput * in);
 
 /*** file scope variables ************************************************************************/
-
-static char **hosts = NULL;
-static char **hosts_p = NULL;
-static int hosts_alloclen = 0;
 
 static WInput *input;
 static int min_end;
@@ -151,12 +146,12 @@ filename_completion_function (const char *text, int state, input_complete_t flag
         char *result;
         char *e_result;
 
-        u_text = strutils_shell_unescape (text);
+        u_text = str_shell_unescape (text);
 
         result = filename_completion_function (u_text, state, flags & (~INPUT_COMPLETE_SHELL_ESC));
         g_free (u_text);
 
-        e_result = strutils_shell_escape (result);
+        e_result = str_shell_escape (result);
         g_free (result);
 
         return e_result;
@@ -395,13 +390,19 @@ variable_completion_function (const char *text, int state, input_complete_t flag
 
 /* --------------------------------------------------------------------------------------------- */
 
+static gboolean
+host_equal_func (gconstpointer a, gconstpointer b)
+{
+    return (strcmp ((const char *) a, (const char *) b) == 0);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static void
-fetch_hosts (const char *filename)
+fetch_hosts (const char *filename, GPtrArray * hosts)
 {
     FILE *file;
-    char buffer[256];
-    char *name;
-    char *lc_start;
+    char buffer[BUF_MEDIUM];
     char *bi;
 
     file = fopen (filename, "r");
@@ -424,31 +425,34 @@ fetch_hosts (const char *filename)
             char *includefile, *t;
 
             /* Find start of filename. */
-            includefile = bi + 9;
-            while (*includefile != '\0' && whitespace (*includefile))
-                includefile++;
+            for (includefile = bi + 9; includefile[0] != '\0' && whitespace (includefile[0]);
+                 includefile++)
+                ;
             t = includefile;
 
             /* Find end of filename. */
-            while (t[0] != '\0' && !str_isspace (t))
-                str_next_char (&t);
+            for (; t[0] != '\0' && !str_isspace (t); str_next_char (&t))
+                ;
             *t = '\0';
 
-            fetch_hosts (includefile);
+            fetch_hosts (includefile, hosts);
             continue;
         }
 
         /* Skip IP #s. */
-        while (bi[0] != '\0' && !str_isspace (bi))
-            str_next_char (&bi);
+        for (; bi[0] != '\0' && !str_isspace (bi); str_next_char (&bi))
+            ;
 
         /* Get the host names separated by white space. */
         while (bi[0] != '\0' && bi[0] != '#')
         {
-            while (bi[0] != '\0' && str_isspace (bi))
-                str_next_char (&bi);
+            char *lc_start, *name;
+
+            for (; bi[0] != '\0' && str_isspace (bi); str_next_char (&bi))
+                ;
             if (bi[0] == '#')
                 continue;
+
             for (lc_start = bi; bi[0] != '\0' && !str_isspace (bi); str_next_char (&bi))
                 ;
 
@@ -456,32 +460,10 @@ fetch_hosts (const char *filename)
                 continue;
 
             name = g_strndup (lc_start, bi - lc_start);
-
-            {
-                char **host_p;
-                int j;
-
-                j = hosts_p - hosts;
-
-                if (j >= hosts_alloclen)
-                {
-                    hosts_alloclen += 30;
-                    hosts = g_renew (char *, hosts, hosts_alloclen + 1);
-                    hosts_p = hosts + j;
-                }
-
-                for (host_p = hosts; host_p < hosts_p; host_p++)
-                    if (strcmp (name, *host_p) == 0)
-                        break;  /* We do not want any duplicates */
-
-                if (host_p == hosts_p)
-                {
-                    *(hosts_p++) = name;
-                    *hosts_p = NULL;
-                }
-                else
-                    g_free (name);
-            }
+            if (!g_ptr_array_find_with_equal_func (hosts, name, host_equal_func, NULL))
+                g_ptr_array_add (hosts, name);
+            else
+                g_free (name);
         }
     }
 
@@ -493,7 +475,8 @@ fetch_hosts (const char *filename)
 static char *
 hostname_completion_function (const char *text, int state, input_complete_t flags)
 {
-    static char **host_p = NULL;
+    static GPtrArray *hosts = NULL;
+    static unsigned int host_p = 0;
     static size_t textstart = 0;
     static size_t textlen = 0;
 
@@ -504,29 +487,27 @@ hostname_completion_function (const char *text, int state, input_complete_t flag
     {                           /* Initialization stuff */
         const char *p;
 
-        g_strfreev (hosts);
-        hosts_alloclen = 30;
-        hosts = g_new (char *, hosts_alloclen + 1);
-        *hosts = NULL;
-        hosts_p = hosts;
+        if (hosts != NULL)
+            g_ptr_array_free (hosts, TRUE);
+        hosts = g_ptr_array_new_with_free_func (g_free);
         p = getenv ("HOSTFILE");
-        fetch_hosts (p != NULL ? p : "/etc/hosts");
-        host_p = hosts;
+        fetch_hosts (p != NULL ? p : "/etc/hosts", hosts);
+        host_p = 0;
         textstart = (*text == '@') ? 1 : 0;
         textlen = strlen (text + textstart);
     }
 
-    for (; *host_p != NULL; host_p++)
+    for (; host_p < hosts->len; host_p++)
     {
         if (textlen == 0)
             break;              /* Match all of them */
-        if (strncmp (text + textstart, *host_p, textlen) == 0)
+        if (strncmp (text + textstart, g_ptr_array_index (hosts, host_p), textlen) == 0)
             break;
     }
 
-    if (*host_p == NULL)
+    if (host_p == hosts->len)
     {
-        g_strfreev (hosts);
+        g_ptr_array_free (hosts, TRUE);
         hosts = NULL;
         return NULL;
     }
@@ -538,7 +519,7 @@ hostname_completion_function (const char *text, int state, input_complete_t flag
 
         if (textstart != 0)
             g_string_append_c (temp, '@');
-        g_string_append (temp, *host_p);
+        g_string_append (temp, g_ptr_array_index (hosts, host_p));
         host_p++;
 
         return g_string_free (temp, FALSE);
@@ -587,7 +568,7 @@ command_completion_function (const char *text, int state, input_complete_t flags
     if ((flags & INPUT_COMPLETE_COMMANDS) == 0)
         return NULL;
 
-    u_text = strutils_shell_unescape (text);
+    u_text = str_shell_unescape (text);
     flags &= ~INPUT_COMPLETE_SHELL_ESC;
 
     if (state == 0)
@@ -621,7 +602,7 @@ command_completion_function (const char *text, int state, input_complete_t flags
         {
             char *temp_p = p;
 
-            p = strutils_shell_escape (p);
+            p = str_shell_escape (p);
             g_free (temp_p);
         }
 
@@ -688,7 +669,7 @@ command_completion_function (const char *text, int state, input_complete_t flags
         {
             char *tmp = found;
 
-            found = strutils_shell_escape (p + 1);
+            found = str_shell_escape (p + 1);
             g_free (tmp);
         }
     }
@@ -884,7 +865,7 @@ try_complete_find_start_sign (try_complete_automation_state_t * state)
         state->q = strrchr (state->word, '$');
 
         /* don't substitute variable in \$ case */
-        if (strutils_is_char_escaped (state->word, state->q))
+        if (str_is_char_escaped (state->word, state->q))
         {
             /* drop '\\' */
             str_move (state->q - 1, state->q);
@@ -1398,7 +1379,7 @@ try_complete (char *text, int *lc_start, int *lc_end, input_complete_t flags)
             char *p;
 
             p = *m;
-            *m = strutils_shell_escape (*m);
+            *m = str_shell_escape (*m);
             g_free (p);
         }
     }
@@ -1431,7 +1412,7 @@ complete_engine_fill_completions (WInput * in)
     for (; s >= in->buffer->str; str_prev_char (&s))
     {
         start = s - in->buffer->str;
-        if (strchr (word_separators, *s) != NULL && !strutils_is_char_escaped (in->buffer->str, s))
+        if (strchr (word_separators, *s) != NULL && !str_is_char_escaped (in->buffer->str, s))
             break;
     }
 

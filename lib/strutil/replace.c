@@ -26,7 +26,6 @@
 #include <config.h>
 
 #include "lib/global.h"
-#include "lib/strescape.h"
 #include "lib/strutil.h"
 
 /*** global variables ****************************************************************************/
@@ -72,7 +71,7 @@ str_replace_all (const char *haystack, const char *needle, const char *replaceme
         if (return_str == NULL)
             return_str = g_string_sized_new (32);
 
-        if (strutils_is_char_escaped (haystack, needle_in_str))
+        if (str_is_char_escaped (haystack, needle_in_str))
         {
             char *backslash = needle_in_str - 1;
 

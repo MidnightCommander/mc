@@ -19,12 +19,11 @@ SUBLIB_includes = \
 	mcconfig.h \
 	search.h \
 	skin.h \
-	strescape.h \
 	strutil.h \
 	widget.h
 
 SRC_mc_utils = \
-	utilunix.c utilunix.h \
+	utilunix.c \
 	unixcompat.h \
 	util.c util.h
 

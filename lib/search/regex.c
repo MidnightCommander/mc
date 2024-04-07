@@ -33,7 +33,6 @@
 #include "lib/global.h"
 #include "lib/strutil.h"
 #include "lib/search.h"
-#include "lib/strescape.h"
 #include "lib/util.h"           /* MC_PTR_FREE */
 
 #include "internal.h"
@@ -97,7 +96,7 @@ mc_search__regex_str_append_if_special (GString * copy_to, const GString * regex
         spec_chr_len = strlen (*spec_chr);
 
         if (strncmp (tmp_regex_str, *spec_chr, spec_chr_len) == 0
-            && !strutils_is_char_escaped (regex_str->str, tmp_regex_str))
+            && !str_is_char_escaped (regex_str->str, tmp_regex_str))
         {
             if (strncmp ("\\x", *spec_chr, spec_chr_len) == 0)
             {
@@ -229,13 +228,12 @@ mc_search__cond_struct_new_regex_ci_str (const char *charset, const GString * as
             continue;
         }
 
-        if (astr->str[loop] == '[' && !strutils_is_char_escaped (astr->str, &(astr->str[loop])))
+        if (astr->str[loop] == '[' && !str_is_char_escaped (astr->str, &(astr->str[loop])))
         {
             mc_search__cond_struct_new_regex_accum_append (charset, ret_str, accumulator);
 
             while (loop < astr->len && !(astr->str[loop] == ']'
-                                         && !strutils_is_char_escaped (astr->str,
-                                                                       &(astr->str[loop]))))
+                                         && !str_is_char_escaped (astr->str, &(astr->str[loop]))))
             {
                 g_string_append_c (ret_str, astr->str[loop]);
                 loop++;
@@ -401,7 +399,7 @@ mc_search_regex__get_max_num_of_replace_tokens (const gchar * str, gsize len)
     for (loop = 0; loop < len - 1; loop++)
         if (str[loop] == '\\' && g_ascii_isdigit (str[loop + 1]))
         {
-            if (strutils_is_char_escaped (str, &str[loop]))
+            if (str_is_char_escaped (str, &str[loop]))
                 continue;
             if (max_token < str[loop + 1] - '0')
                 max_token = str[loop + 1] - '0';
@@ -410,7 +408,7 @@ mc_search_regex__get_max_num_of_replace_tokens (const gchar * str, gsize len)
         {
             gsize tmp_len;
 
-            if (strutils_is_char_escaped (str, &str[loop]))
+            if (str_is_char_escaped (str, &str[loop]))
                 continue;
 
             for (tmp_len = 0;
@@ -555,7 +553,7 @@ mc_search_regex__process_replace_str (const GString * replace_str, const gsize c
     {
         char *tmp_str;
 
-        if (strutils_is_char_escaped (replace_str->str, curr_str))
+        if (str_is_char_escaped (replace_str->str, curr_str))
         {
             *skip_len = 1;
             return REPLACE_PREPARE_T_NOTHING_SPECIAL;
@@ -582,7 +580,7 @@ mc_search_regex__process_replace_str (const GString * replace_str, const gsize c
 
     if (curr_str[0] == '\\' && replace_str->len > current_pos + 1)
     {
-        if (strutils_is_char_escaped (replace_str->str, curr_str))
+        if (str_is_char_escaped (replace_str->str, curr_str))
         {
             *skip_len = 1;
             return REPLACE_PREPARE_T_NOTHING_SPECIAL;

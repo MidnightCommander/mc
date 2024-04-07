@@ -111,7 +111,7 @@ int max_undo = 32768;
 gboolean enable_show_tabs_tws = TRUE;
 
 unsigned int edit_stack_iterator = 0;
-edit_stack_type edit_history_moveto[MAX_HISTORY_MOVETO];
+edit_arg_t edit_history_moveto[MAX_HISTORY_MOVETO];
 /* magic sequence for say than block is vertical */
 const char VERTICAL_MAGIC[] = { '\1', '\1', '\1', '\1', '\n' };
 
@@ -2114,14 +2114,15 @@ edit_insert_file (WEdit * edit, const vfs_path_t * filename_vpath)
  * Fill in the edit structure.  Return NULL on failure.  Pass edit as
  * NULL to allocate a new structure.
  *
- * If line is 0, try to restore saved position.  Otherwise put the
+ * If arg is NULL or arg->line_number is 0, try to restore saved position.  Otherwise put the
  * cursor on that line and show it in the middle of the screen.
  */
 
 WEdit *
-edit_init (WEdit * edit, const WRect * r, const vfs_path_t * filename_vpath, long line)
+edit_init (WEdit * edit, const WRect * r, const edit_arg_t * arg)
 {
     gboolean to_free = FALSE;
+    long line;
 
     auto_syntax = TRUE;         /* Resetting to auto on every invocation */
     edit_options.line_state_width = edit_options.line_state ? LINE_STATE_WIDTH : 0;
@@ -2164,7 +2165,7 @@ edit_init (WEdit * edit, const WRect * r, const vfs_path_t * filename_vpath, lon
     edit->stat1.st_gid = getgid ();
     edit->stat1.st_mtime = 0;
 
-    edit->attrs_ok = (mc_fgetflags (filename_vpath, &edit->attrs) == 0);
+    edit->attrs_ok = (mc_fgetflags (arg->file_vpath, &edit->attrs) == 0);
 
     edit->over_col = 0;
     edit->bracket = -1;
@@ -2172,7 +2173,16 @@ edit_init (WEdit * edit, const WRect * r, const vfs_path_t * filename_vpath, lon
     edit->force |= REDRAW_PAGE;
 
     /* set file name before load file */
-    edit_set_filename (edit, filename_vpath);
+    if (arg != NULL)
+    {
+        edit_set_filename (edit, arg->file_vpath);
+        line = arg->line_number;
+    }
+    else
+    {
+        edit_set_filename (edit, NULL);
+        line = 0;
+    }
 
     edit->undo_stack_size = START_STACK_SIZE;
     edit->undo_stack_size_mask = START_STACK_SIZE - 1;
@@ -2273,7 +2283,7 @@ edit_clean (WEdit * edit)
  * @return TRUE on success, FALSE on failure.
  */
 gboolean
-edit_reload_line (WEdit * edit, const vfs_path_t * filename_vpath, long line)
+edit_reload_line (WEdit * edit, const edit_arg_t * arg)
 {
     Widget *w = WIDGET (edit);
     WEdit *e;
@@ -2284,7 +2294,7 @@ edit_reload_line (WEdit * edit, const vfs_path_t * filename_vpath, long line)
     e->fullscreen = edit->fullscreen;
     e->loc_prev = edit->loc_prev;
 
-    if (edit_init (e, &w->rect, filename_vpath, line) == NULL)
+    if (edit_init (e, &w->rect, arg) == NULL)
     {
         g_free (e);
         return FALSE;
@@ -3017,9 +3027,9 @@ edit_move_to_prev_col (WEdit * edit, off_t p)
         }
         else
         {
-            edit->over_col = 0;
-            edit->prev_col = edit->curs_col;
             edit->curs_col = prev + over;
+            edit->prev_col = edit->curs_col;
+            edit->over_col = 0;
         }
     }
     else
@@ -4135,10 +4145,7 @@ void
 edit_stack_init (void)
 {
     for (edit_stack_iterator = 0; edit_stack_iterator < MAX_HISTORY_MOVETO; edit_stack_iterator++)
-    {
-        edit_history_moveto[edit_stack_iterator].filename_vpath = NULL;
-        edit_history_moveto[edit_stack_iterator].line = -1;
-    }
+        edit_arg_init (&edit_history_moveto[edit_stack_iterator], NULL, -1);
 
     edit_stack_iterator = 0;
 }
@@ -4149,7 +4156,7 @@ void
 edit_stack_free (void)
 {
     for (edit_stack_iterator = 0; edit_stack_iterator < MAX_HISTORY_MOVETO; edit_stack_iterator++)
-        vfs_path_free (edit_history_moveto[edit_stack_iterator].filename_vpath, TRUE);
+        vfs_path_free (edit_history_moveto[edit_stack_iterator].file_vpath, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -4168,6 +4175,96 @@ void
 edit_move_down (WEdit * edit, long i, gboolean do_scroll)
 {
     edit_move_updown (edit, i, do_scroll, FALSE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Create edit_arg_t object from vfs_path_t object and the line number.
+ *
+ * @param file_vpath  file path object
+ * @param line_number line number. If value is 0, try to restore saved position.
+ * @return edit_arg_t object
+ */
+
+edit_arg_t *
+edit_arg_vpath_new (vfs_path_t * file_vpath, long line_number)
+{
+    edit_arg_t *arg;
+
+    arg = g_new (edit_arg_t, 1);
+    arg->file_vpath = file_vpath;
+    arg->line_number = line_number;
+
+    return arg;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Create edit_arg_t object from file name and the line number.
+ *
+ * @param file_name   file name
+ * @param line_number line number. If value is 0, try to restore saved position.
+ * @return edit_arg_t object
+ */
+
+edit_arg_t *
+edit_arg_new (const char *file_name, long line_number)
+{
+    return edit_arg_vpath_new (vfs_path_from_str (file_name), line_number);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Initialize edit_arg_t object.
+ *
+ * @param arg  edit_arg_t object
+ * @param vpath vfs_path_t object
+ * @param line line number
+ */
+
+void
+edit_arg_init (edit_arg_t * arg, vfs_path_t * vpath, long line)
+{
+    arg->file_vpath = (vfs_path_t *) vpath;
+    arg->line_number = line;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Apply new values to edit_arg_t object members.
+ *
+ * @param arg  edit_arg_t object
+ * @param vpath vfs_path_t object
+ * @param line line number
+ */
+
+void
+edit_arg_assign (edit_arg_t * arg, vfs_path_t * vpath, long line)
+{
+    vfs_path_free (arg->file_vpath, TRUE);
+    edit_arg_init (arg, vpath, line);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Free the edit_arg_t object.
+ *
+ * @param arg edit_arg_t object
+ */
+
+void
+edit_arg_free (edit_arg_t * arg)
+{
+    vfs_path_free (arg->file_vpath, TRUE);
+    g_free (arg);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+const char *
+edit_get_file_name (const WEdit * edit)
+{
+    return vfs_path_as_str (edit->filename_vpath);
 }
 
 /* --------------------------------------------------------------------------------------------- */

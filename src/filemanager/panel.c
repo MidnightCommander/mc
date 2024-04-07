@@ -41,7 +41,7 @@
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"        /* XCTRL and ALT macros  */
 #include "lib/skin.h"
-#include "lib/strescape.h"
+#include "lib/strutil.h"
 #include "lib/mcconfig.h"
 #include "lib/vfs/vfs.h"
 #include "lib/unixcompat.h"
@@ -2126,7 +2126,7 @@ panel_select_ext_cmd (WPanel * panel)
 
     do_select = (fe->f.marked == 0);
 
-    cur_file_ext = strutils_regex_escape (extension (filename->str));
+    cur_file_ext = str_regex_escape (extension (filename->str));
     if (cur_file_ext[0] != '\0')
         reg_exp = g_strconcat ("^.*\\.", cur_file_ext, "$", (char *) NULL);
     else
@@ -2810,7 +2810,7 @@ do_search (WPanel * panel, int c_code)
     }
 
     reg_exp = g_strdup_printf ("%s*", panel->quick_search.buffer->str);
-    esc_str = strutils_escape (reg_exp, -1, ",|\\{}[]", TRUE);
+    esc_str = str_escape (reg_exp, -1, ",|\\{}[]", TRUE);
     search = mc_search_new (esc_str, NULL);
     search->search_type = MC_SEARCH_T_GLOB;
     search->is_entire_line = TRUE;
@@ -4467,14 +4467,14 @@ panel_set_lwd (WPanel * panel, const vfs_path_t * vpath)
  * Creatie an empty panel with specified size.
  *
  * @param panel_name name of panel for setup receiving
+ * @param r panel areaa
  *
  * @return new instance of WPanel
  */
 
 WPanel *
-panel_sized_empty_new (const char *panel_name, int y, int x, int lines, int cols)
+panel_sized_empty_new (const char *panel_name, const WRect * r)
 {
-    WRect r = { y, x, lines, cols };
     WPanel *panel;
     Widget *w;
     char *section;
@@ -4482,7 +4482,7 @@ panel_sized_empty_new (const char *panel_name, int y, int x, int lines, int cols
 
     panel = g_new0 (WPanel, 1);
     w = WIDGET (panel);
-    widget_init (w, &r, panel_callback, panel_mouse_callback);
+    widget_init (w, r, panel_callback, panel_mouse_callback);
     w->options |= WOP_SELECTABLE | WOP_TOP_SELECT;
     w->keymap = panel_map;
 
@@ -4555,18 +4555,14 @@ panel_sized_empty_new (const char *panel_name, int y, int x, int lines, int cols
  * Panel creation for specified size and directory.
  *
  * @param panel_name name of panel for setup retrieving
- * @param y y coordinate of top-left corner
- * @param x x coordinate of top-left corner
- * @param lines vertical size
- * @param cols horizontal size
+ * @param r panel areaa
  * @param vpath working panel directory. If NULL then current directory is used
  *
  * @return new instance of WPanel
  */
 
 WPanel *
-panel_sized_with_dir_new (const char *panel_name, int y, int x, int lines, int cols,
-                          const vfs_path_t * vpath)
+panel_sized_with_dir_new (const char *panel_name, const WRect * r, const vfs_path_t * vpath)
 {
     WPanel *panel;
     char *curdir = NULL;
@@ -4574,7 +4570,7 @@ panel_sized_with_dir_new (const char *panel_name, int y, int x, int lines, int c
     const vfs_path_element_t *path_element;
 #endif
 
-    panel = panel_sized_empty_new (panel_name, y, x, lines, cols);
+    panel = panel_sized_empty_new (panel_name, r);
 
     if (vpath != NULL)
     {

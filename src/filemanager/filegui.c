@@ -147,7 +147,6 @@ statfs (char const *filename, struct fs_info *buf)
 #include "lib/mcconfig.h"
 #include "lib/search.h"
 #include "lib/vfs/vfs.h"
-#include "lib/strescape.h"
 #include "lib/strutil.h"
 #include "lib/timefmt.h"        /* file_date() */
 #include "lib/util.h"
@@ -1300,6 +1299,7 @@ char *
 file_mask_dialog (file_op_context_t * ctx, gboolean only_one, const char *format, const void *text,
                   const char *def_text, gboolean * do_bg)
 {
+    gboolean preserve;
     size_t fmd_xlen;
     vfs_path_t *vpath;
     gboolean source_easy_patterns = easy_patterns;
@@ -1312,7 +1312,8 @@ file_mask_dialog (file_op_context_t * ctx, gboolean only_one, const char *format
         return NULL;
 
     /* unselect checkbox if target filesystem doesn't support attributes */
-    ctx->op_preserve = copymove_persistent_attr && filegui__check_attrs_on_fs (def_text);
+    preserve = copymove_persistent_attr && filegui__check_attrs_on_fs (def_text);
+
     ctx->stable_symlinks = FALSE;
     *do_bg = FALSE;
 
@@ -1322,9 +1323,9 @@ file_mask_dialog (file_op_context_t * ctx, gboolean only_one, const char *format
     vfs_path_free (vpath, TRUE);
 
     if (source_easy_patterns)
-        def_text_secure = strutils_glob_escape (tmp);
+        def_text_secure = str_glob_escape (tmp);
     else
-        def_text_secure = strutils_regex_escape (tmp);
+        def_text_secure = str_regex_escape (tmp);
     g_free (tmp);
 
     if (only_one)
@@ -1377,7 +1378,7 @@ file_mask_dialog (file_op_context_t * ctx, gboolean only_one, const char *format
             QUICK_SEPARATOR (TRUE),
             QUICK_START_COLUMNS,
                 QUICK_CHECKBOX (N_("Follow &links"), &ctx->follow_links, NULL),
-                QUICK_CHECKBOX (N_("Preserve &attributes"), &ctx->op_preserve, NULL),
+                QUICK_CHECKBOX (N_("Preserve &attributes"), &preserve, NULL),
             QUICK_NEXT_COLUMN,
                 QUICK_CHECKBOX (N_("Di&ve into subdir if exists"), &ctx->dive_into_subdirs, NULL),
                 QUICK_CHECKBOX (N_("&Stable symlinks"), &ctx->stable_symlinks, NULL),
@@ -1411,7 +1412,7 @@ file_mask_dialog (file_op_context_t * ctx, gboolean only_one, const char *format
 
             ctx->stat_func = ctx->follow_links ? mc_stat : mc_lstat;
 
-            if (ctx->op_preserve)
+            if (preserve)
             {
                 ctx->preserve = TRUE;
                 ctx->umask_kill = 0777777;

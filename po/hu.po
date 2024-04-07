@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-01-20 20:51+0100\n"
+"POT-Creation-Date: 2024-04-07 16:41+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: 6bdcf737f9bcb6037ecba892a70fb951_e9eeb40 "
 "<b76b5e2faba6aa74d4498ee4c87ab010_661337>, 2020\n"
@@ -791,6 +791,10 @@ msgstr "Terminál opciók"
 
 msgid "Arguments parse error!"
 msgstr "Argumentum feldolgozási hiba!"
+
+#, fuzzy
+msgid "MC is built without builtin editor."
+msgstr "Beépített szerkesztővel"
 
 msgid "No arguments given to the viewer."
 msgstr "Hiányzó paraméterek a nézethez."
@@ -2691,6 +2695,23 @@ msgstr ""
 "A(z) \"%s\" forrásfájl adatai nem elérhetők \n"
 "%s"
 
+#, fuzzy, c-format
+msgid ""
+"Cannot get attributes of source file \"%s\"\n"
+"%s"
+msgstr ""
+"A(z) \"%s\" forrásfájl adatai nem elérhetők \n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot set attributes of target file \"%s\"\n"
+"%s"
+msgstr ""
+"Nem sikerült lekérdezni a(z) \"%s\" \n"
+"célfájl adatait. \n"
+"%s"
+
 #, c-format
 msgid ""
 "Cannot create special file \"%s\"\n"
@@ -2805,9 +2826,27 @@ msgstr ""
 "Nem sikerült lezárni a(z) \"%s\" célfájlt. \n"
 "%s"
 
+#, fuzzy, c-format
+msgid ""
+"Cannot set attributes for target file \"%s\"\n"
+"%s"
+msgstr ""
+"Nem sikerült lekérdezni a(z) \"%s\" \n"
+"célfájl adatait. \n"
+"%s"
+
 #, c-format
 msgid ""
 "Cannot stat source directory \"%s\"\n"
+"%s"
+msgstr ""
+"Nem sikerült lekérdezni a(z) \"%s\" \n"
+"forráskönyvtár adatait. \n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot get attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
 "Nem sikerült lekérdezni a(z) \"%s\" \n"
@@ -3896,10 +3935,12 @@ msgstr "A háttér-shell még aktív. Mégis kilép?"
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Nem sikerült belépni a(z) \"%s\" könyvtárba.\n"
 
-msgid "With builtin Editor and Aspell support"
-msgstr ""
+#, fuzzy
+msgid "With builtin editor and aspell support"
+msgstr "Beépített szerkesztővel"
 
-msgid "With builtin Editor"
+#, fuzzy
+msgid "With builtin editor"
 msgstr "Beépített szerkesztővel"
 
 msgid "With optional subshell support"

@@ -29,7 +29,6 @@
 
 #include "lib/mcconfig.h"
 #include "lib/strutil.h"
-#include "lib/strescape.h"
 #include "lib/vfs/vfs.h"
 #include "src/vfs/local/local.c"
 
@@ -215,7 +214,7 @@ START_TEST (emulate__learn_save)
     {
         char *esc_str;
 
-        esc_str = strutils_escape ("T;E\\X;T-FOR-\\T;E;S\\TI;N'G", -1, ";", TRUE);
+        esc_str = str_escape ("T;E\\X;T-FOR-\\T;E;S\\TI;N'G", -1, ";", TRUE);
         mc_config_set_string_raw (mc_config, "test-group1", "test-param1", esc_str);
         g_free (esc_str);
     }

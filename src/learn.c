@@ -37,7 +37,6 @@
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"
 #include "lib/mcconfig.h"
-#include "lib/strescape.h"
 #include "lib/strutil.h"
 #include "lib/util.h"           /* convert_controls() */
 #include "lib/widget.h"
@@ -366,7 +365,7 @@ learn_save (void)
         {
             char *esc_str;
 
-            esc_str = strutils_escape (learnkeys[i].sequence, -1, ";\\", TRUE);
+            esc_str = str_escape (learnkeys[i].sequence, -1, ";\\", TRUE);
             mc_config_set_string_raw_value (mc_global.main_config, section,
                                             key_name_conv_tab[i].name, esc_str);
             g_free (esc_str);

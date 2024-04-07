@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-01-20 20:51+0100\n"
+"POT-Creation-Date: 2024-04-07 16:41+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2022\n"
 "Language-Team: Esperanto (http://app.transifex.com/mc/mc/language/eo/)\n"
@@ -803,6 +803,10 @@ msgstr "Terminala agordo"
 
 msgid "Arguments parse error!"
 msgstr "Eraro dum analizi parametrojn!"
+
+#, fuzzy
+msgid "MC is built without builtin editor."
+msgstr "Kun interna tekstoredaktilo"
 
 msgid "No arguments given to the viewer."
 msgstr "Neniuj parametroj donitaj al la legilo."
@@ -2736,6 +2740,22 @@ msgstr ""
 "Ne eblas trovi fontan dosieron \"%s\"\n"
 "%s"
 
+#, fuzzy, c-format
+msgid ""
+"Cannot get attributes of source file \"%s\"\n"
+"%s"
+msgstr ""
+"Ne eblas trovi fontan dosieron \"%s\"\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot set attributes of target file \"%s\"\n"
+"%s"
+msgstr ""
+"Ne eblas trovi celan dosieron \"%s\"\n"
+"%s"
+
 #, c-format
 msgid ""
 "Cannot create special file \"%s\"\n"
@@ -2847,9 +2867,25 @@ msgstr ""
 "Ne eblas fermi celan dosieron \"%s\"\n"
 "%s"
 
+#, fuzzy, c-format
+msgid ""
+"Cannot set attributes for target file \"%s\"\n"
+"%s"
+msgstr ""
+"Ne eblas trovi celan dosieron \"%s\"\n"
+"%s"
+
 #, c-format
 msgid ""
 "Cannot stat source directory \"%s\"\n"
+"%s"
+msgstr ""
+"Ne eblas trovi fontan dosierujon \"%s\"\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot get attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
 "Ne eblas trovi fontan dosierujon \"%s\"\n"
@@ -3942,10 +3978,12 @@ msgstr "La ŝelo estas aktiva. Ĉu senkonsidere eliri?"
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Averto: Ne eblas ŝanĝi al %s.\n"
 
-msgid "With builtin Editor and Aspell support"
+#, fuzzy
+msgid "With builtin editor and aspell support"
 msgstr "Kun interna tekstoredaktilo kaj literumilo"
 
-msgid "With builtin Editor"
+#, fuzzy
+msgid "With builtin editor"
 msgstr "Kun interna tekstoredaktilo"
 
 msgid "With optional subshell support"
