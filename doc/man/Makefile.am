@@ -3,10 +3,14 @@ if USE_NLS
 SUBDIRS = $(DOC_LINGUAS)
 endif
 
-man_MANS = mc.1 mcview.1 mcdiff.1
+man_MANS = mc.1 mcview.1
 
 if USE_INTERNAL_EDIT
 man_MANS += mcedit.1
+endif
+
+if USE_DIFF
+man_MANS += mcdiff.1
 endif
 
 CLEANFILES = $(man_MANS)
