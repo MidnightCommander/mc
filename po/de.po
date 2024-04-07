@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-01-20 20:51+0100\n"
+"POT-Creation-Date: 2024-04-07 16:41+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Ettore Atalan <atalanttore@googlemail.com>, 2015-2024\n"
 "Language-Team: German (http://app.transifex.com/mc/mc/language/de/)\n"
@@ -822,6 +822,10 @@ msgstr "Terminal-Optionen"
 
 msgid "Arguments parse error!"
 msgstr "Fehler beim Analysieren der Argumente!"
+
+#, fuzzy
+msgid "MC is built without builtin editor."
+msgstr "Mit eingebautem Editor"
 
 msgid "No arguments given to the viewer."
 msgstr "Keine Argumente an den Viewer übergeben."
@@ -2758,6 +2762,22 @@ msgstr ""
 "Kann Quelldatei \"%s\" nicht untersuchen\n"
 "%s"
 
+#, fuzzy, c-format
+msgid ""
+"Cannot get attributes of source file \"%s\"\n"
+"%s"
+msgstr ""
+"Kann Quelldatei \"%s\" nicht untersuchen\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot set attributes of target file \"%s\"\n"
+"%s"
+msgstr ""
+"Kann Zieldatei \"%s\" nicht untersuchen\n"
+"%s"
+
 #, c-format
 msgid ""
 "Cannot create special file \"%s\"\n"
@@ -2869,9 +2889,25 @@ msgstr ""
 "Kann Zieldatei \"%s\" nicht schließen\n"
 "%s"
 
+#, fuzzy, c-format
+msgid ""
+"Cannot set attributes for target file \"%s\"\n"
+"%s"
+msgstr ""
+"Kann Zieldatei \"%s\" nicht untersuchen\n"
+"%s"
+
 #, c-format
 msgid ""
 "Cannot stat source directory \"%s\"\n"
+"%s"
+msgstr ""
+"Kann Quellverzeichnis \"%s\" nicht untersuchen\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot get attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
 "Kann Quellverzeichnis \"%s\" nicht untersuchen\n"
@@ -3964,10 +4000,12 @@ msgstr "Die Shell ist immer noch aktiv. Trotzdem beenden?"
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Warnung: Kann nicht in %s wechseln.\n"
 
-msgid "With builtin Editor and Aspell support"
+#, fuzzy
+msgid "With builtin editor and aspell support"
 msgstr "Mit eingebautem Editor und Aspell-Unterstützung"
 
-msgid "With builtin Editor"
+#, fuzzy
+msgid "With builtin editor"
 msgstr "Mit eingebautem Editor"
 
 msgid "With optional subshell support"

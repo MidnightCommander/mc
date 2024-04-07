@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-01-20 20:51+0100\n"
+"POT-Creation-Date: 2024-04-07 16:41+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>, 2017-2024\n"
 "Language-Team: Catalan (http://app.transifex.com/mc/mc/language/ca/)\n"
@@ -840,6 +840,10 @@ msgstr "Opcions de terminal"
 
 msgid "Arguments parse error!"
 msgstr "Error en analitzar els arguments!"
+
+#, fuzzy
+msgid "MC is built without builtin editor."
+msgstr "Amb l'editor integrat"
 
 msgid "No arguments given to the viewer."
 msgstr "No s'han donat arguments al visor."
@@ -2777,6 +2781,22 @@ msgstr ""
 "No s'ha pogut fer estat al fitxer d'origen «%s»\n"
 "%s"
 
+#, fuzzy, c-format
+msgid ""
+"Cannot get attributes of source file \"%s\"\n"
+"%s"
+msgstr ""
+"No s'ha pogut fer estat al fitxer d'origen «%s»\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot set attributes of target file \"%s\"\n"
+"%s"
+msgstr ""
+"No s'ha pogut fer estat al fitxer de destinació «%s»\n"
+"%s"
+
 #, c-format
 msgid ""
 "Cannot create special file \"%s\"\n"
@@ -2888,9 +2908,25 @@ msgstr ""
 "No s'ha pogut tancar el fitxer de destinació «%s»\n"
 "%s"
 
+#, fuzzy, c-format
+msgid ""
+"Cannot set attributes for target file \"%s\"\n"
+"%s"
+msgstr ""
+"No s'ha pogut fer estat al fitxer de destinació «%s»\n"
+"%s"
+
 #, c-format
 msgid ""
 "Cannot stat source directory \"%s\"\n"
+"%s"
+msgstr ""
+"No s'ha pogut veure l'estat del directori d'origen «%s»\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot get attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
 "No s'ha pogut veure l'estat del directori d'origen «%s»\n"
@@ -3988,10 +4024,12 @@ msgstr "L'intèrpret d'ordres encara està actiu. Voleu sortir igualment?"
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Avís: no s'ha pogut canviar a %s.\n"
 
-msgid "With builtin Editor and Aspell support"
+#, fuzzy
+msgid "With builtin editor and aspell support"
 msgstr "Amb la implementació incorporada de l'Editor i Aspell"
 
-msgid "With builtin Editor"
+#, fuzzy
+msgid "With builtin editor"
 msgstr "Amb l'editor integrat"
 
 msgid "With optional subshell support"

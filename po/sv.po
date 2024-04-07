@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-01-20 20:51+0100\n"
+"POT-Creation-Date: 2024-04-07 16:41+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Alexander Kilian <alexander.kilian@gmail.com>, 2022\n"
 "Language-Team: Swedish (http://app.transifex.com/mc/mc/language/sv/)\n"
@@ -808,6 +808,10 @@ msgstr "Terminalalternativ"
 
 msgid "Arguments parse error!"
 msgstr "Argumenttolkningsfel!"
+
+#, fuzzy
+msgid "MC is built without builtin editor."
+msgstr "Med inbyggd redigerare"
 
 msgid "No arguments given to the viewer."
 msgstr "Inga argument angavs till filvisaren"
@@ -2720,6 +2724,22 @@ msgstr ""
 "Stat på källfilen \"%s\" misslyckades\n"
 "%s"
 
+#, fuzzy, c-format
+msgid ""
+"Cannot get attributes of source file \"%s\"\n"
+"%s"
+msgstr ""
+"Stat på källfilen \"%s\" misslyckades\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot set attributes of target file \"%s\"\n"
+"%s"
+msgstr ""
+"Fstat på målfilen \"%s\" misslyckades\n"
+"%s"
+
 #, c-format
 msgid ""
 "Cannot create special file \"%s\"\n"
@@ -2831,9 +2851,25 @@ msgstr ""
 "Stängning av målfilen \"%s\" misslyckades\n"
 "%s"
 
+#, fuzzy, c-format
+msgid ""
+"Cannot set attributes for target file \"%s\"\n"
+"%s"
+msgstr ""
+"Fstat på målfilen \"%s\" misslyckades\n"
+"%s"
+
 #, c-format
 msgid ""
 "Cannot stat source directory \"%s\"\n"
+"%s"
+msgstr ""
+"Stat på källkatalogen \"%s\" misslyckades\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot get attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
 "Stat på källkatalogen \"%s\" misslyckades\n"
@@ -3918,10 +3954,12 @@ msgstr "Skalet är fortfarande aktivt. Avsluta ändå?"
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Varning: Kan inte byta till %s.\n"
 
-msgid "With builtin Editor and Aspell support"
-msgstr ""
+#, fuzzy
+msgid "With builtin editor and aspell support"
+msgstr "Med inbyggd redigerare"
 
-msgid "With builtin Editor"
+#, fuzzy
+msgid "With builtin editor"
 msgstr "Med inbyggd redigerare"
 
 msgid "With optional subshell support"

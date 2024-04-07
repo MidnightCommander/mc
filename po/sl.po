@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-01-20 20:51+0100\n"
+"POT-Creation-Date: 2024-04-07 16:41+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Matej Urbančič <>, 2012\n"
 "Language-Team: Slovenian (http://app.transifex.com/mc/mc/language/sl/)\n"
@@ -18,8 +18,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
-"n%100==4 ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3);\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -770,6 +770,9 @@ msgid "Terminal options"
 msgstr ""
 
 msgid "Arguments parse error!"
+msgstr ""
+
+msgid "MC is built without builtin editor."
 msgstr ""
 
 msgid "No arguments given to the viewer."
@@ -2598,6 +2601,22 @@ msgid ""
 "%s"
 msgstr ""
 
+#, fuzzy, c-format
+msgid ""
+"Cannot get attributes of source file \"%s\"\n"
+"%s"
+msgstr ""
+"Ne morem pisati v datoteko %s:\n"
+"%s\n"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot set attributes of target file \"%s\"\n"
+"%s"
+msgstr ""
+"Ne morem pisati v datoteko %s:\n"
+"%s\n"
+
 #, c-format
 msgid ""
 "Cannot create special file \"%s\"\n"
@@ -2685,11 +2704,25 @@ msgid ""
 "%s"
 msgstr ""
 
+#, fuzzy, c-format
+msgid ""
+"Cannot set attributes for target file \"%s\"\n"
+"%s"
+msgstr ""
+"Ne morem pisati v datoteko %s:\n"
+"%s\n"
+
 #, c-format
 msgid ""
 "Cannot stat source directory \"%s\"\n"
 "%s"
 msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+"Cannot get attributes of source directory \"%s\"\n"
+"%s"
+msgstr "Ne morem nastaviti pravilnih dovoljenj za imenik %s\n"
 
 #, c-format
 msgid ""
@@ -3753,10 +3786,10 @@ msgstr ""
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Opozorilo: Ne morem iti v %s.\n"
 
-msgid "With builtin Editor and Aspell support"
+msgid "With builtin editor and aspell support"
 msgstr ""
 
-msgid "With builtin Editor"
+msgid "With builtin editor"
 msgstr ""
 
 msgid "With optional subshell support"

@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-01-20 20:51+0100\n"
+"POT-Creation-Date: 2024-04-07 16:41+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Simona Iacob <s@zp1.net>, 2021-2023\n"
 "Language-Team: Romanian (http://app.transifex.com/mc/mc/language/ro/)\n"
@@ -813,6 +813,10 @@ msgstr "Opțiuni terminal"
 
 msgid "Arguments parse error!"
 msgstr "Eroare de interpretare a argumentelor!"
+
+#, fuzzy
+msgid "MC is built without builtin editor."
+msgstr "Cu editor încorporat"
 
 msgid "No arguments given to the viewer."
 msgstr "Nu au fost date argumente către vizualizator."
@@ -2745,6 +2749,22 @@ msgstr ""
 "Nu se poate găsi fișierul sursă \"%s\"\n"
 "%s"
 
+#, fuzzy, c-format
+msgid ""
+"Cannot get attributes of source file \"%s\"\n"
+"%s"
+msgstr ""
+"Nu se poate găsi fișierul sursă \"%s\"\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot set attributes of target file \"%s\"\n"
+"%s"
+msgstr ""
+"Nu se poate găsi fișierul destinație \"%s\"\n"
+"%s"
+
 #, c-format
 msgid ""
 "Cannot create special file \"%s\"\n"
@@ -2856,9 +2876,25 @@ msgstr ""
 "Nu se poate închide fișierul destinație \"%s\"\n"
 "%s"
 
+#, fuzzy, c-format
+msgid ""
+"Cannot set attributes for target file \"%s\"\n"
+"%s"
+msgstr ""
+"Nu se poate găsi fișierul destinație \"%s\"\n"
+"%s"
+
 #, c-format
 msgid ""
 "Cannot stat source directory \"%s\"\n"
+"%s"
+msgstr ""
+"Nu se poate găsi dosarul sursă \"%s\"\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot get attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
 "Nu se poate găsi dosarul sursă \"%s\"\n"
@@ -3956,10 +3992,12 @@ msgstr "Terminalul este încă activ. Ieși oricum?"
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Atenție: Nu se poate schimba în %s.\n"
 
-msgid "With builtin Editor and Aspell support"
+#, fuzzy
+msgid "With builtin editor and aspell support"
 msgstr "Cu editor încorporat și suport Aspell"
 
-msgid "With builtin Editor"
+#, fuzzy
+msgid "With builtin editor"
 msgstr "Cu editor încorporat"
 
 msgid "With optional subshell support"

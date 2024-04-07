@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-01-20 20:51+0100\n"
+"POT-Creation-Date: 2024-04-07 16:41+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Meng Pang Wang, 2023\n"
 "Language-Team: Chinese (Taiwan) (http://app.transifex.com/mc/mc/language/"
@@ -778,6 +778,9 @@ msgid "Terminal options"
 msgstr "終端機選項"
 
 msgid "Arguments parse error!"
+msgstr ""
+
+msgid "MC is built without builtin editor."
 msgstr ""
 
 msgid "No arguments given to the viewer."
@@ -2629,6 +2632,22 @@ msgid ""
 "%s"
 msgstr ""
 
+#, fuzzy, c-format
+msgid ""
+"Cannot get attributes of source file \"%s\"\n"
+"%s"
+msgstr ""
+"無法覆寫檔案 \"%s\"\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot set attributes of target file \"%s\"\n"
+"%s"
+msgstr ""
+"無法對目標檔案 \"%s\" 執行 chmod 指令\n"
+"%s"
+
 #, c-format
 msgid ""
 "Cannot create special file \"%s\"\n"
@@ -2718,11 +2737,27 @@ msgid ""
 "%s"
 msgstr ""
 
+#, fuzzy, c-format
+msgid ""
+"Cannot set attributes for target file \"%s\"\n"
+"%s"
+msgstr ""
+"無法對目標檔案 \"%s\" 執行 chmod 指令\n"
+"%s"
+
 #, c-format
 msgid ""
 "Cannot stat source directory \"%s\"\n"
 "%s"
 msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+"Cannot get attributes of source directory \"%s\"\n"
+"%s"
+msgstr ""
+"無法建立目標目錄 \"%s\"\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -3786,10 +3821,10 @@ msgstr ""
 msgid "Warning: Cannot change to %s.\n"
 msgstr "警告： 無法切換到 %s。\n"
 
-msgid "With builtin Editor and Aspell support"
+msgid "With builtin editor and aspell support"
 msgstr ""
 
-msgid "With builtin Editor"
+msgid "With builtin editor"
 msgstr ""
 
 msgid "With optional subshell support"

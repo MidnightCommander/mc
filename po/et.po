@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-01-20 20:51+0100\n"
+"POT-Creation-Date: 2024-04-07 16:41+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Kristjan Räts <kristjanrats@gmail.com>, "
 "2013-2016,2018-2019,2024\n"
@@ -829,6 +829,10 @@ msgstr "Terminali suvandid"
 
 msgid "Arguments parse error!"
 msgstr "Parameetrite parsimise viga!"
+
+#, fuzzy
+msgid "MC is built without builtin editor."
+msgstr "Sisseehitatud toimetiga"
 
 msgid "No arguments given to the viewer."
 msgstr "Vaaturile parameetreid ei antud."
@@ -2762,6 +2766,22 @@ msgstr ""
 "Lähtefaili \"%s\" info päring nurjus\n"
 "%s"
 
+#, fuzzy, c-format
+msgid ""
+"Cannot get attributes of source file \"%s\"\n"
+"%s"
+msgstr ""
+"Lähtefaili \"%s\" info päring nurjus\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot set attributes of target file \"%s\"\n"
+"%s"
+msgstr ""
+"Sihtfaili \"%s\" info päring nurjus\n"
+"%s"
+
 #, c-format
 msgid ""
 "Cannot create special file \"%s\"\n"
@@ -2873,9 +2893,25 @@ msgstr ""
 "Sihtfaili \"%s\" sulgemine nurjus\n"
 "%s"
 
+#, fuzzy, c-format
+msgid ""
+"Cannot set attributes for target file \"%s\"\n"
+"%s"
+msgstr ""
+"Sihtfaili \"%s\" info päring nurjus\n"
+"%s"
+
 #, c-format
 msgid ""
 "Cannot stat source directory \"%s\"\n"
+"%s"
+msgstr ""
+"Lähtekataloogi \"%s\" info päring nurjus\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot get attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
 "Lähtekataloogi \"%s\" info päring nurjus\n"
@@ -3968,10 +4004,12 @@ msgstr "Shell on veel aktiivne. Kas soovid ikkagi lõpetada?"
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Hoiatus: sisenemine kataloogi %s nurjus.\n"
 
-msgid "With builtin Editor and Aspell support"
+#, fuzzy
+msgid "With builtin editor and aspell support"
 msgstr "Sisseehitatud toimeti ja Aspelli toega"
 
-msgid "With builtin Editor"
+#, fuzzy
+msgid "With builtin editor"
 msgstr "Sisseehitatud toimetiga"
 
 msgid "With optional subshell support"
