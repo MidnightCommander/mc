@@ -607,6 +607,8 @@ char *strrstr_skip_count (const char *haystack, const char *needle, size_t skip_
 
 char *str_replace_all (const char *haystack, const char *needle, const char *replacement);
 
+GPtrArray *str_tokenize (const char *string);
+
 strtol_error_t xstrtoumax (const char *s, char **ptr, int base, uintmax_t * val,
                            const char *valid_suffixes);
 uintmax_t parse_integer (const char *str, gboolean * invalid);

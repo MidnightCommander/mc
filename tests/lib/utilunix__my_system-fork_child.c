@@ -66,6 +66,80 @@ END_TEST
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* *INDENT-OFF* */
+START_TEST (fork_child_tokens)
+/* *INDENT-ON* */
+{
+    int actual_value;
+    /* given */
+    fork__return_value = 0;
+
+    /* when */
+    actual_value = my_system (0, "vi +", "foo.txt");
+
+    /* then */
+    ck_assert_int_eq (actual_value, 0);
+
+    VERIFY_SIGACTION_CALLS ();
+    VERIFY_SIGNAL_CALLS ();
+
+    mctest_assert_str_eq (execvp__file__captured, "vi");
+    ck_assert_int_eq (execvp__args__captured->len, 3);
+
+    mctest_assert_str_eq (g_ptr_array_index (execvp__args__captured, 0), "vi");
+    mctest_assert_str_eq (g_ptr_array_index (execvp__args__captured, 1), "+");
+    mctest_assert_str_eq (g_ptr_array_index (execvp__args__captured, 2), "foo.txt");
+
+    /* All exec* calls is mocked, so call to _exit() function with 127 status code it's a normal situation */
+    ck_assert_int_eq (my_exit__status__captured, 127);
+}
+/* *INDENT-OFF* */
+END_TEST
+/* *INDENT-ON* */
+
+/* --------------------------------------------------------------------------------------------- */
+
+/* *INDENT-OFF* */
+START_TEST (fork_child_tokens2)
+/* *INDENT-ON* */
+{
+    int actual_value;
+    /* given */
+    fork__return_value = 0;
+
+    /* when */
+    actual_value = my_system (0, "qwe -a 'aa bb' -b -c cc -d \"dd ee\" -f ff\\ gg", "foo.txt");
+
+    /* then */
+    ck_assert_int_eq (actual_value, 0);
+
+    VERIFY_SIGACTION_CALLS ();
+    VERIFY_SIGNAL_CALLS ();
+
+    mctest_assert_str_eq (execvp__file__captured, "qwe");
+    ck_assert_int_eq (execvp__args__captured->len, 11);
+
+    mctest_assert_str_eq (g_ptr_array_index (execvp__args__captured, 0), "qwe");
+    mctest_assert_str_eq (g_ptr_array_index (execvp__args__captured, 1), "-a");
+    mctest_assert_str_eq (g_ptr_array_index (execvp__args__captured, 2), "'aa bb'");
+    mctest_assert_str_eq (g_ptr_array_index (execvp__args__captured, 3), "-b");
+    mctest_assert_str_eq (g_ptr_array_index (execvp__args__captured, 4), "-c");
+    mctest_assert_str_eq (g_ptr_array_index (execvp__args__captured, 5), "cc");
+    mctest_assert_str_eq (g_ptr_array_index (execvp__args__captured, 6), "-d");
+    mctest_assert_str_eq (g_ptr_array_index (execvp__args__captured, 7), "\"dd ee\"");
+    mctest_assert_str_eq (g_ptr_array_index (execvp__args__captured, 8), "-f");
+    mctest_assert_str_eq (g_ptr_array_index (execvp__args__captured, 9), "ff\\ gg");
+    mctest_assert_str_eq (g_ptr_array_index (execvp__args__captured, 10), "foo.txt");
+
+    /* All exec* calls is mocked, so call to _exit() function with 127 status code it's a normal situation */
+    ck_assert_int_eq (my_exit__status__captured, 127);
+}
+/* *INDENT-OFF* */
+END_TEST
+/* *INDENT-ON* */
+
+/* --------------------------------------------------------------------------------------------- */
+
 int
 main (void)
 {
@@ -77,6 +151,8 @@ main (void)
 
     /* Add new tests here: *************** */
     tcase_add_test (tc_core, fork_child);
+    tcase_add_test (tc_core, fork_child_tokens);
+    tcase_add_test (tc_core, fork_child_tokens2);
     /* *********************************** */
 
     return mctest_run_all (tc_core);
