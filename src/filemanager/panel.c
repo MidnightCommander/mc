@@ -4704,15 +4704,15 @@ set_panel_formats (WPanel * p)
 
     panel_update_cols (WIDGET (p), p->frame_size);
 
-    if (retcode)
+    if (retcode != 0)
         message (D_ERROR, _("Warning"),
                  _("User supplied format looks invalid, reverting to default."));
-    if (retcode & 0x01)
+    if ((retcode & 0x01) != 0)
     {
         g_free (p->user_format);
         p->user_format = g_strdup (DEFAULT_USER_FORMAT);
     }
-    if (retcode & 0x02)
+    if ((retcode & 0x02) != 0)
     {
         g_free (p->user_status_format[p->list_format]);
         p->user_status_format[p->list_format] = g_strdup (DEFAULT_USER_FORMAT);
