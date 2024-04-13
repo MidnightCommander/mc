@@ -1010,7 +1010,7 @@ search_content (WDialog * h, const char *directory, const char *filename)
 {
     struct stat s;
     char buffer[BUF_4K] = "";   /* raw input buffer */
-    int file_fd;
+    int file_fd = -1;
     gboolean ret_val = FALSE;
     vfs_path_t *vpath;
     gint64 tv;
@@ -1018,13 +1018,9 @@ search_content (WDialog * h, const char *directory, const char *filename)
 
     vpath = vfs_path_build_filename (directory, filename, (char *) NULL);
 
-    if (mc_stat (vpath, &s) != 0 || !S_ISREG (s.st_mode))
-    {
-        vfs_path_free (vpath, TRUE);
-        return FALSE;
-    }
+    if (mc_stat (vpath, &s) == 0 && S_ISREG (s.st_mode))
+        file_fd = mc_open (vpath, O_RDONLY);
 
-    file_fd = mc_open (vpath, O_RDONLY);
     vfs_path_free (vpath, TRUE);
 
     if (file_fd == -1)
