@@ -1130,7 +1130,7 @@ void
 panel_load_setup (WPanel * panel, const char *section)
 {
     size_t i;
-    char *buffer, buffer2[BUF_TINY];
+    char *buffer;
 
     panel->sort_info.reverse =
         mc_config_get_bool (mc_global.panels_config, section, "reverse", FALSE);
@@ -1173,6 +1173,8 @@ panel_load_setup (WPanel * panel, const char *section)
 
     for (i = 0; i < LIST_FORMATS; i++)
     {
+        char buffer2[BUF_TINY];
+
         g_free (panel->user_status_format[i]);
         g_snprintf (buffer2, sizeof (buffer2), "user_status%lld", (long long) i);
         panel->user_status_format[i] =
