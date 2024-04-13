@@ -129,7 +129,7 @@ typedef struct format_item_t
     int field_len;
     align_crt_t just_mode;
     gboolean expand;
-    const char *(*string_fn) (file_entry_t *, int len);
+    const char *(*string_fn) (const file_entry_t * fe, int len);
     char *title;
     const char *id;
 } format_item_t;
@@ -144,24 +144,24 @@ typedef enum
 
 /*** forward declarations (file scope functions) *************************************************/
 
-static const char *string_file_name (file_entry_t * fe, int len);
-static const char *string_file_size (file_entry_t * fe, int len);
-static const char *string_file_size_brief (file_entry_t * fe, int len);
-static const char *string_file_type (file_entry_t * fe, int len);
-static const char *string_file_mtime (file_entry_t * fe, int len);
-static const char *string_file_atime (file_entry_t * fe, int len);
-static const char *string_file_ctime (file_entry_t * fe, int len);
-static const char *string_file_permission (file_entry_t * fe, int len);
-static const char *string_file_perm_octal (file_entry_t * fe, int len);
-static const char *string_file_nlinks (file_entry_t * fe, int len);
-static const char *string_inode (file_entry_t * fe, int len);
-static const char *string_file_nuid (file_entry_t * fe, int len);
-static const char *string_file_ngid (file_entry_t * fe, int len);
-static const char *string_file_owner (file_entry_t * fe, int len);
-static const char *string_file_group (file_entry_t * fe, int len);
-static const char *string_marked (file_entry_t * fe, int len);
-static const char *string_space (file_entry_t * fe, int len);
-static const char *string_dot (file_entry_t * fe, int len);
+static const char *string_file_name (const file_entry_t * fe, int len);
+static const char *string_file_size (const file_entry_t * fe, int len);
+static const char *string_file_size_brief (const file_entry_t * fe, int len);
+static const char *string_file_type (const file_entry_t * fe, int len);
+static const char *string_file_mtime (const file_entry_t * fe, int len);
+static const char *string_file_atime (const file_entry_t * fe, int len);
+static const char *string_file_ctime (const file_entry_t * fe, int len);
+static const char *string_file_permission (const file_entry_t * fe, int len);
+static const char *string_file_perm_octal (const file_entry_t * fe, int len);
+static const char *string_file_nlinks (const file_entry_t * fe, int len);
+static const char *string_inode (const file_entry_t * fe, int len);
+static const char *string_file_nuid (const file_entry_t * fe, int len);
+static const char *string_file_ngid (const file_entry_t * fe, int len);
+static const char *string_file_owner (const file_entry_t * fe, int len);
+static const char *string_file_group (const file_entry_t * fe, int len);
+static const char *string_marked (const file_entry_t * fe, int len);
+static const char *string_space (const file_entry_t * fe, int len);
+static const char *string_dot (const file_entry_t * fe, int len);
 
 /*** file scope variables ************************************************************************/
 
@@ -490,7 +490,7 @@ add_permission_string (const char *dest, int width, file_entry_t * fe, file_attr
 /** String representations of various file attributes name */
 
 static const char *
-string_file_name (file_entry_t * fe, int len)
+string_file_name (const file_entry_t * fe, int len)
 {
     (void) len;
 
@@ -542,7 +542,7 @@ format_device_number (char *buf, size_t bufsize, dev_t dev)
 /** size */
 
 static const char *
-string_file_size (file_entry_t * fe, int len)
+string_file_size (const file_entry_t * fe, int len)
 {
     static char buffer[BUF_TINY];
 
@@ -564,7 +564,7 @@ string_file_size (file_entry_t * fe, int len)
 /** bsize */
 
 static const char *
-string_file_size_brief (file_entry_t * fe, int len)
+string_file_size_brief (const file_entry_t * fe, int len)
 {
     if (S_ISLNK (fe->st.st_mode) && !link_isdir (fe))
         return _("SYMLINK");
@@ -579,7 +579,7 @@ string_file_size_brief (file_entry_t * fe, int len)
 /** This functions return a string representation of a file entry type */
 
 static const char *
-string_file_type (file_entry_t * fe, int len)
+string_file_type (const file_entry_t * fe, int len)
 {
     static char buffer[2];
 
@@ -622,7 +622,7 @@ string_file_type (file_entry_t * fe, int len)
 /** mtime */
 
 static const char *
-string_file_mtime (file_entry_t * fe, int len)
+string_file_mtime (const file_entry_t * fe, int len)
 {
     (void) len;
 
@@ -633,7 +633,7 @@ string_file_mtime (file_entry_t * fe, int len)
 /** atime */
 
 static const char *
-string_file_atime (file_entry_t * fe, int len)
+string_file_atime (const file_entry_t * fe, int len)
 {
     (void) len;
 
@@ -644,7 +644,7 @@ string_file_atime (file_entry_t * fe, int len)
 /** ctime */
 
 static const char *
-string_file_ctime (file_entry_t * fe, int len)
+string_file_ctime (const file_entry_t * fe, int len)
 {
     (void) len;
 
@@ -655,7 +655,7 @@ string_file_ctime (file_entry_t * fe, int len)
 /** perm */
 
 static const char *
-string_file_permission (file_entry_t * fe, int len)
+string_file_permission (const file_entry_t * fe, int len)
 {
     (void) len;
 
@@ -666,7 +666,7 @@ string_file_permission (file_entry_t * fe, int len)
 /** mode */
 
 static const char *
-string_file_perm_octal (file_entry_t * fe, int len)
+string_file_perm_octal (const file_entry_t * fe, int len)
 {
     static char buffer[10];
 
@@ -680,7 +680,7 @@ string_file_perm_octal (file_entry_t * fe, int len)
 /** nlink */
 
 static const char *
-string_file_nlinks (file_entry_t * fe, int len)
+string_file_nlinks (const file_entry_t * fe, int len)
 {
     static char buffer[BUF_TINY];
 
@@ -694,7 +694,7 @@ string_file_nlinks (file_entry_t * fe, int len)
 /** inode */
 
 static const char *
-string_inode (file_entry_t * fe, int len)
+string_inode (const file_entry_t * fe, int len)
 {
     static char buffer[10];
 
@@ -708,7 +708,7 @@ string_inode (file_entry_t * fe, int len)
 /** nuid */
 
 static const char *
-string_file_nuid (file_entry_t * fe, int len)
+string_file_nuid (const file_entry_t * fe, int len)
 {
     static char buffer[10];
 
@@ -722,7 +722,7 @@ string_file_nuid (file_entry_t * fe, int len)
 /** ngid */
 
 static const char *
-string_file_ngid (file_entry_t * fe, int len)
+string_file_ngid (const file_entry_t * fe, int len)
 {
     static char buffer[10];
 
@@ -736,7 +736,7 @@ string_file_ngid (file_entry_t * fe, int len)
 /** owner */
 
 static const char *
-string_file_owner (file_entry_t * fe, int len)
+string_file_owner (const file_entry_t * fe, int len)
 {
     (void) len;
 
@@ -747,7 +747,7 @@ string_file_owner (file_entry_t * fe, int len)
 /** group */
 
 static const char *
-string_file_group (file_entry_t * fe, int len)
+string_file_group (const file_entry_t * fe, int len)
 {
     (void) len;
 
@@ -758,7 +758,7 @@ string_file_group (file_entry_t * fe, int len)
 /** mark */
 
 static const char *
-string_marked (file_entry_t * fe, int len)
+string_marked (const file_entry_t * fe, int len)
 {
     (void) len;
 
@@ -769,7 +769,7 @@ string_marked (file_entry_t * fe, int len)
 /** space */
 
 static const char *
-string_space (file_entry_t * fe, int len)
+string_space (const file_entry_t * fe, int len)
 {
     (void) fe;
     (void) len;
@@ -781,7 +781,7 @@ string_space (file_entry_t * fe, int len)
 /** dot */
 
 static const char *
-string_dot (file_entry_t * fe, int len)
+string_dot (const file_entry_t * fe, int len)
 {
     (void) fe;
     (void) len;
@@ -792,7 +792,7 @@ string_dot (file_entry_t * fe, int len)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-file_compute_color (file_attr_t attr, file_entry_t * fe)
+file_compute_color (const file_attr_t attr, file_entry_t * fe)
 {
     switch (attr)
     {

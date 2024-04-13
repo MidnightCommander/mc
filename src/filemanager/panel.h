@@ -67,7 +67,7 @@ typedef struct panel_field_struct
     const char *title_hotkey;
     gboolean is_user_choice;
     gboolean use_in_user_format;
-    const char *(*string_fn) (file_entry_t *, int);
+    const char *(*string_fn) (const file_entry_t * fe, int len);
     GCompareFunc sort_routine;  /* used by mouse_sort_col() */
 } panel_field_t;
 
