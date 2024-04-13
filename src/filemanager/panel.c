@@ -98,6 +98,8 @@ typedef enum
     FATTR_STATUS
 } file_attr_t;
 
+#define DEFAULT_USER_FORMAT "half type name | size | perm"
+
 /* select/unselect dialog results */
 #define SELECT_RESET ((mc_search_t *)(-1))
 #define SELECT_ERROR ((mc_search_t *)(-2))

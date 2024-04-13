@@ -1169,7 +1169,7 @@ panel_load_setup (WPanel * panel, const char *section)
     /* User formats */
     g_free (panel->user_format);
     panel->user_format =
-        mc_config_get_string (mc_global.panels_config, section, "user_format", DEFAULT_USER_FORMAT);
+        mc_config_get_string (mc_global.panels_config, section, "user_format", NULL);
 
     for (i = 0; i < LIST_FORMATS; i++)
     {
@@ -1178,7 +1178,7 @@ panel_load_setup (WPanel * panel, const char *section)
         g_free (panel->user_status_format[i]);
         g_snprintf (buffer2, sizeof (buffer2), "user_status%lld", (long long) i);
         panel->user_status_format[i] =
-            mc_config_get_string (mc_global.panels_config, section, buffer2, DEFAULT_USER_FORMAT);
+            mc_config_get_string (mc_global.panels_config, section, buffer2, NULL);
     }
 
     panel->user_mini_status =

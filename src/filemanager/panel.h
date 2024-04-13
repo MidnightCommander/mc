@@ -20,7 +20,6 @@
 /*** typedefs(not structures) and defined constants **********************************************/
 
 #define PANEL(x) ((WPanel *)(x))
-#define DEFAULT_USER_FORMAT "half type name | size | perm"
 
 #define LIST_FORMATS 4
 
