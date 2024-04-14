@@ -958,7 +958,7 @@ try_complete_all_possible (try_complete_automation_state_t * state, char *text, 
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-insert_text (WInput * in, char *text, ssize_t size)
+insert_text (WInput * in, const char *text, ssize_t size)
 {
     size_t text_len;
     int buff_len;
