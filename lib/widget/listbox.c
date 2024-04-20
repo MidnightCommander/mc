@@ -806,9 +806,44 @@ listbox_remove_list (WListbox * l)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/**
+ * Add new intem to the listbox.
+ *
+ * @param l WListbox object
+ * @param pos position of the item
+ * @param hotkey position of the item
+ * @param text item text. @l takes the copy of @text.
+ * @param data item data
+ * @param free_data if TRUE free the @data when @l is destroyed,
+ *
+ * @returns pointer to copy of @text.
+ */
 char *
 listbox_add_item (WListbox * l, listbox_append_t pos, int hotkey, const char *text, void *data,
                   gboolean free_data)
+{
+    return listbox_add_item_take (l, pos, hotkey, g_strdup (text), data, free_data);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Add new intem to the listbox.
+ *
+ * @param l WListbox object
+ * @param pos position of the item
+ * @param hotkey position of the item
+ * @param text item text. Ownership of the text is transferred to the @l.
+ * @param data item data
+ * @param free_data if TRUE free the @data when @l is destroyed,
+ *
+ * After this call, @text belongs to the @l and may no longer be modified by the caller.
+ *
+ * @returns pointer to @text.
+ */
+char *
+listbox_add_item_take (WListbox * l, listbox_append_t pos, int hotkey, char *text, void *data,
+                       gboolean free_data)
 {
     WLEntry *entry;
 
@@ -819,7 +854,7 @@ listbox_add_item (WListbox * l, listbox_append_t pos, int hotkey, const char *te
         return NULL;
 
     entry = g_new (WLEntry, 1);
-    entry->text = g_strdup (text);
+    entry->text = text;
     entry->data = data;
     entry->free_data = free_data;
     entry->hotkey = hotkey;

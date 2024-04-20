@@ -76,6 +76,8 @@ void listbox_set_list (WListbox * l, GQueue * list);
 void listbox_remove_list (WListbox * l);
 char *listbox_add_item (WListbox * l, listbox_append_t pos, int hotkey, const char *text,
                         void *data, gboolean free_data);
+char *listbox_add_item_take (WListbox * l, listbox_append_t pos, int hotkey, char *text,
+                             void *data, gboolean free_data);
 
 /*** inline functions ****************************************************************************/
 
