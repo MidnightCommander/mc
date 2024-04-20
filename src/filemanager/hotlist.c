@@ -271,20 +271,16 @@ static void
 fill_listbox (WListbox * list)
 {
     struct hotlist *current;
-    GString *buff;
-
-    buff = g_string_new ("");
 
     for (current = current_group->head; current != NULL; current = current->next)
         switch (current->type)
         {
         case HL_TYPE_GROUP:
             {
-                /* buff clean up */
-                g_string_truncate (buff, 0);
-                g_string_append (buff, "->");
-                g_string_append (buff, current->label);
-                listbox_add_item (list, LISTBOX_APPEND_AT_END, 0, buff->str, current, FALSE);
+                char *lbl;
+
+                lbl = g_strconcat ("->", current->label, (char *) NULL);
+                listbox_add_item_take (list, LISTBOX_APPEND_AT_END, 0, lbl, current, FALSE);
             }
             break;
         case HL_TYPE_DOTDOT:
@@ -294,8 +290,6 @@ fill_listbox (WListbox * list)
         default:
             break;
         }
-
-    g_string_free (buff, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -988,8 +982,7 @@ add2hotlist (char *label, char *directory, enum HotListType type, listbox_append
             char *lbl;
 
             lbl = g_strconcat ("->", new->label, (char *) NULL);
-            listbox_add_item (l_hotlist, pos, 0, lbl, new, FALSE);
-            g_free (lbl);
+            listbox_add_item_take (l_hotlist, pos, 0, lbl, new, FALSE);
         }
         else
             listbox_add_item (l_hotlist, pos, 0, new->label, new, FALSE);

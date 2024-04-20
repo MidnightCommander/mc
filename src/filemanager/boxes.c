@@ -474,8 +474,7 @@ jobs_fill_listbox (WListbox * list)
         char *s;
 
         s = g_strconcat (state_str[tl->state], " ", tl->info, (char *) NULL);
-        listbox_add_item (list, LISTBOX_APPEND_AT_END, 0, s, (void *) tl, FALSE);
-        g_free (s);
+        listbox_add_item_take (list, LISTBOX_APPEND_AT_END, 0, s, (void *) tl, FALSE);
     }
 }
 

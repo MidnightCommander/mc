@@ -252,9 +252,8 @@ dialog_switch_list (void)
         else
             title = g_strdup ("");
 
-        listbox_add_item (listbox->list, LISTBOX_APPEND_BEFORE, get_hotkey (i++), title, h, FALSE);
-
-        g_free (title);
+        listbox_add_item_take (listbox->list, LISTBOX_APPEND_BEFORE, get_hotkey (i++), title, h,
+                               FALSE);
     }
 
     selected = listbox_run_with_data (listbox, mc_current);
