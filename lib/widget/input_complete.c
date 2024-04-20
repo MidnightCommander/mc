@@ -88,7 +88,7 @@ typedef struct
 
 /*** forward declarations (file scope functions) *************************************************/
 
-char **try_complete (char *text, int *lc_start, int *lc_end, input_complete_t flags);
+GPtrArray *try_complete (char *text, int *lc_start, int *lc_end, input_complete_t flags);
 void complete_engine_fill_completions (WInput * in);
 
 /*** file scope variables ************************************************************************/
@@ -681,7 +681,7 @@ command_completion_function (const char *text, int state, input_complete_t flags
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-match_compare (const void *a, const void *b)
+match_compare (gconstpointer a, gconstpointer b)
 {
     return strcmp (*(char *const *) a, *(char *const *) b);
 }
@@ -695,97 +695,76 @@ match_compare (const void *a, const void *b)
    as the second. 
    In case no matches were found we return NULL. */
 
-static char **
+static GPtrArray *
 completion_matches (const char *text, CompletionFunction entry_function, input_complete_t flags)
 {
-    /* Number of slots in match_list. */
-    size_t match_list_size = 30;
-    /* The list of matches. */
-    char **match_list;
-    /* Number of matches actually found. */
-    size_t matches = 0;
-
-    /* Temporary string binder. */
+    GPtrArray *match_list;
     char *string;
 
-    match_list = g_new (char *, match_list_size + 1);
-    match_list[1] = NULL;
+    match_list = g_ptr_array_new_with_free_func (g_free);
 
-    while ((string = (*entry_function) (text, matches, flags)) != NULL)
-    {
-        if (matches + 1 == match_list_size)
-        {
-            match_list_size += 30;
-            match_list = (char **) g_renew (char *, match_list, match_list_size + 1);
-        }
-        match_list[++matches] = string;
-        match_list[matches + 1] = NULL;
-    }
+    while ((string = entry_function (text, match_list->len, flags)) != NULL)
+        g_ptr_array_add (match_list, string);
 
     /* If there were any matches, then look through them finding out the
        lowest common denominator.  That then becomes match_list[0]. */
-    if (matches == 0)
-        MC_PTR_FREE (match_list);       /* There were no matches. */
-    else
+    if (match_list->len == 0)
     {
-        /* If only one match, just use that. */
-        if (matches == 1)
+        /* There were no matches. */
+        g_ptr_array_free (match_list, TRUE);
+        return NULL;
+    }
+
+    /* If only one match, just use that. */
+
+    if (match_list->len > 1)
+    {
+        size_t i, j;
+        size_t low = 4096;      /* Count of max-matched characters. */
+
+        g_ptr_array_sort (match_list, match_compare);
+
+        /* And compare each member of the list with
+           the next, finding out where they stop matching. 
+           If we find two equal strings, we have to put one away... */
+        for (i = 0, j = 1; j < match_list->len;)
         {
-            match_list[0] = match_list[1];
-            match_list[1] = NULL;
-        }
-        else
-        {
-            size_t i = 1;
-            int low = 4096;     /* Count of max-matched characters. */
-            size_t j;
+            char *si, *sj, *mi;
 
-            qsort (match_list + 1, matches, sizeof (char *), match_compare);
+            si = g_ptr_array_index (match_list, i);
+            sj = g_ptr_array_index (match_list, j);
+            mi = si;
 
-            /* And compare each member of the list with
-               the next, finding out where they stop matching. 
-               If we find two equal strings, we have to put one away... */
-
-            j = i + 1;
-            while (j < matches + 1)
+            while (si[0] != '\0' && sj[0] != '\0')
             {
-                char *si, *sj;
                 char *ni, *nj;
 
-                for (si = match_list[i], sj = match_list[j]; si[0] != '\0' && sj[0] != '\0';)
-                {
+                ni = str_get_next_char (si);
+                nj = str_get_next_char (sj);
 
-                    ni = str_get_next_char (si);
-                    nj = str_get_next_char (sj);
+                if (ni - si != nj - sj || strncmp (si, sj, ni - si) != 0)
+                    break;
 
-                    if (ni - si != nj - sj)
-                        break;
-                    if (strncmp (si, sj, ni - si) != 0)
-                        break;
+                si = ni;
+                sj = nj;
+            }
 
-                    si = ni;
-                    sj = nj;
-                }
+            if (si[0] == '\0' && sj[0] == '\0')
+            {
+                /* Two equal strings */
+                g_ptr_array_remove_index (match_list, j);
+            }
+            else
+            {
+                low = MIN (low, (size_t) (si - mi));
 
-                if (si[0] == '\0' && sj[0] == '\0')
-                {               /* Two equal strings */
-                    g_free (match_list[j]);
-                    j++;
-                    if (j > matches)
-                        break;
-                    continue;   /* Look for a run of equal strings */
-                }
-                else if (low > si - match_list[i])
-                    low = si - match_list[i];
-                if (i + 1 != j) /* So there's some gap */
-                    match_list[i + 1] = match_list[j];
                 i++;
                 j++;
             }
-            matches = i;
-            match_list[matches + 1] = NULL;
-            match_list[0] = g_strndup (match_list[1], low);
         }
+
+        string = g_ptr_array_index (match_list, 0);
+        g_ptr_array_insert (match_list, 0, g_strndup (string, low));
     }
 
     return match_list;
@@ -886,10 +865,10 @@ try_complete_find_start_sign (try_complete_automation_state_t * state)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static char **
+static GPtrArray *
 try_complete_all_possible (try_complete_automation_state_t * state, char *text, int *lc_start)
 {
-    char **matches = NULL;
+    GPtrArray *matches = NULL;
 
     if (state->in_command_position != 0)
     {
@@ -1201,32 +1180,37 @@ complete_engine (WInput * in, int what_to_do)
     else
     {
         if ((what_to_do & DO_INSERTION) != 0
-            || ((what_to_do & DO_QUERY) != 0 && in->completions[1] == NULL))
+            || ((what_to_do & DO_QUERY) != 0 && in->completions->len == 1))
         {
-            char *lc_complete = in->completions[0];
+            const char *lc_complete;
 
-            if (!insert_text (in, lc_complete, -1) || in->completions[1] != NULL)
+            lc_complete = g_ptr_array_index (in->completions, 0);
+            if (!insert_text (in, lc_complete, -1) || in->completions->len > 1)
                 tty_beep ();
             else
                 input_complete_free (in);
         }
 
-        if ((what_to_do & DO_QUERY) != 0 && in->completions != NULL && in->completions[1] != NULL)
+        if ((what_to_do & DO_QUERY) != 0 && in->completions != NULL && in->completions->len > 1)
         {
-            int maxlen = 0, count = 0, i;
+            int maxlen = 0;
+            int i;
+            size_t k;
+            int count;
             int x, y, w, h;
             int start_x, start_y;
-            char **p, *q;
+            char *q;
             WDialog *complete_dlg;
             WListbox *complete_list;
 
-            for (p = in->completions + 1; *p != NULL; count++, p++)
+            for (k = 1; k < in->completions->len; k++)
             {
-                i = str_term_width1 (*p);
-                if (i > maxlen)
-                    maxlen = i;
+                q = g_ptr_array_index (in->completions, k);
+                i = str_term_width1 (q);
+                maxlen = MAX (maxlen, i);
             }
 
+            count = in->completions->len - 1;
             start_x = WIDGET (in)->rect.x;
             start_y = WIDGET (in)->rect.y;
             if (start_y - 2 >= count)
@@ -1262,8 +1246,11 @@ complete_engine (WInput * in, int what_to_do)
             complete_list = listbox_new (1, 1, h - 2, w - 2, FALSE, NULL);
             group_add_widget (GROUP (complete_dlg), complete_list);
 
-            for (p = in->completions + 1; *p != NULL; p++)
-                listbox_add_item (complete_list, LISTBOX_APPEND_AT_END, 0, *p, NULL, FALSE);
+            for (k = 1; k < in->completions->len; k++)
+            {
+                q = g_ptr_array_index (in->completions, k);
+                listbox_add_item (complete_list, LISTBOX_APPEND_AT_END, 0, q, NULL, FALSE);
+            }
 
             i = dlg_run (complete_dlg);
             q = NULL;
@@ -1290,11 +1277,11 @@ complete_engine (WInput * in, int what_to_do)
 /* --------------------------------------------------------------------------------------------- */
 
 /** Returns an array of matches, or NULL if none. */
-char **
+GPtrArray *
 try_complete (char *text, int *lc_start, int *lc_end, input_complete_t flags)
 {
     try_complete_automation_state_t state;
-    char **matches = NULL;
+    GPtrArray *matches = NULL;
 
     memset (&state, 0, sizeof (state));
     state.flags = flags;
@@ -1371,16 +1358,16 @@ try_complete (char *text, int *lc_start, int *lc_end, input_complete_t flags)
         (flags & INPUT_COMPLETE_SHELL_ESC) == 0)
     {
         /* FIXME: HACK? INPUT_COMPLETE_SHELL_ESC is used only in command line. */
-        char **m;
+        size_t i;
 
-        for (m = matches; *m != NULL; m++)
+        for (i = 0; i < matches->len; i++)
         {
             char *p;
 
-            p = *m;
+            p = g_ptr_array_index (matches, i);
             /* Escape only '?', '*', and '&' symbols as described in the
                manual page (see a11995e12b88285e044f644904c306ed6c342ad0). */
-            *m = str_escape (*m, -1, "?*&", TRUE);
+            g_ptr_array_index (matches, i) = str_escape (p, -1, "?*&", TRUE);
             g_free (p);
         }
     }
@@ -1456,8 +1443,11 @@ input_complete (WInput * in)
 void
 input_complete_free (WInput * in)
 {
-    g_strfreev (in->completions);
-    in->completions = NULL;
+    if (in->completions != NULL)
+    {
+        g_ptr_array_free (in->completions, TRUE);
+        in->completions = NULL;
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */

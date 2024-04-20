@@ -58,7 +58,7 @@ typedef struct
     gboolean init_from_history; /* init text will be get from history */
     gboolean need_push;         /* need to push the current Input on hist? */
     gboolean strip_password;    /* need to strip password before placing string to history */
-    char **completions;         /* possible completions array */
+    GPtrArray *completions;     /* possible completions array */
     input_complete_t completion_flags;
     char charbuf[MB_LEN_MAX];   /* buffer for multibytes characters */
     size_t charpoint;           /* point to end of mulibyte sequence in charbuf */
