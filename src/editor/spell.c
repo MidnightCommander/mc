@@ -52,6 +52,9 @@
 #define B_SKIP_WORD (B_USER+3)
 #define B_ADD_WORD (B_USER+4)
 
+#define ASPELL_FUNCTION_AVAILABLE(f) \
+    g_module_symbol (spell_module, #f, (void *) &mc_##f)
+
 /*** file scope type declarations ****************************************************************/
 
 typedef struct aspell_struct
@@ -168,119 +171,45 @@ static gboolean
 spell_available (void)
 {
     gchar *spell_module_fname;
-    gboolean ret = FALSE;
 
     if (spell_module != NULL)
         return TRUE;
 
     spell_module_fname = g_module_build_path (NULL, "libaspell");
     spell_module = g_module_open (spell_module_fname, G_MODULE_BIND_LAZY);
-
     g_free (spell_module_fname);
 
-    if (spell_module == NULL)
-        return FALSE;
+    if (spell_module != NULL
+        && ASPELL_FUNCTION_AVAILABLE (new_aspell_config)
+        && ASPELL_FUNCTION_AVAILABLE (aspell_dict_info_list_elements)
+        && ASPELL_FUNCTION_AVAILABLE (aspell_dict_info_enumeration_next)
+        && ASPELL_FUNCTION_AVAILABLE (new_aspell_speller)
+        && ASPELL_FUNCTION_AVAILABLE (aspell_error_number)
+        && ASPELL_FUNCTION_AVAILABLE (aspell_speller_error_message)
+        && ASPELL_FUNCTION_AVAILABLE (aspell_speller_error)
+        && ASPELL_FUNCTION_AVAILABLE (aspell_error)
+        && ASPELL_FUNCTION_AVAILABLE (to_aspell_speller)
+        && ASPELL_FUNCTION_AVAILABLE (aspell_speller_check)
+        && ASPELL_FUNCTION_AVAILABLE (aspell_speller_suggest)
+        && ASPELL_FUNCTION_AVAILABLE (aspell_word_list_elements)
+        && ASPELL_FUNCTION_AVAILABLE (aspell_string_enumeration_next)
+        && ASPELL_FUNCTION_AVAILABLE (aspell_config_replace)
+        && ASPELL_FUNCTION_AVAILABLE (aspell_error_message)
+        && ASPELL_FUNCTION_AVAILABLE (delete_aspell_speller)
+        && ASPELL_FUNCTION_AVAILABLE (delete_aspell_config)
+        && ASPELL_FUNCTION_AVAILABLE (delete_aspell_string_enumeration)
+        && ASPELL_FUNCTION_AVAILABLE (get_aspell_dict_info_list)
+        && ASPELL_FUNCTION_AVAILABLE (delete_aspell_can_have_error)
+        && ASPELL_FUNCTION_AVAILABLE (delete_aspell_dict_info_enumeration)
+        && ASPELL_FUNCTION_AVAILABLE (aspell_config_retrieve)
+        && ASPELL_FUNCTION_AVAILABLE (aspell_word_list_size)
+        && ASPELL_FUNCTION_AVAILABLE (aspell_speller_add_to_personal)
+        && ASPELL_FUNCTION_AVAILABLE (aspell_speller_save_all_word_lists))
+        return TRUE;
 
-    if (!g_module_symbol (spell_module, "new_aspell_config", (void *) &mc_new_aspell_config))
-        goto error_ret;
-
-    if (!g_module_symbol (spell_module, "aspell_dict_info_list_elements",
-                          (void *) &mc_aspell_dict_info_list_elements))
-        goto error_ret;
-
-    if (!g_module_symbol (spell_module, "aspell_dict_info_enumeration_next",
-                          (void *) &mc_aspell_dict_info_enumeration_next))
-        goto error_ret;
-
-    if (!g_module_symbol (spell_module, "new_aspell_speller", (void *) &mc_new_aspell_speller))
-        goto error_ret;
-
-    if (!g_module_symbol (spell_module, "aspell_error_number", (void *) &mc_aspell_error_number))
-        goto error_ret;
-
-    if (!g_module_symbol (spell_module, "aspell_speller_error_message",
-                          (void *) &mc_aspell_speller_error_message))
-        goto error_ret;
-
-    if (!g_module_symbol (spell_module, "aspell_speller_error", (void *) &mc_aspell_speller_error))
-        goto error_ret;
-
-    if (!g_module_symbol (spell_module, "aspell_error", (void *) &mc_aspell_error))
-        goto error_ret;
-
-    if (!g_module_symbol (spell_module, "to_aspell_speller", (void *) &mc_to_aspell_speller))
-        goto error_ret;
-
-    if (!g_module_symbol (spell_module, "aspell_speller_check", (void *) &mc_aspell_speller_check))
-        goto error_ret;
-
-    if (!g_module_symbol
-        (spell_module, "aspell_speller_suggest", (void *) &mc_aspell_speller_suggest))
-        goto error_ret;
-
-    if (!g_module_symbol
-        (spell_module, "aspell_word_list_elements", (void *) &mc_aspell_word_list_elements))
-        goto error_ret;
-
-    if (!g_module_symbol (spell_module, "aspell_string_enumeration_next",
-                          (void *) &mc_aspell_string_enumeration_next))
-        goto error_ret;
-
-    if (!g_module_symbol
-        (spell_module, "aspell_config_replace", (void *) &mc_aspell_config_replace))
-        goto error_ret;
-
-    if (!g_module_symbol (spell_module, "aspell_error_message", (void *) &mc_aspell_error_message))
-        goto error_ret;
-
-    if (!g_module_symbol
-        (spell_module, "delete_aspell_speller", (void *) &mc_delete_aspell_speller))
-        goto error_ret;
-
-    if (!g_module_symbol (spell_module, "delete_aspell_config", (void *) &mc_delete_aspell_config))
-        goto error_ret;
-
-    if (!g_module_symbol (spell_module, "delete_aspell_string_enumeration",
-                          (void *) &mc_delete_aspell_string_enumeration))
-        goto error_ret;
-
-    if (!g_module_symbol (spell_module, "get_aspell_dict_info_list",
-                          (void *) &mc_get_aspell_dict_info_list))
-        goto error_ret;
-
-    if (!g_module_symbol (spell_module, "delete_aspell_can_have_error",
-                          (void *) &mc_delete_aspell_can_have_error))
-        goto error_ret;
-
-    if (!g_module_symbol (spell_module, "delete_aspell_dict_info_enumeration",
-                          (void *) &mc_delete_aspell_dict_info_enumeration))
-        goto error_ret;
-
-    if (!g_module_symbol
-        (spell_module, "aspell_config_retrieve", (void *) &mc_aspell_config_retrieve))
-        goto error_ret;
-
-    if (!g_module_symbol
-        (spell_module, "aspell_word_list_size", (void *) &mc_aspell_word_list_size))
-        goto error_ret;
-
-    if (!g_module_symbol (spell_module, "aspell_speller_add_to_personal",
-                          (void *) &mc_aspell_speller_add_to_personal))
-        goto error_ret;
-
-    if (!g_module_symbol (spell_module, "aspell_speller_save_all_word_lists",
-                          (void *) &mc_aspell_speller_save_all_word_lists))
-        goto error_ret;
-
-    ret = TRUE;
-
-  error_ret:
-    if (!ret)
-    {
-        g_module_close (spell_module);
-        spell_module = NULL;
-    }
-    return ret;
+    g_module_close (spell_module);
+    spell_module = NULL;
+    return FALSE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
