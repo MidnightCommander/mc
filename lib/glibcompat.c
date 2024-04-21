@@ -297,3 +297,32 @@ mc_g_string_dup (const GString * s)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+/**
+ * mc_g_string_append_c_len:
+ * @s: (not nullable): the destination #GString.
+ * @c: the byte to append onto the end of @s
+ * @len: the number of bytes @c to append onto the end of @s
+ * @return: @s
+ *
+ * Adds @len bytes @c onto the end of @s.
+ *
+ * There is no such API in GLib2.
+ */
+GString *
+mc_g_string_append_c_len (GString * s, gchar c, guint len)
+{
+    g_return_val_if_fail (s != NULL, NULL);
+
+    if (len != 0)
+    {
+        guint s_len = s->len;
+
+        g_string_set_size (s, s->len + len);
+        memset (s->str + s_len, (unsigned char) c, len);
+    }
+
+    return s;
+}
+
+/* --------------------------------------------------------------------------------------------- */

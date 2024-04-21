@@ -153,9 +153,7 @@ _str_convert (GIConv coder, const char *string, int size, GString * buffer)
             case G_CONVERT_ERROR_NO_CONVERSION:
                 /* Conversion between the requested character sets is not supported. */
                 g_free (tmp_buff);
-                tmp_buff = g_strnfill (strlen (string), '?');
-                g_string_append (buffer, tmp_buff);
-                g_free (tmp_buff);
+                mc_g_string_append_c_len (buffer, '?', strlen (string));
                 return ESTR_FAILURE;
 
             case G_CONVERT_ERROR_ILLEGAL_SEQUENCE:
@@ -186,12 +184,7 @@ _str_convert (GIConv coder, const char *string, int size, GString * buffer)
                 g_string_append (buffer, tmp_buff);
                 g_free (tmp_buff);
                 if ((int) bytes_read < left)
-                {
-                    left = left - bytes_read;
-                    tmp_buff = g_strnfill (left, '?');
-                    g_string_append (buffer, tmp_buff);
-                    g_free (tmp_buff);
-                }
+                    mc_g_string_append_c_len (buffer, '?', left - bytes_read);
                 return ESTR_PROBLEM;
 
             case G_CONVERT_ERROR_BAD_URI:      /* Don't know how handle this error :( */
