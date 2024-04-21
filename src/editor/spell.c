@@ -6,7 +6,7 @@
 
    Written by:
    Ilia Maslakov <il.smind@gmail.com>, 2012
-   Andrew Borodin <aborodin@vmail.ru>, 2013, 2021
+   Andrew Borodin <aborodin@vmail.ru>, 2013-2024
 
 
    This file is part of the Midnight Commander.
@@ -133,6 +133,7 @@ static struct
     /* *INDENT-ON* */
 };
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 /**
@@ -283,6 +284,313 @@ spell_available (void)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Get the current language name.
+ *
+ * @return language name
+ */
+
+static const char *
+aspell_get_lang (void)
+{
+    const char *code;
+
+    code = mc_aspell_config_retrieve (global_speller->config, "lang");
+    return spell_decode_lang (code);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Get array of available languages.
+ *
+ * @param lang_list Array of languages. Must be cleared before use
+ * @return language list length
+ */
+
+static unsigned int
+aspell_get_lang_list (GPtrArray * lang_list)
+{
+    AspellDictInfoList *dlist;
+    AspellDictInfoEnumeration *elem;
+    const AspellDictInfo *entry;
+    unsigned int i = 0;
+
+    if (spell_module == NULL)
+        return 0;
+
+    /* the returned pointer should _not_ need to be deleted */
+    dlist = mc_get_aspell_dict_info_list (global_speller->config);
+    elem = mc_aspell_dict_info_list_elements (dlist);
+
+    while ((entry = mc_aspell_dict_info_enumeration_next (elem)) != NULL)
+        if (entry->name != NULL)
+        {
+            g_ptr_array_add (lang_list, g_strdup (entry->name));
+            i++;
+        }
+
+    mc_delete_aspell_dict_info_enumeration (elem);
+
+    return i;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Set the language.
+ *
+ * @param lang Language name
+ * @return FALSE or error
+ */
+
+static gboolean
+aspell_set_lang (const char *lang)
+{
+    if (lang != NULL)
+    {
+        AspellCanHaveError *error;
+        const char *spell_codeset;
+
+        g_free (spell_language);
+        spell_language = g_strdup (lang);
+
+#ifdef HAVE_CHARSET
+        if (mc_global.source_codepage > 0)
+            spell_codeset = get_codepage_id (mc_global.source_codepage);
+        else
+#endif
+            spell_codeset = str_detect_termencoding ();
+
+        mc_aspell_config_replace (global_speller->config, "lang", lang);
+        mc_aspell_config_replace (global_speller->config, "encoding", spell_codeset);
+
+        /* the returned pointer should _not_ need to be deleted */
+        if (global_speller->speller != NULL)
+            mc_delete_aspell_speller (global_speller->speller);
+
+        global_speller->speller = NULL;
+
+        error = mc_new_aspell_speller (global_speller->config);
+        if (mc_aspell_error (error) != 0)
+        {
+            mc_delete_aspell_can_have_error (error);
+            return FALSE;
+        }
+
+        global_speller->speller = mc_to_aspell_speller (error);
+    }
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Show suggests for the current word.
+ *
+ * @param edit Editor object
+ * @param word Word for spell check
+ * @param new_word Word to replace the incorrect word
+ * @param suggest Array of suggests for current word
+ * @return code of pressed button
+ */
+
+static int
+spell_dialog_spell_suggest_show (WEdit * edit, const char *word, char **new_word,
+                                 const GPtrArray * suggest)
+{
+
+    int sug_dlg_h = 14;         /* dialog height */
+    int sug_dlg_w = 29;         /* dialog width */
+    int xpos, ypos;
+    char *lang_label;
+    char *word_label;
+    unsigned int i;
+    int res;
+    char *curr = NULL;
+    WDialog *sug_dlg;
+    WGroup *g;
+    WListbox *sug_list;
+    int max_btn_len = 0;
+    int replace_len;
+    int skip_len;
+    int cancel_len;
+    WButton *add_btn;
+    WButton *replace_btn;
+    WButton *skip_btn;
+    WButton *cancel_button;
+    int word_label_len;
+
+    /* calculate the dialog metrics */
+    xpos = (COLS - sug_dlg_w) / 2;
+    ypos = (LINES - sug_dlg_h) * 2 / 3;
+
+    /* Sometimes menu can hide replaced text. I don't like it */
+    if ((edit->curs_row >= ypos - 1) && (edit->curs_row <= ypos + sug_dlg_h - 1))
+        ypos -= sug_dlg_h;
+
+    add_btn = button_new (5, 28, B_ADD_WORD, NORMAL_BUTTON, _("&Add word"), 0);
+    replace_btn = button_new (7, 28, B_ENTER, NORMAL_BUTTON, _("&Replace"), 0);
+    replace_len = button_get_len (replace_btn);
+    skip_btn = button_new (9, 28, B_SKIP_WORD, NORMAL_BUTTON, _("&Skip"), 0);
+    skip_len = button_get_len (skip_btn);
+    cancel_button = button_new (11, 28, B_CANCEL, NORMAL_BUTTON, _("&Cancel"), 0);
+    cancel_len = button_get_len (cancel_button);
+
+    max_btn_len = MAX (replace_len, skip_len);
+    max_btn_len = MAX (max_btn_len, cancel_len);
+
+    lang_label = g_strdup_printf ("%s: %s", _("Language"), aspell_get_lang ());
+    word_label = g_strdup_printf ("%s: %s", _("Misspelled"), word);
+    word_label_len = str_term_width1 (word_label) + 5;
+
+    sug_dlg_w += max_btn_len;
+    sug_dlg_w = MAX (sug_dlg_w, word_label_len) + 1;
+
+    sug_dlg = dlg_create (TRUE, ypos, xpos, sug_dlg_h, sug_dlg_w, WPOS_KEEP_DEFAULT, TRUE,
+                          dialog_colors, NULL, NULL, "[ASpell]", _("Check word"));
+    g = GROUP (sug_dlg);
+
+    group_add_widget (g, label_new (1, 2, lang_label));
+    group_add_widget (g, label_new (3, 2, word_label));
+
+    group_add_widget (g, groupbox_new (4, 2, sug_dlg_h - 5, 25, _("Suggest")));
+
+    sug_list = listbox_new (5, 2, sug_dlg_h - 7, 24, FALSE, NULL);
+    for (i = 0; i < suggest->len; i++)
+        listbox_add_item (sug_list, LISTBOX_APPEND_AT_END, 0, g_ptr_array_index (suggest, i), NULL,
+                          FALSE);
+    group_add_widget (g, sug_list);
+
+    group_add_widget (g, add_btn);
+    group_add_widget (g, replace_btn);
+    group_add_widget (g, skip_btn);
+    group_add_widget (g, cancel_button);
+
+    res = dlg_run (sug_dlg);
+    if (res == B_ENTER)
+    {
+        char *tmp = NULL;
+        listbox_get_current (sug_list, &curr, NULL);
+
+        if (curr != NULL)
+            tmp = g_strdup (curr);
+        *new_word = tmp;
+    }
+
+    widget_destroy (WIDGET (sug_dlg));
+    g_free (lang_label);
+    g_free (word_label);
+
+    return res;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/*
+ * Add word to personal dictionary.
+ *
+ * @param word Word for spell check
+ * @param word_size  Word size (in bytes)
+ * @return FALSE or error
+ */
+static gboolean
+aspell_add_to_dict (const char *word, int word_size)
+{
+    mc_aspell_speller_add_to_personal (global_speller->speller, word, word_size);
+
+    if (mc_aspell_speller_error (global_speller->speller) != 0)
+    {
+        edit_error_dialog (_("Error"), mc_aspell_speller_error_message (global_speller->speller));
+        return FALSE;
+    }
+
+    mc_aspell_speller_save_all_word_lists (global_speller->speller);
+
+    if (mc_aspell_speller_error (global_speller->speller) != 0)
+    {
+        edit_error_dialog (_("Error"), mc_aspell_speller_error_message (global_speller->speller));
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Examine dictionaries and suggest possible words that may repalce the incorrect word.
+ *
+ * @param suggest array of words to iterate through
+ * @param word Word for spell check
+ * @param word_size Word size (in bytes)
+ * @return count of suggests for the word
+ */
+
+static unsigned int
+aspell_suggest (GPtrArray * suggest, const char *word, const int word_size)
+{
+    unsigned int size = 0;
+
+    if (word != NULL && global_speller != NULL && global_speller->speller != NULL)
+    {
+        const AspellWordList *wordlist;
+
+        wordlist = mc_aspell_speller_suggest (global_speller->speller, word, word_size);
+        if (wordlist != NULL)
+        {
+            AspellStringEnumeration *elements = NULL;
+            unsigned int i;
+
+            elements = mc_aspell_word_list_elements (wordlist);
+            size = mc_aspell_word_list_size (wordlist);
+
+            for (i = 0; i < size; i++)
+            {
+                const char *cur_sugg_word;
+
+                cur_sugg_word = mc_aspell_string_enumeration_next (elements);
+                if (cur_sugg_word != NULL)
+                    g_ptr_array_add (suggest, g_strdup (cur_sugg_word));
+            }
+
+            mc_delete_aspell_string_enumeration (elements);
+        }
+    }
+
+    return size;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Check word.
+ *
+ * @param word Word for spell check
+ * @param word_size Word size (in bytes)
+ * @return FALSE if word is not in the dictionary
+ */
+
+static gboolean
+aspell_check (const char *word, const int word_size)
+{
+    int res = 0;
+
+    if (word != NULL && global_speller != NULL && global_speller->speller != NULL)
+        res = mc_aspell_speller_check (global_speller->speller, word, word_size);
+
+    return (res == 1);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Clear the array of languages.
+ *
+ * @param array Array of languages
+ */
+
+static void
+aspell_array_clean (GPtrArray * array)
+{
+    if (array != NULL)
+        g_ptr_array_free (array, TRUE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 /**
@@ -349,212 +657,6 @@ aspell_clean (void)
 
     g_module_close (spell_module);
     spell_module = NULL;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
- * Get array of available languages.
- *
- * @param lang_list Array of languages. Must be cleared before use
- * @return language list length
- */
-
-unsigned int
-aspell_get_lang_list (GPtrArray * lang_list)
-{
-    AspellDictInfoList *dlist;
-    AspellDictInfoEnumeration *elem;
-    const AspellDictInfo *entry;
-    unsigned int i = 0;
-
-    if (spell_module == NULL)
-        return 0;
-
-    /* the returned pointer should _not_ need to be deleted */
-    dlist = mc_get_aspell_dict_info_list (global_speller->config);
-    elem = mc_aspell_dict_info_list_elements (dlist);
-
-    while ((entry = mc_aspell_dict_info_enumeration_next (elem)) != NULL)
-        if (entry->name != NULL)
-        {
-            g_ptr_array_add (lang_list, g_strdup (entry->name));
-            i++;
-        }
-
-    mc_delete_aspell_dict_info_enumeration (elem);
-
-    return i;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
- * Clear the array of languages.
- *
- * @param array Array of languages
- */
-
-void
-aspell_array_clean (GPtrArray * array)
-{
-    if (array != NULL)
-        g_ptr_array_free (array, TRUE);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
- * Get the current language name.
- *
- * @return language name
- */
-
-const char *
-aspell_get_lang (void)
-{
-    const char *code;
-
-    code = mc_aspell_config_retrieve (global_speller->config, "lang");
-    return spell_decode_lang (code);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
- * Set the language.
- *
- * @param lang Language name
- * @return FALSE or error
- */
-
-gboolean
-aspell_set_lang (const char *lang)
-{
-    if (lang != NULL)
-    {
-        AspellCanHaveError *error;
-        const char *spell_codeset;
-
-        g_free (spell_language);
-        spell_language = g_strdup (lang);
-
-#ifdef HAVE_CHARSET
-        if (mc_global.source_codepage > 0)
-            spell_codeset = get_codepage_id (mc_global.source_codepage);
-        else
-#endif
-            spell_codeset = str_detect_termencoding ();
-
-        mc_aspell_config_replace (global_speller->config, "lang", lang);
-        mc_aspell_config_replace (global_speller->config, "encoding", spell_codeset);
-
-        /* the returned pointer should _not_ need to be deleted */
-        if (global_speller->speller != NULL)
-            mc_delete_aspell_speller (global_speller->speller);
-
-        global_speller->speller = NULL;
-
-        error = mc_new_aspell_speller (global_speller->config);
-        if (mc_aspell_error (error) != 0)
-        {
-            mc_delete_aspell_can_have_error (error);
-            return FALSE;
-        }
-
-        global_speller->speller = mc_to_aspell_speller (error);
-    }
-    return TRUE;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
- * Check word.
- *
- * @param word Word for spell check
- * @param word_size Word size (in bytes)
- * @return FALSE if word is not in the dictionary
- */
-
-gboolean
-aspell_check (const char *word, const int word_size)
-{
-    int res = 0;
-
-    if (word != NULL && global_speller != NULL && global_speller->speller != NULL)
-        res = mc_aspell_speller_check (global_speller->speller, word, word_size);
-
-    return (res == 1);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
- * Examine dictionaries and suggest possible words that may repalce the incorrect word.
- *
- * @param suggest array of words to iterate through
- * @param word Word for spell check
- * @param word_size Word size (in bytes)
- * @return count of suggests for the word
- */
-
-unsigned int
-aspell_suggest (GPtrArray * suggest, const char *word, const int word_size)
-{
-    unsigned int size = 0;
-
-    if (word != NULL && global_speller != NULL && global_speller->speller != NULL)
-    {
-        const AspellWordList *wordlist;
-
-        wordlist = mc_aspell_speller_suggest (global_speller->speller, word, word_size);
-        if (wordlist != NULL)
-        {
-            AspellStringEnumeration *elements = NULL;
-            unsigned int i;
-
-            elements = mc_aspell_word_list_elements (wordlist);
-            size = mc_aspell_word_list_size (wordlist);
-
-            for (i = 0; i < size; i++)
-            {
-                const char *cur_sugg_word;
-
-                cur_sugg_word = mc_aspell_string_enumeration_next (elements);
-                if (cur_sugg_word != NULL)
-                    g_ptr_array_add (suggest, g_strdup (cur_sugg_word));
-            }
-
-            mc_delete_aspell_string_enumeration (elements);
-        }
-    }
-
-    return size;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/*
- * Add word to personal dictionary.
- *
- * @param word Word for spell check
- * @param word_size  Word size (in bytes)
- * @return FALSE or error
- */
-gboolean
-aspell_add_to_dict (const char *word, int word_size)
-{
-    mc_aspell_speller_add_to_personal (global_speller->speller, word, word_size);
-
-    if (mc_aspell_speller_error (global_speller->speller) != 0)
-    {
-        edit_error_dialog (_("Error"), mc_aspell_speller_error_message (global_speller->speller));
-        return FALSE;
-    }
-
-    mc_aspell_speller_save_all_word_lists (global_speller->speller);
-
-    if (mc_aspell_speller_error (global_speller->speller) != 0)
-    {
-        edit_error_dialog (_("Error"), mc_aspell_speller_error_message (global_speller->speller));
-        return FALSE;
-    }
-
-    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -695,107 +797,6 @@ edit_set_spell_lang (void)
             (void) aspell_set_lang (lang);
     }
     aspell_array_clean (lang_list);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
- * Show suggests for the current word.
- *
- * @param edit Editor object
- * @param word Word for spell check
- * @param new_word Word to replace the incorrect word
- * @param suggest Array of suggests for current word
- * @return code of pressed button
- */
-
-int
-spell_dialog_spell_suggest_show (WEdit * edit, const char *word, char **new_word,
-                                 const GPtrArray * suggest)
-{
-
-    int sug_dlg_h = 14;         /* dialog height */
-    int sug_dlg_w = 29;         /* dialog width */
-    int xpos, ypos;
-    char *lang_label;
-    char *word_label;
-    unsigned int i;
-    int res;
-    char *curr = NULL;
-    WDialog *sug_dlg;
-    WGroup *g;
-    WListbox *sug_list;
-    int max_btn_len = 0;
-    int replace_len;
-    int skip_len;
-    int cancel_len;
-    WButton *add_btn;
-    WButton *replace_btn;
-    WButton *skip_btn;
-    WButton *cancel_button;
-    int word_label_len;
-
-    /* calculate the dialog metrics */
-    xpos = (COLS - sug_dlg_w) / 2;
-    ypos = (LINES - sug_dlg_h) * 2 / 3;
-
-    /* Sometimes menu can hide replaced text. I don't like it */
-    if ((edit->curs_row >= ypos - 1) && (edit->curs_row <= ypos + sug_dlg_h - 1))
-        ypos -= sug_dlg_h;
-
-    add_btn = button_new (5, 28, B_ADD_WORD, NORMAL_BUTTON, _("&Add word"), 0);
-    replace_btn = button_new (7, 28, B_ENTER, NORMAL_BUTTON, _("&Replace"), 0);
-    replace_len = button_get_len (replace_btn);
-    skip_btn = button_new (9, 28, B_SKIP_WORD, NORMAL_BUTTON, _("&Skip"), 0);
-    skip_len = button_get_len (skip_btn);
-    cancel_button = button_new (11, 28, B_CANCEL, NORMAL_BUTTON, _("&Cancel"), 0);
-    cancel_len = button_get_len (cancel_button);
-
-    max_btn_len = MAX (replace_len, skip_len);
-    max_btn_len = MAX (max_btn_len, cancel_len);
-
-    lang_label = g_strdup_printf ("%s: %s", _("Language"), aspell_get_lang ());
-    word_label = g_strdup_printf ("%s: %s", _("Misspelled"), word);
-    word_label_len = str_term_width1 (word_label) + 5;
-
-    sug_dlg_w += max_btn_len;
-    sug_dlg_w = MAX (sug_dlg_w, word_label_len) + 1;
-
-    sug_dlg = dlg_create (TRUE, ypos, xpos, sug_dlg_h, sug_dlg_w, WPOS_KEEP_DEFAULT, TRUE,
-                          dialog_colors, NULL, NULL, "[ASpell]", _("Check word"));
-    g = GROUP (sug_dlg);
-
-    group_add_widget (g, label_new (1, 2, lang_label));
-    group_add_widget (g, label_new (3, 2, word_label));
-
-    group_add_widget (g, groupbox_new (4, 2, sug_dlg_h - 5, 25, _("Suggest")));
-
-    sug_list = listbox_new (5, 2, sug_dlg_h - 7, 24, FALSE, NULL);
-    for (i = 0; i < suggest->len; i++)
-        listbox_add_item (sug_list, LISTBOX_APPEND_AT_END, 0, g_ptr_array_index (suggest, i), NULL,
-                          FALSE);
-    group_add_widget (g, sug_list);
-
-    group_add_widget (g, add_btn);
-    group_add_widget (g, replace_btn);
-    group_add_widget (g, skip_btn);
-    group_add_widget (g, cancel_button);
-
-    res = dlg_run (sug_dlg);
-    if (res == B_ENTER)
-    {
-        char *tmp = NULL;
-        listbox_get_current (sug_list, &curr, NULL);
-
-        if (curr != NULL)
-            tmp = g_strdup (curr);
-        *new_word = tmp;
-    }
-
-    widget_destroy (WIDGET (sug_dlg));
-    g_free (lang_label);
-    g_free (word_label);
-
-    return res;
 }
 
 /* --------------------------------------------------------------------------------------------- */
