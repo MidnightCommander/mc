@@ -131,6 +131,24 @@ sftpfs_correct_file_name (const char *filename)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Try to expand remote hostname (%h) token.
+ *
+ * @param host hostname string provided by user
+ * @param real_host real hostname string retrieved from the corresponding HostName directive
+ * @return newly allocated string with possibly expanded hostname
+ */
+
+static char *
+sftpsfs_expand_hostname (const char *host, const char *real_host)
+{
+    if (g_str_has_prefix (real_host, "%h"))
+        return g_strconcat (host, real_host + 2, (char *) NULL);
+
+    return g_strdup (real_host);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 #define POINTER_TO_STRUCTURE_MEMBER(type)  \
     ((type) ((char *) config_entity + (size_t) config_variables[i].offset))
@@ -376,7 +394,8 @@ sftpfs_fill_connection_data_from_config (struct vfs_s_super *super, GError ** mc
     if (config_entity->real_host != NULL)
     {
         g_free (super->path_element->host);
-        super->path_element->host = g_strdup (config_entity->real_host);
+        super->path_element->host =
+            sftpsfs_expand_hostname (super->path_element->host, config_entity->real_host);
     }
 
     if (config_entity->identity_file != NULL)
