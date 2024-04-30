@@ -1367,9 +1367,8 @@ try_complete (char *text, int *lc_start, int *lc_end, input_complete_t flags)
 
     g_free (state.word);
 
-    if (matches != NULL &&
-        (flags & (INPUT_COMPLETE_FILENAMES | INPUT_COMPLETE_SHELL_ESC)) !=
-        (INPUT_COMPLETE_FILENAMES | INPUT_COMPLETE_SHELL_ESC))
+    if (matches != NULL && (flags & INPUT_COMPLETE_FILENAMES) != 0 &&
+        (flags & INPUT_COMPLETE_SHELL_ESC) == 0)
     {
         /* FIXME: HACK? INPUT_COMPLETE_SHELL_ESC is used only in command line. */
         char **m;
@@ -1379,7 +1378,9 @@ try_complete (char *text, int *lc_start, int *lc_end, input_complete_t flags)
             char *p;
 
             p = *m;
-            *m = str_shell_escape (*m);
+            /* Escape only '?', '*', and '&' symbols as described in the
+               manual page (see a11995e12b88285e044f644904c306ed6c342ad0). */
+            *m = str_escape (*m, -1, "?*&", TRUE);
             g_free (p);
         }
     }
