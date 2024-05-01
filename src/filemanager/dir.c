@@ -159,7 +159,7 @@ handle_dirent (struct vfs_dirent *dp, const file_filter_t * filter, struct stat 
         return FALSE;
     if (!panels_options.show_dot_files && (dp->d_name[0] == '.'))
         return FALSE;
-    if (!panels_options.show_backups && dp->d_name[strlen (dp->d_name) - 1] == '~')
+    if (!panels_options.show_backups && dp->d_name[dp->d_len - 1] == '~')
         return FALSE;
 
     vpath = vfs_path_from_str (dp->d_name);
@@ -186,7 +186,7 @@ handle_dirent (struct vfs_dirent *dp, const file_filter_t * filter, struct stat 
         gboolean files_only = (filter->flags & SELECT_FILES_ONLY) != 0;
 
         ok = ((S_ISDIR (buf1->st_mode) || *link_to_dir) && files_only)
-            || mc_search_run (filter->handler, dp->d_name, 0, strlen (dp->d_name), NULL);
+            || mc_search_run (filter->handler, dp->d_name, 0, dp->d_len, NULL);
     }
 
     return ok;

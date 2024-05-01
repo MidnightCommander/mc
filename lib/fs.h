@@ -98,9 +98,6 @@
 #define MC_MAXPATHLEN MAXPATHLEN
 #endif
 
-/* unistd.h defines _POSIX_VERSION on POSIX.1 systems. */
-#define NLENGTH(dirent) (strlen ((dirent)->d_name))
-
 /* DragonFlyBSD doesn't provide MAXNAMLEN macro */
 #ifndef MAXNAMLEN
 #define MAXNAMLEN NAME_MAX

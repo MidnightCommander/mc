@@ -565,6 +565,7 @@ vfs_dirent_assign (struct vfs_dirent *d, const char *fname, ino_t ino)
 {
     g_string_assign (d->d_name_str, fname);
     d->d_name = d->d_name_str->str;
+    d->d_len = d->d_name_str->len;
     d->d_ino = ino;
 }
 

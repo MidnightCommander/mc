@@ -1188,11 +1188,11 @@ search_content (WDialog * h, const char *directory, const char *filename)
   If dir is relative, this means we're going to add dir to the directory stack.
 **/
 static gboolean
-find_ignore_dir_search (const char *dir)
+find_ignore_dir_search (const char *dir, size_t len)
 {
     if (find_ignore_dirs != NULL)
     {
-        const size_t dlen = strlen (dir);
+        const size_t dlen = len == (size_t) (-1) ? strlen (dir) : len;
         const unsigned char dabs = g_path_is_absolute (dir) ? 1 : 0;
 
         char **ignore_dir;
@@ -1337,7 +1337,7 @@ do_search (WDialog * h)
                     pop_start_dir = FALSE;
 
                     /* handle absolute ignore dirs here */
-                    if (!find_ignore_dir_search (vfs_path_as_str (tmp_vpath)))
+                    if (!find_ignore_dir_search (vfs_path_as_str (tmp_vpath), -1))
                         break;
 
                     vfs_path_free (tmp_vpath, TRUE);
@@ -1380,7 +1380,7 @@ do_search (WDialog * h)
             if (options.find_recurs && (directory != NULL))
             {                   /* Can directory be NULL ? */
                 /* handle relative ignore dirs here */
-                if (options.ignore_dirs_enable && find_ignore_dir_search (dp->d_name))
+                if (options.ignore_dirs_enable && find_ignore_dir_search (dp->d_name, dp->d_len))
                     ignore_count++;
                 else
                 {
@@ -1401,8 +1401,8 @@ do_search (WDialog * h)
                 }
             }
 
-            search_ok = mc_search_run (search_file_handle, dp->d_name,
-                                       0, strlen (dp->d_name), &bytes_found);
+            search_ok =
+                mc_search_run (search_file_handle, dp->d_name, 0, dp->d_len, &bytes_found);
 
             if (search_ok)
             {

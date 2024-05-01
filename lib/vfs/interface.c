@@ -481,7 +481,7 @@ mc_readdir (DIR * dirp)
 #ifdef HAVE_CHARSET
         str_vfs_convert_from (vfs_path_element->dir.converter, entry->d_name, vfs_str_buffer);
 #else
-        g_string_assign (vfs_str_buffer, entry->d_name);
+        g_string_append_len (vfs_str_buffer, entry->d_name, entry->d_len);
 #endif
         vfs_dirent_assign (mc_readdir_result, vfs_str_buffer->str, entry->d_ino);
         vfs_dirent_free (entry);

@@ -212,9 +212,8 @@ filename_completion_function (const char *text, int state, input_complete_t flag
         {
             /* Otherwise, if these match up to the length of filename, then
                it may be a match. */
-            if ((entry->d_name[0] != filename[0]) ||
-                ((NLENGTH (entry)) < filename_len) ||
-                strncmp (filename, entry->d_name, filename_len) != 0)
+            if (entry->d_name[0] != filename[0] || entry->d_len < filename_len
+                || strncmp (filename, entry->d_name, filename_len) != 0)
                 continue;
         }
 
@@ -291,7 +290,7 @@ filename_completion_function (const char *text, int state, input_complete_t flag
             if (!IS_PATH_SEP (temp->str[temp->len - 1]))
                 g_string_append_c (temp, PATH_SEP);
         }
-        g_string_append (temp, entry->d_name);
+        g_string_append_len (temp, entry->d_name, entry->d_len);
         if (isdir)
             g_string_append_c (temp, PATH_SEP);
 
