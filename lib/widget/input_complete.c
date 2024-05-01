@@ -283,7 +283,7 @@ filename_completion_function (const char *text, int state, input_complete_t flag
 
         temp = g_string_sized_new (16);
 
-        if (users_dirname != NULL && (users_dirname[0] != '.' || users_dirname[1] != '\0'))
+        if (users_dirname != NULL && !DIR_IS_DOT (users_dirname))
         {
             g_string_append (temp, users_dirname);
 
