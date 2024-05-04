@@ -439,11 +439,20 @@ vfs_path_from_str_deprecated_parser (char *path)
 static vfs_path_t *
 vfs_path_from_str_uri_parser (char *path)
 {
+    gboolean path_is_absolute;
     vfs_path_t *vpath;
     vfs_path_element_t *element;
     char *url_delimiter;
 
-    vpath = vfs_path_new (path != NULL && !IS_PATH_SEP (*path));
+    if (path == NULL)
+        return vfs_path_new (FALSE);
+
+    path_is_absolute = IS_PATH_SEP (*path);
+#ifdef HAVE_CHARSET
+    path_is_absolute = path_is_absolute || g_str_has_prefix (path, VFS_ENCODING_PREFIX);
+#endif
+
+    vpath = vfs_path_new (!path_is_absolute);
 
     while ((url_delimiter = g_strrstr (path, VFS_PATH_URL_DELIMITER)) != NULL)
     {
