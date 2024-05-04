@@ -2344,6 +2344,8 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
                 file_error (TRUE, _("Cannot get attributes of source file \"%s\"\n%s"), src_path);
             if (return_status == FILE_SKIPALL)
                 ctx->skip_all = TRUE;
+            if (return_status == FILE_ABORT)
+                goto ret_fast;
         }
 
         if (return_status != FILE_RETRY)
