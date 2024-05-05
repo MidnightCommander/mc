@@ -151,6 +151,7 @@ vfs_canon (const char *path)
 
         char *local;
 
+#ifdef HAVE_CHARSET
         if (g_str_has_prefix (path, VFS_ENCODING_PREFIX))
         {
             /*
@@ -160,6 +161,7 @@ vfs_canon (const char *path)
             local = mc_build_filename (PATH_SEP_STR, path, (char *) NULL);
         }
         else
+#endif
         {
             const char *curr_dir;
 
