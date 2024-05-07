@@ -32,6 +32,10 @@ data_files_to_distribute = \
 	data/hp48+.args \
 	data/hp48+.input \
 	data/hp48+.output \
+	data/iso9660.xorriso.env_vars \
+	data/iso9660.xorriso.input \
+	data/iso9660.xorriso.output \
+	data/iso9660.xorriso.README \
 	data/lslR.1.spaces.args \
 	data/lslR.1.spaces.input \
 	data/lslR.1.spaces.output \

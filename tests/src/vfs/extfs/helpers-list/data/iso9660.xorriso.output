@@ -1,0 +1,34 @@
+-r--r--r--   1        0        0         30 2023-12-07 11:48:00 /.alpine-release
+dr-xr-xr-x   1        0        0          0 2023-12-07 11:48:00 /boot
+-r--r--r--   1        0        0    5751847 2023-12-07 11:48:00 /boot/System.map-lts
+-r--r--r--   1        0        0     261013 2023-12-07 11:48:00 /boot/config-lts
+dr-xr-xr-x   1        0        0          0 2023-12-07 11:48:00 /boot/dtbs-lts
+dr-xr-xr-x   1        0        0          0 2023-12-07 11:48:00 /boot/grub
+-r--r--r--   1        0        0    1474560 2023-12-04 23:01:00 /boot/grub/efi.img
+-r--r--r--   1        0        0        140 2023-12-07 11:48:00 /boot/grub/grub.cfg
+-r--r--r--   1        0        0   20486095 2023-12-07 11:48:00 /boot/initramfs-lts
+-r--r--r--   1        0        0  160346112 2023-12-07 11:48:00 /boot/modloop-lts
+dr-xr-xr-x   1        0        0          0 2023-12-07 11:48:00 /boot/syslinux
+-r--r--r--   1        0        0       2048 2023-12-04 23:01:00 /boot/syslinux/boot.cat
+-r--r--r--   1        0        0        432 2023-05-16 00:00:00 /boot/syslinux/isohdpfx.bin
+-r--r--r--   1        0        0      43008 2023-05-16 00:00:00 /boot/syslinux/isolinux.bin
+-r--r--r--   1        0        0     115468 2023-05-16 00:00:00 /boot/syslinux/ldlinux.c32
+-r--r--r--   1        0        0     178532 2023-05-16 00:00:00 /boot/syslinux/libcom32.c32
+-r--r--r--   1        0        0      23636 2023-05-16 00:00:00 /boot/syslinux/libutil.c32
+-r--r--r--   1        0        0      11712 2023-05-16 00:00:00 /boot/syslinux/mboot.c32
+-r--r--r--   1        0        0        193 2023-12-07 11:48:00 /boot/syslinux/syslinux.cfg
+-r--r--r--   1        0        0   11879168 2023-12-07 11:48:00 /boot/vmlinuz-lts
+dr-xr-xr-x   1        0        0          0 2023-12-07 11:48:00 /efi
+dr-xr-xr-x   1        0        0          0 2023-12-07 11:48:00 /efi/boot
+-r--r--r--   1        0        0     688128 2023-12-07 11:48:00 /efi/boot/bootx64.efi
+drwxr-xr-x   1        0        0          0 2024-05-07 01:28:00 /links
+-rw-r--r--   1        0        0          0 2024-05-07 01:28:00 /links/'side-quotes'
+lrwxrwxrwx   1        0        0          0 2024-05-07 01:28:00 /links/'side-quotes-link-iq' -> inner'quote
+lrwxrwxrwx   1        0        0          0 2024-05-07 01:28:00 /links/'side-quotes-link-nq' -> no-quotes
+lrwxrwxrwx   1        0        0          0 2024-05-07 01:28:00 /links/'side-quotes-link-sq' -> 'side-quotes'
+-rw-r--r--   1        0        0          0 2024-05-07 01:28:00 /links/inner'quote
+lrwxrwxrwx   1        0        0          0 2024-05-07 01:28:00 /links/inner'quote-link-iq -> inner'quote
+lrwxrwxrwx   1        0        0          0 2024-05-07 01:28:00 /links/inner'quote-link-nq -> no-quotes
+lrwxrwxrwx   1        0        0          0 2024-05-07 01:28:00 /links/inner'quote-link-sq -> 'side-quotes'
+-rw-r--r--   1        0        0          0 2024-05-07 01:28:00 /links/no-quotes
+lrwxrwxrwx   1        0        0          0 2024-05-07 01:28:00 /links/no-quotes-link -> no-quotes
