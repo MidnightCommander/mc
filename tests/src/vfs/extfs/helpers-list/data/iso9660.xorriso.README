@@ -1,0 +1,49 @@
+Sample iso image was created from alpine-standard-3.19.0-x86_64.iso with such
+script:
+
+    #!/usr/bin/env bash
+
+    if ! test -d links; then
+        mkdir "$_"
+        cd "$_"
+
+        touch no-quotes "inner'quote" "'side-quotes'"
+
+        ln -s no-quotes no-quotes-link
+        ln -s no-quotes "inner'quote-link-nq"
+        ln -s no-quotes "'side-quotes-link-nq'"
+        ln -s "inner'quote" "inner'quote-link-iq"
+        ln -s "inner'quote" "'side-quotes-link-iq'"
+        ln -s "'side-quotes'" "inner'quote-link-sq"
+        ln -s "'side-quotes'" "'side-quotes-link-sq'"
+
+        cd -
+    fi
+
+    args=(
+        -indev alpine-standard-3.19.0-x86_64.iso
+        -outdev sample.iso
+        -boot_image any replay
+        -joliet on
+        -rm_r /apks --
+        -cpr links / --
+        -chown_r 0 /links --
+        -chgrp_r 0 /links --
+    )
+
+    xorriso "${args[@]}"
+
+Features:
+- boot catalog file
+- subdirs
+- files with q(') included
+- links with q(') included (name, target, both)
+
+The quoted stuff is here because xorriso wraps pathes in single quotes and
+escapes internal quotes, all with misc_funct.c:Text_shellsafe(). We revert it
+back in the helper code.
+
+
+Sample input was generated like this:
+
+    xorriso -dev sample.iso -find / -exec lsdl 2>/dev/null
