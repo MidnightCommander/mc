@@ -87,7 +87,8 @@ xorriso_list() {
     local temp_ls
     temp_ls=$(mktemp "${MC_TMPDIR:-/tmp}"/mc-iso9660.XXXXXX) || return 1
 
-    "$XORRISO" -abort_on FATAL -dev stdio:"$1" -find / -exec lsdl 2>/dev/null >"$temp_ls"
+    # $XORRISO must be unquoted here to hook into the testing framework
+    $XORRISO -abort_on FATAL -dev stdio:"$1" -find / -exec lsdl 2>/dev/null >"$temp_ls"
     local r=$?
 
     if [ "$r" != 0 ]; then
@@ -244,6 +245,20 @@ shift
 
 case "$cmd" in
   list)
+    if [ -n "${MC_TEST_EXTFS_LIST_CMD:-}" ]; then
+        case "${MC_TEST_EXTFS_ISO9660_TOOL}" in
+          xorriso)
+            XORRISO="$MC_TEST_EXTFS_LIST_CMD"
+            xorriso_list "$@" || exit 1
+            ;;
+          *)
+            exit 1
+            ;;
+        esac
+
+        exit 0
+    fi
+
     xorriso_list "$@" || {
         test_iso "$@" || exit 1
         mcisofs_list "$@" || exit 1
