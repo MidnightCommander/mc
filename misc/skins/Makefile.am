@@ -11,6 +11,7 @@ skin_DATA = \
 	gray-green-purple256.ini \
 	gray-orange-blue256.ini \
 	julia256.ini \
+	julia256root.ini \
 	mc46.ini \
 	modarcon16-defbg.ini \
 	modarcon16-defbg-thin.ini \
