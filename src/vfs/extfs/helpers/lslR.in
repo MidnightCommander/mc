@@ -37,7 +37,7 @@ BEGIN {
   # Pattern to match 8 first fields.
   rx8 = "^" rx rx rx rx rx rx rx "[^ 	]+[ 	]";
 }
-/^total\ [0-9]*$/ { next }
+/^total [0-9]*$/ { next }
 /^$/ { empty=1; next }
 empty==1 && /:$/ {
   empty=0
