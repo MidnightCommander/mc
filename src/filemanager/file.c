@@ -3653,10 +3653,9 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
     /* Let our parent know we are saying bye bye */
     if (mc_global.we_are_background)
     {
-        int cur_pid = getpid ();
         /* Send pid to parent with child context, it is fork and
            don't modify real parent ctx */
-        ctx->pid = cur_pid;
+        ctx->pid = getpid ();
         parent_call ((void *) end_bg_process, ctx, 0);
 
         vfs_shut ();
