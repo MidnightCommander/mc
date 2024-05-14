@@ -762,7 +762,7 @@ mc_mkstemps (vfs_path_t ** pname_vpath, const char *prefix, const char *suffix)
 /* --------------------------------------------------------------------------------------------- */
 /**
  * Return the directory where mc should keep its temporary files.
- * This directory is (in Bourne shell terms) "${TMPDIR=/tmp}/mc-$USER"
+ * This directory is (in Bourne shell terms) "${TMPDIR=/tmp}/mc-XXXXXX"
  * When called the first time, the directory is created if needed.
  * The first call should be done early, since we are using fprintf()
  * and not message() to report possible problems.
@@ -774,9 +774,7 @@ mc_tmpdir (void)
     static char buffer[PATH_MAX];
     static const char *tmpdir = NULL;
     const char *sys_tmp;
-    struct passwd *pwd;
     struct stat st;
-    const char *error = NULL;
 
     /* Check if already correctly initialized */
     if (tmpdir != NULL && lstat (tmpdir, &st) == 0 && S_ISDIR (st.st_mode) &&
@@ -791,83 +789,19 @@ mc_tmpdir (void)
             sys_tmp = TMPDIR_DEFAULT;
     }
 
-    pwd = getpwuid (getuid ());
-    if (pwd != NULL)
-        g_snprintf (buffer, sizeof (buffer), "%s/mc-%s", sys_tmp, pwd->pw_name);
+    g_snprintf (buffer, sizeof (buffer), "%s/mc-XXXXXX", sys_tmp);
+    tmpdir = g_mkdtemp (buffer);
+    if (tmpdir != NULL)
+        g_setenv ("MC_TMPDIR", tmpdir, TRUE);
     else
-        g_snprintf (buffer, sizeof (buffer), "%s/mc-%lu", sys_tmp, (unsigned long) getuid ());
-
-    canonicalize_pathname (buffer);
-
-    /* Try to create directory */
-    if (mkdir (buffer, S_IRWXU) != 0)
     {
-        if (errno == EEXIST && lstat (buffer, &st) == 0)
-        {
-            /* Sanity check for existing directory */
-            if (!S_ISDIR (st.st_mode))
-                error = _("%s is not a directory\n");
-            else if (st.st_uid != getuid ())
-                error = _("Directory %s is not owned by you\n");
-            else if (((st.st_mode & 0777) != 0700) && (chmod (buffer, 0700) != 0))
-                error = _("Cannot set correct permissions for directory %s\n");
-        }
-        else
-        {
-            fprintf (stderr,
-                     _("Cannot create temporary directory %s: %s\n"),
-                     buffer, unix_error_string (errno));
-            error = "";
-        }
-    }
-
-    if (error != NULL)
-    {
-        int test_fd;
-        char *fallback_prefix;
-        gboolean fallback_ok = FALSE;
-        vfs_path_t *test_vpath;
-
-        if (*error != '\0')
-            fprintf (stderr, error, buffer);
-
-        /* Test if sys_tmp is suitable for temporary files */
-        fallback_prefix = g_strdup_printf ("%s/mctest", sys_tmp);
-        test_fd = mc_mkstemps (&test_vpath, fallback_prefix, NULL);
-        g_free (fallback_prefix);
-        if (test_fd != -1)
-        {
-            close (test_fd);
-            test_fd = open (vfs_path_as_str (test_vpath), O_RDONLY);
-            if (test_fd != -1)
-            {
-                close (test_fd);
-                unlink (vfs_path_as_str (test_vpath));
-                fallback_ok = TRUE;
-            }
-        }
-
-        if (fallback_ok)
-        {
-            fprintf (stderr, _("Temporary files will be created in %s\n"), sys_tmp);
-            g_snprintf (buffer, sizeof (buffer), "%s", sys_tmp);
-            error = NULL;
-        }
-        else
-        {
-            fprintf (stderr, _("Temporary files will not be created\n"));
-            g_snprintf (buffer, sizeof (buffer), "%s", "/dev/null/");
-        }
-
-        vfs_path_free (test_vpath, TRUE);
+        fprintf (stderr, _("Cannot create temporary directory %s: %s.\n"
+                           "Temporary files will not be created\n"), buffer,
+                 unix_error_string (errno));
+        g_snprintf (buffer, sizeof (buffer), "%s", "/dev/null/");
         fprintf (stderr, "%s\n", _("Press any key to continue..."));
         getc (stdin);
     }
-
-    tmpdir = buffer;
-
-    if (error == NULL)
-        g_setenv ("MC_TMPDIR", tmpdir, TRUE);
 
     return tmpdir;
 }
