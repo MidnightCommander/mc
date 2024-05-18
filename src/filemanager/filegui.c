@@ -1142,12 +1142,8 @@ file_progress_show_source (file_op_context_t * ctx, const vfs_path_t * vpath)
 
     if (vpath != NULL)
     {
-        char *s;
-
-        s = vfs_path_tokens_get (vpath, -1, 1);
         label_set_text (ui->src_file_label, _("Source"));
-        label_set_text (ui->src_file, truncFileString (ui->op_dlg, s));
-        g_free (s);
+        label_set_text (ui->src_file, truncFileStringSecure (ui->op_dlg, vfs_path_as_str (vpath)));
     }
     else
     {
