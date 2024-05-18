@@ -355,6 +355,14 @@ add_to_list (const char *text, void *data)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static inline char *
+add_to_list_take (char *text, void *data)
+{
+    return listbox_add_item_take (find_list, LISTBOX_APPEND_AT_END, 0, text, data, TRUE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static inline void
 stop_idle (void *data)
 {
@@ -945,8 +953,7 @@ insert_file (const char *dir, const char *file, gsize start, gsize end)
     location->dir = dirname;
     location->start = start;
     location->end = end;
-    add_to_list (tmp_name, location);
-    g_free (tmp_name);
+    add_to_list_take (tmp_name, location);
 }
 
 /* --------------------------------------------------------------------------------------------- */
