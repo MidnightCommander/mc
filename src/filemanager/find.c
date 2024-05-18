@@ -926,7 +926,7 @@ clear_stack (void)
 static void
 insert_file (const char *dir, const char *file, gsize start, gsize end)
 {
-    char *tmp_name = NULL;
+    char *tmp_name;
     static char *dirname = NULL;
     find_match_location_t *location;
 
@@ -1794,7 +1794,7 @@ static int
 do_find (WPanel * panel, const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
          char **dirname, char **filename)
 {
-    int return_value = 0;
+    int return_value;
     char *dir_tmp = NULL, *file_tmp = NULL;
 
     setup_gui ();
@@ -1829,7 +1829,7 @@ do_find (WPanel * panel, const char *start_dir, ssize_t start_dir_len, const cha
         for (entry = listbox_get_first_link (find_list); entry != NULL && ok;
              entry = g_list_next (entry))
         {
-            const char *lc_filename = NULL;
+            const char *lc_filename;
             WLEntry *le = LENTRY (entry->data);
             find_match_location_t *location = le->data;
             char *p;
