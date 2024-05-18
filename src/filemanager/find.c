@@ -1047,9 +1047,6 @@ search_content (WDialog * h, const char *directory, const char *filename)
         int n_read = 0;
         off_t off = 0;          /* file_fd's offset corresponding to strbuf[0] */
         gboolean found = FALSE;
-        gsize found_len;
-        gsize found_start;
-        char result[BUF_MEDIUM];
         char *strbuf = NULL;    /* buffer for fetched string */
         int strbuf_size = 0;
         int i = -1;             /* compensate for a newline we'll add when we first enter the loop */
@@ -1067,6 +1064,7 @@ search_content (WDialog * h, const char *directory, const char *filename)
         while (!ret_val)
         {
             char ch = '\0';
+            gsize found_len;
 
             off += i + 1;       /* the previous line, plus a newline character */
             i = 0;
@@ -1121,6 +1119,9 @@ search_content (WDialog * h, const char *directory, const char *filename)
             if (!found          /* Search in binary line once */
                 && mc_search_run (search_content_handle, (const void *) strbuf, 0, i, &found_len))
             {
+                gsize found_start;
+                char result[BUF_MEDIUM];
+
                 if (!status_updated)
                 {
                     /* if we add results for a file, we have to ensure that
