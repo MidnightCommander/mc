@@ -11,6 +11,7 @@
 #  Kachalov Anton <mouse@linux.ru.net>, 2003
 #  Victor Ananjevsky <ananasik@gmail.com>, 2013
 #  slava zanko <slavazanko@gmail.com>, 2013
+#  slowpeek <slowpeek@users.noreply.github.com>, 2024
 #
 # This file is part of the Midnight Commander.
 #
@@ -33,27 +34,77 @@
 
 XORRISO=$(which xorriso 2>/dev/null)
 
+# This snippet is used to undo xorriso's Text_shellsafe(). Pseudocode for the
+# function:
+#
+# Text_shellsafe( s) {
+#     return q(') replace(q('), q('"'"'), s) q(')
+# }
+#
+# Xorriso_ls() uses two formats for pathes:
+# - generic: Text_shellsafe(path)
+# - symlink: Text_shellsafe(link) q( -> ) Text_shellsafe(target)
+#
+# References in xorriso sources:
+# - iso_tree.c:Xorriso_ls()
+# - text_io.c:Xorriso_esc_filepath()
+# - misc_funct.c:Text_shellsafe()
+awk_xorriso_unesc=$(cat <<'EOF'
+{
+    # Start of the path part
+    i = index($0, "'")
+
+    s = substr($0, i)
+    # The path part with the wrapping quotes removed
+    s = substr(s, 2, length(s)-2)
+
+    if (substr($0, 1, 1) == "l") {
+        s1=s
+        if (gsub("->", "", s1) > 1) {
+            # Ambiguity: either the link or its target contains q(->) in
+            # addition to the link/target delimiter
+            next
+        }
+
+        j = index(s, "' -> '")
+        # link -> target with the wrapping quotes removed from both
+        s = substr(s, 1, j-1) " -> " substr(s, j+6)
+    } else if (index(s, "->")) {
+        # Ambiguity: not a symlink, but there is q(->)
+        next
+    }
+
+    gsub("'\"'\"'", "'", s)
+    print substr($0, 1, i-1) s
+}
+EOF
+)
+
 xorriso_list() {
     if test -z "$XORRISO"; then
         return 1
     fi
-    local dir attr ln usr gr sz dt1 dt2 dt3 nm len name lsl r
-    dir="${2:-/}"
-    lsl=$( $XORRISO -abort_on FATAL -dev stdio:"$1" -cd "$dir" -lsl 2> /dev/null )
-    r=$?
-    test $r -gt 0 && return $r
 
-    echo "$lsl" | grep "^[-d]" | \
-    while read attr ln usr gr sz dt1 dt2 dt3 nm ; do
-        len=$((${#nm} - 1))
-        name=$(printf -- "$nm" | cut -c2-$len)  # remove quotes
+    local temp_ls
+    temp_ls=$(mktemp "${MC_TMPDIR:-/tmp}"/mc-iso9660.XXXXXX) || return 1
 
-        if test $(printf -- "$attr" | cut -c1-1) != "d"; then
-            printf -- "%s %s %s %s %s %s %s %s %s/%s\n" "$attr" "$ln" "$usr" "$gr" "$sz" "$dt1" "$dt2" "$dt3" "$dir" "$name"
-        else
-            xorriso_list "$1" "$dir/$name"
-        fi
-    done
+    # $XORRISO must be unquoted here to hook into the testing framework
+    $XORRISO -abort_on FATAL -dev stdio:"$1" -find / -exec lsdl 2>/dev/null >"$temp_ls"
+    local r=$?
+
+    if [ "$r" != 0 ]; then
+        rm -f "$temp_ls"
+        return "$r"
+    fi
+
+    # The first line is /, skip it
+    tail -n+2 "$temp_ls" |
+        # disk_ops.c:Xorriso_format_ls_l() prints the boot catalog file as of
+        # type "e". Make it a generic file
+        sed -E 's,^e,-,' |
+        @AWK@ "$awk_xorriso_unesc"
+
+    rm -f "$temp_ls"
 }
 
 xorriso_copyout() {
@@ -195,6 +246,20 @@ shift
 
 case "$cmd" in
   list)
+    if [ -n "${MC_TEST_EXTFS_LIST_CMD:-}" ]; then
+        case "${MC_TEST_EXTFS_ISO9660_TOOL}" in
+          xorriso)
+            XORRISO="$MC_TEST_EXTFS_LIST_CMD"
+            xorriso_list "$@" || exit 1
+            ;;
+          *)
+            exit 1
+            ;;
+        esac
+
+        exit 0
+    fi
+
     xorriso_list "$@" || {
         test_iso "$@" || exit 1
         mcisofs_list "$@" || exit 1
