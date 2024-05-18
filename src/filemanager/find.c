@@ -1802,12 +1802,12 @@ do_find (WPanel * panel, const char *start_dir, ssize_t start_dir_len, const cha
 
     get_list_info (&file_tmp, &dir_tmp, NULL, NULL);
 
-    if (dir_tmp)
+    if (dir_tmp != NULL)
         *dirname = g_strdup (dir_tmp);
-    if (file_tmp)
+    if (file_tmp != NULL)
         *filename = g_strdup (file_tmp);
 
-    if (return_value == B_PANELIZE && *filename)
+    if (return_value == B_PANELIZE && *filename != NULL)
     {
         struct stat st;
         GList *entry;
