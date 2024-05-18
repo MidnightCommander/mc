@@ -1845,14 +1845,11 @@ do_find (WPanel * panel, const char *start_dir, ssize_t start_dir_len, const cha
 
             name = mc_build_filename (location->dir, lc_filename, (char *) NULL);
             /* skip initial start dir */
-            if (start_dir_len < 0)
-                p = name;
-            else
-            {
-                p = name + (size_t) start_dir_len;
-                if (IS_PATH_SEP (*p))
-                    p++;
-            }
+            p = name;
+            if (start_dir_len > 0)
+                p += (size_t) start_dir_len;
+            if (IS_PATH_SEP (*p))
+                p++;
 
             if (!handle_path (p, &st, &link_to_dir, &stale_link))
             {
