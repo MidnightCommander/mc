@@ -167,7 +167,6 @@ gboolean classic_progressbar = TRUE;
 
 /*** file scope macro definitions ****************************************************************/
 
-#define truncFileString(dlg, s)       str_trunc (s, WIDGET (dlg)->rect.cols - 10)
 #define truncFileStringSecure(dlg, s) path_trunc (s, WIDGET (dlg)->rect.cols - 10)
 
 /*** file scope type declarations ****************************************************************/
