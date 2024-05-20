@@ -94,6 +94,7 @@ extern gboolean auto_save_setup;
 extern gboolean only_leading_plus_minus;
 extern int cd_symlinks;
 extern gboolean auto_fill_mkdir_name;
+extern gboolean erase_at_end;
 extern gboolean output_starts_shell;
 #ifdef USE_FILE_CMD
 extern gboolean use_file_to_check_type;

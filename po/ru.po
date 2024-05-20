@@ -1906,6 +1906,9 @@ msgstr "Автоим&я каталога"
 msgid "&Preallocate space"
 msgstr "Предвы&делять место"
 
+msgid "&Erase at end of move"
+msgstr "&Удалять в конце переноса"
+
 msgid "Esc key mode"
 msgstr "Клавиша Esc"
 
