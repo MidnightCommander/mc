@@ -1552,12 +1552,9 @@ vfs_path_build_url_params_str (const vfs_path_element_t * element, gboolean keep
         g_string_append (buffer, element->host);
         if (element->ipv6)
             g_string_append_c (buffer, ']');
-    }
 
-    if ((element->port) != 0 && (element->host != NULL))
-    {
-        g_string_append_c (buffer, ':');
-        g_string_append_printf (buffer, "%d", element->port);
+        if (element->port != 0)
+            g_string_append_printf (buffer, ":%d", element->port);
     }
 
     if (buffer->len != 0)
