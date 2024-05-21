@@ -466,7 +466,7 @@ vfs_path_from_str_uri_parser (char *path)
         vfs_prefix_start = real_vfs_prefix_start;
 
         if (IS_PATH_SEP (*vfs_prefix_start))
-            vfs_prefix_start += 1;
+            vfs_prefix_start++;
 
         *url_delimiter = '\0';
 
@@ -482,9 +482,7 @@ vfs_path_from_str_uri_parser (char *path)
 
             slash_pointer = strchr (url_delimiter, PATH_SEP);
             if (slash_pointer == NULL)
-            {
                 element->path = g_strdup ("");
-            }
             else
             {
                 element->path = vfs_translate_path_n (slash_pointer + 1);
@@ -672,7 +670,7 @@ vfs_path_to_str_flags (const vfs_path_t * vpath, int elements_count, vfs_path_fl
             g_string_append (buffer, element->vfs_prefix);
             g_string_append (buffer, VFS_PATH_URL_DELIMITER);
 
-            url_str = vfs_path_build_url_params_str (element, !(flags & VPF_STRIP_PASSWORD));
+            url_str = vfs_path_build_url_params_str (element, (flags & VPF_STRIP_PASSWORD) == 0);
             if (url_str != NULL)
             {
                 g_string_append_len (buffer, url_str->str, url_str->len);
