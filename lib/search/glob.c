@@ -49,7 +49,6 @@
 static GString *
 mc_search__glob_translate_to_regex (const GString * astr)
 {
-    const char *str = astr->str;
     GString *buff;
     gsize loop;
     gboolean inside_group = FALSE;
@@ -58,31 +57,36 @@ mc_search__glob_translate_to_regex (const GString * astr)
 
     for (loop = 0; loop < astr->len; loop++)
     {
+        const char *str = astr->str;
+        gboolean not_escaped;
+
+        not_escaped = !str_is_char_escaped (str, str + loop);
+
         switch (str[loop])
         {
         case '*':
-            if (!str_is_char_escaped (str, &(str[loop])))
+            if (not_escaped)
             {
                 g_string_append (buff, inside_group ? ".*" : "(.*)");
                 continue;
             }
             break;
         case '?':
-            if (!str_is_char_escaped (str, &(str[loop])))
+            if (not_escaped)
             {
                 g_string_append (buff, inside_group ? "." : "(.)");
                 continue;
             }
             break;
         case ',':
-            if (!str_is_char_escaped (str, &(str[loop])))
+            if (not_escaped)
             {
                 g_string_append_c (buff, inside_group ? '|' : ',');
                 continue;
             }
             break;
         case '{':
-            if (!str_is_char_escaped (str, &(str[loop])))
+            if (not_escaped)
             {
                 g_string_append_c (buff, '(');
                 inside_group = TRUE;
@@ -90,7 +94,7 @@ mc_search__glob_translate_to_regex (const GString * astr)
             }
             break;
         case '}':
-            if (!str_is_char_escaped (str, &(str[loop])))
+            if (not_escaped)
             {
                 g_string_append_c (buff, ')');
                 inside_group = FALSE;
