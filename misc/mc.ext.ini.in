@@ -23,7 +23,7 @@
 # Section [Default] is optional. It is applied only if no other match was found.
 #
 # Sections like [Include/xxxx] can be referenced as "Include=xxxx" from other sections.
-# Section [Include/xxxx] can be located as before as after sections that point to it.
+# Section [Include/xxxx] can be located before or after sections that point to it.
 #
 # Sections are processed from top to bottom, thus the order is important.
 # Multiple sections with the same name are allowed, they are merged together.
@@ -38,7 +38,7 @@
 #        Directory
 #            Matches any directory matching regular expression.
 #            Always case sensitive.
-#            This key has the highest priority over other keys. If this key is in a section,
+#            This key has the highest priority over other keys. If this key is present,
 #            other keys are ignored.
 #
 #        Type
@@ -53,9 +53,9 @@
 #
 #        Regex
 #            An extended regular expression
-#            Please note that we are using the PCRE library and thus \| matches
+#            Please note that we are using the PCRE library and thus \\| matches
 #            the literal | and | has a special meaning (or), and () have a special meaning
-#            and \( \) stand for literal ( ).
+#            and \\( \\) stand for literal ( ).
 #
 #            An unescaped backslash \ is handled as invalid escape sequences in glib = 2.77.3 and
 #            glib >= 2.79 (https://gitlab.gnome.org/GNOME/glib/-/issues/3094), therefore backslash
@@ -852,7 +852,7 @@ Open=@EXTHELPERSDIR@/misc.sh open glade
 
 # Gettext Catalogs
 [mo]
-Regex=.g?mo$
+Regex=\\.g?mo$
 View=%view{ascii} @EXTHELPERSDIR@/misc.sh view mo
 
 [po]
@@ -921,7 +921,7 @@ View=%view{ascii} @EXTHELPERSDIR@/archive.sh view wim
 ### Archives ###
 
 [mailbox]
-Type=^ASCII\ mail\ text
+Type=^ASCII mail text
 Open=%cd %p/mailfs://
 
 
@@ -942,7 +942,7 @@ View=%view{ascii} @EXTHELPERSDIR@/misc.sh view dylib
 
 # GNU Info page
 [info-by-type]
-Type=^Info\ text
+Type=^Info text
 Open=@EXTHELPERSDIR@/text.sh open info
 
 # Manual page - compressed
@@ -979,7 +979,7 @@ Type=^JPEG
 Include=image
 
 [bitmap]
-Type=^PC\ bitmap
+Type=^PC bitmap
 Include=image
 
 [png]
@@ -1036,23 +1036,23 @@ View=%view{ascii} @EXTHELPERSDIR@/doc.sh view pdf
 
 # Microsoft Word Document
 [msdoc-by-type]
-Type=^Microsoft\ Word
+Type=^Microsoft Word
 Open=@EXTHELPERSDIR@/doc.sh open msdoc
 View=%view{ascii} @EXTHELPERSDIR@/doc.sh view msdoc
 
 # Microsoft Excel Worksheet
 [msxls-by-type]
-Type=^Microsoft\ Excel
+Type=^Microsoft Excel
 Open=@EXTHELPERSDIR@/doc.sh open msxls
 View=%view{ascii} @EXTHELPERSDIR@/doc.sh view msxls
 
 # Use OpenOffice.org/LibreOffice to open any MS Office documents
 [mso-doc-1]
-Type=^Microsoft\ Office\ Document
+Type=^Microsoft Office Document
 Open=@EXTHELPERSDIR@/doc.sh open ooffice
 
 [mso-doc-2]
-Type=^Microsoft\ OOXML
+Type=^Microsoft OOXML
 Open=@EXTHELPERSDIR@/doc.sh open ooffice
 
 [framemaker]
@@ -1071,69 +1071,69 @@ View=%view{ascii} @EXTHELPERSDIR@/misc.sh view sqlite
 ### Plain compressed files ###
 
 [gzip]
-Type=\(gzip compressed
+Type=\\(gzip compressed
 Open=@EXTHELPERSDIR@/archive.sh view gz %var{PAGER:more}
 View=%view{ascii} @EXTHELPERSDIR@/archive.sh view gz
 
 [bzip]
-Type=\(bzip compressed
+Type=\\(bzip compressed
 Open=@EXTHELPERSDIR@/archive.sh view bzip %var{PAGER:more}
 View=%view{ascii} @EXTHELPERSDIR@/archive.sh view bzip
 
 [bzip2]
-Type=\(bzip2 compressed
+Type=\\(bzip2 compressed
 Open=@EXTHELPERSDIR@/archive.sh view bzip2 %var{PAGER:more}
 View=%view{ascii} @EXTHELPERSDIR@/archive.sh view bz2
 
 [compress]
-Type=\(compress'd
+Type=\\(compress'd
 Open=@EXTHELPERSDIR@/archive.sh view gz %var{PAGER:more}
 View=%view{ascii} @EXTHELPERSDIR@/archive.sh view gz
 
 [lz]
-Type=\(lzip compressed
+Type=\\(lzip compressed
 Open=@EXTHELPERSDIR@/archive.sh view lz %var{PAGER:more}
 View=%view{ascii} @EXTHELPERSDIR@/archive.sh view lz
 
 [lzma]
-Type=\(LZMA compressed
+Type=\\(LZMA compressed
 Open=@EXTHELPERSDIR@/archive.sh view lzma %var{PAGER:more}
 View=%view{ascii} @EXTHELPERSDIR@/archive.sh view lzma
 
 [xz]
-Type=\(XZ compressed
+Type=\\(XZ compressed
 Open=@EXTHELPERSDIR@/archive.sh view xz %var{PAGER:more}
 View=%view{ascii} @EXTHELPERSDIR@/archive.sh view xz
 
 [zstd]
-Type=\(Zstandard compressed
+Type=\\(Zstandard compressed
 Open=@EXTHELPERSDIR@/archive.sh view zst %var{PAGER:more}
 View=%view{ascii} @EXTHELPERSDIR@/archive.sh view zst
 
 [zip-by-type]
-Type=\(Zip archive
+Type=\\(Zip archive
 Open=%cd %p/uzip://
 View=%view{ascii} @EXTHELPERSDIR@/archive.sh view zip
 
 [jar]
-Type=\(Java\ (Jar\ file|archive)\ data\ \((zip|JAR)\)
+Type=\\(Java (Jar file|archive) data \\((zip|JAR)\\)\\)
 TypeIgnoreCase=true
 Open=%cd %p/uzip://
 View=%view{ascii} @EXTHELPERSDIR@/archive.sh view zip
 
 [lha]
-Type=^LHa\ .*archive
+Type=^LHa .*archive
 Open=%cd %p/ulha://
 View=%view{ascii} @EXTHELPERSDIR@/archive.sh view lha
 
 [pak]
-Type=^PAK\ .*archive
+Type=^PAK .*archive
 Open=%cd %p/unar://
 View=%view{ascii} @EXTHELPERSDIR@/archive.sh view pak
 
 # Parity Archive
 [par2]
-Type=^Parity\ Archive\ Volume\ Set
+Type=^Parity Archive Volume Set
 Open=@EXTHELPERSDIR@/archive.sh open par2
 
 
