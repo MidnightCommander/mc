@@ -72,6 +72,7 @@ mc_search__normal_translate_to_regex (GString * str)
         case '|':
             g_string_insert_c (str, loop, '\\');
             loop++;
+            break;
         default:
             break;
         }
