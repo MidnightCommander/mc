@@ -1410,7 +1410,7 @@ file_mask_dialog (file_op_context_t * ctx, gboolean only_one, const char *format
             if (preserve)
             {
                 ctx->preserve = TRUE;
-                ctx->umask_kill = 0777777;
+                ctx->umask_kill = (mode_t) (~0);
                 ctx->preserve_uidgid = (geteuid () == 0);
             }
             else
@@ -1420,7 +1420,7 @@ file_mask_dialog (file_op_context_t * ctx, gboolean only_one, const char *format
                 ctx->preserve = ctx->preserve_uidgid = FALSE;
                 i2 = umask (0);
                 umask (i2);
-                ctx->umask_kill = i2 ^ 0777777;
+                ctx->umask_kill = i2 ^ ((mode_t) (~0));
             }
 
             if (*dest_dir == '\0')

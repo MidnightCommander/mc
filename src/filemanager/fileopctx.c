@@ -78,7 +78,7 @@ file_op_context_new (FileOperation op)
     ctx->stat_func = mc_lstat;
     ctx->preserve = TRUE;
     ctx->preserve_uidgid = (geteuid () == 0);
-    ctx->umask_kill = 0777777;
+    ctx->umask_kill = (mode_t) (~0);
     ctx->erase_at_end = TRUE;
     ctx->skip_all = FALSE;
 
