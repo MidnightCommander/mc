@@ -784,7 +784,7 @@ LIBSSH2_USERAUTH_KBDINT_RESPONSE_FUNC (sftpfs_keyboard_interactive_helper)
     len = strlen (kbi_passwd);
 
     for (i = 0; i < num_prompts; ++i)
-        if (strncmp (prompts[i].text, "Password: ", prompts[i].length) == 0)
+        if (memcmp (prompts[i].text, "Password: ", prompts[i].length) == 0)
         {
             responses[i].text = strdup (kbi_passwd);
             responses[i].length = len;
