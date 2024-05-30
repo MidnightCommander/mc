@@ -23,7 +23,7 @@
 # Section [Default] is optional. It is applied only if no other match was found.
 #
 # Sections like [Include/xxxx] can be referenced as "Include=xxxx" from other sections.
-# Section [Include/xxxx] can be located as before as after sections that point to it.
+# Section [Include/xxxx] can be located before or after sections that point to it.
 #
 # Sections are processed from top to bottom, thus the order is important.
 # Multiple sections with the same name are allowed, they are merged together.
@@ -38,7 +38,7 @@
 #        Directory
 #            Matches any directory matching regular expression.
 #            Always case sensitive.
-#            This key has the highest priority over other keys. If this key is in a section,
+#            This key has the highest priority over other keys. If this key is present,
 #            other keys are ignored.
 #
 #        Type
