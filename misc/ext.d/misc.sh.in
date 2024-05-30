@@ -13,11 +13,38 @@ do_view_action() {
 
     case "${filetype}" in
     iso9660)
-         if which isoinfo > /dev/null 2>&1; then
-             isoinfo -d -i "${MC_EXT_FILENAME}" && isoinfo -l -R -J -i "${MC_EXT_FILENAME}"
-         else
-             7za l "${MC_EXT_FILENAME}"
-         fi
+        # Contrary to isoinfo, xorriso is happy with pretty any file, even a
+        # dir. Let's check if it is some readable iso 9660 image indeed.
+        iso=y
+        file -b -- "${MC_EXT_FILENAME}" 2>&1 | grep -q 9660 || iso=n
+
+        if [ "$iso" = y ]; then
+            if command -v xorriso >/dev/null; then
+                # 2>&1 is important here since xorriso_main.c:yell_xorriso() always
+                # prints a header like "xorriso 1.5.4 : RockRidge filesystem
+                # manipulator, libburnia project." to stderr
+                xorriso -report_about WARNING -dev "${MC_EXT_FILENAME}" -toc -print '' -find / -exec lsdl 2>&1
+            elif command -v isoinfo >/dev/null; then
+                # Joliet support in isoinfo is inadequate. It only works well
+                # for latin characters. It can't convert non-latin filenames to
+                # utf-8. `isoinfo -R` means "Rock Ridge with ECMA-119 fallback",
+                # here we ignore the Joliet tree.
+                # More details: src/vfs/extfs/helpers/README.iso9660
+                isoinfo -d -i "${MC_EXT_FILENAME}" && isoinfo -l -R -i "${MC_EXT_FILENAME}"
+            elif _7z=$(command -v 7zz || command -v 7z); then
+                # 7z prefers Joliet over Rock Ridge. When there is only Rock
+                # Ridge present, p7zip version 16.02 (shipped with some distros)
+                # incorrectly converts non-latin filenames.
+                # More details: src/vfs/extfs/helpers/README.iso9660
+                "$_7z" l -- "${MC_EXT_FILENAME}"
+            else
+                echo 'Neither of these tools is available: xorriso, isoinfo, 7z' >&2
+                false
+            fi
+        else
+            echo 'It does not look like a file of ISO 9660 format' >&2
+            false
+        fi
         ;;
     cat)
         cat "${MC_EXT_FILENAME}" 2>/dev/null

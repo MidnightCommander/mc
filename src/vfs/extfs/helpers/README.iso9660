@@ -1,0 +1,198 @@
+Notes on isoinfo
+================
+
+Below we'll use such sample Rock Ridge+Joliet `utf8-rj.iso` image (the
+effective locale is en_US.UTF-8):
+
+    mkdir utf8
+    for x in latin cyrillic-{абв,а,б,в}; do echo "contents of $x.txt" > utf8/"$x".txt; done
+    xorriso -joliet on -as mkisofs -r -o utf8-rj.iso utf8
+
+Rock Ridge doesnt feature a "charset" concept for filenames. By default iso9660
+tools print the names as-is and it is not a big problem these days, since most
+likely the names are utf-8 encoded and the terminals are utf-8 as well. xorriso
+since 2009 supports `-auto_charset` option to save/load the charset from the
+`isofs.cs` xattr on the root dir. It is likely a xorriso-only thing.  Also,
+there is `-in_charset` option to set the source charset when opening an
+existing iso.
+
+isoinfo is a simple tool, it always prints RR names raw, which is fine:
+
+    > isoinfo -i utf8-rj.iso -l -R
+
+    Directory listing of /
+    dr-xr-xr-x   1    0    0            2048 May 29 2024 [     19 02]  .
+    dr-xr-xr-x   1    0    0            2048 May 29 2024 [     19 02]  ..
+    -r--r--r--   1    0    0              28 May 29 2024 [     33 00]  cyrillic-а.txt
+    -r--r--r--   1    0    0              32 May 29 2024 [     34 00]  cyrillic-абв.txt
+    -r--r--r--   1    0    0              28 May 29 2024 [     35 00]  cyrillic-б.txt
+    -r--r--r--   1    0    0              28 May 29 2024 [     36 00]  cyrillic-в.txt
+    -r--r--r--   1    0    0              22 May 29 2024 [     37 00]  latin.txt
+
+Joliet filenames are UCS-2 encoded, it is the standard. When iso9660 tools
+create images, they convert from whatever input charset is to UCS-2. When they
+list some image's content, they convert from UCS-2 to the local charset. It
+sounds much better than the RR case, but there is a problem: isoinfo cant
+convert to utf-8. It can only convert to a selection of 1-byte charsets, the
+conversion tables are under `cdrkit-1.1.11/libunls/`. Among the tables there is
+the almighty `nls_iconv.c`, but it is only used by mkisofs. When isoinfo cant
+convert some char in a Joliet name to the current charset, it uses an
+underscore instead:
+
+    > isoinfo -i utf8-rj.iso -l -J
+
+    Directory listing of /
+    d---------   0    0    0            2048 May 29 2024 [     23 02]  .
+    d---------   0    0    0            2048 May 29 2024 [     23 02]  ..
+    ----------   0    0    0              28 May 29 2024 [     33 00]  cyrillic-_.txt
+    ----------   0    0    0              32 May 29 2024 [     34 00]  cyrillic-___.txt
+    ----------   0    0    0              28 May 29 2024 [     35 00]  cyrillic-_.txt
+    ----------   0    0    0              28 May 29 2024 [     36 00]  cyrillic-_.txt
+    ----------   0    0    0              22 May 29 2024 [     37 00]  latin.txt
+
+Underscored names can be used to extract files:
+
+    > isoinfo -i utf8-rj.iso -J -x /cyrillic-___.txt
+    contents of cyrillic-абв.txt
+
+Notice, in the listing above there are three files named `cyrillic-_.txt`.
+Let's try to extract that name:
+
+    > isoinfo -i utf8-rj.iso -J -x /cyrillic-_.txt
+    contents of cyrillic-а.txt
+    contents of cyrillic-б.txt
+    contents of cyrillic-в.txt
+
+It printed contents of ALL three files.
+
+It is possible to produce the correct listing with isoinfo:
+
+    > isoinfo -i utf8-rj.iso -l -J -j cp1251 | iconv -f cp1251
+
+    Directory listing of /
+    d---------   0    0    0            2048 May 29 2024 [     23 02]  .
+    d---------   0    0    0            2048 May 29 2024 [     23 02]  ..
+    ----------   0    0    0              28 May 29 2024 [     33 00]  cyrillic-а.txt
+    ----------   0    0    0              32 May 29 2024 [     34 00]  cyrillic-абв.txt
+    ----------   0    0    0              28 May 29 2024 [     35 00]  cyrillic-б.txt
+    ----------   0    0    0              28 May 29 2024 [     36 00]  cyrillic-в.txt
+    ----------   0    0    0              22 May 29 2024 [     37 00]  latin.txt
+
+but it only works because we know ahead symbols used in the filenames can be
+converted to cp1251 without issues. This trick can be used with extraction as
+well:
+
+    > isoinfo -i utf8-rj.iso -J -j cp1251 -x /"$(echo cyrillic-б.txt | iconv -t cp1251)"
+    contents of cyrillic-б.txt
+
+To summarize, Joliet support in isoinfo is inadequate. It only works well for
+latin characters. It cant convert non-latin filenames to utf-8, which is a must
+these days. For the best results, use `isoinfo -R`, which stands for "Rock
+Ridge with ECMA-119 fallback".
+
+Notice: `-J` option makes isoinfo only use the Joliet tree (or throw an error
+if there is none), no matter the other options. So `isoinfo -J -R` is literally
+`isoinfo -J`.
+
+
+Notes on 7-zip
+==============
+
+Below we'll use such sample Rock Ridge+Joliet `utf8-rj.iso` and Rock Ridge only
+`utf8-r.iso` images (the effective locale is en_US.UTF-8):
+
+    mkdir utf8
+    for x in latin cyrillic-абв; do echo "contents of $x.txt" > utf8/"$x".txt; done
+    xorriso -joliet on -as mkisofs -r -o utf8-rj.iso utf8
+    xorriso -as mkisofs -r -o utf8-r.iso utf8
+
+Notice: speaking about iso9660 support in 7-zip here, hence the only binaries
+of interest are 7z and 7zz.
+
+There are at least three widely used 7-zip flavours as of Q1 2024:
+
+- p7zip 16.02, which is "the command line version of 7-Zip for Linux / Unix,
+made by an independent developer", quoting 7-zip.org. It is shipped with Ubuntu
+16.10 to 23.10. Package:p7zip-full, binary:7z
+
+- p7zip fork by p7zip-project: https://github.com/p7zip-project/p7zip. It is
+packaged by Arch Linux. Package:p7zip, binary:7z
+
+- builds from 7-zip.org sources. It appeared in Ubuntu 22.04, package:7zip,
+binary:7zz. Since Ubuntu 24.04, p7zip-full is a transitional package to 7zip,
+now 7zip provides 7z, and 7zip-standalone provides 7zz
+
+7-zip prefers Joliet over Rock Ridge, there is no cli option to change that.
+When Joliet is present, `7z l` correctly converts filenames to the current
+locale from Joliet's UCS-2:
+
+    > 7z l utf8-rj.iso | sed -n '/^----/,/^----/p'
+    ------------------- ----- ------------ ------------  ------------------------
+    2024-05-30 15:34:22 .....           32           32  cyrillic-абв.txt
+    2024-05-30 15:34:22 .....           22           22  latin.txt
+    ------------------- ----- ------------ ------------  ------------------------
+
+But when there is only Rock Ridge, p7zip 16.02 assumes the filenames are
+encoded in some 1-byte encoding (CP_OEMCP constant in the sources) and converts
+it to the current locale from that. `utf8-r.iso` has RR names in utf-8, the
+current locale is utf-8 as well. `7z l` prints it as double utf-8 encoded:
+
+    > 7z l utf8-r.iso | sed -n '/^----/,/^----/p'
+    ------------------- ----- ------------ ------------  ------------------------
+    2024-05-30 15:34:22 .....           32           32  cyrillic-Ð°Ð±Ð².txt
+    2024-05-30 15:34:22 .....           22           22  latin.txt
+    ------------------- ----- ------------ ------------  ------------------------
+
+It could be tricked to print the names raw:
+
+    > LC_CTYPE=C 7z l utf8-r.iso | sed -n '/^----/,/^----/p'
+    ------------------- ----- ------------ ------------  ------------------------
+    2024-05-30 15:34:22 .....           32           32  cyrillic-абв.txt
+    2024-05-30 15:34:22 .....           22           22  latin.txt
+    ------------------- ----- ------------ ------------  ------------------------
+
+But the same trick breaks it for Joliet images:
+
+    > LC_CTYPE=C 7z l utf8-rj.iso | sed -n '/^----/,/^----/p'
+    ------------------- ----- ------------ ------------  ------------------------
+    2024-05-30 15:34:22 .....           32           32  cyrillic-???.txt
+    2024-05-30 15:34:22 .....           22           22  latin.txt
+    ------------------- ----- ------------ ------------  ------------------------
+
+So, to correctly list some iso with p7zip 16.02, we need to detect if it
+contains Joliet or RR only and apply the trick to the latter. Joliet could be
+detected using such shell function:
+
+    is_joliet() {
+        local skip=16 mark
+
+        # Loop through the volume descriptor set
+        # https://en.wikipedia.org/wiki/ISO_9660#Volume_descriptor_set
+        while true; do
+            mark=$(od -j$((2048*skip)) -N6 -An -tx1 <"$1" 2>/dev/null | tr -d ' ')
+
+            case "$mark" in
+                ??4344303031) # Type (1 byte) + CD001
+                    case "$mark" in
+                        ff*) return 1 ;; # Terminator
+                        02*) return 0 ;; # Joliet
+                    esac ;;
+                *)
+                    return 1 ;;
+            esac
+
+            skip=$((skip+1))
+        done
+    }
+
+With that, listing could be done like this:
+
+    env=
+    is_joliet "$iso" || env='LC_CTYPE=C'
+    env $env 7z l "$iso"
+
+Out of the mentioned 7-zip flavours, only p7zip 16.02 has the problem with RR
+names conversion. 7zz binary is a recent invention, it likely was never
+affected. So, when both 7z and 7zz are available, 7zz should be preferred. For
+example, in Ubuntu 22.04, 7z is of p7zip 16.02 kind, while 7zz is built from
+7-zip.org sources (version 21.07).
