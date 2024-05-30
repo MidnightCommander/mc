@@ -2263,7 +2263,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
     mode_t src_mode = 0;        /* The mode of the source file */
     struct stat src_stat, dst_stat;
     mc_timesbuf_t times;
-    unsigned long attrs;
+    unsigned long attrs = 0;
     gboolean attrs_ok = ctx->preserve;
     gboolean dst_exists = FALSE, appending = FALSE;
     off_t file_size = -1;
@@ -2941,7 +2941,7 @@ copy_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const cha
 {
     struct vfs_dirent *next;
     struct stat dst_stat, src_stat;
-    unsigned long attrs;
+    unsigned long attrs = 0;
     gboolean attrs_ok = ctx->preserve;
     DIR *reading;
     FileProgressStatus return_status = FILE_CONT;
