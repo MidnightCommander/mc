@@ -63,6 +63,7 @@ int vfs_parse_filedate (int idx, time_t * t);
 int vfs_utime (const char *path, mc_timesbuf_t *times);
 void vfs_get_timespecs_from_timesbuf (mc_timesbuf_t *times, mc_timespec_t *atime,
                                       mc_timespec_t *mtime);
+void vfs_get_timesbuf_from_stat (const struct stat *sb, mc_timesbuf_t *times);
 
 /*** inline functions ****************************************************************************/
 

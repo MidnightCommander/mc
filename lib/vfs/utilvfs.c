@@ -406,3 +406,17 @@ vfs_get_timespecs_from_timesbuf (mc_timesbuf_t *times, mc_timespec_t *atime, mc_
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+void
+vfs_get_timesbuf_from_stat (const struct stat *sb, mc_timesbuf_t *times)
+{
+#ifdef HAVE_UTIMENSAT
+    (*times)[0] = sb->st_atim;
+    (*times)[1] = sb->st_mtim;
+#else
+    times->actime = sb->st_atime;
+    times->modtime = sb->st_mtime;
+#endif
+}
+
+/* --------------------------------------------------------------------------------------------- */
