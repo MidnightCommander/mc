@@ -38,6 +38,10 @@
 #include <stdlib.h>
 #include <string.h>
 
+#if !defined (HAVE_UTIMENSAT) && defined (HAVE_UTIME_H)
+#include <utime.h>
+#endif
+
 #include "lib/global.h"
 #include "lib/unixcompat.h"
 #include "lib/widget.h"         /* message() */
@@ -369,6 +373,18 @@ vfs_get_password (const char *msg)
 {
     return input_dialog (msg, _("Password:"), MC_HISTORY_VFS_PASSWORD, INPUT_PASSWORD,
                          INPUT_COMPLETE_NONE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+int
+vfs_utime (const char *path, mc_timesbuf_t *times)
+{
+#ifdef HAVE_UTIMENSAT
+    return utimensat (AT_FDCWD, path, *times, AT_SYMLINK_NOFOLLOW);
+#else
+    return utime (path, times);
+#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */

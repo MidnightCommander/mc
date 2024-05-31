@@ -349,11 +349,7 @@ sfs_chown (const vfs_path_t *vpath, uid_t owner, gid_t group)
 static int
 sfs_utime (const vfs_path_t *vpath, mc_timesbuf_t *times)
 {
-#ifdef HAVE_UTIMENSAT
-    return utimensat (AT_FDCWD, sfs_redirect (vpath), *times, 0);
-#else
-    return utime (sfs_redirect (vpath), times);
-#endif
+    return vfs_utime (sfs_redirect (vpath), times);
 }
 
 /* --------------------------------------------------------------------------------------------- */

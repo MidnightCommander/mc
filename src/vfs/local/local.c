@@ -26,6 +26,7 @@
  */
 
 #include <config.h>
+
 #include <errno.h>
 #include <sys/types.h>
 #include <unistd.h>
@@ -217,16 +218,7 @@ local_fsetflags (const vfs_path_t *vpath, unsigned long flags)
 static int
 local_utime (const vfs_path_t *vpath, mc_timesbuf_t *times)
 {
-    int ret;
-    const char *path;
-
-    path = vfs_path_get_last_path_str (vpath);
-#ifdef HAVE_UTIMENSAT
-    ret = utimensat (AT_FDCWD, path, *times, AT_SYMLINK_NOFOLLOW);
-#else
-    ret = utime (path, times);
-#endif
-    return ret;
+    return vfs_utime (vfs_path_get_last_path_str (vpath), times);
 }
 
 /* --------------------------------------------------------------------------------------------- */

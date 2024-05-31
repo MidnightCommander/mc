@@ -60,5 +60,8 @@ size_t vfs_parse_ls_lga_get_final_spaces (void);
 gboolean vfs_parse_month (const char *str, struct tm *tim);
 int vfs_parse_filedate (int idx, time_t * t);
 
+int vfs_utime (const char *path, mc_timesbuf_t *times);
+
 /*** inline functions ****************************************************************************/
+
 #endif
