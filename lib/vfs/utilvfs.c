@@ -388,3 +388,21 @@ vfs_utime (const char *path, mc_timesbuf_t *times)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+void
+vfs_get_timespecs_from_timesbuf (mc_timesbuf_t *times, mc_timespec_t *atime, mc_timespec_t *mtime)
+{
+#ifdef HAVE_UTIMENSAT
+    atime->tv_sec = (*times)[0].tv_sec;
+    atime->tv_nsec = (*times)[0].tv_nsec;
+    mtime->tv_sec = (*times)[1].tv_sec;
+    mtime->tv_nsec = (*times)[1].tv_nsec;
+#else
+    atime->tv_sec = times->actime;
+    atime->tv_nsec = 0;
+    mtime->tv_sec = times->modtime;
+    mtime->tv_nsec = 0;
+#endif
+}
+
+/* --------------------------------------------------------------------------------------------- */

@@ -336,16 +336,11 @@ sftpfs_cb_utime (const vfs_path_t *vpath, mc_timesbuf_t *times)
 {
     int rc;
     GError *mcerror = NULL;
+    mc_timespec_t atime, mtime;
 
-#ifdef HAVE_UTIMENSAT
-    time_t atime = (*times)[0].tv_sec;
-    time_t mtime = (*times)[1].tv_sec;
-#else
-    time_t atime = times->actime;
-    time_t mtime = times->modtime;
-#endif
+    vfs_get_timespecs_from_timesbuf (times, &atime, &mtime);
+    rc = sftpfs_utime (vpath, atime.tv_sec, mtime.tv_sec, &mcerror);
 
-    rc = sftpfs_utime (vpath, atime, mtime, &mcerror);
     mc_error_message (&mcerror, NULL);
     return rc;
 }
