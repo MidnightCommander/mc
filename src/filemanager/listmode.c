@@ -274,7 +274,7 @@ init_listmode (char *oldlistformat)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-listmode_done (WDialog * h)
+listmode_done (WDialog *h)
 {
     widget_destroy (WIDGET (h));
     if (0)

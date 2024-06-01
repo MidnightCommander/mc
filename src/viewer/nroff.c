@@ -59,7 +59,7 @@
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-mcview_nroff_get_char (mcview_nroff_t * nroff, int *ret_val, off_t nroff_index)
+mcview_nroff_get_char (mcview_nroff_t *nroff, int *ret_val, off_t nroff_index)
 {
     int c = 0;
 
@@ -92,7 +92,7 @@ mcview_nroff_get_char (mcview_nroff_t * nroff, int *ret_val, off_t nroff_index)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-mcview__get_nroff_real_len (WView * view, off_t start, off_t length)
+mcview__get_nroff_real_len (WView *view, off_t start, off_t length)
 {
     mcview_nroff_t *nroff;
     int ret = 0;
@@ -128,7 +128,7 @@ mcview__get_nroff_real_len (WView * view, off_t start, off_t length)
 /* --------------------------------------------------------------------------------------------- */
 
 mcview_nroff_t *
-mcview_nroff_seq_new_num (WView * view, off_t lc_index)
+mcview_nroff_seq_new_num (WView *view, off_t lc_index)
 {
     mcview_nroff_t *nroff;
 
@@ -145,7 +145,7 @@ mcview_nroff_seq_new_num (WView * view, off_t lc_index)
 /* --------------------------------------------------------------------------------------------- */
 
 mcview_nroff_t *
-mcview_nroff_seq_new (WView * view)
+mcview_nroff_seq_new (WView *view)
 {
     return mcview_nroff_seq_new_num (view, (off_t) 0);
 
@@ -154,7 +154,7 @@ mcview_nroff_seq_new (WView * view)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_nroff_seq_free (mcview_nroff_t ** nroff)
+mcview_nroff_seq_free (mcview_nroff_t **nroff)
 {
     if (nroff == NULL || *nroff == NULL)
         return;
@@ -164,7 +164,7 @@ mcview_nroff_seq_free (mcview_nroff_t ** nroff)
 /* --------------------------------------------------------------------------------------------- */
 
 nroff_type_t
-mcview_nroff_seq_info (mcview_nroff_t * nroff)
+mcview_nroff_seq_info (mcview_nroff_t *nroff)
 {
     int next, next2;
 
@@ -206,7 +206,7 @@ mcview_nroff_seq_info (mcview_nroff_t * nroff)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-mcview_nroff_seq_next (mcview_nroff_t * nroff)
+mcview_nroff_seq_next (mcview_nroff_t *nroff)
 {
     if (nroff == NULL)
         return -1;
@@ -234,7 +234,7 @@ mcview_nroff_seq_next (mcview_nroff_t * nroff)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-mcview_nroff_seq_prev (mcview_nroff_t * nroff)
+mcview_nroff_seq_prev (mcview_nroff_t *nroff)
 {
     int prev;
     off_t prev_index, prev_index2;

@@ -80,7 +80,7 @@ str_unichar_iscombiningmark (gunichar uni)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-str_utf8_insert_replace_char (GString * buffer)
+str_utf8_insert_replace_char (GString *buffer)
 {
     g_string_append (buffer, replch);
 }
@@ -277,7 +277,7 @@ str_utf8_cprev_noncomb_char (const char **text, const char *begin)
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-str_utf8_toupper (const char *text, char **out, size_t * remain)
+str_utf8_toupper (const char *text, char **out, size_t *remain)
 {
     gunichar uni;
     size_t left;
@@ -300,7 +300,7 @@ str_utf8_toupper (const char *text, char **out, size_t * remain)
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-str_utf8_tolower (const char *text, char **out, size_t * remain)
+str_utf8_tolower (const char *text, char **out, size_t *remain)
 {
     gunichar uni;
     size_t left;
@@ -398,7 +398,7 @@ str_utf8_length_noncomb (const char *text)
 
 #if 0
 static void
-str_utf8_questmark_sustb (char **string, size_t * left, GString * buffer)
+str_utf8_questmark_sustb (char **string, size_t *left, GString *buffer)
 {
     char *next;
 
@@ -412,7 +412,7 @@ str_utf8_questmark_sustb (char **string, size_t * left, GString * buffer)
 /* --------------------------------------------------------------------------------------------- */
 
 static gchar *
-str_utf8_conv_gerror_message (GError * mcerror, const char *def_msg)
+str_utf8_conv_gerror_message (GError *mcerror, const char *def_msg)
 {
     if (mcerror != NULL)
         return g_strdup (mcerror->message);
@@ -423,7 +423,7 @@ str_utf8_conv_gerror_message (GError * mcerror, const char *def_msg)
 /* --------------------------------------------------------------------------------------------- */
 
 static estr_t
-str_utf8_vfs_convert_to (GIConv coder, const char *string, int size, GString * buffer)
+str_utf8_vfs_convert_to (GIConv coder, const char *string, int size, GString *buffer)
 {
     estr_t result = ESTR_SUCCESS;
 
@@ -1346,7 +1346,7 @@ str_utf8_caseprefix (const char *text, const char *prefix)
 
 static char *
 str_utf8_create_key_gen (const char *text, gboolean case_sen,
-                         gchar * (*keygen) (const gchar * text, gssize size))
+                         gchar *(*keygen) (const gchar *text, gssize size))
 {
     char *result;
 

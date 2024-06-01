@@ -42,7 +42,7 @@ static struct vfs_class *vfs_test_ops = VFS_CLASS (&vfs_test_subclass);
 
 /* @Mock */
 static int
-test_chdir (const vfs_path_t * vpath)
+test_chdir (const vfs_path_t *vpath)
 {
     (void) vpath;
 

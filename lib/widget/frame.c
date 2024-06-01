@@ -54,7 +54,7 @@
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-frame_adjust (WFrame * f)
+frame_adjust (WFrame *f)
 {
     Widget *w = WIDGET (f);
 
@@ -65,7 +65,7 @@ frame_adjust (WFrame * f)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-frame_draw (const WFrame * f)
+frame_draw (const WFrame *f)
 {
     const Widget *wf = CONST_WIDGET (f);
     const WRect *w = &wf->rect;
@@ -117,7 +117,7 @@ frame_new (int y, int x, int lines, int cols, const char *title, gboolean single
 /* --------------------------------------------------------------------------------------------- */
 
 cb_ret_t
-frame_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+frame_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data)
 {
     WFrame *f = FRAME (w);
 
@@ -143,7 +143,7 @@ frame_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
 /* --------------------------------------------------------------------------------------------- */
 
 void
-frame_set_title (WFrame * f, const char *title)
+frame_set_title (WFrame *f, const char *title)
 {
     MC_PTR_FREE (f->title);
 

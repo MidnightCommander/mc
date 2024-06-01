@@ -62,7 +62,7 @@
 
 /* calculate positions of buttons; width is never less than 7 */
 static void
-buttonbar_init_button_positions (WButtonBar * bb)
+buttonbar_init_button_positions (WButtonBar *bb)
 {
     int i;
     int pos = 0;
@@ -111,7 +111,7 @@ buttonbar_init_button_positions (WButtonBar * bb)
 
 /* return width of one button */
 static int
-buttonbar_get_button_width (const WButtonBar * bb, int i)
+buttonbar_get_button_width (const WButtonBar *bb, int i)
 {
     if (i == 0)
         return bb->labels[0].end_coord;
@@ -121,7 +121,7 @@ buttonbar_get_button_width (const WButtonBar * bb, int i)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-buttonbar_get_button_by_x_coord (const WButtonBar * bb, int x)
+buttonbar_get_button_by_x_coord (const WButtonBar *bb, int x)
 {
     int i;
 
@@ -135,7 +135,7 @@ buttonbar_get_button_by_x_coord (const WButtonBar * bb, int x)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-set_label_text (WButtonBar * bb, int idx, const char *text)
+set_label_text (WButtonBar *bb, int idx, const char *text)
 {
     g_free (bb->labels[idx - 1].text);
     bb->labels[idx - 1].text = g_strdup (text);
@@ -145,7 +145,7 @@ set_label_text (WButtonBar * bb, int idx, const char *text)
 
 /* returns TRUE if a function has been called, FALSE otherwise. */
 static gboolean
-buttonbar_call (WButtonBar * bb, int i)
+buttonbar_call (WButtonBar *bb, int i)
 {
     cb_ret_t ret = MSG_NOT_HANDLED;
     Widget *w = WIDGET (bb);
@@ -162,7 +162,7 @@ buttonbar_call (WButtonBar * bb, int i)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-buttonbar_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+buttonbar_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data)
 {
     WButtonBar *bb = BUTTONBAR (w);
     int i;
@@ -216,7 +216,7 @@ buttonbar_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-buttonbar_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
+buttonbar_mouse_callback (Widget *w, mouse_msg_t msg, mouse_event_t *event)
 {
     switch (msg)
     {
@@ -260,8 +260,8 @@ buttonbar_new (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-buttonbar_set_label (WButtonBar * bb, int idx, const char *text, const global_keymap_t * keymap,
-                     Widget * receiver)
+buttonbar_set_label (WButtonBar *bb, int idx, const char *text, const global_keymap_t *keymap,
+                     Widget *receiver)
 {
     if ((bb != NULL) && (idx >= 1) && (idx <= BUTTONBAR_LABELS_NUM))
     {
@@ -284,7 +284,7 @@ buttonbar_set_label (WButtonBar * bb, int idx, const char *text, const global_ke
 
 /* Find ButtonBar widget in the dialog */
 WButtonBar *
-buttonbar_find (const WDialog * h)
+buttonbar_find (const WDialog *h)
 {
     return BUTTONBAR (widget_find_by_type (CONST_WIDGET (h), buttonbar_callback));
 }

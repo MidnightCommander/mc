@@ -77,7 +77,7 @@ sftpfs_blksize (struct stat *s)
  */
 
 static int
-sftpfs_internal_waitsocket (sftpfs_super_t * super, GError ** mcerror)
+sftpfs_internal_waitsocket (sftpfs_super_t *super, GError **mcerror)
 {
     struct timeval timeout = { 10, 0 };
     fd_set fd;
@@ -114,9 +114,9 @@ sftpfs_internal_waitsocket (sftpfs_super_t * super, GError ** mcerror)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-sftpfs_stat_init (sftpfs_super_t ** super, const vfs_path_element_t ** path_element,
-                  const vfs_path_t * vpath, GError ** mcerror, int stat_type,
-                  LIBSSH2_SFTP_ATTRIBUTES * attrs)
+sftpfs_stat_init (sftpfs_super_t **super, const vfs_path_element_t **path_element,
+                  const vfs_path_t *vpath, GError **mcerror, int stat_type,
+                  LIBSSH2_SFTP_ATTRIBUTES *attrs)
 {
     const GString *fixfname;
     int res;
@@ -152,7 +152,7 @@ sftpfs_stat_init (sftpfs_super_t ** super, const vfs_path_element_t ** path_elem
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-sftpfs_waitsocket (sftpfs_super_t * super, int sftp_res, GError ** mcerror)
+sftpfs_waitsocket (sftpfs_super_t *super, int sftp_res, GError **mcerror)
 {
     if (sftp_res != LIBSSH2_ERROR_EAGAIN)
     {
@@ -168,7 +168,7 @@ sftpfs_waitsocket (sftpfs_super_t * super, int sftp_res, GError ** mcerror)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-sftpfs_is_sftp_error (LIBSSH2_SFTP * sftp_session, int sftp_res, int sftp_error)
+sftpfs_is_sftp_error (LIBSSH2_SFTP *sftp_session, int sftp_res, int sftp_error)
 {
     return (sftp_res == LIBSSH2_ERROR_SFTP_PROTOCOL &&
             libssh2_sftp_last_error (sftp_session) == (unsigned long) sftp_error);
@@ -184,7 +184,7 @@ sftpfs_is_sftp_error (LIBSSH2_SFTP * sftp_session, int sftp_res, int sftp_error)
  */
 
 void
-sftpfs_ssherror_to_gliberror (sftpfs_super_t * super, int libssh_errno, GError ** mcerror)
+sftpfs_ssherror_to_gliberror (sftpfs_super_t *super, int libssh_errno, GError **mcerror)
 {
     char *err = NULL;
     int err_len;
@@ -220,8 +220,8 @@ sftpfs_fix_filename (const char *file_name)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-sftpfs_op_init (sftpfs_super_t ** super, const vfs_path_element_t ** path_element,
-                const vfs_path_t * vpath, GError ** mcerror)
+sftpfs_op_init (sftpfs_super_t **super, const vfs_path_element_t **path_element,
+                const vfs_path_t *vpath, GError **mcerror)
 {
     struct vfs_s_super *lc_super = NULL;
 
@@ -245,7 +245,7 @@ sftpfs_op_init (sftpfs_super_t ** super, const vfs_path_element_t ** path_elemen
 /* --------------------------------------------------------------------------------------------- */
 
 void
-sftpfs_attr_to_stat (const LIBSSH2_SFTP_ATTRIBUTES * attrs, struct stat *s)
+sftpfs_attr_to_stat (const LIBSSH2_SFTP_ATTRIBUTES *attrs, struct stat *s)
 {
     if ((attrs->flags & LIBSSH2_SFTP_ATTR_UIDGID) != 0)
     {
@@ -284,7 +284,7 @@ sftpfs_attr_to_stat (const LIBSSH2_SFTP_ATTRIBUTES * attrs, struct stat *s)
  */
 
 int
-sftpfs_lstat (const vfs_path_t * vpath, struct stat *buf, GError ** mcerror)
+sftpfs_lstat (const vfs_path_t *vpath, struct stat *buf, GError **mcerror)
 {
     sftpfs_super_t *super = NULL;
     const vfs_path_element_t *path_element = NULL;
@@ -312,7 +312,7 @@ sftpfs_lstat (const vfs_path_t * vpath, struct stat *buf, GError ** mcerror)
  */
 
 int
-sftpfs_stat (const vfs_path_t * vpath, struct stat *buf, GError ** mcerror)
+sftpfs_stat (const vfs_path_t *vpath, struct stat *buf, GError **mcerror)
 {
     sftpfs_super_t *super = NULL;
     const vfs_path_element_t *path_element = NULL;
@@ -342,7 +342,7 @@ sftpfs_stat (const vfs_path_t * vpath, struct stat *buf, GError ** mcerror)
  */
 
 int
-sftpfs_readlink (const vfs_path_t * vpath, char *buf, size_t size, GError ** mcerror)
+sftpfs_readlink (const vfs_path_t *vpath, char *buf, size_t size, GError **mcerror)
 {
     sftpfs_super_t *super = NULL;
     const vfs_path_element_t *path_element = NULL;
@@ -381,7 +381,7 @@ sftpfs_readlink (const vfs_path_t * vpath, char *buf, size_t size, GError ** mce
  */
 
 int
-sftpfs_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2, GError ** mcerror)
+sftpfs_symlink (const vfs_path_t *vpath1, const vfs_path_t *vpath2, GError **mcerror)
 {
     sftpfs_super_t *super = NULL;
     const vfs_path_element_t *path_element2 = NULL;
@@ -434,7 +434,7 @@ sftpfs_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2, GError ** 
  */
 
 int
-sftpfs_utime (const vfs_path_t * vpath, time_t atime, time_t mtime, GError ** mcerror)
+sftpfs_utime (const vfs_path_t *vpath, time_t atime, time_t mtime, GError **mcerror)
 {
     sftpfs_super_t *super = NULL;
     const vfs_path_element_t *path_element = NULL;
@@ -488,7 +488,7 @@ sftpfs_utime (const vfs_path_t * vpath, time_t atime, time_t mtime, GError ** mc
  */
 
 int
-sftpfs_chmod (const vfs_path_t * vpath, mode_t mode, GError ** mcerror)
+sftpfs_chmod (const vfs_path_t *vpath, mode_t mode, GError **mcerror)
 {
     sftpfs_super_t *super = NULL;
     const vfs_path_element_t *path_element = NULL;
@@ -540,7 +540,7 @@ sftpfs_chmod (const vfs_path_t * vpath, mode_t mode, GError ** mcerror)
  */
 
 int
-sftpfs_unlink (const vfs_path_t * vpath, GError ** mcerror)
+sftpfs_unlink (const vfs_path_t *vpath, GError **mcerror)
 {
     sftpfs_super_t *super = NULL;
     const vfs_path_element_t *path_element = NULL;
@@ -577,7 +577,7 @@ sftpfs_unlink (const vfs_path_t * vpath, GError ** mcerror)
  */
 
 int
-sftpfs_rename (const vfs_path_t * vpath1, const vfs_path_t * vpath2, GError ** mcerror)
+sftpfs_rename (const vfs_path_t *vpath1, const vfs_path_t *vpath2, GError **mcerror)
 {
     sftpfs_super_t *super = NULL;
     const char *path1;

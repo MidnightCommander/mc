@@ -81,7 +81,7 @@ static gboolean learnchanged = FALSE;
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-learn_button (WButton * button, int action)
+learn_button (WButton *button, int action)
 {
     WDialog *d;
     char *seq;
@@ -232,7 +232,7 @@ learn_check_key (int c)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-learn_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+learn_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data)
 {
     switch (msg)
     {

@@ -83,7 +83,7 @@ rect_new (int y, int x, int lines, int cols)
   */
 
 void
-rect_init (WRect * r, int y, int x, int lines, int cols)
+rect_init (WRect *r, int y, int x, int lines, int cols)
 {
     r->y = y;
     r->x = x;
@@ -101,7 +101,7 @@ rect_init (WRect * r, int y, int x, int lines, int cols)
   */
 
 void
-rect_move (WRect * r, int dy, int dx)
+rect_move (WRect *r, int dy, int dx)
 {
     r->y += dy;
     r->x += dx;
@@ -117,7 +117,7 @@ rect_move (WRect * r, int dy, int dx)
   */
 
 void
-rect_resize (WRect * r, int dl, int dc)
+rect_resize (WRect *r, int dl, int dc)
 {
     r->lines += dl;
     r->cols += dc;
@@ -137,7 +137,7 @@ rect_resize (WRect * r, int dl, int dc)
   */
 
 void
-rect_grow (WRect * r, int dl, int dc)
+rect_grow (WRect *r, int dl, int dc)
 {
     r->y -= dl;
     r->x -= dc;
@@ -157,7 +157,7 @@ rect_grow (WRect * r, int dl, int dc)
   */
 
 void
-rect_intersect (WRect * r, const WRect * r1)
+rect_intersect (WRect *r, const WRect *r1)
 {
     int y, x;
     int y1, x1;
@@ -193,7 +193,7 @@ rect_intersect (WRect * r, const WRect * r1)
   */
 
 void
-rect_union (WRect * r, const WRect * r1)
+rect_union (WRect *r, const WRect *r1)
 {
     int x, y;
     int x1, y1;
@@ -228,7 +228,7 @@ rect_union (WRect * r, const WRect * r1)
   */
 
 gboolean
-rects_are_overlapped (const WRect * r1, const WRect * r2)
+rects_are_overlapped (const WRect *r1, const WRect *r2)
 {
     return !((r2->x >= r1->x + r1->cols) || (r1->x >= r2->x + r2->cols)
              || (r2->y >= r1->y + r1->lines) || (r1->y >= r2->y + r2->lines));
@@ -245,7 +245,7 @@ rects_are_overlapped (const WRect * r1, const WRect * r2)
   */
 
 gboolean
-rects_are_equal (const WRect * r1, const WRect * r2)
+rects_are_equal (const WRect *r1, const WRect *r2)
 {
     return (r1->y == r2->y && r1->x == r2->x && r1->lines == r2->lines && r1->cols == r2->cols);
 }

@@ -312,7 +312,7 @@ editcmd_dialog_select_definition_add (gpointer data, gpointer user_data)
 /* let the user select where function definition */
 
 static void
-editcmd_dialog_select_definition_show (WEdit * edit, char *match_expr, GPtrArray * def_hash)
+editcmd_dialog_select_definition_show (WEdit *edit, char *match_expr, GPtrArray *def_hash)
 {
     const WRect *w = &CONST_WIDGET (edit)->rect;
     int start_x, start_y, offset;
@@ -406,7 +406,7 @@ editcmd_dialog_select_definition_show (WEdit * edit, char *match_expr, GPtrArray
 /* --------------------------------------------------------------------------------------------- */
 
 void
-edit_get_match_keyword_cmd (WEdit * edit)
+edit_get_match_keyword_cmd (WEdit *edit)
 {
     gsize word_len = 0;
     gsize i;

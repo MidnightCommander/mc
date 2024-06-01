@@ -146,7 +146,7 @@ undelfs_shutdown (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-undelfs_get_path (const vfs_path_t * vpath, char **fsname, char **file)
+undelfs_get_path (const vfs_path_t *vpath, char **fsname, char **file)
 {
     const char *p, *dirname;
 
@@ -198,7 +198,7 @@ undelfs_get_path (const vfs_path_t * vpath, char **fsname, char **file)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-undelfs_lsdel_proc (ext2_filsys _fs, blk_t * block_nr, int blockcnt, void *private)
+undelfs_lsdel_proc (ext2_filsys _fs, blk_t *block_nr, int blockcnt, void *private)
 {
     struct lsdel_struct *_lsd = (struct lsdel_struct *) private;
     (void) blockcnt;
@@ -330,7 +330,7 @@ undelfs_loaddel (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void *
-undelfs_opendir (const vfs_path_t * vpath)
+undelfs_opendir (const vfs_path_t *vpath)
 {
     char *file, *f = NULL;
     const char *class_name;
@@ -430,7 +430,7 @@ undelfs_closedir (void *vfs_info)
 /* We do not support lseek */
 
 static void *
-undelfs_open (const vfs_path_t * vpath, int flags, mode_t mode)
+undelfs_open (const vfs_path_t *vpath, int flags, mode_t mode)
 {
     char *file, *f = NULL;
     ext2_ino_t inode, i;
@@ -505,7 +505,7 @@ undelfs_close (void *vfs_info)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-undelfs_dump_read (ext2_filsys param_fs, blk_t * blocknr, int blockcnt, void *private)
+undelfs_dump_read (ext2_filsys param_fs, blk_t *blocknr, int blockcnt, void *private)
 {
     int copy_count;
     undelfs_file *p = (undelfs_file *) private;
@@ -643,7 +643,7 @@ undelfs_stat_int (int inode_index, struct stat *buf)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-undelfs_lstat (const vfs_path_t * vpath, struct stat *buf)
+undelfs_lstat (const vfs_path_t *vpath, struct stat *buf)
 {
     int inode_index;
     char *file, *f = NULL;
@@ -698,7 +698,7 @@ undelfs_fstat (void *vfs_info, struct stat *buf)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-undelfs_chdir (const vfs_path_t * vpath)
+undelfs_chdir (const vfs_path_t *vpath)
 {
     char *file, *f = NULL;
     int fd;
@@ -743,7 +743,7 @@ undelfs_lseek (void *vfs_info, off_t offset, int whence)
 /* --------------------------------------------------------------------------------------------- */
 
 static vfsid
-undelfs_getid (const vfs_path_t * vpath)
+undelfs_getid (const vfs_path_t *vpath)
 {
     char *fname = NULL, *fsname;
     gboolean ok;

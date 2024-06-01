@@ -107,7 +107,7 @@ void file_filter_clear (file_filter_t * filter);
 /*** inline functions ****************************************************************************/
 
 static inline gboolean
-link_isdir (const file_entry_t * file)
+link_isdir (const file_entry_t *file)
 {
     return (file->f.link_to_dir != 0);
 }

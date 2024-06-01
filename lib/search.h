@@ -173,14 +173,14 @@ gboolean mc_search_run (mc_search_t * mc_search, const void *user_data, gsize st
 
 gboolean mc_search_is_type_avail (mc_search_type_t search_type);
 
-const mc_search_type_str_t *mc_search_types_list_get (size_t * num);
+const mc_search_type_str_t *mc_search_types_list_get (size_t *num);
 
 GString *mc_search_prepare_replace_str (mc_search_t * mc_search, GString * replace_str);
 char *mc_search_prepare_replace_str2 (mc_search_t * lc_mc_search, const char *replace_str);
 
 gboolean mc_search_is_fixed_search_str (const mc_search_t * lc_mc_search);
 
-gchar **mc_search_get_types_strings_array (size_t * num);
+gchar **mc_search_get_types_strings_array (size_t *num);
 
 gboolean mc_search (const gchar * pattern, const gchar * pattern_charset, const gchar * str,
                     mc_search_type_t type);

@@ -232,7 +232,7 @@ panel_empty_new (const char *panel_name)
  */
 
 static inline WPanel *
-panel_with_dir_new (const char *panel_name, const vfs_path_t * vpath)
+panel_with_dir_new (const char *panel_name, const vfs_path_t *vpath)
 {
     /* Unknown sizes of the panel at startup */
     WRect r = { 0, 0, 1, 1 };
@@ -267,7 +267,7 @@ panel_new (const char *panel_name)
  */
 
 static inline WPanel *
-panel_sized_new (const char *panel_name, const WRect * r)
+panel_sized_new (const char *panel_name, const WRect *r)
 {
     return panel_sized_with_dir_new (panel_name, r, NULL);
 }
@@ -275,7 +275,7 @@ panel_sized_new (const char *panel_name, const WRect * r)
 /* --------------------------------------------------------------------------------------------- */
 
 static inline file_entry_t *
-panel_current_entry (const WPanel * panel)
+panel_current_entry (const WPanel *panel)
 {
     return &(panel->dir.list[panel->current]);
 }

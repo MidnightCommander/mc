@@ -101,7 +101,7 @@ str_test_not_convert (const char *enc)
 /* --------------------------------------------------------------------------------------------- */
 
 static estr_t
-_str_convert (GIConv coder, const char *string, int size, GString * buffer)
+_str_convert (GIConv coder, const char *string, int size, GString *buffer)
 {
     estr_t state = ESTR_SUCCESS;
     gssize left;
@@ -281,7 +281,7 @@ str_close_conv (GIConv conv)
 /* --------------------------------------------------------------------------------------------- */
 
 estr_t
-str_convert (GIConv coder, const char *string, GString * buffer)
+str_convert (GIConv coder, const char *string, GString *buffer)
 {
     return _str_convert (coder, string, -1, buffer);
 }
@@ -289,7 +289,7 @@ str_convert (GIConv coder, const char *string, GString * buffer)
 /* --------------------------------------------------------------------------------------------- */
 
 estr_t
-str_nconvert (GIConv coder, const char *string, int size, GString * buffer)
+str_nconvert (GIConv coder, const char *string, int size, GString *buffer)
 {
     return _str_convert (coder, string, size, buffer);
 }
@@ -297,7 +297,7 @@ str_nconvert (GIConv coder, const char *string, int size, GString * buffer)
 /* --------------------------------------------------------------------------------------------- */
 
 gchar *
-str_conv_gerror_message (GError * mcerror, const char *def_msg)
+str_conv_gerror_message (GError *mcerror, const char *def_msg)
 {
     return used_class.conv_gerror_message (mcerror, def_msg);
 }
@@ -305,7 +305,7 @@ str_conv_gerror_message (GError * mcerror, const char *def_msg)
 /* --------------------------------------------------------------------------------------------- */
 
 estr_t
-str_vfs_convert_from (GIConv coder, const char *string, GString * buffer)
+str_vfs_convert_from (GIConv coder, const char *string, GString *buffer)
 {
     estr_t result = ESTR_SUCCESS;
 
@@ -320,7 +320,7 @@ str_vfs_convert_from (GIConv coder, const char *string, GString * buffer)
 /* --------------------------------------------------------------------------------------------- */
 
 estr_t
-str_vfs_convert_to (GIConv coder, const char *string, int size, GString * buffer)
+str_vfs_convert_to (GIConv coder, const char *string, int size, GString *buffer)
 {
     return used_class.vfs_convert_to (coder, string, size, buffer);
 }
@@ -328,7 +328,7 @@ str_vfs_convert_to (GIConv coder, const char *string, int size, GString * buffer
 /* --------------------------------------------------------------------------------------------- */
 
 void
-str_printf (GString * buffer, const char *format, ...)
+str_printf (GString *buffer, const char *format, ...)
 {
     va_list ap;
     va_start (ap, format);
@@ -340,7 +340,7 @@ str_printf (GString * buffer, const char *format, ...)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-str_insert_replace_char (GString * buffer)
+str_insert_replace_char (GString *buffer)
 {
     used_class.insert_replace_char (buffer);
 }
@@ -749,7 +749,7 @@ str_isdigit (const char *ch)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-str_toupper (const char *ch, char **out, size_t * remain)
+str_toupper (const char *ch, char **out, size_t *remain)
 {
     return used_class.char_toupper (ch, out, remain);
 }
@@ -757,7 +757,7 @@ str_toupper (const char *ch, char **out, size_t * remain)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-str_tolower (const char *ch, char **out, size_t * remain)
+str_tolower (const char *ch, char **out, size_t *remain)
 {
     return used_class.char_tolower (ch, out, remain);
 }
@@ -987,7 +987,7 @@ strrstr_skip_count (const char *haystack, const char *needle, size_t skip_count)
  */
 
 uintmax_t
-parse_integer (const char *str, gboolean * invalid)
+parse_integer (const char *str, gboolean *invalid)
 {
     uintmax_t n;
     char *suffix;

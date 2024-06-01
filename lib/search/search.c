@@ -64,7 +64,7 @@ static const mc_search_type_str_t mc_search__list_types[] = {
 /* --------------------------------------------------------------------------------------------- */
 
 static mc_search_cond_t *
-mc_search__cond_struct_new (mc_search_t * lc_mc_search, const GString * str, const char *charset)
+mc_search__cond_struct_new (mc_search_t *lc_mc_search, const GString *str, const char *charset)
 {
     mc_search_cond_t *mc_search_cond;
 
@@ -133,7 +133,7 @@ mc_search__cond_struct_free (gpointer data)
  */
 
 mc_search_t *
-mc_search_new (const gchar * original, const gchar * original_charset)
+mc_search_new (const gchar *original, const gchar *original_charset)
 {
     if (original == NULL)
         return NULL;
@@ -152,7 +152,7 @@ mc_search_new (const gchar * original, const gchar * original_charset)
  */
 
 mc_search_t *
-mc_search_new_len (const gchar * original, gsize original_len, const gchar * original_charset)
+mc_search_new_len (const gchar *original, gsize original_len, const gchar *original_charset)
 {
     mc_search_t *lc_mc_search;
 
@@ -175,7 +175,7 @@ mc_search_new_len (const gchar * original, gsize original_len, const gchar * ori
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mc_search_free (mc_search_t * lc_mc_search)
+mc_search_free (mc_search_t *lc_mc_search)
 {
     if (lc_mc_search == NULL)
         return;
@@ -205,7 +205,7 @@ mc_search_free (mc_search_t * lc_mc_search)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mc_search_prepare (mc_search_t * lc_mc_search)
+mc_search_prepare (mc_search_t *lc_mc_search)
 {
     GPtrArray *ret;
 
@@ -272,8 +272,8 @@ mc_search_prepare (mc_search_t * lc_mc_search)
  *     is in lc_mc_search->error_str.
  */
 gboolean
-mc_search_run (mc_search_t * lc_mc_search, const void *user_data,
-               gsize start_search, gsize end_search, gsize * found_len)
+mc_search_run (mc_search_t *lc_mc_search, const void *user_data,
+               gsize start_search, gsize end_search, gsize *found_len)
 {
     gboolean ret = FALSE;
 
@@ -338,7 +338,7 @@ mc_search_is_type_avail (mc_search_type_t search_type)
 /* --------------------------------------------------------------------------------------------- */
 
 const mc_search_type_str_t *
-mc_search_types_list_get (size_t * num)
+mc_search_types_list_get (size_t *num)
 {
     /* don't count last NULL item */
     if (num != NULL)
@@ -350,7 +350,7 @@ mc_search_types_list_get (size_t * num)
 /* --------------------------------------------------------------------------------------------- */
 
 GString *
-mc_search_prepare_replace_str (mc_search_t * lc_mc_search, GString * replace_str)
+mc_search_prepare_replace_str (mc_search_t *lc_mc_search, GString *replace_str)
 {
     GString *ret;
 
@@ -384,7 +384,7 @@ mc_search_prepare_replace_str (mc_search_t * lc_mc_search, GString * replace_str
 /* --------------------------------------------------------------------------------------------- */
 
 char *
-mc_search_prepare_replace_str2 (mc_search_t * lc_mc_search, const char *replace_str)
+mc_search_prepare_replace_str2 (mc_search_t *lc_mc_search, const char *replace_str)
 {
     GString *ret;
     GString *replace_str2;
@@ -398,7 +398,7 @@ mc_search_prepare_replace_str2 (mc_search_t * lc_mc_search, const char *replace_
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mc_search_is_fixed_search_str (const mc_search_t * lc_mc_search)
+mc_search_is_fixed_search_str (const mc_search_t *lc_mc_search)
 {
     if (lc_mc_search == NULL)
         return FALSE;
@@ -424,7 +424,7 @@ mc_search_is_fixed_search_str (const mc_search_t * lc_mc_search)
  */
 
 gboolean
-mc_search (const gchar * pattern, const gchar * pattern_charset, const gchar * str,
+mc_search (const gchar *pattern, const gchar *pattern_charset, const gchar *str,
            mc_search_type_t type)
 {
     gboolean ret;
@@ -451,7 +451,7 @@ mc_search (const gchar * pattern, const gchar * pattern_charset, const gchar * s
 /* --------------------------------------------------------------------------------------------- */
 
 int
-mc_search_getstart_result_by_num (mc_search_t * lc_mc_search, int lc_index)
+mc_search_getstart_result_by_num (mc_search_t *lc_mc_search, int lc_index)
 {
     if (lc_mc_search == NULL)
         return 0;
@@ -473,7 +473,7 @@ mc_search_getstart_result_by_num (mc_search_t * lc_mc_search, int lc_index)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-mc_search_getend_result_by_num (mc_search_t * lc_mc_search, int lc_index)
+mc_search_getend_result_by_num (mc_search_t *lc_mc_search, int lc_index)
 {
     if (lc_mc_search == NULL)
         return 0;
@@ -502,7 +502,7 @@ mc_search_getend_result_by_num (mc_search_t * lc_mc_search, int lc_index)
  */
 
 void
-mc_search_set_error (mc_search_t * lc_mc_search, mc_search_error_t code, const gchar * format, ...)
+mc_search_set_error (mc_search_t *lc_mc_search, mc_search_error_t code, const gchar *format, ...)
 {
     lc_mc_search->error = code;
 

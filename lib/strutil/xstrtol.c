@@ -48,7 +48,7 @@
 /* --------------------------------------------------------------------------------------------- */
 
 static strtol_error_t
-bkm_scale (uintmax_t * x, int scale_factor)
+bkm_scale (uintmax_t *x, int scale_factor)
 {
     if (UINTMAX_MAX / scale_factor < *x)
     {
@@ -63,7 +63,7 @@ bkm_scale (uintmax_t * x, int scale_factor)
 /* --------------------------------------------------------------------------------------------- */
 
 static strtol_error_t
-bkm_scale_by_power (uintmax_t * x, int base, int power)
+bkm_scale_by_power (uintmax_t *x, int base, int power)
 {
     strtol_error_t err = LONGINT_OK;
     while (power-- != 0)
@@ -76,7 +76,7 @@ bkm_scale_by_power (uintmax_t * x, int base, int power)
 /* --------------------------------------------------------------------------------------------- */
 
 strtol_error_t
-xstrtoumax (const char *s, char **ptr, int base, uintmax_t * val, const char *valid_suffixes)
+xstrtoumax (const char *s, char **ptr, int base, uintmax_t *val, const char *valid_suffixes)
 {
     char *t_ptr;
     char **p;

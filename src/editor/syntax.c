@@ -186,7 +186,7 @@ mc_defines_destroy (gpointer key, gpointer value, gpointer data)
 /** Completely destroys the defines tree */
 
 static void
-destroy_defines (GTree ** defines)
+destroy_defines (GTree **defines)
 {
     g_tree_foreach (*defines, mc_defines_destroy, NULL);
     g_tree_destroy (*defines);
@@ -197,7 +197,7 @@ destroy_defines (GTree ** defines)
 
 /** Wrapper for case insensitive mode */
 inline static int
-xx_tolower (const WEdit * edit, int c)
+xx_tolower (const WEdit *edit, int c)
 {
     return edit->is_case_insensitive ? tolower (c) : c;
 }
@@ -205,7 +205,7 @@ xx_tolower (const WEdit * edit, int c)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-subst_defines (GTree * defines, char **argv, char **argv_end)
+subst_defines (GTree *defines, char **argv, char **argv_end)
 {
     for (; *argv != NULL && argv < argv_end; argv++)
     {
@@ -242,7 +242,7 @@ subst_defines (GTree * defines, char **argv, char **argv_end)
 /* --------------------------------------------------------------------------------------------- */
 
 static off_t
-compare_word_to_right (const WEdit * edit, off_t i, const GString * text,
+compare_word_to_right (const WEdit *edit, off_t i, const GString *text,
                        const char *whole_left, const char *whole_right, gboolean line_start)
 {
     const unsigned char *p, *q;
@@ -359,7 +359,7 @@ compare_word_to_right (const WEdit * edit, off_t i, const GString * text,
 /* --------------------------------------------------------------------------------------------- */
 
 static const char *
-xx_strchr (const WEdit * edit, const unsigned char *s, int char_byte)
+xx_strchr (const WEdit *edit, const unsigned char *s, int char_byte)
 {
     while (*s >= '\005' && xx_tolower (edit, *s) != char_byte)
         s++;
@@ -370,7 +370,7 @@ xx_strchr (const WEdit * edit, const unsigned char *s, int char_byte)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-apply_rules_going_right (WEdit * edit, off_t i)
+apply_rules_going_right (WEdit *edit, off_t i)
 {
     context_rule_t *r;
     int c;
@@ -586,7 +586,7 @@ apply_rules_going_right (WEdit * edit, off_t i)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-edit_get_rule (WEdit * edit, off_t byte_index)
+edit_get_rule (WEdit *edit, off_t byte_index)
 {
     off_t i;
 
@@ -646,7 +646,7 @@ edit_get_rule (WEdit * edit, off_t byte_index)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-translate_rule_to_color (const WEdit * edit, const edit_syntax_rule_t * rule)
+translate_rule_to_color (const WEdit *edit, const edit_syntax_rule_t *rule)
 {
     syntax_keyword_t *k;
     context_rule_t *r;
@@ -665,7 +665,7 @@ translate_rule_to_color (const WEdit * edit, const edit_syntax_rule_t * rule)
  */
 
 static size_t
-read_one_line (char **line, FILE * f)
+read_one_line (char **line, FILE *f)
 {
     GString *p;
     size_t r = 0;
@@ -812,7 +812,7 @@ get_args (char *l, char **args, int args_size)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-this_try_alloc_color_pair (tty_color_pair_t * color)
+this_try_alloc_color_pair (tty_color_pair_t *color)
 {
     char f[80], b[80], a[80], *p;
 
@@ -917,7 +917,7 @@ open_include_file (const char *filename)
 /* --------------------------------------------------------------------------------------------- */
 
 inline static void
-xx_lowerize_line (WEdit * edit, char *line, size_t len)
+xx_lowerize_line (WEdit *edit, char *line, size_t len)
 {
     if (edit->is_case_insensitive)
     {
@@ -932,7 +932,7 @@ xx_lowerize_line (WEdit * edit, char *line, size_t len)
 /** returns line number on error */
 
 static int
-edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
+edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int args_size)
 {
     FILE *g = NULL;
     tty_color_pair_t color;
@@ -1265,7 +1265,7 @@ edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
 
 /* returns -1 on file error, line number on error in file syntax */
 static int
-edit_read_syntax_file (WEdit * edit, GPtrArray * pnames, const char *syntax_file,
+edit_read_syntax_file (WEdit *edit, GPtrArray *pnames, const char *syntax_file,
                        const char *editor_file, const char *first_line, const char *type)
 {
     FILE *f, *g = NULL;
@@ -1394,7 +1394,7 @@ edit_read_syntax_file (WEdit * edit, GPtrArray * pnames, const char *syntax_file
 /* --------------------------------------------------------------------------------------------- */
 
 static const char *
-get_first_editor_line (WEdit * edit)
+get_first_editor_line (WEdit *edit)
 {
     static char s[256];
 
@@ -1431,7 +1431,7 @@ pstrcmp (const void *p1, const void *p2)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-exec_edit_syntax_dialog (const GPtrArray * names, const char *current_syntax)
+exec_edit_syntax_dialog (const GPtrArray *names, const char *current_syntax)
 {
     size_t i;
     Listbox *syntaxlist;
@@ -1459,7 +1459,7 @@ exec_edit_syntax_dialog (const GPtrArray * names, const char *current_syntax)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-edit_get_syntax_color (WEdit * edit, off_t byte_index)
+edit_get_syntax_color (WEdit *edit, off_t byte_index)
 {
     if (!tty_use_colors ())
         return 0;
@@ -1476,7 +1476,7 @@ edit_get_syntax_color (WEdit * edit, off_t byte_index)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-edit_free_syntax_rules (WEdit * edit)
+edit_free_syntax_rules (WEdit *edit)
 {
     if (edit == NULL)
         return;
@@ -1504,7 +1504,7 @@ edit_free_syntax_rules (WEdit * edit)
  * type must be edit->syntax_type or NULL
  */
 void
-edit_load_syntax (WEdit * edit, GPtrArray * pnames, const char *type)
+edit_load_syntax (WEdit *edit, GPtrArray *pnames, const char *type)
 {
     int r;
     char *f = NULL;
@@ -1558,7 +1558,7 @@ edit_load_syntax (WEdit * edit, GPtrArray * pnames, const char *type)
 /* --------------------------------------------------------------------------------------------- */
 
 const char *
-edit_get_syntax_type (const WEdit * edit)
+edit_get_syntax_type (const WEdit *edit)
 {
     return edit->syntax_type;
 }
@@ -1566,7 +1566,7 @@ edit_get_syntax_type (const WEdit * edit)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-edit_syntax_dialog (WEdit * edit)
+edit_syntax_dialog (WEdit *edit)
 {
     GPtrArray *names;
     int syntax;

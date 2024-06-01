@@ -99,7 +99,7 @@ file_history_list_read (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-file_history_list_write (const GList * file_list)
+file_history_list_write (const GList *file_list)
 {
     char *fn;
     FILE *f;
@@ -149,7 +149,7 @@ file_history_list_write (const GList * file_list)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-file_history_create_item (history_descriptor_t * hd, void *data)
+file_history_create_item (history_descriptor_t *hd, void *data)
 {
     file_history_data_t *fhd = (file_history_data_t *) data;
     size_t width;
@@ -165,7 +165,7 @@ file_history_create_item (history_descriptor_t * hd, void *data)
 /* --------------------------------------------------------------------------------------------- */
 
 static void *
-file_history_release_item (history_descriptor_t * hd, WLEntry * le)
+file_history_release_item (history_descriptor_t *hd, WLEntry *le)
 {
     file_history_data_t *fhd;
 
@@ -205,7 +205,7 @@ file_history_free_item (void *data)
  * @return name of selected file, A newly allocated string.
  */
 char *
-show_file_history (const Widget * w, int *action)
+show_file_history (const Widget *w, int *action)
 {
     GList *file_list;
     size_t len;

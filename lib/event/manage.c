@@ -57,8 +57,8 @@ mc_event_group_destroy_value (gpointer data)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mc_event_add (const gchar * event_group_name, const gchar * event_name,
-              mc_event_callback_func_t event_callback, gpointer event_init_data, GError ** mcerror)
+mc_event_add (const gchar *event_group_name, const gchar *event_name,
+              mc_event_callback_func_t event_callback, gpointer event_init_data, GError **mcerror)
 {
     GTree *event_group;
     GPtrArray *callbacks;
@@ -95,7 +95,7 @@ mc_event_add (const gchar * event_group_name, const gchar * event_name,
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mc_event_del (const gchar * event_group_name, const gchar * event_name,
+mc_event_del (const gchar *event_group_name, const gchar *event_name,
               mc_event_callback_func_t event_callback, gpointer event_init_data)
 {
     GTree *event_group;
@@ -122,7 +122,7 @@ mc_event_del (const gchar * event_group_name, const gchar * event_name,
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mc_event_destroy (const gchar * event_group_name, const gchar * event_name)
+mc_event_destroy (const gchar *event_group_name, const gchar *event_name)
 {
     GTree *event_group;
 
@@ -136,7 +136,7 @@ mc_event_destroy (const gchar * event_group_name, const gchar * event_name)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mc_event_group_del (const gchar * event_group_name)
+mc_event_group_del (const gchar *event_group_name)
 {
 
     if (mc_event_grouplist != NULL && event_group_name != NULL)
@@ -146,8 +146,8 @@ mc_event_group_del (const gchar * event_group_name)
 /* --------------------------------------------------------------------------------------------- */
 
 GTree *
-mc_event_get_event_group_by_name (const gchar * event_group_name, gboolean create_new,
-                                  GError ** mcerror)
+mc_event_get_event_group_by_name (const gchar *event_group_name, gboolean create_new,
+                                  GError **mcerror)
 {
     GTree *event_group;
 
@@ -175,8 +175,8 @@ mc_event_get_event_group_by_name (const gchar * event_group_name, gboolean creat
 /* --------------------------------------------------------------------------------------------- */
 
 GPtrArray *
-mc_event_get_event_by_name (GTree * event_group, const gchar * event_name, gboolean create_new,
-                            GError ** mcerror)
+mc_event_get_event_by_name (GTree *event_group, const gchar *event_name, gboolean create_new,
+                            GError **mcerror)
 {
     GPtrArray *callbacks;
 
@@ -199,7 +199,7 @@ mc_event_get_event_by_name (GTree * event_group, const gchar * event_name, gbool
 /* --------------------------------------------------------------------------------------------- */
 
 mc_event_callback_t *
-mc_event_is_callback_in_array (GPtrArray * callbacks, mc_event_callback_func_t event_callback,
+mc_event_is_callback_in_array (GPtrArray *callbacks, mc_event_callback_func_t event_callback,
                                gpointer event_init_data)
 {
     guint array_index;

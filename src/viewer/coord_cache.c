@@ -81,7 +81,7 @@ typedef gboolean (*cmp_func_t) (const coord_cache_entry_t * a, const coord_cache
 
 /* insert new cache entry into the cache */
 static inline void
-mcview_ccache_add_entry (GPtrArray * cache, const coord_cache_entry_t * entry)
+mcview_ccache_add_entry (GPtrArray *cache, const coord_cache_entry_t *entry)
 {
 #if GLIB_CHECK_VERSION (2, 68, 0)
     g_ptr_array_add (cache, g_memdup2 (entry, sizeof (*entry)));
@@ -93,7 +93,7 @@ mcview_ccache_add_entry (GPtrArray * cache, const coord_cache_entry_t * entry)
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-mcview_coord_cache_entry_less_offset (const coord_cache_entry_t * a, const coord_cache_entry_t * b)
+mcview_coord_cache_entry_less_offset (const coord_cache_entry_t *a, const coord_cache_entry_t *b)
 {
     return (a->cc_offset < b->cc_offset);
 }
@@ -101,7 +101,7 @@ mcview_coord_cache_entry_less_offset (const coord_cache_entry_t * a, const coord
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-mcview_coord_cache_entry_less_plain (const coord_cache_entry_t * a, const coord_cache_entry_t * b)
+mcview_coord_cache_entry_less_plain (const coord_cache_entry_t *a, const coord_cache_entry_t *b)
 {
     if (a->cc_line < b->cc_line)
         return TRUE;
@@ -115,7 +115,7 @@ mcview_coord_cache_entry_less_plain (const coord_cache_entry_t * a, const coord_
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-mcview_coord_cache_entry_less_nroff (const coord_cache_entry_t * a, const coord_cache_entry_t * b)
+mcview_coord_cache_entry_less_nroff (const coord_cache_entry_t *a, const coord_cache_entry_t *b)
 {
     if (a->cc_line < b->cc_line)
         return TRUE;
@@ -131,7 +131,7 @@ mcview_coord_cache_entry_less_nroff (const coord_cache_entry_t * a, const coord_
  * smaller than ''coord'', according to the criterion ''sort_by''. */
 
 static inline size_t
-mcview_ccache_find (WView * view, const coord_cache_entry_t * coord, cmp_func_t cmp_func)
+mcview_ccache_find (WView *view, const coord_cache_entry_t *coord, cmp_func_t cmp_func)
 {
     size_t base = 0;
     size_t limit = view->coord_cache->len;
@@ -167,7 +167,7 @@ mcview_ccache_find (WView * view, const coord_cache_entry_t * coord, cmp_func_t 
 #ifdef MC_ENABLE_DEBUGGING_CODE
 
 void
-mcview_ccache_dump (WView * view)
+mcview_ccache_dump (WView *view)
 {
     FILE *f;
     off_t offset, line, column, nextline_offset, filesize;
@@ -241,7 +241,7 @@ mcview_ccache_dump (WView * view)
  */
 
 void
-mcview_ccache_lookup (WView * view, coord_cache_entry_t * coord, enum ccache_type lookup_what)
+mcview_ccache_lookup (WView *view, coord_cache_entry_t *coord, enum ccache_type lookup_what)
 {
     size_t i;
     GPtrArray *cache;

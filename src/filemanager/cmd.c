@@ -129,7 +129,7 @@ static const char *machine_str = N_("Enter machine name (F1 for details):");
  * If @plain_view is TRUE, force internal viewer and raw mode (used for F13).
  */
 static void
-do_view_cmd (WPanel * panel, gboolean plain_view)
+do_view_cmd (WPanel *panel, gboolean plain_view)
 {
     const file_entry_t *fe;
 
@@ -165,7 +165,7 @@ do_view_cmd (WPanel * panel, gboolean plain_view)
 /* --------------------------------------------------------------------------------------------- */
 
 static inline void
-do_edit (const vfs_path_t * what_vpath)
+do_edit (const vfs_path_t *what_vpath)
 {
     edit_file_at_line (what_vpath, use_internal_edit, 0);
 }
@@ -173,7 +173,7 @@ do_edit (const vfs_path_t * what_vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-compare_files (const vfs_path_t * vpath1, const vfs_path_t * vpath2, off_t size)
+compare_files (const vfs_path_t *vpath1, const vfs_path_t *vpath2, off_t size)
 {
     int file1;
     int result = -1;            /* Different by default */
@@ -235,7 +235,7 @@ compare_files (const vfs_path_t * vpath1, const vfs_path_t * vpath2, off_t size)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-compare_dir (WPanel * panel, const WPanel * other, enum CompareMode mode)
+compare_dir (WPanel *panel, const WPanel *other, enum CompareMode mode)
 {
     int i, j;
 
@@ -464,7 +464,7 @@ nice_cd (const char *text, const char *xtext, const char *help,
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-configure_panel_listing (WPanel * p, int list_format, int brief_cols, gboolean use_msformat,
+configure_panel_listing (WPanel *p, int list_format, int brief_cols, gboolean use_msformat,
                          char **user, char **status)
 {
     p->user_mini_status = use_msformat;
@@ -504,7 +504,7 @@ switch_to_listing (int panel_index)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-view_file_at_line (const vfs_path_t * filename_vpath, gboolean plain_view, gboolean internal,
+view_file_at_line (const vfs_path_t *filename_vpath, gboolean plain_view, gboolean internal,
                    long start_line, off_t search_start, off_t search_end)
 {
     gboolean ret = TRUE;
@@ -584,7 +584,7 @@ view_file_at_line (const vfs_path_t * filename_vpath, gboolean plain_view, gbool
  */
 
 gboolean
-view_file (const vfs_path_t * filename_vpath, gboolean plain_view, gboolean internal)
+view_file (const vfs_path_t *filename_vpath, gboolean plain_view, gboolean internal)
 {
     return view_file_at_line (filename_vpath, plain_view, internal, 0, 0, 0);
 }
@@ -594,7 +594,7 @@ view_file (const vfs_path_t * filename_vpath, gboolean plain_view, gboolean inte
 /** Run user's preferred viewer on the current file */
 
 void
-view_cmd (WPanel * panel)
+view_cmd (WPanel *panel)
 {
     do_view_cmd (panel, FALSE);
 }
@@ -603,7 +603,7 @@ view_cmd (WPanel * panel)
 /** Ask for file and run user's preferred viewer on it */
 
 void
-view_file_cmd (const WPanel * panel)
+view_file_cmd (const WPanel *panel)
 {
     char *filename;
     vfs_path_t *vpath;
@@ -624,7 +624,7 @@ view_file_cmd (const WPanel * panel)
 /* --------------------------------------------------------------------------------------------- */
 /** Run plain internal viewer on the current file */
 void
-view_raw_cmd (WPanel * panel)
+view_raw_cmd (WPanel *panel)
 {
     do_view_cmd (panel, TRUE);
 }
@@ -632,7 +632,7 @@ view_raw_cmd (WPanel * panel)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-view_filtered_cmd (const WPanel * panel)
+view_filtered_cmd (const WPanel *panel)
 {
     char *command;
     const char *initial_command;
@@ -659,7 +659,7 @@ view_filtered_cmd (const WPanel * panel)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-edit_file_at_line (const vfs_path_t * what_vpath, gboolean internal, long start_line)
+edit_file_at_line (const vfs_path_t *what_vpath, gboolean internal, long start_line)
 {
 
 #ifdef USE_INTERNAL_EDIT
@@ -700,7 +700,7 @@ edit_file_at_line (const vfs_path_t * what_vpath, gboolean internal, long start_
 /* --------------------------------------------------------------------------------------------- */
 
 void
-edit_cmd (const WPanel * panel)
+edit_cmd (const WPanel *panel)
 {
     vfs_path_t *fname;
 
@@ -714,7 +714,7 @@ edit_cmd (const WPanel * panel)
 
 #ifdef USE_INTERNAL_EDIT
 void
-edit_cmd_force_internal (const WPanel * panel)
+edit_cmd_force_internal (const WPanel *panel)
 {
     vfs_path_t *fname;
 
@@ -758,7 +758,7 @@ edit_cmd_new (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mkdir_cmd (WPanel * panel)
+mkdir_cmd (WPanel *panel)
 {
     const file_entry_t *fe;
     char *dir;
@@ -968,7 +968,7 @@ edit_fhl_cmd (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-hotlist_cmd (WPanel * panel)
+hotlist_cmd (WPanel *panel)
 {
     char *target;
 
@@ -1002,7 +1002,7 @@ hotlist_cmd (WPanel * panel)
 
 #ifdef ENABLE_VFS
 void
-vfs_list (WPanel * panel)
+vfs_list (WPanel *panel)
 {
     char *target;
     vfs_path_t *target_vpath;
@@ -1228,7 +1228,7 @@ undelete_cmd (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-quick_cd_cmd (WPanel * panel)
+quick_cd_cmd (WPanel *panel)
 {
     char *p;
 
@@ -1250,7 +1250,7 @@ quick_cd_cmd (WPanel * panel)
  */
 
 void
-smart_dirsize_cmd (WPanel * panel)
+smart_dirsize_cmd (WPanel *panel)
 {
     const file_entry_t *entry;
 
@@ -1264,7 +1264,7 @@ smart_dirsize_cmd (WPanel * panel)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-single_dirsize_cmd (WPanel * panel)
+single_dirsize_cmd (WPanel *panel)
 {
     file_entry_t *entry;
 
@@ -1309,7 +1309,7 @@ single_dirsize_cmd (WPanel * panel)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-dirsizes_cmd (WPanel * panel)
+dirsizes_cmd (WPanel *panel)
 {
     int i;
     dirsize_status_msg_t dsm;

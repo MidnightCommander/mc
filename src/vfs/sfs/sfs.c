@@ -132,7 +132,7 @@ cachedfile_compare (const void *a, const void *b)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-sfs_vfmake (const vfs_path_t * vpath, vfs_path_t * cache_vpath)
+sfs_vfmake (const vfs_path_t *vpath, vfs_path_t *cache_vpath)
 {
     int w;
     char pad[10240];
@@ -250,7 +250,7 @@ sfs_vfmake (const vfs_path_t * vpath, vfs_path_t * cache_vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 static const char *
-sfs_redirect (const vfs_path_t * vpath)
+sfs_redirect (const vfs_path_t *vpath)
 {
     GSList *cur;
     cachedfile *cf;
@@ -292,7 +292,7 @@ sfs_redirect (const vfs_path_t * vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 static void *
-sfs_open (const vfs_path_t * vpath /*struct vfs_class *me, const char *path */ , int flags,
+sfs_open (const vfs_path_t *vpath /*struct vfs_class *me, const char *path */ , int flags,
           mode_t mode)
 {
     int *info;
@@ -311,7 +311,7 @@ sfs_open (const vfs_path_t * vpath /*struct vfs_class *me, const char *path */ ,
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-sfs_stat (const vfs_path_t * vpath, struct stat *buf)
+sfs_stat (const vfs_path_t *vpath, struct stat *buf)
 {
     return stat (sfs_redirect (vpath), buf);
 }
@@ -319,7 +319,7 @@ sfs_stat (const vfs_path_t * vpath, struct stat *buf)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-sfs_lstat (const vfs_path_t * vpath, struct stat *buf)
+sfs_lstat (const vfs_path_t *vpath, struct stat *buf)
 {
 #ifndef HAVE_STATLSTAT
     return lstat (sfs_redirect (vpath), buf);
@@ -331,7 +331,7 @@ sfs_lstat (const vfs_path_t * vpath, struct stat *buf)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-sfs_chmod (const vfs_path_t * vpath, mode_t mode)
+sfs_chmod (const vfs_path_t *vpath, mode_t mode)
 {
     return chmod (sfs_redirect (vpath), mode);
 }
@@ -339,7 +339,7 @@ sfs_chmod (const vfs_path_t * vpath, mode_t mode)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-sfs_chown (const vfs_path_t * vpath, uid_t owner, gid_t group)
+sfs_chown (const vfs_path_t *vpath, uid_t owner, gid_t group)
 {
     return chown (sfs_redirect (vpath), owner, group);
 }
@@ -347,7 +347,7 @@ sfs_chown (const vfs_path_t * vpath, uid_t owner, gid_t group)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-sfs_utime (const vfs_path_t * vpath, mc_timesbuf_t * times)
+sfs_utime (const vfs_path_t *vpath, mc_timesbuf_t *times)
 {
 #ifdef HAVE_UTIMENSAT
     return utimensat (AT_FDCWD, sfs_redirect (vpath), *times, 0);
@@ -359,7 +359,7 @@ sfs_utime (const vfs_path_t * vpath, mc_timesbuf_t * times)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-sfs_readlink (const vfs_path_t * vpath, char *buf, size_t size)
+sfs_readlink (const vfs_path_t *vpath, char *buf, size_t size)
 {
     return readlink (sfs_redirect (vpath), buf, size);
 }
@@ -367,7 +367,7 @@ sfs_readlink (const vfs_path_t * vpath, char *buf, size_t size)
 /* --------------------------------------------------------------------------------------------- */
 
 static vfsid
-sfs_getid (const vfs_path_t * vpath)
+sfs_getid (const vfs_path_t *vpath)
 {
     GSList *cur;
 
@@ -425,7 +425,7 @@ sfs_nothingisopen (vfsid id)
 /* --------------------------------------------------------------------------------------------- */
 
 static vfs_path_t *
-sfs_getlocalcopy (const vfs_path_t * vpath)
+sfs_getlocalcopy (const vfs_path_t *vpath)
 {
     return vfs_path_from_str (sfs_redirect (vpath));
 }
@@ -433,7 +433,7 @@ sfs_getlocalcopy (const vfs_path_t * vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-sfs_ungetlocalcopy (const vfs_path_t * vpath, const vfs_path_t * local, gboolean has_changed)
+sfs_ungetlocalcopy (const vfs_path_t *vpath, const vfs_path_t *local, gboolean has_changed)
 {
     (void) vpath;
     (void) local;

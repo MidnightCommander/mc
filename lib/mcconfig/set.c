@@ -42,7 +42,7 @@
 /* --------------------------------------------------------------------------------------------- */
 
 static gchar *
-mc_config_normalize_before_save (const gchar * value)
+mc_config_normalize_before_save (const gchar *value)
 {
     GIConv conv;
     GString *buffer;
@@ -74,8 +74,8 @@ mc_config_normalize_before_save (const gchar * value)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mc_config_set_string_raw (mc_config_t * mc_config, const gchar * group,
-                          const gchar * param, const gchar * value)
+mc_config_set_string_raw (mc_config_t *mc_config, const gchar *group,
+                          const gchar *param, const gchar *value)
 {
     if (mc_config != NULL && group != NULL && param != NULL && value != NULL)
         g_key_file_set_string (mc_config->handle, group, param, value);
@@ -84,8 +84,8 @@ mc_config_set_string_raw (mc_config_t * mc_config, const gchar * group,
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mc_config_set_string_raw_value (mc_config_t * mc_config, const gchar * group,
-                                const gchar * param, const gchar * value)
+mc_config_set_string_raw_value (mc_config_t *mc_config, const gchar *group,
+                                const gchar *param, const gchar *value)
 {
     if (mc_config != NULL && group != NULL && param != NULL && value != NULL)
         g_key_file_set_value (mc_config->handle, group, param, value);
@@ -94,8 +94,8 @@ mc_config_set_string_raw_value (mc_config_t * mc_config, const gchar * group,
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mc_config_set_string (mc_config_t * mc_config, const gchar * group,
-                      const gchar * param, const gchar * value)
+mc_config_set_string (mc_config_t *mc_config, const gchar *group,
+                      const gchar *param, const gchar *value)
 {
     if (mc_config != NULL && group != NULL && param != NULL && value != NULL)
     {
@@ -110,8 +110,7 @@ mc_config_set_string (mc_config_t * mc_config, const gchar * group,
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mc_config_set_bool (mc_config_t * mc_config, const gchar * group,
-                    const gchar * param, gboolean value)
+mc_config_set_bool (mc_config_t *mc_config, const gchar *group, const gchar *param, gboolean value)
 {
     if (mc_config != NULL && group != NULL && param != NULL)
         g_key_file_set_boolean (mc_config->handle, group, param, value);
@@ -120,7 +119,7 @@ mc_config_set_bool (mc_config_t * mc_config, const gchar * group,
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mc_config_set_int (mc_config_t * mc_config, const gchar * group, const gchar * param, int value)
+mc_config_set_int (mc_config_t *mc_config, const gchar *group, const gchar *param, int value)
 {
     if (mc_config != NULL && group != NULL && param != NULL)
         g_key_file_set_integer (mc_config->handle, group, param, value);
@@ -129,8 +128,8 @@ mc_config_set_int (mc_config_t * mc_config, const gchar * group, const gchar * p
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mc_config_set_string_list (mc_config_t * mc_config, const gchar * group,
-                           const gchar * param, const gchar * const value[], gsize length)
+mc_config_set_string_list (mc_config_t *mc_config, const gchar *group,
+                           const gchar *param, const gchar *const value[], gsize length)
 {
     if (mc_config != NULL && group != NULL && param != NULL && value != NULL && length != 0)
         g_key_file_set_string_list (mc_config->handle, group, param, value, length);
@@ -139,8 +138,8 @@ mc_config_set_string_list (mc_config_t * mc_config, const gchar * group,
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mc_config_set_bool_list (mc_config_t * mc_config, const gchar * group,
-                         const gchar * param, gboolean value[], gsize length)
+mc_config_set_bool_list (mc_config_t *mc_config, const gchar *group,
+                         const gchar *param, gboolean value[], gsize length)
 {
     if (mc_config != NULL && group != NULL && param != NULL && value != NULL && length != 0)
         g_key_file_set_boolean_list (mc_config->handle, group, param, value, length);
@@ -149,8 +148,8 @@ mc_config_set_bool_list (mc_config_t * mc_config, const gchar * group,
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mc_config_set_int_list (mc_config_t * mc_config, const gchar * group,
-                        const gchar * param, int value[], gsize length)
+mc_config_set_int_list (mc_config_t *mc_config, const gchar *group,
+                        const gchar *param, int value[], gsize length)
 {
     if (mc_config != NULL && group != NULL && param != NULL && value != NULL && length != 0)
         g_key_file_set_integer_list (mc_config->handle, group, param, value, length);

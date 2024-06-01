@@ -48,7 +48,7 @@
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-mc_config_new_or_override_file (mc_config_t * mc_config, const gchar * ini_path, GError ** mcerror)
+mc_config_new_or_override_file (mc_config_t *mc_config, const gchar *ini_path, GError **mcerror)
 {
     gchar *data, *written_data;
     gsize len, total_written;
@@ -104,7 +104,7 @@ mc_config_new_or_override_file (mc_config_t * mc_config, const gchar * ini_path,
 /* --------------------------------------------------------------------------------------------- */
 
 mc_config_t *
-mc_config_init (const gchar * ini_path, gboolean read_only)
+mc_config_init (const gchar *ini_path, gboolean read_only)
 {
     mc_config_t *mc_config;
     struct stat st;
@@ -148,7 +148,7 @@ mc_config_init (const gchar * ini_path, gboolean read_only)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mc_config_deinit (mc_config_t * mc_config)
+mc_config_deinit (mc_config_t *mc_config)
 {
     if (mc_config != NULL)
     {
@@ -161,7 +161,7 @@ mc_config_deinit (mc_config_t * mc_config)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mc_config_has_param (const mc_config_t * mc_config, const char *group, const gchar * param)
+mc_config_has_param (const mc_config_t *mc_config, const char *group, const gchar *param)
 {
     char *value;
     gboolean ret;
@@ -178,7 +178,7 @@ mc_config_has_param (const mc_config_t * mc_config, const char *group, const gch
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mc_config_has_group (mc_config_t * mc_config, const char *group)
+mc_config_has_group (mc_config_t *mc_config, const char *group)
 {
     if (mc_config == NULL || group == NULL)
         return FALSE;
@@ -189,7 +189,7 @@ mc_config_has_group (mc_config_t * mc_config, const char *group)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mc_config_del_key (mc_config_t * mc_config, const char *group, const gchar * param)
+mc_config_del_key (mc_config_t *mc_config, const char *group, const gchar *param)
 {
     if (mc_config == NULL || group == NULL || param == NULL)
         return FALSE;
@@ -200,7 +200,7 @@ mc_config_del_key (mc_config_t * mc_config, const char *group, const gchar * par
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mc_config_del_group (mc_config_t * mc_config, const char *group)
+mc_config_del_group (mc_config_t *mc_config, const char *group)
 {
     if (mc_config == NULL || group == NULL)
         return FALSE;
@@ -211,7 +211,7 @@ mc_config_del_group (mc_config_t * mc_config, const char *group)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mc_config_read_file (mc_config_t * mc_config, const gchar * ini_path, gboolean read_only,
+mc_config_read_file (mc_config_t *mc_config, const gchar *ini_path, gboolean read_only,
                      gboolean remove_empty)
 {
     mc_config_t *tmp_config;
@@ -261,7 +261,7 @@ mc_config_read_file (mc_config_t * mc_config, const gchar * ini_path, gboolean r
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mc_config_save_file (mc_config_t * mc_config, GError ** mcerror)
+mc_config_save_file (mc_config_t *mc_config, GError **mcerror)
 {
     mc_return_val_if_error (mcerror, FALSE);
 
@@ -274,7 +274,7 @@ mc_config_save_file (mc_config_t * mc_config, GError ** mcerror)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mc_config_save_to_file (mc_config_t * mc_config, const gchar * ini_path, GError ** mcerror)
+mc_config_save_to_file (mc_config_t *mc_config, const gchar *ini_path, GError **mcerror)
 {
     mc_return_val_if_error (mcerror, FALSE);
 

@@ -135,7 +135,7 @@ fill_by_space (char *buf, size_t n, gboolean zero_terminate)
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-rewrite_backup_content (const vfs_path_t * from_file_name_vpath, const char *to_file_name)
+rewrite_backup_content (const vfs_path_t *from_file_name_vpath, const char *to_file_name)
 {
     FILE *backup_fd;
     char *contents;
@@ -235,7 +235,7 @@ dview_fdopen (int fd)
  */
 
 static int
-dview_ffree (FBUF * fs)
+dview_ffree (FBUF *fs)
 {
     int rv = 0;
 
@@ -326,7 +326,7 @@ dview_fopen (const char *filename, int flags)
  */
 
 static size_t
-dview_fgets (char *buf, size_t size, FBUF * fs)
+dview_fgets (char *buf, size_t size, FBUF *fs)
 {
     size_t j = 0;
 
@@ -368,7 +368,7 @@ dview_fgets (char *buf, size_t size, FBUF * fs)
  */
 
 static off_t
-dview_fseek (FBUF * fs, off_t off, int whence)
+dview_fseek (FBUF *fs, off_t off, int whence)
 {
     off_t rv;
 
@@ -407,7 +407,7 @@ dview_fseek (FBUF * fs, off_t off, int whence)
  */
 
 static off_t
-dview_freset (FBUF * fs)
+dview_freset (FBUF *fs)
 {
     off_t rv;
 
@@ -431,7 +431,7 @@ dview_freset (FBUF * fs)
  */
 
 static ssize_t
-dview_fwrite (FBUF * fs, const char *buf, size_t size)
+dview_fwrite (FBUF *fs, const char *buf, size_t size)
 {
     ssize_t rv;
 
@@ -453,7 +453,7 @@ dview_fwrite (FBUF * fs, const char *buf, size_t size)
  */
 
 static off_t
-dview_ftrunc (FBUF * fs)
+dview_ftrunc (FBUF *fs)
 {
     off_t off;
 
@@ -482,7 +482,7 @@ dview_ftrunc (FBUF * fs)
  */
 
 static int
-dview_fclose (FBUF * fs)
+dview_fclose (FBUF *fs)
 {
     int rv = -1;
 
@@ -547,7 +547,7 @@ dview_popen (const char *cmd, int flags)
  */
 
 static int
-dview_pclose (FBUF * fs)
+dview_pclose (FBUF *fs)
 {
     int rv = -1;
 
@@ -690,7 +690,7 @@ scan_deci (const char **str, int *n)
  */
 
 static int
-scan_line (const char *p, GArray * ops)
+scan_line (const char *p, GArray *ops)
 {
     DIFFCMD op;
 
@@ -765,7 +765,7 @@ scan_line (const char *p, GArray * ops)
  */
 
 static int
-scan_diff (FBUF * f, GArray * ops)
+scan_diff (FBUF *f, GArray *ops)
 {
     int sz;
     char buf[BUFSIZ];
@@ -804,8 +804,7 @@ scan_diff (FBUF * f, GArray * ops)
  */
 
 static int
-dff_execute (const char *args, const char *extra, const char *file1, const char *file2,
-             GArray * ops)
+dff_execute (const char *args, const char *extra, const char *file1, const char *file2, GArray *ops)
 {
     static const char *opt =
         " --old-group-format='%df%(f=l?:,%dl)d%dE\n'"
@@ -847,7 +846,7 @@ dff_execute (const char *args, const char *extra, const char *file1, const char 
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-printer_for (char ch, DFUNC printer, void *ctx, FBUF * f, int *line, off_t * off)
+printer_for (char ch, DFUNC printer, void *ctx, FBUF *f, int *line, off_t *off)
 {
     size_t sz;
     char buf[BUFSIZ];
@@ -891,7 +890,7 @@ printer_for (char ch, DFUNC printer, void *ctx, FBUF * f, int *line, off_t * off
  */
 
 static int
-dff_reparse (diff_place_t ord, const char *filename, const GArray * ops, DFUNC printer, void *ctx)
+dff_reparse (diff_place_t ord, const char *filename, const GArray *ops, DFUNC printer, void *ctx)
 {
     size_t i;
     FBUF *f;
@@ -1000,7 +999,7 @@ dff_reparse (diff_place_t ord, const char *filename, const GArray * ops, DFUNC p
  */
 
 static int
-lcsubstr (const char *s, int m, const char *t, int n, GArray * ret, int min)
+lcsubstr (const char *s, int m, const char *t, int n, GArray *ret, int min)
 {
     int i, j;
     int *Lprev, *Lcurr;
@@ -1097,7 +1096,7 @@ lcsubstr (const char *s, int m, const char *t, int n, GArray * ret, int min)
  */
 
 static gboolean
-hdiff_multi (const char *s, const char *t, const BRACKET bracket, int min, GArray * hdiff,
+hdiff_multi (const char *s, const char *t, const BRACKET bracket, int min, GArray *hdiff,
              unsigned int depth)
 {
     BRACKET p;
@@ -1175,7 +1174,7 @@ hdiff_multi (const char *s, const char *t, const BRACKET bracket, int min, GArra
  */
 
 static gboolean
-hdiff_scan (const char *s, int m, const char *t, int n, int min, GArray * hdiff, unsigned int depth)
+hdiff_scan (const char *s, int m, const char *t, int n, int min, GArray *hdiff, unsigned int depth)
 {
     int i;
     BRACKET b;
@@ -1210,7 +1209,7 @@ hdiff_scan (const char *s, int m, const char *t, int n, int min, GArray * hdiff,
  */
 
 static gboolean
-is_inside (int k, GArray * hdiff, diff_place_t ord)
+is_inside (int k, GArray *hdiff, diff_place_t ord)
 {
     size_t i;
     BRACKET *b;
@@ -1422,7 +1421,7 @@ cvt_mget (const char *src, size_t srcsize, char *dst, int dstsize, int skip, int
 
 static int
 cvt_mgeta (const char *src, size_t srcsize, char *dst, int dstsize, int skip, int ts,
-           gboolean show_cr, GArray * hdiff, diff_place_t ord, char *att)
+           gboolean show_cr, GArray *hdiff, diff_place_t ord, char *att)
 {
     int sz = 0;
 
@@ -1519,7 +1518,7 @@ cvt_mgeta (const char *src, size_t srcsize, char *dst, int dstsize, int skip, in
  */
 
 static int
-cvt_fget (FBUF * f, off_t off, char *dst, size_t dstsize, int skip, int ts, gboolean show_cr)
+cvt_fget (FBUF *f, off_t off, char *dst, size_t dstsize, int skip, int ts, gboolean show_cr)
 {
     int base = 0;
     int old_base = base;
@@ -1682,7 +1681,7 @@ printer (void *ctx, int ch, int line, off_t off, size_t sz, const char *str)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-redo_diff (WDiff * dview)
+redo_diff (WDiff *dview)
 {
     FBUF *const *f = dview->f;
     PRINTER_CTX ctx;
@@ -1781,7 +1780,7 @@ redo_diff (WDiff * dview)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-destroy_hdiff (WDiff * dview)
+destroy_hdiff (WDiff *dview)
 {
     if (dview->hdiff != NULL)
     {
@@ -1823,7 +1822,7 @@ get_digits (unsigned int n)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-get_line_numbers (const GArray * a, size_t pos, int *linenum, int *lineofs)
+get_line_numbers (const GArray *a, size_t pos, int *linenum, int *lineofs)
 {
     const DIFFLN *p;
 
@@ -1858,7 +1857,7 @@ get_line_numbers (const GArray * a, size_t pos, int *linenum, int *lineofs)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-calc_nwidth (const GArray * const *a)
+calc_nwidth (const GArray *const *a)
 {
     int l1, o1;
     int l2, o2;
@@ -1873,7 +1872,7 @@ calc_nwidth (const GArray * const *a)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-find_prev_hunk (const GArray * a, int pos)
+find_prev_hunk (const GArray *a, int pos)
 {
 #if 1
     for (; pos > 0 && ((DIFFLN *) & g_array_index (a, DIFFLN, pos))->ch != EQU_CH; pos--)
@@ -1897,7 +1896,7 @@ find_prev_hunk (const GArray * a, int pos)
 /* --------------------------------------------------------------------------------------------- */
 
 static size_t
-find_next_hunk (const GArray * a, size_t pos)
+find_next_hunk (const GArray *a, size_t pos)
 {
     for (; pos < a->len && ((DIFFLN *) & g_array_index (a, DIFFLN, pos))->ch != EQU_CH; pos++)
         ;
@@ -1919,7 +1918,7 @@ find_next_hunk (const GArray * a, size_t pos)
  */
 
 static int
-get_current_hunk (WDiff * dview, int *start_line1, int *end_line1, int *start_line2, int *end_line2)
+get_current_hunk (WDiff *dview, int *start_line1, int *end_line1, int *start_line2, int *end_line2)
 {
     const GArray *a0 = dview->a[DIFF_LEFT];
     const GArray *a1 = dview->a[DIFF_RIGHT];
@@ -1987,7 +1986,7 @@ get_current_hunk (WDiff * dview, int *start_line1, int *end_line1, int *start_li
  */
 
 static void
-dview_remove_hunk (WDiff * dview, FILE * merge_file, int from1, int to1,
+dview_remove_hunk (WDiff *dview, FILE *merge_file, int from1, int to1,
                    action_direction_t merge_direction)
 {
     int line;
@@ -2024,7 +2023,7 @@ dview_remove_hunk (WDiff * dview, FILE * merge_file, int from1, int to1,
  */
 
 static void
-dview_add_hunk (WDiff * dview, FILE * merge_file, int from1, int from2, int to2,
+dview_add_hunk (WDiff *dview, FILE *merge_file, int from1, int from2, int to2,
                 action_direction_t merge_direction)
 {
     int line;
@@ -2071,7 +2070,7 @@ dview_add_hunk (WDiff * dview, FILE * merge_file, int from1, int from2, int to2,
  */
 
 static void
-dview_replace_hunk (WDiff * dview, FILE * merge_file, int from1, int to1, int from2, int to2,
+dview_replace_hunk (WDiff *dview, FILE *merge_file, int from1, int to1, int from2, int to2,
                     action_direction_t merge_direction)
 {
     int line1, line2;
@@ -2116,7 +2115,7 @@ dview_replace_hunk (WDiff * dview, FILE * merge_file, int from1, int to1, int fr
  */
 
 static void
-do_merge_hunk (WDiff * dview, action_direction_t merge_direction)
+do_merge_hunk (WDiff *dview, action_direction_t merge_direction)
 {
     int from1, to1, from2, to2;
     int hunk;
@@ -2192,7 +2191,7 @@ do_merge_hunk (WDiff * dview, action_direction_t merge_direction)
 /* view routines and callbacks ********************************************** */
 
 static void
-dview_compute_split (WDiff * dview, int i)
+dview_compute_split (WDiff *dview, int i)
 {
     dview->bias += i;
     if (dview->bias < 2 - dview->half1)
@@ -2204,7 +2203,7 @@ dview_compute_split (WDiff * dview, int i)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-dview_compute_areas (WDiff * dview)
+dview_compute_areas (WDiff *dview)
 {
     Widget *w = WIDGET (dview);
 
@@ -2218,7 +2217,7 @@ dview_compute_areas (WDiff * dview)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-dview_reread (WDiff * dview)
+dview_reread (WDiff *dview)
 {
     int ndiff;
 
@@ -2242,7 +2241,7 @@ dview_reread (WDiff * dview)
 
 #ifdef HAVE_CHARSET
 static void
-dview_set_codeset (WDiff * dview)
+dview_set_codeset (WDiff *dview)
 {
     const char *encoding_id = NULL;
 
@@ -2268,7 +2267,7 @@ dview_set_codeset (WDiff * dview)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-dview_select_encoding (WDiff * dview)
+dview_select_encoding (WDiff *dview)
 {
     if (do_select_codepage ())
         dview_set_codeset (dview);
@@ -2281,7 +2280,7 @@ dview_select_encoding (WDiff * dview)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-dview_load_options (WDiff * dview)
+dview_load_options (WDiff *dview)
 {
     gboolean show_numbers;
     int tab_size;
@@ -2316,7 +2315,7 @@ dview_load_options (WDiff * dview)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-dview_save_options (WDiff * dview)
+dview_save_options (WDiff *dview)
 {
     mc_config_set_bool (mc_global.main_config, "DiffView", "show_symbols", dview->display_symbols);
     mc_config_set_bool (mc_global.main_config, "DiffView", "show_numbers",
@@ -2340,7 +2339,7 @@ dview_save_options (WDiff * dview)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-dview_diff_options (WDiff * dview)
+dview_diff_options (WDiff *dview)
 {
     const char *quality_str[] = {
         N_("No&rmal"),
@@ -2380,7 +2379,7 @@ dview_diff_options (WDiff * dview)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-dview_init (WDiff * dview, const char *args, const char *file1, const char *file2,
+dview_init (WDiff *dview, const char *args, const char *file1, const char *file2,
             const char *label1, const char *label2, DSRC dsrc)
 {
     FBUF *f[DIFF_COUNT];
@@ -2461,7 +2460,7 @@ dview_init (WDiff * dview, const char *args, const char *file1, const char *file
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-dview_fini (WDiff * dview)
+dview_fini (WDiff *dview)
 {
     if (dview->dsrc != DATA_SRC_MEM)
     {
@@ -2493,7 +2492,7 @@ dview_fini (WDiff * dview)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-dview_display_file (const WDiff * dview, diff_place_t ord, int r, int c, int height, int width)
+dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int height, int width)
 {
     size_t i, k;
     int j;
@@ -2725,7 +2724,7 @@ dview_display_file (const WDiff * dview, diff_place_t ord, int r, int c, int hei
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-dview_status (const WDiff * dview, diff_place_t ord, int width, int c)
+dview_status (const WDiff *dview, diff_place_t ord, int width, int c)
 {
     const char *buf;
     int filename_width;
@@ -2758,7 +2757,7 @@ dview_status (const WDiff * dview, diff_place_t ord, int width, int c)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-dview_redo (WDiff * dview)
+dview_redo (WDiff *dview)
 {
     if (dview->display_numbers != 0)
     {
@@ -2774,7 +2773,7 @@ dview_redo (WDiff * dview)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-dview_update (WDiff * dview)
+dview_update (WDiff *dview)
 {
     int height = dview->height;
     int width1, width2;
@@ -2858,7 +2857,7 @@ dview_update (WDiff * dview)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-dview_edit (WDiff * dview, diff_place_t ord)
+dview_edit (WDiff *dview, diff_place_t ord)
 {
     Widget *h;
     gboolean h_modal;
@@ -2894,7 +2893,7 @@ dview_edit (WDiff * dview, diff_place_t ord)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-dview_goto_cmd (WDiff * dview, diff_place_t ord)
+dview_goto_cmd (WDiff *dview, diff_place_t ord)
 {
     static gboolean first_run = TRUE;
 
@@ -2941,7 +2940,7 @@ dview_goto_cmd (WDiff * dview, diff_place_t ord)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-dview_labels (WDiff * dview)
+dview_labels (WDiff *dview)
 {
     Widget *d = WIDGET (dview);
     WButtonBar *b;
@@ -2960,7 +2959,7 @@ dview_labels (WDiff * dview)
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-dview_save (WDiff * dview)
+dview_save (WDiff *dview)
 {
     gboolean res = TRUE;
 
@@ -2980,7 +2979,7 @@ dview_save (WDiff * dview)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-dview_do_save (WDiff * dview)
+dview_do_save (WDiff *dview)
 {
     (void) dview_save (dview);
 }
@@ -2992,7 +2991,7 @@ dview_do_save (WDiff * dview)
  * ask user.
  */
 static gboolean
-dview_ok_to_exit (WDiff * dview)
+dview_ok_to_exit (WDiff *dview)
 {
     gboolean res = TRUE;
     int act;
@@ -3034,7 +3033,7 @@ dview_ok_to_exit (WDiff * dview)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-dview_execute_cmd (WDiff * dview, long command)
+dview_execute_cmd (WDiff *dview, long command)
 {
     cb_ret_t res = MSG_HANDLED;
 
@@ -3198,7 +3197,7 @@ dview_execute_cmd (WDiff * dview, long command)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-dview_handle_key (WDiff * dview, int key)
+dview_handle_key (WDiff *dview, int key)
 {
     long command;
 
@@ -3216,7 +3215,7 @@ dview_handle_key (WDiff * dview, int key)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-dview_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+dview_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data)
 {
     WDiff *dview = (WDiff *) w;
     WDialog *h = DIALOG (w->owner);
@@ -3268,7 +3267,7 @@ dview_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-dview_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
+dview_mouse_callback (Widget *w, mouse_msg_t msg, mouse_event_t *event)
 {
     WDiff *dview = (WDiff *) w;
 
@@ -3295,7 +3294,7 @@ dview_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-dview_dialog_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+dview_dialog_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data)
 {
     WDiff *dview;
     WDialog *h = DIALOG (w);
@@ -3325,7 +3324,7 @@ dview_dialog_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, 
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-dview_get_title (const WDialog * h, size_t len)
+dview_get_title (const WDialog *h, size_t len)
 {
     const WDiff *dview;
     const char *modified = " (*) ";

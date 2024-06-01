@@ -47,7 +47,7 @@
 /* --------------------------------------------------------------------------------------------- */
 
 static GString *
-mc_search__glob_translate_to_regex (const GString * astr)
+mc_search__glob_translate_to_regex (const GString *astr)
 {
     GString *buff;
     gsize loop;
@@ -166,8 +166,8 @@ mc_search__translate_replace_glob_to_regex (const char *str)
 /*** public functions ****************************************************************************/
 
 void
-mc_search__cond_struct_new_init_glob (const char *charset, mc_search_t * lc_mc_search,
-                                      mc_search_cond_t * mc_search_cond)
+mc_search__cond_struct_new_init_glob (const char *charset, mc_search_t *lc_mc_search,
+                                      mc_search_cond_t *mc_search_cond)
 {
     GString *tmp;
 
@@ -187,8 +187,8 @@ mc_search__cond_struct_new_init_glob (const char *charset, mc_search_t * lc_mc_s
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mc_search__run_glob (mc_search_t * lc_mc_search, const void *user_data,
-                     gsize start_search, gsize end_search, gsize * found_len)
+mc_search__run_glob (mc_search_t *lc_mc_search, const void *user_data,
+                     gsize start_search, gsize end_search, gsize *found_len)
 {
     return mc_search__run_regex (lc_mc_search, user_data, start_search, end_search, found_len);
 }
@@ -196,7 +196,7 @@ mc_search__run_glob (mc_search_t * lc_mc_search, const void *user_data,
 /* --------------------------------------------------------------------------------------------- */
 
 GString *
-mc_search_glob_prepare_replace_str (mc_search_t * lc_mc_search, GString * replace_str)
+mc_search_glob_prepare_replace_str (mc_search_t *lc_mc_search, GString *replace_str)
 {
     GString *repl, *res;
 

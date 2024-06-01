@@ -76,7 +76,7 @@ const global_keymap_t *dialog_map = NULL;
 /* --------------------------------------------------------------------------------------------- */
 
 static const int *
-dlg_default_get_colors (const Widget * w)
+dlg_default_get_colors (const Widget *w)
 {
     return CONST_DIALOG (w)->colors;
 }
@@ -86,7 +86,7 @@ dlg_default_get_colors (const Widget * w)
   * Read histories from the ${XDG_DATA_HOME}/mc/history file
   */
 static void
-dlg_read_history (WDialog * h)
+dlg_read_history (WDialog *h)
 {
     char *profile;
     ev_history_load_save_t event_data;
@@ -123,7 +123,7 @@ refresh_cmd (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-dlg_help (const WDialog * h)
+dlg_help (const WDialog *h)
 {
     ev_help_t event_data = { NULL, h->help_ctx };
 
@@ -133,7 +133,7 @@ dlg_help (const WDialog * h)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-dlg_execute_cmd (WDialog * h, long command)
+dlg_execute_cmd (WDialog *h, long command)
 {
     WGroup *g = GROUP (h);
     cb_ret_t ret = MSG_HANDLED;
@@ -202,7 +202,7 @@ dlg_execute_cmd (WDialog * h, long command)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-dlg_handle_key (WDialog * h, int d_key)
+dlg_handle_key (WDialog *h, int d_key)
 {
     long command;
 
@@ -218,7 +218,7 @@ dlg_handle_key (WDialog * h, int d_key)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-dlg_key_event (WDialog * h, int d_key)
+dlg_key_event (WDialog *h, int d_key)
 {
     Widget *w = WIDGET (h);
     WGroup *g = GROUP (h);
@@ -261,7 +261,7 @@ dlg_key_event (WDialog * h, int d_key)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-dlg_handle_mouse_event (Widget * w, Gpm_Event * event)
+dlg_handle_mouse_event (Widget *w, Gpm_Event *event)
 {
     if (w->mouse_callback != NULL)
     {
@@ -278,7 +278,7 @@ dlg_handle_mouse_event (Widget * w, Gpm_Event * event)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-frontend_dlg_run (WDialog * h)
+frontend_dlg_run (WDialog *h)
 {
     Widget *wh = WIDGET (h);
     Gpm_Event event;
@@ -328,7 +328,7 @@ frontend_dlg_run (WDialog * h)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-dlg_default_destroy (Widget * w)
+dlg_default_destroy (Widget *w)
 {
     WDialog *h = DIALOG (w);
 
@@ -349,7 +349,7 @@ dlg_default_destroy (Widget * w)
 /** Default dialog callback */
 
 cb_ret_t
-dlg_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+dlg_default_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data)
 {
     switch (msg)
     {
@@ -374,7 +374,7 @@ dlg_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
 /* --------------------------------------------------------------------------------------------- */
 
 void
-dlg_default_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
+dlg_default_mouse_callback (Widget *w, mouse_msg_t msg, mouse_event_t *event)
 {
     switch (msg)
     {
@@ -474,7 +474,7 @@ dlg_set_default_colors (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-dlg_close (WDialog * h)
+dlg_close (WDialog *h)
 {
     widget_set_state (WIDGET (h), WST_CLOSED, TRUE);
 }
@@ -483,7 +483,7 @@ dlg_close (WDialog * h)
 /** Init the process */
 
 void
-dlg_init (WDialog * h)
+dlg_init (WDialog *h)
 {
     WGroup *g = GROUP (h);
     Widget *wh = WIDGET (h);
@@ -518,7 +518,7 @@ dlg_init (WDialog * h)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-dlg_process_event (WDialog * h, int key, Gpm_Event * event)
+dlg_process_event (WDialog *h, int key, Gpm_Event *event)
 {
     switch (key)
     {
@@ -545,7 +545,7 @@ dlg_process_event (WDialog * h, int key, Gpm_Event * event)
 /** Shutdown the dlg_run */
 
 void
-dlg_run_done (WDialog * h)
+dlg_run_done (WDialog *h)
 {
     top_dlg = g_list_remove (top_dlg, h);
 
@@ -567,7 +567,7 @@ dlg_run_done (WDialog * h)
  */
 
 int
-dlg_run (WDialog * h)
+dlg_run (WDialog *h)
 {
     dlg_init (h);
     frontend_dlg_run (h);
@@ -581,7 +581,7 @@ dlg_run (WDialog * h)
   * Write history to the ${XDG_DATA_HOME}/mc/history file
   */
 void
-dlg_save_history (WDialog * h)
+dlg_save_history (WDialog *h)
 {
     char *profile;
     int i;
@@ -615,7 +615,7 @@ dlg_save_history (WDialog * h)
 /* --------------------------------------------------------------------------------------------- */
 
 char *
-dlg_get_title (const WDialog * h, size_t len)
+dlg_get_title (const WDialog *h, size_t len)
 {
     char *t;
 

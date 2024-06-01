@@ -59,7 +59,7 @@
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-gauge_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+gauge_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data)
 {
     WGauge *g = GAUGE (w);
     const int *colors;
@@ -151,7 +151,7 @@ gauge_new (int y, int x, int cols, gboolean shown, int max, int current)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-gauge_set_value (WGauge * g, int max, int current)
+gauge_set_value (WGauge *g, int max, int current)
 {
     if (g->current == current && g->max == max)
         return;                 /* Do not flicker */
@@ -166,7 +166,7 @@ gauge_set_value (WGauge * g, int max, int current)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-gauge_show (WGauge * g, gboolean shown)
+gauge_show (WGauge *g, gboolean shown)
 {
     if (g->shown != shown)
     {

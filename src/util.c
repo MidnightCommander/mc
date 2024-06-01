@@ -50,7 +50,7 @@
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-check_for_default (const vfs_path_t * default_file_vpath, const vfs_path_t * file_vpath)
+check_for_default (const vfs_path_t *default_file_vpath, const vfs_path_t *file_vpath)
 {
     if (!exist_file (vfs_path_as_str (file_vpath)))
     {

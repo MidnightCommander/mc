@@ -49,7 +49,7 @@ static gboolean mc_stat__call_count = 0;
 
 /* @Mock */
 int
-mc_stat (const vfs_path_t * vpath, struct stat *my_stat)
+mc_stat (const vfs_path_t *vpath, struct stat *my_stat)
 {
     (void) vpath;
 

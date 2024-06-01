@@ -347,7 +347,7 @@ ftpfs_translate_path (struct vfs_class *me, struct vfs_s_super *super, const cha
  */
 
 static vfs_path_element_t *
-ftpfs_correct_url_parameters (const vfs_path_element_t * velement)
+ftpfs_correct_url_parameters (const vfs_path_element_t *velement)
 {
     vfs_path_element_t *path_element = vfs_path_element_clone (velement);
 
@@ -1018,7 +1018,7 @@ ftpfs_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
 
 static int
 ftpfs_open_archive (struct vfs_s_super *super,
-                    const vfs_path_t * vpath, const vfs_path_element_t * vpath_element)
+                    const vfs_path_t *vpath, const vfs_path_element_t *vpath_element)
 {
     (void) vpath;
 
@@ -1034,8 +1034,8 @@ ftpfs_open_archive (struct vfs_s_super *super,
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-ftpfs_archive_same (const vfs_path_element_t * vpath_element, struct vfs_s_super *super,
-                    const vfs_path_t * vpath, void *cookie)
+ftpfs_archive_same (const vfs_path_element_t *vpath_element, struct vfs_s_super *super,
+                    const vfs_path_t *vpath, void *cookie)
 {
     vfs_path_element_t *path_element;
     int result;
@@ -1107,7 +1107,7 @@ ftpfs_get_current_directory (struct vfs_class *me, struct vfs_s_super *super)
 
 static gboolean
 ftpfs_setup_passive_pasv (struct vfs_class *me, struct vfs_s_super *super,
-                          int my_socket, struct sockaddr_storage *sa, socklen_t * salen)
+                          int my_socket, struct sockaddr_storage *sa, socklen_t *salen)
 {
     char *c;
     char n[6];
@@ -1145,7 +1145,7 @@ ftpfs_setup_passive_pasv (struct vfs_class *me, struct vfs_s_super *super,
 
 static gboolean
 ftpfs_setup_passive_epsv (struct vfs_class *me, struct vfs_s_super *super,
-                          int my_socket, struct sockaddr_storage *sa, socklen_t * salen)
+                          int my_socket, struct sockaddr_storage *sa, socklen_t *salen)
 {
     char *c;
     int port;
@@ -1185,7 +1185,7 @@ ftpfs_setup_passive_epsv (struct vfs_class *me, struct vfs_s_super *super,
 
 static gboolean
 ftpfs_setup_passive (struct vfs_class *me, struct vfs_s_super *super,
-                     int my_socket, struct sockaddr_storage *sa, socklen_t * salen)
+                     int my_socket, struct sockaddr_storage *sa, socklen_t *salen)
 {
     /* It's IPV4, so try PASV first, some servers and ALGs get confused by EPSV */
     if (sa->ss_family == AF_INET)
@@ -1294,7 +1294,7 @@ ftpfs_setup_active (struct vfs_class *me, struct vfs_s_super *super,
 
 static int
 ftpfs_init_data_socket (struct vfs_class *me, struct vfs_s_super *super,
-                        struct sockaddr_storage *data_addr, socklen_t * data_addrlen)
+                        struct sockaddr_storage *data_addr, socklen_t *data_addrlen)
 {
     const unsigned int attempts = 10;
     unsigned int i;
@@ -1515,7 +1515,7 @@ ftpfs_open_data_connection (struct vfs_class *me, struct vfs_s_super *super, con
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-ftpfs_linear_abort (struct vfs_class *me, vfs_file_handler_t * fh)
+ftpfs_linear_abort (struct vfs_class *me, vfs_file_handler_t *fh)
 {
     struct vfs_s_super *super = VFS_FILE_HANDLER_SUPER (fh);
     ftp_super_t *ftp_super = FTP_SUPER (super);
@@ -1918,7 +1918,7 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, const char *remot
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-ftpfs_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, char *localname)
+ftpfs_file_store (struct vfs_class *me, vfs_file_handler_t *fh, char *name, char *localname)
 {
     struct vfs_s_super *super = VFS_FILE_HANDLER_SUPER (fh);
     ftp_super_t *ftp_super = FTP_SUPER (super);
@@ -2026,7 +2026,7 @@ ftpfs_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, cha
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-ftpfs_linear_start (struct vfs_class *me, vfs_file_handler_t * fh, off_t offset)
+ftpfs_linear_start (struct vfs_class *me, vfs_file_handler_t *fh, off_t offset)
 {
     char *name;
 
@@ -2049,7 +2049,7 @@ ftpfs_linear_start (struct vfs_class *me, vfs_file_handler_t * fh, off_t offset)
 /* --------------------------------------------------------------------------------------------- */
 
 static ssize_t
-ftpfs_linear_read (struct vfs_class *me, vfs_file_handler_t * fh, void *buf, size_t len)
+ftpfs_linear_read (struct vfs_class *me, vfs_file_handler_t *fh, void *buf, size_t len)
 {
     ssize_t n;
     struct vfs_s_super *super = VFS_FILE_HANDLER_SUPER (fh);
@@ -2079,7 +2079,7 @@ ftpfs_linear_read (struct vfs_class *me, vfs_file_handler_t * fh, void *buf, siz
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-ftpfs_linear_close (struct vfs_class *me, vfs_file_handler_t * fh)
+ftpfs_linear_close (struct vfs_class *me, vfs_file_handler_t *fh)
 {
     if (FH_SOCK != -1)
         ftpfs_linear_abort (me, fh);
@@ -2115,7 +2115,7 @@ ftpfs_ctl (void *fh, int ctlop, void *arg)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-ftpfs_send_command (const vfs_path_t * vpath, const char *cmd, int flags)
+ftpfs_send_command (const vfs_path_t *vpath, const char *cmd, int flags)
 {
     const char *rpath;
     char *p;
@@ -2149,7 +2149,7 @@ ftpfs_send_command (const vfs_path_t * vpath, const char *cmd, int flags)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-ftpfs_stat (const vfs_path_t * vpath, struct stat *buf)
+ftpfs_stat (const vfs_path_t *vpath, struct stat *buf)
 {
     int ret;
 
@@ -2161,7 +2161,7 @@ ftpfs_stat (const vfs_path_t * vpath, struct stat *buf)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-ftpfs_lstat (const vfs_path_t * vpath, struct stat *buf)
+ftpfs_lstat (const vfs_path_t *vpath, struct stat *buf)
 {
     int ret;
 
@@ -2185,7 +2185,7 @@ ftpfs_fstat (void *vfs_info, struct stat *buf)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-ftpfs_chmod (const vfs_path_t * vpath, mode_t mode)
+ftpfs_chmod (const vfs_path_t *vpath, mode_t mode)
 {
     char buf[BUF_SMALL];
     int ret;
@@ -2198,7 +2198,7 @@ ftpfs_chmod (const vfs_path_t * vpath, mode_t mode)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-ftpfs_chown (const vfs_path_t * vpath, uid_t owner, gid_t group)
+ftpfs_chown (const vfs_path_t *vpath, uid_t owner, gid_t group)
 {
 #if 0
     (void) vpath;
@@ -2220,7 +2220,7 @@ ftpfs_chown (const vfs_path_t * vpath, uid_t owner, gid_t group)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-ftpfs_unlink (const vfs_path_t * vpath)
+ftpfs_unlink (const vfs_path_t *vpath)
 {
     return ftpfs_send_command (vpath, "DELE /%s", OPT_FLUSH);
 }
@@ -2267,7 +2267,7 @@ ftpfs_chdir_internal (struct vfs_class *me, struct vfs_s_super *super, const cha
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-ftpfs_rename (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
+ftpfs_rename (const vfs_path_t *vpath1, const vfs_path_t *vpath2)
 {
     ftpfs_send_command (vpath1, "RNFR /%s", OPT_FLUSH);
     return ftpfs_send_command (vpath2, "RNTO /%s", OPT_FLUSH);
@@ -2276,7 +2276,7 @@ ftpfs_rename (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-ftpfs_mkdir (const vfs_path_t * vpath, mode_t mode)
+ftpfs_mkdir (const vfs_path_t *vpath, mode_t mode)
 {
     (void) mode;                /* FIXME: should be used */
 
@@ -2286,7 +2286,7 @@ ftpfs_mkdir (const vfs_path_t * vpath, mode_t mode)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-ftpfs_rmdir (const vfs_path_t * vpath)
+ftpfs_rmdir (const vfs_path_t *vpath)
 {
     return ftpfs_send_command (vpath, "RMD /%s", OPT_FLUSH);
 }
@@ -2308,7 +2308,7 @@ ftpfs_fh_new (struct vfs_s_inode *ino, gboolean changed)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-ftpfs_fh_open (struct vfs_class *me, vfs_file_handler_t * fh, int flags, mode_t mode)
+ftpfs_fh_open (struct vfs_class *me, vfs_file_handler_t *fh, int flags, mode_t mode)
 {
     ftp_file_handler_t *ftp = FTP_FILE_HANDLER (fh);
 
@@ -2383,7 +2383,7 @@ ftpfs_fh_open (struct vfs_class *me, vfs_file_handler_t * fh, int flags, mode_t 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-ftpfs_fh_close (struct vfs_class *me, vfs_file_handler_t * fh)
+ftpfs_fh_close (struct vfs_class *me, vfs_file_handler_t *fh)
 {
     if (fh->handle != -1 && fh->ino->localname == NULL)
     {

@@ -56,7 +56,7 @@
 
 static void
 G_GNUC_PRINTF (2, 3)
-prepend_error_message (GError ** error, const char *format, ...)
+prepend_error_message (GError **error, const char *format, ...)
 {
     char *prepend_str;
     char *split_str;
@@ -79,7 +79,7 @@ prepend_error_message (GError ** error, const char *format, ...)
 
 static const char *
 go_to_end_of_serialized_string (const char *non_serialized_data,
-                                const char *already_serialized_part, size_t * offset)
+                                const char *already_serialized_part, size_t *offset)
 {
     size_t calculated_offset;
     const char *semi_ptr = strchr (non_serialized_data + 1, SRLZ_DELIM_C);
@@ -109,7 +109,7 @@ go_to_end_of_serialized_string (const char *non_serialized_data,
  */
 
 char *
-mc_serialize_str (const char prefix, const char *data, GError ** error)
+mc_serialize_str (const char prefix, const char *data, GError **error)
 {
     if (data == NULL)
     {
@@ -132,7 +132,7 @@ mc_serialize_str (const char prefix, const char *data, GError ** error)
 
 #define FUNC_NAME "mc_serialize_str()"
 char *
-mc_deserialize_str (const char prefix, const char *data, GError ** error)
+mc_deserialize_str (const char prefix, const char *data, GError **error)
 {
     size_t data_len;
 
@@ -196,7 +196,7 @@ mc_deserialize_str (const char prefix, const char *data, GError ** error)
  */
 
 char *
-mc_serialize_config (mc_config_t * data, GError ** error)
+mc_serialize_config (mc_config_t *data, GError **error)
 {
     gchar **groups, **group_iterator;
     GString *buffer;
@@ -278,7 +278,7 @@ mc_serialize_config (mc_config_t * data, GError ** error)
 }
 
 mc_config_t *
-mc_deserialize_config (const char *data, GError ** error)
+mc_deserialize_config (const char *data, GError **error)
 {
     char *current_group = NULL, *current_param = NULL, *current_value = NULL;
     size_t current_position = 0;

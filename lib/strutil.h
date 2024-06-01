@@ -356,13 +356,13 @@ gboolean str_iscombiningmark (const char *ch);
  * decrase remain by size of returned characters
  * if out is not big enough, do nothing
  */
-gboolean str_toupper (const char *ch, char **out, size_t * remain);
+gboolean str_toupper (const char *ch, char **out, size_t *remain);
 
 /* write upper from of first characters in ch into out
  * decrase remain by size of returned characters
  * if out is not big enough, do nothing
  */
-gboolean str_tolower (const char *ch, char **out, size_t * remain);
+gboolean str_tolower (const char *ch, char **out, size_t *remain);
 
 /* return length of text in characters
  * I

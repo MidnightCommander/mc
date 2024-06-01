@@ -87,7 +87,7 @@ static gboolean longjmp_allowed = FALSE;
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-x_io_error_handler (Display * dpy)
+x_io_error_handler (Display *dpy)
 {
     (void) dpy;
 
@@ -103,7 +103,7 @@ x_io_error_handler (Display * dpy)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-x_error_handler (Display * dpy, XErrorEvent * ee)
+x_error_handler (Display *dpy, XErrorEvent *ee)
 {
     (void) ee;
     (void) func_XCloseDisplay (dpy);
@@ -205,7 +205,7 @@ mc_XOpenDisplay (const char *displayname)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-mc_XCloseDisplay (Display * display)
+mc_XCloseDisplay (Display *display)
 {
     if (x11_available ())
     {
@@ -230,8 +230,8 @@ mc_XCloseDisplay (Display * display)
 /* --------------------------------------------------------------------------------------------- */
 
 Bool
-mc_XQueryPointer (Display * display, Window win, Window * root_return,
-                  Window * child_return, int *root_x_return, int *root_y_return,
+mc_XQueryPointer (Display *display, Window win, Window *root_return,
+                  Window *child_return, int *root_x_return, int *root_y_return,
                   int *win_x_return, int *win_y_return, unsigned int *mask_return)
 {
     Bool retval;

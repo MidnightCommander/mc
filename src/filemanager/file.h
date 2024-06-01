@@ -61,7 +61,7 @@ FileProgressStatus file_error (gboolean allow_retry, const char *format, const c
 
 /* return value is FILE_CONT or FILE_ABORT */
 FileProgressStatus compute_dir_size (const vfs_path_t * dirname_vpath, dirsize_status_msg_t * sm,
-                                     size_t * ret_dir_count, size_t * ret_marked_count,
+                                     size_t *ret_dir_count, size_t *ret_marked_count,
                                      uintmax_t * ret_total, gboolean follow_symlinks);
 
 void dirsize_status_init_cb (status_msg_t * sm);

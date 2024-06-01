@@ -79,7 +79,7 @@ static struct my_statfs myfs_stats;
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-info_box (WInfo * info)
+info_box (WInfo *info)
 {
     Widget *w = WIDGET (info);
 
@@ -104,7 +104,7 @@ info_box (WInfo * info)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-info_show_info (WInfo * info)
+info_show_info (WInfo *info)
 {
     const WRect *w = &CONST_WIDGET (info)->rect;
     const file_entry_t *fe;
@@ -330,7 +330,7 @@ info_hook (void *data)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-info_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+info_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data)
 {
     WInfo *info = (WInfo *) w;
 
@@ -361,7 +361,7 @@ info_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
 /* --------------------------------------------------------------------------------------------- */
 
 WInfo *
-info_new (const WRect * r)
+info_new (const WRect *r)
 {
     WInfo *info;
     Widget *w;

@@ -105,8 +105,7 @@ static struct
 {
     const char *code;
     const char *name;
-} spell_codes_map[] =
-{
+} spell_codes_map[] = {
     /* *INDENT-OFF* */
     {"br", N_("Breton")},
     {"cs", N_("Czech")},
@@ -237,7 +236,7 @@ aspell_get_lang (void)
  */
 
 static unsigned int
-aspell_get_lang_list (GPtrArray * lang_list)
+aspell_get_lang_list (GPtrArray *lang_list)
 {
     AspellDictInfoList *dlist;
     AspellDictInfoEnumeration *elem;
@@ -322,8 +321,8 @@ aspell_set_lang (const char *lang)
  */
 
 static int
-spell_dialog_spell_suggest_show (WEdit * edit, const char *word, char **new_word,
-                                 const GPtrArray * suggest)
+spell_dialog_spell_suggest_show (WEdit *edit, const char *word, char **new_word,
+                                 const GPtrArray *suggest)
 {
 
     int sug_dlg_h = 14;         /* dialog height */
@@ -452,7 +451,7 @@ aspell_add_to_dict (const char *word, int word_size)
  */
 
 static unsigned int
-aspell_suggest (GPtrArray * suggest, const char *word, const int word_size)
+aspell_suggest (GPtrArray *suggest, const char *word, const int word_size)
 {
     unsigned int size = 0;
 
@@ -513,7 +512,7 @@ aspell_check (const char *word, const int word_size)
  */
 
 static void
-aspell_array_clean (GPtrArray * array)
+aspell_array_clean (GPtrArray *array)
 {
     if (array != NULL)
         g_ptr_array_free (array, TRUE);
@@ -591,7 +590,7 @@ aspell_clean (void)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-edit_suggest_current_word (WEdit * edit)
+edit_suggest_current_word (WEdit *edit)
 {
     gsize cut_len = 0;
     gsize word_len = 0;
@@ -680,7 +679,7 @@ edit_suggest_current_word (WEdit * edit)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-edit_spellcheck_file (WEdit * edit)
+edit_spellcheck_file (WEdit *edit)
 {
     if (edit->buffer.curs_line > 0)
     {
@@ -737,7 +736,7 @@ edit_set_spell_lang (void)
  */
 
 const char *
-spell_dialog_lang_list_show (const GPtrArray * languages)
+spell_dialog_lang_list_show (const GPtrArray *languages)
 {
 
     int lang_dlg_h = 12;        /* dialog height */

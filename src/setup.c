@@ -604,7 +604,7 @@ load_layout (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-load_keys_from_section (const char *terminal, mc_config_t * cfg)
+load_keys_from_section (const char *terminal, mc_config_t *cfg)
 {
     char *section_name;
     gchar **profile_keys, **keys;
@@ -1072,7 +1072,7 @@ done_setup (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-setup_save_config_show_error (const char *filename, GError ** mcerror)
+setup_save_config_show_error (const char *filename, GError **mcerror)
 {
     if (mcerror != NULL && *mcerror != NULL)
     {
@@ -1127,7 +1127,7 @@ load_anon_passwd (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-panel_load_setup (WPanel * panel, const char *section)
+panel_load_setup (WPanel *panel, const char *section)
 {
     size_t i;
     char *buffer;
@@ -1194,7 +1194,7 @@ panel_load_setup (WPanel * panel, const char *section)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-panel_save_setup (WPanel * panel, const char *section)
+panel_save_setup (WPanel *panel, const char *section)
 {
     char buffer[BUF_TINY];
     size_t i;

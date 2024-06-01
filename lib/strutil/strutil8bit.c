@@ -79,7 +79,7 @@ DECLARE_CTYPE_WRAPPER (tolower)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-str_8bit_insert_replace_char (GString * buffer)
+str_8bit_insert_replace_char (GString *buffer)
 {
     g_string_append_c (buffer, replch);
 }
@@ -195,7 +195,7 @@ str_8bit_iscombiningmark (const char *text)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-str_8bit_toupper (const char *text, char **out, size_t * remain)
+str_8bit_toupper (const char *text, char **out, size_t *remain)
 {
     if (*remain <= 1)
         return FALSE;
@@ -209,7 +209,7 @@ str_8bit_toupper (const char *text, char **out, size_t * remain)
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-str_8bit_tolower (const char *text, char **out, size_t * remain)
+str_8bit_tolower (const char *text, char **out, size_t *remain)
 {
     if (*remain <= 1)
         return FALSE;
@@ -239,7 +239,7 @@ str_8bit_length2 (const char *text, int size)
 /* --------------------------------------------------------------------------------------------- */
 
 static gchar *
-str_8bit_conv_gerror_message (GError * mcerror, const char *def_msg)
+str_8bit_conv_gerror_message (GError *mcerror, const char *def_msg)
 {
     GIConv conv;
     gchar *ret;
@@ -272,7 +272,7 @@ str_8bit_conv_gerror_message (GError * mcerror, const char *def_msg)
 /* --------------------------------------------------------------------------------------------- */
 
 static estr_t
-str_8bit_vfs_convert_to (GIConv coder, const char *string, int size, GString * buffer)
+str_8bit_vfs_convert_to (GIConv coder, const char *string, int size, GString *buffer)
 {
     estr_t result = ESTR_SUCCESS;
 

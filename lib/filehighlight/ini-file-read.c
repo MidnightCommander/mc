@@ -52,7 +52,7 @@
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-mc_fhl_parse_fill_color_info (mc_fhl_filter_t * mc_filter, mc_fhl_t * fhl, const gchar * group_name)
+mc_fhl_parse_fill_color_info (mc_fhl_filter_t *mc_filter, mc_fhl_t *fhl, const gchar *group_name)
 {
     (void) fhl;
 
@@ -62,7 +62,7 @@ mc_fhl_parse_fill_color_info (mc_fhl_filter_t * mc_filter, mc_fhl_t * fhl, const
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-mc_fhl_parse_get_file_type_id (mc_fhl_t * fhl, const gchar * group_name)
+mc_fhl_parse_get_file_type_id (mc_fhl_t *fhl, const gchar *group_name)
 {
     mc_fhl_filter_t *mc_filter;
 
@@ -107,7 +107,7 @@ mc_fhl_parse_get_file_type_id (mc_fhl_t * fhl, const gchar * group_name)
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-mc_fhl_parse_get_regexp (mc_fhl_t * fhl, const gchar * group_name)
+mc_fhl_parse_get_regexp (mc_fhl_t *fhl, const gchar *group_name)
 {
     mc_fhl_filter_t *mc_filter;
     gchar *regexp;
@@ -135,7 +135,7 @@ mc_fhl_parse_get_regexp (mc_fhl_t * fhl, const gchar * group_name)
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-mc_fhl_parse_get_extensions (mc_fhl_t * fhl, const gchar * group_name)
+mc_fhl_parse_get_extensions (mc_fhl_t *fhl, const gchar *group_name)
 {
     mc_fhl_filter_t *mc_filter;
     gchar **exts, **exts_orig;
@@ -185,7 +185,7 @@ mc_fhl_parse_get_extensions (mc_fhl_t * fhl, const gchar * group_name)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mc_fhl_read_ini_file (mc_fhl_t * fhl, const gchar * filename)
+mc_fhl_read_ini_file (mc_fhl_t *fhl, const gchar *filename)
 {
     if (fhl == NULL || filename == NULL || !exist_file (filename))
         return FALSE;
@@ -201,7 +201,7 @@ mc_fhl_read_ini_file (mc_fhl_t * fhl, const gchar * filename)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mc_fhl_init_from_standard_files (mc_fhl_t * fhl)
+mc_fhl_init_from_standard_files (mc_fhl_t *fhl)
 {
     gchar *name;
     gboolean ok;
@@ -230,7 +230,7 @@ mc_fhl_init_from_standard_files (mc_fhl_t * fhl)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mc_fhl_parse_ini_file (mc_fhl_t * fhl)
+mc_fhl_parse_ini_file (mc_fhl_t *fhl)
 {
     gchar **group_names, **orig_group_names;
     gboolean ok;

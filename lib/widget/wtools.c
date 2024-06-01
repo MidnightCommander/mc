@@ -65,7 +65,7 @@ static int sel_pos = 0;
 /** default query callback, used to reposition query */
 
 static cb_ret_t
-query_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+query_default_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data)
 {
     WDialog *h = DIALOG (w);
 
@@ -447,7 +447,7 @@ message (int flags, const char *title, const char *text, ...)
 /** Show error message box */
 
 gboolean
-mc_error_message (GError ** mcerror, int *code)
+mc_error_message (GError **mcerror, int *code)
 {
     if (mcerror == NULL || *mcerror == NULL)
         return FALSE;
@@ -568,7 +568,7 @@ status_msg_create (const char *title, double delay, status_msg_cb init_cb,
  */
 
 void
-status_msg_destroy (status_msg_t * sm)
+status_msg_destroy (status_msg_t *sm)
 {
     status_msg_deinit (sm);
     g_free (sm);
@@ -587,7 +587,7 @@ status_msg_destroy (status_msg_t * sm)
  */
 
 void
-status_msg_init (status_msg_t * sm, const char *title, double delay, status_msg_cb init_cb,
+status_msg_init (status_msg_t *sm, const char *title, double delay, status_msg_cb init_cb,
                  status_msg_update_cb update_cb, status_msg_cb deinit_cb)
 {
     gint64 start;
@@ -625,7 +625,7 @@ status_msg_init (status_msg_t * sm, const char *title, double delay, status_msg_
  */
 
 void
-status_msg_deinit (status_msg_t * sm)
+status_msg_deinit (status_msg_t *sm)
 {
     if (sm == NULL)
         return;
@@ -648,7 +648,7 @@ status_msg_deinit (status_msg_t * sm)
  */
 
 int
-status_msg_common_update (status_msg_t * sm)
+status_msg_common_update (status_msg_t *sm)
 {
     int c;
     Gpm_Event event;
@@ -694,7 +694,7 @@ status_msg_common_update (status_msg_t * sm)
  */
 
 void
-simple_status_msg_init_cb (status_msg_t * sm)
+simple_status_msg_init_cb (status_msg_t *sm)
 {
     simple_status_msg_t *ssm = SIMPLE_STATUS_MSG (sm);
     Widget *wd = WIDGET (sm->dlg);

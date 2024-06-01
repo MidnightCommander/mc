@@ -88,7 +88,7 @@ char *mcview_show_eof = NULL;
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-mcview_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
+mcview_mouse_callback (Widget *w, mouse_msg_t msg, mouse_event_t *event)
 {
     WView *view = (WView *) w;
     const WRect *r = &view->data_area;
@@ -195,7 +195,7 @@ mcview_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 /* --------------------------------------------------------------------------------------------- */
 
 WView *
-mcview_new (const WRect * r, gboolean is_panel)
+mcview_new (const WRect *r, gboolean is_panel)
 {
     WView *view;
     Widget *w;
@@ -234,7 +234,7 @@ mcview_new (const WRect * r, gboolean is_panel)
 /** Real view only */
 
 gboolean
-mcview_viewer (const char *command, const vfs_path_t * file_vpath, int start_line,
+mcview_viewer (const char *command, const vfs_path_t *file_vpath, int start_line,
                off_t search_start, off_t search_end)
 {
     gboolean succeeded;
@@ -282,7 +282,7 @@ mcview_viewer (const char *command, const vfs_path_t * file_vpath, int start_lin
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mcview_load (WView * view, const char *command, const char *file, int start_line,
+mcview_load (WView *view, const char *command, const char *file, int start_line,
              off_t search_start, off_t search_end)
 {
     gboolean retval = FALSE;

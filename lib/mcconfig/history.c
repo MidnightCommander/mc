@@ -125,7 +125,7 @@ mc_config_history_get_recent_item (const char *name)
  * Load history from the mc_config
  */
 GList *
-mc_config_history_load (mc_config_t * cfg, const char *name)
+mc_config_history_load (mc_config_t *cfg, const char *name)
 {
     size_t i;
     GList *hist = NULL;
@@ -188,7 +188,7 @@ mc_config_history_load (mc_config_t * cfg, const char *name)
   * Save history to the mc_config, but don't save config to file
   */
 void
-mc_config_history_save (mc_config_t * cfg, const char *name, GList * h)
+mc_config_history_save (mc_config_t *cfg, const char *name, GList *h)
 {
     GIConv conv = INVALID_CONV;
     GString *buffer;

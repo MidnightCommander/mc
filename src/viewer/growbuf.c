@@ -62,7 +62,7 @@
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_growbuf_init (WView * view)
+mcview_growbuf_init (WView *view)
 {
     view->growbuf_in_use = TRUE;
     view->growbuf_blockptr = g_ptr_array_new_with_free_func (g_free);
@@ -73,7 +73,7 @@ mcview_growbuf_init (WView * view)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_growbuf_done (WView * view)
+mcview_growbuf_done (WView *view)
 {
     view->growbuf_finished = TRUE;
 
@@ -92,7 +92,7 @@ mcview_growbuf_done (WView * view)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_growbuf_free (WView * view)
+mcview_growbuf_free (WView *view)
 {
     g_assert (view->growbuf_in_use);
 
@@ -104,7 +104,7 @@ mcview_growbuf_free (WView * view)
 /* --------------------------------------------------------------------------------------------- */
 
 off_t
-mcview_growbuf_filesize (WView * view)
+mcview_growbuf_filesize (WView *view)
 {
     g_assert (view->growbuf_in_use);
 
@@ -121,7 +121,7 @@ mcview_growbuf_filesize (WView * view)
  */
 
 void
-mcview_growbuf_read_until (WView * view, off_t ofs)
+mcview_growbuf_read_until (WView *view, off_t ofs)
 {
     gboolean short_read = FALSE;
 
@@ -246,7 +246,7 @@ mcview_growbuf_read_until (WView * view, off_t ofs)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mcview_get_byte_growing_buffer (WView * view, off_t byte_index, int *retval)
+mcview_get_byte_growing_buffer (WView *view, off_t byte_index, int *retval)
 {
     char *p;
 
@@ -271,7 +271,7 @@ mcview_get_byte_growing_buffer (WView * view, off_t byte_index, int *retval)
 /* --------------------------------------------------------------------------------------------- */
 
 char *
-mcview_get_ptr_growing_buffer (WView * view, off_t byte_index)
+mcview_get_ptr_growing_buffer (WView *view, off_t byte_index)
 {
     off_t pageno, pageindex;
 

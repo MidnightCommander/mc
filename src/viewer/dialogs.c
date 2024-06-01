@@ -66,7 +66,7 @@
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mcview_dialog_search (WView * view)
+mcview_dialog_search (WView *view)
 {
     char *exp = NULL;
     int qd_result;
@@ -138,7 +138,7 @@ mcview_dialog_search (WView * view)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mcview_dialog_goto (WView * view, off_t * offset)
+mcview_dialog_goto (WView *view, off_t *offset)
 {
     typedef enum
     {

@@ -55,7 +55,7 @@
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-events_init (GError ** mcerror)
+events_init (GError **mcerror)
 {
     /* *INDENT-OFF* */
     static const event_init_t standard_events[] =

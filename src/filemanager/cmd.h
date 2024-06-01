@@ -107,7 +107,7 @@ void find_cmd (WPanel * panel);
  */
 
 static inline void
-copy_cmd (WPanel * panel)
+copy_cmd (WPanel *panel)
 {
     panel_operate (panel, OP_COPY, FALSE);
 }
@@ -118,7 +118,7 @@ copy_cmd (WPanel * panel)
  */
 
 static inline void
-copy_cmd_local (WPanel * panel)
+copy_cmd_local (WPanel *panel)
 {
     panel_operate (panel, OP_COPY, TRUE);
 }
@@ -129,7 +129,7 @@ copy_cmd_local (WPanel * panel)
  */
 
 static inline void
-rename_cmd (WPanel * panel)
+rename_cmd (WPanel *panel)
 {
     panel_operate (panel, OP_MOVE, FALSE);
 }
@@ -140,7 +140,7 @@ rename_cmd (WPanel * panel)
  */
 
 static inline void
-rename_cmd_local (WPanel * panel)
+rename_cmd_local (WPanel *panel)
 {
     panel_operate (panel, OP_MOVE, TRUE);
 }
@@ -151,7 +151,7 @@ rename_cmd_local (WPanel * panel)
  */
 
 static inline void
-delete_cmd (WPanel * panel)
+delete_cmd (WPanel *panel)
 {
     panel_operate (panel, OP_DELETE, FALSE);
 }
@@ -162,7 +162,7 @@ delete_cmd (WPanel * panel)
  */
 
 static inline void
-delete_cmd_local (WPanel * panel)
+delete_cmd_local (WPanel *panel)
 {
     panel_operate (panel, OP_DELETE, TRUE);
 }

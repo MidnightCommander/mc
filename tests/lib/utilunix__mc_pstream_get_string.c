@@ -253,7 +253,7 @@ test_mc_popen (void)
 }
 
 static void
-test_mc_pread (mc_pipe_t * p)
+test_mc_pread (mc_pipe_t *p)
 {
     size_t len;
 

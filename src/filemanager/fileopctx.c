@@ -95,7 +95,7 @@ file_op_context_new (FileOperation op)
  */
 
 void
-file_op_context_destroy (file_op_context_t * ctx)
+file_op_context_destroy (file_op_context_t *ctx)
 {
     if (ctx != NULL)
     {
@@ -119,7 +119,7 @@ file_op_total_context_new (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-file_op_total_context_destroy (file_op_total_context_t * tctx)
+file_op_total_context_destroy (file_op_total_context_t *tctx)
 {
     g_free (tctx);
 }

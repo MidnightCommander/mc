@@ -114,7 +114,7 @@
   * @return NULL if byte_index is negative or larger than file size; pointer to byte otherwise.
   */
 static char *
-edit_buffer_get_byte_ptr (const edit_buffer_t * buf, off_t byte_index)
+edit_buffer_get_byte_ptr (const edit_buffer_t *buf, off_t byte_index)
 {
     void *b;
 
@@ -144,7 +144,7 @@ edit_buffer_get_byte_ptr (const edit_buffer_t * buf, off_t byte_index)
  */
 
 void
-edit_buffer_init (edit_buffer_t * buf, off_t size)
+edit_buffer_init (edit_buffer_t *buf, off_t size)
 {
     buf->b1 = g_ptr_array_new_full (32, g_free);
     buf->b2 = g_ptr_array_new_full (32, g_free);
@@ -164,7 +164,7 @@ edit_buffer_init (edit_buffer_t * buf, off_t size)
  */
 
 void
-edit_buffer_clean (edit_buffer_t * buf)
+edit_buffer_clean (edit_buffer_t *buf)
 {
     if (buf->b1 != NULL)
         g_ptr_array_free (buf->b1, TRUE);
@@ -184,7 +184,7 @@ edit_buffer_clean (edit_buffer_t * buf)
   */
 
 int
-edit_buffer_get_byte (const edit_buffer_t * buf, off_t byte_index)
+edit_buffer_get_byte (const edit_buffer_t *buf, off_t byte_index)
 {
     char *p;
 
@@ -209,7 +209,7 @@ edit_buffer_get_byte (const edit_buffer_t * buf, off_t byte_index)
   */
 
 int
-edit_buffer_get_utf (const edit_buffer_t * buf, off_t byte_index, int *char_length)
+edit_buffer_get_utf (const edit_buffer_t *buf, off_t byte_index, int *char_length)
 {
     gchar *str = NULL;
     gunichar res;
@@ -272,7 +272,7 @@ edit_buffer_get_utf (const edit_buffer_t * buf, off_t byte_index, int *char_leng
   */
 
 int
-edit_buffer_get_prev_utf (const edit_buffer_t * buf, off_t byte_index, int *char_length)
+edit_buffer_get_prev_utf (const edit_buffer_t *buf, off_t byte_index, int *char_length)
 {
     size_t i;
     gchar utf8_buf[3 * UTF8_CHAR_LEN + 1];
@@ -323,7 +323,7 @@ edit_buffer_get_prev_utf (const edit_buffer_t * buf, off_t byte_index, int *char
  */
 
 long
-edit_buffer_count_lines (const edit_buffer_t * buf, off_t first, off_t last)
+edit_buffer_count_lines (const edit_buffer_t *buf, off_t first, off_t last)
 {
     long lines = 0;
 
@@ -348,7 +348,7 @@ edit_buffer_count_lines (const edit_buffer_t * buf, off_t first, off_t last)
  */
 
 off_t
-edit_buffer_get_bol (const edit_buffer_t * buf, off_t current)
+edit_buffer_get_bol (const edit_buffer_t *buf, off_t current)
 {
     if (current <= 0)
         return 0;
@@ -370,7 +370,7 @@ edit_buffer_get_bol (const edit_buffer_t * buf, off_t current)
  */
 
 off_t
-edit_buffer_get_eol (const edit_buffer_t * buf, off_t current)
+edit_buffer_get_eol (const edit_buffer_t *buf, off_t current)
 {
     if (current >= buf->size)
         return buf->size;
@@ -394,8 +394,7 @@ edit_buffer_get_eol (const edit_buffer_t * buf, off_t current)
  */
 
 GString *
-edit_buffer_get_word_from_pos (const edit_buffer_t * buf, off_t start_pos, off_t * start,
-                               gsize * cut)
+edit_buffer_get_word_from_pos (const edit_buffer_t *buf, off_t start_pos, off_t *start, gsize *cut)
 {
     off_t word_start;
     gsize cut_len = 0;
@@ -440,7 +439,7 @@ edit_buffer_get_word_from_pos (const edit_buffer_t * buf, off_t start_pos, off_t
  */
 
 gboolean
-edit_buffer_find_word_start (const edit_buffer_t * buf, off_t * word_start, gsize * word_len)
+edit_buffer_find_word_start (const edit_buffer_t *buf, off_t *word_start, gsize *word_len)
 {
     int c;
     off_t i;
@@ -489,7 +488,7 @@ edit_buffer_find_word_start (const edit_buffer_t * buf, off_t * word_start, gsiz
  */
 
 void
-edit_buffer_insert (edit_buffer_t * buf, int c)
+edit_buffer_insert (edit_buffer_t *buf, int c)
 {
     void *b;
     off_t i;
@@ -521,7 +520,7 @@ edit_buffer_insert (edit_buffer_t * buf, int c)
  */
 
 void
-edit_buffer_insert_ahead (edit_buffer_t * buf, int c)
+edit_buffer_insert_ahead (edit_buffer_t *buf, int c)
 {
     void *b;
     off_t i;
@@ -553,7 +552,7 @@ edit_buffer_insert_ahead (edit_buffer_t * buf, int c)
  */
 
 int
-edit_buffer_delete (edit_buffer_t * buf)
+edit_buffer_delete (edit_buffer_t *buf)
 {
     void *b;
     unsigned char c;
@@ -593,7 +592,7 @@ edit_buffer_delete (edit_buffer_t * buf)
  */
 
 int
-edit_buffer_backspace (edit_buffer_t * buf)
+edit_buffer_backspace (edit_buffer_t *buf)
 {
     void *b;
     unsigned char c;
@@ -638,7 +637,7 @@ edit_buffer_backspace (edit_buffer_t * buf)
  */
 
 off_t
-edit_buffer_get_forward_offset (const edit_buffer_t * buf, off_t current, long lines, off_t upto)
+edit_buffer_get_forward_offset (const edit_buffer_t *buf, off_t current, long lines, off_t upto)
 {
     if (upto != 0)
         return (off_t) edit_buffer_count_lines (buf, current, upto);
@@ -670,7 +669,7 @@ edit_buffer_get_forward_offset (const edit_buffer_t * buf, off_t current, long l
  */
 
 off_t
-edit_buffer_get_backward_offset (const edit_buffer_t * buf, off_t current, long lines)
+edit_buffer_get_backward_offset (const edit_buffer_t *buf, off_t current, long lines)
 {
     lines = MAX (lines, 0);
     current = edit_buffer_get_bol (buf, current);
@@ -693,8 +692,8 @@ edit_buffer_get_backward_offset (const edit_buffer_t * buf, off_t current, long 
  */
 
 off_t
-edit_buffer_read_file (edit_buffer_t * buf, int fd, off_t size,
-                       edit_buffer_read_file_status_msg_t * sm, gboolean * aborted)
+edit_buffer_read_file (edit_buffer_t *buf, int fd, off_t size,
+                       edit_buffer_read_file_status_msg_t *sm, gboolean *aborted)
 {
     off_t ret = 0;
     off_t i, j;
@@ -807,7 +806,7 @@ edit_buffer_read_file (edit_buffer_t * buf, int fd, off_t size,
  */
 
 off_t
-edit_buffer_write_file (edit_buffer_t * buf, int fd)
+edit_buffer_write_file (edit_buffer_t *buf, int fd)
 {
     off_t ret = 0;
     off_t i;
@@ -881,7 +880,7 @@ edit_buffer_write_file (edit_buffer_t * buf, int fd)
  */
 
 int
-edit_buffer_calc_percent (const edit_buffer_t * buf, off_t offset)
+edit_buffer_calc_percent (const edit_buffer_t *buf, off_t offset)
 {
     int percent;
 

@@ -45,8 +45,8 @@ static struct vfs_class *vfs_test_ops3 = VFS_CLASS (&test_subclass3);
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-test1_mock_open_archive (struct vfs_s_super *super, const vfs_path_t * vpath,
-                         const vfs_path_element_t * vpath_element)
+test1_mock_open_archive (struct vfs_s_super *super, const vfs_path_t *vpath,
+                         const vfs_path_element_t *vpath_element)
 {
     struct vfs_s_inode *root;
 
@@ -61,8 +61,8 @@ test1_mock_open_archive (struct vfs_s_super *super, const vfs_path_t * vpath,
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-test1_mock_archive_same (const vfs_path_element_t * vpath_element, struct vfs_s_super *super,
-                         const vfs_path_t * vpath, void *cookie)
+test1_mock_archive_same (const vfs_path_element_t *vpath_element, struct vfs_s_super *super,
+                         const vfs_path_t *vpath, void *cookie)
 {
     const char *path;
 

@@ -61,7 +61,7 @@
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-label_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+label_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data)
 {
     WLabel *l = LABEL (w);
 
@@ -154,7 +154,7 @@ label_new (int y, int x, const char *text)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-label_set_text (WLabel * label, const char *text)
+label_set_text (WLabel *label, const char *text)
 {
     Widget *w = WIDGET (label);
     int newcols = w->rect.cols;
@@ -186,7 +186,7 @@ label_set_text (WLabel * label, const char *text)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-label_set_textv (WLabel * label, const char *format, ...)
+label_set_textv (WLabel *label, const char *format, ...)
 {
     va_list args;
     char buf[BUF_1K];           /* FIXME: is it enough? */

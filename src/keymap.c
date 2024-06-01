@@ -625,8 +625,8 @@ static const global_keymap_ini_t default_diff_keymap[] = {
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-create_default_keymap_section (mc_config_t * keymap, const char *section,
-                               const global_keymap_ini_t * k)
+create_default_keymap_section (mc_config_t *keymap, const char *section,
+                               const global_keymap_ini_t *k)
 {
     size_t i;
 
@@ -673,7 +673,7 @@ create_default_keymap (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-load_keymap_from_section (const char *section_name, GArray * keymap, mc_config_t * cfg)
+load_keymap_from_section (const char *section_name, GArray *keymap, mc_config_t *cfg)
 {
     gchar **profile_keys, **keys;
 
@@ -783,7 +783,7 @@ load_setup_get_full_config_name (const char *subdir, const char *config_file_nam
 */
 
 static void
-load_setup_init_config_from_file (mc_config_t ** config, const char *fname, gboolean read_only)
+load_setup_init_config_from_file (mc_config_t **config, const char *fname, gboolean read_only)
 {
     /*
        TODO: IMHO, in future, this function shall be placed in mcconfig module.

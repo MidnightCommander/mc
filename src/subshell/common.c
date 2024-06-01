@@ -1444,7 +1444,7 @@ init_subshell (void)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-invoke_subshell (const char *command, int how, vfs_path_t ** new_dir_vpath)
+invoke_subshell (const char *command, int how, vfs_path_t **new_dir_vpath)
 {
     /* Make the MC terminal transparent */
     tcsetattr (STDOUT_FILENO, TCSANOW, &raw_mode);
@@ -1683,7 +1683,7 @@ exit_subshell (void)
 
 /** If it actually changed the directory it returns true */
 void
-do_subshell_chdir (const vfs_path_t * vpath, gboolean update_prompt)
+do_subshell_chdir (const vfs_path_t *vpath, gboolean update_prompt)
 {
     char *pcwd;
 

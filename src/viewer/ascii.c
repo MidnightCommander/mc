@@ -200,7 +200,7 @@
 /* TODO: These methods shouldn't be necessary, see ticket 3257 */
 
 static int
-mcview_wcwidth (const WView * view, int c)
+mcview_wcwidth (const WView *view, int c)
 {
 #ifdef HAVE_CHARSET
     if (view->utf8)
@@ -220,7 +220,7 @@ mcview_wcwidth (const WView * view, int c)
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-mcview_ismark (const WView * view, int c)
+mcview_ismark (const WView *view, int c)
 {
 #ifdef HAVE_CHARSET
     if (view->utf8)
@@ -236,7 +236,7 @@ mcview_ismark (const WView * view, int c)
 
 /* actually is_non_spacing_mark_or_enclosing_mark */
 static gboolean
-mcview_is_non_spacing_mark (const WView * view, int c)
+mcview_is_non_spacing_mark (const WView *view, int c)
 {
 #ifdef HAVE_CHARSET
     if (view->utf8)
@@ -258,7 +258,7 @@ mcview_is_non_spacing_mark (const WView * view, int c)
 
 #if 0
 static gboolean
-mcview_is_spacing_mark (const WView * view, int c)
+mcview_is_spacing_mark (const WView *view, int c)
 {
 #ifdef HAVE_CHARSET
     if (view->utf8)
@@ -274,7 +274,7 @@ mcview_is_spacing_mark (const WView * view, int c)
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-mcview_isprint (const WView * view, int c)
+mcview_isprint (const WView *view, int c)
 {
 #ifdef HAVE_CHARSET
     if (!view->utf8)
@@ -290,7 +290,7 @@ mcview_isprint (const WView * view, int c)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-mcview_char_display (const WView * view, int c, char *s)
+mcview_char_display (const WView *view, int c, char *s)
 {
 #ifdef HAVE_CHARSET
     if (mc_global.utf8_display)
@@ -343,7 +343,7 @@ mcview_char_display (const WView * view, int c, char *s)
  * TODO: move it to lower layers (datasource.c)?
  */
 static gboolean
-mcview_get_next_char (WView * view, mcview_state_machine_t * state, int *c)
+mcview_get_next_char (WView *view, mcview_state_machine_t *state, int *c)
 {
     /* Pretend EOF if we reached force_max */
     if (view->force_max >= 0 && state->offset >= view->force_max)
@@ -390,7 +390,7 @@ mcview_get_next_char (WView * view, mcview_state_machine_t * state, int *c)
  * color can be null if the caller doesn't care.
  */
 static gboolean
-mcview_get_next_maybe_nroff_char (WView * view, mcview_state_machine_t * state, int *c, int *color)
+mcview_get_next_maybe_nroff_char (WView *view, mcview_state_machine_t *state, int *c, int *color)
 {
     mcview_state_machine_t state_after_nroff;
     int c2, c3;
@@ -473,7 +473,7 @@ mcview_get_next_maybe_nroff_char (WView * view, mcview_state_machine_t * state, 
  * @return the number of entries placed in cs, or 0 on EOF
  */
 static int
-mcview_next_combining_char_sequence (WView * view, mcview_state_machine_t * state, int *cs,
+mcview_next_combining_char_sequence (WView *view, mcview_state_machine_t *state, int *cs,
                                      int clen, int *color)
 {
     int i = 1;
@@ -572,8 +572,8 @@ mcview_next_combining_char_sequence (WView * view, mcview_state_machine_t * stat
  * @return the number of rows, that is, 0 if we were already at EOF, otherwise 1
  */
 static int
-mcview_display_line (WView * view, mcview_state_machine_t * state, int row,
-                     gboolean * paragraph_ended, off_t * linewidth)
+mcview_display_line (WView *view, mcview_state_machine_t *state, int row,
+                     gboolean *paragraph_ended, off_t *linewidth)
 {
     const WRect *r = &view->data_area;
     off_t dpy_text_column = view->mode_flags.wrap ? 0 : view->dpy_text_column;
@@ -764,7 +764,7 @@ mcview_display_line (WView * view, mcview_state_machine_t * state, int row,
  *   viewport, it's not counted how many more lines the paragraph would occupy
  */
 static int
-mcview_display_paragraph (WView * view, mcview_state_machine_t * state, int row)
+mcview_display_paragraph (WView *view, mcview_state_machine_t *state, int row)
 {
     int lines = 0;
 
@@ -800,7 +800,7 @@ mcview_display_paragraph (WView * view, mcview_state_machine_t * state, int row)
  * vertical position, in that case move to its last row.
  */
 static void
-mcview_wrap_fixup (WView * view)
+mcview_wrap_fixup (WView *view)
 {
     int lines = view->dpy_paragraph_skip_lines;
 
@@ -844,7 +844,7 @@ mcview_wrap_fixup (WView * view)
  * case dpy_state_top is invalid and we need to recompute first.
  */
 void
-mcview_display_text (WView * view)
+mcview_display_text (WView *view)
 {
     const WRect *r = &view->data_area;
     int row;
@@ -916,7 +916,7 @@ mcview_display_text (WView * view)
  * the bottom of mcview_ascii_move_up()) which invalidate this value.
  */
 void
-mcview_ascii_move_down (WView * view, off_t lines)
+mcview_ascii_move_down (WView *view, off_t lines)
 {
     while (lines-- != 0)
     {
@@ -965,7 +965,7 @@ mcview_ascii_move_down (WView * view, off_t lines)
  * changes, we don't want to endlessly consume a file of maybe full of zeros upon moving upwards.
  */
 void
-mcview_ascii_move_up (WView * view, off_t lines)
+mcview_ascii_move_up (WView *view, off_t lines)
 {
     if (!view->mode_flags.wrap)
     {
@@ -1015,7 +1015,7 @@ mcview_ascii_move_up (WView * view, off_t lines)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_ascii_moveto_bol (WView * view)
+mcview_ascii_moveto_bol (WView *view)
 {
     if (!view->mode_flags.wrap)
         view->dpy_text_column = 0;
@@ -1024,7 +1024,7 @@ mcview_ascii_moveto_bol (WView * view)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_ascii_moveto_eol (WView * view)
+mcview_ascii_moveto_eol (WView *view)
 {
     if (!view->mode_flags.wrap)
     {
@@ -1041,7 +1041,7 @@ mcview_ascii_moveto_eol (WView * view)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_state_machine_init (mcview_state_machine_t * state, off_t offset)
+mcview_state_machine_init (mcview_state_machine_t *state, off_t offset)
 {
     memset (state, 0, sizeof (*state));
     state->offset = offset;

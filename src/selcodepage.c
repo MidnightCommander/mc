@@ -125,7 +125,8 @@ select_charset (int center_y, int center_x, int current_charset, gboolean seldis
     /* some charset has been selected */
     if (seldisplay)
         /* charset list is finished with "Other 8 bit" item */
-        return (listbox_result >= (int) codepages->len) ? SELECT_CHARSET_OTHER_8BIT : listbox_result;
+        return (listbox_result >=
+                (int) codepages->len) ? SELECT_CHARSET_OTHER_8BIT : listbox_result;
 
     /* charset list is began with "-  < No translation >" item */
     return (listbox_result - 1);

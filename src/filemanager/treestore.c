@@ -97,7 +97,7 @@ tree_store_dirty (gboolean dirty)
   */
 
 static size_t
-str_common (const vfs_path_t * s1_vpath, const vfs_path_t * s2_vpath)
+str_common (const vfs_path_t *s1_vpath, const vfs_path_t *s2_vpath)
 {
     size_t result = 0;
     const char *s1, *s2;
@@ -135,7 +135,7 @@ str_common (const vfs_path_t * s1_vpath, const vfs_path_t * s2_vpath)
  */
 
 static int
-pathcmp (const vfs_path_t * p1_vpath, const vfs_path_t * p2_vpath)
+pathcmp (const vfs_path_t *p1_vpath, const vfs_path_t *p2_vpath)
 {
     int ret_val;
     const char *p1, *p2;
@@ -320,7 +320,7 @@ tree_store_load_from (const char *name)
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-encode (const vfs_path_t * vpath, size_t offset)
+encode (const vfs_path_t *vpath, size_t offset)
 {
     return str_escape (vfs_path_as_str (vpath) + offset, -1, "\n\\", FALSE);
 }
@@ -381,7 +381,7 @@ tree_store_save_to (char *name)
 /* --------------------------------------------------------------------------------------------- */
 
 static tree_entry *
-tree_store_add_entry (const vfs_path_t * name)
+tree_store_add_entry (const vfs_path_t *name)
 {
     int flag = -1;
     tree_entry *current;
@@ -474,7 +474,7 @@ tree_store_add_entry (const vfs_path_t * name)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-tree_store_notify_remove (tree_entry * entry)
+tree_store_notify_remove (tree_entry *entry)
 {
     hook_t *p;
 
@@ -489,7 +489,7 @@ tree_store_notify_remove (tree_entry * entry)
 /* --------------------------------------------------------------------------------------------- */
 
 static tree_entry *
-remove_entry (tree_entry * entry)
+remove_entry (tree_entry *entry)
 {
     tree_entry *current = entry->prev;
     long submask = 0;
@@ -529,7 +529,7 @@ remove_entry (tree_entry * entry)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-process_special_dirs (GList ** special_dirs, const char *file)
+process_special_dirs (GList **special_dirs, const char *file)
 {
     gchar **start_buff;
     mc_config_t *cfg;
@@ -557,7 +557,7 @@ process_special_dirs (GList ** special_dirs, const char *file)
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-should_skip_directory (const vfs_path_t * vpath)
+should_skip_directory (const vfs_path_t *vpath)
 {
     static GList *special_dirs = NULL;
     GList *l;
@@ -599,7 +599,7 @@ queue_vpath_free (gpointer data)
 
 /* Searches for specified directory */
 tree_entry *
-tree_store_whereis (const vfs_path_t * name)
+tree_store_whereis (const vfs_path_t *name)
 {
     tree_entry *current;
     int flag = -1;
@@ -684,7 +684,7 @@ tree_store_remove_entry_remove_hook (tree_store_remove_fn callback)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-tree_store_remove_entry (const vfs_path_t * name_vpath)
+tree_store_remove_entry (const vfs_path_t *name_vpath)
 {
     tree_entry *current, *base;
     size_t len;
@@ -797,7 +797,7 @@ tree_store_mark_checked (const char *subname)
 /** Mark the subdirectories of the current directory for delete */
 
 tree_entry *
-tree_store_start_check (const vfs_path_t * vpath)
+tree_store_start_check (const vfs_path_t *vpath)
 {
     tree_entry *current, *retval;
     size_t len;
@@ -897,7 +897,7 @@ tree_store_end_check (void)
 /* --------------------------------------------------------------------------------------------- */
 
 tree_entry *
-tree_store_rescan (const vfs_path_t * vpath)
+tree_store_rescan (const vfs_path_t *vpath)
 {
     DIR *dirp;
     struct stat buf;

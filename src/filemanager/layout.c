@@ -145,8 +145,7 @@ static struct
     panel_view_mode_t type;
     Widget *widget;
     char *last_saved_dir;       /* last view_list working directory */
-} panels[MAX_VIEWS] =
-{
+} panels[MAX_VIEWS] = {
     /* *INDENT-OFF* */
     /* init MAX_VIEWS items */
     { view_listing, NULL, NULL},
@@ -169,8 +168,7 @@ static struct
     const char *text;
     gboolean *variable;
     WCheck *widget;
-} check_options[] =
-{
+} check_options[] = {
     /* *INDENT-OFF* */
     { N_("&Equal split"), &equal_split, NULL },
     { N_("&Menubar visible"), &menubar_visible, NULL },
@@ -203,7 +201,7 @@ max (int a, int b)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-check_split (panels_layout_t * layout)
+check_split (panels_layout_t *layout)
 {
     if (layout->horizontal_split)
     {
@@ -230,7 +228,7 @@ check_split (panels_layout_t * layout)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-update_split (const WDialog * h)
+update_split (const WDialog *h)
 {
     /* Check split has to be done before testing if it changed, since
        it can change due to calling check_split() as well */
@@ -263,7 +261,7 @@ update_split (const WDialog * h)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-b_left_right_cback (WButton * button, int action)
+b_left_right_cback (WButton *button, int action)
 {
     (void) action;
 
@@ -291,7 +289,7 @@ b_left_right_cback (WButton * button, int action)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-bplus_cback (WButton * button, int action)
+bplus_cback (WButton *button, int action)
 {
     (void) button;
     (void) action;
@@ -304,7 +302,7 @@ bplus_cback (WButton * button, int action)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-bminus_cback (WButton * button, int action)
+bminus_cback (WButton *button, int action)
 {
     (void) button;
     (void) action;
@@ -317,7 +315,7 @@ bminus_cback (WButton * button, int action)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-layout_bg_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+layout_bg_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data)
 {
     switch (msg)
     {
@@ -347,7 +345,7 @@ layout_bg_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-layout_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+layout_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data)
 {
     WDialog *h = DIALOG (w);
 
@@ -649,7 +647,7 @@ panel_do_cols (int idx)
 /** Save current list_view widget directory into panel */
 
 static Widget *
-restore_into_right_dir_panel (int idx, gboolean last_was_panel, const WRect * r)
+restore_into_right_dir_panel (int idx, gboolean last_was_panel, const WRect *r)
 {
     WPanel *new_widget;
     const char *p_name;
@@ -751,7 +749,7 @@ layout_box (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-panel_update_cols (Widget * widget, panel_display_t frame_size)
+panel_update_cols (Widget *widget, panel_display_t frame_size)
 {
     const Widget *mw = CONST_WIDGET (filemanager);
     int cols, x;
@@ -1458,7 +1456,7 @@ save_panel_dir (int idx)
    but for other types - last_saved_dir */
 
 char *
-get_panel_dir_for (const WPanel * widget)
+get_panel_dir_for (const WPanel *widget)
 {
     int i;
 

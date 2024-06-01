@@ -423,8 +423,8 @@ mc_args_add_extended_info_to_help (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static GString *
-mc_args__convert_help_to_syscharset (const gchar * charset, const gchar * error_message_str,
-                                     const gchar * help_str)
+mc_args__convert_help_to_syscharset (const gchar *charset, const gchar *error_message_str,
+                                     const gchar *help_str)
 {
     GString *buffer;
     GIConv conv;
@@ -445,8 +445,7 @@ mc_args__convert_help_to_syscharset (const gchar * charset, const gchar * error_
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-parse_mc_e_argument (const gchar * option_name, const gchar * value, gpointer data,
-                     GError ** mcerror)
+parse_mc_e_argument (const gchar *option_name, const gchar *value, gpointer data, GError **mcerror)
 {
     (void) option_name;
     (void) value;
@@ -462,8 +461,7 @@ parse_mc_e_argument (const gchar * option_name, const gchar * value, gpointer da
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-parse_mc_v_argument (const gchar * option_name, const gchar * value, gpointer data,
-                     GError ** mcerror)
+parse_mc_v_argument (const gchar *option_name, const gchar *value, gpointer data, GError **mcerror)
 {
     (void) option_name;
     (void) value;
@@ -618,7 +616,7 @@ mc_setup_run_mode (char **argv)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mc_args_parse (int *argc, char ***argv, const char *translation_domain, GError ** mcerror)
+mc_args_parse (int *argc, char ***argv, const char *translation_domain, GError **mcerror)
 {
     const gchar *_system_codepage;
     gboolean ok = TRUE;
@@ -734,7 +732,7 @@ mc_args_show_info (void)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mc_setup_by_args (int argc, char **argv, GError ** mcerror)
+mc_setup_by_args (int argc, char **argv, GError **mcerror)
 {
     char *tmp;
 

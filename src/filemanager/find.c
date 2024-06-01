@@ -388,7 +388,7 @@ found_num_update (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-get_list_info (char **file, char **dir, gsize * start, gsize * end)
+get_list_info (char **file, char **dir, gsize *start, gsize *end)
 {
     find_match_location_t *location;
 
@@ -473,7 +473,7 @@ find_toggle_enable_content (void)
  */
 
 static cb_ret_t
-find_parm_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+find_parm_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data)
 {
     /* FIXME: HACK: use first draw of dialog to resolve widget state dependencies.
      * Use this time moment to check input field content. We can't do that in MSG_INIT
@@ -573,7 +573,7 @@ find_parm_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
  */
 
 static gboolean
-find_parameters (WPanel * panel, char **start_dir, ssize_t * start_dir_len,
+find_parameters (WPanel *panel, char **start_dir, ssize_t *start_dir_len,
                  char **ignore_dirs, char **pattern, char **content)
 {
     WGroup *g;
@@ -891,7 +891,7 @@ find_parameters (WPanel * panel, char **start_dir, ssize_t * start_dir_len,
 /* --------------------------------------------------------------------------------------------- */
 
 static inline void
-push_directory (vfs_path_t * dir)
+push_directory (vfs_path_t *dir)
 {
     g_queue_push_head (&dir_queue, (void *) dir);
 }
@@ -975,7 +975,7 @@ find_add_match (const char *dir, const char *file, gsize start, gsize end)
 /* --------------------------------------------------------------------------------------------- */
 
 static FindProgressStatus
-check_find_events (WDialog * h)
+check_find_events (WDialog *h)
 {
     Gpm_Event event;
     int c;
@@ -1013,7 +1013,7 @@ check_find_events (WDialog * h)
  */
 
 static gboolean
-search_content (WDialog * h, const char *directory, const char *filename)
+search_content (WDialog *h, const char *directory, const char *filename)
 {
     struct stat s;
     char buffer[BUF_4K] = "";   /* raw input buffer */
@@ -1253,7 +1253,7 @@ find_ignore_dir_search (const char *dir, size_t len)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-find_rotate_dash (const WDialog * h, gboolean show)
+find_rotate_dash (const WDialog *h, gboolean show)
 {
     static size_t pos = 0;
     static const char rotating_dash[4] = "|/-\\";
@@ -1271,7 +1271,7 @@ find_rotate_dash (const WDialog * h, gboolean show)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-do_search (WDialog * h)
+do_search (WDialog *h)
 {
     static struct vfs_dirent *dp = NULL;
     static DIR *dirp = NULL;
@@ -1409,8 +1409,7 @@ do_search (WDialog * h)
                 }
             }
 
-            search_ok =
-                mc_search_run (search_file_handle, dp->d_name, 0, dp->d_len, &bytes_found);
+            search_ok = mc_search_run (search_file_handle, dp->d_name, 0, dp->d_len, &bytes_found);
 
             if (search_ok)
             {
@@ -1498,7 +1497,7 @@ view_edit_currently_selected_file (gboolean unparsed_view, gboolean edit)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-find_calc_button_locations (const WDialog * h, gboolean all_buttons)
+find_calc_button_locations (const WDialog *h, gboolean all_buttons)
 {
     const int cols = CONST_WIDGET (h)->rect.cols;
 
@@ -1524,7 +1523,7 @@ find_calc_button_locations (const WDialog * h, gboolean all_buttons)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-find_adjust_header (WDialog * h)
+find_adjust_header (WDialog *h)
 {
     char title[BUF_MEDIUM];
     int title_len;
@@ -1553,7 +1552,7 @@ find_adjust_header (WDialog * h)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-find_relocate_buttons (const WDialog * h, gboolean all_buttons)
+find_relocate_buttons (const WDialog *h, gboolean all_buttons)
 {
     size_t i;
 
@@ -1566,7 +1565,7 @@ find_relocate_buttons (const WDialog * h, gboolean all_buttons)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-find_resize (WDialog * h)
+find_resize (WDialog *h)
 {
     Widget *w = WIDGET (h);
     WRect r = w->rect;
@@ -1583,7 +1582,7 @@ find_resize (WDialog * h)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-find_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+find_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data)
 {
     WDialog *h = DIALOG (w);
 
@@ -1621,7 +1620,7 @@ find_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
 /** Handles the Stop/Start button in the find window */
 
 static int
-start_stop (WButton * button, int action)
+start_stop (WButton *button, int action)
 {
     Widget *w = WIDGET (button);
 
@@ -1644,7 +1643,7 @@ start_stop (WButton * button, int action)
 /** Handle view command, when invoked as a button */
 
 static int
-find_do_view_file (WButton * button, int action)
+find_do_view_file (WButton *button, int action)
 {
     (void) button;
     (void) action;
@@ -1657,7 +1656,7 @@ find_do_view_file (WButton * button, int action)
 /** Handle edit command, when invoked as a button */
 
 static int
-find_do_edit_file (WButton * button, int action)
+find_do_edit_file (WButton *button, int action)
 {
     (void) button;
     (void) action;
@@ -1791,7 +1790,7 @@ kill_gui (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-do_find (WPanel * panel, const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
+do_find (WPanel *panel, const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
          char **dirname, char **filename)
 {
     int return_value;
@@ -1891,7 +1890,7 @@ do_find (WPanel * panel, const char *start_dir, ssize_t start_dir_len, const cha
 /* --------------------------------------------------------------------------------------------- */
 
 void
-find_cmd (WPanel * panel)
+find_cmd (WPanel *panel)
 {
     char *start_dir = NULL, *ignore_dirs = NULL;
     ssize_t start_dir_len;

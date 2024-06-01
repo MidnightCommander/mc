@@ -398,7 +398,7 @@ host_equal_func (gconstpointer a, gconstpointer b)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-fetch_hosts (const char *filename, GPtrArray * hosts)
+fetch_hosts (const char *filename, GPtrArray *hosts)
 {
     FILE *file;
     char buffer[BUF_MEDIUM];
@@ -794,7 +794,7 @@ check_is_cd (const char *text, int lc_start, input_complete_t flags)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-try_complete_commands_prepare (try_complete_automation_state_t * state, char *text, int *lc_start)
+try_complete_commands_prepare (try_complete_automation_state_t *state, char *text, int *lc_start)
 {
     const char *command_separator_chars = ";|&{(`";
     char *ti;
@@ -834,7 +834,7 @@ try_complete_commands_prepare (try_complete_automation_state_t * state, char *te
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-try_complete_find_start_sign (try_complete_automation_state_t * state)
+try_complete_find_start_sign (try_complete_automation_state_t *state)
 {
     if ((state->flags & INPUT_COMPLETE_COMMANDS) != 0)
         state->p = strrchr (state->word, '`');
@@ -865,7 +865,7 @@ try_complete_find_start_sign (try_complete_automation_state_t * state)
 /* --------------------------------------------------------------------------------------------- */
 
 static GPtrArray *
-try_complete_all_possible (try_complete_automation_state_t * state, char *text, int *lc_start)
+try_complete_all_possible (try_complete_automation_state_t *state, char *text, int *lc_start)
 {
     GPtrArray *matches = NULL;
 
@@ -936,7 +936,7 @@ try_complete_all_possible (try_complete_automation_state_t * state, char *text, 
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-insert_text (WInput * in, const char *text, ssize_t size)
+insert_text (WInput *in, const char *text, ssize_t size)
 {
     size_t text_len;
     int buff_len;
@@ -986,7 +986,7 @@ insert_text (WInput * in, const char *text, ssize_t size)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-complete_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+complete_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data)
 {
     static int bl = 0;
 
@@ -1166,7 +1166,7 @@ complete_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
 
 /** Returns TRUE if the user would like to see us again */
 static gboolean
-complete_engine (WInput * in, int what_to_do)
+complete_engine (WInput *in, int what_to_do)
 {
     if (in->completions != NULL && str_offset_to_pos (in->buffer->str, in->point) != end)
         input_complete_free (in);
@@ -1377,7 +1377,7 @@ try_complete (char *text, int *lc_start, int *lc_end, input_complete_t flags)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-complete_engine_fill_completions (WInput * in)
+complete_engine_fill_completions (WInput *in)
 {
     char *s;
     const char *word_separators;
@@ -1416,7 +1416,7 @@ complete_engine_fill_completions (WInput * in)
 
 /* declared in lib/widget/input.h */
 void
-input_complete (WInput * in)
+input_complete (WInput *in)
 {
     int engine_flags;
 
@@ -1440,7 +1440,7 @@ input_complete (WInput * in)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-input_complete_free (WInput * in)
+input_complete_free (WInput *in)
 {
     if (in->completions != NULL)
     {

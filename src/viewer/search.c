@@ -81,7 +81,7 @@ static char search_cb_char_buffer[6];
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-mcview_search_status_update_cb (status_msg_t * sm)
+mcview_search_status_update_cb (status_msg_t *sm)
 {
     simple_status_msg_t *ssm = SIMPLE_STATUS_MSG (sm);
     mcview_search_status_msg_t *vsm = (mcview_search_status_msg_t *) sm;
@@ -117,7 +117,7 @@ mcview_search_status_update_cb (status_msg_t * sm)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-mcview_search_update_steps (WView * view)
+mcview_search_update_steps (WView *view)
 {
     off_t filesize;
 
@@ -140,7 +140,7 @@ mcview_search_update_steps (WView * view)
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-mcview_find (mcview_search_status_msg_t * ssm, off_t search_start, off_t search_end, gsize * len)
+mcview_find (mcview_search_status_msg_t *ssm, off_t search_start, off_t search_end, gsize *len)
 {
     WView *view = ssm->view;
 
@@ -189,7 +189,7 @@ mcview_find (mcview_search_status_msg_t * ssm, off_t search_start, off_t search_
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-mcview_search_show_result (WView * view, size_t match_len)
+mcview_search_show_result (WView *view, size_t match_len)
 {
     int nroff_len;
 
@@ -215,7 +215,7 @@ mcview_search_show_result (WView * view, size_t match_len)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mcview_search_init (WView * view)
+mcview_search_init (WView *view)
 {
 #ifdef HAVE_CHARSET
     view->search = mc_search_new (view->last_search_string, cp_source);
@@ -243,7 +243,7 @@ mcview_search_init (WView * view)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_search_deinit (WView * view)
+mcview_search_deinit (WView *view)
 {
     mc_search_free (view->search);
     g_free (view->last_search_string);
@@ -348,7 +348,7 @@ mcview_search_update_cmd_callback (const void *user_data, gsize char_offset)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_do_search (WView * view, off_t want_search_start)
+mcview_do_search (WView *view, off_t want_search_start)
 {
     mcview_search_status_msg_t vsm;
 
