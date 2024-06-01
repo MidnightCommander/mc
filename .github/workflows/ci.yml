@@ -1,0 +1,134 @@
+name: CI
+on: [ push ]
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get install -y autoconf gettext autopoint libtool check indent
+          sudo apt-get install -y e2fslibs-dev libaspell-dev libglib2.0-dev libpcre2-dev libgpm-dev libncurses5-dev libslang2-dev libssh2-1-dev libx11-dev unzip
+
+      - name: Bootstrap build system
+        run: ./autogen.sh
+
+      - name: Build distribution archive
+        run: |
+          mkdir -p build-distrib && cd $_
+
+          ../configure
+
+          make dist-bzip2
+
+      - name: Build full configuration
+        run: |
+          tar -xjf $(ls build-distrib/mc-*.tar.bz2) --one-top-level=build-full
+          cd build-full
+
+          ../configure \
+              --prefix="$(pwd)/install" \
+              --enable-mclib \
+              --enable-aspell \
+              --enable-vfs-undelfs \
+              --enable-werror
+
+          make -j$(nproc)
+          make check
+          make install
+
+          # make indent
+          # exit $(git ls-files --modified | wc -l)
+
+      - name: Build ncurses & pcre2 configuration
+        run: |
+          tar -xjf $(ls build-distrib/mc-*.tar.bz2) --one-top-level=build-ncurses
+          cd build-ncurses
+
+          ../configure \
+              --prefix="$(pwd)/install" \
+              --with-screen=ncurses \
+              --with-search-engine=pcre2 \
+              --enable-werror
+
+          make -j$(nproc)
+          make check
+
+      - name: Build minimal configuration
+        run: |
+          tar -xjf $(ls build-distrib/mc-*.tar.bz2) --one-top-level=build-minimal
+          cd build-minimal
+
+          ../configure \
+              --prefix="$(pwd)/install" \
+              --disable-shared \
+              --disable-static \
+              --disable-maintainer-mode \
+              --disable-largefile \
+              --disable-nls \
+              --disable-rpath \
+              --disable-charset \
+              --disable-mclib \
+              --disable-assert \
+              --disable-aspell \
+              --disable-background \
+              --disable-vfs \
+              --disable-doxygen-doc \
+              --without-x \
+              --without-mmap \
+              --without-gpm-mouse \
+              --without-internal-edit \
+              --without-diff-viewer \
+              --without-subshell \
+              --enable-tests \
+              --enable-werror
+
+            make -j$(nproc)
+            make check
+
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: test-suite-logs-linux
+          path: build-*/**/test-suite.log
+
+  build-macos:
+    runs-on: macos-latest
+    timeout-minutes: 15
+
+    env:
+      CFLAGS: -Wno-assign-enum
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          brew install autoconf automake libtool pkg-config check gnu-indent
+          brew install glib libssh2 openssl aspell s-lang
+
+      - name: Bootstrap build system
+        run: ./autogen.sh
+
+      - name: Build full configuration
+        run: |
+          mkdir build-full && cd $_
+
+          ../configure \
+              --prefix="$(pwd)/install" \
+              --enable-mclib \
+              --enable-aspell=/opt/homebrew
+
+          make -j$(sysctl -n hw.logicalcpu)
+          make check
+          make install
+
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: test-suite-logs-macos
+          path: build-*/**/test-suite.log
