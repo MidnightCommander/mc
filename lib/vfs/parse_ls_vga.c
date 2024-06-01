@@ -703,7 +703,7 @@ vfs_parse_ls_lga (const char *p, struct stat *s, char **filename, char **linknam
         if (strlen (p) <= 8 || p[8] != ']')
             goto error;
 
-        /* Should parse here the Notwell permissions :) */
+        /* Should parse here the Novell permissions :) */
         if (S_ISDIR (s->st_mode))
             s->st_mode |= (S_IRUSR | S_IRGRP | S_IROTH | S_IWUSR | S_IXUSR | S_IXGRP | S_IXOTH);
         else

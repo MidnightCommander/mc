@@ -456,7 +456,7 @@ cpio_create_entry (struct vfs_class *me, struct vfs_s_super *super, struct stat 
     if (entry != NULL)
     {
         /* This shouldn't happen! (well, it can happen if there is a record for a
-           file and than a record for a directory it is in; cpio would die with
+           file and then a record for a directory it is in; cpio would die with
            'No such file or directory' is such case) */
 
         if (!S_ISDIR (entry->ino->st.st_mode))
