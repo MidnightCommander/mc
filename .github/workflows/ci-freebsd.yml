@@ -1,0 +1,54 @@
+name: ci-freebsd
+
+on:
+  workflow_call:
+    inputs:
+      CFLAGS:
+        description: 'Custom CFLAGS'
+        default: ''
+        required: false
+        type: string
+
+jobs:
+  build-freebsd:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build on FreeBSD
+        uses: vmactions/freebsd-vm@v1
+        with:
+          prepare: |
+            pkg install -y autoconf automake gettext libtool pkgconf
+            pkg install -y aspell check glib libssh2 libX11
+
+          run: |
+            ./autogen.sh
+
+            pw useradd test -d "$(pwd)"
+            chown -R test $(pwd)
+
+            su - test -c ' \
+              \
+              export CFLAGS="${{ inputs.CFLAGS }}" && \
+              \
+              ./configure \
+                --prefix="$(pwd)/install-prefix" \
+                --with-screen=ncurses \
+                --enable-mclib \
+                --enable-aspell \
+                --enable-werror \
+                && \
+              \
+              make && \
+              make check && \
+              make install \
+            '
+
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: test-suite-logs-freebsd
+          path: ./**/test-suite.log

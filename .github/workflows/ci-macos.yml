@@ -1,0 +1,47 @@
+name: ci-macos
+
+on:
+  workflow_call:
+    inputs:
+      CFLAGS:
+        description: 'Custom CFLAGS'
+        default: ''
+        required: false
+        type: string
+
+jobs:
+  build-macos:
+    runs-on: macos-latest
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          brew install autoconf automake gettext check gnu-indent libtool pkg-config
+          brew install aspell e2fsprogs glib libssh2 openssl s-lang
+
+          # unzip is part of the base system
+
+      - name: Bootstrap build system
+        run: ./autogen.sh
+
+      - name: Build default configuration
+        run: |
+          export CFLAGS="${{ inputs.CFLAGS }}"
+
+          ./configure \
+            --prefix="$(pwd)/install-prefix" \
+            --enable-mclib \
+            --enable-aspell=/opt/homebrew
+
+          make -j$(sysctl -n hw.logicalcpu)
+          make check
+          make install
+
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: test-suite-logs-macos
+          path: ./**/test-suite.log

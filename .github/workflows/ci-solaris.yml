@@ -1,0 +1,48 @@
+name: ci-solaris
+
+on:
+  workflow_call:
+
+jobs:
+  build-solaris:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build on Solaris
+        uses: vmactions/solaris-vm@v1
+        with:
+          release: "11.4-gcc"  # autoconf automake developer/gcc/gcc-c libtool pkg-config
+          prepare: |
+            pkg install --no-backup-be --no-refresh --accept -v \
+              aspell check glib2 libssh2 libx11
+
+          run: |
+            ./autogen.sh
+
+            useradd -d "$(pwd)" test
+            chown -R test $(pwd)
+
+            su - test -c ' \
+              export PKG_CONFIG_PATH=/usr/lib/64/pkgconfig && \
+              \
+              ./configure \
+                --prefix="$(pwd)/install-prefix" \
+                --with-screen=ncurses \
+                --enable-mclib \
+                --enable-aspell \
+                --enable-werror \
+                && \
+              \
+              make && \
+              make check && \
+              make install \
+            '
+
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: test-suite-logs-solaris
+          path: ./**/test-suite.log
