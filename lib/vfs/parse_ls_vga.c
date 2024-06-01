@@ -796,15 +796,14 @@ vfs_parse_ls_lga (const char *p, struct stat *s, char **filename, char **linknam
 #endif
     }
 
+    vfs_zero_stat_times (s);
+
     idx = vfs_parse_filedate (idx, &s->st_mtime);
     if (idx == 0)
         goto error;
 
     /* Use resulting time value */
     s->st_atime = s->st_ctime = s->st_mtime;
-#ifdef HAVE_STRUCT_STAT_ST_MTIM
-    s->st_atim.tv_nsec = s->st_mtim.tv_nsec = s->st_ctim.tv_nsec = 0;
-#endif
 
     /* s->st_dev and s->st_ino must be initialized by vfs_s_new_inode () */
 #ifdef HAVE_STRUCT_STAT_ST_BLKSIZE

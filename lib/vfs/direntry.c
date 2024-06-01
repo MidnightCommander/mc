@@ -1030,10 +1030,7 @@ vfs_s_default_stat (struct vfs_class *me, mode_t mode)
 #endif
     st.st_size = 0;
 
-    st.st_mtime = st.st_atime = st.st_ctime = time (NULL);
-#ifdef HAVE_STRUCT_STAT_ST_MTIM
-    st.st_atim.tv_nsec = st.st_mtim.tv_nsec = st.st_ctim.tv_nsec = 0;
-#endif
+    vfs_zero_stat_times (&st);
 
     vfs_adjust_stat (&st);
 

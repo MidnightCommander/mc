@@ -113,13 +113,6 @@
 #define get_default_editor() "vi"
 #define OS_SORT_CASE_SENSITIVE_DEFAULT TRUE
 
-/* struct stat members */
-#ifdef __APPLE__
-#define st_atim st_atimespec
-#define st_ctim st_ctimespec
-#define st_mtim st_mtimespec
-#endif
-
 /*** enums ***************************************************************************************/
 
 /*** structures declarations (and typedefs of structures)*****************************************/

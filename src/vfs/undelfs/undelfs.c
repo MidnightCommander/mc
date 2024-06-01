@@ -631,12 +631,12 @@ undelfs_stat_int (int inode_index, struct stat *buf)
     buf->st_uid = delarray[inode_index].uid;
     buf->st_gid = delarray[inode_index].gid;
     buf->st_size = delarray[inode_index].size;
+
+    vfs_zero_stat_times (buf);
     buf->st_atime = delarray[inode_index].dtime;
     buf->st_ctime = delarray[inode_index].dtime;
     buf->st_mtime = delarray[inode_index].dtime;
-#ifdef HAVE_STRUCT_STAT_ST_MTIM
-    buf->st_atim.tv_nsec = buf->st_mtim.tv_nsec = buf->st_ctim.tv_nsec = 0;
-#endif
+
     return 0;
 }
 

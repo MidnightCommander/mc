@@ -261,7 +261,7 @@ AC_CHECK_TYPE([major_t], [], [AC_DEFINE([major_t], [int], [Type of major device 
 AC_CHECK_TYPE([minor_t], [], [AC_DEFINE([minor_t], [int], [Type of minor device numbers.])])
 
 AC_STRUCT_ST_BLOCKS
-AC_CHECK_MEMBERS([struct stat.st_blksize, struct stat.st_rdev, struct stat.st_mtim])
+AC_CHECK_MEMBERS([struct stat.st_blksize, struct stat.st_rdev, struct stat.st_mtim, struct stat.st_mtimespec, struct stat.st_mtimensec])
 gl_STAT_SIZE
 
 AH_TEMPLATE([sig_atomic_t],
@@ -387,14 +387,7 @@ AC_EGREP_CPP([yes],
     ])
 
 dnl utimensat is supported since glibc 2.6 and specified in POSIX.1-2008
-dnl utimensat() causes different timespec structures to cause failures on IBM i and AIX
-case $host_os in
-*os400 | aix*)
-    ;;
-*)
-    AC_CHECK_FUNCS([utimensat])
-    ;;
-esac
+AC_CHECK_FUNCS([utimensat])
 
 case $host_os in
 *os400)

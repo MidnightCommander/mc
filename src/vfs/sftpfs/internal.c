@@ -37,6 +37,7 @@
 
 #include "lib/global.h"
 #include "lib/util.h"
+#include "lib/vfs/utilvfs.h"
 
 #include "internal.h"
 
@@ -255,12 +256,10 @@ sftpfs_attr_to_stat (const LIBSSH2_SFTP_ATTRIBUTES *attrs, struct stat *s)
 
     if ((attrs->flags & LIBSSH2_SFTP_ATTR_ACMODTIME) != 0)
     {
+        vfs_zero_stat_times (s);
         s->st_atime = attrs->atime;
         s->st_mtime = attrs->mtime;
         s->st_ctime = attrs->mtime;
-#ifdef HAVE_STRUCT_STAT_ST_MTIM
-        s->st_atim.tv_nsec = s->st_mtim.tv_nsec = s->st_ctim.tv_nsec = 0;
-#endif
     }
 
     if ((attrs->flags & LIBSSH2_SFTP_ATTR_SIZE) != 0)

@@ -408,15 +408,70 @@ vfs_get_timespecs_from_timesbuf (mc_timesbuf_t *times, mc_timespec_t *atime, mc_
 /* --------------------------------------------------------------------------------------------- */
 
 void
-vfs_get_timesbuf_from_stat (const struct stat *sb, mc_timesbuf_t *times)
+vfs_get_timesbuf_from_stat (const struct stat *s, mc_timesbuf_t *times)
 {
 #ifdef HAVE_UTIMENSAT
-    (*times)[0] = sb->st_atim;
-    (*times)[1] = sb->st_mtim;
+#ifdef HAVE_STRUCT_STAT_ST_MTIM
+    /* POSIX IEEE Std 1003.1-2008 should be the preferred way
+     *
+     * AIX has internal type st_timespec_t conflicting with timespec, so assign per field, for details see:
+     * https://github.com/libuv/libuv/pull/4404
+     */
+    (*times)[0].tv_sec = s->st_atim.tv_sec;
+    (*times)[0].tv_nsec = s->st_atim.tv_nsec;
+    (*times)[1].tv_sec = s->st_mtim.tv_sec;
+    (*times)[1].tv_nsec = s->st_mtim.tv_nsec;
+#elif HAVE_STRUCT_STAT_ST_MTIMESPEC
+    /* Modern BSD solution */
+    (*times)[0] = s->st_atimespec;
+    (*times)[1] = s->st_mtimespec;
+#elif HAVE_STRUCT_STAT_ST_MTIMENSEC
+    /* Legacy BSD solution */
+    (*times)[0].tv_sec = s->st_atime;
+    (*times)[0].tv_nsec = s->st_atimensec;
+    (*times)[1].tv_sec = s->st_mtime;
+    (*times)[1].tv_nsec = s->st_mtimensec;
 #else
-    times->actime = sb->st_atime;
-    times->modtime = sb->st_mtime;
+#error "Found utimensat for nanosecond timestamps, but unsupported struct stat format!"
 #endif
+#else
+    times->actime = s->st_atime;
+    times->modtime = s->st_mtime;
+#endif
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+vfs_copy_stat_times (const struct stat *src, struct stat *dst)
+{
+    dst->st_atime = src->st_atime;
+    dst->st_mtime = src->st_mtime;
+    dst->st_ctime = src->st_ctime;
+
+#ifdef HAVE_STRUCT_STAT_ST_MTIM
+    dst->st_atim.tv_nsec = src->st_atim.tv_nsec;
+    dst->st_mtim.tv_nsec = src->st_mtim.tv_nsec;
+    dst->st_ctim.tv_nsec = src->st_ctim.tv_nsec;
+#elif HAVE_STRUCT_STAT_ST_MTIMESPEC
+    dst->st_atimespec.tv_nsec = src->st_atimespec.tv_nsec;
+    dst->st_mtimespec.tv_nsec = src->st_mtimespec.tv_nsec;
+    dst->st_ctimespec.tv_nsec = src->st_ctimespec.tv_nsec;
+#elif HAVE_STRUCT_STAT_ST_MTIMENSEC
+    dst->st_atimensec = src->st_atimensec;
+    dst->st_mtimensec = src->st_mtimensec;
+    dst->st_ctimensec = src->st_ctimensec;
+#endif
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+vfs_zero_stat_times (struct stat *s)
+{
+    const struct stat empty = { 0 };
+
+    vfs_copy_stat_times (&empty, s);
 }
 
 /* --------------------------------------------------------------------------------------------- */

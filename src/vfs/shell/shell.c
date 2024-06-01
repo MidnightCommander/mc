@@ -860,12 +860,10 @@ shell_parse_ls (char *buffer, struct vfs_s_entry *ent)
 
     case 'd':
         vfs_split_text (buffer);
+        vfs_zero_stat_times (&ST);
         if (vfs_parse_filedate (0, &ST.st_ctime) == 0)
             break;
         ST.st_atime = ST.st_mtime = ST.st_ctime;
-#ifdef HAVE_STRUCT_STAT_ST_MTIM
-        ST.st_atim.tv_nsec = ST.st_mtim.tv_nsec = ST.st_ctim.tv_nsec = 0;
-#endif
         break;
 
     case 'D':
@@ -877,10 +875,8 @@ shell_parse_ls (char *buffer, struct vfs_s_entry *ent)
             if (sscanf (buffer, "%d %d %d %d %d %d", &tim.tm_year, &tim.tm_mon,
                         &tim.tm_mday, &tim.tm_hour, &tim.tm_min, &tim.tm_sec) != 6)
                 break;
+            vfs_zero_stat_times (&ST);
             ST.st_atime = ST.st_mtime = ST.st_ctime = mktime (&tim);
-#ifdef HAVE_STRUCT_STAT_ST_MTIM
-            ST.st_atim.tv_nsec = ST.st_mtim.tv_nsec = ST.st_ctim.tv_nsec = 0;
-#endif
         }
         break;
 
