@@ -1,0 +1,48 @@
+name: ci-fedora
+
+on:
+  workflow_call:
+
+jobs:
+  build-fedora:
+    runs-on: ubuntu-latest
+    container:
+      image: fedora:latest
+    timeout-minutes: 5
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          dnf install -y autoconf automake gcc gettext-devel libtool make pkgconfig
+          dnf install -y aspell-devel check-devel gpm-devel libX11-devel "pkgconfig(ext2fs)" "pkgconfig(glib-2.0)" "pkgconfig(gmodule-2.0)" "pkgconfig(libssh2)" "pkgconfig(slang)"
+
+          # For tests
+          dnf install -y glibc-gconv-extra
+
+      - name: Bootstrap build system
+        run: ./autogen.sh
+
+      - name: Build default configuration
+        run: |
+          # Tests must be run as a non-root user
+          useradd --home "$(pwd)" test
+          chown test -R "$(pwd)"
+
+          sudo -u test -i \
+            ./configure \
+              --prefix="$(pwd)/install-prefix" \
+              --enable-mclib \
+              --enable-aspell
+
+          sudo -u test -i make -j$(nproc)
+          sudo -u test -i make check
+          sudo -u test -i make install
+
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: test-suite-logs-fedora
+          path: ./**/test-suite.log
