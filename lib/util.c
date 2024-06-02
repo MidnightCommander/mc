@@ -111,7 +111,7 @@ is_8bit_printable (unsigned char c)
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-resolve_symlinks (const vfs_path_t * vpath)
+resolve_symlinks (const vfs_path_t *vpath)
 {
     char *p, *p2;
     char *buf, *buf2, *q, *r, c;
@@ -332,15 +332,11 @@ const char *
 path_trunc (const char *path, size_t trunc_len)
 {
     vfs_path_t *vpath;
-    char *secure_path;
     const char *ret;
 
-    vpath = vfs_path_from_str (path);
-    secure_path = vfs_path_to_str_flags (vpath, 0, VPF_STRIP_PASSWORD);
+    vpath = vfs_path_from_str_flags (path, VPF_STRIP_PASSWORD);
+    ret = str_trunc (vfs_path_as_str (vpath), trunc_len);
     vfs_path_free (vpath, TRUE);
-
-    ret = str_trunc (secure_path, trunc_len);
-    g_free (secure_path);
 
     return ret;
 }
@@ -456,11 +452,12 @@ size_trunc_len (char *buffer, unsigned int len, uintmax_t size, int units, gbool
      */
 #endif
     };
-    /* *INDENT-ON* */
+
     static const char *const suffix[] =
         { "", "K", "M", "G", "T", "P", "E", "Z", "Y", "R", "Q", NULL };
     static const char *const suffix_lc[] =
         { "", "k", "m", "g", "t", "p", "e", "z", "y", "r", "q", NULL };
+    /* *INDENT-ON* */
 
     const char *const *sfx = use_si ? suffix_lc : suffix;
     int j = 0;
@@ -597,7 +594,7 @@ extension (const char *filename)
 
 char *
 load_mc_home_file (const char *from, const char *filename, char **allocated_filename,
-                   size_t * length)
+                   size_t *length)
 {
     char *hintfile_base, *hintfile;
     char *lang;
@@ -1029,7 +1026,7 @@ convert_controls (const char *p)
  */
 
 char *
-diff_two_paths (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
+diff_two_paths (const vfs_path_t *vpath1, const vfs_path_t *vpath2)
 {
     int j, prevlen = -1, currlen;
     char *my_first = NULL, *my_second = NULL;
@@ -1100,7 +1097,7 @@ diff_two_paths (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
  */
 
 GList *
-list_append_unique (GList * list, char *text)
+list_append_unique (GList *list, char *text)
 {
     GList *lc_link;
 
@@ -1140,8 +1137,8 @@ list_append_unique (GList * list, char *text)
  */
 
 void
-load_file_position (const vfs_path_t * filename_vpath, long *line, long *column, off_t * offset,
-                    GArray ** bookmarks)
+load_file_position (const vfs_path_t *filename_vpath, long *line, long *column, off_t *offset,
+                    GArray **bookmarks)
 {
     char *fn;
     FILE *f;
@@ -1231,8 +1228,8 @@ load_file_position (const vfs_path_t * filename_vpath, long *line, long *column,
  */
 
 void
-save_file_position (const vfs_path_t * filename_vpath, long line, long column, off_t offset,
-                    GArray * bookmarks)
+save_file_position (const vfs_path_t *filename_vpath, long line, long column, off_t offset,
+                    GArray *bookmarks)
 {
     static size_t filepos_max_saved_entries = 0;
     char *fn, *tmp_fn;
@@ -1275,7 +1272,7 @@ save_file_position (const vfs_path_t * filename_vpath, long line, long column, o
         if (bookmarks != NULL)
             for (i = 0; i < bookmarks->len && i < MAX_SAVED_BOOKMARKS; i++)
                 if (fprintf (f, ";%zu", g_array_index (bookmarks, size_t, i)) < 0)
-                    goto write_position_error;
+                      goto write_position_error;
 
         if (fprintf (f, "\n") < 0)
             goto write_position_error;
@@ -1478,7 +1475,7 @@ mc_get_profile_root (void)
  */
 
 void
-mc_propagate_error (GError ** dest, int code, const char *format, ...)
+mc_propagate_error (GError **dest, int code, const char *format, ...)
 {
     if (dest != NULL && *dest == NULL)
     {
@@ -1504,7 +1501,7 @@ mc_propagate_error (GError ** dest, int code, const char *format, ...)
  */
 
 void
-mc_replace_error (GError ** dest, int code, const char *format, ...)
+mc_replace_error (GError **dest, int code, const char *format, ...)
 {
     if (dest != NULL)
     {
@@ -1533,7 +1530,7 @@ mc_replace_error (GError ** dest, int code, const char *format, ...)
  * @return TRUE if clock skew detected, FALSE otherwise
  */
 gboolean
-mc_time_elapsed (gint64 * timestamp, gint64 delay)
+mc_time_elapsed (gint64 *timestamp, gint64 delay)
 {
     gint64 now;
 

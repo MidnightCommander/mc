@@ -82,7 +82,7 @@ struct menu_t
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-menu_arrange (menu_t * menu, dlg_shortcut_str get_shortcut)
+menu_arrange (menu_t *menu, dlg_shortcut_str get_shortcut)
 {
     if (menu != NULL)
     {
@@ -121,7 +121,7 @@ menu_arrange (menu_t * menu, dlg_shortcut_str get_shortcut)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-menubar_paint_idx (const WMenuBar * menubar, unsigned int idx, int color)
+menubar_paint_idx (const WMenuBar *menubar, unsigned int idx, int color)
 {
     const WRect *w = &CONST_WIDGET (menubar)->rect;
     const menu_t *menu = MENU (g_list_nth_data (menubar->menu, menubar->current));
@@ -179,7 +179,7 @@ menubar_paint_idx (const WMenuBar * menubar, unsigned int idx, int color)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-menubar_draw_drop (const WMenuBar * menubar)
+menubar_draw_drop (const WMenuBar *menubar)
 {
     const WRect *w = &CONST_WIDGET (menubar)->rect;
     const menu_t *menu = MENU (g_list_nth_data (menubar->menu, menubar->current));
@@ -204,7 +204,7 @@ menubar_draw_drop (const WMenuBar * menubar)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-menubar_set_color (const WMenuBar * menubar, gboolean current, gboolean hotkey)
+menubar_set_color (const WMenuBar *menubar, gboolean current, gboolean hotkey)
 {
     if (!widget_get_state (CONST_WIDGET (menubar), WST_FOCUSED))
         tty_setcolor (MENU_INACTIVE_COLOR);
@@ -217,7 +217,7 @@ menubar_set_color (const WMenuBar * menubar, gboolean current, gboolean hotkey)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-menubar_draw (const WMenuBar * menubar)
+menubar_draw (const WMenuBar *menubar)
 {
     const WRect *w = &CONST_WIDGET (menubar)->rect;
     GList *i;
@@ -262,7 +262,7 @@ menubar_draw (const WMenuBar * menubar)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-menubar_remove (WMenuBar * menubar)
+menubar_remove (WMenuBar *menubar)
 {
     Widget *g;
 
@@ -287,7 +287,7 @@ menubar_remove (WMenuBar * menubar)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-menubar_left (WMenuBar * menubar)
+menubar_left (WMenuBar *menubar)
 {
     menubar_remove (menubar);
     if (menubar->current == 0)
@@ -300,7 +300,7 @@ menubar_left (WMenuBar * menubar)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-menubar_right (WMenuBar * menubar)
+menubar_right (WMenuBar *menubar)
 {
     menubar_remove (menubar);
     menubar->current = (menubar->current + 1) % g_list_length (menubar->menu);
@@ -310,7 +310,7 @@ menubar_right (WMenuBar * menubar)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-menubar_finish (WMenuBar * menubar)
+menubar_finish (WMenuBar *menubar)
 {
     Widget *w = WIDGET (menubar);
 
@@ -339,7 +339,7 @@ menubar_finish (WMenuBar * menubar)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-menubar_drop (WMenuBar * menubar, unsigned int selected)
+menubar_drop (WMenuBar *menubar, unsigned int selected)
 {
     menubar->is_dropped = TRUE;
     menubar->current = selected;
@@ -349,7 +349,7 @@ menubar_drop (WMenuBar * menubar, unsigned int selected)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-menubar_execute (WMenuBar * menubar)
+menubar_execute (WMenuBar *menubar)
 {
     const menu_t *menu = MENU (g_list_nth_data (menubar->menu, menubar->current));
     const menu_entry_t *entry = MENUENTRY (g_list_nth_data (menu->entries, menu->current));
@@ -368,7 +368,7 @@ menubar_execute (WMenuBar * menubar)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-menubar_down (WMenuBar * menubar)
+menubar_down (WMenuBar *menubar)
 {
     menu_t *menu = MENU (g_list_nth_data (menubar->menu, menubar->current));
     const unsigned int len = g_list_length (menu->entries);
@@ -389,7 +389,7 @@ menubar_down (WMenuBar * menubar)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-menubar_up (WMenuBar * menubar)
+menubar_up (WMenuBar *menubar)
 {
     menu_t *menu = MENU (g_list_nth_data (menubar->menu, menubar->current));
     const unsigned int len = g_list_length (menu->entries);
@@ -413,7 +413,7 @@ menubar_up (WMenuBar * menubar)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-menubar_first (WMenuBar * menubar)
+menubar_first (WMenuBar *menubar)
 {
     if (menubar->is_dropped)
     {
@@ -450,7 +450,7 @@ menubar_first (WMenuBar * menubar)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-menubar_last (WMenuBar * menubar)
+menubar_last (WMenuBar *menubar)
 {
     if (menubar->is_dropped)
     {
@@ -484,7 +484,7 @@ menubar_last (WMenuBar * menubar)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-menubar_try_drop_menu (WMenuBar * menubar, int hotkey)
+menubar_try_drop_menu (WMenuBar *menubar, int hotkey)
 {
     GList *i;
 
@@ -505,7 +505,7 @@ menubar_try_drop_menu (WMenuBar * menubar, int hotkey)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-menubar_try_exec_menu (WMenuBar * menubar, int hotkey)
+menubar_try_exec_menu (WMenuBar *menubar, int hotkey)
 {
     menu_t *menu;
     GList *i;
@@ -531,7 +531,7 @@ menubar_try_exec_menu (WMenuBar * menubar, int hotkey)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-menubar_help (const WMenuBar * menubar)
+menubar_help (const WMenuBar *menubar)
 {
     ev_help_t event_data;
 
@@ -549,7 +549,7 @@ menubar_help (const WMenuBar * menubar)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-menubar_execute_cmd (WMenuBar * menubar, long command)
+menubar_execute_cmd (WMenuBar *menubar, long command)
 {
     cb_ret_t ret = MSG_HANDLED;
 
@@ -603,7 +603,7 @@ menubar_execute_cmd (WMenuBar * menubar, long command)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-menubar_handle_key (WMenuBar * menubar, int key)
+menubar_handle_key (WMenuBar *menubar, int key)
 {
     long cmd;
     cb_ret_t ret = MSG_NOT_HANDLED;
@@ -627,7 +627,7 @@ menubar_handle_key (WMenuBar * menubar, int key)
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-menubar_refresh (WMenuBar * menubar)
+menubar_refresh (WMenuBar *menubar)
 {
     Widget *w = WIDGET (menubar);
 
@@ -645,7 +645,7 @@ menubar_refresh (WMenuBar * menubar)
 /* --------------------------------------------------------------------------------------------- */
 
 static inline void
-menubar_free_menu (WMenuBar * menubar)
+menubar_free_menu (WMenuBar *menubar)
 {
     g_clear_list (&menubar->menu, (GDestroyNotify) menu_free);
 }
@@ -653,7 +653,7 @@ menubar_free_menu (WMenuBar * menubar)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-menubar_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+menubar_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data)
 {
     WMenuBar *menubar = MENUBAR (w);
 
@@ -708,7 +708,7 @@ menubar_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
 /* --------------------------------------------------------------------------------------------- */
 
 static unsigned int
-menubar_get_menu_by_x_coord (const WMenuBar * menubar, int x)
+menubar_get_menu_by_x_coord (const WMenuBar *menubar, int x)
 {
     unsigned int i;
     GList *menu;
@@ -727,7 +727,7 @@ menubar_get_menu_by_x_coord (const WMenuBar * menubar, int x)
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-menubar_mouse_on_menu (const WMenuBar * menubar, int y, int x)
+menubar_mouse_on_menu (const WMenuBar *menubar, int y, int x)
 {
     const WRect *w = &CONST_WIDGET (menubar)->rect;
     menu_t *menu;
@@ -753,7 +753,7 @@ menubar_mouse_on_menu (const WMenuBar * menubar, int y, int x)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-menubar_change_selected_item (WMenuBar * menubar, int y)
+menubar_change_selected_item (WMenuBar *menubar, int y)
 {
     menu_t *menu;
     menu_entry_t *entry;
@@ -773,7 +773,7 @@ menubar_change_selected_item (WMenuBar * menubar, int y)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-menubar_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
+menubar_mouse_callback (Widget *w, mouse_msg_t msg, mouse_event_t *event)
 {
     static gboolean was_drag = FALSE;
 
@@ -905,7 +905,7 @@ menu_entry_new (const char *name, long command)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-menu_entry_free (menu_entry_t * entry)
+menu_entry_free (menu_entry_t *entry)
 {
     if (entry != NULL)
     {
@@ -918,7 +918,7 @@ menu_entry_free (menu_entry_t * entry)
 /* --------------------------------------------------------------------------------------------- */
 
 menu_t *
-menu_new (const char *name, GList * entries, const char *help_node)
+menu_new (const char *name, GList *entries, const char *help_node)
 {
     menu_t *menu;
 
@@ -937,7 +937,7 @@ menu_new (const char *name, GList * entries, const char *help_node)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-menu_set_name (menu_t * menu, const char *name)
+menu_set_name (menu_t *menu, const char *name)
 {
     hotkey_free (menu->text);
     menu->text = hotkey_new (name);
@@ -946,7 +946,7 @@ menu_set_name (menu_t * menu, const char *name)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-menu_free (menu_t * menu)
+menu_free (menu_t *menu)
 {
     hotkey_free (menu->text);
     g_list_free_full (menu->entries, (GDestroyNotify) menu_entry_free);
@@ -957,7 +957,7 @@ menu_free (menu_t * menu)
 /* --------------------------------------------------------------------------------------------- */
 
 WMenuBar *
-menubar_new (GList * menu)
+menubar_new (GList *menu)
 {
     WRect r = { 0, 0, 1, COLS };
     WMenuBar *menubar;
@@ -977,7 +977,7 @@ menubar_new (GList * menu)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-menubar_set_menu (WMenuBar * menubar, GList * menu)
+menubar_set_menu (WMenuBar *menubar, GList *menu)
 {
     /* delete previous menu */
     menubar_free_menu (menubar);
@@ -992,7 +992,7 @@ menubar_set_menu (WMenuBar * menubar, GList * menu)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-menubar_add_menu (WMenuBar * menubar, menu_t * menu)
+menubar_add_menu (WMenuBar *menubar, menu_t *menu)
 {
     if (menu != NULL)
     {
@@ -1010,7 +1010,7 @@ menubar_add_menu (WMenuBar * menubar, menu_t * menu)
  */
 
 void
-menubar_arrange (WMenuBar * menubar)
+menubar_arrange (WMenuBar *menubar)
 {
     int start_x = 1;
     GList *i;
@@ -1059,7 +1059,7 @@ menubar_arrange (WMenuBar * menubar)
 /** Find MenuBar widget in the dialog */
 
 WMenuBar *
-menubar_find (const WDialog * h)
+menubar_find (const WDialog *h)
 {
     return MENUBAR (widget_find_by_type (CONST_WIDGET (h), menubar_callback));
 }
@@ -1074,7 +1074,7 @@ menubar_find (const WDialog * h)
  * @which number of active dropdown menu
  */
 void
-menubar_activate (WMenuBar * menubar, gboolean dropped, int which)
+menubar_activate (WMenuBar *menubar, gboolean dropped, int which)
 {
     Widget *w = WIDGET (menubar);
 

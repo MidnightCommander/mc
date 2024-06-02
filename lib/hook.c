@@ -54,7 +54,7 @@
 /* --------------------------------------------------------------------------------------------- */
 
 void
-add_hook (hook_t ** hook_list, void (*hook_fn) (void *), void *data)
+add_hook (hook_t **hook_list, void (*hook_fn) (void *), void *data)
 {
     hook_t *new_hook = g_new (hook_t, 1);
 
@@ -68,7 +68,7 @@ add_hook (hook_t ** hook_list, void (*hook_fn) (void *), void *data)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-execute_hooks (hook_t * hook_list)
+execute_hooks (hook_t *hook_list)
 {
     hook_t *new_hook = NULL;
     hook_t *p;
@@ -101,7 +101,7 @@ execute_hooks (hook_t * hook_list)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-delete_hook (hook_t ** hook_list, void (*hook_fn) (void *))
+delete_hook (hook_t **hook_list, void (*hook_fn) (void *))
 {
     hook_t *new_list = NULL;
     hook_t *current, *next;
@@ -120,7 +120,7 @@ delete_hook (hook_t ** hook_list, void (*hook_fn) (void *))
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-hook_present (hook_t * hook_list, void (*hook_fn) (void *))
+hook_present (hook_t *hook_list, void (*hook_fn) (void *))
 {
     hook_t *p;
 

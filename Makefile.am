@@ -115,7 +115,7 @@ cppcheck-split-all: \
     cppcheck-unusedFunction \
     cppcheck-missingInclude
 
-INDENT_CMD = indent \
+INDENT_CMD = $(INDENT) \
     --gnu-style \
     --format-first-column-comments \
     --indent-level4 \

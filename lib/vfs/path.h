@@ -100,7 +100,7 @@ vfs_path_t *vfs_path_to_absolute (const vfs_path_t * vpath);
 /*** inline functions ****************************************************************************/
 
 static inline gboolean
-vfs_path_element_valid (const vfs_path_element_t * element)
+vfs_path_element_valid (const vfs_path_element_t *element)
 {
     return (element != NULL && element->class != NULL);
 }
@@ -108,7 +108,7 @@ vfs_path_element_valid (const vfs_path_element_t * element)
 /* --------------------------------------------------------------------------------------------- */
 
 static inline const char *
-vfs_path_get_last_path_str (const vfs_path_t * vpath)
+vfs_path_get_last_path_str (const vfs_path_t *vpath)
 {
     const vfs_path_element_t *element;
     if (vpath == NULL)
@@ -120,7 +120,7 @@ vfs_path_get_last_path_str (const vfs_path_t * vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 static inline const struct vfs_class *
-vfs_path_get_last_path_vfs (const vfs_path_t * vpath)
+vfs_path_get_last_path_vfs (const vfs_path_t *vpath)
 {
     const vfs_path_element_t *element;
     if (vpath == NULL)
@@ -139,7 +139,7 @@ vfs_path_get_last_path_vfs (const vfs_path_t * vpath)
  */
 
 static inline const char *
-vfs_path_as_str (const vfs_path_t * vpath)
+vfs_path_as_str (const vfs_path_t *vpath)
 {
     return (vpath == NULL ? NULL : vpath->str);
 }

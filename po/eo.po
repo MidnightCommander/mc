@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-04-07 16:41+0300\n"
+"POT-Creation-Date: 2024-06-02 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2022\n"
 "Language-Team: Esperanto (http://app.transifex.com/mc/mc/language/eo/)\n"
@@ -562,29 +562,11 @@ msgstr "Ricevanta dosieron"
 msgid "Changes to file lost"
 msgstr "Ŝanĝoj de la dosiero perditaj"
 
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "%s ne estas dosierujo\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr "Dosierujo %s ne estas estrata de vi\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr "Ne eblas elekti la ĝustajn permesojn por dosierujo %s\n"
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
+#, fuzzy, c-format
+msgid ""
+"Cannot create temporary directory %s: %s.\n"
+"Temporary files will not be created\n"
 msgstr "Ne eblas krei provizoran dosierujon %s: %s\n"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr "Provizoraj dosieroj kreiĝos en %s\n"
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr "Provizoraj dosieroj ne kreiĝos\n"
 
 msgid "Press any key to continue..."
 msgstr "Premu iun klavon por daŭri..."
@@ -4746,3 +4728,23 @@ msgstr "Ĉu deiri de la komenco?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Ne eblas atingi lokan kopion de /ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid "%s is not a directory\n"
+#~ msgstr "%s ne estas dosierujo\n"
+
+#, c-format
+#~ msgid "Directory %s is not owned by you\n"
+#~ msgstr "Dosierujo %s ne estas estrata de vi\n"
+
+#, c-format
+#~ msgid "Cannot set correct permissions for directory %s\n"
+#~ msgstr "Ne eblas elekti la ĝustajn permesojn por dosierujo %s\n"
+
+#, c-format
+#~ msgid "Temporary files will be created in %s\n"
+#~ msgstr "Provizoraj dosieroj kreiĝos en %s\n"
+
+#, c-format
+#~ msgid "Temporary files will not be created\n"
+#~ msgstr "Provizoraj dosieroj ne kreiĝos\n"

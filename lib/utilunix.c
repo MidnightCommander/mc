@@ -113,7 +113,7 @@ static int_cache gid_cache[GID_CACHE_SIZE];
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-i_cache_match (int id, int_cache * cache, int size)
+i_cache_match (int id, int_cache *cache, int size)
 {
     int i;
 
@@ -126,7 +126,7 @@ i_cache_match (int id, int_cache * cache, int size)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-i_cache_add (int id, int_cache * cache, int size, char *text, int *last)
+i_cache_add (int id, int_cache *cache, int size, char *text, int *last)
 {
     g_free (cache[*last].string);
     cache[*last].string = g_strdup (text);
@@ -167,7 +167,7 @@ my_fork (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-my_system__save_sigaction_handlers (my_system_sigactions_t * sigactions)
+my_system__save_sigaction_handlers (my_system_sigactions_t *sigactions)
 {
     struct sigaction ignore;
 
@@ -186,7 +186,7 @@ my_system__save_sigaction_handlers (my_system_sigactions_t * sigactions)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-my_system__restore_sigaction_handlers (my_system_sigactions_t * sigactions)
+my_system__restore_sigaction_handlers (my_system_sigactions_t *sigactions)
 {
     sigaction (SIGINT, &sigactions->intr, NULL);
     sigaction (SIGQUIT, &sigactions->quit, NULL);
@@ -220,7 +220,7 @@ my_system_make_arg_array (int flags, const char *shell)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-mc_pread_stream (mc_pipe_stream_t * ps, const fd_set * fds)
+mc_pread_stream (mc_pipe_stream_t *ps, const fd_set *fds)
 {
     size_t buf_len;
     ssize_t read_len;
@@ -496,7 +496,7 @@ my_systemv_flags (int flags, const char *command, char *const argv[])
  */
 
 mc_pipe_t *
-mc_popen (const char *command, gboolean read_out, gboolean read_err, GError ** error)
+mc_popen (const char *command, gboolean read_out, gboolean read_err, GError **error)
 {
     mc_pipe_t *p;
     const char *const argv[] = { "/bin/sh", "sh", "-c", command, NULL };
@@ -558,7 +558,7 @@ mc_popen (const char *command, gboolean read_out, gboolean read_err, GError ** e
  */
 
 void
-mc_pread (mc_pipe_t * p, GError ** error)
+mc_pread (mc_pipe_t *p, GError **error)
 {
     gboolean read_out, read_err;
     fd_set fds;
@@ -624,7 +624,7 @@ mc_pread (mc_pipe_t * p, GError ** error)
  */
 
 GString *
-mc_pstream_get_string (mc_pipe_stream_t * ps)
+mc_pstream_get_string (mc_pipe_stream_t *ps)
 {
     char *s;
     size_t size, i;
@@ -666,7 +666,7 @@ mc_pstream_get_string (mc_pipe_stream_t * ps)
  */
 
 void
-mc_pclose (mc_pipe_t * p, GError ** error)
+mc_pclose (mc_pipe_t *p, GError **error)
 {
     int res;
 

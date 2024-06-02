@@ -214,6 +214,7 @@ struct vfs_dirent
     /* public */
     ino_t d_ino;
     char *d_name;               /* Alias of d_name_str->str */
+    size_t d_len;               /* Alias of d_name_str->len */
 };
 
 /*** global variables defined in .c file *********************************************************/

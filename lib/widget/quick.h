@@ -346,7 +346,7 @@ int quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip);
 /*** inline functions ****************************************************************************/
 
 static inline int
-quick_dialog (quick_dialog_t * quick_dlg)
+quick_dialog (quick_dialog_t *quick_dlg)
 {
     return quick_dialog_skip (quick_dlg, 1);
 }

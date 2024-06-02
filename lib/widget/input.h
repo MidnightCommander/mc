@@ -58,7 +58,7 @@ typedef struct
     gboolean init_from_history; /* init text will be get from history */
     gboolean need_push;         /* need to push the current Input on hist? */
     gboolean strip_password;    /* need to strip password before placing string to history */
-    char **completions;         /* possible completions array */
+    GPtrArray *completions;     /* possible completions array */
     input_complete_t completion_flags;
     char charbuf[MB_LEN_MAX];   /* buffer for multibytes characters */
     size_t charpoint;           /* point to end of mulibyte sequence in charbuf */
@@ -114,7 +114,7 @@ void input_complete_free (WInput * in);
  * @return newly allocated string that contains a copy of @in's text.
  */
 static inline char *
-input_get_text (const WInput * in)
+input_get_text (const WInput *in)
 {
     return g_strndup (in->buffer->str, in->buffer->len);
 }
@@ -129,7 +129,7 @@ input_get_text (const WInput * in)
  * @return pointer to @in->buffer->str.
  */
 static inline const char *
-input_get_ctext (const WInput * in)
+input_get_ctext (const WInput *in)
 {
     return in->buffer->str;
 }
@@ -144,7 +144,7 @@ input_get_ctext (const WInput * in)
  * @return TRUE if buffer of @in is empty, FALSE otherwise.
  */
 static inline gboolean
-input_is_empty (const WInput * in)
+input_is_empty (const WInput *in)
 {
     return (in->buffer->len == 0);
 }

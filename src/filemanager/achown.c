@@ -74,8 +74,7 @@ static struct
     int x;
     int len;
     const char *text;
-} advanced_chown_but[BUTTONS] =
-{
+} advanced_chown_but[BUTTONS] = {
     /* *INDENT-OFF* */
     { 0, B_ENTER,   NARROW_BUTTON,  3, 0, "   " },
     { 0, B_ENTER,   NARROW_BUTTON, 11, 0, "   " },
@@ -238,7 +237,7 @@ update_ownership (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-print_flags (const WDialog * h)
+print_flags (const WDialog *h)
 {
     int i;
 
@@ -279,7 +278,7 @@ print_flags (const WDialog * h)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-advanced_chown_refresh (const WDialog * h)
+advanced_chown_refresh (const WDialog *h)
 {
     tty_setcolor (COLOR_NORMAL);
 
@@ -315,7 +314,7 @@ advanced_chown_info_update (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-update_mode (WGroup * g)
+update_mode (WGroup *g)
 {
     print_flags (DIALOG (g));
     advanced_chown_info_update ();
@@ -325,7 +324,7 @@ update_mode (WGroup * g)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-perm_button_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+perm_button_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data)
 {
     WButton *b = BUTTON (w);
     WGroup *g = w->owner;
@@ -439,7 +438,7 @@ perm_button_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-perm_button_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
+perm_button_mouse_callback (Widget *w, mouse_msg_t msg, mouse_event_t *event)
 {
     switch (msg)
     {
@@ -479,7 +478,7 @@ perm_button_new (int y, int x, int action, button_flags_t flags, const char *tex
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-chl_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+chl_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data)
 {
     switch (msg)
     {
@@ -508,7 +507,7 @@ chl_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *dat
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-user_group_button_cb (WButton * button, int action)
+user_group_button_cb (WButton *button, int action)
 {
     Widget *w = WIDGET (button);
     int f_pos;
@@ -654,7 +653,7 @@ user_group_button_cb (WButton * button, int action)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-advanced_chown_bg_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+advanced_chown_bg_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data)
 {
     switch (msg)
     {
@@ -672,7 +671,7 @@ advanced_chown_bg_callback (Widget * w, Widget * sender, widget_msg_t msg, int p
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-advanced_chown_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+advanced_chown_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data)
 {
     WGroup *g = GROUP (w);
     int i = 0;
@@ -729,7 +728,7 @@ advanced_chown_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm
 /* --------------------------------------------------------------------------------------------- */
 
 static WDialog *
-advanced_chown_dlg_create (WPanel * panel)
+advanced_chown_dlg_create (WPanel *panel)
 {
     gboolean single_set;
     WDialog *ch_dlg;
@@ -833,7 +832,7 @@ advanced_chown_done (gboolean need_update)
 /* --------------------------------------------------------------------------------------------- */
 
 static const GString *
-next_file (const WPanel * panel)
+next_file (const WPanel *panel)
 {
     while (panel->dir.list[current_file].f.marked == 0)
         current_file++;
@@ -844,7 +843,7 @@ next_file (const WPanel * panel)
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-try_advanced_chown (const vfs_path_t * p, mode_t m, uid_t u, gid_t g)
+try_advanced_chown (const vfs_path_t *p, mode_t m, uid_t u, gid_t g)
 {
     int chmod_result;
     const char *fname = NULL;
@@ -929,7 +928,7 @@ try_advanced_chown (const vfs_path_t * p, mode_t m, uid_t u, gid_t g)
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-do_advanced_chown (WPanel * panel, const vfs_path_t * p, mode_t m, uid_t u, gid_t g)
+do_advanced_chown (WPanel *panel, const vfs_path_t *p, mode_t m, uid_t u, gid_t g)
 {
     gboolean ret;
 
@@ -943,7 +942,7 @@ do_advanced_chown (WPanel * panel, const vfs_path_t * p, mode_t m, uid_t u, gid_
  /* --------------------------------------------------------------------------------------------- */
 
 static void
-apply_advanced_chowns (WPanel * panel, vfs_path_t * vpath, struct stat *sf)
+apply_advanced_chowns (WPanel *panel, vfs_path_t *vpath, struct stat *sf)
 {
     gid_t a_gid = sf->st_gid;
     uid_t a_uid = sf->st_uid;
@@ -990,7 +989,7 @@ apply_advanced_chowns (WPanel * panel, vfs_path_t * vpath, struct stat *sf)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-advanced_chown_cmd (WPanel * panel)
+advanced_chown_cmd (WPanel *panel)
 {
     gboolean need_update;
     gboolean end_chown;

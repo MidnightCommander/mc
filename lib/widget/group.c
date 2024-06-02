@@ -79,7 +79,7 @@ group_widget_init (void *data, void *user_data)
 /* --------------------------------------------------------------------------------------------- */
 
 static GList *
-group_get_next_or_prev_of (GList * list, gboolean next)
+group_get_next_or_prev_of (GList *list, gboolean next)
 {
     GList *l = NULL;
 
@@ -110,7 +110,7 @@ group_get_next_or_prev_of (GList * list, gboolean next)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-group_select_next_or_prev (WGroup * g, gboolean next)
+group_select_next_or_prev (WGroup *g, gboolean next)
 {
     if (g->widgets != NULL && g->current != NULL)
     {
@@ -148,7 +148,7 @@ group_widget_set_state (gpointer data, gpointer user_data)
  */
 
 static void
-group_send_broadcast_msg_custom (WGroup * g, widget_msg_t msg, gboolean reverse,
+group_send_broadcast_msg_custom (WGroup *g, widget_msg_t msg, gboolean reverse,
                                  widget_options_t options)
 {
     GList *p, *first;
@@ -186,7 +186,7 @@ group_send_broadcast_msg_custom (WGroup * g, widget_msg_t msg, gboolean reverse,
   */
 
 static void
-group_default_make_global (Widget * w, const WRect * delta)
+group_default_make_global (Widget *w, const WRect *delta)
 {
     GList *iter;
 
@@ -222,7 +222,7 @@ group_default_make_global (Widget * w, const WRect * delta)
   */
 
 static void
-group_default_make_local (Widget * w, const WRect * delta)
+group_default_make_local (Widget *w, const WRect *delta)
 {
     GList *iter;
 
@@ -260,7 +260,7 @@ group_default_make_local (Widget * w, const WRect * delta)
  */
 
 static GList *
-group_default_find (const Widget * w, const Widget * what)
+group_default_find (const Widget *w, const Widget *what)
 {
     GList *w0;
 
@@ -292,7 +292,7 @@ group_default_find (const Widget * w, const Widget * what)
  */
 
 static Widget *
-group_default_find_by_type (const Widget * w, widget_cb_fn cb)
+group_default_find_by_type (const Widget *w, widget_cb_fn cb)
 {
     Widget *w0;
 
@@ -324,7 +324,7 @@ group_default_find_by_type (const Widget * w, widget_cb_fn cb)
  */
 
 static Widget *
-group_default_find_by_id (const Widget * w, unsigned long id)
+group_default_find_by_id (const Widget *w, unsigned long id)
 {
     Widget *w0;
 
@@ -354,7 +354,7 @@ group_default_find_by_id (const Widget * w, unsigned long id)
  */
 
 static cb_ret_t
-group_update_cursor (WGroup * g)
+group_update_cursor (WGroup *g)
 {
     GList *p = g->current;
 
@@ -422,7 +422,7 @@ group_widget_set_position (gpointer data, gpointer user_data)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-group_set_position (WGroup * g, const WRect * r)
+group_set_position (WGroup *g, const WRect *r)
 {
     WRect *w = &WIDGET (g)->rect;
     widget_shift_scale_t wss;
@@ -451,7 +451,7 @@ group_set_position (WGroup * g, const WRect * r)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-group_default_resize (WGroup * g, WRect * r)
+group_default_resize (WGroup *g, WRect *r)
 {
     /* This is default resizing mechanism.
      * The main idea of this code is to resize dialog according to flags
@@ -470,7 +470,7 @@ group_default_resize (WGroup * g, WRect * r)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-group_draw (WGroup * g)
+group_draw (WGroup *g)
 {
     Widget *wg = WIDGET (g);
 
@@ -495,7 +495,7 @@ group_draw (WGroup * g)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-group_handle_key (WGroup * g, int key)
+group_handle_key (WGroup *g, int key)
 {
     cb_ret_t handled;
 
@@ -516,7 +516,7 @@ group_handle_key (WGroup * g, int key)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-group_handle_hotkey (WGroup * g, int key)
+group_handle_hotkey (WGroup *g, int key)
 {
     GList *current;
     Widget *w;
@@ -596,7 +596,7 @@ group_handle_hotkey (WGroup * g, int key)
  */
 
 void
-group_init (WGroup * g, const WRect * r, widget_cb_fn callback, widget_mouse_cb_fn mouse_callback)
+group_init (WGroup *g, const WRect *r, widget_cb_fn callback, widget_mouse_cb_fn mouse_callback)
 {
     Widget *w = WIDGET (g);
 
@@ -619,7 +619,7 @@ group_init (WGroup * g, const WRect * r, widget_cb_fn callback, widget_mouse_cb_
 /* --------------------------------------------------------------------------------------------- */
 
 cb_ret_t
-group_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+group_default_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data)
 {
     WGroup *g = GROUP (w);
 
@@ -669,7 +669,7 @@ group_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
  * @return       MSG_HANDLED if set was handled successfully, MSG_NOT_HANDLED otherwise.
  */
 cb_ret_t
-group_default_set_state (Widget * w, widget_state_t state, gboolean enable)
+group_default_set_state (Widget *w, widget_state_t state, gboolean enable)
 {
     gboolean ret = MSG_HANDLED;
     WGroup *g = GROUP (w);
@@ -711,7 +711,7 @@ group_default_set_state (Widget * w, widget_state_t state, gboolean enable)
  * @return result of mouse event handling
  */
 int
-group_handle_mouse_event (Widget * w, Gpm_Event * event)
+group_handle_mouse_event (Widget *w, Gpm_Event *event)
 {
     WGroup *g = GROUP (w);
 
@@ -761,7 +761,7 @@ group_handle_mouse_event (Widget * w, Gpm_Event * event)
  */
 
 unsigned long
-group_add_widget_autopos (WGroup * g, void *w, widget_pos_flags_t pos_flags, const void *before)
+group_add_widget_autopos (WGroup *g, void *w, widget_pos_flags_t pos_flags, const void *before)
 {
     Widget *wg = WIDGET (g);
     Widget *ww = WIDGET (w);
@@ -861,7 +861,7 @@ group_remove_widget (void *w)
  */
 
 void
-group_set_current_widget_next (WGroup * g)
+group_set_current_widget_next (WGroup *g)
 {
     g->current = group_get_next_or_prev_of (g->current, TRUE);
 }
@@ -874,7 +874,7 @@ group_set_current_widget_next (WGroup * g)
  */
 
 void
-group_set_current_widget_prev (WGroup * g)
+group_set_current_widget_prev (WGroup *g)
 {
     g->current = group_get_next_or_prev_of (g->current, FALSE);
 }
@@ -889,7 +889,7 @@ group_set_current_widget_prev (WGroup * g)
  */
 
 GList *
-group_get_widget_next_of (GList * w)
+group_get_widget_next_of (GList *w)
 {
     return group_get_next_or_prev_of (w, TRUE);
 }
@@ -904,7 +904,7 @@ group_get_widget_next_of (GList * w)
  */
 
 GList *
-group_get_widget_prev_of (GList * w)
+group_get_widget_prev_of (GList *w)
 {
     return group_get_next_or_prev_of (w, FALSE);
 }
@@ -917,7 +917,7 @@ group_get_widget_prev_of (GList * w)
  */
 
 void
-group_select_next_widget (WGroup * g)
+group_select_next_widget (WGroup *g)
 {
     group_select_next_or_prev (g, TRUE);
 }
@@ -930,7 +930,7 @@ group_select_next_widget (WGroup * g)
  */
 
 void
-group_select_prev_widget (WGroup * g)
+group_select_prev_widget (WGroup *g)
 {
     group_select_next_or_prev (g, FALSE);
 }
@@ -944,7 +944,7 @@ group_select_prev_widget (WGroup * g)
  */
 
 void
-group_select_widget_by_id (const WGroup * g, unsigned long id)
+group_select_widget_by_id (const WGroup *g, unsigned long id)
 {
     Widget *w;
 
@@ -962,7 +962,7 @@ group_select_widget_by_id (const WGroup * g, unsigned long id)
  */
 
 void
-group_send_broadcast_msg (WGroup * g, widget_msg_t msg)
+group_send_broadcast_msg (WGroup *g, widget_msg_t msg)
 {
     group_send_broadcast_msg_custom (g, msg, FALSE, WOP_DEFAULT);
 }

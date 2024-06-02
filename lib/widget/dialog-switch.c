@@ -89,7 +89,7 @@ dialog_switch_suspend (void *data, void *user_data)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-dialog_switch_goto (GList * dlg)
+dialog_switch_goto (GList *dlg)
 {
     if (mc_current != dlg)
     {
@@ -125,7 +125,7 @@ dialog_switch_goto (GList * dlg)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-dialog_switch_resize (WDialog * d)
+dialog_switch_resize (WDialog *d)
 {
     if (widget_get_state (WIDGET (d), WST_ACTIVE))
         send_message (d, NULL, MSG_RESIZE, 0, NULL);
@@ -138,7 +138,7 @@ dialog_switch_resize (WDialog * d)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-dialog_switch_add (WDialog * h)
+dialog_switch_add (WDialog *h)
 {
     GList *dlg;
 
@@ -159,7 +159,7 @@ dialog_switch_add (WDialog * h)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-dialog_switch_remove (WDialog * h)
+dialog_switch_remove (WDialog *h)
 {
     GList *this;
 
@@ -252,9 +252,8 @@ dialog_switch_list (void)
         else
             title = g_strdup ("");
 
-        listbox_add_item (listbox->list, LISTBOX_APPEND_BEFORE, get_hotkey (i++), title, h, FALSE);
-
-        g_free (title);
+        listbox_add_item_take (listbox->list, LISTBOX_APPEND_BEFORE, get_hotkey (i++), title, h,
+                               FALSE);
     }
 
     selected = listbox_run_with_data (listbox, mc_current);

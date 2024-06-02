@@ -82,7 +82,7 @@ static const char hex_char[] = "0123456789ABCDEF";
  */
 
 static mark_t
-mcview_hex_calculate_boldflag (WView * view, off_t from, struct hexedit_change_node *curr,
+mcview_hex_calculate_boldflag (WView *view, off_t from, struct hexedit_change_node *curr,
                                gboolean force_changed)
 {
     return (from == view->hex_cursor) ? MARK_CURSOR
@@ -95,7 +95,7 @@ mcview_hex_calculate_boldflag (WView * view, off_t from, struct hexedit_change_n
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_display_hex (WView * view)
+mcview_display_hex (WView *view)
 {
     const WRect *r = &view->data_area;
     int ngroups = view->bytes_per_line / 4;
@@ -376,7 +376,7 @@ mcview_display_hex (WView * view)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mcview_hexedit_save_changes (WView * view)
+mcview_hexedit_save_changes (WView *view)
 {
     int answer = 0;
 
@@ -437,7 +437,7 @@ mcview_hexedit_save_changes (WView * view)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_toggle_hexedit_mode (WView * view)
+mcview_toggle_hexedit_mode (WView *view)
 {
     view->hexedit_mode = !view->hexedit_mode;
     view->dpy_bbar_dirty = TRUE;
@@ -447,7 +447,7 @@ mcview_toggle_hexedit_mode (WView * view)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_hexedit_free_change_list (WView * view)
+mcview_hexedit_free_change_list (WView *view)
 {
     struct hexedit_change_node *curr, *next;
 

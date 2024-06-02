@@ -264,7 +264,7 @@ int editcmd_dialog_raw_key_query (const char *heading, const char *query, gboole
  * @return TRUE on success, FALSE on failure.
  */
 static inline gboolean
-edit_reload (WEdit * edit, const vfs_path_t * filename_vpath)
+edit_reload (WEdit *edit, const vfs_path_t *filename_vpath)
 {
     edit_arg_t arg;
 

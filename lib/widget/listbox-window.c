@@ -126,7 +126,7 @@ listbox_window_new (int lines, int cols, const char *title, const char *help)
 
 /** Returns the number of the item selected */
 int
-listbox_run (Listbox * l)
+listbox_run (Listbox *l)
 {
     int val = -1;
 
@@ -147,7 +147,7 @@ listbox_run (Listbox * l)
  * @return        the 'data' of the item selected, or NULL if none selected.
  */
 void *
-listbox_run_with_data (Listbox * l, const void *select)
+listbox_run_with_data (Listbox *l, const void *select)
 {
     void *val = NULL;
 

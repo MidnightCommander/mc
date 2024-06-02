@@ -81,7 +81,7 @@ static input_colors_t command_colors;
  */
 
 static cb_ret_t
-enter (WInput * lc_cmdline)
+enter (WInput *lc_cmdline)
 {
     const char *cmd;
 
@@ -183,7 +183,7 @@ enter (WInput * lc_cmdline)
  */
 
 static cb_ret_t
-command_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+command_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data)
 {
     switch (msg)
     {
@@ -246,7 +246,7 @@ command_set_default_colors (void)
  */
 
 void
-command_insert (WInput * in, const char *text, gboolean insert_extra_space)
+command_insert (WInput *in, const char *text, gboolean insert_extra_space)
 {
     char *quoted_text;
 

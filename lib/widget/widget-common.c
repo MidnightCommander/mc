@@ -82,7 +82,7 @@ widget_set_id (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-widget_default_resize (Widget * w, const WRect * r)
+widget_default_resize (Widget *w, const WRect *r)
 {
     if (r == NULL)
         return MSG_NOT_HANDLED;
@@ -95,7 +95,7 @@ widget_default_resize (Widget * w, const WRect * r)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-widget_do_focus (Widget * w, gboolean enable)
+widget_do_focus (Widget *w, gboolean enable)
 {
     if (w != NULL && widget_get_state (WIDGET (w->owner), WST_VISIBLE | WST_FOCUSED))
         widget_set_state (w, WST_FOCUSED, enable);
@@ -109,7 +109,7 @@ widget_do_focus (Widget * w, gboolean enable)
  */
 
 static void
-widget_focus (Widget * w)
+widget_focus (Widget *w)
 {
     WGroup *g = w->owner;
 
@@ -136,7 +136,7 @@ widget_focus (Widget * w)
  * Put widget on top or bottom of Z-order.
  */
 static void
-widget_reorder (GList * l, gboolean set_top)
+widget_reorder (GList *l, gboolean set_top)
 {
     WGroup *g = WIDGET (l->data)->owner;
 
@@ -169,7 +169,7 @@ hotkey_cmp (const char *s1, const char *s2)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-widget_default_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
+widget_default_mouse_callback (Widget *w, mouse_msg_t msg, mouse_event_t *event)
 {
     /* do nothing */
     (void) w;
@@ -180,7 +180,7 @@ widget_default_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * even
 /* --------------------------------------------------------------------------------------------- */
 
 static const int *
-widget_default_get_colors (const Widget * w)
+widget_default_get_colors (const Widget *w)
 {
     const Widget *owner = CONST_WIDGET (w->owner);
 
@@ -262,7 +262,7 @@ hotkey_equal (const hotkey_t hotkey1, const hotkey_t hotkey2)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-hotkey_draw (const Widget * w, const hotkey_t hotkey, gboolean focused)
+hotkey_draw (const Widget *w, const hotkey_t hotkey, gboolean focused)
 {
     if (hotkey.start[0] != '\0')
     {
@@ -307,7 +307,7 @@ hotkey_get_text (const hotkey_t hotkey)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-widget_init (Widget * w, const WRect * r, widget_cb_fn callback, widget_mouse_cb_fn mouse_callback)
+widget_init (Widget *w, const WRect *r, widget_cb_fn callback, widget_mouse_cb_fn mouse_callback)
 {
     w->id = widget_set_id ();
     w->rect = *r;
@@ -345,7 +345,7 @@ widget_init (Widget * w, const WRect * r, widget_cb_fn callback, widget_mouse_cb
 
 /* Default callback for widgets */
 cb_ret_t
-widget_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+widget_default_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data)
 {
     (void) sender;
     (void) parm;
@@ -381,7 +381,7 @@ widget_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm
  * @param enable  TRUE if specified options should be added, FALSE if options should be removed
  */
 void
-widget_set_options (Widget * w, widget_options_t options, gboolean enable)
+widget_set_options (Widget *w, widget_options_t options, gboolean enable)
 {
     if (enable)
         w->options |= options;
@@ -392,7 +392,7 @@ widget_set_options (Widget * w, widget_options_t options, gboolean enable)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-widget_adjust_position (widget_pos_flags_t pos_flags, WRect * r)
+widget_adjust_position (widget_pos_flags_t pos_flags, WRect *r)
 {
     if ((pos_flags & WPOS_FULLSCREEN) != 0)
     {
@@ -431,7 +431,7 @@ widget_adjust_position (widget_pos_flags_t pos_flags, WRect * r)
  */
 
 void
-widget_set_size (Widget * w, int y, int x, int lines, int cols)
+widget_set_size (Widget *w, int y, int x, int lines, int cols)
 {
     WRect r = { y, x, lines, cols };
 
@@ -448,7 +448,7 @@ widget_set_size (Widget * w, int y, int x, int lines, int cols)
  */
 
 void
-widget_set_size_rect (Widget * w, WRect * r)
+widget_set_size_rect (Widget *w, WRect *r)
 {
     send_message (w, NULL, MSG_RESIZE, 0, r);
     widget_draw (w);
@@ -457,7 +457,7 @@ widget_set_size_rect (Widget * w, WRect * r)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-widget_selectcolor (const Widget * w, gboolean focused, gboolean hotkey)
+widget_selectcolor (const Widget *w, gboolean focused, gboolean hotkey)
 {
     int color;
     const int *colors;
@@ -477,7 +477,7 @@ widget_selectcolor (const Widget * w, gboolean focused, gboolean hotkey)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-widget_erase (Widget * w)
+widget_erase (Widget *w)
 {
     if (w != NULL)
         tty_fill_region (w->rect.y, w->rect.x, w->rect.lines, w->rect.cols, ' ');
@@ -486,7 +486,7 @@ widget_erase (Widget * w)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-widget_set_visibility (Widget * w, gboolean make_visible)
+widget_set_visibility (Widget *w, gboolean make_visible)
 {
     if (widget_get_state (w, WST_VISIBLE) != make_visible)
         widget_set_state (w, WST_VISIBLE, make_visible);
@@ -526,7 +526,7 @@ widget_is_active (const void *w)
 /* --------------------------------------------------------------------------------------------- */
 
 cb_ret_t
-widget_draw (Widget * w)
+widget_draw (Widget *w)
 {
     cb_ret_t ret = MSG_NOT_HANDLED;
 
@@ -550,7 +550,7 @@ widget_draw (Widget * w)
   */
 
 void
-widget_replace (Widget * old_w, Widget * new_w)
+widget_replace (Widget *old_w, Widget *new_w)
 {
     WGroup *g = old_w->owner;
     gboolean should_focus = FALSE;
@@ -605,7 +605,7 @@ widget_replace (Widget * old_w, Widget * new_w)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-widget_is_focusable (const Widget * w)
+widget_is_focusable (const Widget *w)
 {
     return (widget_get_options (w, WOP_SELECTABLE) && widget_get_state (w, WST_VISIBLE) &&
             !widget_get_state (w, WST_DISABLED));
@@ -622,7 +622,7 @@ widget_is_focusable (const Widget * w)
  */
 
 void
-widget_select (Widget * w)
+widget_select (Widget *w)
 {
     WGroup *g;
 
@@ -650,7 +650,7 @@ widget_select (Widget * w)
  */
 
 void
-widget_set_bottom (Widget * w)
+widget_set_bottom (Widget *w)
 {
     widget_reorder (widget_find (WIDGET (w->owner), w), FALSE);
 }
@@ -665,7 +665,7 @@ widget_set_bottom (Widget * w)
   */
 
 long
-widget_lookup_key (Widget * w, int key)
+widget_lookup_key (Widget *w, int key)
 {
     if (w->ext_mode)
     {
@@ -687,7 +687,7 @@ widget_lookup_key (Widget * w, int key)
   */
 
 void
-widget_default_make_global (Widget * w, const WRect * delta)
+widget_default_make_global (Widget *w, const WRect *delta)
 {
     if (delta != NULL)
         rect_move (&w->rect, delta->y, delta->x);
@@ -706,7 +706,7 @@ widget_default_make_global (Widget * w, const WRect * delta)
   */
 
 void
-widget_default_make_local (Widget * w, const WRect * delta)
+widget_default_make_local (Widget *w, const WRect *delta)
 {
     if (delta != NULL)
         rect_move (&w->rect, -delta->y, -delta->x);
@@ -725,7 +725,7 @@ widget_default_make_local (Widget * w, const WRect * delta)
  */
 
 GList *
-widget_default_find (const Widget * w, const Widget * what)
+widget_default_find (const Widget *w, const Widget *what)
 {
     return (w != what
             || w->owner == NULL) ? NULL : g_list_find (CONST_GROUP (w->owner)->widgets, what);
@@ -743,7 +743,7 @@ widget_default_find (const Widget * w, const Widget * what)
  */
 
 Widget *
-widget_default_find_by_type (const Widget * w, widget_cb_fn cb)
+widget_default_find_by_type (const Widget *w, widget_cb_fn cb)
 {
     return (w->callback == cb ? WIDGET (w) : NULL);
 }
@@ -759,7 +759,7 @@ widget_default_find_by_type (const Widget * w, widget_cb_fn cb)
  */
 
 Widget *
-widget_default_find_by_id (const Widget * w, unsigned long id)
+widget_default_find_by_id (const Widget *w, unsigned long id)
 {
     return (w->id == id ? WIDGET (w) : NULL);
 }
@@ -777,7 +777,7 @@ widget_default_find_by_id (const Widget * w, unsigned long id)
  */
 
 cb_ret_t
-widget_default_set_state (Widget * w, widget_state_t state, gboolean enable)
+widget_default_set_state (Widget *w, widget_state_t state, gboolean enable)
 {
     gboolean ret = MSG_HANDLED;
     Widget *owner = WIDGET (GROUP (w->owner));
@@ -867,7 +867,7 @@ widget_default_set_state (Widget * w, widget_state_t state, gboolean enable)
  */
 
 void
-widget_default_destroy (Widget * w)
+widget_default_destroy (Widget *w)
 {
     send_message (w, NULL, MSG_DESTROY, 0, NULL);
     g_free (w);
@@ -877,7 +877,7 @@ widget_default_destroy (Widget * w)
 /* get mouse pointer location within widget */
 
 Gpm_Event
-mouse_get_local (const Gpm_Event * global, const Widget * w)
+mouse_get_local (const Gpm_Event *global, const Widget *w)
 {
     Gpm_Event local;
 
@@ -894,7 +894,7 @@ mouse_get_local (const Gpm_Event * global, const Widget * w)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mouse_global_in_widget (const Gpm_Event * event, const Widget * w)
+mouse_global_in_widget (const Gpm_Event *event, const Widget *w)
 {
     const WRect *r = &w->rect;
 

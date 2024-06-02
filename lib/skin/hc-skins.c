@@ -47,7 +47,7 @@
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mc_skin_hardcoded_blackwhite_colors (mc_skin_t * mc_skin)
+mc_skin_hardcoded_blackwhite_colors (mc_skin_t *mc_skin)
 {
     mc_config_set_string (mc_skin->config, "core", "_default_", "default;default");
     mc_config_set_string (mc_skin->config, "core", "selected", "A_REVERSE");
@@ -85,7 +85,7 @@ mc_skin_hardcoded_blackwhite_colors (mc_skin_t * mc_skin)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mc_skin_hardcoded_space_lines (mc_skin_t * mc_skin)
+mc_skin_hardcoded_space_lines (mc_skin_t *mc_skin)
 {
     /* single lines */
     set_lines ("vert", " ");
@@ -115,7 +115,7 @@ mc_skin_hardcoded_space_lines (mc_skin_t * mc_skin)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mc_skin_hardcoded_ugly_lines (mc_skin_t * mc_skin)
+mc_skin_hardcoded_ugly_lines (mc_skin_t *mc_skin)
 {
     /* single lines */
     set_lines ("vert", "|");

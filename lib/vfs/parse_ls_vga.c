@@ -205,7 +205,7 @@ is_year (char *str, struct tm *tim)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-vfs_parse_filetype (const char *s, size_t * ret_skipped, mode_t * ret_type)
+vfs_parse_filetype (const char *s, size_t *ret_skipped, mode_t *ret_type)
 {
     mode_t type;
 
@@ -272,7 +272,7 @@ vfs_parse_filetype (const char *s, size_t * ret_skipped, mode_t * ret_type)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-vfs_parse_fileperms (const char *s, size_t * ret_skipped, mode_t * ret_perms)
+vfs_parse_fileperms (const char *s, size_t *ret_skipped, mode_t *ret_perms)
 {
     const char *p = s;
     mode_t perms = 0;
@@ -411,7 +411,7 @@ vfs_parse_fileperms (const char *s, size_t * ret_skipped, mode_t * ret_perms)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-vfs_parse_filemode (const char *s, size_t * ret_skipped, mode_t * ret_mode)
+vfs_parse_filemode (const char *s, size_t *ret_skipped, mode_t *ret_mode)
 {
     const char *p = s;
     mode_t type, perms;
@@ -434,7 +434,7 @@ vfs_parse_filemode (const char *s, size_t * ret_skipped, mode_t * ret_mode)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-vfs_parse_raw_filemode (const char *s, size_t * ret_skipped, mode_t * ret_mode)
+vfs_parse_raw_filemode (const char *s, size_t *ret_skipped, mode_t *ret_mode)
 {
     const char *p = s;
     mode_t remote_type = 0, local_type, perms = 0;
@@ -495,7 +495,7 @@ vfs_parse_raw_filemode (const char *s, size_t * ret_skipped, mode_t * ret_mode)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-vfs_parse_month (const char *str, struct tm * tim)
+vfs_parse_month (const char *str, struct tm *tim)
 {
     static const char *month = "JanFebMarAprMayJunJulAugSepOctNovDec";
     const char *pos;
@@ -517,7 +517,7 @@ vfs_parse_month (const char *str, struct tm * tim)
 /** This function parses from idx in the columns[] array */
 
 int
-vfs_parse_filedate (int idx, time_t * t)
+vfs_parse_filedate (int idx, time_t *t)
 {
     char *p;
     struct tm tim;
@@ -679,8 +679,8 @@ vfs_parse_ls_lga_get_final_spaces (void)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-vfs_parse_ls_lga (const char *p, struct stat * s, char **filename, char **linkname,
-                  size_t * num_spaces)
+vfs_parse_ls_lga (const char *p, struct stat *s, char **filename, char **linkname,
+                  size_t *num_spaces)
 {
     int idx, idx2, num_cols;
     int i;

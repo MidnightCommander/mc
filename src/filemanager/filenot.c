@@ -61,7 +61,7 @@
 /* --------------------------------------------------------------------------------------------- */
 
 static vfs_path_t *
-get_absolute_name (const vfs_path_t * vpath)
+get_absolute_name (const vfs_path_t *vpath)
 {
     if (vpath == NULL)
         return NULL;
@@ -75,7 +75,7 @@ get_absolute_name (const vfs_path_t * vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-my_mkdir_rec (const vfs_path_t * vpath, mode_t mode)
+my_mkdir_rec (const vfs_path_t *vpath, mode_t mode)
 {
     vfs_path_t *q;
     int result;
@@ -110,7 +110,7 @@ my_mkdir_rec (const vfs_path_t * vpath, mode_t mode)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-my_mkdir (const vfs_path_t * vpath, mode_t mode)
+my_mkdir (const vfs_path_t *vpath, mode_t mode)
 {
     int result;
 

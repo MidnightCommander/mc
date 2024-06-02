@@ -77,7 +77,7 @@ void group_send_broadcast_msg (WGroup * g, widget_msg_t message);
  */
 
 static inline unsigned long
-group_add_widget (WGroup * g, void *w)
+group_add_widget (WGroup *g, void *w)
 {
     return group_add_widget_autopos (g, w, WPOS_KEEP_DEFAULT,
                                      g->current != NULL ? g->current->data : NULL);
@@ -95,7 +95,7 @@ group_add_widget (WGroup * g, void *w)
  */
 
 static inline unsigned long
-group_add_widget_before (WGroup * g, void *w, void *before)
+group_add_widget_before (WGroup *g, void *w, void *before)
 {
     return group_add_widget_autopos (g, w, WPOS_KEEP_DEFAULT, before);
 }
@@ -108,7 +108,7 @@ group_add_widget_before (WGroup * g, void *w, void *before)
  */
 
 static inline void
-group_select_current_widget (WGroup * g)
+group_select_current_widget (WGroup *g)
 {
     if (g->current != NULL)
         widget_select (WIDGET (g->current->data));
@@ -117,7 +117,7 @@ group_select_current_widget (WGroup * g)
 /* --------------------------------------------------------------------------------------------- */
 
 static inline unsigned long
-group_get_current_widget_id (const WGroup * g)
+group_get_current_widget_id (const WGroup *g)
 {
     return WIDGET (g->current->data)->id;
 }

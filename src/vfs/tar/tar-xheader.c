@@ -278,7 +278,7 @@ keyword_item_free (gpointer data)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-xheader_list_append (GSList ** root, const char *kw, const char *value)
+xheader_list_append (GSList **root, const char *kw, const char *value)
 {
     struct keyword_item *kp;
 
@@ -291,7 +291,7 @@ xheader_list_append (GSList ** root, const char *kw, const char *value)
 /* --------------------------------------------------------------------------------------------- */
 
 static inline void
-xheader_list_destroy (GSList ** root)
+xheader_list_destroy (GSList **root)
 {
     g_slist_free_full (*root, keyword_item_free);
     *root = NULL;
@@ -300,7 +300,7 @@ xheader_list_destroy (GSList ** root)
 /* --------------------------------------------------------------------------------------------- */
 
 static inline void
-run_override_list (GSList * kp, struct tar_stat_info *st)
+run_override_list (GSList *kp, struct tar_stat_info *st)
 {
     g_slist_foreach (kp, (GFunc) keyword_item_run, st);
 }
@@ -424,7 +424,7 @@ decode_time (struct timespec *ts, const char *arg, const char *keyword)
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-decode_signed_num (intmax_t * num, const char *arg, intmax_t minval, uintmax_t maxval,
+decode_signed_num (intmax_t *num, const char *arg, intmax_t minval, uintmax_t maxval,
                    const char *keyword)
 {
     char *arg_lim;
@@ -450,7 +450,7 @@ decode_signed_num (intmax_t * num, const char *arg, intmax_t minval, uintmax_t m
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-decode_num (uintmax_t * num, const char *arg, uintmax_t maxval, const char *keyword)
+decode_num (uintmax_t *num, const char *arg, uintmax_t maxval, const char *keyword)
 {
     intmax_t i;
 
@@ -958,7 +958,7 @@ sparse_map_decoder (struct tar_stat_info *st, const char *keyword, const char *a
  * @return TRUE on success, FALSE otherwize
  */
 gboolean
-tar_xheader_decode (struct tar_stat_info * st)
+tar_xheader_decode (struct tar_stat_info *st)
 {
     char *p;
     enum decode_record_status status;
@@ -989,7 +989,7 @@ tar_xheader_decode (struct tar_stat_info * st)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-tar_xheader_read (tar_super_t * archive, struct xheader * xhdr, union block * p, off_t size)
+tar_xheader_read (tar_super_t *archive, struct xheader *xhdr, union block *p, off_t size)
 {
     size_t j = 0;
 
@@ -1024,7 +1024,7 @@ tar_xheader_read (tar_super_t * archive, struct xheader * xhdr, union block * p,
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-tar_xheader_decode_global (struct xheader * xhdr)
+tar_xheader_decode_global (struct xheader *xhdr)
 {
     char *p;
     gboolean ret;

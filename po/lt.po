@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-04-07 16:41+0300\n"
+"POT-Creation-Date: 2024-06-02 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Mantas Kriaučiūnas Baltix <mantas@akl.lt>, 2020\n"
 "Language-Team: Lithuanian (http://app.transifex.com/mc/mc/language/lt/)\n"
@@ -560,29 +560,11 @@ msgstr "Parsiunčiamas failas"
 msgid "Changes to file lost"
 msgstr "Failo pakeitimai prarasti"
 
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "%s nėra aplankas\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr "Aplankas %s jums nepriklauso\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr " Nepavyko nustatyti reikiamų teisių aplankui %s\n"
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
+#, fuzzy, c-format
+msgid ""
+"Cannot create temporary directory %s: %s.\n"
+"Temporary files will not be created\n"
 msgstr "Nepavyko sukurti laikino aplanko %s: %s\n"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr "Laikinieji failai bus talpinami aplanke %s\n"
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr "Laikinieji failai nebus kuriami\n"
 
 msgid "Press any key to continue..."
 msgstr "Paspauskite bet kurį klavišą..."
@@ -4592,3 +4574,23 @@ msgstr "Tęsti nuo pradžios?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#, c-format
+#~ msgid "%s is not a directory\n"
+#~ msgstr "%s nėra aplankas\n"
+
+#, c-format
+#~ msgid "Directory %s is not owned by you\n"
+#~ msgstr "Aplankas %s jums nepriklauso\n"
+
+#, c-format
+#~ msgid "Cannot set correct permissions for directory %s\n"
+#~ msgstr " Nepavyko nustatyti reikiamų teisių aplankui %s\n"
+
+#, c-format
+#~ msgid "Temporary files will be created in %s\n"
+#~ msgstr "Laikinieji failai bus talpinami aplanke %s\n"
+
+#, c-format
+#~ msgid "Temporary files will not be created\n"
+#~ msgstr "Laikinieji failai nebus kuriami\n"

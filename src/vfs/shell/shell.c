@@ -661,7 +661,7 @@ shell_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
 
 static int
 shell_open_archive (struct vfs_s_super *super,
-                    const vfs_path_t * vpath, const vfs_path_element_t * vpath_element)
+                    const vfs_path_t *vpath, const vfs_path_element_t *vpath_element)
 {
     shell_super_t *shell_super = SHELL_SUPER (super);
 
@@ -724,8 +724,8 @@ shell_open_archive (struct vfs_s_super *super,
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-shell_archive_same (const vfs_path_element_t * vpath_element, struct vfs_s_super *super,
-                    const vfs_path_t * vpath, void *cookie)
+shell_archive_same (const vfs_path_element_t *vpath_element, struct vfs_s_super *super,
+                    const vfs_path_t *vpath, void *cookie)
 {
     vfs_path_element_t *path_element;
     int result;
@@ -983,7 +983,7 @@ shell_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, const char *remot
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-shell_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, char *localname)
+shell_file_store (struct vfs_class *me, vfs_file_handler_t *fh, char *name, char *localname)
 {
     shell_file_handler_t *shell = SHELL_FILE_HANDLER (fh);
     struct vfs_s_super *super = VFS_FILE_HANDLER_SUPER (fh);
@@ -1095,7 +1095,7 @@ shell_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, cha
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-shell_linear_start (struct vfs_class *me, vfs_file_handler_t * fh, off_t offset)
+shell_linear_start (struct vfs_class *me, vfs_file_handler_t *fh, off_t offset)
 {
     shell_file_handler_t *shell = SHELL_FILE_HANDLER (fh);
     struct vfs_s_super *super = VFS_FILE_HANDLER_SUPER (fh);
@@ -1140,7 +1140,7 @@ shell_linear_start (struct vfs_class *me, vfs_file_handler_t * fh, off_t offset)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-shell_linear_abort (struct vfs_class *me, vfs_file_handler_t * fh)
+shell_linear_abort (struct vfs_class *me, vfs_file_handler_t *fh)
 {
     shell_file_handler_t *shell = SHELL_FILE_HANDLER (fh);
     struct vfs_s_super *super = VFS_FILE_HANDLER_SUPER (fh);
@@ -1171,7 +1171,7 @@ shell_linear_abort (struct vfs_class *me, vfs_file_handler_t * fh)
 /* --------------------------------------------------------------------------------------------- */
 
 static ssize_t
-shell_linear_read (struct vfs_class *me, vfs_file_handler_t * fh, void *buf, size_t len)
+shell_linear_read (struct vfs_class *me, vfs_file_handler_t *fh, void *buf, size_t len)
 {
     shell_file_handler_t *shell = SHELL_FILE_HANDLER (fh);
     struct vfs_s_super *super = VFS_FILE_HANDLER_SUPER (fh);
@@ -1199,7 +1199,7 @@ shell_linear_read (struct vfs_class *me, vfs_file_handler_t * fh, void *buf, siz
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-shell_linear_close (struct vfs_class *me, vfs_file_handler_t * fh)
+shell_linear_close (struct vfs_class *me, vfs_file_handler_t *fh)
 {
     shell_file_handler_t *shell = SHELL_FILE_HANDLER (fh);
 
@@ -1244,7 +1244,7 @@ shell_ctl (void *fh, int ctlop, void *arg)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-shell_rename (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
+shell_rename (const vfs_path_t *vpath1, const vfs_path_t *vpath2)
 {
     const char *crpath1, *crpath2;
     char *rpath1, *rpath2;
@@ -1278,7 +1278,7 @@ shell_rename (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-shell_link (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
+shell_link (const vfs_path_t *vpath1, const vfs_path_t *vpath2)
 {
     const char *crpath1, *crpath2;
     char *rpath1, *rpath2;
@@ -1312,7 +1312,7 @@ shell_link (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-shell_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
+shell_symlink (const vfs_path_t *vpath1, const vfs_path_t *vpath2)
 {
     char *qsetto;
     const char *crpath;
@@ -1343,7 +1343,7 @@ shell_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-shell_stat (const vfs_path_t * vpath, struct stat *buf)
+shell_stat (const vfs_path_t *vpath, struct stat *buf)
 {
     int ret;
 
@@ -1355,7 +1355,7 @@ shell_stat (const vfs_path_t * vpath, struct stat *buf)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-shell_lstat (const vfs_path_t * vpath, struct stat *buf)
+shell_lstat (const vfs_path_t *vpath, struct stat *buf)
 {
     int ret;
 
@@ -1379,7 +1379,7 @@ shell_fstat (void *vfs_info, struct stat *buf)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-shell_chmod (const vfs_path_t * vpath, mode_t mode)
+shell_chmod (const vfs_path_t *vpath, mode_t mode)
 {
     const char *crpath;
     char *rpath;
@@ -1408,7 +1408,7 @@ shell_chmod (const vfs_path_t * vpath, mode_t mode)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-shell_chown (const vfs_path_t * vpath, uid_t owner, gid_t group)
+shell_chown (const vfs_path_t *vpath, uid_t owner, gid_t group)
 {
     char *sowner, *sgroup;
     struct passwd *pw;
@@ -1452,7 +1452,7 @@ shell_chown (const vfs_path_t * vpath, uid_t owner, gid_t group)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-shell_get_atime (mc_timesbuf_t * times, time_t * sec, long *nsec)
+shell_get_atime (mc_timesbuf_t *times, time_t *sec, long *nsec)
 {
 #ifdef HAVE_UTIMENSAT
     *sec = (*times)[0].tv_sec;
@@ -1466,7 +1466,7 @@ shell_get_atime (mc_timesbuf_t * times, time_t * sec, long *nsec)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-shell_get_mtime (mc_timesbuf_t * times, time_t * sec, long *nsec)
+shell_get_mtime (mc_timesbuf_t *times, time_t *sec, long *nsec)
 {
 #ifdef HAVE_UTIMENSAT
     *sec = (*times)[1].tv_sec;
@@ -1480,7 +1480,7 @@ shell_get_mtime (mc_timesbuf_t * times, time_t * sec, long *nsec)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-shell_utime (const vfs_path_t * vpath, mc_timesbuf_t * times)
+shell_utime (const vfs_path_t *vpath, mc_timesbuf_t *times)
 {
     char utcatime[16], utcmtime[16];
     char utcatime_w_nsec[30], utcmtime_w_nsec[30];
@@ -1533,7 +1533,7 @@ shell_utime (const vfs_path_t * vpath, mc_timesbuf_t * times)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-shell_unlink (const vfs_path_t * vpath)
+shell_unlink (const vfs_path_t *vpath)
 {
     const char *crpath;
     char *rpath;
@@ -1561,7 +1561,7 @@ shell_unlink (const vfs_path_t * vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-shell_exists (const vfs_path_t * vpath)
+shell_exists (const vfs_path_t *vpath)
 {
     const char *crpath;
     char *rpath;
@@ -1589,7 +1589,7 @@ shell_exists (const vfs_path_t * vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-shell_mkdir (const vfs_path_t * vpath, mode_t mode)
+shell_mkdir (const vfs_path_t *vpath, mode_t mode)
 {
     const char *crpath;
     char *rpath;
@@ -1626,7 +1626,7 @@ shell_mkdir (const vfs_path_t * vpath, mode_t mode)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-shell_rmdir (const vfs_path_t * vpath)
+shell_rmdir (const vfs_path_t *vpath)
 {
     const char *crpath;
     char *rpath;
@@ -1667,7 +1667,7 @@ shell_fh_new (struct vfs_s_inode *ino, gboolean changed)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-shell_fh_open (struct vfs_class *me, vfs_file_handler_t * fh, int flags, mode_t mode)
+shell_fh_open (struct vfs_class *me, vfs_file_handler_t *fh, int flags, mode_t mode)
 {
     shell_file_handler_t *shell = SHELL_FILE_HANDLER (fh);
 
@@ -1747,7 +1747,7 @@ shell_fill_names (struct vfs_class *me, fill_names_f func)
 /* --------------------------------------------------------------------------------------------- */
 
 static void *
-shell_open (const vfs_path_t * vpath, int flags, mode_t mode)
+shell_open (const vfs_path_t *vpath, int flags, mode_t mode)
 {
     /*
        sorry, i've places hack here

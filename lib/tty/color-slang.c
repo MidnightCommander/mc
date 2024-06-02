@@ -99,7 +99,7 @@ has_colors (gboolean disable, gboolean force)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-mc_tty_color_pair_init_special (tty_color_lib_pair_t * mc_color_pair,
+mc_tty_color_pair_init_special (tty_color_lib_pair_t *mc_color_pair,
                                 const char *fg1, const char *bg1,
                                 const char *fg2, const char *bg2, SLtt_Char_Type mask)
 {
@@ -145,7 +145,7 @@ tty_color_deinit_lib (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-tty_color_try_alloc_lib_pair (tty_color_lib_pair_t * mc_color_pair)
+tty_color_try_alloc_lib_pair (tty_color_lib_pair_t *mc_color_pair)
 {
     if (mc_color_pair->fg <= (int) SPEC_A_REVERSE)
     {
@@ -213,7 +213,7 @@ tty_set_normal_attrs (void)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-tty_use_256colors (GError ** error)
+tty_use_256colors (GError **error)
 {
     gboolean ret;
 
@@ -229,7 +229,7 @@ tty_use_256colors (GError ** error)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-tty_use_truecolors (GError ** error)
+tty_use_truecolors (GError **error)
 {
     char *colorterm;
 

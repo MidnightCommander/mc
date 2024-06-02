@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-04-07 16:41+0300\n"
+"POT-Creation-Date: 2024-06-02 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Viačasłaŭ Chalikin <viachaslavic@outlook.com>, 2023-2024\n"
 "Language-Team: Belarusian (http://app.transifex.com/mc/mc/language/be/)\n"
@@ -574,29 +574,11 @@ msgstr "Атрыманне файла"
 msgid "Changes to file lost"
 msgstr "Змены ў файле былі страчаныя"
 
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "«%s» — не каталог\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr "Вы не валодаеце каталогам «%s»\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr "Немагчыма вызначыць правільныя дазволы каталога «%s»\n"
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
+#, fuzzy, c-format
+msgid ""
+"Cannot create temporary directory %s: %s.\n"
+"Temporary files will not be created\n"
 msgstr "Немагчыма стварыць часовы каталог «%s»: %s\n"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr "Часовыя файлы будуць стварацца ў «%s»\n"
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr "Часовыя файлы не будуць стварацца\n"
 
 msgid "Press any key to continue..."
 msgstr "Каб працягнуць, націсніце хоць-якую клавішу..."
@@ -4767,3 +4749,23 @@ msgstr "Працягваць ад пачатку?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Немагчыма атрымаць лакальную копію /ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid "%s is not a directory\n"
+#~ msgstr "«%s» — не каталог\n"
+
+#, c-format
+#~ msgid "Directory %s is not owned by you\n"
+#~ msgstr "Вы не валодаеце каталогам «%s»\n"
+
+#, c-format
+#~ msgid "Cannot set correct permissions for directory %s\n"
+#~ msgstr "Немагчыма вызначыць правільныя дазволы каталога «%s»\n"
+
+#, c-format
+#~ msgid "Temporary files will be created in %s\n"
+#~ msgstr "Часовыя файлы будуць стварацца ў «%s»\n"
+
+#, c-format
+#~ msgid "Temporary files will not be created\n"
+#~ msgstr "Часовыя файлы не будуць стварацца\n"

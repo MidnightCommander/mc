@@ -48,7 +48,7 @@ GTree *mc_event_grouplist = NULL;
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mc_event_init (GError ** mcerror)
+mc_event_init (GError **mcerror)
 {
     mc_return_val_if_error (mcerror, FALSE);
 
@@ -74,7 +74,7 @@ mc_event_init (GError ** mcerror)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mc_event_deinit (GError ** mcerror)
+mc_event_deinit (GError **mcerror)
 {
     mc_return_val_if_error (mcerror, FALSE);
 
@@ -92,7 +92,7 @@ mc_event_deinit (GError ** mcerror)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mc_event_mass_add (const event_init_t * events, GError ** mcerror)
+mc_event_mass_add (const event_init_t *events, GError **mcerror)
 {
     size_t array_index;
 
@@ -113,7 +113,7 @@ mc_event_mass_add (const event_init_t * events, GError ** mcerror)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mc_event_present (const gchar * event_group_name, const gchar * event_name)
+mc_event_present (const gchar *event_group_name, const gchar *event_name)
 {
     GTree *event_group;
     GPtrArray *callbacks;

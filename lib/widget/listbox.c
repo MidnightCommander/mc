@@ -90,7 +90,7 @@ listbox_entry_free (void *data)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-listbox_drawscroll (const WListbox * l)
+listbox_drawscroll (const WListbox *l)
 {
     const WRect *w = &CONST_WIDGET (l)->rect;
     int max_line = w->lines - 1;
@@ -131,7 +131,7 @@ listbox_drawscroll (const WListbox * l)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-listbox_draw (WListbox * l, gboolean focused)
+listbox_draw (WListbox *l, gboolean focused)
 {
     Widget *wl = WIDGET (l);
     const WRect *w = &CONST_WIDGET (l)->rect;
@@ -198,7 +198,7 @@ listbox_draw (WListbox * l, gboolean focused)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-listbox_check_hotkey (WListbox * l, int key)
+listbox_check_hotkey (WListbox *l, int key)
 {
     if (!listbox_is_empty (l))
     {
@@ -221,7 +221,7 @@ listbox_check_hotkey (WListbox * l, int key)
 
 /* Calculates the item displayed at screen row 'y' (y==0 being the widget's 1st row). */
 static int
-listbox_y_pos (WListbox * l, int y)
+listbox_y_pos (WListbox *l, int y)
 {
     return MIN (l->top + y, LISTBOX_LAST (l));
 }
@@ -229,7 +229,7 @@ listbox_y_pos (WListbox * l, int y)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-listbox_fwd (WListbox * l, gboolean wrap)
+listbox_fwd (WListbox *l, gboolean wrap)
 {
     if (!listbox_is_empty (l))
     {
@@ -243,7 +243,7 @@ listbox_fwd (WListbox * l, gboolean wrap)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-listbox_fwd_n (WListbox * l, int n)
+listbox_fwd_n (WListbox *l, int n)
 {
     listbox_set_current (l, MIN (l->current + n, LISTBOX_LAST (l)));
 }
@@ -251,7 +251,7 @@ listbox_fwd_n (WListbox * l, int n)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-listbox_back (WListbox * l, gboolean wrap)
+listbox_back (WListbox *l, gboolean wrap)
 {
     if (!listbox_is_empty (l))
     {
@@ -265,7 +265,7 @@ listbox_back (WListbox * l, gboolean wrap)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-listbox_back_n (WListbox * l, int n)
+listbox_back_n (WListbox *l, int n)
 {
     listbox_set_current (l, MAX (l->current - n, 0));
 }
@@ -273,7 +273,7 @@ listbox_back_n (WListbox * l, int n)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-listbox_execute_cmd (WListbox * l, long command)
+listbox_execute_cmd (WListbox *l, long command)
 {
     cb_ret_t ret = MSG_HANDLED;
     const WRect *w = &CONST_WIDGET (l)->rect;
@@ -341,7 +341,7 @@ listbox_execute_cmd (WListbox * l, long command)
 
 /* Return MSG_HANDLED if we want a redraw */
 static cb_ret_t
-listbox_key (WListbox * l, int key)
+listbox_key (WListbox *l, int key)
 {
     long command;
 
@@ -365,7 +365,7 @@ listbox_key (WListbox * l, int key)
 
 /* Listbox item adding function */
 static inline void
-listbox_add_entry (WListbox * l, WLEntry * e, listbox_append_t pos)
+listbox_add_entry (WListbox *l, WLEntry *e, listbox_append_t pos)
 {
     if (l->list == NULL)
     {
@@ -400,7 +400,7 @@ listbox_add_entry (WListbox * l, WLEntry * e, listbox_append_t pos)
 
 /* Call this whenever the user changes the selected item. */
 static void
-listbox_on_change (WListbox * l)
+listbox_on_change (WListbox *l)
 {
     listbox_draw (l, TRUE);
     send_message (WIDGET (l)->owner, l, MSG_NOTIFY, 0, NULL);
@@ -409,7 +409,7 @@ listbox_on_change (WListbox * l)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-listbox_do_action (WListbox * l)
+listbox_do_action (WListbox *l)
 {
     int action;
 
@@ -433,7 +433,7 @@ listbox_do_action (WListbox * l)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-listbox_run_hotkey (WListbox * l, int pos)
+listbox_run_hotkey (WListbox *l, int pos)
 {
     listbox_set_current (l, pos);
     listbox_on_change (l);
@@ -443,7 +443,7 @@ listbox_run_hotkey (WListbox * l, int pos)
 /* --------------------------------------------------------------------------------------------- */
 
 static inline void
-listbox_destroy (WListbox * l)
+listbox_destroy (WListbox *l)
 {
     listbox_remove_list (l);
 }
@@ -451,7 +451,7 @@ listbox_destroy (WListbox * l)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-listbox_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+listbox_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data)
 {
     WListbox *l = LISTBOX (w);
 
@@ -503,7 +503,7 @@ listbox_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-listbox_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
+listbox_mouse_callback (Widget *w, mouse_msg_t msg, mouse_event_t *event)
 {
     WListbox *l = LISTBOX (w);
     int old_current;
@@ -579,7 +579,7 @@ listbox_new (int y, int x, int height, int width, gboolean deletable, lcback_fn 
  * Finds item by its label.
  */
 int
-listbox_search_text (WListbox * l, const char *text)
+listbox_search_text (WListbox *l, const char *text)
 {
     if (!listbox_is_empty (l))
     {
@@ -604,7 +604,7 @@ listbox_search_text (WListbox * l, const char *text)
  * Finds item by its 'data' slot.
  */
 int
-listbox_search_data (WListbox * l, const void *data)
+listbox_search_data (WListbox *l, const void *data)
 {
     if (!listbox_is_empty (l))
     {
@@ -627,7 +627,7 @@ listbox_search_data (WListbox * l, const void *data)
 
 /* Select the first entry and scrolls the list to the top */
 void
-listbox_select_first (WListbox * l)
+listbox_select_first (WListbox *l)
 {
     l->current = l->top = 0;
 }
@@ -636,7 +636,7 @@ listbox_select_first (WListbox * l)
 
 /* Selects the last entry and scrolls the list to the bottom */
 void
-listbox_select_last (WListbox * l)
+listbox_select_last (WListbox *l)
 {
     int lines = WIDGET (l)->rect.lines;
     int length;
@@ -650,7 +650,7 @@ listbox_select_last (WListbox * l)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-listbox_set_current (WListbox * l, int dest)
+listbox_set_current (WListbox *l, int dest)
 {
     GList *le;
     int pos;
@@ -688,7 +688,7 @@ listbox_set_current (WListbox * l, int dest)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-listbox_get_length (const WListbox * l)
+listbox_get_length (const WListbox *l)
 {
     return listbox_is_empty (l) ? 0 : (int) g_queue_get_length (l->list);
 }
@@ -697,7 +697,7 @@ listbox_get_length (const WListbox * l)
 
 /* Returns the current string text as well as the associated extra data */
 void
-listbox_get_current (WListbox * l, char **string, void **extra)
+listbox_get_current (WListbox *l, char **string, void **extra)
 {
     WLEntry *e = NULL;
     gboolean ok;
@@ -717,7 +717,7 @@ listbox_get_current (WListbox * l, char **string, void **extra)
 /* --------------------------------------------------------------------------------------------- */
 
 WLEntry *
-listbox_get_nth_entry (const WListbox * l, int pos)
+listbox_get_nth_entry (const WListbox *l, int pos)
 {
     if (!listbox_is_empty (l) && pos >= 0)
     {
@@ -734,7 +734,7 @@ listbox_get_nth_entry (const WListbox * l, int pos)
 /* --------------------------------------------------------------------------------------------- */
 
 GList *
-listbox_get_first_link (const WListbox * l)
+listbox_get_first_link (const WListbox *l)
 {
     return (l == NULL || l->list == NULL) ? NULL : g_queue_peek_head_link (l->list);
 }
@@ -742,7 +742,7 @@ listbox_get_first_link (const WListbox * l)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-listbox_remove_current (WListbox * l)
+listbox_remove_current (WListbox *l)
 {
     if (!listbox_is_empty (l))
     {
@@ -765,7 +765,7 @@ listbox_remove_current (WListbox * l)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-listbox_is_empty (const WListbox * l)
+listbox_is_empty (const WListbox *l)
 {
     return (l == NULL || l->list == NULL || g_queue_is_empty (l->list));
 }
@@ -779,7 +779,7 @@ listbox_is_empty (const WListbox * l)
  * @param list list of WLEntry objects
  */
 void
-listbox_set_list (WListbox * l, GQueue * list)
+listbox_set_list (WListbox *l, GQueue *list)
 {
     listbox_remove_list (l);
 
@@ -790,7 +790,7 @@ listbox_set_list (WListbox * l, GQueue * list)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-listbox_remove_list (WListbox * l)
+listbox_remove_list (WListbox *l)
 {
     if (l != NULL)
     {
@@ -806,9 +806,44 @@ listbox_remove_list (WListbox * l)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/**
+ * Add new intem to the listbox.
+ *
+ * @param l WListbox object
+ * @param pos position of the item
+ * @param hotkey position of the item
+ * @param text item text. @l takes the copy of @text.
+ * @param data item data
+ * @param free_data if TRUE free the @data when @l is destroyed,
+ *
+ * @returns pointer to copy of @text.
+ */
 char *
-listbox_add_item (WListbox * l, listbox_append_t pos, int hotkey, const char *text, void *data,
+listbox_add_item (WListbox *l, listbox_append_t pos, int hotkey, const char *text, void *data,
                   gboolean free_data)
+{
+    return listbox_add_item_take (l, pos, hotkey, g_strdup (text), data, free_data);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Add new intem to the listbox.
+ *
+ * @param l WListbox object
+ * @param pos position of the item
+ * @param hotkey position of the item
+ * @param text item text. Ownership of the text is transferred to the @l.
+ * @param data item data
+ * @param free_data if TRUE free the @data when @l is destroyed,
+ *
+ * After this call, @text belongs to the @l and may no longer be modified by the caller.
+ *
+ * @returns pointer to @text.
+ */
+char *
+listbox_add_item_take (WListbox *l, listbox_append_t pos, int hotkey, char *text, void *data,
+                       gboolean free_data)
 {
     WLEntry *entry;
 
@@ -819,7 +854,7 @@ listbox_add_item (WListbox * l, listbox_append_t pos, int hotkey, const char *te
         return NULL;
 
     entry = g_new (WLEntry, 1);
-    entry->text = g_strdup (text);
+    entry->text = text;
     entry->data = data;
     entry->free_data = free_data;
     entry->hotkey = hotkey;

@@ -26,6 +26,13 @@ SUBDIRS += consaver
 AM_CPPFLAGS += -DSAVERDIR=\""$(pkglibexecdir)"\"
 endif
 
+# required for textconf.c
+if ENABLE_VFS
+if ENABLE_VFS_SFTP
+AM_CPPFLAGS += $(LIBSSH_CFLAGS)
+endif
+endif
+
 AM_CPPFLAGS += -I$(top_srcdir) $(GLIB_CFLAGS)
 
 localedir = $(datadir)/locale

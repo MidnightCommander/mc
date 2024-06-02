@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-04-07 16:41+0300\n"
+"POT-Creation-Date: 2024-06-02 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Morten Bo Johansen <mortenbo@hotmail.com>, 2018,2023\n"
 "Language-Team: Danish (http://app.transifex.com/mc/mc/language/da/)\n"
@@ -565,29 +565,11 @@ msgstr "Henter fil"
 msgid "Changes to file lost"
 msgstr "Ændringer til fil tabt"
 
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "%s er ikke en mappe\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr "Mappen %s er ikke ejet af dig\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr "Kan ikke angive korrekte tilladelser for mappen %s\n"
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
+#, fuzzy, c-format
+msgid ""
+"Cannot create temporary directory %s: %s.\n"
+"Temporary files will not be created\n"
 msgstr "Kan ikke oprette midlertidig mappe %s: %s\n"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr "Midlertidige filer vil blive oprettet i %s\n"
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr "Midlertidige filer vil ikke blive oprettet\n"
 
 msgid "Press any key to continue..."
 msgstr "Tryk på en tast for at fortsætte..."
@@ -4742,3 +4724,23 @@ msgstr "Fortsæt fra begyndelsen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan ikke hente en lokal kopi af /ftp://en.vært/editme.txt"
+
+#, c-format
+#~ msgid "%s is not a directory\n"
+#~ msgstr "%s er ikke en mappe\n"
+
+#, c-format
+#~ msgid "Directory %s is not owned by you\n"
+#~ msgstr "Mappen %s er ikke ejet af dig\n"
+
+#, c-format
+#~ msgid "Cannot set correct permissions for directory %s\n"
+#~ msgstr "Kan ikke angive korrekte tilladelser for mappen %s\n"
+
+#, c-format
+#~ msgid "Temporary files will be created in %s\n"
+#~ msgstr "Midlertidige filer vil blive oprettet i %s\n"
+
+#, c-format
+#~ msgid "Temporary files will not be created\n"
+#~ msgstr "Midlertidige filer vil ikke blive oprettet\n"

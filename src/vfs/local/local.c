@@ -60,7 +60,7 @@ static struct vfs_class *vfs_local_ops = VFS_CLASS (&local_subclass);
 /* --------------------------------------------------------------------------------------------- */
 
 static void *
-local_open (const vfs_path_t * vpath, int flags, mode_t mode)
+local_open (const vfs_path_t *vpath, int flags, mode_t mode)
 {
     int *local_info;
     int fd;
@@ -80,7 +80,7 @@ local_open (const vfs_path_t * vpath, int flags, mode_t mode)
 /* --------------------------------------------------------------------------------------------- */
 
 static void *
-local_opendir (const vfs_path_t * vpath)
+local_opendir (const vfs_path_t *vpath)
 {
     DIR **local_info;
     DIR *dir = NULL;
@@ -141,7 +141,7 @@ local_closedir (void *data)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-local_stat (const vfs_path_t * vpath, struct stat *buf)
+local_stat (const vfs_path_t *vpath, struct stat *buf)
 {
     const char *path;
 
@@ -152,7 +152,7 @@ local_stat (const vfs_path_t * vpath, struct stat *buf)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-local_lstat (const vfs_path_t * vpath, struct stat *buf)
+local_lstat (const vfs_path_t *vpath, struct stat *buf)
 {
     const char *path;
 
@@ -167,7 +167,7 @@ local_lstat (const vfs_path_t * vpath, struct stat *buf)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-local_chmod (const vfs_path_t * vpath, mode_t mode)
+local_chmod (const vfs_path_t *vpath, mode_t mode)
 {
     const char *path;
 
@@ -178,7 +178,7 @@ local_chmod (const vfs_path_t * vpath, mode_t mode)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-local_chown (const vfs_path_t * vpath, uid_t owner, gid_t group)
+local_chown (const vfs_path_t *vpath, uid_t owner, gid_t group)
 {
     const char *path;
 
@@ -191,7 +191,7 @@ local_chown (const vfs_path_t * vpath, uid_t owner, gid_t group)
 #ifdef ENABLE_EXT2FS_ATTR
 
 static int
-local_fgetflags (const vfs_path_t * vpath, unsigned long *flags)
+local_fgetflags (const vfs_path_t *vpath, unsigned long *flags)
 {
     const char *path;
 
@@ -202,7 +202,7 @@ local_fgetflags (const vfs_path_t * vpath, unsigned long *flags)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-local_fsetflags (const vfs_path_t * vpath, unsigned long flags)
+local_fsetflags (const vfs_path_t *vpath, unsigned long flags)
 {
     const char *path;
 
@@ -215,7 +215,7 @@ local_fsetflags (const vfs_path_t * vpath, unsigned long flags)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-local_utime (const vfs_path_t * vpath, mc_timesbuf_t * times)
+local_utime (const vfs_path_t *vpath, mc_timesbuf_t *times)
 {
     int ret;
     const char *path;
@@ -232,7 +232,7 @@ local_utime (const vfs_path_t * vpath, mc_timesbuf_t * times)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-local_readlink (const vfs_path_t * vpath, char *buf, size_t size)
+local_readlink (const vfs_path_t *vpath, char *buf, size_t size)
 {
     const char *path;
 
@@ -243,7 +243,7 @@ local_readlink (const vfs_path_t * vpath, char *buf, size_t size)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-local_unlink (const vfs_path_t * vpath)
+local_unlink (const vfs_path_t *vpath)
 {
     const char *path;
 
@@ -254,7 +254,7 @@ local_unlink (const vfs_path_t * vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-local_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
+local_symlink (const vfs_path_t *vpath1, const vfs_path_t *vpath2)
 {
     const char *path1, *path2;
 
@@ -295,7 +295,7 @@ local_write (void *data, const char *buf, size_t nbyte)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-local_rename (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
+local_rename (const vfs_path_t *vpath1, const vfs_path_t *vpath2)
 {
     const char *path1, *path2;
 
@@ -307,7 +307,7 @@ local_rename (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-local_chdir (const vfs_path_t * vpath)
+local_chdir (const vfs_path_t *vpath)
 {
     const char *path;
 
@@ -318,7 +318,7 @@ local_chdir (const vfs_path_t * vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-local_mknod (const vfs_path_t * vpath, mode_t mode, dev_t dev)
+local_mknod (const vfs_path_t *vpath, mode_t mode, dev_t dev)
 {
     const char *path;
 
@@ -329,7 +329,7 @@ local_mknod (const vfs_path_t * vpath, mode_t mode, dev_t dev)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-local_link (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
+local_link (const vfs_path_t *vpath1, const vfs_path_t *vpath2)
 {
     const char *path1, *path2;
 
@@ -341,7 +341,7 @@ local_link (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-local_mkdir (const vfs_path_t * vpath, mode_t mode)
+local_mkdir (const vfs_path_t *vpath, mode_t mode)
 {
     const char *path;
 
@@ -352,7 +352,7 @@ local_mkdir (const vfs_path_t * vpath, mode_t mode)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-local_rmdir (const vfs_path_t * vpath)
+local_rmdir (const vfs_path_t *vpath)
 {
     const char *path;
 
@@ -363,7 +363,7 @@ local_rmdir (const vfs_path_t * vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 static vfs_path_t *
-local_getlocalcopy (const vfs_path_t * vpath)
+local_getlocalcopy (const vfs_path_t *vpath)
 {
     return vfs_path_clone (vpath);
 }
@@ -371,7 +371,7 @@ local_getlocalcopy (const vfs_path_t * vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-local_ungetlocalcopy (const vfs_path_t * vpath, const vfs_path_t * local, gboolean has_changed)
+local_ungetlocalcopy (const vfs_path_t *vpath, const vfs_path_t *local, gboolean has_changed)
 {
     (void) vpath;
     (void) local;

@@ -69,7 +69,7 @@
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_toggle_magic_mode (WView * view)
+mcview_toggle_magic_mode (WView *view)
 {
     char *filename, *command;
     dir_list *dir;
@@ -100,7 +100,7 @@ mcview_toggle_magic_mode (WView * view)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_toggle_wrap_mode (WView * view)
+mcview_toggle_wrap_mode (WView *view)
 {
     view->mode_flags.wrap = !view->mode_flags.wrap;
     view->dpy_wrap_dirty = TRUE;
@@ -111,7 +111,7 @@ mcview_toggle_wrap_mode (WView * view)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_toggle_nroff_mode (WView * view)
+mcview_toggle_nroff_mode (WView *view)
 {
     view->mode_flags.nroff = !view->mode_flags.nroff;
     mcview_altered_flags.nroff = TRUE;
@@ -123,7 +123,7 @@ mcview_toggle_nroff_mode (WView * view)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_toggle_hex_mode (WView * view)
+mcview_toggle_hex_mode (WView *view)
 {
     view->mode_flags.hex = !view->mode_flags.hex;
 
@@ -149,7 +149,7 @@ mcview_toggle_hex_mode (WView * view)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_init (WView * view)
+mcview_init (WView *view)
 {
     size_t i;
 
@@ -201,7 +201,7 @@ mcview_init (WView * view)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_done (WView * view)
+mcview_done (WView *view)
 {
     /* Save current file position */
     if (mcview_remember_file_position && view->filename_vpath != NULL)
@@ -261,7 +261,7 @@ mcview_done (WView * view)
 
 #ifdef HAVE_CHARSET
 void
-mcview_set_codeset (WView * view)
+mcview_set_codeset (WView *view)
 {
     const char *cp_id = NULL;
 
@@ -287,7 +287,7 @@ mcview_set_codeset (WView * view)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_select_encoding (WView * view)
+mcview_select_encoding (WView *view)
 {
     if (do_select_codepage ())
         mcview_set_codeset (view);
@@ -297,7 +297,7 @@ mcview_select_encoding (WView * view)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_show_error (WView * view, const char *msg)
+mcview_show_error (WView *view, const char *msg)
 {
     if (mcview_is_in_panel (view))
         mcview_set_datasource_string (view, msg);
@@ -311,7 +311,7 @@ mcview_show_error (WView * view, const char *msg)
  */
 
 off_t
-mcview_bol (WView * view, off_t current, off_t limit)
+mcview_bol (WView *view, off_t current, off_t limit)
 {
     int c;
     off_t filesize;
@@ -346,7 +346,7 @@ mcview_bol (WView * view, off_t current, off_t limit)
  */
 
 off_t
-mcview_eol (WView * view, off_t current)
+mcview_eol (WView *view, off_t current)
 {
     int c, prev_ch = 0;
 
@@ -375,7 +375,7 @@ mcview_eol (WView * view, off_t current)
 /* --------------------------------------------------------------------------------------------- */
 
 char *
-mcview_get_title (const WDialog * h, size_t len)
+mcview_get_title (const WDialog *h, size_t len)
 {
     const WView *view;
     const char *modified;
@@ -399,7 +399,7 @@ mcview_get_title (const WDialog * h, size_t len)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-mcview_calc_percent (WView * view, off_t p)
+mcview_calc_percent (WView *view, off_t p)
 {
     off_t filesize;
     int percent;
@@ -429,7 +429,7 @@ mcview_calc_percent (WView * view, off_t p)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_clear_mode_flags (mcview_mode_flags_t * flags)
+mcview_clear_mode_flags (mcview_mode_flags_t *flags)
 {
     memset (flags, 0, sizeof (*flags));
 }

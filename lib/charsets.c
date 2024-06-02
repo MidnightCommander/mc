@@ -94,7 +94,7 @@ free_codepage_desc (gpointer data)
 /* returns display codepage */
 
 static void
-load_codepages_list_from_file (GPtrArray ** list, const char *fname)
+load_codepages_list_from_file (GPtrArray **list, const char *fname)
 {
     FILE *f;
     char buf[BUF_MEDIUM];

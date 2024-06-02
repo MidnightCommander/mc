@@ -171,7 +171,7 @@ extract_arg (char *p, char *arg, int size)
    specified in argument. */
 
 static gboolean
-test_type (WPanel * panel, char *arg)
+test_type (WPanel *panel, char *arg)
 {
     int result = 0;             /* False by default */
     mode_t st_mode;
@@ -226,7 +226,7 @@ test_type (WPanel * panel, char *arg)
    p. Returns the point after condition. */
 
 static char *
-test_condition (const Widget * edit_widget, char *p, gboolean * condition)
+test_condition (const Widget *edit_widget, char *p, gboolean *condition)
 {
     char arg[256];
     const mc_search_type_t search_type = easy_patterns ? MC_SEARCH_T_GLOB : MC_SEARCH_T_REGEX;
@@ -370,7 +370,7 @@ debug_out (char *start, char *end, gboolean condition)
    the point just before the end of line. */
 
 static char *
-test_line (const Widget * edit_widget, char *p, gboolean * result)
+test_line (const Widget *edit_widget, char *p, gboolean *result)
 {
     char operator;
 
@@ -436,7 +436,7 @@ test_line (const Widget * edit_widget, char *p, gboolean * result)
 /** FIXME: recode this routine on version 3.0, it could be cleaner */
 
 static void
-execute_menu_command (const Widget * edit_widget, const char *commands, gboolean show_prompt)
+execute_menu_command (const Widget *edit_widget, const char *commands, gboolean show_prompt)
 {
     FILE *cmd_file;
     int cmd_file_fd;
@@ -758,7 +758,7 @@ check_format_var (const char *p, char **v)
 /* --------------------------------------------------------------------------------------------- */
 
 char *
-expand_format (const Widget * edit_widget, char c, gboolean do_quote)
+expand_format (const Widget *edit_widget, char c, gboolean do_quote)
 {
     WPanel *panel = NULL;
     char *(*quote_func) (const char *, gboolean);
@@ -971,7 +971,7 @@ expand_format (const Widget * edit_widget, char c, gboolean do_quote)
  */
 
 gboolean
-user_menu_cmd (const Widget * edit_widget, const char *menu_file, int selected_entry)
+user_menu_cmd (const Widget *edit_widget, const char *menu_file, int selected_entry)
 {
     char *p;
     char *data, **entries;

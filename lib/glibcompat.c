@@ -101,8 +101,8 @@ g_direct_equal (gconstpointer v1, gconstpointer v2)
  * Since: 2.54
  */
 gboolean
-g_ptr_array_find_with_equal_func (GPtrArray * haystack, gconstpointer needle, GEqualFunc equal_func,
-                                  guint * index_)
+g_ptr_array_find_with_equal_func (GPtrArray *haystack, gconstpointer needle, GEqualFunc equal_func,
+                                  guint *index_)
 {
     guint i;
 
@@ -138,7 +138,7 @@ g_ptr_array_find_with_equal_func (GPtrArray * haystack, gconstpointer needle, GE
  * Since: 2.64
  */
 void
-g_clear_slist (GSList ** slist_ptr, GDestroyNotify destroy)
+g_clear_slist (GSList **slist_ptr, GDestroyNotify destroy)
 {
     GSList *slist;
 
@@ -169,7 +169,7 @@ g_clear_slist (GSList ** slist_ptr, GDestroyNotify destroy)
  * Since: 2.64
  */
 void
-g_clear_list (GList ** list_ptr, GDestroyNotify destroy)
+g_clear_list (GList **list_ptr, GDestroyNotify destroy)
 {
     GList *list;
 
@@ -202,7 +202,7 @@ g_clear_list (GList ** list_ptr, GDestroyNotify destroy)
  * Since: 2.60
  */
 void
-g_queue_clear_full (GQueue * queue, GDestroyNotify free_func)
+g_queue_clear_full (GQueue *queue, GDestroyNotify free_func)
 {
     g_return_if_fail (queue != NULL);
 
@@ -263,7 +263,7 @@ g_string_new_take (char *init)
  * There is no such API in GLib2.
  */
 GString *
-mc_g_string_copy (GString * dest, const GString * src)
+mc_g_string_copy (GString *dest, const GString *src)
 {
     g_return_val_if_fail (src != NULL, NULL);
     g_return_val_if_fail (dest != NULL, NULL);
@@ -286,7 +286,7 @@ mc_g_string_copy (GString * dest, const GString * src)
  * There is no such API in GLib2.
  */
 GString *
-mc_g_string_dup (const GString * s)
+mc_g_string_dup (const GString *s)
 {
     GString *ret = NULL;
 
@@ -294,6 +294,35 @@ mc_g_string_dup (const GString * s)
         ret = g_string_new_len (s->str, s->len);
 
     return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * mc_g_string_append_c_len:
+ * @s: (not nullable): the destination #GString.
+ * @c: the byte to append onto the end of @s
+ * @len: the number of bytes @c to append onto the end of @s
+ * @return: @s
+ *
+ * Adds @len bytes @c onto the end of @s.
+ *
+ * There is no such API in GLib2.
+ */
+GString *
+mc_g_string_append_c_len (GString *s, gchar c, guint len)
+{
+    g_return_val_if_fail (s != NULL, NULL);
+
+    if (len != 0)
+    {
+        guint s_len = s->len;
+
+        g_string_set_size (s, s->len + len);
+        memset (s->str + s_len, (unsigned char) c, len);
+    }
+
+    return s;
 }
 
 /* --------------------------------------------------------------------------------------------- */

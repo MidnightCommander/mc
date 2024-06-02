@@ -46,7 +46,7 @@
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mc_event_raise (const gchar * event_group_name, const gchar * event_name, gpointer event_data)
+mc_event_raise (const gchar *event_group_name, const gchar *event_name, gpointer event_data)
 {
     GTree *event_group;
     GPtrArray *callbacks;

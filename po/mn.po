@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-04-07 16:41+0300\n"
+"POT-Creation-Date: 2024-06-02 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Shuree Nyam-Oidov <99shuree@gmail.com>, 2020\n"
 "Language-Team: Mongolian (http://app.transifex.com/mc/mc/language/mn/)\n"
@@ -534,29 +534,11 @@ msgstr "Файл хүлээн авч байна"
 msgid "Changes to file lost"
 msgstr "Файлын өөрчлөлт алга байна"
 
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "%s нь лавлах биш байна\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr " %s лавлах нь таны эзэмшил биш байна\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr " %s лавлахын зөв зөвшөөрөлийг олгож чадсангүй\n"
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
+#, fuzzy, c-format
+msgid ""
+"Cannot create temporary directory %s: %s.\n"
+"Temporary files will not be created\n"
 msgstr " %s: %s түр зуурын лавлахыг үүсгэж чадсангүй\n"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr " Түр зуурын файлууд нь %s д үүссэн\n"
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr "Түр зуурын файлууд үүссэнгүй\n"
 
 msgid "Press any key to continue..."
 msgstr "Дурын товчлуур дарж үргэлжлүүл..."
@@ -4486,3 +4468,23 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#, c-format
+#~ msgid "%s is not a directory\n"
+#~ msgstr "%s нь лавлах биш байна\n"
+
+#, c-format
+#~ msgid "Directory %s is not owned by you\n"
+#~ msgstr " %s лавлах нь таны эзэмшил биш байна\n"
+
+#, c-format
+#~ msgid "Cannot set correct permissions for directory %s\n"
+#~ msgstr " %s лавлахын зөв зөвшөөрөлийг олгож чадсангүй\n"
+
+#, c-format
+#~ msgid "Temporary files will be created in %s\n"
+#~ msgstr " Түр зуурын файлууд нь %s д үүссэн\n"
+
+#, c-format
+#~ msgid "Temporary files will not be created\n"
+#~ msgstr "Түр зуурын файлууд үүссэнгүй\n"

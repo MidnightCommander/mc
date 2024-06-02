@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-04-07 16:41+0300\n"
+"POT-Creation-Date: 2024-06-02 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Meng Pang Wang, 2023\n"
 "Language-Team: Chinese (Taiwan) (http://app.transifex.com/mc/mc/language/"
@@ -551,29 +551,11 @@ msgstr "取得檔案中"
 msgid "Changes to file lost"
 msgstr "欲切換到的檔案已遺失"
 
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "%s 不是一個目錄\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr "您不是目錄 %s 的擁有者\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr "無法為目錄 %s 設定適當的權限\n"
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
+#, fuzzy, c-format
+msgid ""
+"Cannot create temporary directory %s: %s.\n"
+"Temporary files will not be created\n"
 msgstr "無法建立暫存目錄 %s：%s\n"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr "將於 %s 建立暫存檔案\n"
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr "將不會建立暫存檔案\n"
 
 msgid "Press any key to continue..."
 msgstr "按任意鍵繼續..."
@@ -4551,3 +4533,23 @@ msgstr "從頭開始?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "無法取得本地的副本在 ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid "%s is not a directory\n"
+#~ msgstr "%s 不是一個目錄\n"
+
+#, c-format
+#~ msgid "Directory %s is not owned by you\n"
+#~ msgstr "您不是目錄 %s 的擁有者\n"
+
+#, c-format
+#~ msgid "Cannot set correct permissions for directory %s\n"
+#~ msgstr "無法為目錄 %s 設定適當的權限\n"
+
+#, c-format
+#~ msgid "Temporary files will be created in %s\n"
+#~ msgstr "將於 %s 建立暫存檔案\n"
+
+#, c-format
+#~ msgid "Temporary files will not be created\n"
+#~ msgstr "將不會建立暫存檔案\n"

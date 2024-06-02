@@ -13,18 +13,6 @@ AC_DEFUN([mc_CHECK_CFLAGS],[
 
     mc_configured_cflags=""
 
-dnl    AC_MSG_CHECKING([CC is $CC])
-
-    dnl https://stackoverflow.com/questions/52557417/how-to-check-support-compile-flag-in-autoconf-for-clang
-    case "$CC" in
-    clang*)
-        EXTRA_OPTION="-Werror"
-        ;;
-    *)
-        EXTRA_OPTION=""
-        ;;
-    esac
-
     dnl Sorted -f options:
     case "$CC" in
     gcc*)

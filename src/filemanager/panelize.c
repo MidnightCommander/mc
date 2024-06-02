@@ -136,7 +136,7 @@ update_command (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-panelize_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+panelize_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data)
 {
     switch (msg)
     {
@@ -163,8 +163,7 @@ external_panelize_init (void)
         int ret_cmd;
         button_flags_t flags;
         const char *text;
-    } panelize_but[] =
-    {
+    } panelize_but[] = {
         /* *INDENT-OFF* */
         { B_ENTER, DEFPUSH_BUTTON, N_("Pane&lize") },
         { B_REMOVE, NORMAL_BUTTON, N_("&Remove") },
@@ -287,7 +286,7 @@ add2panelize_cmd (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-remove_from_panelize (panelize_entry_t * entry)
+remove_from_panelize (panelize_entry_t *entry)
 {
     if (strcmp (entry->label, _("Other command")) != 0)
     {

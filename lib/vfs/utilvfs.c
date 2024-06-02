@@ -179,7 +179,7 @@ vfs_findgid (const char *gname)
  */
 
 int
-vfs_mkstemps (vfs_path_t ** pname_vpath, const char *prefix, const char *param_basename)
+vfs_mkstemps (vfs_path_t **pname_vpath, const char *prefix, const char *param_basename)
 {
     const char *p;
     GString *suffix;
@@ -356,7 +356,7 @@ vfs_url_split (const char *path, int default_port, vfs_url_flags_t flags)
 
 /* --------------------------------------------------------------------------------------------- */
 
-void __attribute__ ((noreturn)) vfs_die (const char *m)
+void __attribute__((noreturn)) vfs_die (const char *m)
 {
     message (D_ERROR, _("Internal error:"), "%s", m);
     exit (EXIT_FAILURE);

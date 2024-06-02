@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-04-07 16:41+0300\n"
+"POT-Creation-Date: 2024-06-02 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>, "
 "2011,2015-2019\n"
@@ -557,29 +557,11 @@ msgstr "Fitxategia eskuratzen"
 msgid "Changes to file lost"
 msgstr "Fitxategiko aldaketak galdu egin dira"
 
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "%s ez da direktorio bat\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr "%s direktorioa ez da zure jabegoa\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr "%s direktorioarentzako baimen zuzenak ezin ezarri\n"
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
+#, fuzzy, c-format
+msgid ""
+"Cannot create temporary directory %s: %s.\n"
+"Temporary files will not be created\n"
 msgstr "%s aldiuneko direktorioa ezin sortu: %s\n"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr "Aldiuneko fitxategiak %s kokalekuan sortuko dira\n"
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr "Aldiuneko fitxategiak ez dira sortuko\n"
 
 msgid "Press any key to continue..."
 msgstr "Sakatu edozein tekla jarraitzeko..."
@@ -4685,3 +4667,23 @@ msgstr "Hasieratik jarraitu?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Ezin eskuratu ondokoaren bertako kopia bat: /ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid "%s is not a directory\n"
+#~ msgstr "%s ez da direktorio bat\n"
+
+#, c-format
+#~ msgid "Directory %s is not owned by you\n"
+#~ msgstr "%s direktorioa ez da zure jabegoa\n"
+
+#, c-format
+#~ msgid "Cannot set correct permissions for directory %s\n"
+#~ msgstr "%s direktorioarentzako baimen zuzenak ezin ezarri\n"
+
+#, c-format
+#~ msgid "Temporary files will be created in %s\n"
+#~ msgstr "Aldiuneko fitxategiak %s kokalekuan sortuko dira\n"
+
+#, c-format
+#~ msgid "Temporary files will not be created\n"
+#~ msgstr "Aldiuneko fitxategiak ez dira sortuko\n"

@@ -47,7 +47,7 @@
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-mc_search__normal_translate_to_regex (GString * str)
+mc_search__normal_translate_to_regex (GString *str)
 {
     gsize loop;
 
@@ -72,6 +72,7 @@ mc_search__normal_translate_to_regex (GString * str)
         case '|':
             g_string_insert_c (str, loop, '\\');
             loop++;
+            break;
         default:
             break;
         }
@@ -82,8 +83,8 @@ mc_search__normal_translate_to_regex (GString * str)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mc_search__cond_struct_new_init_normal (const char *charset, mc_search_t * lc_mc_search,
-                                        mc_search_cond_t * mc_search_cond)
+mc_search__cond_struct_new_init_normal (const char *charset, mc_search_t *lc_mc_search,
+                                        mc_search_cond_t *mc_search_cond)
 {
     mc_search__normal_translate_to_regex (mc_search_cond->str);
     mc_search__cond_struct_new_init_regex (charset, lc_mc_search, mc_search_cond);
@@ -92,15 +93,15 @@ mc_search__cond_struct_new_init_normal (const char *charset, mc_search_t * lc_mc
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mc_search__run_normal (mc_search_t * lc_mc_search, const void *user_data,
-                       gsize start_search, gsize end_search, gsize * found_len)
+mc_search__run_normal (mc_search_t *lc_mc_search, const void *user_data,
+                       gsize start_search, gsize end_search, gsize *found_len)
 {
     return mc_search__run_regex (lc_mc_search, user_data, start_search, end_search, found_len);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 GString *
-mc_search_normal_prepare_replace_str (mc_search_t * lc_mc_search, GString * replace_str)
+mc_search_normal_prepare_replace_str (mc_search_t *lc_mc_search, GString *replace_str)
 {
     (void) lc_mc_search;
 

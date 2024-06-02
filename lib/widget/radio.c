@@ -58,7 +58,7 @@ const global_keymap_t *radio_map = NULL;
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-radio_execute_cmd (WRadio * r, long command)
+radio_execute_cmd (WRadio *r, long command)
 {
     cb_ret_t ret = MSG_HANDLED;
     Widget *w = WIDGET (r);
@@ -107,7 +107,7 @@ radio_execute_cmd (WRadio * r, long command)
 
 /* Return MSG_HANDLED if we want a redraw */
 static cb_ret_t
-radio_key (WRadio * r, int key)
+radio_key (WRadio *r, int key)
 {
     long command;
 
@@ -120,7 +120,7 @@ radio_key (WRadio * r, int key)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-radio_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+radio_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data)
 {
     WRadio *r = RADIO (w);
     int i;
@@ -188,7 +188,7 @@ radio_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-radio_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
+radio_mouse_callback (Widget *w, mouse_msg_t msg, mouse_event_t *event)
 {
     switch (msg)
     {

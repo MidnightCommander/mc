@@ -41,7 +41,7 @@ static gboolean vfs_file_is_local__return_value;
 
 /* @Mock */
 gboolean
-vfs_file_is_local (const vfs_path_t * vpath)
+vfs_file_is_local (const vfs_path_t *vpath)
 {
     g_ptr_array_add (vfs_file_is_local__vpath__captured, vfs_path_clone (vpath));
     return vfs_file_is_local__return_value;
@@ -108,7 +108,7 @@ static vfs_path_t *mc_getlocalcopy__return_value;
 
 /* @Mock */
 vfs_path_t *
-mc_getlocalcopy (const vfs_path_t * pathname_vpath)
+mc_getlocalcopy (const vfs_path_t *pathname_vpath)
 {
     mc_getlocalcopy__pathname_vpath__captured = vfs_path_clone (pathname_vpath);
     return mc_getlocalcopy__return_value;
@@ -179,7 +179,7 @@ static int mc_stat__return_value = 0;
 
 /* @Mock */
 int
-mc_stat (const vfs_path_t * vpath, struct stat *stat_ignored)
+mc_stat (const vfs_path_t *vpath, struct stat *stat_ignored)
 {
     (void) stat_ignored;
     if (mc_stat__vpath__captured != NULL)
@@ -212,7 +212,7 @@ static int mc_ungetlocalcopy__return_value = 0;
 
 /* @Mock */
 int
-mc_ungetlocalcopy (const vfs_path_t * pathname_vpath, const vfs_path_t * local_vpath,
+mc_ungetlocalcopy (const vfs_path_t *pathname_vpath, const vfs_path_t *local_vpath,
                    gboolean has_changed_ignored)
 {
     (void) has_changed_ignored;

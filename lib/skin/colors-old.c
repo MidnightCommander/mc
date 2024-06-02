@@ -147,7 +147,7 @@ mc_skin_colors_old_transform (const char *old_color, const char **group, const c
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-mc_skin_colors_old_configure_one (mc_skin_t * mc_skin, const char *the_color_string)
+mc_skin_colors_old_configure_one (mc_skin_t *mc_skin, const char *the_color_string)
 {
     gchar **colors, **orig_colors;
 
@@ -193,7 +193,7 @@ mc_skin_colors_old_configure_one (mc_skin_t * mc_skin, const char *the_color_str
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mc_skin_colors_old_configure (mc_skin_t * mc_skin)
+mc_skin_colors_old_configure (mc_skin_t *mc_skin)
 {
     mc_skin_colors_old_configure_one (mc_skin, mc_global.tty.setup_color_string);
     mc_skin_colors_old_configure_one (mc_skin, mc_global.tty.term_color_string);

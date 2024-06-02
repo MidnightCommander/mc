@@ -186,7 +186,7 @@ char *diff_two_paths (const vfs_path_t * vpath1, const vfs_path_t * vpath2);
 const char *x_basename (const char *fname);
 
 char *load_mc_home_file (const char *from, const char *filename, char **allocated_filename,
-                         size_t * length);
+                         size_t *length);
 
 /* uid/gid managing */
 void init_groups (void);

@@ -40,7 +40,7 @@ static int ref = 0;
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-widget_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+widget_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data)
 {
     switch (msg)
     {
@@ -60,7 +60,7 @@ widget_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-group_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+group_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data)
 {
     switch (msg)
     {

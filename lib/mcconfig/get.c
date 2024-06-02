@@ -46,7 +46,7 @@
 /* --------------------------------------------------------------------------------------------- */
 
 gchar **
-mc_config_get_groups (const mc_config_t * mc_config, gsize * len)
+mc_config_get_groups (const mc_config_t *mc_config, gsize *len)
 {
     gchar **ret = NULL;
 
@@ -66,7 +66,7 @@ mc_config_get_groups (const mc_config_t * mc_config, gsize * len)
 /* --------------------------------------------------------------------------------------------- */
 
 gchar **
-mc_config_get_keys (const mc_config_t * mc_config, const gchar * group, gsize * len)
+mc_config_get_keys (const mc_config_t *mc_config, const gchar *group, gsize *len)
 {
     gchar **ret = NULL;
 
@@ -86,8 +86,8 @@ mc_config_get_keys (const mc_config_t * mc_config, const gchar * group, gsize * 
 /* --------------------------------------------------------------------------------------------- */
 
 gchar *
-mc_config_get_string (mc_config_t * mc_config, const gchar * group,
-                      const gchar * param, const gchar * def)
+mc_config_get_string (mc_config_t *mc_config, const gchar *group,
+                      const gchar *param, const gchar *def)
 {
     GIConv conv;
     GString *buffer;
@@ -121,8 +121,8 @@ mc_config_get_string (mc_config_t * mc_config, const gchar * group,
 /* --------------------------------------------------------------------------------------------- */
 
 gchar *
-mc_config_get_string_raw (mc_config_t * mc_config, const gchar * group,
-                          const gchar * param, const gchar * def)
+mc_config_get_string_raw (mc_config_t *mc_config, const gchar *group,
+                          const gchar *param, const gchar *def)
 {
     gchar *ret;
 
@@ -144,7 +144,7 @@ mc_config_get_string_raw (mc_config_t * mc_config, const gchar * group,
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mc_config_get_bool (mc_config_t * mc_config, const gchar * group, const gchar * param, gboolean def)
+mc_config_get_bool (mc_config_t *mc_config, const gchar *group, const gchar *param, gboolean def)
 {
     if (mc_config == NULL || group == NULL || param == NULL)
         return def;
@@ -161,7 +161,7 @@ mc_config_get_bool (mc_config_t * mc_config, const gchar * group, const gchar * 
 /* --------------------------------------------------------------------------------------------- */
 
 int
-mc_config_get_int (mc_config_t * mc_config, const gchar * group, const gchar * param, int def)
+mc_config_get_int (mc_config_t *mc_config, const gchar *group, const gchar *param, int def)
 {
     if (mc_config == NULL || group == NULL || param == NULL)
         return def;
@@ -178,8 +178,8 @@ mc_config_get_int (mc_config_t * mc_config, const gchar * group, const gchar * p
 /* --------------------------------------------------------------------------------------------- */
 
 gchar **
-mc_config_get_string_list (mc_config_t * mc_config, const gchar * group,
-                           const gchar * param, gsize * length)
+mc_config_get_string_list (mc_config_t *mc_config, const gchar *group,
+                           const gchar *param, gsize *length)
 {
     if (mc_config == NULL || group == NULL || param == NULL)
         return NULL;
@@ -190,8 +190,8 @@ mc_config_get_string_list (mc_config_t * mc_config, const gchar * group,
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean *
-mc_config_get_bool_list (mc_config_t * mc_config, const gchar * group,
-                         const gchar * param, gsize * length)
+mc_config_get_bool_list (mc_config_t *mc_config, const gchar *group,
+                         const gchar *param, gsize *length)
 {
     if (mc_config == NULL || group == NULL || param == NULL)
         return NULL;
@@ -202,8 +202,8 @@ mc_config_get_bool_list (mc_config_t * mc_config, const gchar * group,
 /* --------------------------------------------------------------------------------------------- */
 
 int *
-mc_config_get_int_list (mc_config_t * mc_config, const gchar * group,
-                        const gchar * param, gsize * length)
+mc_config_get_int_list (mc_config_t *mc_config, const gchar *group,
+                        const gchar *param, gsize *length)
 {
     if (mc_config == NULL || group == NULL || param == NULL)
         return NULL;

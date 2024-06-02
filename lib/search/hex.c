@@ -57,7 +57,7 @@ typedef enum
 /* --------------------------------------------------------------------------------------------- */
 
 static GString *
-mc_search__hex_translate_to_regex (const GString * astr, mc_search_hex_parse_error_t * error_ptr,
+mc_search__hex_translate_to_regex (const GString *astr, mc_search_hex_parse_error_t *error_ptr,
                                    int *error_pos_ptr)
 {
     GString *buff;
@@ -135,8 +135,8 @@ mc_search__hex_translate_to_regex (const GString * astr, mc_search_hex_parse_err
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mc_search__cond_struct_new_init_hex (const char *charset, mc_search_t * lc_mc_search,
-                                     mc_search_cond_t * mc_search_cond)
+mc_search__cond_struct_new_init_hex (const char *charset, mc_search_t *lc_mc_search,
+                                     mc_search_cond_t *mc_search_cond)
 {
     GString *tmp;
     mc_search_hex_parse_error_t error = MC_SEARCH_HEX_E_OK;
@@ -215,8 +215,8 @@ mc_search__cond_struct_new_init_hex (const char *charset, mc_search_t * lc_mc_se
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mc_search__run_hex (mc_search_t * lc_mc_search, const void *user_data,
-                    gsize start_search, gsize end_search, gsize * found_len)
+mc_search__run_hex (mc_search_t *lc_mc_search, const void *user_data,
+                    gsize start_search, gsize end_search, gsize *found_len)
 {
     return mc_search__run_regex (lc_mc_search, user_data, start_search, end_search, found_len);
 }
@@ -224,7 +224,7 @@ mc_search__run_hex (mc_search_t * lc_mc_search, const void *user_data,
 /* --------------------------------------------------------------------------------------------- */
 
 GString *
-mc_search_hex_prepare_replace_str (mc_search_t * lc_mc_search, GString * replace_str)
+mc_search_hex_prepare_replace_str (mc_search_t *lc_mc_search, GString *replace_str)
 {
     (void) lc_mc_search;
 

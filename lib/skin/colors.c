@@ -50,7 +50,7 @@ int mc_skin_color__cache[MC_SKIN_COLOR_CACHE_COUNT];
 /* --------------------------------------------------------------------------------------------- */
 
 static tty_color_pair_t *
-mc_skin_color_get_from_hash (mc_skin_t * mc_skin, const gchar * group, const gchar * key)
+mc_skin_color_get_from_hash (mc_skin_t *mc_skin, const gchar *group, const gchar *key)
 {
     gchar kname[BUF_TINY];
     tty_color_pair_t *mc_skin_color;
@@ -71,7 +71,7 @@ mc_skin_color_get_from_hash (mc_skin_t * mc_skin, const gchar * group, const gch
 
 #if 0
 static void
-mc_skin_color_remove_from_hash (mc_skin_t * mc_skin, const gchar * group, const gchar * key)
+mc_skin_color_remove_from_hash (mc_skin_t *mc_skin, const gchar *group, const gchar *key)
 {
     gchar kname[BUF_TINY];
     if (group == NULL || key == NULL)
@@ -88,8 +88,8 @@ mc_skin_color_remove_from_hash (mc_skin_t * mc_skin, const gchar * group, const 
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-mc_skin_color_add_to_hash (mc_skin_t * mc_skin, const gchar * group, const gchar * key,
-                           tty_color_pair_t * mc_skin_color)
+mc_skin_color_add_to_hash (mc_skin_t *mc_skin, const gchar *group, const gchar *key,
+                           tty_color_pair_t *mc_skin_color)
 {
     gchar *kname;
 
@@ -106,7 +106,7 @@ mc_skin_color_add_to_hash (mc_skin_t * mc_skin, const gchar * group, const gchar
 /* --------------------------------------------------------------------------------------------- */
 
 static tty_color_pair_t *
-mc_skin_color_get_with_defaults (const gchar * group, const gchar * name)
+mc_skin_color_get_with_defaults (const gchar *group, const gchar *name)
 {
     tty_color_pair_t *mc_skin_color;
 
@@ -127,7 +127,7 @@ mc_skin_color_get_with_defaults (const gchar * group, const gchar * name)
 /* If an alias is found, alloc a new string for the resolved value and free the input parameter.
    Otherwise it's a no-op returning the original string. */
 static gchar *
-mc_skin_color_look_up_alias (mc_skin_t * mc_skin, gchar * str)
+mc_skin_color_look_up_alias (mc_skin_t *mc_skin, gchar *str)
 {
     gchar *orig, *str2;
     int hop = 0;
@@ -180,7 +180,7 @@ mc_skin_color_look_up_alias (mc_skin_t * mc_skin, gchar * str)
 /* --------------------------------------------------------------------------------------------- */
 
 static tty_color_pair_t *
-mc_skin_color_get_from_ini_file (mc_skin_t * mc_skin, const gchar * group, const gchar * key)
+mc_skin_color_get_from_ini_file (mc_skin_t *mc_skin, const gchar *group, const gchar *key)
 {
     gsize items_count;
     gchar **values;
@@ -221,7 +221,7 @@ mc_skin_color_get_from_ini_file (mc_skin_t * mc_skin, const gchar * group, const
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-mc_skin_color_set_default_for_terminal (mc_skin_t * mc_skin)
+mc_skin_color_set_default_for_terminal (mc_skin_t *mc_skin)
 {
     tty_color_pair_t *mc_skin_color;
 
@@ -324,7 +324,7 @@ mc_skin_color_cache_init (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-mc_skin_color_check_inisection (const gchar * group)
+mc_skin_color_check_inisection (const gchar *group)
 {
     return !((strcasecmp ("skin", group) == 0) || (strcasecmp ("aliases", group) == 0)
              || (strcasecmp ("lines", group) == 0) || (strncasecmp ("widget-", group, 7) == 0));
@@ -333,7 +333,7 @@ mc_skin_color_check_inisection (const gchar * group)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-mc_skin_color_check_bw_mode (mc_skin_t * mc_skin)
+mc_skin_color_check_bw_mode (mc_skin_t *mc_skin)
 {
     gchar **groups, **orig_groups;
 
@@ -356,7 +356,7 @@ mc_skin_color_check_bw_mode (mc_skin_t * mc_skin)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mc_skin_color_parse_ini_file (mc_skin_t * mc_skin)
+mc_skin_color_parse_ini_file (mc_skin_t *mc_skin)
 {
     gboolean ret = FALSE;
     gsize items_count;
@@ -408,7 +408,7 @@ mc_skin_color_parse_ini_file (mc_skin_t * mc_skin)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-mc_skin_color_get (const gchar * group, const gchar * name)
+mc_skin_color_get (const gchar *group, const gchar *name)
 {
     tty_color_pair_t *mc_skin_color;
 

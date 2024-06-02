@@ -56,7 +56,7 @@ mc_refresh (void)
 /* --------------------------------------------------------------------------------------------- */
 /* @Mock */
 void
-edit_load_syntax (WEdit * _edit, GPtrArray * _pnames, const char *_type)
+edit_load_syntax (WEdit *_edit, GPtrArray *_pnames, const char *_type)
 {
     (void) _edit;
     (void) _pnames;
@@ -67,7 +67,7 @@ edit_load_syntax (WEdit * _edit, GPtrArray * _pnames, const char *_type)
 
 /* @Mock */
 int
-edit_get_syntax_color (WEdit * _edit, off_t _byte_index)
+edit_get_syntax_color (WEdit *_edit, off_t _byte_index)
 {
     (void) _edit;
     (void) _byte_index;
@@ -79,7 +79,7 @@ edit_get_syntax_color (WEdit * _edit, off_t _byte_index)
 
 /* @Mock */
 gboolean
-edit_load_macro_cmd (WEdit * _edit)
+edit_load_macro_cmd (WEdit *_edit)
 {
     (void) _edit;
 
@@ -100,7 +100,7 @@ static char *edit_completion_dialog_show__return_value;
 
 /* @Mock */
 char *
-edit_completion_dialog_show (const WEdit * edit, GQueue * compl, int max_width)
+edit_completion_dialog_show (const WEdit *edit, GQueue *compl, int max_width)
 {
 
     edit_completion_dialog_show__edit = edit;

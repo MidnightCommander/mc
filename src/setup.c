@@ -604,7 +604,7 @@ load_layout (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-load_keys_from_section (const char *terminal, mc_config_t * cfg)
+load_keys_from_section (const char *terminal, mc_config_t *cfg)
 {
     char *section_name;
     gchar **profile_keys, **keys;
@@ -1072,7 +1072,7 @@ done_setup (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-setup_save_config_show_error (const char *filename, GError ** mcerror)
+setup_save_config_show_error (const char *filename, GError **mcerror)
 {
     if (mcerror != NULL && *mcerror != NULL)
     {
@@ -1127,10 +1127,10 @@ load_anon_passwd (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-panel_load_setup (WPanel * panel, const char *section)
+panel_load_setup (WPanel *panel, const char *section)
 {
     size_t i;
-    char *buffer, buffer2[BUF_TINY];
+    char *buffer;
 
     panel->sort_info.reverse =
         mc_config_get_bool (mc_global.panels_config, section, "reverse", FALSE);
@@ -1169,14 +1169,16 @@ panel_load_setup (WPanel * panel, const char *section)
     /* User formats */
     g_free (panel->user_format);
     panel->user_format =
-        mc_config_get_string (mc_global.panels_config, section, "user_format", DEFAULT_USER_FORMAT);
+        mc_config_get_string (mc_global.panels_config, section, "user_format", NULL);
 
     for (i = 0; i < LIST_FORMATS; i++)
     {
+        char buffer2[BUF_TINY];
+
         g_free (panel->user_status_format[i]);
         g_snprintf (buffer2, sizeof (buffer2), "user_status%lld", (long long) i);
         panel->user_status_format[i] =
-            mc_config_get_string (mc_global.panels_config, section, buffer2, DEFAULT_USER_FORMAT);
+            mc_config_get_string (mc_global.panels_config, section, buffer2, NULL);
     }
 
     panel->user_mini_status =
@@ -1192,7 +1194,7 @@ panel_load_setup (WPanel * panel, const char *section)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-panel_save_setup (WPanel * panel, const char *section)
+panel_save_setup (WPanel *panel, const char *section)
 {
     char buffer[BUF_TINY];
     size_t i;

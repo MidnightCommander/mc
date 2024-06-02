@@ -267,7 +267,7 @@ send_message (void *w, void *sender, widget_msg_t msg, int parm, void *data)
   */
 
 static inline gboolean
-widget_get_options (const Widget * w, widget_options_t options)
+widget_get_options (const Widget *w, widget_options_t options)
 {
     return ((w->options & options) == options);
 }
@@ -283,7 +283,7 @@ widget_get_options (const Widget * w, widget_options_t options)
   */
 
 static inline gboolean
-widget_get_state (const Widget * w, widget_state_t state)
+widget_get_state (const Widget *w, widget_state_t state)
 {
     return ((w->state & state) == state);
 }
@@ -297,7 +297,7 @@ widget_get_state (const Widget * w, widget_state_t state)
   */
 
 static inline void
-widget_make_global (Widget * w)
+widget_make_global (Widget *w)
 {
     w->make_global (w, NULL);
 }
@@ -311,7 +311,7 @@ widget_make_global (Widget * w)
   */
 
 static inline void
-widget_make_local (Widget * w)
+widget_make_local (Widget *w)
 {
     w->make_local (w, NULL);
 }
@@ -328,7 +328,7 @@ widget_make_local (Widget * w)
  */
 
 static inline GList *
-widget_find (const Widget * w, const Widget * what)
+widget_find (const Widget *w, const Widget *what)
 {
     return w->find (w, what);
 }
@@ -345,7 +345,7 @@ widget_find (const Widget * w, const Widget * what)
  */
 
 static inline Widget *
-widget_find_by_type (const Widget * w, widget_cb_fn cb)
+widget_find_by_type (const Widget *w, widget_cb_fn cb)
 {
     return w->find_by_type (w, cb);
 }
@@ -361,7 +361,7 @@ widget_find_by_type (const Widget * w, widget_cb_fn cb)
  */
 
 static inline Widget *
-widget_find_by_id (const Widget * w, unsigned long id)
+widget_find_by_id (const Widget *w, unsigned long id)
 {
     return w->find_by_id (w, id);
 }
@@ -378,7 +378,7 @@ widget_find_by_id (const Widget * w, unsigned long id)
  */
 
 static inline cb_ret_t
-widget_set_state (Widget * w, widget_state_t state, gboolean enable)
+widget_set_state (Widget *w, widget_state_t state, gboolean enable)
 {
     return w->set_state (w, state, enable);
 }
@@ -391,7 +391,7 @@ widget_set_state (Widget * w, widget_state_t state, gboolean enable)
  */
 
 static inline void
-widget_destroy (Widget * w)
+widget_destroy (Widget *w)
 {
     w->destroy (w);
 }
@@ -405,7 +405,7 @@ widget_destroy (Widget * w)
  * @return  color colors
  */
 static inline const int *
-widget_get_colors (const Widget * w)
+widget_get_colors (const Widget *w)
 {
     return w->get_colors (w);
 }
@@ -420,7 +420,7 @@ widget_get_colors (const Widget * w)
  */
 
 static inline gboolean
-widget_update_cursor (Widget * w)
+widget_update_cursor (Widget *w)
 {
     return (send_message (w, NULL, MSG_CURSOR, 0, NULL) == MSG_HANDLED);
 }
@@ -428,7 +428,7 @@ widget_update_cursor (Widget * w)
 /* --------------------------------------------------------------------------------------------- */
 
 static inline void
-widget_show (Widget * w)
+widget_show (Widget *w)
 {
     widget_set_visibility (w, TRUE);
 }
@@ -436,7 +436,7 @@ widget_show (Widget * w)
 /* --------------------------------------------------------------------------------------------- */
 
 static inline void
-widget_hide (Widget * w)
+widget_hide (Widget *w)
 {
     widget_set_visibility (w, FALSE);
 }
@@ -452,7 +452,7 @@ widget_hide (Widget * w)
   */
 
 static inline gboolean
-widget_overlapped (const Widget * a, const Widget * b)
+widget_overlapped (const Widget *a, const Widget *b)
 {
     return rects_are_overlapped (&a->rect, &b->rect);
 }

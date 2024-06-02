@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-04-07 16:41+0300\n"
+"POT-Creation-Date: 2024-06-02 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>, 2017-2024\n"
 "Language-Team: Catalan (http://app.transifex.com/mc/mc/language/ca/)\n"
@@ -574,29 +574,11 @@ msgstr "S'està recuperant el fitxer"
 msgid "Changes to file lost"
 msgstr "Canvia al fitxer perdut"
 
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "%s no és un directori\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr "El directori %s no és de la vostra propietat\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr "No s'han pogut establir els permisos correctes per al directori %s\n"
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
+#, fuzzy, c-format
+msgid ""
+"Cannot create temporary directory %s: %s.\n"
+"Temporary files will not be created\n"
 msgstr "No s'ha pogut crear el directori temporal %s: %s\n"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr "Es crearan fitxers temporals a %s\n"
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr "No es crearan fitxers temporals\n"
 
 msgid "Press any key to continue..."
 msgstr "Premeu qualsevol tecla per a continuar..."
@@ -4801,3 +4783,24 @@ msgstr "Voleu continuar des del començament?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "No s'ha pogut obtenir una còpia local de /ftp://algun.amfitrió/editam.txt"
+
+#, c-format
+#~ msgid "%s is not a directory\n"
+#~ msgstr "%s no és un directori\n"
+
+#, c-format
+#~ msgid "Directory %s is not owned by you\n"
+#~ msgstr "El directori %s no és de la vostra propietat\n"
+
+#, c-format
+#~ msgid "Cannot set correct permissions for directory %s\n"
+#~ msgstr ""
+#~ "No s'han pogut establir els permisos correctes per al directori %s\n"
+
+#, c-format
+#~ msgid "Temporary files will be created in %s\n"
+#~ msgstr "Es crearan fitxers temporals a %s\n"
+
+#, c-format
+#~ msgid "Temporary files will not be created\n"
+#~ msgstr "No es crearan fitxers temporals\n"

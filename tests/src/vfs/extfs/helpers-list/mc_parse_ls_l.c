@@ -96,8 +96,8 @@ static GOptionEntry entries[] = {
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-parse_format_name_argument (const gchar * option_name, const gchar * value, gpointer data,
-                            GError ** error)
+parse_format_name_argument (const gchar *option_name, const gchar *value, gpointer data,
+                            GError **error)
 {
     (void) option_name;
     (void) data;
@@ -364,7 +364,7 @@ process_ls_line (const char *line)
 /* ------------------------------------------------------------------------------ */
 
 static void
-process_input (FILE * input)
+process_input (FILE *input)
 {
     char line[BUF_4K];
 

@@ -98,7 +98,7 @@ printwstr (const char *s, int len)
 /* --------------------------------------------------------------------------------------------- */
 
 static inline void
-status_string (WEdit * edit, char *s, int w)
+status_string (WEdit *edit, char *s, int w)
 {
     char byte_str[16];
 
@@ -179,7 +179,7 @@ status_string (WEdit * edit, char *s, int w)
  */
 
 static inline void
-edit_status_fullscreen (WEdit * edit, int color)
+edit_status_fullscreen (WEdit *edit, int color)
 {
     Widget *h = WIDGET (WIDGET (edit)->owner);
     const int w = h->rect.cols;
@@ -243,7 +243,7 @@ edit_status_fullscreen (WEdit * edit, int color)
  */
 
 static inline void
-edit_status_window (WEdit * edit)
+edit_status_window (WEdit *edit)
 {
     Widget *w = WIDGET (edit);
     int y, x;
@@ -334,7 +334,7 @@ edit_status_window (WEdit * edit)
  */
 
 static inline void
-edit_draw_frame (const WEdit * edit, int color, gboolean active)
+edit_draw_frame (const WEdit *edit, int color, gboolean active)
 {
     const Widget *w = CONST_WIDGET (edit);
 
@@ -360,7 +360,7 @@ edit_draw_frame (const WEdit * edit, int color, gboolean active)
  */
 
 static inline void
-edit_draw_window_icons (const WEdit * edit, int color)
+edit_draw_window_icons (const WEdit *edit, int color)
 {
     const Widget *w = CONST_WIDGET (edit);
     char tmp[17];
@@ -377,7 +377,7 @@ edit_draw_window_icons (const WEdit * edit, int color)
 /* --------------------------------------------------------------------------------------------- */
 
 static inline void
-print_to_widget (WEdit * edit, long row, int start_col, int start_col_real,
+print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
                  long end_col, line_s line[], char *status, int bookmarked)
 {
     Widget *w = WIDGET (edit);
@@ -492,7 +492,7 @@ print_to_widget (WEdit * edit, long row, int start_col, int start_col_real,
 /** b is a pointer to the beginning of the line */
 
 static void
-edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_col)
+edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_col)
 {
     Widget *w = WIDGET (edit);
     line_s line[MAX_LINE_LEN];
@@ -820,7 +820,7 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
 /* --------------------------------------------------------------------------------------------- */
 
 static inline void
-edit_draw_this_char (WEdit * edit, off_t curs, long row, long start_column, long end_column)
+edit_draw_this_char (WEdit *edit, off_t curs, long row, long start_column, long end_column)
 {
     off_t b;
 
@@ -832,7 +832,7 @@ edit_draw_this_char (WEdit * edit, off_t curs, long row, long start_column, long
 /** cursor must be in screen for other than REDRAW_PAGE passed in force */
 
 static inline void
-render_edit_text (WEdit * edit, long start_row, long start_column, long end_row, long end_column)
+render_edit_text (WEdit *edit, long start_row, long start_column, long end_row, long end_column)
 {
     static long prev_curs_row = 0;
     static off_t prev_curs = 0;
@@ -995,7 +995,7 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
 /* --------------------------------------------------------------------------------------------- */
 
 static inline void
-edit_render (WEdit * edit, int page, int row_start, int col_start, int row_end, int col_end)
+edit_render (WEdit *edit, int page, int row_start, int col_start, int row_end, int col_end)
 {
     if (page != 0)              /* if it was an expose event, 'page' would be set */
         edit->force |= REDRAW_PAGE | REDRAW_IN_BOUNDS;
@@ -1016,7 +1016,7 @@ edit_render (WEdit * edit, int page, int row_start, int col_start, int row_end, 
 /* --------------------------------------------------------------------------------------------- */
 
 void
-edit_status (WEdit * edit, gboolean active)
+edit_status (WEdit *edit, gboolean active)
 {
     int color;
 
@@ -1040,7 +1040,7 @@ edit_status (WEdit * edit, gboolean active)
 
 /** this scrolls the text so that cursor is on the screen */
 void
-edit_scroll_screen_over_cursor (WEdit * edit)
+edit_scroll_screen_over_cursor (WEdit *edit)
 {
     WRect *w = &WIDGET (edit)->rect;
 
@@ -1112,7 +1112,7 @@ edit_scroll_screen_over_cursor (WEdit * edit)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-edit_render_keypress (WEdit * edit)
+edit_render_keypress (WEdit *edit)
 {
     edit_render (edit, 0, 0, 0, 0, 0);
 }

@@ -212,6 +212,7 @@ dnl Check for other tools
 dnl ############################################################################
 
 AC_CHECK_TOOL(AR, ar, ar)
+AC_CHECK_TOOL(INDENT, gindent, indent)
 mc_UNIT_TESTS
 
 

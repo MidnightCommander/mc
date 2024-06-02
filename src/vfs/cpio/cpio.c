@@ -223,7 +223,7 @@ cpio_free_archive (struct vfs_class *me, struct vfs_s_super *super)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-cpio_open_cpio_file (struct vfs_class *me, struct vfs_s_super *super, const vfs_path_t * vpath)
+cpio_open_cpio_file (struct vfs_class *me, struct vfs_s_super *super, const vfs_path_t *vpath)
 {
     int fd, type;
     cpio_super_t *arch;
@@ -769,8 +769,8 @@ cpio_read_crc_head (struct vfs_class *me, struct vfs_s_super *super)
 /** Need to CPIO_SEEK_CUR to skip the file at the end of add entry!!!! */
 
 static int
-cpio_open_archive (struct vfs_s_super *super, const vfs_path_t * vpath,
-                   const vfs_path_element_t * vpath_element)
+cpio_open_archive (struct vfs_s_super *super, const vfs_path_t *vpath,
+                   const vfs_path_element_t *vpath_element)
 {
     (void) vpath_element;
 
@@ -810,7 +810,7 @@ cpio_open_archive (struct vfs_s_super *super, const vfs_path_t * vpath,
 /** Remaining functions are exactly same as for tarfs (and were in fact just copied) */
 
 static void *
-cpio_super_check (const vfs_path_t * vpath)
+cpio_super_check (const vfs_path_t *vpath)
 {
     static struct stat sb;
     int stat_result;
@@ -822,8 +822,8 @@ cpio_super_check (const vfs_path_t * vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-cpio_super_same (const vfs_path_element_t * vpath_element, struct vfs_s_super *parc,
-                 const vfs_path_t * vpath, void *cookie)
+cpio_super_same (const vfs_path_element_t *vpath_element, struct vfs_s_super *parc,
+                 const vfs_path_t *vpath, void *cookie)
 {
     struct stat *archive_stat = cookie; /* stat of main archive */
 
@@ -872,7 +872,7 @@ cpio_read (void *fh, char *buffer, size_t count)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-cpio_fh_open (struct vfs_class *me, vfs_file_handler_t * fh, int flags, mode_t mode)
+cpio_fh_open (struct vfs_class *me, vfs_file_handler_t *fh, int flags, mode_t mode)
 {
     (void) fh;
     (void) mode;

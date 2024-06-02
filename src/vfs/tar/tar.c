@@ -201,7 +201,7 @@ minor_from_header (const char *p, size_t s)
  * Set *hbits if there are any unrecognized bits.
  * */
 static inline mode_t
-mode_from_header (const char *p, size_t s, gboolean * hbits)
+mode_from_header (const char *p, size_t s, gboolean *hbits)
 {
     unsigned int u;
     mode_t mode;
@@ -268,7 +268,7 @@ tar_calc_sparse_offsets (struct vfs_s_inode *inode)
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-tar_skip_member (tar_super_t * archive, struct vfs_s_inode *inode)
+tar_skip_member (tar_super_t *archive, struct vfs_s_inode *inode)
 {
     char save_typeflag;
 
@@ -370,7 +370,7 @@ tar_checksum (const union block *header)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-tar_decode_header (union block *header, tar_super_t * arch)
+tar_decode_header (union block *header, tar_super_t *arch)
 {
     gboolean hbits = FALSE;
 
@@ -897,7 +897,7 @@ tar_free_archive (struct vfs_class *me, struct vfs_s_super *archive)
 
 /* Returns status of the tar archive open */
 static gboolean
-tar_open_archive_int (struct vfs_class *me, const vfs_path_t * vpath, struct vfs_s_super *archive)
+tar_open_archive_int (struct vfs_class *me, const vfs_path_t *vpath, struct vfs_s_super *archive)
 {
     tar_super_t *arch = TAR_SUPER (archive);
     int result, type;
@@ -965,8 +965,8 @@ tar_open_archive_int (struct vfs_class *me, const vfs_path_t * vpath, struct vfs
  * Returns 0 on success, -1 on error.
  */
 static int
-tar_open_archive (struct vfs_s_super *archive, const vfs_path_t * vpath,
-                  const vfs_path_element_t * vpath_element)
+tar_open_archive (struct vfs_s_super *archive, const vfs_path_t *vpath,
+                  const vfs_path_element_t *vpath_element)
 {
     tar_super_t *arch = TAR_SUPER (archive);
     /* Initial status at start of archive */
@@ -1046,7 +1046,7 @@ tar_open_archive (struct vfs_s_super *archive, const vfs_path_t * vpath,
 /* --------------------------------------------------------------------------------------------- */
 
 static void *
-tar_super_check (const vfs_path_t * vpath)
+tar_super_check (const vfs_path_t *vpath)
 {
     static struct stat stat_buf;
     int stat_result;
@@ -1059,8 +1059,8 @@ tar_super_check (const vfs_path_t * vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-tar_super_same (const vfs_path_element_t * vpath_element, struct vfs_s_super *parc,
-                const vfs_path_t * vpath, void *cookie)
+tar_super_same (const vfs_path_element_t *vpath_element, struct vfs_s_super *parc,
+                const vfs_path_t *vpath, void *cookie)
 {
     struct stat *archive_stat = cookie; /* stat of main archive */
 
@@ -1100,7 +1100,7 @@ tar_super_same (const vfs_path_element_t * vpath_element, struct vfs_s_super *pa
  */
 
 static ssize_t
-tar_get_sparse_chunk_idx (const GArray * sparse_map, off_t offset)
+tar_get_sparse_chunk_idx (const GArray *sparse_map, off_t offset)
 {
     size_t k;
 
@@ -1126,7 +1126,7 @@ tar_get_sparse_chunk_idx (const GArray * sparse_map, off_t offset)
 /* --------------------------------------------------------------------------------------------- */
 
 static ssize_t
-tar_read_sparse (vfs_file_handler_t * fh, char *buffer, size_t count)
+tar_read_sparse (vfs_file_handler_t *fh, char *buffer, size_t count)
 {
     int fd = TAR_SUPER (fh->ino->super)->fd;
     const GArray *sm = (const GArray *) fh->ino->user_data;
@@ -1169,7 +1169,7 @@ tar_read_sparse (vfs_file_handler_t * fh, char *buffer, size_t count)
 /* --------------------------------------------------------------------------------------------- */
 
 static off_t
-tar_lseek_sparse (vfs_file_handler_t * fh, off_t offset)
+tar_lseek_sparse (vfs_file_handler_t *fh, off_t offset)
 {
     off_t saved_offset = offset;
     int fd = TAR_SUPER (fh->ino->super)->fd;
@@ -1260,7 +1260,7 @@ tar_read (void *fh, char *buffer, size_t count)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-tar_fh_open (struct vfs_class *me, vfs_file_handler_t * fh, int flags, mode_t mode)
+tar_fh_open (struct vfs_class *me, vfs_file_handler_t *fh, int flags, mode_t mode)
 {
     (void) fh;
     (void) mode;

@@ -69,7 +69,7 @@ int edit_buffer_calc_percent (const edit_buffer_t * buf, off_t offset);
 /*** inline functions ****************************************************************************/
 
 static inline int
-edit_buffer_get_current_byte (const edit_buffer_t * buf)
+edit_buffer_get_current_byte (const edit_buffer_t *buf)
 {
     return edit_buffer_get_byte (buf, buf->curs1);
 }
@@ -77,7 +77,7 @@ edit_buffer_get_current_byte (const edit_buffer_t * buf)
 /* --------------------------------------------------------------------------------------------- */
 
 static inline int
-edit_buffer_get_previous_byte (const edit_buffer_t * buf)
+edit_buffer_get_previous_byte (const edit_buffer_t *buf)
 {
     return edit_buffer_get_byte (buf, buf->curs1 - 1);
 }
@@ -92,7 +92,7 @@ edit_buffer_get_previous_byte (const edit_buffer_t * buf)
  */
 
 static inline off_t
-edit_buffer_get_current_bol (const edit_buffer_t * buf)
+edit_buffer_get_current_bol (const edit_buffer_t *buf)
 {
     return edit_buffer_get_bol (buf, buf->curs1);
 }
@@ -107,7 +107,7 @@ edit_buffer_get_current_bol (const edit_buffer_t * buf)
  */
 
 static inline off_t
-edit_buffer_get_current_eol (const edit_buffer_t * buf)
+edit_buffer_get_current_eol (const edit_buffer_t *buf)
 {
     return edit_buffer_get_eol (buf, buf->curs1);
 }

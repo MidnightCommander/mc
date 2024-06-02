@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-04-07 16:41+0300\n"
+"POT-Creation-Date: 2024-06-02 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
 "Language-Team: Serbian (http://app.transifex.com/mc/mc/language/sr/)\n"
@@ -549,29 +549,11 @@ msgstr "Добављам датотеку"
 msgid "Changes to file lost"
 msgstr "Измене у датотеци су изгубљене"
 
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "„%s“ није директоријум\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr "Директоријум „%s“ није у вашем власништву\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr "Не могу да поставим исправне дозволе за директоријум %s\n"
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
+#, fuzzy, c-format
+msgid ""
+"Cannot create temporary directory %s: %s.\n"
+"Temporary files will not be created\n"
 msgstr "Не могу да направим привремени директоријум %s: %s\n"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr "Привремене датотеке ће бити направљене у %s\n"
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr "Привремене датотеке неће бити направљене\n"
 
 msgid "Press any key to continue..."
 msgstr "Притиснитенеки тастер да наставите..."
@@ -4665,3 +4647,23 @@ msgstr "Да наставим са почетка?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не могу да довучем месни примерак „/ftp://some.host/editme.txt“"
+
+#, c-format
+#~ msgid "%s is not a directory\n"
+#~ msgstr "„%s“ није директоријум\n"
+
+#, c-format
+#~ msgid "Directory %s is not owned by you\n"
+#~ msgstr "Директоријум „%s“ није у вашем власништву\n"
+
+#, c-format
+#~ msgid "Cannot set correct permissions for directory %s\n"
+#~ msgstr "Не могу да поставим исправне дозволе за директоријум %s\n"
+
+#, c-format
+#~ msgid "Temporary files will be created in %s\n"
+#~ msgstr "Привремене датотеке ће бити направљене у %s\n"
+
+#, c-format
+#~ msgid "Temporary files will not be created\n"
+#~ msgstr "Привремене датотеке неће бити направљене\n"

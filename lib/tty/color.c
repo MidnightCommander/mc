@@ -74,7 +74,7 @@ static GHashTable *mc_tty_color__hashtable = NULL;
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-mc_color__deinit (tty_color_pair_t * color)
+mc_color__deinit (tty_color_pair_t *color)
 {
     g_free (color->fg);
     g_free (color->bg);
@@ -153,7 +153,7 @@ tty_use_colors (void)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-tty_try_alloc_color_pair (const tty_color_pair_t * color, gboolean is_temp)
+tty_try_alloc_color_pair (const tty_color_pair_t *color, gboolean is_temp)
 {
     gboolean is_base;
     gchar *color_pair;
@@ -220,7 +220,7 @@ tty_color_free_all (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-tty_color_set_defaults (const tty_color_pair_t * color)
+tty_color_set_defaults (const tty_color_pair_t *color)
 {
     mc_color__deinit (&tty_color_defaults);
 

@@ -84,7 +84,7 @@
 /*** inline functions ****************************************************************************/
 
 static inline int
-mctest_run_all (TCase * tc_core)
+mctest_run_all (TCase *tc_core)
 {
     Suite *s;
     SRunner *sr;

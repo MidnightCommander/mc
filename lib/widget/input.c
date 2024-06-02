@@ -88,7 +88,7 @@ static char *kill_buffer = NULL;
 /* --------------------------------------------------------------------------------------------- */
 
 static size_t
-get_history_length (GList * history)
+get_history_length (GList *history)
 {
     size_t len = 0;
 
@@ -101,7 +101,7 @@ get_history_length (GList * history)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-draw_history_button (WInput * in)
+draw_history_button (WInput *in)
 {
     char c;
     gboolean disabled;
@@ -128,7 +128,7 @@ draw_history_button (WInput * in)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-input_mark_cmd (WInput * in, gboolean mark)
+input_mark_cmd (WInput *in, gboolean mark)
 {
     in->mark = mark ? in->point : -1;
 }
@@ -136,7 +136,7 @@ input_mark_cmd (WInput * in, gboolean mark)
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-input_eval_marks (WInput * in, long *start_mark, long *end_mark)
+input_eval_marks (WInput *in, long *start_mark, long *end_mark)
 {
     if (in->mark >= 0)
     {
@@ -152,7 +152,7 @@ input_eval_marks (WInput * in, long *start_mark, long *end_mark)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-do_show_hist (WInput * in)
+do_show_hist (WInput *in)
 {
     size_t len;
     history_descriptor_t hd;
@@ -218,7 +218,7 @@ input_history_strip_password (char *url)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-input_push_history (WInput * in)
+input_push_history (WInput *in)
 {
     char *t;
     gboolean empty;
@@ -261,7 +261,7 @@ input_push_history (WInput * in)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-move_buffer_backward (WInput * in, int start, int end)
+move_buffer_backward (WInput *in, int start, int end)
 {
     int str_len;
 
@@ -277,7 +277,7 @@ move_buffer_backward (WInput * in, int start, int end)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-beginning_of_line (WInput * in)
+beginning_of_line (WInput *in)
 {
     in->point = 0;
     in->charpoint = 0;
@@ -286,7 +286,7 @@ beginning_of_line (WInput * in)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-end_of_line (WInput * in)
+end_of_line (WInput *in)
 {
     in->point = str_length (in->buffer->str);
     in->charpoint = 0;
@@ -295,7 +295,7 @@ end_of_line (WInput * in)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-backward_char (WInput * in)
+backward_char (WInput *in)
 {
     if (in->point > 0)
     {
@@ -311,7 +311,7 @@ backward_char (WInput * in)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-forward_char (WInput * in)
+forward_char (WInput *in)
 {
     const char *act;
 
@@ -324,7 +324,7 @@ forward_char (WInput * in)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-forward_word (WInput * in)
+forward_word (WInput *in)
 {
     const char *p;
 
@@ -340,7 +340,7 @@ forward_word (WInput * in)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-backward_word (WInput * in)
+backward_word (WInput *in)
 {
     const char *p;
 
@@ -370,7 +370,7 @@ backward_word (WInput * in)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-backward_delete (WInput * in)
+backward_delete (WInput *in)
 {
     const char *act;
     int start;
@@ -389,7 +389,7 @@ backward_delete (WInput * in)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-copy_region (WInput * in, int start, int end)
+copy_region (WInput *in, int start, int end)
 {
     int first = MIN (start, end);
     int last = MAX (start, end);
@@ -418,7 +418,7 @@ copy_region (WInput * in, int start, int end)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-delete_region (WInput * in, int start, int end)
+delete_region (WInput *in, int start, int end)
 {
     int first = MIN (start, end);
     int last = MAX (start, end);
@@ -433,7 +433,7 @@ delete_region (WInput * in, int start, int end)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-insert_char (WInput * in, int c_code)
+insert_char (WInput *in, int c_code)
 {
     int res;
     long m1, m2;
@@ -471,7 +471,7 @@ insert_char (WInput * in, int c_code)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-delete_char (WInput * in)
+delete_char (WInput *in)
 {
     const char *act;
     int end;
@@ -486,7 +486,7 @@ delete_char (WInput * in)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-kill_word (WInput * in)
+kill_word (WInput *in)
 {
     int old_point = in->point;
     int new_point;
@@ -503,7 +503,7 @@ kill_word (WInput * in)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-back_kill_word (WInput * in)
+back_kill_word (WInput *in)
 {
     int old_point = in->point;
     int new_point;
@@ -519,7 +519,7 @@ back_kill_word (WInput * in)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-yank (WInput * in)
+yank (WInput *in)
 {
     if (kill_buffer != NULL)
     {
@@ -535,7 +535,7 @@ yank (WInput * in)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-kill_line (WInput * in)
+kill_line (WInput *in)
 {
     int chp;
 
@@ -549,7 +549,7 @@ kill_line (WInput * in)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-clear_line (WInput * in)
+clear_line (WInput *in)
 {
     in->need_push = TRUE;
     g_string_set_size (in->buffer, 0);
@@ -561,7 +561,7 @@ clear_line (WInput * in)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-ins_from_clip (WInput * in)
+ins_from_clip (WInput *in)
 {
     char *p = NULL;
     ev_clipboard_text_from_file_t event_data = { NULL, FALSE };
@@ -585,7 +585,7 @@ ins_from_clip (WInput * in)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-hist_prev (WInput * in)
+hist_prev (WInput *in)
 {
     GList *prev;
 
@@ -608,7 +608,7 @@ hist_prev (WInput * in)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-hist_next (WInput * in)
+hist_next (WInput *in)
 {
     GList *next;
 
@@ -640,7 +640,7 @@ hist_next (WInput * in)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-port_region_marked_for_delete (WInput * in)
+port_region_marked_for_delete (WInput *in)
 {
     g_string_set_size (in->buffer, 0);
     in->point = 0;
@@ -651,7 +651,7 @@ port_region_marked_for_delete (WInput * in)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-input_execute_cmd (WInput * in, long command)
+input_execute_cmd (WInput *in, long command)
 {
     cb_ret_t res = MSG_HANDLED;
 
@@ -804,7 +804,7 @@ input_execute_cmd (WInput * in, long command)
 
 /* "history_load" event handler */
 static gboolean
-input_load_history (const gchar * event_group_name, const gchar * event_name,
+input_load_history (const gchar *event_group_name, const gchar *event_name,
                     gpointer init_data, gpointer data)
 {
     WInput *in = INPUT (init_data);
@@ -833,7 +833,7 @@ input_load_history (const gchar * event_group_name, const gchar * event_name,
 
 /* "history_save" event handler */
 static gboolean
-input_save_history (const gchar * event_group_name, const gchar * event_name,
+input_save_history (const gchar *event_group_name, const gchar *event_name,
                     gpointer init_data, gpointer data)
 {
     WInput *in = INPUT (init_data);
@@ -857,7 +857,7 @@ input_save_history (const gchar * event_group_name, const gchar * event_name,
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-input_destroy (WInput * in)
+input_destroy (WInput *in)
 {
     input_complete_free (in);
 
@@ -879,7 +879,7 @@ input_destroy (WInput * in)
  * Calculates the buffer index (aka "point") corresponding to some screen coordinate.
  */
 static int
-input_screen_to_point (const WInput * in, int x)
+input_screen_to_point (const WInput *in, int x)
 {
     x += in->term_first_shown;
 
@@ -895,7 +895,7 @@ input_screen_to_point (const WInput * in, int x)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-input_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
+input_mouse_callback (Widget *w, mouse_msg_t msg, mouse_event_t *event)
 {
     /* save point between MSG_MOUSE_DOWN and MSG_MOUSE_DRAG */
     static int prev_point = 0;
@@ -1001,7 +1001,7 @@ input_new (int y, int x, const int *colors, int width, const char *def_text,
 /* --------------------------------------------------------------------------------------------- */
 
 cb_ret_t
-input_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+input_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data)
 {
     WInput *in = INPUT (w);
     WDialog *h = DIALOG (w->owner);
@@ -1087,7 +1087,7 @@ input_set_default_colors (void)
 /* --------------------------------------------------------------------------------------------- */
 
 cb_ret_t
-input_handle_char (WInput * in, int key)
+input_handle_char (WInput *in, int key)
 {
     cb_ret_t v;
     long command;
@@ -1132,7 +1132,7 @@ input_handle_char (WInput * in, int key)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-input_assign_text (WInput * in, const char *text)
+input_assign_text (WInput *in, const char *text)
 {
     if (text == NULL)
         text = "";
@@ -1150,7 +1150,7 @@ input_assign_text (WInput * in, const char *text)
 
 /* Inserts text in input line */
 void
-input_insert (WInput * in, const char *text, gboolean insert_extra_space)
+input_insert (WInput *in, const char *text, gboolean insert_extra_space)
 {
     input_disable_update (in);
     while (*text != '\0')
@@ -1164,7 +1164,7 @@ input_insert (WInput * in, const char *text, gboolean insert_extra_space)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-input_set_point (WInput * in, int pos)
+input_set_point (WInput *in, int pos)
 {
     int max_pos;
 
@@ -1180,7 +1180,7 @@ input_set_point (WInput * in, int pos)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-input_update (WInput * in, gboolean clear_first)
+input_update (WInput *in, gboolean clear_first)
 {
     Widget *wi = WIDGET (in);
     const WRect *w = &wi->rect;
@@ -1286,7 +1286,7 @@ input_update (WInput * in, gboolean clear_first)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-input_enable_update (WInput * in)
+input_enable_update (WInput *in)
 {
     in->disable_update--;
     input_update (in, FALSE);
@@ -1295,7 +1295,7 @@ input_enable_update (WInput * in)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-input_disable_update (WInput * in)
+input_disable_update (WInput *in)
 {
     in->disable_update++;
 }
@@ -1308,7 +1308,7 @@ input_disable_update (WInput * in)
   *  @param in the input line
   */
 void
-input_clean (WInput * in)
+input_clean (WInput *in)
 {
     input_push_history (in);
     in->need_push = TRUE;

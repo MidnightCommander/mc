@@ -137,8 +137,7 @@ static struct
     const char *text;
     gboolean selected;
     gboolean state;             /* state of checkboxes */
-} check_attr[] =
-{
+} check_attr[] = {
     /* *INDENT-OFF* */
     { EXT2_SECRM_FL,        's', N_("Secure deletion"),               FALSE, FALSE },
     { EXT2_UNRM_FL,         'u', N_("Undelete"),                      FALSE, FALSE },
@@ -224,8 +223,7 @@ static struct
     int width;
     const char *text;
     Widget *button;
-} chattr_but[BUTTONS] =
-{
+} chattr_but[BUTTONS] = {
     /* *INDENT-OFF* */
     /* 0 */ { B_SETALL, NORMAL_BUTTON, 0, N_("Set &all"),      NULL },
     /* 1 */ { B_MARKED, NORMAL_BUTTON, 0, N_("&Marked all"),   NULL },
@@ -273,7 +271,7 @@ chattr_fill_str (unsigned long attr, char *str)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-fileattrtext_fill (WFileAttrText * fat, unsigned long attr)
+fileattrtext_fill (WFileAttrText *fat, unsigned long attr)
 {
     chattr_fill_str (attr, fat->attrs);
     widget_draw (WIDGET (fat));
@@ -282,7 +280,7 @@ fileattrtext_fill (WFileAttrText * fat, unsigned long attr)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-fileattrtext_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+fileattrtext_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data)
 {
     WFileAttrText *fat = (WFileAttrText *) w;
 
@@ -382,7 +380,7 @@ fileattrtext_new (int y, int x, const char *filename, unsigned long attr)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-chattr_draw_select (const Widget * w, gboolean selected)
+chattr_draw_select (const Widget *w, gboolean selected)
 {
     widget_gotoyx (w, 0, -1);
     tty_print_char (selected ? '*' : ' ');
@@ -392,7 +390,7 @@ chattr_draw_select (const Widget * w, gboolean selected)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-chattr_toggle_select (const WChattrBoxes * cb, int Id)
+chattr_toggle_select (const WChattrBoxes *cb, int Id)
 {
     Widget *w;
 
@@ -408,7 +406,7 @@ chattr_toggle_select (const WChattrBoxes * cb, int Id)
 /* --------------------------------------------------------------------------------------------- */
 
 static inline void
-chattrboxes_draw_scrollbar (const WChattrBoxes * cb)
+chattrboxes_draw_scrollbar (const WChattrBoxes *cb)
 {
     const Widget *w = CONST_WIDGET (cb);
     int max_line;
@@ -447,7 +445,7 @@ chattrboxes_draw_scrollbar (const WChattrBoxes * cb)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-chattrboxes_draw (WChattrBoxes * cb)
+chattrboxes_draw (WChattrBoxes *cb)
 {
     Widget *w = WIDGET (cb);
     int i;
@@ -474,7 +472,7 @@ chattrboxes_draw (WChattrBoxes * cb)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-chattrboxes_rename (WChattrBoxes * cb)
+chattrboxes_rename (WChattrBoxes *cb)
 {
     Widget *w = WIDGET (cb);
     gboolean active;
@@ -509,7 +507,7 @@ chattrboxes_rename (WChattrBoxes * cb)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-checkboxes_save_state (const WChattrBoxes * cb)
+checkboxes_save_state (const WChattrBoxes *cb)
 {
     int i;
     GList *l;
@@ -526,7 +524,7 @@ checkboxes_save_state (const WChattrBoxes * cb)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-chattrboxes_down (WChattrBoxes * cb)
+chattrboxes_down (WChattrBoxes *cb)
 {
     if (cb->pos == cb->top + WIDGET (cb)->rect.lines - 1)
     {
@@ -559,7 +557,7 @@ chattrboxes_down (WChattrBoxes * cb)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-chattrboxes_page_down (WChattrBoxes * cb)
+chattrboxes_page_down (WChattrBoxes *cb)
 {
     WGroup *g = GROUP (cb);
     GList *l;
@@ -605,7 +603,7 @@ chattrboxes_page_down (WChattrBoxes * cb)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-chattrboxes_end (WChattrBoxes * cb)
+chattrboxes_end (WChattrBoxes *cb)
 {
     GList *l;
 
@@ -622,7 +620,7 @@ chattrboxes_end (WChattrBoxes * cb)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-chattrboxes_up (WChattrBoxes * cb)
+chattrboxes_up (WChattrBoxes *cb)
 {
     if (cb->pos == cb->top)
     {
@@ -655,7 +653,7 @@ chattrboxes_up (WChattrBoxes * cb)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-chattrboxes_page_up (WChattrBoxes * cb)
+chattrboxes_page_up (WChattrBoxes *cb)
 {
     WGroup *g = GROUP (cb);
     GList *l;
@@ -699,7 +697,7 @@ chattrboxes_page_up (WChattrBoxes * cb)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-chattrboxes_home (WChattrBoxes * cb)
+chattrboxes_home (WChattrBoxes *cb)
 {
     GList *l;
 
@@ -716,7 +714,7 @@ chattrboxes_home (WChattrBoxes * cb)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-chattrboxes_execute_cmd (WChattrBoxes * cb, long command)
+chattrboxes_execute_cmd (WChattrBoxes *cb, long command)
 {
     switch (command)
     {
@@ -756,7 +754,7 @@ chattrboxes_execute_cmd (WChattrBoxes * cb, long command)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-chattrboxes_key (WChattrBoxes * cb, int key)
+chattrboxes_key (WChattrBoxes *cb, int key)
 {
     long command;
 
@@ -769,7 +767,7 @@ chattrboxes_key (WChattrBoxes * cb, int key)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-chattrboxes_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+chattrboxes_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data)
 {
     WChattrBoxes *cb = CHATTRBOXES (w);
     WGroup *g = GROUP (w);
@@ -839,7 +837,7 @@ chattrboxes_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-chattrboxes_handle_mouse_event (Widget * w, Gpm_Event * event)
+chattrboxes_handle_mouse_event (Widget *w, Gpm_Event *event)
 {
     int mou;
 
@@ -853,7 +851,7 @@ chattrboxes_handle_mouse_event (Widget * w, Gpm_Event * event)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-chattrboxes_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
+chattrboxes_mouse_callback (Widget *w, mouse_msg_t msg, mouse_event_t *event)
 {
     WChattrBoxes *cb = CHATTRBOXES (w);
 
@@ -879,7 +877,7 @@ chattrboxes_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 /* --------------------------------------------------------------------------------------------- */
 
 static WChattrBoxes *
-chattrboxes_new (const WRect * r)
+chattrboxes_new (const WRect *r)
 {
     WChattrBoxes *cb;
     Widget *w;
@@ -962,7 +960,7 @@ chattr_init (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static WDialog *
-chattr_dlg_create (WPanel * panel, const char *fname, unsigned long attr)
+chattr_dlg_create (WPanel *panel, const char *fname, unsigned long attr)
 {
     Widget *mw = WIDGET (WIDGET (panel)->owner);
     gboolean single_set;
@@ -1095,7 +1093,7 @@ chattr_done (gboolean need_update)
 /* --------------------------------------------------------------------------------------------- */
 
 static const GString *
-next_file (const WPanel * panel)
+next_file (const WPanel *panel)
 {
     while (panel->dir.list[current_file].f.marked == 0)
         current_file++;
@@ -1106,7 +1104,7 @@ next_file (const WPanel * panel)
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-try_chattr (const vfs_path_t * p, unsigned long m)
+try_chattr (const vfs_path_t *p, unsigned long m)
 {
     const char *fname = NULL;
 
@@ -1152,7 +1150,7 @@ try_chattr (const vfs_path_t * p, unsigned long m)
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-do_chattr (WPanel * panel, const vfs_path_t * p, unsigned long m)
+do_chattr (WPanel *panel, const vfs_path_t *p, unsigned long m)
 {
     gboolean ret;
 
@@ -1169,7 +1167,7 @@ do_chattr (WPanel * panel, const vfs_path_t * p, unsigned long m)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-chattr_apply_mask (WPanel * panel, vfs_path_t * vpath, unsigned long m)
+chattr_apply_mask (WPanel *panel, vfs_path_t *vpath, unsigned long m)
 {
     gboolean ok;
 
@@ -1208,7 +1206,7 @@ chattr_apply_mask (WPanel * panel, vfs_path_t * vpath, unsigned long m)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-chattr_cmd (WPanel * panel)
+chattr_cmd (WPanel *panel)
 {
     gboolean need_update = FALSE;
     gboolean end_chattr = FALSE;

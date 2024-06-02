@@ -69,7 +69,7 @@ str_tokenize_word (const char *string, int start)
 {
     int i = start;
     char delimiter = '\0';
-    char delimopen;
+    char delimopen = '\0';
     int nestdelim = 0;
 
     if (member (string[i], "()\n"))     /* XXX - included \n, but why? been here forever */

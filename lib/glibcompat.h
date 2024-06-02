@@ -40,6 +40,9 @@ GString *mc_g_string_copy (GString * dest, const GString * src);
 /* There is no such API in GLib2 */
 GString *mc_g_string_dup (const GString * s);
 
+/* There is no such API in GLib2 */
+GString *mc_g_string_append_c_len (GString * s, gchar c, guint len);
+
 /*** inline functions ****************************************************************************/
 
 #endif /* MC_GLIBCOMPAT_H */

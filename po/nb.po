@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-04-07 16:41+0300\n"
+"POT-Creation-Date: 2024-06-02 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: heskjestad <kc.madderloss@gmail.com>, 2024\n"
 "Language-Team: Norwegian Bokmål (http://app.transifex.com/mc/mc/language/"
@@ -564,29 +564,11 @@ msgstr "Henter fil"
 msgid "Changes to file lost"
 msgstr "Endringer i filen gikk tapt"
 
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "%s er ikke en mappe\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr "Du eier ikke mappa %s\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr "Klarte ikke velge riktige rettigheter for mappa %s\n"
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
+#, fuzzy, c-format
+msgid ""
+"Cannot create temporary directory %s: %s.\n"
+"Temporary files will not be created\n"
 msgstr "Klarte ikke ikke opprette midlertidig mappe %s: %s\n"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr "Lagrer midlertidige filer i %s\n"
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr "Oppretter ikke noen midlertidige filer\n"
 
 msgid "Press any key to continue..."
 msgstr "Trykk en tast for å fortsette ..."
@@ -4776,3 +4758,23 @@ msgstr "Fortsett fra begynnelsen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Klarte ikke hente en lokal kopi av /ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid "%s is not a directory\n"
+#~ msgstr "%s er ikke en mappe\n"
+
+#, c-format
+#~ msgid "Directory %s is not owned by you\n"
+#~ msgstr "Du eier ikke mappa %s\n"
+
+#, c-format
+#~ msgid "Cannot set correct permissions for directory %s\n"
+#~ msgstr "Klarte ikke velge riktige rettigheter for mappa %s\n"
+
+#, c-format
+#~ msgid "Temporary files will be created in %s\n"
+#~ msgstr "Lagrer midlertidige filer i %s\n"
+
+#, c-format
+#~ msgid "Temporary files will not be created\n"
+#~ msgstr "Oppretter ikke noen midlertidige filer\n"

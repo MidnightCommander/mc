@@ -584,7 +584,7 @@ select_cmp_by_fd (gconstpointer a, gconstpointer b)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-add_selects (fd_set * select_set)
+add_selects (fd_set *select_set)
 {
     int top_fd = 0;
 
@@ -608,7 +608,7 @@ add_selects (fd_set * select_set)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-check_selects (fd_set * select_set)
+check_selects (fd_set *select_set)
 {
     while (disabled_channels == 0)
     {
@@ -690,7 +690,7 @@ create_sequence (const char *seq, int code, int action)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-define_sequences (const key_define_t * kd)
+define_sequences (const key_define_t *kd)
 {
     int i;
 
@@ -745,7 +745,7 @@ getch_with_delay (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-xmouse_get_event (Gpm_Event * ev, gboolean extended)
+xmouse_get_event (Gpm_Event *ev, gboolean extended)
 {
     static gint64 tv1 = 0;      /* Force first click as single */
     static int clicks = 0;
@@ -1173,7 +1173,7 @@ getch_with_timeout (unsigned int delay_us)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-learn_store_key (GString * buffer, int c)
+learn_store_key (GString *buffer, int c)
 {
     if (c == ESC_CHAR)
         g_string_append (buffer, "\\e");
@@ -1191,7 +1191,7 @@ learn_store_key (GString * buffer, int c)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-k_dispose (key_def * k)
+k_dispose (key_def *k)
 {
     if (k != NULL)
     {

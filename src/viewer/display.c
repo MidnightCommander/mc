@@ -79,7 +79,7 @@ static enum ruler_type
 /** Define labels and handlers for functional keys */
 
 static void
-mcview_set_buttonbar (WView * view)
+mcview_set_buttonbar (WView *view)
 {
     Widget *w = WIDGET (view);
     WDialog *h = DIALOG (w->owner);
@@ -128,7 +128,7 @@ mcview_set_buttonbar (WView * view)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-mcview_display_percent (WView * view, off_t p)
+mcview_display_percent (WView *view, off_t p)
 {
     int percent;
 
@@ -149,7 +149,7 @@ mcview_display_percent (WView * view, off_t p)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-mcview_display_status (WView * view)
+mcview_display_status (WView *view)
 {
     const WRect *r = &view->status_area;
     const char *file_label;
@@ -199,7 +199,7 @@ mcview_display_status (WView * view)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_update (WView * view)
+mcview_update (WView *view)
 {
     static int dirt_limit = 1;
 
@@ -245,7 +245,7 @@ mcview_update (WView * view)
 /** Displays as much data from view->dpy_start as fits on the screen */
 
 void
-mcview_display (WView * view)
+mcview_display (WView *view)
 {
     if (view->mode_flags.hex)
         mcview_display_hex (view);
@@ -257,7 +257,7 @@ mcview_display (WView * view)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_compute_areas (WView * view)
+mcview_compute_areas (WView *view)
 {
     WRect view_area;
     int height, rest, y;
@@ -313,7 +313,7 @@ mcview_compute_areas (WView * view)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_update_bytes_per_line (WView * view)
+mcview_update_bytes_per_line (WView *view)
 {
     int cols = view->data_area.cols;
     int bytes;
@@ -332,10 +332,9 @@ mcview_update_bytes_per_line (WView * view)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_display_toggle_ruler (WView * view)
+mcview_display_toggle_ruler (WView *view)
 {
-    static const enum ruler_type next[3] =
-    {
+    static const enum ruler_type next[3] = {
         RULER_TOP,
         RULER_BOTTOM,
         RULER_NONE
@@ -351,7 +350,7 @@ mcview_display_toggle_ruler (WView * view)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_display_clean (WView * view)
+mcview_display_clean (WView *view)
 {
     Widget *w = WIDGET (view);
 
@@ -364,7 +363,7 @@ mcview_display_clean (WView * view)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_display_ruler (WView * view)
+mcview_display_ruler (WView *view)
 {
     static const char ruler_chars[] = "|----*----";
     const WRect *r = &view->ruler_area;

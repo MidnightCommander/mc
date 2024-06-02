@@ -70,7 +70,7 @@
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-mcview_scroll_to_cursor (WView * view)
+mcview_scroll_to_cursor (WView *view)
 {
     if (view->mode_flags.hex)
     {
@@ -93,7 +93,7 @@ mcview_scroll_to_cursor (WView * view)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-mcview_movement_fixups (WView * view, gboolean reset_search)
+mcview_movement_fixups (WView *view, gboolean reset_search)
 {
     mcview_scroll_to_cursor (view);
 
@@ -111,7 +111,7 @@ mcview_movement_fixups (WView * view, gboolean reset_search)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_move_up (WView * view, off_t lines)
+mcview_move_up (WView *view, off_t lines)
 {
     if (!view->mode_flags.hex)
         mcview_ascii_move_up (view, lines);
@@ -141,7 +141,7 @@ mcview_move_up (WView * view, off_t lines)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_move_down (WView * view, off_t lines)
+mcview_move_down (WView *view, off_t lines)
 {
     off_t last_byte;
 
@@ -174,7 +174,7 @@ mcview_move_down (WView * view, off_t lines)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_move_left (WView * view, off_t columns)
+mcview_move_left (WView *view, off_t columns)
 {
     if (view->mode_flags.hex)
     {
@@ -199,7 +199,7 @@ mcview_move_left (WView * view, off_t columns)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_move_right (WView * view, off_t columns)
+mcview_move_right (WView *view, off_t columns)
 {
     if (view->mode_flags.hex)
     {
@@ -228,7 +228,7 @@ mcview_move_right (WView * view, off_t columns)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_moveto_top (WView * view)
+mcview_moveto_top (WView *view)
 {
     view->dpy_start = 0;
     view->dpy_paragraph_skip_lines = 0;
@@ -241,7 +241,7 @@ mcview_moveto_top (WView * view)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_moveto_bottom (WView * view)
+mcview_moveto_bottom (WView *view)
 {
     off_t filesize;
 
@@ -269,7 +269,7 @@ mcview_moveto_bottom (WView * view)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_moveto_bol (WView * view)
+mcview_moveto_bol (WView *view)
 {
     if (!view->mode_flags.hex)
         mcview_ascii_moveto_bol (view);
@@ -285,7 +285,7 @@ mcview_moveto_bol (WView * view)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_moveto_eol (WView * view)
+mcview_moveto_eol (WView *view)
 {
     off_t bol;
 
@@ -312,7 +312,7 @@ mcview_moveto_eol (WView * view)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_moveto_offset (WView * view, off_t offset)
+mcview_moveto_offset (WView *view, off_t offset)
 {
     if (view->mode_flags.hex)
     {
@@ -334,7 +334,7 @@ mcview_moveto_offset (WView * view, off_t offset)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_moveto (WView * view, off_t line, off_t col)
+mcview_moveto (WView *view, off_t line, off_t col)
 {
     off_t offset;
 
@@ -345,7 +345,7 @@ mcview_moveto (WView * view, off_t line, off_t col)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_coord_to_offset (WView * view, off_t * ret_offset, off_t line, off_t column)
+mcview_coord_to_offset (WView *view, off_t *ret_offset, off_t line, off_t column)
 {
     coord_cache_entry_t coord;
 
@@ -359,7 +359,7 @@ mcview_coord_to_offset (WView * view, off_t * ret_offset, off_t line, off_t colu
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_offset_to_coord (WView * view, off_t * ret_line, off_t * ret_column, off_t offset)
+mcview_offset_to_coord (WView *view, off_t *ret_line, off_t *ret_column, off_t offset)
 {
     coord_cache_entry_t coord;
 
@@ -373,7 +373,7 @@ mcview_offset_to_coord (WView * view, off_t * ret_line, off_t * ret_column, off_
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_place_cursor (WView * view)
+mcview_place_cursor (WView *view)
 {
     const WRect *r = &view->data_area;
     int col = view->cursor_col;
@@ -390,7 +390,7 @@ mcview_place_cursor (WView * view)
  * try to display maximum of match */
 
 void
-mcview_moveto_match (WView * view)
+mcview_moveto_match (WView *view)
 {
     if (view->mode_flags.hex)
     {

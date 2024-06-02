@@ -80,7 +80,7 @@ extern struct vfs_dirent *mc_readdir_result;
 /* --------------------------------------------------------------------------------------------- */
 
 static vfs_path_t *
-mc_def_getlocalcopy (const vfs_path_t * filename_vpath)
+mc_def_getlocalcopy (const vfs_path_t *filename_vpath)
 {
     vfs_path_t *tmp_vpath = NULL;
     int fdin, fdout = -1;
@@ -130,8 +130,8 @@ mc_def_getlocalcopy (const vfs_path_t * filename_vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-mc_def_ungetlocalcopy (const vfs_path_t * filename_vpath,
-                       const vfs_path_t * local_vpath, gboolean has_changed)
+mc_def_ungetlocalcopy (const vfs_path_t *filename_vpath,
+                       const vfs_path_t *local_vpath, gboolean has_changed)
 {
     int fdin = -1, fdout = -1;
     const char *local;
@@ -188,7 +188,7 @@ mc_def_ungetlocalcopy (const vfs_path_t * filename_vpath,
 /* --------------------------------------------------------------------------------------------- */
 
 int
-mc_open (const vfs_path_t * vpath, int flags, ...)
+mc_open (const vfs_path_t *vpath, int flags, ...)
 {
     int result = -1;
     mode_t mode = 0;
@@ -267,7 +267,7 @@ MC_NAMEOP (mknod, (const vfs_path_t *vpath, mode_t mode, dev_t dev), (vpath, mod
 /* --------------------------------------------------------------------------------------------- */
 
 int
-mc_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
+mc_symlink (const vfs_path_t *vpath1, const vfs_path_t *vpath2)
 {
     int result = -1;
 
@@ -361,7 +361,7 @@ mc_ctl (int handle, int ctlop, void *arg)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-mc_setctl (const vfs_path_t * vpath, int ctlop, void *arg)
+mc_setctl (const vfs_path_t *vpath, int ctlop, void *arg)
 {
     int result = -1;
     struct vfs_class *me;
@@ -408,7 +408,7 @@ mc_close (int handle)
 /* --------------------------------------------------------------------------------------------- */
 
 DIR *
-mc_opendir (const vfs_path_t * vpath)
+mc_opendir (const vfs_path_t *vpath)
 {
     int handle, *handlep;
     void *info;
@@ -450,7 +450,7 @@ mc_opendir (const vfs_path_t * vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 struct vfs_dirent *
-mc_readdir (DIR * dirp)
+mc_readdir (DIR *dirp)
 {
     int handle;
     struct vfs_class *vfs;
@@ -481,7 +481,7 @@ mc_readdir (DIR * dirp)
 #ifdef HAVE_CHARSET
         str_vfs_convert_from (vfs_path_element->dir.converter, entry->d_name, vfs_str_buffer);
 #else
-        g_string_assign (vfs_str_buffer, entry->d_name);
+        g_string_append_len (vfs_str_buffer, entry->d_name, entry->d_len);
 #endif
         vfs_dirent_assign (mc_readdir_result, vfs_str_buffer->str, entry->d_ino);
         vfs_dirent_free (entry);
@@ -494,7 +494,7 @@ mc_readdir (DIR * dirp)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-mc_closedir (DIR * dirp)
+mc_closedir (DIR *dirp)
 {
     int handle;
     struct vfs_class *vfs;

@@ -130,7 +130,7 @@ static const struct vfs_s_super *kbi_super = NULL;
  */
 
 static int
-sftpfs_open_socket (struct vfs_s_super *super, GError ** mcerror)
+sftpfs_open_socket (struct vfs_s_super *super, GError **mcerror)
 {
     sftpfs_super_t *sftpfs_super = SFTP_SUPER (super);
     struct addrinfo hints, *res = NULL, *curr_res;
@@ -261,7 +261,7 @@ sftpfs_open_socket (struct vfs_s_super *super, GError ** mcerror)
  * Thanks the Curl project for the code used in this function.
  */
 static gboolean
-sftpfs_read_known_hosts (struct vfs_s_super *super, GError ** mcerror)
+sftpfs_read_known_hosts (struct vfs_s_super *super, GError **mcerror)
 {
     sftpfs_super_t *sftpfs_super = SFTP_SUPER (super);
     struct libssh2_knownhost *store = NULL;
@@ -433,7 +433,7 @@ sftpfs_update_known_hosts (struct vfs_s_super *super, const char *remote_key, si
  * @return pointer to static buffer on success, NULL otherwise
  */
 static const char *
-sftpfs_compute_fingerprint_hash (LIBSSH2_SESSION * session)
+sftpfs_compute_fingerprint_hash (LIBSSH2_SESSION *session)
 {
     static char result[SHA1_DIGEST_LENGTH * 3 + 1];     /* "XX:" for each byte, and EOL */
     const char *fingerprint;
@@ -465,7 +465,7 @@ sftpfs_compute_fingerprint_hash (LIBSSH2_SESSION * session)
  * Thanks the Curl project for the code used in this function.
  */
 static gboolean
-sftpfs_process_known_host (struct vfs_s_super *super, GError ** mcerror)
+sftpfs_process_known_host (struct vfs_s_super *super, GError **mcerror)
 {
     sftpfs_super_t *sftpfs_super = SFTP_SUPER (super);
     const char *remote_key;
@@ -657,7 +657,7 @@ sftpfs_recognize_auth_types (struct vfs_s_super *super)
  */
 
 static gboolean
-sftpfs_open_connection_ssh_agent (struct vfs_s_super *super, GError ** mcerror)
+sftpfs_open_connection_ssh_agent (struct vfs_s_super *super, GError **mcerror)
 {
     sftpfs_super_t *sftpfs_super = SFTP_SUPER (super);
     struct libssh2_agent_publickey *identity, *prev_identity = NULL;
@@ -709,7 +709,7 @@ sftpfs_open_connection_ssh_agent (struct vfs_s_super *super, GError ** mcerror)
  */
 
 static gboolean
-sftpfs_open_connection_ssh_key (struct vfs_s_super *super, GError ** mcerror)
+sftpfs_open_connection_ssh_key (struct vfs_s_super *super, GError **mcerror)
 {
     sftpfs_super_t *sftpfs_super = SFTP_SUPER (super);
     char *p, *passwd;
@@ -784,7 +784,7 @@ LIBSSH2_USERAUTH_KBDINT_RESPONSE_FUNC (sftpfs_keyboard_interactive_helper)
     len = strlen (kbi_passwd);
 
     for (i = 0; i < num_prompts; ++i)
-        if (strncmp (prompts[i].text, "Password: ", prompts[i].length) == 0)
+        if (memcmp (prompts[i].text, "Password: ", prompts[i].length) == 0)
         {
             responses[i].text = strdup (kbi_passwd);
             responses[i].length = len;
@@ -801,7 +801,7 @@ LIBSSH2_USERAUTH_KBDINT_RESPONSE_FUNC (sftpfs_keyboard_interactive_helper)
  */
 
 static gboolean
-sftpfs_open_connection_ssh_password (struct vfs_s_super *super, GError ** mcerror)
+sftpfs_open_connection_ssh_password (struct vfs_s_super *super, GError **mcerror)
 {
     sftpfs_super_t *sftpfs_super = SFTP_SUPER (super);
     char *p, *passwd;
@@ -891,7 +891,7 @@ sftpfs_open_connection_ssh_password (struct vfs_s_super *super, GError ** mcerro
  */
 
 int
-sftpfs_open_connection (struct vfs_s_super *super, GError ** mcerror)
+sftpfs_open_connection (struct vfs_s_super *super, GError **mcerror)
 {
     int rc;
     sftpfs_super_t *sftpfs_super = SFTP_SUPER (super);
@@ -966,7 +966,7 @@ sftpfs_open_connection (struct vfs_s_super *super, GError ** mcerror)
  */
 
 void
-sftpfs_close_connection (struct vfs_s_super *super, const char *shutdown_message, GError ** mcerror)
+sftpfs_close_connection (struct vfs_s_super *super, const char *shutdown_message, GError **mcerror)
 {
     sftpfs_super_t *sftpfs_super = SFTP_SUPER (super);
 

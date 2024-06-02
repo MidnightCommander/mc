@@ -70,7 +70,7 @@ typedef struct
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-history_dlg_reposition (WDialog * dlg_head)
+history_dlg_reposition (WDialog *dlg_head)
 {
     history_dlg_data *data;
     int x = 0, y, he, wi;
@@ -115,7 +115,7 @@ history_dlg_reposition (WDialog * dlg_head)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-history_dlg_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+history_dlg_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data)
 {
     switch (msg)
     {
@@ -154,7 +154,7 @@ history_dlg_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-history_create_item (history_descriptor_t * hd, void *data)
+history_create_item (history_descriptor_t *hd, void *data)
 {
     char *text = (char *) data;
     size_t width;
@@ -168,7 +168,7 @@ history_create_item (history_descriptor_t * hd, void *data)
 /* --------------------------------------------------------------------------------------------- */
 
 static void *
-history_release_item (history_descriptor_t * hd, WLEntry * le)
+history_release_item (history_descriptor_t *hd, WLEntry *le)
 {
     void *text;
 
@@ -185,7 +185,7 @@ history_release_item (history_descriptor_t * hd, WLEntry * le)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-history_descriptor_init (history_descriptor_t * hd, int y, int x, GList * history, int current)
+history_descriptor_init (history_descriptor_t *hd, int y, int x, GList *history, int current)
 {
     hd->list = history;
     hd->y = y;
@@ -204,7 +204,7 @@ history_descriptor_init (history_descriptor_t * hd, int y, int x, GList * histor
 /* --------------------------------------------------------------------------------------------- */
 
 void
-history_show (history_descriptor_t * hd)
+history_show (history_descriptor_t *hd)
 {
     GList *z, *hi;
     size_t count;

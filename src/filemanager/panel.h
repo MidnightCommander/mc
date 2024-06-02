@@ -20,7 +20,6 @@
 /*** typedefs(not structures) and defined constants **********************************************/
 
 #define PANEL(x) ((WPanel *)(x))
-#define DEFAULT_USER_FORMAT "half type name | size | perm"
 
 #define LIST_FORMATS 4
 
@@ -68,7 +67,7 @@ typedef struct panel_field_struct
     const char *title_hotkey;
     gboolean is_user_choice;
     gboolean use_in_user_format;
-    const char *(*string_fn) (file_entry_t *, int);
+    const char *(*string_fn) (const file_entry_t * fe, int len);
     GCompareFunc sort_routine;  /* used by mouse_sort_col() */
 } panel_field_t;
 
@@ -233,7 +232,7 @@ panel_empty_new (const char *panel_name)
  */
 
 static inline WPanel *
-panel_with_dir_new (const char *panel_name, const vfs_path_t * vpath)
+panel_with_dir_new (const char *panel_name, const vfs_path_t *vpath)
 {
     /* Unknown sizes of the panel at startup */
     WRect r = { 0, 0, 1, 1 };
@@ -268,7 +267,7 @@ panel_new (const char *panel_name)
  */
 
 static inline WPanel *
-panel_sized_new (const char *panel_name, const WRect * r)
+panel_sized_new (const char *panel_name, const WRect *r)
 {
     return panel_sized_with_dir_new (panel_name, r, NULL);
 }
@@ -276,7 +275,7 @@ panel_sized_new (const char *panel_name, const WRect * r)
 /* --------------------------------------------------------------------------------------------- */
 
 static inline file_entry_t *
-panel_current_entry (const WPanel * panel)
+panel_current_entry (const WPanel *panel)
 {
     return &(panel->dir.list[panel->current]);
 }

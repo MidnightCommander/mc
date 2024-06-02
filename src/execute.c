@@ -131,7 +131,7 @@ edition_pre_exec (void)
 
 #ifdef ENABLE_SUBSHELL
 static void
-do_possible_cd (const vfs_path_t * new_dir_vpath)
+do_possible_cd (const vfs_path_t *new_dir_vpath)
 {
     if (!panel_cd (current_panel, new_dir_vpath, cd_exact))
         message (D_ERROR, _("Warning"), "%s",
@@ -178,8 +178,8 @@ do_suspend_cmd (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-execute_prepare_with_vfs_arg (const vfs_path_t * filename_vpath, vfs_path_t ** localcopy_vpath,
-                              time_t * mtime)
+execute_prepare_with_vfs_arg (const vfs_path_t *filename_vpath, vfs_path_t **localcopy_vpath,
+                              time_t *mtime)
 {
     struct stat st;
 
@@ -208,8 +208,8 @@ execute_prepare_with_vfs_arg (const vfs_path_t * filename_vpath, vfs_path_t ** l
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-execute_cleanup_with_vfs_arg (const vfs_path_t * filename_vpath, vfs_path_t ** localcopy_vpath,
-                              time_t * mtime)
+execute_cleanup_with_vfs_arg (const vfs_path_t *filename_vpath, vfs_path_t **localcopy_vpath,
+                              time_t *mtime)
 {
     if (*localcopy_vpath != NULL)
     {
@@ -260,7 +260,7 @@ execute_get_opts_from_cfg (const char *command, const char *default_str)
 /* --------------------------------------------------------------------------------------------- */
 
 char *
-execute_get_external_cmd_opts_from_config (const char *command, const vfs_path_t * filename_vpath,
+execute_get_external_cmd_opts_from_config (const char *command, const vfs_path_t *filename_vpath,
                                            long start_line)
 {
     char *str_from_config, *return_str;
@@ -582,7 +582,7 @@ toggle_subshell (void)
 
 /* event callback */
 gboolean
-execute_suspend (const gchar * event_group_name, const gchar * event_name,
+execute_suspend (const gchar *event_group_name, const gchar *event_name,
                  gpointer init_data, gpointer data)
 {
     (void) event_group_name;
@@ -608,7 +608,7 @@ execute_suspend (const gchar * event_group_name, const gchar * event_name,
  */
 
 void
-execute_with_vfs_arg (const char *command, const vfs_path_t * filename_vpath)
+execute_with_vfs_arg (const char *command, const vfs_path_t *filename_vpath)
 {
     vfs_path_t *localcopy_vpath = NULL;
     const vfs_path_t *do_execute_vpath;
@@ -635,7 +635,7 @@ execute_with_vfs_arg (const char *command, const vfs_path_t * filename_vpath)
  */
 
 void
-execute_external_editor_or_viewer (const char *command, const vfs_path_t * filename_vpath,
+execute_external_editor_or_viewer (const char *command, const vfs_path_t *filename_vpath,
                                    long start_line)
 {
     vfs_path_t *localcopy_vpath = NULL;

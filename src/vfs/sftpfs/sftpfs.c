@@ -104,7 +104,7 @@ sftpfs_cb_done (struct vfs_class *me)
  */
 
 static void *
-sftpfs_cb_open (const vfs_path_t * vpath, int flags, mode_t mode)
+sftpfs_cb_open (const vfs_path_t *vpath, int flags, mode_t mode)
 {
     vfs_file_handler_t *fh;
     struct vfs_class *me;
@@ -177,7 +177,7 @@ sftpfs_cb_open (const vfs_path_t * vpath, int flags, mode_t mode)
  */
 
 static void *
-sftpfs_cb_opendir (const vfs_path_t * vpath)
+sftpfs_cb_opendir (const vfs_path_t *vpath)
 {
     GError *mcerror = NULL;
     void *ret_value;
@@ -251,7 +251,7 @@ sftpfs_cb_closedir (void *data)
  */
 
 static int
-sftpfs_cb_lstat (const vfs_path_t * vpath, struct stat *buf)
+sftpfs_cb_lstat (const vfs_path_t *vpath, struct stat *buf)
 {
     int rc;
     GError *mcerror = NULL;
@@ -271,7 +271,7 @@ sftpfs_cb_lstat (const vfs_path_t * vpath, struct stat *buf)
  */
 
 static int
-sftpfs_cb_stat (const vfs_path_t * vpath, struct stat *buf)
+sftpfs_cb_stat (const vfs_path_t *vpath, struct stat *buf)
 {
     int rc;
     GError *mcerror = NULL;
@@ -312,7 +312,7 @@ sftpfs_cb_fstat (void *data, struct stat *buf)
  */
 
 static int
-sftpfs_cb_readlink (const vfs_path_t * vpath, char *buf, size_t size)
+sftpfs_cb_readlink (const vfs_path_t *vpath, char *buf, size_t size)
 {
     int rc;
     GError *mcerror = NULL;
@@ -332,7 +332,7 @@ sftpfs_cb_readlink (const vfs_path_t * vpath, char *buf, size_t size)
  */
 
 static int
-sftpfs_cb_utime (const vfs_path_t * vpath, mc_timesbuf_t * times)
+sftpfs_cb_utime (const vfs_path_t *vpath, mc_timesbuf_t *times)
 {
     int rc;
     GError *mcerror = NULL;
@@ -360,7 +360,7 @@ sftpfs_cb_utime (const vfs_path_t * vpath, mc_timesbuf_t * times)
  */
 
 static int
-sftpfs_cb_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
+sftpfs_cb_symlink (const vfs_path_t *vpath1, const vfs_path_t *vpath2)
 {
     int rc;
     GError *mcerror = NULL;
@@ -381,7 +381,7 @@ sftpfs_cb_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
  */
 
 static int
-sftpfs_cb_mknod (const vfs_path_t * vpath, mode_t mode, dev_t dev)
+sftpfs_cb_mknod (const vfs_path_t *vpath, mode_t mode, dev_t dev)
 {
     (void) vpath;
     (void) mode;
@@ -400,7 +400,7 @@ sftpfs_cb_mknod (const vfs_path_t * vpath, mode_t mode, dev_t dev)
  */
 
 static int
-sftpfs_cb_link (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
+sftpfs_cb_link (const vfs_path_t *vpath1, const vfs_path_t *vpath2)
 {
     (void) vpath1;
     (void) vpath2;
@@ -419,7 +419,7 @@ sftpfs_cb_link (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
  */
 
 static int
-sftpfs_cb_chown (const vfs_path_t * vpath, uid_t owner, gid_t group)
+sftpfs_cb_chown (const vfs_path_t *vpath, uid_t owner, gid_t group)
 {
     (void) vpath;
     (void) owner;
@@ -519,7 +519,7 @@ sftpfs_cb_close (void *data)
  */
 
 static int
-sftpfs_cb_chmod (const vfs_path_t * vpath, mode_t mode)
+sftpfs_cb_chmod (const vfs_path_t *vpath, mode_t mode)
 {
     int rc;
     GError *mcerror = NULL;
@@ -539,7 +539,7 @@ sftpfs_cb_chmod (const vfs_path_t * vpath, mode_t mode)
  */
 
 static int
-sftpfs_cb_mkdir (const vfs_path_t * vpath, mode_t mode)
+sftpfs_cb_mkdir (const vfs_path_t *vpath, mode_t mode)
 {
     int rc;
     GError *mcerror = NULL;
@@ -558,7 +558,7 @@ sftpfs_cb_mkdir (const vfs_path_t * vpath, mode_t mode)
  */
 
 static int
-sftpfs_cb_rmdir (const vfs_path_t * vpath)
+sftpfs_cb_rmdir (const vfs_path_t *vpath)
 {
     int rc;
     GError *mcerror = NULL;
@@ -599,7 +599,7 @@ sftpfs_cb_lseek (void *data, off_t offset, int whence)
  */
 
 static int
-sftpfs_cb_unlink (const vfs_path_t * vpath)
+sftpfs_cb_unlink (const vfs_path_t *vpath)
 {
     int rc;
     GError *mcerror = NULL;
@@ -619,7 +619,7 @@ sftpfs_cb_unlink (const vfs_path_t * vpath)
  */
 
 static int
-sftpfs_cb_rename (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
+sftpfs_cb_rename (const vfs_path_t *vpath1, const vfs_path_t *vpath2)
 {
     int rc;
     GError *mcerror = NULL;
@@ -685,8 +685,8 @@ sftpfs_cb_fill_names (struct vfs_class *me, fill_names_f func)
  */
 
 static gboolean
-sftpfs_archive_same (const vfs_path_element_t * vpath_element, struct vfs_s_super *super,
-                     const vfs_path_t * vpath, void *cookie)
+sftpfs_archive_same (const vfs_path_element_t *vpath_element, struct vfs_s_super *super,
+                     const vfs_path_t *vpath, void *cookie)
 {
     int result;
     vfs_path_element_t *orig_connect_info;
@@ -731,8 +731,8 @@ sftpfs_new_archive (struct vfs_class *me)
  */
 
 static int
-sftpfs_open_archive (struct vfs_s_super *super, const vfs_path_t * vpath,
-                     const vfs_path_element_t * vpath_element)
+sftpfs_open_archive (struct vfs_s_super *super, const vfs_path_t *vpath,
+                     const vfs_path_element_t *vpath_element)
 {
     GError *mcerror = NULL;
     sftpfs_super_t *sftpfs_super = SFTP_SUPER (super);

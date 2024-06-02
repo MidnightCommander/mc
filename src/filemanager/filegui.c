@@ -246,8 +246,7 @@ static struct
     const char *text;
     button_flags_t flags;
     int len;
-} progress_buttons[] =
-{
+} progress_buttons[] = {
     /* *INDENT-OFF* */
     { NULL, FILE_SKIP, N_("&Skip"), NORMAL_BUTTON, -1 },
     { NULL, FILE_SUSPEND, N_("S&uspend"), NORMAL_BUTTON, -1 },
@@ -381,7 +380,7 @@ file_bps_prepare_for_show (char *buffer, long bps)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-file_ui_op_dlg_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+file_ui_op_dlg_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data)
 {
     switch (msg)
     {
@@ -421,7 +420,7 @@ file_ui_op_dlg_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm
  */
 
 static replace_action_t
-overwrite_query_dialog (file_op_context_t * ctx, enum OperationMode mode)
+overwrite_query_dialog (file_op_context_t *ctx, enum OperationMode mode)
 {
 #define W(i) dlg_widgets[i].widget
 #define WX(i) W(i)->rect.x
@@ -454,8 +453,7 @@ overwrite_query_dialog (file_op_context_t * ctx, enum OperationMode mode)
         int x;
         widget_pos_flags_t pos_flags;
         int value;              /* 0 for labels and checkbox */
-    } dlg_widgets[] =
-    {
+    } dlg_widgets[] = {
         /* *INDENT-OFF* */
         /*  0 - label */
         { NULL, N_("New     :"), 2, 3, WPOS_KEEP_DEFAULT, 0 },
@@ -734,7 +732,7 @@ is_wildcarded (const char *p)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-place_progress_buttons (WDialog * h, gboolean suspended)
+place_progress_buttons (WDialog *h, gboolean suspended)
 {
     const size_t i = suspended ? 2 : 1;
     Widget *w = WIDGET (h);
@@ -752,7 +750,7 @@ place_progress_buttons (WDialog * h, gboolean suspended)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-progress_button_callback (WButton * button, int action)
+progress_button_callback (WButton *button, int action)
 {
     (void) button;
     (void) action;
@@ -766,7 +764,7 @@ progress_button_callback (WButton * button, int action)
 /* --------------------------------------------------------------------------------------------- */
 
 FileProgressStatus
-check_progress_buttons (file_op_context_t * ctx)
+check_progress_buttons (file_op_context_t *ctx)
 {
     int c;
     Gpm_Event event;
@@ -818,7 +816,7 @@ check_progress_buttons (file_op_context_t * ctx)
 /* {{{ File progress display routines */
 
 void
-file_op_context_create_ui (file_op_context_t * ctx, gboolean with_eta,
+file_op_context_create_ui (file_op_context_t *ctx, gboolean with_eta,
                            filegui_dialog_type_t dialog_type)
 {
     file_op_context_ui_t *ui;
@@ -968,7 +966,7 @@ file_op_context_create_ui (file_op_context_t * ctx, gboolean with_eta,
 /* --------------------------------------------------------------------------------------------- */
 
 void
-file_op_context_destroy_ui (file_op_context_t * ctx)
+file_op_context_destroy_ui (file_op_context_t *ctx)
 {
     if (ctx != NULL && ctx->ui != NULL)
     {
@@ -986,7 +984,7 @@ file_op_context_destroy_ui (file_op_context_t * ctx)
  */
 
 void
-file_progress_show (file_op_context_t * ctx, off_t done, off_t total,
+file_progress_show (file_op_context_t *ctx, off_t done, off_t total,
                     const char *stalled_msg, gboolean force_update)
 {
     file_op_context_ui_t *ui;
@@ -1031,7 +1029,7 @@ file_progress_show (file_op_context_t * ctx, off_t done, off_t total,
 /* --------------------------------------------------------------------------------------------- */
 
 void
-file_progress_show_count (file_op_context_t * ctx, size_t done, size_t total)
+file_progress_show_count (file_op_context_t *ctx, size_t done, size_t total)
 {
     file_op_context_ui_t *ui;
 
@@ -1053,7 +1051,7 @@ file_progress_show_count (file_op_context_t * ctx, size_t done, size_t total)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-file_progress_show_total (file_op_total_context_t * tctx, file_op_context_t * ctx,
+file_progress_show_total (file_op_total_context_t *tctx, file_op_context_t *ctx,
                           uintmax_t copied_bytes, gboolean show_summary)
 {
     char buffer2[BUF_TINY];
@@ -1130,7 +1128,7 @@ file_progress_show_total (file_op_total_context_t * tctx, file_op_context_t * ct
 /* --------------------------------------------------------------------------------------------- */
 
 void
-file_progress_show_source (file_op_context_t * ctx, const vfs_path_t * vpath)
+file_progress_show_source (file_op_context_t *ctx, const vfs_path_t *vpath)
 {
     file_op_context_ui_t *ui;
 
@@ -1154,7 +1152,7 @@ file_progress_show_source (file_op_context_t * ctx, const vfs_path_t * vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-file_progress_show_target (file_op_context_t * ctx, const vfs_path_t * vpath)
+file_progress_show_target (file_op_context_t *ctx, const vfs_path_t *vpath)
 {
     file_op_context_ui_t *ui;
 
@@ -1178,7 +1176,7 @@ file_progress_show_target (file_op_context_t * ctx, const vfs_path_t * vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-file_progress_show_deleting (file_op_context_t * ctx, const char *s, size_t * count)
+file_progress_show_deleting (file_op_context_t *ctx, const char *s, size_t *count)
 {
     static gint64 timestamp = 0;
     /* update with 25 FPS rate */
@@ -1212,9 +1210,9 @@ file_progress_show_deleting (file_op_context_t * ctx, const char *s, size_t * co
 /* --------------------------------------------------------------------------------------------- */
 
 FileProgressStatus
-file_progress_real_query_replace (file_op_context_t * ctx, enum OperationMode mode,
-                                  const char *src, struct stat * src_stat,
-                                  const char *dst, struct stat * dst_stat)
+file_progress_real_query_replace (file_op_context_t *ctx, enum OperationMode mode,
+                                  const char *src, struct stat *src_stat,
+                                  const char *dst, struct stat *dst_stat)
 {
     file_op_context_ui_t *ui;
     FileProgressStatus replace_with_zero;
@@ -1291,8 +1289,8 @@ file_progress_real_query_replace (file_op_context_t * ctx, enum OperationMode mo
 /* --------------------------------------------------------------------------------------------- */
 
 char *
-file_mask_dialog (file_op_context_t * ctx, gboolean only_one, const char *format, const void *text,
-                  const char *def_text, gboolean * do_bg)
+file_mask_dialog (file_op_context_t *ctx, gboolean only_one, const char *format, const void *text,
+                  const char *def_text, gboolean *do_bg)
 {
     gboolean preserve;
     size_t fmd_xlen;
@@ -1410,7 +1408,7 @@ file_mask_dialog (file_op_context_t * ctx, gboolean only_one, const char *format
             if (preserve)
             {
                 ctx->preserve = TRUE;
-                ctx->umask_kill = 0777777;
+                ctx->umask_kill = (mode_t) (~0);
                 ctx->preserve_uidgid = (geteuid () == 0);
             }
             else
@@ -1420,7 +1418,7 @@ file_mask_dialog (file_op_context_t * ctx, gboolean only_one, const char *format
                 ctx->preserve = ctx->preserve_uidgid = FALSE;
                 i2 = umask (0);
                 umask (i2);
-                ctx->umask_kill = i2 ^ 0777777;
+                ctx->umask_kill = i2 ^ ((mode_t) (~0));
             }
 
             if (*dest_dir == '\0')

@@ -51,7 +51,7 @@
 /* --------------------------------------------------------------------------------------------- */
 
 static const int *
-background_get_colors (const Widget * w)
+background_get_colors (const Widget *w)
 {
     return &(CONST_BACKGROUND (w)->color);
 }
@@ -59,7 +59,7 @@ background_get_colors (const Widget * w)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-background_adjust (WBackground * b)
+background_adjust (WBackground *b)
 {
     Widget *w = WIDGET (b);
 
@@ -70,7 +70,7 @@ background_adjust (WBackground * b)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-background_draw (const WBackground * b)
+background_draw (const WBackground *b)
 {
     const Widget *w = CONST_WIDGET (b);
 
@@ -83,7 +83,7 @@ background_draw (const WBackground * b)
 /* --------------------------------------------------------------------------------------------- */
 
 cb_ret_t
-background_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+background_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data)
 {
     WBackground *b = BACKGROUND (w);
 

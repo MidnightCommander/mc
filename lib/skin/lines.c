@@ -45,7 +45,7 @@
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-mc_skin_lines_load_frm (mc_skin_t * mc_skin, const char *name)
+mc_skin_lines_load_frm (mc_skin_t *mc_skin, const char *name)
 {
     int ret;
     char *frm_val;
@@ -62,7 +62,7 @@ mc_skin_lines_load_frm (mc_skin_t * mc_skin, const char *name)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mc_skin_lines_parse_ini_file (mc_skin_t * mc_skin)
+mc_skin_lines_parse_ini_file (mc_skin_t *mc_skin)
 {
     if (mc_global.tty.slow_terminal)
         mc_skin_hardcoded_space_lines (mc_skin);

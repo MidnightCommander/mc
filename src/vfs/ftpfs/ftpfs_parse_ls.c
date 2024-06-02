@@ -1105,7 +1105,7 @@ ftpfs_parse_long_list_MacWebStar (char *line, struct stat *s, char **filename,
 /* --------------------------------------------------------------------------------------------- */
 
 GSList *
-ftpfs_parse_long_list (struct vfs_class * me, struct vfs_s_inode * dir, GSList * buf, int *err_ret)
+ftpfs_parse_long_list (struct vfs_class *me, struct vfs_s_inode *dir, GSList *buf, int *err_ret)
 {
     int err[number_of_parsers];
     GSList *set[number_of_parsers];     /* arrays of struct vfs_s_entry */

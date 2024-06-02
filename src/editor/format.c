@@ -69,7 +69,7 @@
 /* --------------------------------------------------------------------------------------------- */
 
 static off_t
-line_start (const edit_buffer_t * buf, long line)
+line_start (const edit_buffer_t *buf, long line)
 {
     off_t p;
     long l;
@@ -91,7 +91,7 @@ line_start (const edit_buffer_t * buf, long line)
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-bad_line_start (const edit_buffer_t * buf, off_t p)
+bad_line_start (const edit_buffer_t *buf, off_t p)
 {
     int c;
 
@@ -120,7 +120,7 @@ bad_line_start (const edit_buffer_t * buf, off_t p)
  */
 
 static off_t
-begin_paragraph (WEdit * edit, gboolean force, long *lines)
+begin_paragraph (WEdit *edit, gboolean force, long *lines)
 {
     long i;
 
@@ -145,7 +145,7 @@ begin_paragraph (WEdit * edit, gboolean force, long *lines)
  */
 
 static off_t
-end_paragraph (WEdit * edit, gboolean force)
+end_paragraph (WEdit *edit, gboolean force)
 {
     long i;
 
@@ -167,7 +167,7 @@ end_paragraph (WEdit * edit, gboolean force)
 /* --------------------------------------------------------------------------------------------- */
 
 static GString *
-get_paragraph (const edit_buffer_t * buf, off_t p, off_t q, gboolean indent)
+get_paragraph (const edit_buffer_t *buf, off_t p, off_t q, gboolean indent)
 {
     GString *t;
 
@@ -358,7 +358,7 @@ format_this (unsigned char *t, off_t size, long indent, gboolean utf8)
 /* --------------------------------------------------------------------------------------------- */
 
 static inline void
-replace_at (WEdit * edit, off_t q, int c)
+replace_at (WEdit *edit, off_t q, int c)
 {
     edit_cursor_move (edit, q - edit->buffer.curs1);
     edit_delete (edit, TRUE);
@@ -368,7 +368,7 @@ replace_at (WEdit * edit, off_t q, int c)
 /* --------------------------------------------------------------------------------------------- */
 
 static long
-edit_indent_width (const WEdit * edit, off_t p)
+edit_indent_width (const WEdit *edit, off_t p)
 {
     off_t q = p;
 
@@ -383,7 +383,7 @@ edit_indent_width (const WEdit * edit, off_t p)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-edit_insert_indent (WEdit * edit, long indent)
+edit_insert_indent (WEdit *edit, long indent)
 {
     if (!edit_options.fill_tabs_with_spaces)
         while (indent >= TAB_SIZE)
@@ -400,7 +400,7 @@ edit_insert_indent (WEdit * edit, long indent)
 /** replaces a block of text */
 
 static inline void
-put_paragraph (WEdit * edit, unsigned char *t, off_t p, long indent, off_t size)
+put_paragraph (WEdit *edit, unsigned char *t, off_t p, long indent, off_t size)
 {
     off_t cursor;
     off_t i;
@@ -453,7 +453,7 @@ put_paragraph (WEdit * edit, unsigned char *t, off_t p, long indent, off_t size)
 /* --------------------------------------------------------------------------------------------- */
 
 static inline long
-test_indent (const WEdit * edit, off_t p, off_t q)
+test_indent (const WEdit *edit, off_t p, off_t q)
 {
     long indent;
 
@@ -473,7 +473,7 @@ test_indent (const WEdit * edit, off_t p, off_t q)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-format_paragraph (WEdit * edit, gboolean force)
+format_paragraph (WEdit *edit, gboolean force)
 {
     off_t p, q;
     long lines;

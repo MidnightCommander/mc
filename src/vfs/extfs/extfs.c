@@ -116,7 +116,7 @@ static int my_errno = 0;
 /* --------------------------------------------------------------------------------------------- */
 
 static struct extfs_super_t *
-extfs_super_new (struct vfs_class *me, const char *name, const vfs_path_t * local_name_vpath,
+extfs_super_new (struct vfs_class *me, const char *name, const vfs_path_t *local_name_vpath,
                  int fstype)
 {
     struct extfs_super_t *super;
@@ -224,7 +224,7 @@ extfs_generate_entry (struct extfs_super_t *archive, const char *name, struct vf
 /* --------------------------------------------------------------------------------------------- */
 
 static struct vfs_s_entry *
-extfs_find_entry_int (struct vfs_s_inode *dir, const char *name, GSList * list, int flags)
+extfs_find_entry_int (struct vfs_s_inode *dir, const char *name, GSList *list, int flags)
 {
     struct vfs_s_entry *pent, *pdir;
     const char *p, *name_end;
@@ -509,7 +509,7 @@ extfs_add_file (struct extfs_super_t *archive, const char *file_name)
 /* --------------------------------------------------------------------------------------------- */
 
 static mc_pipe_t *
-extfs_open_archive (int fstype, const char *name, struct extfs_super_t **pparc, GError ** error)
+extfs_open_archive (int fstype, const char *name, struct extfs_super_t **pparc, GError **error)
 {
     const extfs_plugin_info_t *info;
     static dev_t archive_counter = 0;
@@ -597,7 +597,7 @@ extfs_open_archive (int fstype, const char *name, struct extfs_super_t **pparc, 
  */
 
 static int
-extfs_read_archive (mc_pipe_t * pip, struct extfs_super_t *archive, GError ** error)
+extfs_read_archive (mc_pipe_t *pip, struct extfs_super_t *archive, GError **error)
 {
     int ret = 0;
     GString *buffer;
@@ -765,7 +765,7 @@ extfs_open_and_read_archive (int fstype, const char *name, struct extfs_super_t 
  * Dissect the path and create corresponding superblock.
  */
 static const char *
-extfs_get_path (const vfs_path_t * vpath, struct extfs_super_t **archive, int flags)
+extfs_get_path (const vfs_path_t *vpath, struct extfs_super_t **archive, int flags)
 {
     char *archive_name;
     int result = -1;
@@ -832,7 +832,7 @@ extfs_get_path_from_entry (const struct vfs_s_entry *entry)
 /* --------------------------------------------------------------------------------------------- */
 
 static struct vfs_s_entry *
-extfs_resolve_symlinks_int (struct vfs_s_entry *entry, GSList * list)
+extfs_resolve_symlinks_int (struct vfs_s_entry *entry, GSList *list)
 {
     struct vfs_s_entry *pent = NULL;
 
@@ -1001,7 +1001,7 @@ extfs_cmd (const char *str_extfs_cmd, const struct extfs_super_t *archive,
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-extfs_run (const vfs_path_t * vpath)
+extfs_run (const vfs_path_t *vpath)
 {
     struct extfs_super_t *archive = NULL;
     const char *p;
@@ -1029,7 +1029,7 @@ extfs_run (const vfs_path_t * vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 static void *
-extfs_open (const vfs_path_t * vpath, int flags, mode_t mode)
+extfs_open (const vfs_path_t *vpath, int flags, mode_t mode)
 {
     vfs_file_handler_t *extfs_info;
     struct extfs_super_t *archive = NULL;
@@ -1164,7 +1164,7 @@ extfs_errno (struct vfs_class *me)
 /* --------------------------------------------------------------------------------------------- */
 
 static void *
-extfs_opendir (const vfs_path_t * vpath)
+extfs_opendir (const vfs_path_t *vpath)
 {
     struct extfs_super_t *archive = NULL;
     const char *q;
@@ -1236,7 +1236,7 @@ extfs_stat_move (struct stat *buf, const struct vfs_s_inode *inode)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-extfs_internal_stat (const vfs_path_t * vpath, struct stat *buf, gboolean resolve)
+extfs_internal_stat (const vfs_path_t *vpath, struct stat *buf, gboolean resolve)
 {
     struct extfs_super_t *archive;
     const char *q;
@@ -1264,7 +1264,7 @@ extfs_internal_stat (const vfs_path_t * vpath, struct stat *buf, gboolean resolv
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-extfs_stat (const vfs_path_t * vpath, struct stat *buf)
+extfs_stat (const vfs_path_t *vpath, struct stat *buf)
 {
     return extfs_internal_stat (vpath, buf, TRUE);
 }
@@ -1272,7 +1272,7 @@ extfs_stat (const vfs_path_t * vpath, struct stat *buf)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-extfs_lstat (const vfs_path_t * vpath, struct stat *buf)
+extfs_lstat (const vfs_path_t *vpath, struct stat *buf)
 {
     return extfs_internal_stat (vpath, buf, FALSE);
 }
@@ -1291,7 +1291,7 @@ extfs_fstat (void *fh, struct stat *buf)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-extfs_readlink (const vfs_path_t * vpath, char *buf, size_t size)
+extfs_readlink (const vfs_path_t *vpath, char *buf, size_t size)
 {
     struct extfs_super_t *archive;
     const char *q;
@@ -1323,7 +1323,7 @@ extfs_readlink (const vfs_path_t * vpath, char *buf, size_t size)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-extfs_chown (const vfs_path_t * vpath, uid_t owner, gid_t group)
+extfs_chown (const vfs_path_t *vpath, uid_t owner, gid_t group)
 {
     (void) vpath;
     (void) owner;
@@ -1334,7 +1334,7 @@ extfs_chown (const vfs_path_t * vpath, uid_t owner, gid_t group)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-extfs_chmod (const vfs_path_t * vpath, mode_t mode)
+extfs_chmod (const vfs_path_t *vpath, mode_t mode)
 {
     (void) vpath;
     (void) mode;
@@ -1355,7 +1355,7 @@ extfs_write (void *fh, const char *buf, size_t nbyte)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-extfs_unlink (const vfs_path_t * vpath)
+extfs_unlink (const vfs_path_t *vpath)
 {
     struct extfs_super_t *archive;
     const char *q;
@@ -1390,7 +1390,7 @@ extfs_unlink (const vfs_path_t * vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-extfs_mkdir (const vfs_path_t * vpath, mode_t mode)
+extfs_mkdir (const vfs_path_t *vpath, mode_t mode)
 {
     struct extfs_super_t *archive;
     const char *q;
@@ -1436,7 +1436,7 @@ extfs_mkdir (const vfs_path_t * vpath, mode_t mode)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-extfs_rmdir (const vfs_path_t * vpath)
+extfs_rmdir (const vfs_path_t *vpath)
 {
     struct extfs_super_t *archive;
     const char *q;
@@ -1472,7 +1472,7 @@ extfs_rmdir (const vfs_path_t * vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-extfs_chdir (const vfs_path_t * vpath)
+extfs_chdir (const vfs_path_t *vpath)
 {
     void *data;
 
@@ -1498,7 +1498,7 @@ extfs_lseek (void *fh, off_t offset, int whence)
 /* --------------------------------------------------------------------------------------------- */
 
 static vfsid
-extfs_getid (const vfs_path_t * vpath)
+extfs_getid (const vfs_path_t *vpath)
 {
     struct extfs_super_t *archive = NULL;
     const char *p;
@@ -1510,7 +1510,7 @@ extfs_getid (const vfs_path_t * vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 static vfs_path_t *
-extfs_getlocalcopy (const vfs_path_t * vpath)
+extfs_getlocalcopy (const vfs_path_t *vpath)
 {
     vfs_file_handler_t *fh;
     vfs_path_t *p;
@@ -1532,7 +1532,7 @@ extfs_getlocalcopy (const vfs_path_t * vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-extfs_ungetlocalcopy (const vfs_path_t * vpath, const vfs_path_t * local, gboolean has_changed)
+extfs_ungetlocalcopy (const vfs_path_t *vpath, const vfs_path_t *local, gboolean has_changed)
 {
     vfs_file_handler_t *fh;
 
@@ -1695,7 +1695,7 @@ extfs_done (struct vfs_class *me)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-extfs_setctl (const vfs_path_t * vpath, int ctlop, void *arg)
+extfs_setctl (const vfs_path_t *vpath, int ctlop, void *arg)
 {
     (void) arg;
 

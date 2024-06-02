@@ -48,7 +48,7 @@
  * Otherwise, *len should be nonnegative, s is a char array, and *len does not change.
  */
 static ssize_t
-file_prefixlen (const char *s, ssize_t * len)
+file_prefixlen (const char *s, ssize_t *len)
 {
     size_t n = (size_t) (*len); /* SIZE_MAX if N == -1 */
     size_t i = 0;

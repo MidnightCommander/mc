@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-04-07 16:41+0300\n"
+"POT-Creation-Date: 2024-06-02 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Takuro Onoue <kusanaginoturugi@gmail.com>, 2021\n"
 "Language-Team: Japanese (http://app.transifex.com/mc/mc/language/ja/)\n"
@@ -545,29 +545,11 @@ msgstr "ファイル取得中"
 msgid "Changes to file lost"
 msgstr "紛失したファイルに変更します"
 
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "%s はディレクトリではありません\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr "ディレクトリ %s はあなた所有のものではありません\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr "ディレクトリ %s のパーミッションを正しく設定できません\n"
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
+#, fuzzy, c-format
+msgid ""
+"Cannot create temporary directory %s: %s.\n"
+"Temporary files will not be created\n"
 msgstr "テンポラリディレクトリ %s を作成できません: %s\n"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr "テンポラリファイルが %s 上に作成されます\n"
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr "テンポラリファイルは作成されません\n"
 
 msgid "Press any key to continue..."
 msgstr "なにかキーを押せば続行します..."
@@ -4497,3 +4479,23 @@ msgstr "初めから続けますか?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#, c-format
+#~ msgid "%s is not a directory\n"
+#~ msgstr "%s はディレクトリではありません\n"
+
+#, c-format
+#~ msgid "Directory %s is not owned by you\n"
+#~ msgstr "ディレクトリ %s はあなた所有のものではありません\n"
+
+#, c-format
+#~ msgid "Cannot set correct permissions for directory %s\n"
+#~ msgstr "ディレクトリ %s のパーミッションを正しく設定できません\n"
+
+#, c-format
+#~ msgid "Temporary files will be created in %s\n"
+#~ msgstr "テンポラリファイルが %s 上に作成されます\n"
+
+#, c-format
+#~ msgid "Temporary files will not be created\n"
+#~ msgstr "テンポラリファイルは作成されません\n"

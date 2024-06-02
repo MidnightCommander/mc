@@ -53,7 +53,7 @@ const char *STR_E_RPL_INVALID_TOKEN = N_("Invalid token number %d");
 
 /*** file scope type declarations ****************************************************************/
 
-typedef gboolean (*case_conv_fn) (const char *ch, char **out, size_t * remain);
+typedef gboolean (*case_conv_fn) (const char *ch, char **out, size_t *remain);
 
 /*** forward declarations (file scope functions) *************************************************/
 
@@ -64,7 +64,7 @@ typedef gboolean (*case_conv_fn) (const char *ch, char **out, size_t * remain);
 /* --------------------------------------------------------------------------------------------- */
 
 static GString *
-mc_search__change_case_str (const char *charset, const GString * str, case_conv_fn case_conv)
+mc_search__change_case_str (const char *charset, const GString *str, case_conv_fn case_conv)
 {
     GString *ret;
     const char *src_ptr;
@@ -153,7 +153,7 @@ mc_search__recode_str (const char *str, gsize str_len, const char *charset_from,
 
 GString *
 mc_search__get_one_symbol (const char *charset, const char *str, gsize str_len,
-                           gboolean * just_letters)
+                           gboolean *just_letters)
 {
     GString *converted_str;
     const gchar *next_char;
@@ -191,7 +191,7 @@ mc_search__get_one_symbol (const char *charset, const char *str, gsize str_len,
 /* --------------------------------------------------------------------------------------------- */
 
 GString *
-mc_search__tolower_case_str (const char *charset, const GString * str)
+mc_search__tolower_case_str (const char *charset, const GString *str)
 {
     return mc_search__change_case_str (charset, str, str_tolower);
 }
@@ -199,7 +199,7 @@ mc_search__tolower_case_str (const char *charset, const GString * str)
 /* --------------------------------------------------------------------------------------------- */
 
 GString *
-mc_search__toupper_case_str (const char *charset, const GString * str)
+mc_search__toupper_case_str (const char *charset, const GString *str)
 {
     return mc_search__change_case_str (charset, str, str_toupper);
 }
@@ -207,7 +207,7 @@ mc_search__toupper_case_str (const char *charset, const GString * str)
 /* --------------------------------------------------------------------------------------------- */
 
 gchar **
-mc_search_get_types_strings_array (size_t * num)
+mc_search_get_types_strings_array (size_t *num)
 {
     gchar **ret;
     int lc_index;

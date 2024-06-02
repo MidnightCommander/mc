@@ -43,7 +43,7 @@ get_current_type (void)
 }
 
 gboolean
-panel_cd (WPanel * panel, const vfs_path_t * new_dir_vpath, enum cd_enum cd_type)
+panel_cd (WPanel *panel, const vfs_path_t *new_dir_vpath, enum cd_enum cd_type)
 {
     (void) panel;
     (void) new_dir_vpath;
@@ -53,7 +53,7 @@ panel_cd (WPanel * panel, const vfs_path_t * new_dir_vpath, enum cd_enum cd_type
 }
 
 void
-sync_tree (const vfs_path_t * vpath)
+sync_tree (const vfs_path_t *vpath)
 {
     (void) vpath;
 }

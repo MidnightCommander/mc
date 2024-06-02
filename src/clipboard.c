@@ -69,7 +69,7 @@ static const mode_t clip_open_mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
 
 /* event callback */
 gboolean
-clipboard_file_to_ext_clip (const gchar * event_group_name, const gchar * event_name,
+clipboard_file_to_ext_clip (const gchar *event_group_name, const gchar *event_name,
                             gpointer init_data, gpointer data)
 {
     char *tmp, *cmd;
@@ -97,7 +97,7 @@ clipboard_file_to_ext_clip (const gchar * event_group_name, const gchar * event_
 
 /* event callback */
 gboolean
-clipboard_file_from_ext_clip (const gchar * event_group_name, const gchar * event_name,
+clipboard_file_from_ext_clip (const gchar *event_group_name, const gchar *event_name,
                               gpointer init_data, gpointer data)
 {
     mc_pipe_t *p;
@@ -171,7 +171,7 @@ clipboard_file_from_ext_clip (const gchar * event_group_name, const gchar * even
 
 /* event callback */
 gboolean
-clipboard_text_to_file (const gchar * event_group_name, const gchar * event_name,
+clipboard_text_to_file (const gchar *event_group_name, const gchar *event_name,
                         gpointer init_data, gpointer data)
 {
     int file;
@@ -208,7 +208,7 @@ clipboard_text_to_file (const gchar * event_group_name, const gchar * event_name
 
 /* event callback */
 gboolean
-clipboard_text_from_file (const gchar * event_group_name, const gchar * event_name,
+clipboard_text_from_file (const gchar *event_group_name, const gchar *event_name,
                           gpointer init_data, gpointer data)
 {
     char buf[BUF_LARGE];

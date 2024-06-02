@@ -167,8 +167,7 @@ static struct
     const char *text;
     int type;
     widget_pos_flags_t pos_flags;
-} hotlist_but[] =
-{
+} hotlist_but[] = {
     /* *INDENT-OFF* */
     { B_ENTER, DEFPUSH_BUTTON, 0, 0, 0, N_("Change &to"),
             LIST_HOTLIST | LIST_VFSLIST | LIST_MOVELIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
@@ -268,23 +267,19 @@ update_path_name (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-fill_listbox (WListbox * list)
+fill_listbox (WListbox *list)
 {
     struct hotlist *current;
-    GString *buff;
-
-    buff = g_string_new ("");
 
     for (current = current_group->head; current != NULL; current = current->next)
         switch (current->type)
         {
         case HL_TYPE_GROUP:
             {
-                /* buff clean up */
-                g_string_truncate (buff, 0);
-                g_string_append (buff, "->");
-                g_string_append (buff, current->label);
-                listbox_add_item (list, LISTBOX_APPEND_AT_END, 0, buff->str, current, FALSE);
+                char *lbl;
+
+                lbl = g_strconcat ("->", current->label, (char *) NULL);
+                listbox_add_item_take (list, LISTBOX_APPEND_AT_END, 0, lbl, current, FALSE);
             }
             break;
         case HL_TYPE_DOTDOT:
@@ -294,8 +289,6 @@ fill_listbox (WListbox * list)
         default:
             break;
         }
-
-    g_string_free (buff, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -482,7 +475,7 @@ hotlist_run_cmd (int action)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-hotlist_button_callback (WButton * button, int action)
+hotlist_button_callback (WButton *button, int action)
 {
     int ret;
 
@@ -495,7 +488,7 @@ hotlist_button_callback (WButton * button, int action)
 /* --------------------------------------------------------------------------------------------- */
 
 static inline cb_ret_t
-hotlist_handle_key (WDialog * h, int key)
+hotlist_handle_key (WDialog *h, int key)
 {
     switch (key)
     {
@@ -564,7 +557,7 @@ hotlist_handle_key (WDialog * h, int key)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-hotlist_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+hotlist_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data)
 {
     WDialog *h = DIALOG (w);
 
@@ -627,7 +620,7 @@ hotlist_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
 /* --------------------------------------------------------------------------------------------- */
 
 static lcback_ret_t
-hotlist_listbox_callback (WListbox * list)
+hotlist_listbox_callback (WListbox *list)
 {
     WDialog *dlg = DIALOG (WIDGET (list)->owner);
 
@@ -988,8 +981,7 @@ add2hotlist (char *label, char *directory, enum HotListType type, listbox_append
             char *lbl;
 
             lbl = g_strconcat ("->", new->label, (char *) NULL);
-            listbox_add_item (l_hotlist, pos, 0, lbl, new, FALSE);
-            g_free (lbl);
+            listbox_add_item_take (l_hotlist, pos, 0, lbl, new, FALSE);
         }
         else
             listbox_add_item (l_hotlist, pos, 0, new->label, new, FALSE);
@@ -1037,7 +1029,7 @@ add_new_entry_input (const char *header, const char *text1, const char *text2,
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-add_new_entry_cmd (WPanel * panel)
+add_new_entry_cmd (WPanel *panel)
 {
     char *title, *url, *to_free;
     int ret;
@@ -1600,7 +1592,7 @@ add_dotdot_to_list (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-add2hotlist_cmd (WPanel * panel)
+add2hotlist_cmd (WPanel *panel)
 {
     char *lc_prompt;
     const char *cp = N_("Label for \"%s\":");
@@ -1637,7 +1629,7 @@ add2hotlist_cmd (WPanel * panel)
 /* --------------------------------------------------------------------------------------------- */
 
 char *
-hotlist_show (hotlist_t list_type, WPanel * panel)
+hotlist_show (hotlist_t list_type, WPanel *panel)
 {
     char *target = NULL;
     int res;

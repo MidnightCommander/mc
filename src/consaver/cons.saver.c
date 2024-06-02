@@ -145,7 +145,7 @@ send_contents (char *buffer, unsigned int columns, unsigned int rows)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void __attribute__ ((noreturn)) die (void)
+static void __attribute__((noreturn)) die (void)
 {
     unsigned char zero = 0;
     ssize_t ret;

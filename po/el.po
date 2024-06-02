@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-04-07 16:41+0300\n"
+"POT-Creation-Date: 2024-06-02 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Efstathios Iosifidis <iefstathios@gmail.com>, 2015\n"
 "Language-Team: Greek (http://app.transifex.com/mc/mc/language/el/)\n"
@@ -542,29 +542,11 @@ msgstr "Γίνεται λήψη αρχείου"
 msgid "Changes to file lost"
 msgstr "Οι αλλαγές στο αρχείο χάθηκαν"
 
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "%s δεν είναι κατάλογος\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr "Ο κατάλογος %s δε σας ανήκει\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr ""
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
+#, fuzzy, c-format
+msgid ""
+"Cannot create temporary directory %s: %s.\n"
+"Temporary files will not be created\n"
 msgstr "Αδύνατη η δημιουργία προσωρινού καταλόγου %s: %s\n"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr "Τα προσωρινά αρχεία θα δημιουργηθούν στο %s\n"
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr "Δε θα δημιουργηθούν προσωρινά αρχεία\n"
 
 msgid "Press any key to continue..."
 msgstr "Πατήστε οποιοδήποτε κουμπί για να συνεχίσετε..."
@@ -4569,3 +4551,19 @@ msgstr "Συνέχεια από την αρχή;"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#, c-format
+#~ msgid "%s is not a directory\n"
+#~ msgstr "%s δεν είναι κατάλογος\n"
+
+#, c-format
+#~ msgid "Directory %s is not owned by you\n"
+#~ msgstr "Ο κατάλογος %s δε σας ανήκει\n"
+
+#, c-format
+#~ msgid "Temporary files will be created in %s\n"
+#~ msgstr "Τα προσωρινά αρχεία θα δημιουργηθούν στο %s\n"
+
+#, c-format
+#~ msgid "Temporary files will not be created\n"
+#~ msgstr "Δε θα δημιουργηθούν προσωρινά αρχεία\n"

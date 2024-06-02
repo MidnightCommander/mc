@@ -42,7 +42,7 @@ static int sigemptyset__return_value = 0;
 
 /* @Mock */
 int
-sigemptyset (sigset_t * set)
+sigemptyset (sigset_t *set)
 {
     sigemptyset_set__captured = set;
     return sigemptyset__return_value;

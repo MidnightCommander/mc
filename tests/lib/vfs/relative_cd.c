@@ -49,7 +49,7 @@ static int test_chdir__return_value;
 
 /* @Mock */
 static int
-test_chdir (const vfs_path_t * vpath)
+test_chdir (const vfs_path_t *vpath)
 {
     test_chdir__vpath__captured = vfs_path_clone (vpath);
     return test_chdir__return_value;
