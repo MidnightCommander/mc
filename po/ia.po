@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-04-07 16:41+0300\n"
+"POT-Creation-Date: 2024-06-02 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Martijn Dekker <mcdutchie@hotmail.com>, 2012,2017\n"
 "Language-Team: Interlingua (http://app.transifex.com/mc/mc/language/ia/)\n"
@@ -542,29 +542,11 @@ msgstr "Obtene file"
 msgid "Changes to file lost"
 msgstr "Cambiamentos in file perdite"
 
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "%s non es un directorio.\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr "Le directorio %s non ha te como proprietario.\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr "Non pote definir le permissiones correcte pro le directorio %s\n"
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
+#, fuzzy, c-format
+msgid ""
+"Cannot create temporary directory %s: %s.\n"
+"Temporary files will not be created\n"
 msgstr "Non pote crear le directorio temporari %s: %s\n"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr "Le files temporari essera create in %s\n"
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr "Files temporari non essera create\n"
 
 msgid "Press any key to continue..."
 msgstr "Preme qualcunque clave pro continuar..."
@@ -4492,3 +4474,23 @@ msgstr "Continuar ab initio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#, c-format
+#~ msgid "%s is not a directory\n"
+#~ msgstr "%s non es un directorio.\n"
+
+#, c-format
+#~ msgid "Directory %s is not owned by you\n"
+#~ msgstr "Le directorio %s non ha te como proprietario.\n"
+
+#, c-format
+#~ msgid "Cannot set correct permissions for directory %s\n"
+#~ msgstr "Non pote definir le permissiones correcte pro le directorio %s\n"
+
+#, c-format
+#~ msgid "Temporary files will be created in %s\n"
+#~ msgstr "Le files temporari essera create in %s\n"
+
+#, c-format
+#~ msgid "Temporary files will not be created\n"
+#~ msgstr "Files temporari non essera create\n"

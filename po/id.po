@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-04-07 16:41+0300\n"
+"POT-Creation-Date: 2024-06-02 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Ferriandy Chianiago <gpl4all@gmail.com>, 2015\n"
 "Language-Team: Indonesian (http://app.transifex.com/mc/mc/language/id/)\n"
@@ -549,29 +549,11 @@ msgstr "Mendapatkan file"
 msgid "Changes to file lost"
 msgstr "Perubahan file tidak tersimpan"
 
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "%s bukan suatu direktori\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr "Direktori %s bukan dimiliki oleh Anda\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr "Tak bisa menata hak yang benar bagi direktori %s\n"
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
+#, fuzzy, c-format
+msgid ""
+"Cannot create temporary directory %s: %s.\n"
+"Temporary files will not be created\n"
 msgstr "Tak bisa membuat direktori sementara %s: %s\n"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr "Berkas sementara akan dibuat dalam %s\n"
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr "Berkas sementara tak akan dibuat\n"
 
 msgid "Press any key to continue..."
 msgstr "Tekan sebarang tombol untuk melanjutkan..."
@@ -4481,3 +4463,23 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#, c-format
+#~ msgid "%s is not a directory\n"
+#~ msgstr "%s bukan suatu direktori\n"
+
+#, c-format
+#~ msgid "Directory %s is not owned by you\n"
+#~ msgstr "Direktori %s bukan dimiliki oleh Anda\n"
+
+#, c-format
+#~ msgid "Cannot set correct permissions for directory %s\n"
+#~ msgstr "Tak bisa menata hak yang benar bagi direktori %s\n"
+
+#, c-format
+#~ msgid "Temporary files will be created in %s\n"
+#~ msgstr "Berkas sementara akan dibuat dalam %s\n"
+
+#, c-format
+#~ msgid "Temporary files will not be created\n"
+#~ msgstr "Berkas sementara tak akan dibuat\n"

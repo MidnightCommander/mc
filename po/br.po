@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-04-07 16:41+0300\n"
+"POT-Creation-Date: 2024-06-02 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Irriep Nala Novram <per.morvan.bzh29@gmail.com>, 2017-2018\n"
 "Language-Team: Breton (http://app.transifex.com/mc/mc/language/br/)\n"
@@ -536,27 +536,9 @@ msgid "Changes to file lost"
 msgstr ""
 
 #, c-format
-msgid "%s is not a directory\n"
-msgstr ""
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr ""
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr ""
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
-msgstr ""
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr ""
-
-#, c-format
-msgid "Temporary files will not be created\n"
+msgid ""
+"Cannot create temporary directory %s: %s.\n"
+"Temporary files will not be created\n"
 msgstr ""
 
 msgid "Press any key to continue..."

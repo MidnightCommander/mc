@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-04-07 16:41+0300\n"
+"POT-Creation-Date: 2024-06-02 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Seong-ho Cho <darkcircle.0426@gmail.com>, 2023\n"
 "Language-Team: Korean (http://app.transifex.com/mc/mc/language/ko/)\n"
@@ -565,29 +565,11 @@ msgstr "파일 받는중"
 msgid "Changes to file lost"
 msgstr "파일 변경 내용 손실"
 
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "%s은(는) 디렉터리가 아님\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr "%s 디렉터리가 사용자의 소유가 아님\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr "%s 디렉터리에 대한 올바른 사용 권한을 설정할 수 없음\n"
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
+#, fuzzy, c-format
+msgid ""
+"Cannot create temporary directory %s: %s.\n"
+"Temporary files will not be created\n"
 msgstr "%s 임시 디렉터리를 생성할 수 없음: %s\n"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr "%s에 임시 파일이 생성됨\n"
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr "임시 파일이 생성되지 않음\n"
 
 msgid "Press any key to continue..."
 msgstr "계속하려면 아무 키나 누르십시오..."
@@ -4740,3 +4722,23 @@ msgstr "처음부터 계속하시겠습니까?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "/ftp://some.host/editme.txt의 로컬 복사본을 가져올 수 없음"
+
+#, c-format
+#~ msgid "%s is not a directory\n"
+#~ msgstr "%s은(는) 디렉터리가 아님\n"
+
+#, c-format
+#~ msgid "Directory %s is not owned by you\n"
+#~ msgstr "%s 디렉터리가 사용자의 소유가 아님\n"
+
+#, c-format
+#~ msgid "Cannot set correct permissions for directory %s\n"
+#~ msgstr "%s 디렉터리에 대한 올바른 사용 권한을 설정할 수 없음\n"
+
+#, c-format
+#~ msgid "Temporary files will be created in %s\n"
+#~ msgstr "%s에 임시 파일이 생성됨\n"
+
+#, c-format
+#~ msgid "Temporary files will not be created\n"
+#~ msgstr "임시 파일이 생성되지 않음\n"

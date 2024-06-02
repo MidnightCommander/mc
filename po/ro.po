@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-04-07 16:41+0300\n"
+"POT-Creation-Date: 2024-06-02 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Simona Iacob <s@zp1.net>, 2021-2023\n"
 "Language-Team: Romanian (http://app.transifex.com/mc/mc/language/ro/)\n"
@@ -569,29 +569,11 @@ msgstr "Transfer fișierul"
 msgid "Changes to file lost"
 msgstr "S-au pierdut schimbările efectuate în fișier"
 
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "%s nu este un dosar\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr "Nu dețineți dosarul %s\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr "Nu pot seta permisiunile corecte pentru dosarul %s\n"
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
+#, fuzzy, c-format
+msgid ""
+"Cannot create temporary directory %s: %s.\n"
+"Temporary files will not be created\n"
 msgstr "Nu pot crea dosarul temporar %s: %s\n"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr "Fișierele temporare vor fi create în %s\n"
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr "Nu vor fi create fișiere temporare\n"
 
 msgid "Press any key to continue..."
 msgstr "Apăsați o tastă pentru a continua..."
@@ -4756,3 +4738,23 @@ msgstr "Continuă de la început?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nu se poate aduce o copie locală a /ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid "%s is not a directory\n"
+#~ msgstr "%s nu este un dosar\n"
+
+#, c-format
+#~ msgid "Directory %s is not owned by you\n"
+#~ msgstr "Nu dețineți dosarul %s\n"
+
+#, c-format
+#~ msgid "Cannot set correct permissions for directory %s\n"
+#~ msgstr "Nu pot seta permisiunile corecte pentru dosarul %s\n"
+
+#, c-format
+#~ msgid "Temporary files will be created in %s\n"
+#~ msgstr "Fișierele temporare vor fi create în %s\n"
+
+#, c-format
+#~ msgid "Temporary files will not be created\n"
+#~ msgstr "Nu vor fi create fișiere temporare\n"

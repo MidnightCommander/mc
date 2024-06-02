@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-04-07 16:41+0300\n"
+"POT-Creation-Date: 2024-06-02 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: hualahyja, 2019\n"
 "Language-Team: Slovak (http://app.transifex.com/mc/mc/language/sk/)\n"
@@ -561,29 +561,11 @@ msgstr "Získava sa súbor"
 msgid "Changes to file lost"
 msgstr "Zmeny súboru stratené"
 
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "%s nie je adresár\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr "Nevlastníte adresár %s\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr "Nepodarilo sa nastaviť správne prístupové práva pre adresár %s\n"
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
+#, fuzzy, c-format
+msgid ""
+"Cannot create temporary directory %s: %s.\n"
+"Temporary files will not be created\n"
 msgstr "Nepodarilo sa vytvoriť dočasný adresár %s: %s\n"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr "Dočasné súbory budú vytvorené v %s\n"
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr "Dočasné súbory nebudú vytvorené\n"
 
 msgid "Press any key to continue..."
 msgstr "Pokračujte stlačením ľubovoľného klávesu..."
@@ -4689,3 +4671,23 @@ msgstr "Pokračovať od začiatku?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nemožno stiahnuť lokálnu kópiu /ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid "%s is not a directory\n"
+#~ msgstr "%s nie je adresár\n"
+
+#, c-format
+#~ msgid "Directory %s is not owned by you\n"
+#~ msgstr "Nevlastníte adresár %s\n"
+
+#, c-format
+#~ msgid "Cannot set correct permissions for directory %s\n"
+#~ msgstr "Nepodarilo sa nastaviť správne prístupové práva pre adresár %s\n"
+
+#, c-format
+#~ msgid "Temporary files will be created in %s\n"
+#~ msgstr "Dočasné súbory budú vytvorené v %s\n"
+
+#, c-format
+#~ msgid "Temporary files will not be created\n"
+#~ msgstr "Dočasné súbory nebudú vytvorené\n"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-04-07 16:41+0300\n"
+"POT-Creation-Date: 2024-06-02 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Andi Chandler <andi@gowling.com>, 2016-2017,2020,2022-2023\n"
 "Language-Team: English (United Kingdom) (http://app.transifex.com/mc/mc/"
@@ -561,29 +561,11 @@ msgstr "Getting file"
 msgid "Changes to file lost"
 msgstr "Changes to file lost"
 
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "%s is not a directory\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr "Directory %s is not owned by you\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr "Cannot set correct permissions for directory %s\n"
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
+#, fuzzy, c-format
+msgid ""
+"Cannot create temporary directory %s: %s.\n"
+"Temporary files will not be created\n"
 msgstr "Cannot create temporary directory %s: %s\n"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr "Temporary files will be created in %s\n"
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr "Temporary files will not be created\n"
 
 msgid "Press any key to continue..."
 msgstr "Press any key to continue..."
@@ -4508,3 +4490,23 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#, c-format
+#~ msgid "%s is not a directory\n"
+#~ msgstr "%s is not a directory\n"
+
+#, c-format
+#~ msgid "Directory %s is not owned by you\n"
+#~ msgstr "Directory %s is not owned by you\n"
+
+#, c-format
+#~ msgid "Cannot set correct permissions for directory %s\n"
+#~ msgstr "Cannot set correct permissions for directory %s\n"
+
+#, c-format
+#~ msgid "Temporary files will be created in %s\n"
+#~ msgstr "Temporary files will be created in %s\n"
+
+#, c-format
+#~ msgid "Temporary files will not be created\n"
+#~ msgstr "Temporary files will not be created\n"

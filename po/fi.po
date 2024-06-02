@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-04-07 16:41+0300\n"
+"POT-Creation-Date: 2024-06-02 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>, 2021\n"
 "Language-Team: Finnish (http://app.transifex.com/mc/mc/language/fi/)\n"
@@ -564,29 +564,11 @@ msgstr "Tuodaan tiedostoa"
 msgid "Changes to file lost"
 msgstr "Muutokset tiedostoon menetetty"
 
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "%s ei ole hakemisto\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr "Et ole kansion %s omistaja\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr "Sinulla ei ole oikeuksia kansioon %s\n"
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
+#, fuzzy, c-format
+msgid ""
+"Cannot create temporary directory %s: %s.\n"
+"Temporary files will not be created\n"
 msgstr "Väliaikaishakemiston luonti epäonnistui %s: %s\n"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr "Väliaikaistiedostoja ei ole luotu kohteeseen %s\n"
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr "Väliaikais tiedosta ei ole luotu\n"
 
 msgid "Press any key to continue..."
 msgstr "Paina mitä tahansa näppäintä jatkaaksesi"
@@ -4559,3 +4541,23 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#, c-format
+#~ msgid "%s is not a directory\n"
+#~ msgstr "%s ei ole hakemisto\n"
+
+#, c-format
+#~ msgid "Directory %s is not owned by you\n"
+#~ msgstr "Et ole kansion %s omistaja\n"
+
+#, c-format
+#~ msgid "Cannot set correct permissions for directory %s\n"
+#~ msgstr "Sinulla ei ole oikeuksia kansioon %s\n"
+
+#, c-format
+#~ msgid "Temporary files will be created in %s\n"
+#~ msgstr "Väliaikaistiedostoja ei ole luotu kohteeseen %s\n"
+
+#, c-format
+#~ msgid "Temporary files will not be created\n"
+#~ msgstr "Väliaikais tiedosta ei ole luotu\n"

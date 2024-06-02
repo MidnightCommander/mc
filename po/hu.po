@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-04-07 16:41+0300\n"
+"POT-Creation-Date: 2024-06-02 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: 6bdcf737f9bcb6037ecba892a70fb951_e9eeb40 "
 "<b76b5e2faba6aa74d4498ee4c87ab010_661337>, 2020\n"
@@ -548,29 +548,11 @@ msgstr "Fájlletöltés"
 msgid "Changes to file lost"
 msgstr "A fájl módosításai elvesztek"
 
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "\"%s\" nem könyvtár\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr "A(z) \"%s\" könyvtár nem az Öné\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr "Nem sikerült beállítani a jogokat a(z) \"%s\" könyvtárhoz.\n"
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
+#, fuzzy, c-format
+msgid ""
+"Cannot create temporary directory %s: %s.\n"
+"Temporary files will not be created\n"
 msgstr "A(z) \"%s\" ideiglenes könyvtár nem hozható létre: %s\n"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr "Az ideiglenes fájlok a(z) \"%s\" könyvtárban jönnek létre\n"
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr "Ideiglenes fájlok nem jönnek létre\n"
 
 msgid "Press any key to continue..."
 msgstr "Nyomjon meg egy billentyűt..."
@@ -4669,3 +4651,23 @@ msgstr "Folytatás az elejéről?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nem sikerült behozni /ftp://some.host/editme.txt helyi másolatát"
+
+#, c-format
+#~ msgid "%s is not a directory\n"
+#~ msgstr "\"%s\" nem könyvtár\n"
+
+#, c-format
+#~ msgid "Directory %s is not owned by you\n"
+#~ msgstr "A(z) \"%s\" könyvtár nem az Öné\n"
+
+#, c-format
+#~ msgid "Cannot set correct permissions for directory %s\n"
+#~ msgstr "Nem sikerült beállítani a jogokat a(z) \"%s\" könyvtárhoz.\n"
+
+#, c-format
+#~ msgid "Temporary files will be created in %s\n"
+#~ msgstr "Az ideiglenes fájlok a(z) \"%s\" könyvtárban jönnek létre\n"
+
+#, c-format
+#~ msgid "Temporary files will not be created\n"
+#~ msgstr "Ideiglenes fájlok nem jönnek létre\n"

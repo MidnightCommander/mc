@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-04-07 16:41+0300\n"
+"POT-Creation-Date: 2024-06-02 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Jaap Kramer <jaap-kramer@ziggo.nl>, 2023\n"
 "Language-Team: Dutch (http://app.transifex.com/mc/mc/language/nl/)\n"
@@ -566,29 +566,11 @@ msgstr "Verkrijgen van bestand"
 msgid "Changes to file lost"
 msgstr "Wijzigingen zijn verloren"
 
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "%s is geen map\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr "U bent niet de eigenaar van de map %s\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr "Kan de rechten niet juist instellen voor de map %s\n"
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
+#, fuzzy, c-format
+msgid ""
+"Cannot create temporary directory %s: %s.\n"
+"Temporary files will not be created\n"
 msgstr "Tijdelijke map \"%s\" kan niet gecreëerd worden: %s\n"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr "Tijdelijke bestanden zullen in %s gemaakt worden\n"
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr "Tijdelijke bestanden zullen niet aangemaakt worden\n"
 
 msgid "Press any key to continue..."
 msgstr "Druk op een toets om verder te gaan..."
@@ -4724,3 +4706,23 @@ msgstr "Doorgaan vanaf het begin?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan geen lokale versie van /ftp://some.host/editme.txt ophalen"
+
+#, c-format
+#~ msgid "%s is not a directory\n"
+#~ msgstr "%s is geen map\n"
+
+#, c-format
+#~ msgid "Directory %s is not owned by you\n"
+#~ msgstr "U bent niet de eigenaar van de map %s\n"
+
+#, c-format
+#~ msgid "Cannot set correct permissions for directory %s\n"
+#~ msgstr "Kan de rechten niet juist instellen voor de map %s\n"
+
+#, c-format
+#~ msgid "Temporary files will be created in %s\n"
+#~ msgstr "Tijdelijke bestanden zullen in %s gemaakt worden\n"
+
+#, c-format
+#~ msgid "Temporary files will not be created\n"
+#~ msgstr "Tijdelijke bestanden zullen niet aangemaakt worden\n"

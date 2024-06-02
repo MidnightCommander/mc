@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-04-07 16:41+0300\n"
+"POT-Creation-Date: 2024-06-02 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Kristjan Räts <kristjanrats@gmail.com>, "
 "2013-2016,2018-2019,2024\n"
@@ -569,29 +569,11 @@ msgstr "Hangitakse faili"
 msgid "Changes to file lost"
 msgstr "Faili muudatused unustati"
 
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "%s ei ole kataloog\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr "Sa ei ole kataloogi %s omanik\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr "Kataloogi %s õiguste määramine nurjus\n"
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
+#, fuzzy, c-format
+msgid ""
+"Cannot create temporary directory %s: %s.\n"
+"Temporary files will not be created\n"
 msgstr "Ajutise kataloogi %s loomine nurjus: %s\n"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr "Ajutised failid luuakse kataloogis %s\n"
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr "Ajutisi faile ei looda\n"
 
 msgid "Press any key to continue..."
 msgstr "Jätkamiseks vajuta suvalist klahvi..."
@@ -4771,3 +4753,23 @@ msgstr "Kas jätkata algusest?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kohaliku koopia hankimine failist /ftp://some.host/editme.txt nurjus"
+
+#, c-format
+#~ msgid "%s is not a directory\n"
+#~ msgstr "%s ei ole kataloog\n"
+
+#, c-format
+#~ msgid "Directory %s is not owned by you\n"
+#~ msgstr "Sa ei ole kataloogi %s omanik\n"
+
+#, c-format
+#~ msgid "Cannot set correct permissions for directory %s\n"
+#~ msgstr "Kataloogi %s õiguste määramine nurjus\n"
+
+#, c-format
+#~ msgid "Temporary files will be created in %s\n"
+#~ msgstr "Ajutised failid luuakse kataloogis %s\n"
+
+#, c-format
+#~ msgid "Temporary files will not be created\n"
+#~ msgstr "Ajutisi faile ei looda\n"

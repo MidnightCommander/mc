@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-04-07 16:41+0300\n"
+"POT-Creation-Date: 2024-06-02 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>, 2022\n"
 "Language-Team: Georgian (http://app.transifex.com/mc/mc/language/ka/)\n"
@@ -538,29 +538,11 @@ msgstr "ფაილის მიღება"
 msgid "Changes to file lost"
 msgstr "ფაილის ცვლილებები დაიკარგა"
 
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "%s საქაღალდე არაა\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr "%s-ის მფლობელი არ ბრძანდებით\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr ""
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
+#, fuzzy, c-format
+msgid ""
+"Cannot create temporary directory %s: %s.\n"
+"Temporary files will not be created\n"
 msgstr "დროებითი საქაღალდის (%s) შექმნა შეუძლებელია: %s\n"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr "დროებითი ფაილები %s-ში შეიქმნება\n"
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr "დროებითი ფალების შექმნის შეცდომა\n"
 
 msgid "Press any key to continue..."
 msgstr "გასაგრძელებლად დააჭირეთ ნებისმიერ ღილაკს..."
@@ -4460,3 +4442,19 @@ msgstr "თავიდან დავიწყო?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#, c-format
+#~ msgid "%s is not a directory\n"
+#~ msgstr "%s საქაღალდე არაა\n"
+
+#, c-format
+#~ msgid "Directory %s is not owned by you\n"
+#~ msgstr "%s-ის მფლობელი არ ბრძანდებით\n"
+
+#, c-format
+#~ msgid "Temporary files will be created in %s\n"
+#~ msgstr "დროებითი ფაილები %s-ში შეიქმნება\n"
+
+#, c-format
+#~ msgid "Temporary files will not be created\n"
+#~ msgstr "დროებითი ფალების შექმნის შეცდომა\n"

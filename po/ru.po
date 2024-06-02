@@ -30,7 +30,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-04-07 16:41+0300\n"
+"POT-Creation-Date: 2024-06-02 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Andrei Stepanov, 2023\n"
 "Language-Team: Russian (http://app.transifex.com/mc/mc/language/ru/)\n"
@@ -587,29 +587,11 @@ msgstr "Получение файла"
 msgid "Changes to file lost"
 msgstr "Изменения файла потеряны"
 
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "%s не является каталогом\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr "Вы не являетесь владельцем каталога %s\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr "Не удалось установить правильные права доступа к каталогу %s\n"
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
+#, fuzzy, c-format
+msgid ""
+"Cannot create temporary directory %s: %s.\n"
+"Temporary files will not be created\n"
 msgstr "Не удалось создать временный каталог %s: %s\n"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr "Временные файлы будут создаваться в каталоге %s\n"
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr "Временные файлы не будут создаваться\n"
 
 msgid "Press any key to continue..."
 msgstr "Для продолжения нажмите любую клавишу..."

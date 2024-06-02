@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-04-07 16:41+0300\n"
+"POT-Creation-Date: 2024-06-02 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Gilberto Jorge <gmj125@gmail.com>, 2013-2024\n"
 "Language-Team: Portuguese (http://app.transifex.com/mc/mc/language/pt/)\n"
@@ -566,29 +566,11 @@ msgstr "A obter ficheiro"
 msgid "Changes to file lost"
 msgstr "Modificações ao ficheiro perdidas"
 
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "%s não é um diretório\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr "Não tem permissões para o diretório %s\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr "Não é possível definir permissões corretas para o diretório %s\n"
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
+#, fuzzy, c-format
+msgid ""
+"Cannot create temporary directory %s: %s.\n"
+"Temporary files will not be created\n"
 msgstr "Não é possível criar diretório temporário %s: %s\n"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr "Ficheiros temporários serão criados em %s\n"
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr "Ficheiros temporários não serão criados\n"
 
 msgid "Press any key to continue..."
 msgstr "Prima qualquer tecla para continuar..."
@@ -4781,3 +4763,23 @@ msgstr "Continuar do início?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Não é possível obter uma cópia local de /ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid "%s is not a directory\n"
+#~ msgstr "%s não é um diretório\n"
+
+#, c-format
+#~ msgid "Directory %s is not owned by you\n"
+#~ msgstr "Não tem permissões para o diretório %s\n"
+
+#, c-format
+#~ msgid "Cannot set correct permissions for directory %s\n"
+#~ msgstr "Não é possível definir permissões corretas para o diretório %s\n"
+
+#, c-format
+#~ msgid "Temporary files will be created in %s\n"
+#~ msgstr "Ficheiros temporários serão criados em %s\n"
+
+#, c-format
+#~ msgid "Temporary files will not be created\n"
+#~ msgstr "Ficheiros temporários não serão criados\n"

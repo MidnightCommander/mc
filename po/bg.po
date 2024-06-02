@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-04-07 16:41+0300\n"
+"POT-Creation-Date: 2024-06-02 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Alexander Shopov <ash@kambanaria.org>, 2022\n"
 "Language-Team: Bulgarian (http://app.transifex.com/mc/mc/language/bg/)\n"
@@ -565,29 +565,11 @@ msgstr "Получавам файл"
 msgid "Changes to file lost"
 msgstr "Промените във файла изгубени"
 
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "%s не е директория\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr "Директорията %s не се притежава от вас\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr "Не може да се зададат коректни права за директория %s\n"
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
+#, fuzzy, c-format
+msgid ""
+"Cannot create temporary directory %s: %s.\n"
+"Temporary files will not be created\n"
 msgstr "Не може да се създаде временна директория %s: %s\n"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr "Временни файлове ще бъдат създадени в %s\n"
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr "Временни файлове няма да бъдат създадени\n"
 
 msgid "Press any key to continue..."
 msgstr "Натиснете клавиш, за да продължите…"
@@ -4731,3 +4713,23 @@ msgstr "Да се продължи ли от началото?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не може да се изтегли локално копие на „/ftp://some.host/editme.txt“"
+
+#, c-format
+#~ msgid "%s is not a directory\n"
+#~ msgstr "%s не е директория\n"
+
+#, c-format
+#~ msgid "Directory %s is not owned by you\n"
+#~ msgstr "Директорията %s не се притежава от вас\n"
+
+#, c-format
+#~ msgid "Cannot set correct permissions for directory %s\n"
+#~ msgstr "Не може да се зададат коректни права за директория %s\n"
+
+#, c-format
+#~ msgid "Temporary files will be created in %s\n"
+#~ msgstr "Временни файлове ще бъдат създадени в %s\n"
+
+#, c-format
+#~ msgid "Temporary files will not be created\n"
+#~ msgstr "Временни файлове няма да бъдат създадени\n"
