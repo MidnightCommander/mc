@@ -48,30 +48,6 @@
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-#if ! GLIB_CHECK_VERSION (2, 54, 0)
-/**
- * g_direct_equal:
- * @v1: (nullable): a key
- * @v2: (nullable): a key to compare with @v1
- *
- * Compares two #gpointer arguments and returns %TRUE if they are equal.
- * It can be passed to g_hash_table_new() as the @key_equal_func
- * parameter, when using opaque pointers compared by pointer value as
- * keys in a #GHashTable.
- *
- * This equality function is also appropriate for keys that are integers
- * stored in pointers, such as `GINT_TO_POINTER (n)`.
- *
- * Returns: %TRUE if the two keys match.
- */
-
-static gboolean
-g_direct_equal (gconstpointer v1, gconstpointer v2)
-{
-    return v1 == v2;
-}
-#endif /* ! GLIB_CHECK_VERSION (2, 54, 0) */
-
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
