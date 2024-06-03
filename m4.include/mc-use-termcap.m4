@@ -5,7 +5,13 @@ AC_DEFUN([mc_USE_TERMCAP], [
 	screen_msg="$screen_msg with termcap database"
 	AC_MSG_NOTICE([using S-Lang screen library with termcap])
 	AC_DEFINE(USE_TERMCAP, 1, [Define to use termcap database])
-	AC_CHECK_LIB(termcap, tgoto, [MCLIBS="$MCLIBS -ltermcap"], , [$LIBS])
+
+	ac_save_LIBS="$LIBS"
+	AC_SEARCH_LIBS([tgoto], [termcap xcurses curses],
+	    [MCLIBS="$MCLIBS $ac_cv_search_tgoto"],
+	    [AC_MSG_ERROR([Could not find a library providing tgoto])]
+	)
+	LIBS="$ac_save_LIBS"
 ])
 
 dnl

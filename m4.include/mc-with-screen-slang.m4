@@ -16,9 +16,6 @@ AC_DEFUN([mc_WITH_SLANG], [
     dnl Check if termcap is needed.
     if test x"$found_slang" = x"yes"; then
         mc_SLANG_TERMCAP
-        if test x"$mc_cv_slang_termcap"  = x"yes"; then
-            MCLIBS="$MCLIBS -ltermcap"
-        fi
     fi
 
     screen_type=slang
