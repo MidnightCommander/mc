@@ -60,7 +60,7 @@
 
 static char *columns[MAXCOLS];  /* Points to the string in column n */
 static int column_ptr[MAXCOLS]; /* Index from 0 to the starting positions of the columns */
-static size_t vfs_parce_ls_final_num_spaces = 0;
+static size_t vfs_parse_ls_final_num_spaces = 0;
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
@@ -665,7 +665,7 @@ vfs_split_text (char *p)
 void
 vfs_parse_ls_lga_init (void)
 {
-    vfs_parce_ls_final_num_spaces = 1;
+    vfs_parse_ls_final_num_spaces = 1;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -673,7 +673,7 @@ vfs_parse_ls_lga_init (void)
 size_t
 vfs_parse_ls_lga_get_final_spaces (void)
 {
-    return vfs_parce_ls_final_num_spaces;
+    return vfs_parse_ls_final_num_spaces;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -816,7 +816,7 @@ vfs_parse_ls_lga (const char *p, struct stat *s, char **filename, char **linknam
     {
         *num_spaces = column_ptr[idx] - column_ptr[idx - 1] - strlen (columns[idx - 1]);
         if (DIR_IS_DOTDOT (columns[idx]))
-            vfs_parce_ls_final_num_spaces = *num_spaces;
+            vfs_parse_ls_final_num_spaces = *num_spaces;
     }
 
     for (i = idx + 1, idx2 = 0; i < num_cols; i++)
