@@ -270,6 +270,7 @@ void
 mcview_set_byte (WView *view, off_t offset, byte b)
 {
     (void) &b;
+    (void) offset;
 
     g_assert (offset < mcview_get_filesize (view));
     g_assert (view->datasource == DS_FILE);
