@@ -18,11 +18,14 @@ AC_DEFUN([mc_WITH_INTERNAL_EDIT], [
 
     dnl ASpell support.
     AC_ARG_ENABLE([aspell],
-        AS_HELP_STRING([--enable-aspell], [Enable aspell support for internal editor @<:@no@:>@]),
+        AS_HELP_STRING(
+        [--enable-aspell@<:@=prefix@:>@],
+        [Enable aspell support for internal editor @<:@no@:>@] and optionally set path to aspell installation prefix @<:@default=/usr@:>@),
         [
             if test "x$enableval" = xno; then
                 enable_aspell=no
             else
+                test -d "$enable_aspell/include" && CPPFLAGS="$CPPFLAGS -I$enable_aspell/include"
                 enable_aspell=yes
             fi
         ],
@@ -40,7 +43,7 @@ AC_DEFUN([mc_WITH_INTERNAL_EDIT], [
                 AC_MSG_NOTICE([using aspell for internal editor])
             else
                 enable_aspell=no
-                AC_MSG_NOTICE([aspell support is disabled because gmodule support is not available])
+                AC_MSG_ERROR([aspell support is disabled because gmodule support is not available])
             fi
     fi
 ])

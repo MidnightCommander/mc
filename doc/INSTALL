@@ -89,9 +89,10 @@ incomplete, use `configure --help' to get the full list):
      built-in file editor.  The built-in editor is compiled in by
      default.
 
-`--enable-aspell'
-     This option adds spell check support in the internal editor using
-     libaspell. Disabled by default.
+`--enable-aspell[=prefix]'
+     This option adds spell check support to the internal editor using
+     libaspell and optionally sets path to libaspell installation prefix
+     [default=/usr]. Disabled by default.
 
 `--without-gpm-mouse'
      Use this flag to disable gpm mouse support (e.g. if you want to
