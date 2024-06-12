@@ -39,7 +39,6 @@
 
 #include <config.h>
 
-#include <ctype.h>
 #ifdef HAVE_STRVERSCMP
 #include <string.h>
 #endif /* HAVE_STRVERSCMP */
@@ -122,7 +121,7 @@ str_verscmp (const char *s1, const char *s2)
     c1 = *p1++;
     c2 = *p2++;
     /* Hint: '0' is a digit too.  */
-    state = S_N + ((c1 == '0') + (isdigit (c1) != 0));
+    state = S_N + ((c1 == '0') + (g_ascii_isdigit (c1) ? 1 : 0));
 
     while ((diff = c1 - c2) == 0)
     {
@@ -132,10 +131,10 @@ str_verscmp (const char *s1, const char *s2)
         state = next_state[state];
         c1 = *p1++;
         c2 = *p2++;
-        state += (c1 == '0') + (isdigit (c1) != 0);
+        state += (c1 == '0') + (g_ascii_isdigit (c1) ? 1 : 0);
     }
 
-    state = result_type[state * 3 + (((c2 == '0') + (isdigit (c2) != 0)))];
+    state = result_type[state * 3 + (((c2 == '0') + (g_ascii_isdigit (c2) ? 1 : 0)))];
 
     switch (state)
     {
@@ -143,11 +142,11 @@ str_verscmp (const char *s1, const char *s2)
         return diff;
 
     case LEN:
-        while (isdigit (*p1++))
-            if (!isdigit (*p2++))
+        while (g_ascii_isdigit (*p1++))
+            if (!g_ascii_isdigit (*p2++))
                 return 1;
 
-        return isdigit (*p2) ? -1 : diff;
+        return g_ascii_isdigit (*p2) ? -1 : diff;
 
     default:
         return state;
