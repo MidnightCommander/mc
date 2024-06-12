@@ -495,10 +495,13 @@ str_utf8_make_make_term_form (const char *text, size_t length)
         }
         else
         {
+            size_t repl_len;
+
             text++;
             /*actual[0] = '?'; */
-            memcpy (actual, replch, strlen (replch));
-            actual += strlen (replch);
+            repl_len = strlen (replch);
+            memcpy (actual, replch, repl_len);
+            actual += repl_len;
             result.width++;
         }
 
