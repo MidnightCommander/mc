@@ -184,20 +184,6 @@ verrevcmp (const char *s1, ssize_t s1_len, const char *s2, ssize_t s2_len)
 
 /* Compare version strings.
  *
- * @param s1 first string to compare
- * @param s2 second string to compare
- *
- * @return an integer less than, equal to, or greater than zero, if @s1 is <, == or > than @s2.
- */
-int
-filevercmp (const char *s1, const char *s2)
-{
-    return filenvercmp (s1, -1, s2, -1);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/* Compare version strings.
- *
  * @param a first string to compare
  * @param alen length of @a or (-1)
  * @param b second string to compare

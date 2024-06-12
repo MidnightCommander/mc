@@ -538,50 +538,6 @@ const char *str_detect_termencoding (void);
 
 int str_verscmp (const char *s1, const char *s2);
 
-/* Compare version strings:
-
-   Compare strings a and b as file names containing version numbers, and return an integer
-   that is negative, zero, or positive depending on whether a compares less than, equal to,
-   or greater than b.
-
-   Use the following version sort algorithm:
-
-   1. Compare the strings' maximal-length non-digit prefixes lexically.
-   If there is a difference return that difference.
-   Otherwise discard the prefixes and continue with the next step.
-
-   2. Compare the strings' maximal-length digit prefixes, using numeric comparison
-   of the numbers represented by each prefix. (Treat an empty prefix as zero; this can
-   happen only at string end.)
-   If there is a difference, return that difference.
-   Otherwise discard the prefixes and continue with the next step.
-
-   3. If both strings are empty, return 0.  Otherwise continue with step 1.
-
-   In version sort, lexical comparison is left to right, byte by byte, using the byte's numeric
-   value (0-255), except that:
-
-   1. ASCII letters sort before other bytes.
-   2. A tilde sorts before anything, even an empty string.
-
-   In addition to the version sort rules, the following strings have special priority and sort
-   before all other strings (listed in order):
-
-   1. The empty string.
-   2. ".".
-   3. "..".
-   4. Strings starting with "." sort before other strings.
-
-   Before comparing two strings where both begin with non-".", or where both begin with "."
-   but neither is "." or "..", suffixes matching the C-locale extended regular expression
-   (\.[A-Za-z~][A-Za-z0-9~]*)*$ are removed and the strings compared without them, using version sort
-   without special priority; if they do not compare equal, this comparison result is used and
-   the suffixes are effectively ignored. Otherwise, the entire strings are compared using version sort.
-   When removing a suffix from a nonempty string, remove the maximal-length suffix such that
-   the remaining string is nonempty.
- */
-int filevercmp (const char *a, const char *b);
-
 /* Like filevercmp, except compare the byte arrays a (of length alen) and b (of length blen)
    so that a and b can contain '\0', which sorts just before '\1'. But if alen is -1 treat
    a as a string terminated by '\0', and similarly for blen.
@@ -671,6 +627,56 @@ str_move (char *dest, const char *src)
     n = strlen (src) + 1;       /* + '\0' */
 
     return (char *) memmove (dest, src, n);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* Compare version strings:
+
+   Compare strings a and b as file names containing version numbers, and return an integer
+   that is negative, zero, or positive depending on whether a compares less than, equal to,
+   or greater than b.
+
+   Use the following version sort algorithm:
+
+   1. Compare the strings' maximal-length non-digit prefixes lexically.
+   If there is a difference return that difference.
+   Otherwise discard the prefixes and continue with the next step.
+
+   2. Compare the strings' maximal-length digit prefixes, using numeric comparison
+   of the numbers represented by each prefix. (Treat an empty prefix as zero; this can
+   happen only at string end.)
+   If there is a difference, return that difference.
+   Otherwise discard the prefixes and continue with the next step.
+
+   3. If both strings are empty, return 0.  Otherwise continue with step 1.
+
+   In version sort, lexical comparison is left to right, byte by byte, using the byte's numeric
+   value (0-255), except that:
+
+   1. ASCII letters sort before other bytes.
+   2. A tilde sorts before anything, even an empty string.
+
+   In addition to the version sort rules, the following strings have special priority and sort
+   before all other strings (listed in order):
+
+   1. The empty string.
+   2. ".".
+   3. "..".
+   4. Strings starting with "." sort before other strings.
+
+   Before comparing two strings where both begin with non-".", or where both begin with "."
+   but neither is "." or "..", suffixes matching the C-locale extended regular expression
+   (\.[A-Za-z~][A-Za-z0-9~]*)*$ are removed and the strings compared without them, using version sort
+   without special priority; if they do not compare equal, this comparison result is used and
+   the suffixes are effectively ignored. Otherwise, the entire strings are compared using version sort.
+   When removing a suffix from a nonempty string, remove the maximal-length suffix such that
+   the remaining string is nonempty.
+ */
+
+static inline int
+filevercmp (const char *s1, const char *s2)
+{
+    return filenvercmp (s1, -1, s2, -1);
 }
 
 /* --------------------------------------------------------------------------------------------- */
