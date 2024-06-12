@@ -992,14 +992,23 @@ str_utf8_release_search_needle (char *needle, gboolean case_sen)
 static const char *
 str_utf8_search_first (const char *text, const char *search, gboolean case_sen)
 {
-    char *fold_text;
     char *deco_text;
     const char *match;
     const char *result = NULL;
-    const char *m;
+    size_t search_len;
 
-    fold_text = case_sen ? (char *) text : g_utf8_casefold (text, -1);
-    deco_text = g_utf8_normalize (fold_text, -1, G_NORMALIZE_ALL);
+    if (case_sen)
+        deco_text = g_utf8_normalize (text, -1, G_NORMALIZE_ALL);
+    else
+    {
+        char *fold_text;
+
+        fold_text = g_utf8_casefold (text, -1);
+        deco_text = g_utf8_normalize (fold_text, -1, G_NORMALIZE_ALL);
+        g_free (fold_text);
+    }
+
+    search_len = strlen (search);
 
     match = deco_text;
     do
@@ -1008,10 +1017,11 @@ str_utf8_search_first (const char *text, const char *search, gboolean case_sen)
         if (match != NULL)
         {
             if ((!str_utf8_iscombiningmark (match) || (match == deco_text)) &&
-                !str_utf8_iscombiningmark (match + strlen (search)))
+                !str_utf8_iscombiningmark (match + search_len))
             {
+                const char *m = deco_text;
+
                 result = text;
-                m = deco_text;
                 while (m < match)
                 {
                     str_utf8_cnext_noncomb_char (&m);
@@ -1025,8 +1035,6 @@ str_utf8_search_first (const char *text, const char *search, gboolean case_sen)
     while (match != NULL && result == NULL);
 
     g_free (deco_text);
-    if (!case_sen)
-        g_free (fold_text);
 
     return result;
 }
@@ -1036,14 +1044,23 @@ str_utf8_search_first (const char *text, const char *search, gboolean case_sen)
 static const char *
 str_utf8_search_last (const char *text, const char *search, gboolean case_sen)
 {
-    char *fold_text;
     char *deco_text;
     char *match;
     const char *result = NULL;
-    const char *m;
+    size_t search_len;
 
-    fold_text = case_sen ? (char *) text : g_utf8_casefold (text, -1);
-    deco_text = g_utf8_normalize (fold_text, -1, G_NORMALIZE_ALL);
+    if (case_sen)
+        deco_text = g_utf8_normalize (text, -1, G_NORMALIZE_ALL);
+    else
+    {
+        char *fold_text;
+
+        fold_text = g_utf8_casefold (text, -1);
+        deco_text = g_utf8_normalize (fold_text, -1, G_NORMALIZE_ALL);
+        g_free (fold_text);
+    }
+
+    search_len = strlen (search);
 
     do
     {
@@ -1051,10 +1068,11 @@ str_utf8_search_last (const char *text, const char *search, gboolean case_sen)
         if (match != NULL)
         {
             if ((!str_utf8_iscombiningmark (match) || (match == deco_text)) &&
-                !str_utf8_iscombiningmark (match + strlen (search)))
+                !str_utf8_iscombiningmark (match + search_len))
             {
+                const char *m = deco_text;
+
                 result = text;
-                m = deco_text;
                 while (m < match)
                 {
                     str_utf8_cnext_noncomb_char (&m);
@@ -1068,8 +1086,6 @@ str_utf8_search_last (const char *text, const char *search, gboolean case_sen)
     while (match != NULL && result == NULL);
 
     g_free (deco_text);
-    if (!case_sen)
-        g_free (fold_text);
 
     return result;
 }
