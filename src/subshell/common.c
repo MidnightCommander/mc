@@ -418,13 +418,13 @@ init_subshell_child (const char *pty_name)
     switch (mc_global.shell->type)
     {
     case SHELL_BASH:
-        execl (mc_global.shell->path, "bash", "-rcfile", init_file, (char *) NULL);
+        execl (mc_global.shell->path, mc_global.shell->path, "-rcfile", init_file, (char *) NULL);
         break;
 
     case SHELL_ZSH:
         /* Use -g to exclude cmds beginning with space from history
          * and -Z to use the line editor on non-interactive term */
-        execl (mc_global.shell->path, "zsh", "-Z", "-g", (char *) NULL);
+        execl (mc_global.shell->path, mc_global.shell->path, "-Z", "-g", (char *) NULL);
         break;
 
     case SHELL_ASH_BUSYBOX:
