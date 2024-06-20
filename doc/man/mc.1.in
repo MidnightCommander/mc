@@ -961,7 +961,7 @@ be filtered. When
 .I Shell Patterns
 checkbox is on, the regular expression is much like the filename globbing
 in the shell (* standing for zero or more characters and ? standing
-for one character). Otherwise, the matching of files/directoris is done
+for one character). Otherwise, the matching of files/directories is done
 with normal regular expressions (see ed(1)). When
 .I Case sensitive
 checkbox is on, the filtering will be case sensitive characters. Otherwise,
