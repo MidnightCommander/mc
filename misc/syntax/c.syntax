@@ -1,133 +1,272 @@
-# Syntax rules for the C and the C++ programming languages
+# Syntax rules for the C (and partially C++) programming languages.
+
+#
+# Rewritten and extended with defines by Morthimer McMare
+#    <mailto:morthimer_second@list.ru>
+#
+# Tab size: 4.
+# Feel free to improve the highlighting file.
+#
+# Date:
+#   Initial 2024.04.24;
+#   Updated 2024.06.26 (first public release. Classic Midnight Commander C-syntax theme set by default, added keywords from the C23 standard).
+#
+
+
+# For the default (blue) background.
+# The colors almost match the original "c.syntax" file, slightly extending it:
+define _punctuation		yellow
+define _punct_operator	brightcyan
+define _punct_semicolon	brightmagenta
+define _punct_bracket	brightcyan
+define _punct_sqbracket	brightcyan
+define _punct_field		yellow
+define _punct_comma		brightcyan
+define _punct_ternary	brightcyan
+define _punct_bitwise	brightmagenta
+define _label			cyan
+define _preproc			brightred
+define _preproc_str		red
+define _preproc_nl_esc	red
+define _preproc_indent	brightmagenta
+define _keyword			yellow
+define _datatype		yellow
+define _datatype_void	yellow
+define _datatype_mod	yellow
+define _datatype_scope	yellow
+define _const			lightgray
+define _num_integer		lightgray
+define _num_hex			lightgray
+define _num_oct			lightgray
+define _num_float		lightgray
+define _string			green
+define _string_specsymb	brightgreen
+define _string_escchar	brightgreen
+define _char			brightgreen
+define _comment			brown
+define _comment_word	black brown
+define _comment_exmark	black yellow
+define _comment_qnmark	black brown
+
+# I think this highlighting is easier for the eyes for the black background themes. Can be also used with the blue background:
+#define _punctuation		yellow
+#define _punct_operator 	brightmagenta
+#define _punct_semicolon	brightmagenta
+#define _punct_bracket  	yellow
+#define _punct_sqbracket	brown
+#define _punct_field		yellow
+#define _punct_comma		yellow
+#define _punct_ternary  	white
+#define _punct_bitwise  	yellow
+#define _label			brightcyan
+#define _preproc			lightgray
+#define _preproc_str		white
+#define _preproc_nl_esc 	white
+#define _preproc_indent 	lightgray
+#define _keyword			brightcyan
+#define _datatype		brightcyan
+#define _datatype_void  	brightcyan
+#define _datatype_mod   	brightcyan
+#define _datatype_scope 	brightblue
+#define _const			lightgray
+#define _num_integer		red
+#define _num_hex			red
+#define _num_oct			red
+#define _num_float		magenta
+#define _string			brightgreen
+#define _string_specsymb	brightcyan
+#define _string_escchar 	brightcyan
+#define _char			brightgreen
+#define _comment			gray
+#define _comment_word   	black gray
+#define _comment_exmark 	black yellow
+#define _comment_qnmark 	black brown
+
 
 context default
-    keyword whole alignas yellow
-    keyword whole alignof yellow
-    keyword whole asm yellow
-    keyword whole auto yellow
-    keyword whole break yellow
-    keyword whole case yellow
-    keyword whole char yellow
-    keyword whole constexpr yellow
-    keyword whole const yellow
-    keyword whole continue yellow
-    keyword whole default yellow
-    keyword whole double yellow
-    keyword whole do yellow
-    keyword whole else yellow
-    keyword whole enum yellow
-    keyword whole extern yellow
-    keyword whole false yellow
-    keyword whole float yellow
-    keyword whole for yellow
-    keyword whole goto yellow
-    keyword whole if yellow
-    keyword whole inline yellow
-    keyword whole int yellow
-    keyword whole long yellow
-    keyword whole nullptr yellow
-    keyword whole register yellow
-    keyword whole restrict yellow
-    keyword whole return yellow
-    keyword whole short yellow
-    keyword whole signed yellow
-    keyword whole sizeof yellow
-    keyword whole static yellow
-    keyword whole static_assert yellow
-    keyword whole struct yellow
-    keyword whole switch yellow
-    keyword whole thread_local yellow
-    keyword whole true yellow
-    keyword whole typedef yellow
-    keyword whole typeof yellow
-    keyword whole typeof_unqual yellow
-    keyword whole union yellow
-    keyword whole unsigned yellow
-    keyword whole void yellow
-    keyword whole volatile yellow
-    keyword whole wchar_t yellow
-    keyword whole while yellow
-    keyword whole _Alignas yellow
-    keyword whole _Alignof yellow
-    keyword whole _Atomic yellow
-    keyword whole _Bool yellow
-    keyword whole _Complex yellow
-    keyword whole _Decimal32 yellow
-    keyword whole _Decimal64 yellow
-    keyword whole _Decimal128 yellow
-    keyword whole _Generic yellow
-    keyword whole _Imaginary yellow
-    keyword whole _Noreturn yellow
-    keyword whole _Static_assert yellow
-    keyword whole _Thread_local yellow
-    keyword whole ... yellow
-    keyword linestart \{\s\t\}\[\s\t\]#*\n brightmagenta
-    keyword whole \[\s\t\]default yellow
-    keyword whole linestart \[\s\t\]\{ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\}\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\]: cyan
+    keyword whole asm _keyword
+    keyword whole break _keyword
+    keyword whole case _keyword
+    keyword whole const _keyword
+    keyword whole continue _keyword
+    keyword whole do _keyword
+    keyword whole else _keyword
+    keyword whole enum _keyword
+    keyword whole for _keyword
+    keyword whole goto _keyword
+    keyword whole if _keyword
+    keyword whole inline _keyword
+    keyword whole restrict _keyword
+    keyword whole return _keyword
+    keyword whole sizeof _keyword
+    keyword whole struct _keyword
+    keyword whole switch _keyword
+    keyword whole typedef _keyword
+    keyword whole union _keyword
+    keyword whole volatile _keyword
+    keyword whole while _keyword
 
-    keyword /\* brown
-    keyword \*/ brown
-    keyword // brown
+    # C11/C23 extensions:
+    keyword whole alignas _keyword
+    keyword whole alignof _keyword
+    keyword whole constexpr _keyword
+    keyword whole typeof _keyword
+    keyword whole typeof_unqual _keyword
+    keyword whole static_assert _keyword
+    keyword whole thread_local _keyword
+    keyword whole _Alignas _keyword
+    keyword whole _Alignof _keyword
+    keyword whole _Atomic _keyword
+    keyword whole _Bool _keyword
+    keyword whole _Complex _keyword
+    keyword whole _Decimal32 _keyword
+    keyword whole _Decimal64 _keyword
+    keyword whole _Decimal128 _keyword
+    keyword whole _Generic _keyword
+    keyword whole _Imaginary _keyword
+    keyword whole _Noreturn _keyword
+    keyword whole _Static_assert _keyword
+    keyword whole _Thread_local _keyword
 
-    keyword '\\\{"abtnvfr\}' brightgreen
-    keyword '\\\{0123\}\{01234567\}\{01234567\}' brightgreen
-    keyword '\\'' brightgreen
-    keyword '\\\\' brightgreen
-    keyword '\\0' brightgreen
-    keyword '\{\s!"#$%&()\*\+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~ ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ\}' brightgreen
+    keyword whole auto _datatype_scope
+    keyword whole extern _datatype_scope
+    keyword whole register _datatype_scope
+    keyword whole static _datatype_scope
 
-# punctuation characters, sorted by ASCII code
-    keyword ! yellow
-    keyword % yellow
-    keyword && yellow
-    keyword & brightmagenta
-    keyword ( brightcyan
-    keyword ) brightcyan
-    keyword \* yellow
-    keyword \+ yellow
-    keyword , brightcyan
-    keyword - yellow
-    keyword / yellow
-    keyword : brightcyan
-    keyword ; brightmagenta
-    keyword < yellow
-    keyword = yellow
-    keyword > yellow
-    keyword ? brightcyan
-    keyword [ brightcyan
-    keyword ] brightcyan
-    keyword ^ brightmagenta
-    keyword { brightcyan
-    keyword || yellow
-    keyword | brightmagenta
-    keyword } brightcyan
-    keyword ~ brightmagenta
+    keyword whole void _datatype_void
+    keyword whole int _datatype
+    keyword whole char _datatype
+    keyword whole float _datatype
+    keyword whole double _datatype
+    keyword whole wchar_t _datatype
+    keyword whole short _datatype_mod
+    keyword whole long _datatype_mod
+    keyword whole signed _datatype_mod
+    keyword whole unsigned _datatype_mod
+    keyword whole wchar_t _datatype
+    keyword whole ... _keyword
 
-context exclusive /\* \*/ brown
+    keyword NULL _const
+    # Since C23:
+    keyword true _const
+    keyword false _const
+    keyword nullptr _const
+
+    keyword linestart \{\s\t\}\[\s\t\]#*\n _preproc_indent
+    keyword whole linestart \[\s\t\]\{ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\}\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\]: _label
+    keyword whole \[\s\t\]default _keyword
+
+    # Comments:
+    keyword /\* _comment
+    keyword \*/ _comment
+    keyword // _comment
+
+    # Characters:
+    keyword '\\\{"abtnvfr\}' _char
+    keyword '\\\{0123\}\{01234567\}\{01234567\}' _char
+    keyword '\\'' _char
+    keyword '\\\\' _char
+    keyword '\\0' _char
+    keyword '\{\s!"#$%&()\*\+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~ ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ\}' _char
+
+    # Punctuation characters, sorted by ASCII code:
+    keyword ! _punctuation
+    keyword % _punctuation
+    keyword && _punctuation
+    # Note: the '&' symbol uses both in the reference/address and in the bitwise operation.
+    keyword & _punct_bitwise
+    keyword ( _punct_bracket
+    keyword ) _punct_bracket
+    keyword \* _punctuation
+    keyword \+ _punctuation
+    keyword , _punct_comma
+    keyword . _punct_field
+    keyword -> _punct_field
+    keyword - _punctuation
+    keyword / _punctuation
+    keyword : _punct_ternary
+    keyword ; _punct_semicolon
+    keyword < _punctuation
+    keyword = _punctuation
+    keyword > _punctuation
+    keyword ? _punct_ternary
+    keyword [ _punct_sqbracket
+    keyword ] _punct_sqbracket
+    keyword ^ _punct_bitwise
+    keyword { _punct_operator
+    keyword || _punctuation
+    keyword | _punct_bitwise
+    keyword } _punct_operator
+    keyword ~ _punct_bitwise
+
+    # Numbers:
+    wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_.
+
+    keyword whole 0x\{0123456789abcdefABCDEF_\}\[0123456789abcdefABCDEF_\] _num_hex
+    keyword whole 0\{01234567_\}\[01234567_\] _num_oct
+    keyword whole 0 _num_integer
+    keyword whole 0\{lu\} _num_integer
+    keyword whole \{123456789_\}\[0123456789_\] _num_integer
+    keyword whole \{123456789_\}\[0123456789_\]\{lu\} _num_integer
+    # Float-point values:
+    keyword whole \[0123456789_\]\.\{0123456789_\}\[0123456789_\] _num_float
+    keyword whole \{0123456789_\}\[0123456789_\]\.\[0123456789_\] _num_float
+    keyword whole \{0123456789_\}\[0123456789_\]\{eE\}\{0123456789_\}\[0123456789_\] _num_float
+    keyword whole \{0123456789_\}\[0123456789_\]\{eE\}\{\-\+\}\{0123456789_\}\[0123456789_\] _num_float
+    keyword whole \{0123456789_\}\[0123456789_\]\.\{0123456789_\}\[0123456789_\]\{eE\}\{0123456789_\}\[0123456789_\] _num_float
+    keyword whole \{0123456789_\}\[0123456789_\]\.\{0123456789_\}\[0123456789_\]\{eE\}\{\-\+\}\{0123456789_\}\[0123456789_\] _num_float
+    # Explicit float (not double):
+    keyword whole \[0123456789_\]\.\{0123456789_\}\[0123456789_\]f _num_float
+    keyword whole \{0123456789_\}\[0123456789_\]\.\[0123456789_\]f _num_float
+    keyword whole \{0123456789_\}\[0123456789_\]\{eE\}\{0123456789_\}\[0123456789_\]f _num_float
+    keyword whole \{0123456789_\}\[0123456789_\]\{eE\}\{\-\+\}\{0123456789_\}\[0123456789_\]f _num_float
+    keyword whole \{0123456789_\}\[0123456789_\]\.\{0123456789_\}\[0123456789_\]\{eE\}\{0123456789_\}\[0123456789_\]f _num_float
+    keyword whole \{0123456789_\}\[0123456789_\]\.\{0123456789_\}\[0123456789_\]\{eE\}\{\-\+\}\{0123456789_\}\[0123456789_\]f _num_float
+
+
+context exclusive /\* \*/ _comment
+    keyword whole BUG 	_comment_word
+    keyword whole FixMe _comment_word
+    keyword whole FIXME _comment_word
+    keyword whole Note 	_comment_word
+    keyword whole NOTE 	_comment_word
+    keyword whole ToDo 	_comment_word
+    keyword whole TODO 	_comment_word
+    keyword !!\[!\] 	_comment_exmark
+    keyword ??\[?\] 	_comment_qnmark
     spellcheck
 
-context exclusive // \n brown
+context exclusive // \n _comment
+    keyword whole BUG:		_comment_word
+    keyword whole FixMe: 	_comment_word
+    keyword whole FIXME: 	_comment_word
+    keyword whole Note: 	_comment_word
+    keyword whole NOTE: 	_comment_word
+    keyword whole ToDo: 	_comment_word
+    keyword whole TODO: 	_comment_word
+    keyword !!\[!\] 		_comment_exmark
+    keyword ??\[?\] 		_comment_qnmark
     spellcheck
 
-context linestart # \n brightred
-    keyword \\\n yellow
-    keyword /\**\*/ brown
-    keyword //*\n brown
-    keyword "+" red
-    keyword <+> red
+context linestart # \n _preproc
+    keyword \\\n _preproc_nl_esc
+    keyword /\**\*/ _comment
+    keyword //*\n _comment
+    keyword "+" _preproc_str
+    keyword <+> _preproc_str
 
-context " " green
+context " " _string
     spellcheck
-    keyword \\" brightgreen
-    keyword %% brightgreen
-    keyword %\[#0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[L\]\{eEfgGoxX\} brightgreen
-    keyword %\[0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[hl\]\{diuxX\} brightgreen
-    keyword %\[hl\]n brightgreen
-    keyword %\[-\]\[0123456789\*\]\[.\]\[0123456789\*\]s brightgreen
-    keyword %[*] brightgreen
-    keyword %c brightgreen
-    keyword %p brightgreen
-    keyword \\\{0123\}\{01234567\}\{01234567\} brightgreen
-    keyword \\\\ brightgreen
-    keyword \\' brightgreen
-    keyword \\\{abtnvfr\} brightgreen
+    keyword \\" _string_escchar
+    keyword %% _string_specsymb
+    keyword %\[#0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[L\]\{eEfgGoxX\} _string_specsymb
+    keyword %\[0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[hl\]\{diuxX\} _string_specsymb
+    keyword %\[hl\]n _string_specsymb
+    keyword %\[-\]\[0123456789\*\]\[.\]\[0123456789\*\]s _string_specsymb
+    keyword %[*] _string_specsymb
+    keyword %c _string_specsymb
+    keyword %p _string_specsymb
+    keyword \\\{0123\}\{01234567\}\{01234567\} _string_specsymb
+    keyword \\\\ _string_escchar
+    keyword \\' _string_escchar
+    keyword \\\{abtnvfr\} _string_escchar
