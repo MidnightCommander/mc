@@ -67,7 +67,6 @@
 #include "src/setup.h"
 #include "src/execute.h"        /* toggle_panels() */
 #include "src/history.h"
-#include "src/usermenu.h"       /* MC_GLOBAL_MENU */
 #include "src/util.h"           /* check_for_default() */
 
 #include "src/viewer/mcviewer.h"
@@ -1149,14 +1148,6 @@ help_cmd (void)
         event_data.node = "[main]";
 
     mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-user_file_menu_cmd (void)
-{
-    (void) user_menu_cmd (NULL, NULL, -1);
 }
 
 /* --------------------------------------------------------------------------------------------- */

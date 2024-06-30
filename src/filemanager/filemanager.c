@@ -61,6 +61,7 @@
 #include "src/setup.h"          /* variables */
 #include "src/learn.h"          /* learn_keys() */
 #include "src/keymap.h"
+#include "src/usermenu.h"       /* user_file_menu_cmd() */
 #include "lib/fileloc.h"        /* MC_FILEPOS_FILE */
 #include "lib/keybind.h"
 #include "lib/event.h"
