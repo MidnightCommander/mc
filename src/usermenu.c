@@ -973,12 +973,15 @@ expand_format (const Widget *edit_widget, char c, gboolean do_quote)
 gboolean
 user_menu_cmd (const Widget *edit_widget, const char *menu_file, int selected_entry)
 {
-    char *p;
-    char *data, **entries;
-    int max_cols, menu_lines, menu_limit;
-    int col, i;
+    char *data, *p;
+    char **entries = NULL;
+    int max_cols = 0;
+    int menu_lines = 0;
+    int menu_limit = 0;
+    int col = 0;
+    int i;
     gboolean accept_entry = TRUE;
-    int selected;
+    int selected = 0;
     gboolean old_patterns;
     gboolean res = FALSE;
     gboolean interactive = TRUE;
@@ -988,10 +991,10 @@ user_menu_cmd (const Widget *edit_widget, const char *menu_file, int selected_en
         message (D_ERROR, MSG_ERROR, "%s", _("Cannot execute commands on non-local filesystems"));
         return FALSE;
     }
-    if (menu_file != NULL)
-        menu = g_strdup (menu_file);
-    else
-        menu = g_strdup (edit_widget != NULL ? EDIT_LOCAL_MENU : MC_LOCAL_MENU);
+
+    menu = g_strdup (menu_file != NULL ? menu_file : edit_widget != NULL ?
+                     EDIT_LOCAL_MENU : MC_LOCAL_MENU);
+
     if (!exist_file (menu) || !menu_file_own (menu))
     {
         if (menu_file != NULL)
@@ -1003,32 +1006,23 @@ user_menu_cmd (const Widget *edit_widget, const char *menu_file, int selected_en
         }
 
         g_free (menu);
-        if (edit_widget != NULL)
-            menu = mc_config_get_full_path (EDIT_HOME_MENU);
-        else
-            menu = mc_config_get_full_path (MC_USERMENU_FILE);
-
+        menu = mc_config_get_full_path (edit_widget != NULL ? EDIT_HOME_MENU : MC_USERMENU_FILE);
         if (!exist_file (menu))
         {
+            const char *global_menu;
+
+            global_menu = edit_widget != NULL ? EDIT_GLOBAL_MENU : MC_GLOBAL_MENU;
+
             g_free (menu);
-            menu =
-                mc_build_filename (mc_config_get_home_dir (),
-                                   edit_widget != NULL ? EDIT_GLOBAL_MENU : MC_GLOBAL_MENU,
-                                   (char *) NULL);
+            menu = mc_build_filename (mc_config_get_home_dir (), global_menu, (char *) NULL);
             if (!exist_file (menu))
             {
                 g_free (menu);
-                menu =
-                    mc_build_filename (mc_global.sysconfig_dir,
-                                       edit_widget != NULL ? EDIT_GLOBAL_MENU : MC_GLOBAL_MENU,
-                                       (char *) NULL);
+                menu = mc_build_filename (mc_global.sysconfig_dir, global_menu, (char *) NULL);
                 if (!exist_file (menu))
                 {
                     g_free (menu);
-                    menu =
-                        mc_build_filename (mc_global.share_data_dir,
-                                           edit_widget != NULL ? EDIT_GLOBAL_MENU : MC_GLOBAL_MENU,
-                                           (char *) NULL);
+                    menu = mc_build_filename (mc_global.share_data_dir, global_menu, (char *) NULL);
                 }
             }
         }
@@ -1041,15 +1035,10 @@ user_menu_cmd (const Widget *edit_widget, const char *menu_file, int selected_en
         return FALSE;
     }
 
-    max_cols = 0;
-    selected = 0;
-    menu_limit = 0;
-    entries = NULL;
+    old_patterns = easy_patterns;
 
     /* Parse the menu file */
-    old_patterns = easy_patterns;
-    p = check_patterns (data);
-    for (menu_lines = col = 0; *p != '\0'; str_next_char (&p))
+    for (p = check_patterns (data); *p != '\0'; str_next_char (&p))
     {
         if (menu_lines >= menu_limit)
         {
@@ -1141,10 +1130,7 @@ user_menu_cmd (const Widget *edit_widget, const char *menu_file, int selected_en
     }
 
     if (menu_lines == 0)
-    {
         message (D_ERROR, MSG_ERROR, _("No suitable entries found in %s"), menu);
-        res = FALSE;
-    }
     else
     {
         if (selected_entry >= 0)
