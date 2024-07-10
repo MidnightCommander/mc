@@ -531,7 +531,10 @@ extfs_open_archive (int fstype, const char *name, struct extfs_super_t **pparc, 
     if (info->need_archive)
     {
         if (mc_stat (name_vpath, &mystat) == -1)
+        {
+            mc_propagate_error (error, 0, "%s", unix_error_string (errno));
             goto ret;
+        }
 
         if (!vfs_file_is_local (name_vpath))
         {
@@ -737,9 +740,14 @@ extfs_open_and_read_archive (int fstype, const char *name, struct extfs_super_t 
         const extfs_plugin_info_t *info;
 
         info = &g_array_index (extfs_plugins, extfs_plugin_info_t, fstype);
-        message (D_ERROR, MSG_ERROR, _("Cannot open %s archive\n%s:\n%s"), info->prefix, name,
-                 error->message);
-        g_error_free (error);
+        if (error == NULL)
+            message (D_ERROR, MSG_ERROR, _("Cannot open %s archive\n%s"), info->prefix, name);
+        else
+        {
+            message (D_ERROR, MSG_ERROR, _("Cannot open %s archive\n%s:\n%s"), info->prefix, name,
+                     error->message);
+            g_error_free (error);
+        }
     }
     else
     {
