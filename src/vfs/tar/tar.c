@@ -773,7 +773,6 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive)
         }
 
         tar_assign_string_dup (&current_stat_info.orig_file_name, file_name);
-        canonicalize_pathname (file_name);
         tar_assign_string (&current_stat_info.file_name, file_name);
 
         g_free (recent_long_link);
@@ -816,6 +815,9 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive)
                 || current_stat_info.dumpdir != NULL)
                 current_stat_info.is_dumpdir = TRUE;
         }
+
+        /* Do this after decoding of all headers occupied with long file/directory name. */
+        canonicalize_pathname (current_stat_info.file_name);
 
         status = tar_insert_entry (me, archive, header, &inode);
         if (status != HEADER_SUCCESS)
