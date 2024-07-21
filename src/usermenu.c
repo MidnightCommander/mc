@@ -974,9 +974,8 @@ gboolean
 user_menu_cmd (const Widget *edit_widget, const char *menu_file, int selected_entry)
 {
     char *data, *p;
-    char **entries = NULL;
+    GPtrArray *entries = NULL;
     int max_cols = 0;
-    int menu_lines = 0;
     int menu_limit = 0;
     int col = 0;
     int i;
@@ -1040,22 +1039,9 @@ user_menu_cmd (const Widget *edit_widget, const char *menu_file, int selected_en
     /* Parse the menu file */
     for (p = check_patterns (data); *p != '\0'; str_next_char (&p))
     {
-        if (menu_lines >= menu_limit)
-        {
-            char **new_entries;
+        int menu_lines = entries == NULL ? 0 : entries->len;
 
-            menu_limit += MAX_ENTRIES;
-            new_entries = g_try_realloc (entries, sizeof (new_entries[0]) * menu_limit);
-            if (new_entries == NULL)
-                break;
-
-            entries = new_entries;
-            new_entries += menu_limit;
-            while (--new_entries >= &entries[menu_lines])
-                *new_entries = NULL;
-        }
-
-        if (col == 0 && entries[menu_lines] == NULL)
+        if (col == 0 && (entries == NULL || menu_lines == entries->len))
             switch (*p)
             {
             case '#':
@@ -1104,7 +1090,11 @@ user_menu_cmd (const Widget *edit_widget, const char *menu_file, int selected_en
                 {
                     /* A menu entry title line */
                     if (accept_entry)
-                        entries[menu_lines] = p;
+                    {
+                        if (entries == NULL)
+                            entries = g_ptr_array_new ();
+                        g_ptr_array_add (entries, p);
+                    }
                     else
                         accept_entry = TRUE;
                 }
@@ -1113,11 +1103,8 @@ user_menu_cmd (const Widget *edit_widget, const char *menu_file, int selected_en
 
         if (*p == '\n')
         {
-            if (entries[menu_lines] != NULL)
-            {
-                menu_lines++;
+            if (entries != NULL && entries->len > menu_lines)
                 accept_entry = TRUE;
-            }
             max_cols = MAX (max_cols, col);
             col = 0;
         }
@@ -1129,7 +1116,7 @@ user_menu_cmd (const Widget *edit_widget, const char *menu_file, int selected_en
         }
     }
 
-    if (menu_lines == 0)
+    if (entries == NULL)
         message (D_ERROR, MSG_ERROR, _("No suitable entries found in %s"), menu);
     else
     {
@@ -1142,12 +1129,12 @@ user_menu_cmd (const Widget *edit_widget, const char *menu_file, int selected_en
             max_cols = MIN (MAX (max_cols, col), MAX_ENTRY_LEN);
 
             /* Create listbox */
-            listbox = listbox_window_new (menu_lines, max_cols + 2, _("User menu"),
+            listbox = listbox_window_new (entries->len, max_cols + 2, _("User menu"),
                                           "[Edit Menu File]");
             /* insert all the items found */
-            for (i = 0; i < menu_lines; i++)
+            for (i = 0; i < entries->len; i++)
             {
-                p = entries[i];
+                p = g_ptr_array_index (entries, i);
                 LISTBOX_APPEND_TEXT (listbox, (unsigned char) p[0],
                                      extract_line (p, p + MAX_ENTRY_LEN, NULL), p, FALSE);
             }
@@ -1156,18 +1143,20 @@ user_menu_cmd (const Widget *edit_widget, const char *menu_file, int selected_en
 
             selected = listbox_run (listbox);
         }
+
         if (selected >= 0)
         {
-            execute_menu_command (edit_widget, entries[selected], interactive);
+            execute_menu_command (edit_widget, g_ptr_array_index (entries, selected), interactive);
             res = TRUE;
         }
+
+        g_ptr_array_free (entries, TRUE);
 
         do_refresh ();
     }
 
     easy_patterns = old_patterns;
     MC_PTR_FREE (menu);
-    g_free (entries);
     g_free (data);
     return res;
 }
