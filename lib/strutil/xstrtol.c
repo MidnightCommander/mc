@@ -20,10 +20,6 @@
 
 #include <config.h>
 
-/* Some pre-ANSI implementations (e.g. SunOS 4)
-   need stderr defined if assertion checking is enabled.  */
-#include <stdio.h>
-
 #include <ctype.h>
 #include <errno.h>
 #include <inttypes.h>
@@ -75,40 +71,58 @@ bkm_scale_by_power (uintmax_t *x, int base, int power)
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
+/* Act like the system's strtol (NPTR, ENDPTR, BASE) except:
+   - The TYPE of the result might be something other than long int.
+   - Return strtol_error, and store any result through an additional
+     TYPE *VAL pointer instead of returning the result.
+   - If TYPE is unsigned, reject leading '-'.
+   - Behavior is undefined if BASE is negative, 1, or greater than 36.
+     (In this respect xstrtol acts like the C standard, not like POSIX.)
+   - Accept an additional char const *VALID_SUFFIXES pointer to a
+     possibly-empty string containing allowed numeric suffixes,
+     which multiply the value.  These include SI suffixes like 'k' and 'M';
+     these normally stand for powers of 1024, but if VALID_SUFFIXES also
+     includes '0' they can be followed by "B" to stand for the usual
+     SI powers of 1000 (or by "iB" to stand for powers of 1024 as before).
+     Other supported suffixes include 'K' for 1024 or 1000, 'b' for 512,
+     'c' for 1, and 'w' for 2.
+   - Suppose that after the initial whitespace, the number is missing
+     but there is a valid suffix.  Then the number is treated as 1.
+*/
 strtol_error_t
-xstrtoumax (const char *s, char **ptr, int base, uintmax_t *val, const char *valid_suffixes)
+xstrtoumax (const char *nptr, char **endptr, int base, uintmax_t *val, const char *valid_suffixes)
 {
     char *t_ptr;
     char **p;
     uintmax_t tmp;
     strtol_error_t err = LONGINT_OK;
 
-    g_assert (0 <= base && base <= 36);
-
-    p = (ptr != NULL ? ptr : &t_ptr);
+    p = endptr != NULL ? endptr : &t_ptr;
 
     {
-        const char *q = s;
+        const char *q = nptr;
         unsigned char ch = *q;
 
         while (isspace (ch))
             ch = *++q;
 
         if (ch == '-')
+        {
+            *p = (char *) nptr;
             return LONGINT_INVALID;
+        }
     }
 
     errno = 0;
-    tmp = strtol (s, p, base);
+    tmp = strtol (nptr, p, base);
 
-    if (*p == s)
+    if (*p == nptr)
     {
         /* If there is no number but there is a valid suffix, assume the
            number is 1.  The string is invalid otherwise.  */
-        if (valid_suffixes != NULL && **p != '\0' && strchr (valid_suffixes, **p) != NULL)
-            tmp = 1;
-        else
+        if (!(valid_suffixes != NULL && *nptr != '\0' && strchr (valid_suffixes, *nptr) != NULL))
             return LONGINT_INVALID;
+        tmp = 1;
     }
     else if (errno != 0)
     {
@@ -128,6 +142,7 @@ xstrtoumax (const char *s, char **ptr, int base, uintmax_t *val, const char *val
 
     if (**p != '\0')
     {
+        int xbase = 1024;
         int suffixes = 1;
         strtol_error_t overflow;
 
@@ -136,8 +151,6 @@ xstrtoumax (const char *s, char **ptr, int base, uintmax_t *val, const char *val
             *val = tmp;
             return err | LONGINT_INVALID_SUFFIX_CHAR;
         }
-
-        base = 1024;
 
         switch (**p)
         {
@@ -173,7 +186,7 @@ xstrtoumax (const char *s, char **ptr, int base, uintmax_t *val, const char *val
 
                 case 'B':
                 case 'D':      /* 'D' is obsolescent */
-                    base = 1000;
+                    xbase = 1000;
                     suffixes++;
                     break;
                 default:
@@ -203,39 +216,39 @@ xstrtoumax (const char *s, char **ptr, int base, uintmax_t *val, const char *val
             break;
 
         case 'E':              /* exa or exbi */
-            overflow = bkm_scale_by_power (&tmp, base, 6);
+            overflow = bkm_scale_by_power (&tmp, xbase, 6);
             break;
 
         case 'G':              /* giga or gibi */
         case 'g':              /* 'g' is undocumented; for compatibility only */
-            overflow = bkm_scale_by_power (&tmp, base, 3);
+            overflow = bkm_scale_by_power (&tmp, xbase, 3);
             break;
 
         case 'k':              /* kilo */
         case 'K':              /* kibi */
-            overflow = bkm_scale_by_power (&tmp, base, 1);
+            overflow = bkm_scale_by_power (&tmp, xbase, 1);
             break;
 
         case 'M':              /* mega or mebi */
         case 'm':              /* 'm' is undocumented; for compatibility only */
-            overflow = bkm_scale_by_power (&tmp, base, 2);
+            overflow = bkm_scale_by_power (&tmp, xbase, 2);
             break;
 
         case 'P':              /* peta or pebi */
-            overflow = bkm_scale_by_power (&tmp, base, 5);
+            overflow = bkm_scale_by_power (&tmp, xbase, 5);
             break;
 
         case 'Q':              /* quetta or 2**100 */
-            overflow = bkm_scale_by_power (&tmp, base, 10);
+            overflow = bkm_scale_by_power (&tmp, xbase, 10);
             break;
 
         case 'R':              /* ronna or 2**90 */
-            overflow = bkm_scale_by_power (&tmp, base, 9);
+            overflow = bkm_scale_by_power (&tmp, xbase, 9);
             break;
 
         case 'T':              /* tera or tebi */
         case 't':              /* 't' is undocumented; for compatibility only */
-            overflow = bkm_scale_by_power (&tmp, base, 4);
+            overflow = bkm_scale_by_power (&tmp, xbase, 4);
             break;
 
         case 'w':
@@ -243,11 +256,11 @@ xstrtoumax (const char *s, char **ptr, int base, uintmax_t *val, const char *val
             break;
 
         case 'Y':              /* yotta or 2**80 */
-            overflow = bkm_scale_by_power (&tmp, base, 8);
+            overflow = bkm_scale_by_power (&tmp, xbase, 8);
             break;
 
         case 'Z':              /* zetta or 2**70 */
-            overflow = bkm_scale_by_power (&tmp, base, 7);
+            overflow = bkm_scale_by_power (&tmp, xbase, 7);
             break;
 
         default:

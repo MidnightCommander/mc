@@ -565,7 +565,7 @@ char *str_replace_all (const char *haystack, const char *needle, const char *rep
 
 GPtrArray *str_tokenize (const char *string);
 
-strtol_error_t xstrtoumax (const char *s, char **ptr, int base, uintmax_t * val,
+strtol_error_t xstrtoumax (const char *nptr, char **endptr, int base, uintmax_t * val,
                            const char *valid_suffixes);
 uintmax_t parse_integer (const char *str, gboolean * invalid);
 
