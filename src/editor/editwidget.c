@@ -6,7 +6,7 @@
 
    Written by:
    Paul Sheer, 1996, 1997
-   Andrew Borodin <aborodin@vmail.ru> 2012-2022
+   Andrew Borodin <aborodin@vmail.ru> 2012-2024
 
    This file is part of the Midnight Commander.
 
@@ -42,7 +42,7 @@
 #include "lib/global.h"
 
 #include "lib/tty/tty.h"        /* LINES, COLS */
-#include "lib/tty/key.h"        /* is_idle() */
+#include "lib/tty/key.h"        /* is_idle(), bracketed_pasting_in_progress */
 #include "lib/tty/color.h"      /* tty_setcolor() */
 #include "lib/skin.h"
 #include "lib/fileloc.h"        /* EDIT_HOME_DIR */
@@ -959,7 +959,7 @@ edit_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data
             cb_ret_t ret = MSG_NOT_HANDLED;
 
             /* The user may override the access-keys for the menu bar. */
-            if (macro_index == -1 && edit_execute_macro (e, parm))
+            if (macro_index == -1 && !bracketed_pasting_in_progress && edit_execute_macro (e, parm))
             {
                 edit_update_screen (e);
                 ret = MSG_HANDLED;
