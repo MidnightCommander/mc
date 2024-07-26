@@ -9,7 +9,7 @@
 .TH MC 1 "%DATE_OF_MAN_PAGE%" "MC Versión %MAN_VERSION%" "GNU Midnight Commander"
 .\"SKIP_SECTION"
 .SH "NOMBRE"
-mc \- entorno visual para sistemas tipo Unix.
+mc \- entorno de consola visual para sistemas tipo Unix.
 .\"SKIP_SECTION"
 .SH "SINOPSIS"
 .B mc
@@ -45,7 +45,7 @@ para más información.
 Usado para especificar un juego de colores diferentes desde la línea de
 órdenes.  El formato de arg está documentado en la sección
 .\"LINK2"
-Colores\&. 
+Colores\&.
 .\"Colors"
 .TP
 .I \-\-configure\-options
@@ -101,48 +101,6 @@ como un alias para el correspondiente guión de shell.
 .I \-s, \-\-slow
 Activa el modo para terminales lentos. En este modo el programa no
 dibuja bordes con líneas de caracteres y desactiva el modo detallado.
-Si no se rellena la sección [Lines] el marco pseudo\-gráfico estará
-formado por espacios; en caso contrario el marco se contruye con
-caracteres de texto según los parámetros siguientes:
-.TP
-.B lefttop
-esquina superior izquierda
-.TP
-.B righttop
-esquina superior derecha
-.TP
-.B centertop
-cruz superior central
-.TP
-.B centerbottom
-cruz inferior central
-.TP
-.B leftbottom
-esquina inferior izquierda
-.TP
-.B rightbottom
-esquina inferior derecha
-.TP
-.B leftmiddle
-cruz central izquierda
-.TP
-.B rightmiddle
-cruz central derecha
-.TP
-.B centermiddle
-cruz central
-.TP
-.B horiz
-línea horizontal por defecto
-.TP
-.B vert
-línea vertical por defecto
-.TP
-.B thinhoriz
-línea horizontal fina
-.TP
-.B thinvert
-línea vertical fina
 .TP
 .I \-S arg, \-\-skin=arg
 Permite elegir un «skin» o apariencia para mc.  La configuración de las
@@ -299,13 +257,14 @@ significa mantener pulsada la tecla de Mayúsculas (o Shift) y teclear
 Todas las líneas de entrada en Midnight Commander usan una aproximación
 a las asociaciones de teclas del editor GNU Emacs.
 .PP
-Se pueden redefinir las asociaciones de las teclas. El resto de los
-comportamientos de las teclas que se describen aquí hacen referencia al
-comportamiento original. Para más información,
+Se pueden redefinir las asociaciones de las teclas.  Para más información,
 véase la sección sobre
 .\"LINK2"
-.IR "redefinición de teclas" .
+.I redefinición de teclas\&.
 .\"Keys_redefine"
+.PP
+El resto de los comportamientos de las teclas que se describen aquí hacen
+referencia al comportamiento predeterminado original.
 .PP
 Hay bastantes secciones que hablan acerca de las teclas. Las siguientes
 son las más importantes.
@@ -822,6 +781,12 @@ Menú de Utilidades
 .\"Command Menu"
 lista las acciones más generales y que no guardan relación con
 la selección actual de archivos.
+.PP
+El
+.\"LINK2"
+Menú de Opciones
+.\"Options Menu"
+lista las acciones que permiten personalizar Midnight Commander.
 .\"NODE "  Left and Right Menus"
 .SH "  Menús Izquierdo y Derecho (Arriba y Abajo)"
 La presentación de los paneles de directorio puede ser cambiada desde los menús
@@ -1010,19 +975,35 @@ activando la opción
 .SH "    Filtro..."
 La utilidad filtro nos permite seleccionar con un patrón (por ejemplo
 .BR "*.tar.gz" )
-los archivos a listar. Indiferentes al patrón de filtro, siempre se
-muestran todos los directorios y enlaces a directorios.
+los archivos a listar.
+La
+.\"LINK2"
+línea de entrada
+.\"Input Line Keys"
+permite introducir el patron de los nombres de archivos/directorios
+a mostrar en el panel.
+.PP
+Cuando la opción
+.I solo archivos
+esté marcada, se mostrarán solo los archivos que encajen con el patrón
+pero todos los directorios. Si no, el filtro se aplicará tanto a archivos
+como a directorios.
+.PP
+Cuando la opción
+.I usando patrones shell
+esté marcada, la expresión actúa como se aplican los comodines con los nombres
+de archivo en la shell (* para cero o más caracteres y ? para un único
+carácter). Si no, la coincidencia de archivos/directorios se realiza de manera
+normal como una expresión regular (véase ed(1)).
+.PP
+Cuando la opción
+.I distinguir May/min
+esté marcada, el filtrado tendrá en cuenta la coincidencia exacta de mayúsculas
+y minúsculas. Si no, darán igual las mayúsculas o minúsculas en los nombres.
 .\"NODE "    Reread"
 .SH "    Releer"
 El comando releer recarga la lista de archivos en el directorio. Esto es
-útil si otros procesos han creado, borrado o modificado archivos. Si
-hemos panelizado los nombres de los archivos en un panel, esto recargará
-los contenidos del directorio y eliminará la información panelizada.
-Véase la sección
-.\"LINK2"
-Búsquedas externas
-.\"External panelize"
-para más información.
+útil si otros procesos han creado, borrado o modificado archivos.
 .\"NODE "  File Menu"
 .SH "  Menú de Archivo"
 Midnight Commander utiliza las teclas de función
@@ -1030,11 +1011,13 @@ Midnight Commander utiliza las teclas de función
 \-
 .I F10
 como atajos de teclado para los comandos que aparecen en el menú de
-Archivo. Las secuencias de escape para las Fkeys son características de
-terminfo desde kf1 hasta kf10. En terminales sin soporte de teclas de
-función, podemos conseguir la misma funcionalidad pulsando la tecla
+Archivo. Las secuencias de escape para las teclas de función son las
+características de terminfo desde kf1 hasta kf10. En terminales sin
+soporte de teclas de función, o que alguna tecla de función este reservada
+para algún otro fin, podemos conseguir la misma funcionalidad
+pulsando la tecla
 .I Esc
-seguido de un número entre 1 y 9 ó 0 (correspondiendo a las teclas
+seguido de un número entre 1 y 9 o 0 (correspondiendo a las teclas
 .I F1
 a
 .I F9
@@ -1059,9 +1042,9 @@ para seguir ese enlace. Las teclas
 .I Espacio
 y
 .I Borrar
-son usadas para mover adelante y atrás en una página de ayuda. Pulsando
+permiten avanzar y retroceder por una página de ayuda. Pulsando
 .I F1
-de nuevo para obtener la lista completa de teclas válidas.
+en cualquier página podemos ver la lista completa de teclas aceptadas.
 .PP
 .B Menú de Usuario (F2)
 .PP
@@ -1069,8 +1052,8 @@ Invoca el
 .\"LINK2"
 Menú de usuario
 .\"Edit Menu File"
-El menú de usuario otorga una manera fácil de tener usuarios con un menú
-y añadir asimismo características extra a Midnight Commander.
+El menú de usuario es una forma fácil de facilitar a los usuarios sus propios
+menús en los que añadir características extra a Midnight Commander.
 .PP
 .B Ver (F3, Mayús\-F3)
 .PP
@@ -1078,9 +1061,9 @@ Visualiza el archivo seleccionado. Por defecto invoca el
 .\"LINK2"
 Visor de Archivos Interno
 .\"Internal File Viewer"
-pero si la opción "Usar visor interno" está desactivada, invoca un visor
+pero si la opción «Usar visor interno» está desactivada, invoca el visor
 de archivos externo especificado por la variable de entorno
-.B VIEWER.
+.BR VIEWER .
 Si
 .B VIEWER
 no está definida se aplica la variable
@@ -1102,9 +1085,10 @@ El comando con los argumentos indicados se ejecuta, y la salida se
 muestra usando el visor de archivos interno. Como argumento se ofrece,
 por defecto, el nombre seleccionado en el panel.
 .PP
-.B Editar (F4)
+.B Editar (F4, Mayús\-F4)
 .PP
-Invoca el editor
+Pulsar F4 para editar el archivo resaltado o Mayús\-F4 para crear y editar
+un nuevo archivo. Invocan el editor
 .BR vi ,
 u otro especificado en la variable de entorno
 .BR EDITOR ,
@@ -1121,18 +1105,18 @@ Véanse los
 parámetros para el editor externo
 .\"Parameters for external editor or viewer"
 para saber cómo proporcionar opciones adicionales en línea de órdenes
-para ediotres externos.
+para editores externos.
 .PP
-.B Copiar (F5)
+.B Copiar (F5, Mayús\-F5)
 .PP
-Sobreimpresiona una ventana de entrada con destino por defecto al directorio del
-panel no seleccionado y copia el archivo actualmente seleccionado (o
-los archivos marcados, si hay al menos uno marcado) al directorio especificado
-por el usuario en la ventana. Space for destination file may be preallocated
-relative to preallocate_space configure option. Durante este proceso, podemos
-pulsar
+Pulsar F5 para abrir un diálogo de entrada para copiar el archivo actualmente
+seleccionado (o los archivos marcados, si hay al menos uno marcado) al directorio
+que se le indique.  Por defecto se mostrará como destino el directorio del
+panel no seleccionado. El espacio para el archivo de destino puede ser preasignado
+si se establece la opción de configuración preallocate_space. Durante el proceso de
+copia podemos pulsar
 .IR Ctrl\-c " o " Esc
-para anular la operación. Para más detalles sobre la máscara de origen
+para abortar la operación. Para más detalles sobre la máscara de origen
 (que será normalmente * o ^\\(.*\\)$ dependiendo
 de la selección de Uso de los patrones del shell) y los posibles comodines en destino
 véase
@@ -1140,14 +1124,18 @@ véase
 Máscara copiar/renombrar\&.
 .\"Mask Copy/Rename"
 .PP
+Mayús\-F5 es similar, pero propone como destino predeterminado el directorio del panel
+seleccionado. Además, opera siempre sobre el archivo sleccionado, ignorando otros
+archivos marcados.
+.PP
 En algunos sistemas, es posible hacer la copia en segundo plano pulsando en el botón
 de segundo plano con el ratón (o pulsando
-.I Alt\-b
-en el cuadro de diálogo). Los
+.I Alt\-o
+en el cuadro de diálogo). En
 .\"LINK2"
-Trabajos en Segundo Plano
+Procesos en Segundo Plano
 .\"Background jobs"
-son utilizados para controlar los procesos en segundo plano.
+se pueden controlar estas tareas.
 .PP
 .B Crear Enlace (Ctrl\-x l)
 .PP
@@ -1155,12 +1143,17 @@ Crea un enlace al archivo actual.
 .PP
 .B Crear Enlace Simbólico (Ctrl\-x s)
 .PP
-Crea un enlace simbólico al archivo actual.  Un enlace es como una copia
-del archivo, salvo que el original y el destino representan un único
-archivo físico, los mismos datos reales. En consecuencia, si editamos
-cualquiera de los archivos, los cambios que realicemos aparecerán en
-todos los archivos. Reciben también el nombre de alias o accesos
-directos.
+Crea un enlace simbólico al archivo actual con su ruta aboluta.
+.PP
+.B Crear Enlace Simbólico Relativo (Ctrl\-x v)
+.PP
+Crea un enlace simbólico al archivo actual con una ruta relativa.
+.PP
+Un enlace es como una copia del archivo, salvo que el original y el
+destino representan un único archivo físico, con los mismos datos
+reales. En consecuencia, si editamos cualquiera de estos archivos, los
+cambios que realicemos aparecerán en ambos. A veces se llaman también
+Reciben también alias o accesos directos.
 .PP
 Un enlace aparece como un archivo real. Después de crearlo, no hay modo
 de decir cuál es el original y cuál el enlace. Si borramos uno de ellos
@@ -1171,16 +1164,33 @@ necesitemos saberlo.
 Un enlace simbólico es, en cambio, solo una referencia al nombre del
 archivo original.  Si se borra el archivo original, el enlace simbólico
 queda sin utilidad. Es bastante fácil advertir que los archivos
-representan la misma imagen. Midnight Commander muestra un símbolo "@"
+representan la misma imagen. Midnight Commander muestra un símbolo «@»
 delante del nombre del archivo si es un enlace simbólico a alguna parte
-(excepto a un directorio, caso en que muestra una tilde (~)). El archivo
+(excepto a un directorio, caso en que muestra una tilde «~»). El archivo
 original al cual apunta el enlace se muestra en la línea de estado si la
 opción
 .I Mostrar Mini\-estado
 está habilitada. Usaremos enlaces simbólicos cuando queramos evitar la
 confusión que pueden causar los enlaces físicos.
 .PP
-.B Renombrar/Mover (F6)
+Al pulsar «Ctrl\-x s» Midnight Commander rellena automáticamente la ruta y nombre
+del archivo original y sugiere el nombre para el enlace. Se puede cambiar
+cualquiera de ellos.
+.PP
+En ocasiones se prefiere cambiar la ruta absoluta del original por una ruta
+relativa. Una ruta absoluta comienza por el directorio raíz:
+.PP
+.I /home/frodo/nuevo/algo \-> /home/frodo/sitio/algo
+.PP
+Una ruta relativa identifica la ubicación del archivo original a partir de la
+ubicación del propio enlace:
+.PP
+.I /home/frodo/nuevo/algo \-> ../sitio/algo
+.PP
+Se puede obligar a Midnight Commander a proponer una ruta relativa pulsando
+«Ctrl\-x v» en vez de «Ctrl\-x s».
+.PP
+.B Renombrar/Mover (F6, Mayús\-F6)
 .PP
 Presenta un diálogo de entrada proponiendo como directorio de destino el
 directorio del panel no activo, y mueve allí, o bien los archivos marcados
@@ -1190,10 +1200,14 @@ el diálogo un destino diferente. Durante el proceso, se puede pulsar
 para abortar la operación. Para más detalles, véase más arriba la
 operación Copiar, dado que la mayoría de los aspectos son similares.
 .PP
+Mayús\-F6 es similar, pero propone como destino predeterminado el directorio del panel
+seleccionado. Además, opera siempre sobre el archivo sleccionado, ignorando otros
+archivos marcados.
+.PP
 En algunos sistemas, es posible hacer la copia en segundo plano pulsando
 con el ratón en el susodicho botón de segundo plano (o pulsando
 .I Alt\-o
-en el cuadro de diálogo). Con
+en el cuadro de diálogo). En
 .\"LINK2"
 Procesos en 2º plano
 .\"Background jobs"
@@ -1242,7 +1256,7 @@ Utilizado para deseleccionar un grupo de archivos. Es la operación antagonista 
 .PP
 .B Salir (F10, Mayús\-F10)
 .PP
-Finaliza Midnight Commander. Mayús\-F10 es usado cuando queremos
+Finaliza Midnight Commander. Mayús\-F10 se usa cuando queremos
 salir y estamos utilizando la envoltura del shell. Mayús\-F10 no nos llevará
 al último directorio visitado con Midnight Commander, en vez de eso
 nos llevará al directorio donde fue invocado Midnight Commander.
@@ -1290,7 +1304,7 @@ contenidos o las fechas, solo chequea los tamaños de los archivos.
 .PP
 El comando Histórico de comandos muestra una lista
 de los comandos escritos. El comando seleccionado es copiado a la línea de órdenes.
-El histórico de comandos puede ser accedido también tecleando Alt\-p ó Alt\-n.
+El histórico de comandos puede ser accedido también tecleando Alt\-p o Alt\-n.
 .PP
 .\"LINK2"
 Favoritos (Ctrl\-\\)
@@ -1612,7 +1626,7 @@ Sub\-condición es una de las siguientes:
 Patrón es un patrón normal del shell o una expresión regular, de acuerdo
 con la opción de patrones del shell. Podemos cambiar el valor global de
 la opción de los patrones del shell escribiendo "shell_patterns=x" en la primera línea
-del archivo de menú (donde "x" es 0 ó 1).
+del archivo de menú (donde «x» es 0 o 1).
 .PP
 Tipo es uno o más de los siguientes caracteres:
 .PP
@@ -2764,7 +2778,7 @@ hexadecimal. Para alternar entre ambos modos, se emplea la tecla F4.
 El visor intenta usar el mejor método disponible en el sistema, según
 el tipo de archivo, para mostrar información. Los archivos comprimidos
 se descomprimen automáticamente si los programas correspondientes (GNU
-gzip ó bzip2) están instalados en el sistema. El propio visor es capaz
+gzip o bzip2) están instalados en el sistema. El propio visor es capaz
 de interpretar ciertas secuencias de caracteres que se emplean para
 activar los atributos de negrita y subrayado, mejorando la presentación
 de los archivos.
