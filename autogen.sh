@@ -2,7 +2,9 @@
 
 set -e
 
-srcdir="$(cd "$(dirname "$0")" && pwd)"
+# Use backticks to support ksh on Solaris
+basedir=`dirname "$0"`
+srcdir=`cd "$basedir" && pwd`
 
 cd "$srcdir"
 
