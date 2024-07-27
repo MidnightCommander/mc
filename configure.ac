@@ -36,6 +36,10 @@ dnl ############################################################################
 dnl Check for compiler
 dnl ############################################################################
 
+dnl This should be checked before toolchain macros, otherwise they will remember
+dnl that ar cannot be found and linking via libtool will fail at a later stage
+AC_CHECK_TOOLS([AR], [ar gar])
+
 AC_PROG_CC
 AM_PROG_CC_C_O
 
@@ -211,8 +215,7 @@ dnl ############################################################################
 dnl Check for other tools
 dnl ############################################################################
 
-AC_CHECK_TOOL(AR, ar, ar)
-AC_CHECK_TOOL(INDENT, gindent, indent)
+AC_CHECK_TOOLS([INDENT], [gindent indent])
 mc_UNIT_TESTS
 
 
