@@ -1176,7 +1176,7 @@ file_progress_show_target (file_op_context_t *ctx, const vfs_path_t *vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-file_progress_show_deleting (file_op_context_t *ctx, const char *s, size_t *count)
+file_progress_show_deleting (file_op_context_t *ctx, const vfs_path_t *vpath, size_t *count)
 {
     static gint64 timestamp = 0;
     /* update with 25 FPS rate */
@@ -1192,12 +1192,14 @@ file_progress_show_deleting (file_op_context_t *ctx, const char *s, size_t *coun
     if (ret)
     {
         file_op_context_ui_t *ui;
+        const char *s;
 
         ui = ctx->ui;
 
         if (ui->src_file_label != NULL)
             label_set_text (ui->src_file_label, _("Deleting"));
 
+        s = vfs_path_as_str (vpath);
         label_set_text (ui->src_file, truncFileStringSecure (ui->op_dlg, s));
     }
 
