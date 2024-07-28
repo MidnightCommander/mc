@@ -12,7 +12,7 @@
 /*** declarations of public functions ************************************************************/
 
 int edit_store_macro_cmd (WEdit * edit);
-gboolean edit_load_macro_cmd (WEdit * edit);
+MC_MOCKABLE gboolean edit_load_macro_cmd (WEdit * edit);
 void edit_delete_macro_cmd (WEdit * edit);
 gboolean edit_repeat_macro_cmd (WEdit * edit);
 gboolean edit_execute_macro (WEdit * edit, int hotkey);
