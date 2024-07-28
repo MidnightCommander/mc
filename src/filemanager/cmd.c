@@ -210,7 +210,7 @@ compare_files (const vfs_path_t *vpath1, const vfs_path_t *vpath2, off_t size)
 #else
             /* Don't have mmap() :( Even more ugly :) */
             char buf1[BUFSIZ], buf2[BUFSIZ];
-            int n1, n2;
+            ssize_t n1, n2;
 
             rotate_dash (TRUE);
             do
