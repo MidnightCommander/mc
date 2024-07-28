@@ -67,6 +67,7 @@
 #include "lib/strutil.h"
 #include "lib/util.h"
 #include "lib/vfs/vfs.h"
+#include "lib/vfs/utilvfs.h"
 #include "lib/widget.h"
 
 #include "src/setup.h"
@@ -928,20 +929,6 @@ check_same_file (const char *a, const struct stat *ast, const char *b, const str
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
-static void
-get_times (const struct stat *sb, mc_timesbuf_t *times)
-{
-#ifdef HAVE_UTIMENSAT
-    (*times)[0] = sb->st_atim;
-    (*times)[1] = sb->st_mtim;
-#else
-    times->actime = sb->st_atime;
-    times->modtime = sb->st_mtime;
-#endif
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /* {{{ Query/status report routines */
 
 static FileProgressStatus
@@ -1297,7 +1284,7 @@ move_file_file (const WPanel *panel, file_op_total_context_t *tctx, file_op_cont
                 {
                     mc_timesbuf_t times;
 
-                    get_times (&src_stat, &times);
+                    vfs_get_timesbuf_from_stat (&src_stat, &times);
                     mc_utime (dst_vpath, &times);
                 }
                 goto retry_src_remove;
@@ -2375,7 +2362,7 @@ copy_file_file (file_op_total_context_t *tctx, file_op_context_t *ctx,
         }
     }
 
-    get_times (&src_stat, &times);
+    vfs_get_timesbuf_from_stat (&src_stat, &times);
 
     if (!ctx->do_append)
     {
@@ -3232,7 +3219,7 @@ copy_dir_dir (file_op_total_context_t *tctx, file_op_context_t *ctx, const char 
         if (attrs_ok)
             mc_fsetflags (dst_vpath, attrs);
 
-        get_times (&src_stat, &times);
+        vfs_get_timesbuf_from_stat (&src_stat, &times);
         mc_utime (dst_vpath, &times);
     }
     else

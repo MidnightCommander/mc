@@ -860,12 +860,10 @@ shell_parse_ls (char *buffer, struct vfs_s_entry *ent)
 
     case 'd':
         vfs_split_text (buffer);
+        vfs_zero_stat_times (&ST);
         if (vfs_parse_filedate (0, &ST.st_ctime) == 0)
             break;
         ST.st_atime = ST.st_mtime = ST.st_ctime;
-#ifdef HAVE_STRUCT_STAT_ST_MTIM
-        ST.st_atim.tv_nsec = ST.st_mtim.tv_nsec = ST.st_ctim.tv_nsec = 0;
-#endif
         break;
 
     case 'D':
@@ -877,10 +875,8 @@ shell_parse_ls (char *buffer, struct vfs_s_entry *ent)
             if (sscanf (buffer, "%d %d %d %d %d %d", &tim.tm_year, &tim.tm_mon,
                         &tim.tm_mday, &tim.tm_hour, &tim.tm_min, &tim.tm_sec) != 6)
                 break;
+            vfs_zero_stat_times (&ST);
             ST.st_atime = ST.st_mtime = ST.st_ctime = mktime (&tim);
-#ifdef HAVE_STRUCT_STAT_ST_MTIM
-            ST.st_atim.tv_nsec = ST.st_mtim.tv_nsec = ST.st_ctim.tv_nsec = 0;
-#endif
         }
         break;
 
@@ -1451,41 +1447,12 @@ shell_chown (const vfs_path_t *vpath, uid_t owner, gid_t group)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
-shell_get_atime (mc_timesbuf_t *times, time_t *sec, long *nsec)
-{
-#ifdef HAVE_UTIMENSAT
-    *sec = (*times)[0].tv_sec;
-    *nsec = (*times)[0].tv_nsec;
-#else
-    *sec = times->actime;
-    *nsec = 0;
-#endif
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-shell_get_mtime (mc_timesbuf_t *times, time_t *sec, long *nsec)
-{
-#ifdef HAVE_UTIMENSAT
-    *sec = (*times)[1].tv_sec;
-    *nsec = (*times)[1].tv_nsec;
-#else
-    *sec = times->modtime;
-    *nsec = 0;
-#endif
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 static int
 shell_utime (const vfs_path_t *vpath, mc_timesbuf_t *times)
 {
     char utcatime[16], utcmtime[16];
     char utcatime_w_nsec[30], utcmtime_w_nsec[30];
-    time_t atime, mtime;
-    long atime_nsec, mtime_nsec;
+    mc_timespec_t atime, mtime;
     struct tm *gmt;
     const char *crpath;
     char *rpath;
@@ -1499,31 +1466,32 @@ shell_utime (const vfs_path_t *vpath, mc_timesbuf_t *times)
 
     rpath = str_shell_escape (crpath);
 
-    shell_get_atime (times, &atime, &atime_nsec);
-    gmt = gmtime (&atime);
+    vfs_get_timespecs_from_timesbuf (times, &atime, &mtime);
+
+    gmt = gmtime (&atime.tv_sec);
     g_snprintf (utcatime, sizeof (utcatime), "%04d%02d%02d%02d%02d.%02d",
                 gmt->tm_year + 1900, gmt->tm_mon + 1, gmt->tm_mday,
                 gmt->tm_hour, gmt->tm_min, gmt->tm_sec);
     g_snprintf (utcatime_w_nsec, sizeof (utcatime_w_nsec), "%04d-%02d-%02d %02d:%02d:%02d.%09ld",
                 gmt->tm_year + 1900, gmt->tm_mon + 1, gmt->tm_mday,
-                gmt->tm_hour, gmt->tm_min, gmt->tm_sec, atime_nsec);
+                gmt->tm_hour, gmt->tm_min, gmt->tm_sec, atime.tv_nsec);
 
-    shell_get_mtime (times, &mtime, &mtime_nsec);
-    gmt = gmtime (&mtime);
+    gmt = gmtime (&mtime.tv_sec);
     g_snprintf (utcmtime, sizeof (utcmtime), "%04d%02d%02d%02d%02d.%02d",
                 gmt->tm_year + 1900, gmt->tm_mon + 1, gmt->tm_mday,
                 gmt->tm_hour, gmt->tm_min, gmt->tm_sec);
     g_snprintf (utcmtime_w_nsec, sizeof (utcmtime_w_nsec), "%04d-%02d-%02d %02d:%02d:%02d.%09ld",
                 gmt->tm_year + 1900, gmt->tm_mon + 1, gmt->tm_mday,
-                gmt->tm_hour, gmt->tm_min, gmt->tm_sec, mtime_nsec);
+                gmt->tm_hour, gmt->tm_min, gmt->tm_sec, mtime.tv_nsec);
 
     me = VFS_CLASS (vfs_path_get_last_path_vfs (vpath));
 
     ret = shell_send_command (me, super, OPT_FLUSH, SHELL_SUPER (super)->scr_utime,
-                              "SHELL_FILENAME=%s SHELL_FILEATIME=%ld SHELL_FILEMTIME=%ld "
+                              "SHELL_FILENAME=%s SHELL_FILEATIME=%ju SHELL_FILEMTIME=%ju "
                               "SHELL_TOUCHATIME=%s SHELL_TOUCHMTIME=%s SHELL_TOUCHATIME_W_NSEC=\"%s\" "
-                              "SHELL_TOUCHMTIME_W_NSEC=\"%s\";\n", rpath, (long) atime,
-                              (long) mtime, utcatime, utcmtime, utcatime_w_nsec, utcmtime_w_nsec);
+                              "SHELL_TOUCHMTIME_W_NSEC=\"%s\";\n", rpath, (uintmax_t) atime.tv_sec,
+                              (uintmax_t) mtime.tv_sec, utcatime, utcmtime, utcatime_w_nsec,
+                              utcmtime_w_nsec);
 
     g_free (rpath);
 

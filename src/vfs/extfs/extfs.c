@@ -1230,15 +1230,22 @@ extfs_closedir (void *data)
 static void
 extfs_stat_move (struct stat *buf, const struct vfs_s_inode *inode)
 {
+    const time_t atime = inode->st.st_atime;
+    const time_t mtime = inode->st.st_mtime;
+    const time_t ctime = inode->st.st_ctime;
+
     *buf = inode->st;
 
 #ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
     buf->st_blksize = RECORDSIZE;
 #endif
+
     vfs_adjust_stat (buf);
-#ifdef HAVE_STRUCT_STAT_ST_MTIM
-    buf->st_atim.tv_nsec = buf->st_mtim.tv_nsec = buf->st_ctim.tv_nsec = 0;
-#endif
+    vfs_zero_stat_times (buf);
+
+    buf->st_atime = atime;
+    buf->st_mtime = mtime;
+    buf->st_ctime = ctime;
 }
 
 /* --------------------------------------------------------------------------------------------- */

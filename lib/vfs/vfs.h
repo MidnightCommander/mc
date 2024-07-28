@@ -95,6 +95,12 @@ typedef struct timespec mc_timesbuf_t[2];
 typedef struct utimbuf mc_timesbuf_t;
 #endif
 
+typedef struct mc_timespec
+{
+    time_t tv_sec;
+    long tv_nsec;
+} mc_timespec_t;
+
 /*** enums ***************************************************************************************/
 
 typedef enum

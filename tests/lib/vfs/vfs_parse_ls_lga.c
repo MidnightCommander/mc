@@ -106,10 +106,7 @@ message (int flags, const char *title, const char *text, ...)
 static void
 fill_stat_struct (struct stat *etalon_stat, int iterator)
 {
-
-#ifdef HAVE_STRUCT_STAT_ST_MTIM
-    etalon_stat->st_atim.tv_nsec = etalon_stat->st_mtim.tv_nsec = etalon_stat->st_ctim.tv_nsec = 0;
-#endif
+    vfs_zero_stat_times (etalon_stat);
 
     switch (iterator)
     {
