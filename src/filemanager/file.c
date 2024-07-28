@@ -2274,8 +2274,12 @@ copy_file_file (file_op_total_context_t *tctx, file_op_context_t *ctx,
     vfs_path_t *src_vpath = NULL, *dst_vpath = NULL;
     char *buf = NULL;
 
-    /* FIXME: We should not be using global variables! */
-    ctx->do_reget = 0;
+    /* Keep the non-default value applied in chain of calls:
+       move_file_file() -> file_progress_real_query_replace()
+       move_file_file() -> copy_file_file() */
+    if (ctx->do_reget < 0)
+        ctx->do_reget = 0;
+
     return_status = FILE_RETRY;
 
     dst_vpath = vfs_path_from_str (dst_path);

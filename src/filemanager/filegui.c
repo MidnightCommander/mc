@@ -569,7 +569,7 @@ overwrite_query_dialog (file_op_context_t *ctx, enum OperationMode mode)
 
     /* will "Append" and "Reget" buttons be in the dialog? */
     do_append = !S_ISDIR (ui->dst_stat->st_mode);
-    do_reget = do_append && ctx->operation == OP_COPY && ui->dst_stat->st_size != 0
+    do_reget = do_append && ui->dst_stat->st_size != 0
         && ui->src_stat->st_size > ui->dst_stat->st_size;
 
     NEW_LABEL (8, dlg_widgets[8].text);

@@ -74,7 +74,7 @@ file_op_context_new (FileOperation op)
     ctx->operation = op;
     ctx->eta_secs = 0.0;
     ctx->progress_bytes = 0;
-    ctx->do_reget = 1;
+    ctx->do_reget = -1;
     ctx->stat_func = mc_lstat;
     ctx->preserve = TRUE;
     ctx->preserve_uidgid = (geteuid () == 0);
