@@ -7,8 +7,6 @@ AM_CPPFLAGS = \
 	-DTEST_SHARE_DIR=\"$(abs_srcdir)\" \
 	@CHECK_CFLAGS@
 
-AM_LDFLAGS = @TESTS_LDFLAGS@
-
 LIBS = @CHECK_LIBS@ \
 	$(top_builddir)/src/libinternal.la \
 	$(top_builddir)/lib/libmc.la

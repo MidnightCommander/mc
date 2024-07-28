@@ -8,6 +8,13 @@
 #define MC_GLOBAL_H
 
 #include <glib.h>
+
+#if defined(HAVE_FUNC_ATTRIBUTE_WEAK) && defined(HAVE_TESTS)
+#define MC_MOCKABLE __attribute__((weak))
+#else
+#define MC_MOCKABLE
+#endif
+
 #include "glibcompat.h"
 
 #include "unixcompat.h"

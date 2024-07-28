@@ -36,7 +36,7 @@ void dialog_switch_shutdown (void);
 void do_refresh (void);
 
 void repaint_screen (void);
-void mc_refresh (void);
+MC_MOCKABLE void mc_refresh (void);
 void dialog_change_screen_size (void);
 
 /*** inline functions ****************************************************************************/

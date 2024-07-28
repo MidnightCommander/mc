@@ -53,8 +53,8 @@ gchar **mc_config_get_keys (const mc_config_t * mc_config, const gchar * group, 
 
 gchar *mc_config_get_string (mc_config_t * mc_config, const gchar * group, const gchar * param,
                              const gchar * def);
-gchar *mc_config_get_string_raw (mc_config_t * mc_config, const gchar * group, const gchar * param,
-                                 const gchar * def);
+MC_MOCKABLE gchar *mc_config_get_string_raw (mc_config_t * mc_config, const gchar * group,
+                                             const gchar * param, const gchar * def);
 gboolean mc_config_get_bool (mc_config_t * mc_config, const gchar * group, const gchar * param,
                              gboolean def);
 int mc_config_get_int (mc_config_t * mc_config, const gchar * group, const gchar * param, int def);
@@ -96,7 +96,7 @@ void mc_config_deinit_config_paths (void);
 
 const char *mc_config_get_data_path (void);
 const char *mc_config_get_cache_path (void);
-const char *mc_config_get_home_dir (void);
+MC_MOCKABLE const char *mc_config_get_home_dir (void);
 const char *mc_config_get_path (void);
 char *mc_config_get_full_path (const char *config_name);
 vfs_path_t *mc_config_get_full_vpath (const char *config_name);

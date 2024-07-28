@@ -32,6 +32,7 @@
 #include <string.h>             /* memset() */
 
 #include "lib/global.h"
+#include "lib/util.h"
 
 #include "netutil.h"
 
@@ -75,7 +76,7 @@ tcp_init (void)
     memset (&sa, 0, sizeof (sa));
     sa.sa_handler = sig_pipe;
     sigemptyset (&sa.sa_mask);
-    sigaction (SIGPIPE, &sa, NULL);
+    my_sigaction (SIGPIPE, &sa, NULL);
 
     initialized = TRUE;
 }

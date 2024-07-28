@@ -208,7 +208,7 @@ init_sigchld (void)
     sigchld_action.sa_flags = SA_RESTART;
 #endif /* !SA_RESTART */
 
-    if (sigaction (SIGCHLD, &sigchld_action, NULL) == -1)
+    if (my_sigaction (SIGCHLD, &sigchld_action, NULL) == -1)
     {
 #ifdef ENABLE_SUBSHELL
         /*
@@ -499,7 +499,7 @@ main (int argc, char *argv[])
     if (mc_global.tty.alternate_plus_minus)
         numeric_keypad_mode ();
 
-    (void) signal (SIGCHLD, SIG_DFL);   /* Disable the SIGCHLD handler */
+    (void) my_signal (SIGCHLD, SIG_DFL);        /* Disable the SIGCHLD handler */
 
     if (mc_global.tty.console_flag != '\0')
         handle_console (CONSOLE_DONE);

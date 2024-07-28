@@ -12,7 +12,7 @@
 /*** declarations of public functions ************************************************************/
 
 /* Public function for unit tests */
-char *edit_completion_dialog_show (const WEdit * edit, GQueue * compl, int max_width);
+MC_MOCKABLE char *edit_completion_dialog_show (const WEdit * edit, GQueue * compl, int max_width);
 
 void edit_complete_word_cmd (WEdit * edit);
 

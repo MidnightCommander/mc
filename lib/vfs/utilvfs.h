@@ -43,7 +43,7 @@ vfs_path_element_t *vfs_url_split (const char *path, int default_port, vfs_url_f
 int vfs_split_text (char *p);
 
 int vfs_mkstemps (vfs_path_t ** pname_vpath, const char *prefix, const char *basename);
-void vfs_die (const char *msg);
+MC_MOCKABLE void vfs_die (const char *msg);
 char *vfs_get_password (const char *msg);
 
 char *vfs_get_local_username (void);
