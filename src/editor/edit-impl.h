@@ -228,9 +228,9 @@ void edit_paste_from_history (WEdit * edit);
 
 void edit_set_filename (WEdit * edit, const vfs_path_t * name_vpath);
 
-void edit_load_syntax (WEdit * edit, GPtrArray * pnames, const char *type);
+MC_MOCKABLE void edit_load_syntax (WEdit * edit, GPtrArray * pnames, const char *type);
 void edit_free_syntax_rules (WEdit * edit);
-int edit_get_syntax_color (WEdit * edit, off_t byte_index);
+MC_MOCKABLE int edit_get_syntax_color (WEdit * edit, off_t byte_index);
 void edit_syntax_dialog (WEdit * edit);
 
 void book_mark_insert (WEdit * edit, long line, int c);

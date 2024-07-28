@@ -125,7 +125,7 @@ main (void)
     tc_core = tcase_create ("Core");
 
     /* writable directory where check creates temporary files */
-    cwd = g_get_current_dir ();
+    cwd = my_get_current_dir ();
     g_setenv ("TEMP", cwd, TRUE);
     g_free (cwd);
 

@@ -41,22 +41,11 @@ AC_DEFUN([mc_UNIT_TESTS],[
         AC_SUBST(CHECK_LIBS)
     fi
     AM_CONDITIONAL(HAVE_TESTS, test x"$have_check" = "xyes")
+    AS_IF([test x"$have_check" = "xyes"], [AC_DEFINE([HAVE_TESTS], [1], [Build with unit tests.])])
 
     dnl sighandler_t is GNU extension
     dnl AC_USE_SYSTEM_EXTENSIONS is required
     AC_CHECK_TYPES([sighandler_t], [], [], [
         #include <signal.h>
     ])
-
-    # on cygwin, the linker does not accept the "-z" option
-    case $host_os in
-        cygwin*)
-            TESTS_LDFLAGS="-Wl,--allow-multiple-definition"
-            ;;
-        *)
-            TESTS_LDFLAGS="-Wl,-z,muldefs"
-            ;;
-    esac
-
-    AC_SUBST(TESTS_LDFLAGS)
 ])

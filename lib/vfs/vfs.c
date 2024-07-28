@@ -77,10 +77,10 @@ extern vfs_class *current_vfs;
 
 /*** global variables ****************************************************************************/
 
-struct vfs_dirent *mc_readdir_result = NULL;
-GPtrArray *vfs__classes_list = NULL;
-GString *vfs_str_buffer = NULL;
-vfs_class *current_vfs = NULL;
+MC_MOCKABLE struct vfs_dirent *mc_readdir_result = NULL;
+MC_MOCKABLE GPtrArray *vfs__classes_list = NULL;
+MC_MOCKABLE GString *vfs_str_buffer = NULL;
+MC_MOCKABLE vfs_class *current_vfs = NULL;
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -638,7 +638,7 @@ vfs_setup_cwd (void)
 
     if (vfs_get_raw_current_dir () == NULL)
     {
-        current_dir = g_get_current_dir ();
+        current_dir = my_get_current_dir ();
         vfs_set_raw_current_dir (vfs_path_from_str (current_dir));
         g_free (current_dir);
 
@@ -657,7 +657,7 @@ vfs_setup_cwd (void)
     me = vfs_path_get_last_path_vfs (vfs_get_raw_current_dir ());
     if ((me->flags & VFSF_LOCAL) != 0)
     {
-        current_dir = g_get_current_dir ();
+        current_dir = my_get_current_dir ();
         tmp_vpath = vfs_path_from_str (current_dir);
         g_free (current_dir);
 

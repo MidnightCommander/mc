@@ -87,7 +87,8 @@ typedef struct
 
 /*** forward declarations (file scope functions) *************************************************/
 
-GPtrArray *try_complete (char *text, int *lc_start, int *lc_end, input_complete_t flags);
+MC_MOCKABLE GPtrArray *try_complete (char *text, int *lc_start, int *lc_end,
+                                     input_complete_t flags);
 void complete_engine_fill_completions (WInput * in);
 
 /*** file scope variables ************************************************************************/
