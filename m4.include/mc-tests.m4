@@ -48,15 +48,7 @@ AC_DEFUN([mc_UNIT_TESTS],[
         #include <signal.h>
     ])
 
-    # on cygwin, the linker does not accept the "-z" option
-    case $host_os in
-        cygwin*)
-            TESTS_LDFLAGS="-Wl,--allow-multiple-definition"
-            ;;
-        *)
-            TESTS_LDFLAGS="-Wl,-z,muldefs"
-            ;;
-    esac
+    # TODO: check weak attribute?
 
     AC_SUBST(TESTS_LDFLAGS)
 ])

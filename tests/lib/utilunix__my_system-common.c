@@ -40,6 +40,10 @@ static sigset_t *sigemptyset_set__captured;
 /* @ThenReturnValue */
 static int sigemptyset__return_value = 0;
 
+#ifdef sigemptyset
+#undef sigemptyset
+#endif
+
 /* @Mock */
 int
 sigemptyset (sigset_t *set)

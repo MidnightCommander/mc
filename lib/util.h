@@ -212,7 +212,7 @@ void mc_pclose (mc_pipe_t * p, GError ** error);
 
 GString *mc_pstream_get_string (mc_pipe_stream_t * ps);
 
-void my_exit (int status);
+void my_exit (int status) __attribute__((weak));
 void save_stop_handler (void);
 
 /* Tilde expansion */
@@ -249,7 +249,7 @@ gboolean mc_util_make_backup_if_possible (const char *file_name, const char *bac
 gboolean mc_util_restore_from_backup_if_possible (const char *file_name, const char *backup_suffix);
 gboolean mc_util_unlink_backup_if_possible (const char *file_name, const char *backup_suffix);
 
-char *guess_message_value (void);
+char *guess_message_value (void) __attribute__((weak));
 
 char *mc_build_filename (const char *first_element, ...);
 char *mc_build_filenamev (const char *first_element, va_list args);

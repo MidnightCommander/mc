@@ -12,7 +12,8 @@
 /*** declarations of public functions ************************************************************/
 
 /* Public function for unit tests */
-char *edit_completion_dialog_show (const WEdit * edit, GQueue * compl, int max_width);
+char *edit_completion_dialog_show (const WEdit * edit, GQueue * compl, int max_width)
+    __attribute__((weak));
 
 void edit_complete_word_cmd (WEdit * edit);
 
