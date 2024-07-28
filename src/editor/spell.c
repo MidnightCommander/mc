@@ -169,14 +169,10 @@ spell_decode_lang (const char *code)
 static gboolean
 spell_available (void)
 {
-    gchar *spell_module_fname;
-
     if (spell_module != NULL)
         return TRUE;
 
-    spell_module_fname = g_module_build_path (NULL, "libaspell");
-    spell_module = g_module_open (spell_module_fname, G_MODULE_BIND_LAZY);
-    g_free (spell_module_fname);
+    spell_module = g_module_open ("libaspell", G_MODULE_BIND_LAZY);
 
     if (spell_module != NULL
         && ASPELL_FUNCTION_AVAILABLE (new_aspell_config)
