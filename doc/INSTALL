@@ -103,12 +103,6 @@ incomplete, use `configure --help' to get the full list):
      building binaries for distribution purposes and may not work on
      some operating systems.
 
-`--with-mmap', `--without-mmap'
-     Force using or not using the mmap function.  It is currently used
-     in the internal viewer.  `--with-mmap' may be useful on some
-     versions of AIX where the `configure' script decides that mmap is
-     broken, but it's actually suitable for the internal viewer.
-
 `--with-subshell[=optional]', `--without-subshell' 
      The subshell support is by default turned on, you can disable
      this by using the --without-subshell option.  If you pass the

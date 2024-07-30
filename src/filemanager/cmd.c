@@ -91,6 +91,7 @@
 #include "boxes.h"              /* cd_box() */
 #include "dir.h"
 #include "cd.h"
+#include "ioblksize.h"          /* IO_BUFSIZE */
 
 #include "cmd.h"                /* Our definitions */
 
@@ -189,27 +190,7 @@ compare_files (const vfs_path_t *vpath1, const vfs_path_t *vpath2, off_t size)
         file2 = open (vfs_path_as_str (vpath2), O_RDONLY);
         if (file2 >= 0)
         {
-#ifdef HAVE_MMAP
-            char *data1;
-
-            /* Ugly if jungle */
-            data1 = mmap (0, size, PROT_READ, MAP_FILE | MAP_PRIVATE, file1, 0);
-            if (data1 != (char *) -1)
-            {
-                char *data2;
-
-                data2 = mmap (0, size, PROT_READ, MAP_FILE | MAP_PRIVATE, file2, 0);
-                if (data2 != (char *) -1)
-                {
-                    rotate_dash (TRUE);
-                    result = memcmp (data1, data2, size);
-                    munmap (data2, size);
-                }
-                munmap (data1, size);
-            }
-#else
-            /* Don't have mmap() :( Even more ugly :) */
-            char buf1[BUFSIZ], buf2[BUFSIZ];
+            char buf1[IO_BUFSIZE], buf2[IO_BUFSIZE];
             ssize_t n1, n2;
 
             rotate_dash (TRUE);
@@ -222,12 +203,12 @@ compare_files (const vfs_path_t *vpath1, const vfs_path_t *vpath2, off_t size)
             }
             while (n1 == n2 && n1 == sizeof (buf1) && memcmp (buf1, buf2, sizeof (buf1)) == 0);
             result = (n1 != n2) || memcmp (buf1, buf2, n1);
-#endif /* !HAVE_MMAP */
+            rotate_dash (FALSE);
+
             close (file2);
         }
         close (file1);
     }
-    rotate_dash (FALSE);
 
     return result;
 }
