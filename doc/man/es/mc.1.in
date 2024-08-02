@@ -1283,8 +1283,7 @@ El comando Compara directorios (Ctrl\-x d) compara los paneles de directorio
 uno con el otro. Podemos usar el comando Copiar (F5) para hacer ambos
 paneles idénticos. Hay tres métodos de comparación. El método rápido
 compara solo el tamaño de archivo y la fecha. El método completo realiza
-una comparación completa octeto a octeto. El método completo no está disponible si
-la máquina no soporta la llamada de sistema mmap(2). El método de comparación
+una comparación completa octeto a octeto. El método de comparación
 de solo tamaño solo compara los tamaños de archivo y no chequea los
 contenidos o las fechas, solo chequea los tamaños de los archivos.
 .PP
@@ -2779,13 +2778,6 @@ pueden entremezclar como en:
 .fi
 .PP
 Nótese que 012 es un número octal y \-1 se convierte en 0xFF.
-.PP
-Algunos detalles internos del visualizador: En sistemas con acceso a la llamada
-del sistema mmap(2), el programa mapea el archivo en vez de cargarlo;
-si el sistema no provee de la llamada al sistema mmap(2) o el archivo
-realiza una acción que necesita de un filtro, entonces el visor usará
-sus cachés de crecimiento, cargando solo las partes del archivo
-a las que actualmente estamos accediendo (esto incluye a los archivos comprimidos).
 .PP
 He aquí una lista de las acciones asociadas a cada tecla que
 Midnight Commander gestiona en el visor interno de archivos.

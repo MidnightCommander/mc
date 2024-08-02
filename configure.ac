@@ -320,19 +320,6 @@ dnl replacing lstat with statlstat on sco makes it more portable between
 dnl sco clones
 AC_CHECK_FUNCS(statlstat)
 
-dnl Overriding mmap support.  This has to be before AC_FUNC_MMAP is used.
-dnl We use only part of the functionality of mmap, so on AIX,
-dnl it's possible to use mmap, even if it doesn't pass the autoconf test.
-AC_ARG_WITH([mmap],
-	AS_HELP_STRING([--with-mmap], [Use the mmap call @<:@yes if found@:>@]))
-if test x$with_mmap != xno; then
-    if test x$with_mmap = x; then
-	AC_FUNC_MMAP
-    else
-	AC_DEFINE(HAVE_MMAP, 1)
-    fi
-fi
-
 mc_GET_FS_INFO
 
 

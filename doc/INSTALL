@@ -1,13 +1,5 @@
-This file contains:
-
-- Build requirements for GNU Midnight Commander
-- Installation instructions for GNU Midnight Commander
-- Where to get more information on GNU Midnight Commander
-- Notes about GNU Midnight Commander installation
-- Obtaining related software
-
 Build requirements for GNU Midnight Commander
-----------------------------------------------------
+---------------------------------------------
 
 - glibc
 - gcc
@@ -26,6 +18,17 @@ Build requirements for GNU Midnight Commander
 Installation instructions for GNU Midnight Commander
 ----------------------------------------------------
 
+Midnight Commander is written in a portable manner and uses GNU Autoconf
+for configuration, so it is expected to compile without changes on many
+other operating systems.
+
+If you are installing from an official tarball, it already contains
+pre-bootstrapped autotools build system (specifically the `configure'
+script). In the case that you are installing from a version control
+checkout, you need to bootstrap the build system yourself first using
+the `autogen.sh' script. Note that to do this you would need to install
+the autotools suite first and not only direct mc build dependencies.
+
 The `configure' shell script attempts to guess correct values for
 various system-dependent variables used during compilation, and creates
 the makefiles.  It also creates a file `config.status' that you can run
@@ -36,14 +39,7 @@ To compile this package:
 1.  Configure the package for your system.
 
 Normally, you just `cd' to the directory containing the package's source
-code and type `./configure'.  If you're using `csh' on an old version of
-SystemV, you might need to type `sh configure' instead to prevent `csh'
-from trying to execute `configure' itself.  Under AIX, you may need to
-use ksh instead of sh.
-
-Running `configure' takes a while.  While it is running, it prints some
-messages that tell what it is doing.  If you don't want to see any
-messages, run `configure' with the `--quiet' option.
+code and type `./configure'.
 
 To compile the package in a different directory than the one containing
 the source code, you must use a version of `make' supporting the `VPATH'
@@ -57,13 +53,6 @@ By default, `make install' will install the package's files in
 `/usr/local/bin', `/usr/local/man', etc.  You can specify an
 installation prefix other than `/usr/local' by giving `configure' the
 option `--prefix=PATH'.
-
-You can specify separate installation prefixes for architecture specific
-files and architecture-independent files.  If you give `configure' the
-option `--exec-prefix=PATH', the package will use PATH as the prefix for
-installing binary programs and libraries.  Data files and documentation
-will still use the regular prefix.  Normally, all files are installed
-using the same prefix.
 
 If compiled on GNU/Linux, Midnight Commander detects if you have the gpm
 library installed.  If you installed the gpm mouse library in a
@@ -102,12 +91,6 @@ incomplete, use `configure --help' to get the full list):
      Force linking against glib statically.  This option is intended for
      building binaries for distribution purposes and may not work on
      some operating systems.
-
-`--with-mmap', `--without-mmap'
-     Force using or not using the mmap function.  It is currently used
-     in the internal viewer.  `--with-mmap' may be useful on some
-     versions of AIX where the `configure' script decides that mmap is
-     broken, but it's actually suitable for the internal viewer.
 
 `--with-subshell[=optional]', `--without-subshell' 
      The subshell support is by default turned on, you can disable
@@ -220,9 +203,6 @@ ncurses):
      Set path to ncurses library [default=/usr/lib]; make sense
      only if --with-screen=ncurses is used.
 
-Compiler options:
-- - - - - - - - -
-
 On systems that require unusual options for compilation or linking that
 the package's `configure' script does not know about, you can give
 `configure' initial values for variables by placing them in the command
@@ -230,131 +210,16 @@ line:
 
 ./configure CC='gcc -traditional' LIBS=-lposix
 
-Here are the variables that you might want to override when running
-`configure'.
-
- - Variable: CC
-     C compiler program.  The default is `gcc' if found, otherwise `cc'.
-
- - Variable: CFLAGS
-     The default flags used to build the program.
-
- - Variable: INSTALL
-     Program to use to install files.  The default is `install' if you
-     have it, `cp' otherwise.
-
-For these variables, any value given in the command line is added to the
-value that `configure' decides to use:
-
- - Variable: LIBS
-     Libraries to link with, in the form `-lfoo -lbar...'.
-
- - Variable: LDFLAGS
-     Linker flags, e.g. -L<lib dir> if you have libraries in a
-     nonstandard directory <lib dir>
-
- - Variable: CPPFLAGS
-     C/C++ preprocessor flags, e.g. -I<include dir> if you have
-     headers in a nonstandard directory <include dir>
-
-If you need to do unusual things to compile the package, we encourage
-you to figure out how `configure' could check whether to do them, and
-mail diffs or instructions to the address given in the README so we can
-include them in the next release.
-
 2.  Type `make' to compile the package.
 
 3.  Type `make install' to install programs, data files, and the
-documentation.  On GNU/Linux the console screen saver is installed as
-well.
+documentation.
 
-4.  You can remove the program binaries and object files from the source
-directory by typing `make clean'.  If you want to clean the source tree
-completely, so that it contains only those files that should be packaged
-in the archive, issue `make distclean'.  If you've run configure in a
-different directory than the source tree, distclean won't remove your
-*.o and linked programs in that directory.
-
-5.  GNU Midnight Commander allows you to stay in the last current
-directory after exiting MC.  This is done with a shell function, the man
-page has more information about this.
-
-The file `configure.in' is used to create `configure' by a program
-called `autoconf'.  You only need it if you want to regenerate
-`configure' using a newer version of `autoconf'.
-
-
-Where to get more information on GNU Midnight Commander
--------------------------------------------------------
-
-There are two mailing lists for the program:
-
-mc@lists.midnight-commander.org:        Discussion on GNU Midnight Commander file manager.
-mc-devel@lists.midnight-commander.org:  Discussion between the developers of the program.
-
-To subscribe to the mailing lists, visit their respective pages:
-
-https://lists.midnight-commander.org/mailman/listinfo/mc/
-https://lists.midnight-commander.org/mailman/listinfo/mc-devel/
-
-
-Notes about GNU Midnight Commander installation
------------------------------------------------
-
-GNU Midnight Commander has been run in the following configurations:
-
-i386-*-linux
-sparc-*-linux
-alpha-*-linux
-powerpc-*-linux
-mips-dec-{open,net}bsd1.0
-mips-sgi-irix5.2
-mips-sgi-irix5.3
-powerpc-ibm-aix5.3.0.0 (IBM XL C, IBM XL C/C++)
-sparc-sun-sunos4.1
-sparc-sun-netbsd1.0
-sparc-sun-solaris2.3
-hppa-hp-hpux9
-hppa-hp-hpux7
-m68k-apple-aux
-mc88110-aviion-dgux5.4
-i386-*-bsdi2
-i386-*-freebsd4.3
-i386-*-openbsd2.9
-
-Midnight Commander is written in a portable manner and uses GNU Autoconf
-for configuration, so it is expected to compile without changes on many
-other operating systems.
-
-You will need an ANSI C Compiler (such as GCC) and glib library to
-compile the source.  GNU Midnight Commander now comes with the S-Lang
-screen manager, a fast screen manager, but you may want to use the
-already installed S-Lang or ncurses library.
-
-If you insist on using ncurses, it's recommended to use ncurses 4.1 and
-above, since the older versions don't support resizing in the xterm
-window.
-
-GNU Midnight Commander comes with the mouse support on xterms and in the
-Linux console.  In order to take advantage of the mouse support on the
-Linux console you will need the gpm mouse server (see the section
-"Obtaining related software" in this file).
-
-Once you get gpm, compile it and install it, then you will have to
-specify the `--with-gpm-mouse' flag to the configure program if you
-installed it in a non-standard directory.  If you installed the gpm
-package under /usr or /usr/local, you don't need to specify this flag;
-configure will find gpm for you.  The support for mice on xterms is
-always compiled in.
-
-We are working on further enhancements to the program, but we're not
-sure which ones must go first.  If you would like to point us in the
-Right Direction we will be glad to hear from you.
-
-If you happen to find a feature that doesn't do what you expect, please
-write to mc@lists.midnight-commander.org telling as much as you can
-about the problem you're experiencing.  Please don't send personal
-messages to the maintainers.
+If you're on a GNU/Linux system, this will install the `cons.saver'
+utility, which allows the Midnight Commander to save and restore the
+console contents.  This utility can be installed setuid root, but it's
+only needed on systems where users cannot access /dev/vcsaN, where N is
+the virtual console number, on which the uses is logged on.
 
 
 Obtaining related software
@@ -366,7 +231,7 @@ glib
 The only "hard" dependency of GNU Midnight Commander is glib.  You can
 get glib from
 
-ftp://ftp.gnome.org/pub/gnome/sources/glib/
+* https://download.gnome.org/sources/glib/
 
 Minimal version of glib: 2.32.0
 Recommended version: 2.32.x and higher.
@@ -376,11 +241,9 @@ Newer versions may work, but haven't been tested.
 PCRE
 ----
 
-Both PCRE and PCRE2 libraries are supported.
+Both PCRE and PCRE2 libraries are supported. You can get PCRE from
 
-You can get PCRE from
-
-http://www.pcre.org/
+* https://www.pcre.org
 
 Terminal database
 -----------------
@@ -402,53 +265,32 @@ Screen libraries
 GNU Midnight Commander can use the included version of S-Lang, but you
 can get the latest version here:
 
-http://www.s-lang.org/
+* https://www.jedsoft.org/slang/
 
 Alternatively, you can use ncurses:
 
-http://www.gnu.org/software/ncurses/ncurses.html
+* https://invisible-island.net/ncurses/announce.html
 
 Mouse support
 -------------
 
 The general purpose mouse (gpm) daemon is available from
 
-http://unix.schottelius.org/gpm/
+* https://www.nico.schottelius.org/software/gpm/
 
-Compiler
---------
+Porting
+-------
 
-If your C compiler is not powerful enough to compile GNU Midnight
-Commander, you should report is as a bug to the GNU Midnight Commander
-team.  Sometimes there is no solution than upgrading to a modern and
-free compiler - GCC (Compiler Collection):
+Some less widespread UNIX systems like AIX or Solaris often come with their own
+implementations of make and relevant parts of the toolchain necessary to build
+mc. While autotools abstract a lot of platform specific issues, you might
+encounter unresolved problems while using the native toolchain.
 
-http://gcc.gnu.org/
+Often, GNU tools are shipped as a part of an additional software collection
+(/opt/freeware on AIX, or OpenCSW on Solaris). These tools are usually prefixed
+with the letter `g', e.g. `gmake' instead of `make'. If you are not really
+interested in building with the native toolchain, try to override tools causing
+problems like this:
 
-AIX
----
-Currently you can not use gcc 4.2.4 (and probably other versions) on
-AIX to compile the S-Lang version. Please use IBM XL C or IBM XL C/C++
-instead.
-
-If you compile a ncurses version you need to set TERM=dtterm to get
-working color support. Furthermore it is important to specify the
---with-ncurses-includes/--with-ncurses-lib parameters because otherwise
-mc will pick up term.h from AIX which does not work with the ncurses
-library.
-
-The AIX S-Lang build was tested with S-Lang 2.0.7. Later versions may
-also work but are not tested yet.
-
-Here is an example for S-Lang, it is assumed that the S-Lang library
-is installed under /user/local and that you also want want to install
-to /usr/local:
-
-  export CC=cc_r
-  export CXX=xlC_r
-  export CONFIG_SHELL=/usr/bin/bash (if installed)
-  export SHELL=/usr/bin/bash        (if installed)
-
-  ./configure \
-     --prefix=/usr/local \
-     --with-screen=slang
+./configure MAKE=gmake AR=gar
+gmake

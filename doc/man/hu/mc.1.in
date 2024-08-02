@@ -1067,8 +1067,7 @@ A Könyvtár összehasonlítás (C\-x d) parancs összehasonlítja a könyvtár
 paneleket egymással. Ilyenkor használható a Másol (F5) parancs a panelek
 azonossá tételére. Ennek három formája van. A gyors változat csak a fájlok
 méretét, és dátumát vizsgálja meg. Az alapos változat teljesen, byte\-ról
-byte\-ra végzi el a vizsgálatot. Az alapos változat nem használható,
-ha a gép nem támogatja az mmap(2) rendszerhívást. A 'Csak fájlhossz'
+byte\-ra végzi el a vizsgálatot. A 'Csak fájlhossz'
 szerinti változat csak a fájlméretet hasonlítja össze és nem ellenőrzi
 le a dátumukat.
 .PP
@@ -2296,14 +2295,6 @@ hexadecimális értékek használatát.
 Használhatsz kevert hivatkozást is ezen értékeknek megfelelően: "Szöveg"
 0xFE 0xBB "további szöveg". A szöveg értékek közötti részt és a
 hivatkozás szövegét nem veszi figyelembe.
-.PP
-Néhány belső részlet a fájlnézőről: Azokon a rendszereken, ahol létezik
-az mmap(2) rendszerhívás, a fájl programtérképe olvasódik be ehelyett;
-ha a rendszer nem tartalmazza az mmap(2) rendszerhívást, vagy a fájl
-tartalmaz olyan műveletet, mint ami megfelel a szűrőnek, a fájlnéző egy
-növekvő buffert fog használni, amely csak azokat a részeit tartalmazza a
-fájlnak, amelyekhez jelenleg hozzáférsz (ez tömörített fájlokra is
-vonatkozik).
 .PP
 Ez a lista tartalmazza azokat a gombokat, amelyekhez művelet kapcsolódik
 a Midnight Commander belső fájlnézőjében.

@@ -92,7 +92,6 @@ mkdir -p build-all-disabled && pushd $_
     --disable-nls \
     --disable-vfs \
     --disable-background \
-    --without-mmap \
     --without-x \
     --without-gpm-mouse \
     --without-internal-edit \

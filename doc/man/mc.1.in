@@ -1241,8 +1241,7 @@ The "Compare directories" command compares the directory
 panels with each other. You can then use the Copy (F5) command to make
 the panels identical. There are three compare methods. The quick method
 compares only file size and file date. The thorough method makes a
-full byte\-by\-byte compare. The thorough method is not available if the
-machine does not support the mmap(2) system call.  The size\-only
+full byte\-by\-byte compare. The size\-only
 compare method just compares the file sizes and does not check the
 contents or the date times, it just checks the file size.
 .PP

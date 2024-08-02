@@ -1090,8 +1090,7 @@ pannelli directory uno con l'altro. E' poi possibile usare il comando
 Copia (F5) per rendere i pannelli identici. Ci sono tre metodi di
 confronto. Il metodo veloce confronta solo l'ampiezza e la data del
 file. Il metodo completo fa un confronto byte\-per\-byte. Il metodo
-completo non è disponibile se la macchina non supporta la chiamata di
-sistema mmap(2). Il metodo solo dimensione confronta solo l'ampiezza dei
+solo dimensione confronta solo l'ampiezza dei
 file e non controlla il contenuto né la data del file.
 .PP
 Il comando cronologia comandi mostra un'elenco dei comandi battuti. Il
@@ -2335,14 +2334,6 @@ mescolare testo protetto con costanti come nell'esempio:
 .fi
 .PP
 Notare che 012 è un numero ottale. \-1 viene convertito in 0xFF.
-.PP
-Alcuni dettagli interni circa il visualizzatore: su sistemi che
-forniscono la chiamata di sistema mmap(2), il programma mappa il
-file invece di caricarlo; se il sistema non fornisce la chiamata di
-sistema mmap(2) o il file corrisponde ad un'azione che richiede
-un filtro, allora il visualizzatore userà i buffer di accrescimanto
-(growing), caricando perciò solo le parti del file su cui vi si accede
-(inclusi i file compressi).
 .PP
 Ecco un'elenco di azioni associate ad ogni tasto che il Midnight Commander
 gestisce nel visualizzatore di file interno.

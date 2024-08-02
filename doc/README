@@ -1,12 +1,12 @@
 Contents
 --------
 
-Introduction
-Dependencies
-Features
-Mini-documentation
-Where to get more information
-Reporting problems
+* Introduction
+* Dependencies
+* Features
+* Mini-documentation
+* Where to get more information
+* Reporting problems
 
 
 Introduction
@@ -141,15 +141,19 @@ Where to get more information
 
 There is a webpage for GNU Midnight Commander at
 
-https://www.midnight-commander.org/
+* https://www.midnight-commander.org
 
 This page also has current information about mailing lists and some
 useful advices how to report bugs.
 
 You can download the latest version of GNU Midnight Commander from
 
-https://www.midnight-commander.org/downloads/
+* https://www.midnight-commander.org/downloads/
 
+The Midnight Commander distribution is placed at:
+
+* http://ftp.osuosl.org/pub/midnightcommander/
+* ftp://ftp.osuosl.org/pub/midnightcommander/
 
 Reporting problems
 ------------------
@@ -167,8 +171,6 @@ There are two mailing lists:
 
 Use mc-devel@ if you are prepared for a more technical discussion
 with the developers of the package, otherwise use mc@.
-
-Please don't sent HTML e-mail to either of those mailing lists.
 
 Include the output of "mc --version", the operating system and the
 distribution (if applicable) you are using, the compiler and the
