@@ -1176,7 +1176,7 @@ init_subshell_precmd (char *precmd, size_t buff_size)
                     "functions -e fish_right_prompt;"
                     "functions -c fish_prompt fish_prompt_mc; end;"
                     "function fish_prompt;"
-                    "echo \"$PWD\">&%d; fish_prompt_mc; kill -STOP %%self; end\n",
+                    "echo \"$PWD\">&%d; fish_prompt_mc; kill -STOP $fish_pid; end\n",
                     command_buffer_pipe[WRITE], command_buffer_pipe[WRITE], subshell_pipe[WRITE]);
         break;
 
