@@ -4,7 +4,7 @@
 
 Hint: Completion: use M-Tab (or Esc+Tab). Type it twice to get a list.
 
-Hint: Use M-p and M-n to access the command history.
+ヒント：M-pとM-nを使用すると、コマンド履歴にアクセスできます。
 
 Hint: Need to quote a character? Use Control-q and the character.
 
@@ -34,7 +34,7 @@ Hint: The file listing format can be customized; do "man mc" for details.
 
 Hint: %D/%T expands to the tagged files in the opposite directory.
 
-Hint: Want your plain shell? Press C-o, and get back to MC with C-o again.
+ヒント：プレーンなシェルが必要な場合はC-oを押してください。もう一度押すことでMCに戻ることが出来ます。
 
 Hint: Setting the CDPATH variable can save you keystrokes in cd commands.
 
