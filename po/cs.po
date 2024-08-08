@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-06-02 12:47+0300\n"
+"POT-Creation-Date: 2024-08-08 09:51+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>, 2017-2023\n"
 "Language-Team: Czech (http://app.transifex.com/mc/mc/language/cs/)\n"
@@ -569,11 +569,11 @@ msgstr "Získává se soubor"
 msgid "Changes to file lost"
 msgstr "Změny souboru byly ztraceny"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create temporary directory %s: %s.\n"
 "Temporary files will not be created\n"
-msgstr "Nedaří se vytvořit dočasnou složku %s: %s\n"
+msgstr ""
 
 msgid "Press any key to continue..."
 msgstr "Pokračujte stiskem libovolné klávesy…"
@@ -793,9 +793,8 @@ msgstr "Nastavení terminálu"
 msgid "Arguments parse error!"
 msgstr "Chyba vyhodnocování argumentů!"
 
-#, fuzzy
 msgid "MC is built without builtin editor."
-msgstr "S vestavěným editorem"
+msgstr ""
 
 msgid "No arguments given to the viewer."
 msgstr "Prohlížeči nebyly zadány žádné parametry"
@@ -2733,21 +2732,17 @@ msgstr ""
 "Na zdrojovém souboru „%s“ nelze provést stat\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
-"Na zdrojovém souboru „%s“ nelze provést stat\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
-"Nelze provést fstat cílového souboru „%s“\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2860,13 +2855,11 @@ msgstr ""
 "Nelze zavřít cílový soubor „%s“\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
-"Nelze provést fstat cílového souboru „%s“\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2876,13 +2869,11 @@ msgstr ""
 "Na zdrojovém adresáři „%s“ nelze provést stat\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
-"Na zdrojovém adresáři „%s“ nelze provést stat\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -3981,13 +3972,11 @@ msgstr "Shell je stále aktivní, přesto ukončit?"
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Varování: Nedaří se přepnout do složky %s.\n"
 
-#, fuzzy
 msgid "With builtin editor and aspell support"
-msgstr "S vestavěným editorem a podporou Aspell"
+msgstr ""
 
-#, fuzzy
 msgid "With builtin editor"
-msgstr "S vestavěným editorem"
+msgstr ""
 
 msgid "With optional subshell support"
 msgstr "S volitelnou podporou podřízeného shellu"
@@ -4169,6 +4158,15 @@ msgstr ""
 
 msgid "Inconsistent archive"
 msgstr "Poškozený archiv"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot open %s archive\n"
+"%s"
+msgstr ""
+"Nepodařilo se otevřít %s archiv\n"
+"%s:\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -4745,23 +4743,3 @@ msgstr "Pokračovat od začátku?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nedaří získat místní kopii souboru /ftp://some.host/editme.txt"
-
-#, c-format
-#~ msgid "%s is not a directory\n"
-#~ msgstr "%s není složka\n"
-
-#, c-format
-#~ msgid "Directory %s is not owned by you\n"
-#~ msgstr "Nejste vlastníkem složky %s\n"
-
-#, c-format
-#~ msgid "Cannot set correct permissions for directory %s\n"
-#~ msgstr "Nedaří se nastavit správná práva pro složku %s\n"
-
-#, c-format
-#~ msgid "Temporary files will be created in %s\n"
-#~ msgstr "Dočasné soubory budou vytvářeny v %s\n"
-
-#, c-format
-#~ msgid "Temporary files will not be created\n"
-#~ msgstr "Dočasné soubory nebudou vytvářeny\n"

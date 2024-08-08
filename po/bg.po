@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-06-02 12:47+0300\n"
+"POT-Creation-Date: 2024-08-08 09:51+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Alexander Shopov <ash@kambanaria.org>, 2022\n"
 "Language-Team: Bulgarian (http://app.transifex.com/mc/mc/language/bg/)\n"
@@ -565,11 +565,11 @@ msgstr "Получавам файл"
 msgid "Changes to file lost"
 msgstr "Промените във файла изгубени"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create temporary directory %s: %s.\n"
 "Temporary files will not be created\n"
-msgstr "Не може да се създаде временна директория %s: %s\n"
+msgstr ""
 
 msgid "Press any key to continue..."
 msgstr "Натиснете клавиш, за да продължите…"
@@ -791,9 +791,8 @@ msgstr "Настройки на терминала"
 msgid "Arguments parse error!"
 msgstr "Грешка при обработка на аргументите"
 
-#, fuzzy
 msgid "MC is built without builtin editor."
-msgstr "С поддръжка на вградения редактор"
+msgstr ""
 
 msgid "No arguments given to the viewer."
 msgstr "Няма предоставени аргументи към визуализатора."
@@ -2713,21 +2712,17 @@ msgstr ""
 "Не може да се изпълни stat върху изходния файл „%s“\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
-"Не може да се изпълни stat върху изходния файл „%s“\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
-"Не може да се изпълни fstat върху целевия файл „%s“\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2840,13 +2835,11 @@ msgstr ""
 "Не може да се затвори целевият файл „%s“\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
-"Не може да се изпълни fstat върху целевия файл „%s“\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2856,13 +2849,11 @@ msgstr ""
 "Не може да се изпълне stat върху изходната директория „%s“\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
-"Не може да се изпълне stat върху изходната директория „%s“\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -3952,13 +3943,11 @@ msgstr "Обвивката е още активна. Да се напусне л
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Внимание: Не може да се влезе в %s.\n"
 
-#, fuzzy
 msgid "With builtin editor and aspell support"
-msgstr "С поддръжка на вградения редактор и aspell"
+msgstr ""
 
-#, fuzzy
 msgid "With builtin editor"
-msgstr "С поддръжка на вградения редактор"
+msgstr ""
 
 msgid "With optional subshell support"
 msgstr "С поддръжка на подобвивка (при възможност)"
@@ -4140,6 +4129,15 @@ msgstr ""
 
 msgid "Inconsistent archive"
 msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+"Cannot open %s archive\n"
+"%s"
+msgstr ""
+"Архивът %s не може да се отвори\n"
+"%s:\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -4713,23 +4711,3 @@ msgstr "Да се продължи ли от началото?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не може да се изтегли локално копие на „/ftp://some.host/editme.txt“"
-
-#, c-format
-#~ msgid "%s is not a directory\n"
-#~ msgstr "%s не е директория\n"
-
-#, c-format
-#~ msgid "Directory %s is not owned by you\n"
-#~ msgstr "Директорията %s не се притежава от вас\n"
-
-#, c-format
-#~ msgid "Cannot set correct permissions for directory %s\n"
-#~ msgstr "Не може да се зададат коректни права за директория %s\n"
-
-#, c-format
-#~ msgid "Temporary files will be created in %s\n"
-#~ msgstr "Временни файлове ще бъдат създадени в %s\n"
-
-#, c-format
-#~ msgid "Temporary files will not be created\n"
-#~ msgstr "Временни файлове няма да бъдат създадени\n"

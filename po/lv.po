@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-06-02 12:47+0300\n"
+"POT-Creation-Date: 2024-08-08 09:51+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
 "Language-Team: Latvian (http://app.transifex.com/mc/mc/language/lv/)\n"
@@ -2575,21 +2575,17 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
-"Nevar ierakstīt failā %s:\n"
-"%s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
-"Nevar ierakstīt failā %s:\n"
-"%s\n"
 
 #, c-format
 msgid ""
@@ -2678,13 +2674,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
-"Nevar ierakstīt failā %s:\n"
-"%s\n"
 
 #, c-format
 msgid ""
@@ -3942,6 +3936,14 @@ msgstr ""
 
 msgid "Inconsistent archive"
 msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+"Cannot open %s archive\n"
+"%s"
+msgstr ""
+"Nevar atvērt tar arhīvu\n"
+"%s"
 
 #, c-format
 msgid ""

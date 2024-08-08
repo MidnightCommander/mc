@@ -11,6 +11,7 @@
 # Johannes Hellmuth <johannes.hellmuth@gmail.com>, 2020
 # Karsten <waldstadt@web.de>, 2016
 # Larson März <larson@protonmail.ch>, 2016
+# Michael John <amstelchen@gmail.com>, 2024
 # Mr.Update, 2019-2020,2023
 # Slow Rider, 2015,2018
 # Slava Zanko <slavazanko@gmail.com>, 2011
@@ -21,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-06-02 12:47+0300\n"
+"POT-Creation-Date: 2024-08-08 09:51+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Ettore Atalan <atalanttore@googlemail.com>, 2015-2024\n"
 "Language-Team: German (http://app.transifex.com/mc/mc/language/de/)\n"
@@ -578,11 +579,11 @@ msgstr "Datei empfangen"
 msgid "Changes to file lost"
 msgstr "Änderungen an Datei verlorengegangen"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create temporary directory %s: %s.\n"
 "Temporary files will not be created\n"
-msgstr "Kann temporäres Verzeichnis \"%s\" nicht erstellen: %s\n"
+msgstr ""
 
 msgid "Press any key to continue..."
 msgstr "Drücken Sie eine Taste zum Fortfahren..."
@@ -805,9 +806,8 @@ msgstr "Terminal-Optionen"
 msgid "Arguments parse error!"
 msgstr "Fehler beim Analysieren der Argumente!"
 
-#, fuzzy
 msgid "MC is built without builtin editor."
-msgstr "Mit eingebautem Editor"
+msgstr "MC ist ohne eingebauten Editor gebaut."
 
 msgid "No arguments given to the viewer."
 msgstr "Keine Argumente an den Viewer übergeben."
@@ -2744,21 +2744,17 @@ msgstr ""
 "Kann Quelldatei \"%s\" nicht untersuchen\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
-"Kann Quelldatei \"%s\" nicht untersuchen\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
-"Kann Zieldatei \"%s\" nicht untersuchen\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2871,13 +2867,11 @@ msgstr ""
 "Kann Zieldatei \"%s\" nicht schließen\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
-"Kann Zieldatei \"%s\" nicht untersuchen\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2887,13 +2881,11 @@ msgstr ""
 "Kann Quellverzeichnis \"%s\" nicht untersuchen\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
-"Kann Quellverzeichnis \"%s\" nicht untersuchen\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -3982,11 +3974,9 @@ msgstr "Die Shell ist immer noch aktiv. Trotzdem beenden?"
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Warnung: Kann nicht in %s wechseln.\n"
 
-#, fuzzy
 msgid "With builtin editor and aspell support"
 msgstr "Mit eingebautem Editor und Aspell-Unterstützung"
 
-#, fuzzy
 msgid "With builtin editor"
 msgstr "Mit eingebautem Editor"
 
@@ -4173,6 +4163,15 @@ msgstr ""
 msgid "Inconsistent archive"
 msgstr "Inkonsistentes Archiv"
 
+#, fuzzy, c-format
+msgid ""
+"Cannot open %s archive\n"
+"%s"
+msgstr ""
+"Kann Archiv %s nicht öffnen\n"
+"%s:\n"
+"%s"
+
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
@@ -4209,6 +4208,8 @@ msgid ""
 "EXTFS virtual file system:\n"
 "cannot build command"
 msgstr ""
+"EXTFS virtuelles Dateisystem:\n"
+"Befehl kann nicht erstellt werden"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
@@ -4497,7 +4498,7 @@ msgid "shell: Disconnecting from %s"
 msgstr "shell: Trennen der Verbindung von %s"
 
 msgid "shell: Waiting for initial line..."
-msgstr ""
+msgstr "shell: Warte auf erste Zeile..."
 
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr ""
@@ -4512,10 +4513,10 @@ msgid "shell: Sending password..."
 msgstr "Shell: Passwort wird gesendet..."
 
 msgid "shell: Sending initial line..."
-msgstr ""
+msgstr "shell: Sende erste Zeile..."
 
 msgid "shell: Getting host info..."
-msgstr ""
+msgstr "shell: Hole Hostinformation..."
 
 #, c-format
 msgid "shell: Reading directory %s..."
@@ -4523,10 +4524,10 @@ msgstr "Shell: Verzeichnis %s wird gelesen..."
 
 #, c-format
 msgid "shell: store %s: sending command..."
-msgstr ""
+msgstr "shell: Speichere %s: Sende Befehl..."
 
 msgid "shell: Local read failed, sending zeros"
-msgstr ""
+msgstr "shell: Lokales Lesen fehlgeschlagen, sende zeros"
 
 msgid "shell: storing file"
 msgstr "shell: Datei speichern"
@@ -4756,23 +4757,3 @@ msgstr "Am Anfang fortsetzen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kann lokale Kopie von /ftp://some.host/editme.txt nicht erstellen"
-
-#, c-format
-#~ msgid "%s is not a directory\n"
-#~ msgstr "%s ist kein Verzeichnis\n"
-
-#, c-format
-#~ msgid "Directory %s is not owned by you\n"
-#~ msgstr "Das Verzeichnis \"%s\" gehört Ihnen nicht\n"
-
-#, c-format
-#~ msgid "Cannot set correct permissions for directory %s\n"
-#~ msgstr "Kann Berechtigungen für das Verzeichnis \"%s\" nicht setzen\n"
-
-#, c-format
-#~ msgid "Temporary files will be created in %s\n"
-#~ msgstr "Temporäre Dateien werden in \"%s\" gespeichert\n"
-
-#, c-format
-#~ msgid "Temporary files will not be created\n"
-#~ msgstr "Es werden keine temporären Dateien erzeugt\n"

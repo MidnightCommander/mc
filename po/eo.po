@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-06-02 12:47+0300\n"
+"POT-Creation-Date: 2024-08-08 09:51+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2022\n"
 "Language-Team: Esperanto (http://app.transifex.com/mc/mc/language/eo/)\n"
@@ -562,11 +562,13 @@ msgstr "Ricevanta dosieron"
 msgid "Changes to file lost"
 msgstr "Ŝanĝoj de la dosiero perditaj"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create temporary directory %s: %s.\n"
 "Temporary files will not be created\n"
-msgstr "Ne eblas krei provizoran dosierujon %s: %s\n"
+msgstr ""
+"Ne eblas krei provizoran dosierujon %s: %s.\n"
+"Provizoraj dosieroj ne kreiĝos\n"
 
 msgid "Press any key to continue..."
 msgstr "Premu iun klavon por daŭri..."
@@ -724,6 +726,25 @@ msgid ""
 "   Viewer:       viewnormal,viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 msgstr ""
+"--colors ŜLOSILVORTO={MALFONO},{FONO},{ATR}:ŜLOSILVORTO2=...\n"
+"\n"
+"Se {MALFONO}, {FONO} kaj {ATR} ne estas specifitaj, la aprioraĵoj uziĝos\n"
+"\n"
+" Ŝlosilvortoj:\n"
+"   Tutprograma:  errors, disabled, reverse, gauge, header\n"
+"                 input, inputmark, inputunchanged, commandlinemark\n"
+"                 bbarhotkey, bbarbutton, statusbar\n"
+"   Dosieroj:     normal, selected, marked, markselect\n"
+"   Dialogujoj:   dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"                 errdhotfocus\n"
+"   Menuoj:       menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Ŝprucmenuoj:  pmenunormal, pmenusel, pmenutitle\n"
+"   Redaktilo:    editnormal, editbold, editmarked, editwhitespace, "
+"editnonprintable,\n"
+"                 editlinestate, editbg, editframe, editframeactive\n"
+"                 editframedrag\n"
+"   Vidigilo:     viewnormal,viewbold, viewunderline, viewselected\n"
+"   Helpilo:      helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 
 #. TRANSLATORS: don't translate color names and attributes
 msgid ""
@@ -786,9 +807,8 @@ msgstr "Terminala agordo"
 msgid "Arguments parse error!"
 msgstr "Eraro dum analizi parametrojn!"
 
-#, fuzzy
 msgid "MC is built without builtin editor."
-msgstr "Kun interna tekstoredaktilo"
+msgstr "Muntita sen interna tekstoredaktilo."
 
 msgid "No arguments given to the viewer."
 msgstr "Neniuj parametroj donitaj al la legilo."
@@ -1597,7 +1617,7 @@ msgstr ""
 "verkita por Midnight Commander."
 
 msgid "Copyright (C) 1996-2024 the Free Software Foundation"
-msgstr ""
+msgstr "Kopirajto (C) 1996-2024 Fondaĵo pri Liberaj Programoj"
 
 msgid "About"
 msgstr "Pri"
@@ -2722,20 +2742,20 @@ msgstr ""
 "Ne eblas trovi fontan dosieron \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
-"Ne eblas trovi fontan dosieron \"%s\"\n"
+"Ne eblas atingi atributojn de fonta dosiero \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
-"Ne eblas trovi celan dosieron \"%s\"\n"
+"Ne eblas agordi atributojn de cela dosiero \"%s\"\n"
 "%s"
 
 #, c-format
@@ -2849,12 +2869,12 @@ msgstr ""
 "Ne eblas fermi celan dosieron \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
-"Ne eblas trovi celan dosieron \"%s\"\n"
+"Ne eblas agordi atributojn por cela dosiero \"%s\"\n"
 "%s"
 
 #, c-format
@@ -2865,12 +2885,12 @@ msgstr ""
 "Ne eblas trovi fontan dosierujon \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
-"Ne eblas trovi fontan dosierujon \"%s\"\n"
+"Ne eblas atingi atributojn de fonta dosierujon \"%s\"\n"
 "%s"
 
 #, c-format
@@ -3960,11 +3980,9 @@ msgstr "La ŝelo estas aktiva. Ĉu senkonsidere eliri?"
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Averto: Ne eblas ŝanĝi al %s.\n"
 
-#, fuzzy
 msgid "With builtin editor and aspell support"
 msgstr "Kun interna tekstoredaktilo kaj literumilo"
 
-#, fuzzy
 msgid "With builtin editor"
 msgstr "Kun interna tekstoredaktilo"
 
@@ -4149,6 +4167,15 @@ msgstr ""
 
 msgid "Inconsistent archive"
 msgstr "Malkonsekvenca arĥivo"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot open %s archive\n"
+"%s"
+msgstr ""
+"Ne eblas malfermi arĥivan dosieron %s\n"
+"%s:\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -4728,23 +4755,3 @@ msgstr "Ĉu deiri de la komenco?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Ne eblas atingi lokan kopion de /ftp://some.host/editme.txt"
-
-#, c-format
-#~ msgid "%s is not a directory\n"
-#~ msgstr "%s ne estas dosierujo\n"
-
-#, c-format
-#~ msgid "Directory %s is not owned by you\n"
-#~ msgstr "Dosierujo %s ne estas estrata de vi\n"
-
-#, c-format
-#~ msgid "Cannot set correct permissions for directory %s\n"
-#~ msgstr "Ne eblas elekti la ĝustajn permesojn por dosierujo %s\n"
-
-#, c-format
-#~ msgid "Temporary files will be created in %s\n"
-#~ msgstr "Provizoraj dosieroj kreiĝos en %s\n"
-
-#, c-format
-#~ msgid "Temporary files will not be created\n"
-#~ msgstr "Provizoraj dosieroj ne kreiĝos\n"

@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-06-02 12:47+0300\n"
+"POT-Creation-Date: 2024-08-08 09:51+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>, 2017-2024\n"
 "Language-Team: Catalan (http://app.transifex.com/mc/mc/language/ca/)\n"
@@ -574,11 +574,13 @@ msgstr "S'està recuperant el fitxer"
 msgid "Changes to file lost"
 msgstr "Canvia al fitxer perdut"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create temporary directory %s: %s.\n"
 "Temporary files will not be created\n"
-msgstr "No s'ha pogut crear el directori temporal %s: %s\n"
+msgstr ""
+"No s'ha pogut crear el directori temporal %s: %s.\n"
+"No es podran crear els fitxers temporals\n"
 
 msgid "Press any key to continue..."
 msgstr "Premeu qualsevol tecla per a continuar..."
@@ -823,9 +825,8 @@ msgstr "Opcions de terminal"
 msgid "Arguments parse error!"
 msgstr "Error en analitzar els arguments!"
 
-#, fuzzy
 msgid "MC is built without builtin editor."
-msgstr "Amb l'editor integrat"
+msgstr "El MC es construeix sense editor integrat."
 
 msgid "No arguments given to the viewer."
 msgstr "No s'han donat arguments al visor."
@@ -2763,20 +2764,20 @@ msgstr ""
 "No s'ha pogut fer estat al fitxer d'origen «%s»\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
-"No s'ha pogut fer estat al fitxer d'origen «%s»\n"
+"No es poden obtenir els atributs del fitxer d'origen «%s»\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
-"No s'ha pogut fer estat al fitxer de destinació «%s»\n"
+"No es poden establir els atributs del fitxer de destinació «%s»\n"
 "%s"
 
 #, c-format
@@ -2890,12 +2891,12 @@ msgstr ""
 "No s'ha pogut tancar el fitxer de destinació «%s»\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
-"No s'ha pogut fer estat al fitxer de destinació «%s»\n"
+"No es poden establir els atributs per al fitxer de destinació «%s»\n"
 "%s"
 
 #, c-format
@@ -2906,12 +2907,12 @@ msgstr ""
 "No s'ha pogut veure l'estat del directori d'origen «%s»\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
-"No s'ha pogut veure l'estat del directori d'origen «%s»\n"
+"No es poden obtenir els atributs del directori d'origen «%s»\n"
 "%s"
 
 #, c-format
@@ -4006,13 +4007,11 @@ msgstr "L'intèrpret d'ordres encara està actiu. Voleu sortir igualment?"
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Avís: no s'ha pogut canviar a %s.\n"
 
-#, fuzzy
 msgid "With builtin editor and aspell support"
-msgstr "Amb la implementació incorporada de l'Editor i Aspell"
+msgstr "Amb editor integrat i suport aspell"
 
-#, fuzzy
 msgid "With builtin editor"
-msgstr "Amb l'editor integrat"
+msgstr "Amb editor integrat"
 
 msgid "With optional subshell support"
 msgstr "Amb la implementació opcional del subintèrpret d'ordres"
@@ -4194,6 +4193,15 @@ msgstr ""
 
 msgid "Inconsistent archive"
 msgstr "Arxiu inconsistent"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot open %s archive\n"
+"%s"
+msgstr ""
+"No s'ha pogut obrir l'arxiu %s\n"
+"%s:\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -4783,24 +4791,3 @@ msgstr "Voleu continuar des del començament?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "No s'ha pogut obtenir una còpia local de /ftp://algun.amfitrió/editam.txt"
-
-#, c-format
-#~ msgid "%s is not a directory\n"
-#~ msgstr "%s no és un directori\n"
-
-#, c-format
-#~ msgid "Directory %s is not owned by you\n"
-#~ msgstr "El directori %s no és de la vostra propietat\n"
-
-#, c-format
-#~ msgid "Cannot set correct permissions for directory %s\n"
-#~ msgstr ""
-#~ "No s'han pogut establir els permisos correctes per al directori %s\n"
-
-#, c-format
-#~ msgid "Temporary files will be created in %s\n"
-#~ msgstr "Es crearan fitxers temporals a %s\n"
-
-#, c-format
-#~ msgid "Temporary files will not be created\n"
-#~ msgstr "No es crearan fitxers temporals\n"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-06-02 12:47+0300\n"
+"POT-Creation-Date: 2024-08-08 09:51+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Matej Urbančič <>, 2012\n"
 "Language-Team: Slovenian (http://app.transifex.com/mc/mc/language/sl/)\n"
@@ -18,8 +18,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
-"%100==4 ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
+"n%100==4 ? 2 : 3);\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -543,11 +543,11 @@ msgstr "Dobivam datoteko"
 msgid "Changes to file lost"
 msgstr "Spremembe v datoteki izgubljene"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create temporary directory %s: %s.\n"
 "Temporary files will not be created\n"
-msgstr " Ne morem ustvariti začasnega imenika %s: %s\n"
+msgstr ""
 
 msgid "Press any key to continue..."
 msgstr "Pritisnite katerokoli tipko za nadaljevanje..."
@@ -2583,21 +2583,17 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
-"Ne morem pisati v datoteko %s:\n"
-"%s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
-"Ne morem pisati v datoteko %s:\n"
-"%s\n"
 
 #, c-format
 msgid ""
@@ -2686,13 +2682,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
-"Ne morem pisati v datoteko %s:\n"
-"%s\n"
 
 #, c-format
 msgid ""
@@ -2700,11 +2694,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get attributes of source directory \"%s\"\n"
 "%s"
-msgstr "Ne morem nastaviti pravilnih dovoljenj za imenik %s\n"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -3955,6 +3949,14 @@ msgstr ""
 msgid "Inconsistent archive"
 msgstr ""
 
+#, fuzzy, c-format
+msgid ""
+"Cannot open %s archive\n"
+"%s"
+msgstr ""
+"Ne morem odpreti tar arhiva\n"
+"%s"
+
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
@@ -4486,23 +4488,3 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#, c-format
-#~ msgid "%s is not a directory\n"
-#~ msgstr "%s ni imenik\n"
-
-#, c-format
-#~ msgid "Directory %s is not owned by you\n"
-#~ msgstr "Niste lastnik imenika %s\n"
-
-#, c-format
-#~ msgid "Cannot set correct permissions for directory %s\n"
-#~ msgstr "Ne morem nastaviti pravilnih dovoljenj za imenik %s\n"
-
-#, c-format
-#~ msgid "Temporary files will be created in %s\n"
-#~ msgstr "Začasne datoteke bodo ustvarjene v %s\n"
-
-#, c-format
-#~ msgid "Temporary files will not be created\n"
-#~ msgstr "Začasne datoteke ne bodo ustvarjene\n"

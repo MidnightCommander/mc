@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-06-02 12:47+0300\n"
+"POT-Creation-Date: 2024-08-08 09:51+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Arabic (http://app.transifex.com/mc/mc/language/ar/)\n"
@@ -3912,6 +3912,12 @@ msgid ""
 msgstr ""
 
 msgid "Inconsistent archive"
+msgstr ""
+
+#, c-format
+msgid ""
+"Cannot open %s archive\n"
+"%s"
 msgstr ""
 
 #, c-format

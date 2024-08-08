@@ -6,8 +6,8 @@
 # Pavel Suravezhkin, 2022
 # debconf <prach.by@gmail.com>, 2023
 # Slava Zanko <slavazanko@gmail.com>, 2011
-# Viačasłaŭ Chalikin <viachaslavic@outlook.com>, 2023
-# Viačasłaŭ Chalikin <viachaslavic@outlook.com>, 2023-2024
+# Viačasłaŭ <viachaslavic@outlook.com>, 2023
+# Viačasłaŭ <viachaslavic@outlook.com>, 2023-2024
 # Viktar Palstsiuk <vipals@gmail.com>, 2015
 # Yury V. Zaytsev <yury@shurup.com>, 2019
 # Źmicier Turok <nashtlumach@gmail.com>, 2018
@@ -17,17 +17,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-06-02 12:47+0300\n"
+"POT-Creation-Date: 2024-08-08 09:51+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Viačasłaŭ Chalikin <viachaslavic@outlook.com>, 2023-2024\n"
+"Last-Translator: Viačasłaŭ <viachaslavic@outlook.com>, 2023-2024\n"
 "Language-Team: Belarusian (http://app.transifex.com/mc/mc/language/be/)\n"
 "Language: be\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
-"%100>=11 && n%100<=14)? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -574,11 +574,11 @@ msgstr "Атрыманне файла"
 msgid "Changes to file lost"
 msgstr "Змены ў файле былі страчаныя"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create temporary directory %s: %s.\n"
 "Temporary files will not be created\n"
-msgstr "Немагчыма стварыць часовы каталог «%s»: %s\n"
+msgstr ""
 
 msgid "Press any key to continue..."
 msgstr "Каб працягнуць, націсніце хоць-якую клавішу..."
@@ -799,9 +799,8 @@ msgstr "Параметры тэрмінала"
 msgid "Arguments parse error!"
 msgstr "Памылка падчас разбору аргумента!"
 
-#, fuzzy
 msgid "MC is built without builtin editor."
-msgstr "З убудаваным рэдактарам"
+msgstr ""
 
 msgid "No arguments given to the viewer."
 msgstr "Праграма для прагляду не атрымала аргументаў."
@@ -2736,21 +2735,17 @@ msgstr ""
 "Немагчыма атрымаць уласцівасці зыходнага файла «%s»\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
-"Немагчыма атрымаць уласцівасці зыходнага файла «%s»\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
-"Немагчыма атрымаць уласцівасці мэтавага файла «%s»\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2863,13 +2858,11 @@ msgstr ""
 "Немагчыма закрыць мэтавы файл «%s»\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
-"Немагчыма атрымаць уласцівасці мэтавага файла «%s»\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2879,13 +2872,11 @@ msgstr ""
 "Немагчыма атрымаць уласцівасці зыходнага файла «%s»\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
-"Немагчыма атрымаць уласцівасці зыходнага файла «%s»\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -3979,13 +3970,11 @@ msgstr "Абалонка яшчэ выкарыстоўваецца. Усё ад�
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Увага: немагчыма перайсці ў «%s».\n"
 
-#, fuzzy
 msgid "With builtin editor and aspell support"
-msgstr "З падтрымкай убудаванага рэдактара і Aspell"
+msgstr ""
 
-#, fuzzy
 msgid "With builtin editor"
-msgstr "З убудаваным рэдактарам"
+msgstr ""
 
 msgid "With optional subshell support"
 msgstr "З падтрымкай падузроўняў абалонкі"
@@ -4168,6 +4157,15 @@ msgstr ""
 
 msgid "Inconsistent archive"
 msgstr "Супярэчлівы архіў"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot open %s archive\n"
+"%s"
+msgstr ""
+"Немагчыма адкрыць %s архіў\n"
+"%s:\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -4749,23 +4747,3 @@ msgstr "Працягваць ад пачатку?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Немагчыма атрымаць лакальную копію /ftp://some.host/editme.txt"
-
-#, c-format
-#~ msgid "%s is not a directory\n"
-#~ msgstr "«%s» — не каталог\n"
-
-#, c-format
-#~ msgid "Directory %s is not owned by you\n"
-#~ msgstr "Вы не валодаеце каталогам «%s»\n"
-
-#, c-format
-#~ msgid "Cannot set correct permissions for directory %s\n"
-#~ msgstr "Немагчыма вызначыць правільныя дазволы каталога «%s»\n"
-
-#, c-format
-#~ msgid "Temporary files will be created in %s\n"
-#~ msgstr "Часовыя файлы будуць стварацца ў «%s»\n"
-
-#, c-format
-#~ msgid "Temporary files will not be created\n"
-#~ msgstr "Часовыя файлы не будуць стварацца\n"

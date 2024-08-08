@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-06-02 12:47+0300\n"
+"POT-Creation-Date: 2024-08-08 09:51+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>, "
 "2011,2015-2019\n"
@@ -557,11 +557,11 @@ msgstr "Fitxategia eskuratzen"
 msgid "Changes to file lost"
 msgstr "Fitxategiko aldaketak galdu egin dira"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create temporary directory %s: %s.\n"
 "Temporary files will not be created\n"
-msgstr "%s aldiuneko direktorioa ezin sortu: %s\n"
+msgstr ""
 
 msgid "Press any key to continue..."
 msgstr "Sakatu edozein tekla jarraitzeko..."
@@ -2697,21 +2697,17 @@ msgstr ""
 "Ezin da lortu \"%s\" iturburu fitxategiaren egoera\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
-"Ezin da lortu \"%s\" iturburu fitxategiaren egoera\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
-"Ezin da loortu \"%s\" helburu fitxategiaren egoera (fstat)\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2824,13 +2820,11 @@ msgstr ""
 "Ezin da itxi \"%s\" helburu fitxategia\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
-"Ezin da loortu \"%s\" helburu fitxategiaren egoera (fstat)\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2840,13 +2834,11 @@ msgstr ""
 "Ezin da lortu \"%s\" iturburu direktorioaren egoera (stat)\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
-"Ezin da lortu \"%s\" iturburu direktorioaren egoera (stat)\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -4115,6 +4107,14 @@ msgstr ""
 msgid "Inconsistent archive"
 msgstr ""
 
+#, fuzzy, c-format
+msgid ""
+"Cannot open %s archive\n"
+"%s"
+msgstr ""
+"tar artxiboa ezin ireki\n"
+"%s"
+
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
@@ -4667,23 +4667,3 @@ msgstr "Hasieratik jarraitu?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Ezin eskuratu ondokoaren bertako kopia bat: /ftp://some.host/editme.txt"
-
-#, c-format
-#~ msgid "%s is not a directory\n"
-#~ msgstr "%s ez da direktorio bat\n"
-
-#, c-format
-#~ msgid "Directory %s is not owned by you\n"
-#~ msgstr "%s direktorioa ez da zure jabegoa\n"
-
-#, c-format
-#~ msgid "Cannot set correct permissions for directory %s\n"
-#~ msgstr "%s direktorioarentzako baimen zuzenak ezin ezarri\n"
-
-#, c-format
-#~ msgid "Temporary files will be created in %s\n"
-#~ msgstr "Aldiuneko fitxategiak %s kokalekuan sortuko dira\n"
-
-#, c-format
-#~ msgid "Temporary files will not be created\n"
-#~ msgstr "Aldiuneko fitxategiak ez dira sortuko\n"

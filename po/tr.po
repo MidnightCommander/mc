@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-06-02 12:47+0300\n"
+"POT-Creation-Date: 2024-08-08 09:51+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Mehmet Akif 9oglu, 2023\n"
 "Language-Team: Turkish (http://app.transifex.com/mc/mc/language/tr/)\n"
@@ -568,11 +568,11 @@ msgstr "Dosya alınması"
 msgid "Changes to file lost"
 msgstr "Değişiklikler kayıp"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create temporary directory %s: %s.\n"
 "Temporary files will not be created\n"
-msgstr "Geçici dizin %s oluşturulamıyor: %s\n"
+msgstr ""
 
 msgid "Press any key to continue..."
 msgstr "Bir tuşa basınız..."
@@ -2709,21 +2709,17 @@ msgstr ""
 "\"%s\" kaynak dosyası durumlanamıyor \n"
 " %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" kaynak dosyası durumlanamıyor \n"
-" %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" hedef dosyası fstat yapılamıyor \n"
-" %s"
 
 #, c-format
 msgid ""
@@ -2836,13 +2832,11 @@ msgstr ""
 "\"%s\" hedef dosyası kapatılamıyor \n"
 " %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" hedef dosyası fstat yapılamıyor \n"
-" %s"
 
 #, c-format
 msgid ""
@@ -2852,13 +2846,11 @@ msgstr ""
 "\"%s\" kaynak dizini durumlanamıyor \n"
 " %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" kaynak dizini durumlanamıyor \n"
-" %s"
 
 #, c-format
 msgid ""
@@ -4127,6 +4119,14 @@ msgstr ""
 msgid "Inconsistent archive"
 msgstr ""
 
+#, fuzzy, c-format
+msgid ""
+"Cannot open %s archive\n"
+"%s"
+msgstr ""
+"%s\n"
+"tar arşivini açılamadı"
+
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
@@ -4677,23 +4677,3 @@ msgstr "Başından devam edilsin mi?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr " /ftp://some.host/editme.txt 'in yerel kopyası alınamadı"
-
-#, c-format
-#~ msgid "%s is not a directory\n"
-#~ msgstr "%s bir dizin değil\n"
-
-#, c-format
-#~ msgid "Directory %s is not owned by you\n"
-#~ msgstr "Dizin %s sahibi değilsiniz\n"
-
-#, c-format
-#~ msgid "Cannot set correct permissions for directory %s\n"
-#~ msgstr "Dizin %s için doğru yetkiler ayarlanamıyor\n"
-
-#, c-format
-#~ msgid "Temporary files will be created in %s\n"
-#~ msgstr "Geçici dosyalar %s içinde oluşturulacak\n"
-
-#, c-format
-#~ msgid "Temporary files will not be created\n"
-#~ msgstr "Geçici dosyalar oluşturulmayacak\n"

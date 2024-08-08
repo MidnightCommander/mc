@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-06-02 12:47+0300\n"
+"POT-Creation-Date: 2024-08-08 09:51+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Rostyslav Haitkulov <info@ubilling.net.ua>, 2023\n"
 "Language-Team: Ukrainian (http://app.transifex.com/mc/mc/language/uk/)\n"
@@ -577,11 +577,11 @@ msgstr "Триває отримання файлу"
 msgid "Changes to file lost"
 msgstr "Зміни у файлі втрачено"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create temporary directory %s: %s.\n"
 "Temporary files will not be created\n"
-msgstr "Не вдалося створити тимчасовий каталог «%s»: %s\n"
+msgstr ""
 
 msgid "Press any key to continue..."
 msgstr "Щоб продовжити, натисніть будь-яку клавішу…"
@@ -802,9 +802,8 @@ msgstr "Параметри терміналу"
 msgid "Arguments parse error!"
 msgstr "Сталася помилка під час обробки аргументів."
 
-#, fuzzy
 msgid "MC is built without builtin editor."
-msgstr "Із вбудованим редактором"
+msgstr ""
 
 msgid "No arguments given to the viewer."
 msgstr "Переглядачу не передано жодних аргументів."
@@ -2720,21 +2719,17 @@ msgstr ""
 "Не вдалося отримати властивості вихідного файлу «%s»\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
-"Не вдалося отримати властивості вихідного файлу «%s»\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
-"Не вдалося отримати властивості цільового файлу «%s»\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2847,13 +2842,11 @@ msgstr ""
 "Не вдалося закрити цільовий файл «%s»\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
-"Не вдалося отримати властивості цільового файлу «%s»\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2863,13 +2856,11 @@ msgstr ""
 "Не вдавдалосяться отримати властивості вихідного каталогу «%s»\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
-"Не вдавдалосяться отримати властивості вихідного каталогу «%s»\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -3967,13 +3958,11 @@ msgstr "Оболонка ще активна. Все одно вийти?"
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Попередження: не вдалося змінити на %s.\n"
 
-#, fuzzy
 msgid "With builtin editor and aspell support"
-msgstr "Із вбудованим редактором і підтримкою Aspell"
+msgstr ""
 
-#, fuzzy
 msgid "With builtin editor"
-msgstr "Із вбудованим редактором"
+msgstr ""
 
 msgid "With optional subshell support"
 msgstr "Із необовʼязковою підтримкою підоболонки"
@@ -4155,6 +4144,15 @@ msgstr ""
 
 msgid "Inconsistent archive"
 msgstr "Неузгоджений архів"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot open %s archive\n"
+"%s"
+msgstr ""
+"Не можливо відкрити %s архів\n"
+"%s:\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -4731,23 +4729,3 @@ msgstr "Почати спочатку?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не вдалося отримати локальну копію /ftp://some.host/editme.txt"
-
-#, c-format
-#~ msgid "%s is not a directory\n"
-#~ msgstr "%s не є каталогом\n"
-
-#, c-format
-#~ msgid "Directory %s is not owned by you\n"
-#~ msgstr "Каталог %s вам не належить\n"
-
-#, c-format
-#~ msgid "Cannot set correct permissions for directory %s\n"
-#~ msgstr "Не вдалося встановити правильні права для каталога %s\n"
-
-#, c-format
-#~ msgid "Temporary files will be created in %s\n"
-#~ msgstr "Тимчасові файли створюватимуться у %s\n"
-
-#, c-format
-#~ msgid "Temporary files will not be created\n"
-#~ msgstr "Тимчасові файли не створюватимуться\n"

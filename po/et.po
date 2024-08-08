@@ -5,17 +5,16 @@
 # Translators:
 # Ivar Smolin <okul@linux.ee>, 2021
 # Kristjan Räts <kristjanrats@gmail.com>, 2013-2016,2018-2019,2024
-# Priit Jõerüüt <transifex@joeruut.com>, 2020-2021,2023
+# Priit Jõerüüt <transifex@joeruut.com>, 2020-2021,2023-2024
 # vaba <vaba@riseup.net>, 2020
 # vaba <vaba@riseup.net>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-06-02 12:47+0300\n"
+"POT-Creation-Date: 2024-08-08 09:51+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Kristjan Räts <kristjanrats@gmail.com>, "
-"2013-2016,2018-2019,2024\n"
+"Last-Translator: Priit Jõerüüt <transifex@joeruut.com>, 2020-2021,2023-2024\n"
 "Language-Team: Estonian (http://app.transifex.com/mc/mc/language/et/)\n"
 "Language: et\n"
 "MIME-Version: 1.0\n"
@@ -135,7 +134,7 @@ msgid ""
 "Default skin has been loaded"
 msgstr ""
 "Naha '%s' laadimine nurjus.\n"
-"Laeti vaikimisi nahk"
+"Laadisime vaikimisi naha"
 
 #, c-format
 msgid ""
@@ -143,7 +142,7 @@ msgid ""
 "Default skin has been loaded"
 msgstr ""
 "Naha '%s' parsimine nurjus.\n"
-"Laeti vaikimisi nahk"
+"Laadisime vaikimisi naha"
 
 #, c-format
 msgid ""
@@ -153,7 +152,7 @@ msgid ""
 msgstr ""
 "Nahka '%s' ei saa tõeliste värvide toega kasutada:\n"
 "%s\n"
-"Laeti vaikimisi nahk"
+"Laadisime vaikimisi naha"
 
 #, c-format
 msgid ""
@@ -161,9 +160,9 @@ msgid ""
 "on non-256 colors terminal.\n"
 "Default skin has been loaded"
 msgstr ""
-"256-värvi toega naha \"%s\" kasutamine terminalil,\n"
+"256 värvi toega naha \"%s\" kasutamine terminalis,\n"
 "mis ei toeta 256 värvi on võimatu.\n"
-"Laeti vaikimisi nahk"
+"Laadisime vaikimisi naha"
 
 msgid "True color not supported with ncurses."
 msgstr "Tõelised värvid ei ole toetatud teegiga ncurses."
@@ -569,11 +568,13 @@ msgstr "Hangitakse faili"
 msgid "Changes to file lost"
 msgstr "Faili muudatused unustati"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create temporary directory %s: %s.\n"
 "Temporary files will not be created\n"
-msgstr "Ajutise kataloogi %s loomine nurjus: %s\n"
+msgstr ""
+"Ei õnnestu luua ajutust kausta %s:%s.\n"
+"Ajutised failid jäävad loomata\n"
 
 msgid "Press any key to continue..."
 msgstr "Jätkamiseks vajuta suvalist klahvi..."
@@ -689,10 +690,10 @@ msgid "Resets soft keys on HP terminals"
 msgstr "Lähtesta HP terminalidel seadistatavad klahvid"
 
 msgid "Load definitions of key bindings from specified file"
-msgstr "Lae klahvide seosed määratud failist"
+msgstr "Laadi klahvide seosed määratud failist"
 
 msgid "Don't load definitions of key bindings from file, use defaults"
-msgstr "Ära lae klahvide seoseid failist, vaid kasuta vaikeseadistust"
+msgstr "Ära laadi klahvide seoseid failist, vaid kasuta vaikeseadistust"
 
 msgid "Requests to run in black and white"
 msgstr "Keelab värvide kasutamise"
@@ -812,9 +813,8 @@ msgstr "Terminali suvandid"
 msgid "Arguments parse error!"
 msgstr "Parameetrite parsimise viga!"
 
-#, fuzzy
 msgid "MC is built without builtin editor."
-msgstr "Sisseehitatud toimetiga"
+msgstr "MC on kompileeritud ilma sisseehitatud tekstitoimetita"
 
 msgid "No arguments given to the viewer."
 msgstr "Vaaturile parameetreid ei antud."
@@ -873,7 +873,7 @@ msgid ""
 "Cannot create temporary diff file\n"
 "%s"
 msgstr ""
-"Ajutisw erinevuste faili loomine nurjus\n"
+"Ajutise erinevuste faili loomine ei õnnestunud\n"
 "%s"
 
 #, c-format
@@ -964,7 +964,7 @@ msgid "Quit"
 msgstr "Välju"
 
 msgid "File(s) was modified. Save with exit?"
-msgstr "Faili(e) on muudetud. Kas salvestada väljumisel?"
+msgstr "Faili(e) on muudetud. Kas salvestame väljumisel?"
 
 msgid ""
 "Midnight Commander is being shut down.\n"
@@ -1026,7 +1026,7 @@ msgid ""
 "Open it anyway?"
 msgstr ""
 "Fail \"%s\" on liiga suur.\n"
-"Kas avada ta ikkagi?"
+"Kas avame ta ikkagi?"
 
 msgid "Warning"
 msgstr "Hoiatus"
@@ -1043,7 +1043,7 @@ msgid "File has hard-links. Detach before saving?"
 msgstr "Failil on jäiku viitasid. Kas võtta need enne salvestamist lahti?"
 
 msgid "The file has been modified in the meantime. Save anyway?"
-msgstr "Faili on vahepeal muudetud. Kas ikkagi salvestada?"
+msgstr "Faili on vahepeal muudetud. Kas ikkagi salvestame?"
 
 #, c-format
 msgid "Error writing to pipe: %s"
@@ -1157,7 +1157,7 @@ msgid ""
 "Save before close?"
 msgstr ""
 "Faili %s on muudetud.\n"
-"Kas salvestada enne sulgemist?"
+"Kas salvestame enne sulgemist?"
 
 msgid "Close file"
 msgstr "Sulge fail"
@@ -1574,7 +1574,7 @@ msgid "Word wrap line length:"
 msgstr "Sõna täpsusega reavahetuse rea pikkus:"
 
 msgid "Editor options"
-msgstr "Redaktori suvandid"
+msgstr "Tekstitoimeti suvandid"
 
 msgid "In se&lection"
 msgstr "&Valikus"
@@ -1752,7 +1752,7 @@ msgid "< Reload Current Syntax >"
 msgstr "<Valitud süntaksi taaslaadimine>"
 
 msgid "Load syntax file"
-msgstr "Lae süntaksi fail"
+msgstr "Laadi süntaksi fail"
 
 #, c-format
 msgid ""
@@ -2059,25 +2059,25 @@ msgstr "Sortimise järjekord"
 
 #. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 msgid "Confirmation|&Delete"
-msgstr "Confirmation|&Kustuta"
+msgstr "Confirmation|&Kustutamisel"
 
 msgid "Confirmation|O&verwrite"
-msgstr "Confirmation|Ü&lekirjutamine"
+msgstr "Confirmation|Ü&lekirjutamisel"
 
 msgid "Confirmation|&Execute"
-msgstr "Confirmation|&Käivitamine"
+msgstr "Confirmation|&Käivitamisel"
 
 msgid "Confirmation|E&xit"
-msgstr "Confirmation|&Väljumine"
+msgstr "Confirmation|&Väljumisel"
 
 msgid "Confirmation|Di&rectory hotlist delete"
-msgstr "Confirmation|K&ataloogi kiirvaliku kustutamine"
+msgstr "Confirmation|K&ataloogi kiirvaliku kustutamisel"
 
 msgid "Confirmation|&History cleanup"
-msgstr "Confirmation|&Ajalugu"
+msgstr "Confirmation|&Ajaloo kustutamisel"
 
 msgid "Confirmation"
-msgstr "Kinnitus"
+msgstr "Küsi kinnitust"
 
 msgid "&UTF-8 output"
 msgstr "&UTF-8 väljund"
@@ -2116,7 +2116,7 @@ msgid "&Always use ftp proxy:"
 msgstr "Kasuta &alati FTP puhvrit:"
 
 msgid "&Use ~/.netrc"
-msgstr "~/.netrc &kasutamine"
+msgstr "&Kasuta ~/.netrc faili"
 
 msgid "Use &passive mode"
 msgstr "Kasuta &passiivset režiimi"
@@ -2171,7 +2171,7 @@ msgid "Undelete"
 msgstr "Taasta"
 
 msgid "Synchronous updates"
-msgstr "Sünkroonsed andnevärskendused"
+msgstr "Sünkroonsed andmevärskendused"
 
 msgid "Synchronous directory updates"
 msgstr "Sünkroonsed kataloogivärskendused"
@@ -2462,7 +2462,7 @@ msgid "Shell link to machine"
 msgstr "Kesta ühendus masinaga"
 
 msgid "Undelete files on an ext2 file system"
-msgstr "Failide taastamine ext2 failisüsteemis"
+msgstr "Taasta failid ext2 failisüsteemis"
 
 msgid ""
 "Enter device (without /dev/) to undelete\n"
@@ -2508,9 +2508,9 @@ msgid ""
 "Midnight Commander now uses %s file.\n"
 "Please copy your modifications of the old file to the new one."
 msgstr ""
-"Teil on aegunud %s fail.\n"
+"Sul on aegunud %s fail.\n"
 "Midnight Commander kasutab nüüd faili %s.\n"
-"Palun kopeerige oma vana faili muudatused uude."
+"Palun kopeeri oma vana faili muudatused uude."
 
 #, c-format
 msgid ""
@@ -2524,7 +2524,7 @@ msgstr ""
 "%s%s\n"
 "faili on versiooniga 4.0 muudetud.\n"
 "Näib, et installimine ebaõnnestus.\n"
-"Palun hankige Midnight Commanderi paketist uus koopia."
+"Palun hangi Midnight Commanderi paketist uus koopia."
 
 #, c-format
 msgid ""
@@ -2538,9 +2538,9 @@ msgstr ""
 "Formaat\n"
 "%s\n"
 "faili on versiooniga 4.0 muudetud.\n"
-"Võib-olla soovite selle kopeerida\n"
+"Võib-olla soovid selle kopeerida\n"
 "%s%s\n"
-"või kasutage seda faili selle kirjutamise näitena."
+"või kasuta seda faili selle kirjutamise näitena."
 
 msgid "DialogTitle|Copy"
 msgstr "DialogTitle|Kopeerimine"
@@ -2662,7 +2662,7 @@ msgid ""
 "Delete it recursively?"
 msgstr ""
 "Kataloog \"%s\" ei ole tühi.\n"
-"Kas kustutada see rekursiivselt?"
+"Kas kustutame selle rekursiivselt?"
 
 #, c-format
 msgid ""
@@ -2672,7 +2672,7 @@ msgid ""
 msgstr ""
 "Taustaprotsess:\n"
 "Kataloog \"%s\" ei ole tühi.\n"
-"Kas see kustutada rekursiivselt?"
+"Kas kustutame selle rekursiivselt?"
 
 msgid "Non&e"
 msgstr "&Mitte ükski"
@@ -2748,20 +2748,20 @@ msgstr ""
 "Lähtefaili \"%s\" info päring nurjus\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
-"Lähtefaili \"%s\" info päring nurjus\n"
+"Sihtfaili atribuute ei õnnestu laadida \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
-"Sihtfaili \"%s\" info päring nurjus\n"
+"Sihtfaili atribuute ei õnnestu väärtustada \"%s\"\n"
 "%s"
 
 #, c-format
@@ -2875,12 +2875,12 @@ msgstr ""
 "Sihtfaili \"%s\" sulgemine nurjus\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
-"Sihtfaili \"%s\" info päring nurjus\n"
+"Sihtfaili jaoks ei õnnestu atribuute väärtustada \"%s\"\n"
 "%s"
 
 #, c-format
@@ -2891,12 +2891,12 @@ msgstr ""
 "Lähtekataloogi \"%s\" info päring nurjus\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
-"Lähtekataloogi \"%s\" info päring nurjus\n"
+"Lähtekausta atribuute ei õnnestu laadida \"%s\"\n"
 "%s"
 
 #, c-format
@@ -2979,7 +2979,7 @@ msgid "Existing:"
 msgstr "Olemasolev:"
 
 msgid "Overwrite this file?"
-msgstr "Kas kirjutada see fail üle?"
+msgstr "Kas kirjutame selle fail üle?"
 
 msgid "A&ppend"
 msgstr "&Lisa"
@@ -2988,7 +2988,7 @@ msgid "&Reget"
 msgstr "&Uuesti"
 
 msgid "Overwrite all files?"
-msgstr "Kas kirjutada kõik failid üle?"
+msgstr "Kas kirjutame kõik failid üle?"
 
 msgid "Don't overwrite with &zero length file"
 msgstr "Ära kirjuta üle &tühje faile"
@@ -3177,7 +3177,7 @@ msgid "&Directory tree"
 msgstr "Kataloogi&puu"
 
 msgid "&Find file"
-msgstr "&Failide otsimine"
+msgstr "&Otsi faile"
 
 msgid "S&wap panels"
 msgstr "&Vaheta paneelid"
@@ -3216,7 +3216,7 @@ msgid "Screen lis&t"
 msgstr "&Ekraanide loend"
 
 msgid "&Undelete files (ext2fs only)"
-msgstr "F&ailide taastamine (ainult ext2fs)"
+msgstr "Taasta f&ailid (ainult ext2fs)"
 
 msgid "&Listing format edit"
 msgstr "Muuda &loendi vormindust"
@@ -3340,7 +3340,7 @@ msgid "Fir&st hit"
 msgstr "E&simene sobiv"
 
 msgid "Find File"
-msgstr "Failide otsimine"
+msgstr "Otsi faile"
 
 msgid "Start at:"
 msgstr "Alusta:"
@@ -3460,7 +3460,7 @@ msgid ""
 "your old hotlist entries were not deleted"
 msgstr ""
 "MC ei suutnud kirjutada faili %s,\n"
-"su vanu kiirvalikuid ei kustutatud"
+"su vanad kiirvalikuid jäid kustutamata"
 
 #, c-format
 msgid "Label for \"%s\":"
@@ -3844,14 +3844,14 @@ msgstr ""
 "%s\n"
 
 msgid "Help file format error\n"
-msgstr "Abi failivorminduse viga\n"
+msgstr "Abifaili vormingu viga\n"
 
 msgid "Internal bug: Double start of link area"
 msgstr "Sisemine viga: viida ala topeltalgus"
 
 #, c-format
 msgid "Cannot find node %s in help file"
-msgstr "Abi failist ei leitud sõlme %s"
+msgstr "Abifailis ei leidunud sõlme %s"
 
 msgid "Help"
 msgstr "Abi"
@@ -3986,13 +3986,11 @@ msgstr "Shell on veel aktiivne. Kas soovid ikkagi lõpetada?"
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Hoiatus: sisenemine kataloogi %s nurjus.\n"
 
-#, fuzzy
 msgid "With builtin editor and aspell support"
-msgstr "Sisseehitatud toimeti ja Aspelli toega"
+msgstr "Sisseehitatud tekstitoimeti ja Aspelli toega"
 
-#, fuzzy
 msgid "With builtin editor"
-msgstr "Sisseehitatud toimetiga"
+msgstr "Sisseehitatud tekstitoimetiga"
 
 msgid "With optional subshell support"
 msgstr "Valikulise alamkesta toega"
@@ -4175,6 +4173,15 @@ msgstr ""
 msgid "Inconsistent archive"
 msgstr "Ebaühtlane arhiiv"
 
+#, fuzzy, c-format
+msgid ""
+"Cannot open %s archive\n"
+"%s"
+msgstr ""
+"%s arhiivi avamine ei õnnestu\n"
+"%s:\n"
+"%s"
+
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
@@ -4310,10 +4317,10 @@ msgid "ftpfs: CWD failed."
 msgstr "ftpfs: CWD nurjus."
 
 msgid "ftpfs: couldn't resolve symlink"
-msgstr "ftpfs: nimeviida lahendamine nurjus"
+msgstr "ftpfs: nimeviida tuvastamine ei õnnestunud"
 
 msgid "Resolving symlink..."
-msgstr "Lahendatakse nimeviita..."
+msgstr "Tuvastame nimeviita..."
 
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
@@ -4541,7 +4548,7 @@ msgid "Inconsistent tar archive"
 msgstr "Tar arhiiv sisaldab vasturääkivusi"
 
 msgid "Unexpected EOF on archive file"
-msgstr "Ootamatu arhiivi faili lõpp"
+msgstr "Ootamatu arhiivifaili lõpp"
 
 #, c-format
 msgid ""
@@ -4581,7 +4588,7 @@ msgstr "alustades i-kirje %d skannimist"
 
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: laetakse kustutatud failide informatsiooni %d i-kirjest"
+msgstr "undelfs: laadime kustutatud failide informatsiooni %d i-kirjest"
 
 #, c-format
 msgid "while calling ext2_block_iterate %d"
@@ -4640,7 +4647,7 @@ msgid "Invalid value"
 msgstr "Vigane väärtus"
 
 msgid "File was modified. Save with exit?"
-msgstr "Faili on muudetud. Kas väljumisel salvestada?"
+msgstr "Faili on muudetud. Kas väljumisel salvestame?"
 
 msgid "&Cancel quit"
 msgstr "&Tühista väljumine"
@@ -4650,7 +4657,7 @@ msgid ""
 "Save modified file?"
 msgstr ""
 "Midnight Commander on sulgumas.\n"
-"Kas salvestada muudetud fail?"
+"Kas salvestame muudetud faili?"
 
 msgid "&Line number"
 msgstr "&Rea number"
@@ -4753,23 +4760,3 @@ msgstr "Kas jätkata algusest?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kohaliku koopia hankimine failist /ftp://some.host/editme.txt nurjus"
-
-#, c-format
-#~ msgid "%s is not a directory\n"
-#~ msgstr "%s ei ole kataloog\n"
-
-#, c-format
-#~ msgid "Directory %s is not owned by you\n"
-#~ msgstr "Sa ei ole kataloogi %s omanik\n"
-
-#, c-format
-#~ msgid "Cannot set correct permissions for directory %s\n"
-#~ msgstr "Kataloogi %s õiguste määramine nurjus\n"
-
-#, c-format
-#~ msgid "Temporary files will be created in %s\n"
-#~ msgstr "Ajutised failid luuakse kataloogis %s\n"
-
-#, c-format
-#~ msgid "Temporary files will not be created\n"
-#~ msgstr "Ajutisi faile ei looda\n"

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-06-02 12:47+0300\n"
+"POT-Creation-Date: 2024-08-08 09:51+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Gilberto Jorge <gmj125@gmail.com>, 2013-2024\n"
 "Language-Team: Portuguese (http://app.transifex.com/mc/mc/language/pt/)\n"
@@ -566,11 +566,13 @@ msgstr "A obter ficheiro"
 msgid "Changes to file lost"
 msgstr "Modificações ao ficheiro perdidas"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create temporary directory %s: %s.\n"
 "Temporary files will not be created\n"
-msgstr "Não é possível criar diretório temporário %s: %s\n"
+msgstr ""
+"Não é possível criar directório temporário %s: %s.\n"
+"Ficheiros temporários não serão criados\n"
 
 msgid "Press any key to continue..."
 msgstr "Prima qualquer tecla para continuar..."
@@ -813,9 +815,8 @@ msgstr "Opções para o terminal"
 msgid "Arguments parse error!"
 msgstr "Erro de parseamento de argumentos!"
 
-#, fuzzy
 msgid "MC is built without builtin editor."
-msgstr "Com Editor integrado"
+msgstr "MC compilado sem o editor integrado."
 
 msgid "No arguments given to the viewer."
 msgstr "Nenhum argumento dado ao visualizador."
@@ -2752,20 +2753,20 @@ msgstr ""
 "Não é possível efetuar stat no ficheiro fonte \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
-"Não é possível efetuar stat no ficheiro fonte \"%s\"\n"
+"Não é possível obter atributos do ficheiro origem \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
-"Não é possível efetuar fstat no ficheiro alvo \"%s\"\n"
+"Não é possível definir atributos do ficheiro destino \"%s\"\n"
 "%s"
 
 #, c-format
@@ -2879,12 +2880,12 @@ msgstr ""
 "Não é possível fechar o ficheiro alvo \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
-"Não é possível efetuar fstat no ficheiro alvo \"%s\"\n"
+"Não é possível definir atributos para o ficheiro destino \"%s\"\n"
 "%s"
 
 #, c-format
@@ -2895,12 +2896,12 @@ msgstr ""
 "Não é possível efetuar stat no diretório fonte \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
-"Não é possível efetuar stat no diretório fonte \"%s\"\n"
+"Não é possível obter atributos do directório de origem \"%s\"\n"
 "%s"
 
 #, c-format
@@ -3995,13 +3996,11 @@ msgstr "A shell ainda está ativa. Sair na mesma?"
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Aviso: Não é possível mudar para %s.\n"
 
-#, fuzzy
 msgid "With builtin editor and aspell support"
-msgstr "Com Editor integrado and suporte Aspell"
+msgstr "Com editor integrado e suporte aspell"
 
-#, fuzzy
 msgid "With builtin editor"
-msgstr "Com Editor integrado"
+msgstr "Com editor integrado"
 
 msgid "With optional subshell support"
 msgstr "Com suporte opcional para subshell"
@@ -4183,6 +4182,15 @@ msgstr ""
 
 msgid "Inconsistent archive"
 msgstr "Arquivo inconsistente"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot open %s archive\n"
+"%s"
+msgstr ""
+"Não é possível abrir arquivo %s\n"
+"%s;\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -4763,23 +4771,3 @@ msgstr "Continuar do início?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Não é possível obter uma cópia local de /ftp://some.host/editme.txt"
-
-#, c-format
-#~ msgid "%s is not a directory\n"
-#~ msgstr "%s não é um diretório\n"
-
-#, c-format
-#~ msgid "Directory %s is not owned by you\n"
-#~ msgstr "Não tem permissões para o diretório %s\n"
-
-#, c-format
-#~ msgid "Cannot set correct permissions for directory %s\n"
-#~ msgstr "Não é possível definir permissões corretas para o diretório %s\n"
-
-#, c-format
-#~ msgid "Temporary files will be created in %s\n"
-#~ msgstr "Ficheiros temporários serão criados em %s\n"
-
-#, c-format
-#~ msgid "Temporary files will not be created\n"
-#~ msgstr "Ficheiros temporários não serão criados\n"

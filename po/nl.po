@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-06-02 12:47+0300\n"
+"POT-Creation-Date: 2024-08-08 09:51+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Jaap Kramer <jaap-kramer@ziggo.nl>, 2023\n"
 "Language-Team: Dutch (http://app.transifex.com/mc/mc/language/nl/)\n"
@@ -566,11 +566,11 @@ msgstr "Verkrijgen van bestand"
 msgid "Changes to file lost"
 msgstr "Wijzigingen zijn verloren"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create temporary directory %s: %s.\n"
 "Temporary files will not be created\n"
-msgstr "Tijdelijke map \"%s\" kan niet gecreëerd worden: %s\n"
+msgstr ""
 
 msgid "Press any key to continue..."
 msgstr "Druk op een toets om verder te gaan..."
@@ -791,9 +791,8 @@ msgstr "Terminal-opties"
 msgid "Arguments parse error!"
 msgstr "Parsefout argumenten!"
 
-#, fuzzy
 msgid "MC is built without builtin editor."
-msgstr "Met ingebouwde editor"
+msgstr ""
 
 msgid "No arguments given to the viewer."
 msgstr "Geen argumenten opgegevan aan de viewer"
@@ -2712,21 +2711,17 @@ msgstr ""
 "Bronbestand \"%s\" kan niet geïnspecteerd worden \n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
-"Bronbestand \"%s\" kan niet geïnspecteerd worden \n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
-"fstat werkt niet op doelbestand \"%s\" \n"
-"%s "
 
 #, c-format
 msgid ""
@@ -2839,13 +2834,11 @@ msgstr ""
 "Doelbestand \"%s\" kan niet gesloten worden \n"
 "%s "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
-"fstat werkt niet op doelbestand \"%s\" \n"
-"%s "
 
 #, c-format
 msgid ""
@@ -2855,13 +2848,11 @@ msgstr ""
 "Bronmap \"%s\" kan niet geïnspecteerd worden\n"
 "%s "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
-"Bronmap \"%s\" kan niet geïnspecteerd worden\n"
-"%s "
 
 #, c-format
 msgid ""
@@ -3952,13 +3943,11 @@ msgstr "De shell is nog steeds actief. Toch stoppen?"
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Waarschuwing: Schakelen naar %s mislukt.\n"
 
-#, fuzzy
 msgid "With builtin editor and aspell support"
-msgstr "Met ingebouwde editor- en Aspell-ondersteuning"
+msgstr ""
 
-#, fuzzy
 msgid "With builtin editor"
-msgstr "Met ingebouwde editor"
+msgstr ""
 
 msgid "With optional subshell support"
 msgstr "Met optionele subshell-ondersteuning"
@@ -4141,6 +4130,15 @@ msgstr ""
 
 msgid "Inconsistent archive"
 msgstr "Inconsistent archief"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot open %s archive\n"
+"%s"
+msgstr ""
+"Kan %s archief niet openen\n"
+"%s:\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -4706,23 +4704,3 @@ msgstr "Doorgaan vanaf het begin?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan geen lokale versie van /ftp://some.host/editme.txt ophalen"
-
-#, c-format
-#~ msgid "%s is not a directory\n"
-#~ msgstr "%s is geen map\n"
-
-#, c-format
-#~ msgid "Directory %s is not owned by you\n"
-#~ msgstr "U bent niet de eigenaar van de map %s\n"
-
-#, c-format
-#~ msgid "Cannot set correct permissions for directory %s\n"
-#~ msgstr "Kan de rechten niet juist instellen voor de map %s\n"
-
-#, c-format
-#~ msgid "Temporary files will be created in %s\n"
-#~ msgstr "Tijdelijke bestanden zullen in %s gemaakt worden\n"
-
-#, c-format
-#~ msgid "Temporary files will not be created\n"
-#~ msgstr "Tijdelijke bestanden zullen niet aangemaakt worden\n"

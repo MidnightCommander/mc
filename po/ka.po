@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-06-02 12:47+0300\n"
+"POT-Creation-Date: 2024-08-08 09:51+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>, 2022\n"
 "Language-Team: Georgian (http://app.transifex.com/mc/mc/language/ka/)\n"
@@ -538,11 +538,11 @@ msgstr "ფაილის მიღება"
 msgid "Changes to file lost"
 msgstr "ფაილის ცვლილებები დაიკარგა"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create temporary directory %s: %s.\n"
 "Temporary files will not be created\n"
-msgstr "დროებითი საქაღალდის (%s) შექმნა შეუძლებელია: %s\n"
+msgstr ""
 
 msgid "Press any key to continue..."
 msgstr "გასაგრძელებლად დააჭირეთ ნებისმიერ ღილაკს..."
@@ -2587,21 +2587,17 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
-"ფაილის გახსნის შეცდომა %s\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
-"ფაილის გახსნის შეცდომა %s\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2702,11 +2698,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get attributes of source directory \"%s\"\n"
 "%s"
-msgstr "დროებითი საქაღალდის (%s) შექმნა შეუძლებელია: %s\n"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -3918,6 +3914,12 @@ msgstr ""
 msgid "Inconsistent archive"
 msgstr ""
 
+#, fuzzy, c-format
+msgid ""
+"Cannot open %s archive\n"
+"%s"
+msgstr "%s ფაილის გახსნა ვერ მოხერხდა"
+
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
@@ -4442,19 +4444,3 @@ msgstr "თავიდან დავიწყო?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#, c-format
-#~ msgid "%s is not a directory\n"
-#~ msgstr "%s საქაღალდე არაა\n"
-
-#, c-format
-#~ msgid "Directory %s is not owned by you\n"
-#~ msgstr "%s-ის მფლობელი არ ბრძანდებით\n"
-
-#, c-format
-#~ msgid "Temporary files will be created in %s\n"
-#~ msgstr "დროებითი ფაილები %s-ში შეიქმნება\n"
-
-#, c-format
-#~ msgid "Temporary files will not be created\n"
-#~ msgstr "დროებითი ფალების შექმნის შეცდომა\n"

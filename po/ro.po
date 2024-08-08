@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-06-02 12:47+0300\n"
+"POT-Creation-Date: 2024-08-08 09:51+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Simona Iacob <s@zp1.net>, 2021-2023\n"
 "Language-Team: Romanian (http://app.transifex.com/mc/mc/language/ro/)\n"
@@ -569,11 +569,11 @@ msgstr "Transfer fișierul"
 msgid "Changes to file lost"
 msgstr "S-au pierdut schimbările efectuate în fișier"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create temporary directory %s: %s.\n"
 "Temporary files will not be created\n"
-msgstr "Nu pot crea dosarul temporar %s: %s\n"
+msgstr ""
 
 msgid "Press any key to continue..."
 msgstr "Apăsați o tastă pentru a continua..."
@@ -796,9 +796,8 @@ msgstr "Opțiuni terminal"
 msgid "Arguments parse error!"
 msgstr "Eroare de interpretare a argumentelor!"
 
-#, fuzzy
 msgid "MC is built without builtin editor."
-msgstr "Cu editor încorporat"
+msgstr ""
 
 msgid "No arguments given to the viewer."
 msgstr "Nu au fost date argumente către vizualizator."
@@ -2731,21 +2730,17 @@ msgstr ""
 "Nu se poate găsi fișierul sursă \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
-"Nu se poate găsi fișierul sursă \"%s\"\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
-"Nu se poate găsi fișierul destinație \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2858,13 +2853,11 @@ msgstr ""
 "Nu se poate închide fișierul destinație \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
-"Nu se poate găsi fișierul destinație \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2874,13 +2867,11 @@ msgstr ""
 "Nu se poate găsi dosarul sursă \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
-"Nu se poate găsi dosarul sursă \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -3974,13 +3965,11 @@ msgstr "Terminalul este încă activ. Ieși oricum?"
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Atenție: Nu se poate schimba în %s.\n"
 
-#, fuzzy
 msgid "With builtin editor and aspell support"
-msgstr "Cu editor încorporat și suport Aspell"
+msgstr ""
 
-#, fuzzy
 msgid "With builtin editor"
-msgstr "Cu editor încorporat"
+msgstr ""
 
 msgid "With optional subshell support"
 msgstr "Cu suport opțional pentru subshell-uri"
@@ -4162,6 +4151,15 @@ msgstr ""
 
 msgid "Inconsistent archive"
 msgstr "Arhivă inconsistentă"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot open %s archive\n"
+"%s"
+msgstr ""
+"Nu se poate deschide %s arhiva\n"
+"%s:\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -4738,23 +4736,3 @@ msgstr "Continuă de la început?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nu se poate aduce o copie locală a /ftp://some.host/editme.txt"
-
-#, c-format
-#~ msgid "%s is not a directory\n"
-#~ msgstr "%s nu este un dosar\n"
-
-#, c-format
-#~ msgid "Directory %s is not owned by you\n"
-#~ msgstr "Nu dețineți dosarul %s\n"
-
-#, c-format
-#~ msgid "Cannot set correct permissions for directory %s\n"
-#~ msgstr "Nu pot seta permisiunile corecte pentru dosarul %s\n"
-
-#, c-format
-#~ msgid "Temporary files will be created in %s\n"
-#~ msgstr "Fișierele temporare vor fi create în %s\n"
-
-#, c-format
-#~ msgid "Temporary files will not be created\n"
-#~ msgstr "Nu vor fi create fișiere temporare\n"

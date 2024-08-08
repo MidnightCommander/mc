@@ -5,7 +5,7 @@
 # Translators:
 # baua gonzo <baua.gonzo@gmail.com>, 2016
 # David D, 2017-2018
-# David Prudhomme <david7.prudhomme@gmail.com>, 2018,2021
+# David Prudhomme <david7.prudhomme@gmail.com>, 2018,2021,2024
 # dfd998a47e5ece82efa734d3c31b5c3e_071ebb8, 2015
 # Effede Effede <g2sainfroc@gmail.com>, 2016
 # Matthieu Crapet <mcrapet@gmail.com>, 2013-2016
@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-06-02 12:47+0300\n"
+"POT-Creation-Date: 2024-08-08 09:51+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Wallon Wallon, 2022-2024\n"
 "Language-Team: French (http://app.transifex.com/mc/mc/language/fr/)\n"
@@ -133,7 +133,7 @@ msgid "He&xadecimal"
 msgstr "He&xadécimal"
 
 msgid "Wil&dcard search"
-msgstr "Recherche joker"
+msgstr "Recherche générique"
 
 #, c-format
 msgid ""
@@ -574,11 +574,13 @@ msgstr "Obtention du fichier"
 msgid "Changes to file lost"
 msgstr "Les modifications du fichier sont perdus"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create temporary directory %s: %s.\n"
 "Temporary files will not be created\n"
-msgstr "Ne peut créer le répertoire temporaire %s : %s\n"
+msgstr ""
+"Impossible de créer le répertoire temporaire %s : %s.\n"
+"Les fichiers temporaires ne seront pas créés\n"
 
 msgid "Press any key to continue..."
 msgstr "Appuyez sur une touche pour continuer..."
@@ -821,9 +823,8 @@ msgstr "Options du terminal"
 msgid "Arguments parse error!"
 msgstr "Erreur lors de l’analyse des arguments !"
 
-#, fuzzy
 msgid "MC is built without builtin editor."
-msgstr "Avec l’éditeur intégré"
+msgstr "MC est conçu sans éditeur intégré."
 
 msgid "No arguments given to the viewer."
 msgstr "Aucun argument passé à la visionneuse."
@@ -1659,7 +1660,7 @@ msgid "ButtonBar|Delete"
 msgstr "ButtonBar|Suppr"
 
 msgid "ButtonBar|PullDn"
-msgstr "ButtonBar|MenuDér"
+msgstr "ButtonBar|MenuDérou"
 
 msgid "Breton"
 msgstr "Breton"
@@ -2554,7 +2555,7 @@ msgstr ""
 "soit utiliser ce fichier comme exemple de rédaction."
 
 msgid "DialogTitle|Copy"
-msgstr "TitreDialog|Copie"
+msgstr "TitreDialog|Copier"
 
 msgid "DialogTitle|Move"
 msgstr "TitreDialog|Déplacer"
@@ -2600,8 +2601,8 @@ msgid ""
 "Cannot stat hardlink source file \"%s\"\n"
 "%s"
 msgstr ""
-"Impossible de statuer sur le fichier source de la liaison physique « "
-"hardlink » « %s »\n"
+"Impossible de statuer sur le fichier source de la liaison physique "
+"« hardlink » « %s »\n"
 "%s"
 
 #, c-format
@@ -2630,8 +2631,8 @@ msgid ""
 "Option Stable Symlinks will be disabled"
 msgstr ""
 "Impossible de réaliser des liens symboliques stables entre systèmes de "
-"fichiers non-locaux : désactivation de l’option « Liens symboliques stables "
-"»."
+"fichiers non-locaux : désactivation de l’option « Liens symboliques "
+"stables »."
 
 #, c-format
 msgid ""
@@ -2760,20 +2761,20 @@ msgstr ""
 "Impossible d’obtenir les caractéristiques du fichier source « %s »\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
-"Impossible d’obtenir les caractéristiques du fichier source « %s »\n"
+"Impossible d’obtenir les attributs du fichier source « %s »\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
-"Impossible d’obtenir les caractéristiques du fichier cible « %s »\n"
+"Impossible de définir les attributs du fichier cible « %s »\n"
 "%s"
 
 #, c-format
@@ -2887,12 +2888,12 @@ msgstr ""
 "Impossible de fermer le fichier cible « %s »\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
-"Impossible d’obtenir les caractéristiques du fichier cible « %s »\n"
+"Impossible de définir les attributs du fichier cible « %s »\n"
 "%s"
 
 #, c-format
@@ -2903,12 +2904,12 @@ msgstr ""
 "Impossible d’obtenir les caractéristiques du fichier source « %s »\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
-"Impossible d’obtenir les caractéristiques du fichier source « %s »\n"
+"Impossible d’obtenir les attributs du répertoire source « %s »\n"
 "%s"
 
 #, c-format
@@ -3298,10 +3299,10 @@ msgid "ButtonBar|View"
 msgstr "ButtonBar|Voir"
 
 msgid "ButtonBar|RenMov"
-msgstr "ButtonBar|RenDep"
+msgstr "ButtonBar|RenDép"
 
 msgid "ButtonBar|Mkdir"
-msgstr "ButtonBar|CréRep"
+msgstr "ButtonBar|CréRép"
 
 msgid "&Chdir"
 msgstr "&Changer de répertoire"
@@ -3718,7 +3719,7 @@ msgid "SUB-DIR"
 msgstr "SOUS-RÉP"
 
 msgid "<readlink failed>"
-msgstr "<échec de readlink>"
+msgstr "<readlink failed>"
 
 #, c-format
 msgid "%s in %d file"
@@ -3752,7 +3753,7 @@ msgid "Do you really want to execute?"
 msgstr "Voulez-vous vraiment l’exécuter ?"
 
 msgid "Cannot read directory contents"
-msgstr " Ne peut lire le contenu du répertoire"
+msgstr "Impossible de lire le contenu du répertoire"
 
 msgid "User supplied format looks invalid, reverting to default."
 msgstr ""
@@ -4004,13 +4005,11 @@ msgstr "Le shell est toujours actif. Quitter tout de même ?"
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Attention : ne peut aller à %s.\n"
 
-#, fuzzy
 msgid "With builtin editor and aspell support"
-msgstr "Avec un éditeur intégré et un support Aspell"
+msgstr "Avec éditeur intégré et support aspell"
 
-#, fuzzy
 msgid "With builtin editor"
-msgstr "Avec l’éditeur intégré"
+msgstr "Avec éditeur intégré"
 
 msgid "With optional subshell support"
 msgstr "Avec prise en charge optionnelle du sous-shell"
@@ -4194,6 +4193,15 @@ msgstr ""
 
 msgid "Inconsistent archive"
 msgstr "Archive incohérente"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot open %s archive\n"
+"%s"
+msgstr ""
+"Impossible d’ouvrir l’archive %s\n"
+"%s :\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -4721,10 +4729,10 @@ msgid "ButtonBar|Parse"
 msgstr "ButtonBar|Analyse"
 
 msgid "ButtonBar|Unform"
-msgstr "ButtonBar|Défmter"
+msgstr "ButtonBar|Déformater"
 
 msgid "ButtonBar|Format"
-msgstr "ButtonBar|Fmter"
+msgstr "ButtonBar|Formater"
 
 #, c-format
 msgid ""
@@ -4783,23 +4791,3 @@ msgstr "Continuer à partir du début ?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Impossible de récupérer localement le fichier /ftp://some.host/editme.txt"
-
-#, c-format
-#~ msgid "%s is not a directory\n"
-#~ msgstr "%s n’est pas un répertoire\n"
-
-#, c-format
-#~ msgid "Directory %s is not owned by you\n"
-#~ msgstr "Vous n’êtes pas propriétaire du répertoire %s\n"
-
-#, c-format
-#~ msgid "Cannot set correct permissions for directory %s\n"
-#~ msgstr "Impossible de régler des droits corrects sur le répertoire %s\n"
-
-#, c-format
-#~ msgid "Temporary files will be created in %s\n"
-#~ msgstr "Les fichiers temporaires seront crées dans %s\n"
-
-#, c-format
-#~ msgid "Temporary files will not be created\n"
-#~ msgstr "Les fichiers temporaires ne seront pas créés\n"

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-06-02 12:47+0300\n"
+"POT-Creation-Date: 2024-08-08 09:51+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Marco Ciampa <ciampix@posteo.net>, 2023\n"
 "Language-Team: Italian (http://app.transifex.com/mc/mc/language/it/)\n"
@@ -567,11 +567,11 @@ msgstr "Ottenuto file "
 msgid "Changes to file lost"
 msgstr "Cambiamenti al file persi"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create temporary directory %s: %s.\n"
 "Temporary files will not be created\n"
-msgstr "Non posso creare la directory temporanea %s: %s\n"
+msgstr ""
 
 msgid "Press any key to continue..."
 msgstr "Premi un tasto per continuare..."
@@ -792,9 +792,8 @@ msgstr "Opzioni terminale"
 msgid "Arguments parse error!"
 msgstr "Errore di analisi argomenti!"
 
-#, fuzzy
 msgid "MC is built without builtin editor."
-msgstr "Con editor integrato"
+msgstr ""
 
 msgid "No arguments given to the viewer."
 msgstr "Nessun argomento fornito al visualizzatore"
@@ -2712,21 +2711,17 @@ msgstr ""
 "Impossibile ottenere info sul file sorgente \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
-"Impossibile ottenere info sul file sorgente \"%s\"\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
-"Impossibile ottenere info sul file destinazione \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2839,13 +2834,11 @@ msgstr ""
 "Impossibile chiudere il file destinazione \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
-"Impossibile ottenere info sul file destinazione \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2855,13 +2848,11 @@ msgstr ""
 "Impossibile ottenere info sulla directory sorgente \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
-"Impossibile ottenere info sulla directory sorgente \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -3954,13 +3945,11 @@ msgstr "La shell è ancora attiva. Esco comunque?"
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Attenzione: non posso entrare su %s.\n"
 
-#, fuzzy
 msgid "With builtin editor and aspell support"
-msgstr "Con editor integrato e supporto Aspell"
+msgstr ""
 
-#, fuzzy
 msgid "With builtin editor"
-msgstr "Con editor integrato"
+msgstr ""
 
 msgid "With optional subshell support"
 msgstr "Con supporto opzionale subshell"
@@ -4142,6 +4131,15 @@ msgstr ""
 
 msgid "Inconsistent archive"
 msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+"Cannot open %s archive\n"
+"%s"
+msgstr ""
+"Impossibile aprire archivio %s\n"
+"%s:\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -4713,24 +4711,3 @@ msgstr "Continuare dall'inizio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Impossibile ricevere copia locale di /ftp://un.host/modificami.txt"
-
-#, c-format
-#~ msgid "%s is not a directory\n"
-#~ msgstr "%s non è una directory\n"
-
-#, c-format
-#~ msgid "Directory %s is not owned by you\n"
-#~ msgstr "La directory %s non è di Vostra proprietà\n"
-
-#, c-format
-#~ msgid "Cannot set correct permissions for directory %s\n"
-#~ msgstr ""
-#~ "Impossibile impostare correttamente i permessi per la directory %s\n"
-
-#, c-format
-#~ msgid "Temporary files will be created in %s\n"
-#~ msgstr "I file temporanei verranno creati in %s\n"
-
-#, c-format
-#~ msgid "Temporary files will not be created\n"
-#~ msgstr "I file temporanei non verranno creati\n"

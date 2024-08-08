@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-06-02 12:47+0300\n"
+"POT-Creation-Date: 2024-08-08 09:51+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>, 2021\n"
 "Language-Team: Finnish (http://app.transifex.com/mc/mc/language/fi/)\n"
@@ -564,11 +564,11 @@ msgstr "Tuodaan tiedostoa"
 msgid "Changes to file lost"
 msgstr "Muutokset tiedostoon menetetty"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create temporary directory %s: %s.\n"
 "Temporary files will not be created\n"
-msgstr "Väliaikaishakemiston luonti epäonnistui %s: %s\n"
+msgstr ""
 
 msgid "Press any key to continue..."
 msgstr "Paina mitä tahansa näppäintä jatkaaksesi"
@@ -2643,21 +2643,17 @@ msgstr ""
 "Lähdetiedostoa ei voi lisätä \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
-"Lähdetiedostoa ei voi lisätä \"%s\"\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
-"Ei onnistu fstat kohdetiedostoon \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2770,13 +2766,11 @@ msgstr ""
 "Kohdetiedostoa ei voi sulkea \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
-"Ei onnistu fstat kohdetiedostoon \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2786,13 +2780,11 @@ msgstr ""
 "Kohdekansiota ei voi lisätä \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
-"Kohdekansiota ei voi lisätä \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -4012,6 +4004,14 @@ msgstr "Odottaminen päättyminen tiedostossa %s"
 msgid "Inconsistent archive"
 msgstr ""
 
+#, fuzzy, c-format
+msgid ""
+"Cannot open %s archive\n"
+"%s"
+msgstr ""
+"Ei voi avata tiedostoa %s\n"
+"%s"
+
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
@@ -4541,23 +4541,3 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#, c-format
-#~ msgid "%s is not a directory\n"
-#~ msgstr "%s ei ole hakemisto\n"
-
-#, c-format
-#~ msgid "Directory %s is not owned by you\n"
-#~ msgstr "Et ole kansion %s omistaja\n"
-
-#, c-format
-#~ msgid "Cannot set correct permissions for directory %s\n"
-#~ msgstr "Sinulla ei ole oikeuksia kansioon %s\n"
-
-#, c-format
-#~ msgid "Temporary files will be created in %s\n"
-#~ msgstr "Väliaikaistiedostoja ei ole luotu kohteeseen %s\n"
-
-#, c-format
-#~ msgid "Temporary files will not be created\n"
-#~ msgstr "Väliaikais tiedosta ei ole luotu\n"
