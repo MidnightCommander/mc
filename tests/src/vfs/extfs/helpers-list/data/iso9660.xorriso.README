@@ -1,7 +1,15 @@
-Sample iso image was created from alpine-standard-3.19.0-x86_64.iso with such
-script:
+Regarding the date formats used in listings, xorriso [1] implements the same
+behavior as `ls` [2]: 'month day year' for recent items (180 days old at max),
+'month day time' for older ones. So, it is important to NOT have any "recent"
+items in the input data for tests. Otherwise, after some time, the test would
+fail, like it happened in ticket #4567.
+
+Sample iso image was created from alpine-standard-3.18.0-x86_64.iso (dated May
+9, 2023) with such script:
 
     #!/usr/bin/env bash
+
+    EPOCH='Jan 1 2024'
 
     if ! test -d links; then
         mkdir "$_"
@@ -18,10 +26,12 @@ script:
         ln -s "'side-quotes'" "'side-quotes-link-sq'"
 
         cd -
+
+        find links -exec touch -h -d "$EPOCH" {} +
     fi
 
     args=(
-        -indev alpine-standard-3.19.0-x86_64.iso
+        -indev alpine-standard-3.18.0-x86_64.iso
         -outdev sample.iso
         -boot_image any replay
         -joliet on
@@ -47,3 +57,7 @@ back in the helper code.
 Sample input was generated like this:
 
     xorriso -dev sample.iso -find / -exec lsdl 2>/dev/null
+
+
+[1] misc_funct.c:Ftimetxt()
+[2] ls.c:long_time_format[] (in GNU coreutils)
