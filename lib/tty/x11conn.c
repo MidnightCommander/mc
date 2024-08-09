@@ -129,20 +129,15 @@ static gboolean
 x11_available (void)
 {
 #ifdef HAVE_GMODULE
-    gchar *x11_module_fname;
-
     if (lost_connection)
         return FALSE;
 
     if (x11_module != NULL)
         return TRUE;
 
-    x11_module_fname = g_module_build_path (NULL, "X11");
-    x11_module = g_module_open (x11_module_fname, G_MODULE_BIND_LAZY);
+    x11_module = g_module_open ("X11", G_MODULE_BIND_LAZY);
     if (x11_module == NULL)
         x11_module = g_module_open ("libX11.so.6", G_MODULE_BIND_LAZY);
-
-    g_free (x11_module_fname);
 
     if (x11_module == NULL)
         return FALSE;
