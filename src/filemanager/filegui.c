@@ -350,14 +350,17 @@ file_eta_prepare_for_show (char *buffer, double eta_secs, gboolean always_show)
 {
     char _fmt_buff[BUF_TINY];
 
-    if (eta_secs <= 0.5 && !always_show)
+    if (eta_secs <= 0.5)
     {
-        *buffer = '\0';
-        return;
+        if (!always_show)
+        {
+            *buffer = '\0';
+            return;
+        }
+
+        eta_secs = 1.0;
     }
 
-    if (eta_secs <= 0.5)
-        eta_secs = 1;
     file_frmt_time (_fmt_buff, eta_secs);
     g_snprintf (buffer, BUF_TINY, _("ETA %s"), _fmt_buff);
 }
