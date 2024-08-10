@@ -76,6 +76,9 @@ typedef struct
     /* Operation type (copy, move, delete) */
     FileOperation operation;
 
+    /* Start of file transferring */
+    gint64 transfer_start;
+
     /* The estimated time of arrival in seconds */
     double eta_secs;
 

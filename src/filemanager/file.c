@@ -1132,8 +1132,7 @@ files_error (const char *format, const char *file1, const char *file2)
 
 static void
 copy_file_file_display_progress (file_op_total_context_t *tctx, file_op_context_t *ctx,
-                                 gint64 tv_current, gint64 tv_transfer_start, off_t file_part,
-                                 off_t file_size)
+                                 gint64 tv_current, off_t file_part, off_t file_size)
 {
     gint64 dt;
 
@@ -1141,7 +1140,7 @@ copy_file_file_display_progress (file_op_total_context_t *tctx, file_op_context_
     rotate_dash (TRUE);
 
     /* Compute ETA */
-    dt = (tv_current - tv_transfer_start) / G_USEC_PER_SEC;
+    dt = (tv_current - ctx->transfer_start) / G_USEC_PER_SEC;
 
     if (file_part == 0)
         ctx->eta_secs = 0.0;
@@ -2277,7 +2276,6 @@ copy_file_file (file_op_total_context_t *tctx, file_op_context_t *ctx,
     gboolean dst_exists = FALSE, appending = FALSE;
     off_t file_size = -1;
     FileProgressStatus return_status, temp_status;
-    gint64 tv_transfer_start;
     dest_status_t dst_status = DEST_NONE;
     int open_flags;
     vfs_path_t *src_vpath = NULL, *dst_vpath = NULL;
@@ -2524,7 +2522,7 @@ copy_file_file (file_op_total_context_t *tctx, file_op_context_t *ctx,
         }
     }
 
-    tv_transfer_start = g_get_monotonic_time ();
+    ctx->transfer_start = g_get_monotonic_time ();
 
     while ((src_desc = mc_open (src_vpath, O_RDONLY | O_LINEAR)) < 0 && !ctx->ignore_all)
     {
@@ -2685,7 +2683,7 @@ copy_file_file (file_op_total_context_t *tctx, file_op_context_t *ctx,
         const char *stalled_msg = "";
         gboolean is_first_time = TRUE;
 
-        tv_last_update = tv_transfer_start;
+        tv_last_update = ctx->transfer_start;
 
         bufsize = io_blksize (dst_stat);
         buf = g_malloc (bufsize);
@@ -2765,8 +2763,8 @@ copy_file_file (file_op_total_context_t *tctx, file_op_context_t *ctx,
 
             if (is_first_time || usecs > FILEOP_UPDATE_INTERVAL_US)
             {
-                copy_file_file_display_progress (tctx, ctx, tv_current, tv_transfer_start,
-                                                 file_part, file_size - ctx->do_reget);
+                copy_file_file_display_progress (tctx, ctx, tv_current, file_part,
+                                                 file_size - ctx->do_reget);
                 tv_last_update = tv_current;
             }
 
