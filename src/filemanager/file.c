@@ -1132,8 +1132,8 @@ files_error (const char *format, const char *file1, const char *file2)
 
 static void
 copy_file_file_display_progress (file_op_total_context_t *tctx, file_op_context_t *ctx,
-                                 gint64 tv_current, gint64 tv_transfer_start, off_t file_size,
-                                 off_t file_part)
+                                 gint64 tv_current, gint64 tv_transfer_start, off_t file_part,
+                                 off_t file_size)
 {
     gint64 dt;
 
@@ -2766,7 +2766,7 @@ copy_file_file (file_op_total_context_t *tctx, file_op_context_t *ctx,
             if (is_first_time || usecs > FILEOP_UPDATE_INTERVAL_US)
             {
                 copy_file_file_display_progress (tctx, ctx, tv_current, tv_transfer_start,
-                                                 file_size - ctx->do_reget, file_part);
+                                                 file_part, file_size - ctx->do_reget);
                 tv_last_update = tv_current;
             }
 
