@@ -665,10 +665,12 @@ try_channels (gboolean set_timeout)
 static key_def *
 create_sequence (const char *seq, int code, int action)
 {
-    key_def *base, *p, *attach;
+    key_def *base, *attach;
 
     for (base = attach = NULL; *seq != '\0'; seq++)
     {
+        key_def *p;
+
         p = g_new (key_def, 1);
         if (base == NULL)
             base = p;
@@ -677,11 +679,9 @@ create_sequence (const char *seq, int code, int action)
 
         p->ch = *seq;
         p->code = code;
-        p->child = p->next = NULL;
-        if (seq[1] == '\0')
-            p->action = action;
-        else
-            p->action = MCKEY_NOACTION;
+        p->child = NULL;
+        p->next = NULL;
+        p->action = seq[1] == '\0' ? action : MCKEY_NOACTION;
         attach = p;
     }
     return base;
