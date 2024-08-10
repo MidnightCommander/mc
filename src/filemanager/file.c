@@ -2766,7 +2766,7 @@ copy_file_file (file_op_total_context_t *tctx, file_op_context_t *ctx,
             if (is_first_time || usecs > FILEOP_UPDATE_INTERVAL_US)
             {
                 copy_file_file_display_progress (tctx, ctx, tv_current, tv_transfer_start,
-                                                 file_size, file_part);
+                                                 file_size - ctx->do_reget, file_part);
                 tv_last_update = tv_current;
             }
 
