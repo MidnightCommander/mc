@@ -1350,7 +1350,8 @@ move_file_file (const WPanel *panel, file_op_total_context_t *tctx, file_op_cont
     if (panel == NULL)
     {
         file_progress_show_source (ctx, NULL);
-        file_progress_show (ctx, 0, 0, "", FALSE);
+        if (verbose)
+            file_progress_show (ctx, 0, 0, "", FALSE);
 
         return_status = check_progress_buttons (ctx);
         if (return_status != FILE_CONT)
@@ -1720,7 +1721,8 @@ do_move_dir_dir (const WPanel *panel, file_op_total_context_t *tctx, file_op_con
     {
         file_progress_show_source (ctx, NULL);
         file_progress_show_target (ctx, NULL);
-        file_progress_show (ctx, 0, 0, "", FALSE);
+        if (verbose)
+            file_progress_show (ctx, 0, 0, "", FALSE);
 
         return_status = check_progress_buttons (ctx);
         if (return_status != FILE_CONT)
@@ -2662,10 +2664,14 @@ copy_file_file (file_op_total_context_t *tctx, file_op_context_t *ctx,
     ctx->eta_secs = 0.0;
     ctx->bps = 0;
 
-    if (tctx->bps == 0 || (file_size / tctx->bps) > FILEOP_UPDATE_INTERVAL)
-        file_progress_show (ctx, 0, file_size, "", TRUE);
-    else
-        file_progress_show (ctx, 1, 1, "", TRUE);
+    if (verbose)
+    {
+        if (tctx->bps == 0 || (file_size / tctx->bps) > FILEOP_UPDATE_INTERVAL)
+            file_progress_show (ctx, 0, file_size, "", TRUE);
+        else
+            file_progress_show (ctx, 1, 1, "", TRUE);
+    }
+
     return_status = check_progress_buttons (ctx);
     mc_refresh ();
 
@@ -2771,15 +2777,19 @@ copy_file_file (file_op_total_context_t *tctx, file_op_context_t *ctx,
 
             force_update = (tv_current - tctx->transfer_start) > FILEOP_UPDATE_INTERVAL_US;
 
-            if (verbose && ctx->dialog_type == FILEGUI_DIALOG_MULTI_ITEM)
+            if (verbose)
             {
-                file_progress_show_count (ctx, tctx->progress_count, ctx->progress_count);
-                file_progress_show_total (tctx, ctx, tctx->copied_bytes, force_update);
-            }
+                if (ctx->dialog_type == FILEGUI_DIALOG_MULTI_ITEM)
+                {
+                    file_progress_show_count (ctx, tctx->progress_count, ctx->progress_count);
+                    file_progress_show_total (tctx, ctx, tctx->copied_bytes, force_update);
+                }
 
-            file_progress_show (ctx, file_part + ctx->do_reget, file_size, stalled_msg,
-                                force_update);
-            mc_refresh ();
+                file_progress_show (ctx, file_part + ctx->do_reget, file_size, stalled_msg,
+                                    force_update);
+
+                mc_refresh ();
+            }
 
             return_status = check_progress_buttons (ctx);
             if (return_status != FILE_CONT)
@@ -3641,14 +3651,17 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                 if (value == FILE_CONT)
                     do_file_mark (panel, i, 0);
 
-                if (verbose && ctx->dialog_type == FILEGUI_DIALOG_MULTI_ITEM)
+                if (verbose)
                 {
-                    file_progress_show_count (ctx, tctx->progress_count, ctx->progress_count);
-                    file_progress_show_total (tctx, ctx, tctx->progress_bytes, FALSE);
-                }
+                    if (ctx->dialog_type == FILEGUI_DIALOG_MULTI_ITEM)
+                    {
+                        file_progress_show_count (ctx, tctx->progress_count, ctx->progress_count);
+                        file_progress_show_total (tctx, ctx, tctx->progress_bytes, FALSE);
+                    }
 
-                if (operation != OP_DELETE)
-                    file_progress_show (ctx, 0, 0, "", FALSE);
+                    if (operation != OP_DELETE)
+                        file_progress_show (ctx, 0, 0, "", FALSE);
+                }
 
                 if (check_progress_buttons (ctx) == FILE_ABORT)
                     break;

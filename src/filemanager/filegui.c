@@ -989,7 +989,7 @@ file_progress_show (file_op_context_t *ctx, off_t done, off_t total,
 {
     file_op_context_ui_t *ui;
 
-    if (!verbose || ctx == NULL || ctx->ui == NULL)
+    if (ctx == NULL || ctx->ui == NULL)
         return;
 
     ui = ctx->ui;
