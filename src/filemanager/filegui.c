@@ -391,7 +391,7 @@ file_ui_op_dlg_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, 
         /* Do not close the dialog because the query dialog will be shown */
         if (parm == CK_Cancel)
         {
-            DIALOG (w)->ret_value = FILE_ABORT; /* for check_progress_buttons() */
+            DIALOG (w)->ret_value = FILE_ABORT; /* for file_progress_check_buttons() */
             return MSG_HANDLED;
         }
         return MSG_NOT_HANDLED;
@@ -767,7 +767,7 @@ progress_button_callback (WButton *button, int action)
 /* --------------------------------------------------------------------------------------------- */
 
 FileProgressStatus
-check_progress_buttons (file_op_context_t *ctx)
+file_progress_check_buttons (file_op_context_t *ctx)
 {
     int c;
     Gpm_Event event;
@@ -819,8 +819,8 @@ check_progress_buttons (file_op_context_t *ctx)
 /* {{{ File progress display routines */
 
 void
-file_op_context_create_ui (file_op_context_t *ctx, gboolean with_eta,
-                           filegui_dialog_type_t dialog_type)
+file_progress_ui_create (file_op_context_t *ctx, gboolean with_eta,
+                         filegui_dialog_type_t dialog_type)
 {
     file_op_context_ui_t *ui;
     Widget *w;
@@ -969,7 +969,7 @@ file_op_context_create_ui (file_op_context_t *ctx, gboolean with_eta,
 /* --------------------------------------------------------------------------------------------- */
 
 void
-file_op_context_destroy_ui (file_op_context_t *ctx)
+file_progress_ui_destroy (file_op_context_t *ctx)
 {
     if (ctx != NULL && ctx->ui != NULL)
     {

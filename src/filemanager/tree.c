@@ -727,7 +727,7 @@ tree_copy (WTree *tree, const char *default_dest)
 
         ctx = file_op_context_new (OP_COPY);
         tctx = file_op_total_context_new ();
-        file_op_context_create_ui (ctx, FALSE, FILEGUI_DIALOG_MULTI_ITEM);
+        file_progress_ui_create (ctx, FALSE, FILEGUI_DIALOG_MULTI_ITEM);
         tctx->ask_overwrite = FALSE;
         copy_dir_dir (tctx, ctx, vfs_path_as_str (tree->selected_ptr->name), dest, TRUE, FALSE,
                       FALSE, NULL);
@@ -774,7 +774,7 @@ tree_move (WTree *tree, const char *default_dest)
 
             ctx = file_op_context_new (OP_MOVE);
             tctx = file_op_total_context_new ();
-            file_op_context_create_ui (ctx, FALSE, FILEGUI_DIALOG_ONE_ITEM);
+            file_progress_ui_create (ctx, FALSE, FILEGUI_DIALOG_ONE_ITEM);
             move_dir_dir (tctx, ctx, vfs_path_as_str (tree->selected_ptr->name), dest);
             file_op_total_context_destroy (tctx);
             file_op_context_destroy (ctx);
@@ -832,7 +832,7 @@ tree_rmdir (void *data)
     ctx = file_op_context_new (OP_DELETE);
     tctx = file_op_total_context_new ();
 
-    file_op_context_create_ui (ctx, FALSE, FILEGUI_DIALOG_ONE_ITEM);
+    file_progress_ui_create (ctx, FALSE, FILEGUI_DIALOG_ONE_ITEM);
     if (erase_dir (tctx, ctx, tree->selected_ptr->name) == FILE_CONT)
         tree_forget (tree);
     file_op_total_context_destroy (tctx);

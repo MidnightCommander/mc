@@ -804,9 +804,9 @@ panel_operate_init_totals (const WPanel *panel, const vfs_path_t *source,
     }
 
     /* destroy already created UI for single file rename operation */
-    file_op_context_destroy_ui (ctx);
+    file_progress_ui_destroy (ctx);
 
-    file_op_context_create_ui (ctx, TRUE, dialog_type);
+    file_progress_ui_create (ctx, TRUE, dialog_type);
 
     return status;
 }
@@ -838,7 +838,7 @@ progress_update_one (file_op_total_context_t *tctx, file_op_context_t *ctx, off_
         tv_start = tv_current;
     }
 
-    return check_progress_buttons (ctx);
+    return file_progress_check_buttons (ctx);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1227,7 +1227,7 @@ move_file_file (const WPanel *panel, file_op_total_context_t *tctx, file_op_cont
     file_progress_show_target (ctx, dst_vpath);
 
     /* FIXME: do we really need to check buttons in case of single file? */
-    if (check_progress_buttons (ctx) == FILE_ABORT)
+    if (file_progress_check_buttons (ctx) == FILE_ABORT)
     {
         return_status = FILE_ABORT;
         goto ret;
@@ -1353,7 +1353,7 @@ move_file_file (const WPanel *panel, file_op_total_context_t *tctx, file_op_cont
         if (verbose)
             file_progress_show (ctx, 0, 0, "", FALSE);
 
-        return_status = check_progress_buttons (ctx);
+        return_status = file_progress_check_buttons (ctx);
         if (return_status != FILE_CONT)
             goto ret;
     }
@@ -1390,7 +1390,7 @@ erase_file (file_op_total_context_t *tctx, file_op_context_t *ctx, const vfs_pat
     if (file_progress_show_deleting (ctx, vpath, &tctx->progress_count))
     {
         file_progress_show_count (ctx, tctx->progress_count, ctx->progress_count);
-        if (check_progress_buttons (ctx) == FILE_ABORT)
+        if (file_progress_check_buttons (ctx) == FILE_ABORT)
             return FILE_ABORT;
 
         mc_refresh ();
@@ -1408,7 +1408,7 @@ erase_file (file_op_total_context_t *tctx, file_op_context_t *ctx, const vfs_pat
     if (tctx->progress_count == 0)
         return FILE_CONT;
 
-    return check_progress_buttons (ctx);
+    return file_progress_check_buttons (ctx);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1480,7 +1480,7 @@ recursive_erase (file_op_total_context_t *tctx, file_op_context_t *ctx, const vf
 
     file_progress_show_deleting (ctx, vpath, NULL);
     file_progress_show_count (ctx, tctx->progress_count, ctx->progress_count);
-    if (check_progress_buttons (ctx) == FILE_ABORT)
+    if (file_progress_check_buttons (ctx) == FILE_ABORT)
         return FILE_ABORT;
 
     mc_refresh ();
@@ -1531,7 +1531,7 @@ erase_dir_iff_empty (file_op_context_t *ctx, const vfs_path_t *vpath, size_t cou
 {
     file_progress_show_deleting (ctx, vpath, NULL);
     file_progress_show_count (ctx, count, ctx->progress_count);
-    if (check_progress_buttons (ctx) == FILE_ABORT)
+    if (file_progress_check_buttons (ctx) == FILE_ABORT)
         return FILE_ABORT;
 
     mc_refresh ();
@@ -1607,7 +1607,7 @@ do_move_dir_dir (const WPanel *panel, file_op_total_context_t *tctx, file_op_con
     file_progress_show_target (ctx, dst_vpath);
 
     /* FIXME: do we really need to check buttons in case of single directory? */
-    if (panel != NULL && check_progress_buttons (ctx) == FILE_ABORT)
+    if (panel != NULL && file_progress_check_buttons (ctx) == FILE_ABORT)
     {
         return_status = FILE_ABORT;
         goto ret_fast;
@@ -1724,7 +1724,7 @@ do_move_dir_dir (const WPanel *panel, file_op_total_context_t *tctx, file_op_con
         if (verbose)
             file_progress_show (ctx, 0, 0, "", FALSE);
 
-        return_status = check_progress_buttons (ctx);
+        return_status = file_progress_check_buttons (ctx);
         if (return_status != FILE_CONT)
             goto ret;
     }
@@ -2092,7 +2092,7 @@ operate_single_file (const WPanel *panel, file_op_total_context_t *tctx, file_op
                 if (!mc_global.we_are_background)
 #endif
                     /* create UI to show confirmation dialog */
-                    file_op_context_create_ui (ctx, TRUE, FILEGUI_DIALOG_ONE_ITEM);
+                    file_progress_ui_create (ctx, TRUE, FILEGUI_DIALOG_ONE_ITEM);
 
                 if (is_file)
                     value = move_file_file (panel, tctx, ctx, src, dest);
@@ -2297,7 +2297,7 @@ copy_file_file (file_op_total_context_t *tctx, file_op_context_t *ctx,
     file_progress_show_source (ctx, src_vpath);
     file_progress_show_target (ctx, dst_vpath);
 
-    if (check_progress_buttons (ctx) == FILE_ABORT)
+    if (file_progress_check_buttons (ctx) == FILE_ABORT)
     {
         return_status = FILE_ABORT;
         goto ret_fast;
@@ -2672,7 +2672,7 @@ copy_file_file (file_op_total_context_t *tctx, file_op_context_t *ctx,
             file_progress_show (ctx, 1, 1, "", TRUE);
     }
 
-    return_status = check_progress_buttons (ctx);
+    return_status = file_progress_check_buttons (ctx);
     mc_refresh ();
 
     if (return_status == FILE_CONT)
@@ -2791,7 +2791,7 @@ copy_file_file (file_op_total_context_t *tctx, file_op_context_t *ctx,
                 mc_refresh ();
             }
 
-            return_status = check_progress_buttons (ctx);
+            return_status = file_progress_check_buttons (ctx);
             if (return_status != FILE_CONT)
             {
                 int query_res;
@@ -3305,7 +3305,7 @@ erase_dir (file_op_total_context_t *tctx, file_op_context_t *ctx, const vfs_path
 {
     file_progress_show_deleting (ctx, vpath, NULL);
     file_progress_show_count (ctx, tctx->progress_count, ctx->progress_count);
-    if (check_progress_buttons (ctx) == FILE_ABORT)
+    if (file_progress_check_buttons (ctx) == FILE_ABORT)
         return FILE_ABORT;
 
     mc_refresh ();
@@ -3663,7 +3663,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                         file_progress_show (ctx, 0, 0, "", FALSE);
                 }
 
-                if (check_progress_buttons (ctx) == FILE_ABORT)
+                if (file_progress_check_buttons (ctx) == FILE_ABORT)
                     break;
 
                 mc_refresh ();

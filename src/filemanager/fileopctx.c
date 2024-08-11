@@ -62,7 +62,7 @@
  * \return The newly-created context, filled with the default file mask values.
  *
  * Creates a new file operation context with the default values.  If you later want
- * to have a user interface for this, call file_op_context_create_ui().
+ * to have a user interface for this, call file_progress_ui_create().
  */
 
 file_op_context_t *
@@ -99,7 +99,7 @@ file_op_context_destroy (file_op_context_t *ctx)
 {
     if (ctx != NULL)
     {
-        file_op_context_destroy_ui (ctx);
+        file_progress_ui_destroy (ctx);
         mc_search_free (ctx->search_handle);
         g_free (ctx);
     }
