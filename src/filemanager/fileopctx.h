@@ -166,7 +166,6 @@ typedef struct
     uintmax_t progress_bytes;
     uintmax_t copied_bytes;
     size_t bps;
-    size_t bps_count;
     gint64 transfer_start;
     double eta_secs;
 

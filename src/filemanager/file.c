@@ -1154,25 +1154,14 @@ copy_file_file_display_progress (file_op_total_context_t *tctx, file_op_context_
     /* Compute total ETA and BPS */
     if (ctx->total_bytes != 0)
     {
-        uintmax_t remain_bytes;
+        gint64 total_secs;
 
-        remain_bytes = ctx->total_bytes - tctx->copied_bytes;
-#if 1
-        {
-            gint64 total_secs;
+        total_secs = (tv_current - tctx->transfer_start) / G_USEC_PER_SEC;
+        total_secs = MAX (1, total_secs);
 
-            total_secs = (tv_current - tctx->transfer_start) / G_USEC_PER_SEC;
-            total_secs = MAX (1, total_secs);
-
-            tctx->bps = tctx->copied_bytes / total_secs;
-            tctx->eta_secs = (tctx->bps != 0) ? remain_bytes / tctx->bps : 0;
-        }
-#else
-        /* broken on lot of little files */
-        tctx->bps_count++;
-        tctx->bps = (tctx->bps * (tctx->bps_count - 1) + ctx->bps) / tctx->bps_count;
-        tctx->eta_secs = (tctx->bps != 0) ? remain_bytes / tctx->bps : 0;
-#endif
+        tctx->bps = tctx->copied_bytes / total_secs;
+        const uintmax_t remain_bytes = ctx->total_bytes - tctx->copied_bytes;
+        tctx->eta_secs = tctx->bps != 0 ? remain_bytes / tctx->bps : 0;
     }
 }
 
