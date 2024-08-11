@@ -88,13 +88,13 @@ typedef struct
     /* Transferred seconds */
     long bps_time;
 
-    /* Whether the panel total has been computed */
-    gboolean progress_totals_computed;
     filegui_dialog_type_t dialog_type;
 
     /* Counters for progress indicators */
-    size_t progress_count;
-    uintmax_t progress_bytes;
+    size_t total_count;
+    uintmax_t total_bytes;
+    /* Whether the panel total has been computed */
+    gboolean totals_computed;
 
     /* Result from the recursive query */
     FileCopyMode recursive_result;

@@ -855,7 +855,7 @@ file_progress_ui_create (file_op_context_t *ctx, gboolean with_eta,
 
     if (dialog_type != FILEGUI_DIALOG_DELETE_ITEM)
     {
-        ui->showing_eta = with_eta && ctx->progress_totals_computed;
+        ui->showing_eta = with_eta && ctx->totals_computed;
         ui->showing_bps = with_eta;
 
         ui->src_file_label = label_new (y++, x, NULL);
@@ -883,7 +883,7 @@ file_progress_ui_create (file_op_context_t *ctx, gboolean with_eta,
             ui->total_bytes_label = hline_new (y++, -1, -1);
             group_add_widget (g, ui->total_bytes_label);
 
-            if (ctx->progress_totals_computed)
+            if (ctx->totals_computed)
             {
                 ui->progress_total_gauge =
                     gauge_new (y++, x + 3, dlg_width - (x + 3) * 2, FALSE, 100, 0);
@@ -1042,7 +1042,7 @@ file_progress_show_count (file_op_context_t *ctx, size_t done, size_t total)
     if (ui->total_files_processed_label == NULL)
         return;
 
-    if (ctx->progress_totals_computed)
+    if (ctx->totals_computed)
         label_set_textv (ui->total_files_processed_label, _("Files processed: %zu / %zu"), done,
                          total);
     else
@@ -1066,12 +1066,12 @@ file_progress_show_total (file_op_total_context_t *tctx, file_op_context_t *ctx,
 
     if (ui->progress_total_gauge != NULL)
     {
-        if (ctx->progress_bytes == 0)
+        if (ctx->total_bytes == 0)
             gauge_show (ui->progress_total_gauge, FALSE);
         else
         {
             gauge_set_value (ui->progress_total_gauge, 1024,
-                             (int) (1024 * copied_bytes / ctx->progress_bytes));
+                             (int) (1024 * copied_bytes / ctx->total_bytes));
             gauge_show (ui->progress_total_gauge, TRUE);
         }
     }
@@ -1087,7 +1087,7 @@ file_progress_show_total (file_op_total_context_t *tctx, file_op_context_t *ctx,
         tv_current = g_get_monotonic_time ();
         file_frmt_time (buffer2, (tv_current - tctx->transfer_start) / G_USEC_PER_SEC);
 
-        if (ctx->progress_totals_computed)
+        if (ctx->totals_computed)
         {
             file_eta_prepare_for_show (buffer3, tctx->eta_secs, TRUE);
             if (tctx->bps == 0)
@@ -1114,11 +1114,11 @@ file_progress_show_total (file_op_total_context_t *tctx, file_op_context_t *ctx,
     {
         size_trunc_len (buffer2, 5, tctx->copied_bytes, 0, panels_options.kilobyte_si);
 
-        if (!ctx->progress_totals_computed)
+        if (!ctx->totals_computed)
             hline_set_textv (ui->total_bytes_label, _(" Total: %s "), buffer2);
         else
         {
-            size_trunc_len (buffer3, 5, ctx->progress_bytes, 0, panels_options.kilobyte_si);
+            size_trunc_len (buffer3, 5, ctx->total_bytes, 0, panels_options.kilobyte_si);
             hline_set_textv (ui->total_bytes_label, _(" Total: %s / %s "), buffer2, buffer3);
         }
     }
