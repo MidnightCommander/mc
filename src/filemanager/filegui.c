@@ -215,15 +215,13 @@ typedef struct
     /* Target file: label and name */
     WLabel *tgt_file_label;
     WLabel *tgt_file;
-
     WGauge *progress_file_gauge;
     WLabel *progress_file_label;
 
+    WHLine *total_bytes_label;
     WGauge *progress_total_gauge;
-
     WLabel *total_files_processed_label;
     WLabel *time_label;
-    WHLine *total_bytes_label;
 
     /* Query replace dialog */
     WDialog *replace_dlg;
@@ -233,7 +231,7 @@ typedef struct
     gboolean dont_overwrite_with_zero;
 
     struct stat *src_stat, *dst_stat;
-} file_op_context_ui_t;
+} file_progress_ui_t;
 
 /*** forward declarations (file scope functions) *************************************************/
 
@@ -508,7 +506,7 @@ overwrite_query_dialog (file_op_context_t *ctx, enum OperationMode mode)
 
     const int gap = 1;
 
-    file_op_context_ui_t *ui = ctx->ui;
+    file_progress_ui_t *ui = ctx->ui;
     Widget *wd;
     WGroup *g;
     const char *title;
@@ -771,7 +769,7 @@ file_progress_check_buttons (file_op_context_t *ctx)
 {
     int c;
     Gpm_Event event;
-    file_op_context_ui_t *ui;
+    file_progress_ui_t *ui;
 
     if (ctx == NULL || ctx->ui == NULL)
         return FILE_CONT;
@@ -822,7 +820,7 @@ void
 file_progress_ui_create (file_op_context_t *ctx, gboolean with_eta,
                          filegui_dialog_type_t dialog_type)
 {
-    file_op_context_ui_t *ui;
+    file_progress_ui_t *ui;
     Widget *w;
     WGroup *g;
     int buttons_width;
@@ -845,7 +843,7 @@ file_progress_ui_create (file_op_context_t *ctx, gboolean with_eta,
 
     ctx->dialog_type = dialog_type;
     ctx->recursive_result = RECURSIVE_YES;
-    ctx->ui = g_new0 (file_op_context_ui_t, 1);
+    ctx->ui = g_new0 (file_progress_ui_t, 1);
 
     ui = ctx->ui;
     ui->replace_result = REPLACE_YES;
@@ -973,7 +971,7 @@ file_progress_ui_destroy (file_op_context_t *ctx)
 {
     if (ctx != NULL && ctx->ui != NULL)
     {
-        file_op_context_ui_t *ui = (file_op_context_ui_t *) ctx->ui;
+        file_progress_ui_t *ui = (file_progress_ui_t *) ctx->ui;
 
         dlg_run_done (ui->op_dlg);
         widget_destroy (WIDGET (ui->op_dlg));
@@ -990,7 +988,7 @@ void
 file_progress_show (file_op_context_t *ctx, off_t done, off_t total,
                     const char *stalled_msg, gboolean force_update)
 {
-    file_op_context_ui_t *ui;
+    file_progress_ui_t *ui;
 
     if (ctx == NULL || ctx->ui == NULL)
         return;
@@ -1034,7 +1032,7 @@ file_progress_show (file_op_context_t *ctx, off_t done, off_t total,
 void
 file_progress_show_count (file_op_context_t *ctx, size_t done, size_t total)
 {
-    file_op_context_ui_t *ui;
+    file_progress_ui_t *ui;
 
     if (ctx == NULL || ctx->ui == NULL)
         return;
@@ -1059,7 +1057,7 @@ file_progress_show_total (file_op_total_context_t *tctx, file_op_context_t *ctx,
 {
     char buffer2[BUF_TINY];
     char buffer3[BUF_TINY];
-    file_op_context_ui_t *ui;
+    file_progress_ui_t *ui;
 
     if (ctx == NULL || ctx->ui == NULL)
         return;
@@ -1133,7 +1131,7 @@ file_progress_show_total (file_op_total_context_t *tctx, file_op_context_t *ctx,
 void
 file_progress_show_source (file_op_context_t *ctx, const vfs_path_t *vpath)
 {
-    file_op_context_ui_t *ui;
+    file_progress_ui_t *ui;
 
     if (ctx == NULL || ctx->ui == NULL)
         return;
@@ -1157,7 +1155,7 @@ file_progress_show_source (file_op_context_t *ctx, const vfs_path_t *vpath)
 void
 file_progress_show_target (file_op_context_t *ctx, const vfs_path_t *vpath)
 {
-    file_op_context_ui_t *ui;
+    file_progress_ui_t *ui;
 
     if (ctx == NULL || ctx->ui == NULL)
         return;
@@ -1194,7 +1192,7 @@ file_progress_show_deleting (file_op_context_t *ctx, const vfs_path_t *vpath, si
 
     if (ret)
     {
-        file_op_context_ui_t *ui;
+        file_progress_ui_t *ui;
         const char *s;
 
         ui = ctx->ui;
@@ -1219,7 +1217,7 @@ file_progress_real_query_replace (file_op_context_t *ctx, enum OperationMode mod
                                   const char *src, struct stat *src_stat,
                                   const char *dst, struct stat *dst_stat)
 {
-    file_op_context_ui_t *ui;
+    file_progress_ui_t *ui;
     FileProgressStatus replace_with_zero;
 
     if (ctx == NULL || ctx->ui == NULL)
