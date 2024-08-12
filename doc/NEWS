@@ -44,7 +44,7 @@ Version 4.8.32
   * mcedit: losing column position when navigating up/down (MidnightCommander/mc#194)
   * mcedit: macro deletes text (#4540)
   * mcedit: macros are applied to the pasted text (#4562)
-  * extfs: iso9660: xorriso is slow to open an ISO image (#3570)
+  * extfs: iso9660: xorriso is slow to open an ISO image (#3570, #4567)
   * extfs: u7z: wrong add of nested directories to archive (#4559)
   * extfs: segfault on enter to deleted archive (#4560)
   * tar: segfault on copy files from archive (#4561)
