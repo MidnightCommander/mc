@@ -1156,12 +1156,12 @@ copy_file_file_display_progress (file_op_total_context_t *tctx, file_op_context_
     {
         gint64 total_secs;
 
-        total_secs = (tv_current - tctx->transfer_start) / G_USEC_PER_SEC;
+        total_secs = (tv_current - tctx->total_transfer_start) / G_USEC_PER_SEC;
         total_secs = MAX (1, total_secs);
 
-        tctx->bps = tctx->copied_bytes / total_secs;
+        tctx->total_bps = tctx->copied_bytes / total_secs;
         const uintmax_t remain_bytes = ctx->total_bytes - tctx->copied_bytes;
-        tctx->eta_secs = tctx->bps != 0 ? remain_bytes / tctx->bps : 0;
+        tctx->total_eta_secs = tctx->total_bps != 0 ? remain_bytes / tctx->total_bps : 0;
     }
 }
 
@@ -2653,7 +2653,7 @@ copy_file_file (file_op_total_context_t *tctx, file_op_context_t *ctx,
 
     if (verbose)
     {
-        if (tctx->bps == 0 || (file_size / tctx->bps) > FILEOP_UPDATE_INTERVAL)
+        if (tctx->total_bps == 0 || (file_size / tctx->total_bps) > FILEOP_UPDATE_INTERVAL)
             file_progress_show (ctx, 0, file_size, "", TRUE);
         else
             file_progress_show (ctx, 1, 1, "", TRUE);
@@ -2762,7 +2762,7 @@ copy_file_file (file_op_total_context_t *tctx, file_op_context_t *ctx,
             if (update_usecs > FILEOP_STALLING_INTERVAL_US)
                 stalled_msg = _("(stalled)");
 
-            force_update = (tv_current - tctx->transfer_start) > FILEOP_UPDATE_INTERVAL_US;
+            force_update = (tv_current - tctx->total_transfer_start) > FILEOP_UPDATE_INTERVAL_US;
 
             if (verbose)
             {
@@ -3509,7 +3509,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
     }
 
     tctx = file_op_total_context_new ();
-    tctx->transfer_start = g_get_monotonic_time ();
+    tctx->total_transfer_start = g_get_monotonic_time ();
 
 #ifdef ENABLE_BACKGROUND
     /* Did the user select to do a background operation? */

@@ -165,9 +165,9 @@ typedef struct
     size_t prev_progress_count; /* Used in OP_MOVE between copy and remove directories */
     uintmax_t progress_bytes;
     uintmax_t copied_bytes;
-    size_t bps;
-    gint64 transfer_start;
-    double eta_secs;
+    size_t total_bps;
+    gint64 total_transfer_start;
+    double total_eta_secs;
 
     gboolean ask_overwrite;
 } file_op_total_context_t;
