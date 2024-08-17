@@ -78,6 +78,7 @@ file_op_context_new (FileOperation op)
     ctx->preserve_uidgid = (geteuid () == 0);
     ctx->umask_kill = (mode_t) (~0);
     ctx->erase_at_end = TRUE;
+    ctx->ask_overwrite = TRUE;
 
     return ctx;
 }
@@ -100,25 +101,6 @@ file_op_context_destroy (file_op_context_t *ctx)
         mc_search_free (ctx->search_handle);
         g_free (ctx);
     }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-file_op_total_context_t *
-file_op_total_context_new (void)
-{
-    file_op_total_context_t *tctx;
-    tctx = g_new0 (file_op_total_context_t, 1);
-    tctx->ask_overwrite = TRUE;
-    return tctx;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-file_op_total_context_destroy (file_op_total_context_t *tctx)
-{
-    g_free (tctx);
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -41,16 +41,13 @@ struct dirsize_status_msg_t
 
 gboolean file_is_symlink_to_dir (const vfs_path_t * path, struct stat *st, gboolean * stale_link);
 
-FileProgressStatus copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
-                                   const char *src_path, const char *dst_path);
-FileProgressStatus move_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx,
-                                 const char *s, const char *d);
-FileProgressStatus copy_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx,
-                                 const char *s, const char *d,
+FileProgressStatus copy_file_file (file_op_context_t * ctx, const char *src_path,
+                                   const char *dst_path);
+FileProgressStatus move_dir_dir (file_op_context_t * ctx, const char *s, const char *d);
+FileProgressStatus copy_dir_dir (file_op_context_t * ctx, const char *s, const char *d,
                                  gboolean toplevel, gboolean move_over, gboolean do_delete,
                                  GSList * parent_dirs);
-FileProgressStatus erase_dir (file_op_total_context_t * tctx, file_op_context_t * ctx,
-                              const vfs_path_t * vpath);
+FileProgressStatus erase_dir (file_op_context_t * ctx, const vfs_path_t * vpath);
 
 gboolean panel_operate (void *source_panel, FileOperation op, gboolean force_single);
 

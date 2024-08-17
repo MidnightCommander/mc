@@ -91,10 +91,19 @@ typedef struct
     filegui_dialog_type_t dialog_type;
 
     /* Counters for progress indicators */
+    size_t progress_count;
+    size_t prev_progress_count; /* Used in OP_MOVE between copy and remove directories */
+    uintmax_t progress_bytes;
+    uintmax_t copied_bytes;
+
     size_t total_count;
     uintmax_t total_bytes;
     /* Whether the panel total has been computed */
     gboolean totals_computed;
+
+    size_t total_bps;
+    gint64 total_transfer_start;
+    double total_eta_secs;
 
     /* Result from the recursive query */
     FileCopyMode recursive_result;
@@ -155,22 +164,11 @@ typedef struct
     /* Whether the file operation is in pause */
     gboolean suspended;
 
+    gboolean ask_overwrite;
+
     /* User interface data goes here */
     void *ui;
 } file_op_context_t;
-
-typedef struct
-{
-    size_t progress_count;
-    size_t prev_progress_count; /* Used in OP_MOVE between copy and remove directories */
-    uintmax_t progress_bytes;
-    uintmax_t copied_bytes;
-    size_t total_bps;
-    gint64 total_transfer_start;
-    double total_eta_secs;
-
-    gboolean ask_overwrite;
-} file_op_total_context_t;
 
 /*** global variables defined in .c file *********************************************************/
 
@@ -180,9 +178,6 @@ extern const char *op_names[3];
 
 file_op_context_t *file_op_context_new (FileOperation op);
 void file_op_context_destroy (file_op_context_t * ctx);
-
-file_op_total_context_t *file_op_total_context_new (void);
-void file_op_total_context_destroy (file_op_total_context_t * tctx);
 
 /* The following functions are implemented separately by each port */
 FileProgressStatus file_progress_real_query_replace (file_op_context_t * ctx,

@@ -1052,8 +1052,7 @@ file_progress_show_count (file_op_context_t *ctx, size_t done, size_t total)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-file_progress_show_total (file_op_total_context_t *tctx, file_op_context_t *ctx,
-                          uintmax_t copied_bytes, gboolean show_summary)
+file_progress_show_total (file_op_context_t *ctx, uintmax_t copied_bytes, gboolean show_summary)
 {
     char buffer2[BUF_TINY];
     char buffer3[BUF_TINY];
@@ -1076,7 +1075,7 @@ file_progress_show_total (file_op_total_context_t *tctx, file_op_context_t *ctx,
         }
     }
 
-    if (!show_summary && tctx->total_bps == 0)
+    if (!show_summary && ctx->total_bps == 0)
         return;
 
     if (ui->time_label != NULL)
@@ -1085,26 +1084,26 @@ file_progress_show_total (file_op_total_context_t *tctx, file_op_context_t *ctx,
         char buffer4[BUF_TINY];
 
         tv_current = g_get_monotonic_time ();
-        file_frmt_time (buffer2, (tv_current - tctx->total_transfer_start) / G_USEC_PER_SEC);
+        file_frmt_time (buffer2, (tv_current - ctx->total_transfer_start) / G_USEC_PER_SEC);
 
         if (ctx->totals_computed)
         {
-            file_eta_prepare_for_show (buffer3, tctx->total_eta_secs, TRUE);
-            if (tctx->total_bps == 0)
+            file_eta_prepare_for_show (buffer3, ctx->total_eta_secs, TRUE);
+            if (ctx->total_bps == 0)
                 label_set_textv (ui->time_label, _("Time: %s %s"), buffer2, buffer3);
             else
             {
-                file_bps_prepare_for_show (buffer4, (long) tctx->total_bps);
+                file_bps_prepare_for_show (buffer4, (long) ctx->total_bps);
                 label_set_textv (ui->time_label, _("Time: %s %s (%s)"), buffer2, buffer3, buffer4);
             }
         }
         else
         {
-            if (tctx->total_bps == 0)
+            if (ctx->total_bps == 0)
                 label_set_textv (ui->time_label, _("Time: %s"), buffer2);
             else
             {
-                file_bps_prepare_for_show (buffer4, (long) tctx->total_bps);
+                file_bps_prepare_for_show (buffer4, (long) ctx->total_bps);
                 label_set_textv (ui->time_label, _("Time: %s (%s)"), buffer2, buffer4);
             }
         }
@@ -1112,7 +1111,7 @@ file_progress_show_total (file_op_total_context_t *tctx, file_op_context_t *ctx,
 
     if (ui->total_bytes_label != NULL)
     {
-        size_trunc_len (buffer2, 5, tctx->copied_bytes, 0, panels_options.kilobyte_si);
+        size_trunc_len (buffer2, 5, ctx->copied_bytes, 0, panels_options.kilobyte_si);
 
         if (!ctx->totals_computed)
             hline_set_textv (ui->total_bytes_label, _(" Total: %s "), buffer2);
