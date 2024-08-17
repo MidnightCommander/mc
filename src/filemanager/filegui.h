@@ -72,95 +72,82 @@ typedef struct
     /* Operation type (copy, move, delete) */
     FileOperation operation;
 
-    /* Start of file transferring */
-    gint64 transfer_start;
-
-    /* The estimated time of arrival in seconds */
-    double eta_secs;
-
-    /* Transferred bytes per second */
-    long bps;
-
-    /* Transferred seconds */
-    long bps_time;
-
     filegui_dialog_type_t dialog_type;
 
-    /* Counters for progress indicators */
-    size_t progress_count;
-    size_t prev_progress_count; /* Used in OP_MOVE between copy and remove directories */
-    uintmax_t progress_bytes;
-    uintmax_t copied_bytes;
-
-    size_t total_count;
-    uintmax_t total_bytes;
-    /* Whether the panel total has been computed */
-    gboolean totals_computed;
-
-    size_t total_bps;
-    gint64 total_transfer_start;
-    double total_eta_secs;
-
-    /* Result from the recursive query */
-    FileCopyMode recursive_result;
-
-    /* Whether to do a reget */
-    off_t do_reget;
-
-    /* Controls appending to files */
-    gboolean do_append;
-
-    /* Whether to stat or lstat */
-    gboolean follow_links;
-
-    /* Pointer to the stat function we will use */
-    mc_stat_fn stat_func;
-
-    /* Whether to recompute symlinks */
-    gboolean stable_symlinks;
-
-    /* Preserve the original files' owner, group, permissions, and
-     * timestamps (owner, group only as root).
-     */
-    gboolean preserve;
-
-    /* If running as root, preserve the original uid/gid (we don't want to
-     * try chown for non root) preserve_uidgid = preserve && uid == 0
-     */
-    gboolean preserve_uidgid;
-
-    /* The bits to preserve in created files' modes on file copy */
-    mode_t umask_kill;
-
+    /* File operation options */
     /* The mask of files to actually operate on */
     char *dest_mask;
-
-    /* search handler */
-    struct mc_search_struct *search_handle;
-
     /* Whether to dive into subdirectories for recursive operations */
     gboolean dive_into_subdirs;
-
+    /* Whether to stat or lstat */
+    gboolean follow_links;
+    /* Whether to recompute symlinks */
+    gboolean stable_symlinks;
+    /* Preserve the original files' owner, group, permissions, and
+     * timestamps (owner, group only as root). */
+    gboolean preserve;
+    /* If running as root, preserve the original uid/gid (we don't want to
+     * try chown for non root) preserve_uidgid = preserve && uid == 0 */
+    gboolean preserve_uidgid;
+    /* The bits to preserve in created files' modes on file copy */
+    mode_t umask_kill;
     /* When moving directories cross filesystem boundaries delete the
      * successfully copied files when all files below the directory and its
      * subdirectories were processed.
      *
      * If erase_at_end is FALSE files will be deleted immediately after their
      * successful copy (Note: this behavior is not tested and at the moment
-     * it can't be changed at runtime).
-     */
+     * it can't be changed at runtime). */
     gboolean erase_at_end;
+
+    /* Whether to do a reget */
+    off_t do_reget;
+    /* Controls appending to files */
+    gboolean do_append;
+
+    /* Pointer to the stat function we will use */
+    mc_stat_fn stat_func;
+    /* search handler */
+    struct mc_search_struct *search_handle;
+    /* toggle if all errors should be ignored */
+    gboolean ignore_all;
+    /* Whether the file operation is in pause */
+    gboolean suspended;
+    gboolean ask_overwrite;
+    /* Result from the recursive query */
+    FileCopyMode recursive_result;
 
     /* PID of the child for background operations */
     pid_t pid;
 
-    /* toggle if all errors should be ignored */
-    gboolean ignore_all;
+    /* One file statuses */
+    /* File transfer start time */
+    gint64 transfer_start;
+    /* Counters for progress indicators */
+    size_t progress_count;
+    uintmax_t progress_bytes;
+    uintmax_t copied_bytes;
+    /* The estimated time of arrival in seconds */
+    double eta_secs;
+    /* Transferred bytes per second */
+    long bps;
+    /* Transferred seconds */
+    long bps_time;
+    /* Used in OP_MOVE between copy and remove directories */
+    size_t prev_progress_count;
 
-    /* Whether the file operation is in pause */
-    gboolean suspended;
-
-    gboolean ask_overwrite;
+    /* Total statuses */
+    /* Whether the panel total has been computed */
+    gboolean totals_computed;
+    /* Files transfer start time */
+    gint64 total_transfer_start;
+    /* Counters for progress indicators */
+    size_t total_count;
+    uintmax_t total_bytes;
+    /* The estimated time of arrival in seconds */
+    double total_eta_secs;
+    /* Transferred bytes per second */
+    size_t total_bps;
 
     /* User interface data goes here */
     void *ui;

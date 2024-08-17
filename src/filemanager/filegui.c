@@ -778,12 +778,12 @@ file_op_context_new (FileOperation op)
 
     ctx = g_new0 (file_op_context_t, 1);
     ctx->operation = op;
-    ctx->do_reget = -1;
-    ctx->stat_func = mc_lstat;
     ctx->preserve = TRUE;
     ctx->preserve_uidgid = (geteuid () == 0);
     ctx->umask_kill = (mode_t) (~0);
     ctx->erase_at_end = TRUE;
+    ctx->do_reget = -1;
+    ctx->stat_func = mc_lstat;
     ctx->ask_overwrite = TRUE;
 
     return ctx;
