@@ -77,7 +77,6 @@
 
 /* Needed for other_panel and WTree */
 #include "dir.h"
-#include "filegui.h"
 #include "filenot.h"
 #include "tree.h"
 #include "filemanager.h"        /* other_panel */

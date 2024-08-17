@@ -10,7 +10,7 @@
 #include "lib/global.h"
 #include "lib/widget.h"
 
-#include "fileopctx.h"
+#include "filegui.h"
 
 /*** typedefs(not structures) and defined constants **********************************************/
 

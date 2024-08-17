@@ -155,7 +155,6 @@ statfs (char const *filename, struct fs_info *buf)
 #include "src/setup.h"          /* verbose, safe_overwrite */
 
 #include "filemanager.h"
-#include "fileopctx.h"          /* FILE_CONT */
 
 #include "filegui.h"
 
@@ -762,6 +761,54 @@ progress_button_callback (WButton *button, int action)
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * \fn file_op_context_t * file_op_context_new (FileOperation op)
+ * \param op file operation struct
+ * \return The newly-created context, filled with the default file mask values.
+ *
+ * Creates a new file operation context with the default values.  If you later want
+ * to have a user interface for this, call file_progress_ui_create().
+ */
+
+file_op_context_t *
+file_op_context_new (FileOperation op)
+{
+    file_op_context_t *ctx;
+
+    ctx = g_new0 (file_op_context_t, 1);
+    ctx->operation = op;
+    ctx->do_reget = -1;
+    ctx->stat_func = mc_lstat;
+    ctx->preserve = TRUE;
+    ctx->preserve_uidgid = (geteuid () == 0);
+    ctx->umask_kill = (mode_t) (~0);
+    ctx->erase_at_end = TRUE;
+    ctx->ask_overwrite = TRUE;
+
+    return ctx;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * \fn void file_op_context_destroy (file_op_context_t *ctx)
+ * \param ctx The file operation context to destroy.
+ *
+ * Destroys the specified file operation context and its associated UI data, if
+ * it exists.
+ */
+
+void
+file_op_context_destroy (file_op_context_t *ctx)
+{
+    if (ctx != NULL)
+    {
+        file_progress_ui_destroy (ctx);
+        mc_search_free (ctx->search_handle);
+        g_free (ctx);
+    }
+}
+
 /* --------------------------------------------------------------------------------------------- */
 
 FileProgressStatus
