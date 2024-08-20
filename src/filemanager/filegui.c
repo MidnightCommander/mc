@@ -936,7 +936,7 @@ file_op_context_create_ui (file_op_context_t *ctx, gboolean with_eta,
 
     progress_buttons[3].w = WIDGET (button_new (y, 0, progress_buttons[3].action,
                                                 progress_buttons[3].flags, progress_buttons[3].text,
-                                                NULL));
+                                                progress_button_callback));
     if (progress_buttons[3].len == -1)
         progress_buttons[3].len = button_get_len (BUTTON (progress_buttons[3].w));
 
