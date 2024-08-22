@@ -717,7 +717,7 @@ Include=video
 ### Documents ###
 
 [html]
-Regex=\\.html?$
+Regex=\\.s?html?$
 RegexIgnoreCase=true
 Open=@EXTHELPERSDIR@/web.sh open html
 View=%view{ascii} @EXTHELPERSDIR@/web.sh view html
