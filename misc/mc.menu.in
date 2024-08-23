@@ -23,32 +23,32 @@ shell_patterns=0
 ##############################################################################
 
 + ! t t
-@       Do something on the current file
+@  Do something on the current file
         CMD=%{Enter command}
         $CMD %f
 
 + t t
-@       Do something on the tagged files
+@  Do something on the tagged files
         CMD=%{Enter command}
         for i in %t ; do
             $CMD "$i"
         done
 
-0       Edit a bug report and send it to root
+0  Edit a bug report and send it to root
         I=`mktemp "${MC_TMPDIR:-/tmp}/mail.XXXXXX"` || exit 1
         ${EDITOR-vi} "$I"
         test -r "$I" && mail root < "$I"
         rm -f "$I"
 
 =+ f \.1$ | f \.3$ | f \.4$ | f \.5$ | f \.6$ | f \.7$ | f \.8$ | f \.man$ & t r
-1       Display the file with roff -man
+1  Display the file with roff -man
         %view{ascii,nroff} roff @MAN_FLAGS@ @MANDOC@ %f
 
-2       Call the info hypertext browser
+2  Call the info hypertext browser
         info
 
 = t d
-3       Compress the current subdirectory (tar.gz)
+3  Compress the current subdirectory (tar.gz)
         Pwd=`basename %d /`
         echo -n "Name of the compressed file (without extension) [$Pwd]: "
         read tar
@@ -57,7 +57,7 @@ shell_patterns=0
         tar cf - "$Pwd" | gzip -f9 > "$tar.tar.gz" && \
         echo "../$tar.tar.gz created."
 
-4       Compress the current subdirectory (tar.bz2)
+4  Compress the current subdirectory (tar.bz2)
         Pwd=`basename %d /`
         echo -n "Name of the compressed file (without extension) [$Pwd]: "
         read tar
@@ -66,7 +66,7 @@ shell_patterns=0
         tar cf - "$Pwd" | bzip2 -f > "$tar.tar.bz2" && \
         echo "../$tar.tar.bz2 created."
 
-5       Compress the current subdirectory (tar.7z)
+5  Compress the current subdirectory (tar.7z)
         Pwd=`basename %d /`
         echo -n "Name of the compressed file (without extension) [$Pwd]: "
         read tar
@@ -75,7 +75,7 @@ shell_patterns=0
         tar cf - "$Pwd" | 7za a -si "$tar.tar.7z" && \
         echo "../$tar.tar.7z created."
 
-6       Compress the current subdirectory (tar.xz)
+6  Compress the current subdirectory (tar.xz)
         Pwd=`basename %d /`
         echo -n "Name of the compressed file (without extension) [$Pwd]: "
         read tar
@@ -84,7 +84,7 @@ shell_patterns=0
         tar cf - "$Pwd" | xz -f > "$tar.tar.xz" && \
         echo "../$tar.tar.xz created."
 
-7       Compress the current subdirectory (tar.zst)
+7  Compress the current subdirectory (tar.zst)
         Pwd=`basename %d /`
         echo -n "Name of the compressed file (without extension) [$Pwd]: "
         read tar
@@ -93,7 +93,7 @@ shell_patterns=0
         tar cf - "$Pwd" | zstd -f > "$tar.tar.zst" && \
         echo "../$tar.tar.zst created."
 
-8       Compress the current subdirectory (tar.lzo)
+8  Compress the current subdirectory (tar.lzo)
         Pwd=`basename %d /`
         echo -n "Name of the compressed file (without extension) [$Pwd]: "
         read tar
@@ -104,21 +104,21 @@ shell_patterns=0
 
 = f \.c$ & t r
 + f \.c$ & t r & ! t t
-c       Compile and link current .c file
+c  Compile and link current .c file
         make "`basename %f .c`" 2>/dev/null || cc -O -o "`basename %f .c`" %f
 
 + t r & ! t t
-a       Append file to opposite
+a  Append file to opposite
         cat %f >> %D/%f
 
 + t t
-A       Append files to opposite files
+A  Append files to opposite files
         for i in %t ; do
             cat "$i" >> %D/"$i"
         done
 
 + t r & ! t t
-d       Delete file if a copy exists in the other directory.
+d  Delete file if a copy exists in the other directory.
         if [ %d = %D ]; then
             echo "The two directories must be different."
             exit 1
@@ -136,7 +136,7 @@ d       Delete file if a copy exists in the other directory.
         fi
 
 + t t
-D       Delete tagged files if a copy exists in the other directory.
+D  Delete tagged files if a copy exists in the other directory.
         if [ %d = %D ]; then
             echo "The two directories must be different."
             exit 1
@@ -155,19 +155,19 @@ D       Delete tagged files if a copy exists in the other directory.
             fi
         done
 
-m       View manual page
+m  View manual page
         MAN=%{Enter manual name}
         %view{ascii,nroff} MANROFFOPT='@MAN_FLAGS@' MAN_KEEP_FORMATTING=1 man -P cat "$MAN"
 
 = f \.gz$ & t r
 + ! t t
-n       Inspect gzip'ed newsbatch file
+n  Inspect gzip'ed newsbatch file
         dd if=%f bs=1 skip=12 | zcat | ${PAGER-more}
         # assuming the cunbatch header is 12 bytes long.
 
 = t r &
 + ! t t
-h       Strip headers from current newsarticle
+h  Strip headers from current newsarticle
         CHECK=`awk '{print $1 ; exit}' %f` 2>/dev/null
         case "$CHECK" in
             Newsgroups:|Path:)
@@ -182,7 +182,7 @@ h       Strip headers from current newsarticle
         esac
 
 + t t
-H       Strip headers from the marked newsarticles
+H  Strip headers from the marked newsarticles
         for i in %t ; do
             CHECK=`awk '{print $1 ; exit}' "$i"` 2>/dev/null
             WFILE=`mktemp "${MC_TMPDIR:-/tmp}/news.XXXXXX"` || exit 1
@@ -203,7 +203,7 @@ H       Strip headers from the marked newsarticles
 
 = t r
 + ! t t
-r       Copy file to remote host
+r  Copy file to remote host
         echo -n "To which host?: "
         read Host
         echo -n "To which directory on $Host?: "
@@ -211,7 +211,7 @@ r       Copy file to remote host
         rcp -p %f "${Host}:${Dir}"
 
 + t t
-R       Copy files to remote host (no error checking)
+R  Copy files to remote host (no error checking)
         echo -n "Copy files to which host?: "
         read Host
         echo -n "To which directory on $Host? :"
@@ -220,12 +220,12 @@ R       Copy files to remote host (no error checking)
 
 = f \.tex$ & t r
 + f \.tex$ & t r & ! t t
-t       Run latex on file and show it with xdvi
+t  Run latex on file and show it with xdvi
         latex %f && xdvi "`basename %f .tex`".dvi
 
 =+ f ^part | f ^Part | f uue & t r
 + t t
-U       Uudecode marked news articles (needs work)
+U  Uudecode marked news articles (needs work)
         (
             for i in %t ; do # strip headers
                 FIRST=`awk '{print $1 ; exit}' "$i"`
@@ -238,7 +238,7 @@ U       Uudecode marked news articles (needs work)
         echo "Please test the output file before deleting anything."
 
 =+ f \.tar\.gz$ | f \.tar\.z$ | f \.tgz$ | f \.tpz$ | f \.tar\.lz$ | f \.tar\.lz4$ | f \.tar\.lzma$ | f \.tar\.lzo$ | f \.tar\.7z$ | f \.tar\.xz$ | f \.tar\.zst | f \.tar\.Z$ | f \.tar\.bz2$ & t rl
-x       Extract the contents of a compressed tar file
+x  Extract the contents of a compressed tar file
         unset PRG
         case %f in
             *.tar.7z)   PRG="7za e -so";;
@@ -256,7 +256,7 @@ x       Extract the contents of a compressed tar file
 
 = t r
 + ! t t
-y       Gzip or gunzip current file
+y  Gzip or gunzip current file
         unset DECOMP
         case %f in
             *.gz|*.[zZ]) DECOMP=-d;;
@@ -265,7 +265,7 @@ y       Gzip or gunzip current file
         gzip $DECOMP -v %f
 
 + t t
-Y       Gzip or gunzip tagged files
+Y  Gzip or gunzip tagged files
         for i in %t ; do
             unset DECOMP
             case "$i" in
@@ -275,7 +275,7 @@ Y       Gzip or gunzip tagged files
         done
 
 + ! t t
-b       Bzip2 or bunzip2 current file
+b  Bzip2 or bunzip2 current file
         unset DECOMP
         case %f in
             *.bz2) DECOMP=-d;;
@@ -283,7 +283,7 @@ b       Bzip2 or bunzip2 current file
         bzip2 $DECOMP -v %f
 
 + t t
-B       Bzip2 or bunzip2 tagged files
+B  Bzip2 or bunzip2 tagged files
         for i in %t ; do
             unset DECOMP
             case "$i" in
@@ -293,7 +293,7 @@ B       Bzip2 or bunzip2 tagged files
         done
 
 + f \.tar.gz$ | f \.tgz$ | f \.tpz$ | f \.tar.Z$ | f \.tar.z$ | f \.tar.bz2$ | f \.tar.F$ & t r & ! t t
-z       Extract compressed tar file to subdirectory
+z  Extract compressed tar file to subdirectory
         unset D
         set gzip -cd
         case %f in
@@ -308,7 +308,7 @@ z       Extract compressed tar file to subdirectory
         mkdir "$D"; cd "$D" && ("$1" "$2" ../%f | tar xvf -)
 
 + t t
-Z       Extract compressed tar files to subdirectories
+Z  Extract compressed tar files to subdirectories
         for i in %t ; do
             set gzip -dc
             unset D
@@ -325,7 +325,7 @@ Z       Extract compressed tar files to subdirectories
         done
 
 + f \.gz$ | f \.tgz$ | f \.tpz$ | f \.Z$ | f \.z$ | f \.bz2$ & t r & ! t t
-c       Convert gz<->bz2, tar.gz<->tar.bz2 & tgz->tar.bz2
+c  Convert gz<->bz2, tar.gz<->tar.bz2 & tgz->tar.bz2
         unset D
         unset EXT
         case %f in
@@ -349,7 +349,7 @@ c       Convert gz<->bz2, tar.gz<->tar.bz2 & tgz->tar.bz2
         fi
 
 + t t
-C       Convert gz<->bz2, tar.gz<->tar.bz2 & tgz->tar.bz2
+C  Convert gz<->bz2, tar.gz<->tar.bz2 & tgz->tar.bz2
         for i in %t ; do
             unset D
             unset EXT
@@ -375,5 +375,5 @@ C       Convert gz<->bz2, tar.gz<->tar.bz2 & tgz->tar.bz2
         done
 
 + x /usr/bin/open | x /usr/local/bin/open & x /bin/sh
-o       Open next a free console
+o  Open next a free console
         open -s -- sh
