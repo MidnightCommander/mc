@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-08-08 09:51+0200\n"
+"POT-Creation-Date: 2024-08-23 19:20+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Shuree Nyam-Oidov <99shuree@gmail.com>, 2020\n"
 "Language-Team: Mongolian (http://app.transifex.com/mc/mc/language/mn/)\n"
@@ -3931,13 +3931,11 @@ msgstr ""
 msgid "Inconsistent archive"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s"
 msgstr ""
-"tar-архивыг нээж чадсангүй\n"
-"%s"
 
 #, c-format
 msgid ""

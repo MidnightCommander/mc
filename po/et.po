@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-08-08 09:51+0200\n"
+"POT-Creation-Date: 2024-08-23 19:20+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Priit Jõerüüt <transifex@joeruut.com>, 2020-2021,2023-2024\n"
 "Language-Team: Estonian (http://app.transifex.com/mc/mc/language/et/)\n"
@@ -4127,7 +4127,7 @@ msgid ""
 "Cannot open cpio archive\n"
 "%s"
 msgstr ""
-"Cpio arhiivi avamine nurjus\n"
+"Cpio arhiivi avamine ei õnnestunud\n"
 " %s"
 
 #, c-format
@@ -4173,13 +4173,12 @@ msgstr ""
 msgid "Inconsistent archive"
 msgstr "Ebaühtlane arhiiv"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s"
 msgstr ""
-"%s arhiivi avamine ei õnnestu\n"
-"%s:\n"
+"%s arhiivi avamine ei õnnestud\n"
 "%s"
 
 #, c-format
@@ -4188,7 +4187,7 @@ msgid ""
 "%s:\n"
 "%s"
 msgstr ""
-"%s arhiivi avamine ei õnnestu\n"
+"%s arhiivi avamine ei õnnestud\n"
 "%s:\n"
 "%s"
 
@@ -4555,7 +4554,7 @@ msgid ""
 "Cannot open tar archive\n"
 "%s"
 msgstr ""
-"Tar arhiivi avamine nurjus\n"
+"Tar arhiivi avamine ei õnnestunud\n"
 "%s"
 
 #, c-format

@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-08-08 09:51+0200\n"
+"POT-Creation-Date: 2024-08-23 19:20+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Wallon Wallon, 2022-2024\n"
 "Language-Team: French (http://app.transifex.com/mc/mc/language/fr/)\n"
@@ -2498,7 +2498,8 @@ msgid "Unable to save setup to %s"
 msgstr "Impossible d’enregistrer la configuration dans %s"
 
 msgid "Cannot execute commands on non-local filesystems"
-msgstr " Ne peut pas exécuter de commande sur un système de fichiers non local"
+msgstr ""
+"Impossible d’exécuter des commandes sur des systèmes de fichiers non locaux"
 
 msgid "Parameter"
 msgstr "Paramètre"
@@ -4194,13 +4195,12 @@ msgstr ""
 msgid "Inconsistent archive"
 msgstr "Archive incohérente"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s"
 msgstr ""
-"Impossible d’ouvrir l’archive %s\n"
-"%s :\n"
+"Impossible d’ouvrir l’archive %s \n"
 "%s"
 
 #, c-format
@@ -4293,7 +4293,7 @@ msgstr "ftpfs : connexion interrompue par l’utilisateur"
 
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
-msgstr "ftpfs : connexion au serveur échouée : %s"
+msgstr "ftpfs : la connexion au serveur a échoué : %s"
 
 #, c-format
 msgid "Waiting to retry... %d (Control-G to cancel)"
@@ -4670,7 +4670,7 @@ msgstr "lors de l’itération sur les blocs"
 
 #, c-format
 msgid "Cannot open file \"%s\""
-msgstr "Ne peut ouvrir le fichier « %s »"
+msgstr "Impossible d’ouvrir le fichier « %s »"
 
 msgid "Ext2lib error"
 msgstr "Erreur Ext2lib"

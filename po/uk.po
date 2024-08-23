@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-08-08 09:51+0200\n"
+"POT-Creation-Date: 2024-08-23 19:20+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Rostyslav Haitkulov <info@ubilling.net.ua>, 2023\n"
 "Language-Team: Ukrainian (http://app.transifex.com/mc/mc/language/uk/)\n"
@@ -4145,14 +4145,11 @@ msgstr ""
 msgid "Inconsistent archive"
 msgstr "Неузгоджений архів"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s"
 msgstr ""
-"Не можливо відкрити %s архів\n"
-"%s:\n"
-"%s"
 
 #, c-format
 msgid ""

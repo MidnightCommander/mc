@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-08-08 09:51+0200\n"
+"POT-Creation-Date: 2024-08-23 19:20+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>, 2017-2023\n"
 "Language-Team: Czech (http://app.transifex.com/mc/mc/language/cs/)\n"
@@ -4159,14 +4159,11 @@ msgstr ""
 msgid "Inconsistent archive"
 msgstr "Poškozený archiv"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s"
 msgstr ""
-"Nepodařilo se otevřít %s archiv\n"
-"%s:\n"
-"%s"
 
 #, c-format
 msgid ""

@@ -3,21 +3,25 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
+# debconf <prach.by@gmail.com>, 2023
+# Pavel Suravezhkin, 2022
 # Pavel Suravezhkin, 2022
 # debconf <prach.by@gmail.com>, 2023
 # Slava Zanko <slavazanko@gmail.com>, 2011
 # Viačasłaŭ <viachaslavic@outlook.com>, 2023
+# Viačasłaŭ <viachaslavic@outlook.com>, 2023-2024
 # Viačasłaŭ <viachaslavic@outlook.com>, 2023-2024
 # Viktar Palstsiuk <vipals@gmail.com>, 2015
 # Yury V. Zaytsev <yury@shurup.com>, 2019
 # Źmicier Turok <nashtlumach@gmail.com>, 2018
 # Źmicier Turok <nashtlumach@gmail.com>, 2018
 # Zmicer Turok <zmicerturok@gmail.com >, 2017-2018
+# Źmicier Turok <nashtlumach@gmail.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-08-08 09:51+0200\n"
+"POT-Creation-Date: 2024-08-23 19:20+0200\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Viačasłaŭ <viachaslavic@outlook.com>, 2023-2024\n"
 "Language-Team: Belarusian (http://app.transifex.com/mc/mc/language/be/)\n"
@@ -579,6 +583,8 @@ msgid ""
 "Cannot create temporary directory %s: %s.\n"
 "Temporary files will not be created\n"
 msgstr ""
+"Немагчыма стварыць часовы каталог %s: %s.\n"
+"Часовыя файлы ня будуць створаныя\n"
 
 msgid "Press any key to continue..."
 msgstr "Каб працягнуць, націсніце хоць-якую клавішу..."
@@ -736,6 +742,29 @@ msgid ""
 "   Viewer:       viewnormal,viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 msgstr ""
+"--colors КЛЮЧАВОЕ_СЛОВА={ТЭКСТ},{ФОН},{АТРЫБУТ}:КЛЮЧАВОЕ_СЛОВА2=...\n"
+"\n"
+"{ТЭКСТ}, {ФОН} ды {АТРЫБУТ} ільга прапусціць, тады будуць выкарыстоўвацца "
+"прадвызначаныя\n"
+"\n"
+" Ключавыя словы:\n"
+"   Агульныя:             errors, disabled, reverse, gauge, header\n"
+"                         input, inputmark, inputunchanged, commandlinemark\n"
+"                         bbarhotkey, bbarbutton, statusbar\n"
+"   Адлюстраванне файлаў: normal, selected, marked, markselect\n"
+"   Поле дыялогу:         dnormal, dfocus, dhotnormal, dhotfocus, "
+"errdhotnormal,\n"
+"                         errdhotfocus\n"
+"   Меню:                 menunormal, menuhot, menusel, menuhotsel, "
+"menuinactive\n"
+"   Усплывальныя меню:    pmenunormal, pmenusel, pmenutitle\n"
+"   Рэдактар:             editnormal, editbold, editmarked, editwhitespace, "
+"editnonprintable,\n"
+"                         editlinestate, editbg, editframe, editframeactive\n"
+"                         editframedrag\n"
+"   Праглядальнік:        viewnormal,viewbold, viewunderline, viewselected\n"
+"   Даведка:              helpnormal, helpitalic, helpbold, helplink, "
+"helpslink\n"
 
 #. TRANSLATORS: don't translate color names and attributes
 msgid ""
@@ -800,7 +829,7 @@ msgid "Arguments parse error!"
 msgstr "Памылка падчас разбору аргумента!"
 
 msgid "MC is built without builtin editor."
-msgstr ""
+msgstr "MC сабраны без убудаванага рэдактара."
 
 msgid "No arguments given to the viewer."
 msgstr "Праграма для прагляду не атрымала аргументаў."
@@ -827,7 +856,7 @@ msgid ""
 "Background process sent us a request for more arguments\n"
 "than we can handle."
 msgstr ""
-"Фонавы працэс запытвае больш аргументаў,\n"
+"Фонавы працэс запрошвае больш аргументаў,\n"
 "чым можна апрацаваць."
 
 msgid "&Dismiss"
@@ -2732,7 +2761,7 @@ msgid ""
 "Cannot stat source file \"%s\"\n"
 "%s"
 msgstr ""
-"Немагчыма атрымаць уласцівасці зыходнага файла «%s»\n"
+"Немагчыма запытаць stat зыходнага файла «%s»\n"
 "%s"
 
 #, c-format
@@ -2740,12 +2769,16 @@ msgid ""
 "Cannot get attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
+"Немагчыма атрымаць атрыбуты зыходнага файла «%s»\n"
+"%s"
 
 #, c-format
 msgid ""
 "Cannot set attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
+"Немагчыма задаць атрыбуты зыходнага файла «%s»\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -2863,6 +2896,8 @@ msgid ""
 "Cannot set attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
+"Немагчыма задаць атрыбуты для мэтавага файла «%s»\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -2877,6 +2912,8 @@ msgid ""
 "Cannot get attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
+"Немагчыма атрымаць атрыбуты зыходнага каталога «%s»\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -3015,7 +3052,7 @@ msgstr " Агулам: %s "
 
 #, c-format
 msgid " Total: %s / %s "
-msgstr " Агулам: %s / %s "
+msgstr " Агульна: %s / %s "
 
 msgid "Source"
 msgstr "Крыніца"
@@ -3971,10 +4008,10 @@ msgid "Warning: Cannot change to %s.\n"
 msgstr "Увага: немагчыма перайсці ў «%s».\n"
 
 msgid "With builtin editor and aspell support"
-msgstr ""
+msgstr "З убудаваным рэдактарам ды падтрымкай aspell"
 
 msgid "With builtin editor"
-msgstr ""
+msgstr "З убудаваным рэдактарам"
 
 msgid "With optional subshell support"
 msgstr "З падтрымкай падузроўняў абалонкі"
@@ -4158,13 +4195,12 @@ msgstr ""
 msgid "Inconsistent archive"
 msgstr "Супярэчлівы архіў"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s"
 msgstr ""
 "Немагчыма адкрыць %s архіў\n"
-"%s:\n"
 "%s"
 
 #, c-format
