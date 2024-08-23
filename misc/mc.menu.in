@@ -20,6 +20,8 @@ shell_patterns=0
 #   %f    quote expanded macro
 #   %1f   ditto
 #   %0f   don't quote expanded macro
+#
+#   Unused shortcuts: I, o, O, l, L, k, K, p, P
 ##############################################################################
 
 + ! t t
@@ -34,20 +36,42 @@ shell_patterns=0
             $CMD "$i"
         done
 
-0  Edit a bug report and send it to root
+!  Edit a bug report and send it to root
         I=`mktemp "${MC_TMPDIR:-/tmp}/mail.XXXXXX"` || exit 1
         ${EDITOR-vi} "$I"
         test -r "$I" && mail root < "$I"
         rm -f "$I"
 
 =+ f \.1$ | f \.3$ | f \.4$ | f \.5$ | f \.6$ | f \.7$ | f \.8$ | f \.man$ & t r
-1  Display the file with roff -man
+$  Display the file with roff -man
         %view{ascii,nroff} roff @MAN_FLAGS@ @MANDOC@ %f
 
-2  Call the info hypertext browser
+%  Call the info hypertext browser
         info
 
-= t d
++ f \.c$ & t r & ! t t
+1  Compile and link current .c file
+        make "`basename %f .c`" 2>/dev/null || cc -O -o "`basename %f .c`" %f
+
++ ! t t
+2  Pack the current subdirectory (tar)
+        Pwd=`basename %d /`
+        echo -n "Name of the tarball (without extension) [$Pwd]: "
+        read tar
+        [ "$tar"x = x ] && tar="$Pwd"
+        cd .. && \
+        tar cf "$tar.tar" "$Pwd" && \
+        echo "../$tar.tar created."
+
++ t t
+2  Pack tagged directories (tar)
+        echo "[%t]"
+        for tar in %t; do
+            tar cf "$tar.tar" "$tar" && \
+            echo "$tar.tar created."
+        done
+
++ ! t t
 3  Compress the current subdirectory (tar.gz)
         Pwd=`basename %d /`
         echo -n "Name of the compressed file (without extension) [$Pwd]: "
@@ -57,6 +81,14 @@ shell_patterns=0
         tar cf - "$Pwd" | gzip -f9 > "$tar.tar.gz" && \
         echo "../$tar.tar.gz created."
 
++ t t
+3  Compress tagged subdirectories (tar.gz)
+        for tar in %t; do
+            tar cf - "$tar" | gzip -f9 > "$tar.tar.gz" && \
+            echo "$tar.tar.gz created."
+        done
+
++ ! t t
 4  Compress the current subdirectory (tar.bz2)
         Pwd=`basename %d /`
         echo -n "Name of the compressed file (without extension) [$Pwd]: "
@@ -66,16 +98,34 @@ shell_patterns=0
         tar cf - "$Pwd" | bzip2 -f > "$tar.tar.bz2" && \
         echo "../$tar.tar.bz2 created."
 
++ t t
+4  Compress tagged subdirectories (tar.bz2)
+        for tar in %t; do
+            tar cf - "$tar" | bzip2 -f > "$tar.tar.bz2" && \
+            echo "$tar.tar.bz2 created."
+        done
+
++ ! t t
 5  Compress the current subdirectory (tar.7z)
+        P7ZIP=`command -v 7zz` || P7ZIP=`command -v 7z` || P7ZIP=`command -v 7za`; test -z "${P7ZIP}" && echo "7zip not found, aborting..." && exit 255
         Pwd=`basename %d /`
         echo -n "Name of the compressed file (without extension) [$Pwd]: "
         read tar
         [ "$tar"x = x ] && tar="$Pwd"
         cd .. && \
-        tar cf - "$Pwd" | 7za a -si "$tar.tar.7z" && \
+        tar cf - "$Pwd" | ${P7ZIP} a -si $COMPRESS_OPTS_7Z "$tar.tar.7z" && \
         echo "../$tar.tar.7z created."
++ t t
+5  Compress tagged subdirectories (tar.7z)
+        P7ZIP=`command -v 7zz` || P7ZIP=`command -v 7z` || P7ZIP=`command -v 7za`; test -z "${P7ZIP}" && echo "7zip not found, aborting..." && exit 255
+        for tar in %t; do
+            tar cf - "$tar" | ${P7ZIP} a -si $COMPRESS_OPTS_7Z "$tar.tar.7z" && \
+            echo "$tar.tar.7z created."
+        done
 
++ ! t t
 6  Compress the current subdirectory (tar.xz)
+        P7ZIP=`command -v 7zz` || P7ZIP=`command -v 7z` || P7ZIP=`command -v 7za`; test -z "${P7ZIP}" && echo "7zip not found, aborting..." && exit 255
         Pwd=`basename %d /`
         echo -n "Name of the compressed file (without extension) [$Pwd]: "
         read tar
@@ -84,15 +134,51 @@ shell_patterns=0
         tar cf - "$Pwd" | xz -f > "$tar.tar.xz" && \
         echo "../$tar.tar.xz created."
 
++ t t
+6  Compress tagged subdirectories (tar.xz)
+        P7ZIP=`command -v 7zz` || P7ZIP=`command -v 7z` || P7ZIP=`command -v 7za`; test -z "${P7ZIP}" && echo "7zip not found, aborting..." && exit 255
+        for tar in %t; do
+            tar cf - "$tar" | xz -f > "$tar.tar.xz" && \
+            echo "../$tar.tar.xz created."
+        done
+
++ ! t t
+^  Compress the current subdirectory (tar.xz using 7z)
+        P7ZIP=`command -v 7zz` || P7ZIP=`command -v 7z` || P7ZIP=`command -v 7za`; test -z "${P7ZIP}" && echo "7zip not found, aborting..." && exit 255
+        Pwd=`basename %d /`
+        echo -n "Name of the compressed file (without extension) [$Pwd]: "
+        read tar
+        [ "$tar"x = x ] && tar="$Pwd"
+        cd .. && \
+        tar cf - "$Pwd" | ${P7ZIP} a -si -txz -m0=lzma2 -ms=on $COMPRESS_OPTS_7Z "$tar.tar.xz" && \
+        echo "../$tar.tar.xz created."
+
++ t t
+^  Compress tagged subdirectories (tar.xz using 7z)
+        P7ZIP=`command -v 7zz` || P7ZIP=`command -v 7z` || P7ZIP=`command -v 7za`; test -z "${P7ZIP}" && echo "7zip not found, aborting..." && exit 255
+        for tar in %t; do
+            tar cf - "$tar" | ${P7ZIP} a -si -txz -m0=lzma2 -ms=on $COMPRESS_OPTS_7Z "$tar.tar.xz" && \
+            echo "$tar.tar.xz created."
+        done
+
++ ! t t
 7  Compress the current subdirectory (tar.zst)
         Pwd=`basename %d /`
         echo -n "Name of the compressed file (without extension) [$Pwd]: "
         read tar
         [ "$tar"x = x ] && tar="$Pwd"
         cd .. && \
-        tar cf - "$Pwd" | zstd -f > "$tar.tar.zst" && \
+        tar cf - "$Pwd" | zstd $COMPRESS_OPTS_ZSTD -f > "$tar.tar.zst" && \
         echo "../$tar.tar.zst created."
 
++ t t
+7  Compress tagged subdirectories (tar.zst)
+        for tar in %t; do
+            tar cf - "$tar" | zstd $COMPRESS_OPTS_ZSTD -f > "$tar.tar.zst" && \
+            echo "$tar.tar.zst created."
+        done
+
++ ! t t
 8  Compress the current subdirectory (tar.lzo)
         Pwd=`basename %d /`
         echo -n "Name of the compressed file (without extension) [$Pwd]: "
@@ -102,10 +188,88 @@ shell_patterns=0
         tar cf - "$Pwd" | lzop -f > "$tar.tar.lzo" && \
         echo "../$tar.tar.lzo created."
 
-= f \.c$ & t r
-+ f \.c$ & t r & ! t t
-c  Compile and link current .c file
-        make "`basename %f .c`" 2>/dev/null || cc -O -o "`basename %f .c`" %f
++ t t
+8  Compress tagged subdirectories (tar.lzo)
+        for tar in %t; do
+            tar cf - "$tar" | lzop -f > "$tar.tar.lzo" && \
+            echo "$tar.tar.lzo created."
+        done
+
++ ! t t
+9  Compress the current subdirectory (7z)
+        P7ZIP=`command -v 7zz` || P7ZIP=`command -v 7z` || P7ZIP=`command -v 7za`; test -z "${P7ZIP}" && echo "7zip not found, aborting..." && exit 255
+        Pwd=`basename %d /`
+        echo -n "Name of the compressed file (without extension) [$Pwd]: "
+        read tar
+        [ "$tar"x = x ] && tar="$Pwd"
+        cd .. && \
+        ${P7ZIP} a $COMPRESS_OPTS_7Z "$tar.7z" "$tar" && \
+        echo "../$tar.7z created."
+
++ t t
+9  Compress tagged subdirectories (7z)
+        P7ZIP=`command -v 7zz` || P7ZIP=`command -v 7z` || P7ZIP=`command -v 7za`; test -z "${P7ZIP}" && echo "7zip not found, aborting..." && exit 255
+        for tar in %t; do
+            ${P7ZIP} a $COMPRESS_OPTS_7Z "$tar.7z" "$tar" && \
+            echo "$tar.7z created."
+        done
+
++ ! t t
+(  Compress & Encrypt the current subdirectory (7z)
+        P7ZIP=`command -v 7zz` || P7ZIP=`command -v 7z` || P7ZIP=`command -v 7za`; test -z "${P7ZIP}" && echo "7zip not found, aborting..." && exit 255
+        Pwd=`basename %d /`
+        echo -n "Name of the compressed file (without extension) [$Pwd]: "
+        read tar
+        [ "$tar"x = x ] && tar="$Pwd"
+        cd .. && \
+        ${P7ZIP} a -p -mhe $COMPRESS_OPTS_7Z "$tar.7z" "$tar" && \
+        echo "../$tar.7z created."
+
++ t t
+(  Compress & Encrypt tagged subdirectories (7z)
+        P7ZIP=`command -v 7zz` || P7ZIP=`command -v 7z` || P7ZIP=`command -v 7za`; test -z "${P7ZIP}" && echo "7zip not found, aborting..." && exit 255
+        for tar in %t; do
+            ${P7ZIP} a -p -mhe $COMPRESS_OPTS_7Z "$tar.7z" "$tar" && \
+            echo "$tar.7z created."
+        done
+
++ ! t t
+0  Compress the current subdirectory (zip)
+        P7ZIP=`command -v 7zz` || P7ZIP=`command -v 7z` || P7ZIP=`command -v 7za`; test -z "${P7ZIP}" && echo "7zip not found, aborting..." && exit 255
+        Pwd=`basename %d /`
+        echo -n "Name of the compressed file (without extension) [$Pwd]: "
+        read tar
+        [ "$tar"x = x ] && tar="$Pwd"
+        cd .. && \
+        zip -r "$tar.zip" "$tar" && \
+        echo "../$tar.zip created."
+
++ t t
+0  Compress tagged subdirectories (zip)
+        P7ZIP=`command -v 7zz` || P7ZIP=`command -v 7z` || P7ZIP=`command -v 7za`; test -z "${P7ZIP}" && echo "7zip not found, aborting..." && exit 255
+        for tar in %t; do
+            zip -r "$tar.zip" "$tar" && \
+            echo "$tar.zip created."
+        done
+
++ ! t t
+)  Compress the current subdirectory (zip using 7z)
+        P7ZIP=`command -v 7zz` || P7ZIP=`command -v 7z` || P7ZIP=`command -v 7za`; test -z "${P7ZIP}" && echo "7zip not found, aborting..." && exit 255
+        Pwd=`basename %d /`
+        echo -n "Name of the compressed file (without extension) [$Pwd]: "
+        read tar
+        [ "$tar"x = x ] && tar="$Pwd"
+        cd .. && \
+        ${P7ZIP} a -tzip "$tar.zip" "$tar" && \
+        echo "../$tar.zip created."
+
++ t t
+)  Compress tagged subdirectories (zip using 7z)
+        P7ZIP=`command -v 7zz` || P7ZIP=`command -v 7z` || P7ZIP=`command -v 7za`; test -z "${P7ZIP}" && echo "7zip not found, aborting..." && exit 255
+        for tar in %t; do
+            ${P7ZIP} a -tzip "$tar.zip" "$tar" && \
+            echo "$tar.zip created."
+        done
 
 + t r & ! t t
 a  Append file to opposite
@@ -118,27 +282,27 @@ A  Append files to opposite files
         done
 
 + t r & ! t t
-d  Delete file if a copy exists in the other directory.
+d  Delete file if a copy exists in the other directory
         if [ %d = %D ]; then
-            echo "The two directories must be different."
+            echo "The two directories must be different"
             exit 1
         fi
         if [ -f %D/%f ]; then        # if two of them, then
             if cmp -s %D/%f %f; then
                 rm %f && echo %f": DELETED."
             else
-                echo %f" and "%D/%f" differ: NOT deleted."
+                echo %f" and "%D/%f" differ: NOT deleted"
                 echo -n "Press RETURN "
                 read key
             fi
         else
-            echo %f": No copy in "%D/%f": NOT deleted."
+            echo %f": No copy in "%D/%f": NOT deleted"
         fi
 
 + t t
-D  Delete tagged files if a copy exists in the other directory.
+D  Delete tagged files if a copy exists in the other directory
         if [ %d = %D ]; then
-            echo "The two directories must be different."
+            echo "The two directories must be different"
             exit 1
         fi
         for i in %t ; do
@@ -146,60 +310,22 @@ D  Delete tagged files if a copy exists in the other directory.
                 SUM1=`sum "$i"`
                 SUM2=`sum %D/"$i"`
                 if [ "$SUM1" = "$SUM2" ]; then
-                    rm "$i" && echo "${i}: DELETED."
+                    rm "$i" && echo "$i: DELETED."
                 else
-                    echo "$i and "%D"/$i differ: NOT deleted."
+                    echo "$i and "%D"/$i differ: NOT deleted"
                 fi
             else
-                echo "$i has no copy in "%D": NOT deleted."
+                echo "$i has no copy in "%D": NOT deleted"
             fi
         done
 
-m  View manual page
+m  View manual page (native)
+        MAN=%{Enter manual name}
+        man "$MAN"
+
+M  View manual page
         MAN=%{Enter manual name}
         %view{ascii,nroff} MANROFFOPT='@MAN_FLAGS@' MAN_KEEP_FORMATTING=1 man -P cat "$MAN"
-
-= f \.gz$ & t r
-+ ! t t
-n  Inspect gzip'ed newsbatch file
-        dd if=%f bs=1 skip=12 | zcat | ${PAGER-more}
-        # assuming the cunbatch header is 12 bytes long.
-
-= t r &
-+ ! t t
-h  Strip headers from current newsarticle
-        CHECK=`awk '{print $1 ; exit}' %f` 2>/dev/null
-        case "$CHECK" in
-            Newsgroups:|Path:)
-                I=`mktemp "${MC_TMPDIR:-/tmp}/news.XXXXXX"` || exit 1
-                cp %f "$I" && sed '/^'"$CHECK"' /,/^$/d' "$I" > %f
-                [ "$?" = "0" ] && rm "$I"
-                echo %f": header removed."
-                ;;
-            *)
-                echo %f" is not a news article."
-                ;;
-        esac
-
-+ t t
-H  Strip headers from the marked newsarticles
-        for i in %t ; do
-            CHECK=`awk '{print $1 ; exit}' "$i"` 2>/dev/null
-            WFILE=`mktemp "${MC_TMPDIR:-/tmp}/news.XXXXXX"` || exit 1
-            case "$CHECK" in
-                Newsgroups:|Path:)
-                    cp "$i" "$WFILE" && sed '/^'"$CHECK"' /,/^$/d' "$WFILE" > "$i"
-                    if [ "$?" = "0" ]; then
-                        rm "$WFILE"; echo "$i header removed. OK."
-                    else
-                        echo "Oops! Please check $i against $WFILE."
-                    fi
-                    ;;
-                *)
-                    echo "$i skipped: Not a news article."
-                    ;;
-            esac
-        done
 
 = t r
 + ! t t
@@ -218,127 +344,409 @@ R  Copy files to remote host (no error checking)
         read Dir
         rcp -pr %u "${Host}:${Dir}"
 
-= f \.tex$ & t r
-+ f \.tex$ & t r & ! t t
-t  Run latex on file and show it with xdvi
-        latex %f && xdvi "`basename %f .tex`".dvi
++ ! t t
+t  List compressed archive/image using 7z
+        P7ZIP=`command -v 7zz` || P7ZIP=`command -v 7z` || P7ZIP=`command -v 7za`; test -z "${P7ZIP}" && echo "7zip not found, aborting..." && exit 255
+        case %f in
+            *.tar.*)
+                tar -taf %f;;
+            *)
+                ${P7ZIP} l %f;;
+        esac
 
-=+ f ^part | f ^Part | f uue & t r
 + t t
-U  Uudecode marked news articles (needs work)
-        (
-            for i in %t ; do # strip headers
-                FIRST=`awk '{print $1 ; exit}' "$i"`
-                cat "$i" | sed '/^'"$FIRST"' /,/^$/d'
-            done
-        ) | sed '/^$/d' | sed -n '/^begin 6/,/^end$/p' | uudecode
-        if [ "$?" != "0" ]; then
-            echo "Cannot decode "%t"."
-        fi
-        echo "Please test the output file before deleting anything."
+t  List compressed archives/images using 7z
+        P7ZIP=`command -v 7zz` || P7ZIP=`command -v 7z` || P7ZIP=`command -v 7za`; test -z "${P7ZIP}" && echo "7zip not found, aborting..." && exit 255
+        for i in %t ; do
+            case %f in
+            *.tar.*)
+                tar -taf "$i";;
+            *)
+                ${P7ZIP} l "$i";;
+            esac
+        done
 
-=+ f \.tar\.gz$ | f \.tar\.z$ | f \.tgz$ | f \.tpz$ | f \.tar\.lz$ | f \.tar\.lz4$ | f \.tar\.lzma$ | f \.tar\.lzo$ | f \.tar\.7z$ | f \.tar\.xz$ | f \.tar\.zst | f \.tar\.Z$ | f \.tar\.bz2$ & t rl
-x  Extract the contents of a compressed tar file
++ ! t t
+T  Test compressed archive/image using 7z
+        P7ZIP=`command -v 7zz` || P7ZIP=`command -v 7z` || P7ZIP=`command -v 7za`; test -z "${P7ZIP}" && echo "7zip not found, aborting..." && exit 255
+        case %f in
+            *.tar.*)
+                tar -taf %f;;
+            *)
+                ${P7ZIP} t -bb3 %f;;
+        esac
+
++ t t
+T  Test compressed archives/images using 7z
+        P7ZIP=`command -v 7zz` || P7ZIP=`command -v 7z` || P7ZIP=`command -v 7za`; test -z "${P7ZIP}" && echo "7zip not found, aborting..." && exit 255
+        for i in %t ; do
+           case %f in
+           *.tar.*)
+               tar -taf "$i";;
+           *)
+               ${P7ZIP} t -bb3 "$i";;
+           esac
+        done
+
++ ! t t
+e  Extract compressed archive/image using 7z
+        P7ZIP=`command -v 7zz` || P7ZIP=`command -v 7z` || P7ZIP=`command -v 7za`; test -z "${P7ZIP}" && echo "7zip not found, aborting..." && exit 255
+        ${P7ZIP} x -bb3 -o$(dirname %f) %f
+
++ t t
+e  Extract compressed archives/images using 7z
+        P7ZIP=`command -v 7zz` || P7ZIP=`command -v 7z` || P7ZIP=`command -v 7za`; test -z "${P7ZIP}" && echo "7zip not found, aborting..." && exit 255
+        for i in %t ; do
+            ${P7ZIP} x -bb3 -o"$(dirname "$i")" "$i"
+        done
+
++ ! t t
+E  Extract compressed archive/image to subdirs using 7z
+        P7ZIP=`command -v 7zz` || P7ZIP=`command -v 7z` || P7ZIP=`command -v 7za`; test -z "${P7ZIP}" && echo "7zip not found, aborting..." && exit 255
+        id=`basename %f`
+        iD="${id%.*}"
+        mkdir -p "$iD"
+        ${P7ZIP} x -bb3 -o"$iD" %f
+
++ t t
+E  Extract compressed archives/images to subdirs using 7z
+        P7ZIP=`command -v 7zz` || P7ZIP=`command -v 7z` || P7ZIP=`command -v 7za`; test -z "${P7ZIP}" && echo "7zip not found, aborting..." && exit 255
+        for i in %t ; do
+            id=`basename "$i"`
+            iD="${id%.*}"
+            mkdir -p "$iD"
+            ${P7ZIP} x -bb3 -o"$iD" "$i"
+        done
+
++ f \.tar$ | f \.tar\.gz$ | f \.tar\.z$ | f \.tgz$ | f \.tpz$ | f \.tar\.lz$ | f \.tar\.lz4$ | f \.tar\.lzma$ | f \.tar\.lzo$ | f \.tar\.7z$ | f \.tar\.xz$ | f \.txz$ | f \.tar\.zst$ | f \.tzst$ | f \.tar\.Z$ | f \.tar\.bz2$ | f \.tbz2$ & t rl & ! t t
+x  Extract compressed tar archive
+        P7ZIP=`command -v 7zz` || P7ZIP=`command -v 7z` || P7ZIP=`command -v 7za`; test -z "${P7ZIP}" && echo "7zip not found, aborting..." && exit 255
         unset PRG
         case %f in
-            *.tar.7z)   PRG="7za e -so";;
-            *.tar.bz2)  PRG="bunzip2 -c";;
-            *.tar.gz|*.tar.z|*.tgz|*.tpz|*.tar.Z) PRG="gzip -dc";;
-            *.tar.lz)   PRG="lzip -dc";;
-            *.tar.lz4)  PRG="lz4 -dc";;
-            *.tar.lzma) PRG="lzma -dc";;
-            *.tar.lzo)  PRG="lzop -dc";;
-            *.tar.xz)   PRG="xz -dc";;
-            *.tar.zst)  PRG="zstd -dc";;
-            *)          exit 1;;
+            *.tar)
+                PRG="";;
+            *.tar.7z)
+                PRG="${P7ZIP} e -so";;
+            *.tar.bz2|*.tbz2)
+                PRG="bunzip2 -c";;
+            *.tar.gz|*.tar.z|*.tgz|*.tpz|*.tar.Z)
+                PRG="gzip -dc";;
+            *.tar.lz)
+                PRG="lzip -dc";;
+            *.tar.lz4)
+                PRG="lz4 -dc";;
+            *.tar.lzma)
+                PRG="lzma -dc";;
+            *.tar.lzo)
+                PRG="lzop -dc";;
+            *.tar.xz|*.txz)
+                PRG="xz -dc";;
+            *.tar.zst|*.tzst)
+                PRG="zstd -dc";;
+            *)
+                exit 1;;
         esac
-        $PRG %f | tar xvf -
+        if [ -n "$PRG" ]; then
+            $PRG %f | tar -xvf -
+        else
+            tar -xf %f
+        fi
 
-= t r
-+ ! t t
-y  Gzip or gunzip current file
-        unset DECOMP
++ f \.tar$ | f \.tar\.gz$ | f \.tar\.z$ | f \.tgz$ | f \.tpz$ | f \.tar\.lz$ | f \.tar\.lz4$ | f \.tar\.lzma$ | f \.tar\.lzo$ | f \.tar\.7z$ | f \.tar\.xz$ | f \.txz$ | f \.tar\.zst$ | f \.tzst$ | f \.tar\.Z$ | f \.tar\.bz2 | f \.tbz2$ & t t
+x  Extract tagged compressed tar archive
+        P7ZIP=`command -v 7zz` || P7ZIP=`command -v 7z` || P7ZIP=`command -v 7za`; test -z "${P7ZIP}" && echo "7zip not found, aborting..." && exit 255
+        for i in %t ; do
+            unset PRG
+            case "$i" in
+                *.tar)
+                    PRG="";;
+                *.tar.7z)
+                    PRG="${P7ZIP} e -so";;
+                *.tar.bz2|*.tbz2)
+                    PRG="bunzip2 -c";;
+                *.tar.gz|*.tar.z|*.tgz|*.tpz|*.tar.Z)
+                    PRG="gzip -dc";;
+                *.tar.lz)
+                    PRG="lzip -dc";;
+                *.tar.lz4)
+                    PRG="lz4 -dc";;
+                *.tar.lzma)
+                    PRG="lzma -dc";;
+                *.tar.lzo)
+                    PRG="lzop -dc";;
+                *.tar.xz|*.txz)
+                    PRG="xz -dc";;
+                *.tar.zst|*.tzst)
+                    PRG="zstd -dc";;
+                *)
+                    exit 1;;
+            esac
+
+            if [ -n "$PRG" ]; then
+                $PRG "$i" | tar -xvf -
+            else
+                tar -xf "$i"
+            fi
+        done
+
++ f \.tar$ | f \.tar\.gz$ | f \.tar\.z$ | f \.tgz$ | f \.tpz$ | f \.tar\.lz$ | f \.tar\.lz4$ | f \.tar\.lzma$ | f \.tar\.lzo$ | f \.tar\.7z$ | f \.tar\.xz$ | f \.txz$ | f \.tar\.zst$ | f \.tzst$ | f \.tar\.Z$ | f \.tar\.bz2$ | f \.tbz2$ & t rl & ! t t
+X  Extract compressed tar archive to subdirectory
+        P7ZIP=`command -v 7zz` || P7ZIP=`command -v 7z` || P7ZIP=`command -v 7za`; test -z "${P7ZIP}" && echo "7zip not found, aborting..." && exit 255
+        unset D
+        unset PRG
         case %f in
-            *.gz|*.[zZ]) DECOMP=-d;;
+            *.tar)
+                PRG=""; D=`basename %f .tar`;;
+            *.tar.7z)
+                PRG="${P7ZIP} e -so"; D=`basename %f .tar.7z`;;
+            *.tar.bz2)
+                PRG="bunzip2 -c"; D=`basename %f .tar.bz2`;;
+            *.tbz2)
+                PRG="bunzip2 -c"; D=`basename %f .tbz2`;;
+            *.tar.gz)
+                PRG="gzip -dc"; D=`basename %f .tar.gz`;;
+            *.tar.z)
+                PRG="gzip -dc"; D=`basename %f .tar.z`;;
+            *.tgz)
+                PRG="gzip -dc"; D=`basename %f .tgz`;;
+            *.tpz)
+                PRG="gzip -dc"; D=`basename %f .tpz`;;
+            *.tar.Z)
+                PRG="gzip -dc"; D=`basename %f .tar.Z`;;
+            *.tar.lz)
+                PRG="lzip -dc"; D=`basename %f .tar.lz`;;
+            *.tar.lz4)
+                PRG="lz4 -dc"; D=`basename %f .tar.lz4`;;
+            *.tar.lzma)
+                PRG="lzma -dc"; D=`basename %f .tar.lzma`;;
+            *.tar.lzo)
+                PRG="lzop -dc"; D=`basename %f .tar.lzo`;;
+            *.tar.xz)
+                PRG="xz -dc"; D=`basename %f .tar.xz`;;
+            *.txz)
+                PRG="xz -dc"; D=`basename %f .txz`;;
+            *.tar.zst)
+                PRG="zstd -dc"; D=`basename %f .tar.zst`;;
+            *.tzst)
+                PRG="zstd -dc"; D=`basename %f .tzst`;;
+            *.tar.F)
+                PRG="freeze -dc"; D=`basename %f .tar.F`;;
+            *)
+                echo "Unsupported compression,"; exit 255;;
+        esac
+        if [ -n "$PRG" ]; then
+            mkdir "$D" && $PRG %f | tar -C "$D" -xvf -
+        else
+            mkdir "$D" && tar -C "$D" -xvf %f
+        fi
+
++ f \.tar$ | f \.tar\.gz$ | f \.tar\.z$ | f \.tgz$ | f \.tpz$ | f \.tar\.lz$ | f \.tar\.lz4$ | f \.tar\.lzma$ | f \.tar\.lzo$ | f \.tar\.7z$ | f \.tar\.xz$ | f \.txz$ | f \.tar\.zst$ | f \.tzst$ | f \.tar\.Z$ | f \.tar\.bz2$ | f \.tbz2$ & t t
+X  Extract tagged compressed tar archives to subdirectories
+        P7ZIP=`command -v 7zz` || P7ZIP=`command -v 7z` || P7ZIP=`command -v 7za`; test -z "${P7ZIP}" && echo "7zip not found, aborting..." && exit 255
+        for i in %t ; do
+            unset D
+            unset PRG
+            case "$i" in
+                *.tar)
+                    PRG=""; D=`basename $i .tar`;;
+                *.tar.7z)
+                    PRG="${P7ZIP} e -so"; D=`basename $i .tar.7z`;;
+                *.tar.bz2)
+                    PRG="bunzip2 -c"; D=`basename $i .tar.bz2`;;
+                *.tbz2)
+                    PRG="bunzip2 -c"; D=`basename $i .tbz2`;;
+                *.tar.gz)
+                    PRG="gzip -dc"; D=`basename $i .tar.gz`;;
+                *.tar.z)
+                    PRG="gzip -dc"; D=`basename $i .tar.z`;;
+                *.tgz)
+                    PRG="gzip -dc"; D=`basename $i .tgz`;;
+                *.tpz)
+                    PRG="gzip -dc"; D=`basename $i .tpz`;;
+                *.tar.Z)
+                    PRG="gzip -dc"; D=`basename $i .tar.Z`;;
+                *.tar.lz)
+                    PRG="lzip -dc"; D=`basename $i .tar.lz`;;
+                *.tar.lz4)
+                    PRG="lz4 -dc"; D=`basename $i .tar.lz4`;;
+                *.tar.lzma)
+                    PRG="lzma -dc"; D=`basename $i .tar.lzma`;;
+                *.tar.lzo)
+                    PRG="lzop -dc"; D=`basename $i .tar.lzo`;;
+                *.tar.xz)
+                    PRG="xz -dc"; D=`basename $i .tar.xz`;;
+                *.txz)
+                    PRG="xz -dc"; D=`basename $i .txz`;;
+                *.tar.zst)
+                    PRG="zstd -dc"; D=`basename $i .tar.zst`;;
+                *.tzst)
+                    PRG="zstd -dc"; D=`basename $i .tzst`;;
+                *.tar.F)
+                    PRG="freeze -dc"; D=`basename $i .tar.F`;;
+                *)
+                    echo "Unsupported compression,"; exit 255;;
+            esac
+           if [ -n "$PRG" ]; then
+                mkdir "$D" && $PRG $i | tar -C "$D" -xvf -
+           else
+                mkdir "$D" && tar -C "$D" -xvf "$i"
+           fi
+        done
+
++ t r & ! t t
+z  Compress / UnCompress (gzip) current file
+        unset DECOMP
+        unset DEPROG
+        case %f in
+            *.gz|*.[zZ])
+                DEPROG=gzip; DECOMP=-d;;
+            *)
+                DEPROG=gzip; DECOMP="";;
         esac
         # Do *not* add quotes around $DECOMP!
-        gzip $DECOMP -v %f
+        $DEPROG $DECOMP -v %f
 
 + t t
-Y  Gzip or gunzip tagged files
+z  Compress / UnCompress (gzip) tagged files
         for i in %t ; do
             unset DECOMP
+            unset DEPROG
             case "$i" in
-                *.gz|*.[zZ]) DECOMP=-d;;
+                *.gz|*.[zZ])
+                    DEPROG=gzip; DECOMP=-d;;
+                *)
+                    DEPROG=gzip; DECOMP="";;
             esac
-            gzip $DECOMP -v "$i"
+            $DEPROG $DECOMP -v "$i"
         done
 
-+ ! t t
-b  Bzip2 or bunzip2 current file
++ t r & ! t t
+Z  Compress / UnCompress (bzip2) current file
         unset DECOMP
+        unset DEPROG
         case %f in
-            *.bz2) DECOMP=-d;;
+            *.bz2)
+                DEPROG=bzip2; DECOMP=-d;;
+            *)
+                DEPROG=bzip2; DECOMP="";;
         esac
-        bzip2 $DECOMP -v %f
+        # Do *not* add quotes around $DECOMP!
+        $DEPROG $DECOMP -v %f
 
 + t t
-B  Bzip2 or bunzip2 tagged files
+Z  Compress / UnCompress (bzip2) tagged files
+        for i in %t ; do
+            unset DECOMP
+            unset DEPROG
+            case "$i" in
+                *.bz2)
+                    DEPROG=bzip2; DECOMP=-d;;
+                *)
+                    DEPROG=bzip2; DECOMP="";;
+            esac
+            $DEPROG $DECOMP -v "$i"
+        done
+
++ t r & ! t t
+y  Compress / UnCompress (zstd) current file
+        unset DECOMP
+        unset DEPROG
+        case %f in
+            *.zst)
+                DEPROG=zstd; DECOMP="-d --rm";;
+            *)
+                DEPROG=zstd; DECOMP="--rm";;
+        esac
+        # Do *not* add quotes around $DECOMP!
+        $DEPROG $DECOMP -v %f
+
++ t t
+y  Compress / UnCompress (zstd) tagged files
+        for i in %t ; do
+            unset DECOMP
+            unset DEPROG
+            case "$i" in
+                *.zst)
+                    DEPROG=zstd; DECOMP="-d --rm";;
+                *)
+                    DEPROG=zstd; DECOMP="--rm";;
+            esac
+            $DEPROG $DECOMP -v "$i"
+        done
+
++ t r & ! t t
+u  Compress / UnCompress (xz) current file
+        unset DECOMP
+        unset DEPROG
+        case %f in
+            *.xz)
+                DEPROG=xz; DECOMP=-d;;
+            *)
+                DEPROG=xz; DECOMP="";;
+        esac
+        # Do *not* add quotes around $DECOMP!
+        $DEPROG $DECOMP -v %f
+
++ t t
+u  Compress / UnCompress (xz) tagged files
+        for i in %t ; do
+            unset DECOMP
+            unset DEPROG
+            case "$i" in
+                *.xz)
+                    DEPROG=xz; DECOMP=-d;;
+                *)
+                    DEPROG=xz; DECOMP="";;
+            esac
+            $DEPROG $DECOMP -v "$i"
+        done
+
++ t r & ! t t
+U  Compress (xz using 7z) / UnCompress (any) current file
+        P7ZIP=`command -v 7zz` || P7ZIP=`command -v 7z` || P7ZIP=`command -v 7za`; test -z "${P7ZIP}" && echo "7zip not found, aborting..." && exit 255
+        case %f in
+            *.gz|*.[zZ]|*.bz2|*.xz|*.xz|*.7z|*.zst)
+                ${P7ZIP} x %f && rm -vf %f;;
+            *)
+                ${P7ZIP} a -txz -m0=lzma2 -ms=on $COMPRESS_OPTS_7Z %f.xz %f && test -r %f.xz && rm -vf %f;;
+        esac
+
++ t t
+U  Compres (xz using 7z) / UnCompress (any) tagged files
+        P7ZIP=`command -v 7zz` || P7ZIP=`command -v 7z` || P7ZIP=`command -v 7za`; test -z "${P7ZIP}" && echo "7zip not found, aborting..." && exit 255
         for i in %t ; do
             unset DECOMP
             case "$i" in
-                *.bz2) DECOMP=-d;;
+                *.gz|*.[zZ]|*.bz2|*.xz|*.xz|*.7z|*.zst)
+                    ${P7ZIP} x "$i" && rm -vf "$i";;
+                *)
+                    ${P7ZIP} a -txz -m0=lzma2 -ms=on $COMPRESS_OPTS_7Z "$i.xz" "$i" && test -r "$i.xz" && rm -vf "$i";;
             esac
-            bzip2 $DECOMP -v "$i"
-        done
-
-+ f \.tar.gz$ | f \.tgz$ | f \.tpz$ | f \.tar.Z$ | f \.tar.z$ | f \.tar.bz2$ | f \.tar.F$ & t r & ! t t
-z  Extract compressed tar file to subdirectory
-        unset D
-        set gzip -cd
-        case %f in
-            *.tar.F)   D=`basename %f .tar.F`; set freeze -dc;;
-            *.tar.Z)   D=`basename %f .tar.Z`;;
-            *.tar.bz2) D=`basename %f .tar.bz2`; set bunzip2 -c;;
-            *.tar.gz)  D=`basename %f .tar.gz`;;
-            *.tar.z)   D=`basename %f .tar.z`;;
-            *.tgz)     D=`basename %f .tgz`;;
-            *.tpz)     D=`basename %f .tpz`;;
-        esac
-        mkdir "$D"; cd "$D" && ("$1" "$2" ../%f | tar xvf -)
-
-+ t t
-Z  Extract compressed tar files to subdirectories
-        for i in %t ; do
-            set gzip -dc
-            unset D
-            case "$i" in
-                *.tar.F)   D=`basename "$i" .tar.F`; set freeze -dc;;
-                *.tar.Z)   D=`basename "$i" .tar.Z`;;
-                *.tar.bz2) D=`basename "$i" .tar.bz2`; set bunzip2 -c;;
-                *.tar.gz)  D=`basename "$i" .tar.gz`;;
-                *.tar.z)   D=`basename "$i" .tar.z`;;
-                *.tgz)     D=`basename "$i" .tgz`;;
-                *.tpz)     D=`basename "$i" .tpz`;;
-          esac
-          mkdir "$D"; (cd "$D" && "$1" "$2" "../$i" | tar xvf -)
         done
 
 + f \.gz$ | f \.tgz$ | f \.tpz$ | f \.Z$ | f \.z$ | f \.bz2$ & t r & ! t t
-c  Convert gz<->bz2, tar.gz<->tar.bz2 & tgz->tar.bz2
+c  Convert gz<->bz2, tar.gz/tgz<->tar.bz2 current
         unset D
         unset EXT
         case %f in
-            *.Z)   EXT=Z;;
-            *.bz2) EXT=bz2;;
-            *.gz)  EXT=gz;;
-            *.tgz) EXT=tgz;;
-            *.tpz) EXT=tpz;;
-            *.z)   EXT=z;;
+            *.Z)
+                EXT=Z;;
+            *.bz2)
+                EXT=bz2;;
+            *.gz)
+                EXT=gz;;
+            *.tgz)
+                EXT=tgz;;
+            *.tpz)
+                EXT=tpz;;
+            *.z)
+                EXT=z;;
         esac
         case "$EXT" in
-            bz2|Z|gz|z) D=`basename %f ."$EXT"`;;
-            tgz|tpz)    D=`basename %f ."$EXT"`.tar;;
+            bz2|Z|gz|z)
+                D="`basename %f ."$EXT"`";;
+            tgz|tpz)
+                D="`basename %f ."$EXT"`.tar";;
         esac
         if [ "$EXT" = "bz2" ]; then
             bunzip2 -v %f
@@ -349,21 +757,29 @@ c  Convert gz<->bz2, tar.gz<->tar.bz2 & tgz->tar.bz2
         fi
 
 + t t
-C  Convert gz<->bz2, tar.gz<->tar.bz2 & tgz->tar.bz2
+c  Convert gz<->bz2, tar.gz/tgz<->tar.bz2 tagged files
         for i in %t ; do
             unset D
             unset EXT
             case "$i" in
-                *.Z)   EXT=Z;;
-                *.bz2) EXT=bz2;;
-                *.gz)  EXT=gz;;
-                *.tgz) EXT=tgz;;
-                *.tpz) EXT=tpz;;
-                *.z)   EXT=z;;
+                *.Z)
+                    EXT=Z;;
+                *.bz2)
+                    EXT=bz2;;
+                *.gz)
+                    EXT=gz;;
+                *.tgz)
+                    EXT=tgz;;
+                *.tpz)
+                    EXT=tpz;;
+                *.z)
+                    EXT=z;;
             esac
             case "$EXT" in
-                bz2|Z|gz|z) D=`basename "$i" ."$EXT"`;;
-                tgz|tpz)    D=`basename "$i" ."$EXT"`.tar;;
+                bz2|Z|gz|z)
+                    D=`basename "$i" ."$EXT"`;;
+                tgz|tpz)
+                    D=`basename "$i" ."$EXT"`.tar;;
             esac
             if [ "$EXT" = "bz2" ]; then
                 bunzip2 -v "$i"
@@ -374,6 +790,160 @@ C  Convert gz<->bz2, tar.gz<->tar.bz2 & tgz->tar.bz2
             fi
         done
 
-+ x /usr/bin/open | x /usr/local/bin/open & x /bin/sh
-o  Open next a free console
-        open -s -- sh
++ ! t t
+j  Convert any->xz (using 7z)
+        P7ZIP=`command -v 7zz` || P7ZIP=`command -v 7z` || P7ZIP=`command -v 7za`; test -z "${P7ZIP}" && echo "7zip not found, aborting..." && exit 255
+        i=%f
+        case "$i" in
+            *.Z|*.bz2|*.gz|*.z|*.Z|*.bz2|*.tar.rar|*.tar.7z|*.zst)
+                EXT=xz;;
+            *.tgz|*.tbz2|*.tzst|*.tpz)
+                EXT=tar.xz;;
+            *)
+                echo "Unsupported compression."; exit 255;;
+        esac
+        ${P7ZIP} e -so "$i" | ${P7ZIP} a -si -txz -m0=lzma2 -ms=on $COMPRESS_OPTS_7Z "${i%.*}.$EXT" && [ -s "${i%.*}.$EXT" ] && rm -vf "${i}"
+
++ t t
+j  Convert any->xz (using 7z)
+        P7ZIP=`command -v 7zz` || P7ZIP=`command -v 7z` || P7ZIP=`command -v 7za`; test -z "${P7ZIP}" && echo "7zip not found, aborting..." && exit 255
+        for i in %t ; do
+            case "$i" in
+                *.Z|*.bz2|*.gz|*.z|*.Z|*.bz2|*.tar.rar|*.tar.7z|*.zst)
+                    EXT=xz;;
+                *.tgz|*.tbz2|*.tzst|*.tpz|*.txz)
+                    EXT=tar.xz;;
+                *)
+                    echo "Unsupported compression."; exit 255;;
+            esac
+            ${P7ZIP} e -so "$i" | ${P7ZIP} a -si -txz -m0=lzma2 -ms=on $COMPRESS_OPTS_7Z "${i%.*}.$EXT" && [ -s "${i%.*}.$EXT" ] && rm -vf "${i}"
+        done
+
++ ! t t
+J  Convert any->zst (using 7z+zstd)
+        P7ZIP=`command -v 7zz` || P7ZIP=`command -v 7z` || P7ZIP=`command -v 7za`; test -z "${P7ZIP}" && echo "7zip not found, aborting..." && exit 255
+        i=%f
+        case "$i" in
+            *.Z|*.bz2|*.gz|*.z|*.Z|*.bz2|*.tar.rar|*.tar.7z|*.xz)
+                EXT=zst;;
+            *.tgz|*.tbz2|*.tzst|*.tpz|*.txz)
+                EXT=tar.zst;;
+            *)
+                echo "Unsupported compression."; exit 255;;
+        esac
+        ${P7ZIP} e -so "$i" | zstd $COMPRESS_OPTS_ZSTD - -o "${i%.*}.$EXT" && [ -s "${i%.*}.$EXT" ] && rm -vf "${i}"
+
++ t t
+J  Convert any->zst (Using 7z+zstd)
+        P7ZIP=`command -v 7zz` || P7ZIP=`command -v 7z` || P7ZIP=`command -v 7za`; test -z "${P7ZIP}" && echo "7zip not found, aborting..." && exit 255
+        for i in %t ; do
+            case "$i" in
+            *.Z|*.bz2|*.gz|*.z|*.Z|*.bz2|*.tar.rar|*.tar.7z|*.xz)
+                EXT=zst;;
+            *.tgz|*.tbz2|*.tzst|*.tpz|*.txz)
+                EXT=tar.zst;;
+            *)
+                echo "Unsupported compression."; exit 255;;
+            esac
+            ${P7ZIP} e -so "$i" | zstd $COMPRESS_OPTS_ZSTD - -o "${i%.*}.$EXT" && [ -s "${i%.*}.$EXT" ] && rm -vf "${i}"
+        done
+
++ t t
+i  Compare (mcdiff) tagged files/directories
+        mcdiff %t
+
++ ! t t
+i  Compare (mcdiff) opposite selected files
+        if [ %d/%f = %D/%F ]; then
+            echo "The two files must be different"
+            exit 1
+        fi
+        mcdiff %d/%f %D/%F
+
++ ! t t
+s  Calculate SHA256 checksum of the current file
+        SHACMD=`command -v sha256sum` || SHACMD="shasum -a256"
+        $SHACMD %f
+
++ t t
+s  Calculate SHA256 checksum of on the tagged files
+        for i in %t ; do
+            SHACMD=`command -v sha256sum` || SHACMD="shasum -a256"
+            $SHACMD "$i"
+        done
+
++ ! t t
+S  Calculate SHA512 checksum of the current file
+        SHACMD=`command -v sha512sum` || SHACMD="shasum -a512"
+        $SHACMD %f
+
++ t t
+S  Calculate SHA512 checksum of on the tagged files
+        for i in %t ; do
+            SHACMD=`command -v sha512sum` || SHACMD="shasum -a512"
+            $SHACMD "$i"
+        done
+
++ ! t t
+f  Check file type
+        file %f
+
++t t
+f  Check files type
+        for i in %t ; do
+            file "$i"
+        done
+
++ ! t t
+F  Rename objects in current direcroty using vidir
+        cd %d
+        VISUAL=mcedit vidir
+
++ t t
+F  Rename tagged file/directories using vidir
+        cd %d
+        VISUAL=mcedit vidir %t
+
+h  Fetch git remote changes
+        echo -n "Choose remote to fetch (empty for all) [$(git remote | tr '\n' ' ')]:"
+        read REMOTE
+        [ "$REMOTE"x = x ] && REMOTE="--all"
+        git fetch $REMOTE
+
+H  Fetch git remote changes (verbose)
+        echo "Available remotes:"
+        git remote
+        echo -n "Name of remote to fetch (empty for all): "
+        read REMOTE
+        [ "$REMOTE"x = x ] && REMOTE="--all"
+        GIT_TRACE=2 git fetch --verbose $REMOTE
+
+g  Show git Log
+        git log --graph --abbrev-commit --date=relative --pretty=format:'%%Cred%%h%%Creset %%C(yellow)[%%an]%%Creset -%%C(cyan)%%d%%Creset %%s - %%Cgreen%%ch %%Cblue(%%cr)%%Creset'
+
+G  Show git Log (include remotes)
+        git log --graph --abbrev-commit --date=relative --all --pretty=format:'%%Cred%h%Creset %%C(yellow)[%%an]%%Creset -%%C(cyan)%%d%%Creset %%s - %%Cgreen%%ch %%Cblue(%%cr)%%Creset'
+
+v  View git Status
+        git status
+
+V  View git Diff
+        git diff
+
+n  Run NCurses Disk Usage (ncdu -x)
+        ncdu -x
+
++ f \.ncdu$ & t r & ! t t
+N  View NCurses Disk Usage file (ncdu)
+        ncdu -f %f
+
++ ! t t
+N  Create current directoy index file (ncdu)
+        i="../$(basename `pwd`).ncdu"
+        ncdu -o "$i"
+
+q  Tail log file
+        tail -f %f
+
+Q  Tail (follow) log file
+        tail -F %f
