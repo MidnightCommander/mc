@@ -60,20 +60,6 @@
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-static vfs_path_t *
-get_absolute_name (const vfs_path_t *vpath)
-{
-    if (vpath == NULL)
-        return NULL;
-
-    if (IS_PATH_SEP (*vfs_path_get_by_index (vpath, 0)->path))
-        return vfs_path_clone (vpath);
-
-    return vfs_path_append_vpath_new (vfs_get_raw_current_dir (), vpath, NULL);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 static int
 my_mkdir_rec (const vfs_path_t *vpath, mode_t mode)
 {
@@ -115,13 +101,6 @@ my_mkdir (const vfs_path_t *vpath, mode_t mode)
     int result;
 
     result = my_mkdir_rec (vpath, mode);
-    if (result == 0)
-    {
-        vfs_path_t *my_s;
-
-        my_s = get_absolute_name (vpath);
-        vfs_path_free (my_s, TRUE);
-    }
     return result;
 }
 
@@ -136,13 +115,6 @@ my_rmdir (const char *path)
     vpath = vfs_path_from_str_flags (path, VPF_NO_CANON);
     /* FIXME: Should receive a Wtree! */
     result = mc_rmdir (vpath);
-    if (result == 0)
-    {
-        vfs_path_t *my_s;
-
-        my_s = get_absolute_name (vpath);
-        vfs_path_free (my_s, TRUE);
-    }
     vfs_path_free (vpath, TRUE);
     return result;
 }
