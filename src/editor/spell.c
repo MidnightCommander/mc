@@ -174,8 +174,10 @@ spell_available (void)
 
     spell_module = g_module_open ("libaspell", G_MODULE_BIND_LAZY);
 
-    if (spell_module != NULL
-        && ASPELL_FUNCTION_AVAILABLE (new_aspell_config)
+    if (spell_module == NULL)
+        return FALSE;
+
+    if (ASPELL_FUNCTION_AVAILABLE (new_aspell_config)
         && ASPELL_FUNCTION_AVAILABLE (aspell_dict_info_list_elements)
         && ASPELL_FUNCTION_AVAILABLE (aspell_dict_info_enumeration_next)
         && ASPELL_FUNCTION_AVAILABLE (new_aspell_speller)
