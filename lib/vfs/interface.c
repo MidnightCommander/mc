@@ -776,13 +776,17 @@ mc_tmpdir (void)
     static char buffer[PATH_MAX];
     static const char *tmpdir = NULL;
     const char *sys_tmp;
-    struct stat st;
     gchar *template;
 
     /* Check if already correctly initialized */
-    if (tmpdir != NULL && lstat (tmpdir, &st) == 0 && S_ISDIR (st.st_mode) &&
-        st.st_uid == getuid () && (st.st_mode & 0777) == 0700)
-        return tmpdir;
+    if (tmpdir != NULL)
+    {
+        struct stat st;
+
+        if (lstat (tmpdir, &st) == 0 && S_ISDIR (st.st_mode) && st.st_uid == getuid ()
+            && (st.st_mode & 0777) == 0700)
+            return tmpdir;
+    }
 
     sys_tmp = getenv ("MC_TMPDIR");
     if (sys_tmp == NULL || !IS_PATH_SEP (sys_tmp[0]))
