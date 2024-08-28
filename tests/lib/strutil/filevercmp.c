@@ -210,7 +210,7 @@ static const char *filevercmp_test_ds2[] = {
     "#.b#"
 };
 
-const size_t filevercmp_test_ds2_len = G_N_ELEMENTS (filevercmp_test_ds2);
+static const size_t filevercmp_test_ds2_len = G_N_ELEMENTS (filevercmp_test_ds2);
 
 /* @Test(dataSource = "filevercmp_test_ds2") */
 /* *INDENT-OFF* */
@@ -247,7 +247,7 @@ static const char *filevercmp_test_ds3[] = {
     "application-1.10.1.tar.gz"
 };
 
-const size_t filevercmp_test_ds3_len = G_N_ELEMENTS (filevercmp_test_ds3);
+static const size_t filevercmp_test_ds3_len = G_N_ELEMENTS (filevercmp_test_ds3);
 
 /* @Test(dataSource = "filevercmp_test_ds3") */
 /* *INDENT-OFF* */
@@ -285,7 +285,7 @@ static const char *filevercmp_test_ds4[] = {
     "firefox-59.0.1+build1.tar.gz"
 };
 
-const size_t filevercmp_test_ds4_len = G_N_ELEMENTS (filevercmp_test_ds4);
+static const size_t filevercmp_test_ds4_len = G_N_ELEMENTS (filevercmp_test_ds4);
 
 /* @Test(dataSource = "filevercmp_test_ds4") */
 /* *INDENT-OFF* */
@@ -346,7 +346,7 @@ static const char *filevercmp_test_ds5[] = {
     NULL
 };
 
-const size_t filevercmp_test_ds5_len = G_N_ELEMENTS (filevercmp_test_ds5);
+static const size_t filevercmp_test_ds5_len = G_N_ELEMENTS (filevercmp_test_ds5);
 
 /* @Test(dataSource = "filevercmp_test_ds5") */
 /* *INDENT-OFF* */
