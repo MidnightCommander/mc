@@ -33,13 +33,13 @@ mcrpmfs_list ()
     if test -z "$MCFASTRPM"; then
       MCFASTRPM=$MCFASTRPM_DFLT
     fi
-    FILEPREF="-r--r--r--   1 root     root    "
+    FILEPREF="-r--r--r--   1 0        0       "
     DESC=`$RPM -qi -- "$1"`
     DATE=`$RPM -q --qf "%{BUILDTIME:date}" -- "$1" | cut -c 5-11,21-24`
     HEADERSIZE=`echo "$DESC" | wc -c`
-    echo "-r--r--r--   1 root     root  $HEADERSIZE $DATE HEADER"
-    echo "-r-xr-xr-x   1 root     root    40 $DATE UNINSTALL"
-    echo "dr-xr-xr-x   3 root     root	   0 $DATE INFO"
+    echo "-r--r--r--   1 0        0     $HEADERSIZE $DATE HEADER"
+    echo "-r-xr-xr-x   1 0        0       40 $DATE UNINSTALL"
+    echo "dr-xr-xr-x   3 0        0   	   0 $DATE INFO"
     echo "$FILEPREF 0 $DATE INFO/NAME-VERSION-RELEASE"
     echo "$FILEPREF 0 $DATE INFO/GROUP"
     echo "$FILEPREF 0 $DATE INFO/BUILDHOST"
@@ -54,7 +54,7 @@ mcrpmfs_list ()
      test "`$RPM -q --qf \"%{SUMMARY}\" -- "$1"`" = "(none)" ||
          echo "$FILEPREF 0 $DATE INFO/SUMMARY"
      if test "`$RPM -q --qf \"%{RPMTAG_PREIN}%{RPMTAG_POSTIN}%{RPMTAG_PREUN}%{RPMTAG_POSTUN}%{VERIFYSCRIPT}\" -- "$1"`" != "(none)(none)(none)(none)(none)"; then
-	echo "dr-xr-xr-x   1 root     root     0 $DATE INFO/SCRIPTS"
+	echo "dr-xr-xr-x   1 0        0        0 $DATE INFO/SCRIPTS"
 	test "`$RPM -q --qf \"%{RPMTAG_PREIN}\" -- "$1"`" = '(none)' ||
 	   echo "$FILEPREF 0 $DATE INFO/SCRIPTS/PREIN"
 	test "`$RPM -q --qf \"%{RPMTAG_POSTIN}\" -- "$1"`" = '(none)' ||
@@ -72,7 +72,7 @@ mcrpmfs_list ()
      echo "$FILEPREF 0 $DATE INFO/VENDOR"
      echo "$FILEPREF 0 $DATE INFO/DESCRIPTION"
      echo "$FILEPREF 0 $DATE INFO/SUMMARY"
-     echo "dr-xr-xr-x   1 root     root     0 $DATE INFO/SCRIPTS"
+     echo "dr-xr-xr-x   1 0        0        0 $DATE INFO/SCRIPTS"
      echo "$FILEPREF 0 $DATE INFO/SCRIPTS/PREIN"
      echo "$FILEPREF 0 $DATE INFO/SCRIPTS/POSTIN"
      echo "$FILEPREF 0 $DATE INFO/SCRIPTS/PREUN"

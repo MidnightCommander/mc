@@ -46,9 +46,9 @@ sub list
 	}
     }
     for $i (sort keys %files) {
-	print "dr-xr-xr-x 1 root root 0 $DATE $i/\n";
+	print "dr-xr-xr-x 1 0    0    0 $DATE $i/\n";
 	for $fn (sort @{$files{$i}}) {
-	    print "-r--r--r-- 1 root root $sizes{$fn} $dates{$fn} $i/$fn.trpm\n";
+	    print "-r--r--r-- 1 0    0    $sizes{$fn} $dates{$fn} $i/$fn.trpm\n";
 	}
     }
 }

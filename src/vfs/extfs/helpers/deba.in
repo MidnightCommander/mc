@@ -21,14 +21,14 @@ sub list
        $install_size=length($pressinstall);
        $upgrade_size=length($pressupgrade);
 
-       print "-r--r--r--   1 root     root     $info_size $date INFO\n";
+       print "-r--r--r--   1 0        0        $info_size $date INFO\n";
 
        chop($debd = `dpkg -s $qarchive | grep -i ^Version | sed 's/^version: //i'`);
        chop($deba = `apt-cache show $qarchive | grep -i ^Version | sed 's/^version: //i'`);
        if( ! $debd ) {
-           print "-r-xr--r--   1 root     root     $install_size $date INSTALL\n";
+           print "-r-xr--r--   1 0        0        $install_size $date INSTALL\n";
        } elsif( $debd ne $deba ) {
-           print "-r-xr--r--   1 root     root     $upgrade_size $date UPGRADE\n";
+           print "-r-xr--r--   1 0        0        $upgrade_size $date UPGRADE\n";
        }
 }
 

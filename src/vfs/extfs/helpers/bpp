@@ -14,8 +14,8 @@ export LC_TIME
 
 mcbppfs_list ()
 {
-    FILEPREF="-r--r--r--   1 root     root    "
-    FIEXPREF="-r-xr-xr-x   1 root     root    "
+    FILEPREF="-r--r--r--   1 0        0       "
+    FIEXPREF="-r-xr-xr-x   1 0        0       "
     DATE=`date +"%b %d %H:%M"`
     set x `ls -l "$1"`
     size=$6

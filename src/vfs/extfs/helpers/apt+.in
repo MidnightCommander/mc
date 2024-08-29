@@ -120,23 +120,23 @@ sub list
     chop($stats = `apt-cache stats 2>/dev/null`);
     chop($config = `apt-config dump 2>&1`);
     $sz = length($check);
-    print "-r--r--r-- 1 root root $sz $DATE CHECK\n";
+    print "-r--r--r-- 1 0    0    $sz $DATE CHECK\n";
     $sz = length($available);
-    print "-r--r--r-- 1 root root $sz $DATE AVAILABLE\n";
+    print "-r--r--r-- 1 0    0    $sz $DATE AVAILABLE\n";
     $sz = length($stats);
-    print "-r--r--r-- 1 root root $sz $DATE STATS\n";
+    print "-r--r--r-- 1 0    0    $sz $DATE STATS\n";
     $sz = length($config);
-    print "-r--r--r-- 1 root root $sz $DATE CONFIG\n";
+    print "-r--r--r-- 1 0    0    $sz $DATE CONFIG\n";
     $sz = length($pressupdate);
-    print "-r-xr--r-- 1 root root $sz $DATE UPDATE\n";
+    print "-r-xr--r-- 1 0    0    $sz $DATE UPDATE\n";
     $sz = length($pressupgrade);
-    print "-r-xr--r-- 1 root root $sz $DATE UPGRADE\n";
-    print "-r-xr--r-- 1 root root $sz $DATE DIST-UPGRADE\n";
+    print "-r-xr--r-- 1 0    0    $sz $DATE UPGRADE\n";
+    print "-r-xr--r-- 1 0    0    $sz $DATE DIST-UPGRADE\n";
 
     ls("/etc/apt/sources.list","sources.list");
     ls('/etc/apt/apt.conf','apt.conf') if (-f '/etc/apt/apt.conf');
 
-    print "drwxr-xr-x 1 root root 0 $DATE all\n";
+    print "drwxr-xr-x 1 0    0    0 $DATE all\n";
 
    if ( open(PIPEIN, "find /var/cache/apt/archives -type f |") ) {
        while(<PIPEIN>) {
@@ -179,18 +179,18 @@ sub list
            my $sub = $dn;
            while( $sub =~ s!^(.*)/[^/]*$!$1! ) {
                unless( $sects{$sub} ) {
-                   print "drwxr-xr-x 1 root root 0 $DATE $sub/\n";
+                   print "drwxr-xr-x 1 0    0    0 $DATE $sub/\n";
                    $sects{$sub} = 1;
                }
            }
-           print "drwxr-xr-x 1 root root 0 $DATE $dn/\n";
+           print "drwxr-xr-x 1 0    0    0 $DATE $dn/\n";
            $sects{$dn} = 1;
        }
        $sz = $debd{$pkg}{'status'} =~ /config-files/ ? 0 : $debd{$pkg}{'installed-size'} * 1024;
        @stat = stat("/var/lib/dpkg/info/".$debd{$pkg}{package}.".list");
        $bt = bt($stat[9]);
-       print "-rw-r--r-- 1 root root $sz $bt $dn/$fn.debd\n";
-       print "lrwxrwxrwx 1 root root $sz $bt all/$fn.debd -> ../$dn/$fn.debd\n";
+       print "-rw-r--r-- 1 0    0    $sz $bt $dn/$fn.debd\n";
+       print "lrwxrwxrwx 1 0    0    $sz $bt all/$fn.debd -> ../$dn/$fn.debd\n";
     }
 
     open STAT, "apt-cache dumpavail |"
@@ -219,16 +219,16 @@ sub list
            my $sub = $dn;
            while( $sub =~ s!^(.*)/[^/]*$!$1! ) {
                unless( $sects{$sub} ) {
-                   print "drwxr-xr-x 1 root root 0 $DATE $sub/\n";
+                   print "drwxr-xr-x 1 0    0    0 $DATE $sub/\n";
                    $sects{$sub} = 1;
                }
            }
-           print "drwxr-xr-x 1 root root 0 $DATE $dn/\n";
+           print "drwxr-xr-x 1 0    0    0 $DATE $dn/\n";
            $sects{$dn} = 1;
        }
        $sz = $deba{$pkg}{'status'} =~ /config-files/ ? 0 : $deba{$pkg}{'installed-size'} * 1024;
-       print "-rw-r--r-- 1 root root $sz $DATE $dn/$fn.deba\n";
-       print "lrwxrwxrwx 1 root root $sz $DATE all/$fn.deba -> ../$dn/$fn.deba\n";
+       print "-rw-r--r-- 1 0    0    $sz $DATE $dn/$fn.deba\n";
+       print "lrwxrwxrwx 1 0    0    $sz $DATE all/$fn.deba -> ../$dn/$fn.deba\n";
     }
 }
 
