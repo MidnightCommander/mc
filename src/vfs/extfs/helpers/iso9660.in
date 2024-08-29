@@ -214,7 +214,7 @@ BEGIN {
   attr=substr($0, 1, length($0)-length(name))
   # strip inodes and extra dir entries; fix perms
   sub(irx, "", name)
-  sub("^----------   0    0    0", "-r--r--r--   1 root root", attr)
+  sub("^----------   0    0    0", "-r--r--r--   1 0    0   ", attr)
   sub(" $", "", name)
   # for Joliet UCS level 3
   if (SEMICOLON == "YES") sub(";1$", "", name);
