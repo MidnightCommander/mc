@@ -2164,7 +2164,10 @@ edit_init (WEdit *edit, const WRect *r, const edit_arg_t *arg)
     edit->stat1.st_gid = getgid ();
     edit->stat1.st_mtime = 0;
 
-    edit->attrs_ok = (mc_fgetflags (arg->file_vpath, &edit->attrs) == 0);
+    if (arg != NULL)
+        edit->attrs_ok = (mc_fgetflags (arg->file_vpath, &edit->attrs) == 0);
+    else
+        edit->attrs_ok = FALSE;
 
     edit->over_col = 0;
     edit->bracket = -1;
