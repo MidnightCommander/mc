@@ -36,10 +36,10 @@
 #include "src/vfs/local/local.c"
 
 
-struct vfs_s_subclass test_subclass1;
+static struct vfs_s_subclass test_subclass1;
 static struct vfs_class *vfs_test_ops1 = VFS_CLASS (&test_subclass1);
 
-struct vfs_s_entry *vfs_root_entry;
+static struct vfs_s_entry *vfs_root_entry;
 static struct vfs_s_inode *vfs_root_inode;
 static struct vfs_s_super *vfs_test_super;
 
