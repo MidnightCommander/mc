@@ -28,11 +28,6 @@
 
 #include "lib/vfs/vfs.h"
 
-/* sighandler_t is GNU extension */
-#ifndef HAVE_SIGHANDLER_T
-typedef void (*sighandler_t) (int);
-#endif
-
 /* --------------------------------------------------------------------------------------------- */
 
 /* @CapturedValue */
@@ -65,7 +60,7 @@ static int sigaction__return_value = 0;
 
 /* @Mock */
 int
-sigaction (int signum, const struct sigaction *act, struct sigaction *oldact)
+my_sigaction (int signum, const struct sigaction *act, struct sigaction *oldact)
 {
     int *tmp_signum;
     struct sigaction *tmp_act;
@@ -133,7 +128,7 @@ static sighandler_t signal__return_value = NULL;
 
 /* @Mock */
 sighandler_t
-signal (int signum, sighandler_t handler)
+my_signal (int signum, sighandler_t handler)
 {
     int *tmp_signum;
     sighandler_t *tmp_handler;
@@ -180,7 +175,7 @@ static pid_t fork__return_value;
 
 /* @Mock */
 pid_t
-fork (void)
+my_fork (void)
 {
     return fork__return_value;
 }
@@ -207,7 +202,7 @@ static int execvp__return_value = 0;
 
 /* @Mock */
 int
-execvp (const char *file, char *const argv[])
+my_execvp (const char *file, char *const argv[])
 {
     char **one_arg;
     execvp__file__captured = g_strdup (file);

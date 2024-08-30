@@ -1403,7 +1403,7 @@ init_subshell (void)
 
     subshell_alive = TRUE;
     subshell_stopped = FALSE;
-    subshell_pid = fork ();
+    subshell_pid = my_fork ();
 
     if (subshell_pid == -1)
     {

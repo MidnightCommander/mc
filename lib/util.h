@@ -126,6 +126,11 @@ typedef struct
     mc_pipe_stream_t err;
 } mc_pipe_t;
 
+/* sighandler_t is GNU extension */
+#ifndef HAVE_SIGHANDLER_T
+typedef void (*sighandler_t) (int);
+#endif
+
 /*** structures declarations (and typedefs of structures)*****************************************/
 
 /*** global variables defined in .c file *********************************************************/
@@ -199,6 +204,14 @@ const char *get_owner (uid_t uid);
 
 /* Returns a copy of *s until a \n is found and is below top */
 const char *extract_line (const char *s, const char *top);
+
+/* System call wrappers */
+sighandler_t my_signal (int signum, sighandler_t handler) __attribute__((weak));
+int my_sigaction (int signum, const struct sigaction *act, struct sigaction *oldact)
+    __attribute__((weak));
+pid_t my_fork (void) __attribute__((weak));
+int my_execvp (const char *file, char *const argv[]) __attribute__((weak));
+char *my_get_current_dir (void) __attribute__((weak));
 
 /* Process spawning */
 int my_system (int flags, const char *shell, const char *command);

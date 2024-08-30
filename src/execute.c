@@ -160,12 +160,12 @@ do_suspend_cmd (void)
         /* Make sure that the SIGTSTP below will suspend us directly,
            without calling ncurses' SIGTSTP handler; we *don't* want
            ncurses to redraw the screen immediately after the SIGCONT */
-        sigaction (SIGTSTP, &startup_handler, &sigtstp_action);
+        my_sigaction (SIGTSTP, &startup_handler, &sigtstp_action);
 
         kill (getpid (), SIGTSTP);
 
         /* Restore previous SIGTSTP action */
-        sigaction (SIGTSTP, &sigtstp_action, NULL);
+        my_sigaction (SIGTSTP, &sigtstp_action, NULL);
     }
 #endif /* SIGTSTP */
 
