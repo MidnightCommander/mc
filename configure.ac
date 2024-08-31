@@ -243,6 +243,8 @@ dnl This macro is redefined in m4.include/gnulib/sys_types_h.m4
 dnl   to work around a buggy version in autoconf <= 2.69.
 AC_HEADER_MAJOR
 
+mc_CHECK_HEADER_STDCKDINT
+
 
 dnl ############################################################################
 dnl Check for types
