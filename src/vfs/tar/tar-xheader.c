@@ -32,6 +32,11 @@
 
 #include <ctype.h>              /* isdigit() */
 #include <errno.h>
+#ifdef HAVE_STDCKDINT_H
+#include <stdckdint.h>
+#else
+#include "lib/stdckdint.h"
+#endif
 #include <stdlib.h>
 #include <string.h>
 
@@ -992,12 +997,14 @@ gboolean
 tar_xheader_read (tar_super_t *archive, struct xheader *xhdr, union block *p, off_t size)
 {
     size_t j = 0;
+    size_t size_plus_1;
 
     size = MAX (0, size);
-    size += BLOCKSIZE;
-
+    if (ckd_add (&size_plus_1, size, BLOCKSIZE + 1))
+        return FALSE;
+    size = size_plus_1 - 1;
     xhdr->size = size;
-    xhdr->buffer = g_malloc (size + 1);
+    xhdr->buffer = g_malloc (size_plus_1);
     xhdr->buffer[size] = '\0';
 
     do
