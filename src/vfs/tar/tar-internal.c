@@ -33,6 +33,11 @@
 #include <config.h>
 
 #include <inttypes.h>           /* uintmax_t */
+#ifdef HAVE_STDCKDINT_H
+#include <stdckdint.h>
+#else
+#include "lib/stdckdint.h"
+#endif
 
 #include "lib/global.h"
 #include "lib/widget.h"         /* message() */
@@ -288,8 +293,7 @@ tar_from_header (const char *where0, size_t digs, char const *type, intmax_t min
             value += *where++ - '0';
             if (where == lim || !is_octal_digit (*where))
                 break;
-            overflow |= value != (value << LG_8 >> LG_8);
-            value <<= LG_8;
+            overflow |= ckd_mul (&value, value, 8);
         }
 
         /* Parse the output of older, unportable tars, which generate
