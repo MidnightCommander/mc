@@ -36,6 +36,11 @@
 #include <config.h>
 
 #include <errno.h>
+#ifdef HAVE_STDCKDINT_H
+#include <stdckdint.h>
+#else
+#include "lib/stdckdint.h"
+#endif
 #include <string.h>             /* memset() */
 
 #ifdef hpux
@@ -636,8 +641,6 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive)
         if (header->header.typeflag == GNUTYPE_LONGNAME
             || header->header.typeflag == GNUTYPE_LONGLINK)
         {
-            size_t name_size = current_stat_info.stat.st_size;
-            size_t n;
             off_t size;
             union block *header_copy;
             char *bp;
@@ -646,16 +649,14 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive)
             if (arch->type == TAR_UNKNOWN)
                 arch->type = TAR_GNU;
 
-            n = name_size % BLOCKSIZE;
-            size = name_size + BLOCKSIZE;
-            if (n != 0)
-                size += BLOCKSIZE - n;
-            if ((off_t) name_size != current_stat_info.stat.st_size || size < (off_t) name_size)
+            if (ckd_add (&size, current_stat_info.stat.st_size, 2 * BLOCKSIZE - 1))
             {
                 message (D_ERROR, MSG_ERROR, _("Inconsistent tar archive"));
                 status = HEADER_FAILURE;
                 goto ret;
             }
+
+            size -= size % BLOCKSIZE;
 
             header_copy = g_malloc (size + 1);
 
