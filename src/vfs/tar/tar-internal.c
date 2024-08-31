@@ -33,7 +33,6 @@
 #include <config.h>
 
 #include <inttypes.h>           /* uintmax_t */
-#include <stdint.h>             /* UINTMAX_MAX, etc */
 
 #include "lib/global.h"
 #include "lib/widget.h"         /* message() */
