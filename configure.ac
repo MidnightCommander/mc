@@ -262,8 +262,14 @@ AC_TYPE_MODE_T
 gl_PROMOTED_TYPE_MODE_T
 AC_TYPE_PID_T
 AC_TYPE_UID_T
-AC_CHECK_TYPE([major_t], [], [AC_DEFINE([major_t], [int], [Type of major device numbers.])])
-AC_CHECK_TYPE([minor_t], [], [AC_DEFINE([minor_t], [int], [Type of minor device numbers.])])
+
+dnl Taken from GNU/Linux, and should be good enough on platforms lacking these types.
+AC_CHECK_TYPE([dev_t], [unsigned long long int])
+AC_CHECK_TYPE([ino_t], [unsigned long long int])
+
+dnl Taken from GNU/Linux, and should be good enough on platforms lacking these types.
+AC_CHECK_TYPE([major_t], [unsigned int])
+AC_CHECK_TYPE([minor_t], [unsigned int])
 
 AC_STRUCT_ST_BLOCKS
 AC_CHECK_MEMBERS([struct stat.st_blksize, struct stat.st_rdev, struct stat.st_mtim, struct stat.st_mtimespec, struct stat.st_mtimensec])
