@@ -312,6 +312,8 @@ void tar_base64_init (void);
 void tar_assign_string (char **string, char *value);
 void tar_assign_string_dup (char **string, const char *value);
 void tar_assign_string_dup_n (char **string, const char *value, size_t n);
+intmax_t stoint (const char *arg, char **arglim, gboolean *overflow, intmax_t minval,
+                 uintmax_t maxval);
 intmax_t tar_from_header (const char *where0, size_t digs, char const *type, intmax_t minval,
                           uintmax_t maxval, gboolean octal_only);
 off_t off_from_header (const char *p, size_t s);

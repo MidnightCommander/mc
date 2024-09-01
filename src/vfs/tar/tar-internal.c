@@ -32,6 +32,7 @@
 
 #include <config.h>
 
+#include <ctype.h>              /* isdigit() */
 #include <inttypes.h>           /* uintmax_t */
 
 #include "lib/global.h"
@@ -228,6 +229,104 @@ tar_assign_string_dup_n (char **string, const char *value, size_t n)
 {
     g_free (*string);
     *string = g_strndup (value, n);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/* Convert a prefix of the string @arg to a system integer type. If @arglim, set *@arglim to point
+   to just after the prefix. If @overflow, set *@overflow to TRUE or FALSE depending on whether
+   the input is out of @minval..@maxval range. If the input is out of that range, return an extreme
+   value. @minval must not be positive.
+
+   If @minval is negative, @maxval can be at most INTMAX_MAX, and negative integers @minval .. -1
+   are assumed to be represented using leading '-' in the usual way. If the represented value
+   exceeds INTMAX_MAX, return a negative integer V such that (uintmax_t) V yields the represented
+   value.
+
+   On conversion error: if @arglim set *@arglim = @arg if @overflow set *@overflow = FALSE;
+   then return 0.
+
+   Sample call to this function:
+
+   char *s_end;
+   gboolean overflow;
+   idx_t i;
+
+   i = stoint (s, &s_end, &overflow, 0, IDX_MAX);
+   if ((s_end == s) | (s_end == '\0') | overflow)
+   diagnose_invalid (s);
+
+   This example uses "|" instead of "||" for fewer branches at runtime,
+   which tends to be more efficient on modern processors.
+
+   This function is named "stoint" instead of "strtoint" because
+   <string.h> reserves names beginning with "str".
+ */
+#if ! (INTMAX_MAX <= UINTMAX_MAX)
+#error "strtosysint: nonnegative intmax_t does not fit in uintmax_t"
+#endif
+intmax_t
+stoint (const char *arg, char **arglim, gboolean *overflow, intmax_t minval, uintmax_t maxval)
+{
+    char const *p = arg;
+    intmax_t i;
+    int v = 0;
+
+    if (isdigit (*p))
+    {
+        if (minval <= 0)
+        {
+            i = *p - '0';
+
+            while (isdigit (*++p) != 0)
+            {
+                v |= ckd_mul (&i, i, 10) ? 1 : 0;
+                v |= ckd_add (&i, i, *p - '0') ? 1 : 0;
+            }
+
+            v |= maxval < i ? 1 : 0;
+            if (v != 0)
+                i = maxval;
+        }
+        else
+        {
+            uintmax_t u = *p - '0';
+
+            while (isdigit (*++p) != 0)
+            {
+                v |= ckd_mul (&u, u, 10) ? 1 : 0;
+                v |= ckd_add (&u, u, *p - '0') ? 1 : 0;
+            }
+
+            v |= maxval < u ? 1 : 0;
+            if (v != 0)
+                u = maxval;
+            i = tar_represent_uintmax (u);
+        }
+    }
+    else if (minval < 0 && *p == '-' && isdigit (p[1]))
+    {
+        p++;
+        i = -(*p - '0');
+
+        while (isdigit (*++p) != 0)
+        {
+            v |= ckd_mul (&i, i, 10) ? 1 : 0;
+            v |= ckd_sub (&i, i, *p - '0') ? 1 : 0;
+        }
+
+        v |= i < minval ? 1 : 0;
+        if (v != 0)
+            i = minval;
+    }
+    else
+        i = 0;
+
+    if (arglim != NULL)
+        *arglim = (char *) p;
+    if (overflow != NULL)
+        *overflow = v != 0;
+    return i;
 }
 
 /* --------------------------------------------------------------------------------------------- */

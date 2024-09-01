@@ -41,8 +41,6 @@
 
 #include <config.h>
 
-#include <ctype.h>              /* isdigit() */
-#include <errno.h>
 #include <inttypes.h>           /* uintmax_t */
 
 #include "lib/global.h"
@@ -268,20 +266,11 @@ static struct tar_sparse_optab const pax_optab = {
 static gboolean
 decode_num (uintmax_t *num, const char *arg, uintmax_t maxval)
 {
-    uintmax_t u;
     char *arg_lim;
+    gboolean overflow;
 
-    if (!isdigit (*arg))
-        return FALSE;
-
-    errno = 0;
-    u = (uintmax_t) g_ascii_strtoll (arg, &arg_lim, 10);
-
-    if (!(u <= maxval && errno != ERANGE) || *arg_lim != '\0')
-        return FALSE;
-
-    *num = u;
-    return TRUE;
+    *num = stoint (arg, &arg_lim, &overflow, 0, maxval);
+    return (((arg_lim == arg ? 1 : 0) | (*arg_lim != '\0') | (overflow ? 1 : 0)) == 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */

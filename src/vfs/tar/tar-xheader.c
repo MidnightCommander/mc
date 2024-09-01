@@ -31,7 +31,6 @@
 #include <config.h>
 
 #include <ctype.h>              /* isdigit() */
-#include <errno.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -180,61 +179,6 @@ static GSList *global_header_override_list = NULL;
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-/* Convert a prefix of the string @arg to a system integer type whose minimum value is @minval
-   and maximum @maxval. If @minval is negative, negative integers @minval .. -1 are assumed
-   to be represented using leading '-' in the usual way. If the represented value exceeds INTMAX_MAX,
-   return a negative integer V such that (uintmax_t) V yields the represented value. If @arglim is
-   nonnull, store into *@arglim a pointer to the first character after the prefix.
-
-   This is the inverse of sysinttostr.
-
-   On a normal return, set errno = 0.
-   On conversion error, return 0 and set errno = EINVAL.
-   On overflow, return an extreme value and set errno = ERANGE.
- */
-#if ! (INTMAX_MAX <= UINTMAX_MAX)
-#error "strtosysint: nonnegative intmax_t does not fit in uintmax_t"
-#endif
-static intmax_t
-strtosysint (const char *arg, char **arglim, intmax_t minval, uintmax_t maxval)
-{
-    errno = 0;
-
-    if (maxval <= INTMAX_MAX)
-    {
-        if (isdigit (arg[*arg == '-' ? 1 : 0]))
-        {
-            gint64 i;
-
-            i = g_ascii_strtoll (arg, arglim, 10);
-            if ((gint64) minval <= i && i <= (gint64) maxval)
-                return (intmax_t) i;
-
-            errno = ERANGE;
-            return i < (gint64) minval ? minval : (intmax_t) maxval;
-        }
-    }
-    else
-    {
-        if (isdigit (*arg))
-        {
-            guint64 i;
-
-            i = g_ascii_strtoull (arg, arglim, 10);
-            if (i <= (guint64) maxval)
-                return tar_represent_uintmax ((uintmax_t) i);
-
-            errno = ERANGE;
-            return maxval;
-        }
-    }
-
-    errno = EINVAL;
-    return 0;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 static struct xhdr_tab *
 locate_handler (const char *keyword)
 {
@@ -310,40 +254,16 @@ run_override_list (GSList *kp, struct tar_stat_info *st)
 static struct timespec
 decode_timespec (const char *arg, char **arg_lim, gboolean parse_fraction)
 {
-    time_t s = TYPE_MINIMUM (time_t);
     int ns = -1;
-    const char *p = arg;
-    gboolean negative = *arg == '-';
+    gboolean overflow;
+    time_t s;
+    char const *p = *arg_lim;
     struct timespec r;
 
-    if (!isdigit (arg[negative]))
-        errno = EINVAL;
-    else
+    s = stoint (arg, arg_lim, &overflow, TYPE_MINIMUM (time_t), TYPE_MAXIMUM (time_t));
+
+    if (p != arg)
     {
-        errno = 0;
-
-        if (negative)
-        {
-            gint64 i;
-
-            i = g_ascii_strtoll (arg, arg_lim, 10);
-            if (TYPE_SIGNED (time_t) ? TYPE_MINIMUM (time_t) <= i : 0 <= i)
-                s = (intmax_t) i;
-            else
-                errno = ERANGE;
-        }
-        else
-        {
-            guint64 i;
-
-            i = g_ascii_strtoull (arg, arg_lim, 10);
-            if (i <= TYPE_MAXIMUM (time_t))
-                s = (uintmax_t) i;
-            else
-                errno = ERANGE;
-        }
-
-        p = *arg_lim;
         ns = 0;
 
         if (parse_fraction && *p == '.')
@@ -360,13 +280,15 @@ decode_timespec (const char *arg, char **arg_lim, gboolean parse_fraction)
                 else if (*p != '0')
                     trailing_nonzero = TRUE;
 
+            *arg_lim = (char *) p;
+
             while (digits < LOG10_BILLION)
             {
                 digits++;
                 ns *= 10;
             }
 
-            if (negative)
+            if (*arg == '-')
             {
                 /* Convert "-1.10000000000001" to s == -2, ns == 89999999.
                    I.e., truncate time stamps towards minus infinity while
@@ -374,23 +296,14 @@ decode_timespec (const char *arg, char **arg_lim, gboolean parse_fraction)
                 if (trailing_nonzero)
                     ns++;
                 if (ns != 0)
-                {
-                    if (s == TYPE_MINIMUM (time_t))
-                        ns = -1;
-                    else
-                    {
-                        s--;
-                        ns = BILLION - ns;
-                    }
-                }
+                    ns = ckd_sub (&s, s, 1) ? -1 : BILLION - ns;
             }
         }
 
-        if (errno == ERANGE)
+        if (overflow)
             ns = -1;
     }
 
-    *arg_lim = (char *) p;
     r.tv_sec = s;
     r.tv_nsec = ns;
     return r;
@@ -428,19 +341,17 @@ decode_signed_num (intmax_t *num, const char *arg, intmax_t minval, uintmax_t ma
                    const char *keyword)
 {
     char *arg_lim;
+    gboolean overflow;
     intmax_t u;
 
     (void) keyword;
 
-    if (!isdigit (*arg))
+    u = stoint (arg, &arg_lim, &overflow, minval, maxval);
+
+    if (arg_lim == arg || *arg_lim != '\0')
         return FALSE;           /* malformed extended header */
 
-    u = strtosysint (arg, &arg_lim, minval, maxval);
-
-    if (errno == EINVAL || *arg_lim != '\0')
-        return FALSE;           /* malformed extended header */
-
-    if (errno == ERANGE)
+    if (overflow)
         return FALSE;           /* out of range */
 
     *num = u;
@@ -670,11 +581,11 @@ decode_record (struct xheader *xhdr, char **ptr,
 {
     char *start = *ptr;
     char *p = start;
-    size_t len;
+    idx_t len;
     char *len_lim;
     const char *keyword;
     char *nextp;
-    size_t len_max;
+    idx_t len_max;
     gboolean ret;
 
     len_max = xhdr->buffer + xhdr->size - start;
@@ -682,10 +593,12 @@ decode_record (struct xheader *xhdr, char **ptr,
     while (*p == ' ' || *p == '\t')
         p++;
 
-    if (!isdigit (*p))
+    len = stoint (p, &len_lim, NULL, 0, IDX_MAX);
+
+    if (len_lim == p)
+        /* Is the length missing? */
         return (*p != '\0' ? decode_record_fail : decode_record_finish);
 
-    len = (uintmax_t) g_ascii_strtoull (p, &len_lim, 10);
     if (len_max < len)
         return decode_record_fail;
 
@@ -887,26 +800,22 @@ sparse_map_decoder (struct tar_stat_info *st, const char *keyword, const char *a
 
     while (TRUE)
     {
-        gint64 u;
+        off_t u;
         char *delim;
+        gboolean overflow;
 
-        if (!isdigit (*arg))
+        u = stoint (arg, &delim, &overflow, 0, TYPE_MAXIMUM (off_t));
+
+        if (delim == arg)
         {
             /* malformed extended header */
             return FALSE;
         }
 
-        errno = 0;
-        u = g_ascii_strtoll (arg, &delim, 10);
-        if (TYPE_MAXIMUM (off_t) < u)
-        {
-            u = TYPE_MAXIMUM (off_t);
-            errno = ERANGE;
-        }
         if (offset)
         {
             e.offset = u;
-            if (errno == ERANGE)
+            if (overflow)
             {
                 /* out of range */
                 return FALSE;
@@ -915,7 +824,7 @@ sparse_map_decoder (struct tar_stat_info *st, const char *keyword, const char *a
         else
         {
             e.numbytes = u;
-            if (errno == ERANGE)
+            if (overflow)
             {
                 /* out of range */
                 return FALSE;
