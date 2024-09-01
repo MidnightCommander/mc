@@ -362,8 +362,7 @@ tar_from_header (const char *where0, size_t digs, char const *type, intmax_t min
         uintmax_t topbits;
 
         signbit = *where & (1 << (LG_256 - 2));
-        topbits =
-            (((uintmax_t) - signbit) << (CHAR_BIT * sizeof (uintmax_t) - LG_256 - (LG_256 - 2)));
+        topbits = ((uintmax_t) - signbit) << (UINTMAX_WIDTH - LG_256 - (LG_256 - 2));
 
         value = (*where++ & ((1 << (LG_256 - 2)) - 1)) - signbit;
 
