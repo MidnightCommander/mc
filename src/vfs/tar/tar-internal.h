@@ -268,8 +268,8 @@ struct tar_stat_info
     gboolean is_sparse;         /**< is the file sparse */
 
     /* For sparse files */
-    unsigned int sparse_major;
-    unsigned int sparse_minor;
+    intmax_t sparse_major;
+    intmax_t sparse_minor;
     GArray *sparse_map;         /**< array of struct sp_array */
 
     off_t real_size;            /**< real size of sparse file */
