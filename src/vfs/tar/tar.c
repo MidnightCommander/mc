@@ -327,39 +327,42 @@ tar_available_space_after (const union block *pointer)
 static read_header
 tar_checksum (const union block *header)
 {
-    size_t i;
+    int i;
     int unsigned_sum = 0;       /* the POSIX one :-) */
     int signed_sum = 0;         /* the Sun one :-( */
     int recorded_sum;
-    int parsed_sum;
-    const char *p = header->buffer;
 
-    for (i = sizeof (*header); i-- != 0;)
+    for (i = 0; i < sizeof (*header); i++)
     {
-        unsigned_sum += (unsigned char) *p;
-        signed_sum += (signed char) (*p++);
+        unsigned char uc = header->buffer[i];
+        signed char sc = header->buffer[i];
+
+        unsigned_sum += uc;
+        signed_sum += sc;
     }
 
     if (unsigned_sum == 0)
         return HEADER_ZERO_BLOCK;
 
     /* Adjust checksum to count the "chksum" field as blanks.  */
-    for (i = sizeof (header->header.chksum); i-- != 0;)
+    for (i = 0; i < sizeof (header->header.chksum); i++)
     {
-        unsigned_sum -= (unsigned char) header->header.chksum[i];
-        signed_sum -= (signed char) (header->header.chksum[i]);
+        unsigned char uc = header->header.chksum[i];
+        signed char sc = header->header.chksum[i];
+
+        unsigned_sum -= uc;
+        signed_sum -= sc;
     }
 
     unsigned_sum += ' ' * sizeof (header->header.chksum);
     signed_sum += ' ' * sizeof (header->header.chksum);
 
-    parsed_sum =
+    recorded_sum =
         tar_from_header (header->header.chksum, sizeof (header->header.chksum), NULL, 0,
                          INT_MAX, TRUE);
-    if (parsed_sum < 0)
-        return HEADER_FAILURE;
 
-    recorded_sum = parsed_sum;
+    if (recorded_sum < 0)
+        return HEADER_FAILURE;
 
     if (unsigned_sum != recorded_sum && signed_sum != recorded_sum)
         return HEADER_FAILURE;

@@ -464,7 +464,10 @@ tar_from_header (const char *where0, size_t digs, char const *type, intmax_t min
 
         while (TRUE)
         {
-            value = (value << LG_256) + (unsigned char) *where++;
+            unsigned char uc;
+
+            uc = *where++;
+            value = (value << LG_256) + uc;
             if (where == lim)
                 break;
 
