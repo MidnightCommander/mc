@@ -59,8 +59,8 @@
 
 /* Size of each record, once in blocks, once in bytes. Those two variables are always related,
    the second being BLOCKSIZE times the first. */
-const int blocking_factor = DEFAULT_BLOCKING;
-const size_t record_size = DEFAULT_BLOCKING * BLOCKSIZE;
+const idx_t blocking_factor = DEFAULT_BLOCKING;
+const idx_t record_size = DEFAULT_BLOCKING * BLOCKSIZE;
 
 /* As we open one archive at a time, it is safe to have these static */
 union block *record_end;        /* last+1 block of archive record */

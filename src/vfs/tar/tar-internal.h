@@ -13,6 +13,7 @@
 #include "lib/stdckdint.h"
 #endif
 
+#include "lib/idx.h"
 #include "lib/vfs/xdirentry.h"  /* vfs_s_super */
 
 /*** typedefs(not structures) and defined constants **********************************************/
@@ -289,8 +290,8 @@ struct tar_stat_info
 
 /*** global variables defined in .c file *********************************************************/
 
-extern const int blocking_factor;
-extern const size_t record_size;
+extern const idx_t blocking_factor;
+extern const idx_t record_size;
 
 extern union block *record_end; /* last+1 block of archive record */
 extern union block *current_block;      /* current block of archive */
