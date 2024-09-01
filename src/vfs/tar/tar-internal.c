@@ -46,7 +46,6 @@
 
 /* Log base 2 of common values. */
 #define LG_8 3
-#define LG_64 6
 #define LG_256 8
 
 /*** file scope type declarations ****************************************************************/
@@ -313,12 +312,10 @@ tar_from_header (const char *where0, size_t digs, char const *type, intmax_t min
                 if (where == lim || !is_octal_digit (*where))
                     break;
                 digit = *where - '0';
-                overflow |= value != (value << LG_8 >> LG_8);
-                value <<= LG_8;
+                overflow |= ckd_mul (&value, value, 8);
             }
 
-            value++;
-            overflow |= value == 0;
+            overflow |= ckd_add (&value, value, 1);
 
             if (!overflow && value <= minus_minval)
                 negative = TRUE;
@@ -342,9 +339,9 @@ tar_from_header (const char *where0, size_t digs, char const *type, intmax_t min
 
         while (where != lim && (dig = base64_map[(unsigned char) *where]) < 64)
         {
-            if (value << LG_64 >> LG_64 != value)
+            if (ckd_mul (&value, value, 64))
                 return (-1);
-            value = (value << LG_64) | dig;
+            value |= dig;
             where++;
         }
     }
