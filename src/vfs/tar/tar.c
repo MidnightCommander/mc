@@ -36,11 +36,6 @@
 #include <config.h>
 
 #include <errno.h>
-#ifdef HAVE_STDCKDINT_H
-#include <stdckdint.h>
-#else
-#include "lib/stdckdint.h"
-#endif
 #include <string.h>             /* memset() */
 
 #ifdef hpux

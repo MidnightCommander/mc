@@ -33,11 +33,6 @@
 #include <config.h>
 
 #include <inttypes.h>           /* uintmax_t */
-#ifdef HAVE_STDCKDINT_H
-#include <stdckdint.h>
-#else
-#include "lib/stdckdint.h"
-#endif
 
 #include "lib/global.h"
 #include "lib/widget.h"         /* message() */

@@ -7,6 +7,12 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
+#ifdef HAVE_STDCKDINT_H
+#include <stdckdint.h>
+#else
+#include "lib/stdckdint.h"
+#endif
+
 #include "lib/vfs/xdirentry.h"  /* vfs_s_super */
 
 /*** typedefs(not structures) and defined constants **********************************************/

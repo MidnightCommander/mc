@@ -32,11 +32,6 @@
 
 #include <ctype.h>              /* isdigit() */
 #include <errno.h>
-#ifdef HAVE_STDCKDINT_H
-#include <stdckdint.h>
-#else
-#include "lib/stdckdint.h"
-#endif
 #include <stdlib.h>
 #include <string.h>
 
