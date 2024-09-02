@@ -432,12 +432,18 @@ tar_from_header (const char *where0, size_t digs, char const *type, intmax_t min
         /* Parse base-64 output produced only by tar test versions
            1.13.6 (1999-08-11) through 1.13.11 (1999-08-23).
            Support for this will be withdrawn in future tar releases. */
-        int dig;
 
         negative = *where++ == '-';
 
-        while (where != lim && (dig = base64_map[(unsigned char) *where]) < 64)
+        while (where != lim)
         {
+            unsigned char uc = *where;
+            int dig;
+
+            dig = base64_map[uc];
+            if (64 <= dig)
+                break;
+
             if (ckd_mul (&value, value, 64))
                 return (-1);
             value |= dig;
