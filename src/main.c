@@ -509,8 +509,7 @@ main (int argc, char *argv[])
     {
         int last_wd_fd;
 
-        last_wd_fd = open (mc_args__last_wd_file, O_WRONLY | O_CREAT | O_TRUNC | O_EXCL,
-                           S_IRUSR | S_IWUSR);
+        last_wd_fd = open (mc_args__last_wd_file, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
         if (last_wd_fd != -1)
         {
             ssize_t ret1;
