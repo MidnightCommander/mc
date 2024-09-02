@@ -55,18 +55,32 @@
 
 /*** file scope variables ************************************************************************/
 
-/* Base 64 digits; see RFC 2045 Table 1.  */
-static char const base_64_digits[64] = {
-    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
-    'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-    'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
-    'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-    '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '/'
+/* Table of base-64 digit values + 1, indexed by unsigned chars.
+   See Internet RFC 2045 Table 1.
+   Zero entries are for unsigned chars that are not base-64 digits.  */
+/* *INDENT-OFF* */
+static char const base64_map[UCHAR_MAX + 1] =
+{
+    ['A'] =  0 + 1, ['B'] =  1 + 1, ['C'] =  2 + 1, ['D'] =  3 + 1,
+    ['E'] =  4 + 1, ['F'] =  5 + 1, ['G'] =  6 + 1, ['H'] =  7 + 1,
+    ['I'] =  8 + 1, ['J'] =  9 + 1, ['K'] = 10 + 1, ['L'] = 11 + 1,
+    ['M'] = 12 + 1, ['N'] = 13 + 1, ['O'] = 14 + 1, ['P'] = 15 + 1,
+    ['Q'] = 16 + 1, ['R'] = 17 + 1, ['S'] = 18 + 1, ['T'] = 19 + 1,
+    ['U'] = 20 + 1, ['V'] = 21 + 1, ['W'] = 22 + 1, ['X'] = 23 + 1,
+    ['Y'] = 24 + 1, ['Z'] = 25 + 1,
+    ['a'] = 26 + 1, ['b'] = 27 + 1, ['c'] = 28 + 1, ['d'] = 29 + 1,
+    ['e'] = 30 + 1, ['f'] = 31 + 1, ['g'] = 32 + 1, ['h'] = 33 + 1,
+    ['i'] = 34 + 1, ['j'] = 35 + 1, ['k'] = 36 + 1, ['l'] = 37 + 1,
+    ['m'] = 38 + 1, ['n'] = 39 + 1, ['o'] = 40 + 1, ['p'] = 41 + 1,
+    ['q'] = 42 + 1, ['r'] = 43 + 1, ['s'] = 44 + 1, ['t'] = 45 + 1,
+    ['u'] = 46 + 1, ['v'] = 47 + 1, ['w'] = 48 + 1, ['x'] = 49 + 1,
+    ['y'] = 50 + 1, ['z'] = 51 + 1,
+    ['0'] = 52 + 1, ['1'] = 53 + 1, ['2'] = 54 + 1, ['3'] = 55 + 1,
+    ['4'] = 56 + 1, ['5'] = 57 + 1, ['6'] = 58 + 1, ['7'] = 59 + 1,
+    ['8'] = 60 + 1, ['9'] = 61 + 1,
+    ['+'] = 62 + 1, ['/'] = 63 + 1,
 };
-
-/* Table of base 64 digit values indexed by unsigned chars.
-   The value is 64 for unsigned chars that are not base 64 digits. */
-static char base64_map[1 + (unsigned char) (-1)];
+/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
@@ -190,18 +204,6 @@ gboolean
 is_octal_digit (char c)
 {
     return '0' <= c && c <= '7';
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-tar_base64_init (void)
-{
-    size_t i;
-
-    memset (base64_map, 64, sizeof base64_map);
-    for (i = 0; i < 64; i++)
-        base64_map[(int) base_64_digits[i]] = i;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -438,15 +440,15 @@ tar_from_header (const char *where0, size_t digs, char const *type, intmax_t min
         while (where != lim)
         {
             unsigned char uc = *where;
-            int dig;
+            char dig;
 
             dig = base64_map[uc];
-            if (64 <= dig)
+            if (dig <= 0)
                 break;
 
             if (ckd_mul (&value, value, 64))
                 return (-1);
-            value |= dig;
+            value |= dig - 1;
             where++;
         }
     }

@@ -1290,8 +1290,6 @@ vfs_init_tarfs (void)
     tarfs_subclass.free_inode = tar_free_inode;
     tarfs_subclass.fh_open = tar_fh_open;
     vfs_register_class (vfs_tarfs_ops);
-
-    tar_base64_init ();
 }
 
 /* --------------------------------------------------------------------------------------------- */

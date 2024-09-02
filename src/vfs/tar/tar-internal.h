@@ -308,7 +308,6 @@ extern struct tar_stat_info current_stat_info;
 
 /* tar-internal.c */
 gboolean is_octal_digit (char c);
-void tar_base64_init (void);
 void tar_assign_string (char **string, char *value);
 void tar_assign_string_dup (char **string, const char *value);
 void tar_assign_string_dup_n (char **string, const char *value, size_t n);
