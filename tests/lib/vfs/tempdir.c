@@ -45,6 +45,9 @@
 static void
 setup (void)
 {
+    /* Ensure that tests behave consistently irrespectively of the environment */
+    g_unsetenv ("MC_TMPDIR");
+
     str_init_strings (NULL);
 
     vfs_init ();
