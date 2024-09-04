@@ -417,7 +417,7 @@ View=%view{ascii} @EXTHELPERSDIR@/package.sh view debd
 [apt]
 Shell=.deba
 Open=%cd %p/deba://
-Ciew=%view{ascii} @EXTHELPERSDIR@/package.sh view deba
+View=%view{ascii} @EXTHELPERSDIR@/package.sh view deba
 
 [ISO9660]
 Shell=.iso
