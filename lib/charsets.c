@@ -288,7 +288,7 @@ init_translation_table (int cpsource, int cpdisplay)
     int i;
     GIConv cd;
 
-    /* Fill inpit <-> display tables */
+    /* Fill input <-> display tables */
 
     if (cpsource < 0 || cpdisplay < 0 || cpsource == cpdisplay)
     {

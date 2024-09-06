@@ -54,15 +54,15 @@
  */
 typedef enum
 {
-    /* success means, that conversion has been finished successfully
+    /* Success means, that the conversion has been finished successfully
      */
     ESTR_SUCCESS = 0,
-    /* problem means, that not every characters was successfully converted (They are
-     * replaced with questionmark). So is impossible convert string back. 
+    /* Problem means, that not every character was successfully converted (some are
+     * replaced with question marks). So it is impossible to convert string back.
      */
     ESTR_PROBLEM = 1,
-    /* failure means, that conversion is not possible (example: wrong encoding 
-     * of input string)
+    /* Failure means, that the conversion is not possible (example: wrong encoding
+     * of the input string)
      */
     ESTR_FAILURE = 2
 } estr_t;
@@ -75,9 +75,9 @@ typedef enum
     J_RIGHT = 0x02,
     J_CENTER = 0x03,
     /* if there is enough space for string on terminal,
-     * string is centered otherwise is aligned to left */
+     * string is centered otherwise is aligned to the left */
     J_CENTER_LEFT = 0x04,
-    /* fit alignment, if string is to long, is truncated with '~' */
+    /* fit alignment: if string is too long, truncate with '~' */
     J_LEFT_FIT = 0x11,
     J_RIGHT_FIT = 0x12,
     J_CENTER_FIT = 0x13,
