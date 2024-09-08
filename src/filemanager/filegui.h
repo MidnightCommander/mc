@@ -124,17 +124,13 @@ typedef struct
     /* File transfer start time */
     gint64 transfer_start;
     /* Counters for progress indicators */
-    size_t progress_count;
     uintmax_t progress_bytes;
-    uintmax_t copied_bytes;
     /* The estimated time of arrival in seconds */
     double eta_secs;
     /* Transferred bytes per second */
     long bps;
     /* Transferred seconds */
     long bps_time;
-    /* Used in OP_MOVE between copy and remove directories */
-    size_t prev_progress_count;
 
     /* Total statuses */
     /* Whether the panel total has been computed */
@@ -142,12 +138,16 @@ typedef struct
     /* Files transfer start time */
     gint64 total_transfer_start;
     /* Counters for progress indicators */
+    size_t total_progress_count;
     size_t total_count;
+    uintmax_t total_progress_bytes;
     uintmax_t total_bytes;
     /* The estimated time of arrival in seconds */
     double total_eta_secs;
     /* Transferred bytes per second */
     size_t total_bps;
+    /* Used in OP_MOVE between copy and remove directories */
+    size_t prev_total_progress_count;
 
     /* User interface data goes here */
     void *ui;

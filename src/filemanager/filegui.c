@@ -1158,7 +1158,7 @@ file_progress_show_total (file_op_context_t *ctx, uintmax_t copied_bytes, gboole
 
     if (ui->total_bytes_label != NULL)
     {
-        size_trunc_len (buffer2, 5, ctx->copied_bytes, 0, panels_options.kilobyte_si);
+        size_trunc_len (buffer2, 5, ctx->total_progress_bytes, 0, panels_options.kilobyte_si);
 
         if (!ctx->totals_computed)
             hline_set_textv (ui->total_bytes_label, _(" Total: %s "), buffer2);

@@ -818,7 +818,7 @@ progress_update_one (file_op_context_t *ctx, off_t add)
     gint64 tv_current;
     static gint64 tv_start = -1;
 
-    ctx->progress_count++;
+    ctx->total_progress_count++;
     ctx->progress_bytes += (uintmax_t) add;
 
     tv_current = g_get_monotonic_time ();
@@ -830,7 +830,7 @@ progress_update_one (file_op_context_t *ctx, off_t add)
     {
         if (verbose && ctx->dialog_type == FILEGUI_DIALOG_MULTI_ITEM)
         {
-            file_progress_show_count (ctx, ctx->progress_count, ctx->total_count);
+            file_progress_show_count (ctx, ctx->total_progress_count, ctx->total_count);
             file_progress_show_total (ctx, ctx->progress_bytes, TRUE);
         }
 
@@ -1158,8 +1158,8 @@ copy_file_file_display_progress (file_op_context_t *ctx, gint64 tv_current, off_
         total_secs = (tv_current - ctx->total_transfer_start) / G_USEC_PER_SEC;
         total_secs = MAX (1, total_secs);
 
-        ctx->total_bps = ctx->copied_bytes / total_secs;
-        const uintmax_t remain_bytes = ctx->total_bytes - ctx->copied_bytes;
+        ctx->total_bps = ctx->total_progress_bytes / total_secs;
+        const uintmax_t remain_bytes = ctx->total_bytes - ctx->total_progress_bytes;
         ctx->total_eta_secs = ctx->total_bps != 0 ? remain_bytes / ctx->total_bps : 0;
     }
 }
@@ -1372,16 +1372,16 @@ erase_file (file_op_context_t *ctx, const vfs_path_t *vpath)
     FileProgressStatus return_status;
 
     /* check buttons if deleting info was changed */
-    if (file_progress_show_deleting (ctx, vpath, &ctx->progress_count))
+    if (file_progress_show_deleting (ctx, vpath, &ctx->total_progress_count))
     {
-        file_progress_show_count (ctx, ctx->progress_count, ctx->total_count);
+        file_progress_show_count (ctx, ctx->total_progress_count, ctx->total_count);
         if (file_progress_check_buttons (ctx) == FILE_ABORT)
             return FILE_ABORT;
 
         mc_refresh ();
     }
 
-    if (ctx->progress_count != 0 && mc_lstat (vpath, &buf) != 0)
+    if (ctx->total_progress_count != 0 && mc_lstat (vpath, &buf) != 0)
     {
         /* ignore, most likely the mc_unlink fails, too */
         buf.st_size = 0;
@@ -1390,7 +1390,7 @@ erase_file (file_op_context_t *ctx, const vfs_path_t *vpath)
     if (!try_remove_file (ctx, vpath, &return_status) && return_status == FILE_ABORT)
         return FILE_ABORT;
 
-    if (ctx->progress_count == 0)
+    if (ctx->total_progress_count == 0)
         return FILE_CONT;
 
     return file_progress_check_buttons (ctx);
@@ -1464,7 +1464,7 @@ recursive_erase (file_op_context_t *ctx, const vfs_path_t *vpath)
         return FILE_ABORT;
 
     file_progress_show_deleting (ctx, vpath, NULL);
-    file_progress_show_count (ctx, ctx->progress_count, ctx->total_count);
+    file_progress_show_count (ctx, ctx->total_progress_count, ctx->total_count);
     if (file_progress_check_buttons (ctx) == FILE_ABORT)
         return FILE_ABORT;
 
@@ -1536,7 +1536,7 @@ erase_dir_after_copy (file_op_context_t *ctx, const vfs_path_t *vpath, FileProgr
     if (ctx->erase_at_end && erase_list != NULL)
     {
         /* Reset progress count before delete to avoid counting files twice */
-        ctx->progress_count = ctx->prev_progress_count;
+        ctx->total_progress_count = ctx->prev_total_progress_count;
 
         while (!g_queue_is_empty (erase_list) && *status != FILE_ABORT)
         {
@@ -1545,7 +1545,7 @@ erase_dir_after_copy (file_op_context_t *ctx, const vfs_path_t *vpath, FileProgr
             lp = (link_t *) g_queue_pop_head (erase_list);
 
             if (S_ISDIR (lp->st_mode))
-                *status = erase_dir_iff_empty (ctx, lp->src_vpath, ctx->progress_count);
+                *status = erase_dir_iff_empty (ctx, lp->src_vpath, ctx->total_progress_count);
             else
                 *status = erase_file (ctx, lp->src_vpath);
 
@@ -1553,10 +1553,10 @@ erase_dir_after_copy (file_op_context_t *ctx, const vfs_path_t *vpath, FileProgr
         }
 
         /* Save progress counter before move next directory */
-        ctx->prev_progress_count = ctx->progress_count;
+        ctx->prev_total_progress_count = ctx->total_progress_count;
     }
 
-    erase_dir_iff_empty (ctx, vpath, ctx->progress_count);
+    erase_dir_iff_empty (ctx, vpath, ctx->total_progress_count);
 }
 
 /* }}} */
@@ -2732,7 +2732,7 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
                 }
             }
 
-            ctx->copied_bytes = ctx->progress_bytes + file_part + ctx->do_reget;
+            ctx->total_progress_bytes = ctx->progress_bytes + file_part + ctx->do_reget;
 
             const gint64 usecs = tv_current - tv_last_update;
 
@@ -2758,8 +2758,8 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
                                     force_update);
                 if (ctx->dialog_type == FILEGUI_DIALOG_MULTI_ITEM)
                 {
-                    file_progress_show_count (ctx, ctx->progress_count, ctx->total_count);
-                    file_progress_show_total (ctx, ctx->copied_bytes, force_update);
+                    file_progress_show_count (ctx, ctx->total_progress_count, ctx->total_count);
+                    file_progress_show_total (ctx, ctx->total_progress_bytes, force_update);
                 }
 
                 mc_refresh ();
@@ -3220,7 +3220,7 @@ copy_dir_dir (file_op_context_t *ctx, const char *s, const char *d, gboolean top
                 tmp_vpath = NULL;
             }
             else if (S_ISDIR (dst_stat.st_mode))
-                return_status = erase_dir_iff_empty (ctx, tmp_vpath, ctx->progress_count);
+                return_status = erase_dir_iff_empty (ctx, tmp_vpath, ctx->total_progress_count);
             else
                 return_status = erase_file (ctx, tmp_vpath);
         }
@@ -3277,7 +3277,7 @@ FileProgressStatus
 erase_dir (file_op_context_t *ctx, const vfs_path_t *vpath)
 {
     file_progress_show_deleting (ctx, vpath, NULL);
-    file_progress_show_count (ctx, ctx->progress_count, ctx->total_count);
+    file_progress_show_count (ctx, ctx->total_progress_count, ctx->total_count);
     if (file_progress_check_buttons (ctx) == FILE_ABORT)
         return FILE_ABORT;
 
@@ -3626,7 +3626,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                 {
                     if (ctx->dialog_type == FILEGUI_DIALOG_MULTI_ITEM)
                     {
-                        file_progress_show_count (ctx, ctx->progress_count, ctx->total_count);
+                        file_progress_show_count (ctx, ctx->total_progress_count, ctx->total_count);
                         file_progress_show_total (ctx, ctx->progress_bytes, FALSE);
                     }
 
