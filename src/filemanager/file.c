@@ -2656,23 +2656,17 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
 
     if (return_status == FILE_CONT)
     {
-        size_t bufsize;
         off_t file_part = 0;
-        gint64 tv_current, tv_last_update;
+        gint64 tv_last_update = ctx->transfer_start;
         gint64 tv_last_input = 0;
-        gint64 usecs, update_usecs;
-        const char *stalled_msg = "";
         gboolean is_first_time = TRUE;
 
-        tv_last_update = ctx->transfer_start;
-
-        bufsize = io_blksize (dst_stat);
+        const size_t bufsize = io_blksize (dst_stat);
         buf = g_malloc (bufsize);
 
         while (TRUE)
         {
-            ssize_t n_read = -1, n_written;
-            gboolean force_update;
+            ssize_t n_read = -1;
 
             /* src_read */
             if (mc_ctl (src_desc, VFS_CTL_IS_NOTREADY, 0) == 0)
@@ -2690,10 +2684,11 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
             if (n_read == 0)
                 break;
 
-            tv_current = g_get_monotonic_time ();
+            const gint64 tv_current = g_get_monotonic_time ();
 
             if (n_read > 0)
             {
+                ssize_t n_written;
                 char *t = buf;
 
                 file_part += n_read;
@@ -2739,8 +2734,7 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
 
             ctx->copied_bytes = ctx->progress_bytes + file_part + ctx->do_reget;
 
-            usecs = tv_current - tv_last_update;
-            update_usecs = tv_current - tv_last_input;
+            const gint64 usecs = tv_current - tv_last_update;
 
             if (is_first_time || usecs > FILEOP_UPDATE_INTERVAL_US)
             {
@@ -2751,21 +2745,22 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
 
             is_first_time = FALSE;
 
-            if (update_usecs > FILEOP_STALLING_INTERVAL_US)
-                stalled_msg = _("(stalled)");
-
-            force_update = (tv_current - ctx->total_transfer_start) > FILEOP_UPDATE_INTERVAL_US;
-
             if (verbose)
             {
+                const gint64 total_usecs = tv_current - ctx->total_transfer_start;
+                const gboolean force_update = total_usecs > FILEOP_UPDATE_INTERVAL_US;
+
+                const gint64 update_usecs = tv_current - tv_last_input;
+                const char *stalled_msg =
+                    update_usecs > FILEOP_STALLING_INTERVAL_US ? _("(stalled)") : "";
+
+                file_progress_show (ctx, file_part + ctx->do_reget, file_size, stalled_msg,
+                                    force_update);
                 if (ctx->dialog_type == FILEGUI_DIALOG_MULTI_ITEM)
                 {
                     file_progress_show_count (ctx, ctx->progress_count, ctx->total_count);
                     file_progress_show_total (ctx, ctx->copied_bytes, force_update);
                 }
-
-                file_progress_show (ctx, file_part + ctx->do_reget, file_size, stalled_msg,
-                                    force_update);
 
                 mc_refresh ();
             }
