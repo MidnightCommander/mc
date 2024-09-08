@@ -1077,7 +1077,7 @@ file_progress_show (file_op_context_t *ctx, off_t done, off_t total,
 /* --------------------------------------------------------------------------------------------- */
 
 void
-file_progress_show_count (file_op_context_t *ctx, size_t done, size_t total)
+file_progress_show_count (file_op_context_t *ctx)
 {
     file_progress_ui_t *ui;
 
@@ -1090,10 +1090,11 @@ file_progress_show_count (file_op_context_t *ctx, size_t done, size_t total)
         return;
 
     if (ctx->totals_computed)
-        label_set_textv (ui->total_files_processed_label, _("Files processed: %zu / %zu"), done,
-                         total);
+        label_set_textv (ui->total_files_processed_label, _("Files processed: %zu / %zu"),
+                         ctx->total_progress_count, ctx->total_count);
     else
-        label_set_textv (ui->total_files_processed_label, _("Files processed: %zu"), done);
+        label_set_textv (ui->total_files_processed_label, _("Files processed: %zu"),
+                         ctx->total_progress_count);
 }
 
 /* --------------------------------------------------------------------------------------------- */
