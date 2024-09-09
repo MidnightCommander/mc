@@ -831,7 +831,7 @@ progress_update_one (file_op_context_t *ctx, off_t add)
         if (verbose && ctx->dialog_type == FILEGUI_DIALOG_MULTI_ITEM)
         {
             file_progress_show_count (ctx);
-            file_progress_show_total (ctx, ctx->progress_bytes, TRUE);
+            file_progress_show_total (ctx, ctx->progress_bytes, tv_current, TRUE);
         }
 
         tv_start = tv_current;
@@ -2759,7 +2759,8 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
                 if (ctx->dialog_type == FILEGUI_DIALOG_MULTI_ITEM)
                 {
                     file_progress_show_count (ctx);
-                    file_progress_show_total (ctx, ctx->total_progress_bytes, force_update);
+                    file_progress_show_total (ctx, ctx->total_progress_bytes, tv_current,
+                                              force_update);
                 }
 
                 mc_refresh ();
@@ -3627,7 +3628,8 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                     if (ctx->dialog_type == FILEGUI_DIALOG_MULTI_ITEM)
                     {
                         file_progress_show_count (ctx);
-                        file_progress_show_total (ctx, ctx->progress_bytes, FALSE);
+                        file_progress_show_total (ctx, ctx->progress_bytes, g_get_monotonic_time (),
+                                                  FALSE);
                     }
 
                     if (operation != OP_DELETE)

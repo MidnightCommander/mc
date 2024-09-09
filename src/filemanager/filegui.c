@@ -1100,7 +1100,8 @@ file_progress_show_count (file_op_context_t *ctx)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-file_progress_show_total (file_op_context_t *ctx, uintmax_t copied_bytes, gboolean show_summary)
+file_progress_show_total (file_op_context_t *ctx, uintmax_t copied_bytes, gint64 tv_current,
+                          gboolean show_summary)
 {
     char buffer2[BUF_TINY];
     char buffer3[BUF_TINY];
@@ -1128,10 +1129,8 @@ file_progress_show_total (file_op_context_t *ctx, uintmax_t copied_bytes, gboole
 
     if (ui->time_label != NULL)
     {
-        gint64 tv_current;
         char buffer4[BUF_TINY];
 
-        tv_current = g_get_monotonic_time ();
         file_frmt_time (buffer2, (tv_current - ctx->total_transfer_start) / G_USEC_PER_SEC);
 
         if (ctx->totals_computed)
