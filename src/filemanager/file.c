@@ -1130,8 +1130,8 @@ files_error (const char *format, const char *file1, const char *file2)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-copy_file_file_display_progress (file_op_context_t *ctx, gint64 tv_current, off_t file_part,
-                                 off_t file_size)
+calc_copy_file_progress (file_op_context_t *ctx, gint64 tv_current, off_t file_part,
+                         off_t file_size)
 {
     gint64 dt;
 
@@ -1147,20 +1147,23 @@ copy_file_file_display_progress (file_op_context_t *ctx, gint64 tv_current, off_
         ctx->eta_secs = ((dt / (double) file_part) * file_size) - dt;
 
     /* Compute BPS rate */
-    ctx->bps_time = MAX (1, dt);
-    ctx->bps = file_part / ctx->bps_time;
+    dt = MAX (1, dt);
+    ctx->bps = file_part / dt;
 
     /* Compute total ETA and BPS */
     if (ctx->total_bytes != 0)
     {
-        gint64 total_secs;
+        dt = (tv_current - ctx->total_transfer_start) / G_USEC_PER_SEC;
+        dt = MAX (1, dt);
+        ctx->total_bps = ctx->total_progress_bytes / dt;
 
-        total_secs = (tv_current - ctx->total_transfer_start) / G_USEC_PER_SEC;
-        total_secs = MAX (1, total_secs);
-
-        ctx->total_bps = ctx->total_progress_bytes / total_secs;
-        const uintmax_t remain_bytes = ctx->total_bytes - ctx->total_progress_bytes;
-        ctx->total_eta_secs = ctx->total_bps != 0 ? remain_bytes / ctx->total_bps : 0;
+        if (ctx->total_bps == 0)
+            ctx->total_eta_secs = 0;
+        else
+        {
+            const uintmax_t remain_bytes = ctx->total_bytes - ctx->total_progress_bytes;
+            ctx->total_eta_secs = remain_bytes / ctx->total_bps;
+        }
     }
 }
 
@@ -2738,8 +2741,7 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
 
             if (is_first_time || usecs > FILEOP_UPDATE_INTERVAL_US)
             {
-                copy_file_file_display_progress (ctx, tv_current, file_part,
-                                                 file_size - ctx->do_reget);
+                calc_copy_file_progress (ctx, tv_current, file_part, file_size - ctx->do_reget);
                 tv_last_update = tv_current;
             }
 

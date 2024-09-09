@@ -129,8 +129,6 @@ typedef struct
     double eta_secs;
     /* Transferred bytes per second */
     long bps;
-    /* Transferred seconds */
-    long bps_time;
 
     /* Total statuses */
     /* Whether the panel total has been computed */
