@@ -6,7 +6,9 @@
 action=$1
 filetype=$2
 
-[ -n "${MC_XDG_OPEN}" ] || MC_XDG_OPEN="xdg-open"
+if [ -n "$DISPLAY" ]; then
+    [ -n "${MC_XDG_OPEN}" ] || MC_XDG_OPEN="xdg-open"
+fi
 
 do_view_action() {
     filetype=$1
@@ -29,23 +31,16 @@ do_open_action() {
     filetype=$1
 
     if which mpv >/dev/null 2>&1; then
-        PLAYER=mpv
-    elif which mplayer >/dev/null 2>&1; then
-        PLAYER=mplayer
+        PLAYER="mpv --really-quiet"
     else
-        echo "Please install either mplayer or mpv to play this file"
-        return
+        PLAYER="mplayer -really-quiet"
     fi
 
-    case "${filetype}" in
-    *)
-        if [ -n "$DISPLAY" ]; then
-            ($PLAYER "${MC_EXT_FILENAME}" >/dev/null 2>&1 &)
-        else
-            $PLAYER -vo null "${MC_EXT_FILENAME}"
-        fi
-        ;;
-    esac
+    if [ -n "$DISPLAY" ]; then
+        ($PLAYER "${MC_EXT_FILENAME}" >/dev/null 2>&1 &)
+    else
+        $PLAYER -vo null "${MC_EXT_FILENAME}"
+    fi
 }
 
 case "${action}" in

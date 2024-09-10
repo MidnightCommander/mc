@@ -6,7 +6,9 @@
 action=$1
 filetype=$2
 
-[ -n "${MC_XDG_OPEN}" ] || MC_XDG_OPEN="xdg-open"
+if [ -n "$DISPLAY" ]; then
+    [ -n "${MC_XDG_OPEN}" ] || MC_XDG_OPEN="xdg-open"
+fi
 
 do_view_action() {
     filetype=$1
@@ -50,10 +52,16 @@ do_open_action() {
             else
                 (gqview "${MC_EXT_FILENAME}" &)
             fi
+        # no backgrounding for console viewers
+        elif which fim >/dev/null 2>&1; then
+            fim "${MC_EXT_FILENAME}"
+        elif which fbi >/dev/null 2>&1; then
+            fbi "${MC_EXT_FILENAME}"
+        elif which zgv >/dev/null 2>&1; then
+            zgv "${MC_EXT_FILENAME}"
+        # run-mailcap as a last resort
         elif which see >/dev/null 2>&1; then
             (see "${MC_EXT_FILENAME}" &)
-        else
-            (zgv "${MC_EXT_FILENAME}" &)
         fi
         ;;
     esac
