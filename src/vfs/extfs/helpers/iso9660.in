@@ -80,17 +80,16 @@ awk_xorriso_unesc=$(cat <<'EOF'
 EOF
 )
 
-xorriso_list() {
+xorriso_list() (
     if test -z "$XORRISO"; then
         return 1
     fi
 
-    local temp_ls
     temp_ls=$(mktemp "${MC_TMPDIR:-/tmp}"/mc-iso9660.XXXXXX) || return 1
 
     # $XORRISO must be unquoted here to hook into the testing framework
     $XORRISO -abort_on FATAL -dev stdio:"$1" -find / -exec lsdl 2>/dev/null >"$temp_ls"
-    local r=$?
+    r=$?
 
     if [ "$r" != 0 ]; then
         rm -f "$temp_ls"
@@ -105,7 +104,7 @@ xorriso_list() {
         @AWK@ "$awk_xorriso_unesc"
 
     rm -f "$temp_ls"
-}
+)
 
 xorriso_copyout() {
     if test -z "$XORRISO"; then
@@ -175,9 +174,7 @@ test_iso () {
     fi
 }
 
-mcisofs_list () {
-    local lsl r
-
+mcisofs_list () (
     # left as a reminder to implement compressed image support =)
     case "$1" in
       *.lz)  MYCAT="lzip -dc";;
@@ -227,7 +224,7 @@ BEGIN {
   if (name == "..") next;
   printf "%s%s%s\n", attr, dir, name
 }'
-}
+)
 
 mcisofs_copyout () {
     if [ "x$SEMICOLON" = "xYES" ]; then
