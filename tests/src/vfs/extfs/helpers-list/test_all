@@ -19,6 +19,9 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+# Suppress warnings about `local`
+# shellcheck disable=SC3043
 
 help() {
   cat << EOS
@@ -94,6 +97,11 @@ opt_run_mcdiff_on_error=no  # "yes" if '--mcdiff' provided.
 
 ############################ Utility functions #############################
 
+# Support shells missing local, but having typeset like ksh93+ on Solaris
+if type typeset > /dev/null 2>&1; then
+  alias local="typeset"
+fi
+
 #
 # Does $1 contain $2?
 #
@@ -109,7 +117,8 @@ has_string() {
 # Given "/path/to/basename.and.some.ext", returns "basename"
 #
 basename_sans_extensions() {
-  local base="$(basename "$1")"
+  local base
+  base="$(basename "$1")"
   echo "${base%%.*}"
 }
 
@@ -137,25 +146,26 @@ has_colors() {
 
 init_colors() {
   if has_colors; then
-    local esc="$(printf '\033')"  # for portability
-    C_bold="$esc[1m"
-    C_green="$esc[1;32m"
-    C_red="$esc[1;31m"
-    C_magenta="$esc[1;35m"
-    C_norm="$esc[0m"
+    local esc
+    esc="$(printf '\033')"  # for portability
+    C_bold="${esc}[1m"
+    C_green="${esc}[1;32m"
+    C_red="${esc}[1;31m"
+    C_magenta="${esc}[1;35m"
+    C_norm="${esc}[0m"
   fi
 }
 
 #
 # A few colorful alternatives to 'echo'.
 #
-header()  { echo $C_bold"$@"$C_norm; }
-err()     { echo $C_red"$@"$C_norm; }
-notice()  { echo $C_magenta"$@"$C_norm; }
-success() { echo $C_green"$@"$C_norm; }
+header()  { echo "$C_bold$*$C_norm"; }
+err()     { echo "$C_red$*$C_norm"; }
+notice()  { echo "$C_magenta$*$C_norm"; }
+success() { echo "$C_green$*$C_norm"; }
 
 die() {
-  err "Error: $@"
+  err "Error: $*"
   exit 1
 }
 
@@ -251,7 +261,9 @@ run() {
     # Set up variables:
     #
 
-    local helper_name="$(basename_sans_extensions "$input")"
+    local helper_name
+    helper_name="$(basename_sans_extensions "$input")"
+
     local expected_parsed_output="${input%.input}.output"
     local env_vars_file="${input%.input}.env_vars"
     local args_file="${input%.input}.args"
@@ -281,8 +293,10 @@ run() {
     local extra_parser_args=""
     [ -f "$args_file" ] && extra_parser_args="$(cat "$args_file")"
 
-    local actual_output="$(temp_file $helper_name.actual-output.XXXXXXXX)"
-    local actual_parsed_output="$(temp_file $helper_name.actual-parsed-output.XXXXXXXX)"
+    local actual_output
+    local actual_parsed_output
+    actual_output="$(temp_file $helper_name.actual-output.XXXXXXXX)"
+    actual_parsed_output="$(temp_file $helper_name.actual-parsed-output.XXXXXXXX)"
 
     #
     # Variables are all set. Now do the actual stuff:
@@ -350,7 +364,7 @@ run() {
       if is_interactive; then
         if [ $opt_run_mcdiff_on_error = "yes" ]; then
           notice "Hit ENTER to launch mcdiff ..."
-          read dummy_var  # dash needs this.
+          read -r _dummy_argument  # dash needs an argument
           ${MCDIFF:-mcdiff} "$expected_parsed_output" "$actual_parsed_output"
         else
           notice "Tip: invoke this program with '--mcdiff' to automatically launch"
@@ -377,7 +391,7 @@ run() {
 
   done
 
-  [ $pass_count = "0" -a $error_count = "0" ] && notice "Note: The data directory contains no *.input files."
+  [ $pass_count = "0" ] && [ $error_count = "0" ] && notice "Note: The data directory contains no *.input files."
 
   [ $error_count = "0" ]  # exit status of function.
 }
