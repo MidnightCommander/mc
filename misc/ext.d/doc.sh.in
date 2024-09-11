@@ -25,9 +25,9 @@ staroffice_console() {
 }
 
 get_ooffice_executable() {
-    if which loffice >/dev/null 2>&1; then
+    if command -v loffice >/dev/null 2>&1; then
         echo "loffice"
-    elif which ooffice >/dev/null 2>&1; then
+    elif command -v ooffice >/dev/null 2>&1; then
         echo "ooffice"
     else
         echo -n
@@ -52,35 +52,35 @@ do_view_action() {
         fi
         ;;
     msdoc)
-        if which wvHtml >/dev/null 2>&1; then
+        if command -v wvHtml >/dev/null 2>&1; then
             tmp=`mktemp -d ${TMPDIR:-/tmp}/%p.XXXXXX`
             wvHtml "${MC_EXT_FILENAME}" --targetdir="$tmp" page.html
             elinks -dump "$tmp/page.html"
             rm -rf "$tmp"
-        elif which antiword >/dev/null 2>&1; then
+        elif command -v antiword >/dev/null 2>&1; then
             antiword -t "${MC_EXT_FILENAME}"
-        elif which catdoc >/dev/null 2>&1; then
+        elif command -v catdoc >/dev/null 2>&1; then
             catdoc -w "${MC_EXT_FILENAME}"
-        elif which word2x >/dev/null 2>&1; then
+        elif command -v word2x >/dev/null 2>&1; then
             word2x -f text "${MC_EXT_FILENAME}" -
         else
             strings "${MC_EXT_FILENAME}"
         fi
         ;;
     msxls)
-        if which xlhtml >/dev/null 2>&1; then
+        if command -v xlhtml >/dev/null 2>&1; then
             tmp=`mktemp -d ${TMPDIR:-/tmp}/%p.XXXXXX`
             xlhtml -a "${MC_EXT_FILENAME}" > "$tmp/page.html"
             elinks -dump "$tmp/page.html"
             rm -rf "$tmp"
-        elif which xls2csv >/dev/null 2>&1; then
+        elif command -v xls2csv >/dev/null 2>&1; then
             xls2csv "${MC_EXT_FILENAME}"
         else
             strings "${MC_EXT_FILENAME}"
         fi
         ;;
     dvi)
-        which dvi2tty >/dev/null 2>&1 && \
+        command -v dvi2tty >/dev/null 2>&1 && \
             dvi2tty "${MC_EXT_FILENAME}" || \
             catdvi "${MC_EXT_FILENAME}"
         ;;

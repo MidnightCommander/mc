@@ -10,8 +10,8 @@
 # On Debian/Ubuntu wimtools can be installed via:
 # apt install wimtools
 
-which wimlib-imagex 2>/dev/null > /dev/null || exit 1
-WIM=`which wimlib-imagex`
+command -v wimlib-imagex >/dev/null 2>&1 || exit 1
+WIM=`command -v wimlib-imagex >/dev/null 2>&1`
 AWK=@AWK@
 
 [ -n "$2" ] || exit 1

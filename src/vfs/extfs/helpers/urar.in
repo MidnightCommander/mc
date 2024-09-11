@@ -16,7 +16,7 @@
 RAR=rar
 
 # Prefer unrar (freeware).
-UNRAR=`which unrar 2>/dev/null`
+UNRAR=`command -v unrar >/dev/null 2>&1`
 
 [ -z $UNRAR ] && UNRAR=$RAR
 [ ! -x $UNRAR -a -x $RAR ] && UNRAR=$RAR
