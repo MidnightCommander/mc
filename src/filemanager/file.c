@@ -2515,8 +2515,6 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
             continue;
         if (return_status == FILE_IGNORE_ALL)
             ctx->ignore_all = TRUE;
-        if (return_status == FILE_IGNORE)
-            break;
         ctx->do_append = FALSE;
         goto ret_fast;
     }
