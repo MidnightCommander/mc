@@ -562,10 +562,8 @@ vfs_s_read (void *fh, char *buffer, size_t count)
     struct vfs_class *me = VFS_FILE_HANDLER_SUPER (fh)->me;
 
     if (file->linear == LS_LINEAR_PREOPEN)
-    {
         if (VFS_SUBCLASS (me)->linear_start (me, file, file->pos) == 0)
             return (-1);
-    }
 
     if (file->linear == LS_LINEAR_CLOSED)
         vfs_die ("linear_start() did not set linear_state!");
@@ -838,10 +836,7 @@ vfs_s_getid (const vfs_path_t *vpath)
     const char *p;
 
     p = vfs_s_get_path (vpath, &archive, FL_NO_OPEN);
-    if (p == NULL)
-        return NULL;
-
-    return (vfsid) archive;
+    return (p == NULL ? NULL : (vfsid) archive);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1586,13 +1581,16 @@ vfs_getid (const vfs_path_t *vpath)
 int
 vfs_s_select_on_two (int fd1, int fd2)
 {
+    struct timeval time_out = {
+        .tv_sec = 1,
+        .tv_usec = 0
+    };
     fd_set set;
-    struct timeval time_out;
+    int maxfd;
     int v;
-    int maxfd = MAX (fd1, fd2) + 1;
 
-    time_out.tv_sec = 1;
-    time_out.tv_usec = 0;
+    maxfd = MAX (fd1, fd2) + 1;
+
     FD_ZERO (&set);
     FD_SET (fd1, &set);
     FD_SET (fd2, &set);
