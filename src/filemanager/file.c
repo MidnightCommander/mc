@@ -2508,14 +2508,19 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
 
     ctx->transfer_start = g_get_monotonic_time ();
 
-    while ((src_desc = mc_open (src_vpath, O_RDONLY | O_LINEAR)) < 0 && !ctx->ignore_all)
+    while ((src_desc = mc_open (src_vpath, O_RDONLY | O_LINEAR)) < 0)
     {
-        return_status = file_error (TRUE, _("Cannot open source file \"%s\"\n%s"), src_path);
-        if (return_status == FILE_RETRY)
-            continue;
-        if (return_status == FILE_IGNORE_ALL)
-            ctx->ignore_all = TRUE;
-        ctx->do_append = FALSE;
+        if (ctx->ignore_all)
+            return_status = FILE_IGNORE_ALL;
+        else
+        {
+            return_status = file_error (TRUE, _("Cannot open source file \"%s\"\n%s"), src_path);
+            if (return_status == FILE_RETRY)
+                continue;
+            if (return_status == FILE_IGNORE_ALL)
+                ctx->ignore_all = TRUE;
+            ctx->do_append = FALSE;
+        }
         goto ret_fast;
     }
 
