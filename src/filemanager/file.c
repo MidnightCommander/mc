@@ -3606,8 +3606,9 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
          * some directory movements can be a cross-filesystem and directory scanning is useful
          * for those directories only. */
 
-        if (panel_operate_init_totals (panel, NULL, NULL, ctx, file_op_compute_totals, dialog_type)
-            == FILE_CONT)
+        value =
+            panel_operate_init_totals (panel, NULL, NULL, ctx, file_op_compute_totals, dialog_type);
+        if (value == FILE_CONT)
         {
             /* Loop for every file, perform the actual copy operation */
             for (i = 0; i < panel->dir.len; i++)
