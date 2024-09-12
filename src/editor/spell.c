@@ -330,7 +330,6 @@ spell_dialog_spell_suggest_show (WEdit *edit, const char *word, char **new_word,
     char *word_label;
     unsigned int i;
     int res;
-    char *curr = NULL;
     WDialog *sug_dlg;
     WGroup *g;
     WListbox *sug_list;
@@ -393,12 +392,10 @@ spell_dialog_spell_suggest_show (WEdit *edit, const char *word, char **new_word,
     res = dlg_run (sug_dlg);
     if (res == B_ENTER)
     {
-        char *tmp = NULL;
-        listbox_get_current (sug_list, &curr, NULL);
+        char *curr = NULL;
 
-        if (curr != NULL)
-            tmp = g_strdup (curr);
-        *new_word = tmp;
+        listbox_get_current (sug_list, &curr, NULL);
+        *new_word = g_strdup (curr);
     }
 
     widget_destroy (WIDGET (sug_dlg));
