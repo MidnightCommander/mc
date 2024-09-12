@@ -42,7 +42,7 @@
 static void
 setup (void)
 {
-    str_init_strings (NULL);
+    str_init_strings ("UTF-8");
 
     vfs_init ();
     vfs_init_localfs ();
