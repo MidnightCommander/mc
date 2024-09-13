@@ -48,8 +48,8 @@ setup (void)
     vfs_init_localfs ();
     vfs_setup_work_dir ();
 
-    mc_global.sysconfig_dir = (char *) TEST_SHARE_DIR;
 #ifdef HAVE_CHARSET
+    mc_global.sysconfig_dir = (char *) TEST_SHARE_DIR;
     load_codepages_list ();
 #endif
 }

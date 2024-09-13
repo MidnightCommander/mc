@@ -72,8 +72,6 @@ test_init_vfs (const char *encoding)
     vfs_setup_work_dir ();
 
     mc_global.sysconfig_dir = (char *) TEST_SHARE_DIR;
-
-    mc_global.sysconfig_dir = (char *) TEST_SHARE_DIR;
     load_codepages_list ();
 }
 

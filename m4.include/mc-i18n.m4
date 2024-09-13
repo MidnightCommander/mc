@@ -18,16 +18,27 @@ AC_DEFUN([mc_I18N],[
         have_charset=yes
         charset_msg="yes"
 
+        AC_CHECK_HEADERS([gnu/libc-version.h])
+
         dnl Solaris has different name of Windows 1251 encoding
         case $host_os in
             solaris*)
-                CP1251="ANSI-1251"
+                ENCODING_CP1251="ANSI-1251"
                 ;;
             *)
-                CP1251="CP1251"
+                ENCODING_CP1251="CP1251"
                 ;;
         esac
 
-        AC_SUBST(CP1251)
+        if test "x$ac_cv_header_gnu_libc_version_h" != "xno"; then
+            ENCODING_CP866="IBM866"
+            ENCODING_ISO8859="ISO-8859"
+        else
+            ENCODING_CP866="CP866"
+            ENCODING_ISO8859="ISO8859"
+        fi
+
+        AC_SUBST(ENCODING_CP1251)
+        AC_SUBST(ENCODING_CP866)
     fi
 ])
