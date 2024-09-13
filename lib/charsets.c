@@ -364,6 +364,8 @@ str_nconvert_to_display (const char *str, int len)
         return g_string_new (str);
 
     conv = str_crt_conv_from (cp_source);
+    if (conv == INVALID_CONV)
+        return g_string_new (str);
 
     buff = g_string_new ("");
     str_nconvert (conv, str, len, buff);
@@ -396,6 +398,8 @@ str_nconvert_to_input (const char *str, int len)
         return g_string_new (str);
 
     conv = str_crt_conv_to (cp_source);
+    if (conv == INVALID_CONV)
+        return g_string_new (str);
 
     buff = g_string_new ("");
     str_nconvert (conv, str, len, buff);
