@@ -48,7 +48,7 @@ static struct vfs_class vfs_test_ops1, vfs_test_ops2, vfs_test_ops3;
 static void
 setup (void)
 {
-    str_init_strings (NULL);
+    str_init_strings ("UTF-8");
 
     vfs_init ();
     vfs_init_localfs ();
