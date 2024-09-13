@@ -272,7 +272,7 @@ str_crt_conv_from (const char *from_enc)
 void
 str_close_conv (GIConv conv)
 {
-    if (conv != str_cnv_not_convert)
+    if (conv != INVALID_CONV && conv != str_cnv_not_convert)
         g_iconv_close (conv);
 }
 
