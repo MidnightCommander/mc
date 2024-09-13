@@ -896,8 +896,8 @@ vfs_path_element_clone (const vfs_path_element_t *element)
     new_element->vfs_prefix = g_strdup (element->vfs_prefix);
 #ifdef HAVE_CHARSET
     new_element->encoding = g_strdup (element->encoding);
-    if (vfs_path_element_need_cleanup_converter (element) && new_element->encoding != NULL)
-        new_element->dir.converter = str_crt_conv_from (new_element->encoding);
+    if (vfs_path_element_need_cleanup_converter (element) && element->encoding != NULL)
+        new_element->dir.converter = str_crt_conv_from (element->encoding);
     else
         new_element->dir.converter = element->dir.converter;
 #endif
