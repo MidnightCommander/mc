@@ -241,12 +241,12 @@ static const struct test_autocomplete_ds
         1,
         "KOI8-R",
         0,
-        "‹ﬂ √’À≈Œ",
+        "\xDC\xDF\xCA\xC3\xD5\xCB\xC5\xCE", // —ç—ä–π—Ü—É–∫–µ–Ω
 
         8,
         2,
         136,
-        "‹ﬂ √’À≈Œ"
+        "\xDC\xDF\xCA\xC3\xD5\xCB\xC5\xCE" // —ç—ä–π—Ü—É–∫–µ–Ω
     },
 };
 /* *INDENT-ON* */
@@ -328,7 +328,7 @@ static const struct test_autocomplete_single_ds
         0,
 
         145,
-        "∆Ÿ◊¡"
+        "\xC6\xD9\xD7\xC1" // —Ñ—ã–≤–∞
     },
 };
 /* *INDENT-ON* */
