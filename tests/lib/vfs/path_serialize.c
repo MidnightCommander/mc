@@ -60,8 +60,8 @@ setup (void)
     vfs_init_class (&vfs_test_ops3, "testfs3", VFSF_UNKNOWN, "test3");
     vfs_register_class (&vfs_test_ops3);
 
-    mc_global.sysconfig_dir = (char *) TEST_SHARE_DIR;
 #ifdef HAVE_CHARSET
+    mc_global.sysconfig_dir = (char *) TEST_SHARE_DIR;
     load_codepages_list ();
 #endif
 }
