@@ -6,7 +6,9 @@
 action=$1
 filetype=$2
 
-[ -n "${MC_XDG_OPEN}" ] || MC_XDG_OPEN="xdg-open"
+if [ -n "$DISPLAY" ]; then
+    [ -n "${MC_XDG_OPEN}" ] || MC_XDG_OPEN="xdg-open"
+fi
 
 do_view_action() {
     filetype=$1
@@ -16,13 +18,13 @@ do_view_action() {
         [ -n "$DISPLAY" ] && sxpm "${MC_EXT_FILENAME}"
         ;;
     *)
-        if which exif >/dev/null 2>&1; then
+        if command -v exif >/dev/null 2>&1; then
             exif "${MC_EXT_FILENAME}" 2>/dev/null
             E=$?
         else
             E=1
         fi
-        if [ $E != 0 ] && which exiftool >/dev/null 2>&1; then
+        if [ $E != 0 ] && command -v exiftool >/dev/null 2>&1; then
             exiftool "${MC_EXT_FILENAME}" 2>/dev/null
         fi
         identify "${MC_EXT_FILENAME}"
@@ -45,15 +47,21 @@ do_open_action() {
         ;;
     *)
         if [ -n "$DISPLAY" ]; then
-            if which geeqie >/dev/null 2>&1; then
+            if command -v geeqie >/dev/null 2>&1; then
                 (geeqie "${MC_EXT_FILENAME}" &)
             else
                 (gqview "${MC_EXT_FILENAME}" &)
             fi
-        elif which see >/dev/null 2>&1; then
+        # no backgrounding for console viewers
+        elif command -v fim >/dev/null 2>&1; then
+            fim "${MC_EXT_FILENAME}"
+        elif command -v fbi >/dev/null 2>&1; then
+            fbi "${MC_EXT_FILENAME}"
+        elif command -v zgv >/dev/null 2>&1; then
+            zgv "${MC_EXT_FILENAME}"
+        # run-mailcap as a last resort
+        elif command -v see >/dev/null 2>&1; then
             (see "${MC_EXT_FILENAME}" &)
-        else
-            (zgv "${MC_EXT_FILENAME}" &)
         fi
         ;;
     esac

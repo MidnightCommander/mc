@@ -6,7 +6,9 @@
 action=$1
 filetype=$2
 
-[ -n "${MC_XDG_OPEN}" ] || MC_XDG_OPEN="xdg-open"
+if [ -n "$DISPLAY" ]; then
+    [ -n "${MC_XDG_OPEN}" ] || MC_XDG_OPEN="xdg-open"
+fi
 
 do_view_action() {
     filetype=$1

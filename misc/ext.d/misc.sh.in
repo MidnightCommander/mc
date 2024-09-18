@@ -13,7 +13,7 @@ do_view_action() {
 
     case "${filetype}" in
     iso9660)
-         if which isoinfo > /dev/null 2>&1; then
+         if command -v isoinfo >/dev/null 2>&1; then
              isoinfo -d -i "${MC_EXT_FILENAME}" && isoinfo -l -R -J -i "${MC_EXT_FILENAME}"
          else
              7za l "${MC_EXT_FILENAME}"
@@ -74,7 +74,7 @@ do_open_action() {
         sqlite3 "${MC_EXT_FILENAME}"
         ;;
     glade)
-        if which glade-3 >/dev/null 2>&1; then
+        if command -v glade-3 >/dev/null 2>&1; then
             (glade-3 "${MC_EXT_FILENAME}" >/dev/null 2>&1 &)
         else
             (glade-2 "${MC_EXT_FILENAME}" >/dev/null 2>&1 &)

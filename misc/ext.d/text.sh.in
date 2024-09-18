@@ -129,7 +129,7 @@ do_open_action() {
         ;;
     chm)
         if [ -n "$DISPLAY" ]; then
-            which kchmviewer > /dev/null 2>&1 \
+            command -v kchmviewer >/dev/null 2>&1 \
                 && (kchmviewer "${MC_EXT_FILENAME}" &) \
                 || (xchm "${MC_EXT_FILENAME}" &)
         else
