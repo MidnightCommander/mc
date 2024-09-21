@@ -143,7 +143,7 @@ typedef struct
     /* The estimated time of arrival in seconds */
     double total_eta_secs;
     /* Transferred bytes per second */
-    size_t total_bps;
+    long total_bps;
     /* Used in OP_MOVE between copy and remove directories */
     size_t prev_total_progress_count;
 

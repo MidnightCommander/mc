@@ -1140,7 +1140,7 @@ file_progress_show_total (file_op_context_t *ctx, uintmax_t copied_bytes, gint64
                 label_set_textv (ui->time_label, _("Time: %s %s"), buffer2, buffer3);
             else
             {
-                file_bps_prepare_for_show (buffer4, (long) ctx->total_bps);
+                file_bps_prepare_for_show (buffer4, ctx->total_bps);
                 label_set_textv (ui->time_label, _("Time: %s %s (%s)"), buffer2, buffer3, buffer4);
             }
         }
@@ -1150,7 +1150,7 @@ file_progress_show_total (file_op_context_t *ctx, uintmax_t copied_bytes, gint64
                 label_set_textv (ui->time_label, _("Time: %s"), buffer2);
             else
             {
-                file_bps_prepare_for_show (buffer4, (long) ctx->total_bps);
+                file_bps_prepare_for_show (buffer4, ctx->total_bps);
                 label_set_textv (ui->time_label, _("Time: %s (%s)"), buffer2, buffer4);
             }
         }

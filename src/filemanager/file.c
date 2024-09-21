@@ -1133,37 +1133,36 @@ static void
 calc_copy_file_progress (file_op_context_t *ctx, gint64 tv_current, off_t file_part,
                          off_t file_size)
 {
-    gint64 dt;
+    double dt;
 
     /* Update rotating dash after some time */
     rotate_dash (TRUE);
 
     /* Compute ETA */
-    dt = (tv_current - ctx->transfer_start) / G_USEC_PER_SEC;
+    dt = (tv_current - ctx->transfer_start) / (double) G_USEC_PER_SEC;
 
     if (file_part == 0)
         ctx->eta_secs = 0.0;
     else
-        ctx->eta_secs = ((dt / (double) file_part) * file_size) - dt;
+        ctx->eta_secs = ((double) file_size / file_part - 1) * dt;
 
     /* Compute BPS rate */
-    dt = MAX (1, dt);
-    ctx->bps = file_part / dt;
+    dt = MAX (1.0, dt);
+    ctx->bps = (long) (file_part / dt);
 
     /* Compute total ETA and BPS */
     if (ctx->total_bytes != 0)
     {
-        dt = (tv_current - ctx->total_transfer_start) / G_USEC_PER_SEC;
-        dt = MAX (1, dt);
-        ctx->total_bps = ctx->total_progress_bytes / dt;
+        dt = (tv_current - ctx->total_transfer_start) / (double) G_USEC_PER_SEC;
 
-        if (ctx->total_bps == 0)
+        const uintmax_t copied_bytes = ctx->total_progress_bytes + file_part;
+        if (copied_bytes == 0)
             ctx->total_eta_secs = 0;
         else
-        {
-            const uintmax_t remain_bytes = ctx->total_bytes - ctx->total_progress_bytes;
-            ctx->total_eta_secs = remain_bytes / ctx->total_bps;
-        }
+            ctx->total_eta_secs = ((double) ctx->total_bytes / copied_bytes - 1) * dt;
+
+        dt = MAX (1.0, dt);
+        ctx->total_bps = (long) (copied_bytes / dt);
     }
 }
 
