@@ -812,32 +812,32 @@ panel_operate_init_totals (const WPanel *panel, const vfs_path_t *source,
 
 /* --------------------------------------------------------------------------------------------- */
 
-static FileProgressStatus
-progress_update_one (file_op_context_t *ctx, off_t add)
+static void
+progress_update_one (gboolean success, file_op_context_t *ctx, off_t add)
 {
     gint64 tv_current;
     static gint64 tv_start = -1;
 
     ctx->total_progress_count++;
-    ctx->progress_bytes += (uintmax_t) add;
+    ctx->total_progress_bytes += (uintmax_t) add;
+
+    if (!success)
+        return;
 
     tv_current = g_get_monotonic_time ();
 
     if (tv_start < 0)
         tv_start = tv_current;
-
-    if (tv_current - tv_start > FILEOP_UPDATE_INTERVAL_US)
+    else if (tv_current - tv_start > FILEOP_UPDATE_INTERVAL_US)
     {
         if (verbose && ctx->dialog_type == FILEGUI_DIALOG_MULTI_ITEM)
         {
             file_progress_show_count (ctx);
-            file_progress_show_total (ctx, ctx->progress_bytes, tv_current, TRUE);
+            file_progress_show_total (ctx, ctx->total_progress_bytes, tv_current, TRUE);
         }
 
         tv_start = tv_current;
     }
-
-    return file_progress_check_buttons (ctx);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1217,7 +1217,7 @@ move_file_file (const WPanel *panel, file_op_context_t *ctx, const char *s, cons
     if (file_progress_check_buttons (ctx) == FILE_ABORT)
     {
         return_status = FILE_ABORT;
-        goto ret;
+        goto ret_fast;
     }
 
     mc_refresh ();
@@ -1280,11 +1280,7 @@ move_file_file (const WPanel *panel, file_op_context_t *ctx, const char *s, cons
         }
 
         if (mc_rename (src_vpath, dst_vpath) == 0)
-        {
-            /* FIXME: do we really need to update progress in case of single file? */
-            return_status = progress_update_one (ctx, src_stat.st_size);
             goto ret;
-        }
     }
 #if 0
     /* Comparison to EXDEV seems not to work in nfs if you're moving from
@@ -1320,7 +1316,7 @@ move_file_file (const WPanel *panel, file_op_context_t *ctx, const char *s, cons
             panel_operate_init_totals (panel, src_vpath, &src_stat, ctx, TRUE,
                                        FILEGUI_DIALOG_ONE_ITEM);
         if (return_status != FILE_CONT)
-            goto ret;
+            goto ret_fast;
     }
 
     old_ask_overwrite = ctx->ask_overwrite;
@@ -1342,19 +1338,24 @@ move_file_file (const WPanel *panel, file_op_context_t *ctx, const char *s, cons
 
         return_status = file_progress_check_buttons (ctx);
         if (return_status != FILE_CONT)
-            goto ret;
+            goto ret_fast;
     }
 
     mc_refresh ();
 
   retry_src_remove:
     if (!try_remove_file (ctx, src_vpath, &return_status) && panel == NULL)
-        goto ret;
-
-    if (!copy_done)
-        return_status = progress_update_one (ctx, src_stat.st_size);
+        goto ret_fast;
 
   ret:
+    if (return_status != FILE_ABORT)
+    {
+        /* if copy_done == TRUE, progress_update_one() was called in copy_file_file() */
+        if (!copy_done)
+            progress_update_one (TRUE, ctx, src_stat.st_size);
+        return_status = file_progress_check_buttons (ctx);
+    }
+  ret_fast:
     vfs_path_free (src_vpath, TRUE);
     vfs_path_free (dst_vpath, TRUE);
 
@@ -2320,8 +2321,18 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
         }
 
         if (return_status != FILE_RETRY)
+        {
+            /* unknown size */
+            progress_update_one (FALSE, ctx, 0);
             goto ret_fast;
+        }
     }
+
+    /* After ctx->stat_func() */
+    src_mode = src_stat.st_mode;
+    src_uid = src_stat.st_uid;
+    src_gid = src_stat.st_gid;
+    file_size = src_stat.st_size;
 
     while (attrs_ok && mc_fgetflags (src_vpath, &attrs) != 0)
     {
@@ -2520,7 +2531,7 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
                 ctx->ignore_all = TRUE;
             ctx->do_append = FALSE;
         }
-        goto ret_fast;
+        goto ret;
     }
 
     if (ctx->do_reget != 0 && mc_lseek (src_desc, ctx->do_reget, SEEK_SET) != ctx->do_reget)
@@ -2546,6 +2557,7 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
         goto ret;
     }
 
+    /* After mc_fstat() */
     src_mode = src_stat.st_mode;
     src_uid = src_stat.st_uid;
     src_gid = src_stat.st_gid;
@@ -2737,7 +2749,7 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
                 }
             }
 
-            ctx->total_progress_bytes = ctx->progress_bytes + file_part + ctx->do_reget;
+            ctx->progress_bytes = file_part + ctx->do_reget;
 
             const gint64 usecs = tv_current - tv_last_update;
 
@@ -2758,13 +2770,12 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
                 const char *stalled_msg =
                     update_usecs > FILEOP_STALLING_INTERVAL_US ? _("(stalled)") : "";
 
-                file_progress_show (ctx, file_part + ctx->do_reget, file_size, stalled_msg,
-                                    force_update);
+                file_progress_show (ctx, ctx->progress_bytes, file_size, stalled_msg, force_update);
                 if (ctx->dialog_type == FILEGUI_DIALOG_MULTI_ITEM)
                 {
                     file_progress_show_count (ctx);
-                    file_progress_show_total (ctx, ctx->total_progress_bytes, tv_current,
-                                              force_update);
+                    file_progress_show_total (ctx, ctx->total_progress_bytes + ctx->progress_bytes,
+                                              tv_current, force_update);
                 }
 
                 mc_refresh ();
@@ -2934,8 +2945,9 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
         }
     }
 
+    progress_update_one (return_status == FILE_CONT, ctx, file_size);
     if (return_status == FILE_CONT)
-        return_status = progress_update_one (ctx, file_size);
+        return_status = file_progress_check_buttons (ctx);
 
   ret_fast:
     vfs_path_free (src_vpath, TRUE);
@@ -3608,7 +3620,6 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
         value =
             panel_operate_init_totals (panel, NULL, NULL, ctx, file_op_compute_totals, dialog_type);
         if (value == FILE_CONT)
-        {
             /* Loop for every file, perform the actual copy operation */
             for (i = 0; i < panel->dir.len; i++)
             {
@@ -3621,32 +3632,14 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                 src_stat = panel->dir.list[i].st;
 
                 value = operate_one_file (panel, ctx, source2, &src_stat, dest);
-
                 if (value == FILE_ABORT)
                     break;
 
                 if (value == FILE_CONT)
                     do_file_mark (panel, i, 0);
 
-                if (verbose)
-                {
-                    if (ctx->dialog_type == FILEGUI_DIALOG_MULTI_ITEM)
-                    {
-                        file_progress_show_count (ctx);
-                        file_progress_show_total (ctx, ctx->progress_bytes, g_get_monotonic_time (),
-                                                  FALSE);
-                    }
-
-                    if (operation != OP_DELETE)
-                        file_progress_show (ctx, 0, 0, "", FALSE);
-                }
-
-                if (file_progress_check_buttons (ctx) == FILE_ABORT)
-                    break;
-
                 mc_refresh ();
             }                   /* Loop for every file */
-        }
     }                           /* Many entries */
 
   clean_up:
