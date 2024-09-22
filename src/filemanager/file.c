@@ -1115,11 +1115,11 @@ static FileProgressStatus
 files_error (const char *format, const char *file1, const char *file2)
 {
     char buf[BUF_MEDIUM];
-    char *nfile1 = g_strdup (path_trunc (file1, 15));
-    char *nfile2 = g_strdup (path_trunc (file2, 15));
+    char *nfile1, *nfile2;
 
+    nfile1 = g_strdup (path_trunc (file1, 15));
+    nfile2 = g_strdup (path_trunc (file2, 15));
     g_snprintf (buf, sizeof (buf), format, nfile1, nfile2, unix_error_string (errno));
-
     g_free (nfile1);
     g_free (nfile2);
 
