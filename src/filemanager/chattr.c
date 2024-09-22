@@ -478,7 +478,6 @@ chattrboxes_rename (WChattrBoxes *cb)
     gboolean active;
     int i;
     GList *l;
-    char btext[BUF_SMALL];      /* FIXME: is 128 bytes enough? */
 
     active = widget_get_state (w, WST_ACTIVE);
 
@@ -490,6 +489,7 @@ chattrboxes_rename (WChattrBoxes *cb)
     {
         WCheck *c = CHECK (l->data);
         int m;
+        char btext[BUF_SMALL];  /* FIXME: are 128 bytes enough? */
 
         m = check_attr_mod[i];
         g_snprintf (btext, sizeof (btext), "(%c) %s", check_attr[m].attr, check_attr[m].text);
