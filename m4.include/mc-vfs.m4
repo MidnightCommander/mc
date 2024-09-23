@@ -7,7 +7,6 @@ AC_DEFUN([mc_VFS_ADDNAME],
     fi
 ])
 
-m4_include([m4.include/vfs/rpc.m4])
 m4_include([m4.include/vfs/socket.m4])
 m4_include([m4.include/vfs/mc-vfs-extfs.m4])
 m4_include([m4.include/vfs/mc-vfs-sfs.m4])
@@ -40,8 +39,6 @@ AC_DEFUN([mc_ENABLE_VFS_NET],
 #include <sys/types.h>
 #include <sys/socket.h>
 	    ])
-
-	AC_CHECK_RPC
 
 	enable_vfs_net=yes
 	AC_DEFINE(ENABLE_VFS_NET, [1], [Define to enable network VFSes support])
