@@ -573,6 +573,7 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
                 unsigned int c;
                 gboolean wide_width_char = FALSE;
                 gboolean control_char = FALSE;
+                gboolean printable;
 
                 p->ch = 0;
                 p->style = q == edit->buffer.curs1 ? MOD_CURSOR : 0;
@@ -759,34 +760,30 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
                         control_char = TRUE;
                         break;
                     }
+
 #ifdef HAVE_CHARSET
                     if (edit->utf8)
                     {
-                        if (g_unichar_isprint (c))
-                            p->ch = c;
+                        if (mc_global.utf8_display)
+                            /* c is gunichar */
+                            printable = g_unichar_isprint (c);
                         else
-                        {
-                            p->ch = '.';
-                            p->style = abn_style;
-                        }
-                        p++;
+                            /* c was gunichar; now c is 8-bit char converted from gunichar */
+                            printable = is_printable (c);
                     }
                     else
 #endif
+                        /* c is 8-bit char */
+                        printable = is_printable (c);
+
+                    if (printable)
+                        p->ch = c;
+                    else
                     {
-                        if ((mc_global.utf8_display && g_unichar_isprint (c)) ||
-                            (!mc_global.utf8_display && is_printable (c)))
-                        {
-                            p->ch = c;
-                            p++;
-                        }
-                        else
-                        {
-                            p->ch = '.';
-                            p->style = abn_style;
-                            p++;
-                        }
+                        p->ch = '.';
+                        p->style = abn_style;
                     }
+                    p++;
                     col++;
                     break;
                 }               /* case */
