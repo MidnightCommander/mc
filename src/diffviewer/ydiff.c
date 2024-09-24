@@ -607,7 +607,7 @@ dview_get_utf (const char *str, int *ch, int *ch_length)
     }
     else
     {
-        char *next_ch;
+        const char *next_ch;
 
         /* Calculate UTF-8 char length */
         next_ch = g_utf8_next_char (str);
