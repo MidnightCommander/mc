@@ -1233,7 +1233,7 @@ chattr_cmd (WPanel *panel)
 
         if (mc_fgetflags (vpath, &flags) != 0)
         {
-            message (D_ERROR, MSG_ERROR, _("Cannot get flags of \"%s\"\n%s"), fname->str,
+            message (D_ERROR, MSG_ERROR, _("Cannot get ext2 attributes of \"%s\"\n%s"), fname->str,
                      unix_error_string (errno));
             vfs_path_free (vpath, TRUE);
             break;
