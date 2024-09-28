@@ -2189,6 +2189,19 @@ end_bg_process (file_op_context_t *ctx, enum OperationMode mode)
 /* }}} */
 
 /* --------------------------------------------------------------------------------------------- */
+
+/**
+ * On Solaris, ENOTSUP != EOPNOTSUPP. Some FS also return ENOSYS or EINVAL as "not implemented".
+ * On some Linux kernels (tested on 4.9, 5.4) there is ENOTTY on tmpfs.
+ */
+static inline gboolean
+attrs_ignore_error (int e)
+{
+    return (e == ENOTSUP || e == EOPNOTSUPP || e == ENOSYS || e == EINVAL || e == ENOTTY
+            || e == ELOOP || e == ENXIO);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -2320,7 +2333,7 @@ copy_file_file (file_op_total_context_t *tctx, file_op_context_t *ctx,
         attrs_ok = FALSE;
 
         /* don't show an error message if attributes aren't supported in this FS */
-        if (errno == ENOTSUP)
+        if (attrs_ignore_error (errno))
             return_status = FILE_CONT;
         else if (ctx->skip_all)
             return_status = FILE_SKIPALL;
@@ -2392,7 +2405,7 @@ copy_file_file (file_op_total_context_t *tctx, file_op_context_t *ctx,
                     attrs_ok = FALSE;
 
                     /* don't show an error message if attributes aren't supported in this FS */
-                    if (errno == ENOTSUP)
+                    if (attrs_ignore_error (errno))
                         return_status = FILE_CONT;
                     else if (return_status == FILE_SKIPALL)
                         ctx->skip_all = TRUE;
@@ -2468,7 +2481,7 @@ copy_file_file (file_op_total_context_t *tctx, file_op_context_t *ctx,
                 attrs_ok = FALSE;
 
                 /* don't show an error message if attributes aren't supported in this FS */
-                if (errno == ENOTSUP)
+                if (attrs_ignore_error (errno))
                     break;
 
                 temp_status =
@@ -2890,7 +2903,7 @@ copy_file_file (file_op_total_context_t *tctx, file_op_context_t *ctx,
             attrs_ok = FALSE;
 
             /* don't show an error message if attributes aren't supported in this FS */
-            if (errno == ENOTSUP)
+            if (attrs_ignore_error (errno))
             {
                 return_status = FILE_CONT;
                 break;
@@ -2973,7 +2986,7 @@ copy_dir_dir (file_op_total_context_t *tctx, file_op_context_t *ctx, const char 
         attrs_ok = FALSE;
 
         /* don't show an error message if attributes aren't supported in this FS */
-        if (errno == ENOTSUP)
+        if (attrs_ignore_error (errno))
         {
             return_status = FILE_CONT;
             break;
