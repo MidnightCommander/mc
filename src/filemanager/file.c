@@ -2340,7 +2340,8 @@ copy_file_file (file_op_total_context_t *tctx, file_op_context_t *ctx,
         else
         {
             return_status =
-                file_error (TRUE, _("Cannot get attributes of source file \"%s\"\n%s"), src_path);
+                file_error (TRUE, _("Cannot get ext2 attributes of source file \"%s\"\n%s"),
+                            src_path);
             if (return_status == FILE_SKIPALL)
                 ctx->skip_all = TRUE;
             if (return_status == FILE_ABORT)
@@ -2411,7 +2412,8 @@ copy_file_file (file_op_total_context_t *tctx, file_op_context_t *ctx,
                         ctx->skip_all = TRUE;
                     else
                         return_status =
-                            file_error (TRUE, _("Cannot set attributes of target file \"%s\"\n%s"),
+                            file_error (TRUE,
+                                        _("Cannot set ext2 attributes of target file \"%s\"\n%s"),
                                         dst_path);
 
                     if (return_status != FILE_RETRY)
@@ -2485,7 +2487,7 @@ copy_file_file (file_op_total_context_t *tctx, file_op_context_t *ctx,
                     break;
 
                 temp_status =
-                    file_error (TRUE, _("Cannot set attributes of target file \"%s\"\n%s"),
+                    file_error (TRUE, _("Cannot set ext2 attributes of target file \"%s\"\n%s"),
                                 dst_path);
                 if (temp_status == FILE_SKIP)
                     break;
@@ -2909,8 +2911,9 @@ copy_file_file (file_op_total_context_t *tctx, file_op_context_t *ctx,
                 break;
             }
 
-            temp_status = file_error (TRUE, _("Cannot set attributes for target file \"%s\"\n%s"),
-                                      dst_path);
+            temp_status =
+                file_error (TRUE, _("Cannot set ext2 attributes for target file \"%s\"\n%s"),
+                            dst_path);
             if (temp_status == FILE_ABORT)
                 return_status = FILE_ABORT;
             if (temp_status == FILE_RETRY)
@@ -2997,7 +3000,8 @@ copy_dir_dir (file_op_total_context_t *tctx, file_op_context_t *ctx, const char 
         else
         {
             return_status =
-                file_error (TRUE, _("Cannot get attributes of source directory \"%s\"\n%s"), s);
+                file_error (TRUE, _("Cannot get ext2 attributes of source directory \"%s\"\n%s"),
+                            s);
             if (return_status == FILE_RETRY)
             {
                 attrs_ok = TRUE;
