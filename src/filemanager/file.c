@@ -2833,6 +2833,11 @@ copy_file_file (file_op_total_context_t *tctx, file_op_context_t *ctx,
                && !ctx->skip_all)
         {
             temp_status = file_error (TRUE, _("Cannot chown target file \"%s\"\n%s"), dst_path);
+            if (temp_status == FILE_ABORT)
+            {
+                return_status = FILE_ABORT;
+                goto ret_fast;
+            }
             if (temp_status == FILE_RETRY)
                 continue;
             if (temp_status == FILE_SKIPALL)
@@ -2849,6 +2854,11 @@ copy_file_file (file_op_total_context_t *tctx, file_op_context_t *ctx,
                && !ctx->skip_all)
         {
             temp_status = file_error (TRUE, _("Cannot chmod target file \"%s\"\n%s"), dst_path);
+            if (temp_status == FILE_ABORT)
+            {
+                return_status = FILE_ABORT;
+                goto ret_fast;
+            }
             if (temp_status == FILE_RETRY)
                 continue;
             if (temp_status == FILE_SKIPALL)
@@ -2888,6 +2898,8 @@ copy_file_file (file_op_total_context_t *tctx, file_op_context_t *ctx,
 
             temp_status = file_error (TRUE, _("Cannot set attributes for target file \"%s\"\n%s"),
                                       dst_path);
+            if (temp_status == FILE_ABORT)
+                return_status = FILE_ABORT;
             if (temp_status == FILE_RETRY)
             {
                 attrs_ok = TRUE;
