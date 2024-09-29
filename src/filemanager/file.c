@@ -2195,6 +2195,9 @@ end_bg_process (file_op_context_t *ctx, enum OperationMode mode)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/**
+ * On Solaris, ENOTSUP != EOPNOTSUPP. Some FS also return ENOSYS or EINVAL as "not implemented".
+ */
 static inline gboolean
 attrs_ignore_error (int e)
 {
