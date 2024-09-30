@@ -101,14 +101,14 @@ static const struct test_path_recode_ds
 {
     { /* 0. */
         "UTF-8",
-        "/тестовый/путь",
-        "/тестовый/путь",
-        "/тестовый/путь"
+        "/\xD4\xC5\xD3\xD4\xCF\xD7\xD9\xCA/\xD0\xD5\xD4\xD8",
+        "/\xD4\xC5\xD3\xD4\xCF\xD7\xD9\xCA/\xD0\xD5\xD4\xD8",
+        "/\xD4\xC5\xD3\xD4\xCF\xD7\xD9\xCA/\xD0\xD5\xD4\xD8"
     },
     { /* 1. */
         "UTF-8",
         "/#enc:KOI8-R/я┌п╣я│я┌п╬п╡я▀п╧/п©я┐я┌я▄",
-        "/тестовый/путь",
+        "/\xD4\xC5\xD3\xD4\xCF\xD7\xD9\xCA/\xD0\xD5\xD4\xD8",
         "/#enc:KOI8-R/я┌п╣я│я┌п╬п╡я▀п╧/п©я┐я┌я▄"
     },
     { /* 2. */
@@ -119,9 +119,9 @@ static const struct test_path_recode_ds
     },
     { /* 3. */
         "KOI8-R",
-        "/#enc:UTF-8/тестовый/путь",
+        "/#enc:UTF-8/\xD4\xC5\xD3\xD4\xCF\xD7\xD9\xCA/\xD0\xD5\xD4\xD8",
         "/я┌п╣я│я┌п╬п╡я▀п╧/п©я┐я┌я▄",
-        "/#enc:UTF-8/тестовый/путь"
+        "/#enc:UTF-8/\xD4\xC5\xD3\xD4\xCF\xD7\xD9\xCA/\xD0\xD5\xD4\xD8"
     },
     { /* 4. Test encode info at start */
         "UTF-8",
@@ -192,13 +192,13 @@ static const struct test_path_to_str_flags_ds
         "/test1://user:passwd@host.name/#enc:KOI8-R/я┌п╣я│я┌п╬п╡я▀п╧/п©я┐я┌я▄",
         VPF_NONE,
         VPF_RECODE,
-        "/test1://user:passwd@host.name/тестовый/путь"
+        "/test1://user:passwd@host.name/\xD4\xC5\xD3\xD4\xCF\xD7\xD9\xCA/\xD0\xD5\xD4\xD8"
     },
     { /* 3. */
         "/test1://user:passwd@host.name/#enc:KOI8-R/я┌п╣я│я┌п╬п╡я▀п╧/п©я┐я┌я▄",
         VPF_NONE,
         VPF_RECODE | VPF_STRIP_PASSWORD,
-        "/test1://user@host.name/тестовый/путь"
+        "/test1://user@host.name/\xD4\xC5\xD3\xD4\xCF\xD7\xD9\xCA/\xD0\xD5\xD4\xD8"
     },
     { /* 4. */
         "/mock/home/test/dir",
@@ -222,13 +222,13 @@ static const struct test_path_to_str_flags_ds
         "/mock/home/test1://user:passwd@host.name/#enc:KOI8-R/я┌п╣я│я┌п╬п╡я▀п╧/п©я┐я┌я▄",
         VPF_NONE,
         VPF_STRIP_HOME | VPF_RECODE,
-        "~/test1://user:passwd@host.name/тестовый/путь"
+        "~/test1://user:passwd@host.name/\xD4\xC5\xD3\xD4\xCF\xD7\xD9\xCA/\xD0\xD5\xD4\xD8"
     },
     { /* 8. */
         "/mock/home/test1://user:passwd@host.name/#enc:KOI8-R/я┌п╣я│я┌п╬п╡я▀п╧/п©я┐я┌я▄",
         VPF_NONE,
         VPF_STRIP_HOME | VPF_RECODE | VPF_STRIP_PASSWORD,
-        "~/test1://user@host.name/тестовый/путь"
+        "~/test1://user@host.name/\xD4\xC5\xD3\xD4\xCF\xD7\xD9\xCA/\xD0\xD5\xD4\xD8"
     },
 };
 /* *INDENT-ON* */
