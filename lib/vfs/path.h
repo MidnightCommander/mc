@@ -82,6 +82,7 @@ void vfs_path_element_free (vfs_path_element_t * element);
 struct vfs_class *vfs_prefix_to_class (const char *prefix);
 
 #ifdef HAVE_CHARSET
+char *vfs_get_encoding(const char *path, ssize_t len);
 gboolean vfs_path_element_need_cleanup_converter (const vfs_path_element_t * element);
 vfs_path_t *vfs_path_change_encoding (vfs_path_t * vpath, const char *encoding);
 #endif

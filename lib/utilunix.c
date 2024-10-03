@@ -920,10 +920,20 @@ canonicalize_pathname_custom (char *path, canon_path_flags_t flags)
                 {
                     /* "token/../foo" -> "foo" */
 #ifdef HAVE_CHARSET
-                    if ((strncmp (s, VFS_ENCODING_PREFIX, enc_prefix_len) == 0)
-                        && (is_supported_encoding (s + enc_prefix_len)))
-                        /* special case: remove encoding */
-                        str_move (s, p + 1);
+                    if (strncmp (s, VFS_ENCODING_PREFIX, enc_prefix_len) == 0)
+                    {
+                        char *enc;
+
+                        enc = vfs_get_encoding (s, -1);
+
+                        if (is_supported_encoding (enc))
+                            /* special case: remove encoding */
+                            str_move (s, p + 1);
+                        else
+                            str_move (s, p + 4);
+
+                        g_free (enc);
+                    }
                     else
 #endif /* HAVE_CHARSET */
                         str_move (s, p + 4);
@@ -947,9 +957,18 @@ canonicalize_pathname_custom (char *path, canon_path_flags_t flags)
                 if (s == lpath + 1)
                     s[0] = '\0';
 #ifdef HAVE_CHARSET
-                else if ((strncmp (s, VFS_ENCODING_PREFIX, enc_prefix_len) == 0)
-                         && (is_supported_encoding (s + enc_prefix_len)))
+                else if (strncmp (s, VFS_ENCODING_PREFIX, enc_prefix_len) == 0)
                 {
+                    char *enc;
+                    gboolean ok;
+
+                    enc = vfs_get_encoding (s, -1);
+                    ok = is_supported_encoding (enc);
+                    g_free (enc);
+
+                    if (!ok)
+                        goto last;
+
                     /* special case: remove encoding */
                     s[0] = '.';
                     s[1] = '.';
@@ -966,6 +985,7 @@ canonicalize_pathname_custom (char *path, canon_path_flags_t flags)
 #endif /* HAVE_CHARSET */
                 else
                 {
+                  last:
                     if (s >= lpath + url_delim_len
                         && strncmp (s - url_delim_len, VFS_PATH_URL_DELIMITER, url_delim_len) == 0)
                         *s = '\0';

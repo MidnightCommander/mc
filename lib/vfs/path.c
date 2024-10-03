@@ -183,42 +183,6 @@ vfs_canon (const char *path)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
-#ifdef HAVE_CHARSET
-/** get encoding after last #enc: or NULL, if part does not contain #enc:
- *
- * @param path null-terminated string
- * @param len the maximum length of path, where #enc: should be searched
- *
- * @return newly allocated string.
- */
-
-static char *
-vfs_get_encoding (const char *path, ssize_t len)
-{
-    char *semi;
-
-    /* try found #enc: */
-    semi = g_strrstr_len (path, len, VFS_ENCODING_PREFIX);
-    if (semi == NULL)
-        return NULL;
-
-    if (semi == path || IS_PATH_SEP (semi[-1]))
-    {
-        char *slash;
-
-        semi += strlen (VFS_ENCODING_PREFIX);   /* skip "#enc:" */
-        slash = strchr (semi, PATH_SEP);
-        if (slash != NULL)
-            return g_strndup (semi, slash - semi);
-        return g_strdup (semi);
-    }
-
-    return vfs_get_encoding (path, semi - path);
-}
-#endif
-
-/* --------------------------------------------------------------------------------------------- */
 /**  Extract the hostname and username from the path
  *
  * Format of the path is [user@]hostname:port/remote-dir, e.g.:
@@ -1071,6 +1035,39 @@ vfs_prefix_to_class (const char *prefix)
 
 #ifdef HAVE_CHARSET
 
+/** get encoding after last #enc: or NULL, if part does not contain #enc:
+ *
+ * @param path null-terminated string
+ * @param len the maximum length of path, where #enc: should be searched
+ *
+ * @return newly allocated string.
+ */
+
+char *
+vfs_get_encoding (const char *path, ssize_t len)
+{
+    char *semi;
+
+    /* try found #enc: */
+    semi = g_strrstr_len (path, len, VFS_ENCODING_PREFIX);
+    if (semi == NULL)
+        return NULL;
+
+    if (semi == path || IS_PATH_SEP (semi[-1]))
+    {
+        char *slash;
+
+        semi += strlen (VFS_ENCODING_PREFIX);   /* skip "#enc:" */
+        slash = strchr (semi, PATH_SEP);
+        if (slash != NULL)
+            return g_strndup (semi, slash - semi);
+        return g_strdup (semi);
+    }
+
+    return vfs_get_encoding (path, semi - path);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /**
  * Check if need cleanup charset converter for vfs_path_element_t
  *
