@@ -38,9 +38,6 @@
 
 #include <sys/types.h>
 #include <sys/stat.h>
-#ifdef HAVE_MMAP
-#include <sys/mman.h>
-#endif
 #ifdef ENABLE_VFS_NET
 #include <netdb.h>
 #endif
@@ -97,12 +94,6 @@
 /*** global variables ****************************************************************************/
 
 /*** file scope macro definitions ****************************************************************/
-
-#ifdef HAVE_MMAP
-#ifndef MAP_FILE
-#define MAP_FILE 0
-#endif
-#endif /* HAVE_MMAP */
 
 /*** file scope type declarations ****************************************************************/
 
