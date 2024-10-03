@@ -193,7 +193,7 @@ vfs_canon (const char *path)
  * @return newly allocated string.
  */
 
-static char *
+char *
 vfs_get_encoding (const char *path, ssize_t len)
 {
     char *semi;

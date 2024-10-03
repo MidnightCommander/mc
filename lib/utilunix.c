@@ -64,6 +64,7 @@
 #include "lib/strutil.h"        /* str_move(), str_tokenize() */
 #include "lib/util.h"
 #include "lib/widget.h"         /* message() */
+#include "lib/vfs/path.h"       /* vfs_get_encoding() */
 #include "lib/vfs/xdirentry.h"
 
 #ifdef HAVE_CHARSET
@@ -921,7 +922,7 @@ canonicalize_pathname_custom (char *path, canon_path_flags_t flags)
                     /* "token/../foo" -> "foo" */
 #ifdef HAVE_CHARSET
                     if ((strncmp (s, VFS_ENCODING_PREFIX, enc_prefix_len) == 0)
-                        && (is_supported_encoding (s + enc_prefix_len)))
+                        && (is_supported_encoding (vfs_get_encoding (s, -1))))
                         /* special case: remove encoding */
                         str_move (s, p + 1);
                     else
@@ -948,7 +949,7 @@ canonicalize_pathname_custom (char *path, canon_path_flags_t flags)
                     s[0] = '\0';
 #ifdef HAVE_CHARSET
                 else if ((strncmp (s, VFS_ENCODING_PREFIX, enc_prefix_len) == 0)
-                         && (is_supported_encoding (s + enc_prefix_len)))
+                         && (is_supported_encoding (vfs_get_encoding (s, -1))))
                 {
                     /* special case: remove encoding */
                     s[0] = '.';

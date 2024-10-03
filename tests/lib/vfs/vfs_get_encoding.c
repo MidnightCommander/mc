@@ -27,7 +27,7 @@
 
 #include "tests/mctest.h"
 
-#include "lib/vfs/path.c"       /* for testing of static vfs_get_encoding() */
+#include "lib/vfs/path.h"
 
 /* --------------------------------------------------------------------------------------------- */
 

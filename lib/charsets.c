@@ -267,17 +267,14 @@ get_codepage_index (const char *id)
 gboolean
 is_supported_encoding (const char *encoding)
 {
-    gboolean result = FALSE;
-    guint t;
-
-    for (t = 0; t < codepages->len; t++)
-    {
-        const char *id;
-
-        id = ((codepage_desc *) g_ptr_array_index (codepages, t))->id;
-        result |= (g_ascii_strncasecmp (encoding, id, strlen (id)) == 0);
-    }
-
+    GIConv coder;
+    gboolean result;
+    if (encoding == NULL)
+        return FALSE;
+    coder = str_crt_conv_from (encoding);
+    result = (coder != INVALID_CONV) ? TRUE : FALSE;
+    if (result)
+        str_close_conv (coder);
     return result;
 }
 
