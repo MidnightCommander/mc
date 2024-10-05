@@ -735,7 +735,7 @@ check_format_var (const char *p, char **v)
         {
             message (D_ERROR,
                      _("Format error on file Extensions File"),
-                     !dots ? _("The %%var macro has no default")
+                     dots == NULL ? _("The %%var macro has no default")
                      : _("The %%var macro has no variable"));
             return 0;
         }
