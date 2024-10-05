@@ -2197,11 +2197,13 @@ end_bg_process (file_op_context_t *ctx, enum OperationMode mode)
 
 /**
  * On Solaris, ENOTSUP != EOPNOTSUPP. Some FS also return ENOSYS or EINVAL as "not implemented".
+ * On some Linux kernels (tested on 4.9, 5.4) there is ENOTTY on tmpfs.
  */
 static inline gboolean
 attrs_ignore_error (int e)
 {
-    return (e == ENOTSUP || e == EOPNOTSUPP || e == ENOSYS || e == EINVAL);
+    return (e == ENOTSUP || e == EOPNOTSUPP || e == ENOSYS || e == EINVAL || e == ENOTTY
+            || e == ELOOP || e == ENXIO);
 }
 
 /* --------------------------------------------------------------------------------------------- */
