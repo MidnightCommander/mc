@@ -21,16 +21,16 @@
  * function, that works with invalid strings are marked with "I" 
  * in documentation
  * invalid bytes of string are handled as one byte characters with width 1, they
- * are displayed as questionmarks, I-maked comparing functions try to keep 
+ * are displayed as question marks, I-marked comparing functions try to keep
  * the original value of these bytes.
  */
 
 /* combining characters
- * displaynig: all handled as zero with characters, expect combing character 
+ * displaying: all handled as zero with characters, expect combing character
  * at the begin of string, this character has with one (space add before), 
  * so str_term_width is not good for computing width of singles characters 
  * (never return zero, expect empty string)
- * for compatibility are strings composed before displaynig
+ * for compatibility are strings composed before displaying
  * comparing: comparing decompose all string before comparing, n-compare 
  * functions do not work as is usual, because same strings do not have to be 
  * same length in UTF-8. So they return 0 if one string is prefix of the other 
@@ -209,7 +209,7 @@ gchar *str_conv_gerror_message (GError * error, const char *def_msg);
 estr_t str_vfs_convert_from (GIConv coder, const char *string, GString * buffer);
 
 /* if coder is str_cnv_to_term or str_cnv_not_convert, string is only copied,
- * does replace with questionmark 
+ * does replace with question mark
  * I
  */
 estr_t str_vfs_convert_to (GIConv coder, const char *string, int size, GString * buffer);
@@ -353,13 +353,13 @@ gboolean str_isprint (const char *ch);
 gboolean str_iscombiningmark (const char *ch);
 
 /* write lower from of first characters in ch into out
- * decrase remain by size of returned characters
+ * decrease remain by size of returned characters
  * if out is not big enough, do nothing
  */
 gboolean str_toupper (const char *ch, char **out, size_t *remain);
 
 /* write upper from of first characters in ch into out
- * decrase remain by size of returned characters
+ * decrease remain by size of returned characters
  * if out is not big enough, do nothing
  */
 gboolean str_tolower (const char *ch, char **out, size_t *remain);
