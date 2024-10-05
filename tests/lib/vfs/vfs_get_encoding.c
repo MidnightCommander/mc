@@ -27,7 +27,7 @@
 
 #include "tests/mctest.h"
 
-#include "lib/vfs/path.c"       /* for testing of static vfs_get_encoding() */
+#include "lib/vfs/path.h"
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -112,8 +112,8 @@ static const struct test_vfs_get_encoding_ds
         NULL
     },
     { /* 14 */
-        "/aaaa/#enc:UTF-8/bbbb/#enc:KOI8-R#enc:IBM866/cccc",
-        "KOI8-R#enc:IBM866"
+        "/aaaa/#enc:UTF-8/bbbb/#enc:KOI8-R#enc:CP866/cccc",
+        "KOI8-R#enc:CP866"
     }
 };
 /* *INDENT-ON* */

@@ -48,7 +48,7 @@ static struct vfs_class vfs_test_ops1, vfs_test_ops2, vfs_test_ops3;
 static void
 setup (void)
 {
-    str_init_strings (NULL);
+    str_init_strings ("UTF-8");
 
     vfs_init ();
     vfs_init_localfs ();
@@ -125,36 +125,36 @@ static const struct test_from_to_string_ds
         &vfs_test_ops3
     },
     { /* 4. */
-        "/#test1/bla-bla1/#enc:IBM866/some/path/#test2/bla-bla2/#enc:KOI8-R/some/path#test3/111/22/33",
-        "/test1://#enc:IBM866/bla-bla1/some/path/test2://#enc:KOI8-R/bla-bla2/some/path/test3://111/22/33",
+        "/#test1/bla-bla1/#enc:CP866/some/path/#test2/bla-bla2/#enc:KOI8-R/some/path#test3/111/22/33",
+        "/test1://#enc:CP866/bla-bla1/some/path/test2://#enc:KOI8-R/bla-bla2/some/path/test3://111/22/33",
         "111/22/33",
         4,
         &vfs_test_ops3
     },
     {  /* 5. */
-        "/#test1/bla-bla1/some/path/#test2/bla-bla2/#enc:IBM866/#enc:KOI8-R/some/path#test3/111/22/33",
+        "/#test1/bla-bla1/some/path/#test2/bla-bla2/#enc:CP866/#enc:KOI8-R/some/path#test3/111/22/33",
         "/test1://bla-bla1/some/path/test2://#enc:KOI8-R/bla-bla2/some/path/test3://111/22/33",
         "111/22/33",
         4,
         &vfs_test_ops3
     },
     { /* 6. */
-        "/#test1/bla-bla1/some/path/#test2/bla-bla2/#enc:IBM866/some/#enc:KOI8-R/path#test3/111/22/33",
+        "/#test1/bla-bla1/some/path/#test2/bla-bla2/#enc:CP866/some/#enc:KOI8-R/path#test3/111/22/33",
         "/test1://bla-bla1/some/path/test2://#enc:KOI8-R/bla-bla2/some/path/test3://111/22/33",
         "111/22/33",
         4,
         &vfs_test_ops3
     },
     { /* 7. */
-        "/#test1/bla-bla1/some/path/#test2/#enc:IBM866/bla-bla2/#enc:KOI8-R/some/path#test3/111/22/33",
+        "/#test1/bla-bla1/some/path/#test2/#enc:CP866/bla-bla2/#enc:KOI8-R/some/path#test3/111/22/33",
         "/test1://bla-bla1/some/path/test2://#enc:KOI8-R/bla-bla2/some/path/test3://111/22/33",
         "111/22/33",
         4,
         &vfs_test_ops3
     },
     { /* 8. */
-        "/#test1/bla-bla1/some/path/#enc:IBM866/#test2/bla-bla2/#enc:KOI8-R/some/path#test3/111/22/33",
-        "/test1://#enc:IBM866/bla-bla1/some/path/test2://#enc:KOI8-R/bla-bla2/some/path/test3://111/22/33",
+        "/#test1/bla-bla1/some/path/#enc:CP866/#test2/bla-bla2/#enc:KOI8-R/some/path#test3/111/22/33",
+        "/test1://#enc:CP866/bla-bla1/some/path/test2://#enc:KOI8-R/bla-bla2/some/path/test3://111/22/33",
         "111/22/33",
         4,
         &vfs_test_ops3

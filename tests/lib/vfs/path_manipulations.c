@@ -60,7 +60,7 @@ init_test_classes (void)
 static void
 setup (void)
 {
-    str_init_strings (NULL);
+    str_init_strings ("UTF-8");
 
     vfs_init ();
     vfs_init_localfs ();
@@ -68,8 +68,8 @@ setup (void)
 
     init_test_classes ();
 
-    mc_global.sysconfig_dir = (char *) TEST_SHARE_DIR;
 #ifdef HAVE_CHARSET
+    mc_global.sysconfig_dir = (char *) TEST_SHARE_DIR;
     load_codepages_list ();
 #endif
 }
