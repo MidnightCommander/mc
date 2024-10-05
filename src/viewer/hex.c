@@ -120,8 +120,11 @@ mcview_display_hex (WView *view)
 
     char hex_buff[10];          /* A temporary buffer for sprintf and mvwaddstr */
 
-    text_start = 8 + 13 * ngroups +
-        ((r->cols < 80) ? 0 : (r->cols == 80) ? (ngroups - 1) : (ngroups - 1 + 1));
+    text_start = 8 + 13 * ngroups;
+    if (r->cols == 80)
+        text_start += ngroups - 1;
+    else if (r->cols > 80)
+        text_start += ngroups;
 
     mcview_display_clean (view);
 
@@ -143,10 +146,8 @@ mcview_display_hex (WView *view)
         }
     }
 #endif /* HAVE_CHARSET */
-    while (curr && (curr->offset < from))
-    {
+    while (curr != NULL && (curr->offset < from))
         curr = curr->next;
-    }
 
     for (; mcview_get_byte (view, from, NULL) && row < r->lines; row++)
     {
@@ -218,9 +219,7 @@ mcview_display_hex (WView *view)
                     /* Determine the state of the current multibyte char */
                     ch = g_utf8_get_char_validated (utf8buf, -1);
                     if (ch == -1 || ch == -2)
-                    {
                         ch = '.';
-                    }
                     else
                     {
                         gchar *next_ch;
@@ -279,12 +278,12 @@ mcview_display_hex (WView *view)
             if (col < r->cols)
             {
                 tty_print_char (hex_char[c / 16]);
-                col += 1;
+                col++;
             }
             if (col < r->cols)
             {
                 tty_print_char (hex_char[c % 16]);
-                col += 1;
+                col++;
             }
 
             /* Print the separator */
@@ -294,7 +293,7 @@ mcview_display_hex (WView *view)
                 if (col < r->cols)
                 {
                     tty_print_char (' ');
-                    col += 1;
+                    col++;
                 }
 
                 /* After every four bytes, print a group separator */
@@ -303,12 +302,12 @@ mcview_display_hex (WView *view)
                     if (view->data_area.cols >= 80 && col < r->cols)
                     {
                         tty_print_one_vline (TRUE);
-                        col += 1;
+                        col++;
                     }
                     if (col < r->cols)
                     {
                         tty_print_char (' ');
-                        col += 1;
+                        col++;
                     }
                 }
             }
@@ -326,9 +325,7 @@ mcview_display_hex (WView *view)
             if (mc_global.utf8_display)
             {
                 if (!view->utf8)
-                {
                     c = convert_from_8bit_to_utf_c ((unsigned char) c, view->converter);
-                }
                 if (!g_unichar_isprint (c))
                     c = '.';
             }
