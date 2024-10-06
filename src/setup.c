@@ -447,10 +447,10 @@ static const struct
 static const char *
 setup__is_cfg_group_must_panel_config (const char *grp)
 {
-    return (!strcasecmp ("Dirs", grp) ||
-            !strcasecmp ("Temporal:New Right Panel", grp) ||
-            !strcasecmp ("Temporal:New Left Panel", grp) ||
-            !strcasecmp ("New Left Panel", grp) || !strcasecmp ("New Right Panel", grp))
+    return (strcasecmp ("Dirs", grp) == 0||
+            strcasecmp ("Temporal:New Right Panel", grp) == 0||
+            strcasecmp ("Temporal:New Left Panel", grp) == 0 ||
+            strcasecmp ("New Left Panel", grp) == 0 || strcasecmp ("New Right Panel", grp) == 0)
         ? grp : NULL;
 }
 

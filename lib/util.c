@@ -634,8 +634,8 @@ load_mc_home_file (const char *from, const char *filename, char **allocated_file
 
 /* --------------------------------------------------------------------------------------------- */
 
-const char *
-extract_line (const char *s, const char *top)
+const const char *
+extract_line (const char *s, const char *top, size_t *len)
 {
     static char tmp_line[BUF_MEDIUM];
     char *t = tmp_line;
@@ -643,6 +643,10 @@ extract_line (const char *s, const char *top)
     while (*s != '\0' && *s != '\n' && (size_t) (t - tmp_line) < sizeof (tmp_line) - 1 && s < top)
         *t++ = *s++;
     *t = '\0';
+
+    if (len != NULL)
+        *len = (size_t) (t - tmp_line);
+
     return tmp_line;
 }
 

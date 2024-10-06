@@ -29,6 +29,7 @@
 #include <limits.h>
 #include <stdio.h>
 #include <sys/types.h>
+#include <stdint.h>             /* uintmax_t */
 
 #if defined (ENABLE_VFS) && defined(ENABLE_VFS_SFTP)
 #include <libssh2.h>
@@ -188,6 +189,7 @@ show_version (void)
     TYPE_INFO (void *);
     TYPE_INFO (size_t);
     TYPE_INFO (off_t);
+    TYPE_INFO (uintmax_t);
 #undef TYPE_INFO
     (void) puts ("");
 }

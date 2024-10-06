@@ -32,8 +32,8 @@
 
 #include <config.h>
 
+#include <ctype.h>              /* isdigit() */
 #include <inttypes.h>           /* uintmax_t */
-#include <stdint.h>             /* UINTMAX_MAX, etc */
 
 #include "lib/global.h"
 #include "lib/widget.h"         /* message() */
@@ -47,7 +47,6 @@
 
 /* Log base 2 of common values. */
 #define LG_8 3
-#define LG_64 6
 #define LG_256 8
 
 /*** file scope type declarations ****************************************************************/
@@ -56,18 +55,32 @@
 
 /*** file scope variables ************************************************************************/
 
-/* Base 64 digits; see RFC 2045 Table 1.  */
-static char const base_64_digits[64] = {
-    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
-    'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-    'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
-    'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-    '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '/'
+/* Table of base-64 digit values + 1, indexed by unsigned chars.
+   See Internet RFC 2045 Table 1.
+   Zero entries are for unsigned chars that are not base-64 digits.  */
+/* *INDENT-OFF* */
+static char const base64_map[UCHAR_MAX + 1] =
+{
+    ['A'] =  0 + 1, ['B'] =  1 + 1, ['C'] =  2 + 1, ['D'] =  3 + 1,
+    ['E'] =  4 + 1, ['F'] =  5 + 1, ['G'] =  6 + 1, ['H'] =  7 + 1,
+    ['I'] =  8 + 1, ['J'] =  9 + 1, ['K'] = 10 + 1, ['L'] = 11 + 1,
+    ['M'] = 12 + 1, ['N'] = 13 + 1, ['O'] = 14 + 1, ['P'] = 15 + 1,
+    ['Q'] = 16 + 1, ['R'] = 17 + 1, ['S'] = 18 + 1, ['T'] = 19 + 1,
+    ['U'] = 20 + 1, ['V'] = 21 + 1, ['W'] = 22 + 1, ['X'] = 23 + 1,
+    ['Y'] = 24 + 1, ['Z'] = 25 + 1,
+    ['a'] = 26 + 1, ['b'] = 27 + 1, ['c'] = 28 + 1, ['d'] = 29 + 1,
+    ['e'] = 30 + 1, ['f'] = 31 + 1, ['g'] = 32 + 1, ['h'] = 33 + 1,
+    ['i'] = 34 + 1, ['j'] = 35 + 1, ['k'] = 36 + 1, ['l'] = 37 + 1,
+    ['m'] = 38 + 1, ['n'] = 39 + 1, ['o'] = 40 + 1, ['p'] = 41 + 1,
+    ['q'] = 42 + 1, ['r'] = 43 + 1, ['s'] = 44 + 1, ['t'] = 45 + 1,
+    ['u'] = 46 + 1, ['v'] = 47 + 1, ['w'] = 48 + 1, ['x'] = 49 + 1,
+    ['y'] = 50 + 1, ['z'] = 51 + 1,
+    ['0'] = 52 + 1, ['1'] = 53 + 1, ['2'] = 54 + 1, ['3'] = 55 + 1,
+    ['4'] = 56 + 1, ['5'] = 57 + 1, ['6'] = 58 + 1, ['7'] = 59 + 1,
+    ['8'] = 60 + 1, ['9'] = 61 + 1,
+    ['+'] = 62 + 1, ['/'] = 63 + 1,
 };
-
-/* Table of base 64 digit values indexed by unsigned chars.
-   The value is 64 for unsigned chars that are not base 64 digits. */
-static char base64_map[1 + (unsigned char) (-1)];
+/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
@@ -196,18 +209,6 @@ is_octal_digit (char c)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-tar_base64_init (void)
-{
-    size_t i;
-
-    memset (base64_map, 64, sizeof base64_map);
-    for (i = 0; i < 64; i++)
-        base64_map[(int) base_64_digits[i]] = i;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
 tar_assign_string (char **string, char *value)
 {
     g_free (*string);
@@ -230,6 +231,104 @@ tar_assign_string_dup_n (char **string, const char *value, size_t n)
 {
     g_free (*string);
     *string = g_strndup (value, n);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/* Convert a prefix of the string @arg to a system integer type. If @arglim, set *@arglim to point
+   to just after the prefix. If @overflow, set *@overflow to TRUE or FALSE depending on whether
+   the input is out of @minval..@maxval range. If the input is out of that range, return an extreme
+   value. @minval must not be positive.
+
+   If @minval is negative, @maxval can be at most INTMAX_MAX, and negative integers @minval .. -1
+   are assumed to be represented using leading '-' in the usual way. If the represented value
+   exceeds INTMAX_MAX, return a negative integer V such that (uintmax_t) V yields the represented
+   value.
+
+   On conversion error: if @arglim set *@arglim = @arg if @overflow set *@overflow = FALSE;
+   then return 0.
+
+   Sample call to this function:
+
+   char *s_end;
+   gboolean overflow;
+   idx_t i;
+
+   i = stoint (s, &s_end, &overflow, 0, IDX_MAX);
+   if ((s_end == s) | (s_end == '\0') | overflow)
+   diagnose_invalid (s);
+
+   This example uses "|" instead of "||" for fewer branches at runtime,
+   which tends to be more efficient on modern processors.
+
+   This function is named "stoint" instead of "strtoint" because
+   <string.h> reserves names beginning with "str".
+ */
+#if ! (INTMAX_MAX <= UINTMAX_MAX)
+#error "strtosysint: nonnegative intmax_t does not fit in uintmax_t"
+#endif
+intmax_t
+stoint (const char *arg, char **arglim, gboolean *overflow, intmax_t minval, uintmax_t maxval)
+{
+    char const *p = arg;
+    intmax_t i;
+    int v = 0;
+
+    if (isdigit (*p))
+    {
+        if (minval <= 0)
+        {
+            i = *p - '0';
+
+            while (isdigit (*++p) != 0)
+            {
+                v |= ckd_mul (&i, i, 10) ? 1 : 0;
+                v |= ckd_add (&i, i, *p - '0') ? 1 : 0;
+            }
+
+            v |= maxval < i ? 1 : 0;
+            if (v != 0)
+                i = maxval;
+        }
+        else
+        {
+            uintmax_t u = *p - '0';
+
+            while (isdigit (*++p) != 0)
+            {
+                v |= ckd_mul (&u, u, 10) ? 1 : 0;
+                v |= ckd_add (&u, u, *p - '0') ? 1 : 0;
+            }
+
+            v |= maxval < u ? 1 : 0;
+            if (v != 0)
+                u = maxval;
+            i = tar_represent_uintmax (u);
+        }
+    }
+    else if (minval < 0 && *p == '-' && isdigit (p[1]))
+    {
+        p++;
+        i = -(*p - '0');
+
+        while (isdigit (*++p) != 0)
+        {
+            v |= ckd_mul (&i, i, 10) ? 1 : 0;
+            v |= ckd_sub (&i, i, *p - '0') ? 1 : 0;
+        }
+
+        v |= i < minval ? 1 : 0;
+        if (v != 0)
+            i = minval;
+    }
+    else
+        i = 0;
+
+    if (arglim != NULL)
+        *arglim = (char *) p;
+    if (overflow != NULL)
+        *overflow = v != 0;
+    return i;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -289,8 +388,7 @@ tar_from_header (const char *where0, size_t digs, char const *type, intmax_t min
             value += *where++ - '0';
             if (where == lim || !is_octal_digit (*where))
                 break;
-            overflow |= value != (value << LG_8 >> LG_8);
-            value <<= LG_8;
+            overflow |= ckd_mul (&value, value, 8);
         }
 
         /* Parse the output of older, unportable tars, which generate
@@ -315,12 +413,10 @@ tar_from_header (const char *where0, size_t digs, char const *type, intmax_t min
                 if (where == lim || !is_octal_digit (*where))
                     break;
                 digit = *where - '0';
-                overflow |= value != (value << LG_8 >> LG_8);
-                value <<= LG_8;
+                overflow |= ckd_mul (&value, value, 8);
             }
 
-            value++;
-            overflow |= value == 0;
+            overflow |= ckd_add (&value, value, 1);
 
             if (!overflow && value <= minus_minval)
                 negative = TRUE;
@@ -338,15 +434,21 @@ tar_from_header (const char *where0, size_t digs, char const *type, intmax_t min
         /* Parse base-64 output produced only by tar test versions
            1.13.6 (1999-08-11) through 1.13.11 (1999-08-23).
            Support for this will be withdrawn in future tar releases. */
-        int dig;
 
         negative = *where++ == '-';
 
-        while (where != lim && (dig = base64_map[(unsigned char) *where]) < 64)
+        while (where != lim)
         {
-            if (value << LG_64 >> LG_64 != value)
+            unsigned char uc = *where;
+            char dig;
+
+            dig = base64_map[uc];
+            if (dig <= 0)
+                break;
+
+            if (ckd_mul (&value, value, 64))
                 return (-1);
-            value = (value << LG_64) | dig;
+            value |= dig - 1;
             where++;
         }
     }
@@ -364,14 +466,16 @@ tar_from_header (const char *where0, size_t digs, char const *type, intmax_t min
         uintmax_t topbits;
 
         signbit = *where & (1 << (LG_256 - 2));
-        topbits =
-            (((uintmax_t) - signbit) << (CHAR_BIT * sizeof (uintmax_t) - LG_256 - (LG_256 - 2)));
+        topbits = ((uintmax_t) - signbit) << (UINTMAX_WIDTH - LG_256 - (LG_256 - 2));
 
         value = (*where++ & ((1 << (LG_256 - 2)) - 1)) - signbit;
 
         while (TRUE)
         {
-            value = (value << LG_256) + (unsigned char) *where++;
+            unsigned char uc;
+
+            uc = *where++;
+            value = (value << LG_256) + uc;
             if (where == lim)
                 break;
 

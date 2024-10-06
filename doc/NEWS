@@ -2,53 +2,53 @@ Version 4.8.32
 
 - Core
 
-  * Tell the current directory to the terminal using OSC 7 sequence (so it can open new tabs there) (#3088)
-  * Preserve ext2fs attributes on copy/move operations (#4532)
-  * Change name of temporary directory: make it unique for each run (#4535)
-  * Hide password in file operation progress dialog (#4541)
-  * Support reget in file move operation (#4563)
-  * Implement nanosecond precision timestamps on non-Linux (macOS, BSD, AIX, Solaris) (#4563)
-  * Remove remaining mmap code to simplify maintenance (#3960)
+    * Tell the current directory to the terminal using OSC 7 sequence (so it can open new tabs there) (#3088)
+    * Preserve ext2fs attributes on copy/move operations (#4532)
+    * Change name of temporary directory: make it unique for each run (#4535)
+    * Hide password in file operation progress dialog (#4541)
+    * Support reget in file move operation (#4563)
+    * Implement nanosecond precision timestamps on non-Linux (macOS, BSD, AIX, Solaris) (#4563)
+    * Remove remaining mmap code to simplify maintenance (#3960)
 
 - VFS
 
-  * extfs: support unrar-7 (#4518)
+    * extfs: support unrar-7 (#4518)
 
 - Editor
 
-  * Improve syntax highlighting:
-      - C and C++ (MidnightCommander/mc#195, #4556)
+    * Improve syntax highlighting:
+        - C and C++ (MidnightCommander/mc#195, #4556)
 
 - Diff viewer
 
-  * Add man page mcdiff.1 (#4224)
+    * Add man page mcdiff.1 (#4224)
 
 - Misc
 
-  * Code cleanup (#4524)
-  * New skins
+    * Code cleanup (#4524)
+    *  New skins
       - xoria256-thin, xoria256root-thin (#4530)
       - modarcon16-defbg-thin, modarcon16-thin, modarcon16root-defbg-thin, modarcon16root-thin (#4530)
       - modarin256-defbg-thin, modarin256-thin, modarin256root-defbg-thin, modarin256root-thin (#4530)
       - julia256root (#4536)
-  * mc.ext.ini: clarify escaping of spaces and parenthesis (#4502)
+    * mc.ext.ini: clarify escaping of spaces and parenthesis (#4502)
 
 - Fixes
 
-  * External editor does not work with arguments in $EDITOR (#4533)
-  * fish shell: strings " cd (printf '%b' ... " in history (#4521)
-  * Redundant back slashes for autocomplete (#4292)
-  * subshell: call execl with argv[0] that is not an actual path to  Bash (#4549)
-  * mcedit: php.syntax: comment highlight from start of light only (#4519)
-  * mcedit: wrong replacement using regular expressions with begin or end of line (#4525, #4526)
-  * mcedit: losing column position when navigating up/down (MidnightCommander/mc#194)
-  * mcedit: macro deletes text (#4540)
-  * mcedit: macros are applied to the pasted text (#4562)
-  * extfs: iso9660: xorriso is slow to open an ISO image (#3570, #4567)
-  * extfs: u7z: wrong add of nested directories to archive (#4559)
-  * extfs: segfault on enter to deleted archive (#4560)
-  * tar: segfault on copy files from archive (#4561)
-  * man: typo (#4550)
+    * External editor does not work with arguments in $EDITOR (#4533)
+    * fish shell: strings " cd (printf '%b' ... " in history (#4521)
+    * Redundant back slashes for autocomplete (#4292)
+    * subshell: call execl with argv[0] that is not an actual path to  Bash (#4549)
+    * mcedit: php.syntax: comment highlight from start of light only (#4519)
+    * mcedit: wrong replacement using regular expressions with begin or end of line (#4525, #4526)
+    * mcedit: losing column position when navigating up/down (MidnightCommander/mc#194)
+    * mcedit: macro deletes text (#4540)
+    * mcedit: macros are applied to the pasted text (#4562)
+    * extfs: iso9660: xorriso is slow to open an ISO image (#3570, #4567)
+    * extfs: u7z: wrong add of nested directories to archive (#4559)
+    * extfs: segfault on enter to deleted archive (#4560)
+    * tar: segfault on copy files from archive (#4561)
+    * man: typo (#4550)
 
 
 Version 4.8.31

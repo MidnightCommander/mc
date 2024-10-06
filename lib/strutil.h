@@ -21,16 +21,16 @@
  * function, that works with invalid strings are marked with "I" 
  * in documentation
  * invalid bytes of string are handled as one byte characters with width 1, they
- * are displayed as questionmarks, I-maked comparing functions try to keep 
+ * are displayed as question marks, I-marked comparing functions try to keep
  * the original value of these bytes.
  */
 
 /* combining characters
- * displaynig: all handled as zero with characters, expect combing character 
+ * displaying: all handled as zero with characters, expect combing character
  * at the begin of string, this character has with one (space add before), 
  * so str_term_width is not good for computing width of singles characters 
  * (never return zero, expect empty string)
- * for compatibility are strings composed before displaynig
+ * for compatibility are strings composed before displaying
  * comparing: comparing decompose all string before comparing, n-compare 
  * functions do not work as is usual, because same strings do not have to be 
  * same length in UTF-8. So they return 0 if one string is prefix of the other 
@@ -54,15 +54,15 @@
  */
 typedef enum
 {
-    /* success means, that conversion has been finished successfully
+    /* Success means, that the conversion has been finished successfully
      */
     ESTR_SUCCESS = 0,
-    /* problem means, that not every characters was successfully converted (They are
-     * replaced with questionmark). So is impossible convert string back. 
+    /* Problem means, that not every character was successfully converted (some are
+     * replaced with question marks). So it is impossible to convert string back.
      */
     ESTR_PROBLEM = 1,
-    /* failure means, that conversion is not possible (example: wrong encoding 
-     * of input string)
+    /* Failure means, that the conversion is not possible (example: wrong encoding
+     * of the input string)
      */
     ESTR_FAILURE = 2
 } estr_t;
@@ -75,9 +75,9 @@ typedef enum
     J_RIGHT = 0x02,
     J_CENTER = 0x03,
     /* if there is enough space for string on terminal,
-     * string is centered otherwise is aligned to left */
+     * string is centered otherwise is aligned to the left */
     J_CENTER_LEFT = 0x04,
-    /* fit alignment, if string is to long, is truncated with '~' */
+    /* fit alignment: if string is too long, truncate with '~' */
     J_LEFT_FIT = 0x11,
     J_RIGHT_FIT = 0x12,
     J_CENTER_FIT = 0x13,
@@ -209,7 +209,7 @@ gchar *str_conv_gerror_message (GError * error, const char *def_msg);
 estr_t str_vfs_convert_from (GIConv coder, const char *string, GString * buffer);
 
 /* if coder is str_cnv_to_term or str_cnv_not_convert, string is only copied,
- * does replace with questionmark 
+ * does replace with question mark
  * I
  */
 estr_t str_vfs_convert_to (GIConv coder, const char *string, int size, GString * buffer);
@@ -353,13 +353,13 @@ gboolean str_isprint (const char *ch);
 gboolean str_iscombiningmark (const char *ch);
 
 /* write lower from of first characters in ch into out
- * decrase remain by size of returned characters
+ * decrease remain by size of returned characters
  * if out is not big enough, do nothing
  */
 gboolean str_toupper (const char *ch, char **out, size_t *remain);
 
 /* write upper from of first characters in ch into out
- * decrase remain by size of returned characters
+ * decrease remain by size of returned characters
  * if out is not big enough, do nothing
  */
 gboolean str_tolower (const char *ch, char **out, size_t *remain);
@@ -538,50 +538,6 @@ const char *str_detect_termencoding (void);
 
 int str_verscmp (const char *s1, const char *s2);
 
-/* Compare version strings:
-
-   Compare strings a and b as file names containing version numbers, and return an integer
-   that is negative, zero, or positive depending on whether a compares less than, equal to,
-   or greater than b.
-
-   Use the following version sort algorithm:
-
-   1. Compare the strings' maximal-length non-digit prefixes lexically.
-   If there is a difference return that difference.
-   Otherwise discard the prefixes and continue with the next step.
-
-   2. Compare the strings' maximal-length digit prefixes, using numeric comparison
-   of the numbers represented by each prefix. (Treat an empty prefix as zero; this can
-   happen only at string end.)
-   If there is a difference, return that difference.
-   Otherwise discard the prefixes and continue with the next step.
-
-   3. If both strings are empty, return 0.  Otherwise continue with step 1.
-
-   In version sort, lexical comparison is left to right, byte by byte, using the byte's numeric
-   value (0-255), except that:
-
-   1. ASCII letters sort before other bytes.
-   2. A tilde sorts before anything, even an empty string.
-
-   In addition to the version sort rules, the following strings have special priority and sort
-   before all other strings (listed in order):
-
-   1. The empty string.
-   2. ".".
-   3. "..".
-   4. Strings starting with "." sort before other strings.
-
-   Before comparing two strings where both begin with non-".", or where both begin with "."
-   but neither is "." or "..", suffixes matching the C-locale extended regular expression
-   (\.[A-Za-z~][A-Za-z0-9~]*)*$ are removed and the strings compared without them, using version sort
-   without special priority; if they do not compare equal, this comparison result is used and
-   the suffixes are effectively ignored. Otherwise, the entire strings are compared using version sort.
-   When removing a suffix from a nonempty string, remove the maximal-length suffix such that
-   the remaining string is nonempty.
- */
-int filevercmp (const char *a, const char *b);
-
 /* Like filevercmp, except compare the byte arrays a (of length alen) and b (of length blen)
    so that a and b can contain '\0', which sorts just before '\1'. But if alen is -1 treat
    a as a string terminated by '\0', and similarly for blen.
@@ -609,7 +565,7 @@ char *str_replace_all (const char *haystack, const char *needle, const char *rep
 
 GPtrArray *str_tokenize (const char *string);
 
-strtol_error_t xstrtoumax (const char *s, char **ptr, int base, uintmax_t * val,
+strtol_error_t xstrtoumax (const char *nptr, char **endptr, int base, uintmax_t * val,
                            const char *valid_suffixes);
 uintmax_t parse_integer (const char *str, gboolean * invalid);
 
@@ -671,6 +627,56 @@ str_move (char *dest, const char *src)
     n = strlen (src) + 1;       /* + '\0' */
 
     return (char *) memmove (dest, src, n);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* Compare version strings:
+
+   Compare strings a and b as file names containing version numbers, and return an integer
+   that is negative, zero, or positive depending on whether a compares less than, equal to,
+   or greater than b.
+
+   Use the following version sort algorithm:
+
+   1. Compare the strings' maximal-length non-digit prefixes lexically.
+   If there is a difference return that difference.
+   Otherwise discard the prefixes and continue with the next step.
+
+   2. Compare the strings' maximal-length digit prefixes, using numeric comparison
+   of the numbers represented by each prefix. (Treat an empty prefix as zero; this can
+   happen only at string end.)
+   If there is a difference, return that difference.
+   Otherwise discard the prefixes and continue with the next step.
+
+   3. If both strings are empty, return 0.  Otherwise continue with step 1.
+
+   In version sort, lexical comparison is left to right, byte by byte, using the byte's numeric
+   value (0-255), except that:
+
+   1. ASCII letters sort before other bytes.
+   2. A tilde sorts before anything, even an empty string.
+
+   In addition to the version sort rules, the following strings have special priority and sort
+   before all other strings (listed in order):
+
+   1. The empty string.
+   2. ".".
+   3. "..".
+   4. Strings starting with "." sort before other strings.
+
+   Before comparing two strings where both begin with non-".", or where both begin with "."
+   but neither is "." or "..", suffixes matching the C-locale extended regular expression
+   (\.[A-Za-z~][A-Za-z0-9~]*)*$ are removed and the strings compared without them, using version sort
+   without special priority; if they do not compare equal, this comparison result is used and
+   the suffixes are effectively ignored. Otherwise, the entire strings are compared using version sort.
+   When removing a suffix from a nonempty string, remove the maximal-length suffix such that
+   the remaining string is nonempty.
+ */
+
+static inline int
+filevercmp (const char *s1, const char *s2)
+{
+    return filenvercmp (s1, -1, s2, -1);
 }
 
 /* --------------------------------------------------------------------------------------------- */

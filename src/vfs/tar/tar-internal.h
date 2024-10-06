@@ -7,6 +7,13 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
+#ifdef HAVE_STDCKDINT_H
+#include <stdckdint.h>
+#else
+#include "lib/stdckdint.h"
+#endif
+
+#include "lib/idx.h"
 #include "lib/vfs/xdirentry.h"  /* vfs_s_super */
 
 /*** typedefs(not structures) and defined constants **********************************************/
@@ -262,8 +269,8 @@ struct tar_stat_info
     gboolean is_sparse;         /**< is the file sparse */
 
     /* For sparse files */
-    unsigned int sparse_major;
-    unsigned int sparse_minor;
+    intmax_t sparse_major;
+    intmax_t sparse_minor;
     GArray *sparse_map;         /**< array of struct sp_array */
 
     off_t real_size;            /**< real size of sparse file */
@@ -283,8 +290,8 @@ struct tar_stat_info
 
 /*** global variables defined in .c file *********************************************************/
 
-extern const int blocking_factor;
-extern const size_t record_size;
+extern const idx_t blocking_factor;
+extern const idx_t record_size;
 
 extern union block *record_end; /* last+1 block of archive record */
 extern union block *current_block;      /* current block of archive */
@@ -301,10 +308,11 @@ extern struct tar_stat_info current_stat_info;
 
 /* tar-internal.c */
 gboolean is_octal_digit (char c);
-void tar_base64_init (void);
 void tar_assign_string (char **string, char *value);
 void tar_assign_string_dup (char **string, const char *value);
 void tar_assign_string_dup_n (char **string, const char *value, size_t n);
+intmax_t stoint (const char *arg, char **arglim, gboolean *overflow, intmax_t minval,
+                 uintmax_t maxval);
 intmax_t tar_from_header (const char *where0, size_t digs, char const *type, intmax_t minval,
                           uintmax_t maxval, gboolean octal_only);
 off_t off_from_header (const char *p, size_t s);

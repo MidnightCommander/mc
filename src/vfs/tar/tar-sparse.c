@@ -41,8 +41,6 @@
 
 #include <config.h>
 
-#include <ctype.h>              /* isdigit() */
-#include <errno.h>
 #include <inttypes.h>           /* uintmax_t */
 
 #include "lib/global.h"
@@ -69,106 +67,10 @@
 
 /*** file scope macro definitions ****************************************************************/
 
-/* The width in bits of the integer type or expression T.
-   Do not evaluate T.  T must not be a bit-field expression.
-   Padding bits are not supported; this is checked at compile-time below.  */
-#define TYPE_WIDTH(t) (sizeof (t) * CHAR_BIT)
-
 /* Bound on length of the string representing an unsigned integer
    value representable in B bits.  log10 (2.0) < 146/485.  The
    smallest value of B where this bound is not tight is 2621.  */
 #define INT_BITS_STRLEN_BOUND(b) (((b) * 146 + 484) / 485)
-
-/* Does the __typeof__ keyword work?  This could be done by
-   'configure', but for now it's easier to do it by hand.  */
-#if (2 <= __GNUC__                                                      \
-     || (4 <= __clang_major__)                                          \
-     || (1210 <= __IBMC__ && defined __IBM__TYPEOF__)                   \
-     || (0x5110 <= __SUNPRO_C && !__STDC__))
-#define _GL_HAVE___TYPEOF__ 1
-#else
-#define _GL_HAVE___TYPEOF__ 0
-#endif
-
-/* Return 1 if the integer type or expression T might be signed.  Return 0
-   if it is definitely unsigned.  T must not be a bit-field expression.
-   This macro does not evaluate its argument, and expands to an
-   integer constant expression.  */
-#if _GL_HAVE___TYPEOF__
-#define _GL_SIGNED_TYPE_OR_EXPR(t) TYPE_SIGNED (__typeof__ (t))
-#else
-#define _GL_SIGNED_TYPE_OR_EXPR(t) 1
-#endif
-
-/* Return a value with the common real type of E and V and the value of V.
-   Do not evaluate E.  */
-#define _GL_INT_CONVERT(e, v) ((1 ? 0 : (e)) + (v))
-
-/* Act like _GL_INT_CONVERT (E, -V) but work around a bug in IRIX 6.5 cc; see
-   <https://lists.gnu.org/r/bug-gnulib/2011-05/msg00406.html>.  */
-#define _GL_INT_NEGATE_CONVERT(e, v) ((1 ? 0 : (e)) - (v))
-
-/* Return 1 if the real expression E, after promotion, has a
-   signed or floating type.  Do not evaluate E.  */
-#define EXPR_SIGNED(e) (_GL_INT_NEGATE_CONVERT (e, 1) < 0)
-
-#define _GL_SIGNED_INT_MAXIMUM(e)                                       \
-    (((_GL_INT_CONVERT (e, 1) << (TYPE_WIDTH (+ (e)) - 2)) - 1) * 2 + 1)
-
-/* The maximum and minimum values for the type of the expression E,
-   after integer promotion.  E is not evaluated.  */
-#define _GL_INT_MINIMUM(e)                                              \
-    (EXPR_SIGNED (e)                                                    \
-        ? ~_GL_SIGNED_INT_MAXIMUM (e)                                   \
-        : _GL_INT_CONVERT (e, 0))
-#define _GL_INT_MAXIMUM(e)                                              \
-    (EXPR_SIGNED (e)                                                    \
-        ? _GL_SIGNED_INT_MAXIMUM (e)                                    \
-        : _GL_INT_NEGATE_CONVERT (e, 1))
-
-/* Return 1 if the expression A <op> B would overflow,
-   where OP_RESULT_OVERFLOW (A, B, MIN, MAX) does the actual test,
-   assuming MIN and MAX are the minimum and maximum for the result type.
-   Arguments should be free of side effects.  */
-#define _GL_BINARY_OP_OVERFLOW(a, b, op_result_overflow)                \
-  op_result_overflow (a, b,                                             \
-                      _GL_INT_MINIMUM (_GL_INT_CONVERT (a, b)),         \
-                      _GL_INT_MAXIMUM (_GL_INT_CONVERT (a, b)))
-
-#define INT_ADD_RANGE_OVERFLOW(a, b, min, max)                          \
-    ((b) < 0                                                            \
-        ? (a) < (min) - (b)                                             \
-        : (max) - (b) < (a))
-
-
-/* True if __builtin_add_overflow_p (A, B, C) works, and similarly for
-   __builtin_sub_overflow_p and __builtin_mul_overflow_p.  */
-#if defined __clang__ || defined __ICC
-/* Clang 11 lacks __builtin_mul_overflow_p, and even if it did it
-   would presumably run afoul of Clang bug 16404.  ICC 2021.1's
-   __builtin_add_overflow_p etc. are not treated as integral constant
-   expressions even when all arguments are.  */
-#define _GL_HAS_BUILTIN_OVERFLOW_P 0
-#elif defined __has_builtin
-#define _GL_HAS_BUILTIN_OVERFLOW_P __has_builtin (__builtin_mul_overflow_p)
-#else
-#define _GL_HAS_BUILTIN_OVERFLOW_P (7 <= __GNUC__)
-#endif
-
-/* The _GL*_OVERFLOW macros have the same restrictions as the
- *_RANGE_OVERFLOW macros, except that they do not assume that operands
- (e.g., A and B) have the same type as MIN and MAX.  Instead, they assume
- that the result (e.g., A + B) has that type.  */
-#if _GL_HAS_BUILTIN_OVERFLOW_P
-#define _GL_ADD_OVERFLOW(a, b, min, max)                                \
-   __builtin_add_overflow_p (a, b, (__typeof__ ((a) + (b))) 0)
-#else
-#define _GL_ADD_OVERFLOW(a, b, min, max)                                \
-   ((min) < 0 ? INT_ADD_RANGE_OVERFLOW (a, b, min, max)                 \
-    : (a) < 0 ? (b) <= (a) + (b)                                        \
-    : (b) < 0 ? (a) <= (a) + (b)                                        \
-    : (a) + (b) < (b))
-#endif
 
 /* Bound on length of the string representing an integer type or expression T.
    T must not be a bit-field expression.
@@ -179,8 +81,8 @@
    Because _GL_SIGNED_TYPE_OR_EXPR sometimes returns 1 when its argument is
    unsigned, this macro may overestimate the true bound by one byte when
    applied to unsigned types of size 2, 4, 16, ... bytes.  */
-#define INT_STRLEN_BOUND(t)                                               \
-    (INT_BITS_STRLEN_BOUND (TYPE_WIDTH (t) - _GL_SIGNED_TYPE_OR_EXPR (t)) \
+#define INT_STRLEN_BOUND(t)                                                   \
+    (INT_BITS_STRLEN_BOUND (_GL_TYPE_WIDTH (t) - _GL_SIGNED_TYPE_OR_EXPR (t)) \
         + _GL_SIGNED_TYPE_OR_EXPR (t))
 
 /* Bound on buffer size needed to represent an integer type or expression T,
@@ -188,9 +90,6 @@
 #define INT_BUFSIZE_BOUND(t) (INT_STRLEN_BOUND (t) + 1)
 
 #define UINTMAX_STRSIZE_BOUND INT_BUFSIZE_BOUND (uintmax_t)
-
-#define INT_ADD_OVERFLOW(a, b) \
-    _GL_BINARY_OP_OVERFLOW (a, b, _GL_ADD_OVERFLOW)
 
 #define SPARSES_INIT_COUNT SPARSES_IN_SPARSE_HEADER
 
@@ -367,20 +266,11 @@ static struct tar_sparse_optab const pax_optab = {
 static gboolean
 decode_num (uintmax_t *num, const char *arg, uintmax_t maxval)
 {
-    uintmax_t u;
     char *arg_lim;
+    gboolean overflow;
 
-    if (!isdigit (*arg))
-        return FALSE;
-
-    errno = 0;
-    u = (uintmax_t) g_ascii_strtoll (arg, &arg_lim, 10);
-
-    if (!(u <= maxval && errno != ERANGE) || *arg_lim != '\0')
-        return FALSE;
-
-    *num = u;
-    return TRUE;
+    *num = stoint (arg, &arg_lim, &overflow, 0, maxval);
+    return (((arg_lim == arg ? 1 : 0) | (*arg_lim != '\0') | (overflow ? 1 : 0)) == 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -493,6 +383,7 @@ static enum oldgnu_add_status
 oldgnu_add_sparse (struct tar_sparse_file *file, struct sparse *s)
 {
     struct sp_array sp;
+    off_t size;
 
     if (s->numbytes[0] == '\0')
         return add_finish;
@@ -500,10 +391,8 @@ oldgnu_add_sparse (struct tar_sparse_file *file, struct sparse *s)
     sp.offset = OFF_FROM_HEADER (s->offset);
     sp.numbytes = OFF_FROM_HEADER (s->numbytes);
 
-    if (sp.offset < 0 || sp.numbytes < 0
-        || INT_ADD_OVERFLOW (sp.offset, sp.numbytes)
-        || file->stat_info->stat.st_size < sp.offset + sp.numbytes
-        || file->stat_info->archive_file_size < 0)
+    if (sp.offset < 0 || sp.numbytes < 0 || ckd_add (&size, sp.offset, sp.numbytes)
+        || file->stat_info->stat.st_size < size || file->stat_info->archive_file_size < 0)
         return add_fail;
 
     sparse_add_map (file->stat_info, &sp);
@@ -681,7 +570,7 @@ pax_decode_header (tar_super_t *archive, struct tar_sparse_file *file)
         p = blk->buffer;
         COPY_BUF (archive, blk, nbuf, p);
 
-        if (!decode_num (&u, nbuf, TYPE_MAXIMUM (size_t)))
+        if (!decode_num (&u, nbuf, SIZE_MAX))
         {
             /* malformed sparse archive member */
             return FALSE;
@@ -698,6 +587,7 @@ pax_decode_header (tar_super_t *archive, struct tar_sparse_file *file)
         for (i = 0; i < sparse_map_len; i++)
         {
             struct sp_array sp;
+            off_t size;
 
             COPY_BUF (archive, blk, nbuf, p);
             if (!decode_num (&u, nbuf, TYPE_MAXIMUM (off_t)))
@@ -707,8 +597,8 @@ pax_decode_header (tar_super_t *archive, struct tar_sparse_file *file)
             }
             sp.offset = u;
             COPY_BUF (archive, blk, nbuf, p);
-            if (!decode_num (&u, nbuf, TYPE_MAXIMUM (size_t)) || INT_ADD_OVERFLOW (sp.offset, u)
-                || (uintmax_t) file->stat_info->stat.st_size < sp.offset + u)
+            if (!decode_num (&u, nbuf, TYPE_MAXIMUM (off_t)) || ckd_add (&size, sp.offset, u)
+                || file->stat_info->stat.st_size < size)
             {
                 /* malformed sparse archive member */
                 return FALSE;

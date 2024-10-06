@@ -554,10 +554,12 @@ int mc_##name (const vfs_path_t *vpath, struct stat *buf) \
 MC_STATOP (stat)
 MC_STATOP (lstat)
 
+/* *INDENT-ON* */
+
 /* --------------------------------------------------------------------------------------------- */
 
 vfs_path_t *
-mc_getlocalcopy (const vfs_path_t * pathname_vpath)
+mc_getlocalcopy (const vfs_path_t *pathname_vpath)
 {
     vfs_path_t *result = NULL;
     struct vfs_class *me;
@@ -579,7 +581,7 @@ mc_getlocalcopy (const vfs_path_t * pathname_vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-mc_ungetlocalcopy (const vfs_path_t * pathname_vpath, const vfs_path_t * local_vpath,
+mc_ungetlocalcopy (const vfs_path_t *pathname_vpath, const vfs_path_t *local_vpath,
                    gboolean has_changed)
 {
     int result = -1;
@@ -608,7 +610,7 @@ mc_ungetlocalcopy (const vfs_path_t * pathname_vpath, const vfs_path_t * local_v
  */
 
 int
-mc_chdir (const vfs_path_t * vpath)
+mc_chdir (const vfs_path_t *vpath)
 {
     struct vfs_class *old_vfs;
     vfsid old_vfsid;
@@ -729,7 +731,7 @@ mc_lseek (int fd, off_t offset, int whence)
  */
 
 int
-mc_mkstemps (vfs_path_t ** pname_vpath, const char *prefix, const char *suffix)
+mc_mkstemps (vfs_path_t **pname_vpath, const char *prefix, const char *suffix)
 {
     char *p1, *p2;
     int fd;
@@ -774,13 +776,17 @@ mc_tmpdir (void)
     static char buffer[PATH_MAX];
     static const char *tmpdir = NULL;
     const char *sys_tmp;
-    struct stat st;
     gchar *template;
 
     /* Check if already correctly initialized */
-    if (tmpdir != NULL && lstat (tmpdir, &st) == 0 && S_ISDIR (st.st_mode) &&
-        st.st_uid == getuid () && (st.st_mode & 0777) == 0700)
-        return tmpdir;
+    if (tmpdir != NULL)
+    {
+        struct stat st;
+
+        if (lstat (tmpdir, &st) == 0 && S_ISDIR (st.st_mode) && st.st_uid == getuid ()
+            && (st.st_mode & 0777) == 0700)
+            return tmpdir;
+    }
 
     sys_tmp = getenv ("MC_TMPDIR");
     if (sys_tmp == NULL || !IS_PATH_SEP (sys_tmp[0]))

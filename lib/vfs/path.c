@@ -1362,7 +1362,7 @@ vfs_path_append_vpath_new (const vfs_path_t *first_vpath, ...)
 /* --------------------------------------------------------------------------------------------- */
 
 /**
- * get tockens count in path.
+ * get tokens count in path.
  *
  * @param vpath path object
  *

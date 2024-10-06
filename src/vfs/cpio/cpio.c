@@ -560,6 +560,7 @@ cpio_read_bin_head (struct vfs_class *me, struct vfs_s_super *super)
     if (arch->type == CPIO_BINRE)
     {
         int i;
+
         for (i = 0; i < (HEAD_LENGTH >> 1); i++)
             u.shorts[i] = GUINT16_SWAP_LE_BE_CONSTANT (u.shorts[i]);
     }
@@ -580,7 +581,7 @@ cpio_read_bin_head (struct vfs_class *me, struct vfs_s_super *super)
     CPIO_POS (super) += len;
     cpio_skip_padding (super);
 
-    if (!strcmp ("TRAILER!!!", name))
+    if (strcmp ("TRAILER!!!", name) == 0)
     {                           /* We got to the last record */
         g_free (name);
         return STATUS_TRAIL;
@@ -653,7 +654,7 @@ cpio_read_oldc_head (struct vfs_class *me, struct vfs_s_super *super)
     CPIO_POS (super) += len;
     cpio_skip_padding (super);
 
-    if (!strcmp ("TRAILER!!!", name))
+    if (strcmp ("TRAILER!!!", name) == 0)
     {                           /* We got to the last record */
         g_free (name);
         return STATUS_TRAIL;
@@ -831,6 +832,7 @@ cpio_super_same (const vfs_path_element_t *vpath_element, struct vfs_s_super *pa
         vfs_rmstamp (vfs_cpiofs_ops, (vfsid) parc);
         return 2;
     }
+
     /* Hasn't been modified, give it a new timeout */
     vfs_stamp (vfs_cpiofs_ops, (vfsid) parc);
     return 1;

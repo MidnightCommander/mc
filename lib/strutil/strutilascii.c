@@ -206,7 +206,11 @@ str_ascii_length (const char *text)
 static int
 str_ascii_length2 (const char *text, int size)
 {
-    return (size >= 0) ? MIN (strlen (text), (gsize) size) : strlen (text);
+    size_t length;
+
+    length = strlen (text);
+
+    return (size >= 0) ? MIN (length, (size_t) size) : length;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -423,7 +427,11 @@ str_ascii_term_trim (const char *text, int width)
 static int
 str_ascii_term_width2 (const char *text, size_t length)
 {
-    return (length != (size_t) (-1)) ? MIN (strlen (text), length) : strlen (text);
+    size_t text_len;
+
+    text_len = strlen (text);
+
+    return (length != (size_t) (-1)) ? MIN (text_len, length) : text_len;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -642,7 +650,12 @@ str_ascii_compare (const char *t1, const char *t2)
 static int
 str_ascii_ncompare (const char *t1, const char *t2)
 {
-    return strncmp (t1, t2, MIN (strlen (t1), strlen (t2)));
+    size_t l1, l2;
+
+    l1 = strlen (t1);
+    l2 = strlen (t2);
+
+    return strncmp (t1, t2, MIN (l1, l2));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -658,7 +671,12 @@ str_ascii_casecmp (const char *t1, const char *t2)
 static int
 str_ascii_ncasecmp (const char *t1, const char *t2)
 {
-    return g_ascii_strncasecmp (t1, t2, MIN (strlen (t1), strlen (t2)));
+    size_t l1, l2;
+
+    l1 = strlen (t1);
+    l2 = strlen (t2);
+
+    return g_ascii_strncasecmp (t1, t2, MIN (l1, l2));
 }
 
 /* --------------------------------------------------------------------------------------------- */
