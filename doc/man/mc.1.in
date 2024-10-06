@@ -2571,9 +2571,15 @@ skipped.
 There are three other dialogs which you can run into during the file
 operations.
 .PP
-The error dialog informs about error conditions and has three choices.
-Normally you select either the Skip button to skip the file or the Abort
-button to abort the operation altogether.  You can also select the Retry
+The error dialog informs about error conditions and has four choices.
+Normally you select either the
+.I [Ignore]
+button to ignore this error, or the
+.I [Ignore all]
+button to ignore this and all future errors, or the
+.I [Abort]
+button to abort the operation altogether.  You can also select the
+.I [Retry]
 button if you fixed the problem from another terminal.
 .PP
 The replace dialog is shown when you attempt to copy or move a file on
