@@ -80,7 +80,7 @@ file_op_context_new (FileOperation op)
     ctx->preserve_uidgid = (geteuid () == 0);
     ctx->umask_kill = (mode_t) (~0);
     ctx->erase_at_end = TRUE;
-    ctx->skip_all = FALSE;
+    ctx->ignore_all = FALSE;
 
     return ctx;
 }

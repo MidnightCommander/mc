@@ -52,7 +52,8 @@ typedef enum
     FILE_RETRY,
     FILE_SKIP,
     FILE_ABORT,
-    FILE_SKIPALL,
+    FILE_IGNORE,
+    FILE_IGNORE_ALL,
     FILE_SUSPEND
 } FileProgressStatus;
 
@@ -146,7 +147,7 @@ typedef struct
     pid_t pid;
 
     /* toggle if all errors should be ignored */
-    gboolean skip_all;
+    gboolean ignore_all;
 
     /* Whether the file operation is in pause */
     gboolean suspended;
