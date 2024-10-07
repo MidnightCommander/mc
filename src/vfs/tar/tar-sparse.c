@@ -72,19 +72,6 @@
    smallest value of B where this bound is not tight is 2621.  */
 #define INT_BITS_STRLEN_BOUND(b) (((b) * 146 + 484) / 485)
 
-/* Bound on length of the string representing an integer type or expression T.
-   T must not be a bit-field expression.
-
-   Subtract 1 for the sign bit if T is signed, and then add 1 more for
-   a minus sign if needed.
-
-   Because _GL_SIGNED_TYPE_OR_EXPR sometimes returns 1 when its argument is
-   unsigned, this macro may overestimate the true bound by one byte when
-   applied to unsigned types of size 2, 4, 16, ... bytes.  */
-#define INT_STRLEN_BOUND(t)                                                   \
-    (INT_BITS_STRLEN_BOUND (_GL_TYPE_WIDTH (t) - _GL_SIGNED_TYPE_OR_EXPR (t)) \
-        + _GL_SIGNED_TYPE_OR_EXPR (t))
-
 /* Bound on buffer size needed to represent an integer type or expression T,
    including the terminating null.  T must not be a bit-field expression.  */
 #define INT_BUFSIZE_BOUND(t) (INT_STRLEN_BOUND (t) + 1)

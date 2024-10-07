@@ -12,7 +12,7 @@
 #else
 #include "lib/stdckdint.h"
 #endif
-
+#include "lib/intprops.h"
 #include "lib/idx.h"
 #include "lib/vfs/xdirentry.h"  /* vfs_s_super */
 
@@ -63,12 +63,6 @@
 
 #define GNUTYPE_SPARSE 'S'
 
-
-/* These macros work even on ones'-complement hosts (!).
-   The extra casts work around some compiler bugs. */
-#define TYPE_SIGNED(t) (!((t) 0 < (t) (-1)))
-#define TYPE_MINIMUM(t) (TYPE_SIGNED (t) ? ~(t) 0 << (sizeof (t) * CHAR_BIT - 1) : (t) 0)
-#define TYPE_MAXIMUM(t) (~(t) 0 - TYPE_MINIMUM (t))
 
 #define OFF_FROM_HEADER(where) off_from_header (where, sizeof (where))
 
