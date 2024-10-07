@@ -314,7 +314,7 @@ decode_timespec (const char *arg, char **arg_lim, gboolean parse_fraction)
 static gboolean
 decode_time (struct timespec *ts, const char *arg, const char *keyword)
 {
-    char *arg_lim;
+    char *arg_lim = NULL;
     struct timespec t;
 
     (void) keyword;
