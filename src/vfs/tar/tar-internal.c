@@ -128,7 +128,7 @@ tar_flush_read (tar_super_t *archive)
     size_t status;
 
     status = mc_read (archive->fd, archive->record_start->buffer, record_size);
-    if (status == record_size)
+    if ((idx_t) status == record_size)
         return TRUE;
 
     return tar_short_read (status, archive);
@@ -286,7 +286,7 @@ stoint (const char *arg, char **arglim, gboolean *overflow, intmax_t minval, uin
                 v |= ckd_add (&i, i, *p - '0') ? 1 : 0;
             }
 
-            v |= maxval < i ? 1 : 0;
+            v |= maxval < (uintmax_t) i ? 1 : 0;
             if (v != 0)
                 i = maxval;
         }
