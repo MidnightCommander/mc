@@ -976,7 +976,6 @@ user_menu_cmd (const Widget *edit_widget, const char *menu_file, int selected_en
     char *data, *p;
     GPtrArray *entries = NULL;
     int max_cols = 0;
-    int menu_limit = 0;
     int col = 0;
     int i;
     gboolean accept_entry = TRUE;
