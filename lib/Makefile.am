@@ -17,7 +17,8 @@ SUBLIB_includes = \
 	event.h event-types.h \
 	filehighlight.h \
 	idx.h \
-	intprops-internal.h
+	intprops-internal.h \
+	intprops.h \
 	mcconfig.h \
 	search.h \
 	skin.h \

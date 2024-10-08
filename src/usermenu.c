@@ -976,9 +976,7 @@ user_menu_cmd (const Widget *edit_widget, const char *menu_file, int selected_en
     char *data, *p;
     GPtrArray *entries = NULL;
     int max_cols = 0;
-    int menu_limit = 0;
     int col = 0;
-    int i;
     gboolean accept_entry = TRUE;
     int selected = 0;
     gboolean old_patterns;
@@ -1039,7 +1037,7 @@ user_menu_cmd (const Widget *edit_widget, const char *menu_file, int selected_en
     /* Parse the menu file */
     for (p = check_patterns (data); *p != '\0'; str_next_char (&p))
     {
-        int menu_lines = entries == NULL ? 0 : entries->len;
+        unsigned int menu_lines = entries == NULL ? 0 : entries->len;
 
         if (col == 0 && (entries == NULL || menu_lines == entries->len))
             switch (*p)
@@ -1078,9 +1076,10 @@ user_menu_cmd (const Widget *edit_widget, const char *menu_file, int selected_en
                 else
                 {
                     /* A condition for making the entry default */
-                    i = 1;
-                    p = test_line (edit_widget, p, &i);
-                    if (selected == 0 && i != 0)
+                    gboolean ok = TRUE;
+
+                    p = test_line (edit_widget, p, &ok);
+                    if (selected == 0 && ok)
                         selected = menu_lines;
                 }
                 break;
@@ -1125,6 +1124,7 @@ user_menu_cmd (const Widget *edit_widget, const char *menu_file, int selected_en
         else
         {
             Listbox *listbox;
+            unsigned int i;
 
             max_cols = MIN (MAX (max_cols, col), MAX_ENTRY_LEN);
 

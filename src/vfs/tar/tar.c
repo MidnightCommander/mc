@@ -327,7 +327,7 @@ tar_available_space_after (const union block *pointer)
 static read_header
 tar_checksum (const union block *header)
 {
-    int i;
+    unsigned int i;
     int unsigned_sum = 0;       /* the POSIX one :-) */
     int signed_sum = 0;         /* the Sun one :-( */
     int recorded_sum;
