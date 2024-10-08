@@ -9,7 +9,7 @@ AC_DEFUN_ONCE([gl_ENVIRON],
 [
   AC_REQUIRE([gl_UNISTD_H_DEFAULTS])
   dnl Persuade glibc <unistd.h> to declare environ.
-  AC_REQUIRE([gl_USE_SYSTEM_EXTENSIONS])
+  AC_REQUIRE([AC_USE_SYSTEM_EXTENSIONS])
 
   AC_CHECK_HEADERS_ONCE([unistd.h])
   gt_CHECK_VAR_DECL(
