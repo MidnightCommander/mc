@@ -346,6 +346,8 @@ dnl ############################################################################
 dnl OS specific stuff
 dnl ############################################################################
 
+gl_ENVIRON
+
 case $host_os in
 *os400)
     AC_PATH_PROG([PERL], [perl], [/QOpenSys/pkgs/bin/perl])
