@@ -1,4 +1,5 @@
 m4_include([m4.include/gnulib/mc-gnulib-common.m4])
+m4_include([m4.include/gnulib/unistd_h.m4])
 m4_include([m4.include/gnulib/environ.m4])
 m4_include([m4.include/gnulib/mode_t.m4])
 m4_include([m4.include/gnulib/stat-size.m4])
