@@ -347,6 +347,7 @@ dnl OS specific stuff
 dnl ############################################################################
 
 gl_ENVIRON
+gl_UNISTD_MODULE_INDICATOR([environ])
 
 case $host_os in
 *os400)
