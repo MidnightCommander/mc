@@ -32,7 +32,7 @@
 
 #*** file scope functions **********************************************
 
-XORRISO=$(command -v xorriso >/dev/null 2>&1)
+XORRISO=$(command -v xorriso 2>/dev/null)
 
 # This snippet is used to undo xorriso's Text_shellsafe(). Pseudocode for the
 # function:
@@ -143,7 +143,7 @@ xorriso_rm() {
 
 # tested to comply with isoinfo 2.0's output
 test_iso () {
-    ISOINFO=$(command -v isoinfo >/dev/null 2>&1)
+    ISOINFO=$(command -v isoinfo 2>/dev/null)
     if test -z "$ISOINFO"; then
         echo "isoinfo not found" >&2
         return 1

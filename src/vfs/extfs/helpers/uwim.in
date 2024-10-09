@@ -11,7 +11,7 @@
 # apt install wimtools
 
 command -v wimlib-imagex >/dev/null 2>&1 || exit 1
-WIM=`command -v wimlib-imagex >/dev/null 2>&1`
+WIM=`command -v wimlib-imagex 2>/dev/null`
 AWK=@AWK@
 
 [ -n "$2" ] || exit 1
