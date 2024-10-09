@@ -17,10 +17,10 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-P7ZIP=`command -v 7z >/dev/null 2>&1` \
-    || P7ZIP=`command -v 7zz >/dev/null 2>&1` \
-    || P7ZIP=`command -v 7za >/dev/null 2>&1` \
-    || P7ZIP=`command -v 7zr >/dev/null 2>&1` \
+P7ZIP=`command -v 7z 2>/dev/null` \
+    || P7ZIP=`command -v 7zz 2>/dev/null` \
+    || P7ZIP=`command -v 7za 2>/dev/null` \
+    || P7ZIP=`command -v 7zr 2>/dev/null` \
     || P7ZIP=""
 
 # Let the test framework hook in:
