@@ -253,8 +253,8 @@ static struct tar_sparse_optab const pax_optab = {
 static gboolean
 decode_num (uintmax_t *num, const char *arg, uintmax_t maxval)
 {
-    char *arg_lim;
-    gboolean overflow;
+    char *arg_lim = NULL;
+    gboolean overflow = FALSE;
 
     *num = stoint (arg, &arg_lim, &overflow, 0, maxval);
     return !(arg_lim == arg || *arg_lim != '\0' || overflow);
