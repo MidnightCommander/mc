@@ -255,7 +255,7 @@ static struct timespec
 decode_timespec (const char *arg, char **arg_lim, gboolean parse_fraction)
 {
     int ns = -1;
-    gboolean overflow;
+    gboolean overflow = FALSE;
     time_t s;
     char const *p;
     struct timespec r;
@@ -341,8 +341,8 @@ static gboolean
 decode_signed_num (intmax_t *num, const char *arg, intmax_t minval, uintmax_t maxval,
                    const char *keyword)
 {
-    char *arg_lim;
-    gboolean overflow;
+    char *arg_lim = NULL;
+    gboolean overflow = FALSE;
     intmax_t u;
 
     (void) keyword;
@@ -583,7 +583,7 @@ decode_record (struct xheader *xhdr, char **ptr,
     char *start = *ptr;
     char *p = start;
     idx_t len;
-    char *len_lim;
+    char *len_lim = NULL;
     const char *keyword;
     char *nextp;
     idx_t len_max;
@@ -802,8 +802,8 @@ sparse_map_decoder (struct tar_stat_info *st, const char *keyword, const char *a
     while (TRUE)
     {
         off_t u;
-        char *delim;
-        gboolean overflow;
+        char *delim = NULL;
+        gboolean overflow = FALSE;
 
         u = stoint (arg, &delim, &overflow, 0, TYPE_MAXIMUM (off_t));
 
