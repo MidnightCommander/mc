@@ -257,10 +257,11 @@ decode_timespec (const char *arg, char **arg_lim, gboolean parse_fraction)
     int ns = -1;
     gboolean overflow;
     time_t s;
-    char const *p = *arg_lim;
+    char const *p;
     struct timespec r;
 
     s = stoint (arg, arg_lim, &overflow, TYPE_MINIMUM (time_t), TYPE_MAXIMUM (time_t));
+    p = *arg_lim;
 
     if (p != arg)
     {
