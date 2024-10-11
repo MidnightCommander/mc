@@ -430,10 +430,14 @@ init_subshell_child (const char *pty_name)
         execl (mc_global.shell->path, mc_global.shell->path, "-Z", "-g", (char *) NULL);
         break;
 
+    case SHELL_FISH:
+        execl (mc_global.shell->path, mc_global.shell->path,
+               "--init-command", "set --global __mc_csi_u 1", (char *) NULL);
+        break;
+
     case SHELL_ASH_BUSYBOX:
     case SHELL_DASH:
     case SHELL_TCSH:
-    case SHELL_FISH:
         execl (mc_global.shell->path, mc_global.shell->path, (char *) NULL);
         break;
 
