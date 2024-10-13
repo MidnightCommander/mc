@@ -1090,9 +1090,13 @@ init_subshell_precmd (char *precmd, size_t buff_size)
                     " bind -x '\"\\e" SHELL_BUFFER_KEYBINDING "\":\"mc_print_command_buffer\"'\n"
                     " bind -x '\"\\e" SHELL_CURSOR_KEYBINDING
                     "\":\"echo $BASH_VERSINFO:$READLINE_POINT >&%d\"'\n"
-                    " PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND\n}'pwd>&%d;kill -STOP $$'\n"
+                    " if test ${BASH_VERSION%%%%.*} -ge 5 && [[ ${PROMPT_COMMAND@a} == *a* ]] 2> /dev/null; then\n"
+                    "   eval \"PROMPT_COMMAND+=( 'pwd>&%d;kill -STOP $$' )\"\n"
+                    " else\n"
+                    "   PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND\n}'pwd>&%d;kill -STOP $$'\n"
+                    " fi\n"
                     "PS1='\\u@\\h:\\w\\$ '\n", command_buffer_pipe[WRITE],
-                    command_buffer_pipe[WRITE], subshell_pipe[WRITE]);
+                    command_buffer_pipe[WRITE], subshell_pipe[WRITE], subshell_pipe[WRITE]);
         break;
 
     case SHELL_ASH_BUSYBOX:
