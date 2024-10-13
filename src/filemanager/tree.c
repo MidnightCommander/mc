@@ -763,7 +763,7 @@ tree_move (WTree *tree, const char *default_dest)
             message (D_ERROR, MSG_ERROR, _("Cannot stat the destination\n%s"),
                      unix_error_string (errno));
         else if (!S_ISDIR (buf.st_mode))
-            file_error (TRUE, _("Destination \"%s\" must be a directory\n%s"), dest);
+            file_error (NULL, TRUE, _("Destination \"%s\" must be a directory\n%s"), dest);
         else
         {
             file_op_context_t *ctx;

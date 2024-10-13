@@ -521,6 +521,8 @@ overwrite_query_dialog (file_op_context_t *ctx, enum OperationMode mode)
     unsigned long yes_id, no_id;
     int result;
 
+    const gint64 t = g_get_monotonic_time ();
+
     if (mode == Foreground)
         title = _("File exists");
     else
@@ -692,6 +694,8 @@ overwrite_query_dialog (file_op_context_t *ctx, enum OperationMode mode)
         ui->dont_overwrite_with_zero = CHECK (dlg_widgets[14].widget)->state;
 
     widget_destroy (wd);
+
+    ctx->pauses += g_get_monotonic_time () - t;
 
     return (result == B_CANCEL) ? REPLACE_ABORT : (replace_action_t) result;
 
@@ -1131,7 +1135,8 @@ file_progress_show_total (file_op_context_t *ctx, uintmax_t copied_bytes, gint64
     {
         char buffer4[BUF_TINY];
 
-        file_frmt_time (buffer2, (tv_current - ctx->total_transfer_start) / G_USEC_PER_SEC);
+        file_frmt_time (buffer2,
+                        (tv_current - ctx->pauses - ctx->total_transfer_start) / G_USEC_PER_SEC);
 
         if (ctx->totals_computed)
         {

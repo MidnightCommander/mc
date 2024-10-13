@@ -147,6 +147,9 @@ typedef struct
     /* Used in OP_MOVE between copy and remove directories */
     size_t prev_total_progress_count;
 
+    /* Time of pauses in query dialogs */
+    gint64 pauses;
+
     /* User interface data goes here */
     void *ui;
 } file_op_context_t;
