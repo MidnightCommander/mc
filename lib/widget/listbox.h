@@ -62,6 +62,7 @@ extern const global_keymap_t *listbox_map;
 
 WListbox *listbox_new (int y, int x, int height, int width, gboolean deletable, lcback_fn callback);
 int listbox_search_text (WListbox * l, const char *text);
+int listbox_search_first_text (WListbox * l, const char *text);
 int listbox_search_data (WListbox * l, const void *data);
 void listbox_select_first (WListbox * l);
 void listbox_select_last (WListbox * l);
