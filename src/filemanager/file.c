@@ -2970,19 +2970,19 @@ copy_dir_dir (file_op_total_context_t *tctx, file_op_context_t *ctx, const char 
     /* First get the mode of the source dir */
 
   retry_src_stat:
-    if ((*ctx->stat_func) (src_vpath, &src_stat) != 0)
+    while ((*ctx->stat_func) (src_vpath, &src_stat) != 0)
     {
         if (ctx->ignore_all)
             return_status = FILE_IGNORE_ALL;
         else
         {
             return_status = file_error (TRUE, _("Cannot stat source directory \"%s\"\n%s"), s);
-            if (return_status == FILE_RETRY)
-                goto retry_src_stat;
             if (return_status == FILE_IGNORE_ALL)
                 ctx->ignore_all = TRUE;
         }
-        goto ret_fast;
+
+        if (return_status != FILE_RETRY)
+            goto ret_fast;
     }
 
     while (attrs_ok && mc_fgetflags (src_vpath, &attrs) != 0)
@@ -2991,27 +2991,25 @@ copy_dir_dir (file_op_total_context_t *tctx, file_op_context_t *ctx, const char 
 
         /* don't show an error message if attributes aren't supported in this FS */
         if (attrs_ignore_error (errno))
-        {
             return_status = FILE_CONT;
-            break;
-        }
-
-        if (ctx->ignore_all)
+        else if (ctx->ignore_all)
             return_status = FILE_IGNORE_ALL;
         else
         {
             return_status =
                 file_error (TRUE, _("Cannot get ext2 attributes of source directory \"%s\"\n%s"),
                             s);
-            if (return_status == FILE_RETRY)
-            {
-                attrs_ok = TRUE;
-                continue;
-            }
             if (return_status == FILE_IGNORE_ALL)
                 ctx->ignore_all = TRUE;
+            if (return_status == FILE_ABORT)
+                goto ret_fast;
         }
-        goto ret_fast;
+
+        if (return_status != FILE_RETRY)
+            break;
+
+        /* yet another attempt */
+        attrs_ok = TRUE;
     }
 
     if (is_in_linklist (dest_dirs, src_vpath, &src_stat) != NULL)
