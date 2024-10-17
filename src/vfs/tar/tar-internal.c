@@ -45,6 +45,10 @@
 
 /*** file scope macro definitions ****************************************************************/
 
+#ifndef UINTMAX_WIDTH
+#define UINTMAX_WIDTH (sizeof (uintmax_t) * CHAR_BIT)
+#endif
+
 /* Log base 2 of common values. */
 #define LG_8 3
 #define LG_256 8
