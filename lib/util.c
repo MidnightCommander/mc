@@ -634,7 +634,7 @@ load_mc_home_file (const char *from, const char *filename, char **allocated_file
 
 /* --------------------------------------------------------------------------------------------- */
 
-const const char *
+const char *
 extract_line (const char *s, const char *top, size_t *len)
 {
     static char tmp_line[BUF_MEDIUM];

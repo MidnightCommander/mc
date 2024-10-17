@@ -198,7 +198,7 @@ const char *get_group (gid_t gid);
 const char *get_owner (uid_t uid);
 
 /* Returns a copy of *s until a \n is found and is below top */
-const const char *extract_line (const char *s, const char *top, size_t *len);
+const char *extract_line (const char *s, const char *top, size_t *len);
 
 /* Process spawning */
 int my_system (int flags, const char *shell, const char *command);
