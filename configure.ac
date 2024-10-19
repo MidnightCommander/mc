@@ -346,6 +346,10 @@ dnl ############################################################################
 dnl OS specific stuff
 dnl ############################################################################
 
+AC_CHECK_DECLS([environ], , ,
+  [ #include <unistd.h>
+    #include <stdlib.h> ])
+
 case $host_os in
 *os400)
     AC_PATH_PROG([PERL], [perl], [/QOpenSys/pkgs/bin/perl])

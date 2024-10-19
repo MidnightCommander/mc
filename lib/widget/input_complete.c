@@ -54,8 +54,7 @@
 
 /*** global variables ****************************************************************************/
 
-/* Linux declares environ in <unistd.h>, so don't repeat it here. */
-#if (!(defined(__linux__) && defined (__USE_GNU)) && !defined(__CYGWIN__))
+#if !HAVE_DECL_ENVIRON
 extern char **environ;
 #endif
 
