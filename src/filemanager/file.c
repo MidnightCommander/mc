@@ -1435,10 +1435,10 @@ try_erase_dir (file_op_context_t *ctx, const vfs_path_t *vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 /**
-  Recursive remove of files
-  abort->cancel stack
-  skip ->warn every level, gets default
-  ignore_all->remove as much as possible
+  Recursive removal of files
+  abort -> cancel stack
+  ignore -> warn every level, gets default
+  ignore_all -> remove as much as possible
 */
 static FileProgressStatus
 recursive_erase (file_op_total_context_t *tctx, file_op_context_t *ctx, const vfs_path_t *vpath)
@@ -2195,7 +2195,7 @@ end_bg_process (file_op_context_t *ctx, enum OperationMode mode)
  * On some Linux kernels (tested on 4.9, 5.4) there is ENOTTY on tmpfs.
  */
 static inline gboolean
-attrs_ignore_error (int e)
+attrs_ignore_error (const int e)
 {
     return (e == ENOTSUP || e == EOPNOTSUPP || e == ENOSYS || e == EINVAL || e == ENOTTY
             || e == ELOOP || e == ENXIO);
