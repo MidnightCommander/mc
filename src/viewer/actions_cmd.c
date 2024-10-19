@@ -168,6 +168,7 @@ mcview_hook (void *v)
 {
     WView *view = (WView *) v;
     WPanel *panel;
+    const file_entry_t *fe;
 
     /* If the user is busy typing, wait until he finishes to update the
        screen */
@@ -187,9 +188,13 @@ mcview_hook (void *v)
     else
         return;
 
+    fe = panel_current_entry (panel);
+    if (fe == NULL)
+        return;
+
     mcview_done (view);
     mcview_init (view);
-    mcview_load (view, 0, panel_current_entry (panel)->fname->str, 0, 0, 0);
+    mcview_load (view, 0, fe->fname->str, 0, 0, 0);
     mcview_display (view);
 }
 

@@ -171,6 +171,7 @@ int set_panel_formats (WPanel * p);
 
 void panel_set_filter (WPanel * panel, const file_filter_t * filter);
 
+file_entry_t *panel_current_entry (const WPanel *panel);
 void panel_set_current_by_name (WPanel * panel, const char *name);
 
 void unmark_files (WPanel * panel);
@@ -179,6 +180,8 @@ void select_item (WPanel * panel);
 void recalculate_panel_summary (WPanel * panel);
 void file_mark (WPanel * panel, int idx, int val);
 void do_file_mark (WPanel * panel, int idx, int val);
+const GString *panel_find_marked_file (const WPanel *panel, int *current_file);
+const GString *panel_get_marked_file (const WPanel *panel, int *current_file);
 
 gboolean panel_do_cd (WPanel * panel, const vfs_path_t * new_dir_vpath, enum cd_enum cd_type);
 MC_MOCKABLE gboolean panel_cd (WPanel * panel, const vfs_path_t * new_dir_vpath,
@@ -271,14 +274,6 @@ static inline WPanel *
 panel_sized_new (const char *panel_name, const WRect *r)
 {
     return panel_sized_with_dir_new (panel_name, r, NULL);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static inline file_entry_t *
-panel_current_entry (const WPanel *panel)
-{
-    return &(panel->dir.list[panel->current]);
 }
 
 /* --------------------------------------------------------------------------------------------- */

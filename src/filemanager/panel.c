@@ -837,7 +837,7 @@ format_file (WPanel *panel, int file_index, int width, file_attr_t attr, gboolea
 
     *field_length = 0;
 
-    if (file_index < panel->dir.len)
+    if (panel->dir.len != 0 && file_index < panel->dir.len)
     {
         fe = &panel->dir.list[file_index];
         color = file_compute_color (attr, fe);
@@ -1039,7 +1039,7 @@ display_mini_info (WPanel *panel)
     Widget *w = WIDGET (panel);
     const file_entry_t *fe;
 
-    if (!panels_options.show_mini_info || panel->current < 0)
+    if (!panels_options.show_mini_info)
         return;
 
     widget_gotoyx (w, panel_lines (panel) + 3, 1);
@@ -1058,7 +1058,10 @@ display_mini_info (WPanel *panel)
 
     fe = panel_current_entry (panel);
 
-    if (S_ISLNK (fe->st.st_mode))
+    if (fe == NULL)
+        /* NULL is in case of filter that doesn't match anything */
+        repaint_status (panel);
+    else if (S_ISLNK (fe->st.st_mode))
     {
         char link_target[MC_MAXPATHLEN];
         vfs_path_t *lc_link_vpath;
@@ -1375,8 +1378,8 @@ show_dir (const WPanel *panel)
 
             fe = panel_current_entry (panel);
 
-            /* Show size of curret file in the bottom of panel */
-            if (S_ISREG (fe->st.st_mode))
+            /* Show size of current file in the bottom of panel */
+            if (fe != NULL && S_ISREG (fe->st.st_mode))
             {
                 char buffer[BUF_SMALL];
 
@@ -1408,24 +1411,20 @@ adjust_top_file (WPanel *panel)
 {
     int items;
 
-    /* Update panel->current to avoid out of range in panel->dir.list[panel->current]
-     * when panel is redrawing when directory is reloading, for example in path:
-     * dir_list_reload() -> mc_refresh() -> dialog_change_screen_size() ->
-     * midnight_callback (MSG_RESIZE) -> setup_panels() -> panel_callback(MSG_DRAW) ->
-     * display_mini_info()
-     */
-    panel->current = CLAMP (panel->current, 0, panel->dir.len - 1);
-
     items = panel_items (panel);
 
-    if (panel->dir.len <= items)
+    if (panel->dir.len <= items || panel->current < 0)
     {
         /* If all files fit, show them all. */
+        /* panel->current < 0 is in case of filter that doesn't match anything, keep it. */
         panel->top = 0;
     }
     else
     {
         int i;
+
+        /* Update panel->current to avoid out of range in panel->dir.list[panel->current]. */
+        panel->current = CLAMP (panel->current, 0, panel->dir.len - 1);
 
         /* top_file has to be in the range [current-items+1, current] so that
            the current file is visible.
@@ -2069,7 +2068,7 @@ maybe_cd (WPanel *panel, gboolean move_up_dir)
 
         fe = panel_current_entry (panel);
 
-        if (S_ISDIR (fe->st.st_mode) || link_isdir (fe))
+        if (fe != NULL && (S_ISDIR (fe->st.st_mode) || link_isdir (fe)))
         {
             vfs_path_t *vpath;
 
@@ -2100,11 +2099,14 @@ force_maybe_cd (WPanel *panel)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static inline void
+static void
 unselect_item (WPanel *panel)
 {
+    const file_entry_t *fe;
+
+    fe = panel_current_entry (panel);
     repaint_file (panel, panel->current,
-                  panel_current_entry (panel)->f.marked != 0 ? FATTR_MARKED : FATTR_NORMAL);
+                  fe != NULL && fe->f.marked != 0 ? FATTR_MARKED : FATTR_NORMAL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2114,21 +2116,18 @@ static void
 panel_select_ext_cmd (WPanel *panel)
 {
     const file_entry_t *fe;
-    GString *filename;
     gboolean do_select;
     char *reg_exp, *cur_file_ext;
     mc_search_t *search;
     int i;
 
     fe = panel_current_entry (panel);
-
-    filename = fe->fname;
-    if (filename == NULL)
+    if (fe == NULL)
         return;
 
     do_select = (fe->f.marked == 0);
 
-    cur_file_ext = str_regex_escape (extension (filename->str));
+    cur_file_ext = str_regex_escape (extension (fe->fname->str));
     if (cur_file_ext[0] != '\0')
         reg_exp = g_strconcat ("^.*\\.", cur_file_ext, "$", (char *) NULL);
     else
@@ -2159,6 +2158,21 @@ panel_select_ext_cmd (WPanel *panel)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static void
+panel_set_current (WPanel *panel, int i)
+{
+    if (i != panel->current)
+    {
+        panel->dirty = TRUE;
+        panel->current = i;
+        panel->top = panel->current - (WIDGET (panel)->rect.lines - 2) / 2;
+        if (panel->top < 0)
+            panel->top = 0;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 panel_current_at_half (const WPanel *panel)
 {
@@ -2181,7 +2195,7 @@ move_down (WPanel *panel)
 {
     int items;
 
-    if (panel->current + 1 == panel->dir.len)
+    if (panel->dir.len == 0 || panel->current + 1 == panel->dir.len)
         return;
 
     unselect_item (panel);
@@ -2212,7 +2226,7 @@ move_down (WPanel *panel)
 static void
 move_up (WPanel *panel)
 {
-    if (panel->current == 0)
+    if (panel->dir.len == 0 || panel->current <= 0)
         return;
 
     unselect_item (panel);
@@ -2244,6 +2258,9 @@ panel_move_current (WPanel *panel, int lines)
 {
     int new_pos;
     gboolean adjust = FALSE;
+
+    if (panel->dir.len == 0 || panel->current < 0)
+        return;
 
     new_pos = panel->current + lines;
     if (new_pos >= panel->dir.len)
@@ -2313,7 +2330,7 @@ prev_page (WPanel *panel)
 {
     int items;
 
-    if (panel->current == 0 && panel->top == 0)
+    if (panel->dir.len == 0 || panel->current < 0 || (panel->current == 0 && panel->top == 0))
         return;
 
     unselect_item (panel);
@@ -2339,11 +2356,16 @@ goto_parent_dir (WPanel *panel)
         cd_up_dir (panel);
     else
     {
+        const file_entry_t *fe;
         GString *fname;
         const char *bname;
         vfs_path_t *dname_vpath;
 
-        fname = panel_current_entry (panel)->fname;
+        fe = panel_current_entry (panel);
+        if (fe == NULL)
+            return;
+
+        fname = fe->fname;
 
         if (g_path_is_absolute (fname->str))
             fname = mc_g_string_dup (fname);
@@ -2383,7 +2405,7 @@ next_page (WPanel *panel)
 {
     int items;
 
-    if (panel->current == panel->dir.len - 1)
+    if (panel->dir.len == 0 || panel->current < 0 || panel->current == panel->dir.len - 1)
         return;
 
     unselect_item (panel);
@@ -2411,7 +2433,7 @@ goto_child_dir (WPanel *panel)
 
     fe = panel_current_entry (panel);
 
-    if (S_ISDIR (fe->st.st_mode) || link_isdir (fe))
+    if (fe != NULL && (S_ISDIR (fe->st.st_mode) || link_isdir (fe)))
     {
         vfs_path_t *vpath;
 
@@ -2426,6 +2448,9 @@ goto_child_dir (WPanel *panel)
 static void
 goto_top_file (WPanel *panel)
 {
+    if (panel->dir.len == 0 || panel->current < 0)
+        return;
+
     unselect_item (panel);
     panel->current = panel->top;
     select_item (panel);
@@ -2436,6 +2461,9 @@ goto_top_file (WPanel *panel)
 static void
 goto_middle_file (WPanel *panel)
 {
+    if (panel->dir.len == 0 || panel->current < 0)
+        return;
+
     unselect_item (panel);
     panel->current = panel->top + panel_items (panel) / 2;
     select_item (panel);
@@ -2446,6 +2474,9 @@ goto_middle_file (WPanel *panel)
 static void
 goto_bottom_file (WPanel *panel)
 {
+    if (panel->dir.len == 0 || panel->current < 0)
+        return;
+
     unselect_item (panel);
     panel->current = panel->top + panel_items (panel) - 1;
     select_item (panel);
@@ -2456,7 +2487,7 @@ goto_bottom_file (WPanel *panel)
 static void
 move_home (WPanel *panel)
 {
-    if (panel->current == 0)
+    if (panel->dir.len == 0 || panel->current <= 0)
         return;
 
     unselect_item (panel);
@@ -2491,7 +2522,7 @@ move_home (WPanel *panel)
 static void
 move_end (WPanel *panel)
 {
-    if (panel->current == panel->dir.len - 1)
+    if (panel->dir.len == 0 || panel->current < 0 || panel->current == panel->dir.len - 1)
         return;
 
     unselect_item (panel);
@@ -2525,7 +2556,13 @@ move_end (WPanel *panel)
 static void
 do_mark_file (WPanel *panel, mark_act_t do_move)
 {
-    do_file_mark (panel, panel->current, panel_current_entry (panel)->f.marked ? 0 : 1);
+    const file_entry_t *fe;
+
+    fe = panel_current_entry (panel);
+    if (fe == NULL)
+        return;
+
+    do_file_mark (panel, panel->current, fe->f.marked ? 0 : 1);
 
     if ((panels_options.mark_moves_down && do_move == MARK_DOWN) || do_move == MARK_FORCE_DOWN)
         move_down (panel);
@@ -2565,7 +2602,15 @@ mark_file_right (WPanel *panel)
     int lines;
 
     if (state_mark < 0)
-        state_mark = panel_current_entry (panel)->f.marked ? 0 : 1;
+    {
+        const file_entry_t *fe;
+
+        fe = panel_current_entry (panel);
+        if (fe == NULL)
+            return;
+
+        state_mark = fe->f.marked ? 0 : 1;
+    }
 
     lines = panel_lines (panel);
     lines = MIN (lines, panel->dir.len - panel->current - 1);
@@ -2585,7 +2630,15 @@ mark_file_left (WPanel *panel)
     int lines;
 
     if (state_mark < 0)
-        state_mark = panel_current_entry (panel)->f.marked ? 0 : 1;
+    {
+        const file_entry_t *fe;
+
+        fe = panel_current_entry (panel);
+        if (fe == NULL)
+            return;
+
+        state_mark = fe->f.marked ? 0 : 1;
+    }
 
     lines = panel_lines (panel);
     lines = MIN (lines, panel->current + 1);
@@ -2889,7 +2942,7 @@ start_search (WPanel *panel)
 
         do_search (panel, 0);
     }
-    else
+    else if (panel->dir.len != 0)
     {
         panel->quick_search.active = TRUE;
         g_string_set_size (panel->quick_search.buffer, 0);
@@ -2921,7 +2974,7 @@ stop_search (WPanel *panel)
 /** Return TRUE if the Enter key has been processed, FALSE otherwise */
 
 static gboolean
-do_enter_on_file_entry (WPanel *panel, file_entry_t *fe)
+do_enter_on_file_entry (WPanel *panel, const file_entry_t *fe)
 {
     const char *fname = fe->fname->str;
     char *fname_quoted;
@@ -2999,7 +3052,11 @@ do_enter_on_file_entry (WPanel *panel, file_entry_t *fe)
 static inline gboolean
 do_enter (WPanel *panel)
 {
-    return do_enter_on_file_entry (panel, panel_current_entry (panel));
+    const file_entry_t *fe;
+
+    fe = panel_current_entry (panel);
+
+    return (fe == NULL ? FALSE : do_enter_on_file_entry (panel, fe));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -3024,6 +3081,8 @@ chdir_other_panel (WPanel *panel)
     WPanel *p;
 
     entry = panel_current_entry (panel);
+    if (entry == NULL)
+        return;
 
     if (get_other_type () != view_listing)
         create_panel (get_other_index (), view_listing);
@@ -3065,7 +3124,13 @@ panel_sync_other (const WPanel *panel)
 
     /* try to set current filename on the other panel */
     if (!panel->is_panelized)
-        panel_set_current_by_name (other_panel, panel_current_entry (panel)->fname->str);
+    {
+        const file_entry_t *fe;
+
+        fe = panel_current_entry (panel);
+        if (fe != NULL)
+            panel_set_current_by_name (other_panel, fe->fname->str);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -3087,7 +3152,7 @@ chdir_to_readlink (WPanel *panel)
 
     fe = panel_current_entry (panel);
 
-    if (!S_ISLNK (fe->st.st_mode))
+    if (fe == NULL || !S_ISLNK (fe->st.st_mode))
         return;
 
     i = readlink (fe->fname->str, buffer, MC_MAXPATHLEN - 1);
@@ -3432,6 +3497,9 @@ panel_do_cd_int (WPanel *panel, const vfs_path_t *new_dir_vpath, enum cd_enum cd
     if (!dir_list_load (&panel->dir, panel->cwd_vpath, panel->sort_field->sort_routine,
                         &panel->sort_info, &panel->filter))
         message (D_ERROR, MSG_ERROR, _("Cannot read directory contents"));
+
+    if (panel->dir.len == 0)
+        panel_set_current (panel, -1);
 
     panel_set_current_by_name (panel, get_parent_dir_name (panel->cwd_vpath, olddir_vpath));
 
@@ -3831,7 +3899,6 @@ panel_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *dat
 
         bb = buttonbar_find (h);
         midnight_set_buttonbar (bb);
-        widget_draw (WIDGET (bb));
         return MSG_HANDLED;
 
     case MSG_UNFOCUS:
@@ -3870,9 +3937,15 @@ panel_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *dat
 static void
 mouse_toggle_mark (WPanel *panel)
 {
-    do_mark_file (panel, MARK_DONT_MOVE);
-    mouse_marking = (panel_current_entry (panel)->f.marked != 0);
-    mouse_mark_panel = current_panel;
+    const file_entry_t *fe;
+
+    fe = panel_current_entry (panel);
+    if (fe != NULL)
+    {
+        do_mark_file (panel, MARK_DONT_MOVE);
+        mouse_marking = fe->f.marked != 0;
+        mouse_mark_panel = current_panel;
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -3885,11 +3958,13 @@ mouse_set_mark (WPanel *panel)
         const file_entry_t *fe;
 
         fe = panel_current_entry (panel);
-
-        if (mouse_marking && fe->f.marked == 0)
-            do_mark_file (panel, MARK_DONT_MOVE);
-        else if (!mouse_marking && fe->f.marked != 0)
-            do_mark_file (panel, MARK_DONT_MOVE);
+        if (fe != NULL)
+        {
+            if (mouse_marking && fe->f.marked == 0)
+                do_mark_file (panel, MARK_DONT_MOVE);
+            else if (!mouse_marking && fe->f.marked != 0)
+                do_mark_file (panel, MARK_DONT_MOVE);
+        }
     }
 }
 
@@ -4188,10 +4263,11 @@ update_one_panel_widget (WPanel *panel, panel_update_flags_t flags, const char *
 
     if (free_pointer)
     {
-        const GString *fname;
+        const file_entry_t *fe;
 
-        fname = panel_current_entry (panel)->fname;
-        my_current_file = g_strndup (fname->str, fname->len);
+        fe = panel_current_entry (panel);
+        if (fe != NULL)
+            my_current_file = g_strndup (fe->fname->str, fe->fname->len);
         current_file = my_current_file;
     }
 
@@ -4225,21 +4301,6 @@ update_one_panel (int which, panel_update_flags_t flags, const char *current_fil
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
-panel_set_current (WPanel *panel, int i)
-{
-    if (i != panel->current)
-    {
-        panel->dirty = TRUE;
-        panel->current = i;
-        panel->top = panel->current - (WIDGET (panel)->rect.lines - 2) / 2;
-        if (panel->top < 0)
-            panel->top = 0;
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 /* event callback */
 static gboolean
 event_update_panels (const gchar *event_group_name, const gchar *event_name,
@@ -4268,8 +4329,13 @@ panel_save_current_file_to_clip_file (const gchar *event_group_name, const gchar
     (void) data;
 
     if (current_panel->marked == 0)
-        mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_text_to_file",
-                        (gpointer) panel_current_entry (current_panel)->fname->str);
+    {
+        const file_entry_t *fe;
+
+        fe = panel_current_entry (current_panel);
+        if (fe != NULL)
+            mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_text_to_file", (gpointer) fe->fname->str);
+    }
     else
     {
         int i;
@@ -4371,11 +4437,32 @@ panel_dir_list_callback (dir_list_cb_state_t state, void *data)
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
+file_entry_t *
+panel_current_entry (const WPanel *panel)
+{
+    file_entry_t *fe;
+
+    if (panel->dir.len == 0 || panel->current < 0 || panel->current >= panel->dir.len)
+        return NULL;
+
+    fe = &(panel->dir.list[panel->current]);
+
+    return fe->fname == NULL ? NULL : fe;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 void
 panel_set_current_by_name (WPanel *panel, const char *name)
 {
     int i;
     char *subdir;
+
+    if (panel->dir.len == 0)
+    {
+        panel_set_current (panel, -1);
+        return;
+    }
 
     if (name == NULL)
     {
@@ -4608,6 +4695,9 @@ panel_sized_with_dir_new (const char *panel_name, const WRect *r, const vfs_path
                         &panel->sort_info, &panel->filter))
         message (D_ERROR, MSG_ERROR, _("Cannot read directory contents"));
 
+    if (panel->dir.len == 0)
+        panel_set_current (panel, -1);
+
     /* Restore old right path */
     if (curdir != NULL)
     {
@@ -4657,7 +4747,10 @@ panel_reload (WPanel *panel)
         message (D_ERROR, MSG_ERROR, _("Cannot read directory contents"));
 
     panel->dirty = TRUE;
-    if (panel->current >= panel->dir.len)
+
+    if (panel->dir.len == 0)
+        panel_set_current (panel, -1);
+    else if (panel->current >= panel->dir.len)
         panel_set_current (panel, panel->dir.len - 1);
 
     recalculate_panel_summary (panel);
@@ -4867,6 +4960,49 @@ file_mark (WPanel *panel, int lc_index, int val)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Find marked file starting from the given position.
+ *
+ * @param panel WPanel object
+ * @param curent_file a staring position to get current or search next marked file
+ *
+ * @return pointer to the name of find file or NULL if no file found or @current_file is out of range
+ */
+
+const GString *
+panel_find_marked_file (const WPanel *panel, int *current_file)
+{
+    while (panel->dir.list[*current_file].f.marked == 0 && *current_file < panel->dir.len)
+        (*current_file)++;
+
+    return (*current_file >= panel->dir.len ? NULL : panel->dir.list[*current_file].fname);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Get marked file clsest to the given position.
+ *
+ * @param panel WPanel object
+ * @param curent_file a staring position to get current or closest next marked file. If there are
+ *                    no marked files in @panel, @panel->current is used.
+ *
+ * @return pointer to the name of find file or NULL if no file found or @current_file is out of range.
+ */
+
+const GString *
+panel_get_marked_file (const WPanel *panel, int *current_file)
+{
+    const file_entry_t *fe;
+
+    if (panel->marked != 0)
+        return panel_find_marked_file (panel, current_file);
+
+    fe = panel_current_entry (panel);
+
+    return (fe == NULL ? NULL : fe->fname);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 panel_re_sort (WPanel *panel)
@@ -4879,6 +5015,9 @@ panel_re_sort (WPanel *panel)
         return;
 
     fe = panel_current_entry (panel);
+    if (fe == NULL)
+        return;
+
     filename = g_strndup (fe->fname->str, fe->fname->len);
     unselect_item (panel);
     dir_list_sort (&panel->dir, panel->sort_field->sort_routine, &panel->sort_info);
@@ -4910,11 +5049,12 @@ panel_set_sort_order (WPanel *panel, const panel_field_t *sort_order)
     /* The directory is already sorted, we have to load the unsorted stuff */
     if (sort_order->sort_routine == (GCompareFunc) unsorted)
     {
-        char *current_file;
-        const GString *fname;
+        const file_entry_t *fe;
+        char *current_file = NULL;
 
-        fname = panel_current_entry (panel)->fname;
-        current_file = g_strndup (fname->str, fname->len);
+        fe = panel_current_entry (panel);
+        if (fe != NULL)
+            current_file = g_strndup (fe->fname->str, fe->fname->len);
         panel_reload (panel);
         panel_set_current_by_name (panel, current_file);
         g_free (current_file);

@@ -150,9 +150,14 @@ stop_dialogs (void)
 static void
 treebox_cmd (void)
 {
+    const file_entry_t *fe;
     char *sel_dir;
 
-    sel_dir = tree_box (panel_current_entry (current_panel)->fname->str);
+    fe = panel_current_entry (current_panel);
+    if (fe == NULL)
+        return;
+
+    sel_dir = tree_box (fe->fname->str);
     if (sel_dir != NULL)
     {
         vfs_path_t *sel_vdir;
@@ -720,7 +725,7 @@ put_link (WPanel *panel)
 
     fe = panel_current_entry (panel);
 
-    if (S_ISLNK (fe->st.st_mode))
+    if (fe != NULL && S_ISLNK (fe->st.st_mode))
     {
         char buffer[MC_MAXPATHLEN];
         vfs_path_t *vpath;
@@ -761,8 +766,6 @@ put_other_link (void)
 static void
 put_current_selected (void)
 {
-    const char *tmp;
-
     if (!command_prompt)
         return;
 
@@ -773,12 +776,16 @@ put_current_selected (void)
 
         tree = (WTree *) get_panel_widget (get_current_index ());
         selected_name = tree_selected_name (tree);
-        tmp = vfs_path_as_str (selected_name);
+        command_insert (cmdline, vfs_path_as_str (selected_name), TRUE);
     }
     else
-        tmp = panel_current_entry (current_panel)->fname->str;
+    {
+        const file_entry_t *fe;
 
-    command_insert (cmdline, tmp, TRUE);
+        fe = panel_current_entry (current_panel);
+        if (fe != NULL)
+            command_insert (cmdline, fe->fname->str, TRUE);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -792,7 +799,13 @@ put_tagged (WPanel *panel)
     input_disable_update (cmdline);
 
     if (panel->marked == 0)
-        command_insert (cmdline, panel_current_entry (panel)->fname->str, TRUE);
+    {
+        const file_entry_t *fe;
+
+        fe = panel_current_entry (current_panel);
+        if (fe != NULL)
+            command_insert (cmdline, fe->fname->str, TRUE);
+    }
     else
     {
         int i;
