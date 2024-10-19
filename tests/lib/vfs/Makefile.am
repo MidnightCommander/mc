@@ -7,8 +7,6 @@ AM_CPPFLAGS = \
 	-I$(top_srcdir)/lib/vfs \
 	@CHECK_CFLAGS@
 
-AM_LDFLAGS = @TESTS_LDFLAGS@
-
 EXTRA_DIST = mc.charsets.in
 
 if CHARSET

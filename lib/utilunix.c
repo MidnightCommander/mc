@@ -137,11 +137,11 @@ i_cache_add (int id, int_cache *cache, int size, char *text, int *last)
 /* --------------------------------------------------------------------------------------------- */
 
 static my_fork_state_t
-my_fork (void)
+my_fork_state (void)
 {
     pid_t pid;
 
-    pid = fork ();
+    pid = my_fork ();
 
     if (pid < 0)
     {
@@ -175,12 +175,12 @@ my_system__save_sigaction_handlers (my_system_sigactions_t *sigactions)
     ignore.sa_handler = SIG_IGN;
     sigemptyset (&ignore.sa_mask);
 
-    sigaction (SIGINT, &ignore, &sigactions->intr);
-    sigaction (SIGQUIT, &ignore, &sigactions->quit);
+    my_sigaction (SIGINT, &ignore, &sigactions->intr);
+    my_sigaction (SIGQUIT, &ignore, &sigactions->quit);
 
     /* Restore the original SIGTSTP handler, we don't want ncurses' */
     /* handler messing the screen after the SIGCONT */
-    sigaction (SIGTSTP, &startup_handler, &sigactions->stop);
+    my_sigaction (SIGTSTP, &startup_handler, &sigactions->stop);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -188,9 +188,9 @@ my_system__save_sigaction_handlers (my_system_sigactions_t *sigactions)
 static void
 my_system__restore_sigaction_handlers (my_system_sigactions_t *sigactions)
 {
-    sigaction (SIGINT, &sigactions->intr, NULL);
-    sigaction (SIGQUIT, &sigactions->quit, NULL);
-    sigaction (SIGTSTP, &sigactions->stop, NULL);
+    my_sigaction (SIGINT, &sigactions->intr, NULL);
+    my_sigaction (SIGQUIT, &sigactions->quit, NULL);
+    my_sigaction (SIGTSTP, &sigactions->stop, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -329,7 +329,7 @@ get_group (gid_t gid)
 void
 save_stop_handler (void)
 {
-    sigaction (SIGTSTP, NULL, &startup_handler);
+    my_sigaction (SIGTSTP, NULL, &startup_handler);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -346,6 +346,61 @@ void
 my_exit (int status)
 {
     _exit (status);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Wrapper for signal() system call.
+ */
+
+sighandler_t
+my_signal (int signum, sighandler_t handler)
+{
+    return signal (signum, handler);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Wrapper for sigaction() system call.
+ */
+
+int
+my_sigaction (int signum, const struct sigaction *act, struct sigaction *oldact)
+{
+    return sigaction (signum, act, oldact);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Wrapper for fork() system call.
+ */
+
+pid_t
+my_fork (void)
+{
+    return fork ();
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Wrapper for execvp() system call.
+ */
+
+int
+my_execvp (const char *file, char *const argv[])
+{
+    return execvp (file, argv);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Wrapper for g_get_current_dir() library function.
+ */
+
+char *
+my_get_current_dir (void)
+{
+    return g_get_current_dir ();
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -422,7 +477,7 @@ my_systemv (const char *command, char *const argv[])
 
     my_system__save_sigaction_handlers (&sigactions);
 
-    fork_state = my_fork ();
+    fork_state = my_fork_state ();
     switch (fork_state)
     {
     case FORK_ERROR:
@@ -430,12 +485,12 @@ my_systemv (const char *command, char *const argv[])
         break;
     case FORK_CHILD:
         {
-            signal (SIGINT, SIG_DFL);
-            signal (SIGQUIT, SIG_DFL);
-            signal (SIGTSTP, SIG_DFL);
-            signal (SIGCHLD, SIG_DFL);
+            my_signal (SIGINT, SIG_DFL);
+            my_signal (SIGQUIT, SIG_DFL);
+            my_signal (SIGTSTP, SIG_DFL);
+            my_signal (SIGCHLD, SIG_DFL);
 
-            execvp (command, argv);
+            my_execvp (command, argv);
             my_exit (127);      /* Exec error */
         }
         MC_FALLTHROUGH;
@@ -1056,7 +1111,7 @@ mc_realpath (const char *path, char *resolved_path)
         /* If it's a relative pathname use getwd for starters. */
         if (!IS_PATH_SEP (*path))
         {
-            new_path = g_get_current_dir ();
+            new_path = my_get_current_dir ();
             if (new_path == NULL)
                 strcpy (got_path, "");
             else

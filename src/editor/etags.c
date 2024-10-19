@@ -426,7 +426,7 @@ edit_get_match_keyword_cmd (WEdit *edit)
     for (i = 0; i < word_len; i++)
         g_string_append_c (match_expr, edit_buffer_get_byte (&edit->buffer, word_start + i));
 
-    ptr = g_get_current_dir ();
+    ptr = my_get_current_dir ();
     path = g_strconcat (ptr, PATH_SEP_STR, (char *) NULL);
     g_free (ptr);
 

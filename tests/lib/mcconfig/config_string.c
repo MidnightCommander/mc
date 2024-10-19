@@ -56,7 +56,6 @@ config_object__reopen (void)
     if (!mc_config_save_file (mc_config, &error))
     {
         ck_abort_msg ("Unable to save config file: %s", error->message);
-        g_error_free (error);
     }
 
     mc_config_deinit (mc_config);
@@ -128,8 +127,10 @@ static const struct test_create_ini_file_ds
         "test-group1",
         "test-param2",
         "not-exists",
-        " \tkoi8-r: Тестовое значение ",
-        " \tkoi8-r: \320\242\320\265\321\201\321\202\320\276\320\262\320\276\320\265 \320\267\320\275\320\260\321\207\320\265\320\275\320\270\320\265 "
+        /* Should be represented as KOI8-R */
+        " \t \xF4\xC5\xD3\xD4\xCF\xD7\xCF\xC5 \xDA\xCE\xC1\xDE\xC5\xCE\xC9\xC5 ",
+        /* Should be stored as UTF-8 */
+        " \t п╒п╣я│я┌п╬п╡п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣ "
     },
     { /* 3. */
         "test-group1",
@@ -172,11 +173,12 @@ START_PARAMETRIZED_TEST (test_create_ini_file_paths, test_create_ini_file_ds)
     char *actual_value, *actual_raw_value;
 
     mc_config_set_string (mc_config, "test-group1", "test-param1", " some value ");
-    mc_config_set_string (mc_config, "test-group1", "test-param2", " \tkoi8-r: Тестовое значение ");
+    mc_config_set_string (mc_config, "test-group1", "test-param2",
+                          " \t \xF4\xC5\xD3\xD4\xCF\xD7\xCF\xC5 \xDA\xCE\xC1\xDE\xC5\xCE\xC9\xC5 ");
     mc_config_set_string (mc_config, "test-group1", "test-param3", " \tsome value2\n\nf\b\005fff ");
     mc_config_set_string_raw (mc_config, "test-group2", "test-param1", " some value ");
     mc_config_set_string_raw (mc_config, "test-group2", "test-param2",
-                              " koi8-r: Тестовое значение");
+                              " \xF4\xC5\xD3\xD4\xCF\xD7\xCF\xC5 \xDA\xCE\xC1\xDE\xC5\xCE\xC9\xC5");
     mc_config_set_string_raw (mc_config, "test-group2", "test-param3",
                               " \tsome value2\n\nf\b\005fff ");
 

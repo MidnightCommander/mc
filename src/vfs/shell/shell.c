@@ -426,7 +426,7 @@ shell_pipeopen (struct vfs_s_super *super, const char *path, const char *argv[])
     if ((pipe (fileset1) < 0) || (pipe (fileset2) < 0))
         vfs_die ("Cannot pipe(): %m.");
 
-    res = fork ();
+    res = my_fork ();
 
     if (res != 0)
     {
@@ -449,7 +449,7 @@ shell_pipeopen (struct vfs_s_super *super, const char *path, const char *argv[])
         res = open ("/dev/null", O_WRONLY);
         close (fileset2[0]);
         close (fileset2[1]);
-        execvp (path, (char **) argv);
+        my_execvp (path, (char **) argv);
         my_exit (3);
     }
 }

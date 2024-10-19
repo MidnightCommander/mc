@@ -123,27 +123,27 @@ sub list
     chop($getselections = `dpkg --get-selections 2>/dev/null`);
     chop($audit = `dpkg --audit 2>/dev/null`);
     $sz = length($diversions);
-    print "-r--r--r-- 1 root root $sz $DATE DIVERSIONS\n";
+    print "-r--r--r-- 1 0    0    $sz $DATE DIVERSIONS\n";
     $sz = length($architecture);
-    print "-r--r--r-- 1 root root $sz $DATE ARCHITECTURE\n";
+    print "-r--r--r-- 1 0    0    $sz $DATE ARCHITECTURE\n";
     $sz = length($list);
-    print "-r--r--r-- 1 root root $sz $DATE LIST\n";
+    print "-r--r--r-- 1 0    0    $sz $DATE LIST\n";
     $sz = length($getselections);
-    print "-r--r--r-- 1 root root $sz $DATE GET-SELECTIONS\n";
+    print "-r--r--r-- 1 0    0    $sz $DATE GET-SELECTIONS\n";
     $sz = length($audit);
-    print "-r--r--r-- 1 root root $sz $DATE AUDIT\n";
+    print "-r--r--r-- 1 0    0    $sz $DATE AUDIT\n";
     $sz = length($pressconfigure);
-    print "-r-xr--r-- 1 root root $sz $DATE CONFIGURE\n";
+    print "-r-xr--r-- 1 0    0    $sz $DATE CONFIGURE\n";
     $sz = length($pressremove);
-    print "-r-xr--r-- 1 root root $sz $DATE REMOVE\n";
+    print "-r-xr--r-- 1 0    0    $sz $DATE REMOVE\n";
     $sz = length($pressclearavail);
-    print "-r-xr--r-- 1 root root $sz $DATE CLEAR-AVAIL\n";
+    print "-r-xr--r-- 1 0    0    $sz $DATE CLEAR-AVAIL\n";
     $sz = length($pressforgetoldunavail);
-    print "-r-xr--r-- 1 root root $sz $DATE FORGET-OLD-UNAVAIL\n";
+    print "-r-xr--r-- 1 0    0    $sz $DATE FORGET-OLD-UNAVAIL\n";
     ls("/var/lib/dpkg/status","STATUS","-r--r--r--");
     # ls("/var/lib/dpkg/available","AVAILABLE","-r--r--r--");
 
-    print "drwxr-xr-x 1 root root 0 $DATE all\n";
+    print "drwxr-xr-x 1 0    0    0 $DATE all\n";
 
     open STAT, "/var/lib/dpkg/status"
        or exit 1;
@@ -171,18 +171,18 @@ sub list
            my $sub = $dn;
            while( $sub =~ s!^(.*)/[^/]*$!$1! ) {
                unless( $sects{$sub} ) {
-                   print "drwxr-xr-x 1 root root 0 $DATE $sub/\n";
+                   print "drwxr-xr-x 1 0    0    0 $DATE $sub/\n";
                    $sects{$sub} = 1;
                }
            }
-           print "drwxr-xr-x 1 root root 0 $DATE $dn/\n";
+           print "drwxr-xr-x 1 0    0    0 $DATE $dn/\n";
            $sects{$dn} = 1;
        }
        $sz = $debs{$pkg}{'status'} =~ /config-files/ ? 0 : $debs{$pkg}{'installed-size'} * 1024;
        @stat = stat("/var/lib/dpkg/info/".$debs{$pkg}{package}.".list");
        $bt = bt($stat[9]);
-       print "-rw-r--r-- 1 root root $sz $bt $dn/$fn.debd\n";
-       print "lrwxrwxrwx 1 root root $sz $bt all/$fn.debd -> ../$dn/$fn.debd\n";
+       print "-rw-r--r-- 1 0    0    $sz $bt $dn/$fn.debd\n";
+       print "lrwxrwxrwx 1 0    0    $sz $bt all/$fn.debd -> ../$dn/$fn.debd\n";
     }
 }
 

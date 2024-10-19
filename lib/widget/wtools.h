@@ -80,7 +80,7 @@ WDialog *create_message (int flags, const char *title, const char *text, ...)
         G_GNUC_PRINTF (3, 4);
 
 /* Show message box, background safe */
-void message (int flags, const char *title, const char *text, ...) G_GNUC_PRINTF (3, 4);
+MC_MOCKABLE void message (int flags, const char *title, const char *text, ...) G_GNUC_PRINTF (3, 4);
 /* *INDENT-ON* */
 
 gboolean mc_error_message (GError ** mcerror, int *code);

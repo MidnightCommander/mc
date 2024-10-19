@@ -30,6 +30,7 @@
 #include <stdlib.h>
 
 #include "lib/strutil.h"
+#include "lib/util.h"
 #include "lib/vfs/xdirentry.h"
 #include "src/vfs/local/local.c"
 
@@ -37,7 +38,7 @@
 
 /* @Mock */
 char *
-g_get_current_dir (void)
+my_get_current_dir (void)
 {
     return g_strdup ("/some/path");
 }

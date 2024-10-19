@@ -65,7 +65,7 @@ void setup_cmdline (void);
 void create_panel (int num, panel_view_mode_t type);
 void swap_panels (void);
 panel_view_mode_t get_panel_type (int idx);
-panel_view_mode_t get_current_type (void);
+MC_MOCKABLE panel_view_mode_t get_current_type (void);
 panel_view_mode_t get_other_type (void);
 int get_current_index (void);
 int get_other_index (void);

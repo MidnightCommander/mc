@@ -65,11 +65,11 @@ int pause_after_run = pause_on_dumb_terminals;
 
 /*** forward declarations (file scope functions) *************************************************/
 
-void do_execute (const char *shell, const char *command, int flags);
-void do_executev (const char *shell, int flags, char *const argv[]);
-char *execute_get_external_cmd_opts_from_config (const char *command,
-                                                 const vfs_path_t * filename_vpath,
-                                                 long start_line);
+MC_MOCKABLE void do_execute (const char *shell, const char *command, int flags);
+MC_MOCKABLE void do_executev (const char *shell, int flags, char *const argv[]);
+MC_MOCKABLE char *execute_get_external_cmd_opts_from_config (const char *command,
+                                                             const vfs_path_t * filename_vpath,
+                                                             long start_line);
 
 /*** file scope variables ************************************************************************/
 
@@ -160,12 +160,12 @@ do_suspend_cmd (void)
         /* Make sure that the SIGTSTP below will suspend us directly,
            without calling ncurses' SIGTSTP handler; we *don't* want
            ncurses to redraw the screen immediately after the SIGCONT */
-        sigaction (SIGTSTP, &startup_handler, &sigtstp_action);
+        my_sigaction (SIGTSTP, &startup_handler, &sigtstp_action);
 
         kill (getpid (), SIGTSTP);
 
         /* Restore previous SIGTSTP action */
-        sigaction (SIGTSTP, &sigtstp_action, NULL);
+        my_sigaction (SIGTSTP, &sigtstp_action, NULL);
     }
 #endif /* SIGTSTP */
 

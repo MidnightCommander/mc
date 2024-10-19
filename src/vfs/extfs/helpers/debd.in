@@ -120,30 +120,30 @@ sub list
        $select_size=length($pressselect);
        $unselect_size=length($pressunselect);
 
-       print "dr-xr-xr-x   1 root     root     0 $date CONTENTS\n";
-       print "dr-xr-xr-x   1 root     root     0 $date DEBIAN\n";
-       print "-r--r--r--   1 root     root     $info_size $date INFO\n";
-       print "-r-xr--r--   1 root     root     $purge_size $date DPKG-PURGE\n";
+       print "dr-xr-xr-x   1 0        0        0 $date CONTENTS\n";
+       print "dr-xr-xr-x   1 0        0        0 $date DEBIAN\n";
+       print "-r--r--r--   1 0        0        $info_size $date INFO\n";
+       print "-r-xr--r--   1 0        0        $purge_size $date DPKG-PURGE\n";
 
        chop($status = `dpkg -s $qarchive | grep ^Status`);
        if( $status =~ /deinstall/ ) {
-           print "-r-xr--r--   1 root     root     $select_size $date DPKG-SELECT\n";
+           print "-r-xr--r--   1 0        0        $select_size $date DPKG-SELECT\n";
        } elsif( $status =~ /install/ ) {
-           print "-r-xr--r--   1 root     root     $unselect_size $date DPKG-UNSELECT\n";
+           print "-r-xr--r--   1 0        0        $unselect_size $date DPKG-UNSELECT\n";
        } 
        if( $status !~ /config-files/ ) {
            if ( -x "/usr/bin/dpkg-repack" ) {
-               print "-r-xr--r--   1 root     root     $repack_size $date DPKG-REPACK\n";
+               print "-r-xr--r--   1 0        0        $repack_size $date DPKG-REPACK\n";
            }
-           print "-r-xr--r--   1 root     root     $remove_size $date DPKG-REMOVE\n";
+           print "-r-xr--r--   1 0        0        $remove_size $date DPKG-REMOVE\n";
            if ( -x "/usr/bin/apt-get" ) {
-               print "-r-xr--r--   1 root     root     $remove_size $date APT-REMOVE\n";
-               print "-r-xr--r--   1 root     root     $reinstall_size $date APT-REINSTALL\n";
-               print "-r-xr--r--   1 root     root     $purge_size $date APT-PURGE\n";
+               print "-r-xr--r--   1 0        0        $remove_size $date APT-REMOVE\n";
+               print "-r-xr--r--   1 0        0        $reinstall_size $date APT-REINSTALL\n";
+               print "-r-xr--r--   1 0        0        $purge_size $date APT-PURGE\n";
 	   }
        }
        if( -x "/usr/bin/dpkg-reconfigure" && -x "/var/lib/dpkg/info/$archive.config" ) {
-           print "-r-xr--r--   1 root     root     $reconfigure_size $date DPKG-RECONFIGURE\n";
+           print "-r-xr--r--   1 0        0        $reconfigure_size $date DPKG-RECONFIGURE\n";
        }
 
 

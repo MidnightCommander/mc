@@ -74,7 +74,7 @@ SED="sed"
 param=$1; shift
 rpm_filename=$1; shift
 
-FILEPREF="-r--r--r--   1 root     root    "
+FILEPREF="-r--r--r--   1 0        0       "
 
 mcrpmfs_getDesription()
 {
@@ -135,7 +135,7 @@ mcrpmfs_list_fastRPM ()
     echo "$FILEPREF 0 $DATE INFO/VENDOR"
     echo "$FILEPREF 0 $DATE INFO/DESCRIPTION"
     echo "$FILEPREF 0 $DATE INFO/SUMMARY"
-    echo "dr-xr-xr-x   1 root     root     0 $DATE INFO/SCRIPTS"
+    echo "dr-xr-xr-x   1 0        0        0 $DATE INFO/SCRIPTS"
     echo "$FILEPREF 0 $DATE INFO/SCRIPTS/PRETRANS"
     echo "$FILEPREF 0 $DATE INFO/SCRIPTS/POSTTRANS"
     echo "$FILEPREF 0 $DATE INFO/SCRIPTS/PREIN"
@@ -220,17 +220,17 @@ mcrpmfs_list ()
 
     HEADERSIZE=`printf '%s\n' "$DESC" | wc -c`  # 'echo' can't be used for arbitrary data (see commit message).
     printf '%s %s %s HEADER\n' "${FILEPREF}"  "${HEADERSIZE}" "${DATE}"
-    echo "-r-xr-xr-x   1 root     root    0 $DATE INSTALL"
+    echo "-r-xr-xr-x   1 0        0       0 $DATE INSTALL"
     case "${rpm_filename}" in
 	*.src.rpm)
-	    echo "-r-xr-xr-x   1 root     root    0 $DATE REBUILD"
+	    echo "-r-xr-xr-x   1 0        0       0 $DATE REBUILD"
 	;;
 	*)
-	    echo "-r-xr-xr-x   1 root     root    0 $DATE UPGRADE"
+	    echo "-r-xr-xr-x   1 0        0       0 $DATE UPGRADE"
 	;;
     esac
 
-    echo "dr-xr-xr-x   3 root     root     0 $DATE INFO"
+    echo "dr-xr-xr-x   3 0        0        0 $DATE INFO"
     if [ `mcrpmfs_getRawOneTag "%{EPOCH}"` = "(none)" ]; then
         echo "$FILEPREF 0 $DATE INFO/NAME-VERSION-RELEASE"
     else

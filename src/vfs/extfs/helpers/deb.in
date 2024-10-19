@@ -37,10 +37,10 @@ sub mcdebfs_list
 	chop($info_size=`dpkg -I $qarchivename | wc -c`);
 	$install_size=length($pressinstall);
 
-	print "dr-xr-xr-x   1 root     root     0 $date CONTENTS\n";
-	print "dr-xr-xr-x   1 root     root     0 $date DEBIAN\n";
-	print "-r--r--r--   1 root     root     $info_size $date INFO\n";
-	print "-r-xr--r--   1 root     root     $install_size $date INSTALL\n";
+	print "dr-xr-xr-x   1 0        0        0 $date CONTENTS\n";
+	print "dr-xr-xr-x   1 0        0        0 $date DEBIAN\n";
+	print "-r--r--r--   1 0        0        $info_size $date INFO\n";
+	print "-r-xr--r--   1 0        0        $install_size $date INSTALL\n";
 
         if ( open(PIPEIN, "LC_ALL=C dpkg-deb -c $qarchivename |") )
 	{
@@ -117,7 +117,7 @@ sub mcdebfs_list
                            $perm='-r--r--r--';
                            $name=$_[4];
                        }
-                       print "$perm 1 root root $size $date DEBIAN/$name\n";
+                       print "$perm 1 0    0    $size $date DEBIAN/$name\n";
                }
         }
 }
