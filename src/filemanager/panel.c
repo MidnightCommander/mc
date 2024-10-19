@@ -3899,7 +3899,6 @@ panel_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *dat
 
         bb = buttonbar_find (h);
         midnight_set_buttonbar (bb);
-        widget_draw (WIDGET (bb));
         return MSG_HANDLED;
 
     case MSG_UNFOCUS:
