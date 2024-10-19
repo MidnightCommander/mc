@@ -173,10 +173,15 @@ extract_arg (char *p, char *arg, int size)
 static gboolean
 test_type (WPanel *panel, char *arg)
 {
+    const file_entry_t *fe;
     int result = 0;             /* False by default */
     mode_t st_mode;
 
-    st_mode = panel_current_entry (panel)->st.st_mode;
+    fe = panel_current_entry (panel);
+    if (fe == NULL)
+        return FALSE;
+
+    st_mode = fe->st.st_mode;
 
     for (; *arg != '\0'; arg++)
     {
@@ -268,9 +273,18 @@ test_condition (const Widget *edit_widget, char *p, gboolean *condition)
             }
             else
 #endif
-                *condition = panel != NULL &&
-                    mc_search (arg, DEFAULT_CHARSET, panel_current_entry (panel)->fname->str,
-                               search_type);
+            {
+                if (panel == NULL)
+                    *condition = FALSE;
+                else
+                {
+                    const file_entry_t *fe;
+
+                    fe = panel_current_entry (panel);
+                    *condition = fe != NULL
+                        && mc_search (arg, DEFAULT_CHARSET, fe->fname->str, search_type);
+                }
+            }
             break;
         case 'y':              /* syntax pattern */
 #ifdef USE_INTERNAL_EDIT
@@ -784,6 +798,8 @@ expand_format (const Widget *edit_widget, char c, gboolean do_quote)
         else
 #endif
         {
+            const file_entry_t *fe;
+
             if (g_ascii_islower ((gchar) c))
                 panel = current_panel;
             else
@@ -793,7 +809,8 @@ expand_format (const Widget *edit_widget, char c, gboolean do_quote)
                 panel = other_panel;
             }
 
-            fname = panel_current_entry (panel)->fname->str;
+            fe = panel_current_entry (panel);
+            fname = fe == NULL ? NULL : fe->fname->str;
         }
         break;
 

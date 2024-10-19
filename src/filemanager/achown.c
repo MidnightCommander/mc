@@ -1020,7 +1020,16 @@ advanced_chown_cmd (WPanel *panel)
         if (panel->marked != 0)
             fname = next_file (panel);  /* next marked file */
         else
-            fname = panel_current_entry (panel)->fname; /* single file */
+        {
+            /* single file */
+            const file_entry_t *fe;
+
+            fe = panel_current_entry (panel);
+            if (fe == NULL)
+                break;
+
+            fname = fe->fname;
+        }
 
         vpath = vfs_path_from_str (fname->str);
 

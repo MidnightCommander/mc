@@ -1199,7 +1199,13 @@ create_panel (int num, panel_view_mode_t type)
             new_widget = WIDGET (mcview_new (&r, TRUE));
             the_other_panel = PANEL (panels[the_other].widget);
             if (the_other_panel != NULL)
-                file_name = panel_current_entry (the_other_panel)->fname->str;
+            {
+                const file_entry_t *fe;
+
+                fe = panel_current_entry (the_other_panel);
+                if (fe != NULL)
+                    file_name = fe->fname->str;
+            }
 
             mcview_load ((WView *) new_widget, 0, file_name, 0, 0, 0);
             break;

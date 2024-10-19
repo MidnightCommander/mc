@@ -1751,6 +1751,8 @@ do_move_dir_dir (const WPanel *panel, file_op_total_context_t *tctx, file_op_con
 static const char *
 panel_get_file (const WPanel *panel)
 {
+    const file_entry_t *fe;
+
     if (get_current_type () == view_tree)
     {
         WTree *tree;
@@ -1770,7 +1772,9 @@ panel_get_file (const WPanel *panel)
                 return panel->dir.list[i].fname->str;
     }
 
-    return panel_current_entry (panel)->fname->str;
+    fe = panel_current_entry (panel);
+
+    return (fe == NULL ? NULL : fe->fname->str);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1782,9 +1786,17 @@ check_single_entry (const WPanel *panel, gboolean force_single, struct stat *src
     gboolean ok;
 
     if (force_single)
-        source = panel_current_entry (panel)->fname->str;
+    {
+        const file_entry_t *fe;
+
+        fe = panel_current_entry (panel);
+        source = fe == NULL ? NULL : fe->fname->str;
+    }
     else
         source = panel_get_file (panel);
+
+    if (source == NULL)
+        return NULL;
 
     ok = !DIR_IS_DOTDOT (source);
 
@@ -3529,9 +3541,12 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
     else
 #endif /* ENABLE_BACKGROUND */
     {
+        const file_entry_t *fe;
+
         if (operation == OP_DELETE)
             dialog_type = FILEGUI_DIALOG_DELETE_ITEM;
-        else if (single_entry && S_ISDIR (panel_current_entry (panel)->st.st_mode))
+        else if (single_entry
+                 && ((fe = panel_current_entry (panel)) == NULL ? FALSE : S_ISDIR (fe->st.st_mode)))
             dialog_type = FILEGUI_DIALOG_MULTI_ITEM;
         else if (single_entry || force_single)
             dialog_type = FILEGUI_DIALOG_ONE_ITEM;

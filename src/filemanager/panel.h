@@ -171,6 +171,7 @@ int set_panel_formats (WPanel * p);
 
 void panel_set_filter (WPanel * panel, const file_filter_t * filter);
 
+file_entry_t *panel_current_entry (const WPanel *panel);
 void panel_set_current_by_name (WPanel * panel, const char *name);
 
 void unmark_files (WPanel * panel);
@@ -271,14 +272,6 @@ static inline WPanel *
 panel_sized_new (const char *panel_name, const WRect *r)
 {
     return panel_sized_with_dir_new (panel_name, r, NULL);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static inline file_entry_t *
-panel_current_entry (const WPanel *panel)
-{
-    return &(panel->dir.list[panel->current]);
 }
 
 /* --------------------------------------------------------------------------------------------- */

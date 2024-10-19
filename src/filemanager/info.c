@@ -138,6 +138,8 @@ info_show_info (WInfo *info)
     my_statfs (&myfs_stats, p_rp_cwd);
 
     fe = panel_current_entry (current_panel);
+    if (fe == NULL)
+        return;
 
     st = fe->st;
 

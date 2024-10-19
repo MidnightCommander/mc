@@ -125,6 +125,8 @@ do_view_cmd (WPanel *panel, gboolean plain_view)
     const file_entry_t *fe;
 
     fe = panel_current_entry (panel);
+    if (fe == NULL)
+        return;
 
     /* Directories are viewed by changing to them */
     if (S_ISDIR (fe->st.st_mode) || link_isdir (fe))
@@ -576,12 +578,16 @@ view_cmd (WPanel *panel)
 void
 view_file_cmd (const WPanel *panel)
 {
+    const file_entry_t *fe;
     char *filename;
     vfs_path_t *vpath;
 
+    fe = panel_current_entry (panel);
+    if (fe == NULL)
+        return;
+
     filename =
-        input_expand_dialog (_("View file"), _("Filename:"),
-                             MC_HISTORY_FM_VIEW_FILE, panel_current_entry (panel)->fname->str,
+        input_expand_dialog (_("View file"), _("Filename:"), MC_HISTORY_FM_VIEW_FILE, fe->fname->str,
                              INPUT_COMPLETE_FILENAMES);
     if (filename == NULL)
         return;
@@ -609,7 +615,15 @@ view_filtered_cmd (const WPanel *panel)
     const char *initial_command;
 
     if (input_is_empty (cmdline))
-        initial_command = panel_current_entry (panel)->fname->str;
+    {
+        const file_entry_t *fe;
+
+        fe = panel_current_entry (panel);
+        if (fe == NULL)
+            return;
+
+        initial_command = fe->fname->str;
+    }
     else
         initial_command = input_get_ctext (cmdline);
 
@@ -673,9 +687,14 @@ edit_file_at_line (const vfs_path_t *what_vpath, gboolean internal, long start_l
 void
 edit_cmd (const WPanel *panel)
 {
+    const file_entry_t *fe;
     vfs_path_t *fname;
 
-    fname = vfs_path_from_str (panel_current_entry (panel)->fname->str);
+    fe = panel_current_entry (panel);
+    if (fe == NULL)
+        return;
+
+    fname = vfs_path_from_str (fe->fname->str);
     if (regex_command (fname, "Edit") == 0)
         do_edit (fname);
     vfs_path_free (fname, TRUE);
@@ -687,9 +706,14 @@ edit_cmd (const WPanel *panel)
 void
 edit_cmd_force_internal (const WPanel *panel)
 {
+    const file_entry_t *fe;
     vfs_path_t *fname;
 
-    fname = vfs_path_from_str (panel_current_entry (panel)->fname->str);
+    fe = panel_current_entry (panel);
+    if (fe == NULL)
+        return;
+
+    fname = vfs_path_from_str (fe->fname->str);
     if (regex_command (fname, "Edit") == 0)
         edit_file_at_line (fname, TRUE, 1);
     vfs_path_free (fname, TRUE);
@@ -736,6 +760,8 @@ mkdir_cmd (WPanel *panel)
     const char *name = "";
 
     fe = panel_current_entry (panel);
+    if (fe == NULL)
+        return;
 
     /* If 'on' then automatically fills name with current item name */
     if (auto_fill_mkdir_name && !DIR_IS_DOTDOT (fe->fname->str))
@@ -1055,11 +1081,11 @@ swap_cmd (void)
 void
 link_cmd (link_type_t link_type)
 {
-    const char *filename;
+    const file_entry_t *fe;
 
-    filename = panel_current_entry (current_panel)->fname->str;
-    if (filename != NULL)
-        do_link (link_type, filename);
+    fe = panel_current_entry (current_panel);
+    if (fe != NULL)
+        do_link (link_type, fe->fname->str);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1071,6 +1097,9 @@ edit_symlink_cmd (void)
     const char *p;
 
     fe = panel_current_entry (current_panel);
+    if (fe == NULL)
+        return;
+
     p = fe->fname->str;
 
     if (!S_ISLNK (fe->st.st_mode))
@@ -1218,7 +1247,8 @@ smart_dirsize_cmd (WPanel *panel)
     const file_entry_t *entry;
 
     entry = panel_current_entry (panel);
-    if ((S_ISDIR (entry->st.st_mode) && DIR_IS_DOTDOT (entry->fname->str)) || panel->dirs_marked)
+    if ((entry != NULL && S_ISDIR (entry->st.st_mode) && DIR_IS_DOTDOT (entry->fname->str))
+        || panel->dirs_marked)
         dirsizes_cmd (panel);
     else
         single_dirsize_cmd (panel);
@@ -1233,7 +1263,7 @@ single_dirsize_cmd (WPanel *panel)
 
     entry = panel_current_entry (panel);
 
-    if (S_ISDIR (entry->st.st_mode) && !DIR_IS_DOTDOT (entry->fname->str))
+    if (entry != NULL && S_ISDIR (entry->st.st_mode) && !DIR_IS_DOTDOT (entry->fname->str))
     {
         size_t dir_count = 0;
         size_t count = 0;
