@@ -1040,7 +1040,9 @@ canonicalize_pathname_custom (char *path, canon_path_flags_t flags)
 #endif /* HAVE_CHARSET */
                 else
                 {
+#ifdef HAVE_CHARSET
                   last:
+#endif /* HAVE_CHARSET */
                     if (s >= lpath + url_delim_len
                         && strncmp (s - url_delim_len, VFS_PATH_URL_DELIMITER, url_delim_len) == 0)
                         *s = '\0';
