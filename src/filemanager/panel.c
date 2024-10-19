@@ -2158,6 +2158,21 @@ panel_select_ext_cmd (WPanel *panel)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static void
+panel_set_current (WPanel *panel, int i)
+{
+    if (i != panel->current)
+    {
+        panel->dirty = TRUE;
+        panel->current = i;
+        panel->top = panel->current - (WIDGET (panel)->rect.lines - 2) / 2;
+        if (panel->top < 0)
+            panel->top = 0;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 panel_current_at_half (const WPanel *panel)
 {
@@ -3471,6 +3486,9 @@ panel_do_cd_int (WPanel *panel, const vfs_path_t *new_dir_vpath, enum cd_enum cd
                         &panel->sort_info, &panel->filter))
         message (D_ERROR, MSG_ERROR, _("Cannot read directory contents"));
 
+    if (panel->dir.len == 0)
+        panel_set_current (panel, -1);
+
     panel_set_current_by_name (panel, get_parent_dir_name (panel->cwd_vpath, olddir_vpath));
 
     load_hint (FALSE);
@@ -4272,21 +4290,6 @@ update_one_panel (int which, panel_update_flags_t flags, const char *current_fil
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
-panel_set_current (WPanel *panel, int i)
-{
-    if (i != panel->current)
-    {
-        panel->dirty = TRUE;
-        panel->current = i;
-        panel->top = panel->current - (WIDGET (panel)->rect.lines - 2) / 2;
-        if (panel->top < 0)
-            panel->top = 0;
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 /* event callback */
 static gboolean
 event_update_panels (const gchar *event_group_name, const gchar *event_name,
@@ -4443,6 +4446,12 @@ panel_set_current_by_name (WPanel *panel, const char *name)
 {
     int i;
     char *subdir;
+
+    if (panel->dir.len == 0)
+    {
+        panel_set_current (panel, -1);
+        return;
+    }
 
     if (name == NULL)
     {
@@ -4675,6 +4684,9 @@ panel_sized_with_dir_new (const char *panel_name, const WRect *r, const vfs_path
                         &panel->sort_info, &panel->filter))
         message (D_ERROR, MSG_ERROR, _("Cannot read directory contents"));
 
+    if (panel->dir.len == 0)
+        panel_set_current (panel, -1);
+
     /* Restore old right path */
     if (curdir != NULL)
     {
@@ -4724,7 +4736,10 @@ panel_reload (WPanel *panel)
         message (D_ERROR, MSG_ERROR, _("Cannot read directory contents"));
 
     panel->dirty = TRUE;
-    if (panel->current >= panel->dir.len)
+
+    if (panel->dir.len == 0)
+        panel_set_current (panel, -1);
+    else if (panel->current >= panel->dir.len)
         panel_set_current (panel, panel->dir.len - 1);
 
     recalculate_panel_summary (panel);
