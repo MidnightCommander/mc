@@ -2195,7 +2195,7 @@ move_down (WPanel *panel)
 {
     int items;
 
-    if (panel->current + 1 == panel->dir.len)
+    if (panel->dir.len == 0 || panel->current + 1 == panel->dir.len)
         return;
 
     unselect_item (panel);
@@ -2226,7 +2226,7 @@ move_down (WPanel *panel)
 static void
 move_up (WPanel *panel)
 {
-    if (panel->current == 0)
+    if (panel->dir.len == 0 || panel->current <= 0)
         return;
 
     unselect_item (panel);
@@ -2258,6 +2258,9 @@ panel_move_current (WPanel *panel, int lines)
 {
     int new_pos;
     gboolean adjust = FALSE;
+
+    if (panel->dir.len == 0 || panel->current < 0)
+        return;
 
     new_pos = panel->current + lines;
     if (new_pos >= panel->dir.len)
@@ -2327,7 +2330,7 @@ prev_page (WPanel *panel)
 {
     int items;
 
-    if (panel->current == 0 && panel->top == 0)
+    if (panel->dir.len == 0 || panel->current < 0 || (panel->current == 0 && panel->top == 0))
         return;
 
     unselect_item (panel);
@@ -2402,7 +2405,7 @@ next_page (WPanel *panel)
 {
     int items;
 
-    if (panel->current == panel->dir.len - 1)
+    if (panel->dir.len == 0 || panel->current < 0 || panel->current == panel->dir.len - 1)
         return;
 
     unselect_item (panel);
@@ -2445,6 +2448,9 @@ goto_child_dir (WPanel *panel)
 static void
 goto_top_file (WPanel *panel)
 {
+    if (panel->dir.len == 0 || panel->current < 0)
+        return;
+
     unselect_item (panel);
     panel->current = panel->top;
     select_item (panel);
@@ -2455,6 +2461,9 @@ goto_top_file (WPanel *panel)
 static void
 goto_middle_file (WPanel *panel)
 {
+    if (panel->dir.len == 0 || panel->current < 0)
+        return;
+
     unselect_item (panel);
     panel->current = panel->top + panel_items (panel) / 2;
     select_item (panel);
@@ -2465,6 +2474,9 @@ goto_middle_file (WPanel *panel)
 static void
 goto_bottom_file (WPanel *panel)
 {
+    if (panel->dir.len == 0 || panel->current < 0)
+        return;
+
     unselect_item (panel);
     panel->current = panel->top + panel_items (panel) - 1;
     select_item (panel);
@@ -2475,7 +2487,7 @@ goto_bottom_file (WPanel *panel)
 static void
 move_home (WPanel *panel)
 {
-    if (panel->current == 0)
+    if (panel->dir.len == 0 || panel->current <= 0)
         return;
 
     unselect_item (panel);
@@ -2510,7 +2522,7 @@ move_home (WPanel *panel)
 static void
 move_end (WPanel *panel)
 {
-    if (panel->current == panel->dir.len - 1)
+    if (panel->dir.len == 0 || panel->current < 0 || panel->current == panel->dir.len - 1)
         return;
 
     unselect_item (panel);
