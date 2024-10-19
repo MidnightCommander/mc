@@ -2930,7 +2930,7 @@ start_search (WPanel *panel)
 
         do_search (panel, 0);
     }
-    else
+    else if (panel->dir.len != 0)
     {
         panel->quick_search.active = TRUE;
         g_string_set_size (panel->quick_search.buffer, 0);
