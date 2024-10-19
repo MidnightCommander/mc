@@ -4960,6 +4960,49 @@ file_mark (WPanel *panel, int lc_index, int val)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Find marked file starting from the given position.
+ *
+ * @param panel WPanel object
+ * @param curent_file a staring position to get current or search next marked file
+ *
+ * @return pointer to the name of find file or NULL if no file found or @current_file is out of range
+ */
+
+const GString *
+panel_find_marked_file (const WPanel *panel, int *current_file)
+{
+    while (panel->dir.list[*current_file].f.marked == 0 && *current_file < panel->dir.len)
+        (*current_file)++;
+
+    return (*current_file >= panel->dir.len ? NULL : panel->dir.list[*current_file].fname);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Get marked file clsest to the given position.
+ *
+ * @param panel WPanel object
+ * @param curent_file a staring position to get current or closest next marked file. If there are
+ *                    no marked files in @panel, @panel->current is used.
+ *
+ * @return pointer to the name of find file or NULL if no file found or @current_file is out of range.
+ */
+
+const GString *
+panel_get_marked_file (const WPanel *panel, int *current_file)
+{
+    const file_entry_t *fe;
+
+    if (panel->marked != 0)
+        return panel_find_marked_file (panel, current_file);
+
+    fe = panel_current_entry (panel);
+
+    return (fe == NULL ? NULL : fe->fname);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 panel_re_sort (WPanel *panel)

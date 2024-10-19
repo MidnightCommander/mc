@@ -180,6 +180,8 @@ void select_item (WPanel * panel);
 void recalculate_panel_summary (WPanel * panel);
 void file_mark (WPanel * panel, int idx, int val);
 void do_file_mark (WPanel * panel, int idx, int val);
+const GString *panel_find_marked_file (const WPanel *panel, int *current_file);
+const GString *panel_get_marked_file (const WPanel *panel, int *current_file);
 
 gboolean panel_do_cd (WPanel * panel, const vfs_path_t * new_dir_vpath, enum cd_enum cd_type);
 MC_MOCKABLE gboolean panel_cd (WPanel * panel, const vfs_path_t * new_dir_vpath,

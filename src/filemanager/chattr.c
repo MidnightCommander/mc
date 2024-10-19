@@ -1087,17 +1087,6 @@ chattr_done (gboolean need_update)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static const GString *
-next_file (const WPanel *panel)
-{
-    while (panel->dir.list[current_file].f.marked == 0)
-        current_file++;
-
-    return panel->dir.list[current_file].fname;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 static gboolean
 try_chattr (const vfs_path_t *p, unsigned long m)
 {
@@ -1173,7 +1162,7 @@ chattr_apply_mask (WPanel *panel, vfs_path_t *vpath, unsigned long m)
     {
         const GString *fname;
 
-        fname = next_file (panel);
+        fname = panel_find_marked_file (panel, &current_file);
         vpath = vfs_path_from_str (fname->str);
         ok = (mc_fgetflags (vpath, &m) == 0);
 
@@ -1224,19 +1213,9 @@ chattr_cmd (WPanel *panel)
         need_update = FALSE;
         end_chattr = FALSE;
 
-        if (panel->marked != 0)
-            fname = next_file (panel);  /* next marked file */
-        else
-        {
-            /* single file */
-            const file_entry_t *fe;
-
-            fe = panel_current_entry (panel);
-            if (fe == NULL)
-                break;
-
-            fname = fe->fname;
-        }
+        fname = panel_get_marked_file (panel, &current_file);
+        if (fname == NULL)
+            break;
 
         vpath = vfs_path_from_str (fname->str);
 
