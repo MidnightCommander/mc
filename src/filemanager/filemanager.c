@@ -44,13 +44,11 @@
 #include <pwd.h>                /* for username in xterm title */
 
 #include "lib/global.h"
-#include "lib/fileloc.h"        /* MC_HINT */
-
+#include "lib/fileloc.h"        /* MC_HINT, MC_FILEPOS_FILE */
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"        /* KEY_M_* masks */
 #include "lib/skin.h"
 #include "lib/util.h"
-
 #include "lib/vfs/vfs.h"
 
 #include "src/args.h"
@@ -62,7 +60,7 @@
 #include "src/learn.h"          /* learn_keys() */
 #include "src/keymap.h"
 #include "src/usermenu.h"       /* user_file_menu_cmd() */
-#include "lib/fileloc.h"        /* MC_FILEPOS_FILE */
+
 #include "lib/keybind.h"
 #include "lib/event.h"
 
