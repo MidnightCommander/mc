@@ -57,7 +57,7 @@ changesetfs_copyout_git()
     [ -z "$GIT_DIR" ] && GIT_DIR=$WORK_DIR
 
     filecommit=`git  --git-dir="$GIT_DIR" show --raw --pretty=tformat:%h "$chset" -- "$fname"| \
-        tail -n1 | \
+        tail -1 | \
         sed 's@^::[0-9]*\s*[0-9]*\s*[0-9]*\s*@@' | \
         sed 's@^:[0-9]*\s*[0-9]*\s*@@' | \
         cut -d'.' -f 1`
@@ -98,8 +98,8 @@ command=$1; shift
 tmp_file=$1; shift
 
 WORK_DIR=`head -n1 $tmp_file`
-fname=`tail -n2 $tmp_file | head -n1`
-VCS_type=`tail -n1 $tmp_file`
+fname=`tail -2 $tmp_file | head -n1`
+VCS_type=`tail -1 $tmp_file`
 
 case "$command" in
   list) changesetfs_list "$VCS_type" "$WORK_DIR" "$fname" ;;

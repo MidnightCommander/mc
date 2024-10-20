@@ -192,7 +192,7 @@
 "if `ls -Q / >/dev/null 2>&1` ; then\n"                                   \
 "    res=`expr $res + 16`\n"                                              \
 "fi\n"                                                                    \
-"dat=`ls -lan / 2>/dev/null | head -n 3 | tail -n 1 | (\n"                \
+"dat=`ls -lan / 2>/dev/null | head -n 3 | tail -1 | (\n"                  \
 "    while read p l u g s rec; do\n"                                      \
 "        if [ -n \"$g\" ]; then\n"                                        \
 "            if [ -n \"$l\" ]; then\n"                                    \
