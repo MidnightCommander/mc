@@ -1,0 +1,180 @@
+#!/usr/bin/env ruby
+
+#
+# Fixes htags' output so that files have fixed names. E.g., S/542.html -> D/whatever.c.h.
+#
+# It addresses the following problem:
+#
+#    "Can htags create permanent addresses?"
+#    http://lists.gnu.org/archive/html/help-global/2015-11/msg00002.html
+#
+
+require 'fileutils'
+require 'pp'
+
+Encoding.default_external = "BINARY"
+
+$base = '.'  # Where the HTML is stored.
+$verbose = false
+$debug = false
+$create_subdirs = false  # Experimental feature. Doesn't really work.
+
+# Bonus: highlight the target line.
+$css = "
+a:target {
+  position: absolute;
+  left: 0;
+  height: 1.35em;
+  width: 100%;
+  background: yellow;
+  opacity: .5;
+  z-index: -1000;
+}
+"
+
+#
+# Computes pretty names for files:
+#
+#    '.../S/456.html' => 'S/modules/tty.c.html'
+#
+def prettyname(full_path, prefix, kind, nid, ext)
+  gist = nid
+  start = IO.read(full_path, 1024)
+  if start =~ /<title>(.*?)<\/title>/ then
+    gist = $1
+    gist.gsub!(%r{/+$}, '')  # remove trailing '/'s.
+    if not $create_subdirs then
+      gist.gsub!('/', '--')
+    end
+    gist.gsub!(%r{[^a-zA-Z0-9_.,/-]}, '-')  # clean special characters.
+  end
+  return kind + '/' + gist + ext
+end
+
+class Counter
+  class << self
+    def init(total)
+      @total = total
+    end
+    def reset()
+      @count = 0
+    end
+    def report()
+      print "[#{@count}/#{@total}]\r"
+      @count += 1
+    end
+    def finish()
+      puts
+    end
+  end
+end
+
+#
+# Returns a table explaining how to rename the files. E.g.:
+#
+# {
+#    'S/456.html' => 'S/modules/tty.c.html'
+#    ...
+# }
+#
+def build_cnv_tbl()
+  Counter.reset()
+  cnv = {}
+  Dir[$base + '/{[A-Z],files}/*.html'].each do |full_path|
+  #p full_path
+    if full_path =~ /(.*)\/((\w+)\/(\d+)(\.\w+))$/ then
+      prefix = $1  # "/home/joe/.../HTML"
+      path = $2    # "S/323.html"
+      kind = $3    # "S"
+      nid = $4     # "323"
+      ext = $5     # ".html"
+      pretty = prettyname(full_path, prefix, kind, nid, ext)
+      cnv[path] = pretty
+    end
+    Counter.report()
+  end
+  Counter.finish()
+  return cnv
+end
+
+#
+# Make all the substiutions inside the files:
+#
+#   <a href='../S/456.html'>  -->  <a href='../S/modules/tty.c.html'>
+#   ...
+#
+def mksub(cnv)
+  Counter.reset()
+  Dir[$base + '/**/*.html'].each do |path|
+    kind = path[$base.length .. -1][/\w+/]
+    text = IO.read(path)
+    fixed = text.gsub(/(<a href='(?:..\/)?)([^'#]+)/) do |a|
+      prefix = $1
+      target = $2
+      if cnv[target] then
+        target = cnv[target]
+      elsif cnv[kind + '/' + target] then
+        # This is a relative link of the form: href='456.html'
+        if cnv[kind + '/' + target].match /\/(.*)/  # converts "s/whatever.html" to "whatever.html"
+          target = $1
+        end
+      end
+      prefix + target
+    end
+
+    # Fix a problem in Opera, where empty lines are squashed.
+    fixed.gsub!(%r{(<a id='L\d+' name='L\d+'></a>)\n}, "\\1 \n")
+
+    if text != fixed then
+      IO.write(path, fixed)
+      puts(path + " modified") if $debug
+    end
+    Counter.report()
+  end
+  Counter.finish()
+end
+
+#
+# Rename the files.
+#
+def rename(cnv)
+  Counter.reset()
+  cnv.each do |a, b|
+    src = $base + '/' + a
+    trg = $base + '/' + b
+    if $create_subdirs then
+      FileUtils.mkdir_p(File.dirname(trg))
+    end
+    File.rename(src, trg)
+    Counter.report()
+  end
+  Counter.finish()
+end
+
+def better_css(css_path)
+  text = IO.read(css_path)
+  IO.write(css_path, text + $css)
+end
+
+def main()
+  if not File.exists?($base + '/help.html') then
+    $base += '/HTML'
+    if not File.exists?($base + '/help.html') then
+      puts "Error: This doesn't look like htags' output directory."
+      exit(1)
+    end
+  end
+  Counter.init( Dir[$base + '/**/*.html'].length )
+  puts "Figuring out pretty names..."
+  cnv = build_cnv_tbl()
+  pp cnv if $verbose
+  puts "Updating links in files..."
+  mksub(cnv)
+  puts "Renaming files..."
+  rename(cnv)
+  puts "Enhancing the css..."
+  better_css($base + '/style.css')  
+  puts "Done."
+end
+
+main()

@@ -1,7 +1,0 @@
-This directory contains files used to maintain the project.
-It should not be included into any releases or even snapshots.
-
-Please run periodically the following command:
-make cppcheck
-in the build root directory. Fix as possible all code analysis
-issues which found by the command.
