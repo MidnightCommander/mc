@@ -14,7 +14,7 @@ ${AUTORECONF:-autoreconf} --verbose --install --force -I m4 ${AUTORECONF_FLAGS}
 rm -f INSTALL && ln -s doc/INSTALL .
 
 # Generate po/POTFILES.in
-if ! xgettext -h 2>&1 | grep -e '--keyword' >/dev/null ; then
+if ! xgettext -h 2>&1 | grep -- '--keyword' >/dev/null ; then
   echo "gettext is unable to extract translations, set XGETTEXT to GNU gettext!" >&2
   touch po/POTFILES.in
 else
