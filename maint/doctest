@@ -47,7 +47,7 @@ done
 # Check that English manuals are in ASCII
 ASCII_WARNINGS=$(find "${MC_SOURCE_ROOT_DIR}/doc" -maxdepth 1 -name '*.[1-9].in' -exec groff -Tascii -ww {} \; 2>&1)
 
-if [ "x$ROFF_WARNINGS" != "x" ] || [ "x$ASCII_WARNINGS" != "x" ] ; then
+if [ "x`printf '%s' "${ROFF_WARNINGS}${ASCII_WARNINGS}" | tr -d "$IFS"`" != x ] ; then
     echo "$ROFF_WARNINGS" | sort -u | grep .
     echo "$ASCII_WARNINGS" | sort -u | grep .
     exit 1
