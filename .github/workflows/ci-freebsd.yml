@@ -24,7 +24,7 @@ jobs:
             ./autogen.sh
 
             pw useradd test -d "$(pwd)"
-            chown test -R $(pwd)
+            chown -R test $(pwd)
 
             su - test -c ' \
               ./configure \
