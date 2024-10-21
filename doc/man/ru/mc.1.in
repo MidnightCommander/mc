@@ -3613,7 +3613,7 @@ tar\-файлов;
 сменить текущий каталог командой cd, задав путь к каталогу следующим
 образом:
 .PP
-.I ftp://[!][user[:pass]@]machine[:port][remote\-dir]
+.I ftp://[!][user[:pass]@]machine[:port]/[remote\-dir]
 .PP
 Элементы
 .IR user ,

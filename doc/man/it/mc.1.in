@@ -2571,7 +2571,7 @@ la directory corrente con un comando
 .I cd
 verso un percorso simile al seguente:
 .PP
-.I ftp://[!][utente[:pass]@]macchina[:porta][dir\-remota]
+.I ftp://[!][utente[:pass]@]macchina[:porta]/[dir\-remota]
 .PP
 Gli elementi
 .IR utente , 
