@@ -1,0 +1,45 @@
+name: ci-solaris
+
+on:
+  workflow_call:
+
+jobs:
+  build-solaris:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build on FreeBSD
+        uses: vmactions/freebsd-vm@v1
+        with:
+          prepare: |
+            pkg install -y autoconf automake gettext libtool pkgconf
+            pkg install -y aspell check glib libssh2 libX11
+
+          run: |
+            export CFLAGS="-Wno-assign-enum"
+            ./autogen.sh
+
+            pw useradd -d "$(pwd)" test
+            chown test -R $(pwd)
+
+            su - test -c ' \
+              ./configure \
+                --prefix="$(pwd)/install-prefix" \
+                --with-screen=ncurses \
+                --enable-mclib \
+                --enable-aspell && \
+              \
+              make && \
+              make check && \
+              make install \
+            '
+
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: test-suite-logs-freebsd
+          path: ./**/test-suite.log
