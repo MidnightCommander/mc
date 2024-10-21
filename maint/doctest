@@ -27,7 +27,7 @@
 
 #set -e
 
-MC_SOURCE_ROOT_DIR=${MC_SOURCE_ROOT_DIR:-$(dirname $(dirname $(pwd)))}
+MC_SOURCE_ROOT_DIR=${MC_SOURCE_ROOT_DIR:-$(dirname "$(pwd)")}
 
 #*** include section (source functions, for example) *******************
 
@@ -52,7 +52,7 @@ one_test() {
     exit 1
 }
 
-# Test the documentation for possible errors.
+# Test the documentation for possible errors
 for i in $(find "${MC_SOURCE_ROOT_DIR}/doc" -name '*.[1-9].in'); do
     echo "test (groff): $i"
 
@@ -69,7 +69,7 @@ for i in $(find "${MC_SOURCE_ROOT_DIR}/doc" -name '*.[1-9].in'); do
         grep "warning:"
 done
 
-# Check the English manuals to be in ASCII.
+# Check the English manuals to be in ASCII
 one_test find "${MC_SOURCE_ROOT_DIR}/doc" -maxdepth 1 -name '*.[1-9].in' -exec groff -wall -Tascii {} \;
 
 rm -rf doctest.err
