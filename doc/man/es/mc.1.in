@@ -3076,7 +3076,7 @@ o simplemente emplear la orden
 como cuando cambiamos habitualmente de directorio, pero indicando
 como ruta:
 .PP
-.I ftp://[!][usuario[:clave]@]maquina[:puerto][dir\-remoto]
+.I ftp://[!][usuario[:clave]@]maquina[:puerto]/[dir\-remoto]
 .PP
 Los elementos
 .IR usuario ,

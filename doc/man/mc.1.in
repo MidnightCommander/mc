@@ -3166,7 +3166,7 @@ item in the menu or directly change your current directory using the
 .I cd
 command to a path name that looks like this:
 .PP
-.I ftp://[!][user[:pass]@]machine[:port][remote\-dir]
+.I ftp://[!][user[:pass]@]machine[:port]/[remote\-dir]
 .PP
 The
 .IR user ,
