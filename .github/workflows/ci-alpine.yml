@@ -26,7 +26,7 @@ jobs:
         run: |
           # Tests must be run as a non-root user
           adduser --home "$(pwd)" --no-create-home --disabled-password test
-          chown test -R "$(pwd)"
+          chown -R test "$(pwd)"
 
           sudo -u test -i \
             ./configure \

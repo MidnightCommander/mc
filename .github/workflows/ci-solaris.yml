@@ -24,7 +24,7 @@ jobs:
             ./autogen.sh
 
             useradd -d "$(pwd)" test
-            chown test -R $(pwd)
+            chown -R test $(pwd)
 
             su - test -c ' \
               export PKG_CONFIG_PATH=/usr/lib/64/pkgconfig && \
