@@ -96,6 +96,9 @@ copy=xterm
 [terminal:xterm-new]
 copy=xterm
 
+[terminal:xterm-clear]
+copy=xterm
+
 [terminal:xterm-color]
 copy=xterm
 
