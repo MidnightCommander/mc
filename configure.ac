@@ -66,6 +66,7 @@ ax_gcc_func_attribute_save_flags=$[]_AC_LANG_PREFIX[]FLAGS
 _AC_LANG_PREFIX[]FLAGS=
 AX_GCC_FUNC_ATTRIBUTE([fallthrough])
 AX_GCC_FUNC_ATTRIBUTE([weak])
+AX_GCC_FUNC_ATTRIBUTE([unused])
 _AC_LANG_PREFIX[]FLAGS=$ax_gcc_func_attribute_save_flags
 unset ax_gcc_func_attribute_save_flags
 

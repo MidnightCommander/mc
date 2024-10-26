@@ -1215,7 +1215,7 @@ read_file_system_list (void)
 
     return g_slist_reverse (mount_list);
 
-  free_then_fail:
+  free_then_fail: MC_UNUSED;
     {
         int saved_errno = errno;
 

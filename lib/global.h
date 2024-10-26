@@ -50,6 +50,12 @@
 #define MC_FALLTHROUGH
 #endif
 
+#ifdef HAVE_FUNC_ATTRIBUTE_UNUSED
+#define MC_UNUSED __attribute__((unused))
+#else
+#define MC_UNUSED
+#endif
+
 #ifdef USE_MAINTAINER_MODE
 #include "lib/logging.h"
 #endif
