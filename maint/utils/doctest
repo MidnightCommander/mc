@@ -25,52 +25,30 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#set -e
+set +e
 
-MC_SOURCE_ROOT_DIR=${MC_SOURCE_ROOT_DIR:-$(dirname $(dirname $(pwd)))}
-
-#*** include section (source functions, for example) *******************
-
-#*** file scope functions **********************************************
-
-one_test() {
-    "$@" >/dev/null 2>doctest.err
-    if test -s doctest.err; then
-        echo "ERROR messages follow:" 2>&1
-        cat doctest.err 2>&1
-        echo "ERROR while running following command:" 2>&1
-        echo "$@" 2>&1
-        echo "ERROR messages are preserved in doctest.err"
-        exit 1
-    fi
-}
+MC_SOURCE_ROOT_DIR=${MC_SOURCE_ROOT_DIR:-$(dirname "$(pwd)")}
 
 #*** main code *********************************************************
 
 [ -r "${MC_SOURCE_ROOT_DIR}/doc/man/mc.1.in" ] || {
-    echo "ERROR: cannot read doc/mc.1.in" 2>&1
+    echo "ERROR: cannot read doc/man/mc.1.in" 2>&1
     exit 1
 }
 
-# Test the documentation for possible errors.
-for i in $(find "${MC_SOURCE_ROOT_DIR}/doc" -name '*.[1-9].in'); do
-    echo "test (groff): $i"
-
-    preconv -e UTF8 "${i}" | \
-        groff -wall -mandoc -Tutf8 | \
-        grep "warning:"
+for cmd in groff nroff ; do
+    IFS='' ROFF_WARNINGS="$ROFF_WARNINGS
+$(
+    find "${MC_SOURCE_ROOT_DIR}/doc" -name '*.[1-9].in' \
+        -exec sh -c "$cmd -K UTF-8 -Tutf8 -mandoc -ww '{}' | grep 'warning:'" \; 2>&1
+)"
 done
 
-for i in $(find "${MC_SOURCE_ROOT_DIR}/doc" -name '*.[1-9].in'); do
-    echo "test (nroff): $i"
+# Check that English manuals are in ASCII
+ASCII_WARNINGS=$(find "${MC_SOURCE_ROOT_DIR}/doc" -maxdepth 1 -name '*.[1-9].in' -exec groff -Tascii -ww {} \; 2>&1)
 
-    preconv -e UTF8 "${i}" | \
-        nroff -Tutf8 -mandoc | \
-        grep "warning:"
-done
-
-# Check the English manuals to be in ASCII.
-one_test find "${MC_SOURCE_ROOT_DIR}/doc" -maxdepth 1 -name '*.[1-9].in' -exec groff -wall -Tascii {} \;
-
-rm -rf doctest.err
-exit 0
+if [ "x`printf '%s' "${ROFF_WARNINGS}${ASCII_WARNINGS}" | tr -d "$IFS"`" != x ] ; then
+    echo "$ROFF_WARNINGS" | sort -u | grep .
+    echo "$ASCII_WARNINGS" | sort -u | grep .
+    exit 1
+fi
