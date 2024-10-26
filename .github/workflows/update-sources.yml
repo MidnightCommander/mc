@@ -1,0 +1,48 @@
+name: update-sources
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  update-sources:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install GNU Global
+        run: sudo apt-get install -y global exuberant-ctags python3-pygments
+
+      - name: Checkout source repo
+        uses: actions/checkout@v4
+        with:
+          repository: MidnightCommander/source
+          path: HTML
+          ref: gh-pages
+          ssh-key: ${{ secrets.SOURCE_DEPLOY_KEY }}
+
+      - name: Create sources index
+        run: |
+          pushd HTML
+            git rm -rf *
+          popd
+
+          gtags
+          htags --suggest -t "Welcome to the Midnight Commander source tour!"
+          ./maint/htagsfix
+
+      - name: Deploy to GitHub
+        run: |
+          cd HTML
+
+          touch .nojekyll
+          echo "source.midnight-commander.org" > CNAME
+
+          git config user.name "GitHub Actions"
+          git config user.email "github@midnight-commander.org"
+
+          git add .
+          git commit -m "Deploy to GitHub Pages"
+
+          git push --force-with-lease
