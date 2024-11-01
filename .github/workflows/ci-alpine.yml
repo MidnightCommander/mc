@@ -1,0 +1,46 @@
+name: ci-alpine
+
+on:
+  workflow_call:
+
+jobs:
+  build-alpine:
+    runs-on: ubuntu-latest
+    container:
+      image: alpine:latest
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          apk add autoconf automake build-base libtool pkgconf sudo
+          apk add aspell-dev check-dev e2fsprogs-dev gettext-dev glib-dev gpm-dev libssh2-dev perl slang-dev
+
+      - name: Bootstrap build system
+        run: ./autogen.sh
+
+      - name: Build default configuration
+        run: |
+          adduser --home "$(pwd)" --no-create-home --disabled-password test
+          chown -R test "$(pwd)"
+
+          su - test -c ' \
+            ./configure \
+              --prefix="$(pwd)/install-prefix" \
+              --enable-mclib \
+              --enable-aspell \
+              --enable-werror \
+              && \
+            \
+            make -j$(nproc) && \
+            make check  && \
+            make install \
+          '
+
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: test-suite-logs-alpine
+          path: ./**/test-suite.log

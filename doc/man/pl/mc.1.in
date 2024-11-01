@@ -2178,7 +2178,7 @@ normalnego użytku, możesz próbować używać panelowych komend FTP i dowiąza
 (dostępnych z linii menu) lub zmienić ścieżkę bezpośrednio za pomocą zwykłej
 komendy cd wyglądającej tak jak poniżej:
 .PP
-.I ftp://[!][użytkownik[:hasło]@]komputer[:port][zdalny katalog]
+.I ftp://[!][użytkownik[:hasło]@]komputer[:port]/[zdalny\-katalog]
 .PP
 Parametry
 .IR użytkownik ,

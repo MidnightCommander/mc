@@ -1,0 +1,34 @@
+name: CI
+on: [ push, pull_request ]
+
+jobs:
+  call-build-ubuntu:
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
+    uses: ./.github/workflows/ci-ubuntu.yml
+
+  call-build-fedora:
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
+    uses: ./.github/workflows/ci-fedora.yml
+
+  call-build-alpine:
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
+    uses: ./.github/workflows/ci-alpine.yml
+
+  call-build-macos:
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
+    uses: ./.github/workflows/ci-macos.yml
+    with:
+      # https://github.com/llvm/llvm-project/issues/20574
+      CFLAGS: -Wno-assign-enum
+
+  call-build-solaris:
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
+    uses: ./.github/workflows/ci-solaris.yml
+
+  call-build-freebsd:
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
+    uses: ./.github/workflows/ci-freebsd.yml
+    with:
+      # https://github.com/llvm/llvm-project/issues/20574
+      # https://github.com/GNUAspell/aspell/pull/651
+      CFLAGS: -Wno-assign-enum -Wno-strict-prototypes

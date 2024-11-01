@@ -69,7 +69,9 @@ fi
 RPM_QUERY_FMT="$RPM -qp --qf"
 RPM2CPIO="rpm2cpio"
 
-SED="sed"
+# Prefer `gsed` on Solaris due to complex regex
+SED=`command -v gsed 2>/dev/null` \
+    || SED=`command -v sed 2>/dev/null`
 
 param=$1; shift
 rpm_filename=$1; shift

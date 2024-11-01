@@ -1,0 +1,100 @@
+name: ci-ubuntu
+
+on:
+  workflow_call:
+
+jobs:
+  build-ubuntu:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get install -y autoconf autopoint check gettext indent libtool pkg-config
+          sudo apt-get install -y e2fslibs-dev libaspell-dev libglib2.0-dev libgpm-dev libncurses5-dev libpcre2-dev libslang2-dev libssh2-1-dev libx11-dev unzip
+
+      - name: Bootstrap build system
+        run: ./autogen.sh
+
+      - name: Build distribution archive
+        run: |
+          mkdir -p build-distrib && cd $_
+
+          ../configure
+
+          make dist-bzip2
+
+      - name: Build full configuration
+        run: |
+          tar -xjf $(ls build-distrib/mc-*.tar.bz2) --one-top-level=build-full
+          cd build-full
+
+          ../configure \
+              --prefix="$(pwd)/install" \
+              --enable-mclib \
+              --enable-aspell \
+              --enable-vfs-undelfs \
+              --enable-werror
+
+          make indent
+          # TODO: exit 1
+          git ls-files --modified
+
+          make -j$(nproc)
+          make check
+          make install
+
+      - name: Build ncurses & pcre2 configuration
+        run: |
+          tar -xjf $(ls build-distrib/mc-*.tar.bz2) --one-top-level=build-ncurses
+          cd build-ncurses
+
+          ../configure \
+              --prefix="$(pwd)/install" \
+              --with-screen=ncurses \
+              --with-search-engine=pcre2 \
+              --enable-werror
+
+          make -j$(nproc)
+          make check
+
+      - name: Build minimal configuration
+        run: |
+          tar -xjf $(ls build-distrib/mc-*.tar.bz2) --one-top-level=build-minimal
+          cd build-minimal
+
+          ../configure \
+              --prefix="$(pwd)/install" \
+              --disable-shared \
+              --disable-static \
+              --disable-maintainer-mode \
+              --disable-largefile \
+              --disable-nls \
+              --disable-rpath \
+              --disable-charset \
+              --disable-mclib \
+              --disable-assert \
+              --disable-aspell \
+              --disable-background \
+              --disable-vfs \
+              --disable-doxygen-doc \
+              --without-x \
+              --without-gpm-mouse \
+              --without-internal-edit \
+              --without-diff-viewer \
+              --without-subshell \
+              --enable-tests \
+              --enable-werror
+
+            make -j$(nproc)
+            make check
+
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: test-suite-logs-ubuntu
+          path: build-*/**/test-suite.log
+

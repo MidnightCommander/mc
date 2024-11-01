@@ -2529,7 +2529,7 @@ panel FTP kapcsolat... parancsát (elérhető a menüből), vagy
 közvetlenül átválthatsz a jelenlegi könyvtárból a cd
 parancs használatával, valahogy így:
 .PP
-.I ftp://[!][felhasználó[:jelszó]@]machine[:port][távoli\-könyvtár]
+.I ftp://[!][felhasználó[:jelszó]@]machine[:port]/[távoli\-könyvtár]
 .PP
 A
 .I felhasználó, port

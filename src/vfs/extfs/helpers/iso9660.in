@@ -97,10 +97,10 @@ xorriso_list() (
     fi
 
     # The first line is /, skip it
-    tail -n+2 "$temp_ls" |
+    sed 1,1d "$temp_ls" |
         # disk_ops.c:Xorriso_format_ls_l() prints the boot catalog file as of
         # type "e". Make it a generic file
-        sed -E 's,^e,-,' |
+        sed 's,^e,-,' |
         @AWK@ "$awk_xorriso_unesc"
 
     rm -f "$temp_ls"
