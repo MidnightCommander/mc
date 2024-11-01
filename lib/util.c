@@ -736,7 +736,10 @@ skip_numbers (const char *s)
  * "control sequence", in a sort of pidgin BNF, as follows:
  *
  * control-seq = Esc non-'['
- *             | Esc '[' (0 or more digits or ';' or ':' or '?') (any other char)
+ *             | Esc '[' (parameter-byte)* (intermediate-byte)* final-byte
+ * parameter-byte = [\x30-\x3F]     # one of "0-9;:<=>?"
+ * intermediate-byte = [\x20–\x2F]  # one of " !\"#$%&'()*+,-./"
+ * final-byte = [\x40-\x7e]         # one of "@A–Z[\]^_`a–z{|}~"
  *
  * The 256-color and true-color escape sequences should allow either ';' or ':' inside as separator,
  * actually, ':' is the more correct according to ECMA-48.
@@ -763,8 +766,10 @@ strip_ctrl_codes (char *s)
             if (*(++r) == '[' || *r == '(')
             {
                 /* strchr() matches trailing binary 0 */
-                while (*(++r) != '\0' && strchr ("0123456789;:?", *r) != NULL)
+                while (*(++r) != '\0' && strchr ("0123456789;:<=>?", *r) != NULL)
                     ;
+                while (*r != '\0' && (*r < 0x40 || *r > 0x7E))
+                    ++r;
             }
             else if (*r == ']')
             {

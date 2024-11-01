@@ -180,6 +180,9 @@ static int subshell_pty_slave = -1;
 /* The key for switching back to MC from the subshell */
 /* *INDENT-OFF* */
 static const char subshell_switch_key = XCTRL ('o') & 255;
+
+static const char subshell_switch_key_csi_u[] = "\x1b[111;5u";
+static const size_t subshell_switch_key_csi_u_len = sizeof(subshell_switch_key_csi_u) - 1;
 /* *INDENT-ON* */
 
 /* For reading/writing on the subshell's pty */
@@ -427,10 +430,14 @@ init_subshell_child (const char *pty_name)
         execl (mc_global.shell->path, mc_global.shell->path, "-Z", "-g", (char *) NULL);
         break;
 
+    case SHELL_FISH:
+        execl (mc_global.shell->path, mc_global.shell->path,
+               "--init-command", "set --global __mc_csi_u 1", (char *) NULL);
+        break;
+
     case SHELL_ASH_BUSYBOX:
     case SHELL_DASH:
     case SHELL_TCSH:
-    case SHELL_FISH:
         execl (mc_global.shell->path, mc_global.shell->path, (char *) NULL);
         break;
 
@@ -864,7 +871,10 @@ feed_subshell (int how, gboolean fail_on_error)
             }
 
             for (i = 0; i < bytes; ++i)
-                if (pty_buffer[i] == subshell_switch_key)
+                if (pty_buffer[i] == subshell_switch_key ||
+                    (subshell_switch_key_csi_u_len <= (size_t) bytes - i &&
+                     memcmp (&pty_buffer[i], subshell_switch_key_csi_u,
+                             subshell_switch_key_csi_u_len) == 0))
                 {
                     write_all (mc_global.tty.subshell_pty, pty_buffer, i);
 
