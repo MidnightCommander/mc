@@ -9,7 +9,7 @@ from translation_utils import get_translations, init_sync_dir
 RESOURCE_NAME = "mc.pot"
 
 SCRIPT_DIR = Path(__file__).parent
-SOURCE_DIR = SCRIPT_DIR.parent.parent.parent
+SOURCE_DIR = SCRIPT_DIR.parent.parent
 PO_DIR = SOURCE_DIR / "po"
 
 

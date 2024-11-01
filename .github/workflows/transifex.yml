@@ -1,4 +1,4 @@
-name: Transifex
+name: transifex
 
 on:
   push:
@@ -23,10 +23,10 @@ jobs:
           curl -o- https://raw.githubusercontent.com/transifex/cli/master/install.sh | bash
           echo "${HOME}/.local/bin" >> $GITHUB_PATH
 
-      - run: ./maint/utils/sync-transifex/po-to-transifex.py
+      - run: ./maint/sync-transifex/po-to-transifex.py
         env:
           TX_TOKEN: ${{ secrets.TX_TOKEN }}
 
-      - run: ./maint/utils/sync-transifex/hints-to-transifex.py
+      - run: ./maint/sync-transifex/hints-to-transifex.py
         env:
           TX_TOKEN: ${{ secrets.TX_TOKEN }}

@@ -10,7 +10,7 @@ from translation_utils import create_po4a_config, init_sync_dir
 RESOURCE_NAME = "mc.hint"
 
 SCRIPT_DIR = Path(__file__).parent
-SOURCE_DIR = SCRIPT_DIR.parent.parent.parent
+SOURCE_DIR = SCRIPT_DIR.parent.parent
 
 
 def unwrap_paragraphs():
