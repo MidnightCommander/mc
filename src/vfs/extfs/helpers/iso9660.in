@@ -32,7 +32,7 @@
 
 #*** file scope functions **********************************************
 
-XORRISO=$(command -v xorriso 2>/dev/null)
+XORRISO=`command -v xorriso 2>/dev/null`
 
 # This snippet is used to undo xorriso's Text_shellsafe(). Pseudocode for the
 # function:
@@ -49,7 +49,7 @@ XORRISO=$(command -v xorriso 2>/dev/null)
 # - iso_tree.c:Xorriso_ls()
 # - text_io.c:Xorriso_esc_filepath()
 # - misc_funct.c:Text_shellsafe()
-awk_xorriso_unesc=$(cat <<'EOF'
+awk_xorriso_unesc=`cat <<'EOF'
 {
     # Start of the path part
     i = index($0, "'")
@@ -78,14 +78,14 @@ awk_xorriso_unesc=$(cat <<'EOF'
     print substr($0, 1, i-1) s
 }
 EOF
-)
+`
 
 xorriso_list() (
     if test -z "$XORRISO"; then
         return 1
     fi
 
-    temp_ls=$(mktemp "${MC_TMPDIR:-/tmp}"/mc-iso9660.XXXXXX) || return 1
+    temp_ls=`mktemp "${MC_TMPDIR:-/tmp}"/mc-iso9660.XXXXXX` || return 1
 
     # $XORRISO must be unquoted here to hook into the testing framework
     $XORRISO -abort_on FATAL -dev stdio:"$1" -find / -exec lsdl 2>/dev/null >"$temp_ls"
@@ -143,18 +143,18 @@ xorriso_rm() {
 
 # tested to comply with isoinfo 2.0's output
 test_iso () {
-    ISOINFO=$(command -v isoinfo 2>/dev/null)
+    ISOINFO=`command -v isoinfo 2>/dev/null`
     if test -z "$ISOINFO"; then
         echo "isoinfo not found" >&2
         return 1
     fi
 
-    CHARSET=$(locale charmap 2>/dev/null)
+    CHARSET=`locale charmap 2>/dev/null`
     if test -z "$CHARSET"; then
-        CHARSET=$(locale 2>/dev/null | grep LC_CTYPE | sed -n -e 's/.*\.\(.*\)"$/\1/p')
+        CHARSET=`locale 2>/dev/null | grep LC_CTYPE | sed -n -e 's/.*\.\(.*\)"$/\1/p'`
     fi
     if test -n "$CHARSET"; then
-        CHARSET=$(echo "$CHARSET" | tr '[A-Z]' '[a-z]' | sed -e 's/^iso-/iso/')
+        CHARSET=`echo "$CHARSET" | tr '[A-Z]' '[a-z]' | sed -e 's/^iso-/iso/'`
         $ISOINFO -j $CHARSET -i /dev/null 2>&1 | grep "Iconv not yet supported\|Unknown charset" >/dev/null && CHARSET=
     fi
     if test -n "$CHARSET"; then
@@ -163,13 +163,13 @@ test_iso () {
         JOLIET_OPT="-J"
     fi
 
-    ISOINFO_D_I="$($ISOINFO -d -i "$1" 2>/dev/null)"
+    ISOINFO_D_I=`$ISOINFO -d -i "$1" 2>/dev/null`
     ISOINFO="$ISOINFO -R"
 
     echo "$ISOINFO_D_I" | grep "UCS level 1\|NO Joliet" > /dev/null || ISOINFO="$ISOINFO $JOLIET_OPT"
 
-    if [ $(echo "$ISOINFO_D_I" | grep "Joliet with UCS level 3 found" | wc -l) = 1 \
-        -a $(echo "$ISOINFO_D_I" | grep "NO Rock Ridge" | wc -l) = 1 ] ; then
+    if [ `echo "$ISOINFO_D_I" | grep "Joliet with UCS level 3 found" | wc -l` = 1 \
+        -a `echo "$ISOINFO_D_I" | grep "NO Rock Ridge" | wc -l` = 1 ] ; then
         SEMICOLON="YES"
     fi
 }
@@ -190,7 +190,7 @@ mcisofs_list () (
       *)     MYCAT="cat";;
     esac
 
-    lsl=$($ISOINFO -l -i "$1"  2>/dev/null)
+    lsl=`$ISOINFO -l -i "$1"  2>/dev/null`
     r=$?
     test $r -gt 0 && return $r
 
