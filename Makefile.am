@@ -1,5 +1,5 @@
 ## Process this file with automake to create Makefile.in.
-AUTOMAKE_OPTIONS = 1.12
+AUTOMAKE_OPTIONS = 1.14
 
 SUBDIRS = po lib src doc contrib misc
 

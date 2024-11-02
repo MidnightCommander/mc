@@ -41,7 +41,6 @@ dnl that ar cannot be found and linking via libtool will fail at a later stage
 AC_CHECK_TOOLS([AR], [ar gar])
 
 AC_PROG_CC
-AM_PROG_CC_C_O
 
 mc_CHECK_CFLAGS
 
