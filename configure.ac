@@ -49,7 +49,7 @@ if test "x$CFLAGS" = "x"; then
     CFLAGS_OPTS=" -O2 "
 fi
 if test x$USE_MAINTAINER_MODE = xyes; then
-    CFLAGS_OPTS="-g3 -O -ggdb"
+    CFLAGS_OPTS="-g3 -Og -ggdb"
     AC_DEFINE(USE_MAINTAINER_MODE, 1, [Use maintainer mode])
 fi
 
