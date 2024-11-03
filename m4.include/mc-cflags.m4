@@ -37,7 +37,6 @@ AC_DEFUN([mc_CHECK_CFLAGS],[
     AX_APPEND_COMPILE_FLAGS([-Wint-conversion], [mc_configured_cflags], [$EXTRA_OPTION])
 
     dnl Sorted -W options not included in -Wall and -Wextra
-    AX_APPEND_COMPILE_FLAGS([-Wassign-enum], [mc_configured_cflags], [$EXTRA_OPTION])
     AX_APPEND_COMPILE_FLAGS([-Wbad-function-cast], [mc_configured_cflags], [$EXTRA_OPTION])
     AX_APPEND_COMPILE_FLAGS([-Wconditional-uninitialized], [mc_configured_cflags], [$EXTRA_OPTION])
     AX_APPEND_COMPILE_FLAGS([-Wfloat-conversion], [mc_configured_cflags], [$EXTRA_OPTION])
@@ -59,6 +58,14 @@ AC_DEFUN([mc_CHECK_CFLAGS],[
     AX_APPEND_COMPILE_FLAGS([-Wunreachable-code], [mc_configured_cflags], [$EXTRA_OPTION])
     AX_APPEND_COMPILE_FLAGS([-Wunused-result], [mc_configured_cflags], [$EXTRA_OPTION])
     AX_APPEND_COMPILE_FLAGS([-Wwrite-strings], [mc_configured_cflags], [$EXTRA_OPTION])
+
+    dnl Explicitly disabled warnings
+
+    dnl This flags casts like (GCompareDataFunc) with missing parameter
+    AX_APPEND_COMPILE_FLAGS([-Wno-cast-function-type], [mc_configured_cflags], [$EXTRA_OPTION])
+
+    dnl https://github.com/llvm/llvm-project/issues/20574
+    AX_APPEND_COMPILE_FLAGS([-Wno-assign-enum], [mc_configured_cflags], [$EXTRA_OPTION])
 
     AC_LANG_POP()
 ])
