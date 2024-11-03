@@ -3,7 +3,7 @@ dnl Configure.in file for the Midnight Commander
 dnl
 
 dnl 2.64 is required at least for m4_esyscmd_s()
-AC_PREREQ(2.64)
+AC_PREREQ([2.64])
 
 AC_INIT([GNU Midnight Commander], m4_esyscmd_s([./version.sh .]),
         [https://www.midnight-commander.org/wiki/NewTicket], [mc],
@@ -373,7 +373,7 @@ aux*)
     ;;
 esac
 
-dnl If running under AIX, AC_AIX does not tell us that
+dnl If running under AIX, AC_USE_SYSTEM_EXTENSIONS does not tell us that
 AC_MSG_CHECKING([for AIX defines])
 AC_EGREP_CPP([yes],
     [
