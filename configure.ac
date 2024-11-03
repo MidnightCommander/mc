@@ -42,6 +42,11 @@ AC_CHECK_TOOLS([AR], [ar gar])
 
 AC_PROG_CC
 
+# AC_PROG_CC doesn't try enabling C99 in autoconf 2.69 and below, but
+# AC_PROG_CC_C99 is deprecated in newer ones. In autoconf 2.70+ both
+# will try enabling features up to C11.
+m4_version_prereq([2.70], [AC_PROG_CC], [AC_PROG_CC_C99])
+
 mc_CHECK_CFLAGS
 
 CFLAGS_OPTS=""
