@@ -3,7 +3,7 @@ dnl Configure.in file for the Midnight Commander
 dnl
 
 dnl 2.64 is required at least for m4_esyscmd_s()
-AC_PREREQ(2.64)
+AC_PREREQ([2.64])
 
 AC_INIT([GNU Midnight Commander], m4_esyscmd_s([./version.sh .]),
         [https://www.midnight-commander.org/wiki/NewTicket], [mc],
@@ -41,7 +41,11 @@ dnl that ar cannot be found and linking via libtool will fail at a later stage
 AC_CHECK_TOOLS([AR], [ar gar])
 
 AC_PROG_CC
-AM_PROG_CC_C_O
+
+# AC_PROG_CC doesn't try enabling C99 in autoconf 2.69 and below, but
+# AC_PROG_CC_C99 is deprecated in newer ones. In autoconf 2.70+ both
+# will try enabling features up to C11.
+m4_version_prereq([2.70], [AC_PROG_CC], [AC_PROG_CC_C99])
 
 mc_CHECK_CFLAGS
 
@@ -50,7 +54,7 @@ if test "x$CFLAGS" = "x"; then
     CFLAGS_OPTS=" -O2 "
 fi
 if test x$USE_MAINTAINER_MODE = xyes; then
-    CFLAGS_OPTS="-g3 -O -ggdb"
+    CFLAGS_OPTS="-g3 -Og -ggdb"
     AC_DEFINE(USE_MAINTAINER_MODE, 1, [Use maintainer mode])
 fi
 
@@ -374,7 +378,7 @@ aux*)
     ;;
 esac
 
-dnl If running under AIX, AC_AIX does not tell us that
+dnl If running under AIX, AC_USE_SYSTEM_EXTENSIONS does not tell us that
 AC_MSG_CHECKING([for AIX defines])
 AC_EGREP_CPP([yes],
     [

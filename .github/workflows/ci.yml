@@ -17,9 +17,6 @@ jobs:
   call-build-macos:
     if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
     uses: ./.github/workflows/ci-macos.yml
-    with:
-      # https://github.com/llvm/llvm-project/issues/20574
-      CFLAGS: -Wno-assign-enum
 
   call-build-solaris:
     if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
@@ -29,6 +26,5 @@ jobs:
     if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
     uses: ./.github/workflows/ci-freebsd.yml
     with:
-      # https://github.com/llvm/llvm-project/issues/20574
       # https://github.com/GNUAspell/aspell/pull/651
-      CFLAGS: -Wno-assign-enum -Wno-strict-prototypes
+      CFLAGS: -Wno-strict-prototypes
