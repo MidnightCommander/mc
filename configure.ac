@@ -97,9 +97,9 @@ if $HAVE_nroff; then
     AC_CACHE_VAL(mc_cv_mandoc, [
     nroff -mandoc < /dev/null > /dev/null 2>&1
     if test $? = 0; then
-	mc_cv_mandoc=-mandoc
+        mc_cv_mandoc=-mandoc
     else
-	mc_cv_mandoc=-man
+        mc_cv_mandoc=-man
     fi
     ])
     MANDOC=$mc_cv_mandoc
@@ -109,9 +109,9 @@ if $HAVE_nroff; then
     AC_CACHE_VAL(mc_cv_man_nocolor, [
     nroff -c < /dev/null > /dev/null 2>&1
     if test $? = 0; then
-	mc_cv_man_nocolor=-c
+        mc_cv_man_nocolor=-c
     else
-	mc_cv_man_nocolor=
+        mc_cv_man_nocolor=
     fi
     ])
     MAN_FLAGS=$mc_cv_man_nocolor
@@ -122,12 +122,12 @@ if $HAVE_nroff; then
     mc_cv_nroff_tascii=
     nroff -Tlatin1 < /dev/null > /dev/null 2>&1 /dev/null
     if test $? = 0; then
-	mc_cv_nroff_tascii=-Tlatin1
+        mc_cv_nroff_tascii=-Tlatin1
     else
         nroff -Tascii < /dev/null > /dev/null 2>&1 /dev/null
         if test $? = 0; then
-	    mc_cv_nroff_tascii=-Tascii
-	fi
+            mc_cv_nroff_tascii=-Tascii
+        fi
     fi
     ])
     AC_MSG_RESULT([${mc_cv_nroff_tascii-no}])
@@ -239,9 +239,9 @@ dnl Check for header files
 dnl ############################################################################
 
 AC_CHECK_HEADERS([string.h memory.h limits.h malloc.h \
-	utime.h sys/statfs.h sys/vfs.h \
-	sys/select.h sys/ioctl.h stropts.h arpa/inet.h \
-	sys/socket.h])
+    utime.h sys/statfs.h sys/vfs.h \
+    sys/select.h sys/ioctl.h stropts.h arpa/inet.h \
+    sys/socket.h])
 dnl This macro is redefined in m4.include/gnulib/sys_types_h.m4
 dnl   to work around a buggy version in autoconf <= 2.69.
 AC_HEADER_MAJOR
@@ -318,9 +318,9 @@ dnl Check for functions
 dnl ############################################################################
 
 AC_CHECK_FUNCS([\
-	strverscmp \
-	strncasecmp \
-	realpath
+    strverscmp \
+    strncasecmp \
+    realpath
 ])
 
 dnl getpt is a GNU Extension (glibc 2.1.x)
@@ -420,17 +420,16 @@ AC_ARG_WITH([gpm-mouse],
 case $host_os in
 linux*)
     if test x$with_gpm_mouse != xno; then
-	AC_CHECK_LIB(gpm, Gpm_Repeat,
-	    [AC_DEFINE(HAVE_LIBGPM, 1,
-		       [Define to enable gpm mouse support on Linux])
-	    mouse_lib="gpm and xterm"
-	    MCLIBS="$MCLIBS -lgpm"],
+        AC_CHECK_LIB(gpm, Gpm_Repeat,
+            [AC_DEFINE(HAVE_LIBGPM, 1, [Define to enable gpm mouse support on Linux])
+            mouse_lib="gpm and xterm"
+            MCLIBS="$MCLIBS -lgpm"],
             if test "x$with_gpm_mouse" = "xyes"; then
                 [AC_MSG_ERROR([libgpm is missing or older than 0.18])]
             else
                 [AC_MSG_WARN([libgpm is missing or older than 0.18])]
             fi
-	)
+        )
     fi
     ;;
 esac
@@ -477,12 +476,12 @@ AC_ARG_WITH([diff_viewer],
     AS_HELP_STRING([--with-diff-viewer], [Compile with diff viewer @<:@yes@:>@]))
 
 if test x$with_diff_viewer != xno; then
-	AC_DEFINE(USE_DIFF_VIEW, 1, [Define to enable diff viewer])
-	use_diff=yes
-	diff_msg="yes"
-	AC_MSG_NOTICE([using diff viewer])
+        AC_DEFINE(USE_DIFF_VIEW, 1, [Define to enable diff viewer])
+        use_diff=yes
+        diff_msg="yes"
+        AC_MSG_NOTICE([using diff viewer])
 else
-	diff_msg="no"
+        diff_msg="no"
 fi
 
 mc_SUBSHELL
@@ -522,9 +521,9 @@ ALL_DOC_LINGUAS="es hu it pl ru sr"
 DOC_LINGUAS=
 if test "x$USE_NLS" = xyes; then
     if test -z "$LINGUAS"; then
-	langs="`grep -v '^#' $srcdir/po/LINGUAS`"
+        langs="`grep -v '^#' $srcdir/po/LINGUAS`"
     else
-	langs="$LINGUAS"
+        langs="$LINGUAS"
     fi
 else
     langs=
@@ -532,10 +531,10 @@ fi
 
 for h_lang in $ALL_DOC_LINGUAS; do
     for lang in $langs; do
-	if test "$lang" = "$h_lang"; then
-	    DOC_LINGUAS="$DOC_LINGUAS $lang"
-	    break
-	fi
+        if test "$lang" = "$h_lang"; then
+            DOC_LINGUAS="$DOC_LINGUAS $lang"
+            break
+        fi
     done
 done
 AC_SUBST(DOC_LINGUAS)
