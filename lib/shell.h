@@ -18,7 +18,9 @@ typedef enum
     SHELL_DASH,                 /* Debian variant of ash */
     SHELL_TCSH,
     SHELL_ZSH,
-    SHELL_FISH
+    SHELL_FISH,
+    SHELL_KSH,                  /* Public Domain Korn shell (pdksh) and variants */
+    SHELL_MKSH                  /* MirBSD Korn shell (mksh) */
 } shell_type_t;
 
 /*** structures declarations (and typedefs of structures)*****************************************/
