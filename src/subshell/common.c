@@ -386,6 +386,23 @@ init_subshell_child (const char *pty_name)
 
         break;
 
+    case SHELL_MKSH:
+        /* Do we have a custom init file ~/.local/share/mc/mkshrc? */
+        init_file = mc_config_get_full_path (MC_MKSHRC_FILE);
+
+        /* Otherwise use ~/.mkshrc */
+        if (!exist_file (init_file))
+        {
+            g_free (init_file);
+            init_file = g_strdup (".mkshrc");
+        }
+
+        /* Put init file to ENV variable used by mksh but only if it
+         * is not already set. */
+        g_setenv ("ENV", init_file, FALSE);
+
+        break;
+
     case SHELL_ZSH:
         /* ZDOTDIR environment variable is the only way to point zsh
          * to an other rc file than the default. */
@@ -460,6 +477,7 @@ init_subshell_child (const char *pty_name)
     case SHELL_DASH:
     case SHELL_TCSH:
     case SHELL_KSH:
+    case SHELL_MKSH:
         execl (mc_global.shell->path, mc_global.shell->path, (char *) NULL);
         break;
 
@@ -1188,6 +1206,12 @@ init_subshell_precmd (char *precmd, size_t buff_size)
     case SHELL_KSH:
         g_snprintf (precmd, buff_size,
                     " PS1='$(pwd>&%d; kill -STOP $$)\\u@\\h:\\w\\$ '\n",
+                    subshell_pipe[WRITE]);
+       break;
+
+    case SHELL_MKSH:
+        g_snprintf (precmd, buff_size,
+                    " PS1='$(pwd>&%d; kill -STOP $$)${USER:=$(id -un)}@${HOSTNAME:=$(hostname -s)}:$PWD\\$ '\n",
                     subshell_pipe[WRITE]);
        break;
 
