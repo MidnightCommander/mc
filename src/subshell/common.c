@@ -370,23 +370,16 @@ init_subshell_child (const char *pty_name)
         /* Do we have a custom init file ~/.local/share/mc/kshrc? */
         init_file = mc_config_get_full_path (MC_KSHRC_FILE);
 
-        /* Otherwise use ~/.profile if $ENV is not already set */
+        /* Otherwise use ~/.profile */
         if (!exist_file (init_file))
         {
             g_free (init_file);
-            init_file = NULL;
-
-            if (!g_getenv ("ENV"))
-            {
-                init_file = g_strdup (".profile");
-            }
+            init_file = g_strdup (".profile");
         }
 
-        /* Put init file to ENV variable used by ash */
-        if (init_file)
-        {
-            g_setenv ("ENV", init_file, TRUE);
-        }
+        /* Put init file to ENV variable used by ksh but only if it
+         * is not already set. */
+        g_setenv ("ENV", init_file, FALSE);
 
         /* Make MC's special commands not show up in history */
         putenv ((char *) "HISTCONTROL=ignorespace");
