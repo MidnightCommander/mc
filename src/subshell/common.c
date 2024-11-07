@@ -390,7 +390,7 @@ init_subshell_child (const char *pty_name)
         /* Do we have a custom init file ~/.local/share/mc/mkshrc? */
         init_file = mc_config_get_full_path (MC_MKSHRC_FILE);
 
-        /* Otherwise use ~/.mkshrc */
+        /* Otherwise use ~/.mkshrc (default behavior of mksh) */
         if (!exist_file (init_file))
         {
             g_free (init_file);
@@ -400,6 +400,8 @@ init_subshell_child (const char *pty_name)
         /* Put init file to ENV variable used by mksh but only if it
          * is not already set. */
         g_setenv ("ENV", init_file, FALSE);
+
+        /* Note mksh doesn't support HISTCONTROL. */
 
         break;
 
@@ -1204,12 +1206,14 @@ init_subshell_precmd (char *precmd, size_t buff_size)
         break;
 
     case SHELL_KSH:
+        /* pdksh based variants support \x placeholders but not any "precmd" functionality. */
         g_snprintf (precmd, buff_size,
                     " PS1='$(pwd>&%d; kill -STOP $$)\\u@\\h:\\w\\$ '\n",
                     subshell_pipe[WRITE]);
        break;
 
     case SHELL_MKSH:
+        /* mksh doesn't support \x placeholders neither any "precmd" functionality */
         g_snprintf (precmd, buff_size,
                     " PS1='$(pwd>&%d; kill -STOP $$)${USER:=$(id -un)}@${HOSTNAME:=$(hostname -s)}:$PWD\\$ '\n",
                     subshell_pipe[WRITE]);
