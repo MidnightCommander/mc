@@ -366,6 +366,33 @@ init_subshell_child (const char *pty_name)
 
         break;
 
+    case SHELL_KSH:
+        /* Do we have a custom init file ~/.local/share/mc/kshrc? */
+        init_file = mc_config_get_full_path (MC_KSHRC_FILE);
+
+        /* Otherwise use ~/.profile if $ENV is not already set */
+        if (!exist_file (init_file))
+        {
+            g_free (init_file);
+            init_file = NULL;
+
+            if (!g_getenv ("ENV"))
+            {
+                init_file = g_strdup (".profile");
+            }
+        }
+
+        /* Put init file to ENV variable used by ash */
+        if (init_file)
+        {
+            g_setenv ("ENV", init_file, TRUE);
+        }
+
+        /* Make MC's special commands not show up in history */
+        putenv ((char *) "HISTCONTROL=ignorespace");
+
+        break;
+
     case SHELL_ZSH:
         /* ZDOTDIR environment variable is the only way to point zsh
          * to an other rc file than the default. */
@@ -439,6 +466,7 @@ init_subshell_child (const char *pty_name)
     case SHELL_ASH_BUSYBOX:
     case SHELL_DASH:
     case SHELL_TCSH:
+    case SHELL_KSH:
         execl (mc_global.shell->path, mc_global.shell->path, (char *) NULL);
         break;
 
@@ -1163,6 +1191,12 @@ init_subshell_precmd (char *precmd, size_t buff_size)
                     "kill -STOP $$; "
                     "}; " "PRECMD=precmd; " "PS1='$($PRECMD)$ '\n", subshell_pipe[WRITE]);
         break;
+
+    case SHELL_KSH:
+        g_snprintf (precmd, buff_size,
+                    " PS1='$(pwd>&%d; kill -STOP $$)\\u@\\h:\\w\\$ '\n",
+                    subshell_pipe[WRITE]);
+       break;
 
     case SHELL_ZSH:
         g_snprintf (precmd, buff_size,

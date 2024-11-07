@@ -53,6 +53,7 @@
 #define MC_BASHRC_FILE          "bashrc"
 #define MC_ZSHRC_FILE           ".zshrc"
 #define MC_ASHRC_FILE           "ashrc"
+#define MC_KSHRC_FILE           "kshrc"
 #define MC_INPUTRC_FILE         "inputrc"
 #define MC_CONFIG_FILE          "ini"
 #define MC_EXT_FILE             "mc.ext.ini"
