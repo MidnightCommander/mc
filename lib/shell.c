@@ -80,6 +80,8 @@ mc_shell_get_installed_in_system (void)
         mc_shell->path = g_strdup ("/bin/tcsh");
     else if (access ("/bin/csh", X_OK) == 0)
         mc_shell->path = g_strdup ("/bin/csh");
+    else if (access ("/bin/ksh", X_OK) == 0)
+        mc_shell->path = g_strdup ("/bin/ksh");
     /* No fish as fallback because it is so much different from other shells and
      * in a way exotic (even though user-friendly by name) that we should not
      * present it as a subshell without the user's explicit intention. We rather
@@ -189,6 +191,17 @@ mc_shell_recognize_real_path (mc_shell_t *mc_shell)
         mc_shell->type = SHELL_ASH_BUSYBOX;
         mc_shell->name = mc_shell->path;
     }
+    else if (strstr (mc_shell->path, "/ksh") != NULL
+             || strstr (mc_shell->real_path, "/ksh") != NULL
+             || strstr (mc_shell->path, "/oksh") != NULL
+             || strstr (mc_shell->real_path, "/oksh") != NULL
+             || strstr (mc_shell->path, "/mksh") != NULL
+             || strstr (mc_shell->real_path, "/mksh") != NULL)
+    {
+        /* Korn shell variants */
+        mc_shell->type = SHELL_KSH;
+        mc_shell->name = "ksh";
+    }
     else
         mc_shell->type = SHELL_NONE;
 }
@@ -213,6 +226,14 @@ mc_shell_recognize_path (mc_shell_t *mc_shell)
     {
         mc_shell->type = SHELL_ASH_BUSYBOX;
         mc_shell->name = "ash";
+    }
+    else if (strstr (mc_shell->path, "/ksh") != NULL 
+             || strstr (mc_shell->path, "/oksh") != NULL
+             || strstr (mc_shell->path, "/mksh") != NULL
+             || getenv ("KSH_VERSION") != NULL)
+    {
+        mc_shell->type = SHELL_KSH;
+        mc_shell->name = "ksh";
     }
     else
         mc_shell->type = SHELL_NONE;

@@ -2406,6 +2406,10 @@ and special keyboard maps in ~/.local/share/mc/inputrc (fallback ~/.inputrc).
 .B ash/dash
 users (BusyBox or Debian) may specify startup commands in ~/.local/share/mc/ashrc (fallback ~/.profile).
 .PP
+.B ksh
+users (ksh, oksh or mksh) may specify startup commands in ~/.local/share/mc/kshrc
+(fallback $ENV or ~/.profile).
+.PP
 .B zsh
 users may specify startup commands in ~/.local/share/mc/.zshrc (fallback ~/.zshrc).
 .PP
