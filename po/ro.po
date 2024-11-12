@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-10-05 15:11+0300\n"
+"POT-Creation-Date: 2024-11-12 12:10+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Simona Iacob <s@zp1.net>, 2021-2023\n"
 "Language-Team: Romanian (http://app.transifex.com/mc/mc/language/ro/)\n"
@@ -958,6 +958,10 @@ msgstr ""
 
 msgid "Diff:"
 msgstr "Diff:"
+
+#, fuzzy
+msgid "File name is empty!"
+msgstr "Nume de fișier:"
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -2241,9 +2245,9 @@ msgstr ""
 "Nu se poate chattr \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get flags of \"%s\"\n"
+"Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
 "Nu se pot obține indicatorii de \"%s\"\n"
@@ -2635,8 +2639,9 @@ msgstr ""
 "\"%s\"\n"
 "sunt același fișier"
 
-msgid "Ski&p all"
-msgstr "Sări t&ot"
+#, fuzzy
+msgid "Ignore a&ll"
+msgstr "Ignoră &tot"
 
 #, c-format
 msgid ""
@@ -2730,17 +2735,21 @@ msgstr ""
 "Nu se poate găsi fișierul sursă \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source file \"%s\"\n"
+"Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
+"Nu se poate găsi fișierul sursă \"%s\"\n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes of target file \"%s\"\n"
+"Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
+"Nu se poate găsi fișierul destinație \"%s\"\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -2853,11 +2862,13 @@ msgstr ""
 "Nu se poate închide fișierul destinație \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes for target file \"%s\"\n"
+"Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
+"Nu se poate găsi fișierul destinație \"%s\"\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -2867,11 +2878,13 @@ msgstr ""
 "Nu se poate găsi dosarul sursă \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source directory \"%s\"\n"
+"Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
+"Nu se poate găsi dosarul sursă \"%s\"\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -4733,3 +4746,6 @@ msgstr "Continuă de la început?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nu se poate aduce o copie locală a /ftp://some.host/editme.txt"
+
+#~ msgid "Ski&p all"
+#~ msgstr "Sări t&ot"

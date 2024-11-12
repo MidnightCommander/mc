@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-10-05 15:11+0300\n"
+"POT-Creation-Date: 2024-11-12 12:10+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Rostyslav Haitkulov <info@ubilling.net.ua>, 2023\n"
 "Language-Team: Ukrainian (http://app.transifex.com/mc/mc/language/uk/)\n"
@@ -962,6 +962,10 @@ msgstr "Midnight Commander закривається. Зберегти зміне
 
 msgid "Diff:"
 msgstr "Різниця:"
+
+#, fuzzy
+msgid "File name is empty!"
+msgstr "Назва файлу:"
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -2242,9 +2246,9 @@ msgstr ""
 "Не вдалося змінити атрибути \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get flags of \"%s\"\n"
+"Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
 "Не вдалося отримати прапорець \"%s\"\n"
@@ -2626,8 +2630,9 @@ msgstr ""
 "«%s»\n"
 "є одним і тим же файлом "
 
-msgid "Ski&p all"
-msgstr "П&ропустити все"
+#, fuzzy
+msgid "Ignore a&ll"
+msgstr "Ігнорувати &все"
 
 #, c-format
 msgid ""
@@ -2719,17 +2724,21 @@ msgstr ""
 "Не вдалося отримати властивості вихідного файлу «%s»\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source file \"%s\"\n"
+"Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
+"Не вдалося отримати властивості вихідного файлу «%s»\n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes of target file \"%s\"\n"
+"Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
+"Не вдалося отримати властивості цільового файлу «%s»\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -2842,11 +2851,13 @@ msgstr ""
 "Не вдалося закрити цільовий файл «%s»\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes for target file \"%s\"\n"
+"Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
+"Не вдалося отримати властивості цільового файлу «%s»\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -2856,11 +2867,13 @@ msgstr ""
 "Не вдавдалосяться отримати властивості вихідного каталогу «%s»\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source directory \"%s\"\n"
+"Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
+"Не вдавдалосяться отримати властивості вихідного каталогу «%s»\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -4726,3 +4739,6 @@ msgstr "Почати спочатку?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не вдалося отримати локальну копію /ftp://some.host/editme.txt"
+
+#~ msgid "Ski&p all"
+#~ msgstr "П&ропустити все"

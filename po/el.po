@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-10-05 15:11+0300\n"
+"POT-Creation-Date: 2024-11-12 12:10+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Efstathios Iosifidis <iefstathios@gmail.com>, 2015\n"
 "Language-Team: Greek (http://app.transifex.com/mc/mc/language/el/)\n"
@@ -913,6 +913,10 @@ msgstr ""
 
 msgid "Diff:"
 msgstr ""
+
+#, fuzzy
+msgid "File name is empty!"
+msgstr "Όνομα αρχείου:"
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -2174,11 +2178,13 @@ msgid ""
 "%s"
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get flags of \"%s\"\n"
+"Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
+"Αδυναμία δημιουργίας αρχείου στόχου \"%s\"\n"
+"%s"
 
 msgid "set &user ID on execution"
 msgstr ""
@@ -2539,8 +2545,9 @@ msgstr ""
 "\"%s\"\n"
 "είναι το ίδιο αρχείο"
 
-msgid "Ski&p all"
-msgstr "&Παράβλεψη όλων"
+#, fuzzy
+msgid "Ignore a&ll"
+msgstr "&Παράβλεψη κλειδώματος"
 
 #, c-format
 msgid ""
@@ -2625,17 +2632,21 @@ msgid ""
 "%s"
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source file \"%s\"\n"
+"Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
+"Αδυναμία ανοίγματος πηγαίου αρχείου \"%s\"\n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes of target file \"%s\"\n"
+"Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
+"Αδυναμία εγγραφής στο αρχείο στόχο \"%s\"\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -2740,11 +2751,13 @@ msgstr ""
 "Αδυναμία κλεισίματος αρχείου στόχου \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes for target file \"%s\"\n"
+"Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
+"Αδυναμία εγγραφής στο αρχείο στόχο \"%s\"\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -2752,11 +2765,13 @@ msgid ""
 "%s"
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source directory \"%s\"\n"
+"Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
+"Αδυναμία δημιουργίας καταλόγου στόχου \"%s\"\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -4549,3 +4564,6 @@ msgstr "Συνέχεια από την αρχή;"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Ski&p all"
+#~ msgstr "&Παράβλεψη όλων"

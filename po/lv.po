@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-10-05 15:11+0300\n"
+"POT-Creation-Date: 2024-11-12 12:10+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
 "Language-Team: Latvian (http://app.transifex.com/mc/mc/language/lv/)\n"
@@ -895,6 +895,9 @@ msgid ""
 msgstr ""
 
 msgid "Diff:"
+msgstr ""
+
+msgid "File name is empty!"
 msgstr ""
 
 #, c-format
@@ -2150,7 +2153,7 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Cannot get flags of \"%s\"\n"
+"Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
 
@@ -2501,7 +2504,7 @@ msgid ""
 "are the same file"
 msgstr ""
 
-msgid "Ski&p all"
+msgid "Ignore a&ll"
 msgstr ""
 
 #, c-format
@@ -2577,13 +2580,13 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Cannot get attributes of source file \"%s\"\n"
+"Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
 
 #, c-format
 msgid ""
-"Cannot set attributes of target file \"%s\"\n"
+"Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
 
@@ -2676,7 +2679,7 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Cannot set attributes for target file \"%s\"\n"
+"Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
 
@@ -2688,7 +2691,7 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Cannot get attributes of source directory \"%s\"\n"
+"Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
 
