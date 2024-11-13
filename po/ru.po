@@ -30,7 +30,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-10-05 15:11+0300\n"
+"POT-Creation-Date: 2024-11-12 12:10+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Andrei Stepanov, 2023-2024\n"
 "Language-Team: Russian (http://app.transifex.com/mc/mc/language/ru/)\n"
@@ -1000,6 +1000,10 @@ msgstr ""
 
 msgid "Diff:"
 msgstr "Различия:"
+
+#, fuzzy
+msgid "File name is empty!"
+msgstr "Шаблон имени:"
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -2284,12 +2288,12 @@ msgstr ""
 "Не удалось изменить атрибуты \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get flags of \"%s\"\n"
+"Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
-"Невозможно получить флаги \"%s\"\n"
+"Не удалось получить атрибуты исходного файла \"%s\"\n"
 "%s"
 
 msgid "set &user ID on execution"
@@ -2679,8 +2683,9 @@ msgstr ""
 "\"%s\"\n"
 "один и тот же файл"
 
-msgid "Ski&p all"
-msgstr "Пропустить вс&ё"
+#, fuzzy
+msgid "Ignore a&ll"
+msgstr "Игнорировать в&сё"
 
 #, c-format
 msgid ""
@@ -2774,17 +2779,17 @@ msgstr ""
 "Не удалось получить свойства исходного файла \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source file \"%s\"\n"
+"Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
 "Не удалось получить атрибуты исходного файла \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes of target file \"%s\"\n"
+"Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
 "Не удалось получить атрибуты целевого файла \"%s\"\n"
@@ -2901,9 +2906,9 @@ msgstr ""
 "Не удалось закрыть целевой файл \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes for target file \"%s\"\n"
+"Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
 "Не удалось задать атрибуты целевого файла \"%s\"\n"
@@ -2917,9 +2922,9 @@ msgstr ""
 "Не удалось получить свойства исходного каталога \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source directory \"%s\"\n"
+"Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
 "Не удалось получить атрибуты исходного каталога \"%s\"\n"
@@ -4795,3 +4800,14 @@ msgstr "Продолжить с начала?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не удалось получить локальную копию /ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot get flags of \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Невозможно получить флаги \"%s\"\n"
+#~ "%s"
+
+#~ msgid "Ski&p all"
+#~ msgstr "Пропустить вс&ё"

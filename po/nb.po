@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-10-05 15:11+0300\n"
+"POT-Creation-Date: 2024-11-12 12:10+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: heskjestad, 2024\n"
 "Language-Team: Norwegian Bokmål (http://app.transifex.com/mc/mc/language/"
@@ -978,6 +978,10 @@ msgstr ""
 
 msgid "Diff:"
 msgstr "Diff:"
+
+#, fuzzy
+msgid "File name is empty!"
+msgstr "Filnavn:"
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -2264,12 +2268,12 @@ msgstr ""
 "chattr mislyktes for «%s»\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get flags of \"%s\"\n"
+"Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
-"Klarte ikke hente flaggene til «%s»\n"
+"Klarte ikke hente attributtene til kildefila «%s»\n"
 "%s"
 
 msgid "set &user ID on execution"
@@ -2658,8 +2662,9 @@ msgstr ""
 "«%s»\n"
 "er samme fil"
 
-msgid "Ski&p all"
-msgstr "H&opp over alle"
+#, fuzzy
+msgid "Ignore a&ll"
+msgstr "Ignorer &alle"
 
 #, c-format
 msgid ""
@@ -2753,17 +2758,17 @@ msgstr ""
 "stat() mislyktes for kildefila «%s»\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source file \"%s\"\n"
+"Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
 "Klarte ikke hente attributtene til kildefila «%s»\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes of target file \"%s\"\n"
+"Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
 "Klarte ikke skrive attributtene til målfila «%s»\n"
@@ -2880,9 +2885,9 @@ msgstr ""
 "Klarte ikke lukke målfila «%s»\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes for target file \"%s\"\n"
+"Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
 "Klarte ikke skrive attributtene til målfila «%s»\n"
@@ -2896,9 +2901,9 @@ msgstr ""
 "stat() mislyktes for kildemappa «%s»\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source directory \"%s\"\n"
+"Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
 "Klarte ikke hente attributtene til kildemappa «%s»\n"
@@ -4766,3 +4771,14 @@ msgstr "Fortsett fra begynnelsen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Klarte ikke hente en lokal kopi av /ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot get flags of \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Klarte ikke hente flaggene til «%s»\n"
+#~ "%s"
+
+#~ msgid "Ski&p all"
+#~ msgstr "H&opp over alle"

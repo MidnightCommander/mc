@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-10-05 15:11+0300\n"
+"POT-Creation-Date: 2024-11-12 12:10+0300\n"
 "PO-Revision-Date: 2024-09-27 09:30+0200\n"
 "Last-Translator: Marco Ciampa <ciampix@posteo.net>, 2023\n"
 "Language-Team: Italian (http://app.transifex.com/mc/mc/language/it/)\n"
@@ -976,6 +976,10 @@ msgstr ""
 
 msgid "Diff:"
 msgstr "Diff:"
+
+#, fuzzy
+msgid "File name is empty!"
+msgstr "Nome file:"
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -2261,12 +2265,12 @@ msgstr ""
 "Non posso chattr \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get flags of \"%s\"\n"
+"Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
-"Non posso ottenere i flag di \"%s\"\n"
+"Non posso ottenere gli attributi del file sorgente \"%s\"\n"
 "%s"
 
 msgid "set &user ID on execution"
@@ -2655,8 +2659,9 @@ msgstr ""
 "\"%s\"\n"
 "sono lo stesso file"
 
-msgid "Ski&p all"
-msgstr "Sa&lta tutti"
+#, fuzzy
+msgid "Ignore a&ll"
+msgstr "Ignor&a tutto"
 
 #, c-format
 msgid ""
@@ -2750,17 +2755,17 @@ msgstr ""
 "Non posso fare fstat sul file sorgente \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source file \"%s\"\n"
+"Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
 "Non posso ottenere gli attributi del file sorgente \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes of target file \"%s\"\n"
+"Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
 "Non posso impostare gli attributi del file destinazione \"%s\"\n"
@@ -2877,9 +2882,9 @@ msgstr ""
 "Non posso chiudere il file destinazione \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes for target file \"%s\"\n"
+"Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
 "Non posso impostare gli attributi del file destinazione \"%s\"\n"
@@ -2893,9 +2898,9 @@ msgstr ""
 "Non posso ottenere info sulla cartella sorgente \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source directory \"%s\"\n"
+"Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
 "Non posso ottenere gli attributi della cartella sorgente \"%s\"\n"
@@ -4765,3 +4770,14 @@ msgstr "Continuare dall'inizio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Non posso ricevere copia locale di /ftp://un.host/modificami.txt"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot get flags of \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Non posso ottenere i flag di \"%s\"\n"
+#~ "%s"
+
+#~ msgid "Ski&p all"
+#~ msgstr "Sa&lta tutti"

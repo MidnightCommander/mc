@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-10-05 15:11+0300\n"
+"POT-Creation-Date: 2024-11-12 12:10+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: marcelo cripe <marcelocripe@gmail.com>, 2022-2024\n"
 "Language-Team: Portuguese (Brazil) (http://app.transifex.com/mc/mc/language/"
@@ -999,6 +999,10 @@ msgstr ""
 
 msgid "Diff:"
 msgstr "Diff:"
+
+#, fuzzy
+msgid "File name is empty!"
+msgstr "Nome do arquivo:"
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -2295,12 +2299,12 @@ msgstr ""
 "Não foi possível executar o comando chattr ‘%s’\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get flags of \"%s\"\n"
+"Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
-"Não foi possível obter os parâmetros de ‘%s’\n"
+"Não foi possível obter os atributos do arquivo da origem ‘%s’\n"
 "%s"
 
 msgid "set &user ID on execution"
@@ -2696,8 +2700,9 @@ msgstr ""
 "‘%s’\n"
 "são o mesmo arquivo"
 
-msgid "Ski&p all"
-msgstr "I&gnorar tudo"
+#, fuzzy
+msgid "Ignore a&ll"
+msgstr "Ignor&ar tudo"
 
 #, c-format
 msgid ""
@@ -2791,17 +2796,17 @@ msgstr ""
 "Não foi possível obter o estado do arquivo da origem ‘%s’\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source file \"%s\"\n"
+"Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
 "Não foi possível obter os atributos do arquivo da origem ‘%s’\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes of target file \"%s\"\n"
+"Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
 "Não foi possível definir os atributos do arquivo do destino ‘%s’\n"
@@ -2918,9 +2923,9 @@ msgstr ""
 "Não foi possível fechar o arquivo do destino ‘%s’\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes for target file \"%s\"\n"
+"Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
 "Não foi possível definir os atributos para o arquivo do destino ‘%s’\n"
@@ -2934,9 +2939,9 @@ msgstr ""
 "Não foi possível obter o estado do diretório ‘%s’\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source directory \"%s\"\n"
+"Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
 "Não foi possível obter os atributos do diretório da origem ‘%s’\n"
@@ -4846,3 +4851,14 @@ msgstr "Você quer continuar a partir do início?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Não foi possível obter uma cópia local do /ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot get flags of \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Não foi possível obter os parâmetros de ‘%s’\n"
+#~ "%s"
+
+#~ msgid "Ski&p all"
+#~ msgstr "I&gnorar tudo"

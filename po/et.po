@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-10-05 15:11+0300\n"
+"POT-Creation-Date: 2024-11-12 12:10+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Priit Jõerüüt <transifex@joeruut.com>, 2020-2021,2023-2024\n"
 "Language-Team: Estonian (http://app.transifex.com/mc/mc/language/et/)\n"
@@ -975,6 +975,10 @@ msgstr ""
 
 msgid "Diff:"
 msgstr "Erinevused:"
+
+#, fuzzy
+msgid "File name is empty!"
+msgstr "Faili nimi:"
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -2259,12 +2263,12 @@ msgstr ""
 "\"%s\" attribuutide muutmine nurjus\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get flags of \"%s\"\n"
+"Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" lippe ei saa hankida\n"
+"Sihtfaili atribuute ei õnnestu laadida \"%s\"\n"
 "%s"
 
 msgid "set &user ID on execution"
@@ -2653,8 +2657,9 @@ msgstr ""
 "\"%s\"\n"
 "on üks ja see sama fail"
 
-msgid "Ski&p all"
-msgstr "Jäta &kõik vahele"
+#, fuzzy
+msgid "Ignore a&ll"
+msgstr "Eira &kõiki"
 
 #, c-format
 msgid ""
@@ -2748,17 +2753,17 @@ msgstr ""
 "Lähtefaili \"%s\" info päring nurjus\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source file \"%s\"\n"
+"Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
 "Sihtfaili atribuute ei õnnestu laadida \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes of target file \"%s\"\n"
+"Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
 "Sihtfaili atribuute ei õnnestu väärtustada \"%s\"\n"
@@ -2875,9 +2880,9 @@ msgstr ""
 "Sihtfaili \"%s\" sulgemine nurjus\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes for target file \"%s\"\n"
+"Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
 "Sihtfaili jaoks ei õnnestu atribuute väärtustada \"%s\"\n"
@@ -2891,9 +2896,9 @@ msgstr ""
 "Lähtekataloogi \"%s\" info päring nurjus\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source directory \"%s\"\n"
+"Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
 "Lähtekausta atribuute ei õnnestu laadida \"%s\"\n"
@@ -4759,3 +4764,14 @@ msgstr "Kas jätkata algusest?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kohaliku koopia hankimine failist /ftp://some.host/editme.txt nurjus"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot get flags of \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "\"%s\" lippe ei saa hankida\n"
+#~ "%s"
+
+#~ msgid "Ski&p all"
+#~ msgstr "Jäta &kõik vahele"

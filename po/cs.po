@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-10-05 15:11+0300\n"
+"POT-Creation-Date: 2024-11-12 12:10+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>, 2017-2023\n"
 "Language-Team: Czech (http://app.transifex.com/mc/mc/language/cs/)\n"
@@ -955,6 +955,10 @@ msgstr ""
 
 msgid "Diff:"
 msgstr "Rozdíl:"
+
+#, fuzzy
+msgid "File name is empty!"
+msgstr "Název souboru:"
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -2240,9 +2244,9 @@ msgstr ""
 "Není možné chattr „%s“\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get flags of \"%s\"\n"
+"Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
 "Nedaří se získat příznaky „%s“\n"
@@ -2637,8 +2641,9 @@ msgstr ""
 "„%s“\n"
 "jsou stejný soubor"
 
-msgid "Ski&p all"
-msgstr "&Přeskočit vše"
+#, fuzzy
+msgid "Ignore a&ll"
+msgstr "Ignorov&at vše"
 
 #, c-format
 msgid ""
@@ -2732,17 +2737,21 @@ msgstr ""
 "Na zdrojovém souboru „%s“ nelze provést stat\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source file \"%s\"\n"
+"Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
+"Na zdrojovém souboru „%s“ nelze provést stat\n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes of target file \"%s\"\n"
+"Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
+"Nelze provést fstat cílového souboru „%s“\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -2855,11 +2864,13 @@ msgstr ""
 "Nelze zavřít cílový soubor „%s“\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes for target file \"%s\"\n"
+"Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
+"Nelze provést fstat cílového souboru „%s“\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -2869,11 +2880,13 @@ msgstr ""
 "Na zdrojovém adresáři „%s“ nelze provést stat\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source directory \"%s\"\n"
+"Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
+"Na zdrojovém adresáři „%s“ nelze provést stat\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -4740,3 +4753,6 @@ msgstr "Pokračovat od začátku?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nedaří získat místní kopii souboru /ftp://some.host/editme.txt"
+
+#~ msgid "Ski&p all"
+#~ msgstr "&Přeskočit vše"

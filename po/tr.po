@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-10-05 15:11+0300\n"
+"POT-Creation-Date: 2024-11-12 12:10+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Mehmet Akif 9oglu, 2023\n"
 "Language-Team: Turkish (http://app.transifex.com/mc/mc/language/tr/)\n"
@@ -954,6 +954,10 @@ msgstr ""
 
 msgid "Diff:"
 msgstr "Fark:"
+
+#, fuzzy
+msgid "File name is empty!"
+msgstr "Dosya ismi:"
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -2240,11 +2244,13 @@ msgid ""
 "%s"
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get flags of \"%s\"\n"
+"Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
+"\"%s\" hedef dosyası oluşturulamıyor \n"
+" %sw"
 
 msgid "set &user ID on execution"
 msgstr "kullanıcı çalıştırabilir"
@@ -2614,8 +2620,9 @@ msgstr ""
 "\"%s\"\n"
 "aynı dosya"
 
-msgid "Ski&p all"
-msgstr "Tümünü atla"
+#, fuzzy
+msgid "Ignore a&ll"
+msgstr "Tümünü &yoksay"
 
 #, c-format
 msgid ""
@@ -2709,17 +2716,21 @@ msgstr ""
 "\"%s\" kaynak dosyası durumlanamıyor \n"
 " %s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source file \"%s\"\n"
+"Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
+"\"%s\" kaynak dosyası durumlanamıyor \n"
+" %s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes of target file \"%s\"\n"
+"Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
+"\"%s\" hedef dosyası fstat yapılamıyor \n"
+" %s"
 
 #, c-format
 msgid ""
@@ -2832,11 +2843,13 @@ msgstr ""
 "\"%s\" hedef dosyası kapatılamıyor \n"
 " %s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes for target file \"%s\"\n"
+"Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
+"\"%s\" hedef dosyası fstat yapılamıyor \n"
+" %s"
 
 #, c-format
 msgid ""
@@ -2846,11 +2859,13 @@ msgstr ""
 "\"%s\" kaynak dizini durumlanamıyor \n"
 " %s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source directory \"%s\"\n"
+"Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
+"\"%s\" kaynak dizini durumlanamıyor \n"
+" %s"
 
 #, c-format
 msgid ""
@@ -4675,3 +4690,6 @@ msgstr "Başından devam edilsin mi?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr " /ftp://some.host/editme.txt 'in yerel kopyası alınamadı"
+
+#~ msgid "Ski&p all"
+#~ msgstr "Tümünü atla"

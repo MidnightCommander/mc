@@ -51,8 +51,6 @@
 #include "lib/event-types.h"
 #include "lib/util.h"           /* my_fork() */
 
-#include "filemanager/fileopctx.h"      /* file_op_context_t */
-
 #include "background.h"
 
 /*** global variables ****************************************************************************/

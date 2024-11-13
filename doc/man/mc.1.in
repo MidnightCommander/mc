@@ -2556,48 +2556,102 @@ cancel the Chattr command.
 .SH "File Operations"
 When you copy, move or delete files, Midnight Commander shows the
 file operations dialog.  It shows the files currently being processed
-and uses up to three progress bars.  The file bar indicates the
+and uses up to two progress bars.  The file bytes bar indicates the
 percentage of the current file that has been processed so far.  The
-count bar shows how many of the tagged files have been handled.  The
-bytes bar indicates the percentage of the total size of the tagged files
-that has been handled.  If the verbose option is off, the file and bytes
-bars are not shown.
+total bytes bar indicates the percentage of the total size of the tagged
+files that has been handled. Ccounters that show how many of the tagged
+files have been handled are displayed. If the
+.I Verbose
+option is off, the file bytes bar and total bytes bar are not shown.
 .PP
-There are two buttons at the bottom of the dialog. Pressing the Skip
-button will skip the rest of the current file. Pressing the Abort
-button will abort the whole operation, the rest of the files are
-skipped.
+There are three buttons at the bottom of the dialog:
+.TP
+.B [Skip]
+button to skip the rest of the current file.
+.TP
+.B [Suspend]
+button to suspend the file operation and button transforms to the
+.B [Continue]
+one which continue the suspended operation.
+.TP
+.B [Abort]
+button to abort the whole operation, the rest of the files are skipped.
 .PP
 There are three other dialogs which you can run into during the file
 operations.
 .PP
-The error dialog informs about error conditions and has four choices.
-Normally you select either the
-.I [Ignore]
-button to ignore this error, or the
-.I [Ignore all]
-button to ignore this and all future errors, or the
-.I [Abort]
-button to abort the operation altogether.  You can also select the
-.I [Retry]
-button if you fixed the problem from another terminal.
+The error dialog informs about error conditions and has four choices:
+.TP
+.B [Ignore]
+button to ignore this error.
+.TP
+.B [Ignore all]
+button to ignore this and all future errors.
+.TP
+.B [Abort]
+button to abort the operation altogether.
+.TP
+.B [Retry]
+button to continue if you fixed the problem from another terminal.
 .PP
 The replace dialog is shown when you attempt to copy or move a file on
 the top of an existing file.  The dialog shows the dates and sizes of
-the both files.  Press the Yes button to overwrite the file, the No
-button to skip the file, the All button to overwrite all the files, the
-None button to never overwrite and the Update button to overwrite if the
-source file is newer than the target file.  You can abort the whole
-operation by pressing the Abort button.
+the both files. There are folloing buttons in this dialog:
+.TP
+.B [Yes]
+button to overwrite the file.
+.TP
+.B [No]
+button to skip the file.
+.TP
+.B [Append]
+button to append the source file to the target one.
+.TP
+.B [Reget]
+button to append the rest of the source file to the target one.
+This button is displayed only if the size of the target file
+is non-zero and less than the size of the source file.
+.TP
+.B [All]
+button to overwrite all the files.
+.TP
+.B [Older]
+button to overwrite if the source file is newer than the target file.
+.TP
+.B [None]
+button to never overwrite files
+.TP
+.B [Smaller]
+button to overwrite if the source file size is less than the target one.
+.TP
+.B [Size differs]
+button to overwrite files with different sizes.
+.TP
+.B [Abort]
+button to abort the whole operation.
+.PP
+If the
+.B Don't overwrite with zero length file
+checkbox is on, the zero\-sized source files don't overwrite the
+non\-zero\-sized target files.
 .PP
 The recursive delete dialog is shown when you try to delete a directory
-which is not empty.  Press the Yes button to delete the directory
-recursively, the No button to skip the directory, the All button to
-delete all the directories and the None button to skip all the non\-empty
-directories.  You can abort the whole operation by pressing the Abort
-button.  If you selected the Yes or All button you will be asked for a
-confirmation.  Type "yes" only if you are really sure you want to do the
-recursive delete.
+which is not empty. There are folloing buttons in this dialog:
+.TP
+.B [Yes]
+button to delete the directory recursively.
+.TP
+.B [No]
+button to skip the directory.
+.TP
+.B [All]
+button to delete all the directories.
+.TP
+.B [None]
+button to skip all the non\-empty directories.
+.TP
+.B [Abort]
+button to abort the whole operation.
 .PP
 If you have tagged files and perform an operation on them only the files
 on which the operation succeeded are untagged. Failed and skipped files

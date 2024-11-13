@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-10-05 15:11+0300\n"
+"POT-Creation-Date: 2024-11-12 12:10+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: 6bdcf737f9bcb6037ecba892a70fb951_e9eeb40 "
 "<b76b5e2faba6aa74d4498ee4c87ab010_661337>, 2020\n"
@@ -936,6 +936,10 @@ msgstr ""
 
 msgid "Diff:"
 msgstr "Diff:"
+
+#, fuzzy
+msgid "File name is empty!"
+msgstr "Fájlnév:"
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -2212,11 +2216,13 @@ msgid ""
 "%s"
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get flags of \"%s\"\n"
+"Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
+"Nem sikerült létrehozni a(z) \"%s\" célfájlt. \n"
+"%s"
 
 msgid "set &user ID on execution"
 msgstr "&felhasználó-azonosító beállítása végrehajtáskor"
@@ -2582,8 +2588,9 @@ msgstr ""
 "\"%s\" \n"
 "ugyanaz a fájl"
 
-msgid "Ski&p all"
-msgstr "Ö&sszes kihagyása"
+#, fuzzy
+msgid "Ignore a&ll"
+msgstr "&Nem érdekes, tovább"
 
 #, c-format
 msgid ""
@@ -2676,17 +2683,22 @@ msgstr ""
 "A(z) \"%s\" forrásfájl adatai nem elérhetők \n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source file \"%s\"\n"
+"Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
+"A(z) \"%s\" forrásfájl adatai nem elérhetők \n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes of target file \"%s\"\n"
+"Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
+"Nem sikerült lekérdezni a(z) \"%s\" \n"
+"célfájl adatait. \n"
+"%s"
 
 #, c-format
 msgid ""
@@ -2802,11 +2814,14 @@ msgstr ""
 "Nem sikerült lezárni a(z) \"%s\" célfájlt. \n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes for target file \"%s\"\n"
+"Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
+"Nem sikerült lekérdezni a(z) \"%s\" \n"
+"célfájl adatait. \n"
+"%s"
 
 #, c-format
 msgid ""
@@ -2817,11 +2832,14 @@ msgstr ""
 "forráskönyvtár adatait. \n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source directory \"%s\"\n"
+"Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
+"Nem sikerült lekérdezni a(z) \"%s\" \n"
+"forráskönyvtár adatait. \n"
+"%s"
 
 #, c-format
 msgid ""
@@ -4643,3 +4661,6 @@ msgstr "Folytatás az elejéről?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nem sikerült behozni /ftp://some.host/editme.txt helyi másolatát"
+
+#~ msgid "Ski&p all"
+#~ msgstr "Ö&sszes kihagyása"
