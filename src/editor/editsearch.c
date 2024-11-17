@@ -551,9 +551,9 @@ static void
 edit_show_search_error (const WEdit *edit, const char *title)
 {
     if (edit->search->error == MC_SEARCH_E_NOTFOUND)
-        edit_query_dialog (title, _(STR_E_NOTFOUND));
+        message (D_NORMAL, title, "%s", _(STR_E_NOTFOUND));
     else if (edit->search->error_str != NULL)
-        edit_query_dialog (title, edit->search->error_str);
+        message (D_NORMAL, title, "%s", edit->search->error_str);
 }
 
 /* --------------------------------------------------------------------------------------------- */
