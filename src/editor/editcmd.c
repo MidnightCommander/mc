@@ -130,7 +130,6 @@ static int
 edit_save_file (WEdit *edit, const vfs_path_t *filename_vpath)
 {
     char *p;
-    gchar *tmp;
     off_t filelen = 0;
     int this_save_mode, rv, fd = -1;
     vfs_path_t *real_filename_vpath;
@@ -263,9 +262,7 @@ edit_save_file (WEdit *edit, const vfs_path_t *filename_vpath)
 #else
             if (pclose (file) != 0)
             {
-                tmp = g_strdup_printf (_("Error writing to pipe: %s"), p);
-                edit_error_dialog (_("Error"), tmp);
-                g_free (tmp);
+                message (D_ERROR, MSG_ERROR, _("Error writing to pipe: %s"), p);
                 g_free (p);
                 goto error_save;
             }
@@ -273,10 +270,8 @@ edit_save_file (WEdit *edit, const vfs_path_t *filename_vpath)
         }
         else
         {
-            tmp = g_strdup_printf (_("Cannot open pipe for writing: %s"), p);
-            edit_error_dialog (_("Error"), get_sys_error (tmp));
+            message (D_ERROR, MSG_ERROR, _("Cannot open pipe for writing: %s"), p);
             g_free (p);
-            g_free (tmp);
             goto error_save;
         }
         g_free (p);
@@ -314,11 +309,7 @@ edit_save_file (WEdit *edit, const vfs_path_t *filename_vpath)
         }
         else
         {
-            char *msg;
-
-            msg = g_strdup_printf (_("Cannot open file for writing: %s"), savename);
-            edit_error_dialog (_("Error"), msg);
-            g_free (msg);
+            message (D_ERROR, MSG_ERROR, _("Cannot open file for writing: %s"), savename);
             goto error_save;
         }
     }
@@ -933,9 +924,8 @@ edit_save_as_cmd (WEdit *edit)
 
             if (mc_stat (exp_vpath, &sb) == 0 && !S_ISREG (sb.st_mode))
             {
-                edit_error_dialog (_("Save as"),
-                                   get_sys_error (_
-                                                  ("Cannot save: destination is not a regular file")));
+                message (D_ERROR, MSG_ERROR, "%s",
+                         get_sys_error (_("Cannot save: destination is not a regular file")));
                 goto ret;
             }
 
@@ -992,7 +982,7 @@ edit_save_as_cmd (WEdit *edit)
             break;
 
         default:
-            edit_error_dialog (_("Save as"), get_sys_error (_("Cannot save file")));
+            message (D_ERROR, MSG_ERROR, "%s", get_sys_error (_("Cannot save file")));
             MC_FALLTHROUGH;
 
         case -1:
@@ -1586,7 +1576,8 @@ void
 edit_paste_from_history (WEdit *edit)
 {
     (void) edit;
-    edit_error_dialog (_("Error"), _("This function is not implemented"));
+
+    message (D_ERROR, MSG_ERROR, "%s", _("This function is not implemented"));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1601,7 +1592,7 @@ edit_copy_to_X_buf_cmd (WEdit *edit)
 
     if (!edit_save_block_to_clip_file (edit, start_mark, end_mark))
     {
-        edit_error_dialog (_("Copy to clipboard"), get_sys_error (_("Unable to save to file")));
+        message (D_ERROR, MSG_ERROR, "%s", get_sys_error (_("Unable to save to file")));
         return FALSE;
     }
     /* try use external clipboard utility */
@@ -1625,7 +1616,7 @@ edit_cut_to_X_buf_cmd (WEdit *edit)
 
     if (!edit_save_block_to_clip_file (edit, start_mark, end_mark))
     {
-        edit_error_dialog (_("Cut to clipboard"), _("Unable to save to file"));
+        message (D_ERROR, MSG_ERROR, "%s", _("Unable to save to file"));
         return FALSE;
     }
     /* try use external clipboard utility */
@@ -1720,7 +1711,7 @@ edit_save_block_cmd (WEdit *edit)
         if (edit_save_block (edit, exp, start_mark, end_mark))
             ret = TRUE;
         else
-            edit_error_dialog (_("Save block"), get_sys_error (_("Cannot save file")));
+            message (D_ERROR, MSG_ERROR, "%s", get_sys_error (_("Cannot save block")));
 
         edit->force |= REDRAW_COMPLETELY;
     }
@@ -1756,7 +1747,7 @@ edit_insert_file_cmd (WEdit *edit)
         vfs_path_free (exp_vpath, TRUE);
 
         if (!ret)
-            edit_error_dialog (_("Insert file"), get_sys_error (_("Cannot insert file")));
+            message (D_ERROR, MSG_ERROR, "%s", get_sys_error (_("Cannot insert file")));
     }
 
     g_free (exp);
@@ -1777,7 +1768,7 @@ edit_sort_cmd (WEdit *edit)
 
     if (!eval_marks (edit, &start_mark, &end_mark))
     {
-        edit_error_dialog (_("Sort block"), _("You must first highlight a block of text"));
+        message (D_ERROR, MSG_ERROR, "%s", _("You must first highlight a block of text"));
         return 0;
     }
 
@@ -1806,15 +1797,13 @@ edit_sort_cmd (WEdit *edit)
     if (e != 0)
     {
         if (e == -1 || e == 127)
-            edit_error_dialog (_("Sort"), get_sys_error (_("Cannot execute sort command")));
+            message (D_ERROR, MSG_ERROR, "%s", get_sys_error (_("Cannot execute sort command")));
         else
         {
             char q[8];
 
             sprintf (q, "%d ", e);
-            tmp = g_strdup_printf (_("Sort returned non-zero: %s"), q);
-            edit_error_dialog (_("Sort"), tmp);
-            g_free (tmp);
+            message (D_ERROR, MSG_ERROR, _("Sort returned non-zero: %s"), q);
         }
 
         return -1;
@@ -1867,7 +1856,7 @@ edit_ext_cmd (WEdit *edit)
 
     if (e != 0)
     {
-        edit_error_dialog (_("External command"), get_sys_error (_("Cannot execute command")));
+        message (D_ERROR, MSG_ERROR, "%s", get_sys_error (_("Cannot execute external command")));
         return -1;
     }
 
