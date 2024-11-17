@@ -143,23 +143,6 @@ do_create_message (int flags, const char *title, const char *text)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/**
- * Show message dialog.  Dismiss it when any key is pressed.
- * Not safe to call from background.
- */
-
-static void
-fg_message (int flags, const char *title, const char *text)
-{
-    WDialog *d;
-
-    d = do_create_message (flags, title, text);
-    tty_getch ();
-    dlg_run_done (d);
-    widget_destroy (WIDGET (d));
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /** Show message box from background */
 
 #ifdef ENABLE_BACKGROUND
@@ -168,7 +151,7 @@ bg_message (int dummy, int *flags, char *title, const char *text)
 {
     (void) dummy;
     title = g_strconcat (_("Background process:"), " ", title, (char *) NULL);
-    fg_message (*flags, title, text);
+    query_dialog (title, text, *flags, 1, _("&OK"));
     g_free (title);
 }
 #endif /* ENABLE_BACKGROUND */
@@ -431,6 +414,7 @@ message (int flags, const char *title, const char *text, ...)
             void *p;
             void (*f) (int, int *, char *, const char *);
         } func;
+
         func.f = bg_message;
 
         wtools_parent_call (func.p, NULL, 3, sizeof (flags), &flags, strlen (title), title,
@@ -438,7 +422,7 @@ message (int flags, const char *title, const char *text, ...)
     }
     else
 #endif /* ENABLE_BACKGROUND */
-        fg_message (flags, title, p);
+        query_dialog (title, p, flags, 1, _("&OK"));
 
     g_free (p);
 }
