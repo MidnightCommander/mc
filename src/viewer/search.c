@@ -371,9 +371,9 @@ mcview_do_search (WView *view, off_t want_search_start)
         mcview_update (view);
 
         if (view->search->error == MC_SEARCH_E_NOTFOUND)
-            query_dialog (_("Search"), _(STR_E_NOTFOUND), D_NORMAL, 1, _("&Dismiss"));
+            message (D_NORMAL, _("Search"), "%s", _(STR_E_NOTFOUND));
         else if (view->search->error_str != NULL)
-            query_dialog (_("Search"), view->search->error_str, D_NORMAL, 1, _("&Dismiss"));
+            message (D_NORMAL, _("Search"), "%s", view->search->error_str);
     }
 
     view->dirty++;
