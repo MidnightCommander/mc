@@ -599,7 +599,7 @@ edit_do_search (WEdit *edit)
         }
 
         if (!found)
-            edit_error_dialog (_("Search"), _(STR_E_NOTFOUND));
+            message (D_NORMAL, _("Search"), "%s", _(STR_E_NOTFOUND));
         else
             edit_cursor_move (edit, edit->search_start - edit->buffer.curs1);
     }

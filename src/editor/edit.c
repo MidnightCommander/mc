@@ -202,12 +202,8 @@ edit_load_file_fast (edit_buffer_t *buf, const vfs_path_t *filename_vpath)
     file = mc_open (filename_vpath, O_RDONLY | O_BINARY);
     if (file < 0)
     {
-        gchar *errmsg;
-
-        errmsg =
-            g_strdup_printf (_("Cannot open %s for reading"), vfs_path_as_str (filename_vpath));
-        edit_error_dialog (_("Error"), errmsg);
-        g_free (errmsg);
+        message (D_ERROR, MSG_ERROR, _("Cannot open %s for reading"),
+                 vfs_path_as_str (filename_vpath));
         return FALSE;
     }
 
@@ -223,13 +219,7 @@ edit_load_file_fast (edit_buffer_t *buf, const vfs_path_t *filename_vpath)
     status_msg_deinit (STATUS_MSG (&rsm));
 
     if (!ret && !aborted)
-    {
-        gchar *errmsg;
-
-        errmsg = g_strdup_printf (_("Error reading %s"), vfs_path_as_str (filename_vpath));
-        edit_error_dialog (_("Error"), errmsg);
-        g_free (errmsg);
-    }
+        message (D_ERROR, MSG_ERROR, _("Error reading %s"), vfs_path_as_str (filename_vpath));
 
     mc_close (file);
     return ret;
@@ -383,7 +373,7 @@ check_file_access (WEdit *edit, const vfs_path_t *filename_vpath, struct stat *s
 
     if (errmsg != NULL)
     {
-        edit_error_dialog (_("Error"), errmsg);
+        message (D_ERROR, MSG_ERROR, "%s", errmsg);
         g_free (errmsg);
         ret = FALSE;
     }
@@ -2015,21 +2005,13 @@ edit_insert_file (WEdit *edit, const vfs_path_t *filename_vpath)
             }
             if (pclose (f) > 0)
             {
-                char *errmsg;
-
-                errmsg = g_strdup_printf (_("Error reading from pipe: %s"), p);
-                edit_error_dialog (_("Error"), errmsg);
-                g_free (errmsg);
+                message (D_ERROR, MSG_ERROR, _("Error reading from pipe: %s"), p);
                 ins_len = -1;
             }
         }
         else
         {
-            char *errmsg;
-
-            errmsg = g_strdup_printf (_("Cannot open pipe for reading: %s"), p);
-            edit_error_dialog (_("Error"), errmsg);
-            g_free (errmsg);
+            message (D_ERROR, MSG_ERROR, _("Cannot open pipe for reading: %s"), p);
             ins_len = -1;
         }
         g_free (p);
