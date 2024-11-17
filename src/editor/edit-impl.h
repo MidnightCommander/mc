@@ -74,7 +74,6 @@
 #define get_sys_error(s) (s)
 
 #define edit_error_dialog(h,s) query_dialog (h, s, D_ERROR, 1, _("&Dismiss"))
-#define edit_query_dialog(h,s) query_dialog (h, s, D_NORMAL, 1, _("&Dismiss"))
 #define edit_query_dialog2(h,t,a,b) query_dialog (h, t, D_NORMAL, 2, a, b)
 #define edit_query_dialog3(h,t,a,b,c) query_dialog (h, t, D_NORMAL, 3, a, b, c)
 
