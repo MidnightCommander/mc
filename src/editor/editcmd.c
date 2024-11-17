@@ -925,7 +925,7 @@ edit_save_as_cmd (WEdit *edit)
             if (mc_stat (exp_vpath, &sb) == 0 && !S_ISREG (sb.st_mode))
             {
                 message (D_ERROR, MSG_ERROR, "%s",
-                         get_sys_error (_("Cannot save: destination is not a regular file")));
+                         _("Cannot save: destination is not a regular file"));
                 goto ret;
             }
 
@@ -982,7 +982,7 @@ edit_save_as_cmd (WEdit *edit)
             break;
 
         default:
-            message (D_ERROR, MSG_ERROR, "%s", get_sys_error (_("Cannot save file")));
+            message (D_ERROR, MSG_ERROR, "%s", _("Cannot save file"));
             MC_FALLTHROUGH;
 
         case -1:
@@ -1592,7 +1592,7 @@ edit_copy_to_X_buf_cmd (WEdit *edit)
 
     if (!edit_save_block_to_clip_file (edit, start_mark, end_mark))
     {
-        message (D_ERROR, MSG_ERROR, "%s", get_sys_error (_("Unable to save to file")));
+        message (D_ERROR, MSG_ERROR, "%s", _("Unable to save to file"));
         return FALSE;
     }
     /* try use external clipboard utility */
@@ -1711,7 +1711,7 @@ edit_save_block_cmd (WEdit *edit)
         if (edit_save_block (edit, exp, start_mark, end_mark))
             ret = TRUE;
         else
-            message (D_ERROR, MSG_ERROR, "%s", get_sys_error (_("Cannot save block")));
+            message (D_ERROR, MSG_ERROR, "%s", _("Cannot save block"));
 
         edit->force |= REDRAW_COMPLETELY;
     }
@@ -1747,7 +1747,7 @@ edit_insert_file_cmd (WEdit *edit)
         vfs_path_free (exp_vpath, TRUE);
 
         if (!ret)
-            message (D_ERROR, MSG_ERROR, "%s", get_sys_error (_("Cannot insert file")));
+            message (D_ERROR, MSG_ERROR, "%s", _("Cannot insert file"));
     }
 
     g_free (exp);
@@ -1797,7 +1797,7 @@ edit_sort_cmd (WEdit *edit)
     if (e != 0)
     {
         if (e == -1 || e == 127)
-            message (D_ERROR, MSG_ERROR, "%s", get_sys_error (_("Cannot execute sort command")));
+            message (D_ERROR, MSG_ERROR, "%s", _("Cannot execute sort command"));
         else
         {
             char q[8];
@@ -1856,7 +1856,7 @@ edit_ext_cmd (WEdit *edit)
 
     if (e != 0)
     {
-        message (D_ERROR, MSG_ERROR, "%s", get_sys_error (_("Cannot execute external command")));
+        message (D_ERROR, MSG_ERROR, "%s", _("Cannot execute external command"));
         return -1;
     }
 
