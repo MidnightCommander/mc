@@ -120,29 +120,6 @@ query_default_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, v
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** Create message dialog */
-
-static WDialog *
-do_create_message (int flags, const char *title, const char *text)
-{
-    char *p;
-    WDialog *d;
-
-    /* Add empty lines before and after the message */
-    p = g_strconcat ("\n", text, "\n", (char *) NULL);
-    query_dialog (title, p, flags, 0);
-    d = last_query_dlg;
-
-    /* do resize before initing and running */
-    send_message (d, NULL, MSG_RESIZE, 0, NULL);
-
-    dlg_init (d);
-    g_free (p);
-
-    return d;
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /** Show message box from background */
 
 #ifdef ENABLE_BACKGROUND
@@ -384,7 +361,13 @@ create_message (int flags, const char *title, const char *text, ...)
     p = g_strdup_vprintf (text, args);
     va_end (args);
 
-    d = do_create_message (flags, title, p);
+    query_dialog (title, p, flags, 0);
+    d = last_query_dlg;
+
+    /* do resize before initing and running */
+    send_message (d, NULL, MSG_RESIZE, 0, NULL);
+
+    dlg_init (d);
     g_free (p);
 
     return d;
