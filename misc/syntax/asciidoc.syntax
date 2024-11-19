@@ -1,0 +1,55 @@
+# asciidoc syntax highlighting
+
+context default lightgray
+	keyword whole linestart '*' white black
+    spellcheck
+
+context linestart _Note_: \n\n green
+    spellcheck
+
+context linestart ==== \n cyan
+    spellcheck
+
+context linestart === \n yellow
+    spellcheck
+
+context linestart == \n green
+    spellcheck
+
+context linestart = \n red
+    spellcheck
+
+context linestart \s \n\n black white
+    spellcheck
+
+context //// //// brown
+    spellcheck
+
+context [[ ]] red
+    spellcheck
+
+context [ ] green
+    spellcheck
+
+#context \s__ __ lightgray
+
+context \s_ _ brown
+
+context \s\*_ _\* green
+
+#context **__ __** lightgray
+
+# the following context results in a yellow space + a yellow * but not further
+# to the next *. see line 362 in README.adoc
+# the space is needed, to avoid highlighting all the file beginning to the * 
+# on line 399.
+context \s\* \* yellow
+
+#context ** ** lightgray
+
+#context ``**__ __**`` lightgray
+
+context `\*_ _\*` red
+
+context ` ` cyan
+
