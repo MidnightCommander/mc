@@ -1134,6 +1134,38 @@ pty_open_slave (const char *pty_name)
 static void
 init_subshell_precmd (char *precmd, size_t buff_size)
 {
+    /* Attention! Make sure that the buffer for precmd is big enough. */
+
+    /* Fallback precmd emulation that should work with virtually any shell.
+     * No real precmd functionality is required, no support for \x substitutions
+     * in PS1 is needed. For convenience, $HOME is replaced by ~ in PS1.
+     *
+     * The following example is a little less fancy (home directory not replaced)
+     * and shows the basic workings of our prompt for easier understanding:
+     *
+     * "precmd() { "
+     *     "echo \"$USER@$(hostname -s):$PWD\"; "
+     *     "pwd>&%d; "
+     *     "kill -STOP $$; "
+     * "}; "
+     * "PRECMD=precmd; "
+     * "PS1='$($PRECMD)$ '\n",
+     */
+    static const char *precmd_fallback =
+        " "  /* Useful if the shell supports HISTCONTROL=ignorespace like functionality */
+        "precmd() { "
+            "if [ ! \"${PWD##$HOME}\" ]; then "
+                "MC_PWD=\"~\"; "
+            "else "
+                "[ \"${PWD##$HOME/}\" = \"$PWD\" ] && MC_PWD=\"$PWD\" || MC_PWD=\"~/${PWD##$HOME/}\"; "
+            "fi; "
+            "echo \"$USER@$(hostname -s):$MC_PWD\"; "
+            "pwd>&%d; "
+            "kill -STOP $$; "
+        "}; "
+        "PRECMD=precmd; "
+        "PS1='$($PRECMD)$ '\n";
+
     switch (mc_global.shell->type)
     {
     case SHELL_BASH:
@@ -1167,55 +1199,28 @@ init_subshell_precmd (char *precmd, size_t buff_size)
          *    Attention: BusyBox must be built with FEATURE_EDITING_FANCY_PROMPT to
          *    permit \u, \w, \h, \$ escape sequences. Unfortunately this cannot be guaranteed,
          *    especially on embedded systems where people try to save space, so let's use
-         *    the dash version below. It should work on virtually all systems.
-         *    "precmd() { pwd>&%d; kill -STOP $$; }; "
-         *    "PRECMD=precmd; "
-         *    "PS1='$(eval $PRECMD)\\u@\\h:\\w\\$ '\n",
+         *    the falback version.
          */
+        g_snprintf (precmd, buff_size, precmd_fallback, subshell_pipe[WRITE]);
+        break;
+
     case SHELL_DASH:
         /* Debian ash needs a precmd emulation via PS1, similar to BusyBox ash,
          * but does not support escape sequences for user, host and cwd in prompt.
-         * Attention! Make sure that the buffer for precmd is big enough.
-         *
-         * We want to have a fancy dynamic prompt with user@host:cwd just like in the BusyBox
-         * examples above, but because replacing the home directory part of the path by "~" is
-         * complicated, it bloats the precmd to a size > BUF_SMALL (128).
-         *
-         * The following example is a little less fancy (home directory not replaced)
-         * and shows the basic workings of our prompt for easier understanding:
-         *
-         * "precmd() { "
-         *     "echo \"$USER@$(hostname -s):$PWD\"; "
-         *     "pwd>&%d; "
-         *     "kill -STOP $$; "
-         * "}; "
-         * "PRECMD=precmd; "
-         * "PS1='$($PRECMD)$ '\n",
          */
-        g_snprintf (precmd, buff_size,
-                    "precmd() { "
-                    "if [ ! \"${PWD##$HOME}\" ]; then "
-                    "MC_PWD=\"~\"; "
-                    "else "
-                    "[ \"${PWD##$HOME/}\" = \"$PWD\" ] && MC_PWD=\"$PWD\" || MC_PWD=\"~/${PWD##$HOME/}\"; "
-                    "fi; "
-                    "echo \"$USER@$(hostname -s):$MC_PWD\"; "
-                    "pwd>&%d; "
-                    "kill -STOP $$; "
-                    "}; " "PRECMD=precmd; " "PS1='$($PRECMD)$ '\n", subshell_pipe[WRITE]);
+        g_snprintf (precmd, buff_size, precmd_fallback, subshell_pipe[WRITE]);
+        break;
+
+    case SHELL_MKSH:
+        /* mksh doesn't support \x placeholders in PS1 and needs precmd emulation via PS1 */
+        g_snprintf (precmd, buff_size, precmd_fallback, subshell_pipe[WRITE]);
         break;
 
     case SHELL_KSH:
         /* pdksh based variants support \x placeholders but not any "precmd" functionality. */
         g_snprintf (precmd, buff_size,
-                    " PS1='$(pwd>&%d; kill -STOP $$)\\u@\\h:\\w\\$ '\n",
-                    subshell_pipe[WRITE]);
-       break;
-
-    case SHELL_MKSH:
-        /* mksh doesn't support \x placeholders neither any "precmd" functionality */
-        g_snprintf (precmd, buff_size,
-                    " PS1='$(pwd>&%d; kill -STOP $$)${USER:=$(id -un)}@${HOSTNAME:=$(hostname -s)}:$PWD\\$ '\n",
+                    " PS1='$(pwd>&%d; kill -STOP $$)'"
+                    "\"${PS1:-\\u@\\h:\\w\\$ }\"\n",
                     subshell_pipe[WRITE]);
        break;
 
@@ -1264,11 +1269,11 @@ init_subshell_precmd (char *precmd, size_t buff_size)
  * Use following technique:
  *
  * printf(1) with format string containing a single conversion specifier,
- * "b", and an argument which contains a copy of the string passed to 
+ * "b", and an argument which contains a copy of the string passed to
  * subshell_name_quote() with all characters, except digits and letters,
  * replaced by the backslash-escape sequence \0nnn, where "nnn" is the
  * numeric value of the character converted to octal number.
- * 
+ *
  *   cd "`printf '%b' 'ABC\0nnnDEF\0nnnXYZ'`"
  *
  * N.B.: Use single quotes for conversion specifier to work around
