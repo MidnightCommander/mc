@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-10-05 15:11+0300\n"
+"POT-Creation-Date: 2024-11-12 12:10+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Alexander Shopov <ash@kambanaria.org>, 2022\n"
 "Language-Team: Bulgarian (http://app.transifex.com/mc/mc/language/bg/)\n"
@@ -953,6 +953,10 @@ msgstr ""
 
 msgid "Diff:"
 msgstr "Разлика:"
+
+#, fuzzy
+msgid "File name is empty!"
+msgstr "Име на файл:"
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -2236,9 +2240,9 @@ msgstr ""
 "Неуспешно изпълнение на chattr „%s“\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get flags of \"%s\"\n"
+"Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
 "Не може да се получат флаговете на „%s“\n"
@@ -2617,8 +2621,9 @@ msgstr ""
 "„%s“\n"
 "са един и същи файл"
 
-msgid "Ski&p all"
-msgstr "Проп&ускане всички"
+#, fuzzy
+msgid "Ignore a&ll"
+msgstr "Прескачане на &всички"
 
 #, c-format
 msgid ""
@@ -2712,17 +2717,21 @@ msgstr ""
 "Не може да се изпълни stat върху изходния файл „%s“\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source file \"%s\"\n"
+"Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
+"Не може да се изпълни stat върху изходния файл „%s“\n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes of target file \"%s\"\n"
+"Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
+"Не може да се изпълни fstat върху целевия файл „%s“\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -2835,11 +2844,13 @@ msgstr ""
 "Не може да се затвори целевият файл „%s“\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes for target file \"%s\"\n"
+"Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
+"Не може да се изпълни fstat върху целевия файл „%s“\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -2849,11 +2860,13 @@ msgstr ""
 "Не може да се изпълне stat върху изходната директория „%s“\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source directory \"%s\"\n"
+"Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
+"Не може да се изпълне stat върху изходната директория „%s“\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -4708,3 +4721,6 @@ msgstr "Да се продължи ли от началото?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не може да се изтегли локално копие на „/ftp://some.host/editme.txt“"
+
+#~ msgid "Ski&p all"
+#~ msgstr "Проп&ускане всички"

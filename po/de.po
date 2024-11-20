@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-10-05 15:11+0300\n"
+"POT-Creation-Date: 2024-11-12 12:10+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Ettore Atalan <atalanttore@googlemail.com>, 2015-2024\n"
 "Language-Team: German (http://app.transifex.com/mc/mc/language/de/)\n"
@@ -968,6 +968,10 @@ msgstr ""
 
 msgid "Diff:"
 msgstr "Diff:"
+
+#, fuzzy
+msgid "File name is empty!"
+msgstr "Dateiname:"
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -2254,9 +2258,9 @@ msgstr ""
 "Kann chattr für\"%s\" nicht durchführen\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get flags of \"%s\"\n"
+"Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
 "Kann Flags für \"%s\" nicht ermitteln\n"
@@ -2649,8 +2653,9 @@ msgstr ""
 "\"%s\"\n"
 "sind die gleichen Dateien"
 
-msgid "Ski&p all"
-msgstr "Alle übers&pringen"
+#, fuzzy
+msgid "Ignore a&ll"
+msgstr "&Alles ignorieren"
 
 #, c-format
 msgid ""
@@ -2744,17 +2749,21 @@ msgstr ""
 "Kann Quelldatei \"%s\" nicht untersuchen\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source file \"%s\"\n"
+"Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
+"Kann Quelldatei \"%s\" nicht untersuchen\n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes of target file \"%s\"\n"
+"Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
+"Kann Zieldatei \"%s\" nicht untersuchen\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -2867,11 +2876,13 @@ msgstr ""
 "Kann Zieldatei \"%s\" nicht schließen\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes for target file \"%s\"\n"
+"Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
+"Kann Zieldatei \"%s\" nicht untersuchen\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -2881,11 +2892,13 @@ msgstr ""
 "Kann Quellverzeichnis \"%s\" nicht untersuchen\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source directory \"%s\"\n"
+"Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
+"Kann Quellverzeichnis \"%s\" nicht untersuchen\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -4754,3 +4767,6 @@ msgstr "Am Anfang fortsetzen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kann lokale Kopie von /ftp://some.host/editme.txt nicht erstellen"
+
+#~ msgid "Ski&p all"
+#~ msgstr "Alle übers&pringen"

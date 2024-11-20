@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-10-05 15:11+0300\n"
+"POT-Creation-Date: 2024-11-12 12:10+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Seong-ho Cho <darkcircle.0426@gmail.com>, 2023-2024\n"
 "Language-Team: Korean (http://app.transifex.com/mc/mc/language/ko/)\n"
@@ -951,6 +951,10 @@ msgstr ""
 
 msgid "Diff:"
 msgstr "비교:"
+
+#, fuzzy
+msgid "File name is empty!"
+msgstr "파일 이름:"
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -2234,9 +2238,9 @@ msgstr ""
 "\"%s\" 속성 변경을 할 수 없음\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get flags of \"%s\"\n"
+"Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
 "\"%s\" 플래그를 가져올 수 없음\n"
@@ -2626,8 +2630,9 @@ msgstr ""
 "\"%s\"\n"
 "는 같은 파일임"
 
-msgid "Ski&p all"
-msgstr "모두 건너뛰기(&P)"
+#, fuzzy
+msgid "Ignore a&ll"
+msgstr "모두 무시(&A)"
 
 #, c-format
 msgid ""
@@ -2722,17 +2727,21 @@ msgstr ""
 "\"%s\" 원본 파일을 통계할 수 없음\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source file \"%s\"\n"
+"Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
+"\"%s\" 원본 파일을 통계할 수 없음\n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes of target file \"%s\"\n"
+"Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
+"\"%s\" 대상 파일을 fstat할 수 없음\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -2845,11 +2854,13 @@ msgstr ""
 "\"%s\" 대상 파일을 닫을 수 없음\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes for target file \"%s\"\n"
+"Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
+"\"%s\" 대상 파일을 fstat할 수 없음\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -2859,11 +2870,13 @@ msgstr ""
 "\"%s\" 소스 디렉터리를 stat할 수 없음\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source directory \"%s\"\n"
+"Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
+"\"%s\" 소스 디렉터리를 stat할 수 없음\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -4717,3 +4730,6 @@ msgstr "처음부터 계속하시겠습니까?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "/ftp://some.host/editme.txt의 로컬 복사본을 가져올 수 없음"
+
+#~ msgid "Ski&p all"
+#~ msgstr "모두 건너뛰기(&P)"

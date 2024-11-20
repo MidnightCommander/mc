@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-10-05 15:11+0300\n"
+"POT-Creation-Date: 2024-11-12 12:10+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Morten Bo Johansen <mortenbo@hotmail.com>, 2018,2023\n"
 "Language-Team: Danish (http://app.transifex.com/mc/mc/language/da/)\n"
@@ -951,6 +951,10 @@ msgstr ""
 
 msgid "Diff:"
 msgstr "Forskel:"
+
+#, fuzzy
+msgid "File name is empty!"
+msgstr "Filnavn:"
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -2234,9 +2238,9 @@ msgstr ""
 "Kan ikke chattr \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get flags of \"%s\"\n"
+"Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
 "Kan ikke hente flag for \"%s\"\n"
@@ -2629,8 +2633,9 @@ msgstr ""
 "»%s«\n"
 "er den samme fil"
 
-msgid "Ski&p all"
-msgstr "&Spring over alle"
+#, fuzzy
+msgid "Ignore a&ll"
+msgstr "Ignorer &alle"
 
 #, c-format
 msgid ""
@@ -2724,17 +2729,21 @@ msgstr ""
 "Kan ikke stat kildefil »%s«\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source file \"%s\"\n"
+"Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
+"Kan ikke stat kildefil »%s«\n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes of target file \"%s\"\n"
+"Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
+"Kan ikke fstat målfil »%s«\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -2847,11 +2856,13 @@ msgstr ""
 "Kan ikke lukke målfil »%s«\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes for target file \"%s\"\n"
+"Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
+"Kan ikke fstat målfil »%s«\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -2861,11 +2872,13 @@ msgstr ""
 "Kan ikke stat kildemappe »%s«\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source directory \"%s\"\n"
+"Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
+"Kan ikke stat kildemappe »%s«\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -4719,3 +4732,6 @@ msgstr "Fortsæt fra begyndelsen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan ikke hente en lokal kopi af /ftp://en.vært/editme.txt"
+
+#~ msgid "Ski&p all"
+#~ msgstr "&Spring over alle"

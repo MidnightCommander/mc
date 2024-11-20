@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-10-05 15:11+0300\n"
+"POT-Creation-Date: 2024-11-12 12:10+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Andi Chandler <andi@gowling.com>, 2016-2017,2020,2022-2024\n"
 "Language-Team: English (United Kingdom) (http://app.transifex.com/mc/mc/"
@@ -968,6 +968,10 @@ msgstr ""
 
 msgid "Diff:"
 msgstr "Diff:"
+
+#, fuzzy
+msgid "File name is empty!"
+msgstr "File name:"
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -2252,12 +2256,12 @@ msgstr ""
 "Cannot chattr \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get flags of \"%s\"\n"
+"Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
-"Cannot get flags of \"%s\"\n"
+"Cannot get attributes of source file \"%s\"\n"
 "%s"
 
 msgid "set &user ID on execution"
@@ -2646,8 +2650,9 @@ msgstr ""
 "\"%s\"\n"
 "are the same file"
 
-msgid "Ski&p all"
-msgstr "Ski&p all"
+#, fuzzy
+msgid "Ignore a&ll"
+msgstr "Ignore &all"
 
 #, c-format
 msgid ""
@@ -2741,17 +2746,17 @@ msgstr ""
 "Cannot stat source file \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source file \"%s\"\n"
+"Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
 "Cannot get attributes of source file \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes of target file \"%s\"\n"
+"Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
 "Cannot set attributes of target file \"%s\"\n"
@@ -2868,9 +2873,9 @@ msgstr ""
 "Cannot close target file \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes for target file \"%s\"\n"
+"Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
 "Cannot set attributes for target file \"%s\"\n"
@@ -2884,9 +2889,9 @@ msgstr ""
 "Cannot stat source directory \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source directory \"%s\"\n"
+"Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
 "Cannot get attributes of source directory \"%s\"\n"
@@ -4752,3 +4757,14 @@ msgstr "Continue from beginning?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Cannot fetch a local copy of /ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot get flags of \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Cannot get flags of \"%s\"\n"
+#~ "%s"
+
+#~ msgid "Ski&p all"
+#~ msgstr "Ski&p all"

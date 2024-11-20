@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-10-05 15:11+0300\n"
+"POT-Creation-Date: 2024-11-12 12:10+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Gilberto Jorge <gmj125@gmail.com>, 2013-2024\n"
 "Language-Team: Portuguese (http://app.transifex.com/mc/mc/language/pt/)\n"
@@ -977,6 +977,10 @@ msgstr ""
 
 msgid "Diff:"
 msgstr "Diff:"
+
+#, fuzzy
+msgid "File name is empty!"
+msgstr "Nome do ficheiro:"
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -2263,12 +2267,12 @@ msgstr ""
 "Não é possível chattr \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get flags of \"%s\"\n"
+"Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
-"Não é possível obter as flags de \"%s\"\n"
+"Não é possível obter atributos do ficheiro origem \"%s\"\n"
 "%s"
 
 msgid "set &user ID on execution"
@@ -2658,8 +2662,9 @@ msgstr ""
 "\"%s\"\n"
 "são o mesmo ficheiro"
 
-msgid "Ski&p all"
-msgstr "Sal&tar todos"
+#, fuzzy
+msgid "Ignore a&ll"
+msgstr "Ignor&ar tudo"
 
 #, c-format
 msgid ""
@@ -2753,17 +2758,17 @@ msgstr ""
 "Não é possível efetuar stat no ficheiro fonte \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source file \"%s\"\n"
+"Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
 "Não é possível obter atributos do ficheiro origem \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes of target file \"%s\"\n"
+"Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
 "Não é possível definir atributos do ficheiro destino \"%s\"\n"
@@ -2880,9 +2885,9 @@ msgstr ""
 "Não é possível fechar o ficheiro alvo \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes for target file \"%s\"\n"
+"Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
 "Não é possível definir atributos para o ficheiro destino \"%s\"\n"
@@ -2896,9 +2901,9 @@ msgstr ""
 "Não é possível efetuar stat no diretório fonte \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source directory \"%s\"\n"
+"Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
 "Não é possível obter atributos do directório de origem \"%s\"\n"
@@ -4770,3 +4775,14 @@ msgstr "Continuar do início?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Não é possível obter uma cópia local de /ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot get flags of \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Não é possível obter as flags de \"%s\"\n"
+#~ "%s"
+
+#~ msgid "Ski&p all"
+#~ msgstr "Sal&tar todos"

@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-10-05 15:11+0300\n"
+"POT-Creation-Date: 2024-11-12 12:10+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>, 2017-2024\n"
 "Language-Team: Catalan (http://app.transifex.com/mc/mc/language/ca/)\n"
@@ -987,6 +987,10 @@ msgstr ""
 
 msgid "Diff:"
 msgstr "Diferència:"
+
+#, fuzzy
+msgid "File name is empty!"
+msgstr "Nom del fitxer:"
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -2274,12 +2278,12 @@ msgstr ""
 "No s'ha pogut fer chattr «%s»\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get flags of \"%s\"\n"
+"Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
-"No s'han pogut obtenir els indicadors de «%s»\n"
+"No es poden obtenir els atributs del fitxer d'origen «%s»\n"
 "%s"
 
 msgid "set &user ID on execution"
@@ -2669,8 +2673,9 @@ msgstr ""
 "«%s»\n"
 "són el mateix fitxer"
 
-msgid "Ski&p all"
-msgstr "Saltar &tot"
+#, fuzzy
+msgid "Ignore a&ll"
+msgstr "Ignor&a-ho tot"
 
 #, c-format
 msgid ""
@@ -2764,17 +2769,17 @@ msgstr ""
 "No s'ha pogut fer estat al fitxer d'origen «%s»\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source file \"%s\"\n"
+"Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
 "No es poden obtenir els atributs del fitxer d'origen «%s»\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes of target file \"%s\"\n"
+"Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
 "No es poden establir els atributs del fitxer de destinació «%s»\n"
@@ -2891,9 +2896,9 @@ msgstr ""
 "No s'ha pogut tancar el fitxer de destinació «%s»\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes for target file \"%s\"\n"
+"Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
 "No es poden establir els atributs per al fitxer de destinació «%s»\n"
@@ -2907,9 +2912,9 @@ msgstr ""
 "No s'ha pogut veure l'estat del directori d'origen «%s»\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source directory \"%s\"\n"
+"Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
 "No es poden obtenir els atributs del directori d'origen «%s»\n"
@@ -4788,3 +4793,14 @@ msgstr "Voleu continuar des del començament?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "No s'ha pogut obtenir una còpia local de /ftp://algun.amfitrió/editam.txt"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot get flags of \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "No s'han pogut obtenir els indicadors de «%s»\n"
+#~ "%s"
+
+#~ msgid "Ski&p all"
+#~ msgstr "Saltar &tot"

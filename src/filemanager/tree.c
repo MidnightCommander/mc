@@ -723,15 +723,12 @@ tree_copy (WTree *tree, const char *default_dest)
     if (dest != NULL && *dest != '\0')
     {
         file_op_context_t *ctx;
-        file_op_total_context_t *tctx;
 
         ctx = file_op_context_new (OP_COPY);
-        tctx = file_op_total_context_new ();
-        file_op_context_create_ui (ctx, FALSE, FILEGUI_DIALOG_MULTI_ITEM);
-        tctx->ask_overwrite = FALSE;
-        copy_dir_dir (tctx, ctx, vfs_path_as_str (tree->selected_ptr->name), dest, TRUE, FALSE,
-                      FALSE, NULL);
-        file_op_total_context_destroy (tctx);
+        file_progress_ui_create (ctx, FALSE, FILEGUI_DIALOG_MULTI_ITEM);
+        ctx->ask_overwrite = FALSE;
+        copy_dir_dir (ctx, vfs_path_as_str (tree->selected_ptr->name), dest, TRUE, FALSE, FALSE,
+                      NULL);
         file_op_context_destroy (ctx);
     }
 
@@ -766,17 +763,14 @@ tree_move (WTree *tree, const char *default_dest)
             message (D_ERROR, MSG_ERROR, _("Cannot stat the destination\n%s"),
                      unix_error_string (errno));
         else if (!S_ISDIR (buf.st_mode))
-            file_error (TRUE, _("Destination \"%s\" must be a directory\n%s"), dest);
+            file_error (NULL, TRUE, _("Destination \"%s\" must be a directory\n%s"), dest);
         else
         {
             file_op_context_t *ctx;
-            file_op_total_context_t *tctx;
 
             ctx = file_op_context_new (OP_MOVE);
-            tctx = file_op_total_context_new ();
-            file_op_context_create_ui (ctx, FALSE, FILEGUI_DIALOG_ONE_ITEM);
-            move_dir_dir (tctx, ctx, vfs_path_as_str (tree->selected_ptr->name), dest);
-            file_op_total_context_destroy (tctx);
+            file_progress_ui_create (ctx, FALSE, FILEGUI_DIALOG_ONE_ITEM);
+            move_dir_dir (ctx, vfs_path_as_str (tree->selected_ptr->name), dest);
             file_op_context_destroy (ctx);
         }
 
@@ -811,7 +805,6 @@ tree_rmdir (void *data)
 {
     WTree *tree = data;
     file_op_context_t *ctx;
-    file_op_total_context_t *tctx;
 
     if (tree->selected_ptr == NULL)
         return;
@@ -830,12 +823,9 @@ tree_rmdir (void *data)
     }
 
     ctx = file_op_context_new (OP_DELETE);
-    tctx = file_op_total_context_new ();
-
-    file_op_context_create_ui (ctx, FALSE, FILEGUI_DIALOG_ONE_ITEM);
-    if (erase_dir (tctx, ctx, tree->selected_ptr->name) == FILE_CONT)
+    file_progress_ui_create (ctx, FALSE, FILEGUI_DIALOG_ONE_ITEM);
+    if (erase_dir (ctx, tree->selected_ptr->name) == FILE_CONT)
         tree_forget (tree);
-    file_op_total_context_destroy (tctx);
     file_op_context_destroy (ctx);
 }
 

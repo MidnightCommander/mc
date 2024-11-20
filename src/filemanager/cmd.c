@@ -76,7 +76,7 @@
 #include "src/diffviewer/ydiff.h"
 #endif
 
-#include "fileopctx.h"
+#include "filegui.h"
 #include "filenot.h"
 #include "hotlist.h"            /* hotlist_show() */
 #include "tree.h"               /* tree_chdir() */

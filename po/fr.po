@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-10-05 15:11+0300\n"
+"POT-Creation-Date: 2024-11-12 12:10+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Wallon Wallon, 2022-2024\n"
 "Language-Team: French (http://app.transifex.com/mc/mc/language/fr/)\n"
@@ -984,6 +984,10 @@ msgstr ""
 
 msgid "Diff:"
 msgstr "Comparaison :"
+
+#, fuzzy
+msgid "File name is empty!"
+msgstr "Nom du fichier :"
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -2271,12 +2275,12 @@ msgstr ""
 "Chattr impossible « %s »\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get flags of \"%s\"\n"
+"Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
-"Impossible d’obtenir les drapeaux de « %s »\n"
+"Impossible d’obtenir les attributs du fichier source « %s »\n"
 "%s"
 
 msgid "set &user ID on execution"
@@ -2667,8 +2671,9 @@ msgstr ""
 "« %s »\n"
 "sont identiques"
 
-msgid "Ski&p all"
-msgstr "Sauter &tout"
+#, fuzzy
+msgid "Ignore a&ll"
+msgstr "Ignorer &tout"
 
 #, c-format
 msgid ""
@@ -2762,17 +2767,17 @@ msgstr ""
 "Impossible d’obtenir les caractéristiques du fichier source « %s »\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source file \"%s\"\n"
+"Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
 "Impossible d’obtenir les attributs du fichier source « %s »\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes of target file \"%s\"\n"
+"Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
 "Impossible de définir les attributs du fichier cible « %s »\n"
@@ -2889,9 +2894,9 @@ msgstr ""
 "Impossible de fermer le fichier cible « %s »\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes for target file \"%s\"\n"
+"Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
 "Impossible de définir les attributs du fichier cible « %s »\n"
@@ -2905,9 +2910,9 @@ msgstr ""
 "Impossible d’obtenir les caractéristiques du fichier source « %s »\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source directory \"%s\"\n"
+"Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
 "Impossible d’obtenir les attributs du répertoire source « %s »\n"
@@ -4791,3 +4796,14 @@ msgstr "Continuer à partir du début ?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Impossible de récupérer localement le fichier /ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot get flags of \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Impossible d’obtenir les drapeaux de « %s »\n"
+#~ "%s"
+
+#~ msgid "Ski&p all"
+#~ msgstr "Sauter &tout"

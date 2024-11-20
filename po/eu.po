@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-10-05 15:11+0300\n"
+"POT-Creation-Date: 2024-11-12 12:10+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>, "
 "2011,2015-2019\n"
@@ -943,6 +943,10 @@ msgstr ""
 
 msgid "Diff:"
 msgstr "Diff:"
+
+#, fuzzy
+msgid "File name is empty!"
+msgstr "Fitxategi izena:"
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -2222,11 +2226,13 @@ msgid ""
 "%s"
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get flags of \"%s\"\n"
+"Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
+"Ezin da sortu \"%s\" helburu fitxategia\n"
+"%s"
 
 msgid "set &user ID on execution"
 msgstr "ezarri &erabiltzaile ID exekutatzean"
@@ -2602,8 +2608,9 @@ msgstr ""
 "\"%s\"\n"
 "fitxategi bera dira"
 
-msgid "Ski&p all"
-msgstr "Sa&hiestu guztia"
+#, fuzzy
+msgid "Ignore a&ll"
+msgstr "Jaramonik ez &guztiari"
 
 #, c-format
 msgid ""
@@ -2697,17 +2704,21 @@ msgstr ""
 "Ezin da lortu \"%s\" iturburu fitxategiaren egoera\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source file \"%s\"\n"
+"Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
+"Ezin da lortu \"%s\" iturburu fitxategiaren egoera\n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes of target file \"%s\"\n"
+"Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
+"Ezin da loortu \"%s\" helburu fitxategiaren egoera (fstat)\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -2820,11 +2831,13 @@ msgstr ""
 "Ezin da itxi \"%s\" helburu fitxategia\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes for target file \"%s\"\n"
+"Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
+"Ezin da loortu \"%s\" helburu fitxategiaren egoera (fstat)\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -2834,11 +2847,13 @@ msgstr ""
 "Ezin da lortu \"%s\" iturburu direktorioaren egoera (stat)\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source directory \"%s\"\n"
+"Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
+"Ezin da lortu \"%s\" iturburu direktorioaren egoera (stat)\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -4665,3 +4680,6 @@ msgstr "Hasieratik jarraitu?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Ezin eskuratu ondokoaren bertako kopia bat: /ftp://some.host/editme.txt"
+
+#~ msgid "Ski&p all"
+#~ msgstr "Sa&hiestu guztia"

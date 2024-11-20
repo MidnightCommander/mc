@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-10-05 15:11+0300\n"
+"POT-Creation-Date: 2024-11-12 12:10+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Jaap Kramer <jaap-kramer@ziggo.nl>, 2023\n"
 "Language-Team: Dutch (http://app.transifex.com/mc/mc/language/nl/)\n"
@@ -951,6 +951,10 @@ msgstr ""
 
 msgid "Diff:"
 msgstr "Diff:"
+
+#, fuzzy
+msgid "File name is empty!"
+msgstr "Bestandsnaam:"
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -2232,9 +2236,9 @@ msgstr ""
 "Kan niet chattr \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get flags of \"%s\"\n"
+"Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
 "Kan flags van \"%s\" niet verkrijgen\n"
@@ -2616,8 +2620,9 @@ msgstr ""
 "`%s' \n"
 "zijn hetzelfde bestand "
 
-msgid "Ski&p all"
-msgstr "Alles ove&rslaan"
+#, fuzzy
+msgid "Ignore a&ll"
+msgstr "&Alles negeren"
 
 #, c-format
 msgid ""
@@ -2711,17 +2716,21 @@ msgstr ""
 "Bronbestand \"%s\" kan niet geïnspecteerd worden \n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source file \"%s\"\n"
+"Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
+"Bronbestand \"%s\" kan niet geïnspecteerd worden \n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes of target file \"%s\"\n"
+"Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
+"fstat werkt niet op doelbestand \"%s\" \n"
+"%s "
 
 #, c-format
 msgid ""
@@ -2834,11 +2843,13 @@ msgstr ""
 "Doelbestand \"%s\" kan niet gesloten worden \n"
 "%s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes for target file \"%s\"\n"
+"Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
+"fstat werkt niet op doelbestand \"%s\" \n"
+"%s "
 
 #, c-format
 msgid ""
@@ -2848,11 +2859,13 @@ msgstr ""
 "Bronmap \"%s\" kan niet geïnspecteerd worden\n"
 "%s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source directory \"%s\"\n"
+"Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
+"Bronmap \"%s\" kan niet geïnspecteerd worden\n"
+"%s "
 
 #, c-format
 msgid ""
@@ -4701,3 +4714,6 @@ msgstr "Doorgaan vanaf het begin?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan geen lokale versie van /ftp://some.host/editme.txt ophalen"
+
+#~ msgid "Ski&p all"
+#~ msgstr "Alles ove&rslaan"

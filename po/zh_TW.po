@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-10-05 15:11+0300\n"
+"POT-Creation-Date: 2024-11-12 12:10+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Meng Pang Wang, 2023\n"
 "Language-Team: Chinese (Taiwan) (http://app.transifex.com/mc/mc/language/"
@@ -918,6 +918,10 @@ msgstr ""
 
 msgid "Diff:"
 msgstr "不同:"
+
+#, fuzzy
+msgid "File name is empty!"
+msgstr "檔案名稱:"
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -2177,11 +2181,13 @@ msgid ""
 "%s"
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get flags of \"%s\"\n"
+"Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
+"無法覆寫檔案 \"%s\"\n"
+"%s"
 
 msgid "set &user ID on execution"
 msgstr ""
@@ -2532,8 +2538,9 @@ msgid ""
 "are the same file"
 msgstr ""
 
-msgid "Ski&p all"
-msgstr ""
+#, fuzzy
+msgid "Ignore a&ll"
+msgstr "忽略全部"
 
 #, c-format
 msgid ""
@@ -2614,17 +2621,21 @@ msgid ""
 "%s"
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source file \"%s\"\n"
+"Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
+"無法覆寫檔案 \"%s\"\n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes of target file \"%s\"\n"
+"Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
+"無法對目標檔案 \"%s\" 執行 chmod 指令\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -2715,11 +2726,13 @@ msgid ""
 "%s"
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes for target file \"%s\"\n"
+"Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
+"無法對目標檔案 \"%s\" 執行 chmod 指令\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -2727,11 +2740,13 @@ msgid ""
 "%s"
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source directory \"%s\"\n"
+"Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
+"無法建立目標目錄 \"%s\"\n"
+"%s"
 
 #, c-format
 msgid ""

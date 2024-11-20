@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-10-05 15:11+0300\n"
+"POT-Creation-Date: 2024-11-12 12:10+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>, 2011-2024\n"
 "Language-Team: Polish (http://app.transifex.com/mc/mc/language/pl/)\n"
@@ -979,6 +979,10 @@ msgstr ""
 
 msgid "Diff:"
 msgstr "Różnica:"
+
+#, fuzzy
+msgid "File name is empty!"
+msgstr "Nazwa pliku:"
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -2264,12 +2268,12 @@ msgstr ""
 "Nie można wykonać polecenia chattr na „%s”\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get flags of \"%s\"\n"
+"Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
-"Nie można uzyskać flag „%s”\n"
+"Nie można uzyskać atrybutów pliku źródłowego „%s”\n"
 "%s"
 
 msgid "set &user ID on execution"
@@ -2659,8 +2663,9 @@ msgstr ""
 "„%s”\n"
 "to ten sam plik"
 
-msgid "Ski&p all"
-msgstr "&Pomiń wszystko"
+#, fuzzy
+msgid "Ignore a&ll"
+msgstr "Zignoruj &wszystko"
 
 #, c-format
 msgid ""
@@ -2754,17 +2759,17 @@ msgstr ""
 "Nie można wykonać polecenia stat na pliku źródłowym „%s”\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source file \"%s\"\n"
+"Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
 "Nie można uzyskać atrybutów pliku źródłowego „%s”\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes of target file \"%s\"\n"
+"Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
 "Nie można ustawić atrybutów pliku docelowego „%s”\n"
@@ -2881,9 +2886,9 @@ msgstr ""
 "Nie można zamknąć pliku docelowego „%s”\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes for target file \"%s\"\n"
+"Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
 "Nie można ustawić atrybutów dla pliku docelowego „%s”\n"
@@ -2897,9 +2902,9 @@ msgstr ""
 "Nie można wykonać polecenia stat na katalogu źródłowym „%s”\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source directory \"%s\"\n"
+"Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
 "Nie można uzyskać atrybutów katalogu źródłowego „%s”\n"
@@ -4779,3 +4784,14 @@ msgstr "Kontynuować od początku?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Nie można pobrać lokalnej kopii /ftp://jakiś.komputer/modyfikuj_mnie.txt"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot get flags of \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Nie można uzyskać flag „%s”\n"
+#~ "%s"
+
+#~ msgid "Ski&p all"
+#~ msgstr "&Pomiń wszystko"

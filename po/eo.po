@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-10-05 15:11+0300\n"
+"POT-Creation-Date: 2024-11-12 12:10+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2022\n"
 "Language-Team: Esperanto (http://app.transifex.com/mc/mc/language/eo/)\n"
@@ -969,6 +969,10 @@ msgstr ""
 
 msgid "Diff:"
 msgstr "Diff:"
+
+#, fuzzy
+msgid "File name is empty!"
+msgstr "Dosiernomo:"
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -2255,12 +2259,12 @@ msgstr ""
 "Ne eblas plenumi la komandon chattr por \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get flags of \"%s\"\n"
+"Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
-"Ne eblas akiri flagojn de \"%s\"\n"
+"Ne eblas atingi atributojn de fonta dosiero \"%s\"\n"
 "%s"
 
 msgid "set &user ID on execution"
@@ -2647,8 +2651,9 @@ msgstr ""
 "\"%s\"\n"
 "estas la sama dosiero"
 
-msgid "Ski&p all"
-msgstr "Preter&lasi ĉion"
+#, fuzzy
+msgid "Ignore a&ll"
+msgstr "Ignori ĉio&n"
 
 #, c-format
 msgid ""
@@ -2742,17 +2747,17 @@ msgstr ""
 "Ne eblas trovi fontan dosieron \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source file \"%s\"\n"
+"Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
 "Ne eblas atingi atributojn de fonta dosiero \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes of target file \"%s\"\n"
+"Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
 "Ne eblas agordi atributojn de cela dosiero \"%s\"\n"
@@ -2869,9 +2874,9 @@ msgstr ""
 "Ne eblas fermi celan dosieron \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes for target file \"%s\"\n"
+"Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
 "Ne eblas agordi atributojn por cela dosiero \"%s\"\n"
@@ -2885,9 +2890,9 @@ msgstr ""
 "Ne eblas trovi fontan dosierujon \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source directory \"%s\"\n"
+"Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
 "Ne eblas atingi atributojn de fonta dosierujon \"%s\"\n"
@@ -4752,3 +4757,14 @@ msgstr "Ĉu deiri de la komenco?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Ne eblas atingi lokan kopion de /ftp://some.host/editme.txt"
+
+#, c-format
+#~ msgid ""
+#~ "Cannot get flags of \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Ne eblas akiri flagojn de \"%s\"\n"
+#~ "%s"
+
+#~ msgid "Ski&p all"
+#~ msgstr "Preter&lasi ĉion"

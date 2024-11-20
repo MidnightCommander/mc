@@ -15,7 +15,6 @@ libmcfilemanager_la_SOURCES = \
 	filegui.c filegui.h \
 	filemanager.h filemanager.c \
 	filenot.c filenot.h \
-	fileopctx.c fileopctx.h \
 	find.c \
 	hotlist.c hotlist.h \
 	info.c info.h \

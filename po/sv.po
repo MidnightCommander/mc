@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-10-05 15:11+0300\n"
+"POT-Creation-Date: 2024-11-12 12:10+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Alexander Kilian <alexander.kilian@gmail.com>, 2022\n"
 "Language-Team: Swedish (http://app.transifex.com/mc/mc/language/sv/)\n"
@@ -953,6 +953,10 @@ msgstr ""
 
 msgid "Diff:"
 msgstr "Diff:"
+
+#, fuzzy
+msgid "File name is empty!"
+msgstr "Filnamn:"
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -2232,11 +2236,13 @@ msgid ""
 "%s"
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get flags of \"%s\"\n"
+"Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
+"Att skapa målfilen \"%s\" misslyckades\n"
+"%s"
 
 msgid "set &user ID on execution"
 msgstr "sätt användar-I&D vid exekvering"
@@ -2610,8 +2616,9 @@ msgstr ""
 "\"%s\"\n"
 "är samma fil"
 
-msgid "Ski&p all"
-msgstr "Ho&ppa över alla"
+#, fuzzy
+msgid "Ignore a&ll"
+msgstr "Ignorera a&lla"
 
 #, c-format
 msgid ""
@@ -2705,17 +2712,21 @@ msgstr ""
 "Stat på källfilen \"%s\" misslyckades\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source file \"%s\"\n"
+"Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
+"Stat på källfilen \"%s\" misslyckades\n"
+"%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes of target file \"%s\"\n"
+"Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
+"Fstat på målfilen \"%s\" misslyckades\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -2828,11 +2839,13 @@ msgstr ""
 "Stängning av målfilen \"%s\" misslyckades\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot set attributes for target file \"%s\"\n"
+"Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
+"Fstat på målfilen \"%s\" misslyckades\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -2842,11 +2855,13 @@ msgstr ""
 "Stat på källkatalogen \"%s\" misslyckades\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot get attributes of source directory \"%s\"\n"
+"Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
+"Stat på källkatalogen \"%s\" misslyckades\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -4669,3 +4684,6 @@ msgstr "Fortsätt från början?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan inte hämta en lokal kopia av /ftp://some.host/editme.txt"
+
+#~ msgid "Ski&p all"
+#~ msgstr "Ho&ppa över alla"
