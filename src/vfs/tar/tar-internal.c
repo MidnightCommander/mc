@@ -50,7 +50,6 @@
 #endif
 
 /* Log base 2 of common values. */
-#define LG_8 3
 #define LG_256 8
 
 /*** file scope type declarations ****************************************************************/
