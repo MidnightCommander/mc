@@ -113,7 +113,7 @@ widget_focus (Widget *w)
 {
     WGroup *g = w->owner;
 
-    if (g == NULL)
+    if (g == NULL || g->current == NULL)
         return;
 
     if (WIDGET (g->current->data) != w)
