@@ -78,8 +78,6 @@
 
 #define UINTMAX_STRSIZE_BOUND INT_BUFSIZE_BOUND (uintmax_t)
 
-#define SPARSES_INIT_COUNT SPARSES_IN_SPARSE_HEADER
-
 #define COPY_BUF(arch,b,buf,src)                                         \
 do                                                                       \
 {                                                                        \

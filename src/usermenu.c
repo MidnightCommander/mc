@@ -65,7 +65,6 @@
 
 /*** file scope macro definitions ****************************************************************/
 
-#define MAX_ENTRIES 16
 #define MAX_ENTRY_LEN 60
 
 /*** file scope type declarations ****************************************************************/
