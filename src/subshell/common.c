@@ -1310,9 +1310,139 @@ clear_cwd_pipe (void)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/*** public functions ****************************************************************************/
-/* --------------------------------------------------------------------------------------------- */
 
+static void
+do_subshell_chdir (const vfs_path_t *vpath, gboolean update_prompt)
+{
+    char *pcwd;
+
+    pcwd = vfs_path_to_str_flags (subshell_get_cwd (), 0, VPF_RECODE);
+
+    if (!(subshell_state == INACTIVE && strcmp (subshell_cwd, pcwd) != 0))
+    {
+        /* We have to repaint the subshell prompt if we read it from
+         * the main program.  Please note that in the code after this
+         * if, the cd command that is sent will make the subshell
+         * repaint the prompt, so we don't have to paint it. */
+        if (update_prompt)
+            do_update_prompt ();
+        g_free (pcwd);
+        return;
+    }
+
+    /* If we are using a shell that doesn't support persistent command buffer, we need to clear
+     * the command prompt before we send the cd command. */
+    if (!use_persistent_buffer)
+    {
+        write_all (mc_global.tty.subshell_pty, "\003", 1);
+        subshell_state = RUNNING_COMMAND;
+        if (mc_global.shell->type != SHELL_FISH)
+            if (!feed_subshell (QUIETLY, TRUE))
+            {
+                subshell_state = ACTIVE;
+                return;
+            }
+    }
+
+    /* A quick and dirty fix for fish shell. For some reason, fish does not
+     * execute all the commands sent to it from Midnight Commander :(
+     * An example of such buggy behavior is presented in ticket #4521.
+     * TODO: Find the real cause and fix it "the right way" */
+    if (mc_global.shell->type == SHELL_FISH)
+    {
+        write_all (mc_global.tty.subshell_pty, "\n", 1);
+        subshell_state = RUNNING_COMMAND;
+        feed_subshell (QUIETLY, TRUE);
+    }
+
+    /* The initial space keeps this out of the command history (in bash
+       because we set "HISTCONTROL=ignorespace") */
+    write_all (mc_global.tty.subshell_pty, " cd ", 4);
+
+    if (vpath == NULL)
+        write_all (mc_global.tty.subshell_pty, "/", 1);
+    else
+    {
+        const char *translate;
+
+        translate = vfs_translate_path (vfs_path_as_str (vpath));
+        if (translate == NULL)
+            write_all (mc_global.tty.subshell_pty, ".", 1);
+        else
+        {
+            GString *temp;
+
+            temp = subshell_name_quote (translate);
+            write_all (mc_global.tty.subshell_pty, temp->str, temp->len);
+            g_string_free (temp, TRUE);
+        }
+    }
+
+    write_all (mc_global.tty.subshell_pty, "\n", 1);
+
+    subshell_state = RUNNING_COMMAND;
+    if (!feed_subshell (QUIETLY, TRUE))
+    {
+        subshell_state = ACTIVE;
+        return;
+    }
+
+    if (subshell_alive)
+    {
+        gboolean bPathNotEq;
+
+        bPathNotEq = strcmp (subshell_cwd, pcwd) != 0;
+
+        if (bPathNotEq && mc_global.shell->type == SHELL_TCSH)
+        {
+            char rp_subshell_cwd[PATH_MAX];
+            char rp_current_panel_cwd[PATH_MAX];
+            char *p_subshell_cwd, *p_current_panel_cwd;
+
+            p_subshell_cwd = mc_realpath (subshell_cwd, rp_subshell_cwd);
+            p_current_panel_cwd = mc_realpath (pcwd, rp_current_panel_cwd);
+
+            if (p_subshell_cwd == NULL)
+                p_subshell_cwd = subshell_cwd;
+            if (p_current_panel_cwd == NULL)
+                p_current_panel_cwd = pcwd;
+            bPathNotEq = strcmp (p_subshell_cwd, p_current_panel_cwd) != 0;
+        }
+
+        if (bPathNotEq && !DIR_IS_DOT (pcwd))
+        {
+            char *cwd;
+
+            cwd = vfs_path_to_str_flags (subshell_get_cwd (), 0, VPF_STRIP_PASSWORD);
+            vfs_print_message (_("Warning: Cannot change to %s.\n"), cwd);
+            g_free (cwd);
+        }
+    }
+
+    /* Really escape Zsh/Fish history */
+    if (mc_global.shell->type == SHELL_ZSH || mc_global.shell->type == SHELL_FISH)
+    {
+        /* Per Zsh documentation last command prefixed with space lingers in the internal history
+         * until the next command is entered before it vanishes. To make it vanish right away,
+         * type a space and press return.
+         *
+         * Fish shell now also provides the same behavior:
+         * https://github.com/fish-shell/fish-shell/commit/9fdc4f903b8b421b18389a0f290d72cc88c128bb
+         * */
+        write_all (mc_global.tty.subshell_pty, " \n", 2);
+        subshell_state = RUNNING_COMMAND;
+        feed_subshell (QUIETLY, TRUE);
+    }
+
+    update_subshell_prompt = FALSE;
+
+    g_free (pcwd);
+    /* Make sure that MC never stores the CWD in a silly format */
+    /* like /usr////lib/../bin, or the strcmp() above will fail */
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 /**
  *  Fork the subshell, and set up many, many things.
@@ -1695,135 +1825,11 @@ exit_subshell (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-/** If it actually changed the directory it returns true */
 void
-do_subshell_chdir (const vfs_path_t *vpath, gboolean update_prompt)
+subshell_chdir (const vfs_path_t *vpath)
 {
-    char *pcwd;
-
-    pcwd = vfs_path_to_str_flags (subshell_get_cwd (), 0, VPF_RECODE);
-
-    if (!(subshell_state == INACTIVE && strcmp (subshell_cwd, pcwd) != 0))
-    {
-        /* We have to repaint the subshell prompt if we read it from
-         * the main program.  Please note that in the code after this
-         * if, the cd command that is sent will make the subshell
-         * repaint the prompt, so we don't have to paint it. */
-        if (update_prompt)
-            do_update_prompt ();
-        g_free (pcwd);
-        return;
-    }
-
-    /* If we are using a shell that doesn't support persistent command buffer, we need to clear
-     * the command prompt before we send the cd command. */
-    if (!use_persistent_buffer)
-    {
-        write_all (mc_global.tty.subshell_pty, "\003", 1);
-        subshell_state = RUNNING_COMMAND;
-        if (mc_global.shell->type != SHELL_FISH)
-            if (!feed_subshell (QUIETLY, TRUE))
-            {
-                subshell_state = ACTIVE;
-                return;
-            }
-    }
-
-    /* A quick and dirty fix for fish shell. For some reason, fish does not
-     * execute all the commands sent to it from Midnight Commander :(
-     * An example of such buggy behavior is presented in ticket #4521.
-     * TODO: Find the real cause and fix it "the right way" */
-    if (mc_global.shell->type == SHELL_FISH)
-    {
-        write_all (mc_global.tty.subshell_pty, "\n", 1);
-        subshell_state = RUNNING_COMMAND;
-        feed_subshell (QUIETLY, TRUE);
-    }
-
-    /* The initial space keeps this out of the command history (in bash
-       because we set "HISTCONTROL=ignorespace") */
-    write_all (mc_global.tty.subshell_pty, " cd ", 4);
-
-    if (vpath == NULL)
-        write_all (mc_global.tty.subshell_pty, "/", 1);
-    else
-    {
-        const char *translate;
-
-        translate = vfs_translate_path (vfs_path_as_str (vpath));
-        if (translate == NULL)
-            write_all (mc_global.tty.subshell_pty, ".", 1);
-        else
-        {
-            GString *temp;
-
-            temp = subshell_name_quote (translate);
-            write_all (mc_global.tty.subshell_pty, temp->str, temp->len);
-            g_string_free (temp, TRUE);
-        }
-    }
-
-    write_all (mc_global.tty.subshell_pty, "\n", 1);
-
-    subshell_state = RUNNING_COMMAND;
-    if (!feed_subshell (QUIETLY, TRUE))
-    {
-        subshell_state = ACTIVE;
-        return;
-    }
-
-    if (subshell_alive)
-    {
-        gboolean bPathNotEq;
-
-        bPathNotEq = strcmp (subshell_cwd, pcwd) != 0;
-
-        if (bPathNotEq && mc_global.shell->type == SHELL_TCSH)
-        {
-            char rp_subshell_cwd[PATH_MAX];
-            char rp_current_panel_cwd[PATH_MAX];
-            char *p_subshell_cwd, *p_current_panel_cwd;
-
-            p_subshell_cwd = mc_realpath (subshell_cwd, rp_subshell_cwd);
-            p_current_panel_cwd = mc_realpath (pcwd, rp_current_panel_cwd);
-
-            if (p_subshell_cwd == NULL)
-                p_subshell_cwd = subshell_cwd;
-            if (p_current_panel_cwd == NULL)
-                p_current_panel_cwd = pcwd;
-            bPathNotEq = strcmp (p_subshell_cwd, p_current_panel_cwd) != 0;
-        }
-
-        if (bPathNotEq && !DIR_IS_DOT (pcwd))
-        {
-            char *cwd;
-
-            cwd = vfs_path_to_str_flags (subshell_get_cwd (), 0, VPF_STRIP_PASSWORD);
-            vfs_print_message (_("Warning: Cannot change to %s.\n"), cwd);
-            g_free (cwd);
-        }
-    }
-
-    /* Really escape Zsh/Fish history */
-    if (mc_global.shell->type == SHELL_ZSH || mc_global.shell->type == SHELL_FISH)
-    {
-        /* Per Zsh documentation last command prefixed with space lingers in the internal history
-         * until the next command is entered before it vanishes. To make it vanish right away,
-         * type a space and press return.
-         *
-         * Fish shell now also provides the same behavior:
-         * https://github.com/fish-shell/fish-shell/commit/9fdc4f903b8b421b18389a0f290d72cc88c128bb
-         * */
-        write_all (mc_global.tty.subshell_pty, " \n", 2);
-        subshell_state = RUNNING_COMMAND;
-        feed_subshell (QUIETLY, TRUE);
-    }
-
-    update_subshell_prompt = FALSE;
-
-    g_free (pcwd);
-    /* Make sure that MC never stores the CWD in a silly format */
-    /* like /usr////lib/../bin, or the strcmp() above will fail */
+    if (mc_global.tty.use_subshell && vfs_current_is_local ())
+        do_subshell_chdir (vpath, FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */

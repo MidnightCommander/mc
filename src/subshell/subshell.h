@@ -46,7 +46,7 @@ gboolean flush_subshell (int max_wait_length, int how);
 gboolean read_subshell_prompt (void);
 void do_update_prompt (void);
 gboolean exit_subshell (void);
-void do_subshell_chdir (const vfs_path_t * vpath, gboolean update_prompt);
+void subshell_chdir (const vfs_path_t * vpath);
 void subshell_get_console_attributes (void);
 void sigchld_handler (int sig);
 
