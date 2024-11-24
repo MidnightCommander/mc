@@ -62,7 +62,7 @@
 #include "src/keymap.h"         /* global_keymap_t */
 #include "src/history.h"
 #ifdef ENABLE_SUBSHELL
-#include "src/subshell/subshell.h"      /* do_subshell_chdir() */
+#include "src/subshell/subshell.h"      /* subshell_chdir() */
 #endif
 
 #include "src/usermenu.h"
@@ -3441,20 +3441,6 @@ get_parent_dir_name (const vfs_path_t *cwd_vpath, const vfs_path_t *lwd_vpath)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** Wrapper for do_subshell_chdir, check for availability of subshell */
-
-static void
-subshell_chdir (const vfs_path_t *vpath)
-{
-#ifdef ENABLE_SUBSHELL
-    if (mc_global.tty.use_subshell && vfs_current_is_local ())
-        do_subshell_chdir (vpath, FALSE);
-#else /* ENABLE_SUBSHELL */
-    (void) vpath;
-#endif /* ENABLE_SUBSHELL */
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /**
  * Changes the current directory of the panel.
  * Don't record change in the directory history.
@@ -3489,7 +3475,9 @@ panel_do_cd_int (WPanel *panel, const vfs_path_t *new_dir_vpath, enum cd_enum cd
 
     vfs_release_path (olddir_vpath);
 
+#ifdef ENABLE_SUBSHELL
     subshell_chdir (panel->cwd_vpath);
+#endif /* ENABLE_SUBSHELL */
 
     /* Reload current panel */
     panel_clean_dir (panel);
@@ -3890,8 +3878,10 @@ panel_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *dat
             cd_error_message (cwd);
             g_free (cwd);
         }
+#ifdef ENABLE_SUBSHELL
         else
             subshell_chdir (panel->cwd_vpath);
+#endif /* ENABLE_SUBSHELL */
 
         update_xterm_title_path ();
         update_terminal_cwd ();
