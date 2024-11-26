@@ -1151,20 +1151,23 @@ init_subshell_precmd (char *precmd, size_t buff_size)
      * "PRECMD=precmd; "
      * "PS1='$($PRECMD)$ '\n",
      */
+    /* *INDENT-OFF* */
     static const char *precmd_fallback =
-        " "  /* Useful if the shell supports HISTCONTROL=ignorespace like functionality */
+        " "    /* Useful if the shell supports HISTCONTROL=ignorespace like functionality */
+        "MC_PS1_SAVED=\"$PS1\"; "       /* Save custom PS1 */
         "precmd() { "
-            "if [ ! \"${PWD##$HOME}\" ]; then "
-                "MC_PWD=\"~\"; "
-            "else "
-                "[ \"${PWD##$HOME/}\" = \"$PWD\" ] && MC_PWD=\"$PWD\" || MC_PWD=\"~/${PWD##$HOME/}\"; "
-            "fi; "
-            "echo \"$USER@$(hostname -s):$MC_PWD\"; "
-            "pwd>&%d; "
-            "kill -STOP $$; "
+        "  if [ ! \"${PWD##$HOME}\" ]; then "
+        "    MC_PWD=\"~\"; "
+        "  else "
+        "    [ \"${PWD##$HOME/}\" = \"$PWD\" ] && MC_PWD=\"$PWD\" || MC_PWD=\"~/${PWD##$HOME/}\"; "
+        "  fi; "
+        "  echo \"${MC_PS1_SAVED:-$USER@$(hostname -s):$MC_PWD\\$ }\"; "
+        "  pwd>&%d; "
+        "  kill -STOP $$; "
         "}; "
         "PRECMD=precmd; "
-        "PS1='$($PRECMD)$ '\n";
+        "PS1='$($PRECMD)'\n";
+    /* *INDENT-ON* */
 
     switch (mc_global.shell->type)
     {
