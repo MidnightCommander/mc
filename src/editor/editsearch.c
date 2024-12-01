@@ -293,31 +293,6 @@ edit_search_get_current_end_line_char (const WEdit *edit)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
- * Checking if search condition have BOL(^) or EOL ($) regexp special characters.
- *
- * @param search search object
- * @return result of checks.
- */
-
-static edit_search_line_t
-edit_get_search_line_type (const mc_search_t *search)
-{
-    edit_search_line_t search_line_type = 0;
-
-    if (search->search_type == MC_SEARCH_T_REGEX)
-    {
-        if (search->original.str->str[0] == '^')
-            search_line_type |= AT_START_LINE;
-
-        if (search->original.str->str[search->original.str->len - 1] == '$')
-            search_line_type |= AT_END_LINE;
-    }
-
-    return search_line_type;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
  * Calculating the start position of next line.
  *
  * @param buf               editor buffer object
@@ -460,14 +435,14 @@ edit_find (edit_search_status_msg_t *esm, gsize *len)
         }
 
         /* fix the start and the end of search block positions */
-        if ((edit->search_line_type & AT_START_LINE) != 0
+        if ((edit->search_line_type & MC_SEARCH_LINE_BEGIN) != 0
             && (start_mark != 0
                 || edit_buffer_get_byte (&edit->buffer, start_mark - 1) != end_string_symbol))
             start_mark =
                 edit_calculate_start_of_next_line (&edit->buffer, start_mark, edit->buffer.size,
                                                    end_string_symbol);
 
-        if ((edit->search_line_type & AT_END_LINE) != 0
+        if ((edit->search_line_type & MC_SEARCH_LINE_END) != 0
             && (end_mark - 1 != edit->buffer.size
                 || edit_buffer_get_byte (&edit->buffer, end_mark) != end_string_symbol))
             end_mark =
@@ -488,7 +463,7 @@ edit_find (edit_search_status_msg_t *esm, gsize *len)
         /* backward search */
         search_end = end_mark;
 
-        if ((edit->search_line_type & AT_START_LINE) != 0)
+        if ((edit->search_line_type & MC_SEARCH_LINE_BEGIN) != 0)
             search_start =
                 edit_calculate_start_of_current_line (&edit->buffer, search_start,
                                                       end_string_symbol);
@@ -511,7 +486,7 @@ edit_find (edit_search_status_msg_t *esm, gsize *len)
             if (!ok && edit->search->error != MC_SEARCH_E_NOTFOUND)
                 return FALSE;
 
-            if ((edit->search_line_type & AT_START_LINE) != 0)
+            if ((edit->search_line_type & MC_SEARCH_LINE_BEGIN) != 0)
                 search_start =
                     edit_calculate_start_of_previous_line (&edit->buffer, search_start,
                                                            end_string_symbol);
@@ -524,7 +499,7 @@ edit_find (edit_search_status_msg_t *esm, gsize *len)
     }
 
     /* forward search */
-    if ((edit->search_line_type & AT_START_LINE) != 0 && search_start != start_mark)
+    if ((edit->search_line_type & MC_SEARCH_LINE_BEGIN) != 0 && search_start != start_mark)
         search_start =
             edit_calculate_start_of_next_line (&edit->buffer, search_start, end_mark,
                                                end_string_symbol);
@@ -697,7 +672,7 @@ edit_search_init (WEdit *edit, const char *str)
     edit->search->search_fn = edit_search_cmd_callback;
     edit->search->update_fn = edit_search_update_callback;
 
-    edit->search_line_type = edit_get_search_line_type (edit->search);
+    edit->search_line_type = mc_search_get_line_type (edit->search);
 
     edit_search_fix_search_start_if_selection (edit);
 

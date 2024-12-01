@@ -60,6 +60,18 @@ typedef enum
     MC_SEARCH_T_GLOB
 } mc_search_type_t;
 
+/**
+ * enum to store search conditions check results.
+ * (whether the search condition has BOL (^) or EOL ($) regexp characters).
+*/
+typedef enum
+{
+    MC_SEARCH_LINE_NONE = 0,
+    MC_SEARCH_LINE_BEGIN = 1 << 0,
+    MC_SEARCH_LINE_END = 1 << 1,
+    MC_SEARCH_LINE_ENTIRE = MC_SEARCH_LINE_BEGIN | MC_SEARCH_LINE_END
+} mc_search_line_t;
+
 enum mc_search_cbret_t
 {
     MC_SEARCH_CB_OK = 0,
@@ -184,6 +196,8 @@ gchar **mc_search_get_types_strings_array (size_t *num);
 
 gboolean mc_search (const gchar * pattern, const gchar * pattern_charset, const gchar * str,
                     mc_search_type_t type);
+
+mc_search_line_t mc_search_get_line_type (const mc_search_t *search);
 
 int mc_search_getstart_result_by_num (mc_search_t * lc_mc_search, int lc_index);
 int mc_search_getend_result_by_num (mc_search_t * lc_mc_search, int lc_index);
