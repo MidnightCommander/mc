@@ -170,6 +170,8 @@ struct WView
     off_t search_start;         /* First character to start searching from */
     off_t search_end;           /* Length of found string or 0 if none was found */
     int search_numNeedSkipChar;
+    /* whether search conditions should be started with BOL(^) or ended with EOL($) */
+    mc_search_line_t search_line_type;
 
     /* Markers */
     int marker;                 /* mark to use */

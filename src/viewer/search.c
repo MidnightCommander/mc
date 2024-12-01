@@ -116,6 +116,20 @@ mcview_search_status_update_cb (status_msg_t *sm)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static inline off_t
+mcview_calculate_start_of_previous_line (WView *view, const off_t current_pos)
+{
+    const off_t bol = mcview_bol (view, current_pos, 0);
+
+    /* Are we in the 1st line? */
+    if (bol == 0)
+        return (-1);
+
+    return mcview_bol (view, bol - 1, 0);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 mcview_search_update_steps (WView *view)
 {
@@ -150,6 +164,10 @@ mcview_find (mcview_search_status_msg_t *ssm, off_t search_start, off_t search_e
     if (mcview_search_options.backwards)
     {
         search_end = mcview_get_filesize (view);
+
+        if ((view->search_line_type & MC_SEARCH_LINE_BEGIN) != 0)
+            search_start = mcview_bol (view, search_start, 0);
+ 
         while (search_start >= 0)
         {
             gboolean ok;
@@ -174,12 +192,19 @@ mcview_find (mcview_search_status_msg_t *ssm, off_t search_start, off_t search_e
             if (!ok && view->search->error != MC_SEARCH_E_NOTFOUND)
                 return FALSE;
 
-            search_start--;
+            if ((view->search_line_type & MC_SEARCH_LINE_BEGIN) != 0)
+                search_start = mcview_calculate_start_of_previous_line (view, search_start);
+            else
+                search_start--;
         }
 
         mc_search_set_error (view->search, MC_SEARCH_E_NOTFOUND, "%s", _(STR_E_NOTFOUND));
         return FALSE;
     }
+
+    if ((view->search_line_type & MC_SEARCH_LINE_BEGIN) != 0 && search_start != 0)
+        search_start = mcview_eol (view, search_start);
+
     view->search_nroff_seq->index = search_start;
     mcview_nroff_seq_info (view->search_nroff_seq);
 
@@ -380,6 +405,8 @@ mcview_search_init (WView *view)
     view->search->whole_words = mcview_search_options.whole_words;
     view->search->search_fn = mcview_search_cmd_callback;
     view->search->update_fn = mcview_search_update_cmd_callback;
+
+    view->search_line_type = mc_search_get_line_type (view->search);
 
     return TRUE;
 }
