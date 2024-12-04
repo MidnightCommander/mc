@@ -1926,6 +1926,10 @@ get_current_hunk (WDiff *dview, int *start_line1, int *end_line1, int *start_lin
     int ch;
     int res = 0;
 
+    /* Is file empty? */
+    if (a0->len == 0)
+        return 0;
+
     *start_line1 = 1;
     *start_line2 = 1;
     *end_line1 = 1;
