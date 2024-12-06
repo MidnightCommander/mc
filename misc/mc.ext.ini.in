@@ -215,6 +215,10 @@ Include=tar.gz
 Shell=.gem
 Include=tar.gz
 
+[crate]
+Shell=.crate
+Include=tar.gz
+
 [tar.bzip]
 Shell=.tar.bz
 # Open=%cd %p/utar://
