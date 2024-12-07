@@ -97,40 +97,6 @@ mcview_remove_ext_script (WView *view)
 
 /* --------------------------------------------------------------------------------------------- */
 
-/* Both views */
-static void
-mcview_search (WView *view, gboolean start_search)
-{
-    off_t want_search_start = view->search_start;
-
-    if (start_search)
-    {
-        if (mcview_dialog_search (view))
-        {
-            if (view->mode_flags.hex)
-                want_search_start = view->hex_cursor;
-
-            mcview_do_search (view, want_search_start);
-        }
-    }
-    else
-    {
-        if (view->mode_flags.hex)
-        {
-            if (!mcview_search_options.backwards)
-                want_search_start = view->hex_cursor + 1;
-            else if (view->hex_cursor > 0)
-                want_search_start = view->hex_cursor - 1;
-            else
-                want_search_start = 0;
-        }
-
-        mcview_do_search (view, want_search_start);
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 static void
 mcview_continue_search_cmd (WView *view)
 {

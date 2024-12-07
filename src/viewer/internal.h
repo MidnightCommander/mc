@@ -328,7 +328,7 @@ void mcview_search_deinit (WView * view);
 mc_search_cbret_t mcview_search_cmd_callback (const void *user_data, gsize char_offset,
                                               int *current_char);
 mc_search_cbret_t mcview_search_update_cmd_callback (const void *user_data, gsize char_offset);
-void mcview_do_search (WView * view, off_t want_search_start);
+void mcview_search (WView * view, gboolean start_search);
 
 /* --------------------------------------------------------------------------------------------- */
 /*** inline functions ****************************************************************************/

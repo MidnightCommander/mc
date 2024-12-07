@@ -211,6 +211,150 @@ mcview_search_show_result (WView *view, size_t match_len)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static void
+mcview_do_search (WView *view, off_t want_search_start)
+{
+    mcview_search_status_msg_t vsm;
+
+    off_t search_start = 0;
+    off_t orig_search_start = view->search_start;
+    gboolean found = FALSE;
+
+    size_t match_len;
+
+    view->search_start = want_search_start;
+    /* to avoid infinite search loop we need to increase or decrease start offset of search */
+
+    if (view->search_start != 0)
+    {
+        if (!view->mode_flags.nroff)
+            search_start = view->search_start + (mcview_search_options.backwards ? -2 : 0);
+        else
+        {
+            if (mcview_search_options.backwards)
+            {
+                mcview_nroff_t *nroff;
+
+                nroff = mcview_nroff_seq_new_num (view, view->search_start);
+                if (mcview_nroff_seq_prev (nroff) != -1)
+                    search_start =
+                        -(mcview__get_nroff_real_len (view, nroff->index - 1, 2) +
+                          nroff->char_length + 1);
+                else
+                    search_start = -2;
+
+                mcview_nroff_seq_free (&nroff);
+            }
+            else
+            {
+                search_start = mcview__get_nroff_real_len (view, view->search_start + 1, 2);
+            }
+            search_start += view->search_start;
+        }
+    }
+
+    if (mcview_search_options.backwards && search_start < 0)
+        search_start = 0;
+
+    /* Compute the percent steps */
+    mcview_search_update_steps (view);
+
+    view->update_activate = search_start;
+
+    vsm.first = TRUE;
+    vsm.view = view;
+    vsm.offset = search_start;
+
+    status_msg_init (STATUS_MSG (&vsm), _("Search"), 1.0, simple_status_msg_init_cb,
+                     mcview_search_status_update_cb, NULL);
+
+    do
+    {
+        off_t growbufsize;
+
+        if (view->growbuf_in_use)
+            growbufsize = mcview_growbuf_filesize (view);
+        else
+            growbufsize = view->search->original.str->len;
+
+        if (mcview_find (&vsm, search_start, mcview_get_filesize (view), &match_len))
+        {
+            mcview_search_show_result (view, match_len);
+            found = TRUE;
+            break;
+        }
+
+        /* Search error is here.
+         * MC_SEARCH_E_NOTFOUND: continue search
+         * others: stop
+         */
+        if (view->search->error != MC_SEARCH_E_NOTFOUND)
+            break;
+
+        search_start = growbufsize - view->search->original.str->len;
+    }
+    while (search_start > 0 && mcview_may_still_grow (view));
+
+    /* After mcview_may_still_grow (view) == FALSE, last chunk remains. Search there. */
+    if (view->growbuf_in_use && !found && view->search->error == MC_SEARCH_E_NOTFOUND
+        && !mcview_search_options.backwards
+        && mcview_find (&vsm, search_start, mcview_get_filesize (view), &match_len))
+    {
+        mcview_search_show_result (view, match_len);
+        found = TRUE;
+    }
+
+    status_msg_deinit (STATUS_MSG (&vsm));
+
+    if (orig_search_start != 0 && (!found && view->search->error == MC_SEARCH_E_NOTFOUND)
+        && !mcview_search_options.backwards)
+    {
+        view->search_start = orig_search_start;
+        mcview_update (view);
+
+        if (query_dialog
+            (_("Search done"), _("Continue from beginning?"), D_NORMAL, 2, _("&Yes"),
+             _("&No")) != 0)
+            found = TRUE;
+        else
+        {
+            /* continue search from beginning */
+            view->update_activate = 0;
+
+            vsm.first = TRUE;
+            vsm.view = view;
+            vsm.offset = 0;
+
+            status_msg_init (STATUS_MSG (&vsm), _("Search"), 1.0, simple_status_msg_init_cb,
+                             mcview_search_status_update_cb, NULL);
+
+            /* search from file begin up to initial search start position */
+            if (mcview_find (&vsm, 0, orig_search_start, &match_len))
+            {
+                mcview_search_show_result (view, match_len);
+                found = TRUE;
+            }
+
+            status_msg_deinit (STATUS_MSG (&vsm));
+        }
+    }
+
+    if (!found)
+    {
+        view->search_start = orig_search_start;
+        mcview_update (view);
+
+        if (view->search->error == MC_SEARCH_E_NOTFOUND)
+            query_dialog (_("Search"), _(STR_E_NOTFOUND), D_NORMAL, 1, _("&Dismiss"));
+        else if (view->search->error_str != NULL)
+            query_dialog (_("Search"), view->search->error_str, D_NORMAL, 1, _("&Dismiss"));
+    }
+
+    view->dirty++;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -347,145 +491,36 @@ mcview_search_update_cmd_callback (const void *user_data, gsize char_offset)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* Both views */
 void
-mcview_do_search (WView *view, off_t want_search_start)
+mcview_search (WView *view, gboolean start_search)
 {
-    mcview_search_status_msg_t vsm;
+    off_t want_search_start = view->search_start;
 
-    off_t search_start = 0;
-    off_t orig_search_start = view->search_start;
-    gboolean found = FALSE;
-
-    size_t match_len;
-
-    view->search_start = want_search_start;
-    /* for avoid infinite search loop we need to increase or decrease start offset of search */
-
-    if (view->search_start != 0)
+    if (start_search)
     {
-        if (!view->mode_flags.nroff)
-            search_start = view->search_start + (mcview_search_options.backwards ? -2 : 0);
-        else
+        if (mcview_dialog_search (view))
         {
-            if (mcview_search_options.backwards)
-            {
-                mcview_nroff_t *nroff;
+            if (view->mode_flags.hex)
+                want_search_start = view->hex_cursor;
 
-                nroff = mcview_nroff_seq_new_num (view, view->search_start);
-                if (mcview_nroff_seq_prev (nroff) != -1)
-                    search_start =
-                        -(mcview__get_nroff_real_len (view, nroff->index - 1, 2) +
-                          nroff->char_length + 1);
-                else
-                    search_start = -2;
-
-                mcview_nroff_seq_free (&nroff);
-            }
+            mcview_do_search (view, want_search_start);
+        }
+    }
+    else
+    {
+        if (view->mode_flags.hex)
+        {
+            if (!mcview_search_options.backwards)
+                want_search_start = view->hex_cursor + 1;
+            else if (view->hex_cursor > 0)
+                want_search_start = view->hex_cursor - 1;
             else
-            {
-                search_start = mcview__get_nroff_real_len (view, view->search_start + 1, 2);
-            }
-            search_start += view->search_start;
-        }
-    }
-
-    if (mcview_search_options.backwards && search_start < 0)
-        search_start = 0;
-
-    /* Compute the percent steps */
-    mcview_search_update_steps (view);
-
-    view->update_activate = search_start;
-
-    vsm.first = TRUE;
-    vsm.view = view;
-    vsm.offset = search_start;
-
-    status_msg_init (STATUS_MSG (&vsm), _("Search"), 1.0, simple_status_msg_init_cb,
-                     mcview_search_status_update_cb, NULL);
-
-    do
-    {
-        off_t growbufsize;
-
-        if (view->growbuf_in_use)
-            growbufsize = mcview_growbuf_filesize (view);
-        else
-            growbufsize = view->search->original.str->len;
-
-        if (mcview_find (&vsm, search_start, mcview_get_filesize (view), &match_len))
-        {
-            mcview_search_show_result (view, match_len);
-            found = TRUE;
-            break;
+                want_search_start = 0;
         }
 
-        /* Search error is here.
-         * MC_SEARCH_E_NOTFOUND: continue search
-         * others: stop
-         */
-        if (view->search->error != MC_SEARCH_E_NOTFOUND)
-            break;
-
-        search_start = growbufsize - view->search->original.str->len;
+        mcview_do_search (view, want_search_start);
     }
-    while (search_start > 0 && mcview_may_still_grow (view));
-
-    /* After mcview_may_still_grow (view) == FALSE we have remained last chunk. Search there. */
-    if (view->growbuf_in_use && !found && view->search->error == MC_SEARCH_E_NOTFOUND
-        && !mcview_search_options.backwards
-        && mcview_find (&vsm, search_start, mcview_get_filesize (view), &match_len))
-    {
-        mcview_search_show_result (view, match_len);
-        found = TRUE;
-    }
-
-    status_msg_deinit (STATUS_MSG (&vsm));
-
-    if (orig_search_start != 0 && (!found && view->search->error == MC_SEARCH_E_NOTFOUND)
-        && !mcview_search_options.backwards)
-    {
-        view->search_start = orig_search_start;
-        mcview_update (view);
-
-        if (query_dialog
-            (_("Search done"), _("Continue from beginning?"), D_NORMAL, 2, _("&Yes"),
-             _("&No")) != 0)
-            found = TRUE;
-        else
-        {
-            /* continue search from beginning */
-            view->update_activate = 0;
-
-            vsm.first = TRUE;
-            vsm.view = view;
-            vsm.offset = 0;
-
-            status_msg_init (STATUS_MSG (&vsm), _("Search"), 1.0, simple_status_msg_init_cb,
-                             mcview_search_status_update_cb, NULL);
-
-            /* search from file begin up to initial search start position */
-            if (mcview_find (&vsm, 0, orig_search_start, &match_len))
-            {
-                mcview_search_show_result (view, match_len);
-                found = TRUE;
-            }
-
-            status_msg_deinit (STATUS_MSG (&vsm));
-        }
-    }
-
-    if (!found)
-    {
-        view->search_start = orig_search_start;
-        mcview_update (view);
-
-        if (view->search->error == MC_SEARCH_E_NOTFOUND)
-            query_dialog (_("Search"), _(STR_E_NOTFOUND), D_NORMAL, 1, _("&Dismiss"));
-        else if (view->search->error_str != NULL)
-            query_dialog (_("Search"), view->search->error_str, D_NORMAL, 1, _("&Dismiss"));
-    }
-    view->dirty++;
 }
 
 /* --------------------------------------------------------------------------------------------- */
