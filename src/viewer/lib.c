@@ -314,29 +314,35 @@ off_t
 mcview_bol (WView *view, off_t current, off_t limit)
 {
     int c;
-    off_t filesize;
-    filesize = mcview_get_filesize (view);
+
     if (current <= 0)
         return 0;
+
+    const off_t filesize = mcview_get_filesize (view);
+
     if (current > filesize)
         return filesize;
+
     if (!mcview_get_byte (view, current, &c))
         return current;
+
     if (c == '\n')
     {
         if (!mcview_get_byte (view, current - 1, &c))
             return current;
+
         if (c == '\r')
             current--;
     }
-    while (current > 0 && current > limit)
+
+    for (; current > 0 && current > limit; current--)
     {
         if (!mcview_get_byte (view, current - 1, &c))
             break;
         if (c == '\r' || c == '\n')
             break;
-        current--;
     }
+
     return current;
 }
 
