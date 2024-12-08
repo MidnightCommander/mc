@@ -354,27 +354,25 @@ mcview_bol (WView *view, off_t current, off_t limit)
 off_t
 mcview_eol (WView *view, off_t current)
 {
-    int c, prev_ch = 0;
+    int c;
+    int prev_ch = 0;
 
     if (current < 0)
         return 0;
 
-    while (TRUE)
+    for (; mcview_get_byte (view, current, &c); current++)
     {
-        if (!mcview_get_byte (view, current, &c))
-            break;
         if (c == '\n')
         {
             current++;
             break;
         }
-        else if (prev_ch == '\r')
-        {
+        if (prev_ch == '\r')
             break;
-        }
-        current++;
+
         prev_ch = c;
     }
+
     return current;
 }
 
