@@ -62,6 +62,7 @@
 
 #include <errno.h>
 #include <ctype.h>
+#include <limits.h>             /* INT_MAX */
 #include <stdio.h>
 #include <string.h>
 #include <sys/types.h>
@@ -347,18 +348,27 @@ file_eta_prepare_for_show (char *buffer, double eta_secs, gboolean always_show)
 {
     char _fmt_buff[BUF_TINY];
 
-    if (eta_secs <= 0.5)
+    if (eta_secs >= INT_MAX)
     {
-        if (!always_show)
+        /* Over 68 years */
+        g_strlcpy (_fmt_buff, "--", sizeof (_fmt_buff));
+    }
+    else
+    {
+        if (eta_secs <= 0.5)
         {
-            *buffer = '\0';
-            return;
+            if (!always_show)
+            {
+                *buffer = '\0';
+                return;
+            }
+
+            eta_secs = 1.0;
         }
 
-        eta_secs = 1.0;
+        file_frmt_time (_fmt_buff, eta_secs);
     }
 
-    file_frmt_time (_fmt_buff, eta_secs);
     g_snprintf (buffer, BUF_TINY, _("ETA %s"), _fmt_buff);
 }
 
