@@ -170,6 +170,8 @@ struct WView
     off_t search_start;         /* First character to start searching from */
     off_t search_end;           /* Length of found string or 0 if none was found */
     int search_numNeedSkipChar;
+    /* whether search conditions should be started with BOL(^) or ended with EOL($) */
+    mc_search_line_t search_line_type;
 
     /* Markers */
     int marker;                 /* mark to use */
@@ -328,7 +330,7 @@ void mcview_search_deinit (WView * view);
 mc_search_cbret_t mcview_search_cmd_callback (const void *user_data, gsize char_offset,
                                               int *current_char);
 mc_search_cbret_t mcview_search_update_cmd_callback (const void *user_data, gsize char_offset);
-void mcview_do_search (WView * view, off_t want_search_start);
+void mcview_search (WView * view, gboolean start_search);
 
 /* --------------------------------------------------------------------------------------------- */
 /*** inline functions ****************************************************************************/

@@ -1114,3 +1114,30 @@ mc_search_regex_prepare_replace_str (mc_search_t *lc_mc_search, GString *replace
 
     return ret;
 }
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Checks whether search condition has BOL (^) or EOL ($) regexp special characters.
+ *
+ * @param search search object
+ * @return check result
+ */
+
+mc_search_line_t
+mc_search_get_line_type (const mc_search_t *search)
+{
+    mc_search_line_t search_line_type = MC_SEARCH_LINE_NONE;
+
+    if (search->search_type == MC_SEARCH_T_REGEX)
+    {
+        if (search->original.str->str[0] == '^')
+            search_line_type |= MC_SEARCH_LINE_BEGIN;
+
+        if (search->original.str->str[search->original.str->len - 1] == '$')
+            search_line_type |= MC_SEARCH_LINE_END;
+    }
+
+    return search_line_type;
+}
+
+/* --------------------------------------------------------------------------------------------- */
