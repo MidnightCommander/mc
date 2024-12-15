@@ -839,7 +839,7 @@ mc_search__cond_struct_new_init_regex (const char *charset, mc_search_t *lc_mc_s
 
 #ifdef HAVE_PCRE2
         int errcode;
-        char error[BUF_SMALL];
+        char error[BUF_SMALL] = "";
         size_t erroffset;
         int pcre_options = PCRE2_MULTILINE;
 #else

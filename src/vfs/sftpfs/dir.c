@@ -68,7 +68,7 @@ sftpfs_opendir (const vfs_path_t *vpath, GError **mcerror)
     sftpfs_dir_data_t *sftpfs_dir;
     sftpfs_super_t *sftpfs_super;
     const vfs_path_element_t *path_element;
-    LIBSSH2_SFTP_HANDLE *handle;
+    LIBSSH2_SFTP_HANDLE *handle = NULL;
     const GString *fixfname;
 
     if (!sftpfs_op_init (&sftpfs_super, &path_element, vpath, mcerror))
