@@ -412,7 +412,8 @@ shell_free_archive (struct vfs_class *me, struct vfs_s_super *super)
     g_free (shell_super->scr_send);
     g_free (shell_super->scr_append);
     g_free (shell_super->scr_info);
-    g_string_free (shell_super->scr_env, TRUE);
+    if (shell_super->scr_env != NULL)
+        g_string_free (shell_super->scr_env, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
