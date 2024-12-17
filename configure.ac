@@ -733,6 +733,10 @@ tests/src/vfs/extfs/helpers-list/misc/Makefile
 tests/src/vfs/ftpfs/Makefile
 ])
 
+AC_CONFIG_COMMANDS_POST([
+"${srcdir}"/po/create-potfiles_in.sh "${srcdir}"
+])
+
 AC_OUTPUT
 
 AC_MSG_NOTICE([
