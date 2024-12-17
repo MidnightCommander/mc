@@ -28,8 +28,13 @@ do_open_action() {
 
     case "${filetype}" in
     html)
-        (if [ -n "@X11_WWW@" -a  -n "$DISPLAY" ]; then
-            (@X11_WWW@ file://"${MC_EXT_CURRENTDIR}"/"${MC_EXT_BASENAME}" &) 1>&2
+        (if [ -n "$DISPLAY" ]; then
+            for browser in gnome-moz-remote mozilla firefox chromium google-chrome konqueror brave-browser opera open ; do
+                if which "${browser}" 1>&2 ; then
+                    "${browser}" file://"${MC_EXT_CURRENTDIR}"/"${MC_EXT_BASENAME}" 1>&2 &
+                    break
+                fi
+            done
         else
             elinks "${MC_EXT_FILENAME}" || \
                 links "${MC_EXT_FILENAME}" || \

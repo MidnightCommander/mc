@@ -213,9 +213,6 @@ if $HAVE_FILECMD; then
     fi
 fi
 
-dnl Only list browsers here that can be run in background (i.e. with `&')
-AC_CHECK_PROGS(X11_WWW, [gnome-moz-remote mozilla firefox konqueror opera])
-
 
 dnl ############################################################################
 dnl Check for other tools
@@ -608,7 +605,6 @@ misc/ext.d/Makefile
 misc/ext.d/doc.sh
 misc/ext.d/misc.sh
 misc/ext.d/text.sh
-misc/ext.d/web.sh
 misc/macros.d/Makefile
 misc/mc.ext.ini
 
