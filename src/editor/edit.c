@@ -3681,14 +3681,14 @@ edit_execute_cmd (WEdit *edit, long command, int char_for_insertion)
         MC_FALLTHROUGH;
     case CK_PageUp:
     case CK_MarkPageUp:
-        edit_move_up (edit, w->lines - 1, TRUE);
+        edit_move_up (edit, w->lines - (edit->fullscreen ? 1 : 2), TRUE);
         break;
     case CK_MarkColumnPageDown:
         edit->column_highlight = 1;
         MC_FALLTHROUGH;
     case CK_PageDown:
     case CK_MarkPageDown:
-        edit_move_down (edit, w->lines - 1, TRUE);
+        edit_move_down (edit, w->lines - (edit->fullscreen ? 1 : 2), TRUE);
         break;
     case CK_MarkColumnLeft:
         edit->column_highlight = 1;
