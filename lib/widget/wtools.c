@@ -154,7 +154,7 @@ fg_input_dialog_help (const char *header, const char *text, const char *help,
     char *p_text;
     char histname[64] = "inp|";
     gboolean is_passwd = FALSE;
-    char *my_str;
+    char *my_str = NULL;
     int ret;
 
     /* label text */
