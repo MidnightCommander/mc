@@ -935,7 +935,7 @@ ftpfs_open_socket (struct vfs_class *me, struct vfs_s_super *super)
         me->verrno = errno;
         close (my_socket);
 
-        if (errno == EINTR && tty_got_interrupt ())
+        if (me->verrno == EINTR && tty_got_interrupt ())
             vfs_print_message ("%s", _("ftpfs: connection interrupted by user"));
         else if (res->ai_next == NULL)
             vfs_print_message (_("ftpfs: connection to server failed: %s"),
