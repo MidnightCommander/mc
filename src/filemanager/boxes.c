@@ -1218,7 +1218,7 @@ char *
 cd_box (const WPanel *panel)
 {
     const Widget *w = CONST_WIDGET (panel);
-    char *my_str;
+    char *my_str = NULL;
 
     quick_widget_t quick_widgets[] = {
         QUICK_LABELED_INPUT (N_("cd"), input_label_left, "", "input", &my_str, NULL, FALSE, TRUE,
