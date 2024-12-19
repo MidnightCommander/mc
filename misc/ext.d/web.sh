@@ -30,7 +30,7 @@ do_open_action() {
     html)
         (if [ -n "$DISPLAY" ]; then
             for browser in gnome-moz-remote mozilla firefox chromium google-chrome konqueror brave-browser opera open ; do
-                if which "${browser}" 1>&2 ; then
+                if command -v "${browser}" 1>&2 ; then
                     "${browser}" file://"${MC_EXT_CURRENTDIR}"/"${MC_EXT_BASENAME}" 1>&2 &
                     break
                 fi
