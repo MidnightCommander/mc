@@ -75,7 +75,7 @@ edit_search_options_t edit_search_options = {
 static gboolean
 edit_dialog_search_show (WEdit *edit)
 {
-    char *search_text;
+    char *search_text = NULL;
     size_t num_of_types = 0;
     gchar **list_of_types;
     int dialog_result;
@@ -121,7 +121,7 @@ edit_dialog_search_show (WEdit *edit)
 
     g_strfreev (list_of_types);
 
-    if (dialog_result == B_CANCEL || search_text[0] == '\0')
+    if (dialog_result == B_CANCEL || search_text == NULL || search_text[0] == '\0')
     {
         g_free (search_text);
         return FALSE;
