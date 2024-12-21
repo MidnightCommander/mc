@@ -543,7 +543,7 @@ configure_box (void)
 
     {
         char time_out[BUF_TINY] = "";
-        char *time_out_new;
+        char *time_out_new = NULL;
 
         quick_widget_t quick_widgets[] = {
             /* *INDENT-OFF* */
