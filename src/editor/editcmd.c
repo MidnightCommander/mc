@@ -374,7 +374,7 @@ static vfs_path_t *
 edit_get_save_file_as (WEdit *edit)
 {
     static LineBreaks cur_lb = LB_ASIS;
-    char *filename_res;
+    char *filename_res = NULL;
     vfs_path_t *ret_vpath = NULL;
 
     const char *lb_names[LB_NAMES] = {
@@ -1897,7 +1897,9 @@ edit_block_process_cmd (WEdit *edit, int macro_number)
 void
 edit_mail_dialog (WEdit *edit)
 {
-    char *mail_to, *mail_subject, *mail_cc;
+    char *mail_to = NULL;
+    char *mail_subject = NULL;
+    char *mail_cc = NULL;
 
     quick_widget_t quick_widgets[] = {
         /* *INDENT-OFF* */
