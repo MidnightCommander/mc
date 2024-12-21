@@ -680,7 +680,6 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive)
                 data_block = tar_find_next_block (arch);
                 if (data_block == NULL)
                 {
-                    g_free (header_copy);
                     message (D_ERROR, MSG_ERROR, _("Unexpected EOF on archive file"));
                     status = HEADER_FAILURE;
                     goto ret;
