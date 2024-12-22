@@ -360,8 +360,9 @@ init_subshell_child (const char *pty_name)
             init_file = g_strdup (".profile");
         }
 
-        /* Put init file to ENV variable used by ash */
-        g_setenv ("ENV", init_file, TRUE);
+        /* Put init file to ENV variable used by ash but only if it
+           is not already set. */
+        g_setenv ("ENV", init_file, FALSE);
 
         break;
 
