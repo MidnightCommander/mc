@@ -1084,7 +1084,7 @@ tar_super_same (const vfs_path_element_t *vpath_element, struct vfs_s_super *par
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/* Get indes of current data chunk in a sparse file.
+/* Get index of current data chunk in a sparse file.
  *
  * @param sparse_map map of the sparse file
  * @param offset offset in the sparse file
