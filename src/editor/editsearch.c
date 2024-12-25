@@ -558,7 +558,7 @@ edit_replace_cmd__conv_to_input (char *str)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-edit_show_search_error (const WEdit *edit, const char *title)
+edit_search_show_error (const WEdit *edit, const char *title)
 {
     if (edit->search->error == MC_SEARCH_E_NOTFOUND)
         message (D_NORMAL, title, "%s", _(STR_E_NOTFOUND));
@@ -638,7 +638,7 @@ edit_do_search (WEdit *edit)
         else
         {
             edit->search_start = edit->buffer.curs1;
-            edit_show_search_error (edit, _("Search"));
+            edit_search_show_error (edit, _("Search"));
         }
     }
 
@@ -891,7 +891,7 @@ edit_replace_cmd (WEdit *edit, gboolean again)
         {
             if (!(edit->search->error == MC_SEARCH_E_OK ||
                   (once_found && edit->search->error == MC_SEARCH_E_NOTFOUND)))
-                edit_show_search_error (edit, _("Search"));
+                edit_search_show_error (edit, _("Search"));
             break;
         }
 
@@ -956,7 +956,7 @@ edit_replace_cmd (WEdit *edit, gboolean again)
 
             if (edit->search->error != MC_SEARCH_E_OK)
             {
-                edit_show_search_error (edit, _("Replace"));
+                edit_search_show_error (edit, _("Replace"));
                 if (repl_str != NULL)
                     g_string_free (repl_str, TRUE);
                 break;
