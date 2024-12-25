@@ -157,9 +157,9 @@ def better_css(css_path)
 end
 
 def main()
-  if not File.exists?($base + '/help.html') then
+  if not File.exist?($base + '/help.html') then
     $base += '/HTML'
-    if not File.exists?($base + '/help.html') then
+    if not File.exist?($base + '/help.html') then
       puts "Error: This doesn't look like htags' output directory."
       exit(1)
     end
