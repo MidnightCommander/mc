@@ -94,24 +94,11 @@ typedef enum
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
-/* search/replace options */
-typedef struct edit_search_options_t
-{
-    mc_search_type_t type;
-    gboolean case_sens;
-    gboolean backwards;
-    gboolean only_in_selection;
-    gboolean whole_words;
-    gboolean all_codepages;
-} edit_search_options_t;
-
 /*** global variables defined in .c file *********************************************************/
 
 extern const char VERTICAL_MAGIC[5];
 /* if enable_show_tabs_tws == TRUE then use visible_tab visible_tws */
 extern gboolean enable_show_tabs_tws;
-
-extern edit_search_options_t edit_search_options;
 
 extern unsigned int edit_stack_iterator;
 extern edit_arg_t edit_history_moveto[MAX_HISTORY_MOVETO];

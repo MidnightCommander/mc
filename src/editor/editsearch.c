@@ -47,15 +47,6 @@
 
 /*** global variables ****************************************************************************/
 
-edit_search_options_t edit_search_options = {
-    .type = MC_SEARCH_T_NORMAL,
-    .case_sens = FALSE,
-    .backwards = FALSE,
-    .only_in_selection = FALSE,
-    .whole_words = FALSE,
-    .all_codepages = FALSE
-};
-
 /*** file scope macro definitions ****************************************************************/
 
 #define B_REPLACE_ALL (B_USER+1)
@@ -64,9 +55,28 @@ edit_search_options_t edit_search_options = {
 
 /*** file scope type declarations ****************************************************************/
 
+typedef struct edit_search_options_t
+{
+    mc_search_type_t type;
+    gboolean case_sens;
+    gboolean backwards;
+    gboolean only_in_selection;
+    gboolean whole_words;
+    gboolean all_codepages;
+} edit_search_options_t;
+
 /*** forward declarations (file scope functions) *************************************************/
 
 /*** file scope variables ************************************************************************/
+
+static edit_search_options_t edit_search_options = {
+    .type = MC_SEARCH_T_NORMAL,
+    .case_sens = FALSE,
+    .backwards = FALSE,
+    .only_in_selection = FALSE,
+    .whole_words = FALSE,
+    .all_codepages = FALSE
+};
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
