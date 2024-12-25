@@ -615,13 +615,16 @@ edit_do_search (WEdit *edit)
     }
     else
     {
-        if (edit->found_len != 0 && edit->search_start == edit->found_start + 1
-            && edit_search_options.backwards)
-            edit->search_start--;
-
-        if (edit->found_len != 0 && edit->search_start == edit->found_start - 1
-            && !edit_search_options.backwards)
-            edit->search_start++;
+        if (edit_search_options.backwards)
+        {
+            if (edit->found_len != 0 && edit->search_start == edit->found_start + 1)
+                edit->search_start--;
+        }
+        else
+        {
+            if (edit->found_len != 0 && edit->search_start == edit->found_start - 1)
+                edit->search_start++;
+        }
 
         if (edit_find (&esm, &len))
         {
@@ -868,13 +871,16 @@ edit_replace_cmd (WEdit *edit, gboolean again)
         goto cleanup;
     }
 
-    if (edit->found_len != 0 && edit->search_start == edit->found_start + 1
-        && edit_search_options.backwards)
-        edit->search_start--;
-
-    if (edit->found_len != 0 && edit->search_start == edit->found_start - 1
-        && !edit_search_options.backwards)
-        edit->search_start++;
+    if (edit_search_options.backwards)
+    {
+        if (edit->found_len != 0 && edit->search_start == edit->found_start + 1)
+            edit->search_start--;
+    }
+    else
+    {
+        if (edit->found_len != 0 && edit->search_start == edit->found_start - 1)
+            edit->search_start++;
+    }
 
     esm.first = TRUE;
     esm.edit = edit;
