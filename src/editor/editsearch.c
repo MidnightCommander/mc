@@ -458,9 +458,7 @@ edit_find (edit_search_status_msg_t *esm, gsize *len)
         }
 
         // fix the start and the end of search block positions
-        if ((edit->search_line_type & MC_SEARCH_LINE_BEGIN) != 0
-            && (start_mark != 0
-                || edit_buffer_get_byte (&edit->buffer, start_mark - 1) != end_string_symbol))
+        if ((edit->search_line_type & MC_SEARCH_LINE_BEGIN) != 0 && start_mark != 0)
             start_mark = edit_calculate_start_of_next_line (&edit->buffer, start_mark,
                                                             edit->buffer.size, end_string_symbol);
 
