@@ -905,10 +905,10 @@ mc_search__cond_struct_new_init_regex (const char *charset, mc_search_t *lc_mc_s
 
 gboolean
 mc_search__run_regex (mc_search_t *lc_mc_search, const void *user_data,
-                      gsize start_search, gsize end_search, gsize *found_len)
+                      off_t start_search, off_t end_search, gsize *found_len)
 {
     mc_search_cbret_t ret = MC_SEARCH_CB_NOTFOUND;
-    gsize current_pos, virtual_pos;
+    off_t current_pos, virtual_pos;
     gint start_pos;
     gint end_pos;
 

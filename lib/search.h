@@ -19,9 +19,9 @@
 
 typedef enum mc_search_cbret_t mc_search_cbret_t;
 
-typedef mc_search_cbret_t (*mc_search_fn) (const void *user_data, gsize char_offset,
+typedef mc_search_cbret_t (*mc_search_fn) (const void *user_data, off_t char_offset,
                                            int *current_char);
-typedef mc_search_cbret_t (*mc_update_fn) (const void *user_data, gsize char_offset);
+typedef mc_search_cbret_t (*mc_update_fn) (const void *user_data, off_t char_offset);
 
 #define MC_SEARCH__NUM_REPLACE_ARGS 64
 
@@ -180,8 +180,8 @@ void mc_search_free (mc_search_t * lc_mc_search);
 
 gboolean mc_search_prepare (mc_search_t * mc_search);
 
-gboolean mc_search_run (mc_search_t * mc_search, const void *user_data, gsize start_search,
-                        gsize end_search, gsize * found_len);
+gboolean mc_search_run (mc_search_t * mc_search, const void *user_data, off_t start_search,
+                        off_t end_search, gsize * found_len);
 
 gboolean mc_search_is_type_avail (mc_search_type_t search_type);
 

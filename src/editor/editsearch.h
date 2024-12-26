@@ -23,9 +23,9 @@ typedef struct
 gboolean edit_search_init (WEdit * edit, const char *s);
 void edit_search_deinit (WEdit * edit);
 
-mc_search_cbret_t edit_search_cmd_callback (const void *user_data, gsize char_offset,
+mc_search_cbret_t edit_search_cmd_callback (const void *user_data, off_t char_offset,
                                             int *current_char);
-mc_search_cbret_t edit_search_update_callback (const void *user_data, gsize char_offset);
+mc_search_cbret_t edit_search_update_callback (const void *user_data, off_t char_offset);
 int edit_search_status_update_cb (status_msg_t * sm);
 
 void edit_search_cmd (WEdit * edit, gboolean again);

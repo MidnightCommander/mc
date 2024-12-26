@@ -327,9 +327,9 @@ int mcview_nroff_seq_prev (mcview_nroff_t * nroff);
 /* search.c: */
 gboolean mcview_search_init (WView * view);
 void mcview_search_deinit (WView * view);
-mc_search_cbret_t mcview_search_cmd_callback (const void *user_data, gsize char_offset,
+mc_search_cbret_t mcview_search_cmd_callback (const void *user_data, off_t char_offset,
                                               int *current_char);
-mc_search_cbret_t mcview_search_update_cmd_callback (const void *user_data, gsize char_offset);
+mc_search_cbret_t mcview_search_update_cmd_callback (const void *user_data, off_t char_offset);
 void mcview_search (WView * view, gboolean start_search);
 
 /* --------------------------------------------------------------------------------------------- */
