@@ -704,11 +704,11 @@ edit_search_deinit (WEdit *edit)
 /* --------------------------------------------------------------------------------------------- */
 
 mc_search_cbret_t
-edit_search_cmd_callback (const void *user_data, gsize char_offset, int *current_char)
+edit_search_cmd_callback (const void *user_data, off_t char_offset, int *current_char)
 {
     WEdit *edit = ((const edit_search_status_msg_t *) user_data)->edit;
 
-    *current_char = edit_buffer_get_byte (&edit->buffer, (off_t) char_offset);
+    *current_char = edit_buffer_get_byte (&edit->buffer, char_offset);
 
     return MC_SEARCH_CB_OK;
 }
@@ -716,11 +716,11 @@ edit_search_cmd_callback (const void *user_data, gsize char_offset, int *current
 /* --------------------------------------------------------------------------------------------- */
 
 mc_search_cbret_t
-edit_search_update_callback (const void *user_data, gsize char_offset)
+edit_search_update_callback (const void *user_data, off_t char_offset)
 {
     status_msg_t *sm = STATUS_MSG (user_data);
 
-    ((edit_search_status_msg_t *) sm)->offset = (off_t) char_offset;
+    ((edit_search_status_msg_t *) sm)->offset = char_offset;
 
     return (sm->update (sm) == B_CANCEL ? MC_SEARCH_CB_ABORT : MC_SEARCH_CB_OK);
 }

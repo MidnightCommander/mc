@@ -424,7 +424,7 @@ mcview_search_deinit (WView *view)
 /* --------------------------------------------------------------------------------------------- */
 
 mc_search_cbret_t
-mcview_search_cmd_callback (const void *user_data, gsize char_offset, int *current_char)
+mcview_search_cmd_callback (const void *user_data, off_t char_offset, int *current_char)
 {
     WView *view = ((const mcview_search_status_msg_t *) user_data)->view;
 
@@ -479,7 +479,7 @@ mcview_search_cmd_callback (const void *user_data, gsize char_offset, int *curre
 /* --------------------------------------------------------------------------------------------- */
 
 mc_search_cbret_t
-mcview_search_update_cmd_callback (const void *user_data, gsize char_offset)
+mcview_search_update_cmd_callback (const void *user_data, off_t char_offset)
 {
     status_msg_t *sm = STATUS_MSG (user_data);
     mcview_search_status_msg_t *vsm = (mcview_search_status_msg_t *) user_data;
@@ -487,7 +487,7 @@ mcview_search_update_cmd_callback (const void *user_data, gsize char_offset)
     gboolean do_update = FALSE;
     mc_search_cbret_t result = MC_SEARCH_CB_OK;
 
-    vsm->offset = (off_t) char_offset;
+    vsm->offset = char_offset;
 
     if (mcview_search_options.backwards)
     {

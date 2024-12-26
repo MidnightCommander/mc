@@ -216,7 +216,7 @@ mc_search__cond_struct_new_init_hex (const char *charset, mc_search_t *lc_mc_sea
 
 gboolean
 mc_search__run_hex (mc_search_t *lc_mc_search, const void *user_data,
-                    gsize start_search, gsize end_search, gsize *found_len)
+                    off_t start_search, off_t end_search, gsize *found_len)
 {
     return mc_search__run_regex (lc_mc_search, user_data, start_search, end_search, found_len);
 }
