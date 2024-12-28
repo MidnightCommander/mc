@@ -1250,7 +1250,7 @@ edit_close_cmd (WEdit *edit)
         WGroup *g = w->owner;
 
         if (edit->locked != 0)
-            unlock_file (edit->filename_vpath);
+            edit->locked = unlock_file (edit->filename_vpath);
 
         group_remove_widget (w);
         widget_destroy (w);
