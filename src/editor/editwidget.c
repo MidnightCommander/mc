@@ -330,10 +330,10 @@ edit_window_list (const WDialog *h)
             char *fname;
 
             if (e->filename_vpath == NULL)
-                fname = g_strdup_printf ("%c [%s]", e->modified ? '*' : ' ', _("NoName"));
+                fname = g_strdup_printf ("%c [%s]", e->modified != 0 ? '*' : ' ', _("NoName"));
             else
                 fname =
-                    g_strdup_printf ("%c%s", e->modified ? '*' : ' ',
+                    g_strdup_printf ("%c%s", e->modified != 0 ? '*' : ' ',
                                      vfs_path_as_str (e->filename_vpath));
 
             listbox_add_item (listbox->list, LISTBOX_APPEND_AT_END, get_hotkey (i++),
@@ -379,7 +379,7 @@ edit_get_title (const WDialog *h, size_t len)
     char *filename;
 
     edit = edit_find_editor (h);
-    modified = edit->modified ? "(*) " : "    ";
+    modified = edit->modified != 0 ? "(*) " : "    ";
 
     len -= 4;
 
@@ -645,7 +645,7 @@ edit_quit (WDialog *h)
 
             /* create separate list because widget_select()
                changes the window position in Z order */
-            if (e->modified)
+            if (e->modified != 0)
                 m = g_slist_prepend (m, l->data);
         }
 
@@ -704,8 +704,8 @@ edit_update_cursor (WEdit *edit, const mouse_event_t *event)
     int x, y;
     gboolean done;
 
-    x = event->x - (edit->fullscreen ? 0 : 1);
-    y = event->y - (edit->fullscreen ? 0 : 1);
+    x = event->x - (edit->fullscreen != 0 ? 0 : 1);
+    y = event->y - (edit->fullscreen != 0 ? 0 : 1);
 
     if (edit->mark2 != -1 && event->msg == MSG_MOUSE_UP)
         return TRUE;            /* don't do anything */
@@ -883,7 +883,8 @@ edit_dialog_mouse_callback (Widget *w, mouse_msg_t msg, mouse_event_t *event)
 
             /* Try find top fullscreen window */
             for (l = g->widgets; l != NULL; l = g_list_next (l))
-                if (edit_widget_is_editor (CONST_WIDGET (l->data)) && EDIT (l->data)->fullscreen)
+                if (edit_widget_is_editor (CONST_WIDGET (l->data))
+                    && EDIT (l->data)->fullscreen != 0)
                     top = l;
 
             /* Handle fullscreen/close buttons in the top line */
@@ -984,8 +985,8 @@ edit_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data
         {
             int y, x;
 
-            y = (e->fullscreen ? 0 : 1) + EDIT_TEXT_VERTICAL_OFFSET + e->curs_row;
-            x = (e->fullscreen ? 0 : 1) + EDIT_TEXT_HORIZONTAL_OFFSET +
+            y = (e->fullscreen != 0 ? 0 : 1) + EDIT_TEXT_VERTICAL_OFFSET + e->curs_row;
+            x = (e->fullscreen != 0 ? 0 : 1) + EDIT_TEXT_HORIZONTAL_OFFSET +
                 edit_options.line_state_width + e->curs_col + e->start_col + e->over_col;
 
             widget_gotoyx (w, y, x);
@@ -1075,7 +1076,7 @@ edit_mouse_callback (Widget *w, mouse_msg_t msg, mouse_event_t *event)
 {
     WEdit *edit = EDIT (w);
     /* buttons' distance from right edge */
-    int dx = edit->fullscreen ? 0 : 2;
+    int dx = edit->fullscreen != 0 ? 0 : 2;
     /* location of 'Close' and 'Toggle fullscreen' pictograms */
     int close_x, toggle_fullscreen_x;
 
@@ -1106,7 +1107,7 @@ edit_mouse_callback (Widget *w, mouse_msg_t msg, mouse_event_t *event)
         edit_update_curs_row (edit);
         edit_update_curs_col (edit);
 
-        if (!edit->fullscreen)
+        if (edit->fullscreen == 0)
         {
             if (event->y == 0)
             {
@@ -1146,7 +1147,7 @@ edit_mouse_callback (Widget *w, mouse_msg_t msg, mouse_event_t *event)
                 send_message (w->owner, NULL, MSG_ACTION, CK_Close, NULL);
             else if (event->x >= toggle_fullscreen_x - 1 && event->x <= toggle_fullscreen_x + 1)
                 edit_toggle_fullscreen (edit);
-            else if (!edit->fullscreen && event->count == GPM_DOUBLE)
+            else if (edit->fullscreen == 0 && event->count == GPM_DOUBLE)
                 /* double click on top line (toggle fullscreen) */
                 edit_toggle_fullscreen (edit);
         }
@@ -1396,7 +1397,7 @@ edit_handle_move_resize (WEdit *edit, long command)
     Widget *w = WIDGET (edit);
     gboolean ret = FALSE;
 
-    if (edit->fullscreen)
+    if (edit->fullscreen != 0)
     {
         edit->drag_state = MCEDIT_DRAG_NONE;
         w->mouse.forced_capture = FALSE;
@@ -1512,10 +1513,10 @@ edit_toggle_fullscreen (WEdit *edit)
 {
     Widget *w = WIDGET (edit);
 
-    edit->fullscreen = !edit->fullscreen;
+    edit->fullscreen = edit->fullscreen != 0 ? 0 : 1;
     edit->force = REDRAW_COMPLETELY;
 
-    if (!edit->fullscreen)
+    if (edit->fullscreen == 0)
     {
         edit_restore_size (edit);
         /* do not follow screen size on resize */

@@ -326,8 +326,9 @@ editcmd_dialog_select_definition_show (WEdit *edit, char *match_expr, GPtrArray 
     def_dlg_h = def_hash->len + 2;
     def_dlg_w = COLS - 2;       /* will be clarified later */
     start_x = w->x + edit->curs_col + edit->start_col + EDIT_TEXT_HORIZONTAL_OFFSET +
-        (edit->fullscreen ? 0 : 1) + edit_options.line_state_width;
-    start_y = w->y + edit->curs_row + EDIT_TEXT_VERTICAL_OFFSET + (edit->fullscreen ? 0 : 1) + 1;
+        (edit->fullscreen != 0 ? 0 : 1) + edit_options.line_state_width;
+    start_y = w->y + edit->curs_row + EDIT_TEXT_VERTICAL_OFFSET +
+        (edit->fullscreen != 0 ? 0 : 1) + 1;
 
     if (start_x < 0)
         start_x = 0;
@@ -366,7 +367,7 @@ editcmd_dialog_select_definition_show (WEdit *edit, char *match_expr, GPtrArray 
 
         listbox_get_current (def_list, &curr, (void **) &curr_def);
 
-        if (!edit->modified)
+        if (edit->modified == 0)
             do_moveto = TRUE;
         else if (!edit_query_dialog2
                  (_("Warning"),

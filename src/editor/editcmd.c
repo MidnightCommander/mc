@@ -172,7 +172,7 @@ edit_save_file (WEdit *edit, const vfs_path_t *filename_vpath)
     rv = mc_stat (real_filename_vpath, &sb);
     if (rv == 0)
     {
-        if (this_save_mode == EDIT_QUICK_SAVE && !edit->skip_detach_prompt && sb.st_nlink > 1)
+        if (this_save_mode == EDIT_QUICK_SAVE && edit->skip_detach_prompt == 0 && sb.st_nlink > 1)
         {
             rv = edit_query_dialog3 (_("Warning"),
                                      _("File has hard-links. Detach before saving?"),
@@ -425,14 +425,15 @@ edit_get_save_file_as (WEdit *edit)
 static gboolean
 edit_save_cmd (WEdit *edit)
 {
-    int res, save_lock = 0;
+    int save_lock = 0;
 
-    if (!edit->locked && !edit->delete_file)
+    if (edit->locked == 0 && edit->delete_file == 0)
         save_lock = lock_file (edit->filename_vpath);
-    res = edit_save_file (edit, edit->filename_vpath);
+
+    const int res = edit_save_file (edit, edit->filename_vpath);
 
     /* Maintain modify (not save) lock on failure */
-    if ((res > 0 && edit->locked) || save_lock)
+    if ((res > 0 && edit->locked != 0) || save_lock != 0)
         edit->locked = unlock_file (edit->filename_vpath);
 
     /* On failure try 'save as', it does locking on its own */
@@ -947,7 +948,7 @@ edit_save_as_cmd (WEdit *edit)
 
             save_lock = lock_file (exp_vpath);
         }
-        else if (!edit->locked && !edit->delete_file)
+        else if (edit->locked == 0 && edit->delete_file == 0)
             /* filenames equal, check if already locked */
             save_lock = lock_file (exp_vpath);
 
@@ -963,12 +964,12 @@ edit_save_as_cmd (WEdit *edit)
             /* Successful, so unlock both files */
             if (different_filename)
             {
-                if (save_lock)
+                if (save_lock != 0)
                     unlock_file (exp_vpath);
-                if (edit->locked)
+                if (edit->locked != 0)
                     edit->locked = unlock_file (edit->filename_vpath);
             }
-            else if (edit->locked || save_lock)
+            else if (edit->locked != 0 || save_lock != 0)
                 edit->locked = unlock_file (edit->filename_vpath);
 
             edit_set_filename (edit, exp_vpath);
@@ -987,7 +988,7 @@ edit_save_as_cmd (WEdit *edit)
 
         case -1:
             /* Failed, so maintain modify (not save) lock */
-            if (save_lock)
+            if (save_lock != 0)
                 unlock_file (exp_vpath);
             break;
         }
@@ -1457,7 +1458,7 @@ edit_ok_to_exit (WEdit *edit)
     char *msg;
     int act;
 
-    if (!edit->modified)
+    if (edit->modified == 0)
         return TRUE;
 
     if (edit->filename_vpath != NULL)
@@ -1965,7 +1966,7 @@ edit_insert_literal_cmd (WEdit *edit)
 gboolean
 edit_load_forward_cmd (WEdit *edit)
 {
-    if (edit->modified
+    if (edit->modified != 0
         && edit_query_dialog2 (_("Warning"),
                                _("Current text was modified without a file save.\n"
                                  "Continue discards these changes."), _("C&ontinue"),
@@ -1993,7 +1994,7 @@ edit_load_forward_cmd (WEdit *edit)
 gboolean
 edit_load_back_cmd (WEdit *edit)
 {
-    if (edit->modified
+    if (edit->modified != 0
         && edit_query_dialog2 (_("Warning"),
                                _("Current text was modified without a file save.\n"
                                  "Continue discards these changes."), _("C&ontinue"),
