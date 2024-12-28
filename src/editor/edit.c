@@ -2224,7 +2224,7 @@ edit_clean (WEdit *edit)
 
     /* a stale lock, remove it */
     if (edit->locked)
-        (void) unlock_file (edit->filename_vpath);
+        edit->locked = unlock_file (edit->filename_vpath);
 
     /* save cursor position */
     if (edit_options.save_position)
