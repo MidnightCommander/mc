@@ -90,7 +90,6 @@ struct WEdit
     /* display information */
     long start_display;         /* First char displayed */
     long start_col;             /* First displayed column, negative */
-    long max_column;            /* The maximum cursor position ever reached used to calc hori scroll bar */
     long curs_row;              /* row position of cursor on the screen */
     long curs_col;              /* column position on screen */
     long over_col;              /* pos after '\n' */
