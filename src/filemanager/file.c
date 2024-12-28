@@ -1501,7 +1501,9 @@ recursive_erase (file_op_context_t *ctx, const vfs_path_t *vpath)
 /**
   * Check if directory is empty or not.
   *
+  * @param ctx file operation context descriptor
   * @param vpath directory handler
+  * @param error status of directory reading
   *
   * @returns -1 on error,
   *          1 if there are no entries besides "." and ".." in the directory path points to,
@@ -1512,15 +1514,32 @@ recursive_erase (file_op_context_t *ctx, const vfs_path_t *vpath)
   * in SHELL) don't return "." and ".." entries.
   */
 static int
-check_dir_is_empty (const vfs_path_t *vpath)
+check_dir_is_empty (file_op_context_t *ctx, const vfs_path_t *vpath, FileProgressStatus *error)
 {
     DIR *dir;
     struct vfs_dirent *d;
     int i = 1;
 
-    dir = mc_opendir (vpath);
-    if (dir == NULL)
-        return -1;
+    while ((dir = mc_opendir (vpath)) == NULL)
+    {
+        if (ctx->ignore_all)
+            *error = FILE_IGNORE_ALL;
+        else
+        {
+            const FileProgressStatus status =
+                file_error (ctx, TRUE, _("Cannot enter into directory \"%s\"\n%s"),
+                            vfs_path_as_str (vpath));
+
+            if (status == FILE_RETRY)
+                continue;
+            if (status == FILE_IGNORE_ALL)
+                ctx->ignore_all = TRUE;
+
+            *error = status;    /* FILE_IGNORE, FILE_IGNORE_ALL, FILE_ABORT */
+        }
+
+        return (-1);
+    }
 
     for (d = mc_readdir (dir); d != NULL; d = mc_readdir (dir))
         if (!DIR_IS_DOT (d->d_name) && !DIR_IS_DOTDOT (d->d_name))
@@ -1530,6 +1549,7 @@ check_dir_is_empty (const vfs_path_t *vpath)
         }
 
     mc_closedir (dir);
+    *error = FILE_CONT;
     return i;
 }
 
@@ -1538,6 +1558,8 @@ check_dir_is_empty (const vfs_path_t *vpath)
 static FileProgressStatus
 erase_dir_iff_empty (file_op_context_t *ctx, const vfs_path_t *vpath)
 {
+    FileProgressStatus error = FILE_CONT;
+
     file_progress_show_deleting (ctx, vpath, NULL);
     file_progress_show_count (ctx);
     if (file_progress_check_buttons (ctx) == FILE_ABORT)
@@ -1545,7 +1567,12 @@ erase_dir_iff_empty (file_op_context_t *ctx, const vfs_path_t *vpath)
 
     mc_refresh ();
 
-    if (check_dir_is_empty (vpath) != 1)
+    const int res = check_dir_is_empty (ctx, vpath, &error);
+
+    if (res == -1)
+        return error;
+
+    if (res != 1)
         return FILE_CONT;
 
     /* not empty or error */
@@ -3331,6 +3358,8 @@ move_dir_dir (file_op_context_t *ctx, const char *s, const char *d)
 FileProgressStatus
 erase_dir (file_op_context_t *ctx, const vfs_path_t *vpath)
 {
+    FileProgressStatus error = FILE_CONT;
+
     file_progress_show_deleting (ctx, vpath, NULL);
     file_progress_show_count (ctx);
     if (file_progress_check_buttons (ctx) == FILE_ABORT)
@@ -3345,10 +3374,14 @@ erase_dir (file_op_context_t *ctx, const vfs_path_t *vpath)
        we would have to check also for EIO. I hope the new way is
        fool proof. (Norbert)
      */
-    if (check_dir_is_empty (vpath) == 0)
-    {                           /* not empty */
-        FileProgressStatus error;
+    const int res = check_dir_is_empty (ctx, vpath, &error);
 
+    if (res == -1)
+        return error;
+
+    if (res == 0)
+    {
+        /* not empty */
         error = query_recursive (ctx, vfs_path_as_str (vpath));
         if (error == FILE_CONT)
             error = recursive_erase (ctx, vpath);
