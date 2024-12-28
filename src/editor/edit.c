@@ -2047,9 +2047,9 @@ edit_insert_file (WEdit *edit, const vfs_path_t *filename_vpath)
             edit_set_markers (edit, edit->buffer.curs1, mark2, c1, c2);
 
             /* highlight inserted text then not persistent blocks */
-            if (!edit_options.persistent_selections && edit->modified)
+            if (!edit_options.persistent_selections && edit->modified != 0)
             {
-                if (!edit->column_highlight)
+                if (edit->column_highlight == 0)
                     edit_push_undo_action (edit, COLUMN_OFF);
                 edit->column_highlight = 1;
             }
@@ -2064,10 +2064,10 @@ edit_insert_file (WEdit *edit, const vfs_path_t *filename_vpath)
                     edit_insert (edit, buf[i]);
             }
             /* highlight inserted text then not persistent blocks */
-            if (!edit_options.persistent_selections && edit->modified)
+            if (!edit_options.persistent_selections && edit->modified != 0)
             {
                 edit_set_markers (edit, edit->buffer.curs1, current, 0, 0);
-                if (edit->column_highlight)
+                if (edit->column_highlight != 0)
                     edit_push_undo_action (edit, COLUMN_ON);
                 edit->column_highlight = 0;
             }
@@ -2110,7 +2110,7 @@ edit_init (WEdit *edit, const WRect *r, const edit_arg_t *arg)
 
     if (edit != NULL)
     {
-        gboolean fullscreen;
+        int fullscreen;
         WRect loc_prev;
 
         /* save some widget parameters */
@@ -2135,7 +2135,7 @@ edit_init (WEdit *edit, const WRect *r, const edit_arg_t *arg)
         w->options |= WOP_SELECTABLE | WOP_TOP_SELECT | WOP_WANT_CURSOR;
         w->keymap = editor_map;
         w->ext_keymap = editor_x_map;
-        edit->fullscreen = TRUE;
+        edit->fullscreen = 1;
         edit_save_size (edit);
     }
 
@@ -2233,7 +2233,7 @@ edit_clean (WEdit *edit)
         g_array_free (edit->serialized_bookmarks, TRUE);
 
     /* File specified on the mcedit command line and never saved */
-    if (edit->delete_file)
+    if (edit->delete_file != 0)
         unlink (vfs_path_get_last_path_str (edit->filename_vpath));
 
     edit_free_syntax_rules (edit);
@@ -2556,7 +2556,7 @@ edit_insert (WEdit *edit, int c)
     }
 
     /* Mark file as modified, unless the file hasn't been fully loaded */
-    if (edit->loading_done)
+    if (edit->loading_done != 0)
         edit_modification (edit);
 
     /* now we must update some info on the file and check if a redraw is required */
@@ -3143,7 +3143,7 @@ eval_marks (WEdit *edit, off_t *start_mark, off_t *end_mark)
         edit->column2 = edit->curs_col + edit->over_col;
     }
 
-    if (edit->column_highlight
+    if (edit->column_highlight != 0
         && ((edit->mark1 > end_mark_curs && edit->column1 < edit->column2)
             || (edit->mark1 < end_mark_curs && edit->column1 > edit->column2)))
     {
@@ -3349,7 +3349,7 @@ edit_execute_key_command (WEdit *edit, long command, int char_for_insertion)
         edit_push_key_press (edit);
 
     edit_execute_cmd (edit, command, char_for_insertion);
-    if (edit->column_highlight)
+    if (edit->column_highlight != 0)
         edit->force |= REDRAW_PAGE;
 }
 
@@ -3379,7 +3379,7 @@ edit_execute_cmd (WEdit *edit, long command, int char_for_insertion)
 
     /* The next key press will unhighlight the found string, so update
      * the whole page */
-    if (edit->found_len || edit->column_highlight)
+    if (edit->found_len != 0 || edit->column_highlight != 0)
         edit->force |= REDRAW_PAGE;
 
     switch (command)
@@ -3425,7 +3425,7 @@ edit_execute_cmd (WEdit *edit, long command, int char_for_insertion)
 
         /* any other command */
     default:
-        if (edit->highlight)
+        if (edit->highlight != 0)
             edit_mark_cmd (edit, FALSE);        /* clear */
         edit->highlight = 0;
     }
@@ -3460,7 +3460,7 @@ edit_execute_cmd (WEdit *edit, long command, int char_for_insertion)
         if (!edit_options.persistent_selections && edit->mark1 != edit->mark2)
             edit_block_delete_cmd (edit);
 
-        if (edit->overwrite)
+        if (edit->overwrite != 0)
         {
             /* remove char only one time, after input first byte, multibyte chars */
 #ifdef HAVE_CHARSET
@@ -3534,7 +3534,7 @@ edit_execute_cmd (WEdit *edit, long command, int char_for_insertion)
     case CK_WordRight:
         if (!edit_options.persistent_selections && edit->mark2 >= 0)
         {
-            if (edit->column_highlight)
+            if (edit->column_highlight != 0)
                 edit_push_undo_action (edit, COLUMN_ON);
             edit->column_highlight = 0;
             edit_mark_cmd (edit, TRUE);
@@ -3801,14 +3801,14 @@ edit_execute_cmd (WEdit *edit, long command, int char_for_insertion)
     case CK_Mark:
         if (edit->mark2 >= 0)
         {
-            if (edit->column_highlight)
+            if (edit->column_highlight != 0)
                 edit_push_undo_action (edit, COLUMN_ON);
             edit->column_highlight = 0;
         }
         edit_mark_cmd (edit, FALSE);
         break;
     case CK_MarkColumn:
-        if (!edit->column_highlight)
+        if (edit->column_highlight == 0)
             edit_push_undo_action (edit, COLUMN_OFF);
         edit->column_highlight = 1;
         edit_mark_cmd (edit, FALSE);
@@ -3818,19 +3818,19 @@ edit_execute_cmd (WEdit *edit, long command, int char_for_insertion)
         edit->force |= REDRAW_PAGE;
         break;
     case CK_Unmark:
-        if (edit->column_highlight)
+        if (edit->column_highlight != 0)
             edit_push_undo_action (edit, COLUMN_ON);
         edit->column_highlight = 0;
         edit_mark_cmd (edit, TRUE);
         break;
     case CK_MarkWord:
-        if (edit->column_highlight)
+        if (edit->column_highlight != 0)
             edit_push_undo_action (edit, COLUMN_ON);
         edit->column_highlight = 0;
         edit_mark_current_word_cmd (edit);
         break;
     case CK_MarkLine:
-        if (edit->column_highlight)
+        if (edit->column_highlight != 0)
             edit_push_undo_action (edit, COLUMN_ON);
         edit->column_highlight = 0;
         edit_mark_current_line_cmd (edit);
@@ -3925,7 +3925,7 @@ edit_execute_cmd (WEdit *edit, long command, int char_for_insertion)
         edit_paste_from_X_buf_cmd (edit);
         if (!edit_options.persistent_selections && edit->mark2 >= 0)
         {
-            if (edit->column_highlight)
+            if (edit->column_highlight != 0)
                 edit_push_undo_action (edit, COLUMN_ON);
             edit->column_highlight = 0;
             edit_mark_cmd (edit, TRUE);
