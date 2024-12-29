@@ -2559,7 +2559,7 @@ file operations dialog.  It shows the files currently being processed
 and uses up to two progress bars.  The file bytes bar indicates the
 percentage of the current file that has been processed so far.  The
 total bytes bar indicates the percentage of the total size of the tagged
-files that has been handled. Ccounters that show how many of the tagged
+files that has been handled. Counters that show how many of the tagged
 files have been handled are displayed. If the
 .I Verbose
 option is off, the file bytes bar and total bytes bar are not shown.
@@ -2888,7 +2888,7 @@ Scroll one line backward.
 Move one page up.
 .TP
 .B PageDown
-Mves one page down.
+Moves one page down.
 .TP
 .B Home, A1
 Moves to the line beginning.
