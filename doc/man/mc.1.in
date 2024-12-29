@@ -2596,7 +2596,7 @@ button to continue if you fixed the problem from another terminal.
 .PP
 The replace dialog is shown when you attempt to copy or move a file on
 the top of an existing file.  The dialog shows the dates and sizes of
-the both files. There are following buttons in this dialog:
+the both files. There are the following buttons in this dialog:
 .TP
 .B [Yes]
 button to overwrite the file.
@@ -2636,7 +2636,7 @@ checkbox is on, the zero\-sized source files don't overwrite the
 non\-zero\-sized target files.
 .PP
 The recursive delete dialog is shown when you try to delete a directory
-which is not empty. There are following buttons in this dialog:
+which is not empty. There are the following buttons in this dialog:
 .TP
 .B [Yes]
 button to delete the directory recursively.
