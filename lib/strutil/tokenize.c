@@ -1,7 +1,7 @@
 /*
    Parse string into tokens.
 
-   Copyright (C) 2024
+   Copyright (C) 2024-2025
    Free Software Foundation, Inc.
 
    Written by:

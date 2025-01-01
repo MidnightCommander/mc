@@ -2,7 +2,7 @@
    lib/strutil - tests for lib/strutil/str_verscmp function.
    Testcases are taken from Gnulib.
 
-   Copyright (C) 2019-2024
+   Copyright (C) 2019-2025
    Free Software Foundation, Inc.
 
    Written by:

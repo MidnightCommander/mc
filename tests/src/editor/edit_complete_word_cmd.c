@@ -1,7 +1,7 @@
 /*
    src/editor - tests for edit_complete_word_cmd() function
 
-   Copyright (C) 2013-2024
+   Copyright (C) 2013-2025
    Free Software Foundation, Inc.
 
    Written by:
