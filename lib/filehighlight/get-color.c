@@ -2,7 +2,7 @@
    File highlight plugin.
    Interface functions. get color pair index for highlighted file.
 
-   Copyright (C) 2009-2024
+   Copyright (C) 2009-2025
    Free Software Foundation, Inc.
 
    Written by:

@@ -1,7 +1,7 @@
 /*
    libmc - check if library is independent to $(topsrc)/src directory
 
-   Copyright (C) 2011-2024
+   Copyright (C) 2011-2025
    Free Software Foundation, Inc.
 
    Written by:

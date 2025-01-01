@@ -1,7 +1,7 @@
 /*
    Learn keys
 
-   Copyright (C) 1995-2024
+   Copyright (C) 1995-2025
    Free Software Foundation, Inc.
 
    Written by:

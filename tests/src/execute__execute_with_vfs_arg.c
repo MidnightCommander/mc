@@ -1,7 +1,7 @@
 /*
    src - tests for execute_with_vfs_arg() function
 
-   Copyright (C) 2013-2024
+   Copyright (C) 2013-2025
    Free Software Foundation, Inc.
 
    Written by:
