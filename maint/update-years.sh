@@ -23,3 +23,6 @@ done
 # special case
 ${SED-sed} -e "/$LINE/s/-[0-9]\{4\} the/-$YEAR the/" src/editor/editwidget.c > src/editor/editwidget.c.tmp && \
   mv -f src/editor/editwidget.c.tmp src/editor/editwidget.c
+
+# restore permissions
+chmod 755 tests/src/vfs/extfs/helpers-list/test_all
