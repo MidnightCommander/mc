@@ -635,15 +635,17 @@ edit_do_search (WEdit *edit)
 
         if (edit_find (&esm, &len))
         {
-            edit->found_start = edit->search_start = edit->search->normal_offset;
+            edit->found_start = edit->search->normal_offset;
             edit->found_len = len;
+
             edit->over_col = 0;
-            edit_cursor_move (edit, edit->search_start - edit->buffer.curs1);
+            edit_cursor_move (edit, edit->found_start - edit->buffer.curs1);
             edit_scroll_screen_over_cursor (edit);
+
             if (edit_search_options.backwards)
-                edit->search_start--;
+                edit->search_start = edit->found_start - 1;
             else
-                edit->search_start++;
+                edit->search_start = edit->found_start + edit->found_len;
         }
         else
         {
