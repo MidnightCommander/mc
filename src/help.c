@@ -96,7 +96,7 @@ typedef struct Link_Area
 
 static char *fdata = NULL;      /* Pointer to the loaded data file */
 static int help_lines;          /* Lines in help viewer */
-static int history_ptr;         /* For the history queue */
+static int history_ptr = 0;     /* For the history queue */
 static const char *main_node;   /* The main node */
 static const char *last_shown = NULL;   /* Last byte shown in a screen */
 static gboolean end_of_node = FALSE;    /* Flag: the last character of the node shown? */
@@ -1091,6 +1091,7 @@ help_interactive_display (const gchar *event_group_name, const gchar *event_name
     char *filedata;
     ev_help_t *event_data = (ev_help_t *) data;
     WRect r = { 1, 1, 1, 1 };
+    int i;
 
     (void) event_group_name;
     (void) event_name;
@@ -1150,10 +1151,10 @@ help_interactive_display (const gchar *event_group_name, const gchar *event_name
     selected_item = search_string_node (main_node, STRING_LINK_START) - 1;
     currentpoint = main_node + 1;       /* Skip the newline following the start of the node */
 
-    for (history_ptr = HISTORY_SIZE - 1; history_ptr >= 0; history_ptr--)
+    for (i = HISTORY_SIZE - 1; i >= 0; i--)
     {
-        history[history_ptr].page = currentpoint;
-        history[history_ptr].link = selected_item;
+        history[i].page = currentpoint;
+        history[i].link = selected_item;
     }
 
     help_bar = buttonbar_new ();
