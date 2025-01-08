@@ -75,7 +75,7 @@ void init_key (void);
 void init_key_input_fd (void);
 void done_key (void);
 
-long tty_keyname_to_keycode (const char *name, char **label);
+int tty_keyname_to_keycode (const char *name, char **label);
 char *tty_keycode_to_keyname (const int keycode);
 /* mouse support */
 int tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block);

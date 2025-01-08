@@ -624,7 +624,6 @@ load_keys_from_section (const char *terminal, mc_config_t *cfg)
     char *section_name;
     gchar **profile_keys, **keys;
     char *valcopy, *value;
-    long key_code;
 
     if (terminal == NULL)
         return;
@@ -643,7 +642,8 @@ load_keys_from_section (const char *terminal, mc_config_t *cfg)
             continue;
         }
 
-        key_code = tty_keyname_to_keycode (*profile_keys, NULL);
+        const int key_code = tty_keyname_to_keycode (*profile_keys, NULL);
+
         if (key_code != 0)
         {
             gchar **values;
