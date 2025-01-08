@@ -207,10 +207,6 @@ View=%cd %p/patchsetfs://
 Regex=\\.t([gp]?z|ar\\.g?[zZ])$
 Include=tar.gz
 
-[ipk]
-Shell=.ipk
-Include=tar.gz
-
 [gem]
 Shell=.gem
 Include=tar.gz
@@ -927,6 +923,17 @@ View=%view{ascii} @EXTHELPERSDIR@/archive.sh view wim
 [mailbox]
 Type=^ASCII mail text
 Open=%cd %p/mailfs://
+
+[ipk-deb]
+Shell=.ipk
+Type=^Debian binary package
+Open=%cd %p/deb://
+View=%view{ascii} @EXTHELPERSDIR@/package.sh view deb
+
+[ipk-openwrt]
+Shell=.ipk
+Type=\\(gzip compressed
+Include=tar.gz
 
 
 ### Sources ###
