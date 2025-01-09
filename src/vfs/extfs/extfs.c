@@ -1337,27 +1337,6 @@ extfs_readlink (const vfs_path_t *vpath, char *buf, size_t size)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
-extfs_chown (const vfs_path_t *vpath, uid_t owner, gid_t group)
-{
-    (void) vpath;
-    (void) owner;
-    (void) group;
-    return 0;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static int
-extfs_chmod (const vfs_path_t *vpath, mode_t mode)
-{
-    (void) vpath;
-    (void) mode;
-    return 0;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 static ssize_t
 extfs_write (void *fh, const char *buf, size_t nbyte)
 {
@@ -1744,8 +1723,6 @@ vfs_init_extfs (void)
     vfs_extfs_ops->stat = extfs_stat;
     vfs_extfs_ops->lstat = extfs_lstat;
     vfs_extfs_ops->fstat = extfs_fstat;
-    vfs_extfs_ops->chmod = extfs_chmod;
-    vfs_extfs_ops->chown = extfs_chown;
     vfs_extfs_ops->readlink = extfs_readlink;
     vfs_extfs_ops->unlink = extfs_unlink;
     vfs_extfs_ops->chdir = extfs_chdir;
