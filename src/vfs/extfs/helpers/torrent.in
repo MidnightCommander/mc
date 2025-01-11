@@ -44,8 +44,15 @@ __license__ = "GPL"
 
 from datetime import datetime
 from os.path import dirname, getmtime
+import os
+import subprocess
 import sys
 from time import localtime, asctime
+
+if 'MC_TEST_EXTFS_LIST_CMD' in os.environ:
+    from time import gmtime as localtime
+else:
+    from time import localtime
 
 try:
     import locale
@@ -266,10 +273,10 @@ def mctorrent_list():
         dt = decode_datetime(getmtime(sys.argv[2]))
 
     for name in sorted(dirs):
-        output("dr-xr-xr-x 1 user group 0 %s %s" % (dt, name))
+        output("dr-xr-xr-x 1 0 0 0 %s %s" % (dt, name))
 
     for name, size in sorted(paths):
-        output("-r--r--r-- 1 user group %d %s %s" % (size, dt, name))
+        output("-r--r--r-- 1 0 0 %d %s %s" % (size, dt, name))
 
 
 def mctorrent_copyout():
@@ -378,10 +385,14 @@ def decode_list(l, encoding):
 
 
 def decode_torrent():
+    helper = os.environ.get('MC_TEST_EXTFS_LIST_CMD')
     try:
-        torrent_file = open(sys.argv[2], 'rb')
-        data = torrent_file.read()
-        torrent_file.close()
+        if helper is not None:
+            data = subprocess.check_output(helper.split())
+        else:
+            torrent_file = open(sys.argv[2], 'rb')
+            data = torrent_file.read()
+            torrent_file.close()
         torrent = eff_bdecode(data)
     except IOError as error_str:
         torrent_error(error_str)

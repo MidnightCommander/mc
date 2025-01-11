@@ -50,6 +50,8 @@ data_files_to_distribute = \
 	data/rpm.glib.input \
 	data/rpm.glib.output \
 	data/rpm.rewrite.sh \
+	data/torrent.input \
+	data/torrent.output \
 	data/u7z.README \
 	data/u7z.complex.env_vars \
 	data/u7z.complex.input \
