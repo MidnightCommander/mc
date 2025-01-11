@@ -82,6 +82,9 @@ if use_locale:
 else:
     default_encoding = sys.getdefaultencoding()
 
+if default_encoding is None:
+    default_encoding = "utf-8"
+
 import logging
 logger = logging.getLogger('torrent-mcextfs')
 log_err_handler = logging.StreamHandler(sys.stderr)
