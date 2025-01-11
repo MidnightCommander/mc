@@ -36,7 +36,7 @@ The filesystem is, naturally, read-only.
 
 """
 
-__version__ = "1.4.0"
+__version__ = "1.4.1"
 __author__ = "Oleg Broytman <phd@phdru.name>"
 __copyright__ = "Copyright (C) 2010-2025 PhiloSoft Design"
 __license__ = "GPL"
@@ -435,8 +435,9 @@ def decode_datetime(dt):
         Y, m, d, H, M = localtime(float(dt))[0:5]
     except ValueError:
         return datetime.max.ctime()
-    else:
-        return "%02d-%02d-%d %02d:%02d" % (m, d, Y, H, M)
+    if Y > 9999:
+        Y = 9999
+    return "%02d-%02d-%d %02d:%02d" % (m, d, Y, H, M)
 
 
 def decode_announce_list(announce):
