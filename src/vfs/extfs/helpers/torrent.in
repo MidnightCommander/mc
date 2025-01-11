@@ -1,4 +1,4 @@
-#! /usr/bin/env python3
+#! @PYTHON@
 """Torrent Virtual FileSystem for Midnight Commander
 
 The script requires Midnight Commander 3.1+
