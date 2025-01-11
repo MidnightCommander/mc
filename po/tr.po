@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-11-12 12:10+0300\n"
+"POT-Creation-Date: 2025-01-11 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Mehmet Akif 9oglu, 2023\n"
 "Language-Team: Turkish (http://app.transifex.com/mc/mc/language/tr/)\n"
@@ -1084,9 +1084,6 @@ msgstr ""
 msgid "Edit Save Mode"
 msgstr "Kaydetme kipini düzenle"
 
-msgid "Save as"
-msgstr "Farklı kaydet"
-
 msgid "Cannot save: destination is not a regular file"
 msgstr "Kaydedilemedi: hedef normal bir dosya değil"
 
@@ -1158,14 +1155,8 @@ msgstr ""
 msgid "This function is not implemented"
 msgstr "Bu özellik henüz eklenmedi"
 
-msgid "Copy to clipboard"
-msgstr "Panoya kopyala"
-
 msgid "Unable to save to file"
 msgstr "Dosya kaydedilemedi"
-
-msgid "Cut to clipboard"
-msgstr "Panoya kes"
 
 msgid "Goto line"
 msgstr "Satıra git (sol)"
@@ -1173,14 +1164,15 @@ msgstr "Satıra git (sol)"
 msgid "Save block"
 msgstr "Bloku kaydet"
 
+#, fuzzy
+msgid "Cannot save block"
+msgstr "Dosyayı kaydedilemiyor"
+
 msgid "Insert file"
 msgstr "Dosya İçer"
 
 msgid "Cannot insert file"
 msgstr "Dosyayı içerirken hata oluştu"
-
-msgid "Sort block"
-msgstr "Bloku sırala"
 
 msgid "You must first highlight a block of text"
 msgstr "Önce bir metin blokunu aydınlatmalısınız"
@@ -1192,9 +1184,6 @@ msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr ""
 "Boşlukla ayrılmış sıralama seçeneklerini girin (bkz. sort(1) kılavuz "
 "sayfası):"
-
-msgid "Sort"
-msgstr "Sıralama"
 
 msgid "Cannot execute sort command"
 msgstr "Sıralama yapılırken bir hata oluştu"
@@ -1209,10 +1198,8 @@ msgstr "Harici komutun çıktısını yapıştır"
 msgid "Enter shell command(s):"
 msgstr "Kabuk komutlarını gir:"
 
-msgid "External command"
-msgstr "Harici komut"
-
-msgid "Cannot execute command"
+#, fuzzy
+msgid "Cannot execute external command"
 msgstr "Sıralama yapılırken bir hata oluştu"
 
 msgid "mail -s <subject> -c <cc> <to>"
@@ -1607,7 +1594,7 @@ msgstr ""
 "Kullanıcı dostu bir metin düzenleyici\n"
 "Midnight Commander için yazıldı"
 
-msgid "Copyright (C) 1996-2024 the Free Software Foundation"
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -2680,6 +2667,14 @@ msgid ""
 msgstr ""
 "\"%s\" dizini silinemiyor \n"
 " %s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot enter into directory \"%s\"\n"
+"%s"
+msgstr ""
+"\"%s\" dizininin üstüne yazılamıyor \n"
+"%s"
 
 #, c-format
 msgid ""
@@ -3851,12 +3846,11 @@ msgstr ""
 "escape'e basmak isterseniz, bir kere basın\n"
 " ve sonucu görün."
 
-msgid "Cannot accept this key"
+#, fuzzy, c-format
+msgid ""
+"Cannot accept this key.\n"
+"You have entered \"%s\""
 msgstr "Bu tuş kabul edilemez"
-
-#, c-format
-msgid "You have entered \"%s\""
-msgstr "\"%s\" tuşuna bastınız"
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -3937,15 +3931,15 @@ msgstr ""
 "%s"
 
 #, c-format
+msgid "Warning: Cannot change to %s.\n"
+msgstr "Uyarı: %s'e geçilemedi.\n"
+
+#, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr " %s isimli veri yolu açılamadı\n"
 
 msgid "The shell is still active. Quit anyway?"
 msgstr "Kabuk hala etkin. Yine de çıkılsın mı?"
-
-#, c-format
-msgid "Warning: Cannot change to %s.\n"
-msgstr "Uyarı: %s'e geçilemedi.\n"
 
 msgid "With builtin editor and aspell support"
 msgstr ""
@@ -4690,6 +4684,28 @@ msgstr "Başından devam edilsin mi?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr " /ftp://some.host/editme.txt 'in yerel kopyası alınamadı"
+
+#~ msgid "Save as"
+#~ msgstr "Farklı kaydet"
+
+#~ msgid "Copy to clipboard"
+#~ msgstr "Panoya kopyala"
+
+#~ msgid "Cut to clipboard"
+#~ msgstr "Panoya kes"
+
+#~ msgid "Sort block"
+#~ msgstr "Bloku sırala"
+
+#~ msgid "Sort"
+#~ msgstr "Sıralama"
+
+#~ msgid "External command"
+#~ msgstr "Harici komut"
+
+#, c-format
+#~ msgid "You have entered \"%s\""
+#~ msgstr "\"%s\" tuşuna bastınız"
 
 #~ msgid "Ski&p all"
 #~ msgstr "Tümünü atla"

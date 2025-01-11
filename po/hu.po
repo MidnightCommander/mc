@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-11-12 12:10+0300\n"
+"POT-Creation-Date: 2025-01-11 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: 6bdcf737f9bcb6037ecba892a70fb951_e9eeb40 "
 "<b76b5e2faba6aa74d4498ee4c87ab010_661337>, 2020\n"
@@ -1064,9 +1064,6 @@ msgstr "&POSIX soremelés vizsgálata"
 msgid "Edit Save Mode"
 msgstr "Mentési mód"
 
-msgid "Save as"
-msgstr "Mentés másként"
-
 msgid "Cannot save: destination is not a regular file"
 msgstr "Nem lehet elmenteni - a cél egy speciális fájl"
 
@@ -1138,14 +1135,8 @@ msgstr ""
 msgid "This function is not implemented"
 msgstr "Ez a funkció nincs megvalósítva."
 
-msgid "Copy to clipboard"
-msgstr "Másolás vágólapra"
-
 msgid "Unable to save to file"
 msgstr "Fájl mentése sikertelen"
-
-msgid "Cut to clipboard"
-msgstr "Kivágás a vágólapra"
 
 msgid "Goto line"
 msgstr "Ugrás adott sorra"
@@ -1153,14 +1144,15 @@ msgstr "Ugrás adott sorra"
 msgid "Save block"
 msgstr "Blokk mentése"
 
+#, fuzzy
+msgid "Cannot save block"
+msgstr "Nem sikerült a mentés."
+
 msgid "Insert file"
 msgstr "Fájl beszúrása"
 
 msgid "Cannot insert file"
 msgstr "Fájl beszúrása sikertelen"
-
-msgid "Sort block"
-msgstr "Blokk rendezése"
 
 msgid "You must first highlight a block of text"
 msgstr "Előbb ki kell jelölni egy szövegrészt."
@@ -1170,9 +1162,6 @@ msgstr "Rendezés futtatása"
 
 msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr ""
-
-msgid "Sort"
-msgstr "Rendezés"
 
 msgid "Cannot execute sort command"
 msgstr "\"sort\" végrehajtása sikertelen"
@@ -1187,10 +1176,8 @@ msgstr "Külső parancs kimenetének beillesztése"
 msgid "Enter shell command(s):"
 msgstr "Shell-parancs(ok):"
 
-msgid "External command"
-msgstr "Külső parancs"
-
-msgid "Cannot execute command"
+#, fuzzy
+msgid "Cannot execute external command"
 msgstr "A parancs nem hajtható végre"
 
 msgid "mail -s <subject> -c <cc> <to>"
@@ -1585,7 +1572,7 @@ msgstr ""
 "Felhasználóbarát szövegszerkesztő\n"
 "a Midnight Commander-hez készítve"
 
-msgid "Copyright (C) 1996-2024 the Free Software Foundation"
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -2646,6 +2633,14 @@ msgid ""
 "%s"
 msgstr ""
 "A(z) \"%s\" könyvtár nem törölhető \n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot enter into directory \"%s\"\n"
+"%s"
+msgstr ""
+"A(z) \"%s\" könyvtár nem felülírható \n"
 "%s"
 
 #, c-format
@@ -3825,12 +3820,11 @@ msgstr ""
 "\n"
 "Kilépéshez használja az \"Escape\" billentyűt."
 
-msgid "Cannot accept this key"
+#, fuzzy, c-format
+msgid ""
+"Cannot accept this key.\n"
+"You have entered \"%s\""
 msgstr "Ez a billentyű nem használható erre"
-
-#, c-format
-msgid "You have entered \"%s\""
-msgstr "Ezt adta meg: \"%s\""
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -3913,15 +3907,15 @@ msgstr ""
 "%s"
 
 #, c-format
+msgid "Warning: Cannot change to %s.\n"
+msgstr "Nem sikerült belépni a(z) \"%s\" könyvtárba.\n"
+
+#, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr "Nem sikerült megnyitni a(z) \"%s\" csőfájlt.\n"
 
 msgid "The shell is still active. Quit anyway?"
 msgstr "A háttér-shell még aktív. Mégis kilép?"
-
-#, c-format
-msgid "Warning: Cannot change to %s.\n"
-msgstr "Nem sikerült belépni a(z) \"%s\" könyvtárba.\n"
 
 msgid "With builtin editor and aspell support"
 msgstr ""
@@ -4661,6 +4655,28 @@ msgstr "Folytatás az elejéről?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nem sikerült behozni /ftp://some.host/editme.txt helyi másolatát"
+
+#~ msgid "Save as"
+#~ msgstr "Mentés másként"
+
+#~ msgid "Copy to clipboard"
+#~ msgstr "Másolás vágólapra"
+
+#~ msgid "Cut to clipboard"
+#~ msgstr "Kivágás a vágólapra"
+
+#~ msgid "Sort block"
+#~ msgstr "Blokk rendezése"
+
+#~ msgid "Sort"
+#~ msgstr "Rendezés"
+
+#~ msgid "External command"
+#~ msgstr "Külső parancs"
+
+#, c-format
+#~ msgid "You have entered \"%s\""
+#~ msgstr "Ezt adta meg: \"%s\""
 
 #~ msgid "Ski&p all"
 #~ msgstr "Ö&sszes kihagyása"

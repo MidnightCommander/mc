@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-11-12 12:10+0300\n"
+"POT-Creation-Date: 2025-01-11 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Seong-ho Cho <darkcircle.0426@gmail.com>, 2023-2024\n"
 "Language-Team: Korean (http://app.transifex.com/mc/mc/language/ko/)\n"
@@ -1079,9 +1079,6 @@ msgstr "POSIX 새 행 확인(&P)"
 msgid "Edit Save Mode"
 msgstr "저장 모드 편집"
 
-msgid "Save as"
-msgstr "다른 이름으로 저장"
-
 msgid "Cannot save: destination is not a regular file"
 msgstr "저장할 수 없음: 대상이 일반 파일이 아님"
 
@@ -1153,14 +1150,8 @@ msgstr ""
 msgid "This function is not implemented"
 msgstr "이 기능은 구현되지 않음"
 
-msgid "Copy to clipboard"
-msgstr "클립보드로 복사하기"
-
 msgid "Unable to save to file"
 msgstr "파일에 저장할 수 없음"
-
-msgid "Cut to clipboard"
-msgstr "클립보드로 잘라내기"
 
 msgid "Goto line"
 msgstr "행으로 이동"
@@ -1168,14 +1159,15 @@ msgstr "행으로 이동"
 msgid "Save block"
 msgstr "블록 저장"
 
+#, fuzzy
+msgid "Cannot save block"
+msgstr "파일을 저장할 수 없음"
+
 msgid "Insert file"
 msgstr "파일 삽입"
 
 msgid "Cannot insert file"
 msgstr "파일을 삽입할 수 없음"
-
-msgid "Sort block"
-msgstr "블록 정렬"
 
 msgid "You must first highlight a block of text"
 msgstr "먼저 텍스트 블록을 강조 표시해야 함"
@@ -1185,9 +1177,6 @@ msgstr "정렬 실행"
 
 msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr "공백으로 구분된 정렬 옵션을 입력합니다(sort(1) 매뉴얼 페이지 참조):"
-
-msgid "Sort"
-msgstr "정렬"
 
 msgid "Cannot execute sort command"
 msgstr "정렬 명령을 실행할 수 없음"
@@ -1202,10 +1191,8 @@ msgstr "확장 명령의 출력 붙여넣기"
 msgid "Enter shell command(s):"
 msgstr "쉘 명령어 입력:"
 
-msgid "External command"
-msgstr "확장 명령어"
-
-msgid "Cannot execute command"
+#, fuzzy
+msgid "Cannot execute external command"
 msgstr "명령을 실행할 수 없음"
 
 msgid "mail -s <subject> -c <cc> <to>"
@@ -1600,7 +1587,8 @@ msgstr ""
 "사용자 친화적인 텍스트 편집기\n"
 "미드나잇 커맨더를 위해 작성됨."
 
-msgid "Copyright (C) 1996-2024 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
 msgstr "Copyright (C) 1996-2024 the Free Software Foundation"
 
 msgid "About"
@@ -2690,6 +2678,14 @@ msgid ""
 "%s"
 msgstr ""
 "%s 디렉터리를 제거할 수 없음\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot enter into directory \"%s\"\n"
+"%s"
+msgstr ""
+"%s 디렉터리를 덮어쓸 수 없음\n"
 "%s"
 
 #, c-format
@@ -3863,12 +3859,11 @@ msgstr ""
 "만약 빠져나가길 원하시면 Escape키를 한번만 누른 후\n"
 "마찬가지로 기다리십시오."
 
-msgid "Cannot accept this key"
+#, fuzzy, c-format
+msgid ""
+"Cannot accept this key.\n"
+"You have entered \"%s\""
 msgstr "이 키를 수락할 수 없음"
-
-#, c-format
-msgid "You have entered \"%s\""
-msgstr "\"%s\"을(를) 입력했습니다"
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -3951,15 +3946,15 @@ msgstr ""
 "%s"
 
 #, c-format
+msgid "Warning: Cannot change to %s.\n"
+msgstr "경고: %s으(로) 변경할 수 없습니다.\n"
+
+#, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr "명명된 %s 파이프를 열 수 없음\n"
 
 msgid "The shell is still active. Quit anyway?"
 msgstr "셸이 아직 활성 상태입니다. 그래도 끝낼까요?"
-
-#, c-format
-msgid "Warning: Cannot change to %s.\n"
-msgstr "경고: %s으(로) 변경할 수 없습니다.\n"
 
 msgid "With builtin editor and aspell support"
 msgstr ""
@@ -4730,6 +4725,28 @@ msgstr "처음부터 계속하시겠습니까?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "/ftp://some.host/editme.txt의 로컬 복사본을 가져올 수 없음"
+
+#~ msgid "Save as"
+#~ msgstr "다른 이름으로 저장"
+
+#~ msgid "Copy to clipboard"
+#~ msgstr "클립보드로 복사하기"
+
+#~ msgid "Cut to clipboard"
+#~ msgstr "클립보드로 잘라내기"
+
+#~ msgid "Sort block"
+#~ msgstr "블록 정렬"
+
+#~ msgid "Sort"
+#~ msgstr "정렬"
+
+#~ msgid "External command"
+#~ msgstr "확장 명령어"
+
+#, c-format
+#~ msgid "You have entered \"%s\""
+#~ msgstr "\"%s\"을(를) 입력했습니다"
 
 #~ msgid "Ski&p all"
 #~ msgstr "모두 건너뛰기(&P)"

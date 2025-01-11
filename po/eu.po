@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-11-12 12:10+0300\n"
+"POT-Creation-Date: 2025-01-11 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>, "
 "2011,2015-2019\n"
@@ -1071,9 +1071,6 @@ msgstr "Egiaztatu &POSIX lerro berria"
 msgid "Edit Save Mode"
 msgstr "Editatu gordetzeko modua"
 
-msgid "Save as"
-msgstr "Gorde honela"
-
 msgid "Cannot save: destination is not a regular file"
 msgstr "Ezin da gorde: helburua ez da ohiko fitxategi bat"
 
@@ -1145,14 +1142,8 @@ msgstr ""
 msgid "This function is not implemented"
 msgstr "Funtzio hau ez da inplementatu"
 
-msgid "Copy to clipboard"
-msgstr "Kopiatu arbelara"
-
 msgid "Unable to save to file"
 msgstr "fitxategira ezin gorde"
-
-msgid "Cut to clipboard"
-msgstr "Ebaki arbelara"
 
 msgid "Goto line"
 msgstr "Joan lerrora"
@@ -1160,14 +1151,15 @@ msgstr "Joan lerrora"
 msgid "Save block"
 msgstr "Gorde blokea"
 
+#, fuzzy
+msgid "Cannot save block"
+msgstr "Fitxategia ezin gorde"
+
 msgid "Insert file"
 msgstr "Txertatu fitxategia"
 
 msgid "Cannot insert file"
 msgstr "Fitxategia ezin txertatu"
-
-msgid "Sort block"
-msgstr "Sailkatu blokea"
 
 msgid "You must first highlight a block of text"
 msgstr "Aurrena testu bloke bat nabarmendu behar duzu"
@@ -1177,9 +1169,6 @@ msgstr "Exekutatu \"sort\""
 
 msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr ""
-
-msgid "Sort"
-msgstr "Sailkatu"
 
 msgid "Cannot execute sort command"
 msgstr "\"sort\" komandoa ezin exekutatu"
@@ -1194,10 +1183,8 @@ msgstr "Itsatsi kanpoko komando baten irteera"
 msgid "Enter shell command(s):"
 msgstr "Sartu shell komandoa(k):"
 
-msgid "External command"
-msgstr "Kanpoko komandoa"
-
-msgid "Cannot execute command"
+#, fuzzy
+msgid "Cannot execute external command"
 msgstr "Komandoa ezin exekutatu"
 
 msgid "mail -s <subject> -c <cc> <to>"
@@ -1592,7 +1579,7 @@ msgstr ""
 "Testu editore lagunkoi bat\n"
 "Midnight Commander-rarentzako idatzia."
 
-msgid "Copyright (C) 1996-2024 the Free Software Foundation"
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -2667,6 +2654,14 @@ msgid ""
 "%s"
 msgstr ""
 "Ezin da ezabatu \"%s\" direktorioa\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot enter into directory \"%s\"\n"
+"%s"
+msgstr ""
+"Ezin da gainidatzi \"%s\" direktorioa\n"
 "%s"
 
 #, c-format
@@ -3840,12 +3835,11 @@ msgstr ""
 "Ihes egin nahi baduzu, sakatu Ihes tekla behin\n"
 "eta itxaron."
 
-msgid "Cannot accept this key"
+#, fuzzy, c-format
+msgid ""
+"Cannot accept this key.\n"
+"You have entered \"%s\""
 msgstr "Tekla hau ezin onartu"
-
-#, c-format
-msgid "You have entered \"%s\""
-msgstr "\"%s\" sartu duzu"
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -3925,15 +3919,15 @@ msgstr ""
 "%s"
 
 #, c-format
+msgid "Warning: Cannot change to %s.\n"
+msgstr "Abisua: %s(e)ra ezin aldatu.\n"
+
+#, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr "%s izeneko hodia ezin ireki\n"
 
 msgid "The shell is still active. Quit anyway?"
 msgstr "Shell oraindik jardunean dago. Irten hala ere?"
-
-#, c-format
-msgid "Warning: Cannot change to %s.\n"
-msgstr "Abisua: %s(e)ra ezin aldatu.\n"
 
 msgid "With builtin editor and aspell support"
 msgstr ""
@@ -4680,6 +4674,28 @@ msgstr "Hasieratik jarraitu?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Ezin eskuratu ondokoaren bertako kopia bat: /ftp://some.host/editme.txt"
+
+#~ msgid "Save as"
+#~ msgstr "Gorde honela"
+
+#~ msgid "Copy to clipboard"
+#~ msgstr "Kopiatu arbelara"
+
+#~ msgid "Cut to clipboard"
+#~ msgstr "Ebaki arbelara"
+
+#~ msgid "Sort block"
+#~ msgstr "Sailkatu blokea"
+
+#~ msgid "Sort"
+#~ msgstr "Sailkatu"
+
+#~ msgid "External command"
+#~ msgstr "Kanpoko komandoa"
+
+#, c-format
+#~ msgid "You have entered \"%s\""
+#~ msgstr "\"%s\" sartu duzu"
 
 #~ msgid "Ski&p all"
 #~ msgstr "Sa&hiestu guztia"

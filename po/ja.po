@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-11-12 12:10+0300\n"
+"POT-Creation-Date: 2025-01-11 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Takuro Onoue <kusanaginoturugi@gmail.com>, 2021\n"
 "Language-Team: Japanese (http://app.transifex.com/mc/mc/language/ja/)\n"
@@ -1031,9 +1031,6 @@ msgstr ""
 msgid "Edit Save Mode"
 msgstr "保存モードの編集"
 
-msgid "Save as"
-msgstr "別名で保存"
-
 msgid "Cannot save: destination is not a regular file"
 msgstr ""
 
@@ -1101,14 +1098,8 @@ msgstr ""
 msgid "This function is not implemented"
 msgstr "この機能は実装されていません"
 
-msgid "Copy to clipboard"
-msgstr "クリップボードにコピー"
-
 msgid "Unable to save to file"
 msgstr "ファイルの保存に失敗しました"
-
-msgid "Cut to clipboard"
-msgstr "グリップボードに切り取り"
 
 msgid "Goto line"
 msgstr "行移動"
@@ -1116,14 +1107,15 @@ msgstr "行移動"
 msgid "Save block"
 msgstr "ブロックの保存"
 
+#, fuzzy
+msgid "Cannot save block"
+msgstr "ファイルを保存できません"
+
 msgid "Insert file"
 msgstr "ファイルの挿入"
 
 msgid "Cannot insert file"
 msgstr "ファイルの挿入ができません"
-
-msgid "Sort block"
-msgstr "ブロックの並び替え"
 
 msgid "You must first highlight a block of text"
 msgstr ""
@@ -1133,9 +1125,6 @@ msgstr "並び替えの実行"
 
 msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr ""
-
-msgid "Sort"
-msgstr "並び替え"
 
 msgid "Cannot execute sort command"
 msgstr "sort コマンドを実行できません"
@@ -1150,10 +1139,8 @@ msgstr ""
 msgid "Enter shell command(s):"
 msgstr "シェル コマンドの入力:"
 
-msgid "External command"
-msgstr "外部コマンド"
-
-msgid "Cannot execute command"
+#, fuzzy
+msgid "Cannot execute external command"
 msgstr "コマンドを実行できません"
 
 msgid "mail -s <subject> -c <cc> <to>"
@@ -1544,7 +1531,7 @@ msgid ""
 "written for the Midnight Commander."
 msgstr ""
 
-msgid "Copyright (C) 1996-2024 the Free Software Foundation"
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -2565,6 +2552,12 @@ msgid ""
 "Cannot remove directory \"%s\"\n"
 "%s"
 msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+"Cannot enter into directory \"%s\"\n"
+"%s"
+msgstr "ディレクトリー %s が作成できません"
 
 #, c-format
 msgid ""
@@ -3674,11 +3667,10 @@ msgstr ""
 "中止するにはエスケープキーを押して待ってく\n"
 "ださい"
 
-msgid "Cannot accept this key"
-msgstr ""
-
 #, c-format
-msgid "You have entered \"%s\""
+msgid ""
+"Cannot accept this key.\n"
+"You have entered \"%s\""
 msgstr ""
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
@@ -3749,15 +3741,15 @@ msgid ""
 msgstr ""
 
 #, c-format
+msgid "Warning: Cannot change to %s.\n"
+msgstr "警告: %s に変更できません.\n"
+
+#, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr "名前付きパイプ %s をオープンできません\n"
 
 msgid "The shell is still active. Quit anyway?"
 msgstr ""
-
-#, c-format
-msgid "Warning: Cannot change to %s.\n"
-msgstr "警告: %s に変更できません.\n"
 
 msgid "With builtin editor and aspell support"
 msgstr ""
@@ -4483,6 +4475,24 @@ msgstr "初めから続けますか?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Save as"
+#~ msgstr "別名で保存"
+
+#~ msgid "Copy to clipboard"
+#~ msgstr "クリップボードにコピー"
+
+#~ msgid "Cut to clipboard"
+#~ msgstr "グリップボードに切り取り"
+
+#~ msgid "Sort block"
+#~ msgstr "ブロックの並び替え"
+
+#~ msgid "Sort"
+#~ msgstr "並び替え"
+
+#~ msgid "External command"
+#~ msgstr "外部コマンド"
 
 #~ msgid "Ski&p all"
 #~ msgstr "すべて飛ばす(&P)"

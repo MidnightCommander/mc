@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-11-12 12:10+0300\n"
+"POT-Creation-Date: 2025-01-11 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>, 2017-2023\n"
 "Language-Team: Czech (http://app.transifex.com/mc/mc/language/cs/)\n"
@@ -1083,9 +1083,6 @@ msgstr "Kontrolovat nový řádek &POSIX"
 msgid "Edit Save Mode"
 msgstr "Upravit ukládací režim"
 
-msgid "Save as"
-msgstr "Uložit jako"
-
 msgid "Cannot save: destination is not a regular file"
 msgstr "Nelze uložit: cíl není běžným souborem"
 
@@ -1157,14 +1154,8 @@ msgstr ""
 msgid "This function is not implemented"
 msgstr "Tato funkce není implementována"
 
-msgid "Copy to clipboard"
-msgstr "Zkopírovat do schránky"
-
 msgid "Unable to save to file"
 msgstr "Nelze uložit soubor"
-
-msgid "Cut to clipboard"
-msgstr "Vyjmout do schránky"
 
 msgid "Goto line"
 msgstr "Přejít na řádek"
@@ -1172,14 +1163,15 @@ msgstr "Přejít na řádek"
 msgid "Save block"
 msgstr "Uložit blok"
 
+#, fuzzy
+msgid "Cannot save block"
+msgstr "Chyba při zápisu do souboru"
+
 msgid "Insert file"
 msgstr "Vložit soubor"
 
 msgid "Cannot insert file"
 msgstr "Chyba při vkládání souboru"
-
-msgid "Sort block"
-msgstr "Setřídit blok"
 
 msgid "You must first highlight a block of text"
 msgstr "Nejprve je třeba označit blok textu"
@@ -1189,9 +1181,6 @@ msgstr "Spustit třídění"
 
 msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr "Zadejte předvolby pro třídění (viz man sort(1) ) oddělované mezerami:"
-
-msgid "Sort"
-msgstr "Setřídit"
 
 msgid "Cannot execute sort command"
 msgstr "Chyba při spouštění příkazu sort"
@@ -1206,10 +1195,8 @@ msgstr "Vložte výstup vnějšího příkazu"
 msgid "Enter shell command(s):"
 msgstr "Zadejte shellový(é) příkaz(y):"
 
-msgid "External command"
-msgstr "Vnější příkaz"
-
-msgid "Cannot execute command"
+#, fuzzy
+msgid "Cannot execute external command"
 msgstr "Nedaří se spustit příkaz"
 
 msgid "mail -s <subject> -c <cc> <to>"
@@ -1604,7 +1591,7 @@ msgstr ""
 "Uživatelsky přívětivý textový editor\n"
 "napsaný pro Midnight Commander."
 
-msgid "Copyright (C) 1996-2024 the Free Software Foundation"
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -2700,6 +2687,14 @@ msgid ""
 "%s"
 msgstr ""
 "Nelze smazat složku „%s“\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot enter into directory \"%s\"\n"
+"%s"
+msgstr ""
+"Nelze přepsat složku „%s“\n"
 "%s"
 
 #, c-format
@@ -3885,12 +3880,11 @@ msgstr ""
 "Pokud chcete přerušit, stiskněte jednou klávesu Esc\n"
 "a opět vyčkejte."
 
-msgid "Cannot accept this key"
+#, fuzzy, c-format
+msgid ""
+"Cannot accept this key.\n"
+"You have entered \"%s\""
 msgstr "Tuto klávesu nelze přijmout"
-
-#, c-format
-msgid "You have entered \"%s\""
-msgstr "Zadali jste „%s“"
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -3975,15 +3969,15 @@ msgstr ""
 "%s"
 
 #, c-format
+msgid "Warning: Cannot change to %s.\n"
+msgstr "Varování: Nedaří se přepnout do složky %s.\n"
+
+#, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr "Nedaří s otevřít pojmenovanou rouru %s\n"
 
 msgid "The shell is still active. Quit anyway?"
 msgstr "Shell je stále aktivní, přesto ukončit?"
-
-#, c-format
-msgid "Warning: Cannot change to %s.\n"
-msgstr "Varování: Nedaří se přepnout do složky %s.\n"
 
 msgid "With builtin editor and aspell support"
 msgstr ""
@@ -4753,6 +4747,28 @@ msgstr "Pokračovat od začátku?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nedaří získat místní kopii souboru /ftp://some.host/editme.txt"
+
+#~ msgid "Save as"
+#~ msgstr "Uložit jako"
+
+#~ msgid "Copy to clipboard"
+#~ msgstr "Zkopírovat do schránky"
+
+#~ msgid "Cut to clipboard"
+#~ msgstr "Vyjmout do schránky"
+
+#~ msgid "Sort block"
+#~ msgstr "Setřídit blok"
+
+#~ msgid "Sort"
+#~ msgstr "Setřídit"
+
+#~ msgid "External command"
+#~ msgstr "Vnější příkaz"
+
+#, c-format
+#~ msgid "You have entered \"%s\""
+#~ msgstr "Zadali jste „%s“"
 
 #~ msgid "Ski&p all"
 #~ msgstr "&Přeskočit vše"

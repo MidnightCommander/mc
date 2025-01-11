@@ -30,7 +30,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-11-12 12:10+0300\n"
+"POT-Creation-Date: 2025-01-11 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Andrei Stepanov, 2023-2024\n"
 "Language-Team: Russian (http://app.transifex.com/mc/mc/language/ru/)\n"
@@ -1128,9 +1128,6 @@ msgstr "П&роверка перевода строки в конце файла
 msgid "Edit Save Mode"
 msgstr "Режим сохранения"
 
-msgid "Save as"
-msgstr "Сохранить как"
-
 msgid "Cannot save: destination is not a regular file"
 msgstr "Не удалось сохранить файл: файл назначения не является обычным файлом"
 
@@ -1202,14 +1199,8 @@ msgstr ""
 msgid "This function is not implemented"
 msgstr "Эта функция не реализована"
 
-msgid "Copy to clipboard"
-msgstr "Копировать в буфер"
-
 msgid "Unable to save to file"
 msgstr "Не удалось сохранить в файл"
-
-msgid "Cut to clipboard"
-msgstr "Вырезать в буфер"
 
 msgid "Goto line"
 msgstr "Перейти к строке"
@@ -1217,14 +1208,15 @@ msgstr "Перейти к строке"
 msgid "Save block"
 msgstr "Сохранить блок"
 
+#, fuzzy
+msgid "Cannot save block"
+msgstr "Не удалось сохранить файл"
+
 msgid "Insert file"
 msgstr "Вставить файл"
 
 msgid "Cannot insert file"
 msgstr "Не удалось вставить файл"
-
-msgid "Sort block"
-msgstr "Сортировать блок"
 
 msgid "You must first highlight a block of text"
 msgstr "Вы должны сначала выделить блок текста"
@@ -1234,9 +1226,6 @@ msgstr "Выполнить сортировку"
 
 msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr "Введите параметры сортировки (см. man sort(1)), разделённые пробелами:"
-
-msgid "Sort"
-msgstr "Сортировка"
 
 msgid "Cannot execute sort command"
 msgstr "Не удалось выполнить команду sort"
@@ -1251,10 +1240,8 @@ msgstr "Вставить вывод внешней команды"
 msgid "Enter shell command(s):"
 msgstr "Введите команду оболочки:"
 
-msgid "External command"
-msgstr "Внешняя команда"
-
-msgid "Cannot execute command"
+#, fuzzy
+msgid "Cannot execute external command"
 msgstr "Не удалось выполнить команду"
 
 msgid "mail -s <subject> -c <cc> <to>"
@@ -1649,7 +1636,8 @@ msgstr ""
 "Удобный текстовый редактор.\n"
 "Создан для Midnight Commander."
 
-msgid "Copyright (C) 1996-2024 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
 msgstr "Авторское право (C) 1996-2024 Фонд свободного программного обеспечения"
 
 msgid "About"
@@ -2742,6 +2730,14 @@ msgid ""
 "%s"
 msgstr ""
 "Не удалось удалить каталог \"%s\"\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot enter into directory \"%s\"\n"
+"%s"
+msgstr ""
+"Не удалось переписать каталог \"%s\"\n"
 "%s"
 
 #, c-format
@@ -3928,12 +3924,11 @@ msgstr ""
 "Если вы хотите прервать обучение, нажмите\n"
 "клавишу Esc и тоже немного подождите."
 
-msgid "Cannot accept this key"
+#, fuzzy, c-format
+msgid ""
+"Cannot accept this key.\n"
+"You have entered \"%s\""
 msgstr "Не удалось принять эту клавишу"
-
-#, c-format
-msgid "You have entered \"%s\""
-msgstr "Вы ввели \"%s\""
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -4015,15 +4010,15 @@ msgstr ""
 "%s"
 
 #, c-format
+msgid "Warning: Cannot change to %s.\n"
+msgstr "Внимание: не удалось перейти в %s.\n"
+
+#, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr "Не удалось открыть именованный канал %s\n"
 
 msgid "The shell is still active. Quit anyway?"
 msgstr "Оболочка всё ещё активна. Всё равно выйти?"
-
-#, c-format
-msgid "Warning: Cannot change to %s.\n"
-msgstr "Внимание: не удалось перейти в %s.\n"
 
 msgid "With builtin editor and aspell support"
 msgstr "Со встроенным редактором и поддержкой Aspell"
@@ -4800,6 +4795,28 @@ msgstr "Продолжить с начала?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не удалось получить локальную копию /ftp://some.host/editme.txt"
+
+#~ msgid "Save as"
+#~ msgstr "Сохранить как"
+
+#~ msgid "Copy to clipboard"
+#~ msgstr "Копировать в буфер"
+
+#~ msgid "Cut to clipboard"
+#~ msgstr "Вырезать в буфер"
+
+#~ msgid "Sort block"
+#~ msgstr "Сортировать блок"
+
+#~ msgid "Sort"
+#~ msgstr "Сортировка"
+
+#~ msgid "External command"
+#~ msgstr "Внешняя команда"
+
+#, c-format
+#~ msgid "You have entered \"%s\""
+#~ msgstr "Вы ввели \"%s\""
 
 #, c-format
 #~ msgid ""

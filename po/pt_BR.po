@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-11-12 12:10+0300\n"
+"POT-Creation-Date: 2025-01-11 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: marcelo cripe <marcelocripe@gmail.com>, 2022-2024\n"
 "Language-Team: Portuguese (Brazil) (http://app.transifex.com/mc/mc/language/"
@@ -1131,9 +1131,6 @@ msgstr "Verificar a nova linha &POSIX"
 msgid "Edit Save Mode"
 msgstr "Editar o Modo de Salvar"
 
-msgid "Save as"
-msgstr "Salvar como"
-
 msgid "Cannot save: destination is not a regular file"
 msgstr "Não foi possível salvar o destino porque não é um arquivo normal"
 
@@ -1205,14 +1202,8 @@ msgstr ""
 msgid "This function is not implemented"
 msgstr "Esta função não foi implementada"
 
-msgid "Copy to clipboard"
-msgstr "Copiar para a área de transferência"
-
 msgid "Unable to save to file"
 msgstr "Não foi possível salvar no arquivo"
-
-msgid "Cut to clipboard"
-msgstr "Recortar para área de transferência"
 
 msgid "Goto line"
 msgstr "Ir para a linha"
@@ -1220,14 +1211,15 @@ msgstr "Ir para a linha"
 msgid "Save block"
 msgstr "Salvar o bloco"
 
+#, fuzzy
+msgid "Cannot save block"
+msgstr "Não foi possível salvar o arquivo"
+
 msgid "Insert file"
 msgstr "Inserir linha"
 
 msgid "Cannot insert file"
 msgstr "Não foi possível inserir o arquivo"
-
-msgid "Sort block"
-msgstr "Ordenar o bloco"
 
 msgid "You must first highlight a block of text"
 msgstr "Você deve primeiro selecionar um bloco de texto"
@@ -1239,9 +1231,6 @@ msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr ""
 "Insira as opções de ordenação (consulte a página  sort(1) do manual) "
 "separadas por espaços em branco:"
-
-msgid "Sort"
-msgstr "Ordenar"
 
 msgid "Cannot execute sort command"
 msgstr "Não foi possível executar o comando sort (ordenar)"
@@ -1256,10 +1245,8 @@ msgstr "Colar a saída do comando externo"
 msgid "Enter shell command(s):"
 msgstr "Insira o(s) comando(s) do shell:"
 
-msgid "External command"
-msgstr "Comando externo"
-
-msgid "Cannot execute command"
+#, fuzzy
+msgid "Cannot execute external command"
 msgstr "Não foi possível executar o comando"
 
 msgid "mail -s <subject> -c <cc> <to>"
@@ -1654,7 +1641,8 @@ msgstr ""
 "Um editor de texto amigável\n"
 "escrito para o Midnight Commander."
 
-msgid "Copyright (C) 1996-2024 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
 msgstr "Direitos de Autor (C) 1996-2024 a Fundação ‘Free Software Foundation’"
 
 msgid "About"
@@ -2759,6 +2747,14 @@ msgid ""
 "%s"
 msgstr ""
 "Não foi possível remover o diretório ‘%s’\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot enter into directory \"%s\"\n"
+"%s"
+msgstr ""
+"Não foi possível sobrescrever o diretório ‘%s’\n"
 "%s"
 
 #, c-format
@@ -3950,12 +3946,11 @@ msgstr ""
 "Se você quiser desistir, pressione a ESC ou\n"
 "Escapar e aguarde."
 
-msgid "Cannot accept this key"
+#, fuzzy, c-format
+msgid ""
+"Cannot accept this key.\n"
+"You have entered \"%s\""
 msgstr "Não foi possível aceitar esta tecla"
-
-#, c-format
-msgid "You have entered \"%s\""
-msgstr "Você inseriu ‘%s’"
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -4041,17 +4036,17 @@ msgstr ""
 "%s"
 
 #, c-format
+msgid "Warning: Cannot change to %s.\n"
+msgstr ""
+"Aviso:\n"
+"Não foi possível alterar para %s.\n"
+
+#, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr "Não foi possível abrir o canal de conexão denominado %s\n"
 
 msgid "The shell is still active. Quit anyway?"
 msgstr "O shell ainda está ativo. Você quer finalizar mesmo assim?"
-
-#, c-format
-msgid "Warning: Cannot change to %s.\n"
-msgstr ""
-"Aviso:\n"
-"Não foi possível alterar para %s.\n"
 
 msgid "With builtin editor and aspell support"
 msgstr "Com suporte integrado do verificador ortográfico ‘Aspell’ no editor"
@@ -4851,6 +4846,28 @@ msgstr "Você quer continuar a partir do início?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Não foi possível obter uma cópia local do /ftp://some.host/editme.txt"
+
+#~ msgid "Save as"
+#~ msgstr "Salvar como"
+
+#~ msgid "Copy to clipboard"
+#~ msgstr "Copiar para a área de transferência"
+
+#~ msgid "Cut to clipboard"
+#~ msgstr "Recortar para área de transferência"
+
+#~ msgid "Sort block"
+#~ msgstr "Ordenar o bloco"
+
+#~ msgid "Sort"
+#~ msgstr "Ordenar"
+
+#~ msgid "External command"
+#~ msgstr "Comando externo"
+
+#, c-format
+#~ msgid "You have entered \"%s\""
+#~ msgstr "Você inseriu ‘%s’"
 
 #, c-format
 #~ msgid ""

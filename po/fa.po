@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-11-12 12:10+0300\n"
+"POT-Creation-Date: 2025-01-11 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Arya Hadi <arya.hadi97@gmail.com>, 2017\n"
 "Language-Team: Persian (http://app.transifex.com/mc/mc/language/fa/)\n"
@@ -1021,9 +1021,6 @@ msgstr ""
 msgid "Edit Save Mode"
 msgstr "ویرایش روش ذخیره"
 
-msgid "Save as"
-msgstr ""
-
 msgid "Cannot save: destination is not a regular file"
 msgstr ""
 
@@ -1091,13 +1088,7 @@ msgstr ""
 msgid "This function is not implemented"
 msgstr "این قابلیت پیاده‌سازی نشده است"
 
-msgid "Copy to clipboard"
-msgstr ""
-
 msgid "Unable to save to file"
-msgstr ""
-
-msgid "Cut to clipboard"
 msgstr ""
 
 msgid "Goto line"
@@ -1106,13 +1097,14 @@ msgstr "برو به خط"
 msgid "Save block"
 msgstr ""
 
+#, fuzzy
+msgid "Cannot save block"
+msgstr "نمی‌توان فایل را ذخیره کرد"
+
 msgid "Insert file"
 msgstr "درج فایل"
 
 msgid "Cannot insert file"
-msgstr ""
-
-msgid "Sort block"
 msgstr ""
 
 msgid "You must first highlight a block of text"
@@ -1123,9 +1115,6 @@ msgstr "اجرای مرتب‌سازی"
 
 msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr ""
-
-msgid "Sort"
-msgstr "مرتب‌سازی"
 
 msgid "Cannot execute sort command"
 msgstr "فرمان مرتب‌سازی قابل اجرا نیست"
@@ -1140,10 +1129,8 @@ msgstr ""
 msgid "Enter shell command(s):"
 msgstr ""
 
-msgid "External command"
-msgstr "فرمان خارجی"
-
-msgid "Cannot execute command"
+#, fuzzy
+msgid "Cannot execute external command"
 msgstr "فرمان قابل اجرا نیست"
 
 msgid "mail -s <subject> -c <cc> <to>"
@@ -1534,7 +1521,7 @@ msgid ""
 "written for the Midnight Commander."
 msgstr ""
 
-msgid "Copyright (C) 1996-2024 the Free Software Foundation"
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -2549,6 +2536,12 @@ msgstr ""
 #, c-format
 msgid ""
 "Cannot remove directory \"%s\"\n"
+"%s"
+msgstr ""
+
+#, c-format
+msgid ""
+"Cannot enter into directory \"%s\"\n"
 "%s"
 msgstr ""
 
@@ -3652,11 +3645,10 @@ msgid ""
 "and wait as well."
 msgstr ""
 
-msgid "Cannot accept this key"
-msgstr ""
-
-#, c-format
-msgid "You have entered \"%s\""
+#, fuzzy, c-format
+msgid ""
+"Cannot accept this key.\n"
+"You have entered \"%s\""
 msgstr "شما \"%s\" را وارد کرده‌اید"
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
@@ -3723,14 +3715,14 @@ msgid ""
 msgstr ""
 
 #, c-format
+msgid "Warning: Cannot change to %s.\n"
+msgstr ""
+
+#, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr ""
 
 msgid "The shell is still active. Quit anyway?"
-msgstr ""
-
-#, c-format
-msgid "Warning: Cannot change to %s.\n"
 msgstr ""
 
 msgid "With builtin editor and aspell support"
@@ -4436,3 +4428,9 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Sort"
+#~ msgstr "مرتب‌سازی"
+
+#~ msgid "External command"
+#~ msgstr "فرمان خارجی"

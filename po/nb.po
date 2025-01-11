@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-11-12 12:10+0300\n"
+"POT-Creation-Date: 2025-01-11 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: heskjestad, 2024\n"
 "Language-Team: Norwegian Bokmål (http://app.transifex.com/mc/mc/language/"
@@ -1106,9 +1106,6 @@ msgstr "Sjekk om linjeskift avslutter fil (&POSIX)"
 msgid "Edit Save Mode"
 msgstr "Rediger lagringsinnstillinger"
 
-msgid "Save as"
-msgstr "Lagre som"
-
 msgid "Cannot save: destination is not a regular file"
 msgstr "Kan ikke lagre: Målet er ikke en vanlig fil"
 
@@ -1180,14 +1177,8 @@ msgstr ""
 msgid "This function is not implemented"
 msgstr "Denne funksjonen er ikke implementert"
 
-msgid "Copy to clipboard"
-msgstr "Kopier til utklippstavle"
-
 msgid "Unable to save to file"
 msgstr "Klarte ikke lagre til fil"
-
-msgid "Cut to clipboard"
-msgstr "Klipp ut til utklippstavle"
 
 msgid "Goto line"
 msgstr "Gå til linje"
@@ -1195,14 +1186,15 @@ msgstr "Gå til linje"
 msgid "Save block"
 msgstr "Lagre blokk"
 
+#, fuzzy
+msgid "Cannot save block"
+msgstr "Klarte ikke lagre fil"
+
 msgid "Insert file"
 msgstr "Sett inn fil"
 
 msgid "Cannot insert file"
 msgstr "Klarte ikke sette inn fil"
-
-msgid "Sort block"
-msgstr "Sorter blokk"
 
 msgid "You must first highlight a block of text"
 msgstr "Du må først utheve en tekstblokk"
@@ -1214,9 +1206,6 @@ msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr ""
 "Angi sorteringsalternativer (jf. «man 1 sort»),\n"
 "og skill dem med blanktegn:"
-
-msgid "Sort"
-msgstr "Sortering"
 
 msgid "Cannot execute sort command"
 msgstr "Klarte ikke utføre sorteringskommando"
@@ -1231,10 +1220,8 @@ msgstr "Lim inn utdata fra ekstern kommando"
 msgid "Enter shell command(s):"
 msgstr "Angi skallkommando(er):"
 
-msgid "External command"
-msgstr "Ekstern kommando"
-
-msgid "Cannot execute command"
+#, fuzzy
+msgid "Cannot execute external command"
 msgstr "Klarte ikke kjøre kommando"
 
 msgid "mail -s <subject> -c <cc> <to>"
@@ -1629,7 +1616,8 @@ msgstr ""
 "Et brukervennlig skriveprogram\n"
 "skrevet for Midnight Commander."
 
-msgid "Copyright (C) 1996-2024 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
 msgstr "Opphavsrett (C) 1996-2024 Free Software Foundation"
 
 msgid "About"
@@ -2721,6 +2709,14 @@ msgid ""
 "%s"
 msgstr ""
 "Klarte ikke slette mappa «%s»\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot enter into directory \"%s\"\n"
+"%s"
+msgstr ""
+"Klarte ikke overskrive mappa «%s»\n"
 "%s"
 
 #, c-format
@@ -3897,12 +3893,11 @@ msgstr ""
 "\n"
 "Trykk Escape og vent litt for å avbryte."
 
-msgid "Cannot accept this key"
+#, fuzzy, c-format
+msgid ""
+"Cannot accept this key.\n"
+"You have entered \"%s\""
 msgstr "Kan ikke godta denne tasten"
-
-#, c-format
-msgid "You have entered \"%s\""
-msgstr "Du tastet «%s»"
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -3985,15 +3980,15 @@ msgstr ""
 "%s"
 
 #, c-format
+msgid "Warning: Cannot change to %s.\n"
+msgstr "Advarsel: Klarte ikke bytte til %s.\n"
+
+#, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr "Klarte ikke åpne navngitt rør %s\n"
 
 msgid "The shell is still active. Quit anyway?"
 msgstr "Skallet er fortsatt aktivt. Avslutte likevel?"
-
-#, c-format
-msgid "Warning: Cannot change to %s.\n"
-msgstr "Advarsel: Klarte ikke bytte til %s.\n"
 
 msgid "With builtin editor and aspell support"
 msgstr "Med innebygget tekstprogram og aspell-støtte"
@@ -4771,6 +4766,28 @@ msgstr "Fortsett fra begynnelsen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Klarte ikke hente en lokal kopi av /ftp://some.host/editme.txt"
+
+#~ msgid "Save as"
+#~ msgstr "Lagre som"
+
+#~ msgid "Copy to clipboard"
+#~ msgstr "Kopier til utklippstavle"
+
+#~ msgid "Cut to clipboard"
+#~ msgstr "Klipp ut til utklippstavle"
+
+#~ msgid "Sort block"
+#~ msgstr "Sorter blokk"
+
+#~ msgid "Sort"
+#~ msgstr "Sortering"
+
+#~ msgid "External command"
+#~ msgstr "Ekstern kommando"
+
+#, c-format
+#~ msgid "You have entered \"%s\""
+#~ msgstr "Du tastet «%s»"
 
 #, c-format
 #~ msgid ""

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-11-12 12:10+0300\n"
+"POT-Creation-Date: 2025-01-11 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Priit Jõerüüt <transifex@joeruut.com>, 2020-2021,2023-2024\n"
 "Language-Team: Estonian (http://app.transifex.com/mc/mc/language/et/)\n"
@@ -1103,9 +1103,6 @@ msgstr "Kontrolli &POSIXi uus rida"
 msgid "Edit Save Mode"
 msgstr "Muuda salvestusrežiim"
 
-msgid "Save as"
-msgstr "Salvesta kui"
-
 msgid "Cannot save: destination is not a regular file"
 msgstr "Salvestamine nurjus: sihtkoht ei ole harilik fail"
 
@@ -1177,14 +1174,8 @@ msgstr ""
 msgid "This function is not implemented"
 msgstr "See funktsioon ei ole valmis"
 
-msgid "Copy to clipboard"
-msgstr "Kopeeri lõikepuhvrisse"
-
 msgid "Unable to save to file"
 msgstr "Faili ei saa salvestada"
-
-msgid "Cut to clipboard"
-msgstr "Lõika lõikepuhvrisse"
 
 msgid "Goto line"
 msgstr "Mine reale"
@@ -1192,14 +1183,15 @@ msgstr "Mine reale"
 msgid "Save block"
 msgstr "Salvesta plokk"
 
+#, fuzzy
+msgid "Cannot save block"
+msgstr "Faili salvestamine nurjus"
+
 msgid "Insert file"
 msgstr "Lisa fail"
 
 msgid "Cannot insert file"
 msgstr "Faili lisamine nurjus"
-
-msgid "Sort block"
-msgstr "Sordi plokk"
 
 msgid "You must first highlight a block of text"
 msgstr "Esmalt vali tekstiplokk"
@@ -1211,9 +1203,6 @@ msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr ""
 "Sisesta sortimissuvandid (vt sortimise (1) man lehekülg), eraldades "
 "tühikutega:"
-
-msgid "Sort"
-msgstr "Sorteeri"
 
 msgid "Cannot execute sort command"
 msgstr "Käsu sort käivitamine nurjus"
@@ -1228,10 +1217,8 @@ msgstr "Aseta välise käsu väljund"
 msgid "Enter shell command(s):"
 msgstr "Sisesta kesta käsk(ud):"
 
-msgid "External command"
-msgstr "Väline käsk"
-
-msgid "Cannot execute command"
+#, fuzzy
+msgid "Cannot execute external command"
 msgstr "Käsu käivitamine nurjus"
 
 msgid "mail -s <subject> -c <cc> <to>"
@@ -1626,7 +1613,8 @@ msgstr ""
 "Kasutajasõbralik tekstitoimeti, mis\n"
 "on loodud Midnight Commanderile."
 
-msgid "Copyright (C) 1996-2024 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
 msgstr "Autoriõigused (C) 1996-2024 the Free Software Foundation"
 
 msgid "About"
@@ -2716,6 +2704,14 @@ msgid ""
 "%s"
 msgstr ""
 "Kataloogi \"%s\" eemaldamine nurjus\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot enter into directory \"%s\"\n"
+"%s"
+msgstr ""
+"Kataloogi \"%s\" ülekirjutamine nurjus\n"
 "%s"
 
 #, c-format
@@ -3893,12 +3889,11 @@ msgstr ""
 "Kui soovid loobuda, siis vajuta üks kord\n"
 "klahvi Esc ja oota samuti."
 
-msgid "Cannot accept this key"
+#, fuzzy, c-format
+msgid ""
+"Cannot accept this key.\n"
+"You have entered \"%s\""
 msgstr "Selle klahvi vastuvõtt nurjus"
-
-#, c-format
-msgid "You have entered \"%s\""
-msgstr "Oled sisestanud \"%s\""
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -3981,15 +3976,15 @@ msgstr ""
 "%s"
 
 #, c-format
+msgid "Warning: Cannot change to %s.\n"
+msgstr "Hoiatus: sisenemine kataloogi %s nurjus.\n"
+
+#, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr "Nimega toru %s avamine nurjus\n"
 
 msgid "The shell is still active. Quit anyway?"
 msgstr "Shell on veel aktiivne. Kas soovid ikkagi lõpetada?"
-
-#, c-format
-msgid "Warning: Cannot change to %s.\n"
-msgstr "Hoiatus: sisenemine kataloogi %s nurjus.\n"
 
 msgid "With builtin editor and aspell support"
 msgstr "Sisseehitatud tekstitoimeti ja Aspelli toega"
@@ -4764,6 +4759,28 @@ msgstr "Kas jätkata algusest?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kohaliku koopia hankimine failist /ftp://some.host/editme.txt nurjus"
+
+#~ msgid "Save as"
+#~ msgstr "Salvesta kui"
+
+#~ msgid "Copy to clipboard"
+#~ msgstr "Kopeeri lõikepuhvrisse"
+
+#~ msgid "Cut to clipboard"
+#~ msgstr "Lõika lõikepuhvrisse"
+
+#~ msgid "Sort block"
+#~ msgstr "Sordi plokk"
+
+#~ msgid "Sort"
+#~ msgstr "Sorteeri"
+
+#~ msgid "External command"
+#~ msgstr "Väline käsk"
+
+#, c-format
+#~ msgid "You have entered \"%s\""
+#~ msgstr "Oled sisestanud \"%s\""
 
 #, c-format
 #~ msgid ""

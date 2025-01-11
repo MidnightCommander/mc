@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-11-12 12:10+0300\n"
+"POT-Creation-Date: 2025-01-11 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Miguel Anxo Bouzada <mbouzada@gmail.com>, "
 "2012,2014-2015,2019\n"
@@ -1078,9 +1078,6 @@ msgstr "Verificar salto de líña &POSIX"
 msgid "Edit Save Mode"
 msgstr "Editar modo de gardar"
 
-msgid "Save as"
-msgstr "Gardar como"
-
 msgid "Cannot save: destination is not a regular file"
 msgstr "Non se pode gardar: o destino non é un ficheiro normal"
 
@@ -1152,14 +1149,8 @@ msgstr ""
 msgid "This function is not implemented"
 msgstr "Esa función non está implementada"
 
-msgid "Copy to clipboard"
-msgstr "Copiar ao portapapeis"
-
 msgid "Unable to save to file"
 msgstr "Non foi posíbel gardar o ficheiro"
-
-msgid "Cut to clipboard"
-msgstr "Cortar ao portapapeis"
 
 msgid "Goto line"
 msgstr "Ir á liña"
@@ -1167,14 +1158,15 @@ msgstr "Ir á liña"
 msgid "Save block"
 msgstr "Gardar o bloque"
 
+#, fuzzy
+msgid "Cannot save block"
+msgstr "Non é posíbel gardar o ficheiro"
+
 msgid "Insert file"
 msgstr "Inserir ficheiro"
 
 msgid "Cannot insert file"
 msgstr "Non é posíbel inserir o ficheiro"
-
-msgid "Sort block"
-msgstr "Ordenar bloque"
 
 msgid "You must first highlight a block of text"
 msgstr "É necesario seleccionar primeiro un bloque de texto"
@@ -1184,9 +1176,6 @@ msgstr "Proceder a ordenar"
 
 msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr ""
-
-msgid "Sort"
-msgstr "Ordenar"
 
 msgid "Cannot execute sort command"
 msgstr "Non foi posíbel executar «ordenar»"
@@ -1201,10 +1190,8 @@ msgstr "Pegar a saída dunha orde externa"
 msgid "Enter shell command(s):"
 msgstr "Orde(s) a executar:"
 
-msgid "External command"
-msgstr "Orde externa"
-
-msgid "Cannot execute command"
+#, fuzzy
+msgid "Cannot execute external command"
 msgstr "Non é posíbel executar a orde"
 
 msgid "mail -s <subject> -c <cc> <to>"
@@ -1599,7 +1586,7 @@ msgstr ""
 "Un editor de texto de uso amigábel\n"
 "escrito para o Midnight Commander."
 
-msgid "Copyright (C) 1996-2024 the Free Software Foundation"
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -2672,6 +2659,14 @@ msgid ""
 "%s"
 msgstr ""
 "Non é posíbel eliminar o directorio «%s»\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot enter into directory \"%s\"\n"
+"%s"
+msgstr ""
+"Non é posíbel sobrescribir o directorio «%s»\n"
 "%s"
 
 #, c-format
@@ -3844,12 +3839,11 @@ msgstr ""
 "Se quere cancelar, prema unha vez a tecla «Escape»\n"
 "e agarde."
 
-msgid "Cannot accept this key"
+#, fuzzy, c-format
+msgid ""
+"Cannot accept this key.\n"
+"You have entered \"%s\""
 msgstr "Non se pode aceptar esta tecla"
-
-#, c-format
-msgid "You have entered \"%s\""
-msgstr "Vostede escribiu «%s»"
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -3929,15 +3923,15 @@ msgstr ""
 "%s"
 
 #, c-format
+msgid "Warning: Cannot change to %s.\n"
+msgstr "Coidado: Non é posíbel cambiar a %s.\n"
+
+#, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr "Non é posíbel abrir a canalización nomeada %s\n"
 
 msgid "The shell is still active. Quit anyway?"
 msgstr "O terminal aínda está activo. Saír de todos xeitos?"
-
-#, c-format
-msgid "Warning: Cannot change to %s.\n"
-msgstr "Coidado: Non é posíbel cambiar a %s.\n"
 
 msgid "With builtin editor and aspell support"
 msgstr ""
@@ -4681,6 +4675,28 @@ msgstr "Continuar desde o principio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Non é posíbel obter unha copia local de /ftp://some.host/editme.txt"
+
+#~ msgid "Save as"
+#~ msgstr "Gardar como"
+
+#~ msgid "Copy to clipboard"
+#~ msgstr "Copiar ao portapapeis"
+
+#~ msgid "Cut to clipboard"
+#~ msgstr "Cortar ao portapapeis"
+
+#~ msgid "Sort block"
+#~ msgstr "Ordenar bloque"
+
+#~ msgid "Sort"
+#~ msgstr "Ordenar"
+
+#~ msgid "External command"
+#~ msgstr "Orde externa"
+
+#, c-format
+#~ msgid "You have entered \"%s\""
+#~ msgstr "Vostede escribiu «%s»"
 
 #~ msgid "Ski&p all"
 #~ msgstr "Omitir &Todos"

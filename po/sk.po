@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-11-12 12:10+0300\n"
+"POT-Creation-Date: 2025-01-11 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: hualahyja, 2019\n"
 "Language-Team: Slovak (http://app.transifex.com/mc/mc/language/sk/)\n"
@@ -1076,9 +1076,6 @@ msgstr "Kontrolovať nový riadok &POSIX"
 msgid "Edit Save Mode"
 msgstr "Upraviť režim ukladania"
 
-msgid "Save as"
-msgstr "Uložiť ako"
-
 msgid "Cannot save: destination is not a regular file"
 msgstr "Nie je možné uložiť: cieľ nie je bežný súbor"
 
@@ -1150,14 +1147,8 @@ msgstr ""
 msgid "This function is not implemented"
 msgstr "Táto funkcia nie je implementovaná"
 
-msgid "Copy to clipboard"
-msgstr "Skopírovať do schránky"
-
 msgid "Unable to save to file"
 msgstr "Nemožno uložiť do súboru"
-
-msgid "Cut to clipboard"
-msgstr "Vystrihnúť do schránky"
 
 msgid "Goto line"
 msgstr "Prejsť na riadok"
@@ -1165,14 +1156,15 @@ msgstr "Prejsť na riadok"
 msgid "Save block"
 msgstr "Uložiť blo"
 
+#, fuzzy
+msgid "Cannot save block"
+msgstr "Nemožno uložiť súbor"
+
 msgid "Insert file"
 msgstr "Vložiť súbor"
 
 msgid "Cannot insert file"
 msgstr "Nemožno vložiť súbo"
-
-msgid "Sort block"
-msgstr "Zoradiť blok"
 
 msgid "You must first highlight a block of text"
 msgstr "Musíte zvýrazniť blok textu"
@@ -1182,9 +1174,6 @@ msgstr "Spustiť zoradenie"
 
 msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr ""
-
-msgid "Sort"
-msgstr "Zoradiť"
 
 msgid "Cannot execute sort command"
 msgstr "Nie je možné spustiť príkaz sort"
@@ -1199,10 +1188,8 @@ msgstr "Vložiť výstup externého príkazu"
 msgid "Enter shell command(s):"
 msgstr "Zadajte príkaz shellu:"
 
-msgid "External command"
-msgstr "Externý príkaz"
-
-msgid "Cannot execute command"
+#, fuzzy
+msgid "Cannot execute external command"
 msgstr "Nie je možné vykonať príkaz"
 
 msgid "mail -s <subject> -c <cc> <to>"
@@ -1597,7 +1584,7 @@ msgstr ""
 "Používateľsky prívetivý textový editor\n"
 "napísaný pre Midnight Commander."
 
-msgid "Copyright (C) 1996-2024 the Free Software Foundation"
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -2665,6 +2652,14 @@ msgid ""
 "%s"
 msgstr ""
 "Nemožno odstrániť adresár „%s“\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot enter into directory \"%s\"\n"
+"%s"
+msgstr ""
+"Nemožno prepísať adresár „%s“\n"
 "%s"
 
 #, c-format
@@ -3846,12 +3841,11 @@ msgstr ""
 "Ak chcete skončiť, stlačte jedenkrát kláves Esc\n"
 "a taktiež počkajte."
 
-msgid "Cannot accept this key"
+#, fuzzy, c-format
+msgid ""
+"Cannot accept this key.\n"
+"You have entered \"%s\""
 msgstr "Nemožno prijať tento kláves"
-
-#, c-format
-msgid "You have entered \"%s\""
-msgstr "Zadali ste „%s“"
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -3932,15 +3926,15 @@ msgstr ""
 "%s "
 
 #, c-format
+msgid "Warning: Cannot change to %s.\n"
+msgstr "Upozornenie: Nedá sa zmeniť adresár na %s.\n"
+
+#, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr "Nepodarilo sa otvoriť pomenovanú rúru %s\n"
 
 msgid "The shell is still active. Quit anyway?"
 msgstr "Shell je ešte aktívny. Ukončiť napriek tomu?"
-
-#, c-format
-msgid "Warning: Cannot change to %s.\n"
-msgstr "Upozornenie: Nedá sa zmeniť adresár na %s.\n"
 
 msgid "With builtin editor and aspell support"
 msgstr ""
@@ -4684,6 +4678,28 @@ msgstr "Pokračovať od začiatku?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nemožno stiahnuť lokálnu kópiu /ftp://some.host/editme.txt"
+
+#~ msgid "Save as"
+#~ msgstr "Uložiť ako"
+
+#~ msgid "Copy to clipboard"
+#~ msgstr "Skopírovať do schránky"
+
+#~ msgid "Cut to clipboard"
+#~ msgstr "Vystrihnúť do schránky"
+
+#~ msgid "Sort block"
+#~ msgstr "Zoradiť blok"
+
+#~ msgid "Sort"
+#~ msgstr "Zoradiť"
+
+#~ msgid "External command"
+#~ msgstr "Externý príkaz"
+
+#, c-format
+#~ msgid "You have entered \"%s\""
+#~ msgstr "Zadali ste „%s“"
 
 #~ msgid "Ski&p all"
 #~ msgstr "&Preskočiť všetky"

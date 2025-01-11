@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-11-12 12:10+0300\n"
+"POT-Creation-Date: 2025-01-11 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Alexander Shopov <ash@kambanaria.org>, 2022\n"
 "Language-Team: Bulgarian (http://app.transifex.com/mc/mc/language/bg/)\n"
@@ -1081,9 +1081,6 @@ msgstr "Проверка за &POSIX нов ред"
 msgid "Edit Save Mode"
 msgstr "Редактиране Режим Запис"
 
-msgid "Save as"
-msgstr "Запис като"
-
 msgid "Cannot save: destination is not a regular file"
 msgstr "Не може да се запише: крайния файл не обикновен файл"
 
@@ -1155,14 +1152,8 @@ msgstr ""
 msgid "This function is not implemented"
 msgstr "Това действие все още не е внедрено"
 
-msgid "Copy to clipboard"
-msgstr "Копиране в буфера"
-
 msgid "Unable to save to file"
 msgstr "Грешка при запис на файла"
-
-msgid "Cut to clipboard"
-msgstr "Изрязване в буфера"
 
 msgid "Goto line"
 msgstr "Към ред"
@@ -1170,14 +1161,15 @@ msgstr "Към ред"
 msgid "Save block"
 msgstr "Запис на блок"
 
+#, fuzzy
+msgid "Cannot save block"
+msgstr "Не може да се запише файл"
+
 msgid "Insert file"
 msgstr "Вмъкване на файл"
 
 msgid "Cannot insert file"
 msgstr "Грешка при вмъкване на файл"
-
-msgid "Sort block"
-msgstr "Подредба на блок"
 
 msgid "You must first highlight a block of text"
 msgstr "Първо изберете блок от текст"
@@ -1189,9 +1181,6 @@ msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr ""
 "Въведете опциите за подредба (вижте страницата sort(1) в ръководството), "
 "разелени с интервал:"
-
-msgid "Sort"
-msgstr "Подредба"
 
 msgid "Cannot execute sort command"
 msgstr "Командата за подредба не може да изпълни"
@@ -1206,10 +1195,8 @@ msgstr "Вмъкване на изхода от външна команда"
 msgid "Enter shell command(s):"
 msgstr "Въвеждане на конзолна команда(и):"
 
-msgid "External command"
-msgstr "Външна команда"
-
-msgid "Cannot execute command"
+#, fuzzy
+msgid "Cannot execute external command"
 msgstr "Грешка при изпълнение на команда"
 
 msgid "mail -s <subject> -c <cc> <to>"
@@ -1604,7 +1591,7 @@ msgstr ""
 "Удобен текстови редактор\n"
 "за Midnight Commander."
 
-msgid "Copyright (C) 1996-2024 the Free Software Foundation"
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -2680,6 +2667,14 @@ msgid ""
 "%s"
 msgstr ""
 "Не може да се изтрие директорията „%s“\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot enter into directory \"%s\"\n"
+"%s"
+msgstr ""
+"Не може да се презапише директорията „%s“\n"
 "%s"
 
 #, c-format
@@ -3857,12 +3852,11 @@ msgstr ""
 "За да излезете, натиснете веднъж Escape\n"
 "и изчакайте."
 
-msgid "Cannot accept this key"
+#, fuzzy, c-format
+msgid ""
+"Cannot accept this key.\n"
+"You have entered \"%s\""
 msgstr "Не може да се приеме този клавиш"
-
-#, c-format
-msgid "You have entered \"%s\""
-msgstr "Въведохте „%s“"
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -3946,15 +3940,15 @@ msgstr ""
 "%s"
 
 #, c-format
+msgid "Warning: Cannot change to %s.\n"
+msgstr "Внимание: Не може да се влезе в %s.\n"
+
+#, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr "Не може да се отвори именуваният канал %s\n"
 
 msgid "The shell is still active. Quit anyway?"
 msgstr "Обвивката е още активна. Да се напусне ли въпреки това?"
-
-#, c-format
-msgid "Warning: Cannot change to %s.\n"
-msgstr "Внимание: Не може да се влезе в %s.\n"
 
 msgid "With builtin editor and aspell support"
 msgstr ""
@@ -4721,6 +4715,28 @@ msgstr "Да се продължи ли от началото?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не може да се изтегли локално копие на „/ftp://some.host/editme.txt“"
+
+#~ msgid "Save as"
+#~ msgstr "Запис като"
+
+#~ msgid "Copy to clipboard"
+#~ msgstr "Копиране в буфера"
+
+#~ msgid "Cut to clipboard"
+#~ msgstr "Изрязване в буфера"
+
+#~ msgid "Sort block"
+#~ msgstr "Подредба на блок"
+
+#~ msgid "Sort"
+#~ msgstr "Подредба"
+
+#~ msgid "External command"
+#~ msgstr "Външна команда"
+
+#, c-format
+#~ msgid "You have entered \"%s\""
+#~ msgstr "Въведохте „%s“"
 
 #~ msgid "Ski&p all"
 #~ msgstr "Проп&ускане всички"

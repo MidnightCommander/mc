@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-11-12 12:10+0300\n"
+"POT-Creation-Date: 2025-01-11 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Martijn Dekker <mcdutchie@hotmail.com>, 2012,2017\n"
 "Language-Team: Interlingua (http://app.transifex.com/mc/mc/language/ia/)\n"
@@ -1037,9 +1037,6 @@ msgstr ""
 msgid "Edit Save Mode"
 msgstr ""
 
-msgid "Save as"
-msgstr "Salveguardar como"
-
 msgid "Cannot save: destination is not a regular file"
 msgstr ""
 
@@ -1107,14 +1104,8 @@ msgstr ""
 msgid "This function is not implemented"
 msgstr "Iste function non es implementate"
 
-msgid "Copy to clipboard"
-msgstr "Copiar al area de transferentia"
-
 msgid "Unable to save to file"
 msgstr ""
-
-msgid "Cut to clipboard"
-msgstr "Taliar al area de transferentia"
 
 msgid "Goto line"
 msgstr "Vader al linea"
@@ -1122,13 +1113,14 @@ msgstr "Vader al linea"
 msgid "Save block"
 msgstr "Salveguardar bloco"
 
+#, fuzzy
+msgid "Cannot save block"
+msgstr "Le file non pote esser salveguardate"
+
 msgid "Insert file"
 msgstr "Inserer file"
 
 msgid "Cannot insert file"
-msgstr ""
-
-msgid "Sort block"
 msgstr ""
 
 msgid "You must first highlight a block of text"
@@ -1138,9 +1130,6 @@ msgid "Run sort"
 msgstr ""
 
 msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
-msgstr ""
-
-msgid "Sort"
 msgstr ""
 
 msgid "Cannot execute sort command"
@@ -1156,10 +1145,8 @@ msgstr ""
 msgid "Enter shell command(s):"
 msgstr ""
 
-msgid "External command"
-msgstr "Commando externe"
-
-msgid "Cannot execute command"
+#, fuzzy
+msgid "Cannot execute external command"
 msgstr "Le commando non pote esser executate"
 
 msgid "mail -s <subject> -c <cc> <to>"
@@ -1550,7 +1537,7 @@ msgid ""
 "written for the Midnight Commander."
 msgstr ""
 
-msgid "Copyright (C) 1996-2024 the Free Software Foundation"
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -2568,6 +2555,14 @@ msgid ""
 "Cannot remove directory \"%s\"\n"
 "%s"
 msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+"Cannot enter into directory \"%s\"\n"
+"%s"
+msgstr ""
+"Impossibile crear file de fusionamento temporari\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -3673,11 +3668,10 @@ msgid ""
 "and wait as well."
 msgstr ""
 
-msgid "Cannot accept this key"
-msgstr ""
-
 #, c-format
-msgid "You have entered \"%s\""
+msgid ""
+"Cannot accept this key.\n"
+"You have entered \"%s\""
 msgstr ""
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
@@ -3744,14 +3738,14 @@ msgid ""
 msgstr ""
 
 #, c-format
+msgid "Warning: Cannot change to %s.\n"
+msgstr ""
+
+#, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr ""
 
 msgid "The shell is still active. Quit anyway?"
-msgstr ""
-
-#, c-format
-msgid "Warning: Cannot change to %s.\n"
 msgstr ""
 
 msgid "With builtin editor and aspell support"
@@ -4485,3 +4479,15 @@ msgstr "Continuar ab initio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Save as"
+#~ msgstr "Salveguardar como"
+
+#~ msgid "Copy to clipboard"
+#~ msgstr "Copiar al area de transferentia"
+
+#~ msgid "Cut to clipboard"
+#~ msgstr "Taliar al area de transferentia"
+
+#~ msgid "External command"
+#~ msgstr "Commando externe"

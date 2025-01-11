@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-11-12 12:10+0300\n"
+"POT-Creation-Date: 2025-01-11 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Jaap Kramer <jaap-kramer@ziggo.nl>, 2023\n"
 "Language-Team: Dutch (http://app.transifex.com/mc/mc/language/nl/)\n"
@@ -1079,9 +1079,6 @@ msgstr "Controleer &POSIX nieuwe regel"
 msgid "Edit Save Mode"
 msgstr "Bewerk Opslag-modus"
 
-msgid "Save as"
-msgstr "Opslaan als"
-
 msgid "Cannot save: destination is not a regular file"
 msgstr "Opslaan niet mogelijk: bestemming is geen gewoon bestand"
 
@@ -1151,14 +1148,8 @@ msgstr ""
 msgid "This function is not implemented"
 msgstr "Deze functie is niet geïmplementeerd"
 
-msgid "Copy to clipboard"
-msgstr "Kopieer naar klembord"
-
 msgid "Unable to save to file"
 msgstr "Kan niet naar bestand opslaan"
-
-msgid "Cut to clipboard"
-msgstr "Knip naar klembord"
 
 msgid "Goto line"
 msgstr "Ga naar regel"
@@ -1166,14 +1157,15 @@ msgstr "Ga naar regel"
 msgid "Save block"
 msgstr "Sla selectieblok op"
 
+#, fuzzy
+msgid "Cannot save block"
+msgstr "Kan bestand niet opslaan"
+
 msgid "Insert file"
 msgstr "Bestand invoegen"
 
 msgid "Cannot insert file"
 msgstr "Kan bestand niet invoegen"
-
-msgid "Sort block"
-msgstr "Sorteer selectieblok"
 
 msgid "You must first highlight a block of text"
 msgstr "U moet eerst een blok selecteren"
@@ -1184,9 +1176,6 @@ msgstr "Sorteren"
 msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr ""
 "Voer sorteeropties in (zie sort(1) man-pagina) gescheiden door witruimte:"
-
-msgid "Sort"
-msgstr "Sorteren"
 
 msgid "Cannot execute sort command"
 msgstr "Kan sorteeropdracht niet uitvoeren"
@@ -1201,10 +1190,8 @@ msgstr "Plak uitvoer van externe opdracht"
 msgid "Enter shell command(s):"
 msgstr " Geef shell-opdracht(en): "
 
-msgid "External command"
-msgstr "Externe opdracht"
-
-msgid "Cannot execute command"
+#, fuzzy
+msgid "Cannot execute external command"
 msgstr "Kan opdracht niet uitvoeren"
 
 msgid "mail -s <subject> -c <cc> <to>"
@@ -1599,7 +1586,7 @@ msgstr ""
 "Een gebruikersvriendelijke tekstbewerker\n"
 "geschreven voor de Midnight Commander"
 
-msgid "Copyright (C) 1996-2024 the Free Software Foundation"
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -2680,6 +2667,14 @@ msgid ""
 msgstr ""
 "Kan map \"%s\" niet verwijderen \n"
 "%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot enter into directory \"%s\"\n"
+"%s"
+msgstr ""
+"Map \"%s\" kan niet overschreven worden \n"
+"%s "
 
 #, c-format
 msgid ""
@@ -3857,12 +3852,11 @@ msgstr ""
 "Als u wilt afbreken, druk dan de escape-toets,\n"
 "en wacht enkele ogenblikken"
 
-msgid "Cannot accept this key"
+#, fuzzy, c-format
+msgid ""
+"Cannot accept this key.\n"
+"You have entered \"%s\""
 msgstr "Kan deze toets niet accepteren"
-
-#, c-format
-msgid "You have entered \"%s\""
-msgstr " U heeft \"%s\" ingevoerd"
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -3946,15 +3940,15 @@ msgstr ""
 " %s "
 
 #, c-format
+msgid "Warning: Cannot change to %s.\n"
+msgstr "Waarschuwing: Schakelen naar %s mislukt.\n"
+
+#, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr "Openen van 'named pipe' %s mislukt\n"
 
 msgid "The shell is still active. Quit anyway?"
 msgstr "De shell is nog steeds actief. Toch stoppen?"
-
-#, c-format
-msgid "Warning: Cannot change to %s.\n"
-msgstr "Waarschuwing: Schakelen naar %s mislukt.\n"
 
 msgid "With builtin editor and aspell support"
 msgstr ""
@@ -4714,6 +4708,28 @@ msgstr "Doorgaan vanaf het begin?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan geen lokale versie van /ftp://some.host/editme.txt ophalen"
+
+#~ msgid "Save as"
+#~ msgstr "Opslaan als"
+
+#~ msgid "Copy to clipboard"
+#~ msgstr "Kopieer naar klembord"
+
+#~ msgid "Cut to clipboard"
+#~ msgstr "Knip naar klembord"
+
+#~ msgid "Sort block"
+#~ msgstr "Sorteer selectieblok"
+
+#~ msgid "Sort"
+#~ msgstr "Sorteren"
+
+#~ msgid "External command"
+#~ msgstr "Externe opdracht"
+
+#, c-format
+#~ msgid "You have entered \"%s\""
+#~ msgstr " U heeft \"%s\" ingevoerd"
 
 #~ msgid "Ski&p all"
 #~ msgstr "Alles ove&rslaan"
