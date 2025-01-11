@@ -2,7 +2,7 @@
    Interface to the terminal controlling library.
    Ncurses wrapper.
 
-   Copyright (C) 2005-2024
+   Copyright (C) 2005-2025
    Free Software Foundation, Inc.
 
    Written by:

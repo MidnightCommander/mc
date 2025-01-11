@@ -1,7 +1,7 @@
 /*
    Widget based utility functions.
 
-   Copyright (C) 1994-2024
+   Copyright (C) 1994-2025
    Free Software Foundation, Inc.
 
    Authors:
@@ -147,6 +147,7 @@ quick_create_labeled_input (GArray *widgets, int *y, int x, quick_widget_t *quic
         break;
 
     default:
+        g_free (label.quick_widget);
         return;
     }
 
@@ -429,7 +430,6 @@ quick_dialog_skip (quick_dialog_t *quick_dlg, int nskip)
         WRect *r;
 
         item = &g_array_index (widgets, quick_widget_item_t, i);
-        r = &item->widget->rect;
         column_width = two_columns ? width2 : width1;
 
         /* adjust widget width and x position */
@@ -448,6 +448,7 @@ quick_dialog_skip (quick_dialog_t *quick_dlg, int nskip)
             MC_FALLTHROUGH;
         case quick_checkbox:
         case quick_radio:
+            r = &item->widget->rect;
             if (r->x != x1)
                 r->x = x2;
             if (g != NULL)
@@ -455,6 +456,7 @@ quick_dialog_skip (quick_dialog_t *quick_dlg, int nskip)
             break;
 
         case quick_button:
+            r = &item->widget->rect;
             if (!put_buttons)
             {
                 if (r->x != x1)
@@ -476,6 +478,8 @@ quick_dialog_skip (quick_dialog_t *quick_dlg, int nskip)
 
                 if (g != NULL)
                     width -= 4;
+
+                r = &item->widget->rect;
 
                 switch (item->quick_widget->u.input.label_location)
                 {
@@ -511,6 +515,7 @@ quick_dialog_skip (quick_dialog_t *quick_dlg, int nskip)
 
         case quick_start_groupbox:
             g = GROUPBOX (item->widget);
+            r = &item->widget->rect;
             if (r->x != x1)
                 r->x = x2;
             r->cols = column_width;
@@ -523,6 +528,8 @@ quick_dialog_skip (quick_dialog_t *quick_dlg, int nskip)
         case quick_separator:
             if (item->widget != NULL)
             {
+                r = &item->widget->rect;
+
                 if (g != NULL)
                 {
                     Widget *wg = WIDGET (g);

@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-11-12 12:10+0300\n"
+"POT-Creation-Date: 2025-01-11 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Viačasłaŭ <viachaslavic@outlook.com>, 2023-2024\n"
 "Language-Team: Belarusian (http://app.transifex.com/mc/mc/language/be/)\n"
@@ -1118,9 +1118,6 @@ msgstr "Праверка пераводу радка ў канцы файла(&P
 msgid "Edit Save Mode"
 msgstr "Спосаб захавання"
 
-msgid "Save as"
-msgstr "Захаваць як"
-
 msgid "Cannot save: destination is not a regular file"
 msgstr "Немагчыма захаваць: прызначаны файл не з’яўляецца звычайным"
 
@@ -1190,14 +1187,8 @@ msgstr ""
 msgid "This function is not implemented"
 msgstr "Гэтая магчымасць яшчэ не рэалізаваная"
 
-msgid "Copy to clipboard"
-msgstr "Скапіяваць у буфер абмену"
-
 msgid "Unable to save to file"
 msgstr "Немагчыма захаваць у файл"
-
-msgid "Cut to clipboard"
-msgstr "Выразаць у буфер абмену"
 
 msgid "Goto line"
 msgstr "Перайсці да радка"
@@ -1205,14 +1196,15 @@ msgstr "Перайсці да радка"
 msgid "Save block"
 msgstr "Захаваць блок"
 
+#, fuzzy
+msgid "Cannot save block"
+msgstr "Немагчыма захаваць файл"
+
 msgid "Insert file"
 msgstr "Уставіць файл"
 
 msgid "Cannot insert file"
 msgstr "Немагчыма ўставіць файл"
-
-msgid "Sort block"
-msgstr "Упарадкаваць блок"
 
 msgid "You must first highlight a block of text"
 msgstr "Спачатку патрэбна абраць блок тэксту"
@@ -1224,9 +1216,6 @@ msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr ""
 "Увядзіце опцыі сартавання (глядзіце даведку man sort(1)), раздзяляючы "
 "прагаламі:"
-
-msgid "Sort"
-msgstr "Упарадкаваць"
 
 msgid "Cannot execute sort command"
 msgstr "Немагчыма выканаць каманду sort"
@@ -1241,10 +1230,8 @@ msgstr "Уставіць вывад знешняй каманды"
 msgid "Enter shell command(s):"
 msgstr "Увядзіце каманду(ы) абалонкі:"
 
-msgid "External command"
-msgstr "Знешняя каманда"
-
-msgid "Cannot execute command"
+#, fuzzy
+msgid "Cannot execute external command"
 msgstr "Немагчыма выканаць каманду"
 
 msgid "mail -s <subject> -c <cc> <to>"
@@ -1639,7 +1626,8 @@ msgstr ""
 "Зручны тэкставы рэдактар,\n"
 "напісаны для Midnight Commander."
 
-msgid "Copyright (C) 1996-2024 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
 msgstr "Аўтарскае права © 1996-2024 the Free Software Foundation"
 
 msgid "About"
@@ -2732,6 +2720,14 @@ msgid ""
 "%s"
 msgstr ""
 "Немагчыма выдаліць каталог «%s»\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot enter into directory \"%s\"\n"
+"%s"
+msgstr ""
+"Немагчыма перазапісаць каталог «%s»\n"
 "%s"
 
 #, c-format
@@ -3915,12 +3911,11 @@ msgstr ""
 "Калі хочаце спыніць навучанне, адзін раз\n"
 "націсніце «Esc» і пачакайце."
 
-msgid "Cannot accept this key"
+#, fuzzy, c-format
+msgid ""
+"Cannot accept this key.\n"
+"You have entered \"%s\""
 msgstr "Немагчыма прыняць клавішу"
-
-#, c-format
-msgid "You have entered \"%s\""
-msgstr "Вы ўвялі «%s»"
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -4002,15 +3997,15 @@ msgstr ""
 "%s"
 
 #, c-format
+msgid "Warning: Cannot change to %s.\n"
+msgstr "Увага: немагчыма перайсці ў «%s».\n"
+
+#, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr "Немагчыма адкрыць названы канал «%s»\n"
 
 msgid "The shell is still active. Quit anyway?"
 msgstr "Абалонка яшчэ выкарыстоўваецца. Усё адно выйсці?"
-
-#, c-format
-msgid "Warning: Cannot change to %s.\n"
-msgstr "Увага: немагчыма перайсці ў «%s».\n"
 
 msgid "With builtin editor and aspell support"
 msgstr "З убудаваным рэдактарам ды падтрымкай aspell"
@@ -4788,6 +4783,28 @@ msgstr "Працягваць ад пачатку?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Немагчыма атрымаць лакальную копію /ftp://some.host/editme.txt"
+
+#~ msgid "Save as"
+#~ msgstr "Захаваць як"
+
+#~ msgid "Copy to clipboard"
+#~ msgstr "Скапіяваць у буфер абмену"
+
+#~ msgid "Cut to clipboard"
+#~ msgstr "Выразаць у буфер абмену"
+
+#~ msgid "Sort block"
+#~ msgstr "Упарадкаваць блок"
+
+#~ msgid "Sort"
+#~ msgstr "Упарадкаваць"
+
+#~ msgid "External command"
+#~ msgstr "Знешняя каманда"
+
+#, c-format
+#~ msgid "You have entered \"%s\""
+#~ msgstr "Вы ўвялі «%s»"
 
 #, c-format
 #~ msgid ""

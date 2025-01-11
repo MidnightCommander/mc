@@ -1,7 +1,7 @@
 /*
    Widget based utility functions.
 
-   Copyright (C) 1994-2024
+   Copyright (C) 1994-2025
    Free Software Foundation, Inc.
 
    Authors:
@@ -120,46 +120,6 @@ query_default_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, v
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** Create message dialog */
-
-static WDialog *
-do_create_message (int flags, const char *title, const char *text)
-{
-    char *p;
-    WDialog *d;
-
-    /* Add empty lines before and after the message */
-    p = g_strconcat ("\n", text, "\n", (char *) NULL);
-    query_dialog (title, p, flags, 0);
-    d = last_query_dlg;
-
-    /* do resize before initing and running */
-    send_message (d, NULL, MSG_RESIZE, 0, NULL);
-
-    dlg_init (d);
-    g_free (p);
-
-    return d;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
- * Show message dialog.  Dismiss it when any key is pressed.
- * Not safe to call from background.
- */
-
-static void
-fg_message (int flags, const char *title, const char *text)
-{
-    WDialog *d;
-
-    d = do_create_message (flags, title, text);
-    tty_getch ();
-    dlg_run_done (d);
-    widget_destroy (WIDGET (d));
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /** Show message box from background */
 
 #ifdef ENABLE_BACKGROUND
@@ -168,7 +128,7 @@ bg_message (int dummy, int *flags, char *title, const char *text)
 {
     (void) dummy;
     title = g_strconcat (_("Background process:"), " ", title, (char *) NULL);
-    fg_message (*flags, title, text);
+    query_dialog (title, text, *flags, 1, _("&OK"));
     g_free (title);
 }
 #endif /* ENABLE_BACKGROUND */
@@ -194,7 +154,7 @@ fg_input_dialog_help (const char *header, const char *text, const char *help,
     char *p_text;
     char histname[64] = "inp|";
     gboolean is_passwd = FALSE;
-    char *my_str;
+    char *my_str = NULL;
     int ret;
 
     /* label text */
@@ -401,7 +361,13 @@ create_message (int flags, const char *title, const char *text, ...)
     p = g_strdup_vprintf (text, args);
     va_end (args);
 
-    d = do_create_message (flags, title, p);
+    query_dialog (title, p, flags, 0);
+    d = last_query_dlg;
+
+    /* do resize before initing and running */
+    send_message (d, NULL, MSG_RESIZE, 0, NULL);
+
+    dlg_init (d);
     g_free (p);
 
     return d;
@@ -431,6 +397,7 @@ message (int flags, const char *title, const char *text, ...)
             void *p;
             void (*f) (int, int *, char *, const char *);
         } func;
+
         func.f = bg_message;
 
         wtools_parent_call (func.p, NULL, 3, sizeof (flags), &flags, strlen (title), title,
@@ -438,7 +405,7 @@ message (int flags, const char *title, const char *text, ...)
     }
     else
 #endif /* ENABLE_BACKGROUND */
-        fg_message (flags, title, p);
+        query_dialog (title, p, flags, 1, _("&OK"));
 
     g_free (p);
 }

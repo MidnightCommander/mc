@@ -1,7 +1,7 @@
 /*
    Virtual File System: GNU Tar file system.
 
-   Copyright (C) 2023-2024
+   Copyright (C) 2023-2025
    Free Software Foundation, Inc.
 
    Written by:
@@ -50,7 +50,6 @@
 #endif
 
 /* Log base 2 of common values. */
-#define LG_8 3
 #define LG_256 8
 
 /*** file scope type declarations ****************************************************************/

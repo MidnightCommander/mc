@@ -1,7 +1,7 @@
 /*
    Main program for the Midnight Commander
 
-   Copyright (C) 1994-2024
+   Copyright (C) 1994-2025
    Free Software Foundation, Inc.
 
    Written by:

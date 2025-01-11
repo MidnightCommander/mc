@@ -1,7 +1,7 @@
 /*
    lib - mc_build_filename() function testing
 
-   Copyright (C) 2011-2024
+   Copyright (C) 2011-2025
    Free Software Foundation, Inc.
 
    Written by:

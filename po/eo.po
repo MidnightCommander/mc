@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-11-12 12:10+0300\n"
+"POT-Creation-Date: 2025-01-11 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2022\n"
 "Language-Team: Esperanto (http://app.transifex.com/mc/mc/language/eo/)\n"
@@ -1097,9 +1097,6 @@ msgstr "Kontroli la novan linion laŭ &POSIX"
 msgid "Edit Save Mode"
 msgstr "Reĝimo de redakta konservado"
 
-msgid "Save as"
-msgstr "Konservi kiel"
-
 msgid "Cannot save: destination is not a regular file"
 msgstr "Ne eblas konservi: celo ne estas normala dosiero"
 
@@ -1171,14 +1168,8 @@ msgstr ""
 msgid "This function is not implemented"
 msgstr "Tiu funkcio ne estas realigita"
 
-msgid "Copy to clipboard"
-msgstr "Enpoŝigi"
-
 msgid "Unable to save to file"
 msgstr "Ne eblas konservi al dosiero"
-
-msgid "Cut to clipboard"
-msgstr "Tranĉi en poŝon"
 
 msgid "Goto line"
 msgstr "Iri linion"
@@ -1186,14 +1177,15 @@ msgstr "Iri linion"
 msgid "Save block"
 msgstr "Konservi blokon"
 
+#, fuzzy
+msgid "Cannot save block"
+msgstr "Ne eblas konservi dosieron"
+
 msgid "Insert file"
 msgstr "Enmeti dosieron"
 
 msgid "Cannot insert file"
 msgstr "Ne eblas enmeti dosieron"
-
-msgid "Sort block"
-msgstr "Ordigi blokon"
 
 msgid "You must first highlight a block of text"
 msgstr "Vi devas antaŭe elekti blokon da teksto"
@@ -1205,9 +1197,6 @@ msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr ""
 "Enmetu ordigajn agordaĵon (vidu la man-elementon sort(1)) apartigante ilin "
 "per blankspacoj:"
-
-msgid "Sort"
-msgstr "Ordigi"
 
 msgid "Cannot execute sort command"
 msgstr "Ne eblas plenumi ordigan komandon"
@@ -1222,10 +1211,8 @@ msgstr "Alglui eligon de ekstera komando"
 msgid "Enter shell command(s):"
 msgstr "Enmetu ŝela(j)n komando(j)n"
 
-msgid "External command"
-msgstr "Ekstera komando"
-
-msgid "Cannot execute command"
+#, fuzzy
+msgid "Cannot execute external command"
 msgstr "Ne eblas plenumi komandon"
 
 msgid "mail -s <subject> -c <cc> <to>"
@@ -1620,7 +1607,8 @@ msgstr ""
 "Afabla tekstoredaktilo\n"
 "verkita por Midnight Commander."
 
-msgid "Copyright (C) 1996-2024 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
 msgstr "Kopirajto (C) 1996-2024 Fondaĵo pri Liberaj Programoj"
 
 msgid "About"
@@ -2710,6 +2698,14 @@ msgid ""
 "%s"
 msgstr ""
 "Ne eblas forigi dosierujon \"%s\"\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot enter into directory \"%s\"\n"
+"%s"
+msgstr ""
+"Ne eblas anstataŭigi dosierujon \"%s\"\n"
 "%s"
 
 #, c-format
@@ -3887,12 +3883,11 @@ msgstr ""
 "Se vi volas eskapi, unufoje premu la klavon Eskapo\n"
 "kaj ankaŭ atendu."
 
-msgid "Cannot accept this key"
+#, fuzzy, c-format
+msgid ""
+"Cannot accept this key.\n"
+"You have entered \"%s\""
 msgstr "Ne eblas akcepti tiun klavon"
-
-#, c-format
-msgid "You have entered \"%s\""
-msgstr "Vi enmetis je \"%s\""
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -3975,15 +3970,15 @@ msgstr ""
 "%s"
 
 #, c-format
+msgid "Warning: Cannot change to %s.\n"
+msgstr "Averto: Ne eblas ŝanĝi al %s.\n"
+
+#, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr "Ne eblas malfermi nomitan dukton %s\n"
 
 msgid "The shell is still active. Quit anyway?"
 msgstr "La ŝelo estas aktiva. Ĉu senkonsidere eliri?"
-
-#, c-format
-msgid "Warning: Cannot change to %s.\n"
-msgstr "Averto: Ne eblas ŝanĝi al %s.\n"
 
 msgid "With builtin editor and aspell support"
 msgstr "Kun interna tekstoredaktilo kaj literumilo"
@@ -4757,6 +4752,28 @@ msgstr "Ĉu deiri de la komenco?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Ne eblas atingi lokan kopion de /ftp://some.host/editme.txt"
+
+#~ msgid "Save as"
+#~ msgstr "Konservi kiel"
+
+#~ msgid "Copy to clipboard"
+#~ msgstr "Enpoŝigi"
+
+#~ msgid "Cut to clipboard"
+#~ msgstr "Tranĉi en poŝon"
+
+#~ msgid "Sort block"
+#~ msgstr "Ordigi blokon"
+
+#~ msgid "Sort"
+#~ msgstr "Ordigi"
+
+#~ msgid "External command"
+#~ msgstr "Ekstera komando"
+
+#, c-format
+#~ msgid "You have entered \"%s\""
+#~ msgstr "Vi enmetis je \"%s\""
 
 #, c-format
 #~ msgid ""

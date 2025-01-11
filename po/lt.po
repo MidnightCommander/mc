@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-11-12 12:10+0300\n"
+"POT-Creation-Date: 2025-01-11 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Mantas Kriaučiūnas Baltix <mantas@akl.lt>, 2020\n"
 "Language-Team: Lithuanian (http://app.transifex.com/mc/mc/language/lt/)\n"
@@ -1058,9 +1058,6 @@ msgstr ""
 msgid "Edit Save Mode"
 msgstr ""
 
-msgid "Save as"
-msgstr "Išsaugoti kaip"
-
 msgid "Cannot save: destination is not a regular file"
 msgstr "Neįmanoma išsaugoti: paskirtis nėra įprastas failas"
 
@@ -1132,14 +1129,8 @@ msgstr ""
 msgid "This function is not implemented"
 msgstr ""
 
-msgid "Copy to clipboard"
-msgstr ""
-
 msgid "Unable to save to file"
 msgstr "Nepavyko išsaugoti faile"
-
-msgid "Cut to clipboard"
-msgstr ""
 
 msgid "Goto line"
 msgstr "Eiti į eilutę"
@@ -1147,14 +1138,15 @@ msgstr "Eiti į eilutę"
 msgid "Save block"
 msgstr "Išsaugoti bloką"
 
+#, fuzzy
+msgid "Cannot save block"
+msgstr "Nepavyko išsaugoti failo"
+
 msgid "Insert file"
 msgstr "Įterpti failą"
 
 msgid "Cannot insert file"
 msgstr "Negalima įterpti failo"
-
-msgid "Sort block"
-msgstr "Rikiuoti bloką"
 
 msgid "You must first highlight a block of text"
 msgstr ""
@@ -1164,9 +1156,6 @@ msgstr "Rikiuoti"
 
 msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr ""
-
-msgid "Sort"
-msgstr "Rikiuoti"
 
 msgid "Cannot execute sort command"
 msgstr "Nepavyko įvykdyti rikiavimo komandos"
@@ -1181,10 +1170,8 @@ msgstr "Įdėti išorinės komandos išvestį"
 msgid "Enter shell command(s):"
 msgstr "Įveskite aplinkos komandą (-as):"
 
-msgid "External command"
-msgstr "Išorinė komanda"
-
-msgid "Cannot execute command"
+#, fuzzy
+msgid "Cannot execute external command"
 msgstr "Nepavyko įvykdyti išorinės komandos"
 
 msgid "mail -s <subject> -c <cc> <to>"
@@ -1579,7 +1566,7 @@ msgstr ""
 "Lengvas vartoti teksto redaktorius\n"
 "sukurtas Midnight Commander aplinkai."
 
-msgid "Copyright (C) 1996-2024 the Free Software Foundation"
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -2622,6 +2609,14 @@ msgid ""
 "%s"
 msgstr ""
 "Nepavyko pašalinti aplanko \"%s\"\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot enter into directory \"%s\"\n"
+"%s"
+msgstr ""
+"Nepavyko perrašyti aplanko \"%s\"\n"
 "%s"
 
 #, c-format
@@ -3768,11 +3763,10 @@ msgstr ""
 "Jei norite atsisakyti, paspauskite „Grįžti“ („Esc“) \n"
 "ir palaukite."
 
-msgid "Cannot accept this key"
-msgstr ""
-
 #, c-format
-msgid "You have entered \"%s\""
+msgid ""
+"Cannot accept this key.\n"
+"You have entered \"%s\""
 msgstr ""
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
@@ -3845,15 +3839,15 @@ msgstr ""
 "%s"
 
 #, c-format
+msgid "Warning: Cannot change to %s.\n"
+msgstr "Įspėjimas: nepavyko įeiti į „%s“.\n"
+
+#, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr "Nepavyko atverti vardinio konvejerio „%s“\n"
 
 msgid "The shell is still active. Quit anyway?"
 msgstr "Aplinka vis dar aktyvi. Vis tiek išeiti?"
-
-#, c-format
-msgid "Warning: Cannot change to %s.\n"
-msgstr "Įspėjimas: nepavyko įeiti į „%s“.\n"
 
 msgid "With builtin editor and aspell support"
 msgstr ""
@@ -4587,6 +4581,18 @@ msgstr "Tęsti nuo pradžios?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Save as"
+#~ msgstr "Išsaugoti kaip"
+
+#~ msgid "Sort block"
+#~ msgstr "Rikiuoti bloką"
+
+#~ msgid "Sort"
+#~ msgstr "Rikiuoti"
+
+#~ msgid "External command"
+#~ msgstr "Išorinė komanda"
 
 #~ msgid "Ski&p all"
 #~ msgstr "Praleisti viską"

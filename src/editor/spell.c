@@ -1,7 +1,7 @@
 /*
    Editor spell checker
 
-   Copyright (C) 2012-2024
+   Copyright (C) 2012-2025
    Free Software Foundation, Inc.
 
    Written by:
@@ -420,7 +420,8 @@ aspell_add_to_dict (const char *word, int word_size)
 
     if (mc_aspell_speller_error (global_speller->speller) != 0)
     {
-        edit_error_dialog (_("Error"), mc_aspell_speller_error_message (global_speller->speller));
+        message (D_ERROR, MSG_ERROR, "%s",
+                 mc_aspell_speller_error_message (global_speller->speller));
         return FALSE;
     }
 
@@ -428,7 +429,8 @@ aspell_add_to_dict (const char *word, int word_size)
 
     if (mc_aspell_speller_error (global_speller->speller) != 0)
     {
-        edit_error_dialog (_("Error"), mc_aspell_speller_error_message (global_speller->speller));
+        message (D_ERROR, MSG_ERROR, "%s",
+                 mc_aspell_speller_error_message (global_speller->speller));
         return FALSE;
     }
 
@@ -553,7 +555,7 @@ aspell_init (void)
         global_speller->speller = mc_to_aspell_speller (error);
     else
     {
-        edit_error_dialog (_("Error"), mc_aspell_error_message (error));
+        message (D_ERROR, MSG_ERROR, "%s", mc_aspell_error_message (error));
         mc_delete_aspell_can_have_error (error);
         aspell_clean ();
     }

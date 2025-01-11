@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-11-12 12:10+0300\n"
+"POT-Creation-Date: 2025-01-11 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Andi Chandler <andi@gowling.com>, 2016-2017,2020,2022-2024\n"
 "Language-Team: English (United Kingdom) (http://app.transifex.com/mc/mc/"
@@ -1096,9 +1096,6 @@ msgstr "Check &POSIX new line"
 msgid "Edit Save Mode"
 msgstr "Edit Save Mode"
 
-msgid "Save as"
-msgstr "Save as"
-
 msgid "Cannot save: destination is not a regular file"
 msgstr "Cannot save: destination is not a regular file"
 
@@ -1170,14 +1167,8 @@ msgstr ""
 msgid "This function is not implemented"
 msgstr "This function is not implemented"
 
-msgid "Copy to clipboard"
-msgstr "Copy to clipboard"
-
 msgid "Unable to save to file"
 msgstr "Unable to save to file"
-
-msgid "Cut to clipboard"
-msgstr "Cut to clipboard"
 
 msgid "Goto line"
 msgstr "Goto line"
@@ -1185,14 +1176,15 @@ msgstr "Goto line"
 msgid "Save block"
 msgstr "Save block"
 
+#, fuzzy
+msgid "Cannot save block"
+msgstr "Cannot save file"
+
 msgid "Insert file"
 msgstr "Insert file"
 
 msgid "Cannot insert file"
 msgstr "Cannot insert file"
-
-msgid "Sort block"
-msgstr "Sort block"
 
 msgid "You must first highlight a block of text"
 msgstr "You must first highlight a block of text"
@@ -1202,9 +1194,6 @@ msgstr "Run sort"
 
 msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr "Enter sort options (see sort(1) manpage) separated by whitespace:"
-
-msgid "Sort"
-msgstr "Sort"
 
 msgid "Cannot execute sort command"
 msgstr "Cannot execute sort command"
@@ -1219,10 +1208,8 @@ msgstr "Paste output of external command"
 msgid "Enter shell command(s):"
 msgstr "Enter shell command(s):"
 
-msgid "External command"
-msgstr "External command"
-
-msgid "Cannot execute command"
+#, fuzzy
+msgid "Cannot execute external command"
 msgstr "Cannot execute command"
 
 msgid "mail -s <subject> -c <cc> <to>"
@@ -1617,7 +1604,8 @@ msgstr ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
 
-msgid "Copyright (C) 1996-2024 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
 msgstr "Copyright (C) 1996-2024 the Free Software Foundation"
 
 msgid "About"
@@ -2709,6 +2697,14 @@ msgid ""
 "%s"
 msgstr ""
 "Cannot remove directory \"%s\"\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot enter into directory \"%s\"\n"
+"%s"
+msgstr ""
+"Cannot overwrite directory \"%s\"\n"
 "%s"
 
 #, c-format
@@ -3886,12 +3882,11 @@ msgstr ""
 "If you want to escape, press a single Escape key\n"
 "and wait as well."
 
-msgid "Cannot accept this key"
+#, fuzzy, c-format
+msgid ""
+"Cannot accept this key.\n"
+"You have entered \"%s\""
 msgstr "Cannot accept this key"
-
-#, c-format
-msgid "You have entered \"%s\""
-msgstr "You have entered \"%s\""
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -3974,15 +3969,15 @@ msgstr ""
 "%s"
 
 #, c-format
+msgid "Warning: Cannot change to %s.\n"
+msgstr "Warning: Cannot change to %s.\n"
+
+#, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr "Cannot open named pipe %s\n"
 
 msgid "The shell is still active. Quit anyway?"
 msgstr "The shell is still active. Quit anyway?"
-
-#, c-format
-msgid "Warning: Cannot change to %s.\n"
-msgstr "Warning: Cannot change to %s.\n"
 
 msgid "With builtin editor and aspell support"
 msgstr "With builtin editor and aspell support"
@@ -4757,6 +4752,28 @@ msgstr "Continue from beginning?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Cannot fetch a local copy of /ftp://some.host/editme.txt"
+
+#~ msgid "Save as"
+#~ msgstr "Save as"
+
+#~ msgid "Copy to clipboard"
+#~ msgstr "Copy to clipboard"
+
+#~ msgid "Cut to clipboard"
+#~ msgstr "Cut to clipboard"
+
+#~ msgid "Sort block"
+#~ msgstr "Sort block"
+
+#~ msgid "Sort"
+#~ msgstr "Sort"
+
+#~ msgid "External command"
+#~ msgstr "External command"
+
+#, c-format
+#~ msgid "You have entered \"%s\""
+#~ msgstr "You have entered \"%s\""
 
 #, c-format
 #~ msgid ""

@@ -1,7 +1,7 @@
 /*
    libmc - checks for initialization and deinitialization of WGroup widget
 
-   Copyright (C) 2020-2024
+   Copyright (C) 2020-2025
    The Free Software Foundation, Inc.
 
    Written by:

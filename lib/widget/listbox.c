@@ -1,7 +1,7 @@
 /*
    Widgets for the Midnight Commander
 
-   Copyright (C) 1994-2024
+   Copyright (C) 1994-2025
    Free Software Foundation, Inc.
 
    Authors:
@@ -115,7 +115,7 @@ listbox_drawscroll (const WListbox *l)
         tty_print_char ('v');
 
     /* Now draw the nice relative pointer */
-    if (!g_queue_is_empty (l->list))
+    if (length != 0)
         line = 1 + ((l->current * (w->lines - 2)) / length);
 
     for (i = 1; i < max_line; i++)

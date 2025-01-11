@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-11-12 12:10+0300\n"
+"POT-Creation-Date: 2025-01-11 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Ettore Atalan <atalanttore@googlemail.com>, 2015-2024\n"
 "Language-Team: German (http://app.transifex.com/mc/mc/language/de/)\n"
@@ -1097,9 +1097,6 @@ msgstr "&POSIX-Zeilenvorschub überprüfen"
 msgid "Edit Save Mode"
 msgstr "Editor-Speichermodus"
 
-msgid "Save as"
-msgstr "Speichern unter"
-
 msgid "Cannot save: destination is not a regular file"
 msgstr "Kann nicht speichern: Ziel ist keine normale Datei"
 
@@ -1171,14 +1168,8 @@ msgstr ""
 msgid "This function is not implemented"
 msgstr "Diese Funktion ist nicht verfügbar"
 
-msgid "Copy to clipboard"
-msgstr "In die Zwischenablage kopieren"
-
 msgid "Unable to save to file"
 msgstr "Kann die Datei nicht speichern"
-
-msgid "Cut to clipboard"
-msgstr "In die Zwischenablage ausschneiden"
 
 msgid "Goto line"
 msgstr "Gehe zu Zeile"
@@ -1186,14 +1177,15 @@ msgstr "Gehe zu Zeile"
 msgid "Save block"
 msgstr "Block speichern"
 
+#, fuzzy
+msgid "Cannot save block"
+msgstr "Kann Datei nicht speichern"
+
 msgid "Insert file"
 msgstr "Datei einfügen"
 
 msgid "Cannot insert file"
 msgstr "Kann Datei nicht einfügen"
-
-msgid "Sort block"
-msgstr "Block sortieren"
 
 msgid "You must first highlight a block of text"
 msgstr "Sie müssen zuerst einen Block oder Text markieren"
@@ -1205,9 +1197,6 @@ msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr ""
 "Geben Sie Sortieroptionen ein (siehe sort(1) manpage), getrennt durch "
 "Leerzeichen:"
-
-msgid "Sort"
-msgstr "Sortieren"
 
 msgid "Cannot execute sort command"
 msgstr "Kann den Sortierbefehl nicht ausführen"
@@ -1222,10 +1211,8 @@ msgstr "Ausgabe eines externen Befehls einfügen"
 msgid "Enter shell command(s):"
 msgstr "Shell-Kommando(s) eingeben:"
 
-msgid "External command"
-msgstr "Externer Befehl"
-
-msgid "Cannot execute command"
+#, fuzzy
+msgid "Cannot execute external command"
 msgstr "Kann Befehl nicht ausführen"
 
 msgid "mail -s <subject> -c <cc> <to>"
@@ -1620,7 +1607,8 @@ msgstr ""
 "Ein benutzerfreundlicher Texteditor,\n"
 "geschrieben für Midnight Commander."
 
-msgid "Copyright (C) 1996-2024 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
 msgstr "Copyright (C) 1996-2024 the Free Software Foundation"
 
 msgid "About"
@@ -2712,6 +2700,14 @@ msgid ""
 "%s"
 msgstr ""
 "Kann Verzeichnis \"%s\" nicht löschen\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot enter into directory \"%s\"\n"
+"%s"
+msgstr ""
+"Kann Verzeichnis \"%s\" nicht überschreiben\n"
 "%s"
 
 #, c-format
@@ -3889,12 +3885,11 @@ msgstr ""
 "Wenn Sie abbrechen möchten, drücken Sie Esc einmal\n"
 "und warten ebenfalls."
 
-msgid "Cannot accept this key"
+#, fuzzy, c-format
+msgid ""
+"Cannot accept this key.\n"
+"You have entered \"%s\""
 msgstr "Kann diese Taste nicht akzeptieren"
-
-#, c-format
-msgid "You have entered \"%s\""
-msgstr "Sie haben \"%s\" eingegeben"
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -3977,15 +3972,15 @@ msgstr ""
 "%s"
 
 #, c-format
+msgid "Warning: Cannot change to %s.\n"
+msgstr "Warnung: Kann nicht in %s wechseln.\n"
+
+#, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr "Kann benannte Pipe %s nicht öffnen\n"
 
 msgid "The shell is still active. Quit anyway?"
 msgstr "Die Shell ist immer noch aktiv. Trotzdem beenden?"
-
-#, c-format
-msgid "Warning: Cannot change to %s.\n"
-msgstr "Warnung: Kann nicht in %s wechseln.\n"
 
 msgid "With builtin editor and aspell support"
 msgstr "Mit eingebautem Editor und Aspell-Unterstützung"
@@ -4767,6 +4762,28 @@ msgstr "Am Anfang fortsetzen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kann lokale Kopie von /ftp://some.host/editme.txt nicht erstellen"
+
+#~ msgid "Save as"
+#~ msgstr "Speichern unter"
+
+#~ msgid "Copy to clipboard"
+#~ msgstr "In die Zwischenablage kopieren"
+
+#~ msgid "Cut to clipboard"
+#~ msgstr "In die Zwischenablage ausschneiden"
+
+#~ msgid "Sort block"
+#~ msgstr "Block sortieren"
+
+#~ msgid "Sort"
+#~ msgstr "Sortieren"
+
+#~ msgid "External command"
+#~ msgstr "Externer Befehl"
+
+#, c-format
+#~ msgid "You have entered \"%s\""
+#~ msgstr "Sie haben \"%s\" eingegeben"
 
 #~ msgid "Ski&p all"
 #~ msgstr "Alle übers&pringen"

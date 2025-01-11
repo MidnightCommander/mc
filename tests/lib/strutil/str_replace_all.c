@@ -1,7 +1,7 @@
 /*
    lib/strutil - tests for lib/strutil/replace.c:str_replace_all() function.
 
-   Copyright (C) 2013-2024
+   Copyright (C) 2013-2025
    Free Software Foundation, Inc.
 
    Written by:

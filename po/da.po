@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-11-12 12:10+0300\n"
+"POT-Creation-Date: 2025-01-11 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Morten Bo Johansen <mortenbo@hotmail.com>, 2018,2023\n"
 "Language-Team: Danish (http://app.transifex.com/mc/mc/language/da/)\n"
@@ -1079,9 +1079,6 @@ msgstr "Tjek &POSIX-linjeskift"
 msgid "Edit Save Mode"
 msgstr "Rediger gemtilstand"
 
-msgid "Save as"
-msgstr "Gem som"
-
 msgid "Cannot save: destination is not a regular file"
 msgstr "Kan ikke gemme: destination er ikke en almindelig fil"
 
@@ -1153,14 +1150,8 @@ msgstr ""
 msgid "This function is not implemented"
 msgstr "Denne funktion er ikke implementeret"
 
-msgid "Copy to clipboard"
-msgstr "Kopiér til udklipsholder"
-
 msgid "Unable to save to file"
 msgstr "Kan ikke gemme fil"
-
-msgid "Cut to clipboard"
-msgstr "Klip til udklipsholder"
 
 msgid "Goto line"
 msgstr "Gå til linje"
@@ -1168,14 +1159,15 @@ msgstr "Gå til linje"
 msgid "Save block"
 msgstr "Gem blok"
 
+#, fuzzy
+msgid "Cannot save block"
+msgstr "Kan ikke gemme fil"
+
 msgid "Insert file"
 msgstr "Indsæt fil"
 
 msgid "Cannot insert file"
 msgstr "Kan ikke indsætte fil"
-
-msgid "Sort block"
-msgstr "Sorter blok"
 
 msgid "You must first highlight a block of text"
 msgstr "Du skal først fremhæve en tekstblok"
@@ -1186,9 +1178,6 @@ msgstr "Udfør sortering"
 msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr ""
 " Anfør sorteringsindstillinger (se manualsiden sort(1)) adskilt af mellemrum:"
-
-msgid "Sort"
-msgstr "Sortér"
 
 msgid "Cannot execute sort command"
 msgstr "Kan ikke udføre sorteringskommando"
@@ -1203,10 +1192,8 @@ msgstr "Indsæt uddata på ekstern kommando"
 msgid "Enter shell command(s):"
 msgstr "Indtast skalkommandoer:"
 
-msgid "External command"
-msgstr "Ekstern kommando"
-
-msgid "Cannot execute command"
+#, fuzzy
+msgid "Cannot execute external command"
 msgstr "Kan ikke udføre kommando"
 
 msgid "mail -s <subject> -c <cc> <to>"
@@ -1601,7 +1588,7 @@ msgstr ""
 "En brugervenlig teksteditor\n"
 "skrevet til Midnight Commander."
 
-msgid "Copyright (C) 1996-2024 the Free Software Foundation"
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -2692,6 +2679,14 @@ msgid ""
 "%s"
 msgstr ""
 "Kan ikke fjerne mappe »%s«\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot enter into directory \"%s\"\n"
+"%s"
+msgstr ""
+"Kan ikke overskrive mappe »%s«\n"
 "%s"
 
 #, c-format
@@ -3869,12 +3864,11 @@ msgstr ""
 "Hvis du vil afbryde, tryk på knappen Escape\n"
 "og vent ligeledes."
 
-msgid "Cannot accept this key"
+#, fuzzy, c-format
+msgid ""
+"Cannot accept this key.\n"
+"You have entered \"%s\""
 msgstr "Kan ikke acceptere denne tast"
-
-#, c-format
-msgid "You have entered \"%s\""
-msgstr "Du har indtastet »%s«"
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -3958,15 +3952,15 @@ msgstr ""
 "%s"
 
 #, c-format
+msgid "Warning: Cannot change to %s.\n"
+msgstr "Advarsel: Kunne ikke skifte til %s.\n"
+
+#, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr "Kan ikke åbne navngivet datakanal %s\n"
 
 msgid "The shell is still active. Quit anyway?"
 msgstr "Skallen er stadig aktiv. Afslut alligevel?"
-
-#, c-format
-msgid "Warning: Cannot change to %s.\n"
-msgstr "Advarsel: Kunne ikke skifte til %s.\n"
 
 msgid "With builtin editor and aspell support"
 msgstr ""
@@ -4732,6 +4726,28 @@ msgstr "Fortsæt fra begyndelsen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan ikke hente en lokal kopi af /ftp://en.vært/editme.txt"
+
+#~ msgid "Save as"
+#~ msgstr "Gem som"
+
+#~ msgid "Copy to clipboard"
+#~ msgstr "Kopiér til udklipsholder"
+
+#~ msgid "Cut to clipboard"
+#~ msgstr "Klip til udklipsholder"
+
+#~ msgid "Sort block"
+#~ msgstr "Sorter blok"
+
+#~ msgid "Sort"
+#~ msgstr "Sortér"
+
+#~ msgid "External command"
+#~ msgstr "Ekstern kommando"
+
+#, c-format
+#~ msgid "You have entered \"%s\""
+#~ msgstr "Du har indtastet »%s«"
 
 #~ msgid "Ski&p all"
 #~ msgstr "&Spring over alle"

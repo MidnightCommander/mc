@@ -1,7 +1,7 @@
 /*
    Some misc dialog boxes for the program.
 
-   Copyright (C) 1994-2024
+   Copyright (C) 1994-2025
    Free Software Foundation, Inc.
 
    Written by:
@@ -543,7 +543,7 @@ configure_box (void)
 
     {
         char time_out[BUF_TINY] = "";
-        char *time_out_new;
+        char *time_out_new = NULL;
 
         quick_widget_t quick_widgets[] = {
             /* *INDENT-OFF* */
@@ -1218,7 +1218,7 @@ char *
 cd_box (const WPanel *panel)
 {
     const Widget *w = CONST_WIDGET (panel);
-    char *my_str;
+    char *my_str = NULL;
 
     quick_widget_t quick_widgets[] = {
         QUICK_LABELED_INPUT (N_("cd"), input_label_left, "", "input", &my_str, NULL, FALSE, TRUE,

@@ -1,7 +1,7 @@
 /*
    Virtual File System: GNU Tar file system.
 
-   Copyright (C) 2003-2024
+   Copyright (C) 2003-2025
    Free Software Foundation, Inc.
 
    Written by:
@@ -77,8 +77,6 @@
 #define INT_BUFSIZE_BOUND(t) (INT_STRLEN_BOUND (t) + 1)
 
 #define UINTMAX_STRSIZE_BOUND INT_BUFSIZE_BOUND (uintmax_t)
-
-#define SPARSES_INIT_COUNT SPARSES_IN_SPARSE_HEADER
 
 #define COPY_BUF(arch,b,buf,src)                                         \
 do                                                                       \

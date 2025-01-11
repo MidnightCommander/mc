@@ -1,7 +1,7 @@
 /*
    Learn keys
 
-   Copyright (C) 1995-2024
+   Copyright (C) 1995-2025
    Free Software Foundation, Inc.
 
    Written by:
@@ -118,7 +118,8 @@ learn_button (WButton *button, int action)
         }
 
         if (!seq_ok)
-            message (D_NORMAL, _("Cannot accept this key"), _("You have entered \"%s\""), seq);
+            message (D_NORMAL, _("Warning"), _("Cannot accept this key.\nYou have entered \"%s\""),
+                     seq);
 
         g_free (seq);
     }

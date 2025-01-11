@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-11-12 12:10+0300\n"
+"POT-Creation-Date: 2025-01-11 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Meng Pang Wang, 2023\n"
 "Language-Team: Chinese (Taiwan) (http://app.transifex.com/mc/mc/language/"
@@ -1044,9 +1044,6 @@ msgstr ""
 msgid "Edit Save Mode"
 msgstr ""
 
-msgid "Save as"
-msgstr "儲存為"
-
 msgid "Cannot save: destination is not a regular file"
 msgstr ""
 
@@ -1116,14 +1113,8 @@ msgstr ""
 msgid "This function is not implemented"
 msgstr "尚未實作此功能"
 
-msgid "Copy to clipboard"
-msgstr "複製到剪貼簿"
-
 msgid "Unable to save to file"
 msgstr "無法儲存為檔案"
-
-msgid "Cut to clipboard"
-msgstr "剪下到剪貼簿"
 
 msgid "Goto line"
 msgstr "前往此行"
@@ -1131,14 +1122,15 @@ msgstr "前往此行"
 msgid "Save block"
 msgstr "儲存區塊"
 
+#, fuzzy
+msgid "Cannot save block"
+msgstr "無法儲存檔案"
+
 msgid "Insert file"
 msgstr "插入檔案"
 
 msgid "Cannot insert file"
 msgstr "無法插入檔案"
-
-msgid "Sort block"
-msgstr "排序區塊"
 
 msgid "You must first highlight a block of text"
 msgstr "您應該先高亮文字中的一個區塊"
@@ -1148,9 +1140,6 @@ msgstr ""
 
 msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr ""
-
-msgid "Sort"
-msgstr "排序"
 
 msgid "Cannot execute sort command"
 msgstr "無法執行簡短的指令"
@@ -1165,10 +1154,8 @@ msgstr "貼上外部指令的輸出結果"
 msgid "Enter shell command(s):"
 msgstr "輸入指令:"
 
-msgid "External command"
-msgstr "外部指令"
-
-msgid "Cannot execute command"
+#, fuzzy
+msgid "Cannot execute external command"
 msgstr "無法執行指令"
 
 msgid "mail -s <subject> -c <cc> <to>"
@@ -1559,7 +1546,7 @@ msgid ""
 "written for the Midnight Commander."
 msgstr ""
 
-msgid "Copyright (C) 1996-2024 the Free Software Foundation"
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -2586,6 +2573,14 @@ msgid ""
 "%s"
 msgstr ""
 "無法刪除目錄 \"%s\"\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot enter into directory \"%s\"\n"
+"%s"
+msgstr ""
+"無法覆寫目錄 \"%s\"\n"
 "%s"
 
 #, c-format
@@ -3720,11 +3715,10 @@ msgstr ""
 "如果您想離開，請按一下 Esc 鍵\n"
 "並稍候。"
 
-msgid "Cannot accept this key"
-msgstr ""
-
 #, c-format
-msgid "You have entered \"%s\""
+msgid ""
+"Cannot accept this key.\n"
+"You have entered \"%s\""
 msgstr ""
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
@@ -3800,15 +3794,15 @@ msgstr ""
 "%s"
 
 #, c-format
+msgid "Warning: Cannot change to %s.\n"
+msgstr "警告： 無法切換到 %s。\n"
+
+#, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr "無法開啟具名管線 %s\n"
 
 msgid "The shell is still active. Quit anyway?"
 msgstr ""
-
-#, c-format
-msgid "Warning: Cannot change to %s.\n"
-msgstr "警告： 無法切換到 %s。\n"
 
 msgid "With builtin editor and aspell support"
 msgstr ""
@@ -4546,3 +4540,21 @@ msgstr "從頭開始?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "無法取得本地的副本在 ftp://some.host/editme.txt"
+
+#~ msgid "Save as"
+#~ msgstr "儲存為"
+
+#~ msgid "Copy to clipboard"
+#~ msgstr "複製到剪貼簿"
+
+#~ msgid "Cut to clipboard"
+#~ msgstr "剪下到剪貼簿"
+
+#~ msgid "Sort block"
+#~ msgstr "排序區塊"
+
+#~ msgid "Sort"
+#~ msgstr "排序"
+
+#~ msgid "External command"
+#~ msgstr "外部指令"

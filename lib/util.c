@@ -1,7 +1,7 @@
 /*
    Various utilities
 
-   Copyright (C) 1994-2024
+   Copyright (C) 1994-2025
    Free Software Foundation, Inc.
 
    Written by:
@@ -459,8 +459,18 @@ size_trunc_len (char *buffer, unsigned int len, uintmax_t size, int units, gbool
         { "", "k", "m", "g", "t", "p", "e", "z", "y", "r", "q", NULL };
     /* *INDENT-ON* */
 
+    static int sfx_last = -1;
+
     const char *const *sfx = use_si ? suffix_lc : suffix;
     int j = 0;
+
+    if (sfx_last < 0)
+    {
+        for (sfx_last = 0; sfx[sfx_last] != NULL; sfx_last++)
+            ;
+
+        sfx_last--;
+    }
 
     if (len == 0)
         len = 9;
@@ -474,13 +484,15 @@ size_trunc_len (char *buffer, unsigned int len, uintmax_t size, int units, gbool
         len = 9;
 #endif
 
+    const int units_safe = MIN (units, sfx_last);
+
     /*
      * recalculate from 1024 base to 1000 base if units>0
      * We can't just multiply by 1024 - that might cause overflow
      * if uintmax_t type is too small
      */
     if (use_si)
-        for (j = 0; j < units; j++)
+        for (j = 0; j < units_safe; j++)
         {
             uintmax_t size_remain;
 
@@ -490,7 +502,7 @@ size_trunc_len (char *buffer, unsigned int len, uintmax_t size, int units, gbool
             size += size_remain;        /* Re-add remainder lost by division/multiplication */
         }
 
-    for (j = units; sfx[j] != NULL; j++)
+    for (j = units_safe; sfx[j] != NULL; j++)
     {
         if (size == 0)
         {

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2024-11-12 12:10+0300\n"
+"POT-Creation-Date: 2025-01-11 12:47+0300\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>, 2021\n"
 "Language-Team: Finnish (http://app.transifex.com/mc/mc/language/fi/)\n"
@@ -1063,9 +1063,6 @@ msgstr "Tarkista &POSIX uusi rivi"
 msgid "Edit Save Mode"
 msgstr "Muokkaa tallennustilaa"
 
-msgid "Save as"
-msgstr "Tallenna nimellä"
-
 msgid "Cannot save: destination is not a regular file"
 msgstr "Ei voi tallentaa: kohde ei ole tavallinen tiedosto"
 
@@ -1137,14 +1134,8 @@ msgstr ""
 msgid "This function is not implemented"
 msgstr "Tätä toimintoa ei ole otettu käyttöön"
 
-msgid "Copy to clipboard"
-msgstr "Kopioi leikepöydälle"
-
 msgid "Unable to save to file"
 msgstr "Tiedostoon tallentaminen epäonnistui "
-
-msgid "Cut to clipboard"
-msgstr "Leikkaa leikepöydälle"
 
 msgid "Goto line"
 msgstr "Mene riville"
@@ -1152,14 +1143,15 @@ msgstr "Mene riville"
 msgid "Save block"
 msgstr "Tallenna alue"
 
+#, fuzzy
+msgid "Cannot save block"
+msgstr "Tiedostoa ei voi tallentaa"
+
 msgid "Insert file"
 msgstr "Lisää tiedosto"
 
 msgid "Cannot insert file"
 msgstr "Tiedostoa ei voi lisätä"
-
-msgid "Sort block"
-msgstr "Lajittele alue"
 
 msgid "You must first highlight a block of text"
 msgstr "Sinun pitää ensin korostaa tekstin alue"
@@ -1169,9 +1161,6 @@ msgstr "Suorita lajittelu"
 
 msgid "Enter sort options (see sort(1) manpage) separated by whitespace:"
 msgstr ""
-
-msgid "Sort"
-msgstr "Lajittelu"
 
 msgid "Cannot execute sort command"
 msgstr "Komentoa sort ei voi suorittaa"
@@ -1186,10 +1175,8 @@ msgstr "Liitä ulkoinen komento"
 msgid "Enter shell command(s):"
 msgstr "Anna shell komento:"
 
-msgid "External command"
-msgstr "Ulkoinen komento"
-
-msgid "Cannot execute command"
+#, fuzzy
+msgid "Cannot execute external command"
 msgstr "Komentoa voi suorittaa"
 
 msgid "mail -s <subject> -c <cc> <to>"
@@ -1584,7 +1571,7 @@ msgstr ""
 "Midnight Commanderille kirjoitettu\n"
 "käyttäjäystävällinen tekstieditori."
 
-msgid "Copyright (C) 1996-2024 the Free Software Foundation"
+msgid "Copyright (C) 1996-2025 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -2613,6 +2600,14 @@ msgid ""
 "%s"
 msgstr ""
 "Kansiota \"%s\" ei voi poistaa\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot enter into directory \"%s\"\n"
+"%s"
+msgstr ""
+"Kansiota \"%s\" ei voi ylikirjoittaa\n"
 "%s"
 
 #, c-format
@@ -3765,11 +3760,10 @@ msgid ""
 "and wait as well."
 msgstr ""
 
-msgid "Cannot accept this key"
-msgstr ""
-
 #, c-format
-msgid "You have entered \"%s\""
+msgid ""
+"Cannot accept this key.\n"
+"You have entered \"%s\""
 msgstr ""
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
@@ -3836,14 +3830,14 @@ msgid ""
 msgstr ""
 
 #, c-format
+msgid "Warning: Cannot change to %s.\n"
+msgstr ""
+
+#, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr ""
 
 msgid "The shell is still active. Quit anyway?"
-msgstr ""
-
-#, c-format
-msgid "Warning: Cannot change to %s.\n"
 msgstr ""
 
 msgid "With builtin editor and aspell support"
@@ -4554,3 +4548,21 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Save as"
+#~ msgstr "Tallenna nimellä"
+
+#~ msgid "Copy to clipboard"
+#~ msgstr "Kopioi leikepöydälle"
+
+#~ msgid "Cut to clipboard"
+#~ msgstr "Leikkaa leikepöydälle"
+
+#~ msgid "Sort block"
+#~ msgstr "Lajittele alue"
+
+#~ msgid "Sort"
+#~ msgstr "Lajittelu"
+
+#~ msgid "External command"
+#~ msgstr "Ulkoinen komento"

@@ -1,18 +1,40 @@
 Build requirements for GNU Midnight Commander
 ---------------------------------------------
 
-- glibc
-- gcc
+- glibc or uClibc or musl
+  - https://www.gnu.org/software/libc/
+  - https://uclibc.org
+  - https://www.musl-libc.org
+- gcc or clang
+  - https://gcc.gnu.org
+  - https://clang.llvm.org
 - make
+  - https://www.gnu.org/software/make/
 - autoconf >= 2.64
+  - https://www.gnu.org/software/autoconf/
 - automake >= 1.14
+  - https://www.gnu.org/software/automake/
 - libtool
+  - https://www.gnu.org/software/libtool/
+- pkg-config (optional)
+  - https://pkg-config.freedesktop.org/wiki/
 - glib2 >= 2.32
-- slang2 or ncurses
+  - https://www.gtk.org
+- slang2 or ncurses screen library
+  - https://www.jedsoft.org/slang/
+  - https://invisible-island.net/ncurses/ncurses.html
 - gettext >= 0.18.2
-- libssh2 >= 1.2.8 is required only for sftp vfs
-- libaspell to support spell checking in the internal editor
-- ext2fs >= 1.42.4 to support ext{2,3,4}fs extended attributes
+  - https://www.gnu.org/software/gettext/
+- pcre or pcre2 (as an alternative to glib-regexp)
+  - https://www.pcre.org
+- gpm (general purpose mouse daemon as an alternative to xterm mouse)
+  - https://www.nico.schottelius.org/software/gpm/
+- libssh2 >= 1.2.8 (required only for sftp vfs)
+  - https://libssh2.org
+- libaspell (spell checking support in the internal editor)
+  - http://aspell.net
+- ext2fs >= 1.42.4 (support for ext{2,3,4}fs extended attributes)
+  - https://e2fsprogs.sourceforge.net
 
 
 Installation instructions for GNU Midnight Commander
@@ -222,29 +244,6 @@ only needed on systems where users cannot access /dev/vcsaN, where N is
 the virtual console number, on which the uses is logged on.
 
 
-Obtaining related software
---------------------------
-
-glib
-----
-
-The only "hard" dependency of GNU Midnight Commander is glib.  You can
-get glib from
-
-* https://download.gnome.org/sources/glib/
-
-Minimal version of glib: 2.32.0
-Recommended version: 2.32.x and higher.
-
-Newer versions may work, but haven't been tested.
-
-PCRE
-----
-
-Both PCRE and PCRE2 libraries are supported. You can get PCRE from
-
-* https://www.pcre.org
-
 Terminal database
 -----------------
 
@@ -252,31 +251,9 @@ There are many incomplete terminal databases out there, however, a
 complete terminfo is bundled with ncurses.  (It is simple to generate
 the termcap database using the infocmp utility in ncurses).
 
-Some terminfo data are included with the mc distribution (lib/*.ti).
-Particularly linux, xterm and vt100. Use e.g. ''tic linux.ti'' to use
-them.
-
 If you want to run mc on xterm/color_xterm/ansi_xterm (not rxvt), then
-you might read lib/README.xterm for further information.
+you might read contrib/README.xterm for further information.
 
-Screen libraries
-----------------
-
-GNU Midnight Commander can use the included version of S-Lang, but you
-can get the latest version here:
-
-* https://www.jedsoft.org/slang/
-
-Alternatively, you can use ncurses:
-
-* https://invisible-island.net/ncurses/announce.html
-
-Mouse support
--------------
-
-The general purpose mouse (gpm) daemon is available from
-
-* https://www.nico.schottelius.org/software/gpm/
 
 Porting
 -------

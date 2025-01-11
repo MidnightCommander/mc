@@ -2,7 +2,7 @@
    Internal file viewer for the Midnight Commander
    Callback function for some actions (hotkeys, menu)
 
-   Copyright (C) 1994-2024
+   Copyright (C) 1994-2025
    Free Software Foundation, Inc.
 
    Written by:
@@ -213,7 +213,7 @@ mcview_handle_editkey (WView *view, int key)
     if ((view->filename_vpath != NULL)
         && (*(vfs_path_get_last_path_str (view->filename_vpath)) != '\0')
         && (view->change_list == NULL))
-        view->locked = lock_file (view->filename_vpath);
+        view->locked = lock_file (view->filename_vpath) != 0;
 
     if (node == NULL)
     {

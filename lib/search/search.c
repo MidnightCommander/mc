@@ -2,7 +2,7 @@
    Search text engine.
    Interface functions
 
-   Copyright (C) 2009-2024
+   Copyright (C) 2009-2025
    Free Software Foundation, Inc.
 
    Written by:
@@ -273,7 +273,7 @@ mc_search_prepare (mc_search_t *lc_mc_search)
  */
 gboolean
 mc_search_run (mc_search_t *lc_mc_search, const void *user_data,
-               gsize start_search, gsize end_search, gsize *found_len)
+               off_t start_search, off_t end_search, gsize *found_len)
 {
     gboolean ret = FALSE;
 

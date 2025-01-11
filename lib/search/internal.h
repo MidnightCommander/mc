@@ -54,7 +54,7 @@ GString *mc_search__toupper_case_str (const char *charset, const GString * str);
 void mc_search__cond_struct_new_init_regex (const char *charset, mc_search_t * lc_mc_search,
                                             mc_search_cond_t * mc_search_cond);
 gboolean mc_search__run_regex (mc_search_t * lc_mc_search, const void *user_data,
-                               gsize start_search, gsize end_search, gsize * found_len);
+                               off_t start_search, off_t end_search, gsize * found_len);
 GString *mc_search_regex_prepare_replace_str (mc_search_t * lc_mc_search, GString * replace_str);
 
 /* search/normal.c : */
@@ -62,7 +62,7 @@ GString *mc_search_regex_prepare_replace_str (mc_search_t * lc_mc_search, GStrin
 void mc_search__cond_struct_new_init_normal (const char *charset, mc_search_t * lc_mc_search,
                                              mc_search_cond_t * mc_search_cond);
 gboolean mc_search__run_normal (mc_search_t * lc_mc_search, const void *user_data,
-                                gsize start_search, gsize end_search, gsize * found_len);
+                                off_t start_search, off_t end_search, gsize * found_len);
 GString *mc_search_normal_prepare_replace_str (mc_search_t * lc_mc_search, GString * replace_str);
 
 /* search/glob.c : */
@@ -70,7 +70,7 @@ GString *mc_search_normal_prepare_replace_str (mc_search_t * lc_mc_search, GStri
 void mc_search__cond_struct_new_init_glob (const char *charset, mc_search_t * lc_mc_search,
                                            mc_search_cond_t * mc_search_cond);
 gboolean mc_search__run_glob (mc_search_t * lc_mc_search, const void *user_data,
-                              gsize start_search, gsize end_search, gsize * found_len);
+                              off_t start_search, off_t end_search, gsize * found_len);
 GString *mc_search_glob_prepare_replace_str (mc_search_t * lc_mc_search, GString * replace_str);
 
 /* search/hex.c : */
@@ -78,7 +78,7 @@ GString *mc_search_glob_prepare_replace_str (mc_search_t * lc_mc_search, GString
 void mc_search__cond_struct_new_init_hex (const char *charset, mc_search_t * lc_mc_search,
                                           mc_search_cond_t * mc_search_cond);
 gboolean mc_search__run_hex (mc_search_t * lc_mc_search, const void *user_data,
-                             gsize start_search, gsize end_search, gsize * found_len);
+                             off_t start_search, off_t end_search, gsize * found_len);
 GString *mc_search_hex_prepare_replace_str (mc_search_t * lc_mc_search, GString * replace_str);
 
 /*** inline functions ****************************************************************************/

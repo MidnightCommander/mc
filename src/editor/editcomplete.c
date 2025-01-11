@@ -1,7 +1,7 @@
 /*
    Editor word completion engine
 
-   Copyright (C) 2021-2024
+   Copyright (C) 2021-2025
    Free Software Foundation, Inc.
 
    Written by:
@@ -369,8 +369,9 @@ edit_completion_dialog_show (const WEdit *edit, GQueue *compl, int max_width)
     compl_dlg_h = g_queue_get_length (compl) + 2;
     compl_dlg_w = max_width + 4;
     start_x = we->x + edit->curs_col + edit->start_col + EDIT_TEXT_HORIZONTAL_OFFSET +
-        (edit->fullscreen ? 0 : 1) + edit_options.line_state_width;
-    start_y = we->y + edit->curs_row + EDIT_TEXT_VERTICAL_OFFSET + (edit->fullscreen ? 0 : 1) + 1;
+        (edit->fullscreen != 0 ? 0 : 1) + edit_options.line_state_width;
+    start_y = we->y + edit->curs_row + EDIT_TEXT_VERTICAL_OFFSET +
+        (edit->fullscreen != 0 ? 0 : 1) + 1;
 
     if (start_x < 0)
         start_x = 0;

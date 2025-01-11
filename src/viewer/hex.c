@@ -2,7 +2,7 @@
    Internal file viewer for the Midnight Commander
    Function for hex view
 
-   Copyright (C) 1994-2024
+   Copyright (C) 1994-2025
    Free Software Foundation, Inc.
 
    Written by:
@@ -409,7 +409,7 @@ mcview_hexedit_save_changes (WView *view)
             view->change_list = NULL;
 
             if (view->locked)
-                view->locked = unlock_file (view->filename_vpath);
+                view->locked = unlock_file (view->filename_vpath) != 0;
 
             if (mc_close (fp) == -1)
                 message (D_ERROR, _("Save file"),
@@ -456,7 +456,7 @@ mcview_hexedit_free_change_list (WView *view)
     view->change_list = NULL;
 
     if (view->locked)
-        view->locked = unlock_file (view->filename_vpath);
+        view->locked = unlock_file (view->filename_vpath) != 0;
 
     view->dirty++;
 }

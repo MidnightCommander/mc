@@ -1,7 +1,7 @@
 /*
    Editor high level editing commands
 
-   Copyright (C) 1996-2024
+   Copyright (C) 1996-2025
    Free Software Foundation, Inc.
 
    Written by:
@@ -130,7 +130,6 @@ static int
 edit_save_file (WEdit *edit, const vfs_path_t *filename_vpath)
 {
     char *p;
-    gchar *tmp;
     off_t filelen = 0;
     int this_save_mode, rv, fd = -1;
     vfs_path_t *real_filename_vpath;
@@ -173,7 +172,7 @@ edit_save_file (WEdit *edit, const vfs_path_t *filename_vpath)
     rv = mc_stat (real_filename_vpath, &sb);
     if (rv == 0)
     {
-        if (this_save_mode == EDIT_QUICK_SAVE && !edit->skip_detach_prompt && sb.st_nlink > 1)
+        if (this_save_mode == EDIT_QUICK_SAVE && edit->skip_detach_prompt == 0 && sb.st_nlink > 1)
         {
             rv = edit_query_dialog3 (_("Warning"),
                                      _("File has hard-links. Detach before saving?"),
@@ -263,9 +262,7 @@ edit_save_file (WEdit *edit, const vfs_path_t *filename_vpath)
 #else
             if (pclose (file) != 0)
             {
-                tmp = g_strdup_printf (_("Error writing to pipe: %s"), p);
-                edit_error_dialog (_("Error"), tmp);
-                g_free (tmp);
+                message (D_ERROR, MSG_ERROR, _("Error writing to pipe: %s"), p);
                 g_free (p);
                 goto error_save;
             }
@@ -273,10 +270,8 @@ edit_save_file (WEdit *edit, const vfs_path_t *filename_vpath)
         }
         else
         {
-            tmp = g_strdup_printf (_("Cannot open pipe for writing: %s"), p);
-            edit_error_dialog (_("Error"), get_sys_error (tmp));
+            message (D_ERROR, MSG_ERROR, _("Cannot open pipe for writing: %s"), p);
             g_free (p);
-            g_free (tmp);
             goto error_save;
         }
         g_free (p);
@@ -314,11 +309,7 @@ edit_save_file (WEdit *edit, const vfs_path_t *filename_vpath)
         }
         else
         {
-            char *msg;
-
-            msg = g_strdup_printf (_("Cannot open file for writing: %s"), savename);
-            edit_error_dialog (_("Error"), msg);
-            g_free (msg);
+            message (D_ERROR, MSG_ERROR, _("Cannot open file for writing: %s"), savename);
             goto error_save;
         }
     }
@@ -383,7 +374,7 @@ static vfs_path_t *
 edit_get_save_file_as (WEdit *edit)
 {
     static LineBreaks cur_lb = LB_ASIS;
-    char *filename_res;
+    char *filename_res = NULL;
     vfs_path_t *ret_vpath = NULL;
 
     const char *lb_names[LB_NAMES] = {
@@ -434,14 +425,15 @@ edit_get_save_file_as (WEdit *edit)
 static gboolean
 edit_save_cmd (WEdit *edit)
 {
-    int res, save_lock = 0;
+    int save_lock = 0;
 
-    if (!edit->locked && !edit->delete_file)
+    if (edit->locked == 0 && edit->delete_file == 0)
         save_lock = lock_file (edit->filename_vpath);
-    res = edit_save_file (edit, edit->filename_vpath);
+
+    const int res = edit_save_file (edit, edit->filename_vpath);
 
     /* Maintain modify (not save) lock on failure */
-    if ((res > 0 && edit->locked) || save_lock)
+    if ((res > 0 && edit->locked != 0) || save_lock != 0)
         edit->locked = unlock_file (edit->filename_vpath);
 
     /* On failure try 'save as', it does locking on its own */
@@ -933,9 +925,8 @@ edit_save_as_cmd (WEdit *edit)
 
             if (mc_stat (exp_vpath, &sb) == 0 && !S_ISREG (sb.st_mode))
             {
-                edit_error_dialog (_("Save as"),
-                                   get_sys_error (_
-                                                  ("Cannot save: destination is not a regular file")));
+                message (D_ERROR, MSG_ERROR, "%s",
+                         _("Cannot save: destination is not a regular file"));
                 goto ret;
             }
 
@@ -957,7 +948,7 @@ edit_save_as_cmd (WEdit *edit)
 
             save_lock = lock_file (exp_vpath);
         }
-        else if (!edit->locked && !edit->delete_file)
+        else if (edit->locked == 0 && edit->delete_file == 0)
             /* filenames equal, check if already locked */
             save_lock = lock_file (exp_vpath);
 
@@ -973,12 +964,12 @@ edit_save_as_cmd (WEdit *edit)
             /* Successful, so unlock both files */
             if (different_filename)
             {
-                if (save_lock)
+                if (save_lock != 0)
                     unlock_file (exp_vpath);
-                if (edit->locked)
+                if (edit->locked != 0)
                     edit->locked = unlock_file (edit->filename_vpath);
             }
-            else if (edit->locked || save_lock)
+            else if (edit->locked != 0 || save_lock != 0)
                 edit->locked = unlock_file (edit->filename_vpath);
 
             edit_set_filename (edit, exp_vpath);
@@ -992,12 +983,12 @@ edit_save_as_cmd (WEdit *edit)
             break;
 
         default:
-            edit_error_dialog (_("Save as"), get_sys_error (_("Cannot save file")));
+            message (D_ERROR, MSG_ERROR, "%s", _("Cannot save file"));
             MC_FALLTHROUGH;
 
         case -1:
             /* Failed, so maintain modify (not save) lock */
-            if (save_lock)
+            if (save_lock != 0)
                 unlock_file (exp_vpath);
             break;
         }
@@ -1260,7 +1251,7 @@ edit_close_cmd (WEdit *edit)
         WGroup *g = w->owner;
 
         if (edit->locked != 0)
-            unlock_file (edit->filename_vpath);
+            edit->locked = unlock_file (edit->filename_vpath);
 
         group_remove_widget (w);
         widget_destroy (w);
@@ -1467,7 +1458,7 @@ edit_ok_to_exit (WEdit *edit)
     char *msg;
     int act;
 
-    if (!edit->modified)
+    if (edit->modified == 0)
         return TRUE;
 
     if (edit->filename_vpath != NULL)
@@ -1586,7 +1577,8 @@ void
 edit_paste_from_history (WEdit *edit)
 {
     (void) edit;
-    edit_error_dialog (_("Error"), _("This function is not implemented"));
+
+    message (D_ERROR, MSG_ERROR, "%s", _("This function is not implemented"));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1601,7 +1593,7 @@ edit_copy_to_X_buf_cmd (WEdit *edit)
 
     if (!edit_save_block_to_clip_file (edit, start_mark, end_mark))
     {
-        edit_error_dialog (_("Copy to clipboard"), get_sys_error (_("Unable to save to file")));
+        message (D_ERROR, MSG_ERROR, "%s", _("Unable to save to file"));
         return FALSE;
     }
     /* try use external clipboard utility */
@@ -1625,7 +1617,7 @@ edit_cut_to_X_buf_cmd (WEdit *edit)
 
     if (!edit_save_block_to_clip_file (edit, start_mark, end_mark))
     {
-        edit_error_dialog (_("Cut to clipboard"), _("Unable to save to file"));
+        message (D_ERROR, MSG_ERROR, "%s", _("Unable to save to file"));
         return FALSE;
     }
     /* try use external clipboard utility */
@@ -1720,7 +1712,7 @@ edit_save_block_cmd (WEdit *edit)
         if (edit_save_block (edit, exp, start_mark, end_mark))
             ret = TRUE;
         else
-            edit_error_dialog (_("Save block"), get_sys_error (_("Cannot save file")));
+            message (D_ERROR, MSG_ERROR, "%s", _("Cannot save block"));
 
         edit->force |= REDRAW_COMPLETELY;
     }
@@ -1756,7 +1748,7 @@ edit_insert_file_cmd (WEdit *edit)
         vfs_path_free (exp_vpath, TRUE);
 
         if (!ret)
-            edit_error_dialog (_("Insert file"), get_sys_error (_("Cannot insert file")));
+            message (D_ERROR, MSG_ERROR, "%s", _("Cannot insert file"));
     }
 
     g_free (exp);
@@ -1777,7 +1769,7 @@ edit_sort_cmd (WEdit *edit)
 
     if (!eval_marks (edit, &start_mark, &end_mark))
     {
-        edit_error_dialog (_("Sort block"), _("You must first highlight a block of text"));
+        message (D_ERROR, MSG_ERROR, "%s", _("You must first highlight a block of text"));
         return 0;
     }
 
@@ -1806,15 +1798,13 @@ edit_sort_cmd (WEdit *edit)
     if (e != 0)
     {
         if (e == -1 || e == 127)
-            edit_error_dialog (_("Sort"), get_sys_error (_("Cannot execute sort command")));
+            message (D_ERROR, MSG_ERROR, "%s", _("Cannot execute sort command"));
         else
         {
             char q[8];
 
             sprintf (q, "%d ", e);
-            tmp = g_strdup_printf (_("Sort returned non-zero: %s"), q);
-            edit_error_dialog (_("Sort"), tmp);
-            g_free (tmp);
+            message (D_ERROR, MSG_ERROR, _("Sort returned non-zero: %s"), q);
         }
 
         return -1;
@@ -1867,7 +1857,7 @@ edit_ext_cmd (WEdit *edit)
 
     if (e != 0)
     {
-        edit_error_dialog (_("External command"), get_sys_error (_("Cannot execute command")));
+        message (D_ERROR, MSG_ERROR, "%s", _("Cannot execute external command"));
         return -1;
     }
 
@@ -1908,7 +1898,9 @@ edit_block_process_cmd (WEdit *edit, int macro_number)
 void
 edit_mail_dialog (WEdit *edit)
 {
-    char *mail_to, *mail_subject, *mail_cc;
+    char *mail_to = NULL;
+    char *mail_subject = NULL;
+    char *mail_cc = NULL;
 
     quick_widget_t quick_widgets[] = {
         /* *INDENT-OFF* */
@@ -1974,7 +1966,7 @@ edit_insert_literal_cmd (WEdit *edit)
 gboolean
 edit_load_forward_cmd (WEdit *edit)
 {
-    if (edit->modified
+    if (edit->modified != 0
         && edit_query_dialog2 (_("Warning"),
                                _("Current text was modified without a file save.\n"
                                  "Continue discards these changes."), _("C&ontinue"),
@@ -2002,7 +1994,7 @@ edit_load_forward_cmd (WEdit *edit)
 gboolean
 edit_load_back_cmd (WEdit *edit)
 {
-    if (edit->modified
+    if (edit->modified != 0
         && edit_query_dialog2 (_("Warning"),
                                _("Current text was modified without a file save.\n"
                                  "Continue discards these changes."), _("C&ontinue"),
