@@ -35,9 +35,6 @@ endif
 
 AM_CPPFLAGS += -I$(top_srcdir) $(GLIB_CFLAGS)
 
-localedir = $(datadir)/locale
-pkglibexecdir = $(libexecdir)/@PACKAGE@
-
 bin_PROGRAMS = mc
 
 if USE_INTERNAL_EDIT
