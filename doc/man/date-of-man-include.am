@@ -3,7 +3,7 @@ SED_PARAMETERS = \
 	-e "s/%MAN_VERSION%/@MAN_VERSION@/g" \
 	-e "s{%sysconfdir%{@sysconfdir@{g" \
 	-e "s{%libexecdir%{@libexecdir@{g" \
-	-e "s{%pkglibexecdir%{$(libexecdir)/@PACKAGE@{g" \
+	-e "s{%pkglibexecdir%{@pkglibexecdir@{g" \
 	-e "s{%pkgdatadir%{$(datadir)/@PACKAGE@{g"
 
 MAN_DATE_CMD = \

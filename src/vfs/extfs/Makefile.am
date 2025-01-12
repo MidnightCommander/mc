@@ -2,7 +2,7 @@ SUBDIRS = helpers
 DIST_SUBDIRS = helpers
 
 AM_CPPFLAGS = \
-	-DLIBEXECDIR=\""$(libexecdir)/@PACKAGE@/"\" \
+	-DLIBEXECDIR=\""$(pkglibexecdir)"\" \
 	$(GLIB_CFLAGS) \
 	-I$(top_srcdir)
 
