@@ -2408,11 +2408,15 @@ users (BusyBox or Debian) may specify startup commands in ~/.local/share/mc/ashr
 .PP
 .B ksh/oksh
 users (PD ksh variants) may specify startup commands in ~/.local/share/mc/kshrc
-(fallback $ENV or ~/.profile).
+(fallback
+.I ENV
+or ~/.profile).
 .PP
 .B mksh
 users (MirBSD ksh) may specify startup commands in ~/.local/share/mc/mkshrc
-(fallback $ENV or ~/.mkshrc).
+(fallback
+.I ENV
+or ~/.mkshrc).
 .PP
 .B zsh
 users may specify startup commands in ~/.local/share/mc/.zshrc (fallback ~/.zshrc).
