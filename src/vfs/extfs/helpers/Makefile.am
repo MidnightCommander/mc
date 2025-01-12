@@ -1,4 +1,4 @@
-extfsdir = $(libexecdir)/@PACKAGE@/extfs.d
+extfsdir = $(EXTFSHELPERSDIR)
 
 # Files to install and distribute other than extfs scripts
 EXTFS_MISC  = README README.extfs

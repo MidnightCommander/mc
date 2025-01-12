@@ -491,12 +491,16 @@ test "x$exec_prefix" = "xNONE" && exec_prefix="${prefix}"
 
 if test x${libexecdir} = x'${exec_prefix}/libexec'; then
     EXTHELPERSDIR=${prefix}/libexec/${PACKAGE}/ext.d
+    EXTFSHELPERSDIR=${prefix}/libexec/${PACKAGE}/extfs.d
 elif test x${libexecdir} = x'${exec_prefix}/lib'; then
     EXTHELPERSDIR=${prefix}/lib/${PACKAGE}/ext.d
+    EXTFSHELPERSDIR=${prefix}/lib/${PACKAGE}/extfs.d
 else
     EXTHELPERSDIR=${libexecdir}/${PACKAGE}/ext.d
+    EXTFSHELPERSDIR=${libexecdir}/${PACKAGE}/extfs.d
 fi
 AC_SUBST(EXTHELPERSDIR)
+AC_SUBST(EXTFSHELPERSDIR)
 
 
 dnl ############################################################################
