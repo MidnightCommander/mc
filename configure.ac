@@ -353,19 +353,10 @@ AC_CHECK_DECLS([environ], , ,
   [ #include <unistd.h>
     #include <stdlib.h> ])
 
-case $host_os in
-*os400)
-    AC_PATH_PROG([PERL], [perl], [/QOpenSys/pkgs/bin/perl])
-    AC_PATH_PROG([PERL_FOR_BUILD], [perl], [/QOpenSys/pkgs/bin/perl])
-    AC_PATH_PROG([PYTHON], [python], [/QOpenSys/pkgs/bin/python2])
-    AC_PATH_PROG([RUBY], [ruby], [/QOpenSys/pkgs/bin/ruby])
-    ;;
-*)
-    AC_PATH_PROG([PERL], [perl], [/usr/bin/perl])
-    AC_PATH_PROG([PERL_FOR_BUILD], [perl], [/usr/bin/perl])
-    AC_PATH_PROG([PYTHON], [python], [/usr/bin/python])
-    AC_PATH_PROG([RUBY], [ruby], [/usr/bin/ruby])
-esac
+AC_PATH_PROG([PERL], [perl], [/usr/bin/env perl], [$PATH$PATH_SEPARATORQOpenSys/pkgs/bin])
+AC_PATH_PROG([PERL_FOR_BUILD], [perl], [/usr/bin/env perl], [$PATH$PATH_SEPARATORQOpenSys/pkgs/bin])
+AC_PATH_PROG([PYTHON], [python3], [/usr/bin/env python3], [$PATH$PATH_SEPARATORQOpenSys/pkgs/bin])
+AC_PATH_PROG([RUBY], [ruby], [/usr/bin/env ruby], [$PATH$PATH_SEPARATORQOpenSys/pkgs/bin])
 
 case $host_os in
 aux*)
@@ -500,12 +491,16 @@ test "x$exec_prefix" = "xNONE" && exec_prefix="${prefix}"
 
 if test x${libexecdir} = x'${exec_prefix}/libexec'; then
     EXTHELPERSDIR=${prefix}/libexec/${PACKAGE}/ext.d
+    EXTFSHELPERSDIR=${prefix}/libexec/${PACKAGE}/extfs.d
 elif test x${libexecdir} = x'${exec_prefix}/lib'; then
     EXTHELPERSDIR=${prefix}/lib/${PACKAGE}/ext.d
+    EXTFSHELPERSDIR=${prefix}/lib/${PACKAGE}/extfs.d
 else
     EXTHELPERSDIR=${libexecdir}/${PACKAGE}/ext.d
+    EXTFSHELPERSDIR=${libexecdir}/${PACKAGE}/extfs.d
 fi
 AC_SUBST(EXTHELPERSDIR)
+AC_SUBST(EXTFSHELPERSDIR)
 
 
 dnl ############################################################################
@@ -636,11 +631,13 @@ src/vfs/extfs/helpers/mailfs
 src/vfs/extfs/helpers/patchfs
 src/vfs/extfs/helpers/rpms+
 src/vfs/extfs/helpers/s3+
+src/vfs/extfs/helpers/torrent
 src/vfs/extfs/helpers/uace
 src/vfs/extfs/helpers/ualz
 src/vfs/extfs/helpers/uar
 src/vfs/extfs/helpers/uarc
 src/vfs/extfs/helpers/uarj
+src/vfs/extfs/helpers/uc1541
 src/vfs/extfs/helpers/ucab
 src/vfs/extfs/helpers/uha
 src/vfs/extfs/helpers/ulha

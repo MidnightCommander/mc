@@ -1,6 +1,4 @@
 #! @PYTHON@
-# -*- coding: utf-8 -*-
-
 #
 #  Midnight Commander compatible EXTFS for accessing Amazon Web Services S3.
 #  Written by Jakob Kemi <jakob.kemi@gmail.com> 2009

@@ -22,7 +22,7 @@ jobs:
         with:
           prepare: |
             pkg install -y autoconf automake gettext libtool pkgconf
-            pkg install -y aspell check glib libssh2 libX11
+            pkg install -y aspell check glib libssh2 libX11 python3
 
           run: |
             ./autogen.sh

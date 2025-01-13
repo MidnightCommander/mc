@@ -1,10 +1,10 @@
-extfsdir = $(libexecdir)/@PACKAGE@/extfs.d
+extfsdir = $(EXTFSHELPERSDIR)
 
 # Files to install and distribute other than extfs scripts
 EXTFS_MISC  = README README.extfs
 
 # Scripts hat don't need adaptation to the local system
-EXTFS_CONST = bpp changesetfs gitfs+ patchsetfs rpm trpm u7z uc1541
+EXTFS_CONST = bpp changesetfs gitfs+ patchsetfs rpm trpm u7z
 
 # Scripts that need adaptation to the local system - source files
 EXTFS_IN    = 			\
@@ -22,11 +22,13 @@ EXTFS_IN    = 			\
 	patchfs.in		\
 	rpms+.in		\
 	s3+.in			\
+	torrent.in		\
 	uace.in			\
 	ualz.in			\
 	uar.in			\
 	uarc.in			\
 	uarj.in			\
+	uc1541.in		\
 	ucab.in			\
 	uha.in			\
 	ulha.in			\
@@ -53,11 +55,13 @@ EXTFS_OUT = 			\
 	patchfs			\
 	rpms+			\
 	s3+			\
+	torrent			\
 	uace			\
 	ualz			\
 	uar			\
 	uarc			\
 	uarj			\
+	uc1541			\
 	ucab			\
 	uha			\
 	ulha			\
