@@ -366,6 +366,45 @@ init_subshell_child (const char *pty_name)
 
         break;
 
+    case SHELL_KSH:
+        /* Do we have a custom init file ~/.local/share/mc/kshrc? */
+        init_file = mc_config_get_full_path (MC_KSHRC_FILE);
+
+        /* Otherwise use ~/.profile */
+        if (!exist_file (init_file))
+        {
+            g_free (init_file);
+            init_file = g_strdup (".profile");
+        }
+
+        /* Put init file to ENV variable used by ksh but only if it
+         * is not already set. */
+        g_setenv ("ENV", init_file, FALSE);
+
+        /* Make MC's special commands not show up in history */
+        putenv ((char *) "HISTCONTROL=ignorespace");
+
+        break;
+
+    case SHELL_MKSH:
+        /* Do we have a custom init file ~/.local/share/mc/mkshrc? */
+        init_file = mc_config_get_full_path (MC_MKSHRC_FILE);
+
+        /* Otherwise use ~/.mkshrc (default behavior of mksh) */
+        if (!exist_file (init_file))
+        {
+            g_free (init_file);
+            init_file = g_strdup (".mkshrc");
+        }
+
+        /* Put init file to ENV variable used by mksh but only if it
+         * is not already set. */
+        g_setenv ("ENV", init_file, FALSE);
+
+        /* Note mksh doesn't support HISTCONTROL. */
+
+        break;
+
     case SHELL_ZSH:
         /* ZDOTDIR environment variable is the only way to point zsh
          * to an other rc file than the default. */
@@ -439,6 +478,8 @@ init_subshell_child (const char *pty_name)
     case SHELL_ASH_BUSYBOX:
     case SHELL_DASH:
     case SHELL_TCSH:
+    case SHELL_KSH:
+    case SHELL_MKSH:
         execl (mc_global.shell->path, mc_global.shell->path, (char *) NULL);
         break;
 
@@ -1093,6 +1134,41 @@ pty_open_slave (const char *pty_name)
 static void
 init_subshell_precmd (char *precmd, size_t buff_size)
 {
+    /* Attention! Make sure that the buffer for precmd is big enough. */
+
+    /* Fallback precmd emulation that should work with virtually any shell.
+     * No real precmd functionality is required, no support for \x substitutions
+     * in PS1 is needed. For convenience, $HOME is replaced by ~ in PS1.
+     *
+     * The following example is a little less fancy (home directory not replaced)
+     * and shows the basic workings of our prompt for easier understanding:
+     *
+     * "precmd() { "
+     *     "echo \"$USER@$(hostname -s):$PWD\"; "
+     *     "pwd>&%d; "
+     *     "kill -STOP $$; "
+     * "}; "
+     * "PRECMD=precmd; "
+     * "PS1='$($PRECMD)$ '\n",
+     */
+    /* *INDENT-OFF* */
+    static const char *precmd_fallback =
+        " "    /* Useful if the shell supports HISTCONTROL=ignorespace like functionality */
+        "MC_PS1_SAVED=\"$PS1\"; "       /* Save custom PS1 */
+        "precmd() { "
+        "  if [ ! \"${PWD##$HOME}\" ]; then "
+        "    MC_PWD=\"~\"; "
+        "  else "
+        "    [ \"${PWD##$HOME/}\" = \"$PWD\" ] && MC_PWD=\"$PWD\" || MC_PWD=\"~/${PWD##$HOME/}\"; "
+        "  fi; "
+        "  echo \"${MC_PS1_SAVED:-$USER@$(hostname -s):$MC_PWD\\$ }\"; "
+        "  pwd>&%d; "
+        "  kill -STOP $$; "
+        "}; "
+        "PRECMD=precmd; "
+        "PS1='$($PRECMD)'\n";
+    /* *INDENT-ON* */
+
     switch (mc_global.shell->type)
     {
     case SHELL_BASH:
@@ -1126,42 +1202,28 @@ init_subshell_precmd (char *precmd, size_t buff_size)
          *    Attention: BusyBox must be built with FEATURE_EDITING_FANCY_PROMPT to
          *    permit \u, \w, \h, \$ escape sequences. Unfortunately this cannot be guaranteed,
          *    especially on embedded systems where people try to save space, so let's use
-         *    the dash version below. It should work on virtually all systems.
-         *    "precmd() { pwd>&%d; kill -STOP $$; }; "
-         *    "PRECMD=precmd; "
-         *    "PS1='$(eval $PRECMD)\\u@\\h:\\w\\$ '\n",
+         *    the falback version.
          */
+        g_snprintf (precmd, buff_size, precmd_fallback, subshell_pipe[WRITE]);
+        break;
+
     case SHELL_DASH:
         /* Debian ash needs a precmd emulation via PS1, similar to BusyBox ash,
          * but does not support escape sequences for user, host and cwd in prompt.
-         * Attention! Make sure that the buffer for precmd is big enough.
-         *
-         * We want to have a fancy dynamic prompt with user@host:cwd just like in the BusyBox
-         * examples above, but because replacing the home directory part of the path by "~" is
-         * complicated, it bloats the precmd to a size > BUF_SMALL (128).
-         *
-         * The following example is a little less fancy (home directory not replaced)
-         * and shows the basic workings of our prompt for easier understanding:
-         *
-         * "precmd() { "
-         *     "echo \"$USER@$(hostname -s):$PWD\"; "
-         *     "pwd>&%d; "
-         *     "kill -STOP $$; "
-         * "}; "
-         * "PRECMD=precmd; "
-         * "PS1='$($PRECMD)$ '\n",
          */
+        g_snprintf (precmd, buff_size, precmd_fallback, subshell_pipe[WRITE]);
+        break;
+
+    case SHELL_MKSH:
+        /* mksh doesn't support \x placeholders in PS1 and needs precmd emulation via PS1 */
+        g_snprintf (precmd, buff_size, precmd_fallback, subshell_pipe[WRITE]);
+        break;
+
+    case SHELL_KSH:
+        /* pdksh based variants support \x placeholders but not any "precmd" functionality. */
         g_snprintf (precmd, buff_size,
-                    "precmd() { "
-                    "if [ ! \"${PWD##$HOME}\" ]; then "
-                    "MC_PWD=\"~\"; "
-                    "else "
-                    "[ \"${PWD##$HOME/}\" = \"$PWD\" ] && MC_PWD=\"$PWD\" || MC_PWD=\"~/${PWD##$HOME/}\"; "
-                    "fi; "
-                    "echo \"$USER@$(hostname -s):$MC_PWD\"; "
-                    "pwd>&%d; "
-                    "kill -STOP $$; "
-                    "}; " "PRECMD=precmd; " "PS1='$($PRECMD)$ '\n", subshell_pipe[WRITE]);
+                    " PS1='$(pwd>&%d; kill -STOP $$)'"
+                    "\"${PS1:-\\u@\\h:\\w\\$ }\"\n", subshell_pipe[WRITE]);
         break;
 
     case SHELL_ZSH:

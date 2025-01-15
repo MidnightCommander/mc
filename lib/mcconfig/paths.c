@@ -75,6 +75,8 @@ static const struct
     { &mc_data_str, MC_SKINS_DIR },
     { &mc_data_str, VFS_SHELL_PREFIX },
     { &mc_data_str, MC_ASHRC_FILE },
+    { &mc_data_str, MC_KSHRC_FILE },
+    { &mc_data_str, MC_MKSHRC_FILE },
     { &mc_data_str, MC_BASHRC_FILE },
     { &mc_data_str, MC_INPUTRC_FILE },
     { &mc_data_str, MC_ZSHRC_FILE },
