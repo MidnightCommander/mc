@@ -1,3 +1,55 @@
+Version 4.8.33
+
+Starting with this release, we will be using language features that require a C99 compiler to build.
+
+- Core
+
+    * Minimal version of Automake is 1.14 (#4604)
+    * Upgrade C standard to C99 (#4604)
+    * Support ksh variants as subshell (#3748)
+    * Improve fish 4.0 shell support (#4597)
+    * Add support for bash PROMPT_COMMAND being an array (#4599)
+    * Don't override ENV variable for ash/dash subshell (#4605)
+    * Don't disable verbose mode if tty baudrate can't be reliably determined (#2452)
+    * New keymap for vim users (#4588)
+
+- VFS
+
+    * extfs vfs:  chmod/chown inside extfs (e.g. zip archive) silently fails (#4629)
+    * Add embedded torrent viewer/vfs (#3100)
+
+- Misc
+
+    * Code cleanup (#4572, #4593, #4595, #4598)
+    * Adjust mc-wrappers to work with the new MC_TMPDIR creation logic (#4575)
+    * Prefer console players for sound, images and video in non-graphical sessions (#4479, #4596)
+    * Support `TERM=xterm-clear` for FreeBSD users (#2633)
+    * mc.ext.ini:
+        - Support for Rust crates file format (#4609)
+        - Support for OpenEmbedded ipk archives (#4626)
+    * ext.d: select browser at runtime (#4615)
+    * Move CI from Travis to GitHub Actions (#4170, #3738, #4602)
+
+- Fixes
+
+    * Segfault if filter makes file panel empty (#4600)
+    * Segfault in built-in help when going to the previous topic (#4627)
+    * Incorrect handling of ext2 attributes of a directory (#4590)
+    * Failed copy/move operations make ETA inaccurate (#3205, #4613, #4623)
+    * Hotlist: use after free (#4621)
+    * mc.ext.ini: typo for apt view command line (#4583)
+    * mcedit: visual glitches if built with aspell, but libraries not installed (#4576)
+    * mcedit: segfault on new file creation (#4580)
+    * mcedit: PageDown skips lines in edit window (#4617)
+    * mcedit: cursor jumps during PageDown in edit window (#4618)
+    * mvciew: false-positive regex search of BOL (#4587)
+    * mcdiff: segmentation fault on empty files merge (#4608)
+    * tar vfs: double free (#4616)
+    * sftpfs vfs: use after free (#4620)
+    * tests: fix charset-related code on non-glibc platforms (Alpine, Illumos) (#3972, #4495)
+    * tests: use weak symbols instead of symbol duplication to support non-GNU linkers / macOS (#4584, #3542)
+
+
 Version 4.8.32
 
 - Core
@@ -26,11 +78,11 @@ Version 4.8.32
 - Misc
 
     * Code cleanup (#4524)
-    *  New skins
-      - xoria256-thin, xoria256root-thin (#4530)
-      - modarcon16-defbg-thin, modarcon16-thin, modarcon16root-defbg-thin, modarcon16root-thin (#4530)
-      - modarin256-defbg-thin, modarin256-thin, modarin256root-defbg-thin, modarin256root-thin (#4530)
-      - julia256root (#4536)
+    * New skins
+        - xoria256-thin, xoria256root-thin (#4530)
+        - modarcon16-defbg-thin, modarcon16-thin, modarcon16root-defbg-thin, modarcon16root-thin (#4530)
+        - modarin256-defbg-thin, modarin256-thin, modarin256root-defbg-thin, modarin256root-thin (#4530)
+        - julia256root (#4536)
     * mc.ext.ini: clarify escaping of spaces and parenthesis (#4502)
 
 - Fixes
