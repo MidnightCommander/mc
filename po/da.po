@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-11 12:47+0300\n"
+"POT-Creation-Date: 2025-01-15 17:54+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Morten Bo Johansen <mortenbo@hotmail.com>, 2018,2023\n"
 "Language-Team: Danish (http://app.transifex.com/mc/mc/language/da/)\n"
@@ -952,9 +952,8 @@ msgstr ""
 msgid "Diff:"
 msgstr "Forskel:"
 
-#, fuzzy
 msgid "File name is empty!"
-msgstr "Filnavn:"
+msgstr ""
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -1159,9 +1158,8 @@ msgstr "Gå til linje"
 msgid "Save block"
 msgstr "Gem blok"
 
-#, fuzzy
 msgid "Cannot save block"
-msgstr "Kan ikke gemme fil"
+msgstr ""
 
 msgid "Insert file"
 msgstr "Indsæt fil"
@@ -1192,9 +1190,8 @@ msgstr "Indsæt uddata på ekstern kommando"
 msgid "Enter shell command(s):"
 msgstr "Indtast skalkommandoer:"
 
-#, fuzzy
 msgid "Cannot execute external command"
-msgstr "Kan ikke udføre kommando"
+msgstr ""
 
 msgid "mail -s <subject> -c <cc> <to>"
 msgstr "post -s <emne> -c <cc> <til>"
@@ -2225,13 +2222,11 @@ msgstr ""
 "Kan ikke chattr \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
-"Kan ikke hente flag for \"%s\"\n"
-"%s"
 
 msgid "set &user ID on execution"
 msgstr "sæt &bruger-id ved eksekvering"
@@ -2620,9 +2615,8 @@ msgstr ""
 "»%s«\n"
 "er den samme fil"
 
-#, fuzzy
 msgid "Ignore a&ll"
-msgstr "Ignorer &alle"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2681,13 +2675,11 @@ msgstr ""
 "Kan ikke fjerne mappe »%s«\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot enter into directory \"%s\"\n"
 "%s"
 msgstr ""
-"Kan ikke overskrive mappe »%s«\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2724,21 +2716,17 @@ msgstr ""
 "Kan ikke stat kildefil »%s«\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
-"Kan ikke stat kildefil »%s«\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
-"Kan ikke fstat målfil »%s«\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2851,13 +2839,11 @@ msgstr ""
 "Kan ikke lukke målfil »%s«\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
-"Kan ikke fstat målfil »%s«\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2867,13 +2853,11 @@ msgstr ""
 "Kan ikke stat kildemappe »%s«\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
-"Kan ikke stat kildemappe »%s«\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -3864,11 +3848,11 @@ msgstr ""
 "Hvis du vil afbryde, tryk på knappen Escape\n"
 "og vent ligeledes."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot accept this key.\n"
 "You have entered \"%s\""
-msgstr "Kan ikke acceptere denne tast"
+msgstr ""
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -4726,28 +4710,3 @@ msgstr "Fortsæt fra begyndelsen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan ikke hente en lokal kopi af /ftp://en.vært/editme.txt"
-
-#~ msgid "Save as"
-#~ msgstr "Gem som"
-
-#~ msgid "Copy to clipboard"
-#~ msgstr "Kopiér til udklipsholder"
-
-#~ msgid "Cut to clipboard"
-#~ msgstr "Klip til udklipsholder"
-
-#~ msgid "Sort block"
-#~ msgstr "Sorter blok"
-
-#~ msgid "Sort"
-#~ msgstr "Sortér"
-
-#~ msgid "External command"
-#~ msgstr "Ekstern kommando"
-
-#, c-format
-#~ msgid "You have entered \"%s\""
-#~ msgstr "Du har indtastet »%s«"
-
-#~ msgid "Ski&p all"
-#~ msgstr "&Spring over alle"

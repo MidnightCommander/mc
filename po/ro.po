@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-11 12:47+0300\n"
+"POT-Creation-Date: 2025-01-15 17:54+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Simona Iacob <s@zp1.net>, 2021-2023\n"
 "Language-Team: Romanian (http://app.transifex.com/mc/mc/language/ro/)\n"
@@ -959,9 +959,8 @@ msgstr ""
 msgid "Diff:"
 msgstr "Diff:"
 
-#, fuzzy
 msgid "File name is empty!"
-msgstr "Nume de fișier:"
+msgstr ""
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -1166,9 +1165,8 @@ msgstr "Mergi la linia"
 msgid "Save block"
 msgstr "Salvează blocul"
 
-#, fuzzy
 msgid "Cannot save block"
-msgstr "Nu se poate salva fișierul"
+msgstr ""
 
 msgid "Insert file"
 msgstr "Inserează fișierul"
@@ -1200,9 +1198,8 @@ msgstr "Lipește ieșirea unei comenzi externe"
 msgid "Enter shell command(s):"
 msgstr "Introdu comandă shell:"
 
-#, fuzzy
 msgid "Cannot execute external command"
-msgstr "Nu se poate executa comanda"
+msgstr ""
 
 msgid "mail -s <subject> -c <cc> <to>"
 msgstr "mail -s <subiect> -c <cc> <către>"
@@ -2232,13 +2229,11 @@ msgstr ""
 "Nu se poate chattr \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
-"Nu se pot obține indicatorii de \"%s\"\n"
-"%s"
 
 msgid "set &user ID on execution"
 msgstr "Setează ID &proprietar la executare"
@@ -2626,9 +2621,8 @@ msgstr ""
 "\"%s\"\n"
 "sunt același fișier"
 
-#, fuzzy
 msgid "Ignore a&ll"
-msgstr "Ignoră &tot"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2687,13 +2681,11 @@ msgstr ""
 "Nu se poate șterge dosarul \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot enter into directory \"%s\"\n"
 "%s"
 msgstr ""
-"Nu se poate suprascrie dosarul \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2730,21 +2722,17 @@ msgstr ""
 "Nu se poate găsi fișierul sursă \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
-"Nu se poate găsi fișierul sursă \"%s\"\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
-"Nu se poate găsi fișierul destinație \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2857,13 +2845,11 @@ msgstr ""
 "Nu se poate închide fișierul destinație \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
-"Nu se poate găsi fișierul destinație \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2873,13 +2859,11 @@ msgstr ""
 "Nu se poate găsi dosarul sursă \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
-"Nu se poate găsi dosarul sursă \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -3875,11 +3859,11 @@ msgstr ""
 "Dacă dorești să ieși, apasă o singură dată tasta Escape\n"
 "și așteaptă."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot accept this key.\n"
 "You have entered \"%s\""
-msgstr "Această tastă nu poate fi acceptată"
+msgstr ""
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -4740,28 +4724,3 @@ msgstr "Continuă de la început?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nu se poate aduce o copie locală a /ftp://some.host/editme.txt"
-
-#~ msgid "Save as"
-#~ msgstr "Salvează ca"
-
-#~ msgid "Copy to clipboard"
-#~ msgstr "Copiază în clipboard"
-
-#~ msgid "Cut to clipboard"
-#~ msgstr "Taie în clipboard"
-
-#~ msgid "Sort block"
-#~ msgstr "Sortează blocul"
-
-#~ msgid "Sort"
-#~ msgstr "Sortare"
-
-#~ msgid "External command"
-#~ msgstr "Comandă externă"
-
-#, c-format
-#~ msgid "You have entered \"%s\""
-#~ msgstr "Ai introdus \"%s\""
-
-#~ msgid "Ski&p all"
-#~ msgstr "Sări t&ot"

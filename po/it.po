@@ -5,7 +5,8 @@
 # Translators:
 # Andreas Troschka <signupbox001@om.it.eu.org>, 2012
 # Giuliano Natali <diaolin@diaolin.com>, 1998
-# Marco Ciampa <ciampix@posteo.net>, 2012-2024
+# Marco Ciampa <ciampix@posteo.net>, 2012,2015
+# Marco Ciampa <ciampix@posteo.net>, 2023
 # Marco Falgari <marco.ledpro@gmail.com>, 2018
 # Marco Manuzzi <marco.manuzzi@icloud.com>, 2021
 # Slava Zanko <slavazanko@gmail.com>, 2011
@@ -13,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-11 12:47+0300\n"
-"PO-Revision-Date: 2024-09-27 09:30+0200\n"
-"Last-Translator: Marco Ciampa <ciampix@posteo.net>, 2023\n"
+"POT-Creation-Date: 2025-01-15 17:54+0100\n"
+"PO-Revision-Date: 2010-12-29 10:19+0000\n"
+"Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
 "Language-Team: Italian (http://app.transifex.com/mc/mc/language/it/)\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -977,9 +978,8 @@ msgstr ""
 msgid "Diff:"
 msgstr "Diff:"
 
-#, fuzzy
 msgid "File name is empty!"
-msgstr "Nome file:"
+msgstr ""
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -1184,9 +1184,8 @@ msgstr "Vai alla riga"
 msgid "Save block"
 msgstr "Salva il blocco"
 
-#, fuzzy
 msgid "Cannot save block"
-msgstr "Non posso salvare il file"
+msgstr ""
 
 msgid "Insert file"
 msgstr "Inserisci file"
@@ -1216,9 +1215,8 @@ msgstr "Incolla l'uscita del comando esterno"
 msgid "Enter shell command(s):"
 msgstr "Inserire comandi shell:"
 
-#, fuzzy
 msgid "Cannot execute external command"
-msgstr "Non posso eseguire il comando"
+msgstr ""
 
 msgid "mail -s <subject> -c <cc> <to>"
 msgstr "mail -s <soggetto> -c <cc> <a>"
@@ -1612,9 +1610,8 @@ msgstr ""
 "Un semplice editor di testi\n"
 "scritto per il Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2025 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2024 the Free Software Foundation"
+msgstr ""
 
 msgid "About"
 msgstr "Informazioni"
@@ -2253,13 +2250,11 @@ msgstr ""
 "Non posso chattr \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
-"Non posso ottenere gli attributi del file sorgente \"%s\"\n"
-"%s"
 
 msgid "set &user ID on execution"
 msgstr "imposta &UID all'esecuzione"
@@ -2647,9 +2642,8 @@ msgstr ""
 "\"%s\"\n"
 "sono lo stesso file"
 
-#, fuzzy
 msgid "Ignore a&ll"
-msgstr "Ignor&a tutto"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2708,13 +2702,11 @@ msgstr ""
 "Non posso cancellare la directory \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot enter into directory \"%s\"\n"
 "%s"
 msgstr ""
-"Non posso sovrascrivere la cartella \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2751,21 +2743,17 @@ msgstr ""
 "Non posso fare fstat sul file sorgente \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
-"Non posso ottenere gli attributi del file sorgente \"%s\"\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
-"Non posso impostare gli attributi del file destinazione \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2878,13 +2866,11 @@ msgstr ""
 "Non posso chiudere il file destinazione \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
-"Non posso impostare gli attributi del file destinazione \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2894,13 +2880,11 @@ msgstr ""
 "Non posso ottenere info sulla cartella sorgente \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
-"Non posso ottenere gli attributi della cartella sorgente \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -3895,11 +3879,11 @@ msgstr ""
 "Se vuoi uscire, premi il tasto ESC una volta\n"
 "e attendi."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot accept this key.\n"
 "You have entered \"%s\""
-msgstr "Non posso accettare questo tasto"
+msgstr ""
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -4765,36 +4749,3 @@ msgstr "Continuare dall'inizio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Non posso ricevere copia locale di /ftp://un.host/modificami.txt"
-
-#~ msgid "Save as"
-#~ msgstr "Salva come"
-
-#~ msgid "Copy to clipboard"
-#~ msgstr "Copia negli appunti"
-
-#~ msgid "Cut to clipboard"
-#~ msgstr "Taglia negli appunti"
-
-#~ msgid "Sort block"
-#~ msgstr "Ordina il blocco"
-
-#~ msgid "Sort"
-#~ msgstr "Ordina"
-
-#~ msgid "External command"
-#~ msgstr "Comando esterno"
-
-#, c-format
-#~ msgid "You have entered \"%s\""
-#~ msgstr "Hai inserito \"%s\""
-
-#, c-format
-#~ msgid ""
-#~ "Cannot get flags of \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Non posso ottenere i flag di \"%s\"\n"
-#~ "%s"
-
-#~ msgid "Ski&p all"
-#~ msgstr "Sa&lta tutti"

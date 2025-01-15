@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-11 12:47+0300\n"
+"POT-Creation-Date: 2025-01-15 17:54+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>, 2021\n"
 "Language-Team: Finnish (http://app.transifex.com/mc/mc/language/fi/)\n"
@@ -938,9 +938,8 @@ msgstr ""
 msgid "Diff:"
 msgstr "Diff:"
 
-#, fuzzy
 msgid "File name is empty!"
-msgstr "Tiedostonimi:"
+msgstr ""
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -1143,9 +1142,8 @@ msgstr "Mene riville"
 msgid "Save block"
 msgstr "Tallenna alue"
 
-#, fuzzy
 msgid "Cannot save block"
-msgstr "Tiedostoa ei voi tallentaa"
+msgstr ""
 
 msgid "Insert file"
 msgstr "Lisää tiedosto"
@@ -1175,9 +1173,8 @@ msgstr "Liitä ulkoinen komento"
 msgid "Enter shell command(s):"
 msgstr "Anna shell komento:"
 
-#, fuzzy
 msgid "Cannot execute external command"
-msgstr "Komentoa voi suorittaa"
+msgstr ""
 
 msgid "mail -s <subject> -c <cc> <to>"
 msgstr "mail -s <subject> -c <cc> <to>"
@@ -2191,13 +2188,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
-"Kohdetiedostoa ei voi luoda \"%s\"\n"
-"%s"
 
 msgid "set &user ID on execution"
 msgstr ""
@@ -2546,9 +2541,8 @@ msgid ""
 "are the same file"
 msgstr ""
 
-#, fuzzy
 msgid "Ignore a&ll"
-msgstr "Ohita &kaikki"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2602,13 +2596,11 @@ msgstr ""
 "Kansiota \"%s\" ei voi poistaa\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot enter into directory \"%s\"\n"
 "%s"
 msgstr ""
-"Kansiota \"%s\" ei voi ylikirjoittaa\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2645,21 +2637,17 @@ msgstr ""
 "Lähdetiedostoa ei voi lisätä \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
-"Lähdetiedostoa ei voi lisätä \"%s\"\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
-"Ei onnistu fstat kohdetiedostoon \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2772,13 +2760,11 @@ msgstr ""
 "Kohdetiedostoa ei voi sulkea \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
-"Ei onnistu fstat kohdetiedostoon \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2788,13 +2774,11 @@ msgstr ""
 "Kohdekansiota ei voi lisätä \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
-"Kohdekansiota ei voi lisätä \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -4548,21 +4532,3 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "Save as"
-#~ msgstr "Tallenna nimellä"
-
-#~ msgid "Copy to clipboard"
-#~ msgstr "Kopioi leikepöydälle"
-
-#~ msgid "Cut to clipboard"
-#~ msgstr "Leikkaa leikepöydälle"
-
-#~ msgid "Sort block"
-#~ msgstr "Lajittele alue"
-
-#~ msgid "Sort"
-#~ msgstr "Lajittelu"
-
-#~ msgid "External command"
-#~ msgstr "Ulkoinen komento"

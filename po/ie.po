@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-11 12:47+0300\n"
+"POT-Creation-Date: 2025-01-15 17:54+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Interlingue (http://app.transifex.com/mc/mc/language/ie/)\n"
@@ -893,9 +893,8 @@ msgstr ""
 msgid "Diff:"
 msgstr ""
 
-#, fuzzy
 msgid "File name is empty!"
-msgstr "Nómine de file:"
+msgstr ""
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -1092,9 +1091,8 @@ msgstr "Ear a linea"
 msgid "Save block"
 msgstr "Gardar li bloc"
 
-#, fuzzy
 msgid "Cannot save block"
-msgstr "Gardar li bloc"
+msgstr ""
 
 msgid "Insert file"
 msgstr "Inserter un file"
@@ -2490,9 +2488,8 @@ msgid ""
 "are the same file"
 msgstr ""
 
-#, fuzzy
 msgid "Ignore a&ll"
-msgstr "Ignorar &omni"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2538,13 +2535,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot enter into directory \"%s\"\n"
 "%s"
 msgstr ""
-"chmod \"%s\" ne successat\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -4431,12 +4426,3 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "Save as"
-#~ msgstr "Gardar quam"
-
-#~ msgid "Sort block"
-#~ msgstr "Ordinar un bloc"
-
-#~ msgid "Sort"
-#~ msgstr "Ordinar"

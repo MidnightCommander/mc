@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-11 12:47+0300\n"
+"POT-Creation-Date: 2025-01-15 17:54+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: heskjestad, 2024\n"
 "Language-Team: Norwegian Bokmål (http://app.transifex.com/mc/mc/language/"
@@ -979,9 +979,8 @@ msgstr ""
 msgid "Diff:"
 msgstr "Diff:"
 
-#, fuzzy
 msgid "File name is empty!"
-msgstr "Filnavn:"
+msgstr "Filnavnet er tomt!"
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -1186,9 +1185,8 @@ msgstr "Gå til linje"
 msgid "Save block"
 msgstr "Lagre blokk"
 
-#, fuzzy
 msgid "Cannot save block"
-msgstr "Klarte ikke lagre fil"
+msgstr ""
 
 msgid "Insert file"
 msgstr "Sett inn fil"
@@ -1220,9 +1218,8 @@ msgstr "Lim inn utdata fra ekstern kommando"
 msgid "Enter shell command(s):"
 msgstr "Angi skallkommando(er):"
 
-#, fuzzy
 msgid "Cannot execute external command"
-msgstr "Klarte ikke kjøre kommando"
+msgstr ""
 
 msgid "mail -s <subject> -c <cc> <to>"
 msgstr "mail -s <emne> -c <kopi til> <til>"
@@ -1616,9 +1613,8 @@ msgstr ""
 "Et brukervennlig skriveprogram\n"
 "skrevet for Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2025 the Free Software Foundation"
-msgstr "Opphavsrett (C) 1996-2024 Free Software Foundation"
+msgstr ""
 
 msgid "About"
 msgstr "Om"
@@ -2256,12 +2252,12 @@ msgstr ""
 "chattr mislyktes for «%s»\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
-"Klarte ikke hente attributtene til kildefila «%s»\n"
+"Klarte ikke hente ext2-attributtene til «%s»\n"
 "%s"
 
 msgid "set &user ID on execution"
@@ -2650,9 +2646,8 @@ msgstr ""
 "«%s»\n"
 "er samme fil"
 
-#, fuzzy
 msgid "Ignore a&ll"
-msgstr "Ignorer &alle"
+msgstr "Ignorer a&lle"
 
 #, c-format
 msgid ""
@@ -2711,13 +2706,11 @@ msgstr ""
 "Klarte ikke slette mappa «%s»\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot enter into directory \"%s\"\n"
 "%s"
 msgstr ""
-"Klarte ikke overskrive mappa «%s»\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2754,20 +2747,20 @@ msgstr ""
 "stat() mislyktes for kildefila «%s»\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
-"Klarte ikke hente attributtene til kildefila «%s»\n"
+"Klarte ikke hente ext2-attributtene til kildefila «%s»\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
-"Klarte ikke skrive attributtene til målfila «%s»\n"
+"Klarte ikke skrive ext2-attributtene til målfila «%s»\n"
 "%s"
 
 #, c-format
@@ -2881,12 +2874,12 @@ msgstr ""
 "Klarte ikke lukke målfila «%s»\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
-"Klarte ikke skrive attributtene til målfila «%s»\n"
+"Klarte ikke skrive ext2-attributtene til målfila «%s»\n"
 "%s"
 
 #, c-format
@@ -2897,12 +2890,12 @@ msgstr ""
 "stat() mislyktes for kildemappa «%s»\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
-"Klarte ikke hente attributtene til kildemappa «%s»\n"
+"Klarte ikke hente ext2-attributtene til kildemappa «%s»\n"
 "%s"
 
 #, c-format
@@ -3893,11 +3886,11 @@ msgstr ""
 "\n"
 "Trykk Escape og vent litt for å avbryte."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot accept this key.\n"
 "You have entered \"%s\""
-msgstr "Kan ikke godta denne tasten"
+msgstr ""
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -4766,36 +4759,3 @@ msgstr "Fortsett fra begynnelsen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Klarte ikke hente en lokal kopi av /ftp://some.host/editme.txt"
-
-#~ msgid "Save as"
-#~ msgstr "Lagre som"
-
-#~ msgid "Copy to clipboard"
-#~ msgstr "Kopier til utklippstavle"
-
-#~ msgid "Cut to clipboard"
-#~ msgstr "Klipp ut til utklippstavle"
-
-#~ msgid "Sort block"
-#~ msgstr "Sorter blokk"
-
-#~ msgid "Sort"
-#~ msgstr "Sortering"
-
-#~ msgid "External command"
-#~ msgstr "Ekstern kommando"
-
-#, c-format
-#~ msgid "You have entered \"%s\""
-#~ msgstr "Du tastet «%s»"
-
-#, c-format
-#~ msgid ""
-#~ "Cannot get flags of \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Klarte ikke hente flaggene til «%s»\n"
-#~ "%s"
-
-#~ msgid "Ski&p all"
-#~ msgstr "H&opp over alle"

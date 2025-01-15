@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-11 12:47+0300\n"
+"POT-Creation-Date: 2025-01-15 17:54+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
 "Language-Team: Spanish (http://app.transifex.com/mc/mc/language/es/)\n"
@@ -978,9 +978,8 @@ msgstr ""
 msgid "Diff:"
 msgstr "Diff:"
 
-#, fuzzy
 msgid "File name is empty!"
-msgstr "Archivos:"
+msgstr "¡Nombre de archivo vacío!"
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -1187,9 +1186,8 @@ msgstr "Ir a la línea"
 msgid "Save block"
 msgstr "Guardar bloque"
 
-#, fuzzy
 msgid "Cannot save block"
-msgstr "Imposible guardar el archivo."
+msgstr "Imposible guardar el bloque."
 
 msgid "Insert file"
 msgstr "Insertar archivo"
@@ -1219,9 +1217,8 @@ msgstr "Pegar desde otro programa"
 msgid "Enter shell command(s):"
 msgstr "Orden a ejecutar:"
 
-#, fuzzy
 msgid "Cannot execute external command"
-msgstr "Imposible ejecutar la orden"
+msgstr "Imposible ejecutar programa"
 
 msgid "mail -s <subject> -c <cc> <to>"
 msgstr "mail -s <tema> -c <cc> <para>"
@@ -1615,9 +1612,8 @@ msgstr ""
 "Un editor de texto amigable\n"
 "para Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2025 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2024 the Free Software Foundation"
+msgstr "Copyright (C) 1996-2025 the Free Software Foundation"
 
 msgid "About"
 msgstr "Acerca de..."
@@ -2255,12 +2251,12 @@ msgstr ""
 "Imposible chattr a «%s»\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
-"Imposible obtener atributos del archivo origen «%s»\n"
+"Imposible obtener atributos ext2 de «%s»\n"
 "%s"
 
 msgid "set &user ID on execution"
@@ -2650,7 +2646,6 @@ msgstr ""
 "«%s»\n"
 "son el mismo archivo"
 
-#, fuzzy
 msgid "Ignore a&ll"
 msgstr "ignorar &Todos"
 
@@ -2710,12 +2705,12 @@ msgstr ""
 "Imposible eliminar el directorio «%s»\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot enter into directory \"%s\"\n"
 "%s"
 msgstr ""
-"Imposible sobrescribir el directorio «%s»\n"
+"Imposible acceder al directorio «%s»\n"
 "%s"
 
 #, c-format
@@ -2753,20 +2748,20 @@ msgstr ""
 "Imposible identificar el archivo origen «%s»\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
-"Imposible obtener atributos del archivo origen «%s»\n"
+"Imposible obtener atributos ext2 del archivo origen «%s»\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
-"Imposible establecer atributos del archivo destino «%s»\n"
+"Imposible establecer atributos ext2 del archivo destino «%s»\n"
 "%s"
 
 #, c-format
@@ -2880,12 +2875,12 @@ msgstr ""
 "Imposible cerrar el archivo destino «%s»\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
-"Imposible establecer atributos para el archivo destino «%s»\n"
+"Imposible establecer atributos ext2 para el archivo destino «%s»\n"
 "%s"
 
 #, c-format
@@ -2896,12 +2891,12 @@ msgstr ""
 "Imposible identificar el directorio de origen «%s»\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
-"Imposible obtener atributos del directorio de origen «%s»\n"
+"Imposible obtener atributos ext2 del directorio de origen «%s»\n"
 "%s"
 
 #, c-format
@@ -3897,11 +3892,13 @@ msgstr ""
 "Para abortar, presione una vez\n"
 "la tecla «Escape» y espere."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot accept this key.\n"
 "You have entered \"%s\""
-msgstr "Imposible aceptar esta tecla"
+msgstr ""
+"Imposible aceptar esta tecla.\n"
+"Ha introducido «%s»."
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -4766,36 +4763,3 @@ msgstr "¿Continuar desde el principio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Imposible obtener una copia local de /ftp://ese.equipo/edítame.txt"
-
-#~ msgid "Save as"
-#~ msgstr "Guardar como"
-
-#~ msgid "Copy to clipboard"
-#~ msgstr "Copiar al portapapeles"
-
-#~ msgid "Cut to clipboard"
-#~ msgstr "Cortar al portapapeles"
-
-#~ msgid "Sort block"
-#~ msgstr "Ordenar bloque de texto"
-
-#~ msgid "Sort"
-#~ msgstr "Ordenar"
-
-#~ msgid "External command"
-#~ msgstr "Programa externo"
-
-#, c-format
-#~ msgid "You have entered \"%s\""
-#~ msgstr "Usted tecleó «%s»"
-
-#, c-format
-#~ msgid ""
-#~ "Cannot get flags of \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Imposible conseguir atributos de «%s»\n"
-#~ "%s"
-
-#~ msgid "Ski&p all"
-#~ msgstr "saltar &Todos"

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-11 12:47+0300\n"
+"POT-Creation-Date: 2025-01-15 17:54+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: 6bdcf737f9bcb6037ecba892a70fb951_e9eeb40 "
 "<b76b5e2faba6aa74d4498ee4c87ab010_661337>, 2020\n"
@@ -937,9 +937,8 @@ msgstr ""
 msgid "Diff:"
 msgstr "Diff:"
 
-#, fuzzy
 msgid "File name is empty!"
-msgstr "Fájlnév:"
+msgstr ""
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -1144,9 +1143,8 @@ msgstr "Ugrás adott sorra"
 msgid "Save block"
 msgstr "Blokk mentése"
 
-#, fuzzy
 msgid "Cannot save block"
-msgstr "Nem sikerült a mentés."
+msgstr ""
 
 msgid "Insert file"
 msgstr "Fájl beszúrása"
@@ -1176,9 +1174,8 @@ msgstr "Külső parancs kimenetének beillesztése"
 msgid "Enter shell command(s):"
 msgstr "Shell-parancs(ok):"
 
-#, fuzzy
 msgid "Cannot execute external command"
-msgstr "A parancs nem hajtható végre"
+msgstr ""
 
 msgid "mail -s <subject> -c <cc> <to>"
 msgstr "mail -s <tárgy> -c <másolat> <címzett>"
@@ -2203,13 +2200,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
-"Nem sikerült létrehozni a(z) \"%s\" célfájlt. \n"
-"%s"
 
 msgid "set &user ID on execution"
 msgstr "&felhasználó-azonosító beállítása végrehajtáskor"
@@ -2575,9 +2570,8 @@ msgstr ""
 "\"%s\" \n"
 "ugyanaz a fájl"
 
-#, fuzzy
 msgid "Ignore a&ll"
-msgstr "&Nem érdekes, tovább"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2635,13 +2629,11 @@ msgstr ""
 "A(z) \"%s\" könyvtár nem törölhető \n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot enter into directory \"%s\"\n"
 "%s"
 msgstr ""
-"A(z) \"%s\" könyvtár nem felülírható \n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2678,22 +2670,17 @@ msgstr ""
 "A(z) \"%s\" forrásfájl adatai nem elérhetők \n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
-"A(z) \"%s\" forrásfájl adatai nem elérhetők \n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
-"Nem sikerült lekérdezni a(z) \"%s\" \n"
-"célfájl adatait. \n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2809,14 +2796,11 @@ msgstr ""
 "Nem sikerült lezárni a(z) \"%s\" célfájlt. \n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
-"Nem sikerült lekérdezni a(z) \"%s\" \n"
-"célfájl adatait. \n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2827,14 +2811,11 @@ msgstr ""
 "forráskönyvtár adatait. \n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
-"Nem sikerült lekérdezni a(z) \"%s\" \n"
-"forráskönyvtár adatait. \n"
-"%s"
 
 #, c-format
 msgid ""
@@ -3820,11 +3801,11 @@ msgstr ""
 "\n"
 "Kilépéshez használja az \"Escape\" billentyűt."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot accept this key.\n"
 "You have entered \"%s\""
-msgstr "Ez a billentyű nem használható erre"
+msgstr ""
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -4655,28 +4636,3 @@ msgstr "Folytatás az elejéről?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nem sikerült behozni /ftp://some.host/editme.txt helyi másolatát"
-
-#~ msgid "Save as"
-#~ msgstr "Mentés másként"
-
-#~ msgid "Copy to clipboard"
-#~ msgstr "Másolás vágólapra"
-
-#~ msgid "Cut to clipboard"
-#~ msgstr "Kivágás a vágólapra"
-
-#~ msgid "Sort block"
-#~ msgstr "Blokk rendezése"
-
-#~ msgid "Sort"
-#~ msgstr "Rendezés"
-
-#~ msgid "External command"
-#~ msgstr "Külső parancs"
-
-#, c-format
-#~ msgid "You have entered \"%s\""
-#~ msgstr "Ezt adta meg: \"%s\""
-
-#~ msgid "Ski&p all"
-#~ msgstr "Ö&sszes kihagyása"

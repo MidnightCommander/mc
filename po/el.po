@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-11 12:47+0300\n"
+"POT-Creation-Date: 2025-01-15 17:54+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Efstathios Iosifidis <iefstathios@gmail.com>, 2015\n"
 "Language-Team: Greek (http://app.transifex.com/mc/mc/language/el/)\n"
@@ -914,9 +914,8 @@ msgstr ""
 msgid "Diff:"
 msgstr ""
 
-#, fuzzy
 msgid "File name is empty!"
-msgstr "Όνομα αρχείου:"
+msgstr ""
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -1117,9 +1116,8 @@ msgstr "Μετακίνηση στη γραμμή"
 msgid "Save block"
 msgstr ""
 
-#, fuzzy
 msgid "Cannot save block"
-msgstr "Δεν ήταν δυνατή η αποθήκευση του αρχείου"
+msgstr ""
 
 msgid "Insert file"
 msgstr "Εισαγωγή αρχείου"
@@ -1149,9 +1147,8 @@ msgstr "Επικόλληση εξόδου της εξωτερικής εντολ
 msgid "Enter shell command(s):"
 msgstr "Εισάγετε εντολή(-ές) κελύφους:"
 
-#, fuzzy
 msgid "Cannot execute external command"
-msgstr "Αδυναμία εκτέλεσης εντολής"
+msgstr ""
 
 msgid "mail -s <subject> -c <cc> <to>"
 msgstr "mail -s <θέμα> -c <cc> <προς>"
@@ -2165,13 +2162,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
-"Αδυναμία δημιουργίας αρχείου στόχου \"%s\"\n"
-"%s"
 
 msgid "set &user ID on execution"
 msgstr ""
@@ -2532,9 +2527,8 @@ msgstr ""
 "\"%s\"\n"
 "είναι το ίδιο αρχείο"
 
-#, fuzzy
 msgid "Ignore a&ll"
-msgstr "&Παράβλεψη κλειδώματος"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2586,13 +2580,11 @@ msgstr ""
 "Αδυναμία αφαίρεσης καταλόγου \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot enter into directory \"%s\"\n"
 "%s"
 msgstr ""
-"Αδυναμία αντικατάστασης καταλόγου \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2627,21 +2619,17 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
-"Αδυναμία ανοίγματος πηγαίου αρχείου \"%s\"\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
-"Αδυναμία εγγραφής στο αρχείο στόχο \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2746,13 +2734,11 @@ msgstr ""
 "Αδυναμία κλεισίματος αρχείου στόχου \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
-"Αδυναμία εγγραφής στο αρχείο στόχο \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2760,13 +2746,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
-"Αδυναμία δημιουργίας καταλόγου στόχου \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -3746,11 +3730,11 @@ msgstr ""
 "Αν θέλετε να φύγετε, πατήστε το πλήκτρο Escape\n"
 "και περιμένετε."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot accept this key.\n"
 "You have entered \"%s\""
-msgstr "Το κουμπί δεν μπορεί να γίνει δεκτό"
+msgstr ""
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -4558,22 +4542,3 @@ msgstr "Συνέχεια από την αρχή;"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "Save as"
-#~ msgstr "Αποθήκευση ως"
-
-#~ msgid "Copy to clipboard"
-#~ msgstr "Αντιγραφή στο πρόχειρο"
-
-#~ msgid "Cut to clipboard"
-#~ msgstr "Αποκοπή στο πρόχειρο"
-
-#~ msgid "External command"
-#~ msgstr "Εξωτερική εντολή"
-
-#, c-format
-#~ msgid "You have entered \"%s\""
-#~ msgstr "Εισάγατε \"%s\""
-
-#~ msgid "Ski&p all"
-#~ msgstr "&Παράβλεψη όλων"

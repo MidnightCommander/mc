@@ -3,24 +3,24 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# Piotr Drąg <piotrdrag@gmail.com>, 2011-2024
+# Piotr Drąg <piotrdrag@gmail.com>, 2011-2025
 # Slava Zanko <slavazanko@gmail.com>, 2011
 # Waldemar Stoczkowski, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-11 12:47+0300\n"
+"POT-Creation-Date: 2025-01-15 17:54+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>, 2011-2024\n"
+"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>, 2011-2025\n"
 "Language-Team: Polish (http://app.transifex.com/mc/mc/language/pl/)\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n"
-"%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n"
-"%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && "
+"(n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && "
+"n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -980,9 +980,8 @@ msgstr ""
 msgid "Diff:"
 msgstr "Różnica:"
 
-#, fuzzy
 msgid "File name is empty!"
-msgstr "Nazwa pliku:"
+msgstr "Nazwa pliku jest pusta."
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -1187,9 +1186,8 @@ msgstr "Przejście do wiersza"
 msgid "Save block"
 msgstr "Zapisz blok"
 
-#, fuzzy
 msgid "Cannot save block"
-msgstr "Nie można zapisać pliku"
+msgstr "Nie można zapisać bloku"
 
 msgid "Insert file"
 msgstr "Wstaw plik"
@@ -1221,9 +1219,8 @@ msgstr "Wklej wyjście zewnętrznego polecenia"
 msgid "Enter shell command(s):"
 msgstr "Polecenia powłoki:"
 
-#, fuzzy
 msgid "Cannot execute external command"
-msgstr "Nie można wykonać polecenia"
+msgstr "Nie można wykonać zewnętrznego polecenia"
 
 msgid "mail -s <subject> -c <cc> <to>"
 msgstr "mail -s <temat> -c <cc> <do>"
@@ -1617,9 +1614,8 @@ msgstr ""
 "Łatwy w obsłudze edytor tekstu,\n"
 "napisany dla programu Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2025 the Free Software Foundation"
-msgstr "Copyright © 1996-2024 Free Software Foundation"
+msgstr "Copyright © 1996-2025 Free Software Foundation"
 
 msgid "About"
 msgstr "O programie"
@@ -2256,12 +2252,12 @@ msgstr ""
 "Nie można wykonać polecenia chattr na „%s”\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
-"Nie można uzyskać atrybutów pliku źródłowego „%s”\n"
+"Nie można uzyskać atrybutów ext2 „%s”\n"
 "%s"
 
 msgid "set &user ID on execution"
@@ -2651,7 +2647,6 @@ msgstr ""
 "„%s”\n"
 "to ten sam plik"
 
-#, fuzzy
 msgid "Ignore a&ll"
 msgstr "Zignoruj &wszystko"
 
@@ -2712,12 +2707,12 @@ msgstr ""
 "Nie można usunąć katalogu „%s”\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot enter into directory \"%s\"\n"
 "%s"
 msgstr ""
-"Nie można zastąpić katalogu „%s”\n"
+"Nie można przejść do katalogu „%s”\n"
 "%s"
 
 #, c-format
@@ -2755,20 +2750,20 @@ msgstr ""
 "Nie można wykonać polecenia stat na pliku źródłowym „%s”\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
-"Nie można uzyskać atrybutów pliku źródłowego „%s”\n"
+"Nie można uzyskać atrybutów ext2 pliku źródłowego „%s”\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
-"Nie można ustawić atrybutów pliku docelowego „%s”\n"
+"Nie można ustawić atrybutów ext2 pliku docelowego „%s”\n"
 "%s"
 
 #, c-format
@@ -2882,12 +2877,12 @@ msgstr ""
 "Nie można zamknąć pliku docelowego „%s”\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
-"Nie można ustawić atrybutów dla pliku docelowego „%s”\n"
+"Nie można ustawić atrybutów ext2 dla pliku docelowego „%s”\n"
 "%s"
 
 #, c-format
@@ -2898,12 +2893,12 @@ msgstr ""
 "Nie można wykonać polecenia stat na katalogu źródłowym „%s”\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
-"Nie można uzyskać atrybutów katalogu źródłowego „%s”\n"
+"Nie można uzyskać atrybutów ext2 katalogu źródłowego „%s”\n"
 "%s"
 
 #, c-format
@@ -3904,11 +3899,13 @@ msgstr ""
 "Aby zrezygnować, należy nacisnąć klawisz Escape\n"
 "i poczekać."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot accept this key.\n"
 "You have entered \"%s\""
-msgstr "Nie można zaakceptować tego klawisza"
+msgstr ""
+"Nie można zaakceptować tego klawisza.\n"
+"Wprowadzono „%s”"
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -4779,36 +4776,3 @@ msgstr "Kontynuować od początku?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Nie można pobrać lokalnej kopii /ftp://jakiś.komputer/modyfikuj_mnie.txt"
-
-#~ msgid "Save as"
-#~ msgstr "Zapisz jako"
-
-#~ msgid "Copy to clipboard"
-#~ msgstr "Skopiuj do schowka"
-
-#~ msgid "Cut to clipboard"
-#~ msgstr "Wytnij do schowka"
-
-#~ msgid "Sort block"
-#~ msgstr "Posortuj blok"
-
-#~ msgid "Sort"
-#~ msgstr "Posortuj"
-
-#~ msgid "External command"
-#~ msgstr "Zewnętrzne polecenie"
-
-#, c-format
-#~ msgid "You have entered \"%s\""
-#~ msgstr "Wprowadzono „%s”"
-
-#, c-format
-#~ msgid ""
-#~ "Cannot get flags of \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Nie można uzyskać flag „%s”\n"
-#~ "%s"
-
-#~ msgid "Ski&p all"
-#~ msgstr "&Pomiń wszystko"

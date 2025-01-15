@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-11 12:47+0300\n"
+"POT-Creation-Date: 2025-01-15 17:54+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Arya Hadi <arya.hadi97@gmail.com>, 2017\n"
 "Language-Team: Persian (http://app.transifex.com/mc/mc/language/fa/)\n"
@@ -898,9 +898,8 @@ msgstr ""
 msgid "Diff:"
 msgstr ""
 
-#, fuzzy
 msgid "File name is empty!"
-msgstr "نام فایل:"
+msgstr ""
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -1097,9 +1096,8 @@ msgstr "برو به خط"
 msgid "Save block"
 msgstr ""
 
-#, fuzzy
 msgid "Cannot save block"
-msgstr "نمی‌توان فایل را ذخیره کرد"
+msgstr ""
 
 msgid "Insert file"
 msgstr "درج فایل"
@@ -1129,9 +1127,8 @@ msgstr ""
 msgid "Enter shell command(s):"
 msgstr ""
 
-#, fuzzy
 msgid "Cannot execute external command"
-msgstr "فرمان قابل اجرا نیست"
+msgstr ""
 
 msgid "mail -s <subject> -c <cc> <to>"
 msgstr ""
@@ -3645,11 +3642,11 @@ msgid ""
 "and wait as well."
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot accept this key.\n"
 "You have entered \"%s\""
-msgstr "شما \"%s\" را وارد کرده‌اید"
+msgstr ""
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -4428,9 +4425,3 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "Sort"
-#~ msgstr "مرتب‌سازی"
-
-#~ msgid "External command"
-#~ msgstr "فرمان خارجی"

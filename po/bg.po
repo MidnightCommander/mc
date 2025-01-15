@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-11 12:47+0300\n"
+"POT-Creation-Date: 2025-01-15 17:54+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Alexander Shopov <ash@kambanaria.org>, 2022\n"
 "Language-Team: Bulgarian (http://app.transifex.com/mc/mc/language/bg/)\n"
@@ -954,9 +954,8 @@ msgstr ""
 msgid "Diff:"
 msgstr "Разлика:"
 
-#, fuzzy
 msgid "File name is empty!"
-msgstr "Име на файл:"
+msgstr ""
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -1161,9 +1160,8 @@ msgstr "Към ред"
 msgid "Save block"
 msgstr "Запис на блок"
 
-#, fuzzy
 msgid "Cannot save block"
-msgstr "Не може да се запише файл"
+msgstr ""
 
 msgid "Insert file"
 msgstr "Вмъкване на файл"
@@ -1195,9 +1193,8 @@ msgstr "Вмъкване на изхода от външна команда"
 msgid "Enter shell command(s):"
 msgstr "Въвеждане на конзолна команда(и):"
 
-#, fuzzy
 msgid "Cannot execute external command"
-msgstr "Грешка при изпълнение на команда"
+msgstr ""
 
 msgid "mail -s <subject> -c <cc> <to>"
 msgstr "mail -s <ТЕМА> -c <ДОП_ПОЛУЧАТЕЛ> <ПОЛУЧАТЕЛ>"
@@ -2227,13 +2224,11 @@ msgstr ""
 "Неуспешно изпълнение на chattr „%s“\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
-"Не може да се получат флаговете на „%s“\n"
-"%s"
 
 msgid "set &user ID on execution"
 msgstr "изпълнение с UID на &собственика"
@@ -2608,9 +2603,8 @@ msgstr ""
 "„%s“\n"
 "са един и същи файл"
 
-#, fuzzy
 msgid "Ignore a&ll"
-msgstr "Прескачане на &всички"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2669,13 +2663,11 @@ msgstr ""
 "Не може да се изтрие директорията „%s“\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot enter into directory \"%s\"\n"
 "%s"
 msgstr ""
-"Не може да се презапише директорията „%s“\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2712,21 +2704,17 @@ msgstr ""
 "Не може да се изпълни stat върху изходния файл „%s“\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
-"Не може да се изпълни stat върху изходния файл „%s“\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
-"Не може да се изпълни fstat върху целевия файл „%s“\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2839,13 +2827,11 @@ msgstr ""
 "Не може да се затвори целевият файл „%s“\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
-"Не може да се изпълни fstat върху целевия файл „%s“\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2855,13 +2841,11 @@ msgstr ""
 "Не може да се изпълне stat върху изходната директория „%s“\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
-"Не може да се изпълне stat върху изходната директория „%s“\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -3852,11 +3836,11 @@ msgstr ""
 "За да излезете, натиснете веднъж Escape\n"
 "и изчакайте."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot accept this key.\n"
 "You have entered \"%s\""
-msgstr "Не може да се приеме този клавиш"
+msgstr ""
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -4715,28 +4699,3 @@ msgstr "Да се продължи ли от началото?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не може да се изтегли локално копие на „/ftp://some.host/editme.txt“"
-
-#~ msgid "Save as"
-#~ msgstr "Запис като"
-
-#~ msgid "Copy to clipboard"
-#~ msgstr "Копиране в буфера"
-
-#~ msgid "Cut to clipboard"
-#~ msgstr "Изрязване в буфера"
-
-#~ msgid "Sort block"
-#~ msgstr "Подредба на блок"
-
-#~ msgid "Sort"
-#~ msgstr "Подредба"
-
-#~ msgid "External command"
-#~ msgstr "Външна команда"
-
-#, c-format
-#~ msgid "You have entered \"%s\""
-#~ msgstr "Въведохте „%s“"
-
-#~ msgid "Ski&p all"
-#~ msgstr "Проп&ускане всички"

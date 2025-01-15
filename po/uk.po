@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-11 12:47+0300\n"
+"POT-Creation-Date: 2025-01-15 17:54+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Rostyslav Haitkulov <info@ubilling.net.ua>, 2023\n"
 "Language-Team: Ukrainian (http://app.transifex.com/mc/mc/language/uk/)\n"
@@ -963,9 +963,8 @@ msgstr "Midnight Commander закривається. Зберегти зміне
 msgid "Diff:"
 msgstr "Різниця:"
 
-#, fuzzy
 msgid "File name is empty!"
-msgstr "Назва файлу:"
+msgstr ""
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -1170,9 +1169,8 @@ msgstr "Перейти на рядок"
 msgid "Save block"
 msgstr "Зберегти блок"
 
-#, fuzzy
 msgid "Cannot save block"
-msgstr "Не вдалося зберегти файл"
+msgstr ""
 
 msgid "Insert file"
 msgstr "Вставити файл"
@@ -1203,9 +1201,8 @@ msgstr "Вставити вивід зовнішньої команди"
 msgid "Enter shell command(s):"
 msgstr "Введіть команди оболонки:"
 
-#, fuzzy
 msgid "Cannot execute external command"
-msgstr "Не вдалося виконати команду"
+msgstr ""
 
 msgid "mail -s <subject> -c <cc> <to>"
 msgstr "mail -s <Тема> -c <Копії> <До>"
@@ -2233,13 +2230,11 @@ msgstr ""
 "Не вдалося змінити атрибути \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
-"Не вдалося отримати прапорець \"%s\"\n"
-"%s"
 
 msgid "set &user ID on execution"
 msgstr "встановити ID &користувача на виконання"
@@ -2617,9 +2612,8 @@ msgstr ""
 "«%s»\n"
 "є одним і тим же файлом "
 
-#, fuzzy
 msgid "Ignore a&ll"
-msgstr "Ігнорувати &все"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2678,13 +2672,11 @@ msgstr ""
 "Не вдалося видалити каталог «%s»\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot enter into directory \"%s\"\n"
 "%s"
 msgstr ""
-"Не вдалося перезаписати каталог «%s»\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2719,21 +2711,17 @@ msgstr ""
 "Не вдалося отримати властивості вихідного файлу «%s»\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
-"Не вдалося отримати властивості вихідного файлу «%s»\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
-"Не вдалося отримати властивості цільового файлу «%s»\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2846,13 +2834,11 @@ msgstr ""
 "Не вдалося закрити цільовий файл «%s»\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
-"Не вдалося отримати властивості цільового файлу «%s»\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2862,13 +2848,11 @@ msgstr ""
 "Не вдавдалосяться отримати властивості вихідного каталогу «%s»\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
-"Не вдавдалосяться отримати властивості вихідного каталогу «%s»\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -3868,11 +3852,11 @@ msgstr ""
 "Якщо необхідно скасувати навчання, натисніть\n"
 "клавішу Esc і також зачекайте."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot accept this key.\n"
 "You have entered \"%s\""
-msgstr "Не вдалося прийняти цю клавішу"
+msgstr ""
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -4733,28 +4717,3 @@ msgstr "Почати спочатку?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не вдалося отримати локальну копію /ftp://some.host/editme.txt"
-
-#~ msgid "Save as"
-#~ msgstr "Зберегти як"
-
-#~ msgid "Copy to clipboard"
-#~ msgstr "Скопіювати в буфер"
-
-#~ msgid "Cut to clipboard"
-#~ msgstr "Вирізати в буфер"
-
-#~ msgid "Sort block"
-#~ msgstr "Сортувати блок"
-
-#~ msgid "Sort"
-#~ msgstr "Сортування"
-
-#~ msgid "External command"
-#~ msgstr "Зовнішня команда"
-
-#, c-format
-#~ msgid "You have entered \"%s\""
-#~ msgstr "Введено «%s»"
-
-#~ msgid "Ski&p all"
-#~ msgstr "П&ропустити все"

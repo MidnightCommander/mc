@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-11 12:47+0300\n"
+"POT-Creation-Date: 2025-01-15 17:54+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Matej Urbančič <>, 2012\n"
 "Language-Team: Slovenian (http://app.transifex.com/mc/mc/language/sl/)\n"
@@ -18,8 +18,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
-"%100==4 ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
+"n%100==4 ? 2 : 3);\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -1104,9 +1104,8 @@ msgstr ""
 msgid "Save block"
 msgstr ""
 
-#, fuzzy
 msgid "Cannot save block"
-msgstr "Ne morem razčleniti:"
+msgstr ""
 
 msgid "Insert file"
 msgstr ""
@@ -2498,9 +2497,8 @@ msgid ""
 "are the same file"
 msgstr ""
 
-#, fuzzy
 msgid "Ignore a&ll"
-msgstr "&Prezri zaklep"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2546,11 +2544,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot enter into directory \"%s\"\n"
 "%s"
-msgstr "Ne morem prebrati vsebine imenika"
+msgstr ""
 
 #, c-format
 msgid ""

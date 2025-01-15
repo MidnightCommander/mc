@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-11 12:47+0300\n"
+"POT-Creation-Date: 2025-01-15 17:54+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Miguel Anxo Bouzada <mbouzada@gmail.com>, "
 "2012,2014-2015,2019\n"
@@ -951,9 +951,8 @@ msgstr ""
 msgid "Diff:"
 msgstr "Diferenza:"
 
-#, fuzzy
 msgid "File name is empty!"
-msgstr "Nome do ficheiro:"
+msgstr ""
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -1158,9 +1157,8 @@ msgstr "Ir á liña"
 msgid "Save block"
 msgstr "Gardar o bloque"
 
-#, fuzzy
 msgid "Cannot save block"
-msgstr "Non é posíbel gardar o ficheiro"
+msgstr ""
 
 msgid "Insert file"
 msgstr "Inserir ficheiro"
@@ -1190,9 +1188,8 @@ msgstr "Pegar a saída dunha orde externa"
 msgid "Enter shell command(s):"
 msgstr "Orde(s) a executar:"
 
-#, fuzzy
 msgid "Cannot execute external command"
-msgstr "Non é posíbel executar a orde"
+msgstr ""
 
 msgid "mail -s <subject> -c <cc> <to>"
 msgstr "correo -s <asunto> -c <cc> <para>"
@@ -2219,13 +2216,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
-"Non é posíbel crear o ficheiro destino «%s»\n"
-"%s"
 
 msgid "set &user ID on execution"
 msgstr "Estabelecer o ID do &Ususrio na execución"
@@ -2600,9 +2595,8 @@ msgstr ""
 "«%s»\n"
 "son o mesmo ficheiro"
 
-#, fuzzy
 msgid "Ignore a&ll"
-msgstr "Ignorar &Todo"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2661,13 +2655,11 @@ msgstr ""
 "Non é posíbel eliminar o directorio «%s»\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot enter into directory \"%s\"\n"
 "%s"
 msgstr ""
-"Non é posíbel sobrescribir o directorio «%s»\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2704,21 +2696,17 @@ msgstr ""
 "Non é posíbel identificar o ficheiro orixe «%s»\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
-"Non é posíbel identificar o ficheiro orixe «%s»\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
-"Non é posíbel identificar o ficheiro destino «%s»\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2831,13 +2819,11 @@ msgstr ""
 "Non é posíbel pechar o ficheiro destino «%s»\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
-"Non é posíbel identificar o ficheiro destino «%s»\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2847,13 +2833,11 @@ msgstr ""
 "Non é posíbel identificar o directorio de orixe «%s»\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
-"Non é posíbel identificar o directorio de orixe «%s»\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -3839,11 +3823,11 @@ msgstr ""
 "Se quere cancelar, prema unha vez a tecla «Escape»\n"
 "e agarde."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot accept this key.\n"
 "You have entered \"%s\""
-msgstr "Non se pode aceptar esta tecla"
+msgstr ""
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -4675,28 +4659,3 @@ msgstr "Continuar desde o principio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Non é posíbel obter unha copia local de /ftp://some.host/editme.txt"
-
-#~ msgid "Save as"
-#~ msgstr "Gardar como"
-
-#~ msgid "Copy to clipboard"
-#~ msgstr "Copiar ao portapapeis"
-
-#~ msgid "Cut to clipboard"
-#~ msgstr "Cortar ao portapapeis"
-
-#~ msgid "Sort block"
-#~ msgstr "Ordenar bloque"
-
-#~ msgid "Sort"
-#~ msgstr "Ordenar"
-
-#~ msgid "External command"
-#~ msgstr "Orde externa"
-
-#, c-format
-#~ msgid "You have entered \"%s\""
-#~ msgstr "Vostede escribiu «%s»"
-
-#~ msgid "Ski&p all"
-#~ msgstr "Omitir &Todos"

@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
+# Appukonrad <appukonrad@gmail.com>, 2024
 # Appukonrad <appukonrad@gmail.com>, 2015,2017
 # k3dar, 2020-2021
 # Karel Kopecky <kdkopx@protonmail.com>, 2017
@@ -14,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-11 12:47+0300\n"
+"POT-Creation-Date: 2025-01-15 17:54+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>, 2017-2023\n"
+"Last-Translator: Appukonrad <appukonrad@gmail.com>, 2024\n"
 "Language-Team: Czech (http://app.transifex.com/mc/mc/language/cs/)\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -794,7 +795,7 @@ msgid "Arguments parse error!"
 msgstr "Chyba vyhodnocování argumentů!"
 
 msgid "MC is built without builtin editor."
-msgstr ""
+msgstr "MC je postaven bez vestavěného editoru."
 
 msgid "No arguments given to the viewer."
 msgstr "Prohlížeči nebyly zadány žádné parametry"
@@ -956,9 +957,8 @@ msgstr ""
 msgid "Diff:"
 msgstr "Rozdíl:"
 
-#, fuzzy
 msgid "File name is empty!"
-msgstr "Název souboru:"
+msgstr ""
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -1163,9 +1163,8 @@ msgstr "Přejít na řádek"
 msgid "Save block"
 msgstr "Uložit blok"
 
-#, fuzzy
 msgid "Cannot save block"
-msgstr "Chyba při zápisu do souboru"
+msgstr ""
 
 msgid "Insert file"
 msgstr "Vložit soubor"
@@ -1195,9 +1194,8 @@ msgstr "Vložte výstup vnějšího příkazu"
 msgid "Enter shell command(s):"
 msgstr "Zadejte shellový(é) příkaz(y):"
 
-#, fuzzy
 msgid "Cannot execute external command"
-msgstr "Nedaří se spustit příkaz"
+msgstr ""
 
 msgid "mail -s <subject> -c <cc> <to>"
 msgstr "mail -s <předmět> -c <kopie> <komu>"
@@ -2231,13 +2229,11 @@ msgstr ""
 "Není možné chattr „%s“\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
-"Nedaří se získat příznaky „%s“\n"
-"%s"
 
 msgid "set &user ID on execution"
 msgstr "při spouštění nastavit identifikátor &uživatele"
@@ -2628,9 +2624,8 @@ msgstr ""
 "„%s“\n"
 "jsou stejný soubor"
 
-#, fuzzy
 msgid "Ignore a&ll"
-msgstr "Ignorov&at vše"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2689,13 +2684,11 @@ msgstr ""
 "Nelze smazat složku „%s“\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot enter into directory \"%s\"\n"
 "%s"
 msgstr ""
-"Nelze přepsat složku „%s“\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2732,21 +2725,17 @@ msgstr ""
 "Na zdrojovém souboru „%s“ nelze provést stat\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
-"Na zdrojovém souboru „%s“ nelze provést stat\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
-"Nelze provést fstat cílového souboru „%s“\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2859,13 +2848,11 @@ msgstr ""
 "Nelze zavřít cílový soubor „%s“\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
-"Nelze provést fstat cílového souboru „%s“\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2875,13 +2862,11 @@ msgstr ""
 "Na zdrojovém adresáři „%s“ nelze provést stat\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
-"Na zdrojovém adresáři „%s“ nelze provést stat\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -3880,11 +3865,11 @@ msgstr ""
 "Pokud chcete přerušit, stiskněte jednou klávesu Esc\n"
 "a opět vyčkejte."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot accept this key.\n"
 "You have entered \"%s\""
-msgstr "Tuto klávesu nelze přijmout"
+msgstr ""
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -3980,10 +3965,10 @@ msgid "The shell is still active. Quit anyway?"
 msgstr "Shell je stále aktivní, přesto ukončit?"
 
 msgid "With builtin editor and aspell support"
-msgstr ""
+msgstr "S vestavěným editorem a podporou aspell"
 
 msgid "With builtin editor"
-msgstr ""
+msgstr "S vestavěným editorem"
 
 msgid "With optional subshell support"
 msgstr "S volitelnou podporou podřízeného shellu"
@@ -4747,28 +4732,3 @@ msgstr "Pokračovat od začátku?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nedaří získat místní kopii souboru /ftp://some.host/editme.txt"
-
-#~ msgid "Save as"
-#~ msgstr "Uložit jako"
-
-#~ msgid "Copy to clipboard"
-#~ msgstr "Zkopírovat do schránky"
-
-#~ msgid "Cut to clipboard"
-#~ msgstr "Vyjmout do schránky"
-
-#~ msgid "Sort block"
-#~ msgstr "Setřídit blok"
-
-#~ msgid "Sort"
-#~ msgstr "Setřídit"
-
-#~ msgid "External command"
-#~ msgstr "Vnější příkaz"
-
-#, c-format
-#~ msgid "You have entered \"%s\""
-#~ msgstr "Zadali jste „%s“"
-
-#~ msgid "Ski&p all"
-#~ msgstr "&Přeskočit vše"

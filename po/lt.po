@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-11 12:47+0300\n"
+"POT-Creation-Date: 2025-01-15 17:54+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Mantas Kriaučiūnas Baltix <mantas@akl.lt>, 2020\n"
 "Language-Team: Lithuanian (http://app.transifex.com/mc/mc/language/lt/)\n"
@@ -933,9 +933,8 @@ msgstr ""
 msgid "Diff:"
 msgstr "Diff:"
 
-#, fuzzy
 msgid "File name is empty!"
-msgstr "Failo pavadinimas:"
+msgstr ""
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -1138,9 +1137,8 @@ msgstr "Eiti į eilutę"
 msgid "Save block"
 msgstr "Išsaugoti bloką"
 
-#, fuzzy
 msgid "Cannot save block"
-msgstr "Nepavyko išsaugoti failo"
+msgstr ""
 
 msgid "Insert file"
 msgstr "Įterpti failą"
@@ -1170,9 +1168,8 @@ msgstr "Įdėti išorinės komandos išvestį"
 msgid "Enter shell command(s):"
 msgstr "Įveskite aplinkos komandą (-as):"
 
-#, fuzzy
 msgid "Cannot execute external command"
-msgstr "Nepavyko įvykdyti išorinės komandos"
+msgstr ""
 
 msgid "mail -s <subject> -c <cc> <to>"
 msgstr ""
@@ -2190,13 +2187,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
-"Nepavyko perrašyti failo \"%s\"\n"
-"%s"
 
 msgid "set &user ID on execution"
 msgstr ""
@@ -2552,9 +2547,8 @@ msgid ""
 "are the same file"
 msgstr ""
 
-#, fuzzy
 msgid "Ignore a&ll"
-msgstr "&Ignoruoti užraktą"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2611,13 +2605,11 @@ msgstr ""
 "Nepavyko pašalinti aplanko \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot enter into directory \"%s\"\n"
 "%s"
 msgstr ""
-"Nepavyko perrašyti aplanko \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2652,21 +2644,17 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
-"Nepavyko perrašyti failo \"%s\"\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
-"Nepavyko sukurti aplanko \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2755,13 +2743,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
-"Nepavyko sukurti aplanko \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2769,13 +2755,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
-"Nepavyko sukurti aplanko \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -4581,18 +4565,3 @@ msgstr "Tęsti nuo pradžios?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "Save as"
-#~ msgstr "Išsaugoti kaip"
-
-#~ msgid "Sort block"
-#~ msgstr "Rikiuoti bloką"
-
-#~ msgid "Sort"
-#~ msgstr "Rikiuoti"
-
-#~ msgid "External command"
-#~ msgstr "Išorinė komanda"
-
-#~ msgid "Ski&p all"
-#~ msgstr "Praleisti viską"

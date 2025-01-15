@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-11 12:47+0300\n"
+"POT-Creation-Date: 2025-01-15 17:54+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>, 2022\n"
 "Language-Team: Georgian (http://app.transifex.com/mc/mc/language/ka/)\n"
@@ -901,9 +901,8 @@ msgstr ""
 msgid "Diff:"
 msgstr "განსხვავება:"
 
-#, fuzzy
 msgid "File name is empty!"
-msgstr "ფაილის სახელი:"
+msgstr ""
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -1100,9 +1099,8 @@ msgstr "გადასვლა ხაზზე"
 msgid "Save block"
 msgstr "ბლოკის შენახვა"
 
-#, fuzzy
 msgid "Cannot save block"
-msgstr "ფაილის შენახვა შეუძლებელია"
+msgstr ""
 
 msgid "Insert file"
 msgstr "ფაილის ჩასმა"
@@ -1132,9 +1130,8 @@ msgstr ""
 msgid "Enter shell command(s):"
 msgstr ""
 
-#, fuzzy
 msgid "Cannot execute external command"
-msgstr "ბრძანების შესრულება ვერ მოხერხდა"
+msgstr ""
 
 msgid "mail -s <subject> -c <cc> <to>"
 msgstr "mail -s <სათაური> -c <ასლები> <ვის>"
@@ -2502,9 +2499,8 @@ msgid ""
 "are the same file"
 msgstr ""
 
-#, fuzzy
 msgid "Ignore a&ll"
-msgstr "ყველას იგნორირება"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2552,11 +2548,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot enter into directory \"%s\"\n"
 "%s"
-msgstr "საქაღალდე %s-ის შექმნა შეუძლებელია"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -4441,24 +4437,3 @@ msgstr "თავიდან დავიწყო?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "Save as"
-#~ msgstr "შენახვა როგორც"
-
-#~ msgid "Copy to clipboard"
-#~ msgstr "გაცვლის ბუფერში კოპირება"
-
-#~ msgid "Cut to clipboard"
-#~ msgstr "ამოჭრა გაცვლის ბუფერში"
-
-#~ msgid "Sort block"
-#~ msgstr "დალაგების ბლოკირება"
-
-#~ msgid "Sort"
-#~ msgstr "დალაგება"
-
-#~ msgid "External command"
-#~ msgstr "გარე ბრძანება"
-
-#~ msgid "Ski&p all"
-#~ msgstr "&ყველას გამოტოვება"

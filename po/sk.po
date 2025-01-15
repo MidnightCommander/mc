@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-11 12:47+0300\n"
+"POT-Creation-Date: 2025-01-15 17:54+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: hualahyja, 2019\n"
 "Language-Team: Slovak (http://app.transifex.com/mc/mc/language/sk/)\n"
@@ -949,9 +949,8 @@ msgstr ""
 msgid "Diff:"
 msgstr "Rozdiel:"
 
-#, fuzzy
 msgid "File name is empty!"
-msgstr "Názov súboru:"
+msgstr ""
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -1156,9 +1155,8 @@ msgstr "Prejsť na riadok"
 msgid "Save block"
 msgstr "Uložiť blo"
 
-#, fuzzy
 msgid "Cannot save block"
-msgstr "Nemožno uložiť súbor"
+msgstr ""
 
 msgid "Insert file"
 msgstr "Vložiť súbor"
@@ -1188,9 +1186,8 @@ msgstr "Vložiť výstup externého príkazu"
 msgid "Enter shell command(s):"
 msgstr "Zadajte príkaz shellu:"
 
-#, fuzzy
 msgid "Cannot execute external command"
-msgstr "Nie je možné vykonať príkaz"
+msgstr ""
 
 msgid "mail -s <subject> -c <cc> <to>"
 msgstr "mail -s <predmet> -c <kópia> <komu>"
@@ -2216,13 +2213,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
-"Nemožno vytvoriť cieľový súbor „%s“\n"
-"%s"
 
 msgid "set &user ID on execution"
 msgstr "nastaviť ID po&užívateľa pri spustení"
@@ -2593,9 +2588,8 @@ msgstr ""
 "„%s“\n"
 "sú rovnaký súbor"
 
-#, fuzzy
 msgid "Ignore a&ll"
-msgstr "Ignorovať &všetky"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2654,13 +2648,11 @@ msgstr ""
 "Nemožno odstrániť adresár „%s“\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot enter into directory \"%s\"\n"
 "%s"
 msgstr ""
-"Nemožno prepísať adresár „%s“\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2697,21 +2689,17 @@ msgstr ""
 "Nemožno vykonať stat() zdrojového súboru „%s“\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
-"Nemožno vykonať stat() zdrojového súboru „%s“\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
-"Nemožno vykonať fstat() cieľového súboru „%s“\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2824,13 +2812,11 @@ msgstr ""
 "Nemožno zatvoriť cieľový súbor „%s“\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
-"Nemožno vykonať fstat() cieľového súboru „%s“\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2840,13 +2826,11 @@ msgstr ""
 "Nemožno vykonať stat() zdrojového adresára „%s“\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
-"Nemožno vykonať stat() zdrojového adresára „%s“\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -3841,11 +3825,11 @@ msgstr ""
 "Ak chcete skončiť, stlačte jedenkrát kláves Esc\n"
 "a taktiež počkajte."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot accept this key.\n"
 "You have entered \"%s\""
-msgstr "Nemožno prijať tento kláves"
+msgstr ""
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -4678,28 +4662,3 @@ msgstr "Pokračovať od začiatku?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nemožno stiahnuť lokálnu kópiu /ftp://some.host/editme.txt"
-
-#~ msgid "Save as"
-#~ msgstr "Uložiť ako"
-
-#~ msgid "Copy to clipboard"
-#~ msgstr "Skopírovať do schránky"
-
-#~ msgid "Cut to clipboard"
-#~ msgstr "Vystrihnúť do schránky"
-
-#~ msgid "Sort block"
-#~ msgstr "Zoradiť blok"
-
-#~ msgid "Sort"
-#~ msgstr "Zoradiť"
-
-#~ msgid "External command"
-#~ msgstr "Externý príkaz"
-
-#, c-format
-#~ msgid "You have entered \"%s\""
-#~ msgstr "Zadali ste „%s“"
-
-#~ msgid "Ski&p all"
-#~ msgstr "&Preskočiť všetky"

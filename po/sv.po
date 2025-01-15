@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-11 12:47+0300\n"
+"POT-Creation-Date: 2025-01-15 17:54+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Alexander Kilian <alexander.kilian@gmail.com>, 2022\n"
 "Language-Team: Swedish (http://app.transifex.com/mc/mc/language/sv/)\n"
@@ -954,9 +954,8 @@ msgstr ""
 msgid "Diff:"
 msgstr "Diff:"
 
-#, fuzzy
 msgid "File name is empty!"
-msgstr "Filnamn:"
+msgstr ""
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -1161,9 +1160,8 @@ msgstr "Gå till rad"
 msgid "Save block"
 msgstr "Spara block"
 
-#, fuzzy
 msgid "Cannot save block"
-msgstr "Kan inte spara fil"
+msgstr ""
 
 msgid "Insert file"
 msgstr "Infoga fil"
@@ -1193,9 +1191,8 @@ msgstr "Klistra in utmatning från externt kommando"
 msgid "Enter shell command(s):"
 msgstr "Ange shell-kommando(n):"
 
-#, fuzzy
 msgid "Cannot execute external command"
-msgstr "Kan inte exekvera kommando"
+msgstr ""
 
 msgid "mail -s <subject> -c <cc> <to>"
 msgstr "mail -s <ämne> -c <kopia> <till>"
@@ -2223,13 +2220,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
-"Att skapa målfilen \"%s\" misslyckades\n"
-"%s"
 
 msgid "set &user ID on execution"
 msgstr "sätt användar-I&D vid exekvering"
@@ -2603,9 +2598,8 @@ msgstr ""
 "\"%s\"\n"
 "är samma fil"
 
-#, fuzzy
 msgid "Ignore a&ll"
-msgstr "Ignorera a&lla"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2664,13 +2658,11 @@ msgstr ""
 "Borttagning av katalogen \"%s\" misslyckades\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot enter into directory \"%s\"\n"
 "%s"
 msgstr ""
-"Katalogen \"%s\" kan inte skrivas över\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2707,21 +2699,17 @@ msgstr ""
 "Stat på källfilen \"%s\" misslyckades\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
-"Stat på källfilen \"%s\" misslyckades\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
-"Fstat på målfilen \"%s\" misslyckades\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2834,13 +2822,11 @@ msgstr ""
 "Stängning av målfilen \"%s\" misslyckades\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
-"Fstat på målfilen \"%s\" misslyckades\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2850,13 +2836,11 @@ msgstr ""
 "Stat på källkatalogen \"%s\" misslyckades\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
-"Stat på källkatalogen \"%s\" misslyckades\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -3841,11 +3825,11 @@ msgstr ""
 "Om du vill avbryta, tryck en gång på Escape-\n"
 "tangenten och vänta."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot accept this key.\n"
 "You have entered \"%s\""
-msgstr "Tangenten godtas inte"
+msgstr ""
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -4678,28 +4662,3 @@ msgstr "Fortsätt från början?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan inte hämta en lokal kopia av /ftp://some.host/editme.txt"
-
-#~ msgid "Save as"
-#~ msgstr "Spara som"
-
-#~ msgid "Copy to clipboard"
-#~ msgstr "Kopiera till urklipp"
-
-#~ msgid "Cut to clipboard"
-#~ msgstr "Klipp ut till urklipp"
-
-#~ msgid "Sort block"
-#~ msgstr "Sortera block"
-
-#~ msgid "Sort"
-#~ msgstr "Sortera"
-
-#~ msgid "External command"
-#~ msgstr "Externt kommando"
-
-#, c-format
-#~ msgid "You have entered \"%s\""
-#~ msgstr "Du har matat in \"%s\""
-
-#~ msgid "Ski&p all"
-#~ msgstr "Ho&ppa över alla"

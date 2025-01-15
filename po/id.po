@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-11 12:47+0300\n"
+"POT-Creation-Date: 2025-01-15 17:54+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Ferriandy Chianiago <gpl4all@gmail.com>, 2015\n"
 "Language-Team: Indonesian (http://app.transifex.com/mc/mc/language/id/)\n"
@@ -1129,9 +1129,8 @@ msgstr ""
 msgid "Save block"
 msgstr ""
 
-#, fuzzy
 msgid "Cannot save block"
-msgstr "Gagal mengurai:"
+msgstr ""
 
 msgid "Insert file"
 msgstr ""
@@ -2170,13 +2169,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
-"Gagal stat \"%s\"\n"
-"%s"
 
 msgid "set &user ID on execution"
 msgstr ""
@@ -2525,9 +2522,8 @@ msgid ""
 "are the same file"
 msgstr ""
 
-#, fuzzy
 msgid "Ignore a&ll"
-msgstr "Aba&ikan kunci"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2573,11 +2569,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot enter into directory \"%s\"\n"
 "%s"
-msgstr "Tidak bisa membuat direktori %s"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2612,13 +2608,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
-"Gagal membuat temporary merge file\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2707,13 +2701,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
-"Gagal membuat temporary merge file\n"
-"%s"
 
 #, c-format
 msgid ""

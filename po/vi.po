@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-11 12:47+0300\n"
+"POT-Creation-Date: 2025-01-15 17:54+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
 "Language-Team: Vietnamese (http://app.transifex.com/mc/mc/language/vi/)\n"
@@ -1094,9 +1094,8 @@ msgstr ""
 msgid "Save block"
 msgstr ""
 
-#, fuzzy
 msgid "Cannot save block"
-msgstr "Không thể phân tích:"
+msgstr ""
 
 msgid "Insert file"
 msgstr ""
@@ -1126,9 +1125,8 @@ msgstr "Dán kết quả của lệnh ngoại trú"
 msgid "Enter shell command(s):"
 msgstr "Nhập (các) câu lệnh shell:"
 
-#, fuzzy
 msgid "Cannot execute external command"
-msgstr "Không thực hiện được câu lệnh"
+msgstr ""
 
 msgid "mail -s <subject> -c <cc> <to>"
 msgstr ""
@@ -2489,9 +2487,8 @@ msgid ""
 "are the same file"
 msgstr ""
 
-#, fuzzy
 msgid "Ignore a&ll"
-msgstr "&Lời đi khóa"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2537,11 +2534,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot enter into directory \"%s\"\n"
 "%s"
-msgstr "Không đọc được nội dung thư mục"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -4459,6 +4456,3 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "External command"
-#~ msgstr "Lệnh ngoại trú"

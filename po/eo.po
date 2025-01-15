@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-11 12:47+0300\n"
+"POT-Creation-Date: 2025-01-15 17:54+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>, 2022\n"
 "Language-Team: Esperanto (http://app.transifex.com/mc/mc/language/eo/)\n"
@@ -970,9 +970,8 @@ msgstr ""
 msgid "Diff:"
 msgstr "Diff:"
 
-#, fuzzy
 msgid "File name is empty!"
-msgstr "Dosiernomo:"
+msgstr ""
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -1177,9 +1176,8 @@ msgstr "Iri linion"
 msgid "Save block"
 msgstr "Konservi blokon"
 
-#, fuzzy
 msgid "Cannot save block"
-msgstr "Ne eblas konservi dosieron"
+msgstr ""
 
 msgid "Insert file"
 msgstr "Enmeti dosieron"
@@ -1211,9 +1209,8 @@ msgstr "Alglui eligon de ekstera komando"
 msgid "Enter shell command(s):"
 msgstr "Enmetu ŝela(j)n komando(j)n"
 
-#, fuzzy
 msgid "Cannot execute external command"
-msgstr "Ne eblas plenumi komandon"
+msgstr ""
 
 msgid "mail -s <subject> -c <cc> <to>"
 msgstr "mail -s <temo> -c <aliaj_ricevontoj> <al>"
@@ -1607,9 +1604,8 @@ msgstr ""
 "Afabla tekstoredaktilo\n"
 "verkita por Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2025 the Free Software Foundation"
-msgstr "Kopirajto (C) 1996-2024 Fondaĵo pri Liberaj Programoj"
+msgstr ""
 
 msgid "About"
 msgstr "Pri"
@@ -2247,13 +2243,11 @@ msgstr ""
 "Ne eblas plenumi la komandon chattr por \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
-"Ne eblas atingi atributojn de fonta dosiero \"%s\"\n"
-"%s"
 
 msgid "set &user ID on execution"
 msgstr "agordi &uzantan identigilon dum plenumigo"
@@ -2639,9 +2633,8 @@ msgstr ""
 "\"%s\"\n"
 "estas la sama dosiero"
 
-#, fuzzy
 msgid "Ignore a&ll"
-msgstr "Ignori ĉio&n"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2700,13 +2693,11 @@ msgstr ""
 "Ne eblas forigi dosierujon \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot enter into directory \"%s\"\n"
 "%s"
 msgstr ""
-"Ne eblas anstataŭigi dosierujon \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2743,21 +2734,17 @@ msgstr ""
 "Ne eblas trovi fontan dosieron \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
-"Ne eblas atingi atributojn de fonta dosiero \"%s\"\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
-"Ne eblas agordi atributojn de cela dosiero \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2870,13 +2857,11 @@ msgstr ""
 "Ne eblas fermi celan dosieron \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
-"Ne eblas agordi atributojn por cela dosiero \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2886,13 +2871,11 @@ msgstr ""
 "Ne eblas trovi fontan dosierujon \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
-"Ne eblas atingi atributojn de fonta dosierujon \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -3883,11 +3866,11 @@ msgstr ""
 "Se vi volas eskapi, unufoje premu la klavon Eskapo\n"
 "kaj ankaŭ atendu."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot accept this key.\n"
 "You have entered \"%s\""
-msgstr "Ne eblas akcepti tiun klavon"
+msgstr ""
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -4752,36 +4735,3 @@ msgstr "Ĉu deiri de la komenco?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Ne eblas atingi lokan kopion de /ftp://some.host/editme.txt"
-
-#~ msgid "Save as"
-#~ msgstr "Konservi kiel"
-
-#~ msgid "Copy to clipboard"
-#~ msgstr "Enpoŝigi"
-
-#~ msgid "Cut to clipboard"
-#~ msgstr "Tranĉi en poŝon"
-
-#~ msgid "Sort block"
-#~ msgstr "Ordigi blokon"
-
-#~ msgid "Sort"
-#~ msgstr "Ordigi"
-
-#~ msgid "External command"
-#~ msgstr "Ekstera komando"
-
-#, c-format
-#~ msgid "You have entered \"%s\""
-#~ msgstr "Vi enmetis je \"%s\""
-
-#, c-format
-#~ msgid ""
-#~ "Cannot get flags of \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Ne eblas akiri flagojn de \"%s\"\n"
-#~ "%s"
-
-#~ msgid "Ski&p all"
-#~ msgstr "Preter&lasi ĉion"

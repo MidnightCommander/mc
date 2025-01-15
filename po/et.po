@@ -5,16 +5,16 @@
 # Translators:
 # Ivar Smolin <okul@linux.ee>, 2021
 # Kristjan Räts <kristjanrats@gmail.com>, 2013-2016,2018-2019,2024
-# Priit Jõerüüt <transifex@joeruut.com>, 2020-2021,2023-2024
+# Priit Jõerüüt <transifex@joeruut.com>, 2020-2021,2023-2025
 # vaba <vaba@riseup.net>, 2020
 # vaba <vaba@riseup.net>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-11 12:47+0300\n"
+"POT-Creation-Date: 2025-01-15 17:54+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Priit Jõerüüt <transifex@joeruut.com>, 2020-2021,2023-2024\n"
+"Last-Translator: Priit Jõerüüt <transifex@joeruut.com>, 2020-2021,2023-2025\n"
 "Language-Team: Estonian (http://app.transifex.com/mc/mc/language/et/)\n"
 "Language: et\n"
 "MIME-Version: 1.0\n"
@@ -74,7 +74,7 @@ msgstr "&Eira lukku"
 
 #, c-format
 msgid "Cannot create %s directory"
-msgstr "%s kataloogi loomine nurjus"
+msgstr "%s kataloogi loomine ei õnnestunud"
 
 msgid "FATAL: not a directory:"
 msgstr "Viga: ei ole kataloog:"
@@ -976,9 +976,8 @@ msgstr ""
 msgid "Diff:"
 msgstr "Erinevused:"
 
-#, fuzzy
 msgid "File name is empty!"
-msgstr "Faili nimi:"
+msgstr "Faili nimi on tühi!"
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -1183,9 +1182,8 @@ msgstr "Mine reale"
 msgid "Save block"
 msgstr "Salvesta plokk"
 
-#, fuzzy
 msgid "Cannot save block"
-msgstr "Faili salvestamine nurjus"
+msgstr "Ploki salvestamine ei õnnestu"
 
 msgid "Insert file"
 msgstr "Lisa fail"
@@ -1217,9 +1215,8 @@ msgstr "Aseta välise käsu väljund"
 msgid "Enter shell command(s):"
 msgstr "Sisesta kesta käsk(ud):"
 
-#, fuzzy
 msgid "Cannot execute external command"
-msgstr "Käsu käivitamine nurjus"
+msgstr "Välise käsi käivitamine ei õnnestu"
 
 msgid "mail -s <subject> -c <cc> <to>"
 msgstr "mail -s <teema> -c <koopia> <saaja>"
@@ -1613,9 +1610,8 @@ msgstr ""
 "Kasutajasõbralik tekstitoimeti, mis\n"
 "on loodud Midnight Commanderile."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2025 the Free Software Foundation"
-msgstr "Autoriõigused (C) 1996-2024 the Free Software Foundation"
+msgstr "Autoriõigused (C) 1996-2025 the Free Software Foundation"
 
 msgid "About"
 msgstr "Programmist"
@@ -2251,12 +2247,12 @@ msgstr ""
 "\"%s\" attribuutide muutmine nurjus\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
-"Sihtfaili atribuute ei õnnestu laadida \"%s\"\n"
+"Objekti ext2 atribuute ei õnnestu laadida „%s“\n"
 "%s"
 
 msgid "set &user ID on execution"
@@ -2645,7 +2641,6 @@ msgstr ""
 "\"%s\"\n"
 "on üks ja see sama fail"
 
-#, fuzzy
 msgid "Ignore a&ll"
 msgstr "Eira &kõiki"
 
@@ -2706,12 +2701,12 @@ msgstr ""
 "Kataloogi \"%s\" eemaldamine nurjus\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot enter into directory \"%s\"\n"
 "%s"
 msgstr ""
-"Kataloogi \"%s\" ülekirjutamine nurjus\n"
+"„%s“ kausta avamine ei õnnestu\n"
 "%s"
 
 #, c-format
@@ -2749,20 +2744,20 @@ msgstr ""
 "Lähtefaili \"%s\" info päring nurjus\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
-"Sihtfaili atribuute ei õnnestu laadida \"%s\"\n"
+"Lähtefaili ext2 atribuute ei õnnestu laadida „%s“\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
-"Sihtfaili atribuute ei õnnestu väärtustada \"%s\"\n"
+"Sihtfaili ext2 atribuute ei õnnestu määrata „%s“\n"
 "%s"
 
 #, c-format
@@ -2876,12 +2871,12 @@ msgstr ""
 "Sihtfaili \"%s\" sulgemine nurjus\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
-"Sihtfaili jaoks ei õnnestu atribuute väärtustada \"%s\"\n"
+"Sihtfaili ext2 atribuute ei õnnestu määrata „%s“\n"
 "%s"
 
 #, c-format
@@ -2892,12 +2887,12 @@ msgstr ""
 "Lähtekataloogi \"%s\" info päring nurjus\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
-"Lähtekausta atribuute ei õnnestu laadida \"%s\"\n"
+"Lähtekausta ext2 atribuute ei õnnestu laadida „%s“\n"
 "%s"
 
 #, c-format
@@ -3889,11 +3884,13 @@ msgstr ""
 "Kui soovid loobuda, siis vajuta üks kord\n"
 "klahvi Esc ja oota samuti."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot accept this key.\n"
 "You have entered \"%s\""
-msgstr "Selle klahvi vastuvõtt nurjus"
+msgstr ""
+"Seda võtit ei saa kasutada.\n"
+"Sa sisestasid „%s“"
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -4759,36 +4756,3 @@ msgstr "Kas jätkata algusest?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kohaliku koopia hankimine failist /ftp://some.host/editme.txt nurjus"
-
-#~ msgid "Save as"
-#~ msgstr "Salvesta kui"
-
-#~ msgid "Copy to clipboard"
-#~ msgstr "Kopeeri lõikepuhvrisse"
-
-#~ msgid "Cut to clipboard"
-#~ msgstr "Lõika lõikepuhvrisse"
-
-#~ msgid "Sort block"
-#~ msgstr "Sordi plokk"
-
-#~ msgid "Sort"
-#~ msgstr "Sorteeri"
-
-#~ msgid "External command"
-#~ msgstr "Väline käsk"
-
-#, c-format
-#~ msgid "You have entered \"%s\""
-#~ msgstr "Oled sisestanud \"%s\""
-
-#, c-format
-#~ msgid ""
-#~ "Cannot get flags of \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "\"%s\" lippe ei saa hankida\n"
-#~ "%s"
-
-#~ msgid "Ski&p all"
-#~ msgstr "Jäta &kõik vahele"

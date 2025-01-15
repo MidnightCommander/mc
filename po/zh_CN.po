@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-11 12:47+0300\n"
+"POT-Creation-Date: 2025-01-15 17:54+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Gurbuzguven <6mehmet6@gmail.com>, 2021\n"
 "Language-Team: Chinese (China) (http://app.transifex.com/mc/mc/language/"
@@ -949,9 +949,8 @@ msgstr ""
 msgid "Diff:"
 msgstr "差异: "
 
-#, fuzzy
 msgid "File name is empty!"
-msgstr "文件名: "
+msgstr ""
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -1156,9 +1155,8 @@ msgstr "转到行"
 msgid "Save block"
 msgstr "保存块"
 
-#, fuzzy
 msgid "Cannot save block"
-msgstr "无法保存文件"
+msgstr ""
 
 msgid "Insert file"
 msgstr "插入文件"
@@ -1188,9 +1186,8 @@ msgstr "粘贴外部命令的输出"
 msgid "Enter shell command(s):"
 msgstr "输入Shell 命令: "
 
-#, fuzzy
 msgid "Cannot execute external command"
-msgstr "无法执行命令"
+msgstr ""
 
 msgid "mail -s <subject> -c <cc> <to>"
 msgstr "mail -s <subject> -c <cc> <to>"
@@ -2216,13 +2213,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
-"无法创建目标文件“%s”\n"
-"%s"
 
 msgid "set &user ID on execution"
 msgstr "执行时设置用户 ID(&U)"
@@ -2594,9 +2589,8 @@ msgstr ""
 "“%s”\n"
 "是同一个文件"
 
-#, fuzzy
 msgid "Ignore a&ll"
-msgstr "全部忽略(&A)"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2655,13 +2649,11 @@ msgstr ""
 "无法删除目录“%s”\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot enter into directory \"%s\"\n"
 "%s"
 msgstr ""
-"无法覆盖目录“%s”\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2698,21 +2690,17 @@ msgstr ""
 "无法 stat 源文件“%s”\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
-"无法 stat 源文件“%s”\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
-"无法 fstat 目标文件\"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2825,13 +2813,11 @@ msgstr ""
 "无法关闭目标文件“%s”\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
-"无法 fstat 目标文件\"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2841,13 +2827,11 @@ msgstr ""
 "无法 stat 源目录“%s”\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
-"无法 stat 源目录“%s”\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -3829,11 +3813,11 @@ msgstr ""
 "如果您想离开，请按下Esc键\n"
 "并稍等。"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot accept this key.\n"
 "You have entered \"%s\""
-msgstr "无法接受这个按键"
+msgstr ""
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -4665,28 +4649,3 @@ msgstr "从头继续搜索?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "无法获取 /ftp://some.host/editme.txt 的本地副本"
-
-#~ msgid "Save as"
-#~ msgstr "另存为"
-
-#~ msgid "Copy to clipboard"
-#~ msgstr "复制到剪贴板"
-
-#~ msgid "Cut to clipboard"
-#~ msgstr "剪切到剪贴板"
-
-#~ msgid "Sort block"
-#~ msgstr "排序块"
-
-#~ msgid "Sort"
-#~ msgstr "排序"
-
-#~ msgid "External command"
-#~ msgstr "外部命令"
-
-#, c-format
-#~ msgid "You have entered \"%s\""
-#~ msgstr "您输入了“%s”"
-
-#~ msgid "Ski&p all"
-#~ msgstr "路过全部(&I)"

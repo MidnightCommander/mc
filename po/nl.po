@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-11 12:47+0300\n"
+"POT-Creation-Date: 2025-01-15 17:54+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Jaap Kramer <jaap-kramer@ziggo.nl>, 2023\n"
 "Language-Team: Dutch (http://app.transifex.com/mc/mc/language/nl/)\n"
@@ -952,9 +952,8 @@ msgstr ""
 msgid "Diff:"
 msgstr "Diff:"
 
-#, fuzzy
 msgid "File name is empty!"
-msgstr "Bestandsnaam:"
+msgstr ""
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -1157,9 +1156,8 @@ msgstr "Ga naar regel"
 msgid "Save block"
 msgstr "Sla selectieblok op"
 
-#, fuzzy
 msgid "Cannot save block"
-msgstr "Kan bestand niet opslaan"
+msgstr ""
 
 msgid "Insert file"
 msgstr "Bestand invoegen"
@@ -1190,9 +1188,8 @@ msgstr "Plak uitvoer van externe opdracht"
 msgid "Enter shell command(s):"
 msgstr " Geef shell-opdracht(en): "
 
-#, fuzzy
 msgid "Cannot execute external command"
-msgstr "Kan opdracht niet uitvoeren"
+msgstr ""
 
 msgid "mail -s <subject> -c <cc> <to>"
 msgstr "mail -s <subject> -c <cc> <to>"
@@ -2223,13 +2220,11 @@ msgstr ""
 "Kan niet chattr \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
-"Kan flags van \"%s\" niet verkrijgen\n"
-"%s"
 
 msgid "set &user ID on execution"
 msgstr "zet gebr&uikers-ID bij uitvoering"
@@ -2607,9 +2602,8 @@ msgstr ""
 "`%s' \n"
 "zijn hetzelfde bestand "
 
-#, fuzzy
 msgid "Ignore a&ll"
-msgstr "&Alles negeren"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2668,13 +2662,11 @@ msgstr ""
 "Kan map \"%s\" niet verwijderen \n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot enter into directory \"%s\"\n"
 "%s"
 msgstr ""
-"Map \"%s\" kan niet overschreven worden \n"
-"%s "
 
 #, c-format
 msgid ""
@@ -2711,21 +2703,17 @@ msgstr ""
 "Bronbestand \"%s\" kan niet geïnspecteerd worden \n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
-"Bronbestand \"%s\" kan niet geïnspecteerd worden \n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
-"fstat werkt niet op doelbestand \"%s\" \n"
-"%s "
 
 #, c-format
 msgid ""
@@ -2838,13 +2826,11 @@ msgstr ""
 "Doelbestand \"%s\" kan niet gesloten worden \n"
 "%s "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
-"fstat werkt niet op doelbestand \"%s\" \n"
-"%s "
 
 #, c-format
 msgid ""
@@ -2854,13 +2840,11 @@ msgstr ""
 "Bronmap \"%s\" kan niet geïnspecteerd worden\n"
 "%s "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
-"Bronmap \"%s\" kan niet geïnspecteerd worden\n"
-"%s "
 
 #, c-format
 msgid ""
@@ -3852,11 +3836,11 @@ msgstr ""
 "Als u wilt afbreken, druk dan de escape-toets,\n"
 "en wacht enkele ogenblikken"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot accept this key.\n"
 "You have entered \"%s\""
-msgstr "Kan deze toets niet accepteren"
+msgstr ""
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -4708,28 +4692,3 @@ msgstr "Doorgaan vanaf het begin?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan geen lokale versie van /ftp://some.host/editme.txt ophalen"
-
-#~ msgid "Save as"
-#~ msgstr "Opslaan als"
-
-#~ msgid "Copy to clipboard"
-#~ msgstr "Kopieer naar klembord"
-
-#~ msgid "Cut to clipboard"
-#~ msgstr "Knip naar klembord"
-
-#~ msgid "Sort block"
-#~ msgstr "Sorteer selectieblok"
-
-#~ msgid "Sort"
-#~ msgstr "Sorteren"
-
-#~ msgid "External command"
-#~ msgstr "Externe opdracht"
-
-#, c-format
-#~ msgid "You have entered \"%s\""
-#~ msgstr " U heeft \"%s\" ingevoerd"
-
-#~ msgid "Ski&p all"
-#~ msgstr "Alles ove&rslaan"

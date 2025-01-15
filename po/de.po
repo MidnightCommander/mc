@@ -4,6 +4,7 @@
 #
 # Translators:
 # Atha Translate, 2016
+# Benjamin M. Berwien <alt.ji-f7q3y0v@courriel.fr.nf>, 2024
 # Benjamin M. Berwien <alt.ji-f7q3y0v@courriel.fr.nf>, 2023
 # cheese <cheese@nosuchhost.net>, 2016
 # Ettore Atalan <atalanttore@googlemail.com>, 2015-2024
@@ -12,7 +13,7 @@
 # Karsten <waldstadt@web.de>, 2016
 # Larson März <larson@protonmail.ch>, 2016
 # Michael John <amstelchen@gmail.com>, 2024
-# Mr.Update, 2019-2020,2023
+# Mr.Update, 2019-2020,2023-2024
 # Slow Rider, 2015,2018
 # Slava Zanko <slavazanko@gmail.com>, 2011
 # 14c4b06b824ec593239362517f538b29_ed1ad11 <ff0d3a0ccce92a0e8d6afacec89fb289_1123>, 2011
@@ -22,9 +23,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-11 12:47+0300\n"
+"POT-Creation-Date: 2025-01-15 17:54+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>, 2015-2024\n"
+"Last-Translator: Benjamin M. Berwien <alt.ji-f7q3y0v@courriel.fr.nf>, 2024\n"
 "Language-Team: German (http://app.transifex.com/mc/mc/language/de/)\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -74,7 +75,7 @@ msgstr ""
 "Prozess-ID: %d"
 
 msgid "File locked"
-msgstr "Die Datei ist gerade gesperrt"
+msgstr "Die Datei ist gesperrt"
 
 msgid "&Grab lock"
 msgstr "Sperre &aufheben"
@@ -584,6 +585,8 @@ msgid ""
 "Cannot create temporary directory %s: %s.\n"
 "Temporary files will not be created\n"
 msgstr ""
+"Kann temporäres Verzeichnis %s nicht erstellen: %s.\n"
+"Temporäre Dateien werden nicht erstellt\n"
 
 msgid "Press any key to continue..."
 msgstr "Drücken Sie eine Taste zum Fortfahren..."
@@ -744,6 +747,26 @@ msgid ""
 "   Viewer:       viewnormal,viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 msgstr ""
+"--colors KEYWORD={FORE},{BACK},{ATTR}:KEYWORD2=...\n"
+"\n"
+"{FORE}, {BACK} und {ATTR} können weggelassen werden, dann wird der "
+"Standardwert verwendet\n"
+"\n"
+" Schlüsselwörter:\n"
+"   Global:       errors, disabled, reverse, gauge, header\n"
+"                 input, inputmark, inputunchanged, commandlinemark\n"
+"                 bbarhotkey, bbarbutton, statusbar\n"
+"   Dateianzeige: normal, selected, marked, markselect\n"
+"   Dialogfenster: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"                 errdhotfocus\n"
+"   Menüs:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Pop-up-Menüs:  pmenunormal, pmenusel, pmenutitle\n"
+"   Editor:       editnormal, editbold, editmarked, editwhitespace, "
+"editnonprintable,\n"
+"                 editlinestate, editbg, editframe, editframeactive, "
+"editframedrag\n"
+"   Betrachter:       viewnormal, viewbold, viewunderline, viewselected\n"
+"   Hilfe:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 
 #. TRANSLATORS: don't translate color names and attributes
 msgid ""
@@ -764,7 +787,7 @@ msgstr ""
 "Hellcyan, Hellgrau und Weiß\n"
 "\n"
 "Erweiterte Farben, wenn 256 Farben zur Verfügung stehen:\n"
-"color16 zu color255 oder rgb000 zu RGB555 und gray0 zu gray23\n"
+"color16 zu color255 oder rgb000 zu rgb555 und gray0 zu gray23\n"
 "\n"
 "Attribute:\n"
 "fett, kursiv, unterstrichen, rückwärts, blinken; weitere mit '+' anhängen\n"
@@ -969,9 +992,8 @@ msgstr ""
 msgid "Diff:"
 msgstr "Diff:"
 
-#, fuzzy
 msgid "File name is empty!"
-msgstr "Dateiname:"
+msgstr ""
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -1177,9 +1199,8 @@ msgstr "Gehe zu Zeile"
 msgid "Save block"
 msgstr "Block speichern"
 
-#, fuzzy
 msgid "Cannot save block"
-msgstr "Kann Datei nicht speichern"
+msgstr ""
 
 msgid "Insert file"
 msgstr "Datei einfügen"
@@ -1211,9 +1232,8 @@ msgstr "Ausgabe eines externen Befehls einfügen"
 msgid "Enter shell command(s):"
 msgstr "Shell-Kommando(s) eingeben:"
 
-#, fuzzy
 msgid "Cannot execute external command"
-msgstr "Kann Befehl nicht ausführen"
+msgstr ""
 
 msgid "mail -s <subject> -c <cc> <to>"
 msgstr "mail -s <betreff> -c <kopiean> <empfänger>"
@@ -1607,9 +1627,8 @@ msgstr ""
 "Ein benutzerfreundlicher Texteditor,\n"
 "geschrieben für Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2025 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2024 the Free Software Foundation"
+msgstr ""
 
 msgid "About"
 msgstr "Über"
@@ -2246,13 +2265,11 @@ msgstr ""
 "Kann chattr für\"%s\" nicht durchführen\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
-"Kann Flags für \"%s\" nicht ermitteln\n"
-"%s"
 
 msgid "set &user ID on execution"
 msgstr "Ben&utzer-ID bei Ausführung setzen"
@@ -2641,9 +2658,8 @@ msgstr ""
 "\"%s\"\n"
 "sind die gleichen Dateien"
 
-#, fuzzy
 msgid "Ignore a&ll"
-msgstr "&Alles ignorieren"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2702,13 +2718,11 @@ msgstr ""
 "Kann Verzeichnis \"%s\" nicht löschen\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot enter into directory \"%s\"\n"
 "%s"
 msgstr ""
-"Kann Verzeichnis \"%s\" nicht überschreiben\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2745,21 +2759,17 @@ msgstr ""
 "Kann Quelldatei \"%s\" nicht untersuchen\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
-"Kann Quelldatei \"%s\" nicht untersuchen\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
-"Kann Zieldatei \"%s\" nicht untersuchen\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2872,13 +2882,11 @@ msgstr ""
 "Kann Zieldatei \"%s\" nicht schließen\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
-"Kann Zieldatei \"%s\" nicht untersuchen\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2888,13 +2896,11 @@ msgstr ""
 "Kann Quellverzeichnis \"%s\" nicht untersuchen\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
-"Kann Quellverzeichnis \"%s\" nicht untersuchen\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -3885,11 +3891,11 @@ msgstr ""
 "Wenn Sie abbrechen möchten, drücken Sie Esc einmal\n"
 "und warten ebenfalls."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot accept this key.\n"
 "You have entered \"%s\""
-msgstr "Kann diese Taste nicht akzeptieren"
+msgstr ""
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -4176,6 +4182,8 @@ msgid ""
 "Cannot open %s archive\n"
 "%s"
 msgstr ""
+"Kann Archiv %s nicht öffnen\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -4762,28 +4770,3 @@ msgstr "Am Anfang fortsetzen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kann lokale Kopie von /ftp://some.host/editme.txt nicht erstellen"
-
-#~ msgid "Save as"
-#~ msgstr "Speichern unter"
-
-#~ msgid "Copy to clipboard"
-#~ msgstr "In die Zwischenablage kopieren"
-
-#~ msgid "Cut to clipboard"
-#~ msgstr "In die Zwischenablage ausschneiden"
-
-#~ msgid "Sort block"
-#~ msgstr "Block sortieren"
-
-#~ msgid "Sort"
-#~ msgstr "Sortieren"
-
-#~ msgid "External command"
-#~ msgstr "Externer Befehl"
-
-#, c-format
-#~ msgid "You have entered \"%s\""
-#~ msgstr "Sie haben \"%s\" eingegeben"
-
-#~ msgid "Ski&p all"
-#~ msgstr "Alle übers&pringen"

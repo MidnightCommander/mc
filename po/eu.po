@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-11 12:47+0300\n"
+"POT-Creation-Date: 2025-01-15 17:54+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>, "
 "2011,2015-2019\n"
@@ -944,9 +944,8 @@ msgstr ""
 msgid "Diff:"
 msgstr "Diff:"
 
-#, fuzzy
 msgid "File name is empty!"
-msgstr "Fitxategi izena:"
+msgstr ""
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -1151,9 +1150,8 @@ msgstr "Joan lerrora"
 msgid "Save block"
 msgstr "Gorde blokea"
 
-#, fuzzy
 msgid "Cannot save block"
-msgstr "Fitxategia ezin gorde"
+msgstr ""
 
 msgid "Insert file"
 msgstr "Txertatu fitxategia"
@@ -1183,9 +1181,8 @@ msgstr "Itsatsi kanpoko komando baten irteera"
 msgid "Enter shell command(s):"
 msgstr "Sartu shell komandoa(k):"
 
-#, fuzzy
 msgid "Cannot execute external command"
-msgstr "Komandoa ezin exekutatu"
+msgstr ""
 
 msgid "mail -s <subject> -c <cc> <to>"
 msgstr "posta -s <gaia> -c <kk> <nori>"
@@ -2213,13 +2210,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
-"Ezin da sortu \"%s\" helburu fitxategia\n"
-"%s"
 
 msgid "set &user ID on execution"
 msgstr "ezarri &erabiltzaile ID exekutatzean"
@@ -2595,9 +2590,8 @@ msgstr ""
 "\"%s\"\n"
 "fitxategi bera dira"
 
-#, fuzzy
 msgid "Ignore a&ll"
-msgstr "Jaramonik ez &guztiari"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2656,13 +2650,11 @@ msgstr ""
 "Ezin da ezabatu \"%s\" direktorioa\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot enter into directory \"%s\"\n"
 "%s"
 msgstr ""
-"Ezin da gainidatzi \"%s\" direktorioa\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2699,21 +2691,17 @@ msgstr ""
 "Ezin da lortu \"%s\" iturburu fitxategiaren egoera\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
-"Ezin da lortu \"%s\" iturburu fitxategiaren egoera\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
-"Ezin da loortu \"%s\" helburu fitxategiaren egoera (fstat)\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2826,13 +2814,11 @@ msgstr ""
 "Ezin da itxi \"%s\" helburu fitxategia\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
-"Ezin da loortu \"%s\" helburu fitxategiaren egoera (fstat)\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2842,13 +2828,11 @@ msgstr ""
 "Ezin da lortu \"%s\" iturburu direktorioaren egoera (stat)\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
-"Ezin da lortu \"%s\" iturburu direktorioaren egoera (stat)\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -3835,11 +3819,11 @@ msgstr ""
 "Ihes egin nahi baduzu, sakatu Ihes tekla behin\n"
 "eta itxaron."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot accept this key.\n"
 "You have entered \"%s\""
-msgstr "Tekla hau ezin onartu"
+msgstr ""
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -4674,28 +4658,3 @@ msgstr "Hasieratik jarraitu?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Ezin eskuratu ondokoaren bertako kopia bat: /ftp://some.host/editme.txt"
-
-#~ msgid "Save as"
-#~ msgstr "Gorde honela"
-
-#~ msgid "Copy to clipboard"
-#~ msgstr "Kopiatu arbelara"
-
-#~ msgid "Cut to clipboard"
-#~ msgstr "Ebaki arbelara"
-
-#~ msgid "Sort block"
-#~ msgstr "Sailkatu blokea"
-
-#~ msgid "Sort"
-#~ msgstr "Sailkatu"
-
-#~ msgid "External command"
-#~ msgstr "Kanpoko komandoa"
-
-#, c-format
-#~ msgid "You have entered \"%s\""
-#~ msgstr "\"%s\" sartu duzu"
-
-#~ msgid "Ski&p all"
-#~ msgstr "Sa&hiestu guztia"

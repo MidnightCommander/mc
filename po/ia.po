@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-11 12:47+0300\n"
+"POT-Creation-Date: 2025-01-15 17:54+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Martijn Dekker <mcdutchie@hotmail.com>, 2012,2017\n"
 "Language-Team: Interlingua (http://app.transifex.com/mc/mc/language/ia/)\n"
@@ -914,9 +914,8 @@ msgstr ""
 msgid "Diff:"
 msgstr "Diff:"
 
-#, fuzzy
 msgid "File name is empty!"
-msgstr "Nomine del file:"
+msgstr ""
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -1113,9 +1112,8 @@ msgstr "Vader al linea"
 msgid "Save block"
 msgstr "Salveguardar bloco"
 
-#, fuzzy
 msgid "Cannot save block"
-msgstr "Le file non pote esser salveguardate"
+msgstr ""
 
 msgid "Insert file"
 msgstr "Inserer file"
@@ -1145,9 +1143,8 @@ msgstr ""
 msgid "Enter shell command(s):"
 msgstr ""
 
-#, fuzzy
 msgid "Cannot execute external command"
-msgstr "Le commando non pote esser executate"
+msgstr ""
 
 msgid "mail -s <subject> -c <cc> <to>"
 msgstr ""
@@ -2508,9 +2505,8 @@ msgid ""
 "are the same file"
 msgstr ""
 
-#, fuzzy
 msgid "Ignore a&ll"
-msgstr "Ignorar serratura"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2556,13 +2552,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot enter into directory \"%s\"\n"
 "%s"
 msgstr ""
-"Impossibile crear file de fusionamento temporari\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2597,13 +2591,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
-"Impossibile crear file de fusionamento temporari\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2692,13 +2684,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
-"Impossibile crear file de fusionamento temporari\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -4479,15 +4469,3 @@ msgstr "Continuar ab initio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "Save as"
-#~ msgstr "Salveguardar como"
-
-#~ msgid "Copy to clipboard"
-#~ msgstr "Copiar al area de transferentia"
-
-#~ msgid "Cut to clipboard"
-#~ msgstr "Taliar al area de transferentia"
-
-#~ msgid "External command"
-#~ msgstr "Commando externe"

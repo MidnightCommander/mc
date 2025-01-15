@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-11 12:47+0300\n"
+"POT-Creation-Date: 2025-01-15 17:54+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Andi Chandler <andi@gowling.com>, 2016-2017,2020,2022-2024\n"
 "Language-Team: English (United Kingdom) (http://app.transifex.com/mc/mc/"
@@ -969,9 +969,8 @@ msgstr ""
 msgid "Diff:"
 msgstr "Diff:"
 
-#, fuzzy
 msgid "File name is empty!"
-msgstr "File name:"
+msgstr "File name is empty!"
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -1176,9 +1175,8 @@ msgstr "Goto line"
 msgid "Save block"
 msgstr "Save block"
 
-#, fuzzy
 msgid "Cannot save block"
-msgstr "Cannot save file"
+msgstr ""
 
 msgid "Insert file"
 msgstr "Insert file"
@@ -1208,9 +1206,8 @@ msgstr "Paste output of external command"
 msgid "Enter shell command(s):"
 msgstr "Enter shell command(s):"
 
-#, fuzzy
 msgid "Cannot execute external command"
-msgstr "Cannot execute command"
+msgstr ""
 
 msgid "mail -s <subject> -c <cc> <to>"
 msgstr "mail -s <subject> -c <cc> <to>"
@@ -1604,9 +1601,8 @@ msgstr ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2025 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2024 the Free Software Foundation"
+msgstr ""
 
 msgid "About"
 msgstr "About"
@@ -2244,12 +2240,12 @@ msgstr ""
 "Cannot chattr \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
-"Cannot get attributes of source file \"%s\"\n"
+"Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 
 msgid "set &user ID on execution"
@@ -2638,9 +2634,8 @@ msgstr ""
 "\"%s\"\n"
 "are the same file"
 
-#, fuzzy
 msgid "Ignore a&ll"
-msgstr "Ignore &all"
+msgstr "Ignore a&ll"
 
 #, c-format
 msgid ""
@@ -2699,13 +2694,11 @@ msgstr ""
 "Cannot remove directory \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot enter into directory \"%s\"\n"
 "%s"
 msgstr ""
-"Cannot overwrite directory \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2742,20 +2735,20 @@ msgstr ""
 "Cannot stat source file \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
-"Cannot get attributes of source file \"%s\"\n"
+"Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
-"Cannot set attributes of target file \"%s\"\n"
+"Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 
 #, c-format
@@ -2869,12 +2862,12 @@ msgstr ""
 "Cannot close target file \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
-"Cannot set attributes for target file \"%s\"\n"
+"Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 
 #, c-format
@@ -2885,12 +2878,12 @@ msgstr ""
 "Cannot stat source directory \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
-"Cannot get attributes of source directory \"%s\"\n"
+"Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 
 #, c-format
@@ -3882,11 +3875,11 @@ msgstr ""
 "If you want to escape, press a single Escape key\n"
 "and wait as well."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot accept this key.\n"
 "You have entered \"%s\""
-msgstr "Cannot accept this key"
+msgstr ""
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -4752,36 +4745,3 @@ msgstr "Continue from beginning?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Cannot fetch a local copy of /ftp://some.host/editme.txt"
-
-#~ msgid "Save as"
-#~ msgstr "Save as"
-
-#~ msgid "Copy to clipboard"
-#~ msgstr "Copy to clipboard"
-
-#~ msgid "Cut to clipboard"
-#~ msgstr "Cut to clipboard"
-
-#~ msgid "Sort block"
-#~ msgstr "Sort block"
-
-#~ msgid "Sort"
-#~ msgstr "Sort"
-
-#~ msgid "External command"
-#~ msgstr "External command"
-
-#, c-format
-#~ msgid "You have entered \"%s\""
-#~ msgstr "You have entered \"%s\""
-
-#, c-format
-#~ msgid ""
-#~ "Cannot get flags of \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Cannot get flags of \"%s\"\n"
-#~ "%s"
-
-#~ msgid "Ski&p all"
-#~ msgstr "Ski&p all"

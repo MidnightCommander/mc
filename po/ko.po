@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-11 12:47+0300\n"
+"POT-Creation-Date: 2025-01-15 17:54+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Seong-ho Cho <darkcircle.0426@gmail.com>, 2023-2024\n"
 "Language-Team: Korean (http://app.transifex.com/mc/mc/language/ko/)\n"
@@ -952,9 +952,8 @@ msgstr ""
 msgid "Diff:"
 msgstr "비교:"
 
-#, fuzzy
 msgid "File name is empty!"
-msgstr "파일 이름:"
+msgstr ""
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -1159,9 +1158,8 @@ msgstr "행으로 이동"
 msgid "Save block"
 msgstr "블록 저장"
 
-#, fuzzy
 msgid "Cannot save block"
-msgstr "파일을 저장할 수 없음"
+msgstr ""
 
 msgid "Insert file"
 msgstr "파일 삽입"
@@ -1191,9 +1189,8 @@ msgstr "확장 명령의 출력 붙여넣기"
 msgid "Enter shell command(s):"
 msgstr "쉘 명령어 입력:"
 
-#, fuzzy
 msgid "Cannot execute external command"
-msgstr "명령을 실행할 수 없음"
+msgstr ""
 
 msgid "mail -s <subject> -c <cc> <to>"
 msgstr "mail -s <subject> -c <cc> <to>"
@@ -1587,9 +1584,8 @@ msgstr ""
 "사용자 친화적인 텍스트 편집기\n"
 "미드나잇 커맨더를 위해 작성됨."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2025 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2024 the Free Software Foundation"
+msgstr ""
 
 msgid "About"
 msgstr "소개"
@@ -2226,13 +2222,11 @@ msgstr ""
 "\"%s\" 속성 변경을 할 수 없음\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" 플래그를 가져올 수 없음\n"
-"%s"
 
 msgid "set &user ID on execution"
 msgstr "실행 시 사용자 ID 설정(&U)"
@@ -2618,9 +2612,8 @@ msgstr ""
 "\"%s\"\n"
 "는 같은 파일임"
 
-#, fuzzy
 msgid "Ignore a&ll"
-msgstr "모두 무시(&A)"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2680,13 +2673,11 @@ msgstr ""
 "%s 디렉터리를 제거할 수 없음\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot enter into directory \"%s\"\n"
 "%s"
 msgstr ""
-"%s 디렉터리를 덮어쓸 수 없음\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2723,21 +2714,17 @@ msgstr ""
 "\"%s\" 원본 파일을 통계할 수 없음\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" 원본 파일을 통계할 수 없음\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" 대상 파일을 fstat할 수 없음\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2850,13 +2837,11 @@ msgstr ""
 "\"%s\" 대상 파일을 닫을 수 없음\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" 대상 파일을 fstat할 수 없음\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2866,13 +2851,11 @@ msgstr ""
 "\"%s\" 소스 디렉터리를 stat할 수 없음\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" 소스 디렉터리를 stat할 수 없음\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -3859,11 +3842,11 @@ msgstr ""
 "만약 빠져나가길 원하시면 Escape키를 한번만 누른 후\n"
 "마찬가지로 기다리십시오."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot accept this key.\n"
 "You have entered \"%s\""
-msgstr "이 키를 수락할 수 없음"
+msgstr ""
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -4725,28 +4708,3 @@ msgstr "처음부터 계속하시겠습니까?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "/ftp://some.host/editme.txt의 로컬 복사본을 가져올 수 없음"
-
-#~ msgid "Save as"
-#~ msgstr "다른 이름으로 저장"
-
-#~ msgid "Copy to clipboard"
-#~ msgstr "클립보드로 복사하기"
-
-#~ msgid "Cut to clipboard"
-#~ msgstr "클립보드로 잘라내기"
-
-#~ msgid "Sort block"
-#~ msgstr "블록 정렬"
-
-#~ msgid "Sort"
-#~ msgstr "정렬"
-
-#~ msgid "External command"
-#~ msgstr "확장 명령어"
-
-#, c-format
-#~ msgid "You have entered \"%s\""
-#~ msgstr "\"%s\"을(를) 입력했습니다"
-
-#~ msgid "Ski&p all"
-#~ msgstr "모두 건너뛰기(&P)"

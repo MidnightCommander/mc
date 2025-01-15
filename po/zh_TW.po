@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-11 12:47+0300\n"
+"POT-Creation-Date: 2025-01-15 17:54+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Meng Pang Wang, 2023\n"
 "Language-Team: Chinese (Taiwan) (http://app.transifex.com/mc/mc/language/"
@@ -919,9 +919,8 @@ msgstr ""
 msgid "Diff:"
 msgstr "不同:"
 
-#, fuzzy
 msgid "File name is empty!"
-msgstr "檔案名稱:"
+msgstr ""
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -1122,9 +1121,8 @@ msgstr "前往此行"
 msgid "Save block"
 msgstr "儲存區塊"
 
-#, fuzzy
 msgid "Cannot save block"
-msgstr "無法儲存檔案"
+msgstr ""
 
 msgid "Insert file"
 msgstr "插入檔案"
@@ -1154,9 +1152,8 @@ msgstr "貼上外部指令的輸出結果"
 msgid "Enter shell command(s):"
 msgstr "輸入指令:"
 
-#, fuzzy
 msgid "Cannot execute external command"
-msgstr "無法執行指令"
+msgstr ""
 
 msgid "mail -s <subject> -c <cc> <to>"
 msgstr ""
@@ -2168,13 +2165,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
-"無法覆寫檔案 \"%s\"\n"
-"%s"
 
 msgid "set &user ID on execution"
 msgstr ""
@@ -2525,9 +2520,8 @@ msgid ""
 "are the same file"
 msgstr ""
 
-#, fuzzy
 msgid "Ignore a&ll"
-msgstr "忽略全部"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2575,13 +2569,11 @@ msgstr ""
 "無法刪除目錄 \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot enter into directory \"%s\"\n"
 "%s"
 msgstr ""
-"無法覆寫目錄 \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2616,21 +2608,17 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
-"無法覆寫檔案 \"%s\"\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
-"無法對目標檔案 \"%s\" 執行 chmod 指令\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2721,13 +2709,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
-"無法對目標檔案 \"%s\" 執行 chmod 指令\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2735,13 +2721,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
-"無法建立目標目錄 \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -4540,21 +4524,3 @@ msgstr "從頭開始?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "無法取得本地的副本在 ftp://some.host/editme.txt"
-
-#~ msgid "Save as"
-#~ msgstr "儲存為"
-
-#~ msgid "Copy to clipboard"
-#~ msgstr "複製到剪貼簿"
-
-#~ msgid "Cut to clipboard"
-#~ msgstr "剪下到剪貼簿"
-
-#~ msgid "Sort block"
-#~ msgstr "排序區塊"
-
-#~ msgid "Sort"
-#~ msgstr "排序"
-
-#~ msgid "External command"
-#~ msgstr "外部指令"

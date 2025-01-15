@@ -5,7 +5,7 @@
 # Translators:
 # Enrico Nicoletto <enrico.BR@gmx.co.uk>, 2013
 # Heitor Adão Júnior <heitoradao@gmail.com>, 2017
-# marcelo cripe <marcelocripe@gmail.com>, 2022-2024
+# marcelo cripe <marcelocripe@gmail.com>, 2022-2025
 # Mauro Hemerly Gazzani <mauro.hemerly@gmail.com>, 2017
 # Rafael Fontenelle <rffontenelle@gmail.com>, 2012
 # Slava Zanko <slavazanko@gmail.com>, 2011
@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-11 12:47+0300\n"
+"POT-Creation-Date: 2025-01-15 17:54+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: marcelo cripe <marcelocripe@gmail.com>, 2022-2024\n"
+"Last-Translator: marcelo cripe <marcelocripe@gmail.com>, 2022-2025\n"
 "Language-Team: Portuguese (Brazil) (http://app.transifex.com/mc/mc/language/"
 "pt_BR/)\n"
 "Language: pt_BR\n"
@@ -1000,9 +1000,8 @@ msgstr ""
 msgid "Diff:"
 msgstr "Diff:"
 
-#, fuzzy
 msgid "File name is empty!"
-msgstr "Nome do arquivo:"
+msgstr "O nome do arquivo está vazio!"
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -1211,9 +1210,8 @@ msgstr "Ir para a linha"
 msgid "Save block"
 msgstr "Salvar o bloco"
 
-#, fuzzy
 msgid "Cannot save block"
-msgstr "Não foi possível salvar o arquivo"
+msgstr "Não foi possível salvar o bloco"
 
 msgid "Insert file"
 msgstr "Inserir linha"
@@ -1245,9 +1243,8 @@ msgstr "Colar a saída do comando externo"
 msgid "Enter shell command(s):"
 msgstr "Insira o(s) comando(s) do shell:"
 
-#, fuzzy
 msgid "Cannot execute external command"
-msgstr "Não foi possível executar o comando"
+msgstr "Não foi possível executar o comando externo"
 
 msgid "mail -s <subject> -c <cc> <to>"
 msgstr "mail -s <subject> -c <cc> <to>"
@@ -1641,9 +1638,8 @@ msgstr ""
 "Um editor de texto amigável\n"
 "escrito para o Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2025 the Free Software Foundation"
-msgstr "Direitos de Autor (C) 1996-2024 a Fundação ‘Free Software Foundation’"
+msgstr "Todos os direitos reservados (C) 1996-2025 a Free Software Foundation"
 
 msgid "About"
 msgstr "Sobre"
@@ -1841,7 +1837,7 @@ msgid "Permissions (octal): %o"
 msgstr "Permissões (octal): %o"
 
 msgid "Chown advanced command"
-msgstr "Comando avançado do chown"
+msgstr "Comando avançado do ‘chown’"
 
 #, c-format
 msgid ""
@@ -1865,7 +1861,7 @@ msgid ""
 "Cannot chown \"%s\"\n"
 "%s"
 msgstr ""
-"Não foi possível executar o chown ‘%s’\n"
+"Não foi possível executar o ‘chown’ do ‘%s’\n"
 "%s"
 
 msgid "< Default >"
@@ -2287,12 +2283,12 @@ msgstr ""
 "Não foi possível executar o comando chattr ‘%s’\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
-"Não foi possível obter os atributos do arquivo da origem ‘%s’\n"
+"Não foi possível obter os atributos do ‘ext2’ de ‘%s’\n"
 "%s"
 
 msgid "set &user ID on execution"
@@ -2371,7 +2367,7 @@ msgid "Size"
 msgstr "Tamanho"
 
 msgid "Chown command"
-msgstr "Comando chown"
+msgstr "Comando do ‘chown’"
 
 msgid "User name"
 msgstr "Nome do usuário"
@@ -2622,7 +2618,7 @@ msgid ""
 "Cannot stat hardlink source file \"%s\"\n"
 "%s"
 msgstr ""
-"Não foi possível estabelecer o vínculo físico (hardlink) do arquivo da "
+"Não foi possível estabelecer o vínculo rígido (hardlink) do arquivo da "
 "origem ‘%s’\n"
 "%s"
 
@@ -2631,12 +2627,12 @@ msgid ""
 "Cannot create target hardlink \"%s\"\n"
 "%s"
 msgstr ""
-"Não foi possível criar o vínculo físico (hardlink) do destino ‘%s’\n"
+"Não foi possível criar o vínculo rígido (hardlink) do destino ‘%s’\n"
 "%s"
 
 #, c-format
 msgid "Cannot create target hardlink \"%s\""
-msgstr "Não foi possível criar o vínculo físico (hardlink) do destino ‘%s’"
+msgstr "Não foi possível criar o vínculo rígido (hardlink) do destino ‘%s’"
 
 #, c-format
 msgid ""
@@ -2688,9 +2684,8 @@ msgstr ""
 "‘%s’\n"
 "são o mesmo arquivo"
 
-#, fuzzy
 msgid "Ignore a&ll"
-msgstr "Ignor&ar tudo"
+msgstr "Ignorar &tudo"
 
 #, c-format
 msgid ""
@@ -2749,12 +2744,12 @@ msgstr ""
 "Não foi possível remover o diretório ‘%s’\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot enter into directory \"%s\"\n"
 "%s"
 msgstr ""
-"Não foi possível sobrescrever o diretório ‘%s’\n"
+"Não foi possível entrar no diretório ‘%s’\n"
 "%s"
 
 #, c-format
@@ -2782,7 +2777,7 @@ msgstr ""
 "%s"
 
 msgid "Cannot operate on \"..\"!"
-msgstr "Não foi possível operar em ‘..’"
+msgstr "Não foi possível operar no ‘..’"
 
 #, c-format
 msgid ""
@@ -2792,20 +2787,20 @@ msgstr ""
 "Não foi possível obter o estado do arquivo da origem ‘%s’\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
-"Não foi possível obter os atributos do arquivo da origem ‘%s’\n"
+"Não foi possível obter os atributos do ‘ext2’ do arquivo de origem ‘%s’\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
-"Não foi possível definir os atributos do arquivo do destino ‘%s’\n"
+"Não foi possível definir os atributos do ‘ext2’ do arquivo do destino ‘%s’\n"
 "%s"
 
 #, c-format
@@ -2821,7 +2816,7 @@ msgid ""
 "Cannot chown target file \"%s\"\n"
 "%s"
 msgstr ""
-"Não foi possível executar o chown no arquivo do destino ‘%s’\n"
+"Não foi possível executar o ‘chown’ no arquivo do destino ‘%s’\n"
 "%s"
 
 #, c-format
@@ -2864,7 +2859,7 @@ msgid ""
 "Cannot fstat target file \"%s\"\n"
 "%s"
 msgstr ""
-"Não foi possível executar o fstat no arquivo do destino ‘%s’\n"
+"Não foi possível executar o ‘fstat’ no arquivo do destino ‘%s’\n"
 "%s"
 
 #, c-format
@@ -2919,12 +2914,13 @@ msgstr ""
 "Não foi possível fechar o arquivo do destino ‘%s’\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
-"Não foi possível definir os atributos para o arquivo do destino ‘%s’\n"
+"Não foi possível definir os atributos do ‘ext2’ para o arquivo do destino "
+"‘%s’\n"
 "%s"
 
 #, c-format
@@ -2935,12 +2931,12 @@ msgstr ""
 "Não foi possível obter o estado do diretório ‘%s’\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
-"Não foi possível obter os atributos do diretório da origem ‘%s’\n"
+"Não foi possível obter os atributos do ‘ext2’ do diretório de origem ‘%s’\n"
 "%s"
 
 #, c-format
@@ -2980,7 +2976,7 @@ msgid ""
 "Cannot chown target directory \"%s\"\n"
 "%s"
 msgstr ""
-"Não foi possível executar o chown no diretório de destino ‘%s’\n"
+"Não foi possível executar o ‘chown’ no diretório do destino ‘%s’\n"
 "%s"
 
 #, c-format
@@ -3870,7 +3866,7 @@ msgid ""
 "Cannot stat the destination\n"
 "%s"
 msgstr ""
-"Não é possível estabelecer o destino\n"
+"Não foi possível estabelecer o destino\n"
 "%s"
 
 #, c-format
@@ -3946,11 +3942,13 @@ msgstr ""
 "Se você quiser desistir, pressione a ESC ou\n"
 "Escapar e aguarde."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot accept this key.\n"
 "You have entered \"%s\""
-msgstr "Não foi possível aceitar esta tecla"
+msgstr ""
+"Não foi possível aceitar esta tecla.\n"
+"Você digitou a tecla ‘%s’"
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -4191,7 +4189,7 @@ msgid ""
 "Cannot open cpio archive\n"
 "%s"
 msgstr ""
-"Não foi possível abrir o arquivo cpio\n"
+"Não foi possível abrir o arquivo ‘cpio’\n"
 "%s"
 
 #, c-format
@@ -4199,7 +4197,7 @@ msgid ""
 "Premature end of cpio archive\n"
 "%s"
 msgstr ""
-"Ocorreu o fim prematuro do arquivo cpio\n"
+"Ocorreu o fim prematuro do arquivo ‘cpio’\n"
 "%s"
 
 #, c-format
@@ -4209,9 +4207,9 @@ msgid ""
 "in cpio archive\n"
 "%s"
 msgstr ""
-"Alguns vínculos físicos (hardlinks) estão inconsistentes em\n"
+"Alguns vínculos rígidos (hardlinks) estão inconsistentes em\n"
 "%s\n"
-"no arquivo cpio\n"
+"no arquivo ‘cpio’\n"
 "%s"
 
 #, c-format
@@ -4223,7 +4221,7 @@ msgid ""
 "Corrupted cpio header encountered in\n"
 "%s"
 msgstr ""
-"O cabeçalho do cpio está corrompido e pode ser encontrado em\n"
+"O cabeçalho do arquivo ‘cpio’ está corrompido e pode ser encontrado em\n"
 "%s"
 
 #, c-format
@@ -4292,17 +4290,17 @@ msgstr ""
 
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
-msgstr "O ftpfs foi desconectando de %s"
+msgstr "O ‘ftpfs’ está desconectando de %s"
 
 #, c-format
 msgid "FTP: Password required for %s"
 msgstr "O FTP necessita de uma senha para %s"
 
 msgid "ftpfs: sending login name"
-msgstr "O ftpfs está enviando o nome de usuário"
+msgstr "O ‘ftpfs’ está enviando o nome de usuário"
 
 msgid "ftpfs: sending user password"
-msgstr "O ftpfs está enviando a senha do usuário"
+msgstr "O ‘ftpfs’ está enviando a senha do usuário"
 
 #, c-format
 msgid "FTP: Account required for user %s"
@@ -4312,17 +4310,17 @@ msgid "Account:"
 msgstr "Conta:"
 
 msgid "ftpfs: sending user account"
-msgstr "O ftpfs está enviando a conta do usuário"
+msgstr "O ‘ftpfs’ está enviando a conta do usuário"
 
 msgid "ftpfs: logged in"
-msgstr "O ftpfs está autenticado"
+msgstr "O ‘ftpfs’ está autenticado"
 
 #, c-format
 msgid "ftpfs: Login incorrect for user %s "
-msgstr "A está autenticação do ftpfs não está correta para o usuário %s "
+msgstr "A está autenticação do ‘ftpfs’ não está correta para o usuário %s "
 
 msgid "ftpfs: Invalid host name."
-msgstr "O nome do hospedeiro para o ftpfs não é válido."
+msgstr "O nome do hospedeiro para o ‘ftpfs’ não é válido."
 
 #, c-format
 msgid "ftpfs: %s"
@@ -4330,14 +4328,14 @@ msgstr "ftpfs: %s"
 
 #, c-format
 msgid "ftpfs: making connection to %s"
-msgstr "O ftpfs está estabelecendo a conexão para %s"
+msgstr "O ‘ftpfs’ está estabelecendo a conexão para %s"
 
 msgid "ftpfs: connection interrupted by user"
-msgstr "A conexão do ftpfs foi interrompida pelo usuário"
+msgstr "A conexão do ‘ftpfs’ foi interrompida pelo usuário"
 
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
-msgstr "A conexão do ftpfs com o servidor falhou: %s"
+msgstr "A conexão do‘ftpfs’ com o servidor falhou: %s"
 
 #, c-format
 msgid "Waiting to retry... %d (Control-G to cancel)"
@@ -4348,52 +4346,52 @@ msgstr ""
 #, c-format
 msgid "ftpfs: could not make address-to-name translation: %s"
 msgstr ""
-"Não foi possível o ftpfs realizar a tradução do endereço para o nome: %s"
+"Não foi possível o ‘ftpfs’ realizar a tradução do endereço para o nome: %s"
 
 #, c-format
 msgid "ftpfs: try reconnect to server, attempt %u"
 msgstr ""
-"O ftpfs está realizando a tentativa de reconectar ao servidor, tentativa %u"
+"O ‘ftpfs’ está realizando a tentativa de reconectar ao servidor, tentativa %u"
 
 #, c-format
 msgid "ftpfs: could not get socket name: %s"
-msgstr "Não foi possível o ftpfs obter o nome do soquete: %s"
+msgstr "Não foi possível o ‘ftpfs’ obter o nome do soquete: %s"
 
 msgid "ftpfs: could not reconnect to server"
-msgstr "Não foi possível o ftpfs reconectar ao servidor"
+msgstr "Não foi possível o ‘ftpfs’ reconectar ao servidor"
 
 msgid "ftpfs: invalid address family"
-msgstr "A família de endereço do ftpfs não é válida"
+msgstr "A família de endereço do ‘ftpfs’ não é válida"
 
 #, c-format
 msgid "ftpfs: could not create socket: %s"
-msgstr "Não foi possível o ftpfs criar o soquete: %s"
+msgstr "Não foi possível o ‘ftpfs’ criar o soquete: %s"
 
 msgid "ftpfs: could not setup passive mode"
-msgstr "Não foi possível o ftpfs configurar modo passivo"
+msgstr "Não foi possível o ‘ftpfs’ configurar modo passivo"
 
 msgid "ftpfs: aborting transfer."
-msgstr "O ftpfs está interrompendo a transferência."
+msgstr "O ‘ftpfs’ está interrompendo a transferência."
 
 #, c-format
 msgid "ftpfs: abort error: %s"
-msgstr "Ocorreu um erro no ftpfs: %s"
+msgstr "Ocorreu um erro no ‘ftpfs’: %s"
 
 msgid "ftpfs: abort failed"
-msgstr "O ftpfs falhou ao ser interrompido"
+msgstr "O ‘ftpfs’ falhou ao ser interrompido"
 
 msgid "ftpfs: CWD failed."
-msgstr "O ftpfs falhou no CWD."
+msgstr "O ‘ftpfs’ falhou no CWD."
 
 msgid "ftpfs: couldn't resolve symlink"
-msgstr "Não é possível o ftpfs resolver a vínculo simbólico"
+msgstr "Não é possível o ‘ftpfs’ resolver a vínculo simbólico"
 
 msgid "Resolving symlink..."
 msgstr "Resolvendo o vínculo simbólico..."
 
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
-msgstr "O ftpfs está lendo o diretório do FTP %s... %s%s"
+msgstr "O ‘ftpfs’ está lendo o diretório do FTP %s... %s%s"
 
 msgid "(strict rfc959)"
 msgstr "(rfc959 estrito)"
@@ -4402,7 +4400,7 @@ msgid "(chdir first)"
 msgstr "(primeiro o chdir)"
 
 msgid "ftpfs: failed; nowhere to fallback to"
-msgstr "Ocorreu uma falha no ftpfs e não é possível voltar"
+msgstr "Ocorreu uma falha no ‘ftpfs’ e não é possível voltar"
 
 #, c-format
 msgid "%s: failure"
@@ -4413,7 +4411,7 @@ msgid "%s: done."
 msgstr "%s: foi concluído com sucesso."
 
 msgid "ftpfs: storing file"
-msgstr "O ftpfs está armazenando os arquivos"
+msgstr "O ‘ftpfs’ está armazenando os arquivos"
 
 msgid ""
 "~/.netrc file has incorrect mode\n"
@@ -4846,36 +4844,3 @@ msgstr "Você quer continuar a partir do início?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Não foi possível obter uma cópia local do /ftp://some.host/editme.txt"
-
-#~ msgid "Save as"
-#~ msgstr "Salvar como"
-
-#~ msgid "Copy to clipboard"
-#~ msgstr "Copiar para a área de transferência"
-
-#~ msgid "Cut to clipboard"
-#~ msgstr "Recortar para área de transferência"
-
-#~ msgid "Sort block"
-#~ msgstr "Ordenar o bloco"
-
-#~ msgid "Sort"
-#~ msgstr "Ordenar"
-
-#~ msgid "External command"
-#~ msgstr "Comando externo"
-
-#, c-format
-#~ msgid "You have entered \"%s\""
-#~ msgstr "Você inseriu ‘%s’"
-
-#, c-format
-#~ msgid ""
-#~ "Cannot get flags of \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Não foi possível obter os parâmetros de ‘%s’\n"
-#~ "%s"
-
-#~ msgid "Ski&p all"
-#~ msgstr "I&gnorar tudo"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-11 12:47+0300\n"
+"POT-Creation-Date: 2025-01-15 17:54+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Shuree Nyam-Oidov <99shuree@gmail.com>, 2020\n"
 "Language-Team: Mongolian (http://app.transifex.com/mc/mc/language/mn/)\n"
@@ -1095,9 +1095,8 @@ msgstr ""
 msgid "Save block"
 msgstr ""
 
-#, fuzzy
 msgid "Cannot save block"
-msgstr "Анализ хийж чадсангүй:"
+msgstr ""
 
 msgid "Insert file"
 msgstr ""
@@ -2536,11 +2535,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot enter into directory \"%s\"\n"
 "%s"
-msgstr "Хавтасны доторхыг уншиж чадсангүй"
+msgstr ""
 
 #, c-format
 msgid ""

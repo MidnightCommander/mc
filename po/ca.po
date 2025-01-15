@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-11 12:47+0300\n"
+"POT-Creation-Date: 2025-01-15 17:54+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>, 2017-2024\n"
 "Language-Team: Catalan (http://app.transifex.com/mc/mc/language/ca/)\n"
@@ -988,9 +988,8 @@ msgstr ""
 msgid "Diff:"
 msgstr "Diferència:"
 
-#, fuzzy
 msgid "File name is empty!"
-msgstr "Nom del fitxer:"
+msgstr "El nom del fitxer és buit!"
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -1196,9 +1195,8 @@ msgstr "Ves a la línia"
 msgid "Save block"
 msgstr "Desa el bloc"
 
-#, fuzzy
 msgid "Cannot save block"
-msgstr "No s'ha pogut desar el fitxer"
+msgstr ""
 
 msgid "Insert file"
 msgstr "Insereix un fitxer"
@@ -1230,9 +1228,8 @@ msgstr "Enganxa la sortida de l'ordre externa"
 msgid "Enter shell command(s):"
 msgstr "Introduïu una/es ordre/s a l'intèrpret d'ordres:"
 
-#, fuzzy
 msgid "Cannot execute external command"
-msgstr "No s'ha pogut executar l'ordre"
+msgstr ""
 
 msgid "mail -s <subject> -c <cc> <to>"
 msgstr "mail -s <assumpte> -c <cc> <per a>"
@@ -1626,9 +1623,8 @@ msgstr ""
 "Un editor de text fàcil d'emprar\n"
 "escrit per al Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2025 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2024 la Free Software Foundation"
+msgstr ""
 
 msgid "About"
 msgstr "Quant a"
@@ -2266,12 +2262,12 @@ msgstr ""
 "No s'ha pogut fer chattr «%s»\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
-"No es poden obtenir els atributs del fitxer d'origen «%s»\n"
+"No es poden obtenir els atributs ext2 de «%s»\n"
 "%s"
 
 msgid "set &user ID on execution"
@@ -2661,9 +2657,8 @@ msgstr ""
 "«%s»\n"
 "són el mateix fitxer"
 
-#, fuzzy
 msgid "Ignore a&ll"
-msgstr "Ignor&a-ho tot"
+msgstr "I&gnorar-ho tot"
 
 #, c-format
 msgid ""
@@ -2722,13 +2717,11 @@ msgstr ""
 "No s'ha pogut eliminar el directori «%s»\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot enter into directory \"%s\"\n"
 "%s"
 msgstr ""
-"No s'ha pogut sobreescriure el directori «%s»\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -2765,20 +2758,20 @@ msgstr ""
 "No s'ha pogut fer estat al fitxer d'origen «%s»\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
-"No es poden obtenir els atributs del fitxer d'origen «%s»\n"
+"No es poden obtenir els atributs ext2 del fitxer font «%s»\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
-"No es poden establir els atributs del fitxer de destinació «%s»\n"
+"No es poden establir els atributs ext2 del fitxer de destinació «%s»\n"
 "%s"
 
 #, c-format
@@ -2892,12 +2885,12 @@ msgstr ""
 "No s'ha pogut tancar el fitxer de destinació «%s»\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
-"No es poden establir els atributs per al fitxer de destinació «%s»\n"
+"No es poden obtenir els atributs ext2 per al fitxer de destinació «%s»\n"
 "%s"
 
 #, c-format
@@ -2908,12 +2901,12 @@ msgstr ""
 "No s'ha pogut veure l'estat del directori d'origen «%s»\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
-"No es poden obtenir els atributs del directori d'origen «%s»\n"
+"No es poden obtenir els atributs ext2 del fitxer de destinació «%s»\n"
 "%s"
 
 #, c-format
@@ -3909,11 +3902,11 @@ msgstr ""
 "Si voleu sortir, premeu un cop la tecla\n"
 "d'Escapada i espereu."
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot accept this key.\n"
 "You have entered \"%s\""
-msgstr "No s'ha pogut acceptar aquesta clau"
+msgstr ""
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -4199,6 +4192,8 @@ msgid ""
 "Cannot open %s archive\n"
 "%s"
 msgstr ""
+"No s'ha pogut obrir l'arxiu %s\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -4788,36 +4783,3 @@ msgstr "Voleu continuar des del començament?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "No s'ha pogut obtenir una còpia local de /ftp://algun.amfitrió/editam.txt"
-
-#~ msgid "Save as"
-#~ msgstr "Desa com a"
-
-#~ msgid "Copy to clipboard"
-#~ msgstr "Copia al porta-retalls"
-
-#~ msgid "Cut to clipboard"
-#~ msgstr "Talla al porta-retalls"
-
-#~ msgid "Sort block"
-#~ msgstr "Ordena el bloc"
-
-#~ msgid "Sort"
-#~ msgstr "Ordena"
-
-#~ msgid "External command"
-#~ msgstr "Ordre externa"
-
-#, c-format
-#~ msgid "You have entered \"%s\""
-#~ msgstr "Heu introduït «%s»"
-
-#, c-format
-#~ msgid ""
-#~ "Cannot get flags of \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "No s'han pogut obtenir els indicadors de «%s»\n"
-#~ "%s"
-
-#~ msgid "Ski&p all"
-#~ msgstr "Saltar &tot"

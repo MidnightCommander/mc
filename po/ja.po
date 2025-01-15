@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-11 12:47+0300\n"
+"POT-Creation-Date: 2025-01-15 17:54+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
 "Last-Translator: Takuro Onoue <kusanaginoturugi@gmail.com>, 2021\n"
 "Language-Team: Japanese (http://app.transifex.com/mc/mc/language/ja/)\n"
@@ -908,9 +908,8 @@ msgstr ""
 msgid "Diff:"
 msgstr ""
 
-#, fuzzy
 msgid "File name is empty!"
-msgstr "ファイル名:"
+msgstr ""
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -1107,9 +1106,8 @@ msgstr "行移動"
 msgid "Save block"
 msgstr "ブロックの保存"
 
-#, fuzzy
 msgid "Cannot save block"
-msgstr "ファイルを保存できません"
+msgstr ""
 
 msgid "Insert file"
 msgstr "ファイルの挿入"
@@ -1139,9 +1137,8 @@ msgstr ""
 msgid "Enter shell command(s):"
 msgstr "シェル コマンドの入力:"
 
-#, fuzzy
 msgid "Cannot execute external command"
-msgstr "コマンドを実行できません"
+msgstr ""
 
 msgid "mail -s <subject> -c <cc> <to>"
 msgstr "mail -s <件名> -c <cc> <to>"
@@ -2553,11 +2550,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot enter into directory \"%s\"\n"
 "%s"
-msgstr "ディレクトリー %s が作成できません"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -4475,24 +4472,3 @@ msgstr "初めから続けますか?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "Save as"
-#~ msgstr "別名で保存"
-
-#~ msgid "Copy to clipboard"
-#~ msgstr "クリップボードにコピー"
-
-#~ msgid "Cut to clipboard"
-#~ msgstr "グリップボードに切り取り"
-
-#~ msgid "Sort block"
-#~ msgstr "ブロックの並び替え"
-
-#~ msgid "Sort"
-#~ msgstr "並び替え"
-
-#~ msgid "External command"
-#~ msgstr "外部コマンド"
-
-#~ msgid "Ski&p all"
-#~ msgstr "すべて飛ばす(&P)"
