@@ -14,6 +14,16 @@ list=/afs;/coda;/:;/...;/net
 
 [terminal:console]
 insert=\\e[2~
+f1=\\e[[A
+f2=\\e[[B
+f3=\\e[[C
+f4=\\e[[D
+f5=\\e[[E
+f6=\\e[17~
+f7=\\e[18~
+f8=\\e[19~
+f9=\\e[20~
+f10=\\e[21~
 f11=\\e[25~
 f12=\\e[26~
 f13=\\e[28~
