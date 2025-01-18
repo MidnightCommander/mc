@@ -562,7 +562,7 @@ static gboolean
 shell_open_archive_talk (struct vfs_class *me, struct vfs_s_super *super)
 {
     shell_super_t *shell_super = SHELL_SUPER (super);
-    char answer[2048];
+    char answer[BUF_2K];
 
     printf ("\n%s\n", _ ("shell: Waiting for initial line..."));
 

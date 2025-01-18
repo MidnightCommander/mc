@@ -955,9 +955,11 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int args_size)
 {
     FILE *g = NULL;
     tty_color_pair_t color;
-    char last_fg[32] = "", last_bg[32] = "", last_attrs[64] = "";
-    char whole_right[512];
-    char whole_left[512];
+    char last_fg[BUF_TINY / 2] = "";
+    char last_bg[BUF_TINY / 2] = "";
+    char last_attrs[BUF_TINY] = "";
+    char whole_right[BUF_MEDIUM];
+    char whole_left[BUF_MEDIUM];
     char *l = NULL;
     int save_line = 0, line = 0;
     context_rule_t *c = NULL;

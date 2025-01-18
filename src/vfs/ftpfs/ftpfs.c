@@ -1666,7 +1666,8 @@ static void
 resolve_symlink_with_ls_options (struct vfs_class *me, struct vfs_s_super *super,
                                  struct vfs_s_inode *dir)
 {
-    char buffer[2048] = "", *filename;
+    char buffer[BUF_2K] = "";
+    char *filename;
     int sock;
     FILE *fp;
     struct stat s;

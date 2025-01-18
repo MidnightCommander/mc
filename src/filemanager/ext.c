@@ -655,7 +655,7 @@ regex_check_type (const vfs_path_t *filename_vpath, const char *ptr, gboolean ca
     gboolean found = FALSE;
 
     // Following variables are valid if *have_type is TRUE
-    static char content_string[2048];
+    static char content_string[BUF_2K];
     static size_t content_shift = 0;
     static int got_data = 0;
 

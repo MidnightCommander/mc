@@ -173,7 +173,7 @@ enum
 /*** file scope variables ************************************************************************/
 
 /* tcsh closes all non-standard file descriptors, so we have to use a pipe */
-static char tcsh_fifo[128];
+static char tcsh_fifo[BUF_SMALL];
 
 static int subshell_pty_slave = -1;
 
