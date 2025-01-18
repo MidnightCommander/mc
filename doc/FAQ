@@ -284,13 +284,14 @@ f2 Keyboard
 
 2.7 What 'keys' are the "a1" and "c1" keys mentioned in the manual?
 
-   The "a1" key is the key which has the "a1" caption on it.
+   A1 is the "Home" key on the keypad (numpad 7 with Num Lock turned
+   off), which is decoded as a different key from the regular "Home".
+   Likewise C1 is keypad "End", C1 is keypad "Page Up", C3 is keypad
+   "Page Down", and B2 is documented to "center of keypad", i.e. the 5
+   key, though I don't know whether any keyboards actually use that.
+   They are documented for the curses library (search for "keypad"):
 
-   The "c1" key is the key which has the "c1" caption on it.
-
-   If you have to ask what these two keys are your keyboard hasn't
-   probably got them.  Actually, I have never seen a keyboard which has
-   got them.
+   https://pubs.opengroup.org/onlinepubs/007908799/xcurses/curses.h.html
 
 2.8 How do I change the key bindings?
 
