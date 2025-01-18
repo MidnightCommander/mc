@@ -767,7 +767,9 @@ regex_check_type (const vfs_path_t *filename_vpath, const char *ptr, gboolean ca
         {
             search->search_type = MC_SEARCH_T_REGEX;
             search->is_case_sensitive = !case_insense;
-            found = mc_search_run (search, content_string + content_shift, 0, -1, NULL);
+            found =
+                mc_search_run (search, content_string + content_shift, 0,
+                               sizeof (content_string) - 1, NULL);
             mc_search_free (search);
         }
         else
