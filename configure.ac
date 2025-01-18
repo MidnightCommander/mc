@@ -644,6 +644,7 @@ src/vfs/extfs/helpers/ulha
 src/vfs/extfs/helpers/ulib
 src/vfs/extfs/helpers/unar
 src/vfs/extfs/helpers/urar
+src/vfs/extfs/helpers/usqfs
 src/vfs/extfs/helpers/uwim
 src/vfs/extfs/helpers/uzip
 src/vfs/extfs/helpers/uzoo

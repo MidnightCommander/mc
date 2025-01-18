@@ -1,0 +1,1354 @@
+drwxr-xr-x root/root               235 2024-09-23 14:34 
+drwxr-xr-x root/root               778 2024-09-23 14:34 /bin
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/ash -> busybox
+-rwxr-xr-x root/root               205 2024-09-23 14:34 /bin/board_detect
+-rwxr-xr-x root/root            327717 2024-09-23 14:34 /bin/busybox
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/cat -> busybox
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/chgrp -> busybox
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/chmod -> busybox
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/chown -> busybox
+-rwxr-xr-x root/root             11952 2024-09-23 14:34 /bin/config_generate
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/cp -> busybox
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/date -> busybox
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/dd -> busybox
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/df -> busybox
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/dmesg -> busybox
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/echo -> busybox
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/egrep -> busybox
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/false -> busybox
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/fgrep -> busybox
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/fsync -> busybox
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/grep -> busybox
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/gunzip -> busybox
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/gzip -> busybox
+-rwxr-xr-x root/root              1898 2024-09-23 14:34 /bin/ipcalc.sh
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/kill -> busybox
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/ln -> busybox
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/lock -> busybox
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/login -> busybox
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/ls -> busybox
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/mkdir -> busybox
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/mknod -> busybox
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/mktemp -> busybox
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/mount -> busybox
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/mv -> busybox
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/netmsg -> busybox
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/netstat -> busybox
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/nice -> busybox
+-rwxr-xr-x root/root            132885 2024-09-23 14:34 /bin/opkg
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/passwd -> busybox
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/pidof -> busybox
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/ping -> busybox
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/ping6 -> busybox
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/ps -> busybox
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/pwd -> busybox
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/rm -> busybox
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/rmdir -> busybox
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/sed -> busybox
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/sh -> busybox
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/sleep -> busybox
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/sync -> busybox
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/tar -> busybox
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/touch -> busybox
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/traceroute -> busybox
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/traceroute6 -> busybox
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/true -> busybox
+-rwxr-xr-x root/root             65804 2024-09-23 14:34 /bin/ubus
+-rwxr-xr-x root/root             65573 2024-09-23 14:34 /bin/uclient-fetch
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/umount -> busybox
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/uname -> busybox
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/vi -> busybox
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /bin/zcat -> busybox
+drwxr-xr-x root/root                30 2024-09-23 14:34 /dev
+crw------- root/root             5,  1 2024-09-23 14:34 /dev/console
+drwxr-xr-x root/root               992 2024-09-23 14:34 /etc
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /etc/TZ -> /tmp/TZ
+-rw-r--r-- root/root               397 2024-09-23 14:34 /etc/banner
+-rw-r--r-- root/root               461 2024-09-23 14:34 /etc/banner.failsafe
+drwxr-xr-x root/root                98 2024-09-23 14:34 /etc/board.d
+-rw-r--r-- root/root             22778 2024-09-23 14:34 /etc/board.d/01_leds
+-rw-r--r-- root/root             20235 2024-09-23 14:34 /etc/board.d/02_network
+-rw-r--r-- root/root              3649 2024-09-23 14:34 /etc/board.d/03_gpio_switches
+-rw-r--r-- root/root               256 2024-09-23 14:34 /etc/board.d/99-default_network
+drwxr-xr-x root/root                49 2024-09-23 14:34 /etc/capabilities
+-rw-r--r-- root/root               317 2024-09-23 14:34 /etc/capabilities/ntpd.json
+-rw-r--r-- root/root               277 2024-09-23 14:34 /etc/capabilities/wpad.json
+drwxr-xr-x root/root               113 2024-09-23 14:34 /etc/config
+-rw------- root/root              1183 2024-09-23 14:34 /etc/config/dhcp
+-rw------- root/root               134 2024-09-23 14:34 /etc/config/dropbear
+-rw-r--r-- root/root              4066 2024-09-23 14:34 /etc/config/firewall
+-rw-r--r-- root/root               687 2024-09-23 14:34 /etc/config/luci
+-rw------- root/root               167 2024-09-23 14:34 /etc/config/rpcd
+-rw-r--r-- root/root               788 2024-09-23 14:34 /etc/config/ucitrack
+-rw------- root/root              4497 2024-09-23 14:34 /etc/config/uhttpd
+drwxr-xr-x root/root                 3 2024-09-23 14:34 /etc/crontabs
+-rw-r--r-- root/root               123 2024-09-23 14:34 /etc/device_info
+-rw-r--r-- root/root               948 2024-09-23 14:34 /etc/diag.sh
+-rw------- root/root              1368 2024-09-23 14:34 /etc/dnsmasq.conf
+drwxr-xr-x root/root                77 2024-09-23 14:34 /etc/dropbear
+-rw-r--r-- root/root                 0 2024-09-23 14:34 /etc/dropbear/dropbear_ed25519_host_key
+-rw-r--r-- root/root                 0 2024-09-23 14:34 /etc/dropbear/dropbear_rsa_host_key
+-rw-r--r-- root/root               130 2024-09-23 14:34 /etc/ethers
+-rw-r--r-- root/root                61 2024-09-23 14:34 /etc/fstab
+-rw-r--r-- root/root               211 2024-09-23 14:34 /etc/group
+-rw-r--r-- root/root               110 2024-09-23 14:34 /etc/hosts
+-rw------- root/root               305 2024-09-23 14:34 /etc/hotplug-preinit.json
+drwxr-xr-x root/root               120 2024-09-23 14:34 /etc/hotplug.d
+drwxr-xr-x root/root                 3 2024-09-23 14:34 /etc/hotplug.d/dhcp
+drwxr-xr-x root/root                63 2024-09-23 14:34 /etc/hotplug.d/firmware
+-rw-r--r-- root/root              3882 2024-09-23 14:34 /etc/hotplug.d/firmware/10-ath9k-eeprom
+-rw-r--r-- root/root              7534 2024-09-23 14:34 /etc/hotplug.d/firmware/11-ath10k-caldata
+drwxr-xr-x root/root                85 2024-09-23 14:34 /etc/hotplug.d/ieee80211
+-rw-r--r-- root/root              1065 2024-09-23 14:34 /etc/hotplug.d/ieee80211/00-wifi-migration
+-rw-r--r-- root/root                61 2024-09-23 14:34 /etc/hotplug.d/ieee80211/10-wifi-detect
+-rw-r--r-- root/root              2627 2024-09-23 14:34 /etc/hotplug.d/ieee80211/10_fix_wifi_mac
+drwxr-xr-x root/root                53 2024-09-23 14:34 /etc/hotplug.d/iface
+-rw-r--r-- root/root               155 2024-09-23 14:34 /etc/hotplug.d/iface/00-netstate
+-rw-r--r-- root/root               498 2024-09-23 14:34 /etc/hotplug.d/iface/20-firewall
+drwxr-xr-x root/root                 3 2024-09-23 14:34 /etc/hotplug.d/neigh
+drwxr-xr-x root/root                32 2024-09-23 14:34 /etc/hotplug.d/net
+-rw-r--r-- root/root               236 2024-09-23 14:34 /etc/hotplug.d/net/00-sysctl
+drwxr-xr-x root/root                36 2024-09-23 14:34 /etc/hotplug.d/ntp
+-rw-r--r-- root/root               277 2024-09-23 14:34 /etc/hotplug.d/ntp/25-dnsmasqsec
+drwxr-xr-x root/root                 3 2024-09-23 14:34 /etc/hotplug.d/tftp
+-rw------- root/root              1927 2024-09-23 14:34 /etc/hotplug.json
+drwxr-xr-x root/root               370 2024-09-23 14:34 /etc/init.d
+-rwxr-xr-x root/root              1333 2024-09-23 14:34 /etc/init.d/boot
+-rwxr-xr-x root/root               296 2024-09-23 14:34 /etc/init.d/bootcount
+-rwxr-xr-x root/root               846 2024-09-23 14:34 /etc/init.d/cron
+-rwxr-xr-x root/root             35048 2024-09-23 14:34 /etc/init.d/dnsmasq
+-rwxr-xr-x root/root               263 2024-09-23 14:34 /etc/init.d/done
+-rwxr-xr-x root/root              6199 2024-09-23 14:34 /etc/init.d/dropbear
+-rwxr-xr-x root/root               378 2024-09-23 14:34 /etc/init.d/firewall
+-rwxr-xr-x root/root              1379 2024-09-23 14:34 /etc/init.d/gpio_switch
+-rwxr-xr-x root/root              3640 2024-09-23 14:34 /etc/init.d/led
+-rwxr-xr-x root/root              2665 2024-09-23 14:34 /etc/init.d/log
+-rwxr-xr-x root/root              2706 2024-09-23 14:34 /etc/init.d/network
+-rwxr-xr-x root/root               292 2024-09-23 14:34 /etc/init.d/odhcpd
+-rwxr-xr-x root/root               321 2024-09-23 14:34 /etc/init.d/packet_steering
+-rwxr-xr-x root/root               393 2024-09-23 14:34 /etc/init.d/rpcd
+-rwxr-xr-x root/root              1212 2024-09-23 14:34 /etc/init.d/sysctl
+-rwxr-xr-x root/root               764 2024-09-23 14:34 /etc/init.d/sysfixtime
+-rwxr-xr-x root/root              3226 2024-09-23 14:34 /etc/init.d/sysntpd
+-rwxr-xr-x root/root              1007 2024-09-23 14:34 /etc/init.d/system
+-rwxr-xr-x root/root              1339 2024-09-23 14:34 /etc/init.d/ucitrack
+-rwxr-xr-x root/root              6056 2024-09-23 14:34 /etc/init.d/uhttpd
+-rwxr-xr-x root/root               125 2024-09-23 14:34 /etc/init.d/umount
+-rwxr-xr-x root/root               239 2024-09-23 14:34 /etc/init.d/urandom_seed
+-rwxr-xr-x root/root               220 2024-09-23 14:34 /etc/init.d/urngd
+-rwxr-xr-x root/root              1262 2024-09-23 14:34 /etc/init.d/wpad
+-rw-r--r-- root/root               106 2024-09-23 14:34 /etc/inittab
+drwxr-xr-x root/root                67 2024-09-23 14:34 /etc/iproute2
+-rw-r--r-- root/root                81 2024-09-23 14:34 /etc/iproute2/ematch_map
+-rw-r--r-- root/root               152 2024-09-23 14:34 /etc/iproute2/rt_protos
+-rw-r--r-- root/root               100 2024-09-23 14:34 /etc/iproute2/rt_tables
+lrwxrwxrwx root/root                14 2024-09-23 14:34 /etc/localtime -> /tmp/localtime
+drwxr-xr-x root/root                35 2024-09-23 14:34 /etc/luci-uploads
+-rw-r--r-- root/root                 0 2024-09-23 14:34 /etc/luci-uploads/.placeholder
+drwxr-xr-x root/root               215 2024-09-23 14:34 /etc/modules-boot.d
+lrwxrwxrwx root/root                27 2024-09-23 14:34 /etc/modules-boot.d/02-crypto-hash -> ../modules.d/02-crypto-hash
+lrwxrwxrwx root/root                29 2024-09-23 14:34 /etc/modules-boot.d/04-crypto-crc32c -> ../modules.d/04-crypto-crc32c
+lrwxrwxrwx root/root                27 2024-09-23 14:34 /etc/modules-boot.d/09-crypto-aead -> ../modules.d/09-crypto-aead
+lrwxrwxrwx root/root                30 2024-09-23 14:34 /etc/modules-boot.d/09-crypto-manager -> ../modules.d/09-crypto-manager
+lrwxrwxrwx root/root                24 2024-09-23 14:34 /etc/modules-boot.d/20-usb-core -> ../modules.d/20-usb-core
+lrwxrwxrwx root/root                29 2024-09-23 14:34 /etc/modules-boot.d/21-phy-ath79-usb -> ../modules.d/21-phy-ath79-usb
+lrwxrwxrwx root/root                35 2024-09-23 14:34 /etc/modules-boot.d/30-gpio-button-hotplug -> ../modules.d/30-gpio-button-hotplug
+lrwxrwxrwx root/root                24 2024-09-23 14:34 /etc/modules-boot.d/35-usb-ehci -> ../modules.d/35-usb-ehci
+lrwxrwxrwx root/root                20 2024-09-23 14:34 /etc/modules-boot.d/40-usb2 -> ../modules.d/40-usb2
+-rw-r--r-- root/root                55 2024-09-23 14:34 /etc/modules.conf
+drwxr-xr-x root/root               786 2024-09-23 14:34 /etc/modules.d
+-rw-r--r-- root/root                12 2024-09-23 14:34 /etc/modules.d/02-crypto-hash
+-rw-r--r-- root/root                15 2024-09-23 14:34 /etc/modules.d/04-crypto-crc32c
+-rw-r--r-- root/root                17 2024-09-23 14:34 /etc/modules.d/09-crypto-acompress
+-rw-r--r-- root/root                 5 2024-09-23 14:34 /etc/modules.d/09-crypto-aead
+-rw-r--r-- root/root                 4 2024-09-23 14:34 /etc/modules.d/09-crypto-ccm
+-rw-r--r-- root/root                 5 2024-09-23 14:34 /etc/modules.d/09-crypto-cmac
+-rw-r--r-- root/root                 4 2024-09-23 14:34 /etc/modules.d/09-crypto-ctr
+-rw-r--r-- root/root                 4 2024-09-23 14:34 /etc/modules.d/09-crypto-gcm
+-rw-r--r-- root/root                 9 2024-09-23 14:34 /etc/modules.d/09-crypto-gf128
+-rw-r--r-- root/root                14 2024-09-23 14:34 /etc/modules.d/09-crypto-ghash
+-rw-r--r-- root/root                 5 2024-09-23 14:34 /etc/modules.d/09-crypto-hmac
+-rw-r--r-- root/root                10 2024-09-23 14:34 /etc/modules.d/09-crypto-manager
+-rw-r--r-- root/root                12 2024-09-23 14:34 /etc/modules.d/09-crypto-null
+-rw-r--r-- root/root                27 2024-09-23 14:34 /etc/modules.d/09-crypto-rng
+-rw-r--r-- root/root                 6 2024-09-23 14:34 /etc/modules.d/09-crypto-seqiv
+-rw-r--r-- root/root                15 2024-09-23 14:34 /etc/modules.d/09-crypto-sha512
+-rw-r--r-- root/root                19 2024-09-23 14:34 /etc/modules.d/20-usb-core
+-rw-r--r-- root/root                30 2024-09-23 14:34 /etc/modules.d/21-phy-ath79-usb
+-rw-r--r-- root/root                20 2024-09-23 14:34 /etc/modules.d/30-gpio-button-hotplug
+-rw-r--r-- root/root                 9 2024-09-23 14:34 /etc/modules.d/35-usb-ehci
+-rw-r--r-- root/root                68 2024-09-23 14:34 /etc/modules.d/40-usb2
+-rw-r--r-- root/root                16 2024-09-23 14:34 /etc/modules.d/50-usb-ledtrig-usbport
+-rw-r--r-- root/root                 6 2024-09-23 14:34 /etc/modules.d/ath9k
+-rw-r--r-- root/root                10 2024-09-23 14:34 /etc/modules.d/lib-crc-ccitt
+-rw-r--r-- root/root                10 2024-09-23 14:34 /etc/modules.d/lib-crc32c
+-rw-r--r-- root/root                40 2024-09-23 14:34 /etc/modules.d/lib-lzo
+-rw-r--r-- root/root                43 2024-09-23 14:34 /etc/modules.d/nf-conntrack
+-rw-r--r-- root/root                31 2024-09-23 14:34 /etc/modules.d/nf-flow
+-rw-r--r-- root/root                14 2024-09-23 14:34 /etc/modules.d/nf-log
+-rw-r--r-- root/root                 7 2024-09-23 14:34 /etc/modules.d/nf-nat
+-rw-r--r-- root/root                15 2024-09-23 14:34 /etc/modules.d/nf-reject
+-rw-r--r-- root/root                15 2024-09-23 14:34 /etc/modules.d/nf-reject6
+-rw-r--r-- root/root                10 2024-09-23 14:34 /etc/modules.d/nfnetlink
+-rw-r--r-- root/root               157 2024-09-23 14:34 /etc/modules.d/nft-core
+-rw-r--r-- root/root                47 2024-09-23 14:34 /etc/modules.d/nft-fib
+-rw-r--r-- root/root                31 2024-09-23 14:34 /etc/modules.d/nft-nat
+-rw-r--r-- root/root                74 2024-09-23 14:34 /etc/modules.d/nft-offload
+-rw-r--r-- root/root                10 2024-09-23 14:34 /etc/modules.d/ppp
+-rw-r--r-- root/root                 6 2024-09-23 14:34 /etc/modules.d/pppoe
+lrwxrwxrwx root/root                12 2024-09-23 14:34 /etc/mtab -> /proc/mounts
+drwxr-xr-x root/root                64 2024-09-23 14:34 /etc/nftables.d
+-rw-r--r-- root/root              1139 2024-09-23 14:34 /etc/nftables.d/10-custom-filter-chains.nft
+-rw-r--r-- root/root               197 2024-09-23 14:34 /etc/nftables.d/README
+-rw------- root/root                75 2024-09-23 14:34 /etc/odhcp6c.user
+drwxr-xr-x root/root                 3 2024-09-23 14:34 /etc/odhcp6c.user.d
+-rw-r--r-- root/root               214 2024-09-23 14:34 /etc/openwrt_release
+-rw-r--r-- root/root                18 2024-09-23 14:34 /etc/openwrt_version
+drwxr-xr-x root/root                73 2024-09-23 14:34 /etc/opkg
+-rw-r--r-- root/root               103 2024-09-23 14:34 /etc/opkg/customfeeds.conf
+-rw-r--r-- root/root               577 2024-09-23 14:34 /etc/opkg/distfeeds.conf
+drwxr-xr-x root/root                39 2024-09-23 14:34 /etc/opkg/keys
+-rw-r--r-- root/root               124 2024-09-23 14:34 /etc/opkg/keys/b5043e70f9a75cde
+-rw-r--r-- root/root               108 2024-09-23 14:34 /etc/opkg.conf
+lrwxrwxrwx root/root                21 2024-09-23 14:34 /etc/os-release -> ../usr/lib/os-release
+-rw-r--r-- root/root               374 2024-09-23 14:34 /etc/passwd
+drwxr-xr-x root/root                83 2024-09-23 14:34 /etc/ppp
+-rw------- root/root                41 2024-09-23 14:34 /etc/ppp/chap-secrets
+-rw-r--r-- root/root               260 2024-09-23 14:34 /etc/ppp/filter
+-rw-r--r-- root/root                79 2024-09-23 14:34 /etc/ppp/options
+lrwxrwxrwx root/root                20 2024-09-23 14:34 /etc/ppp/resolv.conf -> /tmp/resolv.conf.ppp
+-rwxr-xr-x root/root               609 2024-09-23 14:34 /etc/preinit
+-rw-r--r-- root/root              1046 2024-09-23 14:34 /etc/profile
+-rw-r--r-- root/root              2541 2024-09-23 14:34 /etc/protocols
+drwxr-xr-x root/root                96 2024-09-23 14:34 /etc/rc.button
+-rwxr-xr-x root/root                87 2024-09-23 14:34 /etc/rc.button/failsafe
+-rwxr-xr-x root/root                81 2024-09-23 14:34 /etc/rc.button/power
+-rwxr-xr-x root/root               134 2024-09-23 14:34 /etc/rc.button/reboot
+-rwxr-xr-x root/root               419 2024-09-23 14:34 /etc/rc.button/reset
+-rwxr-xr-x root/root               526 2024-09-23 14:34 /etc/rc.button/rfkill
+-rwxr-xr-x root/root              2101 2024-09-23 14:34 /etc/rc.button/wps
+-rwxr-xr-x root/root              3552 2024-09-23 14:34 /etc/rc.common
+drwxr-xr-x root/root               595 2024-09-23 14:34 /etc/rc.d
+lrwxrwxrwx root/root                21 2024-09-23 14:34 /etc/rc.d/K10gpio_switch -> ../init.d/gpio_switch
+lrwxrwxrwx root/root                14 2024-09-23 14:34 /etc/rc.d/K21wpad -> ../init.d/wpad
+lrwxrwxrwx root/root                18 2024-09-23 14:34 /etc/rc.d/K50dropbear -> ../init.d/dropbear
+lrwxrwxrwx root/root                16 2024-09-23 14:34 /etc/rc.d/K85odhcpd -> ../init.d/odhcpd
+lrwxrwxrwx root/root                13 2024-09-23 14:34 /etc/rc.d/K89log -> ../init.d/log
+lrwxrwxrwx root/root                14 2024-09-23 14:34 /etc/rc.d/K90boot -> ../init.d/boot
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /etc/rc.d/K90network -> ../init.d/network
+lrwxrwxrwx root/root                20 2024-09-23 14:34 /etc/rc.d/K90sysfixtime -> ../init.d/sysfixtime
+lrwxrwxrwx root/root                16 2024-09-23 14:34 /etc/rc.d/K90umount -> ../init.d/umount
+lrwxrwxrwx root/root                20 2024-09-23 14:34 /etc/rc.d/S00sysfixtime -> ../init.d/sysfixtime
+lrwxrwxrwx root/root                15 2024-09-23 14:34 /etc/rc.d/S00urngd -> ../init.d/urngd
+lrwxrwxrwx root/root                14 2024-09-23 14:34 /etc/rc.d/S10boot -> ../init.d/boot
+lrwxrwxrwx root/root                16 2024-09-23 14:34 /etc/rc.d/S10system -> ../init.d/system
+lrwxrwxrwx root/root                16 2024-09-23 14:34 /etc/rc.d/S11sysctl -> ../init.d/sysctl
+lrwxrwxrwx root/root                13 2024-09-23 14:34 /etc/rc.d/S12log -> ../init.d/log
+lrwxrwxrwx root/root                14 2024-09-23 14:34 /etc/rc.d/S12rpcd -> ../init.d/rpcd
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /etc/rc.d/S19dnsmasq -> ../init.d/dnsmasq
+lrwxrwxrwx root/root                18 2024-09-23 14:34 /etc/rc.d/S19dropbear -> ../init.d/dropbear
+lrwxrwxrwx root/root                18 2024-09-23 14:34 /etc/rc.d/S19firewall -> ../init.d/firewall
+lrwxrwxrwx root/root                14 2024-09-23 14:34 /etc/rc.d/S19wpad -> ../init.d/wpad
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /etc/rc.d/S20network -> ../init.d/network
+lrwxrwxrwx root/root                25 2024-09-23 14:34 /etc/rc.d/S25packet_steering -> ../init.d/packet_steering
+lrwxrwxrwx root/root                16 2024-09-23 14:34 /etc/rc.d/S35odhcpd -> ../init.d/odhcpd
+lrwxrwxrwx root/root                14 2024-09-23 14:34 /etc/rc.d/S50cron -> ../init.d/cron
+lrwxrwxrwx root/root                16 2024-09-23 14:34 /etc/rc.d/S50uhttpd -> ../init.d/uhttpd
+lrwxrwxrwx root/root                18 2024-09-23 14:34 /etc/rc.d/S80ucitrack -> ../init.d/ucitrack
+lrwxrwxrwx root/root                21 2024-09-23 14:34 /etc/rc.d/S94gpio_switch -> ../init.d/gpio_switch
+lrwxrwxrwx root/root                14 2024-09-23 14:34 /etc/rc.d/S95done -> ../init.d/done
+lrwxrwxrwx root/root                13 2024-09-23 14:34 /etc/rc.d/S96led -> ../init.d/led
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /etc/rc.d/S98sysntpd -> ../init.d/sysntpd
+lrwxrwxrwx root/root                19 2024-09-23 14:34 /etc/rc.d/S99bootcount -> ../init.d/bootcount
+lrwxrwxrwx root/root                22 2024-09-23 14:34 /etc/rc.d/S99urandom_seed -> ../init.d/urandom_seed
+-rw-r--r-- root/root               132 2024-09-23 14:34 /etc/rc.local
+lrwxrwxrwx root/root                16 2024-09-23 14:34 /etc/resolv.conf -> /tmp/resolv.conf
+-rw-r--r-- root/root              3073 2024-09-23 14:34 /etc/services
+-rw------- root/root               204 2024-09-23 14:34 /etc/shadow
+-rw-r--r-- root/root                 9 2024-09-23 14:34 /etc/shells
+-rw-r--r-- root/root               475 2024-09-23 14:34 /etc/shinit
+drwxr-xr-x root/root                44 2024-09-23 14:34 /etc/ssl
+lrwxrwxrwx root/root                34 2024-09-23 14:34 /etc/ssl/cert.pem -> /etc/ssl/certs/ca-certificates.crt
+drwxr-xr-x root/root                42 2024-09-23 14:34 /etc/ssl/certs
+-rw-r--r-- root/root            213777 2024-09-23 14:34 /etc/ssl/certs/ca-certificates.crt
+-rw-r--r-- root/root                80 2024-09-23 14:34 /etc/sysctl.conf
+drwxr-xr-x root/root                66 2024-09-23 14:34 /etc/sysctl.d
+-rw-r--r-- root/root               730 2024-09-23 14:34 /etc/sysctl.d/10-default.conf
+-rw-r--r-- root/root               342 2024-09-23 14:34 /etc/sysctl.d/11-nf-conntrack.conf
+-rw-r--r-- root/root                 0 2024-09-23 14:34 /etc/syslog.conf
+-rw-r--r-- root/root               128 2024-09-23 14:34 /etc/sysupgrade.conf
+drwxr-xr-x root/root               469 2024-09-23 14:34 /etc/uci-defaults
+-rw-r--r-- root/root               251 2024-09-23 14:34 /etc/uci-defaults/00_uhttpd_ubus
+-rw-r--r-- root/root              1525 2024-09-23 14:34 /etc/uci-defaults/04_led_migration
+-rw-r--r-- root/root               227 2024-09-23 14:34 /etc/uci-defaults/05_fix-compat-version
+-rw-r--r-- root/root               640 2024-09-23 14:34 /etc/uci-defaults/09_fix-checksum
+-rw-r--r-- root/root               395 2024-09-23 14:34 /etc/uci-defaults/10_migrate-shadow
+-rw-r--r-- root/root               369 2024-09-23 14:34 /etc/uci-defaults/12_network-generate-ula
+-rw-r--r-- root/root               179 2024-09-23 14:34 /etc/uci-defaults/13_fix-group-user
+-rw-r--r-- root/root               425 2024-09-23 14:34 /etc/uci-defaults/14_migrate-dhcp-release
+-rwxr-xr-x root/root              1092 2024-09-23 14:34 /etc/uci-defaults/15_odhcpd
+-rwxr-xr-x root/root               299 2024-09-23 14:34 /etc/uci-defaults/20_migrate-feeds
+-rwxr-xr-x root/root               483 2024-09-23 14:34 /etc/uci-defaults/30_luci-theme-bootstrap
+-rw-r--r-- root/root              3892 2024-09-23 14:34 /etc/uci-defaults/30_uboot-envtools
+-rwxr-xr-x root/root               509 2024-09-23 14:34 /etc/uci-defaults/50-dnsmasq-migrate-ipset.sh
+-rwxr-xr-x root/root               189 2024-09-23 14:34 /etc/uci-defaults/50-dnsmasq-migrate-resolv-conf-auto.sh
+-rwxr-xr-x root/root               162 2024-09-23 14:34 /etc/uci-defaults/50-migrate-rpcd-ubus-sock.sh
+-rwxr-xr-x root/root               461 2024-09-23 14:34 /etc/uci-defaults/50_luci-mod-admin-full
+-rw-r--r-- root/root                70 2024-09-23 14:34 /etc/udhcpc.user
+drwxr-xr-x root/root                 3 2024-09-23 14:34 /etc/udhcpc.user.d
+drwxr-xr-x root/root               541 2024-09-23 14:34 /lib
+drwxr-xr-x root/root                29 2024-09-23 14:34 /lib/config
+-rw-r--r-- root/root              4282 2024-09-23 14:34 /lib/config/uci.sh
+drwxr-xr-x root/root                36 2024-09-23 14:34 /lib/firmware
+-rw-r--r-- root/root              5424 2024-09-23 14:34 /lib/firmware/regulatory.db
+drwxr-xr-x root/root               193 2024-09-23 14:34 /lib/functions
+-rw-r--r-- root/root              4217 2024-09-23 14:34 /lib/functions/caldata.sh
+-rw-r--r-- root/root               981 2024-09-23 14:34 /lib/functions/k2t.sh
+-rw-r--r-- root/root              2587 2024-09-23 14:34 /lib/functions/leds.sh
+-rw-r--r-- root/root              1456 2024-09-23 14:34 /lib/functions/migrations.sh
+-rw-r--r-- root/root              8503 2024-09-23 14:34 /lib/functions/network.sh
+-rw-r--r-- root/root              1812 2024-09-23 14:34 /lib/functions/preinit.sh
+-rw-r--r-- root/root             13975 2024-09-23 14:34 /lib/functions/procd.sh
+-rw-r--r-- root/root              2748 2024-09-23 14:34 /lib/functions/service.sh
+-rw-r--r-- root/root              6900 2024-09-23 14:34 /lib/functions/system.sh
+-rw-r--r-- root/root             13333 2024-09-23 14:34 /lib/functions/uci-defaults.sh
+-rw-r--r-- root/root              9596 2024-09-23 14:34 /lib/functions.sh
+lrwxrwxrwx root/root                 7 2024-09-23 14:34 /lib/ld-musl-mips-sf.so.1 -> libc.so
+-rw-r--r-- root/root             65692 2024-09-23 14:34 /lib/libblobmsg_json.so.20230523
+-rwxr-xr-x root/root            725268 2024-09-23 14:34 /lib/libc.so
+-rw-r--r-- root/root             66184 2024-09-23 14:34 /lib/libfstools.so
+-rw-r--r-- root/root            131352 2024-09-23 14:34 /lib/libgcc_s.so.1
+-rw-r--r-- root/root             65728 2024-09-23 14:34 /lib/libjson_script.so.20230523
+-rw-r--r-- root/root             65680 2024-09-23 14:34 /lib/libpreload-seccomp.so
+-rw-r--r-- root/root             65612 2024-09-23 14:34 /lib/libpreload-trace.so
+-rw-r--r-- root/root             65584 2024-09-23 14:34 /lib/libsetlbf.so
+-rw-r--r-- root/root             66128 2024-09-23 14:34 /lib/libubox.so.20230523
+-rw-r--r-- root/root             65912 2024-09-23 14:34 /lib/libubus.so.20230605
+-rwxr-xr-x root/root             66060 2024-09-23 14:34 /lib/libuci.so
+-rw-r--r-- root/root             65804 2024-09-23 14:34 /lib/libustream-ssl.so
+-rw-r--r-- root/root             66296 2024-09-23 14:34 /lib/libvalidate.so
+drwxr-xr-x root/root                31 2024-09-23 14:34 /lib/modules
+drwxr-xr-x root/root              1484 2024-09-23 14:34 /lib/modules/5.15.167
+-rw-r--r-- root/root             25420 2024-09-23 14:34 /lib/modules/5.15.167/ath.ko
+-rw-r--r-- root/root            149460 2024-09-23 14:34 /lib/modules/5.15.167/ath9k.ko
+-rw-r--r-- root/root             18500 2024-09-23 14:34 /lib/modules/5.15.167/ath9k_common.ko
+-rw-r--r-- root/root            384208 2024-09-23 14:34 /lib/modules/5.15.167/ath9k_hw.ko
+-rw-r--r-- root/root            356572 2024-09-23 14:34 /lib/modules/5.15.167/cfg80211.ko
+-rw-r--r-- root/root              4468 2024-09-23 14:34 /lib/modules/5.15.167/cmac.ko
+-rw-r--r-- root/root              2012 2024-09-23 14:34 /lib/modules/5.15.167/compat.ko
+-rw-r--r-- root/root              2828 2024-09-23 14:34 /lib/modules/5.15.167/crc-ccitt.ko
+-rw-r--r-- root/root              2792 2024-09-23 14:34 /lib/modules/5.15.167/crc32c_generic.ko
+-rw-r--r-- root/root              7596 2024-09-23 14:34 /lib/modules/5.15.167/crypto_acompress.ko
+-rw-r--r-- root/root             10560 2024-09-23 14:34 /lib/modules/5.15.167/drbg.ko
+-rw-r--r-- root/root              6668 2024-09-23 14:34 /lib/modules/5.15.167/ehci-fsl.ko
+-rw-r--r-- root/root             47160 2024-09-23 14:34 /lib/modules/5.15.167/ehci-hcd.ko
+-rw-r--r-- root/root              9396 2024-09-23 14:34 /lib/modules/5.15.167/ehci-platform.ko
+-rw-r--r-- root/root              7500 2024-09-23 14:34 /lib/modules/5.15.167/fsl-mph-dr-of.ko
+-rw-r--r-- root/root             12476 2024-09-23 14:34 /lib/modules/5.15.167/gpio-button-hotplug.ko
+-rw-r--r-- root/root              4812 2024-09-23 14:34 /lib/modules/5.15.167/hmac.ko
+-rw-r--r-- root/root              9704 2024-09-23 14:34 /lib/modules/5.15.167/jitterentropy_rng.ko
+-rw-r--r-- root/root              6020 2024-09-23 14:34 /lib/modules/5.15.167/ledtrig-usbport.ko
+-rw-r--r-- root/root              2328 2024-09-23 14:34 /lib/modules/5.15.167/libcrc32c.ko
+-rw-r--r-- root/root              3724 2024-09-23 14:34 /lib/modules/5.15.167/lzo-rle.ko
+-rw-r--r-- root/root              3724 2024-09-23 14:34 /lib/modules/5.15.167/lzo.ko
+-rw-r--r-- root/root              4176 2024-09-23 14:34 /lib/modules/5.15.167/lzo_compress.ko
+-rw-r--r-- root/root              2784 2024-09-23 14:34 /lib/modules/5.15.167/lzo_decompress.ko
+-rw-r--r-- root/root            739408 2024-09-23 14:34 /lib/modules/5.15.167/mac80211.ko
+-rw-r--r-- root/root            102516 2024-09-23 14:34 /lib/modules/5.15.167/nf_conntrack.ko
+-rw-r--r-- root/root              3332 2024-09-23 14:34 /lib/modules/5.15.167/nf_defrag_ipv4.ko
+-rw-r--r-- root/root             10392 2024-09-23 14:34 /lib/modules/5.15.167/nf_defrag_ipv6.ko
+-rw-r--r-- root/root             32028 2024-09-23 14:34 /lib/modules/5.15.167/nf_flow_table.ko
+-rw-r--r-- root/root              2612 2024-09-23 14:34 /lib/modules/5.15.167/nf_flow_table_inet.ko
+-rw-r--r-- root/root              1936 2024-09-23 14:34 /lib/modules/5.15.167/nf_flow_table_ipv4.ko
+-rw-r--r-- root/root              1968 2024-09-23 14:34 /lib/modules/5.15.167/nf_flow_table_ipv6.ko
+-rw-r--r-- root/root             19304 2024-09-23 14:34 /lib/modules/5.15.167/nf_log_syslog.ko
+-rw-r--r-- root/root             32400 2024-09-23 14:34 /lib/modules/5.15.167/nf_nat.ko
+-rw-r--r-- root/root              6172 2024-09-23 14:34 /lib/modules/5.15.167/nf_reject_ipv4.ko
+-rw-r--r-- root/root              6724 2024-09-23 14:34 /lib/modules/5.15.167/nf_reject_ipv6.ko
+-rw-r--r-- root/root            214160 2024-09-23 14:34 /lib/modules/5.15.167/nf_tables.ko
+-rw-r--r-- root/root              9804 2024-09-23 14:34 /lib/modules/5.15.167/nfnetlink.ko
+-rw-r--r-- root/root              3012 2024-09-23 14:34 /lib/modules/5.15.167/nft_chain_nat.ko
+-rw-r--r-- root/root              4424 2024-09-23 14:34 /lib/modules/5.15.167/nft_counter.ko
+-rw-r--r-- root/root             13308 2024-09-23 14:34 /lib/modules/5.15.167/nft_ct.ko
+-rw-r--r-- root/root              3148 2024-09-23 14:34 /lib/modules/5.15.167/nft_fib.ko
+-rw-r--r-- root/root              2556 2024-09-23 14:34 /lib/modules/5.15.167/nft_fib_inet.ko
+-rw-r--r-- root/root              4392 2024-09-23 14:34 /lib/modules/5.15.167/nft_fib_ipv4.ko
+-rw-r--r-- root/root              5624 2024-09-23 14:34 /lib/modules/5.15.167/nft_fib_ipv6.ko
+-rw-r--r-- root/root              6476 2024-09-23 14:34 /lib/modules/5.15.167/nft_flow_offload.ko
+-rw-r--r-- root/root              4472 2024-09-23 14:34 /lib/modules/5.15.167/nft_hash.ko
+-rw-r--r-- root/root              7180 2024-09-23 14:34 /lib/modules/5.15.167/nft_limit.ko
+-rw-r--r-- root/root              3976 2024-09-23 14:34 /lib/modules/5.15.167/nft_log.ko
+-rw-r--r-- root/root              4788 2024-09-23 14:34 /lib/modules/5.15.167/nft_masq.ko
+-rw-r--r-- root/root              4912 2024-09-23 14:34 /lib/modules/5.15.167/nft_nat.ko
+-rw-r--r-- root/root              3300 2024-09-23 14:34 /lib/modules/5.15.167/nft_numgen.ko
+-rw-r--r-- root/root              4212 2024-09-23 14:34 /lib/modules/5.15.167/nft_objref.ko
+-rw-r--r-- root/root              4672 2024-09-23 14:34 /lib/modules/5.15.167/nft_quota.ko
+-rw-r--r-- root/root              4336 2024-09-23 14:34 /lib/modules/5.15.167/nft_redir.ko
+-rw-r--r-- root/root              2788 2024-09-23 14:34 /lib/modules/5.15.167/nft_reject.ko
+-rw-r--r-- root/root              2940 2024-09-23 14:34 /lib/modules/5.15.167/nft_reject_inet.ko
+-rw-r--r-- root/root              2484 2024-09-23 14:34 /lib/modules/5.15.167/nft_reject_ipv4.ko
+-rw-r--r-- root/root              2488 2024-09-23 14:34 /lib/modules/5.15.167/nft_reject_ipv6.ko
+-rw-r--r-- root/root              6936 2024-09-23 14:34 /lib/modules/5.15.167/nls_base.ko
+-rw-r--r-- root/root             11400 2024-09-23 14:34 /lib/modules/5.15.167/ppp_async.ko
+-rw-r--r-- root/root             40172 2024-09-23 14:34 /lib/modules/5.15.167/ppp_generic.ko
+-rw-r--r-- root/root             15620 2024-09-23 14:34 /lib/modules/5.15.167/pppoe.ko
+-rw-r--r-- root/root              3576 2024-09-23 14:34 /lib/modules/5.15.167/pppox.ko
+-rw-r--r-- root/root              3572 2024-09-23 14:34 /lib/modules/5.15.167/seqiv.ko
+-rw-r--r-- root/root             11500 2024-09-23 14:34 /lib/modules/5.15.167/sha512_generic.ko
+-rw-r--r-- root/root              6980 2024-09-23 14:34 /lib/modules/5.15.167/slhc.ko
+-rw-r--r-- root/root              7348 2024-09-23 14:34 /lib/modules/5.15.167/usb-common.ko
+-rw-r--r-- root/root            207120 2024-09-23 14:34 /lib/modules/5.15.167/usbcore.ko
+drwxr-xr-x root/root               238 2024-09-23 14:34 /lib/netifd
+-rwxr-xr-x root/root                47 2024-09-23 14:34 /lib/netifd/dhcp-get-server.sh
+-rwxr-xr-x root/root              3145 2024-09-23 14:34 /lib/netifd/dhcp.script
+-rwxr-xr-x root/root              7133 2024-09-23 14:34 /lib/netifd/dhcpv6.script
+-rw-r--r-- root/root             50035 2024-09-23 14:34 /lib/netifd/hostapd.sh
+-rw-r--r-- root/root              9760 2024-09-23 14:34 /lib/netifd/netifd-proto.sh
+-rw-r--r-- root/root              7994 2024-09-23 14:34 /lib/netifd/netifd-wireless.sh
+-rwxr-xr-x root/root               238 2024-09-23 14:34 /lib/netifd/ppp-down
+-rwxr-xr-x root/root               551 2024-09-23 14:34 /lib/netifd/ppp-up
+-rwxr-xr-x root/root               833 2024-09-23 14:34 /lib/netifd/ppp6-up
+drwxr-xr-x root/root                61 2024-09-23 14:34 /lib/netifd/proto
+-rwxr-xr-x root/root              2875 2024-09-23 14:34 /lib/netifd/proto/dhcp.sh
+-rwxr-xr-x root/root              5170 2024-09-23 14:34 /lib/netifd/proto/dhcpv6.sh
+-rwxr-xr-x root/root              7625 2024-09-23 14:34 /lib/netifd/proto/ppp.sh
+-rw-r--r-- root/root               761 2024-09-23 14:34 /lib/netifd/utils.sh
+drwxr-xr-x root/root                34 2024-09-23 14:34 /lib/netifd/wireless
+-rwxr-xr-x root/root             30358 2024-09-23 14:34 /lib/netifd/wireless/mac80211.sh
+drwxr-xr-x root/root                49 2024-09-23 14:34 /lib/network
+-rwxr-xr-x root/root              1480 2024-09-23 14:34 /lib/network/config.sh
+-rw-r--r-- root/root               303 2024-09-23 14:34 /lib/network/switch.sh
+drwxr-xr-x root/root               425 2024-09-23 14:34 /lib/preinit
+-rw-r--r-- root/root               338 2024-09-23 14:34 /lib/preinit/00_preinit.conf
+-rw-r--r-- root/root               100 2024-09-23 14:34 /lib/preinit/02_default_set_state
+-rw-r--r-- root/root               378 2024-09-23 14:34 /lib/preinit/02_sysinfo
+-rw-r--r-- root/root               907 2024-09-23 14:34 /lib/preinit/02_sysinfo_fixup
+-rw-r--r-- root/root              1245 2024-09-23 14:34 /lib/preinit/10_fix_eth_mac.sh
+-rw-r--r-- root/root               389 2024-09-23 14:34 /lib/preinit/10_indicate_failsafe
+-rw-r--r-- root/root              4153 2024-09-23 14:34 /lib/preinit/10_indicate_preinit
+-rw-r--r-- root/root              2769 2024-09-23 14:34 /lib/preinit/30_failsafe_wait
+-rw-r--r-- root/root               370 2024-09-23 14:34 /lib/preinit/40_run_failsafe_hook
+-rw-r--r-- root/root               244 2024-09-23 14:34 /lib/preinit/50_indicate_regular_preinit
+-rw-r--r-- root/root               233 2024-09-23 14:34 /lib/preinit/70_initramfs_test
+-rw-r--r-- root/root               923 2024-09-23 14:34 /lib/preinit/80_mount_root
+-rw-r--r-- root/root               691 2024-09-23 14:34 /lib/preinit/81_urandom_seed
+-rw-r--r-- root/root               322 2024-09-23 14:34 /lib/preinit/99_10_failsafe_dropbear
+-rw-r--r-- root/root               460 2024-09-23 14:34 /lib/preinit/99_10_failsafe_login
+-rw-r--r-- root/root               152 2024-09-23 14:34 /lib/preinit/99_10_run_init
+-rw-r--r-- root/root              1087 2024-09-23 14:34 /lib/uboot-envtools.sh
+drwxr-xr-x root/root               208 2024-09-23 14:34 /lib/upgrade
+-rw-r--r-- root/root              7275 2024-09-23 14:34 /lib/upgrade/common.sh
+-rwxr-xr-x root/root               451 2024-09-23 14:34 /lib/upgrade/do_stage2
+-rw-r--r-- root/root              4286 2024-09-23 14:34 /lib/upgrade/dualboot_datachk.sh
+-rw-r--r-- root/root              2455 2024-09-23 14:34 /lib/upgrade/failsafe_datachk.sh
+-rw-r--r-- root/root              2706 2024-09-23 14:34 /lib/upgrade/fwtool.sh
+drwxr-xr-x root/root               213 2024-09-23 14:34 /lib/upgrade/keep.d
+-rw-r--r-- root/root                82 2024-09-23 14:34 /lib/upgrade/keep.d/base-files
+-rw-r--r-- root/root               170 2024-09-23 14:34 /lib/upgrade/keep.d/base-files-essential
+-rw-r--r-- root/root                15 2024-09-23 14:34 /lib/upgrade/keep.d/busybox
+-rw-r--r-- root/root                16 2024-09-23 14:34 /lib/upgrade/keep.d/dnsmasq
+-rw-r--r-- root/root                17 2024-09-23 14:34 /lib/upgrade/keep.d/firewall4
+-rw-r--r-- root/root                18 2024-09-23 14:34 /lib/upgrade/keep.d/luci-base
+-rw-r--r-- root/root                20 2024-09-23 14:34 /lib/upgrade/keep.d/netifd
+-rw-r--r-- root/root                21 2024-09-23 14:34 /lib/upgrade/keep.d/odhcp6c
+-rw-r--r-- root/root                16 2024-09-23 14:34 /lib/upgrade/keep.d/opkg
+-rw-r--r-- root/root                68 2024-09-23 14:34 /lib/upgrade/keep.d/ppp
+-rw-r--r-- root/root                59 2024-09-23 14:34 /lib/upgrade/keep.d/uboot-envtools
+-rw-r--r-- root/root                32 2024-09-23 14:34 /lib/upgrade/keep.d/uhttpd
+-rw-r--r-- root/root              4710 2024-09-23 14:34 /lib/upgrade/openmesh.sh
+-rw-r--r-- root/root              2694 2024-09-23 14:34 /lib/upgrade/platform.sh
+-rw-r--r-- root/root               842 2024-09-23 14:34 /lib/upgrade/redboot-fis.sh
+-rwxr-xr-x root/root              4167 2024-09-23 14:34 /lib/upgrade/stage2
+drwxr-xr-x root/root                34 2024-09-23 14:34 /lib/wifi
+-rw-r--r-- root/root              4145 2024-09-23 14:34 /lib/wifi/mac80211.sh
+drwxr-xr-x root/root                 3 2024-09-23 14:34 /mnt
+drwxr-xr-x root/root                 3 2024-09-23 14:34 /overlay
+drwxr-xr-x root/root                 3 2024-09-23 14:34 /proc
+drwxr-xr-x root/root                27 2024-09-23 14:34 /rom
+-rw-r--r-- root/root               116 2024-09-23 14:34 /rom/note
+drwxr-xr-x root/root                 3 2024-09-23 14:34 /root
+drwxr-xr-x root/root               897 2024-09-23 14:34 /sbin
+-rwxr-xr-x root/root             65632 2024-09-23 14:34 /sbin/askfirst
+-rwxr-xr-x root/root               200 2024-09-23 14:34 /sbin/devstatus
+-rwxr-xr-x root/root                31 2024-09-23 14:34 /sbin/firstboot
+lrwxrwxrwx root/root                 3 2024-09-23 14:34 /sbin/fw3 -> fw4
+-rwxr-xr-x root/root              3050 2024-09-23 14:34 /sbin/fw4
+lrwxrwxrwx root/root                14 2024-09-23 14:34 /sbin/halt -> ../bin/busybox
+-rwxr-xr-x root/root               359 2024-09-23 14:34 /sbin/hotplug-call
+lrwxrwxrwx root/root                14 2024-09-23 14:34 /sbin/hwclock -> ../bin/busybox
+lrwxrwxrwx root/root                14 2024-09-23 14:34 /sbin/ifconfig -> ../bin/busybox
+lrwxrwxrwx root/root                 4 2024-09-23 14:34 /sbin/ifdown -> ifup
+-rwxr-xr-x root/root               273 2024-09-23 14:34 /sbin/ifstatus
+-rwxr-xr-x root/root               674 2024-09-23 14:34 /sbin/ifup
+-rwxr-xr-x root/root             66060 2024-09-23 14:34 /sbin/init
+lrwxrwxrwx root/root                16 2024-09-23 14:34 /sbin/insmod -> /sbin/kmodloader
+lrwxrwxrwx root/root                14 2024-09-23 14:34 /sbin/ip -> ../bin/busybox
+lrwxrwxrwx root/root                10 2024-09-23 14:34 /sbin/jffs2mark -> jffs2reset
+-rwxr-xr-x root/root             65557 2024-09-23 14:34 /sbin/jffs2reset
+-rwxr-xr-x root/root             65605 2024-09-23 14:34 /sbin/kmodloader
+-rwxr-xr-x root/root               496 2024-09-23 14:34 /sbin/led.sh
+-rwxr-xr-x root/root             65829 2024-09-23 14:34 /sbin/logd
+-rwxr-xr-x root/root             65573 2024-09-23 14:34 /sbin/logread
+lrwxrwxrwx root/root                16 2024-09-23 14:34 /sbin/lsmod -> /sbin/kmodloader
+-rwxr-xr-x root/root               924 2024-09-23 14:34 /sbin/luci-reload
+lrwxrwxrwx root/root                14 2024-09-23 14:34 /sbin/mkswap -> ../bin/busybox
+lrwxrwxrwx root/root                16 2024-09-23 14:34 /sbin/modinfo -> /sbin/kmodloader
+lrwxrwxrwx root/root                16 2024-09-23 14:34 /sbin/modprobe -> /sbin/kmodloader
+-rwxr-xr-x root/root             65557 2024-09-23 14:34 /sbin/mount_root
+-rwxr-xr-x root/root             65637 2024-09-23 14:34 /sbin/mtd
+-rwxr-xr-x root/root            132997 2024-09-23 14:34 /sbin/netifd
+lrwxrwxrwx root/root                14 2024-09-23 14:34 /sbin/pivot_root -> ../bin/busybox
+lrwxrwxrwx root/root                14 2024-09-23 14:34 /sbin/poweroff -> ../bin/busybox
+-rwxr-xr-x root/root            133896 2024-09-23 14:34 /sbin/procd
+lrwxrwxrwx root/root                14 2024-09-23 14:34 /sbin/reboot -> ../bin/busybox
+-rwxr-xr-x root/root               490 2024-09-23 14:34 /sbin/reload_config
+lrwxrwxrwx root/root                16 2024-09-23 14:34 /sbin/rmmod -> /sbin/kmodloader
+lrwxrwxrwx root/root                14 2024-09-23 14:34 /sbin/route -> ../bin/busybox
+-rwxr-xr-x root/root             66572 2024-09-23 14:34 /sbin/rpcd
+lrwxrwxrwx root/root                 6 2024-09-23 14:34 /sbin/seccomp-trace -> utrace
+-rwxr-xr-x root/root               716 2024-09-23 14:34 /sbin/service
+lrwxrwxrwx root/root                14 2024-09-23 14:34 /sbin/start-stop-daemon -> ../bin/busybox
+lrwxrwxrwx root/root                14 2024-09-23 14:34 /sbin/swapoff -> ../bin/busybox
+lrwxrwxrwx root/root                14 2024-09-23 14:34 /sbin/swapon -> ../bin/busybox
+-rwxr-xr-x root/root             65813 2024-09-23 14:34 /sbin/swconfig
+lrwxrwxrwx root/root                14 2024-09-23 14:34 /sbin/switch_root -> ../bin/busybox
+lrwxrwxrwx root/root                14 2024-09-23 14:34 /sbin/sysctl -> ../bin/busybox
+-rwxr-xr-x root/root             10532 2024-09-23 14:34 /sbin/sysupgrade
+-rwxr-xr-x root/root             65996 2024-09-23 14:34 /sbin/ubusd
+-rwxr-xr-x root/root             65573 2024-09-23 14:34 /sbin/uci
+-rwxr-xr-x root/root             65692 2024-09-23 14:34 /sbin/udevtrigger
+lrwxrwxrwx root/root                14 2024-09-23 14:34 /sbin/udhcpc -> ../bin/busybox
+-rwxr-xr-x root/root            132536 2024-09-23 14:34 /sbin/ujail
+-rwxr-xr-x root/root             65736 2024-09-23 14:34 /sbin/upgraded
+-rwxr-xr-x root/root               397 2024-09-23 14:34 /sbin/urandom_seed
+-rwxr-xr-x root/root             65557 2024-09-23 14:34 /sbin/urngd
+-rwxr-xr-x root/root             65792 2024-09-23 14:34 /sbin/utrace
+-rwxr-xr-x root/root             65557 2024-09-23 14:34 /sbin/validate_data
+-rwxr-xr-x root/root              5331 2024-09-23 14:34 /sbin/wifi
+drwxr-xr-x root/root                 3 2024-09-23 14:34 /sys
+drwxrwxrwt root/root                 3 2024-09-23 14:34 /tmp
+drwxr-xr-x root/root                89 2024-09-23 14:34 /usr
+drwxr-xr-x root/root               844 2024-09-23 14:34 /usr/bin
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/bin/[ -> ../../bin/busybox
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/bin/[[ -> ../../bin/busybox
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/bin/awk -> ../../bin/busybox
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/bin/basename -> ../../bin/busybox
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/bin/clear -> ../../bin/busybox
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/bin/cmp -> ../../bin/busybox
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/bin/crontab -> ../../bin/busybox
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/bin/cut -> ../../bin/busybox
+lrwxrwxrwx root/root                16 2024-09-23 14:34 /usr/bin/dbclient -> ../sbin/dropbear
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/bin/dirname -> ../../bin/busybox
+lrwxrwxrwx root/root                16 2024-09-23 14:34 /usr/bin/dropbearkey -> ../sbin/dropbear
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/bin/du -> ../../bin/busybox
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/bin/env -> ../../bin/busybox
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/bin/expr -> ../../bin/busybox
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/bin/find -> ../../bin/busybox
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/bin/flock -> ../../bin/busybox
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/bin/free -> ../../bin/busybox
+-rwxr-xr-x root/root             65573 2024-09-23 14:34 /usr/bin/fwtool
+-rwxr-xr-x root/root             65557 2024-09-23 14:34 /usr/bin/getrandom
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/bin/head -> ../../bin/busybox
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/bin/hexdump -> ../../bin/busybox
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/bin/id -> ../../bin/busybox
+-rwxr-xr-x root/root             66272 2024-09-23 14:34 /usr/bin/iwinfo
+-rwxr-xr-x root/root             65573 2024-09-23 14:34 /usr/bin/jshn
+-rwxr-xr-x root/root             65669 2024-09-23 14:34 /usr/bin/jsonfilter
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/bin/killall -> ../../bin/busybox
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/bin/ldd -> ../../lib/libc.so
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/bin/less -> ../../bin/busybox
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/bin/logger -> ../../bin/busybox
+-rwxr-xr-x root/root             65808 2024-09-23 14:34 /usr/bin/luci-bwc
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/bin/md5sum -> ../../bin/busybox
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/bin/mkfifo -> ../../bin/busybox
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/bin/nc -> ../../bin/busybox
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/bin/nslookup -> ../../bin/busybox
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/bin/pgrep -> ../../bin/busybox
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/bin/printf -> ../../bin/busybox
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/bin/readlink -> ../../bin/busybox
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/bin/reset -> ../../bin/busybox
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/bin/resize -> ../../bin/busybox
+lrwxrwxrwx root/root                18 2024-09-23 14:34 /usr/bin/scp -> /usr/sbin/dropbear
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/bin/seq -> ../../bin/busybox
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/bin/sha256sum -> ../../bin/busybox
+lrwxrwxrwx root/root                 5 2024-09-23 14:34 /usr/bin/signify -> usign
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/bin/sort -> ../../bin/busybox
+lrwxrwxrwx root/root                18 2024-09-23 14:34 /usr/bin/ssh -> /usr/sbin/dropbear
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/bin/strings -> ../../bin/busybox
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/bin/tail -> ../../bin/busybox
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/bin/taskset -> ../../bin/busybox
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/bin/tee -> ../../bin/busybox
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/bin/test -> ../../bin/busybox
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/bin/time -> ../../bin/busybox
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/bin/top -> ../../bin/busybox
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/bin/tr -> ../../bin/busybox
+lrwxrwxrwx root/root                 5 2024-09-23 14:34 /usr/bin/ucc -> ucode
+-rwxr-xr-x root/root             65557 2024-09-23 14:34 /usr/bin/ucode
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/bin/uniq -> ../../bin/busybox
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/bin/uptime -> ../../bin/busybox
+-rwxr-xr-x root/root             65557 2024-09-23 14:34 /usr/bin/usign
+lrwxrwxrwx root/root                 5 2024-09-23 14:34 /usr/bin/utpl -> ucode
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/bin/wc -> ../../bin/busybox
+lrwxrwxrwx root/root                18 2024-09-23 14:34 /usr/bin/wget -> /bin/uclient-fetch
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/bin/which -> ../../bin/busybox
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/bin/xargs -> ../../bin/busybox
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/bin/yes -> ../../bin/busybox
+drwxr-xr-x root/root               707 2024-09-23 14:34 /usr/lib
+drwxr-xr-x root/root                37 2024-09-23 14:34 /usr/lib/dnsmasq
+-rwxr-xr-x root/root              1003 2024-09-23 14:34 /usr/lib/dnsmasq/dhcp-script.sh
+-rwxr-xr-x root/root             66096 2024-09-23 14:34 /usr/lib/libiwinfo.so.20230701
+lrwxrwxrwx root/root                20 2024-09-23 14:34 /usr/lib/libjansson.so.4 -> libjansson.so.4.14.0
+-rw-r--r-- root/root             66116 2024-09-23 14:34 /usr/lib/libjansson.so.4.14.0
+lrwxrwxrwx root/root                18 2024-09-23 14:34 /usr/lib/libjson-c.so.5 -> libjson-c.so.5.2.0
+-rw-r--r-- root/root             66324 2024-09-23 14:34 /usr/lib/libjson-c.so.5.2.0
+lrwxrwxrwx root/root                18 2024-09-23 14:34 /usr/lib/liblucihttp.so.0 -> liblucihttp.so.0.1
+-rw-r--r-- root/root             65664 2024-09-23 14:34 /usr/lib/liblucihttp.so.0.1
+-rw-r--r-- root/root            395440 2024-09-23 14:34 /usr/lib/libmbedcrypto.so.2.28.9
+lrwxrwxrwx root/root                23 2024-09-23 14:34 /usr/lib/libmbedcrypto.so.7 -> libmbedcrypto.so.2.28.9
+lrwxrwxrwx root/root                20 2024-09-23 14:34 /usr/lib/libmbedtls.so.14 -> libmbedtls.so.2.28.9
+-rw-r--r-- root/root            131916 2024-09-23 14:34 /usr/lib/libmbedtls.so.2.28.9
+lrwxrwxrwx root/root                21 2024-09-23 14:34 /usr/lib/libmbedx509.so.1 -> libmbedx509.so.2.28.9
+-rw-r--r-- root/root             66056 2024-09-23 14:34 /usr/lib/libmbedx509.so.2.28.9
+lrwxrwxrwx root/root                15 2024-09-23 14:34 /usr/lib/libmnl.so.0 -> libmnl.so.0.2.0
+-rwxr-xr-x root/root             65716 2024-09-23 14:34 /usr/lib/libmnl.so.0.2.0
+lrwxrwxrwx root/root                20 2024-09-23 14:34 /usr/lib/libnftables.so -> libnftables.so.1.1.0
+lrwxrwxrwx root/root                20 2024-09-23 14:34 /usr/lib/libnftables.so.1 -> libnftables.so.1.1.0
+-rwxr-xr-x root/root            661928 2024-09-23 14:34 /usr/lib/libnftables.so.1.1.0
+lrwxrwxrwx root/root                18 2024-09-23 14:34 /usr/lib/libnftnl.so.11 -> libnftnl.so.11.6.0
+-rwxr-xr-x root/root            133844 2024-09-23 14:34 /usr/lib/libnftnl.so.11.6.0
+-rw-r--r-- root/root             66428 2024-09-23 14:34 /usr/lib/libnl-tiny.so.1
+-rw-r--r-- root/root             65824 2024-09-23 14:34 /usr/lib/libuclient.so
+-rw-r--r-- root/root            198432 2024-09-23 14:34 /usr/lib/libucode.so.20230711
+drwxr-xr-x root/root                54 2024-09-23 14:34 /usr/lib/opkg
+drwxr-xr-x root/root             11733 2024-09-23 14:34 /usr/lib/opkg/info
+-rw-r--r-- root/root               237 2024-09-23 14:34 /usr/lib/opkg/info/base-files.conffiles
+-rw-r--r-- root/root               371 2024-09-23 14:34 /usr/lib/opkg/info/base-files.control
+-rw-r--r-- root/root              2559 2024-09-23 14:34 /usr/lib/opkg/info/base-files.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/base-files.prerm
+-rw-r--r-- root/root                17 2024-09-23 14:34 /usr/lib/opkg/info/busybox.conffiles
+-rw-r--r-- root/root               504 2024-09-23 14:34 /usr/lib/opkg/info/busybox.control
+-rw-r--r-- root/root              1678 2024-09-23 14:34 /usr/lib/opkg/info/busybox.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/busybox.prerm
+-rw-r--r-- root/root               333 2024-09-23 14:34 /usr/lib/opkg/info/ca-bundle.control
+-rw-r--r-- root/root                53 2024-09-23 14:34 /usr/lib/opkg/info/ca-bundle.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/ca-bundle.prerm
+-rw-r--r-- root/root               398 2024-09-23 14:34 /usr/lib/opkg/info/cgi-io.control
+-rw-r--r-- root/root               116 2024-09-23 14:34 /usr/lib/opkg/info/cgi-io.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/cgi-io.prerm
+-rw-r--r-- root/root                35 2024-09-23 14:34 /usr/lib/opkg/info/dnsmasq.conffiles
+-rw-r--r-- root/root               406 2024-09-23 14:34 /usr/lib/opkg/info/dnsmasq.control
+-rw-r--r-- root/root               377 2024-09-23 14:34 /usr/lib/opkg/info/dnsmasq.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/dnsmasq.prerm
+-rw-r--r-- root/root                97 2024-09-23 14:34 /usr/lib/opkg/info/dropbear.conffiles
+-rw-r--r-- root/root               496 2024-09-23 14:34 /usr/lib/opkg/info/dropbear.control
+-rw-r--r-- root/root               213 2024-09-23 14:34 /usr/lib/opkg/info/dropbear.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/dropbear.prerm
+-rw-r--r-- root/root                88 2024-09-23 14:34 /usr/lib/opkg/info/firewall4.conffiles
+-rw-r--r-- root/root               574 2024-09-23 14:34 /usr/lib/opkg/info/firewall4.control
+-rw-r--r-- root/root               798 2024-09-23 14:34 /usr/lib/opkg/info/firewall4.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/firewall4.prerm
+-rw-r--r-- root/root               310 2024-09-23 14:34 /usr/lib/opkg/info/fstools.control
+-rw-r--r-- root/root                69 2024-09-23 14:34 /usr/lib/opkg/info/fstools.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/fstools.prerm
+-rw-r--r-- root/root               343 2024-09-23 14:34 /usr/lib/opkg/info/fwtool.control
+-rw-r--r-- root/root                16 2024-09-23 14:34 /usr/lib/opkg/info/fwtool.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/fwtool.prerm
+-rw-r--r-- root/root               311 2024-09-23 14:34 /usr/lib/opkg/info/getrandom.control
+-rw-r--r-- root/root                19 2024-09-23 14:34 /usr/lib/opkg/info/getrandom.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/getrandom.prerm
+-rw-r--r-- root/root               377 2024-09-23 14:34 /usr/lib/opkg/info/hostapd-common.control
+-rw-r--r-- root/root               203 2024-09-23 14:34 /usr/lib/opkg/info/hostapd-common.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/hostapd-common.prerm
+-rw-r--r-- root/root               331 2024-09-23 14:34 /usr/lib/opkg/info/iw.control
+-rw-r--r-- root/root                13 2024-09-23 14:34 /usr/lib/opkg/info/iw.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/iw.prerm
+-rw-r--r-- root/root               359 2024-09-23 14:34 /usr/lib/opkg/info/iwinfo.control
+-rw-r--r-- root/root                16 2024-09-23 14:34 /usr/lib/opkg/info/iwinfo.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/iwinfo.prerm
+-rw-r--r-- root/root               381 2024-09-23 14:34 /usr/lib/opkg/info/jansson4.control
+-rw-r--r-- root/root                55 2024-09-23 14:34 /usr/lib/opkg/info/jansson4.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/jansson4.prerm
+-rw-r--r-- root/root               377 2024-09-23 14:34 /usr/lib/opkg/info/jshn.control
+-rw-r--r-- root/root                41 2024-09-23 14:34 /usr/lib/opkg/info/jshn.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/jshn.prerm
+-rw-r--r-- root/root               336 2024-09-23 14:34 /usr/lib/opkg/info/jsonfilter.control
+-rw-r--r-- root/root                20 2024-09-23 14:34 /usr/lib/opkg/info/jsonfilter.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/jsonfilter.prerm
+-rw-r--r-- root/root               299 2024-09-23 14:34 /usr/lib/opkg/info/kernel.control
+-rw-r--r-- root/root                 0 2024-09-23 14:34 /usr/lib/opkg/info/kernel.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kernel.prerm
+-rw-r--r-- root/root               446 2024-09-23 14:34 /usr/lib/opkg/info/kmod-ath.control
+-rw-r--r-- root/root                29 2024-09-23 14:34 /usr/lib/opkg/info/kmod-ath.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kmod-ath.prerm
+-rw-r--r-- root/root               474 2024-09-23 14:34 /usr/lib/opkg/info/kmod-ath9k-common.control
+-rw-r--r-- root/root                72 2024-09-23 14:34 /usr/lib/opkg/info/kmod-ath9k-common.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kmod-ath9k-common.prerm
+-rw-r--r-- root/root               495 2024-09-23 14:34 /usr/lib/opkg/info/kmod-ath9k.control
+-rw-r--r-- root/root                52 2024-09-23 14:34 /usr/lib/opkg/info/kmod-ath9k.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kmod-ath9k.prerm
+-rw-r--r-- root/root               458 2024-09-23 14:34 /usr/lib/opkg/info/kmod-cfg80211.control
+-rw-r--r-- root/root               161 2024-09-23 14:34 /usr/lib/opkg/info/kmod-cfg80211.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kmod-cfg80211.prerm
+-rw-r--r-- root/root               363 2024-09-23 14:34 /usr/lib/opkg/info/kmod-crypto-acompress.control
+-rw-r--r-- root/root                77 2024-09-23 14:34 /usr/lib/opkg/info/kmod-crypto-acompress.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kmod-crypto-acompress.prerm
+-rw-r--r-- root/root               357 2024-09-23 14:34 /usr/lib/opkg/info/kmod-crypto-aead.control
+-rw-r--r-- root/root                65 2024-09-23 14:34 /usr/lib/opkg/info/kmod-crypto-aead.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kmod-crypto-aead.prerm
+-rw-r--r-- root/root               388 2024-09-23 14:34 /usr/lib/opkg/info/kmod-crypto-ccm.control
+-rw-r--r-- root/root                29 2024-09-23 14:34 /usr/lib/opkg/info/kmod-crypto-ccm.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kmod-crypto-ccm.prerm
+-rw-r--r-- root/root               395 2024-09-23 14:34 /usr/lib/opkg/info/kmod-crypto-cmac.control
+-rw-r--r-- root/root                60 2024-09-23 14:34 /usr/lib/opkg/info/kmod-crypto-cmac.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kmod-crypto-cmac.prerm
+-rw-r--r-- root/root               357 2024-09-23 14:34 /usr/lib/opkg/info/kmod-crypto-crc32c.control
+-rw-r--r-- root/root               109 2024-09-23 14:34 /usr/lib/opkg/info/kmod-crypto-crc32c.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kmod-crypto-crc32c.prerm
+-rw-r--r-- root/root               384 2024-09-23 14:34 /usr/lib/opkg/info/kmod-crypto-ctr.control
+-rw-r--r-- root/root                29 2024-09-23 14:34 /usr/lib/opkg/info/kmod-crypto-ctr.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kmod-crypto-ctr.prerm
+-rw-r--r-- root/root               394 2024-09-23 14:34 /usr/lib/opkg/info/kmod-crypto-gcm.control
+-rw-r--r-- root/root                29 2024-09-23 14:34 /usr/lib/opkg/info/kmod-crypto-gcm.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kmod-crypto-gcm.prerm
+-rw-r--r-- root/root               370 2024-09-23 14:34 /usr/lib/opkg/info/kmod-crypto-gf128.control
+-rw-r--r-- root/root                31 2024-09-23 14:34 /usr/lib/opkg/info/kmod-crypto-gf128.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kmod-crypto-gf128.prerm
+-rw-r--r-- root/root               385 2024-09-23 14:34 /usr/lib/opkg/info/kmod-crypto-ghash.control
+-rw-r--r-- root/root                31 2024-09-23 14:34 /usr/lib/opkg/info/kmod-crypto-ghash.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kmod-crypto-ghash.prerm
+-rw-r--r-- root/root               339 2024-09-23 14:34 /usr/lib/opkg/info/kmod-crypto-hash.control
+-rw-r--r-- root/root                65 2024-09-23 14:34 /usr/lib/opkg/info/kmod-crypto-hash.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kmod-crypto-hash.prerm
+-rw-r--r-- root/root               385 2024-09-23 14:34 /usr/lib/opkg/info/kmod-crypto-hmac.control
+-rw-r--r-- root/root                60 2024-09-23 14:34 /usr/lib/opkg/info/kmod-crypto-hmac.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kmod-crypto-hmac.prerm
+-rw-r--r-- root/root               386 2024-09-23 14:34 /usr/lib/opkg/info/kmod-crypto-manager.control
+-rw-r--r-- root/root                71 2024-09-23 14:34 /usr/lib/opkg/info/kmod-crypto-manager.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kmod-crypto-manager.prerm
+-rw-r--r-- root/root               356 2024-09-23 14:34 /usr/lib/opkg/info/kmod-crypto-null.control
+-rw-r--r-- root/root                30 2024-09-23 14:34 /usr/lib/opkg/info/kmod-crypto-null.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kmod-crypto-null.prerm
+-rw-r--r-- root/root               406 2024-09-23 14:34 /usr/lib/opkg/info/kmod-crypto-rng.control
+-rw-r--r-- root/root               102 2024-09-23 14:34 /usr/lib/opkg/info/kmod-crypto-rng.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kmod-crypto-rng.prerm
+-rw-r--r-- root/root               393 2024-09-23 14:34 /usr/lib/opkg/info/kmod-crypto-seqiv.control
+-rw-r--r-- root/root                62 2024-09-23 14:34 /usr/lib/opkg/info/kmod-crypto-seqiv.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kmod-crypto-seqiv.prerm
+-rw-r--r-- root/root               370 2024-09-23 14:34 /usr/lib/opkg/info/kmod-crypto-sha512.control
+-rw-r--r-- root/root                72 2024-09-23 14:34 /usr/lib/opkg/info/kmod-crypto-sha512.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kmod-crypto-sha512.prerm
+-rw-r--r-- root/root               649 2024-09-23 14:34 /usr/lib/opkg/info/kmod-gpio-button-hotplug.control
+-rw-r--r-- root/root               126 2024-09-23 14:34 /usr/lib/opkg/info/kmod-gpio-button-hotplug.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kmod-gpio-button-hotplug.prerm
+-rw-r--r-- root/root               357 2024-09-23 14:34 /usr/lib/opkg/info/kmod-lib-crc-ccitt.control
+-rw-r--r-- root/root                64 2024-09-23 14:34 /usr/lib/opkg/info/kmod-lib-crc-ccitt.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kmod-lib-crc-ccitt.prerm
+-rw-r--r-- root/root               367 2024-09-23 14:34 /usr/lib/opkg/info/kmod-lib-crc32c.control
+-rw-r--r-- root/root                61 2024-09-23 14:34 /usr/lib/opkg/info/kmod-lib-crc32c.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kmod-lib-crc32c.prerm
+-rw-r--r-- root/root               388 2024-09-23 14:34 /usr/lib/opkg/info/kmod-lib-lzo.control
+-rw-r--r-- root/root               163 2024-09-23 14:34 /usr/lib/opkg/info/kmod-lib-lzo.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kmod-lib-lzo.prerm
+-rw-r--r-- root/root               498 2024-09-23 14:34 /usr/lib/opkg/info/kmod-mac80211.control
+-rw-r--r-- root/root                34 2024-09-23 14:34 /usr/lib/opkg/info/kmod-mac80211.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kmod-mac80211.prerm
+-rw-r--r-- root/root               350 2024-09-23 14:34 /usr/lib/opkg/info/kmod-nf-conntrack.control
+-rw-r--r-- root/root               181 2024-09-23 14:34 /usr/lib/opkg/info/kmod-nf-conntrack.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kmod-nf-conntrack.prerm
+-rw-r--r-- root/root               373 2024-09-23 14:34 /usr/lib/opkg/info/kmod-nf-conntrack6.control
+-rw-r--r-- root/root                 0 2024-09-23 14:34 /usr/lib/opkg/info/kmod-nf-conntrack6.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kmod-nf-conntrack6.prerm
+-rw-r--r-- root/root               357 2024-09-23 14:34 /usr/lib/opkg/info/kmod-nf-flow.control
+-rw-r--r-- root/root                62 2024-09-23 14:34 /usr/lib/opkg/info/kmod-nf-flow.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kmod-nf-flow.prerm
+-rw-r--r-- root/root               325 2024-09-23 14:34 /usr/lib/opkg/info/kmod-nf-log.control
+-rw-r--r-- root/root                61 2024-09-23 14:34 /usr/lib/opkg/info/kmod-nf-log.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kmod-nf-log.prerm
+-rw-r--r-- root/root               343 2024-09-23 14:34 /usr/lib/opkg/info/kmod-nf-log6.control
+-rw-r--r-- root/root                 0 2024-09-23 14:34 /usr/lib/opkg/info/kmod-nf-log6.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kmod-nf-log6.prerm
+-rw-r--r-- root/root               341 2024-09-23 14:34 /usr/lib/opkg/info/kmod-nf-nat.control
+-rw-r--r-- root/root                54 2024-09-23 14:34 /usr/lib/opkg/info/kmod-nf-nat.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kmod-nf-nat.prerm
+-rw-r--r-- root/root               343 2024-09-23 14:34 /usr/lib/opkg/info/kmod-nf-reject.control
+-rw-r--r-- root/root                65 2024-09-23 14:34 /usr/lib/opkg/info/kmod-nf-reject.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kmod-nf-reject.prerm
+-rw-r--r-- root/root               345 2024-09-23 14:34 /usr/lib/opkg/info/kmod-nf-reject6.control
+-rw-r--r-- root/root                66 2024-09-23 14:34 /usr/lib/opkg/info/kmod-nf-reject6.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kmod-nf-reject6.prerm
+-rw-r--r-- root/root               376 2024-09-23 14:34 /usr/lib/opkg/info/kmod-nfnetlink.control
+-rw-r--r-- root/root                60 2024-09-23 14:34 /usr/lib/opkg/info/kmod-nfnetlink.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kmod-nfnetlink.prerm
+-rw-r--r-- root/root               474 2024-09-23 14:34 /usr/lib/opkg/info/kmod-nft-core.control
+-rw-r--r-- root/root               531 2024-09-23 14:34 /usr/lib/opkg/info/kmod-nft-core.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kmod-nft-core.prerm
+-rw-r--r-- root/root               356 2024-09-23 14:34 /usr/lib/opkg/info/kmod-nft-fib.control
+-rw-r--r-- root/root               170 2024-09-23 14:34 /usr/lib/opkg/info/kmod-nft-fib.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kmod-nft-fib.prerm
+-rw-r--r-- root/root               369 2024-09-23 14:34 /usr/lib/opkg/info/kmod-nft-nat.control
+-rw-r--r-- root/root               129 2024-09-23 14:34 /usr/lib/opkg/info/kmod-nft-nat.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kmod-nft-nat.prerm
+-rw-r--r-- root/root               393 2024-09-23 14:34 /usr/lib/opkg/info/kmod-nft-offload.control
+-rw-r--r-- root/root               201 2024-09-23 14:34 /usr/lib/opkg/info/kmod-nft-offload.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kmod-nft-offload.prerm
+-rw-r--r-- root/root               359 2024-09-23 14:34 /usr/lib/opkg/info/kmod-nls-base.control
+-rw-r--r-- root/root                34 2024-09-23 14:34 /usr/lib/opkg/info/kmod-nls-base.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kmod-nls-base.prerm
+-rw-r--r-- root/root               369 2024-09-23 14:34 /usr/lib/opkg/info/kmod-phy-ath79-usb.control
+-rw-r--r-- root/root                69 2024-09-23 14:34 /usr/lib/opkg/info/kmod-phy-ath79-usb.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kmod-phy-ath79-usb.prerm
+-rw-r--r-- root/root               364 2024-09-23 14:34 /usr/lib/opkg/info/kmod-ppp.control
+-rw-r--r-- root/root                91 2024-09-23 14:34 /usr/lib/opkg/info/kmod-ppp.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kmod-ppp.prerm
+-rw-r--r-- root/root               379 2024-09-23 14:34 /usr/lib/opkg/info/kmod-pppoe.control
+-rw-r--r-- root/root                52 2024-09-23 14:34 /usr/lib/opkg/info/kmod-pppoe.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kmod-pppoe.prerm
+-rw-r--r-- root/root               363 2024-09-23 14:34 /usr/lib/opkg/info/kmod-pppox.control
+-rw-r--r-- root/root                31 2024-09-23 14:34 /usr/lib/opkg/info/kmod-pppox.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kmod-pppox.prerm
+-rw-r--r-- root/root               384 2024-09-23 14:34 /usr/lib/opkg/info/kmod-random-core.control
+-rw-r--r-- root/root                 0 2024-09-23 14:34 /usr/lib/opkg/info/kmod-random-core.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kmod-random-core.prerm
+-rw-r--r-- root/root               354 2024-09-23 14:34 /usr/lib/opkg/info/kmod-slhc.control
+-rw-r--r-- root/root                30 2024-09-23 14:34 /usr/lib/opkg/info/kmod-slhc.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kmod-slhc.prerm
+-rw-r--r-- root/root               350 2024-09-23 14:34 /usr/lib/opkg/info/kmod-usb-core.control
+-rw-r--r-- root/root               128 2024-09-23 14:34 /usr/lib/opkg/info/kmod-usb-core.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kmod-usb-core.prerm
+-rw-r--r-- root/root               351 2024-09-23 14:34 /usr/lib/opkg/info/kmod-usb-ehci.control
+-rw-r--r-- root/root                93 2024-09-23 14:34 /usr/lib/opkg/info/kmod-usb-ehci.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kmod-usb-ehci.prerm
+-rw-r--r-- root/root               589 2024-09-23 14:34 /usr/lib/opkg/info/kmod-usb-ledtrig-usbport.control
+-rw-r--r-- root/root                79 2024-09-23 14:34 /usr/lib/opkg/info/kmod-usb-ledtrig-usbport.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kmod-usb-ledtrig-usbport.prerm
+-rw-r--r-- root/root               396 2024-09-23 14:34 /usr/lib/opkg/info/kmod-usb2.control
+-rw-r--r-- root/root               163 2024-09-23 14:34 /usr/lib/opkg/info/kmod-usb2.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/kmod-usb2.prerm
+-rw-r--r-- root/root               405 2024-09-23 14:34 /usr/lib/opkg/info/libblobmsg-json20230523.control
+-rw-r--r-- root/root                33 2024-09-23 14:34 /usr/lib/opkg/info/libblobmsg-json20230523.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/libblobmsg-json20230523.prerm
+-rw-r--r-- root/root               338 2024-09-23 14:34 /usr/lib/opkg/info/libc.control
+-rw-r--r-- root/root                52 2024-09-23 14:34 /usr/lib/opkg/info/libc.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/libc.prerm
+-rw-r--r-- root/root               368 2024-09-23 14:34 /usr/lib/opkg/info/libgcc1.control
+-rw-r--r-- root/root                19 2024-09-23 14:34 /usr/lib/opkg/info/libgcc1.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/libgcc1.prerm
+-rw-r--r-- root/root               316 2024-09-23 14:34 /usr/lib/opkg/info/libiwinfo-data.control
+-rw-r--r-- root/root                33 2024-09-23 14:34 /usr/lib/opkg/info/libiwinfo-data.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/libiwinfo-data.prerm
+-rw-r--r-- root/root               487 2024-09-23 14:34 /usr/lib/opkg/info/libiwinfo20230701.control
+-rw-r--r-- root/root                31 2024-09-23 14:34 /usr/lib/opkg/info/libiwinfo20230701.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/libiwinfo20230701.prerm
+-rw-r--r-- root/root               420 2024-09-23 14:34 /usr/lib/opkg/info/libjson-c5.control
+-rw-r--r-- root/root                52 2024-09-23 14:34 /usr/lib/opkg/info/libjson-c5.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/libjson-c5.prerm
+-rw-r--r-- root/root               396 2024-09-23 14:34 /usr/lib/opkg/info/libjson-script20230523.control
+-rw-r--r-- root/root                32 2024-09-23 14:34 /usr/lib/opkg/info/libjson-script20230523.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/libjson-script20230523.prerm
+-rw-r--r-- root/root               403 2024-09-23 14:34 /usr/lib/opkg/info/liblucihttp-ucode.control
+-rw-r--r-- root/root                27 2024-09-23 14:34 /usr/lib/opkg/info/liblucihttp-ucode.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/liblucihttp-ucode.prerm
+-rw-r--r-- root/root               374 2024-09-23 14:34 /usr/lib/opkg/info/liblucihttp0.control
+-rw-r--r-- root/root                54 2024-09-23 14:34 /usr/lib/opkg/info/liblucihttp0.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/liblucihttp0.prerm
+-rw-r--r-- root/root               510 2024-09-23 14:34 /usr/lib/opkg/info/libmbedtls12.control
+-rw-r--r-- root/root               174 2024-09-23 14:34 /usr/lib/opkg/info/libmbedtls12.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/libmbedtls12.prerm
+-rw-r--r-- root/root              1377 2024-09-23 14:34 /usr/lib/opkg/info/libmnl0.control
+-rw-r--r-- root/root                46 2024-09-23 14:34 /usr/lib/opkg/info/libmnl0.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/libmnl0.prerm
+-rw-r--r-- root/root               507 2024-09-23 14:34 /usr/lib/opkg/info/libnftnl11.control
+-rw-r--r-- root/root                52 2024-09-23 14:34 /usr/lib/opkg/info/libnftnl11.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/libnftnl11.prerm
+-rw-r--r-- root/root               375 2024-09-23 14:34 /usr/lib/opkg/info/libnl-tiny1.control
+-rw-r--r-- root/root                25 2024-09-23 14:34 /usr/lib/opkg/info/libnl-tiny1.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/libnl-tiny1.prerm
+-rw-r--r-- root/root               359 2024-09-23 14:34 /usr/lib/opkg/info/libpthread.control
+-rw-r--r-- root/root                 0 2024-09-23 14:34 /usr/lib/opkg/info/libpthread.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/libpthread.prerm
+-rw-r--r-- root/root               339 2024-09-23 14:34 /usr/lib/opkg/info/libubox20230523.control
+-rw-r--r-- root/root                25 2024-09-23 14:34 /usr/lib/opkg/info/libubox20230523.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/libubox20230523.prerm
+-rw-r--r-- root/root               364 2024-09-23 14:34 /usr/lib/opkg/info/libubus20230605.control
+-rw-r--r-- root/root                25 2024-09-23 14:34 /usr/lib/opkg/info/libubus20230605.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/libubus20230605.prerm
+-rw-r--r-- root/root               390 2024-09-23 14:34 /usr/lib/opkg/info/libuci20130104.control
+-rw-r--r-- root/root                15 2024-09-23 14:34 /usr/lib/opkg/info/libuci20130104.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/libuci20130104.prerm
+-rw-r--r-- root/root               366 2024-09-23 14:34 /usr/lib/opkg/info/libuclient20201210.control
+-rw-r--r-- root/root                23 2024-09-23 14:34 /usr/lib/opkg/info/libuclient20201210.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/libuclient20201210.prerm
+-rw-r--r-- root/root               415 2024-09-23 14:34 /usr/lib/opkg/info/libucode20230711.control
+-rw-r--r-- root/root                30 2024-09-23 14:34 /usr/lib/opkg/info/libucode20230711.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/libucode20230711.prerm
+-rw-r--r-- root/root               464 2024-09-23 14:34 /usr/lib/opkg/info/libustream-mbedtls20201210.control
+-rw-r--r-- root/root                23 2024-09-23 14:34 /usr/lib/opkg/info/libustream-mbedtls20201210.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/libustream-mbedtls20201210.prerm
+-rw-r--r-- root/root               395 2024-09-23 14:34 /usr/lib/opkg/info/logd.control
+-rw-r--r-- root/root                41 2024-09-23 14:34 /usr/lib/opkg/info/logd.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/logd.prerm
+-rw-r--r-- root/root               360 2024-09-23 14:34 /usr/lib/opkg/info/luci-app-firewall.control
+-rw-r--r-- root/root               441 2024-09-23 14:34 /usr/lib/opkg/info/luci-app-firewall.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/luci-app-firewall.prerm
+-rw-r--r-- root/root               315 2024-09-23 14:34 /usr/lib/opkg/info/luci-app-opkg.control
+-rw-r--r-- root/root               146 2024-09-23 14:34 /usr/lib/opkg/info/luci-app-opkg.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/luci-app-opkg.prerm
+-rw-r--r-- root/root                69 2024-09-23 14:34 /usr/lib/opkg/info/luci-base.conffiles
+-rw-r--r-- root/root               458 2024-09-23 14:34 /usr/lib/opkg/info/luci-base.control
+-rw-r--r-- root/root              2867 2024-09-23 14:34 /usr/lib/opkg/info/luci-base.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/luci-base.prerm
+-rw-r--r-- root/root               491 2024-09-23 14:34 /usr/lib/opkg/info/luci-light.control
+-rw-r--r-- root/root                 0 2024-09-23 14:34 /usr/lib/opkg/info/luci-light.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/luci-light.prerm
+-rw-r--r-- root/root               420 2024-09-23 14:34 /usr/lib/opkg/info/luci-mod-admin-full.control
+-rw-r--r-- root/root                 0 2024-09-23 14:34 /usr/lib/opkg/info/luci-mod-admin-full.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/luci-mod-admin-full.prerm
+-rw-r--r-- root/root               354 2024-09-23 14:34 /usr/lib/opkg/info/luci-mod-network.control
+-rw-r--r-- root/root               510 2024-09-23 14:34 /usr/lib/opkg/info/luci-mod-network.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/luci-mod-network.prerm
+-rw-r--r-- root/root               366 2024-09-23 14:34 /usr/lib/opkg/info/luci-mod-status.control
+-rw-r--r-- root/root              1564 2024-09-23 14:34 /usr/lib/opkg/info/luci-mod-status.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/luci-mod-status.prerm
+-rw-r--r-- root/root               351 2024-09-23 14:34 /usr/lib/opkg/info/luci-mod-system.control
+-rw-r--r-- root/root               939 2024-09-23 14:34 /usr/lib/opkg/info/luci-mod-system.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/luci-mod-system.prerm
+-rw-r--r-- root/root               343 2024-09-23 14:34 /usr/lib/opkg/info/luci-proto-ipv6.control
+-rw-r--r-- root/root               358 2024-09-23 14:34 /usr/lib/opkg/info/luci-proto-ipv6.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/luci-proto-ipv6.prerm
+-rw-r--r-- root/root               326 2024-09-23 14:34 /usr/lib/opkg/info/luci-proto-ppp.control
+-rw-r--r-- root/root               221 2024-09-23 14:34 /usr/lib/opkg/info/luci-proto-ppp.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/luci-proto-ppp.prerm
+-rw-r--r-- root/root               378 2024-09-23 14:34 /usr/lib/opkg/info/luci-ssl.control
+-rw-r--r-- root/root                 0 2024-09-23 14:34 /usr/lib/opkg/info/luci-ssl.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/luci-ssl.prerm
+-rw-r--r-- root/root               346 2024-09-23 14:34 /usr/lib/opkg/info/luci-theme-bootstrap.control
+-rw-r--r-- root/root               603 2024-09-23 14:34 /usr/lib/opkg/info/luci-theme-bootstrap.list
+-rwxr-xr-x root/root               180 2024-09-23 14:34 /usr/lib/opkg/info/luci-theme-bootstrap.postrm
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/luci-theme-bootstrap.prerm
+-rw-r--r-- root/root               373 2024-09-23 14:34 /usr/lib/opkg/info/luci.control
+-rw-r--r-- root/root                 0 2024-09-23 14:34 /usr/lib/opkg/info/luci.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/luci.prerm
+-rw-r--r-- root/root               323 2024-09-23 14:34 /usr/lib/opkg/info/mtd.control
+-rw-r--r-- root/root                10 2024-09-23 14:34 /usr/lib/opkg/info/mtd.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/mtd.prerm
+-rw-r--r-- root/root                17 2024-09-23 14:34 /usr/lib/opkg/info/netifd.conffiles
+-rw-r--r-- root/root               410 2024-09-23 14:34 /usr/lib/opkg/info/netifd.control
+-rw-r--r-- root/root               461 2024-09-23 14:34 /usr/lib/opkg/info/netifd.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/netifd.prerm
+-rw-r--r-- root/root               364 2024-09-23 14:34 /usr/lib/opkg/info/nftables-json.control
+-rw-r--r-- root/root                94 2024-09-23 14:34 /usr/lib/opkg/info/nftables-json.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/nftables-json.prerm
+-rw-r--r-- root/root                18 2024-09-23 14:34 /usr/lib/opkg/info/odhcp6c.conffiles
+-rw-r--r-- root/root               340 2024-09-23 14:34 /usr/lib/opkg/info/odhcp6c.control
+-rw-r--r-- root/root               118 2024-09-23 14:34 /usr/lib/opkg/info/odhcp6c.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/odhcp6c.prerm
+-rw-r--r-- root/root               788 2024-09-23 14:34 /usr/lib/opkg/info/odhcpd-ipv6only.control
+-rw-r--r-- root/root                88 2024-09-23 14:34 /usr/lib/opkg/info/odhcpd-ipv6only.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/odhcpd-ipv6only.prerm
+-rw-r--r-- root/root               385 2024-09-23 14:34 /usr/lib/opkg/info/openwrt-keyring.control
+-rw-r--r-- root/root                32 2024-09-23 14:34 /usr/lib/opkg/info/openwrt-keyring.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/openwrt-keyring.prerm
+-rw-r--r-- root/root                42 2024-09-23 14:34 /usr/lib/opkg/info/opkg.conffiles
+-rw-r--r-- root/root               663 2024-09-23 14:34 /usr/lib/opkg/info/opkg.control
+-rw-r--r-- root/root               131 2024-09-23 14:34 /usr/lib/opkg/info/opkg.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/opkg.prerm
+-rw-r--r-- root/root               401 2024-09-23 14:34 /usr/lib/opkg/info/ppp-mod-pppoe.control
+-rw-r--r-- root/root                29 2024-09-23 14:34 /usr/lib/opkg/info/ppp-mod-pppoe.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/ppp-mod-pppoe.prerm
+-rw-r--r-- root/root                55 2024-09-23 14:34 /usr/lib/opkg/info/ppp.conffiles
+-rw-r--r-- root/root               379 2024-09-23 14:34 /usr/lib/opkg/info/ppp.control
+-rw-r--r-- root/root               200 2024-09-23 14:34 /usr/lib/opkg/info/ppp.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/ppp.prerm
+-rw-r--r-- root/root               371 2024-09-23 14:34 /usr/lib/opkg/info/procd-seccomp.control
+-rw-r--r-- root/root                85 2024-09-23 14:34 /usr/lib/opkg/info/procd-seccomp.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/procd-seccomp.prerm
+-rw-r--r-- root/root               388 2024-09-23 14:34 /usr/lib/opkg/info/procd-ujail.control
+-rw-r--r-- root/root                12 2024-09-23 14:34 /usr/lib/opkg/info/procd-ujail.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/procd-ujail.prerm
+-rw-r--r-- root/root               485 2024-09-23 14:34 /usr/lib/opkg/info/procd.control
+-rw-r--r-- root/root               191 2024-09-23 14:34 /usr/lib/opkg/info/procd.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/procd.prerm
+-rw-r--r-- root/root               470 2024-09-23 14:34 /usr/lib/opkg/info/px5g-mbedtls.control
+-rw-r--r-- root/root                15 2024-09-23 14:34 /usr/lib/opkg/info/px5g-mbedtls.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/px5g-mbedtls.prerm
+-rw-r--r-- root/root               376 2024-09-23 14:34 /usr/lib/opkg/info/rpcd-mod-file.control
+-rw-r--r-- root/root                22 2024-09-23 14:34 /usr/lib/opkg/info/rpcd-mod-file.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/rpcd-mod-file.prerm
+-rw-r--r-- root/root               418 2024-09-23 14:34 /usr/lib/opkg/info/rpcd-mod-iwinfo.control
+-rw-r--r-- root/root                24 2024-09-23 14:34 /usr/lib/opkg/info/rpcd-mod-iwinfo.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/rpcd-mod-iwinfo.prerm
+-rw-r--r-- root/root               380 2024-09-23 14:34 /usr/lib/opkg/info/rpcd-mod-luci.control
+-rw-r--r-- root/root                22 2024-09-23 14:34 /usr/lib/opkg/info/rpcd-mod-luci.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/rpcd-mod-luci.prerm
+-rw-r--r-- root/root               378 2024-09-23 14:34 /usr/lib/opkg/info/rpcd-mod-rrdns.control
+-rw-r--r-- root/root                23 2024-09-23 14:34 /usr/lib/opkg/info/rpcd-mod-rrdns.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/rpcd-mod-rrdns.prerm
+-rw-r--r-- root/root               390 2024-09-23 14:34 /usr/lib/opkg/info/rpcd-mod-ucode.control
+-rw-r--r-- root/root                23 2024-09-23 14:34 /usr/lib/opkg/info/rpcd-mod-ucode.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/rpcd-mod-ucode.prerm
+-rw-r--r-- root/root                17 2024-09-23 14:34 /usr/lib/opkg/info/rpcd.conffiles
+-rw-r--r-- root/root               469 2024-09-23 14:34 /usr/lib/opkg/info/rpcd.control
+-rw-r--r-- root/root               135 2024-09-23 14:34 /usr/lib/opkg/info/rpcd.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/rpcd.prerm
+-rw-r--r-- root/root               325 2024-09-23 14:34 /usr/lib/opkg/info/swconfig.control
+-rw-r--r-- root/root                38 2024-09-23 14:34 /usr/lib/opkg/info/swconfig.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/swconfig.prerm
+-rw-r--r-- root/root               360 2024-09-23 14:34 /usr/lib/opkg/info/uboot-envtools.control
+-rw-r--r-- root/root               178 2024-09-23 14:34 /usr/lib/opkg/info/uboot-envtools.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/uboot-envtools.prerm
+-rw-r--r-- root/root                18 2024-09-23 14:34 /usr/lib/opkg/info/ubox.conffiles
+-rw-r--r-- root/root               552 2024-09-23 14:34 /usr/lib/opkg/info/ubox.control
+-rw-r--r-- root/root                75 2024-09-23 14:34 /usr/lib/opkg/info/ubox.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/ubox.prerm
+-rw-r--r-- root/root               343 2024-09-23 14:34 /usr/lib/opkg/info/ubus.control
+-rw-r--r-- root/root                10 2024-09-23 14:34 /usr/lib/opkg/info/ubus.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/ubus.prerm
+-rw-r--r-- root/root               361 2024-09-23 14:34 /usr/lib/opkg/info/ubusd.control
+-rw-r--r-- root/root                12 2024-09-23 14:34 /usr/lib/opkg/info/ubusd.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/ubusd.prerm
+-rw-r--r-- root/root               334 2024-09-23 14:34 /usr/lib/opkg/info/uci.control
+-rw-r--r-- root/root                29 2024-09-23 14:34 /usr/lib/opkg/info/uci.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/uci.prerm
+-rw-r--r-- root/root               405 2024-09-23 14:34 /usr/lib/opkg/info/uclient-fetch.control
+-rw-r--r-- root/root                19 2024-09-23 14:34 /usr/lib/opkg/info/uclient-fetch.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/uclient-fetch.prerm
+-rw-r--r-- root/root               361 2024-09-23 14:34 /usr/lib/opkg/info/ucode-mod-fs.control
+-rw-r--r-- root/root                21 2024-09-23 14:34 /usr/lib/opkg/info/ucode-mod-fs.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/ucode-mod-fs.prerm
+-rw-r--r-- root/root               328 2024-09-23 14:34 /usr/lib/opkg/info/ucode-mod-html.control
+-rw-r--r-- root/root                23 2024-09-23 14:34 /usr/lib/opkg/info/ucode-mod-html.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/ucode-mod-html.prerm
+-rw-r--r-- root/root               353 2024-09-23 14:34 /usr/lib/opkg/info/ucode-mod-math.control
+-rw-r--r-- root/root                23 2024-09-23 14:34 /usr/lib/opkg/info/ucode-mod-math.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/ucode-mod-math.prerm
+-rw-r--r-- root/root               403 2024-09-23 14:34 /usr/lib/opkg/info/ucode-mod-nl80211.control
+-rw-r--r-- root/root                26 2024-09-23 14:34 /usr/lib/opkg/info/ucode-mod-nl80211.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/ucode-mod-nl80211.prerm
+-rw-r--r-- root/root               386 2024-09-23 14:34 /usr/lib/opkg/info/ucode-mod-rtnl.control
+-rw-r--r-- root/root                23 2024-09-23 14:34 /usr/lib/opkg/info/ucode-mod-rtnl.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/ucode-mod-rtnl.prerm
+-rw-r--r-- root/root               419 2024-09-23 14:34 /usr/lib/opkg/info/ucode-mod-ubus.control
+-rw-r--r-- root/root                23 2024-09-23 14:34 /usr/lib/opkg/info/ucode-mod-ubus.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/ucode-mod-ubus.prerm
+-rw-r--r-- root/root               373 2024-09-23 14:34 /usr/lib/opkg/info/ucode-mod-uci.control
+-rw-r--r-- root/root                22 2024-09-23 14:34 /usr/lib/opkg/info/ucode-mod-uci.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/ucode-mod-uci.prerm
+-rw-r--r-- root/root               404 2024-09-23 14:34 /usr/lib/opkg/info/ucode-mod-uloop.control
+-rw-r--r-- root/root                24 2024-09-23 14:34 /usr/lib/opkg/info/ucode-mod-uloop.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/ucode-mod-uloop.prerm
+-rw-r--r-- root/root               398 2024-09-23 14:34 /usr/lib/opkg/info/ucode.control
+-rw-r--r-- root/root                42 2024-09-23 14:34 /usr/lib/opkg/info/ucode.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/ucode.prerm
+-rw-r--r-- root/root               452 2024-09-23 14:34 /usr/lib/opkg/info/uhttpd-mod-ubus.control
+-rw-r--r-- root/root                57 2024-09-23 14:34 /usr/lib/opkg/info/uhttpd-mod-ubus.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/uhttpd-mod-ubus.prerm
+-rw-r--r-- root/root                19 2024-09-23 14:34 /usr/lib/opkg/info/uhttpd.conffiles
+-rw-r--r-- root/root               503 2024-09-23 14:34 /usr/lib/opkg/info/uhttpd.control
+-rw-r--r-- root/root                82 2024-09-23 14:34 /usr/lib/opkg/info/uhttpd.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/uhttpd.prerm
+-rw-r--r-- root/root               283 2024-09-23 14:34 /usr/lib/opkg/info/urandom-seed.control
+-rw-r--r-- root/root                73 2024-09-23 14:34 /usr/lib/opkg/info/urandom-seed.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/urandom-seed.prerm
+-rw-r--r-- root/root               800 2024-09-23 14:34 /usr/lib/opkg/info/urngd.control
+-rw-r--r-- root/root                30 2024-09-23 14:34 /usr/lib/opkg/info/urngd.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/urngd.prerm
+-rw-r--r-- root/root               322 2024-09-23 14:34 /usr/lib/opkg/info/usign.control
+-rw-r--r-- root/root                32 2024-09-23 14:34 /usr/lib/opkg/info/usign.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/usign.prerm
+-rw-r--r-- root/root               334 2024-09-23 14:34 /usr/lib/opkg/info/wireless-regdb.control
+-rw-r--r-- root/root                28 2024-09-23 14:34 /usr/lib/opkg/info/wireless-regdb.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/wireless-regdb.prerm
+-rw-r--r-- root/root              1184 2024-09-23 14:34 /usr/lib/opkg/info/wpad-basic-mbedtls.control
+-rw-r--r-- root/root               123 2024-09-23 14:34 /usr/lib/opkg/info/wpad-basic-mbedtls.list
+-rwxr-xr-x root/root               117 2024-09-23 14:34 /usr/lib/opkg/info/wpad-basic-mbedtls.prerm
+drwxr-xr-x root/root                 3 2024-09-23 14:34 /usr/lib/opkg/lists
+-rw-r--r-- root/root             33463 2024-09-23 14:34 /usr/lib/opkg/status
+-rw-r--r-- root/root               538 2024-09-23 14:34 /usr/lib/os-release
+drwxr-xr-x root/root                28 2024-09-23 14:34 /usr/lib/pppd
+drwxr-xr-x root/root                31 2024-09-23 14:34 /usr/lib/pppd/2.4.9
+-rwxr-xr-x root/root             66563 2024-09-23 14:34 /usr/lib/pppd/2.4.9/pppoe.so
+drwxr-xr-x root/root                94 2024-09-23 14:34 /usr/lib/rpcd
+-rwxr-xr-x root/root             65920 2024-09-23 14:34 /usr/lib/rpcd/file.so
+-rwxr-xr-x root/root             65844 2024-09-23 14:34 /usr/lib/rpcd/iwinfo.so
+-rwxr-xr-x root/root             66051 2024-09-23 14:34 /usr/lib/rpcd/luci.so
+-rwxr-xr-x root/root             65844 2024-09-23 14:34 /usr/lib/rpcd/rrdns.so
+-rwxr-xr-x root/root             65960 2024-09-23 14:34 /usr/lib/rpcd/ucode.so
+drwxr-xr-x root/root               167 2024-09-23 14:34 /usr/lib/ucode
+-rwxr-xr-x root/root             65964 2024-09-23 14:34 /usr/lib/ucode/fs.so
+-rwxr-xr-x root/root            131244 2024-09-23 14:34 /usr/lib/ucode/html.so
+drwxr-xr-x root/root                30 2024-09-23 14:34 /usr/lib/ucode/luci
+-rwxr-xr-x root/root             65848 2024-09-23 14:34 /usr/lib/ucode/luci/core.so
+-rw-r--r-- root/root             65740 2024-09-23 14:34 /usr/lib/ucode/lucihttp.so
+-rwxr-xr-x root/root             65692 2024-09-23 14:34 /usr/lib/ucode/math.so
+-rwxr-xr-x root/root             65936 2024-09-23 14:34 /usr/lib/ucode/nl80211.so
+-rwxr-xr-x root/root            131484 2024-09-23 14:34 /usr/lib/ucode/rtnl.so
+-rwxr-xr-x root/root             65956 2024-09-23 14:34 /usr/lib/ucode/ubus.so
+-rwxr-xr-x root/root             65836 2024-09-23 14:34 /usr/lib/ucode/uci.so
+-rwxr-xr-x root/root             65884 2024-09-23 14:34 /usr/lib/ucode/uloop.so
+-rwxr-xr-x root/root             65824 2024-09-23 14:34 /usr/lib/uhttpd_ubus.so
+drwxr-xr-x root/root               129 2024-09-23 14:34 /usr/libexec
+-rwxr-xr-x root/root             65605 2024-09-23 14:34 /usr/libexec/cgi-io
+-rwxr-xr-x root/root               104 2024-09-23 14:34 /usr/libexec/login.sh
+-rwxr-xr-x root/root              1365 2024-09-23 14:34 /usr/libexec/luci-peeraddr
+drwxr-xr-x root/root                41 2024-09-23 14:34 /usr/libexec/network
+-rwxr-xr-x root/root              1472 2024-09-23 14:34 /usr/libexec/network/packet-steering.sh
+-rwxr-xr-x root/root              1240 2024-09-23 14:34 /usr/libexec/opkg-call
+-rwxr-xr-x root/root              1565 2024-09-23 14:34 /usr/libexec/validate_firmware_image
+drwxr-xr-x root/root               364 2024-09-23 14:34 /usr/sbin
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/sbin/brctl -> ../../bin/busybox
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/sbin/chroot -> ../../bin/busybox
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/sbin/crond -> ../../bin/busybox
+-rwxr-xr-x root/root            268328 2024-09-23 14:34 /usr/sbin/dnsmasq
+-rwxr-xr-x root/root            264328 2024-09-23 14:34 /usr/sbin/dropbear
+-rwxr-xr-x root/root             65861 2024-09-23 14:34 /usr/sbin/fw_printenv
+-rwxr-xr-x root/root                93 2024-09-23 14:34 /usr/sbin/fw_printsys
+lrwxrwxrwx root/root                11 2024-09-23 14:34 /usr/sbin/fw_setenv -> fw_printenv
+-rwxr-xr-x root/root                91 2024-09-23 14:34 /usr/sbin/fw_setsys
+lrwxrwxrwx root/root                 4 2024-09-23 14:34 /usr/sbin/hostapd -> wpad
+-rwxr-xr-x root/root            137077 2024-09-23 14:34 /usr/sbin/iw
+-rwxr-xr-x root/root             65557 2024-09-23 14:34 /usr/sbin/nft
+lrwxrwxrwx root/root                17 2024-09-23 14:34 /usr/sbin/ntpd -> ../../bin/busybox
+-rwxr-xr-x root/root               265 2024-09-23 14:34 /usr/sbin/ntpd-hotplug
+-rwxr-xr-x root/root             66645 2024-09-23 14:34 /usr/sbin/odhcp6c
+-rwxr-xr-x root/root            132592 2024-09-23 14:34 /usr/sbin/odhcpd
+-rwxr-xr-x root/root               120 2024-09-23 14:34 /usr/sbin/odhcpd-update
+-rwxr-xr-x root/root              1079 2024-09-23 14:34 /usr/sbin/opkg-key
+-rwxr-xr-x root/root            279744 2024-09-23 14:34 /usr/sbin/pppd
+-rwxr-xr-x root/root             65557 2024-09-23 14:34 /usr/sbin/px5g
+-rwxr-xr-x root/root             66704 2024-09-23 14:34 /usr/sbin/uhttpd
+lrwxrwxrwx root/root                 4 2024-09-23 14:34 /usr/sbin/wpa_supplicant -> wpad
+-rwxr-xr-x root/root            863632 2024-09-23 14:34 /usr/sbin/wpad
+drwxr-xr-x root/root               175 2024-09-23 14:34 /usr/share
+drwxr-xr-x root/root                99 2024-09-23 14:34 /usr/share/acl.d
+-rw-r--r-- root/root               217 2024-09-23 14:34 /usr/share/acl.d/dnsmasq_acl.json
+-rw-r--r-- root/root                91 2024-09-23 14:34 /usr/share/acl.d/luci-base.json
+-rw-r--r-- root/root                84 2024-09-23 14:34 /usr/share/acl.d/ntpd.json
+-rw-r--r-- root/root               355 2024-09-23 14:34 /usr/share/acl.d/wpad_acl.json
+drwxr-xr-x root/root                65 2024-09-23 14:34 /usr/share/dnsmasq
+-rw------- root/root               340 2024-09-23 14:34 /usr/share/dnsmasq/dhcpbogushostname.conf
+-rw------- root/root               311 2024-09-23 14:34 /usr/share/dnsmasq/rfc6761.conf
+drwxr-xr-x root/root                62 2024-09-23 14:34 /usr/share/firewall4
+-rw-r--r-- root/root              2195 2024-09-23 14:34 /usr/share/firewall4/helpers
+-rw-r--r-- root/root              3016 2024-09-23 14:34 /usr/share/firewall4/main.uc
+drwxr-xr-x root/root               246 2024-09-23 14:34 /usr/share/firewall4/templates
+-rw-r--r-- root/root              4343 2024-09-23 14:34 /usr/share/firewall4/templates/mangle-rule.uc
+-rw-r--r-- root/root              4198 2024-09-23 14:34 /usr/share/firewall4/templates/redirect.uc
+-rw-r--r-- root/root              4874 2024-09-23 14:34 /usr/share/firewall4/templates/rule.uc
+-rw-r--r-- root/root             14445 2024-09-23 14:34 /usr/share/firewall4/templates/ruleset.uc
+-rw-r--r-- root/root               363 2024-09-23 14:34 /usr/share/firewall4/templates/zone-drop-invalid.uc
+-rw-r--r-- root/root               360 2024-09-23 14:34 /usr/share/firewall4/templates/zone-jump.uc
+-rw-r--r-- root/root               933 2024-09-23 14:34 /usr/share/firewall4/templates/zone-masq.uc
+-rw-r--r-- root/root               856 2024-09-23 14:34 /usr/share/firewall4/templates/zone-match.uc
+-rw-r--r-- root/root               390 2024-09-23 14:34 /usr/share/firewall4/templates/zone-mssfix.uc
+-rw-r--r-- root/root               864 2024-09-23 14:34 /usr/share/firewall4/templates/zone-notrack.uc
+-rw-r--r-- root/root               594 2024-09-23 14:34 /usr/share/firewall4/templates/zone-verdict.uc
+drwxr-xr-x root/root                90 2024-09-23 14:34 /usr/share/hostap
+-rw-r--r-- root/root              8246 2024-09-23 14:34 /usr/share/hostap/common.uc
+-rw-r--r-- root/root             18192 2024-09-23 14:34 /usr/share/hostap/hostapd.uc
+-rw-r--r-- root/root              4222 2024-09-23 14:34 /usr/share/hostap/wdev.uc
+-rw-r--r-- root/root              7091 2024-09-23 14:34 /usr/share/hostap/wpa_supplicant.uc
+drwxr-xr-x root/root                34 2024-09-23 14:34 /usr/share/libiwinfo
+-rw-r--r-- root/root             17016 2024-09-23 14:34 /usr/share/libiwinfo/devices.txt
+drwxr-xr-x root/root                30 2024-09-23 14:34 /usr/share/libubox
+-rw-r--r-- root/root              6018 2024-09-23 14:34 /usr/share/libubox/jshn.sh
+drwxr-xr-x root/root                29 2024-09-23 14:34 /usr/share/luci
+drwxr-xr-x root/root               178 2024-09-23 14:34 /usr/share/luci/menu.d
+-rw-r--r-- root/root              1241 2024-09-23 14:34 /usr/share/luci/menu.d/luci-app-firewall.json
+-rw-r--r-- root/root               174 2024-09-23 14:34 /usr/share/luci/menu.d/luci-app-opkg.json
+-rw-r--r-- root/root              2557 2024-09-23 14:34 /usr/share/luci/menu.d/luci-base.json
+-rw-r--r-- root/root              1566 2024-09-23 14:34 /usr/share/luci/menu.d/luci-mod-network.json
+-rw-r--r-- root/root              2922 2024-09-23 14:34 /usr/share/luci/menu.d/luci-mod-status.json
+-rw-r--r-- root/root              2605 2024-09-23 14:34 /usr/share/luci/menu.d/luci-mod-system.json
+drwxr-xr-x root/root                29 2024-09-23 14:34 /usr/share/nftables.d
+-rw-r--r-- root/root               991 2024-09-23 14:34 /usr/share/nftables.d/README
+drwxr-xr-x root/root                41 2024-09-23 14:34 /usr/share/rpcd
+drwxr-xr-x root/root               240 2024-09-23 14:34 /usr/share/rpcd/acl.d
+-rw-r--r-- root/root               411 2024-09-23 14:34 /usr/share/rpcd/acl.d/luci-app-firewall.json
+-rw-r--r-- root/root               774 2024-09-23 14:34 /usr/share/rpcd/acl.d/luci-app-opkg.json
+-rw-r--r-- root/root               946 2024-09-23 14:34 /usr/share/rpcd/acl.d/luci-base.json
+-rw-r--r-- root/root              1886 2024-09-23 14:34 /usr/share/rpcd/acl.d/luci-mod-network.json
+-rw-r--r-- root/root              1463 2024-09-23 14:34 /usr/share/rpcd/acl.d/luci-mod-status-index.json
+-rw-r--r-- root/root              2072 2024-09-23 14:34 /usr/share/rpcd/acl.d/luci-mod-status.json
+-rw-r--r-- root/root              4441 2024-09-23 14:34 /usr/share/rpcd/acl.d/luci-mod-system.json
+-rw-r--r-- root/root               179 2024-09-23 14:34 /usr/share/rpcd/acl.d/unauthenticated.json
+drwxr-xr-x root/root                27 2024-09-23 14:34 /usr/share/rpcd/ucode
+-rw-r--r-- root/root             14056 2024-09-23 14:34 /usr/share/rpcd/ucode/luci
+drwxr-xr-x root/root                41 2024-09-23 14:34 /usr/share/ucode
+-rw-r--r-- root/root             79301 2024-09-23 14:34 /usr/share/ucode/fw4.uc
+drwxr-xr-x root/root               171 2024-09-23 14:34 /usr/share/ucode/luci
+drwxr-xr-x root/root                28 2024-09-23 14:34 /usr/share/ucode/luci/controller
+drwxr-xr-x root/root                45 2024-09-23 14:34 /usr/share/ucode/luci/controller/admin
+-rw-r--r-- root/root              4033 2024-09-23 14:34 /usr/share/ucode/luci/controller/admin/index.uc
+-rw-r--r-- root/root              3304 2024-09-23 14:34 /usr/share/ucode/luci/controller/admin/uci.uc
+-rw-r--r-- root/root             21964 2024-09-23 14:34 /usr/share/ucode/luci/dispatcher.uc
+-rw-r--r-- root/root             13202 2024-09-23 14:34 /usr/share/ucode/luci/http.uc
+-rw-r--r-- root/root              4514 2024-09-23 14:34 /usr/share/ucode/luci/runtime.uc
+-rw-r--r-- root/root              3368 2024-09-23 14:34 /usr/share/ucode/luci/sys.uc
+drwxr-xr-x root/root               174 2024-09-23 14:34 /usr/share/ucode/luci/template
+drwxr-xr-x root/root                31 2024-09-23 14:34 /usr/share/ucode/luci/template/admin_status
+-rw-r--r-- root/root              1688 2024-09-23 14:34 /usr/share/ucode/luci/template/admin_status/index.ut
+-rw-r--r-- root/root               603 2024-09-23 14:34 /usr/share/ucode/luci/template/csrftoken.ut
+-rw-r--r-- root/root               435 2024-09-23 14:34 /usr/share/ucode/luci/template/error404.ut
+-rw-r--r-- root/root              1143 2024-09-23 14:34 /usr/share/ucode/luci/template/error500.ut
+-rw-r--r-- root/root              1317 2024-09-23 14:34 /usr/share/ucode/luci/template/footer.ut
+-rw-r--r-- root/root              1185 2024-09-23 14:34 /usr/share/ucode/luci/template/header.ut
+-rw-r--r-- root/root              2225 2024-09-23 14:34 /usr/share/ucode/luci/template/sysauth.ut
+drwxr-xr-x root/root                77 2024-09-23 14:34 /usr/share/ucode/luci/template/themes
+drwxr-xr-x root/root                67 2024-09-23 14:34 /usr/share/ucode/luci/template/themes/bootstrap
+-rw-r--r-- root/root               694 2024-09-23 14:34 /usr/share/ucode/luci/template/themes/bootstrap/footer.ut
+-rw-r--r-- root/root              3626 2024-09-23 14:34 /usr/share/ucode/luci/template/themes/bootstrap/header.ut
+-rw-r--r-- root/root              1368 2024-09-23 14:34 /usr/share/ucode/luci/template/themes/bootstrap/sysauth.ut
+lrwxrwxrwx root/root                 9 2024-09-23 14:34 /usr/share/ucode/luci/template/themes/bootstrap-dark -> bootstrap
+lrwxrwxrwx root/root                 9 2024-09-23 14:34 /usr/share/ucode/luci/template/themes/bootstrap-light -> bootstrap
+-rw-r--r-- root/root               254 2024-09-23 14:34 /usr/share/ucode/luci/template/view.ut
+-rw-r--r-- root/root               204 2024-09-23 14:34 /usr/share/ucode/luci/uhttpd.uc
+-rw-r--r-- root/root                90 2024-09-23 14:34 /usr/share/ucode/luci/version.uc
+-rw-r--r-- root/root             15977 2024-09-23 14:34 /usr/share/ucode/luci/zoneinfo.uc
+drwxr-xr-x root/root                37 2024-09-23 14:34 /usr/share/udhcpc
+-rwxr-xr-x root/root              1348 2024-09-23 14:34 /usr/share/udhcpc/default.script
+lrwxrwxrwx root/root                 3 2024-09-23 14:34 /var -> tmp
+drwxr-xr-x root/root                79 2024-09-23 14:34 /www
+drwxr-xr-x root/root                99 2024-09-23 14:34 /www/cgi-bin
+lrwxrwxrwx root/root                24 2024-09-23 14:34 /www/cgi-bin/cgi-backup -> ../../usr/libexec/cgi-io
+lrwxrwxrwx root/root                24 2024-09-23 14:34 /www/cgi-bin/cgi-download -> ../../usr/libexec/cgi-io
+lrwxrwxrwx root/root                24 2024-09-23 14:34 /www/cgi-bin/cgi-exec -> ../../usr/libexec/cgi-io
+lrwxrwxrwx root/root                24 2024-09-23 14:34 /www/cgi-bin/cgi-upload -> ../../usr/libexec/cgi-io
+-rwxr-xr-x root/root               660 2024-09-23 14:34 /www/cgi-bin/luci
+-rw-r--r-- root/root               838 2024-09-23 14:34 /www/index.html
+drwxr-xr-x root/root               106 2024-09-23 14:34 /www/luci-static
+drwxr-xr-x root/root                71 2024-09-23 14:34 /www/luci-static/bootstrap
+-rw-r--r-- root/root             44557 2024-09-23 14:34 /www/luci-static/bootstrap/cascade.css
+-rw-r--r-- root/root               592 2024-09-23 14:34 /www/luci-static/bootstrap/favicon.png
+-rw-r--r-- root/root              7228 2024-09-23 14:34 /www/luci-static/bootstrap/mobile.css
+lrwxrwxrwx root/root                 9 2024-09-23 14:34 /www/luci-static/bootstrap-dark -> bootstrap
+lrwxrwxrwx root/root                 9 2024-09-23 14:34 /www/luci-static/bootstrap-light -> bootstrap
+drwxr-xr-x root/root               319 2024-09-23 14:34 /www/luci-static/resources
+drwxr-xr-x root/root                65 2024-09-23 14:34 /www/luci-static/resources/cbi
+-rw-r--r-- root/root               389 2024-09-23 14:34 /www/luci-static/resources/cbi/file.svg
+-rw-r--r-- root/root               415 2024-09-23 14:34 /www/luci-static/resources/cbi/folder.svg
+-rw-r--r-- root/root               444 2024-09-23 14:34 /www/luci-static/resources/cbi/link.svg
+-rw-r--r-- root/root             14927 2024-09-23 14:34 /www/luci-static/resources/cbi.js
+-rw-r--r-- root/root             10109 2024-09-23 14:34 /www/luci-static/resources/firewall.js
+-rw-r--r-- root/root             57420 2024-09-23 14:34 /www/luci-static/resources/form.js
+-rw-r--r-- root/root              3721 2024-09-23 14:34 /www/luci-static/resources/fs.js
+drwxr-xr-x root/root               534 2024-09-23 14:34 /www/luci-static/resources/icons
+-rw-r--r-- root/root               651 2024-09-23 14:34 /www/luci-static/resources/icons/alias.png
+-rw-r--r-- root/root               371 2024-09-23 14:34 /www/luci-static/resources/icons/alias_disabled.png
+-rw-r--r-- root/root               646 2024-09-23 14:34 /www/luci-static/resources/icons/bridge.png
+-rw-r--r-- root/root               385 2024-09-23 14:34 /www/luci-static/resources/icons/bridge_disabled.png
+-rw-r--r-- root/root               664 2024-09-23 14:34 /www/luci-static/resources/icons/ethernet.png
+-rw-r--r-- root/root               384 2024-09-23 14:34 /www/luci-static/resources/icons/ethernet_disabled.png
+-rw-r--r-- root/root              1786 2024-09-23 14:34 /www/luci-static/resources/icons/loading.gif
+-rw-r--r-- root/root               489 2024-09-23 14:34 /www/luci-static/resources/icons/port_down.png
+-rw-r--r-- root/root               561 2024-09-23 14:34 /www/luci-static/resources/icons/port_up.png
+-rw-r--r-- root/root               451 2024-09-23 14:34 /www/luci-static/resources/icons/signal-0-25.png
+-rw-r--r-- root/root               430 2024-09-23 14:34 /www/luci-static/resources/icons/signal-0.png
+-rw-r--r-- root/root               454 2024-09-23 14:34 /www/luci-static/resources/icons/signal-25-50.png
+-rw-r--r-- root/root               454 2024-09-23 14:34 /www/luci-static/resources/icons/signal-50-75.png
+-rw-r--r-- root/root               440 2024-09-23 14:34 /www/luci-static/resources/icons/signal-75-100.png
+-rw-r--r-- root/root               624 2024-09-23 14:34 /www/luci-static/resources/icons/signal-none.png
+-rw-r--r-- root/root               656 2024-09-23 14:34 /www/luci-static/resources/icons/switch.png
+-rw-r--r-- root/root               388 2024-09-23 14:34 /www/luci-static/resources/icons/switch_disabled.png
+-rw-r--r-- root/root               339 2024-09-23 14:34 /www/luci-static/resources/icons/tunnel.png
+-rw-r--r-- root/root               234 2024-09-23 14:34 /www/luci-static/resources/icons/tunnel_disabled.png
+-rw-r--r-- root/root               656 2024-09-23 14:34 /www/luci-static/resources/icons/vlan.png
+-rw-r--r-- root/root               388 2024-09-23 14:34 /www/luci-static/resources/icons/vlan_disabled.png
+-rw-r--r-- root/root               745 2024-09-23 14:34 /www/luci-static/resources/icons/wifi.png
+-rw-r--r-- root/root               480 2024-09-23 14:34 /www/luci-static/resources/icons/wifi_disabled.png
+-rw-r--r-- root/root             31142 2024-09-23 14:34 /www/luci-static/resources/luci.js
+-rw-r--r-- root/root              2234 2024-09-23 14:34 /www/luci-static/resources/menu-bootstrap.js
+-rw-r--r-- root/root             49274 2024-09-23 14:34 /www/luci-static/resources/network.js
+-rw-r--r-- root/root              1650 2024-09-23 14:34 /www/luci-static/resources/promis.min.js
+drwxr-xr-x root/root               264 2024-09-23 14:34 /www/luci-static/resources/protocol
+-rw-r--r-- root/root              1001 2024-09-23 14:34 /www/luci-static/resources/protocol/464xlat.js
+-rw-r--r-- root/root              2738 2024-09-23 14:34 /www/luci-static/resources/protocol/6in4.js
+-rw-r--r-- root/root              1844 2024-09-23 14:34 /www/luci-static/resources/protocol/6rd.js
+-rw-r--r-- root/root              1140 2024-09-23 14:34 /www/luci-static/resources/protocol/6to4.js
+-rw-r--r-- root/root              1110 2024-09-23 14:34 /www/luci-static/resources/protocol/dhcp.js
+-rw-r--r-- root/root               875 2024-09-23 14:34 /www/luci-static/resources/protocol/dhcpv6.js
+-rw-r--r-- root/root              1626 2024-09-23 14:34 /www/luci-static/resources/protocol/dslite.js
+-rw-r--r-- root/root              1964 2024-09-23 14:34 /www/luci-static/resources/protocol/ipip6.js
+-rw-r--r-- root/root              1243 2024-09-23 14:34 /www/luci-static/resources/protocol/l2tp.js
+-rw-r--r-- root/root              2455 2024-09-23 14:34 /www/luci-static/resources/protocol/map.js
+-rw-r--r-- root/root               116 2024-09-23 14:34 /www/luci-static/resources/protocol/none.js
+-rw-r--r-- root/root              3472 2024-09-23 14:34 /www/luci-static/resources/protocol/ppp.js
+-rw-r--r-- root/root              3170 2024-09-23 14:34 /www/luci-static/resources/protocol/pppoa.js
+-rw-r--r-- root/root              2945 2024-09-23 14:34 /www/luci-static/resources/protocol/pppoe.js
+-rw-r--r-- root/root              2785 2024-09-23 14:34 /www/luci-static/resources/protocol/pptp.js
+-rw-r--r-- root/root              5227 2024-09-23 14:34 /www/luci-static/resources/protocol/static.js
+-rw-r--r-- root/root              4102 2024-09-23 14:34 /www/luci-static/resources/rpc.js
+drwxr-xr-x root/root               143 2024-09-23 14:34 /www/luci-static/resources/svg
+-rw-r--r-- root/root              1065 2024-09-23 14:34 /www/luci-static/resources/svg/bandwidth.svg
+-rw-r--r-- root/root              1677 2024-09-23 14:34 /www/luci-static/resources/svg/channel_analysis.svg
+-rw-r--r-- root/root              1162 2024-09-23 14:34 /www/luci-static/resources/svg/connections.svg
+-rw-r--r-- root/root              1187 2024-09-23 14:34 /www/luci-static/resources/svg/load.svg
+-rw-r--r-- root/root               973 2024-09-23 14:34 /www/luci-static/resources/svg/wifirate.svg
+-rw-r--r-- root/root              1066 2024-09-23 14:34 /www/luci-static/resources/svg/wireless.svg
+drwxr-xr-x root/root               101 2024-09-23 14:34 /www/luci-static/resources/tools
+-rw-r--r-- root/root             14520 2024-09-23 14:34 /www/luci-static/resources/tools/firewall.js
+-rw-r--r-- root/root             28315 2024-09-23 14:34 /www/luci-static/resources/tools/network.js
+-rw-r--r-- root/root              1275 2024-09-23 14:34 /www/luci-static/resources/tools/prng.js
+-rw-r--r-- root/root               994 2024-09-23 14:34 /www/luci-static/resources/tools/views.js
+-rw-r--r-- root/root             14293 2024-09-23 14:34 /www/luci-static/resources/tools/widgets.js
+-rw-r--r-- root/root              8299 2024-09-23 14:34 /www/luci-static/resources/uci.js
+-rw-r--r-- root/root             78042 2024-09-23 14:34 /www/luci-static/resources/ui.js
+-rw-r--r-- root/root             15237 2024-09-23 14:34 /www/luci-static/resources/validation.js
+drwxr-xr-x root/root               106 2024-09-23 14:34 /www/luci-static/resources/view
+drwxr-xr-x root/root                33 2024-09-23 14:34 /www/luci-static/resources/view/bootstrap
+-rw-r--r-- root/root               643 2024-09-23 14:34 /www/luci-static/resources/view/bootstrap/sysauth.js
+drwxr-xr-x root/root               116 2024-09-23 14:34 /www/luci-static/resources/view/firewall
+-rw-r--r-- root/root              1034 2024-09-23 14:34 /www/luci-static/resources/view/firewall/custom.js
+-rw-r--r-- root/root             11835 2024-09-23 14:34 /www/luci-static/resources/view/firewall/forwards.js
+-rw-r--r-- root/root              5071 2024-09-23 14:34 /www/luci-static/resources/view/firewall/ipsets.js
+-rw-r--r-- root/root             16776 2024-09-23 14:34 /www/luci-static/resources/view/firewall/rules.js
+-rw-r--r-- root/root             12221 2024-09-23 14:34 /www/luci-static/resources/view/firewall/snats.js
+-rw-r--r-- root/root             13031 2024-09-23 14:34 /www/luci-static/resources/view/firewall/zones.js
+drwxr-xr-x root/root               126 2024-09-23 14:34 /www/luci-static/resources/view/network
+-rw-r--r-- root/root             34093 2024-09-23 14:34 /www/luci-static/resources/view/network/dhcp.js
+-rw-r--r-- root/root              4362 2024-09-23 14:34 /www/luci-static/resources/view/network/diagnostics.js
+-rw-r--r-- root/root             51730 2024-09-23 14:34 /www/luci-static/resources/view/network/interfaces.js
+-rw-r--r-- root/root              7586 2024-09-23 14:34 /www/luci-static/resources/view/network/routes.js
+-rw-r--r-- root/root              9031 2024-09-23 14:34 /www/luci-static/resources/view/network/switch.js
+-rw-r--r-- root/root             73229 2024-09-23 14:34 /www/luci-static/resources/view/network/wireless.js
+-rw-r--r-- root/root             27795 2024-09-23 14:34 /www/luci-static/resources/view/opkg.js
+drwxr-xr-x root/root               257 2024-09-23 14:34 /www/luci-static/resources/view/status
+-rw-r--r-- root/root              6997 2024-09-23 14:34 /www/luci-static/resources/view/status/bandwidth.js
+-rw-r--r-- root/root             11510 2024-09-23 14:34 /www/luci-static/resources/view/status/channel_analysis.js
+-rw-r--r-- root/root              9772 2024-09-23 14:34 /www/luci-static/resources/view/status/connections.js
+-rw-r--r-- root/root              1260 2024-09-23 14:34 /www/luci-static/resources/view/status/dmesg.js
+drwxr-xr-x root/root               169 2024-09-23 14:34 /www/luci-static/resources/view/status/include
+-rw-r--r-- root/root              1744 2024-09-23 14:34 /www/luci-static/resources/view/status/include/10_system.js
+-rw-r--r-- root/root              1377 2024-09-23 14:34 /www/luci-static/resources/view/status/include/20_memory.js
+-rw-r--r-- root/root              1725 2024-09-23 14:34 /www/luci-static/resources/view/status/include/25_storage.js
+-rw-r--r-- root/root              8754 2024-09-23 14:34 /www/luci-static/resources/view/status/include/29_ports.js
+-rw-r--r-- root/root              2625 2024-09-23 14:34 /www/luci-static/resources/view/status/include/30_network.js
+-rw-r--r-- root/root              4556 2024-09-23 14:34 /www/luci-static/resources/view/status/include/40_dhcp.js
+-rw-r--r-- root/root              1162 2024-09-23 14:34 /www/luci-static/resources/view/status/include/50_dsl.js
+-rw-r--r-- root/root              8909 2024-09-23 14:34 /www/luci-static/resources/view/status/include/60_wifi.js
+-rw-r--r-- root/root              2117 2024-09-23 14:34 /www/luci-static/resources/view/status/index.js
+-rw-r--r-- root/root              9656 2024-09-23 14:34 /www/luci-static/resources/view/status/iptables.js
+-rw-r--r-- root/root              7008 2024-09-23 14:34 /www/luci-static/resources/view/status/load.js
+-rw-r--r-- root/root             18067 2024-09-23 14:34 /www/luci-static/resources/view/status/nftables.js
+-rw-r--r-- root/root              1840 2024-09-23 14:34 /www/luci-static/resources/view/status/processes.js
+-rw-r--r-- root/root              7277 2024-09-23 14:34 /www/luci-static/resources/view/status/routes.js
+-rw-r--r-- root/root              1404 2024-09-23 14:34 /www/luci-static/resources/view/status/syslog.js
+-rw-r--r-- root/root              8564 2024-09-23 14:34 /www/luci-static/resources/view/status/wireless.js
+drwxr-xr-x root/root               225 2024-09-23 14:34 /www/luci-static/resources/view/system
+-rw-r--r-- root/root               975 2024-09-23 14:34 /www/luci-static/resources/view/system/crontab.js
+-rw-r--r-- root/root              1270 2024-09-23 14:34 /www/luci-static/resources/view/system/dropbear.js
+-rw-r--r-- root/root             14334 2024-09-23 14:34 /www/luci-static/resources/view/system/flash.js
+drwxr-xr-x root/root               104 2024-09-23 14:34 /www/luci-static/resources/view/system/led-trigger
+-rw-r--r-- root/root               201 2024-09-23 14:34 /www/luci-static/resources/view/system/led-trigger/default-on.js
+-rw-r--r-- root/root               560 2024-09-23 14:34 /www/luci-static/resources/view/system/led-trigger/heartbeat.js
+-rw-r--r-- root/root               655 2024-09-23 14:34 /www/luci-static/resources/view/system/led-trigger/netdev.js
+-rw-r--r-- root/root               460 2024-09-23 14:34 /www/luci-static/resources/view/system/led-trigger/none.js
+-rw-r--r-- root/root               549 2024-09-23 14:34 /www/luci-static/resources/view/system/led-trigger/timer.js
+-rw-r--r-- root/root              2897 2024-09-23 14:34 /www/luci-static/resources/view/system/leds.js
+-rw-r--r-- root/root             11473 2024-09-23 14:34 /www/luci-static/resources/view/system/mounts.js
+-rw-r--r-- root/root              2671 2024-09-23 14:34 /www/luci-static/resources/view/system/password.js
+-rw-r--r-- root/root              1301 2024-09-23 14:34 /www/luci-static/resources/view/system/reboot.js
+-rw-r--r-- root/root              6857 2024-09-23 14:34 /www/luci-static/resources/view/system/sshkeys.js
+-rw-r--r-- root/root              3784 2024-09-23 14:34 /www/luci-static/resources/view/system/startup.js
+-rw-r--r-- root/root              7014 2024-09-23 14:34 /www/luci-static/resources/view/system/system.js
+-rw-r--r-- root/root               640 2024-09-23 14:34 /www/luci-static/resources/view/system/uhttpd.js
+-rw-r--r-- root/root                 0 2024-09-23 14:34 /www/luci-static/resources/xhr.js

@@ -1,0 +1,87 @@
+#! /bin/sh
+#
+# Squash file system
+#
+# tested to comply with unsquashfs version 4.2 (2011/02/28)'s output
+
+SQUASHFS="${MC_TEST_EXTFS_LIST_CMD:-unsquashfs}"
+AWK="@AWK@"
+MV=mv
+RM=rm
+
+mcsqfs_list ()
+{
+  $SQUASHFS -d "" -lls "$1" | $AWK '
+    {
+      if (NR < 5)
+        next
+      split($2, a, "/")
+      file_type=substr($1,1,1)
+      file_size=file_type == "c" || file_type == "b" ? 0 : $3
+      # character or block device
+      if (NF == 7) {
+        split($5, b, "-")
+        printf "-%9s   1 %8s %8s %8s %2s-%2s-%4s %5s %s\n", substr($1,2), a[1], a[2], file_size, b[2], b[3], b[1], $6, $7
+      } else {
+        split($4, b, "-")
+        # normal file
+        if (NF < 7)
+          printf "%10s   1 %8s %8s %8s %2s-%2s-%4s %5s %s\n", $1, a[1], a[2], file_size, b[2], b[3], b[1], $5, $6
+        # symbolic link
+        else
+          printf "%10s   1 %8s %8s %8s %2s-%2s-%4s %5s %s %s %s\n", $1, a[1], a[2], file_size, b[2], b[3], b[1], $5, $6, $7, $8
+      }
+    }' 2>/dev/null
+}
+
+# permission user group         size date        time filename -  symlinktarget
+# lrwxrwxrwx root/root             2 2013-12-31 12:50 /foolink -> foo
+#         $1 a[1] a[2]            $3 b[1]b[2]b[3]  $5       $6 $7 $8
+
+# AAAAAAAAAA NNN OOOOOOOO GGGGGGGG SSSSSSSS DATETIME [PATH/]FILENAME [-> [PATH/]FILENAME[/]]]
+#
+# where (things in [] are optional):
+#
+# AAAAAAAAAA is the permission string like in ls -l
+# NNN        is the number of links
+# OOOOOOOO   is the owner (either UID or name)
+# GGGGGGGG   is the group (either GID or name)
+# SSSSSSSS   is the file size
+# FILENAME   is the filename
+# PATH       is the path from the archive's root without the leading slash (/)
+# DATETIME   has one of the following formats:
+#            Mon DD hh:mm, Mon DD YYYY, Mon DD YYYY hh:mm, MM-DD-YYYY hh:mm
+#
+#            where Mon is a three letter English month name, DD is day 1-31,
+#            MM is month 01-12, YYYY is four digit year, hh is hour and
+#            mm is minute.
+#
+# If the -> [PATH/]FILENAME part is present, it means:
+#
+# If permissions start with an l (ell), then it is the name that symlink
+# points to. (If this PATH starts with a MC vfs prefix, then it is a symlink
+# somewhere to the other virtual filesystem (if you want to specify path from
+# the local root, use local:/path_name instead of /path_name, since /path_name
+# means from root of the archive listed).
+#
+# If permissions do not start with l, but number of links is greater than one,
+# then it says that this file should be a hardlinked with the other file.
+
+mcsqfs_copyout ()
+{
+  $SQUASHFS "$1" "$2" >/dev/null
+  $MV "squashfs-root/$2" "$3"
+  $RM -rf squashfs-root
+}
+
+umask 077
+
+cmd="$1"
+shift
+case "$cmd" in
+  list) mcsqfs_list "$@" ;;
+  copyout) mcsqfs_copyout "$@" ;;
+  *) exit 1 ;;
+esac
+
+exit 0
