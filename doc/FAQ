@@ -286,7 +286,7 @@ f2 Keyboard
 
    A1 is the "Home" key on the keypad (numpad 7 with Num Lock turned
    off), which is decoded as a different key from the regular "Home".
-   Likewise C1 is keypad "End", C1 is keypad "Page Up", C3 is keypad
+   Likewise C1 is keypad "End", A3 is keypad "Page Up", C3 is keypad
    "Page Down", and B2 is documented to "center of keypad", i.e. the 5
    key, though I don't know whether any keyboards actually use that.
    They are documented for the curses library (search for "keypad"):
