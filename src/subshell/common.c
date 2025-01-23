@@ -1134,9 +1134,10 @@ pty_open_slave (const char *pty_name)
 static void
 init_subshell_precmd (char *precmd, size_t buff_size)
 {
-    /* Attention! Make sure that the buffer for precmd is big enough. */
-
-    /* Fallback precmd emulation that should work with virtually any shell.
+    /*
+     * ATTENTION! Make sure that the buffer for precmd is big enough.
+     *
+     * Fallback precmd emulation that should work with virtually any shell.
      * No real precmd functionality is required, no support for \x substitutions
      * in PS1 is needed. For convenience, $HOME is replaced by ~ in PS1.
      *
@@ -1150,6 +1151,23 @@ init_subshell_precmd (char *precmd, size_t buff_size)
      * "}; "
      * "PRECMD=precmd; "
      * "PS1='$($PRECMD)$ '\n",
+     *
+     * Explanations:
+     *
+     * A: This leads to a stopped subshell (=frozen mc) if user calls "ash" command
+     *    "PS1='$(pwd>&%d; kill -STOP $$)\\u@\\h:\\w\\$ '\n",
+     *
+     * B: This leads to "sh: precmd: not found" in sub-subshell if user calls "ash" command
+     *    "precmd() { pwd>&%d; kill -STOP $$; }; "
+     *    "PS1='$(precmd)\\u@\\h:\\w\\$ '\n",
+     *
+     * C: This works if user calls "ash" command because in sub-subshell
+     *    PRECMD is undefined, thus evaluated to empty string - no damage done.
+     *    Attention: BusyBox must be built with FEATURE_EDITING_FANCY_PROMPT to
+     *    permit \u, \w, \h, \$ escape sequences. Unfortunately this cannot be guaranteed,
+     *    especially on embedded systems where people try to save space, so let's use
+     *    the fallback version.
+     *
      */
     /* *INDENT-OFF* */
     static const char *precmd_fallback =
@@ -1189,20 +1207,6 @@ init_subshell_precmd (char *precmd, size_t buff_size)
     case SHELL_ASH_BUSYBOX:
         /* BusyBox ash needs a somewhat complicated precmd emulation via PS1, and it is vital
          * that BB be built with active CONFIG_ASH_EXPAND_PRMT, but this is the default anyway.
-         *
-         * A: This leads to a stopped subshell (=frozen mc) if user calls "ash" command
-         *    "PS1='$(pwd>&%d; kill -STOP $$)\\u@\\h:\\w\\$ '\n",
-         *
-         * B: This leads to "sh: precmd: not found" in sub-subshell if user calls "ash" command
-         *    "precmd() { pwd>&%d; kill -STOP $$; }; "
-         *    "PS1='$(precmd)\\u@\\h:\\w\\$ '\n",
-         *
-         * C: This works if user calls "ash" command because in sub-subshell
-         *    PRECMD is undefined, thus evaluated to empty string - no damage done.
-         *    Attention: BusyBox must be built with FEATURE_EDITING_FANCY_PROMPT to
-         *    permit \u, \w, \h, \$ escape sequences. Unfortunately this cannot be guaranteed,
-         *    especially on embedded systems where people try to save space, so let's use
-         *    the falback version.
          */
         g_snprintf (precmd, buff_size, precmd_fallback, subshell_pipe[WRITE]);
         break;
