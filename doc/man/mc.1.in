@@ -2387,7 +2387,7 @@ is substituted.
 .\"NODE "  The subshell support"
 .SH "  The subshell support"
 The subshell support is a compile time option, that works with the
-shells: bash, ash (BusyBox and Debian), tcsh, zsh and fish.
+shells: bash, ash (BusyBox and Debian), (o/m)ksh, tcsh, zsh and fish.
 .PP
 When the subshell support is active, Midnight Commander will
 spawn a concurrent copy of your shell (the one defined in the
