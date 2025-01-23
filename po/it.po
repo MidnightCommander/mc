@@ -6,7 +6,7 @@
 # Andreas Troschka <signupbox001@om.it.eu.org>, 2012
 # Giuliano Natali <diaolin@diaolin.com>, 1998
 # Marco Ciampa <ciampix@posteo.net>, 2012,2015
-# Marco Ciampa <ciampix@posteo.net>, 2023
+# Marco Ciampa <ciampix@posteo.net>, 2023,2025
 # Marco Falgari <marco.ledpro@gmail.com>, 2018
 # Marco Manuzzi <marco.manuzzi@icloud.com>, 2021
 # Slava Zanko <slavazanko@gmail.com>, 2011
@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-15 17:54+0100\n"
+"POT-Creation-Date: 2025-01-23 10:30+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Slava Zanko <slavazanko@gmail.com>, 2011\n"
+"Last-Translator: Marco Ciampa <ciampix@posteo.net>, 2023,2025\n"
 "Language-Team: Italian (http://app.transifex.com/mc/mc/language/it/)\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -979,7 +979,7 @@ msgid "Diff:"
 msgstr "Diff:"
 
 msgid "File name is empty!"
-msgstr ""
+msgstr "Il nome file è vuoto!"
 
 #, c-format
 msgid "\"%s\" is a directory"
@@ -1185,7 +1185,7 @@ msgid "Save block"
 msgstr "Salva il blocco"
 
 msgid "Cannot save block"
-msgstr ""
+msgstr "Impossibile salvare il blocco"
 
 msgid "Insert file"
 msgstr "Inserisci file"
@@ -1216,7 +1216,7 @@ msgid "Enter shell command(s):"
 msgstr "Inserire comandi shell:"
 
 msgid "Cannot execute external command"
-msgstr ""
+msgstr "Impossibile eseguire il comando esterno"
 
 msgid "mail -s <subject> -c <cc> <to>"
 msgstr "mail -s <soggetto> -c <cc> <a>"
@@ -1611,7 +1611,7 @@ msgstr ""
 "scritto per il Midnight Commander."
 
 msgid "Copyright (C) 1996-2025 the Free Software Foundation"
-msgstr ""
+msgstr "Copyright (C) 1996-2025 the Free Software Foundation"
 
 msgid "About"
 msgstr "Informazioni"
@@ -2255,6 +2255,8 @@ msgid ""
 "Cannot get ext2 attributes of \"%s\"\n"
 "%s"
 msgstr ""
+"Impossibile ottenere gli attributi ext2 di \" 1%s \"\n"
+"1%s"
 
 msgid "set &user ID on execution"
 msgstr "imposta &UID all'esecuzione"
@@ -2643,7 +2645,7 @@ msgstr ""
 "sono lo stesso file"
 
 msgid "Ignore a&ll"
-msgstr ""
+msgstr "Ignora t&utto"
 
 #, c-format
 msgid ""
@@ -2707,6 +2709,8 @@ msgid ""
 "Cannot enter into directory \"%s\"\n"
 "%s"
 msgstr ""
+"Impossibile entrare nella cartella \"%s\"\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -2748,12 +2752,16 @@ msgid ""
 "Cannot get ext2 attributes of source file \"%s\"\n"
 "%s"
 msgstr ""
+"Impossibile ottenere gli attributi ext2 del file sorgente \"%s\"\n"
+"%s"
 
 #, c-format
 msgid ""
 "Cannot set ext2 attributes of target file \"%s\"\n"
 "%s"
 msgstr ""
+"Impossibile impostare gli attributi ext2 del file obiettivo \"%s\"\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -2871,6 +2879,8 @@ msgid ""
 "Cannot set ext2 attributes for target file \"%s\"\n"
 "%s"
 msgstr ""
+"Impossibile impostare gli attributi ext2 per il file obiettivo \"%s\"\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -2885,6 +2895,8 @@ msgid ""
 "Cannot get ext2 attributes of source directory \"%s\"\n"
 "%s"
 msgstr ""
+"Impossibile ottenere gli attributi ext2 della cartella sorgente \"%s\"\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -3884,6 +3896,8 @@ msgid ""
 "Cannot accept this key.\n"
 "You have entered \"%s\""
 msgstr ""
+"Impossibile accettare questa chiave.\n"
+"Hai inserito \"%s\""
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"

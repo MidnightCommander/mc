@@ -5,22 +5,22 @@
 # Translators:
 # baua gonzo <baua.gonzo@gmail.com>, 2016
 # David D, 2017-2018
-# David Prudhomme <david7.prudhomme@gmail.com>, 2018,2021,2024
+# David Prudhomme <david7.prudhomme@gmail.com>, 2018,2021,2024-2025
 # dfd998a47e5ece82efa734d3c31b5c3e_071ebb8, 2015
 # Effede Effede <g2sainfroc@gmail.com>, 2016
 # Matthieu Crapet <mcrapet@gmail.com>, 2013-2016
 # Slava Zanko <slavazanko@gmail.com>, 2011
 # 4a14a73d523224463300dea5e0502458_3dab472, 2012
 # Towinet, 2017
-# Wallon Wallon, 2022-2024
+# Wallon Wallon, 2022-2025
 # Yury V. Zaytsev <yury@shurup.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-15 17:54+0100\n"
+"POT-Creation-Date: 2025-01-23 10:30+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: Wallon Wallon, 2022-2024\n"
+"Last-Translator: Wallon Wallon, 2022-2025\n"
 "Language-Team: French (http://app.transifex.com/mc/mc/language/fr/)\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -1196,7 +1196,7 @@ msgid "Save block"
 msgstr "Enregistrement du bloc"
 
 msgid "Cannot save block"
-msgstr ""
+msgstr "Impossible d’enregistrer le bloc"
 
 msgid "Insert file"
 msgstr "Insérer fichier"
@@ -1228,7 +1228,7 @@ msgid "Enter shell command(s):"
 msgstr "Saisissez la ou les commandes shell :"
 
 msgid "Cannot execute external command"
-msgstr ""
+msgstr "Impossible d’exécuter la commande externe"
 
 msgid "mail -s <subject> -c <cc> <to>"
 msgstr "mail -s <suject> -c <cc> <to>"
@@ -1623,7 +1623,7 @@ msgstr ""
 "écrit pour Midnight Commander."
 
 msgid "Copyright (C) 1996-2025 the Free Software Foundation"
-msgstr ""
+msgstr "Copyright (C) 1996-2025 the Free Software Foundation"
 
 msgid "About"
 msgstr "À propos"
@@ -1674,7 +1674,7 @@ msgid "English"
 msgstr "Anglais"
 
 msgid "British English"
-msgstr "Anglais Britanique"
+msgstr "Anglais Britannique"
 
 msgid "Canadian English"
 msgstr "Anglais Canadien"
@@ -2221,16 +2221,16 @@ msgid "Inode uses extents"
 msgstr "Inode utilise des formats étendus"
 
 msgid "Huge_file"
-msgstr "Gros_fichier"
+msgstr "Fichier énorme"
 
 msgid "No COW"
-msgstr "Pas de COW - dirty copy-on-write -"
+msgstr "Pas de Copy-On-Write"
 
 msgid "Direct access for files"
 msgstr "Accès direct aux fichiers"
 
 msgid "Casefolded file"
-msgstr "Fichier « casefoldé »"
+msgstr "Fichier insensible à la casse"
 
 msgid "Inode has inline data"
 msgstr "Inode a des données « inline »"
@@ -2723,6 +2723,8 @@ msgid ""
 "Cannot enter into directory \"%s\"\n"
 "%s"
 msgstr ""
+"Impossible d’accéder au répertoire « %s »\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -3911,6 +3913,8 @@ msgid ""
 "Cannot accept this key.\n"
 "You have entered \"%s\""
 msgstr ""
+"Impossible d’accepter cette touche.\n"
+"Vous avez saisi « %s »"
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -4624,7 +4628,7 @@ msgid "while calling ext2_block_iterate %d"
 msgstr "lors de l’appel à ext2_block_iterate %d"
 
 msgid "no more memory while reallocating array"
-msgstr "pas plus de mémoire lors de la ré-allocation du tableau"
+msgstr "pas plus de mémoire lors de la réallocation du tableau"
 
 #, c-format
 msgid "while doing inode scan %d"

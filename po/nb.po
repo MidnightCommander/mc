@@ -5,16 +5,16 @@
 # Translators:
 # heskjestad, 2021-2023
 # heskjestad, 2024
-# heskjestad, 2024
+# heskjestad, 2024-2025
 # heskjestad, 2019-2021
 # Slava Zanko <slavazanko@gmail.com>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: https://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2025-01-15 17:54+0100\n"
+"POT-Creation-Date: 2025-01-23 10:30+0100\n"
 "PO-Revision-Date: 2010-12-29 10:19+0000\n"
-"Last-Translator: heskjestad, 2024\n"
+"Last-Translator: heskjestad, 2024-2025\n"
 "Language-Team: Norwegian Bokmål (http://app.transifex.com/mc/mc/language/"
 "nb/)\n"
 "Language: nb\n"
@@ -1186,7 +1186,7 @@ msgid "Save block"
 msgstr "Lagre blokk"
 
 msgid "Cannot save block"
-msgstr ""
+msgstr "Klarte ikke lagre blokk"
 
 msgid "Insert file"
 msgstr "Sett inn fil"
@@ -1219,7 +1219,7 @@ msgid "Enter shell command(s):"
 msgstr "Angi skallkommando(er):"
 
 msgid "Cannot execute external command"
-msgstr ""
+msgstr "Klarte ikke kjøre ekstern kommando"
 
 msgid "mail -s <subject> -c <cc> <to>"
 msgstr "mail -s <emne> -c <kopi til> <til>"
@@ -1614,7 +1614,7 @@ msgstr ""
 "skrevet for Midnight Commander."
 
 msgid "Copyright (C) 1996-2025 the Free Software Foundation"
-msgstr ""
+msgstr "Opphavsrett (C) 1996-2025 Free Software Foundation"
 
 msgid "About"
 msgstr "Om"
@@ -2711,6 +2711,8 @@ msgid ""
 "Cannot enter into directory \"%s\"\n"
 "%s"
 msgstr ""
+"Kan ikke åpne mappa «%s»\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -3891,6 +3893,8 @@ msgid ""
 "Cannot accept this key.\n"
 "You have entered \"%s\""
 msgstr ""
+"Aksepterer ikke denne tasten.\n"
+"Du skrev «%s»"
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
