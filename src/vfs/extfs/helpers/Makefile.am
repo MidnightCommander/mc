@@ -35,6 +35,7 @@ EXTFS_IN    = 			\
 	ulib.in			\
 	unar.in			\
 	urar.in			\
+	usqfs.in		\
 	uwim.in			\
 	uzip.in			\
 	uzoo.in
@@ -68,6 +69,7 @@ EXTFS_OUT = 			\
 	ulib			\
 	unar			\
 	urar			\
+	usqfs			\
 	uwim			\
 	uzip			\
 	uzoo

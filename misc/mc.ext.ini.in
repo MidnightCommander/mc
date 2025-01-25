@@ -936,6 +936,10 @@ Shell=.ipk
 Type=\\(gzip compressed
 Include=tar.gz
 
+[squashfs]
+Type=^Squashfs filesystem
+Open=%cd %p/usqfs://
+View=%view{ascii} unsquashfs -stat %f ; unsquashfs -lls -d "" %f
 
 ### Sources ###
 
