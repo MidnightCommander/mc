@@ -386,6 +386,14 @@ dialog_change_screen_size (void)
 {
     GList *d;
 
+    /* On startup, when mc reads directories top_dlg isn't created yet. If window is resized
+     * at this time, SIGWINCH can be missed because tty_flush_winch() is called here before
+     * a first tty_got_winch() call in frontend_dlg_run().
+     *
+     * Keep SIGWINCH events in pipe if top_dlg isn't created yet. */
+    if (top_dlg == NULL)
+        return;
+
     tty_flush_winch ();
     tty_change_screen_size ();
 
