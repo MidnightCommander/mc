@@ -547,8 +547,7 @@ toggle_subshell (void)
      * Save sigwinch flag that will be reset in mc_refresh() called via update_panels().
      * There is some problem with screen redraw in ncurses-based mc in this situation.
      */
-    was_sigwinch = tty_got_winch ();
-    tty_flush_winch ();
+    was_sigwinch = tty_flush_winch ();
 
 #ifdef ENABLE_SUBSHELL
     if (mc_global.tty.use_subshell)
