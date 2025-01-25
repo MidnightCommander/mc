@@ -216,10 +216,11 @@ tty_got_winch (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-void
+gboolean
 tty_flush_winch (void)
 {
     ssize_t n;
+    gboolean ret = FALSE;
 
     /* merge all SIGWINCH events raised to this moment */
     do
@@ -228,8 +229,14 @@ tty_flush_winch (void)
 
         /* read multiple events at a time  */
         n = read (sigwinch_pipe[0], &x, sizeof (x));
+
+        /* at least one SIGWINCH came */
+        if (n > 0)
+            ret = TRUE;
     }
     while (n > 0 || (n == -1 && errno == EINTR));
+
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
