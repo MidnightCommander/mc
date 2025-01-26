@@ -440,10 +440,11 @@ static gboolean
 edit_find (edit_search_status_msg_t *esm, gsize *len)
 {
     WEdit *edit = esm->edit;
+    edit_buffer_t *buf = &edit->buffer;
     off_t search_start = edit->search_start;
     off_t search_end;
     off_t start_mark = 0;
-    off_t end_mark = edit->buffer.size;
+    off_t end_mark = buf->size;
     char end_string_symbol;
 
     end_string_symbol = edit_search_get_current_end_line_char (edit);
@@ -459,14 +460,13 @@ edit_find (edit_search_status_msg_t *esm, gsize *len)
 
         // fix the start and the end of search block positions
         if ((edit->search_line_type & MC_SEARCH_LINE_BEGIN) != 0 && start_mark != 0)
-            start_mark = edit_calculate_start_of_next_line (&edit->buffer, start_mark,
-                                                            edit->buffer.size, end_string_symbol);
+            start_mark =
+                edit_calculate_start_of_next_line (buf, start_mark, buf->size, end_string_symbol);
 
         if ((edit->search_line_type & MC_SEARCH_LINE_END) != 0
-            && (end_mark - 1 != edit->buffer.size
-                || edit_buffer_get_byte (&edit->buffer, end_mark) != end_string_symbol))
-            end_mark =
-                edit_calculate_end_of_previous_line (&edit->buffer, end_mark, end_string_symbol);
+            && (end_mark - 1 != buf->size
+                || edit_buffer_get_byte (buf, end_mark) != end_string_symbol))
+            end_mark = edit_calculate_end_of_previous_line (buf, end_mark, end_string_symbol);
 
         if (start_mark >= end_mark)
         {
@@ -475,7 +475,7 @@ edit_find (edit_search_status_msg_t *esm, gsize *len)
         }
     }
     else if (edit_search_options.backwards)
-        end_mark = MAX (1, edit->buffer.curs1) - 1;
+        end_mark = MAX (1, buf->curs1) - 1;
 
     // search
     if (edit_search_options.backwards)
@@ -484,8 +484,8 @@ edit_find (edit_search_status_msg_t *esm, gsize *len)
         search_end = end_mark;
 
         if ((edit->search_line_type & MC_SEARCH_LINE_BEGIN) != 0)
-            search_start = edit_calculate_start_of_current_line (&edit->buffer, search_start,
-                                                                 end_string_symbol);
+            search_start =
+                edit_calculate_start_of_current_line (buf, search_start, end_string_symbol);
 
         while (search_start >= start_mark)
         {
@@ -506,8 +506,8 @@ edit_find (edit_search_status_msg_t *esm, gsize *len)
                 return FALSE;
 
             if ((edit->search_line_type & MC_SEARCH_LINE_BEGIN) != 0)
-                search_start = edit_calculate_start_of_previous_line (&edit->buffer, search_start,
-                                                                      end_string_symbol);
+                search_start =
+                    edit_calculate_start_of_previous_line (buf, search_start, end_string_symbol);
             else
                 search_start--;
         }
@@ -518,8 +518,8 @@ edit_find (edit_search_status_msg_t *esm, gsize *len)
 
     // forward search
     if ((edit->search_line_type & MC_SEARCH_LINE_BEGIN) != 0 && search_start != start_mark)
-        search_start = edit_calculate_start_of_next_line (&edit->buffer, search_start, end_mark,
-                                                          end_string_symbol);
+        search_start =
+            edit_calculate_start_of_next_line (buf, search_start, end_mark, end_string_symbol);
 
     return mc_search_run (edit->search, (void *) esm, search_start, end_mark, len);
 }
