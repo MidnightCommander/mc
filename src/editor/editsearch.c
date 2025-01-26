@@ -445,6 +445,7 @@ edit_find (edit_search_status_msg_t *esm, gsize *len)
     off_t search_end;
     off_t start_mark = 0;
     off_t end_mark = buf->size;
+    gboolean start_from_next_line = FALSE;
     char end_string_symbol;
 
     end_string_symbol = edit_search_get_current_end_line_char (edit);
@@ -459,9 +460,19 @@ edit_find (edit_search_status_msg_t *esm, gsize *len)
         }
 
         // fix the start and the end of search block positions
-        if ((edit->search_line_type & MC_SEARCH_LINE_BEGIN) != 0 && start_mark != 0)
-            start_mark =
-                edit_calculate_start_of_next_line (buf, start_mark, buf->size, end_string_symbol);
+        if (!edit_search_options.backwards && (edit->search_line_type & MC_SEARCH_LINE_BEGIN) != 0
+            && search_start != 0)
+        {
+            const off_t bol =
+                edit_calculate_start_of_current_line (buf, search_start, end_string_symbol);
+
+            if (search_start != bol)
+            {
+                start_mark = edit_calculate_start_of_next_line (buf, start_mark, buf->size,
+                                                                end_string_symbol);
+                start_from_next_line = TRUE;
+            }
+        }
 
         if ((edit->search_line_type & MC_SEARCH_LINE_END) != 0
             && (end_mark - 1 != buf->size
@@ -476,6 +487,14 @@ edit_find (edit_search_status_msg_t *esm, gsize *len)
     }
     else if (edit_search_options.backwards)
         end_mark = MAX (1, buf->curs1) - 1;
+    else if ((edit->search_line_type & MC_SEARCH_LINE_BEGIN) != 0)
+    {
+        // regex forward search
+        const off_t bol =
+            edit_calculate_start_of_current_line (buf, search_start, end_string_symbol);
+
+        start_from_next_line = search_start != bol;
+    }
 
     // search
     if (edit_search_options.backwards)
@@ -517,7 +536,12 @@ edit_find (edit_search_status_msg_t *esm, gsize *len)
     }
 
     // forward search
-    if ((edit->search_line_type & MC_SEARCH_LINE_BEGIN) != 0 && search_start != start_mark)
+
+    // correct end_mark if cursor is in column 0: move end_mark to the end of previous line
+    if (end_mark == edit_calculate_start_of_current_line (buf, end_mark, end_string_symbol))
+        end_mark = edit_calculate_end_of_previous_line (buf, end_mark, end_string_symbol);
+
+    if (start_from_next_line)
         search_start =
             edit_calculate_start_of_next_line (buf, search_start, end_mark, end_string_symbol);
 
@@ -923,7 +947,7 @@ edit_replace_cmd (WEdit *edit, gboolean again)
             edit->found_start = edit->search_start;
             edit->found_len = len;
 
-            edit_cursor_move (edit, edit->search_start - edit->buffer.curs1);
+            edit_cursor_move (edit, edit->found_start - edit->buffer.curs1);
             edit_scroll_screen_over_cursor (edit);
 
             if (edit->replace_mode == 0)
