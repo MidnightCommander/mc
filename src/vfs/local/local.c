@@ -89,10 +89,18 @@ local_opendir (const vfs_path_t *vpath)
 
     path = vfs_path_get_last_path_str (vpath);
 
-    /* On Linux >= 5.1, MC sometimes shows empty directories on mounted CIFS shares.
-     * Rereading directory restores the directory content.
+    /* According to POSIX, `opendir` and `readdir` can't return EINTR (unlike `closedir`).
      *
-     * Reopen directory, if first readdir() returns NULL and errno == EINTR.
+     * Unfortunately, in practice, at least `readdir` is known to return EINTR on Linux >= 5.1 on
+     * networked filesystems such as CIFS. Networked FUSE-based systems appear to be affected as
+     * well. What's worse is that when you retry `readdir`, the file list still comes out empty.
+     *
+     * So our only option seems to be to try `readdir` immediately after `opendir` and use
+     * `rewinddir` if successful, otherwise reopen the directory, which usually leads to correct
+     * file listing.
+     *
+     * However, this has caused problems on FUSE-based systems that do not properly implement
+     * `rewinddir` in the past. No silver bullet...
      */
     while (dir == NULL)
     {
