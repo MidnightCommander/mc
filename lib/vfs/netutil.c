@@ -29,7 +29,7 @@
 
 #include <stdlib.h>
 #include <signal.h>
-#include <string.h>             /* memset() */
+#include <string.h>             // memset()
 
 #include "lib/global.h"
 #include "lib/util.h"

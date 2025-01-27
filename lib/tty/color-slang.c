@@ -33,13 +33,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/types.h>          /* size_t */
+#include <sys/types.h>          // size_t
 
 #include "lib/global.h"
-#include "lib/util.h"           /* whitespace() */
+#include "lib/util.h"           // whitespace()
 
 #include "tty-slang.h"
-#include "color.h"              /* variables */
+#include "color.h"              // variables
 #include "color-internal.h"
 
 /*** global variables ****************************************************************************/
@@ -70,7 +70,7 @@ has_colors (gboolean disable, gboolean force)
         const size_t len = strlen (terminal);
         char *cts = mc_global.tty.color_terminal_string;
 
-        /* check mc_global.tty.color_terminal_string */
+        // check mc_global.tty.color_terminal_string
         while (*cts != '\0')
         {
             char *s;

@@ -35,13 +35,13 @@
 
 #include <config.h>
 
-#include <string.h>             /* memset() */
+#include <string.h>             // memset()
 #include <sys/types.h>
 
 #include "lib/global.h"
 #include "lib/vfs/vfs.h"
 #include "lib/strutil.h"
-#include "lib/util.h"           /* save_file_position() */
+#include "lib/util.h"           // save_file_position()
 #include "lib/widget.h"
 #ifdef HAVE_CHARSET
 #include "lib/charsets.h"
@@ -78,7 +78,7 @@ mcview_toggle_magic_mode (WView *view)
     mcview_altered_flags.magic = TRUE;
     view->mode_flags.magic = !view->mode_flags.magic;
 
-    /* reinit view */
+    // reinit view
     filename = g_strdup (vfs_path_as_str (view->filename_vpath));
     command = g_strdup (view->command);
     dir = view->dir;
@@ -161,7 +161,7 @@ mcview_init (WView *view)
     mcview_set_datasource_none (view);
 
     view->growbuf_in_use = FALSE;
-    /* leave the other growbuf fields uninitialized */
+    // leave the other growbuf fields uninitialized
 
     view->hexedit_lownibble = FALSE;
     view->locked = FALSE;
@@ -179,7 +179,7 @@ mcview_init (WView *view)
     view->cursor_row = 0;
     view->change_list = NULL;
 
-    /* {status,ruler,data}_area are left uninitialized */
+    // {status,ruler,data}_area are left uninitialized
 
     view->dirty = 0;
     view->dpy_bbar_dirty = TRUE;
@@ -203,7 +203,7 @@ mcview_init (WView *view)
 void
 mcview_done (WView *view)
 {
-    /* Save current file position */
+    // Save current file position
     if (mcview_remember_file_position && view->filename_vpath != NULL)
     {
         save_file_position (view->filename_vpath, -1, 0,
@@ -212,11 +212,11 @@ mcview_done (WView *view)
         view->saved_bookmarks = NULL;
     }
 
-    /* Write back the global viewer mode */
+    // Write back the global viewer mode
     mcview_global_flags = view->mode_flags;
 
-    /* Free memory used by the viewer */
-    /* view->widget needs no destructor */
+    // Free memory used by the viewer
+    // view->widget needs no destructor
     vfs_path_free (view->filename_vpath, TRUE);
     view->filename_vpath = NULL;
     vfs_path_free (view->workdir_vpath, TRUE);
@@ -224,7 +224,7 @@ mcview_done (WView *view)
     MC_PTR_FREE (view->command);
 
     mcview_close_datasource (view);
-    /* the growing buffer is freed with the datasource */
+    // the growing buffer is freed with the datasource
 
     if (view->coord_cache != NULL)
     {
@@ -248,7 +248,7 @@ mcview_done (WView *view)
 
     if (mc_global.mc_run_mode == MC_RUN_VIEWER && view->dir != NULL)
     {
-        /* mcviewer is the owner of file list */
+        // mcviewer is the owner of file list
         dir_list_free_list (view->dir);
         g_free (view->dir);
         g_free (view->dir_idx);
@@ -292,7 +292,7 @@ mcview_select_encoding (WView *view)
     if (do_select_codepage ())
         mcview_set_codeset (view);
 }
-#endif /* HAVE_CHARSET */
+#endif // HAVE_CHARSET
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -416,7 +416,7 @@ mcview_calc_percent (WView *view, off_t p)
     filesize = mcview_get_filesize (view);
     if (view->mode_flags.hex && filesize > 0)
     {
-        /* p can't be beyond the last char, only over that. Compensate for this. */
+        // p can't be beyond the last char, only over that. Compensate for this.
         filesize--;
     }
 

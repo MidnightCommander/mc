@@ -74,7 +74,7 @@ widget_set_id (void)
     unsigned long id;
 
     id = widget_id++;
-    /* TODO IF NEEDED: if id is already used, find next free id. */
+    // TODO IF NEEDED: if id is already used, find next free id.
 
     return id;
 }
@@ -119,7 +119,7 @@ widget_focus (Widget *w)
     if (WIDGET (g->current->data) != w)
     {
         widget_do_focus (WIDGET (g->current->data), FALSE);
-        /* Test if focus lost was allowed and focus has really been loose */
+        // Test if focus lost was allowed and focus has really been loose
         if (g->current == NULL || !widget_get_state (WIDGET (g->current->data), WST_FOCUSED))
         {
             widget_do_focus (w, TRUE);
@@ -171,7 +171,7 @@ hotkey_cmp (const char *s1, const char *s2)
 static void
 widget_default_mouse_callback (Widget *w, mouse_msg_t msg, mouse_event_t *event)
 {
-    /* do nothing */
+    // do nothing
     (void) w;
     (void) msg;
     (void) event;
@@ -200,13 +200,13 @@ hotkey_new (const char *text)
     if (text == NULL)
         text = "";
 
-    /* search for '&', that is not on the of text */
+    // search for '&', that is not on the of text
     cp = strchr (text, '&');
     if (cp != NULL && cp[1] != '\0')
     {
         result.start = g_strndup (text, cp - text);
 
-        /* skip '&' */
+        // skip '&'
         cp++;
         p = str_cget_next_char (cp);
         result.hotkey = g_strndup (cp, p - cp);
@@ -252,11 +252,11 @@ hotkey_width (const hotkey_t hotkey)
 gboolean
 hotkey_equal (const hotkey_t hotkey1, const hotkey_t hotkey2)
 {
-    /* *INDENT-OFF* */
+    // *INDENT-OFF*
     return (strcmp (hotkey1.start, hotkey2.start) == 0) &&
            hotkey_cmp (hotkey1.hotkey, hotkey2.hotkey) &&
            hotkey_cmp (hotkey1.end, hotkey2.end);
-    /* *INDENT-ON* */
+    // *INDENT-ON*
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -507,13 +507,13 @@ widget_is_active (const void *w)
 {
     const WGroup *owner;
 
-    /* Is group top? */
+    // Is group top?
     if (w == top_dlg->data)
         return TRUE;
 
     owner = CONST_WIDGET (w)->owner;
 
-    /* Is widget in any group? */
+    // Is widget in any group?
     if (owner == NULL)
         return FALSE;
 
@@ -562,20 +562,20 @@ widget_replace (Widget *old_w, Widget *new_w)
     if (g->current == NULL)
         g->current = g->widgets;
 
-    /* locate widget position in the list */
+    // locate widget position in the list
     if (old_w == g->current->data)
         holder = g->current;
     else
         holder = g_list_find (g->widgets, old_w);
 
-    /* if old widget is focused, we should focus the new one... */
+    // if old widget is focused, we should focus the new one...
     if (widget_get_state (old_w, WST_FOCUSED))
         should_focus = TRUE;
-    /* ...but if new widget isn't selectable, we cannot focus it */
+    // ...but if new widget isn't selectable, we cannot focus it
     if (!widget_get_options (new_w, WOP_SELECTABLE))
         should_focus = FALSE;
 
-    /* if new widget isn't selectable, select other widget before replace */
+    // if new widget isn't selectable, select other widget before replace
     if (!should_focus)
     {
         GList *l;
@@ -588,7 +588,7 @@ widget_replace (Widget *old_w, Widget *new_w)
         widget_select (WIDGET (l->data));
     }
 
-    /* replace widget */
+    // replace widget
     new_w->owner = g;
     new_w->id = old_w->id;
     holder->data = new_w;
@@ -789,7 +789,7 @@ widget_default_set_state (Widget *w, widget_state_t state, gboolean enable)
 
     if (enable)
     {
-        /* exclusive bits */
+        // exclusive bits
         switch (state)
         {
         case WST_CONSTRUCT:
@@ -817,16 +817,15 @@ widget_default_set_state (Widget *w, widget_state_t state, gboolean enable)
     case WST_VISIBLE:
         if (widget_get_state (owner, WST_ACTIVE))
         {
-            /* redraw owner to show/hide widget */
-            widget_draw (owner);
+            widget_draw (owner); // redraw owner to show/hide widget
 
             if (!enable)
             {
-                /* try select another widget if current one got hidden */
+                // try select another widget if current one got hidden
                 if (w == GROUP (owner)->current->data)
                     group_select_next_widget (GROUP (owner));
 
-                widget_update_cursor (owner);   /* FIXME: unneeded? */
+                widget_update_cursor (owner);   // FIXME: unneeded?
             }
         }
         break;
@@ -846,7 +845,7 @@ widget_default_set_state (Widget *w, widget_state_t state, gboolean enable)
             if (ret == MSG_HANDLED && widget_get_state (owner, WST_ACTIVE))
             {
                 widget_draw (w);
-                /* Notify owner that focus was moved from one widget to another */
+                // Notify owner that focus was moved from one widget to another
                 send_message (owner, w, MSG_CHANGED_FOCUS, 0, NULL);
             }
         }

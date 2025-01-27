@@ -43,7 +43,7 @@
 
 #include "lib/global.h"
 #include "lib/event.h"
-#include "lib/util.h"           /* MC_PTR_FREE */
+#include "lib/util.h"           // MC_PTR_FREE
 
 #include "vfs.h"
 #include "utilvfs.h"
@@ -85,7 +85,7 @@
 
 /*** global variables ****************************************************************************/
 
-int vfs_timeout = 60;           /* VFS timeout in seconds */
+int vfs_timeout = 60;           // VFS timeout in seconds
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -253,25 +253,25 @@ vfs_expire (gboolean now)
 
     if (now)
     {
-        /* reverse list to free nested VFSes at first */
+        // reverse list to free nested VFSes at first
         stamps = g_slist_reverse (stamps);
     }
 
-    /* NULLize stamps that point to expired VFS */
+    // NULLize stamps that point to expired VFS
     for (stamp = stamps; stamp != NULL; stamp = g_slist_next (stamp))
     {
         struct vfs_stamping *stamping = VFS_STAMPING (stamp->data);
 
         if (now)
         {
-            /* free VFS forced */
+            // free VFS forced
             if (stamping->v->free != NULL)
                 stamping->v->free (stamping->id);
             MC_PTR_FREE (stamp->data);
         }
         else if (stamping->time <= exp_time)
         {
-            /* update timestamp of VFS that is in use, or free unused VFS */
+            // update timestamp of VFS that is in use, or free unused VFS
             if (stamping->v->nothingisopen != NULL && !stamping->v->nothingisopen (stamping->id))
                 stamping->time = curr_time;
             else
@@ -283,7 +283,7 @@ vfs_expire (gboolean now)
         }
     }
 
-    /* then remove NULLized stamps */
+    // then remove NULLized stamps
     stamps = g_slist_remove_all (stamps, NULL);
 
     locked = FALSE;

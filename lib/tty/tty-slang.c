@@ -34,7 +34,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/types.h>          /* size_t */
+#include <sys/types.h>          // size_t
 #include <unistd.h>
 #ifdef HAVE_SYS_IOCTL_H
 #include <sys/ioctl.h>
@@ -42,16 +42,16 @@
 #include <termios.h>
 
 #include "lib/global.h"
-#include "lib/strutil.h"        /* str_term_form */
-#include "lib/util.h"           /* is_printable() */
+#include "lib/strutil.h"        // str_term_form
+#include "lib/util.h"           // is_printable()
 
-#include "tty-internal.h"       /* mc_tty_normalize_from_utf8() */
+#include "tty-internal.h"       // mc_tty_normalize_from_utf8()
 #include "tty.h"
 #include "color.h"
 #include "color-slang.h"
 #include "color-internal.h"
-#include "mouse.h"              /* Gpm_Event is required in key.h */
-#include "key.h"                /* define_sequence */
+#include "mouse.h"              // Gpm_Event is required in key.h
+#include "key.h"                // define_sequence
 #include "win.h"
 
 
@@ -95,7 +95,7 @@ static const struct
     int key_code;
     const char *key_name;
 } key_table[] = {
-    /* *INDENT-OFF* */
+    // *INDENT-OFF*
     { KEY_F (0), "k0" },
     { KEY_F (1), "k1" },
     { KEY_F (2), "k2" },
@@ -129,7 +129,7 @@ static const struct
     { KEY_HOME, "kh" },
     { KEY_END, "@7" },
     { 0, NULL }
-    /* *INDENT-ON* */
+    // *INDENT-ON*
 };
 
 /* --------------------------------------------------------------------------------------------- */
@@ -276,7 +276,7 @@ tty_init (gboolean mouse_enable, gboolean is_xterm)
 {
     SLtt_Ignore_Beep = 1;
 
-    SLutf8_enable (-1);         /* has to be called first before any of the other functions. */
+    SLutf8_enable (-1);         // has to be called first before any of the other functions.
     SLtt_get_terminfo ();
     /*
      * If the terminal in not in terminfo but begins with a well-known
@@ -300,7 +300,7 @@ tty_init (gboolean mouse_enable, gboolean is_xterm)
     }
 
     tcgetattr (fileno (stdin), &boot_mode);
-    /* 255 = ignore abort char; XCTRL('g') for abort char = ^g */
+    // 255 = ignore abort char; XCTRL('g') for abort char = ^g
     SLang_init_tty (XCTRL ('g'), 1, 0);
 
     if (mc_global.tty.ugly_line_drawing)
@@ -315,7 +315,7 @@ tty_init (gboolean mouse_enable, gboolean is_xterm)
 
     tty_start_interrupt_key ();
 
-    /* It's the small part from the previous init_key() */
+    // It's the small part from the previous init_key()
     init_key_input_fd ();
 
     /* For 8-bit locales, NCurses handles 154 (0x9A) symbol properly, while S-Lang
@@ -329,7 +329,7 @@ tty_init (gboolean mouse_enable, gboolean is_xterm)
     slsmg_active = TRUE;
     if (!mouse_enable)
         use_mouse_p = MOUSE_DISABLED;
-    tty_init_xterm_support (is_xterm);  /* do it before tty_enter_ca_mode() call */
+    tty_init_xterm_support (is_xterm);  // do it before tty_enter_ca_mode() call
     tty_enter_ca_mode ();
     tty_keypad (TRUE);
     tty_nodelay (FALSE);
@@ -353,8 +353,8 @@ tty_shutdown (void)
     SLang_reset_tty ();
     slsmg_active = FALSE;
 
-    /* Load the op capability to reset the colors to those that were 
-     * active when the program was started up 
+    /* Load the op capability to reset the colors to those that were
+     * active when the program was started up
      */
     op_cap = SLtt_tgetstr ((SLFUTURE_CONST char *) "op");
     if (op_cap != NULL)
@@ -369,7 +369,7 @@ tty_shutdown (void)
 void
 tty_enter_ca_mode (void)
 {
-    /* S-Lang handles alternate screen switching and cursor position saving */
+    // S-Lang handles alternate screen switching and cursor position saving
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -377,7 +377,7 @@ tty_enter_ca_mode (void)
 void
 tty_exit_ca_mode (void)
 {
-    /* S-Lang handles alternate screen switching and cursor position restoring */
+    // S-Lang handles alternate screen switching and cursor position restoring
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -443,7 +443,7 @@ tty_noecho (void)
 int
 tty_flush_input (void)
 {
-    return 0;                   /* OK */
+    return 0;                   // OK
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -505,7 +505,7 @@ tty_reset_screen (void)
 {
     SLsmg_reset_smg ();
     slsmg_active = FALSE;
-    return 0;                   /* OK */
+    return 0;                   // OK
 }
 
 /* --------------------------------------------------------------------------------------------- */

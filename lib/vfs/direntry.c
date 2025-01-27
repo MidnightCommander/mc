@@ -59,7 +59,7 @@
 #include <config.h>
 
 #include <errno.h>
-#include <inttypes.h>           /* uintmax_t */
+#include <inttypes.h>           // uintmax_t
 #include <stdarg.h>
 #ifdef HAVE_SYS_SELECT_H
 #include <sys/select.h>
@@ -69,16 +69,16 @@
 
 #include "lib/global.h"
 
-#include "lib/tty/tty.h"        /* enable/disable interrupt key */
-#include "lib/util.h"           /* canonicalize_pathname_custom() */
+#include "lib/tty/tty.h"        // enable/disable interrupt key
+#include "lib/util.h"           // canonicalize_pathname_custom()
 #if 0
-#include "lib/widget.h"         /* message() */
+#include "lib/widget.h"         // message()
 #endif
 
 #include "vfs.h"
 #include "utilvfs.h"
 #include "xdirentry.h"
-#include "gc.h"                 /* vfs_rmstamp */
+#include "gc.h"                 // vfs_rmstamp
 
 /*** global variables ****************************************************************************/
 
@@ -148,7 +148,7 @@ vfs_s_resolve_symlink (struct vfs_class *me, struct vfs_s_entry *entry, int foll
     if (linkname == NULL)
         ERRNOR (EFAULT, NULL);
 
-    /* make full path from relative */
+    // make full path from relative
     if (!IS_PATH_SEP (*linkname))
     {
         char *fullpath;
@@ -183,7 +183,7 @@ vfs_s_find_entry_tree (struct vfs_class *me, struct vfs_s_inode *root,
     char *const pathref = g_strdup (a_path);
     char *path = pathref;
 
-    /* canonicalize as well, but don't remove '../' from path */
+    // canonicalize as well, but don't remove '../' from path
     canonicalize_pathname_custom (path, CANON_PATH_ALL & (~CANON_PATH_REMDOUBLEDOTS));
 
     while (root != NULL)
@@ -206,7 +206,7 @@ vfs_s_find_entry_tree (struct vfs_class *me, struct vfs_s_inode *root,
         {
             ent = VFS_ENTRY (iter->data);
             if (strlen (ent->name) == pseg && strncmp (ent->name, path, pseg) == 0)
-                /* FOUND! */
+                // FOUND!
                 break;
         }
 
@@ -247,7 +247,7 @@ vfs_s_find_entry_linear (struct vfs_class *me, struct vfs_s_inode *root,
     if (root->super->root != root)
         vfs_die ("We have to use _real_ root. Always. Sorry.");
 
-    /* canonicalize as well, but don't remove '../' from path */
+    // canonicalize as well, but don't remove '../' from path
     canonicalize_pathname_custom (path, CANON_PATH_ALL & (~CANON_PATH_REMDOUBLEDOTS));
 
     if ((flags & FL_DIR) == 0)
@@ -343,7 +343,7 @@ vfs_s_free_super (struct vfs_class *me, struct vfs_s_super *super)
     }
 
 #if 0
-    /* FIXME: We currently leak small amount of memory, sometimes. Fix it if you can. */
+    // FIXME: We currently leak small amount of memory, sometimes. Fix it if you can.
     if (super->ino_usage != 0)
         message (D_ERROR, "Direntry warning",
                  "Super ino_usage is %d, memory leak", super->ino_usage);
@@ -409,7 +409,7 @@ vfs_s_inode_from_path (const vfs_path_t *vpath, int flags)
                           (flags & FL_FOLLOW) != 0 ? LINK_FOLLOW : LINK_NO_FOLLOW,
                           flags & ~FL_FOLLOW);
     if (ino == NULL && *q == '\0')
-        /* We are asking about / directory of ftp server: assume it exists */
+        // We are asking about / directory of ftp server: assume it exists
         ino =
             vfs_s_find_inode (me, super, q,
                               (flags & FL_FOLLOW) != 0 ? LINK_FOLLOW : LINK_NO_FOLLOW,
@@ -440,7 +440,7 @@ vfs_s_opendir (const vfs_path_t *vpath)
 
     dir->st.st_nlink++;
 #if 0
-    if (dir->subdir == NULL)    /* This can actually happen if we allow empty directories */
+    if (dir->subdir == NULL)    // This can actually happen if we allow empty directories
     {
         me->verrno = EAGAIN;
         return NULL;
@@ -548,7 +548,7 @@ vfs_s_readlink (const vfs_path_t *vpath, char *buf, size_t size)
     len = strlen (ino->linkname);
     if (size < len)
         len = size;
-    /* readlink() does not append a NUL character to buf */
+    // readlink() does not append a NUL character to buf
     memcpy (buf, ino->linkname, len);
     return len;
 }
@@ -621,7 +621,7 @@ vfs_s_lseek (void *fh, off_t offset, int whence)
         vfs_die ("cannot lseek() after linear_read!");
 
     if (file->handle != -1)
-    {                           /* If we have local file opened, we want to work with it */
+    {                           // If we have local file opened, we want to work with it
         off_t retval;
 
         retval = lseek (file->handle, offset, whence);
@@ -727,8 +727,7 @@ vfs_s_fill_names (struct vfs_class *me, fill_names_f func)
         const struct vfs_s_super *super = (const struct vfs_s_super *) iter->data;
         char *name;
 
-        name = g_strconcat (super->name, PATH_SEP_STR, me->prefix, VFS_PATH_URL_DELIMITER,
-                            /* super->current_dir->name, */ (char *) NULL);
+        name = g_strconcat (super->name, PATH_SEP_STR, me->prefix, VFS_PATH_URL_DELIMITER, (char *) NULL);
         func (name);
         g_free (name);
     }
@@ -909,7 +908,7 @@ vfs_s_free_inode (struct vfs_class *me, struct vfs_s_inode *ino)
     if (ino == NULL)
         vfs_die ("Don't pass NULL to me");
 
-    /* ==0 can happen if freshly created entry is deleted */
+    // ==0 can happen if freshly created entry is deleted
     if (ino->st.st_nlink > 1)
     {
         ino->st.st_nlink--;
@@ -1052,18 +1051,18 @@ vfs_adjust_stat (struct stat *s)
         blkcnt_t ioblocks;
         blksize_t ioblock_size;
 
-        /* 1. Calculate how many IO blocks are occupied */
+        // 1. Calculate how many IO blocks are occupied
         ioblocks = 1 + (s->st_size - 1) / s->st_blksize;
-        /* 2. Calculate size of st_blksize in 512-byte units */
+        // 2. Calculate size of st_blksize in 512-byte units
         ioblock_size = 1 + (s->st_blksize - 1) / 512;
-        /* 3. Calculate number of blocks */
+        // 3. Calculate number of blocks
         s->st_blocks = ioblocks * ioblock_size;
 #else
-        /* Let IO block size is 512 bytes */
+        // Let IO block size is 512 bytes
         s->st_blocks = 1 + (s->st_size - 1) / 512;
-#endif /* HAVE_STRUCT_STAT_ST_BLKSIZE */
+#endif // HAVE_STRUCT_STAT_ST_BLKSIZE
     }
-#endif /* HAVE_STRUCT_STAT_ST_BLOCKS */
+#endif // HAVE_STRUCT_STAT_ST_BLOCKS
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1138,7 +1137,7 @@ vfs_get_super_by_vpath (const vfs_path_t *vpath)
 
         super = VFS_SUPER (iter->data);
 
-        /* 0 == other, 1 == same, return it, 2 == other but stop scanning */
+        // 0 == other, 1 == same, return it, 2 == other but stop scanning
         i = subclass->archive_same (path_element, super, vpath_archive, cookie);
         if (i == 1)
             goto ret;
@@ -1243,7 +1242,7 @@ vfs_s_fullpath (struct vfs_class *me, struct vfs_s_inode *ino)
 
     if ((me->flags & VFSF_USETMP) == 0)
     {
-        /* archives */
+        // archives
         char *path;
 
         path = g_strdup (ino->ent->name);
@@ -1263,7 +1262,7 @@ vfs_s_fullpath (struct vfs_class *me, struct vfs_s_inode *ino)
         return path;
     }
 
-    /* remote systems */
+    // remote systems
     if (ino->ent->dir == NULL || ino->ent->dir->ent == NULL)
         return g_strdup (ino->ent->name);
 
@@ -1316,7 +1315,7 @@ vfs_s_open (const vfs_path_t *vpath, int flags, mode_t mode)
         struct vfs_s_entry *ent;
         struct vfs_s_inode *dir;
 
-        /* If the filesystem is read-only, disable file creation */
+        // If the filesystem is read-only, disable file creation
         if ((flags & O_CREAT) == 0 || me->write == NULL)
             return NULL;
 
@@ -1386,7 +1385,7 @@ vfs_s_open (const vfs_path_t *vpath, int flags, mode_t mode)
         }
     }
 
-    /* i.e. we had no open files and now we have one */
+    // i.e. we had no open files and now we have one
     vfs_rmstamp (me, (vfsid) super);
     super->fd_usage++;
     fh->ino->st.st_nlink++;
@@ -1423,7 +1422,7 @@ vfs_s_fstat (void *fh, struct stat *buf)
 int
 vfs_s_retrieve_file (struct vfs_class *me, struct vfs_s_inode *ino)
 {
-    /* If you want reget, you'll have to open file with O_LINEAR */
+    // If you want reget, you'll have to open file with O_LINEAR
     off_t total = 0;
     char buffer[BUF_8K];
     int handle;
@@ -1449,7 +1448,7 @@ vfs_s_retrieve_file (struct vfs_class *me, struct vfs_s_inode *ino)
     if (s->linear_start (me, fh, 0) == 0)
         goto error_3;
 
-    /* Clear the interrupt status */
+    // Clear the interrupt status
     tty_got_interrupt ();
     tty_enable_interrupt_key ();
 
@@ -1637,7 +1636,7 @@ vfs_s_get_line (struct vfs_class *me, int sock, char *buf, int buf_len, char ter
         }
     }
 
-    /* Line is too long - terminate buffer and discard the rest of line */
+    // Line is too long - terminate buffer and discard the rest of line
     *buf = '\0';
     while (read (sock, &c, sizeof (c)) > 0)
     {
@@ -1700,7 +1699,7 @@ vfs_s_get_line_interruptible (struct vfs_class *me, char *buffer, int size, int 
 
     return res;
 }
-#endif /* ENABLE_VFS_NET */
+#endif // ENABLE_VFS_NET
 
 /* --------------------------------------------------------------------------------------------- */
 /**

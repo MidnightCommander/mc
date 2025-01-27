@@ -28,7 +28,7 @@
 #include "tests/mctest.h"
 
 #include "lib/strutil.h"
-#include "lib/vfs/direntry.c"   /* for testing static methods  */
+#include "lib/vfs/direntry.c"   // for testing static methods
 
 #include "src/vfs/local/local.c"
 
@@ -123,18 +123,18 @@ vfs_die (const char *m)
 START_TEST (test_vfs_s_get_path)
 /* *INDENT-ON* */
 {
-    /* given */
+    // given
     struct vfs_s_super *archive;
     const char *result;
 
-    /* when */
+    // when
     vfs_path_t *vpath =
         vfs_path_from_str_flags ("/" ETALON_VFS_NAME ARCH_NAME "#test1:/" ETALON_PATH,
                                  VPF_USE_DEPRECATED_PARSER);
 
     result = vfs_s_get_path (vpath, &archive, 0);
 
-    /* then */
+    // then
     mctest_assert_str_eq (result, ETALON_PATH);
     mctest_assert_str_eq (archive->name, "/" ETALON_VFS_URL_NAME ARCH_NAME);
 
@@ -156,9 +156,9 @@ main (void)
 
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     tcase_add_test (tc_core, test_vfs_s_get_path);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

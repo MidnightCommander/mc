@@ -28,7 +28,7 @@
 
 #include "tests/mctest.h"
 
-#include "glob.c"               /* for testing static functions */
+#include "glob.c"               // for testing static functions
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -84,14 +84,14 @@ static const struct test_glob_translate_to_regex_ds
 START_PARAMETRIZED_TEST (test_glob_translate_to_regex, test_glob_translate_to_regex_ds)
 /* *INDENT-ON* */
 {
-    /* given */
+    // given
     GString *tmp = g_string_new (data->input_value);
     GString *dest_str;
 
-    /* when */
+    // when
     dest_str = mc_search__glob_translate_to_regex (tmp);
 
-    /* then */
+    // then
     g_string_free (tmp, TRUE);
 
     mctest_assert_str_eq (dest_str->str, data->expected_result);
@@ -110,10 +110,10 @@ main (void)
 
     tc_core = tcase_create ("Core");
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, test_glob_translate_to_regex,
                                    test_glob_translate_to_regex_ds);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

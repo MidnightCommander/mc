@@ -15,4 +15,4 @@ void vfs_init_undelfs (void);
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__VFS_UNDELFS_H */
+#endif // MC__VFS_UNDELFS_H

@@ -45,4 +45,4 @@ gboolean mc_event_raise (const gchar *, const gchar *, gpointer);
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__EVENT_H */
+#endif // MC__EVENT_H

@@ -52,16 +52,16 @@ static const struct the_file_is_local_ds
 START_PARAMETRIZED_TEST (the_file_is_local, the_file_is_local_ds)
 /* *INDENT-ON* */
 {
-    /* given */
+    // given
     vfs_path_t *filename_vpath;
     filename_vpath = vfs_path_from_str (data->input_path);
 
     vfs_file_is_local__return_value = TRUE;
 
-    /* when */
+    // when
     execute_with_vfs_arg ("cmd_for_local_file", filename_vpath);
 
-    /* then */
+    // then
     mctest_assert_str_eq (do_execute__lc_shell__captured, "cmd_for_local_file");
     mctest_assert_str_eq (do_execute__command__captured, data->input_path);
 
@@ -90,16 +90,16 @@ END_PARAMETRIZED_TEST
 START_TEST (the_file_is_remote_but_empty)
 /* *INDENT-ON* */
 {
-    /* given */
+    // given
     vfs_path_t *filename_vpath;
     filename_vpath = NULL;
 
     vfs_file_is_local__return_value = FALSE;
 
-    /* when */
+    // when
     execute_with_vfs_arg ("cmd_for_remote_file", filename_vpath);
 
-    /* then */
+    // then
     mctest_assert_str_eq (do_execute__lc_shell__captured, NULL);
     mctest_assert_str_eq (do_execute__command__captured, NULL);
 
@@ -126,7 +126,7 @@ END_TEST
 START_TEST (the_file_is_remote_fail_to_create_local_copy)
 /* *INDENT-ON* */
 {
-    /* given */
+    // given
     vfs_path_t *filename_vpath;
 
     filename_vpath = vfs_path_from_str ("/ftp://some.host/editme.txt");
@@ -134,10 +134,10 @@ START_TEST (the_file_is_remote_fail_to_create_local_copy)
     vfs_file_is_local__return_value = FALSE;
     mc_getlocalcopy__return_value = NULL;
 
-    /* when */
+    // when
     execute_with_vfs_arg ("cmd_for_remote_file", filename_vpath);
 
-    /* then */
+    // then
     mctest_assert_str_eq (do_execute__lc_shell__captured, NULL);
     mctest_assert_str_eq (do_execute__command__captured, NULL);
 
@@ -167,7 +167,7 @@ END_TEST
 START_TEST (the_file_is_remote)
 /* *INDENT-ON* */
 {
-    /* given */
+    // given
     vfs_path_t *filename_vpath, *local_vpath, *local_vpath_should_be_freeing;
 
     filename_vpath = vfs_path_from_str ("/ftp://some.host/editme.txt");
@@ -177,10 +177,10 @@ START_TEST (the_file_is_remote)
     vfs_file_is_local__return_value = FALSE;
     mc_getlocalcopy__return_value = local_vpath_should_be_freeing;
 
-    /* when */
+    // when
     execute_with_vfs_arg ("cmd_for_remote_file", filename_vpath);
 
-    /* then */
+    // then
     mctest_assert_str_eq (do_execute__lc_shell__captured, "cmd_for_remote_file");
     mctest_assert_str_eq (do_execute__command__captured, "/tmp/blabla-editme.txt");
 
@@ -223,12 +223,12 @@ main (void)
 
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, the_file_is_local, the_file_is_local_ds);
     tcase_add_test (tc_core, the_file_is_remote_but_empty);
     tcase_add_test (tc_core, the_file_is_remote_fail_to_create_local_copy);
     tcase_add_test (tc_core, the_file_is_remote);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

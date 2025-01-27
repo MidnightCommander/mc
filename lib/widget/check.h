@@ -17,8 +17,8 @@
 typedef struct WCheck
 {
     Widget widget;
-    gboolean state;             /* check button state */
-    hotkey_t text;              /* text of check button */
+    gboolean state;             // check button state
+    hotkey_t text;              // text of check button
 } WCheck;
 
 /*** global variables defined in .c file *********************************************************/
@@ -30,4 +30,4 @@ void check_set_text (WCheck * check, const char *text);
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__WIDGET_CHECK_H */
+#endif // MC__WIDGET_CHECK_H

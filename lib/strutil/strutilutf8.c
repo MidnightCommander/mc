@@ -27,7 +27,7 @@
 
 #include <stdlib.h>
 #include <langinfo.h>
-#include <limits.h>             /* MB_LEN_MAX */
+#include <limits.h>             // MB_LEN_MAX
 #include <string.h>
 
 #include "lib/global.h"
@@ -498,7 +498,7 @@ str_utf8_make_make_term_form (const char *text, size_t length)
             size_t repl_len;
 
             text++;
-            /*actual[0] = '?'; */
+            //actual[0] = '?';
             repl_len = strlen (replch);
             memcpy (actual, replch, repl_len);
             actual += repl_len;
@@ -1108,15 +1108,15 @@ str_utf8_normalize (const char *text)
      * needed. Normalization of ASCII string is no-op.
      */
 
-    /* find out whether text is ASCII only */
+    // find out whether text is ASCII only
     for (end = text; *end != '\0'; end++)
         if ((*end & 0x80) != 0)
         {
-            /* found 2nd byte of utf8-encoded symbol */
+            // found 2nd byte of utf8-encoded symbol
             break;
         }
 
-    /* if text is ASCII-only, return copy, normalize otherwise */
+    // if text is ASCII-only, return copy, normalize otherwise
     if (*end == '\0')
         return g_strndup (text, end - text);
 
@@ -1525,10 +1525,10 @@ str_utf8_init (void)
     result.caseprefix = str_utf8_caseprefix;
     result.create_key = str_utf8_create_key;
 #ifdef MC__USE_STR_UTF8_CREATE_KEY_FOR_FILENAME
-    /* case insensitive sort files in "a1 a2 a10" order */
+    // case insensitive sort files in "a1 a2 a10" order
     result.create_key_for_filename = str_utf8_create_key_for_filename;
 #else
-    /* case insensitive sort files in "a1 a10 a2" order */
+    // case insensitive sort files in "a1 a10 a2" order
     result.create_key_for_filename = str_utf8_create_key;
 #endif
     result.key_collate = str_utf8_key_collate;

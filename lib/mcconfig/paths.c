@@ -31,7 +31,7 @@
 #include "lib/global.h"
 #include "lib/fileloc.h"
 #include "lib/vfs/vfs.h"
-#include "lib/util.h"           /* unix_error_string() */
+#include "lib/util.h"           // unix_error_string()
 
 #include "lib/mcconfig.h"
 
@@ -57,8 +57,8 @@ static const struct
     char **basedir;
     const char *filename;
 } mc_config_files_reference[] = {
-    /* *INDENT-OFF* */
-    /* config */
+    // *INDENT-OFF*
+    // config
     { &mc_config_str, MC_CONFIG_FILE },
     { &mc_config_str, MC_FHL_INI_FILE },
     { &mc_config_str, MC_HOTLIST_FILE },
@@ -67,11 +67,11 @@ static const struct
     { &mc_config_str, EDIT_HOME_MENU },
     { &mc_config_str, MC_PANELS_FILE },
 
-    /* User should move this file with applying some changes in file */
+    // User should move this file with applying some changes in file
     { &mc_config_str, MC_EXT_FILE },
     { &mc_config_str, MC_EXT_OLD_FILE },
 
-    /* data */
+    // data
     { &mc_data_str, MC_SKINS_DIR },
     { &mc_data_str, VFS_SHELL_PREFIX },
     { &mc_data_str, MC_ASHRC_FILE },
@@ -87,14 +87,14 @@ static const struct
     { &mc_data_str, EDIT_HOME_CLIP_FILE },
     { &mc_data_str, MC_MACRO_FILE },
 
-    /* cache */
+    // cache
     { &mc_cache_str, "mc.log" },
     { &mc_cache_str, MC_TREESTORE_FILE },
     { &mc_cache_str, EDIT_HOME_TEMP_FILE },
     { &mc_cache_str, EDIT_HOME_BLOCK_FILE },
 
     { NULL, NULL }
-    /* *INDENT-ON* */
+    // *INDENT-ON*
 };
 
 /* --------------------------------------------------------------------------------------------- */

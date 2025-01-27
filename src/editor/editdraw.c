@@ -42,11 +42,11 @@
 #include <sys/stat.h>
 
 #include "lib/global.h"
-#include "lib/tty/tty.h"        /* tty_printf() */
-#include "lib/tty/key.h"        /* is_idle() */
+#include "lib/tty/tty.h"        // tty_printf()
+#include "lib/tty/key.h"        // is_idle()
 #include "lib/skin.h"
-#include "lib/strutil.h"        /* utf string functions */
-#include "lib/util.h"           /* is_printable() */
+#include "lib/strutil.h"        // utf string functions
+#include "lib/util.h"           // is_printable()
 #include "lib/widget.h"
 #ifdef HAVE_CHARSET
 #include "lib/charsets.h"
@@ -135,7 +135,7 @@ status_string (WEdit *edit, char *s, int w)
         g_snprintf (byte_str, sizeof (byte_str), "%4d 0x%03X", (int) cur_byte, (unsigned) cur_byte);
     }
 
-    /* The field lengths just prevent the status line from shortening too much */
+    // The field lengths just prevent the status line from shortening too much
     if (edit_options.simple_statusbar)
         g_snprintf (s, w,
                     "%c%c%c%c %3ld %5ld/%ld %6ld/%ld %s %s",
@@ -183,8 +183,8 @@ edit_status_fullscreen (WEdit *edit, int color)
 {
     Widget *h = WIDGET (WIDGET (edit)->owner);
     const int w = h->rect.cols;
-    const int gap = 3;          /* between the filename and the status */
-    const int right_gap = 5;    /* at the right end of the screen */
+    const int gap = 3;          // between the filename and the status
+    const int right_gap = 5;    // at the right end of the screen
     const int preferred_fname_len = 16;
     char *status;
     size_t status_size;
@@ -338,11 +338,11 @@ edit_draw_frame (const WEdit *edit, int color, gboolean active)
 {
     const Widget *w = CONST_WIDGET (edit);
 
-    /* draw a frame around edit area */
+    // draw a frame around edit area
     tty_setcolor (color);
-    /* draw double frame for active window if skin supports that */
+    // draw double frame for active window if skin supports that
     tty_draw_box (w->rect.y, w->rect.x, w->rect.lines, w->rect.cols, !active);
-    /* draw a drag marker */
+    // draw a drag marker
     if (edit->drag_state == MCEDIT_DRAG_NONE)
     {
         tty_setcolor (EDITOR_FRAME_DRAG);
@@ -609,7 +609,7 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
 #endif
                     c = edit_buffer_get_byte (&edit->buffer, q);
 
-                /* we don't use bg for mc - fg contains both */
+                // we don't use bg for mc - fg contains both
                 if (book_mark != 0)
                     p->style |= book_mark << 16;
                 else
@@ -623,7 +623,7 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
                 switch (c)
                 {
                 case '\n':
-                    col = end_col - edit->start_col + 1;        /* quit */
+                    col = end_col - edit->start_col + 1;        // quit
                     break;
 
                 case '\t':
@@ -735,7 +735,7 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
                         c = convert_to_display_c (c);
 #endif
 
-                    /* Caret notation for control characters */
+                    // Caret notation for control characters
                     if (c < 32)
                     {
                         p->ch = '^';
@@ -765,15 +765,15 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
                     if (edit->utf8)
                     {
                         if (mc_global.utf8_display)
-                            /* c is gunichar */
+                            // c is gunichar
                             printable = g_unichar_isprint (c);
                         else
-                            /* c was gunichar; now c is 8-bit char converted from gunichar */
+                            // c was gunichar; now c is 8-bit char converted from gunichar
                             printable = is_printable (c);
                     }
                     else
 #endif
-                        /* c is 8-bit char */
+                        // c is 8-bit char
                         printable = is_printable (c);
 
                     if (printable)
@@ -786,7 +786,7 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
                     p++;
                     col++;
                     break;
-                }               /* case */
+                }               // case
 
                 q++;
                 if (char_length > 1)
@@ -842,12 +842,12 @@ render_edit_text (WEdit *edit, long start_row, long start_column, long end_row, 
     int y1, x1, y2, x2;
     int last_line, last_column;
 
-    /* draw only visible region */
+    // draw only visible region
 
     last_line = wh->rect.y + wh->rect.lines - 1;
 
     y1 = w->y;
-    if (y1 > last_line - 1 /* buttonbar */ )
+    if (y1 > last_line - 1)  // buttonbar
         return;
 
     last_column = wh->rect.x + wh->rect.cols - 1;
@@ -857,7 +857,7 @@ render_edit_text (WEdit *edit, long start_row, long start_column, long end_row, 
         return;
 
     y2 = w->y + w->lines - 1;
-    if (y2 < wh->rect.y + 1 /* menubar */ )
+    if (y2 < wh->rect.y + 1) // menubar
         return;
 
     x2 = w->x + w->cols - 1;
@@ -866,12 +866,12 @@ render_edit_text (WEdit *edit, long start_row, long start_column, long end_row, 
 
     if ((force & REDRAW_IN_BOUNDS) == 0)
     {
-        /* !REDRAW_IN_BOUNDS means to ignore bounds and redraw whole rows */
-        /* draw only visible region */
+        // !REDRAW_IN_BOUNDS means to ignore bounds and redraw whole rows
+        // draw only visible region
 
-        if (y2 <= last_line - 1 /* buttonbar */ )
+        if (y2 <= last_line - 1) // buttonbar
             end_row = w->lines - 1;
-        else if (y1 >= wh->rect.y + 1 /* menubar */ )
+        else if (y1 >= wh->rect.y + 1) // menubar
             end_row = wh->rect.lines - 1 - y1 - 1;
         else
             end_row = start_row + wh->rect.lines - 1 - 1;
@@ -923,7 +923,7 @@ render_edit_text (WEdit *edit, long start_row, long start_column, long end_row, 
                 }
             }
 
-            /*          if (force & REDRAW_LINE)          ---> default */
+            //          if (force & REDRAW_LINE)          ---> default
             b = edit_buffer_get_current_bol (&edit->buffer);
             if (curs_row >= start_row && curs_row <= end_row)
             {
@@ -973,7 +973,7 @@ render_edit_text (WEdit *edit, long start_row, long start_column, long end_row, 
     }
     else if (prev_curs_row < edit->curs_row)
     {
-        /* with the new text highlighting, we must draw from the top down */
+        // with the new text highlighting, we must draw from the top down
         edit_draw_this_char (edit, prev_curs, prev_curs_row, start_column, end_column);
         edit_draw_this_char (edit, edit->buffer.curs1, edit->curs_row, start_column, end_column);
     }
@@ -994,7 +994,7 @@ render_edit_text (WEdit *edit, long start_row, long start_column, long end_row, 
 static inline void
 edit_render (WEdit *edit, int page, int row_start, int col_start, int row_end, int col_end)
 {
-    if (page != 0)              /* if it was an expose event, 'page' would be set */
+    if (page != 0)              // if it was an expose event, 'page' would be set
         edit->force |= REDRAW_PAGE | REDRAW_IN_BOUNDS;
 
     render_edit_text (edit, row_start, col_start, row_end, col_end);

@@ -39,12 +39,12 @@
 #include "lib/global.h"
 #include "lib/unixcompat.h"
 #include "lib/util.h"
-#include "lib/widget.h"         /* message() */
+#include "lib/widget.h"         // message()
 
 #include "lib/vfs/vfs.h"
 #include "lib/vfs/utilvfs.h"
 #include "lib/vfs/xdirentry.h"
-#include "lib/vfs/gc.h"         /* vfs_rmstamp */
+#include "lib/vfs/gc.h"         // vfs_rmstamp
 
 #include "cpio.h"
 
@@ -61,7 +61,7 @@
 #define CPIO_SEEK_SET(super, where) mc_lseek (CPIO_SUPER(super)->fd, CPIO_POS(super) = (where), SEEK_SET)
 #define CPIO_SEEK_CUR(super, where) mc_lseek (CPIO_SUPER(super)->fd, CPIO_POS(super) += (where), SEEK_SET)
 
-#define MAGIC_LENGTH (6)        /* How many bytes we have to read ahead */
+#define MAGIC_LENGTH (6)        // How many bytes we have to read ahead
 #define SEEKBACK CPIO_SEEK_CUR(super, ptr - top)
 #define RETURN(x) return (CPIO_SUPER(super)->type = (x))
 #define TYPEIS(x) ((CPIO_SUPER(super)->type == CPIO_UNKNOWN) || (CPIO_SUPER(super)->type == (x)))
@@ -81,12 +81,12 @@ enum
 
 enum
 {
-    CPIO_UNKNOWN = 0,           /* Not determined yet */
-    CPIO_BIN,                   /* Binary format */
-    CPIO_BINRE,                 /* Binary format, reverse endianness */
-    CPIO_OLDC,                  /* Old ASCII format */
-    CPIO_NEWC,                  /* New ASCII format */
-    CPIO_CRC                    /* New ASCII format + CRC */
+    CPIO_UNKNOWN = 0,           // Not determined yet
+    CPIO_BIN,                   // Binary format
+    CPIO_BINRE,                 // Binary format, reverse endianness
+    CPIO_OLDC,                  // Old ASCII format
+    CPIO_NEWC,                  // New ASCII format
+    CPIO_CRC                    // New ASCII format + CRC
 };
 
 struct old_cpio_header
@@ -131,12 +131,12 @@ typedef struct
 
 typedef struct
 {
-    struct vfs_s_super base;    /* base class */
+    struct vfs_s_super base;    // base class
 
     int fd;
     struct stat st;
-    int type;                   /* Type of the archive */
-    GSList *deferred;           /* List of inodes for which another entries may appear */
+    int type;                   // Type of the archive
+    GSList *deferred;           // List of inodes for which another entries may appear
 } cpio_super_t;
 
 /*** forward declarations (file scope functions) *************************************************/
@@ -183,7 +183,7 @@ cpio_skip_padding (struct vfs_s_super *super)
         return CPIO_POS (super);
     default:
         g_assert_not_reached ();
-        return 42;              /* & the compiler is happy :-) */
+        return 42;              // & the compiler is happy :-)
     }
 }
 
@@ -196,7 +196,7 @@ cpio_new_archive (struct vfs_class *me)
 
     arch = g_new0 (cpio_super_t, 1);
     arch->base.me = me;
-    arch->fd = -1;              /* for now */
+    arch->fd = -1;              // for now
     arch->type = CPIO_UNKNOWN;
 
     return VFS_SUPER (arch);
@@ -266,7 +266,7 @@ cpio_open_cpio_file (struct vfs_class *me, struct vfs_s_super *super, const vfs_
 
     arch->fd = fd;
     mode = arch->st.st_mode & 07777;
-    mode |= (mode & 0444) >> 2; /* set eXec where Read is */
+    mode |= (mode & 0444) >> 2; // set eXec where Read is
     mode |= S_IFDIR;
 
     root = vfs_s_new_inode (me, super, &arch->st);
@@ -301,7 +301,7 @@ cpio_read_head (struct vfs_class *me, struct vfs_s_super *super)
         return cpio_read_crc_head (me, super);
     default:
         g_assert_not_reached ();
-        return 42;              /* & the compiler is happy :-) */
+        return 42;              // & the compiler is happy :-)
     }
 }
 
@@ -381,26 +381,25 @@ cpio_create_entry (struct vfs_class *me, struct vfs_s_super *super, struct stat 
     char *tn;
 
     switch (st->st_mode & S_IFMT)
-    {                           /* For case of HP/UX archives */
+    {                           // For case of HP/UX archives
     case S_IFCHR:
     case S_IFBLK:
 #ifdef S_IFSOCK
-        /* cppcheck-suppress syntaxError */
+        // cppcheck-suppress syntaxError
     case S_IFSOCK:
 #endif
 #ifdef S_IFIFO
-        /* cppcheck-suppress syntaxError */
+        // cppcheck-suppress syntaxError
     case S_IFIFO:
 #endif
 #ifdef S_IFNAM
-        /* cppcheck-suppress syntaxError */
+        // cppcheck-suppress syntaxError
     case S_IFNAM:
 #endif
 #ifdef HAVE_STRUCT_STAT_ST_RDEV
         if ((st->st_size != 0) && (st->st_rdev == 0x0001))
         {
-            /* FIXME: representation of major/minor differs between */
-            /* different operating systems. */
+            // FIXME: representation of major/minor differs between different operating systems
             st->st_rdev = (unsigned) st->st_size;
             st->st_size = 0;
         }
@@ -411,7 +410,7 @@ cpio_create_entry (struct vfs_class *me, struct vfs_s_super *super, struct stat 
     }
 
     if ((st->st_nlink > 1) && ((arch->type == CPIO_NEWC) || (arch->type == CPIO_CRC)))
-    {                           /* For case of hardlinked files */
+    {                           // For case of hardlinked files
         defer_inode i = { st->st_ino, st->st_dev, NULL };
         GSList *l;
 
@@ -431,7 +430,7 @@ cpio_create_entry (struct vfs_class *me, struct vfs_s_super *super, struct stat 
         }
     }
 
-    /* remove trailing slashes */
+    // remove trailing slashes
     for (tn = name + strlen (name) - 1; tn >= name && IS_PATH_SEP (*tn); tn--)
         *tn = '\0';
 
@@ -440,7 +439,7 @@ cpio_create_entry (struct vfs_class *me, struct vfs_s_super *super, struct stat 
         tn = name;
     else if (tn == name + 1)
     {
-        /* started with "./" -- directory in the root of archive */
+        // started with "./" -- directory in the root of archive
         tn++;
     }
     else
@@ -451,7 +450,7 @@ cpio_create_entry (struct vfs_class *me, struct vfs_s_super *super, struct stat 
         tn++;
     }
 
-    entry = VFS_SUBCLASS (me)->find_entry (me, root, tn, LINK_FOLLOW, FL_NONE); /* In case entry is already there */
+    entry = VFS_SUBCLASS (me)->find_entry (me, root, tn, LINK_FOLLOW, FL_NONE); // In case entry is already there
 
     if (entry != NULL)
     {
@@ -461,7 +460,7 @@ cpio_create_entry (struct vfs_class *me, struct vfs_s_super *super, struct stat 
 
         if (!S_ISDIR (entry->ino->st.st_mode))
         {
-            /* This can be considered archive inconsistency */
+            // This can be considered archive inconsistency
             message (D_ERROR, MSG_ERROR,
                      _("%s contains duplicate entries! Skipping!"), super->name);
         }
@@ -477,7 +476,7 @@ cpio_create_entry (struct vfs_class *me, struct vfs_s_super *super, struct stat 
         g_free (name);
     }
     else
-    {                           /* !entry */
+    {                           // !entry
         /* root == NULL can be in the following case:
          * a/b/c -> d
          * where 'a/b' is the stale link and therefore root of 'c' cannot be found in the archive
@@ -489,7 +488,7 @@ cpio_create_entry (struct vfs_class *me, struct vfs_s_super *super, struct stat 
                 inode = vfs_s_new_inode (me, super, st);
                 if ((st->st_nlink > 0) && ((arch->type == CPIO_NEWC) || (arch->type == CPIO_CRC)))
                 {
-                    /* For case of hardlinked files */
+                    // For case of hardlinked files
                     defer_inode *i;
 
                     i = g_new (defer_inode, 1);
@@ -516,7 +515,7 @@ cpio_create_entry (struct vfs_class *me, struct vfs_s_super *super, struct stat 
         {
             if (inode != NULL)
             {
-                /* FIXME: do we must read from arch->fd in case of inode != NULL only or in any case? */
+                // FIXME: do we must read from arch->fd in case of inode != NULL only or in any case?
 
                 inode->linkname = g_malloc (st->st_size + 1);
 
@@ -526,13 +525,13 @@ cpio_create_entry (struct vfs_class *me, struct vfs_s_super *super, struct stat 
                     return STATUS_EOF;
                 }
 
-                inode->linkname[st->st_size] = '\0';    /* Linkname stored without terminating \0 !!! */
+                inode->linkname[st->st_size] = '\0';    // Linkname stored without terminating \0 !!!
             }
 
             CPIO_POS (super) += st->st_size;
             cpio_skip_padding (super);
         }
-    }                           /* !entry */
+    }                           // !entry
 
     return STATUS_OK;
 }
@@ -582,7 +581,7 @@ cpio_read_bin_head (struct vfs_class *me, struct vfs_s_super *super)
     cpio_skip_padding (super);
 
     if (strcmp ("TRAILER!!!", name) == 0)
-    {                           /* We got to the last record */
+    {                           // We got to the last record
         g_free (name);
         return STATUS_TRAIL;
     }
@@ -655,7 +654,7 @@ cpio_read_oldc_head (struct vfs_class *me, struct vfs_s_super *super)
     cpio_skip_padding (super);
 
     if (strcmp ("TRAILER!!!", name) == 0)
-    {                           /* We got to the last record */
+    {                           // We got to the last record
         g_free (name);
         return STATUS_TRAIL;
     }
@@ -735,7 +734,7 @@ cpio_read_crc_head (struct vfs_class *me, struct vfs_s_super *super)
     cpio_skip_padding (super);
 
     if (strcmp ("TRAILER!!!", name) == 0)
-    {                           /* We got to the last record */
+    {                           // We got to the last record
         g_free (name);
         return STATUS_TRAIL;
     }
@@ -817,23 +816,23 @@ static int
 cpio_super_same (const vfs_path_element_t *vpath_element, struct vfs_s_super *parc,
                  const vfs_path_t *vpath, void *cookie)
 {
-    struct stat *archive_stat = cookie; /* stat of main archive */
+    struct stat *archive_stat = cookie; // stat of main archive
 
     (void) vpath_element;
 
     if (strcmp (parc->name, vfs_path_as_str (vpath)))
         return 0;
 
-    /* Has the cached archive been changed on the disk? */
+    // Has the cached archive been changed on the disk?
     if (parc != NULL && CPIO_SUPER (parc)->st.st_mtime < archive_stat->st_mtime)
     {
-        /* Yes, reload! */
+        // Yes, reload!
         vfs_cpiofs_ops->free ((vfsid) parc);
         vfs_rmstamp (vfs_cpiofs_ops, (vfsid) parc);
         return 2;
     }
 
-    /* Hasn't been modified, give it a new timeout */
+    // Hasn't been modified, give it a new timeout
     vfs_stamp (vfs_cpiofs_ops, (vfsid) parc);
     return 1;
 }
@@ -882,7 +881,7 @@ cpio_fh_open (struct vfs_class *me, vfs_file_handler_t *fh, int flags, mode_t mo
 void
 vfs_init_cpiofs (void)
 {
-    /* FIXME: cpiofs used own temp files */
+    // FIXME: cpiofs used own temp files
     vfs_init_subclass (&cpio_subclass, "cpiofs", VFSF_READONLY, "ucpio");
     vfs_cpiofs_ops->read = cpio_read;
     vfs_cpiofs_ops->setctl = NULL;

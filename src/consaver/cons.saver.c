@@ -69,7 +69,7 @@
 #endif
 #include <termios.h>
 
-#include "lib/unixcompat.h"     /* STDERR_FILENO */
+#include "lib/unixcompat.h"     // STDERR_FILENO
 
 #define LINUX_CONS_SAVER_C
 #include "cons.saver.h"
@@ -194,7 +194,7 @@ main (int argc, char **argv)
         die ();
     console_minor = (int) (st.st_rdev & 0x00ff);
 #else
-    console_minor = 1;          /* FIXME */
+    console_minor = 1;          // FIXME
 #endif
     if (console_minor < 1 || console_minor > 63)
         die ();
@@ -203,13 +203,13 @@ main (int argc, char **argv)
 
     switch (tty_name[5])
     {
-        /* devfs */
     case 'v':
+        // devfs
         p = "/dev/vc/%d";
         q = "/dev/vcc/a%d";
         break;
-        /* /dev/ttyN */
     case 't':
+        // /dev/ttyN
         p = "/dev/tty%d";
         q = "/dev/vcsa%d";
         break;

@@ -131,12 +131,12 @@ static const struct test_empty_mean_home_ds
 START_PARAMETRIZED_TEST (test_empty_mean_home, test_empty_mean_home_ds)
 /* *INDENT-ON* */
 {
-    /* given */
+    // given
     get_current_type__return_value = view_listing;
     do_cd__return_value = TRUE;
     mc_config_get_home_dir__return_value = "/home/test";
 
-    /* when */
+    // when
     {
         char *input_command;
 
@@ -144,7 +144,7 @@ START_PARAMETRIZED_TEST (test_empty_mean_home, test_empty_mean_home_ds)
         cd_to (input_command);
         g_free (input_command);
     }
-    /* then */
+    // then
     mctest_assert_str_eq (mc_config_get_home_dir__return_value,
                           vfs_path_as_str (do_cd__new_dir_vpath__captured));
     ck_assert_int_eq (do_cd__cd_type__captured, cd_parse_command);
@@ -164,9 +164,9 @@ main (void)
 
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, test_empty_mean_home, test_empty_mean_home_ds);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

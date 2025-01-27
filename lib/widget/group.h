@@ -26,12 +26,12 @@ struct WGroup
 {
     Widget widget;
 
-    /* Group members */
-    GList *widgets;             /* widgets list */
-    GList *current;             /* Currently active widget */
+    // Group members
+    GList *widgets;             // widgets list
+    GList *current;             // Currently active widget
 
-    gboolean winch_pending;     /* SIGWINCH signal has been got. Resize group after rise */
-    int mouse_status;           /* For the autorepeat status of the mouse */
+    gboolean winch_pending;     // SIGWINCH signal has been got. Resize group after rise
+    int mouse_status;           // For the autorepeat status of the mouse
 };
 
 /*** global variables defined in .c file *********************************************************/
@@ -122,4 +122,4 @@ group_get_current_widget_id (const WGroup *g)
     return WIDGET (g->current->data)->id;
 }
 
-#endif /* MC__GROUP_H */
+#endif // MC__GROUP_H

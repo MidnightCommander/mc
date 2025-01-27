@@ -34,9 +34,9 @@
 #include <string.h>
 
 #include "lib/global.h"
-#include "lib/strutil.h"        /* utf-8 functions */
+#include "lib/strutil.h"        // utf-8 functions
 #include "lib/fileloc.h"
-#include "lib/util.h"           /* whitespace() */
+#include "lib/util.h"           // whitespace()
 
 #include "lib/charsets.h"
 
@@ -106,7 +106,7 @@ load_codepages_list_from_file (GPtrArray **list, const char *fname)
 
     while (fgets (buf, sizeof buf, f) != NULL)
     {
-        /* split string into id and cpname */
+        // split string into id and cpname
         char *p = buf;
         size_t buflen;
 
@@ -142,8 +142,8 @@ load_codepages_list_from_file (GPtrArray **list, const char *fname)
             {
                 unsigned int i;
 
-                /* whether id is already present in list */
-                /* if yes, overwrite description */
+                // whether id is already present in list
+                // if yes, overwrite description
                 for (i = 0; i < (*list)->len; i++)
                 {
                     codepage_desc *desc;
@@ -152,14 +152,14 @@ load_codepages_list_from_file (GPtrArray **list, const char *fname)
 
                     if (strcmp (id, desc->id) == 0)
                     {
-                        /* found */
+                        // found
                         g_free (desc->name);
                         desc->name = g_strdup (p);
                         break;
                     }
                 }
 
-                /* not found */
+                // not found
                 if (i == (*list)->len)
                     g_ptr_array_add (*list, new_codepage_desc (id, p));
             }
@@ -203,19 +203,19 @@ load_codepages_list (void)
 {
     char *fname;
 
-    /* 1: try load /usr/share/mc/mc.charsets */
+    // 1: try load /usr/share/mc/mc.charsets
     fname = g_build_filename (mc_global.share_data_dir, CHARSETS_LIST, (char *) NULL);
     load_codepages_list_from_file (&codepages, fname);
     g_free (fname);
 
-    /* 2: try load /etc/mc/mc.charsets */
+    // 2: try load /etc/mc/mc.charsets
     fname = g_build_filename (mc_global.sysconfig_dir, CHARSETS_LIST, (char *) NULL);
     load_codepages_list_from_file (&codepages, fname);
     g_free (fname);
 
     if (codepages == NULL)
     {
-        /* files are not found, add default codepage */
+        // files are not found, add default codepage
         fprintf (stderr, "%s\n", _("Warning: cannot load codepages list"));
 
         codepages = g_ptr_array_new_with_free_func (free_codepage_desc);
@@ -229,7 +229,7 @@ void
 free_codepages_list (void)
 {
     g_ptr_array_free (codepages, TRUE);
-    /* NULL-ize pointer to make unit tests happy */
+    // NULL-ize pointer to make unit tests happy
     codepages = NULL;
 }
 
@@ -288,7 +288,7 @@ init_translation_table (int cpsource, int cpdisplay)
     int i;
     GIConv cd;
 
-    /* Fill input <-> display tables */
+    // Fill input <-> display tables
 
     if (cpsource < 0 || cpdisplay < 0 || cpsource == cpdisplay)
     {
@@ -309,7 +309,7 @@ init_translation_table (int cpsource, int cpdisplay)
     cp_source = ((codepage_desc *) g_ptr_array_index (codepages, cpsource))->id;
     cp_display = ((codepage_desc *) g_ptr_array_index (codepages, cpdisplay))->id;
 
-    /* display <- inpit table */
+    // display <- inpit table
 
     cd = g_iconv_open (cp_display, cp_source);
     if (cd == INVALID_CONV)
@@ -320,7 +320,7 @@ init_translation_table (int cpsource, int cpdisplay)
 
     g_iconv_close (cd);
 
-    /* inpit <- display table */
+    // inpit <- display table
 
     cd = g_iconv_open (cp_source, cp_display);
     if (cd == INVALID_CONV)

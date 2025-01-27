@@ -26,12 +26,12 @@
 
 #include "lib/global.h"
 #include "lib/mcconfig.h"
-#include "lib/tty/key.h"        /* tty_keyname_to_keycode*() */
-#include "lib/keybind.h"        /* keybind_lookup_actionname() */
+#include "lib/tty/key.h"        // tty_keyname_to_keycode*()
+#include "lib/keybind.h"        // keybind_lookup_actionname()
 #include "lib/fileloc.h"
 
-#include "src/setup.h"          /* macro_action_t */
-#include "src/history.h"        /* MC_HISTORY_EDIT_REPEAT */
+#include "src/setup.h"          // macro_action_t
+#include "src/history.h"        // MC_HISTORY_EDIT_REPEAT
 
 #include "editwidget.h"
 
@@ -105,7 +105,7 @@ edit_delete_macro (WEdit *edit, int hotkey)
     int indx;
     char *skeyname;
 
-    /* clear array of actions for current hotkey */
+    // clear array of actions for current hotkey
     while ((indx = edit_get_macro (edit, hotkey)) != -1)
     {
         macros_t *macros;
@@ -155,7 +155,7 @@ edit_store_macro_cmd (WEdit *edit)
         return FALSE;
 
     tmp_act = keybind_lookup_keymap_command (WIDGET (edit)->keymap, hotkey);
-    /* return FALSE if try assign macro into restricted hotkeys */
+    // return FALSE if try assign macro into restricted hotkeys
     if (tmp_act == CK_MacroStartRecord
         || tmp_act == CK_MacroStopRecord || tmp_act == CK_MacroStartStopRecord)
         return FALSE;
@@ -274,7 +274,7 @@ edit_load_macro_cmd (WEdit *edit)
 
                 if (m_act.action != 0)
                 {
-                    /* a shell command */
+                    // a shell command
                     if ((m_act.action / CK_PipeBlock (0)) == 1)
                     {
                         m_act.action = CK_PipeBlock (0);
@@ -411,7 +411,7 @@ edit_execute_macro (WEdit *edit, int hotkey)
 void
 edit_begin_end_macro_cmd (WEdit *edit)
 {
-    /* edit is a pointer to the widget */
+    // edit is a pointer to the widget
     if (edit != NULL)
     {
         long command = macro_index < 0 ? CK_MacroStartRecord : CK_MacroStopRecord;
@@ -420,12 +420,12 @@ edit_begin_end_macro_cmd (WEdit *edit)
     }
 }
 
- /* --------------------------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------------------------- */
 
 void
 edit_begin_end_repeat_cmd (WEdit *edit)
 {
-    /* edit is a pointer to the widget */
+    // edit is a pointer to the widget
     if (edit != NULL)
     {
         long command = macro_index < 0 ? CK_RepeatStartRecord : CK_RepeatStopRecord;

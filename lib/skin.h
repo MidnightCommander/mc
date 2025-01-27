@@ -48,8 +48,8 @@
 /* Popup menu colors */
 #define PMENU_ENTRY_COLOR         mc_skin_color__cache[25]
 #define PMENU_SELECTED_COLOR      mc_skin_color__cache[26]
-#define PMENU_HOT_COLOR           mc_skin_color__cache[27]      /* unused: not implemented yet */
-#define PMENU_HOTSEL_COLOR        mc_skin_color__cache[28]      /* unused: not implemented yet */
+#define PMENU_HOT_COLOR           mc_skin_color__cache[27]      // unused: not implemented yet
+#define PMENU_HOTSEL_COLOR        mc_skin_color__cache[28]      // unused: not implemented yet
 #define PMENU_TITLE_COLOR         mc_skin_color__cache[29]
 
 #define BUTTONBAR_HOTKEY_COLOR    mc_skin_color__cache[30]
@@ -143,4 +143,4 @@ gchar *mc_skin_get (const gchar * group, const gchar * key, const gchar * defaul
 
 GPtrArray *mc_skin_list (void);
 
-#endif /* MC_SKIN_H */
+#endif // MC_SKIN_H

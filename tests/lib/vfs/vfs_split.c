@@ -29,7 +29,7 @@
 
 #include "lib/strutil.h"
 #include "lib/vfs/xdirentry.h"
-#include "lib/vfs/path.c"       /* for testing static methods  */
+#include "lib/vfs/path.c"       // for testing static methods
 
 #include "src/vfs/local/local.c"
 
@@ -80,77 +80,77 @@ static const struct test_vfs_split_ds
     const struct vfs_class *expected_result;
 } test_vfs_split_ds[] =
 {
-    { /* 0. */
+    { // 0.
         "#test1:/bla-bla/some/path/#test2:/bla-bla/some/path2/#test3:/qqq/www/eee.rr",
         "#test1:/bla-bla/some/path/#test2:/bla-bla/some/path2/",
         "qqq/www/eee.rr",
         "test3:",
         &vfs_test_ops3
     },
-    { /* 1. */
+    { // 1.
         "#test1:/bla-bla/some/path/#test2:/bla-bla/some/path2/",
         "#test1:/bla-bla/some/path/",
         "bla-bla/some/path2/",
         "test2:",
         &vfs_test_ops2
     },
-    { /* 2. */
+    { // 2.
         "#test1:/bla-bla/some/path/",
         "",
         "bla-bla/some/path/",
         "test1:",
         &vfs_test_ops1
     },
-    { /* 3. */
+    { // 3.
         "",
         "",
         NULL,
         NULL,
         NULL
     },
-    { /* 4. split with local */
+    { // 4. split with local
         "/local/path/#test1:/bla-bla/some/path/#test2:/bla-bla/some/path2#test3:/qqq/www/eee.rr",
         "/local/path/#test1:/bla-bla/some/path/#test2:/bla-bla/some/path2",
         "qqq/www/eee.rr",
         "test3:",
         &vfs_test_ops3
     },
-    { /* 5. split with local */
+    { // 5. split with local
         "/local/path/#test1:/bla-bla/some/path/#test2:/bla-bla/some/path2",
         "/local/path/#test1:/bla-bla/some/path/",
         "bla-bla/some/path2",
         "test2:",
         &vfs_test_ops2
     },
-    { /* 6. split with local */
+    { // 6. split with local
         "/local/path/#test1:/bla-bla/some/path/",
         "/local/path/",
         "bla-bla/some/path/",
         "test1:",
         &vfs_test_ops1
     },
-    { /* 7. split with local */
+    { // 7. split with local
         "/local/path/",
         "/local/path/",
         NULL,
         NULL,
         NULL
     },
-    { /* 8. split with URL */
+    { // 8. split with URL
         "#test2:username:passwd@somehost.net/bla-bla/some/path2",
         "",
         "bla-bla/some/path2",
         "test2:username:passwd@somehost.net",
         &vfs_test_ops2
     },
-    { /* 9. split URL with semi */
+    { // 9. split URL with semi
         "/local/path/#test1:/bla-bla/some/path/#test2:username:p!a@s#s$w%d@somehost.net/bla-bla/some/path2",
         "/local/path/#test1:/bla-bla/some/path/",
         "bla-bla/some/path2",
         "test2:username:p!a@s#s$w%d@somehost.net",
         &vfs_test_ops2
     },
-    { /* 10. split with semi in path */
+    { // 10. split with semi in path
         "#test2:/bl#a-bl#a/so#me/pa#th2",
         "",
         "bl#a-bl#a/so#me/pa#th2",
@@ -165,17 +165,17 @@ static const struct test_vfs_split_ds
 START_PARAMETRIZED_TEST (test_vfs_split, test_vfs_split_ds)
 /* *INDENT-ON* */
 {
-    /* given */
+    // given
     const char *local = NULL, *op = NULL;
     struct vfs_class *actual_result;
     char *path;
 
     path = g_strdup (data->input_string);
 
-    /* when */
+    // when
     actual_result = _vfs_split_with_semi_skip_count (path, &local, &op, 0);
 
-    /* then */
+    // then
     mctest_assert_ptr_eq (actual_result, data->expected_result);
     mctest_assert_str_eq (path, data->expected_path);
     mctest_assert_str_eq (local, data->expected_local);
@@ -197,9 +197,9 @@ main (void)
 
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, test_vfs_split, test_vfs_split_ds);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

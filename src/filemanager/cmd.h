@@ -9,7 +9,7 @@
 
 #include "lib/global.h"
 
-#include "file.h"               /* panel_operate() */
+#include "file.h"               // panel_operate()
 #include "panel.h"
 
 /*** typedefs(not structures) and defined constants **********************************************/
@@ -168,4 +168,4 @@ delete_cmd_local (WPanel *panel)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#endif /* MC__CMD_H */
+#endif // MC__CMD_H

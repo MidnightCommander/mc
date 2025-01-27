@@ -79,7 +79,7 @@ static gboolean handlers_installed = FALSE;
  * reconnect, as that would violate the X11 protocol. */
 static gboolean lost_connection = FALSE;
 
-static jmp_buf x11_exception;   /* FIXME: get a better name */
+static jmp_buf x11_exception;   // FIXME: get a better name
 static gboolean longjmp_allowed = FALSE;
 
 /* --------------------------------------------------------------------------------------------- */
@@ -184,12 +184,12 @@ mc_XOpenDisplay (const char *displayname)
         {
             Display *retval;
 
-            /* cppcheck-suppress redundantAssignment */
+            // cppcheck-suppress redundantAssignment
             longjmp_allowed = TRUE;
 
             retval = func_XOpenDisplay (displayname);
 
-            /* cppcheck-suppress redundantAssignment */
+            // cppcheck-suppress redundantAssignment
             longjmp_allowed = FALSE;
             return retval;
         }
@@ -208,12 +208,12 @@ mc_XCloseDisplay (Display *display)
         {
             int retval;
 
-            /* cppcheck-suppress redundantAssignment */
+            // cppcheck-suppress redundantAssignment
             longjmp_allowed = TRUE;
 
             retval = func_XCloseDisplay (display);
 
-            /* cppcheck-suppress redundantAssignment */
+            // cppcheck-suppress redundantAssignment
             longjmp_allowed = FALSE;
 
             return retval;
@@ -235,14 +235,14 @@ mc_XQueryPointer (Display *display, Window win, Window *root_return,
     {
         if (setjmp (x11_exception) == 0)
         {
-            /* cppcheck-suppress redundantAssignment */
+            // cppcheck-suppress redundantAssignment
             longjmp_allowed = TRUE;
 
             retval = func_XQueryPointer (display, win, root_return,
                                          child_return, root_x_return, root_y_return,
                                          win_x_return, win_y_return, mask_return);
 
-            /* cppcheck-suppress redundantAssignment */
+            // cppcheck-suppress redundantAssignment
             longjmp_allowed = FALSE;
 
             return retval;

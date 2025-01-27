@@ -33,25 +33,25 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/stat.h>
-#include <inttypes.h>           /* PRIuMAX */
+#include <inttypes.h>           // PRIuMAX
 
 #include "lib/global.h"
 #include "lib/unixcompat.h"
 #include "lib/tty/tty.h"
-#include "lib/tty/key.h"        /* is_idle() */
+#include "lib/tty/key.h"        // is_idle()
 #include "lib/skin.h"
 #include "lib/strutil.h"
-#include "lib/timefmt.h"        /* file_date() */
+#include "lib/timefmt.h"        // file_date()
 #include "lib/util.h"
 #include "lib/widget.h"
 
-#include "src/setup.h"          /* panels_options */
+#include "src/setup.h"          // panels_options
 
-#include "filemanager.h"        /* the_menubar */
+#include "filemanager.h"        // the_menubar
 #include "layout.h"
 #include "mountlist.h"
 #ifdef ENABLE_EXT2FS_ATTR
-#include "cmd.h"                /* chattr_get_as_str() */
+#include "cmd.h"                // chattr_get_as_str()
 #endif
 
 #include "info.h"
@@ -130,7 +130,7 @@ info_show_info (WInfo *info)
     if (get_current_type () != view_listing)
         return;
 
-    /* don't rely on vpath CWD when cd_symlinks enabled */
+    // don't rely on vpath CWD when cd_symlinks enabled
     p_rp_cwd = mc_realpath (vfs_path_as_str (current_panel->cwd_vpath), rp_cwd);
     if (p_rp_cwd == NULL)
         p_rp_cwd = vfs_path_as_str (current_panel->cwd_vpath);
@@ -143,11 +143,11 @@ info_show_info (WInfo *info)
 
     st = fe->st;
 
-    /* Print only lines which fit */
+    // Print only lines which fit
 
     if (i18n_adjust == 0)
     {
-        /* This printf pattern string is used as a reference for size */
+        // This printf pattern string is used as a reference for size
         file_label = _("File: %s");
         i18n_adjust = str_term_width1 (file_label) + 2;
     }
@@ -158,7 +158,7 @@ info_show_info (WInfo *info)
 
     switch (w->lines - 2)
     {
-        /* Note: all cases are fall-throughs */
+        // Note: all cases are fall-throughs
 
     default:
         MC_FALLTHROUGH;
@@ -230,7 +230,7 @@ info_show_info (WInfo *info)
         widget_gotoyx (w, 10, 3);
         /* The field st_ctime is changed by writing or by setting inode
            information (i.e., owner, group, link count, mode, etc.).  */
-        /* TRANSLATORS: Time of last status change as in stat(2) man. */
+        // TRANSLATORS: Time of last status change as in stat(2) man.
         str_printf (buff, _("Changed:    %s"), file_date (st.st_ctime));
         tty_print_string (buff->str);
         g_string_set_size (buff, 0);
@@ -280,7 +280,7 @@ info_show_info (WInfo *info)
         }
 #else
         tty_print_string (_("Attributes: unavailable"));
-#endif /* ENABLE_EXT2FS_ATTR */
+#endif // ENABLE_EXT2FS_ATTR
         MC_FALLTHROUGH;
     case 5:
         widget_gotoyx (w, 5, 3);
@@ -307,7 +307,7 @@ info_show_info (WInfo *info)
         MC_FALLTHROUGH;
     case 0:
         ;
-    }                           /* switch */
+    }                           // switch
     g_string_free (buff, TRUE);
 }
 

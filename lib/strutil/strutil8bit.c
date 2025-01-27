@@ -248,7 +248,7 @@ str_8bit_conv_gerror_message (GError *mcerror, const char *def_msg)
     GIConv conv;
     gchar *ret;
 
-    /* glib messages are in UTF-8 charset */
+    // glib messages are in UTF-8 charset
     conv = str_crt_conv_from ("UTF-8");
 
     if (conv == INVALID_CONV)
@@ -682,7 +682,7 @@ str_8bit_ncompare (const char *t1, const char *t2)
 static int
 str_8bit_casecmp (const char *s1, const char *s2)
 {
-    /* code from GLib */
+    // code from GLib
 
 #ifdef HAVE_STRCASECMP
     g_return_val_if_fail (s1 != NULL, 0);
@@ -726,7 +726,7 @@ str_8bit_ncasecmp (const char *s1, const char *s2)
     l2 = strlen (s2);
     n = MIN (l1, l2);
 
-    /* code from GLib */
+    // code from GLib
 
 #ifdef HAVE_STRNCASECMP
     return strncasecmp (s1, s2, n);

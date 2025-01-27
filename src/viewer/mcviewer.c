@@ -40,11 +40,11 @@
 #include "lib/tty/tty.h"
 #include "lib/vfs/vfs.h"
 #include "lib/strutil.h"
-#include "lib/util.h"           /* load_file_position() */
+#include "lib/util.h"           // load_file_position()
 #include "lib/widget.h"
 
 #include "src/filemanager/layout.h"
-#include "src/filemanager/filemanager.h"        /* the_menubar */
+#include "src/filemanager/filemanager.h"        // the_menubar
 
 #include "internal.h"
 
@@ -101,16 +101,16 @@ mcview_mouse_callback (Widget *w, mouse_msg_t msg, mouse_event_t *event)
         {
             if (event->y == WIDGET (w->owner)->rect.y)
             {
-                /* return MOU_UNHANDLED */
+                // return MOU_UNHANDLED
                 event->result.abort = TRUE;
-                /* don't draw viewer over menu */
+                // don't draw viewer over menu
                 ok = FALSE;
                 break;
             }
 
             if (!widget_get_state (w, WST_FOCUSED))
             {
-                /* Grab focus */
+                // Grab focus
                 (void) change_panel ();
             }
         }
@@ -119,10 +119,10 @@ mcview_mouse_callback (Widget *w, mouse_msg_t msg, mouse_event_t *event)
     case MSG_MOUSE_CLICK:
         if (!view->mode_flags.wrap)
         {
-            /* Scrolling left and right */
+            // Scrolling left and right
             int x;
 
-            x = event->x + 1;   /* FIXME */
+            x = event->x + 1;   // FIXME
 
             if (x < r->cols * 1 / 4)
             {
@@ -131,7 +131,7 @@ mcview_mouse_callback (Widget *w, mouse_msg_t msg, mouse_event_t *event)
             }
             else if (x < r->cols * 3 / 4)
             {
-                /* ignore the click */
+                // ignore the click
                 ok = FALSE;
             }
             else
@@ -142,10 +142,10 @@ mcview_mouse_callback (Widget *w, mouse_msg_t msg, mouse_event_t *event)
         }
         else
         {
-            /* Scrolling up and down */
+            // Scrolling up and down
             int y;
 
-            y = event->y + 1;   /* FIXME */
+            y = event->y + 1;   // FIXME
 
             if (y < r->y + r->lines * 1 / 3)
             {
@@ -158,7 +158,7 @@ mcview_mouse_callback (Widget *w, mouse_msg_t msg, mouse_event_t *event)
             }
             else if (y < r->y + r->lines * 2 / 3)
             {
-                /* ignore the click */
+                // ignore the click
                 ok = FALSE;
             }
             else
@@ -244,7 +244,7 @@ mcview_viewer (const char *command, const vfs_path_t *file_vpath, int start_line
     WGroup *g;
     WRect r;
 
-    /* Create dialog and widgets, put them on the dialog */
+    // Create dialog and widgets, put them on the dialog
     view_dlg = dlg_create (FALSE, 0, 0, 1, 1, WPOS_FULLSCREEN, FALSE, NULL, mcview_dialog_callback,
                            NULL, "[Internal File Viewer]", NULL);
     vw = WIDGET (view_dlg);
@@ -292,7 +292,7 @@ mcview_load (WView *view, const char *command, const char *file, int start_line,
 
     view->filename_vpath = vfs_path_from_str (file);
 
-    /* get working dir */
+    // get working dir
     if (file != NULL && file[0] != '\0')
     {
         vfs_path_free (view->workdir_vpath, TRUE);
@@ -307,7 +307,7 @@ mcview_load (WView *view, const char *command, const char *file, int start_line,
         }
         else
         {
-            /* try extract path from filename */
+            // try extract path from filename
             const char *fname;
             char *dir;
 
@@ -333,7 +333,7 @@ mcview_load (WView *view, const char *command, const char *file, int start_line,
         char tmp[BUF_MEDIUM];
         struct stat st;
 
-        /* Open the file */
+        // Open the file
         vpath = vfs_path_from_str (file);
         fd = mc_open (vpath, O_RDONLY | O_NONBLOCK);
         if (fd == -1)
@@ -349,7 +349,7 @@ mcview_load (WView *view, const char *command, const char *file, int start_line,
             goto finish;
         }
 
-        /* Make sure we are working with a regular file */
+        // Make sure we are working with a regular file
         if (mc_fstat (fd, &st) == -1)
         {
             mc_close (fd);
@@ -378,7 +378,7 @@ mcview_load (WView *view, const char *command, const char *file, int start_line,
 
         if (st.st_size == 0 || mc_lseek (fd, 0, SEEK_SET) == -1)
         {
-            /* Must be one of those nice files that grow (/proc) */
+            // Must be one of those nice files that grow (/proc)
             mcview_set_datasource_vfs_pipe (view, fd);
         }
         else

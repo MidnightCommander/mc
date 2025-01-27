@@ -77,11 +77,11 @@ mc_search__hex_translate_to_regex (const GString *astr, mc_search_hex_parse_erro
 
         if (g_ascii_isspace (str[loop]))
         {
-            /* Eat-up whitespace between tokens. */
+            // Eat-up whitespace between tokens.
             while (g_ascii_isspace (str[loop]))
                 loop++;
         }
-        /* cppcheck-suppress invalidscanf */
+        // cppcheck-suppress invalidscanf
         else if (sscanf (str + loop, "%x%n", &val, &ptr) == 1)
         {
             if (val > 255)

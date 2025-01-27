@@ -38,7 +38,7 @@
 #include "lib/tty/key.h"
 #include "lib/mcconfig.h"
 #include "lib/strutil.h"
-#include "lib/util.h"           /* convert_controls() */
+#include "lib/util.h"           // convert_controls()
 #include "lib/widget.h"
 
 #include "setup.h"
@@ -129,7 +129,7 @@ learn_button (WButton *button, int action)
 
     widget_select (learnkeys[action - B_USER].button);
 
-    return 0;                   /* Do not kill learn_dlg */
+    return 0;                   // Do not kill learn_dlg
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -179,7 +179,7 @@ learn_check_key (int c)
             continue;
 
         widget_select (learnkeys[i].button);
-        /* TRANSLATORS: This label appears near learned keys.  Keep it short.  */
+        // TRANSLATORS: This label appears near learned keys.  Keep it short.
         label_set_text (LABEL (learnkeys[i].label), _("OK"));
         learnkeys[i].ok = TRUE;
         learnok++;
@@ -255,7 +255,7 @@ init_learn (void)
     const int dlg_width = 78;
     const int dlg_height = 23;
 
-    /* buttons */
+    // buttons
     int bx0, bx1;
     const char *b0 = N_("&Save");
     const char *b1 = N_("&Cancel");
@@ -274,7 +274,7 @@ init_learn (void)
 
     b0 = _(b0);
     b1 = _(b1);
-#endif /* ENABLE_NLS */
+#endif // ENABLE_NLS
 
     do_refresh ();
 
@@ -283,7 +283,7 @@ init_learn (void)
                     learn_callback, NULL, "[Learn keys]", learn_title);
     g = GROUP (learn_dlg);
 
-    /* find first unshown button */
+    // find first unshown button
     for (key = key_name_conv_tab, learn_total = 0;
          key->name != NULL && strcmp (key->name, "kpleft") != 0; key++, learn_total++)
         ;
@@ -296,7 +296,7 @@ init_learn (void)
     x = UX;
     y = UY;
 
-    /* add buttons and "OK" labels */
+    // add buttons and "OK" labels
     for (i = 0; i < learn_total; i++)
     {
         char buffer[BUF_TINY];
@@ -332,9 +332,9 @@ init_learn (void)
                                      "which keys are not marked with OK. Press space on the missing\n"
                                      "key, or click with the mouse to define it. Move around with Tab.")));
     group_add_widget (g, hline_new (dlg_height - 4, -1, -1));
-    /* buttons */
-    bl0 = str_term_width1 (b0) + 5;     /* default button */
-    bl1 = str_term_width1 (b1) + 3;     /* normal button */
+    // buttons
+    bl0 = str_term_width1 (b0) + 5;     // default button
+    bl1 = str_term_width1 (b1) + 3;     // normal button
     bx0 = (dlg_width - (bl0 + bl1 + 1)) / 2;
     bx1 = bx0 + bl0 + 1;
     group_add_widget (g, button_new (dlg_height - 3, bx0, B_ENTER, DEFPUSH_BUTTON, b0, NULL));
@@ -374,10 +374,10 @@ learn_save (void)
             profile_changed = TRUE;
         }
 
-    /* On the one hand no good idea to save the complete setup but 
-     * without 'Auto save setup' the new key-definitions will not be 
-     * saved unless the user does an 'Options/Save Setup'. 
-     * On the other hand a save-button that does not save anything to 
+    /* On the one hand no good idea to save the complete setup but
+     * without 'Auto save setup' the new key-definitions will not be
+     * saved unless the user does an 'Options/Save Setup'.
+     * On the other hand a save-button that does not save anything to
      * disk is much worse.
      */
     if (profile_changed)
@@ -397,7 +397,7 @@ learn_keys (void)
     gboolean save_alternate_plus_minus = mc_global.tty.alternate_plus_minus;
     int result;
 
-    /* old_esc_mode cannot work in learn keys dialog */
+    // old_esc_mode cannot work in learn keys dialog
     old_esc_mode = 0;
 
     /* don't translate KP_ADD, KP_SUBTRACT and

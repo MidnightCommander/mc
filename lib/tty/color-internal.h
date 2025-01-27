@@ -6,7 +6,7 @@
 #ifndef MC__COLOR_INTERNAL_H
 #define MC__COLOR_INTERNAL_H
 
-#include <sys/types.h>          /* size_t */
+#include <sys/types.h>          // size_t
 
 #include "lib/global.h"
 
@@ -14,7 +14,7 @@
 #include "tty-slang.h"
 #else
 #include "tty-ncurses.h"
-#endif /* HAVE_SLANG */
+#endif // HAVE_SLANG
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -59,4 +59,4 @@ void tty_color_try_alloc_lib_pair (tty_color_lib_pair_t * mc_color_pair);
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__COLOR_INTERNAL_H */
+#endif // MC__COLOR_INTERNAL_H

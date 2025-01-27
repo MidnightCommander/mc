@@ -28,7 +28,7 @@
 #include "tests/mctest.h"
 
 #include "lib/strutil.h"
-#include "lib/util.h"           /* _GL_CMP() */
+#include "lib/util.h"           // _GL_CMP()
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -117,14 +117,14 @@ static const struct filevercmp_test_struct
 START_TEST (filevercmp_test1)
 /* *INDENT-ON* */
 {
-    /* given */
+    // given
     int actual_result;
     const struct filevercmp_test_struct *data = &filevercmp_test_ds1[_i];
 
-    /* when */
+    // when
     actual_result = filevercmp (data->s1, data->s2);
 
-    /* then */
+    // then
     ck_assert_int_eq (sign (actual_result), sign (data->expected_result));
 }
 /* *INDENT-OFF* */
@@ -385,13 +385,13 @@ main (void)
 
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, filevercmp_test1, filevercmp_test_ds1);
     tcase_add_loop_test (tc_core, filevercmp_test2, 0, filevercmp_test_ds2_len);
     tcase_add_loop_test (tc_core, filevercmp_test3, 0, filevercmp_test_ds3_len);
     tcase_add_loop_test (tc_core, filevercmp_test4, 0, filevercmp_test_ds4_len);
     tcase_add_test (tc_core, filevercmp_test5);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

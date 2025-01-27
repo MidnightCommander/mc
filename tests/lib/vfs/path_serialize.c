@@ -135,12 +135,12 @@ teardown (void)
 START_TEST (test_path_serialize)
 /* *INDENT-ON* */
 {
-    /* given */
+    // given
     vfs_path_t *vpath;
     char *serialized_vpath;
     GError *error = NULL;
 
-    /* when */
+    // when
     vpath = vfs_path_from_str_flags (ETALON_PATH_STR, VPF_USE_DEPRECATED_PARSER);
     serialized_vpath = vfs_path_serialize (vpath, &error);
 
@@ -149,7 +149,7 @@ START_TEST (test_path_serialize)
     if (error != NULL)
         g_error_free (error);
 
-    /* then */
+    // then
     mctest_assert_ptr_ne (serialized_vpath, NULL);
     mctest_assert_str_eq (serialized_vpath, ETALON_SERIALIZED_PATH);
 }
@@ -163,14 +163,14 @@ END_TEST
 START_TEST (test_path_deserialize)
 /* *INDENT-ON* */
 {
-    /* given */
+    // given
     vfs_path_t *vpath;
     GError *error = NULL;
 
-    /* when */
+    // when
     vpath = vfs_path_deserialize (ETALON_SERIALIZED_PATH, &error);
 
-    /* then */
+    // then
     mctest_assert_ptr_ne (vpath, NULL);
     mctest_assert_str_eq (vfs_path_as_str (vpath), ETALON_PATH_URL_STR);
 
@@ -192,10 +192,10 @@ main (void)
 
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     tcase_add_test (tc_core, test_path_serialize);
     tcase_add_test (tc_core, test_path_deserialize);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

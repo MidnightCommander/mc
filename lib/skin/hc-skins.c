@@ -87,7 +87,7 @@ mc_skin_hardcoded_blackwhite_colors (mc_skin_t *mc_skin)
 void
 mc_skin_hardcoded_space_lines (mc_skin_t *mc_skin)
 {
-    /* single lines */
+    // single lines
     set_lines ("vert", " ");
     set_lines ("horiz", " ");
     set_lines ("lefttop", " ");
@@ -117,7 +117,7 @@ mc_skin_hardcoded_space_lines (mc_skin_t *mc_skin)
 void
 mc_skin_hardcoded_ugly_lines (mc_skin_t *mc_skin)
 {
-    /* single lines */
+    // single lines
     set_lines ("vert", "|");
     set_lines ("horiz", "-");
     set_lines ("lefttop", "+");
@@ -130,7 +130,7 @@ mc_skin_hardcoded_ugly_lines (mc_skin_t *mc_skin)
     set_lines ("rightmiddle", "|");
     set_lines ("cross", "+");
 
-    /* double lines */
+    // double lines
     set_lines ("dvert", "|");
     set_lines ("dhoriz", "-");
     set_lines ("dlefttop", "+");

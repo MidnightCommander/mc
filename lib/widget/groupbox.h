@@ -29,4 +29,4 @@ void groupbox_set_title (WGroupbox * g, const char *title);
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__WIDGET_GROUPBOX_H */
+#endif // MC__WIDGET_GROUPBOX_H

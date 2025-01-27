@@ -28,8 +28,8 @@
 
 #include <config.h>
 #include <stdlib.h>
-#include <string.h>             /* strcmp() */
-#include <sys/types.h>          /* size_t */
+#include <string.h>             // strcmp()
+#include <sys/types.h>          // size_t
 
 #include "internal.h"
 

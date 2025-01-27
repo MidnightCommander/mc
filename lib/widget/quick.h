@@ -271,7 +271,7 @@ struct quick_widget_t
     widget_pos_flags_t pos_flags;
     unsigned long *id;
 
-    /* widget parameters */
+    // widget parameters
     union
     {
         struct
@@ -294,7 +294,7 @@ struct quick_widget_t
             quick_widget_t *label;
             const char *text;
             input_complete_t completion_flags;
-            gboolean is_passwd; /* TRUE -- is password */
+            gboolean is_passwd; // TRUE -- is password
             gboolean strip_passwd;
             const char *histname;
             char **result;
@@ -351,4 +351,4 @@ quick_dialog (quick_dialog_t *quick_dlg)
     return quick_dialog_skip (quick_dlg, 1);
 }
 
-#endif /* MC__QUICK_H */
+#endif // MC__QUICK_H

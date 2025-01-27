@@ -40,4 +40,4 @@ void frame_set_title (WFrame * f, const char *title);
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__WIDGET_FRAME_H */
+#endif // MC__WIDGET_FRAME_H

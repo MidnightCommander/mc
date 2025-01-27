@@ -68,7 +68,7 @@ mcview_nroff_get_char (mcview_nroff_t *nroff, int *ret_val, off_t nroff_index)
     {
         if (!mcview_get_utf (nroff->view, nroff_index, &c, &nroff->char_length))
         {
-            /* we need got symbol in any case */
+            // we need got symbol in any case
             nroff->char_length = 1;
             if (!mcview_get_byte (nroff->view, nroff_index, &c) || !g_ascii_isprint (c))
                 return FALSE;
@@ -109,10 +109,10 @@ mcview__get_nroff_real_len (WView *view, off_t start, off_t length)
         switch (nroff->type)
         {
         case NROFF_TYPE_BOLD:
-            ret += 1 + nroff->char_length;      /* real char length and 0x8 */
+            ret += 1 + nroff->char_length;      // real char length and 0x8
             break;
         case NROFF_TYPE_UNDERLINE:
-            ret += 2;           /* underline symbol and ox8 */
+            ret += 2;           // underline symbol and ox8
             break;
         default:
             break;
@@ -198,7 +198,7 @@ mcview_nroff_seq_info (mcview_nroff_t *nroff)
     }
     else if (nroff->current_char == '+' && next2 == 'o')
     {
-        /* ??? */
+        // ???
     }
     return nroff->type;
 }

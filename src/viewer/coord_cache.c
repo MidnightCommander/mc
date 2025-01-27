@@ -49,9 +49,9 @@
 
 #include <config.h>
 
-#include <string.h>             /* memset() */
+#include <string.h>             // memset()
 #ifdef MC_ENABLE_DEBUGGING_CODE
-#include <inttypes.h>           /* uintmax_t */
+#include <inttypes.h>           // uintmax_t
 #endif
 
 #include "lib/global.h"
@@ -145,12 +145,12 @@ mcview_ccache_find (WView *view, const coord_cache_entry_t *coord, cmp_func_t cm
         i = base + limit / 2;
         if (cmp_func (coord, coord_cache_index (view->coord_cache, i)))
         {
-            /* continue the search in the lower half of the cache */
+            // continue the search in the lower half of the cache
             ;
         }
         else
         {
-            /* continue the search in the upper half of the cache */
+            // continue the search in the upper half of the cache
             base = i;
         }
 
@@ -184,7 +184,7 @@ mcview_ccache_dump (WView *view)
 
     (void) setvbuf (f, NULL, _IONBF, 0);
 
-    /* cache entries */
+    // cache entries
     for (i = 0; i < cache->len; i++)
     {
         coord_cache_entry_t *e;
@@ -200,7 +200,7 @@ mcview_ccache_dump (WView *view)
     }
     (void) fprintf (f, "\n");
 
-    /* offset -> line/column translation */
+    // offset -> line/column translation
     for (offset = 0; offset < filesize; offset++)
     {
         mcview_offset_to_coord (view, &line, &column, offset);
@@ -209,7 +209,7 @@ mcview_ccache_dump (WView *view)
                         (uintmax_t) offset, (uintmax_t) line, (uintmax_t) column);
     }
 
-    /* line/column -> offset translation */
+    // line/column -> offset translation
     for (line = 0; TRUE; line++)
     {
         mcview_coord_to_offset (view, &nextline_offset, line + 1, 0);
@@ -280,9 +280,9 @@ mcview_ccache_lookup (WView *view, coord_cache_entry_t *coord, enum ccache_type 
     tty_enable_interrupt_key ();
 
   retry:
-    /* find the two neighbor entries in the cache */
+    // find the two neighbor entries in the cache
     i = mcview_ccache_find (view, coord, cmp_func);
-    /* now i points to the lower neighbor in the cache */
+    // now i points to the lower neighbor in the cache
 
     current = *coord_cache_index (cache, i);
     if (i + 1 < view->coord_cache->len)
@@ -303,13 +303,13 @@ mcview_ccache_lookup (WView *view, coord_cache_entry_t *coord, enum ccache_type 
             (lookup_what != CCACHE_OFFSET || !view->mode_flags.nroff || nroff_state == NROFF_START))
             break;
 
-        /* Provide useful default values for 'next' */
+        // Provide useful default values for 'next'
         next.cc_offset = current.cc_offset + 1;
         next.cc_line = current.cc_line;
         next.cc_column = current.cc_column + 1;
         next.cc_nroff_column = current.cc_nroff_column + 1;
 
-        /* and override some of them as necessary. */
+        // and override some of them as necessary.
         if (c == '\r')
         {
             int nextc = -1;
@@ -347,7 +347,7 @@ mcview_ccache_lookup (WView *view, coord_cache_entry_t *coord, enum ccache_type 
         }
         else
         {
-            ;                   /* Use all default values from above */
+            ;                   // Use all default values from above
         }
 
         switch (nroff_state)

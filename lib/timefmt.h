@@ -46,8 +46,8 @@
 
 /*** global variables defined in .c file *********************************************************/
 
-extern char *user_recent_timeformat;    /* time format string for recent dates */
-extern char *user_old_timeformat;       /* time format string for older dates */
+extern char *user_recent_timeformat;    // time format string for recent dates
+extern char *user_old_timeformat;       // time format string for older dates
 
 /*** declarations of public functions ************************************************************/
 
@@ -56,4 +56,4 @@ const char *file_date (time_t when);
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__UTIL_TIMEFMT_H */
+#endif // MC__UTIL_TIMEFMT_H

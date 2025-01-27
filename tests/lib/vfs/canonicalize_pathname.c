@@ -85,80 +85,98 @@ static const struct test_canonicalize_path_ds
     const char *expected_path;
 } test_canonicalize_path_ds[] =
 {
-    { /* 0. UNC path */
+    // 0. UNC path
+    {
         "//some_server/ww",
         "//some_server/ww"
     },
-    { /* 1. join slashes */
+    // 1. join slashes
+    {
         "///some_server/////////ww",
         "/some_server/ww"
     },
-    { /* 2. Collapse "/./" -> "/" */
+    // 2. Collapse "/./" -> "/"
+    {
         "//some_server//.///////ww/./././.",
         "//some_server/ww"
     },
-    {/* 3. Remove leading "./" */
+    // 3. Remove leading "./"
+    {
         "./some_server/ww",
         "some_server/ww"
     },
-    { /* 4. some/.. -> . */
+    // 4. some/.. -> .
+    {
         "some_server/..",
         "."
     },
-    { /* 5. Collapse "/.." with the previous part of path */
+    // 5. Collapse "/.." with the previous part of path
+    {
         "/some_server/ww/some_server/../ww/../some_server/..//ww/some_server/ww",
         "/some_server/ww/ww/some_server/ww"
     },
-    { /* 6. URI style */
+    // 6. URI style
+    {
         "/some_server/ww/ftp://user:pass@host.net/path/",
         "/some_server/ww/ftp://user:pass@host.net/path"
     },
-    { /* 7. */
+    // 7.
+    {
         "/some_server/ww/ftp://user:pass@host.net/path/../../",
         "/some_server/ww"
     },
-    { /* 8. */
+    // 8.
+    {
         "ftp://user:pass@host.net/path/../../",
         "."
     },
-    { /* 9. */
+    // 9.
+    {
         "ftp://user/../../",
         ".."
     },
 #ifdef HAVE_CHARSET
-    { /* 10. Supported encoding */
+    // 10. Supported encoding
+    {
         "/b/#enc:utf-8/../c",
         "/c"
     },
-    { /* 11. Unsupported encoding */
+    // 11. Unsupported encoding
+    {
         "/b/#enc:aaaa/../c",
         "/b/c"
     },
-    { /* 12. Supported encoding */
+    // 12. Supported encoding
+    {
         "/b/../#enc:utf-8/c",
         "/#enc:utf-8/c"
     },
-    { /* 13. Unsupported encoding */
+    // 13. Unsupported encoding
+    {
         "/b/../#enc:aaaa/c",
         "/#enc:aaaa/c"
     },
-    { /* 14.  Supported encoding */
+    // 14.  Supported encoding
+    {
         "/b/c/#enc:utf-8/..",
         "/b"
     },
-    { /* 15.  Unsupported encoding */
+    // 15.  Unsupported encoding
+    {
         "/b/c/#enc:aaaa/..",
         "/b/c"
     },
-    { /* 16.  Supported encoding */
+    // 16.  Supported encoding
+    {
         "/b/c/../#enc:utf-8",
         "/b/#enc:utf-8"
     },
-    { /* 17.  Unsupported encoding */
+    // 17.  Unsupported encoding
+    {
         "/b/c/../#enc:aaaa",
         "/b/#enc:aaaa"
     },
-#endif  /* HAVE_CHARSET */
+#endif  // HAVE_CHARSET
 };
 /* *INDENT-ON* */
 
@@ -167,15 +185,15 @@ static const struct test_canonicalize_path_ds
 START_PARAMETRIZED_TEST (test_canonicalize_path, test_canonicalize_path_ds)
 /* *INDENT-ON* */
 {
-    /* given */
+    // given
     char *actual_path;
 
     actual_path = g_strdup (data->input_path);
 
-    /* when */
+    // when
     canonicalize_pathname (actual_path);
 
-    /* then */
+    // then
     mctest_assert_str_eq (actual_path, data->expected_path) g_free (actual_path);
 }
 /* *INDENT-OFF* */
@@ -193,9 +211,9 @@ main (void)
 
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, test_canonicalize_path, test_canonicalize_path_ds);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

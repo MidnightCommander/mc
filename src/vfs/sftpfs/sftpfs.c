@@ -28,14 +28,14 @@
 #include <config.h>
 #include <errno.h>
 #include <stdlib.h>
-#include <string.h>             /* memset() */
+#include <string.h>             // memset()
 
 #include "lib/global.h"
 #include "lib/vfs/netutil.h"
 #include "lib/vfs/utilvfs.h"
 #include "lib/vfs/gc.h"
 #include "lib/widget.h"
-#include "lib/tty/tty.h"        /* tty_enable_interrupt_key () */
+#include "lib/tty/tty.h"        // tty_enable_interrupt_key ()
 
 #include "internal.h"
 
@@ -44,7 +44,7 @@
 /*** global variables ****************************************************************************/
 
 struct vfs_s_subclass sftpfs_subclass;
-struct vfs_class *vfs_sftpfs_ops = VFS_CLASS (&sftpfs_subclass);        /* used in file.c */
+struct vfs_class *vfs_sftpfs_ops = VFS_CLASS (&sftpfs_subclass);        // used in file.c
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -182,7 +182,7 @@ sftpfs_cb_opendir (const vfs_path_t *vpath)
     GError *mcerror = NULL;
     void *ret_value;
 
-    /* reset interrupt flag */
+    // reset interrupt flag
     tty_got_interrupt ();
 
     ret_value = sftpfs_opendir (vpath, &mcerror);

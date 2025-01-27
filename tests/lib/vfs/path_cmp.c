@@ -79,38 +79,38 @@ static const struct test_path_equal_ds
     const gboolean expected_result;
 } test_path_equal_ds[] =
 {
-    { /* 0. */
+    { // 0.
         NULL,
         NULL,
         FALSE
     },
-    { /* 1. */
+    { // 1.
         NULL,
         "/test/path",
         FALSE
     },
-    { /* 2. */
+    { // 2.
         "/test/path",
         NULL,
         FALSE
     },
-    { /* 3. */
+    { // 3.
         "/test/path",
         "/test/path",
         TRUE
     },
 #ifdef HAVE_CHARSET
-    { /* 4. */
+    { // 4.
         "/#enc:KOI8-R/тестовый/путь",
         "/тестовый/путь",
         FALSE
     },
-    { /* 5. */
+    { // 5.
         "/тестовый/путь",
         "/#enc:KOI8-R/тестовый/путь",
         FALSE
     },
-    { /* 6. */
+    { // 6.
         "/#enc:KOI8-R/тестовый/путь",
         "/#enc:KOI8-R/тестовый/путь",
         TRUE
@@ -124,17 +124,17 @@ static const struct test_path_equal_ds
 START_PARAMETRIZED_TEST (test_path_equal, test_path_equal_ds)
 /* *INDENT-ON* */
 {
-    /* given */
+    // given
     vfs_path_t *vpath1, *vpath2;
     gboolean actual_result;
 
     vpath1 = vfs_path_from_str (data->input_path1);
     vpath2 = vfs_path_from_str (data->input_path2);
 
-    /* when */
+    // when
     actual_result = vfs_path_equal (vpath1, vpath2);
 
-    /* then */
+    // then
     ck_assert_int_eq (actual_result, data->expected_result);
 
     vfs_path_free (vpath1, TRUE);
@@ -156,49 +156,49 @@ static const struct test_path_equal_len_ds
     const gboolean expected_result;
 } test_path_equal_len_ds[] =
 {
-    { /* 0. */
+    { // 0.
         NULL,
         NULL,
         0,
         FALSE
     },
-    { /* 1. */
+    { // 1.
         NULL,
         NULL,
         100,
         FALSE
     },
-    { /* 2. */
+    { // 2.
         NULL,
         "/тестовый/путь",
         10,
         FALSE
     },
-    { /* 3. */
+    { // 3.
         "/тестовый/путь",
         NULL,
         10,
         FALSE
     },
-    { /* 4. */
+    { // 4.
         "/тестовый/путь",
         "/тестовый/путь",
         10,
         TRUE
     },
-    { /* 5. */
+    { // 5.
         "/тест/овый/путь",
         "/тестовый/путь",
         8,
         TRUE
     },
-    { /* 6. */
+    { // 6.
         "/тест/овый/путь",
         "/тестовый/путь",
         10,
         FALSE
     },
-    { /* 7. */
+    { // 7.
         "/тестовый/путь",
         "/тест/овый/путь",
         10,
@@ -212,17 +212,17 @@ static const struct test_path_equal_len_ds
 START_PARAMETRIZED_TEST (test_path_equal_len, test_path_equal_len_ds)
 /* *INDENT-ON* */
 {
-    /* given */
+    // given
     vfs_path_t *vpath1, *vpath2;
     gboolean actual_result;
 
     vpath1 = vfs_path_from_str (data->input_path1);
     vpath2 = vfs_path_from_str (data->input_path2);
 
-    /* when */
+    // when
     actual_result = vfs_path_equal_len (vpath1, vpath2, data->input_length);
 
-    /* then */
+    // then
     ck_assert_int_eq (actual_result, data->expected_result);
 
     vfs_path_free (vpath1, TRUE);
@@ -243,10 +243,10 @@ main (void)
 
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, test_path_equal, test_path_equal_ds);
     mctest_add_parameterized_test (tc_core, test_path_equal_len, test_path_equal_len_ds);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

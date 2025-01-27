@@ -40,7 +40,7 @@
 #if !defined DEV_BSIZE && defined BSIZE
 #define DEV_BSIZE BSIZE
 #endif
-#if !defined DEV_BSIZE && defined BBSIZE        /* SGI sys/param.h */
+#if !defined DEV_BSIZE && defined BBSIZE        // SGI sys/param.h
 #define DEV_BSIZE BBSIZE
 #endif
 #ifndef DEV_BSIZE
@@ -55,12 +55,12 @@
    ST_NBLOCKSIZE: Size of blocks used when calculating ST_NBLOCKS.  */
 #ifndef HAVE_STRUCT_STAT_ST_BLOCKS
 #define ST_BLKSIZE(statbuf) DEV_BSIZE
-  /* coreutils' fileblocks.c also uses BSIZE.  */
+  // coreutils' fileblocks.c also uses BSIZE.
 #if defined _POSIX_SOURCE || !defined BSIZE
 #define ST_NBLOCKS(statbuf) \
   ((statbuf).st_size / ST_NBLOCKSIZE + ((statbuf).st_size % ST_NBLOCKSIZE != 0))
 #else
-   /* This definition calls st_blocks, which is in the fileblocks module. */
+   // This definition calls st_blocks, which is in the fileblocks module.
 #define ST_NBLOCKS(statbuf) \
   (S_ISREG ((statbuf).st_mode) || S_ISDIR ((statbuf).st_mode) ? \
    st_blocks ((statbuf).st_size) : 0)
@@ -96,4 +96,4 @@
 #endif
 #endif
 
-#endif /* STAT_SIZE_H */
+#endif // STAT_SIZE_H

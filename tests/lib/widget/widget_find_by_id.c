@@ -45,41 +45,41 @@ START_TEST (test_widget_find_by_id)
 
     g = g_new0 (WGroup, 1);
     rect_init (&r, 0, 0, 20, 20);
-    group_init (g, &r, NULL, NULL);     /* ID = 0 */
+    group_init (g, &r, NULL, NULL);     // ID = 0
 
     g0 = g_new0 (WGroup, 1);
     rect_init (&r, 0, 0, 10, 10);
-    group_init (g0, &r, NULL, NULL);    /* ID = 1 */
+    group_init (g0, &r, NULL, NULL);    // ID = 1
     group_add_widget (g, g0);
 
     w0 = g_new0 (Widget, 1);
     rect_init (&r, 0, 0, 5, 5);
-    widget_init (w0, &r, widget_default_callback, NULL);        /* ID = 2 */
+    widget_init (w0, &r, widget_default_callback, NULL);        // ID = 2
     group_add_widget (g0, w0);
 
     w0 = g_new0 (Widget, 1);
     rect_init (&r, 5, 5, 5, 5);
-    widget_init (w0, &r, widget_default_callback, NULL);        /* ID = 3 */
+    widget_init (w0, &r, widget_default_callback, NULL);        // ID = 3
     group_add_widget (g0, w0);
 
     g0 = g_new0 (WGroup, 1);
     rect_init (&r, 10, 10, 10, 10);
-    group_init (g0, &r, NULL, NULL);    /* ID = 4 */
+    group_init (g0, &r, NULL, NULL);    // ID = 4
     group_add_widget (g, g0);
 
     w0 = g_new0 (Widget, 1);
     rect_init (&r, 10, 10, 5, 5);
-    widget_init (w0, &r, widget_default_callback, NULL);        /* ID = 5 */
+    widget_init (w0, &r, widget_default_callback, NULL);        // ID = 5
     group_add_widget (g0, w0);
 
     w0 = g_new0 (Widget, 1);
     rect_init (&r, 15, 15, 5, 5);
-    widget_init (w0, &r, widget_default_callback, NULL);        /* ID = 6 */
+    widget_init (w0, &r, widget_default_callback, NULL);        // ID = 6
     group_add_widget (g0, w0);
 
     w0 = g_new0 (Widget, 1);
     rect_init (&r, 5, 5, 10, 10);
-    widget_init (w0, &r, widget_default_callback, NULL);        /* ID = 7 */
+    widget_init (w0, &r, widget_default_callback, NULL);        // ID = 7
     group_add_widget (g, w0);
 
     w0 = WIDGET (g);
@@ -110,9 +110,9 @@ main (void)
 
     tc_core = tcase_create ("Core");
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     tcase_add_test (tc_core, test_widget_find_by_id);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

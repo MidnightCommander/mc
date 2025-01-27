@@ -41,14 +41,14 @@
 #include "lib/global.h"
 
 #include "lib/tty/tty.h"
-#include "lib/tty/key.h"        /* XCTRL and ALT macros  */
+#include "lib/tty/key.h"        // XCTRL and ALT macros
 #include "lib/fileloc.h"
 #include "lib/skin.h"
 #include "lib/strutil.h"
 #include "lib/util.h"
 #include "lib/widget.h"
-#include "lib/event.h"          /* mc_event_raise() */
-#include "lib/mcconfig.h"       /* mc_config_history_*() */
+#include "lib/event.h"          // mc_event_raise()
+#include "lib/mcconfig.h"       // mc_config_history_*()
 
 /*** global variables ****************************************************************************/
 
@@ -173,7 +173,7 @@ do_show_hist (WInput *in)
         g_free (hd.text);
     }
 
-    /* Has history cleaned up or not? */
+    // Has history cleaned up or not?
     if (len != get_history_length (in->history.list))
         in->history.changed = TRUE;
 }
@@ -195,7 +195,7 @@ input_history_strip_password (char *url)
     if (at == NULL)
         return g_strdup (url);
 
-    /* TODO: handle ':' and '@' in password */
+    // TODO: handle ':' and '@' in password
 
     delim = strstr (url, VFS_PATH_URL_DELIMITER);
     if (delim != NULL)
@@ -203,8 +203,8 @@ input_history_strip_password (char *url)
     else
         colon = strchr (url, ':');
 
-    /* if 'colon' before 'at', 'colon' delimits user and password: user:password@host */
-    /* if 'colon' after 'at', 'colon' delimits host and port: user@host:port */
+    // if 'colon' before 'at', 'colon' delimits user and password: user:password@host
+    // if 'colon' after 'at', 'colon' delimits host and port: user@host:port
     if (colon != NULL && colon > at)
         colon = NULL;
 
@@ -396,9 +396,9 @@ copy_region (WInput *in, int start, int end)
 
     if (last == first)
     {
-        /* Copy selected files to clipboard */
+        // Copy selected files to clipboard
         mc_event_raise (MCEVENT_GROUP_FILEMANAGER, "panel_save_current_file_to_clip_file", NULL);
-        /* try use external clipboard utility */
+        // try use external clipboard utility
         mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_to_ext_clip", NULL);
         return;
     }
@@ -411,7 +411,7 @@ copy_region (WInput *in, int start, int end)
     kill_buffer = g_strndup (in->buffer->str + first, last - first);
 
     mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_text_to_file", kill_buffer);
-    /* try use external clipboard utility */
+    // try use external clipboard utility
     mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_to_ext_clip", NULL);
 }
 
@@ -455,7 +455,7 @@ insert_char (WInput *in, int c_code)
     if (res < 0)
     {
         if (res != -2)
-            in->charpoint = 0;  /* broken multibyte char, skip */
+            in->charpoint = 0;  // broken multibyte char, skip
         return MSG_HANDLED;
     }
 
@@ -566,7 +566,7 @@ ins_from_clip (WInput *in)
     char *p = NULL;
     ev_clipboard_text_from_file_t event_data = { NULL, FALSE };
 
-    /* try use external clipboard utility */
+    // try use external clipboard utility
     mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_from_ext_clip", NULL);
 
     event_data.text = &p;
@@ -663,11 +663,11 @@ input_execute_cmd (WInput *in, long command)
     case CK_MarkToWordEnd:
     case CK_MarkToHome:
     case CK_MarkToEnd:
-        /* a highlight command like shift-arrow */
+        // a highlight command like shift-arrow
         if (in->mark < 0)
         {
-            input_mark_cmd (in, FALSE); /* clear */
-            input_mark_cmd (in, TRUE);  /* marking on */
+            input_mark_cmd (in, FALSE); // clear
+            input_mark_cmd (in, TRUE);  // marking on
         }
         break;
     case CK_WordRight:
@@ -790,7 +790,7 @@ input_execute_cmd (WInput *in, long command)
     case CK_MarkToWordEnd:
     case CK_MarkToHome:
     case CK_MarkToEnd:
-        /* do nothing */
+        // do nothing
         break;
     default:
         in->mark = -1;
@@ -861,10 +861,10 @@ input_destroy (WInput *in)
 {
     input_complete_free (in);
 
-    /* clean history */
+    // clean history
     if (in->history.list != NULL)
     {
-        /* history is already saved before this moment */
+        // history is already saved before this moment
         in->history.list = g_list_first (in->history.list);
         g_list_free_full (in->history.list, g_free);
     }
@@ -897,7 +897,7 @@ input_screen_to_point (const WInput *in, int x)
 static void
 input_mouse_callback (Widget *w, mouse_msg_t msg, mouse_event_t *event)
 {
-    /* save point between MSG_MOUSE_DOWN and MSG_MOUSE_DRAG */
+    // save point between MSG_MOUSE_DOWN and MSG_MOUSE_DRAG
     static int prev_point = 0;
     WInput *in = INPUT (w);
 
@@ -913,13 +913,13 @@ input_mouse_callback (Widget *w, mouse_msg_t msg, mouse_event_t *event)
             in->first = FALSE;
             input_mark_cmd (in, FALSE);
             input_set_point (in, input_screen_to_point (in, event->x));
-            /* save point for the possible following MSG_MOUSE_DRAG action */
+            // save point for the possible following MSG_MOUSE_DRAG action
             prev_point = in->point;
         }
         break;
 
     case MSG_MOUSE_DRAG:
-        /* start point: set marker using point before first MSG_MOUSE_DRAG action */
+        // start point: set marker using point before first MSG_MOUSE_DRAG action
         if (in->mark < 0)
             in->mark = prev_point;
 
@@ -927,7 +927,7 @@ input_mouse_callback (Widget *w, mouse_msg_t msg, mouse_event_t *event)
         break;
 
     default:
-        /* don't create highlight region of 0 length */
+        // don't create highlight region of 0 length
         if (in->mark == in->point)
             input_mark_cmd (in, FALSE);
         break;
@@ -970,10 +970,10 @@ input_new (int y, int x, const int *colors, int width, const char *def_text,
     in->is_password = FALSE;
     in->strip_password = FALSE;
 
-    /* in->buffer will be corrected in "history_load" event handler */
+    // in->buffer will be corrected in "history_load" event handler
     in->buffer = g_string_sized_new (width);
 
-    /* init completions before input_assign_text() call */
+    // init completions before input_assign_text() call
     in->completions = NULL;
     in->completion_flags = completion_flags;
 
@@ -984,14 +984,14 @@ input_new (int y, int x, const int *colors, int width, const char *def_text,
 
     input_assign_text (in, def_text);
 
-    /* prepare to history setup */
+    // prepare to history setup
     in->history.list = NULL;
     in->history.current = NULL;
     in->history.changed = FALSE;
     in->history.name = NULL;
     if ((histname != NULL) && (*histname != '\0'))
         in->history.name = g_strdup (histname);
-    /* history will be loaded later */
+    // history will be loaded later
 
     in->label = NULL;
 
@@ -1010,9 +1010,9 @@ input_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *dat
     switch (msg)
     {
     case MSG_INIT:
-        /* subscribe to "history_load" event */
+        // subscribe to "history_load" event
         mc_event_add (h->event_group, MCEVENT_HISTORY_LOAD, input_load_history, w, NULL);
-        /* subscribe to "history_save" event */
+        // subscribe to "history_save" event
         mc_event_add (h->event_group, MCEVENT_HISTORY_SAVE, input_save_history, w, NULL);
         if (in->label != NULL)
             widget_set_state (WIDGET (in->label), WST_DISABLED, widget_get_state (w, WST_DISABLED));
@@ -1027,12 +1027,12 @@ input_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *dat
             return v;
         }
 
-        /* Keys we want others to handle */
+        // Keys we want others to handle
         if (parm == KEY_UP || parm == KEY_DOWN || parm == ESC_CHAR
             || parm == KEY_F (10) || parm == '\n')
             return MSG_NOT_HANDLED;
 
-        /* When pasting multiline text, insert literal Enter */
+        // When pasting multiline text, insert literal Enter
         if ((parm & ~KEY_M_MASK) == '\n')
         {
             quote = TRUE;
@@ -1061,9 +1061,9 @@ input_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *dat
         return MSG_HANDLED;
 
     case MSG_DESTROY:
-        /* unsubscribe from "history_load" event */
+        // unsubscribe from "history_load" event
         mc_event_del (h->event_group, MCEVENT_HISTORY_LOAD, input_load_history, w);
-        /* unsubscribe from "history_save" event */
+        // unsubscribe from "history_save" event
         mc_event_del (h->event_group, MCEVENT_HISTORY_SAVE, input_save_history, w);
         input_destroy (in);
         return MSG_HANDLED;
@@ -1154,7 +1154,7 @@ input_insert (WInput *in, const char *text, gboolean insert_extra_space)
 {
     input_disable_update (in);
     while (*text != '\0')
-        input_handle_char (in, (unsigned char) *text++);        /* unsigned extension char->int */
+        input_handle_char (in, (unsigned char) *text++);        // unsigned extension char->int
     if (insert_extra_space)
         input_handle_char (in, ' ');
     input_enable_update (in);
@@ -1192,7 +1192,7 @@ input_update (WInput *in, gboolean clear_first)
     if (in->disable_update != 0)
         return;
 
-    /* don't draw widget not put into dialog */
+    // don't draw widget not put into dialog
     if (wi->owner == NULL || !widget_get_state (WIDGET (wi->owner), WST_ACTIVE))
         return;
 
@@ -1204,12 +1204,12 @@ input_update (WInput *in, gboolean clear_first)
 
     buf_len = str_length (in->buffer->str);
 
-    /* Adjust the mark */
+    // Adjust the mark
     in->mark = MIN (in->mark, buf_len);
 
     pw = str_term_width2 (in->buffer->str, in->point);
 
-    /* Make the point visible */
+    // Make the point visible
     if ((pw < in->term_first_shown) || (pw >= in->term_first_shown + w->cols - has_history))
     {
         in->term_first_shown = pw - (w->cols / 3);

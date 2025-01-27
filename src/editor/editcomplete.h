@@ -18,4 +18,4 @@ void edit_complete_word_cmd (WEdit * edit);
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__EDIT_COMPLETE_H */
+#endif // MC__EDIT_COMPLETE_H

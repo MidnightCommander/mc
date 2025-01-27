@@ -6,7 +6,7 @@
 #define MC__VIEWER_H
 
 #include "lib/global.h"
-#include "lib/widget.h"         /* WRect */
+#include "lib/widget.h"         // WRect
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -19,10 +19,10 @@ typedef struct WView WView;
 
 typedef struct
 {
-    gboolean wrap;              /* Wrap text lines to fit them on the screen */
-    gboolean hex;               /* Plainview or hexview */
-    gboolean magic;             /* Preprocess the file using external programs */
-    gboolean nroff;             /* Nroff-style highlighting */
+    gboolean wrap;              // Wrap text lines to fit them on the screen
+    gboolean hex;               // Plainview or hexview
+    gboolean magic;             // Preprocess the file using external programs
+    gboolean nroff;             // Nroff-style highlighting
 } mcview_mode_flags_t;
 
 /*** global variables defined in .c file *********************************************************/
@@ -53,4 +53,4 @@ extern gboolean mcview_load (WView * view, const char *command, const char *file
 extern void mcview_clear_mode_flags (mcview_mode_flags_t * flags);
 
 /*** inline functions ****************************************************************************/
-#endif /* MC__VIEWER_H */
+#endif // MC__VIEWER_H

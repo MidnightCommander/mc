@@ -3,7 +3,7 @@
 
 #include <config.h>
 
-#include "lib/global.h"         /* <glib.h> */
+#include "lib/global.h"         // <glib.h>
 
 #include <sys/types.h>
 
@@ -14,7 +14,7 @@
 #else
 #include <pcre.h>
 #endif
-#endif /* SEARCH_TYPE_PCRE */
+#endif // SEARCH_TYPE_PCRE
 /*** typedefs(not structures) and defined constants **********************************************/
 
 typedef enum mc_search_cbret_t mc_search_cbret_t;
@@ -85,55 +85,55 @@ enum mc_search_cbret_t
 
 typedef struct mc_search_struct
 {
-    /* public input data */
+    // public input data
 
 #ifdef HAVE_CHARSET
-    /* search in all charsets */
+    // search in all charsets
     gboolean is_all_charsets;
 #endif
 
-    /* case sensitive search */
+    // case sensitive search
     gboolean is_case_sensitive;
 
-    /* search only once.  Is this for replace? */
+    // search only once.  Is this for replace?
     gboolean is_once_only;
 
-    /* search only whole words (from begin to end). Used only with NORMAL search type */
+    // search only whole words (from begin to end). Used only with NORMAL search type
     gboolean whole_words;
 
-    /* search entire string (from begin to end). Used only with GLOB search type */
+    // search entire string (from begin to end). Used only with GLOB search type
     gboolean is_entire_line;
 
-    /* function, used for getting data. NULL if not used */
+    // function, used for getting data. NULL if not used
     mc_search_fn search_fn;
 
-    /* function, used for updatin current search status. NULL if not used */
+    // function, used for updatin current search status. NULL if not used
     mc_update_fn update_fn;
 
-    /* type of search */
+    // type of search
     mc_search_type_t search_type;
 
-    /* public output data */
+    // public output data
 
-    /* some data for normal */
+    // some data for normal
     off_t normal_offset;
 
     off_t start_buffer;
-    /* some data for regexp */
+    // some data for regexp
     int num_results;
     gboolean is_utf8;
     mc_search_matchinfo_t *regex_match_info;
     GString *regex_buffer;
 #ifdef SEARCH_TYPE_PCRE
 #ifdef HAVE_PCRE2
-    /* pcre2 will provide a pointer to a match_data structure that can be manipulated like an iovector */
+    // pcre2 will provide a pointer to a match_data structure that can be manipulated like an iovector
     size_t *iovector;
 #else
     int iovector[MC_SEARCH__NUM_REPLACE_ARGS * 2];
 #endif
-#endif                          /* SEARCH_TYPE_PCRE */
+#endif                          // SEARCH_TYPE_PCRE
 
-    /* private data */
+    // private data
 
     struct
     {
@@ -141,7 +141,7 @@ typedef struct mc_search_struct
         gboolean result;
     } prepared;
 
-    /* original search string */
+    // original search string
     struct
     {
         GString *str;
@@ -150,7 +150,7 @@ typedef struct mc_search_struct
 #endif
     } original;
 
-    /* error code after search */
+    // error code after search
     mc_search_error_t error;
     gchar *error_str;
 } mc_search_t;
@@ -207,4 +207,4 @@ void mc_search_set_error (mc_search_t * lc_mc_search, mc_search_error_t code, co
      G_GNUC_PRINTF (3, 4);
 /* *INDENT-ON* */
 
-#endif /* MC__SEARCH_H */
+#endif // MC__SEARCH_H

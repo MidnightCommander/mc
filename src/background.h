@@ -5,7 +5,7 @@
 #ifndef MC__BACKGROUND_H
 #define MC__BACKGROUND_H
 
-#include <sys/types.h>          /* pid_t */
+#include <sys/types.h>          // pid_t
 #include "filemanager/filegui.h"
 
 /*** typedefs(not structures) and defined constants **********************************************/
@@ -52,4 +52,4 @@ background_parent_call_string (const gchar * event_group_name, const gchar * eve
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__BACKGROUND_H */
+#endif // MC__BACKGROUND_H

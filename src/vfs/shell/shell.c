@@ -56,23 +56,23 @@
 #include <grp.h>
 #include <stdlib.h>
 #include <string.h>
-#include <inttypes.h>           /* uintmax_t */
+#include <inttypes.h>           // uintmax_t
 
 #include "lib/global.h"
-#include "lib/tty/tty.h"        /* enable/disable interrupt key */
+#include "lib/tty/tty.h"        // enable/disable interrupt key
 #include "lib/strutil.h"
 #include "lib/unixcompat.h"
 #include "lib/fileloc.h"
-#include "lib/util.h"           /* my_exit() */
+#include "lib/util.h"           // my_exit()
 #include "lib/mcconfig.h"
 
-#include "src/execute.h"        /* pre_exec, post_exec */
+#include "src/execute.h"        // pre_exec, post_exec
 
 #include "lib/vfs/vfs.h"
 #include "lib/vfs/utilvfs.h"
 #include "lib/vfs/netutil.h"
 #include "lib/vfs/xdirentry.h"
-#include "lib/vfs/gc.h"         /* vfs_stamp_create */
+#include "lib/vfs/gc.h"         // vfs_stamp_create
 
 #include "shell.h"
 #include "shelldef.h"
@@ -96,11 +96,11 @@ int shell_directory_timeout = 900;
 /*
  * Reply codes.
  */
-#define PRELIM          1       /* positive preliminary */
-#define COMPLETE        2       /* positive completion */
-#define CONTINUE        3       /* positive intermediate */
-#define TRANSIENT       4       /* transient negative completion */
-#define ERROR           5       /* permanent negative completion */
+#define PRELIM          1       // positive preliminary
+#define COMPLETE        2       // positive completion
+#define CONTINUE        3       // positive intermediate
+#define TRANSIENT       4       // transient negative completion
+#define ERROR           5       // permanent negative completion
 
 /* command wait_flag: */
 #define NONE        0x00
@@ -123,7 +123,7 @@ int shell_directory_timeout = 900;
 
 typedef struct
 {
-    struct vfs_s_super base;    /* base class */
+    struct vfs_s_super base;    // base class
 
     int sockr;
     int sockw;
@@ -148,7 +148,7 @@ typedef struct
 
 typedef struct
 {
-    vfs_file_handler_t base;    /* base class */
+    vfs_file_handler_t base;    // base class
 
     off_t got;
     off_t total;
@@ -172,8 +172,8 @@ static void
 shell_set_blksize (struct stat *s)
 {
 #ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
-    /* redefine block size */
-    s->st_blksize = 64 * 1024;  /* FIXME */
+    // redefine block size
+    s->st_blksize = 64 * 1024;  // FIXME
 #endif
 }
 
@@ -200,14 +200,14 @@ shell_load_script_from_file (const char *hostname, const char *script_name, cons
     char *scr_content;
     gsize scr_len = 0;
 
-    /* 1st: scan user directory */
+    // 1st: scan user directory
     scr_filename =
         g_build_path (PATH_SEP_STR, mc_config_get_data_path (), VFS_SHELL_PREFIX, hostname,
                       script_name, (char *) NULL);
-    /* silent about user dir */
+    // silent about user dir
     g_file_get_contents (scr_filename, &scr_content, &scr_len, NULL);
     g_free (scr_filename);
-    /* 2nd: scan system dir */
+    // 2nd: scan system dir
     if (scr_content == NULL)
     {
         scr_filename =
@@ -229,7 +229,7 @@ shell_decode_reply (char *s, gboolean was_garbage)
 {
     int code;
 
-    /* cppcheck-suppress invalidscanf */
+    // cppcheck-suppress invalidscanf
     if (sscanf (s, "%d", &code) == 0)
     {
         code = 500;
@@ -433,7 +433,7 @@ shell_pipeopen (struct vfs_s_super *super, const char *path, const char *argv[])
     {
         if (res < 0)
             vfs_die ("Cannot fork(): %m.");
-        /* We are the parent */
+        // We are the parent
         close (fileset1[0]);
         SHELL_SUPER (super)->sockw = fileset1[1];
         close (fileset2[1]);
@@ -446,7 +446,7 @@ shell_pipeopen (struct vfs_s_super *super, const char *path, const char *argv[])
         close (fileset1[1]);
         res = dup2 (fileset2[1], STDOUT_FILENO);
         close (STDERR_FILENO);
-        /* stderr to /dev/null */
+        // stderr to /dev/null
         res = open ("/dev/null", O_WRONLY);
         close (fileset2[0]);
         close (fileset2[1]);
@@ -520,7 +520,7 @@ static void
 shell_open_archive_pipeopen (struct vfs_s_super *super)
 {
     char gbuf[10];
-    const char *argv[10];       /* All of 10 is used now */
+    const char *argv[10];       // All of 10 is used now
     const char *xsh = (super->path_element->port == SHELL_FLAG_RSH ? "rsh" : "ssh");
     int i = 0;
 
@@ -549,7 +549,7 @@ shell_open_archive_pipeopen (struct vfs_s_super *super)
     }
     else
     {
-        /* The rest of the code assumes it to be a valid username */
+        // The rest of the code assumes it to be a valid username
         super->path_element->user = vfs_get_local_username ();
     }
 
@@ -617,16 +617,16 @@ shell_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
 {
     gboolean ftalk;
 
-    /* hide panels */
+    // hide panels
     pre_exec ();
 
-    /* open pipe */
+    // open pipe
     shell_open_archive_pipeopen (super);
 
-    /* Start talk with ssh-server (password prompt, etc ) */
+    // Start talk with ssh-server (password prompt, etc )
     ftalk = shell_open_archive_talk (me, super);
 
-    /* show panels */
+    // show panels
     post_exec ();
 
     if (!ftalk)
@@ -634,7 +634,7 @@ shell_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
 
     vfs_print_message ("%s", _("shell: Sending initial line..."));
 
-    /* Set up remote locale to C, otherwise dates cannot be recognized */
+    // Set up remote locale to C, otherwise dates cannot be recognized
     if (shell_command
         (me, super, WAIT_REPLY,
          "LANG=C LC_ALL=C LC_TIME=C; export LANG LC_ALL LC_TIME;\n" "echo '### 200'\n",
@@ -768,7 +768,7 @@ shell_parse_ls (char *buffer, struct vfs_s_entry *ent)
             filename = buffer;
 
             if (strcmp (filename, "\".\"") == 0 || strcmp (filename, "\"..\"") == 0)
-                break;          /* We'll do "." and ".." ourselves */
+                break;          // We'll do "." and ".." ourselves
 
             filename_bound = filename + strlen (filename);
 
@@ -789,17 +789,17 @@ shell_parse_ls (char *buffer, struct vfs_s_entry *ent)
                 linkname = strstr (filename, "\" -> \"");
                 if (linkname == NULL)
                 {
-                    /* broken client, or smth goes wrong */
+                    // broken client, or smth goes wrong
                     linkname = filename_bound;
                     if (filename_bound > filename && *(filename_bound - 1) == '"')
-                        --filename_bound;       /* skip trailing " */
+                        --filename_bound;       // skip trailing "
                 }
                 else
                 {
                     filename_bound = linkname;
-                    linkname += 6;      /* strlen ("\" -> \"") */
+                    linkname += 6;      // strlen ("\" -> \"")
                     if (*(linkname_bound - 1) == '"')
-                        --linkname_bound;       /* skip trailing " */
+                        --linkname_bound;       // skip trailing "
                 }
 
                 ent->name = g_strndup (filename, filename_bound - filename);
@@ -814,7 +814,7 @@ shell_parse_ls (char *buffer, struct vfs_s_entry *ent)
             }
             else
             {
-                /* we expect: "escaped-name" */
+                // we expect: "escaped-name"
                 if (filename_bound - filename > 2)
                 {
                     /*
@@ -872,7 +872,7 @@ shell_parse_ls (char *buffer, struct vfs_s_entry *ent)
             struct tm tim;
 
             memset (&tim, 0, sizeof (tim));
-            /* cppcheck-suppress invalidscanf */
+            // cppcheck-suppress invalidscanf
             if (sscanf (buffer, "%d %d %d %d %d %d", &tim.tm_year, &tim.tm_mon,
                         &tim.tm_mday, &tim.tm_hour, &tim.tm_min, &tim.tm_sec) != 6)
                 break;
@@ -885,7 +885,7 @@ shell_parse_ls (char *buffer, struct vfs_s_entry *ent)
         {
             int maj, min;
 
-            /* cppcheck-suppress invalidscanf */
+            // cppcheck-suppress invalidscanf
             if (sscanf (buffer, "%d,%d", &maj, &min) != 2)
                 break;
 #ifdef HAVE_STRUCT_STAT_ST_RDEV
@@ -1033,7 +1033,7 @@ shell_file_store (struct vfs_class *me, vfs_file_handler_t *fh, char *name, char
     quoted_name = str_shell_escape (name);
     vfs_print_message (_("shell: store %s: sending command..."), quoted_name);
 
-    /* FIXME: File size is limited to ULONG_MAX */
+    // FIXME: File size is limited to ULONG_MAX
     code =
         shell_command_v (me, super, WAIT_REPLY,
                          shell->append ? shell_super->scr_append : shell_super->scr_send,
@@ -1107,7 +1107,7 @@ shell_linear_start (struct vfs_class *me, vfs_file_handler_t *fh, off_t offset)
     shell->append = FALSE;
 
     /*
-     * Check whether the remote file is readable by using 'dd' to copy 
+     * Check whether the remote file is readable by using 'dd' to copy
      * a single byte from the remote file to /dev/null. If 'dd' completes
      * with exit status of 0 use 'cat' to send the file contents to the
      * standard output (i.e. over the network).
@@ -1435,7 +1435,7 @@ shell_chown (const vfs_path_t *vpath, uid_t owner, gid_t group)
 
     me = VFS_CLASS (vfs_path_get_last_path_vfs (vpath));
 
-    /* FIXME: what should we report if chgrp succeeds but chown fails? */
+    // FIXME: what should we report if chgrp succeeds but chown fails?
     ret =
         shell_send_command (me, super, OPT_FLUSH, SHELL_SUPER (super)->scr_chown,
                             "SHELL_FILENAME=%s SHELL_FILEOWNER=%s SHELL_FILEGROUP=%s;\n", rpath,
@@ -1642,10 +1642,10 @@ shell_fh_open (struct vfs_class *me, vfs_file_handler_t *fh, int flags, mode_t m
 
     (void) mode;
 
-    /* File will be written only, so no need to retrieve it */
+    // File will be written only, so no need to retrieve it
     if (((flags & O_WRONLY) == O_WRONLY) && ((flags & (O_RDONLY | O_RDWR)) == 0))
     {
-        /* user pressed the button [ Append ] in the "Copy" dialog */
+        // user pressed the button [ Append ] in the "Copy" dialog
         if ((flags & O_APPEND) != 0)
             shell->append = TRUE;
 

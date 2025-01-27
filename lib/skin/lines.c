@@ -69,7 +69,7 @@ mc_skin_lines_parse_ini_file (mc_skin_t *mc_skin)
     else if (mc_global.tty.ugly_line_drawing)
         mc_skin_hardcoded_ugly_lines (mc_skin);
 
-    /* single lines */
+    // single lines
     mc_tty_frm[MC_TTY_FRM_VERT] = mc_skin_lines_load_frm (mc_skin, "vert");
     mc_tty_frm[MC_TTY_FRM_HORIZ] = mc_skin_lines_load_frm (mc_skin, "horiz");
     mc_tty_frm[MC_TTY_FRM_LEFTTOP] = mc_skin_lines_load_frm (mc_skin, "lefttop");
@@ -82,7 +82,7 @@ mc_skin_lines_parse_ini_file (mc_skin_t *mc_skin)
     mc_tty_frm[MC_TTY_FRM_RIGHTMIDDLE] = mc_skin_lines_load_frm (mc_skin, "rightmiddle");
     mc_tty_frm[MC_TTY_FRM_CROSS] = mc_skin_lines_load_frm (mc_skin, "cross");
 
-    /* double lines */
+    // double lines
     mc_tty_frm[MC_TTY_FRM_DVERT] = mc_skin_lines_load_frm (mc_skin, "dvert");
     mc_tty_frm[MC_TTY_FRM_DHORIZ] = mc_skin_lines_load_frm (mc_skin, "dhoriz");
     mc_tty_frm[MC_TTY_FRM_DLEFTTOP] = mc_skin_lines_load_frm (mc_skin, "dlefttop");

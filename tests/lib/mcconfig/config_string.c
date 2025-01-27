@@ -109,51 +109,51 @@ static const struct test_create_ini_file_ds
     const char *expected_raw_value;
 } test_create_ini_file_ds[] =
 {
-    { /* 0. */
+    { // 0.
         "group-not-exists",
         "param-not_exists",
         NULL,
         NULL,
         NULL
     },
-    { /* 1. */
+    { // 1.
         "test-group1",
         "test-param1",
         "not-exists",
         " some value ",
         " some value "
     },
-    { /* 2. */
+    { // 2.
         "test-group1",
         "test-param2",
         "not-exists",
-        /* Should be represented as KOI8-R */
+        // Should be represented as KOI8-R
         " \t \xF4\xC5\xD3\xD4\xCF\xD7\xCF\xC5 \xDA\xCE\xC1\xDE\xC5\xCE\xC9\xC5 ",
-        /* Should be stored as UTF-8 */
+        // Should be stored as UTF-8
         " \t Тестовое значение "
     },
-    { /* 3. */
+    { // 3.
         "test-group1",
         "test-param3",
         "not-exists",
         " \tsome value2\n\nf\b\005fff ",
         " \tsome value2\n\nf\b\005fff "
     },
-    { /* 4. */
+    { // 4.
         "test-group2",
         "test-param1",
         "not-exists",
         " some value ",
         " some value "
     },
-    { /* 5. */
+    { // 5.
         "test-group2",
         "test-param2",
         "not-exists",
         "not-exists",
         "not-exists"
     },
-    { /* 6. */
+    { // 6.
         "test-group2",
         "test-param3",
         "not-exists",
@@ -169,7 +169,7 @@ static const struct test_create_ini_file_ds
 START_PARAMETRIZED_TEST (test_create_ini_file_paths, test_create_ini_file_ds)
 /* *INDENT-ON* */
 {
-    /* given */
+    // given
     char *actual_value, *actual_raw_value;
 
     mc_config_set_string (mc_config, "test-group1", "test-param1", " some value ");
@@ -184,7 +184,7 @@ START_PARAMETRIZED_TEST (test_create_ini_file_paths, test_create_ini_file_ds)
 
     config_object__reopen ();
 
-    /* when */
+    // when
     actual_value =
         mc_config_get_string (mc_config, data->input_group, data->input_param,
                               data->input_default_value);
@@ -192,7 +192,7 @@ START_PARAMETRIZED_TEST (test_create_ini_file_paths, test_create_ini_file_ds)
         mc_config_get_string_raw (mc_config, data->input_group, data->input_param,
                                   data->input_default_value);
 
-    /* then */
+    // then
     mctest_assert_str_eq (actual_value, data->expected_value);
     mctest_assert_str_eq (actual_raw_value, data->expected_raw_value);
 
@@ -210,7 +210,7 @@ END_PARAMETRIZED_TEST
 START_TEST (emulate__learn_save)
 /* *INDENT-ON* */
 {
-    /* given */
+    // given
     char *actual_value;
 
     {
@@ -223,10 +223,10 @@ START_TEST (emulate__learn_save)
 
     config_object__reopen ();
 
-    /* when */
+    // when
     actual_value = mc_config_get_string_raw (mc_config, "test-group1", "test-param1", "not-exists");
 
-    /* then */
+    // then
     mctest_assert_str_eq (actual_value, "T\\;E\\X\\;T-FOR-\\T\\;E\\;S\\TI\\;N'G");
     g_free (actual_value);
 }
@@ -245,10 +245,10 @@ main (void)
 
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, test_create_ini_file_paths, test_create_ini_file_ds);
     tcase_add_test (tc_core, emulate__learn_save);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

@@ -19,8 +19,8 @@ typedef struct
 {
     Widget widget;
 
-    int color;                  /* Color to fill area */
-    unsigned char pattern;      /* Symbol to fill area */
+    int color;                  // Color to fill area
+    unsigned char pattern;      // Symbol to fill area
 } WBackground;
 
 /*** global variables defined in .c file *********************************************************/
@@ -33,4 +33,4 @@ cb_ret_t background_callback (Widget * w, Widget * sender, widget_msg_t msg, int
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__WIDGET_BACKGROUND_H */
+#endif // MC__WIDGET_BACKGROUND_H

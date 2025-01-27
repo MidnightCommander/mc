@@ -55,63 +55,63 @@ static const struct test_vfs_get_encoding_ds
     const char *expected_encoding;
 } test_vfs_get_encoding_ds[] =
 {
-    { /* 0 */
+    { // 0
         "",
         NULL
     },
-    { /* 1 */
+    { // 1
         "aaaa",
         NULL
     },
-    { /* 2 */
+    { // 2
         "/aaaa",
         NULL
     },
-    { /* 3 */
+    { // 3
         "aaaa/bbbb",
         NULL
     },
-    { /* 4 */
+    { // 4
         "/aaaa/bbbb",
         NULL
     },
-    { /* 5 */
+    { // 5
         "#enc:UTF-8/aaaa",
         "UTF-8"
     },
-    { /* 6 */
+    { // 6
         "/#enc:UTF-8/aaaa",
         "UTF-8"
     },
-    { /* 7 */
+    { // 7
         "/aaaa/#enc:UTF-8/bbbb",
         "UTF-8"
     },
-    { /* 8 */
+    { // 8
         "/aaaa/#enc:UTF-8/bbbb/#enc:KOI8-R",
         "KOI8-R"
     },
-    { /* 9 */
+    { // 9
         "/aaaa/#enc:UTF-8/bbbb/#enc:KOI8-R/cccc",
         "KOI8-R"
     },
-    { /* 10 */
+    { // 10
         "/aaaa/#enc:UTF-8/bbbb/cccc#enc:KOI8-R/dddd",
         "UTF-8"
     },
-    { /* 11 */
+    { // 11
         "/#enc:UTF-8/bbbb/cccc#enc:KOI8-R/dddd",
         "UTF-8"
     },
-    { /* 12 */
+    { // 12
         "#enc:UTF-8/bbbb/cccc#enc:KOI8-R/dddd",
         "UTF-8"
     },
-    { /* 13 */
+    { // 13
         "aaaa#enc:UTF-8/bbbb/cccc#enc:KOI8-R/dddd",
         NULL
     },
-    { /* 14 */
+    { // 14
         "/aaaa/#enc:UTF-8/bbbb/#enc:KOI8-R#enc:CP866/cccc",
         "KOI8-R#enc:CP866"
     }
@@ -123,13 +123,13 @@ static const struct test_vfs_get_encoding_ds
 START_PARAMETRIZED_TEST (test_vfs_get_encoding, test_vfs_get_encoding_ds)
 /* *INDENT-ON* */
 {
-    /* given */
+    // given
     char *actual_encoding;
 
-    /* when */
+    // when
     actual_encoding = vfs_get_encoding (data->path, -1);
 
-    /* then */
+    // then
     mctest_assert_str_eq (actual_encoding, data->expected_encoding);
 
     g_free (actual_encoding);
@@ -149,9 +149,9 @@ main (void)
 
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, test_vfs_get_encoding, test_vfs_get_encoding_ds);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

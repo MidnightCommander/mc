@@ -75,99 +75,99 @@ static const struct test_user_config_paths_ds
     const char *input_file_name;
 } test_user_config_paths_ds[] =
 {
-    { /* 0. */
+    { // 0.
         CONF_MAIN,
         MC_CONFIG_FILE
     },
-    { /* 1. */
+    { // 1.
         CONF_MAIN,
         MC_FHL_INI_FILE
     },
-    { /* 2. */
+    { // 2.
         CONF_MAIN,
         MC_HOTLIST_FILE
     },
-    { /* 3. */
+    { // 3.
         CONF_MAIN,
         GLOBAL_KEYMAP_FILE
     },
-    { /* 4. */
+    { // 4.
         CONF_MAIN,
         MC_USERMENU_FILE
     },
-    { /* 5. */
+    { // 5.
         CONF_DATA,
         EDIT_SYNTAX_FILE
     },
-    { /* 6. */
+    { // 6.
         CONF_MAIN,
         EDIT_HOME_MENU
     },
-    { /* 7. */
+    { // 7.
         CONF_MAIN,
         MC_PANELS_FILE
     },
-    { /* 8. */
+    { // 8.
         CONF_MAIN,
         MC_EXT_FILE
     },
-    { /* 9. */
+    { // 9.
         CONF_DATA,
         MC_SKINS_DIR
     },
-    { /* 10. */
+    { // 10.
         CONF_DATA,
         VFS_SHELL_PREFIX
     },
-    { /* 11. */
+    { // 11.
         CONF_DATA,
         MC_ASHRC_FILE
     },
-    { /* 12. */
+    { // 12.
         CONF_DATA,
         MC_BASHRC_FILE
     },
-    { /* 13. */
+    { // 13.
         CONF_DATA,
         MC_INPUTRC_FILE
     },
-    { /* 14. */
+    { // 14.
         CONF_DATA,
         MC_ZSHRC_FILE
     },
-    { /* 15. */
+    { // 15.
         CONF_DATA,
         MC_EXTFS_DIR
     },
-    { /* 16. */
+    { // 16.
         CONF_DATA,
         MC_HISTORY_FILE
     },
-    { /* 17. */
+    { // 17.
         CONF_DATA,
         MC_FILEPOS_FILE
     },
-    { /* 18. */
+    { // 18.
         CONF_DATA,
         EDIT_HOME_CLIP_FILE
     },
-    { /* 19. */
+    { // 19.
         CONF_DATA,
         MC_MACRO_FILE
     },
-    { /* 20. */
+    { // 20.
         CONF_CACHE,
         "mc.log"
     },
-    { /* 21. */
+    { // 21.
         CONF_CACHE,
         MC_TREESTORE_FILE
     },
-    { /* 22. */
+    { // 22.
         CONF_CACHE,
         EDIT_HOME_TEMP_FILE
     },
-    { /* 23. */
+    { // 23.
         CONF_CACHE,
         EDIT_HOME_BLOCK_FILE
     },
@@ -179,13 +179,13 @@ static const struct test_user_config_paths_ds
 START_PARAMETRIZED_TEST (test_user_config_paths, test_user_config_paths_ds)
 /* *INDENT-ON* */
 {
-    /* given */
+    // given
     char *actual_result;
 
-    /* when */
+    // when
     actual_result = mc_config_get_full_path (data->input_file_name);
 
-    /* then */
+    // then
     {
         char *expected_file_path;
 
@@ -212,9 +212,9 @@ main (void)
 
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, test_user_config_paths, test_user_config_paths_ds);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

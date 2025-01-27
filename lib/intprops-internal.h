@@ -166,7 +166,7 @@
       && !defined __EDG__)
 #  define _GL_INT_MULTIPLY_WRAPV(a, b, r) __builtin_mul_overflow (a, b, r)
 # else
-   /* Work around GCC bug 91450.  */
+   // Work around GCC bug 91450.
 #  define _GL_INT_MULTIPLY_WRAPV(a, b, r) \
     ((!_GL_SIGNED_TYPE_OR_EXPR (*(r)) && _GL_EXPR_SIGNED (a) && _GL_EXPR_SIGNED (b) \
       && _GL_INT_MULTIPLY_RANGE_OVERFLOW (a, b, \
@@ -396,4 +396,4 @@
          : (tmin) / (a) < (b)) \
       : (tmax) / (b) < (a)))
 
-#endif /* _GL_INTPROPS_INTERNAL_H */
+#endif // _GL_INTPROPS_INTERNAL_H

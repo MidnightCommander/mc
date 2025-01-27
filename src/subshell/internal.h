@@ -26,4 +26,4 @@ void subshell_set_mainloop_quit (const int param_quit);
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__SUBSHELL_INTERNAL_H */
+#endif // MC__SUBSHELL_INTERNAL_H

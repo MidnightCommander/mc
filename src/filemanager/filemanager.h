@@ -50,4 +50,4 @@ gboolean do_nc (void);
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__FILEMANAGER_H */
+#endif // MC__FILEMANAGER_H

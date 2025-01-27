@@ -9,7 +9,7 @@
 
 typedef struct
 {
-    simple_status_msg_t status_msg;     /* base class */
+    simple_status_msg_t status_msg;     // base class
 
     gboolean first;
     WEdit *edit;
@@ -33,4 +33,4 @@ void edit_replace_cmd (WEdit * edit, gboolean again);
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__EDIT_SEARCH_H */
+#endif // MC__EDIT_SEARCH_H

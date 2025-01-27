@@ -31,7 +31,7 @@
 #include "lib/fileloc.h"
 #include "lib/strutil.h"
 #include "lib/skin.h"
-#include "lib/util.h"           /* exist_file() */
+#include "lib/util.h"           // exist_file()
 
 #include "lib/filehighlight.h"
 
@@ -206,21 +206,21 @@ mc_fhl_init_from_standard_files (mc_fhl_t *fhl)
     gchar *name;
     gboolean ok;
 
-    /* ${XDG_CONFIG_HOME}/mc/filehighlight.ini */
+    // ${XDG_CONFIG_HOME}/mc/filehighlight.ini
     name = mc_config_get_full_path (MC_FHL_INI_FILE);
     ok = mc_fhl_read_ini_file (fhl, name);
     g_free (name);
     if (ok)
         return TRUE;
 
-    /* ${sysconfdir}/mc/filehighlight.ini  */
+    // ${sysconfdir}/mc/filehighlight.ini
     name = g_build_filename (mc_global.sysconfig_dir, MC_FHL_INI_FILE, (char *) NULL);
     ok = mc_fhl_read_ini_file (fhl, name);
     g_free (name);
     if (ok)
         return TRUE;
 
-    /* ${datadir}/mc/filehighlight.ini  */
+    // ${datadir}/mc/filehighlight.ini
     name = g_build_filename (mc_global.share_data_dir, MC_FHL_INI_FILE, (char *) NULL);
     ok = mc_fhl_read_ini_file (fhl, name);
     g_free (name);
@@ -245,17 +245,17 @@ mc_fhl_parse_ini_file (mc_fhl_t *fhl)
     {
         if (mc_config_has_param (fhl->config, *group_names, "type"))
         {
-            /* parse filetype filter */
+            // parse filetype filter
             mc_fhl_parse_get_file_type_id (fhl, *group_names);
         }
         if (mc_config_has_param (fhl->config, *group_names, "regexp"))
         {
-            /* parse regexp filter */
+            // parse regexp filter
             mc_fhl_parse_get_regexp (fhl, *group_names);
         }
         if (mc_config_has_param (fhl->config, *group_names, "extensions"))
         {
-            /* parse extensions filter */
+            // parse extensions filter
             mc_fhl_parse_get_extensions (fhl, *group_names);
         }
     }

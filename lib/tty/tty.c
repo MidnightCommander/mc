@@ -34,7 +34,7 @@
 #include <signal.h>
 #include <stdarg.h>
 #include <stdlib.h>
-#include <string.h>             /* memset() */
+#include <string.h>             // memset()
 
 #ifdef HAVE_SYS_SELECT_H
 #include <sys/select.h>
@@ -42,7 +42,7 @@
 #include <sys/time.h>
 #include <sys/types.h>
 #endif
-#include <unistd.h>             /* exit() */
+#include <unistd.h>             // exit()
 
 #ifdef HAVE_SYS_IOCTL_H
 #include <sys/ioctl.h>
@@ -57,8 +57,8 @@
 
 #include "tty.h"
 #include "tty-internal.h"
-#include "color.h"              /* tty_set_normal_attrs() */
-#include "mouse.h"              /* use_mouse_p */
+#include "color.h"              // tty_set_normal_attrs()
+#include "mouse.h"              // use_mouse_p
 #include "win.h"
 
 /*** global variables ****************************************************************************/
@@ -119,7 +119,7 @@ tty_check_term (gboolean force_xterm)
         exit (EXIT_FAILURE);
     }
 
-    /* *INDENT-OFF* */
+    // *INDENT-OFF*
     return force_xterm
         || strncmp (termvalue, "xterm", 5) == 0
         || strncmp (termvalue, "konsole", 7) == 0
@@ -131,7 +131,7 @@ tty_check_term (gboolean force_xterm)
         || strncmp (termvalue, "screen", 6) == 0
         || strncmp (termvalue, "tmux", 4) == 0
         || strncmp (termvalue, "contour", 7) == 0;
-    /* *INDENT-ON* */
+    // *INDENT-ON*
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -146,7 +146,7 @@ tty_start_interrupt_key (void)
     sigemptyset (&act.sa_mask);
 #ifdef SA_RESTART
     act.sa_flags = SA_RESTART;
-#endif /* SA_RESTART */
+#endif // SA_RESTART
     my_sigaction (SIGINT, &act, NULL);
 }
 
@@ -195,10 +195,10 @@ gboolean
 tty_got_winch (void)
 {
     fd_set fdset;
-    /* *INDENT-OFF* */
-    /* instant timeout */
+    // *INDENT-OFF*
+    // instant timeout
     struct timeval timeout = { .tv_sec = 0, .tv_usec = 0 };
-    /* *INDENT-ON* */
+    // *INDENT-ON*
     int ok;
 
     FD_ZERO (&fdset);
@@ -222,15 +222,15 @@ tty_flush_winch (void)
     ssize_t n;
     gboolean ret = FALSE;
 
-    /* merge all SIGWINCH events raised to this moment */
+    // merge all SIGWINCH events raised to this moment
     do
     {
         char x[16];
 
-        /* read multiple events at a time  */
+        // read multiple events at a time
         n = read (sigwinch_pipe[0], &x, sizeof (x));
 
-        /* at least one SIGWINCH came */
+        // at least one SIGWINCH came
         if (n > 0)
             ret = TRUE;
     }
@@ -290,9 +290,9 @@ tty_draw_box (int y, int x, int ys, int xs, gboolean single)
 void
 tty_draw_box_shadow (int y, int x, int rows, int cols, int shadow_color)
 {
-    /* draw right shadow */
+    // draw right shadow
     tty_colorize_area (y + 1, x + cols, rows - 1, 2, shadow_color);
-    /* draw bottom shadow */
+    // draw bottom shadow
     tty_colorize_area (y + rows, x + 2, 1, cols, shadow_color);
 }
 
@@ -364,10 +364,10 @@ tty_init_xterm_support (gboolean is_xterm)
 
     termvalue = getenv ("TERM");
 
-    /* Check mouse and ca capabilities */
+    // Check mouse and ca capabilities
     /* terminfo/termcap structures have been already initialized,
        in slang_init() or/and init_curses()  */
-    /* Check terminfo at first, then check termcap */
+    // Check terminfo at first, then check termcap
     xmouse_seq = tty_tgetstr ("kmous");
     if (xmouse_seq == NULL)
         xmouse_seq = tty_tgetstr ("Km");
@@ -386,18 +386,18 @@ tty_init_xterm_support (gboolean is_xterm)
 
     if (is_xterm)
     {
-        /* Default to the standard xterm sequence */
+        // Default to the standard xterm sequence
         if (xmouse_seq == NULL)
             xmouse_seq = ESC_STR "[M";
 
-        /* Enable mouse unless explicitly disabled by --nomouse */
+        // Enable mouse unless explicitly disabled by --nomouse
         if (use_mouse_p != MOUSE_DISABLED)
         {
             if (mc_global.tty.old_mouse)
                 use_mouse_p = MOUSE_XTERM_NORMAL_TRACKING;
             else
             {
-                /* FIXME: this dirty hack to set supported type of tracking the mouse */
+                // FIXME: this dirty hack to set supported type of tracking the mouse
                 const char *color_term = getenv ("COLORTERM");
                 if (strncmp (termvalue, "rxvt", 4) == 0 ||
                     (color_term != NULL && strncmp (color_term, "rxvt", 4) == 0) ||

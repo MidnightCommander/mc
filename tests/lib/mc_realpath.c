@@ -28,10 +28,10 @@
 #include "tests/mctest.h"
 
 #include "lib/strutil.h"
-#include "lib/vfs/vfs.h"        /* VFS_ENCODING_PREFIX, vfs_init(), vfs_shut() */
+#include "lib/vfs/vfs.h"        // VFS_ENCODING_PREFIX, vfs_init(), vfs_shut()
 #include "src/vfs/local/local.c"
 
-#include "lib/util.h"           /* mc_realpath() */
+#include "lib/util.h"           // mc_realpath()
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -67,7 +67,7 @@ static const struct data_source
     const char *expected_string;
 } data_source[] =
 {
-    /* absolute paths */
+    // absolute paths
     { "/", "/"},
     { "/usr/bin", "/usr/bin" },
 #ifdef HAVE_CHARSET
@@ -78,7 +78,7 @@ static const struct data_source
     { "/" VFS_ENCODING_PREFIX "UTF-8/usr/bin", "/" VFS_ENCODING_PREFIX "UTF-8/usr/bin" },
 #endif
 
-    /* relative paths are relative to / */
+    // relative paths are relative to /
     { "usr/bin", "/usr/bin" },
 #ifdef HAVE_CHARSET
     { VFS_ENCODING_PREFIX "UTF-8/", "/" },
@@ -101,11 +101,11 @@ START_PARAMETRIZED_TEST (realpath_test, data_source)
      * Change the current directory to produce correct pathname. */
     ret = chdir ("/");
 
-    /* when */
+    // when
     if (mc_realpath (data->input_string, resolved_path) == NULL)
         resolved_path[0] = '\0';
 
-    /* then */
+    // then
     mctest_assert_str_eq (resolved_path, data->expected_string);
 
     (void) ret;
@@ -124,16 +124,16 @@ main (void)
 
     tc_core = tcase_create ("Core");
 
-    /* writable directory where check creates temporary files */
+    // writable directory where check creates temporary files
     cwd = my_get_current_dir ();
     g_setenv ("TEMP", cwd, TRUE);
     g_free (cwd);
 
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, realpath_test, data_source);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

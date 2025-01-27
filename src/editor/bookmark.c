@@ -42,7 +42,7 @@
 #include <unistd.h>
 
 #include "lib/global.h"
-#include "lib/util.h"           /* MAX_SAVED_BOOKMARKS */
+#include "lib/util.h"           // MAX_SAVED_BOOKMARKS
 
 #include "editwidget.h"
 
@@ -85,7 +85,7 @@ book_mark_find (WEdit *edit, long line)
 
     if (edit->book_mark == NULL)
     {
-        /* must have an imaginary top bookmark at line -1 to make things less complicated  */
+        // must have an imaginary top bookmark at line -1 to make things less complicated
         edit->book_mark = g_new0 (edit_book_mark_t, 1);
         edit->book_mark->line = -1;
         return edit->book_mark;
@@ -94,7 +94,7 @@ book_mark_find (WEdit *edit, long line)
     for (p = edit->book_mark; p != NULL; p = p->next)
     {
         if (p->line > line)
-            break;              /* gone past it going downward */
+            break;              // gone past it going downward
 
         if (p->next != NULL)
         {
@@ -114,7 +114,7 @@ book_mark_find (WEdit *edit, long line)
     for (p = edit->book_mark; p != NULL; p = p->prev)
     {
         if (p->next != NULL && p->next->line <= line)
-            break;              /* gone past it going upward */
+            break;              // gone past it going upward
 
         if (p->line <= line)
         {
@@ -134,14 +134,14 @@ book_mark_find (WEdit *edit, long line)
         }
     }
 
-    return NULL;                /* can't get here */
+    return NULL;                // can't get here
 }
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-/** 
+/**
  * Check if bookmark bookmark exists at this line of this color
  *
  * @param edit editor object
@@ -181,7 +181,7 @@ book_mark_insert (WEdit *edit, long line, int c)
 #if 0
     if (p->line == line)
     {
-        /* already exists, so just change the color */
+        // already exists, so just change the color
         if (p->c != c)
         {
             p->c = c;
@@ -190,12 +190,12 @@ book_mark_insert (WEdit *edit, long line, int c)
         return;
     }
 #endif
-    /* create list entry */
+    // create list entry
     q = g_new (edit_book_mark_t, 1);
     q->line = line;
     q->c = c;
     q->next = p->next;
-    /* insert into list */
+    // insert into list
     q->prev = p;
     if (p->next != NULL)
         p->next->prev = q;
@@ -205,7 +205,7 @@ book_mark_insert (WEdit *edit, long line, int c)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** 
+/**
  * Remove a bookmark if there is one at this line matching this color - c of -1 clear all
  *
  * @param edit editor object
@@ -238,7 +238,7 @@ book_mark_clear (WEdit *edit, long line, int c)
             break;
         }
     }
-    /* if there is only our dummy book mark left, clear it for speed */
+    // if there is only our dummy book mark left, clear it for speed
     if (edit->book_mark->line == -1 && edit->book_mark->next == NULL)
         MC_PTR_FREE (edit->book_mark);
 

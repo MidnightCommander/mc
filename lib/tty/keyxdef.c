@@ -49,7 +49,7 @@
 #include "lib/global.h"
 
 #include "tty.h"
-#include "mouse.h"              /* required before key.h */
+#include "mouse.h"              // required before key.h
 #include "key.h"
 
 #if defined (__QNX__) && !defined (__QNXNTO__)
@@ -70,7 +70,7 @@
 #else
 #include <term.h>
 #endif
-#include <stdlib.h>             /* getenv() */
+#include <stdlib.h>             // getenv()
 
 /* fieldname -> index conversion */
 #define __QTISX(_qtisn) \
@@ -79,17 +79,17 @@
 /* define the OS/implementation-specific __TK() format */
 #define __TK(_tis,_tcs,_tisx,_qtisn)  __QTISX(_qtisn)
 
-#endif /* __USE_QNX_TI */
+#endif // __USE_QNX_TI
 
-#endif /* HAVE_QNX_KEYS */
+#endif // HAVE_QNX_KEYS
 
 
 /* {{{ */
 
 /* general key definitions:
- * 
+ *
  * format:
- * 
+ *
  *   terminfo name,
  *   termcap name,
  *   index in the terminfo string table (ncurses),
@@ -289,29 +289,29 @@
 #define Key_ctl_enter   Key_enter
 #define Key_ctl_tab     Key_ctab
 
-#define Key_alt_tab     Key_ctl_tab     /* map ALT-TAB to CTRL-TAB */
-#define Key_alt_enter   Key_ctl_enter   /* map ALT-ENTER to CTRL-ENTER */
+#define Key_alt_tab     Key_ctl_tab     // map ALT-TAB to CTRL-TAB
+#define Key_alt_enter   Key_ctl_enter   // map ALT-ENTER to CTRL-ENTER
 
 #ifdef __USE_QNX_TI
 /* define current xtra_key_define_t (enable OS/implementation) */
 #define xtra_key_define_t qnx_key_define_t
-#endif /* __USE_QNX_TI */
-#endif /* HAVE_QNX_KEYS */
+#endif // __USE_QNX_TI
+#endif // HAVE_QNX_KEYS
 
 
 #ifdef xtra_key_define_t
 #ifndef FORCE_BASE_KEY_DEFS
 #define FORCE_BASE_KEY_DEFS 0
 #endif
-#endif /* xtra_key_define_t */
+#endif // xtra_key_define_t
 
 #ifdef HAVE_QNX_KEYS
 #ifdef __USE_QNX_TI
 #define __CT               (__cur_term)
 #define __QTISOFFS(_qtisx) (((charoffset*)(&__CT->_strs))[_qtisx])
 #define __QTISSTR(_qtisx)  (&__CT->_strtab[0]+__QTISOFFS(_qtisx))
-#endif /* __USE_QNX_TI */
-#endif /* HAVE_QNX_KEYS */
+#endif // __USE_QNX_TI
+#endif // HAVE_QNX_KEYS
 
 /*** file scope type declarations ****************************************************************/
 
@@ -323,8 +323,8 @@ typedef const struct qnx_key_define_s
     int mc_code;
     int str_idx;
 } qnx_key_define_t;
-#endif /* __USE_QNX_TI */
-#endif /* HAVE_QNX_KEYS */
+#endif // __USE_QNX_TI
+#endif // HAVE_QNX_KEYS
 
 /*** file scope variables ************************************************************************/
 
@@ -397,7 +397,7 @@ xtra_key_define_t xtra_key_defines[] = {
     {ALT ('\t'), Key_alt_tab}
 };
 
-#endif /* xtra_key_define_t */
+#endif // xtra_key_define_t
 
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
@@ -438,8 +438,8 @@ load_qnx_key_defines (void)
         _qnx_keys_defined = 1;
     }
 }
-#endif /* __USE_QNX_TI */
-#endif /* HAVE_QNX_KEYS */
+#endif // __USE_QNX_TI
+#endif // HAVE_QNX_KEYS
 
 /* --------------------------------------------------------------------------------------------- */
 /* called from key.c/init_key() */

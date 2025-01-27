@@ -6,7 +6,7 @@
 #ifndef MC__TTY_INTERNAL_H
 #define MC__TTY_INTERNAL_H
 
-#include "lib/global.h"         /* include <glib.h> */
+#include "lib/global.h"         // include <glib.h>
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -46,4 +46,4 @@ void tty_colorize_area (int y, int x, int rows, int cols, int color);
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC_TTY_INTERNAL_H */
+#endif // MC_TTY_INTERNAL_H

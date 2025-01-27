@@ -35,13 +35,13 @@
 #include <config.h>
 
 #include <stdio.h>
-#include <stdlib.h>             /* For atol() */
+#include <stdlib.h>             // For atol()
 #include <stdarg.h>
 #include <string.h>
 #include <errno.h>
 #include <sys/types.h>
 #include <signal.h>
-#include <ctype.h>              /* is_digit() */
+#include <ctype.h>              // is_digit()
 #include <sys/stat.h>
 #include <unistd.h>
 #include <dirent.h>
@@ -50,8 +50,8 @@
 
 #include "lib/global.h"
 
-#include "lib/widget.h"         /* message() */
-#include "lib/strutil.h"        /* str_crt_conv_from() */
+#include "lib/widget.h"         // message()
+#include "lib/strutil.h"        // str_crt_conv_from()
 #include "lib/util.h"
 
 #include "vfs.h"
@@ -197,7 +197,7 @@ mc_open (const vfs_path_t *vpath, int flags, ...)
     if (vpath == NULL)
         return (-1);
 
-    /* Get the mode flag */
+    // Get the mode flag
     if ((flags & O_CREAT) != 0)
     {
         va_list ap;
@@ -215,7 +215,7 @@ mc_open (const vfs_path_t *vpath, int flags, ...)
     {
         void *info;
 
-        /* open must be supported */
+        // open must be supported
         info = me->open (vpath, flags, mode);
         if (info == NULL)
             errno = vfs_ferrno (me);
@@ -653,14 +653,14 @@ mc_chdir (const vfs_path_t *vpath)
     old_vfsid = vfs_getid (vfs_get_raw_current_dir ());
     old_vfs = current_vfs;
 
-    /* Actually change directory */
+    // Actually change directory
     vfs_set_raw_current_dir (cd_vpath);
     current_vfs = me;
 
-    /* This function uses the new current_dir implicitly */
+    // This function uses the new current_dir implicitly
     vfs_stamp_create (old_vfs, old_vfsid);
 
-    /* Sometimes we assume no trailing slash on cwd */
+    // Sometimes we assume no trailing slash on cwd
     path_element = vfs_path_get_by_index (vfs_get_raw_current_dir (), -1);
     if (vfs_path_element_valid (path_element))
     {
@@ -684,7 +684,7 @@ mc_chdir (const vfs_path_t *vpath)
                 super->path_element->path = g_strdup (path_element->path);
             }
         }
-#endif /* ENABLE_VFS_NET */
+#endif // ENABLE_VFS_NET
     }
 
     return 0;
@@ -740,7 +740,7 @@ mc_mkstemps (vfs_path_t **pname_vpath, const char *prefix, const char *suffix)
         p1 = g_strdup (prefix);
     else
     {
-        /* Add prefix first to find the position of XXXXXX */
+        // Add prefix first to find the position of XXXXXX
         p1 = g_build_filename (mc_tmpdir (), prefix, (char *) NULL);
     }
 
@@ -778,7 +778,7 @@ mc_tmpdir (void)
     const char *sys_tmp;
     gchar *template;
 
-    /* Check if already correctly initialized */
+    // Check if already correctly initialized
     if (tmpdir != NULL)
     {
         struct stat st;

@@ -36,4 +36,4 @@ gboolean do_select_codepage (void);
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__SELCODEPAGE_H */
+#endif // MC__SELCODEPAGE_H

@@ -9,7 +9,7 @@
 #ifndef MC_LOCK_H
 #define MC_LOCK_H
 
-#include "lib/vfs/vfs.h"        /* vfs_path_t */
+#include "lib/vfs/vfs.h"        // vfs_path_t
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -26,4 +26,4 @@ int unlock_file (const vfs_path_t * fname_vpath);
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC_LOCK_H */
+#endif // MC_LOCK_H

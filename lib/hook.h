@@ -31,4 +31,4 @@ gboolean hook_present (hook_t * hook_list, void (*hook_fn) (void *));
 
 /*** inline functions **************************************************/
 
-#endif /* MC_HOOK_H */
+#endif // MC_HOOK_H

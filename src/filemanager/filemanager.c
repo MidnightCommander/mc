@@ -41,12 +41,12 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/wait.h>
-#include <pwd.h>                /* for username in xterm title */
+#include <pwd.h>                // for username in xterm title
 
 #include "lib/global.h"
-#include "lib/fileloc.h"        /* MC_HINT, MC_FILEPOS_FILE */
+#include "lib/fileloc.h"        // MC_HINT, MC_FILEPOS_FILE
 #include "lib/tty/tty.h"
-#include "lib/tty/key.h"        /* KEY_M_* masks */
+#include "lib/tty/key.h"        // KEY_M_* masks
 #include "lib/skin.h"
 #include "lib/util.h"
 #include "lib/vfs/vfs.h"
@@ -55,23 +55,23 @@
 #ifdef ENABLE_SUBSHELL
 #include "src/subshell/subshell.h"
 #endif
-#include "src/execute.h"        /* toggle_subshell */
-#include "src/setup.h"          /* variables */
-#include "src/learn.h"          /* learn_keys() */
+#include "src/execute.h"        // toggle_subshell
+#include "src/setup.h"          // variables
+#include "src/learn.h"          // learn_keys()
 #include "src/keymap.h"
-#include "src/usermenu.h"       /* user_file_menu_cmd() */
+#include "src/usermenu.h"       // user_file_menu_cmd()
 
 #include "lib/keybind.h"
 #include "lib/event.h"
 
 #include "tree.h"
-#include "boxes.h"              /* sort_box(), tree_box() */
+#include "boxes.h"              // sort_box(), tree_box()
 #include "layout.h"
-#include "cmd.h"                /* commands */
+#include "cmd.h"                // commands
 #include "hotlist.h"
 #include "panelize.h"
-#include "command.h"            /* cmdline */
-#include "dir.h"                /* dir_list_clean() */
+#include "command.h"            // cmdline
+#include "dir.h"                // dir_list_clean()
 
 #ifdef USE_INTERNAL_EDIT
 #include "src/editor/edit.h"
@@ -81,8 +81,8 @@
 #include "src/diffviewer/ydiff.h"
 #endif
 
-#include "src/consaver/cons.saver.h"    /* show_console_contents */
-#include "src/file_history.h"   /* show_file_history() */
+#include "src/consaver/cons.saver.h"    // show_console_contents
+#include "src/file_history.h"   // show_file_history()
 
 #include "filemanager.h"
 
@@ -118,7 +118,7 @@ const char *mc_prompt = NULL;
  * Don't restrict the output on the screen manager level,
  * the translation tables take care of it.
  */
-#endif /* !HAVE_CHARSET */
+#endif // !HAVE_CHARSET
 
 /*** file scope type declarations ****************************************************************/
 
@@ -189,7 +189,7 @@ listmode_cmd (void)
 
     do_refresh ();
 }
-#endif /* LISTMODE_EDITOR */
+#endif // LISTMODE_EDITOR
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -507,7 +507,7 @@ check_other_panel_timestamp (const gchar *event_group_name, const gchar *event_n
         check_panel_timestamp (other_panel, get_other_type (), event_data->vclass, event_data->id);
     return !event_data->ret;
 }
-#endif /* ENABLE_VFS */
+#endif // ENABLE_VFS
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -532,14 +532,14 @@ print_vfs_message (const gchar *event_group_name, const gchar *event_name,
         if (!nice_rotating_dash || (ok_to_refresh <= 0))
             goto ret;
 
-        /* Preserve current cursor position */
+        // Preserve current cursor position
         tty_getyx (&row, &col);
 
         tty_gotoyx (0, 0);
         tty_setcolor (NORMAL_COLOR);
         tty_print_string (str_fit_to_term (event_data->msg, COLS - 1, J_LEFT));
 
-        /* Restore cursor position */
+        // Restore cursor position
         tty_gotoyx (row, col);
         mc_refresh ();
         goto ret;
@@ -578,10 +578,10 @@ create_panels (void)
      *                                 passive panel uses "other_dir" from panels.ini
      */
 
-    /* Set up panel directories */
+    // Set up panel directories
     if (boot_current_is_left)
     {
-        /* left panel is active */
+        // left panel is active
         current_index = 0;
         other_index = 1;
         current_mode = startup_left_mode;
@@ -589,26 +589,26 @@ create_panels (void)
 
         if (mc_run_param0 == NULL && mc_run_param1 == NULL)
         {
-            /* no arguments */
-            current_dir = NULL; /* assume current dir */
-            other_dir = saved_other_dir;        /* from ini */
+            // no arguments
+            current_dir = NULL; // assume current dir
+            other_dir = saved_other_dir;        // from ini
         }
         else if (mc_run_param0 != NULL && mc_run_param1 != NULL)
         {
-            /* two arguments */
+            // two arguments
             current_dir = (char *) mc_run_param0;
             other_dir = mc_run_param1;
         }
-        else                    /* mc_run_param0 != NULL && mc_run_param1 == NULL */
+        else                    // mc_run_param0 != NULL && mc_run_param1 == NULL
         {
-            /* one argument */
+            // one argument
             current_dir = (char *) mc_run_param0;
-            other_dir = saved_other_dir;        /* from ini */
+            other_dir = saved_other_dir;        // from ini
         }
     }
     else
     {
-        /* right panel is active */
+        // right panel is active
         current_index = 1;
         other_index = 0;
         current_mode = startup_right_mode;
@@ -616,28 +616,28 @@ create_panels (void)
 
         if (mc_run_param0 == NULL && mc_run_param1 == NULL)
         {
-            /* no arguments */
-            current_dir = NULL; /* assume current dir */
-            other_dir = saved_other_dir;        /* from ini */
+            // no arguments
+            current_dir = NULL; // assume current dir
+            other_dir = saved_other_dir;        // from ini
         }
         else if (mc_run_param0 != NULL && mc_run_param1 != NULL)
         {
-            /* two arguments */
+            // two arguments
             current_dir = (char *) mc_run_param0;
             other_dir = mc_run_param1;
         }
-        else                    /* mc_run_param0 != NULL && mc_run_param1 == NULL */
+        else                    // mc_run_param0 != NULL && mc_run_param1 == NULL
         {
-            /* one argument */
+            // one argument
             current_dir = (char *) mc_run_param0;
-            other_dir = saved_other_dir;        /* from ini */
+            other_dir = saved_other_dir;        // from ini
         }
     }
 
-    /* 1. Get current dir */
+    // 1. Get current dir
     original_dir = vfs_path_clone (vfs_get_raw_current_dir ());
 
-    /* 2. Create passive panel */
+    // 2. Create passive panel
     if (other_dir != NULL)
     {
         vfs_path_t *vpath;
@@ -651,7 +651,7 @@ create_panels (void)
     }
     create_panel (other_index, other_mode);
 
-    /* 3. Create active panel */
+    // 3. Create active panel
     if (current_dir == NULL)
         mc_chdir (original_dir);
     else
@@ -679,7 +679,7 @@ create_panels (void)
 #ifdef ENABLE_VFS
     mc_event_add (MCEVENT_GROUP_CORE, "vfs_timestamp", check_other_panel_timestamp, NULL, NULL);
     mc_event_add (MCEVENT_GROUP_CORE, "vfs_timestamp", check_current_panel_timestamp, NULL, NULL);
-#endif /* ENABLE_VFS */
+#endif // ENABLE_VFS
 
     mc_event_add (MCEVENT_GROUP_CORE, "vfs_print_message", print_vfs_message, NULL, NULL);
 }
@@ -843,16 +843,16 @@ setup_mc (void)
     tty_display_8bit (TRUE);
 #else
     tty_display_8bit (mc_global.full_eight_bits);
-#endif /* HAVE_CHARSET */
+#endif // HAVE_CHARSET
 
-#else /* HAVE_SLANG */
+#else // HAVE_SLANG
 
 #ifdef HAVE_CHARSET
     tty_display_8bit (TRUE);
 #else
     tty_display_8bit (mc_global.eight_bit_clean);
-#endif /* HAVE_CHARSET */
-#endif /* HAVE_SLANG */
+#endif // HAVE_CHARSET
+#endif // HAVE_SLANG
 
     const int baudrate = tty_baudrate ();
     if ((baudrate > 0 && baudrate < 9600) || mc_global.tty.slow_terminal)
@@ -906,7 +906,7 @@ create_file_manager (void)
 
     filemanager->get_shortcut = midnight_get_shortcut;
     filemanager->get_title = midnight_get_title;
-    /* allow rebind tab */
+    // allow rebind tab
     widget_want_tab (w, TRUE);
 
     the_menubar = menubar_new (NULL);
@@ -939,7 +939,7 @@ create_file_manager (void)
        NULL dereference in load_prompt() -> ... -> setup_cmdline() -> label_set_text(). */
     if (mc_global.tty.use_subshell)
         add_select_channel (mc_global.tty.subshell_pty, load_prompt, NULL);
-#endif /* !ENABLE_SUBSHELL */
+#endif // !ENABLE_SUBSHELL
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -975,7 +975,7 @@ mc_maybe_editor_or_viewer (void)
     case MC_RUN_EDITOR:
         ret = edit_files ((GList *) mc_run_param0);
         break;
-#endif /* USE_INTERNAL_EDIT */
+#endif // USE_INTERNAL_EDIT
     case MC_RUN_VIEWER:
         {
             vfs_path_t *vpath = NULL;
@@ -991,7 +991,7 @@ mc_maybe_editor_or_viewer (void)
     case MC_RUN_DIFFVIEWER:
         ret = dview_diff_cmd (mc_run_param0, mc_run_param1);
         break;
-#endif /* USE_DIFF_VIEW */
+#endif // USE_DIFF_VIEW
     default:
         ret = FALSE;
     }
@@ -1118,7 +1118,7 @@ toggle_show_hidden (void)
 {
     panels_options.show_dot_files = !panels_options.show_dot_files;
     update_panels (UP_RELOAD, UP_KEEPSEL);
-    /* redraw panels forced */
+    // redraw panels forced
     update_dirty_panels ();
 }
 
@@ -1131,7 +1131,7 @@ midnight_execute_cmd (Widget *sender, long command)
 
     (void) sender;
 
-    /* stop quick search before executing any command */
+    // stop quick search before executing any command
     send_message (current_panel, NULL, MSG_ACTION, CK_SearchStop, NULL);
 
     switch (command)
@@ -1267,14 +1267,14 @@ midnight_execute_cmd (Widget *sender, long command)
         help_cmd ();
         break;
     case CK_History:
-        /* show the history of command line widget */
+        // show the history of command line widget
         send_message (cmdline, NULL, MSG_ACTION, CK_History, NULL);
         break;
     case CK_PanelInfo:
         if (sender == WIDGET (the_menubar))
-            info_cmd ();        /* menu */
+            info_cmd ();        // menu
         else
-            info_cmd_no_menu ();        /* shortcut or buttonbar */
+            info_cmd_no_menu ();        // shortcut or buttonbar
         break;
 #ifdef ENABLE_BACKGROUND
     case CK_Jobs:
@@ -1326,9 +1326,9 @@ midnight_execute_cmd (Widget *sender, long command)
         break;
     case CK_PanelQuickView:
         if (sender == WIDGET (the_menubar))
-            quick_view_cmd ();  /* menu */
+            quick_view_cmd ();  // menu
         else
-            quick_cmd_no_menu ();       /* shortcut or buttonabr */
+            quick_cmd_no_menu ();       // shortcut or buttonabr
         break;
     case CK_QuitQuiet:
         quiet_quit_cmd ();
@@ -1419,7 +1419,7 @@ midnight_execute_cmd (Widget *sender, long command)
         show_editor_viewer_history ();
         break;
     case CK_Cancel:
-        /* don't close panels due to SIGINT */
+        // don't close panels due to SIGINT
         break;
     default:
         res = MSG_NOT_HANDLED;
@@ -1493,7 +1493,7 @@ midnight_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *
     case MSG_DRAW:
         load_hint (TRUE);
         group_default_callback (w, NULL, MSG_DRAW, 0, NULL);
-        /* We handle the special case of the output lines */
+        // We handle the special case of the output lines
         if (mc_global.tty.console_flag != '\0' && output_lines != 0)
         {
             unsigned char end_line;
@@ -1510,7 +1510,7 @@ midnight_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *
         return MSG_HANDLED;
 
     case MSG_IDLE:
-        /* We only need the first idle event to show user menu after start */
+        // We only need the first idle event to show user menu after start
         widget_idle (w, FALSE);
 
         if (boot_current_is_left)
@@ -1530,7 +1530,7 @@ midnight_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *
                 return midnight_execute_cmd (NULL, command);
         }
 
-        /* FIXME: should handle all menu shortcuts before this point */
+        // FIXME: should handle all menu shortcuts before this point
         if (widget_get_state (WIDGET (the_menubar), WST_FOCUSED))
             return MSG_NOT_HANDLED;
 
@@ -1538,7 +1538,7 @@ midnight_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *
         {
             if (handle_cmdline_enter ())
                 return MSG_HANDLED;
-            /* Else: the panel will handle it. */
+            // Else: the panel will handle it.
         }
 
         if ((!mc_global.tty.alternate_plus_minus
@@ -1547,7 +1547,7 @@ midnight_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *
         {
             if (!only_leading_plus_minus)
             {
-                /* Special treatment, since the input line will eat them */
+                // Special treatment, since the input line will eat them
                 if (parm == '+')
                     return send_message (current_panel, filemanager, MSG_ACTION, CK_Select, NULL);
 
@@ -1579,7 +1579,7 @@ midnight_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *
     case MSG_HOTKEY_HANDLED:
         if ((get_current_type () == view_listing) && current_panel->quick_search.active)
         {
-            current_panel->dirty = TRUE;        /* FIXME: unneeded? */
+            current_panel->dirty = TRUE;        // FIXME: unneeded?
             send_message (current_panel, NULL, MSG_ACTION, CK_SearchStop, NULL);
         }
         return MSG_HANDLED;
@@ -1604,7 +1604,7 @@ midnight_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *
         return MSG_HANDLED;
 
     case MSG_ACTION:
-        /* Handle shortcuts, menu, and buttonbar. */
+        // Handle shortcuts, menu, and buttonbar.
         return midnight_execute_cmd (sender, parm);
 
     case MSG_DESTROY:
@@ -1663,7 +1663,7 @@ get_random_hint (gboolean force)
     size_t len, start;
     GIConv conv;
 
-    /* Do not change hints more often than one minute */
+    // Do not change hints more often than one minute
     if (!force && !mc_time_elapsed (&tv, update_period))
         return g_strdup ("");
 
@@ -1671,11 +1671,11 @@ get_random_hint (gboolean force)
     if (data == NULL)
         return NULL;
 
-    /* get a random entry */
+    // get a random entry
     srand ((unsigned int) (tv / G_USEC_PER_SEC));
     start = ((size_t) rand ()) % (len - 1);
 
-    /* Search the start of paragraph */
+    // Search the start of paragraph
     for (; start != 0; start--)
         if (data[start] == '\n' && data[start + 1] == '\n')
         {
@@ -1683,7 +1683,7 @@ get_random_hint (gboolean force)
             break;
         }
 
-    /* Search the end of paragraph */
+    // Search the end of paragraph
     for (eop = data + start; *eop != '\0'; eop++)
     {
         if (*eop == '\n' && *(eop + 1) == '\n')
@@ -1695,8 +1695,8 @@ get_random_hint (gboolean force)
             *eop = ' ';
     }
 
-    /* hint files are stored in utf-8 */
-    /* try convert hint file from utf-8 to terminal encoding */
+    // hint files are stored in utf-8
+    // try convert hint file from utf-8 to terminal encoding
     conv = str_crt_conv_from ("UTF-8");
     if (conv == INVALID_CONV)
         result = g_strndup (data + start, len - start);
@@ -1808,7 +1808,7 @@ do_nc (void)
     filemanager = dlg_create (FALSE, 0, 0, 1, 1, WPOS_FULLSCREEN, FALSE, dialog_colors,
                               midnight_callback, NULL, "[main]", NULL);
 
-    /* Check if we were invoked as an editor or file viewer */
+    // Check if we were invoked as an editor or file viewer
     if (mc_global.mc_run_mode != MC_RUN_FULL)
     {
         setup_dummy_mc ();
@@ -1816,7 +1816,7 @@ do_nc (void)
     }
     else
     {
-        /* We only need the first idle event to show user menu after start */
+        // We only need the first idle event to show user menu after start
         widget_idle (WIDGET (filemanager), TRUE);
 
         setup_mc ();
@@ -1829,15 +1829,15 @@ do_nc (void)
 
         ret = TRUE;
 
-        /* widget_destroy destroys even current_panel->cwd_vpath, so we have to save a copy :) */
+        // widget_destroy destroys even current_panel->cwd_vpath, so we have to save a copy :)
         if (mc_args__last_wd_file != NULL && vfs_current_is_local ())
             last_wd_string = g_strdup (vfs_path_as_str (current_panel->cwd_vpath));
 
-        /* don't handle VFS timestamps for dirs opened in panels */
+        // don't handle VFS timestamps for dirs opened in panels
         mc_event_destroy (MCEVENT_GROUP_CORE, "vfs_timestamp");
     }
 
-    /* Program end */
+    // Program end
     mc_global.midnight_shutdown = TRUE;
     dialog_switch_shutdown ();
     done_mc ();

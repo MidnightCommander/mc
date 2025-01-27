@@ -32,4 +32,4 @@ void sync_tree (const vfs_path_t * vpath);
 WTree *find_tree (const WDialog * h);
 
 /*** inline functions ****************************************************************************/
-#endif /* MC__TREE_H */
+#endif // MC__TREE_H

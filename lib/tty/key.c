@@ -53,11 +53,11 @@
 #include "lib/vfs/vfs.h"
 
 #include "tty.h"
-#include "tty-internal.h"       /* mouse_enabled */
+#include "tty-internal.h"       // mouse_enabled
 #include "mouse.h"
 #include "key.h"
 
-#include "lib/widget.h"         /* mc_refresh() */
+#include "lib/widget.h"         // mc_refresh()
 
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
 #include "x11conn.h"
@@ -65,35 +65,35 @@
 
 #ifdef __linux__
 #if defined(__GLIBC__) && (__GLIBC__ < 2)
-#include <linux/termios.h>      /* TIOCLINUX */
+#include <linux/termios.h>      // TIOCLINUX
 #else
 #include <termios.h>
 #endif
 #ifdef HAVE_SYS_IOCTL_H
 #include <sys/ioctl.h>
 #endif
-#endif /* __linux__ */
+#endif // __linux__
 
 #ifdef __CYGWIN__
 #include <termios.h>
 #ifdef HAVE_SYS_IOCTL_H
 #include <sys/ioctl.h>
 #endif
-#endif /* __CYGWIN__ */
+#endif // __CYGWIN__
 
 #ifdef __QNXNTO__
 #include <dlfcn.h>
 #include <Ph.h>
 #include <sys/dcmd_chr.h>
-#endif /* __QNXNTO__ */
+#endif // __QNXNTO__
 
 /*** global variables ****************************************************************************/
 
-int mou_auto_repeat = 100;      /* ms */
-int double_click_speed = 250;   /* ms */
+int mou_auto_repeat = 100;      // ms
+int double_click_speed = 250;   // ms
 gboolean old_esc_mode = TRUE;
 /* timeout for old_esc_mode in usec */
-int old_esc_mode_timeout = G_USEC_PER_SEC;      /* us, settable via env */
+int old_esc_mode_timeout = G_USEC_PER_SEC;      // us, settable via env
 gboolean use_8th_bit_as_meta = FALSE;
 
 gboolean bracketed_pasting_in_progress = FALSE;
@@ -144,7 +144,7 @@ const key_code_name_t key_name_conv_tab[] = {
     {KEY_KP_SUBTRACT, "kpminus", N_("- on keypad"), "-"},
     {KEY_KP_ADD, "kpplus", N_("+ on keypad"), "+"},
 
-    /* From here on, these won't be shown in Learn keys (no space) */
+    // From here on, these won't be shown in Learn keys (no space)
     {KEY_LEFT, "kpleft", N_("Left arrow keypad"), "Left"},
     {KEY_RIGHT, "kpright", N_("Right arrow keypad"), "Right"},
     {KEY_UP, "kpup", N_("Up arrow keypad"), "Up"},
@@ -163,7 +163,7 @@ const key_code_name_t key_name_conv_tab[] = {
     {KEY_A1, "a1", N_("A1 key"), "A1"},
     {KEY_C1, "c1", N_("C1 key"), "C1"},
 
-    /* Alternative label */
+    // Alternative label
     {ESC_CHAR, "esc", N_("Escape"), "Esc"},
     {KEY_BACKSPACE, "bs", N_("Backspace"), "Bakspace"},
     {KEY_IC, "ins", N_("Insert"), "Ins"},
@@ -204,10 +204,10 @@ const key_code_name_t key_name_conv_tab[] = {
     {(int) '\\', "backslash", N_("Backslash key"), "\\"},
     {(int) '#', "number", N_("Number sign #"), "#"},
     {(int) '#', "hash", N_("Number sign #"), "#"},
-    /* TRANSLATORS: Please translate as in "at sign" (@). */
+    // TRANSLATORS: Please translate as in "at sign" (@).
     {(int) '@', "at", N_("At sign"), "@"},
 
-    /* meta keys */
+    // meta keys
     {KEY_M_CTRL, "control", N_("Ctrl"), "C"},
     {KEY_M_CTRL, "ctrl", N_("Ctrl"), "C"},
     {KEY_M_ALT, "meta", N_("Alt"), "M"},
@@ -238,10 +238,10 @@ typedef enum
 
 typedef struct key_def
 {
-    char ch;                    /* Holds the matching char code */
-    int code;                   /* The code returned, valid if child == NULL */
+    char ch;                    // Holds the matching char code
+    int code;                   // The code returned, valid if child == NULL
     struct key_def *next;
-    struct key_def *child;      /* sequence continuation */
+    struct key_def *child;      // sequence continuation
     int action;                 /* optional action to be done. Now used only
                                    to mark that we are just after the first
                                    Escape */
@@ -304,19 +304,19 @@ static key_define_t xterm_key_defines[] = {
     {KEY_F (9), ESC_STR "[20~", MCKEY_NOACTION},
     {KEY_F (10), ESC_STR "[21~", MCKEY_NOACTION},
 
-    /* old xterm Shift-arrows */
+    // old xterm Shift-arrows
     {KEY_M_SHIFT | KEY_UP, ESC_STR "O2A", MCKEY_NOACTION},
     {KEY_M_SHIFT | KEY_DOWN, ESC_STR "O2B", MCKEY_NOACTION},
     {KEY_M_SHIFT | KEY_RIGHT, ESC_STR "O2C", MCKEY_NOACTION},
     {KEY_M_SHIFT | KEY_LEFT, ESC_STR "O2D", MCKEY_NOACTION},
 
-    /* new xterm Shift-arrows */
+    // new xterm Shift-arrows
     {KEY_M_SHIFT | KEY_UP, ESC_STR "[1;2A", MCKEY_NOACTION},
     {KEY_M_SHIFT | KEY_DOWN, ESC_STR "[1;2B", MCKEY_NOACTION},
     {KEY_M_SHIFT | KEY_RIGHT, ESC_STR "[1;2C", MCKEY_NOACTION},
     {KEY_M_SHIFT | KEY_LEFT, ESC_STR "[1;2D", MCKEY_NOACTION},
 
-    /* more xterm keys with modifiers */
+    // more xterm keys with modifiers
     {KEY_M_CTRL | KEY_PPAGE, ESC_STR "[5;5~", MCKEY_NOACTION},
     {KEY_M_CTRL | KEY_NPAGE, ESC_STR "[6;5~", MCKEY_NOACTION},
     {KEY_M_CTRL | KEY_IC, ESC_STR "[2;5~", MCKEY_NOACTION},
@@ -337,14 +337,14 @@ static key_define_t xterm_key_defines[] = {
     {KEY_M_SHIFT | KEY_M_CTRL | KEY_LEFT, ESC_STR "[1;6D", MCKEY_NOACTION},
     {KEY_M_SHIFT | '\t', ESC_STR "[Z", MCKEY_NOACTION},
 
-    /* putty */
+    // putty
     {KEY_M_SHIFT | KEY_M_CTRL | KEY_UP, ESC_STR "[[1;6A", MCKEY_NOACTION},
     {KEY_M_SHIFT | KEY_M_CTRL | KEY_DOWN, ESC_STR "[[1;6B", MCKEY_NOACTION},
     {KEY_M_SHIFT | KEY_M_CTRL | KEY_RIGHT, ESC_STR "[[1;6C", MCKEY_NOACTION},
     {KEY_M_SHIFT | KEY_M_CTRL | KEY_LEFT, ESC_STR "[[1;6D", MCKEY_NOACTION},
 
-    /* putty alt-arrow keys */
-    /* removed as source esc esc esc trouble */
+    // putty alt-arrow keys
+    // removed as source esc esc esc trouble
     /*
        { KEY_M_ALT | KEY_UP,    ESC_STR ESC_STR "OA", MCKEY_NOACTION },
        { KEY_M_ALT | KEY_DOWN,  ESC_STR ESC_STR "OB", MCKEY_NOACTION },
@@ -365,7 +365,7 @@ static key_define_t xterm_key_defines[] = {
        { KEY_M_CTRL | KEY_M_ALT | KEY_HOME,  ESC_STR ESC_STR "[1;5H", MCKEY_NOACTION },
        { KEY_M_CTRL | KEY_M_ALT | KEY_END,   ESC_STR ESC_STR "[1;5F", MCKEY_NOACTION },
      */
-    /* xterm alt-arrow keys */
+    // xterm alt-arrow keys
     {KEY_M_ALT | KEY_UP, ESC_STR "[1;3A", MCKEY_NOACTION},
     {KEY_M_ALT | KEY_DOWN, ESC_STR "[1;3B", MCKEY_NOACTION},
     {KEY_M_ALT | KEY_RIGHT, ESC_STR "[1;3C", MCKEY_NOACTION},
@@ -388,7 +388,7 @@ static key_define_t xterm_key_defines[] = {
     {KEY_M_SHIFT | KEY_M_ALT | KEY_RIGHT, ESC_STR "[1;4C", MCKEY_NOACTION},
     {KEY_M_SHIFT | KEY_M_ALT | KEY_LEFT, ESC_STR "[1;4D", MCKEY_NOACTION},
 
-    /* rxvt keys with modifiers */
+    // rxvt keys with modifiers
     {KEY_M_SHIFT | KEY_UP, ESC_STR "[a", MCKEY_NOACTION},
     {KEY_M_SHIFT | KEY_DOWN, ESC_STR "[b", MCKEY_NOACTION},
     {KEY_M_SHIFT | KEY_RIGHT, ESC_STR "[c", MCKEY_NOACTION},
@@ -407,11 +407,11 @@ static key_define_t xterm_key_defines[] = {
     {KEY_M_CTRL | KEY_DC, ESC_STR "[3^", MCKEY_NOACTION},
     {KEY_M_SHIFT | KEY_DC, ESC_STR "[3$", MCKEY_NOACTION},
 
-    /* konsole keys with modifiers */
+    // konsole keys with modifiers
     {KEY_M_SHIFT | KEY_HOME, ESC_STR "O2H", MCKEY_NOACTION},
     {KEY_M_SHIFT | KEY_END, ESC_STR "O2F", MCKEY_NOACTION},
 
-    /* gnome-terminal */
+    // gnome-terminal
     {KEY_M_SHIFT | KEY_UP, ESC_STR "[2A", MCKEY_NOACTION},
     {KEY_M_SHIFT | KEY_DOWN, ESC_STR "[2B", MCKEY_NOACTION},
     {KEY_M_SHIFT | KEY_RIGHT, ESC_STR "[2C", MCKEY_NOACTION},
@@ -425,7 +425,7 @@ static key_define_t xterm_key_defines[] = {
     {KEY_M_SHIFT | KEY_M_CTRL | KEY_RIGHT, ESC_STR "[6C", MCKEY_NOACTION},
     {KEY_M_SHIFT | KEY_M_CTRL | KEY_LEFT, ESC_STR "[6D", MCKEY_NOACTION},
 
-    /* gnome-terminal - application mode */
+    // gnome-terminal - application mode
     {KEY_M_CTRL | KEY_UP, ESC_STR "O5A", MCKEY_NOACTION},
     {KEY_M_CTRL | KEY_DOWN, ESC_STR "O5B", MCKEY_NOACTION},
     {KEY_M_CTRL | KEY_RIGHT, ESC_STR "O5C", MCKEY_NOACTION},
@@ -435,15 +435,15 @@ static key_define_t xterm_key_defines[] = {
     {KEY_M_SHIFT | KEY_M_CTRL | KEY_RIGHT, ESC_STR "O6C", MCKEY_NOACTION},
     {KEY_M_SHIFT | KEY_M_CTRL | KEY_LEFT, ESC_STR "O6D", MCKEY_NOACTION},
 
-    /* iTerm */
+    // iTerm
     {KEY_M_SHIFT | KEY_PPAGE, ESC_STR "[5;2~", MCKEY_NOACTION},
     {KEY_M_SHIFT | KEY_NPAGE, ESC_STR "[6;2~", MCKEY_NOACTION},
 
-    /* putty */
+    // putty
     {KEY_M_SHIFT | KEY_PPAGE, ESC_STR "[[5;53~", MCKEY_NOACTION},
     {KEY_M_SHIFT | KEY_NPAGE, ESC_STR "[[6;53~", MCKEY_NOACTION},
 
-    /* keypad keys */
+    // keypad keys
     {KEY_IC, ESC_STR "Op", MCKEY_NOACTION},
     {KEY_DC, ESC_STR "On", MCKEY_NOACTION},
     {'/', ESC_STR "Oo", MCKEY_NOACTION},
@@ -455,73 +455,73 @@ static key_define_t xterm_key_defines[] = {
 /* qansi-m terminals have a much more key combinations,
    which are undefined in termcap/terminfo */
 static key_define_t qansi_key_defines[] = {
-    /* qansi-m terminal */
-    {KEY_M_CTRL | KEY_NPAGE, ESC_STR "[u", MCKEY_NOACTION},     /* Ctrl-PgDown */
-    {KEY_M_CTRL | KEY_PPAGE, ESC_STR "[v", MCKEY_NOACTION},     /* Ctrl-PgUp   */
-    {KEY_M_CTRL | KEY_HOME, ESC_STR "[h", MCKEY_NOACTION},      /* Ctrl-Home   */
-    {KEY_M_CTRL | KEY_END, ESC_STR "[y", MCKEY_NOACTION},       /* Ctrl-End    */
-    {KEY_M_CTRL | KEY_IC, ESC_STR "[`", MCKEY_NOACTION},        /* Ctrl-Insert */
-    {KEY_M_CTRL | KEY_DC, ESC_STR "[p", MCKEY_NOACTION},        /* Ctrl-Delete */
-    {KEY_M_CTRL | KEY_LEFT, ESC_STR "[d", MCKEY_NOACTION},      /* Ctrl-Left   */
-    {KEY_M_CTRL | KEY_RIGHT, ESC_STR "[c", MCKEY_NOACTION},     /* Ctrl-Right  */
-    {KEY_M_CTRL | KEY_DOWN, ESC_STR "[b", MCKEY_NOACTION},      /* Ctrl-Down   */
-    {KEY_M_CTRL | KEY_UP, ESC_STR "[a", MCKEY_NOACTION},        /* Ctrl-Up     */
-    {KEY_M_CTRL | KEY_KP_ADD, ESC_STR "[s", MCKEY_NOACTION},    /* Ctrl-Gr-Plus */
-    {KEY_M_CTRL | KEY_KP_SUBTRACT, ESC_STR "[t", MCKEY_NOACTION},       /* Ctrl-Gr-Minus */
-    {KEY_M_CTRL | '\t', ESC_STR "[z", MCKEY_NOACTION},  /* Ctrl-Tab    */
-    {KEY_M_SHIFT | '\t', ESC_STR "[Z", MCKEY_NOACTION}, /* Shift-Tab   */
-    {KEY_M_CTRL | KEY_F (1), ESC_STR "[1~", MCKEY_NOACTION},    /* Ctrl-F1    */
-    {KEY_M_CTRL | KEY_F (2), ESC_STR "[2~", MCKEY_NOACTION},    /* Ctrl-F2    */
-    {KEY_M_CTRL | KEY_F (3), ESC_STR "[3~", MCKEY_NOACTION},    /* Ctrl-F3    */
-    {KEY_M_CTRL | KEY_F (4), ESC_STR "[4~", MCKEY_NOACTION},    /* Ctrl-F4    */
-    {KEY_M_CTRL | KEY_F (5), ESC_STR "[5~", MCKEY_NOACTION},    /* Ctrl-F5    */
-    {KEY_M_CTRL | KEY_F (6), ESC_STR "[6~", MCKEY_NOACTION},    /* Ctrl-F6    */
-    {KEY_M_CTRL | KEY_F (7), ESC_STR "[7~", MCKEY_NOACTION},    /* Ctrl-F7    */
-    {KEY_M_CTRL | KEY_F (8), ESC_STR "[8~", MCKEY_NOACTION},    /* Ctrl-F8    */
-    {KEY_M_CTRL | KEY_F (9), ESC_STR "[9~", MCKEY_NOACTION},    /* Ctrl-F9    */
-    {KEY_M_CTRL | KEY_F (10), ESC_STR "[10~", MCKEY_NOACTION},  /* Ctrl-F10  */
-    {KEY_M_CTRL | KEY_F (11), ESC_STR "[11~", MCKEY_NOACTION},  /* Ctrl-F11  */
-    {KEY_M_CTRL | KEY_F (12), ESC_STR "[12~", MCKEY_NOACTION},  /* Ctrl-F12  */
-    {KEY_M_ALT | KEY_F (1), ESC_STR "[17~", MCKEY_NOACTION},    /* Alt-F1    */
-    {KEY_M_ALT | KEY_F (2), ESC_STR "[18~", MCKEY_NOACTION},    /* Alt-F2    */
-    {KEY_M_ALT | KEY_F (3), ESC_STR "[19~", MCKEY_NOACTION},    /* Alt-F3    */
-    {KEY_M_ALT | KEY_F (4), ESC_STR "[20~", MCKEY_NOACTION},    /* Alt-F4    */
-    {KEY_M_ALT | KEY_F (5), ESC_STR "[21~", MCKEY_NOACTION},    /* Alt-F5    */
-    {KEY_M_ALT | KEY_F (6), ESC_STR "[22~", MCKEY_NOACTION},    /* Alt-F6    */
-    {KEY_M_ALT | KEY_F (7), ESC_STR "[23~", MCKEY_NOACTION},    /* Alt-F7    */
-    {KEY_M_ALT | KEY_F (8), ESC_STR "[24~", MCKEY_NOACTION},    /* Alt-F8    */
-    {KEY_M_ALT | KEY_F (9), ESC_STR "[25~", MCKEY_NOACTION},    /* Alt-F9    */
-    {KEY_M_ALT | KEY_F (10), ESC_STR "[26~", MCKEY_NOACTION},   /* Alt-F10   */
-    {KEY_M_ALT | KEY_F (11), ESC_STR "[27~", MCKEY_NOACTION},   /* Alt-F11   */
-    {KEY_M_ALT | KEY_F (12), ESC_STR "[28~", MCKEY_NOACTION},   /* Alt-F12   */
-    {KEY_M_ALT | 'a', ESC_STR "Na", MCKEY_NOACTION},    /* Alt-a     */
-    {KEY_M_ALT | 'b', ESC_STR "Nb", MCKEY_NOACTION},    /* Alt-b     */
-    {KEY_M_ALT | 'c', ESC_STR "Nc", MCKEY_NOACTION},    /* Alt-c     */
-    {KEY_M_ALT | 'd', ESC_STR "Nd", MCKEY_NOACTION},    /* Alt-d     */
-    {KEY_M_ALT | 'e', ESC_STR "Ne", MCKEY_NOACTION},    /* Alt-e     */
-    {KEY_M_ALT | 'f', ESC_STR "Nf", MCKEY_NOACTION},    /* Alt-f     */
-    {KEY_M_ALT | 'g', ESC_STR "Ng", MCKEY_NOACTION},    /* Alt-g     */
-    {KEY_M_ALT | 'h', ESC_STR "Nh", MCKEY_NOACTION},    /* Alt-h     */
-    {KEY_M_ALT | 'i', ESC_STR "Ni", MCKEY_NOACTION},    /* Alt-i     */
-    {KEY_M_ALT | 'j', ESC_STR "Nj", MCKEY_NOACTION},    /* Alt-j     */
-    {KEY_M_ALT | 'k', ESC_STR "Nk", MCKEY_NOACTION},    /* Alt-k     */
-    {KEY_M_ALT | 'l', ESC_STR "Nl", MCKEY_NOACTION},    /* Alt-l     */
-    {KEY_M_ALT | 'm', ESC_STR "Nm", MCKEY_NOACTION},    /* Alt-m     */
-    {KEY_M_ALT | 'n', ESC_STR "Nn", MCKEY_NOACTION},    /* Alt-n     */
-    {KEY_M_ALT | 'o', ESC_STR "No", MCKEY_NOACTION},    /* Alt-o     */
-    {KEY_M_ALT | 'p', ESC_STR "Np", MCKEY_NOACTION},    /* Alt-p     */
-    {KEY_M_ALT | 'q', ESC_STR "Nq", MCKEY_NOACTION},    /* Alt-q     */
-    {KEY_M_ALT | 'r', ESC_STR "Nr", MCKEY_NOACTION},    /* Alt-r     */
-    {KEY_M_ALT | 's', ESC_STR "Ns", MCKEY_NOACTION},    /* Alt-s     */
-    {KEY_M_ALT | 't', ESC_STR "Nt", MCKEY_NOACTION},    /* Alt-t     */
-    {KEY_M_ALT | 'u', ESC_STR "Nu", MCKEY_NOACTION},    /* Alt-u     */
-    {KEY_M_ALT | 'v', ESC_STR "Nv", MCKEY_NOACTION},    /* Alt-v     */
-    {KEY_M_ALT | 'w', ESC_STR "Nw", MCKEY_NOACTION},    /* Alt-w     */
-    {KEY_M_ALT | 'x', ESC_STR "Nx", MCKEY_NOACTION},    /* Alt-x     */
-    {KEY_M_ALT | 'y', ESC_STR "Ny", MCKEY_NOACTION},    /* Alt-y     */
-    {KEY_M_ALT | 'z', ESC_STR "Nz", MCKEY_NOACTION},    /* Alt-z     */
-    {KEY_KP_SUBTRACT, ESC_STR "[S", MCKEY_NOACTION},    /* Gr-Minus  */
-    {KEY_KP_ADD, ESC_STR "[T", MCKEY_NOACTION}, /* Gr-Plus   */
+    // qansi-m terminal
+    {KEY_M_CTRL | KEY_NPAGE, ESC_STR "[u", MCKEY_NOACTION},     // Ctrl-PgDown
+    {KEY_M_CTRL | KEY_PPAGE, ESC_STR "[v", MCKEY_NOACTION},     // Ctrl-PgUp
+    {KEY_M_CTRL | KEY_HOME, ESC_STR "[h", MCKEY_NOACTION},      // Ctrl-Home
+    {KEY_M_CTRL | KEY_END, ESC_STR "[y", MCKEY_NOACTION},       // Ctrl-End
+    {KEY_M_CTRL | KEY_IC, ESC_STR "[`", MCKEY_NOACTION},        // Ctrl-Insert
+    {KEY_M_CTRL | KEY_DC, ESC_STR "[p", MCKEY_NOACTION},        // Ctrl-Delete
+    {KEY_M_CTRL | KEY_LEFT, ESC_STR "[d", MCKEY_NOACTION},      // Ctrl-Left
+    {KEY_M_CTRL | KEY_RIGHT, ESC_STR "[c", MCKEY_NOACTION},     // Ctrl-Right
+    {KEY_M_CTRL | KEY_DOWN, ESC_STR "[b", MCKEY_NOACTION},      // Ctrl-Down
+    {KEY_M_CTRL | KEY_UP, ESC_STR "[a", MCKEY_NOACTION},        // Ctrl-Up
+    {KEY_M_CTRL | KEY_KP_ADD, ESC_STR "[s", MCKEY_NOACTION},    // Ctrl-Gr-Plus
+    {KEY_M_CTRL | KEY_KP_SUBTRACT, ESC_STR "[t", MCKEY_NOACTION},       // Ctrl-Gr-Minus
+    {KEY_M_CTRL | '\t', ESC_STR "[z", MCKEY_NOACTION},  // Ctrl-Tab
+    {KEY_M_SHIFT | '\t', ESC_STR "[Z", MCKEY_NOACTION}, // Shift-Tab
+    {KEY_M_CTRL | KEY_F (1), ESC_STR "[1~", MCKEY_NOACTION},    // Ctrl-F1
+    {KEY_M_CTRL | KEY_F (2), ESC_STR "[2~", MCKEY_NOACTION},    // Ctrl-F2
+    {KEY_M_CTRL | KEY_F (3), ESC_STR "[3~", MCKEY_NOACTION},    // Ctrl-F3
+    {KEY_M_CTRL | KEY_F (4), ESC_STR "[4~", MCKEY_NOACTION},    // Ctrl-F4
+    {KEY_M_CTRL | KEY_F (5), ESC_STR "[5~", MCKEY_NOACTION},    // Ctrl-F5
+    {KEY_M_CTRL | KEY_F (6), ESC_STR "[6~", MCKEY_NOACTION},    // Ctrl-F6
+    {KEY_M_CTRL | KEY_F (7), ESC_STR "[7~", MCKEY_NOACTION},    // Ctrl-F7
+    {KEY_M_CTRL | KEY_F (8), ESC_STR "[8~", MCKEY_NOACTION},    // Ctrl-F8
+    {KEY_M_CTRL | KEY_F (9), ESC_STR "[9~", MCKEY_NOACTION},    // Ctrl-F9
+    {KEY_M_CTRL | KEY_F (10), ESC_STR "[10~", MCKEY_NOACTION},  // Ctrl-F10
+    {KEY_M_CTRL | KEY_F (11), ESC_STR "[11~", MCKEY_NOACTION},  // Ctrl-F11
+    {KEY_M_CTRL | KEY_F (12), ESC_STR "[12~", MCKEY_NOACTION},  // Ctrl-F12
+    {KEY_M_ALT | KEY_F (1), ESC_STR "[17~", MCKEY_NOACTION},    // Alt-F1
+    {KEY_M_ALT | KEY_F (2), ESC_STR "[18~", MCKEY_NOACTION},    // Alt-F2
+    {KEY_M_ALT | KEY_F (3), ESC_STR "[19~", MCKEY_NOACTION},    // Alt-F3
+    {KEY_M_ALT | KEY_F (4), ESC_STR "[20~", MCKEY_NOACTION},    // Alt-F4
+    {KEY_M_ALT | KEY_F (5), ESC_STR "[21~", MCKEY_NOACTION},    // Alt-F5
+    {KEY_M_ALT | KEY_F (6), ESC_STR "[22~", MCKEY_NOACTION},    // Alt-F6
+    {KEY_M_ALT | KEY_F (7), ESC_STR "[23~", MCKEY_NOACTION},    // Alt-F7
+    {KEY_M_ALT | KEY_F (8), ESC_STR "[24~", MCKEY_NOACTION},    // Alt-F8
+    {KEY_M_ALT | KEY_F (9), ESC_STR "[25~", MCKEY_NOACTION},    // Alt-F9
+    {KEY_M_ALT | KEY_F (10), ESC_STR "[26~", MCKEY_NOACTION},   // Alt-F10
+    {KEY_M_ALT | KEY_F (11), ESC_STR "[27~", MCKEY_NOACTION},   // Alt-F11
+    {KEY_M_ALT | KEY_F (12), ESC_STR "[28~", MCKEY_NOACTION},   // Alt-F12
+    {KEY_M_ALT | 'a', ESC_STR "Na", MCKEY_NOACTION},    // Alt-a
+    {KEY_M_ALT | 'b', ESC_STR "Nb", MCKEY_NOACTION},    // Alt-b
+    {KEY_M_ALT | 'c', ESC_STR "Nc", MCKEY_NOACTION},    // Alt-c
+    {KEY_M_ALT | 'd', ESC_STR "Nd", MCKEY_NOACTION},    // Alt-d
+    {KEY_M_ALT | 'e', ESC_STR "Ne", MCKEY_NOACTION},    // Alt-e
+    {KEY_M_ALT | 'f', ESC_STR "Nf", MCKEY_NOACTION},    // Alt-f
+    {KEY_M_ALT | 'g', ESC_STR "Ng", MCKEY_NOACTION},    // Alt-g
+    {KEY_M_ALT | 'h', ESC_STR "Nh", MCKEY_NOACTION},    // Alt-h
+    {KEY_M_ALT | 'i', ESC_STR "Ni", MCKEY_NOACTION},    // Alt-i
+    {KEY_M_ALT | 'j', ESC_STR "Nj", MCKEY_NOACTION},    // Alt-j
+    {KEY_M_ALT | 'k', ESC_STR "Nk", MCKEY_NOACTION},    // Alt-k
+    {KEY_M_ALT | 'l', ESC_STR "Nl", MCKEY_NOACTION},    // Alt-l
+    {KEY_M_ALT | 'm', ESC_STR "Nm", MCKEY_NOACTION},    // Alt-m
+    {KEY_M_ALT | 'n', ESC_STR "Nn", MCKEY_NOACTION},    // Alt-n
+    {KEY_M_ALT | 'o', ESC_STR "No", MCKEY_NOACTION},    // Alt-o
+    {KEY_M_ALT | 'p', ESC_STR "Np", MCKEY_NOACTION},    // Alt-p
+    {KEY_M_ALT | 'q', ESC_STR "Nq", MCKEY_NOACTION},    // Alt-q
+    {KEY_M_ALT | 'r', ESC_STR "Nr", MCKEY_NOACTION},    // Alt-r
+    {KEY_M_ALT | 's', ESC_STR "Ns", MCKEY_NOACTION},    // Alt-s
+    {KEY_M_ALT | 't', ESC_STR "Nt", MCKEY_NOACTION},    // Alt-t
+    {KEY_M_ALT | 'u', ESC_STR "Nu", MCKEY_NOACTION},    // Alt-u
+    {KEY_M_ALT | 'v', ESC_STR "Nv", MCKEY_NOACTION},    // Alt-v
+    {KEY_M_ALT | 'w', ESC_STR "Nw", MCKEY_NOACTION},    // Alt-w
+    {KEY_M_ALT | 'x', ESC_STR "Nx", MCKEY_NOACTION},    // Alt-x
+    {KEY_M_ALT | 'y', ESC_STR "Ny", MCKEY_NOACTION},    // Alt-y
+    {KEY_M_ALT | 'z', ESC_STR "Nz", MCKEY_NOACTION},    // Alt-z
+    {KEY_KP_SUBTRACT, ESC_STR "[S", MCKEY_NOACTION},    // Gr-Minus
+    {KEY_KP_ADD, ESC_STR "[T", MCKEY_NOACTION}, // Gr-Plus
     {0, NULL, MCKEY_NOACTION},
 };
 
@@ -529,7 +529,7 @@ static key_define_t qansi_key_defines[] = {
 static key_def *keys = NULL;
 
 static int input_fd;
-static int disabled_channels = 0;       /* Disable channels checking */
+static int disabled_channels = 0;       // Disable channels checking
 
 static GSList *select_list = NULL;
 
@@ -547,7 +547,7 @@ ph_pqc_f ph_query_cursor;
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
 static Display *x11_display;
 static Window x11_window;
-#endif /* HAVE_TEXTMODE_X11_SUPPORT */
+#endif // HAVE_TEXTMODE_X11_SUPPORT
 
 static KeySortType has_been_sorted = KEY_NOSORT;
 
@@ -640,7 +640,7 @@ try_channels (gboolean set_timeout)
         int maxfdp, v;
 
         FD_ZERO (&select_set);
-        FD_SET (input_fd, &select_set); /* Add stdin */
+        FD_SET (input_fd, &select_set); // Add stdin
         maxfdp = MAX (add_selects (&select_set), input_fd);
 
         if (set_timeout)
@@ -712,7 +712,7 @@ init_key_x11 (void)
             x11_window = DefaultRootWindow (x11_display);
     }
 }
-#endif /* HAVE_TEXTMODE_X11_SUPPORT */
+#endif // HAVE_TEXTMODE_X11_SUPPORT
 
 /* --------------------------------------------------------------------------------------------- */
 /* Workaround for System V Curses vt100 bug */
@@ -729,16 +729,16 @@ getch_with_delay (void)
         if (pending_keys == NULL)
             try_channels (FALSE);
 
-        /* Try to get a character */
+        // Try to get a character
         c = get_key_code (0);
         if (c != -1)
             break;
 
-        /* Failed -> wait 0.1 secs and try again */
+        // Failed -> wait 0.1 secs and try again
         try_channels (TRUE);
     }
 
-    /* Success -> return the character */
+    // Success -> return the character
     return c;
 }
 
@@ -747,20 +747,20 @@ getch_with_delay (void)
 static void
 xmouse_get_event (Gpm_Event *ev, gboolean extended)
 {
-    static gint64 tv1 = 0;      /* Force first click as single */
+    static gint64 tv1 = 0;      // Force first click as single
     static int clicks = 0;
     static int last_btn = 0;
     int btn;
 
-    /* Decode Xterm mouse information to a GPM style event */
+    // Decode Xterm mouse information to a GPM style event
 
     if (!extended)
     {
-        /* Variable btn has following meaning: */
-        /* 0 = btn1 dn, 1 = btn2 dn, 2 = btn3 dn, 3 = btn up */
+        // Variable btn has following meaning:
+        // 0 = btn1 dn, 1 = btn2 dn, 2 = btn3 dn, 3 = btn up
         btn = tty_lowlevel_getch () - 32;
-        /* Coordinates are 33-based */
-        /* Transform them to 1-based */
+        // Coordinates are 33-based
+        // Transform them to 1-based
         ev->x = tty_lowlevel_getch () - 32;
         ev->y = tty_lowlevel_getch () - 32;
     }
@@ -775,7 +775,7 @@ xmouse_get_event (Gpm_Event *ev, gboolean extended)
         char c;
 
         btn = ev->x = ev->y = 0;
-        ev->type = 0;           /* In case we return on an invalid sequence */
+        ev->type = 0;           // In case we return on an invalid sequence
 
         while ((c = tty_lowlevel_getch ()) != ';')
         {
@@ -803,8 +803,8 @@ xmouse_get_event (Gpm_Event *ev, gboolean extended)
             btn = 3;
     }
 
-    /* There seems to be no way of knowing which button was released */
-    /* So we assume all the buttons were released */
+    // There seems to be no way of knowing which button was released
+    // So we assume all the buttons were released
 
     if (btn == 3)
     {
@@ -812,9 +812,9 @@ xmouse_get_event (Gpm_Event *ev, gboolean extended)
         {
             if ((last_btn & (GPM_B_UP | GPM_B_DOWN)) != 0)
             {
-                /* FIXME: DIRTY HACK */
-                /* don't generate GPM_UP after mouse wheel */
-                /* need for menu event handling */
+                // FIXME: DIRTY HACK
+                // don't generate GPM_UP after mouse wheel
+                // need for menu event handling
                 ev->type = 0;
                 tv1 = 0;
             }
@@ -829,7 +829,7 @@ xmouse_get_event (Gpm_Event *ev, gboolean extended)
         }
         else
         {
-            /* Bogus event, maybe mouse wheel */
+            // Bogus event, maybe mouse wheel
             ev->type = 0;
         }
     }
@@ -874,7 +874,7 @@ xmouse_get_event (Gpm_Event *ev, gboolean extended)
             clicks = 0;
             break;
         default:
-            /* Nothing */
+            // Nothing
             ev->type = 0;
             ev->buttons = 0;
             break;
@@ -899,7 +899,7 @@ get_modifier (void)
 #ifdef __QNXNTO__
     static int in_photon = 0;
     static int ph_ig = 0;
-#endif /* __QNXNTO__ */
+#endif // __QNXNTO__
 
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
     if (x11_window != 0)
@@ -918,17 +918,17 @@ get_modifier (void)
             result |= KEY_M_CTRL;
         return result;
     }
-#endif /* HAVE_TEXTMODE_X11_SUPPORT */
+#endif // HAVE_TEXTMODE_X11_SUPPORT
 
 #ifdef __QNXNTO__
     if (in_photon == 0)
     {
-        /* First time here, let's load Photon library and attach to Photon */
+        // First time here, let's load Photon library and attach to Photon
         in_photon = -1;
 
         if (getenv ("PHOTON2_PATH") != NULL)
         {
-            /* QNX 6.x has no support for RTLD_LAZY */
+            // QNX 6.x has no support for RTLD_LAZY
             void *ph_handle;
 
             ph_handle = dlopen ("/usr/lib/libph.so", RTLD_NOW);
@@ -940,14 +940,14 @@ get_modifier (void)
                 if ((ph_attach != NULL) && (ph_input_group != NULL) && (ph_query_cursor != NULL)
                     && (*ph_attach) (0, 0) != NULL)
                 {
-                    /* Attached */
+                    // Attached
                     ph_ig = (*ph_input_group) (0);
                     in_photon = 1;
                 }
             }
         }
     }
-    /* We do not have Photon running. Assume we are in text console or xterm */
+    // We do not have Photon running. Assume we are in text console or xterm
     if (in_photon == -1)
     {
         int mod_status;
@@ -978,7 +978,7 @@ get_modifier (void)
         if ((cursor_info.key_mods & 0x01) != 0)
             result |= KEY_M_SHIFT;
     }
-#endif /* __QNXNTO__ */
+#endif // __QNXNTO__
 
 #if defined __linux__ || (defined __CYGWIN__ && defined TIOCLINUX)
     {
@@ -987,7 +987,7 @@ get_modifier (void)
         if (ioctl (0, TIOCLINUX, &modifiers) < 0)
             return 0;
 
-        /* Translate Linux modifiers into mc modifiers */
+        // Translate Linux modifiers into mc modifiers
         if ((modifiers & SHIFT_PRESSED) != 0)
             result |= KEY_M_SHIFT;
         if ((modifiers & (ALTL_PRESSED | ALTR_PRESSED)) != 0)
@@ -995,7 +995,7 @@ get_modifier (void)
         if ((modifiers & CONTROL_PRESSED) != 0)
             result |= KEY_M_CTRL;
     }
-#endif /* !__linux__ */
+#endif // !__linux__
 
     return result;
 }
@@ -1026,12 +1026,12 @@ push_char (int c)
 static int
 correct_key_code (int code)
 {
-    unsigned int c = code & ~KEY_M_MASK;        /* code without modifier */
-    unsigned int mod = code & KEY_M_MASK;       /* modifier */
+    unsigned int c = code & ~KEY_M_MASK;        // code without modifier
+    unsigned int mod = code & KEY_M_MASK;       // modifier
 #ifdef __QNXNTO__
     unsigned int qmod;          /* bunch of the QNX console
                                    modifiers needs unchanged */
-#endif /* __QNXNTO__ */
+#endif // __QNXNTO__
 
     /*
      * Add key modifiers directly from X11 or OS.
@@ -1040,22 +1040,22 @@ correct_key_code (int code)
     if (c < 32 || c >= 256)
         mod |= get_modifier ();
 
-    /* This is needed if the newline is reported as carriage return */
+    // This is needed if the newline is reported as carriage return
     if (c == '\r')
         c = '\n';
 
-    /* This is reported to be useful on AIX */
+    // This is reported to be useful on AIX
     if (c == KEY_SCANCEL)
         c = '\t';
 
-    /* Convert Back Tab to Shift+Tab */
+    // Convert Back Tab to Shift+Tab
     if (c == KEY_BTAB)
     {
         c = '\t';
         mod = KEY_M_SHIFT;
     }
 
-    /* F0 is the same as F10 for out purposes */
+    // F0 is the same as F10 for out purposes
     if (c == KEY_F (0))
         c = KEY_F (10);
 
@@ -1067,7 +1067,7 @@ correct_key_code (int code)
      */
     if (c == '\b')
     {
-        /* Special case for backspase ('\b' < 32) */
+        // Special case for backspase ('\b' < 32)
         c = KEY_BACKSPACE;
         mod &= ~KEY_M_CTRL;
     }
@@ -1079,39 +1079,39 @@ correct_key_code (int code)
 
     if (c == 127 && mod == 0)
     {
-        /* Add Ctrl/Alt/Shift-BackSpace */
+        // Add Ctrl/Alt/Shift-BackSpace
         mod |= get_modifier ();
         c = KEY_BACKSPACE;
     }
 
     if (c == '0' && mod == 0 && (qmod & KEY_M_SHIFT) == KEY_M_SHIFT)
     {
-        /* Add Shift-Insert on key pad */
+        // Add Shift-Insert on key pad
         mod = KEY_M_SHIFT;
         c = KEY_IC;
     }
 
     if (c == '.' && mod == 0 && (qmod & KEY_M_SHIFT) == KEY_M_SHIFT)
     {
-        /* Add Shift-Del on key pad */
+        // Add Shift-Del on key pad
         mod = KEY_M_SHIFT;
         c = KEY_DC;
     }
-#endif /* __QNXNTO__ */
+#endif // __QNXNTO__
 
-    /* Unrecognized 0177 is delete (preserve Ctrl) */
+    // Unrecognized 0177 is delete (preserve Ctrl)
     if (c == 0177)
         c = KEY_BACKSPACE;
 
 #if 0
-    /* Unrecognized Ctrl-d is delete */
+    // Unrecognized Ctrl-d is delete
     if (c == 'd' & 31)
     {
         c = KEY_DC;
         mod &= ~KEY_M_CTRL;
     }
 
-    /* Unrecognized Ctrl-h is backspace */
+    // Unrecognized Ctrl-h is backspace
     if (c == 'h' & 31)
     {
         c = KEY_BACKSPACE;
@@ -1119,15 +1119,15 @@ correct_key_code (int code)
     }
 #endif
 
-    /* Shift+BackSpace is backspace */
+    // Shift+BackSpace is backspace
     if (c == KEY_BACKSPACE && (mod & KEY_M_SHIFT) != 0)
         mod &= ~KEY_M_SHIFT;
 
-    /* Convert Shift+Fn to F(n+10) */
+    // Convert Shift+Fn to F(n+10)
     if (c >= KEY_F (1) && c <= KEY_F (10) && (mod & KEY_M_SHIFT) != 0)
         c += 10;
 
-    /* Remove Shift information from function keys */
+    // Remove Shift information from function keys
     if (c >= KEY_F (1) && c <= KEY_F (20))
         mod &= ~KEY_M_SHIFT;
 
@@ -1319,11 +1319,11 @@ init_key (void)
 
     term = getenv ("TERM");
 
-    /* This has to be the first define_sequence */
-    /* So, we can assume that the first keys member has ESC */
+    // This has to be the first define_sequence
+    // So, we can assume that the first keys member has ESC
     define_sequences (mc_default_keys);
 
-    /* Terminfo on irix does not have some keys */
+    // Terminfo on irix does not have some keys
     if (mc_global.tty.xterm_flag
         || (term != NULL
             && (strncmp (term, "iris-ansi", 9) == 0
@@ -1331,7 +1331,7 @@ init_key (void)
                 || strncmp (term, "rxvt", 4) == 0 || strncmp (term, "screen", 6) == 0)))
         define_sequences (xterm_key_defines);
 
-    /* load some additional keys (e.g. direct Alt-? support) */
+    // load some additional keys (e.g. direct Alt-? support)
     load_xtra_key_defines ();
 
 #ifdef __QNX__
@@ -1352,7 +1352,7 @@ init_key (void)
          */
         use_8th_bit_as_meta = FALSE;
     }
-#endif /* __QNX__ */
+#endif // __QNX__
 
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
     init_key_x11 ();
@@ -1486,7 +1486,7 @@ tty_keyname_to_keycode (const char *name, char **label)
 
     g_strfreev (lc_keys);
 
-    /* output */
+    // output
     if (k <= 0)
         return 0;
 
@@ -1559,9 +1559,9 @@ tty_keyname_to_keycode (const char *name, char **label)
 char *
 tty_keycode_to_keyname (const int keycode)
 {
-    /* code without modifier */
+    // code without modifier
     unsigned int k = keycode & ~KEY_M_MASK;
-    /* modifier */
+    // modifier
     unsigned int mod = keycode & KEY_M_MASK;
 
     int key_idx = -1;
@@ -1581,7 +1581,7 @@ tty_keycode_to_keyname (const int keycode)
 
         if ((mod & KEY_M_CTRL) != 0)
         {
-            /* non printeble chars like a CTRL-[A..Z] */
+            // non printeble chars like a CTRL-[A..Z]
             if (k < 32)
                 k += 64;
 
@@ -1645,7 +1645,7 @@ define_sequence (int code, const char *seq, int action)
                     base->child = create_sequence (seq + 1, code, action);
                 else
                 {
-                    /* The sequence matches an existing one.  */
+                    // The sequence matches an existing one.
                     base->code = code;
                     base->action = action;
                 }
@@ -1668,7 +1668,7 @@ define_sequence (int code, const char *seq, int action)
 
     if (*seq == '\0')
     {
-        /* Attempt to redefine a sequence with a shorter sequence.  */
+        // Attempt to redefine a sequence with a shorter sequence.
         return FALSE;
     }
 
@@ -1703,13 +1703,13 @@ is_idle (void)
         }
         else
         {
-            if (mouse_fd >= 0)  /* error indicative */
+            if (mouse_fd >= 0)  // error indicative
             {
                 if (FD_ISSET (mouse_fd, &select_set))
                     FD_CLR (mouse_fd, &select_set);
                 mouse_fd = gpm_fd;
             }
-            /* gpm_fd == -2 means under some X terminal */
+            // gpm_fd == -2 means under some X terminal
             if (gpm_fd == -1)
             {
                 mouse_enabled = FALSE;
@@ -1811,7 +1811,7 @@ get_key_code (int no_delay)
         goto pend_send;
     }
 
-    /* Search the key on the root */
+    // Search the key on the root
     if (no_delay == 0 || this == NULL)
     {
         this = keys;
@@ -1821,7 +1821,7 @@ get_key_code (int no_delay)
         {
             c &= 0x7f;
 
-            /* The first sequence defined starts with esc */
+            // The first sequence defined starts with esc
             parent = keys;
             this = keys->child;
         }
@@ -1833,13 +1833,13 @@ get_key_code (int no_delay)
         {
             if (this->child == NULL)
             {
-                /* We got a complete match, return and reset search */
+                // We got a complete match, return and reset search
                 pending_keys = seq_append = NULL;
                 c = this->code;
                 goto done;
             }
 
-            /* No match yet, but it may be a prefix for a valid seq */
+            // No match yet, but it may be a prefix for a valid seq
             if (!push_char (c))
             {
                 pending_keys = seq_buffer;
@@ -1872,17 +1872,17 @@ get_key_code (int no_delay)
             continue;
         }
 
-        /* c != this->ch. Try other keys with this prefix */
+        // c != this->ch. Try other keys with this prefix
         if (this->next != NULL)
         {
             this = this->next;
             continue;
         }
 
-        /* No match found. Is it one of our ESC <key> specials? */
+        // No match found. Is it one of our ESC <key> specials?
         if ((parent != NULL) && (parent->action == MCKEY_ESCAPE))
         {
-            /* Convert escape-digits to F-keys */
+            // Convert escape-digits to F-keys
             if (g_ascii_isdigit (c))
                 c = KEY_F (c - '0');
             else if (c == ' ')
@@ -1894,11 +1894,11 @@ get_key_code (int no_delay)
             goto done;
         }
 
-        /* Unknown sequence. Maybe a prefix of a longer one. Save it. */
+        // Unknown sequence. Maybe a prefix of a longer one. Save it.
         push_char (c);
         pending_keys = seq_buffer;
         goto pend_send;
-    }                           /* while (this != NULL) */
+    }                           // while (this != NULL)
 
   done:
     this = NULL;
@@ -1915,9 +1915,9 @@ int
 tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
 {
     int c;
-    int flag = 0;               /* Return value from select */
+    int flag = 0;               // Return value from select
 #ifdef HAVE_LIBGPM
-    static struct Gpm_Event ev; /* Mouse event */
+    static struct Gpm_Event ev; // Mouse event
 #endif
     struct timeval time_out;
     struct timeval *time_addr = NULL;
@@ -1944,7 +1944,7 @@ tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
             event->x = -1;
     }
 
-    /* Repeat if using mouse */
+    // Repeat if using mouse
     while (pending_keys == NULL)
     {
         int nfd;
@@ -1964,13 +1964,13 @@ tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
             }
             else
             {
-                if (mouse_fd >= 0)      /* error indicative */
+                if (mouse_fd >= 0)      // error indicative
                 {
                     if (FD_ISSET (mouse_fd, &select_set))
                         FD_CLR (mouse_fd, &select_set);
                     mouse_fd = gpm_fd;
                 }
-                /* gpm_fd == -2 means under some X terminal */
+                // gpm_fd == -2 means under some X terminal
                 if (gpm_fd == -1)
                 {
                     mouse_enabled = FALSE;
@@ -2050,13 +2050,13 @@ tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
                     int status;
 
                     status = Gpm_GetEvent (&ev);
-                    if (status == 1)    /* success */
+                    if (status == 1)    // success
                     {
                         Gpm_FitEvent (&ev);
                         *event = ev;
                         return EV_MOUSE;
                     }
-                    if (status <= 0)    /* connection closed; -1 == error */
+                    if (status <= 0)    // connection closed; -1 == error
                     {
                         if (mouse_fd >= 0 && FD_ISSET (mouse_fd, &select_set))
                             FD_CLR (mouse_fd, &select_set);
@@ -2068,13 +2068,13 @@ tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
             }
             else
             {
-                if (mouse_fd >= 0)      /* error indicative */
+                if (mouse_fd >= 0)      // error indicative
                 {
                     if (FD_ISSET (mouse_fd, &select_set))
                         FD_CLR (mouse_fd, &select_set);
                     mouse_fd = gpm_fd;
                 }
-                /* gpm_fd == -2 means under some X terminal */
+                // gpm_fd == -2 means under some X terminal
                 if (gpm_fd == -1)
                 {
                     mouse_enabled = FALSE;
@@ -2083,33 +2083,33 @@ tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
                 break;
             }
         }
-#endif /* !HAVE_LIBGPM */
+#endif // !HAVE_LIBGPM
     }
 
 #ifndef HAVE_SLANG
     flag = is_wintouched (stdscr);
     untouchwin (stdscr);
-#endif /* !HAVE_SLANG */
+#endif // !HAVE_SLANG
     c = block ? getch_with_delay () : get_key_code (1);
 
 #ifndef HAVE_SLANG
     if (flag > 0)
         tty_touch_screen ();
-#endif /* !HAVE_SLANG */
+#endif // !HAVE_SLANG
 
     if (mouse_enabled && (c == MCKEY_MOUSE
 #ifdef KEY_MOUSE
                           || c == KEY_MOUSE
-#endif /* KEY_MOUSE */
+#endif // KEY_MOUSE
                           || c == MCKEY_EXTENDED_MOUSE))
     {
-        /* Mouse event. See tickets 2956 and 3954 for extended mode detection. */
+        // Mouse event. See tickets 2956 and 3954 for extended mode detection.
         gboolean extended = c == MCKEY_EXTENDED_MOUSE;
 
 #ifdef KEY_MOUSE
         extended = extended || (c == KEY_MOUSE && xmouse_seq == NULL
                                 && xmouse_extended_seq != NULL);
-#endif /* KEY_MOUSE */
+#endif // KEY_MOUSE
 
         xmouse_get_event (event, extended);
         c = (event->type != 0) ? EV_MOUSE : EV_NONE;
@@ -2148,7 +2148,7 @@ tty_getch (void)
 char *
 learn_key (void)
 {
-    /* LEARN_TIMEOUT in ms */
+    // LEARN_TIMEOUT in ms
 #define LEARN_TIMEOUT 200
 
     fd_set Read_FD_Set;
@@ -2158,10 +2158,10 @@ learn_key (void)
 
     buffer = g_string_sized_new (16);
 
-    tty_keypad (FALSE);         /* disable interpreting keys by ncurses */
+    tty_keypad (FALSE);         // disable interpreting keys by ncurses
     c = tty_lowlevel_getch ();
     while (c == -1)
-        c = tty_lowlevel_getch ();      /* Sanity check, should be unnecessary */
+        c = tty_lowlevel_getch ();      // Sanity check, should be unnecessary
     learn_store_key (buffer, c);
 
     end_time = g_get_monotonic_time () + LEARN_TIMEOUT * MC_USEC_PER_MSEC;

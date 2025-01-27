@@ -7,10 +7,10 @@
 
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <inttypes.h>           /* uintmax_t */
+#include <inttypes.h>           // uintmax_t
 #include <unistd.h>
 
-#include "lib/global.h"         /* include <glib.h> */
+#include "lib/global.h"         // include <glib.h>
 
 #include "lib/vfs/vfs.h"
 
@@ -69,13 +69,12 @@
 typedef enum
 {
     CANON_PATH_NOCHANGE = 0,
-    CANON_PATH_JOINSLASHES = 1L << 0,   /**< Multiple '/'s are collapsed to a single '/' */
-    CANON_PATH_REMSLASHDOTS = 1L << 1,  /**< Leading './'s, '/'s and trailing '/.'s are removed */
-    CANON_PATH_REMDOUBLEDOTS = 1L << 3, /**< Non-leading '../'s and trailing '..'s are handled by removing
-                                             portions of the path */
-    CANON_PATH_GUARDUNC = 1L << 4,      /**< Detect and preserve UNC paths: //server/... */
+    CANON_PATH_JOINSLASHES = 1L << 0,   // Multiple '/'s are collapsed to a single '/'
+    CANON_PATH_REMSLASHDOTS = 1L << 1,  // Leading './'s, '/'s and trailing '/.'s are removed
+    CANON_PATH_REMDOUBLEDOTS = 1L << 3, // Non-leading '../'s and trailing '..'s are handled by removing portions of the path
+    CANON_PATH_GUARDUNC = 1L << 4,      // Detect and preserve UNC paths: //server/...
     CANON_PATH_ALL = CANON_PATH_JOINSLASHES | CANON_PATH_REMSLASHDOTS
-                   | CANON_PATH_REMDOUBLEDOTS | CANON_PATH_GUARDUNC  /**< All flags */
+                   | CANON_PATH_REMDOUBLEDOTS | CANON_PATH_GUARDUNC  // All flags
 } canon_path_flags_t;
 /* *INDENT-ON* */
 
@@ -97,11 +96,11 @@ enum compression_type
 /* stdout or stderr stream of child process */
 typedef struct
 {
-    /* file descriptor */
+    // file descriptor
     int fd;
-    /* data read from fd */
+    // data read from fd
     char buf[MC_PIPE_BUFSIZE];
-    /* current position in @buf (used by mc_pstream_get_string()) */
+    // current position in @buf (used by mc_pstream_get_string())
     size_t pos;
     /* positive: length of data in buf;
      * MC_PIPE_STREAM_EOF: EOF of fd;
@@ -109,20 +108,20 @@ typedef struct
      * MC_PIPE_ERROR_READ: reading error from fd.
      */
     ssize_t len;
-    /* whether buf is null-terminated or not */
+    // whether buf is null-terminated or not
     gboolean null_term;
-    /* error code in case of len == MC_PIPE_ERROR_READ */
+    // error code in case of len == MC_PIPE_ERROR_READ
     int error;
 } mc_pipe_stream_t;
 
 /* Pipe descriptor for child process */
 typedef struct
 {
-    /* PID of child process */
+    // PID of child process
     GPid child_pid;
-    /* stdout of child process */
+    // stdout of child process
     mc_pipe_stream_t out;
-    /* stderr of child process */
+    // stderr of child process
     mc_pipe_stream_t err;
 } mc_pipe_t;
 
@@ -312,4 +311,4 @@ canonicalize_pathname (char *path)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#endif /* MC_UTIL_H */
+#endif // MC_UTIL_H

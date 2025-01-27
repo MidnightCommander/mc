@@ -41,7 +41,7 @@
 
 #ifdef HAVE_STRVERSCMP
 #include <string.h>
-#endif /* HAVE_STRVERSCMP */
+#endif // HAVE_STRVERSCMP
 
 #include "lib/strutil.h"
 
@@ -62,7 +62,7 @@
 #define  CMP    2
 #define  LEN    3
 
-#endif /* HAVE_STRVERSCMP */
+#endif // HAVE_STRVERSCMP
 
 /*** file scope type declarations ****************************************************************/
 
@@ -85,19 +85,19 @@ str_verscmp (const char *s1, const char *s2)
 #ifdef HAVE_STRVERSCMP
     return strverscmp (s1, s2);
 
-#else /* HAVE_STRVERSCMP */
+#else // HAVE_STRVERSCMP
     const unsigned char *p1 = (const unsigned char *) s1;
     const unsigned char *p2 = (const unsigned char *) s2;
     unsigned char c1, c2;
     int state;
     int diff;
 
-    /* *INDENT-OFF* */
+    // *INDENT-OFF*
     /* Symbol(s)    0       [1-9]   others
        Transition   (10) 0  (01) d  (00) x   */
     static const unsigned char next_state[] =
     {
-        /* state    x    d    0  */
+        // state    x    d    0
         /* S_N */ S_N, S_I, S_Z,
         /* S_I */ S_N, S_I, S_I,
         /* S_F */ S_N, S_F, S_F,
@@ -113,14 +113,14 @@ str_verscmp (const char *s1, const char *s2)
         /* S_F */ CMP, CMP, CMP, CMP, CMP, CMP, CMP, CMP, CMP,
         /* S_Z */ CMP,  +1,  +1,  -1, CMP, CMP,  -1, CMP, CMP
     };
-    /* *INDENT-ON* */
+    // *INDENT-ON*
 
     if (p1 == p2)
         return 0;
 
     c1 = *p1++;
     c2 = *p2++;
-    /* Hint: '0' is a digit too.  */
+    // Hint: '0' is a digit too.
     state = S_N + ((c1 == '0') + (g_ascii_isdigit (c1) ? 1 : 0));
 
     while ((diff = c1 - c2) == 0)
@@ -151,7 +151,7 @@ str_verscmp (const char *s1, const char *s2)
     default:
         return state;
     }
-#endif /* HAVE_STRVERSCMP */
+#endif // HAVE_STRVERSCMP
 }
 
 /* --------------------------------------------------------------------------------------------- */

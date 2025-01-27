@@ -33,12 +33,12 @@
 #include <stdio.h>
 #include <string.h>
 #ifdef ENABLE_EXT2FS_ATTR
-#include <e2p/e2p.h>            /* fgetflags(), fsetflags() */
+#include <e2p/e2p.h>            // fgetflags(), fsetflags()
 #endif
 
 #include "lib/global.h"
 
-#include "lib/vfs/xdirentry.h"  /* vfs_s_subclass */
+#include "lib/vfs/xdirentry.h"  // vfs_s_subclass
 #include "lib/vfs/utilvfs.h"
 
 #include "local.h"
@@ -219,7 +219,7 @@ local_fsetflags (const vfs_path_t *vpath, unsigned long flags)
     return fsetflags (path, flags);
 }
 
-#endif /* ENABLE_EXT2FS_ATTR */
+#endif // ENABLE_EXT2FS_ATTR
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -388,7 +388,7 @@ local_which (struct vfs_class *me, const char *path)
     (void) me;
     (void) path;
 
-    return 0;                   /* Every path which other systems do not like is expected to be ours */
+    return 0;                   // Every path which other systems do not like is expected to be ours
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -481,7 +481,7 @@ local_nothingisopen (vfsid id)
 void
 vfs_init_localfs (void)
 {
-    /* NULLize vfs_s_subclass members */
+    // NULLize vfs_s_subclass members
     memset (&local_subclass, 0, sizeof (local_subclass));
 
     vfs_init_class (vfs_local_ops, "localfs", VFSF_LOCAL, NULL);

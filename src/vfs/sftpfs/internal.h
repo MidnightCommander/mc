@@ -111,4 +111,4 @@ off_t sftpfs_lseek (vfs_file_handler_t * fh, off_t offset, int whence, GError **
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__VFS_SFTPFS_INTERNAL_H */
+#endif // MC__VFS_SFTPFS_INTERNAL_H

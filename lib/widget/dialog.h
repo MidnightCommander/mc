@@ -9,11 +9,11 @@
 #ifndef MC__DIALOG_H
 #define MC__DIALOG_H
 
-#include <sys/types.h>          /* size_t */
+#include <sys/types.h>          // size_t
 
 #include "lib/global.h"
-#include "lib/hook.h"           /* hook_t */
-#include "lib/keybind.h"        /* global_keymap_t */
+#include "lib/hook.h"           // hook_t
+#include "lib/keybind.h"        // global_keymap_t
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -58,29 +58,29 @@ typedef int dlg_colors_t[DLG_COLOR_COUNT];
 
 struct WDialog
 {
-    WGroup group;               /* base class */
+    WGroup group;               // base class
 
-    /* Set by the user */
-    gboolean compact;           /* Suppress spaces around the frame */
-    const char *help_ctx;       /* Name of the help entry */
-    const int *colors;          /* Color set. Unused in viewer and editor */
+    // Set by the user
+    gboolean compact;           // Suppress spaces around the frame
+    const char *help_ctx;       // Name of the help entry
+    const int *colors;          // Color set. Unused in viewer and editor
 
-    /* Set and received by the user */
-    int ret_value;              /* Result of dlg_run() */
+    // Set and received by the user
+    int ret_value;              // Result of dlg_run()
 
-    /* Internal variables */
-    char *event_group;          /* Name of event group for this dialog */
-    Widget *bg;                 /* WFrame or WBackground */
+    // Internal variables
+    char *event_group;          // Name of event group for this dialog
+    Widget *bg;                 // WFrame or WBackground
 
-    /* Data can be passed to dialog */
+    // Data can be passed to dialog
     union
     {
         void *p;
         int i;
     } data;
 
-    dlg_shortcut_str get_shortcut;      /* Shortcut string */
-    dlg_title_str get_title;    /* useless for modal dialogs */
+    dlg_shortcut_str get_shortcut;      // Shortcut string
+    dlg_title_str get_title;    // useless for modal dialogs
 };
 
 /*** global variables defined in .c file *********************************************************/
@@ -126,4 +126,4 @@ void dlg_close (WDialog * h);
 /*** inline functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-#endif /* MC__DIALOG_H */
+#endif // MC__DIALOG_H

@@ -1,7 +1,7 @@
 #ifndef MC_STRUTIL_H
 #define MC_STRUTIL_H
 
-#include "lib/global.h"         /* include glib.h */
+#include "lib/global.h"         // include glib.h
 
 #include <sys/types.h>
 #include <inttypes.h>
@@ -18,7 +18,7 @@
  */
 
 /* invalid strings
- * function, that works with invalid strings are marked with "I" 
+ * function, that works with invalid strings are marked with "I"
  * in documentation
  * invalid bytes of string are handled as one byte characters with width 1, they
  * are displayed as question marks, I-marked comparing functions try to keep
@@ -27,15 +27,15 @@
 
 /* combining characters
  * displaying: all handled as zero with characters, expect combing character
- * at the begin of string, this character has with one (space add before), 
- * so str_term_width is not good for computing width of singles characters 
+ * at the begin of string, this character has with one (space add before),
+ * so str_term_width is not good for computing width of singles characters
  * (never return zero, expect empty string)
  * for compatibility are strings composed before displaying
- * comparing: comparing decompose all string before comparing, n-compare 
- * functions do not work as is usual, because same strings do not have to be 
- * same length in UTF-8. So they return 0 if one string is prefix of the other 
- * one. 
- * str_prefix is used to determine, how many characters from one string are 
+ * comparing: comparing decompose all string before comparing, n-compare
+ * functions do not work as is usual, because same strings do not have to be
+ * same length in UTF-8. So they return 0 if one string is prefix of the other
+ * one.
+ * str_prefix is used to determine, how many characters from one string are
  * prefix in second string. However, str_prefix return number of characters in
  * decompose form. (used in do_search (screen.c))
  */
@@ -77,7 +77,7 @@ typedef enum
     /* if there is enough space for string on terminal,
      * string is centered otherwise is aligned to the left */
     J_CENTER_LEFT = 0x04,
-    /* fit alignment: if string is too long, truncate with '~' */
+    // fit alignment: if string is too long, truncate with '~'
     J_LEFT_FIT = 0x11,
     J_RIGHT_FIT = 0x12,
     J_CENTER_FIT = 0x13,
@@ -90,7 +90,7 @@ typedef enum
 {
     LONGINT_OK = 0,
 
-    /* These two values can be ORed together, to indicate that both errors occurred. */
+    // These two values can be ORed together, to indicate that both errors occurred.
     LONGINT_OVERFLOW = 1,
     LONGINT_INVALID_SUFFIX_CHAR = 2,
 
@@ -103,7 +103,7 @@ typedef enum
 /* all functions in str_class must be defined for every encoding */
 struct str_class
 {
-    /* *INDENT-OFF* */
+    // *INDENT-OFF*
     gchar *(*conv_gerror_message) (GError * error, const char *def_msg);
       /*I*/ estr_t (*vfs_convert_to) (GIConv coder, const char *string, int size, GString * buffer);
       /*I*/ void (*insert_replace_char) (GString * buffer);
@@ -151,7 +151,7 @@ struct str_class
       /*I*/ char *(*create_key_for_filename) (const char *text, gboolean case_sen);
       /*I*/ int (*key_collate) (const char *t1, const char *t2, gboolean case_sen);
       /*I*/ void (*release_key) (char *key, gboolean case_sen);
-    /* *INDENT-ON* */
+    // *INDENT-ON*
 };
 
 /*** global variables defined in .c file *********************************************************/
@@ -169,17 +169,17 @@ struct str_class str_8bit_init (void);
 struct str_class str_ascii_init (void);
 
 /* create converter from "from_enc" to terminal encoding
- * if "from_enc" is not supported return INVALID_CONV 
+ * if "from_enc" is not supported return INVALID_CONV
  */
 GIConv str_crt_conv_from (const char *from_enc);
 
 /* create converter from terminal encoding to "to_enc"
- * if "to_enc" is not supported return INVALID_CONV 
+ * if "to_enc" is not supported return INVALID_CONV
  */
 GIConv str_crt_conv_to (const char *to_enc);
 
-/* close converter, do not close str_cnv_to_term, str_cnv_from_term, 
- * str_cnv_not_convert 
+/* close converter, do not close str_cnv_to_term, str_cnv_from_term,
+ * str_cnv_not_convert
  */
 void str_close_conv (GIConv conv);
 
@@ -235,7 +235,7 @@ void str_init_strings (const char *termenc);
 void str_uninit_strings (void);
 
 /* try convert characters in ch to output using conv
- * ch_size is size of ch, can by (size_t)(-1) (-1 only for ASCII 
+ * ch_size is size of ch, can by (size_t)(-1) (-1 only for ASCII
  *     compatible encoding, for other must be set)
  * return ESTR_SUCCESS if conversion was successfully,
  * ESTR_PROBLEM if ch contains only part of characters,
@@ -251,8 +251,8 @@ gboolean str_is_valid_string (const char *text);
 
 /* test, if first char of ch is valid
  * size, how many bytes characters occupied, could be (size_t)(-1)
- * return 1 if it is valid, -1 if it is invalid or -2 if it is only part of 
- * multibyte character 
+ * return 1 if it is valid, -1 if it is invalid or -2 if it is only part of
+ * multibyte character
  * I
  */
 int str_is_valid_char (const char *ch, size_t size);
@@ -278,28 +278,28 @@ void str_prev_char (char **text);
 void str_cprev_char (const char **text);
 
 /* return next characters after text, do not call on the end of string
- * works with invalid string 
+ * works with invalid string
  * I
  */
 char *str_get_next_char_safe (char *text);
 const char *str_cget_next_char_safe (const char *text);
 
 /* return previous characters before text, do not call on the start of strings
- * works with invalid string 
+ * works with invalid string
  * I
  */
 char *str_get_prev_char_safe (char *text);
 const char *str_cget_prev_char_safe (const char *text);
 
 /* set text to next characters, do not call on the end of string
- * works with invalid string 
+ * works with invalid string
  * I
  */
 void str_next_char_safe (char **text);
 void str_cnext_char_safe (const char **text);
 
 /* set text to previous characters, do not call on the start of strings
- * works with invalid string 
+ * works with invalid string
  * I
  */
 void str_prev_char_safe (char **text);
@@ -307,15 +307,15 @@ void str_cprev_char_safe (const char **text);
 
 /* set text to next noncombining characters, check the end of text
  * return how many characters was skipped
- * works with invalid string 
+ * works with invalid string
  * I
  */
 int str_next_noncomb_char (char **text);
 int str_cnext_noncomb_char (const char **text);
 
-/* set text to previous noncombining characters, search stop at begin 
+/* set text to previous noncombining characters, search stop at begin
  * return how many characters was skipped
- * works with invalid string 
+ * works with invalid string
  * I
  */
 int str_prev_noncomb_char (char **text, const char *begin);
@@ -347,7 +347,7 @@ gboolean str_isdigit (const char *ch);
 gboolean str_isprint (const char *ch);
 
 /* if first characters in ch is a combining mark (only in utf-8)
- * combining makrs are assumed to be zero width 
+ * combining makrs are assumed to be zero width
  * I
  */
 gboolean str_iscombiningmark (const char *ch);
@@ -437,7 +437,7 @@ int str_term_width2 (const char *text, size_t length);
  */
 int str_term_char_width (const char *text);
 
-/* convert position in characters to position in bytes 
+/* convert position in characters to position in bytes
  * I
  */
 int str_offset_to_pos (const char *text, size_t length);
@@ -447,7 +447,7 @@ int str_offset_to_pos (const char *text, size_t length);
  */
 int str_column_to_pos (const char *text, size_t pos);
 
-/* like str_fit_to_term width just_mode = J_LEFT_FIT, 
+/* like str_fit_to_term width just_mode = J_LEFT_FIT,
  * but do not insert additional spaces
  * I
  */
@@ -623,7 +623,7 @@ str_move (char *dest, const char *src)
 
     g_assert (dest <= src);
 
-    n = strlen (src) + 1;       /* + '\0' */
+    n = strlen (src) + 1;       // + '\0'
 
     return (char *) memmove (dest, src, n);
 }
@@ -680,4 +680,4 @@ filevercmp (const char *s1, const char *s2)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#endif /* MC_STRUTIL_H */
+#endif // MC_STRUTIL_H

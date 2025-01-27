@@ -37,20 +37,20 @@
 #include <string.h>
 
 #include "lib/global.h"
-#include "lib/vfs/vfs.h"        /* vfs_current_is_local() */
-#include "lib/skin.h"           /* DEFAULT_COLOR */
-#include "lib/util.h"           /* whitespace() */
+#include "lib/vfs/vfs.h"        // vfs_current_is_local()
+#include "lib/skin.h"           // DEFAULT_COLOR
+#include "lib/util.h"           // whitespace()
 #include "lib/widget.h"
 
-#include "src/setup.h"          /* quit */
+#include "src/setup.h"          // quit
 #ifdef ENABLE_SUBSHELL
 #include "src/subshell/subshell.h"
 #endif
-#include "src/execute.h"        /* shell_execute() */
-#include "src/usermenu.h"       /* expand_format() */
+#include "src/execute.h"        // shell_execute()
+#include "src/usermenu.h"       // expand_format()
 
-#include "filemanager.h"        /* quiet_quit_cmd(), layout.h */
-#include "cd.h"                 /* cd_to() */
+#include "filemanager.h"        // quiet_quit_cmd(), layout.h
+#include "cd.h"                 // cd_to()
 
 #include "command.h"
 
@@ -90,7 +90,7 @@ enter (WInput *lc_cmdline)
 
     cmd = input_get_ctext (lc_cmdline);
 
-    /* Any initial whitespace should be removed at this point */
+    // Any initial whitespace should be removed at this point
     while (whiteness (*cmd))
         cmd++;
 
@@ -158,7 +158,7 @@ enter (WInput *lc_cmdline)
                 return MSG_HANDLED;
 
             quit = 0;
-            /* restart subshell */
+            // restart subshell
             if (mc_global.tty.use_subshell)
                 init_subshell ();
         }
@@ -188,7 +188,7 @@ command_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *d
     switch (msg)
     {
     case MSG_KEY:
-        /* Special case: we handle the enter key */
+        // Special case: we handle the enter key
         if (parm == '\n')
             return enter (INPUT (w));
         MC_FALLTHROUGH;
@@ -213,9 +213,9 @@ command_new (int y, int x, int cols)
                      | INPUT_COMPLETE_HOSTNAMES | INPUT_COMPLETE_CD | INPUT_COMPLETE_COMMANDS |
                      INPUT_COMPLETE_SHELL_ESC);
     w = WIDGET (cmd);
-    /* Don't set WOP_SELECTABLE up, otherwise panels will be unselected */
+    // Don't set WOP_SELECTABLE up, otherwise panels will be unselected
     widget_set_options (w, WOP_SELECTABLE, FALSE);
-    /* Add our hooks */
+    // Add our hooks
     w->callback = command_callback;
 
     return cmd;

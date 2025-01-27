@@ -41,21 +41,21 @@
 
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <sys/wait.h>           /* waitpid() */
+#include <sys/wait.h>           // waitpid()
 
 #include "lib/global.h"
 
 #include "lib/unixcompat.h"
-#include "lib/tty/key.h"        /* add_select_channel(), delete_select_channel() */
-#include "lib/widget.h"         /* message() */
+#include "lib/tty/key.h"        // add_select_channel(), delete_select_channel()
+#include "lib/widget.h"         // message()
 #include "lib/event-types.h"
-#include "lib/util.h"           /* my_fork() */
+#include "lib/util.h"           // my_fork()
 
 #include "background.h"
 
 /*** global variables ****************************************************************************/
 
-#define MAXCALLARGS 4           /* Number of arguments supported */
+#define MAXCALLARGS 4           // Number of arguments supported
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -128,7 +128,7 @@ destroy_task (pid_t pid)
         p = p->next;
     }
 
-    /* pid not found */
+    // pid not found
     return (-1);
 }
 
@@ -211,7 +211,7 @@ background_attention (int fd, void *closure)
 
         void *pointer;
     } routine;
-    /*    void *routine; */
+    //    void *routine;
     int argc, i, status;
     char *data[MAXCALLARGS];
     ssize_t bytes, ret;
@@ -229,13 +229,13 @@ background_attention (int fd, void *closure)
 
         if (waitpid (ctx->pid, &status, WNOHANG) == 0)
         {
-            /* the process is still running, but it misbehaves - kill it */
+            // the process is still running, but it misbehaves - kill it
             kill (ctx->pid, SIGTERM);
             message (D_ERROR, background_process_error, "%s", _("Unknown error in child"));
             return 0;
         }
 
-        /* 0 means happy end */
+        // 0 means happy end
         if (WIFEXITED (status) && (WEXITSTATUS (status) == 0))
             return 0;
 
@@ -269,11 +269,11 @@ background_attention (int fd, void *closure)
         if (read (fd, data[i], size) != size)
             return reading_failed (i, data);
 
-        data[i][size] = '\0';   /* NULL terminate the blocks (they could be strings) */
+        data[i][size] = '\0';   // NULL terminate the blocks (they could be strings)
     }
 
-    /* Find child task info by descriptor */
-    /* Find before call, because process can destroy self after */
+    // Find child task info by descriptor
+    // Find before call, because process can destroy self after
     for (p = task_list; p != NULL; p = p->next)
         if (p->fd == fd)
             break;
@@ -285,7 +285,7 @@ background_attention (int fd, void *closure)
         message (D_ERROR, background_process_error, "%s", _("Unknown error in child"));
     else if (type == Return_Integer)
     {
-        /* Handle the call */
+        // Handle the call
 
         int result = 0;
 
@@ -333,7 +333,7 @@ background_attention (int fd, void *closure)
                 break;
             }
 
-        /* Send the result code and the value for shared variables */
+        // Send the result code and the value for shared variables
         ret = write (to_child_fd, &result, sizeof (result));
         if (have_ctx != 0 && to_child_fd != -1)
             ret = write (to_child_fd, ctx, sizeof (*ctx));
@@ -519,8 +519,8 @@ unregister_task_with_pid (pid_t pid)
 int
 do_background (file_op_context_t *ctx, char *info)
 {
-    int comm[2];                /* control connection stream */
-    int back_comm[2];           /* back connection */
+    int comm[2];                // control connection stream
+    int back_comm[2];           // back connection
     pid_t pid;
 
     if (pipe (comm) == -1)
@@ -561,7 +561,7 @@ do_background (file_op_context_t *ctx, char *info)
         mc_global.we_are_background = TRUE;
         top_dlg = NULL;
 
-        /* Make stdin/stdout/stderr point somewhere */
+        // Make stdin/stdout/stderr point somewhere
         close (STDIN_FILENO);
         close (STDOUT_FILENO);
         close (STDERR_FILENO);

@@ -28,11 +28,11 @@
 
 #include <string.h>
 
-#include "lib/global.h"         /* <glib.h> */
+#include "lib/global.h"         // <glib.h>
 
 #include "internal.h"
 #include "lib/fileloc.h"
-#include "lib/util.h"           /* exist_file() */
+#include "lib/util.h"           // exist_file()
 
 /*** global variables ****************************************************************************/
 
@@ -165,15 +165,15 @@ mc_skin_ini_file_load (mc_skin_t *mc_skin)
     }
     g_free (file_name);
 
-    /* ${XDG_DATA_HOME}/mc/skins/ */
+    // ${XDG_DATA_HOME}/mc/skins/
     if (mc_skin_ini_file_load_search_in_dir (mc_skin, mc_config_get_data_path ()))
         return TRUE;
 
-    /* /etc/mc/skins/ */
+    // /etc/mc/skins/
     if (mc_skin_ini_file_load_search_in_dir (mc_skin, mc_global.sysconfig_dir))
         return TRUE;
 
-    /* /usr/share/mc/skins/ */
+    // /usr/share/mc/skins/
     return mc_skin_ini_file_load_search_in_dir (mc_skin, mc_global.share_data_dir);
 }
 

@@ -30,12 +30,12 @@
 
 #include <config.h>
 
-#include <ctype.h>              /* isdigit() */
+#include <ctype.h>              // isdigit()
 #include <stdlib.h>
 #include <string.h>
 
 #include "lib/global.h"
-#include "lib/util.h"           /* MC_PTR_FREE */
+#include "lib/util.h"           // MC_PTR_FREE
 
 #include "tar-internal.h"
 
@@ -149,7 +149,7 @@ static struct xhdr_tab xhdr_tab[] =
     { "uname",                uname_decoder,            0  },
 #endif
 
-    /* Sparse file handling */
+    // Sparse file handling
     { "GNU.sparse.name",      sparse_path_decoder,      XHDR_PROTECTED },
     { "GNU.sparse.major",     sparse_major_decoder,     XHDR_PROTECTED },
     { "GNU.sparse.minor",     sparse_minor_decoder,     XHDR_PROTECTED },
@@ -163,7 +163,7 @@ static struct xhdr_tab xhdr_tab[] =
        given in the header shall take precedence." */
     { "GNU.sparse.offset",    sparse_offset_decoder,    XHDR_PROTECTED },
     { "GNU.sparse.numbytes",  sparse_numbytes_decoder,  XHDR_PROTECTED },
-    /* tar 1.15.90 keyword, introduced to remove the above-mentioned conflict. */
+    // tar 1.15.90 keyword, introduced to remove the above-mentioned conflict.
     { "GNU.sparse.map",       sparse_map_decoder,       0 },
 
     { "GNU.dumpdir",          dumpdir_decoder,          XHDR_PROTECTED },
@@ -204,7 +204,7 @@ keyword_item_run (gpointer data, gpointer user_data)
     if (t != NULL)
         return t->decoder (st, t->keyword, kp->value, strlen (kp->value));
 
-    return TRUE;                /* FIXME */
+    return TRUE;                // FIXME
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -323,11 +323,11 @@ decode_time (struct timespec *ts, const char *arg, const char *keyword)
     t = decode_timespec (arg, &arg_lim, TRUE);
 
     if (t.tv_nsec < 0)
-        /* Malformed extended header */
+        // Malformed extended header
         return FALSE;
 
     if (*arg_lim != '\0')
-        /* Malformed extended header */
+        // Malformed extended header
         return FALSE;
 
     *ts = t;
@@ -350,10 +350,10 @@ decode_signed_num (intmax_t *num, const char *arg, intmax_t minval, uintmax_t ma
     u = stoint (arg, &arg_lim, &overflow, minval, maxval);
 
     if (arg_lim == arg || *arg_lim != '\0')
-        return FALSE;           /* malformed extended header */
+        return FALSE;           // malformed extended header
 
     if (overflow)
-        return FALSE;           /* out of range */
+        return FALSE;           // out of range
 
     *num = u;
     return TRUE;
@@ -501,7 +501,7 @@ path_decoder (struct tar_stat_info *st, const char *keyword, const char *arg, si
     if (!st->sparse_name_done)
         return raw_path_decoder (st, arg);
 
-    return TRUE;                /* FIXME */
+    return TRUE;                // FIXME
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -597,7 +597,7 @@ decode_record (struct xheader *xhdr, char **ptr,
     len = stoint (p, &len_lim, NULL, 0, IDX_MAX);
 
     if (len_lim == p)
-        /* Is the length missing? */
+        // Is the length missing?
         return (*p != '\0' ? decode_record_fail : decode_record_finish);
 
     if (len_max < len)
@@ -620,7 +620,7 @@ decode_record (struct xheader *xhdr, char **ptr,
         return decode_record_fail;
 
     *p = nextp[-1] = '\0';
-    ret = handler (data, keyword, p + 1, nextp - p - 2);        /* '=' + trailing '\n' */
+    ret = handler (data, keyword, p + 1, nextp - p - 2);        // '=' + trailing '\n'
     *p = '=';
     nextp[-1] = '\n';
     *ptr = nextp;
@@ -809,7 +809,7 @@ sparse_map_decoder (struct tar_stat_info *st, const char *keyword, const char *a
 
         if (delim == arg)
         {
-            /* malformed extended header */
+            // malformed extended header
             return FALSE;
         }
 
@@ -818,7 +818,7 @@ sparse_map_decoder (struct tar_stat_info *st, const char *keyword, const char *a
             e.offset = u;
             if (overflow)
             {
-                /* out of range */
+                // out of range
                 return FALSE;
             }
         }
@@ -827,7 +827,7 @@ sparse_map_decoder (struct tar_stat_info *st, const char *keyword, const char *a
             e.numbytes = u;
             if (overflow)
             {
-                /* out of range */
+                // out of range
                 return FALSE;
             }
 
@@ -840,7 +840,7 @@ sparse_map_decoder (struct tar_stat_info *st, const char *keyword, const char *a
             break;
         if (*delim != ',')
         {
-            /* malformed extended header */
+            // malformed extended header
             return FALSE;
         }
 
@@ -849,7 +849,7 @@ sparse_map_decoder (struct tar_stat_info *st, const char *keyword, const char *a
 
     if (!offset)
     {
-        /* malformed extended header */
+        // malformed extended header
         return FALSE;
     }
 
@@ -917,7 +917,7 @@ tar_xheader_read (tar_super_t *archive, struct xheader *xhdr, union block *p, of
         size_t len;
 
         if (p == NULL)
-            return FALSE;       /* Unexpected EOF in archive */
+            return FALSE;       // Unexpected EOF in archive
 
         len = MIN (size, BLOCKSIZE);
 

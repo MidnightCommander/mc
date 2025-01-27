@@ -11,7 +11,7 @@
 #ifndef MC__COLOR_H
 #define MC__COLOR_H
 
-#include "lib/global.h"         /* glib.h */
+#include "lib/global.h"         // glib.h
 
 #ifdef HAVE_SLANG
 #include "color-slang.h"
@@ -57,4 +57,4 @@ extern gboolean tty_use_truecolors (GError ** error);
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__COLOR_H */
+#endif // MC__COLOR_H

@@ -5,8 +5,8 @@
 #ifndef MC__KEY_H
 #define MC__KEY_H
 
-#include "lib/global.h"         /* <glib.h> */
-#include "tty.h"                /* KEY_F macro */
+#include "lib/global.h"         // <glib.h>
+#include "tty.h"                // KEY_F macro
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -118,4 +118,4 @@ is_abort_char (int c)
     return ((c == (int) ESC_CHAR) || (c == (int) KEY_F (10)));
 }
 
-#endif /* MC_KEY_H */
+#endif // MC_KEY_H

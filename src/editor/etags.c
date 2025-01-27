@@ -38,8 +38,8 @@
 #include <string.h>
 
 #include "lib/global.h"
-#include "lib/fileloc.h"        /* TAGS_NAME */
-#include "lib/tty/tty.h"        /* LINES, COLS */
+#include "lib/fileloc.h"        // TAGS_NAME
+#include "lib/tty/tty.h"        // LINES, COLS
 #include "lib/strutil.h"
 #include "lib/util.h"
 
@@ -79,7 +79,7 @@ etags_hash_free (gpointer data)
 static gboolean
 parse_define (const char *buf, char **long_name, char **short_name, long *line)
 {
-    /* *INDENT-OFF* */
+    // *INDENT-OFF*
     enum
     {
         in_longname,
@@ -88,7 +88,7 @@ parse_define (const char *buf, char **long_name, char **short_name, long *line)
         in_line,
         finish
     } def_state = in_longname;
-    /* *INDENT-ON* */
+    // *INDENT-ON*
 
     GString *longdef = NULL;
     GString *shortdef = NULL;
@@ -196,14 +196,14 @@ parse_define (const char *buf, char **long_name, char **short_name, long *line)
 static GPtrArray *
 etags_set_definition_hash (const char *tagfile, const char *start_path, const char *match_func)
 {
-    /* *INDENT-OFF* */
+    // *INDENT-OFF*
     enum
     {
         start,
         in_filename,
         in_define
     } state = start;
-    /* *INDENT-ON* */
+    // *INDENT-ON*
 
     FILE *f;
     char buf[BUF_LARGE];
@@ -213,7 +213,7 @@ etags_set_definition_hash (const char *tagfile, const char *start_path, const ch
     if (match_func == NULL || tagfile == NULL)
         return NULL;
 
-    /* open file with positions */
+    // open file with positions
     f = fopen (tagfile, "r");
     if (f == NULL)
         return NULL;
@@ -244,7 +244,7 @@ etags_set_definition_hash (const char *tagfile, const char *start_path, const ch
             {
                 char *chekedstr;
 
-                /* check if the filename matches the define pos */
+                // check if the filename matches the define pos
                 chekedstr = strstr (buf, match_func);
                 if (chekedstr != NULL)
                 {
@@ -319,12 +319,12 @@ editcmd_dialog_select_definition_show (WEdit *edit, char *match_expr, GPtrArray 
     char *curr = NULL;
     WDialog *def_dlg;
     WListbox *def_list;
-    int def_dlg_h;              /* dialog height */
-    int def_dlg_w;              /* dialog width */
+    int def_dlg_h;              // dialog height
+    int def_dlg_w;              // dialog width
 
-    /* calculate the dialog metrics */
+    // calculate the dialog metrics
     def_dlg_h = def_hash->len + 2;
-    def_dlg_w = COLS - 2;       /* will be clarified later */
+    def_dlg_w = COLS - 2;       // will be clarified later
     start_x = w->x + edit->curs_col + edit->start_col + EDIT_TEXT_HORIZONTAL_OFFSET +
         (edit->fullscreen != 0 ? 0 : 1) + edit_options.line_state_width;
     start_y = w->y + edit->curs_row + EDIT_TEXT_VERTICAL_OFFSET +
@@ -347,11 +347,11 @@ editcmd_dialog_select_definition_show (WEdit *edit, char *match_expr, GPtrArray 
     def_list = listbox_new (1, 1, def_dlg_h - 2, def_dlg_w - 2, FALSE, NULL);
     group_add_widget_autopos (GROUP (def_dlg), def_list, WPOS_KEEP_ALL, NULL);
 
-    /* fill the listbox with the completions and get the maximum width */
+    // fill the listbox with the completions and get the maximum width
     def_max_width = 0;
     g_ptr_array_foreach (def_hash, editcmd_dialog_select_definition_add, def_list);
 
-    /* adjust dialog width */
+    // adjust dialog width
     def_dlg_w = def_max_width + 4;
     offset = start_x + def_dlg_w - COLS;
     if (offset > 0)
@@ -359,7 +359,7 @@ editcmd_dialog_select_definition_show (WEdit *edit, char *match_expr, GPtrArray 
 
     widget_set_size (WIDGET (def_dlg), start_y, start_x, def_dlg_h, def_dlg_w);
 
-    /* pop up the dialog and apply the chosen completion */
+    // pop up the dialog and apply the chosen completion
     if (dlg_run (def_dlg) == B_ENTER)
     {
         etags_hash_t *curr_def = NULL;
@@ -382,7 +382,7 @@ editcmd_dialog_select_definition_show (WEdit *edit, char *match_expr, GPtrArray 
         {
             vfs_path_t *vpath;
 
-            /* Is file path absolute? Prepend with dir_vpath if necessary */
+            // Is file path absolute? Prepend with dir_vpath if necessary
             if (edit->filename_vpath != NULL && edit->filename_vpath->relative
                 && edit->dir_vpath != NULL)
                 vpath = vfs_path_append_vpath_new (edit->dir_vpath, edit->filename_vpath, NULL);
@@ -398,7 +398,7 @@ editcmd_dialog_select_definition_show (WEdit *edit, char *match_expr, GPtrArray 
         }
     }
 
-    /* destroy dialog before return */
+    // destroy dialog before return
     widget_destroy (WIDGET (def_dlg));
 }
 
@@ -418,11 +418,11 @@ edit_get_match_keyword_cmd (WEdit *edit)
     char *tagfile = NULL;
     GPtrArray *def_hash = NULL;
 
-    /* search start of word to be completed */
+    // search start of word to be completed
     if (!edit_buffer_find_word_start (&edit->buffer, &word_start, &word_len))
         return;
 
-    /* prepare match expression */
+    // prepare match expression
     match_expr = g_string_sized_new (word_len);
     for (i = 0; i < word_len; i++)
         g_string_append_c (match_expr, edit_buffer_get_byte (&edit->buffer, word_start + i));
@@ -431,7 +431,7 @@ edit_get_match_keyword_cmd (WEdit *edit)
     path = g_strconcat (ptr, PATH_SEP_STR, (char *) NULL);
     g_free (ptr);
 
-    /* Recursive search file 'TAGS' in parent dirs */
+    // Recursive search file 'TAGS' in parent dirs
     do
     {
         ptr = g_path_get_dirname (path);

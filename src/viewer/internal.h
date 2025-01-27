@@ -1,7 +1,7 @@
 #ifndef MC__VIEWER_INTERNAL_H
 #define MC__VIEWER_INTERNAL_H
 
-#include <limits.h>             /* CHAR_BIT */
+#include <limits.h>             // CHAR_BIT
 #include <stdlib.h>
 #include <stdio.h>
 #include <sys/types.h>
@@ -10,11 +10,11 @@
 
 #include "lib/search.h"
 #include "lib/widget.h"
-#include "lib/vfs/vfs.h"        /* vfs_path_t */
-#include "lib/util.h"           /* mc_pipe_t */
+#include "lib/vfs/vfs.h"        // vfs_path_t
+#include "lib/util.h"           // mc_pipe_t
 
-#include "src/keymap.h"         /* global_keymap_t */
-#include "src/filemanager/dir.h"        /* dir_list */
+#include "src/keymap.h"         // global_keymap_t
+#include "src/filemanager/dir.h"        // dir_list
 
 #include "mcviewer.h"
 
@@ -30,11 +30,11 @@ typedef unsigned char byte;
 /* data sources of the view */
 enum view_ds
 {
-    DS_NONE,                    /* No data available */
-    DS_STDIO_PIPE,              /* Data comes from a pipe using popen/pclose */
-    DS_VFS_PIPE,                /* Data comes from a piped-in VFS file */
-    DS_FILE,                    /* Data comes from a VFS file */
-    DS_STRING                   /* Data comes from a string in memory */
+    DS_NONE,                    // No data available
+    DS_STDIO_PIPE,              // Data comes from a pipe using popen/pclose
+    DS_VFS_PIPE,                // Data comes from a piped-in VFS file
+    DS_FILE,                    // Data comes from a VFS file
+    DS_STRING                   // Data comes from a string in memory
 };
 
 enum ccache_type
@@ -78,11 +78,11 @@ typedef struct
  * Could be parser_state, formatter_state... */
 typedef struct
 {
-    off_t offset;               /* The file offset at which this is the state. */
-    off_t unwrapped_column;     /* Columns if the paragraph wasn't wrapped, */
-    /* used for positioning TABs in wrapped lines */
-    gboolean nroff_underscore_is_underlined;    /* whether _\b_ is underlined rather than bold */
-    gboolean print_lonely_combining;    /* whether lonely combining marks are printed on a dotted circle */
+    off_t offset;               // The file offset at which this is the state.
+    off_t unwrapped_column;     // Columns if the paragraph wasn't wrapped,
+    // used for positioning TABs in wrapped lines
+    gboolean nroff_underscore_is_underlined;    // whether _\b_ is underlined rather than bold
+    gboolean print_lonely_combining;    // whether lonely combining marks are printed on a dotted circle
 } mcview_state_machine_t;
 
 struct mcview_nroff_struct;
@@ -91,96 +91,96 @@ struct WView
 {
     Widget widget;
 
-    vfs_path_t *filename_vpath; /* Name of the file */
-    vfs_path_t *workdir_vpath;  /* Name of the working directory */
-    char *command;              /* Command used to pipe data in */
+    vfs_path_t *filename_vpath; // Name of the file
+    vfs_path_t *workdir_vpath;  // Name of the working directory
+    char *command;              // Command used to pipe data in
 
-    enum view_ds datasource;    /* Where the displayed data comes from */
+    enum view_ds datasource;    // Where the displayed data comes from
 
-    /* stdio pipe data source */
-    mc_pipe_t *ds_stdio_pipe;   /* Output of a shell command */
-    gboolean pipe_first_err_msg;        /* Show only 1st message from stderr */
+    // stdio pipe data source
+    mc_pipe_t *ds_stdio_pipe;   // Output of a shell command
+    gboolean pipe_first_err_msg;        // Show only 1st message from stderr
 
-    /* vfs pipe data source */
-    int ds_vfs_pipe;            /* Non-seekable vfs file descriptor */
+    // vfs pipe data source
+    int ds_vfs_pipe;            // Non-seekable vfs file descriptor
 
-    /* vfs file data source */
-    int ds_file_fd;             /* File with random access */
-    off_t ds_file_filesize;     /* Size of the file */
-    off_t ds_file_offset;       /* Offset of the currently loaded data */
-    byte *ds_file_data;         /* Currently loaded data */
-    size_t ds_file_datalen;     /* Number of valid bytes in file_data */
-    size_t ds_file_datasize;    /* Number of allocated bytes in file_data */
+    // vfs file data source
+    int ds_file_fd;             // File with random access
+    off_t ds_file_filesize;     // Size of the file
+    off_t ds_file_offset;       // Offset of the currently loaded data
+    byte *ds_file_data;         // Currently loaded data
+    size_t ds_file_datalen;     // Number of valid bytes in file_data
+    size_t ds_file_datasize;    // Number of allocated bytes in file_data
 
-    /* string data source */
-    byte *ds_string_data;       /* The characters of the string */
-    size_t ds_string_len;       /* The length of the string */
+    // string data source
+    byte *ds_string_data;       // The characters of the string
+    size_t ds_string_len;       // The length of the string
 
-    /* Growing buffers information */
-    gboolean growbuf_in_use;    /* Use the growing buffers? */
-    GPtrArray *growbuf_blockptr;        /* Pointer to the block pointers */
+    // Growing buffers information
+    gboolean growbuf_in_use;    // Use the growing buffers?
+    GPtrArray *growbuf_blockptr;        // Pointer to the block pointers
     size_t growbuf_lastindex;   /* Number of bytes in the last page of the
                                    growing buffer */
-    gboolean growbuf_finished;  /* TRUE when all data has been read. */
+    gboolean growbuf_finished;  // TRUE when all data has been read.
 
     mcview_mode_flags_t mode_flags;
 
-    /* Hex editor modes */
-    gboolean hexedit_mode;      /* Hexview or Hexedit */
+    // Hex editor modes
+    gboolean hexedit_mode;      // Hexview or Hexedit
     const global_keymap_t *hex_keymap;
-    gboolean hexview_in_text;   /* Is the hexview cursor in the text area? */
-    int bytes_per_line;         /* Number of bytes per line in hex mode */
-    off_t hex_cursor;           /* Hexview cursor position in file */
-    gboolean hexedit_lownibble; /* Are we editing the last significant nibble? */
-    gboolean locked;            /* We hold lock on current file */
+    gboolean hexview_in_text;   // Is the hexview cursor in the text area?
+    int bytes_per_line;         // Number of bytes per line in hex mode
+    off_t hex_cursor;           // Hexview cursor position in file
+    gboolean hexedit_lownibble; // Are we editing the last significant nibble?
+    gboolean locked;            // We hold lock on current file
 
 #ifdef HAVE_CHARSET
-    gboolean utf8;              /* It's multibyte file codeset */
+    gboolean utf8;              // It's multibyte file codeset
 #endif
 
-    GPtrArray *coord_cache;     /* Cache for mapping offsets to cursor positions */
+    GPtrArray *coord_cache;     // Cache for mapping offsets to cursor positions
 
-    /* Display information */
-    int dpy_frame_size;         /* Size of the frame surrounding the real viewer */
-    off_t dpy_start;            /* Offset of the displayed data (start of the paragraph in non-hex mode) */
-    off_t dpy_end;              /* Offset after the displayed data */
-    off_t dpy_paragraph_skip_lines;     /* Extra lines to skip in wrap mode */
-    mcview_state_machine_t dpy_state_top;       /* Parser-formatter state at the topmost visible line in wrap mode */
-    mcview_state_machine_t dpy_state_bottom;    /* Parser-formatter state after the bottomvisible line in wrap mode */
-    gboolean dpy_wrap_dirty;    /* dpy_state_top needs to be recomputed */
+    // Display information
+    int dpy_frame_size;         // Size of the frame surrounding the real viewer
+    off_t dpy_start;            // Offset of the displayed data (start of the paragraph in non-hex mode)
+    off_t dpy_end;              // Offset after the displayed data
+    off_t dpy_paragraph_skip_lines;     // Extra lines to skip in wrap mode
+    mcview_state_machine_t dpy_state_top;       // Parser-formatter state at the topmost visible line in wrap mode
+    mcview_state_machine_t dpy_state_bottom;    // Parser-formatter state after the bottomvisible line in wrap mode
+    gboolean dpy_wrap_dirty;    // dpy_state_top needs to be recomputed
     off_t dpy_text_column;      /* Number of skipped columns in non-wrap
                                  * text mode */
-    int cursor_col;             /* Cursor column */
-    int cursor_row;             /* Cursor row */
-    struct hexedit_change_node *change_list;    /* Linked list of changes */
-    WRect status_area;          /* Where the status line is displayed */
-    WRect ruler_area;           /* Where the ruler is displayed */
-    WRect data_area;            /* Where the data is displayed */
+    int cursor_col;             // Cursor column
+    int cursor_row;             // Cursor row
+    struct hexedit_change_node *change_list;    // Linked list of changes
+    WRect status_area;          // Where the status line is displayed
+    WRect ruler_area;           // Where the ruler is displayed
+    WRect data_area;            // Where the data is displayed
 
-    ssize_t force_max;          /* Force a max offset, or -1 */
+    ssize_t force_max;          // Force a max offset, or -1
 
-    int dirty;                  /* Number of skipped updates */
-    gboolean dpy_bbar_dirty;    /* Does the button bar need to be updated? */
+    int dirty;                  // Number of skipped updates
+    gboolean dpy_bbar_dirty;    // Does the button bar need to be updated?
 
 
-    /* handle of search engine */
+    // handle of search engine
     mc_search_t *search;
     gchar *last_search_string;
     struct mcview_nroff_struct *search_nroff_seq;
-    off_t search_start;         /* First character to start searching from */
-    off_t search_end;           /* Length of found string or 0 if none was found */
+    off_t search_start;         // First character to start searching from
+    off_t search_end;           // Length of found string or 0 if none was found
     int search_numNeedSkipChar;
-    /* whether search conditions should be started with BOL(^) or ended with EOL($) */
+    // whether search conditions should be started with BOL(^) or ended with EOL($)
     mc_search_line_t search_line_type;
 
-    /* Markers */
-    int marker;                 /* mark to use */
-    off_t marks[10];            /* 10 marks: 0..9 */
+    // Markers
+    int marker;                 // mark to use
+    off_t marks[10];            // 10 marks: 0..9
 
-    off_t update_steps;         /* The number of bytes between percent increments */
-    off_t update_activate;      /* Last point where we updated the status */
+    off_t update_steps;         // The number of bytes between percent increments
+    off_t update_activate;      // Last point where we updated the status
 
-    /* converter for translation of text */
+    // converter for translation of text
     GIConv converter;
 
     GArray *saved_bookmarks;
@@ -189,7 +189,7 @@ struct WView
                                  * to handle CK_FileNext and CK_FilePrev commands */
     int *dir_idx;               /* Index of current file in dir structure.
                                  * Pointer is used here as reference to WPanel::dir::count */
-    vfs_path_t *ext_script;     /* Temporary script file created by regex_command_for() */
+    vfs_path_t *ext_script;     // Temporary script file created by regex_command_for()
 };
 
 typedef struct mcview_nroff_struct
@@ -447,7 +447,7 @@ mcview_is_nroff_sequence (WView *view, off_t offset)
 {
     int c0, c1, c2;
 
-    /* The following commands are ordered to speed up the calculation. */
+    // The following commands are ordered to speed up the calculation.
 
     if (!mcview_get_byte_indexed (view, offset, 1, &c1) || c1 != '\b')
         return FALSE;
@@ -471,4 +471,4 @@ mcview_growbuf_read_all_data (WView *view)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#endif /* MC__VIEWER_INTERNAL_H */
+#endif // MC__VIEWER_INTERNAL_H

@@ -27,12 +27,12 @@
 #include <config.h>
 #include <errno.h>
 #include <stddef.h>
-#include <stdlib.h>             /* atoi() */
+#include <stdlib.h>             // atoi()
 
 #include "lib/global.h"
 
 #include "lib/search.h"
-#include "lib/util.h"           /* tilde_expand() */
+#include "lib/util.h"           // tilde_expand()
 #include "lib/vfs/utilvfs.h"
 
 #include "internal.h"
@@ -51,13 +51,13 @@
 
 typedef struct
 {
-    char *real_host;            /* host DNS name or ip address */
-    int port;                   /* port for connect to host */
-    char *user;                 /* the user to log in as */
-    gboolean password_auth;     /* FALSE - no passwords allowed (default TRUE) */
-    gboolean identities_only;   /* TRUE - no ssh agent (default FALSE) */
-    gboolean pubkey_auth;       /* FALSE - disable public key authentication (default TRUE) */
-    char *identity_file;        /* A file from which the user's DSA, ECDSA or DSA authentication identity is read. */
+    char *real_host;            // host DNS name or ip address
+    int port;                   // port for connect to host
+    char *user;                 // the user to log in as
+    gboolean password_auth;     // FALSE - no passwords allowed (default TRUE)
+    gboolean identities_only;   // TRUE - no ssh agent (default FALSE)
+    gboolean pubkey_auth;       // FALSE - disable public key authentication (default TRUE)
+    char *identity_file;        // A file from which the user's DSA, ECDSA or DSA authentication identity is read.
 } sftpfs_ssh_config_entity_t;
 
 enum config_var_type
@@ -176,7 +176,7 @@ sftpfs_fill_config_entity_from_string (sftpfs_ssh_config_entity_t *config_entity
             char **pointer_str;
             gboolean *pointer_bool;
 
-            /* Calculate start of value in string */
+            // Calculate start of value in string
             value_offset = mc_search_getstart_result_by_num (config_variables[i].pattern_regexp, 1);
             value = &buffer[value_offset];
 
@@ -267,7 +267,7 @@ sftpfs_fill_config_entity_from_config (FILE *ssh_config_handler,
             const char *host_pattern;
             int host_pattern_offset;
 
-            /* if previous host block exactly describe our connection */
+            // if previous host block exactly describe our connection
             if (host_block_hit)
                 goto done;
 
@@ -275,7 +275,7 @@ sftpfs_fill_config_entity_from_config (FILE *ssh_config_handler,
             host_pattern = &buffer[host_pattern_offset];
             if (strcmp (host_pattern, vpath_element->host) == 0)
             {
-                /* current host block describe our connection */
+                // current host block describe our connection
                 host_block_hit = TRUE;
             }
             else

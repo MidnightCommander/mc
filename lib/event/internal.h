@@ -29,4 +29,4 @@ mc_event_callback_t *mc_event_is_callback_in_array (GPtrArray * callbacks,
                                                     gpointer event_init_data);
 
 /*** inline functions ****************************************************************************/
-#endif /* MC_EVENT_INTERNAL_H */
+#endif // MC_EVENT_INTERNAL_H

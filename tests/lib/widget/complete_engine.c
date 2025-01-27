@@ -195,16 +195,16 @@ START_PARAMETRIZED_TEST (test_complete_engine_fill_completions,
                          test_complete_engine_fill_completions_ds)
 /* *INDENT-ON* */
 {
-    /* given */
+    // given
     WInput *w_input;
 
     w_input = input_new (1, 1, NULL, 100, data->input_buffer, NULL, data->input_completion_flags);
     w_input->point = data->input_point;
 
-    /* when */
+    // when
     complete_engine_fill_completions (w_input);
 
-    /* then */
+    // then
     mctest_assert_str_eq (try_complete__text__captured, data->input_buffer);
     ck_assert_int_eq (try_complete__lc_start__captured, data->expected_start);
     ck_assert_int_eq (try_complete__lc_end__captured, data->expected_end);
@@ -225,10 +225,10 @@ main (void)
 
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, test_complete_engine_fill_completions,
                                    test_complete_engine_fill_completions_ds);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

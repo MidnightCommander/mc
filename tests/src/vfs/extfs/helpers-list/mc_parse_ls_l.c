@@ -40,10 +40,10 @@
 
 #include "lib/global.h"
 
-#include "lib/vfs/utilvfs.h"    /* vfs_parse_ls_lga() */
-#include "lib/util.h"           /* string_perm() */
-#include "lib/timefmt.h"        /* FMT_LOCALTIME */
-#include "lib/widget.h"         /* for the prototype of message() only */
+#include "lib/vfs/utilvfs.h"    // vfs_parse_ls_lga()
+#include "lib/util.h"           // string_perm()
+#include "lib/timefmt.h"        // FMT_LOCALTIME
+#include "lib/widget.h"         // for the prototype of message() only
 
 /*** global variables ****************************************************************************/
 
@@ -184,7 +184,7 @@ chomp (char *s)
 
     i = strlen (s);
 
-    /* Code taken from vfs_parse_ls_lga(), with modifications. */
+    // Code taken from vfs_parse_ls_lga(), with modifications.
     if ((--i >= 0) && (s[i] == '\r' || s[i] == '\n'))
         s[i] = '\0';
     if ((--i >= 0) && (s[i] == '\r' || s[i] == '\n'))
@@ -241,7 +241,7 @@ message (int flags, const char *title, const char *text, ...)
 static void
 yaml_dump_stbuf (const struct stat *st)
 {
-    /* Various casts and flags here were taken/inspired by info_show_info(). */
+    // Various casts and flags here were taken/inspired by info_show_info()
     printf ("  perm: %s\n", string_perm (st->st_mode));
     if (!opt_drop_ids)
     {
@@ -272,7 +272,7 @@ static void
 yaml_dump_record (gboolean success, const char *input_line, const struct stat *st,
                   const char *filename, const char *linkname)
 {
-    printf ("-\n");             /* Start new item in the list. */
+    printf ("-\n");             // Start new item in the list.
 
     if (success)
     {
@@ -297,7 +297,7 @@ yaml_dump_record (gboolean success, const char *input_line, const struct stat *s
 static void
 ls_dump_stbuf (const struct stat *st)
 {
-    /* Various casts and flags here were taken/inspired by info_show_info(). */
+    // Various casts and flags here were taken/inspired by info_show_info()
     printf ("%s %3d ", string_perm (st->st_mode), (int) st->st_nlink);
     if (!opt_drop_ids)
     {
@@ -370,8 +370,8 @@ process_input (FILE *input)
 
     while (fgets (line, sizeof line, input) != NULL)
     {
-        chomp (line);           /* Not mandatory. Makes error messages nicer. */
-        if (strncmp (line, "total ", 6) == 0)   /* Convenience only: makes 'ls -l' parse cleanly. */
+        chomp (line);           // Not mandatory. Makes error messages nicer.
+        if (strncmp (line, "total ", 6) == 0)   // Convenience only: makes 'ls -l' parse cleanly.
             continue;
         process_ls_line (line);
     }

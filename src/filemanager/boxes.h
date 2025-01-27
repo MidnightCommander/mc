@@ -34,4 +34,4 @@ void symlink_box (const vfs_path_t * existing_vpath, const vfs_path_t * new_vpat
 char *tree_box (const char *current_dir);
 
 /*** inline functions ****************************************************************************/
-#endif /* MC__BOXES_H */
+#endif // MC__BOXES_H

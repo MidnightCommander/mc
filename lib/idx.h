@@ -141,4 +141,4 @@ typedef ptrdiff_t idx_t;
 }
 #endif
 
-#endif /* _IDX_H */
+#endif // _IDX_H

@@ -37,11 +37,11 @@
 #include "lib/global.h"
 #include "lib/vfs/vfs.h"
 #include "lib/strutil.h"
-#include "lib/util.h"           /* whitespace() */
-#include "lib/widget.h"         /* message() */
+#include "lib/util.h"           // whitespace()
+#include "lib/widget.h"         // message()
 
-#include "filemanager.h"        /* current_panel, panel.h, layout.h */
-#include "tree.h"               /* sync_tree() */
+#include "filemanager.h"        // current_panel, panel.h, layout.h
+#include "tree.h"               // sync_tree()
 
 #include "cd.h"
 
@@ -76,27 +76,27 @@
 static GString *
 examine_cd (const char *_path)
 {
-    /* *INDENT-OFF* */
+    // *INDENT-OFF*
     typedef enum
     {
         copy_sym,
         subst_var
     } state_t;
-    /* *INDENT-ON* */
+    // *INDENT-ON*
 
     state_t state = copy_sym;
     GString *q;
     char *path_tilde, *path;
     char *p;
 
-    /* Tilde expansion */
+    // Tilde expansion
     path = str_shell_unescape (_path);
     path_tilde = tilde_expand (path);
     g_free (path);
 
     q = g_string_sized_new (32);
 
-    /* Variable expansion */
+    // Variable expansion
     for (p = path_tilde; *p != '\0';)
     {
         switch (state)
@@ -122,7 +122,7 @@ examine_cd (const char *_path)
                 char c;
                 const char *t = NULL;
 
-                /* skip dollar */
+                // skip dollar
                 p++;
 
                 if (p[0] == '{')
@@ -174,7 +174,7 @@ handle_cdpath (const char *path)
 {
     gboolean result = FALSE;
 
-    /* CDPATH handling */
+    // CDPATH handling
     if (!IS_PATH_SEP (*path))
     {
         char *cdpath, *p;
@@ -224,8 +224,8 @@ cd_to (const char *path)
 {
     char *p;
 
-    /* Remove leading whitespaces. */
-    /* Any final whitespace should be removed here (to see why, try "cd fred "). */
+    // Remove leading whitespaces.
+    // Any final whitespace should be removed here (to see why, try "cd fred ").
     /* NOTE: I think we should not remove the extra space,
        that way, we can cd into hidden directories */
     /* FIXME: what about interpreting quoted strings like the shell.

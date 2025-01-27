@@ -26,7 +26,7 @@
 
 #include <config.h>
 
-#include <errno.h>              /* ENOENT, EACCES */
+#include <errno.h>              // ENOENT, EACCES
 
 #include <libssh2.h>
 #include <libssh2_sftp.h>
@@ -46,7 +46,7 @@
 
 typedef struct
 {
-    vfs_file_handler_t base;    /* base class */
+    vfs_file_handler_t base;    // base class
 
     LIBSSH2_SFTP_HANDLE *handle;
     int flags;

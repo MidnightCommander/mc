@@ -42,13 +42,13 @@ START_TEST (fork_fail)
 {
     int actual_value;
 
-    /* given */
+    // given
     fork__return_value = -1;
 
-    /* when */
+    // when
     actual_value = my_system (0, NULL, NULL);
 
-    /* then */
+    // then
     ck_assert_int_eq (actual_value, -1);
 
     VERIFY_SIGACTION_CALLS ();
@@ -70,9 +70,9 @@ main (void)
 
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     tcase_add_test (tc_core, fork_fail);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

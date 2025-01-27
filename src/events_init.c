@@ -30,11 +30,11 @@
 #include "lib/event.h"
 
 #ifdef ENABLE_BACKGROUND
-#include "background.h"         /* (background_parent_call), background_parent_call_string() */
-#endif /* ENABLE_BACKGROUND */
-#include "clipboard.h"          /* clipboard events */
-#include "execute.h"            /* execute_suspend() */
-#include "help.h"               /* help_interactive_display() */
+#include "background.h"         // (background_parent_call), background_parent_call_string()
+#endif // ENABLE_BACKGROUND
+#include "clipboard.h"          // clipboard events
+#include "execute.h"            // execute_suspend()
+#include "help.h"               // help_interactive_display()
 
 #include "events_init.h"
 
@@ -57,7 +57,7 @@
 gboolean
 events_init (GError **mcerror)
 {
-    /* *INDENT-OFF* */
+    // *INDENT-OFF*
     static const event_init_t standard_events[] =
     {
         {MCEVENT_GROUP_CORE, "clipboard_file_to_ext_clip", clipboard_file_to_ext_clip, NULL},
@@ -71,11 +71,11 @@ events_init (GError **mcerror)
 #ifdef ENABLE_BACKGROUND
         {MCEVENT_GROUP_CORE, "background_parent_call", background_parent_call, NULL},
         {MCEVENT_GROUP_CORE, "background_parent_call_string", background_parent_call_string, NULL},
-#endif /* ENABLE_BACKGROUND */
+#endif // ENABLE_BACKGROUND
 
         {NULL, NULL, NULL, NULL}
     };
-    /* *INDENT-ON* */
+    // *INDENT-ON*
 
     if (!mc_event_init (mcerror))
         return FALSE;

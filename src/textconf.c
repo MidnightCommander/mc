@@ -29,17 +29,17 @@
 #include <limits.h>
 #include <stdio.h>
 #include <sys/types.h>
-#include <stdint.h>             /* uintmax_t */
+#include <stdint.h>             // uintmax_t
 
 #if defined (ENABLE_VFS) && defined(ENABLE_VFS_SFTP)
 #include <libssh2.h>
-#endif /* ENABLE_VFS_SFTP && ENABLE_VFS */
+#endif // ENABLE_VFS_SFTP && ENABLE_VFS
 
 #include "lib/global.h"
 #include "lib/fileloc.h"
 #include "lib/mcconfig.h"
-#include "lib/util.h"           /* mc_get_profile_root() */
-#include "lib/tty/tty.h"        /* S-Lang or ncurses version */
+#include "lib/util.h"           // mc_get_profile_root()
+#include "lib/tty/tty.h"        // S-Lang or ncurses version
 
 #include "src/textconf.h"
 
@@ -81,7 +81,7 @@ static const char *const vfs_supported[] = {
 #endif
     NULL
 };
-#endif /* ENABLE_VFS */
+#endif // ENABLE_VFS
 
 static const char *const features[] = {
 
@@ -90,8 +90,8 @@ static const char *const features[] = {
     N_("With builtin editor and aspell support"),
 #else
     N_("With builtin editor"),
-#endif /* HAVE_ASPELL */
-#endif /* USE_INTERNAL_EDIT */
+#endif // HAVE_ASPELL
+#endif // USE_INTERNAL_EDIT
 
 #ifdef ENABLE_SUBSHELL
 #ifdef SUBSHELL_OPTIONAL
@@ -99,7 +99,7 @@ static const char *const features[] = {
 #else
     N_("With subshell support as default"),
 #endif
-#endif /* !ENABLE_SUBSHELL */
+#endif // !ENABLE_SUBSHELL
 
 #ifdef ENABLE_BACKGROUND
     N_("With support for background operations"),
@@ -154,21 +154,21 @@ show_version (void)
     printf (_("Built with ncurses %s\n"), NCURSES_VERSION);
 #else
     puts (_("Built with ncurses (unknown version)"));
-#endif /* !NCURSES_VERSION */
+#endif // !NCURSES_VERSION
 #elif defined(USE_NCURSESW)
 #ifdef NCURSES_VERSION
     printf (_("Built with ncursesw %s\n"), NCURSES_VERSION);
 #else
     puts (_("Built with ncursesw (unknown version)"));
-#endif /* !NCURSES_VERSION */
+#endif // !NCURSES_VERSION
 #else
 #error "Cannot compile mc without S-Lang or ncurses"
-#endif /* !HAVE_SLANG && !USE_NCURSES */
+#endif // !HAVE_SLANG && !USE_NCURSES
 
 #if defined (ENABLE_VFS) && defined(ENABLE_VFS_SFTP)
     printf (_("Built with libssh2 %d.%d.%d\n"),
             LIBSSH2_VERSION_MAJOR, LIBSSH2_VERSION_MINOR, LIBSSH2_VERSION_PATCH);
-#endif /* ENABLE_VFS_SFTP && ENABLE_VFS */
+#endif // ENABLE_VFS_SFTP && ENABLE_VFS
 
     for (i = 0; features[i] != NULL; i++)
         puts (_(features[i]));
@@ -178,7 +178,7 @@ show_version (void)
     for (i = 0; vfs_supported[i] != NULL; i++)
         printf ("%s %s", i == 0 ? "" : ",", _(vfs_supported[i]));
     (void) puts ("");
-#endif /* ENABLE_VFS */
+#endif // ENABLE_VFS
 
     (void) puts (_("Data types:"));
 #define TYPE_INFO(T) \
@@ -228,7 +228,7 @@ show_datadirs_extended (void)
 #ifdef ENABLE_VFS_SHELL
     PRINTF2 ("shell:", LIBEXECDIR, VFS_SHELL_PREFIX PATH_SEP_STR);
 #endif
-#endif /* ENABLE_VFS_EXTFS || defiined ENABLE_VFS_SHELL */
+#endif // ENABLE_VFS_EXTFS || defiined ENABLE_VFS_SHELL
     (void) puts ("");
 
     PRINTF_GROUP (_("User data"));

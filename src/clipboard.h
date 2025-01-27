@@ -30,4 +30,4 @@ gboolean clipboard_text_from_file (const gchar * event_group_name, const gchar *
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__CLIPBOARD_H */
+#endif // MC__CLIPBOARD_H

@@ -5,7 +5,7 @@
 #ifndef MC__FILE_H
 #define MC__FILE_H
 
-#include <inttypes.h>           /* off_t, uintmax_t */
+#include <inttypes.h>           // off_t, uintmax_t
 
 #include "lib/global.h"
 #include "lib/widget.h"
@@ -23,7 +23,7 @@ typedef struct dirsize_status_msg_t dirsize_status_msg_t;
 /* status dialog of directory size computing */
 struct dirsize_status_msg_t
 {
-    status_msg_t status_msg;    /* base class */
+    status_msg_t status_msg;    // base class
 
     gboolean allow_skip;
     WLabel *dirname;
@@ -67,4 +67,4 @@ int dirsize_status_update_cb (status_msg_t * sm);
 void dirsize_status_deinit_cb (status_msg_t * sm);
 
 /*** inline functions ****************************************************************************/
-#endif /* MC__FILE_H */
+#endif // MC__FILE_H

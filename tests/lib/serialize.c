@@ -86,13 +86,13 @@ static const struct test_serialize_ds
 START_PARAMETRIZED_TEST (test_serialize, test_serialize_ds)
 /* *INDENT-ON* */
 {
-    /* given */
+    // given
     char *actual_result;
 
-    /* when */
+    // when
     actual_result = mc_serialize_str (data->input_char_prefix, data->input_string, &error);
 
-    /* then */
+    // then
     mctest_assert_str_eq (actual_result, data->expected_result);
 
     g_free (actual_result);
@@ -119,31 +119,31 @@ static const struct test_deserialize_incorrect_ds
     {
         's',
         NULL,
-        0,      /* FIXME, TODO */
+        0,      // FIXME, TODO
         "mc_serialize_str(): Input data is NULL or empty."
     },
     {
         's',
         "incorrect string",
-        0,      /* FIXME, TODO */
+        0,      // FIXME, TODO
         "mc_serialize_str(): String prefix doesn't equal to 's'"
     },
     {
         's',
         "s12345string without delimiter",
-        0,      /* FIXME, TODO */
+        0,      // FIXME, TODO
         "mc_serialize_str(): Length delimiter ':' doesn't exists"
     },
     {
         's',
         "s1234567890123456789012345678901234567890123456789012345678901234567890:too big number",
-        0,      /* FIXME, TODO */
+        0,      // FIXME, TODO
         "mc_serialize_str(): Too big string length"
     },
     {
         's',
         "s500:actual string length less that specified length",
-        0,      /* FIXME, TODO */
+        0,      // FIXME, TODO
         "mc_serialize_str(): Specified data length (500) is greater than actual data length (47)"
     },
 };
@@ -153,13 +153,13 @@ static const struct test_deserialize_incorrect_ds
 START_PARAMETRIZED_TEST (test_deserialize_incorrect, test_deserialize_incorrect_ds)
 /* *INDENT-ON* */
 {
-    /* given */
+    // given
     char *actual_result;
 
-    /* when */
+    // when
     actual_result = mc_deserialize_str (data->input_char_prefix, data->input_string, &error);
 
-    /* then */
+    // then
     mctest_assert_null (actual_result);
 
     ck_assert_int_eq (error->code, data->expected_error_code);
@@ -197,13 +197,13 @@ static const struct test_deserialize_ds
 START_PARAMETRIZED_TEST (test_deserialize, test_deserialize_ds)
 /* *INDENT-ON* */
 {
-    /* given */
+    // given
     char *actual_result;
 
-    /* when */
+    // when
     actual_result = mc_deserialize_str (data->input_char_prefix, data->input_string, &error);
 
-    /* then */
+    // then
     mctest_assert_str_eq (actual_result, data->expected_result);
 
     g_free (actual_result);
@@ -218,7 +218,7 @@ END_PARAMETRIZED_TEST
 START_TEST (test_serialize_config)
 /* *INDENT-ON* */
 {
-    /* given */
+    // given
     mc_config_t *test_data;
     char *actual;
     const char *expected_result = "g6:group1p6:param1v10:some valuep6:param2v11:some value "
@@ -240,11 +240,11 @@ START_TEST (test_serialize_config)
     mc_config_set_bool (test_data, "group4", "param1", FALSE);
     mc_config_set_int (test_data, "group4", "param2", 654321);
 
-    /* when */
+    // when
     actual = mc_serialize_config (test_data, &error);
     mc_config_deinit (test_data);
 
-    /* then */
+    // then
     mctest_assert_not_null (actual);
     mctest_assert_str_eq (actual, expected_result);
 
@@ -266,22 +266,22 @@ static const struct test_deserialize_config_incorrect_ds
 {
     {
         "g123error in group name",
-        0,      /* FIXME, TODO */
+        0,      // FIXME, TODO
         "mc_deserialize_config() at 1: mc_serialize_str(): Length delimiter ':' doesn't exists"
     },
     {
         "p6:param1v10:some valuep6:param2v11:some value ",
-        0,      /* FIXME, TODO */
+        0,      // FIXME, TODO
         "mc_deserialize_config() at 1: mc_serialize_str(): String prefix doesn't equal to 'g'"
     },
     {
         "g6:group1v10:some valuep6:param2v11:some value ",
-        0,      /* FIXME, TODO */
+        0,      // FIXME, TODO
         "mc_deserialize_config() at 10: mc_serialize_str(): String prefix doesn't equal to 'p'"
     },
     {
         "g6:group1p6000:param2v11:some value ",
-        0,      /* FIXME, TODO */
+        0,      // FIXME, TODO
         "mc_deserialize_config() at 10: mc_serialize_str(): Specified data length (6000) is greater than actual data length (21)"
     },
 };
@@ -291,13 +291,13 @@ static const struct test_deserialize_config_incorrect_ds
 START_PARAMETRIZED_TEST (test_deserialize_config_incorrect, test_deserialize_config_incorrect_ds)
 /* *INDENT-ON* */
 {
-    /* given */
+    // given
     mc_config_t *actual_result;
 
-    /* when */
+    // when
     actual_result = mc_deserialize_config (data->input_string, &error);
 
-    /* then */
+    // then
     mctest_assert_null (actual_result);
 
     ck_assert_int_eq (error->code, data->expected_error_code);
@@ -313,14 +313,14 @@ END_PARAMETRIZED_TEST
 START_TEST (test_deserialize_config)
 /* *INDENT-ON* */
 {
-    /* given */
+    // given
     mc_config_t *actual;
     char *actual_value;
 
-    /* when */
+    // when
     actual = mc_deserialize_config (deserialize_input_value1, &error);
 
-    /* then */
+    // then
     mctest_assert_not_null (actual);
 
     actual_value = mc_config_get_string_raw (actual, "group1", "param1", "");
@@ -365,7 +365,7 @@ main (void)
 
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, test_serialize, test_serialize_ds);
 
     mctest_add_parameterized_test (tc_core, test_deserialize_incorrect,
@@ -379,7 +379,7 @@ main (void)
                                    test_deserialize_config_incorrect_ds);
 
     tcase_add_test (tc_core, test_deserialize_config);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

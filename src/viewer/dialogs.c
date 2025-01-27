@@ -77,7 +77,7 @@ mcview_dialog_search (WView *view)
 
     {
         quick_widget_t quick_widgets[] = {
-            /* *INDENT-OFF* */
+            // *INDENT-OFF*
             QUICK_LABELED_INPUT (N_("Enter search string:"), input_label_above,
                                  INPUT_LAST_TEXT, MC_HISTORY_SHARED_SEARCH, &exp,
                                  NULL, FALSE, FALSE, INPUT_COMPLETE_NONE),
@@ -95,7 +95,7 @@ mcview_dialog_search (WView *view)
             QUICK_STOP_COLUMNS,
             QUICK_BUTTONS_OK_CANCEL,
             QUICK_END
-            /* *INDENT-ON* */
+            // *INDENT-ON*
         };
 
         WRect r = { -1, -1, 0, 58 };
@@ -175,14 +175,14 @@ mcview_dialog_goto (WView *view, off_t *offset)
 
     {
         quick_widget_t quick_widgets[] = {
-            /* *INDENT-OFF* */
+            // *INDENT-OFF*
             QUICK_INPUT (INPUT_LAST_TEXT, MC_HISTORY_VIEW_GOTO, &exp, NULL,
                          FALSE, FALSE, INPUT_COMPLETE_NONE),
             QUICK_RADIO (num_of_types, (const char **) mc_view_goto_str, (int *) &current_goto_type,
                          NULL),
             QUICK_BUTTONS_OK_CANCEL,
             QUICK_END
-            /* *INDENT-ON* */
+            // *INDENT-ON*
         };
 
         WRect r = { -1, -1, 0, 40 };
@@ -192,13 +192,13 @@ mcview_dialog_goto (WView *view, off_t *offset)
             quick_widgets, NULL, NULL
         };
 
-        /* run dialog */
+        // run dialog
         qd_result = quick_dialog (&qdlg);
     }
 
     *offset = -1;
 
-    /* check input line value */
+    // check input line value
     res = (qd_result != B_CANCEL && exp[0] != '\0');
     if (res)
     {
@@ -212,7 +212,7 @@ mcview_dialog_goto (WView *view, off_t *offset)
             switch (current_goto_type)
             {
             case MC_VIEW_GOTO_LINENUM:
-                /* Line number entered by user is 1-based. */
+                // Line number entered by user is 1-based.
                 if (addr > 0)
                     addr--;
                 mcview_coord_to_offset (view, offset, addr, 0);
@@ -221,7 +221,7 @@ mcview_dialog_goto (WView *view, off_t *offset)
             case MC_VIEW_GOTO_PERCENT:
                 if (addr > 100)
                     addr = 100;
-                /* read all data from pipe to get real size */
+                // read all data from pipe to get real size
                 if (view->growbuf_in_use)
                     mcview_growbuf_read_all_data (view);
                 *offset = addr * mcview_get_filesize (view) / 100;
@@ -239,7 +239,7 @@ mcview_dialog_goto (WView *view, off_t *offset)
                 }
                 else
                 {
-                    /* read all data from pipe to get real size */
+                    // read all data from pipe to get real size
                     if (view->growbuf_in_use)
                         mcview_growbuf_read_all_data (view);
 

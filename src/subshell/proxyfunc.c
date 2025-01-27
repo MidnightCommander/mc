@@ -25,17 +25,17 @@
 
 #include <config.h>
 
-#include <signal.h>             /* kill() */
+#include <signal.h>             // kill()
 #include <sys/types.h>
-#include <sys/wait.h>           /* waitpid() */
+#include <sys/wait.h>           // waitpid()
 
 #include "lib/global.h"
 
-#include "lib/vfs/vfs.h"        /* vfs_get_raw_current_dir() */
+#include "lib/vfs/vfs.h"        // vfs_get_raw_current_dir()
 
-#include "src/setup.h"          /* quit */
-#include "src/filemanager/filemanager.h"        /* current_panel */
-#include "src/consaver/cons.saver.h"    /* handle_console() */
+#include "src/setup.h"          // quit
+#include "src/filemanager/filemanager.h"        // current_panel
+#include "src/consaver/cons.saver.h"    // handle_console()
 
 #include "internal.h"
 
@@ -81,17 +81,17 @@ subshell_handle_cons_saver (void)
     {
 
         if (WIFSTOPPED (status))
-            /* Someone has stopped cons.saver - restart it */
+            // Someone has stopped cons.saver - restart it
             kill (pid, SIGCONT);
         else
         {
-            /* cons.saver has died - disable console saving */
+            // cons.saver has died - disable console saving
             handle_console (CONSOLE_DONE);
             mc_global.tty.console_flag = '\0';
         }
 
     }
-#endif /* __linux__ */
+#endif // __linux__
 }
 
 /* --------------------------------------------------------------------------------------------- */

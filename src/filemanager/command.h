@@ -24,4 +24,4 @@ void command_set_default_colors (void);
 void command_insert (WInput * in, const char *text, gboolean insert_extra_space);
 
 /*** inline functions ****************************************************************************/
-#endif /* MC__COMMAND_H */
+#endif // MC__COMMAND_H

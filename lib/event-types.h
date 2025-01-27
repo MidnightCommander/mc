@@ -72,7 +72,7 @@ struct Widget;
 typedef struct
 {
     struct mc_config_t *cfg;
-    struct Widget *receiver;    /* NULL means broadcast message */
+    struct Widget *receiver;    // NULL means broadcast message
 } ev_history_load_save_t;
 
 /*** global variables defined in .c file *********************************************************/
@@ -81,4 +81,4 @@ typedef struct
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__EVENT_TYPES_H */
+#endif // MC__EVENT_TYPES_H

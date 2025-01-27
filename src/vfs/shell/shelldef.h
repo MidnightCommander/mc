@@ -221,4 +221,4 @@
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__VFS_SHELL_DEF_H */
+#endif // MC__VFS_SHELL_DEF_H

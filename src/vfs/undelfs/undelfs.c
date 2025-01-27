@@ -47,7 +47,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>             /* memset() */
+#include <string.h>             // memset()
 #include <ext2fs/ext2_fs.h>
 #include <ext2fs/ext2fs.h>
 #include <ctype.h>
@@ -55,7 +55,7 @@
 #include "lib/global.h"
 
 #include "lib/util.h"
-#include "lib/widget.h"         /* message() */
+#include "lib/widget.h"         // message()
 #include "lib/vfs/xdirentry.h"
 #include "lib/vfs/utilvfs.h"
 #include "lib/vfs/vfs.h"
@@ -95,19 +95,19 @@ struct lsdel_struct
 
 typedef struct
 {
-    int f_index;                /* file index into delarray */
+    int f_index;                // file index into delarray
     char *buf;
-    int error_code;             /*  */
-    off_t pos;                  /* file position */
-    off_t current;              /* used to determine current position in itereate */
+    int error_code;             //
+    off_t pos;                  // file position
+    off_t current;              // used to determine current position in itereate
     gboolean finished;
     ext2_ino_t inode;
     int bytes_read;
     off_t size;
 
-    /* Used by undelfs_read: */
-    char *dest_buffer;          /* destination buffer */
-    size_t count;               /* bytes to read */
+    // Used by undelfs_read:
+    char *dest_buffer;          // destination buffer
+    size_t count;               // bytes to read
 } undelfs_file;
 
 /*** forward declarations (file scope functions) *************************************************/
@@ -154,7 +154,7 @@ undelfs_get_path (const vfs_path_t *vpath, char **fsname, char **file)
 
     /* To look like filesystem, we have virtual directories
        undel://XXX, which have no subdirectories. XXX is replaced with
-       hda5, sdb8 etc, which is assumed to live under /dev. 
+       hda5, sdb8 etc, which is assumed to live under /dev.
        -- pavel@ucw.cz */
 
     *fsname = NULL;
@@ -343,7 +343,7 @@ undelfs_opendir (const vfs_path_t *vpath)
         return 0;
     }
 
-    /* We don't use the file name */
+    // We don't use the file name
     g_free (f);
 
     if (!ext2_fname || strcmp (ext2_fname, file))
@@ -353,7 +353,7 @@ undelfs_opendir (const vfs_path_t *vpath)
     }
     else
     {
-        /* To avoid expensive re-scannings */
+        // To avoid expensive re-scannings
         readdir_ptr = READDIR_PTR_INIT;
         g_free (file);
         return fs;
@@ -376,7 +376,7 @@ undelfs_opendir (const vfs_path_t *vpath)
         message (D_ERROR, undelfserr, _("Cannot load block bitmap from:\n%s"), ext2_fname);
         goto quit_opendir;
     }
-    /* Now load the deleted information */
+    // Now load the deleted information
     if (!undelfs_loaddel ())
         goto quit_opendir;
     vfs_print_message (_("%s: done."), class_name);
@@ -403,14 +403,14 @@ undelfs_readdir (void *vfs_info)
     if (readdir_ptr == num_delarray)
         return NULL;
     if (readdir_ptr < 0)
-        dirent = vfs_dirent_init (NULL, readdir_ptr == -2 ? "." : "..", 0);     /* FIXME: inode */
+        dirent = vfs_dirent_init (NULL, readdir_ptr == -2 ? "." : "..", 0);     // FIXME: inode
     else
     {
         char dirent_dest[MC_MAXPATHLEN];
 
         g_snprintf (dirent_dest, MC_MAXPATHLEN, "%ld:%d",
                     (long) delarray[readdir_ptr].ino, delarray[readdir_ptr].num_blocks);
-        dirent = vfs_dirent_init (NULL, dirent_dest, 0);        /* FIXME: inode */
+        dirent = vfs_dirent_init (NULL, dirent_dest, 0);        // FIXME: inode
     }
     readdir_ptr++;
 
@@ -438,7 +438,7 @@ undelfs_open (const vfs_path_t *vpath, int flags, mode_t mode)
     (void) flags;
     (void) mode;
 
-    /* Only allow reads on this file system */
+    // Only allow reads on this file system
     undelfs_get_path (vpath, &file, &f);
     if (file == NULL)
     {
@@ -455,13 +455,13 @@ undelfs_open (const vfs_path_t *vpath, int flags, mode_t mode)
     }
     inode = atol (f);
 
-    /* Search the file into delarray */
+    // Search the file into delarray
     for (i = 0; i < (ext2_ino_t) num_delarray; i++)
     {
         if (inode != delarray[i].ino)
             continue;
 
-        /* Found: setup all the structures needed by read */
+        // Found: setup all the structures needed by read
         p = (undelfs_file *) g_try_malloc (((gsize) sizeof (undelfs_file)));
         if (!p)
         {
@@ -530,30 +530,30 @@ undelfs_dump_read (ext2_filsys param_fs, blk_t *blocknr, int blockcnt, void *pri
     if (p->pos > p->current + param_fs->blocksize)
     {
         p->current += param_fs->blocksize;
-        return 0;               /* we have not arrived yet */
+        return 0;               // we have not arrived yet
     }
 
-    /* Now, we know we have to extract some data */
+    // Now, we know we have to extract some data
     if (p->pos >= p->current)
     {
 
-        /* First case: starting pointer inside this block */
+        // First case: starting pointer inside this block
         if (p->pos + (off_t) p->count <= p->current + param_fs->blocksize)
         {
-            /* Fully contained */
+            // Fully contained
             copy_count = p->count;
             p->finished = (p->count != 0);
         }
         else
         {
-            /* Still some more data */
+            // Still some more data
             copy_count = param_fs->blocksize - (p->pos - p->current);
         }
         memcpy (p->dest_buffer, p->buf + (p->pos - p->current), copy_count);
     }
     else
     {
-        /* Second case: we already have passed p->pos */
+        // Second case: we already have passed p->pos
         if (p->pos + (off_t) p->count < p->current + param_fs->blocksize)
         {
             copy_count = (p->pos + p->count) - p->current;
@@ -710,9 +710,9 @@ undelfs_chdir (const vfs_path_t *vpath)
         return (-1);
     }
 
-    /* We may use access because ext2 file systems are local */
-    /* this could be fixed by making an ext2fs io manager to use */
-    /* our vfs, but that is left as an exercise for the reader */
+    // We may use access because ext2 file systems are local
+    // this could be fixed by making an ext2fs io manager to use
+    // our vfs, but that is left as an exercise for the reader
     fd = open (file, O_RDONLY);
     if (fd == -1)
     {
@@ -819,7 +819,7 @@ com_err (const char *whoami, long err_code, const char *fmt, ...)
 void
 vfs_init_undelfs (void)
 {
-    /* NULLize vfs_s_subclass members */
+    // NULLize vfs_s_subclass members
     memset (&undelfs_subclass, 0, sizeof (undelfs_subclass));
 
     vfs_init_class (vfs_undelfs_ops, "undelfs", VFSF_UNKNOWN, "undel");

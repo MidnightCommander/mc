@@ -49,16 +49,16 @@
 #ifdef __linux__
 #ifdef HAVE_LINUX_FS_H
 #include <linux/fs.h>
-#endif /* HAVE_LINUX_FS_H */
+#endif // HAVE_LINUX_FS_H
 #ifdef HAVE_SYS_IOCTL_H
 #include <sys/ioctl.h>
-#endif /* HAVE_SYS_IOCTL_H */
-#endif /* __linux__ */
+#endif // HAVE_SYS_IOCTL_H
+#endif // __linux__
 
 #include "lib/global.h"
 #include "lib/strutil.h"
 #include "lib/util.h"
-#include "lib/widget.h"         /* message() */
+#include "lib/widget.h"         // message()
 #include "lib/event.h"
 
 #ifdef HAVE_CHARSET
@@ -108,7 +108,7 @@ static long vfs_free_handle_list = -1;
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
-/* now used only by vfs_translate_path, but could be used in other vfs 
+/* now used only by vfs_translate_path, but could be used in other vfs
  * plugin to automatic detect encoding
  * path - path to translate
  * size - how many bytes from path translate
@@ -129,7 +129,7 @@ _vfs_translate_path (const char *path, int size, GIConv defcnv, GString *buffer)
 
     size = (size > 0) ? size : (signed int) strlen (path);
 
-    /* try found /#enc: */
+    // try to find /#enc:
     semi = g_strrstr_len (path, size, VFS_ENCODING_PREFIX);
     if (semi != NULL && (semi == path || IS_PATH_SEP (semi[-1])))
     {
@@ -138,7 +138,7 @@ _vfs_translate_path (const char *path, int size, GIConv defcnv, GString *buffer)
         GIConv coder = INVALID_CONV;
         int ms;
 
-        /* first must be translated part before #enc: */
+        // first must be translated part before #enc:
         ms = semi - path;
 
         state = _vfs_translate_path (path, ms, defcnv, buffer);
@@ -146,16 +146,16 @@ _vfs_translate_path (const char *path, int size, GIConv defcnv, GString *buffer)
         if (state != ESTR_SUCCESS)
             return state;
 
-        /* now can be translated part after #enc: */
-        semi += strlen (VFS_ENCODING_PREFIX);   /* skip "#enc:" */
+        // now can be translated part after #enc:
+        semi += strlen (VFS_ENCODING_PREFIX);   // skip "#enc:"
         slash = strchr (semi, PATH_SEP);
-        /* ignore slashes after size; */
+        // ignore slashes after size;
         if (slash - path >= size)
             slash = NULL;
 
         ms = (slash != NULL) ? slash - semi : (int) strlen (semi);
         ms = MIN ((unsigned int) ms, sizeof (encoding) - 1);
-        /* limit encoding size (ms) to path size (size) */
+        // limit encoding size (ms) to path size (size)
         if (semi + ms > path + size)
             ms = path + size - semi;
         memcpy (encoding, semi, ms);
@@ -177,7 +177,7 @@ _vfs_translate_path (const char *path, int size, GIConv defcnv, GString *buffer)
     }
     else
     {
-        /* path can be translated whole at once */
+        // path can be translated whole at once
         state = str_vfs_convert_to (defcnv, path, size, buffer);
     }
 #else
@@ -185,7 +185,7 @@ _vfs_translate_path (const char *path, int size, GIConv defcnv, GString *buffer)
     (void) defcnv;
 
     g_string_assign (buffer, path);
-#endif /* HAVE_CHARSET */
+#endif // HAVE_CHARSET
 
     return state;
 }
@@ -274,11 +274,11 @@ vfs_new_handle (struct vfs_class *vclass, void *fsinfo)
     h->fsinfo = fsinfo;
     h->vclass = vclass;
 
-    /* Allocate the first free handle */
+    // Allocate the first free handle
     h->handle = vfs_free_handle_list;
     if (h->handle == -1)
     {
-        /* No free allocated handles, allocate one */
+        // No free allocated handles, allocate one
         h->handle = vfs_openfiles->len;
         g_ptr_array_add (vfs_openfiles, h);
     }
@@ -298,7 +298,7 @@ int
 vfs_ferrno (struct vfs_class *vfs)
 {
     return vfs->ferrno != NULL ? vfs->ferrno (vfs) : E_UNKNOWN;
-    /* Hope that error message is obscure enough ;-) */
+    // Hope that error message is obscure enough ;-)
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -306,8 +306,8 @@ vfs_ferrno (struct vfs_class *vfs)
 gboolean
 vfs_register_class (struct vfs_class *vfs)
 {
-    if (vfs->init != NULL)      /* vfs has own initialization function */
-        if (vfs->init (vfs) == 0)       /* but it failed */
+    if (vfs->init != NULL)      // vfs has own initialization function
+        if (vfs->init (vfs) == 0)       // but it failed
             return FALSE;
 
     g_ptr_array_add (vfs__classes_list, vfs);
@@ -461,10 +461,10 @@ vfs_file_class_flags (const vfs_path_t *vpath)
 void
 vfs_init (void)
 {
-    /* create the VFS handle arrays */
+    // create the VFS handle arrays
     vfs__classes_list = g_ptr_array_new ();
 
-    /* create the VFS handle array */
+    // create the VFS handle array
     vfs_openfiles = g_ptr_array_new ();
 
     vfs_str_buffer = g_string_new ("");
@@ -479,7 +479,7 @@ vfs_setup_work_dir (void)
 {
     vfs_setup_cwd ();
 
-    /* FIXME: is we really need for this check? */
+    // FIXME: is we really need for this check?
     /*
        if (strlen (current_dir) > MC_MAXPATHLEN - 2)
        vfs_die ("Current dir too long.\n");
@@ -507,7 +507,7 @@ vfs_shut (void)
             vfs->done (vfs);
     }
 
-    /* NULL-ize pointers to make unit tests happy */
+    // NULL-ize pointers to make unit tests happy
     g_ptr_array_free (vfs_openfiles, TRUE);
     vfs_openfiles = NULL;
     g_ptr_array_free (vfs__classes_list, TRUE);
@@ -663,9 +663,9 @@ vfs_setup_cwd (void)
 
         if (tmp_vpath != NULL)
         {
-            /* One of directories in the path is not readable */
+            // One of directories in the path is not readable
 
-            /* Check if it is O.K. to use the current_dir */
+            // Check if it is O.K. to use the current_dir
             if (!vfs_test_current_dir (tmp_vpath))
                 vfs_set_raw_current_dir (tmp_vpath);
             else
@@ -709,7 +709,7 @@ vfs_preallocate (int dest_vfs_fd, off_t src_fsize, off_t dest_fsize)
     (void) dest_fsize;
     return 0;
 
-#else /* HAVE_POSIX_FALLOCATE */
+#else // HAVE_POSIX_FALLOCATE
     void *dest_fd = NULL;
     struct vfs_class *dest_class;
 
@@ -722,10 +722,10 @@ vfs_preallocate (int dest_vfs_fd, off_t src_fsize, off_t dest_fsize)
 
     return posix_fallocate (*(int *) dest_fd, dest_fsize, src_fsize - dest_fsize);
 
-#endif /* HAVE_POSIX_FALLOCATE */
+#endif // HAVE_POSIX_FALLOCATE
 }
 
- /* --------------------------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------------------------- */
 
 int
 vfs_clone_file (int dest_vfs_fd, int src_vfs_fd)

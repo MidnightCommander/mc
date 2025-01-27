@@ -16,4 +16,4 @@ gboolean check_for_default (const vfs_path_t * default_file_vpath, const vfs_pat
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC_SRC_UTIL_H */
+#endif // MC_SRC_UTIL_H

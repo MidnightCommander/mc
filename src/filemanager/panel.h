@@ -5,17 +5,17 @@
 #ifndef MC__PANEL_H
 #define MC__PANEL_H
 
-#include <inttypes.h>           /* uintmax_t */
-#include <limits.h>             /* MB_LEN_MAX */
+#include <inttypes.h>           // uintmax_t
+#include <limits.h>             // MB_LEN_MAX
 
-#include "lib/global.h"         /* gboolean */
-#include "lib/fs.h"             /* MC_MAXPATHLEN */
+#include "lib/global.h"         // gboolean
+#include "lib/fs.h"             // MC_MAXPATHLEN
 #include "lib/strutil.h"
-#include "lib/widget.h"         /* Widget */
+#include "lib/widget.h"         // Widget
 #include "lib/filehighlight.h"
 #include "lib/file-entry.h"
 
-#include "dir.h"                /* dir_list */
+#include "dir.h"                // dir_list
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -29,16 +29,16 @@
 
 typedef enum
 {
-    list_full,                  /* Name, size, perm/date */
-    list_brief,                 /* Name */
-    list_long,                  /* Like ls -l */
-    list_user                   /* User defined */
+    list_full,                  // Name, size, perm/date
+    list_brief,                 // Name
+    list_long,                  // Like ls -l
+    list_user                   // User defined
 } list_format_t;
 
 typedef enum
 {
-    frame_full,                 /* full screen frame */
-    frame_half                  /* half screen frame */
+    frame_full,                 // full screen frame
+    frame_half                  // half screen frame
 } panel_display_t;
 
 typedef enum
@@ -68,7 +68,7 @@ typedef struct panel_field_struct
     gboolean is_user_choice;
     gboolean use_in_user_format;
     const char *(*string_fn) (const file_entry_t * fe, int len);
-    GCompareFunc sort_routine;  /* used by mouse_sort_col() */
+    GCompareFunc sort_routine;  // used by mouse_sort_col()
 } panel_field_t;
 
 typedef struct
@@ -81,53 +81,53 @@ typedef struct
 {
     Widget widget;
 
-    char *name;                 /* The panel name */
+    char *name;                 // The panel name
 
-    panel_display_t frame_size; /* half or full frame */
+    panel_display_t frame_size; // half or full frame
 
-    gboolean active;            /* If panel is currently selected */
-    gboolean dirty;             /* Should we redisplay the panel? */
+    gboolean active;            // If panel is currently selected
+    gboolean dirty;             // Should we redisplay the panel?
 
-    gboolean is_panelized;      /* Panelization: special mode, can't reload the file list */
-    panelized_descr_t *panelized_descr; /* Panelization descriptor */
+    gboolean is_panelized;      // Panelization: special mode, can't reload the file list
+    panelized_descr_t *panelized_descr; // Panelization descriptor
 
 #ifdef HAVE_CHARSET
-    int codepage;               /* Panel codepage */
+    int codepage;               // Panel codepage
 #endif
 
-    dir_list dir;               /* Directory contents */
-    struct stat dir_stat;       /* Stat of current dir: used by execute () */
+    dir_list dir;               // Directory contents
+    struct stat dir_stat;       // Stat of current dir: used by execute ()
 
-    vfs_path_t *cwd_vpath;      /* Current Working Directory */
-    vfs_path_t *lwd_vpath;      /* Last Working Directory */
+    vfs_path_t *cwd_vpath;      // Current Working Directory
+    vfs_path_t *lwd_vpath;      // Last Working Directory
 
-    list_format_t list_format;  /* Listing type */
-    GSList *format;             /* Display format */
-    char *user_format;          /* User format */
-    int list_cols;              /* Number of file list columns */
-    int brief_cols;             /* Number of columns in case of list_brief format */
-    /* sort */
+    list_format_t list_format;  // Listing type
+    GSList *format;             // Display format
+    char *user_format;          // User format
+    int list_cols;              // Number of file list columns
+    int brief_cols;             // Number of columns in case of list_brief format
+    // sort
     dir_sort_options_t sort_info;
     const panel_field_t *sort_field;
 
-    int marked;                 /* Count of marked files */
-    int dirs_marked;            /* Count of marked directories */
-    uintmax_t total;            /* Bytes in marked files */
+    int marked;                 // Count of marked files
+    int dirs_marked;            // Count of marked directories
+    uintmax_t total;            // Bytes in marked files
 
-    int top;                    /* The file shown on the top of the panel */
-    int current;                /* Index to the currently selected file */
+    int top;                    // The file shown on the top of the panel
+    int current;                // Index to the currently selected file
 
-    GSList *status_format;      /* Mini status format */
-    gboolean user_mini_status;  /* Is user_status_format used */
-    char *user_status_format[LIST_FORMATS];     /* User format for status line */
+    GSList *status_format;      // Mini status format
+    gboolean user_mini_status;  // Is user_status_format used
+    char *user_status_format[LIST_FORMATS];     // User format for status line
 
-    file_filter_t filter;       /* File name filter */
+    file_filter_t filter;       // File name filter
 
     struct
     {
-        char *name;             /* Directory history name for history file */
-        GList *list;            /* Directory history */
-        GList *current;         /* Pointer to the current history item */
+        char *name;             // Directory history name for history file
+        GList *list;            // Directory history
+        GList *current;         // Pointer to the current history item
     } dir_history;
 
     struct
@@ -135,12 +135,12 @@ typedef struct
         gboolean active;
         GString *buffer;
         GString *prev_buffer;
-        char ch[MB_LEN_MAX];    /* Buffer for multi-byte character */
-        int chpoint;            /* Point after last characters in @ch */
+        char ch[MB_LEN_MAX];    // Buffer for multi-byte character
+        int chpoint;            // Point after last characters in @ch
     } quick_search;
 
-    int content_shift;          /* Number of characters of filename need to skip from left side. */
-    int max_shift;              /* Max shift for visible part of current panel */
+    int content_shift;          // Number of characters of filename need to skip from left side.
+    int max_shift;              // Max shift for visible part of current panel
 } WPanel;
 
 /*** global variables defined in .c file *********************************************************/
@@ -219,7 +219,7 @@ void panel_deinit (void);
 static inline WPanel *
 panel_empty_new (const char *panel_name)
 {
-    /* Unknown sizes of the panel at startup */
+    // Unknown sizes of the panel at startup
     WRect r = { 0, 0, 1, 1 };
 
     return panel_sized_empty_new (panel_name, &r);
@@ -238,7 +238,7 @@ panel_empty_new (const char *panel_name)
 static inline WPanel *
 panel_with_dir_new (const char *panel_name, const vfs_path_t *vpath)
 {
-    /* Unknown sizes of the panel at startup */
+    // Unknown sizes of the panel at startup
     WRect r = { 0, 0, 1, 1 };
 
     return panel_sized_with_dir_new (panel_name, &r, vpath);
@@ -278,4 +278,4 @@ panel_sized_new (const char *panel_name, const WRect *r)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#endif /* MC__PANEL_H */
+#endif // MC__PANEL_H

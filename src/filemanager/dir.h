@@ -46,10 +46,10 @@ typedef void (*dir_list_cb_fn) (dir_list_cb_state_t state, void *data);
  */
 typedef struct
 {
-    file_entry_t *list; /**< list of file_entry_t objects */
-    int size;           /**< number of allocated elements in list (capacity) */
-    int len;            /**< number of used elements in list */
-    dir_list_cb_fn callback;    /**< callback to visualize of directory read */
+    file_entry_t *list; // list of file_entry_t objects
+    int size;           // number of allocated elements in list (capacity)
+    int len;            // number of used elements in list
+    dir_list_cb_fn callback;    // callback to visualize of directory read
 } dir_list;
 
 /**
@@ -57,9 +57,9 @@ typedef struct
  */
 typedef struct dir_sort_options_struct
 {
-    gboolean reverse;           /**< sort is reverse */
-    gboolean case_sensitive;    /**< sort is case sensitive */
-    gboolean exec_first;        /**< executables are at top of list */
+    gboolean reverse;           // sort is reverse
+    gboolean case_sensitive;    // sort is case sensitive
+    gboolean exec_first;        // executables are at top of list
 } dir_sort_options_t;
 
 /* filter  */
@@ -112,4 +112,4 @@ link_isdir (const file_entry_t *file)
     return (file->f.link_to_dir != 0);
 }
 
-#endif /* MC__DIR_H */
+#endif // MC__DIR_H

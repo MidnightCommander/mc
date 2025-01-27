@@ -1,7 +1,7 @@
 #ifndef MC__EDIT_ASPELL_H
 #define MC__EDIT_ASPELL_H
 
-#include "lib/global.h"         /* include <glib.h> */
+#include "lib/global.h"         // include <glib.h>
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -24,4 +24,4 @@ const char *spell_dialog_lang_list_show (const GPtrArray * languages);
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__EDIT_ASPELL_H */
+#endif // MC__EDIT_ASPELL_H

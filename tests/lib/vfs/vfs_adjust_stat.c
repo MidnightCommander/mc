@@ -38,7 +38,7 @@ static const struct test_vfs_adjust_stat_ds
     struct stat etalon_stat;
 } test_vfs_adjust_stat_ds[] =
 {
-    /* 0 */
+    // 0
     {
         .etalon_stat =
         {
@@ -51,7 +51,7 @@ static const struct test_vfs_adjust_stat_ds
 #endif
         }
     },
-    /* 1 */
+    // 1
     {
         .etalon_stat =
         {
@@ -64,7 +64,7 @@ static const struct test_vfs_adjust_stat_ds
 #endif
         }
     },
-    /* 2 */
+    // 2
     {
         .etalon_stat =
         {
@@ -77,7 +77,7 @@ static const struct test_vfs_adjust_stat_ds
 #endif
         }
     },
-    /* 3 */
+    // 3
     {
         .etalon_stat =
         {
@@ -90,7 +90,7 @@ static const struct test_vfs_adjust_stat_ds
 #endif
         }
     },
-    /* 4 */
+    // 4
     {
         .etalon_stat =
         {
@@ -103,7 +103,7 @@ static const struct test_vfs_adjust_stat_ds
 #endif
         }
     },
-    /* 5 */
+    // 5
     {
         .etalon_stat =
         {
@@ -116,7 +116,7 @@ static const struct test_vfs_adjust_stat_ds
 #endif
         }
     },
-    /* 6 */
+    // 6
     {
         .etalon_stat =
         {
@@ -129,7 +129,7 @@ static const struct test_vfs_adjust_stat_ds
 #endif
         }
     },
-    /* 7 */
+    // 7
     {
         .etalon_stat =
         {
@@ -142,7 +142,7 @@ static const struct test_vfs_adjust_stat_ds
 #endif
         }
     },
-    /* 8 */
+    // 8
     {
         .etalon_stat =
         {
@@ -166,21 +166,21 @@ START_PARAMETRIZED_TEST (test_vfs_adjust_stat, test_vfs_adjust_stat_ds)
 /* *INDENT-ON* */
 {
 #ifdef HAVE_STRUCT_STAT_ST_BLOCKS
-    /* given */
+    // given
     struct stat expected_stat;
 
     expected_stat.st_size = data->etalon_stat.st_size;
 #ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
     expected_stat.st_blksize = data->etalon_stat.st_blksize;
-#endif /* HAVE_STRUCT_STAT_ST_BLKSIZE */
-    /* when */
+#endif // HAVE_STRUCT_STAT_ST_BLKSIZE
+    // when
     vfs_adjust_stat (&expected_stat);
 
-    /* then */
+    // then
     ck_assert_int_eq (data->etalon_stat.st_blocks, expected_stat.st_blocks);
 #else
     ck_assert_int_eq (0, 0);
-#endif /* HAVE_STRUCT_STAT_ST_BLOCKS */
+#endif // HAVE_STRUCT_STAT_ST_BLOCKS
 }
 /* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
@@ -195,9 +195,9 @@ main (void)
 
     tc_core = tcase_create ("Core");
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, test_vfs_adjust_stat, test_vfs_adjust_stat_ds);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

@@ -34,7 +34,7 @@
  */
 
 #include <config.h>
-#include <inttypes.h>           /* uintmax_t */
+#include <inttypes.h>           // uintmax_t
 
 #include "lib/global.h"
 #include "lib/skin.h"
@@ -47,7 +47,7 @@
 #include "lib/charsets.h"
 #endif
 
-#include "src/setup.h"          /* panels_options */
+#include "src/setup.h"          // panels_options
 #include "src/keymap.h"
 
 #include "internal.h"
@@ -56,7 +56,7 @@
 
 /*** file scope macro definitions ****************************************************************/
 
-#define BUF_TRUNC_LEN 5         /* The length of the line displays the file size */
+#define BUF_TRUNC_LEN 5         // The length of the line displays the file size
 
 /*** file scope type declarations ****************************************************************/
 
@@ -116,7 +116,7 @@ mcview_set_buttonbar (WView *view)
     buttonbar_set_label (b, 8, view->mode_flags.magic ? Q_ ("ButtonBar|Raw")
                          : Q_ ("ButtonBar|Parse"), keymap, w);
 
-    if (!mcview_is_in_panel (view))     /* don't override some panel buttonbar keys  */
+    if (!mcview_is_in_panel (view))     // don't override some panel buttonbar keys
     {
         buttonbar_set_label (b, 3, Q_ ("ButtonBar|Quit"), keymap, w);
         buttonbar_set_label (b, 9, view->mode_flags.nroff ? Q_ ("ButtonBar|Unform")
@@ -141,7 +141,7 @@ mcview_display_percent (WView *view, off_t p)
         right = view->status_area.x + view->status_area.cols;
         widget_gotoyx (view, top, right - 4);
         tty_printf ("%3d%%", percent);
-        /* avoid cursor wrapping in NCurses-base MC */
+        // avoid cursor wrapping in NCurses-base MC
         widget_gotoyx (view, top, right - 1);
     }
 }
@@ -212,10 +212,10 @@ mcview_update (WView *view)
 
     if (view->dirty > dirt_limit)
     {
-        /* Too many updates skipped -> force a update */
+        // Too many updates skipped -> force a update
         mcview_display (view);
         view->dirty = 0;
-        /* Raise the update skipping limit */
+        // Raise the update skipping limit
         dirt_limit++;
         if (dirt_limit > mcview_max_dirt_limit)
             dirt_limit = mcview_max_dirt_limit;
@@ -224,7 +224,7 @@ mcview_update (WView *view)
     {
         if (is_idle ())
         {
-            /* We have time to update the screen properly */
+            // We have time to update the screen properly
             mcview_display (view);
             view->dirty = 0;
             if (dirt_limit > 1)
@@ -272,12 +272,12 @@ mcview_compute_areas (WView *view)
     view_area.lines = DOZ (WIDGET (view)->rect.lines, 2 * view->dpy_frame_size);
     view_area.cols = DOZ (WIDGET (view)->rect.cols, 2 * view->dpy_frame_size);
 
-    /* Most coordinates of the areas equal those of the whole viewer */
+    // Most coordinates of the areas equal those of the whole viewer
     view->status_area = view_area;
     view->ruler_area = view_area;
     view->data_area = view_area;
 
-    /* Compute the heights of the areas */
+    // Compute the heights of the areas
     rest = view_area.lines;
 
     height = MIN (rest, 1);
@@ -291,7 +291,7 @@ mcview_compute_areas (WView *view)
 
     view->data_area.lines = rest;
 
-    /* Compute the position of the areas */
+    // Compute the position of the areas
     y = view_area.y;
 
     view->status_area.y = y;
@@ -326,7 +326,7 @@ mcview_update_bytes_per_line (WView *view)
     g_assert (bytes != 0);
 
     view->bytes_per_line = bytes;
-    view->dirty = mcview_max_dirt_limit + 1;    /* To force refresh */
+    view->dirty = mcview_max_dirt_limit + 1;    // To force refresh
 }
 
 /* --------------------------------------------------------------------------------------------- */

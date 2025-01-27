@@ -59,7 +59,7 @@ static const struct parse_integer_test_ds
 } parse_integer_test_ds[] =
 {
     {
-        /* too big */
+        // too big
         "99999999999999999999999999999999999999999999999999999999999999999999",
         0,
         TRUE
@@ -122,14 +122,14 @@ static const struct parse_integer_test_ds
 START_PARAMETRIZED_TEST (parse_integer_test, parse_integer_test_ds)
 /* *INDENT-ON* */
 {
-    /* given */
+    // given
     uintmax_t actual_result;
     gboolean invalid = FALSE;
 
-    /* when */
+    // when
     actual_result = parse_integer (data->haystack, &invalid);
 
-    /* then */
+    // then
     ck_assert_msg (invalid == data->invalid && actual_result == data->expected_result,
                    "actual ( %" PRIuMAX ") not equal to\nexpected (%" PRIuMAX ")",
                    actual_result, data->expected_result);
@@ -149,9 +149,9 @@ main (void)
 
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, parse_integer_test, parse_integer_test_ds);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

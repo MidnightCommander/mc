@@ -1,7 +1,7 @@
 #ifndef MC__CONFIG_H
 #define MC__CONFIG_H
 
-#include "lib/vfs/vfs.h"        /* vfs_path_t */
+#include "lib/vfs/vfs.h"        // vfs_path_t
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -115,4 +115,4 @@ void mc_config_history_save (mc_config_t * cfg, const char *name, GList * h);
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__CONFIG_H */
+#endif // MC__CONFIG_H

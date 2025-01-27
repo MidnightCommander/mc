@@ -65,56 +65,56 @@ static const struct test_is_wildcarded_ds
     gboolean expected_result;
 } test_is_wildcarded_ds[] =
 {
-    { /* 0 */
+    { // 0
         "blabla",
         FALSE
     },
-    { /* 1 */
+    { // 1
         "bla?bla",
         TRUE
     },
-    { /* 2 */
+    { // 2
         "bla*bla",
         TRUE
     },
-    { /* 3 */
+    { // 3
         "bla\\*bla",
         FALSE
     },
 
-    { /* 4 */
+    { // 4
         "bla\\\\*bla",
         TRUE
     },
-    { /* 5 */
+    { // 5
         "bla\\1bla",
         TRUE
     },
-    { /* 6 */
+    { // 6
         "bla\\\\1bla",
         FALSE
     },
-    { /* 7 */
+    { // 7
         "bla\\\t\\\\1bla",
         FALSE
     },
-    { /* 8 */
+    { // 8
         "bla\\\t\\\\\\1bla",
         TRUE
     },
-    { /* 9 */
+    { // 9
         "bla\\9bla",
         TRUE
     },
-    { /* 10 */
+    { // 10
         "blabla\\",
         FALSE
     },
-    { /* 11 */
+    { // 11
         "blab\\?la",
         FALSE
     },
-    { /* 12 */
+    { // 12
         "blab\\\\?la",
         TRUE
     },
@@ -126,12 +126,12 @@ static const struct test_is_wildcarded_ds
 START_PARAMETRIZED_TEST (test_is_wildcarded, test_is_wildcarded_ds)
 /* *INDENT-ON* */
 {
-    /* given */
+    // given
     gboolean actual_result;
 
-    /* when */
+    // when
     actual_result = is_wildcarded (data->input_value);
-    /* then */
+    // then
     ck_assert_int_eq (actual_result, data->expected_result);
 }
 /* *INDENT-OFF* */
@@ -149,9 +149,9 @@ main (void)
 
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, test_is_wildcarded, test_is_wildcarded_ds);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

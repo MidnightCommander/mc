@@ -13,11 +13,11 @@
 
 #include <stdio.h>
 
-#include "lib/search.h"         /* mc_search_type_t */
-#include "lib/widget.h"         /* cb_ret_t */
-#include "lib/vfs/vfs.h"        /* vfs_path_t */
+#include "lib/search.h"         // mc_search_type_t
+#include "lib/widget.h"         // cb_ret_t
+#include "lib/vfs/vfs.h"        // vfs_path_t
 
-#include "src/setup.h"          /* option_tab_spacing */
+#include "src/setup.h"          // option_tab_spacing
 
 #include "edit.h"
 
@@ -256,4 +256,4 @@ edit_reload (WEdit *edit, const vfs_path_t *filename_vpath)
     return edit_reload_line (edit, &arg);
 }
 
-#endif /* MC__EDIT_IMPL_H */
+#endif // MC__EDIT_IMPL_H

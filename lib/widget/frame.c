@@ -36,7 +36,7 @@
 #include "lib/tty/color.h"
 #include "lib/skin.h"
 #include "lib/strutil.h"
-#include "lib/util.h"           /* MC_PTR_FREE */
+#include "lib/util.h"           // MC_PTR_FREE
 #include "lib/widget.h"
 
 /*** global variables ****************************************************************************/
@@ -83,7 +83,7 @@ frame_draw (const WFrame *f)
 
     if (f->title != NULL)
     {
-        /* TODO: truncate long title */
+        // TODO: truncate long title
         tty_setcolor (colors[FRAME_COLOR_TITLE]);
         widget_gotoyx (f, d, (w->cols - str_term_width1 (f->title)) / 2);
         tty_print_string (f->title);
@@ -147,7 +147,7 @@ frame_set_title (WFrame *f, const char *title)
 {
     MC_PTR_FREE (f->title);
 
-    /* Strip existing spaces, add one space before and after the title */
+    // Strip existing spaces, add one space before and after the title
     if (title != NULL && *title != '\0')
     {
         char *t;

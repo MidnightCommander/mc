@@ -31,7 +31,7 @@
 #include "internal.h"
 #include "lib/util.h"
 
-#include "lib/tty/color.h"      /* tty_use_256colors(); */
+#include "lib/tty/color.h"      // tty_use_256colors();
 
 /*** global variables ****************************************************************************/
 
@@ -69,16 +69,16 @@ mc_skin_get_default_name (void)
 {
     char *tmp_str;
 
-    /* from command line */
+    // from command line
     if (mc_global.tty.skin != NULL)
         return g_strdup (mc_global.tty.skin);
 
-    /* from envirovement variable */
+    // from envirovement variable
     tmp_str = getenv ("MC_SKIN");
     if (tmp_str != NULL)
         return g_strdup (tmp_str);
 
-    /*  from config. Or 'default' if no present in config */
+    //  from config. Or 'default' if no present in config
     return mc_config_get_string (mc_global.main_config, CONFIG_APP_SECTION, "skin", "default");
 }
 

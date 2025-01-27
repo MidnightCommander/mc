@@ -78,28 +78,28 @@ static const struct test_path_length_ds
     const size_t expected_length_terminal_encoding;
 } test_path_length_ds[] =
 {
-    { /* 0. */
+    { // 0.
         NULL,
         0,
         0
     },
-    { /* 1. */
+    { // 1.
         "/",
         1,
         1
     },
-    { /* 2. */
+    { // 2.
         "/тестовый/путь",
         26,
         26
     },
 #ifdef HAVE_CHARSET
-    { /* 3. */
+    { // 3.
         "/#enc:KOI8-R/тестовый/путь",
         14,
         38,
     },
-#endif /* HAVE_CHARSET */
+#endif // HAVE_CHARSET
 };
 /* *INDENT-ON* */
 
@@ -108,7 +108,7 @@ static const struct test_path_length_ds
 START_PARAMETRIZED_TEST (test_path_length, test_path_length_ds)
 /* *INDENT-ON* */
 {
-    /* given */
+    // given
     vfs_path_t *vpath;
     char *path;
     size_t actual_length_terminal_encoding, actual_length_element_encoding;
@@ -116,11 +116,11 @@ START_PARAMETRIZED_TEST (test_path_length, test_path_length_ds)
     vpath = vfs_path_from_str (data->input_path);
     path = vpath != NULL ? vfs_path_get_by_index (vpath, 0)->path : NULL;
 
-    /* when */
+    // when
     actual_length_terminal_encoding = vfs_path_len (vpath);
     actual_length_element_encoding = path != NULL ? strlen (path) : 0;
 
-    /* then */
+    // then
     ck_assert_int_eq (actual_length_terminal_encoding, data->expected_length_terminal_encoding);
     ck_assert_int_eq (actual_length_element_encoding, data->expected_length_element_encoding);
 
@@ -141,9 +141,9 @@ main (void)
 
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, test_path_length, test_path_length_ds);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

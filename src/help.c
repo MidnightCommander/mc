@@ -50,7 +50,7 @@
 #include <config.h>
 
 #include <errno.h>
-#include <limits.h>             /* MB_LEN_MAX */
+#include <limits.h>             // MB_LEN_MAX
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -94,12 +94,12 @@ typedef struct Link_Area
 
 /*** file scope variables ************************************************************************/
 
-static char *fdata = NULL;      /* Pointer to the loaded data file */
-static int help_lines;          /* Lines in help viewer */
-static int history_ptr = 0;     /* For the history queue */
-static const char *main_node;   /* The main node */
-static const char *last_shown = NULL;   /* Last byte shown in a screen */
-static gboolean end_of_node = FALSE;    /* Flag: the last character of the node shown? */
+static char *fdata = NULL;      // Pointer to the loaded data file
+static int help_lines;          // Lines in help viewer
+static int history_ptr = 0;     // For the history queue
+static const char *main_node;   // The main node
+static const char *last_shown = NULL;   // Last byte shown in a screen
+static gboolean end_of_node = FALSE;    // Flag: the last character of the node shown?
 static const char *currentpoint;
 static const char *selected_item;
 
@@ -108,8 +108,8 @@ static WDialog *whelp;
 
 static struct
 {
-    const char *page;           /* Pointer to the selected page */
-    const char *link;           /* Pointer to the selected link */
+    const char *page;           // Pointer to the selected page
+    const char *link;           // Pointer to the selected link
 } history[HISTORY_SIZE];
 
 static GSList *link_area = NULL;
@@ -119,7 +119,7 @@ static gboolean inside_link_area = FALSE;
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-/** returns the position where text was found in the start buffer 
+/** returns the position where text was found in the start buffer
  * or 0 if not found
  */
 static const char *
@@ -132,13 +132,13 @@ search_string (const char *start, const char *text)
 
     local_text = g_strdup (text);
 
-    /* fmt sometimes replaces a space with a newline in the help file */
-    /* Replace the newlines in the link name with spaces to correct the situation */
+    // fmt sometimes replaces a space with a newline in the help file
+    // Replace the newlines in the link name with spaces to correct the situation
     for (d = local_text; *d != '\0'; str_next_char (&d))
         if (*d == '\n')
             *d = ' ';
 
-    /* Do search */
+    // Do search
     for (d = local_text; *e != '\0'; e++)
     {
         if (*d == *e)
@@ -235,11 +235,11 @@ move_backward2 (const char *c, int lines)
     {
         if (*p == CHAR_NODE_END)
         {
-            /* We reached the beginning of the node */
-            /* Skip the node headers */
+            // We reached the beginning of the node
+            // Skip the node headers
             while (*p != ']')
                 str_cnext_char (&p);
-            return currentpoint = p + 2;        /* Skip the newline following the start of the node */
+            return currentpoint = p + 2;        // Skip the newline following the start of the node
         }
 
         if (*(p - 1) == '\n')
@@ -277,7 +277,7 @@ move_to_top (void)
 
     while (*currentpoint != ']')
         currentpoint++;
-    currentpoint = currentpoint + 2;    /* Skip the newline following the start of the node */
+    currentpoint = currentpoint + 2;    // Skip the newline following the start of the node
     selected_item = NULL;
 }
 
@@ -318,12 +318,12 @@ help_follow_link (const char *start, const char *lc_selected_item)
         p = search_string (fdata, link_name);
         if (p != NULL)
         {
-            p += 1;             /* Skip the newline following the start of the node */
+            p += 1;             // Skip the newline following the start of the node
             return p;
         }
     }
 
-    /* Create a replacement page with the error message */
+    // Create a replacement page with the error message
     return _("Help file format error\n");
 }
 
@@ -364,12 +364,12 @@ start_link_area (int x, int y, const char *link_name)
     if (inside_link_area)
         message (D_NORMAL, _("Warning"), "%s", _("Internal bug: Double start of link area"));
 
-    /* Allocate memory for a new link area */
+    // Allocate memory for a new link area
     la = g_new (Link_Area, 1);
-    /* Save the beginning coordinates of the link area */
+    // Save the beginning coordinates of the link area
     la->x1 = x;
     la->y1 = y;
-    /* Save the name of the destination anchor */
+    // Save the name of the destination anchor
     la->link_name = link_name;
     link_area = g_slist_prepend (link_area, la);
 
@@ -384,7 +384,7 @@ end_link_area (int x, int y)
     if (inside_link_area)
     {
         Link_Area *la = (Link_Area *) link_area->data;
-        /* Save the end coordinates of the link area */
+        // Save the end coordinates of the link area
         la->x2 = x;
         la->y2 = y;
         inside_link_area = FALSE;
@@ -451,7 +451,7 @@ help_show (WDialog *h, const char *paint_start)
 {
     gboolean painting = TRUE;
     gboolean repeat_paint;
-    int active_col, active_line;        /* Active link position */
+    int active_col, active_line;        // Active link position
     char buff[MB_LEN_MAX + 1];
     GString *word;
 
@@ -462,7 +462,7 @@ help_show (WDialog *h, const char *paint_start)
     {
         int line = 0;
         int col = 0;
-        gboolean acs = FALSE;   /* Flag: Is alternate character set active? */
+        gboolean acs = FALSE;   // Flag: Is alternate character set active?
         const char *p, *n;
 
         active_col = 0;
@@ -497,7 +497,7 @@ help_show (WDialog *h, const char *paint_start)
                 {
                     tty_setcolor (HELP_SLINK_COLOR);
 
-                    /* Store the coordinates of the link */
+                    // Store the coordinates of the link
                     active_col = col + 2;
                     active_line = line + 2;
                 }
@@ -541,7 +541,7 @@ help_show (WDialog *h, const char *paint_start)
                 break;
             case ' ':
             case '\t':
-                /* word delimiter */
+                // word delimiter
                 if (painting)
                 {
                     help_print_word (h, word, &col, &line, c == ' ');
@@ -560,7 +560,7 @@ help_show (WDialog *h, const char *paint_start)
                 if (painting && (line < help_lines))
                 {
                     if (!acs)
-                        /* accumulate symbols in a word */
+                        // accumulate symbols in a word
                         g_string_append (word, buff);
                     else if (col < HELP_WINDOW_WIDTH)
                     {
@@ -581,7 +581,7 @@ help_show (WDialog *h, const char *paint_start)
             }
         }
 
-        /* print last word */
+        // print last word
         if (n[0] == CHAR_NODE_END)
             help_print_word (h, word, &col, &line, FALSE);
 
@@ -603,7 +603,7 @@ help_show (WDialog *h, const char *paint_start)
 
     g_string_free (word, TRUE);
 
-    /* Position the cursor over a nice link */
+    // Position the cursor over a nice link
     if (active_col != 0)
         widget_gotoyx (h, active_line, active_col);
 }
@@ -623,7 +623,7 @@ help_help (WDialog *h)
     p = search_string (fdata, "[How to use help]");
     if (p != NULL)
     {
-        currentpoint = p + 1;   /* Skip the newline following the start of the node */
+        currentpoint = p + 1;   // Skip the newline following the start of the node
         selected_item = NULL;
         widget_draw (WIDGET (h));
     }
@@ -646,7 +646,7 @@ help_index (WDialog *h)
         history[history_ptr].page = currentpoint;
         history[history_ptr].link = selected_item;
 
-        currentpoint = new_item + 1;    /* Skip the newline following the start of the node */
+        currentpoint = new_item + 1;    // Skip the newline following the start of the node
         selected_item = NULL;
         widget_draw (WIDGET (h));
     }
@@ -663,7 +663,7 @@ help_back (WDialog *h)
     if (history_ptr < 0)
         history_ptr = HISTORY_SIZE - 1;
 
-    widget_draw (WIDGET (h));   /* FIXME: unneeded? */
+    widget_draw (WIDGET (h));   // FIXME: unneeded?
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -756,7 +756,7 @@ help_prev_node (void)
 static void
 help_select_link (void)
 {
-    /* follow link */
+    // follow link
     if (selected_item == NULL)
     {
 #ifdef WE_WANT_TO_GO_BACKWARD_ON_KEY_RIGHT
@@ -764,7 +764,7 @@ help_select_link (void)
          * backward if there are no links selected?, I agree
          * with Torben than doing nothing in this case is better
          */
-        /* If there are no links, go backward in history */
+        // If there are no links, go backward in history
         history_ptr--;
         if (history_ptr < 0)
             history_ptr = HISTORY_SIZE - 1;
@@ -926,7 +926,7 @@ help_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data
         }
 
     case MSG_ACTION:
-        /* Handle shortcuts and buttonbar. */
+        // Handle shortcuts and buttonbar.
         return help_execute_cmd (parm);
 
     default:
@@ -958,7 +958,7 @@ translate_file (char *filedata)
 
         g_free (fdata);
 
-        /* initial allocation for largest whole help file */
+        // initial allocation for largest whole help file
         translated_data = g_string_sized_new (32 * 1024);
         nok = (str_convert (conv, filedata, translated_data) == ESTR_FAILURE);
         fdata = g_string_free (translated_data, nok);
@@ -997,42 +997,42 @@ help_mouse_callback (Widget *w, mouse_msg_t msg, mouse_event_t *event)
 
     if ((event->buttons & GPM_B_RIGHT) != 0)
     {
-        /* Right button click */
+        // Right button click
         help_back (whelp);
         return;
     }
 
-    /* Left bytton click */
+    // Left bytton click
 
-    /* The event is relative to the dialog window, adjust it: */
+    // The event is relative to the dialog window, adjust it:
     x = event->x - 1;
     y = event->y - 1;
 
-    /* Test whether the mouse click is inside one of the link areas */
+    // Test whether the mouse click is inside one of the link areas
     for (current_area = link_area; current_area != NULL; current_area = g_slist_next (current_area))
     {
         Link_Area *la = (Link_Area *) current_area->data;
 
-        /* Test one line link area */
+        // Test one line link area
         if (y == la->y1 && x >= la->x1 && y == la->y2 && x <= la->x2)
             break;
 
-        /* Test two line link area */
+        // Test two line link area
         if (la->y1 + 1 == la->y2)
         {
-            /* The first line || The second line */
+            // The first line || The second line
             if ((y == la->y1 && x >= la->x1) || (y == la->y2 && x <= la->x2))
                 break;
         }
-        /* Mouse will not work with link areas of more than two lines */
+        // Mouse will not work with link areas of more than two lines
     }
 
-    /* Test whether a link area was found */
+    // Test whether a link area was found
     if (current_area != NULL)
     {
         Link_Area *la = (Link_Area *) current_area->data;
 
-        /* The click was inside a link area -> follow the link */
+        // The click was inside a link area -> follow the link
         history_ptr = (history_ptr + 1) % HISTORY_SIZE;
         history[history_ptr].page = currentpoint;
         history[history_ptr].link = la->link_name;
@@ -1048,7 +1048,7 @@ help_mouse_callback (Widget *w, mouse_msg_t msg, mouse_event_t *event)
     else
         move_forward (1);
 
-    /* Show the new node */
+    // Show the new node
     widget_draw (WIDGET (w->owner));
 }
 
@@ -1076,11 +1076,11 @@ help_interactive_display (const gchar *event_group_name, const gchar *event_name
                           gpointer init_data, gpointer data)
 {
     const dlg_colors_t help_colors = {
-        HELP_NORMAL_COLOR,      /* common text color */
-        0,                      /* unused in help */
-        HELP_BOLD_COLOR,        /* bold text color */
-        0,                      /* unused in help */
-        HELP_TITLE_COLOR        /* title color */
+        HELP_NORMAL_COLOR,      // common text color
+        0,                      // unused in help
+        HELP_BOLD_COLOR,        // bold text color
+        0,                      // unused in help
+        HELP_TITLE_COLOR        // title color
     };
 
     Widget *wh;
@@ -1127,7 +1127,7 @@ help_interactive_display (const gchar *event_group_name, const gchar *event_name
     {
         message (D_ERROR, MSG_ERROR, _("Cannot find node %s in help file"), event_data->node);
 
-        /* Fallback to [main], return if it also cannot be found */
+        // Fallback to [main], return if it also cannot be found
         main_node = search_string (fdata, "[main]");
         if (main_node == NULL)
         {
@@ -1145,11 +1145,11 @@ help_interactive_display (const gchar *event_group_name, const gchar *event_name
     g = GROUP (whelp);
     wh->keymap = help_map;
     widget_want_tab (wh, TRUE);
-    /* draw background */
+    // draw background
     whelp->bg->callback = help_bg_callback;
 
     selected_item = search_string_node (main_node, STRING_LINK_START) - 1;
-    currentpoint = main_node + 1;       /* Skip the newline following the start of the node */
+    currentpoint = main_node + 1;       // Skip the newline following the start of the node
 
     for (i = HISTORY_SIZE - 1; i >= 0; i--)
     {
@@ -1166,7 +1166,7 @@ help_interactive_display (const gchar *event_group_name, const gchar *event_name
     md = mousedispatch_new (&r);
 
     group_add_widget (g, md);
-    group_add_widget (g, help_bar);     /* FIXME */
+    group_add_widget (g, help_bar);     // FIXME
 
     buttonbar_set_label (help_bar, 1, Q_ ("ButtonBar|Help"), wh->keymap, NULL);
     buttonbar_set_label (help_bar, 2, Q_ ("ButtonBar|Index"), wh->keymap, NULL);

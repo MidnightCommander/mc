@@ -40,16 +40,16 @@
 #include <termios.h>
 
 #include "lib/global.h"
-#include "lib/strutil.h"        /* str_term_form */
+#include "lib/strutil.h"        // str_term_form
 #include "lib/util.h"
 
 #ifndef WANT_TERM_H
 #define WANT_TERM_H
 #endif
 
-#include "tty-internal.h"       /* mc_tty_normalize_from_utf8() */
+#include "tty-internal.h"       // mc_tty_normalize_from_utf8()
 #include "tty.h"
-#include "color.h"              /* tty_setcolor */
+#include "color.h"              // tty_setcolor
 #include "color-internal.h"
 #include "key.h"
 #include "mouse.h"
@@ -61,8 +61,8 @@
 #include <ncurses/term.h>
 #else
 #include <term.h>
-#endif /* HAVE_NCURSES_TERM_H */
-#endif /* WANT_TERM_H */
+#endif // HAVE_NCURSES_TERM_H
+#endif // WANT_TERM_H
 
 /*** global variables ****************************************************************************/
 
@@ -102,9 +102,9 @@ tty_setup_sigwinch (void (*handler) (int))
     sigemptyset (&act.sa_mask);
 #ifdef SA_RESTART
     act.sa_flags = SA_RESTART;
-#endif /* SA_RESTART */
+#endif // SA_RESTART
     my_sigaction (SIGWINCH, &act, &oact);
-#endif /* SIGWINCH */
+#endif // SIGWINCH
 
     tty_create_winch_pipe ();
 }
@@ -182,28 +182,28 @@ mc_tty_normalize_lines_char (const char *ch)
         const char *line;
         int line_code;
     } const lines_codes[] = {
-        {"\342\224\230", ACS_LRCORNER}, /* ┌ */
-        {"\342\224\224", ACS_LLCORNER}, /* └ */
-        {"\342\224\220", ACS_URCORNER}, /* ┐ */
-        {"\342\224\214", ACS_ULCORNER}, /* ┘ */
-        {"\342\224\234", ACS_LTEE},     /* ├ */
-        {"\342\224\244", ACS_RTEE},     /* ┤ */
-        {"\342\224\254", ACS_TTEE},     /* ┬ */
-        {"\342\224\264", ACS_BTEE},     /* ┴ */
-        {"\342\224\200", ACS_HLINE},    /* ─ */
-        {"\342\224\202", ACS_VLINE},    /* │ */
-        {"\342\224\274", ACS_PLUS},     /* ┼ */
+        {"\342\224\230", ACS_LRCORNER}, // ┌
+        {"\342\224\224", ACS_LLCORNER}, // └
+        {"\342\224\220", ACS_URCORNER}, // ┐
+        {"\342\224\214", ACS_ULCORNER}, // ┘
+        {"\342\224\234", ACS_LTEE},     // ├
+        {"\342\224\244", ACS_RTEE},     // ┤
+        {"\342\224\254", ACS_TTEE},     // ┬
+        {"\342\224\264", ACS_BTEE},     // ┴
+        {"\342\224\200", ACS_HLINE},    // ─
+        {"\342\224\202", ACS_VLINE},    // │
+        {"\342\224\274", ACS_PLUS},     // ┼
 
-        {"\342\225\235", ACS_LRCORNER | A_BOLD},        /* ╔ */
-        {"\342\225\232", ACS_LLCORNER | A_BOLD},        /* ╚ */
-        {"\342\225\227", ACS_URCORNER | A_BOLD},        /* ╗ */
-        {"\342\225\224", ACS_ULCORNER | A_BOLD},        /* ╝ */
-        {"\342\225\237", ACS_LTEE | A_BOLD},    /* ╟ */
-        {"\342\225\242", ACS_RTEE | A_BOLD},    /* ╢ */
-        {"\342\225\244", ACS_TTEE | A_BOLD},    /* ╤ */
-        {"\342\225\247", ACS_BTEE | A_BOLD},    /* ╧ */
-        {"\342\225\220", ACS_HLINE | A_BOLD},   /* ═ */
-        {"\342\225\221", ACS_VLINE | A_BOLD},   /* ║ */
+        {"\342\225\235", ACS_LRCORNER | A_BOLD},        // ╔
+        {"\342\225\232", ACS_LLCORNER | A_BOLD},        // ╚
+        {"\342\225\227", ACS_URCORNER | A_BOLD},        // ╗
+        {"\342\225\224", ACS_ULCORNER | A_BOLD},        // ╝
+        {"\342\225\237", ACS_LTEE | A_BOLD},    // ╟
+        {"\342\225\242", ACS_RTEE | A_BOLD},    // ╢
+        {"\342\225\244", ACS_TTEE | A_BOLD},    // ╤
+        {"\342\225\247", ACS_BTEE | A_BOLD},    // ╧
+        {"\342\225\220", ACS_HLINE | A_BOLD},   // ═
+        {"\342\225\221", ACS_VLINE | A_BOLD},   // ║
 
         {NULL, 0}
     };
@@ -247,23 +247,23 @@ tty_init (gboolean mouse_enable, gboolean is_xterm)
      * them in the "Learn Keys" dialog.  The value is in milliseconds.
      */
     ESCDELAY = 200;
-#endif /* HAVE_ESCDELAY */
+#endif // HAVE_ESCDELAY
 
     tcgetattr (STDIN_FILENO, &mode);
-    /* use Ctrl-g to generate SIGINT */
-    mode.c_cc[VINTR] = CTRL ('g');      /* ^g */
-    /* disable SIGQUIT to allow use Ctrl-\ key */
+    // use Ctrl-g to generate SIGINT
+    mode.c_cc[VINTR] = CTRL ('g');      // ^g
+    // disable SIGQUIT to allow use Ctrl-\ key
     mode.c_cc[VQUIT] = NULL_VALUE;
     tcsetattr (STDIN_FILENO, TCSANOW, &mode);
 
-    /* curses remembers the "in-program" modes after this call */
+    // curses remembers the "in-program" modes after this call
     def_prog_mode ();
 
     tty_start_interrupt_key ();
 
     if (!mouse_enable)
         use_mouse_p = MOUSE_DISABLED;
-    tty_init_xterm_support (is_xterm);  /* do it before tty_enter_ca_mode() call */
+    tty_init_xterm_support (is_xterm);  // do it before tty_enter_ca_mode() call
     tty_enter_ca_mode ();
     tty_raw_mode ();
     noecho ();
@@ -293,7 +293,7 @@ tty_enter_ca_mode (void)
 {
     if (mc_global.tty.xterm_flag && smcup != NULL)
     {
-        fprintf (stdout, /* ESC_STR ")0" */ ESC_STR "7" ESC_STR "[?47h");
+        fprintf (stdout, ESC_STR "7" ESC_STR "[?47h");
         fflush (stdout);
     }
 }
@@ -325,19 +325,19 @@ tty_change_screen_size (void)
     tty_reset_screen ();
 #endif
 
-    /* Ioctl on the STDIN_FILENO */
+    // Ioctl on the STDIN_FILENO
     ioctl (fileno (stdout), TIOCGWINSZ, &winsz);
     if (winsz.ws_col != 0 && winsz.ws_row != 0)
     {
 #if defined(NCURSES_VERSION) && defined(HAVE_RESIZETERM)
         resizeterm (winsz.ws_row, winsz.ws_col);
-        clearok (stdscr, TRUE); /* sigwinch's should use a semaphore! */
+        clearok (stdscr, TRUE); // sigwinch's should use a semaphore!
 #else
         COLS = winsz.ws_col;
         LINES = winsz.ws_row;
 #endif
     }
-#endif /* defined(TIOCGWINSZ) || NCURSES_VERSION_MAJOR >= 4 */
+#endif // defined(TIOCGWINSZ) || NCURSES_VERSION_MAJOR >= 4
 
 #ifdef ENABLE_SUBSHELL
     if (mc_global.tty.use_subshell)
@@ -366,7 +366,7 @@ tty_reset_shell_mode (void)
 void
 tty_raw_mode (void)
 {
-    raw ();                     /* FIXME: unneeded? */
+    raw ();                     // FIXME: unneeded?
     cbreak ();
 }
 
@@ -375,7 +375,7 @@ tty_raw_mode (void)
 void
 tty_noraw_mode (void)
 {
-    nocbreak ();                /* FIXME: unneeded? */
+    nocbreak ();                // FIXME: unneeded?
     noraw ();
 }
 
@@ -564,7 +564,7 @@ tty_colorize_area (int y, int x, int rows, int cols, int color)
 {
 #ifdef ENABLE_SHADOWS
     cchar_t *ctext;
-    wchar_t wch[10];            /* TODO not sure if the length is correct */
+    wchar_t wch[10];            // TODO not sure if the length is correct
     attr_t attrs;
     short color_pair;
 
@@ -594,7 +594,7 @@ tty_colorize_area (int y, int x, int rows, int cols, int color)
     (void) rows;
     (void) cols;
     (void) color;
-#endif /* ENABLE_SHADOWS */
+#endif // ENABLE_SHADOWS
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -707,14 +707,14 @@ tty_print_string (const char *s)
     s = str_term_form (s);
     len = str_term_width1 (s);
 
-    /* line is upper or below the screen or entire line is before or after screen */
+    // line is upper or below the screen or entire line is before or after screen
     if (mc_curs_row < 0 || mc_curs_row >= LINES || mc_curs_col + len <= 0 || mc_curs_col >= COLS)
     {
         mc_curs_col += len;
         return;
     }
 
-    /* skip invisible left part */
+    // skip invisible left part
     if (mc_curs_col < 0)
     {
         start = -mc_curs_col;
@@ -735,7 +735,7 @@ void
 tty_printf (const char *fmt, ...)
 {
     va_list args;
-    char buf[BUF_1K];           /* FIXME: is it enough? */
+    char buf[BUF_1K];           // FIXME: is it enough?
 
     va_start (args, fmt);
     g_vsnprintf (buf, sizeof (buf), fmt, args);

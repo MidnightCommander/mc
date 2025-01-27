@@ -24,4 +24,4 @@ void vfs_stamp_create (struct vfs_class *vclass, vfsid id);
 void vfs_gc_done (void);
 
 /*** inline functions ****************************************************************************/
-#endif /* MC_VFS_GC_H */
+#endif // MC_VFS_GC_H

@@ -17,9 +17,9 @@
 typedef struct
 {
     Widget widget;
-    gboolean auto_adjust_cols;  /* compute widget.cols from strlen(text)? */
+    gboolean auto_adjust_cols;  // compute widget.cols from strlen(text)?
     char *text;
-    gboolean transparent;       /* Paint in the default color fg/bg */
+    gboolean transparent;       // Paint in the default color fg/bg
 } WLabel;
 
 /*** global variables defined in .c file *********************************************************/
@@ -34,4 +34,4 @@ void label_set_textv (WLabel * label, const char *format, ...) G_GNUC_PRINTF (2,
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__WIDGET_LABEL_H */
+#endif // MC__WIDGET_LABEL_H

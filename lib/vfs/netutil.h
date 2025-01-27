@@ -23,4 +23,4 @@ extern SIG_ATOMIC_VOLATILE_T got_sigpipe;
 void tcp_init (void);
 
 /*** inline functions ****************************************************************************/
-#endif /* MC_VFS_NETUTIL_H */
+#endif // MC_VFS_NETUTIL_H

@@ -21,4 +21,4 @@ void edit_begin_end_repeat_cmd (WEdit * edit);
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__EDIT_MACROS_H */
+#endif // MC__EDIT_MACROS_H

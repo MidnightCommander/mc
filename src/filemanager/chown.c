@@ -44,9 +44,9 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 
-#include "src/setup.h"          /* panels_options */
+#include "src/setup.h"          // panels_options
 
-#include "cmd.h"                /* chown_cmd() */
+#include "cmd.h"                // chown_cmd()
 
 /*** global variables ****************************************************************************/
 
@@ -79,13 +79,13 @@ static struct
     int len;
     const char *text;
 } chown_but[BUTTONS] = {
-    /* *INDENT-OFF* */
+    // *INDENT-OFF*
     { B_SETALL,  NORMAL_BUTTON, 5, 0, N_("Set &all")    },
     { B_SETGRP,  NORMAL_BUTTON, 5, 0, N_("Set &groups") },
     { B_SETUSR,  NORMAL_BUTTON, 5, 0, N_("Set &users")  },
     { B_ENTER,  DEFPUSH_BUTTON, 3, 0, N_("&Set")        },
     { B_CANCEL,  NORMAL_BUTTON, 3, 0, N_("&Cancel")     }
-    /* *INDENT-ON* */
+    // *INDENT-ON*
 };
 
 /* summary length of three buttons */
@@ -96,13 +96,13 @@ static struct
     int y;
     WLabel *l;
 } chown_label[LABELS] = {
-    /* *INDENT-OFF* */
+    // *INDENT-OFF*
     {  4, NULL },
     {  6, NULL },
     {  8, NULL },
     { 10, NULL },
     { 12, NULL }
-    /* *INDENT-ON* */
+    // *INDENT-ON*
 };
 
 static int current_file;
@@ -128,13 +128,13 @@ chown_init (void)
 #ifdef ENABLE_NLS
     for (i = 0; i < BUTTONS; i++)
         chown_but[i].text = _(chown_but[i].text);
-#endif /* ENABLE_NLS */
+#endif // ENABLE_NLS
 
     for (i = 0; i < BUTTONS; i++)
     {
-        chown_but[i].len = str_term_width1 (chown_but[i].text) + 3;     /* [], spaces and w/o & */
+        chown_but[i].len = str_term_width1 (chown_but[i].text) + 3;     // [], spaces and w/o &
         if (chown_but[i].flags == DEFPUSH_BUTTON)
-            chown_but[i].len += 2;      /* <> */
+            chown_but[i].len += 2;      // <>
 
         if (i < BUTTONS - 2)
             blen += chown_but[i].len;
@@ -204,15 +204,15 @@ chown_dlg_create (WPanel *panel)
                     "[Chown]", _("Chown command"));
     g = GROUP (ch_dlg);
 
-    /* draw background */
+    // draw background
     ch_dlg->bg->callback = chown_bg_callback;
 
     group_add_widget (g, groupbox_new (2, 3, GH, GW, _("User name")));
     l_user = listbox_new (3, 4, GH - 2, GW - 2, FALSE, NULL);
     group_add_widget (g, l_user);
-    /* add field for unknown names (numbers) */
+    // add field for unknown names (numbers)
     listbox_add_item (l_user, LISTBOX_APPEND_AT_END, 0, _("<Unknown user>"), NULL, FALSE);
-    /* get and put user names in the listbox */
+    // get and put user names in the listbox
     setpwent ();
     while ((l_pass = getpwent ()) != NULL)
         listbox_add_item (l_user, LISTBOX_APPEND_SORTED, 0, l_pass->pw_name, NULL, FALSE);
@@ -221,16 +221,16 @@ chown_dlg_create (WPanel *panel)
     group_add_widget (g, groupbox_new (2, 4 + GW, GH, GW, _("Group name")));
     l_group = listbox_new (3, 5 + GW, GH - 2, GW - 2, FALSE, NULL);
     group_add_widget (g, l_group);
-    /* add field for unknown names (numbers) */
+    // add field for unknown names (numbers)
     listbox_add_item (l_group, LISTBOX_APPEND_AT_END, 0, _("<Unknown group>"), NULL, FALSE);
-    /* get and put group names in the listbox */
+    // get and put group names in the listbox
     setgrent ();
     while ((l_grp = getgrent ()) != NULL)
         listbox_add_item (l_group, LISTBOX_APPEND_SORTED, 0, l_grp->gr_name, NULL, FALSE);
     endgrent ();
 
     group_add_widget (g, groupbox_new (2, 5 + GW * 2, GH, GW, _("File")));
-    /* add widgets for the file information */
+    // add widgets for the file information
     for (i = 0; i < LABELS; i++)
     {
         chown_label[i].l = label_new (chown_label[i].y, 7 + GW * 2, NULL);
@@ -264,7 +264,7 @@ chown_dlg_create (WPanel *panel)
     group_add_widget (g, button_new (y, WIDGET (ch_dlg)->rect.cols / 2 + 1, chown_but[i].ret_cmd,
                                      chown_but[i].flags, chown_but[i].text, NULL));
 
-    /* select first listbox */
+    // select first listbox
     widget_select (WIDGET (l_user));
 
     return ch_dlg;
@@ -304,21 +304,21 @@ try_chown (const vfs_path_t *p, uid_t u, gid_t g)
         switch (result)
         {
         case 0:
-            /* try next file */
+            // try next file
             return TRUE;
 
         case 1:
             ignore_all = TRUE;
-            /* try next file */
+            // try next file
             return TRUE;
 
         case 2:
-            /* retry this file */
+            // retry this file
             break;
 
         case 3:
         default:
-            /* stop remain files processing */
+            // stop remain files processing
             return FALSE;
         }
     }
@@ -361,11 +361,11 @@ apply_chowns (WPanel *panel, vfs_path_t *vpath, uid_t u, gid_t g)
 
         if (!ok)
         {
-            /* if current file was deleted outside mc -- try next file */
-            /* decrease panel->marked */
+            // if current file was deleted outside mc -- try next file
+            // decrease panel->marked
             do_file_mark (panel, current_file, 0);
 
-            /* try next file */
+            // try next file
             ok = TRUE;
         }
         else
@@ -392,7 +392,7 @@ chown_cmd (WPanel *panel)
     ignore_all = FALSE;
 
     do
-    {                           /* do while any files remaining */
+    {                           // do while any files remaining
         vfs_path_t *vpath;
         WDialog *ch_dlg;
         struct stat sf_stat;
@@ -421,7 +421,7 @@ chown_cmd (WPanel *panel)
 
         ch_dlg = chown_dlg_create (panel);
 
-        /* select in listboxes */
+        // select in listboxes
         listbox_set_current (l_user, listbox_search_text (l_user, get_owner (sf_stat.st_uid)));
         listbox_set_current (l_group, listbox_search_text (l_group, get_group (sf_stat.st_gid)));
 
@@ -459,7 +459,7 @@ chown_cmd (WPanel *panel)
                 {
                     if (panel->marked <= 1)
                     {
-                        /* single or last file */
+                        // single or last file
                         if (mc_chown (vpath, new_user, new_group) == -1)
                             message (D_ERROR, MSG_ERROR, _("Cannot chown \"%s\"\n%s"),
                                      fname->str, unix_error_string (errno));
@@ -467,7 +467,7 @@ chown_cmd (WPanel *panel)
                     }
                     else if (!try_chown (vpath, new_user, new_group))
                     {
-                        /* stop multiple files processing */
+                        // stop multiple files processing
                         result = B_CANCEL;
                         end_chown = TRUE;
                     }

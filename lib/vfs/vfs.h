@@ -9,7 +9,7 @@
 
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <dirent.h>             /* DIR */
+#include <dirent.h>             // DIR
 #ifdef HAVE_UTIMENSAT
 #include <sys/time.h>
 #elif defined (HAVE_UTIME_H)
@@ -40,7 +40,7 @@
 #define NO_LINEAR(a) a
 #else
 #define O_LINEAR O_APPEND
-#define IS_LINEAR(a) ((a) == (O_RDONLY | O_LINEAR))     /* Return only 0 and 1 ! */
+#define IS_LINEAR(a) ((a) == (O_RDONLY | O_LINEAR))     // Return only 0 and 1 !
 #define NO_LINEAR(a) (((a) == (O_RDONLY | O_LINEAR)) ? O_RDONLY : (a))
 #endif
 
@@ -62,19 +62,19 @@
 /* And now some defines for our errors. */
 
 #ifdef ENOMSG
-#define E_UNKNOWN ENOMSG        /* if we do not know what error happened */
+#define E_UNKNOWN ENOMSG        // if we do not know what error happened
 #else
-#define E_UNKNOWN EIO           /* if we do not know what error happened */
+#define E_UNKNOWN EIO           // if we do not know what error happened
 #endif
 
 #ifdef EREMOTEIO
-#define E_REMOTE EREMOTEIO      /* if other side of ftp/shell reports error */
+#define E_REMOTE EREMOTEIO      // if other side of ftp/shell reports error
 #else
-#define E_REMOTE ENETUNREACH    /* :-( there's no EREMOTEIO on some systems */
+#define E_REMOTE ENETUNREACH    // :-( there's no EREMOTEIO on some systems
 #endif
 
 #ifdef EPROTO
-#define E_PROTO EPROTO          /* if other side fails to follow protocol */
+#define E_PROTO EPROTO          // if other side fails to follow protocol
 #else
 #define E_PROTO EIO
 #endif
@@ -106,8 +106,8 @@ typedef struct mc_timespec
 typedef enum
 {
     VFSF_UNKNOWN = 0,
-    VFSF_LOCAL = 1 << 0,        /* Class is local (not virtual) filesystem */
-    VFSF_NOLINKS = 1 << 1,      /* Hard links not supported */
+    VFSF_LOCAL = 1 << 0,        // Class is local (not virtual) filesystem
+    VFSF_NOLINKS = 1 << 1,      // Hard links not supported
 
     VFSF_REMOTE = 1 << 2,
     VFSF_READONLY = 1 << 3,
@@ -126,7 +126,7 @@ enum
     VFS_SETCTL_FORGET,
     VFS_SETCTL_RUN,
     VFS_SETCTL_LOGFILE,
-    VFS_SETCTL_FLUSH,           /* invalidate directory cache */
+    VFS_SETCTL_FLUSH,           // invalidate directory cache
 
     /* Setting this makes vfs layer give out potentially incorrect data,
        but it also makes some operations much faster. Use with caution. */
@@ -137,14 +137,14 @@ enum
 
 typedef struct vfs_class
 {
-    const char *name;           /* "FIles over SHell" */
+    const char *name;           // "FIles over SHell"
     vfs_flags_t flags;
-    const char *prefix;         /* "shell:" */
-    int verrno;                 /* can't use errno because glibc2 might define errno as function */
-    gboolean flush;             /* if set to TRUE, invalidate directory cache */
+    const char *prefix;         // "shell:"
+    int verrno;                 // can't use errno because glibc2 might define errno as function
+    gboolean flush;             // if set to TRUE, invalidate directory cache
     FILE *logfile;
 
-    /* *INDENT-OFF* */
+    // *INDENT-OFF*
     int (*init) (struct vfs_class * me);
     void (*done) (struct vfs_class * me);
 
@@ -205,7 +205,7 @@ typedef struct vfs_class
 
     int (*ctl) (void *vfs_info, int ctlop, void *arg);
     int (*setctl) (const vfs_path_t * vpath, int ctlop, void *arg);
-    /* *INDENT-ON* */
+    // *INDENT-ON*
 } vfs_class;
 
 /*
@@ -214,13 +214,13 @@ typedef struct vfs_class
  */
 struct vfs_dirent
 {
-    /* private */
+    // private
     GString *d_name_str;
 
-    /* public */
+    // public
     ino_t d_ino;
-    char *d_name;               /* Alias of d_name_str->str */
-    size_t d_len;               /* Alias of d_name_str->len */
+    char *d_name;               // Alias of d_name_str->str
+    size_t d_len;               // Alias of d_name_str->len
 };
 
 /*** global variables defined in .c file *********************************************************/
@@ -347,4 +347,4 @@ const char *mc_tmpdir (void);
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC_VFS_VFS_H */
+#endif // MC_VFS_VFS_H

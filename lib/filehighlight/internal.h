@@ -1,7 +1,7 @@
 #ifndef MC__FILEHIGHLIGHT_INTERNAL_H
 #define MC__FILEHIGHLIGHT_INTERNAL_H
 
-#include "lib/search.h"         /* mc_search_t */
+#include "lib/search.h"         // mc_search_t
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -58,4 +58,4 @@ gboolean mc_fhl_init_from_standard_files (mc_fhl_t * fhl);
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__FILEHIGHLIGHT_INTERNAL_H */
+#endif // MC__FILEHIGHLIGHT_INTERNAL_H

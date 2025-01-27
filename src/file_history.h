@@ -17,4 +17,4 @@ char *show_file_history (const Widget * w, int *action);
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__FILE_HISTORY_H */
+#endif // MC__FILE_HISTORY_H

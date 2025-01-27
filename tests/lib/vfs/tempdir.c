@@ -45,7 +45,7 @@
 static void
 setup (void)
 {
-    /* Ensure that tests behave consistently irrespectively of the environment */
+    // Ensure that tests behave consistently irrespectively of the environment
     g_unsetenv ("MC_TMPDIR");
 
     str_init_strings (NULL);
@@ -72,15 +72,15 @@ teardown (void)
 START_TEST (test_mc_tmpdir)
 /* *INDENT-ON* */
 {
-    /* given */
+    // given
     const char *tmpdir;
     const char *env_tmpdir;
 
-    /* when */
+    // when
     tmpdir = mc_tmpdir ();
     env_tmpdir = g_getenv ("MC_TMPDIR");
 
-    /* then */
+    // then
     ck_assert_msg (g_file_test (tmpdir, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_DIR),
                    "\nNo such directory: %s\n", tmpdir);
     mctest_assert_str_eq (env_tmpdir, tmpdir);
@@ -96,16 +96,16 @@ END_TEST
 START_TEST (test_mc_mkstemps)
 /* *INDENT-ON* */
 {
-    /* given */
+    // given
     vfs_path_t *pname_vpath = NULL;
     char *begin_pname;
     int fd;
 
-    /* when */
+    // when
     fd = mc_mkstemps (&pname_vpath, "mctest-", NULL);
     begin_pname = g_build_filename (mc_tmpdir (), "mctest-", (char *) NULL);
 
-    /* then */
+    // then
     close (fd);
     ck_assert_int_ne (fd, -1);
     ck_assert_msg (g_file_test
@@ -132,10 +132,10 @@ main (void)
 
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     tcase_add_test (tc_core, test_mc_tmpdir);
     tcase_add_test (tc_core, test_mc_mkstemps);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

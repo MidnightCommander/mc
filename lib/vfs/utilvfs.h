@@ -26,8 +26,8 @@
 typedef enum
 {
     URL_FLAGS_NONE = 0,
-    URL_USE_ANONYMOUS = 1, /**< if set, empty *user will contain NULL instead of current */
-    URL_NOSLASH = 2        /**< if set, 'proto://' part in url is not searched */
+    URL_USE_ANONYMOUS = 1, // if set, empty *user will contain NULL instead of current
+    URL_NOSLASH = 2        // if set, 'proto://' part in url is not searched
 } vfs_url_flags_t;
 
 /*** structures declarations (and typedefs of structures)*****************************************/

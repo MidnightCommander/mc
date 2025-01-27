@@ -29,4 +29,4 @@ void mc_skin_colors_old_configure (mc_skin_t * mc_skin);
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__SKIN_INTERNAL_H */
+#endif // MC__SKIN_INTERNAL_H

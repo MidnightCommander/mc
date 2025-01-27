@@ -1,8 +1,8 @@
 #ifndef MC__ARGS_H
 #define MC__ARGS_H
 
-#include "lib/global.h"         /* gboolean */
-#include "lib/vfs/vfs.h"        /* vfs_path_t */
+#include "lib/global.h"         // gboolean
+#include "lib/vfs/vfs.h"        // vfs_path_t
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -44,4 +44,4 @@ gboolean mc_setup_by_args (int argc, char **argv, GError ** mcerror);
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__ARGS_H */
+#endif // MC__ARGS_H

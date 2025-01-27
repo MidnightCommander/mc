@@ -41,7 +41,7 @@
 #include "lib/tty/tty.h"
 #include "lib/skin.h"
 #include "lib/strutil.h"
-#include "lib/util.h"           /* Q_() */
+#include "lib/util.h"           // Q_()
 #include "lib/widget.h"
 
 /*** global variables ****************************************************************************/
@@ -98,7 +98,7 @@ listbox_drawscroll (const WListbox *l)
     int i;
     int length;
 
-    /* Are we at the top? */
+    // Are we at the top?
     widget_gotoyx (l, 0, w->cols);
     if (l->top == 0)
         tty_print_one_vline (TRUE);
@@ -107,14 +107,14 @@ listbox_drawscroll (const WListbox *l)
 
     length = g_queue_get_length (l->list);
 
-    /* Are we at the bottom? */
+    // Are we at the bottom?
     widget_gotoyx (w, max_line, w->cols);
     if (l->top + w->lines == length || w->lines >= length)
         tty_print_one_vline (TRUE);
     else
         tty_print_char ('v');
 
-    /* Now draw the nice relative pointer */
+    // Now draw the nice relative pointer
     if (length != 0)
         line = 1 + ((l->current * (w->lines - 2)) / length);
 
@@ -156,14 +156,14 @@ listbox_draw (WListbox *l, gboolean focused)
         le = g_queue_peek_nth_link (l->list, (guint) l->top);
     }
 
-    /*    pos = (le == NULL) ? 0 : g_list_position (l->list, le); */
+    //    pos = (le == NULL) ? 0 : g_list_position (l->list, le);
     pos = (le == NULL) ? 0 : l->top;
 
     for (i = 0; i < w->lines; i++)
     {
         const char *text = "";
 
-        /* Display the entry */
+        // Display the entry
         if (pos == l->current && sel_line == -1)
         {
             sel_line = i;
@@ -319,7 +319,7 @@ listbox_execute_cmd (WListbox *l, long command)
         break;
     case CK_Clear:
         if (l->deletable && mc_global.widget.confirm_history_cleanup
-            /* TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix */
+            // TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
             && (query_dialog (Q_ ("DialogTitle|History cleanup"),
                               _("Do you want clean this history?"),
                               D_ERROR, 2, _("&Yes"), _("&No")) == 0))
@@ -348,7 +348,7 @@ listbox_key (WListbox *l, int key)
     if (l->list == NULL)
         return MSG_NOT_HANDLED;
 
-    /* focus on listbox item N by '0'..'9' keys */
+    // focus on listbox item N by '0'..'9' keys
     if (key >= '0' && key <= '9')
     {
         listbox_set_current (l, key - '0');
@@ -526,13 +526,13 @@ listbox_mouse_callback (Widget *w, mouse_msg_t msg, mouse_event_t *event)
         break;
 
     case MSG_MOUSE_DRAG:
-        event->result.repeat = TRUE;    /* It'd be functional even without this. */
+        event->result.repeat = TRUE;    // It'd be functional even without this
         listbox_set_current (l, listbox_y_pos (l, event->y));
         break;
 
     case MSG_MOUSE_CLICK:
-        /* We don't call listbox_set_current() here: MSG_MOUSE_DOWN/DRAG did this already. */
-        if (event->count == GPM_DOUBLE) /* Double click */
+        // We don't call listbox_set_current() here: MSG_MOUSE_DOWN/DRAG did this already
+        if (event->count == GPM_DOUBLE) // Double click
             listbox_do_action (l);
         break;
 
@@ -540,7 +540,7 @@ listbox_mouse_callback (Widget *w, mouse_msg_t msg, mouse_event_t *event)
         break;
     }
 
-    /* If the selection has changed, we redraw the widget and notify the dialog. */
+    // If the selection has changed, we redraw the widget and notify the dialog.
     if (l->current != old_current)
         listbox_on_change (l);
 }
@@ -659,7 +659,7 @@ listbox_set_current (WListbox *l, int dest)
     if (listbox_is_empty (l) || dest < 0)
         return;
 
-    /* Special case */
+    // Special case
     for (pos = 0, le = g_queue_peek_head_link (l->list); le != NULL; pos++, le = g_list_next (le))
     {
         if (pos == l->top)
@@ -681,7 +681,7 @@ listbox_set_current (WListbox *l, int dest)
         }
     }
 
-    /* If we are unable to find it, set decent values */
+    // If we are unable to find it, set decent values
     l->current = l->top = 0;
 }
 

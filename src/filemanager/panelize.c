@@ -36,16 +36,16 @@
 #include "lib/skin.h"
 #include "lib/tty/tty.h"
 #include "lib/vfs/vfs.h"
-#include "lib/mcconfig.h"       /* Load/save directories panelize */
+#include "lib/mcconfig.h"       // Load/save directories panelize
 #include "lib/strutil.h"
 #include "lib/widget.h"
-#include "lib/util.h"           /* mc_pipe_t */
+#include "lib/util.h"           // mc_pipe_t
 
 #include "src/history.h"
 
-#include "filemanager.h"        /* current_panel */
-#include "layout.h"             /* rotate_dash() */
-#include "panel.h"              /* WPanel, dir.h */
+#include "filemanager.h"        // current_panel
+#include "layout.h"             // rotate_dash()
+#include "panel.h"              // WPanel, dir.h
 
 #include "panelize.h"
 
@@ -144,7 +144,7 @@ panelize_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *
         group_default_callback (w, NULL, MSG_INIT, 0, NULL);
         MC_FALLTHROUGH;
 
-    case MSG_NOTIFY:           /* MSG_NOTIFY is fired by the listbox to tell us the item has changed. */
+    case MSG_NOTIFY:           // MSG_NOTIFY is fired by the listbox to tell us the item has changed.
         update_command ();
         return MSG_HANDLED;
 
@@ -164,12 +164,12 @@ external_panelize_init (void)
         button_flags_t flags;
         const char *text;
     } panelize_but[] = {
-        /* *INDENT-OFF* */
+        // *INDENT-OFF*
         { B_ENTER, DEFPUSH_BUTTON, N_("Pane&lize") },
         { B_REMOVE, NORMAL_BUTTON, N_("&Remove") },
         { B_ADD, NORMAL_BUTTON, N_("&Add new") },
         { B_CANCEL, NORMAL_BUTTON, N_("&Cancel") }
-        /* *INDENT-ON* */
+        // *INDENT-ON*
     };
 
     WGroup *g;
@@ -184,7 +184,7 @@ external_panelize_init (void)
     do_refresh ();
 
     i = G_N_ELEMENTS (panelize_but);
-    blen = i - 1;               /* gaps between buttons */
+    blen = i - 1;               // gaps between buttons
     while (i-- != 0)
     {
 #ifdef ENABLE_NLS
@@ -203,7 +203,7 @@ external_panelize_init (void)
                     panelize_callback, NULL, "[External panelize]", _("External panelize"));
     g = GROUP (panelize_dlg);
 
-    /* add listbox to the dialogs */
+    // add listbox to the dialogs
     y = UY;
     group_add_widget (g, groupbox_new (y++, UX, 12, panelize_cols - UX * 2, ""));
 
@@ -313,7 +313,7 @@ do_external_panelize (const char *command)
         return;
     }
 
-    /* Clear the counters and the directory list */
+    // Clear the counters and the directory list
     panel_clean_dir (current_panel);
 
     panel_panelize_change_root (current_panel, current_panel->cwd_vpath);
@@ -325,7 +325,7 @@ do_external_panelize (const char *command)
         GString *line;
         gboolean ok;
 
-        /* init buffers before call of mc_pread() */
+        // init buffers before call of mc_pread()
         external->out.len = MC_PIPE_BUFSIZE;
         external->err.len = MC_PIPE_BUFSIZE;
         external->err.null_term = TRUE;
@@ -364,15 +364,15 @@ do_external_panelize (const char *command)
             gboolean link_to_dir, stale_link;
             struct stat st;
 
-            /* handle a \n-separated file list */
+            // handle a \n-separated file list
 
             if (line->str[line->len - 1] == '\n')
             {
-                /* entire file name or last chunk */
+                // entire file name or last chunk
 
                 g_string_truncate (line, line->len - 1);
 
-                /* join filename chunks */
+                // join filename chunks
                 if (remain_file_name != NULL)
                 {
                     g_string_append_len (remain_file_name, line->str, line->len);
@@ -383,7 +383,7 @@ do_external_panelize (const char *command)
             }
             else
             {
-                /* first or middle chunk of file name */
+                // first or middle chunk of file name
 
                 if (remain_file_name == NULL)
                     remain_file_name = line;
@@ -446,7 +446,7 @@ external_panelize_cmd (void)
 
     external_panelize_init ();
 
-    /* display file info */
+    // display file info
     tty_setcolor (SELECTED_COLOR);
 
     switch (dlg_run (panelize_dlg))

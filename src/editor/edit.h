@@ -13,8 +13,8 @@
 #ifndef MC__EDIT_H
 #define MC__EDIT_H
 
-#include "lib/global.h"         /* PATH_SEP_STR */
-#include "lib/vfs/vfs.h"        /* vfs_path_t */
+#include "lib/global.h"         // PATH_SEP_STR
+#include "lib/vfs/vfs.h"        // vfs_path_t
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -41,14 +41,14 @@ typedef struct
     gboolean backspace_through_tabs;
     gboolean fake_half_tabs;
     gboolean persistent_selections;
-    gboolean drop_selection_on_copy;    /* whether we need to drop selection on copy to buffer */
+    gboolean drop_selection_on_copy;    // whether we need to drop selection on copy to buffer
     gboolean cursor_beyond_eol;
     gboolean cursor_after_inserted_block;
     gboolean state_full_filename;
     gboolean line_state;
     int line_state_width;
     int save_mode;
-    gboolean confirm_save;      /* queries on a save */
+    gboolean confirm_save;      // queries on a save
     gboolean save_position;
     gboolean syntax_highlighting;
     gboolean group_undo;
@@ -58,7 +58,7 @@ typedef struct
     gboolean visible_tabs;
     gboolean visible_tws;
     gboolean show_right_margin;
-    gboolean simple_statusbar;  /* statusbar draw style */
+    gboolean simple_statusbar;  // statusbar draw style
     gboolean check_nl_at_eof;
 } edit_options_t;
 
@@ -93,4 +93,4 @@ long edit_get_curs_col (const WEdit * edit);
 const char *edit_get_syntax_type (const WEdit * edit);
 
 /*** inline functions ****************************************************************************/
-#endif /* MC__EDIT_H */
+#endif // MC__EDIT_H

@@ -4,7 +4,7 @@
 #ifndef MC__WIDGET_H
 #define MC__WIDGET_H
 
-#include "lib/global.h"         /* GLib */
+#include "lib/global.h"         // GLib
 
 /* main forward declarations */
 struct Widget;
@@ -50,4 +50,4 @@ typedef struct WGroup WGroup;
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__WIDGET_H */
+#endif // MC__WIDGET_H

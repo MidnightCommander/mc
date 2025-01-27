@@ -60,136 +60,136 @@ teardown (void)
 /* *INDENT-OFF* */
 static const struct data_source
 {
-    /* input */
-    const char *buf;                /* string to read */
+    // input
+    const char *buf;                // string to read
 
-    /* output */
-    int pos[MAX_CHUNKS];            /* ps.pos values */
-    const char *str[MAX_CHUNKS];    /* chunks */
-    size_t len[MAX_CHUNKS];         /* chunk lengths */
+    // output
+    int pos[MAX_CHUNKS];            // ps.pos values
+    const char *str[MAX_CHUNKS];    // chunks
+    size_t len[MAX_CHUNKS];         // chunk lengths
 }
 data_source[] =
 {
-    /* 0 */
+    // 0
     {
         .buf = "",
         .pos = { 0 },
         .str = { "" },
         .len = { 0 }
     },
-    /* 1 */
+    // 1
     {
         .buf = "\n",
         .pos = { 0, 1 },
         .str = { "\n" },
         .len = { 1, 0 }
     },
-    /* 2 */
+    // 2
     {
         .buf = "\\\n",
         .pos = { 0, 2 },
         .str = { "\\\n" },
         .len = { 2, 0 }
     },
-    /* 3 */
+    // 3
     {
         .buf = "\\\\\n",
         .pos = { 0, 3 },
         .str = { "\\\\\n" },
         .len = { 3, 0 }
     },
-    /* 4 */
+    // 4
     {
         .buf = "\\\\\\\n",
         .pos = { 0, 4 },
         .str = { "\\\\\\\n" },
         .len = { 4, 0 }
     },
-    /* 5 */
+    // 5
     {
         .buf = "\\\\\\\\\n",
         .pos = { 0, 5 },
         .str = { "\\\\\\\\\n" },
         .len = { 5, 0 }
     },
-    /* 6 */
+    // 6
     {
         .buf = "12345",
         .pos = { 0, 5 },
         .str = { "12345" },
         .len = { 5, 0 }
     },
-    /* 7 */
+    // 7
     {
         .buf = "12345\n",
         .pos = { 0, 6 },
         .str = { "12345\n" },
         .len = { 6, 0 }
     },
-    /* 8 */
+    // 8
     {
         .buf = "12345\\\n",
         .pos = { 0, 7 },
         .str = { "12345\\\n" },
         .len = { 7, 0 }
     },
-    /* 9 */
+    // 9
     {
         .buf = "12345\\\\\n",
         .pos = { 0, 8 },
         .str = { "12345\\\\\n" },
         .len = { 8, 0 }
     },
-    /* 10 */
+    // 10
     {
         .buf = "12345\nabcd",
         .pos = { 0, 6, 10 },
         .str = { "12345\n", "abcd" },
         .len = { 6, 4, 0 }
     },
-    /* 11 */
+    // 11
     {
         .buf = "12345\\\nabcd",
         .pos = { 0, 11 },
         .str = { "12345\\\nabcd" },
         .len = { 11, 0 }
     },
-    /* 12 */
+    // 12
     {
         .buf = "12345\\\\\nabcd",
         .pos = { 0, 8, 12 },
         .str = { "12345\\\\\n", "abcd" },
         .len = { 8, 4, 0 }
     },
-    /* 13 */
+    // 13
     {
         .buf = "12345\\\\\\\nabcd",
         .pos = { 0, 13 },
         .str = { "12345\\\\\\\nabcd" },
         .len = { 13, 0 }
     },
-    /* 14 */
+    // 14
     {
         .buf = "12345\\\\\\\\\nabcd",
         .pos = { 0, 10, 14 },
         .str = { "12345\\\\\\\\\n", "abcd" },
         .len = { 10, 4, 0 }
     },
-    /* 15 */
+    // 15
     {
         .buf = "12345\nabcd\n",
         .pos = { 0, 6, 11 },
         .str = { "12345\n", "abcd\n" },
         .len = { 6, 5, 0 }
     },
-    /* 16 */
+    // 16
     {
         .buf = "12345\nabcd\n~!@#$%^",
         .pos = { 0, 6, 11, 18  },
         .str = { "12345\n", "abcd\n", "~!@#$%^" },
         .len = { 6, 5, 7, 0 }
     },
-    /* 17 */
+    // 17
     {
         .buf = "12345\nabcd\n~!@#$%^\n",
         .pos = { 0, 6, 11, 19 },
@@ -204,15 +204,15 @@ data_source[] =
 START_PARAMETRIZED_TEST (mc_pstream_get_string_test, data_source)
 /* *INDENT-ON* */
 {
-    /* given */
+    // given
     int j = 0;
 
-    /* when */
+    // when
     memset (&stream, 0, sizeof (stream));
     stream.len = strlen (data->buf);
     memmove (&stream.buf, data->buf, stream.len);
 
-    /* then */
+    // then
     do
     {
         GString *ret;
@@ -244,7 +244,7 @@ test_mc_popen (void)
     mc_pipe_t *p;
 
     p = g_try_new0 (mc_pipe_t, 1);
-    /* make less than sizeof (etalon_long_file_list) */
+    // make less than sizeof (etalon_long_file_list)
     p->out.len = 128;
 
     etalon_long_file_list_pos = 0;
@@ -279,15 +279,15 @@ START_TEST (mc_pstream_get_long_file_list_test)
 /* *INDENT-ON* */
 
 {
-    /* given */
+    // given
     GString *result_long_file_list = NULL;
     mc_pipe_t *pip;
     GString *remain_file_name = NULL;
 
-    /* when */
-    /* fill the list */
+    // when
+    // fill the list
     memset (etalon_long_file_list, 'a', sizeof (etalon_long_file_list) - 1);
-    /* create an \n-separated list */
+    // create an \n-separated list
     etalon_long_file_list[5] = '\n';
     etalon_long_file_list[25] = '\n';
     etalon_long_file_list[50] = '\n';
@@ -304,8 +304,8 @@ START_TEST (mc_pstream_get_long_file_list_test)
     etalon_long_file_list[sizeof (etalon_long_file_list) - 2] = '\n';
     etalon_long_file_list[sizeof (etalon_long_file_list) - 1] = '\0';
 
-    /* then */
-    /* read file list */
+    // then
+    // read file list
     pip = test_mc_popen ();
 
     while (TRUE)
@@ -319,15 +319,15 @@ START_TEST (mc_pstream_get_long_file_list_test)
 
         while ((line = mc_pstream_get_string (&pip->out)) != NULL)
         {
-            /* handle an \n-separated file list */
+            // handle an \n-separated file list
 
             if (line->str[line->len - 1] == '\n')
             {
-                /* entire file name or last chunk */
+                // entire file name or last chunk
 
                 g_string_truncate (line, line->len - 1);
 
-                /* join filename chunks */
+                // join filename chunks
                 if (remain_file_name != NULL)
                 {
                     g_string_append_len (remain_file_name, line->str, line->len);
@@ -338,7 +338,7 @@ START_TEST (mc_pstream_get_long_file_list_test)
             }
             else
             {
-                /* first or middle chunk of file name */
+                // first or middle chunk of file name
                 if (remain_file_name == NULL)
                     remain_file_name = line;
                 else
@@ -350,7 +350,7 @@ START_TEST (mc_pstream_get_long_file_list_test)
                 line = NULL;
             }
 
-            /* collect file names to assemble the result string */
+            // collect file names to assemble the result string
             if (line == NULL)
                 continue;
 
@@ -385,10 +385,10 @@ main (void)
 
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, mc_pstream_get_string_test, data_source);
     tcase_add_test (tc_core, mc_pstream_get_long_file_list_test);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

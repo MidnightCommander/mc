@@ -38,12 +38,12 @@
 #ifdef ENABLE_SUBSHELL
 #  ifdef SUBSHELL_OPTIONAL
 #    define SUBSHELL_USE FALSE
-#  else /* SUBSHELL_OPTIONAL */
+#  else // SUBSHELL_OPTIONAL
 #    define SUBSHELL_USE TRUE
-#  endif /* SUBSHELL_OPTIONAL */
-#else /* !ENABLE_SUBSHELL */
+#  endif // SUBSHELL_OPTIONAL
+#else // !ENABLE_SUBSHELL
 #    define SUBSHELL_USE FALSE
-#endif /* !ENABLE_SUBSHELL */
+#endif // !ENABLE_SUBSHELL
 /* *INDENT-ON* */
 
 /*** global variables ****************************************************************************/
@@ -68,7 +68,7 @@ mc_global_t mc_global =
 #else
     .eight_bit_clean = TRUE,
     .full_eight_bits = FALSE,
-#endif /* !HAVE_CHARSET */
+#endif // !HAVE_CHARSET
     .utf8_display = FALSE,
 
     .message_visible = TRUE,
@@ -76,7 +76,7 @@ mc_global_t mc_global =
 
 #ifdef ENABLE_BACKGROUND
     .we_are_background = FALSE,
-#endif /* ENABLE_BACKGROUND */
+#endif // ENABLE_BACKGROUND
 
     .widget =
     {
@@ -97,13 +97,13 @@ mc_global_t mc_global =
         .command_line_colors = NULL,
 #ifndef LINUX_CONS_SAVER_C
         .console_flag = '\0',
-#endif /* !LINUX_CONS_SAVER_C */
+#endif // !LINUX_CONS_SAVER_C
 
         .use_subshell = SUBSHELL_USE,
 
 #ifdef ENABLE_SUBSHELL
         .subshell_pty = 0,
-#endif /* !ENABLE_SUBSHELL */
+#endif // !ENABLE_SUBSHELL
 
         .xterm_flag = FALSE,
         .disable_x11 = FALSE,

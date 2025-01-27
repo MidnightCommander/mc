@@ -33,7 +33,7 @@
 #include <sys/types.h>
 
 #include "lib/global.h"
-#include "lib/tty/key.h"        /* KEY_M_ */
+#include "lib/tty/key.h"        // KEY_M_
 #include "lib/keybind.h"
 
 /*** global variables ****************************************************************************/
@@ -56,7 +56,7 @@ typedef struct name_keymap_t
 /*** file scope variables ************************************************************************/
 
 static name_keymap_t command_names[] = {
-    /* common */
+    // common
     ADD_KEYMAP_NAME (InsertChar),
     ADD_KEYMAP_NAME (Enter),
     ADD_KEYMAP_NAME (ChangePanel),
@@ -152,7 +152,7 @@ static name_keymap_t command_names[] = {
     ADD_KEYMAP_NAME (QuitQuiet),
     ADD_KEYMAP_NAME (ExtendedKeyMap),
 
-    /* main commands */
+    // main commands
 #ifdef USE_INTERNAL_EDIT
     ADD_KEYMAP_NAME (EditForceInternal),
 #endif
@@ -224,7 +224,7 @@ static name_keymap_t command_names[] = {
     ADD_KEYMAP_NAME (Select),
     ADD_KEYMAP_NAME (Unselect),
 
-    /* panel */
+    // panel
     ADD_KEYMAP_NAME (SelectExt),
     ADD_KEYMAP_NAME (ScrollLeft),
     ADD_KEYMAP_NAME (ScrollRight),
@@ -247,14 +247,14 @@ static name_keymap_t command_names[] = {
     ADD_KEYMAP_NAME (CdParentSmart),
     ADD_KEYMAP_NAME (CycleListingFormat),
 
-    /* dialog */
+    // dialog
     ADD_KEYMAP_NAME (Ok),
     ADD_KEYMAP_NAME (Cancel),
 
-    /* input line */
+    // input line
     ADD_KEYMAP_NAME (Yank),
 
-    /* help */
+    // help
     ADD_KEYMAP_NAME (Index),
     ADD_KEYMAP_NAME (Back),
     ADD_KEYMAP_NAME (LinkNext),
@@ -262,14 +262,14 @@ static name_keymap_t command_names[] = {
     ADD_KEYMAP_NAME (NodeNext),
     ADD_KEYMAP_NAME (NodePrev),
 
-    /* tree */
+    // tree
     ADD_KEYMAP_NAME (Forget),
 
 #if defined (USE_INTERNAL_EDIT) || defined (USE_DIFF_VIEW)
     ADD_KEYMAP_NAME (ShowNumbers),
 #endif
 
-    /* chattr dialog */
+    // chattr dialog
     ADD_KEYMAP_NAME (MarkAndDown),
 
 #ifdef USE_INTERNAL_EDIT
@@ -305,7 +305,7 @@ static name_keymap_t command_names[] = {
     ADD_KEYMAP_NAME (SpellCheck),
     ADD_KEYMAP_NAME (SpellCheckCurrentWord),
     ADD_KEYMAP_NAME (SpellCheckSelectLang),
-#endif /* HAVE_ASPELL */
+#endif // HAVE_ASPELL
     ADD_KEYMAP_NAME (BookmarkFlush),
     ADD_KEYMAP_NAME (BookmarkNext),
     ADD_KEYMAP_NAME (BookmarkPrev),
@@ -338,7 +338,7 @@ static name_keymap_t command_names[] = {
     ADD_KEYMAP_NAME (ShowMargin),
     ADD_KEYMAP_NAME (OptionsSaveMode),
     ADD_KEYMAP_NAME (About),
-    /* An action to run external script from macro */
+    // An action to run external script from macro
     {"ExecuteScript", CK_PipeBlock (0)},
     ADD_KEYMAP_NAME (WindowMove),
     ADD_KEYMAP_NAME (WindowResize),
@@ -346,9 +346,9 @@ static name_keymap_t command_names[] = {
     ADD_KEYMAP_NAME (WindowList),
     ADD_KEYMAP_NAME (WindowNext),
     ADD_KEYMAP_NAME (WindowPrev),
-#endif /* USE_INTERNAL_EDIT */
+#endif // USE_INTERNAL_EDIT
 
-    /* viewer */
+    // viewer
     ADD_KEYMAP_NAME (WrapMode),
     ADD_KEYMAP_NAME (HexEditMode),
     ADD_KEYMAP_NAME (HexMode),
@@ -363,7 +363,7 @@ static name_keymap_t command_names[] = {
     ADD_KEYMAP_NAME (SearchOppositeContinue),
 
 #ifdef USE_DIFF_VIEW
-    /* diff viewer */
+    // diff viewer
     ADD_KEYMAP_NAME (ShowSymbols),
     ADD_KEYMAP_NAME (SplitFull),
     ADD_KEYMAP_NAME (Tab2),
@@ -375,7 +375,7 @@ static name_keymap_t command_names[] = {
     ADD_KEYMAP_NAME (EditOther),
     ADD_KEYMAP_NAME (Merge),
     ADD_KEYMAP_NAME (MergeOther),
-#endif /* USE_DIFF_VIEW */
+#endif // USE_DIFF_VIEW
 
     {NULL, CK_IgnoreKey}
 };

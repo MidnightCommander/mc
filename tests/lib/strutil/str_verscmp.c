@@ -29,7 +29,7 @@
 #include "tests/mctest.h"
 
 #include "lib/strutil.h"
-#include "lib/util.h"           /* _GL_CMP() */
+#include "lib/util.h"           // _GL_CMP()
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -86,7 +86,7 @@ static const struct str_verscmp_test_struct
     { "09", "0", -1 },
     { "9", "10", -1 },
     { "0a", "0", 1 },
-    /* From glibc bug 9913 */
+    // From glibc bug 9913
     { a, b, -1 },
     { b, c, -1 },
     { a, c, -1 },
@@ -101,14 +101,14 @@ static const struct str_verscmp_test_struct
 START_TEST (str_verscmp_test)
 /* *INDENT-ON* */
 {
-    /* given */
+    // given
     int actual_result;
     const struct str_verscmp_test_struct *data = &str_verscmp_test_ds[_i];
 
-    /* when */
+    // when
     actual_result = str_verscmp (data->s1, data->s2);
 
-    /* then */
+    // then
     ck_assert_int_eq (sign (actual_result), sign (data->expected_result));
 }
 /* *INDENT-OFF* */
@@ -126,9 +126,9 @@ main (void)
 
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, str_verscmp_test, str_verscmp_test_ds);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

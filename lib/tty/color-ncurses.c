@@ -34,12 +34,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/types.h>          /* size_t */
+#include <sys/types.h>          // size_t
 
 #include "lib/global.h"
 
 #include "tty-ncurses.h"
-#include "color.h"              /* variables */
+#include "color.h"              // variables
 #include "color-internal.h"
 
 /*** global variables ****************************************************************************/
@@ -183,7 +183,7 @@ tty_color_try_alloc_lib_pair (tty_color_lib_pair_t *mc_color_pair)
         ibg = mc_color_pair->bg;
         attr = mc_color_pair->attr;
 
-        /* In legacy color mode, change bright colors into bold */
+        // In legacy color mode, change bright colors into bold
         if (!tty_use_256colors (NULL) && !tty_use_truecolors (NULL))
         {
             if (ifg >= 8 && ifg < 16)
@@ -195,7 +195,7 @@ tty_color_try_alloc_lib_pair (tty_color_lib_pair_t *mc_color_pair)
             if (ibg >= 8 && ibg < 16)
             {
                 ibg &= 0x07;
-                /* attr | = A_BOLD | A_REVERSE ; */
+                // attr | = A_BOLD | A_REVERSE ;
             }
         }
 
@@ -243,7 +243,7 @@ tty_use_256colors (GError **error)
 gboolean
 tty_use_truecolors (GError **error)
 {
-    /* Not yet supported in ncurses */
+    // Not yet supported in ncurses
     g_set_error (error, MC_ERROR, -1, _("True color not supported with ncurses."));
     return FALSE;
 }

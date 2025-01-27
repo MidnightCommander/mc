@@ -32,12 +32,12 @@
 
 #include <config.h>
 
-#include <ctype.h>              /* isdigit() */
-#include <inttypes.h>           /* uintmax_t */
+#include <ctype.h>              // isdigit()
+#include <inttypes.h>           // uintmax_t
 
 #include "lib/global.h"
-#include "lib/widget.h"         /* message() */
-#include "lib/vfs/vfs.h"        /* mc_read() */
+#include "lib/widget.h"         // message()
+#include "lib/vfs/vfs.h"        // mc_read()
 
 #include "tar-internal.h"
 
@@ -92,8 +92,8 @@ static char const base64_map[UCHAR_MAX + 1] =
 static gboolean
 tar_short_read (size_t status, tar_super_t *archive)
 {
-    size_t left;                /* bytes left */
-    char *more;                 /* pointer to next byte to read */
+    size_t left;                // bytes left
+    char *more;                 // pointer to next byte to read
 
     more = archive->record_start->buffer + status;
     left = record_size - status;
@@ -160,7 +160,7 @@ tar_seek_archive (tar_super_t *archive, off_t size)
     off_t nrec, nblk;
     off_t skipped;
 
-    /* If low level I/O is already at EOF, do not try to seek further. */
+    // If low level I/O is already at EOF, do not try to seek further.
     if (record_end < archive->record_start + blocking_factor)
         return 0;
 
@@ -168,7 +168,7 @@ tar_seek_archive (tar_super_t *archive, off_t size)
     if (size <= skipped)
         return 0;
 
-    /* Compute number of records to skip */
+    // Compute number of records to skip
     nrec = (size - skipped) / record_size;
     if (nrec == 0)
         return 0;
@@ -187,12 +187,12 @@ tar_seek_archive (tar_super_t *archive, off_t size)
     }
 #endif
 
-    /* Convert to number of records */
+    // Convert to number of records
     offset /= BLOCKSIZE;
-    /* Compute number of skipped blocks */
+    // Compute number of skipped blocks
     nblk = offset - start;
 
-    /* Update buffering info */
+    // Update buffering info
     record_start_block = offset - blocking_factor;
     current_block = record_end;
 
@@ -369,7 +369,7 @@ tar_from_header (const char *where0, size_t digs, char const *type, intmax_t min
     if (*where == '\0')
         where++;
 
-    /* Accommodate older tars, which output leading spaces. */
+    // Accommodate older tars, which output leading spaces.
     while (TRUE)
     {
         if (where == lim)
@@ -401,7 +401,7 @@ tar_from_header (const char *where0, size_t digs, char const *type, intmax_t min
            catches the common case of 32-bit negative time stamps. */
         if ((overflow || maxval < value) && *where1 >= 2 && type != NULL)
         {
-            /* Compute the negative of the input value, assuming two's complement. */
+            // Compute the negative of the input value, assuming two's complement.
             int digit;
 
             digit = (*where1 - '0') | 4;
@@ -430,7 +430,7 @@ tar_from_header (const char *where0, size_t digs, char const *type, intmax_t min
     }
     else if (octal_only)
     {
-        /* Suppress the following extensions. */
+        // Suppress the following extensions.
     }
     else if (*where == '-' || *where == '+')
     {
@@ -455,7 +455,7 @@ tar_from_header (const char *where0, size_t digs, char const *type, intmax_t min
             where++;
         }
     }
-    else if (where <= lim - 2 && (*where == '\200'      /* positive base-256 */
+    else if (where <= lim - 2 && (*where == '\200'      // positive base-256
                                   || *where == '\377' /* negative base-256 */ ))
     {
         /* Parse base-256 output.  A nonnegative number N is

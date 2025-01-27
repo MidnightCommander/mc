@@ -33,7 +33,7 @@
 #include "lib/global.h"
 #include "lib/strutil.h"
 #include "lib/search.h"
-#include "lib/util.h"           /* MC_PTR_FREE */
+#include "lib/util.h"           // MC_PTR_FREE
 
 #include "internal.h"
 
@@ -133,7 +133,7 @@ mc_search__cond_struct_new_regex_hex_add (const char *charset, GString *str_to,
 
     for (loop = 0; loop < upp->len; loop++)
     {
-        gchar tmp_str[10 + 1];  /* longest content is "[\\x%02X\\x%02X]" */
+        gchar tmp_str[10 + 1];  // longest content is "[\\x%02X\\x%02X]"
         gint tmp_len;
 
         if (loop >= low->len || upp->str[loop] == low->str[loop])
@@ -284,7 +284,7 @@ mc_search__g_regex_match_full_safe (const GRegex *regex,
                                    match_info, error);
     }
 
-    /* Correctly handle embedded NULs while copying */
+    // Correctly handle embedded NULs while copying
     p = string_safe = g_malloc (string_len + 1);
     memcpy (string_safe, string, string_len);
     string_safe[string_len] = '\0';
@@ -312,7 +312,7 @@ mc_search__g_regex_match_full_safe (const GRegex *regex,
     g_free (string_safe);
     return ret;
 }
-#endif /* SEARCH_TYPE_GLIB */
+#endif // SEARCH_TYPE_GLIB
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -341,7 +341,7 @@ mc_search__regex_found_cond_one (mc_search_t *lc_mc_search, mc_search_regex_t *r
         return COND__NOT_FOUND;
     }
     lc_mc_search->num_results = g_match_info_get_match_count (lc_mc_search->regex_match_info);
-#else /* SEARCH_TYPE_GLIB */
+#else // SEARCH_TYPE_GLIB
 
     lc_mc_search->num_results =
 #ifdef HAVE_PCRE2
@@ -355,7 +355,7 @@ mc_search__regex_found_cond_one (mc_search_t *lc_mc_search, mc_search_regex_t *r
     {
         return COND__NOT_FOUND;
     }
-#endif /* SEARCH_TYPE_GLIB */
+#endif // SEARCH_TYPE_GLIB
     return COND__FOUND_OK;
 
 }
@@ -439,10 +439,10 @@ mc_search_regex__get_token_by_num (const mc_search_t *lc_mc_search, gsize lc_ind
 
 #ifdef SEARCH_TYPE_GLIB
     g_match_info_fetch_pos (lc_mc_search->regex_match_info, lc_index, &fnd_start, &fnd_end);
-#else /* SEARCH_TYPE_GLIB */
+#else // SEARCH_TYPE_GLIB
     fnd_start = lc_mc_search->iovector[lc_index * 2 + 0];
     fnd_end = lc_mc_search->iovector[lc_index * 2 + 1];
-#endif /* SEARCH_TYPE_GLIB */
+#endif // SEARCH_TYPE_GLIB
 
     if (fnd_end == fnd_start)
         return g_strdup ("");
@@ -464,7 +464,7 @@ mc_search_regex__replace_handle_esc_seq (const GString *replace_str, const gsize
     {
         if (c == '{')
         {
-            for (*skip_len = 2; /* \{ */
+            for (*skip_len = 2; // \{
                  current_pos + *skip_len < replace_str->len && curr_str[*skip_len] >= '0'
                  && curr_str[*skip_len] <= '7'; (*skip_len)++)
                 ;
@@ -484,11 +484,11 @@ mc_search_regex__replace_handle_esc_seq (const GString *replace_str, const gsize
 
         if (c == 'x')
         {
-            *skip_len = 2;      /* \x */
+            *skip_len = 2;      // \x
             c = curr_str[2];
             if (c == '{')
             {
-                for (*skip_len = 3;     /* \x{ */
+                for (*skip_len = 3;     // \x{
                      current_pos + *skip_len < replace_str->len
                      && g_ascii_isxdigit ((guchar) curr_str[*skip_len]); (*skip_len)++)
                     ;
@@ -507,7 +507,7 @@ mc_search_regex__replace_handle_esc_seq (const GString *replace_str, const gsize
             }
             else if (!g_ascii_isxdigit ((guchar) c))
             {
-                *skip_len = 2;  /* \x without number behind */
+                *skip_len = 2;  // \x without number behind
                 *ret = REPLACE_PREPARE_T_NOTHING_SPECIAL;
                 return FALSE;
             }
@@ -515,9 +515,9 @@ mc_search_regex__replace_handle_esc_seq (const GString *replace_str, const gsize
             {
                 c = curr_str[3];
                 if (!g_ascii_isxdigit ((guchar) c))
-                    *skip_len = 3;      /* \xH */
+                    *skip_len = 3;      // \xH
                 else
-                    *skip_len = 4;      /* \xHH */
+                    *skip_len = 4;      // \xHH
                 *ret = REPLACE_PREPARE_T_ESCAPE_SEQ;
                 return FALSE;
             }
@@ -573,8 +573,8 @@ mc_search_regex__process_replace_str (const GString *replace_str, const gsize cu
         ret = atoi (tmp_str);
         g_free (tmp_str);
 
-        *skip_len += 3;         /* ${} */
-        return ret;             /* capture buffer index >= 0 */
+        *skip_len += 3;         // ${}
+        return ret;             // capture buffer index >= 0
     }
 
     if (curr_str[0] == '\\' && replace_str->len > current_pos + 1)
@@ -587,8 +587,8 @@ mc_search_regex__process_replace_str (const GString *replace_str, const gsize cu
 
         if (g_ascii_isdigit (curr_str[1]))
         {
-            ret = g_ascii_digit_value (curr_str[1]);    /* capture buffer index >= 0 */
-            *skip_len = 2;      /* \\ and one digit */
+            ret = g_ascii_digit_value (curr_str[1]);    // capture buffer index >= 0
+            *skip_len = 2;      // \\ and one digit
             return ret;
         }
 
@@ -835,7 +835,7 @@ mc_search__cond_struct_new_init_regex (const char *charset, mc_search_t *lc_mc_s
             g_error_free (mcerror);
             return;
         }
-#else /* SEARCH_TYPE_GLIB */
+#else // SEARCH_TYPE_GLIB
 
 #ifdef HAVE_PCRE2
         int errcode;
@@ -895,7 +895,7 @@ mc_search__cond_struct_new_init_regex (const char *charset, mc_search_t *lc_mc_s
             MC_PTR_FREE (mc_search_cond->regex_handle);
             return;
         }
-#endif /* SEARCH_TYPE_GLIB */
+#endif // SEARCH_TYPE_GLIB
     }
 
     lc_mc_search->is_utf8 = str_isutf8 (charset);
@@ -927,7 +927,7 @@ mc_search__run_regex (mc_search_t *lc_mc_search, const void *user_data,
         {
             while (TRUE)
             {
-                int current_chr = '\n'; /* stop search symbol */
+                int current_chr = '\n'; // stop search symbol
 
                 ret = lc_mc_search->search_fn (user_data, current_pos, &current_chr);
 
@@ -969,7 +969,7 @@ mc_search__run_regex (mc_search_t *lc_mc_search, const void *user_data,
                     break;
             }
 
-            /* use virtual_pos as index of start of current chunk */
+            // use virtual_pos as index of start of current chunk
             g_string_append_len (lc_mc_search->regex_buffer, (const char *) user_data + virtual_pos,
                                  current_pos - virtual_pos);
             virtual_pos = current_pos;
@@ -980,10 +980,10 @@ mc_search__run_regex (mc_search_t *lc_mc_search, const void *user_data,
         case COND__FOUND_OK:
 #ifdef SEARCH_TYPE_GLIB
             g_match_info_fetch_pos (lc_mc_search->regex_match_info, 0, &start_pos, &end_pos);
-#else /* SEARCH_TYPE_GLIB */
+#else // SEARCH_TYPE_GLIB
             start_pos = lc_mc_search->iovector[0];
             end_pos = lc_mc_search->iovector[1];
-#endif /* SEARCH_TYPE_GLIB */
+#endif // SEARCH_TYPE_GLIB
             if (found_len != NULL)
                 *found_len = end_pos - start_pos;
             lc_mc_search->normal_offset = lc_mc_search->start_buffer + start_pos;
@@ -1058,7 +1058,7 @@ mc_search_regex_prepare_replace_str (mc_search_t *lc_mc_search, GString *replace
                 mc_search_regex__process_append_str (ret, replace_str->str + loop + 1, len - 1,
                                                      &replace_flags);
                 prev = loop + len;
-                loop = prev - 1;        /* prepare to loop++ */
+                loop = prev - 1;        // prepare to loop++
             }
 
             continue;
@@ -1070,24 +1070,24 @@ mc_search_regex_prepare_replace_str (mc_search_t *lc_mc_search, GString *replace
                 mc_search_regex__process_append_str (ret, replace_str->str + prev, loop - prev,
                                                      &replace_flags);
             prev = loop + len;
-            loop = prev - 1;    /* prepare to loop++ */
+            loop = prev - 1;    // prepare to loop++
             continue;
         }
 
-        /* escape sequence */
+        // escape sequence
         if (lc_index == REPLACE_PREPARE_T_ESCAPE_SEQ)
         {
             mc_search_regex__process_append_str (ret, replace_str->str + prev, loop - prev,
                                                  &replace_flags);
-            /* call process_escape_sequence without starting '\\' */
+            // call process_escape_sequence without starting '\\'
             mc_search_regex__process_escape_sequence (ret, replace_str->str + loop + 1, len - 1,
                                                       &replace_flags, lc_mc_search->is_utf8);
             prev = loop + len;
-            loop = prev - 1;    /* prepare to loop++ */
+            loop = prev - 1;    // prepare to loop++
             continue;
         }
 
-        /* invalid capture buffer number */
+        // invalid capture buffer number
         if (lc_index > lc_mc_search->num_results)
         {
             g_string_free (ret, TRUE);
@@ -1106,7 +1106,7 @@ mc_search_regex_prepare_replace_str (mc_search_t *lc_mc_search, GString *replace
         g_free (tmp_str);
 
         prev = loop + len;
-        loop = prev - 1;        /* prepare to loop++ */
+        loop = prev - 1;        // prepare to loop++
     }
 
     mc_search_regex__process_append_str (ret, replace_str->str + prev, replace_str->len - prev,

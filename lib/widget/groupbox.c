@@ -120,7 +120,7 @@ groupbox_set_title (WGroupbox *g, const char *title)
 {
     MC_PTR_FREE (g->title);
 
-    /* Strip existing spaces, add one space before and after the title */
+    // Strip existing spaces, add one space before and after the title
     if (title != NULL && *title != '\0')
     {
         char *t;

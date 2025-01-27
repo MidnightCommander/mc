@@ -26,7 +26,7 @@
 
 #include "tests/mctest.h"
 
-#include <string.h>             /* memset() */
+#include <string.h>             // memset()
 
 #include "lib/strutil.h"
 #include "lib/vfs/xdirentry.h"
@@ -112,12 +112,12 @@ static const struct test_relative_cd_ds
     const char *expected_element_path;
 } test_relative_cd_ds[] =
 {
-    { /* 0. */
+    { // 0.
         "/test1://user:pass@some.host:12345/path/to/dir",
         VPF_NONE,
         "path/to/dir"
     },
-    { /* 1. */
+    { // 1.
         "some-non-exists-dir",
         VPF_NO_CANON,
         "some-non-exists-dir"
@@ -130,7 +130,7 @@ static const struct test_relative_cd_ds
 START_PARAMETRIZED_TEST (test_relative_cd, test_relative_cd_ds)
 /* *INDENT-ON* */
 {
-    /* given */
+    // given
     vfs_path_t *vpath;
     int actual_result;
 
@@ -138,10 +138,10 @@ START_PARAMETRIZED_TEST (test_relative_cd, test_relative_cd_ds)
 
     vpath = vfs_path_from_str_flags (data->input_string, data->input_flags);
 
-    /* when */
+    // when
     actual_result = mc_chdir (vpath);
 
-    /* then */
+    // then
     {
         const char *element_path;
 
@@ -164,12 +164,12 @@ END_PARAMETRIZED_TEST
 START_TEST (test_vpath_to_str_filter)
 /* *INDENT-ON* */
 {
-    /* given */
+    // given
     vfs_path_t *vpath, *last_vpath;
     char *filtered_path;
     const vfs_path_element_t *path_element;
 
-    /* when */
+    // when
     vpath = vfs_path_from_str ("/test1://some.host/dir");
     path_element = vfs_path_element_clone (vfs_path_get_by_index (vpath, -1));
     vfs_path_free (vpath, TRUE);
@@ -181,7 +181,7 @@ START_TEST (test_vpath_to_str_filter)
     filtered_path = vfs_path_to_str_flags (last_vpath, 0,
                                            VPF_STRIP_HOME | VPF_STRIP_PASSWORD | VPF_HIDE_CHARSET);
 
-    /* then */
+    // then
     mctest_assert_str_eq (filtered_path, "test1://some.host/dir");
 
     vfs_path_free (last_vpath, TRUE);
@@ -201,17 +201,17 @@ main (void)
 
     tc_core = tcase_create ("Core");
 
-    /* writable directory where check creates temporary files */
+    // writable directory where check creates temporary files
     cwd = my_get_current_dir ();
     g_setenv ("TEMP", cwd, TRUE);
     g_free (cwd);
 
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, test_relative_cd, test_relative_cd_ds);
     tcase_add_test (tc_core, test_vpath_to_str_filter);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

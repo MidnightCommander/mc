@@ -48,7 +48,7 @@
 
 /* Needed for the extern declarations of integer parameters */
 #include "dir.h"
-#include "panel.h"              /* Needed for the externs */
+#include "panel.h"              // Needed for the externs
 #include "file.h"
 #include "listmode.h"
 
@@ -215,7 +215,7 @@ init_listmode (char *oldlistformat)
                                 listmode_but[i].flags,
                                 listmode_but[i].text, listmode_but[i].callback));
 
-    /* We add the labels. */
+    // We add the labels.
     for (i = 0; i < sizeof (listmode_labels) / sizeof (struct listmode_label); i++)
     {
         pname = label_new (listmode_labels[i].y, listmode_labels[i].x, listmode_labels[i].text);
@@ -229,7 +229,7 @@ init_listmode (char *oldlistformat)
     add_widget (listmode_dlg, radio_justify);
     radio_justify->sel = 1;
 
-    /* get new listbox */
+    // get new listbox
     l_listmode = listbox_new (UY + 5, UX + 1, 9, 16, FALSE, NULL);
 
     if (strncmp (oldlistformat, "full ", 5) == 0)
@@ -258,7 +258,7 @@ init_listmode (char *oldlistformat)
         s = strtok (NULL, ",");
     }
 
-    /* add listbox to the dialogs */
+    // add listbox to the dialogs
     add_widget (listmode_dlg, l_listmode);
 
     radio_columns = radio_new (UY + 1, UX + 32, 2, s_columns);
@@ -341,4 +341,4 @@ listmode_edit (char *oldlistformat)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#endif /* LISTMODE_EDITOR */
+#endif // LISTMODE_EDITOR

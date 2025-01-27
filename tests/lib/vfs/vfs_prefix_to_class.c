@@ -29,7 +29,7 @@
 
 #include "lib/strutil.h"
 #include "lib/vfs/xdirentry.h"
-#include "lib/vfs/vfs.c"        /* for testing static methods  */
+#include "lib/vfs/vfs.c"        // for testing static methods
 
 #include "src/vfs/local/local.c"
 
@@ -92,27 +92,27 @@ static const struct test_vfs_prefix_to_class_ds
     const struct vfs_class *expected_result;
 } test_vfs_prefix_to_class_ds[] =
 {
-    { /* 0 */
+    { // 0
         "test_1:",
         &vfs_test_ops1
     },
-    { /* 1 */
+    { // 1
         "test_2:",
         &vfs_test_ops1
     },
-    { /* 2 */
+    { // 2
         "test_3:",
         &vfs_test_ops1
     },
-    { /* 3 */
+    { // 3
         "test_4:",
         &vfs_test_ops1
     },
-    { /* 4 */
+    { // 4
         "test2:",
         &vfs_test_ops2
     },
-    { /* 5 */
+    { // 5
         "test3:",
         &vfs_test_ops3
     },
@@ -120,11 +120,11 @@ static const struct test_vfs_prefix_to_class_ds
         "test1:",
         NULL
     },
-    { /* 6 */
+    { // 6
         "test_5:",
         NULL
     },
-    { /* 7 */
+    { // 7
         "test4:",
         NULL
     },
@@ -136,13 +136,13 @@ static const struct test_vfs_prefix_to_class_ds
 START_PARAMETRIZED_TEST (test_vfs_prefix_to_class, test_vfs_prefix_to_class_ds)
 /* *INDENT-ON* */
 {
-    /* given */
+    // given
     struct vfs_class *actual_result;
 
-    /* when */
+    // when
     actual_result = vfs_prefix_to_class ((char *) data->input_string);
 
-    /* then */
+    // then
     mctest_assert_ptr_eq (actual_result, data->expected_result);
 }
 /* *INDENT-OFF* */
@@ -160,9 +160,9 @@ main (void)
 
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, test_vfs_prefix_to_class, test_vfs_prefix_to_class_ds);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

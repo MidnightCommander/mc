@@ -134,9 +134,9 @@ main (void)
 
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     tcase_add_test (tc_core, test_examine_cd);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

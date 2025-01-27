@@ -48,23 +48,23 @@
 
 #include "lib/global.h"
 
-#include "lib/tty/tty.h"        /* LINES, tty_touch_screen() */
-#include "lib/tty/key.h"        /* ALT() macro */
+#include "lib/tty/tty.h"        // LINES, tty_touch_screen()
+#include "lib/tty/key.h"        // ALT() macro
 #include "lib/mcconfig.h"
-#include "lib/filehighlight.h"  /* MC_FHL_INI_FILE */
+#include "lib/filehighlight.h"  // MC_FHL_INI_FILE
 #include "lib/vfs/vfs.h"
 #include "lib/fileloc.h"
 #include "lib/strutil.h"
 #include "lib/file-entry.h"
 #include "lib/util.h"
 #include "lib/widget.h"
-#include "lib/keybind.h"        /* CK_Down, CK_History */
-#include "lib/event.h"          /* mc_event_raise() */
+#include "lib/keybind.h"        // CK_Down, CK_History
+#include "lib/event.h"          // mc_event_raise()
 
 #include "src/setup.h"
-#include "src/execute.h"        /* toggle_panels() */
+#include "src/execute.h"        // toggle_panels()
 #include "src/history.h"
-#include "src/util.h"           /* check_for_default() */
+#include "src/util.h"           // check_for_default()
 
 #include "src/viewer/mcviewer.h"
 
@@ -78,18 +78,18 @@
 
 #include "filegui.h"
 #include "filenot.h"
-#include "hotlist.h"            /* hotlist_show() */
-#include "tree.h"               /* tree_chdir() */
-#include "filemanager.h"        /* change_panel() */
-#include "command.h"            /* cmdline */
-#include "layout.h"             /* get_current_type() */
-#include "ext.h"                /* regex_command() */
-#include "boxes.h"              /* cd_box() */
+#include "hotlist.h"            // hotlist_show()
+#include "tree.h"               // tree_chdir()
+#include "filemanager.h"        // change_panel()
+#include "command.h"            // cmdline
+#include "layout.h"             // get_current_type()
+#include "ext.h"                // regex_command()
+#include "boxes.h"              // cd_box()
 #include "dir.h"
 #include "cd.h"
-#include "ioblksize.h"          /* IO_BUFSIZE */
+#include "ioblksize.h"          // IO_BUFSIZE
 
-#include "cmd.h"                /* Our definitions */
+#include "cmd.h"                // Our definitions
 
 /*** global variables ****************************************************************************/
 
@@ -110,7 +110,7 @@ enum CompareMode
 
 #ifdef ENABLE_VFS_NET
 static const char *machine_str = N_("Enter machine name (F1 for details):");
-#endif /* ENABLE_VFS_NET */
+#endif // ENABLE_VFS_NET
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
@@ -128,7 +128,7 @@ do_view_cmd (WPanel *panel, gboolean plain_view)
     if (fe == NULL)
         return;
 
-    /* Directories are viewed by changing to them */
+    // Directories are viewed by changing to them
     if (S_ISDIR (fe->st.st_mode) || link_isdir (fe))
     {
         vfs_path_t *fname_vpath;
@@ -169,7 +169,7 @@ static int
 compare_files (const vfs_path_t *vpath1, const vfs_path_t *vpath2, off_t size)
 {
     int file1;
-    int result = -1;            /* Different by default */
+    int result = -1;            // Different by default
 
     if (size == 0)
         return 0;
@@ -212,21 +212,21 @@ compare_dir (WPanel *panel, const WPanel *other, enum CompareMode mode)
 {
     int i, j;
 
-    /* No marks by default */
+    // No marks by default
     panel->marked = 0;
     panel->total = 0;
     panel->dirs_marked = 0;
 
-    /* Handle all files in the panel */
+    // Handle all files in the panel
     for (i = 0; i < panel->dir.len; i++)
     {
         file_entry_t *source = &panel->dir.list[i];
         const char *source_fname;
 
-        /* Default: unmarked */
+        // Default: unmarked
         file_mark (panel, i, 0);
 
-        /* Skip directories */
+        // Skip directories
         if (S_ISDIR (source->st.st_mode))
             continue;
 
@@ -234,7 +234,7 @@ compare_dir (WPanel *panel, const WPanel *other, enum CompareMode mode)
         if (panel->is_panelized)
             source_fname = x_basename (source_fname);
 
-        /* Search the corresponding entry from the other panel */
+        // Search the corresponding entry from the other panel
         for (j = 0; j < other->dir.len; j++)
         {
             const char *other_fname;
@@ -248,19 +248,19 @@ compare_dir (WPanel *panel, const WPanel *other, enum CompareMode mode)
         }
 
         if (j >= other->dir.len)
-            /* Not found -> mark */
+            // Not found -> mark
             do_file_mark (panel, i, 1);
         else
         {
-            /* Found */
+            // Found
             file_entry_t *target = &other->dir.list[j];
 
             if (mode != compare_size_only)
-                /* Older version is not marked */
+                // Older version is not marked
                 if (source->st.st_mtime < target->st.st_mtime)
                     continue;
 
-            /* Newer version with different size is marked */
+            // Newer version with different size is marked
             if (source->st.st_size != target->st.st_size)
             {
                 do_file_mark (panel, i, 1);
@@ -272,15 +272,15 @@ compare_dir (WPanel *panel, const WPanel *other, enum CompareMode mode)
 
             if (mode == compare_quick)
             {
-                /* Thorough compare off, compare only time stamps */
-                /* Mark newer version, don't mark version with the same date */
+                // Thorough compare off, compare only time stamps
+                // Mark newer version, don't mark version with the same date
                 if (source->st.st_mtime > target->st.st_mtime)
                     do_file_mark (panel, i, 1);
 
                 continue;
             }
 
-            /* Thorough compare on, do byte-by-byte comparison */
+            // Thorough compare on, do byte-by-byte comparison
             {
                 vfs_path_t *src_name, *dst_name;
 
@@ -294,7 +294,7 @@ compare_dir (WPanel *panel, const WPanel *other, enum CompareMode mode)
                 vfs_path_free (dst_name, TRUE);
             }
         }
-    }                           /* for (i ...) */
+    }                           // for (i ...)
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -428,11 +428,11 @@ nice_cd (const char *text, const char *xtext, const char *help,
     }
     g_free (cd_path);
 
-    /* In case of passive panel, restore current VFS directory that was changed in panel_do_cd() */
+    // In case of passive panel, restore current VFS directory that was changed in panel_do_cd()
     if (MENU_PANEL != current_panel)
         (void) mc_chdir (current_panel->cwd_vpath);
 }
-#endif /* ENABLE_VFS_UNDELFS || ENABLE_VFS_NET */
+#endif // ENABLE_VFS_UNDELFS || ENABLE_VFS_NET
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -655,7 +655,7 @@ edit_file_at_line (const vfs_path_t *what_vpath, gboolean internal, long start_l
         edit_file (&arg);
     }
     else
-#endif /* USE_INTERNAL_EDIT */
+#endif // USE_INTERNAL_EDIT
     {
         static const char *editor = NULL;
 
@@ -678,7 +678,7 @@ edit_file_at_line (const vfs_path_t *what_vpath, gboolean internal, long start_l
     if (use_internal_edit)
         dialog_switch_process_pending ();
     else
-#endif /* USE_INTERNAL_EDIT */
+#endif // USE_INTERNAL_EDIT
         repaint_screen ();
 }
 
@@ -763,7 +763,7 @@ mkdir_cmd (WPanel *panel)
     if (fe == NULL)
         return;
 
-    /* If 'on' then automatically fills name with current item name */
+    // If 'on' then automatically fills name with current item name
     if (auto_fill_mkdir_name && !DIR_IS_DOTDOT (fe->fname->str))
         name = fe->fname->str;
 
@@ -780,8 +780,8 @@ mkdir_cmd (WPanel *panel)
             absdir = vfs_path_from_str (dir);
         else
         {
-            /* possible escaped '~' */
-            /* allow create directory with name '~' */
+            // possible escaped '~'
+            // allow create directory with name '~'
             char *tmpdir = dir;
 
             if (dir[0] == '\\' && dir[1] == '~')
@@ -957,7 +957,7 @@ edit_fhl_cmd (void)
     }
 
     vfs_path_free (fhlfile_vpath, TRUE);
-    /* refresh highlighting rules */
+    // refresh highlighting rules
     mc_fhl_free (&mc_filehighlight);
     mc_filehighlight = mc_fhl_new (TRUE);
 }
@@ -1014,7 +1014,7 @@ vfs_list (WPanel *panel)
     vfs_path_free (target_vpath, TRUE);
     g_free (target);
 }
-#endif /* ENABLE_VFS */
+#endif // ENABLE_VFS
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -1050,7 +1050,7 @@ compare_dirs_cmd (void)
 void
 diff_view_cmd (void)
 {
-    /* both panels must be in the list mode */
+    // both panels must be in the list mode
     if (get_current_type () == view_listing && get_other_type () == view_listing)
     {
         if (get_current_index () == 0)
@@ -1179,7 +1179,7 @@ ftplink_cmd (void)
     nice_cd (_("FTP to machine"), _(machine_str),
              "[FTP File System]", ":ftplink_cmd: FTP to machine ", "ftp://", 1, TRUE);
 }
-#endif /* ENABLE_VFS_FTP */
+#endif // ENABLE_VFS_FTP
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -1191,7 +1191,7 @@ sftplink_cmd (void)
              "[SFTP (SSH File Transfer Protocol) filesystem]",
              ":sftplink_cmd: SFTP to machine ", "sftp://", 1, TRUE);
 }
-#endif /* ENABLE_VFS_SFTP */
+#endif // ENABLE_VFS_SFTP
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -1203,7 +1203,7 @@ shelllink_cmd (void)
              "[FIle transfer over SHell filesystem]", ":fishlink_cmd: Shell link to machine ",
              "sh://", 1, TRUE);
 }
-#endif /* ENABLE_VFS_SHELL */
+#endif // ENABLE_VFS_SHELL
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -1215,7 +1215,7 @@ undelete_cmd (void)
              _("Enter device (without /dev/) to undelete\nfiles on: (F1 for details)"),
              "[Undelete File System]", ":undelete_cmd: Undel on ext2 fs ", "undel://", 0, FALSE);
 }
-#endif /* ENABLE_VFS_UNDELFS */
+#endif // ENABLE_VFS_UNDELFS
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -1399,7 +1399,7 @@ listing_cmd (void)
     p = PANEL (get_panel_widget (MENU_PANEL_IDX));
 
     p->is_panelized = FALSE;
-    panel_set_filter (p, NULL); /* including panel reload */
+    panel_set_filter (p, NULL); // including panel reload
 }
 
 /* --------------------------------------------------------------------------------------------- */

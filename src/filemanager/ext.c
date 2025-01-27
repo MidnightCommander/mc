@@ -47,11 +47,11 @@
 #include "lib/vfs/vfs.h"
 #include "lib/widget.h"
 #ifdef HAVE_CHARSET
-#include "lib/charsets.h"       /* get_codepage_index */
+#include "lib/charsets.h"       // get_codepage_index
 #endif
 
 #ifdef USE_FILE_CMD
-#include "src/setup.h"          /* use_file_to_check_type */
+#include "src/setup.h"          // use_file_to_check_type
 #endif
 #include "src/execute.h"
 #include "src/history.h"
@@ -61,11 +61,11 @@
 #include "src/viewer/mcviewer.h"
 
 #ifdef HAVE_CHARSET
-#include "src/selcodepage.h"    /* do_set_codepage */
+#include "src/selcodepage.h"    // do_set_codepage
 #endif
 
-#include "filemanager.h"        /* current_panel */
-#include "panel.h"              /* panel_cd */
+#include "filemanager.h"        // current_panel
+#include "panel.h"              // panel_cd
 
 #include "ext.h"
 
@@ -193,7 +193,7 @@ exec_get_export_variables (const vfs_path_t *filename_vpath)
     GString *export_vars_string;
     size_t i;
 
-    /* *INDENT-OFF* */
+    // *INDENT-OFF*
     struct
     {
         const char symbol;
@@ -206,7 +206,7 @@ exec_get_export_variables (const vfs_path_t *filename_vpath)
         {'t', "MC_EXT_ONLYTAGGED", TRUE},
         {'\0', NULL, FALSE}
     };
-    /* *INDENT-ON* */
+    // *INDENT-ON*
 
     text = exec_get_file_name (filename_vpath);
     if (text == NULL)
@@ -258,7 +258,7 @@ exec_make_shell_string (const char *lc_data, const vfs_path_t *filename_vpath)
                                   INPUT_COMPLETE_NONE);
                 if (parameter == NULL)
                 {
-                    /* User canceled */
+                    // User canceled
                     g_string_free (shell_string, TRUE);
                     exec_cleanup_file_name (filename_vpath, FALSE);
                     return NULL;
@@ -361,7 +361,7 @@ exec_make_shell_string (const char *lc_data, const vfs_path_t *filename_vpath)
             else
                 g_string_append_c (shell_string, *lc_data);
         }
-    }                           /* for */
+    }                           // for
 
     return shell_string;
 }
@@ -372,12 +372,12 @@ static void
 exec_extension_view (void *target, char *cmd, const vfs_path_t *filename_vpath, int start_line)
 {
     mcview_mode_flags_t def_flags = {
-        /* *INDENT-OFF* */
+        // *INDENT-OFF*
         .wrap = FALSE,
         .hex = mcview_global_flags.hex,
         .magic = FALSE,
         .nroff = mcview_global_flags.nroff
-        /* *INDENT-ON* */
+        // *INDENT-ON*
     };
 
     mcview_mode_flags_t changed_flags;
@@ -445,7 +445,7 @@ exec_extension (WPanel *panel, void *target, const vfs_path_t *filename_vpath,
     is_cd = FALSE;
     written_nonspace = FALSE;
 
-    /* Avoid making a local copy if we are doing a cd */
+    // Avoid making a local copy if we are doing a cd
     do_local_copy = !vfs_file_is_local (filename_vpath);
 
     shell_string = exec_make_shell_string (lc_data, filename_vpath);
@@ -505,15 +505,15 @@ exec_extension (WPanel *panel, void *target, const vfs_path_t *filename_vpath,
     }
     else
     {
-        /* Set executable flag on the command file ... */
+        // Set executable flag on the command file ...
         mc_chmod (script_vpath, S_IRWXU);
-        /* ... but don't rely on it - run /bin/sh explicitly */
+        // ... but don't rely on it - run /bin/sh explicitly
         cmd = g_strconcat ("/bin/sh ", vfs_path_as_str (script_vpath), (char *) NULL);
     }
 
     if (run_view)
     {
-        /* If we've written whitespace only, then just load filename into view */
+        // If we've written whitespace only, then just load filename into view
         if (!written_nonspace)
             exec_extension_view (target, NULL, filename_vpath, start_line);
         else
@@ -574,12 +574,12 @@ get_popen_information (const char *cmd_file, const char *args, char *buf, int bu
 #endif
         read_bytes = (fgets (buf, buflen, f) != NULL);
         if (!read_bytes)
-            buf[0] = '\0';      /* Paranoid termination */
+            buf[0] = '\0';      // Paranoid termination
         pclose (f);
     }
     else
     {
-        buf[0] = '\0';          /* Paranoid termination */
+        buf[0] = '\0';          // Paranoid termination
         return -1;
     }
 
@@ -645,7 +645,7 @@ get_file_encoding_local (const vfs_path_t *filename_vpath, char *buf, int buflen
 
     return ret;
 }
-#endif /* HAVE_CHARSET */
+#endif // HAVE_CHARSET
 
 /* --------------------------------------------------------------------------------------------- */
 /**
@@ -661,7 +661,7 @@ regex_check_type (const vfs_path_t *filename_vpath, const char *ptr, gboolean ca
 {
     gboolean found = FALSE;
 
-    /* Following variables are valid if *have_type is TRUE */
+    // Following variables are valid if *have_type is TRUE
     static char content_string[2048];
     static size_t content_shift = 0;
     static int got_data = 0;
@@ -673,11 +673,11 @@ regex_check_type (const vfs_path_t *filename_vpath, const char *ptr, gboolean ca
         vfs_path_t *localfile_vpath;
 
 #ifdef HAVE_CHARSET
-        static char encoding_id[21];    /* CSISO51INISCYRILLIC -- 20 */
+        static char encoding_id[21];    // CSISO51INISCYRILLIC -- 20
         int got_encoding_data;
-#endif /* HAVE_CHARSET */
+#endif // HAVE_CHARSET
 
-        /* Don't repeate even unsuccessful checks */
+        // Don't repeate even unsuccessful checks
         *have_type = TRUE;
 
         localfile_vpath = mc_getlocalcopy (filename_vpath);
@@ -708,7 +708,7 @@ regex_check_type (const vfs_path_t *filename_vpath, const char *ptr, gboolean ca
 
             do_set_codepage (cp_id);
         }
-#endif /* HAVE_CHARSET */
+#endif // HAVE_CHARSET
 
         got_data = get_file_type_local (localfile_vpath, content_string, sizeof (content_string));
 
@@ -724,7 +724,7 @@ regex_check_type (const vfs_path_t *filename_vpath, const char *ptr, gboolean ca
 
 #ifndef FILE_B
             {
-                const char *real_name;  /* name used with "file" */
+                const char *real_name;  // name used with "file"
                 size_t real_len;
 
                 real_name = vfs_path_get_last_path_str (localfile_vpath);
@@ -732,21 +732,21 @@ regex_check_type (const vfs_path_t *filename_vpath, const char *ptr, gboolean ca
 
                 if (strncmp (content_string, real_name, real_len) == 0)
                 {
-                    /* Skip "real_name: " */
+                    // Skip "real_name: "
                     content_shift = real_len;
 
-                    /* Solaris' file prints tab(s) after ':' */
+                    // Solaris' file prints tab(s) after ':'
                     if (content_string[content_shift] == ':')
                         for (content_shift++; whitespace (content_string[content_shift]);
                              content_shift++)
                             ;
                 }
             }
-#endif /* FILE_B */
+#endif // FILE_B
         }
         else
         {
-            /* No data */
+            // No data
             content_string[0] = '\0';
         }
         vfs_path_free (localfile_vpath, TRUE);
@@ -780,7 +780,7 @@ regex_check_type (const vfs_path_t *filename_vpath, const char *ptr, gboolean ca
 
     return found;
 }
-#endif /* USE_FILE_CMD */
+#endif // USE_FILE_CMD
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -835,7 +835,7 @@ load_extension_file (void)
     if (ext_ini == NULL)
         return FALSE;
 
-    /* Check version */
+    // Check version
     if (!mc_config_has_group (ext_ini, descr_group))
     {
         flush_extension_file ();
@@ -908,7 +908,7 @@ regex_command_for (void *target, const vfs_path_t *filename_vpath, const char *a
     struct stat mystat;
     int view_at_line_number = 0;
 #ifdef USE_FILE_CMD
-    gboolean have_type = FALSE; /* Flag used by regex_check_type() */
+    gboolean have_type = FALSE; // Flag used by regex_check_type()
 #endif
     char **group_iter;
     char *include_group = NULL;
@@ -920,7 +920,7 @@ regex_command_for (void *target, const vfs_path_t *filename_vpath, const char *a
     if (script_vpath != NULL)
         *script_vpath = NULL;
 
-    /* Check for the special View:%d parameter */
+    // Check for the special View:%d parameter
     if (strncmp (action, "View:", 5) == 0)
     {
         view_at_line_number = atoi (action + 5);
@@ -939,7 +939,7 @@ regex_command_for (void *target, const vfs_path_t *filename_vpath, const char *a
     if (ext_ini_groups == NULL)
         ext_ini_groups = mc_config_get_groups (ext_ini, NULL);
 
-    /* find matched type, regex or shell pattern */
+    // find matched type, regex or shell pattern
     for (group_iter = ext_ini_groups; *group_iter != NULL && !found; group_iter++)
     {
         enum
@@ -967,7 +967,7 @@ regex_command_for (void *target, const vfs_path_t *filename_vpath, const char *a
                               MC_SEARCH_T_REGEX);
             g_free (pattern);
 
-            continue;           /* stop if found */
+            continue;           // stop if found
         }
 
 #ifdef USE_FILE_CMD
@@ -985,13 +985,13 @@ regex_command_for (void *target, const vfs_path_t *filename_vpath, const char *a
                 g_free (pattern);
 
                 if (mc_error_message (&mcerror, NULL))
-                    error_flag = TRUE;  /* leave it if file cannot be opened */
+                    error_flag = TRUE;  // leave it if file cannot be opened
 
                 if (type_state == TYPE_NOT_FOUND)
                     continue;
             }
         }
-#endif /* USE_FILE_CMD */
+#endif // USE_FILE_CMD
 
         pattern = mc_config_get_string_raw (ext_ini, g, "Regex", NULL);
         if (pattern != NULL)
@@ -1040,18 +1040,18 @@ regex_command_for (void *target, const vfs_path_t *filename_vpath, const char *a
         }
     }
 
-    /* group is found, process actions */
+    // group is found, process actions
     if (found)
     {
         char *include_value;
 
         group_iter--;
 
-        /* "Include" parameter has the highest priority over any actions */
+        // "Include" parameter has the highest priority over any actions
         include_value = mc_config_get_string_raw (ext_ini, *group_iter, "Include", NULL);
         if (include_value != NULL)
         {
-            /* find "Include/include_value" group */
+            // find "Include/include_value" group
             include_group = g_strconcat ("Include/", include_value, (char *) NULL);
             g_free (include_value);
             found = mc_config_has_group (ext_ini, include_group);
@@ -1073,13 +1073,13 @@ regex_command_for (void *target, const vfs_path_t *filename_vpath, const char *a
         action_value = mc_config_get_string_raw (ext_ini, current_group, action, NULL);
         if (action_value == NULL)
         {
-            /* Not found, try the action from default section */
+            // Not found, try the action from default section
             action_value = mc_config_get_string_raw (ext_ini, default_group, action, NULL);
             found = (action_value != NULL && *action_value != '\0');
         }
         else
         {
-            /* If action's value is empty, ignore action from default section */
+            // If action's value is empty, ignore action from default section
             found = (*action_value != '\0');
         }
 

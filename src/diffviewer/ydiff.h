@@ -13,4 +13,4 @@
 
 gboolean dview_diff_cmd (const void *f0, const void *f1);
 
-#endif /* MC__DIFFVIEW_YDIFF_H */
+#endif // MC__DIFFVIEW_YDIFF_H

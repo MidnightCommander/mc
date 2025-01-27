@@ -28,7 +28,7 @@ typedef struct WButtonBar
         char *text;
         long command;
         Widget *receiver;
-        int end_coord;          /* cumulative width of buttons so far */
+        int end_coord;          // cumulative width of buttons so far
     } labels[BUTTONBAR_LABELS_NUM];
 } WButtonBar;
 
@@ -43,4 +43,4 @@ WButtonBar *buttonbar_find (const WDialog * h);
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__WIDGET_BUTTONBAR_H */
+#endif // MC__WIDGET_BUTTONBAR_H

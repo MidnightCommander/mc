@@ -38,7 +38,7 @@
 
 #include "lib/global.h"
 #include "lib/strutil.h"
-#include "lib/util.h"           /* mc_build_filename() */
+#include "lib/util.h"           // mc_build_filename()
 #include "lib/serialize.h"
 
 #include "vfs.h"
@@ -147,7 +147,7 @@ vfs_canon (const char *path)
 
     if (!IS_PATH_SEP (*path))
     {
-        /* Relative to current directory */
+        // Relative to current directory
 
         char *local;
 
@@ -173,7 +173,7 @@ vfs_canon (const char *path)
     }
     else
     {
-        /* Absolute path */
+        // Absolute path
 
         result = g_strdup (path);
         canonicalize_pathname (result);
@@ -213,10 +213,10 @@ vfs_path_url_split (vfs_path_element_t *path_element, const char *path)
 
     pcopy = g_strdup (path);
 
-    /* search for any possible user */
+    // search for any possible user
     at = strrchr (pcopy, '@');
 
-    /* We have a username */
+    // We have a username
     if (at == NULL)
         rest = pcopy;
     else
@@ -244,7 +244,7 @@ vfs_path_url_split (vfs_path_element_t *path_element, const char *path)
             rest = at + 1;
     }
 
-    /* Check if the host comes with a port spec, if so, chop it */
+    // Check if the host comes with a port spec, if so, chop it
     if (*rest != '[')
         colon = strchr (rest, ':');
     else
@@ -262,7 +262,7 @@ vfs_path_url_split (vfs_path_element_t *path_element, const char *path)
     if (colon != NULL)
     {
         *colon = '\0';
-        /* cppcheck-suppress invalidscanf */
+        // cppcheck-suppress invalidscanf
         if (sscanf (colon + 1, "%d", &path_element->port) == 1)
         {
             if (path_element->port <= 0 || path_element->port >= 65536)
@@ -363,7 +363,7 @@ vfs_path_from_str_deprecated_parser (char *path)
             (element->encoding != NULL) ? str_crt_conv_from (element->encoding) : INVALID_CONV;
 #endif
 
-        url_params = strchr (op, ':');  /* skip VFS prefix */
+        url_params = strchr (op, ':');  // skip VFS prefix
         if (url_params != NULL)
         {
             *url_params = '\0';
@@ -1011,7 +1011,7 @@ vfs_prefix_to_class (const char *prefix)
 {
     guint i;
 
-    /* Avoid first class (localfs) that would accept any prefix */
+    // Avoid first class (localfs) that would accept any prefix
     for (i = 1; i < vfs__classes_list->len; i++)
     {
         struct vfs_class *vfs;
@@ -1048,7 +1048,7 @@ vfs_get_encoding (const char *path, ssize_t len)
 {
     char *semi;
 
-    /* try found #enc: */
+    // try found #enc:
     semi = g_strrstr_len (path, len, VFS_ENCODING_PREFIX);
     if (semi == NULL)
         return NULL;
@@ -1057,7 +1057,7 @@ vfs_get_encoding (const char *path, ssize_t len)
     {
         char *slash;
 
-        semi += strlen (VFS_ENCODING_PREFIX);   /* skip "#enc:" */
+        semi += strlen (VFS_ENCODING_PREFIX);   // skip "#enc:"
         slash = strchr (semi, PATH_SEP);
         if (slash != NULL)
             return g_strndup (semi, slash - semi);
@@ -1097,7 +1097,7 @@ vfs_path_change_encoding (vfs_path_t *vpath, const char *encoding)
     vfs_path_element_t *path_element;
 
     path_element = (vfs_path_element_t *) vfs_path_get_by_index (vpath, -1);
-    /* don't add current encoding */
+    // don't add current encoding
     if ((path_element->encoding != NULL) && (strcmp (encoding, path_element->encoding) == 0))
         return vpath;
 
@@ -1151,7 +1151,7 @@ vfs_path_serialize (const vfs_path_t *vpath, GError **mcerror)
 
         g_snprintf (groupname, sizeof (groupname), "path-element-%zd", element_index);
         element = vfs_path_get_by_index (vpath, element_index);
-        /* convert one element to config group */
+        // convert one element to config group
 
         mc_config_set_string_raw (cpath, groupname, "path", element->path);
         mc_config_set_string_raw (cpath, groupname, "class-name", element->class->name);
@@ -1388,7 +1388,7 @@ vfs_path_tokens_count (const vfs_path_t *vpath)
         for (prev_token = element->path; (token = strchr (prev_token, PATH_SEP)) != NULL;
              prev_token = token + 1)
         {
-            /* skip empty substring */
+            // skip empty substring
             if (token != prev_token)
                 count_tokens++;
         }

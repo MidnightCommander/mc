@@ -65,13 +65,13 @@ my_sigaction (int signum, const struct sigaction *act, struct sigaction *oldact)
     int *tmp_signum;
     struct sigaction *tmp_act;
 
-    /* store signum */
+    // store signum
     tmp_signum = g_new (int, 1);
     memcpy (tmp_signum, &signum, sizeof (*tmp_signum));
     if (sigaction_signum__captured != NULL)
         g_ptr_array_add (sigaction_signum__captured, tmp_signum);
 
-    /* store act */
+    // store act
     if (act != NULL)
     {
         tmp_act = g_new (struct sigaction, 1);
@@ -82,7 +82,7 @@ my_sigaction (int signum, const struct sigaction *act, struct sigaction *oldact)
     if (sigaction_act__captured != NULL)
         g_ptr_array_add (sigaction_act__captured, tmp_act);
 
-    /* store oldact */
+    // store oldact
     if (oldact != NULL)
     {
         tmp_act = g_new (struct sigaction, 1);
@@ -133,12 +133,12 @@ my_signal (int signum, sighandler_t handler)
     int *tmp_signum;
     sighandler_t *tmp_handler;
 
-    /* store signum */
+    // store signum
     tmp_signum = g_new (int, 1);
     memcpy (tmp_signum, &signum, sizeof (*tmp_signum));
     g_ptr_array_add (signal_signum__captured, tmp_signum);
 
-    /* store handler */
+    // store handler
     if (handler != SIG_DFL)
     {
         tmp_handler = g_new (sighandler_t, 1);

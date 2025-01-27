@@ -71,7 +71,7 @@ my_mkdir_rec (const vfs_path_t *vpath, mode_t mode)
     if (errno != ENOENT)
         return (-1);
 
-    /* FIXME: should check instead if vpath is at the root of that filesystem */
+    // FIXME: should check instead if vpath is at the root of that filesystem
     if (!vfs_file_is_local (vpath))
         return (-1);
 
@@ -113,7 +113,7 @@ my_rmdir (const char *path)
     vfs_path_t *vpath;
 
     vpath = vfs_path_from_str_flags (path, VPF_NO_CANON);
-    /* FIXME: Should receive a Wtree! */
+    // FIXME: Should receive a Wtree!
     result = mc_rmdir (vpath);
     vfs_path_free (vpath, TRUE);
     return result;

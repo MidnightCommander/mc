@@ -40,10 +40,10 @@
 #include "lib/skin.h"
 #include "lib/tty/key.h"
 #include "lib/strutil.h"
-#include "lib/fileloc.h"        /* MC_HISTORY_FILE */
-#include "lib/event.h"          /* mc_event_raise() */
-#include "lib/util.h"           /* MC_PTR_FREE */
-#include "lib/mcconfig.h"       /* num_history_items_recorded */
+#include "lib/fileloc.h"        // MC_HISTORY_FILE
+#include "lib/event.h"          // mc_event_raise()
+#include "lib/util.h"           // MC_PTR_FREE
+#include "lib/mcconfig.h"       // num_history_items_recorded
 
 #include "lib/widget.h"
 #include "lib/widget/mouse.h"
@@ -91,14 +91,14 @@ dlg_read_history (WDialog *h)
     char *profile;
     ev_history_load_save_t event_data;
 
-    if (num_history_items_recorded == 0)        /* this is how to disable */
+    if (num_history_items_recorded == 0)        // this is how to disable
         return;
 
     profile = mc_config_get_full_path (MC_HISTORY_FILE);
     event_data.cfg = mc_config_init (profile, TRUE);
     event_data.receiver = NULL;
 
-    /* create all histories in dialog */
+    // create all histories in dialog
     mc_event_raise (h->event_group, MCEVENT_HISTORY_LOAD, &event_data);
 
     mc_config_deinit (event_data.cfg);
@@ -114,10 +114,10 @@ refresh_cmd (void)
     tty_touch_screen ();
     mc_refresh ();
 #else
-    /* Use this if the refreshes fail */
+    // Use this if the refreshes fail
     tty_clear_screen ();
     repaint_screen ();
-#endif /* HAVE_SLANG */
+#endif // HAVE_SLANG
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -230,7 +230,7 @@ dlg_key_event (WDialog *h, int d_key)
     if (g->current == NULL)
         g->current = g->widgets;
 
-    /* TAB used to cycle */
+    // TAB used to cycle
     if (!widget_get_options (w, WOP_WANT_TAB))
     {
         if (d_key == '\t')
@@ -245,7 +245,7 @@ dlg_key_event (WDialog *h, int d_key)
         }
     }
 
-    /* first can dlalog handle the key itself */
+    // first can dlalog handle the key itself
     handled = send_message (h, NULL, MSG_KEY, d_key, NULL);
 
     if (handled == MSG_NOT_HANDLED)
@@ -285,7 +285,7 @@ frontend_dlg_run (WDialog *h)
 
     event.x = -1;
 
-    /* close opened editors, viewers, etc */
+    // close opened editors, viewers, etc
     if (!widget_get_state (wh, WST_MODAL) && mc_global.midnight_shutdown)
     {
         send_message (h, NULL, MSG_VALIDATE, 0, NULL);
@@ -307,14 +307,14 @@ frontend_dlg_run (WDialog *h)
             while (widget_get_state (wh, WST_IDLE) && is_idle ())
                 send_message (wh, NULL, MSG_IDLE, 0, NULL);
 
-            /* Allow terminating the dialog from the idle handler */
+            // Allow terminating the dialog from the idle handler
             if (!widget_get_state (wh, WST_ACTIVE))
                 break;
         }
 
         widget_update_cursor (wh);
 
-        /* Clear interrupt flag */
+        // Clear interrupt flag
         tty_got_interrupt ();
         d_key = tty_get_event (&event, GROUP (h)->mouse_status == MOU_REPEAT, TRUE);
 
@@ -332,7 +332,7 @@ dlg_default_destroy (Widget *w)
 {
     WDialog *h = DIALOG (w);
 
-    /* if some widgets have history, save all histories at one moment here */
+    // if some widgets have history, save all histories at one moment here
     dlg_save_history (h);
     group_default_callback (w, NULL, MSG_DESTROY, 0, NULL);
     send_message (w, NULL, MSG_DESTROY, 0, NULL);
@@ -354,16 +354,16 @@ dlg_default_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, voi
     switch (msg)
     {
     case MSG_INIT:
-        /* nothing to init in dialog itself */
+        // nothing to init in dialog itself
         return MSG_HANDLED;
 
     case MSG_IDLE:
-        /* we don't want endless loop */
+        // we don't want endless loop
         widget_idle (w, FALSE);
         return MSG_HANDLED;
 
     case MSG_DESTROY:
-        /* nothing to deinit in dialog itself */
+        // nothing to deinit in dialog itself
         return MSG_HANDLED;
 
     default:
@@ -387,7 +387,7 @@ dlg_default_mouse_callback (Widget *w, mouse_msg_t msg, mouse_event_t *event)
         break;
 
     default:
-        /* return MOU_UNHANDLED */
+        // return MOU_UNHANDLED
         event->result.abort = TRUE;
         break;
     }
@@ -415,7 +415,7 @@ dlg_create (gboolean modal, int y1, int x1, int lines, int cols, widget_pos_flag
     w->pos_flags = pos_flags;
     w->options |= WOP_SELECTABLE | WOP_TOP_SELECT;
     w->state |= WST_FOCUSED;
-    /* Temporary hack: dialog doesn't have an owner, own itself. */
+    // Temporary hack: dialog doesn't have an owner, own itself.
     w->owner = g;
 
     w->keymap = dialog_map;
@@ -441,7 +441,7 @@ dlg_create (gboolean modal, int y1, int x1, int lines, int cols, widget_pos_flag
         frame_set_title (FRAME (new_d->bg), title);
     }
 
-    /* unique name of event group for this dialog */
+    // unique name of event group for this dialog
     new_d->event_group = g_strdup_printf ("%s_%p", MCEVENT_GROUP_DIALOG, (void *) new_d);
 
     return new_d;
@@ -491,10 +491,10 @@ dlg_init (WDialog *h)
     if (top_dlg != NULL && widget_get_state (WIDGET (top_dlg->data), WST_MODAL))
         widget_set_state (wh, WST_MODAL, TRUE);
 
-    /* add dialog to the stack */
+    // add dialog to the stack
     top_dlg = g_list_prepend (top_dlg, h);
 
-    /* Initialize dialog manager and widgets */
+    // Initialize dialog manager and widgets
     if (widget_get_state (wh, WST_CONSTRUCT))
     {
         if (!widget_get_state (wh, WST_MODAL))
@@ -505,7 +505,7 @@ dlg_init (WDialog *h)
         dlg_read_history (h);
     }
 
-    /* Select the first widget that takes focus */
+    // Select the first widget that takes focus
     while (g->current != NULL && !widget_is_focusable (g->current->data))
         group_set_current_widget_next (g);
 
@@ -586,7 +586,7 @@ dlg_save_history (WDialog *h)
     char *profile;
     int i;
 
-    if (num_history_items_recorded == 0)        /* this is how to disable */
+    if (num_history_items_recorded == 0)        // this is how to disable
         return;
 
     profile = mc_config_get_full_path (MC_HISTORY_FILE);
@@ -594,7 +594,7 @@ dlg_save_history (WDialog *h)
     if (i != -1)
         close (i);
 
-    /* Make sure the history is only readable by the user */
+    // Make sure the history is only readable by the user
     if (chmod (profile, S_IRUSR | S_IWUSR) != -1 || errno == ENOENT)
     {
         ev_history_load_save_t event_data;
@@ -602,7 +602,7 @@ dlg_save_history (WDialog *h)
         event_data.cfg = mc_config_init (profile, FALSE);
         event_data.receiver = NULL;
 
-        /* get all histories in dialog */
+        // get all histories in dialog
         mc_event_raise (h->event_group, MCEVENT_HISTORY_SAVE, &event_data);
 
         mc_config_save_file (event_data.cfg, NULL);

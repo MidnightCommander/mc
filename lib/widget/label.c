@@ -161,7 +161,7 @@ label_set_text (WLabel *label, const char *text)
     int newlines;
 
     if (label->text != NULL && text != NULL && strcmp (label->text, text) == 0)
-        return;                 /* Flickering is not nice */
+        return;                 // Flickering is not nice
 
     g_free (label->text);
 
@@ -189,7 +189,7 @@ void
 label_set_textv (WLabel *label, const char *format, ...)
 {
     va_list args;
-    char buf[BUF_1K];           /* FIXME: is it enough? */
+    char buf[BUF_1K];           // FIXME: is it enough?
 
     va_start (args, format);
     g_vsnprintf (buf, sizeof (buf), format, args);

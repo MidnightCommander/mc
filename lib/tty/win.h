@@ -5,7 +5,7 @@
 #ifndef MC__WIN_H
 #define MC__WIN_H
 
-#include "lib/global.h"         /* <glib.h> */
+#include "lib/global.h"         // <glib.h>
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -21,4 +21,4 @@ void show_rxvt_contents (int starty, unsigned char y1, unsigned char y2);
 gboolean look_for_rxvt_extensions (void);
 
 /*** inline functions ****************************************************************************/
-#endif /* MC_WIN_H */
+#endif // MC_WIN_H

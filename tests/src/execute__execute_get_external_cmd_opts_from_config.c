@@ -146,24 +146,24 @@ static const struct check_subtitute_ds
 START_PARAMETRIZED_TEST (check_if_filename_and_lineno_will_be_subtituted, check_subtitute_ds)
 /* *INDENT-ON* */
 {
-    /* given */
+    // given
     char *actual_result;
     vfs_path_t *filename_vpath;
 
     g_ptr_array_add (mc_config_get_string__return_value, g_strdup (data->config_opts_string));
     filename_vpath = vfs_path_from_str (data->file_name);
 
-    /* when */
+    // when
     actual_result =
         execute_get_external_cmd_opts_from_config (data->app_name, filename_vpath,
                                                    data->start_line);
 
-    /* then */
+    // then
 
-    /* check returned value */
+    // check returned value
     mctest_assert_str_eq (actual_result, data->expected_result);
 
-    /* check calls to mc_config_get_string() function */
+    // check calls to mc_config_get_string() function
     mctest_assert_str_eq (g_ptr_array_index (mc_config_get_string__group__captured, 0),
                           CONFIG_EXT_EDITOR_VIEWER_SECTION);
     mctest_assert_str_eq (g_ptr_array_index (mc_config_get_string__param__captured, 0),
@@ -189,10 +189,10 @@ main (void)
 
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     mctest_add_parameterized_test (tc_core, check_if_filename_and_lineno_will_be_subtituted,
                                    check_subtitute_ds);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

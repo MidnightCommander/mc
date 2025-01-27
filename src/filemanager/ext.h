@@ -30,4 +30,4 @@ regex_command (const vfs_path_t *filename_vpath, const char *action)
     return regex_command_for (NULL, filename_vpath, action, NULL);
 }
 
-#endif /* MC__EXT_H */
+#endif // MC__EXT_H

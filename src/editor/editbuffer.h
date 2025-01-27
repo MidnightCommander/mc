@@ -13,18 +13,18 @@
 
 typedef struct edit_buffer_struct
 {
-    off_t curs1;                /* position of the cursor from the beginning of the file. */
-    off_t curs2;                /* position from the end of the file */
-    GPtrArray *b1;              /* all data up to curs1 */
-    GPtrArray *b2;              /* all data from end of file down to curs2 */
-    off_t size;                 /* file size */
-    long lines;                 /* total lines in the file */
-    long curs_line;             /* line number of the cursor. */
+    off_t curs1;                // position of the cursor from the beginning of the file.
+    off_t curs2;                // position from the end of the file
+    GPtrArray *b1;              // all data up to curs1
+    GPtrArray *b2;              // all data from end of file down to curs2
+    off_t size;                 // file size
+    long lines;                 // total lines in the file
+    long curs_line;             // line number of the cursor.
 } edit_buffer_t;
 
 typedef struct edit_buffer_read_file_status_msg_struct
 {
-    simple_status_msg_t status_msg;     /* base class */
+    simple_status_msg_t status_msg;     // base class
 
     gboolean first;
     edit_buffer_t *buf;
@@ -114,4 +114,4 @@ edit_buffer_get_current_eol (const edit_buffer_t *buf)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#endif /* MC__EDIT_BUFFER_H */
+#endif // MC__EDIT_BUFFER_H

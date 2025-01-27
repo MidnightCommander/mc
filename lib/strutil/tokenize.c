@@ -36,7 +36,7 @@
 #include <string.h>
 
 #include "lib/global.h"
-#include "lib/util.h"           /* whiteness() */
+#include "lib/util.h"           // whiteness()
 
 #include "lib/strutil.h"
 
@@ -72,7 +72,7 @@ str_tokenize_word (const char *string, int start)
     char delimopen = '\0';
     int nestdelim = 0;
 
-    if (member (string[i], "()\n"))     /* XXX - included \n, but why? been here forever */
+    if (member (string[i], "()\n"))     // XXX - included \n, but why? been here forever
         return (i + 1);
 
     if (g_ascii_isdigit (string[i]))
@@ -86,10 +86,10 @@ str_tokenize_word (const char *string, int start)
             return j;
 
         if (string[j] == '<' || string[j] == '>')
-            i = j;              /* digit sequence is a file descriptor */
+            i = j;              // digit sequence is a file descriptor
         else
         {
-            i = j;              /* digit sequence is part of a word */
+            i = j;              // digit sequence is part of a word
             goto get_word;
         }
     }
@@ -109,10 +109,10 @@ str_tokenize_word (const char *string, int start)
         {
             int j;
 
-            /* file descriptor */
+            // file descriptor
             for (j = i + 2; string[j] != '\0' && g_ascii_isdigit (string[j]); j++)
                 ;
-            if (string[j] == '-')       /* <&[digits]-, >&[digits]- */
+            if (string[j] == '-')       // <&[digits]-, >&[digits]-
                 j++;
             return j;
         }
@@ -120,10 +120,10 @@ str_tokenize_word (const char *string, int start)
         if ((peek == '>' && string[i] == '&') || (peek == '|' && string[i] == '>'))
             return (i + 2);
 
-        /* XXX - process substitution -- separated out for later -- bash-4.2 */
+        // XXX - process substitution -- separated out for later -- bash-4.2
         if (peek == '(' && (string[i] == '>' || string[i] == '<'))
         {
-            /* ) */
+            // )
             i += 2;
             delimopen = '(';
             delimiter = ')';
@@ -135,7 +135,7 @@ str_tokenize_word (const char *string, int start)
     }
 
   get_word:
-    /* Get word from string + i; */
+    // Get word from string + i;
 
     if (delimiter == '\0' && member (string[i], QUOTE_CHARACTERS))
     {
@@ -179,11 +179,11 @@ str_tokenize_word (const char *string, int start)
             continue;
         }
 
-        /* Command and process substitution; shell extended globbing patterns */
+        // Command and process substitution; shell extended globbing patterns
         if (nestdelim == 0 && delimiter == '\0' && member (string[i], "<>$!@?+*")
             && string[i + 1] == '(')
         {
-            /* ) */
+            // )
             i += 2;
             delimopen = '(';
             delimiter = ')';
@@ -221,7 +221,7 @@ str_tokenize (const char *string)
     {
         int start;
 
-        /* Skip leading whitespace */
+        // Skip leading whitespace
         for (; string[i] != '\0' && whiteness (string[i]); i++)
             ;
 

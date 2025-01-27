@@ -31,11 +31,11 @@
 
 #include "lib/fileloc.h"
 #include "lib/keybind.h"
-#include "lib/mcconfig.h"       /* mc_config_t */
+#include "lib/mcconfig.h"       // mc_config_t
 #include "lib/util.h"
-#include "lib/widget.h"         /* dialog_map, input_map, listbox_map, menu_map, radio_map */
+#include "lib/widget.h"         // dialog_map, input_map, listbox_map, menu_map, radio_map
 
-#include "args.h"               /* mc_args__keymap_file */
+#include "args.h"               // mc_args__keymap_file
 
 #include "keymap.h"
 
@@ -115,39 +115,39 @@ static const global_keymap_ini_t default_filemanager_keymap[] = {
     {"History", "alt-h"},
     {"EditorViewerHistory", "alt-shift-e"},
     {"DirSize", "ctrl-space"},
-    /* Copy useful information to the command line */
+    // Copy useful information to the command line
     {"PutCurrentPath", "alt-a"},
     {"PutOtherPath", "alt-shift-a"},
     {"PutCurrentSelected", "alt-enter; ctrl-enter"},
     {"PutCurrentFullSelected", "ctrl-shift-enter"},
     {"CdQuick", "alt-c"},
-    /* To access the directory hotlist */
+    // To access the directory hotlist
     {"HotList", "ctrl-backslash"},
-    /* Suspend */
+    // Suspend
     {"Suspend", "ctrl-z"},
-    /* The filtered view command */
+    // The filtered view command
     {"ViewFiltered", "alt-exclamation"},
-    /* Find file */
+    // Find file
     {"Find", "alt-question"},
-    /* Panel refresh */
+    // Panel refresh
     {"Reread", "ctrl-r"},
-    /* Switch listing between long, user defined and full formats */
-    /* Swap panels */
+    // Switch listing between long, user defined and full formats
+    // Swap panels
     {"Swap", "ctrl-u"},
-    /* Resize panels */
+    // Resize panels
     {"SplitEqual", "alt-equal"},
     {"SplitMore", "alt-shift-right"},
     {"SplitLess", "alt-shift-left"},
-    /* View output */
+    // View output
     {"Shell", "ctrl-o"},
     {"ShowHidden", "alt-dot"},
     {"SplitVertHoriz", "alt-comma"},
     {"ExtendedKeyMap", "ctrl-x"},
-    /* Select/unselect group */
+    // Select/unselect group
     {"Select", "kpplus"},
     {"Unselect", "kpminus"},
     {"SelectInvert", "kpasterisk"},
-    /* List of screens */
+    // List of screens
     {"ScreenList", "alt-prime"},
     {NULL, NULL}
 };
@@ -156,10 +156,10 @@ static const global_keymap_ini_t default_filemanager_x_keymap[] = {
     {"CompareDirs", "d"},
 #ifdef USE_DIFF_VIEW
     {"CompareFiles", "ctrl-d"},
-#endif /* USE_DIFF_VIEW */
+#endif // USE_DIFF_VIEW
 #ifdef ENABLE_VFS
     {"VfsList", "a"},
-#endif /* ENABLE_VFS */
+#endif // ENABLE_VFS
     {"PutCurrentPath", "p"},
     {"PutOtherPath", "ctrl-p"},
     {"PutCurrentTagged", "t"},
@@ -168,7 +168,7 @@ static const global_keymap_ini_t default_filemanager_x_keymap[] = {
     {"ChangeOwn", "o"},
 #ifdef ENABLE_EXT2FS_ATTR
     {"ChangeAttributes", "e"},
-#endif /* ENABLE_EXT2FS_ATTR */
+#endif // ENABLE_EXT2FS_ATTR
     {"PutCurrentLink", "r"},
     {"PutOtherLink", "ctrl-r"},
     {"Link", "l"},
@@ -180,7 +180,7 @@ static const global_keymap_ini_t default_filemanager_x_keymap[] = {
     {"HotListAdd", "h"},
 #ifdef ENABLE_BACKGROUND
     {"Jobs", "j"},
-#endif /* ENABLE_BACKGROUND */
+#endif // ENABLE_BACKGROUND
     {"ExternalPanelize", "!"},
     {NULL, NULL}
 };
@@ -261,35 +261,35 @@ static const global_keymap_ini_t default_menu_keymap[] = {
 
 /* input line */
 static const global_keymap_ini_t default_input_keymap[] = {
-    /* Motion */
+    // Motion
     {"Home", "ctrl-a; alt-lt; home; a1"},
     {"End", "ctrl-e; alt-gt; end; c1"},
     {"Left", "left; alt-left; ctrl-b"},
     {"Right", "right; alt-right; ctrl-f"},
     {"WordLeft", "ctrl-left; alt-b"},
     {"WordRight", "ctrl-right; alt-f"},
-    /* Mark */
+    // Mark
     {"MarkLeft", "shift-left"},
     {"MarkRight", "shift-right"},
     {"MarkToWordBegin", "ctrl-shift-left"},
     {"MarkToWordEnd", "ctrl-shift-right"},
     {"MarkToHome", "shift-home"},
     {"MarkToEnd", "shift-end"},
-    /* Editing */
+    // Editing
     {"Backspace", "backspace; ctrl-h"},
     {"Delete", "delete; ctrl-d"},
     {"DeleteToWordEnd", "alt-d"},
     {"DeleteToWordBegin", "alt-backspace"},
-    /* Region manipulation */
+    // Region manipulation
     {"Remove", "ctrl-w"},
     {"Store", "alt-w"},
     {"Yank", "ctrl-y"},
     {"DeleteToEnd", "ctrl-k"},
-    /* History */
+    // History
     {"History", "alt-h"},
     {"HistoryPrev", "alt-p; ctrl-down"},
     {"HistoryNext", "alt-n; ctrl-up"},
-    /* Completion */
+    // Completion
     {"Complete", "alt-tab"},
     {NULL, NULL}
 };
@@ -380,13 +380,13 @@ static const global_keymap_ini_t default_chattr_keymap[] = {
     {"MarkAndDown", "insert"},
     {NULL, NULL}
 };
-#endif /* ENABLE_EXT2FS_ATTR */
+#endif // ENABLE_EXT2FS_ATTR
 
 #ifdef USE_INTERNAL_EDIT
 static const global_keymap_ini_t default_editor_keymap[] = {
     {"Enter", "enter"},
-    {"Return", "shift-enter; ctrl-enter; ctrl-shift-enter"},    /* useful for pasting multiline text */
-    {"Tab", "tab; shift-tab; ctrl-tab; ctrl-shift-tab"},        /* ditto */
+    {"Return", "shift-enter; ctrl-enter; ctrl-shift-enter"},    // useful for pasting multiline text
+    {"Tab", "tab; shift-tab; ctrl-tab; ctrl-shift-tab"},        // ditto
     {"BackSpace", "backspace; ctrl-h"},
     {"Delete", "delete; ctrl-d"},
     {"Left", "left"},
@@ -491,7 +491,7 @@ static const global_keymap_ini_t default_editor_keymap[] = {
 static const global_keymap_ini_t default_editor_x_keymap[] = {
     {NULL, NULL}
 };
-#endif /* USE_INTERNAL_EDIT */
+#endif // USE_INTERNAL_EDIT
 
 /* viewer */
 static const global_keymap_ini_t default_viewer_keymap[] = {
@@ -729,7 +729,7 @@ load_setup_get_full_config_name (const char *subdir, const char *config_file_nam
     if (config_file_name == NULL)
         return NULL;
 
-    /* check for .keymap suffix */
+    // check for .keymap suffix
     if (g_str_has_suffix (config_file_name, ".keymap"))
         file_name = g_strdup (config_file_name);
     else
@@ -809,25 +809,25 @@ load_setup_get_keymap_profile_config (gboolean load_from_file)
     char *share_keymap, *sysconfig_keymap;
     char *fname, *fname2;
 
-    /* 0) Create default keymap */
+    // 0) Create default keymap
     keymap_config = create_default_keymap ();
     if (!load_from_file)
         return keymap_config;
 
-    /* load and merge global keymaps */
+    // load and merge global keymaps
 
-    /* 1) /usr/share/mc (mc_global.share_data_dir) */
+    // 1) /usr/share/mc (mc_global.share_data_dir)
     share_keymap = g_build_filename (mc_global.share_data_dir, GLOBAL_KEYMAP_FILE, (char *) NULL);
     load_setup_init_config_from_file (&keymap_config, share_keymap, TRUE);
 
-    /* 2) /etc/mc (mc_global.sysconfig_dir) */
+    // 2) /etc/mc (mc_global.sysconfig_dir)
     sysconfig_keymap =
         g_build_filename (mc_global.sysconfig_dir, GLOBAL_KEYMAP_FILE, (char *) NULL);
     load_setup_init_config_from_file (&keymap_config, sysconfig_keymap, TRUE);
 
-    /* then load and merge one of user-defined keymap */
+    // then load and merge one of user-defined keymap
 
-    /* 3) --keymap=<keymap> */
+    // 3) --keymap=<keymap>
     fname = load_setup_get_full_config_name (NULL, mc_args__keymap_file);
     if (fname != NULL && strcmp (fname, sysconfig_keymap) != 0 && strcmp (fname, share_keymap) != 0)
     {
@@ -836,7 +836,7 @@ load_setup_get_keymap_profile_config (gboolean load_from_file)
     }
     g_free (fname);
 
-    /* 4) getenv("MC_KEYMAP") */
+    // 4) getenv("MC_KEYMAP")
     fname = load_setup_get_full_config_name (NULL, g_getenv ("MC_KEYMAP"));
     if (fname != NULL && strcmp (fname, sysconfig_keymap) != 0 && strcmp (fname, share_keymap) != 0)
     {
@@ -846,7 +846,7 @@ load_setup_get_keymap_profile_config (gboolean load_from_file)
 
     MC_PTR_FREE (fname);
 
-    /* 5) main config; [Midnight Commander] -> keymap */
+    // 5) main config; [Midnight Commander] -> keymap
     fname2 = mc_config_get_string (mc_global.main_config, CONFIG_APP_SECTION, "keymap", NULL);
     if (fname2 != NULL && *fname2 != '\0')
         fname = load_setup_get_full_config_name (NULL, fname2);
@@ -858,7 +858,7 @@ load_setup_get_keymap_profile_config (gboolean load_from_file)
     }
     g_free (fname);
 
-    /* 6) ${XDG_CONFIG_HOME}/mc/mc.keymap */
+    // 6) ${XDG_CONFIG_HOME}/mc/mc.keymap
     fname = mc_config_get_full_path (GLOBAL_KEYMAP_FILE);
     load_setup_init_config_from_file (&keymap_config, fname, TRUE);
 

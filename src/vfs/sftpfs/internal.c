@@ -63,8 +63,8 @@ static void
 sftpfs_blksize (struct stat *s)
 {
 #ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
-    s->st_blksize = LIBSSH2_CHANNEL_WINDOW_DEFAULT;     /* FIXME */
-#endif /* HAVE_STRUCT_STAT_ST_BLKSIZE */
+    s->st_blksize = LIBSSH2_CHANNEL_WINDOW_DEFAULT;     // FIXME
+#endif // HAVE_STRUCT_STAT_ST_BLKSIZE
     vfs_adjust_stat (s);
 }
 
@@ -91,7 +91,7 @@ sftpfs_internal_waitsocket (sftpfs_super_t *super, GError **mcerror)
     FD_ZERO (&fd);
     FD_SET (super->socket_handle, &fd);
 
-    /* now make sure we wait in the correct direction */
+    // now make sure we wait in the correct direction
     dir = libssh2_session_block_directions (super->session);
 
     if ((dir & LIBSSH2_SESSION_BLOCK_INBOUND) != 0)
@@ -464,7 +464,7 @@ sftpfs_utime (const vfs_path_t *vpath, time_t atime, time_t mtime, GError **mcer
 
         if (sftpfs_is_sftp_error (super->sftp_session, res, LIBSSH2_FX_FAILURE))
         {
-            res = 0;            /* need something like ftpfs_ignore_chattr_errors */
+            res = 0;            // need something like ftpfs_ignore_chattr_errors
             break;
         }
 
@@ -517,7 +517,7 @@ sftpfs_chmod (const vfs_path_t *vpath, mode_t mode, GError **mcerror)
 
         if (sftpfs_is_sftp_error (super->sftp_session, res, LIBSSH2_FX_FAILURE))
         {
-            res = 0;            /* need something like ftpfs_ignore_chattr_errors */
+            res = 0;            // need something like ftpfs_ignore_chattr_errors
             break;
         }
 

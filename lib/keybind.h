@@ -23,7 +23,7 @@
 #define KEYMAP_SECTION_VIEWER_HEX "viewer:hex"
 #define KEYMAP_SECTION_DIFFVIEWER "diffviewer"
 
-#define KEYMAP_SHORTCUT_LENGTH 32       /* FIXME: is 32 bytes enough for shortcut? */
+#define KEYMAP_SHORTCUT_LENGTH 32       // FIXME: is 32 bytes enough for shortcut?
 
 #define CK_PipeBlock(i)  (10000+(i))
 #define CK_Macro(i)      (20000+(i))
@@ -33,11 +33,11 @@
 
 enum
 {
-    /* special commands */
+    // special commands
     CK_InsertChar = -1L,
     CK_IgnoreKey = 0L,
 
-    /* common */
+    // common
     CK_Enter = 1L,
     CK_ChangePanel,
     CK_Up,
@@ -127,10 +127,10 @@ enum
     CK_Bookmark,
     CK_Quit,
     CK_QuitQuiet,
-    /* C-x or similar */
+    // C-x or similar
     CK_ExtendedKeyMap,
 
-    /* main commands */
+    // main commands
     CK_EditForceInternal = 100L,
     CK_View,
     CK_ViewRaw,
@@ -188,7 +188,7 @@ enum
     CK_SelectExt,
     CK_SelectInvert,
 
-    /* panels */
+    // panels
     CK_PanelOtherCd = 200L,
     CK_PanelOtherCdLink,
     CK_Panelize,
@@ -210,14 +210,14 @@ enum
     CK_ScrollRight,
     CK_CycleListingFormat,
 
-    /* dialog */
+    // dialog
     CK_Ok = 300L,
     CK_Cancel,
 
-    /* input */
+    // input
     CK_Yank = 350L,
 
-    /* help */
+    // help
     CK_Index = 400L,
     CK_Back,
     CK_LinkNext,
@@ -225,14 +225,14 @@ enum
     CK_NodeNext,
     CK_NodePrev,
 
-    /* tree */
+    // tree
     CK_Forget = 450L,
 
-    /* chattr dialog */
+    // chattr dialog
     CK_MarkAndDown = 480L,
 
-    /* editor */
-    /* cursor movements */
+    // editor
+    // cursor movements
     CK_Tab = 500L,
     CK_Undo,
     CK_ScrollUp,
@@ -240,21 +240,21 @@ enum
     CK_Return,
     CK_ParagraphUp,
     CK_ParagraphDown,
-    /* file commands */
+    // file commands
     CK_EditFile,
     CK_InsertFile,
     CK_EditSyntaxFile,
     CK_Close,
-    /* block commands */
+    // block commands
     CK_BlockSave,
     CK_BlockShiftLeft,
     CK_BlockShiftRight,
     CK_DeleteLine,
-    /* bookmarks */
+    // bookmarks
     CK_BookmarkFlush,
     CK_BookmarkNext,
     CK_BookmarkPrev,
-    /* mark commands */
+    // mark commands
     CK_MarkColumn,
     CK_MarkWord,
     CK_MarkLine,
@@ -270,7 +270,7 @@ enum
     CK_MarkScrollDown,
     CK_MarkParagraphUp,
     CK_MarkParagraphDown,
-    /* column mark commands */
+    // column mark commands
     CK_MarkColumnPageUp,
     CK_MarkColumnPageDown,
     CK_MarkColumnLeft,
@@ -281,7 +281,7 @@ enum
     CK_MarkColumnScrollDown,
     CK_MarkColumnParagraphUp,
     CK_MarkColumnParagraphDown,
-    /* macros */
+    // macros
     CK_MacroStartRecord,
     CK_MacroStopRecord,
     CK_MacroStartStopRecord,
@@ -289,14 +289,14 @@ enum
     CK_RepeatStartRecord,
     CK_RepeatStopRecord,
     CK_RepeatStartStopRecord,
-    /* window commands */
+    // window commands
     CK_WindowMove,
     CK_WindowResize,
     CK_WindowFullscreen,
     CK_WindowList,
     CK_WindowNext,
     CK_WindowPrev,
-    /* misc commands */
+    // misc commands
     CK_SpellCheck,
     CK_SpellCheckCurrentWord,
     CK_SpellCheckSelectLang,
@@ -314,7 +314,7 @@ enum
     CK_Date,
     CK_EditMail,
 
-    /* viewer */
+    // viewer
     CK_WrapMode = 600L,
     CK_MagicMode,
     CK_NroffMode,
@@ -328,7 +328,7 @@ enum
     CK_SearchBackwardContinue,
     CK_SearchOppositeContinue,
 
-    /* diff viewer */
+    // diff viewer
     CK_ShowSymbols = 700L,
     CK_SplitFull,
     CK_Tab2,
@@ -364,4 +364,4 @@ long keybind_lookup_keymap_command (const global_keymap_t * keymap, long key);
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__KEYBIND_H */
+#endif // MC__KEYBIND_H

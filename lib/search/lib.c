@@ -79,7 +79,7 @@ mc_search__change_case_str (const char *charset, const GString *str, case_conv_f
 
     converted_str = mc_search__recode_str (str->str, str->len, charset, cp_display);
 
-    dst_len = converted_str->len + 1;   /* +1 is required for str_toupper/str_tolower */
+    dst_len = converted_str->len + 1;   // +1 is required for str_toupper/str_tolower
     dst_str = g_malloc (dst_len);
 
     for (src_ptr = converted_str->str, dst_ptr = dst_str;
@@ -95,7 +95,7 @@ mc_search__change_case_str (const char *charset, const GString *str, case_conv_f
 #else
     (void) charset;
 
-    dst_len = str->len + 1;     /* +1 is required for str_toupper/str_tolower */
+    dst_len = str->len + 1;     // +1 is required for str_toupper/str_tolower
     dst_str = g_malloc (dst_len);
 
     for (src_ptr = str->str, dst_ptr = dst_str;
@@ -223,7 +223,7 @@ mc_search_get_types_strings_array (size_t *num)
     for (lc_index = 0, type_str = types_str; type_str->str != NULL; type_str++, lc_index++)
         ret[lc_index] = g_strdup (type_str->str);
 
-    /* don't count last NULL item */
+    // don't count last NULL item
     if (num != NULL)
         *num = (size_t) lc_index;
 

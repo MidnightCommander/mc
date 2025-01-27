@@ -11,7 +11,7 @@
 #ifndef MC__TTY_H
 #define MC__TTY_H
 
-#include "lib/global.h"         /* include <glib.h> */
+#include "lib/global.h"         // include <glib.h>
 
 #ifdef HAVE_SLANG
 #include "tty-slang.h"
@@ -29,7 +29,7 @@
 
 typedef enum
 {
-    /* single lines */
+    // single lines
     MC_TTY_FRM_VERT,
     MC_TTY_FRM_HORIZ,
     MC_TTY_FRM_LEFTTOP,
@@ -42,7 +42,7 @@ typedef enum
     MC_TTY_FRM_RIGHTMIDDLE,
     MC_TTY_FRM_CROSS,
 
-    /* double lines */
+    // double lines
     MC_TTY_FRM_DVERT,
     MC_TTY_FRM_DHORIZ,
     MC_TTY_FRM_DLEFTTOP,
@@ -143,4 +143,4 @@ extern void tty_exit_ca_mode (void);
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__TTY_H */
+#endif // MC__TTY_H

@@ -62,7 +62,7 @@
 
 #include <errno.h>
 #include <ctype.h>
-#include <limits.h>             /* INT_MAX */
+#include <limits.h>             // INT_MAX
 #include <stdio.h>
 #include <string.h>
 #include <sys/types.h>
@@ -79,7 +79,7 @@
 /* NetBSD 1.5.2 needs these, for the declaration of struct statfs. */
 #include <sys/param.h>
 #include <sys/mount.h>
-#elif defined HAVE_OS_H         /* Haiku, also (obsolete) BeOS */
+#elif defined HAVE_OS_H         // Haiku, also (obsolete) BeOS
 #include <fs_info.h>
 #endif
 
@@ -101,7 +101,7 @@
 #else
 #define STATFS statfs
 #define STRUCT_STATVFS struct statfs
-#ifdef HAVE_OS_H                /* Haiku, also (obsolete) BeOS */
+#ifdef HAVE_OS_H                // Haiku, also (obsolete) BeOS
 /* BeOS has a statvfs function, but it does not return sensible values
    for f_files, f_ffree and f_favail, and lacks f_type, f_basetype and
    f_fstypename.  Use 'struct fs_info' instead.  */
@@ -120,7 +120,7 @@ statfs (char const *filename, struct fs_info *buf)
                  : device == B_NO_MEMORY ? ENOMEM : device == B_FILE_ERROR ? EIO : 0);
         return -1;
     }
-    /* If successful, buf->dev will be == device.  */
+    // If successful, buf->dev will be == device.
     return fs_stat_dev (device, buf);
 }
 
@@ -135,7 +135,7 @@ statfs (char const *filename, struct fs_info *buf)
 #else
 #if defined HAVE_STRUCT_STATVFS_F_FSTYPENAME || defined HAVE_STRUCT_STATFS_F_FSTYPENAME
 #define STATXFS_FILE_SYSTEM_TYPE_MEMBER_NAME f_fstypename
-#elif defined HAVE_OS_H         /* Haiku, also (obsolete) BeOS */
+#elif defined HAVE_OS_H         // Haiku, also (obsolete) BeOS
 #define STATXFS_FILE_SYSTEM_TYPE_MEMBER_NAME fsh_name
 #endif
 #endif
@@ -144,16 +144,16 @@ statfs (char const *filename, struct fs_info *buf)
 
 #include "lib/global.h"
 
-#include "lib/tty/key.h"        /* tty_get_event */
+#include "lib/tty/key.h"        // tty_get_event
 #include "lib/mcconfig.h"
 #include "lib/search.h"
 #include "lib/vfs/vfs.h"
 #include "lib/strutil.h"
-#include "lib/timefmt.h"        /* file_date() */
+#include "lib/timefmt.h"        // file_date()
 #include "lib/util.h"
 #include "lib/widget.h"
 
-#include "src/setup.h"          /* verbose, safe_overwrite */
+#include "src/setup.h"          // verbose, safe_overwrite
 
 #include "filemanager.h"
 
@@ -203,16 +203,16 @@ typedef enum
  */
 typedef struct
 {
-    /* ETA and bps */
+    // ETA and bps
     gboolean showing_eta;
     gboolean showing_bps;
 
-    /* Dialog and widgets for the operation progress window */
+    // Dialog and widgets for the operation progress window
     WDialog *op_dlg;
-    /* Source file: label and name */
+    // Source file: label and name
     WLabel *src_file_label;
     WLabel *src_file;
-    /* Target file: label and name */
+    // Target file: label and name
     WLabel *tgt_file_label;
     WLabel *tgt_file;
     WGauge *progress_file_gauge;
@@ -223,7 +223,7 @@ typedef struct
     WLabel *total_files_processed_label;
     WLabel *time_label;
 
-    /* Query replace dialog */
+    // Query replace dialog
     WDialog *replace_dlg;
     const char *src_filename;
     const char *tgt_filename;
@@ -245,12 +245,12 @@ static struct
     button_flags_t flags;
     int len;
 } progress_buttons[] = {
-    /* *INDENT-OFF* */
+    // *INDENT-OFF*
     { NULL, FILE_SKIP, N_("&Skip"), NORMAL_BUTTON, -1 },
     { NULL, FILE_SUSPEND, N_("S&uspend"), NORMAL_BUTTON, -1 },
     { NULL, FILE_SUSPEND, N_("Con&tinue"), NORMAL_BUTTON, -1 },
     { NULL, FILE_ABORT, N_("&Abort"), NORMAL_BUTTON, -1 }
-    /* *INDENT-ON* */
+    // *INDENT-ON*
 };
 
 /* --------------------------------------------------------------------------------------------- */
@@ -350,7 +350,7 @@ file_eta_prepare_for_show (char *buffer, double eta_secs, gboolean always_show)
 
     if (eta_secs >= INT_MAX)
     {
-        /* Over 68 years */
+        // Over 68 years
         g_strlcpy (_fmt_buff, "--", sizeof (_fmt_buff));
     }
     else
@@ -395,10 +395,10 @@ file_ui_op_dlg_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, 
     switch (msg)
     {
     case MSG_ACTION:
-        /* Do not close the dialog because the query dialog will be shown */
+        // Do not close the dialog because the query dialog will be shown
         if (parm == CK_Cancel)
         {
-            DIALOG (w)->ret_value = FILE_ABORT; /* for file_progress_check_buttons() */
+            DIALOG (w)->ret_value = FILE_ABORT; // for file_progress_check_buttons()
             return MSG_HANDLED;
         }
         return MSG_NOT_HANDLED;
@@ -451,7 +451,7 @@ overwrite_query_dialog (file_op_context_t *ctx, enum OperationMode mode)
 #define ADD_BUTTON(i) \
     group_add_widget_autopos (g, W(i), dlg_widgets[i].pos_flags, g->current->data)
 
-    /* dialog sizes */
+    // dialog sizes
     const int dlg_height = 17;
     int dlg_width = 60;
 
@@ -462,55 +462,55 @@ overwrite_query_dialog (file_op_context_t *ctx, enum OperationMode mode)
         int y;
         int x;
         widget_pos_flags_t pos_flags;
-        int value;              /* 0 for labels and checkbox */
+        int value;              // 0 for labels and checkbox
     } dlg_widgets[] = {
-        /* *INDENT-OFF* */
-        /*  0 - label */
+        // *INDENT-OFF*
+        //  0 - label
         { NULL, N_("New     :"), 2, 3, WPOS_KEEP_DEFAULT, 0 },
-        /*  1 - label - name */
+        //  1 - label - name
         { NULL, NULL, 2, 14, WPOS_KEEP_DEFAULT, 0 },
-        /*  2 - label - size */
+        //  2 - label - size
         { NULL, NULL, 3, 3, WPOS_KEEP_DEFAULT, 0 },
-        /*  3 - label - date & time */
+        //  3 - label - date & time
         { NULL, NULL, 3, 43, WPOS_KEEP_TOP | WPOS_KEEP_RIGHT, 0 },
-        /*  4 - label */
+        //  4 - label
         { NULL, N_("Existing:"), 4, 3, WPOS_KEEP_DEFAULT, 0 },
-        /*  5 - label - name */
+        //  5 - label - name
         { NULL, NULL, 4, 14, WPOS_KEEP_DEFAULT, 0 },
-        /*  6 - label - size */
+        //  6 - label - size
         { NULL, NULL, 5, 3, WPOS_KEEP_DEFAULT, 0 },
-        /*  7 - label - date & time */
+        //  7 - label - date & time
         { NULL, NULL, 5, 43, WPOS_KEEP_TOP | WPOS_KEEP_RIGHT, 0 },
-        /* --------------------------------------------------- */
-        /*  8 - label */
+        // ---------------------------------------------------
+        //  8 - label
         { NULL, N_("Overwrite this file?"), 7, 21, WPOS_KEEP_TOP | WPOS_CENTER_HORZ, 0 },
-        /*  9 - button */
+        //  9 - button
         { NULL, N_("&Yes"), 8, 14, WPOS_KEEP_DEFAULT, REPLACE_YES },
-        /* 10 - button */
+        // 10 - button
         { NULL, N_("&No"), 8, 22, WPOS_KEEP_DEFAULT, REPLACE_NO },
-        /* 11 - button */
+        // 11 - button
         { NULL, N_("A&ppend"), 8, 29, WPOS_KEEP_DEFAULT, REPLACE_APPEND },
-        /* 12 - button */
+        // 12 - button
         { NULL, N_("&Reget"), 8, 40, WPOS_KEEP_DEFAULT, REPLACE_REGET },
-        /* --------------------------------------------------- */
-        /* 13 - label */
+        // ---------------------------------------------------
+        // 13 - label
         { NULL, N_("Overwrite all files?"), 10, 21, WPOS_KEEP_TOP | WPOS_CENTER_HORZ, 0 },
-        /* 14 - checkbox */
+        // 14 - checkbox
         { NULL, N_("Don't overwrite with &zero length file"), 11, 3, WPOS_KEEP_DEFAULT, 0 },
-        /* 15 - button */
+        // 15 - button
         { NULL, N_("A&ll"), 12, 12, WPOS_KEEP_DEFAULT, REPLACE_ALL },
-        /* 16 - button */
+        // 16 - button
         { NULL, N_("&Older"), 12, 12, WPOS_KEEP_DEFAULT, REPLACE_OLDER },
-        /* 17 - button */
+        // 17 - button
         { NULL, N_("Non&e"), 12, 12, WPOS_KEEP_DEFAULT, REPLACE_NONE },
-        /* 18 - button */
+        // 18 - button
         { NULL, N_("S&maller"), 12, 25, WPOS_KEEP_DEFAULT, REPLACE_SMALLER },
-        /* 19 - button */
+        // 19 - button
         { NULL, N_("&Size differs"), 12, 40, WPOS_KEEP_DEFAULT, REPLACE_SIZE },
-        /* --------------------------------------------------- */
-        /* 20 - button */
+        // ---------------------------------------------------
+        // 20 - button
         { NULL, N_("&Abort"), 14, 27, WPOS_KEEP_TOP | WPOS_CENTER_HORZ, REPLACE_ABORT }
-        /* *INDENT-ON* */
+        // *INDENT-ON*
     };
 
     const int gap = 1;
@@ -546,40 +546,40 @@ overwrite_query_dialog (file_op_context_t *ctx, enum OperationMode mode)
             if (dlg_widgets[i].text != NULL)
                 dlg_widgets[i].text = _(dlg_widgets[i].text);
     }
-#endif /* ENABLE_NLS */
+#endif // ENABLE_NLS
 
-    /* create widgets to get their real widths */
-    /* new file */
+    // create widgets to get their real widths
+    // new file
     NEW_LABEL (0, dlg_widgets[0].text);
-    /* new file name */
+    // new file name
     p = vfs_path_from_str (ui->src_filename);
     s1 = vfs_path_to_str_flags (p, 0, VPF_STRIP_HOME | VPF_STRIP_PASSWORD);
     NEW_LABEL (1, s1);
     vfs_path_free (p, TRUE);
     g_free (s1);
-    /* new file size */
+    // new file size
     size_trunc_len (s2, sizeof (s2), ui->src_stat->st_size, 0, panels_options.kilobyte_si);
     NEW_LABEL (2, s2);
-    /* new file modification date & time */
+    // new file modification date & time
     cs1 = file_date (ui->src_stat->st_mtime);
     NEW_LABEL (3, cs1);
 
-    /* existing file */
+    // existing file
     NEW_LABEL (4, dlg_widgets[4].text);
-    /* existing file name */
+    // existing file name
     p = vfs_path_from_str (ui->tgt_filename);
     s1 = vfs_path_to_str_flags (p, 0, VPF_STRIP_HOME | VPF_STRIP_PASSWORD);
     NEW_LABEL (5, s1);
     vfs_path_free (p, TRUE);
     g_free (s1);
-    /* existing file size */
+    // existing file size
     size_trunc_len (s2, sizeof (s2), ui->dst_stat->st_size, 0, panels_options.kilobyte_si);
     NEW_LABEL (6, s2);
-    /* existing file modification date & time */
+    // existing file modification date & time
     cs1 = file_date (ui->dst_stat->st_mtime);
     NEW_LABEL (7, cs1);
 
-    /* will "Append" and "Reget" buttons be in the dialog? */
+    // will "Append" and "Reget" buttons be in the dialog?
     do_append = !S_ISDIR (ui->dst_stat->st_mode);
     do_reget = do_append && ui->dst_stat->st_size != 0
         && ui->src_stat->st_size > ui->dst_stat->st_size;
@@ -598,10 +598,10 @@ overwrite_query_dialog (file_op_context_t *ctx, enum OperationMode mode)
     for (i = 15; i <= 20; i++)
         NEW_BUTTON (i);
 
-    /* place widgets */
-    dlg_width -= 2 * (2 + gap); /* inside frame */
+    // place widgets
+    dlg_width -= 2 * (2 + gap); // inside frame
 
-    /* perhaps longest line is buttons */
+    // perhaps longest line is buttons
     bw1 = WCOLS (9) + gap + WCOLS (10);
     if (do_append)
         bw1 += gap + WCOLS (11);
@@ -618,7 +618,7 @@ overwrite_query_dialog (file_op_context_t *ctx, enum OperationMode mode)
     dlg_width = MAX (dlg_width, WCOLS (13));
     dlg_width = MAX (dlg_width, WCOLS (14));
 
-    /* truncate file names */
+    // truncate file names
     w = WCOLS (0) + gap + WCOLS (1);
     if (w > dlg_width)
     {
@@ -637,23 +637,23 @@ overwrite_query_dialog (file_op_context_t *ctx, enum OperationMode mode)
         label_set_text (l, str_trunc (l->text, w));
     }
 
-    /* real dlalog width */
+    // real dlalog width
     dlg_width += 2 * (2 + gap);
 
     WX (1) = WX (0) + WCOLS (0) + gap;
     WX (5) = WX (4) + WCOLS (4) + gap;
 
-    /* sizes: right alignment */
+    // sizes: right alignment
     WX (2) = dlg_width / 2 - WCOLS (2);
     WX (6) = dlg_width / 2 - WCOLS (6);
 
-    w = dlg_width - (2 + gap);  /* right bound */
+    w = dlg_width - (2 + gap);  // right bound
 
-    /* date & time */
+    // date & time
     WX (3) = w - WCOLS (3);
     WX (7) = w - WCOLS (7);
 
-    /* buttons: center alignment */
+    // buttons: center alignment
     WX (9) = dlg_width / 2 - bw1 / 2;
     WX (10) = WX (9) + WCOLS (9) + gap;
     if (do_append)
@@ -665,36 +665,36 @@ overwrite_query_dialog (file_op_context_t *ctx, enum OperationMode mode)
     for (i = 16; i <= 19; i++)
         WX (i) = WX (i - 1) + WCOLS (i - 1) + gap;
 
-    /* TODO: write help (ticket #3970) */
+    // TODO: write help (ticket #3970)
     ui->replace_dlg =
         dlg_create (TRUE, 0, 0, dlg_height, dlg_width, WPOS_CENTER, FALSE, alarm_colors, NULL, NULL,
                     "[Replace]", title);
     wd = WIDGET (ui->replace_dlg);
     g = GROUP (ui->replace_dlg);
 
-    /* file info */
+    // file info
     for (i = 0; i <= 7; i++)
         ADD_LABEL (i);
     group_add_widget (g, hline_new (WY (7) - wd->rect.y + 1, -1, -1));
 
-    /* label & buttons */
-    ADD_LABEL (8);              /* Overwrite this file? */
-    yes_id = ADD_BUTTON (9);    /* Yes */
-    no_id = ADD_BUTTON (10);    /* No */
+    // label & buttons
+    ADD_LABEL (8);              // Overwrite this file?
+    yes_id = ADD_BUTTON (9);    // Yes
+    no_id = ADD_BUTTON (10);    // No
     if (do_append)
-        ADD_BUTTON (11);        /* Append */
+        ADD_BUTTON (11);        // Append
     if (do_reget)
-        ADD_BUTTON (12);        /* Reget */
+        ADD_BUTTON (12);        // Reget
     group_add_widget (g, hline_new (WY (10) - wd->rect.y + 1, -1, -1));
 
-    /* label & buttons */
-    ADD_LABEL (13);             /* Overwrite all files? */
+    // label & buttons
+    ADD_LABEL (13);             // Overwrite all files?
     group_add_widget (g, dlg_widgets[14].widget);
     for (i = 15; i <= 19; i++)
         ADD_BUTTON (i);
     group_add_widget (g, hline_new (WY (19) - wd->rect.y + 1, -1, -1));
 
-    ADD_BUTTON (20);            /* Abort */
+    ADD_BUTTON (20);            // Abort
 
     group_select_widget_by_id (g, safe_overwrite ? no_id : yes_id);
 
@@ -769,7 +769,7 @@ progress_button_callback (WButton *button, int action)
     (void) button;
     (void) action;
 
-    /* don't close dialog in any case */
+    // don't close dialog in any case
     return 0;
 }
 
@@ -838,12 +838,12 @@ file_progress_check_buttons (file_op_context_t *ctx)
     ui = ctx->ui;
 
   get_event:
-    event.x = -1;               /* Don't show the GPM cursor */
+    event.x = -1;               // Don't show the GPM cursor
     c = tty_get_event (&event, FALSE, ctx->suspended);
     if (c == EV_NONE)
         return FILE_CONT;
 
-    /* Reinitialize to avoid old values after events other than selecting a button */
+    // Reinitialize to avoid old values after events other than selecting a button
     ui->op_dlg->ret_value = FILE_CONT;
 
     dlg_process_event (ui->op_dlg, c, &event);
@@ -852,7 +852,7 @@ file_progress_check_buttons (file_op_context_t *ctx)
     case FILE_SKIP:
         if (ctx->suspended)
         {
-            /* redraw dialog in case of Skip after Suspend */
+            // redraw dialog in case of Skip after Suspend
             place_progress_buttons (ui->op_dlg, FALSE);
             widget_draw (WIDGET (ui->op_dlg));
         }
@@ -986,7 +986,7 @@ file_progress_ui_create (file_op_context_t *ctx, gboolean with_eta,
 
     if (progress_buttons[2].len == -1)
     {
-        /* create and destroy button to get it length */
+        // create and destroy button to get it length
         progress_buttons[2].w = WIDGET (button_new (y, 0, progress_buttons[2].action,
                                                     progress_buttons[2].flags,
                                                     progress_buttons[2].text,
@@ -1010,7 +1010,7 @@ file_progress_ui_create (file_op_context_t *ctx, gboolean with_eta,
         progress_buttons[0].len + MAX (progress_buttons[1].len, progress_buttons[2].len) +
         progress_buttons[3].len;
 
-    /* adjust dialog sizes  */
+    // adjust dialog sizes
     r = w->rect;
     r.lines = y + 3;
     r.cols = MAX (COLS * 2 / 3, buttons_width + 6);
@@ -1241,7 +1241,7 @@ gboolean
 file_progress_show_deleting (file_op_context_t *ctx, const vfs_path_t *vpath, size_t *count)
 {
     static gint64 timestamp = 0;
-    /* update with 25 FPS rate */
+    // update with 25 FPS rate
     static const gint64 delay = G_USEC_PER_SEC / 25;
 
     gboolean ret;
@@ -1327,7 +1327,7 @@ file_progress_real_query_replace (file_op_context_t *ctx, enum OperationMode mod
         return replace_with_zero;
 
     case REPLACE_REGET:
-        /* Careful: we fall through and set do_append */
+        // Careful: we fall through and set do_append
         ctx->do_reget = dst_stat->st_size;
         MC_FALLTHROUGH;
 
@@ -1368,13 +1368,13 @@ file_mask_dialog (file_op_context_t *ctx, gboolean only_one, const char *format,
     if (ctx == NULL)
         return NULL;
 
-    /* unselect checkbox if target filesystem doesn't support attributes */
+    // unselect checkbox if target filesystem doesn't support attributes
     preserve = copymove_persistent_attr && filegui__check_attrs_on_fs (def_text);
 
     ctx->stable_symlinks = FALSE;
     *do_bg = FALSE;
 
-    /* filter out a possible password from def_text */
+    // filter out a possible password from def_text
     vpath = vfs_path_from_str_flags (def_text, only_one ? VPF_NO_CANON : VPF_NONE);
     tmp = vfs_path_to_str_flags (vpath, 0, VPF_STRIP_PASSWORD);
     vfs_path_free (vpath, TRUE);
@@ -1421,7 +1421,7 @@ file_mask_dialog (file_op_context_t *ctx, gboolean only_one, const char *format,
         struct stat buf;
 
         quick_widget_t quick_widgets[] = {
-            /* *INDENT-OFF* */
+            // *INDENT-OFF*
             QUICK_LABELED_INPUT (fmd_buf, input_label_above, easy_patterns ? "*" : "^(.*)$",
                                  "input-def", &source_mask, NULL, FALSE, FALSE,
                                  INPUT_COMPLETE_FILENAMES),
@@ -1444,10 +1444,10 @@ file_mask_dialog (file_op_context_t *ctx, gboolean only_one, const char *format,
                 QUICK_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
 #ifdef ENABLE_BACKGROUND
                 QUICK_BUTTON (N_("&Background"), B_USER, NULL, NULL),
-#endif /* ENABLE_BACKGROUND */
+#endif // ENABLE_BACKGROUND
                 QUICK_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
             QUICK_END
-            /* *INDENT-ON* */
+            // *INDENT-ON*
         };
 
         WRect r = { -1, -1, 0, fmd_xlen };

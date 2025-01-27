@@ -30,10 +30,10 @@ typedef struct WMenuBar
 {
     Widget widget;
 
-    gboolean is_dropped;        /* If the menubar has dropped */
-    GList *menu;                /* The actual menus */
-    guint current;              /* Current menu on the top bar */
-    unsigned long previous_widget;      /* Selected widget ID before activating menu */
+    gboolean is_dropped;        // If the menubar has dropped
+    GList *menu;                // The actual menus
+    guint current;              // Current menu on the top bar
+    unsigned long previous_widget;      // Selected widget ID before activating menu
 } WMenuBar;
 
 /*** global variables defined in .c file *********************************************************/
@@ -60,4 +60,4 @@ void menubar_activate (WMenuBar * menubar, gboolean dropped, int which);
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__WIDGET_MENU_H */
+#endif // MC__WIDGET_MENU_H

@@ -42,9 +42,9 @@
 
 #include "lib/unixcompat.h"
 #include "lib/tty/tty.h"
-#include "lib/tty/color.h"      /* tty_set_normal_attrs */
+#include "lib/tty/color.h"      // tty_set_normal_attrs
 #include "lib/tty/win.h"
-#include "lib/util.h"           /* mc_build_filename() */
+#include "lib/util.h"           // mc_build_filename()
 
 #include "consaver/cons.saver.h"
 
@@ -52,7 +52,7 @@
 
 #ifdef __linux__
 int cons_saver_pid = 1;
-#endif /* __linux__ */
+#endif // __linux__
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -64,7 +64,7 @@ do \
     printf("\x1B[%d;%df", (y) + 1, (x) + 1); \
     fflush(stdout); \
 } while (0)
-#endif /* __linux__ */
+#endif // __linux__
 
 /*** file scope type declarations ****************************************************************/
 
@@ -80,7 +80,7 @@ static int pipefd2[2] = { -1, -1 };
 #elif defined(__FreeBSD__)
 static struct scrshot screen_shot;
 static struct vid_info screen_info;
-#endif /* __linux__ */
+#endif // __linux__
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
@@ -95,10 +95,10 @@ show_console_contents_linux (int starty, unsigned char begin_line, unsigned char
     int i;
     ssize_t ret;
 
-    /* Is tty console? */
+    // Is tty console?
     if (mc_global.tty.console_flag == '\0')
         return;
-    /* Paranoid: Is the cons.saver still running? */
+    // Paranoid: Is the cons.saver still running?
     if (cons_saver_pid < 1 || kill (cons_saver_pid, SIGCONT))
     {
         cons_saver_pid = 0;
@@ -106,21 +106,21 @@ show_console_contents_linux (int starty, unsigned char begin_line, unsigned char
         return;
     }
 
-    /* Send command to the console handler */
+    // Send command to the console handler
     message = CONSOLE_CONTENTS;
     ret = write (pipefd1[1], &message, 1);
-    /* Check for outdated cons.saver */
+    // Check for outdated cons.saver
     ret = read (pipefd2[0], &message, 1);
     if (message != CONSOLE_CONTENTS)
         return;
 
-    /* Send the range of lines that we want */
+    // Send the range of lines that we want
     ret = write (pipefd1[1], &begin_line, 1);
     ret = write (pipefd1[1], &end_line, 1);
-    /* Read the corresponding number of bytes */
+    // Read the corresponding number of bytes
     ret = read (pipefd2[0], &bytes, 2);
 
-    /* Read the bytes and output them */
+    // Read the bytes and output them
     for (i = 0; i < bytes; i++)
     {
         if ((i % COLS) == 0)
@@ -129,7 +129,7 @@ show_console_contents_linux (int starty, unsigned char begin_line, unsigned char
         tty_print_char (message);
     }
 
-    /* Read the value of the mc_global.tty.console_flag */
+    // Read the value of the mc_global.tty.console_flag
     ret = read (pipefd2[0], &message, 1);
     (void) ret;
 }
@@ -144,21 +144,21 @@ handle_console_linux (console_action_t action)
     switch (action)
     {
     case CONSOLE_INIT:
-        /* Close old pipe ends in case it is the 2nd time we run cons.saver */
+        // Close old pipe ends in case it is the 2nd time we run cons.saver
         status = close (pipefd1[1]);
         status = close (pipefd2[0]);
-        /* Create two pipes for communication */
+        // Create two pipes for communication
         if (!((pipe (pipefd1) == 0) && ((pipe (pipefd2)) == 0)))
         {
             mc_global.tty.console_flag = '\0';
             break;
         }
-        /* Get the console saver running */
+        // Get the console saver running
         cons_saver_pid = my_fork ();
         if (cons_saver_pid < 0)
         {
-            /* Cannot fork */
-            /* Delete pipes */
+            // Cannot fork
+            // Delete pipes
             status = close (pipefd1[1]);
             status = close (pipefd1[0]);
             status = close (pipefd2[1]);
@@ -167,11 +167,11 @@ handle_console_linux (console_action_t action)
         }
         else if (cons_saver_pid > 0)
         {
-            /* Parent */
-            /* Close the extra pipe ends */
+            // Parent
+            // Close the extra pipe ends
             status = close (pipefd1[0]);
             status = close (pipefd2[1]);
-            /* Was the child successful? */
+            // Was the child successful?
             status = read (pipefd2[0], &mc_global.tty.console_flag, 1);
             if (mc_global.tty.console_flag == '\0')
             {
@@ -184,14 +184,14 @@ handle_console_linux (console_action_t action)
         }
         else
         {
-            /* Child */
+            // Child
             char *tty_name;
 
-            /* Close the extra pipe ends */
+            // Close the extra pipe ends
             status = close (pipefd1[1]);
             status = close (pipefd2[0]);
             tty_name = ttyname (0);
-            /* Bind the pipe 0 to the standard input */
+            // Bind the pipe 0 to the standard input
             do
             {
                 gboolean ok;
@@ -199,12 +199,12 @@ handle_console_linux (console_action_t action)
                 if (dup2 (pipefd1[0], STDIN_FILENO) == -1)
                     break;
                 status = close (pipefd1[0]);
-                /* Bind the pipe 1 to the standard output */
+                // Bind the pipe 1 to the standard output
                 if (dup2 (pipefd2[1], STDOUT_FILENO) == -1)
                     break;
 
                 status = close (pipefd2[1]);
-                /* Bind standard error to /dev/null */
+                // Bind standard error to /dev/null
                 status = open ("/dev/null", O_WRONLY);
                 if (status == -1)
                     break;
@@ -217,33 +217,33 @@ handle_console_linux (console_action_t action)
                 {
                     char *mc_conssaver;
 
-                    /* Exec the console save/restore handler */
+                    // Exec the console save/restore handler
                     mc_conssaver = mc_build_filename (SAVERDIR, "cons.saver", (char *) NULL);
                     execl (mc_conssaver, "cons.saver", tty_name, (char *) NULL);
                 }
-                /* Console is not a tty or execl() failed */
+                // Console is not a tty or execl() failed
             }
             while (0);
             mc_global.tty.console_flag = '\0';
             status = write (1, &mc_global.tty.console_flag, 1);
             my_exit (3);
-        }                       /* if (cons_saver_pid ...) */
+        }                       // if (cons_saver_pid ...)
         break;
 
     case CONSOLE_DONE:
     case CONSOLE_SAVE:
     case CONSOLE_RESTORE:
-        /* Is tty console? */
+        // Is tty console?
         if (mc_global.tty.console_flag == '\0')
             return;
-        /* Paranoid: Is the cons.saver still running? */
+        // Paranoid: Is the cons.saver still running?
         if (cons_saver_pid < 1 || kill (cons_saver_pid, SIGCONT))
         {
             cons_saver_pid = 0;
             mc_global.tty.console_flag = '\0';
             return;
         }
-        /* Send command to the console handler */
+        // Send command to the console handler
         {
             /* Convert enum (i.e. int) to char to write the correct value
              * (the least byte) regardless of machine endianness. */
@@ -253,12 +253,12 @@ handle_console_linux (console_action_t action)
         }
         if (action != CONSOLE_DONE)
         {
-            /* Wait the console handler to do its job */
+            // Wait the console handler to do its job
             status = read (pipefd2[0], &mc_global.tty.console_flag, 1);
         }
         if (action == CONSOLE_DONE || mc_global.tty.console_flag == '\0')
         {
-            /* We are done -> Let's clean up */
+            // We are done -> Let's clean up
             pid_t ret;
             close (pipefd1[1]);
             close (pipefd2[0]);
@@ -329,7 +329,7 @@ console_restore (void)
 
     cursor_to (0, 0);
 
-    /* restoring all content up to cursor position */
+    // restoring all content up to cursor position
     last = screen_info.mv_row * screen_info.mv_csz + screen_info.mv_col;
     for (i = 0; i < last; ++i)
     {
@@ -337,7 +337,7 @@ console_restore (void)
         putc (screen_shot.buf[i] & 0xFF, stdout);
     }
 
-    /* restoring cursor color */
+    // restoring cursor color
     set_attr ((screen_shot.buf[last] >> 8) & 0xFF);
 
     fflush (stdout);
@@ -368,14 +368,14 @@ console_save (void)
     if (mc_global.tty.console_flag == '\0')
         return;
 
-    /* screen_info.size is already set in console_init() */
+    // screen_info.size is already set in console_init()
     if (ioctl (FD_OUT, CONS_GETINFO, &screen_info) == -1)
     {
         console_shutdown ();
         return;
     }
 
-    /* handle console resize */
+    // handle console resize
     if (screen_info.mv_csz != screen_shot.xsize || screen_info.mv_rsz != screen_shot.ysize)
     {
         console_shutdown ();
@@ -402,10 +402,10 @@ console_save (void)
 
     for (i = 0; i < screen_shot.xsize * screen_shot.ysize; i++)
     {
-        /* *INDENT-OFF* */
-        screen_shot.buf[i] = (screen_shot.buf[i] & 0xff00) 
+        // *INDENT-OFF*
+        screen_shot.buf[i] = (screen_shot.buf[i] & 0xff00)
             | (unsigned char) revmap.scrmap[screen_shot.buf[i] & 0xff];
-        /* *INDENT-ON* */
+        // *INDENT-ON*
     }
 }
 
@@ -457,7 +457,7 @@ handle_console_freebsd (console_action_t action)
         break;
     }
 }
-#endif /* __FreeBSD__ */
+#endif // __FreeBSD__
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/

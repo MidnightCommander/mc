@@ -33,7 +33,7 @@
 
 #include <config.h>
 
-#include <pwd.h>                /* for username in xterm title */
+#include <pwd.h>                // for username in xterm title
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -46,14 +46,14 @@
 #include "lib/tty/key.h"
 #include "lib/tty/mouse.h"
 #include "lib/mcconfig.h"
-#include "lib/vfs/vfs.h"        /* vfs_get_cwd () */
+#include "lib/vfs/vfs.h"        // vfs_get_cwd ()
 #include "lib/strutil.h"
 #include "lib/widget.h"
 #include "lib/event.h"
-#include "lib/util.h"           /* mc_time_elapsed() */
+#include "lib/util.h"           // mc_time_elapsed()
 
 #include "src/consaver/cons.saver.h"
-#include "src/viewer/mcviewer.h"        /* The view widget */
+#include "src/viewer/mcviewer.h"        // The view widget
 #include "src/setup.h"
 #ifdef ENABLE_SUBSHELL
 #include "src/subshell/subshell.h"
@@ -65,19 +65,19 @@
 /* Needed for the extern declarations of integer parameters */
 #include "dir.h"
 #include "layout.h"
-#include "info.h"               /* The Info widget */
+#include "info.h"               // The Info widget
 
 /*** global variables ****************************************************************************/
 
 panels_layout_t panels_layout = {
-    /* Set if the panels are split horizontally */
+    // Set if the panels are split horizontally
     .horizontal_split = FALSE,
 
-    /* vertical split */
+    // vertical split
     .vertical_equal = TRUE,
     .left_panel_size = 0,
 
-    /* horizontal split */
+    // horizontal split
     .horizontal_equal = TRUE,
     .top_panel_size = 0
 };
@@ -144,13 +144,13 @@ static struct
 {
     panel_view_mode_t type;
     Widget *widget;
-    char *last_saved_dir;       /* last view_list working directory */
+    char *last_saved_dir;       // last view_list working directory
 } panels[MAX_VIEWS] = {
-    /* *INDENT-OFF* */
-    /* init MAX_VIEWS items */
+    // *INDENT-OFF*
+    // init MAX_VIEWS items
     { view_listing, NULL, NULL},
     { view_listing, NULL, NULL}
-    /* *INDENT-ON* */
+    // *INDENT-ON*
 };
 
 static layout_t old_layout;
@@ -169,7 +169,7 @@ static struct
     gboolean *variable;
     WCheck *widget;
 } check_options[] = {
-    /* *INDENT-OFF* */
+    // *INDENT-OFF*
     { N_("&Equal split"), &equal_split, NULL },
     { N_("&Menubar visible"), &menubar_visible, NULL },
     { N_("Command &prompt"), &command_prompt, NULL },
@@ -177,7 +177,7 @@ static struct
     { N_("H&intbar visible"), &mc_global.message_visible, NULL },
     { N_("&XTerm window title"), &xterm_title, NULL },
     { N_("&Show free space"), &free_space, NULL }
-    /* *INDENT-ON* */
+    // *INDENT-ON*
 };
 
 static const char *output_lines_label = NULL;
@@ -535,25 +535,25 @@ layout_dlg_create (void)
     }
 #endif
 
-    /* radiobuttons */
+    // radiobuttons
     i = G_N_ELEMENTS (s_split_direction);
     while (i-- != 0)
         l1 = max (l1, str_term_width1 (s_split_direction[i]) + 7);
-    /* checkboxes */
+    // checkboxes
     for (i = 0; i < (size_t) LAYOUT_OPTIONS_COUNT; i++)
         l1 = max (l1, str_term_width1 (check_options[i].text) + 7);
-    /* groupboxes */
+    // groupboxes
     l1 = max (l1, str_term_width1 (title1) + 4);
     l1 = max (l1, str_term_width1 (title2) + 4);
     l1 = max (l1, str_term_width1 (title3) + 4);
-    /* label + "+"/"-" buttons */
+    // label + "+"/"-" buttons
     output_lines_label_len = str_term_width1 (output_lines_label);
     l1 = max (l1, output_lines_label_len + 12);
-    /* buttons */
-    b1 = str_term_width1 (ok_button) + 5;       /* default button */
+    // buttons
+    b1 = str_term_width1 (ok_button) + 5;       // default button
     b2 = str_term_width1 (cancel_button) + 3;
     b = b1 + b2 + 1;
-    /* dialog width */
+    // dialog width
     width = max (l1 * 2 + 7, b);
 
     layout_dlg =
@@ -561,12 +561,12 @@ layout_dlg_create (void)
                     "[Layout]", _("Layout"));
     g = GROUP (layout_dlg);
 
-    /* draw background */
+    // draw background
     layout_dlg->bg->callback = layout_bg_callback;
 
 #define XTRACT(i) (*check_options[i].variable != 0), check_options[i].text
 
-    /* "Panel split" groupbox */
+    // "Panel split" groupbox
     group_add_widget (g, groupbox_new (2, 3, 6, l1, title1));
 
     radio_widget = radio_new (3, 5, 2, s_split_direction);
@@ -587,7 +587,7 @@ layout_dlg_create (void)
     widget_disable (WIDGET (bright_widget), equal_split);
     group_add_widget (g, bright_widget);
 
-    /* "Console output" groupbox */
+    // "Console output" groupbox
     {
         widget_state_t disabled;
         Widget *w;
@@ -609,7 +609,7 @@ layout_dlg_create (void)
         group_add_widget (g, w);
     }
 
-    /* "Other options" groupbox */
+    // "Other options" groupbox
     group_add_widget (g, groupbox_new (2, 4 + l1, 9, l1, title3));
 
     for (i = 1; i < (size_t) LAYOUT_OPTIONS_COUNT; i++)
@@ -621,7 +621,7 @@ layout_dlg_create (void)
 #undef XTRACT
 
     group_add_widget (g, hline_new (11, -1, -1));
-    /* buttons */
+    // buttons
     group_add_widget (g, button_new (12, (width - b) / 2, B_ENTER, DEFPUSH_BUTTON, ok_button, 0));
     group_add_widget (g,
                       button_new (12, (width - b) / 2 + b1 + 1, B_CANCEL, NORMAL_BUTTON,
@@ -754,7 +754,7 @@ panel_update_cols (Widget *widget, panel_display_t frame_size)
     const Widget *mw = CONST_WIDGET (filemanager);
     int cols, x;
 
-    /* don't touch panel if it is not in dialog yet */
+    // don't touch panel if it is not in dialog yet
     /* if panel is not in dialog it is not in widgets list
        and cannot be compared with get_panel_widget() result */
     if (widget->owner == NULL)
@@ -825,11 +825,11 @@ setup_panels (void)
 
     active = widget_get_state (mw, WST_ACTIVE);
 
-    /* lock the group to avoid many redraws */
+    // lock the group to avoid many redraws
     if (active)
         widget_set_state (mw, WST_SUSPENDED, TRUE);
 
-    /* initial height of panels */
+    // initial height of panels
     height =
         r->lines - (menubar_visible ? 1 : 0) - (mc_global.message_visible ? 1 : 0) -
         (command_prompt ? 1 : 0) - (mc_global.keybar_visible ? 1 : 0);
@@ -858,11 +858,11 @@ setup_panels (void)
     check_split (&panels_layout);
     start_y = r->y + (menubar_visible ? 1 : 0);
 
-    /* update columns first... */
+    // update columns first...
     panel_do_cols (0);
     panel_do_cols (1);
 
-    /* ...then rows and origin */
+    // ...then rows and origin
     if (panels_layout.horizontal_split)
     {
         widget_set_size (panels[0].widget, start_y, r->x, panels_layout.top_panel_size,
@@ -880,7 +880,7 @@ setup_panels (void)
     widget_set_size (WIDGET (the_hint), height + start_y, r->x, 1, r->cols);
     widget_set_visibility (WIDGET (the_hint), mc_global.message_visible);
 
-    /* Output window */
+    // Output window
     if (mc_global.tty.console_flag != '\0' && output_lines != 0)
     {
         unsigned char end_line;
@@ -899,7 +899,7 @@ setup_panels (void)
     }
     else
     {
-        /* make invisible */
+        // make invisible
         widget_hide (WIDGET (cmdline));
         widget_hide (WIDGET (the_prompt));
     }
@@ -913,7 +913,7 @@ setup_panels (void)
     update_xterm_title_path ();
     update_terminal_cwd ();
 
-    /* unlock */
+    // unlock
     if (active)
     {
         widget_set_state (mw, WST_ACTIVE, TRUE);
@@ -990,7 +990,7 @@ setup_cmdline (void)
 #ifdef ENABLE_SUBSHELL
     if (mc_global.tty.use_subshell)
     {
-        /* Workaround: avoid crash on FreeBSD (see ticket #4213 for details)  */
+        // Workaround: avoid crash on FreeBSD (see ticket #4213 for details)
         if (subshell_prompt != NULL)
             tmp_prompt = g_string_free (subshell_prompt, FALSE);
         else
@@ -1001,7 +1001,7 @@ setup_cmdline (void)
 
     prompt_width = str_term_width1 (tmp_prompt);
 
-    /* Check for prompts too big */
+    // Check for prompts too big
     if (r->cols > 8 && prompt_width > r->cols - 8)
     {
         int prompt_len;
@@ -1056,7 +1056,7 @@ void
 rotate_dash (gboolean show)
 {
     static gint64 timestamp = 0;
-    /* update with 10 FPS rate */
+    // update with 10 FPS rate
     static const gint64 delay = G_USEC_PER_SEC / 10;
 
     const Widget *w = CONST_WIDGET (filemanager);
@@ -1120,7 +1120,7 @@ void
 create_panel (int num, panel_view_mode_t type)
 {
     WRect r = { 0, 0, 0, 0 };
-    unsigned int the_other = 0; /* Index to the other panel */
+    unsigned int the_other = 0; // Index to the other panel
     Widget *new_widget = NULL, *old_widget = NULL;
     panel_view_mode_t old_type = view_listing;
 
@@ -1129,7 +1129,7 @@ create_panel (int num, panel_view_mode_t type)
         fprintf (stderr, "Cannot allocate more that %d views\n", MAX_VIEWS);
         abort ();
     }
-    /* Check that we will have a WPanel * at least */
+    // Check that we will have a WPanel * at least
     if (type != view_listing)
     {
         the_other = num == 0 ? 1 : 0;
@@ -1138,7 +1138,7 @@ create_panel (int num, panel_view_mode_t type)
             return;
     }
 
-    /* Get rid of it */
+    // Get rid of it
     if (panels[num].widget != NULL)
     {
         Widget *w = panels[num].widget;
@@ -1166,8 +1166,8 @@ create_panel (int num, panel_view_mode_t type)
         }
     }
 
-    /* Restoring saved path from panels.ini for nonlist panel */
-    /* when it's first creation (for example view_info) */
+    // Restoring saved path from panels.ini for nonlist panel
+    // when it's first creation (for example view_info)
     if (old_widget == NULL && type != view_listing)
         panels[num].last_saved_dir = vfs_get_cwd ();
 
@@ -1216,15 +1216,15 @@ create_panel (int num, panel_view_mode_t type)
     }
 
     if (type != view_listing)
-        /* Must save dir, for restoring after change type to */
-        /* view_listing */
+        // Must save dir, for restoring after change type to
+        // view_listing
         save_panel_dir (num);
 
     panels[num].type = type;
     panels[num].widget = new_widget;
 
-    /* We use replace to keep the circular list of the dialog in the */
-    /* same state.  Maybe we could just kill it and then replace it  */
+    // We use replace to keep the circular list of the dialog in the
+    // same state.  Maybe we could just kill it and then replace it
     if (old_widget != NULL)
     {
         if (old_type == view_listing)
@@ -1241,7 +1241,7 @@ create_panel (int num, panel_view_mode_t type)
     {
         WPanel *panel = PANEL (new_widget);
 
-        /* if existing panel changed type to view_listing, then load history */
+        // if existing panel changed type to view_listing, then load history
         if (old_widget != NULL)
         {
             ev_history_load_save_t event_data = { NULL, new_widget };
@@ -1254,7 +1254,7 @@ create_panel (int num, panel_view_mode_t type)
         else
             right_panel = panel;
 
-        /* forced update format after set new sizes */
+        // forced update format after set new sizes
         set_panel_formats (panel);
     }
 
@@ -1295,7 +1295,7 @@ swap_panels (void)
         WPanel panel;
 
 #define panelswap(x) panel.x = panel1->x; panel1->x = panel2->x; panel2->x = panel.x;
-        /* Change content and related stuff */
+        // Change content and related stuff
         panelswap (dir);
         panelswap (active);
         panelswap (cwd_vpath);
@@ -1318,7 +1318,7 @@ swap_panels (void)
         else
             current_panel = panel1;
 
-        /* if sort options are different -> resort panels */
+        // if sort options are different -> resort panels
         if (memcmp (&panel1->sort_info, &panel2->sort_info, sizeof (dir_sort_options_t)) != 0)
         {
             panel_re_sort (other_panel);
@@ -1368,7 +1368,7 @@ swap_panels (void)
         panels[0].type = panels[1].type;
         panels[1].type = tmp_type;
 
-        /* force update formats because of possible changed sizes */
+        // force update formats because of possible changed sizes
         if (panels[0].type == view_listing)
             set_panel_formats (PANEL (panels[0].widget));
         if (panels[1].type == view_listing)
@@ -1450,8 +1450,8 @@ save_panel_dir (int idx)
         p = PANEL (get_panel_widget (idx));
         if (p != NULL)
         {
-            g_free (panels[idx].last_saved_dir);        /* last path no needed */
-            /* Because path can be nonlocal */
+            g_free (panels[idx].last_saved_dir);        // last path no needed
+            // Because path can be nonlocal
             panels[idx].last_saved_dir = g_strdup (vfs_path_as_str (p->cwd_vpath));
         }
     }
@@ -1495,7 +1495,7 @@ do_load_prompt (void)
     if (!read_subshell_prompt ())
         return ret;
 
-    /* Don't actually change the prompt if it's invisible */
+    // Don't actually change the prompt if it's invisible
     if (top_dlg != NULL && DIALOG (top_dlg->data) == filemanager && command_prompt)
     {
         setup_cmdline ();
@@ -1527,7 +1527,7 @@ load_prompt (int fd, void *unused)
 
     return 0;
 }
-#endif /* ENABLE_SUBSHELL */
+#endif // ENABLE_SUBSHELL
 
 /* --------------------------------------------------------------------------------------------- */
 

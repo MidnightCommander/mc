@@ -71,7 +71,7 @@ teardown (void)
 START_TEST (sanitize_variables)
 /* *INDENT-ON* */
 {
-    /* given */
+    // given
     vfs_path_t *filename_vpath;
     GString *actual_string;
     const char *expected_string;
@@ -84,12 +84,12 @@ START_TEST (sanitize_variables)
     current_panel->dir.list[2].fname = g_string_new ("tagged file2.txt");
     current_panel->dir.list[2].f.marked = 1;
 
-    /* when */
+    // when
     filename_vpath = vfs_path_from_str ("/tmp/blabla.txt");
     actual_string = exec_get_export_variables (filename_vpath);
     vfs_path_free (filename_vpath, TRUE);
 
-    /* then */
+    // then
     expected_string = "\
 MC_EXT_FILENAME=/tmp/blabla.txt\n\
 export MC_EXT_FILENAME\n\
@@ -124,9 +124,9 @@ main (void)
 
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     tcase_add_test (tc_core, sanitize_variables);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }

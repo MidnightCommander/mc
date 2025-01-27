@@ -31,12 +31,12 @@ typedef enum
 typedef struct WButton
 {
     Widget widget;
-    int action;                 /* what to do when pressed */
+    int action;                 // what to do when pressed
 
-    button_flags_t flags;       /* button flags */
-    hotkey_t text;              /* text of button, contain hotkey too */
-    int hotpos;                 /* offset hot KEY char in text */
-    bcback_fn callback;         /* callback function */
+    button_flags_t flags;       // button flags
+    hotkey_t text;              // text of button, contain hotkey too
+    int hotpos;                 // offset hot KEY char in text
+    bcback_fn callback;         // callback function
 } WButton;
 
 /*** global variables defined in .c file *********************************************************/
@@ -55,4 +55,4 @@ void button_mouse_default_callback (Widget * w, mouse_msg_t msg, mouse_event_t *
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__WIDGET_BUTTON_H */
+#endif // MC__WIDGET_BUTTON_H

@@ -16,4 +16,4 @@ gboolean events_init (GError ** mcerror);
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__EVENTS_INIT_H */
+#endif // MC__EVENTS_INIT_H

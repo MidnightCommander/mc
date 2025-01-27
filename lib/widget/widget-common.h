@@ -6,9 +6,9 @@
 #ifndef MC__WIDGET_COMMON_H
 #define MC__WIDGET_COMMON_H
 
-#include "lib/keybind.h"        /* global_keymap_t */
+#include "lib/keybind.h"        // global_keymap_t
 #include "lib/tty/mouse.h"
-#include "lib/widget/mouse.h"   /* mouse_msg_t, mouse_event_t */
+#include "lib/widget/mouse.h"   // mouse_msg_t, mouse_event_t
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -28,27 +28,27 @@
 /* Widget messages */
 typedef enum
 {
-    MSG_INIT = 0,               /* Initialize widget */
-    MSG_FOCUS,                  /* Draw widget in focused state or widget has got focus */
-    MSG_UNFOCUS,                /* Draw widget in unfocused state or widget has been unfocused */
-    MSG_CHANGED_FOCUS,          /* Notification to owner about focus state change */
-    MSG_ENABLE,                 /* Change state to enabled */
-    MSG_DISABLE,                /* Change state to disabled */
-    MSG_DRAW,                   /* Draw widget on screen */
-    MSG_KEY,                    /* Sent to widgets on key press */
-    MSG_HOTKEY,                 /* Sent to widget to catch preprocess key */
-    MSG_HOTKEY_HANDLED,         /* A widget has got the hotkey */
-    MSG_UNHANDLED_KEY,          /* Key that no widget handled */
-    MSG_POST_KEY,               /* The key has been handled */
-    MSG_ACTION,                 /* Send to widget to handle command */
+    MSG_INIT = 0,               // Initialize widget
+    MSG_FOCUS,                  // Draw widget in focused state or widget has got focus
+    MSG_UNFOCUS,                // Draw widget in unfocused state or widget has been unfocused
+    MSG_CHANGED_FOCUS,          // Notification to owner about focus state change
+    MSG_ENABLE,                 // Change state to enabled
+    MSG_DISABLE,                // Change state to disabled
+    MSG_DRAW,                   // Draw widget on screen
+    MSG_KEY,                    // Sent to widgets on key press
+    MSG_HOTKEY,                 // Sent to widget to catch preprocess key
+    MSG_HOTKEY_HANDLED,         // A widget has got the hotkey
+    MSG_UNHANDLED_KEY,          // Key that no widget handled
+    MSG_POST_KEY,               // The key has been handled
+    MSG_ACTION,                 // Send to widget to handle command
     MSG_NOTIFY,                 /* Typically sent to dialog to inform it of state-change
                                  * of listboxes, check- and radiobuttons. */
-    MSG_CURSOR,                 /* Sent to widget to position the cursor */
-    MSG_IDLE,                   /* The idle state is active */
-    MSG_RESIZE,                 /* Screen size has changed */
-    MSG_VALIDATE,               /* Dialog is to be closed */
-    MSG_END,                    /* Shut down dialog */
-    MSG_DESTROY                 /* Sent to widget at destruction time */
+    MSG_CURSOR,                 // Sent to widget to position the cursor
+    MSG_IDLE,                   // The idle state is active
+    MSG_RESIZE,                 // Screen size has changed
+    MSG_VALIDATE,               // Dialog is to be closed
+    MSG_END,                    // Shut down dialog
+    MSG_DESTROY                 // Sent to widget at destruction time
 } widget_msg_t;
 
 /* Widgets are expected to answer to the following messages:
@@ -70,7 +70,7 @@ typedef enum
     WOP_DEFAULT = (0 << 0),
     WOP_WANT_HOTKEY = (1 << 0),
     WOP_WANT_CURSOR = (1 << 1),
-    WOP_WANT_TAB = (1 << 2),    /* Should the tab key be sent to the dialog? */
+    WOP_WANT_TAB = (1 << 2),    // Should the tab key be sent to the dialog?
     WOP_IS_INPUT = (1 << 3),
     WOP_SELECTABLE = (1 << 4),
     WOP_TOP_SELECT = (1 << 5)
@@ -80,30 +80,30 @@ typedef enum
 typedef enum
 {
     WST_DEFAULT = (0 << 0),
-    WST_VISIBLE = (1 << 0),     /* Widget is visible */
-    WST_DISABLED = (1 << 1),    /* Widget cannot be selected */
+    WST_VISIBLE = (1 << 0),     // Widget is visible
+    WST_DISABLED = (1 << 1),    // Widget cannot be selected
     WST_IDLE = (1 << 2),
-    WST_MODAL = (1 << 3),       /* Widget (dialog) is modal */
+    WST_MODAL = (1 << 3),       // Widget (dialog) is modal
     WST_FOCUSED = (1 << 4),
 
-    WST_CONSTRUCT = (1 << 15),  /* Widget has been constructed but not run yet */
-    WST_ACTIVE = (1 << 16),     /* Dialog is visible and active */
-    WST_SUSPENDED = (1 << 17),  /* Dialog is suspended */
-    WST_CLOSED = (1 << 18)      /* Dialog is closed */
+    WST_CONSTRUCT = (1 << 15),  // Widget has been constructed but not run yet
+    WST_ACTIVE = (1 << 16),     // Dialog is visible and active
+    WST_SUSPENDED = (1 << 17),  // Dialog is suspended
+    WST_CLOSED = (1 << 18)      // Dialog is closed
 } widget_state_t;
 
 /* Flags for widget repositioning on dialog resize */
 typedef enum
 {
-    WPOS_FULLSCREEN = (1 << 0), /* widget occupies the whole screen */
-    WPOS_CENTER_HORZ = (1 << 1),        /* center widget in horizontal */
-    WPOS_CENTER_VERT = (1 << 2),        /* center widget in vertical */
-    WPOS_CENTER = WPOS_CENTER_HORZ | WPOS_CENTER_VERT,  /* center widget */
-    WPOS_TRYUP = (1 << 3),      /* try to move two lines up the widget */
-    WPOS_KEEP_LEFT = (1 << 4),  /* keep widget distance to left border of dialog */
-    WPOS_KEEP_RIGHT = (1 << 5), /* keep widget distance to right border of dialog */
-    WPOS_KEEP_TOP = (1 << 6),   /* keep widget distance to top border of dialog */
-    WPOS_KEEP_BOTTOM = (1 << 7),        /* keep widget distance to bottom border of dialog */
+    WPOS_FULLSCREEN = (1 << 0), // widget occupies the whole screen
+    WPOS_CENTER_HORZ = (1 << 1),        // center widget in horizontal
+    WPOS_CENTER_VERT = (1 << 2),        // center widget in vertical
+    WPOS_CENTER = WPOS_CENTER_HORZ | WPOS_CENTER_VERT,  // center widget
+    WPOS_TRYUP = (1 << 3),      // try to move two lines up the widget
+    WPOS_KEEP_LEFT = (1 << 4),  // keep widget distance to left border of dialog
+    WPOS_KEEP_RIGHT = (1 << 5), // keep widget distance to right border of dialog
+    WPOS_KEEP_TOP = (1 << 6),   // keep widget distance to top border of dialog
+    WPOS_KEEP_BOTTOM = (1 << 7),        // keep widget distance to bottom border of dialog
     WPOS_KEEP_HORZ = WPOS_KEEP_LEFT | WPOS_KEEP_RIGHT,
     WPOS_KEEP_VERT = WPOS_KEEP_TOP | WPOS_KEEP_BOTTOM,
     WPOS_KEEP_ALL = WPOS_KEEP_HORZ | WPOS_KEEP_VERT,
@@ -130,32 +130,32 @@ typedef int (*widget_mouse_handle_fn) (Widget * w, Gpm_Event * event);
 /* Every Widget must have this as its first element */
 struct Widget
 {
-    WRect rect;                 /* position and size */
+    WRect rect;                 // position and size
     /* ATTENTION! For groups, don't change @rect members directly to avoid
        incorrect reposion and resize of group members.  */
-    widget_pos_flags_t pos_flags;       /* repositioning flags */
+    widget_pos_flags_t pos_flags;       // repositioning flags
     widget_options_t options;
     widget_state_t state;
-    unsigned long id;           /* uniq widget ID */
+    unsigned long id;           // uniq widget ID
     widget_cb_fn callback;
     widget_mouse_cb_fn mouse_callback;
     WGroup *owner;
 
-    /* Key-related fields */
-    const global_keymap_t *keymap;      /* main keymap */
-    const global_keymap_t *ext_keymap;  /* extended keymap */
-    gboolean ext_mode;          /* use keymap or ext_keymap */
+    // Key-related fields
+    const global_keymap_t *keymap;      // main keymap
+    const global_keymap_t *ext_keymap;  // extended keymap
+    gboolean ext_mode;          // use keymap or ext_keymap
 
-    /* Mouse-related fields. */
+    // Mouse-related fields.
     widget_mouse_handle_fn mouse_handler;
     struct
     {
-        /* Public members: */
-        gboolean forced_capture;        /* Overrides the 'capture' member. Set explicitly by the programmer. */
+        // Public members:
+        gboolean forced_capture;        // Overrides the 'capture' member. Set explicitly by the programmer.
 
-        /* Implementation details: */
-        gboolean capture;       /* Whether the widget "owns" the mouse. */
-        mouse_msg_t last_msg;   /* The previous event type processed. */
+        // Implementation details:
+        gboolean capture;       // Whether the widget "owns" the mouse.
+        mouse_msg_t last_msg;   // The previous event type processed.
         int last_buttons_down;
     } mouse;
 
@@ -166,9 +166,9 @@ struct Widget
     Widget *(*find_by_type) (const Widget * w, widget_cb_fn cb);
     Widget *(*find_by_id) (const Widget * w, unsigned long id);
 
-    /* *INDENT-OFF* */
+    // *INDENT-OFF*
     cb_ret_t (*set_state) (Widget * w, widget_state_t state, gboolean enable);
-    /* *INDENT-ON* */
+    // *INDENT-ON*
     void (*destroy) (Widget * w);
 
     const int *(*get_colors) (const Widget * w);
@@ -180,9 +180,9 @@ struct Widget
  */
 typedef struct hotkey_t
 {
-    char *start;                /* never NULL */
-    char *hotkey;               /* can be NULL */
-    char *end;                  /* can be NULL */
+    char *start;                // never NULL
+    char *hotkey;               // can be NULL
+    char *end;                  // can be NULL
 } hotkey_t;
 
 /*** global variables defined in .c file *********************************************************/
@@ -250,7 +250,7 @@ send_message (void *w, void *sender, widget_msg_t msg, int parm, void *data)
     cb_ret_t ret = MSG_NOT_HANDLED;
 
 #if 1
-    if (w != NULL)              /* This must be always true, but... */
+    if (w != NULL)              // This must be always true, but...
 #endif
         ret = WIDGET (w)->callback (WIDGET (w), WIDGET (sender), msg, parm, data);
 
@@ -459,4 +459,4 @@ widget_overlapped (const Widget *a, const Widget *b)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#endif /* MC__WIDGET_COMMON_H */
+#endif // MC__WIDGET_COMMON_H

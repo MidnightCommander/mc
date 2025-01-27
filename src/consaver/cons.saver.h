@@ -32,7 +32,7 @@ typedef enum
 #ifndef LINUX_CONS_SAVER_C
 /* Used only in mc, not in cons.saver */
 extern int cons_saver_pid;
-#endif /* !LINUX_CONS_SAVER_C */
+#endif // !LINUX_CONS_SAVER_C
 
 /*** declarations of public functions ************************************************************/
 
@@ -40,7 +40,7 @@ extern int cons_saver_pid;
 /* Used only in mc, not in cons.saver */
 void show_console_contents (int starty, unsigned char begin_line, unsigned char end_line);
 void handle_console (console_action_t action);
-#endif /* !LINUX_CONS_SAVER_C */
+#endif // !LINUX_CONS_SAVER_C
 
 /*** inline functions ****************************************************************************/
-#endif /* MC__CONS_SAVER_H */
+#endif // MC__CONS_SAVER_H

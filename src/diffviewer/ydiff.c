@@ -31,7 +31,7 @@
 
 #include <ctype.h>
 #include <errno.h>
-#include <stddef.h>             /* ptrdiff_t */
+#include <stddef.h>             // ptrdiff_t
 #include <stdlib.h>
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -41,7 +41,7 @@
 #include "lib/tty/tty.h"
 #include "lib/tty/color.h"
 #include "lib/tty/key.h"
-#include "lib/skin.h"           /* EDITOR_NORMAL_COLOR */
+#include "lib/skin.h"           // EDITOR_NORMAL_COLOR
 #include "lib/vfs/vfs.h"
 #include "lib/util.h"
 #include "lib/widget.h"
@@ -49,13 +49,13 @@
 #ifdef HAVE_CHARSET
 #include "lib/charsets.h"
 #endif
-#include "lib/event.h"          /* mc_event_raise() */
+#include "lib/event.h"          // mc_event_raise()
 
-#include "src/filemanager/cmd.h"        /* edit_file_at_line() */
+#include "src/filemanager/cmd.h"        // edit_file_at_line()
 #include "src/filemanager/panel.h"
-#include "src/filemanager/layout.h"     /* Needed for get_current_index and get_other_panel */
+#include "src/filemanager/layout.h"     // Needed for get_current_index and get_other_panel
 
-#include "src/execute.h"        /* toggle_subshell() */
+#include "src/execute.h"        // toggle_subshell()
 #include "src/keymap.h"
 #include "src/setup.h"
 #include "src/history.h"
@@ -609,7 +609,7 @@ dview_get_utf (const char *str, int *ch, int *ch_length)
     {
         const char *next_ch;
 
-        /* Calculate UTF-8 char length */
+        // Calculate UTF-8 char length
         next_ch = g_utf8_next_char (str);
         *ch_length = next_ch - str;
     }
@@ -651,7 +651,7 @@ dview_str_utf8_offset_to_pos (const char *text, size_t length)
     }
     return MAX (length, (size_t) result);
 }
-#endif /*HAVE_CHARSET */
+#endif // HAVE_CHARSET
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -818,7 +818,7 @@ dff_execute (const char *args, const char *extra, const char *file1, const char 
     int code;
     char *file1_esc, *file2_esc;
 
-    /* escape potential $ to avoid shell variable substitutions in popen() */
+    // escape potential $ to avoid shell variable substitutions in popen()
     file1_esc = str_shell_escape (file1);
     file2_esc = str_shell_escape (file2);
     cmd = g_strdup_printf ("diff %s %s %s %s %s", args, extra, opt, file1_esc, file2_esc);
@@ -1007,7 +1007,7 @@ lcsubstr (const char *s, int m, const char *t, int n, GArray *ret, int min)
 
     if (m < min || n < min)
     {
-        /* XXX early culling */
+        // XXX early culling
         return 0;
     }
 
@@ -1179,7 +1179,7 @@ hdiff_scan (const char *s, int m, const char *t, int n, int min, GArray *hdiff, 
     int i;
     BRACKET b;
 
-    /* dumbscan (single horizontal diff) -- does not compress whitespace */
+    // dumbscan (single horizontal diff) -- does not compress whitespace
     for (i = 0; i < m && i < n && s[i] == t[i]; i++)
         ;
     for (; m > i && n > i && s[m - 1] == t[n - 1]; m--, n--)
@@ -1190,7 +1190,7 @@ hdiff_scan (const char *s, int m, const char *t, int n, int min, GArray *hdiff, 
     b[DIFF_RIGHT].off = i;
     b[DIFF_RIGHT].len = n - i;
 
-    /* smartscan (multiple horizontal diff) */
+    // smartscan (multiple horizontal diff)
     return hdiff_multi (s, t, b, min, hdiff, depth);
 }
 
@@ -1528,12 +1528,12 @@ cvt_fget (FBUF *f, off_t off, char *dst, size_t dstsize, int skip, int ts, gbool
     size_t sz;
     int lastch = '\0';
     const char *q = NULL;
-    char tmp[BUFSIZ];           /* XXX capacity must be >= MAX{dstsize + 1, amount} */
-    char cvt[BUFSIZ];           /* XXX capacity must be >= MAX_TAB_WIDTH * amount */
+    char tmp[BUFSIZ];           // XXX capacity must be >= MAX{dstsize + 1, amount}
+    char cvt[BUFSIZ];           // XXX capacity must be >= MAX_TAB_WIDTH * amount
 
     if (sizeof (tmp) < amount || sizeof (tmp) <= dstsize || sizeof (cvt) < 8 * amount)
     {
-        /* abnormal, but avoid buffer overflow */
+        // abnormal, but avoid buffer overflow
         fill_by_space (dst, dstsize, TRUE);
         return 0;
     }
@@ -1926,7 +1926,7 @@ get_current_hunk (WDiff *dview, int *start_line1, int *end_line1, int *start_lin
     int ch;
     int res = 0;
 
-    /* Is file empty? */
+    // Is file empty?
     if (a0->len == 0)
         return 0;
 
@@ -2279,7 +2279,7 @@ dview_select_encoding (WDiff *dview)
     tty_touch_screen ();
     repaint_screen ();
 }
-#endif /* HAVE_CHARSET */
+#endif // HAVE_CHARSET
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -2352,7 +2352,7 @@ dview_diff_options (WDiff *dview)
     };
 
     quick_widget_t quick_widgets[] = {
-        /* *INDENT-OFF* */
+        // *INDENT-OFF*
         QUICK_START_GROUPBOX (N_("Diff algorithm")),
             QUICK_RADIO (3, (const char **) quality_str, (int *) &dview->opt.quality, NULL),
         QUICK_STOP_GROUPBOX,
@@ -2366,7 +2366,7 @@ dview_diff_options (WDiff *dview)
         QUICK_STOP_GROUPBOX,
         QUICK_BUTTONS_OK_CANCEL,
         QUICK_END
-        /* *INDENT-ON* */
+        // *INDENT-ON*
     };
 
     WRect r = { -1, -1, 0, 56 };
@@ -2539,7 +2539,7 @@ dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int heig
 
     if ((int) sizeof (buf) <= width || (int) sizeof (buf) <= nwidth)
     {
-        /* abnormal, but avoid buffer overflow */
+        // abnormal, but avoid buffer overflow
         return -1;
     }
 
@@ -2663,7 +2663,7 @@ dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int heig
             fill_by_space (buf, width, TRUE);
         }
         tty_gotoyx (r + j, c);
-        /* tty_print_nstring (buf, width); */
+        // tty_print_nstring (buf, width);
         col = 0;
         for (cnt = 0; cnt < strlen (buf) && col < width; cnt++)
         {
@@ -2714,11 +2714,11 @@ dview_display_file (const WDiff *dview, diff_place_t ord, int r, int c, int heig
         if (xwidth != 0)
         {
             tty_gotoyx (r + j, c - xwidth);
-            /* tty_print_nstring (buf, xwidth - 1); */
+            // tty_print_nstring (buf, xwidth - 1);
             tty_print_string (str_fit_to_term (buf, xwidth - 1, J_LEFT_FIT));
         }
         tty_gotoyx (r + j, c);
-        /* tty_print_nstring (buf, width); */
+        // tty_print_nstring (buf, width);
         tty_print_string (str_fit_to_term (buf, width, J_LEFT_FIT));
     }
 
@@ -2795,7 +2795,7 @@ dview_update (WDiff *dview)
     if (height < 2)
         return;
 
-    /* use an actual length of dview->a */
+    // use an actual length of dview->a
     if (dview->display_numbers != 0)
         dview->display_numbers = calc_nwidth ((const GArray * const *) dview->a);
 
@@ -2878,7 +2878,7 @@ dview_edit (WDiff *dview, diff_place_t ord)
 
     get_line_numbers (dview->a[ord], dview->skip_rows, &linenum, &lineofs);
 
-    /* disallow edit file in several editors */
+    // disallow edit file in several editors
     widget_set_state (h, WST_MODAL, TRUE);
 
     {
@@ -2901,12 +2901,12 @@ dview_goto_cmd (WDiff *dview, diff_place_t ord)
 {
     static gboolean first_run = TRUE;
 
-    /* *INDENT-OFF* */
+    // *INDENT-OFF*
     static const char *title[2] = {
         N_("Goto line (left)"),
         N_("Goto line (right)")
     };
-    /* *INDENT-ON* */
+    // *INDENT-ON*
 
     int newline;
     char *input;
@@ -3008,20 +3008,20 @@ dview_ok_to_exit (WDiff *dview)
                         _("Midnight Commander is being shut down.\nSave modified file(s)?"),
                         D_NORMAL, 2, _("&Yes"), _("&No"));
 
-    /* Esc is No */
+    // Esc is No
     if (mc_global.midnight_shutdown || (act == -1))
         act = 1;
 
     switch (act)
     {
-    case -1:                   /* Esc */
+    case -1:                   // Esc
         res = FALSE;
         break;
-    case 0:                    /* Yes */
+    case 0:                    // Yes
         (void) dview_save (dview);
         res = TRUE;
         break;
-    case 1:                    /* No */
+    case 1:                    // No
         if (mc_util_restore_from_backup_if_possible (dview->file[DIFF_LEFT], "~~~"))
             res = mc_util_unlink_backup_if_possible (dview->file[DIFF_LEFT], "~~~");
         if (mc_util_restore_from_backup_if_possible (dview->file[DIFF_RIGHT], "~~~"))
@@ -3190,7 +3190,7 @@ dview_execute_cmd (WDiff *dview, long command)
         break;
 #endif
     case CK_Cancel:
-        /* don't close diffviewer due to SIGINT */
+        // don't close diffviewer due to SIGINT
         break;
     default:
         res = MSG_NOT_HANDLED;
@@ -3306,7 +3306,7 @@ dview_dialog_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, vo
     switch (msg)
     {
     case MSG_ACTION:
-        /* Handle shortcuts. */
+        // Handle shortcuts.
 
         /* Note: the buttonbar sends messages directly to the the WDiff, not to
          * here, which is why we can pass NULL in the following call. */
@@ -3314,7 +3314,7 @@ dview_dialog_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, vo
 
     case MSG_VALIDATE:
         dview = (WDiff *) widget_find_by_type (CONST_WIDGET (h), dview_callback);
-        /* don't stop the dialog before final decision */
+        // don't stop the dialog before final decision
         widget_set_state (w, WST_ACTIVE, TRUE);
         if (dview_ok_to_exit (dview))
             dlg_close (h);
@@ -3363,7 +3363,7 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
     WRect r;
     WGroup *g;
 
-    /* Create dialog and widgets, put them on the dialog */
+    // Create dialog and widgets, put them on the dialog
     dview_dlg =
         dlg_create (FALSE, 0, 0, 1, 1, WPOS_FULLSCREEN, FALSE, NULL, dview_dialog_callback, NULL,
                     "[Diff Viewer]", NULL);
@@ -3386,7 +3386,7 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
 
     dview_dlg->get_title = dview_get_title;
 
-    error = dview_init (dview, "-a", file1, file2, label1, label2, DATA_SRC_MEM);       /* XXX binary diff? */
+    error = dview_init (dview, "-a", file1, file2, label1, label2, DATA_SRC_MEM);       // XXX binary diff?
     if (error >= 0)
         error = redo_diff (dview);
     if (error >= 0)
@@ -3458,7 +3458,7 @@ dview_diff_cmd (const void *f0, const void *f1)
     {
     case MC_RUN_FULL:
         {
-            /* run from panels */
+            // run from panels
             const WPanel *panel0 = (const WPanel *) f0;
             const WPanel *panel1 = (const WPanel *) f1;
             const file_entry_t *fe0, *fe1;
@@ -3498,7 +3498,7 @@ dview_diff_cmd (const void *f0, const void *f1)
 
     case MC_RUN_DIFFVIEWER:
         {
-            /* run from command line */
+            // run from command line
             const char *p0 = (const char *) f0;
             const char *p1 = (const char *) f1;
             struct stat st;
@@ -3540,7 +3540,7 @@ dview_diff_cmd (const void *f0, const void *f1)
         }
 
     default:
-        /* this should not happened */
+        // this should not happened
         message (D_ERROR, MSG_ERROR, _("Diff viewer: invalid mode"));
         return FALSE;
     }

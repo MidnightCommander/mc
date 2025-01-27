@@ -43,10 +43,10 @@
 
 #include "lib/global.h"
 
-#include "lib/tty/key.h"        /* ALT */
+#include "lib/tty/key.h"        // ALT
 #include "lib/widget.h"
 
-#include "src/setup.h"          /* drop_menus */
+#include "src/setup.h"          // drop_menus
 
 #include "edit-impl.h"
 #include "editwidget.h"
@@ -184,7 +184,7 @@ create_command_menu (void)
                                             CK_SpellCheckSelectLang));
         entries = g_list_prepend (entries, menu_separator_new ());
     }
-#endif /* HAVE_ASPELL */
+#endif // HAVE_ASPELL
     entries = g_list_prepend (entries, menu_entry_new (_("&Mail..."), CK_EditMail));
 
 

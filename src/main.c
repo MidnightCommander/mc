@@ -34,38 +34,38 @@
 #include <ctype.h>
 #include <errno.h>
 #include <locale.h>
-#include <pwd.h>                /* for username in xterm title */
+#include <pwd.h>                // for username in xterm title
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <signal.h>
-#include <unistd.h>             /* getsid() */
+#include <unistd.h>             // getsid()
 
 #include "lib/global.h"
 
 #include "lib/event.h"
 #include "lib/tty/tty.h"
-#include "lib/tty/key.h"        /* For init_key() */
-#include "lib/tty/mouse.h"      /* init_mouse() */
+#include "lib/tty/key.h"        // For init_key()
+#include "lib/tty/mouse.h"      // init_mouse()
 #include "lib/skin.h"
 #include "lib/filehighlight.h"
 #include "lib/fileloc.h"
 #include "lib/strutil.h"
 #include "lib/util.h"
-#include "lib/vfs/vfs.h"        /* vfs_init(), vfs_shut() */
+#include "lib/vfs/vfs.h"        // vfs_init(), vfs_shut()
 
 #include "filemanager/filemanager.h"
-#include "filemanager/treestore.h"      /* tree_store_save */
+#include "filemanager/treestore.h"      // tree_store_save
 #include "filemanager/layout.h"
-#include "filemanager/ext.h"    /* flush_extension_file() */
-#include "filemanager/command.h"        /* cmdline */
-#include "filemanager/panel.h"  /* panalized_panel */
-#include "filemanager/filenot.h"        /* my_rmdir() */
+#include "filemanager/ext.h"    // flush_extension_file()
+#include "filemanager/command.h"        // cmdline
+#include "filemanager/panel.h"  // panalized_panel
+#include "filemanager/filenot.h"        // my_rmdir()
 
 #ifdef USE_INTERNAL_EDIT
-#include "editor/edit.h"        /* edit_arg_free() */
+#include "editor/edit.h"        // edit_arg_free()
 #endif
 
 #include "vfs/plugins_init.h"
@@ -76,14 +76,14 @@
 #include "subshell/subshell.h"
 #endif
 #include "keymap.h"
-#include "setup.h"              /* load_setup() */
+#include "setup.h"              // load_setup()
 
 #ifdef HAVE_CHARSET
 #include "lib/charsets.h"
 #include "selcodepage.h"
-#endif /* HAVE_CHARSET */
+#endif // HAVE_CHARSET
 
-#include "consaver/cons.saver.h"        /* cons_saver_pid */
+#include "consaver/cons.saver.h"        // cons_saver_pid
 
 /*** global variables ****************************************************************************/
 
@@ -137,8 +137,8 @@ OS_Setup (void)
 
     mc_shell_init ();
 
-    /* This is the directory, where MC was installed, on Unix this is DATADIR */
-    /* and can be overridden by the MC_DATADIR environment variable */
+    // This is the directory, where MC was installed, on Unix this is DATADIR
+    // and can be overridden by the MC_DATADIR environment variable
     datadir_env = g_getenv ("MC_DATADIR");
     if (datadir_env != NULL)
         mc_global.sysconfig_dir = g_strdup (datadir_env);
@@ -172,18 +172,18 @@ sigchld_handler_no_subshell (int sig)
     {
         if (WIFSTOPPED (status))
         {
-            /* Someone has stopped cons.saver - restart it */
+            // Someone has stopped cons.saver - restart it
             kill (pid, SIGCONT);
         }
         else
         {
-            /* cons.saver has died - disable console saving */
+            // cons.saver has died - disable console saving
             handle_console (CONSOLE_DONE);
             mc_global.tty.console_flag = '\0';
         }
     }
-    /* If we got here, some other child exited; ignore it */
-#endif /* __linux__ */
+    // If we got here, some other child exited; ignore it
+#endif // __linux__
 
     (void) sig;
 }
@@ -199,14 +199,14 @@ init_sigchld (void)
     sigchld_action.sa_handler =
 #ifdef ENABLE_SUBSHELL
         mc_global.tty.use_subshell ? sigchld_handler :
-#endif /* ENABLE_SUBSHELL */
+#endif // ENABLE_SUBSHELL
         sigchld_handler_no_subshell;
 
     sigemptyset (&sigchld_action.sa_mask);
 
 #ifdef SA_RESTART
     sigchld_action.sa_flags = SA_RESTART;
-#endif /* !SA_RESTART */
+#endif // !SA_RESTART
 
     if (my_sigaction (SIGCHLD, &sigchld_action, NULL) == -1)
     {
@@ -216,7 +216,7 @@ init_sigchld (void)
          * is defined but not implemented.  Fallback to no subshell.
          */
         mc_global.tty.use_subshell = FALSE;
-#endif /* ENABLE_SUBSHELL */
+#endif // ENABLE_SUBSHELL
     }
 }
 
@@ -245,7 +245,7 @@ check_sid (void)
     if (my_sid == -1)
         return TRUE;
 
-    /* The parent mc is in a different session, it's OK */
+    // The parent mc is in a different session, it's OK
     return (old_sid != my_sid);
 }
 
@@ -262,17 +262,17 @@ main (int argc, char *argv[])
 
     mc_global.run_from_parent_mc = !check_sid ();
 
-    /* We had LC_CTYPE before, LC_ALL includs LC_TYPE as well */
+    // We had LC_CTYPE before, LC_ALL includs LC_TYPE as well
 #ifdef HAVE_SETLOCALE
     (void) setlocale (LC_ALL, "");
 #endif
     (void) bindtextdomain (PACKAGE, LOCALEDIR);
     (void) textdomain (PACKAGE);
 
-    /* do this before args parsing */
+    // do this before args parsing
     str_init_strings (NULL);
 
-    mc_setup_run_mode (argv);   /* are we mc? editor? viewer? etc... */
+    mc_setup_run_mode (argv);   // are we mc? editor? viewer? etc...
 
     if (!mc_args_parse (&argc, &argv, "mc", &mcerror))
     {
@@ -292,7 +292,7 @@ main (int argc, char *argv[])
      */
     mc_global.tty.xterm_flag = tty_check_term (mc_args__force_xterm);
 
-    /* do this before mc_args_show_info () to view paths in the --datadir-info output */
+    // do this before mc_args_show_info () to view paths in the --datadir-info output
     OS_Setup ();
 
     if (!g_path_is_absolute (mc_config_get_home_dir ()))
@@ -324,10 +324,10 @@ main (int argc, char *argv[])
 
     load_setup ();
 
-    /* Must be done after load_setup because depends on mc_global.vfs.cd_symlinks */
+    // Must be done after load_setup because depends on mc_global.vfs.cd_symlinks
     vfs_setup_work_dir ();
 
-    /* Set up temporary directory after VFS initialization */
+    // Set up temporary directory after VFS initialization
     tmpdir = mc_tmpdir ();
 
     /* do this after vfs initialization and vfs working directory setup
@@ -368,39 +368,39 @@ main (int argc, char *argv[])
        calls any define_sequence */
     init_key ();
 
-    /* Must be done before installing the SIGCHLD handler [[FIXME]] */
+    // Must be done before installing the SIGCHLD handler [[FIXME]]
     handle_console (CONSOLE_INIT);
 
 #ifdef ENABLE_SUBSHELL
-    /* Disallow subshell when invoked as standalone viewer or editor from running mc */
+    // Disallow subshell when invoked as standalone viewer or editor from running mc
     if (mc_global.mc_run_mode != MC_RUN_FULL && mc_global.run_from_parent_mc)
         mc_global.tty.use_subshell = FALSE;
 
     if (mc_global.tty.use_subshell)
         subshell_get_console_attributes ();
-#endif /* ENABLE_SUBSHELL */
+#endif // ENABLE_SUBSHELL
 
-    /* Install the SIGCHLD handler; must be done before init_subshell() */
+    // Install the SIGCHLD handler; must be done before init_subshell()
     init_sigchld ();
 
-    /* We need this, since ncurses endwin () doesn't restore the signals */
+    // We need this, since ncurses endwin () doesn't restore the signals
     save_stop_handler ();
 
-    /* Must be done before init_subshell, to set up the terminal size: */
-    /* FIXME: Should be removed and LINES and COLS computed on subshell */
+    // Must be done before init_subshell, to set up the terminal size:
+    // FIXME: Should be removed and LINES and COLS computed on subshell
     tty_init (!mc_args__nomouse, mc_global.tty.xterm_flag);
 
-    /* start check mc_global.display_codepage and mc_global.source_codepage */
+    // start check mc_global.display_codepage and mc_global.source_codepage
     check_codeset ();
 
-    /* Removing this from the X code let's us type C-c */
+    // Removing this from the X code let's us type C-c
     load_key_defs ();
 
     keymap_load (!mc_args__nokeymap);
 
 #ifdef USE_INTERNAL_EDIT
     macros_list = g_array_new (TRUE, FALSE, sizeof (macros_t));
-#endif /* USE_INTERNAL_EDIT */
+#endif // USE_INTERNAL_EDIT
 
     tty_init_colors (mc_global.tty.disable_colors, mc_args__force_colors);
 
@@ -413,8 +413,8 @@ main (int argc, char *argv[])
     mc_error_message (&mcerror, NULL);
 
 #ifdef ENABLE_SUBSHELL
-    /* Done here to ensure that the subshell doesn't  */
-    /* inherit the file descriptors opened below, etc */
+    // Done here to ensure that the subshell doesn't
+    // inherit the file descriptors opened below, etc
     if (mc_global.tty.use_subshell && mc_global.run_from_parent_mc)
     {
         int r;
@@ -425,12 +425,12 @@ main (int argc, char *argv[])
                           D_ERROR, 2, _("&OK"), _("&Quit"));
         if (r == 0)
         {
-            /* parent mc was found and the user wants to continue */
+            // parent mc was found and the user wants to continue
             ;
         }
         else
         {
-            /* parent mc was found and the user wants to quit mc */
+            // parent mc was found and the user wants to quit mc
             mc_global.midnight_shutdown = TRUE;
         }
 
@@ -439,11 +439,11 @@ main (int argc, char *argv[])
 
     if (mc_global.tty.use_subshell)
         init_subshell ();
-#endif /* ENABLE_SUBSHELL */
+#endif // ENABLE_SUBSHELL
 
     if (!mc_global.midnight_shutdown)
     {
-        /* Also done after init_subshell, to save any shell init file messages */
+        // Also done after init_subshell, to save any shell init file messages
         if (mc_global.tty.console_flag != '\0')
             handle_console (CONSOLE_SAVE);
 
@@ -458,11 +458,11 @@ main (int argc, char *argv[])
            separate for the normal and alternate screens */
         enable_bracketed_paste ();
 
-        /* subshell_prompt is NULL here */
+        // subshell_prompt is NULL here
         mc_prompt = (geteuid () == 0) ? "# " : "$ ";
     }
 
-    /* Program main loop */
+    // Program main loop
     if (mc_global.midnight_shutdown)
         exit_code = EXIT_SUCCESS;
     else
@@ -472,7 +472,7 @@ main (int argc, char *argv[])
 
     disable_mouse ();
 
-    /* Save the tree store */
+    // Save the tree store
     (void) tree_store_save ();
 
     keymap_free ();
@@ -482,10 +482,10 @@ main (int argc, char *argv[])
     vfs_expire (TRUE);
     (void) my_rmdir (tmpdir);
 
-    /* Virtual File System shutdown */
+    // Virtual File System shutdown
     vfs_shut ();
 
-    flush_extension_file ();    /* does only free memory */
+    flush_extension_file ();    // does only free memory
 
     mc_skin_deinit ();
     tty_colors_done ();
@@ -499,7 +499,7 @@ main (int argc, char *argv[])
     if (mc_global.tty.alternate_plus_minus)
         numeric_keypad_mode ();
 
-    (void) my_signal (SIGCHLD, SIG_DFL);        /* Disable the SIGCHLD handler */
+    (void) my_signal (SIGCHLD, SIG_DFL);        // Disable the SIGCHLD handler
 
     if (mc_global.tty.console_flag != '\0')
         handle_console (CONSOLE_DONE);
@@ -541,7 +541,7 @@ main (int argc, char *argv[])
         }
         (void) g_array_free (macros_list, TRUE);
     }
-#endif /* USE_INTERNAL_EDIT */
+#endif // USE_INTERNAL_EDIT
 
     str_uninit_strings ();
 
@@ -550,7 +550,7 @@ main (int argc, char *argv[])
 #ifdef USE_INTERNAL_EDIT
     else
         g_list_free_full ((GList *) mc_run_param0, (GDestroyNotify) edit_arg_free);
-#endif /* USE_INTERNAL_EDIT */
+#endif // USE_INTERNAL_EDIT
 
     g_free (mc_run_param1);
     g_free (saved_other_dir);
@@ -565,7 +565,7 @@ main (int argc, char *argv[])
         exit_code = EXIT_FAILURE;
     }
 
-    (void) putchar ('\n');      /* Hack to make shell's prompt start at left of screen */
+    (void) putchar ('\n');      // Hack to make shell's prompt start at left of screen
 
     return exit_code;
 }

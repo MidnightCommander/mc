@@ -32,12 +32,12 @@
 #include "lib/tty/tty.h"
 #include "lib/strutil.h"
 #include "lib/vfs/vfs.h"
-#include "lib/util.h"           /* x_basename() */
+#include "lib/util.h"           // x_basename()
 
 #include "src/textconf.h"
 
 #ifdef USE_INTERNAL_EDIT
-#include "editor/edit.h"        /* edit_arg_t */
+#include "editor/edit.h"        // edit_arg_t
 #endif
 
 #include "src/args.h"
@@ -88,7 +88,7 @@ static GOptionContext *context;
 
 #ifdef ENABLE_SUBSHELL
 static gboolean mc_args__nouse_subshell = FALSE;
-#endif /* ENABLE_SUBSHELL */
+#endif // ENABLE_SUBSHELL
 static gboolean mc_args__show_datadirs = FALSE;
 static gboolean mc_args__show_datadirs_extended = FALSE;
 #ifdef ENABLE_CONFIGURE_ARGS
@@ -98,8 +98,8 @@ static gboolean mc_args__show_configure_opts = FALSE;
 static GOptionGroup *main_group;
 
 static const GOptionEntry argument_main_table[] = {
-    /* *INDENT-OFF* */
-    /* generic options */
+    // *INDENT-OFF*
+    // generic options
     {
      "version", 'V', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE,
      &mc_args__show_version,
@@ -107,7 +107,7 @@ static const GOptionEntry argument_main_table[] = {
      NULL
     },
 
-    /* options for wrappers */
+    // options for wrappers
     {
      "datadir", 'f', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE,
      &mc_args__show_datadirs,
@@ -115,7 +115,7 @@ static const GOptionEntry argument_main_table[] = {
      NULL
     },
 
-    /* show extended information about used data directories */
+    // show extended information about used data directories
     {
      "datadir-info", 'F', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE,
      &mc_args__show_datadirs_extended,
@@ -124,7 +124,7 @@ static const GOptionEntry argument_main_table[] = {
     },
 
 #ifdef ENABLE_CONFIGURE_ARGS
-    /* show configure options */
+    // show configure options
     {
      "configure-options", '\0', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE,
      &mc_args__show_configure_opts,
@@ -156,7 +156,7 @@ static const GOptionEntry argument_main_table[] = {
     },
 #endif
 
-    /* debug options */
+    // debug options
 #ifdef ENABLE_VFS_FTP
     {
      "ftplog", 'l', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_STRING,
@@ -164,10 +164,10 @@ static const GOptionEntry argument_main_table[] = {
      N_("Log ftp dialog to specified file"),
      N_("<file>")
     },
-#endif /* ENABLE_VFS_FTP */
+#endif // ENABLE_VFS_FTP
 
     {
-     /* handle arguments manually */
+     // handle arguments manually
      "view", 'v', G_OPTION_FLAG_IN_MAIN | G_OPTION_FLAG_NO_ARG, G_OPTION_ARG_CALLBACK,
      (gpointer) parse_mc_v_argument,
      N_("Launches the file viewer on a file"),
@@ -175,7 +175,7 @@ static const GOptionEntry argument_main_table[] = {
     },
 
     {
-     /* handle arguments manually */
+     // handle arguments manually
      "edit", 'e', G_OPTION_FLAG_IN_MAIN | G_OPTION_FLAG_NO_ARG, G_OPTION_ARG_CALLBACK,
      (gpointer) parse_mc_e_argument,
      N_("Edit files"),
@@ -183,14 +183,14 @@ static const GOptionEntry argument_main_table[] = {
     },
 
     G_OPTION_ENTRY_NULL
-    /* *INDENT-ON* */
+    // *INDENT-ON*
 };
 
 static GOptionGroup *terminal_group;
 #define ARGS_TERM_OPTIONS 0
 static const GOptionEntry argument_terminal_table[] = {
-    /* *INDENT-OFF* */
-    /* terminal options */
+    // *INDENT-OFF*
+    // terminal options
     {
      "xterm", 'x', ARGS_TERM_OPTIONS, G_OPTION_ARG_NONE,
      &mc_args__force_xterm,
@@ -266,7 +266,7 @@ static const GOptionEntry argument_terminal_table[] = {
     },
 
     G_OPTION_ENTRY_NULL
-    /* *INDENT-ON* */
+    // *INDENT-ON*
 };
 
 #undef ARGS_TERM_OPTIONS
@@ -275,8 +275,8 @@ static GOptionGroup *color_group;
 #define ARGS_COLOR_OPTIONS 0
 /* #define ARGS_COLOR_OPTIONS G_OPTION_FLAG_IN_MAIN */
 static const GOptionEntry argument_color_table[] = {
-    /* *INDENT-OFF* */
-    /* color options */
+    // *INDENT-OFF*
+    // color options
     {
      "nocolor", 'b', ARGS_COLOR_OPTIONS, G_OPTION_ARG_NONE,
      &mc_global.tty.disable_colors,
@@ -306,7 +306,7 @@ static const GOptionEntry argument_color_table[] = {
     },
 
     G_OPTION_ENTRY_NULL
-    /* *INDENT-ON* */
+    // *INDENT-ON*
 };
 
 #undef ARGS_COLOR_OPTIONS
@@ -334,10 +334,10 @@ mc_args_clean_temp_help_strings (void)
 static GOptionGroup *
 mc_args_new_color_group (void)
 {
-    /* *INDENT-OFF* */
-    /* FIXME: to preserve translations, lines should be split. */
+    // *INDENT-OFF*
+    // FIXME: to preserve translations, lines should be split.
     mc_args__loc__colors_string = g_strdup_printf ("%s\n%s",
-                                                   /* TRANSLATORS: don't translate keywords */
+                                                   // TRANSLATORS: don't translate keywords
                                                    _("--colors KEYWORD={FORE},{BACK},{ATTR}:KEYWORD2=...\n\n"
                                                      "{FORE}, {BACK} and {ATTR} can be omitted, and the default will be used\n"
                                                      "\n Keywords:\n"
@@ -354,7 +354,7 @@ mc_args_new_color_group (void)
                                                      "                 editframedrag\n"
                                                      "   Viewer:       viewnormal,viewbold, viewunderline, viewselected\n"
                                                      "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"),
-                                                   /* TRANSLATORS: don't translate color names and attributes */
+                                                   // TRANSLATORS: don't translate color names and attributes
                                                    _("Standard Colors:\n"
                                                     "   black, gray, red, brightred, green, brightgreen, brown,\n"
                                                     "   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
@@ -364,7 +364,7 @@ mc_args_new_color_group (void)
                                                     "Attributes:\n"
                                                     "   bold, italic, underline, reverse, blink; append more with '+'\n")
                                                     );
-    /* *INDENT-ON* */
+    // *INDENT-ON*
 
     return g_option_group_new ("color", mc_args__loc__colors_string,
                                _("Color options"), NULL, NULL);
@@ -384,7 +384,7 @@ mc_args_add_usage_info (void)
     case MC_RUN_EDITOR:
         s = g_strdup_printf ("%s\n", _("[+lineno] file1[:lineno] [file2[:lineno]...]"));
         break;
-#endif /* USE_INTERNAL_EDIT */
+#endif // USE_INTERNAL_EDIT
     case MC_RUN_VIEWER:
         s = g_strdup_printf ("%s\n", _("file"));
         break;
@@ -392,7 +392,7 @@ mc_args_add_usage_info (void)
     case MC_RUN_DIFFVIEWER:
         s = g_strdup_printf ("%s\n", _("file1 file2"));
         break;
-#endif /* USE_DIFF_VIEW */
+#endif // USE_DIFF_VIEW
     case MC_RUN_FULL:
     default:
         s = g_strdup_printf ("%s\n", _("[this_dir] [other_panel_dir]"));
@@ -512,11 +512,11 @@ parse_mcedit_arguments (int argc, char **argv)
 
             if (*error == '\0')
             {
-                /* this is line number */
+                // this is line number
                 first_line_number = lineno;
                 continue;
             }
-            /* this is file name */
+            // this is file name
         }
 
         /*
@@ -570,7 +570,7 @@ parse_mcedit_arguments (int argc, char **argv)
         flist = g_list_prepend (flist, edit_arg_new (NULL, 0));
     else if (first_line_number != -1)
     {
-        /* overwrite line number for first file */
+        // overwrite line number for first file
         GList *l;
 
         l = g_list_last (flist);
@@ -579,7 +579,7 @@ parse_mcedit_arguments (int argc, char **argv)
 
     return flist;
 }
-#endif /* USE_INTERNAL_EDIT */
+#endif // USE_INTERNAL_EDIT
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
@@ -594,23 +594,23 @@ mc_setup_run_mode (char **argv)
 
     if (strncmp (base, "mcv", 3) == 0 || strcmp (base, "view") == 0)
     {
-        /* mcv* or view is link to mc */
+        // mcv* or view is link to mc
         mc_global.mc_run_mode = MC_RUN_VIEWER;
     }
 #ifdef USE_INTERNAL_EDIT
     else if (strncmp (base, "mce", 3) == 0 || strcmp (base, "vi") == 0)
     {
-        /* mce* or vi is link to mc */
+        // mce* or vi is link to mc
         mc_global.mc_run_mode = MC_RUN_EDITOR;
     }
 #endif
 #ifdef USE_DIFF_VIEW
     else if (strncmp (base, "mcd", 3) == 0 || strcmp (base, "diff") == 0)
     {
-        /* mcd* or diff is link to mc */
+        // mcd* or diff is link to mc
         mc_global.mc_run_mode = MC_RUN_DIFFVIEWER;
     }
-#endif /* USE_DIFF_VIEW */
+#endif // USE_DIFF_VIEW
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -744,7 +744,7 @@ mc_setup_by_args (int argc, char **argv, GError **mcerror)
 #ifdef ENABLE_SUBSHELL
     if (mc_args__nouse_subshell)
         mc_global.tty.use_subshell = FALSE;
-#endif /* ENABLE_SUBSHELL */
+#endif // ENABLE_SUBSHELL
 
 #ifdef ENABLE_VFS_FTP
     if (mc_args__netfs_logfile != NULL)
@@ -755,7 +755,7 @@ mc_setup_by_args (int argc, char **argv, GError **mcerror)
         mc_setctl (vpath, VFS_SETCTL_LOGFILE, (void *) mc_args__netfs_logfile);
         vfs_path_free (vpath, TRUE);
     }
-#endif /* ENABLE_VFS_FTP */
+#endif // ENABLE_VFS_FTP
 
     tmp = (argc > 0) ? argv[1] : NULL;
 
@@ -789,7 +789,7 @@ mc_setup_by_args (int argc, char **argv, GError **mcerror)
             return FALSE;
         }
         MC_FALLTHROUGH;
-#endif /* USE_DIFF_VIEW */
+#endif // USE_DIFF_VIEW
 
     case MC_RUN_FULL:
     default:

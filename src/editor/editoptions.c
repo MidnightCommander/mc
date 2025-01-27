@@ -32,7 +32,7 @@
 
 #include <config.h>
 
-#include <stdlib.h>             /* atoi(), NULL */
+#include <stdlib.h>             // atoi(), NULL
 
 #include "lib/global.h"
 #include "lib/widget.h"
@@ -71,7 +71,7 @@ i18n_translate_array (const char *array[])
         array++;
     }
 }
-#endif /* ENABLE_NLS */
+#endif // ENABLE_NLS
 
 /* --------------------------------------------------------------------------------------------- */
 /**
@@ -133,7 +133,7 @@ edit_options_dialog (WDialog *h)
         i18n_translate_array (wrap_str);
         i18n_flag = TRUE;
     }
-#endif /* ENABLE_NLS */
+#endif // ENABLE_NLS
 
     g_snprintf (wrap_length, sizeof (wrap_length), "%d", edit_options.word_wrap_line_length);
     g_snprintf (tab_spacing, sizeof (tab_spacing), "%d", TAB_SIZE);
@@ -147,7 +147,7 @@ edit_options_dialog (WDialog *h)
 
     {
         quick_widget_t quick_widgets[] = {
-            /* *INDENT-OFF* */
+            // *INDENT-OFF*
             QUICK_START_COLUMNS,
                 QUICK_START_GROUPBOX (N_("Wrap mode")),
                     QUICK_RADIO (3, wrap_str, &wrap_mode, NULL),
@@ -182,7 +182,7 @@ edit_options_dialog (WDialog *h)
             QUICK_STOP_COLUMNS,
             QUICK_BUTTONS_OK_CANCEL,
             QUICK_END
-            /* *INDENT-ON* */
+            // *INDENT-ON*
         };
 
         WRect r = { -1, -1, 0, 74 };
@@ -233,7 +233,7 @@ edit_options_dialog (WDialog *h)
         edit_options.typewriter_wrap = FALSE;
     }
 
-    /* Load or unload syntax rules if the option has changed */
+    // Load or unload syntax rules if the option has changed
     if (edit_options.syntax_highlighting != old_syntax_hl)
         g_list_foreach (GROUP (h)->widgets, edit_reload_syntax, NULL);
 }

@@ -40,7 +40,7 @@
 #include "lib/global.h"
 
 #include "lib/tty/tty.h"
-#include "lib/tty/key.h"        /* XCTRL and ALT macros  */
+#include "lib/tty/key.h"        // XCTRL and ALT macros
 #include "lib/skin.h"
 #include "lib/strutil.h"
 #include "lib/util.h"

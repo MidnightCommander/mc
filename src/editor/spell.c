@@ -36,8 +36,8 @@
 #include "lib/charsets.h"
 #endif
 #include "lib/strutil.h"
-#include "lib/util.h"           /* MC_PTR_FREE() */
-#include "lib/tty/tty.h"        /* COLS, LINES */
+#include "lib/util.h"           // MC_PTR_FREE()
+#include "lib/tty/tty.h"        // COLS, LINES
 
 #include "src/setup.h"
 
@@ -106,7 +106,7 @@ static struct
     const char *code;
     const char *name;
 } spell_codes_map[] = {
-    /* *INDENT-OFF* */
+    // *INDENT-OFF*
     {"br", N_("Breton")},
     {"cs", N_("Czech")},
     {"cy", N_("Welsh")},
@@ -132,7 +132,7 @@ static struct
     {"sv", N_("Swedish")},
     {"uk", N_("Ukrainian")},
     {NULL, NULL}
-    /* *INDENT-ON* */
+    // *INDENT-ON*
 };
 
 /* --------------------------------------------------------------------------------------------- */
@@ -244,7 +244,7 @@ aspell_get_lang_list (GPtrArray *lang_list)
     if (spell_module == NULL)
         return 0;
 
-    /* the returned pointer should _not_ need to be deleted */
+    // the returned pointer should _not_ need to be deleted
     dlist = mc_get_aspell_dict_info_list (global_speller->config);
     elem = mc_aspell_dict_info_list_elements (dlist);
 
@@ -289,7 +289,7 @@ aspell_set_lang (const char *lang)
         mc_aspell_config_replace (global_speller->config, "lang", lang);
         mc_aspell_config_replace (global_speller->config, "encoding", spell_codeset);
 
-        /* the returned pointer should _not_ need to be deleted */
+        // the returned pointer should _not_ need to be deleted
         if (global_speller->speller != NULL)
             mc_delete_aspell_speller (global_speller->speller);
 
@@ -323,8 +323,8 @@ spell_dialog_spell_suggest_show (WEdit *edit, const char *word, char **new_word,
                                  const GPtrArray *suggest)
 {
 
-    int sug_dlg_h = 14;         /* dialog height */
-    int sug_dlg_w = 29;         /* dialog width */
+    int sug_dlg_h = 14;         // dialog height
+    int sug_dlg_w = 29;         // dialog width
     int xpos, ypos;
     char *lang_label;
     char *word_label;
@@ -343,11 +343,11 @@ spell_dialog_spell_suggest_show (WEdit *edit, const char *word, char **new_word,
     WButton *cancel_button;
     int word_label_len;
 
-    /* calculate the dialog metrics */
+    // calculate the dialog metrics
     xpos = (COLS - sug_dlg_w) / 2;
     ypos = (LINES - sug_dlg_h) * 2 / 3;
 
-    /* Sometimes menu can hide replaced text. I don't like it */
+    // Sometimes menu can hide replaced text. I don't like it
     if ((edit->curs_row >= ypos - 1) && (edit->curs_row <= ypos + sug_dlg_h - 1))
         ypos -= sug_dlg_h;
 
@@ -595,7 +595,7 @@ edit_suggest_current_word (WEdit *edit)
     int retval = B_SKIP_WORD;
     GString *match_word;
 
-    /* search start of word to spell check */
+    // search start of word to spell check
     match_word = edit_buffer_get_word_from_pos (&edit->buffer, edit->buffer.curs1, &word_start,
                                                 &cut_len);
     word_len = match_word->len;
@@ -736,14 +736,14 @@ const char *
 spell_dialog_lang_list_show (const GPtrArray *languages)
 {
 
-    int lang_dlg_h = 12;        /* dialog height */
-    int lang_dlg_w = 30;        /* dialog width */
+    int lang_dlg_h = 12;        // dialog height
+    int lang_dlg_w = 30;        // dialog width
     const char *selected_lang = NULL;
     unsigned int i;
     int res;
     Listbox *lang_list;
 
-    /* Create listbox */
+    // Create listbox
     lang_list = listbox_window_centered_new (-1, -1, lang_dlg_h, lang_dlg_w,
                                              _("Select language"), "[ASpell]");
 

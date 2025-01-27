@@ -20,4 +20,4 @@ void cd_error_message (const char *path);
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__CD_H */
+#endif // MC__CD_H

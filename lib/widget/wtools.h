@@ -30,7 +30,7 @@ enum
     D_NORMAL = 0,
     D_ERROR = (1 << 0),
     D_CENTER = (1 << 1)
-} /* dialog options */ ;
+} ; // dialog options
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
@@ -39,20 +39,20 @@ enum
 
 struct status_msg_t
 {
-    WDialog *dlg;               /* pointer to status message dialog */
-    gint64 start;               /* start time in microseconds */
-    gint64 delay;               /* delay before raise the 'dlg' in microseconds */
-    gboolean block;             /* how to get event using tty_get_event() */
+    WDialog *dlg;               // pointer to status message dialog
+    gint64 start;               // start time in microseconds
+    gint64 delay;               // delay before raise the 'dlg' in microseconds
+    gboolean block;             // how to get event using tty_get_event()
 
-    status_msg_cb init;         /* callback to init derived classes */
-    status_msg_update_cb update;        /* callback to update dlg */
-    status_msg_cb deinit;       /* callback to deinit derived classes */
+    status_msg_cb init;         // callback to init derived classes
+    status_msg_update_cb update;        // callback to update dlg
+    status_msg_cb deinit;       // callback to deinit derived classes
 };
 
 /* Simple status message with label and 'Abort' button */
 struct simple_status_msg_t
 {
-    status_msg_t status_msg;    /* base class */
+    status_msg_t status_msg;    // base class
 
     WLabel *label;
 };
@@ -97,4 +97,4 @@ void simple_status_msg_init_cb (status_msg_t * sm);
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__WTOOLS_H */
+#endif // MC__WTOOLS_H

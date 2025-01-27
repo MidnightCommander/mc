@@ -15,4 +15,4 @@ void vfs_plugins_init (void);
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__VFS_PLUINS_INIT_H */
+#endif // MC__VFS_PLUINS_INIT_H

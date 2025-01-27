@@ -34,11 +34,11 @@
 
 #include <config.h>
 
-#include <ctype.h>              /* isdigit() */
-#include <stdio.h>              /* sscanf() */
+#include <ctype.h>              // isdigit()
+#include <stdio.h>              // sscanf()
 #include <stdlib.h>
 #include <string.h>
-#include <sys/stat.h>           /* mode_t */
+#include <sys/stat.h>           // mode_t
 #include <time.h>
 #include <unistd.h>
 #include <sys/types.h>
@@ -285,7 +285,7 @@ parse_ls_line (char *line, struct stat *s, char **filename, char **linkname)
     gboolean year_anomaly = FALSE;
     char *name;
 
-    /* parse perms */
+    // parse perms
     t = FIRST_TOKEN_R;
     if (t == NULL)
         return FALSE;
@@ -298,29 +298,29 @@ parse_ls_line (char *line, struct stat *s, char **filename, char **linkname)
 
     s->st_mode = mode;
 
-    /* link count */
+    // link count
     t = NEXT_TOKEN_R;
     if (t == NULL)
         return FALSE;
     s->st_nlink = atol (t);
 
-    /* user */
+    // user
     t = NEXT_TOKEN_R;
     if (t == NULL)
         return FALSE;
 
     s->st_uid = ftpfs_get_uid (t);
 
-    /* group or size */
+    // group or size
     group_or_size = NEXT_TOKEN_R;
 
-    /* size or month */
+    // size or month
     t = NEXT_TOKEN_R;
     if (t == NULL)
         return FALSE;
     if (isdigit ((unsigned char) *t))
     {
-        /* it's size, so the previous was group: */
+        // it's size, so the previous was group:
         long long size;
         int n;
 
@@ -334,7 +334,7 @@ parse_ls_line (char *line, struct stat *s, char **filename, char **linkname)
     }
     else
     {
-        /*  it was month, so the previous was size: */
+        //  it was month, so the previous was size:
         long long size;
         int n;
 
@@ -359,7 +359,7 @@ parse_ls_line (char *line, struct stat *s, char **filename, char **linkname)
         return FALSE;
     date.tm_mday = atoi (day_of_month);
 
-    /* time or year */
+    // time or year
     t = NEXT_TOKEN_R;
     if (t == NULL)
         return FALSE;
@@ -382,14 +382,14 @@ parse_ls_line (char *line, struct stat *s, char **filename, char **linkname)
     }
 
     s->st_mtime = mktime (&date);
-    /* Use resulting time value */
+    // Use resulting time value
     s->st_atime = s->st_ctime = s->st_mtime;
 
     name = strtok_r (NULL, "", &next);
     if (name == NULL)
         return FALSE;
 
-    /* there are ls which output extra space after year. */
+    // there are ls which output extra space after year
     if (year_anomaly && *name == ' ')
         name++;
 
@@ -425,7 +425,7 @@ ftpfs_parse_long_list_UNIX (char *line, struct stat *s, char **filename, char **
         return FALSE;
 
     if (strncasecmp (line, "Status of ", 10) == 0)
-        return FALSE;           /* STAT output. */
+        return FALSE;           // STAT output
 
     ret = parse_ls_line (line, s, filename, linkname);
     if (!ret)
@@ -468,7 +468,7 @@ ftpfs_parse_long_list_NT (char *line, struct stat *s, char **filename, char **li
     t = NEXT_TOKEN;
     if (t == NULL)
         ERR2;
-    am = 'A';                   /* AM/PM is optional */
+    am = 'A';                   // AM/PM is optional
     if (sscanf (t, "%2d:%2d%c", &hour, &minute, &am) < 2)
         ERR2;
 
@@ -476,24 +476,24 @@ ftpfs_parse_long_list_NT (char *line, struct stat *s, char **filename, char **li
     if (t == NULL)
         ERR2;
 
-    if (am == 'P')              /* PM - after noon */
+    if (am == 'P')              // PM - after noon
     {
         hour += 12;
         if (hour == 24)
             hour = 0;
     }
 
-    tms.tm_sec = 30;            /* seconds after the minute [0, 61]  */
-    tms.tm_min = minute;        /* minutes after the hour [0, 59] */
-    tms.tm_hour = hour;         /* hour since midnight [0, 23] */
-    tms.tm_mday = day;          /* day of the month [1, 31] */
-    tms.tm_mon = month - 1;     /* months since January [0, 11] */
-    tms.tm_year = year - 1900;  /* years since 1900 */
+    tms.tm_sec = 30;            // seconds after the minute [0, 61]
+    tms.tm_min = minute;        // minutes after the hour [0, 59]
+    tms.tm_hour = hour;         // hour since midnight [0, 23]
+    tms.tm_mday = day;          // day of the month [1, 31]
+    tms.tm_mon = month - 1;     // months since January [0, 11]
+    tms.tm_year = year - 1900;  // years since 1900
     tms.tm_isdst = -1;
 
 
     s->st_mtime = mktime (&tms);
-    /* Use resulting time value */
+    // Use resulting time value
     s->st_atime = s->st_ctime = s->st_mtime;
 
     if (strcmp (t, "<DIR>") == 0)
@@ -570,7 +570,7 @@ ftpfs_parse_long_list_EPLF (char *line, struct stat *s, char **filename, char **
 
         switch (*scan)
         {
-        case '\t':             /* the rest is file name. */
+        case '\t':             // the rest is file name
             name = scan + 1;
             name_len = scan_len - 1;
             scan = NULL;
@@ -596,7 +596,7 @@ ftpfs_parse_long_list_EPLF (char *line, struct stat *s, char **filename, char **
         case 'i':
             break;
         case 'u':
-            if (scan[1] == 'p') /* permissions. */
+            if (scan[1] == 'p') // permissions
                 if (sscanf (scan + 2, "%o", (unsigned int *) &perms) != 1)
                     perms = -1;
             break;
@@ -627,13 +627,13 @@ ftpfs_parse_long_list_EPLF (char *line, struct stat *s, char **filename, char **
     if (date != NO_DATE)
     {
         s->st_mtime = date;
-        /* Use resulting time value */
+        // Use resulting time value
         s->st_atime = s->st_ctime = s->st_mtime;
     }
     if (type_known)
         s->st_mode = dir ? S_IFDIR : S_IFREG;
     if (perms != -1)
-        s->st_mode |= perms;    /* FIXME */
+        s->st_mode |= perms;    // FIXME
 
     return TRUE;
 }
@@ -671,7 +671,7 @@ ftpfs_parse_long_list_MLSD (char *line, struct stat *s, char **filename, char **
     }
     else
     {
-        /* NcFTPd does not put a semicolon after last fact, workaround it. */
+        // NcFTPd does not put a semicolon after last fact, workaround it
         space = strchr (line, ' ');
         if (space == NULL)
             ERR2;
@@ -778,7 +778,7 @@ ftpfs_parse_long_list_MLSD (char *line, struct stat *s, char **filename, char **
     if (date != NO_DATE)
     {
         s->st_mtime = date;
-        /* Use resulting time value */
+        // Use resulting time value
         s->st_atime = s->st_ctime = s->st_mtime;
     }
     switch (type)
@@ -796,7 +796,7 @@ ftpfs_parse_long_list_MLSD (char *line, struct stat *s, char **filename, char **
         g_assert_not_reached ();
     }
     if (perms != -1)
-        s->st_mode |= perms;    /* FIXME */
+        s->st_mode |= perms;    // FIXME
     if (owner != NULL)
         s->st_uid = ftpfs_get_uid (owner);
     if (group != NULL)
@@ -858,12 +858,12 @@ ftpfs_parse_long_list_AS400 (char *line, struct stat *s, char **filename, char *
     if (t == NULL)
         ERR2;
 
-    tms.tm_sec = second;        /* seconds after the minute [0, 61]  */
-    tms.tm_min = minute;        /* minutes after the hour [0, 59] */
-    tms.tm_hour = hour;         /* hour since midnight [0, 23] */
-    tms.tm_mday = day;          /* day of the month [1, 31] */
-    tms.tm_mon = month - 1;     /* months since January [0, 11] */
-    tms.tm_year = year - 1900;  /* years since 1900 */
+    tms.tm_sec = second;        // seconds after the minute [0, 61]
+    tms.tm_min = minute;        // minutes after the hour [0, 59]
+    tms.tm_hour = hour;         // hour since midnight [0, 23]
+    tms.tm_mday = day;          // day of the month [1, 31]
+    tms.tm_mon = month - 1;     // months since January [0, 11]
+    tms.tm_year = year - 1900;  // years since 1900
     tms.tm_isdst = -1;
     mtime = mktime (&tms);
 
@@ -896,7 +896,7 @@ ftpfs_parse_long_list_AS400 (char *line, struct stat *s, char **filename, char *
         if (slash[1] != '\0')
         {
             *filename = g_strdup (t);
-            s->st_mode = type;  /* FIXME */
+            s->st_mode = type;  // FIXME
             return TRUE;
         }
     }
@@ -905,7 +905,7 @@ ftpfs_parse_long_list_AS400 (char *line, struct stat *s, char **filename, char *
     s->st_mode = type;
     s->st_size = (off_t) size;
     s->st_mtime = mtime;
-    /* Use resulting time value */
+    // Use resulting time value
     s->st_atime = s->st_ctime = s->st_mtime;
     s->st_uid = ftpfs_get_uid (user);
 
@@ -961,15 +961,15 @@ ftpfs_parse_long_list_OS2 (char *line, struct stat *s, char **filename, char **l
     if (sscanf (t, "%2d:%2d", &hour, &minute) != 3)
         ERR2;
 
-    tms.tm_sec = 30;            /* seconds after the minute [0, 61]  */
-    tms.tm_min = minute;        /* minutes after the hour [0, 59] */
-    tms.tm_hour = hour;         /* hour since midnight [0, 23] */
-    tms.tm_mday = day;          /* day of the month [1, 31] */
-    tms.tm_mon = month - 1;     /* months since January [0, 11] */
-    tms.tm_year = year - 1900;  /* years since 1900 */
+    tms.tm_sec = 30;            // seconds after the minute [0, 61]
+    tms.tm_min = minute;        // minutes after the hour [0, 59]
+    tms.tm_hour = hour;         // hour since midnight [0, 23]
+    tms.tm_mday = day;          // day of the month [1, 31]
+    tms.tm_mon = month - 1;     // months since January [0, 11]
+    tms.tm_year = year - 1900;  // years since 1900
     tms.tm_isdst = -1;
     s->st_mtime = mktime (&tms);
-    /* Use resulting time value */
+    // Use resulting time value
     s->st_atime = s->st_ctime = s->st_mtime;
 
     t = strtok (NULL, "");
@@ -1008,9 +1008,9 @@ ftpfs_parse_long_list_MacWebStar (char *line, struct stat *s, char **filename,
 
     if (!vfs_parse_fileperms (t + 1, NULL, &mode))
         ERR2;
-    /* permissions are meaningless here. */
+    // permissions are meaningless here
 
-    /* "folder" or 0 */
+    // "folder" or 0
     t = NEXT_TOKEN;
     if (t == NULL)
         ERR2;
@@ -1019,11 +1019,11 @@ ftpfs_parse_long_list_MacWebStar (char *line, struct stat *s, char **filename,
     {
         long long size;
 
-        /* size? */
+        // size?
         t = NEXT_TOKEN;
         if (t == NULL)
             ERR2;
-        /* size */
+        // size
         t = NEXT_TOKEN;
         if (t == NULL)
             ERR2;
@@ -1035,13 +1035,13 @@ ftpfs_parse_long_list_MacWebStar (char *line, struct stat *s, char **filename,
     }
     else
     {
-        /* ?? */
+        // ??
         t = NEXT_TOKEN;
         if (t == NULL)
             ERR2;
     }
 
-    /* month */
+    // month
     t = NEXT_TOKEN;
     if (t == NULL)
         ERR2;
@@ -1057,7 +1057,7 @@ ftpfs_parse_long_list_MacWebStar (char *line, struct stat *s, char **filename,
 
     date.tm_mday = atoi (day_of_month);
 
-    /* time or year */
+    // time or year
     t = NEXT_TOKEN;
     if (t == NULL)
         ERR2;
@@ -1072,14 +1072,14 @@ ftpfs_parse_long_list_MacWebStar (char *line, struct stat *s, char **filename,
         date.tm_hour = 12;
 
     s->st_mtime = mktime (&date);
-    /* Use resulting time value */
+    // Use resulting time value
     s->st_atime = s->st_ctime = s->st_mtime;
 
     name = strtok (NULL, "");
     if (name == NULL)
         ERR2;
 
-    /* no symlinks on Mac, but anyway. */
+    // no symlinks on Mac, but anyway
     if (!S_ISLNK (s->st_mode))
         *linkname = NULL;
     else
@@ -1108,7 +1108,7 @@ GSList *
 ftpfs_parse_long_list (struct vfs_class *me, struct vfs_s_inode *dir, GSList *buf, int *err_ret)
 {
     int err[number_of_parsers];
-    GSList *set[number_of_parsers];     /* arrays of struct vfs_s_entry */
+    GSList *set[number_of_parsers];     // arrays of struct vfs_s_entry
     size_t i;
     GSList *bufp;
     ftpfs_line_parser guessed_parser = NULL;
@@ -1150,7 +1150,7 @@ ftpfs_parse_long_list (struct vfs_class *me, struct vfs_s_inode *dir, GSList *bu
                 char *tmp_line;
                 int nlink;
 
-                /* parser can clobber the line - work on a copy */
+                // parser can clobber the line - work on a copy
                 tmp_line = g_strndup (b, blen);
 
                 info = vfs_s_generate_entry (me, NULL, dir, 0);
@@ -1159,7 +1159,7 @@ ftpfs_parse_long_list (struct vfs_class *me, struct vfs_s_inode *dir, GSList *bu
                                          &info->ino->linkname, &err[i]);
                 if (ok && strchr (info->name, '/') == NULL)
                 {
-                    info->ino->st.st_nlink = nlink;     /* Ouch, we need to preserve our counts :-( */
+                    info->ino->st.st_nlink = nlink;     // Ouch, we need to preserve our counts :-(
                     set[i] = g_slist_prepend (set[i], info);
                 }
                 else
@@ -1173,7 +1173,7 @@ ftpfs_parse_long_list (struct vfs_class *me, struct vfs_s_inode *dir, GSList *bu
                     best_err2 = &err[i];
 
                 if (*best_err1 > 16)
-                    goto leave; /* too many errors with best parser. */
+                    goto leave; // too many errors with best parser
             }
 
             if (*best_err2 > (*best_err1 + 1) * 16)
@@ -1191,7 +1191,7 @@ ftpfs_parse_long_list (struct vfs_class *me, struct vfs_s_inode *dir, GSList *bu
             char *tmp_line;
             int nlink;
 
-            /* parser can clobber the line - work on a copy */
+            // parser can clobber the line - work on a copy
             tmp_line = g_strndup (b, blen);
 
             info = vfs_s_generate_entry (me, NULL, dir, 0);
@@ -1200,7 +1200,7 @@ ftpfs_parse_long_list (struct vfs_class *me, struct vfs_s_inode *dir, GSList *bu
                                  the_err);
             if (ok && strchr (info->name, '/') == NULL)
             {
-                info->ino->st.st_nlink = nlink; /* Ouch, we need to preserve our counts :-( */
+                info->ino->st.st_nlink = nlink; // Ouch, we need to preserve our counts :-(
                 *the_set = g_slist_prepend (*the_set, info);
             }
             else

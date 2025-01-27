@@ -1,7 +1,7 @@
 #ifndef MC__FILEHIGHLIGHT_H
 #define MC__FILEHIGHLIGHT_H
 
-#include "lib/mcconfig.h"       /* mc_config_t */
+#include "lib/mcconfig.h"       // mc_config_t
 #include "lib/file-entry.h"
 
 /*** typedefs(not structures) and defined constants **********************************************/
@@ -31,4 +31,4 @@ void mc_fhl_clear (mc_fhl_t * fhl);
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC__FILEHIGHLIGHT_H */
+#endif // MC__FILEHIGHLIGHT_H

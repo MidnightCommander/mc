@@ -162,21 +162,21 @@ rect_intersect (WRect *r, const WRect *r1)
     int y, x;
     int y1, x1;
 
-    /* right-down corners */
+    // right-down corners
     y = r->y + r->lines;
     x = r->x + r->cols;
     y1 = r1->y + r1->lines;
     x1 = r1->x + r1->cols;
 
-    /* right-down corner of intersection */
+    // right-down corner of intersection
     y = MIN (y, y1);
     x = MIN (x, x1);
 
-    /* left-up corner of intersection */
+    // left-up corner of intersection
     r->y = MAX (r->y, r1->y);
     r->x = MAX (r->x, r1->x);
 
-    /* intersection sizes */
+    // intersection sizes
     r->lines = y - r->y;
     r->cols = x - r->x;
 }
@@ -198,21 +198,21 @@ rect_union (WRect *r, const WRect *r1)
     int x, y;
     int x1, y1;
 
-    /* right-down corners */
+    // right-down corners
     y = r->y + r->lines;
     x = r->x + r->cols;
     y1 = r1->y + r1->lines;
     x1 = r1->x + r1->cols;
 
-    /* right-down corner of union */
+    // right-down corner of union
     y = MAX (y, y1);
     x = MAX (x, x1);
 
-    /* left-up corner of union */
+    // left-up corner of union
     r->y = MIN (r->y, r1->y);
     r->x = MIN (r->x, r1->x);
 
-    /* union sizes */
+    // union sizes
     r->lines = y - r->y;
     r->cols = x - r->x;
 }

@@ -45,13 +45,13 @@
 
 #include "lib/global.h"
 #include "lib/util.h"
-#include "lib/widget.h"         /* D_ERROR, D_NORMAL */
+#include "lib/widget.h"         // D_ERROR, D_NORMAL
 
 #include "lib/vfs/vfs.h"
 #include "lib/vfs/utilvfs.h"
 #include "lib/vfs/xdirentry.h"
 #include "src/vfs/local/local.h"
-#include "lib/vfs/gc.h"         /* vfs_stamp_create */
+#include "lib/vfs/gc.h"         // vfs_stamp_create
 
 #include "sfs.h"
 
@@ -138,8 +138,8 @@ sfs_vfmake (const vfs_path_t *vpath, vfs_path_t *cache_vpath)
     char pad[10240];
     char *s_iter, *t = pad;
     gboolean was_percent = FALSE;
-    vfs_path_t *pname;          /* name of parent archive */
-    char *pqname;               /* name of parent archive, quoted */
+    vfs_path_t *pname;          // name of parent archive
+    char *pqname;               // name of parent archive, quoted
     const vfs_path_element_t *path_element;
     mc_pipe_t *pip;
     GError *error = NULL;
@@ -159,7 +159,7 @@ sfs_vfmake (const vfs_path_t *vpath, vfs_path_t *cache_vpath)
         return (-1);
     }
 
-    /*    if ((sfs_info[w].flags & F_2) || (!inpath) || (!*inpath)); else return -1; */
+    //    if ((sfs_info[w].flags & F_2) || (!inpath) || (!*inpath)); else return -1;
     if ((sfs_info[w].flags & F_NOLOCALCOPY) != 0)
         pqname = name_quote (vfs_path_as_str (pname), FALSE);
     else
@@ -220,7 +220,7 @@ sfs_vfmake (const vfs_path_t *vpath, vfs_path_t *cache_vpath)
 
     g_free (pqname);
 
-    /* don't read stdout */
+    // don't read stdout
     pip = mc_popen (pad, FALSE, TRUE, &error);
     if (pip == NULL)
     {
@@ -244,7 +244,7 @@ sfs_vfmake (const vfs_path_t *vpath, vfs_path_t *cache_vpath)
         message (D_ERROR, MSG_ERROR, _("SFS virtual file system:\n%s"), pip->err.buf);
 
     mc_pclose (pip, NULL);
-    return 0;                   /* OK */
+    return 0;                   // OK
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -567,7 +567,7 @@ sfs_which (struct vfs_class *me, const char *path)
 void
 vfs_init_sfs (void)
 {
-    /* NULLize vfs_s_subclass members */
+    // NULLize vfs_s_subclass members
     memset (&sfs_subclass, 0, sizeof (sfs_subclass));
 
     vfs_init_class (vfs_sfs_ops, "sfs", VFSF_UNKNOWN, NULL);

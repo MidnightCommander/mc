@@ -45,4 +45,4 @@ extern int reset_hp_softkeys;
 
 /*** inline functions ****************************************************************************/
 
-#endif /* MC_TTY_SLANG_H */
+#endif // MC_TTY_SLANG_H

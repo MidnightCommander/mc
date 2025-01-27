@@ -149,9 +149,9 @@ main (void)
 
     tc_core = tcase_create ("Core");
 
-    /* Add new tests here: *************** */
+    // Add new tests here: ***************
     tcase_add_test (tc_core, test_group_init_deinit);
-    /* *********************************** */
+    // ***********************************
 
     return mctest_run_all (tc_core);
 }
