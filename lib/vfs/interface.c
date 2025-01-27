@@ -230,7 +230,6 @@ mc_open (const vfs_path_t *vpath, int flags, ...)
 
 /* --------------------------------------------------------------------------------------------- */
 
-/* *INDENT-OFF* */
 
 #define MC_NAMEOP(name, inarg, callarg) \
 int mc_##name inarg \
@@ -262,7 +261,6 @@ MC_NAMEOP (mkdir, (const vfs_path_t *vpath, mode_t mode), (vpath, mode))
 MC_NAMEOP (rmdir, (const vfs_path_t *vpath), (vpath))
 MC_NAMEOP (mknod, (const vfs_path_t *vpath, mode_t mode, dev_t dev), (vpath, mode, dev))
 
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -288,7 +286,6 @@ mc_symlink (const vfs_path_t *vpath1, const vfs_path_t *vpath2)
 
 /* --------------------------------------------------------------------------------------------- */
 
-/* *INDENT-OFF* */
 
 #define MC_HANDLEOP(rettype, name, inarg, callarg) \
 rettype mc_##name inarg \
@@ -343,7 +340,6 @@ int mc_##name (const vfs_path_t *vpath1, const vfs_path_t *vpath2) \
 MC_RENAMEOP (link)
 MC_RENAMEOP (rename)
 
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -529,7 +525,6 @@ mc_closedir (DIR *dirp)
 
 /* --------------------------------------------------------------------------------------------- */
 
-/* *INDENT-OFF* */
 
 #define MC_STATOP(name) \
 int mc_##name (const vfs_path_t *vpath, struct stat *buf) \
@@ -554,7 +549,6 @@ int mc_##name (const vfs_path_t *vpath, struct stat *buf) \
 MC_STATOP (stat)
 MC_STATOP (lstat)
 
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

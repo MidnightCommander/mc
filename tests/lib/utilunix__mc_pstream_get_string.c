@@ -57,7 +57,6 @@ teardown (void)
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("data_source") */
-/* *INDENT-OFF* */
 static const struct data_source
 {
     // input
@@ -197,12 +196,9 @@ data_source[] =
         .len = { 6, 5, 8, 0 }
     }
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "data_source") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (mc_pstream_get_string_test, data_source)
-/* *INDENT-ON* */
 {
     // given
     int j = 0;
@@ -232,9 +228,7 @@ START_PARAMETRIZED_TEST (mc_pstream_get_string_test, data_source)
     }
     while (TRUE);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -274,9 +268,7 @@ test_mc_pread (mc_pipe_t *p)
     etalon_long_file_list_pos += len;
 }
 
-/* *INDENT-OFF* */
 START_TEST (mc_pstream_get_long_file_list_test)
-/* *INDENT-ON* */
 
 {
     // given
@@ -370,9 +362,7 @@ START_TEST (mc_pstream_get_long_file_list_test)
     g_string_free (result_long_file_list, TRUE);
 
 }
-/* *INDENT-OFF* */
 END_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

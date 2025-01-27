@@ -193,7 +193,6 @@ exec_get_export_variables (const vfs_path_t *filename_vpath)
     GString *export_vars_string;
     size_t i;
 
-    // *INDENT-OFF*
     struct
     {
         const char symbol;
@@ -206,7 +205,6 @@ exec_get_export_variables (const vfs_path_t *filename_vpath)
         {'t', "MC_EXT_ONLYTAGGED", TRUE},
         {'\0', NULL, FALSE}
     };
-    // *INDENT-ON*
 
     text = exec_get_file_name (filename_vpath);
     if (text == NULL)
@@ -372,12 +370,10 @@ static void
 exec_extension_view (void *target, char *cmd, const vfs_path_t *filename_vpath, int start_line)
 {
     mcview_mode_flags_t def_flags = {
-        // *INDENT-OFF*
         .wrap = FALSE,
         .hex = mcview_global_flags.hex,
         .magic = FALSE,
         .nroff = mcview_global_flags.nroff
-        // *INDENT-ON*
     };
 
     mcview_mode_flags_t changed_flags;

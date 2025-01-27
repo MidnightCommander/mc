@@ -385,7 +385,6 @@ edit_get_save_file_as (WEdit *edit)
     };
 
     quick_widget_t quick_widgets[] = {
-        // *INDENT-OFF*
         QUICK_LABELED_INPUT (N_("Enter file name:"), input_label_above,
                              vfs_path_as_str (edit->filename_vpath), "save-as",
                              &filename_res, NULL, FALSE, FALSE, INPUT_COMPLETE_FILENAMES),
@@ -394,7 +393,6 @@ edit_get_save_file_as (WEdit *edit)
         QUICK_RADIO (LB_NAMES, lb_names, (int *) &cur_lb, NULL),
         QUICK_BUTTONS_OK_CANCEL,
         QUICK_END
-        // *INDENT-ON*
     };
 
     WRect r = { -1, -1, 0, 64 };
@@ -857,7 +855,6 @@ edit_save_mode_cmd (void)
 
     {
         quick_widget_t quick_widgets[] = {
-            // *INDENT-OFF*
             QUICK_RADIO (3, str, &edit_options.save_mode, &edit_save_mode_radio_id),
             QUICK_INPUT (edit_options.backup_ext, "edit-backup-ext", &str_result,
                          &edit_save_mode_input_id, FALSE, FALSE, INPUT_COMPLETE_NONE),
@@ -865,7 +862,6 @@ edit_save_mode_cmd (void)
             QUICK_CHECKBOX (N_("Check &POSIX new line"), &edit_options.check_nl_at_eof, NULL),
             QUICK_BUTTONS_OK_CANCEL,
             QUICK_END
-            // *INDENT-ON*
         };
 
         WRect r = { -1, -1, 0, 38 };
@@ -1903,7 +1899,6 @@ edit_mail_dialog (WEdit *edit)
     char *mail_cc = NULL;
 
     quick_widget_t quick_widgets[] = {
-        // *INDENT-OFF*
         QUICK_LABEL (N_("mail -s <subject> -c <cc> <to>"), NULL),
         QUICK_LABELED_INPUT (N_("To"), input_label_above,
                              INPUT_LAST_TEXT, "mail-dlg-input-3",
@@ -1916,7 +1911,6 @@ edit_mail_dialog (WEdit *edit)
                              &mail_cc, NULL, FALSE, FALSE, INPUT_COMPLETE_USERNAMES),
         QUICK_BUTTONS_OK_CANCEL,
         QUICK_END
-        // *INDENT-ON*
     };
 
     WRect r = { -1, -1, 0, 50 };

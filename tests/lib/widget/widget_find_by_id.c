@@ -35,9 +35,7 @@
 
 /* --------------------------------------------------------------------------------------------- */
 
-/* *INDENT-OFF* */
 START_TEST (test_widget_find_by_id)
-/* *INDENT-ON* */
 {
     WGroup *g, *g0;
     Widget *w0;
@@ -97,9 +95,7 @@ START_TEST (test_widget_find_by_id)
     send_message (g, NULL, MSG_INIT, 0, NULL);
     widget_destroy (w0);
 }
-/* *INDENT-OFF* */
 END_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

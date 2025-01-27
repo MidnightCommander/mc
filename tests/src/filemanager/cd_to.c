@@ -105,7 +105,6 @@ teardown (void)
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("test_empty_mean_home_ds") */
-/* *INDENT-OFF* */
 static const struct test_empty_mean_home_ds
 {
     const char *command;
@@ -124,12 +123,9 @@ static const struct test_empty_mean_home_ds
         "  \t   \t  \t\t    \t    "
     },
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "test_empty_mean_home_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_empty_mean_home, test_empty_mean_home_ds)
-/* *INDENT-ON* */
 {
     // given
     get_current_type__return_value = view_listing;
@@ -149,9 +145,7 @@ START_PARAMETRIZED_TEST (test_empty_mean_home, test_empty_mean_home_ds)
                           vfs_path_as_str (do_cd__new_dir_vpath__captured));
     ck_assert_int_eq (do_cd__cd_type__captured, cd_parse_command);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

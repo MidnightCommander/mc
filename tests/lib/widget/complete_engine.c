@@ -99,7 +99,6 @@ teardown (void)
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("test_complete_engine_fill_completions_ds") */
-/* *INDENT-OFF* */
 static const struct test_complete_engine_fill_completions_ds
 {
     const char *input_buffer;
@@ -187,13 +186,10 @@ static const struct test_complete_engine_fill_completions_ds
         30
     },
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "test_complete_engine_fill_completions_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_complete_engine_fill_completions,
                          test_complete_engine_fill_completions_ds)
-/* *INDENT-ON* */
 {
     // given
     WInput *w_input;
@@ -210,9 +206,7 @@ START_PARAMETRIZED_TEST (test_complete_engine_fill_completions,
     ck_assert_int_eq (try_complete__lc_end__captured, data->expected_end);
     ck_assert_int_eq (try_complete__flags__captured, data->input_completion_flags);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

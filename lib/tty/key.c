@@ -551,9 +551,7 @@ static Window x11_window;
 
 static KeySortType has_been_sorted = KEY_NOSORT;
 
-/* *INDENT-OFF* */
 static const size_t key_conv_tab_size = G_N_ELEMENTS (key_name_conv_tab) - 1;
-/* *INDENT-ON* */
 
 static const key_code_name_t *key_conv_tab_sorted[G_N_ELEMENTS (key_name_conv_tab) - 1];
 

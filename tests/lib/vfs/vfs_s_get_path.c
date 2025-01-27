@@ -119,9 +119,7 @@ vfs_die (const char *m)
 /* --------------------------------------------------------------------------------------------- */
 
 /* @Test */
-/* *INDENT-OFF* */
 START_TEST (test_vfs_s_get_path)
-/* *INDENT-ON* */
 {
     // given
     struct vfs_s_super *archive;
@@ -141,9 +139,7 @@ START_TEST (test_vfs_s_get_path)
     g_free (vpath);
 
 }
-/* *INDENT-OFF* */
 END_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

@@ -84,7 +84,6 @@ read_list (const char *fname)
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("test_ftpfs_parse_long_list_ds") */
-/* *INDENT-OFF* */
 static const struct test_ftpfs_parse_long_list_ds
 {
     const char *name;
@@ -97,12 +96,9 @@ static const struct test_ftpfs_parse_long_list_ds
         "ms"
     }
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "test_ftpfs_parse_long_list_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_ftpfs_parse_long_list, test_ftpfs_parse_long_list_ds)
-/* *INDENT-ON* */
 {
     // given
     char *name;
@@ -141,9 +137,7 @@ START_PARAMETRIZED_TEST (test_ftpfs_parse_long_list, test_ftpfs_parse_long_list_
     g_slist_free_full (input, g_free);
     g_slist_free_full (output, g_free);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

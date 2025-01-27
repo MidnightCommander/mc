@@ -68,9 +68,7 @@ teardown (void)
 /* --------------------------------------------------------------------------------------------- */
 
 /* @Test */
-/* *INDENT-OFF* */
 START_TEST (test_mc_tmpdir)
-/* *INDENT-ON* */
 {
     // given
     const char *tmpdir;
@@ -85,16 +83,12 @@ START_TEST (test_mc_tmpdir)
                    "\nNo such directory: %s\n", tmpdir);
     mctest_assert_str_eq (env_tmpdir, tmpdir);
 }
-/* *INDENT-OFF* */
 END_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
 /* @Test */
-/* *INDENT-OFF* */
 START_TEST (test_mc_mkstemps)
-/* *INDENT-ON* */
 {
     // given
     vfs_path_t *pname_vpath = NULL;
@@ -117,9 +111,7 @@ START_TEST (test_mc_mkstemps)
                    begin_pname);
     vfs_path_free (pname_vpath, TRUE);
 }
-/* *INDENT-OFF* */
 END_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

@@ -57,7 +57,6 @@ static const struct
     char **basedir;
     const char *filename;
 } mc_config_files_reference[] = {
-    // *INDENT-OFF*
     // config
     { &mc_config_str, MC_CONFIG_FILE },
     { &mc_config_str, MC_FHL_INI_FILE },
@@ -94,7 +93,6 @@ static const struct
     { &mc_cache_str, EDIT_HOME_BLOCK_FILE },
 
     { NULL, NULL }
-    // *INDENT-ON*
 };
 
 /* --------------------------------------------------------------------------------------------- */

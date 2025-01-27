@@ -85,7 +85,6 @@ teardown (void)
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("test_vfs_prefix_to_class_ds") */
-/* *INDENT-OFF* */
 static const struct test_vfs_prefix_to_class_ds
 {
     const char *input_string;
@@ -129,12 +128,9 @@ static const struct test_vfs_prefix_to_class_ds
         NULL
     },
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "test_vfs_prefix_to_class_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_vfs_prefix_to_class, test_vfs_prefix_to_class_ds)
-/* *INDENT-ON* */
 {
     // given
     struct vfs_class *actual_result;
@@ -145,9 +141,7 @@ START_PARAMETRIZED_TEST (test_vfs_prefix_to_class, test_vfs_prefix_to_class_ds)
     // then
     mctest_assert_ptr_eq (actual_result, data->expected_result);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

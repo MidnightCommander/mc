@@ -94,7 +94,6 @@ edit_dialog_search_show (WEdit *edit)
 
     {
         quick_widget_t quick_widgets[] = {
-            // *INDENT-OFF*
             QUICK_LABELED_INPUT (N_("Enter search string:"), input_label_above, INPUT_LAST_TEXT,
                                  MC_HISTORY_SHARED_SEARCH, &search_text, NULL, FALSE, FALSE,
                                  INPUT_COMPLETE_NONE),
@@ -116,7 +115,6 @@ edit_dialog_search_show (WEdit *edit)
                 QUICK_BUTTON (N_("&Find all"), B_USER, NULL, NULL),
                 QUICK_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
             QUICK_END
-            // *INDENT-ON*
         };
 
         WRect r = { -1, -1, 0, 58 };
@@ -175,7 +173,6 @@ edit_dialog_replace_show (WEdit *edit, const char *search_default, const char *r
 
     {
         quick_widget_t quick_widgets[] = {
-            // *INDENT-OFF*
             QUICK_LABELED_INPUT (N_("Enter search string:"), input_label_above, search_default,
                                  MC_HISTORY_SHARED_SEARCH, search_text, NULL, FALSE, FALSE,
                                  INPUT_COMPLETE_NONE),
@@ -196,7 +193,6 @@ edit_dialog_replace_show (WEdit *edit, const char *search_default, const char *r
             QUICK_STOP_COLUMNS,
             QUICK_BUTTONS_OK_CANCEL,
             QUICK_END
-            // *INDENT-ON*
         };
 
         WRect r = { -1, -1, 0, 58 };
@@ -251,7 +247,6 @@ edit_dialog_replace_prompt_show (WEdit *edit, char *from_text, char *to_text, in
 
     {
         quick_widget_t quick_widgets[] = {
-            // *INDENT-OFF*
             QUICK_LABEL (repl_from, NULL),
             QUICK_LABEL (N_("Replace with:"), NULL),
             QUICK_LABEL (repl_to, NULL),
@@ -261,7 +256,6 @@ edit_dialog_replace_prompt_show (WEdit *edit, char *from_text, char *to_text, in
                 QUICK_BUTTON (N_("&Skip"), B_SKIP_REPLACE, NULL, NULL),
                 QUICK_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
             QUICK_END
-            // *INDENT-ON*
         };
 
         WRect r = { ypos, xpos, 0, -1 };

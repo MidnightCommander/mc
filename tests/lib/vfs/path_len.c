@@ -70,7 +70,6 @@ teardown (void)
 
 /* --------------------------------------------------------------------------------------------- */
 /* @DataSource("test_path_length_ds") */
-/* *INDENT-OFF* */
 static const struct test_path_length_ds
 {
     const char *input_path;
@@ -101,12 +100,9 @@ static const struct test_path_length_ds
     },
 #endif // HAVE_CHARSET
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "test_path_length_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_path_length, test_path_length_ds)
-/* *INDENT-ON* */
 {
     // given
     vfs_path_t *vpath;
@@ -126,9 +122,7 @@ START_PARAMETRIZED_TEST (test_path_length, test_path_length_ds)
 
     vfs_path_free (vpath, TRUE);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

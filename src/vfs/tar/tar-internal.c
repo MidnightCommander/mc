@@ -61,7 +61,6 @@
 /* Table of base-64 digit values + 1, indexed by unsigned chars.
    See Internet RFC 2045 Table 1.
    Zero entries are for unsigned chars that are not base-64 digits.  */
-/* *INDENT-OFF* */
 static char const base64_map[UCHAR_MAX + 1] =
 {
     ['A'] =  0 + 1, ['B'] =  1 + 1, ['C'] =  2 + 1, ['D'] =  3 + 1,
@@ -83,7 +82,6 @@ static char const base64_map[UCHAR_MAX + 1] =
     ['8'] = 60 + 1, ['9'] = 61 + 1,
     ['+'] = 62 + 1, ['/'] = 63 + 1,
 };
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/

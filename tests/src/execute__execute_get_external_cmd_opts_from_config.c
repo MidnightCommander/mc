@@ -114,7 +114,6 @@ teardown (void)
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("check_subtitute_ds") */
-/* *INDENT-OFF* */
 static const struct check_subtitute_ds
 {
     const char *config_opts_string;
@@ -139,12 +138,9 @@ static const struct check_subtitute_ds
         "'/path/to/'\\''f i\" l e \t\t\n':\\\\\\\\\\\\1234",
     },
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "check_subtitute_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (check_if_filename_and_lineno_will_be_subtituted, check_subtitute_ds)
-/* *INDENT-ON* */
 {
     // given
     char *actual_result;
@@ -174,9 +170,7 @@ START_PARAMETRIZED_TEST (check_if_filename_and_lineno_will_be_subtituted, check_
     vfs_path_free (filename_vpath, TRUE);
 
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

@@ -92,7 +92,6 @@ test_filevercmp (char const *a, char const *b)
 
 /* @DataSource("filevercmp_test_ds1") */
 /* Testcases are taken from Gnulib */
-/* *INDENT-OFF* */
 static const struct filevercmp_test_struct
 {
     const char *s1;
@@ -109,13 +108,10 @@ static const struct filevercmp_test_struct
     { "9", "10", -1 },
     { "0a", "0", 1 }
 };
-/* *INDENT-ON* */
 
 
 /* @Test(dataSource = "filevercmp_test_ds1") */
-/* *INDENT-OFF* */
 START_TEST (filevercmp_test1)
-/* *INDENT-ON* */
 {
     // given
     int actual_result;
@@ -127,9 +123,7 @@ START_TEST (filevercmp_test1)
     // then
     ck_assert_int_eq (sign (actual_result), sign (data->expected_result));
 }
-/* *INDENT-OFF* */
 END_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -213,9 +207,7 @@ static const char *filevercmp_test_ds2[] = {
 static const size_t filevercmp_test_ds2_len = G_N_ELEMENTS (filevercmp_test_ds2);
 
 /* @Test(dataSource = "filevercmp_test_ds2") */
-/* *INDENT-OFF* */
 START_TEST (filevercmp_test2)
-/* *INDENT-ON* */
 {
     const char *i = filevercmp_test_ds2[_i];
     size_t _j;
@@ -235,9 +227,7 @@ START_TEST (filevercmp_test2)
             ck_assert_int_eq ((size_t) _i, _j);
     }
 }
-/* *INDENT-OFF* */
 END_TEST
-/* *INDENT-ON* */
 
 
 /* @DataSource("filevercmp_test_ds3") */
@@ -250,9 +240,7 @@ static const char *filevercmp_test_ds3[] = {
 static const size_t filevercmp_test_ds3_len = G_N_ELEMENTS (filevercmp_test_ds3);
 
 /* @Test(dataSource = "filevercmp_test_ds3") */
-/* *INDENT-OFF* */
 START_TEST (filevercmp_test3)
-/* *INDENT-ON* */
 {
     const char *i = filevercmp_test_ds3[_i];
     size_t _j;
@@ -272,9 +260,7 @@ START_TEST (filevercmp_test3)
             ck_assert_int_eq ((size_t) _i, _j);
     }
 }
-/* *INDENT-OFF* */
 END_TEST
-/* *INDENT-ON* */
 
 
 /* @DataSource("filevercmp_test_ds4") */
@@ -288,9 +274,7 @@ static const char *filevercmp_test_ds4[] = {
 static const size_t filevercmp_test_ds4_len = G_N_ELEMENTS (filevercmp_test_ds4);
 
 /* @Test(dataSource = "filevercmp_test_ds4") */
-/* *INDENT-OFF* */
 START_TEST (filevercmp_test4)
-/* *INDENT-ON* */
 {
     const char *i = filevercmp_test_ds4[_i];
     size_t _j;
@@ -310,9 +294,7 @@ START_TEST (filevercmp_test4)
             ck_assert_int_eq ((size_t) _i, _j);
     }
 }
-/* *INDENT-OFF* */
 END_TEST
-/* *INDENT-ON* */
 
 
 /* @DataSource("filevercmp_test_ds5") */
@@ -349,9 +331,7 @@ static const char *filevercmp_test_ds5[] = {
 static const size_t filevercmp_test_ds5_len = G_N_ELEMENTS (filevercmp_test_ds5);
 
 /* @Test(dataSource = "filevercmp_test_ds5") */
-/* *INDENT-OFF* */
 START_TEST (filevercmp_test5)
-/* *INDENT-ON* */
 {
     size_t ii;
 
@@ -370,9 +350,7 @@ START_TEST (filevercmp_test5)
             }
         }
 }
-/* *INDENT-OFF* */
 END_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

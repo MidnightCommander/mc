@@ -67,9 +67,7 @@ teardown (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-/* *INDENT-OFF* */
 START_TEST (sanitize_variables)
-/* *INDENT-ON* */
 {
     // given
     vfs_path_t *filename_vpath;
@@ -109,9 +107,7 @@ export MC_EXT_ONLYTAGGED\n";
     g_string_free (current_panel->dir.list[1].fname, TRUE);
     g_string_free (current_panel->dir.list[2].fname, TRUE);
 }
-/* *INDENT-OFF* */
 END_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

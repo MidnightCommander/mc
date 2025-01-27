@@ -29,7 +29,6 @@
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("test_hex_translate_to_regex_ds") */
-/* *INDENT-OFF* */
 static const struct test_hex_translate_to_regex_ds
 {
     const char *input_value;
@@ -143,12 +142,9 @@ static const struct test_hex_translate_to_regex_ds
         MC_SEARCH_HEX_E_OK
     },
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "test_hex_translate_to_regex_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_hex_translate_to_regex, test_hex_translate_to_regex_ds)
-/* *INDENT-ON* */
 {
     GString *tmp, *dest_str;
     mc_search_hex_parse_error_t error = MC_SEARCH_HEX_E_OK;
@@ -170,9 +166,7 @@ START_PARAMETRIZED_TEST (test_hex_translate_to_regex, test_hex_translate_to_rege
     else
         ck_assert_int_eq (error, data->expected_error);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

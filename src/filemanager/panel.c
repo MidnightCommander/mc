@@ -165,7 +165,6 @@ static const char *string_dot (const file_entry_t * fe, int len);
 
 /*** file scope variables ************************************************************************/
 
-/* *INDENT-OFF* */
 static panel_field_t panel_fields[] = {
     {
      "unsorted", 12, TRUE, J_LEFT_FIT,
@@ -364,7 +363,6 @@ static panel_field_t panel_fields[] = {
      NULL, 0, FALSE, J_RIGHT, NULL, NULL, FALSE, FALSE, NULL, NULL
     }
 };
-/* *INDENT-ON* */
 
 static char *panel_sort_up_char = NULL;
 static char *panel_sort_down_char = NULL;
@@ -1739,7 +1737,6 @@ parse_panel_size (WPanel *panel, const char *format, gboolean isstatus)
 
 /* --------------------------------------------------------------------------------------------- */
 
-/* *INDENT-OFF* */
 /* Format is:
 
    all              := panel_format? format
@@ -1754,7 +1751,6 @@ parse_panel_size (WPanel *panel, const char *format, gboolean isstatus)
    opt_expand        := +
 
  */
-/* *INDENT-ON* */
 
 static GSList *
 parse_display_format (WPanel *panel, const char *format, char **error, gboolean isstatus,
@@ -2674,7 +2670,6 @@ panel_select_unselect_files_dialog (select_flags_t *flags, const char *title,
     mc_search_t *search;
 
     quick_widget_t quick_widgets[] = {
-        // *INDENT-OFF*
         QUICK_INPUT (INPUT_LAST_TEXT, history_name, &reg_exp, NULL,
                      FALSE, FALSE, INPUT_COMPLETE_FILENAMES),
         QUICK_START_COLUMNS,
@@ -2684,7 +2679,6 @@ panel_select_unselect_files_dialog (select_flags_t *flags, const char *title,
             QUICK_CHECKBOX (N_("&Case sensitive"), &case_sens, NULL),
         QUICK_STOP_COLUMNS,
         QUICK_END
-        // *INDENT-ON*
     };
 
     WRect r = { -1, -1, 0, 50 };
@@ -2805,9 +2799,7 @@ panel_select_invert_files (WPanel *panel)
 static void
 panel_do_set_filter (WPanel *panel)
 {
-    // *INDENT-OFF*
     file_filter_t ff = { .value = NULL, .handler = NULL, .flags = panel->filter.flags };
-    // *INDENT-ON*
 
     ff.handler =
         panel_select_unselect_files_dialog (&ff.flags, _("Filter"), MC_HISTORY_FM_PANEL_FILTER,

@@ -68,7 +68,6 @@ teardown (void)
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("test_user_config_paths_ds") */
-/* *INDENT-OFF* */
 static const struct test_user_config_paths_ds
 {
     const char *input_base_dir;
@@ -172,12 +171,9 @@ static const struct test_user_config_paths_ds
         EDIT_HOME_BLOCK_FILE
     },
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "test_user_config_paths_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_user_config_paths, test_user_config_paths_ds)
-/* *INDENT-ON* */
 {
     // given
     char *actual_result;
@@ -197,9 +193,7 @@ START_PARAMETRIZED_TEST (test_user_config_paths, test_user_config_paths_ds)
     }
     g_free (actual_result);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

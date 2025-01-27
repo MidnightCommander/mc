@@ -66,7 +66,6 @@ static const char replch = '?';
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-/* *INDENT-OFF* */
 DECLARE_CTYPE_WRAPPER (isalnum)
 DECLARE_CTYPE_WRAPPER (isdigit)
 DECLARE_CTYPE_WRAPPER (isprint)
@@ -74,7 +73,6 @@ DECLARE_CTYPE_WRAPPER (ispunct)
 DECLARE_CTYPE_WRAPPER (isspace)
 DECLARE_CTYPE_WRAPPER (toupper)
 DECLARE_CTYPE_WRAPPER (tolower)
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

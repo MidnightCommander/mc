@@ -98,7 +98,6 @@ static gboolean mc_args__show_configure_opts = FALSE;
 static GOptionGroup *main_group;
 
 static const GOptionEntry argument_main_table[] = {
-    // *INDENT-OFF*
     // generic options
     {
      "version", 'V', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE,
@@ -183,13 +182,11 @@ static const GOptionEntry argument_main_table[] = {
     },
 
     G_OPTION_ENTRY_NULL
-    // *INDENT-ON*
 };
 
 static GOptionGroup *terminal_group;
 #define ARGS_TERM_OPTIONS 0
 static const GOptionEntry argument_terminal_table[] = {
-    // *INDENT-OFF*
     // terminal options
     {
      "xterm", 'x', ARGS_TERM_OPTIONS, G_OPTION_ARG_NONE,
@@ -266,7 +263,6 @@ static const GOptionEntry argument_terminal_table[] = {
     },
 
     G_OPTION_ENTRY_NULL
-    // *INDENT-ON*
 };
 
 #undef ARGS_TERM_OPTIONS
@@ -275,7 +271,6 @@ static GOptionGroup *color_group;
 #define ARGS_COLOR_OPTIONS 0
 /* #define ARGS_COLOR_OPTIONS G_OPTION_FLAG_IN_MAIN */
 static const GOptionEntry argument_color_table[] = {
-    // *INDENT-OFF*
     // color options
     {
      "nocolor", 'b', ARGS_COLOR_OPTIONS, G_OPTION_ARG_NONE,
@@ -306,7 +301,6 @@ static const GOptionEntry argument_color_table[] = {
     },
 
     G_OPTION_ENTRY_NULL
-    // *INDENT-ON*
 };
 
 #undef ARGS_COLOR_OPTIONS
@@ -334,7 +328,6 @@ mc_args_clean_temp_help_strings (void)
 static GOptionGroup *
 mc_args_new_color_group (void)
 {
-    // *INDENT-OFF*
     // FIXME: to preserve translations, lines should be split.
     mc_args__loc__colors_string = g_strdup_printf ("%s\n%s",
                                                    // TRANSLATORS: don't translate keywords
@@ -364,7 +357,6 @@ mc_args_new_color_group (void)
                                                     "Attributes:\n"
                                                     "   bold, italic, underline, reverse, blink; append more with '+'\n")
                                                     );
-    // *INDENT-ON*
 
     return g_option_group_new ("color", mc_args__loc__colors_string,
                                _("Color options"), NULL, NULL);

@@ -32,7 +32,6 @@
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("test_test_vfs_adjust_stat_ds") */
-/* *INDENT-OFF* */
 static const struct test_vfs_adjust_stat_ds
 {
     struct stat etalon_stat;
@@ -156,14 +155,11 @@ static const struct test_vfs_adjust_stat_ds
         }
     }
 };
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
 /* @Test(dataSource = "test_vfs_adjust_stat_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_vfs_adjust_stat, test_vfs_adjust_stat_ds)
-/* *INDENT-ON* */
 {
 #ifdef HAVE_STRUCT_STAT_ST_BLOCKS
     // given
@@ -182,9 +178,7 @@ START_PARAMETRIZED_TEST (test_vfs_adjust_stat, test_vfs_adjust_stat_ds)
     ck_assert_int_eq (0, 0);
 #endif // HAVE_STRUCT_STAT_ST_BLOCKS
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

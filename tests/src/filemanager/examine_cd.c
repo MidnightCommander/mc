@@ -80,9 +80,7 @@ teardown (void)
     g_string_free (result, TRUE); \
 }
 
-/* *INDENT-OFF* */
 START_TEST (test_examine_cd)
-/* *INDENT-ON* */
 {
     GString *result;
 
@@ -119,9 +117,7 @@ START_TEST (test_examine_cd)
     check_examine_cd ("/test/path/\\${AAA}test2", "/test/path/${AAA}test2");
     check_examine_cd ("/test/path/test1\\${AAA}test2", "/test/path/test1${AAA}test2");
 }
-/* *INDENT-OFF* */
 END_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

@@ -99,7 +99,6 @@ teardown (void)
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("test_create_ini_file_ds") */
-/* *INDENT-OFF* */
 static const struct test_create_ini_file_ds
 {
     const char *input_group;
@@ -162,12 +161,9 @@ static const struct test_create_ini_file_ds
     },
 
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "test_create_ini_file_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_create_ini_file_paths, test_create_ini_file_ds)
-/* *INDENT-ON* */
 {
     // given
     char *actual_value, *actual_raw_value;
@@ -199,16 +195,12 @@ START_PARAMETRIZED_TEST (test_create_ini_file_paths, test_create_ini_file_ds)
     g_free (actual_value);
     g_free (actual_raw_value);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
 /* @Test(group='Integration') */
-/* *INDENT-OFF* */
 START_TEST (emulate__learn_save)
-/* *INDENT-ON* */
 {
     // given
     char *actual_value;
@@ -230,9 +222,7 @@ START_TEST (emulate__learn_save)
     mctest_assert_str_eq (actual_value, "T\\;E\\X\\;T-FOR-\\T\\;E\\;S\\TI\\;N'G");
     g_free (actual_value);
 }
-/* *INDENT-OFF* */
 END_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

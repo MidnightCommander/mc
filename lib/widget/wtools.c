@@ -175,12 +175,10 @@ fg_input_dialog_help (const char *header, const char *text, const char *help,
 
     {
         quick_widget_t quick_widgets[] = {
-            // *INDENT-OFF*
             QUICK_LABELED_INPUT (p_text, input_label_above, def_text, histname, &my_str,
                                  NULL, is_passwd, strip_password, completion_flags),
             QUICK_BUTTONS_OK_CANCEL,
             QUICK_END
-            // *INDENT-ON*
         };
 
         WRect r = { -1, -1, 0, COLS / 2 };

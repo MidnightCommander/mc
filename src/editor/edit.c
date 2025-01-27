@@ -135,7 +135,6 @@ static const struct edit_filters
 {
     const char *read, *write, *extension;
 } all_filters[] = {
-    // *INDENT-OFF*
     { "xz -cd %s 2>&1", "xz > %s", ".xz"},
     { "zstd -cd %s 2>&1", "zstd > %s", ".zst"},
     { "lz4 -cd %s 2>&1", "lz4 > %s", ".lz4" },
@@ -145,7 +144,6 @@ static const struct edit_filters
     { "bzip2 -cd %s 2>&1", "bzip2 > %s", ".bz2" },
     { "gzip -cd %s 2>&1", "gzip > %s", ".gz" },
     { "gzip -cd %s 2>&1", "gzip > %s", ".Z" }
-    // *INDENT-ON*
 };
 
 static const off_t filesize_default_threshold = 64 * 1024 * 1024;       // 64 MB

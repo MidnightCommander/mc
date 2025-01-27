@@ -70,7 +70,6 @@
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
-/* *INDENT-OFF* */
 
 /* POSIX header */
 struct posix_header
@@ -184,7 +183,6 @@ struct star_ext_header
     char isextended;
 };
 
-/* *INDENT-ON* */
 
 /* tar Header Block, overall structure */
 union block

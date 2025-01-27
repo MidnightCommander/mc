@@ -87,7 +87,6 @@ run_mc_build_filename (int iteration)
 }
 
 /* @DataSource("test_mc_build_filename_ds") */
-/* *INDENT-OFF* */
 static const struct test_mc_build_filename_ds
 {
     const char *expected_result;
@@ -107,12 +106,9 @@ static const struct test_mc_build_filename_ds
     {"pa/th"},
     {"/pa/th"},
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "test_mc_build_filename_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_mc_build_filename, test_mc_build_filename_ds)
-/* *INDENT-ON* */
 {
     // given
     char *actual_result;
@@ -125,9 +121,7 @@ START_PARAMETRIZED_TEST (test_mc_build_filename, test_mc_build_filename_ds)
 
     g_free (actual_result);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

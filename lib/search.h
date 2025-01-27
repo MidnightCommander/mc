@@ -202,9 +202,7 @@ mc_search_line_t mc_search_get_line_type (const mc_search_t *search);
 int mc_search_getstart_result_by_num (mc_search_t * lc_mc_search, int lc_index);
 int mc_search_getend_result_by_num (mc_search_t * lc_mc_search, int lc_index);
 
-/* *INDENT-OFF* */
 void mc_search_set_error (mc_search_t * lc_mc_search, mc_search_error_t code, const gchar * format, ...)
      G_GNUC_PRINTF (3, 4);
-/* *INDENT-ON* */
 
 #endif // MC__SEARCH_H

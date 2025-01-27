@@ -146,11 +146,9 @@ static struct
     Widget *widget;
     char *last_saved_dir;       // last view_list working directory
 } panels[MAX_VIEWS] = {
-    // *INDENT-OFF*
     // init MAX_VIEWS items
     { view_listing, NULL, NULL},
     { view_listing, NULL, NULL}
-    // *INDENT-ON*
 };
 
 static layout_t old_layout;
@@ -169,7 +167,6 @@ static struct
     gboolean *variable;
     WCheck *widget;
 } check_options[] = {
-    // *INDENT-OFF*
     { N_("&Equal split"), &equal_split, NULL },
     { N_("&Menubar visible"), &menubar_visible, NULL },
     { N_("Command &prompt"), &command_prompt, NULL },
@@ -177,7 +174,6 @@ static struct
     { N_("H&intbar visible"), &mc_global.message_visible, NULL },
     { N_("&XTerm window title"), &xterm_title, NULL },
     { N_("&Show free space"), &free_space, NULL }
-    // *INDENT-ON*
 };
 
 static const char *output_lines_label = NULL;

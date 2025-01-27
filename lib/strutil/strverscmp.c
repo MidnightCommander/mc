@@ -92,7 +92,6 @@ str_verscmp (const char *s1, const char *s2)
     int state;
     int diff;
 
-    // *INDENT-OFF*
     /* Symbol(s)    0       [1-9]   others
        Transition   (10) 0  (01) d  (00) x   */
     static const unsigned char next_state[] =
@@ -113,7 +112,6 @@ str_verscmp (const char *s1, const char *s2)
         /* S_F */ CMP, CMP, CMP, CMP, CMP, CMP, CMP, CMP, CMP,
         /* S_Z */ CMP,  +1,  +1,  -1, CMP, CMP,  -1, CMP, CMP
     };
-    // *INDENT-ON*
 
     if (p1 == p2)
         return 0;

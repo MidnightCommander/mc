@@ -79,9 +79,7 @@ group_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *dat
 
 /* --------------------------------------------------------------------------------------------- */
 
-/* *INDENT-OFF* */
 START_TEST (test_group_init_deinit)
-/* *INDENT-ON* */
 {
     WGroup *g, *g0;
     Widget *w0;
@@ -136,9 +134,7 @@ START_TEST (test_group_init_deinit)
 
     ck_assert_msg (ref == 0, "ref (%d) != 0", ref);
 }
-/* *INDENT-OFF* */
 END_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

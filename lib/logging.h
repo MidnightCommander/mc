@@ -22,10 +22,8 @@
 
 /*** declarations of public functions ************************************************************/
 
-/* *INDENT-OFF* */
 void mc_log (const char *fmt, ...) G_GNUC_PRINTF (1, 2);
 void mc_always_log (const char *fmt, ...) G_GNUC_PRINTF (1, 2);
-/* *INDENT-ON* */
 
 /*** inline functions ****************************************************************************/
 

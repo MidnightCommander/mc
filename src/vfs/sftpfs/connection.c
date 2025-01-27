@@ -74,7 +74,6 @@ static const char *const hostkey_method_ssh_ecdsa_256 = "ecdsa-sha2-nistp256";
 static const char *const hostkey_method_ssh_rsa = "ssh-rsa";
 static const char *const hostkey_method_ssh_dss = "ssh-dss";
 
-/* *INDENT-OFF* */
 static const char *default_hostkey_methods =
 #ifdef LIBSSH2_KNOWNHOST_KEY_ECDSA_256
     "ecdsa-sha2-nistp256,"
@@ -103,7 +102,6 @@ static const char *default_hostkey_methods =
     "ssh-rsa,"
     "ssh-rsa-cert-v01@openssh.com,"
     "ssh-dss";
-/* *INDENT-ON* */
 
 /**
  *

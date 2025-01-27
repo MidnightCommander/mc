@@ -138,7 +138,6 @@ static struct
     gboolean selected;
     gboolean state;             // state of checkboxes
 } check_attr[] = {
-    // *INDENT-OFF*
     { EXT2_SECRM_FL,        's', N_("Secure deletion"),               FALSE, FALSE },
     { EXT2_UNRM_FL,         'u', N_("Undelete"),                      FALSE, FALSE },
     { EXT2_SYNC_FL,         'S', N_("Synchronous updates"),           FALSE, FALSE },
@@ -203,7 +202,6 @@ static struct
        ext2fsprogs 7e5a95e3d59719361661086ec7188ca6e674f139 2018-08-21 */
     { EXT4_VERITY_FL,       'V', N_("Verity protected inode"),        FALSE, FALSE }
 #endif
-    // *INDENT-ON*
 };
 
 /* number of attributes */
@@ -224,14 +222,12 @@ static struct
     const char *text;
     Widget *button;
 } chattr_but[BUTTONS] = {
-    // *INDENT-OFF*
     /* 0 */ { B_SETALL, NORMAL_BUTTON, 0, N_("Set &all"),      NULL },
     /* 1 */ { B_MARKED, NORMAL_BUTTON, 0, N_("&Marked all"),   NULL },
     /* 2 */ { B_SETMRK, NORMAL_BUTTON, 0, N_("S&et marked"),   NULL },
     /* 3 */ { B_CLRMRK, NORMAL_BUTTON, 0, N_("C&lear marked"), NULL },
     /* 4 */ { B_ENTER, DEFPUSH_BUTTON, 0, N_("&Set"),          NULL },
     /* 5 */ { B_CANCEL, NORMAL_BUTTON, 0, N_("&Cancel"),       NULL }
-    // *INDENT-ON*
 };
 
 static gboolean flags_changed;

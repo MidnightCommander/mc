@@ -51,14 +51,12 @@
 /* General Interface */
 
 /* Since tar VFS is read-only, inplement decodes only */
-/* *INDENT-OFF* */
 struct xhdr_tab
 {
     const char *keyword;
     gboolean (*decoder) (struct tar_stat_info * st, const char *keyword, const char *arg, size_t size);
     int flags;
 };
-/* *INDENT-ON* */
 
 /* Keyword options */
 struct keyword_item
@@ -129,7 +127,6 @@ enum
     LOG10_BILLION = 9
 };
 
-/* *INDENT-OFF* */
 static struct xhdr_tab xhdr_tab[] =
 {
     { "atime",                atime_decoder,            0  },
@@ -170,7 +167,6 @@ static struct xhdr_tab xhdr_tab[] =
 
     { NULL,                   NULL,                     0 }
 };
-/* *INDENT-ON* */
 
 /* List of keyword/value pairs decoded from the last 'g' type header */
 static GSList *global_header_override_list = NULL;

@@ -33,7 +33,6 @@
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("test_translate_replace_glob_to_regex_ds") */
-/* *INDENT-OFF* */
 static const struct test_translate_replace_glob_to_regex_ds
 {
     const char *input_value;
@@ -57,12 +56,9 @@ static const struct test_translate_replace_glob_to_regex_ds
         "a\\&a\\?a"
     },
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "test_translate_replace_glob_to_regex_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_translate_replace_glob_to_regex, test_translate_replace_glob_to_regex_ds)
-/* *INDENT-ON* */
 {
     // given
     GString *dest_str;
@@ -74,9 +70,7 @@ START_PARAMETRIZED_TEST (test_translate_replace_glob_to_regex, test_translate_re
     mctest_assert_str_eq (dest_str->str, data->expected_result);
     g_string_free (dest_str, TRUE);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

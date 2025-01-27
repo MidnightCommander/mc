@@ -229,7 +229,6 @@ GArray *macros_list;
 static char *profile_name = NULL;       /* ${XDG_CONFIG_HOME}/mc/ini */
 static char *panels_profile_name = NULL;        /* ${XDG_CONFIG_HOME}/mc/panels.ini */
 
-/* *INDENT-OFF* */
 static const struct
 {
     const char *key;
@@ -438,7 +437,6 @@ static const struct
     { "torben_fj_mode", &panels_options.torben_fj_mode },
     { NULL, NULL }
 };
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/

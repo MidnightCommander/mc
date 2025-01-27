@@ -1373,11 +1373,9 @@ get_fs_usage (char const *file, char const *disk, struct fs_usage *fsp)
             return -1;
 
         // f_frsize isn't guaranteed to be supported.
-        // *INDENT-OFF*
         fsp->fsu_blocksize = fsd.f_frsize
             ? PROPAGATE_ALL_ONES (fsd.f_frsize)
             : PROPAGATE_ALL_ONES (fsd.f_bsize);
-        // *INDENT-ON*
 
 #elif defined STAT_STATFS3_OSF1 // OSF/1
 

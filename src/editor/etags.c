@@ -79,7 +79,6 @@ etags_hash_free (gpointer data)
 static gboolean
 parse_define (const char *buf, char **long_name, char **short_name, long *line)
 {
-    // *INDENT-OFF*
     enum
     {
         in_longname,
@@ -88,7 +87,6 @@ parse_define (const char *buf, char **long_name, char **short_name, long *line)
         in_line,
         finish
     } def_state = in_longname;
-    // *INDENT-ON*
 
     GString *longdef = NULL;
     GString *shortdef = NULL;
@@ -196,14 +194,12 @@ parse_define (const char *buf, char **long_name, char **short_name, long *line)
 static GPtrArray *
 etags_set_definition_hash (const char *tagfile, const char *start_path, const char *match_func)
 {
-    // *INDENT-OFF*
     enum
     {
         start,
         in_filename,
         in_define
     } state = start;
-    // *INDENT-ON*
 
     FILE *f;
     char buf[BUF_LARGE];

@@ -117,9 +117,7 @@ extern void tty_print_char (int c);
 extern void tty_print_alt_char (int c, gboolean single);
 extern void tty_print_anychar (int c);
 extern void tty_print_string (const char *s);
-/* *INDENT-OFF* */
 extern void tty_printf (const char *s, ...) G_GNUC_PRINTF (1, 2);
-/* *INDENT-ON* */
 
 extern void tty_print_one_vline (gboolean single);
 extern void tty_print_one_hline (gboolean single);

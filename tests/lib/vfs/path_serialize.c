@@ -131,9 +131,7 @@ teardown (void)
         "p10:vfs_prefixv5:test3"
 #endif
 
-/* *INDENT-OFF* */
 START_TEST (test_path_serialize)
-/* *INDENT-ON* */
 {
     // given
     vfs_path_t *vpath;
@@ -153,15 +151,11 @@ START_TEST (test_path_serialize)
     mctest_assert_ptr_ne (serialized_vpath, NULL);
     mctest_assert_str_eq (serialized_vpath, ETALON_SERIALIZED_PATH);
 }
-/* *INDENT-OFF* */
 END_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
-/* *INDENT-OFF* */
 START_TEST (test_path_deserialize)
-/* *INDENT-ON* */
 {
     // given
     vfs_path_t *vpath;
@@ -177,9 +171,7 @@ START_TEST (test_path_deserialize)
     vfs_path_free (vpath, TRUE);
 
 }
-/* *INDENT-OFF* */
 END_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

@@ -149,7 +149,6 @@ static gboolean pax_decode_header (tar_super_t * archive, struct tar_sparse_file
 
 /*** file scope variables ************************************************************************/
 
-/* *INDENT-OFF* */
 static struct tar_sparse_optab const oldgnu_optab =
 {
     .init = NULL,               // No init function
@@ -158,9 +157,7 @@ static struct tar_sparse_optab const oldgnu_optab =
     .fixup_header = oldgnu_fixup_header,
     .decode_header = oldgnu_get_sparse_info
 };
-/* *INDENT-ON* */
 
-/* *INDENT-OFF* */
 static struct tar_sparse_optab const star_optab =
 {
     .init = NULL,               // No init function
@@ -169,7 +166,6 @@ static struct tar_sparse_optab const star_optab =
     .fixup_header = star_fixup_header,
     .decode_header = star_get_sparse_info
 };
-/* *INDENT-ON* */
 
 /* GNU PAX sparse file format. There are several versions:
  * 0.0

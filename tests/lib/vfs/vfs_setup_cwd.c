@@ -97,7 +97,6 @@ teardown (void)
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("test_vfs_setup_cwd_symlink_ds") */
-/* *INDENT-OFF* */
 static const struct test_vfs_setup_cwd_symlink_ds
 {
     gboolean is_2nd_call_different;
@@ -113,12 +112,9 @@ static const struct test_vfs_setup_cwd_symlink_ds
         "/some/path2"
     },
 };
-/* *INDENT-ON* */
 
 /* @Test */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_vfs_setup_cwd_symlink, test_vfs_setup_cwd_symlink_ds)
-/* *INDENT-ON* */
 {
     // given
     vfs_set_raw_current_dir (NULL);
@@ -132,9 +128,7 @@ START_PARAMETRIZED_TEST (test_vfs_setup_cwd_symlink, test_vfs_setup_cwd_symlink_
     // then
     mctest_assert_str_eq (vfs_get_current_dir (), data->expected_result);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

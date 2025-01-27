@@ -168,7 +168,6 @@ static struct
     int type;
     widget_pos_flags_t pos_flags;
 } hotlist_but[] = {
-    // *INDENT-OFF*
     { B_ENTER, DEFPUSH_BUTTON, 0, 0, 0, N_("Change &to"),
             LIST_HOTLIST | LIST_VFSLIST | LIST_MOVELIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
 #ifdef ENABLE_VFS
@@ -195,7 +194,6 @@ static struct
             LIST_HOTLIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
     { B_MOVE, NORMAL_BUTTON, 1, 42, 0, N_("&Move"),
             LIST_HOTLIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM }
-    // *INDENT-ON*
 };
 
 static const size_t hotlist_but_num = G_N_ELEMENTS (hotlist_but);
@@ -998,7 +996,6 @@ add_new_entry_input (const char *header, const char *text1, const char *text2,
                      const char *help, const char *def_text, char **r1, char **r2)
 {
     quick_widget_t quick_widgets[] = {
-        // *INDENT-OFF*
         QUICK_LABELED_INPUT (text1, input_label_above, def_text, "input-lbl", r1, NULL,
                              FALSE, FALSE, INPUT_COMPLETE_NONE),
         QUICK_SEPARATOR (FALSE),
@@ -1009,7 +1006,6 @@ add_new_entry_input (const char *header, const char *text1, const char *text2,
             QUICK_BUTTON (N_("&Insert"), B_INSERT, NULL, NULL),
             QUICK_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
         QUICK_END
-        // *INDENT-ON*
     };
 
     WRect r = { -1, -1, 0, 64 };
@@ -1059,7 +1055,6 @@ static int
 add_new_group_input (const char *header, const char *label, char **result)
 {
     quick_widget_t quick_widgets[] = {
-        // *INDENT-OFF*
         QUICK_LABELED_INPUT (label, input_label_above, "", "input", result, NULL,
                              FALSE, FALSE, INPUT_COMPLETE_NONE),
         QUICK_START_BUTTONS (TRUE, TRUE),
@@ -1067,7 +1062,6 @@ add_new_group_input (const char *header, const char *label, char **result)
             QUICK_BUTTON (N_("&Insert"), B_INSERT, NULL, NULL),
             QUICK_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
         QUICK_END
-        // *INDENT-ON*
     };
 
     WRect r = { -1, -1, 0, 64 };

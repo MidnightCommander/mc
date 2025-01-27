@@ -32,7 +32,6 @@
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("test_regex_process_escape_sequence_ds") */
-/* *INDENT-OFF* */
 static const struct test_regex_process_escape_sequence_ds
 {
     const char *input_from;
@@ -108,12 +107,9 @@ static const struct test_regex_process_escape_sequence_ds
         "\a"
     },
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "test_regex_process_escape_sequence_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_regex_process_escape_sequence, test_regex_process_escape_sequence_ds)
-/* *INDENT-ON* */
 {
     // given
     GString *actual_string;
@@ -131,9 +127,7 @@ START_PARAMETRIZED_TEST (test_regex_process_escape_sequence, test_regex_process_
 
     g_string_free (actual_string, TRUE);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

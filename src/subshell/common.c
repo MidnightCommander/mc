@@ -178,12 +178,10 @@ static char tcsh_fifo[128];
 static int subshell_pty_slave = -1;
 
 /* The key for switching back to MC from the subshell */
-/* *INDENT-OFF* */
 static const char subshell_switch_key = XCTRL ('o') & 255;
 
 static const char subshell_switch_key_csi_u[] = "\x1b[111;5u";
 static const size_t subshell_switch_key_csi_u_len = sizeof(subshell_switch_key_csi_u) - 1;
-/* *INDENT-ON* */
 
 /* For reading/writing on the subshell's pty */
 static char pty_buffer[PTY_BUFFER_SIZE] = "\0";
@@ -1169,7 +1167,6 @@ init_subshell_precmd (char *precmd, size_t buff_size)
      *    the fallback version.
      *
      */
-    // *INDENT-OFF*
     static const char *precmd_fallback =
         " "    // Useful if the shell supports HISTCONTROL=ignorespace like functionality
         "MC_PS1_SAVED=\"$PS1\"; "       // Save custom PS1
@@ -1185,7 +1182,6 @@ init_subshell_precmd (char *precmd, size_t buff_size)
         "}; "
         "PRECMD=precmd; "
         "PS1='$($PRECMD)'\n";
-    // *INDENT-ON*
 
     switch (mc_global.shell->type)
     {

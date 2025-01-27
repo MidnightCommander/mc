@@ -252,11 +252,9 @@ hotkey_width (const hotkey_t hotkey)
 gboolean
 hotkey_equal (const hotkey_t hotkey1, const hotkey_t hotkey2)
 {
-    // *INDENT-OFF*
     return (strcmp (hotkey1.start, hotkey2.start) == 0) &&
            hotkey_cmp (hotkey1.hotkey, hotkey2.hotkey) &&
            hotkey_cmp (hotkey1.end, hotkey2.end);
-    // *INDENT-ON*
 }
 
 /* --------------------------------------------------------------------------------------------- */

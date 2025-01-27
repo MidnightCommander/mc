@@ -135,9 +135,7 @@ my_teardown (void)
 /* --------------------------------------------------------------------------------------------- */
 
 /* @Test */
-/* *INDENT-OFF* */
 START_TEST (do_open_external_editor_or_viewer)
-/* *INDENT-ON* */
 {
     // given
     vfs_path_t *filename_vpath;
@@ -175,9 +173,7 @@ START_TEST (do_open_external_editor_or_viewer)
 
     vfs_path_free (filename_vpath, TRUE);
 }
-/* *INDENT-OFF* */
 END_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

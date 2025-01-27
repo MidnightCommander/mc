@@ -79,13 +79,11 @@ static struct
     int len;
     const char *text;
 } chown_but[BUTTONS] = {
-    // *INDENT-OFF*
     { B_SETALL,  NORMAL_BUTTON, 5, 0, N_("Set &all")    },
     { B_SETGRP,  NORMAL_BUTTON, 5, 0, N_("Set &groups") },
     { B_SETUSR,  NORMAL_BUTTON, 5, 0, N_("Set &users")  },
     { B_ENTER,  DEFPUSH_BUTTON, 3, 0, N_("&Set")        },
     { B_CANCEL,  NORMAL_BUTTON, 3, 0, N_("&Cancel")     }
-    // *INDENT-ON*
 };
 
 /* summary length of three buttons */
@@ -96,13 +94,11 @@ static struct
     int y;
     WLabel *l;
 } chown_label[LABELS] = {
-    // *INDENT-OFF*
     {  4, NULL },
     {  6, NULL },
     {  8, NULL },
     { 10, NULL },
     { 12, NULL }
-    // *INDENT-ON*
 };
 
 static int current_file;

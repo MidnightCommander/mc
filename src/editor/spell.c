@@ -106,7 +106,6 @@ static struct
     const char *code;
     const char *name;
 } spell_codes_map[] = {
-    // *INDENT-OFF*
     {"br", N_("Breton")},
     {"cs", N_("Czech")},
     {"cy", N_("Welsh")},
@@ -132,7 +131,6 @@ static struct
     {"sv", N_("Swedish")},
     {"uk", N_("Ukrainian")},
     {NULL, NULL}
-    // *INDENT-ON*
 };
 
 /* --------------------------------------------------------------------------------------------- */

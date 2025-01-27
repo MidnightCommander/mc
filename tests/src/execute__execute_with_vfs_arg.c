@@ -32,7 +32,6 @@
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("the_file_is_local_ds") */
-/* *INDENT-OFF* */
 static const struct the_file_is_local_ds
 {
     const char *input_path;
@@ -45,12 +44,9 @@ static const struct the_file_is_local_ds
         "/blabla",
     },
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "the_file_is_local_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (the_file_is_local, the_file_is_local_ds)
-/* *INDENT-ON* */
 {
     // given
     vfs_path_t *filename_vpath;
@@ -79,16 +75,12 @@ START_PARAMETRIZED_TEST (the_file_is_local, the_file_is_local_ds)
 
     vfs_path_free (filename_vpath, TRUE);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
 /* @Test */
-/* *INDENT-OFF* */
 START_TEST (the_file_is_remote_but_empty)
-/* *INDENT-ON* */
 {
     // given
     vfs_path_t *filename_vpath;
@@ -115,16 +107,12 @@ START_TEST (the_file_is_remote_but_empty)
 
     vfs_path_free (filename_vpath, TRUE);
 }
-/* *INDENT-OFF* */
 END_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
 /* @Test */
-/* *INDENT-OFF* */
 START_TEST (the_file_is_remote_fail_to_create_local_copy)
-/* *INDENT-ON* */
 {
     // given
     vfs_path_t *filename_vpath;
@@ -156,16 +144,12 @@ START_TEST (the_file_is_remote_fail_to_create_local_copy)
 
     vfs_path_free (filename_vpath, TRUE);
 }
-/* *INDENT-OFF* */
 END_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
 /* @Test */
-/* *INDENT-OFF* */
 START_TEST (the_file_is_remote)
-/* *INDENT-ON* */
 {
     // given
     vfs_path_t *filename_vpath, *local_vpath, *local_vpath_should_be_freeing;
@@ -208,9 +192,7 @@ START_TEST (the_file_is_remote)
     vfs_path_free (filename_vpath, TRUE);
     vfs_path_free (local_vpath, TRUE);
 }
-/* *INDENT-OFF* */
 END_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

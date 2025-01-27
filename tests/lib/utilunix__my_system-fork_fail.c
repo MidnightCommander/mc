@@ -36,9 +36,7 @@
 
 /* --------------------------------------------------------------------------------------------- */
 
-/* *INDENT-OFF* */
 START_TEST (fork_fail)
-/* *INDENT-ON* */
 {
     int actual_value;
 
@@ -55,9 +53,7 @@ START_TEST (fork_fail)
 
     ck_assert_int_eq (signal_signum__captured->len, 0);
 }
-/* *INDENT-OFF* */
 END_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

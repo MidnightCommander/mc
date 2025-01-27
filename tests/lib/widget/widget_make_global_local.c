@@ -35,9 +35,7 @@
 
 /* --------------------------------------------------------------------------------------------- */
 
-/* *INDENT-OFF* */
 START_TEST (test_widget_make_global_local)
-/* *INDENT-ON* */
 {
     WRect r;
     WGroup *g0, *g1, *g2;
@@ -122,9 +120,7 @@ START_TEST (test_widget_make_global_local)
     widget_destroy (WIDGET (g1));
     widget_destroy (WIDGET (g0));
 }
-/* *INDENT-OFF* */
 END_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

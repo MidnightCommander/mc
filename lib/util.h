@@ -65,7 +65,6 @@
 /*** enums ***************************************************************************************/
 
 /* Pathname canonicalization */
-/* *INDENT-OFF* */
 typedef enum
 {
     CANON_PATH_NOCHANGE = 0,
@@ -76,7 +75,6 @@ typedef enum
     CANON_PATH_ALL = CANON_PATH_JOINSLASHES | CANON_PATH_REMSLASHDOTS
                    | CANON_PATH_REMDOUBLEDOTS | CANON_PATH_GUARDUNC  // All flags
 } canon_path_flags_t;
-/* *INDENT-ON* */
 
 enum compression_type
 {
@@ -267,10 +265,8 @@ char *mc_build_filenamev (const char *first_element, va_list args);
 
 const char *mc_get_profile_root (void);
 
-/* *INDENT-OFF* */
 void mc_propagate_error (GError ** dest, int code, const char *format, ...) G_GNUC_PRINTF (3, 4);
 void mc_replace_error (GError ** dest, int code, const char *format, ...) G_GNUC_PRINTF (3, 4);
-/* *INDENT-ON* */
 
 gboolean mc_time_elapsed (gint64 * timestamp, gint64 delay);
 

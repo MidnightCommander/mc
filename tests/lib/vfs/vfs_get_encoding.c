@@ -48,7 +48,6 @@ teardown (void)
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("test_vfs_get_encoding_ds") */
-/* *INDENT-OFF* */
 static const struct test_vfs_get_encoding_ds
 {
     const char *path;
@@ -116,12 +115,9 @@ static const struct test_vfs_get_encoding_ds
         "KOI8-R#enc:CP866"
     }
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "test_vfs_get_encoding_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_vfs_get_encoding, test_vfs_get_encoding_ds)
-/* *INDENT-ON* */
 {
     // given
     char *actual_encoding;
@@ -134,9 +130,7 @@ START_PARAMETRIZED_TEST (test_vfs_get_encoding, test_vfs_get_encoding_ds)
 
     g_free (actual_encoding);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

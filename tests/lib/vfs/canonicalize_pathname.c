@@ -78,7 +78,6 @@ teardown (void)
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("test_canonicalize_path_ds") */
-/* *INDENT-OFF* */
 static const struct test_canonicalize_path_ds
 {
     const char *input_path;
@@ -178,12 +177,9 @@ static const struct test_canonicalize_path_ds
     },
 #endif  // HAVE_CHARSET
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "test_canonicalize_path_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_canonicalize_path, test_canonicalize_path_ds)
-/* *INDENT-ON* */
 {
     // given
     char *actual_path;
@@ -196,9 +192,7 @@ START_PARAMETRIZED_TEST (test_canonicalize_path, test_canonicalize_path_ds)
     // then
     mctest_assert_str_eq (actual_path, data->expected_path) g_free (actual_path);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

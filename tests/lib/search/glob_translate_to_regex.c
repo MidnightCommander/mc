@@ -33,7 +33,6 @@
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("test_glob_translate_to_regex_ds") */
-/* *INDENT-OFF* */
 static const struct test_glob_translate_to_regex_ds
 {
     const char *input_value;
@@ -77,12 +76,9 @@ static const struct test_glob_translate_to_regex_ds
         "te!@#\\$%\\^&(.*)\\(\\)_\\+|\";:'():><(.)\\?\\*\\.,/[]|\\/st"
     },
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "test_glob_translate_to_regex_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_glob_translate_to_regex, test_glob_translate_to_regex_ds)
-/* *INDENT-ON* */
 {
     // given
     GString *tmp = g_string_new (data->input_value);
@@ -97,9 +93,7 @@ START_PARAMETRIZED_TEST (test_glob_translate_to_regex, test_glob_translate_to_re
     mctest_assert_str_eq (dest_str->str, data->expected_result);
     g_string_free (dest_str, TRUE);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

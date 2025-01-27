@@ -206,7 +206,6 @@ my_teardown (void)
 
 #ifdef HAVE_CHARSET
 /* @DataSource("test_autocomplete_ds") */
-/* *INDENT-OFF* */
 static const struct test_autocomplete_ds
 {
     off_t input_position;
@@ -249,12 +248,9 @@ static const struct test_autocomplete_ds
         "\xDC\xDF\xCA\xC3\xD5\xCB\xC5\xCE" // эъйцукен
     },
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "test_autocomplete_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_autocomplete, test_autocomplete_ds)
-/* *INDENT-ON* */
 {
     // given
     edit_completion_dialog_show__return_value = g_strdup (data->input_completed_word);
@@ -299,14 +295,11 @@ START_PARAMETRIZED_TEST (test_autocomplete, test_autocomplete_ds)
         g_string_free (actual_completed_str, TRUE);
     }
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("test_autocomplete_single_ds") */
-/* *INDENT-OFF* */
 static const struct test_autocomplete_single_ds
 {
     off_t input_position;
@@ -331,12 +324,9 @@ static const struct test_autocomplete_single_ds
         "\xC6\xD9\xD7\xC1" // фыва
     },
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "test_autocomplete_single_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_autocomplete_single, test_autocomplete_single_ds)
-/* *INDENT-ON* */
 {
     // given
     mc_global.source_codepage = data->input_source_codepage_id;
@@ -373,9 +363,7 @@ START_PARAMETRIZED_TEST (test_autocomplete_single, test_autocomplete_single_ds)
         g_string_free (actual_completed_str, TRUE);
     }
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 
 #endif // HAVE_CHARSET

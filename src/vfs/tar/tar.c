@@ -209,7 +209,6 @@ mode_from_header (const char *p, size_t s, gboolean *hbits)
     // Do not complain about unrecognized mode bits.
     u = tar_from_header (p, s, "mode_t", INTMAX_MIN, UINTMAX_MAX, FALSE);
 
-    // *INDENT-OFF*
     mode = ((u & TSUID ? S_ISUID : 0)
           | (u & TSGID ? S_ISGID : 0)
           | (u & TSVTX ? S_ISVTX : 0)
@@ -222,7 +221,6 @@ mode_from_header (const char *p, size_t s, gboolean *hbits)
           | (u & TOREAD ? S_IROTH : 0)
           | (u & TOWRITE ? S_IWOTH : 0)
           | (u & TOEXEC ? S_IXOTH : 0));
-    // *INDENT-ON*
 
     if (hbits != NULL)
         *hbits = (u & ~07777) != 0;
@@ -460,14 +458,12 @@ tar_fill_stat (struct vfs_s_super *archive, union block *header)
     case TAR_POSIX:
     case TAR_GNU:
     case TAR_OLDGNU:
-        // *INDENT-OFF*
         current_stat_info.stat.st_uid = *header->header.uname != '\0'
             ? (uid_t) vfs_finduid (header->header.uname)
             : UID_FROM_HEADER (header->header.uid);
         current_stat_info.stat.st_gid = *header->header.gname != '\0'
             ? (gid_t) vfs_findgid (header->header.gname)
             : GID_FROM_HEADER (header->header.gid);
-        // *INDENT-ON*
 
         switch (header->header.typeflag)
         {

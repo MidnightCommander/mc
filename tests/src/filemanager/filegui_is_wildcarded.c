@@ -58,7 +58,6 @@ teardown (void)
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("test_is_wildcarded_ds") */
-/* *INDENT-OFF* */
 static const struct test_is_wildcarded_ds
 {
     const char *input_value;
@@ -119,12 +118,9 @@ static const struct test_is_wildcarded_ds
         TRUE
     },
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "test_is_wildcarded_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_is_wildcarded, test_is_wildcarded_ds)
-/* *INDENT-ON* */
 {
     // given
     gboolean actual_result;
@@ -134,9 +130,7 @@ START_PARAMETRIZED_TEST (test_is_wildcarded, test_is_wildcarded_ds)
     // then
     ck_assert_int_eq (actual_result, data->expected_result);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

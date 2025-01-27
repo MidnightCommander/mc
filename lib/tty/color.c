@@ -46,7 +46,6 @@
 
 /*** global variables ****************************************************************************/
 
-/* *INDENT-OFF* */
 static tty_color_pair_t tty_color_defaults =
 {
     .fg = NULL,
@@ -54,7 +53,6 @@ static tty_color_pair_t tty_color_defaults =
     .attrs = NULL,
     .pair_index = 0
 };
-/* *INDENT-ON* */
 
 /* Set if we are actually using colors */
 gboolean use_colors = FALSE;

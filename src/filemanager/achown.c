@@ -75,7 +75,6 @@ static struct
     int len;
     const char *text;
 } advanced_chown_but[BUTTONS] = {
-    // *INDENT-OFF*
     { 0, B_ENTER,   NARROW_BUTTON,  3, 0, "   " },
     { 0, B_ENTER,   NARROW_BUTTON, 11, 0, "   " },
     { 0, B_ENTER,   NARROW_BUTTON, 19, 0, "   " },
@@ -86,7 +85,6 @@ static struct
     { 0, B_SKIP,    NORMAL_BUTTON,  0, 0, N_("S&kip")    },
     { 0, B_ENTER,  DEFPUSH_BUTTON,  0, 0, N_("&Set")     },
     { 0, B_CANCEL,  NORMAL_BUTTON,  0, 0, N_("&Cancel")  }
-    // *INDENT-ON*
 };
 
 static int current_file;

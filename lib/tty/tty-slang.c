@@ -95,7 +95,6 @@ static const struct
     int key_code;
     const char *key_name;
 } key_table[] = {
-    // *INDENT-OFF*
     { KEY_F (0), "k0" },
     { KEY_F (1), "k1" },
     { KEY_F (2), "k2" },
@@ -129,7 +128,6 @@ static const struct
     { KEY_HOME, "kh" },
     { KEY_END, "@7" },
     { 0, NULL }
-    // *INDENT-ON*
 };
 
 /* --------------------------------------------------------------------------------------------- */

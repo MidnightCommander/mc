@@ -91,7 +91,6 @@ teardown (void)
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("test_vfs_path_tokens_count_ds") */
-/* *INDENT-OFF* */
 static const struct test_vfs_path_tokens_count_ds
 {
     const char *input_path;
@@ -151,12 +150,9 @@ static const struct test_vfs_path_tokens_count_ds
     },
 #endif
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "test_vfs_path_tokens_count_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_vfs_path_tokens_count, test_vfs_path_tokens_count_ds)
-/* *INDENT-ON* */
 {
     // given
     size_t tokens_count;
@@ -172,14 +168,11 @@ START_PARAMETRIZED_TEST (test_vfs_path_tokens_count, test_vfs_path_tokens_count_
 
     vfs_path_free (vpath, TRUE);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("test_vfs_path_tokens_get_ds") */
-/* *INDENT-OFF* */
 static const struct test_vfs_path_tokens_get_ds
 {
     const char *input_path;
@@ -290,12 +283,9 @@ static const struct test_vfs_path_tokens_get_ds
     },
 */
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "test_vfs_path_tokens_get_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_vfs_path_tokens_get, test_vfs_path_tokens_get_ds)
-/* *INDENT-ON* */
 {
     // given
     vfs_path_t *vpath;
@@ -312,14 +302,11 @@ START_PARAMETRIZED_TEST (test_vfs_path_tokens_get, test_vfs_path_tokens_get_ds)
     g_free (actual_path);
     vfs_path_free (vpath, TRUE);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("test_vfs_path_append_vpath_ds") */
-/* *INDENT-OFF* */
 static const struct test_vfs_path_append_vpath_ds
 {
     const char *input_path1;
@@ -345,12 +332,9 @@ static const struct test_vfs_path_append_vpath_ds
     },
 #endif // HAVE_CHARSET
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "test_vfs_path_append_vpath_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_vfs_path_append_vpath, test_vfs_path_append_vpath_ds)
-/* *INDENT-ON* */
 {
     // given
     vfs_path_t *vpath1, *vpath2, *vpath3;
@@ -369,14 +353,11 @@ START_PARAMETRIZED_TEST (test_vfs_path_append_vpath, test_vfs_path_append_vpath_
     vfs_path_free (vpath2, TRUE);
     vfs_path_free (vpath3, TRUE);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("test_vfs_path_relative_ds") */
-/* *INDENT-OFF* */
 static const struct test_vfs_path_relative_ds
 {
     const char *input_path;
@@ -395,12 +376,9 @@ static const struct test_vfs_path_relative_ds
         "bla-bla/some/path/"
     },
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "test_vfs_path_relative_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_vfs_path_relative, test_vfs_path_relative_ds)
-/* *INDENT-ON* */
 {
     // given
     vfs_path_t *vpath;
@@ -416,16 +394,12 @@ START_PARAMETRIZED_TEST (test_vfs_path_relative, test_vfs_path_relative_ds)
 
     vfs_path_free (vpath, TRUE);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
 /* @Test(dataSource = "test_vfs_path_relative_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_vfs_path_relative_clone, test_vfs_path_relative_ds)
-/* *INDENT-ON* */
 {
     // given
     vfs_path_t *vpath, *cloned_vpath;
@@ -445,9 +419,7 @@ START_PARAMETRIZED_TEST (test_vfs_path_relative_clone, test_vfs_path_relative_ds
     vfs_path_free (vpath, TRUE);
     vfs_path_free (cloned_vpath, TRUE);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

@@ -171,7 +171,6 @@ gboolean classic_progressbar = TRUE;
 
 /*** file scope type declarations ****************************************************************/
 
-/* *INDENT-OFF* */
 typedef enum {
     MSDOS_SUPER_MAGIC     = 0x4d44,
     NTFS_SB_MAGIC         = 0x5346544e,
@@ -181,7 +180,6 @@ typedef enum {
     NCP_SUPER_MAGIC       = 0x564c,
     USBDEVICE_SUPER_MAGIC = 0x9fa2
 } filegui_nonattrs_fs_t;
-/* *INDENT-ON* */
 
 /* Used for button result values */
 typedef enum
@@ -245,12 +243,10 @@ static struct
     button_flags_t flags;
     int len;
 } progress_buttons[] = {
-    // *INDENT-OFF*
     { NULL, FILE_SKIP, N_("&Skip"), NORMAL_BUTTON, -1 },
     { NULL, FILE_SUSPEND, N_("S&uspend"), NORMAL_BUTTON, -1 },
     { NULL, FILE_SUSPEND, N_("Con&tinue"), NORMAL_BUTTON, -1 },
     { NULL, FILE_ABORT, N_("&Abort"), NORMAL_BUTTON, -1 }
-    // *INDENT-ON*
 };
 
 /* --------------------------------------------------------------------------------------------- */
@@ -464,7 +460,6 @@ overwrite_query_dialog (file_op_context_t *ctx, enum OperationMode mode)
         widget_pos_flags_t pos_flags;
         int value;              // 0 for labels and checkbox
     } dlg_widgets[] = {
-        // *INDENT-OFF*
         //  0 - label
         { NULL, N_("New     :"), 2, 3, WPOS_KEEP_DEFAULT, 0 },
         //  1 - label - name
@@ -510,7 +505,6 @@ overwrite_query_dialog (file_op_context_t *ctx, enum OperationMode mode)
         // ---------------------------------------------------
         // 20 - button
         { NULL, N_("&Abort"), 14, 27, WPOS_KEEP_TOP | WPOS_CENTER_HORZ, REPLACE_ABORT }
-        // *INDENT-ON*
     };
 
     const int gap = 1;
@@ -1421,7 +1415,6 @@ file_mask_dialog (file_op_context_t *ctx, gboolean only_one, const char *format,
         struct stat buf;
 
         quick_widget_t quick_widgets[] = {
-            // *INDENT-OFF*
             QUICK_LABELED_INPUT (fmd_buf, input_label_above, easy_patterns ? "*" : "^(.*)$",
                                  "input-def", &source_mask, NULL, FALSE, FALSE,
                                  INPUT_COMPLETE_FILENAMES),
@@ -1447,7 +1440,6 @@ file_mask_dialog (file_op_context_t *ctx, gboolean only_one, const char *format,
 #endif // ENABLE_BACKGROUND
                 QUICK_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
             QUICK_END
-            // *INDENT-ON*
         };
 
         WRect r = { -1, -1, 0, fmd_xlen };

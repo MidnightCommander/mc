@@ -32,7 +32,6 @@
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("test_glob_prepare_replace_str_ds") */
-/* *INDENT-OFF* */
 static const struct test_glob_prepare_replace_str_ds
 {
     const char *input_value;
@@ -60,12 +59,9 @@ static const struct test_glob_prepare_replace_str_ds
         "qqwwRR"
     }
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "test_glob_prepare_replace_str_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_glob_prepare_replace_str, test_glob_prepare_replace_str_ds)
-/* *INDENT-ON* */
 {
     // given
     mc_search_t *s;
@@ -85,9 +81,7 @@ START_PARAMETRIZED_TEST (test_glob_prepare_replace_str, test_glob_prepare_replac
     g_free (dest_str);
     mc_search_free (s);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

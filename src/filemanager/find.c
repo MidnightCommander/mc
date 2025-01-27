@@ -173,7 +173,6 @@ static WLabel *found_num_label; // Number of found items
 /* This keeps track of the directory stack */
 static GQueue dir_queue = G_QUEUE_INIT;
 
-/* *INDENT-OFF* */
 static struct
 {
     int ret_cmd;
@@ -195,7 +194,6 @@ static struct
     { B_VIEW, NORMAL_BUTTON, N_("&View - F3"), 0, 0, NULL, find_do_view_file },
     { B_VIEW, NORMAL_BUTTON, N_("&Edit - F4"), 0, 0, NULL, find_do_edit_file }
 };
-/* *INDENT-ON* */
 
 static const size_t fbuts_num = G_N_ELEMENTS (fbuts);
 static const size_t quit_button = 4;    // index of "Quit" button

@@ -66,7 +66,6 @@ teardown (void)
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("test_from_to_string_ds") */
-/* *INDENT-OFF* */
 static const struct test_strip_home_ds
 {
     const char *input_string;
@@ -82,12 +81,9 @@ static const struct test_strip_home_ds
         "/mock/testttt/some/path"
     },
 };
-/* *INDENT-ON* */
 
 /* @Test */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_strip_home, test_strip_home_ds)
-/* *INDENT-ON* */
 {
     // given
     vfs_path_t *actual_result;
@@ -100,9 +96,7 @@ START_PARAMETRIZED_TEST (test_strip_home, test_strip_home_ds)
 
     vfs_path_free (actual_result, TRUE);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

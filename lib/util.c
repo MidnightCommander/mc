@@ -419,7 +419,6 @@ void
 size_trunc_len (char *buffer, unsigned int len, uintmax_t size, int units, gboolean use_si)
 {
     // Avoid taking power for every file.
-    // *INDENT-OFF*
     static const uintmax_t power10[] = {
     // we hope that size of uintmax_t is 4 bytes at least
         1ULL,
@@ -457,7 +456,6 @@ size_trunc_len (char *buffer, unsigned int len, uintmax_t size, int units, gbool
         { "", "K", "M", "G", "T", "P", "E", "Z", "Y", "R", "Q", NULL };
     static const char *const suffix_lc[] =
         { "", "k", "m", "g", "t", "p", "e", "z", "y", "r", "q", NULL };
-    // *INDENT-ON*
 
     static int sfx_last = -1;
 

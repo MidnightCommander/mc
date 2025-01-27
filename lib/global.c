@@ -34,7 +34,6 @@
 
 #include "global.h"
 
-/* *INDENT-OFF* */
 #ifdef ENABLE_SUBSHELL
 #  ifdef SUBSHELL_OPTIONAL
 #    define SUBSHELL_USE FALSE
@@ -44,11 +43,9 @@
 #else // !ENABLE_SUBSHELL
 #    define SUBSHELL_USE FALSE
 #endif // !ENABLE_SUBSHELL
-/* *INDENT-ON* */
 
 /*** global variables ****************************************************************************/
 
-/* *INDENT-OFF* */
 mc_global_t mc_global =
 {
     .mc_version = MC_CURRENT_VERSION,
@@ -121,7 +118,6 @@ mc_global_t mc_global =
     }
 
 };
-/* *INDENT-ON* */
 
 #undef SUBSHELL_USE
 

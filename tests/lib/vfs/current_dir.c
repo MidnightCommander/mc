@@ -80,7 +80,6 @@ teardown (void)
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("test_cd_ds") */
-/* *INDENT-OFF* */
 static const struct test_cd_ds
 {
     const char *input_initial_path;
@@ -154,12 +153,9 @@ static const struct test_cd_ds
         "/"
     },
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "test_cd_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_cd, test_cd_ds)
-/* *INDENT-ON* */
 {
     // given
     vfs_path_t *vpath;
@@ -186,9 +182,7 @@ START_PARAMETRIZED_TEST (test_cd, test_cd_ds)
 
     vfs_unregister_class (vfs_test_ops);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

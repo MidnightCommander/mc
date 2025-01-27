@@ -144,7 +144,6 @@ typedef struct vfs_class
     gboolean flush;             // if set to TRUE, invalidate directory cache
     FILE *logfile;
 
-    // *INDENT-OFF*
     int (*init) (struct vfs_class * me);
     void (*done) (struct vfs_class * me);
 
@@ -205,7 +204,6 @@ typedef struct vfs_class
 
     int (*ctl) (void *vfs_info, int ctlop, void *arg);
     int (*setctl) (const vfs_path_t * vpath, int ctlop, void *arg);
-    // *INDENT-ON*
 } vfs_class;
 
 /*
@@ -287,9 +285,7 @@ void vfs_dirent_free (struct vfs_dirent *d);
 
 void vfs_fill_names (fill_names_f);
 
-/* *INDENT-OFF* */
 void vfs_print_message (const char *msg, ...) G_GNUC_PRINTF (1, 2);
-/* *INDENT-ON* */
 
 int vfs_ferrno (struct vfs_class *vfs);
 

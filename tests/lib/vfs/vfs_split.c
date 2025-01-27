@@ -70,7 +70,6 @@ teardown (void)
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("test_vfs_split_ds") */
-/* *INDENT-OFF* */
 static const struct test_vfs_split_ds
 {
     const char *input_string;
@@ -158,12 +157,9 @@ static const struct test_vfs_split_ds
         &vfs_test_ops2
     }
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "test_vfs_split_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_vfs_split, test_vfs_split_ds)
-/* *INDENT-ON* */
 {
     // given
     const char *local = NULL, *op = NULL;
@@ -182,9 +178,7 @@ START_PARAMETRIZED_TEST (test_vfs_split, test_vfs_split_ds)
     mctest_assert_str_eq (op, data->expected_op);
     g_free (path);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

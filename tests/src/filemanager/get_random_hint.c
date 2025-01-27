@@ -73,9 +73,7 @@ teardown (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-/* *INDENT-OFF* */
 START_TEST (test_not_force)
-/* *INDENT-ON* */
 {
     // given
     char *first_hint_for_ignore;
@@ -100,14 +98,11 @@ START_TEST (test_not_force)
     g_free (actual_hint1);
     g_free (first_hint_for_ignore);
 }
-/* *INDENT-OFF* */
 END_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 #define MC_HINT_FILE_SIZE 58
 /* @DataSource("get_random_ds") */
-/* *INDENT-OFF* */
 static const struct get_random_ds
 {
     int input_random_value;
@@ -136,11 +131,8 @@ static const struct get_random_ds
         "P A R A _ 4 ", // the trailing space it's a bug, but not critical and may be omitted
     },
 };
-/* *INDENT-ON* */
     // @Test(dataSource = "get_random_ds")
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (get_random, get_random_ds)
-/* *INDENT-ON* */
 {
     // given
     char *actual_value;
@@ -154,9 +146,7 @@ START_PARAMETRIZED_TEST (get_random, get_random_ds)
     mctest_assert_str_eq (actual_value, data->expected_value);
     g_free (actual_value);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

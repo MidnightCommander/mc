@@ -85,7 +85,6 @@ teardown (void)
 
 /* --------------------------------------------------------------------------------------------- */
 /* @DataSource("test_from_to_string_ds") */
-/* *INDENT-OFF* */
 static const struct test_from_to_string_ds
 {
     const char *input_string;
@@ -161,12 +160,9 @@ static const struct test_from_to_string_ds
     },
 #endif // HAVE_CHARSET
 };
-/* *INDENT-ON* */
 
 /* @Test */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_from_to_string, test_from_to_string_ds)
-/* *INDENT-ON* */
 {
     // given
     vfs_path_t *vpath;
@@ -189,14 +185,11 @@ START_PARAMETRIZED_TEST (test_from_to_string, test_from_to_string_ds)
 
     vfs_path_free (vpath, TRUE);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("test_partial_string_by_index_ds") */
-/* *INDENT-OFF* */
 static const struct test_partial_string_by_index_ds
 {
     const char *input_string;
@@ -250,12 +243,9 @@ static const struct test_partial_string_by_index_ds
         ETALON_PATH_URL_STR
     },
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "test_partial_string_by_index_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_partial_string_by_index, test_partial_string_by_index_ds)
-/* *INDENT-ON* */
 {
     // given
     vfs_path_t *vpath;
@@ -271,9 +261,7 @@ START_PARAMETRIZED_TEST (test_partial_string_by_index, test_partial_string_by_in
 
     vfs_path_free (vpath, TRUE);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 #ifdef HAVE_CHARSET
@@ -281,9 +269,7 @@ END_PARAMETRIZED_TEST
 
 #define ETALON_STR "/path/to/file.ext/test1://#enc:KOI8-R"
 /* @Test */
-/* *INDENT-OFF* */
 START_TEST (test_vfs_path_encoding_at_end)
-/* *INDENT-ON* */
 {
     // given
     vfs_path_t *vpath;
@@ -305,9 +291,7 @@ START_TEST (test_vfs_path_encoding_at_end)
     vfs_path_free (vpath, TRUE);
 }
 
-/* *INDENT-OFF* */
 END_TEST
-/* *INDENT-ON* */
 #endif // HAVE_CHARSET
 /* --------------------------------------------------------------------------------------------- */
 

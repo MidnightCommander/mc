@@ -103,7 +103,6 @@ typedef enum
 /* all functions in str_class must be defined for every encoding */
 struct str_class
 {
-    // *INDENT-OFF*
     gchar *(*conv_gerror_message) (GError * error, const char *def_msg);
       /*I*/ estr_t (*vfs_convert_to) (GIConv coder, const char *string, int size, GString * buffer);
       /*I*/ void (*insert_replace_char) (GString * buffer);
@@ -151,7 +150,6 @@ struct str_class
       /*I*/ char *(*create_key_for_filename) (const char *text, gboolean case_sen);
       /*I*/ int (*key_collate) (const char *t1, const char *t2, gboolean case_sen);
       /*I*/ void (*release_key) (char *key, gboolean case_sen);
-    // *INDENT-ON*
 };
 
 /*** global variables defined in .c file *********************************************************/
@@ -216,9 +214,7 @@ estr_t str_vfs_convert_to (GIConv coder, const char *string, int size, GString *
 
 /* printf function for str_buffer, append result of printf at the end of buffer
  */
-/* *INDENT-OFF* */
 void str_printf (GString * buffer, const char *format, ...) G_GNUC_PRINTF (2, 3);
-/* *INDENT-ON* */
 
 /* add standard replacement character in terminal encoding
  */

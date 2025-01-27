@@ -51,7 +51,6 @@ teardown (void)
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("test_x_basename_ds") */
-/* *INDENT-OFF* */
 static const struct test_x_basename_ds
 {
     const char *input_value;
@@ -87,12 +86,9 @@ static const struct test_x_basename_ds
         "/"
     },
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "test_x_basename_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_x_basename, test_x_basename_ds)
-/* *INDENT-ON* */
 {
     // given
     const char *actual_result;
@@ -103,9 +99,7 @@ START_PARAMETRIZED_TEST (test_x_basename, test_x_basename_ds)
     // then
     mctest_assert_str_eq (actual_result, data->expected_result);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

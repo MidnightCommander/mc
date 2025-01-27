@@ -43,9 +43,7 @@ static struct vfs_s_entry *vfs_root_entry;
 static struct vfs_s_inode *vfs_root_inode;
 static struct vfs_s_super *vfs_test_super;
 
-/* *INDENT-OFF* */
 void message (int flags, const char *title, const char *text, ...) G_GNUC_PRINTF (3, 4);
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -202,7 +200,6 @@ fill_stat_struct (struct stat *etalon_stat, int iterator)
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("test_vfs_parse_ls_lga_ds") */
-/* *INDENT-OFF* */
 static const struct test_vfs_parse_ls_lga_ds
 {
     const char *input_string;
@@ -241,12 +238,9 @@ static const struct test_vfs_parse_ls_lga_ds
         0
     },
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "test_vfs_parse_ls_lga_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_vfs_parse_ls_lga, test_vfs_parse_ls_lga_ds)
-/* *INDENT-ON* */
 
 {
     // given
@@ -305,16 +299,12 @@ START_PARAMETRIZED_TEST (test_vfs_parse_ls_lga, test_vfs_parse_ls_lga_ds)
 #endif
 
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
 /* @Test */
-/* *INDENT-OFF* */
 START_TEST (test_vfs_parse_ls_lga_reorder)
-/* *INDENT-ON* */
 {
     // given
     size_t filepos = 0;
@@ -352,9 +342,7 @@ START_TEST (test_vfs_parse_ls_lga_reorder)
     mctest_assert_str_eq (ent1->name, "     build_root1");
     mctest_assert_str_eq (ent2->name, "   build_root2");
 }
-/* *INDENT-OFF* */
 END_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 #define parce_one_line(ent_index, ls_output) {\
@@ -371,9 +359,7 @@ END_TEST
 }
 
 /* @Test */
-/* *INDENT-OFF* */
 START_TEST (test_vfs_parse_ls_lga_unaligned)
-/* *INDENT-ON* */
 {
     // given
     size_t filepos = 0;
@@ -396,9 +382,7 @@ START_TEST (test_vfs_parse_ls_lga_unaligned)
     mctest_assert_str_eq (ent[1]->name, "   build_root2");
     mctest_assert_str_eq (ent[3]->name, " build_root 0");
 }
-/* *INDENT-OFF* */
 END_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

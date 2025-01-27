@@ -901,14 +901,12 @@ static FileProgressStatus
 warn_same_file (file_op_context_t *ctx, const char *fmt, const char *a, const char *b)
 {
 #ifdef ENABLE_BACKGROUND
-/* *INDENT-OFF* */
     union
     {
         void *p;
         FileProgressStatus (*f) (file_op_context_t *ctx, enum OperationMode, const char *fmt,
                                  const char *a, const char *b);
     } pntr;
-/* *INDENT-ON* */
 
     pntr.f = real_warn_same_file;
 
@@ -1038,13 +1036,11 @@ real_query_recursive (file_op_context_t *ctx, enum OperationMode mode, const cha
 static FileProgressStatus
 do_file_error (file_op_context_t *ctx, gboolean allow_retry, const char *str)
 {
-/* *INDENT-OFF* */
     union
     {
         void *p;
         FileProgressStatus (*f) (file_op_context_t *ctx, enum OperationMode, gboolean, const char *);
     } pntr;
-/* *INDENT-ON* */
 
     pntr.f = real_do_file_error;
 
@@ -1059,13 +1055,11 @@ do_file_error (file_op_context_t *ctx, gboolean allow_retry, const char *str)
 static FileProgressStatus
 query_recursive (file_op_context_t *ctx, const char *s)
 {
-/* *INDENT-OFF* */
     union
     {
         void *p;
         FileProgressStatus (*f) (file_op_context_t *, enum OperationMode, const char *);
     } pntr;
-/* *INDENT-ON* */
 
     pntr.f = real_query_recursive;
 
@@ -1081,14 +1075,12 @@ static FileProgressStatus
 query_replace (file_op_context_t *ctx, const char *src, struct stat *src_stat, const char *dst,
                struct stat *dst_stat)
 {
-/* *INDENT-OFF* */
     union
     {
         void *p;
         FileProgressStatus (*f) (file_op_context_t *, enum OperationMode, const char *,
                                  struct stat *, const char *, struct stat *);
     } pntr;
-/* *INDENT-ON* */
 
     pntr.f = file_progress_real_query_replace;
 

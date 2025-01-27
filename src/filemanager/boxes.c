@@ -546,7 +546,6 @@ configure_box (void)
         char *time_out_new = NULL;
 
         quick_widget_t quick_widgets[] = {
-            // *INDENT-OFF*
             QUICK_START_COLUMNS,
                 QUICK_START_GROUPBOX (N_("File operations")),
                     QUICK_CHECKBOX (N_("&Verbose operation"), &verbose, NULL),
@@ -588,7 +587,6 @@ configure_box (void)
             QUICK_STOP_COLUMNS,
             QUICK_BUTTONS_OK_CANCEL,
             QUICK_END
-            // *INDENT-ON*
         };
 
         WRect r = { -1, -1, 0, 60 };
@@ -636,7 +634,6 @@ appearance_box (void)
 
     {
         quick_widget_t quick_widgets[] = {
-            // *INDENT-OFF*
             QUICK_START_COLUMNS,
                 QUICK_LABEL (N_("Skin:"), NULL),
             QUICK_NEXT_COLUMN,
@@ -647,7 +644,6 @@ appearance_box (void)
             QUICK_CHECKBOX (N_("&Shadows"), &mc_global.tty.shadows, &shadows_id),
             QUICK_BUTTONS_OK_CANCEL,
             QUICK_END
-            // *INDENT-ON*
         };
 
         WRect r = { -1, -1, 0, 54 };
@@ -688,7 +684,6 @@ panel_options_box (void)
         };
 
         quick_widget_t quick_widgets[] = {
-            // *INDENT-OFF*
             QUICK_START_COLUMNS,
                 QUICK_START_GROUPBOX (N_("Main options")),
                     QUICK_CHECKBOX (N_("Show mi&ni-status"), &panels_options.show_mini_info, NULL),
@@ -727,7 +722,6 @@ panel_options_box (void)
             QUICK_STOP_COLUMNS,
             QUICK_BUTTONS_OK_CANCEL,
             QUICK_END
-            // *INDENT-ON*
         };
 
         WRect r = { -1, -1, 0, 60 };
@@ -787,7 +781,6 @@ panel_listing_box (WPanel *panel, int num, char **userp, char **minip, gboolean 
         };
 
         quick_widget_t quick_widgets[] = {
-            // *INDENT-OFF*
             QUICK_START_COLUMNS,
                 QUICK_RADIO (LIST_FORMATS, list_formats, &result, &panel_list_formats_id),
             QUICK_NEXT_COLUMN,
@@ -804,7 +797,6 @@ panel_listing_box (WPanel *panel, int num, char **userp, char **minip, gboolean 
                          &mini_user_format, &mini_user_format_id, FALSE, FALSE, INPUT_COMPLETE_NONE),
             QUICK_BUTTONS_OK_CANCEL,
             QUICK_END
-            // *INDENT-ON*
         };
 
         WRect r = { -1, -1, 0, 48 };
@@ -885,7 +877,6 @@ sort_box (dir_sort_options_t *op, const panel_field_t *sort_field)
 
     {
         quick_widget_t quick_widgets[] = {
-            // *INDENT-OFF*
             QUICK_START_COLUMNS,
                 QUICK_RADIO (sort_names_num, (const char **) sort_orders_names, &sort_idx, NULL),
             QUICK_NEXT_COLUMN,
@@ -895,7 +886,6 @@ sort_box (dir_sort_options_t *op, const panel_field_t *sort_field)
             QUICK_STOP_COLUMNS,
             QUICK_BUTTONS_OK_CANCEL,
             QUICK_END
-            // *INDENT-ON*
         };
 
         WRect r = { -1, -1, 0, 40 };
@@ -923,7 +913,6 @@ void
 confirm_box (void)
 {
     quick_widget_t quick_widgets[] = {
-        // *INDENT-OFF*
         // TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
         QUICK_CHECKBOX (Q_("Confirmation|&Delete"), &confirm_delete, NULL),
         QUICK_CHECKBOX (Q_("Confirmation|O&verwrite"), &confirm_overwrite, NULL),
@@ -935,7 +924,6 @@ confirm_box (void)
                         &mc_global.widget.confirm_history_cleanup, NULL),
         QUICK_BUTTONS_OK_CANCEL,
         QUICK_END
-        // *INDENT-ON*
     };
 
     WRect r = { -1, -1, 0, 46 };
@@ -965,13 +953,11 @@ display_bits_box (void)
     };
 
     quick_widget_t quick_widgets[] = {
-        // *INDENT-OFF*
         QUICK_RADIO (4, display_bits_str, &current_mode, NULL),
         QUICK_SEPARATOR (TRUE),
         QUICK_CHECKBOX (N_("F&ull 8 bits input"), &new_meta, NULL),
         QUICK_BUTTONS_OK_CANCEL,
         QUICK_END
-        // *INDENT-ON*
     };
 
     WRect r = { -1, -1, 0, 46 };
@@ -1020,7 +1006,6 @@ display_bits_box (void)
         gboolean new_meta;
 
         quick_widget_t quick_widgets[] = {
-            // *INDENT-OFF*
             QUICK_START_COLUMNS,
                 QUICK_LABEL (N_("Input / display codepage:"), NULL),
             QUICK_NEXT_COLUMN,
@@ -1030,7 +1015,6 @@ display_bits_box (void)
                 QUICK_CHECKBOX (N_("F&ull 8 bits input"), &new_meta, NULL),
             QUICK_BUTTONS_OK_CANCEL,
             QUICK_END
-            // *INDENT-ON*
         };
 
         WRect r = { -1, -1, 0, 46 };
@@ -1137,7 +1121,6 @@ configure_vfs_box (void)
 #endif // ENABLE_VFS_FTP
 
         quick_widget_t quick_widgets[] = {
-            // *INDENT-OFF*
             QUICK_LABELED_INPUT (N_("Timeout for freeing VFSs (sec):"), input_label_left,
                                  buffer2, "input-timo-vfs", &ret_timeout, NULL, FALSE, FALSE,
                                  INPUT_COMPLETE_NONE),
@@ -1160,7 +1143,6 @@ configure_vfs_box (void)
 #endif // ENABLE_VFS_FTP
             QUICK_BUTTONS_OK_CANCEL,
             QUICK_END
-            // *INDENT-ON*
         };
 
         WRect r = { -1, -1, 0, 56 };
@@ -1243,7 +1225,6 @@ symlink_box (const vfs_path_t *existing_vpath, const vfs_path_t *new_vpath,
              char **ret_existing, char **ret_new)
 {
     quick_widget_t quick_widgets[] = {
-        // *INDENT-OFF*
         QUICK_LABELED_INPUT (N_("Existing filename (filename symlink will point to):"),
                              input_label_above, vfs_path_as_str (existing_vpath), "input-2",
                              ret_existing, NULL, FALSE, FALSE, INPUT_COMPLETE_FILENAMES),
@@ -1253,7 +1234,6 @@ symlink_box (const vfs_path_t *existing_vpath, const vfs_path_t *new_vpath,
                              ret_new, NULL, FALSE, FALSE, INPUT_COMPLETE_FILENAMES),
         QUICK_BUTTONS_OK_CANCEL,
         QUICK_END
-        // *INDENT-ON*
     };
 
     WRect r = { -1, -1, 0, 64 };
@@ -1285,12 +1265,10 @@ jobs_box (void)
         bcback_fn callback;
     }
     job_but[] = {
-        // *INDENT-OFF*
         { N_("&Stop"), NORMAL_BUTTON, B_STOP, 0, task_cb },
         { N_("&Resume"), NORMAL_BUTTON, B_RESUME, 0, task_cb },
         { N_("&Kill"), NORMAL_BUTTON, B_KILL, 0, task_cb },
         { N_("&OK"), DEFPUSH_BUTTON, B_CANCEL, 0, NULL }
-        // *INDENT-ON*
     };
 
     size_t i;

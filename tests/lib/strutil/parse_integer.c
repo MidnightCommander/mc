@@ -50,7 +50,6 @@ teardown (void)
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("parse_integer_test_ds") */
-/* *INDENT-OFF* */
 static const struct parse_integer_test_ds
 {
     const char *haystack;
@@ -115,12 +114,9 @@ static const struct parse_integer_test_ds
         FALSE
     }
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "parse_integer_test_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (parse_integer_test, parse_integer_test_ds)
-/* *INDENT-ON* */
 {
     // given
     uintmax_t actual_result;
@@ -134,9 +130,7 @@ START_PARAMETRIZED_TEST (parse_integer_test, parse_integer_test_ds)
                    "actual ( %" PRIuMAX ") not equal to\nexpected (%" PRIuMAX ")",
                    actual_result, data->expected_result);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

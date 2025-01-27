@@ -61,7 +61,6 @@ teardown (void)
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("test_serialize_ds") */
-/* *INDENT-OFF* */
 static const struct test_serialize_ds
 {
     const char input_char_prefix;
@@ -80,11 +79,8 @@ static const struct test_serialize_ds
         "a26:some test test test string"
     },
 };
-/* *INDENT-ON* */
 /* @Test(dataSource = "test_serialize_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_serialize, test_serialize_ds)
-/* *INDENT-ON* */
 {
     // given
     char *actual_result;
@@ -100,14 +96,11 @@ START_PARAMETRIZED_TEST (test_serialize, test_serialize_ds)
     if (error != NULL)
         g_error_free (error);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("test_deserialize_incorrect_ds") */
-/* *INDENT-OFF* */
 static const struct test_deserialize_incorrect_ds
 {
     const char input_char_prefix;
@@ -147,11 +140,8 @@ static const struct test_deserialize_incorrect_ds
         "mc_serialize_str(): Specified data length (500) is greater than actual data length (47)"
     },
 };
-/* *INDENT-ON* */
 /* @Test(dataSource = "test_deserialize_incorrect_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_deserialize_incorrect, test_deserialize_incorrect_ds)
-/* *INDENT-ON* */
 {
     // given
     char *actual_result;
@@ -165,14 +155,11 @@ START_PARAMETRIZED_TEST (test_deserialize_incorrect, test_deserialize_incorrect_
     ck_assert_int_eq (error->code, data->expected_error_code);
     mctest_assert_str_eq (error->message, data->expected_error_string);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("test_deserialize_ds") */
-/* *INDENT-OFF* */
 static const struct test_deserialize_ds
 {
     const char input_char_prefix;
@@ -191,11 +178,8 @@ static const struct test_deserialize_ds
         "The right test string"
     },
 };
-/* *INDENT-ON* */
 /* @Test(dataSource = "test_deserialize_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_deserialize, test_deserialize_ds)
-/* *INDENT-ON* */
 {
     // given
     char *actual_result;
@@ -208,15 +192,11 @@ START_PARAMETRIZED_TEST (test_deserialize, test_deserialize_ds)
 
     g_free (actual_result);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
-/* *INDENT-OFF* */
 START_TEST (test_serialize_config)
-/* *INDENT-ON* */
 {
     // given
     mc_config_t *test_data;
@@ -250,13 +230,10 @@ START_TEST (test_serialize_config)
 
     g_free (actual);
 }
-/* *INDENT-OFF* */
 END_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 /* @DataSource("test_deserialize_config_incorrect_ds") */
-/* *INDENT-OFF* */
 static const struct test_deserialize_config_incorrect_ds
 {
     const char *input_string;
@@ -285,11 +262,8 @@ static const struct test_deserialize_config_incorrect_ds
         "mc_deserialize_config() at 10: mc_serialize_str(): Specified data length (6000) is greater than actual data length (21)"
     },
 };
-/* *INDENT-ON* */
 /* @Test(dataSource = "test_deserialize_config_incorrect_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_deserialize_config_incorrect, test_deserialize_config_incorrect_ds)
-/* *INDENT-ON* */
 {
     // given
     mc_config_t *actual_result;
@@ -303,15 +277,11 @@ START_PARAMETRIZED_TEST (test_deserialize_config_incorrect, test_deserialize_con
     ck_assert_int_eq (error->code, data->expected_error_code);
     mctest_assert_str_eq (error->message, data->expected_error_string);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
-/* *INDENT-OFF* */
 START_TEST (test_deserialize_config)
-/* *INDENT-ON* */
 {
     // given
     mc_config_t *actual;
@@ -349,9 +319,7 @@ START_TEST (test_deserialize_config)
 
     mc_config_deinit (actual);
 }
-/* *INDENT-OFF* */
 END_TEST
-/* *INDENT-ON* */
 
 #undef input_value
 /* --------------------------------------------------------------------------------------------- */

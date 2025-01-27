@@ -380,9 +380,7 @@ static name_keymap_t command_names[] = {
     {NULL, CK_IgnoreKey}
 };
 
-/* *INDENT-OFF* */
 static const size_t num_command_names = G_N_ELEMENTS (command_names) - 1;
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/

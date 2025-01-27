@@ -14,7 +14,6 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
 
-/* *INDENT-OFF* */
 /*
    Macros defined by this file (s is an rvalue of type struct stat):
 
@@ -24,7 +23,6 @@
    ST_NBLOCKS(s):   Number of blocks in the file, including indirect blocks.
    ST_NBLOCKSIZE:   Size of blocks used when calculating ST_NBLOCKS.
  */
-/* *INDENT-ON* */
 
 #ifndef STAT_SIZE_H
 #define STAT_SIZE_H

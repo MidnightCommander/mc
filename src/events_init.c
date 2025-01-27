@@ -57,7 +57,6 @@
 gboolean
 events_init (GError **mcerror)
 {
-    // *INDENT-OFF*
     static const event_init_t standard_events[] =
     {
         {MCEVENT_GROUP_CORE, "clipboard_file_to_ext_clip", clipboard_file_to_ext_clip, NULL},
@@ -75,7 +74,6 @@ events_init (GError **mcerror)
 
         {NULL, NULL, NULL, NULL}
     };
-    // *INDENT-ON*
 
     if (!mc_event_init (mcerror))
         return FALSE;

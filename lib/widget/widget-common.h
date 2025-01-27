@@ -166,9 +166,7 @@ struct Widget
     Widget *(*find_by_type) (const Widget * w, widget_cb_fn cb);
     Widget *(*find_by_id) (const Widget * w, unsigned long id);
 
-    // *INDENT-OFF*
     cb_ret_t (*set_state) (Widget * w, widget_state_t state, gboolean enable);
-    // *INDENT-ON*
     void (*destroy) (Widget * w);
 
     const int *(*get_colors) (const Widget * w);

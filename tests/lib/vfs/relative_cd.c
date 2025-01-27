@@ -104,7 +104,6 @@ teardown (void)
 
 /* --------------------------------------------------------------------------------------------- */
 /* @DataSource("test_relative_cd_ds") */
-/* *INDENT-OFF* */
 static const struct test_relative_cd_ds
 {
     const char *input_string;
@@ -123,12 +122,9 @@ static const struct test_relative_cd_ds
         "some-non-exists-dir"
     },
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "test_relative_cd_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_relative_cd, test_relative_cd_ds)
-/* *INDENT-ON* */
 {
     // given
     vfs_path_t *vpath;
@@ -151,18 +147,14 @@ START_PARAMETRIZED_TEST (test_relative_cd, test_relative_cd_ds)
         vfs_path_free (vpath, TRUE);
     }
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
 /* Relative to panel_correct_path_to_show()  */
 
 /* @Test */
-/* *INDENT-OFF* */
 START_TEST (test_vpath_to_str_filter)
-/* *INDENT-ON* */
 {
     // given
     vfs_path_t *vpath, *last_vpath;
@@ -187,9 +179,7 @@ START_TEST (test_vpath_to_str_filter)
     vfs_path_free (last_vpath, TRUE);
     g_free (filtered_path);
 }
-/* *INDENT-OFF* */
 END_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

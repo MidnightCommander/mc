@@ -46,7 +46,6 @@ teardown (void)
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("data_source1") */
-/* *INDENT-OFF* */
 static const struct data_source1
 {
     gboolean input_quote_percent;
@@ -58,12 +57,9 @@ static const struct data_source1
     { TRUE, "%%", "%%%%"},
     { FALSE, "%%", "%%"},
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "data_source1") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (quote_percent_test, data_source1)
-/* *INDENT-ON* */
 {
     // given
     char *actual_string;
@@ -76,14 +72,11 @@ START_PARAMETRIZED_TEST (quote_percent_test, data_source1)
 
     g_free (actual_string);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("data_source2") */
-/* *INDENT-OFF* */
 static const struct data_source2
 {
     const char *input_string;
@@ -103,12 +96,9 @@ static const struct data_source2
     {"~", "\\~"},
     {"blabla~", "blabla~"},
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "data_source2") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (name_quote_test, data_source2)
-/* *INDENT-ON* */
 {
     // given
     char *actual_string;
@@ -121,9 +111,7 @@ START_PARAMETRIZED_TEST (name_quote_test, data_source2)
 
     g_free (actual_string);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

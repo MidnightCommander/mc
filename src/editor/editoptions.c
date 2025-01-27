@@ -147,7 +147,6 @@ edit_options_dialog (WDialog *h)
 
     {
         quick_widget_t quick_widgets[] = {
-            // *INDENT-OFF*
             QUICK_START_COLUMNS,
                 QUICK_START_GROUPBOX (N_("Wrap mode")),
                     QUICK_RADIO (3, wrap_str, &wrap_mode, NULL),
@@ -182,7 +181,6 @@ edit_options_dialog (WDialog *h)
             QUICK_STOP_COLUMNS,
             QUICK_BUTTONS_OK_CANCEL,
             QUICK_END
-            // *INDENT-ON*
         };
 
         WRect r = { -1, -1, 0, 74 };

@@ -72,7 +72,6 @@ enum config_var_type
 
 /*** file scope variables ************************************************************************/
 
-/* *INDENT-OFF* */
 static struct
 {
     const char *pattern;
@@ -90,7 +89,6 @@ static struct
     {"^\\s*PubkeyAuthentication\\s+(.*)$", NULL, STRING, offsetof (sftpfs_ssh_config_entity_t, pubkey_auth)},
     {NULL, NULL, 0, 0}
 };
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/

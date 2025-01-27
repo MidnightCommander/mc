@@ -145,7 +145,6 @@ edit_about (void)
 
     {
         quick_widget_t quick_widgets[] = {
-            // *INDENT-OFF*
             QUICK_LABEL (ver, NULL),
             QUICK_SEPARATOR (TRUE),
             QUICK_LABEL (N_("A user friendly text editor\n"
@@ -155,7 +154,6 @@ edit_about (void)
             QUICK_START_BUTTONS (TRUE, TRUE),
             QUICK_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
             QUICK_END
-            // *INDENT-ON*
         };
 
         WRect r = { -1, -1, 0, 40 };

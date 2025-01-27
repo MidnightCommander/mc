@@ -83,7 +83,6 @@ mcdiffview_dialog_search (WDiff *dview)
 
     {
         quick_widget_t quick_widgets[] = {
-            // *INDENT-OFF*
             QUICK_LABELED_INPUT (N_("Enter search string:"), input_label_above, INPUT_LAST_TEXT,
                                  MC_HISTORY_SHARED_SEARCH, &exp, NULL, FALSE, FALSE,
                                  INPUT_COMPLETE_NONE),
@@ -101,7 +100,6 @@ mcdiffview_dialog_search (WDiff *dview)
             QUICK_STOP_COLUMNS,
             QUICK_BUTTONS_OK_CANCEL,
             QUICK_END
-            // *INDENT-ON*
         };
 
         WRect r = { -1, -1, 0, 58 };

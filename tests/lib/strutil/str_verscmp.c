@@ -65,7 +65,6 @@ sign (int n)
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("str_verscmp_test_ds") */
-/* *INDENT-OFF* */
 static const struct str_verscmp_test_struct
 {
     const char *s1;
@@ -94,12 +93,9 @@ static const struct str_verscmp_test_struct
     { c, b, 1 },
     { c, a, 1 }
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "str_verscmp_test_ds") */
-/* *INDENT-OFF* */
 START_TEST (str_verscmp_test)
-/* *INDENT-ON* */
 {
     // given
     int actual_result;
@@ -111,9 +107,7 @@ START_TEST (str_verscmp_test)
     // then
     ck_assert_int_eq (sign (actual_result), sign (data->expected_result));
 }
-/* *INDENT-OFF* */
 END_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

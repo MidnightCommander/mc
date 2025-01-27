@@ -33,9 +33,7 @@
 
 /* --------------------------------------------------------------------------------------------- */
 
-/* *INDENT-OFF* */
 START_TEST (fork_child_as_shell)
-/* *INDENT-ON* */
 {
     int actual_value;
     // given
@@ -60,9 +58,7 @@ START_TEST (fork_child_as_shell)
     // All exec* calls is mocked, so call to _exit() function with 127 status code it's a normal situation
     ck_assert_int_eq (my_exit__status__captured, 127);
 }
-/* *INDENT-OFF* */
 END_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

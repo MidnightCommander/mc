@@ -88,7 +88,6 @@ test_deinit_vfs (void)
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("test_path_recode_ds") */
-/* *INDENT-OFF* */
 static const struct test_path_recode_ds
 {
     const char *input_codepage;
@@ -128,12 +127,9 @@ static const struct test_path_recode_ds
         "/#enc:KOI8-R/bla-bla/some/path"
     },
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "test_path_recode_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_path_recode, test_path_recode_ds)
-/* *INDENT-ON* */
 {
     // given
     vfs_path_t *vpath;
@@ -155,9 +151,7 @@ START_PARAMETRIZED_TEST (test_path_recode, test_path_recode_ds)
     vfs_path_free (vpath, TRUE);
     test_deinit_vfs ();
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 
 /* --------------------------------------------------------------------------------------------- */
@@ -165,7 +159,6 @@ END_PARAMETRIZED_TEST
 static struct vfs_class vfs_test_ops1;
 
 /* @DataSource("test_path_to_str_flags_ds") */
-/* *INDENT-OFF* */
 static const struct test_path_to_str_flags_ds
 {
     const char *input_path;
@@ -229,12 +222,9 @@ static const struct test_path_to_str_flags_ds
         "~/test1://user@host.name/\xD4\xC5\xD3\xD4\xCF\xD7\xD9\xCA/\xD0\xD5\xD4\xD8"
     },
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "test_path_to_str_flags_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_path_to_str_flags, test_path_to_str_flags_ds)
-/* *INDENT-ON* */
 {
     // given
     vfs_path_t *vpath;
@@ -257,9 +247,7 @@ START_PARAMETRIZED_TEST (test_path_to_str_flags, test_path_to_str_flags_ds)
     vfs_path_free (vpath, TRUE);
     test_deinit_vfs ();
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

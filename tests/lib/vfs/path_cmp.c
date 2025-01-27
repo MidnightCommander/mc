@@ -71,7 +71,6 @@ teardown (void)
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("test_path_equal_ds") */
-/* *INDENT-OFF* */
 static const struct test_path_equal_ds
 {
     const char *input_path1;
@@ -117,12 +116,9 @@ static const struct test_path_equal_ds
     },
 #endif
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "test_path_equal_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_path_equal, test_path_equal_ds)
-/* *INDENT-ON* */
 {
     // given
     vfs_path_t *vpath1, *vpath2;
@@ -140,14 +136,11 @@ START_PARAMETRIZED_TEST (test_path_equal, test_path_equal_ds)
     vfs_path_free (vpath1, TRUE);
     vfs_path_free (vpath2, TRUE);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("test_path_equal_len_ds") */
-/* *INDENT-OFF* */
 static const struct test_path_equal_len_ds
 {
     const char *input_path1;
@@ -205,12 +198,9 @@ static const struct test_path_equal_len_ds
         FALSE
     },
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "test_path_equal_len_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_path_equal_len, test_path_equal_len_ds)
-/* *INDENT-ON* */
 {
     // given
     vfs_path_t *vpath1, *vpath2;
@@ -228,9 +218,7 @@ START_PARAMETRIZED_TEST (test_path_equal_len, test_path_equal_len_ds)
     vfs_path_free (vpath1, TRUE);
     vfs_path_free (vpath2, TRUE);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

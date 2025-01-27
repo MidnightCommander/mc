@@ -51,7 +51,6 @@
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("test_regex_replace_esc_seq_prepare_ds") */
-/* *INDENT-OFF* */
 static const struct test_regex_replace_esc_seq_prepare_ds
 {
     const char *input_string;
@@ -175,12 +174,9 @@ static const struct test_regex_replace_esc_seq_prepare_ds
         0
     },
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "test_regex_replace_esc_seq_prepare_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_regex_replace_esc_seq_prepare, test_regex_replace_esc_seq_prepare_ds)
-/* *INDENT-ON* */
 {
     // given
     GString *replace_str;
@@ -202,9 +198,7 @@ START_PARAMETRIZED_TEST (test_regex_replace_esc_seq_prepare, test_regex_replace_
 
     g_string_free (replace_str, TRUE);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

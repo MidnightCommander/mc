@@ -60,7 +60,6 @@ teardown (void)
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("data_source") */
-/* *INDENT-OFF* */
 static const struct data_source
 {
     const char *input_string;
@@ -88,12 +87,9 @@ static const struct data_source
     { VFS_ENCODING_PREFIX "UTF-8/usr/bin", VFS_ENCODING_PREFIX "UTF-8/usr/bin" }
 #endif
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "data_source") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (realpath_test, data_source)
-/* *INDENT-ON* */
 {
     int ret;
 
@@ -110,9 +106,7 @@ START_PARAMETRIZED_TEST (realpath_test, data_source)
 
     (void) ret;
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

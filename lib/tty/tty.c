@@ -119,7 +119,6 @@ tty_check_term (gboolean force_xterm)
         exit (EXIT_FAILURE);
     }
 
-    // *INDENT-OFF*
     return force_xterm
         || strncmp (termvalue, "xterm", 5) == 0
         || strncmp (termvalue, "konsole", 7) == 0
@@ -131,7 +130,6 @@ tty_check_term (gboolean force_xterm)
         || strncmp (termvalue, "screen", 6) == 0
         || strncmp (termvalue, "tmux", 4) == 0
         || strncmp (termvalue, "contour", 7) == 0;
-    // *INDENT-ON*
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -195,10 +193,8 @@ gboolean
 tty_got_winch (void)
 {
     fd_set fdset;
-    // *INDENT-OFF*
     // instant timeout
     struct timeval timeout = { .tv_sec = 0, .tv_usec = 0 };
-    // *INDENT-ON*
     int ok;
 
     FD_ZERO (&fdset);

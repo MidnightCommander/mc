@@ -2352,7 +2352,6 @@ dview_diff_options (WDiff *dview)
     };
 
     quick_widget_t quick_widgets[] = {
-        // *INDENT-OFF*
         QUICK_START_GROUPBOX (N_("Diff algorithm")),
             QUICK_RADIO (3, (const char **) quality_str, (int *) &dview->opt.quality, NULL),
         QUICK_STOP_GROUPBOX,
@@ -2366,7 +2365,6 @@ dview_diff_options (WDiff *dview)
         QUICK_STOP_GROUPBOX,
         QUICK_BUTTONS_OK_CANCEL,
         QUICK_END
-        // *INDENT-ON*
     };
 
     WRect r = { -1, -1, 0, 56 };
@@ -2901,12 +2899,10 @@ dview_goto_cmd (WDiff *dview, diff_place_t ord)
 {
     static gboolean first_run = TRUE;
 
-    // *INDENT-OFF*
     static const char *title[2] = {
         N_("Goto line (left)"),
         N_("Goto line (right)")
     };
-    // *INDENT-ON*
 
     int newline;
     char *input;

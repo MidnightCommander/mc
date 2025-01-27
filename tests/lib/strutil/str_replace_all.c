@@ -50,7 +50,6 @@ teardown (void)
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("str_replace_all_test_ds") */
-/* *INDENT-OFF* */
 static const struct str_replace_all_test_ds
 {
     const char *haystack;
@@ -151,12 +150,9 @@ static const struct str_replace_all_test_ds
         NULL,
     },
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "str_replace_all_test_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (str_replace_all_test, str_replace_all_test_ds)
-/* *INDENT-ON* */
 {
     // given
     char *actual_result;
@@ -168,9 +164,7 @@ START_PARAMETRIZED_TEST (str_replace_all_test, str_replace_all_test_ds)
     mctest_assert_str_eq (actual_result, data->expected_result);
     g_free (actual_result);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

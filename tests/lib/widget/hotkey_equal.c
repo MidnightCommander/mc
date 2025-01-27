@@ -50,7 +50,6 @@ teardown (void)
 /* --------------------------------------------------------------------------------------------- */
 
 /* @DataSource("test_hotkey_equal_ds") */
-/* *INDENT-OFF* */
 static const struct test_hotkey_equal_ds
 {
     const hotkey_t hotkey1;
@@ -125,13 +124,10 @@ static const struct test_hotkey_equal_ds
         FALSE
     }
 };
-/* *INDENT-ON* */
 
 /* @Test(dataSource = "test_hotkey_equal_ds") */
-/* *INDENT-OFF* */
 START_PARAMETRIZED_TEST (test_hotkey_equal,
                          test_hotkey_equal_ds)
-/* *INDENT-ON* */
 {
     // given
     gboolean result;
@@ -142,9 +138,7 @@ START_PARAMETRIZED_TEST (test_hotkey_equal,
     // then
     ck_assert_int_eq (result, data->expected_result);
 }
-/* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
-/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

@@ -76,13 +76,11 @@
 static GString *
 examine_cd (const char *_path)
 {
-    // *INDENT-OFF*
     typedef enum
     {
         copy_sym,
         subst_var
     } state_t;
-    // *INDENT-ON*
 
     state_t state = copy_sym;
     GString *q;
