@@ -64,24 +64,24 @@ groupbox_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *
     switch (msg)
     {
     case MSG_DRAW:
+    {
+        gboolean disabled;
+        const int *colors;
+
+        colors = widget_get_colors (w);
+
+        disabled = widget_get_state (w, WST_DISABLED);
+        tty_setcolor (disabled ? DISABLED_COLOR : colors[DLG_COLOR_NORMAL]);
+        tty_draw_box (w->rect.y, w->rect.x, w->rect.lines, w->rect.cols, TRUE);
+
+        if (g->title != NULL)
         {
-            gboolean disabled;
-            const int *colors;
-
-            colors = widget_get_colors (w);
-
-            disabled = widget_get_state (w, WST_DISABLED);
-            tty_setcolor (disabled ? DISABLED_COLOR : colors[DLG_COLOR_NORMAL]);
-            tty_draw_box (w->rect.y, w->rect.x, w->rect.lines, w->rect.cols, TRUE);
-
-            if (g->title != NULL)
-            {
-                tty_setcolor (disabled ? DISABLED_COLOR : colors[DLG_COLOR_TITLE]);
-                widget_gotoyx (w, 0, 1);
-                tty_print_string (g->title);
-            }
-            return MSG_HANDLED;
+            tty_setcolor (disabled ? DISABLED_COLOR : colors[DLG_COLOR_TITLE]);
+            widget_gotoyx (w, 0, 1);
+            tty_print_string (g->title);
         }
+        return MSG_HANDLED;
+    }
 
     case MSG_DESTROY:
         g_free (g->title);

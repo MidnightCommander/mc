@@ -28,7 +28,7 @@
 #include "tests/mctest.h"
 
 #include "lib/strutil.h"
-#include "lib/util.h"           // _GL_CMP()
+#include "lib/util.h"  // _GL_CMP()
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -97,18 +97,9 @@ static const struct filevercmp_test_struct
     const char *s1;
     const char *s2;
     int expected_result;
-} filevercmp_test_ds1[] =
-{
-    { "", "", 0 },
-    { "a", "a", 0 },
-    { "a", "b", -1 },
-    { "b", "a", 1 },
-    { "00", "01", -1 },
-    { "01", "010", -1 },
-    { "9", "10", -1 },
-    { "0a", "0", 1 }
-};
-
+} filevercmp_test_ds1[] = { { "", "", 0 },     { "a", "a", 0 },    { "a", "b", -1 },
+                            { "b", "a", 1 },   { "00", "01", -1 }, { "01", "010", -1 },
+                            { "9", "10", -1 }, { "0a", "0", 1 } };
 
 /* @Test(dataSource = "filevercmp_test_ds1") */
 START_TEST (filevercmp_test1)
@@ -129,80 +120,78 @@ END_TEST
 
 /* @DataSource("filevercmp_test_ds2") */
 /* Testcases are taken from Gnulib */
-static const char *filevercmp_test_ds2[] = {
-    "",
-    ".",
-    "..",
-    ".0",
-    ".9",
-    ".A",
-    ".Z",
-    ".a~",
-    ".a",
-    ".b~",
-    ".b",
-    ".z",
-    ".zz~",
-    ".zz",
-    ".zz.~1~",
-    ".zz.0",
-    ".\1",
-    ".\1.txt",
-    ".\1x",
-    ".\1x\1",
-    ".\1.0",
-    "0",
-    "9",
-    "A",
-    "Z",
-    "a~",
-    "a",
-    "a.b~",
-    "a.b",
-    "a.bc~",
-    "a.bc",
-    "a+",
-    "a.",
-    "a..a",
-    "a.+",
-    "b~",
-    "b",
-    "gcc-c++-10.fc9.tar.gz",
-    "gcc-c++-10.fc9.tar.gz.~1~",
-    "gcc-c++-10.fc9.tar.gz.~2~",
-    "gcc-c++-10.8.12-0.7rc2.fc9.tar.bz2",
-    "gcc-c++-10.8.12-0.7rc2.fc9.tar.bz2.~1~",
-    "glibc-2-0.1.beta1.fc10.rpm",
-    "glibc-common-5-0.2.beta2.fc9.ebuild",
-    "glibc-common-5-0.2b.deb",
-    "glibc-common-11b.ebuild",
-    "glibc-common-11-0.6rc2.ebuild",
-    "libstdc++-0.5.8.11-0.7rc2.fc10.tar.gz",
-    "libstdc++-4a.fc8.tar.gz",
-    "libstdc++-4.10.4.20040204svn.rpm",
-    "libstdc++-devel-3.fc8.ebuild",
-    "libstdc++-devel-3a.fc9.tar.gz",
-    "libstdc++-devel-8.fc8.deb",
-    "libstdc++-devel-8.6.2-0.4b.fc8",
-    "nss_ldap-1-0.2b.fc9.tar.bz2",
-    "nss_ldap-1-0.6rc2.fc8.tar.gz",
-    "nss_ldap-1.0-0.1a.tar.gz",
-    "nss_ldap-10beta1.fc8.tar.gz",
-    "nss_ldap-10.11.8.6.20040204cvs.fc10.ebuild",
-    "z",
-    "zz~",
-    "zz",
-    "zz.~1~",
-    "zz.0",
-    "zz.0.txt",
-    "\1",
-    "\1.txt",
-    "\1x",
-    "\1x\1",
-    "\1.0",
-    "#\1.b#",
-    "#.b#"
-};
+static const char *filevercmp_test_ds2[] = { "",
+                                             ".",
+                                             "..",
+                                             ".0",
+                                             ".9",
+                                             ".A",
+                                             ".Z",
+                                             ".a~",
+                                             ".a",
+                                             ".b~",
+                                             ".b",
+                                             ".z",
+                                             ".zz~",
+                                             ".zz",
+                                             ".zz.~1~",
+                                             ".zz.0",
+                                             ".\1",
+                                             ".\1.txt",
+                                             ".\1x",
+                                             ".\1x\1",
+                                             ".\1.0",
+                                             "0",
+                                             "9",
+                                             "A",
+                                             "Z",
+                                             "a~",
+                                             "a",
+                                             "a.b~",
+                                             "a.b",
+                                             "a.bc~",
+                                             "a.bc",
+                                             "a+",
+                                             "a.",
+                                             "a..a",
+                                             "a.+",
+                                             "b~",
+                                             "b",
+                                             "gcc-c++-10.fc9.tar.gz",
+                                             "gcc-c++-10.fc9.tar.gz.~1~",
+                                             "gcc-c++-10.fc9.tar.gz.~2~",
+                                             "gcc-c++-10.8.12-0.7rc2.fc9.tar.bz2",
+                                             "gcc-c++-10.8.12-0.7rc2.fc9.tar.bz2.~1~",
+                                             "glibc-2-0.1.beta1.fc10.rpm",
+                                             "glibc-common-5-0.2.beta2.fc9.ebuild",
+                                             "glibc-common-5-0.2b.deb",
+                                             "glibc-common-11b.ebuild",
+                                             "glibc-common-11-0.6rc2.ebuild",
+                                             "libstdc++-0.5.8.11-0.7rc2.fc10.tar.gz",
+                                             "libstdc++-4a.fc8.tar.gz",
+                                             "libstdc++-4.10.4.20040204svn.rpm",
+                                             "libstdc++-devel-3.fc8.ebuild",
+                                             "libstdc++-devel-3a.fc9.tar.gz",
+                                             "libstdc++-devel-8.fc8.deb",
+                                             "libstdc++-devel-8.6.2-0.4b.fc8",
+                                             "nss_ldap-1-0.2b.fc9.tar.bz2",
+                                             "nss_ldap-1-0.6rc2.fc8.tar.gz",
+                                             "nss_ldap-1.0-0.1a.tar.gz",
+                                             "nss_ldap-10beta1.fc8.tar.gz",
+                                             "nss_ldap-10.11.8.6.20040204cvs.fc10.ebuild",
+                                             "z",
+                                             "zz~",
+                                             "zz",
+                                             "zz.~1~",
+                                             "zz.0",
+                                             "zz.0.txt",
+                                             "\1",
+                                             "\1.txt",
+                                             "\1x",
+                                             "\1x\1",
+                                             "\1.0",
+                                             "#\1.b#",
+                                             "#.b#" };
 
 static const size_t filevercmp_test_ds2_len = G_N_ELEMENTS (filevercmp_test_ds2);
 
@@ -229,13 +218,10 @@ START_TEST (filevercmp_test2)
 }
 END_TEST
 
-
 /* @DataSource("filevercmp_test_ds3") */
 /* Ticket #3959 */
-static const char *filevercmp_test_ds3[] = {
-    "application-1.10.tar.gz",
-    "application-1.10.1.tar.gz"
-};
+static const char *filevercmp_test_ds3[] = { "application-1.10.tar.gz",
+                                             "application-1.10.1.tar.gz" };
 
 static const size_t filevercmp_test_ds3_len = G_N_ELEMENTS (filevercmp_test_ds3);
 
@@ -262,14 +248,11 @@ START_TEST (filevercmp_test3)
 }
 END_TEST
 
-
 /* @DataSource("filevercmp_test_ds4") */
 /* Ticket #3905 */
-static const char *filevercmp_test_ds4[] = {
-    "firefox-58.0.1+build1.tar.gz",
-    "firefox-59.0~b14+build1.tar.gz",
-    "firefox-59.0.1+build1.tar.gz"
-};
+static const char *filevercmp_test_ds4[] = { "firefox-58.0.1+build1.tar.gz",
+                                             "firefox-59.0~b14+build1.tar.gz",
+                                             "firefox-59.0.1+build1.tar.gz" };
 
 static const size_t filevercmp_test_ds4_len = G_N_ELEMENTS (filevercmp_test_ds4);
 
@@ -295,7 +278,6 @@ START_TEST (filevercmp_test4)
     }
 }
 END_TEST
-
 
 /* @DataSource("filevercmp_test_ds5") */
 /* Testcases are taken from Gnulib */

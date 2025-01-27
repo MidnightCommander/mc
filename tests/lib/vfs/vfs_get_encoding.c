@@ -52,69 +52,37 @@ static const struct test_vfs_get_encoding_ds
 {
     const char *path;
     const char *expected_encoding;
-} test_vfs_get_encoding_ds[] =
-{
-    { // 0
-        "",
-        NULL
-    },
-    { // 1
-        "aaaa",
-        NULL
-    },
-    { // 2
-        "/aaaa",
-        NULL
-    },
-    { // 3
-        "aaaa/bbbb",
-        NULL
-    },
-    { // 4
-        "/aaaa/bbbb",
-        NULL
-    },
-    { // 5
-        "#enc:UTF-8/aaaa",
-        "UTF-8"
-    },
-    { // 6
-        "/#enc:UTF-8/aaaa",
-        "UTF-8"
-    },
-    { // 7
-        "/aaaa/#enc:UTF-8/bbbb",
-        "UTF-8"
-    },
-    { // 8
-        "/aaaa/#enc:UTF-8/bbbb/#enc:KOI8-R",
-        "KOI8-R"
-    },
-    { // 9
-        "/aaaa/#enc:UTF-8/bbbb/#enc:KOI8-R/cccc",
-        "KOI8-R"
-    },
-    { // 10
-        "/aaaa/#enc:UTF-8/bbbb/cccc#enc:KOI8-R/dddd",
-        "UTF-8"
-    },
-    { // 11
-        "/#enc:UTF-8/bbbb/cccc#enc:KOI8-R/dddd",
-        "UTF-8"
-    },
-    { // 12
-        "#enc:UTF-8/bbbb/cccc#enc:KOI8-R/dddd",
-        "UTF-8"
-    },
-    { // 13
-        "aaaa#enc:UTF-8/bbbb/cccc#enc:KOI8-R/dddd",
-        NULL
-    },
-    { // 14
-        "/aaaa/#enc:UTF-8/bbbb/#enc:KOI8-R#enc:CP866/cccc",
-        "KOI8-R#enc:CP866"
-    }
-};
+} test_vfs_get_encoding_ds[] = { { // 0
+                                   "", NULL },
+                                 { // 1
+                                   "aaaa", NULL },
+                                 { // 2
+                                   "/aaaa", NULL },
+                                 { // 3
+                                   "aaaa/bbbb", NULL },
+                                 { // 4
+                                   "/aaaa/bbbb", NULL },
+                                 { // 5
+                                   "#enc:UTF-8/aaaa", "UTF-8" },
+                                 { // 6
+                                   "/#enc:UTF-8/aaaa", "UTF-8" },
+                                 { // 7
+                                   "/aaaa/#enc:UTF-8/bbbb", "UTF-8" },
+                                 { // 8
+                                   "/aaaa/#enc:UTF-8/bbbb/#enc:KOI8-R", "KOI8-R" },
+                                 { // 9
+                                   "/aaaa/#enc:UTF-8/bbbb/#enc:KOI8-R/cccc", "KOI8-R" },
+                                 { // 10
+                                   "/aaaa/#enc:UTF-8/bbbb/cccc#enc:KOI8-R/dddd", "UTF-8" },
+                                 { // 11
+                                   "/#enc:UTF-8/bbbb/cccc#enc:KOI8-R/dddd", "UTF-8" },
+                                 { // 12
+                                   "#enc:UTF-8/bbbb/cccc#enc:KOI8-R/dddd", "UTF-8" },
+                                 { // 13
+                                   "aaaa#enc:UTF-8/bbbb/cccc#enc:KOI8-R/dddd", NULL },
+                                 { // 14
+                                   "/aaaa/#enc:UTF-8/bbbb/#enc:KOI8-R#enc:CP866/cccc",
+                                   "KOI8-R#enc:CP866" } };
 
 /* @Test(dataSource = "test_vfs_get_encoding_ds") */
 START_PARAMETRIZED_TEST (test_vfs_get_encoding, test_vfs_get_encoding_ds)

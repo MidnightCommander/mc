@@ -33,8 +33,8 @@
 #include <config.h>
 
 #include "lib/global.h"
-#include "lib/tty/tty.h"        // LINES, COLS
-#include "lib/tty/color.h"      // tty_set_normal_attrs()
+#include "lib/tty/tty.h"    // LINES, COLS
+#include "lib/tty/color.h"  // tty_set_normal_attrs()
 #include "lib/widget.h"
 #include "lib/event.h"
 
@@ -240,7 +240,7 @@ dialog_switch_list (void)
     lines = MIN ((size_t) (LINES * 2 / 3), dlg_num);
     cols = COLS * 2 / 3;
 
-    listbox = listbox_window_new (lines, cols, _("Screens"), "[Screen selector]");
+    listbox = listbox_window_new (lines, cols, _ ("Screens"), "[Screen selector]");
 
     for (h = mc_dialogs; h != NULL; h = g_list_next (h))
     {
@@ -367,7 +367,7 @@ mc_refresh (void)
 #ifdef ENABLE_BACKGROUND
     if (mc_global.we_are_background)
         return;
-#endif // ENABLE_BACKGROUND
+#endif  // ENABLE_BACKGROUND
 
     if (!tty_got_winch ())
         tty_refresh ();

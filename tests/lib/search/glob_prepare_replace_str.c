@@ -27,7 +27,7 @@
 
 #include "tests/mctest.h"
 
-#include "glob.c"               // for testing static functions
+#include "glob.c"  // for testing static functions
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -38,27 +38,12 @@ static const struct test_glob_prepare_replace_str_ds
     const char *glob_str;
     const char *replace_str;
     const char *expected_result;
-} test_glob_prepare_replace_str_ds[] =
-{
-    { // 0.
-        "qqwwee",
-        "*ww*",
-        "\\1AA\\2",
-        "qqAAee"
-    },
-    { // 1.
-        "qqwwee",
-        "*qq*",
-        "\\1SS\\2",
-        "SSwwee"
-    },
-    { // 2.
-        "qqwwee",
-        "*ee*",
-        "\\1RR\\2",
-        "qqwwRR"
-    }
-};
+} test_glob_prepare_replace_str_ds[] = { { // 0.
+                                           "qqwwee", "*ww*", "\\1AA\\2", "qqAAee" },
+                                         { // 1.
+                                           "qqwwee", "*qq*", "\\1SS\\2", "SSwwee" },
+                                         { // 2.
+                                           "qqwwee", "*ee*", "\\1RR\\2", "qqwwRR" } };
 
 /* @Test(dataSource = "test_glob_prepare_replace_str_ds") */
 START_PARAMETRIZED_TEST (test_glob_prepare_replace_str, test_glob_prepare_replace_str_ds)

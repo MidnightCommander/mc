@@ -47,7 +47,7 @@
 #include <stdlib.h>
 
 #include "lib/global.h"
-#include "lib/util.h"           // whitespace()
+#include "lib/util.h"  // whitespace()
 
 #include "edit-impl.h"
 #include "editwidget.h"
@@ -125,8 +125,8 @@ begin_paragraph (WEdit *edit, gboolean force, long *lines)
     long i;
 
     for (i = edit->buffer.curs_line - 1; i >= 0; i--)
-        if (edit_line_is_blank (edit, i) ||
-            (force && bad_line_start (&edit->buffer, line_start (&edit->buffer, i))))
+        if (edit_line_is_blank (edit, i)
+            || (force && bad_line_start (&edit->buffer, line_start (&edit->buffer, i))))
         {
             i++;
             break;
@@ -150,18 +150,17 @@ end_paragraph (WEdit *edit, gboolean force)
     long i;
 
     for (i = edit->buffer.curs_line + 1; i <= edit->buffer.lines; i++)
-        if (edit_line_is_blank (edit, i) ||
-            (force && bad_line_start (&edit->buffer, line_start (&edit->buffer, i))))
+        if (edit_line_is_blank (edit, i)
+            || (force && bad_line_start (&edit->buffer, line_start (&edit->buffer, i))))
         {
             i--;
             break;
         }
 
-    return edit_buffer_get_eol (&edit->buffer,
-                                edit_buffer_get_forward_offset (&edit->buffer,
-                                                                edit_buffer_get_current_bol
-                                                                (&edit->buffer),
-                                                                i - edit->buffer.curs_line, 0));
+    return edit_buffer_get_eol (
+        &edit->buffer,
+        edit_buffer_get_forward_offset (&edit->buffer, edit_buffer_get_current_bol (&edit->buffer),
+                                        i - edit->buffer.curs_line, 0));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -216,8 +215,8 @@ next_tab_pos (off_t x)
 static inline off_t
 line_pixel_length (unsigned char *t, off_t b, off_t l, gboolean utf8)
 {
-    off_t xn, x;                // position counters
-    off_t char_length = 0;      // character length in bytes
+    off_t xn, x;            // position counters
+    off_t char_length = 0;  // character length in bytes
 
 #ifndef HAVE_CHARSET
     (void) utf8;
@@ -343,12 +342,12 @@ format_this (unsigned char *t, off_t size, long indent, gboolean utf8)
             break;
         p = word_start (t, q, size);
         if (p == -1)
-            q = next_word_start (t, q, size);   /* Return the end of the word if the beginning
-                                                   of the word is at the beginning of a line
-                                                   (i.e. a very long word) */
+            q = next_word_start (t, q, size); /* Return the end of the word if the beginning
+                                                 of the word is at the beginning of a line
+                                                 (i.e. a very long word) */
         else
             q = p;
-        if (q == -1)            // end of paragraph
+        if (q == -1)  // end of paragraph
             break;
         if (q != 0)
             t[q - 1] = '\n';
@@ -447,7 +446,7 @@ put_paragraph (WEdit *edit, unsigned char *t, off_t p, long indent, off_t size)
         if (c != t[i])
             replace_at (edit, p, t[i]);
     }
-    edit_cursor_move (edit, cursor - edit->buffer.curs1);       // restore cursor position
+    edit_cursor_move (edit, cursor - edit->buffer.curs1);  // restore cursor position
 }
 
 /* --------------------------------------------------------------------------------------------- */

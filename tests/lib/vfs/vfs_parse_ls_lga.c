@@ -35,7 +35,6 @@
 
 #include "src/vfs/local/local.c"
 
-
 static struct vfs_s_subclass test_subclass1;
 static struct vfs_class *vfs_test_ops1 = VFS_CLASS (&test_subclass1);
 
@@ -207,36 +206,18 @@ static const struct test_vfs_parse_ls_lga_ds
     const char *expected_filename;
     const char *expected_linkname;
     const size_t expected_filepos;
-} test_vfs_parse_ls_lga_ds[] =
-{
+} test_vfs_parse_ls_lga_ds[] = {
     { // 0.
-        "drwxrwxr-x   10 500      500          4096 Jun 23 17:09 build_root",
-        1,
-        "build_root",
-        NULL,
-        0
-    },
+      "drwxrwxr-x   10 500      500          4096 Jun 23 17:09 build_root", 1, "build_root", NULL,
+      0 },
     { // 1.
-        "lrwxrwxrwx    1 500      500            11 Mar 13  2010 COPYING -> doc/COPYING",
-        1,
-        "COPYING",
-        "doc/COPYING",
-        0
-    },
+      "lrwxrwxrwx    1 500      500            11 Mar 13  2010 COPYING -> doc/COPYING", 1,
+      "COPYING", "doc/COPYING", 0 },
     { // 2.
-        "drwxrwxr-x   10 500      500          4096 Jun 23 17:09 ..",
-        1,
-        "..",
-        NULL,
-        0
-    },
+      "drwxrwxr-x   10 500      500          4096 Jun 23 17:09 ..", 1, "..", NULL, 0 },
     { // 3.
-        "drwxrwxr-x   10 500      500          4096 Jun 23 17:09   build_root",
-        1,
-        "build_root",
-        NULL,
-        0
-    },
+      "drwxrwxr-x   10 500      500          4096 Jun 23 17:09   build_root", 1, "build_root", NULL,
+      0 },
 };
 
 /* @Test(dataSource = "test_vfs_parse_ls_lga_ds") */
@@ -297,7 +278,6 @@ START_PARAMETRIZED_TEST (test_vfs_parse_ls_lga, test_vfs_parse_ls_lga_ds)
     ck_assert_int_eq (0, test_stat.st_mtim.tv_nsec);
     ck_assert_int_eq (0, test_stat.st_ctim.tv_nsec);
 #endif
-
 }
 END_PARAMETRIZED_TEST
 
@@ -314,12 +294,10 @@ START_TEST (test_vfs_parse_ls_lga_reorder)
 
     // init ent1
     ent1 = vfs_s_generate_entry (vfs_test_ops1, NULL, vfs_root_inode, 0);
-    vfs_parse_ls_lga
-        ("drwxrwxr-x   10 500      500          4096 Jun 23 17:09      build_root1", &ent1->ino->st,
-         &ent1->name, &ent1->ino->linkname, &filepos);
+    vfs_parse_ls_lga ("drwxrwxr-x   10 500      500          4096 Jun 23 17:09      build_root1",
+                      &ent1->ino->st, &ent1->name, &ent1->ino->linkname, &filepos);
     vfs_s_store_filename_leading_spaces (ent1, filepos);
     vfs_s_insert_entry (vfs_test_ops1, vfs_root_inode, ent1);
-
 
     // init ent2
     ent2 = vfs_s_generate_entry (vfs_test_ops1, NULL, vfs_root_inode, 0);
@@ -330,8 +308,8 @@ START_TEST (test_vfs_parse_ls_lga_reorder)
 
     // init ent3
     ent3 = vfs_s_generate_entry (vfs_test_ops1, NULL, vfs_root_inode, 0);
-    vfs_parse_ls_lga ("drwxrwxr-x   10 500      500          4096 Jun 23 17:09 ..",
-                      &ent3->ino->st, &ent3->name, &ent3->ino->linkname, &filepos);
+    vfs_parse_ls_lga ("drwxrwxr-x   10 500      500          4096 Jun 23 17:09 ..", &ent3->ino->st,
+                      &ent3->name, &ent3->ino->linkname, &filepos);
     vfs_s_store_filename_leading_spaces (ent3, filepos);
     vfs_s_insert_entry (vfs_test_ops1, vfs_root_inode, ent3);
 
@@ -345,18 +323,18 @@ START_TEST (test_vfs_parse_ls_lga_reorder)
 END_TEST
 
 /* --------------------------------------------------------------------------------------------- */
-#define parce_one_line(ent_index, ls_output) {\
-    ent[ent_index] = vfs_s_generate_entry (vfs_test_ops1, NULL, vfs_root_inode, 0);\
-    if (! vfs_parse_ls_lga (ls_output,\
-    &ent[ent_index]->ino->st, &ent[ent_index]->name, &ent[ent_index]->ino->linkname, &filepos))\
-    {\
-        ck_abort_msg ("An error occurred while parse ls output");\
-        return;\
-    }\
-    vfs_s_store_filename_leading_spaces (ent[ent_index], filepos);\
-    vfs_s_insert_entry (vfs_test_ops1, vfs_root_inode, ent[ent_index]);\
-    \
-}
+#define parce_one_line(ent_index, ls_output)                                                       \
+    {                                                                                              \
+        ent[ent_index] = vfs_s_generate_entry (vfs_test_ops1, NULL, vfs_root_inode, 0);            \
+        if (!vfs_parse_ls_lga (ls_output, &ent[ent_index]->ino->st, &ent[ent_index]->name,         \
+                               &ent[ent_index]->ino->linkname, &filepos))                          \
+        {                                                                                          \
+            ck_abort_msg ("An error occurred while parse ls output");                              \
+            return;                                                                                \
+        }                                                                                          \
+        vfs_s_store_filename_leading_spaces (ent[ent_index], filepos);                             \
+        vfs_s_insert_entry (vfs_test_ops1, vfs_root_inode, ent[ent_index]);                        \
+    }
 
 /* @Test */
 START_TEST (test_vfs_parse_ls_lga_unaligned)
@@ -370,8 +348,9 @@ START_TEST (test_vfs_parse_ls_lga_unaligned)
     parce_one_line (0, "drwxrwxr-x   10 500      500          4096 Jun 23 17:09  build_root1");
     parce_one_line (1, "drwxrwxr-x   10 500     500         4096 Jun 23 17:09     build_root2");
     parce_one_line (2, "drwxrwxr-x 10 500 500 4096 Jun 23 17:09  ..");
-    parce_one_line (3,
-                    "drwxrwxr-x      10   500        500             4096   Jun   23   17:09   build_root 0");
+    parce_one_line (
+        3,
+        "drwxrwxr-x      10   500        500             4096   Jun   23   17:09   build_root 0");
 
     // when
     vfs_s_normalize_filename_leading_spaces (vfs_root_inode, vfs_parse_ls_lga_get_final_spaces ());

@@ -87,16 +87,16 @@ check_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *dat
         return MSG_HANDLED;
 
     case MSG_DRAW:
-        {
-            gboolean focused;
+    {
+        gboolean focused;
 
-            focused = widget_get_state (w, WST_FOCUSED);
-            widget_selectcolor (w, focused, FALSE);
-            widget_gotoyx (w, 0, 0);
-            tty_print_string (c->state ? "[x] " : "[ ] ");
-            hotkey_draw (w, c->text, focused);
-            return MSG_HANDLED;
-        }
+        focused = widget_get_state (w, WST_FOCUSED);
+        widget_selectcolor (w, focused, FALSE);
+        widget_gotoyx (w, 0, 0);
+        tty_print_string (c->state ? "[x] " : "[ ] ");
+        hotkey_draw (w, c->text, focused);
+        return MSG_HANDLED;
+    }
 
     case MSG_DESTROY:
         hotkey_free (c->text);
@@ -172,7 +172,7 @@ check_set_text (WCheck *check, const char *text)
     check->text = hk;
 
     if (check->text.start[0] == '\0' && check->text.hotkey == NULL && check->text.end == NULL)
-        w->rect.cols = 3;       // "[ ]"
+        w->rect.cols = 3;  // "[ ]"
     else
         w->rect.cols = 4 + hotkey_width (check->text);  // "[ ]  text"
 

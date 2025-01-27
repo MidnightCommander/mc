@@ -70,16 +70,11 @@ static const struct test_strip_home_ds
 {
     const char *input_string;
     const char *expected_result;
-} test_strip_home_ds[] =
-{
+} test_strip_home_ds[] = {
     { // 0.
-        "/mock/test/some/path",
-        "~/some/path"
-    },
+      "/mock/test/some/path", "~/some/path" },
     { // 1.
-        "/mock/testttt/some/path",
-        "/mock/testttt/some/path"
-    },
+      "/mock/testttt/some/path", "/mock/testttt/some/path" },
 };
 
 /* @Test */

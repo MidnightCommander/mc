@@ -33,8 +33,7 @@
 #include "src/vfs/local/local.c"
 
 char *execute_get_external_cmd_opts_from_config (const char *command,
-                                                 const vfs_path_t * filename_vpath,
-                                                 long start_line);
+                                                 const vfs_path_t *filename_vpath, long start_line);
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -49,8 +48,8 @@ static GPtrArray *mc_config_get_string__return_value;
 
 /* @Mock */
 gchar *
-mc_config_get_string_raw (mc_config_t *config_ignored, const gchar *group,
-                          const gchar *param, const gchar *default_value)
+mc_config_get_string_raw (mc_config_t *config_ignored, const gchar *group, const gchar *param,
+                          const gchar *default_value)
 {
     char *return_value;
     (void) config_ignored;
@@ -119,10 +118,9 @@ static const struct check_subtitute_ds
     const char *config_opts_string;
     const char *app_name;
     const char *file_name;
-    int  start_line;
+    int start_line;
     const char *expected_result;
-} check_subtitute_ds[] =
-{
+} check_subtitute_ds[] = {
     {
         "-a -b -c %filename \\%filename %filename:%lineno \\%lineno +%lineno",
         "some-editor",
@@ -150,9 +148,8 @@ START_PARAMETRIZED_TEST (check_if_filename_and_lineno_will_be_subtituted, check_
     filename_vpath = vfs_path_from_str (data->file_name);
 
     // when
-    actual_result =
-        execute_get_external_cmd_opts_from_config (data->app_name, filename_vpath,
-                                                   data->start_line);
+    actual_result = execute_get_external_cmd_opts_from_config (data->app_name, filename_vpath,
+                                                               data->start_line);
 
     // then
 
@@ -168,7 +165,6 @@ START_PARAMETRIZED_TEST (check_if_filename_and_lineno_will_be_subtituted, check_
                           NULL);
 
     vfs_path_free (filename_vpath, TRUE);
-
 }
 END_PARAMETRIZED_TEST
 

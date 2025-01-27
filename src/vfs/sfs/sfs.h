@@ -15,4 +15,4 @@ void vfs_init_sfs (void);
 
 /*** inline functions ****************************************************************************/
 
-#endif // MC__VFS_SFS_H
+#endif  // MC__VFS_SFS_H

@@ -28,7 +28,7 @@
 #include "tests/mctest.h"
 
 #ifdef HAVE_CHARSET
-#include "lib/charsets.h"
+#    include "lib/charsets.h"
 #endif
 
 #include "lib/strutil.h"
@@ -82,99 +82,46 @@ static const struct test_canonicalize_path_ds
 {
     const char *input_path;
     const char *expected_path;
-} test_canonicalize_path_ds[] =
-{
+} test_canonicalize_path_ds[] = {
     // 0. UNC path
-    {
-        "//some_server/ww",
-        "//some_server/ww"
-    },
+    { "//some_server/ww", "//some_server/ww" },
     // 1. join slashes
-    {
-        "///some_server/////////ww",
-        "/some_server/ww"
-    },
+    { "///some_server/////////ww", "/some_server/ww" },
     // 2. Collapse "/./" -> "/"
-    {
-        "//some_server//.///////ww/./././.",
-        "//some_server/ww"
-    },
+    { "//some_server//.///////ww/./././.", "//some_server/ww" },
     // 3. Remove leading "./"
-    {
-        "./some_server/ww",
-        "some_server/ww"
-    },
+    { "./some_server/ww", "some_server/ww" },
     // 4. some/.. -> .
-    {
-        "some_server/..",
-        "."
-    },
+    { "some_server/..", "." },
     // 5. Collapse "/.." with the previous part of path
-    {
-        "/some_server/ww/some_server/../ww/../some_server/..//ww/some_server/ww",
-        "/some_server/ww/ww/some_server/ww"
-    },
+    { "/some_server/ww/some_server/../ww/../some_server/..//ww/some_server/ww",
+      "/some_server/ww/ww/some_server/ww" },
     // 6. URI style
-    {
-        "/some_server/ww/ftp://user:pass@host.net/path/",
-        "/some_server/ww/ftp://user:pass@host.net/path"
-    },
+    { "/some_server/ww/ftp://user:pass@host.net/path/",
+      "/some_server/ww/ftp://user:pass@host.net/path" },
     // 7.
-    {
-        "/some_server/ww/ftp://user:pass@host.net/path/../../",
-        "/some_server/ww"
-    },
+    { "/some_server/ww/ftp://user:pass@host.net/path/../../", "/some_server/ww" },
     // 8.
-    {
-        "ftp://user:pass@host.net/path/../../",
-        "."
-    },
+    { "ftp://user:pass@host.net/path/../../", "." },
     // 9.
-    {
-        "ftp://user/../../",
-        ".."
-    },
+    { "ftp://user/../../", ".." },
 #ifdef HAVE_CHARSET
     // 10. Supported encoding
-    {
-        "/b/#enc:utf-8/../c",
-        "/c"
-    },
+    { "/b/#enc:utf-8/../c", "/c" },
     // 11. Unsupported encoding
-    {
-        "/b/#enc:aaaa/../c",
-        "/b/c"
-    },
+    { "/b/#enc:aaaa/../c", "/b/c" },
     // 12. Supported encoding
-    {
-        "/b/../#enc:utf-8/c",
-        "/#enc:utf-8/c"
-    },
+    { "/b/../#enc:utf-8/c", "/#enc:utf-8/c" },
     // 13. Unsupported encoding
-    {
-        "/b/../#enc:aaaa/c",
-        "/#enc:aaaa/c"
-    },
+    { "/b/../#enc:aaaa/c", "/#enc:aaaa/c" },
     // 14.  Supported encoding
-    {
-        "/b/c/#enc:utf-8/..",
-        "/b"
-    },
+    { "/b/c/#enc:utf-8/..", "/b" },
     // 15.  Unsupported encoding
-    {
-        "/b/c/#enc:aaaa/..",
-        "/b/c"
-    },
+    { "/b/c/#enc:aaaa/..", "/b/c" },
     // 16.  Supported encoding
-    {
-        "/b/c/../#enc:utf-8",
-        "/b/#enc:utf-8"
-    },
+    { "/b/c/../#enc:utf-8", "/b/#enc:utf-8" },
     // 17.  Unsupported encoding
-    {
-        "/b/c/../#enc:aaaa",
-        "/b/#enc:aaaa"
-    },
+    { "/b/c/../#enc:aaaa", "/b/#enc:aaaa" },
 #endif  // HAVE_CHARSET
 };
 

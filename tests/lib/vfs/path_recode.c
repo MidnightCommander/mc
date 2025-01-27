@@ -94,38 +94,22 @@ static const struct test_path_recode_ds
     const char *input_path;
     const char *expected_element_path;
     const char *expected_recoded_path;
-} test_path_recode_ds[] =
-{
+} test_path_recode_ds[] = {
     { // 0.
-        "UTF-8",
-        "/\xD4\xC5\xD3\xD4\xCF\xD7\xD9\xCA/\xD0\xD5\xD4\xD8",
-        "/\xD4\xC5\xD3\xD4\xCF\xD7\xD9\xCA/\xD0\xD5\xD4\xD8",
-        "/\xD4\xC5\xD3\xD4\xCF\xD7\xD9\xCA/\xD0\xD5\xD4\xD8"
-    },
+      "UTF-8", "/\xD4\xC5\xD3\xD4\xCF\xD7\xD9\xCA/\xD0\xD5\xD4\xD8",
+      "/\xD4\xC5\xD3\xD4\xCF\xD7\xD9\xCA/\xD0\xD5\xD4\xD8",
+      "/\xD4\xC5\xD3\xD4\xCF\xD7\xD9\xCA/\xD0\xD5\xD4\xD8" },
     { // 1.
-        "UTF-8",
-        "/#enc:KOI8-R/тестовый/путь",
-        "/\xD4\xC5\xD3\xD4\xCF\xD7\xD9\xCA/\xD0\xD5\xD4\xD8",
-        "/#enc:KOI8-R/тестовый/путь"
-    },
+      "UTF-8", "/#enc:KOI8-R/тестовый/путь", "/\xD4\xC5\xD3\xD4\xCF\xD7\xD9\xCA/\xD0\xD5\xD4\xD8",
+      "/#enc:KOI8-R/тестовый/путь" },
     { // 2.
-        "KOI8-R",
-        "/тестовый/путь",
-        "/тестовый/путь",
-        "/тестовый/путь"
-    },
+      "KOI8-R", "/тестовый/путь", "/тестовый/путь", "/тестовый/путь" },
     { // 3.
-        "KOI8-R",
-        "/#enc:UTF-8/\xD4\xC5\xD3\xD4\xCF\xD7\xD9\xCA/\xD0\xD5\xD4\xD8",
-        "/тестовый/путь",
-        "/#enc:UTF-8/\xD4\xC5\xD3\xD4\xCF\xD7\xD9\xCA/\xD0\xD5\xD4\xD8"
-    },
+      "KOI8-R", "/#enc:UTF-8/\xD4\xC5\xD3\xD4\xCF\xD7\xD9\xCA/\xD0\xD5\xD4\xD8", "/тестовый/путь",
+      "/#enc:UTF-8/\xD4\xC5\xD3\xD4\xCF\xD7\xD9\xCA/\xD0\xD5\xD4\xD8" },
     { // 4. Test encode info at start
-        "UTF-8",
-        "#enc:KOI8-R/bla-bla/some/path",
-        "/bla-bla/some/path",
-        "/#enc:KOI8-R/bla-bla/some/path"
-    },
+      "UTF-8", "#enc:KOI8-R/bla-bla/some/path", "/bla-bla/some/path",
+      "/#enc:KOI8-R/bla-bla/some/path" },
 };
 
 /* @Test(dataSource = "test_path_recode_ds") */
@@ -153,7 +137,6 @@ START_PARAMETRIZED_TEST (test_path_recode, test_path_recode_ds)
 }
 END_PARAMETRIZED_TEST
 
-
 /* --------------------------------------------------------------------------------------------- */
 
 static struct vfs_class vfs_test_ops1;
@@ -165,62 +148,37 @@ static const struct test_path_to_str_flags_ds
     const vfs_path_flag_t input_from_str_flags;
     const vfs_path_flag_t input_to_str_flags;
     const char *expected_path;
-} test_path_to_str_flags_ds[] =
-{
+} test_path_to_str_flags_ds[] = {
     { // 0.
-        "test1://user:passwd@127.0.0.1",
-        VPF_NO_CANON,
-        VPF_STRIP_PASSWORD,
-        "test1://user@127.0.0.1/"
-    },
+      "test1://user:passwd@127.0.0.1", VPF_NO_CANON, VPF_STRIP_PASSWORD,
+      "test1://user@127.0.0.1/" },
     { // 1.
-        "/test1://user:passwd@host.name/#enc:KOI8-R/тестовый/путь",
-        VPF_NONE,
-        VPF_STRIP_PASSWORD,
-        "/test1://user@host.name/#enc:KOI8-R/тестовый/путь"
-    },
+      "/test1://user:passwd@host.name/#enc:KOI8-R/тестовый/путь", VPF_NONE, VPF_STRIP_PASSWORD,
+      "/test1://user@host.name/#enc:KOI8-R/тестовый/путь" },
     { // 2.
-        "/test1://user:passwd@host.name/#enc:KOI8-R/тестовый/путь",
-        VPF_NONE,
-        VPF_RECODE,
-        "/test1://user:passwd@host.name/\xD4\xC5\xD3\xD4\xCF\xD7\xD9\xCA/\xD0\xD5\xD4\xD8"
-    },
+      "/test1://user:passwd@host.name/#enc:KOI8-R/тестовый/путь", VPF_NONE, VPF_RECODE,
+      "/test1://user:passwd@host.name/\xD4\xC5\xD3\xD4\xCF\xD7\xD9\xCA/\xD0\xD5\xD4\xD8" },
     { // 3.
-        "/test1://user:passwd@host.name/#enc:KOI8-R/тестовый/путь",
-        VPF_NONE,
-        VPF_RECODE | VPF_STRIP_PASSWORD,
-        "/test1://user@host.name/\xD4\xC5\xD3\xD4\xCF\xD7\xD9\xCA/\xD0\xD5\xD4\xD8"
-    },
+      "/test1://user:passwd@host.name/#enc:KOI8-R/тестовый/путь", VPF_NONE,
+      VPF_RECODE | VPF_STRIP_PASSWORD,
+      "/test1://user@host.name/\xD4\xC5\xD3\xD4\xCF\xD7\xD9\xCA/\xD0\xD5\xD4\xD8" },
     { // 4.
-        "/mock/home/test/dir",
-        VPF_NONE,
-        VPF_STRIP_HOME,
-        "~/test/dir"
-    },
+      "/mock/home/test/dir", VPF_NONE, VPF_STRIP_HOME, "~/test/dir" },
     { // 5.
-        "/mock/home/test1://user:passwd@host.name/#enc:KOI8-R/тестовый/путь",
-        VPF_NONE,
-        VPF_STRIP_HOME | VPF_STRIP_PASSWORD,
-        "~/test1://user@host.name/#enc:KOI8-R/тестовый/путь"
-    },
+      "/mock/home/test1://user:passwd@host.name/#enc:KOI8-R/тестовый/путь", VPF_NONE,
+      VPF_STRIP_HOME | VPF_STRIP_PASSWORD, "~/test1://user@host.name/#enc:KOI8-R/тестовый/путь" },
     { // 6.
-        "/mock/home/test1://user:passwd@host.name/#enc:KOI8-R/тестовый/путь",
-        VPF_NONE,
-        VPF_STRIP_HOME | VPF_STRIP_PASSWORD | VPF_HIDE_CHARSET,
-        "~/test1://user@host.name/тестовый/путь"
-    },
+      "/mock/home/test1://user:passwd@host.name/#enc:KOI8-R/тестовый/путь", VPF_NONE,
+      VPF_STRIP_HOME | VPF_STRIP_PASSWORD | VPF_HIDE_CHARSET,
+      "~/test1://user@host.name/тестовый/путь" },
     { // 7.
-        "/mock/home/test1://user:passwd@host.name/#enc:KOI8-R/тестовый/путь",
-        VPF_NONE,
-        VPF_STRIP_HOME | VPF_RECODE,
-        "~/test1://user:passwd@host.name/\xD4\xC5\xD3\xD4\xCF\xD7\xD9\xCA/\xD0\xD5\xD4\xD8"
-    },
+      "/mock/home/test1://user:passwd@host.name/#enc:KOI8-R/тестовый/путь", VPF_NONE,
+      VPF_STRIP_HOME | VPF_RECODE,
+      "~/test1://user:passwd@host.name/\xD4\xC5\xD3\xD4\xCF\xD7\xD9\xCA/\xD0\xD5\xD4\xD8" },
     { // 8.
-        "/mock/home/test1://user:passwd@host.name/#enc:KOI8-R/тестовый/путь",
-        VPF_NONE,
-        VPF_STRIP_HOME | VPF_RECODE | VPF_STRIP_PASSWORD,
-        "~/test1://user@host.name/\xD4\xC5\xD3\xD4\xCF\xD7\xD9\xCA/\xD0\xD5\xD4\xD8"
-    },
+      "/mock/home/test1://user:passwd@host.name/#enc:KOI8-R/тестовый/путь", VPF_NONE,
+      VPF_STRIP_HOME | VPF_RECODE | VPF_STRIP_PASSWORD,
+      "~/test1://user@host.name/\xD4\xC5\xD3\xD4\xCF\xD7\xD9\xCA/\xD0\xD5\xD4\xD8" },
 };
 
 /* @Test(dataSource = "test_path_to_str_flags_ds") */

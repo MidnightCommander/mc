@@ -94,7 +94,7 @@ gauge_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *dat
                 done /= 256;
             }
 
-            gauge_len = w->rect.cols - 7;       // 7 positions for percentage
+            gauge_len = w->rect.cols - 7;  // 7 positions for percentage
 
             percentage = (200 * done / total + 1) / 2;
             columns = (2 * gauge_len * done / total + 1) / 2;
@@ -140,7 +140,7 @@ gauge_new (int y, int x, int cols, gboolean shown, int max, int current)
 
     g->shown = shown;
     if (max == 0)
-        max = 1;                // I do not like division by zero :)
+        max = 1;  // I do not like division by zero :)
     g->max = max;
     g->current = current;
     g->from_left_to_right = TRUE;
@@ -154,10 +154,10 @@ void
 gauge_set_value (WGauge *g, int max, int current)
 {
     if (g->current == current && g->max == max)
-        return;                 // Do not flicker
+        return;  // Do not flicker
 
     if (max == 0)
-        max = 1;                // I do not like division by zero :)
+        max = 1;  // I do not like division by zero :)
     g->current = current;
     g->max = max;
     widget_draw (WIDGET (g));

@@ -15,4 +15,4 @@ void vfs_init_extfs (void);
 
 /*** inline functions ****************************************************************************/
 
-#endif // MC__VFS_CPIO_H
+#endif  // MC__VFS_CPIO_H

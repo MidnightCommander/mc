@@ -72,16 +72,16 @@
 
 #include "src/setup.h"
 #ifdef ENABLE_BACKGROUND
-#include "src/background.h"     // do_background()
+#    include "src/background.h"  // do_background()
 #endif
 
 /* Needed for other_panel and WTree */
 #include "dir.h"
 #include "filenot.h"
 #include "tree.h"
-#include "filemanager.h"        // other_panel
-#include "layout.h"             // rotate_dash()
-#include "ioblksize.h"          // io_blksize()
+#include "filemanager.h"  // other_panel
+#include "layout.h"       // rotate_dash()
+#include "ioblksize.h"    // io_blksize()
 
 #include "file.h"
 
@@ -90,17 +90,14 @@
 /*** global variables ****************************************************************************/
 
 /* TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix  */
-const char *op_names[3] = {
-    N_("DialogTitle|Copy"),
-    N_("DialogTitle|Move"),
-    N_("DialogTitle|Delete")
-};
+const char *op_names[3] = { N_ ("DialogTitle|Copy"), N_ ("DialogTitle|Move"),
+                            N_ ("DialogTitle|Delete") };
 
 /*** file scope macro definitions ****************************************************************/
 
-#define FILEOP_UPDATE_INTERVAL 2
-#define FILEOP_STALLING_INTERVAL 4
-#define FILEOP_UPDATE_INTERVAL_US (FILEOP_UPDATE_INTERVAL * G_USEC_PER_SEC)
+#define FILEOP_UPDATE_INTERVAL      2
+#define FILEOP_STALLING_INTERVAL    4
+#define FILEOP_UPDATE_INTERVAL_US   (FILEOP_UPDATE_INTERVAL * G_USEC_PER_SEC)
 #define FILEOP_STALLING_INTERVAL_US (FILEOP_STALLING_INTERVAL * G_USEC_PER_SEC)
 
 /*** file scope type declarations ****************************************************************/
@@ -119,22 +116,22 @@ typedef struct
 /* Status of the destination file */
 typedef enum
 {
-    DEST_NONE = 0,              // Not created
-    DEST_SHORT_QUERY,           // Created, not fully copied, query to do
-    DEST_SHORT_KEEP,            // Created, not fully copied, keep it
-    DEST_SHORT_DELETE,          // Created, not fully copied, delete it
-    DEST_FULL                   // Created, fully copied
+    DEST_NONE = 0,      // Not created
+    DEST_SHORT_QUERY,   // Created, not fully copied, query to do
+    DEST_SHORT_KEEP,    // Created, not fully copied, keep it
+    DEST_SHORT_DELETE,  // Created, not fully copied, delete it
+    DEST_FULL           // Created, fully copied
 } dest_status_t;
 
 /* Status of hard link creation */
 typedef enum
 {
-    HARDLINK_OK = 0,            // Hardlink was created successfully
-    HARDLINK_CACHED,            // Hardlink was added to the cache
-    HARDLINK_NOTLINK,           // This is not a hard link
-    HARDLINK_UNSUPPORTED,       // VFS doesn't support hard links
-    HARDLINK_ERROR,             // Hard link creation error
-    HARDLINK_ABORT              // Stop file operation after hardlink creation error
+    HARDLINK_OK = 0,       // Hardlink was created successfully
+    HARDLINK_CACHED,       // Hardlink was added to the cache
+    HARDLINK_NOTLINK,      // This is not a hard link
+    HARDLINK_UNSUPPORTED,  // VFS doesn't support hard links
+    HARDLINK_ERROR,        // Hard link creation error
+    HARDLINK_ABORT         // Stop file operation after hardlink creation error
 } hardlink_status_t;
 
 /*
@@ -146,11 +143,8 @@ typedef enum
  */
 
 /* TRANSLATORS: no need to translate 'FileOperation', it's just a context prefix  */
-static const char *op_names1[] = {
-    N_("FileOperation|Copy"),
-    N_("FileOperation|Move"),
-    N_("FileOperation|Delete")
-};
+static const char *op_names1[] = { N_ ("FileOperation|Copy"), N_ ("FileOperation|Move"),
+                                   N_ ("FileOperation|Delete") };
 
 /*
  * These are formats for building a prompt. Parts encoded as follows:
@@ -162,18 +156,14 @@ static const char *op_names1[] = {
  * %n - the '\n' symbol to form two-line prompt for delete or space for other operations
  */
 /* xgettext:no-c-format */
-static const char *one_format = N_("%o %f%n\"%s\"%m");
+static const char *one_format = N_ ("%o %f%n\"%s\"%m");
 /* xgettext:no-c-format */
-static const char *many_format = N_("%o %d %f%m");
+static const char *many_format = N_ ("%o %d %f%m");
 
 static const char *prompt_parts[] = {
-    N_("file"),
-    N_("files"),
-    N_("directory"),
-    N_("directories"),
-    N_("files/directories"),
+    N_ ("file"), N_ ("files"), N_ ("directory"), N_ ("directories"), N_ ("files/directories"),
     // TRANSLATORS: keep leading space here to split words in Copy/Move dialog
-    N_(" with source mask:")
+    N_ (" with source mask:")
 };
 
 /*** forward declarations (file scope functions) *************************************************/
@@ -404,9 +394,9 @@ check_hardlinks (file_op_context_t *ctx, const vfs_path_t *src_vpath, const stru
                     {
                         FileProgressStatus status;
 
-                        status =
-                            file_error (ctx, TRUE, _("Cannot stat hardlink source file \"%s\"\n%s"),
-                                        vfs_path_as_str (lnk->dst_vpath));
+                        status = file_error (ctx, TRUE,
+                                             _ ("Cannot stat hardlink source file \"%s\"\n%s"),
+                                             vfs_path_as_str (lnk->dst_vpath));
                         if (status == FILE_ABORT)
                             return HARDLINK_ABORT;
                         if (status == FILE_RETRY)
@@ -425,7 +415,7 @@ check_hardlinks (file_op_context_t *ctx, const vfs_path_t *src_vpath, const stru
                         FileProgressStatus status;
 
                         status =
-                            file_error (ctx, TRUE, _("Cannot create target hardlink \"%s\"\n%s"),
+                            file_error (ctx, TRUE, _ ("Cannot create target hardlink \"%s\"\n%s"),
                                         vfs_path_as_str (dst_vpath));
                         if (status == FILE_ABORT)
                             return HARDLINK_ABORT;
@@ -460,9 +450,8 @@ check_hardlinks (file_op_context_t *ctx, const vfs_path_t *src_vpath, const stru
              *
              */
             errno = 0;
-            status =
-                file_error (ctx, FALSE, _("Cannot create target hardlink \"%s\""),
-                            vfs_path_as_str (dst_vpath));
+            status = file_error (ctx, FALSE, _ ("Cannot create target hardlink \"%s\""),
+                                 vfs_path_as_str (dst_vpath));
 
             if (status == FILE_ABORT)
                 return HARDLINK_ABORT;
@@ -516,7 +505,7 @@ make_symlink (file_op_context_t *ctx, const vfs_path_t *src_vpath, const vfs_pat
 
     dst_is_symlink = (mc_lstat (dst_vpath, &dst_stat) == 0) && S_ISLNK (dst_stat.st_mode);
 
-  retry_src_readlink:
+retry_src_readlink:
     len = mc_readlink (src_vpath, link_target, sizeof (link_target) - 1);
     if (len < 0)
     {
@@ -525,7 +514,7 @@ make_symlink (file_op_context_t *ctx, const vfs_path_t *src_vpath, const vfs_pat
         else
         {
             return_status =
-                file_error (ctx, TRUE, _("Cannot read source link \"%s\"\n%s"), src_path);
+                file_error (ctx, TRUE, _ ("Cannot read source link \"%s\"\n%s"), src_path);
             if (return_status == FILE_IGNORE_ALL)
                 ctx->ignore_all = TRUE;
             if (return_status == FILE_RETRY)
@@ -539,8 +528,8 @@ make_symlink (file_op_context_t *ctx, const vfs_path_t *src_vpath, const vfs_pat
     if (ctx->stable_symlinks && !(vfs_file_is_local (src_vpath) && vfs_file_is_local (dst_vpath)))
     {
         message (D_ERROR, MSG_ERROR,
-                 _("Cannot make stable symlinks across "
-                   "non-local filesystems:\n\nOption Stable Symlinks will be disabled"));
+                 _ ("Cannot make stable symlinks across "
+                    "non-local filesystems:\n\nOption Stable Symlinks will be disabled"));
         ctx->stable_symlinks = FALSE;
     }
 
@@ -586,7 +575,7 @@ make_symlink (file_op_context_t *ctx, const vfs_path_t *src_vpath, const vfs_pat
     }
     link_target_vpath = vfs_path_from_str_flags (link_target, VPF_NO_CANON);
 
-  retry_dst_symlink:
+retry_dst_symlink:
     if (mc_symlink (link_target_vpath, dst_vpath) == 0)
     {
         // Success
@@ -610,14 +599,14 @@ make_symlink (file_op_context_t *ctx, const vfs_path_t *src_vpath, const vfs_pat
     else
     {
         return_status =
-            file_error (ctx, TRUE, _("Cannot create target symlink \"%s\"\n%s"), dst_path);
+            file_error (ctx, TRUE, _ ("Cannot create target symlink \"%s\"\n%s"), dst_path);
         if (return_status == FILE_IGNORE_ALL)
             ctx->ignore_all = TRUE;
         if (return_status == FILE_RETRY)
             goto retry_dst_symlink;
     }
 
-  ret:
+ret:
     vfs_path_free (link_target_vpath, TRUE);
     return return_status;
 }
@@ -630,9 +619,8 @@ make_symlink (file_op_context_t *ctx, const vfs_path_t *src_vpath, const vfs_pat
  */
 
 static FileProgressStatus
-do_compute_dir_size (const vfs_path_t *dirname_vpath, dirsize_status_msg_t *dsm,
-                     size_t *dir_count, size_t *ret_marked, uintmax_t *ret_total,
-                     mc_stat_fn stat_func)
+do_compute_dir_size (const vfs_path_t *dirname_vpath, dirsize_status_msg_t *dsm, size_t *dir_count,
+                     size_t *ret_marked, uintmax_t *ret_total, mc_stat_fn stat_func)
 {
     static gint64 timestamp = 0;
     // update with 25 FPS rate
@@ -664,9 +652,8 @@ do_compute_dir_size (const vfs_path_t *dirname_vpath, dirsize_status_msg_t *dsm,
         if (res == 0)
         {
             if (S_ISDIR (s.st_mode))
-                ret =
-                    do_compute_dir_size (tmp_vpath, dsm, dir_count, ret_marked, ret_total,
-                                         stat_func);
+                ret = do_compute_dir_size (tmp_vpath, dsm, dir_count, ret_marked, ret_total,
+                                           stat_func);
             else
             {
                 ret = FILE_CONT;
@@ -763,7 +750,7 @@ panel_operate_init_totals (const WPanel *panel, const vfs_path_t *source,
 
         memset (&dsm, 0, sizeof (dsm));
         dsm.allow_skip = TRUE;
-        status_msg_init (STATUS_MSG (&dsm), _("Directory scanning"), 0, dirsize_status_init_cb,
+        status_msg_init (STATUS_MSG (&dsm), _ ("Directory scanning"), 0, dirsize_status_init_cb,
                          dirsize_status_update_cb, dirsize_status_deinit_cb);
 
         ctx->total_count = 0;
@@ -855,7 +842,7 @@ real_warn_same_file (file_op_context_t *ctx, enum OperationMode mode, const char
 
     const gint64 t = g_get_monotonic_time ();
 
-    head_msg = mode == Foreground ? MSG_ERROR : _("Background process error");
+    head_msg = mode == Foreground ? MSG_ERROR : _ ("Background process error");
 
     width_a = str_term_width1 (a);
     width_b = str_term_width1 (b);
@@ -886,7 +873,7 @@ real_warn_same_file (file_op_context_t *ctx, enum OperationMode mode, const char
         msg = g_strdup_printf (fmt, a, b);
     }
 
-    result = query_dialog (head_msg, msg, D_ERROR, 2, _("&Skip"), _("&Abort"));
+    result = query_dialog (head_msg, msg, D_ERROR, 2, _ ("&Skip"), _ ("&Abort"));
     g_free (msg);
     do_refresh ();
 
@@ -926,9 +913,9 @@ check_same_file (file_op_context_t *ctx, const char *a, const struct stat *ast, 
         return FALSE;
 
     if (S_ISDIR (ast->st_mode))
-        *status = warn_same_file (ctx, _("\"%s\"\nand\n\"%s\"\nare the same directory"), a, b);
+        *status = warn_same_file (ctx, _ ("\"%s\"\nand\n\"%s\"\nare the same directory"), a, b);
     else
-        *status = warn_same_file (ctx, _("\"%s\"\nand\n\"%s\"\nare the same file"), a, b);
+        *status = warn_same_file (ctx, _ ("\"%s\"\nand\n\"%s\"\nare the same file"), a, b);
 
     return TRUE;
 }
@@ -947,14 +934,14 @@ real_do_file_error (file_op_context_t *ctx, enum OperationMode mode, gboolean al
     if (ctx != NULL)
         t = g_get_monotonic_time ();
 
-    msg = mode == Foreground ? MSG_ERROR : _("Background process error");
+    msg = mode == Foreground ? MSG_ERROR : _ ("Background process error");
 
     if (allow_retry)
-        result =
-            query_dialog (msg, error, D_ERROR, 4, _("&Ignore"), _("Ignore a&ll"), _("&Retry"),
-                          _("&Abort"));
+        result = query_dialog (msg, error, D_ERROR, 4, _ ("&Ignore"), _ ("Ignore a&ll"),
+                               _ ("&Retry"), _ ("&Abort"));
     else
-        result = query_dialog (msg, error, D_ERROR, 3, _("&Ignore"), _("Ignore a&ll"), _("&Abort"));
+        result =
+            query_dialog (msg, error, D_ERROR, 3, _ ("&Ignore"), _ ("Ignore a&ll"), _ ("&Abort"));
 
     if (ctx != NULL)
         ctx->pauses += g_get_monotonic_time () - t;
@@ -996,16 +983,15 @@ real_query_recursive (file_op_context_t *ctx, enum OperationMode mode, const cha
         const gint64 t = g_get_monotonic_time ();
 
         msg = mode == Foreground
-            ? _("Directory \"%s\" not empty.\nDelete it recursively?")
-            : _("Background process:\nDirectory \"%s\" not empty.\nDelete it recursively?");
+            ? _ ("Directory \"%s\" not empty.\nDelete it recursively?")
+            : _ ("Background process:\nDirectory \"%s\" not empty.\nDelete it recursively?");
         text = g_strdup_printf (msg, path_trunc (s, 30));
 
         if (safe_delete)
             query_set_sel (1);
 
-        ctx->recursive_result =
-            query_dialog (op_names[OP_DELETE], text, D_ERROR, 5, _("&Yes"), _("&No"), _("A&ll"),
-                          _("Non&e"), _("&Abort"));
+        ctx->recursive_result = query_dialog (op_names[OP_DELETE], text, D_ERROR, 5, _ ("&Yes"),
+                                              _ ("&No"), _ ("A&ll"), _ ("Non&e"), _ ("&Abort"));
         g_free (text);
 
         if (ctx->recursive_result != RECURSIVE_ABORT)
@@ -1039,7 +1025,8 @@ do_file_error (file_op_context_t *ctx, gboolean allow_retry, const char *str)
     union
     {
         void *p;
-        FileProgressStatus (*f) (file_op_context_t *ctx, enum OperationMode, gboolean, const char *);
+        FileProgressStatus (*f) (file_op_context_t *ctx, enum OperationMode, gboolean,
+                                 const char *);
     } pntr;
 
     pntr.f = real_do_file_error;
@@ -1117,7 +1104,7 @@ query_replace (file_op_context_t *ctx, const char *src, struct stat *src_stat, c
     return file_progress_real_query_replace (ctx, Foreground, src, src_stat, dst, dst_stat);
 }
 
-#endif // !ENABLE_BACKGROUND
+#endif  // !ENABLE_BACKGROUND
 
 /* --------------------------------------------------------------------------------------------- */
 /** Report error with two files */
@@ -1186,7 +1173,7 @@ try_remove_file (file_op_context_t *ctx, const vfs_path_t *vpath, FileProgressSt
     while (mc_unlink (vpath) != 0 && !ctx->ignore_all)
     {
         *status =
-            file_error (ctx, TRUE, _("Cannot remove file \"%s\"\n%s"), vfs_path_as_str (vpath));
+            file_error (ctx, TRUE, _ ("Cannot remove file \"%s\"\n%s"), vfs_path_as_str (vpath));
         if (*status == FILE_RETRY)
             continue;
         if (*status == FILE_IGNORE_ALL)
@@ -1242,7 +1229,7 @@ move_file_file (const WPanel *panel, file_op_context_t *ctx, const char *s, cons
             return_status = FILE_IGNORE_ALL;
         else
         {
-            return_status = file_error (ctx, TRUE, _("Cannot stat file \"%s\"\n%s"), s);
+            return_status = file_error (ctx, TRUE, _ ("Cannot stat file \"%s\"\n%s"), s);
             if (return_status == FILE_IGNORE_ALL)
                 ctx->ignore_all = TRUE;
         }
@@ -1258,7 +1245,7 @@ move_file_file (const WPanel *panel, file_op_context_t *ctx, const char *s, cons
 
         if (S_ISDIR (dst_stat.st_mode))
         {
-            message (D_ERROR, MSG_ERROR, _("Cannot overwrite directory \"%s\""), d);
+            message (D_ERROR, MSG_ERROR, _ ("Cannot overwrite directory \"%s\""), d);
             do_refresh ();
             return_status = FILE_SKIP;
             goto ret;
@@ -1301,7 +1288,7 @@ move_file_file (const WPanel *panel, file_op_context_t *ctx, const char *s, cons
        filesystems. Then nfs returns EIO instead of EXDEV.
        Hope it will not hurt if we always in case of error try to copy/delete. */
     else
-        errno = EXDEV;          // Hack to copy (append) the file and then delete it
+        errno = EXDEV;          // Hack to copy (append) the file and then delete it 
 
     if (errno != EXDEV)
     {
@@ -1325,9 +1312,8 @@ move_file_file (const WPanel *panel, file_op_context_t *ctx, const char *s, cons
     {
         /* In case of single file, calculate totals. In case of many files,
            totals are calculated already. */
-        return_status =
-            panel_operate_init_totals (panel, src_vpath, &src_stat, ctx, TRUE,
-                                       FILEGUI_DIALOG_ONE_ITEM);
+        return_status = panel_operate_init_totals (panel, src_vpath, &src_stat, ctx, TRUE,
+                                                   FILEGUI_DIALOG_ONE_ITEM);
         if (return_status != FILE_CONT)
             goto ret_fast;
     }
@@ -1356,11 +1342,11 @@ move_file_file (const WPanel *panel, file_op_context_t *ctx, const char *s, cons
 
     mc_refresh ();
 
-  retry_src_remove:
+retry_src_remove:
     if (!try_remove_file (ctx, src_vpath, &return_status) && panel == NULL)
         goto ret_fast;
 
-  ret:
+ret:
     if (return_status != FILE_ABORT)
     {
         // if copy_done == TRUE, progress_update_one() was called in copy_file_file()
@@ -1368,7 +1354,7 @@ move_file_file (const WPanel *panel, file_op_context_t *ctx, const char *s, cons
             progress_update_one (TRUE, ctx, src_stat.st_size);
         return_status = file_progress_check_buttons (ctx);
     }
-  ret_fast:
+ret_fast:
     vfs_path_free (src_vpath, TRUE);
     vfs_path_free (dst_vpath, TRUE);
 
@@ -1424,7 +1410,7 @@ try_erase_dir (file_op_context_t *ctx, const vfs_path_t *vpath)
 
     while (my_rmdir (dir) != 0 && !ctx->ignore_all)
     {
-        return_status = file_error (ctx, TRUE, _("Cannot remove directory \"%s\"\n%s"), dir);
+        return_status = file_error (ctx, TRUE, _ ("Cannot remove directory \"%s\"\n%s"), dir);
         if (return_status == FILE_IGNORE_ALL)
             ctx->ignore_all = TRUE;
         if (return_status != FILE_RETRY)
@@ -1491,20 +1477,20 @@ recursive_erase (file_op_context_t *ctx, const vfs_path_t *vpath)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
-  * Check if directory is empty or not.
-  *
-  * @param ctx file operation context descriptor
-  * @param vpath directory handler
-  * @param error status of directory reading
-  *
-  * @returns -1 on error,
-  *          1 if there are no entries besides "." and ".." in the directory path points to,
-  *          0 else.
-  *
-  * ATTENTION! Be careful when modifying this function (like commit 25e419ba0886f)!
-  * Some implementations of readdir() in MC VFS (for example, vfs_s_readdir(), which is used
-  * in SHELL) don't return "." and ".." entries.
-  */
+ * Check if directory is empty or not.
+ *
+ * @param ctx file operation context descriptor
+ * @param vpath directory handler
+ * @param error status of directory reading
+ *
+ * @returns -1 on error,
+ *          1 if there are no entries besides "." and ".." in the directory path points to,
+ *          0 else.
+ *
+ * ATTENTION! Be careful when modifying this function (like commit 25e419ba0886f)!
+ * Some implementations of readdir() in MC VFS (for example, vfs_s_readdir(), which is used
+ * in SHELL) don't return "." and ".." entries.
+ */
 static int
 check_dir_is_empty (file_op_context_t *ctx, const vfs_path_t *vpath, FileProgressStatus *error)
 {
@@ -1518,16 +1504,15 @@ check_dir_is_empty (file_op_context_t *ctx, const vfs_path_t *vpath, FileProgres
             *error = FILE_IGNORE_ALL;
         else
         {
-            const FileProgressStatus status =
-                file_error (ctx, TRUE, _("Cannot enter into directory \"%s\"\n%s"),
-                            vfs_path_as_str (vpath));
+            const FileProgressStatus status = file_error (
+                ctx, TRUE, _ ("Cannot enter into directory \"%s\"\n%s"), vfs_path_as_str (vpath));
 
             if (status == FILE_RETRY)
                 continue;
             if (status == FILE_IGNORE_ALL)
                 ctx->ignore_all = TRUE;
 
-            *error = status;    // FILE_IGNORE, FILE_IGNORE_ALL, FILE_ABORT
+            *error = status;  // FILE_IGNORE, FILE_IGNORE_ALL, FILE_ABORT
         }
 
         return (-1);
@@ -1648,7 +1633,7 @@ do_move_dir_dir (const WPanel *panel, file_op_context_t *ctx, const char *s, con
         goto ret_fast;
 
     if (!dstat_ok)
-        ;                       // destination doesn't exist
+        ;  // destination doesn't exist
     else if (!ctx->dive_into_subdirs)
         move_over = TRUE;
     else
@@ -1663,7 +1648,7 @@ do_move_dir_dir (const WPanel *panel, file_op_context_t *ctx, const char *s, con
     d = vfs_path_as_str (dst_vpath);
 
     // Check if the user inputted an existing dir
-  retry_dst_stat:
+retry_dst_stat:
     if (mc_stat (dst_vpath, &dst_stat) == 0)
     {
         if (move_over)
@@ -1672,9 +1657,8 @@ do_move_dir_dir (const WPanel *panel, file_op_context_t *ctx, const char *s, con
             {
                 /* In case of single directory, calculate totals. In case of many directories,
                    totals are calculated already. */
-                return_status =
-                    panel_operate_init_totals (panel, src_vpath, &src_stat, ctx, TRUE,
-                                               FILEGUI_DIALOG_MULTI_ITEM);
+                return_status = panel_operate_init_totals (panel, src_vpath, &src_stat, ctx, TRUE,
+                                                           FILEGUI_DIALOG_MULTI_ITEM);
                 if (return_status != FILE_CONT)
                     goto ret;
             }
@@ -1691,9 +1675,9 @@ do_move_dir_dir (const WPanel *panel, file_op_context_t *ctx, const char *s, con
         {
             if (S_ISDIR (dst_stat.st_mode))
                 return_status =
-                    file_error (ctx, TRUE, _("Cannot overwrite directory \"%s\"\n%s"), d);
+                    file_error (ctx, TRUE, _ ("Cannot overwrite directory \"%s\"\n%s"), d);
             else
-                return_status = file_error (ctx, TRUE, _("Cannot overwrite file \"%s\"\n%s"), d);
+                return_status = file_error (ctx, TRUE, _ ("Cannot overwrite file \"%s\"\n%s"), d);
             if (return_status == FILE_IGNORE_ALL)
                 ctx->ignore_all = TRUE;
             if (return_status == FILE_RETRY)
@@ -1703,7 +1687,7 @@ do_move_dir_dir (const WPanel *panel, file_op_context_t *ctx, const char *s, con
         goto ret_fast;
     }
 
-  retry_rename:
+retry_rename:
     if (mc_rename (src_vpath, dst_vpath) == 0)
     {
         return_status = FILE_CONT;
@@ -1715,7 +1699,7 @@ do_move_dir_dir (const WPanel *panel, file_op_context_t *ctx, const char *s, con
         if (!ctx->ignore_all)
         {
             return_status =
-                files_error (ctx, _("Cannot move directory \"%s\" to \"%s\"\n%s"), s, d);
+                files_error (ctx, _ ("Cannot move directory \"%s\" to \"%s\"\n%s"), s, d);
             if (return_status == FILE_IGNORE_ALL)
                 ctx->ignore_all = TRUE;
             if (return_status == FILE_RETRY)
@@ -1729,9 +1713,8 @@ do_move_dir_dir (const WPanel *panel, file_op_context_t *ctx, const char *s, con
     {
         /* In case of single directory, calculate totals. In case of many directories,
            totals are calculated already. */
-        return_status =
-            panel_operate_init_totals (panel, src_vpath, &src_stat, ctx, TRUE,
-                                       FILEGUI_DIALOG_MULTI_ITEM);
+        return_status = panel_operate_init_totals (panel, src_vpath, &src_stat, ctx, TRUE,
+                                                   FILEGUI_DIALOG_MULTI_ITEM);
         if (return_status != FILE_CONT)
             goto ret;
     }
@@ -1741,7 +1724,7 @@ do_move_dir_dir (const WPanel *panel, file_op_context_t *ctx, const char *s, con
     if (return_status != FILE_CONT)
         goto ret;
 
-  oktoret:
+oktoret:
     /* FIXME: there is no need to update progress and check buttons
        at the finish of single directory operation. */
     if (panel == NULL)
@@ -1760,9 +1743,9 @@ do_move_dir_dir (const WPanel *panel, file_op_context_t *ctx, const char *s, con
 
     erase_dir_after_copy (ctx, src_vpath, &return_status);
 
-  ret:
+ret:
     erase_list = free_erase_list (erase_list);
-  ret_fast:
+ret_fast:
     vfs_path_free (src_vpath, TRUE);
     vfs_path_free (dst_vpath, TRUE);
     return return_status;
@@ -1830,7 +1813,7 @@ check_single_entry (const WPanel *panel, gboolean force_single, struct stat *src
     ok = !DIR_IS_DOTDOT (source);
 
     if (!ok)
-        message (D_ERROR, MSG_ERROR, _("Cannot operate on \"..\"!"));
+        message (D_ERROR, MSG_ERROR, _ ("Cannot operate on \"..\"!"));
     else
     {
         vfs_path_t *source_vpath;
@@ -1841,8 +1824,8 @@ check_single_entry (const WPanel *panel, gboolean force_single, struct stat *src
         ok = mc_lstat (source_vpath, src_stat) == 0;
         if (!ok)
         {
-            message (D_ERROR, MSG_ERROR, _("Cannot stat \"%s\"\n%s"),
-                     path_trunc (source, 30), unix_error_string (errno));
+            message (D_ERROR, MSG_ERROR, _ ("Cannot stat \"%s\"\n%s"), path_trunc (source, 30),
+                     unix_error_string (errno));
 
             // Directory was changed outside MC. Reload it forced
             if (!panel->is_panelized)
@@ -1887,11 +1870,11 @@ panel_operate_generate_prompt (const WPanel *panel, FileOperation operation,
 
 #ifdef ENABLE_NLS
         for (i = G_N_ELEMENTS (prompt_parts); i-- != 0;)
-            prompt_parts[i] = _(prompt_parts[i]);
+            prompt_parts[i] = _ (prompt_parts[i]);
 
-        one_format = _(one_format);
-        many_format = _(many_format);
-#endif // ENABLE_NLS
+        one_format = _ (one_format);
+        many_format = _ (many_format);
+#endif  // ENABLE_NLS
         i18n_flag = TRUE;
     }
 
@@ -1993,9 +1976,9 @@ do_confirm_copy_move (const WPanel *panel, gboolean force_single, const char *so
     // Generate confirmation prompt
     format = panel_operate_generate_prompt (panel, ctx->operation, src_stat);
 
-    ret = file_mask_dialog (ctx, source != NULL, format,
-                            source != NULL ? source : (const void *) &panel->marked, dest_dir,
-                            do_bg);
+    ret =
+        file_mask_dialog (ctx, source != NULL, format,
+                          source != NULL ? source : (const void *) &panel->marked, dest_dir, do_bg);
 
     g_free (format);
     g_free (dest_dir);
@@ -2033,7 +2016,7 @@ do_confirm_erase (const WPanel *panel, const char *source, struct stat *src_stat
     if (safe_delete)
         query_set_sel (1);
 
-    i = query_dialog (op_names[OP_DELETE], fmd_buf, D_ERROR, 2, _("&Yes"), _("&No"));
+    i = query_dialog (op_names[OP_DELETE], fmd_buf, D_ERROR, 2, _ ("&Yes"), _ ("&No"));
 
     return (i == 0);
 }
@@ -2091,9 +2074,8 @@ operate_single_file (const WPanel *panel, file_op_context_t *ctx, const char *sr
                 // we use file_mask_op_follow_links only with OP_COPY
                 ctx->stat_func (src_vpath, src_stat);
 
-                value =
-                    panel_operate_init_totals (panel, src_vpath, src_stat, ctx, !is_file,
-                                               dialog_type);
+                value = panel_operate_init_totals (panel, src_vpath, src_stat, ctx, !is_file,
+                                                   dialog_type);
                 if (value == FILE_CONT)
                 {
                     is_file = !S_ISDIR (src_stat->st_mode);
@@ -2278,7 +2260,7 @@ file_is_symlink_to_dir (const vfs_path_t *vpath, struct stat *st, gboolean *stal
             res = (S_ISDIR (st3.st_mode) != 0);
     }
 
-  ret:
+ret:
     if (stale_link != NULL)
         *stale_link = stale;
 
@@ -2294,7 +2276,7 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
     gid_t src_gid = (gid_t) (-1);
 
     int src_desc, dest_desc = -1;
-    mode_t src_mode = 0;        // The mode of the source file
+    mode_t src_mode = 0;  // The mode of the source file
     struct stat src_stat, dst_stat;
     mc_timesbuf_t times;
     unsigned long attrs = 0;
@@ -2338,7 +2320,7 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
             else
             {
                 return_status =
-                    file_error (ctx, TRUE, _("Cannot overwrite directory \"%s\"\n%s"), dst_path);
+                    file_error (ctx, TRUE, _ ("Cannot overwrite directory \"%s\"\n%s"), dst_path);
                 if (return_status == FILE_IGNORE_ALL)
                     ctx->ignore_all = TRUE;
                 if (return_status == FILE_RETRY)
@@ -2358,7 +2340,7 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
         else
         {
             return_status =
-                file_error (ctx, TRUE, _("Cannot stat source file \"%s\"\n%s"), src_path);
+                file_error (ctx, TRUE, _ ("Cannot stat source file \"%s\"\n%s"), src_path);
             if (return_status == FILE_IGNORE_ALL)
                 ctx->ignore_all = TRUE;
         }
@@ -2388,9 +2370,8 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
             return_status = FILE_IGNORE_ALL;
         else
         {
-            return_status =
-                file_error (ctx, TRUE, _("Cannot get ext2 attributes of source file \"%s\"\n%s"),
-                            src_path);
+            return_status = file_error (
+                ctx, TRUE, _ ("Cannot get ext2 attributes of source file \"%s\"\n%s"), src_path);
             if (return_status == FILE_IGNORE_ALL)
                 ctx->ignore_all = TRUE;
             if (return_status == FILE_ABORT)
@@ -2460,10 +2441,9 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
                     else if (return_status == FILE_IGNORE_ALL)
                         ctx->ignore_all = TRUE;
                     else
-                        return_status =
-                            file_error (ctx, TRUE,
-                                        _("Cannot set ext2 attributes of target file \"%s\"\n%s"),
-                                        dst_path);
+                        return_status = file_error (
+                            ctx, TRUE, _ ("Cannot set ext2 attributes of target file \"%s\"\n%s"),
+                            dst_path);
 
                     if (return_status != FILE_RETRY)
                         break;
@@ -2488,7 +2468,7 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
                    && !ctx->ignore_all)
             {
                 return_status =
-                    file_error (ctx, TRUE, _("Cannot create special file \"%s\"\n%s"), dst_path);
+                    file_error (ctx, TRUE, _ ("Cannot create special file \"%s\"\n%s"), dst_path);
                 if (return_status == FILE_RETRY)
                     continue;
                 if (return_status == FILE_IGNORE_ALL)
@@ -2502,7 +2482,7 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
                    && !ctx->ignore_all)
             {
                 temp_status =
-                    file_error (ctx, TRUE, _("Cannot chown target file \"%s\"\n%s"), dst_path);
+                    file_error (ctx, TRUE, _ ("Cannot chown target file \"%s\"\n%s"), dst_path);
                 if (temp_status == FILE_IGNORE)
                     break;
                 if (temp_status == FILE_IGNORE_ALL)
@@ -2518,7 +2498,7 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
                    && !ctx->ignore_all)
             {
                 temp_status =
-                    file_error (ctx, TRUE, _("Cannot chmod target file \"%s\"\n%s"), dst_path);
+                    file_error (ctx, TRUE, _ ("Cannot chmod target file \"%s\"\n%s"), dst_path);
                 if (temp_status == FILE_IGNORE)
                     break;
                 if (temp_status == FILE_IGNORE_ALL)
@@ -2538,9 +2518,9 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
                 if (attrs_ignore_error (errno))
                     break;
 
-                temp_status =
-                    file_error (ctx, TRUE, _("Cannot set ext2 attributes of target file \"%s\"\n%s"),
-                                dst_path);
+                temp_status = file_error (
+                    ctx, TRUE, _ ("Cannot set ext2 attributes of target file \"%s\"\n%s"),
+                    dst_path);
                 if (temp_status == FILE_IGNORE)
                     break;
                 if (temp_status == FILE_IGNORE_ALL)
@@ -2570,7 +2550,7 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
         else
         {
             return_status =
-                file_error (ctx, TRUE, _("Cannot open source file \"%s\"\n%s"), src_path);
+                file_error (ctx, TRUE, _ ("Cannot open source file \"%s\"\n%s"), src_path);
             if (return_status == FILE_RETRY)
                 continue;
             if (return_status == FILE_IGNORE_ALL)
@@ -2582,7 +2562,7 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
 
     if (ctx->do_reget != 0 && mc_lseek (src_desc, ctx->do_reget, SEEK_SET) != ctx->do_reget)
     {
-        message (D_ERROR, _("Warning"), _("Reget failed, about to overwrite file"));
+        message (D_ERROR, _ ("Warning"), _ ("Reget failed, about to overwrite file"));
         ctx->do_reget = 0;
         ctx->do_append = FALSE;
     }
@@ -2594,7 +2574,7 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
         else
         {
             return_status =
-                file_error (ctx, TRUE, _("Cannot fstat source file \"%s\"\n%s"), src_path);
+                file_error (ctx, TRUE, _ ("Cannot fstat source file \"%s\"\n%s"), src_path);
             if (return_status == FILE_RETRY)
                 continue;
             if (return_status == FILE_IGNORE_ALL)
@@ -2627,7 +2607,7 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
             else
             {
                 return_status =
-                    file_error (ctx, TRUE, _("Cannot create target file \"%s\"\n%s"), dst_path);
+                    file_error (ctx, TRUE, _ ("Cannot create target file \"%s\"\n%s"), dst_path);
                 if (return_status == FILE_RETRY)
                     continue;
                 if (return_status == FILE_IGNORE_ALL)
@@ -2660,7 +2640,7 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
         else
         {
             return_status =
-                file_error (ctx, TRUE, _("Cannot fstat target file \"%s\"\n%s"), dst_path);
+                file_error (ctx, TRUE, _ ("Cannot fstat target file \"%s\"\n%s"), dst_path);
             if (return_status == FILE_RETRY)
                 continue;
             if (return_status == FILE_IGNORE_ALL)
@@ -2670,8 +2650,8 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
     }
 
     // try preallocate space; if fail, try copy anyway
-    while (mc_global.vfs.preallocate_space &&
-           vfs_preallocate (dest_desc, file_size, appending ? dst_stat.st_size : 0) != 0)
+    while (mc_global.vfs.preallocate_space
+           && vfs_preallocate (dest_desc, file_size, appending ? dst_stat.st_size : 0) != 0)
     {
         if (ctx->ignore_all)
         {
@@ -2680,9 +2660,8 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
             break;
         }
 
-        return_status =
-            file_error (ctx, TRUE, _("Cannot preallocate space for target file \"%s\"\n%s"),
-                        dst_path);
+        return_status = file_error (
+            ctx, TRUE, _ ("Cannot preallocate space for target file \"%s\"\n%s"), dst_path);
 
         if (return_status == FILE_IGNORE_ALL)
             ctx->ignore_all = TRUE;
@@ -2739,7 +2718,7 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
                 while ((n_read = mc_read (src_desc, buf, bufsize)) < 0 && !ctx->ignore_all)
                 {
                     return_status =
-                        file_error (ctx, TRUE, _("Cannot read source file \"%s\"\n%s"), src_path);
+                        file_error (ctx, TRUE, _ ("Cannot read source file \"%s\"\n%s"), src_path);
                     if (return_status == FILE_RETRY)
                         continue;
                     if (return_status == FILE_IGNORE_ALL)
@@ -2778,9 +2757,8 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
                     if (ctx->ignore_all)
                         return_status = FILE_IGNORE_ALL;
                     else
-                        return_status =
-                            file_error (ctx, TRUE, _("Cannot write target file \"%s\"\n%s"),
-                                        dst_path);
+                        return_status = file_error (
+                            ctx, TRUE, _ ("Cannot write target file \"%s\"\n%s"), dst_path);
 
                     if (return_status == FILE_IGNORE)
                     {
@@ -2818,7 +2796,7 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
 
                 const gint64 update_usecs = tv_current - tv_last_input;
                 const char *stalled_msg =
-                    update_usecs > FILEOP_STALLING_INTERVAL_US ? _("(stalled)") : "";
+                    update_usecs > FILEOP_STALLING_INTERVAL_US ? _ ("(stalled)") : "";
 
                 file_progress_show (ctx, ctx->progress_bytes, file_size, stalled_msg, force_update);
                 if (ctx->dialog_type == FILEGUI_DIALOG_MULTI_ITEM)
@@ -2838,9 +2816,8 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
 
                 const gint64 t1 = g_get_monotonic_time ();
                 query_res =
-                    query_dialog (Q_ ("DialogTitle|Copy"),
-                                  _("Incomplete file was retrieved"), D_ERROR, 3,
-                                  _("&Delete"), _("&Keep"), _("&Continue copy"));
+                    query_dialog (Q_ ("DialogTitle|Copy"), _ ("Incomplete file was retrieved"),
+                                  D_ERROR, 3, _ ("&Delete"), _ ("&Keep"), _ ("&Continue copy"));
                 const gint64 t2 = g_get_monotonic_time ();
                 ctx->pauses += t2 - t1;
 
@@ -2870,13 +2847,13 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
         dst_status = DEST_FULL;
     }
 
-  ret:
+ret:
     g_free (buf);
 
     rotate_dash (FALSE);
     while (src_desc != -1 && mc_close (src_desc) < 0 && !ctx->ignore_all)
     {
-        temp_status = file_error (ctx, TRUE, _("Cannot close source file \"%s\"\n%s"), src_path);
+        temp_status = file_error (ctx, TRUE, _ ("Cannot close source file \"%s\"\n%s"), src_path);
         if (temp_status == FILE_RETRY)
             continue;
         if (temp_status == FILE_ABORT)
@@ -2888,7 +2865,7 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
 
     while (dest_desc != -1 && mc_close (dest_desc) < 0 && !ctx->ignore_all)
     {
-        temp_status = file_error (ctx, TRUE, _("Cannot close target file \"%s\"\n%s"), dst_path);
+        temp_status = file_error (ctx, TRUE, _ ("Cannot close target file \"%s\"\n%s"), dst_path);
         if (temp_status == FILE_RETRY)
             continue;
         if (temp_status == FILE_IGNORE_ALL)
@@ -2900,8 +2877,9 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
     if (dst_status == DEST_SHORT_QUERY)
     {
         // Query to remove short file
-        if (query_dialog (Q_ ("DialogTitle|Copy"), _("Incomplete file was retrieved"),
-                          D_ERROR, 2, _("&Delete"), _("&Keep")) == 0)
+        if (query_dialog (Q_ ("DialogTitle|Copy"), _ ("Incomplete file was retrieved"), D_ERROR, 2,
+                          _ ("&Delete"), _ ("&Keep"))
+            == 0)
             dst_status = DEST_SHORT_DELETE;
         else
             dst_status = DEST_SHORT_KEEP;
@@ -2916,7 +2894,8 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
         while (ctx->preserve_uidgid && mc_chown (dst_vpath, src_uid, src_gid) != 0
                && !ctx->ignore_all)
         {
-            temp_status = file_error (ctx, TRUE, _("Cannot chown target file \"%s\"\n%s"), dst_path);
+            temp_status =
+                file_error (ctx, TRUE, _ ("Cannot chown target file \"%s\"\n%s"), dst_path);
             if (temp_status == FILE_ABORT)
             {
                 return_status = FILE_ABORT;
@@ -2937,7 +2916,8 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
         while (ctx->preserve && mc_chmod (dst_vpath, (src_mode & ctx->umask_kill)) != 0
                && !ctx->ignore_all)
         {
-            temp_status = file_error (ctx, TRUE, _("Cannot chmod target file \"%s\"\n%s"), dst_path);
+            temp_status =
+                file_error (ctx, TRUE, _ ("Cannot chmod target file \"%s\"\n%s"), dst_path);
             if (temp_status == FILE_ABORT)
             {
                 return_status = FILE_ABORT;
@@ -2980,9 +2960,8 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
                 break;
             }
 
-            temp_status =
-                file_error (ctx, TRUE, _("Cannot set ext2 attributes for target file \"%s\"\n%s"),
-                            dst_path);
+            temp_status = file_error (
+                ctx, TRUE, _ ("Cannot set ext2 attributes for target file \"%s\"\n%s"), dst_path);
             if (temp_status == FILE_ABORT)
                 return_status = FILE_ABORT;
             if (temp_status == FILE_RETRY)
@@ -3005,7 +2984,7 @@ copy_file_file (file_op_context_t *ctx, const char *src_path, const char *dst_pa
     if (return_status == FILE_CONT)
         return_status = file_progress_check_buttons (ctx);
 
-  ret_fast:
+ret_fast:
     vfs_path_free (src_vpath, TRUE);
     vfs_path_free (dst_vpath, TRUE);
     return return_status;
@@ -3038,14 +3017,15 @@ copy_dir_dir (file_op_context_t *ctx, const char *s, const char *d, gboolean top
 
     // First get the mode of the source dir
 
-  retry_src_stat:
+retry_src_stat:
     while ((*ctx->stat_func) (src_vpath, &src_stat) != 0)
     {
         if (ctx->ignore_all)
             return_status = FILE_IGNORE_ALL;
         else
         {
-            return_status = file_error (ctx, TRUE, _("Cannot stat source directory \"%s\"\n%s"), s);
+            return_status =
+                file_error (ctx, TRUE, _ ("Cannot stat source directory \"%s\"\n%s"), s);
             if (return_status == FILE_IGNORE_ALL)
                 ctx->ignore_all = TRUE;
         }
@@ -3065,9 +3045,8 @@ copy_dir_dir (file_op_context_t *ctx, const char *s, const char *d, gboolean top
             return_status = FILE_IGNORE_ALL;
         else
         {
-            return_status =
-                file_error (ctx, TRUE,
-                            _("Cannot get ext2 attributes of source directory \"%s\"\n%s"), s);
+            return_status = file_error (
+                ctx, TRUE, _ ("Cannot get ext2 attributes of source directory \"%s\"\n%s"), s);
             if (return_status == FILE_IGNORE_ALL)
                 ctx->ignore_all = TRUE;
             if (return_status == FILE_ABORT)
@@ -3116,7 +3095,7 @@ copy_dir_dir (file_op_context_t *ctx, const char *s, const char *d, gboolean top
             return_status = FILE_IGNORE_ALL;
         else
         {
-            return_status = file_error (ctx, TRUE, _("Source \"%s\" is not a directory\n%s"), s);
+            return_status = file_error (ctx, TRUE, _ ("Source \"%s\" is not a directory\n%s"), s);
             if (return_status == FILE_RETRY)
                 goto retry_src_stat;
             if (return_status == FILE_IGNORE_ALL)
@@ -3128,7 +3107,7 @@ copy_dir_dir (file_op_context_t *ctx, const char *s, const char *d, gboolean top
     if (is_in_linklist (parent_dirs, src_vpath, &src_stat) != NULL)
     {
         // we found a cyclic symbolic link
-        message (D_ERROR, MSG_ERROR, _("Cannot copy cyclic symbolic link\n\"%s\""), s);
+        message (D_ERROR, MSG_ERROR, _ ("Cannot copy cyclic symbolic link\n\"%s\""), s);
         return_status = FILE_SKIP;
         goto ret_fast;
     }
@@ -3139,7 +3118,7 @@ copy_dir_dir (file_op_context_t *ctx, const char *s, const char *d, gboolean top
     lp->dev = src_stat.st_dev;
     parent_dirs = g_slist_prepend (parent_dirs, lp);
 
-  retry_dst_stat:
+retry_dst_stat:
     // Now, check if the dest dir exists, if not, create it.
     if (mc_stat (dst_vpath, &dst_stat) != 0)
     {
@@ -3167,7 +3146,7 @@ copy_dir_dir (file_op_context_t *ctx, const char *s, const char *d, gboolean top
             else
             {
                 return_status =
-                    file_error (ctx, TRUE, _("Destination \"%s\" must be a directory\n%s"), d);
+                    file_error (ctx, TRUE, _ ("Destination \"%s\" must be a directory\n%s"), d);
                 if (return_status == FILE_IGNORE_ALL)
                     ctx->ignore_all = TRUE;
                 if (return_status == FILE_RETRY)
@@ -3183,7 +3162,6 @@ copy_dir_dir (file_op_context_t *ctx, const char *s, const char *d, gboolean top
             tmp = dst_vpath;
             dst_vpath = vfs_path_append_new (dst_vpath, x_basename (s), (char *) NULL);
             vfs_path_free (tmp, TRUE);
-
         }
         else
             do_mkdir = FALSE;
@@ -3200,7 +3178,7 @@ copy_dir_dir (file_op_context_t *ctx, const char *s, const char *d, gboolean top
             else
             {
                 return_status =
-                    file_error (ctx, TRUE, _("Cannot create target directory \"%s\"\n%s"), d);
+                    file_error (ctx, TRUE, _ ("Cannot create target directory \"%s\"\n%s"), d);
                 if (return_status == FILE_IGNORE_ALL)
                     ctx->ignore_all = TRUE;
             }
@@ -3225,7 +3203,7 @@ copy_dir_dir (file_op_context_t *ctx, const char *s, const char *d, gboolean top
             else
             {
                 return_status =
-                    file_error (ctx, TRUE, _("Cannot chown target directory \"%s\"\n%s"), d);
+                    file_error (ctx, TRUE, _ ("Cannot chown target directory \"%s\"\n%s"), d);
                 if (return_status == FILE_IGNORE_ALL)
                     ctx->ignore_all = TRUE;
             }
@@ -3322,10 +3300,10 @@ copy_dir_dir (file_op_context_t *ctx, const char *s, const char *d, gboolean top
         mc_chmod (dst_vpath, src_stat.st_mode & ctx->umask_kill);
     }
 
-  ret:
+ret:
     free_link (parent_dirs->data);
     g_slist_free_1 (parent_dirs);
-  ret_fast:
+ret_fast:
     vfs_path_free (src_vpath, TRUE);
     vfs_path_free (dst_vpath, TRUE);
     return return_status;
@@ -3396,13 +3374,13 @@ dirsize_status_init_cb (status_msg_t *sm)
     Widget *wd = WIDGET (sm->dlg);
     WRect r = wd->rect;
 
-    const char *b1_name = N_("&Abort");
-    const char *b2_name = N_("&Skip");
+    const char *b1_name = N_ ("&Abort");
+    const char *b2_name = N_ ("&Skip");
     int b_width, ui_width;
 
 #ifdef ENABLE_NLS
-    b1_name = _(b1_name);
-    b2_name = _(b2_name);
+    b1_name = _ (b1_name);
+    b2_name = _ (b2_name);
 #endif
 
     b_width = str_term_width1 (b1_name) + 4;
@@ -3441,8 +3419,8 @@ dirsize_status_update_cb (status_msg_t *sm)
     WRect r = wd->rect;
 
     // update second (longer label)
-    label_set_textv (dsm->count_size, _("Directories: %zu, total size: %s"),
-                     dsm->dir_count, size_trunc_sep (dsm->total_size, panels_options.kilobyte_si));
+    label_set_textv (dsm->count_size, _ ("Directories: %zu, total size: %s"), dsm->dir_count,
+                     size_trunc_sep (dsm->total_size, panels_options.kilobyte_si));
 
     // enlarge dialog if required
     if (WIDGET (dsm->count_size)->rect.cols + 6 > r.cols)
@@ -3490,9 +3468,8 @@ dirsize_status_deinit_cb (status_msg_t *sm)
  */
 
 FileProgressStatus
-compute_dir_size (const vfs_path_t *dirname_vpath, dirsize_status_msg_t *sm,
-                  size_t *ret_dir_count, size_t *ret_marked_count, uintmax_t *ret_total,
-                  gboolean follow_symlinks)
+compute_dir_size (const vfs_path_t *dirname_vpath, dirsize_status_msg_t *sm, size_t *ret_dir_count,
+                  size_t *ret_marked_count, uintmax_t *ret_total, gboolean follow_symlinks)
 {
     return do_compute_dir_size (dirname_vpath, sm, ret_dir_count, ret_marked_count, ret_total,
                                 follow_symlinks ? mc_stat : mc_lstat);
@@ -3516,8 +3493,8 @@ gboolean
 panel_operate (void *source_panel, FileOperation operation, gboolean force_single)
 {
     WPanel *panel = PANEL (source_panel);
-    const gboolean single_entry = force_single || (panel->marked <= 1)
-        || (get_current_type () == view_tree);
+    const gboolean single_entry =
+        force_single || (panel->marked <= 1) || (get_current_type () == view_tree);
 
     const char *source = NULL;
     char *dest = NULL;
@@ -3530,7 +3507,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
     file_op_context_t *ctx;
     filegui_dialog_type_t dialog_type = FILEGUI_DIALOG_ONE_ITEM;
 
-    gboolean do_bg = FALSE;     // do background operation?
+    gboolean do_bg = FALSE;  // do background operation?
 
     static gboolean i18n_flag = FALSE;
     if (!i18n_flag)
@@ -3585,7 +3562,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                            g_strconcat (op_names[operation], ": ",
                                         vfs_path_as_str (panel->cwd_vpath), (char *) NULL));
         if (v == -1)
-            message (D_ERROR, MSG_ERROR, _("Sorry, I could not put the job in background"));
+            message (D_ERROR, MSG_ERROR, _ ("Sorry, I could not put the job in background"));
 
         // If we are the parent
         if (v == 1)
@@ -3600,7 +3577,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
         }
     }
     else
-#endif // ENABLE_BACKGROUND
+#endif  // ENABLE_BACKGROUND
     {
         const file_entry_t *fe;
 
@@ -3670,8 +3647,8 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                 break;
 
             if (ctx->ignore_all
-                || file_error (ctx, TRUE, _("Destination \"%s\" must be a directory\n%s"),
-                               dest) != FILE_RETRY)
+                || file_error (ctx, TRUE, _ ("Destination \"%s\" must be a directory\n%s"), dest)
+                    != FILE_RETRY)
                 goto clean_up;
         }
 
@@ -3689,7 +3666,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                 const char *source2;
 
                 if (panel->dir.list[i].f.marked == 0)
-                    continue;   // Skip the unmarked ones
+                    continue;  // Skip the unmarked ones
 
                 source2 = panel->dir.list[i].fname->str;
                 src_stat = panel->dir.list[i].st;
@@ -3702,10 +3679,10 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                     do_file_mark (panel, i, 0);
 
                 mc_refresh ();
-            }                   // Loop for every file
-    }                           // Many entries
+            }  // Loop for every file
+    }  // Many entries
 
-  clean_up:
+clean_up:
     // Clean up
     if (save_cwd != NULL)
     {
@@ -3737,9 +3714,9 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
         vfs_shut ();
         my_exit (EXIT_SUCCESS);
     }
-#endif // ENABLE_BACKGROUND
+#endif  // ENABLE_BACKGROUND
 
-  ret_fast:
+ret_fast:
     file_op_context_destroy (ctx);
 
     update_panels (UP_OPTIMIZE, UP_KEEPSEL);

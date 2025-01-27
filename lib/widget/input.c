@@ -41,14 +41,14 @@
 #include "lib/global.h"
 
 #include "lib/tty/tty.h"
-#include "lib/tty/key.h"        // XCTRL and ALT macros
+#include "lib/tty/key.h"  // XCTRL and ALT macros
 #include "lib/fileloc.h"
 #include "lib/skin.h"
 #include "lib/strutil.h"
 #include "lib/util.h"
 #include "lib/widget.h"
-#include "lib/event.h"          // mc_event_raise()
-#include "lib/mcconfig.h"       // mc_config_history_*()
+#include "lib/event.h"     // mc_event_raise()
+#include "lib/mcconfig.h"  // mc_config_history_*()
 
 /*** global variables ****************************************************************************/
 
@@ -64,14 +64,14 @@ input_colors_t input_colors;
 #define LARGE_HISTORY_BUTTON 1
 
 #ifdef LARGE_HISTORY_BUTTON
-#define HISTORY_BUTTON_WIDTH 3
+#    define HISTORY_BUTTON_WIDTH 3
 #else
-#define HISTORY_BUTTON_WIDTH 1
+#    define HISTORY_BUTTON_WIDTH 1
 #endif
 
-#define should_show_history_button(in) \
-    (in->history.list != NULL && WIDGET (in)->rect.cols > HISTORY_BUTTON_WIDTH * 2 + 1 \
-         && WIDGET (in)->owner != NULL)
+#define should_show_history_button(in)                                                             \
+    (in->history.list != NULL && WIDGET (in)->rect.cols > HISTORY_BUTTON_WIDTH * 2 + 1             \
+     && WIDGET (in)->owner != NULL)
 
 /*** file scope type declarations ****************************************************************/
 
@@ -666,8 +666,8 @@ input_execute_cmd (WInput *in, long command)
         // a highlight command like shift-arrow
         if (in->mark < 0)
         {
-            input_mark_cmd (in, FALSE); // clear
-            input_mark_cmd (in, TRUE);  // marking on
+            input_mark_cmd (in, FALSE);  // clear
+            input_mark_cmd (in, TRUE);   // marking on
         }
         break;
     case CK_WordRight:
@@ -708,15 +708,15 @@ input_execute_cmd (WInput *in, long command)
         forward_word (in);
         break;
     case CK_BackSpace:
-        {
-            long m1, m2;
+    {
+        long m1, m2;
 
-            if (input_eval_marks (in, &m1, &m2))
-                delete_region (in, m1, m2);
-            else
-                backward_delete (in);
-        }
-        break;
+        if (input_eval_marks (in, &m1, &m2))
+            delete_region (in, m1, m2);
+        else
+            backward_delete (in);
+    }
+    break;
     case CK_Delete:
         if (in->first)
             port_region_marked_for_delete (in);
@@ -752,14 +752,14 @@ input_execute_cmd (WInput *in, long command)
         copy_region (in, MAX (in->mark, 0), in->point);
         break;
     case CK_Cut:
-        {
-            long m;
+    {
+        long m;
 
-            m = MAX (in->mark, 0);
-            copy_region (in, m, in->point);
-            delete_region (in, in->point, m);
-        }
-        break;
+        m = MAX (in->mark, 0);
+        copy_region (in, m, in->point);
+        delete_region (in, in->point, m);
+    }
+    break;
     case CK_Yank:
         yank (in);
         break;
@@ -804,8 +804,8 @@ input_execute_cmd (WInput *in, long command)
 
 /* "history_load" event handler */
 static gboolean
-input_load_history (const gchar *event_group_name, const gchar *event_name,
-                    gpointer init_data, gpointer data)
+input_load_history (const gchar *event_group_name, const gchar *event_name, gpointer init_data,
+                    gpointer data)
 {
     WInput *in = INPUT (init_data);
     ev_history_load_save_t *ev = (ev_history_load_save_t *) data;
@@ -833,8 +833,8 @@ input_load_history (const gchar *event_group_name, const gchar *event_name,
 
 /* "history_save" event handler */
 static gboolean
-input_save_history (const gchar *event_group_name, const gchar *event_name,
-                    gpointer init_data, gpointer data)
+input_save_history (const gchar *event_group_name, const gchar *event_name, gpointer init_data,
+                    gpointer data)
 {
     WInput *in = INPUT (init_data);
 
@@ -939,18 +939,18 @@ input_mouse_callback (Widget *w, mouse_msg_t msg, mouse_event_t *event)
 /* --------------------------------------------------------------------------------------------- */
 
 /** Create new instance of WInput object.
-  * @param y                    Y coordinate
-  * @param x                    X coordinate
-  * @param input_colors         Array of used colors
-  * @param width                Widget width
-  * @param def_text             Default text filled in widget
-  * @param histname             Name of history
-  * @param completion_flags     Flags for specify type of completions
-  * @return                     WInput object
-  */
+ * @param y                    Y coordinate
+ * @param x                    X coordinate
+ * @param input_colors         Array of used colors
+ * @param width                Widget width
+ * @param def_text             Default text filled in widget
+ * @param histname             Name of history
+ * @param completion_flags     Flags for specify type of completions
+ * @return                     WInput object
+ */
 WInput *
-input_new (int y, int x, const int *colors, int width, const char *def_text,
-           const char *histname, input_complete_t completion_flags)
+input_new (int y, int x, const int *colors, int width, const char *def_text, const char *histname,
+           input_complete_t completion_flags)
 {
     WRect r = { y, x, 1, width };
     WInput *in;
@@ -1028,8 +1028,8 @@ input_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *dat
         }
 
         // Keys we want others to handle
-        if (parm == KEY_UP || parm == KEY_DOWN || parm == ESC_CHAR
-            || parm == KEY_F (10) || parm == '\n')
+        if (parm == KEY_UP || parm == KEY_DOWN || parm == ESC_CHAR || parm == KEY_F (10)
+            || parm == '\n')
             return MSG_NOT_HANDLED;
 
         // When pasting multiline text, insert literal Enter
@@ -1154,7 +1154,7 @@ input_insert (WInput *in, const char *text, gboolean insert_extra_space)
 {
     input_disable_update (in);
     while (*text != '\0')
-        input_handle_char (in, (unsigned char) *text++);        // unsigned extension char->int
+        input_handle_char (in, (unsigned char) *text++);  // unsigned extension char->int
     if (insert_extra_space)
         input_handle_char (in, ' ');
     input_enable_update (in);
@@ -1232,8 +1232,8 @@ input_update (WInput *in, gboolean clear_first)
     if (!in->is_password)
     {
         if (in->mark < 0)
-            tty_print_string (str_term_substring (in->buffer->str, in->term_first_shown,
-                                                  w->cols - has_history));
+            tty_print_string (
+                str_term_substring (in->buffer->str, in->term_first_shown, w->cols - has_history));
         else
         {
             long m1, m2;
@@ -1257,8 +1257,8 @@ input_update (WInput *in, gboolean clear_first)
 
                     widget_gotoyx (in, 0, m1 - in->term_first_shown);
                     buf_width = str_term_width2 (in->buffer->str, m1);
-                    m2 = MIN (m2 - m1,
-                              (w->cols - has_history) - (buf_width - in->term_first_shown));
+                    m2 =
+                        MIN (m2 - m1, (w->cols - has_history) - (buf_width - in->term_first_shown));
                 }
 
                 tty_print_string (str_term_substring (in->buffer->str, m1, m2));
@@ -1303,10 +1303,10 @@ input_disable_update (WInput *in)
 /* --------------------------------------------------------------------------------------------- */
 
 /**
-  *  Cleans the input line and adds the current text to the history
-  *
-  *  @param in the input line
-  */
+ *  Cleans the input line and adds the current text to the history
+ *
+ *  @param in the input line
+ */
 void
 input_clean (WInput *in)
 {

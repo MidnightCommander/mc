@@ -42,7 +42,7 @@
 #include <unistd.h>
 
 #include "lib/global.h"
-#include "lib/util.h"           // MAX_SAVED_BOOKMARKS
+#include "lib/util.h"  // MAX_SAVED_BOOKMARKS
 
 #include "editwidget.h"
 
@@ -94,7 +94,7 @@ book_mark_find (WEdit *edit, long line)
     for (p = edit->book_mark; p != NULL; p = p->next)
     {
         if (p->line > line)
-            break;              // gone past it going downward
+            break;  // gone past it going downward
 
         if (p->next != NULL)
         {
@@ -114,7 +114,7 @@ book_mark_find (WEdit *edit, long line)
     for (p = edit->book_mark; p != NULL; p = p->prev)
     {
         if (p->next != NULL && p->next->line <= line)
-            break;              // gone past it going upward
+            break;  // gone past it going upward
 
         if (p->line <= line)
         {
@@ -134,7 +134,7 @@ book_mark_find (WEdit *edit, long line)
         }
     }
 
-    return NULL;                // can't get here
+    return NULL;  // can't get here
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -181,7 +181,7 @@ book_mark_insert (WEdit *edit, long line, int c)
 #if 0
     if (p->line == line)
     {
-        // already exists, so just change the color
+        // already exists, so just change the color 
         if (p->c != c)
         {
             p->c = c;
@@ -322,8 +322,8 @@ book_mark_serialize (WEdit *edit, int color)
         edit_book_mark_t *p;
 
         if (edit->serialized_bookmarks == NULL)
-            edit->serialized_bookmarks = g_array_sized_new (FALSE, FALSE, sizeof (size_t),
-                                                            MAX_SAVED_BOOKMARKS);
+            edit->serialized_bookmarks =
+                g_array_sized_new (FALSE, FALSE, sizeof (size_t), MAX_SAVED_BOOKMARKS);
 
         for (p = book_mark_find (edit, 0); p != NULL; p = p->next)
             if (p->c == color && p->line >= 0)

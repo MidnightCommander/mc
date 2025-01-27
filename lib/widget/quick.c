@@ -34,11 +34,11 @@
 #include <config.h>
 
 #include <stdlib.h>
-#include <stdio.h>              // fprintf()
+#include <stdio.h>  // fprintf()
 
 #include "lib/global.h"
-#include "lib/strutil.h"        // str_term_width1()
-#include "lib/util.h"           // tilde_expand()
+#include "lib/strutil.h"  // str_term_width1()
+#include "lib/util.h"     // tilde_expand()
 #include "lib/widget.h"
 
 /*** global variables ****************************************************************************/
@@ -46,9 +46,9 @@
 /*** file scope macro definitions ****************************************************************/
 
 #ifdef ENABLE_NLS
-#define I18N(x) (x = x != NULL && *x != '\0' ? _(x) : x)
+#    define I18N(x) (x = x != NULL && *x != '\0' ? _ (x) : x)
 #else
-#define I18N(x) (x = x)
+#    define I18N(x) (x = x)
 #endif
 
 /*** file scope type declarations ****************************************************************/
@@ -126,9 +126,8 @@ quick_create_labeled_input (GArray *widgets, int *y, int x, quick_widget_t *quic
         in.quick_widget = quick_widget;
         g_array_append_val (widgets, in);
 
-        label.widget =
-            WIDGET (label_new
-                    (*y, x + in.widget->rect.cols + 1, I18N (quick_widget->u.input.label_text)));
+        label.widget = WIDGET (
+            label_new (*y, x + in.widget->rect.cols + 1, I18N (quick_widget->u.input.label_text)));
         g_array_append_val (widgets, label);
 
         *width = label.widget->rect.cols + in.widget->rect.cols + 1;
@@ -166,11 +165,11 @@ quick_dialog_skip (quick_dialog_t *quick_dlg, int nskip)
 {
     int len;
     int blen = 0;
-    int x, y;                   // current positions
-    int y1 = 0;                 // bottom of 1st column in case of two columns
-    int y2 = -1;                // start of two columns
-    int width1 = 0;             // width of single column
-    int width2 = 0;             // width of each of two columns
+    int x, y;        // current positions
+    int y1 = 0;      // bottom of 1st column in case of two columns
+    int y2 = -1;     // start of two columns
+    int width1 = 0;  // width of single column
+    int width2 = 0;  // width of each of two columns
     gboolean have_groupbox = FALSE;
     gboolean two_columns = FALSE;
     gboolean put_buttons = FALSE;
@@ -185,7 +184,7 @@ quick_dialog_skip (quick_dialog_t *quick_dlg, int nskip)
     quick_widget_t *quick_widget;
     WGroupbox *g = NULL;
     WDialog *dd;
-    GList *input_labels = NULL; // Widgets not directly requested by the user.
+    GList *input_labels = NULL;  // Widgets not directly requested by the user.
     int return_val;
 
     len = str_term_width1 (I18N (quick_dlg->title)) + 6;
@@ -205,10 +204,8 @@ quick_dialog_skip (quick_dialog_t *quick_dlg, int nskip)
         switch (quick_widget->widget_type)
         {
         case quick_checkbox:
-            item.widget =
-                WIDGET (check_new
-                        (++y, x, *quick_widget->u.checkbox.state,
-                         I18N (quick_widget->u.checkbox.text)));
+            item.widget = WIDGET (check_new (++y, x, *quick_widget->u.checkbox.state,
+                                             I18N (quick_widget->u.checkbox.text)));
             g_array_append_val (widgets, item);
             width = item.widget->rect.cols;
             if (g != NULL)
@@ -221,11 +218,10 @@ quick_dialog_skip (quick_dialog_t *quick_dlg, int nskip)
 
         case quick_button:
             // single button
-            item.widget = WIDGET (button_new (++y, x, quick_widget->u.button.action,
-                                              quick_widget->u.button.action == B_ENTER ?
-                                              DEFPUSH_BUTTON : NORMAL_BUTTON,
-                                              I18N (quick_widget->u.button.text),
-                                              quick_widget->u.button.callback));
+            item.widget = WIDGET (button_new (
+                ++y, x, quick_widget->u.button.action,
+                quick_widget->u.button.action == B_ENTER ? DEFPUSH_BUTTON : NORMAL_BUTTON,
+                I18N (quick_widget->u.button.text), quick_widget->u.button.callback));
             g_array_append_val (widgets, item);
             width = item.widget->rect.cols;
             if (g != NULL)
@@ -272,31 +268,31 @@ quick_dialog_skip (quick_dialog_t *quick_dlg, int nskip)
             break;
 
         case quick_radio:
-            {
-                WRadio *r;
-                char **items = NULL;
+        {
+            WRadio *r;
+            char **items = NULL;
 
-                // create the copy of radio_items to avoid mwmory leak
-                items = g_new (char *, quick_widget->u.radio.count + 1);
-                for (i = 0; i < (size_t) quick_widget->u.radio.count; i++)
-                    items[i] = g_strdup (_(quick_widget->u.radio.items[i]));
-                items[i] = NULL;
+            // create the copy of radio_items to avoid mwmory leak
+            items = g_new (char *, quick_widget->u.radio.count + 1);
+            for (i = 0; i < (size_t) quick_widget->u.radio.count; i++)
+                items[i] = g_strdup (_ (quick_widget->u.radio.items[i]));
+            items[i] = NULL;
 
-                r = radio_new (++y, x, quick_widget->u.radio.count, (const char **) items);
-                r->pos = r->sel = *quick_widget->u.radio.value;
-                g_strfreev (items);
-                item.widget = WIDGET (r);
-                g_array_append_val (widgets, item);
-                y += item.widget->rect.lines - 1;
-                width = item.widget->rect.cols;
-                if (g != NULL)
-                    width += 2;
-                if (two_columns)
-                    width2 = MAX (width2, width);
-                else
-                    width1 = MAX (width1, width);
-            }
-            break;
+            r = radio_new (++y, x, quick_widget->u.radio.count, (const char **) items);
+            r->pos = r->sel = *quick_widget->u.radio.value;
+            g_strfreev (items);
+            item.widget = WIDGET (r);
+            g_array_append_val (widgets, item);
+            y += item.widget->rect.lines - 1;
+            width = item.widget->rect.cols;
+            if (g != NULL)
+                width += 2;
+            if (two_columns)
+                width2 = MAX (width2, width);
+            else
+                width1 = MAX (width1, width);
+        }
+        break;
 
         case quick_start_groupbox:
             I18N (quick_widget->u.groupbox.title);
@@ -365,11 +361,10 @@ quick_dialog_skip (quick_dialog_t *quick_dlg, int nskip)
             quick_widget++;
             for (; quick_widget->widget_type == quick_button; quick_widget++)
             {
-                item.widget = WIDGET (button_new (y, x++, quick_widget->u.button.action,
-                                                  quick_widget->u.button.action == B_ENTER ?
-                                                  DEFPUSH_BUTTON : NORMAL_BUTTON,
-                                                  I18N (quick_widget->u.button.text),
-                                                  quick_widget->u.button.callback));
+                item.widget = WIDGET (button_new (
+                    y, x++, quick_widget->u.button.action,
+                    quick_widget->u.button.action == B_ENTER ? DEFPUSH_BUTTON : NORMAL_BUTTON,
+                    I18N (quick_widget->u.button.text), quick_widget->u.button.callback));
                 item.quick_widget = quick_widget;
                 g_array_append_val (widgets, item);
                 blen += item.widget->rect.cols + 1;
@@ -436,15 +431,15 @@ quick_dialog_skip (quick_dialog_t *quick_dlg, int nskip)
         switch (item->quick_widget->widget_type)
         {
         case quick_label:
-            {
-                quick_widget_t *input = item->quick_widget->u.label.input;
+        {
+            quick_widget_t *input = item->quick_widget->u.label.input;
 
-                if (input != NULL && input->u.input.label_location == input_label_right)
-                {
-                    // location of this label will be adjusted later
-                    break;
-                }
+            if (input != NULL && input->u.input.label_location == input_label_right)
+            {
+                // location of this label will be adjusted later
+                break;
             }
+        }
             MC_FALLTHROUGH;
         case quick_checkbox:
         case quick_radio:
@@ -472,46 +467,46 @@ quick_dialog_skip (quick_dialog_t *quick_dlg, int nskip)
             break;
 
         case quick_input:
+        {
+            Widget *label = WIDGET (INPUT (item->widget)->label);
+            int width = column_width;
+
+            if (g != NULL)
+                width -= 4;
+
+            r = &item->widget->rect;
+
+            switch (item->quick_widget->u.input.label_location)
             {
-                Widget *label = WIDGET (INPUT (item->widget)->label);
-                int width = column_width;
+            case input_label_left:
+                // label was adjusted before; adjust input line
+                r->x = label->rect.x + label->rect.cols + 1 - WIDGET (label->owner)->rect.x;
+                r->cols = width - label->rect.cols - 1;
+                break;
 
+            case input_label_right:
+                if (r->x != x1)
+                    r->x = x2;
                 if (g != NULL)
-                    width -= 4;
+                    r->x += 2;
+                r->cols = width - label->rect.cols - 1;
+                label->rect.x = r->x + r->cols + 1;
+                break;
 
-                r = &item->widget->rect;
-
-                switch (item->quick_widget->u.input.label_location)
-                {
-                case input_label_left:
-                    // label was adjusted before; adjust input line
-                    r->x = label->rect.x + label->rect.cols + 1 - WIDGET (label->owner)->rect.x;
-                    r->cols = width - label->rect.cols - 1;
-                    break;
-
-                case input_label_right:
-                    if (r->x != x1)
-                        r->x = x2;
-                    if (g != NULL)
-                        r->x += 2;
-                    r->cols = width - label->rect.cols - 1;
-                    label->rect.x = r->x + r->cols + 1;
-                    break;
-
-                default:
-                    if (r->x != x1)
-                        r->x = x2;
-                    if (g != NULL)
-                        r->x += 2;
-                    r->cols = width;
-                    break;
-                }
-
-                // forced update internal variables of input line
-                r->lines = 1;
-                widget_set_size_rect (item->widget, r);
+            default:
+                if (r->x != x1)
+                    r->x = x2;
+                if (g != NULL)
+                    r->x += 2;
+                r->cols = width;
+                break;
             }
-            break;
+
+            // forced update internal variables of input line
+            r->lines = 1;
+            widget_set_size_rect (item->widget, r);
+        }
+        break;
 
         case quick_start_groupbox:
             g = GROUPBOX (item->widget);
@@ -573,8 +568,10 @@ quick_dialog_skip (quick_dialog_t *quick_dlg, int nskip)
             unsigned long id;
 
             // add widget into dialog
-            item->widget->options |= item->quick_widget->options;       // FIXME: cannot reset flags, setup only
-            item->widget->state |= item->quick_widget->state;   // FIXME: cannot reset flags, setup only
+            item->widget->options |=
+                item->quick_widget->options;  // FIXME: cannot reset flags, setup only
+            item->widget->state |=
+                item->quick_widget->state;  // FIXME: cannot reset flags, setup only
             id = group_add_widget_autopos (GROUP (dd), item->widget, item->quick_widget->pos_flags,
                                            NULL);
             if (item->quick_widget->id != NULL)
@@ -624,7 +621,7 @@ quick_dialog_skip (quick_dialog_t *quick_dlg, int nskip)
 
     widget_destroy (WIDGET (dd));
 
-    g_list_free_full (input_labels, g_free);    // destroy input labels created before
+    g_list_free_full (input_labels, g_free);  // destroy input labels created before
     g_array_free (widgets, TRUE);
 
     return return_val;

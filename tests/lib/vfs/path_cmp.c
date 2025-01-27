@@ -27,7 +27,7 @@
 #include "tests/mctest.h"
 
 #ifdef HAVE_CHARSET
-#include "lib/charsets.h"
+#    include "lib/charsets.h"
 #endif
 
 #include "lib/strutil.h"
@@ -76,44 +76,22 @@ static const struct test_path_equal_ds
     const char *input_path1;
     const char *input_path2;
     const gboolean expected_result;
-} test_path_equal_ds[] =
-{
+} test_path_equal_ds[] = {
     { // 0.
-        NULL,
-        NULL,
-        FALSE
-    },
+      NULL, NULL, FALSE },
     { // 1.
-        NULL,
-        "/test/path",
-        FALSE
-    },
+      NULL, "/test/path", FALSE },
     { // 2.
-        "/test/path",
-        NULL,
-        FALSE
-    },
+      "/test/path", NULL, FALSE },
     { // 3.
-        "/test/path",
-        "/test/path",
-        TRUE
-    },
+      "/test/path", "/test/path", TRUE },
 #ifdef HAVE_CHARSET
     { // 4.
-        "/#enc:KOI8-R/тестовый/путь",
-        "/тестовый/путь",
-        FALSE
-    },
+      "/#enc:KOI8-R/тестовый/путь", "/тестовый/путь", FALSE },
     { // 5.
-        "/тестовый/путь",
-        "/#enc:KOI8-R/тестовый/путь",
-        FALSE
-    },
+      "/тестовый/путь", "/#enc:KOI8-R/тестовый/путь", FALSE },
     { // 6.
-        "/#enc:KOI8-R/тестовый/путь",
-        "/#enc:KOI8-R/тестовый/путь",
-        TRUE
-    },
+      "/#enc:KOI8-R/тестовый/путь", "/#enc:KOI8-R/тестовый/путь", TRUE },
 #endif
 };
 
@@ -147,56 +125,23 @@ static const struct test_path_equal_len_ds
     const char *input_path2;
     const size_t input_length;
     const gboolean expected_result;
-} test_path_equal_len_ds[] =
-{
+} test_path_equal_len_ds[] = {
     { // 0.
-        NULL,
-        NULL,
-        0,
-        FALSE
-    },
+      NULL, NULL, 0, FALSE },
     { // 1.
-        NULL,
-        NULL,
-        100,
-        FALSE
-    },
+      NULL, NULL, 100, FALSE },
     { // 2.
-        NULL,
-        "/тестовый/путь",
-        10,
-        FALSE
-    },
+      NULL, "/тестовый/путь", 10, FALSE },
     { // 3.
-        "/тестовый/путь",
-        NULL,
-        10,
-        FALSE
-    },
+      "/тестовый/путь", NULL, 10, FALSE },
     { // 4.
-        "/тестовый/путь",
-        "/тестовый/путь",
-        10,
-        TRUE
-    },
+      "/тестовый/путь", "/тестовый/путь", 10, TRUE },
     { // 5.
-        "/тест/овый/путь",
-        "/тестовый/путь",
-        8,
-        TRUE
-    },
+      "/тест/овый/путь", "/тестовый/путь", 8, TRUE },
     { // 6.
-        "/тест/овый/путь",
-        "/тестовый/путь",
-        10,
-        FALSE
-    },
+      "/тест/овый/путь", "/тестовый/путь", 10, FALSE },
     { // 7.
-        "/тестовый/путь",
-        "/тест/овый/путь",
-        10,
-        FALSE
-    },
+      "/тестовый/путь", "/тест/овый/путь", 10, FALSE },
 };
 
 /* @Test(dataSource = "test_path_equal_len_ds") */

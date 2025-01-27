@@ -6,15 +6,15 @@
 #ifndef MC__TTY_INTERNAL_H
 #define MC__TTY_INTERNAL_H
 
-#include "lib/global.h"         // include <glib.h>
+#include "lib/global.h"  // include <glib.h>
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
 /* Taken from S-Lang's slutty.c */
 #ifdef _POSIX_VDISABLE
-#define NULL_VALUE _POSIX_VDISABLE
+#    define NULL_VALUE _POSIX_VDISABLE
 #else
-#define NULL_VALUE 255
+#    define NULL_VALUE 255
 #endif
 
 /*** enums ***************************************************************************************/
@@ -46,4 +46,4 @@ void tty_colorize_area (int y, int x, int rows, int cols, int color);
 
 /*** inline functions ****************************************************************************/
 
-#endif // MC_TTY_INTERNAL_H
+#endif  // MC_TTY_INTERNAL_H

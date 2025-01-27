@@ -187,8 +187,8 @@ mc_search__cond_struct_new_init_glob (const char *charset, mc_search_t *lc_mc_se
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mc_search__run_glob (mc_search_t *lc_mc_search, const void *user_data,
-                     off_t start_search, off_t end_search, gsize *found_len)
+mc_search__run_glob (mc_search_t *lc_mc_search, const void *user_data, off_t start_search,
+                     off_t end_search, gsize *found_len)
 {
     return mc_search__run_regex (lc_mc_search, user_data, start_search, end_search, found_len);
 }

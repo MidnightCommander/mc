@@ -33,11 +33,11 @@
 #include <aspell.h>
 
 #ifdef HAVE_CHARSET
-#include "lib/charsets.h"
+#    include "lib/charsets.h"
 #endif
 #include "lib/strutil.h"
-#include "lib/util.h"           // MC_PTR_FREE()
-#include "lib/tty/tty.h"        // COLS, LINES
+#include "lib/util.h"     // MC_PTR_FREE()
+#include "lib/tty/tty.h"  // COLS, LINES
 
 #include "src/setup.h"
 
@@ -49,11 +49,10 @@
 
 /*** file scope macro definitions ****************************************************************/
 
-#define B_SKIP_WORD (B_USER+3)
-#define B_ADD_WORD (B_USER+4)
+#define B_SKIP_WORD                  (B_USER + 3)
+#define B_ADD_WORD                   (B_USER + 4)
 
-#define ASPELL_FUNCTION_AVAILABLE(f) \
-    g_module_symbol (spell_module, #f, (void *) &mc_##f)
+#define ASPELL_FUNCTION_AVAILABLE(f) g_module_symbol (spell_module, #f, (void *) &mc_##f)
 
 /*** file scope type declarations ****************************************************************/
 
@@ -71,67 +70,65 @@ static GModule *spell_module = NULL;
 static spell_t *global_speller = NULL;
 
 static AspellConfig *(*mc_new_aspell_config) (void);
-static int (*mc_aspell_config_replace) (AspellConfig * ths, const char *key, const char *value);
-static AspellCanHaveError *(*mc_new_aspell_speller) (AspellConfig * config);
-static unsigned int (*mc_aspell_error_number) (const AspellCanHaveError * ths);
-static const char *(*mc_aspell_speller_error_message) (const AspellSpeller * ths);
-static const AspellError *(*mc_aspell_speller_error) (const AspellSpeller * ths);
+static int (*mc_aspell_config_replace) (AspellConfig *ths, const char *key, const char *value);
+static AspellCanHaveError *(*mc_new_aspell_speller) (AspellConfig *config);
+static unsigned int (*mc_aspell_error_number) (const AspellCanHaveError *ths);
+static const char *(*mc_aspell_speller_error_message) (const AspellSpeller *ths);
+static const AspellError *(*mc_aspell_speller_error) (const AspellSpeller *ths);
 
-static AspellSpeller *(*mc_to_aspell_speller) (AspellCanHaveError * obj);
-static int (*mc_aspell_speller_check) (AspellSpeller * ths, const char *word, int word_size);
-static const AspellWordList *(*mc_aspell_speller_suggest) (AspellSpeller * ths,
-                                                           const char *word, int word_size);
-static AspellStringEnumeration *(*mc_aspell_word_list_elements) (const struct AspellWordList * ths);
-static const char *(*mc_aspell_config_retrieve) (AspellConfig * ths, const char *key);
-static void (*mc_delete_aspell_speller) (AspellSpeller * ths);
-static void (*mc_delete_aspell_config) (AspellConfig * ths);
-static void (*mc_delete_aspell_can_have_error) (AspellCanHaveError * ths);
-static const char *(*mc_aspell_error_message) (const AspellCanHaveError * ths);
-static void (*mc_delete_aspell_string_enumeration) (AspellStringEnumeration * ths);
-static AspellDictInfoEnumeration *(*mc_aspell_dict_info_list_elements)
-    (const AspellDictInfoList * ths);
-static AspellDictInfoList *(*mc_get_aspell_dict_info_list) (AspellConfig * config);
-static const AspellDictInfo *(*mc_aspell_dict_info_enumeration_next)
-    (AspellDictInfoEnumeration * ths);
-static const char *(*mc_aspell_string_enumeration_next) (AspellStringEnumeration * ths);
-static void (*mc_delete_aspell_dict_info_enumeration) (AspellDictInfoEnumeration * ths);
-static unsigned int (*mc_aspell_word_list_size) (const AspellWordList * ths);
-static const AspellError *(*mc_aspell_error) (const AspellCanHaveError * ths);
-static int (*mc_aspell_speller_add_to_personal) (AspellSpeller * ths, const char *word,
+static AspellSpeller *(*mc_to_aspell_speller) (AspellCanHaveError *obj);
+static int (*mc_aspell_speller_check) (AspellSpeller *ths, const char *word, int word_size);
+static const AspellWordList *(*mc_aspell_speller_suggest) (AspellSpeller *ths, const char *word,
+                                                           int word_size);
+static AspellStringEnumeration *(*mc_aspell_word_list_elements) (const struct AspellWordList *ths);
+static const char *(*mc_aspell_config_retrieve) (AspellConfig *ths, const char *key);
+static void (*mc_delete_aspell_speller) (AspellSpeller *ths);
+static void (*mc_delete_aspell_config) (AspellConfig *ths);
+static void (*mc_delete_aspell_can_have_error) (AspellCanHaveError *ths);
+static const char *(*mc_aspell_error_message) (const AspellCanHaveError *ths);
+static void (*mc_delete_aspell_string_enumeration) (AspellStringEnumeration *ths);
+static AspellDictInfoEnumeration *(*mc_aspell_dict_info_list_elements) (
+    const AspellDictInfoList *ths);
+static AspellDictInfoList *(*mc_get_aspell_dict_info_list) (AspellConfig *config);
+static const AspellDictInfo *(*mc_aspell_dict_info_enumeration_next) (
+    AspellDictInfoEnumeration *ths);
+static const char *(*mc_aspell_string_enumeration_next) (AspellStringEnumeration *ths);
+static void (*mc_delete_aspell_dict_info_enumeration) (AspellDictInfoEnumeration *ths);
+static unsigned int (*mc_aspell_word_list_size) (const AspellWordList *ths);
+static const AspellError *(*mc_aspell_error) (const AspellCanHaveError *ths);
+static int (*mc_aspell_speller_add_to_personal) (AspellSpeller *ths, const char *word,
                                                  int word_size);
-static int (*mc_aspell_speller_save_all_word_lists) (AspellSpeller * ths);
+static int (*mc_aspell_speller_save_all_word_lists) (AspellSpeller *ths);
 
 static struct
 {
     const char *code;
     const char *name;
-} spell_codes_map[] = {
-    {"br", N_("Breton")},
-    {"cs", N_("Czech")},
-    {"cy", N_("Welsh")},
-    {"da", N_("Danish")},
-    {"de", N_("German")},
-    {"el", N_("Greek")},
-    {"en", N_("English")},
-    {"en_GB", N_("British English")},
-    {"en_CA", N_("Canadian English")},
-    {"en_US", N_("American English")},
-    {"eo", N_("Esperanto")},
-    {"es", N_("Spanish")},
-    {"fo", N_("Faroese")},
-    {"fr", N_("French")},
-    {"it", N_("Italian")},
-    {"nl", N_("Dutch")},
-    {"no", N_("Norwegian")},
-    {"pl", N_("Polish")},
-    {"pt", N_("Portuguese")},
-    {"ro", N_("Romanian")},
-    {"ru", N_("Russian")},
-    {"sk", N_("Slovak")},
-    {"sv", N_("Swedish")},
-    {"uk", N_("Ukrainian")},
-    {NULL, NULL}
-};
+} spell_codes_map[] = { { "br", N_ ("Breton") },
+                        { "cs", N_ ("Czech") },
+                        { "cy", N_ ("Welsh") },
+                        { "da", N_ ("Danish") },
+                        { "de", N_ ("German") },
+                        { "el", N_ ("Greek") },
+                        { "en", N_ ("English") },
+                        { "en_GB", N_ ("British English") },
+                        { "en_CA", N_ ("Canadian English") },
+                        { "en_US", N_ ("American English") },
+                        { "eo", N_ ("Esperanto") },
+                        { "es", N_ ("Spanish") },
+                        { "fo", N_ ("Faroese") },
+                        { "fr", N_ ("French") },
+                        { "it", N_ ("Italian") },
+                        { "nl", N_ ("Dutch") },
+                        { "no", N_ ("Norwegian") },
+                        { "pl", N_ ("Polish") },
+                        { "pt", N_ ("Portuguese") },
+                        { "ro", N_ ("Romanian") },
+                        { "ru", N_ ("Russian") },
+                        { "sk", N_ ("Slovak") },
+                        { "sv", N_ ("Swedish") },
+                        { "uk", N_ ("Ukrainian") },
+                        { NULL, NULL } };
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
@@ -151,7 +148,7 @@ spell_decode_lang (const char *code)
     for (i = 0; spell_codes_map[i].code != NULL; i++)
     {
         if (strcmp (spell_codes_map[i].code, code) == 0)
-            return _(spell_codes_map[i].name);
+            return _ (spell_codes_map[i].name);
     }
 
     return code;
@@ -182,8 +179,7 @@ spell_available (void)
         && ASPELL_FUNCTION_AVAILABLE (aspell_error_number)
         && ASPELL_FUNCTION_AVAILABLE (aspell_speller_error_message)
         && ASPELL_FUNCTION_AVAILABLE (aspell_speller_error)
-        && ASPELL_FUNCTION_AVAILABLE (aspell_error)
-        && ASPELL_FUNCTION_AVAILABLE (to_aspell_speller)
+        && ASPELL_FUNCTION_AVAILABLE (aspell_error) && ASPELL_FUNCTION_AVAILABLE (to_aspell_speller)
         && ASPELL_FUNCTION_AVAILABLE (aspell_speller_check)
         && ASPELL_FUNCTION_AVAILABLE (aspell_speller_suggest)
         && ASPELL_FUNCTION_AVAILABLE (aspell_word_list_elements)
@@ -321,8 +317,8 @@ spell_dialog_spell_suggest_show (WEdit *edit, const char *word, char **new_word,
                                  const GPtrArray *suggest)
 {
 
-    int sug_dlg_h = 14;         // dialog height
-    int sug_dlg_w = 29;         // dialog width
+    int sug_dlg_h = 14;  // dialog height
+    int sug_dlg_w = 29;  // dialog width
     int xpos, ypos;
     char *lang_label;
     char *word_label;
@@ -349,32 +345,32 @@ spell_dialog_spell_suggest_show (WEdit *edit, const char *word, char **new_word,
     if ((edit->curs_row >= ypos - 1) && (edit->curs_row <= ypos + sug_dlg_h - 1))
         ypos -= sug_dlg_h;
 
-    add_btn = button_new (5, 28, B_ADD_WORD, NORMAL_BUTTON, _("&Add word"), 0);
-    replace_btn = button_new (7, 28, B_ENTER, NORMAL_BUTTON, _("&Replace"), 0);
+    add_btn = button_new (5, 28, B_ADD_WORD, NORMAL_BUTTON, _ ("&Add word"), 0);
+    replace_btn = button_new (7, 28, B_ENTER, NORMAL_BUTTON, _ ("&Replace"), 0);
     replace_len = button_get_len (replace_btn);
-    skip_btn = button_new (9, 28, B_SKIP_WORD, NORMAL_BUTTON, _("&Skip"), 0);
+    skip_btn = button_new (9, 28, B_SKIP_WORD, NORMAL_BUTTON, _ ("&Skip"), 0);
     skip_len = button_get_len (skip_btn);
-    cancel_button = button_new (11, 28, B_CANCEL, NORMAL_BUTTON, _("&Cancel"), 0);
+    cancel_button = button_new (11, 28, B_CANCEL, NORMAL_BUTTON, _ ("&Cancel"), 0);
     cancel_len = button_get_len (cancel_button);
 
     max_btn_len = MAX (replace_len, skip_len);
     max_btn_len = MAX (max_btn_len, cancel_len);
 
-    lang_label = g_strdup_printf ("%s: %s", _("Language"), aspell_get_lang ());
-    word_label = g_strdup_printf ("%s: %s", _("Misspelled"), word);
+    lang_label = g_strdup_printf ("%s: %s", _ ("Language"), aspell_get_lang ());
+    word_label = g_strdup_printf ("%s: %s", _ ("Misspelled"), word);
     word_label_len = str_term_width1 (word_label) + 5;
 
     sug_dlg_w += max_btn_len;
     sug_dlg_w = MAX (sug_dlg_w, word_label_len) + 1;
 
     sug_dlg = dlg_create (TRUE, ypos, xpos, sug_dlg_h, sug_dlg_w, WPOS_KEEP_DEFAULT, TRUE,
-                          dialog_colors, NULL, NULL, "[ASpell]", _("Check word"));
+                          dialog_colors, NULL, NULL, "[ASpell]", _ ("Check word"));
     g = GROUP (sug_dlg);
 
     group_add_widget (g, label_new (1, 2, lang_label));
     group_add_widget (g, label_new (3, 2, word_label));
 
-    group_add_widget (g, groupbox_new (4, 2, sug_dlg_h - 5, 25, _("Suggest")));
+    group_add_widget (g, groupbox_new (4, 2, sug_dlg_h - 5, 25, _ ("Suggest")));
 
     sug_list = listbox_new (5, 2, sug_dlg_h - 7, 24, FALSE, NULL);
     for (i = 0; i < suggest->len; i++)
@@ -594,8 +590,8 @@ edit_suggest_current_word (WEdit *edit)
     GString *match_word;
 
     // search start of word to spell check
-    match_word = edit_buffer_get_word_from_pos (&edit->buffer, edit->buffer.curs1, &word_start,
-                                                &cut_len);
+    match_word =
+        edit_buffer_get_word_from_pos (&edit->buffer, edit->buffer.curs1, &word_start, &cut_len);
     word_len = match_word->len;
 
 #ifdef HAVE_CHARSET
@@ -636,8 +632,8 @@ edit_suggest_current_word (WEdit *edit)
                 if (retval == B_ENTER && new_word != NULL)
                 {
 #ifdef HAVE_CHARSET
-                    if (mc_global.source_codepage >= 0 &&
-                        (mc_global.source_codepage != mc_global.display_codepage))
+                    if (mc_global.source_codepage >= 0
+                        && (mc_global.source_codepage != mc_global.display_codepage))
                     {
                         GString *tmp_word;
 
@@ -734,16 +730,16 @@ const char *
 spell_dialog_lang_list_show (const GPtrArray *languages)
 {
 
-    int lang_dlg_h = 12;        // dialog height
-    int lang_dlg_w = 30;        // dialog width
+    int lang_dlg_h = 12;  // dialog height
+    int lang_dlg_w = 30;  // dialog width
     const char *selected_lang = NULL;
     unsigned int i;
     int res;
     Listbox *lang_list;
 
     // Create listbox
-    lang_list = listbox_window_centered_new (-1, -1, lang_dlg_h, lang_dlg_w,
-                                             _("Select language"), "[ASpell]");
+    lang_list = listbox_window_centered_new (-1, -1, lang_dlg_h, lang_dlg_w, _ ("Select language"),
+                                             "[ASpell]");
 
     for (i = 0; i < languages->len; i++)
         LISTBOX_APPEND_TEXT (lang_list, 0, g_ptr_array_index (languages, i), NULL, FALSE);

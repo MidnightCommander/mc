@@ -34,10 +34,10 @@
 #include "lib/mcconfig.h"
 #include "src/vfs/local/local.c"
 
-#define HOME_DIR "/home/testuser"
+#define HOME_DIR   "/home/testuser"
 
-#define CONF_MAIN HOME_DIR PATH_SEP_STR ".config"
-#define CONF_DATA HOME_DIR PATH_SEP_STR ".local" PATH_SEP_STR "share"
+#define CONF_MAIN  HOME_DIR PATH_SEP_STR ".config"
+#define CONF_DATA  HOME_DIR PATH_SEP_STR ".local" PATH_SEP_STR "share"
 #define CONF_CACHE HOME_DIR PATH_SEP_STR ".cache"
 
 /* --------------------------------------------------------------------------------------------- */
@@ -72,104 +72,55 @@ static const struct test_user_config_paths_ds
 {
     const char *input_base_dir;
     const char *input_file_name;
-} test_user_config_paths_ds[] =
-{
+} test_user_config_paths_ds[] = {
     { // 0.
-        CONF_MAIN,
-        MC_CONFIG_FILE
-    },
+      CONF_MAIN, MC_CONFIG_FILE },
     { // 1.
-        CONF_MAIN,
-        MC_FHL_INI_FILE
-    },
+      CONF_MAIN, MC_FHL_INI_FILE },
     { // 2.
-        CONF_MAIN,
-        MC_HOTLIST_FILE
-    },
+      CONF_MAIN, MC_HOTLIST_FILE },
     { // 3.
-        CONF_MAIN,
-        GLOBAL_KEYMAP_FILE
-    },
+      CONF_MAIN, GLOBAL_KEYMAP_FILE },
     { // 4.
-        CONF_MAIN,
-        MC_USERMENU_FILE
-    },
+      CONF_MAIN, MC_USERMENU_FILE },
     { // 5.
-        CONF_DATA,
-        EDIT_SYNTAX_FILE
-    },
+      CONF_DATA, EDIT_SYNTAX_FILE },
     { // 6.
-        CONF_MAIN,
-        EDIT_HOME_MENU
-    },
+      CONF_MAIN, EDIT_HOME_MENU },
     { // 7.
-        CONF_MAIN,
-        MC_PANELS_FILE
-    },
+      CONF_MAIN, MC_PANELS_FILE },
     { // 8.
-        CONF_MAIN,
-        MC_EXT_FILE
-    },
+      CONF_MAIN, MC_EXT_FILE },
     { // 9.
-        CONF_DATA,
-        MC_SKINS_DIR
-    },
+      CONF_DATA, MC_SKINS_DIR },
     { // 10.
-        CONF_DATA,
-        VFS_SHELL_PREFIX
-    },
+      CONF_DATA, VFS_SHELL_PREFIX },
     { // 11.
-        CONF_DATA,
-        MC_ASHRC_FILE
-    },
+      CONF_DATA, MC_ASHRC_FILE },
     { // 12.
-        CONF_DATA,
-        MC_BASHRC_FILE
-    },
+      CONF_DATA, MC_BASHRC_FILE },
     { // 13.
-        CONF_DATA,
-        MC_INPUTRC_FILE
-    },
+      CONF_DATA, MC_INPUTRC_FILE },
     { // 14.
-        CONF_DATA,
-        MC_ZSHRC_FILE
-    },
+      CONF_DATA, MC_ZSHRC_FILE },
     { // 15.
-        CONF_DATA,
-        MC_EXTFS_DIR
-    },
+      CONF_DATA, MC_EXTFS_DIR },
     { // 16.
-        CONF_DATA,
-        MC_HISTORY_FILE
-    },
+      CONF_DATA, MC_HISTORY_FILE },
     { // 17.
-        CONF_DATA,
-        MC_FILEPOS_FILE
-    },
+      CONF_DATA, MC_FILEPOS_FILE },
     { // 18.
-        CONF_DATA,
-        EDIT_HOME_CLIP_FILE
-    },
+      CONF_DATA, EDIT_HOME_CLIP_FILE },
     { // 19.
-        CONF_DATA,
-        MC_MACRO_FILE
-    },
+      CONF_DATA, MC_MACRO_FILE },
     { // 20.
-        CONF_CACHE,
-        "mc.log"
-    },
+      CONF_CACHE, "mc.log" },
     { // 21.
-        CONF_CACHE,
-        MC_TREESTORE_FILE
-    },
+      CONF_CACHE, MC_TREESTORE_FILE },
     { // 22.
-        CONF_CACHE,
-        EDIT_HOME_TEMP_FILE
-    },
+      CONF_CACHE, EDIT_HOME_TEMP_FILE },
     { // 23.
-        CONF_CACHE,
-        EDIT_HOME_BLOCK_FILE
-    },
+      CONF_CACHE, EDIT_HOME_BLOCK_FILE },
 };
 
 /* @Test(dataSource = "test_user_config_paths_ds") */
@@ -185,9 +136,8 @@ START_PARAMETRIZED_TEST (test_user_config_paths, test_user_config_paths_ds)
     {
         char *expected_file_path;
 
-        expected_file_path =
-            g_build_filename (data->input_base_dir, MC_USERCONF_DIR, data->input_file_name,
-                              (char *) NULL);
+        expected_file_path = g_build_filename (data->input_base_dir, MC_USERCONF_DIR,
+                                               data->input_file_name, (char *) NULL);
         mctest_assert_str_eq (actual_result, expected_file_path);
         g_free (expected_file_path);
     }

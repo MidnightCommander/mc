@@ -36,9 +36,9 @@
 #include <stdlib.h>
 
 #include "lib/global.h"
-#include "lib/tty/tty.h"        // COLS
+#include "lib/tty/tty.h"  // COLS
 #include "lib/skin.h"
-#include "lib/strutil.h"        // str_term_width1()
+#include "lib/strutil.h"  // str_term_width1()
 #include "lib/widget.h"
 
 /*** global variables ****************************************************************************/
@@ -56,8 +56,8 @@
 /* --------------------------------------------------------------------------------------------- */
 
 Listbox *
-listbox_window_centered_new (int center_y, int center_x, int lines, int cols,
-                             const char *title, const char *help)
+listbox_window_centered_new (int center_y, int center_x, int lines, int cols, const char *title,
+                             const char *help)
 {
     const int space = 4;
 
@@ -104,9 +104,8 @@ listbox_window_centered_new (int center_y, int center_x, int lines, int cols,
 
     listbox = g_new (Listbox, 1);
 
-    listbox->dlg =
-        dlg_create (TRUE, ypos, xpos, lines + space, cols + space, pos_flags, FALSE, listbox_colors,
-                    NULL, NULL, help, title);
+    listbox->dlg = dlg_create (TRUE, ypos, xpos, lines + space, cols + space, pos_flags, FALSE,
+                               listbox_colors, NULL, NULL, help, title);
 
     listbox->list = listbox_new (2, 2, lines, cols, FALSE, NULL);
     group_add_widget (GROUP (listbox->dlg), listbox->list);

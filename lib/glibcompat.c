@@ -52,7 +52,7 @@
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-#if ! GLIB_CHECK_VERSION (2, 54, 0)
+#if !GLIB_CHECK_VERSION(2, 54, 0)
 /**
  * g_ptr_array_find_with_equal_func: (skip)
  * @haystack: pointer array to be searched
@@ -97,11 +97,11 @@ g_ptr_array_find_with_equal_func (GPtrArray *haystack, gconstpointer needle, GEq
 
     return FALSE;
 }
-#endif // ! GLIB_CHECK_VERSION (2, 54, 0)
+#endif  // ! GLIB_CHECK_VERSION (2, 54, 0)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#if ! GLIB_CHECK_VERSION (2, 63, 3)
+#if !GLIB_CHECK_VERSION(2, 63, 3)
 /**
  * g_clear_slist: (skip)
  * @slist_ptr: (not nullable): a #GSList return location
@@ -162,11 +162,11 @@ g_clear_list (GList **list_ptr, GDestroyNotify destroy)
     }
 }
 
-#endif // ! GLIB_CHECK_VERSION (2, 63, 3)
+#endif  // ! GLIB_CHECK_VERSION (2, 63, 3)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#if ! GLIB_CHECK_VERSION (2, 60, 0)
+#if !GLIB_CHECK_VERSION(2, 60, 0)
 /**
  * g_queue_clear_full:
  * @queue: a pointer to a #GQueue
@@ -187,11 +187,11 @@ g_queue_clear_full (GQueue *queue, GDestroyNotify free_func)
 
     g_queue_clear (queue);
 }
-#endif // ! GLIB_CHECK_VERSION (2, 60, 0)
+#endif  // ! GLIB_CHECK_VERSION (2, 60, 0)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#if ! GLIB_CHECK_VERSION (2, 77, 0)
+#if !GLIB_CHECK_VERSION(2, 77, 0)
 /**
  * g_string_new_take:
  * @init: (nullable): initial text used as the string.
@@ -222,7 +222,7 @@ g_string_new_take (char *init)
 
     return string;
 }
-#endif // ! GLIB_CHECK_VERSION (2, 77, 0)
+#endif  // ! GLIB_CHECK_VERSION (2, 77, 0)
 
 /* --------------------------------------------------------------------------------------------- */
 

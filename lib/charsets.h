@@ -110,4 +110,4 @@ str_convert_to_display (const char *str)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#endif // MC__CHARSETS_H
+#endif  // MC__CHARSETS_H

@@ -91,7 +91,7 @@ radio_execute_cmd (WRadio *r, long command)
 
     case CK_Select:
         r->sel = r->pos;
-        widget_set_state (w, WST_FOCUSED, TRUE);        // Also draws the widget
+        widget_set_state (w, WST_FOCUSED, TRUE);  // Also draws the widget
         send_message (w->owner, w, MSG_NOTIFY, 0, NULL);
         return MSG_HANDLED;
 
@@ -157,22 +157,22 @@ radio_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *dat
         return MSG_HANDLED;
 
     case MSG_DRAW:
+    {
+        gboolean focused;
+
+        focused = widget_get_state (w, WST_FOCUSED);
+
+        for (i = 0; i < r->count; i++)
         {
-            gboolean focused;
-
-            focused = widget_get_state (w, WST_FOCUSED);
-
-            for (i = 0; i < r->count; i++)
-            {
-                widget_selectcolor (w, i == r->pos && focused, FALSE);
-                widget_gotoyx (w, i, 0);
-                tty_draw_hline (w->rect.y + i, w->rect.x, ' ', w->rect.cols);
-                tty_print_string ((r->sel == i) ? "(*) " : "( ) ");
-                hotkey_draw (w, r->texts[i], i == r->pos && focused);
-            }
-
-            return MSG_HANDLED;
+            widget_selectcolor (w, i == r->pos && focused, FALSE);
+            widget_gotoyx (w, i, 0);
+            tty_draw_hline (w->rect.y + i, w->rect.x, ' ', w->rect.cols);
+            tty_print_string ((r->sel == i) ? "(*) " : "( ) ");
+            hotkey_draw (w, r->texts[i], i == r->pos && focused);
         }
+
+        return MSG_HANDLED;
+    }
 
     case MSG_DESTROY:
         for (i = 0; i < r->count; i++)

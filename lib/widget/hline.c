@@ -182,7 +182,7 @@ void
 hline_set_textv (WHLine *l, const char *format, ...)
 {
     va_list args;
-    char buf[BUF_1K];           // FIXME: is it enough?
+    char buf[BUF_1K];  // FIXME: is it enough?
 
     va_start (args, format);
     g_vsnprintf (buf, sizeof (buf), format, args);

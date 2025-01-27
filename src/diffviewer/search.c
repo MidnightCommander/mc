@@ -33,7 +33,7 @@
 #include "lib/tty/key.h"
 #include "lib/widget.h"
 #ifdef HAVE_CHARSET
-#include "lib/charsets.h"
+#    include "lib/charsets.h"
 #endif
 
 #include "src/history.h"
@@ -166,7 +166,7 @@ mcdiffview_do_search_backward (WDiff *dview)
     {
         DIFFLN *p;
 
-        p = (DIFFLN *) & g_array_index (dview->a[dview->ord], DIFFLN, (size_t) ind);
+        p = (DIFFLN *) &g_array_index (dview->a[dview->ord], DIFFLN, (size_t) ind);
         if (p->u.len == 0)
             continue;
 
@@ -181,7 +181,6 @@ mcdiffview_do_search_backward (WDiff *dview)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
 
 static gboolean
 mcdiffview_do_search_forward (WDiff *dview)
@@ -201,7 +200,7 @@ mcdiffview_do_search_forward (WDiff *dview)
     {
         DIFFLN *p;
 
-        p = (DIFFLN *) & g_array_index (dview->a[dview->ord], DIFFLN, ind);
+        p = (DIFFLN *) &g_array_index (dview->a[dview->ord], DIFFLN, ind);
         if (p->u.len == 0)
             continue;
 
@@ -238,7 +237,7 @@ mcdiffview_do_search (WDiff *dview)
     if (!present_result)
     {
         dview->search.last_found_line = -1;
-        query_dialog (_("Search"), _(STR_E_NOTFOUND), D_NORMAL, 1, _("&Dismiss"));
+        query_dialog (_ ("Search"), _ (STR_E_NOTFOUND), D_NORMAL, 1, _ ("&Dismiss"));
     }
 }
 
@@ -251,7 +250,7 @@ dview_search_cmd (WDiff *dview)
 {
     if (dview->dsrc != DATA_SRC_MEM)
     {
-        error_dialog (_("Search"), _("Search is disabled"));
+        error_dialog (_ ("Search"), _ ("Search is disabled"));
         return;
     }
 
@@ -284,7 +283,7 @@ void
 dview_continue_search_cmd (WDiff *dview)
 {
     if (dview->dsrc != DATA_SRC_MEM)
-        error_dialog (_("Search"), _("Search is disabled"));
+        error_dialog (_ ("Search"), _ ("Search is disabled"));
     else if (dview->search.handle == NULL)
         dview_search_cmd (dview);
     else

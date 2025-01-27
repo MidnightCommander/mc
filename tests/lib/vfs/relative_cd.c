@@ -26,7 +26,7 @@
 
 #include "tests/mctest.h"
 
-#include <string.h>             // memset()
+#include <string.h>  // memset()
 
 #include "lib/strutil.h"
 #include "lib/vfs/xdirentry.h"
@@ -35,11 +35,10 @@
 
 #include "src/vfs/local/local.c"
 
-
 static struct vfs_s_subclass vfs_test_subclass1;
 static struct vfs_class *vfs_test_ops1 = VFS_CLASS (&vfs_test_subclass1);
 
-static int test_chdir (const vfs_path_t * vpath);
+static int test_chdir (const vfs_path_t *vpath);
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -109,18 +108,11 @@ static const struct test_relative_cd_ds
     const char *input_string;
     const vfs_path_flag_t input_flags;
     const char *expected_element_path;
-} test_relative_cd_ds[] =
-{
+} test_relative_cd_ds[] = {
     { // 0.
-        "/test1://user:pass@some.host:12345/path/to/dir",
-        VPF_NONE,
-        "path/to/dir"
-    },
+      "/test1://user:pass@some.host:12345/path/to/dir", VPF_NONE, "path/to/dir" },
     { // 1.
-        "some-non-exists-dir",
-        VPF_NO_CANON,
-        "some-non-exists-dir"
-    },
+      "some-non-exists-dir", VPF_NO_CANON, "some-non-exists-dir" },
 };
 
 /* @Test(dataSource = "test_relative_cd_ds") */

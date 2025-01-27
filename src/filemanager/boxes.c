@@ -42,36 +42,36 @@
 #include "lib/global.h"
 
 #include "lib/tty/tty.h"
-#include "lib/tty/color.h"      // tty_use_colors()
-#include "lib/tty/key.h"        // XCTRL and ALT macros
-#include "lib/skin.h"           // INPUT_COLOR
-#include "lib/mcconfig.h"       // Load/save user formats
+#include "lib/tty/color.h"  // tty_use_colors()
+#include "lib/tty/key.h"    // XCTRL and ALT macros
+#include "lib/skin.h"       // INPUT_COLOR
+#include "lib/mcconfig.h"   // Load/save user formats
 #include "lib/strutil.h"
 
 #include "lib/vfs/vfs.h"
 #ifdef ENABLE_VFS_FTP
-#include "src/vfs/ftpfs/ftpfs.h"
-#endif // ENABLE_VFS_FTP
+#    include "src/vfs/ftpfs/ftpfs.h"
+#endif  // ENABLE_VFS_FTP
 
-#include "lib/util.h"           // Q_()
+#include "lib/util.h"  // Q_()
 #include "lib/widget.h"
 
 #include "src/setup.h"
-#include "src/history.h"        // MC_HISTORY_ESC_TIMEOUT
-#include "src/execute.h"        // pause_after_run
+#include "src/history.h"  // MC_HISTORY_ESC_TIMEOUT
+#include "src/execute.h"  // pause_after_run
 #ifdef ENABLE_BACKGROUND
-#include "src/background.h"     // task_list
+#    include "src/background.h"  // task_list
 #endif
 
 #ifdef HAVE_CHARSET
-#include "lib/charsets.h"
-#include "src/selcodepage.h"
+#    include "lib/charsets.h"
+#    include "src/selcodepage.h"
 #endif
 
-#include "command.h"            // For cmdline
+#include "command.h"  // For cmdline
 #include "dir.h"
 #include "tree.h"
-#include "layout.h"             // for get_nth_panel_name proto
+#include "layout.h"  // for get_nth_panel_name proto
 #include "filemanager.h"
 
 #include "boxes.h"
@@ -81,10 +81,10 @@
 /*** file scope macro definitions ****************************************************************/
 
 #ifdef ENABLE_BACKGROUND
-#define B_STOP   (B_USER+1)
-#define B_RESUME (B_USER+2)
-#define B_KILL   (B_USER+3)
-#endif // ENABLE_BACKGROUND
+#    define B_STOP   (B_USER + 1)
+#    define B_RESUME (B_USER + 2)
+#    define B_KILL   (B_USER + 3)
+#endif  // ENABLE_BACKGROUND
 
 /*** file scope type declarations ****************************************************************/
 
@@ -105,18 +105,18 @@ static unsigned long user_mini_status_id, mini_user_format_id;
 
 #ifdef HAVE_CHARSET
 static int new_display_codepage;
-#endif // HAVE_CHARSET
+#endif  // HAVE_CHARSET
 
 #if defined(ENABLE_VFS) && defined(ENABLE_VFS_FTP)
 static unsigned long ftpfs_always_use_proxy_id, ftpfs_proxy_host_id;
-#endif // ENABLE_VFS && ENABLE_VFS_FTP
+#endif  // ENABLE_VFS && ENABLE_VFS_FTP
 
 static GPtrArray *skin_names;
 static gchar *current_skin_name;
 
 #ifdef ENABLE_BACKGROUND
 static WListbox *bg_list = NULL;
-#endif // ENABLE_BACKGROUND
+#endif  // ENABLE_BACKGROUND
 
 static unsigned long shadows_id;
 
@@ -177,7 +177,7 @@ static const gchar *
 skin_name_to_label (const gchar *name)
 {
     if (strcmp (name, "default") == 0)
-        return _("< Default >");
+        return _ ("< Default >");
     return name;
 }
 
@@ -189,16 +189,16 @@ skin_dlg_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *
     switch (msg)
     {
     case MSG_RESIZE:
-        {
-            WDialog *d = DIALOG (w);
-            const WRect *wd = &WIDGET (d->data.p)->rect;
-            WRect r = w->rect;
+    {
+        WDialog *d = DIALOG (w);
+        const WRect *wd = &WIDGET (d->data.p)->rect;
+        WRect r = w->rect;
 
-            r.y = wd->y + (wd->lines - r.lines) / 2;
-            r.x = wd->x + wd->cols / 2;
+        r.y = wd->y + (wd->lines - r.lines) / 2;
+        r.x = wd->x + wd->cols / 2;
 
-            return dlg_default_callback (w, NULL, MSG_RESIZE, 0, &r);
-        }
+        return dlg_default_callback (w, NULL, MSG_RESIZE, 0, &r);
+    }
 
     default:
         return dlg_default_callback (w, sender, msg, parm, data);
@@ -219,9 +219,8 @@ sel_skin_button (WButton *button, int action)
 
     (void) action;
 
-    skin_dlg =
-        dlg_create (TRUE, 0, 0, 13, 24, WPOS_KEEP_DEFAULT, TRUE, dialog_colors, skin_dlg_callback,
-                    NULL, "[Appearance]", _("Skins"));
+    skin_dlg = dlg_create (TRUE, 0, 0, 13, 24, WPOS_KEEP_DEFAULT, TRUE, dialog_colors,
+                           skin_dlg_callback, NULL, "[Appearance]", _ ("Skins"));
     // use Appearance dialog for positioning
     skin_dlg->data.p = WIDGET (button)->owner;
 
@@ -378,13 +377,13 @@ sel_charset_button (WButton *button, int action)
         const char *cpname;
 
         new_display_codepage = new_dcp;
-        cpname = (new_display_codepage == SELECT_CHARSET_OTHER_8BIT) ?
-            _("Other 8 bit") :
-            ((codepage_desc *) g_ptr_array_index (codepages, new_display_codepage))->name;
+        cpname = (new_display_codepage == SELECT_CHARSET_OTHER_8BIT)
+            ? _ ("Other 8 bit")
+            : ((codepage_desc *) g_ptr_array_index (codepages, new_display_codepage))->name;
         if (cpname != NULL)
             mc_global.utf8_display = str_isutf8 (cpname);
         else
-            cpname = _("7-bit ASCII");  // FIXME
+            cpname = _ ("7-bit ASCII");  // FIXME
 
         button_set_text (button, cpname);
         widget_draw (WIDGET (WIDGET (button)->owner));
@@ -392,7 +391,7 @@ sel_charset_button (WButton *button, int action)
 
     return 0;
 }
-#endif // HAVE_CHARSET
+#endif  // HAVE_CHARSET
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -404,19 +403,19 @@ tree_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data
     switch (msg)
     {
     case MSG_RESIZE:
-        {
-            WRect r = w->rect;
-            Widget *bar;
+    {
+        WRect r = w->rect;
+        Widget *bar;
 
-            r.lines = LINES - 9;
-            r.cols = COLS - 20;
-            dlg_default_callback (w, NULL, MSG_RESIZE, 0, &r);
+        r.lines = LINES - 9;
+        r.cols = COLS - 20;
+        dlg_default_callback (w, NULL, MSG_RESIZE, 0, &r);
 
-            bar = WIDGET (buttonbar_find (h));
-            bar->rect.x = 0;
-            bar->rect.y = LINES - 1;
-            return MSG_HANDLED;
-        }
+        bar = WIDGET (buttonbar_find (h));
+        bar->rect.x = 0;
+        bar->rect.y = LINES - 1;
+        return MSG_HANDLED;
+    }
 
     case MSG_ACTION:
         return send_message (find_tree (h), NULL, MSG_ACTION, parm, NULL);
@@ -428,7 +427,7 @@ tree_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data
 
 /* --------------------------------------------------------------------------------------------- */
 
-#if defined(ENABLE_VFS) && defined (ENABLE_VFS_FTP)
+#if defined(ENABLE_VFS) && defined(ENABLE_VFS_FTP)
 static cb_ret_t
 confvfs_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *data)
 {
@@ -452,7 +451,7 @@ confvfs_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *d
         return dlg_default_callback (w, sender, msg, parm, data);
     }
 }
-#endif // ENABLE_VFS && ENABLE_VFS_FTP
+#endif  // ENABLE_VFS && ENABLE_VFS_FTP
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -465,8 +464,8 @@ jobs_fill_listbox (WListbox *list)
 
     if (state_str[0][0] == '\0')
     {
-        state_str[0] = _("Running");
-        state_str[1] = _("Stopped");
+        state_str[0] = _ ("Running");
+        state_str[1] = _ ("Stopped");
     }
 
     for (tl = task_list; tl != NULL; tl = tl->next)
@@ -494,7 +493,7 @@ task_cb (WButton *button, int action)
     // Get this instance information
     listbox_get_current (bg_list, NULL, (void **) &tl);
 
-#ifdef SIGTSTP
+#    ifdef SIGTSTP
     if (action == B_STOP)
     {
         sig = SIGSTOP;
@@ -506,8 +505,8 @@ task_cb (WButton *button, int action)
         tl->state = Task_Running;
     }
     else
-#endif
-    if (action == B_KILL)
+#    endif
+        if (action == B_KILL)
         sig = SIGKILL;
 
     if (sig == SIGKILL)
@@ -522,7 +521,7 @@ task_cb (WButton *button, int action)
 
     return 0;
 }
-#endif // ENABLE_BACKGROUND
+#endif  // ENABLE_BACKGROUND
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
@@ -531,11 +530,7 @@ task_cb (WButton *button, int action)
 void
 configure_box (void)
 {
-    const char *pause_options[] = {
-        N_("&Never"),
-        N_("On dum&b terminals"),
-        N_("Alwa&ys")
-    };
+    const char *pause_options[] = { N_ ("&Never"), N_ ("On dum&b terminals"), N_ ("Alwa&ys") };
 
     int pause_options_num;
 
@@ -686,14 +681,11 @@ panel_options_box (void)
 {
     gboolean simple_swap;
 
-    simple_swap = mc_config_get_bool (mc_global.main_config, CONFIG_PANELS_SECTION,
-                                      "simple_swap", FALSE);
+    simple_swap =
+        mc_config_get_bool (mc_global.main_config, CONFIG_PANELS_SECTION, "simple_swap", FALSE);
     {
-        const char *qsearch_options[] = {
-            N_("Case &insensitive"),
-            N_("Cas&e sensitive"),
-            N_("Use panel sort mo&de")
-        };
+        const char *qsearch_options[] = { N_ ("Case &insensitive"), N_ ("Cas&e sensitive"),
+                                          N_ ("Use panel sort mo&de") };
 
         quick_widget_t quick_widgets[] = {
             // clang-format off
@@ -757,10 +749,11 @@ panel_options_box (void)
 
     if (!panels_options.fast_reload_msg_shown && panels_options.fast_reload)
     {
-        message (D_NORMAL, _("Information"),
-                 _("Using the fast reload option may not reflect the exact\n"
-                   "directory contents. In this case you'll need to do a\n"
-                   "manual reload of the directory. See the man page for\n" "the details."));
+        message (D_NORMAL, _ ("Information"),
+                 _ ("Using the fast reload option may not reflect the exact\n"
+                    "directory contents. In this case you'll need to do a\n"
+                    "manual reload of the directory. See the man page for\n"
+                    "the details."));
         panels_options.fast_reload_msg_shown = TRUE;
     }
 
@@ -791,12 +784,8 @@ panel_listing_box (WPanel *panel, int num, char **userp, char **minip, gboolean 
         char *mini_user_format = NULL;
 
         // Controls whether the array strings have been translated
-        const char *list_formats[LIST_FORMATS] = {
-            N_("&Full file list"),
-            N_("&Brief file list:"),
-            N_("&Long file list"),
-            N_("&User defined:")
-        };
+        const char *list_formats[LIST_FORMATS] = { N_ ("&Full file list"), N_ ("&Brief file list:"),
+                                                   N_ ("&Long file list"), N_ ("&User defined:") };
 
         quick_widget_t quick_widgets[] = {
             // clang-format off
@@ -893,7 +882,7 @@ sort_box (dir_sort_options_t *op, const panel_field_t *sort_field)
     sort_orders_names = panel_get_sortable_fields (&sort_names_num);
 
     for (i = 0; i < sort_names_num; i++)
-        if (strcmp (sort_orders_names[i], _(sort_field->title_hotkey)) == 0)
+        if (strcmp (sort_orders_names[i], _ (sort_field->title_hotkey)) == 0)
         {
             sort_idx = i;
             break;
@@ -944,13 +933,13 @@ confirm_box (void)
 {
     quick_widget_t quick_widgets[] = {
         // TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
-        QUICK_CHECKBOX (Q_("Confirmation|&Delete"), &confirm_delete, NULL),
-        QUICK_CHECKBOX (Q_("Confirmation|O&verwrite"), &confirm_overwrite, NULL),
-        QUICK_CHECKBOX (Q_("Confirmation|&Execute"), &confirm_execute, NULL),
-        QUICK_CHECKBOX (Q_("Confirmation|E&xit"), &confirm_exit, NULL),
-        QUICK_CHECKBOX (Q_("Confirmation|Di&rectory hotlist delete"),
+        QUICK_CHECKBOX (Q_ ("Confirmation|&Delete"), &confirm_delete, NULL),
+        QUICK_CHECKBOX (Q_ ("Confirmation|O&verwrite"), &confirm_overwrite, NULL),
+        QUICK_CHECKBOX (Q_ ("Confirmation|&Execute"), &confirm_execute, NULL),
+        QUICK_CHECKBOX (Q_ ("Confirmation|E&xit"), &confirm_exit, NULL),
+        QUICK_CHECKBOX (Q_ ("Confirmation|Di&rectory hotlist delete"),
                         &confirm_directory_hotlist_delete, NULL),
-        QUICK_CHECKBOX (Q_("Confirmation|&History cleanup"),
+        QUICK_CHECKBOX (Q_ ("Confirmation|&History cleanup"),
                         &mc_global.widget.confirm_history_cleanup, NULL),
         QUICK_BUTTONS_OK_CANCEL,
         QUICK_END
@@ -979,20 +968,13 @@ display_bits_box (void)
     gboolean new_meta;
     int current_mode;
 
-    const char *display_bits_str[] = {
-        N_("&UTF-8 output"),
-        N_("&Full 8 bits output"),
-        N_("&ISO 8859-1"),
-        N_("7 &bits")
-    };
+    const char *display_bits_str[] = { N_ ("&UTF-8 output"), N_ ("&Full 8 bits output"),
+                                       N_ ("&ISO 8859-1"), N_ ("7 &bits") };
 
-    quick_widget_t quick_widgets[] = {
-        QUICK_RADIO (4, display_bits_str, &current_mode, NULL),
-        QUICK_SEPARATOR (TRUE),
-        QUICK_CHECKBOX (N_("F&ull 8 bits input"), &new_meta, NULL),
-        QUICK_BUTTONS_OK_CANCEL,
-        QUICK_END
-    };
+    quick_widget_t quick_widgets[] = { QUICK_RADIO (4, display_bits_str, &current_mode, NULL),
+                                       QUICK_SEPARATOR (TRUE),
+                                       QUICK_CHECKBOX (N_ ("F&ull 8 bits input"), &new_meta, NULL),
+                                       QUICK_BUTTONS_OK_CANCEL, QUICK_END };
 
     WRect r = { -1, -1, 0, 46 };
 
@@ -1018,17 +1000,17 @@ display_bits_box (void)
     {
         mc_global.eight_bit_clean = current_mode < 3;
         mc_global.full_eight_bits = current_mode < 2;
-#ifndef HAVE_SLANG
+#    ifndef HAVE_SLANG
         tty_display_8bit (mc_global.eight_bit_clean);
-#else
+#    else
         tty_display_8bit (mc_global.full_eight_bits);
-#endif
+#    endif
         use_8th_bit_as_meta = !new_meta;
     }
 }
 
 /* --------------------------------------------------------------------------------------------- */
-#else // HAVE_CHARSET
+#else  // HAVE_CHARSET
 
 void
 display_bits_box (void)
@@ -1037,7 +1019,8 @@ display_bits_box (void)
 
     new_display_codepage = mc_global.display_codepage;
 
-    cpname = (new_display_codepage < 0) ? _("Other 8 bit")
+    cpname = (new_display_codepage < 0)
+        ? _ ("Other 8 bit")
         : ((codepage_desc *) g_ptr_array_index (codepages, new_display_codepage))->name;
 
     {
@@ -1084,18 +1067,18 @@ display_bits_box (void)
                 g_free (errmsg);
             }
 
-#ifdef HAVE_SLANG
+#    ifdef HAVE_SLANG
             tty_display_8bit (mc_global.display_codepage != 0 && mc_global.display_codepage != 1);
-#else
+#    else
             tty_display_8bit (mc_global.display_codepage != 0);
-#endif
+#    endif
             use_8th_bit_as_meta = !new_meta;
 
             repaint_screen ();
         }
     }
 }
-#endif // HAVE_CHARSET
+#endif  // HAVE_CHARSET
 
 /* --------------------------------------------------------------------------------------------- */
 /** Show tree in a box, not on a panel */
@@ -1115,7 +1098,7 @@ tree_box (const char *current_dir)
 
     // Create the components
     dlg = dlg_create (TRUE, 0, 0, LINES - 9, COLS - 20, WPOS_CENTER, FALSE, dialog_colors,
-                      tree_callback, NULL, "[Directory Tree]", _("Directory tree"));
+                      tree_callback, NULL, "[Directory Tree]", _ ("Directory tree"));
     g = GROUP (dlg);
     wd = WIDGET (dlg);
 
@@ -1148,43 +1131,43 @@ void
 configure_vfs_box (void)
 {
     char buffer2[BUF_TINY];
-#ifdef ENABLE_VFS_FTP
+#    ifdef ENABLE_VFS_FTP
     char buffer3[BUF_TINY];
 
     g_snprintf (buffer3, sizeof (buffer3), "%i", ftpfs_directory_timeout);
-#endif
+#    endif
 
     g_snprintf (buffer2, sizeof (buffer2), "%i", vfs_timeout);
 
     {
         char *ret_timeout;
-#ifdef ENABLE_VFS_FTP
+#    ifdef ENABLE_VFS_FTP
         char *ret_passwd;
         char *ret_ftp_proxy;
         char *ret_directory_timeout;
-#endif // ENABLE_VFS_FTP
+#    endif  // ENABLE_VFS_FTP
 
         quick_widget_t quick_widgets[] = {
-            QUICK_LABELED_INPUT (N_("Timeout for freeing VFSs (sec):"), input_label_left,
-                                 buffer2, "input-timo-vfs", &ret_timeout, NULL, FALSE, FALSE,
+            QUICK_LABELED_INPUT (N_ ("Timeout for freeing VFSs (sec):"), input_label_left, buffer2,
+                                 "input-timo-vfs", &ret_timeout, NULL, FALSE, FALSE,
                                  INPUT_COMPLETE_NONE),
-#ifdef ENABLE_VFS_FTP
+#    ifdef ENABLE_VFS_FTP
             QUICK_SEPARATOR (TRUE),
-            QUICK_LABELED_INPUT (N_("FTP anonymous password:"), input_label_left,
-                                 ftpfs_anonymous_passwd, "input-passwd", &ret_passwd, NULL,
-                                 FALSE, FALSE, INPUT_COMPLETE_NONE),
-            QUICK_LABELED_INPUT (N_("FTP directory cache timeout (sec):"), input_label_left,
-                                 buffer3, "input-timeout", &ret_directory_timeout, NULL,
-                                 FALSE, FALSE, INPUT_COMPLETE_NONE),
-            QUICK_CHECKBOX (N_("&Always use ftp proxy:"), &ftpfs_always_use_proxy,
+            QUICK_LABELED_INPUT (N_ ("FTP anonymous password:"), input_label_left,
+                                 ftpfs_anonymous_passwd, "input-passwd", &ret_passwd, NULL, FALSE,
+                                 FALSE, INPUT_COMPLETE_NONE),
+            QUICK_LABELED_INPUT (N_ ("FTP directory cache timeout (sec):"), input_label_left,
+                                 buffer3, "input-timeout", &ret_directory_timeout, NULL, FALSE,
+                                 FALSE, INPUT_COMPLETE_NONE),
+            QUICK_CHECKBOX (N_ ("&Always use ftp proxy:"), &ftpfs_always_use_proxy,
                             &ftpfs_always_use_proxy_id),
-            QUICK_INPUT (ftpfs_proxy_host, "input-ftp-proxy", &ret_ftp_proxy,
-                         &ftpfs_proxy_host_id, FALSE, FALSE, INPUT_COMPLETE_HOSTNAMES),
-            QUICK_CHECKBOX (N_("&Use ~/.netrc"), &ftpfs_use_netrc, NULL),
-            QUICK_CHECKBOX (N_("Use &passive mode"), &ftpfs_use_passive_connections, NULL),
-            QUICK_CHECKBOX (N_("Use passive mode over pro&xy"),
+            QUICK_INPUT (ftpfs_proxy_host, "input-ftp-proxy", &ret_ftp_proxy, &ftpfs_proxy_host_id,
+                         FALSE, FALSE, INPUT_COMPLETE_HOSTNAMES),
+            QUICK_CHECKBOX (N_ ("&Use ~/.netrc"), &ftpfs_use_netrc, NULL),
+            QUICK_CHECKBOX (N_ ("Use &passive mode"), &ftpfs_use_passive_connections, NULL),
+            QUICK_CHECKBOX (N_ ("Use passive mode over pro&xy"),
                             &ftpfs_use_passive_connections_over_proxy, NULL),
-#endif // ENABLE_VFS_FTP
+#    endif  // ENABLE_VFS_FTP
             QUICK_BUTTONS_OK_CANCEL,
             QUICK_END
         };
@@ -1196,18 +1179,18 @@ configure_vfs_box (void)
             .title = N_ ("Virtual File System Setting"),
             .help = "[Virtual FS]",
             .widgets = quick_widgets,
-#ifdef ENABLE_VFS_FTP
+#    ifdef ENABLE_VFS_FTP
             .callback = confvfs_callback,
-#else
+#    else
             .callback = NULL,
-#endif
+#    endif
             .mouse_callback = NULL,
         };
 
-#ifdef ENABLE_VFS_FTP
+#    ifdef ENABLE_VFS_FTP
         if (!ftpfs_always_use_proxy)
             quick_widgets[5].state = WST_DISABLED;
-#endif
+#    endif
 
         if (quick_dialog (&qdlg) != B_CANCEL)
         {
@@ -1220,7 +1203,7 @@ configure_vfs_box (void)
 
             if (vfs_timeout < 0 || vfs_timeout > 10000)
                 vfs_timeout = 10;
-#ifdef ENABLE_VFS_FTP
+#    ifdef ENABLE_VFS_FTP
             g_free (ftpfs_anonymous_passwd);
             // cppcheck-suppress uninitvar
             ftpfs_anonymous_passwd = ret_passwd;
@@ -1233,12 +1216,12 @@ configure_vfs_box (void)
             else
                 ftpfs_directory_timeout = atoi (ret_directory_timeout);
             g_free (ret_directory_timeout);
-#endif
+#    endif
         }
     }
 }
 
-#endif // ENABLE_VFS
+#endif  // ENABLE_VFS
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -1249,7 +1232,7 @@ cd_box (const WPanel *panel)
     char *my_str = NULL;
 
     quick_widget_t quick_widgets[] = {
-        QUICK_LABELED_INPUT (N_("cd"), input_label_left, "", "input", &my_str, NULL, FALSE, TRUE,
+        QUICK_LABELED_INPUT (N_ ("cd"), input_label_left, "", "input", &my_str, NULL, FALSE, TRUE,
                              INPUT_COMPLETE_FILENAMES | INPUT_COMPLETE_CD),
         QUICK_END
     };
@@ -1271,19 +1254,18 @@ cd_box (const WPanel *panel)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-symlink_box (const vfs_path_t *existing_vpath, const vfs_path_t *new_vpath,
-             char **ret_existing, char **ret_new)
+symlink_box (const vfs_path_t *existing_vpath, const vfs_path_t *new_vpath, char **ret_existing,
+             char **ret_new)
 {
     quick_widget_t quick_widgets[] = {
-        QUICK_LABELED_INPUT (N_("Existing filename (filename symlink will point to):"),
+        QUICK_LABELED_INPUT (N_ ("Existing filename (filename symlink will point to):"),
                              input_label_above, vfs_path_as_str (existing_vpath), "input-2",
                              ret_existing, NULL, FALSE, FALSE, INPUT_COMPLETE_FILENAMES),
         QUICK_SEPARATOR (FALSE),
-        QUICK_LABELED_INPUT (N_("Symbolic link filename:"), input_label_above,
-                             vfs_path_as_str (new_vpath), "input-1",
-                             ret_new, NULL, FALSE, FALSE, INPUT_COMPLETE_FILENAMES),
-        QUICK_BUTTONS_OK_CANCEL,
-        QUICK_END
+        QUICK_LABELED_INPUT (N_ ("Symbolic link filename:"), input_label_above,
+                             vfs_path_as_str (new_vpath), "input-1", ret_new, NULL, FALSE, FALSE,
+                             INPUT_COMPLETE_FILENAMES),
+        QUICK_BUTTONS_OK_CANCEL, QUICK_END
     };
 
     WRect r = { -1, -1, 0, 64 };
@@ -1317,13 +1299,10 @@ jobs_box (void)
         int value;
         int len;
         bcback_fn callback;
-    }
-    job_but[] = {
-        { N_("&Stop"), NORMAL_BUTTON, B_STOP, 0, task_cb },
-        { N_("&Resume"), NORMAL_BUTTON, B_RESUME, 0, task_cb },
-        { N_("&Kill"), NORMAL_BUTTON, B_KILL, 0, task_cb },
-        { N_("&OK"), DEFPUSH_BUTTON, B_CANCEL, 0, NULL }
-    };
+    } job_but[] = { { N_ ("&Stop"), NORMAL_BUTTON, B_STOP, 0, task_cb },
+                    { N_ ("&Resume"), NORMAL_BUTTON, B_RESUME, 0, task_cb },
+                    { N_ ("&Kill"), NORMAL_BUTTON, B_KILL, 0, task_cb },
+                    { N_ ("&OK"), DEFPUSH_BUTTON, B_CANCEL, 0, NULL } };
 
     size_t i;
     const size_t n_but = G_N_ELEMENTS (job_but);
@@ -1336,9 +1315,9 @@ jobs_box (void)
 
     for (i = 0; i < n_but; i++)
     {
-#ifdef ENABLE_NLS
-        job_but[i].name = _(job_but[i].name);
-#endif // ENABLE_NLS
+#    ifdef ENABLE_NLS
+        job_but[i].name = _ (job_but[i].name);
+#    endif  // ENABLE_NLS
 
         job_but[i].len = str_term_width1 (job_but[i].name) + 3;
         if (job_but[i].flags == DEFPUSH_BUTTON)
@@ -1350,7 +1329,7 @@ jobs_box (void)
     cols = MAX (cols, x + 6);
 
     jobs_dlg = dlg_create (TRUE, 0, 0, lines, cols, WPOS_CENTER, FALSE, dialog_colors, NULL, NULL,
-                           "[Background jobs]", _("Background jobs"));
+                           "[Background jobs]", _ ("Background jobs"));
     g = GROUP (jobs_dlg);
 
     bg_list = listbox_new (2, 2, lines - 6, cols - 6, FALSE, NULL);
@@ -1362,14 +1341,15 @@ jobs_box (void)
     x = (cols - x) / 2;
     for (i = 0; i < n_but; i++)
     {
-        group_add_widget (g, button_new (lines - 3, x, job_but[i].value, job_but[i].flags,
-                                         job_but[i].name, job_but[i].callback));
+        group_add_widget (g,
+                          button_new (lines - 3, x, job_but[i].value, job_but[i].flags,
+                                      job_but[i].name, job_but[i].callback));
         x += job_but[i].len + 1;
     }
 
     (void) dlg_run (jobs_dlg);
     widget_destroy (WIDGET (jobs_dlg));
 }
-#endif // ENABLE_BACKGROUND
+#endif  // ENABLE_BACKGROUND
 
 /* --------------------------------------------------------------------------------------------- */

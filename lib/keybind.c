@@ -33,15 +33,14 @@
 #include <sys/types.h>
 
 #include "lib/global.h"
-#include "lib/tty/key.h"        // KEY_M_
+#include "lib/tty/key.h"  // KEY_M_
 #include "lib/keybind.h"
 
 /*** global variables ****************************************************************************/
 
 /*** file scope macro definitions ****************************************************************/
 
-#define ADD_KEYMAP_NAME(name) \
-    { #name, CK_##name }
+#define ADD_KEYMAP_NAME(name) { #name, CK_##name }
 
 /*** file scope type declarations ****************************************************************/
 
@@ -152,7 +151,7 @@ static name_keymap_t command_names[] = {
     ADD_KEYMAP_NAME (QuitQuiet),
     ADD_KEYMAP_NAME (ExtendedKeyMap),
 
-    // main commands
+// main commands
 #ifdef USE_INTERNAL_EDIT
     ADD_KEYMAP_NAME (EditForceInternal),
 #endif
@@ -265,7 +264,7 @@ static name_keymap_t command_names[] = {
     // tree
     ADD_KEYMAP_NAME (Forget),
 
-#if defined (USE_INTERNAL_EDIT) || defined (USE_DIFF_VIEW)
+#if defined(USE_INTERNAL_EDIT) || defined(USE_DIFF_VIEW)
     ADD_KEYMAP_NAME (ShowNumbers),
 #endif
 
@@ -301,11 +300,11 @@ static name_keymap_t command_names[] = {
     ADD_KEYMAP_NAME (MacroStartStopRecord),
     ADD_KEYMAP_NAME (MacroDelete),
     ADD_KEYMAP_NAME (RepeatStartStopRecord),
-#ifdef HAVE_ASPELL
+#    ifdef HAVE_ASPELL
     ADD_KEYMAP_NAME (SpellCheck),
     ADD_KEYMAP_NAME (SpellCheckCurrentWord),
     ADD_KEYMAP_NAME (SpellCheckSelectLang),
-#endif // HAVE_ASPELL
+#    endif  // HAVE_ASPELL
     ADD_KEYMAP_NAME (BookmarkFlush),
     ADD_KEYMAP_NAME (BookmarkNext),
     ADD_KEYMAP_NAME (BookmarkPrev),
@@ -339,14 +338,14 @@ static name_keymap_t command_names[] = {
     ADD_KEYMAP_NAME (OptionsSaveMode),
     ADD_KEYMAP_NAME (About),
     // An action to run external script from macro
-    {"ExecuteScript", CK_PipeBlock (0)},
+    { "ExecuteScript", CK_PipeBlock (0) },
     ADD_KEYMAP_NAME (WindowMove),
     ADD_KEYMAP_NAME (WindowResize),
     ADD_KEYMAP_NAME (WindowFullscreen),
     ADD_KEYMAP_NAME (WindowList),
     ADD_KEYMAP_NAME (WindowNext),
     ADD_KEYMAP_NAME (WindowPrev),
-#endif // USE_INTERNAL_EDIT
+#endif  // USE_INTERNAL_EDIT
 
     // viewer
     ADD_KEYMAP_NAME (WrapMode),
@@ -375,9 +374,9 @@ static name_keymap_t command_names[] = {
     ADD_KEYMAP_NAME (EditOther),
     ADD_KEYMAP_NAME (Merge),
     ADD_KEYMAP_NAME (MergeOther),
-#endif // USE_DIFF_VIEW
+#endif  // USE_DIFF_VIEW
 
-    {NULL, CK_IgnoreKey}
+    { NULL, CK_IgnoreKey }
 };
 
 static const size_t num_command_names = G_N_ELEMENTS (command_names) - 1;
@@ -404,8 +403,8 @@ sort_command_names (void)
 
     if (!has_been_sorted)
     {
-        qsort (command_names, num_command_names,
-               sizeof (command_names[0]), &name_keymap_comparator);
+        qsort (command_names, num_command_names, sizeof (command_names[0]),
+               &name_keymap_comparator);
         has_been_sorted = TRUE;
     }
 }
@@ -451,8 +450,8 @@ keybind_lookup_action (const char *name)
 
     sort_command_names ();
 
-    res = bsearch (&key, command_names, num_command_names,
-                   sizeof (command_names[0]), name_keymap_comparator);
+    res = bsearch (&key, command_names, num_command_names, sizeof (command_names[0]),
+                   name_keymap_comparator);
 
     return (res != NULL) ? res->val : CK_IgnoreKey;
 }

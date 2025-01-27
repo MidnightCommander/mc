@@ -27,7 +27,7 @@
 
 #include <stdlib.h>
 #include <langinfo.h>
-#include <limits.h>             // MB_LEN_MAX
+#include <limits.h>  // MB_LEN_MAX
 #include <string.h>
 
 #include "lib/global.h"
@@ -73,8 +73,8 @@ str_unichar_iscombiningmark (gunichar uni)
     GUnicodeType type;
 
     type = g_unichar_type (uni);
-    return (type == G_UNICODE_SPACING_MARK)
-        || (type == G_UNICODE_ENCLOSING_MARK) || (type == G_UNICODE_NON_SPACING_MARK);
+    return (type == G_UNICODE_SPACING_MARK) || (type == G_UNICODE_ENCLOSING_MARK)
+        || (type == G_UNICODE_NON_SPACING_MARK);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -498,7 +498,7 @@ str_utf8_make_make_term_form (const char *text, size_t length)
             size_t repl_len;
 
             text++;
-            //actual[0] = '?';
+            // actual[0] = '?';
             repl_len = strlen (replch);
             memcpy (actual, replch, repl_len);
             actual += repl_len;
@@ -1016,8 +1016,8 @@ str_utf8_search_first (const char *text, const char *search, gboolean case_sen)
         match = g_strstr_len (match, -1, search);
         if (match != NULL)
         {
-            if ((!str_utf8_iscombiningmark (match) || (match == deco_text)) &&
-                !str_utf8_iscombiningmark (match + search_len))
+            if ((!str_utf8_iscombiningmark (match) || (match == deco_text))
+                && !str_utf8_iscombiningmark (match + search_len))
             {
                 const char *m = deco_text;
 
@@ -1067,8 +1067,8 @@ str_utf8_search_last (const char *text, const char *search, gboolean case_sen)
         match = g_strrstr_len (deco_text, -1, search);
         if (match != NULL)
         {
-            if ((!str_utf8_iscombiningmark (match) || (match == deco_text)) &&
-                !str_utf8_iscombiningmark (match + search_len))
+            if ((!str_utf8_iscombiningmark (match) || (match == deco_text))
+                && !str_utf8_iscombiningmark (match + search_len))
             {
                 const char *m = deco_text;
 

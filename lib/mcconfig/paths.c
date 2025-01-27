@@ -31,7 +31,7 @@
 #include "lib/global.h"
 #include "lib/fileloc.h"
 #include "lib/vfs/vfs.h"
-#include "lib/util.h"           // unix_error_string()
+#include "lib/util.h"  // unix_error_string()
 
 #include "lib/mcconfig.h"
 
@@ -104,9 +104,9 @@ mc_config_mkdir (const char *directory_name, GError **mcerror)
 {
     mc_return_if_error (mcerror);
 
-    if ((!g_file_test (directory_name, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_DIR)) &&
-        (g_mkdir_with_parents (directory_name, 0700) != 0))
-        mc_propagate_error (mcerror, 0, _("Cannot create %s directory"), directory_name);
+    if ((!g_file_test (directory_name, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_DIR))
+        && (g_mkdir_with_parents (directory_name, 0700) != 0))
+        mc_propagate_error (mcerror, 0, _ ("Cannot create %s directory"), directory_name);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -126,7 +126,7 @@ mc_config_init_one_config_path (const char *path_base, const char *subdir, GErro
             config_dir_present = TRUE;
         else
         {
-            fprintf (stderr, "%s %s\n", _("FATAL: not a directory:"), full_path);
+            fprintf (stderr, "%s %s\n", _ ("FATAL: not a directory:"), full_path);
             exit (EXIT_FAILURE);
         }
     }

@@ -34,7 +34,7 @@
  */
 
 #include <config.h>
-#include <inttypes.h>           // uintmax_t
+#include <inttypes.h>  // uintmax_t
 
 #include "lib/global.h"
 #include "lib/skin.h"
@@ -44,10 +44,10 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 #ifdef HAVE_CHARSET
-#include "lib/charsets.h"
+#    include "lib/charsets.h"
 #endif
 
-#include "src/setup.h"          // panels_options
+#include "src/setup.h"  // panels_options
 #include "src/keymap.h"
 
 #include "internal.h"
@@ -56,7 +56,7 @@
 
 /*** file scope macro definitions ****************************************************************/
 
-#define BUF_TRUNC_LEN 5         // The length of the line displays the file size
+#define BUF_TRUNC_LEN 5  // The length of the line displays the file size
 
 /*** file scope type declarations ****************************************************************/
 
@@ -65,12 +65,7 @@
 /*** file scope variables ************************************************************************/
 
 /* If set, show a ruler */
-static enum ruler_type
-{
-    RULER_NONE,
-    RULER_TOP,
-    RULER_BOTTOM
-} ruler = RULER_NONE;
+static enum ruler_type { RULER_NONE, RULER_TOP, RULER_BOTTOM } ruler = RULER_NONE;
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
@@ -101,26 +96,27 @@ mcview_set_buttonbar (WView *view)
         buttonbar_set_label (b, 4, Q_ ("ButtonBar|Ascii"), keymap, w);
         buttonbar_set_label (b, 6, Q_ ("ButtonBar|Save"), keymap, w);
         buttonbar_set_label (b, 7, Q_ ("ButtonBar|HxSrch"), keymap, w);
-
     }
     else
     {
-        buttonbar_set_label (b, 2, view->mode_flags.wrap ? Q_ ("ButtonBar|UnWrap")
-                             : Q_ ("ButtonBar|Wrap"), keymap, w);
+        buttonbar_set_label (
+            b, 2, view->mode_flags.wrap ? Q_ ("ButtonBar|UnWrap") : Q_ ("ButtonBar|Wrap"), keymap,
+            w);
         buttonbar_set_label (b, 4, Q_ ("ButtonBar|Hex"), keymap, w);
         buttonbar_set_label (b, 6, "", keymap, WIDGET (view));
         buttonbar_set_label (b, 7, Q_ ("ButtonBar|Search"), keymap, w);
     }
 
     buttonbar_set_label (b, 5, Q_ ("ButtonBar|Goto"), keymap, w);
-    buttonbar_set_label (b, 8, view->mode_flags.magic ? Q_ ("ButtonBar|Raw")
-                         : Q_ ("ButtonBar|Parse"), keymap, w);
+    buttonbar_set_label (
+        b, 8, view->mode_flags.magic ? Q_ ("ButtonBar|Raw") : Q_ ("ButtonBar|Parse"), keymap, w);
 
-    if (!mcview_is_in_panel (view))     // don't override some panel buttonbar keys
+    if (!mcview_is_in_panel (view))  // don't override some panel buttonbar keys
     {
         buttonbar_set_label (b, 3, Q_ ("ButtonBar|Quit"), keymap, w);
-        buttonbar_set_label (b, 9, view->mode_flags.nroff ? Q_ ("ButtonBar|Unform")
-                             : Q_ ("ButtonBar|Format"), keymap, w);
+        buttonbar_set_label (
+            b, 9, view->mode_flags.nroff ? Q_ ("ButtonBar|Unform") : Q_ ("ButtonBar|Format"),
+            keymap, w);
         buttonbar_set_label (b, 10, Q_ ("ButtonBar|Quit"), keymap, w);
     }
 }
@@ -160,10 +156,9 @@ mcview_display_status (WView *view)
     tty_setcolor (STATUSBAR_COLOR);
     tty_draw_hline (WIDGET (view)->rect.y + r->y, WIDGET (view)->rect.x + r->x, ' ', r->cols);
 
-    file_label =
-        view->filename_vpath != NULL ?
-        vfs_path_get_last_path_str (view->filename_vpath) : view->command != NULL ?
-        view->command : "";
+    file_label = view->filename_vpath != NULL ? vfs_path_get_last_path_str (view->filename_vpath)
+        : view->command != NULL               ? view->command
+                                              : "";
 
     if (r->cols > 40)
     {
@@ -176,13 +171,13 @@ mcview_display_status (WView *view)
 
             size_trunc_len (buffer, BUF_TRUNC_LEN, mcview_get_filesize (view), 0,
                             panels_options.kilobyte_si);
-            tty_printf ("%9" PRIuMAX "/%s%s %s", (uintmax_t) view->dpy_end,
-                        buffer, mcview_may_still_grow (view) ? "+" : " ",
+            tty_printf ("%9" PRIuMAX "/%s%s %s", (uintmax_t) view->dpy_end, buffer,
+                        mcview_may_still_grow (view) ? "+" : " ",
 #ifdef HAVE_CHARSET
-                        mc_global.source_codepage >= 0 ?
-                        get_codepage_id (mc_global.source_codepage) :
+                        mc_global.source_codepage >= 0 ? get_codepage_id (mc_global.source_codepage)
+                                                       :
 #endif
-                        "");
+                                                       "");
         }
     }
     widget_gotoyx (view, r->y, r->x);
@@ -326,7 +321,7 @@ mcview_update_bytes_per_line (WView *view)
     g_assert (bytes != 0);
 
     view->bytes_per_line = bytes;
-    view->dirty = mcview_max_dirt_limit + 1;    // To force refresh
+    view->dirty = mcview_max_dirt_limit + 1;  // To force refresh
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -334,11 +329,7 @@ mcview_update_bytes_per_line (WView *view)
 void
 mcview_display_toggle_ruler (WView *view)
 {
-    static const enum ruler_type next[3] = {
-        RULER_TOP,
-        RULER_BOTTOM,
-        RULER_NONE
-    };
+    static const enum ruler_type next[3] = { RULER_TOP, RULER_BOTTOM, RULER_NONE };
 
     g_assert ((size_t) ruler < 3);
 

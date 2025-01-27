@@ -31,7 +31,7 @@
 #include "lib/fileloc.h"
 #include "lib/strutil.h"
 #include "lib/skin.h"
-#include "lib/util.h"           // exist_file()
+#include "lib/util.h"  // exist_file()
 
 #include "lib/filehighlight.h"
 
@@ -66,15 +66,10 @@ mc_fhl_parse_get_file_type_id (mc_fhl_t *fhl, const gchar *group_name)
 {
     mc_fhl_filter_t *mc_filter;
 
-    const gchar *types[] = {
-        "FILE", "FILE_EXE",
-        "DIR", "LINK_DIR",
-        "LINK", "HARDLINK", "SYMLINK",
-        "STALE_LINK",
-        "DEVICE", "DEVICE_BLOCK", "DEVICE_CHAR",
-        "SPECIAL", "SPECIAL_SOCKET", "SPECIAL_FIFO", "SPECIAL_DOOR",
-        NULL
-    };
+    const gchar *types[] = { "FILE",           "FILE_EXE",     "DIR",          "LINK_DIR",
+                             "LINK",           "HARDLINK",     "SYMLINK",      "STALE_LINK",
+                             "DEVICE",         "DEVICE_BLOCK", "DEVICE_CHAR",  "SPECIAL",
+                             "SPECIAL_SOCKET", "SPECIAL_FIFO", "SPECIAL_DOOR", NULL };
     int i;
     gchar *param_type;
 

@@ -48,15 +48,15 @@
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 /**
-  * Create new WRect object.
-  *
-  * @param y y-coordinate of left-up corner
-  * @param x x-coordinate of left-up corner
-  * @param lines height
-  * @param cols width
-  *
-  * @return newly allocated WRect object.
-  */
+ * Create new WRect object.
+ *
+ * @param y y-coordinate of left-up corner
+ * @param x x-coordinate of left-up corner
+ * @param lines height
+ * @param cols width
+ *
+ * @return newly allocated WRect object.
+ */
 
 WRect *
 rect_new (int y, int x, int lines, int cols)
@@ -73,14 +73,14 @@ rect_new (int y, int x, int lines, int cols)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
-  * Initialize WRect object.
-  *
-  * @param r WRect object
-  * @param y y-coordinate of left-up corner
-  * @param x x-coordinate of left-up corner
-  * @param lines height
-  * @param cols width
-  */
+ * Initialize WRect object.
+ *
+ * @param r WRect object
+ * @param y y-coordinate of left-up corner
+ * @param x x-coordinate of left-up corner
+ * @param lines height
+ * @param cols width
+ */
 
 void
 rect_init (WRect *r, int y, int x, int lines, int cols)
@@ -93,12 +93,12 @@ rect_init (WRect *r, int y, int x, int lines, int cols)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
-  * Change position of rectangle area.
-  *
-  * @param r WRect object
-  * @param dy y-shift of left-up corner
-  * @param dx x-shift of left-up corner
-  */
+ * Change position of rectangle area.
+ *
+ * @param r WRect object
+ * @param dy y-shift of left-up corner
+ * @param dx x-shift of left-up corner
+ */
 
 void
 rect_move (WRect *r, int dy, int dx)
@@ -109,12 +109,12 @@ rect_move (WRect *r, int dy, int dx)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
-  * Change size of rectangle area keeping it's position.
-  *
-  * @param r WRect object
-  * @param dl change size value of height
-  * @param dc change size value of width
-  */
+ * Change size of rectangle area keeping it's position.
+ *
+ * @param r WRect object
+ * @param dl change size value of height
+ * @param dc change size value of width
+ */
 
 void
 rect_resize (WRect *r, int dl, int dc)
@@ -125,16 +125,16 @@ rect_resize (WRect *r, int dl, int dc)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
-  * Change size of rectangle area keeping it's center.
-  *
-  * @param r WRect object
-  * @param dl change size value of y-coordinate and height
-  *           Positive value means move up and increase height.
-  *           Negative value means move down and decrease height.
-  * @param dc change size value of x-coordinate and width
-  *           Positive value means move left and increase width.
-  *           Negative value means move right and decrease width.
-  */
+ * Change size of rectangle area keeping it's center.
+ *
+ * @param r WRect object
+ * @param dl change size value of y-coordinate and height
+ *           Positive value means move up and increase height.
+ *           Negative value means move down and decrease height.
+ * @param dc change size value of x-coordinate and width
+ *           Positive value means move left and increase width.
+ *           Negative value means move right and decrease width.
+ */
 
 void
 rect_grow (WRect *r, int dl, int dc)
@@ -147,14 +147,14 @@ rect_grow (WRect *r, int dl, int dc)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
-  * Calculates the intersection of two rectangle areas.
-  * The resulting rectangle is the largest rectangle which contains intersection of rectangle areas.
-  *
-  * @param r first WRect object
-  * @param r1 second WRect object
-  *
-  * The resulting rectangle is stored in r.
-  */
+ * Calculates the intersection of two rectangle areas.
+ * The resulting rectangle is the largest rectangle which contains intersection of rectangle areas.
+ *
+ * @param r first WRect object
+ * @param r1 second WRect object
+ *
+ * The resulting rectangle is stored in r.
+ */
 
 void
 rect_intersect (WRect *r, const WRect *r1)
@@ -183,14 +183,14 @@ rect_intersect (WRect *r, const WRect *r1)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
-  * Calculates the union of two rectangle areas.
-  * The resulting rectangle is the largest rectangle which contains both rectangle areas.
-  *
-  * @param r first WRect object
-  * @param r1 second WRect object
-  *
-  * The resulting rectangle is stored in r.
-  */
+ * Calculates the union of two rectangle areas.
+ * The resulting rectangle is the largest rectangle which contains both rectangle areas.
+ *
+ * @param r first WRect object
+ * @param r1 second WRect object
+ *
+ * The resulting rectangle is stored in r.
+ */
 
 void
 rect_union (WRect *r, const WRect *r1)
@@ -219,13 +219,13 @@ rect_union (WRect *r, const WRect *r1)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
-  * Check whether two rectangle areas are overlapped or not.
-  *
-  * @param r1 WRect object
-  * @param r2 WRect object
-  *
-  * @return TRUE if rectangle areas are overlapped, FALSE otherwise.
-  */
+ * Check whether two rectangle areas are overlapped or not.
+ *
+ * @param r1 WRect object
+ * @param r2 WRect object
+ *
+ * @return TRUE if rectangle areas are overlapped, FALSE otherwise.
+ */
 
 gboolean
 rects_are_overlapped (const WRect *r1, const WRect *r2)
@@ -236,13 +236,13 @@ rects_are_overlapped (const WRect *r1, const WRect *r2)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
-  * Check whether two rectangle areas are equal or not.
-  *
-  * @param r1 WRect object
-  * @param r2 WRect object
-  *
-  * @return TRUE if rectangle areas are equal, FALSE otherwise.
-  */
+ * Check whether two rectangle areas are equal or not.
+ *
+ * @param r1 WRect object
+ * @param r2 WRect object
+ *
+ * @return TRUE if rectangle areas are equal, FALSE otherwise.
+ */
 
 gboolean
 rects_are_equal (const WRect *r1, const WRect *r2)

@@ -32,7 +32,7 @@
 
 /* --------------------------------------------------------------------------------------------- */
 
-void complete_engine_fill_completions (WInput * in);
+void complete_engine_fill_completions (WInput *in);
 GPtrArray *try_complete (char *text, int *lc_start, int *lc_end, input_complete_t flags);
 
 /* --------------------------------------------------------------------------------------------- */
@@ -106,85 +106,18 @@ static const struct test_complete_engine_fill_completions_ds
     const input_complete_t input_completion_flags;
     int expected_start;
     int expected_end;
-} test_complete_engine_fill_completions_ds[] =
-{
-    {
-        "string",
-        3,
-        INPUT_COMPLETE_NONE,
-        0,
-        3
-    },
-    {
-        "some string",
-        7,
-        INPUT_COMPLETE_NONE,
-        0,
-        7
-    },
-    {
-        "some string",
-        7,
-        INPUT_COMPLETE_SHELL_ESC,
-        5,
-        7
-    },
-    {
-        "some\\ string111",
-        9,
-        INPUT_COMPLETE_SHELL_ESC,
-        0,
-        9
-    },
-    {
-        "some\\\tstring111",
-        9,
-        INPUT_COMPLETE_SHELL_ESC,
-        0,
-        9
-    },
-    {
-        "some\tstring",
-        7,
-        INPUT_COMPLETE_NONE,
-        5,
-        7
-    },
-    {
-        "some;string",
-        7,
-        INPUT_COMPLETE_NONE,
-        5,
-        7
-    },
-    {
-        "some|string",
-        7,
-        INPUT_COMPLETE_NONE,
-        5,
-        7
-    },
-    {
-        "some<string",
-        7,
-        INPUT_COMPLETE_NONE,
-        5,
-        7
-    },
-    {
-        "some>string",
-        7,
-        INPUT_COMPLETE_NONE,
-        5,
-        7
-    },
-    {
-        "some!@#$%^&*()_\\+~`\"',./?:string",
-        30,
-        INPUT_COMPLETE_NONE,
-        0,
-        30
-    },
+} test_complete_engine_fill_completions_ds[] = {
+    { "string", 3, INPUT_COMPLETE_NONE, 0, 3 },
+    { "some string", 7, INPUT_COMPLETE_NONE, 0, 7 },
+    { "some string", 7, INPUT_COMPLETE_SHELL_ESC, 5, 7 },
+    { "some\\ string111", 9, INPUT_COMPLETE_SHELL_ESC, 0, 9 },
+    { "some\\\tstring111", 9, INPUT_COMPLETE_SHELL_ESC, 0, 9 },
+    { "some\tstring", 7, INPUT_COMPLETE_NONE, 5, 7 },
+    { "some;string", 7, INPUT_COMPLETE_NONE, 5, 7 },
+    { "some|string", 7, INPUT_COMPLETE_NONE, 5, 7 },
+    { "some<string", 7, INPUT_COMPLETE_NONE, 5, 7 },
+    { "some>string", 7, INPUT_COMPLETE_NONE, 5, 7 },
+    { "some!@#$%^&*()_\\+~`\"',./?:string", 30, INPUT_COMPLETE_NONE, 0, 30 },
 };
 
 /* @Test(dataSource = "test_complete_engine_fill_completions_ds") */

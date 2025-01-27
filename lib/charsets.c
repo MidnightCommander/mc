@@ -34,9 +34,9 @@
 #include <string.h>
 
 #include "lib/global.h"
-#include "lib/strutil.h"        // utf-8 functions
+#include "lib/strutil.h"  // utf-8 functions
 #include "lib/fileloc.h"
-#include "lib/util.h"           // whitespace()
+#include "lib/util.h"  // whitespace()
 
 #include "lib/charsets.h"
 
@@ -52,7 +52,7 @@ const char *cp_source = NULL;
 
 /*** file scope macro definitions ****************************************************************/
 
-#define UNKNCHAR '\001'
+#define UNKNCHAR   '\001'
 
 #define OTHER_8BIT "Other_8_bit"
 
@@ -172,7 +172,7 @@ load_codepages_list_from_file (GPtrArray **list, const char *fname)
         g_free (default_codepage);
     }
 
-  fail:
+fail:
     fclose (f);
 }
 
@@ -216,10 +216,10 @@ load_codepages_list (void)
     if (codepages == NULL)
     {
         // files are not found, add default codepage
-        fprintf (stderr, "%s\n", _("Warning: cannot load codepages list"));
+        fprintf (stderr, "%s\n", _ ("Warning: cannot load codepages list"));
 
         codepages = g_ptr_array_new_with_free_func (free_codepage_desc);
-        g_ptr_array_add (codepages, new_codepage_desc (DEFAULT_CHARSET, _("7-bit ASCII")));
+        g_ptr_array_add (codepages, new_codepage_desc (DEFAULT_CHARSET, _ ("7-bit ASCII")));
     }
 }
 
@@ -313,7 +313,7 @@ init_translation_table (int cpsource, int cpdisplay)
 
     cd = g_iconv_open (cp_display, cp_source);
     if (cd == INVALID_CONV)
-        return g_strdup_printf (_("Cannot translate from %s to %s"), cp_source, cp_display);
+        return g_strdup_printf (_ ("Cannot translate from %s to %s"), cp_source, cp_display);
 
     for (i = 128; i <= 255; ++i)
         conv_displ[i] = translate_character (cd, i);
@@ -324,7 +324,7 @@ init_translation_table (int cpsource, int cpdisplay)
 
     cd = g_iconv_open (cp_source, cp_display);
     if (cd == INVALID_CONV)
-        return g_strdup_printf (_("Cannot translate from %s to %s"), cp_display, cp_source);
+        return g_strdup_printf (_ ("Cannot translate from %s to %s"), cp_display, cp_source);
 
     for (i = 128; i <= 255; ++i)
     {
@@ -489,13 +489,13 @@ convert_from_8bit_to_utf_c (char input_char, GIConv conv)
     switch (str_translate_char (conv, (char *) str, -1, (char *) buf_ch, sizeof (buf_ch)))
     {
     case ESTR_SUCCESS:
-        {
-            int res;
+    {
+        int res;
 
-            res = g_utf8_get_char_validated ((char *) buf_ch, -1);
-            ch = res >= 0 ? res : buf_ch[0];
-            break;
-        }
+        res = g_utf8_get_char_validated ((char *) buf_ch, -1);
+        ch = res >= 0 ? res : buf_ch[0];
+        break;
+    }
     case ESTR_PROBLEM:
     case ESTR_FAILURE:
     default:

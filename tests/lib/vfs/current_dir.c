@@ -27,7 +27,7 @@
 
 #include "tests/mctest.h"
 
-#include <string.h>             // memset()
+#include <string.h>  // memset()
 
 #include "lib/global.h"
 #include "lib/strutil.h"
@@ -87,71 +87,27 @@ static const struct test_cd_ds
     const vfs_flags_t input_class_flags;
 
     const char *expected_cd_path;
-} test_cd_ds[] =
-{
+} test_cd_ds[] = {
     // 0.
-    {
-        "/",
-        "/dev/some.file/test://",
-        VFSF_NOLINKS,
-        "/dev/some.file/test://"
-    },
+    { "/", "/dev/some.file/test://", VFSF_NOLINKS, "/dev/some.file/test://" },
     // 1.
-    {
-        "/",
-        "/dev/some.file/test://bla-bla",
-        VFSF_NOLINKS,
-        "/dev/some.file/test://bla-bla"
-    },
+    { "/", "/dev/some.file/test://bla-bla", VFSF_NOLINKS, "/dev/some.file/test://bla-bla" },
     // 2.
-    {
-        "/dev/some.file/test://bla-bla",
-        "..",
-        VFSF_NOLINKS,
-        "/dev/some.file/test://"
-    },
+    { "/dev/some.file/test://bla-bla", "..", VFSF_NOLINKS, "/dev/some.file/test://" },
     // 3.
-    {
-        "/dev/some.file/test://",
-        "..",
-        VFSF_NOLINKS,
-        "/dev"
-    },
+    { "/dev/some.file/test://", "..", VFSF_NOLINKS, "/dev" },
     // 4.
-    {
-        "/dev",
-        "..",
-        VFSF_NOLINKS,
-        "/"
-    },
+    { "/dev", "..", VFSF_NOLINKS, "/" },
     // 5.
-    {
-        "/",
-        "..",
-        VFSF_NOLINKS,
-        "/"
-    },
+    { "/", "..", VFSF_NOLINKS, "/" },
     // 6.
-    {
-        "/",
-        "/test://user:pass@host.net/path",
-        VFSF_NOLINKS | VFSF_REMOTE,
-        "/test://user:pass@host.net/path"
-    },
+    { "/", "/test://user:pass@host.net/path", VFSF_NOLINKS | VFSF_REMOTE,
+      "/test://user:pass@host.net/path" },
     // 7.
-    {
-        "/test://user:pass@host.net/path",
-        "..",
-        VFSF_NOLINKS | VFSF_REMOTE,
-        "/test://user:pass@host.net/"
-    },
+    { "/test://user:pass@host.net/path", "..", VFSF_NOLINKS | VFSF_REMOTE,
+      "/test://user:pass@host.net/" },
     // 8.
-    {
-        "/test://user:pass@host.net/",
-        "..",
-        VFSF_NOLINKS | VFSF_REMOTE,
-        "/"
-    },
+    { "/test://user:pass@host.net/", "..", VFSF_NOLINKS | VFSF_REMOTE, "/" },
 };
 
 /* @Test(dataSource = "test_cd_ds") */

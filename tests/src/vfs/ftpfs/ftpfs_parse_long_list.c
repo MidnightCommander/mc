@@ -87,15 +87,10 @@ read_list (const char *fname)
 static const struct test_ftpfs_parse_long_list_ds
 {
     const char *name;
-} test_ftpfs_parse_long_list_ds[] =
-{
-    { // 0. Ticket #2841
-        "aix"
-    },
-    { // 1. Ticket #3174
-        "ms"
-    }
-};
+} test_ftpfs_parse_long_list_ds[] = { { // 0. Ticket #2841
+                                        "aix" },
+                                      { // 1. Ticket #3174
+                                        "ms" } };
 
 /* @Test(dataSource = "test_ftpfs_parse_long_list_ds") */
 START_PARAMETRIZED_TEST (test_ftpfs_parse_long_list, test_ftpfs_parse_long_list_ds)
@@ -120,8 +115,7 @@ START_PARAMETRIZED_TEST (test_ftpfs_parse_long_list, test_ftpfs_parse_long_list_
     parsed = ftpfs_parse_long_list (me, super->root, input, &err_count);
 
     // then
-    for (parsed_iter = parsed, output_iter = output;
-         parsed_iter != NULL && output_iter != NULL;
+    for (parsed_iter = parsed, output_iter = output; parsed_iter != NULL && output_iter != NULL;
          parsed_iter = g_slist_next (parsed_iter), output_iter = g_slist_next (output_iter))
         mctest_assert_str_eq (VFS_ENTRY (parsed_iter->data)->name, (char *) output_iter->data);
 

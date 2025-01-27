@@ -36,7 +36,7 @@ static sigset_t *sigemptyset_set__captured;
 static int sigemptyset__return_value = 0;
 
 #ifdef sigemptyset
-#undef sigemptyset
+#    undef sigemptyset
 #endif
 
 /* @Mock */
@@ -229,70 +229,80 @@ execvp__deinit (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#define VERIFY_SIGACTION__ACT_IGNORED(_pntr) { \
-    struct sigaction *_act = (struct sigaction *) _pntr; \
-    mctest_assert_ptr_eq (_act->sa_handler, SIG_IGN); \
-    ck_assert_int_eq (_act->sa_flags, 0); \
-}
+#define VERIFY_SIGACTION__ACT_IGNORED(_pntr)                                                       \
+    {                                                                                              \
+        struct sigaction *_act = (struct sigaction *) _pntr;                                       \
+        mctest_assert_ptr_eq (_act->sa_handler, SIG_IGN);                                          \
+        ck_assert_int_eq (_act->sa_flags, 0);                                                      \
+    }
 
-#define VERIFY_SIGACTION__IS_RESTORED(oldact_idx, act_idx) { \
-    struct sigaction *_oldact = (struct sigaction *) g_ptr_array_index(sigaction_oldact__captured, oldact_idx); \
-    struct sigaction *_act = (struct sigaction *) g_ptr_array_index(sigaction_act__captured, act_idx); \
-    ck_assert_msg (memcmp(_oldact, _act, sizeof(struct sigaction)) == 0, \
-        "sigaction(): oldact[%d] should be equals to act[%d]", oldact_idx, act_idx); \
-}
+#define VERIFY_SIGACTION__IS_RESTORED(oldact_idx, act_idx)                                         \
+    {                                                                                              \
+        struct sigaction *_oldact =                                                                \
+            (struct sigaction *) g_ptr_array_index (sigaction_oldact__captured, oldact_idx);       \
+        struct sigaction *_act =                                                                   \
+            (struct sigaction *) g_ptr_array_index (sigaction_act__captured, act_idx);             \
+        ck_assert_msg (memcmp (_oldact, _act, sizeof (struct sigaction)) == 0,                     \
+                       "sigaction(): oldact[%d] should be equals to act[%d]", oldact_idx,          \
+                       act_idx);                                                                   \
+    }
 
 /* @Verify */
-#define VERIFY_SIGACTION_CALLS() { \
-    ck_assert_int_eq (sigaction_signum__captured->len, 6); \
-\
-    ck_assert_int_eq (*((int *) g_ptr_array_index(sigaction_signum__captured, 0)), SIGINT); \
-    ck_assert_int_eq (*((int *) g_ptr_array_index(sigaction_signum__captured, 1)), SIGQUIT); \
-    ck_assert_int_eq (*((int *) g_ptr_array_index(sigaction_signum__captured, 2)), SIGTSTP); \
-    ck_assert_int_eq (*((int *) g_ptr_array_index(sigaction_signum__captured, 3)), SIGINT); \
-    ck_assert_int_eq (*((int *) g_ptr_array_index(sigaction_signum__captured, 4)), SIGQUIT); \
-    ck_assert_int_eq (*((int *) g_ptr_array_index(sigaction_signum__captured, 5)), SIGTSTP); \
-\
-    VERIFY_SIGACTION__ACT_IGNORED(g_ptr_array_index(sigaction_act__captured, 0)); \
-    VERIFY_SIGACTION__ACT_IGNORED(g_ptr_array_index(sigaction_act__captured, 1)); \
-    { \
-        struct sigaction *_act  = g_ptr_array_index(sigaction_act__captured, 2); \
-        ck_assert_msg (memcmp (_act, &startup_handler, sizeof(struct sigaction)) == 0, \
-            "The 'act' in third call to sigaction() should be equals to startup_handler"); \
-    } \
-\
-    VERIFY_SIGACTION__IS_RESTORED (0, 3); \
-    VERIFY_SIGACTION__IS_RESTORED (1, 4); \
-    VERIFY_SIGACTION__IS_RESTORED (2, 5); \
-\
-    ck_assert_msg (g_ptr_array_index(sigaction_oldact__captured, 3) == NULL, \
-        "oldact in fourth call to sigaction() should be NULL"); \
-    ck_assert_msg (g_ptr_array_index(sigaction_oldact__captured, 4) == NULL, \
-        "oldact in fifth call to sigaction() should be NULL"); \
-    ck_assert_msg (g_ptr_array_index(sigaction_oldact__captured, 5) == NULL, \
-        "oldact in sixth call to sigaction() should be NULL"); \
-}
+#define VERIFY_SIGACTION_CALLS()                                                                   \
+    {                                                                                              \
+        ck_assert_int_eq (sigaction_signum__captured->len, 6);                                     \
+                                                                                                   \
+        ck_assert_int_eq (*((int *) g_ptr_array_index (sigaction_signum__captured, 0)), SIGINT);   \
+        ck_assert_int_eq (*((int *) g_ptr_array_index (sigaction_signum__captured, 1)), SIGQUIT);  \
+        ck_assert_int_eq (*((int *) g_ptr_array_index (sigaction_signum__captured, 2)), SIGTSTP);  \
+        ck_assert_int_eq (*((int *) g_ptr_array_index (sigaction_signum__captured, 3)), SIGINT);   \
+        ck_assert_int_eq (*((int *) g_ptr_array_index (sigaction_signum__captured, 4)), SIGQUIT);  \
+        ck_assert_int_eq (*((int *) g_ptr_array_index (sigaction_signum__captured, 5)), SIGTSTP);  \
+                                                                                                   \
+        VERIFY_SIGACTION__ACT_IGNORED (g_ptr_array_index (sigaction_act__captured, 0));            \
+        VERIFY_SIGACTION__ACT_IGNORED (g_ptr_array_index (sigaction_act__captured, 1));            \
+        {                                                                                          \
+            struct sigaction *_act = g_ptr_array_index (sigaction_act__captured, 2);               \
+            ck_assert_msg (                                                                        \
+                memcmp (_act, &startup_handler, sizeof (struct sigaction)) == 0,                   \
+                "The 'act' in third call to sigaction() should be equals to startup_handler");     \
+        }                                                                                          \
+                                                                                                   \
+        VERIFY_SIGACTION__IS_RESTORED (0, 3);                                                      \
+        VERIFY_SIGACTION__IS_RESTORED (1, 4);                                                      \
+        VERIFY_SIGACTION__IS_RESTORED (2, 5);                                                      \
+                                                                                                   \
+        ck_assert_msg (g_ptr_array_index (sigaction_oldact__captured, 3) == NULL,                  \
+                       "oldact in fourth call to sigaction() should be NULL");                     \
+        ck_assert_msg (g_ptr_array_index (sigaction_oldact__captured, 4) == NULL,                  \
+                       "oldact in fifth call to sigaction() should be NULL");                      \
+        ck_assert_msg (g_ptr_array_index (sigaction_oldact__captured, 5) == NULL,                  \
+                       "oldact in sixth call to sigaction() should be NULL");                      \
+    }
 
 /* --------------------------------------------------------------------------------------------- */
 
-#define VERIFY_SIGNAL_HANDLER_IS_SIG_DFL(_idx) { \
-    sighandler_t *tmp_handler = (sighandler_t *) g_ptr_array_index(signal_handler__captured, _idx);\
-    mctest_assert_ptr_eq (tmp_handler, (sighandler_t *) SIG_DFL); \
-}
+#define VERIFY_SIGNAL_HANDLER_IS_SIG_DFL(_idx)                                                     \
+    {                                                                                              \
+        sighandler_t *tmp_handler =                                                                \
+            (sighandler_t *) g_ptr_array_index (signal_handler__captured, _idx);                   \
+        mctest_assert_ptr_eq (tmp_handler, (sighandler_t *) SIG_DFL);                              \
+    }
 
 /* @Verify */
-#define VERIFY_SIGNAL_CALLS() { \
-    ck_assert_int_eq (signal_signum__captured->len, 4); \
-    ck_assert_int_eq (*((int *) g_ptr_array_index(signal_signum__captured, 0)), SIGINT); \
-    ck_assert_int_eq (*((int *) g_ptr_array_index(signal_signum__captured, 1)), SIGQUIT); \
-    ck_assert_int_eq (*((int *) g_ptr_array_index(signal_signum__captured, 2)), SIGTSTP); \
-    ck_assert_int_eq (*((int *) g_ptr_array_index(signal_signum__captured, 3)), SIGCHLD); \
-    \
-    VERIFY_SIGNAL_HANDLER_IS_SIG_DFL (0); \
-    VERIFY_SIGNAL_HANDLER_IS_SIG_DFL (1); \
-    VERIFY_SIGNAL_HANDLER_IS_SIG_DFL (2); \
-    VERIFY_SIGNAL_HANDLER_IS_SIG_DFL (3); \
-}
+#define VERIFY_SIGNAL_CALLS()                                                                      \
+    {                                                                                              \
+        ck_assert_int_eq (signal_signum__captured->len, 4);                                        \
+        ck_assert_int_eq (*((int *) g_ptr_array_index (signal_signum__captured, 0)), SIGINT);      \
+        ck_assert_int_eq (*((int *) g_ptr_array_index (signal_signum__captured, 1)), SIGQUIT);     \
+        ck_assert_int_eq (*((int *) g_ptr_array_index (signal_signum__captured, 2)), SIGTSTP);     \
+        ck_assert_int_eq (*((int *) g_ptr_array_index (signal_signum__captured, 3)), SIGCHLD);     \
+                                                                                                   \
+        VERIFY_SIGNAL_HANDLER_IS_SIG_DFL (0);                                                      \
+        VERIFY_SIGNAL_HANDLER_IS_SIG_DFL (1);                                                      \
+        VERIFY_SIGNAL_HANDLER_IS_SIG_DFL (2);                                                      \
+        VERIFY_SIGNAL_HANDLER_IS_SIG_DFL (3);                                                      \
+    }
 
 /* --------------------------------------------------------------------------------------------- */
 

@@ -42,16 +42,16 @@
 #include "lib/vfs/vfs.h"
 #include "lib/mcconfig.h"
 #include "lib/util.h"
-#include "lib/strutil.h"        // str_replace_all_substrings()
+#include "lib/strutil.h"  // str_replace_all_substrings()
 #include "lib/widget.h"
 
 #include "filemanager/filemanager.h"
-#include "filemanager/layout.h" // use_dash()
+#include "filemanager/layout.h"  // use_dash()
 #include "consaver/cons.saver.h"
 #ifdef ENABLE_SUBSHELL
-#include "subshell/subshell.h"
+#    include "subshell/subshell.h"
 #endif
-#include "setup.h"              // clear_before_exec
+#include "setup.h"  // clear_before_exec
 
 #include "execute.h"
 
@@ -68,7 +68,7 @@ int pause_after_run = pause_on_dumb_terminals;
 MC_MOCKABLE void do_execute (const char *shell, const char *command, int flags);
 MC_MOCKABLE void do_executev (const char *shell, int flags, char *const argv[]);
 MC_MOCKABLE char *execute_get_external_cmd_opts_from_config (const char *command,
-                                                             const vfs_path_t * filename_vpath,
+                                                             const vfs_path_t *filename_vpath,
                                                              long start_line);
 
 /*** file scope variables ************************************************************************/
@@ -134,13 +134,13 @@ static void
 do_possible_cd (const vfs_path_t *new_dir_vpath)
 {
     if (!panel_cd (current_panel, new_dir_vpath, cd_exact))
-        message (D_ERROR, _("Warning"), "%s",
-                 _("The Commander can't change to the directory that\n"
-                   "the subshell claims you are in. Perhaps you have\n"
-                   "deleted your working directory, or given yourself\n"
-                   "extra access permissions with the \"su\" command?"));
+        message (D_ERROR, _ ("Warning"), "%s",
+                 _ ("The Commander can't change to the directory that\n"
+                    "the subshell claims you are in. Perhaps you have\n"
+                    "deleted your working directory, or given yourself\n"
+                    "extra access permissions with the \"su\" command?"));
 }
-#endif // ENABLE_SUBSHELL
+#endif  // ENABLE_SUBSHELL
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -167,7 +167,7 @@ do_suspend_cmd (void)
         // Restore previous SIGTSTP action
         my_sigaction (SIGTSTP, &sigtstp_action, NULL);
     }
-#endif // SIGTSTP
+#endif  // SIGTSTP
 
     if (mc_global.tty.console_flag != '\0' && !mc_global.tty.use_subshell)
         handle_console (CONSOLE_SAVE);
@@ -195,7 +195,7 @@ execute_prepare_with_vfs_arg (const vfs_path_t *filename_vpath, vfs_path_t **loc
     *localcopy_vpath = mc_getlocalcopy (filename_vpath);
     if (*localcopy_vpath == NULL)
     {
-        message (D_ERROR, MSG_ERROR, _("Cannot fetch a local copy of %s"),
+        message (D_ERROR, MSG_ERROR, _ ("Cannot fetch a local copy of %s"),
                  vfs_path_as_str (filename_vpath));
         return FALSE;
     }
@@ -234,9 +234,8 @@ execute_get_opts_from_cfg (const char *command, const char *default_str)
 {
     char *str_from_config;
 
-    str_from_config =
-        mc_config_get_string_raw (mc_global.main_config, CONFIG_EXT_EDITOR_VIEWER_SECTION, command,
-                                  NULL);
+    str_from_config = mc_config_get_string_raw (mc_global.main_config,
+                                                CONFIG_EXT_EDITOR_VIEWER_SECTION, command, NULL);
 
     if (str_from_config == NULL)
     {
@@ -296,7 +295,7 @@ do_executev (const char *shell, int flags, char *const argv[])
 {
 #ifdef ENABLE_SUBSHELL
     vfs_path_t *new_dir_vpath = NULL;
-#endif // ENABLE_SUBSHELL
+#endif  // ENABLE_SUBSHELL
 
     vfs_path_t *old_vfs_dir_vpath = NULL;
 
@@ -323,20 +322,21 @@ do_executev (const char *shell, int flags, char *const argv[])
         invoke_subshell (*argv, VISIBLY, old_vfs_dir_vpath != NULL ? NULL : &new_dir_vpath);
     }
     else
-#endif // ENABLE_SUBSHELL
+#endif  // ENABLE_SUBSHELL
         my_systemv_flags (flags, shell, argv);
 
     if ((flags & EXECUTE_INTERNAL) == 0)
     {
         if ((pause_after_run == pause_always
              || (pause_after_run == pause_on_dumb_terminals && !mc_global.tty.xterm_flag
-                 && mc_global.tty.console_flag == '\0')) && quit == 0
+                 && mc_global.tty.console_flag == '\0'))
+            && quit == 0
 #ifdef ENABLE_SUBSHELL
             && subshell_state != RUNNING_COMMAND
-#endif // ENABLE_SUBSHELL
-            )
+#endif  // ENABLE_SUBSHELL
+        )
         {
-            printf ("%s", _("Press any key to continue..."));
+            printf ("%s", _ ("Press any key to continue..."));
             fflush (stdout);
             tty_raw_mode ();
             get_key_code (0);
@@ -361,7 +361,7 @@ do_executev (const char *shell, int flags, char *const argv[])
         vfs_path_free (new_dir_vpath, TRUE);
     }
 
-#endif // ENABLE_SUBSHELL
+#endif  // ENABLE_SUBSHELL
 
     if (old_vfs_dir_vpath != NULL)
     {
@@ -438,10 +438,10 @@ shell_execute (const char *command, int flags)
             do_execute (mc_global.shell->path, cmd != NULL ? cmd : command,
                         flags | EXECUTE_AS_SHELL);
         else
-            message (D_ERROR, MSG_ERROR, "%s", _("The shell is already running a command"));
+            message (D_ERROR, MSG_ERROR, "%s", _ ("The shell is already running a command"));
     }
     else
-#endif // ENABLE_SUBSHELL
+#endif  // ENABLE_SUBSHELL
         do_execute (mc_global.shell->path, cmd != NULL ? cmd : command, flags | EXECUTE_AS_SHELL);
 
     g_free (cmd);
@@ -456,7 +456,7 @@ toggle_subshell (void)
 
 #ifdef ENABLE_SUBSHELL
     vfs_path_t *new_dir_vpath = NULL;
-#endif // ENABLE_SUBSHELL
+#endif  // ENABLE_SUBSHELL
 
     SIG_ATOMIC_VOLATILE_T was_sigwinch = 0;
 
@@ -465,7 +465,7 @@ toggle_subshell (void)
     {
         if (message_flag)
             message (D_ERROR, MSG_ERROR,
-                     _("Not an xterm or Linux console;\nthe subshell cannot be toggled."));
+                     _ ("Not an xterm or Linux console;\nthe subshell cannot be toggled."));
         message_flag = FALSE;
         return;
     }
@@ -482,7 +482,7 @@ toggle_subshell (void)
      * is no raw_mode supported
      */
     tty_reset_shell_mode ();
-#endif // !HAVE_SLANG
+#endif  // !HAVE_SLANG
     tty_noecho ();
     tty_keypad (FALSE);
     tty_reset_screen ();
@@ -496,15 +496,15 @@ toggle_subshell (void)
     {
         vfs_path_t **new_dir_p;
 
-        new_dir_p = vfs_current_is_local ()? &new_dir_vpath : NULL;
+        new_dir_p = vfs_current_is_local () ? &new_dir_vpath : NULL;
         invoke_subshell (NULL, VISIBLY, new_dir_p);
     }
     else
-#endif // ENABLE_SUBSHELL
+#endif  // ENABLE_SUBSHELL
     {
         if (output_starts_shell)
         {
-            fputs (_("Type 'exit' to return to the Midnight Commander"), stderr);
+            fputs (_ ("Type 'exit' to return to the Midnight Commander"), stderr);
             fputs ("\n\r\n\r", stderr);
 
             my_system (EXECUTE_INTERNAL, mc_global.shell->path, NULL);
@@ -534,7 +534,7 @@ toggle_subshell (void)
         // restart subshell
         if (mc_global.tty.use_subshell)
             init_subshell ();
-#endif // ENABLE_SUBSHELL
+#endif  // ENABLE_SUBSHELL
     }
 
     enable_mouse ();
@@ -562,7 +562,7 @@ toggle_subshell (void)
     }
 
     vfs_path_free (new_dir_vpath, TRUE);
-#endif // ENABLE_SUBSHELL
+#endif  // ENABLE_SUBSHELL
 
     if (mc_global.mc_run_mode == MC_RUN_FULL)
     {
@@ -581,8 +581,8 @@ toggle_subshell (void)
 
 /* event callback */
 gboolean
-execute_suspend (const gchar *event_group_name, const gchar *event_name,
-                 gpointer init_data, gpointer data)
+execute_suspend (const gchar *event_group_name, const gchar *event_name, gpointer init_data,
+                 gpointer data)
 {
     (void) event_group_name;
     (void) event_name;

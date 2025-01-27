@@ -38,14 +38,14 @@
 #include <stdlib.h>
 #include <string.h>
 
-#if !defined (HAVE_UTIMENSAT) && defined (HAVE_UTIME_H)
-#include <utime.h>
+#if !defined(HAVE_UTIMENSAT) && defined(HAVE_UTIME_H)
+#    include <utime.h>
 #endif
 
 #include "lib/global.h"
 #include "lib/unixcompat.h"
-#include "lib/widget.h"         // message()
-#include "lib/strutil.h"        // INVALID_CONV
+#include "lib/widget.h"   // message()
+#include "lib/strutil.h"  // INVALID_CONV
 
 #include "vfs.h"
 #include "utilvfs.h"
@@ -55,13 +55,13 @@
 /*** file scope macro definitions ****************************************************************/
 
 #ifndef TUNMLEN
-#define TUNMLEN 256
+#    define TUNMLEN 256
 #endif
 #ifndef TGNMLEN
-#define TGNMLEN 256
+#    define TGNMLEN 256
 #endif
 
-#define MC_HISTORY_VFS_PASSWORD       "mc.vfs.password"
+#define MC_HISTORY_VFS_PASSWORD "mc.vfs.password"
 
 /*
  * FIXME2, the "-993" is to reduce the chance of a hit on the first lookup.
@@ -116,7 +116,7 @@ vfs_finduid (const char *uname)
 
     uname_len = strlen (uname);
 
-    if (uname[0] != saveuname[0]        // Quick test w/o proc call
+    if (uname[0] != saveuname[0]  // Quick test w/o proc call
         || strncmp (uname, saveuname, MIN (uname_len, TUNMLEN - 1)) != 0)
     {
         struct passwd *pw;
@@ -151,7 +151,7 @@ vfs_findgid (const char *gname)
 
     gname_len = strlen (gname);
 
-    if (gname[0] != savegname[0]        // Quick test w/o proc call
+    if (gname[0] != savegname[0]  // Quick test w/o proc call
         || strncmp (gname, savegname, MIN (gname_len, TGNMLEN - 1)) != 0)
     {
         struct group *gr;
@@ -360,9 +360,10 @@ vfs_url_split (const char *path, int default_port, vfs_url_flags_t flags)
 
 /* --------------------------------------------------------------------------------------------- */
 
-void __attribute__((noreturn)) vfs_die (const char *m)
+void __attribute__ ((noreturn))
+vfs_die (const char *m)
 {
-    message (D_ERROR, _("Internal error:"), "%s", m);
+    message (D_ERROR, _ ("Internal error:"), "%s", m);
     exit (EXIT_FAILURE);
 }
 
@@ -371,7 +372,7 @@ void __attribute__((noreturn)) vfs_die (const char *m)
 char *
 vfs_get_password (const char *msg)
 {
-    return input_dialog (msg, _("Password:"), MC_HISTORY_VFS_PASSWORD, INPUT_PASSWORD,
+    return input_dialog (msg, _ ("Password:"), MC_HISTORY_VFS_PASSWORD, INPUT_PASSWORD,
                          INPUT_COMPLETE_NONE);
 }
 
@@ -411,29 +412,29 @@ void
 vfs_get_timesbuf_from_stat (const struct stat *s, mc_timesbuf_t *times)
 {
 #ifdef HAVE_UTIMENSAT
-#ifdef HAVE_STRUCT_STAT_ST_MTIM
+#    ifdef HAVE_STRUCT_STAT_ST_MTIM
     /* POSIX IEEE Std 1003.1-2008 should be the preferred way
      *
-     * AIX has internal type st_timespec_t conflicting with timespec, so assign per field, for details see:
-     * https://github.com/libuv/libuv/pull/4404
+     * AIX has internal type st_timespec_t conflicting with timespec, so assign per field, for
+     * details see: https://github.com/libuv/libuv/pull/4404
      */
     (*times)[0].tv_sec = s->st_atim.tv_sec;
     (*times)[0].tv_nsec = s->st_atim.tv_nsec;
     (*times)[1].tv_sec = s->st_mtim.tv_sec;
     (*times)[1].tv_nsec = s->st_mtim.tv_nsec;
-#elif HAVE_STRUCT_STAT_ST_MTIMESPEC
+#    elif HAVE_STRUCT_STAT_ST_MTIMESPEC
     // Modern BSD solution
     (*times)[0] = s->st_atimespec;
     (*times)[1] = s->st_mtimespec;
-#elif HAVE_STRUCT_STAT_ST_MTIMENSEC
+#    elif HAVE_STRUCT_STAT_ST_MTIMENSEC
     // Legacy BSD solution
     (*times)[0].tv_sec = s->st_atime;
     (*times)[0].tv_nsec = s->st_atimensec;
     (*times)[1].tv_sec = s->st_mtime;
     (*times)[1].tv_nsec = s->st_mtimensec;
-#else
-#error "Found utimensat for nanosecond timestamps, but unsupported struct stat format!"
-#endif
+#    else
+#        error "Found utimensat for nanosecond timestamps, but unsupported struct stat format!"
+#    endif
 #else
     times->actime = s->st_atime;
     times->modtime = s->st_mtime;

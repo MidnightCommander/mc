@@ -28,11 +28,11 @@
 
 #include <string.h>
 
-#include "lib/global.h"         // <glib.h>
+#include "lib/global.h"  // <glib.h>
 
 #include "internal.h"
 #include "lib/fileloc.h"
-#include "lib/util.h"           // exist_file()
+#include "lib/util.h"  // exist_file()
 
 /*** global variables ****************************************************************************/
 

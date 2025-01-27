@@ -35,7 +35,7 @@
 
 #include "lib/global.h"
 
-#include "lib/tty/key.h"        // ALT()
+#include "lib/tty/key.h"  // ALT()
 
 #include "lib/widget.h"
 
@@ -143,8 +143,8 @@ group_widget_set_state (gpointer data, gpointer user_data)
  * @param g WGroup object
  * @param msg message sent to widgets
  * @param reverse if TRUE, send message in reverse order, FALSE -- in direct one.
- * @param options if WOP_DEFAULT, the message is sent to all widgets. Else message is sent to widgets
- *                that have specified options.
+ * @param options if WOP_DEFAULT, the message is sent to all widgets. Else message is sent to
+ * widgets that have specified options.
  */
 
 static void
@@ -179,11 +179,11 @@ group_send_broadcast_msg_custom (WGroup *g, widget_msg_t msg, gboolean reverse,
 /* --------------------------------------------------------------------------------------------- */
 
 /**
-  * Default group callback to convert group coordinates from local (relative to owner) to global
-  * (relative to screen).
-  *
-  * @param w widget
-  */
+ * Default group callback to convert group coordinates from local (relative to owner) to global
+ * (relative to screen).
+ *
+ * @param w widget
+ */
 
 static void
 group_default_make_global (Widget *w, const WRect *delta)
@@ -215,11 +215,11 @@ group_default_make_global (Widget *w, const WRect *delta)
 /* --------------------------------------------------------------------------------------------- */
 
 /**
-  * Default group callback to convert group coordinates from global (relative to screen) to local
-  * (relative to owner).
-  *
-  * @param w widget
-  */
+ * Default group callback to convert group coordinates from global (relative to screen) to local
+ * (relative to owner).
+ *
+ * @param w widget
+ */
 
 static void
 group_default_make_local (Widget *w, const WRect *delta)
@@ -673,10 +673,7 @@ group_default_set_state (Widget *w, widget_state_t state, gboolean enable)
 {
     gboolean ret = MSG_HANDLED;
     WGroup *g = GROUP (w);
-    widget_state_info_t st = {
-        .state = state,
-        .enable = enable
-    };
+    widget_state_info_t st = { .state = state, .enable = enable };
 
     ret = widget_default_set_state (w, state, enable);
 

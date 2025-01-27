@@ -56,23 +56,23 @@
 #include <grp.h>
 #include <stdlib.h>
 #include <string.h>
-#include <inttypes.h>           // uintmax_t
+#include <inttypes.h>  // uintmax_t
 
 #include "lib/global.h"
-#include "lib/tty/tty.h"        // enable/disable interrupt key
+#include "lib/tty/tty.h"  // enable/disable interrupt key
 #include "lib/strutil.h"
 #include "lib/unixcompat.h"
 #include "lib/fileloc.h"
-#include "lib/util.h"           // my_exit()
+#include "lib/util.h"  // my_exit()
 #include "lib/mcconfig.h"
 
-#include "src/execute.h"        // pre_exec, post_exec
+#include "src/execute.h"  // pre_exec, post_exec
 
 #include "lib/vfs/vfs.h"
 #include "lib/vfs/utilvfs.h"
 #include "lib/vfs/netutil.h"
 #include "lib/vfs/xdirentry.h"
-#include "lib/vfs/gc.h"         // vfs_stamp_create
+#include "lib/vfs/gc.h"  // vfs_stamp_create
 
 #include "shell.h"
 #include "shelldef.h"
@@ -83,24 +83,24 @@ int shell_directory_timeout = 900;
 
 /*** file scope macro definitions ****************************************************************/
 
-#define DO_RESOLVE_SYMLINK 1
-#define DO_OPEN            2
-#define DO_FREE_RESOURCE   4
+#define DO_RESOLVE_SYMLINK    1
+#define DO_OPEN               2
+#define DO_FREE_RESOURCE      4
 
 #define SHELL_FLAG_COMPRESSED 1
 #define SHELL_FLAG_RSH        2
 
-#define OPT_FLUSH        1
-#define OPT_IGNORE_ERROR 2
+#define OPT_FLUSH             1
+#define OPT_IGNORE_ERROR      2
 
 /*
  * Reply codes.
  */
-#define PRELIM          1       // positive preliminary
-#define COMPLETE        2       // positive completion
-#define CONTINUE        3       // positive intermediate
-#define TRANSIENT       4       // transient negative completion
-#define ERROR           5       // permanent negative completion
+#define PRELIM    1  // positive preliminary
+#define COMPLETE  2  // positive completion
+#define CONTINUE  3  // positive intermediate
+#define TRANSIENT 4  // transient negative completion
+#define ERROR     5  // permanent negative completion
 
 /* command wait_flag: */
 #define NONE        0x00
@@ -112,18 +112,18 @@ int shell_directory_timeout = 900;
 #define SHELL_HAVE_SED         2
 #define SHELL_HAVE_AWK         4
 #define SHELL_HAVE_PERL        8
-#define SHELL_HAVE_LSQ        16
-#define SHELL_HAVE_DATE_MDYT  32
-#define SHELL_HAVE_TAIL       64
+#define SHELL_HAVE_LSQ         16
+#define SHELL_HAVE_DATE_MDYT   32
+#define SHELL_HAVE_TAIL        64
 
-#define SHELL_SUPER(super) ((shell_super_t *) (super))
+#define SHELL_SUPER(super)     ((shell_super_t *) (super))
 #define SHELL_FILE_HANDLER(fh) ((shell_file_handler_t *) fh)
 
 /*** file scope type declarations ****************************************************************/
 
 typedef struct
 {
-    struct vfs_s_super base;    // base class
+    struct vfs_s_super base;  // base class
 
     int sockr;
     int sockw;
@@ -148,7 +148,7 @@ typedef struct
 
 typedef struct
 {
-    vfs_file_handler_t base;    // base class
+    vfs_file_handler_t base;  // base class
 
     off_t got;
     off_t total;
@@ -201,9 +201,8 @@ shell_load_script_from_file (const char *hostname, const char *script_name, cons
     gsize scr_len = 0;
 
     // 1st: scan user directory
-    scr_filename =
-        g_build_path (PATH_SEP_STR, mc_config_get_data_path (), VFS_SHELL_PREFIX, hostname,
-                      script_name, (char *) NULL);
+    scr_filename = g_build_path (PATH_SEP_STR, mc_config_get_data_path (), VFS_SHELL_PREFIX,
+                                 hostname, script_name, (char *) NULL);
     // silent about user dir
     g_file_get_contents (scr_filename, &scr_content, &scr_len, NULL);
     g_free (scr_filename);
@@ -304,8 +303,7 @@ shell_command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, 
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
-G_GNUC_PRINTF (5, 0)
+static int G_GNUC_PRINTF (5, 0)
 shell_command_va (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, const char *scr,
                   const char *vars, va_list ap)
 {
@@ -323,8 +321,7 @@ shell_command_va (struct vfs_class *me, struct vfs_s_super *super, int wait_repl
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
-G_GNUC_PRINTF (5, 6)
+static int G_GNUC_PRINTF (5, 6)
 shell_command_v (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, const char *scr,
                  const char *vars, ...)
 {
@@ -340,8 +337,7 @@ shell_command_v (struct vfs_class *me, struct vfs_s_super *super, int wait_reply
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
-G_GNUC_PRINTF (5, 6)
+static int G_GNUC_PRINTF (5, 6)
 shell_send_command (struct vfs_class *me, struct vfs_s_super *super, int flags, const char *scr,
                     const char *vars, ...)
 {
@@ -382,7 +378,7 @@ shell_free_archive (struct vfs_class *me, struct vfs_s_super *super)
     shell_super_t *shell_super = SHELL_SUPER (super);
 
     if ((shell_super->sockw != -1) || (shell_super->sockr != -1))
-        vfs_print_message (_("shell: Disconnecting from %s"), super->name ? super->name : "???");
+        vfs_print_message (_ ("shell: Disconnecting from %s"), super->name ? super->name : "???");
 
     if (shell_super->sockw != -1)
     {
@@ -520,7 +516,7 @@ static void
 shell_open_archive_pipeopen (struct vfs_s_super *super)
 {
     char gbuf[10];
-    const char *argv[10];       // All of 10 is used now
+    const char *argv[10];  // All of 10 is used now
     const char *xsh = (super->path_element->port == SHELL_FLAG_RSH ? "rsh" : "ssh");
     int i = 0;
 
@@ -568,7 +564,7 @@ shell_open_archive_talk (struct vfs_class *me, struct vfs_s_super *super)
     shell_super_t *shell_super = SHELL_SUPER (super);
     char answer[2048];
 
-    printf ("\n%s\n", _("shell: Waiting for initial line..."));
+    printf ("\n%s\n", _ ("shell: Waiting for initial line..."));
 
     if (vfs_s_get_line (me, shell_super->sockr, answer, sizeof (answer), ':') == 0)
         return FALSE;
@@ -578,7 +574,7 @@ shell_open_archive_talk (struct vfs_class *me, struct vfs_s_super *super)
         /* Currently, this does not work. ssh reads passwords from
            /dev/tty, not from stdin :-(. */
 
-        printf ("\n%s\n", _("Sorry, we cannot do password authenticated connections for now."));
+        printf ("\n%s\n", _ ("Sorry, we cannot do password authenticated connections for now."));
 
         return FALSE;
 #if 0
@@ -632,16 +628,17 @@ shell_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
     if (!ftalk)
         ERRNOR (E_PROTO, -1);
 
-    vfs_print_message ("%s", _("shell: Sending initial line..."));
+    vfs_print_message ("%s", _ ("shell: Sending initial line..."));
 
     // Set up remote locale to C, otherwise dates cannot be recognized
-    if (shell_command
-        (me, super, WAIT_REPLY,
-         "LANG=C LC_ALL=C LC_TIME=C; export LANG LC_ALL LC_TIME;\n" "echo '### 200'\n",
-         -1) != COMPLETE)
+    if (shell_command (me, super, WAIT_REPLY,
+                       "LANG=C LC_ALL=C LC_TIME=C; export LANG LC_ALL LC_TIME;\n"
+                       "echo '### 200'\n",
+                       -1)
+        != COMPLETE)
         ERRNOR (E_PROTO, -1);
 
-    vfs_print_message ("%s", _("shell: Getting host info..."));
+    vfs_print_message ("%s", _ ("shell: Getting host info..."));
     if (shell_info (me, super))
         SHELL_SUPER (super)->scr_env = shell_set_env (SHELL_SUPER (super)->host_flags);
 
@@ -661,8 +658,8 @@ shell_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-shell_open_archive (struct vfs_s_super *super,
-                    const vfs_path_t *vpath, const vfs_path_element_t *vpath_element)
+shell_open_archive (struct vfs_s_super *super, const vfs_path_t *vpath,
+                    const vfs_path_element_t *vpath_element)
 {
     shell_super_t *shell_super = SHELL_SUPER (super);
 
@@ -673,51 +670,36 @@ shell_open_archive (struct vfs_s_super *super,
     if (strncmp (vpath_element->vfs_prefix, "rsh", 3) == 0)
         super->path_element->port = SHELL_FLAG_RSH;
 
-    shell_super->scr_ls =
-        shell_load_script_from_file (super->path_element->host, VFS_SHELL_LS_FILE,
-                                     VFS_SHELL_LS_DEF_CONTENT);
-    shell_super->scr_exists =
-        shell_load_script_from_file (super->path_element->host, VFS_SHELL_EXISTS_FILE,
-                                     VFS_SHELL_EXISTS_DEF_CONTENT);
-    shell_super->scr_mkdir =
-        shell_load_script_from_file (super->path_element->host, VFS_SHELL_MKDIR_FILE,
-                                     VFS_SHELL_MKDIR_DEF_CONTENT);
-    shell_super->scr_unlink =
-        shell_load_script_from_file (super->path_element->host, VFS_SHELL_UNLINK_FILE,
-                                     VFS_SHELL_UNLINK_DEF_CONTENT);
-    shell_super->scr_chown =
-        shell_load_script_from_file (super->path_element->host, VFS_SHELL_CHOWN_FILE,
-                                     VFS_SHELL_CHOWN_DEF_CONTENT);
-    shell_super->scr_chmod =
-        shell_load_script_from_file (super->path_element->host, VFS_SHELL_CHMOD_FILE,
-                                     VFS_SHELL_CHMOD_DEF_CONTENT);
-    shell_super->scr_utime =
-        shell_load_script_from_file (super->path_element->host, VFS_SHELL_UTIME_FILE,
-                                     VFS_SHELL_UTIME_DEF_CONTENT);
-    shell_super->scr_rmdir =
-        shell_load_script_from_file (super->path_element->host, VFS_SHELL_RMDIR_FILE,
-                                     VFS_SHELL_RMDIR_DEF_CONTENT);
-    shell_super->scr_ln =
-        shell_load_script_from_file (super->path_element->host, VFS_SHELL_LN_FILE,
-                                     VFS_SHELL_LN_DEF_CONTENT);
-    shell_super->scr_mv =
-        shell_load_script_from_file (super->path_element->host, VFS_SHELL_MV_FILE,
-                                     VFS_SHELL_MV_DEF_CONTENT);
-    shell_super->scr_hardlink =
-        shell_load_script_from_file (super->path_element->host, VFS_SHELL_HARDLINK_FILE,
-                                     VFS_SHELL_HARDLINK_DEF_CONTENT);
-    shell_super->scr_get =
-        shell_load_script_from_file (super->path_element->host, VFS_SHELL_GET_FILE,
-                                     VFS_SHELL_GET_DEF_CONTENT);
-    shell_super->scr_send =
-        shell_load_script_from_file (super->path_element->host, VFS_SHELL_SEND_FILE,
-                                     VFS_SHELL_SEND_DEF_CONTENT);
-    shell_super->scr_append =
-        shell_load_script_from_file (super->path_element->host, VFS_SHELL_APPEND_FILE,
-                                     VFS_SHELL_APPEND_DEF_CONTENT);
-    shell_super->scr_info =
-        shell_load_script_from_file (super->path_element->host, VFS_SHELL_INFO_FILE,
-                                     VFS_SHELL_INFO_DEF_CONTENT);
+    shell_super->scr_ls = shell_load_script_from_file (super->path_element->host, VFS_SHELL_LS_FILE,
+                                                       VFS_SHELL_LS_DEF_CONTENT);
+    shell_super->scr_exists = shell_load_script_from_file (
+        super->path_element->host, VFS_SHELL_EXISTS_FILE, VFS_SHELL_EXISTS_DEF_CONTENT);
+    shell_super->scr_mkdir = shell_load_script_from_file (
+        super->path_element->host, VFS_SHELL_MKDIR_FILE, VFS_SHELL_MKDIR_DEF_CONTENT);
+    shell_super->scr_unlink = shell_load_script_from_file (
+        super->path_element->host, VFS_SHELL_UNLINK_FILE, VFS_SHELL_UNLINK_DEF_CONTENT);
+    shell_super->scr_chown = shell_load_script_from_file (
+        super->path_element->host, VFS_SHELL_CHOWN_FILE, VFS_SHELL_CHOWN_DEF_CONTENT);
+    shell_super->scr_chmod = shell_load_script_from_file (
+        super->path_element->host, VFS_SHELL_CHMOD_FILE, VFS_SHELL_CHMOD_DEF_CONTENT);
+    shell_super->scr_utime = shell_load_script_from_file (
+        super->path_element->host, VFS_SHELL_UTIME_FILE, VFS_SHELL_UTIME_DEF_CONTENT);
+    shell_super->scr_rmdir = shell_load_script_from_file (
+        super->path_element->host, VFS_SHELL_RMDIR_FILE, VFS_SHELL_RMDIR_DEF_CONTENT);
+    shell_super->scr_ln = shell_load_script_from_file (super->path_element->host, VFS_SHELL_LN_FILE,
+                                                       VFS_SHELL_LN_DEF_CONTENT);
+    shell_super->scr_mv = shell_load_script_from_file (super->path_element->host, VFS_SHELL_MV_FILE,
+                                                       VFS_SHELL_MV_DEF_CONTENT);
+    shell_super->scr_hardlink = shell_load_script_from_file (
+        super->path_element->host, VFS_SHELL_HARDLINK_FILE, VFS_SHELL_HARDLINK_DEF_CONTENT);
+    shell_super->scr_get = shell_load_script_from_file (
+        super->path_element->host, VFS_SHELL_GET_FILE, VFS_SHELL_GET_DEF_CONTENT);
+    shell_super->scr_send = shell_load_script_from_file (
+        super->path_element->host, VFS_SHELL_SEND_FILE, VFS_SHELL_SEND_DEF_CONTENT);
+    shell_super->scr_append = shell_load_script_from_file (
+        super->path_element->host, VFS_SHELL_APPEND_FILE, VFS_SHELL_APPEND_DEF_CONTENT);
+    shell_super->scr_info = shell_load_script_from_file (
+        super->path_element->host, VFS_SHELL_INFO_FILE, VFS_SHELL_INFO_DEF_CONTENT);
 
     return shell_open_archive_int (vpath_element->class, super);
 }
@@ -741,7 +723,9 @@ shell_archive_same (const vfs_path_element_t *vpath_element, struct vfs_s_super 
 
     result = ((strcmp (path_element->host, super->path_element->host) == 0)
               && (strcmp (path_element->user, super->path_element->user) == 0)
-              && (path_element->port == super->path_element->port)) ? 1 : 0;
+              && (path_element->port == super->path_element->port))
+        ? 1
+        : 0;
 
     vfs_path_element_free (path_element);
 
@@ -760,104 +744,103 @@ shell_parse_ls (char *buffer, struct vfs_s_entry *ent)
     switch (buffer[-1])
     {
     case ':':
+    {
+        char *filename;
+        char *filename_bound;
+        char *temp;
+
+        filename = buffer;
+
+        if (strcmp (filename, "\".\"") == 0 || strcmp (filename, "\"..\"") == 0)
+            break;  // We'll do "." and ".." ourselves
+
+        filename_bound = filename + strlen (filename);
+
+        if (S_ISLNK (ST.st_mode))
         {
-            char *filename;
-            char *filename_bound;
-            char *temp;
+            char *linkname;
+            char *linkname_bound;
+            /* we expect: "escaped-name" -> "escaped-name"
+               //     -> cannot occur in filenames,
+               //     because it will be escaped to -\> */
 
-            filename = buffer;
+            linkname_bound = filename_bound;
 
-            if (strcmp (filename, "\".\"") == 0 || strcmp (filename, "\"..\"") == 0)
-                break;          // We'll do "." and ".." ourselves
+            if (*filename == '"')
+                ++filename;
 
-            filename_bound = filename + strlen (filename);
-
-            if (S_ISLNK (ST.st_mode))
+            linkname = strstr (filename, "\" -> \"");
+            if (linkname == NULL)
             {
-                char *linkname;
-                char *linkname_bound;
-                /* we expect: "escaped-name" -> "escaped-name"
-                   //     -> cannot occur in filenames,
-                   //     because it will be escaped to -\> */
-
-
-                linkname_bound = filename_bound;
-
-                if (*filename == '"')
-                    ++filename;
-
-                linkname = strstr (filename, "\" -> \"");
-                if (linkname == NULL)
-                {
-                    // broken client, or smth goes wrong
-                    linkname = filename_bound;
-                    if (filename_bound > filename && *(filename_bound - 1) == '"')
-                        --filename_bound;       // skip trailing "
-                }
-                else
-                {
-                    filename_bound = linkname;
-                    linkname += 6;      // strlen ("\" -> \"")
-                    if (*(linkname_bound - 1) == '"')
-                        --linkname_bound;       // skip trailing "
-                }
-
-                ent->name = g_strndup (filename, filename_bound - filename);
-                temp = ent->name;
-                ent->name = str_shell_unescape (ent->name);
-                g_free (temp);
-
-                ent->ino->linkname = g_strndup (linkname, linkname_bound - linkname);
-                temp = ent->ino->linkname;
-                ent->ino->linkname = str_shell_unescape (ent->ino->linkname);
-                g_free (temp);
+                // broken client, or smth goes wrong
+                linkname = filename_bound;
+                if (filename_bound > filename && *(filename_bound - 1) == '"')
+                    --filename_bound;  // skip trailing "
             }
             else
             {
-                // we expect: "escaped-name"
-                if (filename_bound - filename > 2)
-                {
-                    /*
-                       there is at least 2 "
-                       and we skip them
-                     */
-                    if (*filename == '"')
-                        ++filename;
-                    if (*(filename_bound - 1) == '"')
-                        --filename_bound;
-                }
-
-                ent->name = g_strndup (filename, filename_bound - filename);
-                temp = ent->name;
-                ent->name = str_shell_unescape (ent->name);
-                g_free (temp);
+                filename_bound = linkname;
+                linkname += 6;  // strlen ("\" -> \"")
+                if (*(linkname_bound - 1) == '"')
+                    --linkname_bound;  // skip trailing "
             }
-            break;
+
+            ent->name = g_strndup (filename, filename_bound - filename);
+            temp = ent->name;
+            ent->name = str_shell_unescape (ent->name);
+            g_free (temp);
+
+            ent->ino->linkname = g_strndup (linkname, linkname_bound - linkname);
+            temp = ent->ino->linkname;
+            ent->ino->linkname = str_shell_unescape (ent->ino->linkname);
+            g_free (temp);
         }
+        else
+        {
+            // we expect: "escaped-name"
+            if (filename_bound - filename > 2)
+            {
+                /*
+                   there is at least 2 "
+                   and we skip them
+                 */
+                if (*filename == '"')
+                    ++filename;
+                if (*(filename_bound - 1) == '"')
+                    --filename_bound;
+            }
+
+            ent->name = g_strndup (filename, filename_bound - filename);
+            temp = ent->name;
+            ent->name = str_shell_unescape (ent->name);
+            g_free (temp);
+        }
+        break;
+    }
 
     case 'S':
         ST.st_size = (off_t) g_ascii_strtoll (buffer, NULL, 10);
         break;
 
     case 'P':
-        {
-            size_t skipped;
+    {
+        size_t skipped;
 
-            vfs_parse_filemode (buffer, &skipped, &ST.st_mode);
-            break;
-        }
+        vfs_parse_filemode (buffer, &skipped, &ST.st_mode);
+        break;
+    }
 
     case 'R':
-        {
-            /*
-               raw filemode:
-               we expect: Roctal-filemode octal-filetype uid.gid
-             */
-            size_t skipped;
+    {
+        /*
+           raw filemode:
+           we expect: Roctal-filemode octal-filetype uid.gid
+         */
+        size_t skipped;
 
-            vfs_parse_raw_filemode (buffer, &skipped, &ST.st_mode);
-            break;
-        }
+        vfs_parse_raw_filemode (buffer, &skipped, &ST.st_mode);
+        break;
+    }
 
     case 'd':
         vfs_split_text (buffer);
@@ -868,31 +851,32 @@ shell_parse_ls (char *buffer, struct vfs_s_entry *ent)
         break;
 
     case 'D':
-        {
-            struct tm tim;
+    {
+        struct tm tim;
 
-            memset (&tim, 0, sizeof (tim));
-            // cppcheck-suppress invalidscanf
-            if (sscanf (buffer, "%d %d %d %d %d %d", &tim.tm_year, &tim.tm_mon,
-                        &tim.tm_mday, &tim.tm_hour, &tim.tm_min, &tim.tm_sec) != 6)
-                break;
-            vfs_zero_stat_times (&ST);
-            ST.st_atime = ST.st_mtime = ST.st_ctime = mktime (&tim);
-        }
-        break;
+        memset (&tim, 0, sizeof (tim));
+        // cppcheck-suppress invalidscanf
+        if (sscanf (buffer, "%d %d %d %d %d %d", &tim.tm_year, &tim.tm_mon, &tim.tm_mday,
+                    &tim.tm_hour, &tim.tm_min, &tim.tm_sec)
+            != 6)
+            break;
+        vfs_zero_stat_times (&ST);
+        ST.st_atime = ST.st_mtime = ST.st_ctime = mktime (&tim);
+    }
+    break;
 
     case 'E':
-        {
-            int maj, min;
+    {
+        int maj, min;
 
-            // cppcheck-suppress invalidscanf
-            if (sscanf (buffer, "%d,%d", &maj, &min) != 2)
-                break;
+        // cppcheck-suppress invalidscanf
+        if (sscanf (buffer, "%d,%d", &maj, &min) != 2)
+            break;
 #ifdef HAVE_STRUCT_STAT_ST_RDEV
-            ST.st_rdev = makedev (maj, min);
+        ST.st_rdev = makedev (maj, min);
 #endif
-        }
-        break;
+    }
+    break;
 
     default:
         break;
@@ -920,7 +904,7 @@ shell_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, const char *remot
         me->logfile = fopen ("/tmp/mc-SHELL.sh", "w");
 #endif
 
-    vfs_print_message (_("shell: Reading directory %s..."), remote_path);
+    vfs_print_message (_ ("shell: Reading directory %s..."), remote_path);
 
     dir->timestamp = g_get_monotonic_time () + shell_directory_timeout * G_USEC_PER_SEC;
 
@@ -966,14 +950,14 @@ shell_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, const char *remot
     reply_code = shell_decode_reply (buffer + 4, 0);
     if (reply_code == COMPLETE)
     {
-        vfs_print_message (_("%s: done."), me->name);
+        vfs_print_message (_ ("%s: done."), me->name);
         return 0;
     }
 
     me->verrno = reply_code == ERROR ? EACCES : E_REMOTE;
 
-  error:
-    vfs_print_message (_("%s: failure"), me->name);
+error:
+    vfs_print_message (_ ("%s: failure"), me->name);
     return -1;
 }
 
@@ -1031,14 +1015,12 @@ shell_file_store (struct vfs_class *me, vfs_file_handler_t *fh, char *name, char
      */
 
     quoted_name = str_shell_escape (name);
-    vfs_print_message (_("shell: store %s: sending command..."), quoted_name);
+    vfs_print_message (_ ("shell: store %s: sending command..."), quoted_name);
 
     // FIXME: File size is limited to ULONG_MAX
-    code =
-        shell_command_v (me, super, WAIT_REPLY,
-                         shell->append ? shell_super->scr_append : shell_super->scr_send,
-                         "SHELL_FILENAME=%s SHELL_FILESIZE=%" PRIuMAX ";\n", quoted_name,
-                         (uintmax_t) s.st_size);
+    code = shell_command_v (
+        me, super, WAIT_REPLY, shell->append ? shell_super->scr_append : shell_super->scr_send,
+        "SHELL_FILENAME=%s SHELL_FILESIZE=%" PRIuMAX ";\n", quoted_name, (uintmax_t) s.st_size);
     g_free (quoted_name);
 
     if (code != PRELIM)
@@ -1055,7 +1037,7 @@ shell_file_store (struct vfs_class *me, vfs_file_handler_t *fh, char *name, char
         {
             if ((errno == EINTR) && tty_got_interrupt ())
                 continue;
-            vfs_print_message ("%s", _("shell: Local read failed, sending zeros"));
+            vfs_print_message ("%s", _ ("shell: Local read failed, sending zeros"));
             close (h);
             h = open ("/dev/zero", O_RDONLY);
         }
@@ -1074,7 +1056,7 @@ shell_file_store (struct vfs_class *me, vfs_file_handler_t *fh, char *name, char
         }
         tty_disable_interrupt_key ();
         total += n;
-        vfs_print_message ("%s: %" PRIuMAX "/%" PRIuMAX, _("shell: storing file"),
+        vfs_print_message ("%s: %" PRIuMAX "/%" PRIuMAX, _ ("shell: storing file"),
                            (uintmax_t) total, (uintmax_t) s.st_size);
     }
     close (h);
@@ -1083,7 +1065,7 @@ shell_file_store (struct vfs_class *me, vfs_file_handler_t *fh, char *name, char
         ERRNOR (E_REMOTE, -1);
     return 0;
 
-  error_return:
+error_return:
     close (h);
     shell_get_reply (me, shell_super->sockr, NULL, 0);
     return -1;
@@ -1113,10 +1095,9 @@ shell_linear_start (struct vfs_class *me, vfs_file_handler_t *fh, off_t offset)
      * standard output (i.e. over the network).
      */
 
-    offset =
-        shell_command_v (me, super, WANT_STRING, SHELL_SUPER (super)->scr_get,
-                         "SHELL_FILENAME=%s SHELL_START_OFFSET=%" PRIuMAX ";\n", quoted_name,
-                         (uintmax_t) offset);
+    offset = shell_command_v (me, super, WANT_STRING, SHELL_SUPER (super)->scr_get,
+                              "SHELL_FILENAME=%s SHELL_START_OFFSET=%" PRIuMAX ";\n", quoted_name,
+                              (uintmax_t) offset);
     g_free (quoted_name);
 
     if (offset != PRELIM)
@@ -1144,7 +1125,7 @@ shell_linear_abort (struct vfs_class *me, vfs_file_handler_t *fh)
     char buffer[BUF_8K];
     ssize_t n;
 
-    vfs_print_message ("%s", _("Aborting transfer..."));
+    vfs_print_message ("%s", _ ("Aborting transfer..."));
 
     do
     {
@@ -1160,9 +1141,9 @@ shell_linear_abort (struct vfs_class *me, vfs_file_handler_t *fh)
     while (n != 0);
 
     if (shell_get_reply (me, SHELL_SUPER (super)->sockr, NULL, 0) != COMPLETE)
-        vfs_print_message ("%s", _("Error reported after abort."));
+        vfs_print_message ("%s", _ ("Error reported after abort."));
     else
-        vfs_print_message ("%s", _("Aborted transfer would be successful."));
+        vfs_print_message ("%s", _ ("Aborted transfer would be successful."));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1262,9 +1243,8 @@ shell_rename (const vfs_path_t *vpath1, const vfs_path_t *vpath2)
 
     me = VFS_CLASS (vfs_path_get_last_path_vfs (vpath1));
 
-    ret =
-        shell_send_command (me, super2, OPT_FLUSH, SHELL_SUPER (super)->scr_mv,
-                            "SHELL_FILEFROM=%s SHELL_FILETO=%s;\n", rpath1, rpath2);
+    ret = shell_send_command (me, super2, OPT_FLUSH, SHELL_SUPER (super)->scr_mv,
+                              "SHELL_FILEFROM=%s SHELL_FILETO=%s;\n", rpath1, rpath2);
 
     g_free (rpath1);
     g_free (rpath2);
@@ -1296,9 +1276,8 @@ shell_link (const vfs_path_t *vpath1, const vfs_path_t *vpath2)
 
     me = VFS_CLASS (vfs_path_get_last_path_vfs (vpath1));
 
-    ret =
-        shell_send_command (me, super2, OPT_FLUSH, SHELL_SUPER (super)->scr_hardlink,
-                            "SHELL_FILEFROM=%s SHELL_FILETO=%s;\n", rpath1, rpath2);
+    ret = shell_send_command (me, super2, OPT_FLUSH, SHELL_SUPER (super)->scr_hardlink,
+                              "SHELL_FILEFROM=%s SHELL_FILETO=%s;\n", rpath1, rpath2);
 
     g_free (rpath1);
     g_free (rpath2);
@@ -1327,9 +1306,8 @@ shell_symlink (const vfs_path_t *vpath1, const vfs_path_t *vpath2)
 
     me = VFS_CLASS (vfs_path_get_last_path_vfs (vpath2));
 
-    ret =
-        shell_send_command (me, super, OPT_FLUSH, SHELL_SUPER (super)->scr_ln,
-                            "SHELL_FILEFROM=%s SHELL_FILETO=%s;\n", qsetto, rpath);
+    ret = shell_send_command (me, super, OPT_FLUSH, SHELL_SUPER (super)->scr_ln,
+                              "SHELL_FILEFROM=%s SHELL_FILETO=%s;\n", qsetto, rpath);
 
     g_free (qsetto);
     g_free (rpath);
@@ -1392,14 +1370,14 @@ shell_chmod (const vfs_path_t *vpath, mode_t mode)
 
     me = VFS_CLASS (vfs_path_get_last_path_vfs (vpath));
 
-    ret =
-        shell_send_command (me, super, OPT_FLUSH, SHELL_SUPER (super)->scr_chmod,
-                            "SHELL_FILENAME=%s SHELL_FILEMODE=%4.4o;\n", rpath,
-                            (unsigned int) (mode & 07777));
+    ret = shell_send_command (me, super, OPT_FLUSH, SHELL_SUPER (super)->scr_chmod,
+                              "SHELL_FILENAME=%s SHELL_FILEMODE=%4.4o;\n", rpath,
+                              (unsigned int) (mode & 07777));
 
     g_free (rpath);
 
-    return ret;;
+    return ret;
+    ;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1436,10 +1414,9 @@ shell_chown (const vfs_path_t *vpath, uid_t owner, gid_t group)
     me = VFS_CLASS (vfs_path_get_last_path_vfs (vpath));
 
     // FIXME: what should we report if chgrp succeeds but chown fails?
-    ret =
-        shell_send_command (me, super, OPT_FLUSH, SHELL_SUPER (super)->scr_chown,
-                            "SHELL_FILENAME=%s SHELL_FILEOWNER=%s SHELL_FILEGROUP=%s;\n", rpath,
-                            sowner, sgroup);
+    ret = shell_send_command (me, super, OPT_FLUSH, SHELL_SUPER (super)->scr_chown,
+                              "SHELL_FILENAME=%s SHELL_FILEOWNER=%s SHELL_FILEGROUP=%s;\n", rpath,
+                              sowner, sgroup);
 
     g_free (rpath);
 
@@ -1470,29 +1447,28 @@ shell_utime (const vfs_path_t *vpath, mc_timesbuf_t *times)
     vfs_get_timespecs_from_timesbuf (times, &atime, &mtime);
 
     gmt = gmtime (&atime.tv_sec);
-    g_snprintf (utcatime, sizeof (utcatime), "%04d%02d%02d%02d%02d.%02d",
-                gmt->tm_year + 1900, gmt->tm_mon + 1, gmt->tm_mday,
-                gmt->tm_hour, gmt->tm_min, gmt->tm_sec);
+    g_snprintf (utcatime, sizeof (utcatime), "%04d%02d%02d%02d%02d.%02d", gmt->tm_year + 1900,
+                gmt->tm_mon + 1, gmt->tm_mday, gmt->tm_hour, gmt->tm_min, gmt->tm_sec);
     g_snprintf (utcatime_w_nsec, sizeof (utcatime_w_nsec), "%04d-%02d-%02d %02d:%02d:%02d.%09ld",
-                gmt->tm_year + 1900, gmt->tm_mon + 1, gmt->tm_mday,
-                gmt->tm_hour, gmt->tm_min, gmt->tm_sec, atime.tv_nsec);
+                gmt->tm_year + 1900, gmt->tm_mon + 1, gmt->tm_mday, gmt->tm_hour, gmt->tm_min,
+                gmt->tm_sec, atime.tv_nsec);
 
     gmt = gmtime (&mtime.tv_sec);
-    g_snprintf (utcmtime, sizeof (utcmtime), "%04d%02d%02d%02d%02d.%02d",
-                gmt->tm_year + 1900, gmt->tm_mon + 1, gmt->tm_mday,
-                gmt->tm_hour, gmt->tm_min, gmt->tm_sec);
+    g_snprintf (utcmtime, sizeof (utcmtime), "%04d%02d%02d%02d%02d.%02d", gmt->tm_year + 1900,
+                gmt->tm_mon + 1, gmt->tm_mday, gmt->tm_hour, gmt->tm_min, gmt->tm_sec);
     g_snprintf (utcmtime_w_nsec, sizeof (utcmtime_w_nsec), "%04d-%02d-%02d %02d:%02d:%02d.%09ld",
-                gmt->tm_year + 1900, gmt->tm_mon + 1, gmt->tm_mday,
-                gmt->tm_hour, gmt->tm_min, gmt->tm_sec, mtime.tv_nsec);
+                gmt->tm_year + 1900, gmt->tm_mon + 1, gmt->tm_mday, gmt->tm_hour, gmt->tm_min,
+                gmt->tm_sec, mtime.tv_nsec);
 
     me = VFS_CLASS (vfs_path_get_last_path_vfs (vpath));
 
-    ret = shell_send_command (me, super, OPT_FLUSH, SHELL_SUPER (super)->scr_utime,
-                              "SHELL_FILENAME=%s SHELL_FILEATIME=%ju SHELL_FILEMTIME=%ju "
-                              "SHELL_TOUCHATIME=%s SHELL_TOUCHMTIME=%s SHELL_TOUCHATIME_W_NSEC=\"%s\" "
-                              "SHELL_TOUCHMTIME_W_NSEC=\"%s\";\n", rpath, (uintmax_t) atime.tv_sec,
-                              (uintmax_t) mtime.tv_sec, utcatime, utcmtime, utcatime_w_nsec,
-                              utcmtime_w_nsec);
+    ret = shell_send_command (
+        me, super, OPT_FLUSH, SHELL_SUPER (super)->scr_utime,
+        "SHELL_FILENAME=%s SHELL_FILEATIME=%ju SHELL_FILEMTIME=%ju "
+        "SHELL_TOUCHATIME=%s SHELL_TOUCHMTIME=%s SHELL_TOUCHATIME_W_NSEC=\"%s\" "
+        "SHELL_TOUCHMTIME_W_NSEC=\"%s\";\n",
+        rpath, (uintmax_t) atime.tv_sec, (uintmax_t) mtime.tv_sec, utcatime, utcmtime,
+        utcatime_w_nsec, utcmtime_w_nsec);
 
     g_free (rpath);
 
@@ -1518,9 +1494,8 @@ shell_unlink (const vfs_path_t *vpath)
 
     me = VFS_CLASS (vfs_path_get_last_path_vfs (vpath));
 
-    ret =
-        shell_send_command (me, super, OPT_FLUSH, SHELL_SUPER (super)->scr_unlink,
-                            "SHELL_FILENAME=%s;\n", rpath);
+    ret = shell_send_command (me, super, OPT_FLUSH, SHELL_SUPER (super)->scr_unlink,
+                              "SHELL_FILENAME=%s;\n", rpath);
 
     g_free (rpath);
 
@@ -1546,9 +1521,8 @@ shell_exists (const vfs_path_t *vpath)
 
     me = VFS_CLASS (vfs_path_get_last_path_vfs (vpath));
 
-    ret =
-        shell_send_command (me, super, OPT_FLUSH, SHELL_SUPER (super)->scr_exists,
-                            "SHELL_FILENAME=%s;\n", rpath);
+    ret = shell_send_command (me, super, OPT_FLUSH, SHELL_SUPER (super)->scr_exists,
+                              "SHELL_FILENAME=%s;\n", rpath);
 
     g_free (rpath);
 
@@ -1576,9 +1550,8 @@ shell_mkdir (const vfs_path_t *vpath, mode_t mode)
 
     me = VFS_CLASS (vfs_path_get_last_path_vfs (vpath));
 
-    ret =
-        shell_send_command (me, super, OPT_FLUSH, SHELL_SUPER (super)->scr_mkdir,
-                            "SHELL_FILENAME=%s;\n", rpath);
+    ret = shell_send_command (me, super, OPT_FLUSH, SHELL_SUPER (super)->scr_mkdir,
+                              "SHELL_FILENAME=%s;\n", rpath);
     g_free (rpath);
 
     if (ret != 0)
@@ -1611,9 +1584,8 @@ shell_rmdir (const vfs_path_t *vpath)
 
     me = VFS_CLASS (vfs_path_get_last_path_vfs (vpath));
 
-    ret =
-        shell_send_command (me, super, OPT_FLUSH, SHELL_SUPER (super)->scr_rmdir,
-                            "SHELL_FILENAME=%s;\n", rpath);
+    ret = shell_send_command (me, super, OPT_FLUSH, SHELL_SUPER (super)->scr_rmdir,
+                              "SHELL_FILENAME=%s;\n", rpath);
 
     g_free (rpath);
 
@@ -1704,10 +1676,9 @@ shell_fill_names (struct vfs_class *me, fill_names_f func)
             break;
         }
 
-        name =
-            g_strconcat (vfs_shell_ops->prefix, VFS_PATH_URL_DELIMITER,
-                         super->path_element->user, "@", super->path_element->host, flags,
-                         PATH_SEP_STR, super->path_element->path, (char *) NULL);
+        name = g_strconcat (vfs_shell_ops->prefix, VFS_PATH_URL_DELIMITER,
+                            super->path_element->user, "@", super->path_element->host, flags,
+                            PATH_SEP_STR, super->path_element->path, (char *) NULL);
         func (name);
         g_free (name);
     }

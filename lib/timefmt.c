@@ -37,7 +37,7 @@
 #include <config.h>
 
 #include <stdlib.h>
-#include <limits.h>             // MB_LEN_MAX
+#include <limits.h>  // MB_LEN_MAX
 
 #include "lib/global.h"
 #include "lib/strutil.h"
@@ -46,8 +46,8 @@
 
 /*** global variables ****************************************************************************/
 
-char *user_recent_timeformat = NULL;    // time format string for recent dates
-char *user_old_timeformat = NULL;       // time format string for older dates
+char *user_recent_timeformat = NULL;  // time format string for recent dates
+char *user_old_timeformat = NULL;     // time format string for older dates
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -91,7 +91,7 @@ i18n_checktimelength (void)
     if (lt == NULL)
     {
         // huh, localtime() doesn't seem to work ... falling back to "(invalid)"
-        length = str_term_width1 (_(INVALID_TIME_TEXT));
+        length = str_term_width1 (_ (INVALID_TIME_TEXT));
     }
     else
     {
@@ -112,7 +112,7 @@ i18n_checktimelength (void)
             length = MAX (tlen, length);
         }
 
-        tlen = (size_t) str_term_width1 (_(INVALID_TIME_TEXT));
+        tlen = (size_t) str_term_width1 (_ (INVALID_TIME_TEXT));
         length = MAX (tlen, length);
     }
 
@@ -135,8 +135,8 @@ file_date (time_t when)
     time_t current_time = time (NULL);
     const char *fmt;
 
-    if (current_time > when + 6L * 30L * 24L * 60L * 60L        // Old.
-        || current_time < when - 60L * 60L)     // In the future.
+    if (current_time > when + 6L * 30L * 24L * 60L * 60L  // Old.
+        || current_time < when - 60L * 60L)               // In the future.
         /* The file is fairly old or in the future.
            POSIX says the cutoff is 6 months old;
            approximate this by 6*30 days.

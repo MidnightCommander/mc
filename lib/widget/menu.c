@@ -38,10 +38,10 @@
 
 #include "lib/tty/tty.h"
 #include "lib/skin.h"
-#include "lib/tty/key.h"        // key macros
+#include "lib/tty/key.h"  // key macros
 #include "lib/strutil.h"
 #include "lib/widget.h"
-#include "lib/event.h"          // mc_event_raise()
+#include "lib/event.h"  // mc_event_raise()
 
 /*** global variables ****************************************************************************/
 
@@ -49,8 +49,8 @@ const global_keymap_t *menu_map = NULL;
 
 /*** file scope macro definitions ****************************************************************/
 
-#define MENUENTRY(x) ((menu_entry_t *)(x))
-#define MENU(x) ((menu_t *)(x))
+#define MENUENTRY(x) ((menu_entry_t *) (x))
+#define MENU(x)      ((menu_t *) (x))
 
 /*** file scope type declarations ****************************************************************/
 
@@ -64,12 +64,12 @@ struct menu_entry_t
 
 struct menu_t
 {
-    int start_x;                // position relative to menubar start
+    int start_x;  // position relative to menubar start
     hotkey_t text;
     GList *entries;
-    size_t max_entry_len;       // cached max length of entry texts (text + shortcut)
-    size_t max_hotkey_len;      // cached max length of shortcuts
-    unsigned int current;       // pointer to current menu entry
+    size_t max_entry_len;   // cached max length of entry texts (text + shortcut)
+    size_t max_hotkey_len;  // cached max length of shortcuts
+    unsigned int current;   // pointer to current menu entry
     char *help_node;
 };
 
@@ -223,8 +223,8 @@ menubar_draw (const WMenuBar *menubar)
     GList *i;
 
     // First draw the complete menubar
-    tty_setcolor (widget_get_state (WIDGET (menubar), WST_FOCUSED) ? MENU_ENTRY_COLOR :
-                  MENU_INACTIVE_COLOR);
+    tty_setcolor (widget_get_state (WIDGET (menubar), WST_FOCUSED) ? MENU_ENTRY_COLOR
+                                                                   : MENU_INACTIVE_COLOR);
     tty_draw_hline (w->y, w->x, ' ', w->cols);
 
     // Now each one of the entries
@@ -713,8 +713,8 @@ menubar_get_menu_by_x_coord (const WMenuBar *menubar, int x)
     unsigned int i;
     GList *menu;
 
-    for (i = 0, menu = menubar->menu;
-         menu != NULL && x >= MENU (menu->data)->start_x; i++, menu = g_list_next (menu))
+    for (i = 0, menu = menubar->menu; menu != NULL && x >= MENU (menu->data)->start_x;
+         i++, menu = g_list_next (menu))
         ;
 
     // Don't set the invalid value -1
@@ -745,7 +745,7 @@ menubar_mouse_on_menu (const WMenuBar *menubar, int y, int x)
         right_x = w->cols;
     }
 
-    bottom_y = g_list_length (menu->entries) + 2;       // skip bar and top frame
+    bottom_y = g_list_length (menu->entries) + 2;  // skip bar and top frame
 
     return (x >= left_x && x < right_x && y > 1 && y < bottom_y);
 }
@@ -758,7 +758,7 @@ menubar_change_selected_item (WMenuBar *menubar, int y)
     menu_t *menu;
     menu_entry_t *entry;
 
-    y -= 2;                     // skip bar and top frame
+    y -= 2;  // skip bar and top frame
     menu = MENU (g_list_nth_data (menubar->menu, menubar->current));
     entry = MENUENTRY (g_list_nth_data (menu->entries, y));
 
@@ -794,7 +794,7 @@ menubar_mouse_callback (Widget *w, mouse_msg_t msg, mouse_event_t *event)
 
             selected = menubar_get_menu_by_x_coord (menubar, event->x);
             menubar_activate (menubar, TRUE, selected);
-            menubar_remove (menubar);   // if already shown
+            menubar_remove (menubar);  // if already shown
             menubar_drop (menubar, selected);
         }
         else if (mouse_on_drop)

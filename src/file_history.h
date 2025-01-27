@@ -11,10 +11,10 @@
 
 /*** global variables defined in .c file *********************************************************/
 
-char *show_file_history (const Widget * w, int *action);
+char *show_file_history (const Widget *w, int *action);
 
 /*** declarations of public functions ************************************************************/
 
 /*** inline functions ****************************************************************************/
 
-#endif // MC__FILE_HISTORY_H
+#endif  // MC__FILE_HISTORY_H

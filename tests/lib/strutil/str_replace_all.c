@@ -56,8 +56,7 @@ static const struct str_replace_all_test_ds
     const char *needle;
     const char *replacement;
     const char *expected_result;
-} str_replace_all_test_ds[] =
-{
+} str_replace_all_test_ds[] = {
     {
         // 0. needle not found
         "needle not found",
@@ -68,7 +67,7 @@ static const struct str_replace_all_test_ds
     {
         // 1.  replacement is less rather that needle
         "some string blablablabla string",
-       "blablablabla",
+        "blablablabla",
         "1234",
         "some string 1234 string",
     },

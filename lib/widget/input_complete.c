@@ -33,7 +33,7 @@
 #include <config.h>
 
 #include <ctype.h>
-#include <limits.h>             // MB_LEN_MAX
+#include <limits.h>  // MB_LEN_MAX
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -46,7 +46,7 @@
 #include "lib/global.h"
 
 #include "lib/tty/tty.h"
-#include "lib/tty/key.h"        // XCTRL and ALT macros
+#include "lib/tty/key.h"  // XCTRL and ALT macros
 #include "lib/vfs/vfs.h"
 #include "lib/strutil.h"
 #include "lib/util.h"
@@ -62,10 +62,11 @@ extern char **environ;
 
 /* #define DO_COMPLETION_DEBUG */
 #ifdef DO_COMPLETION_DEBUG
-#define SHOW_C_CTX(func) fprintf(stderr, "%s: text='%s' flags=%s\n", func, text, show_c_flags(flags))
+#    define SHOW_C_CTX(func)                                                                       \
+        fprintf (stderr, "%s: text='%s' flags=%s\n", func, text, show_c_flags (flags))
 #else
-#define SHOW_C_CTX(func)
-#endif // DO_CMPLETION_DEBUG
+#    define SHOW_C_CTX(func)
+#endif  // DO_CMPLETION_DEBUG
 
 #define DO_INSERTION 1
 #define DO_QUERY     2
@@ -89,7 +90,7 @@ typedef struct
 
 MC_MOCKABLE GPtrArray *try_complete (char *text, int *lc_start, int *lc_end,
                                      input_complete_t flags);
-void complete_engine_fill_completions (WInput * in);
+void complete_engine_fill_completions (WInput *in);
 
 /*** file scope variables ************************************************************************/
 
@@ -121,7 +122,7 @@ show_c_flags (input_complete_t flags)
 
     return s_cf;
 }
-#endif // DO_CMPLETION_DEBUG
+#endif  // DO_CMPLETION_DEBUG
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -239,10 +240,10 @@ filename_completion_function (const char *text, int state, input_complete_t flag
                 {
                     isdir = FALSE;
 
-                    if ((my_uid == 0 && (tempstat.st_mode & 0111) != 0) ||
-                        (my_uid == tempstat.st_uid && (tempstat.st_mode & 0100) != 0) ||
-                        (my_gid == tempstat.st_gid && (tempstat.st_mode & 0010) != 0) ||
-                        (tempstat.st_mode & 0001) != 0)
+                    if ((my_uid == 0 && (tempstat.st_mode & 0111) != 0)
+                        || (my_uid == tempstat.st_uid && (tempstat.st_mode & 0100) != 0)
+                        || (my_gid == tempstat.st_gid && (tempstat.st_mode & 0010) != 0)
+                        || (tempstat.st_mode & 0001) != 0)
                         isexec = TRUE;
                 }
             }
@@ -314,7 +315,7 @@ username_completion_function (const char *text, int state, input_complete_t flag
     if (text[0] == '\\' && text[1] == '~')
         text++;
     if (state == 0)
-    {                           // Initialization stuff
+    {  // Initialization stuff
         setpwent ();
         userlen = strlen (text + 1);
     }
@@ -351,7 +352,7 @@ variable_completion_function (const char *text, int state, input_complete_t flag
     SHOW_C_CTX ("variable_completion_function");
 
     if (state == 0)
-    {                           // Initialization stuff
+    {  // Initialization stuff
         isbrace = (text[1] == '{');
         varlen = strlen (text + 1 + isbrace);
         env_p = environ;
@@ -483,7 +484,7 @@ hostname_completion_function (const char *text, int state, input_complete_t flag
     SHOW_C_CTX ("hostname_completion_function");
 
     if (state == 0)
-    {                           // Initialization stuff
+    {  // Initialization stuff
         const char *p;
 
         if (hosts != NULL)
@@ -499,7 +500,7 @@ hostname_completion_function (const char *text, int state, input_complete_t flag
     for (; host_p < hosts->len; host_p++)
     {
         if (textlen == 0)
-            break;              // Match all of them
+            break;  // Match all of them
         if (strncmp (text + textstart, g_ptr_array_index (hosts, host_p), textlen) == 0)
             break;
     }
@@ -545,18 +546,17 @@ command_completion_function (const char *text, int state, input_complete_t flags
     static char *cur_path = NULL;
     static char *cur_word = NULL;
     static int init_state = 0;
-    static const char *const bash_reserved[] = {
-        "if", "then", "else", "elif", "fi", "case", "esac", "for",
-        "select", "while", "until", "do", "done", "in", "function", 0
-    };
+    static const char *const bash_reserved[] = { "if",     "then",  "else",     "elif",
+                                                 "fi",     "case",  "esac",     "for",
+                                                 "select", "while", "until",    "do",
+                                                 "done",   "in",    "function", 0 };
     static const char *const bash_builtins[] = {
-        "alias", "bg", "bind", "break", "builtin", "cd", "command",
-        "continue", "declare", "dirs", "echo", "enable", "eval",
-        "exec", "exit", "export", "fc", "fg", "getopts", "hash",
-        "help", "history", "jobs", "kill", "let", "local", "logout",
-        "popd", "pushd", "pwd", "read", "readonly", "return", "set",
-        "shift", "source", "suspend", "test", "times", "trap", "type",
-        "typeset", "ulimit", "umask", "unalias", "unset", "wait", 0
+        "alias",   "bg",      "bind",    "break",  "builtin", "cd",      "command", "continue",
+        "declare", "dirs",    "echo",    "enable", "eval",    "exec",    "exit",    "export",
+        "fc",      "fg",      "getopts", "hash",   "help",    "history", "jobs",    "kill",
+        "let",     "local",   "logout",  "popd",   "pushd",   "pwd",     "read",    "readonly",
+        "return",  "set",     "shift",   "source", "suspend", "test",    "times",   "trap",
+        "type",    "typeset", "ulimit",  "umask",  "unalias", "unset",   "wait",    0
     };
 
     char *u_text;
@@ -571,7 +571,7 @@ command_completion_function (const char *text, int state, input_complete_t flags
     flags &= ~INPUT_COMPLETE_SHELL_ESC;
 
     if (state == 0)
-    {                           // Initialize us a little bit
+    {  // Initialize us a little bit
         isabsolute = strchr (u_text, PATH_SEP) != NULL;
         if (!isabsolute)
         {
@@ -612,7 +612,7 @@ command_completion_function (const char *text, int state, input_complete_t flags
     found = NULL;
     switch (phase)
     {
-    case 0:                    // Reserved words
+    case 0:  // Reserved words
         for (; *words != NULL; words++)
             if (strncmp (*words, u_text, text_len) == 0)
             {
@@ -622,7 +622,7 @@ command_completion_function (const char *text, int state, input_complete_t flags
         phase++;
         words = bash_builtins;
         MC_FALLTHROUGH;
-    case 1:                    // Builtin commands
+    case 1:  // Builtin commands
         for (; *words != NULL; words++)
             if (strncmp (*words, u_text, text_len) == 0)
             {
@@ -635,7 +635,7 @@ command_completion_function (const char *text, int state, input_complete_t flags
         cur_path = path;
         cur_word = NULL;
         MC_FALLTHROUGH;
-    case 2:                    // And looking through the $PATH
+    case 2:  // And looking through the $PATH
         while (found == NULL)
         {
             if (cur_word == NULL)
@@ -719,7 +719,7 @@ completion_matches (const char *text, CompletionFunction entry_function, input_c
     if (match_list->len > 1)
     {
         size_t i, j;
-        size_t low = 4096;      // Count of max-matched characters.
+        size_t low = 4096;  // Count of max-matched characters.
 
         g_ptr_array_sort (match_list, match_compare);
 
@@ -824,8 +824,8 @@ try_complete_commands_prepare (try_complete_automation_state_t *state, char *tex
 
             // Quoted
             if ((this_char == '&' && (prev_char == '<' || prev_char == '>'))
-                || (this_char == '|' && prev_char == '>') || (ti != text
-                                                              && str_get_prev_char (ti)[0] == '\\'))
+                || (this_char == '|' && prev_char == '>')
+                || (ti != text && str_get_prev_char (ti)[0] == '\\'))
                 state->in_command_position = 0;
         }
     }
@@ -872,9 +872,8 @@ try_complete_all_possible (try_complete_automation_state_t *state, char *text, i
     if (state->in_command_position != 0)
     {
         SHOW_C_CTX ("try_complete:cmd_subst");
-        matches =
-            completion_matches (state->word, command_completion_function,
-                                state->flags & (~INPUT_COMPLETE_FILENAMES));
+        matches = completion_matches (state->word, command_completion_function,
+                                      state->flags & (~INPUT_COMPLETE_FILENAMES));
     }
     else if ((state->flags & INPUT_COMPLETE_FILENAMES) != 0)
     {
@@ -918,9 +917,8 @@ try_complete_all_possible (try_complete_automation_state_t *state, char *text, i
                     {
                         state->r = mc_build_filename (cdpath, state->word, (char *) NULL);
                         SHOW_C_CTX ("try_complete:filename_subst_2");
-                        matches =
-                            completion_matches (state->r, filename_completion_function,
-                                                state->flags);
+                        matches = completion_matches (state->r, filename_completion_function,
+                                                      state->flags);
                         g_free (state->r);
                     }
                     *s = c;
@@ -1029,8 +1027,8 @@ complete_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *
 
                 new_end = str_get_prev_char (input->buffer->str + end) - input->buffer->str;
 
-                for (i = 0, e = listbox_get_first_link (LISTBOX (g->current->data));
-                     e != NULL; i++, e = g_list_next (e))
+                for (i = 0, e = listbox_get_first_link (LISTBOX (g->current->data)); e != NULL;
+                     i++, e = g_list_next (e))
                 {
                     WLEntry *le = LENTRY (e->data);
 
@@ -1083,8 +1081,8 @@ complete_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *
                     break;
                 }
 
-                for (i = 0, e = listbox_get_first_link (LISTBOX (g->current->data));
-                     e != NULL; i++, e = g_list_next (e))
+                for (i = 0, e = listbox_get_first_link (LISTBOX (g->current->data)); e != NULL;
+                     i++, e = g_list_next (e))
                 {
                     WLEntry *le = LENTRY (e->data);
 
@@ -1239,9 +1237,8 @@ complete_engine (WInput *in, int what_to_do)
             input = in;
             min_end = end;
 
-            complete_dlg =
-                dlg_create (TRUE, y, x, h, w, WPOS_KEEP_DEFAULT, TRUE,
-                            dialog_colors, complete_callback, NULL, "[Completion]", NULL);
+            complete_dlg = dlg_create (TRUE, y, x, h, w, WPOS_KEEP_DEFAULT, TRUE, dialog_colors,
+                                       complete_callback, NULL, "[Completion]", NULL);
             complete_list = listbox_new (1, 1, h - 2, w - 2, FALSE, NULL);
             group_add_widget (GROUP (complete_dlg), complete_list);
 
@@ -1303,8 +1300,7 @@ try_complete (char *text, int *lc_start, int *lc_end, input_complete_t flags)
     if (state.p > state.q && state.p > state.r)
     {
         SHOW_C_CTX ("try_complete:cmd_backq_subst");
-        matches = completion_matches (str_cget_next_char (state.p),
-                                      command_completion_function,
+        matches = completion_matches (str_cget_next_char (state.p), command_completion_function,
                                       state.flags & (~INPUT_COMPLETE_FILENAMES));
         if (matches != NULL)
             *lc_start += str_get_next_char (state.p) - state.word;
@@ -1353,8 +1349,8 @@ try_complete (char *text, int *lc_start, int *lc_end, input_complete_t flags)
 
     g_free (state.word);
 
-    if (matches != NULL && (flags & INPUT_COMPLETE_FILENAMES) != 0 &&
-        (flags & INPUT_COMPLETE_SHELL_ESC) == 0)
+    if (matches != NULL && (flags & INPUT_COMPLETE_FILENAMES) != 0
+        && (flags & INPUT_COMPLETE_SHELL_ESC) == 0)
     {
         // FIXME: HACK? INPUT_COMPLETE_SHELL_ESC is used only in command line.
         size_t i;

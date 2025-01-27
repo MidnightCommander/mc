@@ -9,7 +9,7 @@
 #ifndef MC__MOUNTLIST_H
 #define MC__MOUNTLIST_H
 
-#include <stdint.h>             // uintmax_t
+#include <stdint.h>  // uintmax_t
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -25,8 +25,8 @@ struct my_statfs
     const char *mpoint;
     const char *mroot;
     const char *device;
-    uintmax_t avail;            // in kB
-    uintmax_t total;            // in kB
+    uintmax_t avail;  // in kB
+    uintmax_t total;  // in kB
     uintmax_t nfree;
     uintmax_t nodes;
 };
@@ -41,4 +41,4 @@ void free_my_statfs (void);
 
 /*** inline functions ****************************************************************************/
 
-#endif // MC__MOUNTLIST_H
+#endif  // MC__MOUNTLIST_H

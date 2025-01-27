@@ -40,28 +40,22 @@
 #include "lib/tty/tty.h"
 #include "lib/vfs/vfs.h"
 #include "lib/strutil.h"
-#include "lib/util.h"           // load_file_position()
+#include "lib/util.h"  // load_file_position()
 #include "lib/widget.h"
 
 #include "src/filemanager/layout.h"
-#include "src/filemanager/filemanager.h"        // the_menubar
+#include "src/filemanager/filemanager.h"  // the_menubar
 
 #include "internal.h"
 
 /*** global variables ****************************************************************************/
 
 mcview_mode_flags_t mcview_global_flags = {
-    .wrap = TRUE,
-    .hex = FALSE,
-    .magic = TRUE,
-    .nroff = FALSE
+    .wrap = TRUE, .hex = FALSE, .magic = TRUE, .nroff = FALSE
 };
 
 mcview_mode_flags_t mcview_altered_flags = {
-    .wrap = FALSE,
-    .hex = FALSE,
-    .magic = FALSE,
-    .nroff = FALSE
+    .wrap = FALSE, .hex = FALSE, .magic = FALSE, .nroff = FALSE
 };
 
 gboolean mcview_remember_file_position = FALSE;
@@ -122,7 +116,7 @@ mcview_mouse_callback (Widget *w, mouse_msg_t msg, mouse_event_t *event)
             // Scrolling left and right
             int x;
 
-            x = event->x + 1;   // FIXME
+            x = event->x + 1;  // FIXME
 
             if (x < r->cols * 1 / 4)
             {
@@ -145,7 +139,7 @@ mcview_mouse_callback (Widget *w, mouse_msg_t msg, mouse_event_t *event)
             // Scrolling up and down
             int y;
 
-            y = event->y + 1;   // FIXME
+            y = event->y + 1;  // FIXME
 
             if (y < r->y + r->lines * 1 / 3)
             {
@@ -262,9 +256,8 @@ mcview_viewer (const char *command, const vfs_path_t *file_vpath, int start_line
 
     view_dlg->get_title = mcview_get_title;
 
-    succeeded =
-        mcview_load (lc_mcview, command, vfs_path_as_str (file_vpath), start_line, search_start,
-                     search_end);
+    succeeded = mcview_load (lc_mcview, command, vfs_path_as_str (file_vpath), start_line,
+                             search_start, search_end);
 
     if (succeeded)
         dlg_run (view_dlg);
@@ -282,8 +275,8 @@ mcview_viewer (const char *command, const vfs_path_t *file_vpath, int start_line
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mcview_load (WView *view, const char *command, const char *file, int start_line,
-             off_t search_start, off_t search_end)
+mcview_load (WView *view, const char *command, const char *file, int start_line, off_t search_start,
+             off_t search_end)
 {
     gboolean retval = FALSE;
     vfs_path_t *vpath = NULL;
@@ -338,8 +331,8 @@ mcview_load (WView *view, const char *command, const char *file, int start_line,
         fd = mc_open (vpath, O_RDONLY | O_NONBLOCK);
         if (fd == -1)
         {
-            g_snprintf (tmp, sizeof (tmp), _("Cannot open \"%s\"\n%s"),
-                        file, unix_error_string (errno));
+            g_snprintf (tmp, sizeof (tmp), _ ("Cannot open \"%s\"\n%s"), file,
+                        unix_error_string (errno));
             mcview_close_datasource (view);
             mcview_show_error (view, tmp);
             vfs_path_free (view->filename_vpath, TRUE);
@@ -353,8 +346,8 @@ mcview_load (WView *view, const char *command, const char *file, int start_line,
         if (mc_fstat (fd, &st) == -1)
         {
             mc_close (fd);
-            g_snprintf (tmp, sizeof (tmp), _("Cannot stat \"%s\"\n%s"),
-                        file, unix_error_string (errno));
+            g_snprintf (tmp, sizeof (tmp), _ ("Cannot stat \"%s\"\n%s"), file,
+                        unix_error_string (errno));
             mcview_close_datasource (view);
             mcview_show_error (view, tmp);
             vfs_path_free (view->filename_vpath, TRUE);
@@ -368,7 +361,7 @@ mcview_load (WView *view, const char *command, const char *file, int start_line,
         {
             mc_close (fd);
             mcview_close_datasource (view);
-            mcview_show_error (view, _("Cannot view: not a regular file"));
+            mcview_show_error (view, _ ("Cannot view: not a regular file"));
             vfs_path_free (view->filename_vpath, TRUE);
             view->filename_vpath = NULL;
             vfs_path_free (view->workdir_vpath, TRUE);
@@ -403,7 +396,7 @@ mcview_load (WView *view, const char *command, const char *file, int start_line,
 
                     if (fd1 == -1)
                     {
-                        g_snprintf (tmp, sizeof (tmp), _("Cannot open \"%s\" in parse mode\n%s"),
+                        g_snprintf (tmp, sizeof (tmp), _ ("Cannot open \"%s\" in parse mode\n%s"),
                                     file, unix_error_string (errno));
                         mcview_close_datasource (view);
                         mcview_show_error (view, tmp);
@@ -422,7 +415,7 @@ mcview_load (WView *view, const char *command, const char *file, int start_line,
         retval = TRUE;
     }
 
-  finish:
+finish:
     view->command = g_strdup (command);
     view->dpy_start = 0;
     view->dpy_paragraph_skip_lines = 0;

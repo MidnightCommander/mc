@@ -35,20 +35,20 @@
 
 #include <config.h>
 
-#include <string.h>             // memset()
+#include <string.h>  // memset()
 #include <sys/types.h>
 
 #include "lib/global.h"
 #include "lib/vfs/vfs.h"
 #include "lib/strutil.h"
-#include "lib/util.h"           // save_file_position()
+#include "lib/util.h"  // save_file_position()
 #include "lib/widget.h"
 #ifdef HAVE_CHARSET
-#include "lib/charsets.h"
+#    include "lib/charsets.h"
 #endif
 
 #ifdef HAVE_CHARSET
-#include "src/selcodepage.h"
+#    include "src/selcodepage.h"
 #endif
 
 #include "internal.h"
@@ -266,9 +266,8 @@ mcview_set_codeset (WView *view)
     const char *cp_id = NULL;
 
     view->utf8 = TRUE;
-    cp_id =
-        get_codepage_id (mc_global.source_codepage >=
-                         0 ? mc_global.source_codepage : mc_global.display_codepage);
+    cp_id = get_codepage_id (mc_global.source_codepage >= 0 ? mc_global.source_codepage
+                                                            : mc_global.display_codepage);
     if (cp_id != NULL)
     {
         GIConv conv;
@@ -292,7 +291,7 @@ mcview_select_encoding (WView *view)
     if (do_select_codepage ())
         mcview_set_codeset (view);
 }
-#endif // HAVE_CHARSET
+#endif  // HAVE_CHARSET
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -394,9 +393,9 @@ mcview_get_title (const WDialog *h, size_t len)
     len -= 4;
 
     file_label = view_filename != NULL ? view_filename : view->command != NULL ? view->command : "";
-    file_label = str_term_trim (file_label, len - str_term_width1 (_("View: ")));
+    file_label = str_term_trim (file_label, len - str_term_width1 (_ ("View: ")));
 
-    ret_str = g_strconcat (_("View: "), modified, file_label, (char *) NULL);
+    ret_str = g_strconcat (_ ("View: "), modified, file_label, (char *) NULL);
     return ret_str;
 }
 

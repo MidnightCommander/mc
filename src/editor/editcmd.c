@@ -46,24 +46,24 @@
 
 #include "lib/global.h"
 #include "lib/tty/tty.h"
-#include "lib/tty/key.h"        // XCTRL
-#include "lib/strutil.h"        // utf string functions
+#include "lib/tty/key.h"  // XCTRL
+#include "lib/strutil.h"  // utf string functions
 #include "lib/fileloc.h"
 #include "lib/lock.h"
-#include "lib/util.h"           // tilde_expand()
+#include "lib/util.h"  // tilde_expand()
 #include "lib/vfs/vfs.h"
 #include "lib/widget.h"
-#include "lib/event.h"          // mc_event_raise()
+#include "lib/event.h"  // mc_event_raise()
 #ifdef HAVE_CHARSET
-#include "lib/charsets.h"
+#    include "lib/charsets.h"
 #endif
 
 #include "src/history.h"
-#include "src/file_history.h"   // show_file_history()
+#include "src/file_history.h"  // show_file_history()
 #ifdef HAVE_CHARSET
-#include "src/selcodepage.h"
+#    include "src/selcodepage.h"
 #endif
-#include "src/util.h"           // check_for_default()
+#include "src/util.h"  // check_for_default()
 
 #include "edit-impl.h"
 #include "editwidget.h"
@@ -77,7 +77,7 @@ int search_create_bookmark = FALSE;
 
 /*** file scope macro definitions ****************************************************************/
 
-#define space_width 1
+#define space_width  1
 
 #define TEMP_BUF_LEN 1024
 
@@ -174,9 +174,9 @@ edit_save_file (WEdit *edit, const vfs_path_t *filename_vpath)
     {
         if (this_save_mode == EDIT_QUICK_SAVE && edit->skip_detach_prompt == 0 && sb.st_nlink > 1)
         {
-            rv = edit_query_dialog3 (_("Warning"),
-                                     _("File has hard-links. Detach before saving?"),
-                                     _("&Yes"), _("&No"), _("&Cancel"));
+            rv =
+                edit_query_dialog3 (_ ("Warning"), _ ("File has hard-links. Detach before saving?"),
+                                    _ ("&Yes"), _ ("&No"), _ ("&Cancel"));
             switch (rv)
             {
             case 0:
@@ -197,9 +197,9 @@ edit_save_file (WEdit *edit, const vfs_path_t *filename_vpath)
             // The default action is "Cancel".
             query_set_sel (1);
 
-            rv = edit_query_dialog2 (_("Warning"),
-                                     _("The file has been modified in the meantime. Save anyway?"),
-                                     _("&Yes"), _("&Cancel"));
+            rv = edit_query_dialog2 (_ ("Warning"),
+                                     _ ("The file has been modified in the meantime. Save anyway?"),
+                                     _ ("&Yes"), _ ("&Cancel"));
             if (rv != 0)
             {
                 vfs_path_free (real_filename_vpath, TRUE);
@@ -262,7 +262,7 @@ edit_save_file (WEdit *edit, const vfs_path_t *filename_vpath)
 #else
             if (pclose (file) != 0)
             {
-                message (D_ERROR, MSG_ERROR, _("Error writing to pipe: %s"), p);
+                message (D_ERROR, MSG_ERROR, _ ("Error writing to pipe: %s"), p);
                 g_free (p);
                 goto error_save;
             }
@@ -270,14 +270,14 @@ edit_save_file (WEdit *edit, const vfs_path_t *filename_vpath)
         }
         else
         {
-            message (D_ERROR, MSG_ERROR, _("Cannot open pipe for writing: %s"), p);
+            message (D_ERROR, MSG_ERROR, _ ("Cannot open pipe for writing: %s"), p);
             g_free (p);
             goto error_save;
         }
         g_free (p);
     }
     else if (edit->lb == LB_ASIS)
-    {                           // do not change line breaks
+    {  // do not change line breaks
         filelen = edit_buffer_write_file (&edit->buffer, fd);
 
         if (filelen != edit->buffer.size)
@@ -294,7 +294,7 @@ edit_save_file (WEdit *edit, const vfs_path_t *filename_vpath)
             goto error_save;
     }
     else
-    {                           // change line breaks
+    {  // change line breaks
         FILE *file;
         const char *savename;
 
@@ -309,7 +309,7 @@ edit_save_file (WEdit *edit, const vfs_path_t *filename_vpath)
         }
         else
         {
-            message (D_ERROR, MSG_ERROR, _("Cannot open file for writing: %s"), savename);
+            message (D_ERROR, MSG_ERROR, _ ("Cannot open file for writing: %s"), savename);
             goto error_save;
         }
     }
@@ -346,7 +346,7 @@ edit_save_file (WEdit *edit, const vfs_path_t *filename_vpath)
     vfs_path_free (real_filename_vpath, TRUE);
     vfs_path_free (savename_vpath, TRUE);
     return 1;
-  error_save:
+error_save:
     /*  FIXME: Is this safe ?
      *  if (this_save_mode != EDIT_QUICK_SAVE)
      *      mc_unlink (savename);
@@ -363,9 +363,10 @@ edit_check_newline (const edit_buffer_t *buf)
 {
     return !(edit_options.check_nl_at_eof && buf->size > 0
              && edit_buffer_get_byte (buf, buf->size - 1) != '\n'
-             && edit_query_dialog2 (_("Warning"),
-                                    _("The file you are saving does not end with a newline."),
-                                    _("C&ontinue"), _("&Cancel")) != 0);
+             && edit_query_dialog2 (_ ("Warning"),
+                                    _ ("The file you are saving does not end with a newline."),
+                                    _ ("C&ontinue"), _ ("&Cancel"))
+                 != 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -377,19 +378,16 @@ edit_get_save_file_as (WEdit *edit)
     char *filename_res = NULL;
     vfs_path_t *ret_vpath = NULL;
 
-    const char *lb_names[LB_NAMES] = {
-        N_("&Do not change"),
-        N_("&Unix format (LF)"),
-        N_("&Windows/DOS format (CR LF)"),
-        N_("&Macintosh format (CR)")
-    };
+    const char *lb_names[LB_NAMES] = { N_ ("&Do not change"), N_ ("&Unix format (LF)"),
+                                       N_ ("&Windows/DOS format (CR LF)"),
+                                       N_ ("&Macintosh format (CR)") };
 
     quick_widget_t quick_widgets[] = {
-        QUICK_LABELED_INPUT (N_("Enter file name:"), input_label_above,
-                             vfs_path_as_str (edit->filename_vpath), "save-as",
-                             &filename_res, NULL, FALSE, FALSE, INPUT_COMPLETE_FILENAMES),
+        QUICK_LABELED_INPUT (N_ ("Enter file name:"), input_label_above,
+                             vfs_path_as_str (edit->filename_vpath), "save-as", &filename_res, NULL,
+                             FALSE, FALSE, INPUT_COMPLETE_FILENAMES),
         QUICK_SEPARATOR (TRUE),
-        QUICK_LABEL (N_("Change line breaks to:"), NULL),
+        QUICK_LABEL (N_ ("Change line breaks to:"), NULL),
         QUICK_RADIO (LB_NAMES, lb_names, (int *) &cur_lb, NULL),
         QUICK_BUTTONS_OK_CANCEL,
         QUICK_END
@@ -507,10 +505,11 @@ edit_block_delete (WEdit *edit, off_t start_mark, off_t end_mark)
         edit_mark_cmd (edit, FALSE);
 
     // Warning message with a query to continue or cancel the operation
-    if ((end_mark - start_mark) > max_undo / 2 &&
-        edit_query_dialog2 (_("Warning"),
-                            ("Block is large, you may not be able to undo this action"),
-                            _("C&ontinue"), _("&Cancel")) != 0)
+    if ((end_mark - start_mark) > max_undo / 2
+        && edit_query_dialog2 (_ ("Warning"),
+                               ("Block is large, you may not be able to undo this action"),
+                               _ ("C&ontinue"), _ ("&Cancel"))
+            != 0)
         return FALSE;
 
     c1 = MIN (edit->column1, edit->column2);
@@ -685,7 +684,7 @@ edit_insert_column_of_text (WEdit *edit, unsigned char *data, off_t size, long w
         if (data[i] != '\n')
             edit_insert (edit, data[i]);
         else
-        {                       // fill in and move to next line
+        {  // fill in and move to next line
             long l;
             off_t p;
 
@@ -842,17 +841,14 @@ edit_save_mode_cmd (void)
 {
     char *str_result = NULL;
 
-    const char *str[] = {
-        N_("&Quick save"),
-        N_("&Safe save"),
-        N_("&Do backups with following extension:")
-    };
+    const char *str[] = { N_ ("&Quick save"), N_ ("&Safe save"),
+                          N_ ("&Do backups with following extension:") };
 
 #ifdef ENABLE_NLS
     size_t i;
 
     for (i = 0; i < 3; i++)
-        str[i] = _(str[i]);
+        str[i] = _ (str[i]);
 #endif
 
     g_assert (edit_options.backup_ext != NULL);
@@ -863,7 +859,7 @@ edit_save_mode_cmd (void)
             QUICK_INPUT (edit_options.backup_ext, "edit-backup-ext", &str_result,
                          &edit_save_mode_input_id, FALSE, FALSE, INPUT_COMPLETE_NONE),
             QUICK_SEPARATOR (TRUE),
-            QUICK_CHECKBOX (N_("Check &POSIX new line"), &edit_options.check_nl_at_eof, NULL),
+            QUICK_CHECKBOX (N_ ("Check &POSIX new line"), &edit_options.check_nl_at_eof, NULL),
             QUICK_BUTTONS_OK_CANCEL,
             QUICK_END
         };
@@ -930,7 +926,7 @@ edit_save_as_cmd (WEdit *edit)
             if (mc_stat (exp_vpath, &sb) == 0 && !S_ISREG (sb.st_mode))
             {
                 message (D_ERROR, MSG_ERROR, "%s",
-                         _("Cannot save: destination is not a regular file"));
+                         _ ("Cannot save: destination is not a regular file"));
                 goto ret;
             }
 
@@ -944,9 +940,8 @@ edit_save_as_cmd (WEdit *edit)
                 // the file exists
                 mc_close (file);
                 // Overwrite the current file or cancel the operation
-                if (edit_query_dialog2
-                    (_("Warning"),
-                     _("A file already exists with this name"), _("&Overwrite"), _("&Cancel")))
+                if (edit_query_dialog2 (_ ("Warning"), _ ("A file already exists with this name"),
+                                        _ ("&Overwrite"), _ ("&Cancel")))
                     goto ret;
             }
 
@@ -987,7 +982,7 @@ edit_save_as_cmd (WEdit *edit)
             break;
 
         default:
-            message (D_ERROR, MSG_ERROR, "%s", _("Cannot save file"));
+            message (D_ERROR, MSG_ERROR, "%s", _ ("Cannot save file"));
             MC_FALLTHROUGH;
 
         case -1:
@@ -998,7 +993,7 @@ edit_save_as_cmd (WEdit *edit)
         }
     }
 
-  ret:
+ret:
     vfs_path_free (exp_vpath, TRUE);
     edit->force |= REDRAW_COMPLETELY;
     return ret;
@@ -1021,9 +1016,9 @@ edit_save_confirm_cmd (WEdit *edit)
         char *f;
         gboolean ok;
 
-        f = g_strdup_printf (_("Confirm save file: \"%s\""),
+        f = g_strdup_printf (_ ("Confirm save file: \"%s\""),
                              vfs_path_as_str (edit->filename_vpath));
-        ok = (edit_query_dialog2 (_("Save file"), f, _("&Save"), _("&Cancel")) == 0);
+        ok = (edit_query_dialog2 (_ ("Save file"), f, _ ("&Save"), _ ("&Cancel")) == 0);
         g_free (f);
         if (!ok)
             return FALSE;
@@ -1034,20 +1029,19 @@ edit_save_confirm_cmd (WEdit *edit)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
-  * Ask file to edit and load it.
-  *
-  * @return TRUE on success or cancel of ask.
-  */
+ * Ask file to edit and load it.
+ *
+ * @return TRUE on success or cancel of ask.
+ */
 
 gboolean
 edit_load_cmd (WDialog *h)
 {
     char *exp;
-    gboolean ret = TRUE;        // possible cancel
+    gboolean ret = TRUE;  // possible cancel
 
-    exp = input_expand_dialog (_("Load"), _("Enter file name:"),
-                               MC_HISTORY_EDIT_LOAD, INPUT_LAST_TEXT,
-                               INPUT_COMPLETE_FILENAMES | INPUT_COMPLETE_CD);
+    exp = input_expand_dialog (_ ("Load"), _ ("Enter file name:"), MC_HISTORY_EDIT_LOAD,
+                               INPUT_LAST_TEXT, INPUT_COMPLETE_FILENAMES | INPUT_COMPLETE_CD);
 
     if (exp != NULL && *exp != '\0')
     {
@@ -1088,17 +1082,17 @@ edit_load_file_from_filename (WDialog *h, const edit_arg_t *arg)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
-  * Show history od edited or viewed files and open selected file.
-  *
-  * @return TRUE on success, FALSE otherwise.
-  */
+ * Show history od edited or viewed files and open selected file.
+ *
+ * @return TRUE on success, FALSE otherwise.
+ */
 
 gboolean
 edit_load_file_from_history (WDialog *h)
 {
     char *exp;
     int action;
-    gboolean ret = TRUE;        // possible cancel
+    gboolean ret = TRUE;  // possible cancel
 
     exp = show_file_history (CONST_WIDGET (h), &action);
     if (exp != NULL && (action == CK_Edit || action == CK_Enter))
@@ -1119,10 +1113,10 @@ edit_load_file_from_history (WDialog *h)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
-  * Load syntax file to edit.
-  *
-  * @return TRUE on success
-  */
+ * Load syntax file to edit.
+ *
+ * @return TRUE on success
+ */
 
 gboolean
 edit_load_syntax_file (WDialog *h)
@@ -1133,9 +1127,8 @@ edit_load_syntax_file (WDialog *h)
     gboolean ret = FALSE;
 
     if (geteuid () == 0)
-        dir = query_dialog (_("Syntax file edit"),
-                            _("Which syntax file you want to edit?"), D_NORMAL, 2,
-                            _("&User"), _("&System wide"));
+        dir = query_dialog (_ ("Syntax file edit"), _ ("Which syntax file you want to edit?"),
+                            D_NORMAL, 2, _ ("&User"), _ ("&System wide"));
 
     extdir_vpath =
         vfs_path_build_filename (mc_global.sysconfig_dir, EDIT_SYNTAX_FILE, (char *) NULL);
@@ -1169,10 +1162,10 @@ edit_load_syntax_file (WDialog *h)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
-  * Load menu file to edit.
-  *
-  * @return TRUE on success
-  */
+ * Load menu file to edit.
+ *
+ * @return TRUE on success
+ */
 
 gboolean
 edit_load_menu_file (WDialog *h)
@@ -1184,9 +1177,8 @@ edit_load_menu_file (WDialog *h)
     gboolean ret;
 
     query_set_sel (1);
-    dir = query_dialog (_("Menu edit"),
-                        _("Which menu file do you want to edit?"), D_NORMAL,
-                        geteuid () != 0 ? 2 : 3, _("&Local"), _("&User"), _("&System wide"));
+    dir = query_dialog (_ ("Menu edit"), _ ("Which menu file do you want to edit?"), D_NORMAL,
+                        geteuid () != 0 ? 2 : 3, _ ("&Local"), _ ("&User"), _ ("&System wide"));
 
     menufile_vpath =
         vfs_path_build_filename (mc_global.sysconfig_dir, EDIT_GLOBAL_MENU, (char *) NULL);
@@ -1237,10 +1229,10 @@ edit_load_menu_file (WDialog *h)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
-  * Close window with opened file.
-  *
-  * @return TRUE if file was closed.
-  */
+ * Close window with opened file.
+ *
+ * @return TRUE if file was closed.
+ */
 
 gboolean
 edit_close_cmd (WEdit *edit)
@@ -1326,7 +1318,6 @@ edit_block_copy_cmd (WEdit *edit)
 
     edit->force |= REDRAW_PAGE;
 }
-
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -1450,15 +1441,15 @@ edit_block_delete_cmd (WEdit *edit)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
-  * Check if it's OK to close the file. If there are unsaved changes, ask user.
-  *
-  * @return TRUE if it's OK to exit, FALSE to continue editing.
-  */
+ * Check if it's OK to close the file. If there are unsaved changes, ask user.
+ *
+ * @return TRUE if it's OK to exit, FALSE to continue editing.
+ */
 
 gboolean
 edit_ok_to_exit (WEdit *edit)
 {
-    const char *fname = N_("[NoName]");
+    const char *fname = N_ ("[NoName]");
     char *msg;
     int act;
 
@@ -1469,21 +1460,21 @@ edit_ok_to_exit (WEdit *edit)
         fname = vfs_path_as_str (edit->filename_vpath);
 #ifdef ENABLE_NLS
     else
-        fname = _(fname);
+        fname = _ (fname);
 #endif
 
     if (!mc_global.midnight_shutdown)
     {
         query_set_sel (2);
 
-        msg = g_strdup_printf (_("File %s was modified.\nSave before close?"), fname);
-        act = edit_query_dialog3 (_("Close file"), msg, _("&Yes"), _("&No"), _("&Cancel"));
+        msg = g_strdup_printf (_ ("File %s was modified.\nSave before close?"), fname);
+        act = edit_query_dialog3 (_ ("Close file"), msg, _ ("&Yes"), _ ("&No"), _ ("&Cancel"));
     }
     else
     {
-        msg = g_strdup_printf (_("Midnight Commander is being shut down.\nSave modified file %s?"),
+        msg = g_strdup_printf (_ ("Midnight Commander is being shut down.\nSave modified file %s?"),
                                fname);
-        act = edit_query_dialog2 (_("Quit"), msg, _("&Yes"), _("&No"));
+        act = edit_query_dialog2 (_ ("Quit"), msg, _ ("&Yes"), _ ("&No"));
 
         // Esc is No
         if (act == -1)
@@ -1494,7 +1485,7 @@ edit_ok_to_exit (WEdit *edit)
 
     switch (act)
     {
-    case 0:                    // Yes
+    case 0:  // Yes
         if (!mc_global.midnight_shutdown && !edit_check_newline (&edit->buffer))
             return FALSE;
         edit_push_markers (edit);
@@ -1502,11 +1493,11 @@ edit_ok_to_exit (WEdit *edit)
         if (!edit_save_cmd (edit) || mc_global.midnight_shutdown)
             return mc_global.midnight_shutdown;
         break;
-    case 1:                    // No
+    case 1:  // No
     default:
         break;
-    case 2:                    // Cancel quit
-    case -1:                   // Esc
+    case 2:   // Cancel quit
+    case -1:  // Esc
         return FALSE;
     }
 
@@ -1582,7 +1573,7 @@ edit_paste_from_history (WEdit *edit)
 {
     (void) edit;
 
-    message (D_ERROR, MSG_ERROR, "%s", _("This function is not implemented"));
+    message (D_ERROR, MSG_ERROR, "%s", _ ("This function is not implemented"));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1597,7 +1588,7 @@ edit_copy_to_X_buf_cmd (WEdit *edit)
 
     if (!edit_save_block_to_clip_file (edit, start_mark, end_mark))
     {
-        message (D_ERROR, MSG_ERROR, "%s", _("Unable to save to file"));
+        message (D_ERROR, MSG_ERROR, "%s", _ ("Unable to save to file"));
         return FALSE;
     }
     // try use external clipboard utility
@@ -1621,7 +1612,7 @@ edit_cut_to_X_buf_cmd (WEdit *edit)
 
     if (!edit_save_block_to_clip_file (edit, start_mark, end_mark))
     {
-        message (D_ERROR, MSG_ERROR, "%s", _("Unable to save to file"));
+        message (D_ERROR, MSG_ERROR, "%s", _ ("Unable to save to file"));
         return FALSE;
     }
     // try use external clipboard utility
@@ -1665,7 +1656,7 @@ edit_goto_cmd (WEdit *edit)
     long l;
     char *error;
 
-    f = input_dialog (_("Goto line"), _("Enter line:"), MC_HISTORY_EDIT_GOTO_LINE,
+    f = input_dialog (_ ("Goto line"), _ ("Enter line:"), MC_HISTORY_EDIT_GOTO_LINE,
                       first_run ? NULL : INPUT_LAST_TEXT, INPUT_COMPLETE_NONE);
     if (f == NULL || *f == '\0')
     {
@@ -1705,9 +1696,8 @@ edit_save_block_cmd (WEdit *edit)
         return TRUE;
 
     tmp = mc_config_get_full_path (EDIT_HOME_CLIP_FILE);
-    exp =
-        input_expand_dialog (_("Save block"), _("Enter file name:"),
-                             MC_HISTORY_EDIT_SAVE_BLOCK, tmp, INPUT_COMPLETE_FILENAMES);
+    exp = input_expand_dialog (_ ("Save block"), _ ("Enter file name:"), MC_HISTORY_EDIT_SAVE_BLOCK,
+                               tmp, INPUT_COMPLETE_FILENAMES);
     g_free (tmp);
     edit_push_undo_action (edit, KEY_PRESS + edit->start_display);
 
@@ -1716,7 +1706,7 @@ edit_save_block_cmd (WEdit *edit)
         if (edit_save_block (edit, exp, start_mark, end_mark))
             ret = TRUE;
         else
-            message (D_ERROR, MSG_ERROR, "%s", _("Cannot save block"));
+            message (D_ERROR, MSG_ERROR, "%s", _ ("Cannot save block"));
 
         edit->force |= REDRAW_COMPLETELY;
     }
@@ -1737,7 +1727,7 @@ edit_insert_file_cmd (WEdit *edit)
     gboolean ret = FALSE;
 
     tmp = mc_config_get_full_path (EDIT_HOME_CLIP_FILE);
-    exp = input_expand_dialog (_("Insert file"), _("Enter file name:"),
+    exp = input_expand_dialog (_ ("Insert file"), _ ("Enter file name:"),
                                MC_HISTORY_EDIT_INSERT_FILE, tmp, INPUT_COMPLETE_FILENAMES);
     g_free (tmp);
 
@@ -1752,7 +1742,7 @@ edit_insert_file_cmd (WEdit *edit)
         vfs_path_free (exp_vpath, TRUE);
 
         if (!ret)
-            message (D_ERROR, MSG_ERROR, "%s", _("Cannot insert file"));
+            message (D_ERROR, MSG_ERROR, "%s", _ ("Cannot insert file"));
     }
 
     g_free (exp);
@@ -1773,7 +1763,7 @@ edit_sort_cmd (WEdit *edit)
 
     if (!eval_marks (edit, &start_mark, &end_mark))
     {
-        message (D_ERROR, MSG_ERROR, "%s", _("You must first highlight a block of text"));
+        message (D_ERROR, MSG_ERROR, "%s", _ ("You must first highlight a block of text"));
         return 0;
     }
 
@@ -1781,8 +1771,8 @@ edit_sort_cmd (WEdit *edit)
     edit_save_block (edit, tmp, start_mark, end_mark);
     g_free (tmp);
 
-    exp = input_dialog (_("Run sort"),
-                        _("Enter sort options (see sort(1) manpage) separated by whitespace:"),
+    exp = input_dialog (_ ("Run sort"),
+                        _ ("Enter sort options (see sort(1) manpage) separated by whitespace:"),
                         MC_HISTORY_EDIT_SORT, INPUT_LAST_TEXT, INPUT_COMPLETE_NONE);
 
     if (exp == NULL)
@@ -1790,9 +1780,8 @@ edit_sort_cmd (WEdit *edit)
 
     tmp_edit_block_name = mc_config_get_full_path (EDIT_HOME_BLOCK_FILE);
     tmp_edit_temp_name = mc_config_get_full_path (EDIT_HOME_TEMP_FILE);
-    tmp =
-        g_strconcat (" sort ", exp, " ", tmp_edit_block_name,
-                     " > ", tmp_edit_temp_name, (char *) NULL);
+    tmp = g_strconcat (" sort ", exp, " ", tmp_edit_block_name, " > ", tmp_edit_temp_name,
+                       (char *) NULL);
     g_free (tmp_edit_temp_name);
     g_free (tmp_edit_block_name);
     g_free (exp);
@@ -1802,13 +1791,13 @@ edit_sort_cmd (WEdit *edit)
     if (e != 0)
     {
         if (e == -1 || e == 127)
-            message (D_ERROR, MSG_ERROR, "%s", _("Cannot execute sort command"));
+            message (D_ERROR, MSG_ERROR, "%s", _ ("Cannot execute sort command"));
         else
         {
             char q[8];
 
             sprintf (q, "%d ", e);
-            message (D_ERROR, MSG_ERROR, _("Sort returned non-zero: %s"), q);
+            message (D_ERROR, MSG_ERROR, _ ("Sort returned non-zero: %s"), q);
         }
 
         return -1;
@@ -1843,11 +1832,11 @@ edit_ext_cmd (WEdit *edit)
     int e;
 
     exp =
-        input_dialog (_("Paste output of external command"),
-                      _("Enter shell command(s):"), MC_HISTORY_EDIT_PASTE_EXTCMD, INPUT_LAST_TEXT,
+        input_dialog (_ ("Paste output of external command"), _ ("Enter shell command(s):"),
+                      MC_HISTORY_EDIT_PASTE_EXTCMD, INPUT_LAST_TEXT,
                       INPUT_COMPLETE_FILENAMES | INPUT_COMPLETE_VARIABLES | INPUT_COMPLETE_USERNAMES
-                      | INPUT_COMPLETE_HOSTNAMES | INPUT_COMPLETE_CD | INPUT_COMPLETE_COMMANDS |
-                      INPUT_COMPLETE_SHELL_ESC);
+                          | INPUT_COMPLETE_HOSTNAMES | INPUT_COMPLETE_CD | INPUT_COMPLETE_COMMANDS
+                          | INPUT_COMPLETE_SHELL_ESC);
 
     if (!exp)
         return 1;
@@ -1861,7 +1850,7 @@ edit_ext_cmd (WEdit *edit)
 
     if (e != 0)
     {
-        message (D_ERROR, MSG_ERROR, "%s", _("Cannot execute external command"));
+        message (D_ERROR, MSG_ERROR, "%s", _ ("Cannot execute external command"));
         return -1;
     }
 
@@ -1907,15 +1896,12 @@ edit_mail_dialog (WEdit *edit)
     char *mail_cc = NULL;
 
     quick_widget_t quick_widgets[] = {
-        QUICK_LABEL (N_("mail -s <subject> -c <cc> <to>"), NULL),
-        QUICK_LABELED_INPUT (N_("To"), input_label_above,
-                             INPUT_LAST_TEXT, "mail-dlg-input-3",
+        QUICK_LABEL (N_ ("mail -s <subject> -c <cc> <to>"), NULL),
+        QUICK_LABELED_INPUT (N_ ("To"), input_label_above, INPUT_LAST_TEXT, "mail-dlg-input-3",
                              &mail_to, NULL, FALSE, FALSE, INPUT_COMPLETE_USERNAMES),
-        QUICK_LABELED_INPUT (N_("Subject"), input_label_above,
-                              INPUT_LAST_TEXT, "mail-dlg-input-2",
-                              &mail_subject, NULL, FALSE, FALSE, INPUT_COMPLETE_NONE),
-        QUICK_LABELED_INPUT (N_("Copies to"), input_label_above,
-                             INPUT_LAST_TEXT, "mail-dlg-input",
+        QUICK_LABELED_INPUT (N_ ("Subject"), input_label_above, INPUT_LAST_TEXT, "mail-dlg-input-2",
+                             &mail_subject, NULL, FALSE, FALSE, INPUT_COMPLETE_NONE),
+        QUICK_LABELED_INPUT (N_ ("Copies to"), input_label_above, INPUT_LAST_TEXT, "mail-dlg-input",
                              &mail_cc, NULL, FALSE, FALSE, INPUT_COMPLETE_USERNAMES),
         QUICK_BUTTONS_OK_CANCEL,
         QUICK_END
@@ -1962,8 +1948,8 @@ edit_insert_literal_cmd (WEdit *edit)
 {
     int char_for_insertion;
 
-    char_for_insertion = editcmd_dialog_raw_key_query (_("Insert literal"),
-                                                       _("Press any key:"), FALSE);
+    char_for_insertion =
+        editcmd_dialog_raw_key_query (_ ("Insert literal"), _ ("Press any key:"), FALSE);
     edit_execute_key_command (edit, -1, ascii_alpha_to_cntrl (char_for_insertion));
 }
 
@@ -1973,10 +1959,11 @@ gboolean
 edit_load_forward_cmd (WEdit *edit)
 {
     if (edit->modified != 0
-        && edit_query_dialog2 (_("Warning"),
-                               _("Current text was modified without a file save.\n"
-                                 "Continue discards these changes."), _("C&ontinue"),
-                               _("&Cancel")) == 1)
+        && edit_query_dialog2 (_ ("Warning"),
+                               _ ("Current text was modified without a file save.\n"
+                                  "Continue discards these changes."),
+                               _ ("C&ontinue"), _ ("&Cancel"))
+            == 1)
     {
         edit->force |= REDRAW_COMPLETELY;
         return TRUE;
@@ -2001,10 +1988,11 @@ gboolean
 edit_load_back_cmd (WEdit *edit)
 {
     if (edit->modified != 0
-        && edit_query_dialog2 (_("Warning"),
-                               _("Current text was modified without a file save.\n"
-                                 "Continue discards these changes."), _("C&ontinue"),
-                               _("&Cancel")) == 1)
+        && edit_query_dialog2 (_ ("Warning"),
+                               _ ("Current text was modified without a file save.\n"
+                                  "Continue discards these changes."),
+                               _ ("C&ontinue"), _ ("&Cancel"))
+            == 1)
     {
         edit->force |= REDRAW_COMPLETELY;
         return TRUE;
@@ -2040,21 +2028,19 @@ editcmd_dialog_raw_key_query (const char *heading, const char *query, gboolean c
     wq = str_term_width1 (query);
     w = MAX (w, wq + 3 * 2 + 1 + 2);
 
-    raw_dlg =
-        dlg_create (TRUE, 0, 0, cancel ? 7 : 5, w, WPOS_CENTER | WPOS_TRYUP, FALSE, dialog_colors,
-                    editcmd_dialog_raw_key_query_cb, NULL, NULL, heading);
+    raw_dlg = dlg_create (TRUE, 0, 0, cancel ? 7 : 5, w, WPOS_CENTER | WPOS_TRYUP, FALSE,
+                          dialog_colors, editcmd_dialog_raw_key_query_cb, NULL, NULL, heading);
     g = GROUP (raw_dlg);
     widget_want_tab (WIDGET (raw_dlg), TRUE);
 
     group_add_widget (g, label_new (y, 3, query));
-    group_add_widget (g,
-                      input_new (y++, 3 + wq + 1, input_colors, w - (6 + wq + 1), "", 0,
-                                 INPUT_COMPLETE_NONE));
+    group_add_widget (
+        g, input_new (y++, 3 + wq + 1, input_colors, w - (6 + wq + 1), "", 0, INPUT_COMPLETE_NONE));
     if (cancel)
     {
         group_add_widget (g, hline_new (y++, -1, -1));
         // Button w/o hotkey to allow use any key as raw or macro one
-        group_add_widget_autopos (g, button_new (y, 1, B_CANCEL, NORMAL_BUTTON, _("Cancel"), NULL),
+        group_add_widget_autopos (g, button_new (y, 1, B_CANCEL, NORMAL_BUTTON, _ ("Cancel"), NULL),
                                   WPOS_KEEP_TOP | WPOS_CENTER_HORZ, NULL);
     }
 

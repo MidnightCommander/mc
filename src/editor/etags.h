@@ -19,8 +19,8 @@ typedef struct etags_hash_struct
 
 /*** declarations of public functions ************************************************************/
 
-void edit_get_match_keyword_cmd (WEdit * edit);
+void edit_get_match_keyword_cmd (WEdit *edit);
 
 /*** inline functions ****************************************************************************/
 
-#endif // MC__EDIT_ETAGS_H
+#endif  // MC__EDIT_ETAGS_H

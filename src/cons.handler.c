@@ -32,19 +32,19 @@
 #include <stdio.h>
 #include <sys/types.h>
 #ifdef __FreeBSD__
-#include <sys/consio.h>
-#ifdef HAVE_SYS_IOCTL_H
-#include <sys/ioctl.h>
-#endif
+#    include <sys/consio.h>
+#    ifdef HAVE_SYS_IOCTL_H
+#        include <sys/ioctl.h>
+#    endif
 #endif
 
 #include "lib/global.h"
 
 #include "lib/unixcompat.h"
 #include "lib/tty/tty.h"
-#include "lib/tty/color.h"      // tty_set_normal_attrs
+#include "lib/tty/color.h"  // tty_set_normal_attrs
 #include "lib/tty/win.h"
-#include "lib/util.h"           // mc_build_filename()
+#include "lib/util.h"  // mc_build_filename()
 
 #include "consaver/cons.saver.h"
 
@@ -52,19 +52,20 @@
 
 #ifdef __linux__
 int cons_saver_pid = 1;
-#endif // __linux__
+#endif  // __linux__
 
 /*** file scope macro definitions ****************************************************************/
 
 #if defined(__FreeBSD__)
-#define FD_OUT 1
-#define cursor_to(x, y) \
-do \
-{ \
-    printf("\x1B[%d;%df", (y) + 1, (x) + 1); \
-    fflush(stdout); \
-} while (0)
-#endif // __linux__
+#    define FD_OUT 1
+#    define cursor_to(x, y)                                                                        \
+        do                                                                                         \
+        {                                                                                          \
+            printf ("\x1B[%d;%df", (y) + 1, (x) + 1);                                              \
+            fflush (stdout);                                                                       \
+        }                                                                                          \
+        while (0)
+#endif  // __linux__
 
 /*** file scope type declarations ****************************************************************/
 
@@ -80,7 +81,7 @@ static int pipefd2[2] = { -1, -1 };
 #elif defined(__FreeBSD__)
 static struct scrshot screen_shot;
 static struct vid_info screen_info;
-#endif // __linux__
+#endif  // __linux__
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
@@ -227,7 +228,7 @@ handle_console_linux (console_action_t action)
             mc_global.tty.console_flag = '\0';
             status = write (1, &mc_global.tty.console_flag, 1);
             my_exit (3);
-        }                       // if (cons_saver_pid ...)
+        }  // if (cons_saver_pid ...)
         break;
 
     case CONSOLE_DONE:
@@ -313,8 +314,8 @@ set_attr (unsigned attr)
     tc = attr & 0xF;
     bc = (attr >> 4) & 0xF;
 
-    printf ("\x1B[%d;%d;3%d;4%dm", (bc & 8) ? 5 : 25, (tc & 8) ? 1 : 22,
-            color_map[tc & 7], color_map[bc & 7]);
+    printf ("\x1B[%d;%d;3%d;4%dm", (bc & 8) ? 5 : 25, (tc & 8) ? 1 : 22, color_map[tc & 7],
+            color_map[bc & 7]);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -455,7 +456,7 @@ handle_console_freebsd (console_action_t action)
         break;
     }
 }
-#endif // __FreeBSD__
+#endif  // __FreeBSD__
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
@@ -473,7 +474,7 @@ show_console_contents (int starty, unsigned char begin_line, unsigned char end_l
     }
 #ifdef __linux__
     show_console_contents_linux (starty, begin_line, end_line);
-#elif defined (__FreeBSD__)
+#elif defined(__FreeBSD__)
     show_console_contents_freebsd (starty, begin_line, end_line);
 #else
     mc_global.tty.console_flag = '\0';
@@ -492,7 +493,7 @@ handle_console (console_action_t action)
 
 #ifdef __linux__
     handle_console_linux (action);
-#elif defined (__FreeBSD__)
+#elif defined(__FreeBSD__)
     handle_console_freebsd (action);
 #endif
 }

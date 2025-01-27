@@ -7,36 +7,54 @@
 
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <inttypes.h>           // uintmax_t
+#include <inttypes.h>  // uintmax_t
 #include <unistd.h>
 
-#include "lib/global.h"         // include <glib.h>
+#include "lib/global.h"  // include <glib.h>
 
 #include "lib/vfs/vfs.h"
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
 #ifndef MAXSYMLINKS
-#define MAXSYMLINKS 32
+#    define MAXSYMLINKS 32
 #endif
 
 #define MAX_SAVED_BOOKMARKS 10
 
-#define MC_PTR_FREE(ptr) do { g_free (ptr); (ptr) = NULL; } while (0)
+#define MC_PTR_FREE(ptr)                                                                           \
+    do                                                                                             \
+    {                                                                                              \
+        g_free (ptr);                                                                              \
+        (ptr) = NULL;                                                                              \
+    }                                                                                              \
+    while (0)
 
-#define mc_return_if_error(mcerror) do { if (mcerror != NULL && *mcerror != NULL) return; } while (0)
-#define mc_return_val_if_error(mcerror, mcvalue) do { if (mcerror != NULL && *mcerror != NULL) return mcvalue; } while (0)
+#define mc_return_if_error(mcerror)                                                                \
+    do                                                                                             \
+    {                                                                                              \
+        if (mcerror != NULL && *mcerror != NULL)                                                   \
+            return;                                                                                \
+    }                                                                                              \
+    while (0)
+#define mc_return_val_if_error(mcerror, mcvalue)                                                   \
+    do                                                                                             \
+    {                                                                                              \
+        if (mcerror != NULL && *mcerror != NULL)                                                   \
+            return mcvalue;                                                                        \
+    }                                                                                              \
+    while (0)
 
-#define whitespace(c) ((c) == ' ' || (c) == '\t')
-#define whiteness(c) (whitespace (c) || (c) == '\n')
+#define whitespace(c)                    ((c) == ' ' || (c) == '\t')
+#define whiteness(c)                     (whitespace (c) || (c) == '\n')
 
-#define MC_PIPE_BUFSIZE BUF_8K
-#define MC_PIPE_STREAM_EOF 0
-#define MC_PIPE_STREAM_UNREAD -1
-#define MC_PIPE_ERROR_CREATE_PIPE -2
-#define MC_PIPE_ERROR_PARSE_COMMAND -3
+#define MC_PIPE_BUFSIZE                  BUF_8K
+#define MC_PIPE_STREAM_EOF               0
+#define MC_PIPE_STREAM_UNREAD            -1
+#define MC_PIPE_ERROR_CREATE_PIPE        -2
+#define MC_PIPE_ERROR_PARSE_COMMAND      -3
 #define MC_PIPE_ERROR_CREATE_PIPE_STREAM -4
-#define MC_PIPE_ERROR_READ -5
+#define MC_PIPE_ERROR_READ               -5
 
 /* gnulib efa15594e17fc20827dba66414fb391e99905394
 
@@ -70,10 +88,11 @@ typedef enum
     CANON_PATH_NOCHANGE = 0,
     CANON_PATH_JOINSLASHES = 1L << 0,   // Multiple '/'s are collapsed to a single '/'
     CANON_PATH_REMSLASHDOTS = 1L << 1,  // Leading './'s, '/'s and trailing '/.'s are removed
-    CANON_PATH_REMDOUBLEDOTS = 1L << 3, // Non-leading '../'s and trailing '..'s are handled by removing portions of the path
-    CANON_PATH_GUARDUNC = 1L << 4,      // Detect and preserve UNC paths: //server/...
-    CANON_PATH_ALL = CANON_PATH_JOINSLASHES | CANON_PATH_REMSLASHDOTS
-                   | CANON_PATH_REMDOUBLEDOTS | CANON_PATH_GUARDUNC  // All flags
+    CANON_PATH_REMDOUBLEDOTS = 1L
+        << 3,  // Non-leading '../'s and trailing '..'s are handled by removing portions of the path
+    CANON_PATH_GUARDUNC = 1L << 4,  // Detect and preserve UNC paths: //server/...
+    CANON_PATH_ALL = CANON_PATH_JOINSLASHES | CANON_PATH_REMSLASHDOTS | CANON_PATH_REMDOUBLEDOTS
+        | CANON_PATH_GUARDUNC  // All flags
 } canon_path_flags_t;
 
 enum compression_type
@@ -182,7 +201,7 @@ char *convert_controls (const char *s);
 /* overwrites passwd with '\0's and frees it. */
 void wipe_password (char *passwd);
 
-char *diff_two_paths (const vfs_path_t * vpath1, const vfs_path_t * vpath2);
+char *diff_two_paths (const vfs_path_t *vpath1, const vfs_path_t *vpath2);
 
 /* Returns the basename of fname. The result is a pointer into fname. */
 const char *x_basename (const char *fname);
@@ -215,11 +234,11 @@ int my_systeml (int flags, const char *shell, ...);
 int my_systemv (const char *command, char *const argv[]);
 int my_systemv_flags (int flags, const char *command, char *const argv[]);
 
-mc_pipe_t *mc_popen (const char *command, gboolean read_out, gboolean read_err, GError ** error);
-void mc_pread (mc_pipe_t * p, GError ** error);
-void mc_pclose (mc_pipe_t * p, GError ** error);
+mc_pipe_t *mc_popen (const char *command, gboolean read_out, gboolean read_err, GError **error);
+void mc_pread (mc_pipe_t *p, GError **error);
+void mc_pclose (mc_pipe_t *p, GError **error);
 
-GString *mc_pstream_get_string (mc_pipe_stream_t * ps);
+GString *mc_pstream_get_string (mc_pipe_stream_t *ps);
 
 MC_MOCKABLE void my_exit (int status);
 void save_stop_handler (void);
@@ -236,16 +255,15 @@ char *mc_realpath (const char *path, char *resolved_path);
 enum compression_type get_compression_type (int fd, const char *name);
 const char *decompress_extension (int type);
 
-GList *list_append_unique (GList * list, char *text);
+GList *list_append_unique (GList *list, char *text);
 
 /* Position saving and restoring */
 /* Load position for the given filename */
-void load_file_position (const vfs_path_t * filename_vpath, long *line, long *column,
-                         off_t * offset, GArray ** bookmarks);
+void load_file_position (const vfs_path_t *filename_vpath, long *line, long *column, off_t *offset,
+                         GArray **bookmarks);
 /* Save position for the given filename */
-void save_file_position (const vfs_path_t * filename_vpath, long line, long column, off_t offset,
-                         GArray * bookmarks);
-
+void save_file_position (const vfs_path_t *filename_vpath, long line, long column, off_t offset,
+                         GArray *bookmarks);
 
 /* if ch is in [A-Za-z], returns the corresponding control character,
  * else returns the argument. */
@@ -265,10 +283,10 @@ char *mc_build_filenamev (const char *first_element, va_list args);
 
 const char *mc_get_profile_root (void);
 
-void mc_propagate_error (GError ** dest, int code, const char *format, ...) G_GNUC_PRINTF (3, 4);
-void mc_replace_error (GError ** dest, int code, const char *format, ...) G_GNUC_PRINTF (3, 4);
+void mc_propagate_error (GError **dest, int code, const char *format, ...) G_GNUC_PRINTF (3, 4);
+void mc_replace_error (GError **dest, int code, const char *format, ...) G_GNUC_PRINTF (3, 4);
 
-gboolean mc_time_elapsed (gint64 * timestamp, gint64 delay);
+gboolean mc_time_elapsed (gint64 *timestamp, gint64 delay);
 
 /* --------------------------------------------------------------------------------------------- */
 /*** inline functions ****************************************************************************/
@@ -307,4 +325,4 @@ canonicalize_pathname (char *path)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#endif // MC_UTIL_H
+#endif  // MC_UTIL_H

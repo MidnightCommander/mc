@@ -46,12 +46,12 @@
 #include <stdlib.h>
 #include <string.h>
 #ifdef HAVE_SYS_PARAM_H
-#include <sys/param.h>
+#    include <sys/param.h>
 #endif
 #include <sys/types.h>
 #include <sys/stat.h>
 #ifdef HAVE_SYS_SELECT_H
-#include <sys/select.h>
+#    include <sys/select.h>
 #endif
 #include <sys/wait.h>
 #include <pwd.h>
@@ -60,14 +60,14 @@
 #include "lib/global.h"
 
 #include "lib/unixcompat.h"
-#include "lib/vfs/vfs.h"        // VFS_ENCODING_PREFIX
-#include "lib/strutil.h"        // str_move(), str_tokenize()
+#include "lib/vfs/vfs.h"  // VFS_ENCODING_PREFIX
+#include "lib/strutil.h"  // str_move(), str_tokenize()
 #include "lib/util.h"
-#include "lib/widget.h"         // message()
+#include "lib/widget.h"  // message()
 #include "lib/vfs/xdirentry.h"
 
 #ifdef HAVE_CHARSET
-#include "lib/charsets.h"
+#    include "lib/charsets.h"
 #endif
 
 /*** global variables ****************************************************************************/
@@ -411,7 +411,8 @@ my_get_current_dir (void)
  * @parameter shell   shell (if flags contain EXECUTE_AS_SHELL), command to run otherwise.
  *                    Shell (or command) will be found in paths described in PATH variable
  *                    (if shell parameter doesn't begin from path delimiter)
- * @parameter command Command for shell (or first parameter for command, if flags contain EXECUTE_AS_SHELL)
+ * @parameter command Command for shell (or first parameter for command, if flags contain
+ * EXECUTE_AS_SHELL)
  * @return 0 if successful, -1 otherwise
  */
 
@@ -447,7 +448,7 @@ my_systeml (int flags, const char *shell, ...)
 
     va_start (vargs, shell);
     while ((one_arg = va_arg (vargs, char *)) != NULL)
-          g_ptr_array_add (args_array, one_arg);
+        g_ptr_array_add (args_array, one_arg);
     va_end (vargs);
 
     g_ptr_array_add (args_array, NULL);
@@ -484,15 +485,15 @@ my_systemv (const char *command, char *const argv[])
         status = -1;
         break;
     case FORK_CHILD:
-        {
-            my_signal (SIGINT, SIG_DFL);
-            my_signal (SIGQUIT, SIG_DFL);
-            my_signal (SIGTSTP, SIG_DFL);
-            my_signal (SIGCHLD, SIG_DFL);
+    {
+        my_signal (SIGINT, SIG_DFL);
+        my_signal (SIGQUIT, SIG_DFL);
+        my_signal (SIGTSTP, SIG_DFL);
+        my_signal (SIGCHLD, SIG_DFL);
 
-            my_execvp (command, argv);
-            my_exit (127);      // Exec error
-        }
+        my_execvp (command, argv);
+        my_exit (127);  // Exec error
+    }
         MC_FALLTHROUGH;
         // no break here, or unreachable-code warning by no returning my_exit()
     default:
@@ -560,20 +561,20 @@ mc_popen (const char *command, gboolean read_out, gboolean read_err, GError **er
     if (p == NULL)
     {
         mc_replace_error (error, MC_PIPE_ERROR_CREATE_PIPE, "%s",
-                          _("Cannot create pipe descriptor"));
+                          _ ("Cannot create pipe descriptor"));
         goto ret_err;
     }
 
     p->out.fd = -1;
     p->err.fd = -1;
 
-    if (!g_spawn_async_with_pipes
-        (NULL, (gchar **) argv, NULL, G_SPAWN_DO_NOT_REAP_CHILD | G_SPAWN_FILE_AND_ARGV_ZERO, NULL,
-         NULL, &p->child_pid, NULL, read_out ? &p->out.fd : NULL, read_err ? &p->err.fd : NULL,
-         error))
+    if (!g_spawn_async_with_pipes (NULL, (gchar **) argv, NULL,
+                                   G_SPAWN_DO_NOT_REAP_CHILD | G_SPAWN_FILE_AND_ARGV_ZERO, NULL,
+                                   NULL, &p->child_pid, NULL, read_out ? &p->out.fd : NULL,
+                                   read_err ? &p->err.fd : NULL, error))
     {
         mc_replace_error (error, MC_PIPE_ERROR_CREATE_PIPE_STREAM, "%s",
-                          _("Cannot create pipe streams"));
+                          _ ("Cannot create pipe streams"));
         goto ret_err;
     }
 
@@ -587,7 +588,7 @@ mc_popen (const char *command, gboolean read_out, gboolean read_err, GError **er
 
     return p;
 
-  ret_err:
+ret_err:
     g_free (p);
     return NULL;
 }
@@ -650,10 +651,10 @@ mc_pread (mc_pipe_t *p, GError **error)
     res = select (maxfd + 1, &fds, NULL, NULL, NULL);
     if (res < 0 && errno != EINTR)
     {
-        mc_propagate_error (error, MC_PIPE_ERROR_READ,
-                            _
-                            ("Unexpected error in select() reading data from a child process:\n%s"),
-                            unix_error_string (errno));
+        mc_propagate_error (
+            error, MC_PIPE_ERROR_READ,
+            _ ("Unexpected error in select() reading data from a child process:\n%s"),
+            unix_error_string (errno));
         return;
     }
 
@@ -728,7 +729,7 @@ mc_pclose (mc_pipe_t *p, GError **error)
     if (p == NULL)
     {
         mc_replace_error (error, MC_PIPE_ERROR_READ, "%s",
-                          _("Cannot close pipe descriptor (p == NULL)"));
+                          _ ("Cannot close pipe descriptor (p == NULL)"));
         return;
     }
 
@@ -746,7 +747,7 @@ mc_pclose (mc_pipe_t *p, GError **error)
     while (res < 0 && errno == EINTR);
 
     if (res < 0)
-        mc_replace_error (error, MC_PIPE_ERROR_READ, _("Unexpected error in waitpid():\n%s"),
+        mc_replace_error (error, MC_PIPE_ERROR_READ, _ ("Unexpected error in waitpid():\n%s"),
                           unix_error_string (errno));
 
     g_free (p);
@@ -817,7 +818,7 @@ void
 canonicalize_pathname_custom (char *path, canon_path_flags_t flags)
 {
     char *p, *s;
-    char *lpath = path;         // path without leading UNC part
+    char *lpath = path;  // path without leading UNC part
     const size_t url_delim_len = strlen (VFS_PATH_URL_DELIMITER);
 
     // Detect and preserve UNC paths: //server/...
@@ -884,8 +885,8 @@ canonicalize_pathname_custom (char *path, canon_path_flags_t flags)
 
         if (IS_PATH_SEP (lpath[len - 1])
             && (len < url_delim_len
-                || strncmp (lpath + len - url_delim_len, VFS_PATH_URL_DELIMITER,
-                            url_delim_len) != 0))
+                || strncmp (lpath + len - url_delim_len, VFS_PATH_URL_DELIMITER, url_delim_len)
+                    != 0))
             lpath[len - 1] = '\0';
         else if (lpath[len - 1] == '.' && IS_PATH_SEP (lpath[len - 2]))
         {
@@ -904,7 +905,7 @@ canonicalize_pathname_custom (char *path, canon_path_flags_t flags)
     {
 #ifdef HAVE_CHARSET
         const size_t enc_prefix_len = strlen (VFS_ENCODING_PREFIX);
-#endif // HAVE_CHARSET
+#endif  // HAVE_CHARSET
 
         for (p = lpath; p[0] != '\0' && p[1] != '\0' && p[2] != '\0';)
         {
@@ -990,7 +991,7 @@ canonicalize_pathname_custom (char *path, canon_path_flags_t flags)
                         g_free (enc);
                     }
                     else
-#endif // HAVE_CHARSET
+#endif  // HAVE_CHARSET
                         str_move (s, p + 4);
                 }
 
@@ -1037,12 +1038,12 @@ canonicalize_pathname_custom (char *path, canon_path_flags_t flags)
                     if (p >= lpath)
                         continue;
                 }
-#endif // HAVE_CHARSET
+#endif  // HAVE_CHARSET
                 else
                 {
 #ifdef HAVE_CHARSET
-                  last:
-#endif // HAVE_CHARSET
+                last:
+#endif  // HAVE_CHARSET
                     if (s >= lpath + url_delim_len
                         && strncmp (s - url_delim_len, VFS_PATH_URL_DELIMITER, url_delim_len) == 0)
                         *s = '\0';
@@ -1084,7 +1085,7 @@ mc_realpath (const char *path, char *resolved_path)
             path = p;
         }
     }
-#endif // HAVE_CHARSET
+#endif  // HAVE_CHARSET
 
 #ifdef HAVE_REALPATH
     return realpath (path, resolved_path);
@@ -1094,11 +1095,11 @@ mc_realpath (const char *path, char *resolved_path)
         char got_path[PATH_MAX];
         char *new_path = got_path;
         char *max_path;
-#ifdef S_IFLNK
+#    ifdef S_IFLNK
         char link_path[PATH_MAX];
         int readlinks = 0;
         int n;
-#endif // S_IFLNK
+#    endif  // S_IFLNK
 
         // Make a copy of the source path since we may need to modify it.
         if (strlen (path) >= PATH_MAX - 2)
@@ -1174,7 +1175,7 @@ mc_realpath (const char *path, char *resolved_path)
                 }
                 *new_path++ = *path++;
             }
-#ifdef S_IFLNK
+#    ifdef S_IFLNK
             // Protect against infinite loops.
             if (readlinks++ > MAXSYMLINKS)
             {
@@ -1217,7 +1218,7 @@ mc_realpath (const char *path, char *resolved_path)
                 strcpy (copy_path, link_path);
                 path = copy_path;
             }
-#endif // S_IFLNK
+#    endif  // S_IFLNK
             *new_path++ = PATH_SEP;
         }
         // Delete trailing slash but don't whomp a lone slash.
@@ -1228,7 +1229,7 @@ mc_realpath (const char *path, char *resolved_path)
         strcpy (resolved_path, got_path);
         return resolved_path;
     }
-#endif // HAVE_REALPATH
+#endif      // HAVE_REALPATH
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1252,7 +1253,7 @@ get_user_permissions (struct stat *st)
 
         ngroups = getgroups (0, NULL);
         if (ngroups == -1)
-            ngroups = 0;        // ignore errors
+            ngroups = 0;  // ignore errors
 
         /* allocate space for one element in addition to what
          * will be filled by getgroups(). */
@@ -1262,7 +1263,7 @@ get_user_permissions (struct stat *st)
         {
             ngroups = getgroups (ngroups, groups);
             if (ngroups == -1)
-                ngroups = 0;    // ignore errors
+                ngroups = 0;  // ignore errors
         }
 
         /* getgroups() may or may not return the effective group ID,

@@ -36,7 +36,7 @@
 #include <string.h>
 
 #include "lib/global.h"
-#include "lib/util.h"           // whiteness()
+#include "lib/util.h"  // whiteness()
 
 #include "lib/strutil.h"
 
@@ -44,12 +44,12 @@
 
 /*** file scope macro definitions ****************************************************************/
 
-#define WORD_DELIMITERS " \t\n;&()|<>"
-#define QUOTE_CHARACTERS "\"'`"
+#define WORD_DELIMITERS    " \t\n;&()|<>"
+#define QUOTE_CHARACTERS   "\"'`"
 
 #define slashify_in_quotes "\\`\"$"
 
-#define member(c, s) ((c != '\0') ? (strchr ((s), (c)) != NULL) : FALSE)
+#define member(c, s)       ((c != '\0') ? (strchr ((s), (c)) != NULL) : FALSE)
 
 /*** file scope type declarations ****************************************************************/
 
@@ -72,7 +72,7 @@ str_tokenize_word (const char *string, int start)
     char delimopen = '\0';
     int nestdelim = 0;
 
-    if (member (string[i], "()\n"))     // XXX - included \n, but why? been here forever
+    if (member (string[i], "()\n"))  // XXX - included \n, but why? been here forever
         return (i + 1);
 
     if (g_ascii_isdigit (string[i]))
@@ -86,10 +86,10 @@ str_tokenize_word (const char *string, int start)
             return j;
 
         if (string[j] == '<' || string[j] == '>')
-            i = j;              // digit sequence is a file descriptor
+            i = j;  // digit sequence is a file descriptor
         else
         {
-            i = j;              // digit sequence is part of a word
+            i = j;  // digit sequence is part of a word
             goto get_word;
         }
     }
@@ -112,7 +112,7 @@ str_tokenize_word (const char *string, int start)
             // file descriptor
             for (j = i + 2; string[j] != '\0' && g_ascii_isdigit (string[j]); j++)
                 ;
-            if (string[j] == '-')       // <&[digits]-, >&[digits]-
+            if (string[j] == '-')  // <&[digits]-, >&[digits]-
                 j++;
             return j;
         }
@@ -134,7 +134,7 @@ str_tokenize_word (const char *string, int start)
         return (i + 1);
     }
 
-  get_word:
+get_word:
     // Get word from string + i;
 
     if (delimiter == '\0' && member (string[i], QUOTE_CHARACTERS))
@@ -151,8 +151,8 @@ str_tokenize_word (const char *string, int start)
             continue;
         }
 
-        if (string[i] == '\\' && delimiter != '\'' &&
-            (delimiter != '"' || member (string[i], slashify_in_quotes)))
+        if (string[i] == '\\' && delimiter != '\''
+            && (delimiter != '"' || member (string[i], slashify_in_quotes)))
         {
             i++;
             continue;

@@ -10,9 +10,9 @@
 #include <glib.h>
 
 #if defined(HAVE_FUNC_ATTRIBUTE_WEAK) && defined(HAVE_TESTS)
-#define MC_MOCKABLE __attribute__((weak))
+#    define MC_MOCKABLE __attribute__ ((weak))
 #else
-#define MC_MOCKABLE
+#    define MC_MOCKABLE
 #endif
 
 #include "glibcompat.h"
@@ -26,58 +26,58 @@
 /*** typedefs(not structures) and defined constants **********************************************/
 
 #ifdef ENABLE_NLS
-#include <libintl.h>
-#define _(String) gettext (String)
-#ifdef gettext_noop
-#define N_(String) gettext_noop (String)
-#else
-#define N_(String) (String)
-#endif
-#else // Stubs that do something close enough.
-#define textdomain(String) 1
-#define gettext(String) (String)
-#define ngettext(String1,String2,Num) (((Num) == 1) ? (String1) : (String2))
-#define dgettext(Domain,Message) (Message)
-#define dcgettext(Domain,Message,Type) (Message)
-#define bindtextdomain(Domain,Directory) 1
-#define _(String) (String)
-#define N_(String) (String)
-#endif // !ENABLE_NLS
+#    include <libintl.h>
+#    define _(String) gettext (String)
+#    ifdef gettext_noop
+#        define N_(String) gettext_noop (String)
+#    else
+#        define N_(String) (String)
+#    endif
+#else  // Stubs that do something close enough.
+#    define textdomain(String)                1
+#    define gettext(String)                   (String)
+#    define ngettext(String1, String2, Num)   (((Num) == 1) ? (String1) : (String2))
+#    define dgettext(Domain, Message)         (Message)
+#    define dcgettext(Domain, Message, Type)  (Message)
+#    define bindtextdomain(Domain, Directory) 1
+#    define _(String)                         (String)
+#    define N_(String)                        (String)
+#endif  // !ENABLE_NLS
 
 #ifdef HAVE_FUNC_ATTRIBUTE_FALLTHROUGH
-#define MC_FALLTHROUGH __attribute__((fallthrough))
+#    define MC_FALLTHROUGH __attribute__ ((fallthrough))
 #else
-#define MC_FALLTHROUGH
+#    define MC_FALLTHROUGH
 #endif
 
 #ifdef HAVE_FUNC_ATTRIBUTE_UNUSED
-#define MC_UNUSED __attribute__((unused))
+#    define MC_UNUSED __attribute__ ((unused))
 #else
-#define MC_UNUSED
+#    define MC_UNUSED
 #endif
 
 #ifdef USE_MAINTAINER_MODE
-#include "lib/logging.h"
+#    include "lib/logging.h"
 #endif
 
 /* Just for keeping Your's brains from invention a proper size of the buffer :-) */
-#define BUF_10K 10240L
-#define BUF_8K  8192L
-#define BUF_4K  4096L
-#define BUF_1K  1024L
+#define BUF_10K       10240L
+#define BUF_8K        8192L
+#define BUF_4K        4096L
+#define BUF_1K        1024L
 
-#define BUF_LARGE  BUF_1K
-#define BUF_MEDIUM 512
-#define BUF_SMALL 128
-#define BUF_TINY 64
+#define BUF_LARGE     BUF_1K
+#define BUF_MEDIUM    512
+#define BUF_SMALL     128
+#define BUF_TINY      64
 
 #define UTF8_CHAR_LEN 6
 
 /* Used to distinguish between a normal MC termination and */
 /* one caused by typing 'exit' or 'logout' in the subshell */
-#define SUBSHELL_EXIT 128
+#define SUBSHELL_EXIT   128
 
-#define MC_ERROR g_quark_from_static_string (PACKAGE)
+#define MC_ERROR        g_quark_from_static_string (PACKAGE)
 
 #define DEFAULT_CHARSET "ASCII"
 
@@ -126,7 +126,7 @@ typedef struct
      * This is reported to break on many terminals (xterm, qansi-m).
      */
     gboolean full_eight_bits;
-#endif                          // !HAVE_CHARSET
+#endif  // !HAVE_CHARSET
     /*
      * If utf-8 terminal utf8_display = TRUE
      * Display bits set UTF-8
@@ -141,7 +141,7 @@ typedef struct
 #ifdef ENABLE_BACKGROUND
     // If true, this is a background process
     gboolean we_are_background;
-#endif                          // ENABLE_BACKGROUND
+#endif  // ENABLE_BACKGROUND
 
     struct
     {
@@ -153,7 +153,7 @@ typedef struct
 
         // Ugly hack in order to distinguish between left and right panel in menubar
         // Set if the command is being run from the "Right" menu
-        gboolean is_right;      // If the selected menu was the right
+        gboolean is_right;  // If the selected menu was the right
     } widget;
 
     // The user's shell
@@ -175,14 +175,14 @@ typedef struct
 #ifndef LINUX_CONS_SAVER_C
         // Used only in mc, not in cons.saver
         char console_flag;
-#endif                          // !LINUX_CONS_SAVER_C
+#endif  // !LINUX_CONS_SAVER_C
         // If using a subshell for evaluating commands this is true
         gboolean use_subshell;
 
 #ifdef ENABLE_SUBSHELL
         // File descriptors of the pseudoterminal used by the subshell
         int subshell_pty;
-#endif                          // !ENABLE_SUBSHELL
+#endif  // !ENABLE_SUBSHELL
 
         // This flag is set by xterm detection routine in function main()
         // It is used by function toggle_subshell()

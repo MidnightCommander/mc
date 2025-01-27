@@ -9,11 +9,10 @@
 
 /*** global variables defined in .c file *********************************************************/
 
-
 /*** declarations of public functions ************************************************************/
 
-gboolean events_init (GError ** mcerror);
+gboolean events_init (GError **mcerror);
 
 /*** inline functions ****************************************************************************/
 
-#endif // MC__EVENTS_INIT_H
+#endif  // MC__EVENTS_INIT_H

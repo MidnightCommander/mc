@@ -38,15 +38,16 @@
 #include "lib/global.h"
 
 #include "tty.h"
-#include "tty-internal.h"       // mouse_enabled
+#include "tty-internal.h"  // mouse_enabled
 #include "mouse.h"
-#include "key.h"                // define sequence
+#include "key.h"  // define sequence
 
 /*** global variables ****************************************************************************/
 
 Mouse_Type use_mouse_p = MOUSE_NONE;
 gboolean mouse_enabled = FALSE;
-int mouse_fd = -1;              // for when gpm_fd changes to < 0 and the old one must be cleared from select_set
+int mouse_fd =
+    -1;  // for when gpm_fd changes to < 0 and the old one must be cleared from select_set
 const char *xmouse_seq;
 const char *xmouse_extended_seq;
 
@@ -72,7 +73,7 @@ show_mouse_pointer (int x, int y)
 #else
     (void) x;
     (void) y;
-#endif // HAVE_LIBGPM
+#endif  // HAVE_LIBGPM
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -86,7 +87,7 @@ init_mouse (void)
     case MOUSE_NONE:
         use_mouse_p = MOUSE_GPM;
         break;
-#endif // HAVE_LIBGPM
+#endif  // HAVE_LIBGPM
 
     case MOUSE_XTERM_NORMAL_TRACKING:
     case MOUSE_XTERM_BUTTON_EVENT_TRACKING:
@@ -115,24 +116,24 @@ enable_mouse (void)
     {
 #ifdef HAVE_LIBGPM
     case MOUSE_GPM:
+    {
+        Gpm_Connect conn;
+
+        conn.eventMask = ~GPM_MOVE;
+        conn.defaultMask = GPM_MOVE;
+        conn.minMod = 0;
+        conn.maxMod = 0;
+
+        mouse_fd = Gpm_Open (&conn, 0);
+        if (mouse_fd == -1)
         {
-            Gpm_Connect conn;
-
-            conn.eventMask = ~GPM_MOVE;
-            conn.defaultMask = GPM_MOVE;
-            conn.minMod = 0;
-            conn.maxMod = 0;
-
-            mouse_fd = Gpm_Open (&conn, 0);
-            if (mouse_fd == -1)
-            {
-                use_mouse_p = MOUSE_NONE;
-                return;
-            }
-            mouse_enabled = TRUE;
+            use_mouse_p = MOUSE_NONE;
+            return;
         }
-        break;
-#endif // HAVE_LIBGPM
+        mouse_enabled = TRUE;
+    }
+    break;
+#endif  // HAVE_LIBGPM
 
     case MOUSE_XTERM_NORMAL_TRACKING:
         // save old highlight mouse tracking

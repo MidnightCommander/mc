@@ -33,25 +33,25 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/stat.h>
-#include <inttypes.h>           // PRIuMAX
+#include <inttypes.h>  // PRIuMAX
 
 #include "lib/global.h"
 #include "lib/unixcompat.h"
 #include "lib/tty/tty.h"
-#include "lib/tty/key.h"        // is_idle()
+#include "lib/tty/key.h"  // is_idle()
 #include "lib/skin.h"
 #include "lib/strutil.h"
-#include "lib/timefmt.h"        // file_date()
+#include "lib/timefmt.h"  // file_date()
 #include "lib/util.h"
 #include "lib/widget.h"
 
-#include "src/setup.h"          // panels_options
+#include "src/setup.h"  // panels_options
 
-#include "filemanager.h"        // the_menubar
+#include "filemanager.h"  // the_menubar
 #include "layout.h"
 #include "mountlist.h"
 #ifdef ENABLE_EXT2FS_ATTR
-#include "cmd.h"                // chattr_get_as_str()
+#    include "cmd.h"  // chattr_get_as_str()
 #endif
 
 #include "info.h"
@@ -83,7 +83,7 @@ info_box (WInfo *info)
 {
     Widget *w = WIDGET (info);
 
-    const char *title = _("Information");
+    const char *title = _ ("Information");
     const int len = str_term_width1 (title);
 
     tty_set_normal_attrs ();
@@ -122,7 +122,7 @@ info_show_info (WInfo *info)
 
     tty_setcolor (MARKED_COLOR);
     widget_gotoyx (w, 1, 3);
-    tty_printf (_("Midnight Commander %s"), mc_global.mc_version);
+    tty_printf (_ ("Midnight Commander %s"), mc_global.mc_version);
 
     if (!info->ready)
         return;
@@ -148,7 +148,7 @@ info_show_info (WInfo *info)
     if (i18n_adjust == 0)
     {
         // This printf pattern string is used as a reference for size
-        file_label = _("File: %s");
+        file_label = _ ("File: %s");
         i18n_adjust = str_term_width1 (file_label) + 2;
     }
 
@@ -164,65 +164,66 @@ info_show_info (WInfo *info)
         MC_FALLTHROUGH;
     case 17:
         widget_gotoyx (w, 17, 3);
-        if ((myfs_stats.nfree == 0 && myfs_stats.nodes == 0) ||
-            (myfs_stats.nfree == (uintmax_t) (-1) && myfs_stats.nodes == (uintmax_t) (-1)))
-            tty_print_string (_("No node information"));
+        if ((myfs_stats.nfree == 0 && myfs_stats.nodes == 0)
+            || (myfs_stats.nfree == (uintmax_t) (-1) && myfs_stats.nodes == (uintmax_t) (-1)))
+            tty_print_string (_ ("No node information"));
         else if (myfs_stats.nfree == (uintmax_t) (-1))
-            tty_printf ("%s - / %" PRIuMAX, _("Free nodes:"), myfs_stats.nodes);
+            tty_printf ("%s - / %" PRIuMAX, _ ("Free nodes:"), myfs_stats.nodes);
         else if (myfs_stats.nodes == (uintmax_t) (-1))
-            tty_printf ("%s %" PRIuMAX " / -", _("Free nodes:"), myfs_stats.nfree);
+            tty_printf ("%s %" PRIuMAX " / -", _ ("Free nodes:"), myfs_stats.nfree);
         else
-            tty_printf ("%s %" PRIuMAX " / %" PRIuMAX " (%d%%)",
-                        _("Free nodes:"),
+            tty_printf ("%s %" PRIuMAX " / %" PRIuMAX " (%d%%)", _ ("Free nodes:"),
                         myfs_stats.nfree, myfs_stats.nodes,
-                        myfs_stats.nodes == 0 ? 0 :
-                        (int) (100 * (long double) myfs_stats.nfree / myfs_stats.nodes));
+                        myfs_stats.nodes == 0
+                            ? 0
+                            : (int) (100 * (long double) myfs_stats.nfree / myfs_stats.nodes));
         MC_FALLTHROUGH;
     case 16:
         widget_gotoyx (w, 16, 3);
         if (myfs_stats.avail == 0 && myfs_stats.total == 0)
-            tty_print_string (_("No space information"));
+            tty_print_string (_ ("No space information"));
         else
         {
             char buffer1[6], buffer2[6];
 
             size_trunc_len (buffer1, 5, myfs_stats.avail, 1, panels_options.kilobyte_si);
             size_trunc_len (buffer2, 5, myfs_stats.total, 1, panels_options.kilobyte_si);
-            tty_printf (_("Free space: %s / %s (%d%%)"), buffer1, buffer2,
-                        myfs_stats.total == 0 ? 0 :
-                        (int) (100 * (long double) myfs_stats.avail / myfs_stats.total));
+            tty_printf (_ ("Free space: %s / %s (%d%%)"), buffer1, buffer2,
+                        myfs_stats.total == 0
+                            ? 0
+                            : (int) (100 * (long double) myfs_stats.avail / myfs_stats.total));
         }
         MC_FALLTHROUGH;
     case 15:
         widget_gotoyx (w, 15, 3);
-        tty_printf (_("Type:       %s"),
-                    myfs_stats.typename ? myfs_stats.typename : _("non-local vfs"));
+        tty_printf (_ ("Type:       %s"),
+                    myfs_stats.typename ? myfs_stats.typename : _ ("non-local vfs"));
         if (myfs_stats.type != 0xffff && myfs_stats.type != -1)
             tty_printf (" (%Xh)", (unsigned int) myfs_stats.type);
         MC_FALLTHROUGH;
     case 14:
         widget_gotoyx (w, 14, 3);
-        str_printf (buff, _("Device:     %s"),
+        str_printf (buff, _ ("Device:     %s"),
                     str_trunc (myfs_stats.device, w->cols - i18n_adjust));
         tty_print_string (buff->str);
         g_string_set_size (buff, 0);
         MC_FALLTHROUGH;
     case 13:
         widget_gotoyx (w, 13, 3);
-        str_printf (buff, _("Filesystem: %s"),
+        str_printf (buff, _ ("Filesystem: %s"),
                     str_trunc (myfs_stats.mpoint, w->cols - i18n_adjust));
         tty_print_string (buff->str);
         g_string_set_size (buff, 0);
         MC_FALLTHROUGH;
     case 12:
         widget_gotoyx (w, 12, 3);
-        str_printf (buff, _("Accessed:   %s"), file_date (st.st_atime));
+        str_printf (buff, _ ("Accessed:   %s"), file_date (st.st_atime));
         tty_print_string (buff->str);
         g_string_set_size (buff, 0);
         MC_FALLTHROUGH;
     case 11:
         widget_gotoyx (w, 11, 3);
-        str_printf (buff, _("Modified:   %s"), file_date (st.st_mtime));
+        str_printf (buff, _ ("Modified:   %s"), file_date (st.st_mtime));
         tty_print_string (buff->str);
         g_string_set_size (buff, 0);
         MC_FALLTHROUGH;
@@ -231,7 +232,7 @@ info_show_info (WInfo *info)
         /* The field st_ctime is changed by writing or by setting inode
            information (i.e., owner, group, link count, mode, etc.).  */
         // TRANSLATORS: Time of last status change as in stat(2) man.
-        str_printf (buff, _("Changed:    %s"), file_date (st.st_ctime));
+        str_printf (buff, _ ("Changed:    %s"), file_date (st.st_ctime));
         tty_print_string (buff->str);
         g_string_set_size (buff, 0);
         MC_FALLTHROUGH;
@@ -239,27 +240,27 @@ info_show_info (WInfo *info)
         widget_gotoyx (w, 9, 3);
 #ifdef HAVE_STRUCT_STAT_ST_RDEV
         if (S_ISCHR (st.st_mode) || S_ISBLK (st.st_mode))
-            tty_printf (_("Dev. type: major %lu, minor %lu"),
-                        (unsigned long) major (st.st_rdev), (unsigned long) minor (st.st_rdev));
+            tty_printf (_ ("Dev. type: major %lu, minor %lu"), (unsigned long) major (st.st_rdev),
+                        (unsigned long) minor (st.st_rdev));
         else
 #endif
         {
             char buffer[10];
             size_trunc_len (buffer, 9, st.st_size, 0, panels_options.kilobyte_si);
-            tty_printf (_("Size:       %s"), buffer);
+            tty_printf (_ ("Size:       %s"), buffer);
 #ifdef HAVE_STRUCT_STAT_ST_BLOCKS
-            tty_printf (ngettext (" (%lu block)", " (%lu blocks)",
-                                  (unsigned long) st.st_blocks), (unsigned long) st.st_blocks);
+            tty_printf (ngettext (" (%lu block)", " (%lu blocks)", (unsigned long) st.st_blocks),
+                        (unsigned long) st.st_blocks);
 #endif
         }
         MC_FALLTHROUGH;
     case 8:
         widget_gotoyx (w, 8, 3);
-        tty_printf (_("Owner:      %s/%s"), get_owner (st.st_uid), get_group (st.st_gid));
+        tty_printf (_ ("Owner:      %s/%s"), get_owner (st.st_uid), get_group (st.st_gid));
         MC_FALLTHROUGH;
     case 7:
         widget_gotoyx (w, 7, 3);
-        tty_printf (_("Links:      %d"), (int) st.st_nlink);
+        tty_printf (_ ("Links:      %d"), (int) st.st_nlink);
         MC_FALLTHROUGH;
     case 6:
         widget_gotoyx (w, 6, 3);
@@ -272,42 +273,41 @@ info_show_info (WInfo *info)
             vpath = vfs_path_from_str (fe->fname->str);
 
             if (mc_fgetflags (vpath, &attr) == 0)
-                tty_printf (_("Attributes: %s"), chattr_get_as_str (attr));
+                tty_printf (_ ("Attributes: %s"), chattr_get_as_str (attr));
             else
-                tty_print_string (_("Attributes: unavailable"));
+                tty_print_string (_ ("Attributes: unavailable"));
 
             vfs_path_free (vpath, TRUE);
         }
 #else
-        tty_print_string (_("Attributes: unavailable"));
-#endif // ENABLE_EXT2FS_ATTR
+        tty_print_string (_ ("Attributes: unavailable"));
+#endif  // ENABLE_EXT2FS_ATTR
         MC_FALLTHROUGH;
     case 5:
         widget_gotoyx (w, 5, 3);
-        tty_printf (_("Mode:       %s (%04o)"),
-                    string_perm (st.st_mode), (unsigned) st.st_mode & 07777);
+        tty_printf (_ ("Mode:       %s (%04o)"), string_perm (st.st_mode),
+                    (unsigned) st.st_mode & 07777);
         MC_FALLTHROUGH;
     case 4:
         widget_gotoyx (w, 4, 3);
-        tty_printf (_("Location:   %Xh:%Xh"), (unsigned int) st.st_dev, (unsigned int) st.st_ino);
+        tty_printf (_ ("Location:   %Xh:%Xh"), (unsigned int) st.st_dev, (unsigned int) st.st_ino);
         MC_FALLTHROUGH;
     case 3:
-        {
-            const char *fname;
+    {
+        const char *fname;
 
-            widget_gotoyx (w, 3, 2);
-            fname = fe->fname->str;
-            str_printf (buff, file_label, str_trunc (fname, w->cols - i18n_adjust));
-            tty_print_string (buff->str);
-        }
+        widget_gotoyx (w, 3, 2);
+        fname = fe->fname->str;
+        str_printf (buff, file_label, str_trunc (fname, w->cols - i18n_adjust));
+        tty_print_string (buff->str);
+    }
         MC_FALLTHROUGH;
     case 2:
         MC_FALLTHROUGH;
     case 1:
         MC_FALLTHROUGH;
-    case 0:
-        ;
-    }                           // switch
+    case 0:;
+    }  // switch
     g_string_free (buff, TRUE);
 }
 

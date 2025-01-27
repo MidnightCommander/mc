@@ -25,14 +25,14 @@
 
 #include <config.h>
 
-#include <stdio.h>              // file functions
+#include <stdio.h>  // file functions
 
 #include "lib/global.h"
 
-#include "lib/fileloc.h"        // MC_FILEPOS_FILE
-#include "lib/mcconfig.h"       // mc_config_get_full_path()
-#include "lib/strutil.h"        // str_term_width1()
-#include "lib/util.h"           // backup functions
+#include "lib/fileloc.h"   // MC_FILEPOS_FILE
+#include "lib/mcconfig.h"  // mc_config_get_full_path()
+#include "lib/strutil.h"   // str_term_width1()
+#include "lib/util.h"      // backup functions
 
 #include "file_history.h"
 
@@ -87,7 +87,7 @@ file_history_list_read (void)
         fhd = g_new (file_history_data_t, 1);
         fhd->file_name = g_strndup (buf, s - buf);
         len = strlen (s + 1);
-        fhd->file_pos = g_strndup (s + 1, len - 1);     // ignore '\n'
+        fhd->file_pos = g_strndup (s + 1, len - 1);  // ignore '\n'
         file_list = g_list_prepend (file_list, fhd);
     }
 

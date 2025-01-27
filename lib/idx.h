@@ -112,33 +112,32 @@
        then be typedef'ed to a range type that is signed after promotion.  */
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
+    /* In the future, idx_t could be typedef'ed to a signed range type.
+       The clang "extended integer types", supported in Clang 11 or newer
+       <https://clang.llvm.org/docs/LanguageExtensions.html#extended-integer-types>,
+       are a special case of range types.  However, these types don't support binary
+       operators with plain integer types (e.g. expressions such as x > 1).
+       Therefore, they don't behave like signed types (and not like unsigned types
+       either).  So, we cannot use them here.  */
 
-/* In the future, idx_t could be typedef'ed to a signed range type.
-   The clang "extended integer types", supported in Clang 11 or newer
-   <https://clang.llvm.org/docs/LanguageExtensions.html#extended-integer-types>,
-   are a special case of range types.  However, these types don't support binary
-   operators with plain integer types (e.g. expressions such as x > 1).
-   Therefore, they don't behave like signed types (and not like unsigned types
-   either).  So, we cannot use them here.  */
-
-/* Use the signed type 'ptrdiff_t'.  */
-/* Note: ISO C does not mandate that 'size_t' and 'ptrdiff_t' have the same
-   size, but it is so on all platforms we have seen since 1990.  */
-typedef ptrdiff_t idx_t;
+    /* Use the signed type 'ptrdiff_t'.  */
+    /* Note: ISO C does not mandate that 'size_t' and 'ptrdiff_t' have the same
+       size, but it is so on all platforms we have seen since 1990.  */
+    typedef ptrdiff_t idx_t;
 
 /* IDX_MAX is the maximum value of an idx_t.  */
 #define IDX_MAX PTRDIFF_MAX
 
-/* So far no need has been found for an IDX_WIDTH macro.
-   Perhaps there should be another macro IDX_VALUE_BITS that does not
-   count the sign bit and is therefore one less than PTRDIFF_WIDTH.  */
-
+    /* So far no need has been found for an IDX_WIDTH macro.
+       Perhaps there should be another macro IDX_VALUE_BITS that does not
+       count the sign bit and is therefore one less than PTRDIFF_WIDTH.  */
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // _IDX_H
+#endif  // _IDX_H

@@ -40,10 +40,10 @@
 
 #include "lib/global.h"
 
-#include "lib/vfs/utilvfs.h"    // vfs_parse_ls_lga()
-#include "lib/util.h"           // string_perm()
-#include "lib/timefmt.h"        // FMT_LOCALTIME
-#include "lib/widget.h"         // for the prototype of message() only
+#include "lib/vfs/utilvfs.h"  // vfs_parse_ls_lga()
+#include "lib/util.h"         // string_perm()
+#include "lib/timefmt.h"      // FMT_LOCALTIME
+#include "lib/widget.h"       // for the prototype of message() only
 
 /*** global variables ****************************************************************************/
 
@@ -59,9 +59,8 @@ typedef enum
 
 /*** forward declarations (file scope functions) *************************************************/
 
-static gboolean
-parse_format_name_argument (const gchar * option_name, const gchar * value, gpointer data,
-                            GError ** error);
+static gboolean parse_format_name_argument (const gchar *option_name, const gchar *value,
+                                            gpointer data, GError **error);
 
 /*** file scope variables ************************************************************************/
 
@@ -74,18 +73,18 @@ static output_format_t opt_output_format = FORMAT_LS;
 /* Misc. */
 static int error_count = 0;
 
-static GOptionEntry entries[] = {
-    {"drop-mtime", 0, 0, G_OPTION_ARG_NONE, &opt_drop_mtime, "Don't include mtime in the output.",
-     NULL},
-    {"drop-ids", 0, 0, G_OPTION_ARG_NONE, &opt_drop_ids, "Don't include uid/gid in the output.",
-     NULL},
-    {"symbolic-ids", 0, 0, G_OPTION_ARG_NONE, &opt_symbolic_ids,
-     "Print the strings '<<uid>>'/'<<gid>>' instead of the numeric IDs when they match the process' uid/gid.",
-     NULL},
-    {"format", 'f', 0, G_OPTION_ARG_CALLBACK, parse_format_name_argument,
-     "Output format. Default: ls.", "<ls|yaml>"},
-    G_OPTION_ENTRY_NULL
-};
+static GOptionEntry entries[] = { { "drop-mtime", 0, 0, G_OPTION_ARG_NONE, &opt_drop_mtime,
+                                    "Don't include mtime in the output.", NULL },
+                                  { "drop-ids", 0, 0, G_OPTION_ARG_NONE, &opt_drop_ids,
+                                    "Don't include uid/gid in the output.", NULL },
+                                  { "symbolic-ids", 0, 0, G_OPTION_ARG_NONE, &opt_symbolic_ids,
+                                    "Print the strings '<<uid>>'/'<<gid>>' instead of the numeric "
+                                    "IDs when they match the process' uid/gid.",
+                                    NULL },
+                                  { "format", 'f', 0, G_OPTION_ARG_CALLBACK,
+                                    parse_format_name_argument, "Output format. Default: ls.",
+                                    "<ls|yaml>" },
+                                  G_OPTION_ENTRY_NULL };
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
@@ -123,9 +122,8 @@ parse_command_line (int *argc, char **argv[])
     GError *error = NULL;
     GOptionContext *context;
 
-    context =
-        g_option_context_new
-        ("- Parses its input, which is expected to be in a format similar to 'ls -l', and writes the result to stdout.");
+    context = g_option_context_new ("- Parses its input, which is expected to be in a format "
+                                    "similar to 'ls -l', and writes the result to stdout.");
     g_option_context_add_main_entries (context, entries, NULL);
     if (!g_option_context_parse (context, argc, argv, &error))
     {
@@ -161,7 +159,7 @@ my_itoa (int i)
 static const char *
 symbolic_uid (uid_t uid)
 {
-    return (opt_symbolic_ids && uid == getuid ())? "<<uid>>" : my_itoa ((int) uid);
+    return (opt_symbolic_ids && uid == getuid ()) ? "<<uid>>" : my_itoa ((int) uid);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -169,7 +167,7 @@ symbolic_uid (uid_t uid)
 static const char *
 symbolic_gid (gid_t gid)
 {
-    return (opt_symbolic_ids && gid == getgid ())? "<<gid>>" : my_itoa ((int) gid);
+    return (opt_symbolic_ids && gid == getgid ()) ? "<<gid>>" : my_itoa ((int) gid);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -272,7 +270,7 @@ static void
 yaml_dump_record (gboolean success, const char *input_line, const struct stat *st,
                   const char *filename, const char *linkname)
 {
-    printf ("-\n");             // Start new item in the list.
+    printf ("-\n");  // Start new item in the list.
 
     if (success)
     {
@@ -370,8 +368,8 @@ process_input (FILE *input)
 
     while (fgets (line, sizeof line, input) != NULL)
     {
-        chomp (line);           // Not mandatory. Makes error messages nicer.
-        if (strncmp (line, "total ", 6) == 0)   // Convenience only: makes 'ls -l' parse cleanly.
+        chomp (line);                          // Not mandatory. Makes error messages nicer.
+        if (strncmp (line, "total ", 6) == 0)  // Convenience only: makes 'ls -l' parse cleanly.
             continue;
         process_ls_line (line);
     }

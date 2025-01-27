@@ -58,7 +58,7 @@
 #include "lib/hook.h"
 #include "lib/util.h"
 
-#include "src/setup.h"          // setup_init()
+#include "src/setup.h"  // setup_init()
 
 #include "treestore.h"
 
@@ -72,7 +72,7 @@
 
 /*** forward declarations (file scope functions) *************************************************/
 
-static tree_entry *tree_store_add_entry (const vfs_path_t * name);
+static tree_entry *tree_store_add_entry (const vfs_path_t *name);
 
 /*** file scope variables ************************************************************************/
 
@@ -92,9 +92,9 @@ tree_store_dirty (gboolean dirty)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
-  *
-  * @return the number of common bytes in the strings.
-  */
+ *
+ * @return the number of common bytes in the strings.
+ */
 
 static size_t
 str_common (const vfs_path_t *s1_vpath, const vfs_path_t *s2_vpath)
@@ -113,25 +113,25 @@ str_common (const vfs_path_t *s1_vpath, const vfs_path_t *s2_vpath)
 
 /* --------------------------------------------------------------------------------------------- */
 /** The directory names are arranged in a single linked list in the same
-  * order as they are displayed. When the tree is displayed the expected
-  * order is like this:
-  * /
-  * /bin
-  * /etc
-  * /etc/X11
-  * /etc/rc.d
-  * /etc.old/X11
-  * /etc.old/rc.d
-  * /usr
-  *
-  * i.e. the required collating sequence when comparing two directory names is
-  * '\0' < PATH_SEP < all-other-characters-in-encoding-order
-  *
-  * Since strcmp doesn't fulfil this requirement we use pathcmp when
-  * inserting directory names into the list. The meaning of the return value
-  * of pathcmp and strcmp are the same (an integer less than, equal to, or
-  * greater than zero if p1 is found to be less than, to match, or be greater
-  * than p2.
+ * order as they are displayed. When the tree is displayed the expected
+ * order is like this:
+ * /
+ * /bin
+ * /etc
+ * /etc/X11
+ * /etc/rc.d
+ * /etc.old/X11
+ * /etc.old/rc.d
+ * /usr
+ *
+ * i.e. the required collating sequence when comparing two directory names is
+ * '\0' < PATH_SEP < all-other-characters-in-encoding-order
+ *
+ * Since strcmp doesn't fulfil this requirement we use pathcmp when
+ * inserting directory names into the list. The meaning of the return value
+ * of pathcmp and strcmp are the same (an integer less than, equal to, or
+ * greater than zero if p1 is found to be less than, to match, or be greater
+ * than p2.
  */
 
 static int
@@ -366,8 +366,8 @@ tree_store_save_to (char *name)
 
             if (i == EOF)
             {
-                fprintf (stderr, _("Cannot write to the %s file:\n%s\n"),
-                         name, unix_error_string (errno));
+                fprintf (stderr, _ ("Cannot write to the %s file:\n%s\n"), name,
+                         unix_error_string (errno));
                 break;
             }
         }
@@ -393,12 +393,12 @@ tree_store_add_entry (const vfs_path_t *name)
         abort ();
 
     // Search for the correct place
-    for (current = ts.tree_first;
-         current != NULL && (flag = pathcmp (current->name, name)) < 0; current = current->next)
+    for (current = ts.tree_first; current != NULL && (flag = pathcmp (current->name, name)) < 0;
+         current = current->next)
         old = current;
 
     if (flag == 0)
-        return current;         // Already in the list
+        return current;  // Already in the list
 
     // Not in the list -> add it
     new = g_new0 (tree_entry, 1);
@@ -463,8 +463,8 @@ tree_store_add_entry (const vfs_path_t *name)
     new->mark = FALSE;
 
     // Correct the submasks of the previous entries
-    for (current = new->prev;
-         current != NULL && current->sublevel > new->sublevel; current = current->prev)
+    for (current = new->prev; current != NULL && current->sublevel > new->sublevel;
+         current = current->prev)
         current->submask |= 1 << new->sublevel;
 
     tree_store_dirty (TRUE);
@@ -604,8 +604,8 @@ tree_store_whereis (const vfs_path_t *name)
     tree_entry *current;
     int flag = -1;
 
-    for (current = ts.tree_first;
-         current != NULL && (flag = pathcmp (current->name, name)) < 0; current = current->next)
+    for (current = ts.tree_first; current != NULL && (flag = pathcmp (current->name, name)) < 0;
+         current = current->next)
         ;
 
     return flag == 0 ? current : NULL;
@@ -670,7 +670,7 @@ tree_store_save (void)
 void
 tree_store_add_entry_remove_hook (tree_store_remove_fn callback, void *data)
 {
-    add_hook (&remove_entry_hooks, (void (*)(void *)) callback, data);
+    add_hook (&remove_entry_hooks, (void (*) (void *)) callback, data);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -678,7 +678,7 @@ tree_store_add_entry_remove_hook (tree_store_remove_fn callback, void *data)
 void
 tree_store_remove_entry_remove_hook (tree_store_remove_fn callback)
 {
-    delete_hook (&remove_entry_hooks, (void (*)(void *)) callback);
+    delete_hook (&remove_entry_hooks, (void (*) (void *)) callback);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -705,7 +705,7 @@ tree_store_remove_entry (const vfs_path_t *name_vpath)
 
     base = tree_store_whereis (name_vpath);
     if (base == NULL)
-        return;                 // Doesn't exist
+        return;  // Doesn't exist
 
     len = vfs_path_len (base->name);
     current = base->next;
@@ -756,8 +756,8 @@ tree_store_mark_checked (const char *subname)
         name = vfs_path_append_new (ts.check_name, subname, (char *) NULL);
 
     // Search for the subdirectory
-    for (current = ts.check_start;
-         current != NULL && (flag = pathcmp (current->name, name)) < 0; current = current->next)
+    for (current = ts.check_start; current != NULL && (flag = pathcmp (current->name, name)) < 0;
+         current = current->next)
         ;
 
     if (flag != 0)

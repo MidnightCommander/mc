@@ -49,9 +49,9 @@
 
 #include <config.h>
 
-#include <string.h>             // memset()
+#include <string.h>  // memset()
 #ifdef MC_ENABLE_DEBUGGING_CODE
-#include <inttypes.h>           // uintmax_t
+#    include <inttypes.h>  // uintmax_t
 #endif
 
 #include "lib/global.h"
@@ -63,13 +63,13 @@
 /*** file scope macro definitions ****************************************************************/
 
 #define VIEW_COORD_CACHE_GRANUL 1024
-#define CACHE_CAPACITY_DELTA 64
+#define CACHE_CAPACITY_DELTA    64
 
 #define coord_cache_index(c, i) ((coord_cache_entry_t *) g_ptr_array_index ((c), (i)))
 
 /*** file scope type declarations ****************************************************************/
 
-typedef gboolean (*cmp_func_t) (const coord_cache_entry_t * a, const coord_cache_entry_t * b);
+typedef gboolean (*cmp_func_t) (const coord_cache_entry_t *a, const coord_cache_entry_t *b);
 
 /*** forward declarations (file scope functions) *************************************************/
 
@@ -83,7 +83,7 @@ typedef gboolean (*cmp_func_t) (const coord_cache_entry_t * a, const coord_cache
 static inline void
 mcview_ccache_add_entry (GPtrArray *cache, const coord_cache_entry_t *entry)
 {
-#if GLIB_CHECK_VERSION (2, 68, 0)
+#if GLIB_CHECK_VERSION(2, 68, 0)
     g_ptr_array_add (cache, g_memdup2 (entry, sizeof (*entry)));
 #else
     g_ptr_array_add (cache, g_memdup (entry, sizeof (*entry)));
@@ -191,12 +191,10 @@ mcview_ccache_dump (WView *view)
 
         e = coord_cache_index (cache, i);
         (void) fprintf (f,
-                        "entry %8u  offset %8" PRIuMAX
-                        "  line %8" PRIuMAX "  column %8" PRIuMAX
+                        "entry %8u  offset %8" PRIuMAX "  line %8" PRIuMAX "  column %8" PRIuMAX
                         "  nroff_column %8" PRIuMAX "\n",
-                        (unsigned int) i,
-                        (uintmax_t) e->cc_offset, (uintmax_t) e->cc_line, (uintmax_t) e->cc_column,
-                        (uintmax_t) e->cc_nroff_column);
+                        (unsigned int) i, (uintmax_t) e->cc_offset, (uintmax_t) e->cc_line,
+                        (uintmax_t) e->cc_column, (uintmax_t) e->cc_nroff_column);
     }
     (void) fprintf (f, "\n");
 
@@ -204,8 +202,7 @@ mcview_ccache_dump (WView *view)
     for (offset = 0; offset < filesize; offset++)
     {
         mcview_offset_to_coord (view, &line, &column, offset);
-        (void) fprintf (f,
-                        "offset %8" PRIuMAX "  line %8" PRIuMAX "  column %8" PRIuMAX "\n",
+        (void) fprintf (f, "offset %8" PRIuMAX "  line %8" PRIuMAX "  column %8" PRIuMAX "\n",
                         (uintmax_t) offset, (uintmax_t) line, (uintmax_t) column);
     }
 
@@ -221,8 +218,7 @@ mcview_ccache_dump (WView *view)
             if (offset >= nextline_offset)
                 break;
 
-            (void) fprintf (f,
-                            "line %8" PRIuMAX "  column %8" PRIuMAX "  offset %8" PRIuMAX "\n",
+            (void) fprintf (f, "line %8" PRIuMAX "  column %8" PRIuMAX "  offset %8" PRIuMAX "\n",
                             (uintmax_t) line, (uintmax_t) column, (uintmax_t) offset);
         }
 
@@ -279,7 +275,7 @@ mcview_ccache_lookup (WView *view, coord_cache_entry_t *coord, enum ccache_type 
 
     tty_enable_interrupt_key ();
 
-  retry:
+retry:
     // find the two neighbor entries in the cache
     i = mcview_ccache_find (view, coord, cmp_func);
     // now i points to the lower neighbor in the cache
@@ -299,8 +295,9 @@ mcview_ccache_lookup (WView *view, coord_cache_entry_t *coord, enum ccache_type 
         if (!mcview_get_byte (view, current.cc_offset, &c))
             break;
 
-        if (!cmp_func (&current, coord) &&
-            (lookup_what != CCACHE_OFFSET || !view->mode_flags.nroff || nroff_state == NROFF_START))
+        if (!cmp_func (&current, coord)
+            && (lookup_what != CCACHE_OFFSET || !view->mode_flags.nroff
+                || nroff_state == NROFF_START))
             break;
 
         // Provide useful default values for 'next'
@@ -347,15 +344,15 @@ mcview_ccache_lookup (WView *view, coord_cache_entry_t *coord, enum ccache_type 
         }
         else
         {
-            ;                   // Use all default values from above
+            ;  // Use all default values from above
         }
 
         switch (nroff_state)
         {
         case NROFF_START:
         case NROFF_CONTINUATION:
-            nroff_state = mcview_is_nroff_sequence (view, current.cc_offset)
-                ? NROFF_BACKSPACE : NROFF_START;
+            nroff_state =
+                mcview_is_nroff_sequence (view, current.cc_offset) ? NROFF_BACKSPACE : NROFF_START;
             break;
         case NROFF_BACKSPACE:
             nroff_state = NROFF_CONTINUATION;

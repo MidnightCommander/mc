@@ -28,10 +28,10 @@
 #include "tests/mctest.h"
 
 #include "lib/strutil.h"
-#include "lib/vfs/vfs.h"        // VFS_ENCODING_PREFIX, vfs_init(), vfs_shut()
+#include "lib/vfs/vfs.h"  // VFS_ENCODING_PREFIX, vfs_init(), vfs_shut()
 #include "src/vfs/local/local.c"
 
-#include "lib/util.h"           // mc_realpath()
+#include "lib/util.h"  // mc_realpath()
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -64,10 +64,9 @@ static const struct data_source
 {
     const char *input_string;
     const char *expected_string;
-} data_source[] =
-{
+} data_source[] = {
     // absolute paths
-    { "/", "/"},
+    { "/", "/" },
     { "/usr/bin", "/usr/bin" },
 #ifdef HAVE_CHARSET
     { "/" VFS_ENCODING_PREFIX "UTF-8/", "/" },

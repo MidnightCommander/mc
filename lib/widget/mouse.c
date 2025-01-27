@@ -63,7 +63,7 @@ init_mouse_event (mouse_event_t *event, mouse_msg_t msg, const Gpm_Event *global
                   const Widget *w)
 {
     event->msg = msg;
-    event->x = global_gpm->x - w->rect.x - 1;   // '-1' because Gpm_Event is 1-based.
+    event->x = global_gpm->x - w->rect.x - 1;  // '-1' because Gpm_Event is 1-based.
     event->y = global_gpm->y - w->rect.y - 1;
     event->count = global_gpm->type & (GPM_SINGLE | GPM_DOUBLE | GPM_TRIPLE);
     event->buttons = global_gpm->buttons;
@@ -200,7 +200,6 @@ mouse_process_event (Widget *w, mouse_event_t *event)
 
     return ret;
 }
-
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/

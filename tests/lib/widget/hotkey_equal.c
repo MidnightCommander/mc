@@ -55,79 +55,55 @@ static const struct test_hotkey_equal_ds
     const hotkey_t hotkey1;
     const hotkey_t hotkey2;
     gboolean expected_result;
-} test_hotkey_equal_ds[] =
-{
+} test_hotkey_equal_ds[] = {
     // 0
-    {
-        { .start = C ("abc"), .hotkey = NULL, .end = NULL },
-        { .start = C ("abc"), .hotkey = NULL, .end = NULL },
-        TRUE
-    },
+    { { .start = C ("abc"), .hotkey = NULL, .end = NULL },
+      { .start = C ("abc"), .hotkey = NULL, .end = NULL },
+      TRUE },
     // 1
-    {
-        { .start = C (""), .hotkey = C (""), .end = C ("") },
-        { .start = C (""), .hotkey = C (""), .end = C ("") },
-        TRUE
-    },
+    { { .start = C (""), .hotkey = C (""), .end = C ("") },
+      { .start = C (""), .hotkey = C (""), .end = C ("") },
+      TRUE },
     // 2
-    {
-        { .start = C ("abc"), .hotkey = C ("d"), .end = C ("efg") },
-        { .start = C ("abc"), .hotkey = C ("d"), .end = C ("efg") },
-        TRUE
-    },
+    { { .start = C ("abc"), .hotkey = C ("d"), .end = C ("efg") },
+      { .start = C ("abc"), .hotkey = C ("d"), .end = C ("efg") },
+      TRUE },
     // 3
-    {
-        { .start = C ("abc"), .hotkey = NULL, .end = C ("efg") },
-        { .start = C ("abc"), .hotkey = NULL, .end = C ("efg") },
-        TRUE
-    },
+    { { .start = C ("abc"), .hotkey = NULL, .end = C ("efg") },
+      { .start = C ("abc"), .hotkey = NULL, .end = C ("efg") },
+      TRUE },
     // 4
-    {
-        { .start = C ("abc"), .hotkey = C ("d"), .end = NULL },
-        { .start = C ("abc"), .hotkey = C ("d"), .end = NULL },
-        TRUE
-    },
+    { { .start = C ("abc"), .hotkey = C ("d"), .end = NULL },
+      { .start = C ("abc"), .hotkey = C ("d"), .end = NULL },
+      TRUE },
     // 5
-    {
-        { .start = C ("abc"), .hotkey = C ("d"), .end = C ("efg") },
-        { .start = C ("_bc"), .hotkey = C ("d"), .end = C ("efg") },
-        FALSE
-    },
+    { { .start = C ("abc"), .hotkey = C ("d"), .end = C ("efg") },
+      { .start = C ("_bc"), .hotkey = C ("d"), .end = C ("efg") },
+      FALSE },
     // 6
-    {
-        { .start = C ("abc"), .hotkey = C ("d"), .end = C ("efg") },
-        { .start = C ("abc"), .hotkey = C ("_"), .end = C ("efg") },
-        FALSE
-    },
+    { { .start = C ("abc"), .hotkey = C ("d"), .end = C ("efg") },
+      { .start = C ("abc"), .hotkey = C ("_"), .end = C ("efg") },
+      FALSE },
     // 7
-    {
-        { .start = C ("abc"), .hotkey = C ("d"), .end = C ("efg") },
-        { .start = C ("abc"), .hotkey = C ("d"), .end = C ("_fg") },
-        FALSE
-    },
+    { { .start = C ("abc"), .hotkey = C ("d"), .end = C ("efg") },
+      { .start = C ("abc"), .hotkey = C ("d"), .end = C ("_fg") },
+      FALSE },
     // 8
-    {
-        { .start = C ("abc"), .hotkey = C ("d"), .end = C ("efg") },
-        { .start = C ("adc"), .hotkey = NULL,    .end = C ("efg") },
-        FALSE
-    },
+    { { .start = C ("abc"), .hotkey = C ("d"), .end = C ("efg") },
+      { .start = C ("adc"), .hotkey = NULL, .end = C ("efg") },
+      FALSE },
     // 9
-    {
-        { .start = C ("abc"), .hotkey = C ("d"), .end = C ("efg") },
-        { .start = C ("abc"), .hotkey = C ("d"), .end = NULL      },
-        FALSE
-    },
+    { { .start = C ("abc"), .hotkey = C ("d"), .end = C ("efg") },
+      { .start = C ("abc"), .hotkey = C ("d"), .end = NULL },
+      FALSE },
     // 10
-    {
-        { .start = C ("abc"), .hotkey = C ("d"), .end = C ("efg") },
-        { .start = C ("abc"), .hotkey = NULL,    .end = NULL      },
-        FALSE
-    }
+    { { .start = C ("abc"), .hotkey = C ("d"), .end = C ("efg") },
+      { .start = C ("abc"), .hotkey = NULL, .end = NULL },
+      FALSE }
 };
 
 /* @Test(dataSource = "test_hotkey_equal_ds") */
-START_PARAMETRIZED_TEST (test_hotkey_equal,
-                         test_hotkey_equal_ds)
+START_PARAMETRIZED_TEST (test_hotkey_equal, test_hotkey_equal_ds)
 {
     // given
     gboolean result;

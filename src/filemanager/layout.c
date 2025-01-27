@@ -33,7 +33,7 @@
 
 #include <config.h>
 
-#include <pwd.h>                // for username in xterm title
+#include <pwd.h>  // for username in xterm title
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -46,17 +46,17 @@
 #include "lib/tty/key.h"
 #include "lib/tty/mouse.h"
 #include "lib/mcconfig.h"
-#include "lib/vfs/vfs.h"        // vfs_get_cwd ()
+#include "lib/vfs/vfs.h"  // vfs_get_cwd ()
 #include "lib/strutil.h"
 #include "lib/widget.h"
 #include "lib/event.h"
-#include "lib/util.h"           // mc_time_elapsed()
+#include "lib/util.h"  // mc_time_elapsed()
 
 #include "src/consaver/cons.saver.h"
-#include "src/viewer/mcviewer.h"        // The view widget
+#include "src/viewer/mcviewer.h"  // The view widget
 #include "src/setup.h"
 #ifdef ENABLE_SUBSHELL
-#include "src/subshell/subshell.h"
+#    include "src/subshell/subshell.h"
 #endif
 
 #include "command.h"
@@ -65,7 +65,7 @@
 /* Needed for the extern declarations of integer parameters */
 #include "dir.h"
 #include "layout.h"
-#include "info.h"               // The Info widget
+#include "info.h"  // The Info widget
 
 /*** global variables ****************************************************************************/
 
@@ -113,15 +113,15 @@ int ok_to_refresh = 1;
 #define MAX_VIEWS 2
 
 /* Width 12 for a wee Quick (Hex) View */
-#define MINWIDTH 12
-#define MINHEIGHT 5
+#define MINWIDTH             12
+#define MINHEIGHT            5
 
-#define B_2LEFT B_USER
-#define B_2RIGHT (B_USER + 1)
-#define B_PLUS (B_USER + 2)
-#define B_MINUS (B_USER + 3)
+#define B_2LEFT              B_USER
+#define B_2RIGHT             (B_USER + 1)
+#define B_PLUS               (B_USER + 2)
+#define B_MINUS              (B_USER + 3)
 
-#define LAYOUT_OPTIONS_COUNT  G_N_ELEMENTS (check_options)
+#define LAYOUT_OPTIONS_COUNT G_N_ELEMENTS (check_options)
 
 /*** file scope type declarations ****************************************************************/
 
@@ -144,11 +144,11 @@ static struct
 {
     panel_view_mode_t type;
     Widget *widget;
-    char *last_saved_dir;       // last view_list working directory
+    char *last_saved_dir;  // last view_list working directory
 } panels[MAX_VIEWS] = {
     // init MAX_VIEWS items
-    { view_listing, NULL, NULL},
-    { view_listing, NULL, NULL}
+    { view_listing, NULL, NULL },
+    { view_listing, NULL, NULL }
 };
 
 static layout_t old_layout;
@@ -166,15 +166,13 @@ static struct
     const char *text;
     gboolean *variable;
     WCheck *widget;
-} check_options[] = {
-    { N_("&Equal split"), &equal_split, NULL },
-    { N_("&Menubar visible"), &menubar_visible, NULL },
-    { N_("Command &prompt"), &command_prompt, NULL },
-    { N_("&Keybar visible"), &mc_global.keybar_visible, NULL },
-    { N_("H&intbar visible"), &mc_global.message_visible, NULL },
-    { N_("&XTerm window title"), &xterm_title, NULL },
-    { N_("&Show free space"), &free_space, NULL }
-};
+} check_options[] = { { N_ ("&Equal split"), &equal_split, NULL },
+                      { N_ ("&Menubar visible"), &menubar_visible, NULL },
+                      { N_ ("Command &prompt"), &command_prompt, NULL },
+                      { N_ ("&Keybar visible"), &mc_global.keybar_visible, NULL },
+                      { N_ ("H&intbar visible"), &mc_global.message_visible, NULL },
+                      { N_ ("&XTerm window title"), &xterm_title, NULL },
+                      { N_ ("&Show free space"), &free_space, NULL } };
 
 static const char *output_lines_label = NULL;
 static int output_lines_label_len;
@@ -348,44 +346,42 @@ layout_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, void *da
     switch (msg)
     {
     case MSG_POST_KEY:
+    {
+        const Widget *mw = CONST_WIDGET (filemanager);
+        gboolean _menubar_visible, _command_prompt, _keybar_visible, _message_visible;
+
+        _menubar_visible = check_options[1].widget->state;
+        _command_prompt = check_options[2].widget->state;
+        _keybar_visible = check_options[3].widget->state;
+        _message_visible = check_options[4].widget->state;
+
+        if (mc_global.tty.console_flag == '\0')
+            height = mw->rect.lines - (_keybar_visible ? 1 : 0) - (_command_prompt ? 1 : 0)
+                - (_menubar_visible ? 1 : 0) - _output_lines - (_message_visible ? 1 : 0);
+        else
         {
-            const Widget *mw = CONST_WIDGET (filemanager);
-            gboolean _menubar_visible, _command_prompt, _keybar_visible, _message_visible;
+            int minimum;
 
-            _menubar_visible = check_options[1].widget->state;
-            _command_prompt = check_options[2].widget->state;
-            _keybar_visible = check_options[3].widget->state;
-            _message_visible = check_options[4].widget->state;
-
-            if (mc_global.tty.console_flag == '\0')
-                height =
-                    mw->rect.lines - (_keybar_visible ? 1 : 0) - (_command_prompt ? 1 : 0) -
-                    (_menubar_visible ? 1 : 0) - _output_lines - (_message_visible ? 1 : 0);
-            else
+            if (_output_lines < 0)
+                _output_lines = 0;
+            height = mw->rect.lines - (_keybar_visible ? 1 : 0) - (_command_prompt ? 1 : 0)
+                - (_menubar_visible ? 1 : 0) - _output_lines - (_message_visible ? 1 : 0);
+            minimum = MINHEIGHT * (1 + (panels_layout.horizontal_split ? 1 : 0));
+            if (height < minimum)
             {
-                int minimum;
-
-                if (_output_lines < 0)
-                    _output_lines = 0;
-                height =
-                    mw->rect.lines - (_keybar_visible ? 1 : 0) - (_command_prompt ? 1 : 0) -
-                    (_menubar_visible ? 1 : 0) - _output_lines - (_message_visible ? 1 : 0);
-                minimum = MINHEIGHT * (1 + (panels_layout.horizontal_split ? 1 : 0));
-                if (height < minimum)
-                {
-                    _output_lines -= minimum - height;
-                    height = minimum;
-                }
-            }
-
-            if (old_layout.output_lines != _output_lines)
-            {
-                old_layout.output_lines = _output_lines;
-                tty_setcolor (mc_global.tty.console_flag != '\0' ? COLOR_NORMAL : DISABLED_COLOR);
-                widget_gotoyx (h, 9, 5 + 3 + output_lines_label_len);
-                tty_printf ("%02d", _output_lines);
+                _output_lines -= minimum - height;
+                height = minimum;
             }
         }
+
+        if (old_layout.output_lines != _output_lines)
+        {
+            old_layout.output_lines = _output_lines;
+            tty_setcolor (mc_global.tty.console_flag != '\0' ? COLOR_NORMAL : DISABLED_COLOR);
+            widget_gotoyx (h, 9, 5 + 3 + output_lines_label_len);
+            tty_printf ("%02d", _output_lines);
+        }
+    }
         return MSG_HANDLED;
 
     case MSG_NOTIFY:
@@ -493,41 +489,38 @@ layout_dlg_create (void)
     int b1, b2, b;
     size_t i;
 
-    const char *title1 = N_("Panel split");
-    const char *title2 = N_("Console output");
-    const char *title3 = N_("Other options");
+    const char *title1 = N_ ("Panel split");
+    const char *title2 = N_ ("Console output");
+    const char *title3 = N_ ("Other options");
 
-    const char *s_split_direction[2] = {
-        N_("&Vertical"),
-        N_("&Horizontal")
-    };
+    const char *s_split_direction[2] = { N_ ("&Vertical"), N_ ("&Horizontal") };
 
-    const char *ok_button = N_("&OK");
-    const char *cancel_button = N_("&Cancel");
+    const char *ok_button = N_ ("&OK");
+    const char *cancel_button = N_ ("&Cancel");
 
-    output_lines_label = _("Output lines:");
+    output_lines_label = _ ("Output lines:");
 
 #ifdef ENABLE_NLS
     {
         static gboolean i18n = FALSE;
 
-        title1 = _(title1);
-        title2 = _(title2);
-        title3 = _(title3);
+        title1 = _ (title1);
+        title2 = _ (title2);
+        title3 = _ (title3);
 
         i = G_N_ELEMENTS (s_split_direction);
         while (i-- != 0)
-            s_split_direction[i] = _(s_split_direction[i]);
+            s_split_direction[i] = _ (s_split_direction[i]);
 
         if (!i18n)
         {
             for (i = 0; i < (size_t) LAYOUT_OPTIONS_COUNT; i++)
-                check_options[i].text = _(check_options[i].text);
+                check_options[i].text = _ (check_options[i].text);
             i18n = TRUE;
         }
 
-        ok_button = _(ok_button);
-        cancel_button = _(cancel_button);
+        ok_button = _ (ok_button);
+        cancel_button = _ (cancel_button);
     }
 #endif
 
@@ -546,15 +539,14 @@ layout_dlg_create (void)
     output_lines_label_len = str_term_width1 (output_lines_label);
     l1 = max (l1, output_lines_label_len + 12);
     // buttons
-    b1 = str_term_width1 (ok_button) + 5;       // default button
+    b1 = str_term_width1 (ok_button) + 5;  // default button
     b2 = str_term_width1 (cancel_button) + 3;
     b = b1 + b2 + 1;
     // dialog width
     width = max (l1 * 2 + 7, b);
 
-    layout_dlg =
-        dlg_create (TRUE, 0, 0, 15, width, WPOS_CENTER, FALSE, dialog_colors, layout_callback, NULL,
-                    "[Layout]", _("Layout"));
+    layout_dlg = dlg_create (TRUE, 0, 0, 15, width, WPOS_CENTER, FALSE, dialog_colors,
+                             layout_callback, NULL, "[Layout]", _ ("Layout"));
     g = GROUP (layout_dlg);
 
     // draw background
@@ -572,8 +564,8 @@ layout_dlg_create (void)
     check_options[0].widget = check_new (5, 5, XTRACT (0));
     group_add_widget (g, check_options[0].widget);
 
-    equal_split = panels_layout.horizontal_split ?
-        panels_layout.horizontal_equal : panels_layout.vertical_equal;
+    equal_split = panels_layout.horizontal_split ? panels_layout.horizontal_equal
+                                                 : panels_layout.vertical_equal;
 
     bleft_widget = button_new (6, 8, B_2LEFT, NARROW_BUTTON, "&<", b_left_right_cback);
     widget_disable (WIDGET (bleft_widget), equal_split);
@@ -594,13 +586,13 @@ layout_dlg_create (void)
         w->state |= disabled;
         group_add_widget (g, w);
 
-        w = WIDGET (button_new (9, output_lines_label_len + 5, B_PLUS,
-                                NARROW_BUTTON, "&+", bplus_cback));
+        w = WIDGET (
+            button_new (9, output_lines_label_len + 5, B_PLUS, NARROW_BUTTON, "&+", bplus_cback));
         w->state |= disabled;
         group_add_widget (g, w);
 
-        w = WIDGET (button_new (9, output_lines_label_len + 5 + 5, B_MINUS,
-                                NARROW_BUTTON, "&-", bminus_cback));
+        w = WIDGET (button_new (9, output_lines_label_len + 5 + 5, B_MINUS, NARROW_BUTTON, "&-",
+                                bminus_cback));
         w->state |= disabled;
         group_add_widget (g, w);
     }
@@ -619,9 +611,8 @@ layout_dlg_create (void)
     group_add_widget (g, hline_new (11, -1, -1));
     // buttons
     group_add_widget (g, button_new (12, (width - b) / 2, B_ENTER, DEFPUSH_BUTTON, ok_button, 0));
-    group_add_widget (g,
-                      button_new (12, (width - b) / 2 + b1 + 1, B_CANCEL, NORMAL_BUTTON,
-                                  cancel_button, 0));
+    group_add_widget (
+        g, button_new (12, (width - b) / 2 + b1 + 1, B_CANCEL, NORMAL_BUTTON, cancel_button, 0));
 
     widget_select (WIDGET (radio_widget));
 
@@ -826,9 +817,8 @@ setup_panels (void)
         widget_set_state (mw, WST_SUSPENDED, TRUE);
 
     // initial height of panels
-    height =
-        r->lines - (menubar_visible ? 1 : 0) - (mc_global.message_visible ? 1 : 0) -
-        (command_prompt ? 1 : 0) - (mc_global.keybar_visible ? 1 : 0);
+    height = r->lines - (menubar_visible ? 1 : 0) - (mc_global.message_visible ? 1 : 0)
+        - (command_prompt ? 1 : 0) - (mc_global.keybar_visible ? 1 : 0);
 
     if (mc_global.tty.console_flag != '\0')
     {
@@ -1116,7 +1106,7 @@ void
 create_panel (int num, panel_view_mode_t type)
 {
     WRect r = { 0, 0, 0, 0 };
-    unsigned int the_other = 0; // Index to the other panel
+    unsigned int the_other = 0;  // Index to the other panel
     Widget *new_widget = NULL, *old_widget = NULL;
     panel_view_mode_t old_type = view_listing;
 
@@ -1171,13 +1161,13 @@ create_panel (int num, panel_view_mode_t type)
     {
     case view_nothing:
     case view_listing:
-        {
-            gboolean last_was_panel;
+    {
+        gboolean last_was_panel;
 
-            last_was_panel = old_widget != NULL && get_panel_type (num) != view_listing;
-            new_widget = restore_into_right_dir_panel (num, last_was_panel, &r);
-            break;
-        }
+        last_was_panel = old_widget != NULL && get_panel_type (num) != view_listing;
+        new_widget = restore_into_right_dir_panel (num, last_was_panel, &r);
+        break;
+    }
 
     case view_info:
         new_widget = WIDGET (info_new (&r));
@@ -1188,24 +1178,24 @@ create_panel (int num, panel_view_mode_t type)
         break;
 
     case view_quick:
+    {
+        WPanel *the_other_panel;
+        const char *file_name = "";
+
+        new_widget = WIDGET (mcview_new (&r, TRUE));
+        the_other_panel = PANEL (panels[the_other].widget);
+        if (the_other_panel != NULL)
         {
-            WPanel *the_other_panel;
-            const char *file_name = "";
+            const file_entry_t *fe;
 
-            new_widget = WIDGET (mcview_new (&r, TRUE));
-            the_other_panel = PANEL (panels[the_other].widget);
-            if (the_other_panel != NULL)
-            {
-                const file_entry_t *fe;
-
-                fe = panel_current_entry (the_other_panel);
-                if (fe != NULL)
-                    file_name = fe->fname->str;
-            }
-
-            mcview_load ((WView *) new_widget, 0, file_name, 0, 0, 0);
-            break;
+            fe = panel_current_entry (the_other_panel);
+            if (fe != NULL)
+                file_name = fe->fname->str;
         }
+
+        mcview_load ((WView *) new_widget, 0, file_name, 0, 0, 0);
+        break;
+    }
 
     default:
         break;
@@ -1285,12 +1275,15 @@ swap_panels (void)
     panel1 = PANEL (panels[0].widget);
     panel2 = PANEL (panels[1].widget);
 
-    if (panels[0].type == view_listing && panels[1].type == view_listing &&
-        !mc_config_get_bool (mc_global.main_config, CONFIG_PANELS_SECTION, "simple_swap", FALSE))
+    if (panels[0].type == view_listing && panels[1].type == view_listing
+        && !mc_config_get_bool (mc_global.main_config, CONFIG_PANELS_SECTION, "simple_swap", FALSE))
     {
         WPanel panel;
 
-#define panelswap(x) panel.x = panel1->x; panel1->x = panel2->x; panel2->x = panel.x;
+#define panelswap(x)                                                                               \
+    panel.x = panel1->x;                                                                           \
+    panel1->x = panel2->x;                                                                         \
+    panel2->x = panel.x;
         // Change content and related stuff
         panelswap (dir);
         panelswap (active);
@@ -1446,7 +1439,7 @@ save_panel_dir (int idx)
         p = PANEL (get_panel_widget (idx));
         if (p != NULL)
         {
-            g_free (panels[idx].last_saved_dir);        // last path no needed
+            g_free (panels[idx].last_saved_dir);  // last path no needed
             // Because path can be nonlocal
             panels[idx].last_saved_dir = g_strdup (vfs_path_as_str (p->cwd_vpath));
         }
@@ -1523,7 +1516,7 @@ load_prompt (int fd, void *unused)
 
     return 0;
 }
-#endif // ENABLE_SUBSHELL
+#endif  // ENABLE_SUBSHELL
 
 /* --------------------------------------------------------------------------------------------- */
 

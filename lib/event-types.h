@@ -6,12 +6,12 @@
 /*** typedefs(not structures) and defined constants **********************************************/
 
 /* Event groups for main modules */
-#define MCEVENT_GROUP_CORE "Core"
-#define MCEVENT_GROUP_DIALOG "Dialog"
-#define MCEVENT_GROUP_DIFFVIEWER "DiffViewer"
-#define MCEVENT_GROUP_EDITOR "Editor"
+#define MCEVENT_GROUP_CORE        "Core"
+#define MCEVENT_GROUP_DIALOG      "Dialog"
+#define MCEVENT_GROUP_DIFFVIEWER  "DiffViewer"
+#define MCEVENT_GROUP_EDITOR      "Editor"
 #define MCEVENT_GROUP_FILEMANAGER "FileManager"
-#define MCEVENT_GROUP_VIEWER "Viewer"
+#define MCEVENT_GROUP_VIEWER      "Viewer"
 
 /* Events */
 #define MCEVENT_HISTORY_LOAD "history_load"
@@ -72,7 +72,7 @@ struct Widget;
 typedef struct
 {
     struct mc_config_t *cfg;
-    struct Widget *receiver;    // NULL means broadcast message
+    struct Widget *receiver;  // NULL means broadcast message
 } ev_history_load_save_t;
 
 /*** global variables defined in .c file *********************************************************/
@@ -81,4 +81,4 @@ typedef struct
 
 /*** inline functions ****************************************************************************/
 
-#endif // MC__EVENT_TYPES_H
+#endif  // MC__EVENT_TYPES_H

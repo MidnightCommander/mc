@@ -34,11 +34,11 @@
 
 #include <config.h>
 
-#include <ctype.h>              // isdigit()
-#include <stdio.h>              // sscanf()
+#include <ctype.h>  // isdigit()
+#include <stdio.h>  // sscanf()
 #include <stdlib.h>
 #include <string.h>
-#include <sys/stat.h>           // mode_t
+#include <sys/stat.h>  // mode_t
 #include <time.h>
 #include <unistd.h>
 #include <sys/types.h>
@@ -56,15 +56,21 @@
 
 #define number_of_parsers 7
 
-#define NO_SIZE     ((off_t) (-1L))
-#define NO_DATE     ((time_t) (-1L))
+#define NO_SIZE           ((off_t) (-1L))
+#define NO_DATE           ((time_t) (-1L))
 
-#define FIRST_TOKEN strtok (line, " \t")
-#define NEXT_TOKEN  strtok (NULL, " \t")
-#define FIRST_TOKEN_R strtok_r (line, " \t", &next)
-#define NEXT_TOKEN_R  strtok_r (NULL, " \t", &next)
+#define FIRST_TOKEN       strtok (line, " \t")
+#define NEXT_TOKEN        strtok (NULL, " \t")
+#define FIRST_TOKEN_R     strtok_r (line, " \t", &next)
+#define NEXT_TOKEN_R      strtok_r (NULL, " \t", &next)
 
-#define ERR2 do { (*err)++; return FALSE; } while (FALSE)
+#define ERR2                                                                                       \
+    do                                                                                             \
+    {                                                                                              \
+        (*err)++;                                                                                  \
+        return FALSE;                                                                              \
+    }                                                                                              \
+    while (FALSE)
 
 /*** file scope type declarations ****************************************************************/
 
@@ -76,8 +82,8 @@ typedef enum
     NORMAL
 } filetype;
 
-typedef gboolean (*ftpfs_line_parser) (char *line, struct stat * s, char **filename,
-                                       char **linkname, int *err);
+typedef gboolean (*ftpfs_line_parser) (char *line, struct stat *s, char **filename, char **linkname,
+                                       int *err);
 
 /*** forward declarations (file scope functions) *************************************************/
 
@@ -102,12 +108,8 @@ static time_t rawnow;
 static struct tm now;
 
 static ftpfs_line_parser line_parsers[number_of_parsers] = {
-    ftpfs_parse_long_list_UNIX,
-    ftpfs_parse_long_list_NT,
-    ftpfs_parse_long_list_EPLF,
-    ftpfs_parse_long_list_MLSD,
-    ftpfs_parse_long_list_AS400,
-    ftpfs_parse_long_list_OS2,
+    ftpfs_parse_long_list_UNIX,      ftpfs_parse_long_list_NT,    ftpfs_parse_long_list_EPLF,
+    ftpfs_parse_long_list_MLSD,      ftpfs_parse_long_list_AS400, ftpfs_parse_long_list_OS2,
     ftpfs_parse_long_list_MacWebStar
 };
 
@@ -425,7 +427,7 @@ ftpfs_parse_long_list_UNIX (char *line, struct stat *s, char **filename, char **
         return FALSE;
 
     if (strncasecmp (line, "Status of ", 10) == 0)
-        return FALSE;           // STAT output
+        return FALSE;  // STAT output
 
     ret = parse_ls_line (line, s, filename, linkname);
     if (!ret)
@@ -468,7 +470,7 @@ ftpfs_parse_long_list_NT (char *line, struct stat *s, char **filename, char **li
     t = NEXT_TOKEN;
     if (t == NULL)
         ERR2;
-    am = 'A';                   // AM/PM is optional
+    am = 'A';  // AM/PM is optional
     if (sscanf (t, "%2d:%2d%c", &hour, &minute, &am) < 2)
         ERR2;
 
@@ -476,7 +478,7 @@ ftpfs_parse_long_list_NT (char *line, struct stat *s, char **filename, char **li
     if (t == NULL)
         ERR2;
 
-    if (am == 'P')              // PM - after noon
+    if (am == 'P')  // PM - after noon
     {
         hour += 12;
         if (hour == 24)
@@ -490,7 +492,6 @@ ftpfs_parse_long_list_NT (char *line, struct stat *s, char **filename, char **li
     tms.tm_mon = month - 1;     // months since January [0, 11]
     tms.tm_year = year - 1900;  // years since 1900
     tms.tm_isdst = -1;
-
 
     s->st_mtime = mktime (&tms);
     // Use resulting time value
@@ -570,7 +571,7 @@ ftpfs_parse_long_list_EPLF (char *line, struct stat *s, char **filename, char **
 
         switch (*scan)
         {
-        case '\t':             // the rest is file name
+        case '\t':  // the rest is file name
             name = scan + 1;
             name_len = scan_len - 1;
             scan = NULL;
@@ -596,7 +597,7 @@ ftpfs_parse_long_list_EPLF (char *line, struct stat *s, char **filename, char **
         case 'i':
             break;
         case 'u':
-            if (scan[1] == 'p') // permissions
+            if (scan[1] == 'p')  // permissions
                 if (sscanf (scan + 2, "%o", (unsigned int *) &perms) != 1)
                     perms = -1;
             break;
@@ -633,7 +634,7 @@ ftpfs_parse_long_list_EPLF (char *line, struct stat *s, char **filename, char **
     if (type_known)
         s->st_mode = dir ? S_IFDIR : S_IFREG;
     if (perms != -1)
-        s->st_mode |= perms;    // FIXME
+        s->st_mode |= perms;  // FIXME
 
     return TRUE;
 }
@@ -681,8 +682,8 @@ ftpfs_parse_long_list_MLSD (char *line, struct stat *s, char **filename, char **
 
     for (tok = strtok (line, ";"); tok != NULL; tok = strtok (NULL, ";"))
     {
-        if (strcasecmp (tok, "Type=cdir") == 0
-            || strcasecmp (tok, "Type=pdir") == 0 || strcasecmp (tok, "Type=dir") == 0)
+        if (strcasecmp (tok, "Type=cdir") == 0 || strcasecmp (tok, "Type=pdir") == 0
+            || strcasecmp (tok, "Type=dir") == 0)
         {
             type = DIRECTORY;
             continue;
@@ -796,7 +797,7 @@ ftpfs_parse_long_list_MLSD (char *line, struct stat *s, char **filename, char **
         g_assert_not_reached ();
     }
     if (perms != -1)
-        s->st_mode |= perms;    // FIXME
+        s->st_mode |= perms;  // FIXME
     if (owner != NULL)
         s->st_uid = ftpfs_get_uid (owner);
     if (group != NULL)
@@ -988,8 +989,8 @@ ftpfs_parse_long_list_OS2 (char *line, struct stat *s, char **filename, char **l
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-ftpfs_parse_long_list_MacWebStar (char *line, struct stat *s, char **filename,
-                                  char **linkname, int *err)
+ftpfs_parse_long_list_MacWebStar (char *line, struct stat *s, char **filename, char **linkname,
+                                  int *err)
 {
     char *t;
     mode_t type, mode;
@@ -1108,7 +1109,7 @@ GSList *
 ftpfs_parse_long_list (struct vfs_class *me, struct vfs_s_inode *dir, GSList *buf, int *err_ret)
 {
     int err[number_of_parsers];
-    GSList *set[number_of_parsers];     // arrays of struct vfs_s_entry
+    GSList *set[number_of_parsers];  // arrays of struct vfs_s_entry
     size_t i;
     GSList *bufp;
     ftpfs_line_parser guessed_parser = NULL;
@@ -1159,7 +1160,7 @@ ftpfs_parse_long_list (struct vfs_class *me, struct vfs_s_inode *dir, GSList *bu
                                          &info->ino->linkname, &err[i]);
                 if (ok && strchr (info->name, '/') == NULL)
                 {
-                    info->ino->st.st_nlink = nlink;     // Ouch, we need to preserve our counts :-(
+                    info->ino->st.st_nlink = nlink;  // Ouch, we need to preserve our counts :-(
                     set[i] = g_slist_prepend (set[i], info);
                 }
                 else
@@ -1173,7 +1174,7 @@ ftpfs_parse_long_list (struct vfs_class *me, struct vfs_s_inode *dir, GSList *bu
                     best_err2 = &err[i];
 
                 if (*best_err1 > 16)
-                    goto leave; // too many errors with best parser
+                    goto leave;  // too many errors with best parser
             }
 
             if (*best_err2 > (*best_err1 + 1) * 16)
@@ -1200,7 +1201,7 @@ ftpfs_parse_long_list (struct vfs_class *me, struct vfs_s_inode *dir, GSList *bu
                                  the_err);
             if (ok && strchr (info->name, '/') == NULL)
             {
-                info->ino->st.st_nlink = nlink; // Ouch, we need to preserve our counts :-(
+                info->ino->st.st_nlink = nlink;  // Ouch, we need to preserve our counts :-(
                 *the_set = g_slist_prepend (*the_set, info);
             }
             else
@@ -1217,7 +1218,7 @@ ftpfs_parse_long_list (struct vfs_class *me, struct vfs_s_inode *dir, GSList *bu
         the_err = &err[i];
     }
 
-  leave:
+leave:
     for (i = 0; i < number_of_parsers; i++)
         if (&set[i] != the_set)
         {

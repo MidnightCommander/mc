@@ -27,7 +27,6 @@
    along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 /** \file  filenot.c
  *  \brief Source: wrapper for routines to notify the
  *  tree about the changes made to the directory

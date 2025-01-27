@@ -31,7 +31,7 @@
 #include "internal.h"
 #include "lib/util.h"
 
-#include "lib/tty/color.h"      // tty_use_256colors();
+#include "lib/tty/color.h"  // tty_use_256colors();
 
 /*** global variables ****************************************************************************/
 
@@ -89,8 +89,8 @@ mc_skin_reinit (void)
 {
     mc_skin_deinit ();
     mc_skin__default.name = mc_skin_get_default_name ();
-    mc_skin__default.colors = g_hash_table_new_full (g_str_hash, g_str_equal,
-                                                     g_free, mc_skin_hash_destroy_value);
+    mc_skin__default.colors =
+        g_hash_table_new_full (g_str_hash, g_str_equal, g_free, mc_skin_hash_destroy_value);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -126,12 +126,12 @@ mc_skin_init (const gchar *skin_override, GError **mcerror)
     mc_skin__default.name =
         skin_override != NULL ? g_strdup (skin_override) : mc_skin_get_default_name ();
 
-    mc_skin__default.colors = g_hash_table_new_full (g_str_hash, g_str_equal,
-                                                     g_free, mc_skin_hash_destroy_value);
+    mc_skin__default.colors =
+        g_hash_table_new_full (g_str_hash, g_str_equal, g_free, mc_skin_hash_destroy_value);
     if (!mc_skin_ini_file_load (&mc_skin__default))
     {
         mc_propagate_error (mcerror, 0,
-                            _("Unable to load '%s' skin.\nDefault skin has been loaded"),
+                            _ ("Unable to load '%s' skin.\nDefault skin has been loaded"),
                             mc_skin__default.name);
         mc_skin_try_to_load_default ();
         is_good_init = FALSE;
@@ -141,7 +141,7 @@ mc_skin_init (const gchar *skin_override, GError **mcerror)
     if (!mc_skin_ini_file_parse (&mc_skin__default))
     {
         mc_propagate_error (mcerror, 0,
-                            _("Unable to parse '%s' skin.\nDefault skin has been loaded"),
+                            _ ("Unable to parse '%s' skin.\nDefault skin has been loaded"),
                             mc_skin__default.name);
 
         mc_skin_try_to_load_default ();
@@ -152,8 +152,8 @@ mc_skin_init (const gchar *skin_override, GError **mcerror)
     if (is_good_init && mc_skin__default.have_true_colors && !tty_use_truecolors (&error))
     {
         mc_propagate_error (mcerror, 0,
-                            _
-                            ("Unable to use '%s' skin with true colors support:\n%s\nDefault skin has been loaded"),
+                            _ ("Unable to use '%s' skin with true colors support:\n%s\nDefault "
+                               "skin has been loaded"),
                             mc_skin__default.name, error->message);
         g_error_free (error);
         mc_skin_try_to_load_default ();
@@ -164,8 +164,8 @@ mc_skin_init (const gchar *skin_override, GError **mcerror)
     if (is_good_init && mc_skin__default.have_256_colors && !tty_use_256colors (&error))
     {
         mc_propagate_error (mcerror, 0,
-                            _
-                            ("Unable to use '%s' skin with 256 colors support\non non-256 colors terminal.\nDefault skin has been loaded"),
+                            _ ("Unable to use '%s' skin with 256 colors support\non non-256 colors "
+                               "terminal.\nDefault skin has been loaded"),
                             mc_skin__default.name);
         mc_skin_try_to_load_default ();
         mc_skin_colors_old_configure (&mc_skin__default);

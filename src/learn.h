@@ -18,4 +18,4 @@
 void learn_keys (void);
 
 /*** inline functions ****************************************************************************/
-#endif // MC__LEARN_H
+#endif  // MC__LEARN_H

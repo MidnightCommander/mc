@@ -11,12 +11,12 @@
 #ifndef MC__TTY_H
 #define MC__TTY_H
 
-#include "lib/global.h"         // include <glib.h>
+#include "lib/global.h"  // include <glib.h>
 
 #ifdef HAVE_SLANG
-#include "tty-slang.h"
+#    include "tty-slang.h"
 #else
-#include "tty-ncurses.h"
+#    include "tty-ncurses.h"
 #endif
 
 /*** typedefs(not structures) and defined constants **********************************************/
@@ -141,4 +141,4 @@ extern void tty_exit_ca_mode (void);
 
 /*** inline functions ****************************************************************************/
 
-#endif // MC__TTY_H
+#endif  // MC__TTY_H

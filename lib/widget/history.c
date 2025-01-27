@@ -39,10 +39,10 @@
 
 #include "lib/global.h"
 
-#include "lib/tty/tty.h"        // LINES, COLS
+#include "lib/tty/tty.h"  // LINES, COLS
 #include "lib/strutil.h"
 #include "lib/widget.h"
-#include "lib/keybind.h"        // CK_*
+#include "lib/keybind.h"  // CK_*
 
 /*** global variables ****************************************************************************/
 
@@ -123,28 +123,28 @@ history_dlg_callback (Widget *w, Widget *sender, widget_msg_t msg, int parm, voi
         return history_dlg_reposition (DIALOG (w));
 
     case MSG_NOTIFY:
+    {
+        // message from listbox
+        WDialog *d = DIALOG (w);
+
+        switch (parm)
         {
-            // message from listbox
-            WDialog *d = DIALOG (w);
-
-            switch (parm)
-            {
-            case CK_View:
-                d->ret_value = B_VIEW;
-                break;
-            case CK_Edit:
-                d->ret_value = B_EDIT;
-                break;
-            case CK_Enter:
-                d->ret_value = B_ENTER;
-                break;
-            default:
-                return MSG_NOT_HANDLED;
-            }
-
-            dlg_close (d);
-            return MSG_HANDLED;
+        case CK_View:
+            d->ret_value = B_VIEW;
+            break;
+        case CK_Edit:
+            d->ret_value = B_EDIT;
+            break;
+        case CK_Enter:
+            d->ret_value = B_ENTER;
+            break;
+        default:
+            return MSG_NOT_HANDLED;
         }
+
+        dlg_close (d);
+        return MSG_HANDLED;
+    }
 
     default:
         return dlg_default_callback (w, sender, msg, parm, data);
@@ -215,7 +215,7 @@ history_show (history_descriptor_t *hd)
     if (hd == NULL || hd->list == NULL)
         return;
 
-    hd->max_width = str_term_width1 (_("History")) + 2;
+    hd->max_width = str_term_width1 (_ ("History")) + 2;
 
     for (z = hd->list; z != NULL; z = g_list_previous (z))
         hd->create (hd, z->data);
@@ -228,9 +228,8 @@ history_show (history_descriptor_t *hd)
     hist_data.count = count;
     hist_data.max_width = hd->max_width;
 
-    query_dlg =
-        dlg_create (TRUE, 0, 0, 4, 4, WPOS_KEEP_DEFAULT, TRUE, dialog_colors, history_dlg_callback,
-                    NULL, "[History-query]", _("History"));
+    query_dlg = dlg_create (TRUE, 0, 0, 4, 4, WPOS_KEEP_DEFAULT, TRUE, dialog_colors,
+                            history_dlg_callback, NULL, "[History-query]", _ ("History"));
     query_dlg->data.p = &hist_data;
 
     /* this call makes list stick to all sides of dialog, effectively make

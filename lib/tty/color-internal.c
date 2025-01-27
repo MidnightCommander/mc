@@ -31,9 +31,9 @@
 
 #include <config.h>
 
-#include <string.h>             // strcmp
+#include <string.h>  // strcmp
 
-#include "color.h"              // colors and attributes
+#include "color.h"  // colors and attributes
 #include "color-internal.h"
 
 /*** global variables ****************************************************************************/
@@ -57,43 +57,41 @@ typedef struct mc_tty_color_table_struct
 /*** file scope variables ************************************************************************/
 
 static mc_tty_color_table_t const color_table[] = {
-    {"black", COLOR_BLACK},
-    {"gray", COLOR_BLACK + COLOR_INTENSITY},
-    {"red", COLOR_RED},
-    {"brightred", COLOR_RED + COLOR_INTENSITY},
-    {"green", COLOR_GREEN},
-    {"brightgreen", COLOR_GREEN + COLOR_INTENSITY},
-    {"brown", COLOR_YELLOW},
-    {"yellow", COLOR_YELLOW + COLOR_INTENSITY},
-    {"blue", COLOR_BLUE},
-    {"brightblue", COLOR_BLUE + COLOR_INTENSITY},
-    {"magenta", COLOR_MAGENTA},
-    {"brightmagenta", COLOR_MAGENTA + COLOR_INTENSITY},
-    {"cyan", COLOR_CYAN},
-    {"brightcyan", COLOR_CYAN + COLOR_INTENSITY},
-    {"lightgray", COLOR_WHITE},
-    {"white", COLOR_WHITE + COLOR_INTENSITY},
-    {"default", -1},            // default color of the terminal
+    { "black", COLOR_BLACK },
+    { "gray", COLOR_BLACK + COLOR_INTENSITY },
+    { "red", COLOR_RED },
+    { "brightred", COLOR_RED + COLOR_INTENSITY },
+    { "green", COLOR_GREEN },
+    { "brightgreen", COLOR_GREEN + COLOR_INTENSITY },
+    { "brown", COLOR_YELLOW },
+    { "yellow", COLOR_YELLOW + COLOR_INTENSITY },
+    { "blue", COLOR_BLUE },
+    { "brightblue", COLOR_BLUE + COLOR_INTENSITY },
+    { "magenta", COLOR_MAGENTA },
+    { "brightmagenta", COLOR_MAGENTA + COLOR_INTENSITY },
+    { "cyan", COLOR_CYAN },
+    { "brightcyan", COLOR_CYAN + COLOR_INTENSITY },
+    { "lightgray", COLOR_WHITE },
+    { "white", COLOR_WHITE + COLOR_INTENSITY },
+    { "default", -1 },  // default color of the terminal
     // special colors
-    {"A_REVERSE", SPEC_A_REVERSE},
-    {"A_BOLD", SPEC_A_BOLD},
-    {"A_BOLD_REVERSE", SPEC_A_BOLD_REVERSE},
-    {"A_UNDERLINE", SPEC_A_UNDERLINE},
+    { "A_REVERSE", SPEC_A_REVERSE },
+    { "A_BOLD", SPEC_A_BOLD },
+    { "A_BOLD_REVERSE", SPEC_A_BOLD_REVERSE },
+    { "A_UNDERLINE", SPEC_A_UNDERLINE },
     // End of list
-    {NULL, 0}
+    { NULL, 0 }
 };
 
-static mc_tty_color_table_t const attributes_table[] = {
-    {"bold", A_BOLD},
-#ifdef A_ITALIC                 // available since ncurses-5.9-20130831 / slang-pre2.3.0-107
-    {"italic", A_ITALIC},
-#endif // A_ITALIC
-    {"underline", A_UNDERLINE},
-    {"reverse", A_REVERSE},
-    {"blink", A_BLINK},
-    // End of list
-    {NULL, 0}
-};
+static mc_tty_color_table_t const attributes_table[] = { { "bold", A_BOLD },
+#ifdef A_ITALIC  // available since ncurses-5.9-20130831 / slang-pre2.3.0-107
+                                                         { "italic", A_ITALIC },
+#endif  // A_ITALIC
+                                                         { "underline", A_UNDERLINE },
+                                                         { "reverse", A_REVERSE },
+                                                         { "blink", A_BLINK },
+                                                         // End of list
+                                                         { NULL, 0 } };
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
@@ -128,10 +126,9 @@ parse_256_or_true_color_name (const char *color_name)
     {
         return 232 + i;
     }
-    if (strncmp (color_name, "rgb", 3) == 0 &&
-        color_name[3] >= '0' && color_name[3] < '6' &&
-        color_name[4] >= '0' && color_name[4] < '6' &&
-        color_name[5] >= '0' && color_name[5] < '6' && color_name[6] == '\0')
+    if (strncmp (color_name, "rgb", 3) == 0 && color_name[3] >= '0' && color_name[3] < '6'
+        && color_name[4] >= '0' && color_name[4] < '6' && color_name[5] >= '0'
+        && color_name[5] < '6' && color_name[6] == '\0')
     {
         return 16 + 36 * (color_name[3] - '0') + 6 * (color_name[4] - '0') + (color_name[5] - '0');
     }

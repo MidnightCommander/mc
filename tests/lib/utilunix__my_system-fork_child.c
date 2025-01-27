@@ -54,7 +54,8 @@ START_TEST (fork_child)
     mctest_assert_str_eq (g_ptr_array_index (execvp__args__captured, 0), "/bin/some-command");
     mctest_assert_str_eq (g_ptr_array_index (execvp__args__captured, 1), "some parameter");
 
-    // All exec* calls is mocked, so call to _exit() function with 127 status code it's a normal situation
+    // All exec* calls is mocked, so call to _exit() function with 127 status code it's a normal
+    // situation
     ck_assert_int_eq (my_exit__status__captured, 127);
 }
 END_TEST
@@ -83,7 +84,8 @@ START_TEST (fork_child_tokens)
     mctest_assert_str_eq (g_ptr_array_index (execvp__args__captured, 1), "+");
     mctest_assert_str_eq (g_ptr_array_index (execvp__args__captured, 2), "foo.txt");
 
-    // All exec* calls is mocked, so call to _exit() function with 127 status code it's a normal situation
+    // All exec* calls is mocked, so call to _exit() function with 127 status code it's a normal
+    // situation
     ck_assert_int_eq (my_exit__status__captured, 127);
 }
 END_TEST
@@ -120,7 +122,8 @@ START_TEST (fork_child_tokens2)
     mctest_assert_str_eq (g_ptr_array_index (execvp__args__captured, 9), "ff\\ gg");
     mctest_assert_str_eq (g_ptr_array_index (execvp__args__captured, 10), "foo.txt");
 
-    // All exec* calls is mocked, so call to _exit() function with 127 status code it's a normal situation
+    // All exec* calls is mocked, so call to _exit() function with 127 status code it's a normal
+    // situation
     ck_assert_int_eq (my_exit__status__captured, 127);
 }
 END_TEST

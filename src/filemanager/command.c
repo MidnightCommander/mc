@@ -37,20 +37,20 @@
 #include <string.h>
 
 #include "lib/global.h"
-#include "lib/vfs/vfs.h"        // vfs_current_is_local()
-#include "lib/skin.h"           // DEFAULT_COLOR
-#include "lib/util.h"           // whitespace()
+#include "lib/vfs/vfs.h"  // vfs_current_is_local()
+#include "lib/skin.h"     // DEFAULT_COLOR
+#include "lib/util.h"     // whitespace()
 #include "lib/widget.h"
 
-#include "src/setup.h"          // quit
+#include "src/setup.h"  // quit
 #ifdef ENABLE_SUBSHELL
-#include "src/subshell/subshell.h"
+#    include "src/subshell/subshell.h"
 #endif
-#include "src/execute.h"        // shell_execute()
-#include "src/usermenu.h"       // expand_format()
+#include "src/execute.h"   // shell_execute()
+#include "src/usermenu.h"  // expand_format()
 
-#include "filemanager.h"        // quiet_quit_cmd(), layout.h
-#include "cd.h"                 // cd_to()
+#include "filemanager.h"  // quiet_quit_cmd(), layout.h
+#include "cd.h"           // cd_to()
 
 #include "command.h"
 
@@ -116,7 +116,7 @@ enter (WInput *lc_cmdline)
 
         if (!vfs_current_is_local ())
         {
-            message (D_ERROR, MSG_ERROR, _("Cannot execute commands on non-local filesystems"));
+            message (D_ERROR, MSG_ERROR, _ ("Cannot execute commands on non-local filesystems"));
             return MSG_NOT_HANDLED;
         }
 #ifdef ENABLE_SUBSHELL
@@ -124,7 +124,7 @@ enter (WInput *lc_cmdline)
          * (will be checked again by shell_execute) */
         if (mc_global.tty.use_subshell && subshell_state != INACTIVE)
         {
-            message (D_ERROR, MSG_ERROR, _("The shell is already running a command"));
+            message (D_ERROR, MSG_ERROR, _ ("The shell is already running a command"));
             return MSG_NOT_HANDLED;
         }
 #endif
@@ -210,8 +210,8 @@ command_new (int y, int x, int cols)
 
     cmd = input_new (y, x, command_colors, cols, "", "cmdline",
                      INPUT_COMPLETE_FILENAMES | INPUT_COMPLETE_VARIABLES | INPUT_COMPLETE_USERNAMES
-                     | INPUT_COMPLETE_HOSTNAMES | INPUT_COMPLETE_CD | INPUT_COMPLETE_COMMANDS |
-                     INPUT_COMPLETE_SHELL_ESC);
+                         | INPUT_COMPLETE_HOSTNAMES | INPUT_COMPLETE_CD | INPUT_COMPLETE_COMMANDS
+                         | INPUT_COMPLETE_SHELL_ESC);
     w = WIDGET (cmd);
     // Don't set WOP_SELECTABLE up, otherwise panels will be unselected
     widget_set_options (w, WOP_SELECTABLE, FALSE);

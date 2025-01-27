@@ -39,9 +39,9 @@
 
 #include "lib/global.h"
 
-#include "lib/fileloc.h"        // MC_HISTORY_FILE
+#include "lib/fileloc.h"  // MC_HISTORY_FILE
 #include "lib/strutil.h"
-#include "lib/util.h"           // list_append_unique
+#include "lib/util.h"  // list_append_unique
 
 #include "lib/mcconfig.h"
 
@@ -76,7 +76,7 @@ mc_config_history_get (const char *name)
     char *profile;
     mc_config_t *cfg;
 
-    if (num_history_items_recorded == 0)        // this is how to disable
+    if (num_history_items_recorded == 0)  // this is how to disable
         return NULL;
     if (name == NULL || *name == '\0')
         return NULL;
@@ -185,8 +185,8 @@ mc_config_history_load (mc_config_t *cfg, const char *name)
 /* --------------------------------------------------------------------------------------------- */
 
 /**
-  * Save history to the mc_config, but don't save config to file
-  */
+ * Save history to the mc_config, but don't save config to file
+ */
 void
 mc_config_history_save (mc_config_t *cfg, const char *name, GList *h)
 {

@@ -32,7 +32,7 @@
 
 #include <config.h>
 
-#include <stdlib.h>             // atoi(), NULL
+#include <stdlib.h>  // atoi(), NULL
 
 #include "lib/global.h"
 #include "lib/widget.h"
@@ -50,12 +50,8 @@
 
 /*** file scope variables ************************************************************************/
 
-static const char *wrap_str[] = {
-    N_("&None"),
-    N_("&Dynamic paragraphing"),
-    N_("Type &writer wrap"),
-    NULL
-};
+static const char *wrap_str[] = { N_ ("&None"), N_ ("&Dynamic paragraphing"),
+                                  N_ ("Type &writer wrap"), NULL };
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
@@ -67,11 +63,11 @@ i18n_translate_array (const char *array[])
 {
     while (*array != NULL)
     {
-        *array = _(*array);
+        *array = _ (*array);
         array++;
     }
 }
-#endif // ENABLE_NLS
+#endif  // ENABLE_NLS
 
 /* --------------------------------------------------------------------------------------------- */
 /**
@@ -133,7 +129,7 @@ edit_options_dialog (WDialog *h)
         i18n_translate_array (wrap_str);
         i18n_flag = TRUE;
     }
-#endif // ENABLE_NLS
+#endif  // ENABLE_NLS
 
     g_snprintf (wrap_length, sizeof (wrap_length), "%d", edit_options.word_wrap_line_length);
     g_snprintf (tab_spacing, sizeof (tab_spacing), "%d", TAB_SIZE);

@@ -361,10 +361,9 @@ str_ascii_fit_to_term (const char *text, int width, align_crt_t just_mode)
             actual[0] = isascii ((unsigned char) text[pos]) ? text[pos] : '?';
             actual[0] = g_ascii_isprint ((gchar) actual[0]) ? actual[0] : '.';
         }
-
     }
 
-  finally:
+finally:
     if (actual >= result + sizeof (result))
         actual = result + sizeof (result) - 1;
     actual[0] = '\0';
@@ -535,7 +534,7 @@ str_ascii_trunc (const char *text, int width)
         }
     }
 
-  finally:
+finally:
     actual[0] = '\0';
     return result;
 }
@@ -574,7 +573,6 @@ str_ascii_release_search_needle (char *needle, gboolean case_sen)
 {
     (void) case_sen;
     (void) needle;
-
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -721,8 +719,9 @@ str_ascii_prefix (const char *text, const char *prefix)
 {
     int result;
 
-    for (result = 0; text[result] != '\0' && prefix[result] != '\0'
-         && text[result] == prefix[result]; result++);
+    for (result = 0;
+         text[result] != '\0' && prefix[result] != '\0' && text[result] == prefix[result]; result++)
+        ;
 
     return result;
 }
@@ -735,7 +734,9 @@ str_ascii_caseprefix (const char *text, const char *prefix)
     int result;
 
     for (result = 0; text[result] != '\0' && prefix[result] != '\0'
-         && g_ascii_toupper (text[result]) == g_ascii_toupper (prefix[result]); result++);
+         && g_ascii_toupper (text[result]) == g_ascii_toupper (prefix[result]);
+         result++)
+        ;
 
     return result;
 }

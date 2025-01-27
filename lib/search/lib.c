@@ -34,18 +34,18 @@
 #include "lib/strutil.h"
 #include "lib/search.h"
 #ifdef HAVE_CHARSET
-#include "lib/charsets.h"
+#    include "lib/charsets.h"
 #endif
 
 #include "internal.h"
 
 /*** global variables ****************************************************************************/
 
-const char *STR_E_NOTFOUND = N_("Search string not found");
-const char *STR_E_UNKNOWN_TYPE = N_("Not implemented yet");
+const char *STR_E_NOTFOUND = N_ ("Search string not found");
+const char *STR_E_UNKNOWN_TYPE = N_ ("Not implemented yet");
 const char *STR_E_RPL_NOT_EQ_TO_FOUND =
-            N_("Num of replace tokens not equal to num of found tokens");
-const char *STR_E_RPL_INVALID_TOKEN = N_("Invalid token number %d");
+    N_ ("Num of replace tokens not equal to num of found tokens");
+const char *STR_E_RPL_INVALID_TOKEN = N_ ("Invalid token number %d");
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -77,11 +77,11 @@ mc_search__change_case_str (const char *charset, const GString *str, case_conv_f
 
     converted_str = mc_search__recode_str (str->str, str->len, charset, cp_display);
 
-    dst_len = converted_str->len + 1;   // +1 is required for str_toupper/str_tolower
+    dst_len = converted_str->len + 1;  // +1 is required for str_toupper/str_tolower
     dst_str = g_malloc (dst_len);
 
-    for (src_ptr = converted_str->str, dst_ptr = dst_str;
-         case_conv (src_ptr, &dst_ptr, &dst_len); src_ptr += str_length_char (src_ptr))
+    for (src_ptr = converted_str->str, dst_ptr = dst_str; case_conv (src_ptr, &dst_ptr, &dst_len);
+         src_ptr += str_length_char (src_ptr))
         ;
     *dst_ptr = '\0';
 
@@ -93,11 +93,11 @@ mc_search__change_case_str (const char *charset, const GString *str, case_conv_f
 #else
     (void) charset;
 
-    dst_len = str->len + 1;     // +1 is required for str_toupper/str_tolower
+    dst_len = str->len + 1;  // +1 is required for str_toupper/str_tolower
     dst_str = g_malloc (dst_len);
 
-    for (src_ptr = str->str, dst_ptr = dst_str;
-         case_conv (src_ptr, &dst_ptr, &dst_len); src_ptr += str_length_char (src_ptr))
+    for (src_ptr = str->str, dst_ptr = dst_str; case_conv (src_ptr, &dst_ptr, &dst_len);
+         src_ptr += str_length_char (src_ptr))
         ;
     *dst_ptr = '\0';
 

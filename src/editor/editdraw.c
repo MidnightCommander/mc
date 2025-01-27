@@ -42,14 +42,14 @@
 #include <sys/stat.h>
 
 #include "lib/global.h"
-#include "lib/tty/tty.h"        // tty_printf()
-#include "lib/tty/key.h"        // is_idle()
+#include "lib/tty/tty.h"  // tty_printf()
+#include "lib/tty/key.h"  // is_idle()
 #include "lib/skin.h"
-#include "lib/strutil.h"        // utf string functions
-#include "lib/util.h"           // is_printable()
+#include "lib/strutil.h"  // utf string functions
+#include "lib/util.h"     // is_printable()
 #include "lib/widget.h"
 #ifdef HAVE_CHARSET
-#include "lib/charsets.h"
+#    include "lib/charsets.h"
 #endif
 
 #include "edit-impl.h"
@@ -62,15 +62,15 @@
 #define MAX_LINE_LEN 1024
 
 /* Text styles */
-#define MOD_ABNORMAL            (1 << 8)
-#define MOD_BOLD                (1 << 9)
-#define MOD_MARKED              (1 << 10)
-#define MOD_CURSOR              (1 << 11)
-#define MOD_WHITESPACE          (1 << 12)
+#define MOD_ABNORMAL                  (1 << 8)
+#define MOD_BOLD                      (1 << 9)
+#define MOD_MARKED                    (1 << 10)
+#define MOD_CURSOR                    (1 << 11)
+#define MOD_WHITESPACE                (1 << 12)
 
-#define edit_move(x,y) widget_gotoyx(edit, y, x);
+#define edit_move(x, y)               widget_gotoyx (edit, y, x);
 
-#define key_pending(x) (!is_idle())
+#define key_pending(x)                (!is_idle ())
 
 #define EDITOR_MINIMUM_TERMINAL_WIDTH 30
 
@@ -117,13 +117,13 @@ status_string (WEdit *edit, char *s, int w)
 
         cur_utf = edit_buffer_get_utf (&edit->buffer, edit->buffer.curs1, &char_length);
         if (char_length > 0)
-            g_snprintf (byte_str, sizeof (byte_str), "%04u 0x%03X",
-                        (unsigned) cur_utf, (unsigned) cur_utf);
+            g_snprintf (byte_str, sizeof (byte_str), "%04u 0x%03X", (unsigned) cur_utf,
+                        (unsigned) cur_utf);
         else
         {
             cur_utf = edit_buffer_get_current_byte (&edit->buffer);
-            g_snprintf (byte_str, sizeof (byte_str), "%04d 0x%03X",
-                        (int) cur_utf, (unsigned) cur_utf);
+            g_snprintf (byte_str, sizeof (byte_str), "%04d 0x%03X", (int) cur_utf,
+                        (unsigned) cur_utf);
         }
     }
 #endif
@@ -137,37 +137,28 @@ status_string (WEdit *edit, char *s, int w)
 
     // The field lengths just prevent the status line from shortening too much
     if (edit_options.simple_statusbar)
-        g_snprintf (s, w,
-                    "%c%c%c%c %3ld %5ld/%ld %6ld/%ld %s %s",
+        g_snprintf (s, w, "%c%c%c%c %3ld %5ld/%ld %6ld/%ld %s %s",
                     edit->mark1 != edit->mark2 ? (edit->column_highlight ? 'C' : 'B') : '-',
-                    edit->modified != 0 ? 'M' : '-',
-                    macro_index < 0 ? '-' : 'R',
-                    edit->overwrite == 0 ? '-' : 'O',
-                    edit->curs_col + edit->over_col,
-                    edit->buffer.curs_line + 1,
-                    edit->buffer.lines + 1, (long) edit->buffer.curs1, (long) edit->buffer.size,
-                    byte_str,
+                    edit->modified != 0 ? 'M' : '-', macro_index < 0 ? '-' : 'R',
+                    edit->overwrite == 0 ? '-' : 'O', edit->curs_col + edit->over_col,
+                    edit->buffer.curs_line + 1, edit->buffer.lines + 1, (long) edit->buffer.curs1,
+                    (long) edit->buffer.size, byte_str,
 #ifdef HAVE_CHARSET
                     mc_global.source_codepage >= 0 ? get_codepage_id (mc_global.source_codepage) :
 #endif
-                    "");
+                                                   "");
     else
-        g_snprintf (s, w,
-                    "[%c%c%c%c] %2ld L:[%3ld+%2ld %3ld/%3ld] *(%-4ld/%4ldb) %s  %s",
+        g_snprintf (s, w, "[%c%c%c%c] %2ld L:[%3ld+%2ld %3ld/%3ld] *(%-4ld/%4ldb) %s  %s",
                     edit->mark1 != edit->mark2 ? (edit->column_highlight ? 'C' : 'B') : '-',
-                    edit->modified != 0 ? 'M' : '-',
-                    macro_index < 0 ? '-' : 'R',
-                    edit->overwrite == 0 ? '-' : 'O',
-                    edit->curs_col + edit->over_col,
-                    edit->start_line + 1,
-                    edit->curs_row,
-                    edit->buffer.curs_line + 1,
+                    edit->modified != 0 ? 'M' : '-', macro_index < 0 ? '-' : 'R',
+                    edit->overwrite == 0 ? '-' : 'O', edit->curs_col + edit->over_col,
+                    edit->start_line + 1, edit->curs_row, edit->buffer.curs_line + 1,
                     edit->buffer.lines + 1, (long) edit->buffer.curs1, (long) edit->buffer.size,
                     byte_str,
 #ifdef HAVE_CHARSET
                     mc_global.source_codepage >= 0 ? get_codepage_id (mc_global.source_codepage) :
 #endif
-                    "");
+                                                   "");
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -183,8 +174,8 @@ edit_status_fullscreen (WEdit *edit, int color)
 {
     Widget *h = WIDGET (WIDGET (edit)->owner);
     const int w = h->rect.cols;
-    const int gap = 3;          // between the filename and the status
-    const int right_gap = 5;    // at the right end of the screen
+    const int gap = 3;        // between the filename and the status
+    const int right_gap = 5;  // at the right end of the screen
     const int preferred_fname_len = 16;
     char *status;
     size_t status_size;
@@ -253,7 +244,7 @@ edit_status_window (WEdit *edit)
 
     if (cols > 5)
     {
-        const char *fname = N_("NoName");
+        const char *fname = N_ ("NoName");
 
         if (edit->filename_vpath != NULL)
         {
@@ -264,7 +255,7 @@ edit_status_window (WEdit *edit)
         }
 #ifdef ENABLE_NLS
         else
-            fname = _(fname);
+            fname = _ (fname);
 #endif
 
         edit_move (2, 0);
@@ -279,15 +270,14 @@ edit_status_window (WEdit *edit)
         edit_move (x, 0);
         tty_printf ("[%c%c%c%c]",
                     edit->mark1 != edit->mark2 ? (edit->column_highlight ? 'C' : 'B') : '-',
-                    edit->modified != 0 ? 'M' : '-',
-                    macro_index < 0 ? '-' : 'R', edit->overwrite == 0 ? '-' : 'O');
+                    edit->modified != 0 ? 'M' : '-', macro_index < 0 ? '-' : 'R',
+                    edit->overwrite == 0 ? '-' : 'O');
     }
 
     if (cols > 30)
     {
         edit_move (2, w->rect.lines - 1);
-        tty_printf ("%3ld %5ld/%ld %6ld/%ld",
-                    edit->curs_col + edit->over_col,
+        tty_printf ("%3ld %5ld/%ld %6ld/%ld", edit->curs_col + edit->over_col,
                     edit->buffer.curs_line + 1, edit->buffer.lines + 1, (long) edit->buffer.curs1,
                     (long) edit->buffer.size);
     }
@@ -377,8 +367,8 @@ edit_draw_window_icons (const WEdit *edit, int color)
 /* --------------------------------------------------------------------------------------------- */
 
 static inline void
-print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
-                 long end_col, line_s line[], char *status, int bookmarked)
+print_to_widget (WEdit *edit, long row, int start_col, int start_col_real, long end_col,
+                 line_s line[], char *status, int bookmarked)
 {
     Widget *w = WIDGET (edit);
     line_s *p;
@@ -623,87 +613,87 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
                 switch (c)
                 {
                 case '\n':
-                    col = end_col - edit->start_col + 1;        // quit
+                    col = end_col - edit->start_col + 1;  // quit
                     break;
 
                 case '\t':
-                    {
-                        int tab_over;
-                        int i;
+                {
+                    int tab_over;
+                    int i;
 
-                        i = TAB_SIZE - ((int) col % TAB_SIZE);
-                        tab_over = (end_col - edit->start_col) - (col + i - 1);
-                        if (tab_over < 0)
-                            i += tab_over;
-                        col += i;
-                        if ((edit_options.visible_tabs || (edit_options.visible_tws && q >= tws))
-                            && enable_show_tabs_tws && tty_use_colors ())
+                    i = TAB_SIZE - ((int) col % TAB_SIZE);
+                    tab_over = (end_col - edit->start_col) - (col + i - 1);
+                    if (tab_over < 0)
+                        i += tab_over;
+                    col += i;
+                    if ((edit_options.visible_tabs || (edit_options.visible_tws && q >= tws))
+                        && enable_show_tabs_tws && tty_use_colors ())
+                    {
+                        if ((p->style & MOD_MARKED) != 0)
+                            c = p->style;
+                        else if (book_mark != 0)
+                            c |= book_mark << 16;
+                        else
+                            c = p->style | MOD_WHITESPACE;
+                        if (i > 2)
                         {
-                            if ((p->style & MOD_MARKED) != 0)
-                                c = p->style;
-                            else if (book_mark != 0)
-                                c |= book_mark << 16;
-                            else
-                                c = p->style | MOD_WHITESPACE;
-                            if (i > 2)
-                            {
-                                p->ch = '<';
-                                p->style = c;
-                                p++;
-                                while (--i > 1)
-                                {
-                                    p->ch = '-';
-                                    p->style = c;
-                                    p++;
-                                }
-                                p->ch = '>';
-                                p->style = c;
-                                p++;
-                            }
-                            else if (i > 1)
-                            {
-                                p->ch = '<';
-                                p->style = c;
-                                p++;
-                                p->ch = '>';
-                                p->style = c;
-                                p++;
-                            }
-                            else
-                            {
-                                p->ch = '>';
-                                p->style = c;
-                                p++;
-                            }
-                        }
-                        else if (edit_options.visible_tws && q >= tws && enable_show_tabs_tws
-                                 && tty_use_colors ())
-                        {
-                            p->ch = '.';
-                            p->style |= MOD_WHITESPACE;
-                            c = p->style & ~MOD_CURSOR;
+                            p->ch = '<';
+                            p->style = c;
                             p++;
-                            while (--i != 0)
+                            while (--i > 1)
                             {
-                                p->ch = ' ';
+                                p->ch = '-';
                                 p->style = c;
                                 p++;
                             }
+                            p->ch = '>';
+                            p->style = c;
+                            p++;
+                        }
+                        else if (i > 1)
+                        {
+                            p->ch = '<';
+                            p->style = c;
+                            p++;
+                            p->ch = '>';
+                            p->style = c;
+                            p++;
                         }
                         else
                         {
-                            p->ch |= ' ';
-                            c = p->style & ~MOD_CURSOR;
+                            p->ch = '>';
+                            p->style = c;
                             p++;
-                            while (--i != 0)
-                            {
-                                p->ch = ' ';
-                                p->style = c;
-                                p++;
-                            }
                         }
                     }
-                    break;
+                    else if (edit_options.visible_tws && q >= tws && enable_show_tabs_tws
+                             && tty_use_colors ())
+                    {
+                        p->ch = '.';
+                        p->style |= MOD_WHITESPACE;
+                        c = p->style & ~MOD_CURSOR;
+                        p++;
+                        while (--i != 0)
+                        {
+                            p->ch = ' ';
+                            p->style = c;
+                            p++;
+                        }
+                    }
+                    else
+                    {
+                        p->ch |= ' ';
+                        c = p->style & ~MOD_CURSOR;
+                        p++;
+                        while (--i != 0)
+                        {
+                            p->ch = ' ';
+                            p->style = c;
+                            p++;
+                        }
+                    }
+                }
+                break;
 
                 case ' ':
                     if (edit_options.visible_tws && q >= tws && enable_show_tabs_tws
@@ -786,7 +776,7 @@ edit_draw_this_line (WEdit *edit, off_t b, long row, long start_col, long end_co
                     p++;
                     col++;
                     break;
-                }               // case
+                }  // case
 
                 q++;
                 if (char_length > 1)
@@ -857,7 +847,7 @@ render_edit_text (WEdit *edit, long start_row, long start_column, long end_row, 
         return;
 
     y2 = w->y + w->lines - 1;
-    if (y2 < wh->rect.y + 1) // menubar
+    if (y2 < wh->rect.y + 1)  // menubar
         return;
 
     x2 = w->x + w->cols - 1;
@@ -869,9 +859,9 @@ render_edit_text (WEdit *edit, long start_row, long start_column, long end_row, 
         // !REDRAW_IN_BOUNDS means to ignore bounds and redraw whole rows
         // draw only visible region
 
-        if (y2 <= last_line - 1) // buttonbar
+        if (y2 <= last_line - 1)  // buttonbar
             end_row = w->lines - 1;
-        else if (y1 >= wh->rect.y + 1) // menubar
+        else if (y1 >= wh->rect.y + 1)  // menubar
             end_row = wh->rect.lines - 1 - y1 - 1;
         else
             end_row = start_row + wh->rect.lines - 1 - 1;
@@ -994,7 +984,7 @@ render_edit_text (WEdit *edit, long start_row, long start_column, long end_row, 
 static inline void
 edit_render (WEdit *edit, int page, int row_start, int col_start, int row_end, int col_end)
 {
-    if (page != 0)              // if it was an expose event, 'page' would be set
+    if (page != 0)  // if it was an expose event, 'page' would be set
         edit->force |= REDRAW_PAGE | REDRAW_IN_BOUNDS;
 
     render_edit_text (edit, row_start, col_start, row_end, col_end);
@@ -1024,8 +1014,9 @@ edit_status (WEdit *edit, gboolean active)
     }
     else
     {
-        color = edit->drag_state != MCEDIT_DRAG_NONE ? EDITOR_FRAME_DRAG : active ?
-            EDITOR_FRAME_ACTIVE : EDITOR_FRAME;
+        color = edit->drag_state != MCEDIT_DRAG_NONE ? EDITOR_FRAME_DRAG
+            : active                                 ? EDITOR_FRAME_ACTIVE
+                                                     : EDITOR_FRAME;
         edit_draw_frame (edit, color, active);
         edit_status_window (edit);
     }

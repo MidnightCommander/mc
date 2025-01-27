@@ -7,14 +7,14 @@
 
 #include <sys/stat.h>
 #include <sys/types.h>
-#include <inttypes.h>           // uintmax_t
+#include <inttypes.h>  // uintmax_t
 
 #include "lib/global.h"
 #include "lib/vfs/vfs.h"
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
-typedef int (*mc_stat_fn) (const vfs_path_t * vpath, struct stat * buf);
+typedef int (*mc_stat_fn) (const vfs_path_t *vpath, struct stat *buf);
 
 /*** enums ***************************************************************************************/
 
@@ -161,33 +161,33 @@ extern const char *op_names[3];
 /*** declarations of public functions ************************************************************/
 
 file_op_context_t *file_op_context_new (FileOperation op);
-void file_op_context_destroy (file_op_context_t * ctx);
+void file_op_context_destroy (file_op_context_t *ctx);
 
-void file_progress_ui_create (file_op_context_t * ctx, gboolean with_eta,
+void file_progress_ui_create (file_op_context_t *ctx, gboolean with_eta,
                               filegui_dialog_type_t dialog_type);
-void file_progress_ui_destroy (file_op_context_t * ctx);
+void file_progress_ui_destroy (file_op_context_t *ctx);
 
-char *file_mask_dialog (file_op_context_t * ctx, gboolean only_one, const char *format,
-                        const void *text, const char *def_text, gboolean * do_bg);
+char *file_mask_dialog (file_op_context_t *ctx, gboolean only_one, const char *format,
+                        const void *text, const char *def_text, gboolean *do_bg);
 
-FileProgressStatus file_progress_check_buttons (file_op_context_t * ctx);
+FileProgressStatus file_progress_check_buttons (file_op_context_t *ctx);
 
-void file_progress_show (file_op_context_t * ctx, off_t done, off_t total,
-                         const char *stalled_msg, gboolean force_update);
-void file_progress_show_count (file_op_context_t * ctx);
-void file_progress_show_total (file_op_context_t * ctx, uintmax_t copied_bytes, gint64 tv_current,
+void file_progress_show (file_op_context_t *ctx, off_t done, off_t total, const char *stalled_msg,
+                         gboolean force_update);
+void file_progress_show_count (file_op_context_t *ctx);
+void file_progress_show_total (file_op_context_t *ctx, uintmax_t copied_bytes, gint64 tv_current,
                                gboolean show_summary);
-void file_progress_show_source (file_op_context_t * ctx, const vfs_path_t * vpath);
-void file_progress_show_target (file_op_context_t * ctx, const vfs_path_t * vpath);
-gboolean file_progress_show_deleting (file_op_context_t * ctx, const vfs_path_t * vpath,
+void file_progress_show_source (file_op_context_t *ctx, const vfs_path_t *vpath);
+void file_progress_show_target (file_op_context_t *ctx, const vfs_path_t *vpath);
+gboolean file_progress_show_deleting (file_op_context_t *ctx, const vfs_path_t *vpath,
                                       size_t *count);
 
 /* The following functions are implemented separately by each port */
-FileProgressStatus file_progress_real_query_replace (file_op_context_t * ctx,
+FileProgressStatus file_progress_real_query_replace (file_op_context_t *ctx,
                                                      enum OperationMode mode, const char *src,
                                                      struct stat *src_stat, const char *dst,
                                                      struct stat *dst_stat);
 
 /*** inline functions ****************************************************************************/
 
-#endif // MC__FILEGUI_H
+#endif  // MC__FILEGUI_H

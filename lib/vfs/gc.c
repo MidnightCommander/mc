@@ -36,14 +36,13 @@
  * \date 1995, 1998, 2003
  */
 
-
 #include <config.h>
 
 #include <stdlib.h>
 
 #include "lib/global.h"
 #include "lib/event.h"
-#include "lib/util.h"           // MC_PTR_FREE
+#include "lib/util.h"  // MC_PTR_FREE
 
 #include "vfs.h"
 #include "utilvfs.h"
@@ -85,11 +84,11 @@
 
 /*** global variables ****************************************************************************/
 
-int vfs_timeout = 60;           // VFS timeout in seconds
+int vfs_timeout = 60;  // VFS timeout in seconds
 
 /*** file scope macro definitions ****************************************************************/
 
-#define VFS_STAMPING(a) ((struct vfs_stamping *)(a))
+#define VFS_STAMPING(a) ((struct vfs_stamping *) (a))
 
 /*** file scope type declarations ****************************************************************/
 
@@ -144,10 +143,7 @@ vfs_addstamp (struct vfs_class *v, vfsid id)
 gboolean
 vfs_stamp (struct vfs_class *v, vfsid id)
 {
-    struct vfs_stamping what = {
-        .v = v,
-        .id = id
-    };
+    struct vfs_stamping what = { .v = v, .id = id };
     GSList *stamp;
     gboolean ret = FALSE;
 
@@ -166,10 +162,7 @@ vfs_stamp (struct vfs_class *v, vfsid id)
 void
 vfs_rmstamp (struct vfs_class *v, vfsid id)
 {
-    struct vfs_stamping what = {
-        .v = v,
-        .id = id
-    };
+    struct vfs_stamping what = { .v = v, .id = id };
     GSList *stamp;
 
     stamp = g_slist_find_custom (stamps, &what, vfs_stamp_compare);
@@ -223,7 +216,7 @@ vfs_stamp_create (struct vfs_class *vclass, vfsid id)
 
     if (!(id == NULL || (me == vclass && nvfsid == id)))
     {
-        mc_event_raise (MCEVENT_GROUP_CORE, "vfs_timestamp", (gpointer) & event_data);
+        mc_event_raise (MCEVENT_GROUP_CORE, "vfs_timestamp", (gpointer) &event_data);
 
         if (!event_data.ret && vclass != NULL && vclass->nothingisopen != NULL
             && vclass->nothingisopen (id))

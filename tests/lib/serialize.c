@@ -66,18 +66,9 @@ static const struct test_serialize_ds
     const char input_char_prefix;
     const char *input_string;
     const char *expected_result;
-} test_serialize_ds[] =
-{
-    {
-        's',
-        "some test string",
-        "s16:some test string"
-    },
-    {
-        'a',
-        "some test test test string",
-        "a26:some test test test string"
-    },
+} test_serialize_ds[] = {
+    { 's', "some test string", "s16:some test string" },
+    { 'a', "some test test test string", "a26:some test test test string" },
 };
 /* @Test(dataSource = "test_serialize_ds") */
 START_PARAMETRIZED_TEST (test_serialize, test_serialize_ds)
@@ -105,40 +96,24 @@ static const struct test_deserialize_incorrect_ds
 {
     const char input_char_prefix;
     const char *input_string;
-    const int  expected_error_code;
+    const int expected_error_code;
     const char *expected_error_string;
-} test_deserialize_incorrect_ds[] =
-{
-    {
-        's',
-        NULL,
-        0,      // FIXME, TODO
-        "mc_serialize_str(): Input data is NULL or empty."
-    },
-    {
-        's',
-        "incorrect string",
-        0,      // FIXME, TODO
-        "mc_serialize_str(): String prefix doesn't equal to 's'"
-    },
-    {
-        's',
-        "s12345string without delimiter",
-        0,      // FIXME, TODO
-        "mc_serialize_str(): Length delimiter ':' doesn't exists"
-    },
-    {
-        's',
-        "s1234567890123456789012345678901234567890123456789012345678901234567890:too big number",
-        0,      // FIXME, TODO
-        "mc_serialize_str(): Too big string length"
-    },
-    {
-        's',
-        "s500:actual string length less that specified length",
-        0,      // FIXME, TODO
-        "mc_serialize_str(): Specified data length (500) is greater than actual data length (47)"
-    },
+} test_deserialize_incorrect_ds[] = {
+    { 's', NULL,
+      0,  // FIXME, TODO
+      "mc_serialize_str(): Input data is NULL or empty." },
+    { 's', "incorrect string",
+      0,  // FIXME, TODO
+      "mc_serialize_str(): String prefix doesn't equal to 's'" },
+    { 's', "s12345string without delimiter",
+      0,  // FIXME, TODO
+      "mc_serialize_str(): Length delimiter ':' doesn't exists" },
+    { 's', "s1234567890123456789012345678901234567890123456789012345678901234567890:too big number",
+      0,  // FIXME, TODO
+      "mc_serialize_str(): Too big string length" },
+    { 's', "s500:actual string length less that specified length",
+      0,  // FIXME, TODO
+      "mc_serialize_str(): Specified data length (500) is greater than actual data length (47)" },
 };
 /* @Test(dataSource = "test_deserialize_incorrect_ds") */
 START_PARAMETRIZED_TEST (test_deserialize_incorrect, test_deserialize_incorrect_ds)
@@ -165,18 +140,9 @@ static const struct test_deserialize_ds
     const char input_char_prefix;
     const char *input_string;
     const char *expected_result;
-} test_deserialize_ds[] =
-{
-    {
-        's',
-        "s10:actual string length great that specified length",
-        "actual str"
-    },
-    {
-        'r',
-        "r21:The right test string",
-        "The right test string"
-    },
+} test_deserialize_ds[] = {
+    { 's', "s10:actual string length great that specified length", "actual str" },
+    { 'r', "r21:The right test string", "The right test string" },
 };
 /* @Test(dataSource = "test_deserialize_ds") */
 START_PARAMETRIZED_TEST (test_deserialize, test_deserialize_ds)
@@ -201,7 +167,8 @@ START_TEST (test_serialize_config)
     // given
     mc_config_t *test_data;
     char *actual;
-    const char *expected_result = "g6:group1p6:param1v10:some valuep6:param2v11:some value "
+    const char *expected_result =
+        "g6:group1p6:param1v10:some valuep6:param2v11:some value "
         "g6:group2p6:param1v4:truep6:param2v6:123456"
         "g6:group3p6:param1v11:::bla-bla::p6:param2v31:bla-:p1:w:v2:12:g3:123:bla-bla\n"
         "g6:group4p6:param1v5:falsep6:param2v6:654321";
@@ -237,30 +204,22 @@ END_TEST
 static const struct test_deserialize_config_incorrect_ds
 {
     const char *input_string;
-    const int  expected_error_code;
+    const int expected_error_code;
     const char *expected_error_string;
-} test_deserialize_config_incorrect_ds[] =
-{
-    {
-        "g123error in group name",
-        0,      // FIXME, TODO
-        "mc_deserialize_config() at 1: mc_serialize_str(): Length delimiter ':' doesn't exists"
-    },
-    {
-        "p6:param1v10:some valuep6:param2v11:some value ",
-        0,      // FIXME, TODO
-        "mc_deserialize_config() at 1: mc_serialize_str(): String prefix doesn't equal to 'g'"
-    },
-    {
-        "g6:group1v10:some valuep6:param2v11:some value ",
-        0,      // FIXME, TODO
-        "mc_deserialize_config() at 10: mc_serialize_str(): String prefix doesn't equal to 'p'"
-    },
-    {
-        "g6:group1p6000:param2v11:some value ",
-        0,      // FIXME, TODO
-        "mc_deserialize_config() at 10: mc_serialize_str(): Specified data length (6000) is greater than actual data length (21)"
-    },
+} test_deserialize_config_incorrect_ds[] = {
+    { "g123error in group name",
+      0,  // FIXME, TODO
+      "mc_deserialize_config() at 1: mc_serialize_str(): Length delimiter ':' doesn't exists" },
+    { "p6:param1v10:some valuep6:param2v11:some value ",
+      0,  // FIXME, TODO
+      "mc_deserialize_config() at 1: mc_serialize_str(): String prefix doesn't equal to 'g'" },
+    { "g6:group1v10:some valuep6:param2v11:some value ",
+      0,  // FIXME, TODO
+      "mc_deserialize_config() at 10: mc_serialize_str(): String prefix doesn't equal to 'p'" },
+    { "g6:group1p6000:param2v11:some value ",
+      0,  // FIXME, TODO
+      "mc_deserialize_config() at 10: mc_serialize_str(): Specified data length (6000) is greater "
+      "than actual data length (21)" },
 };
 /* @Test(dataSource = "test_deserialize_config_incorrect_ds") */
 START_PARAMETRIZED_TEST (test_deserialize_config_incorrect, test_deserialize_config_incorrect_ds)

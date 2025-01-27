@@ -108,20 +108,11 @@ teardown (void)
 static const struct test_empty_mean_home_ds
 {
     const char *command;
-} test_empty_mean_home_ds[] =
-{
-    {
-        ""
-    },
-    {
-        "                      "
-    },
-    {
-        "\t\t\t\t\t\t\t\t\t\t\t"
-    },
-    {
-        "  \t   \t  \t\t    \t    "
-    },
+} test_empty_mean_home_ds[] = {
+    { "" },
+    { "                      " },
+    { "\t\t\t\t\t\t\t\t\t\t\t" },
+    { "  \t   \t  \t\t    \t    " },
 };
 
 /* @Test(dataSource = "test_empty_mean_home_ds") */

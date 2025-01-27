@@ -16,7 +16,7 @@
 /*** typedefs(not structures) and defined constants **********************************************/
 
 #ifndef MC_USERCONF_DIR
-#define MC_USERCONF_DIR         "mc"
+#    define MC_USERCONF_DIR "mc"
 #endif
 
 #define TAGS_NAME               "TAGS"
@@ -70,19 +70,19 @@
 #define MC_SKINS_DIR            "skins"
 
 /* editor home directory */
-#define EDIT_HOME_DIR           "mcedit"
+#define EDIT_HOME_DIR "mcedit"
 
 /* file names */
-#define EDIT_HOME_MACRO_FILE    EDIT_HOME_DIR PATH_SEP_STR "macros.d" PATH_SEP_STR "macro"
-#define EDIT_HOME_CLIP_FILE     EDIT_HOME_DIR PATH_SEP_STR "mcedit.clip"
-#define EDIT_HOME_BLOCK_FILE    EDIT_HOME_DIR PATH_SEP_STR "mcedit.block"
-#define EDIT_HOME_TEMP_FILE     EDIT_HOME_DIR PATH_SEP_STR "mcedit.temp"
-#define EDIT_SYNTAX_DIR         "syntax"
-#define EDIT_SYNTAX_FILE        EDIT_SYNTAX_DIR PATH_SEP_STR "Syntax"
+#define EDIT_HOME_MACRO_FILE EDIT_HOME_DIR PATH_SEP_STR "macros.d" PATH_SEP_STR "macro"
+#define EDIT_HOME_CLIP_FILE  EDIT_HOME_DIR PATH_SEP_STR "mcedit.clip"
+#define EDIT_HOME_BLOCK_FILE EDIT_HOME_DIR PATH_SEP_STR "mcedit.block"
+#define EDIT_HOME_TEMP_FILE  EDIT_HOME_DIR PATH_SEP_STR "mcedit.temp"
+#define EDIT_SYNTAX_DIR      "syntax"
+#define EDIT_SYNTAX_FILE     EDIT_SYNTAX_DIR PATH_SEP_STR "Syntax"
 
-#define EDIT_GLOBAL_MENU        "mcedit.menu"
-#define EDIT_LOCAL_MENU         ".cedit.menu"
-#define EDIT_HOME_MENU          EDIT_HOME_DIR PATH_SEP_STR "menu"
+#define EDIT_GLOBAL_MENU     "mcedit.menu"
+#define EDIT_LOCAL_MENU      ".cedit.menu"
+#define EDIT_HOME_MENU       EDIT_HOME_DIR PATH_SEP_STR "menu"
 
 /*** enums ***************************************************************************************/
 

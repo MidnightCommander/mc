@@ -52,10 +52,9 @@ static const struct data_source1
     const char *input_string;
 
     const char *expected_string;
-} data_source1[] =
-{
-    { TRUE, "%%", "%%%%"},
-    { FALSE, "%%", "%%"},
+} data_source1[] = {
+    { TRUE, "%%", "%%%%" },
+    { FALSE, "%%", "%%" },
 };
 
 /* @Test(dataSource = "data_source1") */
@@ -82,19 +81,18 @@ static const struct data_source2
     const char *input_string;
 
     const char *expected_string;
-} data_source2[] =
-{
-    {NULL, NULL},
-    {"", NULL},
-    {"-", "./-"},
-    {"blabla-", "blabla-"},
-    {"\r\n\t", "\\\r\\\n\\\t"},
-    {"'\\\";?|[]{}<>`!$&*()", "\\'\\\\\\\"\\;\\?\\|\\[\\]\\{\\}\\<\\>\\`\\!\\$\\&\\*\\(\\)"},
-    {"a b c ", "a\\ b\\ c\\ "},
-    {"#", "\\#"},
-    {"blabla#", "blabla#"},
-    {"~", "\\~"},
-    {"blabla~", "blabla~"},
+} data_source2[] = {
+    { NULL, NULL },
+    { "", NULL },
+    { "-", "./-" },
+    { "blabla-", "blabla-" },
+    { "\r\n\t", "\\\r\\\n\\\t" },
+    { "'\\\";?|[]{}<>`!$&*()", "\\'\\\\\\\"\\;\\?\\|\\[\\]\\{\\}\\<\\>\\`\\!\\$\\&\\*\\(\\)" },
+    { "a b c ", "a\\ b\\ c\\ " },
+    { "#", "\\#" },
+    { "blabla#", "blabla#" },
+    { "~", "\\~" },
+    { "blabla~", "blabla~" },
 };
 
 /* @Test(dataSource = "data_source2") */

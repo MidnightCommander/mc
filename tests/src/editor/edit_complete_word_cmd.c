@@ -31,16 +31,16 @@
 #include <ctype.h>
 
 #ifdef HAVE_CHARSET
-#include "lib/charsets.h"
+#    include "lib/charsets.h"
 #endif
 #include "lib/strutil.h"
 
 #include "src/vfs/local/local.c"
 #ifdef HAVE_CHARSET
-#include "src/selcodepage.h"
+#    include "src/selcodepage.h"
 #endif
 #include "src/editor/editwidget.h"
-#include "src/editor/editmacros.h"      // edit_load_macro_cmd()
+#include "src/editor/editmacros.h"  // edit_load_macro_cmd()
 #include "src/editor/editcomplete.h"
 
 static WGroup owner;
@@ -100,7 +100,7 @@ static char *edit_completion_dialog_show__return_value;
 
 /* @Mock */
 char *
-edit_completion_dialog_show (const WEdit *edit, GQueue *compl, int max_width)
+edit_completion_dialog_show (const WEdit *edit, GQueue * compl, int max_width)
 {
 
     edit_completion_dialog_show__edit = edit;
@@ -163,7 +163,7 @@ my_setup (void)
 #ifdef HAVE_CHARSET
     mc_global.sysconfig_dir = (char *) TEST_SHARE_DIR;
     load_codepages_list ();
-#endif // HAVE_CHARSET
+#endif  // HAVE_CHARSET
 
     mc_global.main_config = mc_config_init ("edit_complete_word_cmd.ini", FALSE);
     mc_config_set_bool (mc_global.main_config, CONFIG_APP_SECTION,
@@ -195,7 +195,7 @@ my_teardown (void)
 
 #ifdef HAVE_CHARSET
     free_codepages_list ();
-#endif // HAVE_CHARSET
+#endif  // HAVE_CHARSET
 
     vfs_shut ();
 
@@ -219,33 +219,18 @@ static const struct test_autocomplete_ds
     int expected_compl_word_count;
     int input_completed_word_start_pos;
     const char *expected_completed_word;
-} test_autocomplete_ds[] =
-{
+} test_autocomplete_ds[] = {
     { // 0.
-        102,
-        "KOI8-R",
-        0,
-        "UTF-8",
-        1,
-        "эъйцукен",
+      102, "KOI8-R", 0, "UTF-8", 1, "эъйцукен",
 
-        16,
-        2,
-        98,
-        "эъйцукен"
-    },
-    { // 1.
-        138,
-        "UTF-8",
-        1,
-        "KOI8-R",
-        0,
-        "\xDC\xDF\xCA\xC3\xD5\xCB\xC5\xCE", // эъйцукен
+      16, 2, 98, "эъйцукен" },
+    {
+        // 1.
+        138, "UTF-8", 1, "KOI8-R", 0,
+        "\xDC\xDF\xCA\xC3\xD5\xCB\xC5\xCE",  // эъйцукен
 
-        8,
-        2,
-        136,
-        "\xDC\xDF\xCA\xC3\xD5\xCB\xC5\xCE" // эъйцукен
+        8, 2, 136,
+        "\xDC\xDF\xCA\xC3\xD5\xCB\xC5\xCE"  // эъйцукен
     },
 };
 
@@ -254,7 +239,6 @@ START_PARAMETRIZED_TEST (test_autocomplete, test_autocomplete_ds)
 {
     // given
     edit_completion_dialog_show__return_value = g_strdup (data->input_completed_word);
-
 
     mc_global.source_codepage = data->input_source_codepage_id;
     mc_global.display_codepage = data->input_display_codepage_id;
@@ -284,9 +268,8 @@ START_PARAMETRIZED_TEST (test_autocomplete, test_autocomplete_ds)
         {
             int chr;
 
-            chr =
-                edit_buffer_get_byte (&test_edit->buffer,
-                                      data->input_completed_word_start_pos + i++);
+            chr = edit_buffer_get_byte (&test_edit->buffer,
+                                        data->input_completed_word_start_pos + i++);
             if (isspace (chr))
                 break;
             g_string_append_c (actual_completed_str, chr);
@@ -311,17 +294,13 @@ static const struct test_autocomplete_single_ds
     int input_completed_word_start_pos;
 
     const char *expected_completed_word;
-} test_autocomplete_single_ds[] =
-{
-    { // 0.
-        146,
-        "UTF-8",
-        1,
-        "KOI8-R",
-        0,
+} test_autocomplete_single_ds[] = {
+    {
+        // 0.
+        146, "UTF-8", 1, "KOI8-R", 0,
 
         145,
-        "\xC6\xD9\xD7\xC1" // фыва
+        "\xC6\xD9\xD7\xC1"  // фыва
     },
 };
 
@@ -352,9 +331,8 @@ START_PARAMETRIZED_TEST (test_autocomplete_single, test_autocomplete_single_ds)
         {
             int chr;
 
-            chr =
-                edit_buffer_get_byte (&test_edit->buffer,
-                                      data->input_completed_word_start_pos + i++);
+            chr = edit_buffer_get_byte (&test_edit->buffer,
+                                        data->input_completed_word_start_pos + i++);
             if (isspace (chr))
                 break;
             g_string_append_c (actual_completed_str, chr);
@@ -365,8 +343,7 @@ START_PARAMETRIZED_TEST (test_autocomplete_single, test_autocomplete_single_ds)
 }
 END_PARAMETRIZED_TEST
 
-
-#endif // HAVE_CHARSET
+#endif  // HAVE_CHARSET
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -383,7 +360,7 @@ main (void)
 #ifdef HAVE_CHARSET
     mctest_add_parameterized_test (tc_core, test_autocomplete, test_autocomplete_ds);
     mctest_add_parameterized_test (tc_core, test_autocomplete_single, test_autocomplete_single_ds);
-#endif // HAVE_CHARSET
+#endif  // HAVE_CHARSET
     // ***********************************
 
     return mctest_run_all (tc_core);

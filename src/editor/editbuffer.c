@@ -31,7 +31,7 @@
 
 #include <config.h>
 
-#include <ctype.h>              // isdigit()
+#include <ctype.h>  // isdigit()
 #include <stdlib.h>
 #include <string.h>
 #include <sys/types.h>
@@ -87,7 +87,7 @@
 
 /* Configurable: log2 of the buffer size in bytes */
 #ifndef S_EDIT_BUF_SIZE
-#define S_EDIT_BUF_SIZE 16
+#    define S_EDIT_BUF_SIZE 16
 #endif
 
 /* Size of the buffer */
@@ -106,13 +106,13 @@
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 /**
-  * Get pointer to byte at specified index
-  *
-  * @param buf pointer to editor buffer
-  * @param byte_index byte index
-  *
-  * @return NULL if byte_index is negative or larger than file size; pointer to byte otherwise.
-  */
+ * Get pointer to byte at specified index
+ *
+ * @param buf pointer to editor buffer
+ * @param byte_index byte index
+ *
+ * @return NULL if byte_index is negative or larger than file size; pointer to byte otherwise.
+ */
 static char *
 edit_buffer_get_byte_ptr (const edit_buffer_t *buf, off_t byte_index)
 {
@@ -175,13 +175,13 @@ edit_buffer_clean (edit_buffer_t *buf)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
-  * Get byte at specified index
-  *
-  * @param buf pointer to editor buffer
-  * @param byte_index byte index
-  *
-  * @return '\n' if byte_index is negative or larger than file size; byte at byte_index otherwise.
-  */
+ * Get byte at specified index
+ *
+ * @param buf pointer to editor buffer
+ * @param byte_index byte index
+ *
+ * @return '\n' if byte_index is negative or larger than file size; byte at byte_index otherwise.
+ */
 
 int
 edit_buffer_get_byte (const edit_buffer_t *buf, off_t byte_index)
@@ -197,16 +197,16 @@ edit_buffer_get_byte (const edit_buffer_t *buf, off_t byte_index)
 
 #ifdef HAVE_CHARSET
 /**
-  * Get utf-8 symbol at specified index
-  *
-  * @param buf pointer to editor buffer
-  * @param byte_index byte index
-  * @param char_length length of returned symbol
-  *
-  * @return '\n' if byte_index is negative or larger than file size;
-  *         0 if utf-8 symbol at specified index is invalid;
-  *         utf-8 symbol otherwise
-  */
+ * Get utf-8 symbol at specified index
+ *
+ * @param buf pointer to editor buffer
+ * @param byte_index byte index
+ * @param char_length length of returned symbol
+ *
+ * @return '\n' if byte_index is negative or larger than file size;
+ *         0 if utf-8 symbol at specified index is invalid;
+ *         utf-8 symbol otherwise
+ */
 
 int
 edit_buffer_get_utf (const edit_buffer_t *buf, off_t byte_index, int *char_length)
@@ -260,16 +260,16 @@ edit_buffer_get_utf (const edit_buffer_t *buf, off_t byte_index, int *char_lengt
 
 /* --------------------------------------------------------------------------------------------- */
 /**
-  * Get utf-8 symbol before specified index
-  *
-  * @param buf pointer to editor buffer
-  * @param byte_index byte index
-  * @param char_length length of returned symbol
-  *
-  * @return 0 if byte_index is negative or larger than file size;
-  *         1-byte value before specified index if utf-8 symbol before specified index is invalid;
-  *         utf-8 symbol otherwise
-  */
+ * Get utf-8 symbol before specified index
+ *
+ * @param buf pointer to editor buffer
+ * @param byte_index byte index
+ * @param char_length length of returned symbol
+ *
+ * @return 0 if byte_index is negative or larger than file size;
+ *         1-byte value before specified index if utf-8 symbol before specified index is invalid;
+ *         utf-8 symbol otherwise
+ */
 
 int
 edit_buffer_get_prev_utf (const edit_buffer_t *buf, off_t byte_index, int *char_length)
@@ -309,7 +309,7 @@ edit_buffer_get_prev_utf (const edit_buffer_t *buf, off_t byte_index, int *char_
     *char_length = cursor_buf_ptr - str;
     return (int) res;
 }
-#endif // HAVE_CHARSET
+#endif  // HAVE_CHARSET
 
 /* --------------------------------------------------------------------------------------------- */
 /**
@@ -472,7 +472,7 @@ edit_buffer_find_word_start (const edit_buffer_t *buf, off_t *word_start, gsize 
     }
 
     // success
-    *word_start = buf->curs1 - i;       // start found
+    *word_start = buf->curs1 - i;  // start found
     *word_len = (gsize) i;
 
     return TRUE;

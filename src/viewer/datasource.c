@@ -57,7 +57,7 @@
 #include "lib/global.h"
 #include "lib/vfs/vfs.h"
 #include "lib/util.h"
-#include "lib/widget.h"         // D_NORMAL, D_ERROR
+#include "lib/widget.h"  // D_NORMAL, D_ERROR
 
 #include "internal.h"
 
@@ -303,9 +303,8 @@ mcview_file_load_data (WView *view, off_t byte_index)
     bytes_read = 0;
     while (bytes_read < view->ds_file_datasize)
     {
-        res =
-            mc_read (view->ds_file_fd, view->ds_file_data + bytes_read,
-                     view->ds_file_datasize - bytes_read);
+        res = mc_read (view->ds_file_fd, view->ds_file_data + bytes_read,
+                       view->ds_file_datasize - bytes_read);
         if (res == -1)
             goto error;
         if (res == 0)
@@ -324,7 +323,7 @@ mcview_file_load_data (WView *view, off_t byte_index)
     }
     return;
 
-  error:
+error:
     view->ds_file_datalen = 0;
 }
 

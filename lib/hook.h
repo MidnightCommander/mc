@@ -24,11 +24,11 @@ typedef struct hook_t
 
 /*** declarations of public functions ************************************************************/
 
-void add_hook (hook_t ** hook_list, void (*hook_fn) (void *), void *data);
-void execute_hooks (hook_t * hook_list);
-void delete_hook (hook_t ** hook_list, void (*hook_fn) (void *));
-gboolean hook_present (hook_t * hook_list, void (*hook_fn) (void *));
+void add_hook (hook_t **hook_list, void (*hook_fn) (void *), void *data);
+void execute_hooks (hook_t *hook_list);
+void delete_hook (hook_t **hook_list, void (*hook_fn) (void *));
+gboolean hook_present (hook_t *hook_list, void (*hook_fn) (void *));
 
 /*** inline functions **************************************************/
 
-#endif // MC_HOOK_H
+#endif  // MC_HOOK_H

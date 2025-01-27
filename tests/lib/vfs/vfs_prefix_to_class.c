@@ -29,7 +29,7 @@
 
 #include "lib/strutil.h"
 #include "lib/vfs/xdirentry.h"
-#include "lib/vfs/vfs.c"        // for testing static methods
+#include "lib/vfs/vfs.c"  // for testing static methods
 
 #include "src/vfs/local/local.c"
 
@@ -42,9 +42,8 @@ test_which (struct vfs_class *me, const char *path)
 {
     (void) me;
 
-    if ((strcmp (path, "test_1:") == 0) ||
-        (strcmp (path, "test_2:") == 0) ||
-        (strcmp (path, "test_3:") == 0) || (strcmp (path, "test_4:") == 0))
+    if ((strcmp (path, "test_1:") == 0) || (strcmp (path, "test_2:") == 0)
+        || (strcmp (path, "test_3:") == 0) || (strcmp (path, "test_4:") == 0))
         return 1;
     return -1;
 }
@@ -89,44 +88,24 @@ static const struct test_vfs_prefix_to_class_ds
 {
     const char *input_string;
     const struct vfs_class *expected_result;
-} test_vfs_prefix_to_class_ds[] =
-{
+} test_vfs_prefix_to_class_ds[] = {
     { // 0
-        "test_1:",
-        &vfs_test_ops1
-    },
+      "test_1:", &vfs_test_ops1 },
     { // 1
-        "test_2:",
-        &vfs_test_ops1
-    },
+      "test_2:", &vfs_test_ops1 },
     { // 2
-        "test_3:",
-        &vfs_test_ops1
-    },
+      "test_3:", &vfs_test_ops1 },
     { // 3
-        "test_4:",
-        &vfs_test_ops1
-    },
+      "test_4:", &vfs_test_ops1 },
     { // 4
-        "test2:",
-        &vfs_test_ops2
-    },
+      "test2:", &vfs_test_ops2 },
     { // 5
-        "test3:",
-        &vfs_test_ops3
-    },
-    {
-        "test1:",
-        NULL
-    },
+      "test3:", &vfs_test_ops3 },
+    { "test1:", NULL },
     { // 6
-        "test_5:",
-        NULL
-    },
+      "test_5:", NULL },
     { // 7
-        "test4:",
-        NULL
-    },
+      "test4:", NULL },
 };
 
 /* @Test(dataSource = "test_vfs_prefix_to_class_ds") */

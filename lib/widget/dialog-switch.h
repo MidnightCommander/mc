@@ -20,8 +20,8 @@ extern WDialog *filemanager;
 
 /*** declarations of public functions ************************************************************/
 
-void dialog_switch_add (WDialog * h);
-void dialog_switch_remove (WDialog * h);
+void dialog_switch_add (WDialog *h);
+void dialog_switch_remove (WDialog *h);
 size_t dialog_switch_num (void);
 
 void dialog_switch_next (void);
@@ -41,4 +41,4 @@ void dialog_change_screen_size (void);
 
 /*** inline functions ****************************************************************************/
 
-#endif // MC__DIALOG_SWITCH_H
+#endif  // MC__DIALOG_SWITCH_H

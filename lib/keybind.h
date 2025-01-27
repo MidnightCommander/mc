@@ -6,28 +6,28 @@
 /*** typedefs(not structures) and defined constants **********************************************/
 
 /* keymap sections */
-#define KEYMAP_SECTION_FILEMANAGER "filemanager"
+#define KEYMAP_SECTION_FILEMANAGER     "filemanager"
 #define KEYMAP_SECTION_FILEMANAGER_EXT "filemanager:xmap"
-#define KEYMAP_SECTION_PANEL "panel"
-#define KEYMAP_SECTION_DIALOG "dialog"
-#define KEYMAP_SECTION_MENU "menu"
-#define KEYMAP_SECTION_INPUT "input"
-#define KEYMAP_SECTION_LISTBOX "listbox"
-#define KEYMAP_SECTION_RADIO "radio"
-#define KEYMAP_SECTION_TREE "tree"
-#define KEYMAP_SECTION_HELP "help"
-#define KEYMAP_SECTION_CHATTR "chattr"
-#define KEYMAP_SECTION_EDITOR "editor"
-#define KEYMAP_SECTION_EDITOR_EXT "editor:xmap"
-#define KEYMAP_SECTION_VIEWER "viewer"
-#define KEYMAP_SECTION_VIEWER_HEX "viewer:hex"
-#define KEYMAP_SECTION_DIFFVIEWER "diffviewer"
+#define KEYMAP_SECTION_PANEL           "panel"
+#define KEYMAP_SECTION_DIALOG          "dialog"
+#define KEYMAP_SECTION_MENU            "menu"
+#define KEYMAP_SECTION_INPUT           "input"
+#define KEYMAP_SECTION_LISTBOX         "listbox"
+#define KEYMAP_SECTION_RADIO           "radio"
+#define KEYMAP_SECTION_TREE            "tree"
+#define KEYMAP_SECTION_HELP            "help"
+#define KEYMAP_SECTION_CHATTR          "chattr"
+#define KEYMAP_SECTION_EDITOR          "editor"
+#define KEYMAP_SECTION_EDITOR_EXT      "editor:xmap"
+#define KEYMAP_SECTION_VIEWER          "viewer"
+#define KEYMAP_SECTION_VIEWER_HEX      "viewer:hex"
+#define KEYMAP_SECTION_DIFFVIEWER      "diffviewer"
 
-#define KEYMAP_SHORTCUT_LENGTH 32       // FIXME: is 32 bytes enough for shortcut?
+#define KEYMAP_SHORTCUT_LENGTH         32  // FIXME: is 32 bytes enough for shortcut?
 
-#define CK_PipeBlock(i)  (10000+(i))
-#define CK_Macro(i)      (20000+(i))
-#define CK_MacroLast     CK_Macro(0x7FFF)
+#define CK_PipeBlock(i)                (10000 + (i))
+#define CK_Macro(i)                    (20000 + (i))
+#define CK_MacroLast                   CK_Macro (0x7FFF)
 
 /*** enums ***************************************************************************************/
 
@@ -356,12 +356,12 @@ typedef struct global_keymap_t
 
 /*** declarations of public functions ************************************************************/
 
-void keybind_cmd_bind (GArray * keymap, const char *keybind, long action);
+void keybind_cmd_bind (GArray *keymap, const char *keybind, long action);
 long keybind_lookup_action (const char *name);
 const char *keybind_lookup_actionname (long action);
-const char *keybind_lookup_keymap_shortcut (const global_keymap_t * keymap, long action);
-long keybind_lookup_keymap_command (const global_keymap_t * keymap, long key);
+const char *keybind_lookup_keymap_shortcut (const global_keymap_t *keymap, long action);
+long keybind_lookup_keymap_command (const global_keymap_t *keymap, long key);
 
 /*** inline functions ****************************************************************************/
 
-#endif // MC__KEYBIND_H
+#endif  // MC__KEYBIND_H

@@ -31,7 +31,6 @@
 
 #include "src/filemanager/filegui.c"
 
-
 /* --------------------------------------------------------------------------------------------- */
 
 /* @Before */
@@ -62,61 +61,34 @@ static const struct test_is_wildcarded_ds
 {
     const char *input_value;
     gboolean expected_result;
-} test_is_wildcarded_ds[] =
-{
+} test_is_wildcarded_ds[] = {
     { // 0
-        "blabla",
-        FALSE
-    },
+      "blabla", FALSE },
     { // 1
-        "bla?bla",
-        TRUE
-    },
+      "bla?bla", TRUE },
     { // 2
-        "bla*bla",
-        TRUE
-    },
+      "bla*bla", TRUE },
     { // 3
-        "bla\\*bla",
-        FALSE
-    },
+      "bla\\*bla", FALSE },
 
     { // 4
-        "bla\\\\*bla",
-        TRUE
-    },
+      "bla\\\\*bla", TRUE },
     { // 5
-        "bla\\1bla",
-        TRUE
-    },
+      "bla\\1bla", TRUE },
     { // 6
-        "bla\\\\1bla",
-        FALSE
-    },
+      "bla\\\\1bla", FALSE },
     { // 7
-        "bla\\\t\\\\1bla",
-        FALSE
-    },
+      "bla\\\t\\\\1bla", FALSE },
     { // 8
-        "bla\\\t\\\\\\1bla",
-        TRUE
-    },
+      "bla\\\t\\\\\\1bla", TRUE },
     { // 9
-        "bla\\9bla",
-        TRUE
-    },
+      "bla\\9bla", TRUE },
     { // 10
-        "blabla\\",
-        FALSE
-    },
+      "blabla\\", FALSE },
     { // 11
-        "blab\\?la",
-        FALSE
-    },
+      "blab\\?la", FALSE },
     { // 12
-        "blab\\\\?la",
-        TRUE
-    },
+      "blab\\\\?la", TRUE },
 };
 
 /* @Test(dataSource = "test_is_wildcarded_ds") */

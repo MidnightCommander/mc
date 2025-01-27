@@ -38,8 +38,8 @@
 #include <string.h>
 
 #include "lib/global.h"
-#include "lib/fileloc.h"        // TAGS_NAME
-#include "lib/tty/tty.h"        // LINES, COLS
+#include "lib/fileloc.h"  // TAGS_NAME
+#include "lib/tty/tty.h"  // LINES, COLS
 #include "lib/strutil.h"
 #include "lib/util.h"
 
@@ -223,15 +223,15 @@ etags_set_definition_hash (const char *tagfile, const char *start_path, const ch
             break;
 
         case in_filename:
-            {
-                size_t pos;
+        {
+            size_t pos;
 
-                pos = strcspn (buf, ",");
-                g_free (filename);
-                filename = g_strndup (buf, pos);
-                state = in_define;
-                break;
-            }
+            pos = strcspn (buf, ",");
+            g_free (filename);
+            filename = g_strndup (buf, pos);
+            state = in_define;
+            break;
+        }
 
         case in_define:
             if (buf[0] == 0x0C)
@@ -296,9 +296,8 @@ editcmd_dialog_select_definition_add (gpointer data, gpointer user_data)
     char *label_def;
     int def_width;
 
-    label_def =
-        g_strdup_printf ("%s -> %s:%ld", def_hash->short_define, def_hash->filename,
-                         def_hash->line);
+    label_def = g_strdup_printf ("%s -> %s:%ld", def_hash->short_define, def_hash->filename,
+                                 def_hash->line);
     listbox_add_item_take (def_list, LISTBOX_APPEND_AT_END, 0, label_def, def_hash, FALSE);
     def_width = str_term_width1 (label_def);
     def_max_width = MAX (def_max_width, def_width);
@@ -315,16 +314,16 @@ editcmd_dialog_select_definition_show (WEdit *edit, char *match_expr, GPtrArray 
     char *curr = NULL;
     WDialog *def_dlg;
     WListbox *def_list;
-    int def_dlg_h;              // dialog height
-    int def_dlg_w;              // dialog width
+    int def_dlg_h;  // dialog height
+    int def_dlg_w;  // dialog width
 
     // calculate the dialog metrics
     def_dlg_h = def_hash->len + 2;
-    def_dlg_w = COLS - 2;       // will be clarified later
-    start_x = w->x + edit->curs_col + edit->start_col + EDIT_TEXT_HORIZONTAL_OFFSET +
-        (edit->fullscreen != 0 ? 0 : 1) + edit_options.line_state_width;
-    start_y = w->y + edit->curs_row + EDIT_TEXT_VERTICAL_OFFSET +
-        (edit->fullscreen != 0 ? 0 : 1) + 1;
+    def_dlg_w = COLS - 2;  // will be clarified later
+    start_x = w->x + edit->curs_col + edit->start_col + EDIT_TEXT_HORIZONTAL_OFFSET
+        + (edit->fullscreen != 0 ? 0 : 1) + edit_options.line_state_width;
+    start_y =
+        w->y + edit->curs_row + EDIT_TEXT_VERTICAL_OFFSET + (edit->fullscreen != 0 ? 0 : 1) + 1;
 
     if (start_x < 0)
         start_x = 0;
@@ -365,10 +364,10 @@ editcmd_dialog_select_definition_show (WEdit *edit, char *match_expr, GPtrArray 
 
         if (edit->modified == 0)
             do_moveto = TRUE;
-        else if (!edit_query_dialog2
-                 (_("Warning"),
-                  _("Current text was modified without a file save.\n"
-                    "Continue discards these changes."), _("C&ontinue"), _("&Cancel")))
+        else if (!edit_query_dialog2 (_ ("Warning"),
+                                      _ ("Current text was modified without a file save.\n"
+                                         "Continue discards these changes."),
+                                      _ ("C&ontinue"), _ ("&Cancel")))
         {
             edit->force |= REDRAW_COMPLETELY;
             do_moveto = TRUE;

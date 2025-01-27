@@ -12,7 +12,7 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
-#define mc_log_mark() mc_log("%s:%d\n",__FILE__,__LINE__)
+#define mc_log_mark() mc_log ("%s:%d\n", __FILE__, __LINE__)
 
 /*** enums ***************************************************************************************/
 

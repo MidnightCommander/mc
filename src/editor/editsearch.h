@@ -9,7 +9,7 @@
 
 typedef struct
 {
-    simple_status_msg_t status_msg;     // base class
+    simple_status_msg_t status_msg;  // base class
 
     gboolean first;
     WEdit *edit;
@@ -20,17 +20,17 @@ typedef struct
 
 /*** declarations of public functions ************************************************************/
 
-gboolean edit_search_init (WEdit * edit, const char *s);
-void edit_search_deinit (WEdit * edit);
+gboolean edit_search_init (WEdit *edit, const char *s);
+void edit_search_deinit (WEdit *edit);
 
 mc_search_cbret_t edit_search_cmd_callback (const void *user_data, off_t char_offset,
                                             int *current_char);
 mc_search_cbret_t edit_search_update_callback (const void *user_data, off_t char_offset);
-int edit_search_status_update_cb (status_msg_t * sm);
+int edit_search_status_update_cb (status_msg_t *sm);
 
-void edit_search_cmd (WEdit * edit, gboolean again);
-void edit_replace_cmd (WEdit * edit, gboolean again);
+void edit_search_cmd (WEdit *edit, gboolean again);
+void edit_replace_cmd (WEdit *edit, gboolean again);
 
 /*** inline functions ****************************************************************************/
 
-#endif // MC__EDIT_SEARCH_H
+#endif  // MC__EDIT_SEARCH_H

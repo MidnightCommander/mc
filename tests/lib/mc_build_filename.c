@@ -90,21 +90,20 @@ run_mc_build_filename (int iteration)
 static const struct test_mc_build_filename_ds
 {
     const char *expected_result;
-} test_mc_build_filename_ds[] =
-{
-    {"test/path"},
-    {"/test/path"},
-    {"/test/pa/th"},
-    {"/test/#vfsprefix:/path  "},
-    {"/test/vfsprefix://path  "},
-    {"/test/prefix://p\\/ath"},
-    {"/test/test/path"},
-    {"path"},
-    {"path"},
-    {"path"},
-    {"/path"},
-    {"pa/th"},
-    {"/pa/th"},
+} test_mc_build_filename_ds[] = {
+    { "test/path" },
+    { "/test/path" },
+    { "/test/pa/th" },
+    { "/test/#vfsprefix:/path  " },
+    { "/test/vfsprefix://path  " },
+    { "/test/prefix://p\\/ath" },
+    { "/test/test/path" },
+    { "path" },
+    { "path" },
+    { "path" },
+    { "/path" },
+    { "pa/th" },
+    { "/pa/th" },
 };
 
 /* @Test(dataSource = "test_mc_build_filename_ds") */

@@ -28,14 +28,14 @@
 #include <config.h>
 #include <errno.h>
 #include <stdlib.h>
-#include <string.h>             // memset()
+#include <string.h>  // memset()
 
 #include "lib/global.h"
 #include "lib/vfs/netutil.h"
 #include "lib/vfs/utilvfs.h"
 #include "lib/vfs/gc.h"
 #include "lib/widget.h"
-#include "lib/tty/tty.h"        // tty_enable_interrupt_key ()
+#include "lib/tty/tty.h"  // tty_enable_interrupt_key ()
 
 #include "internal.h"
 
@@ -44,7 +44,7 @@
 /*** global variables ****************************************************************************/
 
 struct vfs_s_subclass sftpfs_subclass;
-struct vfs_class *vfs_sftpfs_ops = VFS_CLASS (&sftpfs_subclass);        // used in file.c
+struct vfs_class *vfs_sftpfs_ops = VFS_CLASS (&sftpfs_subclass);  // used in file.c
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -214,9 +214,9 @@ sftpfs_cb_readdir (void *data)
     if (!mc_error_message (&mcerror, NULL))
     {
         if (sftpfs_dirent != NULL)
-            vfs_print_message (_("sftp: (Ctrl-G break) Listing... %s"), sftpfs_dirent->d_name);
+            vfs_print_message (_ ("sftp: (Ctrl-G break) Listing... %s"), sftpfs_dirent->d_name);
         else
-            vfs_print_message ("%s", _("sftp: Listing done."));
+            vfs_print_message ("%s", _ ("sftp: Listing done."));
     }
 
     return sftpfs_dirent;
@@ -737,7 +737,7 @@ sftpfs_open_archive (struct vfs_s_super *super, const vfs_path_t *vpath,
 
     if (vpath_element->host == NULL || *vpath_element->host == '\0')
     {
-        vfs_print_message ("%s", _("sftp: Invalid host name."));
+        vfs_print_message ("%s", _ ("sftp: Invalid host name."));
         vpath_element->class->verrno = EPERM;
         return -1;
     }
@@ -752,9 +752,8 @@ sftpfs_open_archive (struct vfs_s_super *super, const vfs_path_t *vpath,
         return -1;
     }
 
-    super->root =
-        vfs_s_new_inode (vpath_element->class, super,
-                         vfs_s_default_stat (vpath_element->class, S_IFDIR | 0755));
+    super->root = vfs_s_new_inode (vpath_element->class, super,
+                                   vfs_s_default_stat (vpath_element->class, S_IFDIR | 0755));
 
     ret_value = sftpfs_open_connection (super, &mcerror);
     mc_error_message (&mcerror, NULL);

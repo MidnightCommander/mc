@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#include <pwd.h>                // for username in xterm title
+#include <pwd.h>  // for username in xterm title
 #include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -197,8 +197,7 @@ mc_shell_recognize_real_path (mc_shell_t *mc_shell)
         mc_shell->type = SHELL_ASH_BUSYBOX;
         mc_shell->name = mc_shell->path;
     }
-    else if (strstr (mc_shell->path, "/ksh") != NULL
-             || strstr (mc_shell->real_path, "/ksh") != NULL
+    else if (strstr (mc_shell->path, "/ksh") != NULL || strstr (mc_shell->real_path, "/ksh") != NULL
              || strstr (mc_shell->path, "/ksh93") != NULL
              || strstr (mc_shell->real_path, "/ksh93") != NULL
              || strstr (mc_shell->path, "/oksh") != NULL
@@ -238,8 +237,7 @@ mc_shell_recognize_path (mc_shell_t *mc_shell)
         mc_shell->type = SHELL_ASH_BUSYBOX;
         mc_shell->name = "ash";
     }
-    else if (strstr (mc_shell->path, "/ksh") != NULL
-             || strstr (mc_shell->path, "/ksh93") != NULL
+    else if (strstr (mc_shell->path, "/ksh") != NULL || strstr (mc_shell->path, "/ksh93") != NULL
              || strstr (mc_shell->path, "/oksh") != NULL
              || (getenv ("KSH_VERSION") != NULL
                  && strstr (getenv ("KSH_VERSION"), "PD KSH") != NULL))

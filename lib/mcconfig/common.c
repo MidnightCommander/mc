@@ -25,10 +25,10 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
-#include <errno.h>              // extern int errno
+#include <errno.h>  // extern int errno
 
 #include "lib/global.h"
-#include "lib/vfs/vfs.h"        // mc_stat
+#include "lib/vfs/vfs.h"  // mc_stat
 #include "lib/util.h"
 
 #include "lib/mcconfig.h"

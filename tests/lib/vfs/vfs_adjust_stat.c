@@ -35,125 +35,88 @@
 static const struct test_vfs_adjust_stat_ds
 {
     struct stat etalon_stat;
-} test_vfs_adjust_stat_ds[] =
-{
+} test_vfs_adjust_stat_ds[] = {
     // 0
-    {
-        .etalon_stat =
-        {
-            .st_size = 0,
+    { .etalon_stat = { .st_size = 0,
 #ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
-            .st_blksize = 512,
+                       .st_blksize = 512,
 #endif
 #ifdef HAVE_STRUCT_STAT_ST_BLOCKS
-            .st_blocks = 0
+                       .st_blocks = 0
 #endif
-        }
-    },
+      } },
     // 1
-    {
-        .etalon_stat =
-        {
-            .st_size = 4096,
+    { .etalon_stat = { .st_size = 4096,
 #ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
-            .st_blksize = 512,
+                       .st_blksize = 512,
 #endif
 #ifdef HAVE_STRUCT_STAT_ST_BLOCKS
-            .st_blocks = 8
+                       .st_blocks = 8
 #endif
-        }
-    },
+      } },
     // 2
-    {
-        .etalon_stat =
-        {
-            .st_size = 4096,
+    { .etalon_stat = { .st_size = 4096,
 #ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
-            .st_blksize = 1024,
+                       .st_blksize = 1024,
 #endif
 #ifdef HAVE_STRUCT_STAT_ST_BLOCKS
-            .st_blocks = 8
+                       .st_blocks = 8
 #endif
-        }
-    },
+      } },
     // 3
-    {
-        .etalon_stat =
-        {
-            .st_size = 4096,
+    { .etalon_stat = { .st_size = 4096,
 #ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
-            .st_blksize = 2048,
+                       .st_blksize = 2048,
 #endif
 #ifdef HAVE_STRUCT_STAT_ST_BLOCKS
-            .st_blocks = 8
+                       .st_blocks = 8
 #endif
-        }
-    },
+      } },
     // 4
-    {
-        .etalon_stat =
-        {
-            .st_size = 4096,
+    { .etalon_stat = { .st_size = 4096,
 #ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
-            .st_blksize = 4096,
+                       .st_blksize = 4096,
 #endif
 #ifdef HAVE_STRUCT_STAT_ST_BLOCKS
-            .st_blocks = 8
+                       .st_blocks = 8
 #endif
-        }
-    },
+      } },
     // 5
-    {
-        .etalon_stat =
-        {
-            .st_size = 5000,
+    { .etalon_stat = { .st_size = 5000,
 #ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
-            .st_blksize = 512,
+                       .st_blksize = 512,
 #endif
 #ifdef HAVE_STRUCT_STAT_ST_BLOCKS
-            .st_blocks = 10
+                       .st_blocks = 10
 #endif
-        }
-    },
+      } },
     // 6
-    {
-        .etalon_stat =
-        {
-            .st_size = 5000,
+    { .etalon_stat = { .st_size = 5000,
 #ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
-            .st_blksize = 1024,
+                       .st_blksize = 1024,
 #endif
 #ifdef HAVE_STRUCT_STAT_ST_BLOCKS
-            .st_blocks = 10
+                       .st_blocks = 10
 #endif
-        }
-    },
+      } },
     // 7
-    {
-        .etalon_stat =
-        {
-            .st_size = 5000,
+    { .etalon_stat = { .st_size = 5000,
 #ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
-            .st_blksize = 2048,
+                       .st_blksize = 2048,
 #endif
 #ifdef HAVE_STRUCT_STAT_ST_BLOCKS
-            .st_blocks = 12
+                       .st_blocks = 12
 #endif
-        }
-    },
+      } },
     // 8
-    {
-        .etalon_stat =
-        {
-            .st_size = 5000,
+    { .etalon_stat = { .st_size = 5000,
 #ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
-            .st_blksize = 4096,
+                       .st_blksize = 4096,
 #endif
 #ifdef HAVE_STRUCT_STAT_ST_BLOCKS
-            .st_blocks = 16
+                       .st_blocks = 16
 #endif
-        }
-    }
+      } }
 };
 
 /* --------------------------------------------------------------------------------------------- */
@@ -166,9 +129,9 @@ START_PARAMETRIZED_TEST (test_vfs_adjust_stat, test_vfs_adjust_stat_ds)
     struct stat expected_stat;
 
     expected_stat.st_size = data->etalon_stat.st_size;
-#ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
+#    ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
     expected_stat.st_blksize = data->etalon_stat.st_blksize;
-#endif // HAVE_STRUCT_STAT_ST_BLKSIZE
+#    endif  // HAVE_STRUCT_STAT_ST_BLKSIZE
     // when
     vfs_adjust_stat (&expected_stat);
 
@@ -176,7 +139,7 @@ START_PARAMETRIZED_TEST (test_vfs_adjust_stat, test_vfs_adjust_stat_ds)
     ck_assert_int_eq (data->etalon_stat.st_blocks, expected_stat.st_blocks);
 #else
     ck_assert_int_eq (0, 0);
-#endif // HAVE_STRUCT_STAT_ST_BLOCKS
+#endif  // HAVE_STRUCT_STAT_ST_BLOCKS
 }
 END_PARAMETRIZED_TEST
 

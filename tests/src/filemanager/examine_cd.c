@@ -72,13 +72,14 @@ teardown (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#define check_examine_cd(input, etalon) \
-{ \
-    result = examine_cd (input); \
-    ck_assert_msg (strcmp (result->str, etalon) == 0, \
-    "\ninput (%s)\nactial (%s) not equal to\netalon (%s)", input, result->str, etalon); \
-    g_string_free (result, TRUE); \
-}
+#define check_examine_cd(input, etalon)                                                            \
+    {                                                                                              \
+        result = examine_cd (input);                                                               \
+        ck_assert_msg (strcmp (result->str, etalon) == 0,                                          \
+                       "\ninput (%s)\nactial (%s) not equal to\netalon (%s)", input, result->str,  \
+                       etalon);                                                                    \
+        g_string_free (result, TRUE);                                                              \
+    }
 
 START_TEST (test_examine_cd)
 {

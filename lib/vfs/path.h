@@ -58,45 +58,45 @@ typedef struct
 /*** declarations of public functions ************************************************************/
 
 vfs_path_t *vfs_path_new (gboolean relative);
-vfs_path_t *vfs_path_clone (const vfs_path_t * vpath);
-void vfs_path_remove_element_by_index (vfs_path_t * vpath, int element_index);
-char *vfs_path_free (vfs_path_t * path, gboolean free_str);
-int vfs_path_elements_count (const vfs_path_t * path);
+vfs_path_t *vfs_path_clone (const vfs_path_t *vpath);
+void vfs_path_remove_element_by_index (vfs_path_t *vpath, int element_index);
+char *vfs_path_free (vfs_path_t *path, gboolean free_str);
+int vfs_path_elements_count (const vfs_path_t *path);
 
-char *vfs_path_to_str_elements_count (const vfs_path_t * path, int elements_count);
-char *vfs_path_to_str_flags (const vfs_path_t * vpath, int elements_count, vfs_path_flag_t flags);
+char *vfs_path_to_str_elements_count (const vfs_path_t *path, int elements_count);
+char *vfs_path_to_str_flags (const vfs_path_t *vpath, int elements_count, vfs_path_flag_t flags);
 vfs_path_t *vfs_path_from_str (const char *path_str);
 vfs_path_t *vfs_path_from_str_flags (const char *path_str, vfs_path_flag_t flags);
 vfs_path_t *vfs_path_build_filename (const char *first_element, ...);
-vfs_path_t *vfs_path_append_new (const vfs_path_t * vpath, const char *first_element, ...);
-vfs_path_t *vfs_path_append_vpath_new (const vfs_path_t * first_vpath, ...);
-size_t vfs_path_tokens_count (const vfs_path_t * vpath);
-char *vfs_path_tokens_get (const vfs_path_t * vpath, ssize_t start_position, ssize_t length);
-vfs_path_t *vfs_path_vtokens_get (const vfs_path_t * vpath, ssize_t start_position, ssize_t length);
+vfs_path_t *vfs_path_append_new (const vfs_path_t *vpath, const char *first_element, ...);
+vfs_path_t *vfs_path_append_vpath_new (const vfs_path_t *first_vpath, ...);
+size_t vfs_path_tokens_count (const vfs_path_t *vpath);
+char *vfs_path_tokens_get (const vfs_path_t *vpath, ssize_t start_position, ssize_t length);
+vfs_path_t *vfs_path_vtokens_get (const vfs_path_t *vpath, ssize_t start_position, ssize_t length);
 
-void vfs_path_add_element (vfs_path_t * vpath, const vfs_path_element_t * path_element);
-const vfs_path_element_t *vfs_path_get_by_index (const vfs_path_t * path, int element_index);
-vfs_path_element_t *vfs_path_element_clone (const vfs_path_element_t * element);
-void vfs_path_element_free (vfs_path_element_t * element);
+void vfs_path_add_element (vfs_path_t *vpath, const vfs_path_element_t *path_element);
+const vfs_path_element_t *vfs_path_get_by_index (const vfs_path_t *path, int element_index);
+vfs_path_element_t *vfs_path_element_clone (const vfs_path_element_t *element);
+void vfs_path_element_free (vfs_path_element_t *element);
 
 struct vfs_class *vfs_prefix_to_class (const char *prefix);
 
 #ifdef HAVE_CHARSET
-char *vfs_get_encoding(const char *path, ssize_t len);
-gboolean vfs_path_element_need_cleanup_converter (const vfs_path_element_t * element);
-vfs_path_t *vfs_path_change_encoding (vfs_path_t * vpath, const char *encoding);
+char *vfs_get_encoding (const char *path, ssize_t len);
+gboolean vfs_path_element_need_cleanup_converter (const vfs_path_element_t *element);
+vfs_path_t *vfs_path_change_encoding (vfs_path_t *vpath, const char *encoding);
 #endif
 
-char *vfs_path_serialize (const vfs_path_t * vpath, GError ** error);
-vfs_path_t *vfs_path_deserialize (const char *data, GError ** error);
+char *vfs_path_serialize (const vfs_path_t *vpath, GError **error);
+vfs_path_t *vfs_path_deserialize (const char *data, GError **error);
 
-GString *vfs_path_build_url_params_str (const vfs_path_element_t * element, gboolean keep_password);
-GString *vfs_path_element_build_pretty_path_str (const vfs_path_element_t * element);
+GString *vfs_path_build_url_params_str (const vfs_path_element_t *element, gboolean keep_password);
+GString *vfs_path_element_build_pretty_path_str (const vfs_path_element_t *element);
 
-size_t vfs_path_len (const vfs_path_t * vpath);
-gboolean vfs_path_equal (const vfs_path_t * vpath1, const vfs_path_t * vpath2);
-gboolean vfs_path_equal_len (const vfs_path_t * vpath1, const vfs_path_t * vpath2, size_t len);
-vfs_path_t *vfs_path_to_absolute (const vfs_path_t * vpath);
+size_t vfs_path_len (const vfs_path_t *vpath);
+gboolean vfs_path_equal (const vfs_path_t *vpath1, const vfs_path_t *vpath2);
+gboolean vfs_path_equal_len (const vfs_path_t *vpath1, const vfs_path_t *vpath2, size_t len);
+vfs_path_t *vfs_path_to_absolute (const vfs_path_t *vpath);
 
 /*** inline functions ****************************************************************************/
 

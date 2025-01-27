@@ -36,7 +36,7 @@
 #include "lib/tty/color.h"
 #include "lib/skin.h"
 #include "lib/strutil.h"
-#include "lib/util.h"           // MC_PTR_FREE
+#include "lib/util.h"  // MC_PTR_FREE
 #include "lib/widget.h"
 
 /*** global variables ****************************************************************************/

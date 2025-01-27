@@ -39,7 +39,7 @@
 #include "lib/tty/tty.h"
 #include "lib/skin.h"
 #ifdef HAVE_CHARSET
-#include "lib/charsets.h"
+#    include "lib/charsets.h"
 #endif
 
 #include "internal.h"
@@ -109,10 +109,10 @@ mcview__get_nroff_real_len (WView *view, off_t start, off_t length)
         switch (nroff->type)
         {
         case NROFF_TYPE_BOLD:
-            ret += 1 + nroff->char_length;      // real char length and 0x8
+            ret += 1 + nroff->char_length;  // real char length and 0x8
             break;
         case NROFF_TYPE_UNDERLINE:
-            ret += 2;           // underline symbol and ox8
+            ret += 2;  // underline symbol and ox8
             break;
         default:
             break;
@@ -148,7 +148,6 @@ mcview_nroff_t *
 mcview_nroff_seq_new (WView *view)
 {
     return mcview_nroff_seq_new_num (view, (off_t) 0);
-
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -183,9 +182,8 @@ mcview_nroff_seq_info (mcview_nroff_t *nroff)
 
     if (nroff->current_char == '_' && next2 == '_')
     {
-        nroff->type = (nroff->prev_type == NROFF_TYPE_BOLD)
-            ? NROFF_TYPE_BOLD : NROFF_TYPE_UNDERLINE;
-
+        nroff->type =
+            (nroff->prev_type == NROFF_TYPE_BOLD) ? NROFF_TYPE_BOLD : NROFF_TYPE_UNDERLINE;
     }
     else if (nroff->current_char == next2)
     {

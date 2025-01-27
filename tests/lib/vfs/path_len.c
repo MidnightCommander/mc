@@ -27,7 +27,7 @@
 #include "tests/mctest.h"
 
 #ifdef HAVE_CHARSET
-#include "lib/charsets.h"
+#    include "lib/charsets.h"
 #endif
 
 #include "lib/strutil.h"
@@ -75,30 +75,21 @@ static const struct test_path_length_ds
     const char *input_path;
     const size_t expected_length_element_encoding;
     const size_t expected_length_terminal_encoding;
-} test_path_length_ds[] =
-{
+} test_path_length_ds[] = {
     { // 0.
-        NULL,
-        0,
-        0
-    },
+      NULL, 0, 0 },
     { // 1.
-        "/",
-        1,
-        1
-    },
+      "/", 1, 1 },
     { // 2.
-        "/тестовый/путь",
-        26,
-        26
-    },
+      "/тестовый/путь", 26, 26 },
 #ifdef HAVE_CHARSET
-    { // 3.
+    {
+        // 3.
         "/#enc:KOI8-R/тестовый/путь",
         14,
         38,
     },
-#endif // HAVE_CHARSET
+#endif  // HAVE_CHARSET
 };
 
 /* @Test(dataSource = "test_path_length_ds") */

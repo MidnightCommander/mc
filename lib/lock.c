@@ -42,7 +42,7 @@
 
 #include <config.h>
 
-#include <signal.h>             // kill()
+#include <signal.h>  // kill()
 #include <stdio.h>
 #include <stdarg.h>
 #include <sys/types.h>
@@ -58,13 +58,13 @@
 #include "lib/vfs/vfs.h"
 #include "lib/util.h"
 #include "lib/lock.h"
-#include "lib/widget.h"         // query_dialog()
+#include "lib/widget.h"  // query_dialog()
 
 /*** global variables ****************************************************************************/
 
 /*** file scope macro definitions ****************************************************************/
 
-#define BUF_SIZE 255
+#define BUF_SIZE     255
 #define PID_BUF_SIZE 10
 
 /*** file scope type declarations ****************************************************************/
@@ -237,20 +237,18 @@ lock_file (const vfs_path_t *fname_vpath)
         // Check if locking process alive, ask user if required
         if (lockinfo->pid == 0 || !(kill (lockinfo->pid, 0) == -1 && errno == ESRCH))
         {
-            msg =
-                g_strdup_printf (_
-                                 ("File \"%s\" is already being edited.\n"
-                                  "User: %s\nProcess ID: %d"), x_basename (lockfname) + 2,
-                                 lockinfo->who, (int) lockinfo->pid);
+            msg = g_strdup_printf (_ ("File \"%s\" is already being edited.\n"
+                                      "User: %s\nProcess ID: %d"),
+                                   x_basename (lockfname) + 2, lockinfo->who, (int) lockinfo->pid);
             // TODO: Implement "Abort" - needs to rewind undo stack
-            switch (query_dialog
-                    (_("File locked"), msg, D_NORMAL, 2, _("&Grab lock"), _("&Ignore lock")))
+            switch (query_dialog (_ ("File locked"), msg, D_NORMAL, 2, _ ("&Grab lock"),
+                                  _ ("&Ignore lock")))
             {
             case 0:
                 break;
             case 1:
             case -1:
-            default:           // Esc Esc
+            default:  // Esc Esc
                 g_free (msg);
                 goto ret;
             }
@@ -264,7 +262,7 @@ lock_file (const vfs_path_t *fname_vpath)
     symlink_ok = (symlink (newlock, lockfname) != -1);
     g_free (newlock);
 
-  ret:
+ret:
     g_free (lockfname);
     return symlink_ok ? 1 : 0;
 }

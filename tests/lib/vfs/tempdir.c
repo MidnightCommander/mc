@@ -28,7 +28,7 @@
 #include "tests/mctest.h"
 
 #ifndef HAVE_CHARSET
-#define HAVE_CHARSET 1
+#    define HAVE_CHARSET 1
 #endif
 
 #include "lib/charsets.h"
@@ -102,9 +102,9 @@ START_TEST (test_mc_mkstemps)
     // then
     close (fd);
     ck_assert_int_ne (fd, -1);
-    ck_assert_msg (g_file_test
-                   (vfs_path_as_str (pname_vpath), G_FILE_TEST_EXISTS | G_FILE_TEST_IS_REGULAR),
-                   "\nNo such file: %s\n", vfs_path_as_str (pname_vpath));
+    ck_assert_msg (
+        g_file_test (vfs_path_as_str (pname_vpath), G_FILE_TEST_EXISTS | G_FILE_TEST_IS_REGULAR),
+        "\nNo such file: %s\n", vfs_path_as_str (pname_vpath));
     unlink (vfs_path_as_str (pname_vpath));
     ck_assert_msg (strncmp (vfs_path_as_str (pname_vpath), begin_pname, strlen (begin_pname)) == 0,
                    "\nstart of %s should be equal to %s\n", vfs_path_as_str (pname_vpath),

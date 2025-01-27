@@ -47,22 +47,22 @@
 #include <stdlib.h>
 
 #ifdef __linux__
-#ifdef HAVE_LINUX_FS_H
-#include <linux/fs.h>
-#endif // HAVE_LINUX_FS_H
-#ifdef HAVE_SYS_IOCTL_H
-#include <sys/ioctl.h>
-#endif // HAVE_SYS_IOCTL_H
-#endif // __linux__
+#    ifdef HAVE_LINUX_FS_H
+#        include <linux/fs.h>
+#    endif  // HAVE_LINUX_FS_H
+#    ifdef HAVE_SYS_IOCTL_H
+#        include <sys/ioctl.h>
+#    endif  // HAVE_SYS_IOCTL_H
+#endif      // __linux__
 
 #include "lib/global.h"
 #include "lib/strutil.h"
 #include "lib/util.h"
-#include "lib/widget.h"         // message()
+#include "lib/widget.h"  // message()
 #include "lib/event.h"
 
 #ifdef HAVE_CHARSET
-#include "lib/charsets.h"
+#    include "lib/charsets.h"
 #endif
 
 #include "vfs.h"
@@ -147,7 +147,7 @@ _vfs_translate_path (const char *path, int size, GIConv defcnv, GString *buffer)
             return state;
 
         // now can be translated part after #enc:
-        semi += strlen (VFS_ENCODING_PREFIX);   // skip "#enc:"
+        semi += strlen (VFS_ENCODING_PREFIX);  // skip "#enc:"
         slash = strchr (semi, PATH_SEP);
         // ignore slashes after size;
         if (slash - path >= size)
@@ -185,7 +185,7 @@ _vfs_translate_path (const char *path, int size, GIConv defcnv, GString *buffer)
     (void) defcnv;
 
     g_string_assign (buffer, path);
-#endif // HAVE_CHARSET
+#endif  // HAVE_CHARSET
 
     return state;
 }
@@ -306,8 +306,8 @@ vfs_ferrno (struct vfs_class *vfs)
 gboolean
 vfs_register_class (struct vfs_class *vfs)
 {
-    if (vfs->init != NULL)      // vfs has own initialization function
-        if (vfs->init (vfs) == 0)       // but it failed
+    if (vfs->init != NULL)         // vfs has own initialization function
+        if (vfs->init (vfs) == 0)  // but it failed
             return FALSE;
 
     g_ptr_array_add (vfs__classes_list, vfs);
@@ -522,14 +522,14 @@ vfs_shut (void)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
-  * Init or create vfs_dirent structure
-  *
-  * @d vfs_dirent structure to init. If NULL, new structure is created.
-  * @fname file name
-  * @ino file inode number
-  *
-  * @return pointer to d if d isn't NULL, or pointer to newly created structure.
-  */
+ * Init or create vfs_dirent structure
+ *
+ * @d vfs_dirent structure to init. If NULL, new structure is created.
+ * @fname file name
+ * @ino file inode number
+ *
+ * @return pointer to d if d isn't NULL, or pointer to newly created structure.
+ */
 
 struct vfs_dirent *
 vfs_dirent_init (struct vfs_dirent *d, const char *fname, ino_t ino)
@@ -549,12 +549,12 @@ vfs_dirent_init (struct vfs_dirent *d, const char *fname, ino_t ino)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
-  * Assign members of vfs_dirent structure
-  *
-  * @d vfs_dirent structure for assignment
-  * @fname file name
-  * @ino file inode number
-  */
+ * Assign members of vfs_dirent structure
+ *
+ * @d vfs_dirent structure for assignment
+ * @fname file name
+ * @ino file inode number
+ */
 
 void
 vfs_dirent_assign (struct vfs_dirent *d, const char *fname, ino_t ino)
@@ -567,10 +567,10 @@ vfs_dirent_assign (struct vfs_dirent *d, const char *fname, ino_t ino)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
-  * Destroy vfs_dirent structure
-  *
-  * @d vfs_dirent structure to destroy.
-  */
+ * Destroy vfs_dirent structure
+ *
+ * @d vfs_dirent structure to destroy.
+ */
 
 void
 vfs_dirent_free (struct vfs_dirent *d)
@@ -620,7 +620,7 @@ vfs_print_message (const char *msg, ...)
     event_data.msg = g_strdup_vprintf (msg, ap);
     va_end (ap);
 
-    mc_event_raise (MCEVENT_GROUP_CORE, "vfs_print_message", (gpointer) & event_data);
+    mc_event_raise (MCEVENT_GROUP_CORE, "vfs_print_message", (gpointer) &event_data);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -709,7 +709,7 @@ vfs_preallocate (int dest_vfs_fd, off_t src_fsize, off_t dest_fsize)
     (void) dest_fsize;
     return 0;
 
-#else // HAVE_POSIX_FALLOCATE
+#else  // HAVE_POSIX_FALLOCATE
     void *dest_fd = NULL;
     struct vfs_class *dest_class;
 
@@ -722,7 +722,7 @@ vfs_preallocate (int dest_vfs_fd, off_t src_fsize, off_t dest_fsize)
 
     return posix_fallocate (*(int *) dest_fd, dest_fsize, src_fsize - dest_fsize);
 
-#endif // HAVE_POSIX_FALLOCATE
+#endif  // HAVE_POSIX_FALLOCATE
 }
 
 /* --------------------------------------------------------------------------------------------- */

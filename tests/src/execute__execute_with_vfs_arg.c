@@ -35,8 +35,7 @@
 static const struct the_file_is_local_ds
 {
     const char *input_path;
-} the_file_is_local_ds[] =
-{
+} the_file_is_local_ds[] = {
     {
         NULL,
     },
@@ -66,8 +65,8 @@ START_PARAMETRIZED_TEST (the_file_is_local, the_file_is_local_ds)
         const vfs_path_t *tmp_vpath;
 
         tmp_vpath = (data->input_path == NULL) ? vfs_get_raw_current_dir () : filename_vpath;
-        mctest_assert_true (vfs_path_equal
-                            (g_ptr_array_index (vfs_file_is_local__vpath__captured, 0), tmp_vpath));
+        mctest_assert_true (
+            vfs_path_equal (g_ptr_array_index (vfs_file_is_local__vpath__captured, 0), tmp_vpath));
     }
     ck_assert_int_eq (do_execute__flags__captured, EXECUTE_INTERNAL);
     ck_assert_msg (mc_getlocalcopy__pathname_vpath__captured == NULL,
@@ -97,9 +96,8 @@ START_TEST (the_file_is_remote_but_empty)
 
     ck_assert_int_eq (vfs_file_is_local__vpath__captured->len, 2);
 
-    mctest_assert_true (vfs_path_equal
-                        (g_ptr_array_index (vfs_file_is_local__vpath__captured, 0),
-                         vfs_get_raw_current_dir ()));
+    mctest_assert_true (vfs_path_equal (g_ptr_array_index (vfs_file_is_local__vpath__captured, 0),
+                                        vfs_get_raw_current_dir ()));
     ck_assert_msg (g_ptr_array_index (vfs_file_is_local__vpath__captured, 1) == NULL,
                    "\nParameter for second call to vfs_file_is_local() should be NULL!");
     ck_assert_msg (mc_getlocalcopy__pathname_vpath__captured == NULL,
@@ -131,16 +129,14 @@ START_TEST (the_file_is_remote_fail_to_create_local_copy)
 
     ck_assert_int_eq (vfs_file_is_local__vpath__captured->len, 1);
 
-    mctest_assert_true (vfs_path_equal
-                        (g_ptr_array_index (vfs_file_is_local__vpath__captured, 0),
-                         filename_vpath));
+    mctest_assert_true (
+        vfs_path_equal (g_ptr_array_index (vfs_file_is_local__vpath__captured, 0), filename_vpath));
 
     mctest_assert_true (vfs_path_equal (mc_getlocalcopy__pathname_vpath__captured, filename_vpath));
 
-    mctest_assert_str_eq (message_title__captured, _("Error"));
+    mctest_assert_str_eq (message_title__captured, _ ("Error"));
     mctest_assert_str_eq (message_text__captured,
-                          _("Cannot fetch a local copy of /ftp://some.host/editme.txt"));
-
+                          _ ("Cannot fetch a local copy of /ftp://some.host/editme.txt"));
 
     vfs_path_free (filename_vpath, TRUE);
 }
@@ -170,22 +166,20 @@ START_TEST (the_file_is_remote)
 
     ck_assert_int_eq (vfs_file_is_local__vpath__captured->len, 1);
 
-    mctest_assert_true (vfs_path_equal
-                        (g_ptr_array_index (vfs_file_is_local__vpath__captured, 0),
-                         filename_vpath));
+    mctest_assert_true (
+        vfs_path_equal (g_ptr_array_index (vfs_file_is_local__vpath__captured, 0), filename_vpath));
 
     mctest_assert_true (vfs_path_equal (mc_getlocalcopy__pathname_vpath__captured, filename_vpath));
 
     ck_assert_int_eq (mc_stat__vpath__captured->len, 2);
 
-    mctest_assert_true (vfs_path_equal
-                        (g_ptr_array_index (mc_stat__vpath__captured, 0), local_vpath));
-    mctest_assert_true (vfs_path_equal
-                        (g_ptr_array_index (mc_stat__vpath__captured, 0),
-                         g_ptr_array_index (mc_stat__vpath__captured, 1)));
+    mctest_assert_true (
+        vfs_path_equal (g_ptr_array_index (mc_stat__vpath__captured, 0), local_vpath));
+    mctest_assert_true (vfs_path_equal (g_ptr_array_index (mc_stat__vpath__captured, 0),
+                                        g_ptr_array_index (mc_stat__vpath__captured, 1)));
 
-    mctest_assert_true (vfs_path_equal
-                        (mc_ungetlocalcopy__pathname_vpath__captured, filename_vpath));
+    mctest_assert_true (
+        vfs_path_equal (mc_ungetlocalcopy__pathname_vpath__captured, filename_vpath));
 
     mctest_assert_true (vfs_path_equal (mc_ungetlocalcopy__local_vpath__captured, local_vpath));
 

@@ -5,7 +5,7 @@
 #ifndef MC__FILE_H
 #define MC__FILE_H
 
-#include <inttypes.h>           // off_t, uintmax_t
+#include <inttypes.h>  // off_t, uintmax_t
 
 #include "lib/global.h"
 #include "lib/widget.h"
@@ -23,7 +23,7 @@ typedef struct dirsize_status_msg_t dirsize_status_msg_t;
 /* status dialog of directory size computing */
 struct dirsize_status_msg_t
 {
-    status_msg_t status_msg;    // base class
+    status_msg_t status_msg;  // base class
 
     gboolean allow_skip;
     WLabel *dirname;
@@ -39,15 +39,15 @@ struct dirsize_status_msg_t
 
 /*** declarations of public functions ************************************************************/
 
-gboolean file_is_symlink_to_dir (const vfs_path_t * path, struct stat *st, gboolean * stale_link);
+gboolean file_is_symlink_to_dir (const vfs_path_t *path, struct stat *st, gboolean *stale_link);
 
-FileProgressStatus copy_file_file (file_op_context_t * ctx, const char *src_path,
+FileProgressStatus copy_file_file (file_op_context_t *ctx, const char *src_path,
                                    const char *dst_path);
-FileProgressStatus move_dir_dir (file_op_context_t * ctx, const char *s, const char *d);
-FileProgressStatus copy_dir_dir (file_op_context_t * ctx, const char *s, const char *d,
+FileProgressStatus move_dir_dir (file_op_context_t *ctx, const char *s, const char *d);
+FileProgressStatus copy_dir_dir (file_op_context_t *ctx, const char *s, const char *d,
                                  gboolean toplevel, gboolean move_over, gboolean do_delete,
-                                 GSList * parent_dirs);
-FileProgressStatus erase_dir (file_op_context_t * ctx, const vfs_path_t * vpath);
+                                 GSList *parent_dirs);
+FileProgressStatus erase_dir (file_op_context_t *ctx, const vfs_path_t *vpath);
 
 gboolean panel_operate (void *source_panel, FileOperation op, gboolean force_single);
 
@@ -58,13 +58,13 @@ FileProgressStatus file_error (file_op_context_t *ctx, gboolean allow_retry, con
                                const char *file);
 
 /* return value is FILE_CONT or FILE_ABORT */
-FileProgressStatus compute_dir_size (const vfs_path_t * dirname_vpath, dirsize_status_msg_t * sm,
+FileProgressStatus compute_dir_size (const vfs_path_t *dirname_vpath, dirsize_status_msg_t *sm,
                                      size_t *ret_dir_count, size_t *ret_marked_count,
-                                     uintmax_t * ret_total, gboolean follow_symlinks);
+                                     uintmax_t *ret_total, gboolean follow_symlinks);
 
-void dirsize_status_init_cb (status_msg_t * sm);
-int dirsize_status_update_cb (status_msg_t * sm);
-void dirsize_status_deinit_cb (status_msg_t * sm);
+void dirsize_status_init_cb (status_msg_t *sm);
+int dirsize_status_update_cb (status_msg_t *sm);
+void dirsize_status_deinit_cb (status_msg_t *sm);
 
 /*** inline functions ****************************************************************************/
-#endif // MC__FILE_H
+#endif  // MC__FILE_H

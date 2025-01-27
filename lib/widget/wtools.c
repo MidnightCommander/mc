@@ -38,11 +38,11 @@
 
 #include "lib/global.h"
 #include "lib/tty/tty.h"
-#include "lib/tty/key.h"        // tty_getch()
+#include "lib/tty/key.h"  // tty_getch()
 #include "lib/strutil.h"
-#include "lib/util.h"           // tilde_expand()
+#include "lib/util.h"  // tilde_expand()
 #include "lib/widget.h"
-#include "lib/event.h"          // mc_event_raise()
+#include "lib/event.h"  // mc_event_raise()
 
 /*** global variables ****************************************************************************/
 
@@ -127,11 +127,11 @@ static void
 bg_message (int dummy, int *flags, char *title, const char *text)
 {
     (void) dummy;
-    title = g_strconcat (_("Background process:"), " ", title, (char *) NULL);
-    query_dialog (title, text, *flags, 1, _("&OK"));
+    title = g_strconcat (_ ("Background process:"), " ", title, (char *) NULL);
+    query_dialog (title, text, *flags, 1, _ ("&OK"));
     g_free (title);
 }
-#endif // ENABLE_BACKGROUND
+#endif  // ENABLE_BACKGROUND
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -174,12 +174,10 @@ fg_input_dialog_help (const char *header, const char *text, const char *help,
     }
 
     {
-        quick_widget_t quick_widgets[] = {
-            QUICK_LABELED_INPUT (p_text, input_label_above, def_text, histname, &my_str,
-                                 NULL, is_passwd, strip_password, completion_flags),
-            QUICK_BUTTONS_OK_CANCEL,
-            QUICK_END
-        };
+        quick_widget_t quick_widgets[] = { QUICK_LABELED_INPUT (p_text, input_label_above, def_text,
+                                                                histname, &my_str, NULL, is_passwd,
+                                                                strip_password, completion_flags),
+                                           QUICK_BUTTONS_OK_CANCEL, QUICK_END };
 
         WRect r = { -1, -1, 0, COLS / 2 };
 
@@ -212,7 +210,7 @@ wtools_parent_call (void *routine, gpointer ctx, int argc, ...)
     event_data.ctx = ctx;
     event_data.argc = argc;
     va_start (event_data.ap, argc);
-    mc_event_raise (MCEVENT_GROUP_CORE, "background_parent_call", (gpointer) & event_data);
+    mc_event_raise (MCEVENT_GROUP_CORE, "background_parent_call", (gpointer) &event_data);
     va_end (event_data.ap);
     return event_data.ret.i;
 }
@@ -227,11 +225,11 @@ wtools_parent_call_string (void *routine, int argc, ...)
     event_data.routine = routine;
     event_data.argc = argc;
     va_start (event_data.ap, argc);
-    mc_event_raise (MCEVENT_GROUP_CORE, "background_parent_call_string", (gpointer) & event_data);
+    mc_event_raise (MCEVENT_GROUP_CORE, "background_parent_call_string", (gpointer) &event_data);
     va_end (event_data.ap);
     return event_data.ret.s;
 }
-#endif // ENABLE_BACKGROUND
+#endif  // ENABLE_BACKGROUND
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
@@ -254,7 +252,7 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
         (flags & D_CENTER) != 0 ? (WPOS_CENTER | WPOS_TRYUP) : WPOS_KEEP_DEFAULT;
 
     if (header == MSG_ERROR)
-        header = _("Error");
+        header = _ ("Error");
 
     if (count > 0)
     {
@@ -276,9 +274,8 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
     lines += 4 + (count > 0 ? 2 : 0);
 
     // prepare dialog
-    query_dlg =
-        dlg_create (TRUE, 0, 0, lines, cols, pos_flags, FALSE, query_colors, query_default_callback,
-                    NULL, "[QueryBox]", header);
+    query_dlg = dlg_create (TRUE, 0, 0, lines, cols, pos_flags, FALSE, query_colors,
+                            query_default_callback, NULL, "[QueryBox]", header);
     g = GROUP (query_dlg);
 
     if (count > 0)
@@ -389,7 +386,7 @@ message (int flags, const char *title, const char *text, ...)
     va_end (ap);
 
     if (title == MSG_ERROR)
-        title = _("Error");
+        title = _ ("Error");
 
 #ifdef ENABLE_BACKGROUND
     if (mc_global.we_are_background)
@@ -406,8 +403,8 @@ message (int flags, const char *title, const char *text, ...)
                             strlen (p), p);
     }
     else
-#endif // ENABLE_BACKGROUND
-        query_dialog (title, p, flags, 1, _("&OK"));
+#endif  // ENABLE_BACKGROUND
+        query_dialog (title, p, flags, 1, _ ("&OK"));
 
     g_free (p);
 }
@@ -424,7 +421,7 @@ mc_error_message (GError **mcerror, int *code)
     if ((*mcerror)->code == 0)
         message (D_ERROR, MSG_ERROR, "%s", (*mcerror)->message);
     else
-        message (D_ERROR, MSG_ERROR, _("%s (%d)"), (*mcerror)->message, (*mcerror)->code);
+        message (D_ERROR, MSG_ERROR, _ ("%s (%d)"), (*mcerror)->message, (*mcerror)->code);
 
     if (code != NULL)
         *code = (*mcerror)->code;
@@ -444,9 +441,8 @@ mc_error_message (GError **mcerror, int *code)
  */
 
 char *
-input_dialog_help (const char *header, const char *text, const char *help,
-                   const char *history_name, const char *def_text, gboolean strip_password,
-                   input_complete_t completion_flags)
+input_dialog_help (const char *header, const char *text, const char *help, const char *history_name,
+                   const char *def_text, gboolean strip_password, input_complete_t completion_flags)
 {
 #ifdef ENABLE_BACKGROUND
     if (mc_global.we_are_background)
@@ -458,16 +454,13 @@ input_dialog_help (const char *header, const char *text, const char *help,
                         gboolean, input_complete_t);
         } func;
         func.f = fg_input_dialog_help;
-        return wtools_parent_call_string (func.p, 7,
-                                          strlen (header), header, strlen (text),
-                                          text, strlen (help), help,
-                                          strlen (history_name), history_name,
-                                          strlen (def_text), def_text,
-                                          sizeof (gboolean), strip_password,
-                                          sizeof (input_complete_t), completion_flags);
+        return wtools_parent_call_string (
+            func.p, 7, strlen (header), header, strlen (text), text, strlen (help), help,
+            strlen (history_name), history_name, strlen (def_text), def_text, sizeof (gboolean),
+            strip_password, sizeof (input_complete_t), completion_flags);
     }
     else
-#endif // ENABLE_BACKGROUND
+#endif  // ENABLE_BACKGROUND
         return fg_input_dialog_help (header, text, help, history_name, def_text, strip_password,
                                      completion_flags);
 }
@@ -486,9 +479,8 @@ input_dialog (const char *header, const char *text, const char *history_name, co
 /* --------------------------------------------------------------------------------------------- */
 
 char *
-input_expand_dialog (const char *header, const char *text,
-                     const char *history_name, const char *def_text,
-                     input_complete_t completion_flags)
+input_expand_dialog (const char *header, const char *text, const char *history_name,
+                     const char *def_text, input_complete_t completion_flags)
 {
     char *result;
 
@@ -642,7 +634,7 @@ status_msg_common_update (status_msg_t *sm)
         return B_ENTER;
     }
 
-    event.x = -1;               // Don't show the GPM cursor
+    event.x = -1;  // Don't show the GPM cursor
     c = tty_get_event (&event, FALSE, sm->block);
     if (c == EV_NONE)
         return B_ENTER;
@@ -670,13 +662,13 @@ simple_status_msg_init_cb (status_msg_t *sm)
     WGroup *wg = GROUP (sm->dlg);
     WRect r;
 
-    const char *b_name = N_("&Abort");
+    const char *b_name = N_ ("&Abort");
     int b_width;
     int wd_width, y;
     Widget *b;
 
 #ifdef ENABLE_NLS
-    b_name = _(b_name);
+    b_name = _ (b_name);
 #endif
 
     b_width = str_term_width1 (b_name) + 4;

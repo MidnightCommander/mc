@@ -33,7 +33,7 @@
 
 /*** file scope macro definitions ****************************************************************/
 
-#define set_lines(x,y) mc_config_set_string(mc_skin->config, "Lines", x, y)
+#define set_lines(x, y) mc_config_set_string (mc_skin->config, "Lines", x, y)
 
 /*** file scope type declarations ****************************************************************/
 

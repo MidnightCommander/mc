@@ -28,13 +28,13 @@
 #include "tests/mctest.h"
 
 #include "lib/strutil.h"
-#include "lib/vfs/direntry.c"   // for testing static methods
+#include "lib/vfs/direntry.c"  // for testing static methods
 
 #include "src/vfs/local/local.c"
 
-#define ARCH_NAME "/path/to/some/file.ext"
-#define ETALON_PATH "path/to/test1_file.ext"
-#define ETALON_VFS_NAME "#test2:user:pass@host.net"
+#define ARCH_NAME           "/path/to/some/file.ext"
+#define ETALON_PATH         "path/to/test1_file.ext"
+#define ETALON_VFS_NAME     "#test2:user:pass@host.net"
 #define ETALON_VFS_URL_NAME "test2://user:pass@host.net"
 
 static struct vfs_s_subclass test_subclass1, test_subclass2, test_subclass3;
@@ -109,7 +109,6 @@ teardown (void)
     str_uninit_strings ();
 }
 
-
 void
 vfs_die (const char *m)
 {
@@ -126,9 +125,8 @@ START_TEST (test_vfs_s_get_path)
     const char *result;
 
     // when
-    vfs_path_t *vpath =
-        vfs_path_from_str_flags ("/" ETALON_VFS_NAME ARCH_NAME "#test1:/" ETALON_PATH,
-                                 VPF_USE_DEPRECATED_PARSER);
+    vfs_path_t *vpath = vfs_path_from_str_flags (
+        "/" ETALON_VFS_NAME ARCH_NAME "#test1:/" ETALON_PATH, VPF_USE_DEPRECATED_PARSER);
 
     result = vfs_s_get_path (vpath, &archive, 0);
 
@@ -137,7 +135,6 @@ START_TEST (test_vfs_s_get_path)
     mctest_assert_str_eq (archive->name, "/" ETALON_VFS_URL_NAME ARCH_NAME);
 
     g_free (vpath);
-
 }
 END_TEST
 

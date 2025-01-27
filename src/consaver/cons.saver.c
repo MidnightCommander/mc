@@ -52,7 +52,7 @@
 #include <config.h>
 
 #ifndef _GNU_SOURCE
-#define _GNU_SOURCE
+#    define _GNU_SOURCE
 #endif
 
 #include <stdlib.h>
@@ -62,14 +62,14 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #ifdef HAVE_SYS_IOCTL_H
-#include <sys/ioctl.h>
+#    include <sys/ioctl.h>
 #endif
 #ifdef HAVE_FCNTL_H
-#include <fcntl.h>
+#    include <fcntl.h>
 #endif
 #include <termios.h>
 
-#include "lib/unixcompat.h"     // STDERR_FILENO
+#include "lib/unixcompat.h"  // STDERR_FILENO
 
 #define LINUX_CONS_SAVER_C
 #include "cons.saver.h"
@@ -104,7 +104,7 @@ send_contents (char *buffer, unsigned int columns, unsigned int rows)
             if (buffer[lc_index] != ' ')
                 goto out;
         }
-  out:
+out:
 
     message = CONSOLE_CONTENTS;
     if (write (1, &message, 1) != 1)
@@ -145,7 +145,8 @@ send_contents (char *buffer, unsigned int columns, unsigned int rows)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void __attribute__((noreturn)) die (void)
+static void __attribute__ ((noreturn))
+die (void)
 {
     unsigned char zero = 0;
     ssize_t ret;
@@ -194,7 +195,7 @@ main (int argc, char **argv)
         die ();
     console_minor = (int) (st.st_rdev & 0x00ff);
 #else
-    console_minor = 1;          // FIXME
+    console_minor = 1;  // FIXME
 #endif
     if (console_minor < 1 || console_minor > 63)
         die ();
@@ -235,8 +236,8 @@ main (int argc, char **argv)
         die ();
 
     winsz.ws_col = winsz.ws_row = 0;
-    if (ioctl (console_fd, TIOCGWINSZ, &winsz) < 0
-        || winsz.ws_col <= 0 || winsz.ws_row <= 0 || winsz.ws_col >= 256 || winsz.ws_row >= 256)
+    if (ioctl (console_fd, TIOCGWINSZ, &winsz) < 0 || winsz.ws_col <= 0 || winsz.ws_row <= 0
+        || winsz.ws_col >= 256 || winsz.ws_row >= 256)
         die ();
 
     buffer_size = 4 + 2 * winsz.ws_col * winsz.ws_row;
@@ -255,18 +256,16 @@ main (int argc, char **argv)
             console_flag = 0;
             continue;
         case CONSOLE_SAVE:
-            if (seteuid (euid) < 0
-                || lseek (vcsa_fd, 0, 0) != 0
-                || fstat (console_fd, &st) < 0 || st.st_uid != uid
-                || read (vcsa_fd, buffer, buffer_size) != buffer_size
+            if (seteuid (euid) < 0 || lseek (vcsa_fd, 0, 0) != 0 || fstat (console_fd, &st) < 0
+                || st.st_uid != uid || read (vcsa_fd, buffer, buffer_size) != buffer_size
                 || fstat (console_fd, &st) < 0 || st.st_uid != uid)
                 memset (buffer, 0, buffer_size);
             if (seteuid (uid) < 0)
                 die ();
             break;
         case CONSOLE_RESTORE:
-            if (seteuid (euid) >= 0
-                && lseek (vcsa_fd, 0, 0) == 0 && fstat (console_fd, &st) >= 0 && st.st_uid == uid)
+            if (seteuid (euid) >= 0 && lseek (vcsa_fd, 0, 0) == 0 && fstat (console_fd, &st) >= 0
+                && st.st_uid == uid)
                 if (write (vcsa_fd, buffer, buffer_size) != buffer_size)
                     die ();
             if (seteuid (uid) < 0)

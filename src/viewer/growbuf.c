@@ -39,7 +39,7 @@
 #include "lib/global.h"
 #include "lib/vfs/vfs.h"
 #include "lib/util.h"
-#include "lib/widget.h"         // D_NORMAL
+#include "lib/widget.h"  // D_NORMAL
 
 #include "internal.h"
 
@@ -82,7 +82,7 @@ mcview_growbuf_done (WView *view)
         mc_pclose (view->ds_stdio_pipe, NULL);
         view->ds_stdio_pipe = NULL;
     }
-    else                        // view->datasource == DS_VFS_PIPE
+    else  // view->datasource == DS_VFS_PIPE
     {
         (void) mc_close (view->ds_vfs_pipe);
         view->ds_vfs_pipe = -1;
@@ -147,8 +147,8 @@ mcview_growbuf_read_until (WView *view, off_t ofs)
             view->growbuf_lastindex = 0;
         }
 
-        p = (byte *) g_ptr_array_index (view->growbuf_blockptr,
-                                        view->growbuf_blockptr->len - 1) + view->growbuf_lastindex;
+        p = (byte *) g_ptr_array_index (view->growbuf_blockptr, view->growbuf_blockptr->len - 1)
+            + view->growbuf_lastindex;
 
         bytesfree = VIEW_PAGE_SIZE - view->growbuf_lastindex;
 
@@ -206,7 +206,7 @@ mcview_growbuf_read_until (WView *view, off_t ofs)
                 {
                     char *err_msg;
 
-                    err_msg = g_strdup_printf (_("Failed to read data from child stdout:\n%s"),
+                    err_msg = g_strdup_printf (_ ("Failed to read data from child stdout:\n%s"),
                                                unix_error_string (sp->out.error));
                     mcview_show_error (view, err_msg);
                     g_free (err_msg);

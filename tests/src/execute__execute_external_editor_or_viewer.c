@@ -32,8 +32,7 @@
 /* --------------------------------------------------------------------------------------------- */
 
 char *execute_get_external_cmd_opts_from_config (const char *command,
-                                                 const vfs_path_t * filename_vpath,
-                                                 long start_line);
+                                                 const vfs_path_t *filename_vpath, long start_line);
 
 /* @CapturedValue */
 static char *execute_external_cmd_opts__command__captured;
@@ -142,9 +141,8 @@ START_TEST (do_open_external_editor_or_viewer)
     filename_vpath = vfs_path_from_str ("/path/to/file.txt");
 
     vfs_file_is_local__return_value = TRUE;
-    execute_external_cmd_opts__return_value =
-        g_strdup
-        (" 'param 1 with spaces' \"param 2\"           -a -b -cdef /path/to/file.txt +123");
+    execute_external_cmd_opts__return_value = g_strdup (
+        " 'param 1 with spaces' \"param 2\"           -a -b -cdef /path/to/file.txt +123");
 
     // when
     execute_external_editor_or_viewer ("editor_or_viewer", filename_vpath, 123);
@@ -153,8 +151,8 @@ START_TEST (do_open_external_editor_or_viewer)
 
     // check call to execute_get_external_cmd_opts_from_config()
     mctest_assert_str_eq (execute_external_cmd_opts__command__captured, "editor_or_viewer");
-    mctest_assert_true (vfs_path_equal
-                        (execute_external_cmd_opts__filename_vpath__captured, filename_vpath));
+    mctest_assert_true (
+        vfs_path_equal (execute_external_cmd_opts__filename_vpath__captured, filename_vpath));
     ck_assert_int_eq (execute_external_cmd_opts__start_line__captured, 123);
 
     // check call to do_executev()

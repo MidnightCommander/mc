@@ -27,7 +27,7 @@
 
 #include "tests/mctest.h"
 
-#include "regex.c"              // for testing static functions
+#include "regex.c"  // for testing static functions
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -38,74 +38,29 @@ static const struct test_regex_process_escape_sequence_ds
     const replace_transform_type_t input_initial_flags;
     const gboolean input_use_utf;
     const char *expected_string;
-} test_regex_process_escape_sequence_ds[] =
-{
+} test_regex_process_escape_sequence_ds[] = {
     { // 0.
-        "{101}",
-        REPLACE_T_NO_TRANSFORM,
-        FALSE,
-        "A"
-    },
+      "{101}", REPLACE_T_NO_TRANSFORM, FALSE, "A" },
     { // 1.
-        "x42",
-        REPLACE_T_NO_TRANSFORM,
-        FALSE,
-        "B"
-    },
+      "x42", REPLACE_T_NO_TRANSFORM, FALSE, "B" },
     { // 2.
-        "x{444}",
-        REPLACE_T_NO_TRANSFORM,
-        FALSE,
-        "D"
-    },
+      "x{444}", REPLACE_T_NO_TRANSFORM, FALSE, "D" },
     { // 3.
-        "x{444}",
-        REPLACE_T_NO_TRANSFORM,
-        TRUE,
-        "ф"
-    },
+      "x{444}", REPLACE_T_NO_TRANSFORM, TRUE, "ф" },
     { // 4.
-        "n",
-        REPLACE_T_NO_TRANSFORM,
-        FALSE,
-        "\n"
-    },
+      "n", REPLACE_T_NO_TRANSFORM, FALSE, "\n" },
     { // 5.
-        "t",
-        REPLACE_T_NO_TRANSFORM,
-        FALSE,
-        "\t"
-    },
+      "t", REPLACE_T_NO_TRANSFORM, FALSE, "\t" },
     { // 6.
-        "v",
-        REPLACE_T_NO_TRANSFORM,
-        FALSE,
-        "\v"
-    },
+      "v", REPLACE_T_NO_TRANSFORM, FALSE, "\v" },
     { // 7.
-        "b",
-        REPLACE_T_NO_TRANSFORM,
-        FALSE,
-        "\b"
-    },
+      "b", REPLACE_T_NO_TRANSFORM, FALSE, "\b" },
     { // 8.
-        "r",
-        REPLACE_T_NO_TRANSFORM,
-        FALSE,
-        "\r"
-    },
+      "r", REPLACE_T_NO_TRANSFORM, FALSE, "\r" },
     { // 9.
-        "f",
-        REPLACE_T_NO_TRANSFORM,
-        FALSE,
-        "\f"
-    },
+      "f", REPLACE_T_NO_TRANSFORM, FALSE, "\f" },
     { // 10.
-        "a",
-        REPLACE_T_NO_TRANSFORM,
-        FALSE,
-        "\a"
-    },
+      "a", REPLACE_T_NO_TRANSFORM, FALSE, "\a" },
 };
 
 /* @Test(dataSource = "test_regex_process_escape_sequence_ds") */
