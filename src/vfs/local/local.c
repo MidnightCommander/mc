@@ -83,11 +83,9 @@ local_open (const vfs_path_t *vpath, int flags, mode_t mode)
 static void *
 local_opendir (const vfs_path_t *vpath)
 {
-    DIR **local_info;
     DIR *dir = NULL;
-    const char *path;
 
-    path = vfs_path_get_last_path_str (vpath);
+    const char *path = vfs_path_get_last_path_str (vpath);
 
     /* According to POSIX, `opendir` and `readdir` can't return EINTR (unlike `closedir`).
      *
@@ -117,7 +115,7 @@ local_opendir (const vfs_path_t *vpath)
             rewinddir (dir);
     }
 
-    local_info = (DIR **) g_new (DIR *, 1);
+    DIR **local_info = (DIR **) g_new (DIR *, 1);
     *local_info = dir;
 
     return local_info;
