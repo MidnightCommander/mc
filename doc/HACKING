@@ -66,29 +66,11 @@ cd mc-slang
 cd ../mc-ncurses
 /usr/local/src/mc/configure --with-screen=ncurses && make all
 
-Please use the same indentation as other developers.  To indent a block,
-select in the internal editor and use Shift-F9 to call the external
-indent.  For historic reasons, GNU Midnight Commander used formatting
-that is not default for GNU Indent.  Please put following text to your
-~/.indent.pro file to make GNU Indent follow the style used in GNU
-Midnight Commander:
+Please use the same indentation as other developers.  We enforce our
+indentation style with clang-format.  If your IDE doesn't have a
+suitable itegration, make sure to run the formatter yourself:
 
---gnu-style
---format-first-column-comments
---indent-level4
---brace-indent0
---line-length100
---no-tabs
---blank-lines-after-procedures
-
-or in short notation:
-
-indent -gnu -fc1 -i4 -bli0 -nut -bap -l100
-
-It's OK to indent the whole function if you edit it.  However, please
-refrain from it if you are posting your patch for review.  In this case
-you would save time of other developers if you only include significant
-changes.  The developer applying your patch can format the code for you.
+make indent
 
 Please keep in mind that the VFS subsystem is licensed under LGPL, while
 the rest of the code uses GPL.

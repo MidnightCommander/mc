@@ -1,0 +1,36 @@
+---
+BasedOnStyle: GNU
+AlignConsecutiveMacros:
+  Enabled: true
+  AcrossEmptyLines: true
+  PadOperators: true
+AlignOperands: DontAlign
+AttributeMacros:
+  - G_GNUC_PRINTF
+BraceWrapping:
+  AfterCaseLabel: true
+  AfterClass: true
+  AfterControlStatement: Always
+  AfterEnum: true
+  AfterExternBlock: true
+  AfterFunction: true
+  AfterNamespace: true
+  AfterObjCDeclaration: true
+  AfterStruct: true
+  AfterUnion: true
+  BeforeCatch: true
+  BeforeElse: true
+  BeforeLambdaBody: false
+  BeforeWhile: true
+  IndentBraces: false
+  SplitEmptyFunction: true
+  SplitEmptyRecord: true
+  SplitEmptyNamespace: true
+BreakBeforeBinaryOperators: NonAssignment
+BreakBeforeBraces: Custom
+ColumnLimit: 100
+IndentPPDirectives: AfterHash
+IndentWidth: 4
+SortIncludes: Never
+SpaceAfterCStyleCast: true
+SpacesBeforeTrailingComments: 2

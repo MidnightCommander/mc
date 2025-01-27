@@ -403,8 +403,8 @@ c       Compile, link and run the current .c file
         (echo -ne "\n--- Press any key for return to edit. ---"; read)
 
 + f \.c$ | f \.h$
-t       Indent `C' formatter
-        indent -kr -pcs %b 1>/dev/null 2> %e
+t       clang-format `C/C++' formatter
+        clang-format -i %b 1>/dev/null 2> %e
 
 #--------------------- End [c/c++] language template --------------------------
 
