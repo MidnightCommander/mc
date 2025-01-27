@@ -11,11 +11,14 @@ jobs:
     timeout-minutes: 5
 
     steps:
+      - name: Install git inside container
+        run: dnf install -y git
+
       - uses: actions/checkout@v4
 
       - name: Install dependencies
         run: |
-          dnf install -y autoconf automake gcc gettext-devel groff libtool make pkgconfig
+          dnf install -y autoconf automake clang-tools-extra gcc gettext-devel groff libtool make pkgconfig
           dnf install -y aspell-devel check-devel gpm-devel libX11-devel "pkgconfig(ext2fs)" "pkgconfig(glib-2.0)" "pkgconfig(gmodule-2.0)" "pkgconfig(libssh2)" "pkgconfig(slang)"
 
           # For tests
@@ -40,6 +43,11 @@ jobs:
               --enable-aspell \
               --enable-werror \
               && \
+            \
+            echo "Checking formatting..." && \
+            clang-format --version && \
+            make indent && \
+            git diff --exit-code && \
             \
             make -j$(nproc) && \
             make check && \
